@@ -19,9 +19,9 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.API.TFCOptions;
 import TFC.API.Enums.CraftingRuleEnum;
-import TFC.API.Util.StringUtil;
 import TFC.Containers.ContainerAnvil;
 import TFC.Core.TFC_Textures;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityAnvil;
 
 

@@ -11,7 +11,7 @@ import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCTabs;
 import TFC.API.Util.Helper;
-import TFC.API.Util.StringUtil;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemHammer;
 import TFC.TileEntities.TileEntityDetailed;

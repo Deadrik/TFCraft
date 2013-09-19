@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.API.Enums.CraftingRuleEnum;
+import TFC.Core.Util.StringUtil;
 
 public class GuiAnvilButton extends GuiButton 
 {
@@ -69,7 +70,7 @@ public class GuiAnvilButton extends GuiButton
 				{
 					CraftingRuleEnum[] Rules = screen.AnvilEntity.workRecipe.getRules();
 					int[] ItemRules = screen.AnvilEntity.getItemRules();
-					this.displayString = Rules[ruleIndex].Name;
+					this.displayString = StringUtil.localize(Rules[ruleIndex].Name);
 				}
 			}
 

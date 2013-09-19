@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.Properties;
 
-import TFC.TerraFirmaCraft;
+import net.minecraft.client.Minecraft;
 
 public class Localization 
 {
@@ -109,6 +109,6 @@ public class Localization
 	}
 
 	private static String getCurrentLanguage() {
-		return TerraFirmaCraft.proxy.getCurrentLanguage();
+		return Minecraft.getMinecraft().func_135016_M().func_135041_c().func_135034_a();
 	}
 }

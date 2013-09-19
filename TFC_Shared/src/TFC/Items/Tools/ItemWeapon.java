@@ -23,7 +23,7 @@ import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
-import TFC.API.Util.StringUtil;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 import com.google.common.collect.HashMultimap;
@@ -59,7 +59,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 
 		if(is.getItem() instanceof ICausesDamage)
 		{
-			arraylist.add(EnumChatFormatting.AQUA + ((ICausesDamage)this).GetDamageType().toString());
+			arraylist.add(EnumChatFormatting.AQUA + StringUtil.localize(((ICausesDamage)this).GetDamageType().toString()));
 		}
 
 		addItemInformation(is, player, arraylist);

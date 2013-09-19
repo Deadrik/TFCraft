@@ -11,7 +11,7 @@ import TFC.TFCBlocks;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.API.Util.StringUtil;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import java.util.HashMap;
 

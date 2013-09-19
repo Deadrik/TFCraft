@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.API.Util.StringUtil;
 import TFC.Containers.ContainerVessel;
+import TFC.Core.Util.StringUtil;
 
 public class GuiVessel extends GuiContainer
 {

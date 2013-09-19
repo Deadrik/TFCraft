@@ -1,6 +1,4 @@
-package TFC.API.Util;
-
-import TFC.Core.Util.Localization;
+package TFC.Core.Util;
 
 public class StringUtil 
 {

@@ -18,7 +18,7 @@ import TFC.API.ISize;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.API.Util.StringUtil;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 import com.google.common.collect.HashMultimap;
@@ -45,7 +45,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 
 		if(is.getItem() instanceof ICausesDamage)
 		{
-			arraylist.add(EnumChatFormatting.AQUA + ((ICausesDamage)this).GetDamageType().toString());
+			arraylist.add(EnumChatFormatting.AQUA + StringUtil.localize(((ICausesDamage)this).GetDamageType().toString()));
 		}
 
 		addItemInformation(is, player, arraylist);

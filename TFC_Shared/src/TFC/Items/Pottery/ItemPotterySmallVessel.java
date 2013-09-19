@@ -15,12 +15,12 @@ import TFC.API.ISmeltable;
 import TFC.API.Metal;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Core.Metal.Alloy;
 import TFC.Core.Metal.AlloyManager;
 import TFC.Core.Metal.AlloyMetal;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemOre;
 import TFC.Items.ItemOreSmall;
 
