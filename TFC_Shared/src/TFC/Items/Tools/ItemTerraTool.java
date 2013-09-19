@@ -15,9 +15,9 @@ import net.minecraft.util.EnumChatFormatting;
 import TFC.Reference;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.TFCTabs;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 

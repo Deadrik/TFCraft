@@ -18,11 +18,11 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
+import TFC.Core.TFCTabs;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 

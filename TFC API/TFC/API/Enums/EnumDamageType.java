@@ -1,7 +1,5 @@
 package TFC.API.Enums;
 
-import TFC.Core.Util.StringUtil;
-
 public enum EnumDamageType 
 {
 	GENERIC(-1), 
@@ -10,12 +8,12 @@ public enum EnumDamageType
 	CRUSHING(2);
 
 	public int DamageID;
-	
+
 	private EnumDamageType(int id)
 	{
 		DamageID = id;
 	}
-	
+
 	@Override
 	public String toString()
 	{

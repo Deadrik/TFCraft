@@ -15,8 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.API.ICausesDamage;
 import TFC.API.IProjectile;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumDamageType;
+import TFC.Core.TFCTabs;
 import TFC.Entities.EntityJavelin;
 
 import com.google.common.collect.HashMultimap;

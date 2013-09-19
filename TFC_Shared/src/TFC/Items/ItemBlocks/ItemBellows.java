@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
+import TFC.Core.TFCTabs;
 
 public class ItemBellows extends ItemTerraBlock
 {
