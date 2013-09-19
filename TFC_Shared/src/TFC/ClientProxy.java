@@ -108,6 +108,8 @@ import TFC.Render.Blocks.RenderAnvil;
 import TFC.Render.Blocks.RenderBarrel;
 import TFC.Render.Blocks.RenderBellows;
 import TFC.Render.Blocks.RenderCrucible;
+import TFC.Render.Blocks.RenderFence;
+import TFC.Render.Blocks.RenderFenceGate;
 import TFC.Render.Blocks.RenderNestBox;
 import TFC.Render.Blocks.RenderOre;
 import TFC.Render.Blocks.RenderPottery;
@@ -210,6 +212,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.cookingPitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.leavesRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.detailedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.FenceRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFence());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.FenceGateRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFenceGate());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.toolRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderToolRack());
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.foodPrepRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.quernRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderQuern());

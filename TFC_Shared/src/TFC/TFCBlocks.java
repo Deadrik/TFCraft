@@ -66,6 +66,7 @@ import TFC.Blocks.Terrain.BlockSedSmooth;
 import TFC.Blocks.Vanilla.BlockCustomBookshelf;
 import TFC.Blocks.Vanilla.BlockCustomCactus;
 import TFC.Blocks.Vanilla.BlockCustomDoor;
+import TFC.Blocks.Vanilla.BlockCustomFence;
 import TFC.Blocks.Vanilla.BlockCustomFenceGate;
 import TFC.Blocks.Vanilla.BlockCustomFlower;
 import TFC.Blocks.Vanilla.BlockCustomFlowing;
@@ -102,6 +103,8 @@ public class TFCBlocks
 	public static int FirepitRenderId;
 	public static int AnvilRenderId;
 	public static int barrelRenderId;
+	public static int FenceRenderId;
+	public static int FenceGateRenderId;
 	public static int NestBoxRenderId;
 	public static int BellowsRenderId;
 	public static int ScribeRenderId;
@@ -226,6 +229,9 @@ public class TFCBlocks
 	public static Block Crucible;
 
 	public static Block NestBox;
+	
+	public static Block Fence;
+	public static Block FenceGate;
 
 	public static void RegisterBlocks()
 	{
@@ -341,6 +347,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Tuyere, "Tuyere");
 		GameRegistry.registerBlock(Crucible, TFC.Items.ItemBlocks.ItemCrucible.class, "Crucible");
 		GameRegistry.registerBlock(NestBox, TFC.Items.ItemBlocks.ItemTerraBlock.class, "NestBox");
+		GameRegistry.registerBlock(Fence,TFC.Items.ItemBlocks.ItemFence.class,"Fence");
+		GameRegistry.registerBlock(FenceGate,TFC.Items.ItemBlocks.ItemFenceGate.class,"FenceGate");
 	}
 
 	public static void LoadBlocks()
@@ -528,6 +536,9 @@ public class TFCBlocks
 		TFCBlocks.Crucible = new BlockCrucible(TFCBlockID.Crucible).setUnlocalizedName("Crucible").setHardness(4.0f);
 
 		TFCBlocks.NestBox = new BlockNestBox(TFCBlockID.NestBox).setUnlocalizedName("NestBox").setHardness(1);
+		
+		TFCBlocks.Fence = new BlockCustomFence(TFCBlockID.Fence,"Fence",Material.wood).setUnlocalizedName("FenceTFC").setHardness(2);
+		TFCBlocks.FenceGate = new BlockCustomFenceGate(TFCBlockID.FenceGate).setUnlocalizedName("FenceGateTFC").setHardness(2);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);
