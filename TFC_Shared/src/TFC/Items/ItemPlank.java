@@ -11,10 +11,10 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
-import TFC.API.TFCTabs;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.TFCTabs;
 import TFC.TileEntities.TileEntityWoodConstruct;
 
 public class ItemPlank extends ItemTerra

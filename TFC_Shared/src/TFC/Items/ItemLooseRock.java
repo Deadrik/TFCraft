@@ -13,10 +13,11 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
 import TFC.API.Constant.Global;
-import TFC.API.Util.StringUtil;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Core.Util.StringUtil;
 
 public class ItemLooseRock extends ItemTerra
 {
@@ -28,7 +29,7 @@ public class ItemLooseRock extends ItemTerra
 		super(id);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCMaterials);
 		this.MetaNames = Global.STONE_ALL;
 		icons = new Icon[MetaNames.length];
 	}

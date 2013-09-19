@@ -9,11 +9,29 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class ContainerTFC extends Container
 {
-
+	public int bagsSlotNum = 0;
+	public EntityPlayer player;
+	protected boolean isLoading = false;
+	protected boolean doItemSaving = false;
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 		// TODO Auto-generated method stub
 		return true;
+	}
+	/**
+	 * Used by containers that represent items and need to save the inventory to that items NBT
+	 */
+	public void saveContents(ItemStack is) 
+	{
+
+	}
+
+	@Override
+	public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer)
+	{
+		ItemStack is = super.slotClick(par1, par2, par3, par4EntityPlayer);
+		saveContents(is);
+		return is;
 	}
 
 	@Override
@@ -97,6 +115,7 @@ public class ContainerTFC extends Container
 					slot.putStack(copy);
 					slot.onSlotChanged();
 					var5 = true;
+					//this.bagsSlotNum = slotIndex;
 					break;
 				}
 				else if (slotstack == null && slot.isItemValid(is))
@@ -134,6 +153,7 @@ public class ContainerTFC extends Container
 	@Override
 	public void detectAndSendChanges()
 	{
+		boolean _shouldSave = false;
 		for (int i = 0; i < this.inventorySlots.size(); ++i)
 		{
 			ItemStack itemstack = ((Slot)this.inventorySlots.get(i)).getStack();
@@ -141,8 +161,24 @@ public class ContainerTFC extends Container
 
 			if (!areItemStacksEqual(itemstack1, itemstack))
 			{
+				if(doItemSaving && i < inventoryItemStacks.size()-36 && !isLoading) 
+				{
+					_shouldSave = true;
+				}
+
 				itemstack1 = itemstack == null ? null : itemstack.copy();
 				this.inventoryItemStacks.set(i, itemstack1);
+
+				if(_shouldSave) 
+				{
+					int slotNum = bagsSlotNum + (inventoryItemStacks.size()-36);
+					this.saveContents((ItemStack)inventoryItemStacks.get(slotNum));
+					player.inventory.setInventorySlotContents(bagsSlotNum, (ItemStack)inventoryItemStacks.get(slotNum));
+					for (int j = 0; j < this.crafters.size(); ++j)
+					{
+						((ICrafting)this.crafters.get(j)).sendSlotContents(this, slotNum, (ItemStack)inventoryItemStacks.get(slotNum));
+					}
+				}
 
 				for (int j = 0; j < this.crafters.size(); ++j)
 				{
@@ -150,14 +186,15 @@ public class ContainerTFC extends Container
 				}
 			}
 		}
+		this.isLoading = false;
 	}	
 
-	public boolean areItemStacksEqual(ItemStack is1, ItemStack is2)
+	public static boolean areItemStacksEqual(ItemStack is1, ItemStack is2)
 	{
 		return is1 == null && is2 == null ? true : (is1 != null && is2 != null ? isItemStackEqual(is1, is2) : false);
 	}
 
-	private boolean isItemStackEqual(ItemStack is1, ItemStack is2)
+	public static boolean isItemStackEqual(ItemStack is1, ItemStack is2)
 	{
 		return is1.stackSize != is2.stackSize ? false : 
 			(is1.itemID != is2.itemID ? false : 
@@ -166,7 +203,7 @@ public class ContainerTFC extends Container
 						is1.stackTagCompound == null || areCompoundsEqual(is1, is2))));
 	}
 
-	private boolean areCompoundsEqual(ItemStack is1, ItemStack is2)
+	public static boolean areCompoundsEqual(ItemStack is1, ItemStack is2)
 	{
 		ItemStack is3 = is1.copy(); 
 		ItemStack is4 = is2.copy(); 

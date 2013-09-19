@@ -1,7 +1,7 @@
 package TFC.Items.Tools;
 
 import TFC.*;
-import TFC.API.TFCTabs;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemTerra;
 import cpw.mods.fml.relauncher.Side;

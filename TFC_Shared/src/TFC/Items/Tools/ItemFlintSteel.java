@@ -13,9 +13,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityPottery;
 

@@ -151,18 +151,19 @@ public class EntityDamageHandler
 			{
 				//a. If the attack hits an unprotected head, it does 75% more damage
 				//b. If the attack hits unprotected feet, it applies a slow to the player
-				if(location == 0)
+				if(location == 3)
 				{
 					damage *= 1.75f;
 				}
-				else if(location == 3)
+				else if(location == 0)
 				{
 					entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 100, 1));
 				}
 			}
 			//6. Apply the damage to the player
-			EntityArmorCalcEvent eventPost = new EntityArmorCalcEvent(entity, originalDamage, EntityArmorCalcEvent.EventType.POST);
+			EntityArmorCalcEvent eventPost = new EntityArmorCalcEvent(entity, damage, EntityArmorCalcEvent.EventType.POST);
 			MinecraftForge.EVENT_BUS.post(eventPost);
+			//System.out.println(entity.getClass()+", "+eventPre.incomingDamage+", "+eventPost.incomingDamage);
 			entity.setEntityHealth(entity.func_110143_aJ()-eventPost.incomingDamage);
 		}
 

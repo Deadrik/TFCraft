@@ -16,10 +16,7 @@ public class ContainerQuiver extends ContainerTFC {
 	private int posX;
 	private int posY;
 	private int posZ;
-	private EntityPlayer player;
 	public InventoryCrafting containerInv = new InventoryCrafting(this, 4, 2);
-
-	public int bagsSlotNum = 0;
 
 	public ContainerQuiver(InventoryPlayer playerinv, World world, int x, int y, int z) {
 		this.player = playerinv.player;
@@ -44,6 +41,7 @@ public class ContainerQuiver extends ContainerTFC {
 		{
 			loadBagInventory();
 		}
+		this.doItemSaving = true;
 	}
 
 	public void loadBagInventory()
@@ -65,45 +63,10 @@ public class ContainerQuiver extends ContainerTFC {
 		}
 	}
 
-	/**
-	 * Callback for when the crafting gui is closed.
-	 */
-	@Override
-	public void onContainerClosed(EntityPlayer player) {
-		super.onContainerClosed(player);
-		if (!this.world.isRemote)
-		{
-			NBTTagList nbttaglist = new NBTTagList();
-			for(int i = 0; i < containerInv.getSizeInventory(); i++)
-			{
-				if(containerInv.getStackInSlot(i) != null)
-				{
-					NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-					nbttagcompound1.setByte("Slot", (byte)i);
-					containerInv.getStackInSlot(i).writeToNBT(nbttagcompound1);
-					nbttaglist.appendTag(nbttagcompound1);
-				}
-			}
-			if(player.inventory.getStackInSlot(bagsSlotNum) != null)
-			{
-				if(!player.inventory.getStackInSlot(bagsSlotNum).hasTagCompound()) {
-					player.inventory.getStackInSlot(bagsSlotNum).setTagCompound(new NBTTagCompound());
-				}
-				player.inventory.getStackInSlot(bagsSlotNum).getTagCompound().setTag("Items", nbttaglist);
-
-			}
-		}
-	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 		return true;
-	}
-
-	@Override
-	public void detectAndSendChanges()
-	{
-		super.detectAndSendChanges();
 	}
 
 	@Override
@@ -117,14 +80,14 @@ public class ContainerQuiver extends ContainerTFC {
 			ItemStack clickedStack = clickedSlot.getStack();
 			returnedStack = clickedStack.copy();
 
-			if (clickedIndex < 4)
+			if (clickedIndex < 8)
 			{
-				if (!this.mergeItemStack(clickedStack, 4, inventorySlots.size(), true)) {
+				if (!this.mergeItemStack(clickedStack, 8, inventorySlots.size(), true)) {
 					return null;
 				}
 			}
-			else if (clickedIndex >= 4 && clickedIndex < inventorySlots.size()) {
-				if (!this.mergeItemStack(clickedStack, 0, 4, false)) {
+			else if (clickedIndex >= 8 && clickedIndex < inventorySlots.size()) {
+				if (!this.mergeItemStack(clickedStack, 0, 8, false)) {
 					return null;
 				}
 			}

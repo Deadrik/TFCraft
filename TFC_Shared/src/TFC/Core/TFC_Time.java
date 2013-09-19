@@ -2,7 +2,7 @@ package TFC.Core;
 
 import net.minecraft.world.World;
 import TFC.API.TFCOptions;
-import TFC.API.Util.StringUtil;
+import TFC.Core.Util.StringUtil;
 
 
 public class TFC_Time
