@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
@@ -373,12 +374,15 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		if(!worldObj.isRemote){
-			par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+		//if(!worldObj.isRemote){
+			//par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
 			//if(getGender()==GenderEnum.FEMALE && pregnant){
 			//	par1EntityPlayer.addChatMessage("Pregnant");
 			//}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		if(!worldObj.isRemote && isAdult() && attackEntityFrom(DamageSource.generic, 25)) {
+			par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Item.feather, 1));
+
 		}
 		return super.interact(par1EntityPlayer);
 	}
