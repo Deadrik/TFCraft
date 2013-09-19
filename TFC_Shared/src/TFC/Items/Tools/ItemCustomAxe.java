@@ -13,7 +13,6 @@ import TFC.Reference;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;

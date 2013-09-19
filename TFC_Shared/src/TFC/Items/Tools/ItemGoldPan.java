@@ -16,7 +16,6 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.TFCOptions;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Util.Helper;
 import TFC.Blocks.Terrain.BlockOre;

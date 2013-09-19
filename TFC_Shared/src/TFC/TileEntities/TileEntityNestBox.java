@@ -11,21 +11,14 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.util.AxisAlignedBB;
-import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.API.TFCOptions;
-import TFC.API.Util.StringUtil;
-import TFC.Core.TFC_ItemHeat;
-import TFC.Core.TFC_Time;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemTerra;
 
 public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 {
@@ -40,13 +33,13 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 
 	public void careForInventorySlot()
 	{
-		
+
 	}
 
 	private void ProcessItems()
 	{
-		
-		
+
+
 	}
 
 	public boolean hasBird(){
@@ -58,7 +51,7 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 		}
 		return false;	
 	}
-	
+
 	public EntityAnimal getBird(){
 		List list = worldObj.getEntitiesWithinAABB(EntityChickenTFC.class, AxisAlignedBB.getBoundingBox(
 				xCoord, yCoord, zCoord, 
@@ -79,7 +72,7 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 	public ItemStack decrStackSize(int i, int j)
 	{
 		return null;
-	
+
 	}
 
 	public void ejectContents()
@@ -152,7 +145,7 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
-		this.itemstack[i] = (ItemStack) itemstack;
+		this.itemstack[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 		{
 			itemstack.stackSize = getInventoryStackLimit();
