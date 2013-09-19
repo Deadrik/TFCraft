@@ -10,8 +10,8 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.API.TFCOptions;
-import TFC.API.Util.StringUtil;
 import TFC.Containers.ContainerBlastFurnace;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TEBlastFurnace;
 
 

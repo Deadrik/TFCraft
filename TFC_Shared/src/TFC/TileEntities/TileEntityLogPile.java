@@ -1,6 +1,8 @@
 package TFC.TileEntities;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Queue;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -18,13 +20,17 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 {
     public ItemStack[] storage;
     private int logPileOpeners;
+    
     private TileEntityFirepit charcoalFirepit;
     private boolean isOnFire;
+    private int fireTimer;
+    public Queue<Vector3f> blocksToBeSetOnFire;
 
     public TileEntityLogPile()
     {
         storage = new ItemStack[4];
         logPileOpeners = 0;
+        fireTimer = 100;
     }
 
     public void addContents(int index, ItemStack is)
@@ -252,6 +258,18 @@ public class TileEntityLogPile extends TileEntity implements IInventory
     public void updateEntity()
     {
         TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
+        
+        if(charcoalFirepit != null && !charcoalFirepit.isInactiveCharcoalFirepit())
+        {
+	        --fireTimer;
+	        if(fireTimer == 0)
+	        {
+				if(blocksToBeSetOnFire.size() > 0)
+		    		setOnFire(blocksToBeSetOnFire);
+				
+				fireTimer = 100;
+	        }
+        }
     }
     @Override
     public void writeToNBT(NBTTagCompound nbttagcompound)
@@ -304,37 +322,36 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 		{	
 			if(!charcoalFirepit.isInactiveCharcoalFirepit())
 			{
-				ArrayList<Vector3f> blocksOnFire = new ArrayList<Vector3f>();
+				blocksToBeSetOnFire = new ArrayDeque<Vector3f>();
 				
 				if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) == 0)
-		        	blocksOnFire.add(new Vector3f(xCoord+1, yCoord, zCoord));
+		        	blocksToBeSetOnFire.add(new Vector3f(xCoord+1, yCoord, zCoord));
 		        if(worldObj.getBlockId(xCoord-1, yCoord, zCoord) == 0)
-		        	blocksOnFire.add(new Vector3f(xCoord-1, yCoord, zCoord));
+		        	blocksToBeSetOnFire.add(new Vector3f(xCoord-1, yCoord, zCoord));
 		        if(worldObj.getBlockId(xCoord, yCoord, zCoord+1) == 0)
-		        	blocksOnFire.add(new Vector3f(xCoord, yCoord, zCoord+1));
+		        	blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord+1));
 		        if(worldObj.getBlockId(xCoord, yCoord, zCoord-1) == 0)
-		        	blocksOnFire.add(new Vector3f(xCoord, yCoord, zCoord-1));
+		        	blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord-1));
 		        if(worldObj.getBlockId(xCoord, yCoord+1, zCoord) == 0)
-		        	blocksOnFire.add(new Vector3f(xCoord, yCoord+1, zCoord));
+		        	blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord+1, zCoord));
 		        if(worldObj.getBlockId(xCoord, yCoord-1, zCoord) == 0)
-		        	blocksOnFire.add(new Vector3f(xCoord, yCoord-1, zCoord));
-		
-				if(blocksOnFire.size() > 0)
-		    		setOnFire(blocksOnFire);
+		        	blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord-1, zCoord));
+		       
 			}
 			else
 			{			
 				setCharcoalFirepit(null);
 				extinguishFire();
+				blocksToBeSetOnFire = null;
 			}
 		}
 	}
 	
-	public void setOnFire(ArrayList<Vector3f> blocksOnFire)
+	private void setOnFire(Queue<Vector3f> blocksOnFire)
 	{
-		for(int i = 0; i < blocksOnFire.size(); ++i)
+		while(blocksOnFire.size() > 0)
 		{
-			Vector3f blockOnFire = blocksOnFire.get(i); 
+			Vector3f blockOnFire = blocksOnFire.poll(); 
 			worldObj.setBlock((int)blockOnFire.X, (int)blockOnFire.Y, (int)blockOnFire.Z, Block.fire.blockID);
             worldObj.markBlockForUpdate((int)blockOnFire.X, (int)blockOnFire.Y, (int)blockOnFire.Z);          
 		}

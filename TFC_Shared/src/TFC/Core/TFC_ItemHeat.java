@@ -17,7 +17,7 @@ import TFC.API.HeatRaw;
 import TFC.API.HeatRegistry;
 import TFC.API.Metal;
 import TFC.API.TFCOptions;
-import TFC.API.Util.StringUtil;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class TFC_ItemHeat 

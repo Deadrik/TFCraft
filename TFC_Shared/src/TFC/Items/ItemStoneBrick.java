@@ -9,8 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.Reference;
-import TFC.API.TFCTabs;
 import TFC.API.Constant.Global;
+import TFC.Core.TFCTabs;
 
 public class ItemStoneBrick extends ItemTerra
 {

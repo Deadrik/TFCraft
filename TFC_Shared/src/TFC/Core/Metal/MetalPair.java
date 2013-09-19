@@ -5,8 +5,8 @@ import TFC.API.Metal;
 public class MetalPair 
 {
 	public Metal type;
-	public short amount;
-	public MetalPair(Metal t, short amnt)
+	public float amount;
+	public MetalPair(Metal t, float amnt)
 	{
 		type = t;
 		amount = amnt;

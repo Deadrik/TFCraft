@@ -3,8 +3,8 @@ package TFC.Items.Tools;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 import TFC.Reference;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
+import TFC.Core.TFCTabs;
 import TFC.Items.ItemTerra;
 public class ItemPlan extends ItemTerra
 {

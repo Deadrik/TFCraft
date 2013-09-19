@@ -14,9 +14,9 @@ import TFC.Reference;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class ItemTerraFood extends ItemFood implements ISize

@@ -17,10 +17,8 @@ public class ContainerVessel extends ContainerTFC {
 	private int posX;
 	private int posY;
 	private int posZ;
-	private EntityPlayer player;
 	public InventoryCrafting containerInv = new InventoryCrafting(this, 2, 2);
-
-	public int bagsSlotNum = 0;
+	private ItemStack bagStack = null;
 
 	public ContainerVessel(InventoryPlayer playerinv, World world, int x, int y, int z) {
 		this.player = playerinv.player;
@@ -29,12 +27,14 @@ public class ContainerVessel extends ContainerTFC {
 		this.posY = y;
 		this.posZ = z;
 		bagsSlotNum = player.inventory.currentItem;
+		bagStack = player.inventory.getCurrentItem();
 		layoutContainer(playerinv, 0, 0);
 
 		if(!world.isRemote)
 		{
 			loadBagInventory();
 		}
+		this.doItemSaving = true;
 	}
 
 	public void loadBagInventory()
@@ -43,7 +43,7 @@ public class ContainerVessel extends ContainerTFC {
 				player.inventory.getStackInSlot(bagsSlotNum).hasTagCompound())
 		{
 			NBTTagList nbttaglist = player.inventory.getStackInSlot(bagsSlotNum).getTagCompound().getTagList("Items");
-
+			this.isLoading = true;
 			for(int i = 0; i < nbttaglist.tagCount(); i++)
 			{
 				NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
@@ -62,29 +62,36 @@ public class ContainerVessel extends ContainerTFC {
 	@Override
 	public void onContainerClosed(EntityPlayer player) {
 		super.onContainerClosed(player);
-		if (!this.world.isRemote)
-		{
-			NBTTagList nbttaglist = new NBTTagList();
-			for(int i = 0; i < containerInv.getSizeInventory(); i++)
-			{
-				if(containerInv.getStackInSlot(i) != null)
-				{
-					NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-					nbttagcompound1.setByte("Slot", (byte)i);
-					containerInv.getStackInSlot(i).writeToNBT(nbttagcompound1);
-					nbttaglist.appendTag(nbttagcompound1);
-				}
-			}
-			if(player.inventory.getStackInSlot(bagsSlotNum) != null)
-			{
-				if(!player.inventory.getStackInSlot(bagsSlotNum).hasTagCompound()) {
-					player.inventory.getStackInSlot(bagsSlotNum).setTagCompound(new NBTTagCompound());
-				}
-				player.inventory.getStackInSlot(bagsSlotNum).getTagCompound().setTag("Items", nbttaglist);
+		/*if(ContainerTFC.areItemStacksEqual(bagStack, player.inventory.getCurrentItem())) {
+			saveContents(player.inventory.getStackInSlot(bagsSlotNum));
+		}*/
+	}
 
+	@Override
+	public void saveContents(ItemStack is) 
+	{
+		NBTTagList nbttaglist = new NBTTagList();
+		for(int i = 0; i < containerInv.getSizeInventory(); i++)
+		{
+			if(containerInv.getStackInSlot(i) != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				containerInv.getStackInSlot(i).writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
+		if(is != null)
+		{
+			if(!is.hasTagCompound()) {
+				is.setTagCompound(new NBTTagCompound());
+			}
+			is.getTagCompound().setTag("Items", nbttaglist);
+
+		}
 	}
+
+
 
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
