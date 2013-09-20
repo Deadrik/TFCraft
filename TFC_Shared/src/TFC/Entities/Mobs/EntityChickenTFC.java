@@ -33,7 +33,6 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	protected float mateSizeMod;
 	public float size_mod;
 	public boolean inLove;
-	public boolean TEgeneratedChickFlag= false;
 
 	int degreeOfDiversion = 2;
 	/** The time until the next egg is spawned. */
@@ -96,7 +95,6 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		TEgeneratedChickFlag = true;
 		this.setAge((int) TFC_Time.getTotalDays());
 	}
 
