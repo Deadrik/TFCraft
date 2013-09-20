@@ -121,6 +121,9 @@ public class TFCBlockID
 	public static int Tuyere					= 2066;
 	public static int Crucible					= 2067;
 	public static int NestBox					= 2112;
+	public static int Fence						= 2113;
+	public static int FenceGate					= 2114;
+	public static int StrawHideBed				= 2115;
 
 
 	static Configuration config;

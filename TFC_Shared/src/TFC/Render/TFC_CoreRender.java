@@ -3,6 +3,7 @@ package TFC.Render;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
@@ -282,6 +283,8 @@ public class TFC_CoreRender
 
 		return true;
 	}
+	
+	
 
 	
 

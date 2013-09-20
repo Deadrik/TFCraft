@@ -49,6 +49,7 @@ import TFC.Items.ItemOre;
 import TFC.Items.ItemOreSmall;
 import TFC.Items.ItemPlank;
 import TFC.Items.ItemQuiver;
+import TFC.Items.ItemRawHide;
 import TFC.Items.ItemSluice;
 import TFC.Items.ItemStick;
 import TFC.Items.ItemStoneBrick;
@@ -1460,7 +1461,7 @@ public class TFCItems
 		Mortar = new ItemTerra(TFCItemID.Mortar).setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
 		Limewater = new ItemCustomBucket(TFCItemID.Limewater,2).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
 		Vinegar = new ItemCustomBucket(TFCItemID.Vinegar,2).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
-		Hide = new ItemTerra(TFCItemID.Hide).setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFCMaterials);
+		Hide = new ItemRawHide(TFCItemID.Hide).setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		SoakedHide = new ItemTerra(TFCItemID.SoakedHide).setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		ScrapedHide = new ItemTerra(TFCItemID.ScrapedHide).setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		PrepHide = new ItemTerra(TFCItemID.PrepHide).setFolder("tools/").setFolder("tools/").setUnlocalizedName("Prep Hide").setCreativeTab(TFCTabs.TFCMaterials);

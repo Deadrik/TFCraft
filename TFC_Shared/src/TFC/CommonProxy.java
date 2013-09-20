@@ -72,6 +72,7 @@ import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityEarlyBloomery;
 import TFC.TileEntities.TileEntityFarmland;
+import TFC.TileEntities.TileEntityFenceGate;
 import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityForge;
@@ -145,6 +146,7 @@ public class CommonProxy implements IGuiHandler
 		GameRegistry.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");
 		GameRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
 		GameRegistry.registerTileEntity(TileEntityBarrel.class, "Barrel");
+		GameRegistry.registerTileEntity(TileEntityFenceGate.class, "FenceGate");
 
 		GameRegistry.registerTileEntity(TileEntityBloom.class, "IronBloom");
 		GameRegistry.registerTileEntity(TECrucible.class, "Crucible");

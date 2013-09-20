@@ -399,13 +399,13 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		//if(!worldObj.isRemote){
-		//par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
-		//if(getGender()==GenderEnum.FEMALE && pregnant){
-		//	par1EntityPlayer.addChatMessage("Pregnant");
-		//}
-		//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
-		if(!worldObj.isRemote && isAdult() && attackEntityFrom(DamageSource.generic, 25)) {
+		if(!worldObj.isRemote){
+			if(!par1EntityPlayer.isSneaking()){par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");}
+			//if(getGender()==GenderEnum.FEMALE && pregnant){
+			//	par1EntityPlayer.addChatMessage("Pregnant");
+			}
+			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		if(!worldObj.isRemote && isAdult() && attackEntityFrom(DamageSource.generic, 25) && par1EntityPlayer.isSneaking()) {
 			par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Item.feather, 1));
 
 		}

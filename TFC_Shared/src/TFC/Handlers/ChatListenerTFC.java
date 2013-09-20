@@ -23,6 +23,8 @@ public class ChatListenerTFC implements IChatListener
 				String start = message.message.substring(0,i);
 				String s2 = message.message.substring(i, i+1);
 				String end = message.message.substring(i+1);
+				soberTime=Math.min(soberTime,10999);
+				if(message.message.charAt(0) != '/'){
 				if(s.indexOf(s2)!=-1 && rand.nextInt(11-(int)(soberTime/1000))==0){
 					int n = rand.nextInt(2);
 					int m = 0;
@@ -38,8 +40,9 @@ public class ChatListenerTFC implements IChatListener
 					message.message = message.message + end;
 					i+=n;
 				}
+				}
 			}
-
+			
 		}
 		return message;
 	}
