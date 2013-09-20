@@ -41,6 +41,10 @@ public class ItemEgg extends ItemTerra
 				is.stackTagCompound.removeTag("Fertilized");
 				is.stackTagCompound.removeTag("Genes");
 			}
+			if(!is.getTagCompound().hasNoTags())
+			{
+				is.stackTagCompound = null;
+			}
 		}
 	}
 

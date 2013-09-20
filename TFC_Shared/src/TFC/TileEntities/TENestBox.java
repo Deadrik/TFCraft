@@ -88,8 +88,24 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 	@Override
 	public ItemStack decrStackSize(int i, int j)
 	{
-		return null;
-
+		if(inventory[i] != null)
+		{
+			if(inventory[i].stackSize <= j)
+			{
+				ItemStack itemstack = inventory[i];
+				inventory[i] = null;
+				return itemstack;
+			}
+			ItemStack itemstack1 = inventory[i].splitStack(j);
+			if(inventory[i].stackSize == 0)
+			{
+				inventory[i] = null;
+			}
+			return itemstack1;
+		} else
+		{
+			return null;
+		}
 	}
 
 	public void ejectContents()

@@ -38,7 +38,7 @@ public class ContainerAnvil extends ContainerTFC
 		//Weld slots
 		addSlotToContainer(new SlotAnvilIn(anvil,  2, 14, 12));
 		addSlotToContainer(new SlotAnvilIn(anvil,  3, 32, 12));
-		addSlotToContainer(new SlotAnvilWeldOut(inventoryplayer.player, anvil, 4, 23, 34));
+		addSlotToContainer(new SlotAnvilWeldOut(anvil, 4, 23, 34));
 		//blueprint slot
 		addSlotToContainer(new SlotAnvilPlan(anvil, 5, 105, 46));
 		//flux slot
