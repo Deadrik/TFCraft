@@ -45,6 +45,16 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 		List list = worldObj.getEntitiesWithinAABB(EntityChickenTFC.class, AxisAlignedBB.getBoundingBox(
 				xCoord+0.1, yCoord, zCoord+0.1, 
 				xCoord+0.9, yCoord+1.1, zCoord+0.9));
+		//Code that returns the closest chicken instead of the first one found, which afaik would be the one found first when the AABB was checked,
+		//which might be left to right? either way, takes longer and doesn't neccesarilly produce better results. Chickens do swap nests humourously though.
+		/*
+		if(list.size()!=0){
+			EntityAnimal ea = (EntityAnimal)list.get(0);
+			for(Object entity : list){
+				ea = ((EntityAnimal)entity).getDistanceSq(xCoord+0.5,yCoord,zCoord+0.5) < ea.getDistanceSq(xCoord+0.5,yCoord,zCoord+0.5)?(EntityAnimal)entity:ea;
+			}
+			return ea;//(EntityAnimal)list.get(0);
+		}*/
 		if(list.size()!=0){
 			return (EntityAnimal)list.get(0);
 		}
@@ -197,6 +207,10 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 						{
 							EntityChickenTFC chick = new EntityChickenTFC(worldObj,xCoord+0.5,yCoord+1,zCoord+0.5, 
 									(NBTTagCompound) inventory[i].getTagCompound().getTag("Genes"));
+							Random rand = new Random();
+							chick.setLocationAndAngles (xCoord+(rand.nextFloat()-0.5F)*2F,yCoord,zCoord+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
+							chick.rotationYawHead = chick.rotationYaw;
+							chick.renderYawOffset = chick.rotationYaw;
 							worldObj.spawnEntityInWorld(chick);
 							inventory[i] = null;
 						}

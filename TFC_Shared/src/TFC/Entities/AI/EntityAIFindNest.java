@@ -53,7 +53,7 @@ public class EntityAIFindNest extends EntityAIBase
     public boolean shouldExecute()
     {
         
-        if(this.theWorld.getBlockId((int)theCreature.posX, (int)theCreature.posY,(int)theCreature.posZ) != TFCBlocks.NestBox.blockID&&
+        if(((EntityChickenTFC)theCreature).isAdult() && this.theWorld.getBlockId((int)theCreature.posX, (int)theCreature.posY,(int)theCreature.posZ) != TFCBlocks.NestBox.blockID&&
         		this.theWorld.getBlockId((int)theCreature.posX, (int)theCreature.posY-1,(int)theCreature.posZ) != TFCBlocks.NestBox.blockID
         		 && this.getNearbySitableBlockDistance() &&
         		 ((EntityChickenTFC)theCreature).getGender()==GenderEnum.FEMALE){
@@ -138,7 +138,7 @@ public class EntityAIFindNest extends EntityAIBase
         {
             TENestBox tileentitynest = (TENestBox)par1World.getBlockTileEntity(par2, par3, par4);
 
-            if (!tileentitynest.hasBird()||(this.theCreature.getDistanceSq((double)sitableBlockX+0.5, (double)sitableBlockY, (double)sitableBlockZ+0.5)<1))
+            if (!tileentitynest.hasBird()||tileentitynest.getBird() == theCreature)
             {
                 return true;
             }

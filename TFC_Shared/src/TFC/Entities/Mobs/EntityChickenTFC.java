@@ -33,6 +33,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	protected float mateSizeMod;
 	public float size_mod;
 	public boolean inLove;
+	public boolean TEgeneratedChickFlag= false;
 
 	int degreeOfDiversion = 2;
 	/** The time until the next egg is spawned. */
@@ -90,11 +91,12 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		float m_size = genes.getFloat("m_size");
 		float f_size = genes.getFloat("f_size");
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((m_size + f_size)/1.9F);
-		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
+		//size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
+		TEgeneratedChickFlag = true;
 		this.setAge((int) TFC_Time.getTotalDays());
 	}
 
@@ -150,7 +152,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			setGrowingAge(-1);
 		}
 
-		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE){
+		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE && isAdult()){
 			this.playSound(TFC_Sounds.ROOSTERCROW, 10, rand.nextFloat()+0.5F);
 		}
 
@@ -405,7 +407,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			//	par1EntityPlayer.addChatMessage("Pregnant");
 			}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
-		if(!worldObj.isRemote && isAdult() && attackEntityFrom(DamageSource.generic, 25) && par1EntityPlayer.isSneaking()) {
+		if(!worldObj.isRemote && isAdult()&& par1EntityPlayer.isSneaking() && attackEntityFrom(DamageSource.generic, 25) ) {
 			par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Item.feather, 1));
 
 		}

@@ -1534,7 +1534,7 @@ public class TFCItems
 		
 		Rope = new ItemTerra(TFCItemID.rope).setUnlocalizedName("Rope");
 		Jute = new ItemTerra(TFCItemID.jute).setUnlocalizedName("Jute");
-		JuteFibre = new ItemTerra(TFCItemID.juteFibre).setUnlocalizedName("JuteFibre");
+		JuteFibre = new ItemTerra(TFCItemID.juteFibre).setFolder("plants/").setUnlocalizedName("JuteFibre");
 
 		// Plans
 		PickaxeHeadPlan = new ItemPlan(TFCItemID.PickaxeHeadPlan).setUnlocalizedName("PickaxeHeadPlan");

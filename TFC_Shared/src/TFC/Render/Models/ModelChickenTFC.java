@@ -72,7 +72,7 @@ public class ModelChickenTFC extends ModelBase
 	public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7);
-		float percent = TFC_Core.getPercentGrown((IAnimal)entity);
+		float percent = Math.max(TFC_Core.getPercentGrown((IAnimal)entity),0);
 		float ageScale = 2.0F-percent;
 		float offset = 1.4f - percent;
 
