@@ -32,13 +32,7 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 	}
 
 	public boolean hasBird(){
-		List list = worldObj.getEntitiesWithinAABB(EntityChickenTFC.class, AxisAlignedBB.getBoundingBox(
-				xCoord, yCoord, zCoord, 
-				xCoord+1, yCoord+1.1, zCoord+1));
-		if(list.size()!=0){
-			return true;
-		}
-		return false;	
+		return getBird() != null;	
 	}
 
 	public EntityAnimal getBird(){
@@ -56,7 +50,13 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 			return ea;//(EntityAnimal)list.get(0);
 		}*/
 		if(list.size()!=0){
-			return (EntityAnimal)list.get(0);
+			for(Object e : list)
+			{
+				if(((EntityChickenTFC)e).getGender() == GenderEnum.FEMALE && ((EntityChickenTFC)e).isAdult())
+				{
+					return (EntityChickenTFC)e;
+				}
+			}
 		}
 		return null;
 	}
