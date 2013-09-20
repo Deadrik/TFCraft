@@ -17,29 +17,18 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.util.AxisAlignedBB;
 import TFC.TerraFirmaCraft;
+import TFC.API.Entities.IAnimal.GenderEnum;
+import TFC.Core.TFC_Time;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.Handlers.PacketHandler;
 
-public class TileEntityNestBox extends NetworkTileEntity implements IInventory
+public class TENestBox extends NetworkTileEntity implements IInventory
 {
+	public ItemStack[] inventory = new ItemStack[4];
 
-	private ItemStack[] itemstack = new ItemStack[4];
-	private ItemStack output;
-
-	public TileEntityNestBox()
+	public TENestBox()
 	{		
 		shouldSendInitData = true;
-	}
-
-	public void careForInventorySlot()
-	{
-
-	}
-
-	private void ProcessItems()
-	{
-
-
 	}
 
 	public boolean hasBird(){
@@ -54,10 +43,28 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 
 	public EntityAnimal getBird(){
 		List list = worldObj.getEntitiesWithinAABB(EntityChickenTFC.class, AxisAlignedBB.getBoundingBox(
-				xCoord, yCoord, zCoord, 
-				xCoord+0.5, yCoord+1.1, zCoord+0.5));
+				xCoord+0.1, yCoord, zCoord+0.1, 
+				xCoord+0.9, yCoord+1.1, zCoord+0.9));
 		if(list.size()!=0){
 			return (EntityAnimal)list.get(0);
+		}
+		return null;
+	}
+
+	public EntityAnimal getRooster()
+	{
+		List list = worldObj.getEntitiesWithinAABB(EntityChickenTFC.class, AxisAlignedBB.getBoundingBox(
+				xCoord-5, yCoord, zCoord-5, 
+				xCoord+5, yCoord+2, zCoord+5));
+		if(list.size() != 0)
+		{
+			for(Object e : list)
+			{
+				if(((EntityChickenTFC)e).getGender() == GenderEnum.MALE && ((EntityChickenTFC)e).isAdult())
+				{
+					return (EntityChickenTFC)e;
+				}
+			}
 		}
 		return null;
 	}
@@ -86,10 +93,10 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 
 		for (int i = 0; i < getSizeInventory(); i++)
 		{
-			if(itemstack != null)
+			if(inventory != null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
-						itemstack[i]);
+						inventory[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
@@ -108,7 +115,7 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 	@Override
 	public String getInvName()
 	{
-		return "Barrel";
+		return "NestBox";
 	}
 
 	@Override
@@ -121,7 +128,7 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 	public ItemStack getStackInSlot(int i)
 	{
 		// TODO Auto-generated method stub
-		return itemstack[i];
+		return inventory[i];
 	}
 
 	@Override
@@ -132,26 +139,22 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public void openChest() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
-		this.itemstack[i] = itemstack;
+		this.inventory[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 		{
 			itemstack.stackSize = getInventoryStackLimit();
 		}
-
-
 	}
 
 
@@ -160,15 +163,42 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
-			careForInventorySlot();
 			EntityAnimal bird = getBird();
-			if(bird!=null){
+			if(bird!=null)
+			{
 				ItemStack item = ((EntityChickenTFC)bird).getEggs();
-				if(item!=null){
-					for(int i = 0; i< this.getSizeInventory();i++){
-						if(itemstack[i]==null){
-							setInventorySlotContents(i,item);
-							break;
+				EntityChickenTFC father = (EntityChickenTFC) getRooster();
+				for(int i = 0; item != null && i < this.getSizeInventory();i++)
+				{
+					if(inventory[i] == null)
+					{
+						if(father != null)
+						{
+							NBTTagCompound nbt = new NBTTagCompound();
+							nbt.setLong("Fertilized", TFC_Time.getTotalTicks()+(long)(TFC_Time.ticksInMonth*0.75f));
+							nbt.setTag("Genes", this.createGenes((EntityChickenTFC) bird, father));
+							item.setTagCompound(nbt);
+						}
+						setInventorySlotContents(i,item);
+						break;
+					}
+				}
+			}
+
+			//Care for the eggs in the hatchery
+			for(int i = 0;i < this.getSizeInventory();i++)
+			{
+				if(inventory[i] != null)
+				{
+					if(inventory[i].getTagCompound() != null && inventory[i].getTagCompound().hasKey("Fertilized"))
+					{
+						long _time = inventory[i].getTagCompound().getLong("Fertilized");
+						if(_time <= TFC_Time.getTotalTicks())
+						{
+							EntityChickenTFC chick = new EntityChickenTFC(worldObj,xCoord+0.5,yCoord+1,zCoord+0.5, 
+									(NBTTagCompound) inventory[i].getTagCompound().getTag("Genes"));
+							worldObj.spawnEntityInWorld(chick);
+							inventory[i] = null;
 						}
 					}
 				}
@@ -176,31 +206,30 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 		}
 	}
 
+	public NBTTagCompound createGenes(EntityChickenTFC mother, EntityChickenTFC father)
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setFloat("m_size", mother.getSize());
+		nbt.setFloat("f_size", father.getSize());
+
+		return nbt;
+	}
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
 		NBTTagList nbttaglist = new NBTTagList();
-
-		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-		nbttagcompound1.setByte("Slot0", (byte)1);
-		if(itemstack[0] != null){
-			itemstack[0].writeToNBT(nbttagcompound1);
+		for(int i = 0; i < inventory.length; i++)
+		{
+			if(inventory[i] != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				inventory[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
 		}
-		nbttagcompound1.setByte("Slot1", (byte)1);
-		if(itemstack[1] != null){
-			itemstack[1].writeToNBT(nbttagcompound1);
-		}
-		nbttagcompound1.setByte("Slot2", (byte)1);
-		if(itemstack[2] != null){
-			itemstack[2].writeToNBT(nbttagcompound1);
-		}
-		nbttagcompound1.setByte("Slot3", (byte)1);
-		if(itemstack[3] != null){
-			itemstack[3].writeToNBT(nbttagcompound1);
-		}
-		nbttaglist.appendTag(nbttagcompound1);
-
 		nbttagcompound.setTag("Items", nbttaglist);
 	}
 
@@ -209,16 +238,16 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 	{
 		super.readFromNBT(nbttagcompound);
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
-
-		NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(0);
-		byte byte0 = nbttagcompound1.getByte("Slot0");
-		itemstack[0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		byte byte1 = nbttagcompound1.getByte("Slot1");
-		itemstack[1] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		byte byte2 = nbttagcompound1.getByte("Slot2");
-		itemstack[2] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		byte byte3 = nbttagcompound1.getByte("Slot3");
-		itemstack[3] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		inventory = new ItemStack[getSizeInventory()];
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+			byte byte0 = nbttagcompound1.getByte("Slot");
+			if(byte0 >= 0 && byte0 < inventory.length)
+			{
+				inventory[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+			}
+		}
 	}
 
 	public void updateGui()
@@ -249,22 +278,6 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 
 	@Override
 	public void createInitPacket(DataOutputStream outStream) throws IOException {
-	}
-
-	public Packet createSealPacket()
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-
-		try {
-			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-		} catch (IOException e) {
-		}
-
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
 
 	@Override

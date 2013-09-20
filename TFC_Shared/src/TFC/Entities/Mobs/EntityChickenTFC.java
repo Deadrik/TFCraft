@@ -35,6 +35,9 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	public boolean inLove;
 
 	int degreeOfDiversion = 2;
+	/** The time until the next egg is spawned. */
+	public long nextEgg;
+	public int EggTime = 1000;
 
 	public EntityChickenTFC(World par1World)
 	{
@@ -77,8 +80,25 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		//
 		this.setAge((int) TFC_Time.getTotalDays());
 	}
-	
-	
+
+	public EntityChickenTFC(World world, double posX, double posY, double posZ, NBTTagCompound genes)
+	{
+		this(world);
+		this.posX = posX;
+		this.posY = posY;
+		this.posZ = posZ;
+		float m_size = genes.getFloat("m_size");
+		float f_size = genes.getFloat("f_size");
+		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((m_size + f_size)/1.9F);
+		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
+
+		//	We hijack the growingAge to hold the day of birth rather
+		//	than number of ticks to next growth event.
+		//
+		this.setAge((int) TFC_Time.getTotalDays());
+	}
+
+
 
 	@Override
 	protected void entityInit()
@@ -129,7 +149,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		else{
 			setGrowingAge(-1);
 		}
-		
+
 		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE){
 			this.playSound(TFC_Sounds.ROOSTERCROW, 10, rand.nextFloat()+0.5F);
 		}
@@ -143,9 +163,11 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		 * */
 		TFC_Core.PreventEntityDataUpdate = true;
 		if(getGender()==GenderEnum.MALE){
-		timeUntilNextEgg=10000;
+			timeUntilNextEgg=10000;
 		}
-		else if(timeUntilNextEgg == 0){
+		else if(timeUntilNextEgg == 0)
+		{
+			//This prevents the vanilla chicken from ever laying an egg.
 			timeUntilNextEgg = 2;
 		}
 		super.onLivingUpdate();
@@ -185,6 +207,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setFloat("MateSize", mateSizeMod);
 		nbt.setInteger("Age", getBirthDay());
+		nbt.setLong("nextEgg", nextEgg);
 	}
 
 	/**
@@ -200,6 +223,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		hunger = nbt.getInteger ("Hunger");
 		mateSizeMod = nbt.getFloat("MateSize");
 		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
+		nextEgg = nbt.getLong("nextEgg");
 	}
 
 	/**
@@ -210,11 +234,12 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	{
 		return Item.feather.itemID;
 	}
-	
+
 	public ItemStack getEggs(){
-		if(--this.timeUntilNextEgg == 0){			
-			this.timeUntilNextEgg = this.rand.nextInt(6000) + 24000;
-			return new ItemStack(Item.egg, 1);
+		if(TFC_Time.getTotalTicks() >= this.nextEgg)
+		{			
+			this.nextEgg = TFC_Time.getTotalTicks() + EggTime;
+			return new ItemStack(TFCItems.Egg, 1);
 		}		
 		return null;
 	}
@@ -375,11 +400,11 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
 		//if(!worldObj.isRemote){
-			//par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
-			//if(getGender()==GenderEnum.FEMALE && pregnant){
-			//	par1EntityPlayer.addChatMessage("Pregnant");
-			//}
-			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		//par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+		//if(getGender()==GenderEnum.FEMALE && pregnant){
+		//	par1EntityPlayer.addChatMessage("Pregnant");
+		//}
+		//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		if(!worldObj.isRemote && isAdult() && attackEntityFrom(DamageSource.generic, 25)) {
 			par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Item.feather, 1));
 

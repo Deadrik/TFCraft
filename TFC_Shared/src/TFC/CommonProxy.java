@@ -25,6 +25,7 @@ import TFC.Containers.ContainerForge;
 import TFC.Containers.ContainerLiquidVessel;
 import TFC.Containers.ContainerLogPile;
 import TFC.Containers.ContainerMold;
+import TFC.Containers.ContainerNestBox;
 import TFC.Containers.ContainerQuern;
 import TFC.Containers.ContainerQuiver;
 import TFC.Containers.ContainerScribe;
@@ -61,6 +62,7 @@ import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
 import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TECrucible;
+import TFC.TileEntities.TENestBox;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityBellows;
@@ -146,6 +148,7 @@ public class CommonProxy implements IGuiHandler
 
 		GameRegistry.registerTileEntity(TileEntityBloom.class, "IronBloom");
 		GameRegistry.registerTileEntity(TECrucible.class, "Crucible");
+		GameRegistry.registerTileEntity(TENestBox.class, "Nest Box");
 
 		if(b){
 			GameRegistry.registerTileEntity(TileEntityPottery.class, "Pottery");
@@ -447,7 +450,10 @@ public class CommonProxy implements IGuiHandler
 		{
 			return new ContainerQuiver(player.inventory, world, x, y, z);
 		}
-
+		case 41:
+		{
+			return new ContainerNestBox(player.inventory,((TENestBox)te),world,x,y,z);
+		}
 		default:
 		{
 			return null;

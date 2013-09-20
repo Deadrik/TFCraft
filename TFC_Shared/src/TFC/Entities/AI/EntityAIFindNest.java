@@ -4,7 +4,7 @@ import java.util.Random;
 
 import TFC.TFCBlocks;
 import TFC.API.Entities.IAnimal.GenderEnum;
-import TFC.TileEntities.TileEntityNestBox;
+import TFC.TileEntities.TENestBox;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.entity.EntityCreature;
@@ -136,7 +136,7 @@ public class EntityAIFindNest extends EntityAIBase
 
         if (l == TFCBlocks.NestBox.blockID)
         {
-            TileEntityNestBox tileentitynest = (TileEntityNestBox)par1World.getBlockTileEntity(par2, par3, par4);
+            TENestBox tileentitynest = (TENestBox)par1World.getBlockTileEntity(par2, par3, par4);
 
             if (!tileentitynest.hasBird()||(this.theCreature.getDistanceSq((double)sitableBlockX+0.5, (double)sitableBlockY, (double)sitableBlockZ+0.5)<1))
             {

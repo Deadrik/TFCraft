@@ -23,6 +23,7 @@ import TFC.Core.TFCTabs;
 import TFC.Core.Metal.Alloy;
 import TFC.Core.Metal.AlloyManager;
 import TFC.Core.Metal.MetalRegistry;
+import TFC.Food.ItemEgg;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemAlcohol;
@@ -728,7 +729,7 @@ public class TFCItems
 	public static Item OatWhole;
 	public static Item RyeWhole;
 	public static Item RiceWhole;
-	
+
 	public static Item venisonRaw;
 	public static Item venisonCooked;
 
@@ -952,8 +953,8 @@ public class TFCItems
 		Item.itemsList[Item.stick.itemID] = null; Item.itemsList[Item.stick.itemID] = new ItemStick(24).setFull3D().setUnlocalizedName("stick");
 		Item.itemsList[Item.leather.itemID] = null; Item.itemsList[Item.leather.itemID] = new ItemTerra(Item.leather.itemID).setFull3D().setUnlocalizedName("leather");
 		Item.itemsList[Block.vine.blockID] = new ItemColored(Block.vine.blockID - 256, false);
-		Item.itemsList[Item.egg.itemID] = new ItemTerra(88).setSize(EnumSize.SMALL).setUnlocalizedName("egg").func_111206_d("egg");
-
+		Item.itemsList[Item.egg.itemID] = new ItemEgg(Item.egg.itemID).setSize(EnumSize.SMALL).setUnlocalizedName("egg").func_111206_d("egg");
+		Egg = Item.itemsList[Item.egg.itemID];
 		minecartCrate = (new ItemCustomMinecart(TFCItemID.minecartCrate, 1)).setUnlocalizedName("minecartChest").func_111206_d("minecart_chest");
 
 		Item.itemsList[Item.bow.itemID] = null; Item.itemsList[Item.bow.itemID] = (new ItemCustomBow(5)).setUnlocalizedName("bow").func_111206_d("bow");
@@ -967,7 +968,7 @@ public class TFCItems
 		Item.itemsList[109+256] = null; Item.itemsList[109+256] = new ItemTerra(109).setUnlocalizedName("chickenRaw");
 		Item.itemsList[110+256] = null; Item.itemsList[110+256] = new ItemTerraFood(110, 35, 0.6F, true, 41).setFolder("").setUnlocalizedName("chickenCooked");
 		//Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 25, 0.6F, false, 42)).setFolder("").setUnlocalizedName("bread");
-		Item.itemsList[88+256] = null; Item.itemsList[88+256] = (new ItemTerra(88)).setUnlocalizedName("egg");
+
 		Item.itemsList[Item.dyePowder.itemID] = null; Item.itemsList[Item.dyePowder.itemID] = new ItemDyeCustom(95).setUnlocalizedName("dyePowder").func_111206_d("dye_powder");
 		Item.itemsList[Item.potion.itemID] = null; Item.itemsList[Item.potion.itemID] = (new ItemCustomPotion(117)).setUnlocalizedName("potion").func_111206_d("potion");
 
@@ -1444,8 +1445,8 @@ public class TFCItems
 		Sake = new ItemAlcohol(TFCItemID.Sake).setUnlocalizedName("Sake").setCreativeTab(CreativeTabs.tabFood);
 		Vodka = new ItemAlcohol(TFCItemID.Vodka).setUnlocalizedName("Vodka").setCreativeTab(CreativeTabs.tabFood);
 		Whiskey = new ItemAlcohol(TFCItemID.Whiskey).setUnlocalizedName("Whiskey").setCreativeTab(CreativeTabs.tabFood);
-		
-		
+
+
 
 		Blueprint = new ItemBlueprint(TFCItemID.Blueprint);
 		writabeBookTFC = new ItemWritableBookTFC(TFCItemID.WritableBookTFC,"Fix Me I'm Broken").setUnlocalizedName("book");

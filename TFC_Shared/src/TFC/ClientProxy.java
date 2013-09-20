@@ -71,6 +71,7 @@ import TFC.GUI.GuiInventoryTFC;
 import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiLogPile;
 import TFC.GUI.GuiMold;
+import TFC.GUI.GuiNestBox;
 import TFC.GUI.GuiQuern;
 import TFC.GUI.GuiQuiver;
 import TFC.GUI.GuiScribe;
@@ -126,6 +127,7 @@ import TFC.Render.Models.ModelSquidTFC;
 import TFC.Render.Models.ModelWolfTFC;
 import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TECrucible;
+import TFC.TileEntities.TENestBox;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityBellows;
@@ -135,7 +137,6 @@ import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityForge;
 import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TileEntityLogPile;
-import TFC.TileEntities.TileEntityNestBox;
 import TFC.TileEntities.TileEntityPottery;
 import TFC.TileEntities.TileEntityQuern;
 import TFC.TileEntities.TileEntityScribe;
@@ -383,7 +384,10 @@ public class ClientProxy extends CommonProxy
 		{
 			return new GuiQuiver(player.inventory, world, x, y, z);
 		}
-
+		case 41:
+		{
+			return new GuiNestBox(player.inventory, ((TENestBox)te), world, x, y, z);
+		}
 		default:
 		{
 			return null;
