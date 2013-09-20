@@ -37,7 +37,7 @@ public class ItemRawHide extends ItemLooseRock
 			int d = (int)((45 + ((entityplayer.rotationYaw % 360)+360f)%360)/90)%4; //direction
 			int x2 = x+(d==1?-1:(d==3?1:0)); // the x-coord of the second block
 			int z2 = z+(d==2?-1:(d==0?1:0));
-			if(world.getBlockId(x, y, z)==TFCBlocks.Thatch.blockID && side != -1 && world.getBlockId(x2,y,z2)==TFCBlocks.Thatch.blockID
+			if(world.getBlockId(x, y, z)==TFCBlocks.Thatch.blockID && side == 1 && world.getBlockId(x2,y,z2)==TFCBlocks.Thatch.blockID
 					&& world.getBlockId(x, y+1, z)==0 && world.getBlockId(x2, y+1, z2)==0){
 				world.destroyBlock(x, y, z, false);
 				world.destroyBlock(x2, y, z2, false);

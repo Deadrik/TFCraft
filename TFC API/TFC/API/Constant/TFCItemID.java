@@ -741,6 +741,8 @@ public class TFCItemID {
 	public static int rope						= 19116;
 	public static int venisonRaw				= 19117;
 	public static int venisonCooked				= 19118;
+	public static int jute						= 19119;
+	public static int juteFibre					= 19120;
 
 
 	public static void Setup(Configuration config)

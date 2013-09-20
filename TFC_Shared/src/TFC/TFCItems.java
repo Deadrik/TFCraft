@@ -864,6 +864,10 @@ public class TFCItems
 	public static Item UnknownUnshaped;
 
 	public static Item Quiver;
+	
+	public static Item Rope;
+	public static Item Jute;
+	public static Item JuteFibre;
 
 	/**
 	 * Item Uses Setup
@@ -1527,6 +1531,10 @@ public class TFCItems
 		UnknownUnshaped = new ItemMeltedMetal(TFCItemID.UnknownUnshaped).setUnlocalizedName("Unknown Unshaped");
 
 		Quiver = new ItemQuiver(TFCItemID.Quiver).setUnlocalizedName("Quiver");
+		
+		Rope = new ItemTerra(TFCItemID.rope).setUnlocalizedName("Rope");
+		Jute = new ItemTerra(TFCItemID.jute).setUnlocalizedName("Jute");
+		JuteFibre = new ItemTerra(TFCItemID.juteFibre).setUnlocalizedName("JuteFibre");
 
 		// Plans
 		PickaxeHeadPlan = new ItemPlan(TFCItemID.PickaxeHeadPlan).setUnlocalizedName("PickaxeHeadPlan");
