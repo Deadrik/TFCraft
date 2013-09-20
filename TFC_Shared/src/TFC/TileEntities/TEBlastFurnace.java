@@ -202,6 +202,10 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 					te.addMetal(m, (short)(100-output.getItemDamage()));
 				}
 				input[1].setItemDamage(input[1].getItemDamage()+1);
+				if( input[1] != null && input[1].getItemDamage() == input[1].getMaxDamage())
+				{
+					setInventorySlotContents(1,null);
+				}
 				te.temperature = (int)this.fireTemperature;
 			}
 		}
