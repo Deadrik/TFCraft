@@ -123,14 +123,14 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	protected void updateAITick ()
 	{
-		dataWatcher.updateObject (18, func_110143_aJ());
+		dataWatcher.updateObject (18, getHealth());
 	}
 
 	@Override
 	protected void entityInit ()
 	{
 		super.entityInit ();
-		dataWatcher.addObject (18,func_110143_aJ());
+		dataWatcher.addObject (18, getHealth());
 		this.dataWatcher.addObject(13, new Integer(0));
 		this.dataWatcher.addObject(14, new Float(1));
 		this.dataWatcher.addObject(15, Integer.valueOf(0));
@@ -138,13 +138,11 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 
 
 	@Override
-	protected void func_110147_ax()
+	protected void applyEntityAttributes()
 	{
-		super.func_110147_ax();
-		//this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobDamage.BearDamage);
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.BearHealth);//MaxHealth
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(TFC_MobData.BearHealth);//MaxHealth
 	}
-
 
 	/**
 	 * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to

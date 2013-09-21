@@ -26,15 +26,15 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 			int meta = bellows.worldObj.getBlockMetadata(bellows.xCoord, bellows.yCoord, bellows.zCoord);
 			float pos = bellows.blowTimer * 0.1F;
 			if(pos < 0) { pos = 0; }
-			
+
 			Tessellator t = Tessellator.instance;
 			GL11.glPushMatrix();
 			GL11.glTranslatef((float) x, (float) y, (float) z);
-			
+
 			renderBack(t, meta, pos);
 			renderBody(t, meta, pos);
 			renderFront(t, meta);
-			
+
 			GL11.glPopMatrix();
 		}
 	}
@@ -43,7 +43,7 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 	{
 		float i;
 		float j;
-		
+
 		if(meta == 0 || meta == 2)
 		{
 			if(meta == 0)
@@ -56,7 +56,7 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 				i = 0.9F - pos;
 				j = 1.0F - pos;
 			}
-			func_110628_a(BACK_TEXTURE);
+			bindTexture(BACK_TEXTURE);
 			t.startDrawingQuads();
 			//back
 			t.addVertexWithUV(0, 0, i, 0, 0);
@@ -102,7 +102,7 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 				i = 0.9F - pos;
 				j = 1.0F - pos;
 			}
-			func_110628_a(BACK_TEXTURE);
+			bindTexture(BACK_TEXTURE);
 			t.startDrawingQuads();
 			//front
 			t.addVertexWithUV(i, 0, 0, 0, 0);
@@ -137,23 +137,23 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 			t.draw();
 		}
 	}
-	
+
 	private void renderBody(Tessellator t, int meta, float pos)
 	{
 		float i;
 		float j;
-		
+
 		if(meta == 0 || meta == 2)
 		{
 			if(meta == 0)
 			{
-				func_110628_a(SIDE1_TEXTURE);
+				bindTexture(SIDE1_TEXTURE);
 				i = 0.05F + pos;
 				j = 0.95F;
 			}
 			else
 			{
-				func_110628_a(SIDE4_TEXTURE);
+				bindTexture(SIDE4_TEXTURE);
 				i = 0.05F;
 				j = 0.95F - pos;
 			}
@@ -163,21 +163,21 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 			t.addVertexWithUV(0.9F, 0.1F, j, 1, 1);
 			t.addVertexWithUV(0.9F, 0.1F, i, 1, 0);
 			t.draw();
-			
+
 			t.startDrawingQuads();
 			t.addVertexWithUV(0.1F, 0.9F, i, 0, 0);
 			t.addVertexWithUV(0.1F, 0.9F, j, 0, 1);
 			t.addVertexWithUV(0.9F, 0.9F, j, 1, 1);
 			t.addVertexWithUV(0.9F, 0.9F, i, 1, 0);
 			t.draw();
-			
+
 			t.startDrawingQuads();
 			t.addVertexWithUV(0.1F, 0.1F, i, 0, 0);
 			t.addVertexWithUV(0.1F, 0.1F, j, 0, 1);
 			t.addVertexWithUV(0.1F, 0.9F, j, 1, 1);
 			t.addVertexWithUV(0.1F, 0.9F, i, 1, 0);
 			t.draw();
-			
+
 			t.startDrawingQuads();
 			t.addVertexWithUV(0.9F, 0.1F, i, 0, 0);
 			t.addVertexWithUV(0.9F, 0.1F, j, 0, 1);
@@ -189,13 +189,13 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 		{
 			if(meta == 3)
 			{
-				func_110628_a(SIDE3_TEXTURE);
+				bindTexture(SIDE3_TEXTURE);
 				i = 0.05F + pos;
 				j = 0.95F;
 			}
 			else
 			{
-				func_110628_a(SIDE2_TEXTURE);
+				bindTexture(SIDE2_TEXTURE);
 				i = 0.05F;
 				j = 0.95F - pos;
 			}
@@ -205,21 +205,21 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 			t.addVertexWithUV(j, 0.9F, 0.1F, 1, 1);
 			t.addVertexWithUV(j, 0.1F, 0.1F, 1, 0);
 			t.draw();
-			
+
 			t.startDrawingQuads();
 			t.addVertexWithUV(i, 0.1F, 0.9F, 0, 0);
 			t.addVertexWithUV(i, 0.1F, 0.1F, 0, 1);
 			t.addVertexWithUV(j, 0.1F, 0.1F, 1, 1);
 			t.addVertexWithUV(j, 0.1F, 0.9F, 1, 0);
 			t.draw();
-			
+
 			t.startDrawingQuads();
 			t.addVertexWithUV(i, 0.9F, 0.9F, 0, 0);
 			t.addVertexWithUV(i, 0.1F, 0.9F, 0, 1);
 			t.addVertexWithUV(j, 0.1F, 0.9F, 1, 1);
 			t.addVertexWithUV(j, 0.9F, 0.9F, 1, 0);
 			t.draw();
-			
+
 			t.startDrawingQuads();
 			t.addVertexWithUV(i, 0.9F, 0.1F, 0, 0);
 			t.addVertexWithUV(i, 0.9F, 0.9F, 0, 1);
@@ -228,12 +228,12 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 			t.draw();
 		}
 	}
-	
+
 	private void renderFront(Tessellator t, int meta)
 	{
 		if(meta == 0)
 		{
-			func_110628_a(FRONT_TEXTURE);
+			bindTexture(FRONT_TEXTURE);
 			t.startDrawingQuads();
 			//front
 			t.addVertexWithUV(0, 0, 1, 0, 0);
@@ -241,8 +241,8 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 			t.addVertexWithUV(1, 1, 1, 1, 1);
 			t.addVertexWithUV(0, 1, 1, 1, 0);
 			t.draw();
-			
-			func_110628_a(BACK_TEXTURE);
+
+			bindTexture(BACK_TEXTURE);
 			t.startDrawingQuads();
 			//back
 			t.addVertexWithUV(0, 0, 0.9F, 0, 0);
@@ -273,7 +273,7 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 		}
 		else if(meta == 1)
 		{
-			func_110628_a(FRONT_TEXTURE);
+			bindTexture(FRONT_TEXTURE);
 			t.startDrawingQuads();
 			//front
 			t.addVertexWithUV(0, 0, 0, 0, 0);
@@ -281,8 +281,8 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 			t.addVertexWithUV(0, 1, 1, 1, 1);
 			t.addVertexWithUV(0, 1, 0, 1, 0);
 			t.draw();
-			
-			func_110628_a(BACK_TEXTURE);
+
+			bindTexture(BACK_TEXTURE);
 			t.startDrawingQuads();
 			//back
 			t.addVertexWithUV(0.1F, 0, 0, 0, 0);
@@ -313,7 +313,7 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 		}
 		else if(meta == 2)
 		{
-			func_110628_a(FRONT_TEXTURE);
+			bindTexture(FRONT_TEXTURE);
 			t.startDrawingQuads();
 			//back
 			t.addVertexWithUV(0, 0, 0, 0, 0);
@@ -321,8 +321,8 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 			t.addVertexWithUV(1, 1, 0, 1, 1);
 			t.addVertexWithUV(1, 0, 0, 1, 0);
 			t.draw();
-			
-			func_110628_a(BACK_TEXTURE);
+
+			bindTexture(BACK_TEXTURE);
 			t.startDrawingQuads();
 			//front
 			t.addVertexWithUV(0, 0, 0.1F, 0, 0);
@@ -353,7 +353,7 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 		}
 		else if(meta == 3)
 		{
-			func_110628_a(FRONT_TEXTURE);
+			bindTexture(FRONT_TEXTURE);
 			t.startDrawingQuads();
 			//back
 			t.addVertexWithUV(1.0F, 0, 0, 0, 0);
@@ -361,15 +361,15 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 			t.addVertexWithUV(1.0F, 1, 1, 1, 1);
 			t.addVertexWithUV(1.0F, 0, 1, 1, 0);
 			t.draw();
-			
-			func_110628_a(BACK_TEXTURE);
+
+			bindTexture(BACK_TEXTURE);
 			t.startDrawingQuads();
 			//front
 			t.addVertexWithUV(0.9F, 0, 0, 0, 0);
 			t.addVertexWithUV(0.9F, 0, 1, 0, 1);
 			t.addVertexWithUV(0.9F, 1, 1, 1, 1);
 			t.addVertexWithUV(0.9F, 1, 0, 1, 0);
-			
+
 			// top
 			t.addVertexWithUV(0.9F, 1, 0, 0, 0);
 			t.addVertexWithUV(0.9F, 1, 1, 0, 1);

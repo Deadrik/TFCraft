@@ -129,7 +129,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.StoneKnife, 1, 0), new Object[] { 
 			"1","2", Character.valueOf('1'), TFCItems.StoneKnifeHead,Character.valueOf('2'), new ItemStack(Item.stick,1,32767)});
-		
+
 
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.WoodenBucketEmpty, 1), new Object[] { "w w","w w"," w ", Character.valueOf('w'), new ItemStack(TFCItems.SinglePlank, 1, 32767) });
@@ -167,12 +167,12 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(Item.itemFrame,1),new Object[]{"###","#$#","###",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.TerraLeather,1)});
 		GameRegistry.addRecipe(new ItemStack(Item.painting,1),new Object[]{"###","#$#","###",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
-		
-		GameRegistry.addRecipe(new ItemStack(Block.field_111031_cC,2,0),new Object[]{"$$",Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
+
+		GameRegistry.addRecipe(new ItemStack(Block.carpet,2,0),new Object[]{"$$",Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
 		for(int i = 0; i < 16;i++){
-			GameRegistry.addShapelessRecipe(new ItemStack(Block.field_111031_cC,1,i),new Object[] {new ItemStack(Item.dyePowder,1,15-i),new ItemStack(Block.field_111031_cC,1,32767)});
+			GameRegistry.addShapelessRecipe(new ItemStack(Block.carpet,1,i),new Object[] {new ItemStack(Item.dyePowder,1,15-i),new ItemStack(Block.carpet,1,32767)});
 		}
-		
+
 		//Chest
 		GameRegistry.addRecipe(new ItemStack(Block.chest, 1), new Object[] { "###","# #","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, 32767)});
 
@@ -536,7 +536,7 @@ public class Recipes
 		registerKilnRecipes();
 		registerToolMolds();
 	}
-	
+
 	private static ItemStack checkMelted(ItemStack is){
 		if(TFC_ItemHeat.GetTemperature(is)>TFC_ItemHeat.getMeltingPoint(is)){
 			return null;

@@ -1,18 +1,18 @@
 package TFC.Render;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderChicken;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
 import TFC.Reference;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntityChickenTFC;
-import TFC.Entities.Mobs.EntityCowTFC;
 public class RenderChickenTFC extends RenderChicken
 {
 	private static final ResourceLocation ChickenTexture = new ResourceLocation("textures/entity/chicken.png");
@@ -51,16 +51,16 @@ public class RenderChickenTFC extends RenderChicken
 			return ChickenTexture;
 		}
 	}
-	
-	@Override
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
-    {
-		float scale = (((EntityChickenTFC)par1EntityLivingBase).size_mod/3)+0.5f;
-		GL11.glScalef(scale, scale, scale);
-    }
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+	{
+		float scale = (((EntityChickenTFC)par1EntityLivingBase).size_mod/3)+0.5f;
+		GL11.glScalef(scale, scale, scale);
+	}
+
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		// TODO Auto-generated method stub
 		return getTexture((IAnimal)entity);
 	}

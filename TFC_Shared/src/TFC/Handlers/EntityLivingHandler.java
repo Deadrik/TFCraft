@@ -35,7 +35,7 @@ public class EntityLivingHandler
 		{
 			EntityPlayer player = (EntityPlayer)entity;
 			//Set Max Health
-			player.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(getMaxHealth(player));
+			player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(getMaxHealth(player));
 			if(!player.worldObj.isRemote)
 			{
 				//Nullify the Old Food

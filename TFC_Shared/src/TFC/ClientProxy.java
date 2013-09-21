@@ -150,8 +150,8 @@ public class ClientProxy extends CommonProxy
 	@SideOnly(Side.CLIENT)
 	public void registerRenderInformation() 
 	{
-		((ReloadableResourceManager)Minecraft.getMinecraft().func_110442_L()).func_110542_a(new GrassColorReloadListener());
-		((ReloadableResourceManager)Minecraft.getMinecraft().func_110442_L()).func_110542_a(new FoliageColorReloadListener());
+		((ReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new GrassColorReloadListener());
+		((ReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new FoliageColorReloadListener());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderTerraJavelin());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySquidTFC.class, new RenderSquidTFC(new ModelSquidTFC(), 0.7F));
@@ -681,7 +681,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public String getCurrentLanguage()
 	{
-		return Minecraft.getMinecraft().func_135016_M().func_135041_c().func_135034_a();
+		return Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode();
 	}
 
 	@Override

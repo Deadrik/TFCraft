@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
@@ -636,7 +637,7 @@ public class TFC_Core
 
 	public static float getEntityMaxHealth(EntityLivingBase entity)
 	{
-		return (float) entity.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111126_e();
+		return (float) entity.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
 	}
 
 	public static float getPercentGrown(IAnimal animal)
@@ -645,5 +646,10 @@ public class TFC_Core
 		float time = (int) TFC_Time.getTotalDays();
 		float percent =(time-birth)/animal.getNumberOfDaysToAdult();
 		return Math.min(percent, 1f);
+	}
+
+	public static void bindTexture(ResourceLocation texture)
+	{
+		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 	}
 }

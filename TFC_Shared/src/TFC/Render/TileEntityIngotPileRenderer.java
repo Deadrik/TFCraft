@@ -2,13 +2,13 @@ package TFC.Render;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
+import TFC.Core.TFC_Core;
 import TFC.Render.Models.ModelIngotPile;
 import TFC.TileEntities.TileEntityIngotPile;
 
@@ -38,7 +38,7 @@ public class TileEntityIngotPileRenderer extends TileEntitySpecialRenderer
 			if (par1TileEntityPile.getStackInSlot(0)!=null)
 			{
 				int i = ((TFC.Blocks.BlockIngotPile)var10).getStack(par1TileEntityPile.worldObj,par1TileEntityPile);
-				ModLoader.getMinecraftInstance().renderEngine.func_110577_a(new ResourceLocation(Reference.ModID, "textures/blocks/metal/"+par1TileEntityPile.type+".png")); //texture
+				TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/metal/"+par1TileEntityPile.type+".png")); //texture
 				GL11.glPushMatrix(); //start
 				GL11.glTranslatef((float)d + 0.0F, (float)d1 + 0F, (float)d2 + 0.0F); //size
 

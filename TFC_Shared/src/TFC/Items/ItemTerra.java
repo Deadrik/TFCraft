@@ -210,7 +210,7 @@ public class ItemTerra extends Item implements ISize
 	}
 
 	@Override
-	public Multimap func_111205_h()
+	public Multimap getItemAttributeModifiers()
 	{
 		Multimap multimap = HashMultimap.create();
 		return multimap;

@@ -4,11 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.src.ModLoader;
 import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
 import TFC.API.Crafting.AnvilReq;
 import TFC.Blocks.Devices.BlockAnvil;
+import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityAnvil;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -82,14 +82,14 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 				renderblocks.renderStandardBlock(block, i, j, k);
 				if(te.anvilItemStacks[0] != null && !breaking)
 				{
-					
+
 					//					block.setBlockBounds(0.0F, 0.9F, 0.0F, 1F, 0.901F, 1F);
 					//					renderblocks.renderStandardBlock(block, i, j, k);
 					Tessellator tessellator = Tessellator.instance;
 					int state = tessellator.drawMode;
 					tessellator.draw();
 					tessellator.startDrawingQuads();
-					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
+					TFC_Core.bindTexture(TextureMap.locationItemsTexture);
 					renderblocks.overrideBlockTexture = te.anvilItemStacks[0].getIconIndex();
 					tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 					tessellator.setColorRGBA_F(1, 1, 1, 1);
@@ -111,7 +111,7 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 					tessellator.startDrawing(state);
 
 				}
-				ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110575_b);
+				TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
 				renderblocks.clearOverrideBlockTexture();
 			}
 		}
@@ -160,13 +160,15 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	public static void renderInvBlock(Block block, int m, RenderBlocks renderer)
 	{
 		Tessellator var14 = Tessellator.instance;
 		int meta = m;
 		if(meta >=8)
+		{
 			meta-=8;
+		}
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, -1.0F, 0.0F);
 		renderer.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, meta));

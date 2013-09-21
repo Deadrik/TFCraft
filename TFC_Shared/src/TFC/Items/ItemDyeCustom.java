@@ -66,7 +66,7 @@ public class ItemDyeCustom extends ItemTerra
 
 		for (int i = 0; i < field_94595_b.length; ++i)
 		{
-			this.field_94594_d[i] = par1IconRegister.registerIcon(this.func_111208_A() + "_" + field_94595_b[i]);
+			this.field_94594_d[i] = par1IconRegister.registerIcon(this.getIconString() + "_" + field_94595_b[i]);
 		}
 	}
 
@@ -107,7 +107,7 @@ public class ItemDyeCustom extends ItemTerra
 	}
 
 	@Override
-	public boolean func_111207_a(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
+	public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
 	{
 		if (par3EntityLivingBase instanceof EntitySheep)
 		{

@@ -41,7 +41,10 @@ public class TFC_CoreRender
         	breaking = true;
         }*/
 
-		if(te.TypeID <= 0) return false;
+		if(te.TypeID <= 0)
+		{
+			return false;
+		}
 
 		int type = te.TypeID;
 		int meta = te.MetaID;
@@ -72,7 +75,9 @@ public class TFC_CoreRender
 		}
 
 		if(!breaking)
+		{
 			renderblocks.overrideBlockTexture = tex;
+		}
 
 		renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
 
@@ -107,7 +112,10 @@ public class TFC_CoreRender
 			var10 = 0.5F;
 		}
 		TileEntityPartial te = (TileEntityPartial) renderblocks.blockAccess.getBlockTileEntity(par2, par3, par4);
-		if(te.TypeID <= 0) return false;
+		if(te.TypeID <= 0)
+		{
+			return false;
+		}
 
 		int type = te.TypeID;
 		int meta = te.MetaID;
@@ -263,7 +271,9 @@ public class TFC_CoreRender
 
 		DataLayer rockLayer1 = ((TFCWorldChunkManager)w.getWorldChunkManager()).getRockLayerAt(i, k, 0);
 		if(rockLayer1 != null && Block.blocksList[rockLayer1.data1] != null && !breaking)
+		{
 			renderblocks.overrideBlockTexture = Block.blocksList[rockLayer1.data1].getIcon(0, rockLayer1.data2);
+		}
 
 		int seed = i*k+j;
 		Random R = new Random(seed);
@@ -283,7 +293,7 @@ public class TFC_CoreRender
 		return true;
 	}
 
-	
+
 
 	public static boolean RenderOre(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks, IBlockAccess iblockaccess)
 	{
@@ -317,11 +327,15 @@ public class TFC_CoreRender
 		DataLayer rockLayer3 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);
 
 		if(yCoord <= TFCOptions.RockLayer3Height)
+		{
 			var27 = Block.blocksList[rockLayer3.data1].getIcon(5, rockLayer3.data2);
-		else if(yCoord <= TFCOptions.RockLayer2Height)
+		} else if(yCoord <= TFCOptions.RockLayer2Height)
+		{
 			var27 = Block.blocksList[rockLayer2.data1].getIcon(5, rockLayer2.data2);
-		else
+		} else
+		{
 			var27 = Block.blocksList[rockLayer1.data1].getIcon(5, rockLayer1.data2);
+		}
 		return var27;
 	}
 
@@ -681,39 +695,41 @@ public class TFC_CoreRender
 
 		return true;
 	}
-	
+
 	public static boolean RenderBlockWithCustomColorMultiplier(Block block, RenderBlocks renderBlocks, int xCoord, int yCoord, int zCoord, int colorMultiplier)
 	{
 		int l = colorMultiplier;
-        float f = (float)(l >> 16 & 255) / 255.0F;
-        float f1 = (float)(l >> 8 & 255) / 255.0F;
-        float f2 = (float)(l & 255) / 255.0F;
+		float f = (l >> 16 & 255) / 255.0F;
+		float f1 = (l >> 8 & 255) / 255.0F;
+		float f2 = (l & 255) / 255.0F;
 
-        if (EntityRenderer.anaglyphEnable)
-        {
-            float f3 = (f * 30.0F + f1 * 59.0F + f2 * 11.0F) / 100.0F;
-            float f4 = (f * 30.0F + f1 * 70.0F) / 100.0F;
-            float f5 = (f * 30.0F + f2 * 70.0F) / 100.0F;
-            f = f3;
-            f1 = f4;
-            f2 = f5;
-        }
+		if (EntityRenderer.anaglyphEnable)
+		{
+			float f3 = (f * 30.0F + f1 * 59.0F + f2 * 11.0F) / 100.0F;
+			float f4 = (f * 30.0F + f1 * 70.0F) / 100.0F;
+			float f5 = (f * 30.0F + f2 * 70.0F) / 100.0F;
+			f = f3;
+			f1 = f4;
+			f2 = f5;
+		}
 
-        return Minecraft.isAmbientOcclusionEnabled() && Block.lightValue[block.blockID] == 0 ? 
-        		(renderBlocks.partialRenderBounds ? 
-        				renderBlocks.renderBlockWithAmbientOcclusion(block, xCoord, yCoord, zCoord, f, f1, f2) : 
-        					renderBlocks.renderStandardBlockWithAmbientOcclusion(block, xCoord, yCoord, zCoord, f, f1, f2)) : 
-        						renderBlocks.renderStandardBlockWithColorMultiplier(block, xCoord, yCoord, zCoord, f, f1, f2);
+		return Minecraft.isAmbientOcclusionEnabled() && Block.lightValue[block.blockID] == 0 ? 
+				(renderBlocks.partialRenderBounds ? 
+						renderBlocks.renderStandardBlockWithAmbientOcclusion(block, xCoord, yCoord, zCoord, f, f1, f2) : 
+							renderBlocks.renderStandardBlockWithAmbientOcclusion(block, xCoord, yCoord, zCoord, f, f1, f2)) : 
+								renderBlocks.renderStandardBlockWithColorMultiplier(block, xCoord, yCoord, zCoord, f, f1, f2);
 	}
 
 	public static boolean RenderFruitLeaves(Block block, int xCoord, int yCoord, int zCoord, RenderBlocks renderblocks)
 	{
 		int meta = renderblocks.blockAccess.getBlockMetadata(xCoord, yCoord, zCoord);
 		if(meta >= 8)
+		{
 			meta-=8;
+		}
 		FloraManager manager = FloraManager.getInstance();
 		FloraIndex index = manager.findMatchingIndex(BlockFruitLeaves.getType(block.blockID, meta));
-		
+
 		renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
 		if(index.inBloom(TFC_Time.currentMonth) || index.inHarvest(TFC_Time.currentMonth))
 		{
@@ -725,7 +741,7 @@ public class TFC_CoreRender
 			renderblocks.clearOverrideBlockTexture();
 		}
 
-/*
+		/*
 		renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 0));
 
 		if(index.inBloom(TFC_Time.currentMonth))
@@ -739,7 +755,7 @@ public class TFC_CoreRender
 				renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
 			}
 		}
-*/
+		 */
 		return true;
 	}
 

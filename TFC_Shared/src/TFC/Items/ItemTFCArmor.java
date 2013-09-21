@@ -70,7 +70,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	{
 		if (this.getArmorMaterial() == EnumArmorMaterial.CLOTH)
 		{
-			this.itemIcon = registerer.registerIcon("minecraft:" + func_111208_A());
+			this.itemIcon = registerer.registerIcon("minecraft:" + getIconString());
 			overlayIcon = registerer.registerIcon("minecraft:" + leatherNames[this.armorType]);
 		}
 		else

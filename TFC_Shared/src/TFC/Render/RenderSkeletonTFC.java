@@ -60,7 +60,7 @@ public class RenderSkeletonTFC extends RenderBiped
 	}
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity par1Entity)
+	protected ResourceLocation getEntityTexture(Entity par1Entity)
 	{
 		return this.func_110860_a((EntitySkeletonTFC)par1Entity);
 	}

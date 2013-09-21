@@ -104,10 +104,10 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	}
 
 	@Override
-	protected void func_110147_ax()
+	protected void applyEntityAttributes()
 	{
-		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(400);//MaxHealth
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(400);//MaxHealth
 	}
 
 	@Override
@@ -185,7 +185,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
-		if (hunger > 144000 && rand.nextInt (100) == 0 && func_110143_aJ() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
 		{
 			this.heal(1);
 		}
@@ -201,7 +201,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			}
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
-				size_mod = this.dataWatcher.func_111145_d(14);
+				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
 			}
 		}
 	}
@@ -264,14 +264,14 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 				par1EntityPlayer.addChatMessage("Pregnant");
 			}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
-		
-		if(par1EntityPlayer.getHeldItem()!=null&&par1EntityPlayer.getHeldItem().getItem() instanceof ItemCustomKnife && !getSheared() && getPercentGrown(this) > 0.95F){
-			setSheared(true);
-			this.entityDropItem(new ItemStack(TFCItems.Wool,1), 0.0F);
-			if(!par1EntityPlayer.capabilities.isCreativeMode){
-				par1EntityPlayer.getHeldItem().damageItem(1, par1EntityPlayer);
+
+			if(par1EntityPlayer.getHeldItem()!=null&&par1EntityPlayer.getHeldItem().getItem() instanceof ItemCustomKnife && !getSheared() && getPercentGrown(this) > 0.95F){
+				setSheared(true);
+				this.entityDropItem(new ItemStack(TFCItems.Wool,1), 0.0F);
+				if(!par1EntityPlayer.capabilities.isCreativeMode){
+					par1EntityPlayer.getHeldItem().damageItem(1, par1EntityPlayer);
+				}
 			}
-		}
 		}
 		return super.interact(par1EntityPlayer);
 	}

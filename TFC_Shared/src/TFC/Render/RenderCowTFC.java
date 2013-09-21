@@ -1,13 +1,13 @@
 package TFC.Render;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderCow;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
 import TFC.Reference;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Entities.IAnimal.GenderEnum;
@@ -45,18 +45,18 @@ public class RenderCowTFC extends RenderCow
 			return CowTex;
 		}
 	}
-	
-	@Override
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
-    {
-		float scale = ((EntityCowTFC)par1EntityLivingBase).size_mod;
-		GL11.glScalef(scale, scale, scale);
-    }
-	
-	
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity par1Entity)
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+	{
+		float scale = ((EntityCowTFC)par1EntityLivingBase).size_mod;
+		GL11.glScalef(scale, scale, scale);
+	}
+
+
+
+	@Override
+	protected ResourceLocation getEntityTexture(Entity par1Entity)
 	{
 		return this.getTexture((EntityCowTFC)par1Entity);
 	}

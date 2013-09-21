@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.Containers.ContainerMold;
+import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 
@@ -34,7 +35,7 @@ public class GuiMold extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_mold.png"));
+		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_mold.png"));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int w = (width - xSize) / 2;
 		int h = (height - ySize) / 2;
