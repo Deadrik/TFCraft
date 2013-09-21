@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
 
 public class GuiContainerTFC extends GuiContainer
@@ -39,7 +40,7 @@ public class GuiContainerTFC extends GuiContainer
 
 	protected void bindTexture(ResourceLocation rl)
 	{
-		this.mc.func_110434_K().func_110577_a(rl);
+		TFC_Core.bindTexture(rl);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 

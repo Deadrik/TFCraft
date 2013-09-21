@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.Containers.ContainerBarrel;
+import TFC.Core.TFC_Core;
 import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityBarrel;
 
@@ -64,7 +65,7 @@ public class GuiBarrel extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_barrel.png"));
+		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_barrel.png"));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		int w = (width - xSize) / 2;
 		int h = (height - ySize) / 2;

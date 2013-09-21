@@ -164,7 +164,7 @@ public class EntityDamageHandler
 			EntityArmorCalcEvent eventPost = new EntityArmorCalcEvent(entity, damage, EntityArmorCalcEvent.EventType.POST);
 			MinecraftForge.EVENT_BUS.post(eventPost);
 			//System.out.println(entity.getClass()+", "+eventPre.incomingDamage+", "+eventPost.incomingDamage);
-			entity.setEntityHealth(entity.func_110143_aJ()-eventPost.incomingDamage);
+			entity.setHealth(entity.getMaxHealth()-eventPost.incomingDamage);
 		}
 
 		return 0;
@@ -226,12 +226,12 @@ public class EntityDamageHandler
 		}
 		if (target.canAttackWithItem())
 		{
-			if (!target.func_85031_j(target))
+			if (!target.hitByEntity(target))
 			{
 				float i = TFC_MobData.SteveDamage;
 				if(stack != null) 
 				{
-					i = (float)event.entityPlayer.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111126_e();
+					i = (float)event.entityPlayer.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
 					//event.entityPlayer.addChatMessage("Damage: " + i);
 					if(i == 1.0f)
 					{
@@ -314,7 +314,7 @@ public class EntityDamageHandler
 							event.entityPlayer.triggerAchievement(AchievementList.overkill);
 						}
 
-						event.entityPlayer.func_130011_c(target);
+						event.entityPlayer.setLastAttacker(target);
 
 						if (target instanceof EntityLiving)
 						{

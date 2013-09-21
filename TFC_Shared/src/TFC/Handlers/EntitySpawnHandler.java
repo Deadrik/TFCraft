@@ -33,8 +33,8 @@ public class EntitySpawnHandler
 	{
 		if (event.entity instanceof EntityPlayer && !event.entity.getEntityData().hasKey("hasSpawned"))
 		{
-			((EntityPlayer)event.entity).func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);
-			((EntityPlayer)event.entity).setEntityHealth(1000);
+			((EntityPlayer)event.entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1000);
+			((EntityPlayer)event.entity).setHealth(1000);
 			event.entity.getEntityData().setBoolean("hasSpawned", true);
 		}
 	}

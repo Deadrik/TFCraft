@@ -129,7 +129,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.StoneKnife, 1, 0), new Object[] { 
 			"1","2", Character.valueOf('1'), TFCItems.StoneKnifeHead,Character.valueOf('2'), new ItemStack(Item.stick,1,32767)});
-		
+
 
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.WoodenBucketEmpty, 1), new Object[] { "w w","w w"," w ", Character.valueOf('w'), new ItemStack(TFCItems.SinglePlank, 1, 32767) });
@@ -167,19 +167,19 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(Item.itemFrame,1),new Object[]{"###","#$#","###",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.TerraLeather,1)});
 		GameRegistry.addRecipe(new ItemStack(Item.painting,1),new Object[]{"###","#$#","###",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
-		
-		GameRegistry.addRecipe(new ItemStack(Block.field_111031_cC,2,0),new Object[]{"$$",Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
+
+		GameRegistry.addRecipe(new ItemStack(Block.carpet,2,0),new Object[]{"$$",Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
 		for(int i = 0; i < 16;i++){
-			GameRegistry.addShapelessRecipe(new ItemStack(Block.field_111031_cC,1,i),new Object[] {new ItemStack(Item.dyePowder,1,15-i),new ItemStack(Block.field_111031_cC,1,32767)});
+			GameRegistry.addShapelessRecipe(new ItemStack(Block.carpet,1,i),new Object[] {new ItemStack(Item.dyePowder,1,15-i),new ItemStack(Block.carpet,1,32767)});
 		}
-		
+
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,4),new Object[]{new ItemStack(TFCItems.Powder,1,6)});
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,2),new Object[]{new ItemStack(TFCItems.Powder,1,8)});
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,1),new Object[]{new ItemStack(TFCItems.Powder,1,5)});
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,11),new Object[]{new ItemStack(TFCItems.Powder,1,7)});
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,12),new Object[]{new ItemStack(TFCItems.Powder,1,8),new ItemStack(TFCItems.Powder,1,0),new ItemStack(TFCBlocks.Sand,1,32767)});
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,12),new Object[]{new ItemStack(TFCItems.Powder,1,8),new ItemStack(TFCItems.Powder,1,0),new ItemStack(TFCBlocks.Sand2,1,32767)});
-		
+
 		//Chest
 		GameRegistry.addRecipe(new ItemStack(Block.chest, 1), new Object[] { "###","# #","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, 32767)});
 
@@ -285,14 +285,14 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.BlastFurnace, 1), new Object[] { "PPP","PCP","PPP", Character.valueOf('P'), new ItemStack(TFCItems.WroughtIronSheet2x, 1),Character.valueOf('C'), new ItemStack(TFCBlocks.Crucible, 1)});
 
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.NestBox,1), new Object[] {"S S","PSP","PPP",Character.valueOf('S'), new ItemStack(TFCItems.Straw,1),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,32767)});
-		
+
 		for(int i = 0; i < 16; i++){
 			GameRegistry.addRecipe(new ItemStack(TFCBlocks.Fence,6,i), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.Logs,1,i),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,i)});
 			GameRegistry.addRecipe(new ItemStack(TFCBlocks.FenceGate,2,i), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank,1,i),Character.valueOf('P'),new ItemStack(TFCBlocks.Planks,1,i)});
 		}
-		
-		GameRegistry.addRecipe(new ItemStack(Item.field_111214_ch,1),new Object[]{"RR ","RR ","  R",Character.valueOf('R'),new ItemStack(TFCItems.Rope,1)});
-		
+
+		GameRegistry.addRecipe(new ItemStack(Item.leash,1),new Object[]{"RR ","RR ","  R",Character.valueOf('R'),new ItemStack(TFCItems.Rope,1)});
+
 		GameRegistry.addRecipe(new ItemStack(Block.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), TFCItems.WroughtIronIngot, Character.valueOf('s'), new ItemStack(Item.stick,1,32767)});
 		GameRegistry.addRecipe(new ItemStack(Block.railPowered, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), TFCItems.GoldIngot, Character.valueOf('s'), new ItemStack(Item.stick,1,32767), Character.valueOf('r'), Item.redstone});
 		GameRegistry.addRecipe(new ItemStack(Item.minecartEmpty, 1), new Object[] { "P P","PPP", Character.valueOf('P'), TFCItems.WroughtIronSheet});
@@ -552,7 +552,7 @@ public class Recipes
 		registerKilnRecipes();
 		registerToolMolds();
 	}
-	
+
 	private static ItemStack checkMelted(ItemStack is){
 		if(TFC_ItemHeat.GetTemperature(is)>TFC_ItemHeat.getMeltingPoint(is)){
 			return null;

@@ -4,8 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.src.ModLoader;
 import net.minecraft.world.IBlockAccess;
+import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityFoodPrep;
 
 public class RenderFoodPrep 
@@ -20,16 +20,16 @@ public class RenderFoodPrep
 		if(te != null)
 		{
 			double height = 0.005;
-			
-			
+
+
 			Tessellator tessellator = Tessellator.instance;
-			
+
 			int state = tessellator.drawMode;
 			tessellator.draw();
 			tessellator.startDrawingQuads();
-			
-			ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
-			
+
+			TFC_Core.bindTexture(TextureMap.locationItemsTexture);
+
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 			tessellator.setColorRGBA_F(1, 1, 1, 1);
 			if(te.storage[5] != null)
@@ -124,7 +124,7 @@ public class RenderFoodPrep
 			}
 			tessellator.draw();				
 			tessellator.startDrawing(state);
-			ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110575_b);
+			TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
 		}
 
 		renderblocks.clearOverrideBlockTexture();

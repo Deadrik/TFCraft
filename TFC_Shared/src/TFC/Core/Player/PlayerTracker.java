@@ -35,8 +35,8 @@ public class PlayerTracker implements IPlayerTracker
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 			foodstats.addStats(foodLevel - foodstats.getFoodLevel(), 0.0f);
 			TFC_Core.setPlayerFoodStats(player, foodstats);
-			player.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);
-			player.setEntityHealth(1000f * (0.25f + (player.worldObj.rand.nextFloat()*0.25f)));
+			player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1000);
+			player.setHealth(1000f * (0.25f + (player.worldObj.rand.nextFloat()*0.25f)));
 			player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*(player.worldObj.rand.nextInt(45)+45), 0));
 		}
 	}

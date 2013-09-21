@@ -98,7 +98,7 @@ public class FoodStatsTFC
 
 				if (this.foodLevel >= 25 && player.shouldHeal())
 				{
-					player.heal((int) (player.func_110138_aP()*0.01f));
+					player.heal((int) (player.getMaxHealth()*0.01f));
 
 					if (this.foodSaturationLevel > 0.0F)
 					{
@@ -111,7 +111,7 @@ public class FoodStatsTFC
 				}
 				else if (this.foodLevel <= 0)
 				{
-					if (difficulty > 1 || (player.func_110143_aJ() > 50))
+					if (difficulty > 1 || (player.getMaxHealth() > 50))
 					{
 						player.attackEntityFrom(DamageSource.starve, 50);
 					}
@@ -130,7 +130,7 @@ public class FoodStatsTFC
 				waterLevel -= 5+(tempWaterMod);
 			}
 			long time = TFC_Time.getTotalTicks();
-			
+
 			if(player.capabilities.isCreativeMode)
 			{
 				long oldWaterTimer = waterTimer;

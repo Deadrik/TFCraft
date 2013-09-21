@@ -46,7 +46,7 @@ public class SetPlayerStatsCommand extends CommandBase{
 		player = var4;     
 		if(params.length == 4){
 			try{
-				player  = func_82359_c(sender, params[0]);
+				player = getPlayer(sender, params[0]);
 			}catch(PlayerNotFoundException e){
 				throw new PlayerNotFoundException("Unkown Player");
 			}
@@ -55,7 +55,7 @@ public class SetPlayerStatsCommand extends CommandBase{
 			throw new PlayerNotFoundException("Invalid");
 		}
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
-		player.setEntityHealth((int)((values[0]/100d)*player.func_110138_aP()));
+		player.setHealth((int)((values[0]/100d)*player.getMaxHealth()));
 		fs.setFoodLevel((int)values[1]);
 		fs.waterLevel = ((int)((values[2]/100d)*fs.getMaxWater(player)));
 		throw new PlayerNotFoundException(values[0]+" "+values[1]+" "+values[2]);

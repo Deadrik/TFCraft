@@ -1,6 +1,5 @@
 package TFC.Core.Player;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -11,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.Containers.Slots.SlotForShowOnly;
+import TFC.Core.TFC_Core;
 
 public class PlayerInventory 
 {
@@ -56,7 +56,7 @@ public class PlayerInventory
 
 	public static void drawInventory(GuiContainer container, int screenWidth, int screenHeight, int upperGuiHeight)
 	{
-		Minecraft.getMinecraft().func_110434_K().func_110577_a(invTexture);
+		TFC_Core.bindTexture(invTexture);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int l = (screenWidth - invXSize) / 2;
 		int i1 = (screenHeight - (upperGuiHeight+invYSize)) / 2 + upperGuiHeight;

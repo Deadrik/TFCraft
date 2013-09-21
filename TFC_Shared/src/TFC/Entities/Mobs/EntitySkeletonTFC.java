@@ -151,12 +151,14 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	}
 
 	@Override
-	protected void func_110147_ax()
+	protected void applyEntityAttributes()
 	{
-		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.SkeletonHealth);//MaxHealth
-		this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.25D);
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(TFC_MobData.SkeletonHealth);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25D);
 	}
+
+
 
 	@Override
 	protected void entityInit()
@@ -504,16 +506,16 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	}
 
 	@Override
-	public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData)
+	public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData)
 	{
-		par1EntityLivingData = super.func_110161_a(par1EntityLivingData);
+		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
 
 		int skelType = rand.nextInt(2);
 		this.setSkeletonType(skelType);
 		this.addRandomArmor();
 		this.enchantEquipment();
 		setCombatTask();
-		this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * this.worldObj.func_110746_b(this.posX, this.posY, this.posZ));
+		this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * this.worldObj.getLocationTensionFactor(this.posX, this.posY, this.posZ));
 
 		return par1EntityLivingData;
 	}

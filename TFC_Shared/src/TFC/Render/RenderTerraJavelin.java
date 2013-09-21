@@ -16,7 +16,7 @@ public class RenderTerraJavelin extends Render
 {
 	public void render(EntityJavelin entity, double x, double y, double z, float par8, float par9)
 	{
-		func_110777_b(entity);
+		bindEntityTexture(entity);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float)x, (float)y, (float)z);
 		GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 - 90.0F, 0.0F, 1.0F, 0.0F);
@@ -75,7 +75,7 @@ public class RenderTerraJavelin extends Render
 	}
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) 
+	protected ResourceLocation getEntityTexture(Entity entity) 
 	{
 		return new ResourceLocation(Reference.ModID, "mob/javelin.png");
 	}

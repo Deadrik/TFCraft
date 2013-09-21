@@ -295,7 +295,7 @@ public class CommonProxy implements IGuiHandler
 	}
 
 	public World getCurrentWorld() {
-		return MinecraftServer.getServer().func_130014_f_();
+		return MinecraftServer.getServer().getEntityWorld();
 	}
 
 	public int waterColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)

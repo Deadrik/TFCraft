@@ -1,18 +1,16 @@
 package TFC.Render;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderPig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
 import TFC.Reference;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
-import TFC.Entities.Mobs.EntityChickenTFC;
-import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Entities.Mobs.EntityPigTFC;
 
 public class RenderPigTFC extends RenderPig
@@ -36,17 +34,17 @@ public class RenderPigTFC extends RenderPig
 		this.shadowSize = 0.35f + (TFC_Core.getPercentGrown((IAnimal)par1Entity)*0.35f);
 		super.doRender(par1Entity, par2, par4, par6, par8, par9);
 	}
-	
+
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
-    {
+	{
 		float scale = (((EntityPigTFC)par1EntityLivingBase).size_mod/2)+0.5f;
 		GL11.glScalef(scale, scale, scale);
-    }
-	
+	}
+
 	@Override
-	protected ResourceLocation func_110886_a(EntityPig par1EntityPig)
-    {
-        return pigSkinTFC;
-    }
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
+		return pigSkinTFC;
+	}
 }

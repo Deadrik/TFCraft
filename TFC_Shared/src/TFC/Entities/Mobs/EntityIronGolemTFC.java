@@ -25,11 +25,11 @@ public class EntityIronGolemTFC extends EntityIronGolem
 	}
 
 	@Override
-	protected void func_110147_ax()
+	protected void applyEntityAttributes()
 	{
-		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobData.IronGolemDamage);
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.IronGolemHealth);//MaxHealth
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(TFC_MobData.IronGolemDamage);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(TFC_MobData.IronGolemHealth);//MaxHealth
 	}
 
 	/**

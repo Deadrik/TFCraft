@@ -20,8 +20,8 @@ public class EntitySlimeTFC extends EntitySlime
 	@Override
 	protected void setSlimeSize(int par1)
 	{
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(par1*TFC_MobData.SlimeHealth);
-		this.setEntityHealth(this.func_110138_aP());
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(par1*TFC_MobData.SlimeHealth);
+		this.setHealth(this.getMaxHealth());
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class EntitySlimeTFC extends EntitySlime
 	{
 		int var1 = this.getSlimeSize();
 
-		if (!this.worldObj.isRemote && var1 > 1 && this.func_110143_aJ() <= 0)
+		if (!this.worldObj.isRemote && var1 > 1 && this.getHealth() <= 0)
 		{
 			int var2 = 2 + this.rand.nextInt(3);
 
