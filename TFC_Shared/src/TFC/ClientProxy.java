@@ -4,14 +4,12 @@ import java.io.File;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderBlaze;
 import net.minecraft.client.renderer.entity.RenderEnderman;
 import net.minecraft.client.renderer.entity.RenderFallingSand;
 import net.minecraft.client.renderer.entity.RenderGhast;
-import net.minecraft.client.renderer.entity.RenderHorse;
 import net.minecraft.client.renderer.entity.RenderIronGolem;
 import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.entity.RenderSilverfish;
@@ -19,10 +17,8 @@ import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.client.renderer.entity.RenderSpider;
 import net.minecraft.client.renderer.entity.RenderZombie;
 import net.minecraft.client.resources.ReloadableResourceManager;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.src.ModLoader;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -33,7 +29,6 @@ import TFC.API.Util.KeyBindings;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
-import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Util.StringUtil;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityFallingStone;
@@ -59,28 +54,6 @@ import TFC.Entities.Mobs.EntitySpiderTFC;
 import TFC.Entities.Mobs.EntitySquidTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
-import TFC.GUI.GuiAnvil;
-import TFC.GUI.GuiBarrel;
-import TFC.GUI.GuiBlastFurnace;
-import TFC.GUI.GuiBlueprint;
-import TFC.GUI.GuiCalendar;
-import TFC.GUI.GuiChestTFC;
-import TFC.GUI.GuiCrucible;
-import TFC.GUI.GuiFirepit;
-import TFC.GUI.GuiFoodPrep;
-import TFC.GUI.GuiForge;
-import TFC.GUI.GuiInventoryTFC;
-import TFC.GUI.GuiKnapping;
-import TFC.GUI.GuiLogPile;
-import TFC.GUI.GuiMold;
-import TFC.GUI.GuiNestBox;
-import TFC.GUI.GuiQuern;
-import TFC.GUI.GuiQuiver;
-import TFC.GUI.GuiScribe;
-import TFC.GUI.GuiSluice;
-import TFC.GUI.GuiVessel;
-import TFC.GUI.GuiVesselLiquid;
-import TFC.GUI.GuiWorkbench;
 import TFC.Handlers.BiomeEventHandler;
 import TFC.Handlers.Client.BlockRenderHandler;
 import TFC.Handlers.Client.ChiselHighlightHandler;
@@ -129,23 +102,11 @@ import TFC.Render.Models.ModelSheep1TFC;
 import TFC.Render.Models.ModelSheep2TFC;
 import TFC.Render.Models.ModelSquidTFC;
 import TFC.Render.Models.ModelWolfTFC;
-import TFC.TileEntities.TEBlastFurnace;
-import TFC.TileEntities.TECrucible;
-import TFC.TileEntities.TENestBox;
-import TFC.TileEntities.TileEntityAnvil;
-import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityChestTFC;
-import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TileEntityFoodPrep;
-import TFC.TileEntities.TileEntityForge;
 import TFC.TileEntities.TileEntityIngotPile;
-import TFC.TileEntities.TileEntityLogPile;
 import TFC.TileEntities.TileEntityPottery;
-import TFC.TileEntities.TileEntityQuern;
-import TFC.TileEntities.TileEntityScribe;
-import TFC.TileEntities.TileEntitySluice;
-import TFC.TileEntities.TileEntityWorkbench;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
@@ -282,124 +243,7 @@ public class ClientProxy extends CommonProxy
 		return ModLoader.getMinecraftInstance().mcDataDir;
 	}
 
-	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
-			int x, int y, int z) 
-	{
-		TileEntity te;
-		try
-		{
-			te= world.getBlockTileEntity(x, y, z);
-		}
-		catch(Exception e)
-		{
-			te = null;
-		}
 
-		switch(ID)
-		{
-		case 0:
-		{
-			return new GuiLogPile(player.inventory, (TileEntityLogPile) te, world, x, y, z);
-		}
-		case 1:
-		{
-			return new GuiWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
-		}
-		case 19:
-		{
-			return new GuiVesselLiquid(player.inventory, world, x, y, z);
-		}
-		case 20:
-		{
-			return new GuiFirepit(player.inventory, (TileEntityFirepit) te, world, x, y, z);
-		}
-		case 21:
-		{
-			return new GuiAnvil(player.inventory, (TileEntityAnvil) te, world, x, y, z);
-		}
-		case 22:
-		{
-			return new GuiScribe(player.inventory, (TileEntityScribe) te, world, x, y, z);
-		}
-		case 23:
-		{
-			return new GuiForge(player.inventory, (TileEntityForge) te, world, x, y, z);
-		}
-		case 24:
-		{
-			return null;//was metallurgy table
-		}
-		case 25:
-		{
-			return new GuiSluice(player.inventory, (TileEntitySluice) te, world, x, y, z);
-		}
-		case 26:
-		{
-			return new GuiBlastFurnace(player.inventory, (TEBlastFurnace) te, world, x, y, z);
-		}
-		case 27:
-		{
-			return new GuiCalendar(player, world, x, y, z);
-		}
-		case 28:
-		{
-			return new GuiKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).specialCraftingType , world, x, y, z);
-		}
-		case 29:
-		{
-			return new GuiChestTFC(player.inventory, ((TileEntityChestTFC) te), world, x, y, z);
-		}
-		case 31:
-		{
-			return new GuiInventoryTFC(player);
-		}
-		case 32:
-		{
-			return new GuiFoodPrep(player.inventory, ((TileEntityFoodPrep) te), world, x, y, z);
-		}
-		case 33:
-		{
-			return new GuiQuern(player.inventory, ((TileEntityQuern) te), world, x, y, z);
-		}
-		case 34:
-		{
-			return new GuiBlueprint(player, world, x, y, z);
-		}
-		case 35:
-		{
-			return new GuiBarrel(player.inventory,((TileEntityBarrel)te),world,x,y,z);
-		}
-		case 36:
-		{
-			return null;
-		}
-		case 37:
-		{
-			return new GuiCrucible(player.inventory,((TECrucible)te), world, x, y, z);
-		}
-		case 38:
-		{
-			return new GuiMold(player.inventory, world, x, y, z);
-		}
-		case 39:
-		{
-			return new GuiVessel(player.inventory, world, x, y, z);
-		}
-		case 40:
-		{
-			return new GuiQuiver(player.inventory, world, x, y, z);
-		}
-		case 41:
-		{
-			return new GuiNestBox(player.inventory, ((TENestBox)te), world, x, y, z);
-		}
-		default:
-		{
-			return null;
-		}
-		}
-	}
 
 	private BiomeGenBase lastBiomeGen;
 	private int waterColorMultiplier;
