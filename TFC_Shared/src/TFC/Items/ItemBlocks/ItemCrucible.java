@@ -52,7 +52,7 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 			{
 				NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
 				int id = nbttagcompound1.getInteger("ID");
-				short amount = nbttagcompound1.getShort("Amount");
+				float amount = nbttagcompound1.getFloat("AmountF");
 
 				Metal m = MetalRegistry.instance.getMetalFromItem(Item.itemsList[id]);
 				addMetal(m, amount);
@@ -73,7 +73,7 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 		}
 	}
 
-	public boolean addMetal(Metal m, short amt)
+	public boolean addMetal(Metal m, float amt)
 	{
 		if(getTotalMetal()+amt <= 3000 && m.Name != "Unknown")
 		{
@@ -118,7 +118,7 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 			MetalPair m = (MetalPair) iter.next();
 			if(m != null)
 			{
-				a.add(new AlloyMetal(m.type, ((float)m.amount/totalAmount) * 100f));
+				a.add(new AlloyMetal(m.type, (m.amount/totalAmount) * 100f));
 			}
 		}
 

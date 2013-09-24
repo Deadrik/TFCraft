@@ -117,7 +117,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			//Added so that hopefully old worlds that stored metal as shorts wont break
 			float amountF = amount + nbttagcompound1.getFloat("AmountF");
 			Metal m = MetalRegistry.instance.getMetalFromItem(Item.itemsList[id]);
-			addMetal(MetalRegistry.instance.getMetalFromItem(Item.itemsList[id]), amount);
+			addMetal(MetalRegistry.instance.getMetalFromItem(Item.itemsList[id]), amountF);
 		}
 
 		nbttaglist = nbt.getTagList("Items");
