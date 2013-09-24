@@ -258,12 +258,10 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	{
 		if(metals != null && metals.values().size() > 0) 
 		{
-			int numMetals = metals.values().size();
-			amount /= numMetals;
 			for(Object am : metals.values())
 			{
-
-				((MetalPair)am).amount -= amount;
+				float percent = currentAlloy.getPercentForMetal(((MetalPair)am).type) / 100;
+				((MetalPair)am).amount -= amount*percent;
 			}
 
 			updateCurrentAlloy();

@@ -6,12 +6,12 @@ public class AlloyMetalCompare extends AlloyMetal
 {
 	float metalMin;
 	float metalMax;
-	
+
 	public AlloyMetalCompare(Metal e, int min)
 	{
 		super(e, min);
 	}
-	
+
 	public AlloyMetalCompare(Metal e, int min, int max)
 	{
 		super(e, min);
@@ -19,7 +19,7 @@ public class AlloyMetalCompare extends AlloyMetal
 		metalMin = min;
 		metalMax = max;
 	}
-	
+
 	public boolean compare(AlloyMetal b)
 	{
 		//	Multiplying all the values by 1000 and then rounding to the
@@ -28,7 +28,7 @@ public class AlloyMetalCompare extends AlloyMetal
 		//	decimal places.
 		//
 		return (this.metalType == b.metalType
-		&&	Math.round(b.metal * 1000f) >= Math.round(this.metalMin * 1000f)
-		&&	Math.round(b.metal * 1000f) <= Math.round(this.metalMax * 1000f));
+				&&	(b.metal == -1 || (Math.round(b.metal * 1000f) >= Math.round(this.metalMin * 1000f)
+				&&	Math.round(b.metal * 1000f) <= Math.round(this.metalMax * 1000f))));
 	}
 }
