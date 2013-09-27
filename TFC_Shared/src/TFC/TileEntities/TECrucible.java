@@ -84,15 +84,6 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		}
 
 		nbt.setTag("Items", nbttaglist);
-
-		if(currentAlloy != null)
-		{
-			nbt.setInteger("outputAmount", currentAlloy.outputAmount);
-		}
-		else
-		{
-			nbt.setInteger("outputAmount", 0);
-		}
 	}
 
 	@Override
@@ -130,11 +121,6 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			{
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
-		}
-
-		if(currentAlloy != null)
-		{
-			currentAlloy.outputAmount = nbt.getInteger("outputAmount");
 		}
 	}
 
@@ -227,7 +213,6 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					float temp = (temperature - inTemp) / 2;
 					TFC_ItemHeat.SetTemperature(storage[1], inTemp+temp);
 					//System.out.println(temperature +", "+inTemp+", "+temp);
-					//currentAlloy.outputAmount--;
 					drainOutput(1.0f);
 					storage[1].stackSize = 1;
 					updateGui((byte) 1);
@@ -235,7 +220,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				outputTick = 0;
 			}
 
-			if(currentAlloy != null && currentAlloy.outputAmount <= 0) {
+			if(currentAlloy != null && this.getTotalMetal() < 1) {
 				metals = new HashMap();
 				updateCurrentAlloy();
 				this.updateGui((byte) 2);
@@ -286,10 +271,10 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		return false;
 	}
 
-	public int getTotalMetal()
+	public float getTotalMetal()
 	{
 		Iterator iter = metals.values().iterator();
-		int totalAmount = 0;
+		float totalAmount = 0;
 		while(iter.hasNext())
 		{
 			MetalPair m = (MetalPair) iter.next();
@@ -306,7 +291,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		List<AlloyMetal> a = new ArrayList<AlloyMetal>();
 
 		Iterator iter = metals.values().iterator();
-		int totalAmount = getTotalMetal();
+		float totalAmount = getTotalMetal();
 
 		iter = metals.values().iterator();
 		while(iter.hasNext())
@@ -341,7 +326,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		} 
 		else if(id == 1)
 		{
-			currentAlloy.outputAmount = inStream.readInt();
+			currentAlloy.outputAmount = inStream.readFloat();
 		}
 		else if(id == 2)
 		{
@@ -473,7 +458,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			else if(id == 1 && currentAlloy != null)
 			{
 				dos.writeByte(1);
-				dos.writeInt(this.getTotalMetal());
+				dos.writeFloat(this.getTotalMetal());
 			}
 			else if(id == 2)
 			{
@@ -488,7 +473,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public int getOutCountScaled(int length)
 	{
 		if(currentAlloy != null) {
-			return (this.currentAlloy.outputAmount * length)/3000;
+			return ((int)this.currentAlloy.outputAmount * length)/3000;
 		} else {
 			return 0;
 		}

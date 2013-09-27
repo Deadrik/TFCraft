@@ -13,7 +13,7 @@ public class Alloy
 {
 	public List<AlloyMetal> AlloyIngred;
 	public Metal outputType;
-	public int outputAmount;
+	public float outputAmount;
 	EnumTier furnaceTier;
 
 	public Alloy(Metal type, EnumTier tier)
@@ -24,7 +24,7 @@ public class Alloy
 		furnaceTier = tier;
 	}
 
-	public Alloy(Metal type, int am)
+	public Alloy(Metal type, float am)
 	{
 		this();
 		outputType = type;
@@ -41,12 +41,12 @@ public class Alloy
 		AlloyIngred.add(am);
 	}
 
-	public void addIngred(Metal e, int m)
+	public void addIngred(Metal e, float m)
 	{
 		AlloyIngred.add(new AlloyMetal(e, m));
 	}
 
-	public void addIngred(Metal e, int min, int max)
+	public void addIngred(Metal e, float min, float max)
 	{
 		AlloyIngred.add(new AlloyMetalCompare(e, min, max));
 	}
@@ -141,7 +141,7 @@ public class Alloy
 			{
 				dos.writeUTF("Unknown");
 			}
-			dos.writeInt(outputAmount);
+			dos.writeFloat(outputAmount);
 			dos.writeInt(AlloyIngred.size());
 			for(int i = 0; i < AlloyIngred.size(); i++)
 			{
@@ -160,7 +160,7 @@ public class Alloy
 		try 
 		{
 			outputType = MetalRegistry.instance.getMetalFromString(dis.readUTF());
-			outputAmount = dis.readInt();
+			outputAmount = dis.readFloat();
 			int size = dis.readInt();
 			for(int i = 0; i < size; i++)
 			{

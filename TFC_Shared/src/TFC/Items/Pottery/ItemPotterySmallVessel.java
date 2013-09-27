@@ -172,7 +172,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					Alloy output = new Alloy(match, total); 
 					NBTTagCompound tag = is.stackTagCompound;
 					tag.setString("MetalType", output.outputType.Name);
-					tag.setInteger("MetalAmount", output.outputAmount);
+					tag.setInteger("MetalAmount", (int)output.outputAmount);
 					long totalH =  TFC_Time.getTotalHours();
 					tag.setLong("TempTimer", totalH);
 					is.getTagCompound().removeTag("Items");

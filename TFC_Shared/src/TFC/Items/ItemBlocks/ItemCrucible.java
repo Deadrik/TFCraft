@@ -90,10 +90,10 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 		return false;
 	}
 
-	public int getTotalMetal()
+	public float getTotalMetal()
 	{
 		Iterator iter = metals.values().iterator();
-		int totalAmount = 0;
+		float totalAmount = 0;
 		while(iter.hasNext())
 		{
 			MetalPair m = (MetalPair) iter.next();
@@ -110,7 +110,7 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 		List<AlloyMetal> a = new ArrayList<AlloyMetal>();
 
 		Iterator iter = metals.values().iterator();
-		int totalAmount = getTotalMetal();
+		float totalAmount = getTotalMetal();
 
 		iter = metals.values().iterator();
 		while(iter.hasNext())

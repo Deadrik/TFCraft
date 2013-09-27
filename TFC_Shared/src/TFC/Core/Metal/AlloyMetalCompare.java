@@ -7,12 +7,12 @@ public class AlloyMetalCompare extends AlloyMetal
 	float metalMin;
 	float metalMax;
 
-	public AlloyMetalCompare(Metal e, int min)
+	public AlloyMetalCompare(Metal e, float min)
 	{
 		super(e, min);
 	}
 
-	public AlloyMetalCompare(Metal e, int min, int max)
+	public AlloyMetalCompare(Metal e, float min, float max)
 	{
 		super(e, min);
 		metalType = e;
