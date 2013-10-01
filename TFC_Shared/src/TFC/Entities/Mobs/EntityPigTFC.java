@@ -48,13 +48,12 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		super(par1World);
 		this.setSize(0.9F, 0.9F);
 		this.getNavigator().setAvoidsWater(true);
-		float var2 = 0.25F;
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-		this.tasks.addTask(2, new EntityAIMateTFC(this, worldObj, var2));
+		this.tasks.addTask(2, new EntityAIMateTFC(this, worldObj, 1.0f));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
-		this.tasks.addTask(5, new EntityAIWander(this, var2));
+		this.tasks.addTask(5, new EntityAIWander(this, 0.75));
 		this.tasks.addTask(6, this.aiEatGrass);
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));

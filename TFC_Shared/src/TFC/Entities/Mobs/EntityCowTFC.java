@@ -46,7 +46,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		size_mod =(float)Math.sqrt((((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) * 0.1f) + 1F) * (1.0F - 0.1F * sex));
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 0.2F));
+		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 1.0F));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
 		this.tasks.addTask(6, this.aiEatGrass);
 
