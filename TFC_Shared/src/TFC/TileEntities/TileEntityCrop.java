@@ -8,6 +8,7 @@ import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
+import net.minecraft.tileentity.TileEntity;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
@@ -56,8 +57,9 @@ public class TileEntityCrop extends NetworkTileEntity
 				}
 
 				TileEntityFarmland tef = null;
-				if(worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord) != null) {
-					tef = (TileEntityFarmland) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
+				TileEntity te = worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
+				if(te != null && te instanceof TileEntityFarmland) {
+					tef = (TileEntityFarmland) te;
 				}
 
 				float ambientTemp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYearFromTick(growthTimer), xCoord, yCoord, zCoord);
