@@ -48,12 +48,11 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		super(par1World);
 		running = false;
 		this.setSize(0.9F, 1.3F);
-		float var2 = 0.23F / 1.1F;
 		sex = rand.nextInt(2);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-		this.tasks.addTask(2, new EntityAIMateTFC(this,worldObj, var2));
+		this.tasks.addTask(2, new EntityAIMateTFC(this,worldObj, 1.0f));
 		//this.tasks.addTask(3, new EntityAIPanicTFC(this, var2*2, false, true));
 		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
@@ -62,7 +61,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		//this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
 		this.tasks.addTask(5, this.aiEatGrass);
 		//this.tasks.addTask(5, new EntityAIRutt(this, var2));
-		this.tasks.addTask(1, new EntityAIWander(this, var2));
+		this.tasks.addTask(1, new EntityAIWander(this, 0.75));
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		//this.tasks.addTask(8, new EntityAILookIdle(this));
 

@@ -7,341 +7,316 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.AxisAlignedBB;
 import TFC.Core.TFC_ItemHeat;
 public class TileEntityChestTFC extends TileEntityChest implements IInventory
 {
-    private ItemStack[] chestContents = new ItemStack[18];
+	private ItemStack[] chestContents = new ItemStack[18];
 
-    /** Determines if the check for adjacent chests has taken place. */
-    public boolean adjacentChestChecked = false;
+	/** Server sync counter (once per 20 ticks) */
+	private int ticksSinceSync;
 
-    /** Contains the chest tile located adjacent to this one (if any) */
-    public TileEntityChestTFC adjacentChestZNeg;
+	@Override
+	public int getSizeInventory()
+	{
+		return 18;
+	}
 
-    /** Contains the chest tile located adjacent to this one (if any) */
-    public TileEntityChestTFC adjacentChestXPos;
+	@Override
+	public ItemStack getStackInSlot(int par1)
+	{
+		return this.chestContents[par1];
+	}
 
-    /** Contains the chest tile located adjacent to this one (if any) */
-    public TileEntityChestTFC adjacentChestXNeg;
+	@Override
+	public ItemStack decrStackSize(int par1, int par2)
+	{
+		if (this.chestContents[par1] != null)
+		{
+			ItemStack var3;
 
-    /** Contains the chest tile located adjacent to this one (if any) */
-    public TileEntityChestTFC adjacentChestZPosition;
+			if (this.chestContents[par1].stackSize <= par2)
+			{
+				var3 = this.chestContents[par1];
+				this.chestContents[par1] = null;
+				this.onInventoryChanged();
+				return var3;
+			}
+			else
+			{
+				var3 = this.chestContents[par1].splitStack(par2);
 
-    /** The current angle of the lid (between 0 and 1) */
-    public float lidAngle;
+				if (this.chestContents[par1].stackSize == 0)
+				{
+					this.chestContents[par1] = null;
+				}
 
-    /** The angle of the lid last tick */
-    public float prevLidAngle;
+				this.onInventoryChanged();
+				return var3;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
 
-    /** The number of players currently using this chest */
-    public int numUsingPlayers;
+	@Override
+	public ItemStack getStackInSlotOnClosing(int par1)
+	{
+		if (this.chestContents[par1] != null)
+		{
+			ItemStack var2 = this.chestContents[par1];
+			this.chestContents[par1] = null;
+			return var2;
+		}
+		else
+		{
+			return null;
+		}
+	}
 
-    /** Server sync counter (once per 20 ticks) */
-    private int ticksSinceSync;
+	@Override
+	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+	{
+		this.chestContents[par1] = par2ItemStack;
 
-    @Override
-    public int getSizeInventory()
-    {
-        return 18;
-    }
+		if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
+		{
+			par2ItemStack.stackSize = this.getInventoryStackLimit();
+		}
 
-    @Override
-    public ItemStack getStackInSlot(int par1)
-    {
-        return this.chestContents[par1];
-    }
+		this.onInventoryChanged();
+	}
 
-    @Override
-    public ItemStack decrStackSize(int par1, int par2)
-    {
-        if (this.chestContents[par1] != null)
-        {
-            ItemStack var3;
+	@Override
+	public String getInvName()
+	{
+		return "container.chest";
+	}
 
-            if (this.chestContents[par1].stackSize <= par2)
-            {
-                var3 = this.chestContents[par1];
-                this.chestContents[par1] = null;
-                this.onInventoryChanged();
-                return var3;
-            }
-            else
-            {
-                var3 = this.chestContents[par1].splitStack(par2);
+	@Override
+	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readFromNBT(par1NBTTagCompound);
+		NBTTagList var2 = par1NBTTagCompound.getTagList("Items");
+		this.chestContents = new ItemStack[this.getSizeInventory()];
 
-                if (this.chestContents[par1].stackSize == 0)
-                {
-                    this.chestContents[par1] = null;
-                }
+		for (int var3 = 0; var3 < var2.tagCount(); ++var3)
+		{
+			NBTTagCompound var4 = (NBTTagCompound)var2.tagAt(var3);
+			int var5 = var4.getByte("Slot") & 255;
 
-                this.onInventoryChanged();
-                return var3;
-            }
-        }
-        else
-        {
-            return null;
-        }
-    }
+			if (var5 >= 0 && var5 < this.chestContents.length)
+			{
+				this.chestContents[var5] = ItemStack.loadItemStackFromNBT(var4);
+			}
+		}
+	}
 
-    @Override
-    public ItemStack getStackInSlotOnClosing(int par1)
-    {
-        if (this.chestContents[par1] != null)
-        {
-            ItemStack var2 = this.chestContents[par1];
-            this.chestContents[par1] = null;
-            return var2;
-        }
-        else
-        {
-            return null;
-        }
-    }
+	@Override
+	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeToNBT(par1NBTTagCompound);
+		NBTTagList var2 = new NBTTagList();
 
-    @Override
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
-    {
-        this.chestContents[par1] = par2ItemStack;
+		for (int var3 = 0; var3 < this.chestContents.length; ++var3)
+		{
+			if (this.chestContents[var3] != null)
+			{
+				NBTTagCompound var4 = new NBTTagCompound();
+				var4.setByte("Slot", (byte)var3);
+				this.chestContents[var3].writeToNBT(var4);
+				var2.appendTag(var4);
+			}
+		}
 
-        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
-        {
-            par2ItemStack.stackSize = this.getInventoryStackLimit();
-        }
+		par1NBTTagCompound.setTag("Items", var2);
+	}
 
-        this.onInventoryChanged();
-    }
+	@Override
+	public int getInventoryStackLimit()
+	{
+		return 64;
+	}
 
-    @Override
-    public String getInvName()
-    {
-        return "container.chest";
-    }
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+	{
+		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
-        super.readFromNBT(par1NBTTagCompound);
-        NBTTagList var2 = par1NBTTagCompound.getTagList("Items");
-        this.chestContents = new ItemStack[this.getSizeInventory()];
+	@Override
+	public void updateContainingBlockInfo()
+	{
+		super.updateContainingBlockInfo();
+		this.adjacentChestChecked = false;
+	}
 
-        for (int var3 = 0; var3 < var2.tagCount(); ++var3)
-        {
-            NBTTagCompound var4 = (NBTTagCompound)var2.tagAt(var3);
-            int var5 = var4.getByte("Slot") & 255;
+	@Override
+	public void checkForAdjacentChests()
+	{
+		if (!this.adjacentChestChecked)
+		{
+			this.adjacentChestChecked = true;
+			this.adjacentChestZNeg = null;
+			this.adjacentChestXPos = null;
+			this.adjacentChestXNeg = null;
+			this.adjacentChestZPosition = null;
 
-            if (var5 >= 0 && var5 < this.chestContents.length)
-            {
-                this.chestContents[var5] = ItemStack.loadItemStackFromNBT(var4);
-            }
-        }
-    }
+			if (this.worldObj.getBlockId(this.xCoord - 1, this.yCoord, this.zCoord) == Block.chest.blockID)
+			{
+				this.adjacentChestXNeg = (TileEntityChestTFC)this.worldObj.getBlockTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
+			}
 
-    @Override
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
-    {
-        super.writeToNBT(par1NBTTagCompound);
-        NBTTagList var2 = new NBTTagList();
+			if (this.worldObj.getBlockId(this.xCoord + 1, this.yCoord, this.zCoord) == Block.chest.blockID)
+			{
+				this.adjacentChestXPos = (TileEntityChestTFC)this.worldObj.getBlockTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+			}
 
-        for (int var3 = 0; var3 < this.chestContents.length; ++var3)
-        {
-            if (this.chestContents[var3] != null)
-            {
-                NBTTagCompound var4 = new NBTTagCompound();
-                var4.setByte("Slot", (byte)var3);
-                this.chestContents[var3].writeToNBT(var4);
-                var2.appendTag(var4);
-            }
-        }
+			if (this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord - 1) == Block.chest.blockID)
+			{
+				this.adjacentChestZNeg = (TileEntityChestTFC)this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+			}
 
-        par1NBTTagCompound.setTag("Items", var2);
-    }
+			if (this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord + 1) == Block.chest.blockID)
+			{
+				this.adjacentChestZPosition = (TileEntityChestTFC)this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+			}
 
-    @Override
-    public int getInventoryStackLimit()
-    {
-        return 64;
-    }
+			if (this.adjacentChestZNeg != null)
+			{
+				this.adjacentChestZNeg.updateContainingBlockInfo();
+			}
 
-    @Override
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
-    {
-        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
-    }
+			if (this.adjacentChestZPosition != null)
+			{
+				this.adjacentChestZPosition.updateContainingBlockInfo();
+			}
 
-    @Override
-    public void updateContainingBlockInfo()
-    {
-        super.updateContainingBlockInfo();
-        this.adjacentChestChecked = false;
-    }
+			if (this.adjacentChestXPos != null)
+			{
+				this.adjacentChestXPos.updateContainingBlockInfo();
+			}
 
-    @Override
-    public void checkForAdjacentChests()
-    {
-        if (!this.adjacentChestChecked)
-        {
-            this.adjacentChestChecked = true;
-            this.adjacentChestZNeg = null;
-            this.adjacentChestXPos = null;
-            this.adjacentChestXNeg = null;
-            this.adjacentChestZPosition = null;
+			if (this.adjacentChestXNeg != null)
+			{
+				this.adjacentChestXNeg.updateContainingBlockInfo();
+			}
+		}
+	}
 
-            if (this.worldObj.getBlockId(this.xCoord - 1, this.yCoord, this.zCoord) == Block.chest.blockID)
-            {
-                this.adjacentChestXNeg = (TileEntityChestTFC)this.worldObj.getBlockTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
-            }
+	@Override
+	public void updateEntity()
+	{
+		super.updateEntity();
 
-            if (this.worldObj.getBlockId(this.xCoord + 1, this.yCoord, this.zCoord) == Block.chest.blockID)
-            {
-                this.adjacentChestXPos = (TileEntityChestTFC)this.worldObj.getBlockTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
-            }
+		TFC_ItemHeat.HandleContainerHeatChest(this.worldObj, chestContents, xCoord, yCoord, zCoord);
 
-            if (this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord - 1) == Block.chest.blockID)
-            {
-                this.adjacentChestZNeg = (TileEntityChestTFC)this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
-            }
+		this.checkForAdjacentChests();
 
-            if (this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord + 1) == Block.chest.blockID)
-            {
-                this.adjacentChestZPosition = (TileEntityChestTFC)this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
-            }
+		if (++this.ticksSinceSync % 20 * 4 == 0)
+		{
 
-            if (this.adjacentChestZNeg != null)
-            {
-                this.adjacentChestZNeg.updateContainingBlockInfo();
-            }
+		}
 
-            if (this.adjacentChestZPosition != null)
-            {
-                this.adjacentChestZPosition.updateContainingBlockInfo();
-            }
+		this.prevLidAngle = this.lidAngle;
+		float var1 = 0.1F;
+		double var4;
 
-            if (this.adjacentChestXPos != null)
-            {
-                this.adjacentChestXPos.updateContainingBlockInfo();
-            }
+		if (this.numUsingPlayers > 0 && this.lidAngle == 0.0F && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
+		{
+			double var2 = this.xCoord + 0.5D;
+			var4 = this.zCoord + 0.5D;
 
-            if (this.adjacentChestXNeg != null)
-            {
-                this.adjacentChestXNeg.updateContainingBlockInfo();
-            }
-        }
-    }
+			if (this.adjacentChestZPosition != null)
+			{
+				var4 += 0.5D;
+			}
 
-    @Override
-    public void updateEntity()
-    {
-        super.updateEntity();
-        
-        TFC_ItemHeat.HandleContainerHeatChest(this.worldObj, chestContents, xCoord, yCoord, zCoord);
-        
-        this.checkForAdjacentChests();
+			if (this.adjacentChestXPos != null)
+			{
+				var2 += 0.5D;
+			}
 
-        if (++this.ticksSinceSync % 20 * 4 == 0)
-        {
+			this.worldObj.playSoundEffect(var2, this.yCoord + 0.5D, var4, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+		}
 
-        }
+		if (this.numUsingPlayers == 0 && this.lidAngle > 0.0F || this.numUsingPlayers > 0 && this.lidAngle < 1.0F)
+		{
+			float var8 = this.lidAngle;
 
-        this.prevLidAngle = this.lidAngle;
-        float var1 = 0.1F;
-        double var4;
+			if (this.numUsingPlayers > 0)
+			{
+				this.lidAngle += var1;
+			}
+			else
+			{
+				this.lidAngle -= var1;
+			}
 
-        if (this.numUsingPlayers > 0 && this.lidAngle == 0.0F && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
-        {
-            double var2 = this.xCoord + 0.5D;
-            var4 = this.zCoord + 0.5D;
+			if (this.lidAngle > 1.0F)
+			{
+				this.lidAngle = 1.0F;
+			}
 
-            if (this.adjacentChestZPosition != null)
-            {
-                var4 += 0.5D;
-            }
+			float var3 = 0.5F;
 
-            if (this.adjacentChestXPos != null)
-            {
-                var2 += 0.5D;
-            }
+			if (this.lidAngle < var3 && var8 >= var3 && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
+			{
+				var4 = this.xCoord + 0.5D;
+				double var6 = this.zCoord + 0.5D;
 
-            this.worldObj.playSoundEffect(var2, this.yCoord + 0.5D, var4, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
-        }
+				if (this.adjacentChestZPosition != null)
+				{
+					var6 += 0.5D;
+				}
 
-        if (this.numUsingPlayers == 0 && this.lidAngle > 0.0F || this.numUsingPlayers > 0 && this.lidAngle < 1.0F)
-        {
-            float var8 = this.lidAngle;
+				if (this.adjacentChestXPos != null)
+				{
+					var4 += 0.5D;
+				}
 
-            if (this.numUsingPlayers > 0)
-            {
-                this.lidAngle += var1;
-            }
-            else
-            {
-                this.lidAngle -= var1;
-            }
+				this.worldObj.playSoundEffect(var4, this.yCoord + 0.5D, var6, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			}
 
-            if (this.lidAngle > 1.0F)
-            {
-                this.lidAngle = 1.0F;
-            }
+			if (this.lidAngle < 0.0F)
+			{
+				this.lidAngle = 0.0F;
+			}
+		}
+	}
 
-            float var3 = 0.5F;
+	@Override
+	public boolean receiveClientEvent(int par1, int par2)
+	{
+		if (par1 == 1)
+		{
+			this.numUsingPlayers = par2;
+		}
+		return true;
+	}
+	@Override
+	public void openChest()
+	{
+		++this.numUsingPlayers;
+		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, Block.chest.blockID, 1, this.numUsingPlayers);
+	}
+	@Override
+	public void closeChest()
+	{
+		--this.numUsingPlayers;
+		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, Block.chest.blockID, 1, this.numUsingPlayers);
+	}
 
-            if (this.lidAngle < var3 && var8 >= var3 && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
-            {
-                var4 = this.xCoord + 0.5D;
-                double var6 = this.zCoord + 0.5D;
+	@Override
+	public void invalidate()
+	{
+		this.updateContainingBlockInfo();
+		this.checkForAdjacentChests();
+		super.invalidate();
+	}
 
-                if (this.adjacentChestZPosition != null)
-                {
-                    var6 += 0.5D;
-                }
-
-                if (this.adjacentChestXPos != null)
-                {
-                    var4 += 0.5D;
-                }
-
-                this.worldObj.playSoundEffect(var4, this.yCoord + 0.5D, var6, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
-            }
-
-            if (this.lidAngle < 0.0F)
-            {
-                this.lidAngle = 0.0F;
-            }
-        }
-    }
-
-    @Override
-    public boolean receiveClientEvent(int par1, int par2)
-    {
-        if (par1 == 1)
-        {
-            this.numUsingPlayers = par2;
-        }
-        return true;
-    }
-    @Override
-    public void openChest()
-    {
-        ++this.numUsingPlayers;
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, Block.chest.blockID, 1, this.numUsingPlayers);
-    }
-    @Override
-    public void closeChest()
-    {
-        --this.numUsingPlayers;
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, Block.chest.blockID, 1, this.numUsingPlayers);
-    }
-
-    @Override
-    public void invalidate()
-    {
-        this.updateContainingBlockInfo();
-        this.checkForAdjacentChests();
-        super.invalidate();
-    }
-
-    @Override
+	@Override
 	public boolean isInvNameLocalized() 
 	{
 		return false;
@@ -350,13 +325,6 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
 	{
-		return false;
+		return true;
 	}
-	
-	@Override
-	public AxisAlignedBB getRenderBoundingBox()
-    {
-        Block type = getBlockType();
-        return AxisAlignedBB.getAABBPool().getAABB(xCoord - 1, yCoord, zCoord - 1, xCoord + 2, yCoord + 2, zCoord + 2);
-    }
 }

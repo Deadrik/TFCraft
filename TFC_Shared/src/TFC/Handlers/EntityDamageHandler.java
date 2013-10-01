@@ -164,7 +164,7 @@ public class EntityDamageHandler
 			EntityArmorCalcEvent eventPost = new EntityArmorCalcEvent(entity, damage, EntityArmorCalcEvent.EventType.POST);
 			MinecraftForge.EVENT_BUS.post(eventPost);
 			//System.out.println(entity.getClass()+", "+eventPre.incomingDamage+", "+eventPost.incomingDamage);
-			entity.setHealth(entity.getMaxHealth()-eventPost.incomingDamage);
+			entity.setHealth(entity.getHealth()-eventPost.incomingDamage);
 		}
 
 		return 0;

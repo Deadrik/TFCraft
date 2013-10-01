@@ -364,7 +364,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	}
 	@Override
 	public int getSex() {
-		return dataWatcher.getWatchableObjectInt(13);
+		return dataWatcher.getWatchableObjectInt(21);
 	}
 
 
