@@ -97,7 +97,10 @@ public class GuiCalendar extends GuiScreen
 
 		if(dom == 7 && month == 4) {
 			drawCenteredString(fontRenderer,StringUtil.localize("gui.Calendar.DateBioxx") + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
-		} else {
+		}
+		else if(dom == 2 && month == 11) {
+			drawCenteredString(fontRenderer,StringUtil.localize("gui.Calendar.DateDunk") + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
+		}else {
 			drawCenteredString(fontRenderer,StringUtil.localize("gui.Calendar.Date") + " : " + dom + " " + TFC_Time.months[month] + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
 		}
 
