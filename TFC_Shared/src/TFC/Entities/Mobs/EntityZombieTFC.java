@@ -1,9 +1,16 @@
 package TFC.Entities.Mobs;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import TFC.TFCItems;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
@@ -109,4 +116,133 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage
 	{
 		return EnumDamageType.SLASHING;
 	}
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    {
+		if (ForgeHooks.onLivingAttack(this, par1DamageSource, par2)) return false;
+        if (this.isEntityInvulnerable())
+        {
+            return false;
+        }
+        else if (this.worldObj.isRemote)
+        {
+            return false;
+        }
+        else
+        {
+            this.entityAge = 0;
+
+            if (this.getHealth() <= 0.0F)
+            {
+                return false;
+            }
+            else if (par1DamageSource.isFireDamage() && this.isPotionActive(Potion.fireResistance))
+            {
+                return false;
+            }
+            else
+            {
+                if ((par1DamageSource == DamageSource.anvil || par1DamageSource == DamageSource.fallingBlock) && this.getCurrentItemOrArmor(4) != null)
+                {
+                    this.getCurrentItemOrArmor(4).damageItem((int)(par2 * 4.0F + this.rand.nextFloat() * par2 * 2.0F), this);
+                    par2 *= 0.75F;
+                }
+
+                this.limbSwingAmount = 1.5F;
+                boolean flag = true;
+
+                if ((float)this.hurtResistantTime > (float)this.maxHurtResistantTime / 2.0F)
+                {
+                    if (par2 <= this.lastDamage)
+                    {
+                        return false;
+                    }
+
+                    this.damageEntity(par1DamageSource, par2 - this.lastDamage);
+                    this.lastDamage = par2;
+                    flag = false;
+                }
+                else
+                {
+                    this.lastDamage = par2;
+                    this.prevHealth = this.getHealth();
+                    this.hurtResistantTime = this.maxHurtResistantTime;
+                    this.damageEntity(par1DamageSource, par2);
+                    this.hurtTime = this.maxHurtTime = 10;
+                }
+
+                this.attackedAtYaw = 0.0F;
+                Entity entity = par1DamageSource.getEntity();
+
+                if (entity != null)
+                {
+                    if (entity instanceof EntityLivingBase)
+                    {
+                        this.setRevengeTarget((EntityLivingBase)entity);
+                    }
+
+                    if (entity instanceof EntityPlayer)
+                    {
+                        this.recentlyHit = 100;
+                        this.attackingPlayer = (EntityPlayer)entity;
+                    }
+                    else if (entity instanceof EntityWolf)
+                    {
+                        EntityWolf entitywolf = (EntityWolf)entity;
+
+                        if (entitywolf.isTamed())
+                        {
+                            this.recentlyHit = 100;
+                            this.attackingPlayer = null;
+                        }
+                    }
+                }
+
+                if (flag)
+                {
+                    this.worldObj.setEntityState(this, (byte)2);
+
+                    if (par1DamageSource != DamageSource.drown)
+                    {
+                        this.setBeenAttacked();
+                    }
+
+                    if (entity != null)
+                    {
+                        double d0 = entity.posX - this.posX;
+                        double d1;
+
+                        for (d1 = entity.posZ - this.posZ; d0 * d0 + d1 * d1 < 1.0E-4D; d1 = (Math.random() - Math.random()) * 0.01D)
+                        {
+                            d0 = (Math.random() - Math.random()) * 0.01D;
+                        }
+
+                        this.attackedAtYaw = (float)(Math.atan2(d1, d0) * 180.0D / Math.PI) - this.rotationYaw;
+                        this.knockBack(entity, par2, d0, d1);
+                    }
+                    else
+                    {
+                        this.attackedAtYaw = (float)((int)(Math.random() * 2.0D) * 180);
+                    }
+                }
+
+                if (this.getHealth() <= 0.0F)
+                {
+                    if (flag)
+                    {
+                        this.playSound(this.getDeathSound(), this.getSoundVolume(), this.getSoundPitch());
+                    }
+
+                    this.onDeath(par1DamageSource);
+                }
+                else if (flag)
+                {
+                    this.playSound(this.getHurtSound(), this.getSoundVolume(), this.getSoundPitch());
+                }
+
+                return true;
+            }
+        }
+    }
 }
