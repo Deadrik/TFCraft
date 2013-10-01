@@ -188,17 +188,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 
     private void destroyLeaves(World world, int par1, int par2, int par3)
     {
-        world.setBlock(par1, par2, par3, 0, 0, 0x2);
-        world.scheduleBlockUpdate(par1 - 1, par2, par3, blockID, 5);
-        world.scheduleBlockUpdate(par1 + 1, par2, par3, blockID, 5);
-        world.scheduleBlockUpdate(par1, par2 - 1, par3, blockID, 5);
-        world.scheduleBlockUpdate(par1, par2 + 1, par3, blockID, 5);
-        world.scheduleBlockUpdate(par1, par2, par3 - 1, blockID, 5);
-        world.scheduleBlockUpdate(par1, par2, par3 + 1, blockID, 5);
-        world.scheduleBlockUpdate(par1 - 1, par2, par3+1, blockID, 5);
-        world.scheduleBlockUpdate(par1 - 1, par2, par3-1, blockID, 5);
-        world.scheduleBlockUpdate(par1 + 1, par2, par3+1, blockID, 5);
-        world.scheduleBlockUpdate(par1 + 1, par2, par3-1, blockID, 5);
+        world.setBlockToAir(par1, par2, par3);
     }
 
     private void removeLeaves(World world, int i, int j, int k)
@@ -206,7 +196,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
         dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
         if(new Random().nextInt(100) < 30)
             dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.stick, 1));
-        world.setBlock(i, j, k, 0);
+        world.setBlockToAir(i, j, k);
     }
 
     @Override
