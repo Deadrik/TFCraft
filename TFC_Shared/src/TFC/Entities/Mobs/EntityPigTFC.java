@@ -48,13 +48,12 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		super(par1World);
 		this.setSize(0.9F, 0.9F);
 		this.getNavigator().setAvoidsWater(true);
-		float var2 = 0.25F;
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-		this.tasks.addTask(2, new EntityAIMateTFC(this, worldObj, var2));
+		this.tasks.addTask(2, new EntityAIMateTFC(this, worldObj, 1.0f));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
-		this.tasks.addTask(5, new EntityAIWander(this, var2));
+		this.tasks.addTask(5, new EntityAIWander(this, 0.75));
 		this.tasks.addTask(6, this.aiEatGrass);
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
@@ -103,10 +102,10 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	}
 
 	@Override
-	protected void func_110147_ax()
+	protected void applyEntityAttributes()
 	{
-		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(500);//MaxHealth
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(500);//MaxHealth
 	}
 
 	@Override
@@ -167,7 +166,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
-		if (hunger > 144000 && rand.nextInt (100) == 0 && func_110143_aJ() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
 		{
 			this.heal(1);
 		}
@@ -183,7 +182,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			}
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
-				size_mod = this.dataWatcher.func_111145_d(14);
+				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
 			}
 		}
 	}

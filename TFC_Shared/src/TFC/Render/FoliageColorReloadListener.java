@@ -15,11 +15,12 @@ public class FoliageColorReloadListener implements ResourceManagerReloadListener
 {
 	private static final ResourceLocation field_130079_a = new ResourceLocation("textures/colormap/foliage.png");
 
-	public void func_110549_a(ResourceManager par1ResourceManager)
+	@Override
+	public void onResourceManagerReload(ResourceManager par1ResourceManager)
 	{
 		try
 		{
-			ColorizerFoliageTFC.setFoliageBiomeColorizer(TextureUtil.func_110986_a(par1ResourceManager, field_130079_a));
+			ColorizerFoliageTFC.setFoliageBiomeColorizer(TextureUtil.readImageData(par1ResourceManager, field_130079_a));
 		}
 		catch (IOException ioexception)
 		{

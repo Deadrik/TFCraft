@@ -2,17 +2,15 @@ package TFC.Items;
 
 import java.util.Random;
 
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_Core;
+import TFC.Core.Util.StringUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -44,14 +42,14 @@ public class ItemAlcohol extends ItemTerra
 		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 
-/*	
+	/*	
 	@Override
 	public Icon getIconFromDamage(int par1)
 	{
 		return this.field_94590_d;
 	}
 
-*/
+	 */
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
@@ -66,7 +64,7 @@ public class ItemAlcohol extends ItemTerra
 	{
 		return 32;
 	}
-/*
+	/*
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister)
@@ -99,8 +97,8 @@ public class ItemAlcohol extends ItemTerra
 	{
 		return true;
 	}
-*/
-	
+	 */
+
 	@Override
 	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer player)
 	{
@@ -159,7 +157,7 @@ public class ItemAlcohol extends ItemTerra
 							soberTime = 0;
 							//((EntityPlayerMP)player).mcServer.getConfigurationManager().sendChatMsg(player.username+" died of alcohol poisoning.");
 							player.inventory.dropAllItems();
-							player.setEntityHealth(0);
+							player.setHealth(0);
 						}
 					}
 

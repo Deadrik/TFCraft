@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.Containers.Slots.SlotAnvilFlux;
 import TFC.Containers.Slots.SlotAnvilHammer;
+import TFC.Containers.Slots.SlotAnvilIn;
 import TFC.Containers.Slots.SlotAnvilPlan;
 import TFC.Containers.Slots.SlotAnvilWeldOut;
 import TFC.Items.Tools.ItemHammer;
@@ -32,11 +33,11 @@ public class ContainerAnvil extends ContainerTFC
 		//Hammer slot
 		addSlotToContainer(new SlotAnvilHammer(inventoryplayer.player, anvil, 0, 7, 95));
 		//input item slot
-		addSlotToContainer(new Slot(anvil, 1, 87, 46));
+		addSlotToContainer(new SlotAnvilIn(anvil, 1, 87, 46));
 
 		//Weld slots
-		addSlotToContainer(new Slot(anvil,  2, 14, 12));
-		addSlotToContainer(new Slot(anvil,  3, 32, 12));
+		addSlotToContainer(new SlotAnvilIn(anvil,  2, 14, 12));
+		addSlotToContainer(new SlotAnvilIn(anvil,  3, 32, 12));
 		addSlotToContainer(new SlotAnvilWeldOut(inventoryplayer.player, anvil, 4, 23, 34));
 		//blueprint slot
 		addSlotToContainer(new SlotAnvilPlan(anvil, 5, 105, 46));

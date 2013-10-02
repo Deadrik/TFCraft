@@ -7,10 +7,10 @@ import net.minecraft.item.ItemStack;
 import TFC.TFCItems;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
-import TFC.API.TFCTabs;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.TFCTabs;
 
 public class ItemBloom extends ItemTerra implements ISmeltable
 {

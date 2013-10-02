@@ -65,7 +65,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setInteger("ID", m.type.IngotID);
-				nbttagcompound1.setShort("Amount", m.amount);
+				nbttagcompound1.setFloat("AmountF", m.amount);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
@@ -84,15 +84,6 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		}
 
 		nbt.setTag("Items", nbttaglist);
-
-		if(currentAlloy != null)
-		{
-			nbt.setInteger("outputAmount", currentAlloy.outputAmount);
-		}
-		else
-		{
-			nbt.setInteger("outputAmount", 0);
-		}
 	}
 
 	@Override
@@ -113,10 +104,11 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		{
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
 			int id = nbttagcompound1.getInteger("ID");
-			short amount = nbttagcompound1.getShort("Amount");
-
+			float amount = nbttagcompound1.getShort("Amount");
+			//Added so that hopefully old worlds that stored metal as shorts wont break
+			float amountF = amount + nbttagcompound1.getFloat("AmountF");
 			Metal m = MetalRegistry.instance.getMetalFromItem(Item.itemsList[id]);
-			addMetal(MetalRegistry.instance.getMetalFromItem(Item.itemsList[id]), amount);
+			addMetal(MetalRegistry.instance.getMetalFromItem(Item.itemsList[id]), amountF);
 		}
 
 		nbttaglist = nbt.getTagList("Items");
@@ -129,11 +121,6 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			{
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
-		}
-
-		if(currentAlloy != null)
-		{
-			currentAlloy.outputAmount = nbt.getInteger("outputAmount");
 		}
 	}
 
@@ -215,7 +202,8 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				{
 					storage[1] = new ItemStack(Item.itemsList[currentAlloy.outputType.MeltedItemID], 1, 99);
 					TFC_ItemHeat.SetTemperature(storage[1], temperature);
-					currentAlloy.outputAmount--;
+					//currentAlloy.outputAmount--;
+					drainOutput(1.0f);
 					updateGui((byte) 1);
 				}
 				else if(storage[1].itemID == currentAlloy.outputType.MeltedItemID && storage[1].getItemDamage() > 0)
@@ -225,14 +213,14 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					float temp = (temperature - inTemp) / 2;
 					TFC_ItemHeat.SetTemperature(storage[1], inTemp+temp);
 					//System.out.println(temperature +", "+inTemp+", "+temp);
-					currentAlloy.outputAmount--;
+					drainOutput(1.0f);
 					storage[1].stackSize = 1;
 					updateGui((byte) 1);
 				}
 				outputTick = 0;
 			}
 
-			if(currentAlloy != null && currentAlloy.outputAmount <= 0) {
+			if(currentAlloy != null && this.getTotalMetal() < 1) {
 				metals = new HashMap();
 				updateCurrentAlloy();
 				this.updateGui((byte) 2);
@@ -251,7 +239,22 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		}
 	}
 
-	public boolean addMetal(Metal m, short amt)
+	public boolean drainOutput(float amount)
+	{
+		if(metals != null && metals.values().size() > 0) 
+		{
+			for(Object am : metals.values())
+			{
+				float percent = currentAlloy.getPercentForMetal(((MetalPair)am).type) / 100;
+				((MetalPair)am).amount -= amount*percent;
+			}
+
+			updateCurrentAlloy();
+		}
+		return true;
+	}
+
+	public boolean addMetal(Metal m, float amt)
 	{
 		if(getTotalMetal()+amt <= 3000 && m.Name != "Unknown")
 		{
@@ -268,10 +271,10 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		return false;
 	}
 
-	public int getTotalMetal()
+	public float getTotalMetal()
 	{
 		Iterator iter = metals.values().iterator();
-		int totalAmount = 0;
+		float totalAmount = 0;
 		while(iter.hasNext())
 		{
 			MetalPair m = (MetalPair) iter.next();
@@ -288,7 +291,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		List<AlloyMetal> a = new ArrayList<AlloyMetal>();
 
 		Iterator iter = metals.values().iterator();
-		int totalAmount = getTotalMetal();
+		float totalAmount = getTotalMetal();
 
 		iter = metals.values().iterator();
 		while(iter.hasNext())
@@ -296,7 +299,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			MetalPair m = (MetalPair) iter.next();
 			if(m != null)
 			{
-				a.add(new AlloyMetal(m.type, ((float)m.amount/totalAmount) * 100f));
+				a.add(new AlloyMetal(m.type, (m.amount/totalAmount) * 100f));
 			}
 		}
 
@@ -323,7 +326,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		} 
 		else if(id == 1)
 		{
-			currentAlloy.outputAmount = inStream.readInt();
+			currentAlloy.outputAmount = inStream.readFloat();
 		}
 		else if(id == 2)
 		{
@@ -455,7 +458,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			else if(id == 1 && currentAlloy != null)
 			{
 				dos.writeByte(1);
-				dos.writeInt(currentAlloy.outputAmount);
+				dos.writeFloat(this.getTotalMetal());
 			}
 			else if(id == 2)
 			{
@@ -470,7 +473,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public int getOutCountScaled(int length)
 	{
 		if(currentAlloy != null) {
-			return (this.currentAlloy.outputAmount * length)/3000;
+			return ((int)this.currentAlloy.outputAmount * length)/3000;
 		} else {
 			return 0;
 		}

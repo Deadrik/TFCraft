@@ -9,8 +9,9 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.API.Util.StringUtil;
 import TFC.Containers.ContainerQuern;
+import TFC.Core.TFC_Core;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityQuern;
 
 public class GuiQuern extends GuiContainer
@@ -37,7 +38,7 @@ public class GuiQuern extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_quern.png"));
+		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_quern.png"));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int l = (width - xSize) / 2;
 		int i1 = (height - ySize) / 2;

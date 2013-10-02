@@ -8,6 +8,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.API.TFCOptions;
+import TFC.Core.TFC_Textures;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -26,40 +27,55 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 			Block block, int modelId, RenderBlocks renderer) 
 	{
 		boolean breaking = false;
-        if(renderer.overrideBlockTexture != null)
-        {
-        	breaking = true;
-        }
+		if(renderer.overrideBlockTexture != null)
+		{
+			breaking = true;
+		}
 
-        if(!breaking)
-        {
-        	//render the background rock
-        	renderer.overrideBlockTexture = getRockTexture(ModLoader.getMinecraftInstance().theWorld, x, y, z);
-        	renderer.renderStandardBlock(block, x, y, z);
-        	renderer.clearOverrideBlockTexture();
+		if(!breaking)
+		{
+			//render the background rock
+			renderer.overrideBlockTexture = getRockTexture(ModLoader.getMinecraftInstance().theWorld, x, y, z);
+			renderer.renderStandardBlock(block, x, y, z);
+			renderer.clearOverrideBlockTexture();
 
-            //render the ore overlay
-        	renderer.renderStandardBlock(block, x, y, z);
-        }
+			//render the ore overlay
+			renderer.renderStandardBlock(block, x, y, z);
+		}
 
-        //renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
-		 
+		//renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
+
 		return false;
 	}
-	
+
 	public static Icon getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord) 
 	{
-		Icon var27;
+		Icon var27 = null;
 		DataLayer rockLayer1 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 		DataLayer rockLayer2 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 1);
 		DataLayer rockLayer3 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);
 
-		if(yCoord <= TFCOptions.RockLayer3Height)
-			var27 = Block.blocksList[rockLayer3.data1].getIcon(5, rockLayer3.data2);
-		else if(yCoord <= TFCOptions.RockLayer2Height)
-			var27 = Block.blocksList[rockLayer2.data1].getIcon(5, rockLayer2.data2);
-		else
-			var27 = Block.blocksList[rockLayer1.data1].getIcon(5, rockLayer1.data2);
+		try
+		{
+			if(yCoord <= TFCOptions.RockLayer3Height)
+			{
+				var27 = Block.blocksList[rockLayer3.data1].getIcon(5, rockLayer3.data2);
+			} else if(yCoord <= TFCOptions.RockLayer2Height)
+			{
+				var27 = Block.blocksList[rockLayer2.data1].getIcon(5, rockLayer2.data2);
+			} else
+			{
+				var27 = Block.blocksList[rockLayer1.data1].getIcon(5, rockLayer1.data2);
+			}
+		}
+		catch(Exception ex)
+		{
+			System.out.println("Ore getRockTexture crash! " +
+					"rock1: " + rockLayer1.data1 + "/" + rockLayer1.data2 +
+					"rock2: " + rockLayer2.data1 + "/" + rockLayer2.data2 +
+					"rock3: " + rockLayer3.data1 + "/" + rockLayer3.data2);
+			var27 = TFC_Textures.InvisibleTexture;
+		}
 		return var27;
 	}
 
@@ -73,7 +89,7 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	public static void renderInvBlock(Block block, int meta, RenderBlocks renderer)
 	{
 		Tessellator var14 = Tessellator.instance;

@@ -14,11 +14,11 @@ import net.minecraft.util.Icon;
 import TFC.Reference;
 import TFC.API.Armor;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.API.Util.StringUtil;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
+import TFC.Core.Util.StringUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -70,7 +70,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	{
 		if (this.getArmorMaterial() == EnumArmorMaterial.CLOTH)
 		{
-			this.itemIcon = registerer.registerIcon("minecraft:" + func_111208_A());
+			this.itemIcon = registerer.registerIcon("minecraft:" + getIconString());
 			overlayIcon = registerer.registerIcon("minecraft:" + leatherNames[this.armorType]);
 		}
 		else

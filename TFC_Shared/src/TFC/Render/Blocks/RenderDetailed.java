@@ -4,22 +4,37 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
+import TFC.Render.RenderBlocksFixUV;
 import TFC.TileEntities.TileEntityDetailed;
 
 public class RenderDetailed 
 {
+	private static RenderBlocksFixUV renderer;
+
 	public static boolean renderBlockDetailed(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		TileEntityDetailed te = (TileEntityDetailed) renderblocks.blockAccess.getBlockTileEntity(i, j, k);
 		int md = renderblocks.blockAccess.getBlockMetadata(i, j, k);
 
-		if(te.TypeID <= 0) return false;
+		if(renderer == null)
+		{
+			renderer = new RenderBlocksFixUV(renderblocks);
+		}
+		else
+		{
+			renderer.update(renderblocks);
+		}
+
+		if(te.TypeID <= 0)
+		{
+			return false;
+		}
 
 		int type = te.TypeID;
 		int meta = te.MetaID;
 
 		boolean breaking = false;
-		if(renderblocks.overrideBlockTexture != null)
+		if(renderer.overrideBlockTexture != null)
 		{
 			breaking = true;
 		}
@@ -31,8 +46,9 @@ public class RenderDetailed
 				for(int subY = 0; subY < 2; subY++)
 				{
 					if(!te.isQuadSolid(subX, subY, subZ))
-						renderMiniBlock(i, j, k, subX, subY, subZ, renderblocks, te, type, meta);
-					else
+					{
+						renderMiniBlock(i, j, k, subX, subY, subZ, renderer, te, type, meta);
+					} else
 					{
 						float minX = 0.5f * subX;
 						float maxX = minX + 0.5f;
@@ -41,8 +57,8 @@ public class RenderDetailed
 						float minZ = 0.5f * subZ;
 						float maxZ = minZ + 0.5f;
 
-						renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
-						renderStandardBlockWithColorMultiplier(Block.blocksList[type], renderblocks, i, j, k, 1f, 1f, 1f, meta);
+						renderer.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
+						renderStandardBlockWithColorMultiplier(Block.blocksList[type], renderer, i, j, k, 1f, 1f, 1f, meta);
 					}
 				}
 			}

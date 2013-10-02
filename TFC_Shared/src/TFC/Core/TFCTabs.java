@@ -1,9 +1,9 @@
-package TFC.API;
+package TFC.Core;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import TFC.API.Util.StringUtil;
+import TFC.Core.Util.StringUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

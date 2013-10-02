@@ -115,42 +115,42 @@ public class CommonProxy implements IGuiHandler
 
 	public void registerTileEntities(boolean b)
 	{
-		ModLoader.registerTileEntity(TileEntityLogPile.class, "TerraLogPile");
+		GameRegistry.registerTileEntity(TileEntityLogPile.class, "TerraLogPile");
 
-		ModLoader.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
-		ModLoader.registerTileEntity(TileEntityFirepit.class, "TerraFirepit");
-		ModLoader.registerTileEntity(TileEntityAnvil.class, "TerraAnvil");
-		ModLoader.registerTileEntity(TileEntityScribe.class, "TerraScribe");
-		ModLoader.registerTileEntity(TileEntityForge.class, "TerraForge");
-		ModLoader.registerTileEntity(TileEntityMetallurgy.class, "TerraMetallurgy");
-		ModLoader.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");
-		ModLoader.registerTileEntity(TileEntityEarlyBloomery.class, "TerraEarlyBloomery");
-		ModLoader.registerTileEntity(TileEntitySluice.class, "TerraSluice");
-		ModLoader.registerTileEntity(TileEntityFarmland.class, "TileEntityFarmland");
-		ModLoader.registerTileEntity(TileEntityCrop.class, "TileEntityCrop");
+		GameRegistry.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
+		GameRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit");
+		GameRegistry.registerTileEntity(TileEntityAnvil.class, "TerraAnvil");
+		GameRegistry.registerTileEntity(TileEntityScribe.class, "TerraScribe");
+		GameRegistry.registerTileEntity(TileEntityForge.class, "TerraForge");
+		GameRegistry.registerTileEntity(TileEntityMetallurgy.class, "TerraMetallurgy");
+		GameRegistry.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");
+		GameRegistry.registerTileEntity(TileEntityEarlyBloomery.class, "TerraEarlyBloomery");
+		GameRegistry.registerTileEntity(TileEntitySluice.class, "TerraSluice");
+		GameRegistry.registerTileEntity(TileEntityFarmland.class, "TileEntityFarmland");
+		GameRegistry.registerTileEntity(TileEntityCrop.class, "TileEntityCrop");
 
-		ModLoader.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
-		ModLoader.registerTileEntity(TileEntityPartial.class, "Partial");
-		ModLoader.registerTileEntity(TileEntityDetailed.class, "Detailed");
+		GameRegistry.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
+		GameRegistry.registerTileEntity(TileEntityPartial.class, "Partial");
+		GameRegistry.registerTileEntity(TileEntityDetailed.class, "Detailed");
 
-		ModLoader.registerTileEntity(TileEntityToolRack.class, "ToolRack");
-		ModLoader.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
+		GameRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack");
+		GameRegistry.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
 
-		ModLoader.registerTileEntity(TileEntityQuern.class, "Quern");
-		ModLoader.registerTileEntity(TileEntitySapling.class, "Sapling");
+		GameRegistry.registerTileEntity(TileEntityQuern.class, "Quern");
+		GameRegistry.registerTileEntity(TileEntitySapling.class, "Sapling");
 
-		ModLoader.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");
-		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
-		ModLoader.registerTileEntity(TileEntityBarrel.class, "Barrel");
+		GameRegistry.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");
+		GameRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
+		GameRegistry.registerTileEntity(TileEntityBarrel.class, "Barrel");
 
-		ModLoader.registerTileEntity(TileEntityBloom.class, "IronBloom");
-		ModLoader.registerTileEntity(TECrucible.class, "Crucible");
+		GameRegistry.registerTileEntity(TileEntityBloom.class, "IronBloom");
+		GameRegistry.registerTileEntity(TECrucible.class, "Crucible");
 
 		if(b){
-			ModLoader.registerTileEntity(TileEntityPottery.class, "Pottery");
-			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");
-			ModLoader.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep");
-			ModLoader.registerTileEntity(TileEntityBellows.class, "Bellows");
+			GameRegistry.registerTileEntity(TileEntityPottery.class, "Pottery");
+			GameRegistry.registerTileEntity(TileEntityChestTFC.class, "chest");
+			GameRegistry.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep");
+			GameRegistry.registerTileEntity(TileEntityBellows.class, "Bellows");
 		}
 
 		EntityRegistry.registerGlobalEntityID(EntityWolfTFC.class, "Wolf", ModLoader.getUniqueEntityId(), 0xffffff, 0xaaaaaa);
@@ -289,7 +289,7 @@ public class CommonProxy implements IGuiHandler
 	}
 
 	public World getCurrentWorld() {
-		return MinecraftServer.getServer().func_130014_f_();
+		return MinecraftServer.getServer().getEntityWorld();
 	}
 
 	public int waterColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)

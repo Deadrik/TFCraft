@@ -15,8 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.API.ICausesDamage;
 import TFC.API.IProjectile;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumDamageType;
+import TFC.Core.TFCTabs;
 import TFC.Entities.EntityJavelin;
 
 import com.google.common.collect.HashMultimap;
@@ -180,10 +180,10 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	}
 
 	@Override
-	public Multimap func_111205_h()
+	public Multimap getItemAttributeModifiers()
 	{
 		Multimap multimap = HashMultimap.create();
-		multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Weapon modifier", this.weaponDamage, 0));
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", this.weaponDamage, 0));
 		return multimap;
 	}
 }

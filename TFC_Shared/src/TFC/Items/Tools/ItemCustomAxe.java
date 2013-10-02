@@ -12,12 +12,12 @@ import net.minecraft.item.ItemStack;
 import TFC.Reference;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.API.Util.StringUtil;
+import TFC.Core.TFCTabs;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 import com.google.common.collect.HashMultimap;
@@ -89,10 +89,10 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	}
 
 	@Override
-	public Multimap func_111205_h()
+	public Multimap getItemAttributeModifiers()
 	{
 		Multimap multimap = HashMultimap.create();
-		multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
 		return multimap;
 	}
 }

@@ -8,10 +8,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.API.Util.StringUtil;
+import TFC.Core.TFCTabs;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import java.util.HashMap;
 

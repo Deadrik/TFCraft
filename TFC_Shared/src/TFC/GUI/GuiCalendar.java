@@ -11,9 +11,10 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.API.TFCOptions;
-import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
+import TFC.Core.Util.StringUtil;
 
 public class GuiCalendar extends GuiScreen
 {
@@ -77,7 +78,7 @@ public class GuiCalendar extends GuiScreen
 	@Override
 	public void drawScreen(int par1, int par2, float par3)
 	{
-		this.mc.func_110434_K().func_110577_a(texture);
+		TFC_Core.bindTexture(texture);
 
 		int var4 = this.guiLeft;
 		int var5 = this.guiTop;

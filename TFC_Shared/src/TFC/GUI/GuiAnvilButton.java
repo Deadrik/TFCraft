@@ -11,6 +11,8 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.API.Enums.CraftingRuleEnum;
+import TFC.Core.TFC_Core;
+import TFC.Core.Util.StringUtil;
 
 public class GuiAnvilButton extends GuiButton 
 {
@@ -69,11 +71,11 @@ public class GuiAnvilButton extends GuiButton
 				{
 					CraftingRuleEnum[] Rules = screen.AnvilEntity.workRecipe.getRules();
 					int[] ItemRules = screen.AnvilEntity.getItemRules();
-					this.displayString = Rules[ruleIndex].Name;
+					this.displayString = StringUtil.localize(Rules[ruleIndex].Name);
 				}
 			}
 
-			mc.func_110434_K().func_110577_a(GuiAnvil.texture);
+			TFC_Core.bindTexture(GuiAnvil.texture);
 			GL11.glColor4ub(red, green, blue, (byte)255);
 			this.drawTexturedModalRect(this.xPosition, this.yPosition, this.bX + k * 16, this.bY + (ruleIndex * 22), this.bW, this.bH);
 
@@ -82,7 +84,7 @@ public class GuiAnvilButton extends GuiButton
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			if(icon != null) 
 			{
-				mc.func_110434_K().func_110577_a(TextureMap.field_110575_b);
+				TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
 				this.drawTexturedModelRectFromIcon(this.xPosition, this.yPosition, icon, this.width, this.height);
 			}
 

@@ -15,11 +15,11 @@ import TFC.Reference;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.API.Util.StringUtil;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.Util.StringUtil;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -210,7 +210,7 @@ public class ItemTerra extends Item implements ISize
 	}
 
 	@Override
-	public Multimap func_111205_h()
+	public Multimap getItemAttributeModifiers()
 	{
 		Multimap multimap = HashMultimap.create();
 		return multimap;

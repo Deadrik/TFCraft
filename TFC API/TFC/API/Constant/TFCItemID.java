@@ -1,9 +1,6 @@
 package TFC.API.Constant;
 
-import java.io.File;
-
 import net.minecraftforge.common.Configuration;
-import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
 
 public class TFCItemID {
@@ -734,26 +731,14 @@ public class TFCItemID {
 	public static int PlatinumSheet2x			= 19111;
 	public static int SilverSheet2x				= 19112;
 	public static int SterlingSilverSheet2x		= 19113;
-	
+
 	//additional foods + food stuffs
 	public static int Cheese 					= 19114;
 	public static int Vinegar					= 19115;
 
 
-	static Configuration config;
-
-	public static void Setup()
+	public static void Setup(Configuration config)
 	{
-		try
-		{
-			config = new net.minecraftforge.common.Configuration(
-					new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFC.cfg"));
-			config.load();
-		} catch (Exception e) {
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to access item configuration!").toString());
-			config = null;
-		}
-
 		minecartCrate = TFCOptions.getIntFor(config,"item","minecartCrate", minecartCrate);
 		GoldPan = TFCOptions.getIntFor(config,"item","GoldPan", GoldPan);
 		SluiceItem = TFCOptions.getIntFor(config,"item","SluiceItem", SluiceItem);
@@ -1487,11 +1472,6 @@ public class TFCItemID {
 		PlatinumSheet2x = TFCOptions.getIntFor(config, "item", "PlatinumSheet2x", PlatinumSheet2x );
 		SilverSheet2x = TFCOptions.getIntFor(config, "item", "SilverSheet2x", SilverSheet2x );
 		SterlingSilverSheet2x = TFCOptions.getIntFor(config, "item", "Sterling SilverSheet2x", SterlingSilverSheet2x );
-
-
-		if (config != null) {
-			config.save();
-		}
 	}
 
 }

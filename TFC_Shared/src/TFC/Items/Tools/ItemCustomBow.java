@@ -14,9 +14,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.TFCTabs;
 import TFC.Entities.EntityProjectileTFC;
 import TFC.Items.ItemTerra;
 import cpw.mods.fml.relauncher.Side;
@@ -140,12 +140,12 @@ public class ItemCustomBow extends ItemBow implements ISize
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.itemIcon = par1IconRegister.registerIcon(this.func_111208_A() + "_standby");
+		this.itemIcon = par1IconRegister.registerIcon(this.getIconString() + "_standby");
 		iconArray = new Icon[bowPullIconNameArray.length];
 
 		for (int i = 0; i < iconArray.length; ++i)
 		{
-			iconArray[i] = par1IconRegister.registerIcon(this.func_111208_A() + "_" + bowPullIconNameArray[i]);
+			iconArray[i] = par1IconRegister.registerIcon(this.getIconString() + "_" + bowPullIconNameArray[i]);
 		}
 		Item.bow.registerIcons(par1IconRegister);
 	}

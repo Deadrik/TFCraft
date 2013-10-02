@@ -48,7 +48,7 @@ public class RenderOverlayHandler
 		int armorRowHeight = healthRowHeight - 10;
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.func_110434_K().func_110577_a(tfcicons);
+		TFC_Core.bindTexture(tfcicons);
 
 		//Render Tool Mode
 		if(mc.thePlayer.inventory.getCurrentItem() != null && 
@@ -70,8 +70,8 @@ public class RenderOverlayHandler
 			//Draw Health
 
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 0, 90, 10);
-			float maxHealth = mc.thePlayer.func_110138_aP();
-			float percentHealth = mc.thePlayer.func_110143_aJ()/maxHealth;
+			float maxHealth = mc.thePlayer.getMaxHealth();
+			float percentHealth = mc.thePlayer.getHealth()/maxHealth;
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
 
 			//Draw Food and Water
@@ -98,7 +98,7 @@ public class RenderOverlayHandler
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 28, 90, 5);
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 33, (int) (90*percentWater), 5);
 
-			mc.func_110434_K().func_110577_a(new ResourceLocation("minecraft:textures/gui/icons.png"));
+			TFC_Core.bindTexture(new ResourceLocation("minecraft:textures/gui/icons.png"));
 			//Draw experience bar
 			int cap = 0;
 			if(mc.thePlayer.ridingEntity == null)
@@ -154,7 +154,7 @@ public class RenderOverlayHandler
 					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord), 
 					TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1}));
 
-			event.left.add("Health: " + player.func_110143_aJ());
+			event.left.add("Health: " + player.getHealth());
 		}
 	}
 

@@ -235,12 +235,15 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 		else{
 			//run of the mill plains, but not too cold
-			if(temp > 10 && rain < 250 && rain > 100){
-				if(temp < 30){
+			if(temp > 10 && rain > 100 && rain <= 500)
+			{
+				if(temp < 30)
+				{
 					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 2, 2, 4));
 					spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
 				}
-				else{
+				else
+				{
 					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 1, 1, 2));
 				}
 			}

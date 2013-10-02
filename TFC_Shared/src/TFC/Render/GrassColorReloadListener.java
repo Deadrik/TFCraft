@@ -16,11 +16,11 @@ public class GrassColorReloadListener implements ResourceManagerReloadListener
 	private static final ResourceLocation field_130078_a = new ResourceLocation("textures/colormap/grass.png");
 
 	@Override
-	public void func_110549_a(ResourceManager par1ResourceManager)
+	public void onResourceManagerReload(ResourceManager par1ResourceManager)
 	{
 		try
 		{
-			ColorizerGrassTFC.setGrassBiomeColorizer(TextureUtil.func_110986_a(par1ResourceManager, field_130078_a));
+			ColorizerGrassTFC.setGrassBiomeColorizer(TextureUtil.readImageData(par1ResourceManager, field_130078_a));
 		}
 		catch (IOException ioexception)
 		{

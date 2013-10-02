@@ -10,7 +10,7 @@ backup_dir = os.path.join(mcp_dir, 'src_backup')
 sys.path.append(mcp_dir)
 from runtime.recompile import recompile
 
-from tfc import copytree, reset_logger
+from base import copytree, reset_logger
 
 def main():
     build_num = 0
@@ -21,8 +21,8 @@ def main():
             pass
     sys.exit(build(build_num))
     
-def build(build_num=0):
-    print '=================================== Build Start ================================='   
+def build(major_num=0, build_num=0, revision_num=0):
+    print '============================= Build Start (%d.%d.%d) ============================' % (major_num, build_num, revision_num)   
     print '\nsrc -> backup'
     copytree(src_dir, backup_dir, 0)    
     print '\nTFC_Shared -> minecraft'
@@ -49,7 +49,7 @@ def build(build_num=0):
     print '\nremove backup'
     shutil.rmtree(backup_dir)
         
-    print '=================================== Build Finished %d =================================' % error_level
+    print '============================= Build Finished %d ============================' % error_level
     return error_level
     
 if __name__ == '__main__':

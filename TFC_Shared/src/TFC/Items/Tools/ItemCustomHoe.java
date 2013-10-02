@@ -15,12 +15,12 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.API.Util.StringUtil;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityFarmland;
 
@@ -175,7 +175,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	}
 
 	@Override
-	public Multimap func_111205_h()
+	public Multimap getItemAttributeModifiers()
 	{
 		Multimap multimap = HashMultimap.create();
 		return multimap;

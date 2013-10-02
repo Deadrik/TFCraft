@@ -12,15 +12,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.API.Util.StringUtil;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Core.Metal.Alloy;
+import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.NetworkTileEntity;
@@ -104,13 +105,19 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 				int offset = 0;
 				if(world.getBlockId(x, y, z) != TFCBlocks.Pottery.blockID && world.isAirBlock(x, y+1, z))
 				{
+					//We only want the pottery to be placeable if the block is solid on top.
+					if(!world.isBlockSolidOnSide(x, y, z, ForgeDirection.UP))
+					{
+						return false;
+					}
 					world.setBlock(x, y+1, z, TFCBlocks.Pottery.blockID);
 					offset = 1;
 				}
 
-				te = (TileEntityPottery) world.getBlockTileEntity(x, y+offset, z);
-				if(te != null) 
+
+				if(world.getBlockTileEntity(x, y+offset, z) != null && world.getBlockTileEntity(x, y+offset, z) instanceof TileEntityPottery) 
 				{
+					te = (TileEntityPottery) world.getBlockTileEntity(x, y+offset, z);
 					if(hitX < 0.5 && hitZ < 0.5)
 					{
 						if(te.inventory[0] == null)

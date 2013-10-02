@@ -46,7 +46,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		size_mod =(float)Math.sqrt((((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) * 0.1f) + 1F) * (1.0F - 0.1F * sex));
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 0.2F));
+		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 1.0F));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
 		this.tasks.addTask(6, this.aiEatGrass);
 
@@ -131,7 +131,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
-		if (hunger > 144000 && rand.nextInt (100) == 0 && func_110143_aJ() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
 		{
 			this.heal(1);
 		}
@@ -147,7 +147,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			}
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
-				size_mod = this.dataWatcher.func_111145_d(14);
+				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
 			}
 		}
 	}
@@ -161,10 +161,10 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	}
 
 	@Override
-	protected void func_110147_ax()
+	protected void applyEntityAttributes()
 	{
-		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(500);//MaxHealth
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(500);//MaxHealth
 	}
 
 	@Override

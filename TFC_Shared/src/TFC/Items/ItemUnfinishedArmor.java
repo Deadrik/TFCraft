@@ -3,8 +3,8 @@ package TFC.Items;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
 import TFC.Reference;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
+import TFC.Core.TFCTabs;
 
 public class ItemUnfinishedArmor extends ItemTerra
 {

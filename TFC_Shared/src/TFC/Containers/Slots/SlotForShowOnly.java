@@ -15,14 +15,19 @@ public class SlotForShowOnly extends Slot
 
 	@Override
 	public boolean canTakeStack(EntityPlayer par1EntityPlayer)
-    {
-        return false;
-    }
-	
+	{
+		return false;
+	}
+
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack)
-    {
-        return false;
-    }
+	{
+		return false;
+	}
 
+	@Override
+	public void onSlotChanged()
+	{
+		this.inventory.onInventoryChanged();
+	}
 }

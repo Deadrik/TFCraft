@@ -86,34 +86,34 @@ public class TileEntityChestRendererTFC extends TileEntitySpecialRenderer
 			{
 				modelchest = this.chestModel;
 
-				if (par1TileEntityChest.func_98041_l() == 1)
+				if (par1TileEntityChest.getChestType() == 1)
 				{
-					this.func_110628_a(field_110633_e);
+					this.bindTexture(field_110633_e);
 				}
 				else if (this.isChristmas)
 				{
-					this.func_110628_a(field_110630_f);
+					this.bindTexture(field_110630_f);
 				}
 				else
 				{
-					this.func_110628_a(field_110631_g);
+					this.bindTexture(field_110631_g);
 				}
 			}
 			else
 			{
 				modelchest = this.largeChestModel;
 
-				if (par1TileEntityChest.func_98041_l() == 1)
+				if (par1TileEntityChest.getChestType() == 1)
 				{
-					this.func_110628_a(field_110635_a);
+					this.bindTexture(field_110635_a);
 				}
 				else if (this.isChristmas)
 				{
-					this.func_110628_a(field_110634_c);
+					this.bindTexture(field_110634_c);
 				}
 				else
 				{
-					this.func_110628_a(field_110632_d);
+					this.bindTexture(field_110632_d);
 				}
 			}
 

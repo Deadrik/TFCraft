@@ -3,10 +3,10 @@ package TFC.Items;
 import java.util.List;
 
 import TFC.TFCBlocks;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
+import TFC.Core.TFCTabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

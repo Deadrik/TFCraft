@@ -5,12 +5,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import TFC.*;
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Core;
-import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCBiome;
-import TFC.WorldGen.TFCWorldChunkManager;
 
 public class WorldGenCustomCedarTrees extends WorldGenerator
 {
@@ -21,6 +17,7 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 		super(flag);
 		treeId=id;
 	}
+	@Override
 	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		int treeHeight = random.nextInt(6) + 3;
@@ -84,7 +81,8 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 				for (int zPos = zCoord - 1; zPos <= zCoord + 1; zPos++)
 				{
 					int j4 = zPos - zCoord;
-					if ((Math.abs(l3) != treeRadius || Math.abs(j4) != treeRadius || random.nextInt(2) != 0 && treeDiameter != 0) && !Block.opaqueCubeLookup[world.getBlockId(xPos, treeHeightOffset, zPos)])
+					if ((Math.abs(l3) != treeRadius || Math.abs(j4) != treeRadius || random.nextInt(2) != 0 && treeDiameter != 0) && 
+							world.getBlockId(xPos, treeHeightOffset, zPos) == 0)
 					{
 						setBlockAndMetadata(world, xPos, treeHeightOffset, zPos, TFCBlocks.Leaves.blockID, treeId);
 					}

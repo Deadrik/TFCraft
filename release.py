@@ -9,7 +9,7 @@ src_dir = os.path.join(mcp_dir, 'src')
 sys.path.append(mcp_dir)
 from runtime.reobfuscate import reobfuscate
 
-from tfc import reset_logger, load_version, zip_folder, zip_create, inject_version
+from base import reset_logger, load_version, zip_folder, zip_create, inject_version
 from build import build
 
 reobf_dir = os.path.join(mcp_dir, 'reobf')
@@ -22,18 +22,22 @@ version_str = None
 
 def main():
     global version_str
+    major_num = 0
     build_num = 0
+    revision_num = 0
     if len(sys.argv) > 1:
         try:
-            build_num = int(sys.argv[1])
+            major_num = int(sys.argv[1])
+            build_num = int(sys.argv[2])
+            revision_num = int(sys.argv[3])
         except:
             pass
     ret = 0
-    ret = build(build_num)
+    ret = build(major_num, build_num, revision_num)
     if ret != 0:
         sys.exit(ret)
     
-    print '=================================== Release Start ================================='
+    print '============================= Release Start (%d.%d.%d) ============================' % (major_num, build_num, revision_num)
     error_level = 0
     try:
         os.chdir(mcp_dir)
@@ -48,33 +52,34 @@ def main():
         error_level = e.code
     
     version = load_version(build_num)
-        
     out_folder = os.path.join(mcp_dir, 'TFC Build')
-    if os.path.isdir(out_folder):
-        shutil.rmtree(out_folder)
+    if os.path.exists(out_folder):
+        print 'TFC Build already exists. Skipping creation.'
+    else:
+        print 'Creating TFC Build.'
         
-    os.makedirs(out_folder)
+        os.makedirs(out_folder)
     
-    zip_start('TFC-0.77.X.zip')
+    zip_start('TFC-%d.%d.%d.zip' % (major_num, build_num, revision_num))
     zip_folder(client_dir, '', zip)
     zip_add('TFCraft_credits.txt')
     zip_add('license.txt')
     zip_folder(os.path.join(forge_dir, 'TFC Resources'), '', zip)
     zip_end()
     
-    zip_start('TFCraft-src.zip')
-    zip_add('tfc_shared/src',     'src/minecraft')
-    zip_add('patches',          'patches')
+    zip_start('TFC-Dev-%d.%d.%d.zip' % (major_num, build_num, revision_num))
+    zip_folder(os.path.join(forge_dir, 'TFC_Shared/src'), '', zip)
+    zip_folder(os.path.join(forge_dir, 'TFC Resources'), '', zip)
+    zip_folder(os.path.join(forge_dir, 'TFC API'), '', zip)
     zip_add('tfc_credits.txt')
-    zip_add('install/install.cmd')
-    zip_add('install/install.sh')
-    zip_add('install/README.txt')
-    zip_add('install/install.py')
-    zip_add('tfc.py')
     zip_add('license.txt')
     zip_end()
+
+    zip_start('TFC-Dev-API-%d.%d.%d.zip' % (major_num, build_num, revision_num))
+    zip_folder(os.path.join(forge_dir, 'TFC API'), '', zip)
+    zip_end()
     
-    print '=================================== Release Finished %d =================================' % error_level
+    print '============================= Release Finished %d ============================' % error_level
     sys.exit(error_level)
     
     

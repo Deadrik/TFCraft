@@ -18,12 +18,12 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
-import TFC.API.Util.StringUtil;
+import TFC.Core.TFCTabs;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 import com.google.common.collect.HashMultimap;
@@ -59,7 +59,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 
 		if(is.getItem() instanceof ICausesDamage)
 		{
-			arraylist.add(EnumChatFormatting.AQUA + ((ICausesDamage)this).GetDamageType().toString());
+			arraylist.add(EnumChatFormatting.AQUA + StringUtil.localize(((ICausesDamage)this).GetDamageType().toString()));
 		}
 
 		addItemInformation(is, player, arraylist);
@@ -140,10 +140,10 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	}
 
 	@Override
-	public Multimap func_111205_h()
+	public Multimap getItemAttributeModifiers()
 	{
 		Multimap multimap = HashMultimap.create();
-		multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Weapon modifier", this.weaponDamage, 0));
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", this.weaponDamage, 0));
 		return multimap;
 	}
 }

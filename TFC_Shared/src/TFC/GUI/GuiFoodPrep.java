@@ -10,50 +10,51 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.API.Util.StringUtil;
 import TFC.Containers.ContainerFoodPrep;
+import TFC.Core.TFC_Core;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityFoodPrep;
 
 public class GuiFoodPrep extends GuiContainer
 {
 	TileEntityFoodPrep table;
-	
-    public GuiFoodPrep(InventoryPlayer inventoryplayer, TileEntityFoodPrep wb, World world, int i, int j, int k)
-    {
-        super(new ContainerFoodPrep(inventoryplayer, wb,world, i, j, k));
-        table = wb;
-    }
 
-    @Override
+	public GuiFoodPrep(InventoryPlayer inventoryplayer, TileEntityFoodPrep wb, World world, int i, int j, int k)
+	{
+		super(new ContainerFoodPrep(inventoryplayer, wb,world, i, j, k));
+		table = wb;
+	}
+
+	@Override
 	public void onGuiClosed()
-    {
-        super.onGuiClosed();
-    }
+	{
+		super.onGuiClosed();
+	}
 
-    protected void drawGuiContainerForegroundLayer()
-    {
-    	//drawCenteredString(fontRenderer,"Log Pile", 87, 6, 0x000000);
-        //fontRenderer.drawString("Log Pile", 28, 6, 0x404040);
-        fontRenderer.drawString(StringUtil.localize("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
-    }
+	protected void drawGuiContainerForegroundLayer()
+	{
+		//drawCenteredString(fontRenderer,"Log Pile", 87, 6, 0x000000);
+		//fontRenderer.drawString("Log Pile", 28, 6, 0x404040);
+		fontRenderer.drawString(StringUtil.localize("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
+	}
 
-    @Override
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
-    {
-    	this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_foodprep.png"));
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        int l = (width - xSize) / 2;
-        int i1 = (height - ySize) / 2;
-        drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
-    }
-    
-    @Override
+	{
+		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_foodprep.png"));
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		int l = (width - xSize) / 2;
+		int i1 = (height - ySize) / 2;
+		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
+	}
+
+	@Override
 	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
-    {
-        fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
-    }
-    
-    @Override
+	{
+		fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
+	}
+
+	@Override
 	public void initGui()
 	{
 		super.initGui();

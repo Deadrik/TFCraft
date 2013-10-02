@@ -13,13 +13,13 @@ import net.minecraftforge.common.EnumHelper;
 import TFC.API.Armor;
 import TFC.API.Metal;
 import TFC.API.TFCOptions;
-import TFC.API.TFCTabs;
 import TFC.API.Constant.Global;
 import TFC.API.Constant.TFCItemID;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.Recipes;
+import TFC.Core.TFCTabs;
 import TFC.Core.Metal.Alloy;
 import TFC.Core.Metal.AlloyManager;
 import TFC.Core.Metal.MetalRegistry;
@@ -945,23 +945,22 @@ public class TFCItems
 		Item.itemsList[Item.stick.itemID] = null; Item.itemsList[Item.stick.itemID] = new ItemStick(24).setFull3D().setUnlocalizedName("stick");
 		Item.itemsList[Item.leather.itemID] = null; Item.itemsList[Item.leather.itemID] = new ItemTerra(Item.leather.itemID).setFull3D().setUnlocalizedName("leather");
 		Item.itemsList[Block.vine.blockID] = new ItemColored(Block.vine.blockID - 256, false);
-		Item.itemsList[Item.egg.itemID] = new ItemTerra(88).setSize(EnumSize.SMALL).setUnlocalizedName("egg").func_111206_d("egg");
+		Item.itemsList[Item.egg.itemID] = new ItemTerra(88).setSize(EnumSize.SMALL).setUnlocalizedName("egg").setTextureName("egg");
 
-		minecartCrate = (new ItemCustomMinecart(TFCItemID.minecartCrate, 1)).setUnlocalizedName("minecartChest").func_111206_d("minecart_chest");
+		minecartCrate = (new ItemCustomMinecart(TFCItemID.minecartCrate, 1)).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 
-		Item.itemsList[Item.bow.itemID] = null; Item.itemsList[Item.bow.itemID] = (new ItemCustomBow(5)).setUnlocalizedName("bow").func_111206_d("bow");
-		Item.itemsList[63+256] = null; Item.itemsList[63+256] = new ItemTerra(63).setUnlocalizedName("porkchopRaw");
-		Item.itemsList[64+256] = null; Item.itemsList[64+256] = new ItemTerraFood(64, 35, 0.8F, true, 38).setFolder("").setUnlocalizedName("porkchopCooked");
-		Item.itemsList[93+256] = null; Item.itemsList[93+256] = new ItemTerra(93).setUnlocalizedName("fishRaw");
-		Item.itemsList[94+256] = null; Item.itemsList[94+256] = new ItemTerraFood(94, 30, 0.6F, true, 39).setFolder("").setUnlocalizedName("fishCooked");
-		Item.itemsList[107+256] = null; Item.itemsList[107+256] = new ItemTerra(107).setUnlocalizedName("beefRaw");
-		Item.itemsList[108+256] = null; Item.itemsList[108+256] = new ItemTerraFood(108, 40, 0.8F, true, 40).setFolder("").setUnlocalizedName("beefCooked");
-		Item.itemsList[109+256] = null; Item.itemsList[109+256] = new ItemTerra(109).setUnlocalizedName("chickenRaw");
-		Item.itemsList[110+256] = null; Item.itemsList[110+256] = new ItemTerraFood(110, 35, 0.6F, true, 41).setFolder("").setUnlocalizedName("chickenCooked");
+		Item.itemsList[Item.bow.itemID] = null; Item.itemsList[Item.bow.itemID] = (new ItemCustomBow(5)).setUnlocalizedName("bow").setTextureName("bow");
+		Item.itemsList[Item.porkRaw.itemID] = null; Item.itemsList[Item.porkRaw.itemID] = new ItemTerra(63).setUnlocalizedName("porkchopRaw");
+		Item.itemsList[Item.porkCooked.itemID] = null; Item.itemsList[Item.porkCooked.itemID] = new ItemTerraFood(64, 35, 0.8F, true, 38).setFolder("").setUnlocalizedName("porkchopCooked");
+		Item.itemsList[Item.fishRaw.itemID] = null; Item.itemsList[Item.fishRaw.itemID] = new ItemTerra(93).setUnlocalizedName("fishRaw");
+		Item.itemsList[Item.fishCooked.itemID] = null; Item.itemsList[Item.fishCooked.itemID] = new ItemTerraFood(94, 30, 0.6F, true, 39).setFolder("").setUnlocalizedName("fishCooked");
+		Item.itemsList[Item.beefRaw.itemID] = null; Item.itemsList[Item.beefRaw.itemID] = new ItemTerra(107).setUnlocalizedName("beefRaw");
+		Item.itemsList[Item.beefCooked.itemID] = null; Item.itemsList[Item.beefCooked.itemID] = new ItemTerraFood(108, 40, 0.8F, true, 40).setFolder("").setUnlocalizedName("beefCooked");
+		Item.itemsList[Item.chickenRaw.itemID] = null; Item.itemsList[Item.chickenRaw.itemID] = new ItemTerra(109).setUnlocalizedName("chickenRaw");
+		Item.itemsList[Item.chickenCooked.itemID] = null; Item.itemsList[Item.chickenCooked.itemID] = new ItemTerraFood(110, 35, 0.6F, true, 41).setFolder("").setUnlocalizedName("chickenCooked");
 		//Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 25, 0.6F, false, 42)).setFolder("").setUnlocalizedName("bread");
-		Item.itemsList[88+256] = null; Item.itemsList[88+256] = (new ItemTerra(88)).setUnlocalizedName("egg");
-		Item.itemsList[Item.dyePowder.itemID] = null; Item.itemsList[Item.dyePowder.itemID] = new ItemDyeCustom(95).setUnlocalizedName("dyePowder").func_111206_d("dye_powder");
-		Item.itemsList[Item.potion.itemID] = null; Item.itemsList[Item.potion.itemID] = (new ItemCustomPotion(117)).setUnlocalizedName("potion").func_111206_d("potion");
+		Item.itemsList[Item.dyePowder.itemID] = null; Item.itemsList[Item.dyePowder.itemID] = new ItemDyeCustom(95).setUnlocalizedName("dyePowder").setTextureName("dye_powder");
+		Item.itemsList[Item.potion.itemID] = null; Item.itemsList[Item.potion.itemID] = (new ItemCustomPotion(117)).setUnlocalizedName("potion").setTextureName("potion");
 
 		Item.itemsList[Block.tallGrass.blockID] = null; Item.itemsList[Block.tallGrass.blockID] = (new ItemColored(Block.tallGrass.blockID - 256, true)).setBlockNames(new String[] {"shrub", "grass", "fern"});
 
@@ -1410,7 +1409,7 @@ public class TFCItems
 		BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFCItemID.BlueSteelBucketLava, Block.lavaMoving.blockID)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);
 
 		Quern = ((ItemTerra) new ItemTerra(TFCItemID.Quern).setUnlocalizedName("Quern").setMaxDamage(250)).setSize(EnumSize.MEDIUM).setWeight(EnumWeight.HEAVY);
-		FlintSteel = new ItemFlintSteel(TFCItemID.FlintSteel).setUnlocalizedName("flintAndSteel").setMaxDamage(200).func_111206_d("flint_and_steel");
+		FlintSteel = new ItemFlintSteel(TFCItemID.FlintSteel).setUnlocalizedName("flintAndSteel").setMaxDamage(200).setTextureName("flint_and_steel");
 
 		DoorOak = new ItemWoodDoor(TFCItemID.DoorOak, 0).setUnlocalizedName("Oak Door");
 		DoorAspen = new ItemWoodDoor(TFCItemID.DoorAspen, 1).setUnlocalizedName("Aspen Door");
@@ -1946,10 +1945,10 @@ public class TFCItems
 		TFCItems.SilverSheet2x = 			new ItemMetalSheet2x(TFCItemID.SilverSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
 		TFCItems.SterlingSilverSheet2x = 	new ItemMetalSheet2x(TFCItemID.SterlingSilverSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
 
-		Item.itemsList[Item.helmetLeather.itemID] = null; Item.itemsList[Item.helmetLeather.itemID] = new ItemTFCArmor(Item.helmetLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 0, EnumArmorMaterial.CLOTH).setUnlocalizedName("helmetCloth").func_111206_d("leather_helmet");
-		Item.itemsList[Item.plateLeather.itemID] = null; Item.itemsList[Item.plateLeather.itemID] = new ItemTFCArmor(Item.plateLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 1, EnumArmorMaterial.CLOTH).setUnlocalizedName("chestplateCloth").func_111206_d("leather_chestplate");
-		Item.itemsList[Item.legsLeather.itemID] = null; Item.itemsList[Item.legsLeather.itemID] = new ItemTFCArmor(Item.legsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 2, EnumArmorMaterial.CLOTH).setUnlocalizedName("leggingsCloth").func_111206_d("leather_leggings");
-		Item.itemsList[Item.bootsLeather.itemID] = null; Item.itemsList[Item.bootsLeather.itemID] = new ItemTFCArmor(Item.bootsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 3, EnumArmorMaterial.CLOTH).setUnlocalizedName("bootsCloth").func_111206_d("leather_boots");
+		Item.itemsList[Item.helmetLeather.itemID] = null; Item.itemsList[Item.helmetLeather.itemID] = new ItemTFCArmor(Item.helmetLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 0, EnumArmorMaterial.CLOTH).setUnlocalizedName("helmetCloth").setTextureName("leather_helmet");
+		Item.itemsList[Item.plateLeather.itemID] = null; Item.itemsList[Item.plateLeather.itemID] = new ItemTFCArmor(Item.plateLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 1, EnumArmorMaterial.CLOTH).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate");
+		Item.itemsList[Item.legsLeather.itemID] = null; Item.itemsList[Item.legsLeather.itemID] = new ItemTFCArmor(Item.legsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 2, EnumArmorMaterial.CLOTH).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings");
+		Item.itemsList[Item.bootsLeather.itemID] = null; Item.itemsList[Item.bootsLeather.itemID] = new ItemTFCArmor(Item.bootsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 3, EnumArmorMaterial.CLOTH).setUnlocalizedName("bootsCloth").setTextureName("leather_boots");
 	}
 
 	public static Item[] Meals;

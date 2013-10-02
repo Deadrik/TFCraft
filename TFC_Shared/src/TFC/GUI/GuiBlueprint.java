@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StringTranslate;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -22,7 +21,8 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
-import TFC.API.Util.StringUtil;
+import TFC.Core.TFC_Core;
+import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
 
 public class GuiBlueprint extends GuiScreen
@@ -165,9 +165,9 @@ public class GuiBlueprint extends GuiScreen
 	}
 
 	@Override
-    public void drawScreen(int par1, int par2, float par3)
-    {
-		this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_blueprint.png"));
+	public void drawScreen(int par1, int par2, float par3)
+	{
+		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_blueprint.png"));
 
 		int var4 = this.guiLeft;
 		int var5 = this.guiTop;
@@ -179,7 +179,7 @@ public class GuiBlueprint extends GuiScreen
 
 		drawCenteredString(fontRenderer,StringUtil.localize("gui.Blueprint"), this.width / 2, i1+8, 0x000000);
 		this.theGuiTextField.drawTextBox();
-		
+
 		super.drawScreen(par1, par2, par3);
 
 	}

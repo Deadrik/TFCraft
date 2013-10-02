@@ -15,11 +15,11 @@ public class EntitySpiderTFC extends EntitySpider implements ICausesDamage
 	}
 
 	@Override
-	protected void func_110147_ax()
+	protected void applyEntityAttributes()
 	{
-		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobData.SpiderDamage);
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.SpiderHealth);//MaxHealth
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(TFC_MobData.SpiderDamage);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(TFC_MobData.SpiderHealth);//MaxHealth
 	}
 
 	@Override

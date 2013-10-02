@@ -17,9 +17,9 @@ import net.minecraft.network.packet.Packet;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
-import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
+import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
 

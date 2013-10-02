@@ -11,8 +11,9 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.TFCItems;
-import TFC.API.Util.StringUtil;
 import TFC.Containers.ContainerScribe;
+import TFC.Core.TFC_Core;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityScribe;
 
 
@@ -58,10 +59,10 @@ public class GuiScribe extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_scribe.png"));
+		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_scribe.png"));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		int w = (width - xSize) / 2;
-        int h = (height - ySize) / 2;
+		int h = (height - ySize) / 2;
 		drawTexturedModalRect(w, h, 0, 0, 175, 183);
 
 	}

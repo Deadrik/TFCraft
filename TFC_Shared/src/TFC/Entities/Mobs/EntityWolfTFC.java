@@ -81,10 +81,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 
 
 	@Override
-	protected void func_110147_ax()
+	protected void applyEntityAttributes()
 	{
-		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.WolfHealth);//MaxHealth
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(TFC_MobData.WolfHealth);//MaxHealth
 	}
 
 	@Override
@@ -185,7 +185,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
-		if (hunger > 144000 && rand.nextInt (100) == 0 && func_110143_aJ() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
 		{
 			this.heal(1);
 		}
@@ -201,7 +201,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 			}
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(21);
-				size_mod = this.dataWatcher.func_111145_d(22);
+				size_mod = this.dataWatcher.getWatchableObjectFloat(22);
 			}
 		}
 	}
@@ -210,7 +210,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@SideOnly(Side.CLIENT)
 	public float getTailRotation()
 	{
-		return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (1000.0F - this.dataWatcher.func_111145_d(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
+		return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (1000.0F - this.dataWatcher.getWatchableObjectFloat(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
 	}
 
 	@Override
@@ -364,7 +364,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	}
 	@Override
 	public int getSex() {
-		return dataWatcher.getWatchableObjectInt(13);
+		return dataWatcher.getWatchableObjectInt(21);
 	}
 
 

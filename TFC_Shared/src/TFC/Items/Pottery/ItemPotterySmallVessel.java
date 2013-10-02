@@ -3,6 +3,7 @@ package TFC.Items.Pottery;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,12 +16,12 @@ import TFC.API.ISmeltable;
 import TFC.API.Metal;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Core.Metal.Alloy;
 import TFC.Core.Metal.AlloyManager;
 import TFC.Core.Metal.AlloyMetal;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemOre;
 import TFC.Items.ItemOreSmall;
 
@@ -32,6 +33,12 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		super(id);
 		this.MetaNames = new String[]{"Clay Vessel", "Ceramic Vessel", "Ceramic Vessel"};
 		this.setMaxStackSize(1);
+	}
+
+	@Override
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
+	{
+		list.add(new ItemStack(this,1,0));
 	}
 
 	@Override
@@ -172,7 +179,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					Alloy output = new Alloy(match, total); 
 					NBTTagCompound tag = is.stackTagCompound;
 					tag.setString("MetalType", output.outputType.Name);
-					tag.setInteger("MetalAmount", output.outputAmount);
+					tag.setInteger("MetalAmount", (int)output.outputAmount);
 					long totalH =  TFC_Time.getTotalHours();
 					tag.setLong("TempTimer", totalH);
 					is.getTagCompound().removeTag("Items");
