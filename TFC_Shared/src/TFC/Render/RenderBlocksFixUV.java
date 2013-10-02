@@ -4,12 +4,24 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
+import TFC.Core.TFC_Time;
 
 public class RenderBlocksFixUV extends RenderBlocks
 {
-	public RenderBlocksFixUV(RenderBlocks old) {
+	private long lastUpdate = 0;
+	public RenderBlocksFixUV(RenderBlocks old) 
+	{
 		this.blockAccess = old.blockAccess;
+		lastUpdate = TFC_Time.getTotalTicks();
 		//this.minecraftRB = Minecraft.getMinecraft();
+	}
+
+	public void update(RenderBlocks old)
+	{
+		if(TFC_Time.getTotalTicks() > lastUpdate+10)
+		{
+			this.blockAccess = old.blockAccess;
+		}
 	}
 
 	@Override
