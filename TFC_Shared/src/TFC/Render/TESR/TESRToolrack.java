@@ -1,48 +1,19 @@
-package TFC.Render;
+package TFC.Render.TESR;
 
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
 import TFC.TileEntities.TileEntityToolRack;
 
-import com.google.common.primitives.SignedBytes;
-
-public class TESRToolrack extends TileEntitySpecialRenderer
+public class TESRToolrack extends TESRBase
 {
-	private RenderBlocks renderBlocks;
-	private RenderItem itemRenderer;
-	private ModelRenderer modelRenderer;
 
 	public TESRToolrack()
 	{
-		renderBlocks = new RenderBlocks();
-		itemRenderer = new RenderItem() {
-			@Override
-			public byte getMiniBlockCount(ItemStack stack) {
-				return SignedBytes.saturatedCast(Math.min(stack.stackSize / 32, 15) + 1);
-			}
-			@Override
-			public byte getMiniItemCount(ItemStack stack) {
-				return SignedBytes.saturatedCast(Math.min(stack.stackSize / 32, 7) + 1);
-			}
-			@Override
-			public boolean shouldBob() {
-				return true;
-			}
-			@Override
-			public boolean shouldSpreadItems() {
-				return false;
-			}
-		};
-		itemRenderer.setRenderManager(RenderManager.instance);
+
 	}
 
 	/**

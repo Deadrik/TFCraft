@@ -1,10 +1,9 @@
-package TFC.Items;
+package TFC.Items.ItemBlocks;
 
 import net.minecraft.item.ItemStack;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.Items.ItemBlocks.ItemTerraBlock;
 
 public class ItemToolRack extends ItemTerraBlock
 {	

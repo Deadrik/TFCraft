@@ -1,7 +1,6 @@
-package TFC.Render;
+package TFC.Render.TESR;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
@@ -12,7 +11,7 @@ import TFC.Core.TFC_Core;
 import TFC.Render.Models.ModelIngotPile;
 import TFC.TileEntities.TileEntityIngotPile;
 
-public class TileEntityIngotPileRenderer extends TileEntitySpecialRenderer
+public class TESRIngotPile extends TESRBase
 {
 	/** The normal small chest model. */
 	private final ModelIngotPile ingotModel = new ModelIngotPile();

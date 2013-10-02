@@ -1,12 +1,7 @@
-package TFC.Render;
+package TFC.Render.TESR;
 
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
@@ -15,38 +10,14 @@ import TFC.TFCItems;
 import TFC.Render.Models.ModelUrn;
 import TFC.TileEntities.TileEntityPottery;
 
-import com.google.common.primitives.SignedBytes;
-
-public class TileEntityPotteryRenderer extends TileEntitySpecialRenderer
+public class TESRPottery extends TESRBase
 {
-	private RenderBlocks renderBlocks;
 	private ModelUrn urnModel;
-    private RenderItem itemRenderer;
-    private ModelRenderer modelRenderer;
 
-    public TileEntityPotteryRenderer()
-    {
-    	renderBlocks = new RenderBlocks();
-        itemRenderer = new RenderItem() {
-            @Override
-            public byte getMiniBlockCount(ItemStack stack) {
-                return SignedBytes.saturatedCast(Math.min(stack.stackSize / 32, 15) + 1);
-            }
-            @Override
-            public byte getMiniItemCount(ItemStack stack) {
-                return SignedBytes.saturatedCast(Math.min(stack.stackSize / 32, 7) + 1);
-            }
-            @Override
-            public boolean shouldBob() {
-                return true;
-            }
-            @Override
-            public boolean shouldSpreadItems() {
-                return false;
-            }
-        };
-        itemRenderer.setRenderManager(RenderManager.instance);
-    }
+	public TESRPottery()
+	{
+
+	}
 
 	/**
 	 * Renders the TileEntity for the chest at a position.
@@ -62,7 +33,7 @@ public class TileEntityPotteryRenderer extends TileEntitySpecialRenderer
 			EntityItem customitem = new EntityItem(tileEntityRenderer.worldObj);			
 			customitem.hoverStart = 0f;
 			float blockScale = 1.0F;
-            float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+			float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 			for(int i = 0; i < 4; i++)
 			{
 				float offsetX = 0.25f; 
@@ -83,7 +54,7 @@ public class TileEntityPotteryRenderer extends TileEntitySpecialRenderer
 					offsetX = 0.75f; 
 					offsetZ = 0.75f;
 				}
-				
+
 				if (te.getStackInSlot(i) != null && te.getStackInSlot(i).itemID != TFCItems.PotteryLargeVessel.itemID)
 				{
 					GL11.glPushMatrix(); //start
@@ -96,7 +67,7 @@ public class TileEntityPotteryRenderer extends TileEntitySpecialRenderer
 					customitem.setEntityItemStack(te.getStackInSlot(i));
 					itemRenderer.doRenderItem(customitem, 0, 0, 0, 0, 0);
 					GL11.glPopMatrix(); //end
-					
+
 				}
 				/**
 				 * Commented out until Large Vessels are implemented
@@ -110,7 +81,7 @@ public class TileEntityPotteryRenderer extends TileEntitySpecialRenderer
 					GL11.glPopMatrix(); //end
 				}*/
 			}
-			
+
 		}
 	}
 

@@ -75,12 +75,6 @@ import TFC.Render.RenderSkeletonTFC;
 import TFC.Render.RenderSquidTFC;
 import TFC.Render.RenderTerraJavelin;
 import TFC.Render.RenderWolfTFC;
-import TFC.Render.TESRToolrack;
-import TFC.Render.TileEntityBellowsRenderer;
-import TFC.Render.TileEntityChestRendererTFC;
-import TFC.Render.TileEntityFoodPrepRenderer;
-import TFC.Render.TileEntityIngotPileRenderer;
-import TFC.Render.TileEntityPotteryRenderer;
 import TFC.Render.Blocks.RenderAnvil;
 import TFC.Render.Blocks.RenderBarrel;
 import TFC.Render.Blocks.RenderBellows;
@@ -104,6 +98,14 @@ import TFC.Render.Models.ModelSheep1TFC;
 import TFC.Render.Models.ModelSheep2TFC;
 import TFC.Render.Models.ModelSquidTFC;
 import TFC.Render.Models.ModelWolfTFC;
+import TFC.Render.TESR.TESRAnvil;
+import TFC.Render.TESR.TESRToolrack;
+import TFC.Render.TESR.TESRBellows;
+import TFC.Render.TESR.TESRChest;
+import TFC.Render.TESR.TESRFoodPrep;
+import TFC.Render.TESR.TESRIngotPile;
+import TFC.Render.TESR.TESRPottery;
+import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFoodPrep;
@@ -218,13 +220,14 @@ public class ClientProxy extends CommonProxy
 	public void registerTileEntities(boolean b)
 	{
 		super.registerTileEntities(false);
-		ClientRegistry.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
-		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TileEntityIngotPileRenderer());
+		ClientRegistry.registerTileEntity(TileEntityChestTFC.class, "chest", new TESRChest());
+		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TESRIngotPile());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
-		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TileEntityPotteryRenderer());
-		ClientRegistry.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep", new TileEntityFoodPrepRenderer());
-		ClientRegistry.registerTileEntity(TileEntityBellows.class, "Bellows", new TileEntityBellowsRenderer());
+		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TESRPottery());
+		ClientRegistry.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep", new TESRFoodPrep());
+		ClientRegistry.registerTileEntity(TileEntityBellows.class, "Bellows", new TESRBellows());
 		ClientRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack", new TESRToolrack());
+		ClientRegistry.registerTileEntity(TileEntityAnvil.class, "Anvil", new TESRAnvil());
 	}
 
 	@Override

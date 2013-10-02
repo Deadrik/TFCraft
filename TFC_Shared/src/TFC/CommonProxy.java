@@ -100,7 +100,7 @@ public class CommonProxy
 
 		GameRegistry.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
 		GameRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit");
-		GameRegistry.registerTileEntity(TileEntityAnvil.class, "TerraAnvil");
+
 		GameRegistry.registerTileEntity(TileEntityScribe.class, "TerraScribe");
 		GameRegistry.registerTileEntity(TileEntityForge.class, "TerraForge");
 		GameRegistry.registerTileEntity(TileEntityMetallurgy.class, "TerraMetallurgy");
@@ -137,6 +137,7 @@ public class CommonProxy
 			GameRegistry.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep");
 			GameRegistry.registerTileEntity(TileEntityBellows.class, "Bellows");
 			GameRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack");
+			GameRegistry.registerTileEntity(TileEntityAnvil.class, "TerraAnvil");
 		}
 
 		EntityRegistry.registerGlobalEntityID(EntityWolfTFC.class, "Wolf", ModLoader.getUniqueEntityId(), 0xffffff, 0xaaaaaa);
