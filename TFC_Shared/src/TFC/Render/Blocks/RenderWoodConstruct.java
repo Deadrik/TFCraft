@@ -22,6 +22,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 			Block block, int modelId, RenderBlocks renderer)
 	{
 		renderOld(i, j, k, block, renderer);
+
 		return true;
 	}
 
