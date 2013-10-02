@@ -3,13 +3,17 @@ package TFC.Render;
 import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED;
 import static net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D;
 import net.minecraft.block.Block;
+import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumArmorMaterial;
@@ -24,10 +28,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.opengl.GL11;
 
 import TFC.TFCItems;
+import TFC.Entities.EntityStand;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -90,6 +97,74 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
         HornR1.addChild(HornR2);
         HornL1.addChild(HornL2);
     }
+    
+    @Override
+    protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
+    {
+    	if(par1EntityLivingBase instanceof EntityStand){
+    		return this.setArmorModelTFC((EntityStand)par1EntityLivingBase, par2, par3);
+    	}
+    	return this.setArmorModel((AbstractClientPlayer)par1EntityLivingBase, par2, par3);
+    }
+    
+    protected int setArmorModelTFC(EntityStand stand, int par2, float par3)
+    {
+        ItemStack itemstack = stand.getCurrentItemOrArmor(3 - par2);
+
+        if (itemstack != null)
+        {
+            Item item = itemstack.getItem();
+
+            if (item instanceof ItemArmor)
+            {
+                ItemArmor itemarmor = (ItemArmor)item;
+                this.bindTexture(RenderBiped.getArmorResource(stand, itemstack, par2, null));
+                ModelBiped modelbiped = par2 == 2 ? this.modelArmor : this.modelArmorChestplate;
+                modelbiped.bipedHead.showModel = par2 == 0;
+                modelbiped.bipedHeadwear.showModel = par2 == 0;
+                modelbiped.bipedBody.showModel = par2 == 1 || par2 == 2;
+                modelbiped.bipedRightArm.showModel = par2 == 1;
+                modelbiped.bipedLeftArm.showModel = par2 == 1;
+                modelbiped.bipedRightLeg.showModel = par2 == 2 || par2 == 3;
+                modelbiped.bipedLeftLeg.showModel = par2 == 2 || par2 == 3;
+                modelbiped = ForgeHooksClient.getArmorModel(stand, itemstack, par2, modelbiped);
+                this.setRenderPassModel(modelbiped);
+                modelbiped.onGround = this.mainModel.onGround;
+                modelbiped.isRiding = this.mainModel.isRiding;
+                modelbiped.isChild = this.mainModel.isChild;
+                float f1 = 1.0F;
+
+                //Move outside if to allow for more then just CLOTH
+                int j = itemarmor.getColor(itemstack);
+                if (j != -1)
+                {
+                    float f2 = (float)(j >> 16 & 255) / 255.0F;
+                    float f3 = (float)(j >> 8 & 255) / 255.0F;
+                    float f4 = (float)(j & 255) / 255.0F;
+                    GL11.glColor3f(f1 * f2, f1 * f3, f1 * f4);
+
+                    if (itemstack.isItemEnchanted())
+                    {
+                        return 31;
+                    }
+
+                    return 16;
+                }
+
+                GL11.glColor3f(f1, f1, f1);
+
+                if (itemstack.isItemEnchanted())
+                {
+                    return 15;
+                }
+
+                return 1;
+            }
+        }
+
+        return -1;
+    }
+    
 
     /*@Override
 	protected void func_98191_a(EntityPlayer par1EntityPlayer)

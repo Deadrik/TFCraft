@@ -19,6 +19,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Core.Util.StringUtil;
@@ -187,9 +188,14 @@ public class BlockCustomBed extends BlockDirectional
 	 */
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.bedTopIcons = new Icon[] {par1IconRegister.registerIcon(this.getItemIconName() + "_feet_top"), par1IconRegister.registerIcon(this.getItemIconName() + "_head_top")};
-		this.field_94472_b = new Icon[] {par1IconRegister.registerIcon(this.getItemIconName() + "_feet_end"), par1IconRegister.registerIcon(this.getItemIconName() + "_head_end")};
-		this.bedSideIcons = new Icon[] {par1IconRegister.registerIcon(this.getItemIconName() + "_feet_side"), par1IconRegister.registerIcon(this.getItemIconName() + "_head_side")};
+		this.bedTopIcons = new Icon[] {par1IconRegister.registerIcon(Reference.ModID + ":" + this.getItemIconName() + "_feet_top"), par1IconRegister.registerIcon(Reference.ModID + ":" + this.getItemIconName() + "_head_top")};
+		this.field_94472_b = new Icon[] {par1IconRegister.registerIcon(Reference.ModID + ":" + this.getItemIconName() + "_feet_end"), par1IconRegister.registerIcon(Reference.ModID + ":" + this.getItemIconName() + "_head_end")};
+		this.bedSideIcons = new Icon[] {par1IconRegister.registerIcon(Reference.ModID + ":" + this.getItemIconName() + "_feet_side"), par1IconRegister.registerIcon(Reference.ModID + ":" + this.getItemIconName() + "_head_side")};
+	}
+	
+	@Override
+	public String getItemIconName(){
+		return "straw bed";
 	}
 
 	/**
