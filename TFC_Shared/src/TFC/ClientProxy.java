@@ -75,6 +75,7 @@ import TFC.Render.RenderSkeletonTFC;
 import TFC.Render.RenderSquidTFC;
 import TFC.Render.RenderTerraJavelin;
 import TFC.Render.RenderWolfTFC;
+import TFC.Render.TESRToolrack;
 import TFC.Render.TileEntityBellowsRenderer;
 import TFC.Render.TileEntityChestRendererTFC;
 import TFC.Render.TileEntityFoodPrepRenderer;
@@ -108,6 +109,7 @@ import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TileEntityPottery;
+import TFC.TileEntities.TileEntityToolRack;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
@@ -222,6 +224,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TileEntityPotteryRenderer());
 		ClientRegistry.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep", new TileEntityFoodPrepRenderer());
 		ClientRegistry.registerTileEntity(TileEntityBellows.class, "Bellows", new TileEntityBellowsRenderer());
+		ClientRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack", new TESRToolrack());
 	}
 
 	@Override

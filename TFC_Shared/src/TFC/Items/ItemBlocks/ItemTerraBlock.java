@@ -44,8 +44,15 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack)
 	{
-		if(MetaNames != null) {
-			return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
+		try
+		{
+			if(MetaNames != null) {
+				return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
+			}
+		}
+		catch(Exception ex)
+		{
+			System.out.println(ex.getLocalizedMessage());
 		}
 		return super.getUnlocalizedName(itemstack);
 	}
