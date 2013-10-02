@@ -109,6 +109,7 @@ public class WorldGenDouglasFir extends WorldGenerator
 				for (int l4 = par5-x; l4 <= par5 +x; l4++)
 				{
 					int i5 = l4 - par5;
+					id = world.getBlockId(l3, k1, l4);
 					if ((Math.abs(j4) != 0 || Math.abs(i5) != 0 && k2 != 0) && 
 							(Math.abs(j4) + Math.abs(i5)!=x*2 || (k1-par4>i/2&&k1-par4<(4*i/5)) || 
 							k1-par4-(i/3)+2==2) && (par2Random.nextInt(12)!=0) && id == 0)
