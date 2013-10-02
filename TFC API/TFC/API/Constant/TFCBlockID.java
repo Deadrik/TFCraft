@@ -124,6 +124,7 @@ public class TFCBlockID
 	public static int Fence						= 2113;
 	public static int FenceGate					= 2114;
 	public static int StrawHideBed				= 2115;
+	public static int ArmourStand				= 2116;
 
 
 	static Configuration config;

@@ -40,6 +40,7 @@ import TFC.Blocks.Devices.BlockQuern;
 import TFC.Blocks.Devices.BlockScribe;
 import TFC.Blocks.Devices.BlockSluice;
 import TFC.Blocks.Devices.BlockSpawnMeter;
+import TFC.Blocks.Devices.BlockStand;
 import TFC.Blocks.Devices.BlockToolRack;
 import TFC.Blocks.Terrain.BlockDryGrass;
 import TFC.Blocks.Terrain.BlockIgEx;
@@ -104,6 +105,7 @@ public class TFCBlocks
 	public static int FirepitRenderId;
 	public static int AnvilRenderId;
 	public static int barrelRenderId;
+	public static int standRenderId;
 	public static int FenceRenderId;
 	public static int FenceGateRenderId;
 	public static int NestBoxRenderId;
@@ -235,6 +237,8 @@ public class TFCBlocks
 	public static Block FenceGate;
 	
 	public static Block StrawHideBed;
+	
+	public static Block ArmourStand;
 
 	public static void RegisterBlocks()
 	{
@@ -353,6 +357,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Fence,TFC.Items.ItemBlocks.ItemFence.class,"Fence");
 		GameRegistry.registerBlock(FenceGate,TFC.Items.ItemBlocks.ItemFenceGate.class,"FenceGate");
 		GameRegistry.registerBlock(StrawHideBed,"StrawHideBed");
+		GameRegistry.registerBlock(ArmourStand,TFC.Items.ItemBlocks.ItemArmourStand.class,"ArmourStand");
 	}
 
 	public static void LoadBlocks()
@@ -544,6 +549,7 @@ public class TFCBlocks
 		TFCBlocks.Fence = new BlockCustomFence(TFCBlockID.Fence,"Fence",Material.wood).setUnlocalizedName("FenceTFC").setHardness(2);
 		TFCBlocks.FenceGate = new BlockCustomFenceGate(TFCBlockID.FenceGate).setUnlocalizedName("FenceGateTFC").setHardness(2);
 		TFCBlocks.StrawHideBed = new BlockCustomBed(TFCBlockID.StrawHideBed).setUnlocalizedName("StrawHideBed").setHardness(1);
+		TFCBlocks.ArmourStand = new BlockStand(TFCBlockID.ArmourStand).setUnlocalizedName("ArmourStand").setHardness(2);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

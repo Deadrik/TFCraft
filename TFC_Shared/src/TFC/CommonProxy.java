@@ -17,6 +17,7 @@ import TFC.Entities.EntityFallingDirt;
 import TFC.Entities.EntityFallingStone;
 import TFC.Entities.EntityJavelin;
 import TFC.Entities.EntityProjectileTFC;
+import TFC.Entities.EntityStand;
 import TFC.Entities.Mobs.EntityBear;
 import TFC.Entities.Mobs.EntityBlazeTFC;
 import TFC.Entities.Mobs.EntityCaveSpiderTFC;
@@ -157,6 +158,8 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntityIronGolemTFC.class, "irongolem", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityCreeperTFC.class, "Creeper", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityProjectileTFC.class, "arrow", ModLoader.getUniqueEntityId());
+		EntityRegistry.registerGlobalEntityID(EntityStand.class, "stand", ModLoader.getUniqueEntityId());
+		
 
 		EntityRegistry.registerModEntity(EntityJavelin.class, "javelin", 1,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntitySquidTFC.class, "squid", 2,TerraFirmaCraft.instance, 160, 5, true);

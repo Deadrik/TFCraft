@@ -90,6 +90,7 @@ import TFC.Render.Blocks.RenderNestBox;
 import TFC.Render.Blocks.RenderOre;
 import TFC.Render.Blocks.RenderPottery;
 import TFC.Render.Blocks.RenderQuern;
+import TFC.Render.Blocks.RenderStand;
 import TFC.Render.Blocks.RenderSupportBeam;
 import TFC.Render.Blocks.RenderToolRack;
 import TFC.Render.Blocks.RenderTuyere;
@@ -184,6 +185,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.fluidRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.barrelRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBarrel());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.standRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderStand());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.NestBoxRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderNestBox());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.potteryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPottery());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.tuyereRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTuyere());
