@@ -112,7 +112,7 @@ public class BlockCustomFlowing extends BlockFlowing
 				{
 					var10 = 0;
 				}
-				else if (par1World.getBlockMaterial(par2, par3 - 1, par4) == this.blockMaterial && par1World.getBlockMetadata(par2, par3, par4) == 0)
+				else if (par1World.getBlockMaterial(par2, par3 - 1, par4) == this.blockMaterial && par1World.getBlockMetadata(par2, par3 - 1, par4) == 0)
 				{
 					var10 = 0;
 				}

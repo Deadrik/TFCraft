@@ -41,8 +41,9 @@ public class EntityAIMateTFC extends EntityAIBase
 		{
 			targetMate = getLocalMate();
 			if (targetMate != null){
-				if ((targetMate.getGender() ==  theAnimal.getGender()) 
-						|| (theAnimal.isPregnant() || targetMate.isPregnant())){
+				if (targetMate.getGender() == theAnimal.getGender() || 
+						theAnimal.isPregnant() || targetMate.isPregnant())
+				{
 					return false;
 				}
 			}
@@ -80,12 +81,11 @@ public class EntityAIMateTFC extends EntityAIBase
 	@Override
 	public void updateTask ()
 	{
-		theAnimal.getEntity().getLookHelper().setLookPositionWithEntity(targetMate.getEntity(), 10F, 
-				theAnimal.getEntity().getVerticalFaceSpeed());
+		theAnimal.getEntity().getLookHelper().setLookPositionWithEntity(targetMate.getEntity(), 10F, theAnimal.getEntity().getVerticalFaceSpeed());
 		theAnimal.getEntity().getNavigator().tryMoveToEntityLiving(targetMate.getEntity(), field_48262_c);
 		matingCounter++;
 
-		if (matingCounter == 60)
+		if (matingCounter >= 60 && theAnimal.getEntity().getDistanceSqToEntity(this.targetMate.getEntity()) < 9.0D)
 		{
 			theAnimal.mate(targetMate);
 		}

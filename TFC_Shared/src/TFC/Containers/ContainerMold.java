@@ -2,6 +2,7 @@ package TFC.Containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
@@ -88,6 +89,17 @@ public class ContainerMold extends ContainerTFC {
 		}
 	}
 
+
+	@Override
+	public void updateProgressBar(int id, int value)
+	{
+		if (id == 0)
+		{
+			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+			pi.moldTransferTimer = (short) value;
+		}
+	}
+
 	@Override
 	public void detectAndSendChanges()
 	{
@@ -95,6 +107,8 @@ public class ContainerMold extends ContainerTFC {
 		if(craftResult.getStackInSlot(0) == null)
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+
+			short oldTransferTimer = pi.moldTransferTimer;
 
 			if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null)
 			{
@@ -154,7 +168,18 @@ public class ContainerMold extends ContainerTFC {
 				containerInv.setInventorySlotContents(1, new ItemStack(TFCItems.CeramicMold, 1, 1));
 				containerInv.setInventorySlotContents(0, null);
 			}
+
+			for (int var1 = 0; var1 < this.crafters.size(); ++var1)
+			{
+				ICrafting var2 = (ICrafting)this.crafters.get(var1);
+				if (pi.moldTransferTimer != oldTransferTimer)
+				{
+					var2.sendProgressBarUpdate(this, 0, pi.moldTransferTimer);
+				}
+			}
 		}
+
+
 	}
 
 	@Override

@@ -125,14 +125,6 @@ public class BlockCrucible extends BlockTerraContainer
 
 		nbt.setTag("Items", nbttaglist);
 
-		if(te.currentAlloy != null)
-		{
-			nbt.setInteger("outputAmount", te.currentAlloy.outputAmount);
-		}
-		else
-		{
-			nbt.setInteger("outputAmount", 0);
-		}
 		return nbt;
 	}
 

@@ -41,7 +41,7 @@ public class GuiMold extends GuiContainer
 		int h = (height - ySize) / 2;
 		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
 
-		drawTexturedModalRect(w+85, h+17, 176, 0, drawArrowScaled(21)+1, 15);
+		drawTexturedModalRect(w+85, h+17, 176, 0, drawArrowScaled(22)+1, 15);
 	}
 
 	private int drawArrowScaled(int scale)

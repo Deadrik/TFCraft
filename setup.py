@@ -8,7 +8,7 @@ mcp_dir = os.path.abspath('..')
 src_dir = os.path.join(mcp_dir, 'src')
 
 sys.path.append(mcp_dir)
-from tfc import apply_patches, copytree
+from base import apply_patches, copytree
 
 
 def main():

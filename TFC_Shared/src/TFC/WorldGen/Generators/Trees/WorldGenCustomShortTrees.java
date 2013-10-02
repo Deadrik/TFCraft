@@ -2,42 +2,13 @@ package TFC.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
-import TFC.*;
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenCustomShortTrees extends WorldGenerator
 {
@@ -48,6 +19,7 @@ public class WorldGenCustomShortTrees extends WorldGenerator
 		super(flag);
 		treeId=id;
 	}
+	@Override
 	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		int l = random.nextInt(3) + 4;
@@ -114,7 +86,7 @@ public class WorldGenCustomShortTrees extends WorldGenerator
 					int j4 = i4 - zCoord;
 					int id = world.getBlockId(k3, k1, i4);
 					if ((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0) && 
-							!Block.opaqueCubeLookup[id])
+							id == 0)
 					{
 						setBlockAndMetadata(world, k3, k1, i4, TFCBlocks.Leaves.blockID, treeId);
 					}
