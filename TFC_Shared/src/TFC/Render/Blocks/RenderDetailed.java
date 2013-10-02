@@ -10,6 +10,7 @@ import TFC.TileEntities.TileEntityDetailed;
 public class RenderDetailed 
 {
 	private static RenderBlocksFixUV renderer;
+
 	public static boolean renderBlockDetailed(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		TileEntityDetailed te = (TileEntityDetailed) renderblocks.blockAccess.getBlockTileEntity(i, j, k);
@@ -18,6 +19,10 @@ public class RenderDetailed
 		if(renderer == null)
 		{
 			renderer = new RenderBlocksFixUV(renderblocks);
+		}
+		else
+		{
+			renderer.update(renderblocks);
 		}
 
 		if(te.TypeID <= 0)
