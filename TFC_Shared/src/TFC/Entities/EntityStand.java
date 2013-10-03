@@ -19,16 +19,16 @@ public class EntityStand extends EntityLiving
 	public EntityStand(World par1World)
 	{
 		super(par1World);
-		setSize(0.5f,2f);
+		setSize(0.25f,2f);
 		this.setHealth(1);
 	}
 
 	public EntityStand(World par1World, TEStand TE){
 		this(par1World);
 		standTE = TE;
-		posX = TE.xCoord;
+		posX = TE.xCoord+0.5;
 		posY = TE.yCoord;
-		posZ = TE.zCoord;
+		posZ = TE.zCoord+0.5;
 	}
 
 	@Override
@@ -39,12 +39,11 @@ public class EntityStand extends EntityLiving
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-
 	}
 
 	@Override
 	public void moveEntity(double d1,double d2,double d3){
-
+	this.isCollided = false;
 	}
 
 	@Override
@@ -55,8 +54,18 @@ public class EntityStand extends EntityLiving
 				setDead();
 			}
 		}
-		this.rotationYaw = ((int)(((standTE.yaw-225)%360)/90))*90F;
-		this.rotationYawHead = this.rotationYaw;
+		if(standTE != null){
+			this.rotationYaw = ((int)(standTE.yaw/90))*90 - 180;
+			this.rotationYawHead = this.rotationYaw;
+			this.posX = standTE.xCoord + 0.5;
+			this.posZ = standTE.zCoord + 0.5;
+		}
+		float lookX;
+		float lookZ;
+		lookZ = -MathHelper.cos(this.rotationYaw);
+		lookX = MathHelper.sin(this.rotationYaw);
+		//this.getLookHelper().setLookPosition(this.posX + lookX, this.posY + (double)this.getEyeHeight(), this.posZ + lookZ, 10.0F, (float)this.getVerticalFaceSpeed());
+		//this.getNavigator().tryMoveToXYZ(this.posX + lookX, this.posY, this.posZ + lookZ, 0.5);
 	}
 
 	@Override
@@ -66,16 +75,18 @@ public class EntityStand extends EntityLiving
 	}
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
-		posX = nbttagcompound.getDouble("X");
-		posY = nbttagcompound.getDouble("Y");
-		posZ = nbttagcompound.getDouble("Z");
+		super.readEntityFromNBT(nbttagcompound);
+		//posX = nbttagcompound.getDouble("X");
+		//posY = nbttagcompound.getDouble("Y");
+		//posZ = nbttagcompound.getDouble("Z");
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
-		nbttagcompound.setDouble("X", posX);
-		nbttagcompound.setDouble("Y", posY);
-		nbttagcompound.setDouble("Z", posZ);
+		super.writeEntityToNBT(nbttagcompound);
+		//nbttagcompound.setDouble("X", posX);
+		//nbttagcompound.setDouble("Y", posY);
+		//nbttagcompound.setDouble("Z", posZ);
 	}
 
 	@Override

@@ -44,7 +44,7 @@ public class BlockStand extends BlockTerraContainer
 	{
 		super(par1, Material.wood);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
-		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 2, 0.9f);
+		this.setBlockBounds(0f, 0, 0f, 1f, 1, 1f);
 	}
 
 	@Override
@@ -80,11 +80,19 @@ public class BlockStand extends BlockTerraContainer
 	{
 		return false;
 	}
-	
+
 	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack is) {
 		super.onBlockPlacedBy(world, i, j, k, entityliving, is);
-		((TEStand)world.getBlockTileEntity(i,j,k)).yaw = (entityliving.rotationYaw + 225)%360;
+		TEStand te = ((TEStand)world.getBlockTileEntity(i,j,k));
+		te.yaw =(((int)((((entityliving.rotationYaw)%360)+360)+45)/90)*90)%360;
+		if(te.yaw % 180 == 0){
+			te.yaw+=180;
+		}
+		world.setBlock(i,j+1,k,this.blockID);
+		world.setBlockMetadataWithNotify(i, j+1, k, is.getItemDamage(),0);
+		world.setBlockTileEntity(i, j+1, k, new TEStand());
+		((TEStand)world.getBlockTileEntity(i, j+1, k)).isTop = true;
 	}
 
 	@Override
@@ -153,6 +161,18 @@ public class BlockStand extends BlockTerraContainer
 	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
 	{
 		TEStand var5 = (TEStand)par1World.getBlockTileEntity(par2, par3, par4);
+		if(var5 != null){
+			if(var5.isTop){
+				breakBlock(par1World,par2,par3-1,par4,par5,par6);
+				par1World.setBlock(par2,par3-1,par4,0);
+				return;
+			}				
+		}
+		else{
+			return;					//if TE does not exist, assume this is the top block being destroyed by the bottom
+		}
+		if(par1World.getBlockTileEntity(par2, par3+1, par4) !=null)((TEStand)par1World.getBlockTileEntity(par2, par3+1, par4)).destroy();
+		par1World.setBlock(par2,par3+1,par4,0);
 		var5.destroy();
 		if (var5 != null)
 		{
@@ -209,16 +229,27 @@ public class BlockStand extends BlockTerraContainer
 		if (world.isRemote)
 		{
 			((NetworkTileEntity)world.getBlockTileEntity(x,y,z)).validate();
+			TEStand TeStand = (TEStand)(world.getBlockTileEntity(x, y, z));
+			if(TeStand.isTop){
+				return onBlockActivated(world,x,y-1,z,entityplayer,side,hitX,hitY,hitZ);
+			}
+			ItemStack item = entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem];
+			if(item!=null && item.getItem() instanceof ItemArmor){
+				TeStand.setInventorySlotContents(4-((ItemArmor)item.getItem()).armorType,item);					
+			}
 			return true;
 		}
 		else
 		{
-			
+
 			if(world.getBlockTileEntity(x, y, z) != null){
 				TEStand TeStand = (TEStand)(world.getBlockTileEntity(x, y, z));
+				if(TeStand.isTop){
+					return onBlockActivated(world,x,y-1,z,entityplayer,side,hitX,hitY,hitZ);
+				}
 				ItemStack item = entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem];
-				if(item!=null && entityplayer.isSneaking() && item.getItem() instanceof ItemArmor){
-					TeStand.setInventorySlotContents(3-((ItemArmor)item.getItem()).armorType,item);					
+				if(item!=null && item.getItem() instanceof ItemArmor){
+					TeStand.setInventorySlotContents(4-((ItemArmor)item.getItem()).armorType,item);					
 				}
 				//entityplayer.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);
 				return true;

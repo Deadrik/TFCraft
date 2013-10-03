@@ -32,16 +32,16 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	public ItemStack[] items;
 	public EntityStand entity;
 	public float yaw = 0;
+	public boolean isTop = false;
 	private boolean hasEntity = false;
 
 	public TEStand()
 	{
-		shouldSendInitData = true;
 		items = new ItemStack[5];
-		items[4] = new ItemStack(TFCItems.CopperHelmet,1,0);
-		items[3] = new ItemStack(TFCItems.CopperChestplate,1,0);
-		items[2] = new ItemStack(TFCItems.CopperGreaves,1,0);
-		items[1] = new ItemStack(TFCItems.CopperBoots,1,0);
+		//items[4] = new ItemStack(TFCItems.CopperHelmet,1,0);
+		//items[3] = new ItemStack(TFCItems.CopperChestplate,1,0);
+		//items[2] = new ItemStack(TFCItems.CopperGreaves,1,0);
+		//items[1] = new ItemStack(TFCItems.CopperBoots,1,0);
 	}
 
 	@Override
@@ -49,15 +49,16 @@ public class TEStand extends NetworkTileEntity implements IInventory
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	public void destroy(){
-		entity.setDead();
+		if(!isTop)
+			entity.setDead();
 	}
 
 	@Override
 	public ItemStack decrStackSize(int i, int j)
 	{
-		if(items[i] != null)
+		if(items[i] != null && !isTop)
 		{
 			if(items[i].stackSize <= j)
 			{
@@ -80,23 +81,25 @@ public class TEStand extends NetworkTileEntity implements IInventory
 
 	public void ejectContents()
 	{
-		float f3 = 0.05F;
-		EntityItem entityitem;
-		Random rand = new Random();
-		float f = rand.nextFloat() * 0.8F + 0.1F;
-		float f1 = rand.nextFloat() * 2.0F + 0.4F;
-		float f2 = rand.nextFloat() * 0.8F + 0.1F;
+		if(!isTop){
+			float f3 = 0.05F;
+			EntityItem entityitem;
+			Random rand = new Random();
+			float f = rand.nextFloat() * 0.8F + 0.1F;
+			float f1 = rand.nextFloat() * 2.0F + 0.4F;
+			float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
-		for (int i = 0; i < getSizeInventory(); i++)
-		{
-			if(items[i] != null)
+			for (int i = 0; i < getSizeInventory(); i++)
 			{
-				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
-						items[i]);
-				entityitem.motionX = (float)rand.nextGaussian() * f3;
-				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
-				entityitem.motionZ = (float)rand.nextGaussian() * f3;
-				worldObj.spawnEntityInWorld(entityitem);
+				if(items[i] != null)
+				{
+					entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
+							items[i]);
+					entityitem.motionX = (float)rand.nextGaussian() * f3;
+					entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
+					entityitem.motionZ = (float)rand.nextGaussian() * f3;
+					worldObj.spawnEntityInWorld(entityitem);
+				}
 			}
 		}
 	}
@@ -124,7 +127,9 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	public ItemStack getStackInSlot(int i)
 	{
 		// TODO Auto-generated method stub
-		return items[i];
+		if(!isTop)
+			return items[i];
+		return null;
 	}
 
 	@Override
@@ -148,19 +153,21 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
-		items[i] = itemstack;
-		if(items[i] != null && items[i].stackSize > getInventoryStackLimit())
-		{
-			items[i].stackSize = getInventoryStackLimit();
+		if(!isTop){
+			if(items[i]==null){
+				items[i] = itemstack;
+			}
+			if(items[i] != null && items[i].stackSize > getInventoryStackLimit())
+			{
+				items[i].stackSize = getInventoryStackLimit();
+			}
 		}
-
-
 	}
 
 	@Override
 	public void updateEntity()
 	{
-		if(!worldObj.isRemote)
+		if(!worldObj.isRemote && !isTop)
 		{
 			if(hasWorldObj() && !hasEntity){
 				entity = new EntityStand(worldObj,this);
@@ -189,28 +196,18 @@ public class TEStand extends NetworkTileEntity implements IInventory
 		super.writeToNBT(nbttagcompound);
 		NBTTagList nbttaglist = new NBTTagList();
 		nbttagcompound.setBoolean("hasEntity", hasEntity);
-		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-		nbttagcompound1.setByte("Slot", (byte)1);
-		if(items[0] != null){
-			items[0].writeToNBT(nbttagcompound1);
+		nbttagcompound.setFloat("yaw", yaw);
+		nbttagcompound.setBoolean("isTop",isTop);
+		for(int i = 0; i < items.length; i++)
+		{
+			if(items[i] != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				items[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
 		}
-		nbttagcompound1.setByte("Slot1", (byte)1);
-		if(items[1] != null){
-			items[1].writeToNBT(nbttagcompound1);
-		}
-		nbttagcompound1.setByte("Slot2", (byte)1);
-		if(items[2] != null){
-			items[2].writeToNBT(nbttagcompound1);
-		}
-		nbttagcompound1.setByte("Slot3", (byte)1);
-		if(items[3] != null){
-			items[3].writeToNBT(nbttagcompound1);
-		}
-		nbttagcompound1.setByte("Slot4", (byte)1);
-		if(items[4] != null){
-			items[4].writeToNBT(nbttagcompound1);
-		}
-		nbttaglist.appendTag(nbttagcompound1);
 		nbttagcompound.setTag("Items", nbttaglist);
 	}
 
@@ -218,19 +215,20 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
 		hasEntity = nbttagcompound.getBoolean("hasEntity");
-		NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(0);
-		byte byte0 = nbttagcompound1.getByte("Slot");
-		items[0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		byte0 = nbttagcompound1.getByte("Slot1");
-		items[1] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		byte0 = nbttagcompound1.getByte("Slot2");
-		items[2] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		byte0 = nbttagcompound1.getByte("Slot3");
-		items[3] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		byte0 = nbttagcompound1.getByte("Slot4");
-		items[4] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		yaw = nbttagcompound.getFloat("yaw");
+		isTop = nbttagcompound.getBoolean("isTop");
+		items = new ItemStack[getSizeInventory()];
+		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+			byte byte0 = nbttagcompound1.getByte("Slot");
+			if(byte0 >= 0 && byte0 < items.length)
+			{
+				items[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+			}
+		}
 	}
 
 	public void updateGui()
@@ -240,28 +238,6 @@ public class TEStand extends NetworkTileEntity implements IInventory
 		}
 	}
 
-	@Override
-	public void handleDataPacket(DataInputStream inStream) throws IOException {
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-
-	public Packet createUpdatePacket()
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);	
-		try {
-			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-		} catch (IOException e) {
-		}
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
-
-	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException {;
-	}
 
 	public Packet createSealPacket()
 	{
@@ -279,15 +255,6 @@ public class TEStand extends NetworkTileEntity implements IInventory
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
 
-	@Override
-	public void handleInitPacket(DataInputStream inStream) throws IOException {
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-
-	@Override
-	public void handleDataPacketServer(DataInputStream inStream)
-			throws IOException {
-	}
 
 	@Override
 	public boolean isInvNameLocalized() 
@@ -299,5 +266,75 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
 	{
 		return false;
+	}
+
+	@Override
+	public void handleDataPacket(DataInputStream inStream) throws IOException {
+		this.yaw = inStream.readFloat();
+		this.isTop = inStream.readBoolean();
+		int item;
+		for(int i = 0; i < items.length;i++){
+			item = inStream.readInt();
+			if(Item.itemsList[item] != null){
+				items[i] = new ItemStack(Item.itemsList[item]);
+			}
+		}
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	public Packet createUpdatePacket() {
+		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+		DataOutputStream dos=new DataOutputStream(bos);
+		try {
+			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
+			dos.writeInt(xCoord);
+			dos.writeInt(yCoord);
+			dos.writeInt(zCoord);
+			dos.writeFloat(yaw);
+			dos.writeBoolean(isTop);
+		} catch (IOException e) {
+		}
+		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	}
+
+	@Override
+	public void handleDataPacketServer(DataInputStream inStream) throws IOException {
+		yaw = inStream.readFloat();
+		isTop = inStream.readBoolean();
+		int item;
+		for(int i = 0; i < items.length;i++){
+			item = inStream.readInt();
+			if(Item.itemsList[item] != null){
+				items[i] = new ItemStack(Item.itemsList[item]);
+			}
+		}
+	}
+
+	@Override
+	public void createInitPacket(DataOutputStream outStream) throws IOException {
+		outStream.writeFloat(yaw);
+		outStream.writeBoolean(isTop);
+		for(int i = 0; i < items.length;i++){
+			if(items[i]!=null){
+				outStream.writeInt(items[i].itemID);
+			}
+			else{
+				outStream.writeInt(0);
+			}
+		}
+	}
+
+	@Override
+	public void handleInitPacket(DataInputStream inStream) throws IOException {
+		yaw = inStream.readFloat();
+		isTop = inStream.readBoolean();
+		int item;
+		for(int i = 0; i < items.length;i++){
+			item = inStream.readInt();
+			if(Item.itemsList[item] != null){
+				items[i] = new ItemStack(Item.itemsList[item]);
+			}
+		}
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 }
