@@ -879,6 +879,7 @@ public class TFCItems
 	public static Item Snowberry;
 	public static Item Elderberry;
 	public static Item Gooseberry;
+	public static Item Cloudberry;
 	public static Item WintergreenLeaf;
 	public static Item BlueberryLeaf;
 	public static Item RaspberryLeaf;
@@ -889,6 +890,7 @@ public class TFCItems
 	public static Item SnowberryLeaf;
 	public static Item ElderberryLeaf;
 	public static Item GooseberryLeaf;
+	public static Item CloudberryLeaf;
 
 	/**
 	 * Item Uses Setup
@@ -1683,6 +1685,7 @@ public class TFCItems
 		Snowberry =  new ItemTerraFood(TFCItemID.Snowberry, 30, -0.8F, 57).setUnlocalizedName("Snowberry");	
 		Elderberry =  new ItemTerraFood(TFCItemID.Elderberry, 30, -0.8F, 58).setUnlocalizedName("Elderberry");
 		Gooseberry =  new ItemTerraFood(TFCItemID.Gooseberry, 30, -0.8F, 59).setUnlocalizedName("Gooseberry");
+		Cloudberry =  new ItemTerraFood(TFCItemID.Cloudberry, 30, -0.8F, 60).setUnlocalizedName("Cloudberry");
 		WintergreenLeaf =  new ItemTerra(TFCItemID.WintergreenLeaf).setUnlocalizedName("WintergreenLeaf");	
 		BlueberryLeaf =  new ItemTerra(TFCItemID.BlueberryLeaf).setUnlocalizedName("BlueberryLeaf");
 		RaspberryLeaf =  new ItemTerra(TFCItemID.RaspberryLeaf).setUnlocalizedName("RaspberryLeaf");
@@ -1693,6 +1696,7 @@ public class TFCItems
 		SnowberryLeaf =  new ItemTerra(TFCItemID.SnowberryLeaf).setUnlocalizedName("SnowberryLeaf");
 		ElderberryLeaf =  new ItemTerra(TFCItemID.ElderberryLeaf).setUnlocalizedName("ElderberryLeaf");
 		GooseberryLeaf =  new ItemTerra(TFCItemID.GooseberryLeaf).setUnlocalizedName("GooseberryLeaf");
+		CloudberryLeaf =  new ItemTerra(TFCItemID.CloudberryLeaf).setUnlocalizedName("CloudberryLeaf");
 
 		/**Armor Crafting related items*/
 		SetupArmor();
