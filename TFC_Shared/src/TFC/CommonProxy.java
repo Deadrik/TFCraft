@@ -38,6 +38,7 @@ import TFC.Entities.Mobs.EntitySpiderTFC;
 import TFC.Entities.Mobs.EntitySquidTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
+import TFC.TileEntities.TEBerryBush;
 import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TENestBox;
@@ -130,6 +131,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TECrucible.class, "Crucible");
 		GameRegistry.registerTileEntity(TENestBox.class, "Nest Box");
 		GameRegistry.registerTileEntity(TEStand.class, "Armour Stand");
+		GameRegistry.registerTileEntity(TEBerryBush.class, "Berry Bush");
 
 		if(b)
 		{
@@ -192,7 +194,7 @@ public class CommonProxy
 		EntityRegistry.registerModEntity(EntityPigZombieTFC.class, "pigzombieTFC", 22,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityIronGolemTFC.class, "irongolemTFC", 23,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityCreeperTFC.class, "creeperTFC", 24,TerraFirmaCraft.instance, 160, 5, true);
-		
+
 		EntityRegistry.registerModEntity(EntityStand.class, "standTFC", 25,TerraFirmaCraft.instance, 160, 5, true);
 
 		//EntityRegistry.registerModEntity(EntityArrowTFC.class, "deerTFC", 25,TerraFirmaCraft.instance, 160, 5, true);

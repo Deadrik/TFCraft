@@ -70,7 +70,6 @@ import TFC.Render.RenderCowTFC;
 import TFC.Render.RenderDeer;
 import TFC.Render.RenderEntityStand;
 import TFC.Render.RenderPigTFC;
-import TFC.Render.RenderPlayerTFC;
 import TFC.Render.RenderSheepTFC;
 import TFC.Render.RenderSkeletonTFC;
 import TFC.Render.RenderSquidTFC;
@@ -196,6 +195,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.potteryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPottery());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.tuyereRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTuyere());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.crucibleRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderCrucible());
+		//RenderingRegistry.registerBlockHandler(TFCBlocks.berryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBerryBush());
 
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());

@@ -869,6 +869,27 @@ public class TFCItems
 	public static Item Jute;
 	public static Item JuteFibre;
 
+	public static Item WintergreenBerry;
+	public static Item Blueberry;
+	public static Item Raspberry;
+	public static Item Strawberry;
+	public static Item Blackberry;
+	public static Item Bunchberry;
+	public static Item Cranberry;
+	public static Item Snowberry;
+	public static Item Elderberry;
+	public static Item Gooseberry;
+	public static Item WintergreenLeaf;
+	public static Item BlueberryLeaf;
+	public static Item RaspberryLeaf;
+	public static Item StrawberryLeaf;
+	public static Item BlackberryLeaf;
+	public static Item BunchberryLeaf;
+	public static Item CranberryLeaf;
+	public static Item SnowberryLeaf;
+	public static Item ElderberryLeaf;
+	public static Item GooseberryLeaf;
+
 	/**
 	 * Item Uses Setup
 	 * */
@@ -965,13 +986,13 @@ public class TFCItems
 		Item.itemsList[Item.bow.itemID] = null; Item.itemsList[Item.bow.itemID] = (new ItemCustomBow(5)).setUnlocalizedName("bow").setTextureName("bow");
 		Item.itemsList[Item.arrow.itemID] = null; Item.itemsList[Item.arrow.itemID] = (new ItemArrow(6)).setUnlocalizedName("arrow");
 		Item.itemsList[Item.porkRaw.itemID] = null; Item.itemsList[Item.porkRaw.itemID] = new ItemTerra(63).setUnlocalizedName("porkchopRaw");
-		Item.itemsList[Item.porkCooked.itemID] = null; Item.itemsList[Item.porkCooked.itemID] = new ItemTerraFood(64, 35, 0.8F, true, 38).setFolder("").setUnlocalizedName("porkchopCooked");
+		Item.itemsList[Item.porkCooked.itemID] = null; Item.itemsList[Item.porkCooked.itemID] = new ItemTerraFood(64, 35, 0.0F, true, 38).setFolder("").setUnlocalizedName("porkchopCooked");
 		Item.itemsList[Item.fishRaw.itemID] = null; Item.itemsList[Item.fishRaw.itemID] = new ItemTerra(93).setUnlocalizedName("fishRaw");
-		Item.itemsList[Item.fishCooked.itemID] = null; Item.itemsList[Item.fishCooked.itemID] = new ItemTerraFood(94, 30, 0.6F, true, 39).setFolder("").setUnlocalizedName("fishCooked");
+		Item.itemsList[Item.fishCooked.itemID] = null; Item.itemsList[Item.fishCooked.itemID] = new ItemTerraFood(94, 30, 0.0F, true, 39).setFolder("").setUnlocalizedName("fishCooked");
 		Item.itemsList[Item.beefRaw.itemID] = null; Item.itemsList[Item.beefRaw.itemID] = new ItemTerra(107).setUnlocalizedName("beefRaw");
-		Item.itemsList[Item.beefCooked.itemID] = null; Item.itemsList[Item.beefCooked.itemID] = new ItemTerraFood(108, 40, 0.8F, true, 40).setFolder("").setUnlocalizedName("beefCooked");
+		Item.itemsList[Item.beefCooked.itemID] = null; Item.itemsList[Item.beefCooked.itemID] = new ItemTerraFood(108, 40, 0.0F, true, 40).setFolder("").setUnlocalizedName("beefCooked");
 		Item.itemsList[Item.chickenRaw.itemID] = null; Item.itemsList[Item.chickenRaw.itemID] = new ItemTerra(109).setUnlocalizedName("chickenRaw");
-		Item.itemsList[Item.chickenCooked.itemID] = null; Item.itemsList[Item.chickenCooked.itemID] = new ItemTerraFood(110, 35, 0.6F, true, 41).setFolder("").setUnlocalizedName("chickenCooked");
+		Item.itemsList[Item.chickenCooked.itemID] = null; Item.itemsList[Item.chickenCooked.itemID] = new ItemTerraFood(110, 35, 0.0F, true, 41).setFolder("").setUnlocalizedName("chickenCooked");
 		//Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 25, 0.6F, false, 42)).setFolder("").setUnlocalizedName("bread");
 		Item.itemsList[Item.dyePowder.itemID] = null; Item.itemsList[Item.dyePowder.itemID] = new ItemDyeCustom(95).setUnlocalizedName("dyePowder").setTextureName("dye_powder");
 		Item.itemsList[Item.potion.itemID] = null; Item.itemsList[Item.potion.itemID] = (new ItemCustomPotion(117)).setUnlocalizedName("potion").setTextureName("potion");
@@ -1558,38 +1579,39 @@ public class TFCItems
 		// Food related items
 		FruitTreeSapling1 = new ItemFruitTreeSapling(TFCItemID.FruitTreeSapling1, 0).setUnlocalizedName("FruitSapling1");
 		FruitTreeSapling2 = new ItemFruitTreeSapling(TFCItemID.FruitTreeSapling2, 8).setUnlocalizedName("FruitSapling2");
-		RedApple = new ItemTerraFood(TFCItemID.RedApple, 15, 0.1F, false, 2).setUnlocalizedName("Red Apple");
-		Banana = new ItemTerraFood(TFCItemID.Banana, 10, 0.1F, false, 3).setUnlocalizedName("Banana");
-		Orange = new ItemTerraFood(TFCItemID.Orange, 10, 0.1F, false, 4).setUnlocalizedName("Orange");
-		GreenApple = new ItemTerraFood(TFCItemID.GreenApple, 15, 0.1F, false, 5).setUnlocalizedName("Green Apple");
-		Lemon = new ItemTerraFood(TFCItemID.Lemon, 10, 0.03F, false, 6).setUnlocalizedName("Lemon");
-		Olive = new ItemTerraFood(TFCItemID.Olive, 10, 0.05F, false, 7).setUnlocalizedName("Olive");
-		Cherry = new ItemTerraFood(TFCItemID.Cherry, 10, 0.03F, false, 8).setUnlocalizedName("Cherry");
-		Peach = new ItemTerraFood(TFCItemID.Peach, 12, 0.1F, false, 9).setUnlocalizedName("Peach");
-		Plum = new ItemTerraFood(TFCItemID.Plum, 10, 0.1F, false, 10).setUnlocalizedName("Plum");
-		EggCooked = new ItemTerraFood(TFCItemID.EggCooked, 25, 0.4F, false, 11).setUnlocalizedName("Egg Cooked");
+		RedApple = new ItemTerraFood(TFCItemID.RedApple, 15, -0.25F, 2).setUnlocalizedName("Red Apple");
+		Banana = new ItemTerraFood(TFCItemID.Banana, 10, -0.25F, 3).setUnlocalizedName("Banana");
+		Orange = new ItemTerraFood(TFCItemID.Orange, 10, -0.25F, 4).setUnlocalizedName("Orange");
+		GreenApple = new ItemTerraFood(TFCItemID.GreenApple, 15, -0.25F, 5).setUnlocalizedName("Green Apple");
+		Lemon = new ItemTerraFood(TFCItemID.Lemon, 15, -0.5F, 6).setUnlocalizedName("Lemon");
+		Olive = new ItemTerraFood(TFCItemID.Olive, 30, -0.8F, 7).setUnlocalizedName("Olive");
+		Cherry = new ItemTerraFood(TFCItemID.Cherry, 30, -0.8F, 8).setUnlocalizedName("Cherry");
+		Peach = new ItemTerraFood(TFCItemID.Peach, 15, -0.25F, 9).setUnlocalizedName("Peach");
+		Plum = new ItemTerraFood(TFCItemID.Plum, 10, -0.35F, 10).setUnlocalizedName("Plum");
+		EggCooked = new ItemTerraFood(TFCItemID.EggCooked, 25, 0.0F, 11).setUnlocalizedName("Egg Cooked");
 
-		WheatGrain = new ItemTerraFood(TFCItemID.WheatGrain, 1, 0.4F, false, 12).setUnlocalizedName("Wheat Grain");
-		BarleyGrain = new ItemTerraFood(TFCItemID.BarleyGrain, 1, 0.4F, false, 14).setUnlocalizedName("Barley Grain");
-		OatGrain = new ItemTerraFood(TFCItemID.OatGrain, 1, 0.4F, false, 16).setUnlocalizedName("Oat Grain");
-		RyeGrain = new ItemTerraFood(TFCItemID.RyeGrain, 1, 0.4F, false, 18).setUnlocalizedName("Rye Grain");
-		RiceGrain = new ItemTerraFood(TFCItemID.RiceGrain, 1, 0.4F, false, 20).setUnlocalizedName("Rice Grain");
-		MaizeEar = new ItemTerraFood(TFCItemID.MaizeEar, 10, 0.4F, false, 22).setUnlocalizedName("Maize Ear");
-		Tomato = new ItemTerraFood(TFCItemID.Tomato, 15, 0.4F, false, 24).setUnlocalizedName("Tomato");
-		Potato = new ItemTerraFood(TFCItemID.Potato, 22, 0.4F, false, 25).setUnlocalizedName("Potato");
-		Onion = new ItemTerraFood(TFCItemID.Onion, 10, 0.4F, false, 27).setUnlocalizedName(TFCOptions.iDontLikeOnions?"Rutabaga":"Onion");
-		Cabbage = new ItemTerraFood(TFCItemID.Cabbage, 20, 0.4F, false, 28).setUnlocalizedName("Cabbage");
-		Garlic = new ItemTerraFood(TFCItemID.Garlic, 10, 0.4F, false, 29).setUnlocalizedName("Garlic");
-		Carrot = new ItemTerraFood(TFCItemID.Carrot, 5, 0.4F, false, 30).setUnlocalizedName("Carrot");
+		WheatGrain = new ItemTerraFood(TFCItemID.WheatGrain, 1, 0.0F, 12).setUnlocalizedName("Wheat Grain");
+		BarleyGrain = new ItemTerraFood(TFCItemID.BarleyGrain, 1, 0.0F, 14).setUnlocalizedName("Barley Grain");
+		OatGrain = new ItemTerraFood(TFCItemID.OatGrain, 1, 0.0F, 16).setUnlocalizedName("Oat Grain");
+		RyeGrain = new ItemTerraFood(TFCItemID.RyeGrain, 1, 0.0F, 18).setUnlocalizedName("Rye Grain");
+		RiceGrain = new ItemTerraFood(TFCItemID.RiceGrain, 1, 0.0F, 20).setUnlocalizedName("Rice Grain");
+		MaizeEar = new ItemTerraFood(TFCItemID.MaizeEar, 30, -0.25F, 22).setUnlocalizedName("Maize Ear");
+
+		Tomato = new ItemTerraFood(TFCItemID.Tomato, 20, -0.5F, 24).setUnlocalizedName("Tomato");
+		Potato = new ItemTerraFood(TFCItemID.Potato, 20, 0.0F, 25).setUnlocalizedName("Potato");
+		Onion = new ItemTerraFood(TFCItemID.Onion, 10, -0.5F, 27).setUnlocalizedName(TFCOptions.iDontLikeOnions?"Rutabaga":"Onion");
+		Cabbage = new ItemTerraFood(TFCItemID.Cabbage, 20, -0.5F, 28).setUnlocalizedName("Cabbage");
+		Garlic = new ItemTerraFood(TFCItemID.Garlic, 10, -0.5F, 29).setUnlocalizedName("Garlic");
+		Carrot = new ItemTerraFood(TFCItemID.Carrot, 10, -0.5F, 30).setUnlocalizedName("Carrot");
 		Sugarcane = new ItemTerra(TFCItemID.Sugarcane).setFolder("plants/").setUnlocalizedName("Sugarcane");
 		Hemp = new ItemTerra(TFCItemID.Hemp).setFolder("plants/").setUnlocalizedName("Hemp");
-		Soybean = new ItemTerraFood(TFCItemID.Soybean, 10, 0.4F, false, 31).setUnlocalizedName("Soybeans");
-		Greenbeans = new ItemTerraFood(TFCItemID.Greenbeans, 10, 0.4F, false, 32).setUnlocalizedName("Greenbeans");
-		GreenBellPepper = new ItemTerraFood(TFCItemID.GreenBellPepper, 10, 0.4F, false, 34).setUnlocalizedName("Green Bell Pepper");
-		YellowBellPepper = new ItemTerraFood(TFCItemID.YellowBellPepper, 10, 0.4F, false, 35).setUnlocalizedName("Yellow Bell Pepper");
-		RedBellPepper = new ItemTerraFood(TFCItemID.RedBellPepper, 10, 0.4F, false, 36).setUnlocalizedName("Red Bell Pepper");
-		Squash = new ItemTerraFood(TFCItemID.Squash, 12, 0.4F, false, 37).setUnlocalizedName("Squash");
-		Cheese = new ItemTerraFood(TFCItemID.Cheese, 20, 0.6F, false, 50).setUnlocalizedName("Cheese");
+		Soybean = new ItemTerraFood(TFCItemID.Soybean, 10, -0.5F, 31).setUnlocalizedName("Soybeans");
+		Greenbeans = new ItemTerraFood(TFCItemID.Greenbeans, 10, -0.5F, 32).setUnlocalizedName("Greenbeans");
+		GreenBellPepper = new ItemTerraFood(TFCItemID.GreenBellPepper, 20, -0.5F, 34).setUnlocalizedName("Green Bell Pepper");
+		YellowBellPepper = new ItemTerraFood(TFCItemID.YellowBellPepper, 20, -0.5F, 35).setUnlocalizedName("Yellow Bell Pepper");
+		RedBellPepper = new ItemTerraFood(TFCItemID.RedBellPepper, 20, -0.5F, 36).setUnlocalizedName("Red Bell Pepper");
+		Squash = new ItemTerraFood(TFCItemID.Squash, 20, -0.5F, 37).setUnlocalizedName("Squash");
+		Cheese = new ItemTerraFood(TFCItemID.Cheese, 50, 0F, 26).setUnlocalizedName("Cheese");
 
 		WheatWhole = new ItemTerra(TFCItemID.WheatWhole).setFolder("food/").setUnlocalizedName("Wheat Whole");
 		BarleyWhole = new ItemTerra(TFCItemID.BarleyWhole).setFolder("food/").setUnlocalizedName("Barley Whole");
@@ -1614,22 +1636,22 @@ public class TFCItems
 		RiceGround = new ItemTerra(TFCItemID.RiceGround).setFolder("food/").setUnlocalizedName("Rice Ground");
 		CornmealGround = new ItemTerra(TFCItemID.CornmealGround).setFolder("food/").setUnlocalizedName("Cornmeal Ground");
 
-		WheatDough = new ItemTerraFood(TFCItemID.WheatDough, 1, 0.0F, false, 0).setUnlocalizedName("Wheat Dough");
-		BarleyDough = new ItemTerraFood(TFCItemID.BarleyDough, 1, 0.0F, false, 0).setUnlocalizedName("Barley Dough");
-		OatDough = new ItemTerraFood(TFCItemID.OatDough, 1, 0.0F, false, 0).setUnlocalizedName("Oat Dough");
-		RyeDough = new ItemTerraFood(TFCItemID.RyeDough, 1, 0.0F, false, 0).setUnlocalizedName("Rye Dough");
-		RiceDough = new ItemTerraFood(TFCItemID.RiceDough, 1, 0.0F, false, 0).setUnlocalizedName("Rice Dough");
-		CornmealDough = new ItemTerraFood(TFCItemID.CornmealDough, 1, 0.0F, false, 0).setUnlocalizedName("Cornmeal Dough");
+		WheatDough = new ItemTerraFood(TFCItemID.WheatDough, 1, 0.0F, 0).setUnlocalizedName("Wheat Dough");
+		BarleyDough = new ItemTerraFood(TFCItemID.BarleyDough, 1, 0.0F, 0).setUnlocalizedName("Barley Dough");
+		OatDough = new ItemTerraFood(TFCItemID.OatDough, 1, 0.0F, 0).setUnlocalizedName("Oat Dough");
+		RyeDough = new ItemTerraFood(TFCItemID.RyeDough, 1, 0.0F, 0).setUnlocalizedName("Rye Dough");
+		RiceDough = new ItemTerraFood(TFCItemID.RiceDough, 1, 0.0F, 0).setUnlocalizedName("Rice Dough");
+		CornmealDough = new ItemTerraFood(TFCItemID.CornmealDough, 1, 0.0F, 0).setUnlocalizedName("Cornmeal Dough");
 
-		WheatBread = new ItemTerraFood(TFCItemID.WheatBread, 25, 0.6F, false, 42).setUnlocalizedName("Wheat Bread");
-		BarleyBread = new ItemTerraFood(TFCItemID.BarleyBread, 25, 0.6F, false, 43).setUnlocalizedName("Barley Bread");
-		OatBread = new ItemTerraFood(TFCItemID.OatBread, 25, 0.6F, false, 44).setUnlocalizedName("Oat Bread");
-		RyeBread = new ItemTerraFood(TFCItemID.RyeBread, 25, 0.6F, false, 45).setUnlocalizedName("Rye Bread");
-		RiceBread = new ItemTerraFood(TFCItemID.RiceBread, 25, 0.6F, false, 46).setUnlocalizedName("Rice Bread");
-		CornBread = new ItemTerraFood(TFCItemID.CornBread, 25, 0.6F, false, 47).setUnlocalizedName("Corn Bread");
+		WheatBread = new ItemTerraFood(TFCItemID.WheatBread, 40, 0F, 42).setUnlocalizedName("Wheat Bread");
+		BarleyBread = new ItemTerraFood(TFCItemID.BarleyBread, 40, 0F, 43).setUnlocalizedName("Barley Bread");
+		OatBread = new ItemTerraFood(TFCItemID.OatBread, 40, 0F, 44).setUnlocalizedName("Oat Bread");
+		RyeBread = new ItemTerraFood(TFCItemID.RyeBread, 40, 0F, 45).setUnlocalizedName("Rye Bread");
+		RiceBread = new ItemTerraFood(TFCItemID.RiceBread, 40, 0F, 46).setUnlocalizedName("Rice Bread");
+		CornBread = new ItemTerraFood(TFCItemID.CornBread, 40, 0F, 47).setUnlocalizedName("Corn Bread");
 
 		CalamariRaw = new ItemTerra(TFCItemID.CalamariRaw).setFolder("").setUnlocalizedName("Calamari Raw");
-		CalamariCooked = new ItemTerraFood(TFCItemID.CalamariCooked, 29, 0.6F, true, 49).setFolder("").setUnlocalizedName("Calamari Cooked");
+		CalamariCooked = new ItemTerraFood(TFCItemID.CalamariCooked, 10, -0.25F, true, 49).setFolder("").setUnlocalizedName("Calamari Cooked");
 
 		SeedsWheat = new ItemCustomSeeds(TFCItemID.SeedsWheat,0).setUnlocalizedName("Seeds Wheat");
 		SeedsBarley = new ItemCustomSeeds(TFCItemID.SeedsBarley,5).setUnlocalizedName("Seeds Barley");
@@ -1650,6 +1672,27 @@ public class TFCItems
 		SeedsSoybean = new ItemCustomSeeds(TFCItemID.SeedsSoybean,21).setUnlocalizedName("Seeds Soybean");
 		SeedsGreenbean = new ItemCustomSeeds(TFCItemID.SeedsGreenbean,22).setUnlocalizedName("Seeds Greenbean");
 		SeedsSquash = new ItemCustomSeeds(TFCItemID.SeedsSquash,23).setUnlocalizedName("Seeds Squash");
+
+		WintergreenBerry =  new ItemTerraFood(TFCItemID.WintergreenBerry, 30, -0.8F, 50).setUnlocalizedName("WintergreenBerry");
+		Blueberry =  new ItemTerraFood(TFCItemID.Blueberry, 30, -0.8F, 51).setUnlocalizedName("Blueberry");
+		Raspberry =  new ItemTerraFood(TFCItemID.Raspberry, 30, -0.8F, 52).setUnlocalizedName("Raspberry");
+		Strawberry =  new ItemTerraFood(TFCItemID.Strawberry, 30, -0.8F, 53).setUnlocalizedName("Strawberry");
+		Blackberry =  new ItemTerraFood(TFCItemID.Blackberry, 30, -0.8F, 54).setUnlocalizedName("Blackberry");
+		Bunchberry =  new ItemTerraFood(TFCItemID.Bunchberry, 30, -0.8F, 55).setUnlocalizedName("Bunchberry");
+		Cranberry =  new ItemTerraFood(TFCItemID.Cranberry, 30, -0.8F, 56).setUnlocalizedName("Cranberry");
+		Snowberry =  new ItemTerraFood(TFCItemID.Snowberry, 30, -0.8F, 57).setUnlocalizedName("Snowberry");	
+		Elderberry =  new ItemTerraFood(TFCItemID.Elderberry, 30, -0.8F, 58).setUnlocalizedName("Elderberry");
+		Gooseberry =  new ItemTerraFood(TFCItemID.Gooseberry, 30, -0.8F, 59).setUnlocalizedName("Gooseberry");
+		WintergreenLeaf =  new ItemTerra(TFCItemID.WintergreenLeaf).setUnlocalizedName("WintergreenLeaf");	
+		BlueberryLeaf =  new ItemTerra(TFCItemID.BlueberryLeaf).setUnlocalizedName("BlueberryLeaf");
+		RaspberryLeaf =  new ItemTerra(TFCItemID.RaspberryLeaf).setUnlocalizedName("RaspberryLeaf");
+		StrawberryLeaf =  new ItemTerra(TFCItemID.StrawberryLeaf).setUnlocalizedName("StrawberryLeaf");
+		BlackberryLeaf =  new ItemTerra(TFCItemID.BlackberryLeaf).setUnlocalizedName("BlackberryLeaf");
+		BunchberryLeaf =  new ItemTerra(TFCItemID.BunchberryLeaf).setUnlocalizedName("BunchberryLeaf");
+		CranberryLeaf =  new ItemTerra(TFCItemID.CranberryLeaf).setUnlocalizedName("CranberryLeaf");
+		SnowberryLeaf =  new ItemTerra(TFCItemID.SnowberryLeaf).setUnlocalizedName("SnowberryLeaf");
+		ElderberryLeaf =  new ItemTerra(TFCItemID.ElderberryLeaf).setUnlocalizedName("ElderberryLeaf");
+		GooseberryLeaf =  new ItemTerra(TFCItemID.GooseberryLeaf).setUnlocalizedName("GooseberryLeaf");
 
 		/**Armor Crafting related items*/
 		SetupArmor();

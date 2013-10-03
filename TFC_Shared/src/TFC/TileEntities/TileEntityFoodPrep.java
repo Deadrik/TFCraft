@@ -46,7 +46,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 				int id2 = storage[1] != null ? ((ItemTerraFood)storage[1].getItem()).foodID : 1;
 				int id3 = storage[2] != null ? ((ItemTerraFood)storage[2].getItem()).foodID : 1;
 				int id4 = storage[3] != null ? ((ItemTerraFood)storage[3].getItem()).foodID : 1;
-				
+
 				if((id1 == id2 || id1 == id3 || id1 == id4) || (id2 == id3 || id2 == id4) || id3 == id4)
 				{
 					return;
@@ -61,7 +61,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 
 				int filling = Math.min(fill1 + fill2 + fill3 + fill4, 100);
 
-				if(count >= 2 && filling > 40)
+				if(count >= 2 && filling > 50)
 				{
 					decrStackSize(0,1);
 					decrStackSize(1,1);
@@ -72,12 +72,13 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 					if(R.nextInt(5) == 0)
 					{
 						byte power = (byte)R.nextInt(25*count);
-						
-						storage[4] = new ItemStack(TFCItems.Meals[R.nextInt(TFCItems.Meals.length)], 1);
+
+						storage[4] = new ItemStack(TFCItems.MealGeneric, 1);
+						//storage[4] = new ItemStack(TFCItems.Meals[R.nextInt(TFCItems.Meals.length)], 1);
 						NBTTagCompound nbt = new NBTTagCompound();
-						nbt.setByte("effectpower", power);
+						//nbt.setByte("effectpower", power);
 						nbt.setByte("energy", (byte) R.nextInt(100));
-						nbt.setByte("filling", (byte) filling);
+						nbt.setByte("filling", (byte) Math.min(filling, 100));
 						storage[4].setTagCompound(nbt);
 					}
 					else
@@ -85,7 +86,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 						storage[4] = new ItemStack(TFCItems.MealGeneric, 1);
 						NBTTagCompound nbt = new NBTTagCompound();
 						nbt.setByte("energy", (byte) R.nextInt(100));
-						nbt.setByte("filling", (byte) filling);
+						nbt.setByte("filling", (byte) Math.min(filling, 100));
 						storage[4].setTagCompound(nbt);
 					}
 				}
@@ -328,15 +329,16 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	@Override
 	public void closeChest() 
 	{
-		if(worldObj.isRemote)
+		if(worldObj.isRemote) {
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-		else
+		} else
 		{
 			if(storage[0] == null && storage[1] == null && storage[2] == null && storage[3] == null && storage[5] == null)
 			{
-				if(storage[4] != null)
+				if(storage[4] != null) {
 					this.ejectItem(4);
-				
+				}
+
 				this.worldObj.setBlock(xCoord, yCoord, zCoord, 0);
 			}
 		}

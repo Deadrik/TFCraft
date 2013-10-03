@@ -9,14 +9,9 @@ import TFC.Blocks.BlockBloom;
 import TFC.Blocks.BlockCharcoal;
 import TFC.Blocks.BlockCrop;
 import TFC.Blocks.BlockDetailed;
-import TFC.Blocks.BlockFlora;
 import TFC.Blocks.BlockFoodPrep;
-import TFC.Blocks.BlockFruitLeaves;
-import TFC.Blocks.BlockFruitWood;
 import TFC.Blocks.BlockIngotPile;
-import TFC.Blocks.BlockLogHoriz;
 import TFC.Blocks.BlockLogPile;
-import TFC.Blocks.BlockLogVert;
 import TFC.Blocks.BlockLooseRock;
 import TFC.Blocks.BlockMolten;
 import TFC.Blocks.BlockSlab;
@@ -42,6 +37,12 @@ import TFC.Blocks.Devices.BlockSluice;
 import TFC.Blocks.Devices.BlockSpawnMeter;
 import TFC.Blocks.Devices.BlockStand;
 import TFC.Blocks.Devices.BlockToolRack;
+import TFC.Blocks.Flora.BlockBerryBush;
+import TFC.Blocks.Flora.BlockFlora;
+import TFC.Blocks.Flora.BlockFruitLeaves;
+import TFC.Blocks.Flora.BlockFruitWood;
+import TFC.Blocks.Flora.BlockLogHoriz;
+import TFC.Blocks.Flora.BlockLogVert;
 import TFC.Blocks.Terrain.BlockDryGrass;
 import TFC.Blocks.Terrain.BlockIgEx;
 import TFC.Blocks.Terrain.BlockIgExBrick;
@@ -129,6 +130,7 @@ public class TFCBlocks
 	public static int potteryRenderId;
 	public static int tuyereRenderId;
 	public static int crucibleRenderId;
+	public static int berryRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -224,7 +226,7 @@ public class TFCBlocks
 	public static Block Pottery;
 	public static Block Thatch;
 	public static Block Moss;
-
+	public static Block BerryBush;
 	public static Block Flora;
 	public static Block Tuyere;
 	public static Block EarlyBloomery;
@@ -232,12 +234,12 @@ public class TFCBlocks
 	public static Block Crucible;
 
 	public static Block NestBox;
-	
+
 	public static Block Fence;
 	public static Block FenceGate;
-	
+
 	public static Block StrawHideBed;
-	
+
 	public static Block ArmourStand;
 
 	public static void RegisterBlocks()
@@ -348,7 +350,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Barrel, ItemBarrels.class,"Barrel");
 		GameRegistry.registerBlock(Moss, "Moss");
 
-		GameRegistry.registerBlock(Flora, "Flora");
+		GameRegistry.registerBlock(Flora, TFC.Items.ItemBlocks.ItemFlora.class,"Flora");
 		GameRegistry.registerBlock(Pottery, "ClayPottery");
 		GameRegistry.registerBlock(Thatch, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Thatch");
 		GameRegistry.registerBlock(Tuyere, "Tuyere");
@@ -357,7 +359,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Fence,TFC.Items.ItemBlocks.ItemFence.class,"Fence");
 		GameRegistry.registerBlock(FenceGate,TFC.Items.ItemBlocks.ItemFenceGate.class,"FenceGate");
 		GameRegistry.registerBlock(StrawHideBed,"StrawHideBed");
-		GameRegistry.registerBlock(ArmourStand,TFC.Items.ItemBlocks.ItemArmourStand.class,"ArmourStand");
+		GameRegistry.registerBlock(BerryBush,TFC.Items.ItemBlocks.ItemBerryBush.class,"BerryBush");
 	}
 
 	public static void LoadBlocks()
@@ -398,7 +400,7 @@ public class TFCBlocks
 		Block.blocksList[8] = (new BlockCustomFlowing(8, Material.water)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water");
 		Block.blocksList[9] = (new BlockCustomStationary(9, Material.water)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water");
 		Block.blocksList[10] = (new BlockCustomFlowing(10, Material.lava)).setHardness(0.0F).setLightValue(1.0F).setLightOpacity(255).setUnlocalizedName("lava");
-		Block.blocksList[17] = (new TFC.Blocks.BlockLogNatural(17)).setHardness(50.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("log");
+		Block.blocksList[17] = (new TFC.Blocks.Flora.BlockLogNatural(17)).setHardness(50.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("log");
 		Block.blocksList[18] = (new BlockCustomLeaves(18)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("leaves");
 		Block.blocksList[31] = (new BlockCustomTallGrass(31)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("tallgrass");
 		Block.blocksList[37] = (new BlockCustomFlower(37)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("flower").setTextureName("flower_dandelion");
@@ -538,18 +540,20 @@ public class TFCBlocks
 		TFCBlocks.Moss =  new BlockMoss(TFCBlockID.Moss).setUnlocalizedName("Moss").setHardness(1).setStepSound(Block.soundGrassFootstep);
 
 
-		TFCBlocks.Flora = new BlockFlora(TFCBlockID.Flora).setUnlocalizedName("Flora").setHardness(1).setStepSound(Block.soundGrassFootstep);
+		TFCBlocks.Flora = new BlockFlora(TFCBlockID.Flora).setUnlocalizedName("Flora").setHardness(0.1f).setStepSound(Block.soundGrassFootstep);
 		TFCBlocks.Pottery = new BlockPottery(TFCBlockID.Pottery).setUnlocalizedName("Pottery").setHardness(1.0f);
 
 		TFCBlocks.Tuyere = new BlockTuyere(TFCBlockID.Tuyere).setUnlocalizedName("Tuyere");
 		TFCBlocks.Crucible = new BlockCrucible(TFCBlockID.Crucible).setUnlocalizedName("Crucible").setHardness(4.0f);
 
 		TFCBlocks.NestBox = new BlockNestBox(TFCBlockID.NestBox).setUnlocalizedName("NestBox").setHardness(1);
-		
+
 		TFCBlocks.Fence = new BlockCustomFence(TFCBlockID.Fence,"Fence",Material.wood).setUnlocalizedName("FenceTFC").setHardness(2);
 		TFCBlocks.FenceGate = new BlockCustomFenceGate(TFCBlockID.FenceGate).setUnlocalizedName("FenceGateTFC").setHardness(2);
 		TFCBlocks.StrawHideBed = new BlockCustomBed(TFCBlockID.StrawHideBed).setUnlocalizedName("StrawHideBed").setHardness(1);
 		TFCBlocks.ArmourStand = new BlockStand(TFCBlockID.ArmourStand).setUnlocalizedName("ArmourStand").setHardness(2);
+
+		TFCBlocks.BerryBush = new BlockBerryBush(TFCBlockID.BerryBush).setUnlocalizedName("BerryBush").setHardness(0.3f).setStepSound(Block.soundGrassFootstep);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

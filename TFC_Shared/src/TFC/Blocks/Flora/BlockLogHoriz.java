@@ -1,4 +1,4 @@
-package TFC.Blocks;
+package TFC.Blocks.Flora;
 
 import java.util.List;
 

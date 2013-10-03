@@ -3,7 +3,7 @@ package TFC.TileEntities;
 import java.util.Random;
 
 import TFC.TFCBlocks;
-import TFC.Blocks.BlockFruitLeaves;
+import TFC.Blocks.Flora.BlockFruitLeaves;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;

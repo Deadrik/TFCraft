@@ -1,4 +1,4 @@
-package TFC.Blocks;
+package TFC.Blocks.Flora;
 
 import java.util.Random;
 
@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;

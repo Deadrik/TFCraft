@@ -61,6 +61,9 @@ public class FoodStatsTFC
 
 			float temp = TFC_Climate.getHeightAdjustedTemp((int)player.posX, (int)player.posY, (int)player.posZ);
 
+			/*
+			 * Standard filling reduction based upon player exhaustion. This reduces filling faster than the standard time based reduction
+			 */
 			if (this.foodExhaustionLevel > 4.0F)
 			{
 				this.foodExhaustionLevel -= 4.0F;
@@ -74,11 +77,16 @@ public class FoodStatsTFC
 					this.foodLevel = Math.max(this.foodLevel - 2, 0);
 				}
 			}
-			soberTime = player.getEntityData().hasKey("soberTime") ? player.getEntityData().getLong("soberTime") : 0;
-			if(soberTime > 0){
-				soberTime--;
+			float satisfaction = 0;
+			if (this.foodSaturationLevel < 0.0F)
+			{
+				satisfaction = -foodSaturationLevel;
 			}
-			player.getEntityData().setLong("soberTime", soberTime);
+
+
+			/*
+			 * Standard filling reduction based upon time.
+			 */
 			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength)
 			{
 				this.foodTimer += TFC_Time.hourLength;
@@ -88,7 +96,7 @@ public class FoodStatsTFC
 				}
 				else if(!player.capabilities.isCreativeMode)
 				{
-					this.foodLevel = Math.max(this.foodLevel - 1, 0);
+					this.foodLevel = Math.max(this.foodLevel - (1 + satisfaction), 0);
 				}
 			}
 
@@ -117,6 +125,16 @@ public class FoodStatsTFC
 					}
 				}
 			}
+
+			/****************************************
+			 * Handle Alcohol
+			 ****************************************/
+
+			soberTime = player.getEntityData().hasKey("soberTime") ? player.getEntityData().getLong("soberTime") : 0;
+			if(soberTime > 0){
+				soberTime--;
+			}
+			player.getEntityData().setLong("soberTime", soberTime);
 
 			float tempWaterMod = temp;
 			if(tempWaterMod >= 30) {
@@ -258,10 +276,14 @@ public class FoodStatsTFC
 	/**
 	 * Args: int foodLevel, float foodSaturationModifier
 	 */
-	public void addStats(int par1, float par2)
+	public void addStats(int food, float satur)
 	{
-		this.foodLevel = Math.min(par1 + this.foodLevel, 100);
-		this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float)par1 / 3 * par2 * 2.0F, this.foodLevel);
+		this.foodLevel = Math.min(food + this.foodLevel, 100);
+		if(satur < 0) {
+			this.foodSaturationLevel = this.foodSaturationLevel + satur;
+		} else {
+			this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float)food / 3 * satur * 2.0F, this.foodLevel);
+		}
 	}
 
 	/**

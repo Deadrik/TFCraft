@@ -1,4 +1,4 @@
-package TFC.Blocks;
+package TFC.Blocks.Flora;
 
 import java.util.Random;
 
@@ -14,6 +14,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
+import TFC.Blocks.BlockTerra;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;

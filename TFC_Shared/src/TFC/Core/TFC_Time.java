@@ -238,5 +238,10 @@ public class TFC_Time
 		return daysInYear / 360f;
 	}
 
+	public static int getMonthsSinceDay(int totalDay)
+	{
+		int days = (int) (TFC_Time.getTotalDays() - totalDay);
+		return days / TFC_Time.daysInMonth;
+	}
 
 }

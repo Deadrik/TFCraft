@@ -188,15 +188,18 @@ public class BlockCustomBed extends BlockDirectional
 	 */
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.bedTopIcons = new Icon[] {par1IconRegister.registerIcon(Reference.ModID + ":" + this.getItemIconName() + "_feet_top"), par1IconRegister.registerIcon(Reference.ModID + ":" + this.getItemIconName() + "_head_top")};
-		this.field_94472_b = new Icon[] {par1IconRegister.registerIcon(Reference.ModID + ":" + this.getItemIconName() + "_feet_end"), par1IconRegister.registerIcon(Reference.ModID + ":" + this.getItemIconName() + "_head_end")};
-		this.bedSideIcons = new Icon[] {par1IconRegister.registerIcon(Reference.ModID + ":" + this.getItemIconName() + "_feet_side"), par1IconRegister.registerIcon(Reference.ModID + ":" + this.getItemIconName() + "_head_side")};
+		this.bedTopIcons = new Icon[] {par1IconRegister.registerIcon(Reference.ModID + ":straw bed_feet_top"), par1IconRegister.registerIcon(Reference.ModID + ":straw bed_head_top")};
+		this.field_94472_b = new Icon[] {par1IconRegister.registerIcon(Reference.ModID + ":straw bed_feet_end"), par1IconRegister.registerIcon(Reference.ModID + ":straw bed_head_end")};
+		this.bedSideIcons = new Icon[] {par1IconRegister.registerIcon(Reference.ModID + ":straw bed_feet_side"), par1IconRegister.registerIcon(Reference.ModID + ":straw bed_head_side")};
 	}
-	
-	@Override
+
+	/*
+	 * Removed because it is trying to load an item texture that doesn't exist causing a slow down at launch
+	 * 
+	 * @Override
 	public String getItemIconName(){
 		return "straw bed";
-	}
+	}*/
 
 	/**
 	 * The type of render function that is called for this block

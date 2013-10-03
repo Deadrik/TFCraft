@@ -1,4 +1,4 @@
-package TFC.Blocks;
+package TFC.Blocks.Flora;
 
 import java.util.List;
 import java.util.Random;
@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.Blocks.BlockTerra;
 import TFC.Core.Recipes;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

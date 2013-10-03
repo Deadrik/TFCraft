@@ -3,7 +3,6 @@ package TFC.Render;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
@@ -19,8 +18,8 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.TFCBlocks;
 import TFC.API.TFCOptions;
-import TFC.Blocks.BlockFruitLeaves;
 import TFC.Blocks.Devices.BlockSluice;
+import TFC.Blocks.Flora.BlockFruitLeaves;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
@@ -257,6 +256,8 @@ public class TFC_CoreRender
 		return true;
 	}
 
+	public static Random renderRandom = new Random();
+
 	public static boolean RenderLooseRock(Block block, int i, int j, int k, RenderBlocks renderblocks)	
 	{
 		boolean breaking = false;
@@ -277,14 +278,14 @@ public class TFC_CoreRender
 		}
 
 		int seed = i*k+j;
-		Random R = new Random(seed);
+		renderRandom.setSeed(seed);
 
-		float xOffset = (R.nextInt(5) - 2) * 0.05f;
-		float zOffset = (R.nextInt(5) - 2) * 0.05f;
+		float xOffset = (renderRandom.nextInt(5) - 2) * 0.05f;
+		float zOffset = (renderRandom.nextInt(5) - 2) * 0.05f;
 
-		float xOffset2 = (R.nextInt(5) - 2) * 0.05f;
-		float yOffset2 = (R.nextInt(5) - 2) * 0.05f;
-		float zOffset2 = (R.nextInt(5) - 2) * 0.05f;
+		float xOffset2 = (renderRandom.nextInt(5) - 2) * 0.05f;
+		float yOffset2 = (renderRandom.nextInt(5) - 2) * 0.05f;
+		float zOffset2 = (renderRandom.nextInt(5) - 2) * 0.05f;
 
 		renderblocks.setRenderBounds(0.35F + xOffset, 0.00F, 0.35F + zOffset, 0.65F + xOffset2, 0.15F + yOffset2, 0.65F + zOffset2);
 		renderblocks.renderStandardBlock(block, i, j, k);
@@ -293,8 +294,8 @@ public class TFC_CoreRender
 
 		return true;
 	}
-	
-	
+
+
 
 
 
@@ -743,22 +744,6 @@ public class TFC_CoreRender
 			}
 			renderblocks.clearOverrideBlockTexture();
 		}
-
-		/*
-		renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 0));
-
-		if(index.inBloom(TFC_Time.currentMonth))
-		{
-			texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
-			if(texIndex != null)
-			{
-				renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
-				renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
-				renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
-				renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
-			}
-		}
-		 */
 		return true;
 	}
 

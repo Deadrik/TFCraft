@@ -28,21 +28,28 @@ public class ItemTerraFood extends ItemFood implements ISize
 
 	public String folder = "food/";
 
+	public Item[] FoodList = new Item[1024];
+
 	public ItemTerraFood(int id, int healAmt) 
 	{
 		super(id, healAmt, true);
+	}
+
+	public ItemTerraFood(int id, int healAmt, float saturation, int foodid)
+	{
+		this(id, healAmt, saturation, false, foodid);
 	}
 
 	public ItemTerraFood(int id, int healAmt, float saturation, boolean wolfFood, int foodid)
 	{
 		super(id, healAmt, saturation, wolfFood);
 		foodID = foodid;
+		FoodList[foodID] = this;
 	}
 
 	public ItemTerraFood(int id, int healAmt, float saturation, boolean wolfFood, int foodid, int tier)
 	{
-		super(id, healAmt, saturation, wolfFood);
-		foodID = foodid;
+		this(id, healAmt, saturation, wolfFood, foodid);
 		Tier = tier;
 	}
 

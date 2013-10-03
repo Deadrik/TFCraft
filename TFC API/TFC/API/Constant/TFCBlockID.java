@@ -125,6 +125,7 @@ public class TFCBlockID
 	public static int FenceGate					= 2114;
 	public static int StrawHideBed				= 2115;
 	public static int ArmourStand				= 2116;
+	public static int BerryBush					= 2117;
 
 
 	static Configuration config;
@@ -248,6 +249,7 @@ public class TFCBlockID
 		Pottery = TFCOptions.getIntFor(config, "block", "Pottery", Pottery);
 		Tuyere = TFCOptions.getIntFor(config, "block", "Tuyere", Tuyere);
 		Crucible = TFCOptions.getIntFor(config, "block", "Crucible", Crucible);
+		BerryBush = TFCOptions.getIntFor(config, "block", "BerryBush", BerryBush);
 
 	}
 }
