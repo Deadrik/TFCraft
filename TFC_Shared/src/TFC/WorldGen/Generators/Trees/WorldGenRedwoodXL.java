@@ -89,6 +89,34 @@ public class WorldGenRedwoodXL extends WorldGenerator {
 		int j2 = 1;
 		boolean flag1 = false;
 
+		final int j3 = rand.nextInt(3);
+
+		for (int y1 = 0; y1 < height - j3; y1++) {
+			final int j4 = world.getBlockId(x, y + y1, z);
+
+			if (Block.blocksList[j4] == null
+					|| Block.blocksList[j4].isLeaves(world, x, y + y1,z) && 
+					Block.blocksList[j4].canBeReplacedByLeaves(world, x, y + y1, z))
+			{
+				int id = world.getBlockId(x, y + y1, z);
+				if(id == 0 || Block.blocksList[id].canBeReplacedByLeaves(world, x, y + y1, z) || world.getBlockMaterial(x, y + y1, z).isReplaceable()) {
+					setBlockAndMetadata(world, x, y + y1, z, blockWood, metaWood);
+				}
+				id = world.getBlockId(x-1, y + y1, z);
+				if(id == 0 || Block.blocksList[id].canBeReplacedByLeaves(world, x-1, y + y1, z) || world.getBlockMaterial(x-1, y + y1, z).isReplaceable()) {
+					setBlockAndMetadata(world, x - 1, y + y1, z, blockWood, metaWood);
+				}
+				id = world.getBlockId(x, y + y1, z-1);
+				if(id == 0 || Block.blocksList[id].canBeReplacedByLeaves(world, x, y + y1, z-1) || world.getBlockMaterial(x, y + y1, z-1).isReplaceable()) {
+					setBlockAndMetadata(world, x, y + y1, z - 1, blockWood, metaWood);
+				}
+				id = world.getBlockId(x-1, y + y1, z-1);
+				if(id == 0 || Block.blocksList[id].canBeReplacedByLeaves(world, x-1, y + y1, z-1) || world.getBlockMaterial(x-1, y + y1, z-1).isReplaceable()) {
+					setBlockAndMetadata(world, x - 1, y + y1, z - 1, blockWood, metaWood);
+				}
+			}
+		}
+
 		for (int i3 = 0; i3 <= k; i3++) {
 			final int y1 = y + height - i3;
 
@@ -130,29 +158,6 @@ public class WorldGenRedwoodXL extends WorldGenerator {
 			}
 		}
 
-		final int j3 = rand.nextInt(3);
-
-		for (int y1 = 0; y1 < height - j3; y1++) {
-			final int j4 = world.getBlockId(x, y + y1, z);
-
-			if (Block.blocksList[j4] == null
-					|| Block.blocksList[j4].isLeaves(world, x, y + y1,z) && 
-					Block.blocksList[j4].canBeReplacedByLeaves(world, x, y + y1, z))
-			{
-				if(world.getBlockMaterial(x, y + y1, z).isReplaceable()) {
-					setBlockAndMetadata(world, x, y + y1, z, blockWood, metaWood);
-				}
-				if(world.getBlockMaterial(x-1, y + y1, z).isReplaceable()) {
-					setBlockAndMetadata(world, x - 1, y + y1, z, blockWood, metaWood);
-				}
-				if(world.getBlockMaterial(x, y + y1, z-1).isReplaceable()) {
-					setBlockAndMetadata(world, x, y + y1, z - 1, blockWood, metaWood);
-				}
-				if(world.getBlockMaterial(x-1, y + y1, z-1).isReplaceable()) {
-					setBlockAndMetadata(world, x - 1, y + y1, z - 1, blockWood, metaWood);
-				}
-			}
-		}
 
 		return true;
 	}
