@@ -83,7 +83,7 @@ import TFC.Blocks.Vanilla.BlockCustomTallGrass;
 import TFC.Blocks.Vanilla.BlockCustomVine;
 import TFC.Blocks.Vanilla.BlockCustomWall;
 import TFC.Items.ItemBarrels;
-import TFC.Items.ItemToolRack;
+import TFC.Items.ItemBlocks.ItemToolRack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TFCBlocks 

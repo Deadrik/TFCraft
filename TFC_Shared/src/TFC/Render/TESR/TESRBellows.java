@@ -1,7 +1,6 @@
-package TFC.Render;
+package TFC.Render.TESR;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
@@ -10,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.TileEntities.TileEntityBellows;
 
-public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
+public class TESRBellows extends TESRBase
 {
 	private static final ResourceLocation FRONT_TEXTURE = new ResourceLocation(Reference.ModID + ":textures/blocks/devices/Bellows Front.png");
 	private static final ResourceLocation BACK_TEXTURE = new ResourceLocation(Reference.ModID + ":textures/blocks/devices/Bellows Back.png");

@@ -1,4 +1,4 @@
-package TFC.Render;
+package TFC.Render.TESR;
 
 import java.util.Calendar;
 
@@ -17,7 +17,7 @@ import TFC.Blocks.Devices.BlockChestTFC;
 import TFC.TileEntities.TileEntityChestTFC;
 import cpw.mods.fml.common.FMLLog;
 
-public class TileEntityChestRendererTFC extends TileEntitySpecialRenderer
+public class TESRChest extends TileEntitySpecialRenderer
 {
 	private static final ResourceLocation field_110635_a = new ResourceLocation("textures/entity/chest/trapped_double.png");
 	private static final ResourceLocation field_110634_c = new ResourceLocation("textures/entity/chest/christmas_double.png");
@@ -35,7 +35,7 @@ public class TileEntityChestRendererTFC extends TileEntitySpecialRenderer
 	/** If true, chests will be rendered with the Christmas present textures. */
 	private boolean isChristmas;
 
-	public TileEntityChestRendererTFC()
+	public TESRChest()
 	{
 		Calendar calendar = Calendar.getInstance();
 

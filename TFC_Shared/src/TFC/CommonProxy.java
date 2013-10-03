@@ -101,7 +101,7 @@ public class CommonProxy
 
 		GameRegistry.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
 		GameRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit");
-		GameRegistry.registerTileEntity(TileEntityAnvil.class, "TerraAnvil");
+
 		GameRegistry.registerTileEntity(TileEntityScribe.class, "TerraScribe");
 		GameRegistry.registerTileEntity(TileEntityForge.class, "TerraForge");
 		GameRegistry.registerTileEntity(TileEntityMetallurgy.class, "TerraMetallurgy");
@@ -115,14 +115,14 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TileEntityPartial.class, "Partial");
 		GameRegistry.registerTileEntity(TileEntityDetailed.class, "Detailed");
 
-		GameRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack");
+
 		GameRegistry.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
 
 		GameRegistry.registerTileEntity(TileEntityQuern.class, "Quern");
 		GameRegistry.registerTileEntity(TileEntitySapling.class, "Sapling");
 
 		GameRegistry.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");
-		GameRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
+
 		GameRegistry.registerTileEntity(TileEntityBarrel.class, "Barrel");
 		GameRegistry.registerTileEntity(TileEntityFenceGate.class, "FenceGate");
 
@@ -131,11 +131,15 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TENestBox.class, "Nest Box");
 		GameRegistry.registerTileEntity(TEStand.class, "Armour Stand");
 
-		if(b){
+		if(b)
+		{
+			GameRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
 			GameRegistry.registerTileEntity(TileEntityPottery.class, "Pottery");
 			GameRegistry.registerTileEntity(TileEntityChestTFC.class, "chest");
 			GameRegistry.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep");
 			GameRegistry.registerTileEntity(TileEntityBellows.class, "Bellows");
+			GameRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack");
+			GameRegistry.registerTileEntity(TileEntityAnvil.class, "TerraAnvil");
 		}
 
 		EntityRegistry.registerGlobalEntityID(EntityWolfTFC.class, "Wolf", ModLoader.getUniqueEntityId(), 0xffffff, 0xaaaaaa);
@@ -161,7 +165,7 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntityCreeperTFC.class, "Creeper", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityProjectileTFC.class, "arrow", ModLoader.getUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityStand.class, "stand", ModLoader.getUniqueEntityId());
-		
+
 
 		EntityRegistry.registerModEntity(EntityJavelin.class, "javelin", 1,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntitySquidTFC.class, "squid", 2,TerraFirmaCraft.instance, 160, 5, true);

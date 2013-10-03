@@ -20,31 +20,28 @@ public class ItemHammer extends ItemTerraTool
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
 	{
-		if(!world.isRemote)
-		{
-			int id2 = player.worldObj.getBlockId(x, y, z);
-			int meta2 = player.worldObj.getBlockMetadata(x, y, z);
+		int id2 = player.worldObj.getBlockId(x, y, z);
+		int meta2 = player.worldObj.getBlockMetadata(x, y, z);
 
-			if(id2 == TFCBlocks.StoneIgEx.blockID || id2 == TFCBlocks.StoneIgIn.blockID)
-			{
-				if(side == 1)
-				{
-					world.setBlock(x, y, z, TFCBlocks.Anvil.blockID);
-					TileEntityAnvil te = (TileEntityAnvil) world.getBlockTileEntity(x, y, z);
-					if(te != null)
-					{
-						te.stonePair[0] = id2;
-						te.stonePair[1] = meta2;
-						te.validate();
-					}
-					world.markBlockForUpdate(x, y, z);
-					return true;
-				}
-			}
-		}
-		else
+		if(id2 == TFCBlocks.StoneIgEx.blockID || id2 == TFCBlocks.StoneIgIn.blockID)
 		{
-			return false;
+			if(side == 1)
+			{
+				world.setBlock(x, y, z, TFCBlocks.Anvil.blockID);
+				TileEntityAnvil te = (TileEntityAnvil) world.getBlockTileEntity(x, y, z);
+				if(te == null)
+				{
+					world.setBlockTileEntity(x, y, z, new TileEntityAnvil());
+				}
+				if(te != null)
+				{
+					te.stonePair[0] = id2;
+					te.stonePair[1] = meta2;
+					te.validate();
+				}
+				//world.markBlockForUpdate(x, y, z);
+				return true;
+			}
 		}
 		return false;
 	}

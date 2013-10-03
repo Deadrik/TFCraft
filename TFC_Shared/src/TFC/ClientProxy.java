@@ -76,11 +76,6 @@ import TFC.Render.RenderSkeletonTFC;
 import TFC.Render.RenderSquidTFC;
 import TFC.Render.RenderTerraJavelin;
 import TFC.Render.RenderWolfTFC;
-import TFC.Render.TileEntityBellowsRenderer;
-import TFC.Render.TileEntityChestRendererTFC;
-import TFC.Render.TileEntityFoodPrepRenderer;
-import TFC.Render.TileEntityIngotPileRenderer;
-import TFC.Render.TileEntityPotteryRenderer;
 import TFC.Render.Blocks.RenderAnvil;
 import TFC.Render.Blocks.RenderBarrel;
 import TFC.Render.Blocks.RenderBellows;
@@ -95,6 +90,7 @@ import TFC.Render.Blocks.RenderStand;
 import TFC.Render.Blocks.RenderSupportBeam;
 import TFC.Render.Blocks.RenderToolRack;
 import TFC.Render.Blocks.RenderTuyere;
+import TFC.Render.Blocks.RenderWoodConstruct;
 import TFC.Render.Models.ModelBear;
 import TFC.Render.Models.ModelChickenTFC;
 import TFC.Render.Models.ModelCowTFC;
@@ -104,11 +100,20 @@ import TFC.Render.Models.ModelSheep1TFC;
 import TFC.Render.Models.ModelSheep2TFC;
 import TFC.Render.Models.ModelSquidTFC;
 import TFC.Render.Models.ModelWolfTFC;
+import TFC.Render.TESR.TESRAnvil;
+import TFC.Render.TESR.TESRBellows;
+import TFC.Render.TESR.TESRChest;
+import TFC.Render.TESR.TESRFoodPrep;
+import TFC.Render.TESR.TESRIngotPile;
+import TFC.Render.TESR.TESRPottery;
+import TFC.Render.TESR.TESRToolrack;
+import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TileEntityPottery;
+import TFC.TileEntities.TileEntityToolRack;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
@@ -184,7 +189,7 @@ public class ClientProxy extends CommonProxy
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.foodPrepRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.quernRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderQuern());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.fluidRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderWoodConstruct());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.barrelRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBarrel());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.standRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderStand());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.NestBoxRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderNestBox());
@@ -217,12 +222,14 @@ public class ClientProxy extends CommonProxy
 	public void registerTileEntities(boolean b)
 	{
 		super.registerTileEntities(false);
-		ClientRegistry.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
-		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TileEntityIngotPileRenderer());
+		ClientRegistry.registerTileEntity(TileEntityChestTFC.class, "chest", new TESRChest());
+		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TESRIngotPile());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
-		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TileEntityPotteryRenderer());
-		ClientRegistry.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep", new TileEntityFoodPrepRenderer());
-		ClientRegistry.registerTileEntity(TileEntityBellows.class, "Bellows", new TileEntityBellowsRenderer());
+		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TESRPottery());
+		ClientRegistry.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep", new TESRFoodPrep());
+		ClientRegistry.registerTileEntity(TileEntityBellows.class, "Bellows", new TESRBellows());
+		ClientRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack", new TESRToolrack());
+		ClientRegistry.registerTileEntity(TileEntityAnvil.class, "Anvil", new TESRAnvil());
 	}
 
 	@Override

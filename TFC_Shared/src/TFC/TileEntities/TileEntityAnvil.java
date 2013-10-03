@@ -9,6 +9,7 @@ import java.util.Random;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -50,13 +51,13 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 
 	private EntityPlayer lastWorker;
 
-	private final int INPUT_SLOT = 1;
-	private final int WELD1_SLOT = 2;
-	private final int WELD2_SLOT = 3;
-	private final int WELDOUT_SLOT = 4;
-	private final int RECIPE_SLOT = 5;
-	private final int FLUX_SLOT = 6;
-	private final int HAMMER_SLOT = 0;
+	public static final int INPUT_SLOT = 1;
+	public static final int WELD1_SLOT = 2;
+	public static final int WELD2_SLOT = 3;
+	public static final int WELDOUT_SLOT = 4;
+	public static final int RECIPE_SLOT = 5;
+	public static final int FLUX_SLOT = 6;
+	public static final int HAMMER_SLOT = 0;
 
 	public TileEntityAnvil()
 	{
@@ -148,7 +149,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 								anvilItemStacks[INPUT_SLOT].setItemDamage((int)(pct));
 							}
 						}
-						
+
 					}
 					workRecipe = null;
 					craftingValue = 0;
@@ -798,6 +799,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		outStream.writeInt(AnvilTier);
 		outStream.writeInt(stonePair[0]);
 		outStream.writeInt(stonePair[1]);
+		outStream.writeInt(anvilItemStacks[this.HAMMER_SLOT]!= null ? anvilItemStacks[this.HAMMER_SLOT].itemID : 0);
+		outStream.writeInt(anvilItemStacks[this.INPUT_SLOT]!= null ? anvilItemStacks[this.INPUT_SLOT].itemID : 0);
 	}
 
 	@Override
@@ -806,6 +809,17 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		AnvilTier = inStream.readInt();
 		stonePair[0] = inStream.readInt();
 		stonePair[1] = inStream.readInt();
+		int item = inStream.readInt();
+		if(Item.itemsList[item] != null)
+		{
+			anvilItemStacks[HAMMER_SLOT] = new ItemStack(Item.itemsList[item]);
+		}
+		item = inStream.readInt();
+		if(Item.itemsList[item] != null)
+		{
+			anvilItemStacks[INPUT_SLOT] = new ItemStack(Item.itemsList[item]);
+		}
+
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 

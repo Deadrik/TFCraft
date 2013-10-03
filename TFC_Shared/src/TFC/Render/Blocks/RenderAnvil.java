@@ -3,12 +3,10 @@ package TFC.Render.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
 import TFC.API.Crafting.AnvilReq;
 import TFC.Blocks.Devices.BlockAnvil;
-import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityAnvil;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -80,7 +78,7 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 				}
 				renderblocks.setRenderBounds(0.0F, 0.0F, 0.00F, 1.0F, 0.9F, 1.0F);
 				renderblocks.renderStandardBlock(block, i, j, k);
-				if(te.anvilItemStacks[0] != null && !breaking)
+				/*if(te.anvilItemStacks[0] != null && !breaking)
 				{
 
 					//					block.setBlockBounds(0.0F, 0.9F, 0.0F, 1F, 0.901F, 1F);
@@ -111,7 +109,7 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 					tessellator.startDrawing(state);
 
 				}
-				TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
+				TFC_Core.bindTexture(TextureMap.locationBlocksTexture);*/
 				renderblocks.clearOverrideBlockTexture();
 			}
 		}
