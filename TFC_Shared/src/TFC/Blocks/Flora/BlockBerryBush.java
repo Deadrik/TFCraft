@@ -3,6 +3,7 @@ package TFC.Blocks.Flora;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +32,8 @@ public class BlockBerryBush extends BlockTerraContainer
 
 	public BlockBerryBush(int par1)
 	{
-		super(par1);
+		super(par1, Material.plants);
+
 		MetaNames = new String[]{"Wintergreen", "Blueberry", "Raspberry", "Strawberry", "Blackberry", "Bunchberry", "Cranberry", 
 				"Snowberry", "Elderberry", "Gooseberry", "Cloudberry"};
 		icons = new Icon[MetaNames.length];
@@ -194,6 +196,10 @@ public class BlockBerryBush extends BlockTerraContainer
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
+		lifeCycle(world, i, j, k);
+	}
+
+	private void lifeCycle(World world, int i, int j, int k) {
 		if(!world.isRemote)
 		{
 			if(!canBlockStay(world, i, j, k))
@@ -307,10 +313,7 @@ public class BlockBerryBush extends BlockTerraContainer
 	public void onNeighborBlockChange(World world, int i, int j, int k, int par5)
 	{
 		super.onNeighborBlockChange(world, i, j, k, par5);
-		if(!canBlockStay(world,i,j,k))
-		{
-			world.setBlock(i, j, k, 0);
-		}
+		lifeCycle(world, i, j, k);
 	}
 
 	protected boolean canThisPlantGrowOnThisBlockID(int id)
@@ -322,6 +325,11 @@ public class BlockBerryBush extends BlockTerraContainer
 	public int idDropped(int par1, Random par2Random, int par3)
 	{
 		return this.blockID;
+	}
+
+	@Override
+	public int damageDropped(int i) {
+		return i;
 	}
 
 	@Override

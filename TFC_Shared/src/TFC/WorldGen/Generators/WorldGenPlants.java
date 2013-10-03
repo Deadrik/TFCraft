@@ -8,7 +8,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import TFC.TFCBlocks;
 import TFC.Blocks.Vanilla.BlockCustomTallGrass;
 import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomFruitTree;
@@ -33,6 +32,18 @@ public class WorldGenPlants implements IWorldGenerator
 
 	static WorldGenCustomFruitTree2 plumTree = new WorldGenCustomFruitTree2(false, TFCBlocks.fruitTreeLeaves2.blockID, 0);
 	static WorldGenCustomFruitTree2 cacaoTree = new WorldGenCustomFruitTree2(false, TFCBlocks.fruitTreeLeaves2.blockID, 1);
+
+	static WorldGenBerryBush wintergreenGen = new WorldGenBerryBush(false, 0, 12, 1, 5);
+	static WorldGenBerryBush blueberryGen = new WorldGenBerryBush(false, 1, 6, 1, 4);
+	static WorldGenBerryBush raspberryGen = new WorldGenBerryBush(false, 2, 5, 2, 4);
+	static WorldGenBerryBush strawberryGen = new WorldGenBerryBush(false, 3, 8, 1, 4);
+	static WorldGenBerryBush blackberryGen = new WorldGenBerryBush(false, 4, 5, 2, 4);
+	static WorldGenBerryBush bunchberryGen = new WorldGenBerryBush(false, 5, 8, 1, 4);
+	//static WorldGenBerryBush cranberryGen = new WorldGenBerryBush(false, 6, 15, 1, 6, TFCBlocks.Peat.blockID);
+	static WorldGenBerryBush snowberryGen = new WorldGenBerryBush(false, 7, 6, 1, 4);
+	static WorldGenBerryBush elderberryGen = new WorldGenBerryBush(false, 8, 5, 2, 4);
+	static WorldGenBerryBush gooseberryGen = new WorldGenBerryBush(false, 9, 8, 1, 4);
+	//static WorldGenBerryBush cloudberryGen = new WorldGenBerryBush(false, 10, 12, 1, 6, TFCBlocks.Peat.blockID);
 
 	public WorldGenPlants()
 	{
@@ -115,6 +126,7 @@ public class WorldGenPlants implements IWorldGenerator
 			}
 		}
 
+		genBushes(random, chunkX, chunkZ, world);
 
 
 		for (int i  = 0; i < grassPerChunk; ++i)
@@ -156,7 +168,8 @@ public class WorldGenPlants implements IWorldGenerator
 			}
 		}
 
-		if (random.nextInt(70) == 0  && rainfall.floatdata1 > 500)
+
+		/*if (random.nextInt(70) == 0  && rainfall.floatdata1 > 500)
 		{
 			xCoord = chunkX + random.nextInt(16) + 8;
 			zCoord = chunkZ + random.nextInt(16) + 8;
@@ -233,7 +246,56 @@ public class WorldGenPlants implements IWorldGenerator
 			//                    break;
 			//                }
 			}
-		}
+		}*/
 
+	}
+
+
+	private void genBushes(Random random, int chunkX, int chunkZ, World world) {
+		int xCoord;
+		int yCoord;
+		int zCoord;
+		if (random.nextInt(12) == 0)
+		{
+			xCoord = chunkX + random.nextInt(16) + 8;
+			zCoord = chunkZ + random.nextInt(16) + 8;
+			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
+			switch(random.nextInt(11))
+			{
+			default:
+				wintergreenGen.generate(world, random, xCoord, yCoord, zCoord);
+				break;
+			case 1:
+				blueberryGen.generate(world, random, xCoord, yCoord, zCoord);
+				break;
+			case 2:
+				raspberryGen.generate(world, random, xCoord, yCoord, zCoord);
+				break;
+			case 3:
+				strawberryGen.generate(world, random, xCoord, yCoord, zCoord);
+				break;
+			case 4:
+				blackberryGen.generate(world, random, xCoord, yCoord, zCoord);
+				break;
+			case 5:
+				bunchberryGen.generate(world, random, xCoord, yCoord, zCoord);
+				break;
+				/*case 6:
+				cranberryGen.generate(world, random, xCoord, yCoord, zCoord);
+				break;*/
+			case 7:
+				snowberryGen.generate(world, random, xCoord, yCoord, zCoord);
+				break;
+			case 8:
+				elderberryGen.generate(world, random, xCoord, yCoord, zCoord);
+				break;
+			case 9:
+				gooseberryGen.generate(world, random, xCoord, yCoord, zCoord);
+				break;
+				/*case 10:
+				cloudberryGen.generate(world, random, xCoord, yCoord, zCoord);
+				break;*/
+			}
+		}
 	}
 }

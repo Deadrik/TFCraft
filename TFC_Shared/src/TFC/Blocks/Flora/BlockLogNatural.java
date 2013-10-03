@@ -28,10 +28,10 @@ public class BlockLogNatural extends BlockTerra
 		super(i, Material.wood);
 		this.setTickRandomly(true);
 	}
-	
+
 	@Override
-    public void updateTick(World world, int i, int j, int k, Random rand)
-    {
+	public void updateTick(World world, int i, int j, int k, Random rand)
+	{
 		if(!world.isRemote)
 		{
 			if(!world.isBlockOpaqueCube(i, j-1, k))
@@ -41,11 +41,11 @@ public class BlockLogNatural extends BlockTerra
 						world.getBlockId(i+1, j, k+1) != blockID && world.getBlockId(i+1, j, k-1) != blockID && 
 						world.getBlockId(i-1, j, k+1) != blockID && world.getBlockId(i-1, j, k-1) != blockID)
 				{
-					world.setBlock(i, j, k, 0);
+					world.setBlockToAir(i, j, k);
 				}
 			}
 		}
-    }
+	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -92,21 +92,21 @@ public class BlockLogNatural extends BlockTerra
 		}
 		return sideIcons[j];
 	}
-	
+
 	public static Icon[] sideIcons = new Icon[Global.WOOD_ALL.length];
 	public static Icon[] innerIcons = new Icon[Global.WOOD_ALL.length];
 	public static Icon[] rotatedSideIcons = new Icon[Global.WOOD_ALL.length];
-	
+
 	@Override
-    public void registerIcons(IconRegister registerer)
-    {
+	public void registerIcons(IconRegister registerer)
+	{
 		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
 			sideIcons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + Global.WOOD_ALL[i] + " Log");
 			innerIcons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + Global.WOOD_ALL[i] + " Log Top");
 			rotatedSideIcons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + Global.WOOD_ALL[i] + " Log Side");
 		}
-    }
+	}
 
 	static int damage = 0;
 	boolean isStone = false;
@@ -127,17 +127,18 @@ public class BlockLogNatural extends BlockTerra
 					if(equip.getItem() == Recipes.Axes[cnt])
 					{
 						isAxeorSaw = true;
-						if(cnt < 4)
+						if(cnt < 4) {
 							isStone = true;
+						}
 					}
 				}
-//				for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
-//				{
-//					if(equip.getItem() == Recipes.Saws[cnt])
-//					{
-//						isAxeorSaw = true;
-//					}
-//				}
+				//				for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
+				//				{
+				//					if(equip.getItem() == Recipes.Saws[cnt])
+				//					{
+				//						isAxeorSaw = true;
+				//					}
+				//				}
 				for(int cnt = 0; cnt < Recipes.Hammers.length && !isAxeorSaw; cnt++)
 				{
 					if(equip.getItem() == Recipes.Hammers[cnt])
@@ -150,7 +151,7 @@ public class BlockLogNatural extends BlockTerra
 			{
 				damage = -1;
 				ProcessTree(world, i, j, k, l, equip);	
-				
+
 				if(damage + equip.getItemDamage() > equip.getMaxDamage())
 				{
 					int ind = entityplayer.inventory.currentItem;
@@ -173,12 +174,12 @@ public class BlockLogNatural extends BlockTerra
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
-    {
-        return true;
-    }
+	{
+		return true;
+	}
 
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
@@ -252,7 +253,7 @@ public class BlockLogNatural extends BlockTerra
 		{
 			checkArray[x][y][z] = true;
 			int offsetX = 0;int offsetY = 0;int offsetZ = 0;
-			
+
 			for (offsetX = -2; offsetX <= 2; offsetX++)
 			{
 				for (offsetZ = -2; offsetZ <= 2; offsetZ++)
@@ -261,21 +262,22 @@ public class BlockLogNatural extends BlockTerra
 					{
 						if(checkOut(world, i+offsetX, j, k+offsetZ, l) && !checkArray[x+offsetX][y][z+offsetZ])
 						{
-							scanLogs(world,i+offsetX, j, k+offsetZ, l, checkArray,(byte)(x+offsetX),(byte)y,(byte)(z+offsetZ), stack);
+							scanLogs(world,i+offsetX, j, k+offsetZ, l, checkArray,(byte)(x+offsetX),y,(byte)(z+offsetZ), stack);
 						}
 					}
 				}
 			}
 
-			
+
 			damage++;
 			if(stack != null)
 			{
 				if(damage+stack.getItemDamage() <= stack.getMaxDamage())
 				{
 					world.setBlock(i, j, k, 0, 0, 0x3);
-					if((isStone && world.rand.nextInt(10) != 0) || !isStone)
+					if((isStone && world.rand.nextInt(10) != 0) || !isStone) {
 						dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.itemID],1,l));
+					}
 				}
 			}
 			else
