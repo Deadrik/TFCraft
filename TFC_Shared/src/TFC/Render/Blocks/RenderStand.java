@@ -25,7 +25,7 @@ public class RenderStand  implements ISimpleBlockRenderingHandler
 			IBlockAccess blockAccess = renderer.blockAccess;
 			
 			TEStand te = (TEStand)(world.getBlockTileEntity(i, j, k));
-			
+			if((world.getBlockTileEntity(i, j-1, k)!=null && world.getBlockTileEntity(i, j-1, k) instanceof TEStand) || te.isTop)return false;
 			int l = (int)(((te.yaw%360) / 90)%2);
 			//Arms of the Stand
 			if(l == 0){
@@ -53,7 +53,7 @@ public class RenderStand  implements ISimpleBlockRenderingHandler
 			
 			
 			//Base of the stand
-			renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 0.2F, 0.9F);
+			renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 0.1F, 0.9F);
 			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
 			
 			renderer.setRenderBounds(0.45F, 1.45F, 0.45F,0.55F,1.9F,0.55F);

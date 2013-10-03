@@ -37,6 +37,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.TFCItems;
 import TFC.Entities.EntityStand;
+import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.Entities.Mobs.EntitySkeletonTFC;
 import TFC.Render.Models.ModelStand;
 import cpw.mods.fml.relauncher.Side;
@@ -118,6 +119,12 @@ public class RenderEntityStand extends RenderBiped
 	protected ResourceLocation func_110856_a(EntityLiving par1EntityLiving)
 	{
 		return Texture;
+	}
+    
+    @Override
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+	{
+		GL11.glScalef(1f, 0.95f, 1f);
 	}
     
     protected int setArmorModelTFC(EntityStand stand, int par2, float par3)

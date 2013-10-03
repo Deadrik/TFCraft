@@ -359,6 +359,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Fence,TFC.Items.ItemBlocks.ItemFence.class,"Fence");
 		GameRegistry.registerBlock(FenceGate,TFC.Items.ItemBlocks.ItemFenceGate.class,"FenceGate");
 		GameRegistry.registerBlock(StrawHideBed,"StrawHideBed");
+		GameRegistry.registerBlock(ArmourStand,TFC.Items.ItemBlocks.ItemArmourStand.class,"ArmourStand");
 		GameRegistry.registerBlock(BerryBush,TFC.Items.ItemBlocks.ItemBerryBush.class,"BerryBush");
 	}
 

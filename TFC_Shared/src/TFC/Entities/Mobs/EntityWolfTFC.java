@@ -134,6 +134,21 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		timeOfConception = nbt.getLong("ConceptionTime");
 		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
 	}
+	
+	@Override
+	public void setTamed(boolean par1)
+    {
+        super.setTamed(par1);
+
+        if (par1)
+        {
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(TFC_MobData.WolfHealth);
+        }
+        else
+        {
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(TFC_MobData.WolfHealth);
+        }
+    }
 
 	/**
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
@@ -166,7 +181,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 
 
 		if(pregnant){
-			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime*TFC_Time.dayLength){
+			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime){
 				int i = rand.nextInt(5) + 3;
 				for (int x = 0; x<i;x++){
 					EntityWolfTFC baby = new EntityWolfTFC(worldObj, this,mateSizeMod);
@@ -224,7 +239,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	public boolean isBreedingItem(ItemStack is)
 	{
 		return !pregnant && is != null &&
-				(is.getItem() == Item.porkRaw || is.getItem() == Item.beefRaw || is.getItem() == TFCItems.muttonRaw);
+				(is.getItem() == Item.itemsList[Item.porkRaw.itemID] || is.getItem() == Item.itemsList[Item.beefRaw.itemID] || is.getItem() == TFCItems.muttonRaw);
 	}
 
 	@Override
