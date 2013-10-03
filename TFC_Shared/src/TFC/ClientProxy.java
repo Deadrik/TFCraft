@@ -68,6 +68,7 @@ import TFC.Render.RenderBear;
 import TFC.Render.RenderChickenTFC;
 import TFC.Render.RenderCowTFC;
 import TFC.Render.RenderDeer;
+import TFC.Render.RenderEntityStand;
 import TFC.Render.RenderPigTFC;
 import TFC.Render.RenderPlayerTFC;
 import TFC.Render.RenderSheepTFC;
@@ -135,7 +136,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer(new ModelDeer(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCustomMinecart.class, new RenderMinecart());
-		RenderingRegistry.registerEntityRenderingHandler(EntityStand.class,new RenderPlayerTFC());
+		RenderingRegistry.registerEntityRenderingHandler(EntityStand.class, new RenderEntityStand());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonTFC.class, new RenderSkeletonTFC());
 		RenderingRegistry.registerEntityRenderingHandler(EntityZombieTFC.class, new RenderZombie());

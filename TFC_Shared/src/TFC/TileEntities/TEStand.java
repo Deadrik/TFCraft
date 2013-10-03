@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
@@ -14,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
+import net.minecraft.util.AxisAlignedBB;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
@@ -29,20 +31,27 @@ public class TEStand extends NetworkTileEntity implements IInventory
 
 	public ItemStack[] items;
 	public EntityStand entity;
-	public float yaw;
+	public float yaw = 0;
+	private boolean hasEntity = false;
 
 	public TEStand()
-	{		
+	{
 		shouldSendInitData = true;
 		items = new ItemStack[5];
-		entity = new EntityStand(worldObj,this);
-		entity.setLocationAndAngles(xCoord, yCoord, zCoord, yaw, 0);
+		items[4] = new ItemStack(TFCItems.CopperHelmet,1,0);
+		items[3] = new ItemStack(TFCItems.CopperChestplate,1,0);
+		items[2] = new ItemStack(TFCItems.CopperGreaves,1,0);
+		items[1] = new ItemStack(TFCItems.CopperBoots,1,0);
 	}
 
 	@Override
 	public void closeChest() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void destroy(){
+		entity.setDead();
 	}
 
 	@Override
@@ -153,7 +162,24 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
-			
+			if(hasWorldObj() && !hasEntity){
+				entity = new EntityStand(worldObj,this);
+				entity.setLocationAndAngles(xCoord, yCoord, zCoord, yaw, 0);
+				worldObj.spawnEntityInWorld(entity);
+				entity.standTE = this;
+				hasEntity = true;
+			}
+			if(hasEntity && entity == null){
+				List list = worldObj.getEntitiesWithinAABB(EntityStand.class, AxisAlignedBB.getBoundingBox(
+						xCoord, yCoord, zCoord, 
+						xCoord+1, yCoord+2, zCoord+1));
+				if(list.size() != 0){
+					entity = (EntityStand)list.get(0);
+				}
+				else{
+					hasEntity = false;
+				}
+			}
 		}
 	}
 
@@ -162,7 +188,7 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	{
 		super.writeToNBT(nbttagcompound);
 		NBTTagList nbttaglist = new NBTTagList();
-
+		nbttagcompound.setBoolean("hasEntity", hasEntity);
 		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 		nbttagcompound1.setByte("Slot", (byte)1);
 		if(items[0] != null){
@@ -185,7 +211,6 @@ public class TEStand extends NetworkTileEntity implements IInventory
 			items[4].writeToNBT(nbttagcompound1);
 		}
 		nbttaglist.appendTag(nbttagcompound1);
-
 		nbttagcompound.setTag("Items", nbttaglist);
 	}
 
@@ -194,7 +219,7 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	{
 		super.readFromNBT(nbttagcompound);
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
-
+		hasEntity = nbttagcompound.getBoolean("hasEntity");
 		NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(0);
 		byte byte0 = nbttagcompound1.getByte("Slot");
 		items[0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);

@@ -25,6 +25,7 @@ import net.minecraft.scoreboard.Score;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -33,17 +34,22 @@ import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.Reference;
 import TFC.TFCItems;
 import TFC.Entities.EntityStand;
+import TFC.Entities.Mobs.EntitySkeletonTFC;
+import TFC.Render.Models.ModelStand;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.RenderPlayer
+public class RenderEntityStand extends RenderBiped
 {
     private ModelBiped modelBipedMain;
     private ModelBiped modelArmorChestplate;
     private ModelBiped modelArmor;
+    //private static final ResourceLocation Texture = new ResourceLocation("textures/entity/zombie/zombie.png");
+    private static final ResourceLocation Texture = new ResourceLocation(Reference.ModID, "mob/stand.png");
     public static String[] armorFilenamePrefix = new String[] {"cloth", "chain", "iron", "diamond", "gold"};
     public static float NAME_TAG_RANGE = 64.0f;
     public static float NAME_TAG_RANGE_SNEAK = 32.0f;
@@ -54,12 +60,12 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
     ModelRenderer HornR2;
     ModelRenderer HornL2;
     
-    public RenderPlayerTFC()
+    public RenderEntityStand()
     {
-        super();
-        this.modelBipedMain = (ModelBiped)this.mainModel;
-        this.modelArmorChestplate = new ModelBiped(1.0F);
-        this.modelArmor = new ModelBiped(0.5F);
+        super(new ModelStand(),0.5F);
+        this.modelBipedMain = (ModelStand)this.mainModel;
+        this.modelArmorChestplate = new ModelStand(1.0F);
+        this.modelArmor = new ModelStand(0.5F);
         //Bronze
         plume = new ModelRenderer(modelArmorChestplate,40,0);
         plume2 = new ModelRenderer(modelArmorChestplate,40,0);
@@ -96,21 +102,27 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
         modelArmorChestplate.bipedHead.addChild(HornL1);
         HornR1.addChild(HornR2);
         HornL1.addChild(HornL2);
+        HornR1.showModel = false;
+        HornL1.showModel = false;
+        plume.showModel = false;
+        plume2.showModel = false;
     }
     
     @Override
     protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
     {
-    	if(par1EntityLivingBase instanceof EntityStand){
-    		return this.setArmorModelTFC((EntityStand)par1EntityLivingBase, par2, par3);
-    	}
-    	return this.setArmorModel((AbstractClientPlayer)par1EntityLivingBase, par2, par3);
+    	return this.setArmorModelTFC((EntityStand)par1EntityLivingBase, par2, par3);    	
     }
+    
+    @Override
+	protected ResourceLocation func_110856_a(EntityLiving par1EntityLiving)
+	{
+		return Texture;
+	}
     
     protected int setArmorModelTFC(EntityStand stand, int par2, float par3)
     {
-    	//System.out.println("Arrived at setArmorModelTFC");
-        ItemStack itemstack = stand.getCurrentItemOrArmor(3 - par2);
+        ItemStack itemstack = stand.getCurrentItemOrArmor(4 - par2);
 
         if (itemstack != null)
         {

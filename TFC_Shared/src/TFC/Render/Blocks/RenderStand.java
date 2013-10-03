@@ -77,10 +77,10 @@ public class RenderStand  implements ISimpleBlockRenderingHandler
 		renderer.setRenderBounds(0.44F,1.45F,0.2F,0.56F,1.55F,0.8F);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
 		
-		renderer.setRenderBounds(0.45F, 0.201F, 0.35F, 0.55F, 1.35F, 0.45F);
+		renderer.setRenderBounds(0.45F, 0.201F, 0.35F, 0.55F, 1.45F, 0.45F);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
 		
-		renderer.setRenderBounds(0.45F, 0.201F, 0.55F, 0.55F, 1.35F, 0.65F);
+		renderer.setRenderBounds(0.45F, 0.201F, 0.55F, 0.55F, 1.45F, 0.65F);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
 		
 		//Base of the stand

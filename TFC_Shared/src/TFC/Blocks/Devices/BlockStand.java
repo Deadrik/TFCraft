@@ -108,6 +108,7 @@ public class BlockStand extends BlockTerraContainer
 		super.onBlockAdded(par1World, par2, par3, par4);
 	}
 
+
 	@Override
 	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
 
@@ -152,7 +153,7 @@ public class BlockStand extends BlockTerraContainer
 	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
 	{
 		TEStand var5 = (TEStand)par1World.getBlockTileEntity(par2, par3, par4);
-
+		var5.destroy();
 		if (var5 != null)
 		{
 			for (int var6 = 0; var6 < var5.getSizeInventory(); ++var6)
