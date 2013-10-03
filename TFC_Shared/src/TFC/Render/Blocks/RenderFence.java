@@ -64,7 +64,7 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 
 		if (flag1)
 		{
-			renderblocks.setRenderBounds((double)f4, (double)f2, (double)f+0.001, (double)f5, (double)f3, (double)f1+0.001);
+			renderblocks.setRenderBounds((double)f4, (double)f2+0.001, (double)f+0.001, (double)f5, (double)f3+0.001, (double)f1+0.001);
 			renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
 
 			renderblocks.setRenderBounds((double)f5, (double)f2, (double)f1-0.001, (double)f4, (double)f3, (double)f-0.001);
@@ -75,7 +75,7 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 
 		if (flag2)
 		{
-			renderblocks.setRenderBounds((double)f-0.001, (double)f2, (double)f6, (double)f1-0.001, (double)f3, (double)f7);
+			renderblocks.setRenderBounds((double)f-0.001, (double)f2+0.001, (double)f6, (double)f1-0.001, (double)f3+0.001, (double)f7);
 			renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
 
 			renderblocks.setRenderBounds((double)f1+0.001, (double)f2, (double)f7, (double)f+0.001, (double)f3, (double)f6);
@@ -88,7 +88,7 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 
 		if (flag1)
 		{
-			renderblocks.setRenderBounds((double)f4, (double)f2, (double)f+0.001, (double)f5, (double)f3, (double)f1+0.001);
+			renderblocks.setRenderBounds((double)f4, (double)f2+0.001, (double)f+0.001, (double)f5, (double)f3+0.001, (double)f1+0.001);
 			renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
 
 			renderblocks.setRenderBounds((double)f5, (double)f2, (double)f1-0.001, (double)f4, (double)f3, (double)f-0.001);
@@ -99,7 +99,7 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 
 		if (flag2)
 		{
-			renderblocks.setRenderBounds((double)f-0.001, (double)f2, (double)f6, (double)f1-0.001, (double)f3, (double)f7);
+			renderblocks.setRenderBounds((double)f-0.001, (double)f2+0.001, (double)f6, (double)f1-0.001, (double)f3+0.001, (double)f7);
 			renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
 
 			renderblocks.setRenderBounds((double)f1+0.001, (double)f2, (double)f7, (double)f+0.001, (double)f3, (double)f6);
