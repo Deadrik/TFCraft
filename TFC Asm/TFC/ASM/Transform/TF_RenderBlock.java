@@ -13,8 +13,6 @@ import org.objectweb.asm.tree.LdcInsnNode;
 import org.objectweb.asm.tree.VarInsnNode;
 
 import TFC.ASM.ClassTransformer;
-import TFC.ASM.ClassTransformer.InstrSet;
-import TFC.ASM.ClassTransformer.OperationType;
 
 public class TF_RenderBlock extends ClassTransformer
 {
@@ -53,7 +51,7 @@ public class TF_RenderBlock extends ClassTransformer
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 24), 546, OperationType.Replace));
 
 		this.mcpMethodNodes.put("renderFaceZNeg | (Lnet/minecraft/block/Block;DDDLnet/minecraft/util/Icon;)V", nodes);
-		this.obfMethodNodes.put("func_78611_c | (Laqw;DDDLmr;)V", nodes);
+		this.obfMethodNodes.put("c | (Laqw;DDDLmr;)V", nodes);
 
 		/**
 		 * renderFaceXPos
@@ -90,7 +88,7 @@ public class TF_RenderBlock extends ClassTransformer
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 32), 544, OperationType.Replace));
 
 		this.mcpMethodNodes.put("renderFaceXPos | (Lnet/minecraft/block/Block;DDDLnet/minecraft/util/Icon;)V", nodes);
-		this.obfMethodNodes.put("func_78605_f | (Laqw;DDDLmr;)V", nodes);
+		this.obfMethodNodes.put("f | (Laqw;DDDLmr;)V", nodes);
 
 	}
 }

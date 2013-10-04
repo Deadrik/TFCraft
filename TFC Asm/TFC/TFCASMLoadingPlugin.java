@@ -17,12 +17,12 @@ public class TFCASMLoadingPlugin implements IFMLLoadingPlugin
 
 	@Override
 	public String[] getASMTransformerClass() {
-		return new String[]{TF_RenderBlock.class.getName(), TF_EntityFallingSand.class.getName()};
+		return new String[]{TF_RenderBlock.class.getName(),TF_EntityFallingSand.class.getName()};
 	}
 
 	@Override
 	public String getModContainerClass() {
-		return TerraFirmaCraft.class.getName();
+		return TerraFirmaCraftCore.class.getName();
 	}
 
 	@Override

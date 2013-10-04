@@ -84,8 +84,8 @@ public class TerraFirmaCraft extends DummyModContainer
 	{
 		super(new ModMetadata());
 		ModMetadata meta = getMetadata();
-		meta.modId = Reference.ModID+"_coremod";
-		meta.name = Reference.ModName+"[coremod]";
+		meta.modId = Reference.ModID;
+		meta.name = Reference.ModName;
 		meta.version = Reference.ModVersion;
 		meta.credits = "";
 		meta.authorList = Arrays.asList("Bioxx");

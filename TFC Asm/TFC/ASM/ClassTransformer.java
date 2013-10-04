@@ -18,12 +18,13 @@ import org.objectweb.asm.tree.TypeInsnNode;
 import TFC.TFCASMLoadingPlugin;
 import cpw.mods.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 
-public abstract class ClassTransformer implements net.minecraft.launchwrapper.IClassTransformer
+public class ClassTransformer implements net.minecraft.launchwrapper.IClassTransformer
 {
 	protected HashMap<String, List<InstrSet>> mcpMethodNodes = new HashMap<String, List<InstrSet>>();
 	protected HashMap<String, List<InstrSet>> obfMethodNodes = new HashMap<String, List<InstrSet>>();
 	protected String mcpClassName;
 	protected String obfClassName;
+
 
 	@Override
 	public byte[] transform(String name, String transformedName, byte[] bytes)
@@ -47,7 +48,7 @@ public abstract class ClassTransformer implements net.minecraft.launchwrapper.IC
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader(bytes);
 		classReader.accept(classNode, 0);
-
+		System.out.println("Attempting to Transform: "+ classNode.name + " | Found " + getMethodNodeList().size() + " injections");
 		// find method to inject into
 		Iterator<MethodNode> methods = classNode.methods.iterator();
 		while (methods.hasNext())
@@ -81,9 +82,11 @@ public abstract class ClassTransformer implements net.minecraft.launchwrapper.IC
 						}
 					}
 				}
+				m.visitMaxs(m.maxStack+numInsertions, m.maxLocals);
+				System.out.println("Inserted: "+ classNode.name +" : {"+m.name + " | " + m.desc+"}");
 			}
 		}
-
+		System.out.println("Attempting to Transform: "+ classNode.name + " Complete");
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 		return writer.toByteArray();

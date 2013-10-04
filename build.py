@@ -29,6 +29,8 @@ def build(major_num=0, build_num=0, revision_num=0):
     copytree(os.path.join(forge_dir, 'TFC_Shared'), os.path.join(src_dir, 'minecraft'), 0)
     print '\nTFC API -> minecraft'
     copytree(os.path.join(forge_dir, 'TFC API'), os.path.join(src_dir, 'minecraft'), 0)
+    print '\nTFC ASM -> minecraft'
+    copytree(os.path.join(forge_dir, 'TFC ASM'), os.path.join(src_dir, 'minecraft'), 0)
     print
     
     error_level = 0
