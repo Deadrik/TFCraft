@@ -3,7 +3,6 @@ package TFC.Entities;
 import net.minecraft.entity.item.EntityFallingSand;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import TFC.API.Util.Helper;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
@@ -17,7 +16,7 @@ public class EntityFallingStone extends EntityFallingSand implements IEntityAddi
 		super(par1World);
 		this.shouldDropItem = true;
 		this.setIsAnvil(true);
-		try {
+		/*try {
 			Helper.setPrivateValue(EntityFallingSand.class, this, 6, 2000);
 			Helper.setPrivateValue(EntityFallingSand.class, this, 7, 100.0F);
 		} catch (IllegalArgumentException e) {
@@ -26,7 +25,7 @@ public class EntityFallingStone extends EntityFallingSand implements IEntityAddi
 			e.printStackTrace();
 		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
-		}
+		}*/
 
 	}
 
@@ -34,7 +33,7 @@ public class EntityFallingStone extends EntityFallingSand implements IEntityAddi
 	{
 		super(par1World, par2, par4, par6, par8, par9);
 		this.setIsAnvil(true);
-		try {
+		/*try {
 			Helper.setPrivateValue(EntityFallingSand.class, this, 6, 2000);
 			Helper.setPrivateValue(EntityFallingSand.class, this, 7, 100.0F);
 		} catch (IllegalArgumentException e) {
@@ -43,7 +42,7 @@ public class EntityFallingStone extends EntityFallingSand implements IEntityAddi
 			e.printStackTrace();
 		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	@Override

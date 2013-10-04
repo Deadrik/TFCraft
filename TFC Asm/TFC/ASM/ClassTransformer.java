@@ -33,7 +33,7 @@ public abstract class ClassTransformer implements net.minecraft.launchwrapper.IC
 		{
 			return transform(bytes);
 		}
-		else if (transformedName.equals(mcpClassName))
+		else if (name.equals(mcpClassName))
 		{
 			return transform(bytes);
 		}
@@ -57,7 +57,12 @@ public abstract class ClassTransformer implements net.minecraft.launchwrapper.IC
 			{
 				numInsertions = 0;
 				List<InstrSet> instructions = (List<InstrSet>) getMethodNodeList().get(m.name + " | " + m.desc);
-				InstrSet target = instructions.get(0);
+				InstrSet target = null;
+				if(instructions.size() > 0) {
+					target = instructions.get(0);
+				} else {
+					System.out.println("Error in: {"+m.name + " | " + m.desc+"} No Instructions");
+				}
 
 				for (int index = 0; index < m.instructions.size() && instructions.size() > 0; index++)
 				{

@@ -1,4 +1,4 @@
-package TFC.ASM;
+package TFC.ASM.Transform;
 
 /*
  * Invaluable help from AtomicStryker's MultiMine coremod code <3
@@ -12,10 +12,14 @@ import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.LdcInsnNode;
 import org.objectweb.asm.tree.VarInsnNode;
 
-public class RenderBlockTransformer extends ClassTransformer
+import TFC.ASM.ClassTransformer;
+import TFC.ASM.ClassTransformer.InstrSet;
+import TFC.ASM.ClassTransformer.OperationType;
+
+public class TF_RenderBlock extends ClassTransformer
 {
 
-	public RenderBlockTransformer()
+	public TF_RenderBlock()
 	{
 		mcpClassName = "net.minecraft.client.renderer.RenderBlocks";
 		obfClassName = "bfo";
