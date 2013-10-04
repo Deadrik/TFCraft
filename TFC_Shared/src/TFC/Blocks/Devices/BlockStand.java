@@ -228,14 +228,19 @@ public class BlockStand extends BlockTerraContainer
 	{
 		if (world.isRemote)
 		{
-			((NetworkTileEntity)world.getBlockTileEntity(x,y,z)).validate();
+			//((NetworkTileEntity)world.getBlockTileEntity(x,y,z)).validate();
 			TEStand TeStand = (TEStand)(world.getBlockTileEntity(x, y, z));
 			if(TeStand.isTop){
 				return onBlockActivated(world,x,y-1,z,entityplayer,side,hitX,hitY,hitZ);
 			}
 			ItemStack item = entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem];
-			if(item!=null && item.getItem() instanceof ItemArmor){
-				TeStand.setInventorySlotContents(4-((ItemArmor)item.getItem()).armorType,item);					
+			if(item!=null && item.getItem() instanceof ItemArmor && TeStand.items[4-((ItemArmor)item.getItem()).armorType] == null){
+				TeStand.setInventorySlotContents(4-((ItemArmor)item.getItem()).armorType,item.copy());					
+			}
+			else if(item==null && TeStand.highlightedSlot != -1){
+				entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem] = TeStand.items[TeStand.highlightedSlot];
+				TeStand.setInventorySlotContents(TeStand.highlightedSlot, null);
+				TeStand.highlightedSlot = -1;
 			}
 			return true;
 		}
@@ -248,8 +253,14 @@ public class BlockStand extends BlockTerraContainer
 					return onBlockActivated(world,x,y-1,z,entityplayer,side,hitX,hitY,hitZ);
 				}
 				ItemStack item = entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem];
-				if(item!=null && item.getItem() instanceof ItemArmor){
-					TeStand.setInventorySlotContents(4-((ItemArmor)item.getItem()).armorType,item);					
+				if(item!=null && item.getItem() instanceof ItemArmor && TeStand.items[4-((ItemArmor)item.getItem()).armorType] == null){
+					TeStand.setInventorySlotContents(4-((ItemArmor)item.getItem()).armorType,item.copy());
+					entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem].stackSize--;
+				}
+				else if(item==null && TeStand.highlightedSlot != -1){
+					entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem] = TeStand.items[TeStand.highlightedSlot];
+					TeStand.setInventorySlotContents(TeStand.highlightedSlot, null);
+					TeStand.highlightedSlot = -1;
 				}
 				//entityplayer.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);
 				return true;

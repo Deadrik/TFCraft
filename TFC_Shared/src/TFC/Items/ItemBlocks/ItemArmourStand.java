@@ -5,6 +5,8 @@ import java.util.List;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.Constant.Global;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Textures;
 import cpw.mods.fml.relauncher.Side;
@@ -53,5 +55,15 @@ public class ItemArmourStand extends ItemTerraBlock
 	public void registerIcons(IconRegister registerer)
 	{
 
+	}
+	
+	@Override
+	public EnumSize getSize(ItemStack is) {
+		return EnumSize.VERYLARGE;
+	}
+
+	@Override
+	public EnumWeight getWeight(ItemStack is) {
+		return EnumWeight.HEAVY;
 	}
 }

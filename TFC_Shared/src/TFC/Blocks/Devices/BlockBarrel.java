@@ -1,8 +1,10 @@
 package TFC.Blocks.Devices;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -13,6 +15,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
@@ -26,8 +29,10 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Textures;
+import TFC.Core.Metal.MetalPair;
 import TFC.Items.ItemBarrels;
 import TFC.TileEntities.NetworkTileEntity;
+import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TileEntityBarrel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -107,9 +112,16 @@ public class BlockBarrel extends BlockTerraContainer
 	 * Called when the block is placed in the world.
 	 */
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack is)
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase player, ItemStack is)
 	{
+		super.onBlockPlacedBy(world, i, j, k, player, is);
+		TileEntityBarrel te = (TileEntityBarrel)world.getBlockTileEntity(i, j, k);
 
+		if (te != null && is.hasTagCompound())
+		{
+			te.readFromItemNBT(is.getTagCompound());
+			TerraFirmaCraft.proxy.sendCustomPacket(te.createUpdatePacket());
+		}
 	}
 
 	/**
@@ -223,57 +235,57 @@ public class BlockBarrel extends BlockTerraContainer
 	 * Called whenever the block is removed.
 	 */
 	@Override
-	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+	public void breakBlock(World world, int i, int j, int k, int par5, int par6)
 	{
-		TileEntityBarrel var5 = (TileEntityBarrel)par1World.getBlockTileEntity(par2, par3, par4);
+		TileEntityBarrel te = (TileEntityBarrel)world.getBlockTileEntity(i, j, k);
 
-		if (var5 != null)
+		if (te != null)
 		{
-			for (int var6 = 0; var6 < var5.getSizeInventory(); ++var6)
-			{
-				ItemStack var7 = var5.getStackInSlot(var6);
+			ItemStack is = new ItemStack(Block.blocksList[par5], 1,par6);
+			NBTTagCompound nbt = writeBarrelToNBT(te);
+			is.setTagCompound(nbt);
+			EntityItem ei = new EntityItem(world,i,j,k,is);
+			world.spawnEntityInWorld(ei);
 
-				if (var7 != null)
-				{
-					float var8 = this.random.nextFloat() * 0.8F + 0.1F;
-					float var9 = this.random.nextFloat() * 0.8F + 0.1F;
-					EntityItem var12;
-
-					for (float var10 = this.random.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; par1World.spawnEntityInWorld(var12))
-					{
-						int var11 = this.random.nextInt(21) + 10;
-
-						if (var11 > var7.stackSize)
-						{
-							var11 = var7.stackSize;
-						}
-						var7.stackSize -= var11;
-						var12 = new EntityItem(par1World, par2 + var8, par3 + var9, par4 + var10, new ItemStack(var7.itemID, var11, var7.getItemDamage()));
-						float var13 = 0.05F;
-						var12.motionX = (float)this.random.nextGaussian() * var13;
-						var12.motionY = (float)this.random.nextGaussian() * var13 + 0.2F;
-						var12.motionZ = (float)this.random.nextGaussian() * var13;
-
-						if (var7.hasTagCompound())
-						{
-							var12.getEntityItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
-						}
-					}
-				}
+			for(int s = 0; s < te.getSizeInventory(); ++s) {
+				te.setInventorySlotContents(s, null);
 			}
 		}
-
-		super.breakBlock(par1World, par2, par3, par4, par5, par6);
+		super.breakBlock(world, i, j, k, par5, par6);
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	protected void dropBlockAsItem_do(World par1World, int par2, int par3, int par4, ItemStack par5ItemStack)
 	{
-		//Random R = new Random();
-		//dropBlockAsItem_do(world, i, j, k, new ItemStack(idDropped(0,R,l), 1, l+13));
+	}
 
-		//super.harvestBlock(world, entityplayer, i, j, k, l);
-		dropBlockAsItem_do(world, i, j, k, new ItemStack(this, 1, l));
+	public NBTTagCompound writeBarrelToNBT(TileEntityBarrel te)
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+
+		nbt.setInteger("liqLev", te.liquidLevel);
+		nbt.setInteger("type", te.Type);
+		nbt.setBoolean("sealed", te.getSealed());
+
+		NBTTagList nbttaglist = new NBTTagList();
+		nbttaglist = new NBTTagList();
+		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+		if(te.getStackInSlot(0)!=null){
+			nbttagcompound1.setByte("Slot", (byte)0);
+			te.getStackInSlot(0).writeToNBT(nbttagcompound1);
+			nbttaglist.appendTag(nbttagcompound1);
+		}
+
+		nbttagcompound1 = new NBTTagCompound();
+		if(te.getStackInSlot(1)!=null){
+			nbttagcompound1.setByte("Slot", (byte)1);
+			te.getStackInSlot(1).writeToNBT(nbttagcompound1);
+			nbttaglist.appendTag(nbttagcompound1);
+		}
+
+		nbt.setTag("Items", nbttaglist);
+
+		return nbt;
 	}
 
 	@Override
@@ -286,7 +298,7 @@ public class BlockBarrel extends BlockTerraContainer
 		}
 		else
 		{
-			
+
 			if(world.getBlockTileEntity(x, y, z) != null){
 				TileEntityBarrel TeBarrel = (TileEntityBarrel)(world.getBlockTileEntity(x, y, z));
 				if(TeBarrel.liquidLevel == 256 && TeBarrel.Type == 4 && TeBarrel.getSealed()){
@@ -307,6 +319,8 @@ public class BlockBarrel extends BlockTerraContainer
 		return false;
 
 	}
+
+
 
 	@Override
 	@SideOnly(Side.CLIENT)

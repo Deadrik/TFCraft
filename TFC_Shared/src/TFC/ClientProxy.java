@@ -55,6 +55,7 @@ import TFC.Entities.Mobs.EntitySquidTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
 import TFC.Handlers.BiomeEventHandler;
+import TFC.Handlers.Client.ArmourStandHighlightHandler;
 import TFC.Handlers.Client.BlockRenderHandler;
 import TFC.Handlers.Client.ChiselHighlightHandler;
 import TFC.Handlers.Client.FarmlandHighlightHandler;
@@ -546,6 +547,7 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new ChiselHighlightHandler());
 		MinecraftForge.EVENT_BUS.register(new FarmlandHighlightHandler());
 		MinecraftForge.EVENT_BUS.register(new PlankHighlightHandler());
+		MinecraftForge.EVENT_BUS.register(new ArmourStandHighlightHandler());
 	}
 
 	@Override

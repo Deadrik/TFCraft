@@ -33,10 +33,10 @@ public class RenderStand  implements ISimpleBlockRenderingHandler
 				renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
 				
 				//Main posts of the stand
-				renderer.setRenderBounds(0.35F, 0.201F, 0.45F, 0.45F, 1.35F, 0.55F);
+				renderer.setRenderBounds(0.35F, 0.101F, 0.45F, 0.45F, 1.35F, 0.55F);
 				renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
 				
-				renderer.setRenderBounds(0.55F, 0.201F, 0.45F, 0.65F, 1.35F, 0.55F);
+				renderer.setRenderBounds(0.55F, 0.101F, 0.45F, 0.65F, 1.35F, 0.55F);
 				renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
 			}
 			else{
@@ -44,10 +44,10 @@ public class RenderStand  implements ISimpleBlockRenderingHandler
 				renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
 				
 				//Main posts of the stand
-				renderer.setRenderBounds(0.45F, 0.201F, 0.35F, 0.55F, 1.35F, 0.45F);
+				renderer.setRenderBounds(0.45F, 0.101F, 0.35F, 0.55F, 1.35F, 0.45F);
 				renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
 				
-				renderer.setRenderBounds(0.45F, 0.201F, 0.55F, 0.55F, 1.35F, 0.65F);
+				renderer.setRenderBounds(0.45F, 0.101F, 0.55F, 0.55F, 1.35F, 0.65F);
 				renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
 			}
 			

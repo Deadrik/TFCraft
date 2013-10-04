@@ -247,11 +247,13 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(Item.fishingRod,1), new Object[] {"  #"," #$","# $",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)});
 		GameRegistry.addRecipe(new ItemStack(Item.fishingRod,1), new Object[] {"#  ","$# ","$ #",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)});
 
-		//Tool Rack & Barrel
+		//Tool Rack & Barrel & Armour Stands
 		for(int j = 0; j < 16; j++)
 		{
 			GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack, 1, j), new Object[] { "###","   ","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,j)});
 			GameRegistry.addRecipe(new ItemStack(TFCBlocks.Barrel,1,j), new Object[] { "# #","# #","###",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j)});
+			GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand,1,j), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j),Character.valueOf('%'),
+				new ItemStack(TFCBlocks.Planks,1,j)});
 		}
 
 		for (int i=0; i < Global.STONE_FLUXINDEX.length; i++) {
