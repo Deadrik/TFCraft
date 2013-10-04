@@ -66,7 +66,7 @@ public class BlockFruitWood extends BlockTerraContainer
     @Override
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {		
-        //we need to make sure teh palyer has the correct tool out
+        //we need to make sure the player has the correct tool out
         boolean isAxeorSaw = false;
         ItemStack equip = entityplayer.getCurrentEquippedItem();
         if(equip!=null)
@@ -187,8 +187,7 @@ public class BlockFruitWood extends BlockTerraContainer
                         }
                     }
                 }
-            }
-
+            }           
             world.setBlock(i, j, k, 0);
         }
     }
@@ -419,5 +418,15 @@ public class BlockFruitWood extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		return new TileEntityFruitTreeWood();
+	}
+
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, int blockId,
+			int metadata) {
+		if(!world.isRemote && checkOut(world,x,y-1,z,metadata) && world.getBlockTileEntity(x, y-1, z) != null) {
+			((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y-1, z)).setBirth();
+		}
+		super.breakBlock(world, x, y, z, blockId, metadata);
 	}
 }
