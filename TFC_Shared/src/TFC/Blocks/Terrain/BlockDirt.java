@@ -72,14 +72,14 @@ public class BlockDirt extends BlockTerra
 	{
 		if(par1IBlockAccess.getBlockMetadata(par2, par3, par4)+textureOffset < 21)
 			return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)+textureOffset];
-		return icons[21];
+		return icons[20];
 	}
 
 	@Override
 	public Icon getIcon(int par1, int par2)
 	{
 		if(par2+textureOffset < 21)return icons[par2+textureOffset];
-		return icons[21];
+		return icons[20];
 	}
 
 	@Override
