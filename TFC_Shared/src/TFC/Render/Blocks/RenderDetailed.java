@@ -3,27 +3,25 @@ package TFC.Render.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Icon;
-import TFC.Render.RenderBlocksFixUV;
 import TFC.TileEntities.TileEntityDetailed;
 
 public class RenderDetailed 
 {
-	private static RenderBlocksFixUV renderer;
+	//private static RenderBlocksFixUV renderer;
 
-	public static boolean renderBlockDetailed(Block block, int i, int j, int k, RenderBlocks renderblocks)
+	public static boolean renderBlockDetailed(Block block, int i, int j, int k, RenderBlocks renderer)
 	{
-		TileEntityDetailed te = (TileEntityDetailed) renderblocks.blockAccess.getBlockTileEntity(i, j, k);
-		int md = renderblocks.blockAccess.getBlockMetadata(i, j, k);
+		TileEntityDetailed te = (TileEntityDetailed) renderer.blockAccess.getBlockTileEntity(i, j, k);
+		int md = renderer.blockAccess.getBlockMetadata(i, j, k);
 
-		if(renderer == null)
+		/*if(renderer == null)
 		{
-			renderer = new RenderBlocksFixUV(renderblocks);
+			renderer = new RenderBlocksFixUV(renderer);
 		}
 		else
 		{
-			renderer.update(renderblocks);
-		}
+			renderer.update(renderer);
+		}*/
 
 		if(te.TypeID <= 0)
 		{
@@ -58,7 +56,7 @@ public class RenderDetailed
 						float maxZ = minZ + 0.5f;
 
 						renderer.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
-						renderStandardBlockWithColorMultiplier(Block.blocksList[type], renderer, i, j, k, 1f, 1f, 1f, meta);
+						renderer.renderStandardBlock(Block.blocksList[type], i, j, k);
 					}
 				}
 			}
@@ -86,87 +84,56 @@ public class RenderDetailed
 						float maxZ = minZ + 0.125f;
 
 						renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
-						renderStandardBlockWithColorMultiplier(Block.blocksList[type], renderblocks, i, j, k, 1f, 1f, 1f, meta);
+						renderblocks.renderStandardBlock(Block.blocksList[type], i, j, k);
 					}
 				}
 			}
 		}
 	}
 
-	public static boolean renderStandardBlockWithColorMultiplier(Block par1Block, RenderBlocks renderblocks, int par2, int par3, int par4, float par5, float par6, float par7, int meta)
+	public static boolean renderStandardBlock(Block block, RenderBlocks renderblocks, int x, int y, int z, int meta)
 	{
 		renderblocks.enableAO = false;
-		Tessellator var8 = Tessellator.instance;
+		Tessellator tess = Tessellator.instance;
 
-		float var10 = 0.5F;
-		float var11 = 1.0F;
-		float var12 = 0.8F;
-		float var13 = 0.6F;
-		float var14 = var11 * par5;
-		float var15 = var11 * par6;
-		float var16 = var11 * par7;
-		float var17 = var10;
-		float var18 = var12;
-		float var19 = var13;
-		float var20 = var10;
-		float var21 = var12;
-		float var22 = var13;
-		float var23 = var10;
-		float var24 = var12;
-		float var25 = var13;
+		float r = 0.5F;
+		float g = 0.8F;
+		float b = 0.6F;
+		float var17 = r;
+		float var18 = g;
+		float var19 = b;
+		float var20 = r;
+		float var21 = g;
+		float var22 = b;
+		float var23 = r;
+		float var24 = g;
+		float var25 = b;
 
-		if (par1Block != Block.grass)
-		{
-			var17 = var10 * par5;
-			var18 = var12 * par5;
-			var19 = var13 * par5;
-			var20 = var10 * par6;
-			var21 = var12 * par6;
-			var22 = var13 * par6;
-			var23 = var10 * par7;
-			var24 = var12 * par7;
-			var25 = var13 * par7;
-		}
+		int var26 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, x, y, z);
 
-		int var26 = par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4);
+		tess.setBrightness(renderblocks.renderMinY > 0.0D ? var26 : block.getMixedBrightnessForBlock(renderblocks.blockAccess, x, y - 1, z));
+		tess.setColorOpaque_F(var17, var20, var23);
+		renderblocks.renderFaceYNeg(block, x, y, z, block.getIcon(0, meta));
 
-		var8.setBrightness(renderblocks.renderMinY > 0.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4));
-		var8.setColorOpaque_F(var17, var20, var23);
-		renderblocks.renderFaceYNeg(par1Block, par2, par3, par4, par1Block.getIcon(0, meta));
+		tess.setBrightness(renderblocks.renderMaxY < 1.0D ? var26 : block.getMixedBrightnessForBlock(renderblocks.blockAccess, x, y + 1, z));
+		tess.setColorOpaque_F(1, 1, 1);
+		renderblocks.renderFaceYPos(block, x, y, z, block.getIcon(1, meta));
 
+		tess.setBrightness(renderblocks.renderMaxX > 0.0D ? var26 : block.getMixedBrightnessForBlock(renderblocks.blockAccess, x+1, y, z));
+		tess.setColorOpaque_F(var18, var21, var24);
+		renderblocks.renderFaceXPos(block, x, y, z, block.getIcon(2, meta));
 
-		var8.setBrightness(renderblocks.renderMaxY < 1.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4));
-		var8.setColorOpaque_F(var14, var15, var16);
-		renderblocks.renderFaceYPos(par1Block, par2, par3, par4, par1Block.getIcon(1, meta));
+		tess.setBrightness(renderblocks.renderMinX < 1.0D ? var26 : block.getMixedBrightnessForBlock(renderblocks.blockAccess, x-1, y, z));
+		tess.setColorOpaque_F(var18, var21, var24);
+		renderblocks.renderFaceXNeg(block, x, y, z, block.getIcon(3, meta));
 
+		tess.setBrightness(renderblocks.renderMinZ > 0.0D ? var26 : block.getMixedBrightnessForBlock(renderblocks.blockAccess, x, y, z-1));
+		tess.setColorOpaque_F(var19, var22, var25);
+		renderblocks.renderFaceZNeg(block, x, y, z, block.getIcon(4, meta));
 
-		Icon var28;
-
-		var8.setBrightness(renderblocks.renderMaxX > 0.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 - 1));
-		var8.setColorOpaque_F(var18, var21, var24);
-		var28 = par1Block.getIcon(2, meta);
-
-		renderblocks.renderFaceXNeg(par1Block, par2, par3, par4, var28);
-
-		var8.setBrightness(renderblocks.renderMinX < 1.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 + 1));
-		var8.setColorOpaque_F(var18, var21, var24);
-		var28 = par1Block.getIcon(3, meta);
-
-		renderblocks.renderFaceXPos(par1Block, par2, par3, par4, var28);
-
-
-		var8.setBrightness(renderblocks.renderMinZ > 0.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4));
-		var8.setColorOpaque_F(var19, var22, var25);
-		var28 = par1Block.getIcon(4, meta);
-
-		renderblocks.renderFaceZNeg(par1Block, par2, par3, par4, var28);
-
-
-		var8.setBrightness(renderblocks.renderMaxZ < 1.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4));
-		var8.setColorOpaque_F(var19, var22, var25);
-		var28 = par1Block.getIcon(5, meta);
-
-		renderblocks.renderFaceZPos(par1Block, par2, par3, par4, var28);
+		tess.setBrightness(renderblocks.renderMaxZ < 1.0D ? var26 : block.getMixedBrightnessForBlock(renderblocks.blockAccess, x, y, z+1));
+		tess.setColorOpaque_F(var19, var22, var25);
+		renderblocks.renderFaceZPos(block, x, y, z, block.getIcon(5, meta));
 
 		return true;
 	}

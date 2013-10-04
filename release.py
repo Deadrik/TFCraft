@@ -60,19 +60,24 @@ def main():
         
         os.makedirs(out_folder)
     
-    zip_start('TFC-%d.%d.%d.zip' % (major_num, build_num, revision_num))
+    zip_start('TFC-%d.%d.%d.jar' % (major_num, build_num, revision_num))
     zip_folder(client_dir, '', zip)
     zip_add('TFCraft_credits.txt')
     zip_add('license.txt')
+    zip_add('TFC ASM/tfc_at.cfg')
     zip_folder(os.path.join(forge_dir, 'TFC Resources'), '', zip)
+    zip_folder(os.path.join(forge_dir, 'TFC ASM/META-INF'), 'META-INF', zip)
     zip_end()
     
-    zip_start('TFC-Dev-%d.%d.%d.zip' % (major_num, build_num, revision_num))
+    zip_start('TFC-Dev-%d.%d.%d.jar' % (major_num, build_num, revision_num))
     zip_folder(os.path.join(forge_dir, 'TFC_Shared/src'), '', zip)
     zip_folder(os.path.join(forge_dir, 'TFC Resources'), '', zip)
     zip_folder(os.path.join(forge_dir, 'TFC API'), '', zip)
+    zip_folder(os.path.join(forge_dir, 'TFC ASM'), '', zip)
+    zip_folder(os.path.join(forge_dir, 'TFC ASM/META-INF'), 'META-INF', zip)
     zip_add('tfc_credits.txt')
     zip_add('license.txt')
+    zip_add('TFC ASM/tfc_at.cfg')
     zip_end()
 
     zip_start('TFC-Dev-API-%d.%d.%d.zip' % (major_num, build_num, revision_num))
