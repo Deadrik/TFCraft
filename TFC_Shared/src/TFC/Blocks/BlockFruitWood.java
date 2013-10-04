@@ -424,7 +424,7 @@ public class BlockFruitWood extends BlockTerraContainer
 	@Override
 	public void breakBlock(World world, int x, int y, int z, int blockId,
 			int metadata) {
-		if(checkOut(world,x,y-1,z,metadata)) {
+		if(!world.isRemote && checkOut(world,x,y-1,z,metadata) && world.getBlockTileEntity(x, y-1, z) != null) {
 			((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y-1, z)).setBirth();
 		}
 		super.breakBlock(world, x, y, z, blockId, metadata);
