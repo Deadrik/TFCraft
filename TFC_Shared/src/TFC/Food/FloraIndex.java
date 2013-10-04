@@ -12,9 +12,15 @@ public class FloraIndex
 	public int bloomFinish;
 	public int harvestStart;
 	public int harvestFinish;
-	public int fruitHangTime;
-	public float minTemp;
-	public float maxTemp;
+	public int fruitHangTime = 1;
+	public float minTemp = 0;
+	public float maxTemp = 38;
+	public float minBioTemp = 10;
+	public float maxBioTemp = 30;
+	public float minRain = 125;
+	public float maxRain = 2000;
+	public float minEVT = 0.25f;
+	public float maxEVT = 16;
 	public ItemStack output;
 
 	/**
@@ -32,14 +38,32 @@ public class FloraIndex
 		harvestStart = h1;
 		harvestFinish = h2;
 		output = o;
-		minTemp = 0F;
-		maxTemp = 43;
-		fruitHangTime = 1;
 	}
 
 	public FloraIndex setHangTime(int time)
 	{
 		fruitHangTime = time;
+		return this;
+	}
+
+	public FloraIndex setBioTemp(float min, float max)
+	{
+		this.minBioTemp = min;
+		this.maxBioTemp = max;
+		return this;
+	}
+
+	public FloraIndex setRain(float min, float max)
+	{
+		this.minRain = min;
+		this.maxRain = max;
+		return this;
+	}
+
+	public FloraIndex setEVT(float min, float max)
+	{
+		this.minEVT = min;
+		this.maxEVT = max;
 		return this;
 	}
 

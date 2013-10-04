@@ -763,6 +763,8 @@ public class TFCItemID {
 	public static int SnowberryLeaf				= 19138;
 	public static int ElderberryLeaf			= 19139;
 	public static int GooseberryLeaf			= 19140;
+	public static int Cloudberry				= 19141;
+	public static int CloudberryLeaf			= 19142;
 
 
 	public static void Setup(Configuration config)
@@ -1330,6 +1332,7 @@ public class TFCItemID {
 		Snowberry = TFCOptions.getIntFor(config, "item", "Snowberry", Snowberry);	
 		Elderberry = TFCOptions.getIntFor(config, "item", "Elderberry", Elderberry);
 		Gooseberry = TFCOptions.getIntFor(config, "item", "Gooseberry", Gooseberry);	
+		Cloudberry = TFCOptions.getIntFor(config, "item", "Gooseberry", Gooseberry);
 		WintergreenLeaf = TFCOptions.getIntFor(config, "item", "WintergreenLeaf", WintergreenLeaf);	
 		BlueberryLeaf = TFCOptions.getIntFor(config, "item", "BlueberryLeaf", BlueberryLeaf);	
 		RaspberryLeaf = TFCOptions.getIntFor(config, "item", "RaspberryLeaf", RaspberryLeaf);	
@@ -1340,6 +1343,7 @@ public class TFCItemID {
 		SnowberryLeaf = TFCOptions.getIntFor(config, "item", "SnowberryLeaf", SnowberryLeaf);	
 		ElderberryLeaf = TFCOptions.getIntFor(config, "item", "ElderberryLeaf", ElderberryLeaf);
 		GooseberryLeaf = TFCOptions.getIntFor(config, "item", "GooseberryLeaf", GooseberryLeaf);
+		CloudberryLeaf = TFCOptions.getIntFor(config, "item", "GooseberryLeaf", CloudberryLeaf);
 
 		MealGeneric = TFCOptions.getIntFor(config, "item", "MealGeneric", MealGeneric);
 		MealMoveSpeed = TFCOptions.getIntFor(config, "item", "MealMoveSpeed", MealMoveSpeed);

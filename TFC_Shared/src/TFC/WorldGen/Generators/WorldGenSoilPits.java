@@ -13,7 +13,8 @@ import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenSoilPits implements IWorldGenerator
 {
-
+	static WorldGenBerryBush cranberryGen = new WorldGenBerryBush(false, 6, 15, 1, 6, TFCBlocks.Peat.blockID);
+	static WorldGenBerryBush cloudberryGen = new WorldGenBerryBush(false, 10, 12, 1, 6, TFCBlocks.Peat.blockID);
 
 	public WorldGenSoilPits()
 	{
@@ -26,18 +27,20 @@ public class WorldGenSoilPits implements IWorldGenerator
 	{
 		chunkX *= 16;
 		chunkZ *= 16;
-		for (int var1 = 0; var1 < 1; ++var1)
-		{
-			int var2 = chunkX + random.nextInt(16) + 8;
-			int var3 = chunkZ + random.nextInt(16) + 8;
-			generateClay(world, random, var2, world.getTopSolidOrLiquidBlock(var2, var3), var3);
-		}
 
-		for (int var1 = 0; var1 < 1; ++var1)
+		int x = chunkX + random.nextInt(16) + 8;
+		int z = chunkZ + random.nextInt(16) + 8;
+		generateClay(world, random, x, world.getTopSolidOrLiquidBlock(x, z), z);
+
+		x = chunkX + random.nextInt(16) + 8;
+		z = chunkZ + random.nextInt(16) + 8;
+		if(generatePeat(world, random, x, world.getTopSolidOrLiquidBlock(x, z), z))
 		{
-			int var2 = chunkX + random.nextInt(16) + 8;
-			int var3 = chunkZ + random.nextInt(16) + 8;
-			generatePeat(world, random, var2, world.getTopSolidOrLiquidBlock(var2, var3), var3);
+			if(random.nextInt(5) == 0) {
+				if(!cranberryGen.generate(world, random, x, world.getTopSolidOrLiquidBlock(x, z)+1, z)) {
+					cloudberryGen.generate(world, random, x, world.getTopSolidOrLiquidBlock(x, z)+1, z);
+				}
+			}
 		}
 
 	}
@@ -46,7 +49,7 @@ public class WorldGenSoilPits implements IWorldGenerator
 	{
 		int var6 = par2Random.nextInt(16) + 8;
 		byte var7 = 2;
-
+		boolean flag = false;
 		if(par2Random.nextInt(50) == 0 && yCoord <= 145)
 		{
 			for (int x = xCoord - var6; x <= xCoord + var6; ++x)
@@ -67,10 +70,12 @@ public class WorldGenSoilPits implements IWorldGenerator
 								if (TFC_Core.isDirt(blockID) || TFC_Core.isClay(blockID) || TFC_Core.isPeat(blockID))
 								{
 									par1World.setBlock(x, y, z, TFCBlocks.Peat.blockID);
+									flag = true;
 								}
 								else if(TFC_Core.isGrass(blockID))
 								{
 									par1World.setBlock(x, y, z, TFCBlocks.PeatGrass.blockID);
+									flag = true;
 								}
 							}
 						}
@@ -79,14 +84,14 @@ public class WorldGenSoilPits implements IWorldGenerator
 			}
 		}
 
-		return true;
+		return flag;
 	}
 
 	public boolean generateClay(World world, Random rand, int i, int j, int k)
 	{
 		int radius = rand.nextInt(14) + 2;
 		byte depth = (byte) (rand.nextInt(3) + 1);
-
+		boolean flag = false;
 		if(rand.nextInt(30) == 0 && j <= 150)
 		{
 			for (int xCoord = i - radius; xCoord <= i + radius; ++xCoord)
@@ -108,6 +113,7 @@ public class WorldGenSoilPits implements IWorldGenerator
 							{
 								world.setBlock(xCoord, yCoord, zCoord, 
 										TFC_Core.getTypeForClay(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2), 0x2);
+								flag = true;
 							}
 							else if(ID == TFCBlocks.Grass.blockID || ID == TFCBlocks.Grass2.blockID)
 							{
@@ -115,6 +121,7 @@ public class WorldGenSoilPits implements IWorldGenerator
 										TFC_Core.getTypeForClayGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2), 0x2);
 								if(rand.nextInt(9) == 0 && world.getBlockId(xCoord, yCoord+1, zCoord) == 0) {
 									world.setBlock(xCoord, yCoord+1, zCoord, TFCBlocks.Flora.blockID, 0, 2);
+									flag = true;
 								}
 							}
 						}
@@ -123,6 +130,6 @@ public class WorldGenSoilPits implements IWorldGenerator
 			}
 		}
 
-		return true;
+		return flag;
 	}
 }

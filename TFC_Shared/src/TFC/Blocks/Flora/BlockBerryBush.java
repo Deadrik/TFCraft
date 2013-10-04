@@ -3,6 +3,7 @@ package TFC.Blocks.Flora;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +20,6 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
-import TFC.Render.TFC_CoreRender;
 import TFC.TileEntities.TEBerryBush;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -32,9 +32,10 @@ public class BlockBerryBush extends BlockTerraContainer
 
 	public BlockBerryBush(int par1)
 	{
-		super(par1);
+		super(par1, Material.plants);
+
 		MetaNames = new String[]{"Wintergreen", "Blueberry", "Raspberry", "Strawberry", "Blackberry", "Bunchberry", "Cranberry", 
-				"Snowberry", "Elderberry", "Gooseberry"};
+				"Snowberry", "Elderberry", "Gooseberry", "Cloudberry"};
 		icons = new Icon[MetaNames.length];
 		iconsBerries = new Icon[MetaNames.length];
 		this.setTickRandomly(true);
@@ -90,9 +91,6 @@ public class BlockBerryBush extends BlockTerraContainer
 		case 1://Blueberries	
 		{
 			maxY = 0.85f;
-			if(isSamePlant(access, i, j+1, k, _meta)) {
-				maxY = 1;
-			}
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
@@ -147,16 +145,22 @@ public class BlockBerryBush extends BlockTerraContainer
 			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
 			return;
 		}
+		case 9://Gooseberries	
+		{
+			maxY = 0.75f;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case 10://Cloudberries	
+		{
+			maxY = 0.35f;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
 		default:
 			setBlockBounds(minX, 0, minZ, maxX, 1f, maxZ);
 			return;
 		}
-	}
-
-	private float getRandomHeight(int i, int j, int k, float yMax, float disp)
-	{
-		TFC_CoreRender.renderRandom.setSeed(i*k+j);
-		return yMax + ((TFC_CoreRender.renderRandom.nextFloat() * (disp * 2))-disp);
 	}
 
 	private boolean isSamePlant(IBlockAccess access, int i, int j, int k, int meta)
@@ -192,6 +196,10 @@ public class BlockBerryBush extends BlockTerraContainer
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
+		lifeCycle(world, i, j, k);
+	}
+
+	private void lifeCycle(World world, int i, int j, int k) {
 		if(!world.isRemote)
 		{
 			if(!canBlockStay(world, i, j, k))
@@ -305,10 +313,7 @@ public class BlockBerryBush extends BlockTerraContainer
 	public void onNeighborBlockChange(World world, int i, int j, int k, int par5)
 	{
 		super.onNeighborBlockChange(world, i, j, k, par5);
-		if(!canBlockStay(world,i,j,k))
-		{
-			world.setBlock(i, j, k, 0);
-		}
+		lifeCycle(world, i, j, k);
 	}
 
 	protected boolean canThisPlantGrowOnThisBlockID(int id)
@@ -320,6 +325,11 @@ public class BlockBerryBush extends BlockTerraContainer
 	public int idDropped(int par1, Random par2Random, int par3)
 	{
 		return this.blockID;
+	}
+
+	@Override
+	public int damageDropped(int i) {
+		return i;
 	}
 
 	@Override
