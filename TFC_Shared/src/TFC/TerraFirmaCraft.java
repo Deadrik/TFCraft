@@ -4,6 +4,7 @@
 package TFC;
 
 import java.io.File;
+import java.util.Arrays;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
@@ -53,9 +54,11 @@ import TFC.WorldGen.Generators.WorldGenOre;
 import TFC.WorldGen.Generators.WorldGenOreSurface;
 import TFC.WorldGen.Generators.WorldGenPlants;
 import TFC.WorldGen.Generators.WorldGenSoilPits;
+import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -69,7 +72,7 @@ import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies)
 @NetworkMod(channels = { Reference.ModChannel }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
-public class TerraFirmaCraft
+public class TerraFirmaCraft extends DummyModContainer
 {
 	@Instance("TerraFirmaCraft")
 	public static TerraFirmaCraft instance;
@@ -79,7 +82,18 @@ public class TerraFirmaCraft
 
 	public TerraFirmaCraft()
 	{
-
+		super(new ModMetadata());
+		ModMetadata meta = getMetadata();
+		meta.modId = Reference.ModID+"_coremod";
+		meta.name = Reference.ModName+"[coremod]";
+		meta.version = Reference.ModVersion;
+		meta.credits = "";
+		meta.authorList = Arrays.asList("Bioxx");
+		meta.description = "";
+		meta.url = "www.TerraFirmaCraft.com";
+		meta.updateUrl = "";
+		meta.screenshots = new String[0];
+		meta.logoFile = "";
 	}
 
 	@EventHandler
