@@ -5,7 +5,9 @@ import java.util.Map;
 import TFC.ASM.Transform.TF_EntityFallingSand;
 import TFC.ASM.Transform.TF_RenderBlock;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
+import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
+@TransformerExclusions({ "TFC.ASM" })
 public class TFCASMLoadingPlugin implements IFMLLoadingPlugin
 {
 	public static boolean runtimeDeobf;

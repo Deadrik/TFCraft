@@ -4,7 +4,6 @@
 package TFC;
 
 import java.io.File;
-import java.util.Arrays;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
@@ -16,17 +15,10 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.TFCBlockID;
 import TFC.API.Constant.TFCItemID;
-import TFC.Commands.GetBioTempCommand;
-import TFC.Commands.GetBodyTemp;
-import TFC.Commands.GetRocksCommand;
-import TFC.Commands.GetSpawnProtectionCommand;
-import TFC.Commands.GetTreesCommand;
-import TFC.Commands.SetPlayerStatsCommand;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
-import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
 import TFC.Handlers.AnvilCraftingHandler;
 import TFC.Handlers.ChatListenerTFC;
@@ -54,11 +46,9 @@ import TFC.WorldGen.Generators.WorldGenOre;
 import TFC.WorldGen.Generators.WorldGenOreSurface;
 import TFC.WorldGen.Generators.WorldGenPlants;
 import TFC.WorldGen.Generators.WorldGenSoilPits;
-import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -71,8 +61,8 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies)
-@NetworkMod(channels = { Reference.ModChannel }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
-public class TerraFirmaCraft extends DummyModContainer
+@NetworkMod(channels = { Reference.ModChannel }, clientSideRequired = false, serverSideRequired = false, packetHandler = PacketHandler.class)
+public class TerraFirmaCraft// extends DummyModContainer
 {
 	@Instance("TerraFirmaCraft")
 	public static TerraFirmaCraft instance;
@@ -82,7 +72,7 @@ public class TerraFirmaCraft extends DummyModContainer
 
 	public TerraFirmaCraft()
 	{
-		super(new ModMetadata());
+		/*super(new ModMetadata());
 		ModMetadata meta = getMetadata();
 		meta.modId = Reference.ModID;
 		meta.name = Reference.ModName;
@@ -90,11 +80,17 @@ public class TerraFirmaCraft extends DummyModContainer
 		meta.credits = "";
 		meta.authorList = Arrays.asList("Bioxx");
 		meta.description = "";
-		meta.url = "www.TerraFirmaCraft.com";
+		meta.url = "www.terrafirmacraft.com";
 		meta.updateUrl = "";
 		meta.screenshots = new String[0];
-		meta.logoFile = "";
+		meta.logoFile = "";*/
 	}
+
+	/*@Override
+	public boolean registerBus(EventBus bus, LoadController controller) {
+		bus.register(this);
+		return true;
+	}*/
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) 
@@ -170,7 +166,7 @@ public class TerraFirmaCraft extends DummyModContainer
 	public void initialize(FMLInitializationEvent evt)
 	{
 		//Add Item Name Localizations
-		Localization.addLocalization("/assets/terrafirmacraft/lang/", "en_US");
+		//Localization.addLocalization("/assets/terrafirmacraft/lang/", "en_US");
 		//LanguageRegistry.instance().loadLocalization("assets/terrafirmacraft/lang/", "en_US", false);
 		proxy.registerTranslations();
 
@@ -252,18 +248,18 @@ public class TerraFirmaCraft extends DummyModContainer
 	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt) 
 	{
-
+		//Localization.addLocalization("/assets/terrafirmacraft/lang/", "en_US");
 	}
 
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent evt)
 	{
-		evt.registerServerCommand(new GetBioTempCommand());
+		/*evt.registerServerCommand(new GetBioTempCommand());
 		evt.registerServerCommand(new GetTreesCommand());
 		evt.registerServerCommand(new GetRocksCommand());
 		evt.registerServerCommand(new GetSpawnProtectionCommand());
 		evt.registerServerCommand(new SetPlayerStatsCommand());
-		evt.registerServerCommand(new GetBodyTemp());
+		evt.registerServerCommand(new GetBodyTemp());*/
 	}	
 
 	public void loadSettings()

@@ -69,7 +69,11 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 				{
 					while(target != null)
 					{
-						performOperation(m.instructions, target);
+						if(target.startLine == -1) {
+							performDirectOperation(m.instructions, target);
+						} else if(this.isLineNumber(m.instructions.get(index), target.startLine)) {
+							performAnchorOperation(m.instructions, target, index);
+						}
 
 						instructions.remove(0);
 						if(instructions.size() > 0) 
@@ -92,26 +96,53 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		return writer.toByteArray();
 	}
 
-	private void performOperation(InsnList mInNew, InstrSet input)
+	private void performDirectOperation(InsnList methodInsn, InstrSet input)
 	{
-		AbstractInsnNode _current = mInNew.get(input.insertionOffset+numInsertions);
+		AbstractInsnNode _current = methodInsn.get(input.insertionOffset+numInsertions);
+
 		switch(input.opType)
 		{
 		case InsertAfter:
 			numInsertions+=input.iList.size();
-			mInNew.insert(_current, input.iList);
+			methodInsn.insert(_current, input.iList);
 			break;
 		case InsertBefore:
 			numInsertions+=input.iList.size();
-			mInNew.insertBefore(_current, input.iList);
+			methodInsn.insertBefore(_current, input.iList);
 			break;
 		case Remove:
 			numInsertions--;
-			mInNew.remove(_current);
+			methodInsn.remove(_current);
 			break;
 		case Replace:
-			mInNew.insert(_current, input.iList);
-			mInNew.remove(_current);
+			methodInsn.insert(_current, input.iList);
+			methodInsn.remove(_current);
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void performAnchorOperation(InsnList methodInsn, InstrSet input, int anchor)
+	{
+		AbstractInsnNode _current = methodInsn.get(anchor + input.insertionOffset+numInsertions);
+		switch(input.opType)
+		{
+		case InsertAfter:
+			numInsertions+=input.iList.size();
+			methodInsn.insert(_current, input.iList);
+			break;
+		case InsertBefore:
+			numInsertions+=input.iList.size();
+			methodInsn.insertBefore(_current, input.iList);
+			break;
+		case Remove:
+			numInsertions--;
+			methodInsn.remove(_current);
+			break;
+		case Replace:
+			methodInsn.insert(_current, input.iList);
+			methodInsn.remove(_current);
 			break;
 		default:
 			break;
@@ -164,13 +195,6 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 			return na.desc.equals(nb.desc);
 		}
 		}
-		if(current instanceof LineNumberNode && target instanceof LineNumberNode)
-		{
-			if(((LineNumberNode)current).line == ((LineNumberNode)target).line)
-			{
-				return true;
-			}
-		}
 		return false;
 	}
 
@@ -210,6 +234,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 	{
 		InsnList iList;
 		int insertionOffset;
+		int startLine = -1;
 		OperationType opType;
 
 		public InstrSet(InsnList list, int offset, OperationType op)
@@ -218,11 +243,26 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 			insertionOffset = offset;
 			opType = op;
 		}
-		public InstrSet(AbstractInsnNode node, int insert, OperationType op)
+		public InstrSet(AbstractInsnNode node, int offset, OperationType op)
 		{
 			iList = new InsnList();
 			iList.add(node);
-			insertionOffset = insert;
+			insertionOffset = offset;
+			opType = op;
+		}
+		public InstrSet(InsnList list, int startLineNum, int offset, OperationType op)
+		{
+			iList = list;
+			startLine = startLineNum;
+			insertionOffset = offset;
+			opType = op;
+		}
+		public InstrSet(AbstractInsnNode node, int startLineNum, int offset, OperationType op)
+		{
+			iList = new InsnList();
+			iList.add(node);
+			startLine = startLineNum;
+			insertionOffset = offset;
 			opType = op;
 		}
 	}

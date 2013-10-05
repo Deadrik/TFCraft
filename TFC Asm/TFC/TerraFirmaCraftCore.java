@@ -5,8 +5,10 @@ package TFC;
 
 import java.util.Arrays;
 
-import TFC.Handlers.PacketHandler;
+import com.google.common.eventbus.EventBus;
+
 import cpw.mods.fml.common.DummyModContainer;
+import cpw.mods.fml.common.LoadController;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.ModMetadata;
@@ -15,12 +17,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 
-@NetworkMod(channels = { Reference.ModChannel }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraftCore extends DummyModContainer
 {
-	@Instance("TerraFirmaCraftCore")
+	@Instance("tfc_coremod")
 	public static TerraFirmaCraftCore instance;
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
@@ -30,16 +30,22 @@ public class TerraFirmaCraftCore extends DummyModContainer
 	{
 		super(new ModMetadata());
 		ModMetadata meta = getMetadata();
-		meta.modId = Reference.ModID+"_coremod";
-		meta.name = Reference.ModName+"[coremod]";
+		meta.modId = "tfc_coremod";
+		meta.name = "TFC[coremod]";
 		meta.version = Reference.ModVersion;
 		meta.credits = "";
 		meta.authorList = Arrays.asList("Bioxx");
 		meta.description = "";
-		meta.url = "www.TerraFirmaCraft.com";
+		meta.url = "www.terrafirmacraft.com";
 		meta.updateUrl = "";
 		meta.screenshots = new String[0];
 		meta.logoFile = "";
+	}
+
+	@Override
+	public boolean registerBus(EventBus bus, LoadController controller) {
+		bus.register(this);
+		return true;
 	}
 
 	@EventHandler
