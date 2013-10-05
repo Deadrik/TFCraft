@@ -2,6 +2,7 @@ package TFC.TileEntities;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
@@ -12,10 +13,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.HeatIndex;
+import TFC.API.HeatRegistry;
 import TFC.API.ISmeltable;
+import TFC.API.Metal;
 import TFC.API.Constant.Global;
 import TFC.Blocks.Devices.BlockEarlyBloomery;
 import TFC.Core.TFC_Time;
+import TFC.Core.Metal.MetalRegistry;
 import TFC.Items.ItemOre;
 
 public class TileEntityEarlyBloomery extends TileEntity
@@ -85,9 +90,26 @@ public class TileEntityEarlyBloomery extends TileEntity
 
 	public boolean AddOreToFire(ItemStack is)
 	{
+		HeatRegistry manager = HeatRegistry.getInstance();
+		Random R = new Random();
+		HeatIndex index = manager.findMatchingIndex(is);
 		if(((ISmeltable)is.getItem()).GetMetalType(is) == Global.PIGIRON || ((ISmeltable)is.getItem()).GetMetalType(is) == Global.WROUGHTIRON)
 		{
-			outCount += ((ISmeltable)is.getItem()).GetMetalReturnAmount(is);
+			is = index.getMorph();
+			if(is != null)
+			{
+				NBTTagCompound nbt = new NBTTagCompound();
+				nbt.setFloat("temperature", index.meltTemp+50);
+				is.stackTagCompound = nbt;
+			}
+			else
+			{
+				oreCount--;
+				charcoalCount--;
+			}
+			ItemStack output = index.getOutput(is, R);
+				
+			outCount += 100-output.getItemDamage();
 			return true;
 		}
 		return false;
