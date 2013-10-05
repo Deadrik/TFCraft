@@ -34,10 +34,12 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	public float yaw = 0;
 	public boolean isTop = false;
 	private boolean hasEntity = false;
+	public int highlightedSlot;
 
 	public TEStand()
 	{
 		items = new ItemStack[5];
+		highlightedSlot = -1;
 		//items[4] = new ItemStack(TFCItems.CopperHelmet,1,0);
 		//items[3] = new ItemStack(TFCItems.CopperChestplate,1,0);
 		//items[2] = new ItemStack(TFCItems.CopperGreaves,1,0);
@@ -154,7 +156,7 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
 		if(!isTop){
-			if(items[i]==null){
+			if(items[i]==null || itemstack == null){
 				items[i] = itemstack;
 			}
 			if(items[i] != null && items[i].stackSize > getInventoryStackLimit())
@@ -239,19 +241,21 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	}
 
 
-	public Packet createSealPacket()
+	public Packet createHighlightPacket(int i)
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 		DataOutputStream dos=new DataOutputStream(bos);
-
+		this.highlightedSlot = i;
 		try {
 			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
 			dos.writeInt(xCoord);
 			dos.writeInt(yCoord);
 			dos.writeInt(zCoord);
+			dos.writeInt(i);
 		} catch (IOException e) {
-		}
 
+		}
+		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
 
@@ -272,6 +276,7 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	public void handleDataPacket(DataInputStream inStream) throws IOException {
 		this.yaw = inStream.readFloat();
 		this.isTop = inStream.readBoolean();
+		highlightedSlot = inStream.readInt();
 		int item;
 		for(int i = 0; i < items.length;i++){
 			item = inStream.readInt();
@@ -299,21 +304,15 @@ public class TEStand extends NetworkTileEntity implements IInventory
 
 	@Override
 	public void handleDataPacketServer(DataInputStream inStream) throws IOException {
-		yaw = inStream.readFloat();
-		isTop = inStream.readBoolean();
-		int item;
-		for(int i = 0; i < items.length;i++){
-			item = inStream.readInt();
-			if(Item.itemsList[item] != null){
-				items[i] = new ItemStack(Item.itemsList[item]);
-			}
-		}
+		highlightedSlot = inStream.readInt();
+		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
 	public void createInitPacket(DataOutputStream outStream) throws IOException {
 		outStream.writeFloat(yaw);
 		outStream.writeBoolean(isTop);
+		outStream.writeInt(highlightedSlot);
 		for(int i = 0; i < items.length;i++){
 			if(items[i]!=null){
 				outStream.writeInt(items[i].itemID);
@@ -328,11 +327,15 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	public void handleInitPacket(DataInputStream inStream) throws IOException {
 		yaw = inStream.readFloat();
 		isTop = inStream.readBoolean();
+		highlightedSlot = inStream.readInt();
 		int item;
 		for(int i = 0; i < items.length;i++){
 			item = inStream.readInt();
 			if(Item.itemsList[item] != null){
 				items[i] = new ItemStack(Item.itemsList[item]);
+			}
+			else{
+				items[i] = null;
 			}
 		}
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);

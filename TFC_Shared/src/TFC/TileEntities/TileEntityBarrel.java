@@ -16,9 +16,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.Metal;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
+import TFC.Core.Metal.MetalRegistry;
 import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
@@ -29,6 +31,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	public int liquidLevel;
 	public int Type;
 	public int barrelType;
+	public int mode;
 	private ItemStack itemstack;
 	private ItemStack output;
 	private boolean sealed;
@@ -146,7 +149,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				}
 				Type = 11;
 			}
-			
+
 		}
 		else if(itemstack != null && Type == 2)
 		{
@@ -208,25 +211,25 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		{
 			itemstack = null;
 		}
-		
+
 	}
 
 	public void setSealed(){
 		sealed = true;
 	}
-	
+
 	public void setUnsealed(String reason){
 		if(reason.equals("killing fuse")){
-		sealed = false;
+			sealed = false;
 		}
 	}
 
-	public String getType()
+	public static String getType(int type)
 	{
-		switch (Type)
+		switch (type)
 		{
 		case 0:
-			return "";
+			return StringUtil.localize("gui.Barrel.Empty");
 		case 1:
 			return StringUtil.localize("gui.Barrel.Water");
 		case 2:
@@ -336,13 +339,31 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	public ItemStack getStackInSlot(int i)
 	{
 		// TODO Auto-generated method stub
-		return itemstack;
+		return i==0?itemstack:output;
 	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int var1) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void readFromItemNBT(NBTTagCompound nbt)
+	{
+		liquidLevel = nbt.getInteger("liqLev");
+		Type = nbt.getInteger("type");
+		sealed = nbt.getBoolean("sealed");
+
+		NBTTagList nbttaglist = nbt.getTagList("Items");
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+			byte byte0 = nbttagcompound1.getByte("Slot");
+			if(byte0 >= 0 && byte0 < 2)
+			{
+				setInventorySlotContents(byte0,ItemStack.loadItemStackFromNBT(nbttagcompound1));
+			}
+		}
 	}
 
 	@Override
@@ -360,25 +381,36 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
-		this.itemstack = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-		{
-			itemstack.stackSize = getInventoryStackLimit();
+		if(i == 0){
+			this.itemstack = itemstack;
+			if(this.itemstack != null && this.itemstack.stackSize > getInventoryStackLimit())
+			{
+				this.itemstack.stackSize = getInventoryStackLimit();
+			}
+		}
+		else{
+			this.output = itemstack;
+			if(this.output != null && output.stackSize > getInventoryStackLimit())
+			{
+				output.stackSize = getInventoryStackLimit();
+			}
 		}
 
 
 	}
 
 	public boolean checkValidAddition(int i){
-		if(i == Type && !sealed && liquidLevel < 256)
+		if((i == Type || Type == 0 || (Type == 13 && i == 12))&& !sealed && liquidLevel < 256)
 		{
 			liquidLevel = Math.min(liquidLevel+32, 256);
-			if(i == 2)
+			if(Type == 0)
 			{
-				Type = 2;
+				Type = i==12 && Type == 13?14:i;
 			}
+			updateGui();
 			return true;
 		}
+		updateGui();
 		return false;
 	}
 
@@ -410,85 +442,104 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			{
 				Type = 0; 
 			}
-			if(itemstack == null)
-			{
-				if(output != null)
+			if(mode == 0){
+				if(itemstack == null)
 				{
-					itemstack = output;
-					output = null;
+					if(output != null)
+					{
+						itemstack = output;
+						output = null;
+					}
+				}
+				if (itemstack != null)
+				{
+					if ((Type ==0||Type == 2) && itemstack.getItem() == TFCItems.Limewater && liquidLevel < 256)
+					{
+						liquidLevel = Math.min(liquidLevel + 32, 256);
+						Type = 2;
+						itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
+						updateGui();
+					}
+					else if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.WoodenBucketWater) && liquidLevel < 256)
+					{
+						liquidLevel = Math.min(liquidLevel + 32, 256);
+						Type = 1;
+						itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
+						updateGui();
+					}
+					else if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.RedSteelBucketWater) && liquidLevel < 256)
+					{
+						liquidLevel = Math.min(liquidLevel + 32, 256);
+						Type = 1;
+						itemstack.itemID = TFCItems.RedSteelBucketEmpty.itemID;
+						updateGui();
+					}
+					else if ((Type == 0||Type == 4) && itemstack.getItem() == Item.gunpowder && liquidLevel < 256)
+					{
+						liquidLevel = Math.min(liquidLevel + 1, 256);
+						Type = 4;
+						itemstack.stackSize-=1;
+						if(itemstack.stackSize==0) {
+							itemstack=null;
+						}
+						updateGui();
+					} 
+					else if((Type == 0||Type == 13 || Type == 14) && itemstack.getItem() == TFCItems.WoodenBucketMilk && liquidLevel < 256){
+						liquidLevel = Math.min(liquidLevel + 32, 256);
+						Type = Math.max(13, Type);
+						itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
+						updateGui();
+					}
+					else if(Type == 13 && itemstack.getItem() == TFCItems.Vinegar && liquidLevel < 256){
+						liquidLevel = Math.min(liquidLevel + 32, 256);
+						Type = 14;
+						itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
+						updateGui();
+					}
 				}
 			}
-			if (itemstack != null)
-			{
-				if ((Type ==0||Type == 2) && itemstack.getItem() == TFCItems.Limewater && liquidLevel < 256)
+			else{
+				if (itemstack != null)
 				{
-					liquidLevel = Math.min(liquidLevel + 32, 256);
-					Type = 2;
-					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
-					updateGui();
-				}
-				else if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.WoodenBucketWater) && liquidLevel < 256)
-				{
-					liquidLevel = Math.min(liquidLevel + 32, 256);
-					Type = 1;
-					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
-					updateGui();
-				}
-				else if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.RedSteelBucketWater) && liquidLevel < 256)
-				{
-					liquidLevel = Math.min(liquidLevel + 32, 256);
-					Type = 1;
-					itemstack.itemID = TFCItems.RedSteelBucketEmpty.itemID;
-					updateGui();
-				}
-				else if ((Type == 0||Type == 4) && itemstack.getItem() == Item.gunpowder && liquidLevel < 256)
-				{
-					liquidLevel = Math.min(liquidLevel + 1, 256);
-					Type = 4;
-					itemstack.stackSize-=1;
-					if(itemstack.stackSize==0) {
-						itemstack=null;
+					if((Type>=5&&Type<=11 )&& itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize)
+					{
+						liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
+						itemstack.itemID = alcohols[Type-5];
+						updateGui();
 					}
-					updateGui();
-				}
-				else if((Type>=5&&Type<=11 )&& itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize)
-				{
-					liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
-					itemstack.itemID = alcohols[Type-5];
-					updateGui();
-				}
-				/*Fill pottery jug*/
-				else if (Type == 1 && (itemstack.getItem() == TFCItems.PotteryJug && itemstack.getItemDamage() == 1) && liquidLevel >= 16)
-				{
-					liquidLevel = Math.max(liquidLevel - 16, 0);
-					Type = 1;
-					itemstack.setItemDamage(2);
-					updateGui();
-				}
-				/*Fill water bottle*/
-				else if(Type == 1 && itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize)
-				{
-					liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
-					itemstack.itemID = Item.potion.itemID;
-					updateGui();
-				}
-				else if((Type == 0||Type == 13 || Type == 14) && itemstack.getItem() == TFCItems.WoodenBucketMilk && liquidLevel < 256){
-					liquidLevel = Math.min(liquidLevel + 32, 256);
-					Type = Math.max(13, Type);
-					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
-					updateGui();
-				}
-				else if(Type == 12 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
-					liquidLevel = Math.max(liquidLevel - 32, 0);
-					Type = liquidLevel>0?Type:0;
-					itemstack.itemID = TFCItems.Vinegar.itemID;
-					updateGui();
-				}
-				else if(Type == 13 && itemstack.getItem() == TFCItems.Vinegar && liquidLevel < 256){
-					liquidLevel = Math.min(liquidLevel + 32, 256);
-					Type = 14;
-					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
-					updateGui();
+					/*Fill pottery jug*/
+					else if (Type == 1 && (itemstack.getItem() == TFCItems.PotteryJug && itemstack.getItemDamage() == 1) && liquidLevel >= 16)
+					{
+						liquidLevel = Math.max(liquidLevel - 16, 0);
+						Type = 1;
+						itemstack.setItemDamage(2);
+						updateGui();
+					}
+					/*Fill water bottle*/
+					else if(Type == 1 && itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize)
+					{
+						liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
+						itemstack.itemID = Item.potion.itemID;
+						updateGui();
+					}
+					else if(Type == 12 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
+						liquidLevel = Math.max(liquidLevel - 32, 0);
+						Type = liquidLevel>0?Type:0;
+						itemstack.itemID = TFCItems.Vinegar.itemID;
+						updateGui();
+					}
+					else if(Type == 1 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
+						liquidLevel = Math.max(liquidLevel - 32, 0);
+						Type = liquidLevel>0?Type:0;
+						itemstack.itemID = TFCItems.WoodenBucketWater.itemID;
+						updateGui();
+					}
+					else if(Type == 2 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
+						liquidLevel = Math.max(liquidLevel - 32, 0);
+						Type = liquidLevel>0?Type:0;
+						itemstack.itemID = TFCItems.Limewater.itemID;
+						updateGui();
+					}
 				}
 			}
 		}
@@ -502,6 +553,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		nbttagcompound.setInteger("Type", Type);
 		nbttagcompound.setBoolean("Sealed", sealed);
 		nbttagcompound.setInteger("SealTime", sealtimecounter);
+		nbttagcompound.setInteger("mode", mode);
 		NBTTagList nbttaglist = new NBTTagList();
 
 		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -522,6 +574,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		Type = nbttagcompound.getInteger("Type");
 		sealed = nbttagcompound.getBoolean("Sealed");
 		sealtimecounter = nbttagcompound.getInteger("SealTime");
+		mode = nbttagcompound.getInteger("mode");
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
 
 		NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(0);
@@ -534,6 +587,9 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		if(!worldObj.isRemote) {
 			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
 		}
+		else{
+			validate();
+		}
 	}
 
 	@Override
@@ -542,6 +598,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		liquidLevel = inStream.readInt();
 		sealed = inStream.readBoolean();
 		sealtimecounter = inStream.readInt();
+		mode = inStream.readInt();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -558,6 +615,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			dos.writeInt(liquidLevel);
 			dos.writeBoolean(sealed);
 			dos.writeInt(sealtimecounter);
+			dos.writeInt(mode);
 		} catch (IOException e) {
 		}
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
@@ -569,6 +627,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		outStream.writeInt(liquidLevel);
 		outStream.writeBoolean(sealed);
 		outStream.writeInt(sealtimecounter);
+		outStream.writeInt(mode);
 	}
 
 	public Packet createSealPacket()
@@ -583,6 +642,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			dos.writeInt(zCoord);
 			dos.writeBoolean(sealed);
 			dos.writeInt(liquidLevel);
+			dos.writeInt(Type);
+			dos.writeInt(mode);
 		} catch (IOException e) {
 		}
 
@@ -595,6 +656,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		liquidLevel = inStream.readInt();
 		sealed = inStream.readBoolean();
 		sealtimecounter = inStream.readInt();
+		mode = inStream.readInt();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -603,6 +665,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			throws IOException {
 		sealed = inStream.readBoolean();
 		liquidLevel = inStream.readInt();
+		Type = inStream.readInt();
+		mode = inStream.readInt();
 	}
 
 	public int getLiquidScaled(int i) {
@@ -619,59 +683,50 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	}
 
 	private boolean isItemValid() {
-		if(itemstack == null && ((Type >=5&& Type <=11)||Type == 14)){
-			return true;
-		}
-		else if(itemstack == null){
-			return false;
-		}
-		else{
-			int id = itemstack.getItem().itemID;
-			if(Type == 1){
-				if(id == TFCItems.ScrapedHide.itemID){
-					return true;
-				}
-				if(id == TFCItems.Logs.itemID){
-					return true;
-				}
-				if(id == TFCItems.WheatGrain.itemID||id == TFCItems.BarleyGrain.itemID||id == TFCItems.RyeGrain.itemID||id == TFCItems.RiceGrain.itemID||
-						id == TFCItems.Potato.itemID||id == TFCItems.RedApple.itemID||id == TFCItems.GreenApple.itemID||id == Item.sugar.itemID){
-					return true;
-				}
-			}
-			if(id == TFCItems.Hide.itemID && Type == 2){
+		if(mode == 0){
+			if(itemstack == null && ((Type >=5&& Type <=11)||Type == 14)){
 				return true;
 			}
-			if(id == TFCItems.PrepHide.itemID && Type == 3){
-				return true;
+			else if(itemstack == null){
+				return false;
 			}
+			else{
+				int id = itemstack.getItem().itemID;
+				if(Type == 1){
+					if(id == TFCItems.ScrapedHide.itemID){
+						return true;
+					}
+					if(id == TFCItems.Logs.itemID){
+						return true;
+					}
+					if(id == TFCItems.WheatGrain.itemID||id == TFCItems.BarleyGrain.itemID||id == TFCItems.RyeGrain.itemID||id == TFCItems.RiceGrain.itemID||
+							id == TFCItems.Potato.itemID||id == TFCItems.RedApple.itemID||id == TFCItems.GreenApple.itemID||id == Item.sugar.itemID){
+						return true;
+					}
+				}
+				if(id == TFCItems.Hide.itemID && Type == 2){
+					return true;
+				}
+				if(id == TFCItems.PrepHide.itemID && Type == 3){
+					return true;
+				}
 
+			}
 		}
 		return false;
 	}
 
 	public void actionEmpty() {
-		if(itemstack!=null && itemstack.getItem()==TFCItems.WoodenBucketEmpty && liquidLevel >= 32){
-			if(Type == 1){
-				itemstack.itemID = TFCItems.WoodenBucketWater.itemID;
-			}
-			else if(Type == 2){
-				itemstack.itemID = TFCItems.Limewater.itemID;
-			}
-			else if(Type == 12){
-				itemstack.itemID = TFCItems.Vinegar.itemID;
-			}
-			else if(Type == 13){
-				itemstack.itemID = TFCItems.WoodenBucketMilk.itemID;
-			}
-		}
-		else if(liquidLevel >0){
-			liquidLevel =0;
-			Type = 0;
-			updateGui();
-			TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
-		}
+		liquidLevel =0;
+		Type = 0;
+		TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
+		updateGui();
+	}
 
+	public void actionMode() {
+		mode= (mode-1)*-1;
+		TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
+		updateGui();
 	}
 
 	@Override

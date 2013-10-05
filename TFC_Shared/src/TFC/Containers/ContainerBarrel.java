@@ -198,9 +198,9 @@ public class ContainerBarrel extends ContainerTFC
 					return null;
 				}
 				ItemStack stack = itemstack1.copy();
-				stack.stackSize = 1;
+				stack.stackSize = itemstack1.stackSize;
 				slot1.putStack(stack);
-				itemstack1.stackSize--;
+				itemstack1.stackSize = 0;
 			}
 			if(itemstack1.stackSize == 0)
 			{
