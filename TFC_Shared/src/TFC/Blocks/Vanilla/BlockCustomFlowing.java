@@ -10,7 +10,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockCustomFlowing extends BlockFlowing
+public class BlockCustomFlowing extends BlockCustomFluid
 {
 	/**
 	 * Number of horizontally adjacent liquid source blocks. Diagonal doesn't count. Only source blocks of the same
@@ -156,7 +156,7 @@ public class BlockCustomFlowing extends BlockFlowing
 		{
 			if (this.blockMaterial == Material.lava && par1World.getBlockMaterial(par2, par3 - 1, par4) == Material.water)
 			{
-				par1World.setBlock(par2, par3 - 1, par4, Block.stone.blockID, 0, 2);
+				setBlockforLava(par1World, par2,  par3-1,  par4,2);
 				this.triggerLavaMixEffects(par1World, par2, par3 - 1, par4);
 				return;
 			}
@@ -390,7 +390,6 @@ public class BlockCustomFlowing extends BlockFlowing
 	 * value is valid and the other isn't, the valid value will be returned. Valid values are >= 0. Flow decay is the
 	 * amount that a liquid has dissipated. 0 indicates a source block.
 	 */
-	@Override
 	protected int getSmallestFlowDecay(World par1World, int par2, int par3, int par4, int par5)
 	{
 		int var6 = this.getFlowDecay(par1World, par2, par3, par4);
