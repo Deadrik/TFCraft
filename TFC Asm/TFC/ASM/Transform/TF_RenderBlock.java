@@ -1,7 +1,10 @@
 package TFC.ASM.Transform;
 
 /*
- * Invaluable help from AtomicStryker's MultiMine coremod code <3
+ * This is disabled in favor of the hacky RenderBlocksFixUV solution. This Transformer unfortunately 
+ * affects every single block which causes shadow errors on normal blocks. For the detailed blocks, it's
+ * a near perfect solution however. Eventually ti may be worth figuring out how to make this only affect 
+ * partial blocks and not the solid blocks.
  */
 
 import java.util.ArrayList;
@@ -35,17 +38,27 @@ public class TF_RenderBlock extends ClassTransformer
 
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 10), 7267, 5, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 14), 7267, 6, OperationType.Replace));
+		nodes.add(new InstrSet(7268, 3, 7274, 3));
+		nodes.add(new InstrSet(7268, 5, 7274, 5));
+		nodes.add(new InstrSet(7268, 7, 7274, 7));
+		nodes.add(new InstrSet(7269, 3, 7275, 3));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 18), 7270, 5, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 22), 7270, 6, OperationType.Replace));
+
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 12), 7273, 5, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 16), 7273, 6, OperationType.Replace));
+
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 20), 7276, 5, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 24), 7276, 6, OperationType.Replace));
+
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 10), 7280, 5, OperationType.Replace));
+
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 14), 7280, 6, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 18), 7281, 5, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 22), 7281, 6, OperationType.Replace));
+
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 12), 7282, 5, OperationType.Replace));
+
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 16), 7282, 6, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 20), 7283, 5, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 24), 7283, 6, OperationType.Replace));
@@ -66,26 +79,29 @@ public class TF_RenderBlock extends ClassTransformer
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 30), 7597, 3, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 18), 7597, 5, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 22), 7597, 6, OperationType.Replace));
-
-		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 34), 7600, 3, OperationType.Replace));
+		nodes.add(new InstrSet(7598, 3, 7604, 3));
+		nodes.add(new InstrSet(7598, 5, 7604, 5));
+		nodes.add(new InstrSet(7598, 7, 7604, 7));
+		nodes.add(new InstrSet(7599, 3, 7605, 3));
+		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 34), 7600, 4, OperationType.Replace));
 
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 28), 7603, 3, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 20), 7603, 5, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 24), 7603, 6, OperationType.Replace));
 
-		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 32), 7606, 3, OperationType.Replace));
+		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 32), 7606, 4, OperationType.Replace));
 
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 30), 7610, 3, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 18), 7610, 5, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 22), 7610, 6, OperationType.Replace));
 
-		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 34), 7611, 3, OperationType.Replace));
+		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 34), 7611, 4, OperationType.Replace));
 
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 28), 7612, 3, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 20), 7612, 5, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 24), 7612, 6, OperationType.Replace));
 
-		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 32), 7613, 3, OperationType.Replace));
+		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 32), 7613, 4, OperationType.Replace));
 
 		this.mcpMethodNodes.put("renderFaceXPos | (Lnet/minecraft/block/Block;DDDLnet/minecraft/util/Icon;)V", nodes);
 		this.obfMethodNodes.put("f | (Laqw;DDDLmr;)V", nodes);

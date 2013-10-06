@@ -62,7 +62,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 				renderer.uvRotateTop = 3;
 				renderer.uvRotateBottom = 3;
 				renderer.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
-				renderer.renderStandardBlockWithColorMultiplier(block, i, j, k, 1, 1, 1);
+				renderer.renderStandardBlock(block, i, j, k);
 			}
 		}
 		//Fix the rotations
@@ -89,7 +89,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 				renderer.uvRotateEast = 1;
 				renderer.uvRotateWest = 1;
 				renderer.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
-				renderer.renderStandardBlockWithColorMultiplier(block, i, j, k, 1, 1, 1);
+				renderer.renderStandardBlock(block, i, j, k);
 			}
 		}
 

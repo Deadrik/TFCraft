@@ -2,55 +2,38 @@ package TFC.Blocks;
 
 import java.util.ArrayList;
 import java.util.List;
-import TFC.*;
-import TFC.Core.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import TFC.TFCBlocks;
+import TFC.TerraFirmaCraft;
+import TFC.Core.CollisionRayTraceDetailed;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemHammer;
 import TFC.TileEntities.TileEntityDetailed;
-import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityWoodConstruct;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.particle.EffectRenderer;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class BlockDetailed extends BlockPartial
 {
 	public static int lockX = 0;
 	public static int lockY = 0;
 	public static int lockZ = 0;
-	
+
 	public BlockDetailed(int par1)
 	{
 		super(par1, Material.rock);
@@ -63,29 +46,36 @@ public class BlockDetailed extends BlockPartial
 	}
 
 	@Override
-    @SideOnly(Side.CLIENT)
-    public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
-    {
+	@SideOnly(Side.CLIENT)
+	public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
+	{
 		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
-        return true;
-    }
+		return true;
+	}
 	@Override
-    @SideOnly(Side.CLIENT)
-    public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
-    {
+	@SideOnly(Side.CLIENT)
+	public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
+	{
 		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
-        return true;
-    }
+		return true;
+	}
 	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
 	{
 		return true;
 	}
-	
+
 	@Override
-    public void registerIcons(IconRegister iconRegisterer)
-    {
-    }
+	public void registerIcons(IconRegister iconRegisterer)
+	{
+	}
+
+	@Override
+	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	{
+		TileEntityDetailed te = ((TileEntityDetailed)par1IBlockAccess.getBlockTileEntity(par2, par3, par4));
+		return Block.blocksList[te.TypeID].getIcon(par5, te.MetaID);
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
@@ -104,13 +94,13 @@ public class BlockDetailed extends BlockPartial
 	{
 		return false;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
-        return true;
-    }
+	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	{
+		return true;
+	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ) 
@@ -119,63 +109,70 @@ public class BlockDetailed extends BlockPartial
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
 		for(int i = 0; i < 9;i++)
 		{
-			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
+			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer) {
 				hasHammer = true;
+			}
 		}
 		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && world.isRemote &&
 				pi.lockMatches(x, y, z))
 		{
 			TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(x, y, z);
-			
+
 			lockX = x; lockY = y; lockZ = z;
-			
+
 			TerraFirmaCraft.proxy.sendCustomPacket(te.createActivatePacket(xSelected, ySelected, zSelected));
 		}
 		return false;
 	}
-	
+
 	public boolean onBlockActivatedServer(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) 
 	{
-			int id = world.getBlockId(x, y, z);
-			byte meta = (byte) world.getBlockMetadata(x, y, z);
+		int id = world.getBlockId(x, y, z);
+		byte meta = (byte) world.getBlockMetadata(x, y, z);
 
-			int mode = 0;
-			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
-			if(pi!=null) mode = pi.ChiselMode;
-			
-			int hasChisel = -1;
-			int hasHammer = -1;
+		int mode = 0;
+		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+		if(pi!=null) {
+			mode = pi.ChiselMode;
+		}
 
-			for(int i = 0; i < 9;i++)
-			{
-				if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer)
-					hasHammer = i;
-				if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemChisel)
-					hasChisel = i;
+		int hasChisel = -1;
+		int hasHammer = -1;
+
+		for(int i = 0; i < 9;i++)
+		{
+			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer) {
+				hasHammer = i;
 			}
+			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemChisel) {
+				hasChisel = i;
+			}
+		}
 
-			if(mode == 3 && xSelected != -10)
+		if(mode == 3 && xSelected != -10)
+		{
+			//ItemChisel.CreateDetailed(world, x, y, z, id, meta, side, hitX, hitY, hitZ);
+			TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(x, y, z);
+			int index = (xSelected * 8 + zSelected)*8 + ySelected;
+
+			if(index >= 0)
 			{
-				//ItemChisel.CreateDetailed(world, x, y, z, id, meta, side, hitX, hitY, hitZ);
-				TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(x, y, z);
-				int index = (xSelected * 8 + zSelected)*8 + ySelected;
+				System.out.println("xSelected: " +xSelected + " ySelected: " + ySelected + " zSelected: " + zSelected + " index: " + index);
+				te.data.clear(index);
+				te.clearQuad(xSelected, ySelected, zSelected);
 
-				if(index >= 0)
-				{
-					System.out.println("xSelected: " +xSelected + " ySelected: " + ySelected + " zSelected: " + zSelected + " index: " + index);
-					te.data.clear(index);
-					te.clearQuad(xSelected, ySelected, zSelected);
-					
-					if(player.inventory.mainInventory[hasChisel] != null)
-						player.inventory.mainInventory[hasChisel].damageItem(1, player);
-
-					if(player.inventory.mainInventory[hasHammer] != null)
-						player.inventory.mainInventory[hasHammer].damageItem(1, player);
-					
-					te.broadcastPacketInRange(te.createUpdatePacket(index));
+				if(player.inventory.mainInventory[hasChisel] != null) {
+					player.inventory.mainInventory[hasChisel].damageItem(1, player);
 				}
-				return true;
+
+				if(player.inventory.mainInventory[hasHammer] != null) {
+					player.inventory.mainInventory[hasHammer].damageItem(1, player);
+				}
+
+				te.broadcastPacketInRange(te.createUpdatePacket(index));
 			}
+			return true;
+		}
 		return false;
 	}
 
@@ -237,19 +234,19 @@ public class BlockDetailed extends BlockPartial
 				te.data,
 				te);
 
-			//Check if the block itself is being collided with
+		//Check if the block itself is being collided with
 		/*
 		 * With this enabled, the chisel can't chisel past the outer layer
 		 * */
-//			returns = CollisionRayTraceDetailed.collisionRayTracer(
-//					this,
-//					world,
-//					player,
-//					view,
-//					x,
-//					y,
-//					z,
-//					returns);
+		//			returns = CollisionRayTraceDetailed.collisionRayTracer(
+		//					this,
+		//					world,
+		//					player,
+		//					view,
+		//					x,
+		//					y,
+		//					z,
+		//					returns);
 
 		if (!returns.isEmpty()) {
 			Object[] min = null;
@@ -288,7 +285,7 @@ public class BlockDetailed extends BlockPartial
 					rayTraceBound(AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ), x, y, z, player, view);
 				}
 				setBlockBoundsBasedOnSelection(world, x, y, z);
-				
+
 				lockX = x; lockY = y; lockZ = z;
 
 				return new MovingObjectPosition(x,y,z,
