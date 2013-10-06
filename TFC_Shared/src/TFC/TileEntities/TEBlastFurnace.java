@@ -23,6 +23,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
+import TFC.API.ISmeltable;
 import TFC.API.Metal;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
@@ -183,24 +184,25 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
 			if(index != null && inputItemTemps[i] >= index.meltTemp)
 			{
-				fireItemStacks[i] = index.getMorph();
-				if(fireItemStacks[i] != null)
+
+				oreCount--;
+				charcoalCount--;
+
+				int output = 0;
+				if(fireItemStacks[i].getItem() instanceof ISmeltable)
 				{
-					NBTTagCompound nbt = new NBTTagCompound();
-					nbt.setFloat("temperature", inputItemTemps[i]);
-					fireItemStacks[i].stackTagCompound = nbt;
+					output = ((ISmeltable)fireItemStacks[i].getItem()).GetMetalReturnAmount(fireItemStacks[i]);
+					te.addMetal(((ISmeltable)fireItemStacks[i].getItem()).GetMetalType(fireItemStacks[i]), output);
 				}
 				else
 				{
-					oreCount--;
-					charcoalCount--;
+					Metal m = MetalRegistry.instance.getMetalFromItem(fireItemStacks[i].getItem());
+					output = index.getOutput(fireItemStacks[i], R).getItemDamage();
+					if(m != null) {
+						te.addMetal(m, (short)(100-output));
+					}
 				}
-
-				ItemStack output = index.getOutput(fireItemStacks[i], R);
-				Metal m = MetalRegistry.instance.getMetalFromItem(output.getItem());
-				if(m != null) {
-					te.addMetal(m, (short)(100-output.getItemDamage()));
-				}
+				fireItemStacks[i] = null;
 				input[1].setItemDamage(input[1].getItemDamage()+1);
 				if( input[1] != null && input[1].getItemDamage() == input[1].getMaxDamage())
 				{
@@ -460,124 +462,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		return false;
 	}
 
-	public boolean AddOreToOutput(ItemStack is, ItemStack is2)
-	{
-		ItemStack work = new ItemStack(is.itemID,is.stackSize,is.getItemDamage());
-		/* First we check to see if there are any mergeable items*/
-		for (int i = 0; i < outputItemStacks.length; i++)
-		{
-			if(outputItemStacks[i] != null && outputItemStacks[i].getItem().getUnlocalizedName(outputItemStacks[i]) == work.getItem().getUnlocalizedName(work))
-			{
-				if(outputItemStacks[i].getItemDamage() > 0 && work.getItemDamage() > 0)
-				{
-					int amt = combineMetals(work,outputItemStacks[i]);
-					if(amt != 0)
-					{
-						work.setItemDamage(amt);
-					} else {
-						oreCount--;
-
-						return true;
-					}
-				}
-			}
-		}
-		/*If not then the item takes a new slot*/
-		for (int i = 0; i < outputItemStacks.length; i++)
-		{
-			if(outputItemStacks[i] == null)
-			{
-				outputItemStacks[i] = work;
-				oreCount--;
-				TFC_ItemHeat.SetTemperature(outputItemStacks[i], TFC_ItemHeat.GetTemperature(is2));
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean RemoveOre()
-	{
-		if(outMetal1 == null && outMetal1Count > 0)
-		{
-			HeatRegistry manager = HeatRegistry.getInstance();
-			HeatIndex index = manager.findMatchingIndex(new ItemStack(TFCItems.OreChunk, 1, 3));
-			if(index != null)
-			{
-				ItemStack output = index.getOutput(worldObj.rand);
-
-				if(outMetal1 == null) {
-					outMetal1 = output;
-				}
-			}
-		}
-
-		//Make sure that we have an item in the input slot
-		if(input[0] != null)
-		{
-			/**
-			 * First we check if there is an empty mold
-			 * */
-			if(input[0].itemID == TFCItems.CeramicMold.itemID)
-			{
-				int dam = 0;
-				if(outMetal1Count > 0)
-				{
-					if(outMetal1Count > 100)
-					{
-						dam = 100;
-						outMetal1Count -= 100;
-					}
-					else
-					{
-						dam = outMetal1Count;
-						outMetal1Count = 0;
-					}  
-
-					if(outMetal1 != null) {
-						input[0] = outMetal1.copy();
-					}
-				}
-
-				if(input[0] != null && input[0].itemID != TFCItems.CeramicMold.itemID) {
-					input[0].setItemDamage(100-dam);
-				}
-
-				TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
-
-				return true;
-			}
-			/**
-			 * If the input is not an empty mold but instead contains a partial mold matching the first output metal, 
-			 * then we handle the process
-			 * */
-			else if(outMetal1 != null && input[0].itemID == outMetal1.getItem().itemID && input[0].getItemDamage() > 0)
-			{
-				int i = 100-input[0].getItemDamage();
-				if(i + outMetal1Count < 100)
-				{
-					input[0].setItemDamage(100-(i + outMetal1Count));
-					outMetal1Count = 0;
-				}
-				else
-				{
-					int j = 100 - i;
-					input[0].setItemDamage(0);
-					outMetal1Count -= j;
-				}
-
-				if(outMetal1Count == 0) {
-					outMetal1 = null;
-				} 
-
-				TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
-
-				return true;
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
@@ -588,11 +472,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		}
 
 
-	}
-
-	public void setNumAirBlocks(int n)
-	{
-		numAirBlocks = n;
 	}
 
 	public void CreateTuyereBlock()
@@ -687,7 +566,10 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				{
 					//Make sure that the Stack is surrounded by rock
 					if(i < moltenCount && isStackValid(xCoord, yCoord+i, zCoord)) {
-						worldObj.setBlock(xCoord, yCoord+i, zCoord, TFCBlocks.Molten.blockID, 0, 0x2);
+						if(this.fireTemperature > 200)
+						{
+							worldObj.setBlock(xCoord, yCoord+i, zCoord, TFCBlocks.Molten.blockID, (int) Math.min(16, fireTemperature/(this.MaxFireTemp*0.75f)), 2);
+						}
 					} else {
 						worldObj.setBlockToAir(xCoord, yCoord+i, zCoord);
 					}
@@ -704,10 +586,13 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			/*Make sure the list isn't null or empty and that the stack is valid 1 layer above the Molten Ore*/
 			if (list != null && !list.isEmpty() && isStackValid(xCoord, yCoord+moltenCount, zCoord))
 			{
+
 				/*Iterate through the list and check for charcoal, coke, and ore*/
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
 				{
 					EntityItem entity = (EntityItem)iterator.next();
+					boolean _isOre = TFC_Core.isOreIron(entity.getEntityItem());
+
 					if(entity.getEntityItem().itemID == Item.coal.itemID && entity.getEntityItem().getItemDamage() == 1 || entity.getEntityItem().itemID == TFCItems.Coke.itemID)
 					{
 						for(int c = 0; c < entity.getEntityItem().stackSize; c++)
@@ -723,7 +608,8 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 						}
 					}
 					/*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
-					else if(TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && TFC_Core.isOreIron(entity.getEntityItem()))
+					else if((TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && _isOre) || 
+							(!_isOre && entity.getEntityItem().getItem() instanceof ISmeltable))
 					{
 						int c = entity.getEntityItem().stackSize;
 						int nonConsumedOre = 0;

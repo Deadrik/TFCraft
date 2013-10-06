@@ -2,7 +2,6 @@ package TFC.TileEntities;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
@@ -13,14 +12,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.API.HeatIndex;
-import TFC.API.HeatRegistry;
 import TFC.API.ISmeltable;
-import TFC.API.Metal;
 import TFC.API.Constant.Global;
 import TFC.Blocks.Devices.BlockEarlyBloomery;
 import TFC.Core.TFC_Time;
-import TFC.Core.Metal.MetalRegistry;
 import TFC.Items.ItemOre;
 
 public class TileEntityEarlyBloomery extends TileEntity
@@ -90,26 +85,9 @@ public class TileEntityEarlyBloomery extends TileEntity
 
 	public boolean AddOreToFire(ItemStack is)
 	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		Random R = new Random();
-		HeatIndex index = manager.findMatchingIndex(is);
 		if(((ISmeltable)is.getItem()).GetMetalType(is) == Global.PIGIRON || ((ISmeltable)is.getItem()).GetMetalType(is) == Global.WROUGHTIRON)
 		{
-			is = index.getMorph();
-			if(is != null)
-			{
-				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setFloat("temperature", index.meltTemp+50);
-				is.stackTagCompound = nbt;
-			}
-			else
-			{
-				oreCount--;
-				charcoalCount--;
-			}
-			ItemStack output = index.getOutput(is, R);
-				
-			outCount += 100-output.getItemDamage();
+			outCount += ((ISmeltable)is.getItem()).GetMetalReturnAmount(is);
 			return true;
 		}
 		return false;
@@ -182,15 +160,15 @@ public class TileEntityEarlyBloomery extends TileEntity
 
 
 			//Do the funky math to find how many molten blocks should be placed
-			float count = charcoalCount+oreCount;
+			int count = charcoalCount+oreCount;
 
-			int moltenCount = 1;
+			int moltenCount = count / 8;
 			/*if(count > 0 && count <= 8) {moltenCount = 1;} 
 			else if(count > 8 && count <= 16) {moltenCount = 2;} */
-
+			int validCount = 0;
 
 			/*Fill the bloomery stack with molten ore. */
-			for (int i = 1; i < 3; i++)
+			for (int i = 1; i < moltenCount; i++)
 			{
 				/*The stack must be air or already be molten rock*/
 				if((worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == 0 ||
@@ -198,9 +176,18 @@ public class TileEntityEarlyBloomery extends TileEntity
 						worldObj.getBlockMaterial(xCoord+direction[0], yCoord-1, zCoord+direction[1]) == Material.rock)
 				{
 					//Make sure that the Stack is surrounded by rock
-					if(i-1 < moltenCount && isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1]) && bloomeryLit) 
+					if(isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) {
+						validCount++;
+					}
+
+					if(i-1 < moltenCount && i <= validCount) 
 					{
-						worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 0, 0x2);
+						if(this.bloomeryLit)
+						{
+							worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 15, 2);
+						} else {
+							worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 0, 2);
+						}
 					} 
 					else 
 					{
@@ -227,7 +214,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 					{
 						for(int c = 0; c < entity.getEntityItem().stackSize; c++)
 						{
-							if(charcoalCount+oreCount < 16 && charcoalCount < 8)
+							if(charcoalCount+oreCount < 32 && charcoalCount < 16)
 							{
 								charcoalCount++;
 								entity.getEntityItem().stackSize--;
@@ -243,7 +230,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 						int c = entity.getEntityItem().stackSize;
 						for(; c > 0; )
 						{
-							if(charcoalCount+oreCount < 16 && oreCount < 8 && outCount < 1000)
+							if(charcoalCount+oreCount < 32 && oreCount < 16 && outCount < 1000)
 							{
 								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(),1,entity.getEntityItem().getItemDamage()))) 
 								{
