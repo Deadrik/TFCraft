@@ -15,6 +15,7 @@ from build import build
 reobf_dir = os.path.join(mcp_dir, 'reobf')
 client_dir = os.path.join(reobf_dir, 'minecraft')
 server_dir = os.path.join(reobf_dir, 'minecraft_server')
+tfc_dir = os.path.join(client_dir, 'TFC')
 zip = None
 zip_name = None
 zip_base = None
@@ -25,6 +26,8 @@ def main():
     major_num = 0
     build_num = 0
     revision_num = 0
+    shouldBuild = 0
+    
     if len(sys.argv) > 1:
         try:
             major_num = int(sys.argv[1])
@@ -32,8 +35,17 @@ def main():
             revision_num = int(sys.argv[3])
         except:
             pass
+    if len(sys.argv) > 4:
+        try:
+            shouldBuild = str2bool(sys.argv[4])
+        except:
+            pass
+        
     ret = 0
-    ret = build(major_num, build_num, revision_num)
+    if shouldBuild:
+        ret = build(major_num, build_num, revision_num)
+    else:
+        print 'Skipping Build Process...'
     if ret != 0:
         sys.exit(ret)
     
@@ -54,9 +66,9 @@ def main():
     version = load_version(build_num)
     out_folder = os.path.join(mcp_dir, 'TFC Build')
     if os.path.exists(out_folder):
-        print 'TFC Build already exists. Skipping creation.'
+        print 'TFC Build Folder already exists. Skipping creation.'
     else:
-        print 'Creating TFC Build.'
+        print 'Creating TFC Build Folder.'
         
         os.makedirs(out_folder)
     
@@ -64,8 +76,8 @@ def main():
     zip_folder(client_dir, '', zip)
     zip_add('TFCraft_credits.txt')
     zip_add('license.txt')
-    zip_add('TFC ASM/tfc_at.cfg')
     zip_folder(os.path.join(forge_dir, 'TFC Resources'), '', zip)
+    zip_add('TFC ASM/tfc_at.cfg')
     zip_folder(os.path.join(forge_dir, 'TFC ASM/META-INF'), 'META-INF', zip)
     zip_end()
     
@@ -74,10 +86,11 @@ def main():
     zip_folder(os.path.join(forge_dir, 'TFC Resources'), '', zip)
     zip_folder(os.path.join(forge_dir, 'TFC API'), '', zip)
     zip_folder(os.path.join(forge_dir, 'TFC ASM'), '', zip)
-    zip_folder(os.path.join(forge_dir, 'TFC ASM/META-INF'), 'META-INF', zip)
     zip_add('tfc_credits.txt')
     zip_add('license.txt')
     zip_add('TFC ASM/tfc_at.cfg')
+    zip_folder(os.path.join(forge_dir, 'TFC ASM/META-INF'), 'META-INF', zip)
+
     zip_end()
 
     zip_start('TFC-Dev-API-%d.%d.%d.zip' % (major_num, build_num, revision_num))
@@ -87,8 +100,11 @@ def main():
     print '============================= Release Finished %d ============================' % error_level
     sys.exit(error_level)
     
-    
-def zip_add(file, key=None):
+def str2bool(v):
+  return v.lower() in ("yes", "true", "t", "1")
+
+def zip_add(file, key=None, base=None):
+    zip_base=base
     if key == None:
         key = os.path.basename(file)
     else:
