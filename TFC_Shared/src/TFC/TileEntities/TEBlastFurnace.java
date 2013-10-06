@@ -25,6 +25,7 @@ import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
+import TFC.Blocks.Devices.BlockEarlyBloomery;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
@@ -47,7 +48,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	public String OreType;
 
 	//We dont save this since its purpose is to just mkae certain parts of the code not run every single tick
-	private int slowCounter = 0;
+	public int slowCounter = 0;
 
 
 	//Bloomery
@@ -56,6 +57,8 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 	ItemStack outMetal1;
 	int outMetal1Count;
+
+	private int cookDelay = 0;
 
 	public TEBlastFurnace()
 	{
@@ -77,6 +80,28 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		charcoalCount = 0;
 		oreCount = 0;
 		shouldSendInitData = false;
+	}
+
+	public boolean canLight()
+	{
+		if(!worldObj.isRemote)
+		{
+			//get the direction that the bloomery is facing so that we know where the stack should be
+			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
+			int[] direction = BlockEarlyBloomery.headBlockToFootBlockMap[meta];
+
+			if (this.charcoalCount < this.oreCount) 
+			{
+				return false;
+			}
+
+			if(worldObj.getBlockId(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Charcoal.blockID && 
+					worldObj.getBlockMetadata(xCoord+direction[0], yCoord, zCoord+direction[1]) >= 7 && this.fireTemperature < 200)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void careForInventorySlot(int i, float startTemp)
@@ -158,28 +183,14 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 	}
 
-	public int combineMetals(ItemStack InputItem, ItemStack DestItem)
-	{
-		int D1 = 100-InputItem.getItemDamage();
-		int D2 = 100-DestItem.getItemDamage();
-
-		int damage = 100-(D1 + D2);
-
-		DestItem.setItemDamage(damage);
-		if(damage < 0) {
-			return 100-damage;
-		}
-
-		return 0;//returns false if there is no metal left over to combine
-	}
-
 	public void CookItemsNew(int i)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
 		Random R = new Random();
 		TECrucible te = (TECrucible) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
+
 		//Only allow the ore to smelt if there is a valid Tuyere associated with the furnace
-		if(fireItemStacks[i] != null && te != null && input[1] != null)
+		if(fireItemStacks[i] != null && te != null && input[1] != null && cookDelay == 0)
 		{
 			HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
 			if(index != null && inputItemTemps[i] >= index.meltTemp)
@@ -202,6 +213,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 						te.addMetal(m, (short)(100-output));
 					}
 				}
+				cookDelay = 100;
 				fireItemStacks[i] = null;
 				input[1].setItemDamage(input[1].getItemDamage()+1);
 				if( input[1] != null && input[1].getItemDamage() == input[1].getMaxDamage())
@@ -270,7 +282,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	@Override
 	public String getInvName()
 	{
-		return "Bloomery";
+		return "BlastFurnace";
 	}
 
 	@Override
@@ -282,14 +294,12 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		// TODO Auto-generated method stub
 		return input[i];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
-		return null;
+	public ItemStack getStackInSlotOnClosing(int i) {
+		return input[i];
 	}
 
 	@Override
@@ -599,7 +609,11 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 									nonConsumedOre++;
 								}
 							}
+							else{
+								nonConsumedOre++;
+							}
 						}
+
 						if(c+nonConsumedOre == 0) {
 							entity.setDead();
 						} else {
@@ -614,10 +628,14 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			/*Handle the temperature of the Bloomery*/
 			HandleTemperature();
 
+			if(cookDelay > 0) {
+				cookDelay--;
+			}
+
 			for(int i = 0; i < fireItemStacks.length; i++)
 			{
 				/*Handle temperature for each item in the stack*/
-				careForInventorySlot(i,100);
+				careForInventorySlot(i, 10);
 				/*Cook each input item */
 				if(worldObj.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.Crucible.blockID)
 				{
