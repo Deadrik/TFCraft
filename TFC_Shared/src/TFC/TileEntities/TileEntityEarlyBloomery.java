@@ -162,9 +162,8 @@ public class TileEntityEarlyBloomery extends TileEntity
 			//Do the funky math to find how many molten blocks should be placed
 			int count = charcoalCount+oreCount;
 
-			int moltenCount = count / 8;
-			/*if(count > 0 && count <= 8) {moltenCount = 1;} 
-			else if(count > 8 && count <= 16) {moltenCount = 2;} */
+			int moltenCount = count > 0 && count < 8 ? 1 : count / 8;
+
 			int validCount = 0;
 
 			/*Fill the bloomery stack with molten ore. */

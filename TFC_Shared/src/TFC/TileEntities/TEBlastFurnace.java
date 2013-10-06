@@ -533,6 +533,8 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		}*/
 	}
 
+	int moltenCount = 0;
+
 	@Override
 	public void updateEntity()
 	{
@@ -547,34 +549,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				charcoalCount = 0;
 			}
 
-			//Do the funky math to find how many molten blocks should be placed
-			float count = charcoalCount+oreCount;
-
-			int moltenCount = 0;
-			if(count > 0 && count <= 8) {moltenCount = 1;} 
-			else if(count > 8 && count <= 16) {moltenCount = 2;} 
-			else if(count > 16 && count <= 24) {moltenCount = 3;} 
-			else if(count > 24 && count <= 32) {moltenCount = 4;} 
-			else if(count > 32 && count <= 40) {moltenCount = 5;} 
-
-			/*Fill the bloomery stack with molten ore. */
-			for (int i = 1; i < 5; i++)
-			{
-				/*The stack must be air or already be molten rock*/
-				if((worldObj.getBlockId(xCoord, yCoord+i, zCoord) == 0 ||
-						worldObj.getBlockId(xCoord, yCoord+i, zCoord) == TFCBlocks.Molten.blockID))
-				{
-					//Make sure that the Stack is surrounded by rock
-					if(i < moltenCount && isStackValid(xCoord, yCoord+i, zCoord)) {
-						if(this.fireTemperature > 200)
-						{
-							worldObj.setBlock(xCoord, yCoord+i, zCoord, TFCBlocks.Molten.blockID, (int) Math.min(16, fireTemperature/(this.MaxFireTemp*0.75f)), 2);
-						}
-					} else {
-						worldObj.setBlockToAir(xCoord, yCoord+i, zCoord);
-					}
-				}
-			}
 			/*Create a list of all the items that are falling into the stack */
 			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
 					xCoord, yCoord+moltenCount, zCoord, 
@@ -651,21 +625,56 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				}
 			}
 
-			/*if(input[0]!= null)
-			{
-				RemoveOre();
-				if(input[0].stackSize < 1)
-					input[0].stackSize = 1;
-			}*/
-
-			if(slowCounter > 200)
+			//Every 5 seconds we do a validity check and update the molten ore count
+			if(slowCounter > 100)
 			{
 				//Here we make sure that the forge is valid
 				isValid = CheckValidity();
+				moltenCount = updateMoltenBlocks();
 			}
 			slowCounter++;
 
 		}
+	}
+
+	/**
+	 * @return Number of molten blocks
+	 */
+	private int updateMoltenBlocks() {
+		//Do the funky math to find how many molten blocks should be placed
+		float count = charcoalCount+oreCount;
+
+		int moltenCount = 0;
+		if(count > 0 && count <= 8) {moltenCount = 1;} 
+		else if(count > 8 && count <= 16) {moltenCount = 2;} 
+		else if(count > 16 && count <= 24) {moltenCount = 3;} 
+		else if(count > 24 && count <= 32) {moltenCount = 4;} 
+		else if(count > 32 && count <= 40) {moltenCount = 5;} 
+
+		int validCount = 0;
+
+		/*Fill the bloomery stack with molten ore. */
+		for (int i = 1; i < 5; i++)
+		{
+			/*The stack must be air or already be molten rock*/
+			if((worldObj.getBlockId(xCoord, yCoord+i, zCoord) == 0 ||
+					worldObj.getBlockId(xCoord, yCoord+i, zCoord) == TFCBlocks.Molten.blockID))
+			{
+				//Make sure that the Stack is surrounded by rock
+				if(isStackValid(xCoord, yCoord+i, zCoord)) {
+					validCount++;
+				}
+				if(i <= moltenCount && i <= validCount) {
+					if(this.fireTemperature > 200)
+					{
+						worldObj.setBlock(xCoord, yCoord+i, zCoord, TFCBlocks.Molten.blockID, (int) (Math.min(15, fireTemperature/(this.MaxFireTemp*0.75f))*15), 2);
+					}
+				} else {
+					worldObj.setBlockToAir(xCoord, yCoord+i, zCoord);
+				}
+			}
+		}
+		return moltenCount;
 	}
 
 	private boolean foundFlux(int moltenCount){
