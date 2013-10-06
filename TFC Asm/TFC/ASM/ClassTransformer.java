@@ -232,9 +232,22 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 
 	public class InstrSet
 	{
+		/**
+		 * InsnList of instructions that should be inserted at the specified point
+		 */
 		InsnList iList;
+		/**
+		 * Insertion offset to from either the top of the file, or from the provided startLine
+		 */
 		int insertionOffset;
+		/**
+		 * The line number of the LineNumberNode to use as the starting offset, also known as the anchor point. 
+		 * If this is -1 then the top of the method is used as the anchor point
+		 */
 		int startLine = -1;
+		/**
+		 * The type of operation that should be performed at the given offset
+		 */
 		OperationType opType;
 
 		public InstrSet(InsnList list, int offset, OperationType op)
@@ -269,8 +282,17 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 
 	public class MethodPatch
 	{
+		/**
+		 * Name of the Method
+		 */
 		public String name;
+		/**
+		 * Method Signature
+		 */
 		public String desc;
+		/**
+		 * InstrSet Instance that should be used to modify the given method
+		 */
 		public InstrSet instructions;
 
 		public MethodPatch(String methodName, InstrSet instr)
