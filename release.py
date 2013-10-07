@@ -13,6 +13,7 @@ from base import reset_logger, load_version, zip_folder, zip_create, inject_vers
 from build import build
 
 reobf_dir = os.path.join(mcp_dir, 'reobf')
+bin_dir = os.path.join(mcp_dir, os.path.join('bin', 'minecraft'))
 client_dir = os.path.join(reobf_dir, 'minecraft')
 server_dir = os.path.join(reobf_dir, 'minecraft_server')
 tfc_dir = os.path.join(client_dir, 'TFC')
@@ -82,10 +83,8 @@ def main():
     zip_end()
     
     zip_start('TFC-Dev-%d.%d.%d.jar' % (major_num, build_num, revision_num))
-    zip_folder(os.path.join(forge_dir, 'TFC_Shared/src'), '', zip)
+    zip_folder(os.path.join(bin_dir, 'TFC'), 'TFC', zip)
     zip_folder(os.path.join(forge_dir, 'TFC Resources'), '', zip)
-    zip_folder(os.path.join(forge_dir, 'TFC API'), '', zip)
-    zip_folder(os.path.join(forge_dir, 'TFC ASM'), '', zip)
     zip_add('tfc_credits.txt')
     zip_add('license.txt')
     zip_add('TFC ASM/tfc_at.cfg')
