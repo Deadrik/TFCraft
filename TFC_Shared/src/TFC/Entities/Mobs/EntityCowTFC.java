@@ -31,6 +31,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	protected float mateSizeMod;
 	public float size_mod;
 	public boolean inLove;
+	int degreeOfDiversion = 1;
 
 	public EntityCowTFC(World par1World)
 	{
@@ -42,12 +43,15 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		conception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
-		int degreeOfDiversion = 1;
-		size_mod =(float)Math.sqrt((((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) * 0.1f) + 1F) * (1.0F - 0.1F * sex));
+		size_mod =(float)Math.sqrt((((rand.nextInt (degreeOfDiversion+1)*10*(rand.nextBoolean()?1:-1)) * 0.1f) + 1F) * (1.0F - 0.1F * sex));
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 1.0F));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.RyeGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.RiceGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.BarleyGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.OatGrain.itemID, false));
 		this.tasks.addTask(6, this.aiEatGrass);
 
 		//	We hijack the growingAge to hold the day of birth rather
@@ -67,7 +71,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		this.posX = ((EntityLivingBase)mother).posX;
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
-		size_mod = (float)Math.sqrt((((rand.nextInt (4+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size)/1.95F));
+		size_mod = (float)Math.sqrt((((rand.nextInt (degreeOfDiversion+1)*10*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size)/1.95F));
 		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 
 		//	We hijack the growingAge to hold the day of birth rather
@@ -354,6 +358,12 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		} else {
 			return false;
 		}
+	}
+	
+	@Override
+	public void eatGrassBonus()
+	{
+		hunger += 24000;
 	}
 
 	@Override
