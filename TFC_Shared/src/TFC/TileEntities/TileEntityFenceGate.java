@@ -4,11 +4,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.tileentity.TileEntity;
 import TFC.TerraFirmaCraft;
 import TFC.Handlers.PacketHandler;
 
@@ -16,23 +14,23 @@ public class TileEntityFenceGate extends NetworkTileEntity {
 
 	private boolean open = false;
 	private byte direction = 0;
-	
+
 	public void setOpen(boolean value){
 		open = value;
 		TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-	
+
 	public void setDirection(byte value){
 		direction = value;
 		TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-	
+
 	public boolean getOpen(){
 		return open;
 	}
-	
+
 	public byte getDirection(){
 		return direction;
 	}
@@ -43,7 +41,7 @@ public class TileEntityFenceGate extends NetworkTileEntity {
 		open = nbttagcompound.getBoolean("open");
 		direction = nbttagcompound.getByte("dir");
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
 		super.writeToNBT(nbttagcompound);
@@ -57,7 +55,7 @@ public class TileEntityFenceGate extends NetworkTileEntity {
 		this.direction = inStream.readByte();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-	
+
 	public Packet createUpdatePacket() {
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 		DataOutputStream dos=new DataOutputStream(bos);
@@ -74,9 +72,9 @@ public class TileEntityFenceGate extends NetworkTileEntity {
 	}
 
 	@Override
-	public void handleDataPacketServer(DataInputStream inStream) throws IOException {
-		open = inStream.readBoolean();
-		direction = inStream.readByte();
+	public void handleDataPacketServer(DataInputStream inStream) throws IOException 
+	{
+
 	}
 
 	@Override
@@ -89,5 +87,6 @@ public class TileEntityFenceGate extends NetworkTileEntity {
 	public void handleInitPacket(DataInputStream inStream) throws IOException {
 		open = inStream.readBoolean();
 		direction = inStream.readByte();
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 }

@@ -6,10 +6,13 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -29,6 +32,18 @@ public class BlockBerryBush extends BlockTerraContainer
 	public static Icon[] icons;
 	public static Icon[] iconsBerries;
 	public static String[] MetaNames;
+
+	public static final int Wintergreen = 0;
+	public static final int Blueberry = 1;
+	public static final int Raspberry = 2;
+	public static final int Strawberry = 3;
+	public static final int Blackberry = 4;
+	public static final int Bunchberry = 5;
+	public static final int Cranberry = 6;
+	public static final int Snowberry = 7;
+	public static final int Elderberry = 8;
+	public static final int Gooseberry = 9;
+	public static final int Cloudberry = 10;
 
 	public BlockBerryBush(int par1)
 	{
@@ -51,6 +66,12 @@ public class BlockBerryBush extends BlockTerraContainer
 		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(id, 1, i));
 		}
+	}
+
+	@Override
+	public void setBlockBoundsForItemRender() 
+	{
+		setBlockBounds(0, 0, 0, 1, 1, 1);
 	}
 
 	@Override
@@ -186,6 +207,7 @@ public class BlockBerryBush extends BlockTerraContainer
 			{
 				te.hasFruit = false;
 				te.dayHarvested = (int) TFC_Time.getTotalDays();
+				te.broadcastPacketInRange(te.createUpdatePacket());
 				dropBlockAsItem_do(world, i, j, k, fi.getOutput());
 				return true;
 			}
@@ -335,6 +357,32 @@ public class BlockBerryBush extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		return new TEBerryBush();
+	}
+
+	@Override
+	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	{
+		return true;
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
+	{
+		int _meta = world.getBlockMetadata(i, j, k);
+		if(_meta == Blueberry ||_meta == Raspberry || _meta == Blackberry || 
+				_meta == Elderberry || _meta == Gooseberry) {
+			entity.motionX *= 0.7D;
+			entity.motionZ *= 0.7D;
+		}
+
+
+		if(_meta == Raspberry || _meta == Blackberry) 
+		{
+			if(entity instanceof EntityLivingBase) {
+				entity.attackEntityFrom(DamageSource.cactus, 5);
+			}
+		}
+
 	}
 
 }

@@ -67,15 +67,22 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 
 				for (int index = 0; index < m.instructions.size() && instructions.size() > 0; index++)
 				{
+					numInsertions = 0;
 					while(target != null)
 					{
 						if(target.startLine == -1) {
 							performDirectOperation(m.instructions, target);
+							instructions.remove(0);
 						} else if(this.isLineNumber(m.instructions.get(index), target.startLine)) {
 							performAnchorOperation(m.instructions, target, index);
+							instructions.remove(0);
+						}
+						else
+						{
+							break;
 						}
 
-						instructions.remove(0);
+
 						if(instructions.size() > 0) 
 						{
 							target = instructions.get(0);
@@ -96,9 +103,21 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		return writer.toByteArray();
 	}
 
+	private int findLine(InsnList methodList, int line)
+	{
+		for (int index = 0; index < methodList.size(); index++)
+		{
+			if(this.isLineNumber(methodList.get(index), line))
+			{
+				return index;
+			}
+		}
+		return -1;
+	}
+
 	private void performDirectOperation(InsnList methodInsn, InstrSet input)
 	{
-		AbstractInsnNode _current = methodInsn.get(input.insertionOffset+numInsertions);
+		AbstractInsnNode _current = methodInsn.get(input.offset+numInsertions);
 
 		switch(input.opType)
 		{
@@ -125,7 +144,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 
 	private void performAnchorOperation(InsnList methodInsn, InstrSet input, int anchor)
 	{
-		AbstractInsnNode _current = methodInsn.get(anchor + input.insertionOffset+numInsertions);
+		AbstractInsnNode _current = methodInsn.get(anchor + input.offset + numInsertions);
 		switch(input.opType)
 		{
 		case InsertAfter:
@@ -143,6 +162,19 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		case Replace:
 			methodInsn.insert(_current, input.iList);
 			methodInsn.remove(_current);
+			break;
+		case Switch:
+			/**
+			 * Current is the first node. We will remove it and insert after the chosen index
+			 * and then move back one, grab that node and move it to the original location
+			 * */
+			int otherAnchor = findLine(methodInsn, input.offsetLine);
+			AbstractInsnNode _other = methodInsn.get(otherAnchor + input.offsetSwitch + numInsertions);
+			methodInsn.remove(_current);
+			methodInsn.insert(_other, _current);
+			_current = methodInsn.get(anchor + input.offset + numInsertions);
+			methodInsn.remove(_other);
+			methodInsn.insertBefore(_current, _other);
 			break;
 		default:
 			break;
@@ -232,45 +264,82 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 
 	public class InstrSet
 	{
+		/**
+		 * InsnList of instructions that should be inserted at the specified point
+		 */
 		InsnList iList;
-		int insertionOffset;
+
+		/**
+		 * Insertion offset to from either the top of the file, or from the provided startLine
+		 */
+		int offset;
+
+		/**
+		 * The line number of the LineNumberNode to use as the starting offset, also known as the anchor point. 
+		 * If this is -1 then the top of the method is used as the anchor point
+		 */
 		int startLine = -1;
+
+		/**
+		 * The type of operation that should be performed at the given offset
+		 */
 		OperationType opType;
 
-		public InstrSet(InsnList list, int offset, OperationType op)
+
+		int offsetSwitch = -1;
+		int offsetLine = -1;
+
+		public InstrSet(InsnList list, int off, OperationType op)
 		{
 			iList = list;
-			insertionOffset = offset;
+			offset = off;
 			opType = op;
 		}
-		public InstrSet(AbstractInsnNode node, int offset, OperationType op)
+		public InstrSet(AbstractInsnNode node, int off, OperationType op)
 		{
 			iList = new InsnList();
 			iList.add(node);
-			insertionOffset = offset;
+			offset = off;
 			opType = op;
 		}
-		public InstrSet(InsnList list, int startLineNum, int offset, OperationType op)
+		public InstrSet(InsnList list, int startLineNum, int off, OperationType op)
 		{
 			iList = list;
 			startLine = startLineNum;
-			insertionOffset = offset;
+			offset = off;
 			opType = op;
 		}
-		public InstrSet(AbstractInsnNode node, int startLineNum, int offset, OperationType op)
+		public InstrSet(AbstractInsnNode node, int startLineNum, int off, OperationType op)
 		{
 			iList = new InsnList();
 			iList.add(node);
 			startLine = startLineNum;
-			insertionOffset = offset;
+			offset = off;
 			opType = op;
+		}
+		public InstrSet(int startLineNum, int off, int swLineNum, int swOffset)
+		{
+			startLine = startLineNum;
+			offset = off;
+			opType = OperationType.Switch;
+			offsetSwitch = swOffset;
+			offsetLine = swLineNum;
 		}
 	}
 
 	public class MethodPatch
 	{
+		/**
+		 * Name of the Method
+		 */
 		public String name;
+		/**
+		 * Method Signature
+		 */
 		public String desc;
+		/**
+		 * InstrSet Instance that should be used to modify the given method
+		 */
 		public InstrSet instructions;
 
 		public MethodPatch(String methodName, InstrSet instr)
@@ -284,6 +353,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 	{
 		InsertAfter,
 		InsertBefore,
+		Switch,
 		Replace,
 		Remove;
 	}
