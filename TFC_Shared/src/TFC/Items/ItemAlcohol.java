@@ -115,7 +115,6 @@ public class ItemAlcohol extends ItemTerra
 			TFC_Core.getPlayerFoodStats(player).restoreWater(player, 800);
 			long soberTime = player.getEntityData().hasKey("soberTime") ? player.getEntityData().getLong("soberTime") : 0;
 			int time = rand.nextInt(1000) + 400;
-			System.out.println(soberTime);
 			soberTime +=time;
 			if(rand.nextInt(100)==0){
 				player.addPotionEffect(new PotionEffect(8,time,4));

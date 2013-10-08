@@ -3,17 +3,24 @@ package TFC.Food;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
+import TFC.TFCItems;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
+import TFC.TileEntities.TileEntityFireEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -41,6 +48,12 @@ public class FoodStatsTFC
 
 
 	private int prevFoodLevel = 100;
+
+	private int temperatureLevel = 0;
+	private int prevTemperatureLevel = 0;
+	private int extraFoodConsumed = 0;
+	private int extraWaterConsumed = 0;
+	Random rand = new Random();
 
 	public FoodStatsTFC()
 	{
@@ -83,10 +96,13 @@ public class FoodStatsTFC
 				satisfaction = -foodSaturationLevel;
 			}
 
+			if(!player.capabilities.isCreativeMode)applyTemperature(player);
+
 
 			/*
 			 * Standard filling reduction based upon time.
 			 */
+			if(!player.capabilities.isCreativeMode)this.foodLevel -= extraFoodConsumed;
 			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength)
 			{
 				this.foodTimer += TFC_Time.hourLength;
@@ -147,6 +163,7 @@ public class FoodStatsTFC
 			{
 				waterLevel -= 5+(tempWaterMod);
 			}
+			if(!player.capabilities.isCreativeMode)waterLevel-=extraWaterConsumed;
 			long time = TFC_Time.getTotalTicks();
 
 			if(player.capabilities.isCreativeMode)
@@ -181,9 +198,129 @@ public class FoodStatsTFC
 		}
 	}
 
+	private void applyTemperature(EntityPlayer player){
+		//Player's basic body functions.
+		prevTemperatureLevel = temperatureLevel;
+		if(temperatureLevel <-1){
+			if(rand.nextInt(2000-getBaseBodyTempMod(player))==0 && this.foodLevel >= 500){
+				temperatureLevel++;
+			}
+			temperatureLevel+=applyTemperatureFromHeatSources(player);
+		}
+		if((player.isSprinting() || player.swingProgress != 0)&& rand.nextInt(1000- (getBaseBodyTempMod(player) )/2 ) == 0 ){
+			temperatureLevel++;
+		}
+		if(temperatureLevel > 1 && rand.nextInt(1500 - (player.isInWater()?1000:0))==0 && this.waterLevel >= 500){
+			temperatureLevel--;
+		}
+
+		temperatureLevel += applyTemperatureFromEnvironment(player);
+
+		extraFoodConsumed = (temperatureLevel <0 && rand.nextInt(350)==0)?temperatureLevel*-1:0;
+		extraWaterConsumed = (temperatureLevel >0 && rand.nextInt(350)==0)?temperatureLevel:0;
+
+		if(temperatureLevel != prevTemperatureLevel && !((prevTemperatureLevel >=-1 && prevTemperatureLevel <=1)&&
+				(temperatureLevel >=-1 && temperatureLevel <=1))){
+			tellPlayerMessage(player);
+		}
+		prevTemperatureLevel = temperatureLevel;
+		if(temperatureLevel >= -1 && temperatureLevel <= 1){
+			extraFoodConsumed = 0;
+			extraWaterConsumed = 0;
+		}
+	}
+
+	public int applyTemperatureFromEnvironment(EntityPlayer player){
+		int x = (int)(player.posX);
+		int y = (int)(player.posY);
+		int z = (int)(player.posZ);
+		World world = player.worldObj;
+		float temperature = TFC_Climate.getHeightAdjustedTemp(x, y, z);
+		//if it's cold
+		if(temperature <=10){
+			int modifier = (int)((temperature - 10)*15);
+			if(rand.nextInt(1200 + modifier)==0){
+				return -1;
+			}
+		}
+		//if it's warm
+		else if(temperature >=30){
+			int modifier = (int)((temperature - 30)*15);
+			if(rand.nextInt(1200-modifier)==0){
+				return 1;
+			}
+		}
+		return 0;
+	}
+
+	public int applyTemperatureFromHeatSources(EntityPlayer player){
+		int x = (int)(player.posX);
+		int y = (int)(player.posY);
+		int z = (int)(player.posZ);
+		World world = player.worldObj;
+		int returnAmount = 0;
+		for(int i = x - 10; i<x +10;i++){
+			for(int j = y-3;j<y+3;j++){
+				for(int k = z-10;k<z+10;k++){
+					TileEntity te = world.getBlockTileEntity(i, j, k);
+					if(te != null && te instanceof TileEntityFireEntity && ((TileEntityFireEntity)te).fireTemperature > 100){
+						returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )==0?1:0);
+					}
+				}
+			}
+		}
+		return returnAmount;
+	}
+
+	public int getBaseBodyTempMod(EntityPlayer player){
+		ItemStack itemHead = player.inventory.armorItemInSlot(3);
+		ItemStack itemChest = player.inventory.armorItemInSlot(2);
+		ItemStack itemLegs = player.inventory.armorItemInSlot(1);
+		ItemStack itemFeet = player.inventory.armorItemInSlot(0);
+		int returnAmount = 0;
+		if(itemHead !=null){
+			returnAmount += (itemHead.getItem() == Item.helmetLeather)?250:0;
+		}
+		if(itemChest !=null){
+			returnAmount += (itemHead.getItem() == Item.plateLeather)?250:0;
+		}
+		if(itemLegs !=null){
+			returnAmount += (itemHead.getItem() == Item.legsLeather)?250:0;
+		}
+		if(itemFeet !=null){
+			returnAmount += (itemHead.getItem() == Item.bootsLeather)?250:0;
+		}
+		return returnAmount;
+	}
+
 	public int getMaxWater(EntityPlayer player)
 	{
 		return (TFC_Time.dayLength*2)+(200*player.experienceLevel);
+	}
+
+	private void tellPlayerMessage(EntityPlayer player){
+		switch(temperatureLevel){
+		case -1:
+		case 0:
+		case 1: player.addChatMessage("You feel comfortable");break;
+		case -2: player.addChatMessage("You feel cool.");break;
+		case -3: player.addChatMessage("You feel chilled.");break;
+		case -4: player.addChatMessage("You feel cold.");break;
+		case -5: player.addChatMessage("You feel numb.");break;
+		case -6: player.addChatMessage("You feel freezing!");break;
+		case -7: killPlayer(player);break;
+		case 2: player.addChatMessage("You feel warm.");break;
+		case 3: player.addChatMessage("You feel very warm.");break;
+		case 4: player.addChatMessage("You feel hot.");break;
+		case 5: player.addChatMessage("You feel very hot.");break;
+		case 6: player.addChatMessage("You feel extremely hot!");break;
+		case 7: killPlayer(player);break;
+		}
+	}
+
+	private void killPlayer(EntityPlayer player){
+		player.inventory.dropAllItems();
+		player.setHealth(0);		
 	}
 
 	/**
@@ -225,6 +362,9 @@ public class FoodStatsTFC
 			this.foodLevel = foodCompound.getFloat("foodLevel");
 			this.foodTimer = foodCompound.getLong("foodTickTimer");
 			this.foodHealTimer = foodCompound.getLong("foodHealTimer");
+			this.temperatureLevel = foodCompound.getInteger("tempLev");
+			this.extraWaterConsumed = foodCompound.getInteger("waterExtra");
+			this.extraFoodConsumed = foodCompound.getInteger("foodExtra");
 			this.waterTimer = foodCompound.getLong("waterTimer");
 			this.foodSaturationLevel = foodCompound.getFloat("foodSaturationLevel");
 			this.foodExhaustionLevel = foodCompound.getFloat("foodExhaustionLevel");
@@ -242,6 +382,9 @@ public class FoodStatsTFC
 		foodCompound.setLong("foodTickTimer", this.foodTimer);
 		foodCompound.setLong("foodHealTimer", this.foodHealTimer);
 		foodCompound.setLong("waterTimer", this.waterTimer);
+		foodCompound.setInteger("tempLev",this.temperatureLevel);
+		foodCompound.setInteger("waterExtra",this.extraWaterConsumed);
+		foodCompound.setInteger("foodExtra",this.extraFoodConsumed);
 		foodCompound.setFloat("foodSaturationLevel", this.foodSaturationLevel);
 		foodCompound.setFloat("foodExhaustionLevel", this.foodExhaustionLevel);
 		par1NBTTagCompound.setCompoundTag("foodCompound", foodCompound);
