@@ -76,7 +76,7 @@ public class ModelCowTFC extends ModelQuadruped
 
 		float percent = TFC_Core.getPercentGrown((IAnimal)entity);
 		float ageScale = 2.0F-percent;
-		float ageHeadScale = (float)Math.sqrt(1/ageScale);
+		float ageHeadScale = (float)Math.pow(1/ageScale,0.66);
 		float offset = 1.4f - percent;
 		GL11.glPushMatrix ();
 

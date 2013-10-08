@@ -67,6 +67,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 
 		pregnancyRequiredTime = 4 * TFC_Time.daysInMonth;
 
+		hunger = 168000;
 		int degreeOfDiversion = 1;
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 
@@ -412,6 +413,13 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	public void setAnimalID(long id) 
 	{
 		animalID = id;
+	}
+	
+	
+	@Override
+	public void eatGrassBonus()
+	{
+		hunger += 24000;
 	}
 
 	@Override
