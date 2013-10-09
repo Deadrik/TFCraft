@@ -98,22 +98,11 @@ public class WorldGenRedwoodXL extends WorldGenerator {
 					|| Block.blocksList[j4].isLeaves(world, x, y + y1,z) && 
 					Block.blocksList[j4].canBeReplacedByLeaves(world, x, y + y1, z))
 			{
-				int id = world.getBlockId(x, y + y1, z);
-				if(id == 0 || Block.blocksList[id].canBeReplacedByLeaves(world, x, y + y1, z) || world.getBlockMaterial(x, y + y1, z).isReplaceable()) {
-					setBlockAndMetadata(world, x, y + y1, z, blockWood, metaWood);
-				}
-				id = world.getBlockId(x-1, y + y1, z);
-				if(id == 0 || Block.blocksList[id].canBeReplacedByLeaves(world, x-1, y + y1, z) || world.getBlockMaterial(x-1, y + y1, z).isReplaceable()) {
-					setBlockAndMetadata(world, x - 1, y + y1, z, blockWood, metaWood);
-				}
-				id = world.getBlockId(x, y + y1, z-1);
-				if(id == 0 || Block.blocksList[id].canBeReplacedByLeaves(world, x, y + y1, z-1) || world.getBlockMaterial(x, y + y1, z-1).isReplaceable()) {
-					setBlockAndMetadata(world, x, y + y1, z - 1, blockWood, metaWood);
-				}
-				id = world.getBlockId(x-1, y + y1, z-1);
-				if(id == 0 || Block.blocksList[id].canBeReplacedByLeaves(world, x-1, y + y1, z-1) || world.getBlockMaterial(x-1, y + y1, z-1).isReplaceable()) {
-					setBlockAndMetadata(world, x - 1, y + y1, z - 1, blockWood, metaWood);
-				}
+
+				setBlockID(world, x, y+y1, z, blockWood, metaWood);
+				setBlockID(world, x-1, y+y1, z, blockWood, metaWood);
+				setBlockID(world, x, y+y1, z-1, blockWood, metaWood);
+				setBlockID(world, x-1, y+y1, z-1, blockWood, metaWood);
 			}
 		}
 
@@ -134,14 +123,10 @@ public class WorldGenRedwoodXL extends WorldGenerator {
 							.canBeReplacedByLeaves(world, x1,
 									y1, z1)))
 					{
-						setBlockAndMetadata(world, x1, y1, z1,
-								blockLeaf, metaLeaf);
-						setBlockAndMetadata(world, x1 - 1, y1, z1,
-								blockLeaf, metaLeaf);
-						setBlockAndMetadata(world, x1, y1, z1 - 1,
-								blockLeaf, metaLeaf);
-						setBlockAndMetadata(world, x1 - 1, y1, z1 - 1,
-								blockLeaf, metaLeaf);
+						setBlockID(world, x1, y1, z1, blockLeaf, metaLeaf);
+						setBlockID(world, x1 - 1, y1, z1, blockLeaf, metaLeaf);
+						setBlockID(world, x1, y1, z1 - 1, blockLeaf, metaLeaf);
+						setBlockID(world, x1 - 1, y1, z1 - 1, blockLeaf, metaLeaf);
 					}
 				}
 			}
@@ -160,5 +145,19 @@ public class WorldGenRedwoodXL extends WorldGenerator {
 
 
 		return true;
+	}
+
+	/**
+	 * @param world
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
+	private void setBlockID(World world, int x, int y, int z, int blockID, int blockMeta) 
+	{
+		int id = world.getBlockId(x, y, z);
+		if(id == 0 || Block.blocksList[id].canBeReplacedByLeaves(world, x, y, z) || world.getBlockMaterial(x, y, z).isReplaceable()) {
+			setBlockAndMetadata(world, x, y, z, blockID, blockMeta);
+		}
 	}
 }

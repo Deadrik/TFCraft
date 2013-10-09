@@ -182,6 +182,12 @@ public class BlockLogNatural extends BlockTerra
 	}
 
 	@Override
+	public boolean canBeReplacedByLeaves(World world, int x, int y, int z)
+	{
+		return false;
+	}
+
+	@Override
 	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
 	{
 		ProcessTree(world, i, j, k, world.getBlockMetadata(i, j, k), null);
