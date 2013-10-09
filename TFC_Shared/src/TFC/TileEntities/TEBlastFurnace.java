@@ -631,7 +631,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			for(int i = 0; i < fireItemStacks.length; i++)
 			{
 				/*Handle temperature for each item in the stack*/
-				careForInventorySlot(i, 10);
+				careForInventorySlot(i, 100);
 				/*Cook each input item */
 				if(worldObj.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.Crucible.blockID)
 				{
