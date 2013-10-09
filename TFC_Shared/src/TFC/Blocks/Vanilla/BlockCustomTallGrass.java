@@ -103,7 +103,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	
 	private void createStraw(World world, EntityPlayer player, int i, int j, int k)
 	{
-		EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCItems.Straw, 1));
+		EntityItem ei = new EntityItem(world, i+0.5F, j+0.5F, k+0.5F, new ItemStack(TFCItems.Straw, 1));
 		world.spawnEntityInWorld(ei);
 	}
 

@@ -160,15 +160,14 @@ public class TileEntityEarlyBloomery extends TileEntity
 
 
 			//Do the funky math to find how many molten blocks should be placed
-			float count = charcoalCount+oreCount;
+			int count = charcoalCount+oreCount;
 
-			int moltenCount = 1;
-			/*if(count > 0 && count <= 8) {moltenCount = 1;} 
-			else if(count > 8 && count <= 16) {moltenCount = 2;} */
+			int moltenCount = count > 0 && count < 8 ? 1 : count / 8;
 
+			int validCount = 0;
 
 			/*Fill the bloomery stack with molten ore. */
-			for (int i = 1; i < 3; i++)
+			for (int i = 1; i < moltenCount; i++)
 			{
 				/*The stack must be air or already be molten rock*/
 				if((worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == 0 ||
@@ -176,9 +175,18 @@ public class TileEntityEarlyBloomery extends TileEntity
 						worldObj.getBlockMaterial(xCoord+direction[0], yCoord-1, zCoord+direction[1]) == Material.rock)
 				{
 					//Make sure that the Stack is surrounded by rock
-					if(i-1 < moltenCount && isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1]) && bloomeryLit) 
+					if(isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) {
+						validCount++;
+					}
+
+					if(i-1 < moltenCount && i <= validCount) 
 					{
-						worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 0, 0x2);
+						if(this.bloomeryLit)
+						{
+							worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 15, 2);
+						} else {
+							worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 0, 2);
+						}
 					} 
 					else 
 					{
@@ -205,7 +213,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 					{
 						for(int c = 0; c < entity.getEntityItem().stackSize; c++)
 						{
-							if(charcoalCount+oreCount < 16 && charcoalCount < 8)
+							if(charcoalCount+oreCount < 32 && charcoalCount < 16)
 							{
 								charcoalCount++;
 								entity.getEntityItem().stackSize--;
@@ -221,7 +229,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 						int c = entity.getEntityItem().stackSize;
 						for(; c > 0; )
 						{
-							if(charcoalCount+oreCount < 16 && oreCount < 8 && outCount < 1000)
+							if(charcoalCount+oreCount < 32 && oreCount < 16 && outCount < 1000)
 							{
 								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(),1,entity.getEntityItem().getItemDamage()))) 
 								{
