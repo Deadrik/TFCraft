@@ -330,13 +330,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			}
 			if(this.input[1] == null && airFromBellows > 0) {
 				airFromBellows = 0;
-			}
+			};
 
-			float bAir = airFromBellows*(1+airFromBellowsTime/120);
-
-			AddedAir = (numAirBlocks+bAir)/25/16;
-
-			desiredTemp = (fuelBurnTemp + fuelBurnTemp * AddedAir)*t;
+			desiredTemp = this.handleTemp()*t;
 
 			if(fireTemperature < desiredTemp)
 			{
@@ -397,11 +393,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		}
 
 		//Here we handle the bellows
-		if(airFromBellowsTime > 0)
-		{
-			airFromBellowsTime--;
-			airFromBellows = airFromBellowsTime/120*10;
-		}
+		handleAirReduction();
 
 	}
 
