@@ -54,6 +54,7 @@ public class FoodStatsTFC
 	private int extraFoodConsumed = 0;
 	private int extraWaterConsumed = 0;
 	Random rand = new Random();
+	ItemStack itemHead,itemChest,itemLegs,itemFeet;
 
 	public FoodStatsTFC()
 	{
@@ -234,7 +235,6 @@ public class FoodStatsTFC
 		int x = (int)(player.posX);
 		int y = (int)(player.posY);
 		int z = (int)(player.posZ);
-		World world = player.worldObj;
 		float temperature = TFC_Climate.getHeightAdjustedTemp(x, y, z);
 		//if it's cold
 		if(temperature <=10){
@@ -257,12 +257,11 @@ public class FoodStatsTFC
 		int x = (int)(player.posX);
 		int y = (int)(player.posY);
 		int z = (int)(player.posZ);
-		World world = player.worldObj;
 		int returnAmount = 0;
 		for(int i = x - 10; i<x +10;i++){
 			for(int j = y-3;j<y+3;j++){
 				for(int k = z-10;k<z+10;k++){
-					TileEntity te = world.getBlockTileEntity(i, j, k);
+					TileEntity te = player.worldObj.getBlockTileEntity(i, j, k);
 					if(te != null && te instanceof TileEntityFireEntity && ((TileEntityFireEntity)te).fireTemperature > 100){
 						returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )==0?1:0);
 					}
@@ -273,10 +272,10 @@ public class FoodStatsTFC
 	}
 
 	public int getBaseBodyTempMod(EntityPlayer player){
-		ItemStack itemHead = player.inventory.armorItemInSlot(3);
-		ItemStack itemChest = player.inventory.armorItemInSlot(2);
-		ItemStack itemLegs = player.inventory.armorItemInSlot(1);
-		ItemStack itemFeet = player.inventory.armorItemInSlot(0);
+		itemHead = player.inventory.armorItemInSlot(3);
+		itemChest = player.inventory.armorItemInSlot(2);
+		itemLegs = player.inventory.armorItemInSlot(1);
+		itemFeet = player.inventory.armorItemInSlot(0);
 		int returnAmount = 0;
 		if(itemHead !=null){
 			returnAmount += (itemHead.getItem() == Item.helmetLeather)?250:0;

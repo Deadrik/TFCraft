@@ -4,12 +4,14 @@ import java.io.File;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderBlaze;
 import net.minecraft.client.renderer.entity.RenderEnderman;
 import net.minecraft.client.renderer.entity.RenderFallingSand;
 import net.minecraft.client.renderer.entity.RenderGhast;
+import net.minecraft.client.renderer.entity.RenderHorse;
 import net.minecraft.client.renderer.entity.RenderIronGolem;
 import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.entity.RenderSilverfish;
@@ -43,6 +45,7 @@ import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Entities.Mobs.EntityDeer;
 import TFC.Entities.Mobs.EntityEndermanTFC;
 import TFC.Entities.Mobs.EntityGhastTFC;
+import TFC.Entities.Mobs.EntityHorseTFC;
 import TFC.Entities.Mobs.EntityIronGolemTFC;
 import TFC.Entities.Mobs.EntityPigTFC;
 import TFC.Entities.Mobs.EntityPigZombieTFC;
@@ -140,6 +143,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityChickenTFC.class, new RenderChickenTFC(new ModelChickenTFC(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer(new ModelDeer(), 0.9F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHorseTFC.class, new RenderHorse(new ModelHorse(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCustomMinecart.class, new RenderMinecart());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStand.class, new RenderEntityStand());
 
