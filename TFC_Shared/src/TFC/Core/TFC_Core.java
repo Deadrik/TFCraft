@@ -389,6 +389,15 @@ public class TFC_Core
 		return TFCBlocks.Grass2.blockID;
 	}
 
+	public static int getTypeForGrassFromDirt(int inID)
+	{
+		if(inID == TFCBlocks.Dirt.blockID) 
+		{
+			return TFCBlocks.Grass.blockID;
+		}
+		return TFCBlocks.Grass2.blockID;
+	}
+
 	public static int getTypeForDryGrass(int inMeta)
 	{
 		if(inMeta < 16) {

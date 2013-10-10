@@ -60,16 +60,20 @@ public class ModelSheep2TFC extends ModelSheep2
 
 		float percent = TFC_Core.getPercentGrown((IAnimal)entity);
 		float ageScale = 2.0F-percent;
+		float ageHeadScale = (float)Math.pow(1/ageScale,0.66);
 		float offset = 1.4f - percent;
 
 		if(((IAnimal)entity).isAdult()) {
 			offset = 0;
 		}
+		
+		GL11.glPushMatrix ();
 
-		GL11.glPushMatrix();
 		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
-		GL11.glScalef(1.0F / ageScale, 1.0F / ageScale, 1.0F / ageScale);
-		//GL11.glTranslatef(0.0F, offset / ageScale, 0f);
+		GL11.glScalef(ageHeadScale, ageHeadScale, ageHeadScale);
+		GL11.glTranslatef (0.0F, (ageScale-1)*-0.125f,0.1875f-(0.1875f*percent));
+
+		
 		if(percent < 0.5)
 		{
 			horn1.isHidden = true;//rotateAngleX = (float)Math.PI;
@@ -89,6 +93,12 @@ public class ModelSheep2TFC extends ModelSheep2
 		this.head.render(par7);
 		//this.horn1.render(par7);
 		//this.horn2.render(par7);
+		
+		GL11.glPopMatrix();
+		GL11.glPushMatrix ();
+		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+		GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);
+
 		this.body.render(par7);
 		this.leg1.render(par7);
 		this.leg2.render(par7);

@@ -14,6 +14,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
+import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.TileEntities.TEBlastFurnace;
@@ -63,6 +64,14 @@ public class BlockBlastFurnace extends BlockTerraContainer
 
 			if(te.isValid)
 			{
+				if(equippedItem != null && (equippedItem.getItem() == TFCItems.FireStarter || equippedItem.getItem() == TFCItems.FlintSteel))
+				{
+					if(te.canLight())
+					{
+						entityplayer.getCurrentEquippedItem().damageItem(1,entityplayer);
+						te.fireTemperature = 250;
+					}
+				}
 				entityplayer.openGui(TerraFirmaCraft.instance, 26, world, i, j, k);
 			}
 		}
@@ -144,6 +153,10 @@ public class BlockBlastFurnace extends BlockTerraContainer
 			{
 				world.setBlockToAir(i, j, k);
 				world.spawnEntityInWorld(new EntityItem(world,i,j,k, new ItemStack(this, 1)));
+			}
+			else
+			{
+				((TEBlastFurnace)world.getBlockTileEntity(i, j, k)).slowCounter = 101;
 			}
 		}
 	}
