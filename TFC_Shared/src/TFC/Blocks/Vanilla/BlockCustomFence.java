@@ -229,7 +229,7 @@ public class BlockCustomFence extends BlockFence
 
     public static boolean isIdAFence(int par0)
     {
-        return par0 == TFCBlocks.Fence.blockID;
+        return par0 == TFCBlocks.Fence.blockID || BlockFence.isIdAFence(par0);
     }
 
     @SideOnly(Side.CLIENT)

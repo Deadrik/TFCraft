@@ -1,7 +1,15 @@
 package TFC.Blocks;
 
+import static net.minecraftforge.common.ForgeDirection.DOWN;
+import static net.minecraftforge.common.ForgeDirection.UP;
+
 import java.util.Random;
 
+import net.minecraft.block.BlockFarmland;
+import net.minecraft.block.BlockHalfSlab;
+import net.minecraft.block.BlockHopper;
+import net.minecraft.block.BlockPoweredOre;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -16,6 +24,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
+import TFC.Items.ItemIngot;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityIngotPile;
 import cpw.mods.fml.relauncher.Side;
@@ -85,7 +95,25 @@ public class BlockIngotPile extends BlockTerraContainer
 			return true;
 		}
 	}
+	
+	@Override
+	public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side)
+    {
+		TileEntityIngotPile te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z);
+        if(te!= null && te.getStack() == 64 && side == ForgeDirection.UP){
+        	return true;
+        }
+        return false;
+    }
 
+	@Override
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+    {
+        if(!ItemIngot.isValid(par1World, par2, par3, par4)){
+        	par1World.setBlock(par2, par3, par4, 0);
+        }
+    }
+	
 	/**
 	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
 	 * cleared to be reused)

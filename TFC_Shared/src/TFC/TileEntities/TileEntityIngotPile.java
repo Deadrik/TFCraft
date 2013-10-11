@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -14,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
+import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
@@ -57,11 +59,13 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		if(storage[index] == null) {
 			storage[index] = is;
 		}
+		updateNeighbours();
 	}
 
 	public void clearContents()
 	{
 		storage[0] = null;
+		updateNeighbours();
 	}
 
 	@Override
@@ -95,6 +99,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 			{
 				ItemStack itemstack = storage[i];
 				storage[i] = null;
+				updateNeighbours();
 				return itemstack;
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
@@ -102,6 +107,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 			{
 				storage[i] = null;
 			}
+			updateNeighbours();
 			return itemstack1;
 		} else
 		{
@@ -130,6 +136,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 				worldObj.spawnEntityInWorld(entityitem);
 			}
 		}
+		updateNeighbours();
 	}
 
 	@Override
@@ -174,6 +181,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 				
 			}
 		}
+		updateNeighbours();
 	}
 
 
@@ -260,6 +268,13 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		outStream.writeInt(storage[0] != null ? storage[0].itemID : -1);
 		outStream.writeInt(storage[0] != null ? storage[0].stackSize : 0);
 	}
+	
+	public void updateNeighbours(){
+		if(worldObj.blockExists(xCoord, yCoord+1, zCoord) && worldObj.getBlockId(xCoord, yCoord+1, zCoord)!= 0){
+			Block.blocksList[worldObj.getBlockId(xCoord, yCoord+1, zCoord)]
+					.onNeighborBlockChange(worldObj, xCoord, yCoord+1, zCoord, TFCBlocks.IngotPile.blockID);
+		}
+	}
 
 	@Override
 	public void handleInitPacket(DataInputStream inStream) throws IOException 
@@ -268,6 +283,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		int s1 = inStream.readInt();
 		int size = inStream.readInt();
 		storage[0] = s1 != -1 ? new ItemStack(Item.itemsList[s1],size) : null;
+		updateNeighbours();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 	

@@ -42,12 +42,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet39AttachEntity;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 {
@@ -66,6 +68,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	private AnimalChest horseChest;
 	private boolean hasReproduced;
 
+	public int inLove;
+	private int breeding;
+
 	private final AIEatGrass aiEatGrass = new AIEatGrass(this);
 	protected long animalID;
 	protected int sex = 0;
@@ -76,7 +81,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	protected long conception;
 	protected float mateSizeMod;
 	public float size_mod;
-	public boolean inLove;
+	public boolean isInLove;
 
 	int degreeOfDiversion = 2;
 
@@ -109,7 +114,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 1.0F));
+		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.RyeGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.RiceGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.BarleyGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.OatGrain.itemID, false));
 		this.tasks.addTask(6, this.aiEatGrass);
 
 		this.func_110226_cD();
@@ -168,7 +178,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		{
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyRequiredTime)
 			{
-				EntityCowTFC baby = (EntityCowTFC) createChildTFC(this);
+				EntityHorseTFC baby = (EntityHorseTFC) createChildTFC(this);
 				baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
 				baby.rotationYawHead = baby.rotationYaw;
 				baby.renderYawOffset = baby.rotationYaw;
@@ -653,7 +663,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	{
 		boolean flag = this.rand.nextInt(4) == 0;
 		int i = this.getHorseType();
-		return i == 4 ? Item.bone.itemID : (i == 3 ? (flag ? 0 : Item.rottenFlesh.itemID) : Item.leather.itemID);
+		return i == 4 ? Item.bone.itemID : (i == 3 ? (flag ? 0 : Item.rottenFlesh.itemID) : TFCItems.Hide.itemID);
 	}
 
 	/**
@@ -862,6 +872,33 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
 		ItemStack itemstack = par1EntityPlayer.inventory.getCurrentItem();
+		if(!worldObj.isRemote){
+			par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+			if(getGender()==GenderEnum.FEMALE && pregnant){
+				par1EntityPlayer.addChatMessage("Pregnant");
+			}
+			//player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		}
+
+		if (itemstack != null && this.isBreedingItem(itemstack) && this.getGrowingAge() == 0 && this.inLove <= 0)
+		{
+			if (!par1EntityPlayer.capabilities.isCreativeMode)
+			{
+				--itemstack.stackSize;
+
+				if (itemstack.stackSize <= 0)
+				{
+					par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
+				}
+			}
+
+			this.func_110196_bT();
+			return true;
+		}
+		else
+		{
+			//return super.interact(par1EntityPlayer);
+		}
 
 		if (itemstack != null && itemstack.itemID == Item.monsterPlacer.itemID)
 		{
@@ -916,90 +953,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 					}
 				}
 
-				if (!flag && !this.func_110256_cu())
-				{
-					float f = 0.0F;
-					short short1 = 0;
-					byte b1 = 0;
-
-					if (itemstack.itemID == Item.wheat.itemID)
-					{
-						f = 2.0F;
-						short1 = 60;
-						b1 = 3;
-					}
-					else if (itemstack.itemID == Item.sugar.itemID)
-					{
-						f = 1.0F;
-						short1 = 30;
-						b1 = 3;
-					}
-					else if (itemstack.itemID == Item.bread.itemID)
-					{
-						f = 7.0F;
-						short1 = 180;
-						b1 = 3;
-					}
-					else if (itemstack.itemID == Block.hay.blockID)
-					{
-						f = 20.0F;
-						short1 = 180;
-					}
-					else if (itemstack.itemID == Item.appleRed.itemID)
-					{
-						f = 3.0F;
-						short1 = 60;
-						b1 = 3;
-					}
-					else if (itemstack.itemID == Item.goldenCarrot.itemID)
-					{
-						f = 4.0F;
-						short1 = 60;
-						b1 = 5;
-
-						if (this.isTame() && this.getGrowingAge() == 0)
-						{
-							flag = true;
-							this.func_110196_bT();
-						}
-					}
-					else if (itemstack.itemID == Item.appleGold.itemID)
-					{
-						f = 10.0F;
-						short1 = 240;
-						b1 = 10;
-
-						if (this.isTame() && this.getGrowingAge() == 0)
-						{
-							flag = true;
-							this.func_110196_bT();
-						}
-					}
-
-					if (this.getHealth() < this.getMaxHealth() && f > 0.0F)
-					{
-						this.heal(f);
-						flag = true;
-					}
-
-					if (!this.isAdultHorse() && short1 > 0)
-					{
-						this.addGrowth(short1);
-						flag = true;
-					}
-
-					if (b1 > 0 && (flag || !this.isTame()) && b1 < this.getMaxTemper())
-					{
-						flag = true;
-						this.increaseTemper(b1);
-					}
-
-					if (flag)
-					{
-						this.func_110266_cB();
-					}
-				}
-
 				if (!this.isTame() && !flag)
 				{
 					if (itemstack != null && itemstack.func_111282_a(par1EntityPlayer, this))
@@ -1035,7 +988,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 					return true;
 				}
 			}
-
+			System.out.println(getGrowingAge());
 			if (this.func_110253_bW() && this.riddenByEntity == null)
 			{
 				if (itemstack != null && itemstack.func_111282_a(par1EntityPlayer, this))
@@ -1044,7 +997,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				}
 				else
 				{
-					this.func_110237_h(par1EntityPlayer);
+					
+					if(this.getLeashedToEntity() != null && this.getLeashedToEntity() instanceof EntityPlayer &&
+							this.getLeashedToEntity() == par1EntityPlayer){
+						this.func_110237_h(par1EntityPlayer);
+					}
 					return true;
 				}
 			}
@@ -1052,6 +1009,31 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			{
 				return super.interact(par1EntityPlayer);
 			}
+		}
+	}
+	
+	//We use this to catch the EntityLiving check, so that other interactions can be performed on leashed animals
+	@Override
+	public boolean getLeashed(){
+		if(super.getLeashed() && getLeashedToEntity() instanceof EntityPlayer && 
+				((EntityPlayer)getLeashedToEntity()).inventory.getCurrentItem() == null && func_110174_bM() != -1){
+			return false;
+		}
+		return super.getLeashed();
+	}
+
+	@Override
+	public void clearLeashed(boolean par1, boolean par2)
+	{
+		Entity entity = getLeashedToEntity();
+		if(entity!= null && entity instanceof EntityPlayer){
+			ItemStack item = ((EntityPlayer)entity).inventory.getCurrentItem();
+			if(item != null && item.getItem() == Item.leash){
+				super.clearLeashed(par1, par2);
+			}
+		}
+		else{
+			super.clearLeashed(par1, par2);
 		}
 	}
 
@@ -1115,6 +1097,16 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			this.dropChestItems();
 		}
 	}
+	
+	@Override
+	protected void dropFewItems(boolean par1, int par2)
+	{
+		if(isAdult())
+		{
+			this.dropItem(TFCItems.Hide.itemID,1);
+			this.dropItem(Item.bone.itemID, rand.nextInt(8)+3);
+		}
+	}
 
 	/**
 	 * Called to update the entity's position/logic.
@@ -1154,6 +1146,24 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			{
 				this.field_110279_bq = 0;
 			}
+		}
+
+		if (this.inLove > 0)
+		{
+			--this.inLove;
+			String s = "heart";
+
+			if (this.inLove % 10 == 0)
+			{
+				double d0 = this.rand.nextGaussian() * 0.02D;
+				double d1 = this.rand.nextGaussian() * 0.02D;
+				double d2 = this.rand.nextGaussian() * 0.02D;
+				this.worldObj.spawnParticle(s, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+			}
+		}
+		else
+		{
+			this.breeding = 0;
 		}
 
 		this.prevHeadLean = this.headLean;
@@ -1406,6 +1416,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		par1NBTTagCompound.setInteger("Temper", this.getTemper());
 		par1NBTTagCompound.setBoolean("Tame", this.isTame());
 		par1NBTTagCompound.setString("OwnerName", this.getOwnerName());
+		par1NBTTagCompound.setInteger ("Sex", sex);
+		par1NBTTagCompound.setLong ("Animal ID", animalID);
+		par1NBTTagCompound.setFloat ("Size Modifier", size_mod);
+		par1NBTTagCompound.setInteger ("Hunger", hunger);
+		par1NBTTagCompound.setBoolean("Pregnant", pregnant);
+		par1NBTTagCompound.setFloat("MateSize", mateSizeMod);
+		par1NBTTagCompound.setLong("ConceptionTime",conception);
+		par1NBTTagCompound.setInteger("Age", getBirthDay());
 
 		if (this.isChested())
 		{
@@ -1452,6 +1470,15 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.setHorseVariant(par1NBTTagCompound.getInteger("Variant"));
 		this.setTemper(par1NBTTagCompound.getInteger("Temper"));
 		this.setHorseTamed(par1NBTTagCompound.getBoolean("Tame"));
+		NBTTagCompound nbt = par1NBTTagCompound;
+		animalID = nbt.getLong ("Animal ID");
+		sex = nbt.getInteger ("Sex");
+		size_mod = nbt.getFloat ("Size Modifier");
+		hunger = nbt.getInteger ("Hunger");
+		pregnant = nbt.getBoolean("Pregnant");
+		mateSizeMod = nbt.getFloat("MateSize");
+		conception = nbt.getLong("ConceptionTime");
+		this.setAge(nbt.getInteger ("Age"));
 
 		if (par1NBTTagCompound.hasKey("OwnerName"))
 		{
@@ -1631,9 +1658,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
-	 protected boolean isAIEnabled()
+	protected boolean isAIEnabled()
 	{
-		 return true;
+		return true;
 	}
 
 	public void setJumpPower(int par1)
@@ -1717,7 +1744,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 	private float func_110267_cL()
 	{
-		return 15.0F + (float)this.rand.nextInt(8) + (float)this.rand.nextInt(9);
+		return 1000 + (float)this.rand.nextInt(101) + (float)this.rand.nextInt(151);
 	}
 
 	private double func_110245_cM()
@@ -1738,215 +1765,215 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * returns true if this entity is by a ladder, false otherwise
 	 */
-	 public boolean isOnLadder()
-	 {
-		 return false;
-	 }
+	public boolean isOnLadder()
+	{
+		return false;
+	}
 
-	 @Override
-	 public boolean canMateWith(IAnimal animal) 
-	 {
-		 if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityCowTFC) {
-			 return true;
-		 } else {
-			 return false;
-		 }
-	 }
+	@Override
+	public boolean canMateWith(IAnimal animal) 
+	{
+		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityHorseTFC) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-	 @Override
-	 public void mate(IAnimal otherAnimal) 
-	 {
-		 if (getGender() == GenderEnum.MALE)
-		 {
-			 otherAnimal.mate(this);
-			 return;
-		 }
-		 conception = TFC_Time.getTotalTicks();
-		 pregnant = true;
-		 resetInLove();
-		 otherAnimal.setInLove(false);
-		 mateSizeMod = otherAnimal.getSize();
-	 }
+	@Override
+	public void mate(IAnimal otherAnimal) 
+	{
+		if (getGender() == GenderEnum.MALE)
+		{
+			otherAnimal.mate(this);
+			return;
+		}
+		conception = TFC_Time.getTotalTicks();
+		pregnant = true;
+		resetInLove();
+		otherAnimal.setInLove(false);
+		mateSizeMod = otherAnimal.getSize();
+	}
 
-	 @Override
-	 public boolean getInLove()
-	 {
-		 return inLove;
-	 }
+	@Override
+	public boolean getInLove()
+	{
+		return isInLove;
+	}
 
-	 @Override
-	 public void setInLove(boolean b) 
-	 {
-		 this.inLove = b;
-	 }
+	@Override
+	public void setInLove(boolean b) 
+	{
+		this.isInLove = b;
+	}
 
-	 @Override
-	 public long getAnimalID() 
-	 {
-		 return animalID;
-	 }
+	@Override
+	public long getAnimalID() 
+	{
+		return animalID;
+	}
 
-	 @Override
-	 public void setAnimalID(long id) 
-	 {
-		 animalID = id;
-	 }
+	@Override
+	public void setAnimalID(long id) 
+	{
+		animalID = id;
+	}
 
-	 @Override
-	 public int getHunger() {
-		 return hunger;
-	 }
+	@Override
+	public int getHunger() {
+		return hunger;
+	}
 
-	 @Override
-	 public void setHunger(int h) 
-	 {
-		 hunger = h;
-	 }
+	@Override
+	public void setHunger(int h) 
+	{
+		hunger = h;
+	}
 
-	 @Override
-	 public boolean isBreedingItem(ItemStack par1ItemStack)
-	 {
-		 return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
-				 par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);
-	 }
+	@Override
+	public boolean isBreedingItem(ItemStack par1ItemStack)
+	{
+		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
+				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);
+	}
 
-	 @Override
-	 public void setGrowingAge(int par1)
-	 {
-		 if(!TFC_Core.PreventEntityDataUpdate) {
-			 this.dataWatcher.updateObject(12, Integer.valueOf(par1));
-		 }
-	 }
+	@Override
+	public void setGrowingAge(int par1)
+	{
+		if(!TFC_Core.PreventEntityDataUpdate) {
+			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
+		}
+	}
 
-	 @Override
-	 public void setAge(int par1)
-	 {
-		 //if(!TFC_Core.PreventEntityDataUpdate) {
-			 this.dataWatcher.updateObject(15, Integer.valueOf(par1));
-			 //}
-	 }
+	@Override
+	public void setAge(int par1)
+	{
+		//if(!TFC_Core.PreventEntityDataUpdate) {
+		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
+		//}
+	}
 
-	 @Override
-	 public boolean isChild()
-	 {
-		 return !isAdult();
-	 }
+	@Override
+	public boolean isChild()
+	{
+		return !isAdult();
+	}
 
-	 @Override
-	 public GenderEnum getGender() 
-	 {
-		 return GenderEnum.genders[getSex()];
-	 }
+	@Override
+	public GenderEnum getGender() 
+	{
+		return GenderEnum.genders[getSex()];
+	}
 
-	 @Override
-	 public int getSex(){
-		 return dataWatcher.getWatchableObjectInt(13);
-	 }
+	@Override
+	public int getSex(){
+		return dataWatcher.getWatchableObjectInt(13);
+	}
 
-	 @Override
-	 public EntityAgeable createChild(EntityAgeable entityageable) 
-	 {
-		 return null;
-	 }
+	@Override
+	public EntityAgeable createChild(EntityAgeable entityageable) 
+	{
+		return null;
+	}
 
 
-	 @Override
-	 public EntityAgeable createChildTFC(EntityAgeable entityageable) 
-	 {
-		 EntityHorseTFC entityhorse = (EntityHorseTFC)entityageable;
-		 EntityHorseTFC entityhorse1 = new EntityHorseTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
-		 int i = this.getHorseType();
-		 int j = entityhorse.getHorseType();
-		 int k = 0;
+	@Override
+	public EntityAgeable createChildTFC(EntityAgeable entityageable) 
+	{
+		EntityHorseTFC entityhorse = (EntityHorseTFC)entityageable;
+		EntityHorseTFC entityhorse1 = new EntityHorseTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
+		int i = this.getHorseType();
+		int j = entityhorse.getHorseType();
+		int k = 0;
 
-		 if (i == j)
-		 {
-			 k = i;
-		 }
-		 else if (i == 0 && j == 1 || i == 1 && j == 0)
-		 {
-			 k = 2;
-		 }
+		if (i == j)
+		{
+			k = i;
+		}
+		else if (i == 0 && j == 1 || i == 1 && j == 0)
+		{
+			k = 2;
+		}
 
-		 if (k == 0)
-		 {
-			 int l = this.rand.nextInt(9);
-			 int i1;
+		if (k == 0)
+		{
+			int l = this.rand.nextInt(9);
+			int i1;
 
-			 if (l < 4)
-			 {
-				 i1 = this.getHorseVariant() & 255;
-			 }
-			 else if (l < 8)
-			 {
-				 i1 = entityhorse.getHorseVariant() & 255;
-			 }
-			 else
-			 {
-				 i1 = this.rand.nextInt(7);
-			 }
+			if (l < 4)
+			{
+				i1 = this.getHorseVariant() & 255;
+			}
+			else if (l < 8)
+			{
+				i1 = entityhorse.getHorseVariant() & 255;
+			}
+			else
+			{
+				i1 = this.rand.nextInt(7);
+			}
 
-			 int j1 = this.rand.nextInt(5);
+			int j1 = this.rand.nextInt(5);
 
-			 if (j1 < 4)
-			 {
-				 i1 |= this.getHorseVariant() & 65280;
-			 }
-			 else if (j1 < 8)
-			 {
-				 i1 |= entityhorse.getHorseVariant() & 65280;
-			 }
-			 else
-			 {
-				 i1 |= this.rand.nextInt(5) << 8 & 65280;
-			 }
+			if (j1 < 4)
+			{
+				i1 |= this.getHorseVariant() & 65280;
+			}
+			else if (j1 < 8)
+			{
+				i1 |= entityhorse.getHorseVariant() & 65280;
+			}
+			else
+			{
+				i1 |= this.rand.nextInt(5) << 8 & 65280;
+			}
 
-			 entityhorse1.setHorseVariant(i1);
-		 }
+			entityhorse1.setHorseVariant(i1);
+		}
 
-		 entityhorse1.setHorseType(k);
-		 double d0 = this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + entityageable.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + (double)this.func_110267_cL();
-		 entityhorse1.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(d0 / 3.0D);
-		 double d1 = this.getEntityAttribute(horseJumpStrength).getBaseValue() + entityageable.getEntityAttribute(horseJumpStrength).getBaseValue() + this.func_110245_cM();
-		 entityhorse1.getEntityAttribute(horseJumpStrength).setAttribute(d1 / 3.0D);
-		 double d2 = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + entityageable.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + this.func_110203_cN();
-		 entityhorse1.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(d2 / 3.0D);
-		 return entityhorse1;
-	 }
+		entityhorse1.setHorseType(k);
+		double d0 = this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + entityageable.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + (double)this.func_110267_cL();
+		entityhorse1.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(d0 / 3.0D);
+		double d1 = this.getEntityAttribute(horseJumpStrength).getBaseValue() + entityageable.getEntityAttribute(horseJumpStrength).getBaseValue() + this.func_110245_cM();
+		entityhorse1.getEntityAttribute(horseJumpStrength).setAttribute(d1 / 3.0D);
+		double d2 = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + entityageable.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + this.func_110203_cN();
+		entityhorse1.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(d2 / 3.0D);
+		return entityhorse1;
+	}
 
-	 @Override
-	 public int getBirthDay() 
-	 {
-		 return this.dataWatcher.getWatchableObjectInt(15);
-	 }
+	@Override
+	public int getBirthDay() 
+	{
+		return this.dataWatcher.getWatchableObjectInt(15);
+	}
 
-	 @Override
-	 public int getNumberOfDaysToAdult() 
-	 {
-		 return TFC_Time.daysInMonth * 3;
-	 }
+	@Override
+	public int getNumberOfDaysToAdult() 
+	{
+		return TFC_Time.daysInMonth * 3;
+	}
 
-	 @Override
-	 public boolean isAdult() 
-	 {
-		 return getBirthDay()+getNumberOfDaysToAdult() <= TFC_Time.getTotalDays();
-	 }
+	@Override
+	public boolean isAdult() 
+	{
+		return getBirthDay()+getNumberOfDaysToAdult() <= TFC_Time.getTotalDays();
+	}
 
-	 @Override
-	 public float getSize() 
-	 {
-		 return size_mod;
-	 }
+	@Override
+	public float getSize() 
+	{
+		return size_mod;
+	}
 
-	 @Override
-	 public boolean isPregnant() 
-	 {
-		 return pregnant;
-	 }
+	@Override
+	public boolean isPregnant() 
+	{
+		return pregnant;
+	}
 
-	 @Override
-	 public EntityLiving getEntity() {
-		 // TODO Auto-generated method stub
-		 return this;
-	 }
+	@Override
+	public EntityLiving getEntity() {
+		// TODO Auto-generated method stub
+		return this;
+	}
 }
