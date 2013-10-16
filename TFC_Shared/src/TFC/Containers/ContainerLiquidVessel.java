@@ -12,6 +12,7 @@ import TFC.TFCItems;
 import TFC.API.HeatRegistry;
 import TFC.API.Metal;
 import TFC.Containers.Slots.SlotForShowOnly;
+import TFC.Containers.Slots.SlotLiquidVessel;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.MetalRegistry;
 
@@ -59,7 +60,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 
 	private void layoutContainer(IInventory playerInventory) {
 
-		this.addSlotToContainer(new Slot(containerInv, 0, 80, 34));
+		this.addSlotToContainer(new SlotLiquidVessel(containerInv, 0, 80, 34));
 
 		int row;
 		int col;
@@ -137,6 +138,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex) {
 		ItemStack returnedStack = null;
 		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
+		Slot slot1 = (Slot)inventorySlots.get(0);
 
 		if (clickedSlot != null
 				&& clickedSlot.getHasStack())
@@ -151,10 +153,16 @@ public class ContainerLiquidVessel extends ContainerTFC
 				}
 			}
 			else if (clickedIndex > 0 && clickedIndex < inventorySlots.size() && clickedStack.getItem().itemID == TFCItems.CeramicMold.itemID && 
-					clickedStack.getItemDamage() == 1) {
-				if (!this.mergeItemStack(clickedStack, 0, 1, false)) {
+					clickedStack.getItemDamage() == 1)
+				{
+				if(slot1.getHasStack())
+				{
 					return null;
 				}
+				ItemStack stack = clickedStack.copy();
+				stack.stackSize = 1;                            
+				slot1.putStack(stack);                          
+				clickedStack.stackSize--;
 			}
 
 			if (clickedStack.stackSize == 0) {
