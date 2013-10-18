@@ -213,7 +213,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 						te.addMetal(m, (short)(100-output));
 					}
 				}
-				cookDelay = 100;
+				cookDelay = 60;
 				fireItemStacks[i] = null;
 				input[1].setItemDamage(input[1].getItemDamage()+1);
 				if( input[1] != null && input[1].getItemDamage() == input[1].getMaxDamage())
@@ -411,8 +411,11 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		//Here we handle the bellows
 		if(airFromBellowsTime > 0)
 		{
-			airFromBellowsTime--;
-			airFromBellows = airFromBellowsTime/120*10;
+			if(this.worldObj.rand.nextBoolean())
+			{
+				airFromBellowsTime--;
+				airFromBellows = airFromBellowsTime/120*10;
+			}
 		}
 
 	}
@@ -635,7 +638,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			for(int i = 0; i < fireItemStacks.length; i++)
 			{
 				/*Handle temperature for each item in the stack*/
-				careForInventorySlot(i, 10);
+				careForInventorySlot(i, 100);
 				/*Cook each input item */
 				if(worldObj.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.Crucible.blockID)
 				{
