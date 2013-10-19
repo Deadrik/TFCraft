@@ -240,7 +240,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 							itemstack.stackSize = itemstack.stackSize-1;
 							if (world.getBlockTileEntity(x,y,z) != null)
 							{
-								((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
+								//((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
 							}
 							world.addBlockEvent(x,y,z,TFCBlocks.IngotPile.blockID,0,0);
 							te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
@@ -251,7 +251,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 					itemstack.stackSize = itemstack.stackSize-1;
 					if (world.getBlockTileEntity(x,y,z) != null)
 					{
-						((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
+						//((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
 					}
 					world.addBlockEvent(x,y,z,TFCBlocks.IngotPile.blockID,0,0);
 					return true;
@@ -323,7 +323,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 
 				if(ip != null)
 				{
-					if(ip.storage[0] == null || ip.storage[0].stackSize < 64 || ip.storage[0].itemID != this.itemID) {
+					if(ip.storage[0] == null || ip.storage[0].stackSize < 64) {
 						return false;
 					}
 				}
