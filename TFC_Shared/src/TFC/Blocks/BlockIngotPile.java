@@ -16,8 +16,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityIngotPile;
+import TFC.TileEntities.TileEntityPottery;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -71,6 +73,7 @@ public class BlockIngotPile extends BlockTerraContainer
 					}
 					world.spawnEntityInWorld(new EntityItem(world,tileentityingotpile.xCoord,
 							tileentityingotpile.yCoord+1,tileentityingotpile.zCoord,new ItemStack(tileentityingotpile.getStackInSlot(0).getItem(),1,tileentityingotpile.getStackInSlot(0).getItemDamage())));
+					world.notifyBlockOfNeighborChange(i, j+1, k, this.blockID);
 					if(tileentityingotpile.getStackInSlot(0).stackSize < 1){
 						world.setBlock(i, j, k, 0);
 					}
@@ -293,5 +296,20 @@ public class BlockIngotPile extends BlockTerraContainer
 	public TileEntity createNewTileEntity(World var1) 
 	{
 		return new TileEntityIngotPile();
+	}
+	
+	@Override
+	public void onNeighborBlockChange(World world, int i, int j, int k, int id)
+	{
+		if(!world.isRemote)
+		{
+			if(!world.isBlockOpaqueCube(i, j-1, k) ||  (world.getBlockId(i, j-1, k) == TFCBlocks.IngotPile.blockID && 
+					((TileEntityIngotPile)world.getBlockTileEntity(i, j-1, k)).storage[0].stackSize < 64))
+			{
+					((TileEntityIngotPile)world.getBlockTileEntity(i, j, k)).ejectContents();
+					world.setBlock(i, j, k, 0);
+					return;
+			}
+		}
 	}
 }

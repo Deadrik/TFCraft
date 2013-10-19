@@ -128,6 +128,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
 				worldObj.spawnEntityInWorld(entityitem);
+				storage[i] = null;
 			}
 		}
 	}
