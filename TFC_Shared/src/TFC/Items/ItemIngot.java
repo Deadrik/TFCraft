@@ -1,7 +1,6 @@
 package TFC.Items;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,10 +16,8 @@ import TFC.API.Metal;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.MetalRegistry;
 import TFC.TileEntities.TileEntityIngotPile;
-import TFC.TileEntities.TileEntityLogPile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -164,10 +161,22 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		return true;
 	}
 	
-	public static boolean isValid(World world, int i, int j, int k)
+	public boolean isValid(World world, int i, int j, int k)
 	{
-		if(world.isBlockSolidOnSide(i, j-1, k, ForgeDirection.UP))
+		if (world.isBlockSolidOnSide(i, j - 1, k, ForgeDirection.UP)
+				|| world.getBlockId(i, j - 1, k) == TFCBlocks.IngotPile.blockID)
 		{
+			TileEntity te = world.getBlockTileEntity(i, j - 1, k);
+
+			if (te instanceof TileEntityIngotPile) {
+				TileEntityIngotPile ip = (TileEntityIngotPile) te;
+
+				if (ip != null) {
+					if (ip.storage[0] == null || ip.storage[0].stackSize < 64) {
+						return false;
+					}
+				}
+			}
 			return true;
 		}
 		return false;
