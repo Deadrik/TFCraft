@@ -161,7 +161,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		return true;
 	}
 	
-	public boolean isValid(World world, int i, int j, int k)
+	public static boolean isValid(World world, int i, int j, int k)
 	{
 		if (world.isBlockSolidOnSide(i, j - 1, k, ForgeDirection.UP)
 				|| world.getBlockId(i, j - 1, k) == TFCBlocks.IngotPile.blockID)
