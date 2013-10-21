@@ -141,6 +141,30 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 		}
 	}
 
+	public void ejectContents()
+	{
+		float f3 = 0.05F;
+		EntityItem entityitem;
+		Random rand = new Random();
+		float f = rand.nextFloat() * 0.8F + 0.1F;
+		float f1 = rand.nextFloat() * 2.0F + 0.4F;
+		float f2 = rand.nextFloat() * 0.8F + 0.1F;
+
+		for (int i = 0; i < getSizeInventory(); i++)
+		{
+			if(inventory[i]!= null)
+			{
+				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
+						inventory[i]);
+				entityitem.motionX = (float)rand.nextGaussian() * f3;
+				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
+				entityitem.motionZ = (float)rand.nextGaussian() * f3;
+				worldObj.spawnEntityInWorld(entityitem);
+				inventory[i] = null;
+			}
+		}
+	}
+	
 	public void ejectItem(int index)
 	{
 		float f3 = 0.01F;
