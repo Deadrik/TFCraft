@@ -12,7 +12,6 @@ public abstract class ItemAnvil extends ItemTerraBlock implements ISmeltable
 	public ItemAnvil(int i) 
 	{
 		super(i);
-		//this.MetaNames = new String[]{"Stone", "Copper", "Bronze", "Wrought Iron", "Steel", "Black Steel", "Blue Steel", "Red Steel"};
 	}
 
 	@Override

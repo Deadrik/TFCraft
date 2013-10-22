@@ -28,9 +28,6 @@ public class ItemAnvil1 extends ItemAnvil
 		case 5: return Global.BLACKSTEEL;
 		case 6: return Global.BLUESTEEL;
 		case 7: return Global.REDSTEEL;
-		case 8: return Global.ROSEGOLD;
-		case 9: return Global.BISMUTHBRONZE;
-		case 10: return Global.BLACKBRONZE;
 		default : return Global.UNKNOWN;
 		}
 	}
