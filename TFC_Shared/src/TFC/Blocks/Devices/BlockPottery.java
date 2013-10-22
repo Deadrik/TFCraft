@@ -16,6 +16,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityPottery;
 
 public class BlockPottery extends BlockTerraContainer
@@ -161,5 +162,19 @@ public class BlockPottery extends BlockTerraContainer
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
 		return new TileEntityPottery();
+	}
+	
+	@Override
+	public void onNeighborBlockChange(World world, int i, int j, int k, int id)
+	{
+		if(!world.isRemote)
+		{
+			if(!world.isBlockOpaqueCube(i, j-1, k))
+			{
+				((TileEntityPottery)world.getBlockTileEntity(i, j, k)).ejectContents();
+				world.setBlock(i, j, k, 0);
+				return;
+			}
+		}
 	}
 }
