@@ -16,10 +16,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import TFC.TFCBlocks;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityIngotPile;
-import TFC.TileEntities.TileEntityPottery;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -75,9 +73,9 @@ public class BlockIngotPile extends BlockTerraContainer
 							tileentityingotpile.yCoord+1,tileentityingotpile.zCoord,new ItemStack(tileentityingotpile.getStackInSlot(0).getItem(),1,tileentityingotpile.getStackInSlot(0).getItemDamage())));
 					world.notifyBlockOfNeighborChange(i, j+1, k, this.blockID);
 					
-//					if(tileentityingotpile.getStackInSlot(0).stackSize < 1){
-//						world.setBlock(i, j, k, 0);
-//					}
+					if (tileentityingotpile.getStackInSlot(0).stackSize < 1) {
+						world.setBlockToAir(i, j, k);
+					}
 					tileentityingotpile.broadcastPacketInRange(tileentityingotpile.createUpdatePacket());
 				}
 				//damage = tileentityingotpile.getStackInSlot(0).getItem().itemID - 16028 - 256;
