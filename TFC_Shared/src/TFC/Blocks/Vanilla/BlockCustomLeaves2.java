@@ -21,21 +21,27 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
+import TFC.API.Constant.Global;
 import TFC.API.Constant.TFCBlockID;
 import TFC.Items.Tools.ItemCustomScythe;
 
-public class BlockCustomLeaves extends BlockLeaves implements IShearable
+public class BlockCustomLeaves2 extends BlockLeaves implements IShearable
 {
     int adjacentTreeBlocks[][][];
     
-    Icon[] icons = new Icon[16];
-	Icon[] iconsOpaque = new Icon[16];
-	Block saplingBlock;
+    String[] woodNames;
+    Icon[] icons;
+	Icon[] iconsOpaque;
+	Block saplingBlock = TFCBlocks.Sapling2;
 
-    public BlockCustomLeaves(int i) 
+    public BlockCustomLeaves2(int i) 
     {
         super(i);
-        saplingBlock = blockID == Block.leaves.blockID?TFCBlocks.Sapling:TFCBlocks.Sapling2;
+        saplingBlock = TFCBlocks.Sapling2;
+		woodNames = new String[Global.WOOD_ALL.length-16];
+		System.arraycopy(Global.WOOD_ALL, 16, woodNames, 0, Global.WOOD_ALL.length-16);
+		icons = new Icon[woodNames.length];
+		iconsOpaque = new Icon[woodNames.length];
         this.setTickRandomly(false);
     }
     
@@ -212,7 +218,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     @Override
     public int idDropped(int i, Random random, int j)
     {
-        return sapling.blockID;
+        return TFCBlocks.Sapling2.blockID;
     }
     
     @Override
@@ -243,7 +249,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
                             if(new Random().nextInt(100) < 11)
                                 dropBlockAsItem_do(world, i+x, j+y, k+z, new ItemStack(Item.stick, 1));
                             else if(new Random().nextInt(100) < 4 && l != 9 && l != 15)
-                                dropBlockAsItem_do(world, i+x, j+y, k+z, new ItemStack(sapling, 1, l));
+                                dropBlockAsItem_do(world, i+x, j+y, k+z, new ItemStack(TFCBlocks.Sapling2, 1, l));
                             removeLeaves(world, i+x, j+y, k+z);
                             super.harvestBlock(world, entityplayer, i+x, j+y, k+z, l);
                             
@@ -272,7 +278,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
             if(new Random().nextInt(100) < 28)
                 dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.stick, 1));
             else if(new Random().nextInt(100) < 6 && l != 9 && l != 15)
-                dropBlockAsItem_do(world, i, j, k, new ItemStack(sapling, 1, l));
+                dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCBlocks.Sapling2, 1, l));
 
             super.harvestBlock(world, entityplayer, i, j, k, l);
         }
@@ -293,6 +299,9 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     @Override
     public Icon getIcon(int i, int j)
     {
+    	if(j>woodNames.length-1){
+    		j=0;
+    	}
         if (TerraFirmaCraft.proxy.getGraphicsLevel())
         {
         	return icons[j];
@@ -303,16 +312,13 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
         }
     }
     
-    String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-	
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < woodNames.length; i++)
 		{
-			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/trees/" + WoodNames[i] + " Leaves Fancy");
-			iconsOpaque[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/trees/" + WoodNames[i] + " Leaves");
+			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/trees/" + woodNames[i] + " Leaves Fancy");
+			iconsOpaque[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/trees/" + woodNames[i] + " Leaves");
 		}
     }
 
@@ -325,7 +331,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     @Override
     public void addCreativeItems(java.util.ArrayList list)
     {
-        for(int i = 0; i < 16; i++)
+        for(int i = 0; i < woodNames.length; i++)
             list.add(new ItemStack(this,1,i));
     }
 

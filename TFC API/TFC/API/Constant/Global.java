@@ -48,7 +48,7 @@ public class Global
 		"Oak","Aspen","Birch","Chestnut",
 		"Douglas Fir","Hickory","Maple","Ash",
 		"Pine","Sequoia","Spruce","Sycamore",
-		"White Cedar","White Elm","Willow","Kapok"
+		"White Cedar","White Elm","Willow","Kapok","Acacia"
 	};
 
 

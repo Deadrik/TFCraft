@@ -1686,6 +1686,9 @@ public class TFCItems
 		Elderberry =  new ItemTerraFood(TFCItemID.Elderberry, 30, -0.8F, 58).setUnlocalizedName("Elderberry");
 		Gooseberry =  new ItemTerraFood(TFCItemID.Gooseberry, 30, -0.8F, 59).setUnlocalizedName("Gooseberry");
 		Cloudberry =  new ItemTerraFood(TFCItemID.Cloudberry, 30, -0.8F, 60).setUnlocalizedName("Cloudberry");
+		//mushroom is a food now, with foodID 61
+		//pumpkin is a food now, id = 61
+		//melon is a food, not currently obtainable. id = 62. See ItemFoodBlock
 		WintergreenLeaf =  new ItemTerra(TFCItemID.WintergreenLeaf).setUnlocalizedName("WintergreenLeaf");	
 		BlueberryLeaf =  new ItemTerra(TFCItemID.BlueberryLeaf).setUnlocalizedName("BlueberryLeaf");
 		RaspberryLeaf =  new ItemTerra(TFCItemID.RaspberryLeaf).setUnlocalizedName("RaspberryLeaf");

@@ -988,7 +988,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 					return true;
 				}
 			}
-			System.out.println(getGrowingAge());
 			if (this.func_110253_bW() && this.riddenByEntity == null)
 			{
 				if (itemstack != null && itemstack.func_111282_a(par1EntityPlayer, this))

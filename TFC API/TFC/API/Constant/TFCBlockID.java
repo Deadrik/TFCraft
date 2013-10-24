@@ -126,6 +126,17 @@ public class TFCBlockID
 	public static int StrawHideBed				= 2115;
 	public static int ArmourStand				= 2116;
 	public static int BerryBush					= 2117;
+	
+	public static int WoodVert2					= 2118;
+	public static int WoodHoriz3				= 2119;
+	public static int WoodHoriz4				= 2120;
+	public static int LogNatural2				= 2121;
+	public static int Wood2						= 2122;
+	public static int Planks2					= 2123;
+	public static int Leaves2					= 2124;
+	public static int Sapling2					= 2125;
+	public static int WoodSupportV2				= 2126;
+	public static int WoodSupportH2				= 2127;
 
 
 	static Configuration config;

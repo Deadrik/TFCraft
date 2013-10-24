@@ -18,7 +18,8 @@ public enum EnumWoodMaterial
 	WHITEELM("WHITEELM", 647, 35),
 	WILLOW("WILLOW", 603, 25),
 	KAPOK("KAPOK", 645, 20),
-	PEAT("PEAT", 680, 50);
+	PEAT("PEAT", 680, 50),
+	ACACIA("ACACIA",650,25);
 
 	public final float burnTimeMax;
 	public final float burnTempMax;//degrees celcius
@@ -26,7 +27,7 @@ public enum EnumWoodMaterial
 
 	private static final EnumWoodMaterial Materials[] = new EnumWoodMaterial[] {
 		ASH,ASPEN,BIRCH,CHESTNUT,DOUGLASFIR,HICKORY,MAPLE,OAK,PINE,REDWOOD,SPRUCE,
-		SYCAMORE,WHITECEDAR,WHITEELM,WILLOW,KAPOK,PEAT};
+		SYCAMORE,WHITECEDAR,WHITEELM,WILLOW,KAPOK,PEAT,ACACIA};
 
 	private EnumWoodMaterial(String s, float i, float j)
 	{

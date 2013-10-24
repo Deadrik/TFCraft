@@ -25,7 +25,7 @@ public class ItemPlank extends ItemTerra
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
 		setCreativeTab(TFCTabs.TFCMaterials);
-		this.MetaNames = Global.WOOD_ALL;
+		this.MetaNames = Global.WOOD_ALL.clone();
 		this.setWeight(EnumWeight.LIGHT);
 		this.setSize(EnumSize.MEDIUM);
 	}

@@ -12,8 +12,10 @@ import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
+import TFC.WorldGen.Generators.Trees.WorldGenAcaciaKoaTrees;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomHugeTrees;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenKapokTrees;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenForests implements IWorldGenerator
@@ -263,7 +265,7 @@ public class WorldGenForests implements IWorldGenerator
 					//						random.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + random.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15));
 
 					WorldGenerator gen0 = ( (random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : 
-						(random.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + random.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15))));
+						(random.nextInt(3) == 0 ? (random.nextInt(2) == 0 ?new WorldGenKapokTrees(false,15)/*new WorldGenCustomHugeTrees(false, 10 + random.nextInt(20), 15, 15)*/: new WorldGenAcaciaKoaTrees(false,0) ): new WorldGenCustomShortTrees(false, 15))));
 
 					gen0.setScale(1.0D, 1.0D, 1.0D);
 					gen0.generate(world, random, xCoord, yCoord, zCoord);
@@ -272,7 +274,7 @@ public class WorldGenForests implements IWorldGenerator
 
 			}catch(IndexOutOfBoundsException e)
 			{
-				//e.printStackTrace();System.out.println("Tree0 Type: "+TreeType0);System.out.println("Tree1 Type: "+TreeType1);System.out.println("Tree2 Type: "+TreeType2);
+				//e.printStackTrace();//System.out.println("Tree0 Type: "+TreeType0);System.out.println("Tree1 Type: "+TreeType1);System.out.println("Tree2 Type: "+TreeType2);
 			}
 		}
 		if(completed)

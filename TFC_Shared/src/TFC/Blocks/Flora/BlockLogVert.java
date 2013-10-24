@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.Recipes;
@@ -74,6 +75,9 @@ public class BlockLogVert extends BlockTerra
 
     @Override
     public int damageDropped(int j) {
+    	if(blockID == TFCBlocks.WoodVert2.blockID){
+    		j+=16;
+    	}
         return j;
     }	
     

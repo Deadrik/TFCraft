@@ -21,12 +21,12 @@ import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockPlanks extends BlockTerra
+public class BlockPlanks2 extends BlockTerra
 {
 	String[] woodNames;
 	Icon[] icons;
 
-	public BlockPlanks(int i, Material material) 
+	public BlockPlanks2(int i, Material material) 
 	{
 		super(i, Material.wood);
 		this.setCreativeTab(CreativeTabs.tabBlock);
@@ -45,7 +45,7 @@ public class BlockPlanks extends BlockTerra
      */
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < 16; i++) {
+		for(int i = 0; i < woodNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -59,9 +59,10 @@ public class BlockPlanks extends BlockTerra
 	@Override
 	public Icon getIcon(int i, int j) 
 	{
-		if(j<icons.length)
+		if(blockID == TFCBlockID.Planks2){
+			j+=16;
+		}
 		return icons[j];
-		return icons[0];
 	}
 	
 	@Override
@@ -69,8 +70,7 @@ public class BlockPlanks extends BlockTerra
     {
 		for(int i = 0; i < woodNames.length; i++)
 		{
-			Icon n = registerer.registerIcon(Reference.ModID + ":" + "wood/"+woodNames[i]+" Plank");
-			icons[i] = n;//registerer.registerIcon(Reference.ModID + ":" + "wood/"+woodNames[i]+" Plank");
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+woodNames[i]+" Plank");
 		}
 		
 		super.registerIcons(registerer);

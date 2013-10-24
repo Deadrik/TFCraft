@@ -35,12 +35,14 @@ public class DataLayer
 	public static DataLayer Chestnut = new DataLayer(33, 3);
 	public static DataLayer DouglasFir = new DataLayer(34, 4);
 	public static DataLayer Hickory = new DataLayer(35, 5);
+	public static DataLayer Koa = new DataLayer(45, 0);
 	public static DataLayer Maple = new DataLayer(36, 6);
 	public static DataLayer Oak = new DataLayer(37, 0);
 	public static DataLayer Pine = new DataLayer(38, 8);
 	public static DataLayer Redwood = new DataLayer(39, 9);
 	public static DataLayer Spruce = new DataLayer(40, 10);
 	public static DataLayer Sycamore = new DataLayer(41, 11);
+	public static DataLayer UTAcacia = new DataLayer(46, 0);
 	public static DataLayer WhiteCedar = new DataLayer(42, 12);
 	public static DataLayer WhiteElm = new DataLayer(43, 13);
 	public static DataLayer Willow = new DataLayer(44, 14);

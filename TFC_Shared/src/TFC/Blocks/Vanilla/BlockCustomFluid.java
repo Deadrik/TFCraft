@@ -619,7 +619,6 @@ public abstract class BlockCustomFluid extends Block
 		int blockId = rockLayer3.data1;
 		int meta = rockLayer3.data2;
 		Random rand = new Random();
-		System.out.println(blockId + ", "+meta);
 		boolean felsicLava = true;
 		if(blockId == TFCBlocks.StoneIgIn.blockID && (meta == 2||meta == 1)){
 			felsicLava = false;

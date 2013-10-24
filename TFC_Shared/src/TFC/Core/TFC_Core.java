@@ -477,7 +477,12 @@ public class TFC_Core
 		{
 			return EnumWoodMaterial.PEAT;
 		}
-		if(is.getItemDamage() == 0)
+		if(is.itemID == TFCBlocks.LogNatural2.blockID){
+			if(is.getItemDamage() == 0){
+				return EnumWoodMaterial.ACACIA;
+			}
+		}
+		else if(is.getItemDamage() == 0)
 		{
 			return EnumWoodMaterial.ASH;
 		}
@@ -541,10 +546,7 @@ public class TFC_Core
 		{
 			return EnumWoodMaterial.KAPOK;
 		}
-		else
-		{
-			return EnumWoodMaterial.ASPEN;
-		}
+		return EnumWoodMaterial.ASPEN;
 	}
 
 	public static boolean showExtraInformation()

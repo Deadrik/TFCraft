@@ -108,7 +108,6 @@ public class CraftingHandler implements ICraftingHandler
 					{
 						continue;
 					}
-					System.out.println(iinventory.getStackInSlot(i).getItem());
 					if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
 					{
 						iinventory.getStackInSlot(i).itemID = TFCItems.Limewater.itemID;
