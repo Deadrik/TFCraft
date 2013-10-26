@@ -158,7 +158,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				itemstack2 = new ItemStack(TFCItems.SoakedHide,0,0);
 				while(liquidLevel >= 20 && itemstack.stackSize >0)
 				{
-					System.out.println(liquidLevel);
 					liquidLevel-=20;
 					itemstack2.stackSize++;
 					itemstack.stackSize--;

@@ -5,13 +5,13 @@ import net.minecraft.item.ItemStack;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 
-public class ItemPlankBlock extends ItemTerraBlock
+public class ItemPlankBlock2 extends ItemTerraBlock
 {
-	public ItemPlankBlock(int i) 
+	public ItemPlankBlock2(int i) 
 	{
 		super(i);
-		MetaNames = new String[16];
-		System.arraycopy(Global.WOOD_ALL, 0, MetaNames, 0, 16);
+		MetaNames = new String[Global.WOOD_ALL.length-16];
+		System.arraycopy(Global.WOOD_ALL, 16, MetaNames, 0, Global.WOOD_ALL.length-16);
 	}
 
 	@Override

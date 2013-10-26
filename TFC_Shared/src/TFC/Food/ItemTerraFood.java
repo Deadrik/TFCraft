@@ -28,7 +28,7 @@ public class ItemTerraFood extends ItemFood implements ISize
 
 	public String folder = "food/";
 
-	public Item[] FoodList = new Item[1024];
+	public static int[] FoodList = new int[1024];
 
 	public ItemTerraFood(int id, int healAmt) 
 	{
@@ -44,7 +44,7 @@ public class ItemTerraFood extends ItemFood implements ISize
 	{
 		super(id, healAmt, saturation, wolfFood);
 		foodID = foodid;
-		FoodList[foodID] = this;
+		FoodList[foodID] = this.itemID;
 	}
 
 	public ItemTerraFood(int id, int healAmt, float saturation, boolean wolfFood, int foodid, int tier)

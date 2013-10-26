@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.IItemFoodBlock;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Food.ItemTerraFood;
 import TFC.Handlers.PacketHandler;
@@ -31,6 +32,30 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	{
 		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
 	}
+	
+	public int getFoodIdFromItemStack(ItemStack is){
+		if(is != null){
+			if(is.getItem() instanceof ItemTerraFood){
+				return ((ItemTerraFood)is.getItem()).foodID;
+			}
+			else if(is.getItem() instanceof IItemFoodBlock){
+				return ((IItemFoodBlock)is.getItem()).getFoodId(is);
+			}
+		}
+		return 1;
+	}
+	
+	public int getHealAmountFromItemStack(ItemStack is){
+		if(is != null){
+			if(is.getItem() instanceof ItemTerraFood){
+				return ((ItemTerraFood)is.getItem()).foodID;
+			}
+			else if(is.getItem() instanceof IItemFoodBlock){
+				return ((IItemFoodBlock)is.getItem()).getHealAmount(is);
+			}
+		}
+		return 1;
+	}
 
 	public void actionCreate()
 	{
@@ -42,10 +67,10 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 						(storage[1] != null ? 1 : 0) + 
 						(storage[2] != null ? 1 : 0) + 
 						(storage[3] != null ? 1 : 0);
-				int id1 = storage[0] != null ? ((ItemTerraFood)storage[0].getItem()).foodID : 1;
-				int id2 = storage[1] != null ? ((ItemTerraFood)storage[1].getItem()).foodID : 1;
-				int id3 = storage[2] != null ? ((ItemTerraFood)storage[2].getItem()).foodID : 1;
-				int id4 = storage[3] != null ? ((ItemTerraFood)storage[3].getItem()).foodID : 1;
+				int id1 = getFoodIdFromItemStack(storage[0]);
+				int id2 = getFoodIdFromItemStack(storage[1]);
+				int id3 = getFoodIdFromItemStack(storage[2]);
+				int id4 = getFoodIdFromItemStack(storage[3]);
 
 				if((id1 == id2 || id1 == id3 || id1 == id4) || (id2 == id3 || id2 == id4) || id3 == id4)
 				{
@@ -54,10 +79,10 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 
 				int seed = id1 * id2 * id3 * id4;
 
-				int fill1 = storage[0] != null ? ((ItemTerraFood)storage[0].getItem()).getHealAmount() : 1;
-				int fill2 = storage[1] != null ? ((ItemTerraFood)storage[1].getItem()).getHealAmount() : 1;
-				int fill3 = storage[2] != null ? ((ItemTerraFood)storage[2].getItem()).getHealAmount() : 1;
-				int fill4 = storage[3] != null ? ((ItemTerraFood)storage[3].getItem()).getHealAmount() : 1;
+				int fill1 = getHealAmountFromItemStack(storage[0]);
+				int fill2 = getHealAmountFromItemStack(storage[1]);
+				int fill3 = getHealAmountFromItemStack(storage[2]);
+				int fill4 = getHealAmountFromItemStack(storage[3]);
 
 				int filling = Math.min(fill1 + fill2 + fill3 + fill4, 100);
 

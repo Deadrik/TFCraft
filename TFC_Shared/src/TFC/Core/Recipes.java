@@ -138,17 +138,28 @@ public class Recipes
 
 		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
-			for(int j = 0; j < Saws.length; j++)
-			{
-				GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 8, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(Saws[j], 1, 32767)});
-				GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportV, 8, i), new Object[] { "A2"," 2", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
-				GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportH, 8, i), new Object[] { "A ","22", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
+			int l = i%16;
+			if(i==l){
+				for(int j = 0; j < Saws.length; j++)
+				{
+					GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 8, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(Saws[j], 1, 32767)});
+					GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportV, 8, i), new Object[] { "A2"," 2", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
+					GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportH, 8, i), new Object[] { "A ","22", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
+				}
+				GameRegistry.addRecipe(new ItemStack(Block.planks.blockID, 1, i), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
 			}
-
-			GameRegistry.addRecipe(new ItemStack(Block.planks.blockID, 1, i), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
+			else if(i/16 == 1){
+				for(int j = 0; j < Saws.length; j++)
+				{
+					GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 8, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(Saws[j], 1, 32767)});
+					GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportV2, 8, l), new Object[] { "A2"," 2", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
+					GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportH2, 8, l), new Object[] { "A ","22", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
+				}
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Planks2.blockID, 1, l), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
+			}
 		}
 
-		for(int i = 0; i < Global.WOOD_ALL.length; i++)
+		for(int i = 0; i < Global.WOOD_ALL.length -1; i++)
 		{
 			GameRegistry.addRecipe(new ItemStack(Doors[i], 1, i), new Object[] { "WW","WW","WW", Character.valueOf('W'), new ItemStack(TFCItems.SinglePlank, 1, i)});
 		}
@@ -619,13 +630,13 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Item.dyePowder,3, 15));
 			RemoveRecipe(new ItemStack(Item.dyePowder,2, 1));
 			RemoveRecipe(new ItemStack(Item.dyePowder,2, 11));
-			
+
 			//Remove the vanilla stairs
 			RemoveRecipe(new ItemStack(Block.stairsWoodBirch, 4));
 			RemoveRecipe(new ItemStack(Block.stairsWoodJungle, 4));
 			RemoveRecipe(new ItemStack(Block.stairsWoodOak, 4));
 			RemoveRecipe(new ItemStack(Block.stairsWoodSpruce, 4));
-			
+
 			//Remove the vanilla slabs
 			RemoveRecipe(new ItemStack(Block.woodSingleSlab, 6, 0));
 			RemoveRecipe(new ItemStack(Block.woodSingleSlab, 6, 1));

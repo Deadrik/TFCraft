@@ -2,6 +2,8 @@ package TFC.Blocks.Flora;
 
 import java.util.List;
 
+import TFC.TFCBlocks;
+
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
@@ -70,6 +72,9 @@ public class BlockLogHoriz extends BlockLogVert
     @Override
     public int damageDropped(int j) 
     {
+    	if(blockID == TFCBlocks.WoodHoriz3.blockID ||blockID ==  TFCBlocks.WoodHoriz4.blockID){
+    		j+=16;
+    	}
         return (j & 7) + offset;
     }
     

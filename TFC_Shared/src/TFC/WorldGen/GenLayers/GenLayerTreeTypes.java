@@ -37,8 +37,8 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerTreeTypes extends GenLayerTFC
 {
-	public static DataLayer[] biomeArray = new DataLayer[] {DataLayer.Ash, DataLayer.Aspen, DataLayer.Birch, DataLayer.Chestnut, DataLayer.DouglasFir, DataLayer.Hickory, DataLayer.Maple, DataLayer.Oak, DataLayer.Pine, DataLayer.Redwood, 
-		DataLayer.Pine, DataLayer.Spruce, DataLayer.Sycamore, DataLayer.WhiteCedar, DataLayer.WhiteElm, DataLayer.Willow};
+	public static DataLayer[] biomeArray = new DataLayer[] {DataLayer.Ash, DataLayer.Aspen, DataLayer.Birch, DataLayer.Chestnut, DataLayer.DouglasFir, DataLayer.Hickory,DataLayer.Koa, DataLayer.Maple, DataLayer.Oak, DataLayer.Pine, DataLayer.Redwood, 
+		DataLayer.Pine, DataLayer.Spruce, DataLayer.Sycamore, DataLayer.UTAcacia, DataLayer.WhiteCedar, DataLayer.WhiteElm, DataLayer.Willow};
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private DataLayer[] allowedBiomes;

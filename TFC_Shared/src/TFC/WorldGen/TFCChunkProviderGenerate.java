@@ -23,6 +23,7 @@ import TFC.Entities.Mobs.EntityBear;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Entities.Mobs.EntityDeer;
+import TFC.Entities.Mobs.EntityHorseTFC;
 import TFC.Entities.Mobs.EntityPigTFC;
 import TFC.Entities.Mobs.EntitySheepTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
@@ -240,13 +241,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				if(temp < 30)
 				{
 					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 2, 2, 4));
-					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 3, 4, 1));
+					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,2,2,3));
 					spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
 				}
 				else
 				{
 					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 1, 1, 2));
-					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 1, 2, 1));
+					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,1,2,3));
 				}
 			}
 		}

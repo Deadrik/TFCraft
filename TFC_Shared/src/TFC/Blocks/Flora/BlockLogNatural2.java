@@ -23,18 +23,21 @@ import TFC.Core.Recipes;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockLogNatural extends BlockTerra
+public class BlockLogNatural2 extends BlockTerra
 {	
 	String[] woodNames;
 	public static Icon[] sideIcons;
 	public static Icon[] innerIcons;
 	public static Icon[] rotatedSideIcons;
-	public BlockLogNatural(int i) 
+	public BlockLogNatural2(int i) 
 	{
 		super(i, Material.wood);
 		this.setTickRandomly(true);
 		woodNames = Global.WOOD_ALL.clone();
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
+		if(blockID == TFCBlockID.LogNatural2){
+			System.arraycopy(Global.WOOD_ALL, 16, woodNames, 0, Global.WOOD_ALL.length-16);
+		}
 		sideIcons = new Icon[woodNames.length];
 		innerIcons = new Icon[woodNames.length];
 		rotatedSideIcons = new Icon[woodNames.length];
@@ -92,7 +95,14 @@ public class BlockLogNatural extends BlockTerra
     @Override
     public int damageDropped(int j) {
         return j;
-    }	
+    }
+    
+    public int getItemDamage(int j){
+    	if(blockID == TFCBlocks.LogNatural2.blockID){
+    		j+=16;
+    	}
+        return j;
+    }
 
 	@Override
 	public Icon getIcon(int i, int j) 

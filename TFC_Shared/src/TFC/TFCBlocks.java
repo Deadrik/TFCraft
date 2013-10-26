@@ -1,6 +1,7 @@
 package TFC;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Constant.Global;
@@ -67,6 +68,7 @@ import TFC.Blocks.Terrain.BlockSedCobble;
 import TFC.Blocks.Terrain.BlockSedSmooth;
 import TFC.Blocks.Vanilla.BlockCustomBed;
 import TFC.Blocks.Vanilla.BlockCustomBookshelf;
+import TFC.Blocks.Vanilla.BlockCustomButtonWood;
 import TFC.Blocks.Vanilla.BlockCustomCactus;
 import TFC.Blocks.Vanilla.BlockCustomDoor;
 import TFC.Blocks.Vanilla.BlockCustomFence;
@@ -75,15 +77,18 @@ import TFC.Blocks.Vanilla.BlockCustomFlower;
 import TFC.Blocks.Vanilla.BlockCustomFlowing;
 import TFC.Blocks.Vanilla.BlockCustomIce;
 import TFC.Blocks.Vanilla.BlockCustomLeaves;
+import TFC.Blocks.Vanilla.BlockCustomLeaves2;
 import TFC.Blocks.Vanilla.BlockCustomMushroom;
 import TFC.Blocks.Vanilla.BlockCustomReed;
 import TFC.Blocks.Vanilla.BlockCustomSapling;
+import TFC.Blocks.Vanilla.BlockCustomSapling2;
 import TFC.Blocks.Vanilla.BlockCustomSnow;
 import TFC.Blocks.Vanilla.BlockCustomStationary;
 import TFC.Blocks.Vanilla.BlockCustomTallGrass;
 import TFC.Blocks.Vanilla.BlockCustomVine;
 import TFC.Blocks.Vanilla.BlockCustomWall;
 import TFC.Items.ItemBarrels;
+import TFC.Items.ItemBlocks.ItemCustomWood2;
 import TFC.Items.ItemBlocks.ItemToolRack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -154,10 +159,15 @@ public class TFCBlocks
 	public static Block Sulfur;
 	public static Block Wood;
 	public static Block Planks;
+	public static Block Planks2;
 	public static Block Leaves;
 	public static Block Sapling;
+	public static Block Leaves2;
+	public static Block Sapling2;
 	public static Block WoodSupportV;
 	public static Block WoodSupportH;
+	public static Block WoodSupportV2;
+	public static Block WoodSupportH2;
 	public static Block Grass;
 	public static Block Grass2;
 	public static Block Dirt;
@@ -241,6 +251,11 @@ public class TFCBlocks
 	public static Block StrawHideBed;
 
 	public static Block ArmourStand;
+	
+	public static Block LogNatural2;
+	public static Block WoodHoriz3;
+	public static Block WoodHoriz4;
+	public static Block WoodVert2;
 
 	public static void RegisterBlocks()
 	{
@@ -289,11 +304,19 @@ public class TFCBlocks
 
 		GameRegistry.registerBlock(WoodSupportV, TFC.Items.ItemBlocks.ItemWoodSupport.class,"WoodSupportV");
 		GameRegistry.registerBlock(WoodSupportH, TFC.Items.ItemBlocks.ItemWoodSupport.class, "WoodSupportH");
+		GameRegistry.registerBlock(WoodSupportV2, TFC.Items.ItemBlocks.ItemWoodSupport.class,"WoodSupportV2");
+		GameRegistry.registerBlock(WoodSupportH2, TFC.Items.ItemBlocks.ItemWoodSupport.class, "WoodSupportH2");
 		GameRegistry.registerBlock(Sulfur, "Sulfur");
 		GameRegistry.registerBlock(Block.wood, TFC.Items.ItemBlocks.ItemCustomWood.class, "wood");
 		GameRegistry.registerBlock(Block.leaves, TFC.Items.ItemBlocks.ItemCustomLeaves.class, "leaves");
 		GameRegistry.registerBlock(Block.sapling, TFC.Items.ItemBlocks.ItemSapling.class, "sapling");
+		GameRegistry.registerBlock(TFCBlocks.Leaves2, TFC.Items.ItemBlocks.ItemCustomLeaves2.class, "leaves2");
+		GameRegistry.registerBlock(TFCBlocks.Sapling2, TFC.Items.ItemBlocks.ItemSapling2.class, "sapling2");
 		GameRegistry.registerBlock(Block.planks, TFC.Items.ItemBlocks.ItemPlankBlock.class, "planks");
+		GameRegistry.registerBlock(TFCBlocks.Planks2, TFC.Items.ItemBlocks.ItemPlankBlock2.class, "planks2");
+		GameRegistry.registerBlock(Block.mushroomBrown, TFC.Items.ItemBlocks.ItemFoodBlock.class, "mushroom");
+		GameRegistry.registerBlock(Block.pumpkin, TFC.Items.ItemBlocks.ItemFoodBlock.class, "pumpkin");
+		GameRegistry.registerBlock(Block.melon, TFC.Items.ItemBlocks.ItemFoodBlock.class, "melon");
 
 		GameRegistry.registerBlock(Firepit, "Firepit");
 		GameRegistry.registerBlock(Bellows, TFC.Items.ItemBlocks.ItemBellows.class, "Bellows");
@@ -319,6 +342,12 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WoodVert, "WoodVert");
 		GameRegistry.registerBlock(WoodHoriz, "WoodHoriz");
 		GameRegistry.registerBlock(WoodHoriz2, "WoodHoriz2");
+		
+		
+		GameRegistry.registerBlock(LogNatural2,ItemCustomWood2.class,"LogNatural2");
+		GameRegistry.registerBlock(WoodVert2, "WoodVert2");
+		GameRegistry.registerBlock(WoodHoriz3, "WoodHoriz3");
+		GameRegistry.registerBlock(WoodHoriz4, "WoodHoriz4");
 
 		GameRegistry.registerBlock(ToolRack, ItemToolRack.class,"ToolRack");
 		GameRegistry.registerBlock(SpawnMeter, TFC.Items.ItemBlocks.ItemTerraBlock.class, "SpawnMeter");
@@ -342,7 +371,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WallSmoothMM, TFC.Items.ItemBlocks.ItemMM.class, "WallSmoothMM");
 
 		// Wooden Doors
-		for (int i=0; i < Global.WOOD_ALL.length; i++) {
+		for (int i=0; i < Global.WOOD_ALL.length - 1; i++) {
 			GameRegistry.registerBlock(Doors[i], "Door"+Global.WOOD_ALL[i].replaceAll(" ", ""));
 		}
 
@@ -395,6 +424,7 @@ public class TFCBlocks
 		Block.blocksList[134].setCreativeTab(null);
 		Block.blocksList[135].setCreativeTab(null);
 		Block.blocksList[136].setCreativeTab(null);
+		Block.blocksList[143] = null;
 
 		Block.blocksList[5] = (new TFC.Blocks.BlockPlanks(5, Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("wood").setTextureName("planks");
 		Block.blocksList[6] = (new BlockCustomSapling(6)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("sapling");
@@ -419,12 +449,15 @@ public class TFCBlocks
 		Block.blocksList[83] = (new BlockCustomReed(83)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("reeds").setTextureName("reeds");;
 		Block.blocksList[106] = (new BlockCustomVine(106)).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("vine").setTextureName("vine");
 		Block.blocksList[107] = (new BlockCustomFenceGate(107)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("fenceGate");
-
+		Block.blocksList[143] = (new BlockCustomButtonWood(143)).setHardness(0.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("button");
 
 		TFCBlocks.Planks = Block.blocksList[5];
+		TFCBlocks.Planks2  = (new TFC.Blocks.BlockPlanks2(TFCBlockID.Wood2, Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("wood2").setTextureName("planks");
 		TFCBlocks.Wood = Block.blocksList[17];
 		TFCBlocks.Leaves = Block.blocksList[18];
+		TFCBlocks.Leaves2 = (new BlockCustomLeaves2(TFCBlockID.Leaves2)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("leaves2");
 		TFCBlocks.Sapling = Block.blocksList[6];
+		TFCBlocks.Sapling2 = (new BlockCustomSapling2(TFCBlockID.Sapling2)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("sapling2");
 
 		TFCBlocks.StoneIgInCobble = new BlockIgInCobble(TFCBlockID.StoneIgInCobble, Material.rock).setHardness(13F).setResistance(10F).setUnlocalizedName("IgInRockCobble");
 		TFCBlocks.StoneIgIn = new BlockIgIn(TFCBlockID.StoneIgIn, Material.rock, TFCBlocks.StoneIgInCobble.blockID).setHardness(13F).setResistance(10F).setUnlocalizedName("IgInRock");	
@@ -468,6 +501,8 @@ public class TFCBlocks
 		TFCBlocks.Sulfur = new BlockSulfur(TFCBlockID.Sulfur, Material.rock).setUnlocalizedName("Sulfur").setHardness(0.5F).setResistance(1F);
 		TFCBlocks.WoodSupportV = new BlockWoodSupport(TFCBlockID.WoodSupportV, Material.wood).setUnlocalizedName("WoodSupportV").setHardness(0.5F).setResistance(1F);
 		TFCBlocks.WoodSupportH = new BlockWoodSupport(TFCBlockID.WoodSupportH, Material.wood).setUnlocalizedName("WoodSupportH").setHardness(0.5F).setResistance(1F);
+		TFCBlocks.WoodSupportV2 = new BlockWoodSupport(TFCBlockID.WoodSupportV2, Material.wood).setUnlocalizedName("WoodSupportV2").setHardness(0.5F).setResistance(1F);
+		TFCBlocks.WoodSupportH2 = new BlockWoodSupport(TFCBlockID.WoodSupportH2, Material.wood).setUnlocalizedName("WoodSupportH2").setHardness(0.5F).setResistance(1F);
 
 		TFCBlocks.tilledSoil = new TFC.Blocks.BlockFarmland(TFCBlockID.tilledSoil, TFCBlocks.Dirt.blockID, 0).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("tilledSoil");
 		TFCBlocks.tilledSoil2 = new TFC.Blocks.BlockFarmland(TFCBlockID.tilledSoil2, TFCBlocks.Dirt2.blockID, 16).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("tilledSoil2");
@@ -505,6 +540,11 @@ public class TFCBlocks
 		TFCBlocks.WoodVert = new BlockLogVert(TFCBlockID.WoodVert).setUnlocalizedName("WoodVert").setHardness(40).setResistance(15F);
 		TFCBlocks.WoodHoriz = new BlockLogHoriz(TFCBlockID.WoodHoriz, 0).setUnlocalizedName("WoodHoriz").setHardness(40).setResistance(15F);
 		TFCBlocks.WoodHoriz2 = new BlockLogHoriz(TFCBlockID.WoodHoriz2, 8).setUnlocalizedName("WoodHoriz2").setHardness(40).setResistance(15F);
+		
+		TFCBlocks.LogNatural2 = new TFC.Blocks.Flora.BlockLogNatural2(TFCBlockID.LogNatural2).setHardness(50.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("log2");
+		TFCBlocks.WoodVert2 = new BlockLogVert(TFCBlockID.WoodVert2).setUnlocalizedName("WoodVert2").setHardness(40).setResistance(15F);
+		TFCBlocks.WoodHoriz3 = new BlockLogHoriz(TFCBlockID.WoodHoriz3, 0).setUnlocalizedName("WoodHoriz3").setHardness(40).setResistance(15F);
+		TFCBlocks.WoodHoriz4 = new BlockLogHoriz(TFCBlockID.WoodHoriz4, 8).setUnlocalizedName("WoodHoriz4").setHardness(40).setResistance(15F);
 
 		TFCBlocks.ToolRack = new BlockToolRack(TFCBlockID.ToolRack).setHardness(3F).setUnlocalizedName("Toolrack");
 		TFCBlocks.SpawnMeter = new BlockSpawnMeter(TFCBlockID.SpawnMeter).setHardness(3F).setUnlocalizedName("SpawnMeter");
@@ -529,7 +569,7 @@ public class TFCBlocks
 		TFCBlocks.WallSmoothMM = new BlockCustomWall(TFCBlockID.WallSmoothMM, StoneMMSmooth, 6).setUnlocalizedName("WallSmooth");
 
 		// Wooden Doors
-		for (int i=0; i < Global.WOOD_ALL.length; i++) {
+		for (int i=0; i < Global.WOOD_ALL.length - 1; i++) {
 			TFCBlocks.Doors[i] = new BlockCustomDoor(TFCBlockID.Doors[i], i*2).setUnlocalizedName("Door "+Global.WOOD_ALL[i]);
 		}
 

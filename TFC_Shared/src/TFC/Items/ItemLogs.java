@@ -27,7 +27,7 @@ public class ItemLogs extends ItemTerra
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setCreativeTab(TFCTabs.TFCMaterials);
-		this.MetaNames = Global.WOOD_ALL;
+		this.MetaNames = Global.WOOD_ALL.clone();
 		this.setWeight(EnumWeight.MEDIUM);
 		this.setSize(EnumSize.MEDIUM);
 	}
@@ -137,7 +137,7 @@ public class ItemLogs extends ItemTerra
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		for(int i = 0; i < 16; i++) {
+		for(int i = 0; i < Global.WOOD_ALL.length; i++) {
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+Global.WOOD_ALL[i]+" Log");
 		}
 	}
@@ -195,14 +195,15 @@ public class ItemLogs extends ItemTerra
 			else
 			{
 				int m = itemstack.getItemDamage();
+				int blockId = m>15?TFCBlocks.WoodVert2.blockID:TFCBlocks.WoodVert.blockID;
 				if(side == 1)
 				{
-					world.setBlock(x, y+1, z, TFCBlocks.WoodVert.blockID, m,0x2);
+					world.setBlock(x, y+1, z, blockId, m,0x2);
 					itemstack.stackSize = itemstack.stackSize-1;
 				}
 				else if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 				{
-					world.setBlock(x, y-1, z, TFCBlocks.WoodVert.blockID, m,0x2);
+					world.setBlock(x, y-1, z, blockId, m,0x2);
 					itemstack.stackSize = itemstack.stackSize-1;
 				}
 				else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
@@ -238,12 +239,32 @@ public class ItemLogs extends ItemTerra
 			}
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
-		else if(m >= 8)
+		else if(m >= 8 && m<16)
 		{
 			if(dir == 0 || dir == 2) {
 				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8, 0x2);
 			} else {
 				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8 | 8, 0x2);
+			}
+			itemstack.stackSize = itemstack.stackSize-1;
+		}
+		else if(m < 24)
+		{
+			m-=16;
+			if(dir == 0 || dir == 2) {
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz3.blockID, m, 0x2);
+			} else {
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz3.blockID, m | 8, 0x2);
+			}
+			itemstack.stackSize = itemstack.stackSize-1;
+		}
+		else if(m >= 24 && m<32)
+		{
+			m-=16;
+			if(dir == 0 || dir == 2) {
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz4.blockID, m-8, 0x2);
+			} else {
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz4.blockID, m-8 | 8, 0x2);
 			}
 			itemstack.stackSize = itemstack.stackSize-1;
 		}

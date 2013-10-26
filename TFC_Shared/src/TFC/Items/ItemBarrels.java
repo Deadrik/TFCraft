@@ -27,7 +27,7 @@ public class ItemBarrels extends ItemTerraBlock
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		this.MetaNames = Global.WOOD_ALL;
+		this.MetaNames = Global.WOOD_ALL.clone();
 	}
 
 	@Override
