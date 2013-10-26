@@ -1,15 +1,7 @@
 package TFC.Blocks;
 
-import static net.minecraftforge.common.ForgeDirection.DOWN;
-import static net.minecraftforge.common.ForgeDirection.UP;
-
 import java.util.Random;
 
-import net.minecraft.block.BlockFarmland;
-import net.minecraft.block.BlockHalfSlab;
-import net.minecraft.block.BlockHopper;
-import net.minecraft.block.BlockPoweredOre;
-import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -25,7 +17,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import TFC.Items.ItemIngot;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityIngotPile;
 import cpw.mods.fml.relauncher.Side;
@@ -84,6 +75,7 @@ public class BlockIngotPile extends BlockTerraContainer
 					if(tileentityingotpile.getStackInSlot(0).stackSize < 1){
 						world.setBlock(i, j, k, 0);
 					}
+					world.notifyBlockOfNeighborChange(i, j + 1, k, this.blockID);
 					tileentityingotpile.broadcastPacketInRange(tileentityingotpile.createUpdatePacket());
 				}
 				//damage = tileentityingotpile.getStackInSlot(0).getItem().itemID - 16028 - 256;
@@ -107,11 +99,87 @@ public class BlockIngotPile extends BlockTerraContainer
     }
 
 	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+	public void onNeighborBlockChange(World world, int i, int j, int k, int id) {
+		if (!world.isRemote) {
+			if (!world.isBlockOpaqueCube(i, j - 1, k)) {
+				if (world.getBlockId(i, j - 1, k) == this.blockID
+						&& ((TileEntityIngotPile) world.getBlockTileEntity(i,
+								j, k)).storage[0].itemID == ((TileEntityIngotPile) world
+								.getBlockTileEntity(i, j - 1, k)).storage[0].itemID) {
+					combineIngotsDown(world, i, j, k);
+				} else if (world.getBlockId(i, j + 1, k) == this.blockID
+						&& ((TileEntityIngotPile) world.getBlockTileEntity(i,
+								j, k)).storage[0].itemID == ((TileEntityIngotPile) world
+								.getBlockTileEntity(i, j + 1, k)).storage[0].itemID) {
+					combineIngotsUp(world, i, j, k);
+				} else {
+					((TileEntityIngotPile) world.getBlockTileEntity(i, j, k))
+							.ejectContents();
+					world.setBlock(i, j, k, 0);
+					return;
+				}
+			}
+
+		}
+	}
+
+	public void combineIngotsDown(World world, int i, int j, int k) {
+		TileEntityIngotPile teip = (TileEntityIngotPile) world
+				.getBlockTileEntity(i, j, k);
+		TileEntityIngotPile teipBottom = (TileEntityIngotPile) world
+				.getBlockTileEntity(i, j - 1, k);
+
+		int bottomSize = teipBottom.getStackInSlot(0).stackSize;
+		int topSize = teip.getStackInSlot(0).stackSize;
+
+		if (bottomSize < 64) {
+			bottomSize = bottomSize + topSize;
+			int m2 = 0;
+			if (bottomSize > 64) {
+				m2 = bottomSize - 64;
+				bottomSize = 64;
+			}
+			teipBottom.storage[0] = new ItemStack(
+					teipBottom.storage[0].getItem(), bottomSize,
+					teipBottom.storage[0].getItemDamage());
+
+			if (m2 > 0) {
+				teip.injectContents(0, m2 - topSize);
+				world.notifyBlockOfNeighborChange(i, j + 1, k, blockID);
+				teip.broadcastPacketInRange(teip.createUpdatePacket());
+			} else
+				world.setBlockToAir(i, j, k);
+		}
+	}
+
+	public void combineIngotsUp(World world, int i, int j, int k)
     {
-        if(!ItemIngot.isValid(par1World, par2, par3, par4)){
-        	par1World.setBlock(par2, par3, par4, 0);
-        }
+		TileEntityIngotPile teip = (TileEntityIngotPile) world
+				.getBlockTileEntity(i, j + 1, k);
+		TileEntityIngotPile teipBottom = (TileEntityIngotPile) world
+				.getBlockTileEntity(i, j, k);
+
+		int bottomSize = teipBottom.getStackInSlot(0).stackSize;
+		int topSize = teip.getStackInSlot(0).stackSize;
+
+		if (bottomSize < 64) {
+			bottomSize = bottomSize + topSize;
+			int m2 = 0;
+			if (bottomSize > 64) {
+				m2 = bottomSize - 64;
+				bottomSize = 64;
+			}
+			teipBottom.storage[0] = new ItemStack(
+					teipBottom.storage[0].getItem(), bottomSize,
+					teipBottom.storage[0].getItemDamage());
+
+			if (m2 > 0) {
+				teip.injectContents(0, m2 - topSize);
+				world.notifyBlockOfNeighborChange(i, j + 2, k, blockID);
+				teip.broadcastPacketInRange(teip.createUpdatePacket());
+			} else
+				world.setBlockToAir(i, j + 1, k);
+		}
     }
 	
 	/**
