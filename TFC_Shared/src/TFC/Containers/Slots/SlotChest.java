@@ -18,25 +18,25 @@ public class SlotChest extends Slot
 {
 	EnumSize size = EnumSize.LARGE;
 
-	List excpetions;
+	List exceptions;
 
 	public SlotChest(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
-		excpetions = new ArrayList<Item>();
+		exceptions = new ArrayList<Item>();
 	}
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
-		boolean except = excpetions.contains(itemstack.getItem());
+		boolean except = exceptions.contains(itemstack.getItem());
 
 		if((itemstack.getItem() instanceof ItemTool || itemstack.getItem() instanceof ItemTerraTool || itemstack.getItem() instanceof ItemWeapon ||
 				itemstack.getItem() instanceof ItemHoe) && itemstack.getItem() instanceof ISize && 
-				((ISize)itemstack.getItem()).getSize(null).stackSize < EnumSize.SMALL.stackSize ) {
+				((ISize)itemstack.getItem()).getSize(itemstack).stackSize < EnumSize.SMALL.stackSize ) {
 			return false;
 		}
 
-		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize(null).stackSize >= size.stackSize && !except)
+		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize && !except)
 		{
 			return true;
 		}
@@ -55,7 +55,7 @@ public class SlotChest extends Slot
 
 	public SlotChest addItemException(ArrayList<Item> ex)
 	{
-		excpetions = ex;
+		exceptions = ex;
 		return this;
 	}
 }

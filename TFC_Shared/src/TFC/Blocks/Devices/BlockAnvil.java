@@ -98,10 +98,13 @@ public class BlockAnvil extends BlockTerraContainer
 	{
 		int meta = par1World.getBlockMetadata(par2, par3, par4);
 		int direction = getDirectionFromMetadata(meta);
-		TileEntityAnvil te = (TileEntityAnvil)par1World.getBlockTileEntity(par2, par3, par4);
-		if(te!= null)
+		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+
+		if (te != null && te instanceof TileEntityAnvil)
 		{
-			if(te.AnvilTier != AnvilReq.STONE.Tier || this.blockID == TFCBlocks.Anvil2.blockID)
+			TileEntityAnvil teAnvil = (TileEntityAnvil) te;
+			if (teAnvil.AnvilTier != AnvilReq.STONE.Tier
+					|| this.blockID == TFCBlocks.Anvil2.blockID)
 			{
 				if(direction == 0) {
 					return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
