@@ -1,6 +1,5 @@
 package TFC.Blocks.Vanilla;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -16,15 +15,13 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IShearable;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
-import TFC.API.Constant.TFCBlockID;
 import TFC.Items.Tools.ItemCustomScythe;
 
-public class BlockCustomLeaves extends BlockLeaves implements IShearable
+public class BlockCustomLeaves extends BlockLeaves
 {
     int adjacentTreeBlocks[][][];
     
@@ -328,19 +325,4 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
         for(int i = 0; i < 16; i++)
             list.add(new ItemStack(this,1,i));
     }
-
-    @Override
-    public boolean isShearable(ItemStack item, World world, int x, int y, int z) 
-    {
-        return true;
-    }
-
-    @Override
-    public ArrayList<ItemStack> onSheared(ItemStack item, World world, int x, int y, int z, int fortune) 
-    {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-        ret.add(new ItemStack(this, 1, world.getBlockMetadata(x, y, z) & 3));
-        return ret;
-    }
-
 }
