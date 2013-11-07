@@ -18,8 +18,7 @@ import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemMeltedMetal;
-import TFC.Items.ItemTuyere;
-import TFC.Items.Pottery.ItemPotteryBase;
+import TFC.Items.Pottery.ItemPotteryMold;
 
 public class ContainerMold extends ContainerTFC {
 	private World world;
@@ -216,7 +215,7 @@ public class ContainerMold extends ContainerTFC {
 					slot1.putStack(stack);                          
 					itemstack1.stackSize--;
 				}
-				else if(itemstack1.getItem() instanceof ItemPotteryBase)
+				else if(itemstack1.getItem() instanceof ItemPotteryMold && itemstack1.getItemDamage() == 1)
 				{
 					if(slot2.getHasStack())
 					{
