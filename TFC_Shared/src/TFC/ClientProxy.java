@@ -88,6 +88,7 @@ import TFC.Render.Blocks.RenderFence;
 import TFC.Render.Blocks.RenderFenceGate;
 import TFC.Render.Blocks.RenderNestBox;
 import TFC.Render.Blocks.RenderOre;
+import TFC.Render.Blocks.RenderPipeBasic;
 import TFC.Render.Blocks.RenderPottery;
 import TFC.Render.Blocks.RenderQuern;
 import TFC.Render.Blocks.RenderStand;
@@ -202,6 +203,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.potteryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPottery());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.tuyereRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTuyere());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.crucibleRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderCrucible());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.pipeRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPipeBasic());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.pipeValveRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPipeBasic());
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.berryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBerryBush());
 
 		//Register our overlay changes

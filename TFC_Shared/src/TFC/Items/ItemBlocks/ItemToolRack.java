@@ -9,7 +9,8 @@ public class ItemToolRack extends ItemTerraBlock
 {	
 	public ItemToolRack(int id) {
 		super(id);
-		this.MetaNames = Global.WOOD_ALL;
+		MetaNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, MetaNames, 0, 16);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
+import TFC.API.IMultipleBlock;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderBarrel  implements ISimpleBlockRenderingHandler 
@@ -15,42 +16,45 @@ public class RenderBarrel  implements ISimpleBlockRenderingHandler
 	static float pixel5 = 5f/16f;
 	static float pixel12 = 12f/16f;
 	static float pixel14 = 14f/16f;
-	
+
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int i, int j, int k,
 			Block block, int modelId, RenderBlocks renderer) 
 	{
-			IBlockAccess blockAccess = renderer.blockAccess;
-			renderer.setRenderBounds(0.15F, 0.1F, 0.15F, 0.85F, 0.9F, 0.85F);
-			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
-			
-			renderer.setRenderBounds(0.1F, 0F, 0.15F, 0.15F, 1F, 0.85F);
-			rotate(renderer, 1);
-			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
-			rotate(renderer, 0);
-			renderer.renderStandardBlock(block, i, j, k);
-			
-			renderer.setRenderBounds(0.85F, 0F, 0.15F, 0.9F, 1F, 0.85F);
-			rotate(renderer, 1);
-			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
-			rotate(renderer, 0);
-			renderer.renderStandardBlock(block, i, j, k);
-			
-			renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 1F, 0.15F);
-			rotate(renderer, 1);
-			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
-			rotate(renderer, 0);
-			renderer.renderStandardBlock(block, i, j, k);
-			
-			renderer.setRenderBounds(0.1F, 0F, 0.85F, 0.9F, 1F, 0.9F);
-			rotate(renderer, 1);
-			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
-			rotate(renderer, 0);
-			renderer.renderStandardBlock(block, i, j, k);
-			
-			return true;
+		Block blockToRender;
+		blockToRender = ((IMultipleBlock)block).getBlockTypeForRender();
+
+		IBlockAccess blockAccess = renderer.blockAccess;
+		renderer.setRenderBounds(0.15F, 0.1F, 0.15F, 0.85F, 0.9F, 0.85F);
+		renderer.renderStandardBlock(blockToRender, i, j, k);
+
+		renderer.setRenderBounds(0.1F, 0F, 0.15F, 0.15F, 1F, 0.85F);
+		rotate(renderer, 1);
+		renderer.renderStandardBlock(blockToRender, i, j, k);
+		rotate(renderer, 0);
+		renderer.renderStandardBlock(block, i, j, k);
+
+		renderer.setRenderBounds(0.85F, 0F, 0.15F, 0.9F, 1F, 0.85F);
+		rotate(renderer, 1);
+		renderer.renderStandardBlock(blockToRender, i, j, k);
+		rotate(renderer, 0);
+		renderer.renderStandardBlock(block, i, j, k);
+
+		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 1F, 0.15F);
+		rotate(renderer, 1);
+		renderer.renderStandardBlock(blockToRender, i, j, k);
+		rotate(renderer, 0);
+		renderer.renderStandardBlock(block, i, j, k);
+
+		renderer.setRenderBounds(0.1F, 0F, 0.85F, 0.9F, 1F, 0.9F);
+		rotate(renderer, 1);
+		renderer.renderStandardBlock(blockToRender, i, j, k);
+		rotate(renderer, 0);
+		renderer.renderStandardBlock(block, i, j, k);
+
+		return true;
 	}
-	
+
 	public void rotate(RenderBlocks renderer, int i)
 	{
 		renderer.uvRotateEast = i;
@@ -62,32 +66,34 @@ public class RenderBarrel  implements ISimpleBlockRenderingHandler
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
-		
+		Block blockToRender;
+		blockToRender = ((IMultipleBlock)block).getBlockTypeForRender();
+
 		renderer.setRenderBounds(0.15F, 0.2F, 0.15F, 0.85F, 0.8F, 0.85F);
 		rotate(renderer, 1);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
-		
+		renderInvBlock(blockToRender, metadata, renderer);
+
 		renderer.setRenderBounds(0.1F, 0F, 0.15F, 0.15F, 1F, 0.85F);
 		rotate(renderer, 1);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(blockToRender, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
-		
+
 		renderer.setRenderBounds(0.85F, 0F, 0.15F, 0.9F, 1F, 0.85F);
 		rotate(renderer, 1);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(blockToRender, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
-		
+
 		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 1F, 0.15F);
 		rotate(renderer, 1);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(blockToRender, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
-		
+
 		renderer.setRenderBounds(0.1F, 0F, 0.85F, 0.9F, 1F, 0.9F);
 		rotate(renderer, 1);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(blockToRender, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
 	}
@@ -101,7 +107,7 @@ public class RenderBarrel  implements ISimpleBlockRenderingHandler
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	public static void renderInvBlock(Block block, int m, RenderBlocks renderer)
 	{
 		Tessellator var14 = Tessellator.instance;

@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
+import TFC.API.IMultipleBlock;
 import TFC.TileEntities.TEStand;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -24,40 +25,45 @@ public class RenderStand  implements ISimpleBlockRenderingHandler
 	{
 			IBlockAccess blockAccess = renderer.blockAccess;
 			
+			Block blockToRender = TFCBlocks.Planks;
+			if(block instanceof IMultipleBlock){
+				blockToRender = ((IMultipleBlock)block).getBlockTypeForRender();
+			}
+			
 			TEStand te = (TEStand)(world.getBlockTileEntity(i, j, k));
 			if((world.getBlockTileEntity(i, j-1, k)!=null && world.getBlockTileEntity(i, j-1, k) instanceof TEStand) || te.isTop)return false;
 			int l = (int)(((te.yaw%360) / 90)%2);
 			//Arms of the Stand
 			if(l == 0){
 				renderer.setRenderBounds(0.1F,1.35F,0.44F,0.9F,1.45F,0.56F);
-				renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+				renderer.renderStandardBlock(blockToRender, i, j, k);
 				
 				//Main posts of the stand
 				renderer.setRenderBounds(0.35F, 0.101F, 0.45F, 0.45F, 1.35F, 0.55F);
-				renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+				renderer.renderStandardBlock(blockToRender, i, j, k);
 				
 				renderer.setRenderBounds(0.55F, 0.101F, 0.45F, 0.65F, 1.35F, 0.55F);
-				renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+				renderer.renderStandardBlock(blockToRender, i, j, k);
 			}
 			else{
 				renderer.setRenderBounds(0.44F,1.35F,0.1F,0.56F,1.45F,0.9F);
-				renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+				renderer.renderStandardBlock(blockToRender, i, j, k);
 				
 				//Main posts of the stand
 				renderer.setRenderBounds(0.45F, 0.101F, 0.35F, 0.55F, 1.35F, 0.45F);
-				renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+				renderer.renderStandardBlock(blockToRender, i, j, k);
 				
 				renderer.setRenderBounds(0.45F, 0.101F, 0.55F, 0.55F, 1.35F, 0.65F);
-				renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+				renderer.renderStandardBlock(blockToRender, i, j, k);
 			}
 			
 			
 			//Base of the stand
 			renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 0.1F, 0.9F);
-			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+			renderer.renderStandardBlock(blockToRender, i, j, k);
 			
 			renderer.setRenderBounds(0.45F, 1.45F, 0.45F,0.55F,1.9F,0.55F);
-			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+			renderer.renderStandardBlock(blockToRender, i, j, k);
 			return true;
 	}
 	
@@ -73,23 +79,27 @@ public class RenderStand  implements ISimpleBlockRenderingHandler
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
 
+		Block blockToRender = TFCBlocks.Planks;
+		if(block instanceof IMultipleBlock){
+			blockToRender = ((IMultipleBlock)block).getBlockTypeForRender();
+		}
 		//Arms of the Stand
 		renderer.setRenderBounds(0.44F,1.45F,0.2F,0.56F,1.55F,0.8F);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(blockToRender, metadata, renderer);
 		
 		renderer.setRenderBounds(0.45F, 0.201F, 0.35F, 0.55F, 1.45F, 0.45F);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(blockToRender, metadata, renderer);
 		
 		renderer.setRenderBounds(0.45F, 0.201F, 0.55F, 0.55F, 1.45F, 0.65F);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(blockToRender, metadata, renderer);
 		
 		//Base of the stand
 		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 0.2F, 0.9F);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(blockToRender, metadata, renderer);
 
 		//Main post of the stand
 		renderer.setRenderBounds(0.45F, 1.45F, 0.45F,0.55F,1.9F,0.55F);
-		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
+		renderInvBlock(blockToRender, metadata, renderer);
 	}
 	@Override
 	public boolean shouldRender3DInInventory() {

@@ -1,12 +1,14 @@
 package TFC.API.Enums;
 
+//Based on data from the internet, and poetic licence, we can attribute the rainfall level directly to rainfall in mm. While above the average
+//of the rainiest place on earth, it is well below the rainiest year on record.
 public enum EnumTree
 {
-	OAK("OAK", /*minRain*/400f, /*maxRain*/16000f, /*minTemp*/4, /*maxTemp*/24, /*minEVT*/0.25f, /*maxEVT*/2, false),
+	OAK("OAK", /*minRain*/500f, /*maxRain*/1200f, /*minTemp*/5, /*maxTemp*/15, /*minEVT*/0.25f, /*maxEVT*/2, false),
 	
-	ASPEN("ASPEN", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/2, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, false),
+	ASPEN("ASPEN", /*minRain*/300f, /*maxRain*/1600f, /*minTemp*/-5, /*maxTemp*/18, /*minEVT*/0.25f, /*maxEVT*/1, false),
 	
-	BIRCH("BIRCH", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/2, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, false),
+	BIRCH("BIRCH", /*minRain*/200f, /*maxRain*/500f, /*minTemp*/-10, /*maxTemp*/12, /*minEVT*/0, /*maxEVT*/1, false),
 	
 	CHESTNUT("CHESTNUT", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/3, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, false),
 	
@@ -36,7 +38,7 @@ public enum EnumTree
 	
 	WILLOW("WILLOW", /*minRain*/1000f, /*maxRain*/16000f, /*minTemp*/6, /*maxTemp*/30, /*minEVT*/0, /*maxEVT*/1, false),
 	
-	KAPOK("KAPOK", /*minRain*/500f, /*maxRain*/16000f, /*minTemp*/28, /*maxTemp*/44, /*minEVT*/0f, /*maxEVT*/1f, false);
+	KAPOK("KAPOK", /*minRain*/1500f, /*maxRain*/16000f, /*minTemp*/24, /*maxTemp*/44, /*minEVT*/0f, /*maxEVT*/1f, false);
 
 	public final float minRain;
 	public final float maxRain;

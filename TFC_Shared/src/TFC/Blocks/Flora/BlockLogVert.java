@@ -14,6 +14,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.Recipes;
 import cpw.mods.fml.relauncher.Side;
@@ -21,9 +22,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLogVert extends BlockTerra
 {
+	String[] woodNames;
     public BlockLogVert(int par1)
     {
         super(par1, Material.wood);
+        woodNames = new String[16];
+        System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
         //this.setCreativeTab(CreativeTabs.tabDecorations);
     }
     
@@ -75,9 +79,6 @@ public class BlockLogVert extends BlockTerra
 
     @Override
     public int damageDropped(int j) {
-    	if(blockID == TFCBlocks.WoodVert2.blockID){
-    		j+=16;
-    	}
         return j;
     }	
     
@@ -108,7 +109,7 @@ public class BlockLogVert extends BlockTerra
      */
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < 16; i++) {
+		for(int i = 0; i < woodNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}

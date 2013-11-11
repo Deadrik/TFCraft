@@ -3,6 +3,7 @@ package TFC.Blocks.Flora;
 import java.util.List;
 
 import TFC.TFCBlocks;
+import TFC.API.Constant.Global;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -17,10 +18,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockLogHoriz extends BlockLogVert
 {
 	int offset = 0;
+	String[] woodNames;
     public BlockLogHoriz(int par1, int off)
     {
         super(par1);
         offset = off;
+        woodNames = new String[16];
+        System.arraycopy(Global.WOOD_ALL, off, woodNames, 0, off);
     }
     
     @Override
@@ -72,9 +76,6 @@ public class BlockLogHoriz extends BlockLogVert
     @Override
     public int damageDropped(int j) 
     {
-    	if(blockID == TFCBlocks.WoodHoriz3.blockID ||blockID ==  TFCBlocks.WoodHoriz4.blockID){
-    		j+=16;
-    	}
         return (j & 7) + offset;
     }
     
@@ -85,7 +86,7 @@ public class BlockLogHoriz extends BlockLogVert
      */
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < 8; i++) 
+		for(int i = 0; i < (woodNames.length+1)/2; i++) 
 		{
 			list.add(new ItemStack(this,1,i));
 		}

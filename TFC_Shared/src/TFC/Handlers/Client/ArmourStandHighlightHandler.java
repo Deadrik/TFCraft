@@ -52,7 +52,7 @@ public class ArmourStandHighlightHandler{
 	public void DrawBlockHighlightEvent(DrawBlockHighlightEvent evt) 
 	{
 		World world = evt.player.worldObj;
-		if(evt.currentItem == null && world.getBlockId(evt.target.blockX,evt.target.blockY,evt.target.blockZ) == TFCBlocks.ArmourStand.blockID
+		if(evt.currentItem == null && TFCBlocks.isArmourStand(world.getBlockId(evt.target.blockX,evt.target.blockY,evt.target.blockZ)) 
 			&&	(Math.sqrt(evt.target.hitVec.squareDistanceTo(evt.player.posX, evt.player.posY, evt.player.posZ))) < 2.5)
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();

@@ -137,6 +137,13 @@ public class TFCBlockID
 	public static int Sapling2					= 2125;
 	public static int WoodSupportV2				= 2126;
 	public static int WoodSupportH2				= 2127;
+	public static int Barrel2					= 2128;
+	public static int ArmourStand2				= 2129;
+	public static int ToolRack2					= 2130;
+	public static int Fence2					= 2131;
+	public static int FenceGate2				= 2132;
+	public static int BasicPipe					= 2133;
+	public static int ValvePipe					= 2134;
 
 
 	static Configuration config;
@@ -254,6 +261,7 @@ public class TFCBlockID
 
 		IngotPile = TFCOptions.getIntFor(config, "block", "IngotPile", IngotPile);
 		Barrel = TFCOptions.getIntFor(config, "block", "Barrel", Barrel);
+		Barrel2 = TFCOptions.getIntFor(config, "block", "Barrel2", Barrel2);
 		Thatch = TFCOptions.getIntFor(config, "block", "Thatch", Thatch);
 		Moss = TFCOptions.getIntFor(config, "block", "Moss", Moss);
 		Flora = TFCOptions.getIntFor(config, "block", "Flora", Flora);

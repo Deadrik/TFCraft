@@ -25,7 +25,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomSapling2 extends BlockTerraContainer
 {
-	Icon[] icons = new Icon[Global.WOOD_ALL.length];
+	Icon[] icons;
 	String[] woodNames;
 	public BlockCustomSapling2(int i)
 	{
@@ -55,7 +55,6 @@ public class BlockCustomSapling2 extends BlockTerraContainer
 	@Override
 	public Icon getIcon(int i, int j)
 	{
-		System.out.println(woodNames[j]);
 		return icons[j];
 	}
 
@@ -66,13 +65,14 @@ public class BlockCustomSapling2 extends BlockTerraContainer
 		{
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/"+woodNames[i]+" Sapling");
 		}
+		
 	}
 
 	public void growTree(World world, int i, int j, int k, Random random)
 	{
 		int l = world.getBlockMetadata(i, j, k);
 		world.setBlockToAir(i, j, k);
-		Object obj = TFCBiome.getTreeGen(l, random.nextBoolean());
+		Object obj = TFCBiome.getTreeGen(l+16, random.nextBoolean());
 
 
 		if (obj!= null && !((WorldGenerator) obj).generate(world, random, i, j, k))
@@ -103,7 +103,7 @@ public class BlockCustomSapling2 extends BlockTerraContainer
 		}
 		super.updateTick(world, i, j, k, random);
 		int meta = world.getBlockMetadata(i, j, k);
-		float growSpeed = 1;
+		float growSpeed = 1.5f;
 		if(meta == 1 || meta == 11) {
 			growSpeed = 1.2f;
 		} else if(meta == 5 || meta == 0 || meta == 13) {

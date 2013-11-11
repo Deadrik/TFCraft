@@ -14,13 +14,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
+import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.IPipeConnectable;
 import TFC.API.Metal;
 import TFC.API.TFCOptions;
+import TFC.Blocks.BlockPipeBasic;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.Metal.MetalRegistry;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
@@ -418,6 +422,9 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
+			if(TFC_Time.getTotalTicks() % 60 == 0){
+				System.out.println(PlayerManagerTFC.getInstance().Players.size());
+			}
 			careForInventorySlot();
 			if(sealed)
 			{
@@ -435,8 +442,12 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					ProcessItems();                
 				}
 			}
-
-
+			
+			if(mode == 1 && liquidLevel > 0 && TFC_Time.getTotalTicks() % 2 == 0 &&
+					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj,0,xCoord,yCoord,zCoord,true)){
+				liquidLevel-=4;
+				updateGui();
+			}
 			if(liquidLevel == 0)
 			{
 				Type = 0; 

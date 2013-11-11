@@ -1,10 +1,21 @@
 package TFC.Core;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.resources.Resource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import TFC.Reference;
 import TFC.API.Util.Helper;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -18,11 +29,12 @@ public class TFC_Climate
 	private static final float[] zFactorCache = new float[30001];
 	private static final float[][] monthTempCache = new float[12][30001];
 	private static final float[][] monthTempFactorCache = new float[12][30001];
-	
+	private static int[][] insolationMap;
+
 	/**
 	 * All Temperature related code
 	 */
-	
+
 	public static void initCache()
 	{
 		for(int zCoord = 0; zCoord < getMaxZPos() + 1; ++zCoord)
@@ -31,124 +43,124 @@ public class TFC_Climate
 			float z = zCoord;
 
 			factor = (getMaxZPos()-z)/(getMaxZPos());
-			
+
 			zFactorCache[zCoord] = factor;
-			
+
 			for(int month = 0; month < 12; ++month)
 			{
 				final float MAXTEMP = 35F;
 
 				double angle = factor * (Math.PI / 2);
 				double latitudeFactor = Math.cos(angle);
-				
+
 				switch(month)
 				{
-					case 9:
-					case 11:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP -12.5*latitudeFactor- (latitudeFactor*53));
-						break;
-					}
-					case 0:
-					case 8:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP -10*latitudeFactor- (latitudeFactor*46));
-						break;
-					}
-					case 1:
-					case 7:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP -7.5*latitudeFactor- (latitudeFactor*40));
-						break;
-					}
-					case 2:
-					case 6:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP - 5*latitudeFactor- (latitudeFactor*33));
-						break;
-					}
-					case 3:
-					case 5:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP -2.5*latitudeFactor- (latitudeFactor*27)); 
-						break;
-					}
-					case 4:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP -1.5*latitudeFactor- (latitudeFactor*27));
-						break;
-					}
-					case 10:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP-15*latitudeFactor - (latitudeFactor*60));
-						break;
-					}
+				case 9:
+				case 11:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP -12.5*latitudeFactor- (latitudeFactor*53));
+					break;
 				}
-				
+				case 0:
+				case 8:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP -10*latitudeFactor- (latitudeFactor*46));
+					break;
+				}
+				case 1:
+				case 7:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP -7.5*latitudeFactor- (latitudeFactor*40));
+					break;
+				}
+				case 2:
+				case 6:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP - 5*latitudeFactor- (latitudeFactor*33));
+					break;
+				}
+				case 3:
+				case 5:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP -2.5*latitudeFactor- (latitudeFactor*27)); 
+					break;
+				}
+				case 4:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP -1.5*latitudeFactor- (latitudeFactor*27));
+					break;
+				}
+				case 10:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP-15*latitudeFactor - (latitudeFactor*60));
+					break;
+				}
+				}
+
 				float diff = (1-factor) / 6;
-				
+
 				switch(month)
 				{
-					case 11:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*4);
-						break;
-					}
-					case 0:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*3);
-						break;
-					}
-					case 1:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*2);
-						break;
-					}
-					case 2:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*1);
-						break;
-					}
-					case 3:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff);
-						break;
-					}
-					case 4:
-					{
-						monthTempFactorCache[month][zCoord] = 1F;
-						break;
-					}
-					case 5:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*1.2f);
-						break;
-					}
-					case 6:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*2.4f);
-						break;
-					}
-					case 7:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*3.6f);
-						break;
-					}
-					case 8:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*4.8f);
-						break;
-					}
-					case 9:
-					{
-						monthTempFactorCache[month][zCoord] = factor;
-						break;
-					}
-					case 10:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*5);
-						break;
-					}
+				case 11:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*4);
+					break;
+				}
+				case 0:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*3);
+					break;
+				}
+				case 1:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*2);
+					break;
+				}
+				case 2:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*1);
+					break;
+				}
+				case 3:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff);
+					break;
+				}
+				case 4:
+				{
+					monthTempFactorCache[month][zCoord] = 1F;
+					break;
+				}
+				case 5:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*1.2f);
+					break;
+				}
+				case 6:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*2.4f);
+					break;
+				}
+				case 7:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*3.6f);
+					break;
+				}
+				case 8:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*4.8f);
+					break;
+				}
+				case 9:
+				{
+					monthTempFactorCache[month][zCoord] = factor;
+					break;
+				}
+				case 10:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*5);
+					break;
+				}
 				}
 			}
 		}
@@ -158,9 +170,9 @@ public class TFC_Climate
 	{
 		if(zCoord < 0)
 			zCoord = -zCoord;
-		
+
 		if(zCoord > getMaxZPos()) zCoord = (getMaxZPos());
-		
+
 		return zFactorCache[zCoord];
 	}
 
@@ -173,7 +185,7 @@ public class TFC_Climate
 	{
 		if(manager!= null)
 		{
-			
+
 			float zMod = getZFactor(z);
 			float zTemp = (zMod * getMaxTemperature())-20;
 
@@ -285,9 +297,9 @@ public class TFC_Climate
 	{
 		if(z < 0)
 			z = -z;
-		
+
 		if(z > getMaxZPos()) z = (getMaxZPos());
-		
+
 		return monthTempCache[month][z];
 	}
 
@@ -295,9 +307,9 @@ public class TFC_Climate
 	{
 		if(z < 0)
 			z = -z;
-		
+
 		if(z > getMaxZPos()) z = (getMaxZPos());
-		
+
 		return monthTempFactorCache[month][z];
 	}
 

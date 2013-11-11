@@ -35,6 +35,7 @@ import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 import TFC.WorldGen.Biomes.BiomeGenSwampTFC;
 import TFC.WorldGen.Biomes.BiomeGenTaigaTFC;
 import TFC.WorldGen.Generators.WorldGenCustomShrub;
+import TFC.WorldGen.Generators.Trees.WorldGenAcaciaKoaTrees;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomBigTree;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomCedarTrees;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomHugeTrees;
@@ -102,7 +103,7 @@ public class TFCBiome extends BiomeGenBase
 	public static final TFCBiome Mountains = (new TFCBiome(31)).setColor(HillsColor).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F);
 	public static final TFCBiome MountainsEdge = (new TFCBiome(32)).setColor(HillsColor).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F);
 
-
+	protected static WorldGenAcaciaKoaTrees worldGenAcaciaKoaTrees;
 	protected static WorldGenCustomTallTrees worldGenAshTallTrees;
 	protected static WorldGenCustomTallTrees worldGenAspenTallTrees;
 	protected static WorldGenCustomTallTrees worldGenBirchTallTrees;
@@ -150,6 +151,7 @@ public class TFCBiome extends BiomeGenBase
 
 		super.biomeList[par1] = this;
 
+		worldGenAcaciaKoaTrees = new WorldGenAcaciaKoaTrees(false,0);
 		worldGenAshTallTrees = new WorldGenCustomTallTrees(false,7);
 		worldGenAspenTallTrees = new WorldGenCustomTallTrees(false,1);
 		worldGenBirchTallTrees = new WorldGenCustomTallTrees(false,2);
@@ -586,6 +588,10 @@ public class TFCBiome extends BiomeGenBase
 		case 15:
 		{
 			return ( (R.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : (R.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + R.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15))));
+		}
+		case 16:
+		{
+			return worldGenAcaciaKoaTrees;
 		}
 		}
 		return null;

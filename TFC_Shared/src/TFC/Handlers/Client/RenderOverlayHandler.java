@@ -17,6 +17,7 @@ import TFC.Reference;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.FoodStatsTFC;
@@ -151,7 +152,7 @@ public class RenderOverlayHandler
 			int zCoord = (int)player.posZ;
 			event.left.add(String.format("rain: %.0f, temp: %.2f, evt: %.3f", new Object[] {
 					TFC_Climate.getRainfall(xCoord, yCoord, zCoord), 
-					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord), 
+					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord),
 					TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1}));
 
 			event.left.add("Health: " + player.getHealth());

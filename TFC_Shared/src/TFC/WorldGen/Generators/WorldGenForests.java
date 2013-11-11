@@ -1,11 +1,13 @@
 package TFC.WorldGen.Generators;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumTree;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
@@ -82,10 +84,13 @@ public class WorldGenForests implements IWorldGenerator
 				numTrees = 30;
 			}
 
-			int TreeType0 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 0);
-			int	TreeType1 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
-			int	TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
+			int[] trees = getTreesForClimate(random,world,xCoord,yCoord,zCoord);
+			int TreeType0 = trees[0];//= TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 0);
+			int	TreeType1 = trees[1];//= TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
+			int	TreeType2 = trees[2];//= TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
+			
 
+			/*
 			if(TreeType0 < 0 || TreeType0 > 15) {
 				TreeType0 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
 			}
@@ -94,7 +99,7 @@ public class WorldGenForests implements IWorldGenerator
 			}
 			if(TreeType2 < 0 || TreeType2 > 15) {
 				TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
-			}
+			}*/
 
 
 			float evt = TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1;
@@ -290,6 +295,35 @@ public class WorldGenForests implements IWorldGenerator
 			}
 		}
 		return completed;
+	}
+	
+	public int[] getTreesForClimate(Random random, World world, int xCoord, int yCoord, int zCoord){
+		ArrayList list = new ArrayList<EnumTree>();
+		float evt = TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1;
+		float rainfall = TFC_Climate.getRainfall(xCoord, 0, zCoord);
+		if(getNearWater(world, xCoord, yCoord, zCoord))
+		{
+			rainfall*=2;
+			evt /= 2;
+		}
+		float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
+		float temperatureAvg = TFC_Climate.getBioTemperature(xCoord, zCoord);
+		for(int i = 0; i < EnumTree.values().length;i++){
+			if(EnumTree.values()[i].maxRain > rainfall && EnumTree.values()[i].minRain < rainfall){
+				if(EnumTree.values()[i].maxEVT > evt && EnumTree.values()[i].minEVT < evt){
+					if(EnumTree.values()[i].maxTemp > temperatureAvg && EnumTree.values()[i].minTemp < temperatureAvg){
+						list.add(EnumTree.values()[i]);
+					}
+				}
+			}
+		}
+		int[] treeTypes = new int[]{0,0,0};
+		for(int i = 0; i < 3 && list.size() > 0; i++){
+			int n = random.nextInt(list.size());
+			treeTypes[i] = n;
+			list.remove(n);
+		}
+		return treeTypes;
 	}
 
 	public boolean getNearWater(World world, int x, int y, int z)

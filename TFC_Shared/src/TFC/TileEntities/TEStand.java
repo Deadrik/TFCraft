@@ -53,7 +53,7 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	}
 
 	public void destroy(){
-		if(!isTop)
+		if(!isTop && entity!= null)
 			entity.setDead();
 	}
 

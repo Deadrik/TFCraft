@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
+import TFC.API.IMultipleBlock;
 import TFC.Blocks.Vanilla.BlockCustomFenceGate;
 import TFC.TileEntities.TileEntityFenceGate;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -25,7 +26,7 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 	public boolean renderWorldBlock(IBlockAccess world, int par2, int par3, int par4,
 			Block block, int modelId, RenderBlocks renderer)
 	{
-		BlockCustomFenceGate par1BlockFenceGate = (BlockCustomFenceGate)block;
+		Block par1BlockFenceGate = ((IMultipleBlock)block).getBlockTypeForRender();
 		boolean flag = true;
 		int l = ((TileEntityFenceGate)renderer.blockAccess.getBlockTileEntity(par2, par3, par4)).getDirection();
 		boolean flag1 = ((TileEntityFenceGate)renderer.blockAccess.getBlockTileEntity(par2, par3, par4)).getOpen();
@@ -241,7 +242,7 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public void renderInventoryBlock(Block par1BlockFence, int metadata, int modelID,
+	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
 
 		int l = 1;
@@ -266,11 +267,11 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 			f7 = 0.4375F;
 			f9 = 0.5625F;
 			renderer.setRenderBounds((double)f6, (double)f4, (double)f7, (double)f8, (double)f5, (double)f9);
-			renderInvBlock2(TFCBlocks.FenceGate, metadata, renderer);
+			renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 			f6 = 0.875F;
 			f8 = 1.0F;
 			renderer.setRenderBounds((double)f6, (double)f4, (double)f7, (double)f8, (double)f5, (double)f9);
-			renderInvBlock2(TFCBlocks.FenceGate, metadata, renderer);
+			renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 		}
 		else
 		{
@@ -280,11 +281,11 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 			f7 = 0.0F;
 			f9 = 0.125F;
 			renderer.setRenderBounds((double)f6, (double)f4, (double)f7, (double)f8, (double)f5, (double)f9);
-			renderInvBlock2(TFCBlocks.FenceGate, metadata, renderer);
+			renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 			f7 = 0.875F;
 			f9 = 1.0F;
 			renderer.setRenderBounds((double)f6, (double)f4, (double)f7, (double)f8, (double)f5, (double)f9);
-			renderInvBlock2(TFCBlocks.FenceGate, metadata, renderer);
+			renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 			renderer.uvRotateTop = 0;
 		}
 
@@ -296,23 +297,23 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 		f7 = 0.375F;
 		f9 = 0.5F;
 		renderer.setRenderBounds((double)f6, (double)f, (double)f7, (double)f8, (double)f3, (double)f9);
-		renderInvBlock2(TFCBlocks.FenceGate, metadata, renderer);
+		renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 		f7 = 0.5F;
 		f9 = 0.625F;
 		renderer.setRenderBounds((double)f6, (double)f, (double)f7, (double)f8, (double)f3, (double)f9);
-		renderInvBlock2(TFCBlocks.FenceGate, metadata, renderer);
+		renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 		f7 = 0.625F;
 		f9 = 0.875F;
 		renderer.setRenderBounds((double)f6, (double)f, (double)f7, (double)f8, (double)f1, (double)f9);
-		renderInvBlock2(TFCBlocks.FenceGate, metadata, renderer);
+		renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 		renderer.setRenderBounds((double)f6, (double)f2, (double)f7, (double)f8, (double)f3, (double)f9);
-		renderInvBlock2(TFCBlocks.FenceGate, metadata, renderer);
+		renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 		f7 = 0.125F;
 		f9 = 0.375F;
 		renderer.setRenderBounds((double)f6, (double)f, (double)f7, (double)f8, (double)f1, (double)f9);
-		renderInvBlock2(TFCBlocks.FenceGate, metadata, renderer);
+		renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 		renderer.setRenderBounds((double)f6, (double)f2, (double)f7, (double)f8, (double)f3, (double)f9);
-		renderInvBlock2(TFCBlocks.FenceGate, metadata, renderer);
+		renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 
 
 		renderer.renderAllFaces = false;

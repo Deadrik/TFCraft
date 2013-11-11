@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+import TFC.API.IMultipleBlock;
 import TFC.Blocks.Devices.BlockToolRack;
 import TFC.TileEntities.TileEntityToolRack;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -15,7 +16,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderblocks) 
 	{
-		renderblocks.overrideBlockTexture = ((BlockToolRack)block).getBlockTexture(metadata);
+		renderblocks.overrideBlockTexture = ((IMultipleBlock)block).getBlockTypeForRender().getIcon(0, metadata);;
 
 		renderblocks.setRenderBounds(0.3F, 0.3, 0.95F, 1.7F, 0.45F, 1.1F);
 		renderInvBlock(block,metadata,renderblocks);
@@ -35,7 +36,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 		int dir = blockAccess.getBlockMetadata(i, j, k);
 		if(te != null)
 		{
-			renderblocks.overrideBlockTexture = ((BlockToolRack)block).getBlockTexture(te.woodType);
+			renderblocks.overrideBlockTexture = ((IMultipleBlock)block).getBlockTypeForRender().getIcon(0, te.woodType);
 			double minX = 0;
 			double maxX = 0.5;
 			double minZ = 0;

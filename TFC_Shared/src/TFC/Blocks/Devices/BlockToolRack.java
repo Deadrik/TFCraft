@@ -3,6 +3,7 @@ package TFC.Blocks.Devices;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,6 +23,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.IMultipleBlock;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Items.Tools.ItemProPick;
 import TFC.Items.Tools.ItemWeapon;
@@ -29,12 +32,15 @@ import TFC.TileEntities.TileEntityToolRack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockToolRack extends BlockTerraContainer
+public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 {
+	String[] woodNames;
 	public BlockToolRack(int par1)
 	{
 		super(par1, Material.wood);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
+		woodNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0,16);
 	}
 
 	@Override
@@ -63,7 +69,7 @@ public class BlockToolRack extends BlockTerraContainer
 
 	public Icon getBlockTexture(int woodType)
 	{
-		return TFCBlocks.WoodSupportH.getIcon(0, woodType);
+		return getBlockTypeForRender().getIcon(0, woodType);
 	}
 	@Override
 	public int getRenderType()
@@ -372,7 +378,7 @@ public class BlockToolRack extends BlockTerraContainer
 	 */
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
-		for(int i = 0; i < 16; i++) {
+		for(int i = 0; i < woodNames.length; i++) {
 			par3List.add(new ItemStack(par1, 1, i));
 		}
 	}
@@ -380,18 +386,23 @@ public class BlockToolRack extends BlockTerraContainer
 	@Override
 	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 	{
-		return TFCBlocks.WoodSupportH.getBlockTexture(par1IBlockAccess, par2, par3, par4, par5);
+		return getBlockTypeForRender().getBlockTexture(par1IBlockAccess, par2, par3, par4, par5);
 	}
 
 	@Override
 	public Icon getIcon(int par1, int par2)
 	{
-		return TFCBlocks.WoodSupportH.getIcon(par1, par2);
+		return getBlockTypeForRender().getIcon(par1, par2);
 	}
 
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
 	{
 		//Empty On Purpose
+	}
+	
+	@Override
+	public Block getBlockTypeForRender() {
+		return TFCBlocks.WoodSupportH;
 	}
 }

@@ -6,6 +6,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import TFC.Reference;
 import TFC.TFCBlocks;
+import TFC.API.IMultipleBlock;
+import TFC.API.Constant.Global;
 import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityFenceGate;
 import net.minecraft.block.Block;
@@ -24,15 +26,16 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityProvider{
+public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityProvider, IMultipleBlock{
 
 	
-	String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-    Icon[] icons = new Icon[16];
+	String[] woodNames;
+    Icon[] icons;
 	public BlockCustomFenceGate(int par1) {
 		super(par1);
-		// TODO Auto-generated constructor stub
+		woodNames = new String[16];
+        System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
+        icons = new Icon[woodNames.length];
 	}
 	
 	@Override
@@ -57,7 +60,7 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
     {
 		for(int i = 0; i < 16; i++)
 		{
-			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/" + WoodNames[i] + " Plank");
+			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/" + woodNames[i] + " Plank");
 		}
     }
 	
@@ -135,5 +138,10 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
 		return new TileEntityFenceGate();
+	}
+
+	@Override
+	public Block getBlockTypeForRender() {
+		return TFCBlocks.FenceGate;
 	}
 }

@@ -32,9 +32,6 @@ public class BlockPlanks extends BlockTerra
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
-		if(blockID == TFCBlockID.Planks2){
-			System.arraycopy(Global.WOOD_ALL, 16, woodNames, 0, Global.WOOD_ALL.length-16);
-		}
 		icons = new Icon[woodNames.length];
 	}
 
@@ -61,7 +58,7 @@ public class BlockPlanks extends BlockTerra
 	{
 		if(j<icons.length)
 		return icons[j];
-		return icons[0];
+		return TFCBlocks.Planks2.getIcon(i, j-16);
 	}
 	
 	@Override

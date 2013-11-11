@@ -15,46 +15,74 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.Constant.Global;
+import TFC.API.Constant.TFCBlockID;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockWoodSupport extends BlockTerra
 {
-	Icon[] icons = new Icon[Global.WOOD_ALL.length];
+	String[] woodNames;
+	Icon[] icons;
 	public BlockWoodSupport(int i, Material material) 
 	{
 		super(i, Material.wood);
 		this.setCreativeTab(CreativeTabs.tabBlock);
+		woodNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
+		icons = new Icon[woodNames.length];
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
 	{
-		for(int i = 0; i < Global.WOOD_ALL.length; i++) {
+		for(int i = 0; i < woodNames.length; i++) {
 			par3List.add(new ItemStack(this, 1, i));
 		}
 	}
 
-	public static Boolean getSupportInRange(World world, int x, int y, int z, int range, int supportID)
+	public static Boolean getSupportInRange(World world, int x, int y, int z, int range, boolean isVerticalSupport)
 	{
-		for(int i = -range; i < range; i++)
-		{
-			if(world.getBlockId(x+i, y, z) == supportID)
+		if(isVerticalSupport){
+			for(int i = -range; i < range; i++)
 			{
-				return true;
+				if(TFCBlocks.isIdVSupport(world.getBlockId(x+i, y, z)))
+				{
+					return true;
+				}
+				if(TFCBlocks.isIdVSupport(world.getBlockId(x-i, y, z)))
+				{
+					return true;
+				}
+				if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z+i)))
+				{
+					return true;
+				}
+				if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z-i)))
+				{
+					return true;
+				}
 			}
-			if(world.getBlockId(x-i, y, z) == supportID)
+		}
+		else{
+			for(int i = -range; i < range; i++)
 			{
-				return true;
-			}
-			if(world.getBlockId(x, y, z+i) == supportID)
-			{
-				return true;
-			}
-			if(world.getBlockId(x, y, z-i) == supportID)
-			{
-				return true;
+				if(TFCBlocks.isIdHSupport(world.getBlockId(x+i, y, z)))
+				{
+					return true;
+				}
+				if(TFCBlocks.isIdHSupport(world.getBlockId(x-i, y, z)))
+				{
+					return true;
+				}
+				if(TFCBlocks.isIdHSupport(world.getBlockId(x, y, z+i)))
+				{
+					return true;
+				}
+				if(TFCBlocks.isIdHSupport(world.getBlockId(x, y, z-i)))
+				{
+					return true;
+				}
 			}
 		}
 		return false;
@@ -68,19 +96,19 @@ public class BlockWoodSupport extends BlockTerra
 
 	public static int isNextToSupport(World world, int x, int y, int z)
 	{
-		if(world.getBlockId(x+1, y, z) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(x+1, y, z) == TFCBlocks.WoodSupportH.blockID)
+		if(TFCBlocks.isIdVSupport(world.getBlockId(x+1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x+1, y, z)))
 		{
 			return 5;
 		}
-		if(world.getBlockId(x-1, y, z) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(x-1, y, z) == TFCBlocks.WoodSupportH.blockID)
+		if(TFCBlocks.isIdVSupport(world.getBlockId(x-1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x-1, y, z)))
 		{
 			return 4;
 		}
-		if(world.getBlockId(x, y, z+1) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(x, y, z+1) == TFCBlocks.WoodSupportH.blockID)
+		if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z+1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z+1)))
 		{
 			return 3;
 		}
-		if(world.getBlockId(x, y, z-1) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(x, y, z-1) == TFCBlocks.WoodSupportH.blockID)
+		if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z-1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z-1)))
 		{
 			return 2;
 		}
@@ -96,7 +124,7 @@ public class BlockWoodSupport extends BlockTerra
 				for(int z = -6; z < 4; z++)
 				{
 
-					if(world.getBlockId(i+x, j+y, k+z) == TFCBlocks.WoodSupportV.blockID)
+					if(TFCBlocks.isIdVSupport(world.getBlockId(i+x, j+y, k+z)))
 					{
 						return true;
 					}
@@ -121,20 +149,17 @@ public class BlockWoodSupport extends BlockTerra
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		for(int i = 0; i < Global.WOOD_ALL.length; i++)
+		for(int i = 0; i < woodNames.length; i++)
 		{
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/WoodSheet/WoodSheet"+i);
 		}
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		int hSupportID = TFCBlocks.WoodSupportH.blockID;
-		int vSupportID = TFCBlocks.WoodSupportV.blockID;
-
-		Boolean isHorizontal = world.getBlockId(i, j, k) == hSupportID;
-		Boolean isVertical = world.getBlockId(i, j, k) == vSupportID;
+		Boolean isHorizontal = TFCBlocks.isIdHSupport(world.getBlockId(x, y, z));
+		Boolean isVertical = TFCBlocks.isIdVSupport(world.getBlockId(x, y, z));
 
 		double minX = 0.25; double minY = 0.0; double minZ = 0.25;
 		double maxX = 0.75; double maxY = 0.75; double maxZ = 0.75;
@@ -144,23 +169,23 @@ public class BlockWoodSupport extends BlockTerra
 		{
 			minY = 0.5;
 			maxY = 1;
-			if(world.getBlockId(i+1, j, k) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i+1, j, k) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x+1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x+1, y, z)))
 			{
 				maxX = 1;
 			}
-			if(world.getBlockId(i-1, j, k) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i-1, j, k) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x-1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x-1, y, z)))
 			{
 				minX = 0;
 			}
-			if(world.getBlockId(i, j, k+1) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i, j, k+1) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z+1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z+1)))
 			{
 				maxZ = 1;
 			}
-			if(world.getBlockId(i, j, k-1) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i, j, k-1) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z-1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z-1)))
 			{
 				minZ = 0;
 			}
-			if(world.getBlockId(i, j-1, k) == TFCBlocks.WoodSupportV.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y-1, z)))
 			{
 				minY = 0;
 			}
@@ -169,31 +194,31 @@ public class BlockWoodSupport extends BlockTerra
 		{
 			minY = 0;
 			maxY = 1;
-			if(world.getBlockId(i+1, j, k) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i+1, j, k) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x+1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x+1, y, z)))
 			{
 				maxX = 1;
 			}
-			if(world.getBlockId(i-1, j, k) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i-1, j, k) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x-1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x-1, y, z)))
 			{
 				minX = 0;
 			}
-			if(world.getBlockId(i, j, k+1) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i, j, k+1) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z+1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z+1)))
 			{
 				maxZ = 1;
 			}
-			if(world.getBlockId(i, j, k-1) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i, j, k-1) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z-1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z-1)))
 			{
 				minZ = 0;
 			}
 		}
 
-		return AxisAlignedBB.getBoundingBox(i + minX, j + minY, k + minZ, i + maxX, j + maxY, k + maxZ);
+		return AxisAlignedBB.getBoundingBox(x + minX, y + minY, z + minZ, x + maxX, y + maxY, z + maxZ);
 	}
 
 	@Override
 	public int getRenderType()
 	{
-		if(this.blockID == TFCBlocks.WoodSupportV.blockID) {
+		if(TFCBlocks.isIdVSupport(blockID)) {
 			return TFCBlocks.woodSupportRenderIdV;
 		} else {
 			return TFCBlocks.woodSupportRenderIdH;
@@ -201,15 +226,12 @@ public class BlockWoodSupport extends BlockTerra
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		int hSupportID = TFCBlocks.WoodSupportH.blockID;
-		int vSupportID = TFCBlocks.WoodSupportV.blockID;
+		Boolean isHorizontal = TFCBlocks.isIdHSupport(world.getBlockId(x, y, z));
+		Boolean isVertical = TFCBlocks.isIdVSupport(world.getBlockId(x, y, z));
 
-		Boolean isHorizontal = world.getBlockId(i, j, k) == hSupportID;
-		Boolean isVertical = world.getBlockId(i, j, k) == vSupportID;
-
-		double minX = 0.25; double minY = 0.25; double minZ = 0.25;
+		double minX = 0.25; double minY = 0.0; double minZ = 0.25;
 		double maxX = 0.75; double maxY = 0.75; double maxZ = 0.75;
 
 
@@ -217,23 +239,23 @@ public class BlockWoodSupport extends BlockTerra
 		{
 			minY = 0.5;
 			maxY = 1;
-			if(world.getBlockId(i+1, j, k) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i+1, j, k) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x+1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x+1, y, z)))
 			{
 				maxX = 1;
 			}
-			if(world.getBlockId(i-1, j, k) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i-1, j, k) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x-1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x-1, y, z)))
 			{
 				minX = 0;
 			}
-			if(world.getBlockId(i, j, k+1) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i, j, k+1) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z+1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z+1)))
 			{
 				maxZ = 1;
 			}
-			if(world.getBlockId(i, j, k-1) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i, j, k-1) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z-1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z-1)))
 			{
 				minZ = 0;
 			}
-			if(world.getBlockId(i, j-1, k) == TFCBlocks.WoodSupportV.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y-1, z)))
 			{
 				minY = 0;
 			}
@@ -242,25 +264,25 @@ public class BlockWoodSupport extends BlockTerra
 		{
 			minY = 0;
 			maxY = 1;
-			if(world.getBlockId(i+1, j, k) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i+1, j, k) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x+1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x+1, y, z)))
 			{
 				maxX = 1;
 			}
-			if(world.getBlockId(i-1, j, k) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i-1, j, k) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x-1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x-1, y, z)))
 			{
 				minX = 0;
 			}
-			if(world.getBlockId(i, j, k+1) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i, j, k+1) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z+1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z+1)))
 			{
 				maxZ = 1;
 			}
-			if(world.getBlockId(i, j, k-1) == TFCBlocks.WoodSupportV.blockID || world.getBlockId(i, j, k-1) == TFCBlocks.WoodSupportH.blockID)
+			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z-1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z-1)))
 			{
 				minZ = 0;
 			}
 		}
 
-		return AxisAlignedBB.getBoundingBox(i + minX, j + minY, k + minZ, i + maxX, j + maxY, k + maxZ);
+		return AxisAlignedBB.getBoundingBox(x + minX, y + minY, z + minZ, x + maxX, y + maxY, z + maxZ);
 	}
 
 	@Override
@@ -301,18 +323,15 @@ public class BlockWoodSupport extends BlockTerra
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
 
-		int hSupportID = TFCBlocks.WoodSupportH.blockID;
-		int vSupportID = TFCBlocks.WoodSupportV.blockID;
-
-		Boolean isHorizontal = world.getBlockId(i, j, k) == hSupportID;
-		Boolean isVertical = world.getBlockId(i, j, k) == vSupportID;
+		Boolean isHorizontal = TFCBlocks.isIdHSupport(world.getBlockId(i, j, k));
+		Boolean isVertical = TFCBlocks.isIdVSupport(world.getBlockId(i, j, k));
 
 		int meta = world.getBlockMetadata(i, j, k);
 
 		if(isVertical)//Vertical Beam
 		{
 			//if the block directly beneath the support is not solid or a support then break the support
-			if(!world.isBlockOpaqueCube(i, j-1, k) && world.getBlockId(i, j-1, k) != vSupportID)
+			if(!world.isBlockOpaqueCube(i, j-1, k) && !TFCBlocks.isIdVSupport(world.getBlockId(i, j-1, k)))
 			{	
 				harvestBlock(world, null, i, j, k,  meta);
 				world.setBlock(i, j, k, 0);
@@ -320,8 +339,8 @@ public class BlockWoodSupport extends BlockTerra
 		}
 		else if(isHorizontal)//Horizontal Beam
 		{
-			Boolean b1 = !getSupportInRange(world,i,j,k,5,TFCBlocks.WoodSupportV.blockID);
-			Boolean b2 = !getSupportInRange(world,i,j-1,k,5,TFCBlocks.WoodSupportV.blockID);
+			Boolean b1 = !getSupportInRange(world,i,j,k,5,true);
+			Boolean b2 = !getSupportInRange(world,i,j-1,k,5,true);
 			Boolean support = isNextToSupport(world,i,j,k) == 0;
 			//if the block on any side is not a support then break
 			if(support  || b2 || b1 && b2)
@@ -338,17 +357,17 @@ public class BlockWoodSupport extends BlockTerra
 		if(!world.isRemote && canPlaceBlockAt(world, x, y, z))
 		{
 			int id0 = world.getBlockId(x, y-1, z);
-			Boolean vSupport = id0 == TFCBlocks.WoodSupportV.blockID;
+			Boolean vSupport = TFCBlocks.isIdVSupport(id0);
 			Boolean b1 = world.isBlockOpaqueCube(x, y-2, z);
 			//bottom
-			if(blockID != TFCBlocks.WoodSupportV.blockID)
+			if(!TFCBlocks.isIdVSupport(blockID))
 			{
 				if(side == 0 && world.getBlockId(x, y-1, z) == 0 /*&& world.isBlockOpaqueCube(x, y, z)*/)
 				{
 					boolean nextToSupport = isNextToSupport(world,x,y-1,z) != 0;
-					boolean SupportRange1 = getSupportInRange(world, x,y-1,z,5,TFCBlocks.WoodSupportV.blockID);
-					boolean SupportRange2 = getSupportInRange(world, x,y-2,z,5,TFCBlocks.WoodSupportV.blockID);
-					if(nextToSupport && (SupportRange1 || SupportRange2) || world.getBlockId(x, y-2, z) == TFCBlocks.WoodSupportV.blockID)
+					boolean SupportRange1 = getSupportInRange(world, x,y-1,z,5,true);
+					boolean SupportRange2 = getSupportInRange(world, x,y-2,z,5,true);
+					if(nextToSupport && (SupportRange1 || SupportRange2) || TFCBlocks.isIdVSupport(world.getBlockId(x, y-2, z)))
 					{
 						return true;
 					}
@@ -356,9 +375,9 @@ public class BlockWoodSupport extends BlockTerra
 				else if(side == 2 && world.getBlockId(x, y, z-1) == 0 /*&& world.isBlockOpaqueCube(x, y+1, z-1)*/)
 				{
 					if(isNextToSupport(world,x,y,z-1) != 0 && 
-							(getSupportInRange(world, x,y,z-1,5,TFCBlocks.WoodSupportV.blockID) || 
-									getSupportInRange(world, x,y-1,z-1,5,TFCBlocks.WoodSupportV.blockID)) || 
-									world.getBlockId(x, y-1, z-1) == TFCBlocks.WoodSupportV.blockID)
+							(getSupportInRange(world, x,y,z-1,5,true) || 
+									getSupportInRange(world, x,y-1,z-1,5,true)) || 
+									TFCBlocks.isIdVSupport(world.getBlockId(x, y-1, z-1)))
 					{
 						return true;
 					}
@@ -366,9 +385,9 @@ public class BlockWoodSupport extends BlockTerra
 				else if(side == 3 && world.getBlockId(x, y, z+1) == 0 /*&& world.isBlockOpaqueCube(x, y+1, z+1)*/)
 				{
 					if(isNextToSupport(world,x,y,z+1) != 0 && 
-							(getSupportInRange(world, x,y,z+1,5,TFCBlocks.WoodSupportV.blockID) || 
-									getSupportInRange(world, x,y-1,z+1,5,TFCBlocks.WoodSupportV.blockID)) || 
-									world.getBlockId(x, y-1, z+1) == TFCBlocks.WoodSupportV.blockID)
+							(getSupportInRange(world, x,y,z+1,5,true) || 
+									getSupportInRange(world, x,y-1,z+1,5,true)) || 
+									TFCBlocks.isIdVSupport(world.getBlockId(x, y-1, z+1)))
 					{
 						return true;
 					}
@@ -376,9 +395,9 @@ public class BlockWoodSupport extends BlockTerra
 				else if(side == 4 && world.getBlockId(x-1, y, z) == 0 /*&& world.isBlockOpaqueCube(x-1, y+1, z)*/)
 				{
 					if(isNextToSupport(world,x-1,y,z) != 0  && 
-							(getSupportInRange(world, x-1,y,z,5,TFCBlocks.WoodSupportV.blockID) || 
-									getSupportInRange(world, x-1,y-1,z,5,TFCBlocks.WoodSupportV.blockID)) || 
-									world.getBlockId(x-1, y-1, z) == TFCBlocks.WoodSupportV.blockID)
+							(getSupportInRange(world, x-1,y,z,5,true) || 
+									getSupportInRange(world, x-1,y-1,z,5,true)) || 
+									TFCBlocks.isIdVSupport(world.getBlockId(x-1, y-1, z)))
 					{
 						return true;
 					}
@@ -386,15 +405,15 @@ public class BlockWoodSupport extends BlockTerra
 				else if(side == 5 && world.getBlockId(x+1, y, z) == 0 /*&& world.isBlockOpaqueCube(x+1, y+1, z)*/)
 				{
 					if(isNextToSupport(world,x+1,y,z) != 0 && 
-							(getSupportInRange(world, x+1,y,z,5,TFCBlocks.WoodSupportV.blockID) || 
-									getSupportInRange(world, x+1,y-1,z,5,TFCBlocks.WoodSupportV.blockID)) || 
-									world.getBlockId(x+1, y-1, z) == TFCBlocks.WoodSupportV.blockID)
+							(getSupportInRange(world, x+1,y,z,5,true) || 
+									getSupportInRange(world, x+1,y-1,z,5,true)) || 
+									TFCBlocks.isIdVSupport(world.getBlockId(x+1, y-1, z)))
 					{
 						return true;
 					}
 				}
 			}
-			else if(blockID == TFCBlocks.WoodSupportV.blockID)
+			else if(TFCBlocks.isIdVSupport(blockID))
 			{
 
 				//if the block beneath is opaque or is another support
@@ -408,22 +427,22 @@ public class BlockWoodSupport extends BlockTerra
 				{
 					return true;
 				}
-				else if(side == 2 && (world.getBlockId(x, y-1, z-1) == TFCBlocks.WoodSupportV.blockID || world.isBlockOpaqueCube(x, y-1, z-1)) &&
+				else if(side == 2 && (TFCBlocks.isIdVSupport(world.getBlockId(x, y-1, z-1)) || world.isBlockOpaqueCube(x, y-1, z-1)) &&
 						world.getBlockId(x, y, z-1) == 0)
 				{
 					return true;
 				}
-				else if(side == 3 && (world.getBlockId(x, y-1, z+1) == TFCBlocks.WoodSupportV.blockID || world.isBlockOpaqueCube(x, y-1, z+1)) &&
+				else if(side == 3 && (TFCBlocks.isIdVSupport(world.getBlockId(x, y-1, z+1)) || world.isBlockOpaqueCube(x, y-1, z+1)) &&
 						world.getBlockId(x, y, z+1) == 0)
 				{
 					return true;
 				}
-				else if(side == 4 && (world.getBlockId(x-1, y-1, z) == TFCBlocks.WoodSupportV.blockID || world.isBlockOpaqueCube(x-1, y-1, z)) &&
+				else if(side == 4 && (TFCBlocks.isIdVSupport(world.getBlockId(x-1, y-1, z)) || world.isBlockOpaqueCube(x-1, y-1, z)) &&
 						world.getBlockId(x-1, y, z) == 0)
 				{
 					return true;
 				}
-				else if(side == 5 && (world.getBlockId(x+1, y-1, z) == TFCBlocks.WoodSupportV.blockID || world.isBlockOpaqueCube(x+1, y-1, z)) &&
+				else if(side == 5 && (TFCBlocks.isIdVSupport(world.getBlockId(x+1, y-1, z)) || world.isBlockOpaqueCube(x+1, y-1, z)) &&
 						world.getBlockId(x+1, y, z) == 0)
 				{
 					return true;

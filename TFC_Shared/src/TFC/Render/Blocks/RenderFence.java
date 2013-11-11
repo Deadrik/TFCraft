@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
+import TFC.API.IMultipleBlock;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderFence  implements ISimpleBlockRenderingHandler 
@@ -21,7 +22,7 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 	public boolean renderWorldBlock(IBlockAccess world, int par2, int par3, int par4,
 			Block block, int modelId, RenderBlocks renderblocks) 
 	{
-		BlockFence par1BlockFence = (BlockFence)block;
+		BlockFence par1BlockFence = (BlockFence)(((IMultipleBlock)block).getBlockTypeForRender());
 		boolean flag = false;
 		float f = 0.375F;
 		float f1 = 0.625F;
@@ -112,18 +113,18 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public void renderInventoryBlock(Block par1BlockFence, int metadata, int modelID,
+	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
 
 		float f = 0.375F;
 		float f1 = 0.625F;
 		renderer.setRenderBounds((double)f, 0.0D, (double)f, (double)f1, 1.0D, (double)f1);
 		//rotate(renderer, 1);
-		renderInvBlock(TFCBlocks.Fence, metadata, renderer);
+		renderInvBlock(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 
 		renderer.setRenderBounds((double)f, 0.0D, (double)f, (double)f1, 1.0D, (double)f1);
 		//rotate(renderer, 1);
-		renderInvBlock2(TFCBlocks.Fence, metadata, renderer);
+		renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 
 		f = 0.4375F;
 		f1 = 0.5625F;
@@ -135,19 +136,19 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 		float f7 = 1.0F;
 
 		renderer.setRenderBounds((double)f-0.001, (double)f2, (double)f6, (double)f1-0.001, (double)f3, (double)f7/2);
-		renderInvBlock(TFCBlocks.Fence, metadata, renderer);
+		renderInvBlock(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 
 		renderer.setRenderBounds((double)f1+0.001, (double)f2, (double)f7/2, (double)f+0.001, (double)f3, (double)f6);
-		renderInvBlock(TFCBlocks.Fence, metadata, renderer);
+		renderInvBlock(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 
 		f2 = 0.375F;
 		f3 = 0.5625F;
 
 		renderer.setRenderBounds((double)f-0.001, (double)f2, (double)f6, (double)f1-0.001, (double)f3, (double)f7/2);
-		renderInvBlock(TFCBlocks.Fence, metadata, renderer);
+		renderInvBlock(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 
 		renderer.setRenderBounds((double)f1+0.001, (double)f2, (double)f7/2, (double)f+0.001, (double)f3, (double)f6);
-		renderInvBlock(TFCBlocks.Fence, metadata, renderer);
+		renderInvBlock(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 	}
 	@Override
 	public boolean shouldRender3DInInventory() {

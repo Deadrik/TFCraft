@@ -17,28 +17,27 @@ public class ItemSapling2 extends ItemTerraBlock
 		setHasSubtypes(true);
 		MetaNames = Global.WOOD_ALL;
 	}
-	@Override
-	public Icon getIconFromDamage(int par1)
-	{
-		return Icons[par1];
-	}
+
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
-		if(MetaNames != null) {
-			return StringUtil.localize("tile.sapling." + Global.WOOD_ALL[itemstack.getItemDamage()+16].replace(" ", ""));
+		if(itemstack.getItemDamage()+16 < Global.WOOD_ALL.length){
+		String s = StringUtil.localize("tile.sapling." + Global.WOOD_ALL[itemstack.getItemDamage()+16]).toString();
+		return s;
 		}
-		return super.getItemDisplayName(itemstack);
+		return "Unknown";
 	}
-	public static Icon[] Icons = new Icon[Global.WOOD_ALL.length];
+	
+	@Override
+	public int getMetadata(int i)
+	{
+		return i;
+	}
 
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		for(int i = 0; i < Global.WOOD_ALL.length; i++)
-		{
-			Icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + Global.WOOD_ALL[i] + " Sapling");
-		}
+
 	}
 	@Override
 	public EnumWeight getWeight(ItemStack is) {

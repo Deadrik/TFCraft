@@ -27,7 +27,8 @@ public class ItemBarrels extends ItemTerraBlock
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		this.MetaNames = Global.WOOD_ALL.clone();
+		this.MetaNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, MetaNames, 0, 16);
 	}
 
 	@Override
@@ -59,7 +60,7 @@ public class ItemBarrels extends ItemTerraBlock
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < Global.WOOD_ALL.length; i++) {
+		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}

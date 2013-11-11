@@ -27,6 +27,9 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.IMultipleBlock;
+import TFC.API.IPipeConnectable;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Textures;
 import TFC.Core.Metal.MetalPair;
@@ -37,15 +40,18 @@ import TFC.TileEntities.TileEntityBarrel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBarrel extends BlockTerraContainer
+public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, IPipeConnectable
 {
 	private final Random random = new Random();
-
+	String[] woodNames;
+	
 	public BlockBarrel(int par1)
 	{
 		super(par1, Material.wood);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 1, 0.9f);
+		woodNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0,16);
 	}
 
 	@Override
@@ -71,7 +77,7 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
 	{
-		for(int i = 0; i < 16; i++) {
+		for(int i = 0; i < woodNames.length; i++) {
 			par3List.add(new ItemStack(this, 1, i));
 		}
 	}
@@ -147,7 +153,7 @@ public class BlockBarrel extends BlockTerraContainer
 	{
 		int j = 0;
 		String s = this.getUnlocalizedName();
-		for(int i = 0; i < ((ItemBarrels)(TFCItems.Barrel)).MetaNames.length;i++){
+		for(int i = 0; i < woodNames.length;i++){
 			j = s.substring(s.indexOf("l",s.length()))==((ItemBarrels)(TFCItems.Barrel)).MetaNames[i]?i:0;
 		}
 
@@ -347,5 +353,46 @@ public class BlockBarrel extends BlockTerraContainer
 	{
 		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
 		return true;
+	}
+
+	@Override
+	public Block getBlockTypeForRender() {
+		return TFCBlocks.Planks;
+	}
+
+	@Override
+	public boolean canConnectTo(IBlockAccess world, int desiredFace, int x,
+			int y, int z) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean feed(IBlockAccess world, int fedFace, int x, int y, int z,boolean isLiquid) {
+		TileEntityBarrel te = ((TileEntityBarrel)(world.getBlockTileEntity(x, y, z)));
+		if(te != null && te.liquidLevel < 256){
+		te.liquidLevel+=4;
+		te.Type = 1;
+		te.updateGui();
+		return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hasToBeOnlyOption() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getSide(IBlockAccess world, int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return -1;
+	}
+
+	@Override
+	public int getFinalBit(IBlockAccess world, int x, int y, int z) {
+		return 0;
 	}
 }

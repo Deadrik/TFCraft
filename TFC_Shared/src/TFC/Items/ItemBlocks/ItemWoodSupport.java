@@ -11,11 +11,19 @@ public class ItemWoodSupport extends ItemTerraBlock
 		super(i);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		this.MetaNames = Global.WOOD_ALL;
+		this.MetaNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, MetaNames, 0, 16);
 	}
 
 	@Override
 	public EnumSize getSize(ItemStack is) {
 		return EnumSize.MEDIUM;
+	}
+	
+	@Override
+	public String getItemDisplayName(ItemStack itemstack) 
+	{
+		String s = new StringBuilder().append((super.getItemDisplayName(itemstack)).substring(0, 18)).append(".").append(Global.WOOD_ALL[itemstack.getItemDamage()]).toString();
+		return s;
 	}
 }

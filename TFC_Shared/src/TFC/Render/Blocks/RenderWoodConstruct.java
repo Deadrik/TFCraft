@@ -43,7 +43,6 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 		{
 			breaking = true;
 		}
-
 		for(int index = 0; index < dd; index++)
 		{
 			if(te.data.get(index))
@@ -61,7 +60,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 				}
 				renderer.uvRotateTop = 3;
 				renderer.uvRotateBottom = 3;
-				renderer.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
+				renderer.setRenderBounds(minX-0.001d, minY-0.001d, minZ-0.001d, maxX+0.001d, maxY+0.001d, maxZ+0.001d);
 				renderer.renderStandardBlock(block, i, j, k);
 			}
 		}
@@ -116,7 +115,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 				}
 				renderer.uvRotateTop = 1;
 				renderer.uvRotateBottom = 1;
-				renderer.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
+				renderer.setRenderBounds(minX+0.001d, minY+0.001d, minZ+0.001d, maxX-0.001d, maxY-0.001d, maxZ-0.001d);
 				renderer.renderStandardBlockWithColorMultiplier(block, i, j, k, 1, 1, 1);
 			}
 		}

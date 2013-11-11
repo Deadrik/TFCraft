@@ -2,6 +2,8 @@ package TFC.Blocks.Vanilla;
 
 import TFC.Reference;
 import TFC.TFCBlocks;
+import TFC.API.IMultipleBlock;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerra;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,19 +23,22 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockCustomFence extends BlockFence
+public class BlockCustomFence extends BlockFence implements IMultipleBlock
 {
     private final String field_94464_a;
     
-    String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-    Icon[] iconsPost = new Icon[16];
-    Icon[] iconsPostTop = new Icon[16];
+    String[] woodNames;
+    Icon[] iconsPost;
+    Icon[] iconsPostTop;
 
     public BlockCustomFence(int par1, String par2Str, Material par3Material)
     {
         super(par1,"par2Str", par3Material);
         this.field_94464_a = par2Str;
+        woodNames = new String[16];
+        System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
+        iconsPost = new Icon[woodNames.length];
+        iconsPostTop = new Icon[woodNames.length];
     }
 
     /**
@@ -122,8 +127,8 @@ public class BlockCustomFence extends BlockFence
     {
 		for(int i = 0; i < 16; i++)
 		{
-			iconsPost[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/" + WoodNames[i] + " Fence");
-			iconsPostTop[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/" + WoodNames[i] + " Fence Top");
+			iconsPost[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/" + woodNames[i] + " Fence");
+			iconsPostTop[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/" + woodNames[i] + " Fence Top");
 		}
     }
 
@@ -216,20 +221,20 @@ public class BlockCustomFence extends BlockFence
     {
         int l = par1IBlockAccess.getBlockId(par2, par3, par4);
 
-        if (l != this.blockID && l != TFCBlocks.FenceGate.blockID)
+        if (TFCBlocks.canFenceConnectTo(l))
         {
-            Block block = Block.blocksList[l];
-            return block != null && block.blockMaterial.isOpaque() && block.renderAsNormalBlock() ? block.blockMaterial != Material.pumpkin : false;
+            return true;
         }
         else
         {
-            return true;
+        	Block block = Block.blocksList[l];
+            return block != null && block.blockMaterial.isOpaque() && block.renderAsNormalBlock() ? block.blockMaterial != Material.pumpkin : false;
         }
     }
 
     public static boolean isIdAFence(int par0)
     {
-        return par0 == TFCBlocks.Fence.blockID || BlockFence.isIdAFence(par0);
+        return TFCBlocks.isIdAFence(par0);
     }
 
     @SideOnly(Side.CLIENT)
@@ -257,4 +262,9 @@ public class BlockCustomFence extends BlockFence
     {
         return par1World.isRemote ? true : ItemLeash.func_135066_a(par5EntityPlayer, par1World, par2, par3, par4);
     }
+
+	@Override
+	public Block getBlockTypeForRender() {
+		return TFCBlocks.Fence;
+	}
 }

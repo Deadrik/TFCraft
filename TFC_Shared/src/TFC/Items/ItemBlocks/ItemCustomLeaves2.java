@@ -2,6 +2,7 @@ package TFC.Items.ItemBlocks;
 
 import TFC.TFCBlocks;
 import TFC.API.Constant.Global;
+import TFC.Core.Util.StringUtil;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
 
@@ -23,7 +24,7 @@ public class ItemCustomLeaves2 extends ItemTerraBlock
 			n=16;
 		}
 		
-		String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(Global.WOOD_ALL[itemstack.getItemDamage()+n]).toString();
+		String s = StringUtil.localize("tile.leaves." + Global.WOOD_ALL[itemstack.getItemDamage()+n]).toString();
 		return s;
 	}
 	

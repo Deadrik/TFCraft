@@ -3,6 +3,7 @@ package TFC.Blocks.Devices;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -27,6 +28,8 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.IMultipleBlock;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Textures;
 import TFC.Items.ItemBarrels;
@@ -36,15 +39,17 @@ import TFC.TileEntities.TileEntityBarrel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockStand extends BlockTerraContainer
+public class BlockStand extends BlockTerraContainer implements IMultipleBlock
 {
 	private final Random random = new Random();
-
+	String[] woodNames;
 	public BlockStand(int par1)
 	{
 		super(par1, Material.wood);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setBlockBounds(0f, 0, 0f, 1f, 1, 1f);
+		woodNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0,16);
 	}
 
 	@Override
@@ -70,7 +75,7 @@ public class BlockStand extends BlockTerraContainer
 	@Override
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
 	{
-		for(int i = 0; i < 16; i++) {
+		for(int i = 0; i < woodNames.length; i++) {
 			par3List.add(new ItemStack(this, 1, i));
 		}
 	}
@@ -295,5 +300,10 @@ public class BlockStand extends BlockTerraContainer
 	{
 		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
 		return true;
+	}
+	
+	@Override
+	public Block getBlockTypeForRender() {
+		return TFCBlocks.Planks;
 	}
 }
