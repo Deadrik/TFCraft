@@ -168,7 +168,7 @@ public class BlockCustomBed extends BlockDirectional
 	{
 		if (par1 == 0)
 		{
-			return Block.planks.getBlockTextureFromSide(par1);
+			return TFCBlocks.Planks.getBlockTextureFromSide(par1);
 		}
 		else
 		{

@@ -422,9 +422,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
-			if(TFC_Time.getTotalTicks() % 60 == 0){
-				System.out.println(PlayerManagerTFC.getInstance().Players.size());
-			}
 			careForInventorySlot();
 			if(sealed)
 			{
