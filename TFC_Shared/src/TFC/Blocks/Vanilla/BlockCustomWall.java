@@ -100,4 +100,9 @@ public class BlockCustomWall extends BlockWall
 			return true;
 		}
 	}
+
+    @Override
+    public boolean canPlaceTorchOnTop(World world, int x, int y, int z) {
+	return true;
+    }
 }
