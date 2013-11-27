@@ -10,7 +10,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import TFC.TFCBlocks;
+import TFC.TileEntities.TileEntityPartial;
 
 public class BlockStair extends BlockPartial
 {
@@ -108,4 +110,21 @@ public class BlockStair extends BlockPartial
 
     }
 
+	@Override
+    public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side)
+    {
+		boolean solidSides[][] = {
+				{ true, false, false, false, false, true },
+				{ true, false, false, false, true, false },
+				{ true, false, false, true, false, false },
+				{ true, false, true, false, false, false },
+				{ false, true, false, false, false, true },
+				{ false, true, false, false, true, false },
+				{ false, true, false, true, false, false },
+				{ false, true, true, false, false, false }
+		};
+
+		int meta = world.getBlockMetadata(x, y, z);
+		return solidSides[meta][side.ordinal()];
+    }
 }

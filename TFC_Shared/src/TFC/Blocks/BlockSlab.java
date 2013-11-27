@@ -8,6 +8,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import TFC.TFCBlocks;
 import TFC.API.Util.Helper;
 import TFC.Core.Player.PlayerInfo;
@@ -210,4 +211,16 @@ public class BlockSlab extends BlockPartial
 	{
 		return true;
 	}
+
+	@Override
+    public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side)
+    {
+		int shift[] = { 4, 16, 0, 12, 8, 20 };
+		int opposite[] = { 1, 0, 3, 2, 5, 4 };
+
+		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+		long opChip = (te.extraData >> shift[opposite[side.ordinal()]]) & 0xf;
+		long consolidatedChip = te.extraData - (opChip << shift[opposite[side.ordinal()]]);
+		return ((consolidatedChip & 0xffffff) == 0);
+    }
 }
