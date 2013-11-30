@@ -190,7 +190,7 @@ public class MapGenCaves256TFC extends MapGenBaseTFC
 											{
 												if (var50 < 10)
 												{
-													blockArray[index] = (byte)Block.lavaStill.blockID;
+													blockArray[index] = (short)Block.lavaStill.blockID;
 													metaArray[index] = 0;
 												}
 												else
