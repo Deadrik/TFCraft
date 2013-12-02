@@ -143,7 +143,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 				{
 					bloomeryLit = false;
 					worldObj.setBlock(xCoord+direction[0], yCoord, zCoord+direction[1], TFCBlocks.Bloom.blockID);
-					worldObj.setBlockToAir(xCoord+direction[0], yCoord+moltenCount-1, zCoord+direction[1]);
+					worldObj.setBlockToAir(xCoord+direction[0], yCoord+(moltenCount<2?2:moltenCount)-1, zCoord+direction[1]);
 
 					oreCount = 0;
 					charcoalCount = 0;

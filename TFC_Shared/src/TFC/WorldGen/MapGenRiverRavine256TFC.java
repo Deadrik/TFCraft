@@ -183,13 +183,13 @@ public class MapGenRiverRavine256TFC extends MapGenBaseTFC
 											{
 												if (var49 < 10)
 												{
-													blockArray[var47] = (byte)Block.lavaMoving.blockID;
+													blockArray[var47] = (short)Block.lavaMoving.blockID;
 												}
 												else
 												{
 													if(var49 < waterHeight)
 													{
-														blockArray[var47] = (byte)Block.waterStill.blockID;
+														blockArray[var47] = (short)Block.waterStill.blockID;
 														metaArray[var47] = 0;
 													}
 													else
@@ -202,7 +202,7 @@ public class MapGenRiverRavine256TFC extends MapGenBaseTFC
 
 													if (var48 && TFC_Core.isDirt(blockArray[var47 - 1]))
 													{
-														blockArray[var47 - 1] = (byte) TFC_Core.getTypeForGrass(rockLayer1.data2);
+														blockArray[var47 - 1] = (short) TFC_Core.getTypeForGrass(rockLayer1.data2);
 													}
 
 												}
