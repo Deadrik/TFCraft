@@ -20,6 +20,8 @@ import TFC.Commands.GetBodyTemp;
 import TFC.Commands.GetRocksCommand;
 import TFC.Commands.GetSpawnProtectionCommand;
 import TFC.Commands.GetTreesCommand;
+import TFC.Commands.StripChunkCommand;
+import TFC.Commands.RemoveChunkCommand;
 import TFC.Commands.SetPlayerStatsCommand;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_Climate;
@@ -246,6 +248,8 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new GetSpawnProtectionCommand());
 		evt.registerServerCommand(new SetPlayerStatsCommand());
 		evt.registerServerCommand(new GetBodyTemp());
+		evt.registerServerCommand(new RemoveChunkCommand());
+		evt.registerServerCommand(new StripChunkCommand());
 	}	
 
 	public void loadSettings()
