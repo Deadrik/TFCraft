@@ -15,6 +15,7 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.TFCBlockID;
 import TFC.API.Constant.TFCItemID;
+import TFC.Commands.GSPVisualCommand;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetBodyTemp;
 import TFC.Commands.GetRocksCommand;
@@ -250,6 +251,7 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new GetBodyTemp());
 		evt.registerServerCommand(new RemoveChunkCommand());
 		evt.registerServerCommand(new StripChunkCommand());
+		evt.registerServerCommand(new GSPVisualCommand());
 	}	
 
 	public void loadSettings()
