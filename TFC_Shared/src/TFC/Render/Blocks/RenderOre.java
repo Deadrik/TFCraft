@@ -43,9 +43,7 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 			renderer.renderStandardBlock(block, x, y, z);
 		}
 
-		//renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
-
-		return false;
+		return true;
 	}
 
 	public static Icon getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord) 
