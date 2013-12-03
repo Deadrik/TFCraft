@@ -183,28 +183,11 @@ public class MapGenRavine256TFC extends MapGenBaseTFC
 											{
 												if (var49 < 10)
 												{
-													blockArray[var47] = (short)Block.lavaStill.blockID;
+													blockArray[index] = (short)Block.lavaStill.blockID;
 												}
 												else
 												{
-													byte meta = 0;
-													if(isGrass)
-													{
-														meta = metaArray[var47];
-													}
-													blockArray[var47] = 0;
-
-													//													if (var48 && blockArray[var47 - 1] == (byte)mod_TFC_Core.terraDirt.blockID)
-													//													{
-													//														blockArray[var47 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16).GrassID;
-													//														metaArray[var47-1] = meta;
-													//													}
-													//													else if (var48 && blockArray[var47 - 1] == (byte)mod_TFC_Core.terraDirt2.blockID)
-													//													{
-													//														blockArray[var47 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16).GrassID;
-													//														metaArray[var47-1] = meta;
-													//													}
-
+													blockArray[index] = 0;
 												}
 											}
 										}
