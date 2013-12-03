@@ -8,6 +8,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.API.TFCOptions;
+import TFC.Chunkdata.ChunkData;
+import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Textures;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -49,16 +51,19 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 	public static Icon getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord) 
 	{
 		Icon var27 = null;
+		int localX = xCoord & 15;
+		int localZ = zCoord & 15;
 		DataLayer rockLayer1 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 		DataLayer rockLayer2 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 1);
 		DataLayer rockLayer3 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);
-
+		ChunkData data = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
 		try
 		{
-			if(yCoord <= TFCOptions.RockLayer3Height)
+			int localY = localX + localZ * 16;
+			if(yCoord <= TFCOptions.RockLayer3Height+(data.heightmap[localY]))
 			{
 				var27 = Block.blocksList[rockLayer3.data1].getIcon(5, rockLayer3.data2);
-			} else if(yCoord <= TFCOptions.RockLayer2Height)
+			} else if(yCoord <= TFCOptions.RockLayer2Height+data.heightmap[localY])
 			{
 				var27 = Block.blocksList[rockLayer2.data1].getIcon(5, rockLayer2.data2);
 			} else

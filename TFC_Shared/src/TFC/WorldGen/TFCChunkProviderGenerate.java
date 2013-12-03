@@ -145,16 +145,16 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		new MapGenRavine256TFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 		new MapGenRiverRavine256TFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 
-		ChunkTFC var4 = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
-
+		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
+		data.heightmap = heightMap;
 		String key = data.chunkX + "," + data.chunkZ;
 		if(!this.worldObj.isRemote) {
 			ChunkDataManager.chunkmap.put(key, data);
 		}
 
-		var4.generateSkylightMap();
-		return var4;
+		chunk.generateSkylightMap();
+		return chunk;
 	}
 
 	@Override
