@@ -183,7 +183,7 @@ public class MapGenRavine256TFC extends MapGenBaseTFC
 											{
 												if (var49 < 10)
 												{
-													blockArray[var47] = (byte)Block.lavaStill.blockID;
+													blockArray[var47] = (short)Block.lavaStill.blockID;
 												}
 												else
 												{
