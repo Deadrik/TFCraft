@@ -9,7 +9,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.API.TFCOptions;
+import TFC.Core.TFC_Core;
+import TFC.WorldGen.DataLayer;
 // remove for multiplayer server
+import TFC.WorldGen.TFCWorldChunkManager;
 
 // Referenced classes of package net.minecraft.src:
 //                      WorldGenerator, MathHelper, World, Block
@@ -262,8 +266,6 @@ public class WorldGenMinable extends WorldGenerator
 					if(directionY2 == 1 && directionChange2 != 1){posY2 = posY2 - rand.nextInt(2);}
 					if(directionZ2 == 1 && directionChange2 != 2){posZ2 = posZ2 - rand.nextInt(2);}
 
-
-
 					for(int blocksMade2 = 0; blocksMade2 <= (1 +(blocksToUse2/5)); )
 					{
 
@@ -278,7 +280,16 @@ public class WorldGenMinable extends WorldGenerator
 						boolean isCorrectRockType = world.getBlockId(posX, posY, posZ) == this.genInBlock;
 						boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-						if(isCorrectRockType && isCorrectMeta)
+						if(TFCOptions.enableOreTest)
+						{
+							DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(posY));
+							if(rockLayer.data1 == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
+							{
+								isCorrectRockType = true;
+								isCorrectMeta = true;
+							}						
+						}
+						if((isCorrectRockType && isCorrectMeta))
 						{
 							world.setBlock(posX, posY, posZ, MPBlockID, minableBlockMeta, 2);
 						}
@@ -291,6 +302,15 @@ public class WorldGenMinable extends WorldGenerator
 				int m = world.getBlockMetadata(posX, posY, posZ);
 				boolean isCorrectRockType = world.getBlockId(posX, posY, posZ) == this.genInBlock;
 				boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
+				if(TFCOptions.enableOreTest)
+				{
+					DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(posY));
+					if(rockLayer.data1 == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
+					{
+						isCorrectRockType = true;
+						isCorrectMeta = true;
+					}						
+				}
 
 				if(isCorrectRockType && isCorrectMeta)
 				{
@@ -365,6 +385,15 @@ public class WorldGenMinable extends WorldGenerator
 								boolean isCorrectRockType = world.getBlockId(posX, posY, posZ) == this.genInBlock;
 								boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
+								if(TFCOptions.enableOreTest)
+								{
+									DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(posY));
+									if(rockLayer.data1 == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
+									{
+										isCorrectRockType = true;
+										isCorrectMeta = true;
+									}						
+								}
 								if(isCorrectRockType && isCorrectMeta)
 								{
 									if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D)

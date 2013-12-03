@@ -20,9 +20,9 @@ import TFC.Commands.GetBodyTemp;
 import TFC.Commands.GetRocksCommand;
 import TFC.Commands.GetSpawnProtectionCommand;
 import TFC.Commands.GetTreesCommand;
-import TFC.Commands.StripChunkCommand;
 import TFC.Commands.RemoveChunkCommand;
 import TFC.Commands.SetPlayerStatsCommand;
+import TFC.Commands.StripChunkCommand;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
@@ -276,6 +276,7 @@ public class TerraFirmaCraft
 		TFCOptions.enableDebugMode = TFCOptions.getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
 		TFCOptions.yearLength = TFCOptions.getIntFor(config,"General","yearLength",96, "This is how many days are in a year. Keep this to multiples of 12.");
 		TFCOptions.iDontLikeOnions = TFCOptions.getBooleanFor(config, "General", "enableNotOnions", false,"Set this to true if you don't like onions.");
+		TFCOptions.enableOreTest = TFCOptions.getBooleanFor(config, "General","enableOreTest", false, "This will generate only ore in your world with nothing else. *Caution Unsupported*");
 		//Caveins
 		TFCOptions.minimumRockLoad = TFCOptions.getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
 		TFCOptions.initialCollapseRatio = TFCOptions.getIntFor(config,"Cavein Options","initialCollapseRatio",40, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");

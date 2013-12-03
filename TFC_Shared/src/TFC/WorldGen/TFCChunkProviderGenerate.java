@@ -15,6 +15,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
+import TFC.API.TFCOptions;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
@@ -141,9 +142,16 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		replaceBlocksForBiomeLow(chunkX, chunkZ, rand, idsBig, metaBig);
 
 
+
 		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 		new MapGenRavineTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 		new MapGenRiverRavine().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+
+		if(TFCOptions.enableOreTest)
+		{
+			this.idsBig = new short[16*16*256];
+			Arrays.fill(idsBig, (short)0);
+		}
 
 		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
@@ -736,11 +744,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 	public void convertStone(int height, int indexArray, int indexBig, short[] idsBig, byte[] metaBig, DataLayer rock1, DataLayer rock2, DataLayer rock3)
 	{
-		if(height <= 55+heightMap[indexArray])
+		if(height <= TFCOptions.RockLayer3Height + heightMap[indexArray])
 		{
 			idsBig[indexBig] = (short) rock3.data1; 
 			metaBig[indexBig] = (byte) rock3.data2;
-			if(height == 55+heightMap[indexArray])
+			if(height == TFCOptions.RockLayer3Height + heightMap[indexArray])
 			{
 				if(rand.nextBoolean())
 				{
@@ -759,11 +767,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				}
 			}
 		}
-		else if(height <= 110+heightMap[indexArray] && height > 55+heightMap[indexArray])
+		else if(height <= TFCOptions.RockLayer2Height + heightMap[indexArray] && height > 55+heightMap[indexArray])
 		{
 			idsBig[indexBig] = (short) rock2.data1; 
 			metaBig[indexBig] = (byte) rock2.data2;
-			if(height == 110+heightMap[indexArray])
+			if(height == TFCOptions.RockLayer2Height + heightMap[indexArray])
 			{
 				if(rand.nextBoolean())
 				{

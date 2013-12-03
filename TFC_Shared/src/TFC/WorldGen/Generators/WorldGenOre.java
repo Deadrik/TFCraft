@@ -27,6 +27,7 @@ public class WorldGenOre implements IWorldGenerator
 		chunkX *= 16;
 		chunkZ *= 16;
 		int height = Min-Max;
+		height = 3;
 		//============Copper
 		createOreVein(TFCBlocks.Ore.blockID, 0,new int[]{TFCBlocks.StoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins
 				/*rarity*/100,/*veinSize*/80,/*veinAmt*/55,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Native Copper");
@@ -87,11 +88,11 @@ public class WorldGenOre implements IWorldGenerator
 
 		//============Bituminous Coal
 		createOre(TFCBlocks.Ore.blockID, 14,new int[]{TFCBlocks.StoneSed.blockID,-1},//sedimentary, veins
-				/*rarity*/80,/*veinSize*/80,/*veinAmt*/60,/*height*/height,/*diameter*/200,/*vDensity*/60,/*hDensity*/80,         world, rand, chunkX, chunkZ, Min, Max, "Bituminous Coal");
+				/*rarity*/80,/*veinSize*/80,/*veinAmt*/40,/*height*/height,/*diameter*/200,/*vDensity*/90,/*hDensity*/80,         world, rand, chunkX, chunkZ, Min, Max, "Bituminous Coal");
 
 		//============Lignite
 		createOre(TFCBlocks.Ore.blockID, 15,new int[]{TFCBlocks.StoneSed.blockID,-1},//sedimentary, veins
-				/*rarity*/80,/*veinSize*/80,/*veinAmt*/60,/*height*/height,/*diameter*/200,/*vDensity*/10,/*hDensity*/80,         world, rand, chunkX, chunkZ, Min, Max, "Lignite");
+				/*rarity*/80,/*veinSize*/80,/*veinAmt*/40,/*height*/height,/*diameter*/200,/*vDensity*/90,/*hDensity*/80,         world, rand, chunkX, chunkZ, Min, Max, "Lignite");
 
 		//============Kaolinite
 		createOre(TFCBlocks.Ore2.blockID, 0,new int[]{TFCBlocks.StoneSed.blockID,-1},//sedimentary, large clusters

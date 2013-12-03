@@ -14,6 +14,7 @@ public class TFCOptions
 	public static boolean enableInnerGrassFix;
 	public static boolean enableDebugMode;
 	public static boolean iDontLikeOnions;
+	public static boolean enableOreTest;
 
 	public static boolean enableCropsDie;
 
