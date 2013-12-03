@@ -1,14 +1,6 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode fieldsfirst 
-
 package TFC.WorldGen.Biomes;
 
-import java.util.Random;
-
-import net.minecraft.world.World;
 import net.minecraft.world.biome.SpawnListEntry;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import TFC.Entities.Mobs.EntityBear;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.Entities.Mobs.EntityDeer;
@@ -17,21 +9,8 @@ import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
 
-// Referenced classes of package net.minecraft.src:
-//            BiomeGenBase, SpawnListEntry, EntityWolf, BiomeDecorator, 
-//            WorldGenerator
-
 public class BiomeGenForestTFC extends TFCBiome
 {
-
-	int treeCommon1 = -1;
-	Boolean treeCommon1Size;
-	int treeCommon2 = -1;
-	Boolean treeCommon2Size;
-	int treeUncommon = -1;
-	Boolean treeUncommonSize;
-	int treeRare = -1;
-	Boolean treeRareSize;
 
 	public BiomeGenForestTFC(int i)
 	{
@@ -44,52 +23,6 @@ public class BiomeGenForestTFC extends TFCBiome
 
 		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 10;
 		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 2;
-		treeCommon1 = -1;
-		treeCommon2 = -1;
-		treeUncommon = -1;
-		treeRare = -1;
-	}
-
-	@Override
-	public WorldGenerator getRandomWorldGenForTrees(Random random, World world)
-	{    	
-		int rand = random.nextInt(100);
-		if(rand < 40) {
-			return getTreeGen(treeCommon1,treeCommon1Size);
-		} else if(rand < 80) {
-			return getTreeGen(treeCommon2,treeCommon2Size);
-		} else if(rand < 95) {
-			return getTreeGen(treeUncommon,treeUncommonSize);
-		} else {
-			return getTreeGen(treeRare,treeRareSize);
-		}
-	}
-
-	public void SetupTrees(World world, Random R)
-	{
-		treeCommon1 = R.nextInt(13);
-		treeCommon1Size = R.nextBoolean();
-		treeCommon2 = R.nextInt(13);
-		treeCommon2Size = R.nextBoolean();
-		treeUncommon = R.nextInt(13);
-		treeUncommonSize = R.nextBoolean();
-		treeRare = R.nextInt(13);
-		treeRareSize = R.nextBoolean();
-
-		if(treeCommon1 == 15 || treeCommon1 == 9) {
-			treeCommon1 = R.nextInt(8);
-		}
-		if(treeCommon2 == 15 || treeCommon2 == 9) {
-			treeCommon2 = R.nextInt(8);
-		}
-		if(treeUncommon == 15) {
-			treeUncommon = R.nextInt(13);
-		}
-		if(treeRare == 15) {
-			treeRare = R.nextInt(13);
-		}
-
-		//System.out.println("treeCommon1:" + treeCommon1+" "+"treeCommon2:" + treeCommon2+" "+"treeUncommon:" + treeUncommon+" "+"treeRare:" + treeRare);
 	}
 
 	@Override
@@ -125,5 +58,4 @@ public class BiomeGenForestTFC extends TFCBiome
 			return 1F;
 		}
 	}
-
 }

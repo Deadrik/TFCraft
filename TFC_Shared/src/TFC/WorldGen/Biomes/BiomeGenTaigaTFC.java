@@ -1,10 +1,6 @@
 package TFC.WorldGen.Biomes;
 
-import java.util.Random;
-
-import net.minecraft.world.World;
 import net.minecraft.world.biome.SpawnListEntry;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import TFC.Entities.Mobs.EntityBear;
 import TFC.Entities.Mobs.EntityDeer;
 import TFC.Entities.Mobs.EntityWolfTFC;
@@ -18,14 +14,6 @@ import TFC.WorldGen.TFCBiome;
 
 public class BiomeGenTaigaTFC extends TFCBiome
 {
-	int treeCommon1 = -1;
-	Boolean treeCommon1Size;
-	int treeCommon2 = -1;
-	Boolean treeCommon2Size;
-	int treeUncommon = -1;
-	Boolean treeUncommonSize;
-	int treeRare = -1;
-	Boolean treeRareSize;
 
 	public BiomeGenTaigaTFC(int i)
 	{
@@ -35,60 +23,8 @@ public class BiomeGenTaigaTFC extends TFCBiome
 		spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1, 2, 5));
 		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 10;
 		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 1;
-		treeCommon1 = 0;
-		treeCommon2 = 0;
-		treeUncommon = 0;
-		treeRare = 0;
 		setMinMaxHeight(0.2F, 0.4F);
 	}
-
-	@Override
-	public WorldGenerator getRandomWorldGenForTrees(Random random, World world)
-	{
-
-		int rand = random.nextInt(100);
-		if(rand < 40) {
-			return getTreeGen(treeCommon1,treeCommon1Size);
-		} else if(rand < 80) {
-			return getTreeGen(treeCommon2,treeCommon2Size);
-		} else if(rand < 95) {
-			return getTreeGen(treeUncommon,treeUncommonSize);
-		} else {
-			return getTreeGen(treeRare,treeRareSize);
-		}
-	}
-
-	public void SetupTrees(World world, Random R)
-	{
-		WorldGenerator[] ConiferGenList = {
-				worldGenRedwoodShortTrees,
-				worldGenWhiteCedarTallTrees,
-				worldGenPineShortTrees,
-				worldGenSpruceShortTrees,
-				worldGenOakShortTrees,
-				worldGenBirchShortTrees,
-				worldGenAshTallTrees,
-				worldGenWhiteElmTallTrees,
-				worldGenOakTallTrees,
-				worldGenBirchTallTrees,
-				worldGenPineTallTrees,
-				worldGenAspenTallTrees,
-				worldGenAspenShortTrees};
-
-		if (treeCommon1 == 0 || treeCommon2 == 0)
-		{
-			treeCommon1 = R.nextInt(ConiferGenList.length-1) + 1;
-			treeCommon1Size = R.nextBoolean();
-			treeCommon2 = R.nextInt(ConiferGenList.length-1) + 1;
-			treeCommon2Size = R.nextBoolean();
-			treeUncommon = R.nextInt(ConiferGenList.length);
-			treeUncommonSize = R.nextBoolean();
-			treeRare = R.nextInt(ConiferGenList.length);
-			treeRareSize = R.nextBoolean();
-		}
-
-	}
-
 	@Override
 	protected float getMonthTemp(int month)
 	{

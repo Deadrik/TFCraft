@@ -103,6 +103,11 @@ public class TFCBiome extends BiomeGenBase
 	public static final TFCBiome Mountains = (new TFCBiome(31)).setColor(HillsColor).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F);
 	public static final TFCBiome MountainsEdge = (new TFCBiome(32)).setColor(HillsColor).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F);
 
+	public static final TFCBiome MountainsSeismic = (new TFCBiome(33)).setColor(HillsColor).setBiomeName("Mountains Seismic").setMinMaxHeight(0.8F, 1.6F);
+	public static final TFCBiome MountainsEdgeSeismic = (new TFCBiome(34)).setColor(HillsColor).setBiomeName("Mountains Edge Seismic").setMinMaxHeight(0.4F, 0.8F);
+
+	public static final TFCBiome PlainsSeismic = (new BiomeGenPlainsTFC(35)).setColor(PlainsColor).setBiomeName("TFC Plains Seismic").setMinMaxHeight(0.1F, 0.2F);
+
 	protected static WorldGenAcaciaKoaTrees worldGenAcaciaKoaTrees;
 	protected static WorldGenCustomTallTrees worldGenAshTallTrees;
 	protected static WorldGenCustomTallTrees worldGenAspenTallTrees;
@@ -595,11 +600,6 @@ public class TFCBiome extends BiomeGenBase
 		}
 		}
 		return null;
-	}
-
-	public WorldGenerator getRandomWorldGenForTrees(Random randomGenerator,World currentWorld) 
-	{
-		return randomGenerator.nextInt(10) == 0 ? this.worldGeneratorBigTree : this.worldGeneratorTrees;
 	}
 
 	public TFCBiome GetBiomeByName(String name)

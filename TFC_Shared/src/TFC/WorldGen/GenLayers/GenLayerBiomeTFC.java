@@ -8,9 +8,9 @@ import TFC.WorldGen.TFCBiome;
 
 public class GenLayerBiomeTFC extends GenLayerTFC
 {
-	public static BiomeGenBase[] biomeArray = new BiomeGenBase[] {TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains, TFCBiome.plains, 
-		TFCBiome.rollingHills, TFCBiome.Mountains};
-	
+	public static BiomeGenBase[] biomeArray = new BiomeGenBase[] {TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains, TFCBiome.PlainsSeismic, 
+		TFCBiome.rollingHills, TFCBiome.Mountains, TFCBiome.MountainsSeismic};
+
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private BiomeGenBase[] allowedBiomes;

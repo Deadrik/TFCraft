@@ -142,8 +142,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 
 		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
-		new MapGenRavine256TFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
-		new MapGenRiverRavine256TFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+		new MapGenRavineTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+		new MapGenRiverRavine().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 
 		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
@@ -635,12 +635,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							--var13;
 							idsBig[indexBig] = subSurfaceBlock;
 							metaBig[indexBig] = soilMeta;
-
-							//							if (var13 == 0 && subSurfaceBlock == TFC_Core.getTypeForSand(soilMeta))
-							//							{
-							//								var13 = rand.nextInt(4);
-							//								subSurfaceBlock = TFC_Core.getTypeForSand(soilMeta);
-							//							}
 						}
 
 						if(biomegenbase.biomeID == 0)
@@ -693,6 +687,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				DataLayer rock1 = rockLayer1[arrayIndexDL];
 				DataLayer rock2 = rockLayer2[arrayIndexDL];
 				DataLayer rock3 = rockLayer3[arrayIndexDL];
+				BiomeGenBase biomegenbase = biomesForGeneration[arrayIndexDL];
 
 				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
@@ -706,7 +701,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 					metaBig[indexBig] = 0;
 
-					if (height >= 2 && height <= 6)
+					if (height >= 2 && height <= 6 && 
+							(biomegenbase.biomeID == TFCBiome.MountainsSeismic.biomeID || biomegenbase.biomeID == TFCBiome.PlainsSeismic.biomeID))
 					{
 						idsBig[indexBig] = (short) Block.lavaStill.blockID;
 						metaBig[indexBig] = 0; 

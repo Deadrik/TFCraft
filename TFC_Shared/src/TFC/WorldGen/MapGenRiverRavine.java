@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import TFC.Core.TFC_Core;
 
-public class MapGenRiverRavine256TFC extends MapGenBaseTFC
+public class MapGenRiverRavine extends MapGenBaseTFC
 {
 	private float[] field_35627_a = new float[1024];
 
