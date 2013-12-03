@@ -36,7 +36,6 @@ import TFC.Handlers.EnteringChunkHandler;
 import TFC.Handlers.EntityDamageHandler;
 import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.EntitySpawnHandler;
-import TFC.Handlers.GuiHandler;
 import TFC.Handlers.PacketHandler;
 import TFC.Handlers.PickupHandler;
 import TFC.Handlers.PlayerTossEventHandler;
@@ -183,7 +182,7 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new PlayerTossEventHandler());
 
 		// Register Gui Handler
-		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+		proxy.registerGuiHandler();
 
 		// Register Chat Listener
 		NetworkRegistry.instance().registerChatListener(new ChatListenerTFC());
@@ -205,9 +204,6 @@ public class TerraFirmaCraft
 
 		// Register Anvil Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
-
-		// Register Gui Event Handler
-		MinecraftForge.EVENT_BUS.register(new GuiHandler());
 
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());

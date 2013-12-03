@@ -39,6 +39,7 @@ import TFC.Entities.Mobs.EntitySpiderTFC;
 import TFC.Entities.Mobs.EntitySquidTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
+import TFC.Handlers.GuiHandler;
 import TFC.TileEntities.TEBerryBush;
 import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TECrucible;
@@ -72,6 +73,7 @@ import TFC.TileEntities.TileEntityToolRack;
 import TFC.TileEntities.TileEntityWoodConstruct;
 import TFC.TileEntities.TileEntityWorkbench;
 import TFC.WorldGen.TFCProvider;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -331,6 +333,10 @@ public class CommonProxy
 	}
 
 	public void registerSoundHandler() {
+	}
+
+	public void registerGuiHandler() {
+		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 	}
 
 	public void sendCustomPacket(Packet packet)

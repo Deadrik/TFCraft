@@ -4,14 +4,12 @@ import java.io.File;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderBlaze;
 import net.minecraft.client.renderer.entity.RenderEnderman;
 import net.minecraft.client.renderer.entity.RenderFallingSand;
 import net.minecraft.client.renderer.entity.RenderGhast;
-import net.minecraft.client.renderer.entity.RenderHorse;
 import net.minecraft.client.renderer.entity.RenderIronGolem;
 import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.entity.RenderSilverfish;
@@ -124,6 +122,7 @@ import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -262,8 +261,6 @@ public class ClientProxy extends CommonProxy
 	public File getMinecraftDir() {
 		return ModLoader.getMinecraftInstance().mcDataDir;
 	}
-
-
 
 	private BiomeGenBase lastBiomeGen;
 	private int waterColorMultiplier;
@@ -562,6 +559,13 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerSoundHandler() {
 		MinecraftForge.EVENT_BUS.register(new SoundHandler());
+	}
+
+	@Override
+	public void registerGuiHandler() {
+		NetworkRegistry.instance().registerGuiHandler(this, new TFC.Handlers.Client.GuiHandler());
+		// Register Gui Event Handler
+		MinecraftForge.EVENT_BUS.register(new TFC.Handlers.Client.GuiHandler());
 	}
 
 	@Override
