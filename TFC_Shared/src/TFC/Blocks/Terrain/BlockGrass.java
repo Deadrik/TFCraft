@@ -221,11 +221,13 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 					/*Time it take to grow trees (years)*/
 					float treesTimeModifier = 1.0F;
 					
-					if(rand.nextInt((int) (((TFC_Time.ticksInMonth * grassTimeModifier) / 1200) / 2)) == 0 && temp > 10)
+					float rainModifier = (rain / 7.2F);
+					
+					if(rand.nextInt((int) ((((TFC_Time.ticksInMonth * grassTimeModifier) / 1200) / 2) - rainModifier)) == 0 && temp > 10)
 					{
 						world.setBlock(i, j + 1, k, Block.tallGrass.blockID, 1, 0x2);
 					}
-					else if(rand.nextInt((int) (((TFC_Time.ticksInYear * treesTimeModifier) / 1200) / 2)) == 0 && temp > 20 && world.canBlockSeeTheSky(i, j, k))
+					else if(rand.nextInt((int) ((((TFC_Time.ticksInYear * treesTimeModifier) / 1200) / 2) - rainModifier)) == 0 && temp > 20 && world.canBlockSeeTheSky(i, j, k))
 					{
 						new WorldGenGrowTrees().generate(world, rand, i, j, k);
 					}
