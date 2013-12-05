@@ -17,6 +17,7 @@ import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Textures;
+import TFC.Core.TFC_Time;
 import TFC.WorldGen.Generators.WorldGenGrowTrees;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -214,11 +215,17 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 				if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlockLightValue(i, j + 1, k) >= 4 && 
 						world.getBlockMaterial(i, j + 1, k) != Material.water && world.getBlockId(i, j + 1, k) == 0)
 				{
-					if(rand.nextInt((int) ((16800-rain)/4)) == 0 && temp > 20)
+					/*Time it take to grow grass (months)*/
+					float grassTimeModifier = 1.0F;
+					
+					/*Time it take to grow trees (years)*/
+					float treesTimeModifier = 1.0F;
+					
+					if(rand.nextInt((int) (((TFC_Time.ticksInMonth * grassTimeModifier) / 1200) / 2)) == 0 && temp > 10)
 					{
 						world.setBlock(i, j + 1, k, Block.tallGrass.blockID, 1, 0x2);
 					}
-					else if(rand.nextInt(15000) == 0 && temp > 20 && world.canBlockSeeTheSky(i, j, k))
+					else if(rand.nextInt((int) (((TFC_Time.ticksInYear * treesTimeModifier) / 1200) / 2)) == 0 && temp > 20 && world.canBlockSeeTheSky(i, j, k))
 					{
 						new WorldGenGrowTrees().generate(world, rand, i, j, k);
 					}
