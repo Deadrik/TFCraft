@@ -39,9 +39,6 @@ public class TileEntityCrop extends NetworkTileEntity
 		Random R = new Random();
 		if(!worldObj.isRemote)
 		{
-			float timeMultiplier = 360/TFC_Time.daysInYear;
-
-
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 
 			long time = TFC_Time.getTotalTicks();
@@ -111,7 +108,7 @@ public class TileEntityCrop extends NetworkTileEntity
 					}
 				}
 
-				float growthRate = (((crop.numGrowthStages/(crop.growthTime*TFC_Time.timeRatio))+tempAdded)*nutriMult) * timeMultiplier;
+				float growthRate = ((((float)crop.numGrowthStages/(float)crop.growthTime)+tempAdded)*nutriMult)/TFC_Time.timeRatio;
 
 				int oldGrowth = (int) Math.floor(growth);
 

@@ -118,14 +118,12 @@ public class TileEntityFarmland extends NetworkTileEntity
 
 	public int getSoilMax()
 	{
-		float timeMultiplier = TFC_Time.daysInYear / 360f;
-		return (int) (25000 * timeMultiplier);
+		return (int) (25000*TFC_Time.timeRatio);
 	}
 
 	public void DrainNutrients(int type, float multiplier)
 	{
-		float timeMultiplier = 360f / TFC_Time.daysInYear;
-		nutrients[type] -= (100*multiplier)*timeMultiplier;
+		nutrients[type] -= (100*multiplier);
 	}
 
 	/**
