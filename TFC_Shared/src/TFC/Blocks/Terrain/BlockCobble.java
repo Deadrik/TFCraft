@@ -1,5 +1,6 @@
 package TFC.Blocks.Terrain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -170,9 +171,91 @@ public class BlockCobble extends BlockTerra
 		}
 	}
 
-	@Override
+	/*@Override
 	public void updateTick(World world, int i, int j, int k, Random random)
 	{
 		tryToFall(world, i, j, k);
+	}*/
+
+	@Override
+	public void updateTick(World world, int i, int j, int k, Random random)
+	{
+		if(!world.isRemote)
+		{
+			int meta = world.getBlockMetadata(i, j, k);
+
+			boolean isBelowAir = world.getBlockId(i, j-1, k) == 0;
+			byte count = 0;
+			List sides = new ArrayList<Integer>();
+
+			if(world.getBlockId(i+1, j, k) == 0)
+			{
+				count++;
+				if(world.getBlockId(i+1, j-1, k) == 0) {
+					sides.add(0);
+				}
+			}
+			if(world.getBlockId(i, j, k+1) == 0)
+			{
+				count++;
+				if(world.getBlockId(i, j-1, k+1) == 0) {
+					sides.add(1);
+				}
+			}
+			if(world.getBlockId(i-1, j, k) == 0)
+			{
+				count++;
+				if(world.getBlockId(i-1, j-1, k) == 0) {
+					sides.add(2);
+				}
+			}
+			if(world.getBlockId(i, j, k-1) == 0)
+			{
+				count++;
+				if(world.getBlockId(i, j-1, k-1) == 0) {
+					sides.add(3);
+				}
+			}
+
+			if(!isBelowAir && (count > 2) && sides.size() >= 1)
+			{
+				switch((Integer)sides.get(random.nextInt(sides.size())))
+				{
+				case 0:
+				{
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i+1, j, k, blockID, meta, 0x2);
+					tryToFall(world, i+1, j, k);
+					break;
+				}
+				case 1:
+				{
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i, j, k+1, blockID, meta, 0x2);
+					tryToFall(world, i, j, k+1);
+					break;
+				}
+				case 2:
+				{
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i-1, j, k, blockID, meta, 3);
+					tryToFall(world, i-1, j, k);
+					break;
+				}
+				case 3:
+				{
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i, j, k-1, blockID, meta, 3);
+					tryToFall(world, i, j, k-1);
+					break;
+				}
+				}
+
+			}
+			else if(isBelowAir)
+			{
+				tryToFall(world, i, j, k);
+			}
+		}
 	}
 }

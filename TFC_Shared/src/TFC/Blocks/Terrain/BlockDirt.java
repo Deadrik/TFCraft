@@ -70,15 +70,18 @@ public class BlockDirt extends BlockTerra
 	@Override
 	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 	{
-		if(par1IBlockAccess.getBlockMetadata(par2, par3, par4)+textureOffset < 21)
+		if(par1IBlockAccess.getBlockMetadata(par2, par3, par4)+textureOffset < 21) {
 			return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)+textureOffset];
+		}
 		return icons[20];
 	}
 
 	@Override
 	public Icon getIcon(int par1, int par2)
 	{
-		if(par2+textureOffset < 21)return icons[par2+textureOffset];
+		if(par2+textureOffset < 21) {
+			return icons[par2+textureOffset];
+		}
 		return icons[20];
 	}
 
@@ -137,14 +140,6 @@ public class BlockDirt extends BlockTerra
 		if(!world.isRemote)
 		{
 			int meta = world.getBlockMetadata(i, j, k);
-			boolean PosXAir = false;
-			boolean NegXAir = false;
-			boolean PosZAir = false;
-			boolean NegZAir = false;
-			boolean PosXAir2 = false;
-			boolean NegXAir2 = false;
-			boolean PosZAir2 = false;
-			boolean NegZAir2 = false;	
 
 			boolean isBelowAir = world.getBlockId(i, j-1, k) == 0;
 			byte count = 0;
@@ -154,7 +149,6 @@ public class BlockDirt extends BlockTerra
 			{
 				count++;
 				if(world.getBlockId(i+1, j-1, k) == 0) {
-					//PosXAir = true;
 					sides.add(0);
 				}
 			}
@@ -162,7 +156,6 @@ public class BlockDirt extends BlockTerra
 			{
 				count++;
 				if(world.getBlockId(i, j-1, k+1) == 0) {
-					//PosZAir = true;
 					sides.add(1);
 				}
 			}
@@ -170,7 +163,6 @@ public class BlockDirt extends BlockTerra
 			{
 				count++;
 				if(world.getBlockId(i-1, j-1, k) == 0) {
-					//NegXAir = true;
 					sides.add(2);
 				}
 			}
@@ -178,7 +170,6 @@ public class BlockDirt extends BlockTerra
 			{
 				count++;
 				if(world.getBlockId(i, j-1, k-1) == 0) {
-					//NegZAir = true; 
 					sides.add(3);
 				}
 			}
