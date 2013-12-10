@@ -1,5 +1,7 @@
 package TFC.WorldGen.Generators;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -14,10 +16,16 @@ public class WorldGenOre implements IWorldGenerator
 {
 	int Min;
 	int Max;
-	public WorldGenOre(int min, int max)
+	int ChunkX;
+	int ChunkZ;
+	World worldObj;
+	Random random;
+
+	public static HashMap<String, OreSpawnData> OreList = new HashMap<String, OreSpawnData>();
+
+	public WorldGenOre()
 	{
-		Min = min;
-		Max = max;
+
 	}
 
 	@Override
@@ -26,8 +34,59 @@ public class WorldGenOre implements IWorldGenerator
 	{
 		chunkX *= 16;
 		chunkZ *= 16;
+		ChunkX = chunkX;
+		ChunkZ = chunkZ;
+		worldObj = world;
+		random = rand;
+
+		Iterator iter = OreList.values().iterator();
+		while(iter.hasNext())
+		{
+			OreSpawnData osd = (OreSpawnData) iter.next();
+			if(osd.type == 0)
+			{
+				if(osd.size == 0)
+				{
+					oreSmall(osd.id, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity);
+				}
+				else if(osd.size == 1)
+				{
+					oreMedium(osd.id, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity);
+				}
+				else if(osd.size == 2)
+				{
+					oreLarge(osd.id, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity);
+				}
+			}
+			else if(osd.type == 1)
+			{
+				if(osd.size == 0)
+				{
+					oreSmallVein(osd.id, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity);
+				}
+				else if(osd.size == 1)
+				{
+					oreMediumVein(osd.id, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity);
+				}
+				else if(osd.size == 2)
+				{
+					oreLargeVein(osd.id, osd.meta, osd.base, osd.rarity, osd.min, osd.max, osd.vDensity, osd.hDensity);
+				}
+			}
+		}
+	}
+
+	public void generate2(Random rand, int chunkX, int chunkZ, World world,
+			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
+	{
+		chunkX *= 16;
+		chunkZ *= 16;
+		ChunkX = chunkX;
+		ChunkZ = chunkZ;
+		worldObj = world;
+		random = rand;
 		int height = Min-Max;
-		height = 3;
+		height = 20;
 		//============Copper
 		createOreVein(TFCBlocks.Ore.blockID, 0,new int[]{TFCBlocks.StoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins
 				/*rarity*/100,/*veinSize*/80,/*veinAmt*/55,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Native Copper");
@@ -88,11 +147,11 @@ public class WorldGenOre implements IWorldGenerator
 
 		//============Bituminous Coal
 		createOre(TFCBlocks.Ore.blockID, 14,new int[]{TFCBlocks.StoneSed.blockID,-1},//sedimentary, veins
-				/*rarity*/80,/*veinSize*/80,/*veinAmt*/40,/*height*/height,/*diameter*/200,/*vDensity*/90,/*hDensity*/80,         world, rand, chunkX, chunkZ, Min, Max, "Bituminous Coal");
+				/*rarity*/20,/*veinSize*/40,/*veinAmt*/40,/*height*/5,/*diameter*/200,/*vDensity*/90,/*hDensity*/30,         world, rand, chunkX, chunkZ, Min, Max, "Bituminous Coal");
 
 		//============Lignite
 		createOre(TFCBlocks.Ore.blockID, 15,new int[]{TFCBlocks.StoneSed.blockID,-1},//sedimentary, veins
-				/*rarity*/80,/*veinSize*/80,/*veinAmt*/40,/*height*/height,/*diameter*/200,/*vDensity*/90,/*hDensity*/80,         world, rand, chunkX, chunkZ, Min, Max, "Lignite");
+				/*rarity*/20,/*veinSize*/40,/*veinAmt*/40,/*height*/5,/*diameter*/200,/*vDensity*/90,/*hDensity*/30,         world, rand, chunkX, chunkZ, Min, Max, "Lignite");
 
 		//============Kaolinite
 		createOre(TFCBlocks.Ore2.blockID, 0,new int[]{TFCBlocks.StoneSed.blockID,-1},//sedimentary, large clusters
@@ -124,7 +183,7 @@ public class WorldGenOre implements IWorldGenerator
 				/*rarity*/200,/*veinSize*/10,/*veinAmt*/5,/*height*/height,/*diameter*/20,/*vDensity*/10,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Petrified Wood");
 
 		//============Sulfur
-		//      createOre(mod_TFCraft.terraOre.blockID, 14,new int[]{mod_TFCraft.terraStoneIgEx.blockID,-1,mod_TFCraft.terraOre2.blockID,8},//igex, gypsum small clusters
+		//      createOre(mod_TFCraft.terraOre.blockID, 14Sulfur,new int[]{mod_TFCraft.terraStoneIgEx.blockID,-1,mod_TFCraft.terraOre2.blockID,8},//igex, gypsum small clusters
 		//              /*rarity*/4,/*veinSize*/6,/*veinAmt*/10,/*height*/128,/*diameter*/40,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ);
 
 		//============Jet
@@ -176,6 +235,54 @@ public class WorldGenOre implements IWorldGenerator
 		//============Platinum -- (out of order) must follow magnetite and olivine
 		createOre(TFCBlocks.Ore.blockID, 2,new int[]{TFCBlocks.Ore.blockID,1,TFCBlocks.Ore3.blockID,8},//magnetite, veins
 				/*rarity*/10,/*veinSize*/8,/*veinAmt*/10,/*height*/height,/*diameter*/25,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Platinum");
+
+	}
+
+	private void oreSmallVein(int id, int meta, int[] baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	{
+		createOreVein(id, meta ,baseRocks,
+				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/20,/*height*/5,/*diameter*/40,/*vDensity*/vDensity,/*hDensity*/hDensity,        
+				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
+
+	}
+
+	private void oreMediumVein(int id, int meta, int[] baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	{
+		createOreVein(id, meta ,baseRocks,
+				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/30,/*height*/10,/*diameter*/60,/*vDensity*/vDensity,/*hDensity*/hDensity,        
+				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
+
+	}
+
+	private void oreLargeVein(int id, int meta, int[] baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	{
+		createOreVein(id, meta ,baseRocks,
+				/*rarity*/rarity,/*veinSize*/60,/*veinAmt*/45,/*height*/20,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,        
+				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
+
+	}
+
+	private void oreSmall(int id, int meta, int[] baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	{
+		createOreVein(id, meta ,baseRocks,
+				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/20,/*height*/5,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,        
+				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
+
+	}
+
+	private void oreMedium(int id, int meta, int[] baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	{
+		createOre(id, meta ,baseRocks,
+				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/30,/*height*/10,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,        
+				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
+
+	}
+
+	private void oreLarge(int id, int meta, int[] baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
+	{
+		createOre(id, meta ,baseRocks,
+				/*rarity*/rarity,/*veinSize*/60,/*veinAmt*/40,/*height*/5,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,        
+				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
 
 	}
 

@@ -10,6 +10,8 @@ import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import TFC.API.TFCOptions;
+import TFC.Chunkdata.ChunkData;
+import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
 // remove for multiplayer server
@@ -130,22 +132,10 @@ public class WorldGenMinable extends WorldGenerator
 
 	public boolean generate(World world, Random random, int x, int z, int min, int max, String n)//obsorb default system
 	{
-		//System.out.println(" 1: call "+minableBlockId+":"+minableBlockMeta); // for debugging
-		randomOut = random;     // pad the seed so it's the same as vannila
-		randomOut.nextFloat(); //   |
-		randomOut.nextInt(3);  //   |                          
-		randomOut.nextInt(3);  //   |
-		randomOut.nextDouble();//   |   
-		//System.out.println(" 1.2: found dirt, setting up"); /// for debugging
 		MPChunk_X = x;// set output chunk x // snap to grid
 		MPChunk_Z = z;// set output chunk z    
 
-		/*----*/    Random randomz = new Random(world.getSeed()); // setup a random for BOD
-		long l = (randomz.nextLong() / 2L) * 2L + 1L;                       // |
-		long l1 = (randomz.nextLong() / 2L) * 2L + 1L;                      // |
-		randomz.setSeed(x * l + z * l1 ^ world.getSeed());      // |
-		/*----*/    
-		rand = randomz;
+		rand = random;
 
 		worldObj = world; // set world
 		mineCount = 0; // this is a new chunk, so list gets set to the beginning
@@ -155,10 +145,8 @@ public class WorldGenMinable extends WorldGenerator
 		MPBlockID = minableBlockId;// set output block ID
 		if(MPChunk_X != MPPrevX || MPChunk_Z != MPPrevZ || MPPrevID != MPBlockID || minableBlockMeta != MPPrevMeta)// if it is a new x or z chunk, then generate // blockID stops dirt
 		{
-			//System.out.println(" 2: allowed ore chunk prev test"); /// for debugging
 			if (generateBeforeCheck() == false)
 			{
-				//System.out.println(" 2.2: procede with gen"); /// for debugging315 56 298
 				MPPrevX = MPChunk_X;
 				MPPrevZ = MPChunk_Z;
 				x_Chunk = MPChunk_X;
@@ -167,15 +155,12 @@ public class WorldGenMinable extends WorldGenerator
 				MPPrevMeta = minableBlockMeta;
 				mineHeight = min + rand.nextInt(max-min);
 
-				//System.out.println(" 2.3: bod file exists, checking rarity random"); /// for debugging
-				//betterOreDistribution(x_Chunk, z_Chunk, MPBlockID, minableBlockMeta); // gather ore gen values from .txt
 
 				if (rarity == 1 || (rarity > 0 && rand.nextInt(rarity) == 0)) // use values
 				{
 					createMine(worldObj, rand, x_Chunk, z_Chunk);
 				}
 			}
-			//else{System.out.println(" checked, and genned before!" + minableBlockId);}// for debugging
 		}
 		return true;
 	}
@@ -276,9 +261,15 @@ public class WorldGenMinable extends WorldGenerator
 						if(directionY2 == 1 && directionChange2 != 1){posY2 = posY2 - rand.nextInt(2);}
 						if(directionZ2 == 1 && directionChange2 != 2){posZ2 = posZ2 - rand.nextInt(2);}
 
+
+						boolean isCorrectRockType = false;
+						boolean isCorrectMeta = false;
+						int localX = posX & 15;
+						int localZ = posZ & 15;
+						ChunkData data = ChunkDataManager.getData(posX >> 4, posZ >> 4);
+						int hm = data != null ? data.heightmap[localX + localZ * 16] : 0;
+						posY = Math.min(255, posY + hm);
 						int m = world.getBlockMetadata(posX, posY, posZ);
-						boolean isCorrectRockType = world.getBlockId(posX, posY, posZ) == this.genInBlock;
-						boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
 						if(TFCOptions.enableOreTest)
 						{
@@ -289,9 +280,16 @@ public class WorldGenMinable extends WorldGenerator
 								isCorrectMeta = true;
 							}						
 						}
+						else
+						{
+							isCorrectRockType = world.getBlockId(posX, Math.min(255, posY+hm), posZ) == this.genInBlock;
+							isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
+						}
 						if((isCorrectRockType && isCorrectMeta))
 						{
-							world.setBlock(posX, posY, posZ, MPBlockID, minableBlockMeta, 2);
+
+
+							world.setBlock(posX, Math.min(255, posY+hm), posZ, MPBlockID, minableBlockMeta, 2);
 						}
 						blocksMade++;
 						blocksMade1++;
@@ -300,8 +298,9 @@ public class WorldGenMinable extends WorldGenerator
 				}
 
 				int m = world.getBlockMetadata(posX, posY, posZ);
-				boolean isCorrectRockType = world.getBlockId(posX, posY, posZ) == this.genInBlock;
-				boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
+				boolean isCorrectRockType = false;
+				boolean isCorrectMeta = false;
+
 				if(TFCOptions.enableOreTest)
 				{
 					DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(posY));
@@ -310,6 +309,11 @@ public class WorldGenMinable extends WorldGenerator
 						isCorrectRockType = true;
 						isCorrectMeta = true;
 					}						
+				}
+				else
+				{
+					isCorrectRockType = world.getBlockId(posX, posY, posZ) == this.genInBlock;
+					isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 				}
 
 				if(isCorrectRockType && isCorrectMeta)
@@ -382,8 +386,8 @@ public class WorldGenMinable extends WorldGenerator
 								double var45 = (posZ + 0.5D - var24) / (var28 / 2.0D);
 
 								int m = world.getBlockMetadata(posX, posY, posZ);
-								boolean isCorrectRockType = world.getBlockId(posX, posY, posZ) == this.genInBlock;
-								boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
+								boolean isCorrectRockType = false;
+								boolean isCorrectMeta = false;
 
 								if(TFCOptions.enableOreTest)
 								{
@@ -393,6 +397,11 @@ public class WorldGenMinable extends WorldGenerator
 										isCorrectRockType = true;
 										isCorrectMeta = true;
 									}						
+								}
+								else
+								{
+									isCorrectRockType = world.getBlockId(posX, posY, posZ) == this.genInBlock;
+									isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 								}
 								if(isCorrectRockType && isCorrectMeta)
 								{
