@@ -138,7 +138,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		rainfallLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
 
 		heightMap = new int[256];
-		replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
+		if(!TFCOptions.enableOreTest)
+		{
+			replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
+		}
 		replaceBlocksForBiomeLow(chunkX, chunkZ, rand, idsBig, metaBig);
 
 
@@ -146,12 +149,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 		new MapGenRavineTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 		new MapGenRiverRavine().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
-
-		if(TFCOptions.enableOreTest)
-		{
-			this.idsBig = new short[16*16*256];
-			Arrays.fill(idsBig, (short)0);
-		}
 
 		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
@@ -583,15 +580,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					int var18 = idsTop[index];
 					idsBig[indexBig] = idsTop[index];
 
-					if (var18 == 0)
-					{
-						if(heightMap[arrayIndex] != 0 && height-16 >= 0)
-						{
-							heightMap[arrayIndex] = 0;
-						}
-						var13 = -1;
-					}
-					else if (var18 == Block.stone.blockID)
+					if (var18 == Block.stone.blockID)
 					{
 						if(heightMap[arrayIndex] == 0 && height-16 >= 0)
 						{
@@ -619,11 +608,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 						if (var13 == -1)
 						{
-							//							if (var12 <= 0)
-							//							{
-							//								surfaceBlock = 0;
-							//							}
-
 							var13 = var12;
 
 
@@ -654,14 +638,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 								metaBig[indexBig] = soilMeta;
 							}
 						}
-						//						else if(biomegenbase.biomeID == BiomeGenBase.beach.biomeID)
-						//						{
-						//							if((height >= var5 && height < var5+2 && blockArray[index] != Block.waterStill.blockID))//If its a beach make it sandy
-						//							{
-						//								blockArrayBig[indexBig] = (byte) TFC_Core.getTypeForSand(soilMeta);
-						//								metaArrayBig[indexBig] = (byte) soilMeta;
-						//							}
-						//						}
 						else if(!(biomegenbase.biomeID == TFCBiome.swampland.biomeID))
 						{
 							if(((height > var5-2 && height < var5 && idsTop[index+1] == Block.waterStill.blockID) || (height < var5 && idsTop[index+1] == Block.waterStill.blockID)))//If its an ocean give it a sandy bottom
@@ -709,23 +685,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 					metaBig[indexBig] = 0;
 
-					if (height >= 2 && height <= 6 && 
-							(biomegenbase.biomeID == TFCBiome.MountainsSeismic.biomeID || biomegenbase.biomeID == TFCBiome.PlainsSeismic.biomeID))
-					{
-						idsBig[indexBig] = (short) Block.lavaStill.blockID;
-						metaBig[indexBig] = 0; 
-
-						if(idsBig[indexBig+1] != (short) Block.lavaStill.blockID && rand.nextBoolean())
-						{
-							idsBig[indexBig+1] = (short) Block.lavaStill.blockID;
-							metaBig[indexBig+1] = 0; 
-						}
-					}
-					else if (height <= 1)
+					if (height <= 1 + (heightMap[arrayIndex] / 3) + this.rand.nextInt(3))
 					{
 						idsBig[indexBig] = (byte) Block.bedrock.blockID;
 					}
-					else
+					else if(!TFCOptions.enableOreTest)
 					{
 						convertStone(height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);      
 
@@ -735,6 +699,20 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							{
 
 							}
+						}
+					}
+
+					if (height <= 6 && 
+							(biomegenbase.biomeID == TFCBiome.MountainsSeismic.biomeID || biomegenbase.biomeID == TFCBiome.PlainsSeismic.biomeID)
+							&& idsBig[indexBig] == 0)
+					{
+						idsBig[indexBig] = (short) Block.lavaStill.blockID;
+						metaBig[indexBig] = 0; 
+
+						if(idsBig[indexBig+1] != (short) Block.lavaStill.blockID && rand.nextBoolean())
+						{
+							idsBig[indexBig+1] = (short) Block.lavaStill.blockID;
+							metaBig[indexBig+1] = 0; 
 						}
 					}
 				}
