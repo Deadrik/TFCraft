@@ -44,7 +44,7 @@ public abstract class GenRockLayer1TFC extends GenLayerTFC
         var5 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var13, var4+2);
         GenLayerSmoothTFC var15 = new GenLayerSmoothTFC(1000L, var5);
         GenLayerTFC var6 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
-        GenLayerRockTypes var17 = new GenLayerRockTypes(200L, var6, par2WorldType,1);
+        GenLayerRockTypes1 var17 = new GenLayerRockTypes1(200L, var6, par2WorldType,1);
         var6 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var17, 2);
 
         Object var18 = new GenLayerSmoothTFC(1000L, var6);

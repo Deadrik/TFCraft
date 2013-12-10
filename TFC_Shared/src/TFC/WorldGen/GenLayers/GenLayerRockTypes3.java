@@ -5,18 +5,16 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import TFC.WorldGen.DataLayer;
 
-public class GenLayerRockTypes extends GenLayerTFC
+public class GenLayerRockTypes3 extends GenLayerTFC
 {
-	public static DataLayer[] biomeArray1 = new DataLayer[] {DataLayer.Shale, DataLayer.Claystone, DataLayer.RockSalt, 
-		DataLayer.Limestone, DataLayer.Conglomerate, DataLayer.Dolomite, DataLayer.Chert, DataLayer.Chalk,
-		DataLayer.Rhyolite,DataLayer.Basalt,DataLayer.Andesite,DataLayer.Dacite,
-		DataLayer.Quartzite,DataLayer.Slate,DataLayer.Phyllite,DataLayer.Schist,DataLayer.Gneiss,DataLayer.Marble, DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro};
+	public static DataLayer[] biomeArray1 = new DataLayer[] {DataLayer.Rhyolite,DataLayer.Basalt,DataLayer.Andesite,DataLayer.Dacite,
+		DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro};
 
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private DataLayer[] allowedBiomes;
 
-	public GenLayerRockTypes(long par1, GenLayer par3GenLayer, WorldType par4WorldType, int layer)
+	public GenLayerRockTypes3(long par1, GenLayer par3GenLayer, WorldType par4WorldType, int layer)
 	{
 		super(par1);
 
