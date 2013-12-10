@@ -171,12 +171,6 @@ public class BlockCobble extends BlockTerra
 		}
 	}
 
-	/*@Override
-	public void updateTick(World world, int i, int j, int k, Random random)
-	{
-		tryToFall(world, i, j, k);
-	}*/
-
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random random)
 	{
