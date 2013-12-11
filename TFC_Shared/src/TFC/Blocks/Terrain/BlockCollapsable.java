@@ -137,7 +137,7 @@ public class BlockCollapsable extends BlockTerra
 			for(int x = -range; x < range+1; x++)
 				for(int z = -range; z < range+1; z++)
 					if(world.getBlockId(i+x, j+y, k+z) == TFCBlocks.WoodSupportH.blockID)
-						if(world.rand.nextFloat() < collapseChance/100f)
+						if(world.rand.nextFloat() < collapseChance/100f/2f)
 							world.setBlock(i+x, j+y, k+z, 0);
 						else return true;
 		return false;
