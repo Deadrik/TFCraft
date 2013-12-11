@@ -38,9 +38,8 @@ public class BlockDirt extends BlockTerra
 	 */
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
-		for(int i = 0; i < 15; i++) {
+		for(int i = 0; i < 15; i++)
 			par3List.add(new ItemStack(par1, 1, i));
-		}
 	}
 
 	@Override
@@ -52,36 +51,28 @@ public class BlockDirt extends BlockTerra
 	{
 		int l = world.getBlockId(i, j, k);
 		if (l == 0)
-		{
 			return true;
-		}
 		if (l == Block.fire.blockID)
-		{
 			return true;
-		}
 		Material material = Block.blocksList[l].blockMaterial;
 		if (material == Material.water)
-		{
 			return true;
-		}
 		return material == Material.lava;
 	}
 
 	@Override
 	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 	{
-		if(par1IBlockAccess.getBlockMetadata(par2, par3, par4)+textureOffset < 21) {
+		if(par1IBlockAccess.getBlockMetadata(par2, par3, par4)+textureOffset < 21)
 			return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)+textureOffset];
-		}
 		return icons[20];
 	}
 
 	@Override
 	public Icon getIcon(int par1, int par2)
 	{
-		if(par2+textureOffset < 21) {
+		if(par2+textureOffset < 21)
 			return icons[par2+textureOffset];
-		}
 		return icons[20];
 	}
 
@@ -89,9 +80,7 @@ public class BlockDirt extends BlockTerra
 	public void registerIcons(IconRegister registerer)
 	{
 		for(int i = 0; i < 21; i++)
-		{
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "soil/Dirt"+i);
-		}
 	}
 
 	@Override
@@ -111,7 +100,7 @@ public class BlockDirt extends BlockTerra
 		if(!world.isRemote)
 		{
 			int meta = world.getBlockMetadata(i, j, k);
-			if (!BlockCollapsable.isNearSupport(world, i, j, k) && BlockCollapsable.canFallBelow(world, i, j - 1, k) && j >= 0)
+			if (!BlockCollapsable.isNearSupport(world, i, j, k, 4, 0) && BlockCollapsable.canFallBelow(world, i, j - 1, k) && j >= 0)
 			{
 				byte byte0 = 32;
 				if (!world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))
@@ -119,9 +108,7 @@ public class BlockDirt extends BlockTerra
 					world.setBlockToAir(i, j, k);
 					for (; BlockCollapsable.canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
 					if (j > 0)
-					{
 						world.setBlock(i, j, k, blockID, meta, 0x2);
-					}
 				}
 				else
 				{
@@ -148,34 +135,29 @@ public class BlockDirt extends BlockTerra
 			if(world.getBlockId(i+1, j, k) == 0)
 			{
 				count++;
-				if(world.getBlockId(i+1, j-1, k) == 0) {
+				if(world.getBlockId(i+1, j-1, k) == 0)
 					sides.add(0);
-				}
 			}
 			if(world.getBlockId(i, j, k+1) == 0)
 			{
 				count++;
-				if(world.getBlockId(i, j-1, k+1) == 0) {
+				if(world.getBlockId(i, j-1, k+1) == 0)
 					sides.add(1);
-				}
 			}
 			if(world.getBlockId(i-1, j, k) == 0)
 			{
 				count++;
-				if(world.getBlockId(i-1, j-1, k) == 0) {
+				if(world.getBlockId(i-1, j-1, k) == 0)
 					sides.add(2);
-				}
 			}
 			if(world.getBlockId(i, j, k-1) == 0)
 			{
 				count++;
-				if(world.getBlockId(i, j-1, k-1) == 0) {
+				if(world.getBlockId(i, j-1, k-1) == 0)
 					sides.add(3);
-				}
 			}
 
 			if(!isBelowAir && (count > 2) && sides.size() >= 1)
-			{
 				switch((Integer)sides.get(random.nextInt(sides.size())))
 				{
 				case 0:
@@ -207,12 +189,8 @@ public class BlockDirt extends BlockTerra
 					break;
 				}
 				}
-
-			}
 			else if(isBelowAir)
-			{
 				tryToFall(world, i, j, k);
-			}
 		}
 	}
 

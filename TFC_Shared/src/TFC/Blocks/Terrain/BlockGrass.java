@@ -76,51 +76,40 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	{
 		Block blk = Block.blocksList[TFC_Core.getTypeForDirt(access.getBlockMetadata(xCoord, yCoord, zCoord) + textureOffset)];
 
-		if (side == 1)//top
-		{
+		if (side == 1)
 			return GrassTopTexture;
-		}
-		else if (side == 0)//Bottom
-		{
+		else if (side == 0)
 			return TFC_Textures.InvisibleTexture;
-		}
 		else if (side == 2)//-Z
 		{
-			if(TFCOptions.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord-1) == Material.grass) {
+			if(TFCOptions.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord-1) == Material.grass)
 				return isSnow(access, xCoord, yCoord-1, zCoord-1) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
-			}
 		}
 		else if (side == 3)//+Z
 		{
-			if(TFCOptions.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord+1) == Material.grass) {
+			if(TFCOptions.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord+1) == Material.grass)
 				return isSnow(access, xCoord, yCoord-1, zCoord+1) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
-			}
 		}
 		else if (side == 4)//-X
 		{
-			if(TFCOptions.enableBetterGrass == true && access.getBlockMaterial(xCoord-1, yCoord-1, zCoord) == Material.grass) {
+			if(TFCOptions.enableBetterGrass == true && access.getBlockMaterial(xCoord-1, yCoord-1, zCoord) == Material.grass)
 				return isSnow(access, xCoord-1, yCoord-1, zCoord) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
-			}
 		}
-		else if (side == 5)//+X
-		{
-			if(TFCOptions.enableBetterGrass == true && access.getBlockMaterial(xCoord+1, yCoord-1, zCoord) == Material.grass) {
+		else if (side == 5)
+			if(TFCOptions.enableBetterGrass == true && access.getBlockMaterial(xCoord+1, yCoord-1, zCoord) == Material.grass)
 				return isSnow(access, xCoord+1, yCoord-1, zCoord) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
-			}
-		}
 
-		return iconGrassSideOverlay;
+				return iconGrassSideOverlay;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess access, int x, int y, int z, int side)
 	{
-		if(side == 0) {
+		if(side == 0)
 			return false;
-		} else {
+		else
 			return super.shouldSideBeRendered(access, x, y, z, side);
-		}
 
 	}
 
@@ -172,13 +161,10 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	{
 		if (!world.isRemote)
 		{
-			if(world.getBlockId(i, j+1, k)==Block.snow.blockID){
+			if(world.getBlockId(i, j+1, k)==Block.snow.blockID)
 				world.setBlock(i, j, k, TFC_Core.getTypeForDryGrass(world.getBlockMetadata(i, j, k)), world.getBlockMetadata(i, j, k), 0x2);
-			}
 			else if (world.getBlockLightValue(i, j + 1, k) < 4 && Block.lightOpacity[world.getBlockId(i, j + 1, k)] > 2)
-			{
 				world.setBlock(i, j, k, TFC_Core.getTypeForDirt(world.getBlockMetadata(i, j, k) + textureOffset), world.getBlockMetadata(i, j, k), 0x2);
-			}
 			else if (world.getBlockLightValue(i, j + 1, k) >= 9)
 			{            	
 				for (int var6 = 0; var6 < 4; ++var6)
@@ -194,17 +180,11 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 
 					if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 &&
 							world.getBlockLightValue(x, y + 1, z) >= 4 && world.getBlockMaterial(x, y + 1, z) != Material.water)
-					{
 						world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRain(meta, rain), meta, 0x2);
-					}
 					else if (TFC_Core.isClay(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlockMaterial(x, y + 1, z) != Material.water)
-					{
 						world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
-					}
 					else if (TFC_Core.isPeat(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlockMaterial(x, y + 1, z) != Material.water)
-					{
 						world.setBlock(x, y, z, TFCBlocks.PeatGrass.blockID);
-					}
 				}
 
 				float rain = TFC_Climate.getRainfall(i, j + 1, k);
@@ -213,32 +193,18 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 
 				if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlockLightValue(i, j + 1, k) >= 4 && 
 						world.getBlockMaterial(i, j + 1, k) != Material.water && world.getBlockId(i, j + 1, k) == 0)
-				{
 					if(rand.nextInt((int) ((16800-rain)/4)) == 0 && temp > 20)
-					{
 						world.setBlock(i, j + 1, k, Block.tallGrass.blockID, 1, 0x2);
-					}
 					else if(rand.nextInt(15000) == 0 && temp > 20 && world.canBlockSeeTheSky(i, j, k))
-					{
 						new WorldGenGrowTrees().generate(world, rand, i, j, k);
-					}
-				}
 
 				boolean nearWater = false;
 
 				for(int y = 0; y < 2 && !nearWater; y++)
-				{
 					for(int x = -4; x < 5 && !nearWater; x++)
-					{
 						for(int z = -4; z < 5 && !nearWater; z++)
-						{
 							if(world.getBlockMaterial(i+x, j-y, k+z) == Material.water)
-							{
 								nearWater = true;
-							}
-						}
-					}
-				}
 
 				int[] rock1 = TFC_Climate.getRockLayer(i, j, k, 0);
 				if(TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && !nearWater && rain < 500)
@@ -254,21 +220,21 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 			}
 
 			//            if(!(this.blockID >= 2080 && this.blockID < 2088))
-				//            {
-				//            	boolean hasBeenSet = false;
-				//            	int meta = world.getBlockMetadata(i, j, k);
-				//            	for(int x = i-1; x <= i+1 && !hasBeenSet; x++)
-					//            	{
-					//            		for(int z = k-1; z <= k+1 && !hasBeenSet; z++)
-						//                	{
-						//            			if(!world.isBlockNormalCube(x, j, z))
-							//            			{
-							//            				hasBeenSet = true;
-							//            				world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForRaisedGrass(meta), meta);
-							//            			}
-						//                	}
-					//            	}
-				//            }
+			//            {
+			//            	boolean hasBeenSet = false;
+			//            	int meta = world.getBlockMetadata(i, j, k);
+			//            	for(int x = i-1; x <= i+1 && !hasBeenSet; x++)
+			//            	{
+			//            		for(int z = k-1; z <= k+1 && !hasBeenSet; z++)
+			//                	{
+			//            			if(!world.isBlockNormalCube(x, j, z))
+			//            			{
+			//            				hasBeenSet = true;
+			//            				world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForRaisedGrass(meta), meta);
+			//            			}
+			//                	}
+			//            	}
+			//            }
 
 			world.markBlockForUpdate(i, j, k);
 		}
@@ -281,7 +247,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 				blockID != TFCBlocks.ClayGrass.blockID && blockID != TFCBlocks.PeatGrass.blockID)
 		{
 			Random R = new Random();
-			if(!BlockCollapsable.isNearSupport(world, i, j, k) && BlockDirt.canFallBelow(world, i, j - 1, k) && R.nextInt(10) == 0)
+			if(!BlockCollapsable.isNearSupport(world, i, j, k, 4, 0) && BlockDirt.canFallBelow(world, i, j - 1, k) && R.nextInt(10) == 0)
 			{
 				int meta = world.getBlockMetadata(i, j, k);
 				world.setBlock(i, j, k, TFC_Core.getTypeForDirt(meta), meta, 0x2);

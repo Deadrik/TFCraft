@@ -131,37 +131,16 @@ public class BlockCollapsable extends BlockTerra
 		return false;
 	}
 
-	public static Boolean isNearSupport(World world, int i, int j, int k)
-	{
-		for(int y = -1; y < 1; y++)
-			for(int x = -4; x < 5; x++)
-				for(int z = -4; z < 5; z++)
-					if(world.getBlockId(i+x, j+y, k+z) == TFCBlocks.WoodSupportH.blockID)
-						return true;
-		return false;
-	}
-
-	public static Boolean isNearSupportRange(World world, int i, int j, int k, int range)
+	public static Boolean isNearSupport(World world, int i, int j, int k, int range, float collapseChance)
 	{
 		for(int y = -1; y < 1; y++)
 			for(int x = -range; x < range+1; x++)
 				for(int z = -range; z < range+1; z++)
 					if(world.getBlockId(i+x, j+y, k+z) == TFCBlocks.WoodSupportH.blockID)
-						return true;
+						if(world.rand.nextFloat() < collapseChance/100f)
+							world.setBlock(i+x, j+y, k+z, 0);
+						else return true;
 		return false;
-	}
-
-	public static void collapseNearSupportRange(World world, int i, int j, int k, int range, int minRange)
-	{
-		for(int y = -1; y < 1; y++)
-			for(int x = -range; x < range+1; x++)
-				for(int z = -range; z < range+1; z++)
-					if(world.getBlockId(i+x, j+y, k+z) == TFCBlocks.WoodSupportH.blockID)
-						if(x < -range || x > range || z < -range || z > range)
-						{
-
-						}
-
 	}
 
 	public Boolean isUnderLoad(World world, int i, int j, int k)
@@ -172,7 +151,7 @@ public class BlockCollapsable extends BlockTerra
 		return true;
 	}
 
-	public Boolean tryToFall(World world, int i, int j, int k)
+	public Boolean tryToFall(World world, int i, int j, int k, float collapseChance)
 	{
 		int xCoord = i;
 		int yCoord = j;
@@ -184,7 +163,7 @@ public class BlockCollapsable extends BlockTerra
 		if(world.getBlockId(xCoord, yCoord, zCoord) == Block.bedrock.blockID || world.getBlockId(xCoord, yCoord, zCoord) == fallingBlockID)
 			return false;
 
-		if (canFallBelow(world, xCoord, yCoord - 1, zCoord)  && !isNearSupportRange(world, i, j, k, 4)  && isUnderLoad(world, i, j, k) /*&& !hasNaturalSupport(world,i,j,k)*/)
+		if (canFallBelow(world, xCoord, yCoord - 1, zCoord)  && !isNearSupport(world, i, j, k, 4, collapseChance)  && isUnderLoad(world, i, j, k))
 			if (!world.isRemote && fallingBlockID != -1)
 			{
 				EntityFallingStone ent = new EntityFallingStone(world, i + 0.5F, j + 0.5F, k + 0.5F, fallingBlockID, fallingBlockMeta+8);
@@ -247,7 +226,7 @@ public class BlockCollapsable extends BlockTerra
 			for(int x1 = -1; x1 < 2 && !found; x1++)
 				for(int z1 = -1; z1 < 2 && !found; z1++)
 					if(Block.blocksList[world.getBlockId(i+x1, j, k+z1)] instanceof BlockCollapsable && 
-							((BlockCollapsable)Block.blocksList[world.getBlockId(i+x1, j, k+z1)]).tryToFall(world, i+x1, j, k+z1))
+							((BlockCollapsable)Block.blocksList[world.getBlockId(i+x1, j, k+z1)]).tryToFall(world, i+x1, j, k+z1, 0))
 					{
 						found = true;
 						triggerCollapse(world, entityplayer, i, j, k, meta);
@@ -347,7 +326,7 @@ public class BlockCollapsable extends BlockTerra
 				if((world.getBlockId(worldX, worldY, worldZ) == 0 || Block.blocksList[world.getBlockId(worldX, worldY, worldZ)].isAirBlock(world, worldX, worldY, worldZ)) /*&& localY < 4*/)
 					checkQueue.add(checkedmap, new CollapseData(new ByteCoord(localX + 0, localY + 1, localZ + 0), block.collapseChance - incrementChance*4, TFCDirection.UP));
 				else if(Block.blocksList[world.getBlockId(worldX, worldY, worldZ)] instanceof BlockCollapsable && 
-						((BlockCollapsable)Block.blocksList[world.getBlockId(worldX, worldY, worldZ)]).tryToFall(world, worldX, worldY, worldZ))
+						((BlockCollapsable)Block.blocksList[world.getBlockId(worldX, worldY, worldZ)]).tryToFall(world, worldX, worldY, worldZ, block.collapseChance))
 				{
 					map.add(block.coords);
 
