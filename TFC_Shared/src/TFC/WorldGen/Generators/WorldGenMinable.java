@@ -95,10 +95,7 @@ public class WorldGenMinable extends WorldGenerator
 		genBeforeCheck = oreList.contains(Arrays.asList(MPBlockID, minableBlockMeta));
 
 		if(oreList.contains(Arrays.asList(MPBlockID, minableBlockMeta)) == false)
-		{
 			oreList.add(Arrays.asList(MPBlockID, minableBlockMeta));
-
-		}
 		return genBeforeCheck;
 	}
 
@@ -113,21 +110,15 @@ public class WorldGenMinable extends WorldGenerator
 			int i9 = temp2;
 			int k13 = z + temp3;
 			if(useMarcoVeins == false)
-			{
 				BODgenerate(worldObj, rand, l5, i9, k13, veinSi); // generate based on values
-			}
 			else
-			{
 				BODgenerateVein(worldObj, rand, l5, i9, k13, veinSi);
-			}
 		}
 	}
 	void createMineWithChance(World worldObj, Random rand, int x, int z)
 	{
-		if (rarity == 1 || (rarity > 0 && rand.nextInt(rarity) == 0)) // use values
-		{
+		if (rarity == 1 || (rarity > 0 && rand.nextInt(rarity) == 0))
 			createMine(worldObj, rand, x, z);
-		}
 	}
 
 	public boolean generate(World world, Random random, int x, int z, int min, int max, String n)//obsorb default system
@@ -143,8 +134,7 @@ public class WorldGenMinable extends WorldGenerator
 		oreList.clear(); // clear the list of ores, this is a new chunk   
 
 		MPBlockID = minableBlockId;// set output block ID
-		if(MPChunk_X != MPPrevX || MPChunk_Z != MPPrevZ || MPPrevID != MPBlockID || minableBlockMeta != MPPrevMeta)// if it is a new x or z chunk, then generate // blockID stops dirt
-		{
+		if(MPChunk_X != MPPrevX || MPChunk_Z != MPPrevZ || MPPrevID != MPBlockID || minableBlockMeta != MPPrevMeta)
 			if (generateBeforeCheck() == false)
 			{
 				MPPrevX = MPChunk_X;
@@ -156,12 +146,9 @@ public class WorldGenMinable extends WorldGenerator
 				mineHeight = min + rand.nextInt(max-min);
 
 
-				if (rarity == 1 || (rarity > 0 && rand.nextInt(rarity) == 0)) // use values
-				{
+				if (rarity == 1 || (rarity > 0 && rand.nextInt(rarity) == 0))
 					createMine(worldObj, rand, x_Chunk, z_Chunk);
-				}
 			}
-		}
 		return true;
 	}
 
@@ -220,12 +207,18 @@ public class WorldGenMinable extends WorldGenerator
 
 			for(int blocksMade1 = 0; blocksMade1 <= blocksToUse2; ) // make branch
 			{
-				if(directionX == 0 && directionChange != 1){posX = posX + rand.nextInt(2);}
-				if(directionX == 1 && directionChange != 1){posX = posX - rand.nextInt(2);}
-				if(directionY == 0 && directionChange != 2){posY = posY + rand.nextInt(2);}
-				if(directionY == 1 && directionChange != 2){posY = posY - rand.nextInt(2);}
-				if(directionZ == 0 && directionChange != 3){posZ = posZ + rand.nextInt(2);}
-				if(directionZ == 1 && directionChange != 3){posZ = posZ - rand.nextInt(2);}
+				if(directionX == 0 && directionChange != 1)
+					posX = posX + rand.nextInt(2);
+				if(directionX == 1 && directionChange != 1)
+					posX = posX - rand.nextInt(2);
+				if(directionY == 0 && directionChange != 2)
+					posY = posY + rand.nextInt(2);
+				if(directionY == 1 && directionChange != 2)
+					posY = posY - rand.nextInt(2);
+				if(directionZ == 0 && directionChange != 3)
+					posZ = posZ + rand.nextInt(2);
+				if(directionZ == 1 && directionChange != 3)
+					posZ = posZ - rand.nextInt(2);
 				if(rand.nextInt(4) == 0){
 					posX2 = posX2 + rand.nextInt(2);
 					posY2 = posY2 + rand.nextInt(2);
@@ -244,22 +237,34 @@ public class WorldGenMinable extends WorldGenerator
 					directionY2 = rand.nextInt(2);
 					directionZ2 = rand.nextInt(2);
 					directionChange2 = rand.nextInt(6);
-					if(directionX2 == 0 && directionChange2 != 0){posX2 = posX2 + rand.nextInt(2);}
-					if(directionY2 == 0 && directionChange2 != 1){posY2 = posY2 + rand.nextInt(2);}
-					if(directionZ2 == 0 && directionChange2 != 2){posZ2 = posZ2 + rand.nextInt(2);}
-					if(directionX2 == 1 && directionChange2 != 0){posX2 = posX2 - rand.nextInt(2);}
-					if(directionY2 == 1 && directionChange2 != 1){posY2 = posY2 - rand.nextInt(2);}
-					if(directionZ2 == 1 && directionChange2 != 2){posZ2 = posZ2 - rand.nextInt(2);}
+					if(directionX2 == 0 && directionChange2 != 0)
+						posX2 = posX2 + rand.nextInt(2);
+					if(directionY2 == 0 && directionChange2 != 1)
+						posY2 = posY2 + rand.nextInt(2);
+					if(directionZ2 == 0 && directionChange2 != 2)
+						posZ2 = posZ2 + rand.nextInt(2);
+					if(directionX2 == 1 && directionChange2 != 0)
+						posX2 = posX2 - rand.nextInt(2);
+					if(directionY2 == 1 && directionChange2 != 1)
+						posY2 = posY2 - rand.nextInt(2);
+					if(directionZ2 == 1 && directionChange2 != 2)
+						posZ2 = posZ2 - rand.nextInt(2);
 
 					for(int blocksMade2 = 0; blocksMade2 <= (1 +(blocksToUse2/5)); )
 					{
 
-						if(directionX2 == 0 && directionChange2 != 0){posX2 = posX2 + rand.nextInt(2);}
-						if(directionY2 == 0 && directionChange2 != 1){posY2 = posY2 + rand.nextInt(2);}
-						if(directionZ2 == 0 && directionChange2 != 2){posZ2 = posZ2 + rand.nextInt(2);}
-						if(directionX2 == 1 && directionChange2 != 0){posX2 = posX2 - rand.nextInt(2);}
-						if(directionY2 == 1 && directionChange2 != 1){posY2 = posY2 - rand.nextInt(2);}
-						if(directionZ2 == 1 && directionChange2 != 2){posZ2 = posZ2 - rand.nextInt(2);}
+						if(directionX2 == 0 && directionChange2 != 0)
+							posX2 = posX2 + rand.nextInt(2);
+						if(directionY2 == 0 && directionChange2 != 1)
+							posY2 = posY2 + rand.nextInt(2);
+						if(directionZ2 == 0 && directionChange2 != 2)
+							posZ2 = posZ2 + rand.nextInt(2);
+						if(directionX2 == 1 && directionChange2 != 0)
+							posX2 = posX2 - rand.nextInt(2);
+						if(directionY2 == 1 && directionChange2 != 1)
+							posY2 = posY2 - rand.nextInt(2);
+						if(directionZ2 == 1 && directionChange2 != 2)
+							posZ2 = posZ2 - rand.nextInt(2);
 
 
 						boolean isCorrectRockType = false;
@@ -273,7 +278,7 @@ public class WorldGenMinable extends WorldGenerator
 
 						if(TFCOptions.enableOreTest)
 						{
-							DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(posY));
+							DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(world, posX, posY, posZ));
 							if(rockLayer.data1 == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
 							{
 								isCorrectRockType = true;
@@ -286,11 +291,7 @@ public class WorldGenMinable extends WorldGenerator
 							isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 						}
 						if((isCorrectRockType && isCorrectMeta))
-						{
-
-
 							world.setBlock(posX, Math.min(255, posY+hm), posZ, MPBlockID, minableBlockMeta, 2);
-						}
 						blocksMade++;
 						blocksMade1++;
 						blocksMade2++;
@@ -303,7 +304,7 @@ public class WorldGenMinable extends WorldGenerator
 
 				if(TFCOptions.enableOreTest)
 				{
-					DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(posY));
+					DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(world, posX, posY, posZ));
 					if(rockLayer.data1 == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
 					{
 						isCorrectRockType = true;
@@ -317,9 +318,7 @@ public class WorldGenMinable extends WorldGenerator
 				}
 
 				if(isCorrectRockType && isCorrectMeta)
-				{
 					world.setBlock(posX, posY, posZ, MPBlockID, minableBlockMeta, 2);
-				}
 
 				blocksMade++;
 				blocksMade1++;
@@ -374,13 +373,11 @@ public class WorldGenMinable extends WorldGenerator
 				double var39 = (posX + 0.5D - var20) / (var28 / 2.0D);
 
 				if (var39 * var39 < 1.0D)
-				{
 					for (int posY = var33; posY <= var36; ++posY)
 					{
 						double var42 = (posY + 0.5D - var22) / (var30 / 2.0D);
 
 						if (var39 * var39 + var42 * var42 < 1.0D)
-						{
 							for (int posZ = var34; posZ <= var37; ++posZ)
 							{
 								double var45 = (posZ + 0.5D - var24) / (var28 / 2.0D);
@@ -391,7 +388,7 @@ public class WorldGenMinable extends WorldGenerator
 
 								if(TFCOptions.enableOreTest)
 								{
-									DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(posY));
+									DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(world, posX, posY, posZ));
 									if(rockLayer.data1 == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
 									{
 										isCorrectRockType = true;
@@ -404,18 +401,12 @@ public class WorldGenMinable extends WorldGenerator
 									isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 								}
 								if(isCorrectRockType && isCorrectMeta)
-								{
 									if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D)
-									{
 										//world.setBlockAndMetadata(var38, var41, var44, minableBlockId, minableBlockMeta);
 										world.setBlock(posX, posY, posZ, minableBlockId, minableBlockMeta, 2);
-										//System.out.println("block at " + var38 +" "+var41+" "+var44); /// for debugging
-									}
-								}
+								//System.out.println("block at " + var38 +" "+var41+" "+var44); /// for debugging
 							}
-						}
 					}
-				}
 			}
 		}
 		//System.out.println("a vein was placed " + minableBlockId + "." + minableBlockMeta+ " at " + par3 +" "+par4+" "+par5); /// for debugging

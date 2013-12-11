@@ -26,6 +26,7 @@ import TFC.API.Constant.Global;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumWoodMaterial;
 import TFC.Blocks.BlockSlab;
+import TFC.Chunkdata.ChunkDataManager;
 import TFC.Food.FoodStatsTFC;
 import TFC.Items.ItemOre;
 import TFC.TileEntities.TileEntityPartial;
@@ -64,9 +65,8 @@ public class TFC_Core
 
 	static Boolean isBlockAboveSolid(IBlockAccess blockAccess, int i, int j, int k)
 	{
-		if(TerraFirmaCraft.proxy.getCurrentWorld().isBlockOpaqueCube(i, j+1, k)) {
+		if(TerraFirmaCraft.proxy.getCurrentWorld().isBlockOpaqueCube(i, j+1, k))
 			return true;
-		}
 
 		return false;
 	}
@@ -172,17 +172,10 @@ public class TFC_Core
 	public static void SurroundWithLeaves(World world, int i, int j, int k, int meta, Random R)
 	{
 		for (int y = 2; y >= -2; y--)
-		{
 			for (int x = 2; x >= -2; x--)
-			{
 				for (int z = 2; z >= -2; z--)
-				{
-					if(world.getBlockId(i+x, j+y, k+z) == 0) {
+					if(world.getBlockId(i+x, j+y, k+z) == 0)
 						world.setBlock(i+x, j+y, k+z, Block.leaves.blockID, meta, 2);
-					}
-				}
-			}
-		}
 	}
 
 	public static void SetupWorld(World world)
@@ -299,33 +292,29 @@ public class TFC_Core
 
 	public static boolean isClay(int id)
 	{
-		if(id == TFCBlocks.Clay.blockID || id == TFCBlocks.Clay2.blockID) {
+		if(id == TFCBlocks.Clay.blockID || id == TFCBlocks.Clay2.blockID)
 			return true;
-		}
 		return false;
 	}
 
 	public static boolean isSand(int id)
 	{
-		if(id == TFCBlocks.Sand.blockID || id == TFCBlocks.Sand2.blockID) {
+		if(id == TFCBlocks.Sand.blockID || id == TFCBlocks.Sand2.blockID)
 			return true;
-		}
 		return false;
 	}
 
 	public static boolean isPeat(int id)
 	{
-		if(id == TFCBlocks.Peat.blockID) {
+		if(id == TFCBlocks.Peat.blockID)
 			return true;
-		}
 		return false;
 	}
 
 	public static boolean isWater(int id)
 	{
-		if(id == Block.waterMoving.blockID || id == Block.waterMoving.blockID) {
+		if(id == Block.waterMoving.blockID || id == Block.waterMoving.blockID)
 			return true;
-		}
 		return false;
 	}
 
@@ -336,119 +325,105 @@ public class TFC_Core
 
 	public static int getSoilMetaFromStone(int inType, int inMeta)
 	{
-		if(inType == TFCBlocks.StoneIgIn.blockID) 
-		{
+		if(inType == TFCBlocks.StoneIgIn.blockID)
 			return inMeta;
-		} 
-		else if(inType == TFCBlocks.StoneSed.blockID) 
-		{
+		else if(inType == TFCBlocks.StoneSed.blockID)
 			return inMeta+3;
-		} 
 		else if(inType == TFCBlocks.StoneIgEx.blockID)
-		{
 			return inMeta+11;
-		}
 		else 
 		{
-			if(inMeta == 0) {
+			if(inMeta == 0)
 				return inMeta+15;
-			}
 			return inMeta;
 		}
 	}
 
 	public static int getItemMetaFromStone(int inType, int inMeta)
 	{
-		if(inType == TFCBlocks.StoneIgIn.blockID) {
+		if(inType == TFCBlocks.StoneIgIn.blockID)
 			return inMeta;
-		} else if(inType == TFCBlocks.StoneSed.blockID) {
+		else if(inType == TFCBlocks.StoneSed.blockID)
 			return inMeta+3;
-		} else if(inType == TFCBlocks.StoneIgEx.blockID) {
+		else if(inType == TFCBlocks.StoneIgEx.blockID)
 			return inMeta+11;
-		} else if(inType == TFCBlocks.StoneMM.blockID) {
+		else if(inType == TFCBlocks.StoneMM.blockID)
 			return inMeta+15;
-		} else {
+		else
 			return 0;
-		}
 	}
 
 	public static int getTypeForGrassWithRain(int inMeta, float rain)
 	{
-		if(rain >= 500) {
+		if(rain >= 500)
 			return getTypeForGrass(inMeta);
-		}
 		return getTypeForDryGrass(inMeta);
 
 	}
 
 	public static int getTypeForGrass(int inMeta)
 	{
-		if(inMeta < 16) {
+		if(inMeta < 16)
 			return TFCBlocks.Grass.blockID;
-		}
 		return TFCBlocks.Grass2.blockID;
 	}
 
 	public static int getTypeForGrassFromDirt(int inID)
 	{
-		if(inID == TFCBlocks.Dirt.blockID) 
-		{
+		if(inID == TFCBlocks.Dirt.blockID)
 			return TFCBlocks.Grass.blockID;
-		}
 		return TFCBlocks.Grass2.blockID;
 	}
 
 	public static int getTypeForDryGrass(int inMeta)
 	{
-		if(inMeta < 16) {
+		if(inMeta < 16)
 			return TFCBlocks.DryGrass.blockID;
-		}
 		return TFCBlocks.DryGrass2.blockID;
 	}
 
 	public static int getTypeForClayGrass(int inMeta)
 	{
-		if(inMeta < 16) {
+		if(inMeta < 16)
 			return TFCBlocks.ClayGrass.blockID;
-		}
 		return TFCBlocks.ClayGrass2.blockID;
 	}
 
 	public static int getTypeForDirt(int inMeta)
 	{
-		if(inMeta < 16) {
+		if(inMeta < 16)
 			return TFCBlocks.Dirt.blockID;
-		}
 		return TFCBlocks.Dirt2.blockID;
 	}
 
 	public static int getTypeForClay(int inMeta)
 	{
-		if(inMeta < 16) {
+		if(inMeta < 16)
 			return TFCBlocks.Clay.blockID;
-		}
 		return TFCBlocks.Clay2.blockID;
 
 	}
 
 	public static int getTypeForSand(int inMeta)
 	{
-		if(inMeta < 16) {
+		if(inMeta < 16)
 			return TFCBlocks.Sand.blockID;
-		}
 		return TFCBlocks.Sand2.blockID;
 
 	}
 
-	public static int getRockLayerFromHeight( int y)
+	public static int getRockLayerFromHeight(World world, int x, int y, int z)
 	{
-		if(y <= TFCOptions.RockLayer3Height) {
+		int[] hm = ChunkDataManager.getData(x >> 4, z >> 4).heightmap;
+		int localX = x & 15;
+		int localZ = z & 15;
+		int localY = localX + localZ * 16;
+		if(y <= TFCOptions.RockLayer3Height + hm[localY])
 			return 2;
-		} else if(y <= TFCOptions.RockLayer2Height) {
+		else if(y <= TFCOptions.RockLayer2Height + hm[localY])
 			return 1;
-		} else {
+		else
 			return 0;
-		}
 	}
 
 	public static boolean convertGrassToDirt(World world, int i, int j, int k)
@@ -456,7 +431,6 @@ public class TFC_Core
 		int id = world.getBlockId(i, j, k);
 		int meta = world.getBlockMetadata(i, j, k);
 		if(TFC_Core.isGrass(id))
-		{
 			if(TFC_Core.isGrassType1(id)) 
 			{
 				world.setBlock(i, j, k, TFCBlocks.Dirt.blockID, meta, 2);
@@ -467,95 +441,57 @@ public class TFC_Core
 				world.setBlock(i, j, k, TFCBlocks.Dirt2.blockID, meta, 2);
 				return true;
 			}
-		}
 		return false;
 	}
 
 	public static EnumWoodMaterial getWoodMaterial(ItemStack is)
 	{
 		if(is.itemID == TFCBlocks.Peat.blockID)
-		{
 			return EnumWoodMaterial.PEAT;
-		}
 		if(is.itemID == TFCBlocks.LogNatural2.blockID){
-			if(is.getItemDamage() == 0){
+			if(is.getItemDamage() == 0)
 				return EnumWoodMaterial.ACACIA;
-			}
 		}
 		else if(is.getItemDamage() == 0)
-		{
 			return EnumWoodMaterial.ASH;
-		}
 		else if(is.getItemDamage() == 1)
-		{
 			return EnumWoodMaterial.ASPEN;
-		}
 		else if(is.getItemDamage() == 2)
-		{
 			return EnumWoodMaterial.BIRCH;
-		}
 		else if(is.getItemDamage() == 3)
-		{
 			return EnumWoodMaterial.CHESTNUT;
-		}
 		else if(is.getItemDamage() == 4)
-		{
 			return EnumWoodMaterial.DOUGLASFIR;
-		}
 		else if(is.getItemDamage() == 5)
-		{
 			return EnumWoodMaterial.HICKORY;
-		}
 		else if(is.getItemDamage() == 6)
-		{
 			return EnumWoodMaterial.MAPLE;
-		}
 		else if(is.getItemDamage() == 7)
-		{
 			return EnumWoodMaterial.OAK;
-		}
 		else if(is.getItemDamage() == 8)
-		{
 			return EnumWoodMaterial.PINE;
-		}
 		else if(is.getItemDamage() == 9)
-		{
 			return EnumWoodMaterial.REDWOOD;
-		}
 		else if(is.getItemDamage() == 10)
-		{
 			return EnumWoodMaterial.SPRUCE;
-		}
 		else if(is.getItemDamage() == 11)
-		{
 			return EnumWoodMaterial.SYCAMORE;
-		}
 		else if(is.getItemDamage() == 12)
-		{
 			return EnumWoodMaterial.WHITECEDAR;
-		}
 		else if(is.getItemDamage() == 13)
-		{
 			return EnumWoodMaterial.WHITEELM;
-		}
 		else if(is.getItemDamage() == 14)
-		{
 			return EnumWoodMaterial.WILLOW;
-		}
 		else if(is.getItemDamage() == 15)
-		{
 			return EnumWoodMaterial.KAPOK;
-		}
 		return EnumWoodMaterial.ASPEN;
 	}
 
 	public static boolean showExtraInformation()
 	{
 		if ((FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) && 
-				(Keyboard.isKeyDown(42))) 
-		{
+				(Keyboard.isKeyDown(42)))
 			return true;
-		}
 		return false;
 	}
 
@@ -574,16 +510,12 @@ public class TFC_Core
 	public static boolean isNorthSolid(World world, int x, int y, int z)
 	{
 		if(world.isBlockNormalCube(x, y, z-1))
-		{
 			return true;
-		}
 		else if(world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z-1);
 			if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
-			{
 				return false;
-			}
 			return true;
 		}
 		return false;
@@ -592,16 +524,12 @@ public class TFC_Core
 	public static boolean isSouthSolid(World world, int x, int y, int z)
 	{
 		if(world.isBlockNormalCube(x, y, z+1))
-		{
 			return true;
-		}
 		else if(world.getBlockId(x, y, z+1) == TFCBlocks.stoneSlabs.blockID)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z+1);
 			if(BlockSlab.getSouthChiselLevel(te.extraData) != 0)
-			{
 				return false;
-			}
 			return true;
 		}
 		return false;
@@ -610,16 +538,12 @@ public class TFC_Core
 	public static boolean isEastSolid(World world, int x, int y, int z)
 	{
 		if(world.isBlockNormalCube(x-1, y, z))
-		{
 			return true;
-		}
 		else if(world.getBlockId(x-1, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x-1, y, z);
 			if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
-			{
 				return false;
-			}
 			return true;
 		}
 		return false;
@@ -628,16 +552,12 @@ public class TFC_Core
 	public static boolean isWestSolid(World world, int x, int y, int z)
 	{
 		if(world.isBlockNormalCube(x+1, y, z))
-		{
 			return true;
-		}
 		else if(world.getBlockId(x+1, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x+1, y, z);
 			if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
-			{
 				return false;
-			}
 			return true;
 		}
 		return false;
@@ -646,9 +566,7 @@ public class TFC_Core
 	public static boolean isOreIron(ItemStack is)
 	{
 		if(is.getItem() instanceof ItemOre && ((ItemOre)is.getItem()).GetMetalType(is) == Global.PIGIRON)
-		{
 			return true;
-		}
 		return false;
 	}
 

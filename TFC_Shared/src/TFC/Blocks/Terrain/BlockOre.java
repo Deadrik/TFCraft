@@ -2,6 +2,7 @@ package TFC.Blocks.Terrain;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,9 +17,11 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.Constant.Global;
-import TFC.Blocks.BlockTerra;
+import TFC.Core.TFC_Core;
+import TFC.WorldGen.DataLayer;
+import TFC.WorldGen.TFCWorldChunkManager;
 
-public class BlockOre extends BlockTerra
+public class BlockOre extends BlockCollapsable
 {
 	public String[] blockNames = Global.ORE_METAL;
 
@@ -27,11 +30,20 @@ public class BlockOre extends BlockTerra
 	}
 
 	@Override
+	public int[] getDropBlock(World world, int i, int j, int k)
+	{
+		int[] data = new int[2];
+		DataLayer dl =((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(i, k, TFC_Core.getRockLayerFromHeight(world,i,j,k));
+		data[0] = ((BlockCollapsable)Block.blocksList[dl.data1]).dropBlock;
+		data[1] = dl.data2;
+		return data;
+	}
+
+	@Override
 	public void addCreativeItems(java.util.ArrayList list)
 	{
-		for(int i = 0; i < blockNames.length; i++) {
+		for(int i = 0; i < blockNames.length; i++)
 			list.add(new ItemStack(this,1,i));
-		}
 	}
 
 	@Override
@@ -52,9 +64,7 @@ public class BlockOre extends BlockTerra
 	public void registerIcons(IconRegister iconRegisterer)
 	{
 		for(int i = 0; i < blockNames.length; i++)
-		{
 			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "ores/"+ blockNames[i] + " Ore");
-		}
 	}
 
 	@Override
@@ -73,23 +83,14 @@ public class BlockOre extends BlockTerra
 		}
 		Random random = new Random();
 		ItemStack itemstack;
-		if(l == 14 || l == 15) 
-		{
+		if(l == 14 || l == 15)
 			itemstack  = new ItemStack(Item.coal,1+random.nextInt(2));
-		} 
-		else 
-		{
+		else
 			itemstack  = new ItemStack(TFCItems.OreChunk, 1, damageDropped(l));
-		}
 
 		if (itemstack != null)
-		{
 			//if(random.nextInt(4) == 0)
 			dropBlockAsItem_do(world, i, j, k, itemstack);
-
-			//			if(random.nextInt(100) != 0)
-			//			    world.setBlockAndMetadata(i, j, k, blockID, l);
-		}
 
 	}
 
@@ -101,14 +102,10 @@ public class BlockOre extends BlockTerra
 
 	public static Item getDroppedItem(int meta)
 	{
-		if(meta == 14 || meta == 15) 
-		{
+		if(meta == 14 || meta == 15)
 			return Item.coal;
-		} 
-		else 
-		{
+		else
 			return TFCItems.SmallOreChunk;
-		}
 	}
 
 	@Override
@@ -127,14 +124,12 @@ public class BlockOre extends BlockTerra
 		ItemStack itemstack;
 		int meta = par1World.getBlockMetadata(par2, par3, par4);
 
-		if(meta == 14 || meta == 15) {
+		if(meta == 14 || meta == 15)
 			itemstack  = new ItemStack(Item.coal,1+random.nextInt(2));
-		} else {
+		else
 			itemstack  = new ItemStack(TFCItems.OreChunk, 1, meta);
-		}
-		if (itemstack != null) {
+		if (itemstack != null)
 			dropBlockAsItem_do(par1World, par2, par3, par4, itemstack);
-		}
 		onBlockDestroyedByExplosion(par1World, par2, par3, par4, par5Explosion);
 	}
 
