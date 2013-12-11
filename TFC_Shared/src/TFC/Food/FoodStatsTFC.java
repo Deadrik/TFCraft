@@ -15,8 +15,6 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
-import TFC.TFCItems;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
@@ -83,19 +81,13 @@ public class FoodStatsTFC
 				this.foodExhaustionLevel -= 4.0F;
 
 				if (this.foodSaturationLevel > 0.0F)
-				{
 					this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
-				}
 				else if (!player.capabilities.isCreativeMode)
-				{
 					this.foodLevel = Math.max(this.foodLevel - 2, 0);
-				}
 			}
 			float satisfaction = 0;
 			if (this.foodSaturationLevel < 0.0F)
-			{
 				satisfaction = -foodSaturationLevel;
-			}
 
 			if(!player.capabilities.isCreativeMode)applyTemperature(player);
 
@@ -108,13 +100,9 @@ public class FoodStatsTFC
 			{
 				this.foodTimer += TFC_Time.hourLength;
 				if (this.foodSaturationLevel > 0.0F)
-				{
 					this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
-				}
 				else if(!player.capabilities.isCreativeMode)
-				{
 					this.foodLevel = Math.max(this.foodLevel - (1 + satisfaction), 0);
-				}
 			}
 
 			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.hourLength/2)
@@ -126,21 +114,13 @@ public class FoodStatsTFC
 					player.heal((int) (player.getMaxHealth()*0.01f));
 
 					if (this.foodSaturationLevel > 0.0F)
-					{
 						this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 4.0F, 0.0F);
-					}
 					else if (!player.capabilities.isCreativeMode)
-					{
 						this.foodLevel = Math.max(this.foodLevel - 1, 0);
-					}
 				}
 				else if (this.foodLevel <= 0)
-				{
 					if (difficulty > 1 || (player.getMaxHealth() > 50))
-					{
 						player.attackEntityFrom(DamageSource.starve, 50);
-					}
-				}
 			}
 
 			/****************************************
@@ -148,22 +128,18 @@ public class FoodStatsTFC
 			 ****************************************/
 
 			soberTime = player.getEntityData().hasKey("soberTime") ? player.getEntityData().getLong("soberTime") : 0;
-			if(soberTime > 0){
+			if(soberTime > 0)
 				soberTime--;
-			}
 			player.getEntityData().setLong("soberTime", soberTime);
 
 			float tempWaterMod = temp;
-			if(tempWaterMod >= 30) {
+			if(tempWaterMod >= 30)
 				tempWaterMod = (tempWaterMod-30)*0.1f;
-			} else {
+			else
 				tempWaterMod = 0;
-			}
 			//Handle water related ticking
 			if(player.isSprinting()&& !player.capabilities.isCreativeMode)
-			{
 				waterLevel -= 5+(tempWaterMod);
-			}
 			if(!player.capabilities.isCreativeMode)waterLevel-=extraWaterConsumed;
 			long time = TFC_Time.getTotalTicks();
 
@@ -172,30 +148,19 @@ public class FoodStatsTFC
 				long oldWaterTimer = waterTimer;
 				waterTimer = time;
 				if(player.isInWater())
-				{
 					this.restoreWater(player, 20*(int)(time - oldWaterTimer));
-				}
-			}
-			else
-			{
+			} else
 				for(;waterTimer < time;  waterTimer++)
 				{
 					/**Reduce the player's water for normal living*/
 					waterLevel -= 1+(tempWaterMod/2);
 					if(player.isInWater())
-					{
 						this.restoreWater(player, 20);
-					}
-					if(waterLevel < 0) 
-					{
+					if(waterLevel < 0)
 						waterLevel = 0;
-					}
-					if(waterLevel == 0 && temp > 30) 
-					{
+					if(waterLevel == 0 && temp > 30)
 						player.attackEntityFrom(DamageSource.generic, 2);
-					}
 				}
-			}
 		}
 	}
 
@@ -203,17 +168,14 @@ public class FoodStatsTFC
 		//Player's basic body functions.
 		prevTemperatureLevel = temperatureLevel;
 		if(temperatureLevel <-1){
-			if(rand.nextInt(2000-getBaseBodyTempMod(player))==0 && this.foodLevel >= 500){
+			if(rand.nextInt(2000-getBaseBodyTempMod(player))==0 && this.foodLevel >= 500)
 				temperatureLevel++;
-			}
 			temperatureLevel+=applyTemperatureFromHeatSources(player);
 		}
-		if((player.isSprinting() || player.swingProgress != 0)&& rand.nextInt(1000- (getBaseBodyTempMod(player) )/2 ) == 0 ){
+		if((player.isSprinting() || player.swingProgress != 0)&& rand.nextInt(1000- (getBaseBodyTempMod(player) )/2 ) == 0 )
 			temperatureLevel++;
-		}
-		if(temperatureLevel > 1 && rand.nextInt(1500 - (player.isInWater()?1000:0))==0 && this.waterLevel >= 500){
+		if(temperatureLevel > 1 && rand.nextInt(1500 - (player.isInWater()?1000:0))==0 && this.waterLevel >= 500)
 			temperatureLevel--;
-		}
 
 		temperatureLevel += applyTemperatureFromEnvironment(player);
 
@@ -221,9 +183,8 @@ public class FoodStatsTFC
 		extraWaterConsumed = (temperatureLevel >0 && rand.nextInt(350)==0)?temperatureLevel:0;
 
 		if(temperatureLevel != prevTemperatureLevel && !((prevTemperatureLevel >=-1 && prevTemperatureLevel <=1)&&
-				(temperatureLevel >=-1 && temperatureLevel <=1))){
+				(temperatureLevel >=-1 && temperatureLevel <=1)))
 			tellPlayerMessage(player);
-		}
 		prevTemperatureLevel = temperatureLevel;
 		if(temperatureLevel >= -1 && temperatureLevel <= 1){
 			extraFoodConsumed = 0;
@@ -239,16 +200,14 @@ public class FoodStatsTFC
 		//if it's cold
 		if(temperature <=10){
 			int modifier = (int)((temperature - 10)*15);
-			if(rand.nextInt(1200 + modifier)==0){
+			if(rand.nextInt(1200 + modifier)==0)
 				return -1;
-			}
 		}
 		//if it's warm
 		else if(temperature >=30){
 			int modifier = (int)((temperature - 30)*15);
-			if(rand.nextInt(1200-modifier)==0){
+			if(rand.nextInt(1200-modifier)==0)
 				return 1;
-			}
 		}
 		return 0;
 	}
@@ -258,16 +217,13 @@ public class FoodStatsTFC
 		int y = (int)(player.posY);
 		int z = (int)(player.posZ);
 		int returnAmount = 0;
-		for(int i = x - 10; i<x +10;i++){
-			for(int j = y-3;j<y+3;j++){
+		for(int i = x - 10; i<x +10;i++)
+			for(int j = y-3;j<y+3;j++)
 				for(int k = z-10;k<z+10;k++){
 					TileEntity te = player.worldObj.getBlockTileEntity(i, j, k);
-					if(te != null && te instanceof TileEntityFireEntity && ((TileEntityFireEntity)te).fireTemperature > 100){
+					if(te != null && te instanceof TileEntityFireEntity && ((TileEntityFireEntity)te).fireTemperature > 100)
 						returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )==0?1:0);
-					}
 				}
-			}
-		}
 		return returnAmount;
 	}
 
@@ -277,18 +233,14 @@ public class FoodStatsTFC
 		itemLegs = player.inventory.armorItemInSlot(1);
 		itemFeet = player.inventory.armorItemInSlot(0);
 		int returnAmount = 0;
-		if(itemHead !=null){
+		if(itemHead !=null)
 			returnAmount += (itemHead.getItem() == Item.helmetLeather)?250:0;
-		}
-		if(itemChest !=null){
-			returnAmount += (itemHead.getItem() == Item.plateLeather)?250:0;
-		}
-		if(itemLegs !=null){
-			returnAmount += (itemHead.getItem() == Item.legsLeather)?250:0;
-		}
-		if(itemFeet !=null){
-			returnAmount += (itemHead.getItem() == Item.bootsLeather)?250:0;
-		}
+		if(itemChest !=null)
+			returnAmount += (itemChest.getItem() == Item.plateLeather)?250:0;
+		if(itemLegs !=null)
+			returnAmount += (itemLegs.getItem() == Item.legsLeather)?250:0;
+		if(itemFeet !=null)
+			returnAmount += (itemFeet.getItem() == Item.bootsLeather)?250:0;
 		return returnAmount;
 	}
 
@@ -421,11 +373,10 @@ public class FoodStatsTFC
 	public void addStats(int food, float satur)
 	{
 		this.foodLevel = Math.min(food + this.foodLevel, 100);
-		if(satur < 0) {
+		if(satur < 0)
 			this.foodSaturationLevel = this.foodSaturationLevel + satur;
-		} else {
+		else
 			this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float)food / 3 * satur * 2.0F, this.foodLevel);
-		}
 	}
 
 	/**
