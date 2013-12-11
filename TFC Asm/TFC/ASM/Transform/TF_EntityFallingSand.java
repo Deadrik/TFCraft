@@ -33,5 +33,14 @@ public class TF_EntityFallingSand extends ClassTransformer
 		nodes.add(new InstrSet(new LdcInsnNode(100.0F), 18, OperationType.Replace));
 		this.mcpMethodNodes.put("<init> | (Lnet/minecraft/world/World;)V", nodes);
 		this.obfMethodNodes.put("<init> | (Labv;)V", nodes);
+
+		/*nodes = new ArrayList<InstrSet>();
+		InsnList list = new InsnList();
+		list.add(new FieldInsnNode(Opcodes.GETSTATIC,"net/minecraft/block/Block", "blocksList", "[Lnet/minecraft/block/Block;"));
+		list.add(new VarInsnNode(Opcodes.ALOAD, 0));
+		list.add(new FieldInsnNode(Opcodes.GETFIELD,"net/minecraft/entity/item/EntityFallingSand", "blockID", "I"));
+		list.add(new InsnNode(Opcodes.AALOAD));
+		list.add(new Label());
+		nodes.add(new InstrSet(list, 229, OperationType.InsertAfter));*/
 	}
 }

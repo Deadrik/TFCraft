@@ -16,16 +16,6 @@ public class EntityFallingStone extends EntityFallingSand implements IEntityAddi
 		super(par1World);
 		this.shouldDropItem = true;
 		this.setIsAnvil(true);
-		/*try {
-			Helper.setPrivateValue(EntityFallingSand.class, this, 6, 2000);
-			Helper.setPrivateValue(EntityFallingSand.class, this, 7, 100.0F);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-		}*/
 
 	}
 
@@ -33,16 +23,6 @@ public class EntityFallingStone extends EntityFallingSand implements IEntityAddi
 	{
 		super(par1World, par2, par4, par6, par8, par9);
 		this.setIsAnvil(true);
-		/*try {
-			Helper.setPrivateValue(EntityFallingSand.class, this, 6, 2000);
-			Helper.setPrivateValue(EntityFallingSand.class, this, 7, 100.0F);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-		}*/
 	}
 
 	@Override
