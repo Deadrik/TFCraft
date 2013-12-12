@@ -1675,7 +1675,7 @@ public class TFCItems
 		SeedsGreenbean = new ItemCustomSeeds(TFCItemID.SeedsGreenbean,22).setUnlocalizedName("Seeds Greenbean");
 		SeedsSquash = new ItemCustomSeeds(TFCItemID.SeedsSquash,23).setUnlocalizedName("Seeds Squash");
 
-		WintergreenBerry =  new ItemTerraFood(TFCItemID.WintergreenBerry, 30, -0.8F, 50).setUnlocalizedName("WintergreenBerry");
+		WintergreenBerry =  new ItemTerraFood(TFCItemID.WintergreenBerry, 30, -0.8F, 50).setUnlocalizedName("Wintergreen Berry");
 		Blueberry =  new ItemTerraFood(TFCItemID.Blueberry, 30, -0.8F, 51).setUnlocalizedName("Blueberry");
 		Raspberry =  new ItemTerraFood(TFCItemID.Raspberry, 30, -0.8F, 52).setUnlocalizedName("Raspberry");
 		Strawberry =  new ItemTerraFood(TFCItemID.Strawberry, 30, -0.8F, 53).setUnlocalizedName("Strawberry");
@@ -1689,17 +1689,17 @@ public class TFCItems
 		//mushroom is a food now, with foodID 61
 		//pumpkin is a food now, id = 61
 		//melon is a food, not currently obtainable. id = 62. See ItemFoodBlock
-		WintergreenLeaf =  new ItemTerra(TFCItemID.WintergreenLeaf).setUnlocalizedName("WintergreenLeaf");	
-		BlueberryLeaf =  new ItemTerra(TFCItemID.BlueberryLeaf).setUnlocalizedName("BlueberryLeaf");
-		RaspberryLeaf =  new ItemTerra(TFCItemID.RaspberryLeaf).setUnlocalizedName("RaspberryLeaf");
-		StrawberryLeaf =  new ItemTerra(TFCItemID.StrawberryLeaf).setUnlocalizedName("StrawberryLeaf");
-		BlackberryLeaf =  new ItemTerra(TFCItemID.BlackberryLeaf).setUnlocalizedName("BlackberryLeaf");
-		BunchberryLeaf =  new ItemTerra(TFCItemID.BunchberryLeaf).setUnlocalizedName("BunchberryLeaf");
-		CranberryLeaf =  new ItemTerra(TFCItemID.CranberryLeaf).setUnlocalizedName("CranberryLeaf");
-		SnowberryLeaf =  new ItemTerra(TFCItemID.SnowberryLeaf).setUnlocalizedName("SnowberryLeaf");
-		ElderberryLeaf =  new ItemTerra(TFCItemID.ElderberryLeaf).setUnlocalizedName("ElderberryLeaf");
-		GooseberryLeaf =  new ItemTerra(TFCItemID.GooseberryLeaf).setUnlocalizedName("GooseberryLeaf");
-		CloudberryLeaf =  new ItemTerra(TFCItemID.CloudberryLeaf).setUnlocalizedName("CloudberryLeaf");
+		WintergreenLeaf =  new ItemTerra(TFCItemID.WintergreenLeaf).setFolder("plants/").setUnlocalizedName("Wintergreen Leaf");	
+		BlueberryLeaf =  new ItemTerra(TFCItemID.BlueberryLeaf).setFolder("plants/").setUnlocalizedName("Blueberry Leaf");
+		RaspberryLeaf =  new ItemTerra(TFCItemID.RaspberryLeaf).setFolder("plants/").setUnlocalizedName("Raspberry Leaf");
+		StrawberryLeaf =  new ItemTerra(TFCItemID.StrawberryLeaf).setFolder("plants/").setUnlocalizedName("Strawberry Leaf");
+		BlackberryLeaf =  new ItemTerra(TFCItemID.BlackberryLeaf).setFolder("plants/").setUnlocalizedName("Blackberry Leaf");
+		BunchberryLeaf =  new ItemTerra(TFCItemID.BunchberryLeaf).setFolder("plants/").setUnlocalizedName("Bunchberry Leaf");
+		CranberryLeaf =  new ItemTerra(TFCItemID.CranberryLeaf).setFolder("plants/").setUnlocalizedName("Cranberry Leaf");
+		SnowberryLeaf =  new ItemTerra(TFCItemID.SnowberryLeaf).setFolder("plants/").setUnlocalizedName("Snowberry Leaf");
+		ElderberryLeaf =  new ItemTerra(TFCItemID.ElderberryLeaf).setFolder("plants/").setUnlocalizedName("Elderberry Leaf");
+		GooseberryLeaf =  new ItemTerra(TFCItemID.GooseberryLeaf).setFolder("plants/").setUnlocalizedName("Gooseberry Leaf");
+		CloudberryLeaf =  new ItemTerra(TFCItemID.CloudberryLeaf).setFolder("plants/").setUnlocalizedName("Cloudberry Leaf");
 
 		/**Armor Crafting related items*/
 		SetupArmor();
