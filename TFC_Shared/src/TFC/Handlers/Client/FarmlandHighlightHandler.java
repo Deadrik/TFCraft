@@ -84,8 +84,7 @@ public class FarmlandHighlightHandler{
 				TileEntityFarmland te = (TileEntityFarmland) world.getBlockTileEntity(evt.target.blockX, evt.target.blockY - crop, evt.target.blockZ);
 				te.requestNutrientData();
 
-				float timeMultiplier = (float)TFC_Time.daysInYear / 360f;
-				int soilMax = (int) (25000 * timeMultiplier);
+				int soilMax = TileEntityFarmland.soilMax;
 
 				//Setup GL for the depthbox
 				GL11.glEnable(GL11.GL_BLEND);
