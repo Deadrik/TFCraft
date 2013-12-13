@@ -18,9 +18,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityFarmland extends NetworkTileEntity
 {
+	public static int soilMax = 50000;
+	public static int nutrientDefault = 35000;
 	public long nutrientTimer = -1;
-	public int[] nutrients = {18000,18000,18000};
-
+	public int[] nutrients = {nutrientDefault,nutrientDefault,nutrientDefault};
 	/**
 	 * Client only
 	 * */
@@ -44,8 +45,7 @@ public class TileEntityFarmland extends NetworkTileEntity
 			{
 				CropIndex crop = null;
 
-				int soilMax = getSoilMax();
-				int restoreAmount = 139;
+				int restoreAmount = (int) (139/TFC_Time.timeRatio);
 
 				if((worldObj.getBlockId(xCoord, yCoord+1, zCoord) == Block.crops.blockID))
 				{
@@ -116,16 +116,9 @@ public class TileEntityFarmland extends NetworkTileEntity
 		}
 	}
 
-	public int getSoilMax()
-	{
-		float timeMultiplier = TFC_Time.daysInYear / 360f;
-		return (int) (25000 * timeMultiplier);
-	}
-
 	public void DrainNutrients(int type, float multiplier)
 	{
-		float timeMultiplier = 360f / TFC_Time.daysInYear;
-		nutrients[type] -= (100*multiplier)*timeMultiplier;
+		nutrients[type] -= (int) (100*multiplier/TFC_Time.timeRatio);
 	}
 
 	/**

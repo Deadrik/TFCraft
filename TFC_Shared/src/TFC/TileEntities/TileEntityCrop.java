@@ -39,9 +39,6 @@ public class TileEntityCrop extends NetworkTileEntity
 		Random R = new Random();
 		if(!worldObj.isRemote)
 		{
-			float timeMultiplier = 360/TFC_Time.daysInYear;
-
-
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 
 			long time = TFC_Time.getTotalTicks();
@@ -97,13 +94,13 @@ public class TileEntityCrop extends NetworkTileEntity
 				}
 
 				int nutriType = crop.cycleType;
-				int nutri = tef != null ? tef.nutrients[nutriType] : 18000;
-				int soilMax = tef != null ? tef.getSoilMax() : 18000;
-				//waterBoost only helps if you are playing on a longer than default year length.
-				float waterBoost = TFC.Blocks.BlockFarmland.isWaterNearby(worldObj, xCoord, yCoord, zCoord) ? 0.1f : 0;
+				int nutri = tef != null ? tef.nutrients[nutriType] : TileEntityFarmland.nutrientDefault;
 
-				float nutriMult = (0.2f + ((float)nutri/(float)soilMax) * 0.5f) + waterBoost;
-
+				float waterBoost = TFC.Blocks.BlockFarmland.isWaterNearby(worldObj, xCoord, yCoord - 1, zCoord) ? 0.1f : 0;
+				
+				/*Base 75 % growth + Nutrient grow boost from 0 to 35 % + 10 % boost for water*/
+				float nutriMult =  (0.75f + (((float)nutri / (float)TileEntityFarmland.soilMax) * 0.35f) + waterBoost);
+				
 				if(tef != null)
 				{
 					if(tef.nutrients[nutriType] > 0) {
@@ -111,12 +108,12 @@ public class TileEntityCrop extends NetworkTileEntity
 					}
 				}
 
-				float growthRate = (((crop.numGrowthStages/(crop.growthTime*TFC_Time.timeRatio))+tempAdded)*nutriMult) * timeMultiplier;
+				float growthRate = (((((float)crop.numGrowthStages/(float)crop.growthTime)+tempAdded)*nutriMult)/TFC_Time.timeRatio);
 
 				int oldGrowth = (int) Math.floor(growth);
 
 				growth += growthRate;
-
+				
 				if(oldGrowth < (int) Math.floor(growth))
 				{
 					this.broadcastPacketInRange(createCropUpdatePacket());
