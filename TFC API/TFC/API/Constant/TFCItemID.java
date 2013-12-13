@@ -766,6 +766,8 @@ public class TFCItemID {
 	public static int Cloudberry				= 19141;
 	public static int CloudberryLeaf			= 19142;
 
+	public static int Fertilizer				= 19143;
+
 
 	public static void Setup(Configuration config)
 	{

@@ -36,6 +36,7 @@ public class TFCOptions
 	public static byte[] cropNutrientAColor = {(byte) 237, (byte) 28, (byte) 36, (byte) 200};
 	public static byte[] cropNutrientBColor = {(byte) 242, (byte) 101, (byte) 34, (byte) 200};
 	public static byte[] cropNutrientCColor = {(byte) 247, (byte) 148, (byte) 49, (byte) 200};
+	public static byte[] cropFertilizerColor = {(byte) 255, (byte) 255, (byte) 0, (byte) 200};
 
 	public static byte[] anvilRuleColor0 = {(byte) 237, (byte) 28, (byte) 36, (byte) 255};
 	public static byte[] anvilRuleColor1 = {(byte) 242, (byte) 101, (byte) 34, (byte) 255};
@@ -46,9 +47,7 @@ public class TFCOptions
 	public static boolean getBooleanFor(Configuration config,String heading, String item, boolean value)
 	{
 		if (config == null)
-		{
 			return value;
-		}
 		try
 		{
 			Property prop = config.get(heading, item, value);
@@ -63,9 +62,7 @@ public class TFCOptions
 	public static boolean getBooleanFor(Configuration config,String heading, String item, boolean value, String comment)
 	{
 		if (config == null)
-		{
 			return value;
-		}
 		try
 		{
 			Property prop = config.get(heading, item, value);
@@ -81,9 +78,7 @@ public class TFCOptions
 	public static int getIntFor(Configuration config, String heading, String item, int value)
 	{
 		if (config == null)
-		{
 			return value;
-		}
 		try
 		{
 			Property prop = config.get(heading, item, value);
@@ -98,9 +93,7 @@ public class TFCOptions
 	public static int getIntFor(Configuration config,String heading, String item, int value, String comment)
 	{
 		if (config == null)
-		{
 			return value;
-		}
 		try
 		{
 			Property prop = config.get(heading, item, value);

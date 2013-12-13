@@ -31,9 +31,8 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 
 	@Override
 	public void updateEntity() {
-		if(!worldObj.isRemote) {
+		if(!worldObj.isRemote)
 			TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
-		}
 
 		if(shouldRotate) {
 			rotatetimer++;
@@ -44,257 +43,49 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 					shouldRotate = false;
 					if(!worldObj.isRemote) {
 						if(storage[0] != null) {
-							if(storage[0].getItem() == TFCItems.WheatGrain && (storage[1] == null || storage[1].getItem() == TFCItems.WheatGround))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(TFCItems.WheatGround, 1);
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize++;
-								} else {
-									ejectItem(new ItemStack(TFCItems.WheatGround,1));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.RyeGrain && (storage[1] == null || storage[1].getItem() == TFCItems.RyeGround))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(TFCItems.RyeGround, 1);
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize++;
-								} else {
-									ejectItem(new ItemStack(TFCItems.RyeGround, 1));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.OatGrain && (storage[1] == null || storage[1].getItem() == TFCItems.OatGround))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(TFCItems.OatGround, 1);
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize++;
-								} else {
-									ejectItem(new ItemStack(TFCItems.OatGround, 1));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.BarleyGrain && (storage[1] == null || storage[1].getItem() == TFCItems.BarleyGround))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(TFCItems.BarleyGround, 1);
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize++;
-								} else {
-									ejectItem(new ItemStack(TFCItems.BarleyGround, 1));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.RiceGrain && (storage[1] == null || storage[1].getItem() == TFCItems.RiceGround))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(TFCItems.RiceGround, 1);
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize++;
-								} else {
-									ejectItem(new ItemStack(TFCItems.RiceGround, 1));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.MaizeEar && (storage[1] == null || storage[1].getItem() == TFCItems.CornmealGround))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(TFCItems.CornmealGround, 1);
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize++;
-								} else {
-									ejectItem(new ItemStack(TFCItems.CornmealGround, 1));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 16 && 
-									(storage[1] == null || (storage[1].getItem() == TFCItems.Powder && storage[1].getItemDamage() == 1)))//Kaolinite
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(TFCItems.Powder, 1, 1);
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize++;
-								} else {
-									ejectItem(new ItemStack(TFCItems.Powder, 1, 1));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 20 && 
-									(storage[1] == null || (storage[1].getItem() == TFCItems.Powder && storage[1].getItemDamage() == 2)))//Graphite
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(TFCItems.Powder, 1, 2);
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize++;
-								} else {
-									ejectItem(new ItemStack(TFCItems.Powder, 1, 2));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 27 &&
-									(storage[1] == null || storage[1].getItem() == Item.redstone))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(Item.redstone, 8);
-								} else if(storage[1].stackSize < 56) {
-									storage[1].stackSize += 8;
-								} else {
-									ejectItem(new ItemStack(Item.redstone, 8));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 28 &&
-									(storage[1] == null || storage[1].getItem() == Item.redstone))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(Item.redstone, 8);
-								} else if(storage[1].stackSize < 56) {
-									storage[1].stackSize += 8;
-								} else {
-									ejectItem(new ItemStack(Item.redstone, 8));
-								}
-							}
-							/*Dyes*/
-							else if(storage[0].getItem() == Item.bone && 
-									(storage[1] == null || (storage[1].getItem().itemID == Item.dyePowder.itemID && 
-									storage[1].getItemDamage() == 15)))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(Item.dyePowder, 2, 15);//White
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize += 2;
-								} else {
-									ejectItem(new ItemStack(Item.dyePowder, 2, 15));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 34 && //Lapis
-									(storage[1] == null || (storage[1].getItem().itemID == TFCItems.Powder.itemID && storage[1].getItemDamage() == 6)))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(TFCItems.Powder,4,6);//storage[1] = new ItemStack(Item.dyePowder,4,4); //Blue
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize += 4;
-								} else {
-									ejectItem(new ItemStack(TFCItems.Powder, 4, 6));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 9 && //Malachite
-									(storage[1] == null || (storage[1].getItem().itemID == TFCItems.Powder.itemID && storage[1].getItemDamage() == 8)))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(TFCItems.Powder,4,8);//storage[1] = new ItemStack(Item.dyePowder,4,2); //Green
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize += 4;
-								} else {
-									ejectItem(new ItemStack(TFCItems.Powder, 4, 8));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 3 && //Hematite
-									(storage[1] == null || (storage[1].getItem().itemID == TFCItems.Powder.itemID && storage[1].getItemDamage() == 5)))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(TFCItems.Powder,4,5);//storage[1] = new ItemStack(Item.dyePowder,4,1); //Red
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize += 4;
-								} else {
-									ejectItem(new ItemStack(TFCItems.Powder, 4, 5));
-								}
-							}
-							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 11 && //Limonite
-									(storage[1] == null || (storage[1].getItem().itemID == TFCItems.Powder.itemID && storage[1].getItemDamage() == 7)))
-							{
-								if(storage[0].stackSize == 1) {
-									storage[0] = null;
-								} else {
-									storage[0].stackSize--;
-								}
-								if(storage[1] == null) {
-									storage[1] = new ItemStack(TFCItems.Powder,4,7);// Yellow
-								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize += 4;
-								} else {
-									ejectItem(new ItemStack(TFCItems.Powder, 4, 7));
-								}
-							}
+							processItem(TFCItems.WheatGrain, 0, TFCItems.WheatGround, 0, 1);//cornmeal
+							processItem(TFCItems.RyeGrain, 0, TFCItems.RyeGround, 0, 1);//cornmeal
+							processItem(TFCItems.OatGrain, 0, TFCItems.OatGround, 0, 1);//cornmeal
+							processItem(TFCItems.BarleyGrain, 0, TFCItems.BarleyGround, 0, 1);//cornmeal
+							processItem(TFCItems.RiceGrain, 0, TFCItems.RiceGround, 0, 1);//cornmeal
+							processItem(TFCItems.MaizeEar, 0, TFCItems.CornmealGround, 0, 1);//cornmeal
+							processItem(TFCItems.OreChunk, 16, TFCItems.Powder, 1, 1);//kaolinite
+							processItem(TFCItems.OreChunk, 20, TFCItems.Powder, 2, 2);//graphite
+							processItem(TFCItems.OreChunk, 27, Item.redstone, 0, 8);//cinnabar
+							processItem(TFCItems.OreChunk, 28, Item.redstone, 0, 8);//cryolite
+							processItem(Item.bone, 0, TFCItems.Powder, 15, 2);//bone
+							processItem(TFCItems.OreChunk, 34, TFCItems.Powder, 6, 4);//lapis
+							processItem(TFCItems.OreChunk, 9, TFCItems.Powder, 8, 4);//malachite
+							processItem(TFCItems.OreChunk, 3, TFCItems.Powder, 5, 4);//hematite
+							processItem(TFCItems.OreChunk, 11, TFCItems.Powder, 7, 4);//limonite
+							processItem(TFCItems.OreChunk, 31, TFCItems.Fertilizer, 0, 4);//Sylvite
 						}
 
-						if(storage[2] != null) {
+						if(storage[2] != null)
 							damageStackInSlot(2);
-						}
-
-						/*if(storage[2].getItemDamage() == storage[2].getMaxDamage())
-							setInventorySlotContents(2, null);*/
 					}
-				} else {
+				} else
 					rotation++;
-				}
 				rotatetimer = 0;
 			}
+		}
+	}
+
+	public void processItem(Item inputItem, int damageIn, Item outputItem, int damageOut, int amountOut)
+	{
+		if(storage[0].getItem() == inputItem && storage[0].getItemDamage() == damageIn &&
+				(storage[1] == null || (storage[1].getItem() == outputItem && storage[1].getItemDamage() == damageOut)))
+		{
+			if(storage[0].stackSize == 1)
+				storage[0] = null;
+			else
+				storage[0].stackSize--;
+			if(storage[1] == null)
+				storage[1] = new ItemStack(outputItem,amountOut,damageOut);
+			else if(storage[1].stackSize < outputItem.getItemStackLimit())
+				storage[1].stackSize += amountOut;
+			else
+				ejectItem(new ItemStack(outputItem, amountOut, damageOut));
 		}
 	}
 
@@ -306,9 +97,8 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 		for(int i = 0; i < nbttaglist.tagCount(); i++) {
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
-			if(byte0 >= 0 && byte0 < storage.length) {
+			if(byte0 >= 0 && byte0 < storage.length)
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 		hasQuern = nbttagcompound.getBoolean("hasQuern");
 	}
@@ -317,14 +107,13 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
 		super.writeToNBT(nbttagcompound);
 		NBTTagList nbttaglist = new NBTTagList();
-		for(int i = 0; i < storage.length; i++) {
+		for(int i = 0; i < storage.length; i++)
 			if(storage[i] != null) {
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte)i);
 				storage[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-		}
 		nbttagcompound.setTag("Items", nbttaglist);
 		nbttagcompound.setBoolean("hasQuern", hasQuern);
 	}
@@ -350,13 +139,11 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 				return itemstack;
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
-			if(storage[i].stackSize == 0) {
+			if(storage[i].stackSize == 0)
 				setInventorySlotContents(i, null);
-			}
 			return itemstack1;
-		} else {
+		} else
 			return null;
-		}
 	}
 
 	public void ejectContents() {
@@ -367,7 +154,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 		float f1 = rand.nextFloat() * 2.0F + 0.4F;
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
-		for (int i = 0; i < getSizeInventory(); i++) {
+		for (int i = 0; i < getSizeInventory(); i++)
 			if(storage[i]!= null) {
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, storage[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
@@ -375,7 +162,6 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
 				worldObj.spawnEntityInWorld(entityitem);
 			}
-		}
 	}
 
 	public void ejectItem(ItemStack item) {
@@ -408,9 +194,8 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) {
 		storage[i] = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
+		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 			itemstack.stackSize = getInventoryStackLimit();
-		}
 		TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 	}
 

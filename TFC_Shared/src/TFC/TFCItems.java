@@ -35,6 +35,7 @@ import TFC.Items.ItemCustomMinecart;
 import TFC.Items.ItemCustomPotion;
 import TFC.Items.ItemCustomSeeds;
 import TFC.Items.ItemDyeCustom;
+import TFC.Items.ItemFertilizer;
 import TFC.Items.ItemFlatGeneric;
 import TFC.Items.ItemFruitTreeSapling;
 import TFC.Items.ItemGem;
@@ -891,6 +892,7 @@ public class TFCItems
 	public static Item ElderberryLeaf;
 	public static Item GooseberryLeaf;
 	public static Item CloudberryLeaf;
+	public static Item Fertilizer;
 
 	/**
 	 * Item Uses Setup
@@ -1700,6 +1702,8 @@ public class TFCItems
 		ElderberryLeaf =  new ItemTerra(TFCItemID.ElderberryLeaf).setFolder("plants/").setUnlocalizedName("Elderberry Leaf");
 		GooseberryLeaf =  new ItemTerra(TFCItemID.GooseberryLeaf).setFolder("plants/").setUnlocalizedName("Gooseberry Leaf");
 		CloudberryLeaf =  new ItemTerra(TFCItemID.CloudberryLeaf).setFolder("plants/").setUnlocalizedName("Cloudberry Leaf");
+
+		Fertilizer = new ItemFertilizer(TFCItemID.Fertilizer).setUnlocalizedName("Fertilizer");
 
 		/**Armor Crafting related items*/
 		SetupArmor();

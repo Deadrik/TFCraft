@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityFarmland extends NetworkTileEntity
 {
 	public long nutrientTimer = -1;
-	public int[] nutrients = {18000,18000,18000};
+	public int[] nutrients = {6666,6666,6666, 0};
 
 	/**
 	 * Client only
@@ -36,9 +36,8 @@ public class TileEntityFarmland extends NetworkTileEntity
 	{
 		if(!worldObj.isRemote)
 		{
-			if(nutrientTimer <= 0) {
+			if(nutrientTimer <= 0)
 				nutrientTimer = TFC_Time.getTotalHours();
-			}
 
 			if(nutrientTimer < TFC_Time.getTotalHours())
 			{
@@ -52,46 +51,31 @@ public class TileEntityFarmland extends NetworkTileEntity
 					crop = CropManager.getInstance().getCropFromId(((TileEntityCrop)worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord)).cropId);
 
 					if((crop.cycleType != 0))
-					{
-						if(nutrients[0] < soilMax) {
+						if(nutrients[0] < soilMax)
 							nutrients[0] += restoreAmount + crop.nutrientExtraRestore[0];
-						}
-					}
 					if((crop.cycleType != 1))
-					{
-						if(nutrients[1] < soilMax) {
+						if(nutrients[1] < soilMax)
 							nutrients[1] += restoreAmount + crop.nutrientExtraRestore[1];
-						}
-					}
 					if((crop.cycleType != 2))
-					{
-						if(nutrients[2] < soilMax) {
+						if(nutrients[2] < soilMax)
 							nutrients[2] += restoreAmount + crop.nutrientExtraRestore[2];
-						}
-					}
 				}
 				else
 				{
-					if(nutrients[0] < soilMax) {
+					if(nutrients[0] < soilMax)
 						nutrients[0] += restoreAmount;
-					}
-					if(nutrients[1] < soilMax) {
+					if(nutrients[1] < soilMax)
 						nutrients[1] += restoreAmount;
-					}
-					if(nutrients[2] < soilMax) {
+					if(nutrients[2] < soilMax)
 						nutrients[2] += restoreAmount;
-					}
 				}
 
-				if(nutrients[0] > soilMax) {
+				if(nutrients[0] > soilMax)
 					nutrients[0] = soilMax;
-				}
-				if(nutrients[1] > soilMax) {
+				if(nutrients[1] > soilMax)
 					nutrients[1] = soilMax;
-				}
-				if(nutrients[2] > soilMax) {
+				if(nutrients[2] > soilMax)
 					nutrients[2] = soilMax;
-				}
 
 				nutrientTimer+=24;
 
@@ -132,23 +116,23 @@ public class TileEntityFarmland extends NetworkTileEntity
 	 * Reads a tile entity from NBT.
 	 */
 	@Override
-	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(par1NBTTagCompound);
+		super.readFromNBT(nbt);
 
-		nutrients = par1NBTTagCompound.getIntArray("nutrients");
-		nutrientTimer = par1NBTTagCompound.getLong("nutrientTimer");
+		nutrients = nbt.getIntArray("nutrients");
+		nutrientTimer = nbt.getLong("nutrientTimer");
 	}
 
 	/**
 	 * Writes a tile entity to NBT.
 	 */
 	@Override
-	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setIntArray("nutrients", nutrients);
-		par1NBTTagCompound.setLong("nutrientTimer", nutrientTimer);    
+		super.writeToNBT(nbt);
+		nbt.setIntArray("nutrients", nutrients);
+		nbt.setLong("nutrientTimer", nutrientTimer); 
 	}
 
 	@Override
@@ -157,6 +141,7 @@ public class TileEntityFarmland extends NetworkTileEntity
 		nutrients[0] = inStream.readInt();
 		nutrients[1] = inStream.readInt();
 		nutrients[2] = inStream.readInt();		
+		nutrients[3] = inStream.readInt();	
 	}
 
 	@Override
@@ -215,6 +200,7 @@ public class TileEntityFarmland extends NetworkTileEntity
 			dos.writeInt(nutrients[0]);
 			dos.writeInt(nutrients[1]);
 			dos.writeInt(nutrients[2]);
+			dos.writeInt(nutrients[3]);
 		} catch (IOException e) {
 		}
 

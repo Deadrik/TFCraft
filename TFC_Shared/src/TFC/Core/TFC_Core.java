@@ -240,6 +240,11 @@ public class TFC_Core
 		return (id == TFCBlocks.Dirt.blockID || id == TFCBlocks.Dirt2.blockID);
 	}
 
+	public static boolean isFarmland(int id)
+	{
+		return (id == TFCBlocks.tilledSoil.blockID || id == TFCBlocks.tilledSoil2.blockID);
+	}
+
 	public static boolean isGrass(int id)
 	{
 		return (id == TFCBlocks.Grass.blockID || id == TFCBlocks.Grass2.blockID ||

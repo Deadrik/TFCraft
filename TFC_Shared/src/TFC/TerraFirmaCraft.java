@@ -302,6 +302,11 @@ public class TerraFirmaCraft
 		TFCOptions.cropNutrientCColor[2] = (byte)TFCOptions.getIntFor(config,"ColorNutrientC","Blue", 49);
 		TFCOptions.cropNutrientCColor[3] = (byte)TFCOptions.getIntFor(config,"ColorNutrientC","Alpha", 200);
 
+		TFCOptions.cropFertilizerColor[0] = (byte)TFCOptions.getIntFor(config,"cropFertilizerColor","Red", 255);
+		TFCOptions.cropFertilizerColor[1] = (byte)TFCOptions.getIntFor(config,"cropFertilizerColor","Green", 255);
+		TFCOptions.cropFertilizerColor[2] = (byte)TFCOptions.getIntFor(config,"cropFertilizerColor","Blue", 0);
+		TFCOptions.cropFertilizerColor[3] = (byte)TFCOptions.getIntFor(config,"cropFertilizerColor","Alpha", 200);
+
 		TFCOptions.anvilRuleColor0[0] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor0","Red", 237);
 		TFCOptions.anvilRuleColor0[1] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor0","Green", 28);
 		TFCOptions.anvilRuleColor0[2] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor0","Blue", 36);
@@ -324,9 +329,8 @@ public class TerraFirmaCraft
 		TFCOptions.HealthGainCap = TFCOptions.getIntFor(config,"Player","HealthGainCap", 3000, "The maximum achievable health pool total.");
 
 		/**Always end with this*/
-		if (config != null) {
+		if (config != null)
 			config.save();
-		}
 	}
 
 	public void loadOre()
@@ -408,10 +412,8 @@ public class TerraFirmaCraft
 					config.get(s, "Horizontal Density", 50).getInt());
 
 			//If this is a new entry
-			if(!WorldGenOre.OreList.containsKey(s)) 
-			{
+			if(!WorldGenOre.OreList.containsKey(s))
 				WorldGenOre.OreList.put(s, data);
-			}
 			else //There is an entry that already exists for this name so we want to replace the default.
 			{
 				WorldGenOre.OreList.remove(s);
@@ -420,9 +422,8 @@ public class TerraFirmaCraft
 		}
 
 		/**Always end with this*/
-		if (config != null) {
+		if (config != null)
 			config.save();
-		}
 	}
 
 	private static OreSpawnData getOreData(Configuration config, String category, String type, String size, 

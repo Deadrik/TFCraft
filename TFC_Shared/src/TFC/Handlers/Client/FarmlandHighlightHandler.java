@@ -1,52 +1,24 @@
 package TFC.Handlers.Client;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
+import net.minecraftforge.client.event.DrawBlockHighlightEvent;
+import net.minecraftforge.event.ForgeSubscribe;
+
 import org.lwjgl.opengl.GL11;
 
-import TFC.*;
+import TFC.TFCBlocks;
+import TFC.TFCItems;
 import TFC.API.TFCOptions;
-import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
-import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.Items.Tools.ItemCustomHoe;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityFarmland;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
-import net.minecraftforge.client.event.DrawBlockHighlightEvent;
-import net.minecraftforge.event.ForgeSubscribe;
 
 public class FarmlandHighlightHandler{
 
@@ -54,20 +26,18 @@ public class FarmlandHighlightHandler{
 	public void DrawBlockHighlightEvent(DrawBlockHighlightEvent evt) 
 	{
 		World world = evt.player.worldObj;		
-		double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * (double)evt.partialTicks;
-		double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * (double)evt.partialTicks;
-		double var12 = evt.player.lastTickPosZ + (evt.player.posZ - evt.player.lastTickPosZ) * (double)evt.partialTicks;
-		
+		double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * evt.partialTicks;
+		double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * evt.partialTicks;
+		double var12 = evt.player.lastTickPosZ + (evt.player.posZ - evt.player.lastTickPosZ) * evt.partialTicks;
+
 		boolean isMetalHoe = false;
-		
+
 		if(evt.currentItem != null && evt.currentItem.getItem().itemID != TFCItems.IgInHoe.itemID &&
 				evt.currentItem.getItem().itemID != TFCItems.IgExHoe.itemID &&
 				evt.currentItem.getItem().itemID != TFCItems.SedHoe.itemID &&
 				evt.currentItem.getItem().itemID != TFCItems.MMHoe.itemID)
-		{
 			isMetalHoe = true;
-		}
-		
+
 		if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && isMetalHoe && PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 1)
 		{
 			int id = world.getBlockId(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
@@ -78,101 +48,122 @@ public class FarmlandHighlightHandler{
 				id = TFCBlocks.tilledSoil.blockID;
 				crop = 1;
 			}
-			
+
 			if(id == TFCBlocks.tilledSoil.blockID || id == TFCBlocks.tilledSoil2.blockID)
 			{
 				TileEntityFarmland te = (TileEntityFarmland) world.getBlockTileEntity(evt.target.blockX, evt.target.blockY - crop, evt.target.blockZ);
 				te.requestNutrientData();
 
-				float timeMultiplier = (float)TFC_Time.daysInYear / 360f;
+				float timeMultiplier = TFC_Time.daysInYear / 360f;
 				int soilMax = (int) (25000 * timeMultiplier);
 
 				//Setup GL for the depthbox
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4ub(TFCOptions.cropNutrientAColor[0], TFCOptions.cropNutrientAColor[1], TFCOptions.cropNutrientAColor[2], TFCOptions.cropNutrientAColor[3]);
+
 				GL11.glDisable(GL11.GL_CULL_FACE);
 				//GL11.glLineWidth(6.0F);
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glDepthMask(false);
 
 				double offset = 0;
-				double nutrient = 1.02 + ((double)te.nutrients[0] / (double)soilMax)*0.5;
-
+				double fertilizer = 1.02 + ((double)te.nutrients[3] / (double)soilMax)*0.5;
+				GL11.glColor4ub(TFCOptions.cropFertilizerColor[0], TFCOptions.cropFertilizerColor[1], TFCOptions.cropFertilizerColor[2], TFCOptions.cropFertilizerColor[3]);
 				drawBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
-						evt.target.blockX + offset + 0.3333,
-						evt.target.blockY + nutrient - crop, 
+						evt.target.blockX + 1,
+						evt.target.blockY + fertilizer - crop, 
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
-				
+
+				double nutrient = 1.02 + ((double)te.nutrients[0] / (double)soilMax)*0.5;
+				GL11.glColor4ub(TFCOptions.cropNutrientAColor[0], TFCOptions.cropNutrientAColor[1], TFCOptions.cropNutrientAColor[2], TFCOptions.cropNutrientAColor[3]);
+				drawBox(AxisAlignedBB.getAABBPool().getAABB(
+						evt.target.blockX + offset,
+						evt.target.blockY + 1.01 - crop + fertilizer-1.02,
+						evt.target.blockZ,
+						evt.target.blockX + offset + 0.3333,
+						evt.target.blockY + nutrient - crop + fertilizer-1.02, 
+						evt.target.blockZ + 1
+						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
+
 				offset = 0.3333;
 				nutrient = 1.02 + ((double)te.nutrients[1] / (double)soilMax)*0.5;
 				GL11.glColor4ub(TFCOptions.cropNutrientBColor[0], TFCOptions.cropNutrientBColor[1], TFCOptions.cropNutrientBColor[2], TFCOptions.cropNutrientBColor[3]);
 				drawBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
-						evt.target.blockY + 1.01 - crop,
+						evt.target.blockY + 1.01 - crop + fertilizer-1.02,
 						evt.target.blockZ,
 						evt.target.blockX + offset + 0.3333,
-						evt.target.blockY + nutrient - crop, 
+						evt.target.blockY + nutrient - crop + fertilizer-1.02, 
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
-				
+
 				offset = 0.6666;
 				nutrient = 1.02 + ((double)te.nutrients[2] / (double)soilMax)*0.5;
 				GL11.glColor4ub(TFCOptions.cropNutrientCColor[0], TFCOptions.cropNutrientCColor[1], TFCOptions.cropNutrientCColor[2], TFCOptions.cropNutrientCColor[3]);
 				drawBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
-						evt.target.blockY + 1.01 - crop,
+						evt.target.blockY + 1.01 - crop + fertilizer-1.02,
 						evt.target.blockZ,
 						evt.target.blockX + offset + 0.3333,
-						evt.target.blockY + nutrient - crop, 
+						evt.target.blockY + nutrient - crop + fertilizer-1.02, 
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 
 				GL11.glEnable(GL11.GL_CULL_FACE);
-				
-				
+
+
 				/**
 				 * Draw the outliens around the boxes
 				 * */
-				
+
 				GL11.glColor4f(0.1F, 0.1F, 0.1F, 1.0F);
 				GL11.glLineWidth(3.0F);
 				GL11.glDepthMask(false);
-				
+
 				offset = 0;
-				nutrient = 1.02 + ((double)te.nutrients[0] / (double)soilMax)*0.5;
+
 				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
-						evt.target.blockX + offset + 0.3333,
-						evt.target.blockY + nutrient - crop, 
+						evt.target.blockX + 1,
+						evt.target.blockY + fertilizer - crop, 
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
-				
+
+				nutrient = 1.02 + ((double)te.nutrients[0] / (double)soilMax)*0.5;
+				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().getAABB(
+						evt.target.blockX + offset,
+						evt.target.blockY + 1.01 - crop + fertilizer-1.02,
+						evt.target.blockZ,
+						evt.target.blockX + offset + 0.3333,
+						evt.target.blockY + nutrient - crop + fertilizer-1.02, 
+						evt.target.blockZ + 1
+						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
+
 				offset = 0.3333;
 				nutrient = 1.02 + ((double)te.nutrients[1] / (double)soilMax)*0.5;
 				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
-						evt.target.blockY + 1.01 - crop,
+						evt.target.blockY + 1.01 - crop + fertilizer-1.02,
 						evt.target.blockZ,
 						evt.target.blockX + offset + 0.3333,
-						evt.target.blockY + nutrient - crop, 
+						evt.target.blockY + nutrient - crop + fertilizer-1.02, 
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
-				
+
 				offset = 0.6666;
 				nutrient = 1.02 + ((double)te.nutrients[2] / (double)soilMax)*0.5;
 				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
-						evt.target.blockY + 1.01 - crop,
+						evt.target.blockY + 1.01 - crop + fertilizer-1.02,
 						evt.target.blockZ,
 						evt.target.blockX + offset + 0.3333,
-						evt.target.blockY + nutrient - crop, 
+						evt.target.blockY + nutrient - crop + fertilizer-1.02, 
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 			}
@@ -192,7 +183,7 @@ public class FarmlandHighlightHandler{
 			if(id == TFCBlocks.tilledSoil.blockID || id == TFCBlocks.tilledSoil2.blockID)
 			{				
 				boolean water = TFC.Blocks.BlockFarmland.isWaterNearby(world, evt.target.blockX, evt.target.blockY-crop, evt.target.blockZ);
-				
+
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				if(water)
@@ -203,7 +194,7 @@ public class FarmlandHighlightHandler{
 				//GL11.glLineWidth(6.0F);
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glDepthMask(false);
-				
+
 				drawFace(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX,
 						evt.target.blockY + 1.01 - crop,
@@ -226,7 +217,7 @@ public class FarmlandHighlightHandler{
 				TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(evt.target.blockX, evt.target.blockY, evt.target.blockZ);
 				CropIndex index = CropManager.getInstance().getCropFromId(te.cropId);
 				boolean fullyGrown = te.growth >= index.numGrowthStages;
-				
+
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				if(fullyGrown)
@@ -237,7 +228,7 @@ public class FarmlandHighlightHandler{
 				//GL11.glLineWidth(6.0F);
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glDepthMask(false);
-				
+
 				drawFace(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX,
 						evt.target.blockY + 0.01,
@@ -264,7 +255,7 @@ public class FarmlandHighlightHandler{
 		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.maxZ);
 		var2.draw();
 	}
-	
+
 	void drawBox(AxisAlignedBB par1AxisAlignedBB)
 	{
 		Tessellator var2 = Tessellator.instance;
@@ -300,7 +291,7 @@ public class FarmlandHighlightHandler{
 		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.minZ);
 		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.minY, par1AxisAlignedBB.minZ);
 		var2.draw();
-		
+
 		//+z
 		var2.startDrawing(GL11.GL_QUADS);
 		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.minY, par1AxisAlignedBB.maxZ);
