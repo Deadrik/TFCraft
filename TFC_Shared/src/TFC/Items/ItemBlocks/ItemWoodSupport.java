@@ -19,11 +19,11 @@ public class ItemWoodSupport extends ItemTerraBlock
 	public EnumSize getSize(ItemStack is) {
 		return EnumSize.MEDIUM;
 	}
-	
+
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
-		String s = new StringBuilder().append((super.getItemDisplayName(itemstack)).substring(0, 18)).append(".").append(Global.WOOD_ALL[itemstack.getItemDamage()]).toString();
+		String s = new StringBuilder().append((super.getItemDisplayName(itemstack))/*.substring(0, 18)*/).append(".").append(Global.WOOD_ALL[itemstack.getItemDamage()]).toString();
 		return s;
 	}
 }

@@ -1,7 +1,6 @@
 package TFC;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,7 +24,6 @@ import TFC.Blocks.BlockSulfur;
 import TFC.Blocks.BlockThatch;
 import TFC.Blocks.BlockTuyere;
 import TFC.Blocks.BlockWoodSupport;
-import TFC.Blocks.BlockWoodSupport2;
 import TFC.Blocks.Devices.BlockBarrel;
 import TFC.Blocks.Devices.BlockBarrel2;
 import TFC.Blocks.Devices.BlockBellows;
@@ -271,12 +269,12 @@ public class TFCBlocks
 
 	public static Block ArmourStand;
 	public static Block ArmourStand2;
-	
+
 	public static Block LogNatural2;
 	public static Block WoodHoriz3;
 	public static Block WoodHoriz4;
 	public static Block WoodVert2;
-	
+
 	public static Block SteamPipe;
 	public static Block SteamPipeValve;
 
@@ -365,8 +363,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WoodVert, "WoodVert");
 		GameRegistry.registerBlock(WoodHoriz, "WoodHoriz");
 		GameRegistry.registerBlock(WoodHoriz2, "WoodHoriz2");
-		
-		
+
+
 		GameRegistry.registerBlock(LogNatural2,ItemCustomWood2.class,"LogNatural2");
 		GameRegistry.registerBlock(WoodVert2, "WoodVert2");
 		GameRegistry.registerBlock(WoodHoriz3, "WoodHoriz3");
@@ -397,9 +395,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(SteamPipeValve, TFC.Items.ItemBlocks.ItemPipeValve.class, "ValvePipe");
 
 		// Wooden Doors
-		for (int i=0; i < Global.WOOD_ALL.length - 1; i++) {
+		for (int i=0; i < Global.WOOD_ALL.length - 1; i++)
 			GameRegistry.registerBlock(Doors[i], "Door"+Global.WOOD_ALL[i].replaceAll(" ", ""));
-		}
 
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
 		GameRegistry.registerBlock(Barrel, ItemBarrels.class,"Barrel");
@@ -533,8 +530,8 @@ public class TFCBlocks
 		TFCBlocks.Sulfur = new BlockSulfur(TFCBlockID.Sulfur, Material.rock).setUnlocalizedName("Sulfur").setHardness(0.5F).setResistance(1F);
 		TFCBlocks.WoodSupportV = new BlockWoodSupport(TFCBlockID.WoodSupportV, Material.wood).setUnlocalizedName("WoodSupportV").setHardness(0.5F).setResistance(1F);
 		TFCBlocks.WoodSupportH = new BlockWoodSupport(TFCBlockID.WoodSupportH, Material.wood).setUnlocalizedName("WoodSupportH").setHardness(0.5F).setResistance(1F);
-		TFCBlocks.WoodSupportV2 = new BlockWoodSupport2(TFCBlockID.WoodSupportV2, Material.wood).setUnlocalizedName("WoodSupportV2").setHardness(0.5F).setResistance(1F);
-		TFCBlocks.WoodSupportH2 = new BlockWoodSupport2(TFCBlockID.WoodSupportH2, Material.wood).setUnlocalizedName("WoodSupportH2").setHardness(0.5F).setResistance(1F);
+		TFCBlocks.WoodSupportV2 = new BlockWoodSupport(TFCBlockID.WoodSupportV2, Material.wood).setUnlocalizedName("WoodSupportV2").setHardness(0.5F).setResistance(1F);
+		TFCBlocks.WoodSupportH2 = new BlockWoodSupport(TFCBlockID.WoodSupportH2, Material.wood).setUnlocalizedName("WoodSupportH2").setHardness(0.5F).setResistance(1F);
 
 		TFCBlocks.tilledSoil = new TFC.Blocks.BlockFarmland(TFCBlockID.tilledSoil, TFCBlocks.Dirt.blockID, 0).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("tilledSoil");
 		TFCBlocks.tilledSoil2 = new TFC.Blocks.BlockFarmland(TFCBlockID.tilledSoil2, TFCBlocks.Dirt2.blockID, 16).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("tilledSoil2");
@@ -572,7 +569,7 @@ public class TFCBlocks
 		TFCBlocks.WoodVert = new BlockLogVert(TFCBlockID.WoodVert).setUnlocalizedName("WoodVert").setHardness(40).setResistance(15F);
 		TFCBlocks.WoodHoriz = new BlockLogHoriz(TFCBlockID.WoodHoriz, 0).setUnlocalizedName("WoodHoriz").setHardness(40).setResistance(15F);
 		TFCBlocks.WoodHoriz2 = new BlockLogHoriz(TFCBlockID.WoodHoriz2, 8).setUnlocalizedName("WoodHoriz2").setHardness(40).setResistance(15F);
-		
+
 		TFCBlocks.LogNatural2 = new TFC.Blocks.Flora.BlockLogNatural2(TFCBlockID.LogNatural2).setHardness(50.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("log2");
 		TFCBlocks.WoodVert2 = new BlockLogVert2(TFCBlockID.WoodVert2).setUnlocalizedName("WoodVert2").setHardness(40).setResistance(15F);
 		TFCBlocks.WoodHoriz3 = new BlockLogHoriz2(TFCBlockID.WoodHoriz3, 0).setUnlocalizedName("WoodHoriz3").setHardness(40).setResistance(15F);
@@ -602,9 +599,8 @@ public class TFCBlocks
 		TFCBlocks.WallSmoothMM = new BlockCustomWall(TFCBlockID.WallSmoothMM, StoneMMSmooth, 6).setUnlocalizedName("WallSmooth");
 
 		// Wooden Doors
-		for (int i=0; i < Global.WOOD_ALL.length - 1; i++) {
+		for (int i=0; i < Global.WOOD_ALL.length - 1; i++)
 			TFCBlocks.Doors[i] = new BlockCustomDoor(TFCBlockID.Doors[i], i*2).setUnlocalizedName("Door "+Global.WOOD_ALL[i]);
-		}
 
 		TFCBlocks.IngotPile =  new BlockIngotPile(TFCBlockID.IngotPile).setUnlocalizedName("ingotpile").setHardness(3);
 
@@ -630,7 +626,7 @@ public class TFCBlocks
 		TFCBlocks.StrawHideBed = new BlockCustomBed(TFCBlockID.StrawHideBed).setUnlocalizedName("StrawHideBed").setHardness(1);
 		TFCBlocks.ArmourStand = new BlockStand(TFCBlockID.ArmourStand).setUnlocalizedName("ArmourStand").setHardness(2);
 		TFCBlocks.ArmourStand2 = new BlockStand2(TFCBlockID.ArmourStand2).setUnlocalizedName("ArmourStand").setHardness(2);
-		
+
 		TFCBlocks.SteamPipe = new BlockPipeBasic(TFCBlockID.BasicPipe,Material.iron).setUnlocalizedName("BasicPipe").setHardness(2);
 		TFCBlocks.SteamPipeValve = new BlockPipeValve(TFCBlockID.ValvePipe,Material.iron).setUnlocalizedName("ValvePipe").setHardness(2);
 
@@ -675,20 +671,20 @@ public class TFCBlocks
 	public static boolean isIdVSupport(int id){	
 		return id == WoodSupportV.blockID || id == WoodSupportV2.blockID;
 	}
-	
+
 	public static boolean isIdHSupport(int id){	
 		return id == WoodSupportH.blockID || id == WoodSupportH2.blockID;
 	}
-	
+
 	public static boolean isIdAFence(int par0)
-    {
-        return par0 == TFCBlocks.Fence.blockID||par0 == TFCBlocks.Fence2.blockID || BlockFence.isIdAFence(par0);
-    }
-	
+	{
+		return par0 == TFCBlocks.Fence.blockID||par0 == TFCBlocks.Fence2.blockID || BlockFence.isIdAFence(par0);
+	}
+
 	public static boolean canFenceConnectTo(int l){
 		return isIdAFence(l) || l == TFCBlocks.FenceGate.blockID || l == TFCBlocks.FenceGate2.blockID;
 	}
-	
+
 	public static boolean isArmourStand(int l){
 		return l == TFCBlocks.ArmourStand.blockID || l == TFCBlocks.ArmourStand2.blockID;
 	}
