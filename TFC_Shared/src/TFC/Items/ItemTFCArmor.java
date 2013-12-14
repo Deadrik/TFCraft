@@ -13,6 +13,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import TFC.Reference;
 import TFC.API.Armor;
+import TFC.API.IClothing;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -22,13 +23,14 @@ import TFC.Core.Util.StringUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemTFCArmor extends ItemArmor implements ISize
+public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 {
 	private static final String[] leatherNames = new String[] {"leather_helmet_overlay", "leather_chestplate_overlay", "leather_leggings_overlay", "leather_boots_overlay"};
 	public Armor ArmorType;
 	public Icon overlayIcon;
+	private int thermal = 0;
 
-	public ItemTFCArmor(int itemID, Armor armor, int renderIndex, int armorSlot)
+	public ItemTFCArmor(int itemID, Armor armor, int renderIndex, int armorSlot, int thermal)
 	{
 		super(itemID,EnumArmorMaterial.IRON,renderIndex,armorSlot);
 		ArmorType = armor;
@@ -36,7 +38,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 		this.setMaxDamage(ArmorType.getDurability(armorSlot));
 	}
 
-	public ItemTFCArmor(int itemID, Armor armor, int renderIndex, int armorSlot, EnumArmorMaterial m)
+	public ItemTFCArmor(int itemID, Armor armor, int renderIndex, int armorSlot, EnumArmorMaterial m, int thermal)
 	{
 		super(itemID, m, renderIndex, armorSlot);
 		ArmorType = armor;
@@ -47,11 +49,10 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	@Override
 	public int getItemStackLimit()
 	{
-		if(canStack()) {
+		if(canStack())
 			return this.getSize(null).stackSize * getWeight(null).multiplier;
-		} else {
+		else
 			return 1;
-		}
 	}
 
 	@Override
@@ -72,11 +73,8 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 		{
 			this.itemIcon = registerer.registerIcon("minecraft:" + getIconString());
 			overlayIcon = registerer.registerIcon("minecraft:" + leatherNames[this.armorType]);
-		}
-		else
-		{
+		} else
 			this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "armor/"+this.getUnlocalizedName().replace("item.", ""));
-		}
 	}
 
 	@Override
@@ -108,17 +106,12 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 				NBTTagCompound stackTagCompound = is.getTagCompound();
 
 				if(stackTagCompound.hasKey("creator"))
-				{
 					arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.ForgedBy") + " " + stackTagCompound.getString("creator"));
-				}
 			}
-		}
-		else
-		{
+		} else
 			arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Armor.Advanced") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
 					EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
 					EnumChatFormatting.DARK_GRAY + ")");
-		}
 
 	}
 
@@ -129,9 +122,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 		{
 			NBTTagCompound nbt = stack.getTagCompound();
 			if(nbt.hasKey("armorDuraBuff"))
-			{
 				return super.getMaxDamage(stack) + nbt.getShort("armorDuraBuff");
-			}
 		}
 		return super.getMaxDamage(stack);
 	}
@@ -139,9 +130,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	@Override
 	public EnumWeight getWeight(ItemStack is) {
 		if (this.getArmorMaterial() == EnumArmorMaterial.CLOTH)
-		{
 			return EnumWeight.LIGHT;
-		}
 		return EnumWeight.HEAVY;
 	}
 
@@ -157,6 +146,12 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 		String m = ArmorType.metaltype.replace(" ", "").toLowerCase();
 		return Reference.ModID+String.format(":textures/models/armor/%s_%d%s.png",
 				m, (slot == 2 ? 2 : 1), type == null ? "" : String.format("_%s", type));
+	}
+
+	@Override
+	public int getThermal() 
+	{
+		return thermal;
 	}
 }
 

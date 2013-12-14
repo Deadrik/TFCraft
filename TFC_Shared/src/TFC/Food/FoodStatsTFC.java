@@ -7,7 +7,6 @@ import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +14,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
+import TFC.API.IClothing;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
@@ -51,6 +51,8 @@ public class FoodStatsTFC
 	private int prevTemperatureLevel = 0;
 	private int extraFoodConsumed = 0;
 	private int extraWaterConsumed = 0;
+	private int heatStorage = 0;
+
 	Random rand = new Random();
 	ItemStack itemHead,itemChest,itemLegs,itemFeet;
 
@@ -103,6 +105,12 @@ public class FoodStatsTFC
 					this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
 				else if(!player.capabilities.isCreativeMode)
 					this.foodLevel = Math.max(this.foodLevel - (1 + satisfaction), 0);
+
+				if(heatStorage > temperatureLevel)
+				{
+					heatStorage--;
+					player.addChatMessage("HS: "+heatStorage);
+				}
 			}
 
 			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.hourLength/2)
@@ -179,8 +187,11 @@ public class FoodStatsTFC
 
 		temperatureLevel += applyTemperatureFromEnvironment(player);
 
-		extraFoodConsumed = (temperatureLevel <0 && rand.nextInt(350)==0)?temperatureLevel*-1:0;
-		extraWaterConsumed = (temperatureLevel >0 && rand.nextInt(350)==0)?temperatureLevel:0;
+		//If we are warm then add it to heat reserves
+		heatStorage = Math.max(Math.min(temperatureLevel+heatStorage, 14), 0);
+
+		extraFoodConsumed = (temperatureLevel <0 && heatStorage <= 0 && rand.nextInt(350)==0)?temperatureLevel*-1:0;
+		extraWaterConsumed = (temperatureLevel >0 && heatStorage <= 0 && rand.nextInt(350)==0)?temperatureLevel:0;
 
 		if(temperatureLevel != prevTemperatureLevel && !((prevTemperatureLevel >=-1 && prevTemperatureLevel <=1)&&
 				(temperatureLevel >=-1 && temperatureLevel <=1)))
@@ -234,13 +245,13 @@ public class FoodStatsTFC
 		itemFeet = player.inventory.armorItemInSlot(0);
 		int returnAmount = 0;
 		if(itemHead !=null)
-			returnAmount += (itemHead.getItem() == Item.helmetLeather)?250:0;
+			returnAmount += ((IClothing)itemHead.getItem()).getThermal();
 		if(itemChest !=null)
-			returnAmount += (itemChest.getItem() == Item.plateLeather)?250:0;
+			returnAmount += ((IClothing)itemChest.getItem()).getThermal();
 		if(itemLegs !=null)
-			returnAmount += (itemLegs.getItem() == Item.legsLeather)?250:0;
+			returnAmount += ((IClothing)itemLegs.getItem()).getThermal();
 		if(itemFeet !=null)
-			returnAmount += (itemFeet.getItem() == Item.bootsLeather)?250:0;
+			returnAmount += ((IClothing)itemFeet.getItem()).getThermal();
 		return returnAmount;
 	}
 
@@ -319,6 +330,7 @@ public class FoodStatsTFC
 			this.waterTimer = foodCompound.getLong("waterTimer");
 			this.foodSaturationLevel = foodCompound.getFloat("foodSaturationLevel");
 			this.foodExhaustionLevel = foodCompound.getFloat("foodExhaustionLevel");
+			this.heatStorage = foodCompound.getInteger("heatStorage");
 		}
 	}
 
@@ -338,6 +350,7 @@ public class FoodStatsTFC
 		foodCompound.setInteger("foodExtra",this.extraFoodConsumed);
 		foodCompound.setFloat("foodSaturationLevel", this.foodSaturationLevel);
 		foodCompound.setFloat("foodExhaustionLevel", this.foodExhaustionLevel);
+		foodCompound.setInteger("heatStorage",this.heatStorage);
 		par1NBTTagCompound.setCompoundTag("foodCompound", foodCompound);
 	}
 
