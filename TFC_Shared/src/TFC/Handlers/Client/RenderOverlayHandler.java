@@ -17,7 +17,6 @@ import TFC.Reference;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.FoodStatsTFC;
@@ -35,9 +34,8 @@ public class RenderOverlayHandler
 		GuiIngameForge.renderFood = false;
 
 		// We check for crosshairs just because it's always drawn and is before air bar
-		if(event.type != ElementType.CROSSHAIRS) {
+		if(event.type != ElementType.CROSSHAIRS)
 			return;
-		}
 
 		// This is for air to be drawn above our bars
 		GuiIngameForge.right_height += 10;
@@ -114,9 +112,7 @@ public class RenderOverlayHandler
 					int top = sr.getScaledHeight() - 28;
 					drawTexturedModalRect(left, top, 0, 64, barWidth, 5);
 					if (filled > 0)
-					{
 						drawTexturedModalRect(left, top, 0, 69, filled, 5);
-					}
 				}
 
 				if (mc.thePlayer.experienceLevel > 0)
@@ -156,6 +152,7 @@ public class RenderOverlayHandler
 					TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1}));
 
 			event.left.add("Health: " + player.getHealth());
+			event.left.add("Stability: " + TFC_Climate.manager.getStabilityLayerAt(xCoord, zCoord).data1);
 		}
 	}
 

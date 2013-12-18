@@ -18,6 +18,7 @@ import TFC.WorldGen.GenLayers.GenRainLayerTFC;
 import TFC.WorldGen.GenLayers.GenRockLayer1TFC;
 import TFC.WorldGen.GenLayers.GenRockLayer2TFC;
 import TFC.WorldGen.GenLayers.GenRockLayer3TFC;
+import TFC.WorldGen.GenLayers.GenStabilityLayer;
 import TFC.WorldGen.GenLayers.GenTreeLayerTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -54,6 +55,11 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	protected GenLayerTFC rainfallIndexLayer;
 	protected DataCache rainfallCache;
 
+	//Stability
+	protected GenLayerTFC genStability;
+	protected GenLayerTFC stabilityIndexLayer;
+	protected DataCache stabilityCache;
+
 	public TFCWorldChunkManager()
 	{
 		super();
@@ -68,6 +74,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		treeCache[0] = new DataCache(this,0);
 		treeCache[1] = new DataCache(this,1);
 		treeCache[2] = new DataCache(this,2);
+		stabilityCache = new DataCache(this,0);
 
 		this.biomesToSpawnIn = new ArrayList();
 		this.biomesToSpawnIn.add(TFCBiome.forest);
@@ -81,18 +88,18 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	}
 
 	public long seed = 0;
-	public TFCWorldChunkManager(long Seed, WorldType par3WorldType)
+	public TFCWorldChunkManager(long Seed, WorldType worldtype)
 	{
 		this();
 		seed = Seed;
-		GenLayerTFC[] var4 = GenLayerTFC.initializeAllBiomeGenerators(Seed, par3WorldType);
+		GenLayerTFC[] var4 = GenLayerTFC.initializeAllBiomeGenerators(Seed, worldtype);
 		this.genBiomes = var4[0];
 		this.biomeIndexLayer = var4[1];
 
 		//Setup Rocks
-		GenLayerTFC[] var5 = GenRockLayer1TFC.initializeAllBiomeGenerators(Seed+1, par3WorldType);
-		GenLayerTFC[] var6 = GenRockLayer2TFC.initializeAllBiomeGenerators(Seed+2, par3WorldType);
-		GenLayerTFC[] var7 = GenRockLayer3TFC.initializeAllBiomeGenerators(Seed+3, par3WorldType);
+		GenLayerTFC[] var5 = GenRockLayer1TFC.initializeAllBiomeGenerators(Seed+1, worldtype);
+		GenLayerTFC[] var6 = GenRockLayer2TFC.initializeAllBiomeGenerators(Seed+2, worldtype);
+		GenLayerTFC[] var7 = GenRockLayer3TFC.initializeAllBiomeGenerators(Seed+3, worldtype);
 		genRocks = new GenLayerTFC[3];
 		rocksIndexLayer = new GenLayerTFC[3];
 		this.genRocks[0] = var5[0];
@@ -109,29 +116,32 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		genTrees = new GenLayerTFC[3];
 		treesIndexLayer = new GenLayerTFC[3];
 
-		GenLayerTFC[] var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(Seed+4, par3WorldType);
+		GenLayerTFC[] var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(Seed+4, worldtype);
 		genTrees[0] = var8[0];
 		treesIndexLayer[0] = var8[1];
 
-		var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(Seed+5, par3WorldType);
+		var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(Seed+5, worldtype);
 		genTrees[1] = var8[0];
 		treesIndexLayer[1] = var8[1];
 
-		var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(Seed+6, par3WorldType);
+		var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(Seed+6, worldtype);
 		genTrees[2] = var8[0];
 		treesIndexLayer[2] = var8[1];
 
 		//Setup Evapotranspiration
-		var8 = GenEVTLayerTFC.initializeAllBiomeGenerators(Seed+7, par3WorldType);
+		var8 = GenEVTLayerTFC.initializeAllBiomeGenerators(Seed+7, worldtype);
 		genEVT = var8[0];
 		evtIndexLayer = var8[1];
 
 		//Setup Rainfall
-		var8 = GenRainLayerTFC.initializeAllBiomeGenerators(Seed+8, par3WorldType);
+		var8 = GenRainLayerTFC.initializeAllBiomeGenerators(Seed+8, worldtype);
 		genRainfall = var8[0];
 		rainfallIndexLayer = var8[1];
 
-
+		//Setup Stability
+		var8 = GenStabilityLayer.initializeAllBiomeGenerators(Seed+9, worldtype);
+		genStability = var8[0];
+		stabilityIndexLayer = var8[1];
 	}
 
 	public TFCWorldChunkManager(World par1World)
@@ -166,9 +176,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		IntCache.resetIntCache();
 
 		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5)
-		{
 			par1ArrayOfFloat = new float[par4 * par5];
-		}
 
 		int[] var6 = this.rainfallIndexLayer.getInts(par2, par3, par4, par5);
 
@@ -179,9 +187,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 			var8 = 1-((8000-var8) / 8000);
 
 			if (var8 > 1.0F)
-			{
 				var8 = 1.0F;
-			}
 
 			par1ArrayOfFloat[var7] = var8;
 		}
@@ -198,9 +204,8 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	public float getTemperatureAtHeight(float par1, int par2)
 	{
 		float temp = par1;
-		if(par2 > 180) {
+		if(par2 > 180)
 			temp -= temp * (par2-180)/90;
-		}
 		return temp;
 	}
 
@@ -213,24 +218,13 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		//	IntCache.resetIntCache();
 
 		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5)
-		{
 			par1ArrayOfFloat = new float[par4 * par5];
-		}
 
 		//        int[] var6 = this.biomeIndexLayer.getInts(x, z, par4, par5);
 		//        var6 = TFC_Climate.getBioTemperature(z)
 
 		for (int var7 = 0; var7 < par4 * par5; ++var7)
-		{
-			//            float var8 = (float)((TFCBiome)TFCBiome.biomeList[var6[var7]]).getFloatTemp();
-			//
-			//            if (var8 > 1.0F)
-			//            {
-			//                var8 = 1.0F;
-			//            }
-
 			par1ArrayOfFloat[var7] = TFC_Climate.getBioTemperature(x, z);
-		}
 
 		return par1ArrayOfFloat;
 	}
@@ -244,9 +238,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		IntCache.resetIntCache();
 
 		if (par1ArrayOfBiomeGenBase == null || par1ArrayOfBiomeGenBase.length < par4 * par5)
-		{
 			par1ArrayOfBiomeGenBase = new BiomeGenBase[par4 * par5];
-		}
 
 		int[] var6 = this.genBiomes.getInts(par2, par3, par4, par5);
 
@@ -277,9 +269,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5, boolean par6)
 	{
 		if (par1ArrayOfBiomeGenBase == null || par1ArrayOfBiomeGenBase.length < par4 * par5)
-		{
 			par1ArrayOfBiomeGenBase = new BiomeGenBase[par4 * par5];
-		}
 
 		if (par6 && par4 == 16 && par5 == 16 && (par2 & 15) == 0 && (par3 & 15) == 0)
 		{
@@ -297,13 +287,11 @@ public class TFCWorldChunkManager extends WorldChunkManager
 			{
 				int id = var7[var8] != -1 ? var7[var8] : 0;
 
-				if(var7[var8] == -1) {
+				if(var7[var8] == -1)
 					System.out.println("var7[var8] is " + var7[var8]);
-				}
 
-				if(var8 == -1) {
+				if(var8 == -1)
 					System.out.println("var8 is " + var8);
-				}
 
 				par1ArrayOfBiomeGenBase[var8] = BiomeGenBase.biomeList[id];
 			}
@@ -332,9 +320,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 			BiomeGenBase var13 = BiomeGenBase.biomeList[var11[var12]];
 
 			if (!par4List.contains(var13))
-			{
 				return false;
-			}
 		}
 
 		return true;
@@ -407,9 +393,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	public DataLayer[] getDataLayerAt(DataCache[] cache, DataLayer[] layers, GenLayerTFC[] indexLayers, int x, int y, int width, int height, boolean par6, int layer)
 	{
 		if (layers == null || layers.length < width * height)
-		{
 			layers = new DataLayer[width * height];
-		}
 
 		if (par6 && width == 16 && height == 16 && (x & 15) == 0 && (y & 15) == 0)
 		{
@@ -424,9 +408,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 			int[] var7 = indexLayers[layer].getInts(x, y, width, height);
 
 			for (int var8 = 0; var8 < width * height; ++var8)
-			{
 				layers[var8] = DataLayer.layers[var7[var8]];
-			}
 
 			return layers;
 		}
@@ -435,9 +417,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	public DataLayer[] getDataLayerAt(DataCache cache, DataLayer[] layers, GenLayerTFC indexLayers, int x, int y, int width, int height, boolean par6, int layer)
 	{
 		if (layers == null || layers.length < width * height)
-		{
 			layers = new DataLayer[width * height];
-		}
 
 		if (par6 && width == 16 && height == 16 && (x & 15) == 0 && (y & 15) == 0)
 		{
@@ -452,9 +432,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 			int[] var7 = indexLayers.getInts(x, y, width, height);
 
 			for (int var8 = 0; var8 < width * height; ++var8)
-			{
 				layers[var8] = DataLayer.layers[var7[var8]];
-			}
 
 			return layers;
 		}
@@ -513,6 +491,16 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	public DataLayer[] loadRainfallLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height)
 	{    	
 		return this.getDataLayerAt(rainfallCache, layers, rainfallIndexLayer, x, y, width, height, true, 0);
+	}
+
+	public DataLayer getStabilityLayerAt(int par1, int par2)
+	{
+		return this.stabilityCache.getDataLayerAt(stabilityIndexLayer, par1, par2);
+	}
+
+	public DataLayer[] loadStabilityLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height)
+	{    	
+		return this.getDataLayerAt(stabilityCache, layers, stabilityIndexLayer, x, y, width, height, true, 0);
 	}
 
 }

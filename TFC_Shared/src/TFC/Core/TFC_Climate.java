@@ -1,21 +1,9 @@
 package TFC.Core;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Random;
 
-import javax.imageio.ImageIO;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.resources.Resource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import TFC.Reference;
 import TFC.API.Util.Helper;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -496,14 +484,12 @@ public class TFC_Climate
 
 		float addMoisture = 1;
 		for(int i = -2; i <= 2 && addMoisture == 1; i++)
-		{
 			for(int k = -2; k <= 2 && addMoisture == 1; k++)
 			{
 				biome = worldObj.getBiomeGenForCoords(x+(i * 8), z+(k * 8));
 				if(biome.biomeID == TFCBiome.ocean.biomeID || biome.biomeID == TFCBiome.river.biomeID || biome.biomeID == TFCBiome.swampland.biomeID)
 					addMoisture = 2f;
 			}
-		}
 
 
 		return rain*((rainModEast + rainModWest + rainModNorth + rainModSouth + addMoisture)/5);
@@ -529,9 +515,12 @@ public class TFC_Climate
 		float rain = getRainfall(x,y,z);
 		float evt = manager.getEVTLayerAt(x, z).floatdata1;
 		if(rain >= 1000 && evt < 0.25 && manager.getBiomeGenAt(x, z).maxHeight < 0.15)
-		{
 			return true;
-		}
 		return false;
+	}
+
+	public static int getStability(int x, int z)
+	{
+		return manager.getStabilityLayerAt(x, z).data1;
 	}
 }

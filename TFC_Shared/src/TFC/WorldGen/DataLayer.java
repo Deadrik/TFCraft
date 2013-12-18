@@ -65,6 +65,8 @@ public class DataLayer
 	public static DataLayer Rain_4000 = new DataLayer(106,"4000", 4000f);
 	public static DataLayer Rain_8000 = new DataLayer(107,"8000", 8000f);
 
+	public static DataLayer SeismicStable = new DataLayer(110, 0);
+	public static DataLayer SeismicUnStable = new DataLayer(111, 1);
 
 	public int ID;
 	public int data1;//used as block id in rocks

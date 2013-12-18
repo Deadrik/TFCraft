@@ -58,6 +58,7 @@ import TFC.WorldGen.Generators.WorldGenLooseRocks;
 import TFC.WorldGen.Generators.WorldGenOre;
 import TFC.WorldGen.Generators.WorldGenPlants;
 import TFC.WorldGen.Generators.WorldGenSoilPits;
+import TFC.WorldGen.Generators.WorldGenSurfaceLava;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -123,6 +124,7 @@ public class TerraFirmaCraft
 		TFCItems.Setup();
 
 		//Register Generators
+		GameRegistry.registerWorldGenerator(new WorldGenSurfaceLava());
 		GameRegistry.registerWorldGenerator(new WorldGenOre());
 		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
 		GameRegistry.registerWorldGenerator(new WorldGenForests());
@@ -130,6 +132,7 @@ public class TerraFirmaCraft
 		GameRegistry.registerWorldGenerator(new WorldGenSoilPits());
 		GameRegistry.registerWorldGenerator(new WorldGenLargeRock());
 		GameRegistry.registerWorldGenerator(new WorldGenPlants());
+
 
 		TFCWorldType.DEFAULT = new TFCWorldType(0, "DEFAULT", 1);
 		TFCWorldType.FLAT = new TFCWorldType(1, "FLAT");

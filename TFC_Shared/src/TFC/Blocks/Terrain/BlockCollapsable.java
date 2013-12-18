@@ -1,7 +1,6 @@
 package TFC.Blocks.Terrain;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -18,6 +17,7 @@ import TFC.API.TFCOptions;
 import TFC.API.Enums.TFCDirection;
 import TFC.API.Util.ByteCoord;
 import TFC.API.Util.CollapseData;
+import TFC.API.Util.CollapseList;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.TFC_Sounds;
 import TFC.Entities.EntityFallingStone;
@@ -316,7 +316,7 @@ public class BlockCollapsable extends BlockTerra
 			if(!checkedmap.contains(block) && world.rand.nextFloat() < block.collapseChance/100f)
 			{
 				checks++;
-				System.out.println("Number of block checks: " + checks + " | Queue Length: " + checkQueue.size());
+				//System.out.println("Number of block checks: " + checks + " | Queue Length: " + checkQueue.size());
 				worldX = block.coords.x + i;
 				worldY = block.coords.y + j;
 				worldZ = block.coords.z + k;
@@ -421,23 +421,6 @@ public class BlockCollapsable extends BlockTerra
 	public boolean canBeReplacedByLeaves(World w, int x, int y, int z)
 	{
 		return false;
-	}
-
-	public class CollapseList<E> extends LinkedList<CollapseData>
-	{
-
-		public boolean add(ArrayList<ByteCoord> checkedmap, CollapseData e)
-		{
-			if(this.peekFirst() != null)
-			{
-				CollapseData first = peekFirst();
-				if(first.coords.equals(e.coords) || checkedmap.contains(e))
-					return false;
-				else
-					this.addLast(e);
-			}
-			return false;
-		}
 	}
 
 }

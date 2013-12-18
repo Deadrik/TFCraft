@@ -69,6 +69,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	private DataLayer[] rockLayer3;
 	private DataLayer[] evtLayer;
 	private DataLayer[] rainfallLayer;
+	private DataLayer[] stabilityLayer;
 
 	private short[] idsTop;
 	private short[] idsBig;
@@ -136,12 +137,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		rockLayer3 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRockLayerGeneratorData(rockLayer3, chunkX * 16, chunkZ * 16, 16, 16, 2);
 		evtLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadEVTLayerGeneratorData(evtLayer, chunkX * 16, chunkZ * 16, 16, 16);
 		rainfallLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
+		stabilityLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadStabilityLayerGeneratorData(stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
 
 		heightMap = new int[256];
 		if(!TFCOptions.enableOreTest)
-		{
 			replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
-		}
 		replaceBlocksForBiomeLow(chunkX, chunkZ, rand, idsBig, metaBig);
 
 
@@ -154,9 +154,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
 		data.heightmap = heightMap;
 		String key = data.chunkX + "," + data.chunkZ;
-		if(!this.worldObj.isRemote) {
+		if(!this.worldObj.isRemote)
 			ChunkDataManager.chunkmap.put(key, data);
-		}
 
 		chunk.generateSkylightMap();
 		return chunk;
@@ -186,16 +185,12 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			(new WorldGenLakesTFC(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
 		}
 
-		if (!var11 && this.rand.nextInt(8) == 0)
+		if (!var11 && this.rand.nextInt(8) == 0 && TFC_Climate.getStability(xCoord, zCoord) == 1)
 		{
 			var12 = xCoord + this.rand.nextInt(16) + 8;
 			var13 = this.rand.nextInt(this.rand.nextInt(120) + 8);
 			var14 = zCoord + this.rand.nextInt(16) + 8;
-
-			if (var13 < 40)
-			{
-				(new WorldGenLakesTFC(Block.lavaStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
-			}
+			(new WorldGenLakesTFC(Block.lavaStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
 		}
 
 		biome.decorate(this.worldObj, this.rand, xCoord, zCoord);
@@ -204,22 +199,16 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		zCoord += 8;
 
 		for (var12 = 0; var12 < 16; ++var12)
-		{
 			for (var13 = 0; var13 < 16; ++var13)
 			{
 				var14 = this.worldObj.getPrecipitationHeight(xCoord + var12, zCoord + var13);
 
 				if (this.worldObj.isBlockFreezable(var12 + xCoord, var14 - 1, var13 + zCoord))
-				{
 					this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID, 0, 0x2);
-				}
 
 				if (canSnowAt(worldObj, var12 + xCoord, var14, var13 + zCoord))
-				{
 					this.worldObj.setBlock(var12 + xCoord, var14, var13 + zCoord, Block.snow.blockID, 0, 0x2);
-				}
 			}
-		}
 	}
 
 	public static List getCreatureSpawnsByChunk(World world,BiomeGenBase biome, int x, int z){
@@ -238,11 +227,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
 				spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 2, 2, 4));
 			}
-		}
-		else{
-			//run of the mill plains, but not too cold
+		} else //run of the mill plains, but not too cold
 			if(temp > 10 && rain > 100 && rain <= 500)
-			{
 				if(temp < 30)
 				{
 					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 2, 2, 4));
@@ -254,8 +240,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 1, 1, 2));
 					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,1,2,3));
 				}
-			}
-		}
 		//regular temperate forest
 		if(temp > 15 &&temp < 28 && rain > 250){
 			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 2+mountainousAreaModifier, 2+mountainousAreaModifier, 3+mountainousAreaModifier));
@@ -266,7 +250,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 		}
 		//colder climate
-		if(temp > -10 && temp <=15){
+		if(temp > -10 && temp <=15)
 			//boreal forest
 			if(rain > 250){
 				spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1+mountainousAreaModifier, 1, 2));
@@ -274,21 +258,19 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 2+mountainousAreaModifier, 1, 1));
 				spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1+mountainousAreaModifier, 2, 3));
 			}
-			//closer to tundra or taiga
+		//closer to tundra or taiga
 			else if(rain >100){
 				spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 1+mountainousAreaModifier, 1, 1));
 				spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1+mountainousAreaModifier, 1, 1));
 			}
-		}
 		//Jungle
 		if(temp >= 28 && temp < 44 && rain > 1500){
 			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 2+mountainousAreaModifier, 2+mountainousAreaModifier, 4+mountainousAreaModifier));
 			spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 3+mountainousAreaModifier, 1, 4+mountainousAreaModifier));
 		}
 		//Swamp
-		if(TFC_Climate.isSwamp(x,150,z)){
+		if(TFC_Climate.isSwamp(x,150,z))
 			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
-		}
 
 		return spawnableCreatureList;
 	}
@@ -298,9 +280,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		float var5 = TFC_Climate.getHeightAdjustedTemp(par1, par2, par3);
 
 		if (var5 > 0F)
-		{
 			return false;
-		}
 		else
 		{
 			if (par2 >= 0 && par2 < 256 && world.getSavedLightValue(EnumSkyBlock.Block, par1, par2, par3) < 10)
@@ -309,9 +289,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				int var7 = world.getBlockId(par1, par2, par3);
 
 				if (var7 == 0 && Block.snow.canPlaceBlockAt(world, par1, par2, par3) && var6 != 0 && var6 != Block.ice.blockID && Block.blocksList[var6].blockMaterial.blocksMovement())
-				{
 					return true;
-				}
 			}
 
 			return false;
@@ -330,9 +308,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		this.noiseArray = this.initializeNoiseFieldHigh(this.noiseArray, par1 * var4, 0, par2 * var4, var7, var8, var9);
 
 		for (int var10 = 0; var10 < var4; ++var10)
-		{
 			for (int var11 = 0; var11 < var4; ++var11)
-			{
 				for (int var12 = 0; var12 < var5; ++var12)
 				{
 					double yLerp = 0.125D;
@@ -363,20 +339,12 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							double var47 = var34 - var49;
 
 							for (int var51 = 0; var51 < 4; ++var51)
-							{
 								if ((var47 += var49) > 0.0D)
-								{
 									idsTop[var43 += var44] = (short)Block.stone.blockID;
-								}
 								else if (var12 * 8 + var31 < seaLevel)
-								{
 									idsTop[var43 += var44] = (short)Block.waterStill.blockID;
-								}
 								else
-								{
 									idsTop[var43 += var44] = 0;
-								}
-							}
 							var34 += var38;
 							var36 += var40;
 						}
@@ -386,8 +354,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						var21 += var29;
 					}
 				}
-			}
-		}
 	}
 
 	/**
@@ -397,22 +363,18 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	private double[] initializeNoiseFieldHigh(double[] par1ArrayOfDouble, int par2, int par3, int par4, int par5, int par6, int par7)
 	{
 		if (par1ArrayOfDouble == null)
-		{
 			par1ArrayOfDouble = new double[par5 * par6 * par7];
-		}
 
 		if (this.parabolicField == null)
 		{
 			this.parabolicField = new float[25];
 
 			for (int var8 = -2; var8 <= 2; ++var8)
-			{
 				for (int var9 = -2; var9 <= 2; ++var9)
 				{
 					float var10 = 10.0F / MathHelper.sqrt_float(var8 * var8 + var9 * var9 + 0.2F);
 					this.parabolicField[var8 + 2 + (var9 + 2) * 5] = var10;
 				}
-			}
 		}
 
 		double var44 = 684.412D;
@@ -428,7 +390,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		int var13 = 0;
 
 		for (int var14 = 0; var14 < par5; ++var14)
-		{
 			for (int var15 = 0; var15 < par7; ++var15)
 			{
 				float var16 = 0.0F;
@@ -438,22 +399,18 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				BiomeGenBase baseBiome = this.biomesForGeneration[var14 + 2 + (var15 + 2) * (par5 + 5)];
 
 				for (int var21 = -var19; var21 <= var19; ++var21)
-				{
 					for (int var22 = -var19; var22 <= var19; ++var22)
 					{
 						BiomeGenBase blendBiome = this.biomesForGeneration[var14 + var21 + 2 + (var15 + var22 + 2) * (par5 + 5)];
 						float blendedHeight = this.parabolicField[var21 + 2 + (var22 + 2) * 5] / (/*blendBiome.minHeight*/ + 2.0F);//<---blendBiome.minHeight was commented out
 
 						if (blendBiome.minHeight > baseBiome.minHeight)
-						{
 							blendedHeight *= 0.3F;
-						}
 
 						var16 += blendBiome.maxHeight * blendedHeight;
 						var17 += blendBiome.minHeight * blendedHeight;
 						var18 += blendedHeight;
 					}
-				}
 
 				var16 /= var18;
 				var17 /= var18;
@@ -462,9 +419,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				double var47 = this.noise6[var13] / 8000.0D;
 
 				if (var47 < 0.0D)
-				{
 					var47 = -var47 * 0.3D;
-				}
 
 				var47 = var47 * 3.0D - 2.0D;
 
@@ -473,9 +428,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					var47 /= 2.0D;
 
 					if (var47 < -1.0D)
-					{
 						var47 = -1.0D;
-					}
 
 					var47 /= 1.4D;
 					var47 /= 2.0D;
@@ -483,9 +436,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				else
 				{
 					if (var47 > 1.0D)
-					{
 						var47 = 1.0D;
-					}
 
 					var47 /= 8.0D;
 				}
@@ -503,26 +454,18 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					double var32 = (var46 - var28) * 12.0D * 256.0D / 256.0D / (2.70 + var26);
 
 					if (var32 < 0.0D)
-					{
 						var32 *= 4.0D;
-					}
 
 					double var34 = this.noise1[var12] / 512.0D;
 					double var36 = this.noise2[var12] / 512.0D;
 					double var38 = (this.noise3[var12] / 10.0D + 1.0D) / 2.0D;
 
 					if (var38 < 0.0D)
-					{
 						var30 = var34;
-					}
 					else if (var38 > 1.0D)
-					{
 						var30 = var36;
-					}
 					else
-					{
 						var30 = var34 + (var36 - var34) * var38;
-					}
 
 					var30 -= var32;
 
@@ -536,7 +479,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					++var12;
 				}
 			}
-		}
 
 		return par1ArrayOfDouble;
 	}
@@ -548,7 +490,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
 
 		for (int xCoord = 0; xCoord < 16; ++xCoord)
-		{
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
 			{
 				int arrayIndex = xCoord + zCoord * 16;
@@ -583,9 +524,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					if (var18 == Block.stone.blockID)
 					{
 						if(heightMap[arrayIndex] == 0 && height-16 >= 0)
-						{
 							heightMap[arrayIndex] = height-16;
-						}
 
 						convertStone(128+height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);       
 
@@ -639,20 +578,15 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							}
 						}
 						else if(!(biomegenbase.biomeID == TFCBiome.swampland.biomeID))
-						{
-							if(((height > var5-2 && height < var5 && idsTop[index+1] == Block.waterStill.blockID) || (height < var5 && idsTop[index+1] == Block.waterStill.blockID)))//If its an ocean give it a sandy bottom
-							{
+							if(((height > var5-2 && height < var5 && idsTop[index+1] == Block.waterStill.blockID) || (height < var5 && idsTop[index+1] == Block.waterStill.blockID)))
 								if(idsBig[indexBig] != TFC_Core.getTypeForSand(soilMeta) && rand.nextInt(5) != 0)
 								{
 									idsBig[indexBig] = (short) Block.gravel.blockID;
 									metaBig[indexBig] = 0;
 								}
-							}
-						}
 					}
 				}
 			}
-		}
 	}
 
 	private double[] layer2Noise = new double[256];
@@ -663,7 +597,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, par1 * 16, par2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
 
 		for (int xCoord = 0; xCoord < 16; ++xCoord)
-		{
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
 			{
 				int arrayIndex = xCoord + zCoord * 16;
@@ -671,6 +604,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				DataLayer rock1 = rockLayer1[arrayIndexDL];
 				DataLayer rock2 = rockLayer2[arrayIndexDL];
 				DataLayer rock3 = rockLayer3[arrayIndexDL];
+				DataLayer stability = stabilityLayer[arrayIndexDL];
 				BiomeGenBase biomegenbase = biomesForGeneration[arrayIndexDL];
 
 				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
@@ -686,25 +620,19 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					metaBig[indexBig] = 0;
 
 					if (height <= 1 + (heightMap[arrayIndex] / 3) + this.rand.nextInt(3))
-					{
 						idsBig[indexBig] = (byte) Block.bedrock.blockID;
-					}
 					else if(!TFCOptions.enableOreTest)
 					{
 						convertStone(height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);      
 
 						if (var13 == -1)
-						{
 							if (var12 <= 0)
 							{
 
 							}
-						}
 					}
 
-					if (height <= 6 && 
-							(biomegenbase.biomeID == TFCBiome.MountainsSeismic.biomeID || biomegenbase.biomeID == TFCBiome.PlainsSeismic.biomeID)
-							&& idsBig[indexBig] == 0)
+					if (height <= 6 && stability.data1 == 1 && idsBig[indexBig] == 0)
 					{
 						idsBig[indexBig] = (short) Block.lavaStill.blockID;
 						metaBig[indexBig] = 0; 
@@ -717,7 +645,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					}
 				}
 			}
-		}
 	}
 
 	public void convertStone(int height, int indexArray, int indexBig, short[] idsBig, byte[] metaBig, DataLayer rock1, DataLayer rock2, DataLayer rock3)
@@ -727,7 +654,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			idsBig[indexBig] = (short) rock3.data1; 
 			metaBig[indexBig] = (byte) rock3.data2;
 			if(height == TFCOptions.RockLayer3Height + heightMap[indexArray])
-			{
 				if(rand.nextBoolean())
 				{
 					idsBig[indexBig+1] = (short) rock3.data1; 
@@ -743,14 +669,12 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						}
 					}
 				}
-			}
 		}
 		else if(height <= TFCOptions.RockLayer2Height + heightMap[indexArray] && height > 55+heightMap[indexArray])
 		{
 			idsBig[indexBig] = (short) rock2.data1; 
 			metaBig[indexBig] = (byte) rock2.data2;
 			if(height == TFCOptions.RockLayer2Height + heightMap[indexArray])
-			{
 				if(rand.nextBoolean())
 				{
 					idsBig[indexBig+1] = (short) rock2.data1; 
@@ -766,7 +690,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						}
 					}
 				}
-			}
 		}
 		else
 		{
