@@ -53,13 +53,9 @@ public class TFCProvider extends WorldProvider
 		float var5 = (var4 + par3) / TFC_Time.dayLength - 0.25F;
 
 		if (var5 < 0.0F)
-		{
 			++var5;
-		}
 		else if (var5 > 1.0F)
-		{
 			--var5;
-		}
 
 		float var6 = var5;
 		var5 = 1.0F - (float)((Math.cos(var5 * Math.PI) + 1.0D) / 2.0D);
@@ -94,8 +90,10 @@ public class TFCProvider extends WorldProvider
 		try
 		{
 			biome = worldObj.getBiomeGenForCoordsBody(x, z);
-			if(canSnowAtTemp(x,145,z)){biome.temperature = 0;}
-			else{biome.temperature = 0.21f;}
+			if(canSnowAtTemp(x,145,z))
+				biome.temperature = 0;
+			else
+				biome.temperature = 0.21f;
 		}
 		catch(Exception Ex)
 		{
@@ -128,12 +126,9 @@ public class TFCProvider extends WorldProvider
 			{
 				var6 = chunkcoordinates.x;
 				var8 = chunkcoordinates.z;
-			}
-			else
-			{
+			} else
 				xOffset += 512;
-				//System.out.println("Unable to find spawn biome");
-			}
+			//System.out.println("Unable to find spawn biome");
 		}
 
 		int var9 = 0;
@@ -145,9 +140,7 @@ public class TFCProvider extends WorldProvider
 			++var9;
 
 			if (var9 == 1000)
-			{
 				break;
-			}
 		}
 
 		return new ChunkCoordinates(var6, this.worldObj.getHeightValue(var6, var8), var8);
@@ -157,7 +150,8 @@ public class TFCProvider extends WorldProvider
 	public ChunkCoordinates getSpawnPoint()
 	{
 		WorldInfo info = worldObj.getWorldInfo();
-		return new ChunkCoordinates(info.getSpawnX(), info.getSpawnY(), info.getSpawnZ());
+		return getRandomizedSpawnPoint();
+		//return new ChunkCoordinates(info.getSpawnX(), info.getSpawnY(), info.getSpawnZ());
 	}
 
 	@Override
@@ -178,18 +172,15 @@ public class TFCProvider extends WorldProvider
 	{
 		int id = worldObj.getBlockId(x, y, z);
 		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0
-				&& Block.blocksList[Block.snow.blockID].canPlaceBlockAt(worldObj, x, y, z) && worldObj.getBlockMaterial(x, y, z).isReplaceable()) 
-		{
+				&& Block.blocksList[Block.snow.blockID].canPlaceBlockAt(worldObj, x, y, z) && worldObj.getBlockMaterial(x, y, z).isReplaceable())
 			return true;
-		}
 		return false;
 	}
 
 	private boolean canSnowAtTemp(int x, int y, int z)
 	{
-		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0) {
+		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
 			return true;
-		}
 		return false;
 	}
 
