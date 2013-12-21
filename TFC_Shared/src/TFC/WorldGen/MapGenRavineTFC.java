@@ -14,13 +14,22 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 
 	private byte[] metaArray;
 
+	private int height = 0;
+	private int variability = 0;
+
+	public MapGenRavineTFC(int h, int v)
+	{
+		height = h;
+		variability = v;
+	}
+
 	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, short[] idsBig, byte[] metaBig)
 	{
 		metaArray = metaBig;
 		super.generate(par1IChunkProvider, par2World, par3, par4, idsBig);
 	}
 
-	protected void generateRavine(long par1, int par3, int par4, short[] blockArray, double xCoord, double yCoord, double zCoord, float par12, float par13, float par14, int par15, int par16, double par17)
+	protected void generateRavine(long par1, int par3, int par4, short[] blockArray, double xCoord, double yCoord, double zCoord, float par12, float par13, float par14, int par15, int par16, double yScale)
 	{
 		Random var19 = new Random(par1);
 		double var20 = par3 * 16 + 8;
@@ -47,9 +56,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 		for (int var28 = 0; var28 < 256; ++var28)
 		{
 			if (var28 == 0 || var19.nextInt(3) == 0)
-			{
 				var27 = 1.0F + var19.nextFloat() * var19.nextFloat() * 1.0F;
-			}
 
 			this.field_35627_a[var28] = var27 * var27;
 		}
@@ -57,7 +64,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 		for (; par15 < par16; ++par15)
 		{
 			double var53 = 1.5D + MathHelper.sin(par15 * (float)Math.PI / par16) * par12 * 1.0F;
-			double var30 = var53 * par17;
+			double var30 = var53 * yScale;
 			var53 *= var19.nextFloat() * 0.25D + 0.75D;
 			var30 *= var19.nextFloat() * 0.25D + 0.75D;
 			float var32 = MathHelper.cos(par14);
@@ -81,9 +88,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 				double var40 = par12 + 2.0F + 16.0F;
 
 				if (var34 * var34 + var36 * var36 - var38 * var38 > var40 * var40)
-				{
 					return;
-				}
 
 				if (xCoord >= var20 - 16.0D - var53 * 2.0D && zCoord >= var22 - 16.0D - var53 * 2.0D && xCoord <= var20 + 16.0D + var53 * 2.0D && zCoord <= var22 + 16.0D + var53 * 2.0D)
 				{
@@ -95,43 +100,29 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 					int var39 = MathHelper.floor_double(zCoord + var53) - par4 * 16 + 1;
 
 					if (var56 < 0)
-					{
 						var56 = 0;
-					}
 
 					if (var35 > 16)
-					{
 						var35 = 16;
-					}
 
 					if (var55 < 1)
-					{
 						var55 = 1;
-					}
 
 					if (var37 > 250)
-					{
 						var37 = 250;
-					}
 
 					if (var57 < 0)
-					{
 						var57 = 0;
-					}
 
 					if (var39 > 16)
-					{
 						var39 = 16;
-					}
 
 					boolean var58 = false;
 					int var41;
 					int var44;
 
 					for (var41 = var56; !var58 && var41 < var35; ++var41)
-					{
 						for (int var42 = var57; !var58 && var42 < var39; ++var42)
-						{
 							for (int var43 = var37 + 1; !var58 && var43 >= var55 - 1; --var43)
 							{
 								var44 = (var41 * 16 + var42) * 256 + var43;
@@ -139,18 +130,12 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 								if (var43 >= 0 && var43 < 256)
 								{
 									if (blockArray[var44] == Block.waterMoving.blockID || blockArray[var44] == Block.waterStill.blockID)
-									{
 										var58 = true;
-									}
 
 									if (var43 != var55 - 1 && var41 != var56 && var41 != var35 - 1 && var42 != var57 && var42 != var39 - 1)
-									{
 										var43 = var55;
-									}
 								}
 							}
-						}
-					}
 
 					if (!var58)
 					{
@@ -165,7 +150,6 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 								boolean isGrass = false;
 
 								if (var59 * var59 + var45 * var45 < 1.0D)
-								{
 									for (int var49 = var37 - 1; var49 >= var55; --var49)
 									{
 										double var50 = (var49 + 0.5D - yCoord) / var30;
@@ -175,33 +159,22 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 											int var52 = blockArray[index];
 
 											if (TFC_Core.isGrass(var52))
-											{
 												isGrass = true;
-											}
 
 											if (TFC_Core.isRawStone(var52) || TFC_Core.isSoil(var52))
-											{
 												if (var49 < 10)
-												{
 													blockArray[index] = (short)Block.lavaStill.blockID;
-												}
 												else
-												{
 													blockArray[index] = 0;
-												}
-											}
 										}
 
 										--index;
 									}
-								}
 							}
 						}
 
 						if (var54)
-						{
 							break;
-						}
 					}
 				}
 			}
@@ -217,7 +190,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 		if (this.rand.nextInt(50) == 0)
 		{
 			double startX = chunkX * 16 + this.rand.nextInt(16);
-			double startY = this.rand.nextInt(this.rand.nextInt(220) + 8) + 20;
+			double startY = this.rand.nextInt(variability) + height;
 			double startZ = chunkZ * 16 + this.rand.nextInt(16);
 			byte var13 = 1;
 
@@ -226,7 +199,8 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 				float angleY = this.rand.nextFloat() * (float)Math.PI * 2.0F;
 				float angleZ = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
 				float angleX = (this.rand.nextFloat() * 2.0F + this.rand.nextFloat()) * 2.0F;
-				this.generateRavine(this.rand.nextLong(), par4, par5, par6ArrayOfByte, startX, startY, startZ, angleX, angleY, angleZ, 0, 0, 3.0D);
+				double scaleY = 1.2 + this.rand.nextFloat() + this.rand.nextFloat();
+				this.generateRavine(this.rand.nextLong(), par4, par5, par6ArrayOfByte, startX, startY, startZ, angleX, angleY, angleZ, 0, 0, scaleY);
 			}
 		}
 	}

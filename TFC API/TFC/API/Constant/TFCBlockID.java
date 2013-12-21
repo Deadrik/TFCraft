@@ -126,7 +126,7 @@ public class TFCBlockID
 	public static int StrawHideBed				= 2115;
 	public static int ArmourStand				= 2116;
 	public static int BerryBush					= 2117;
-	
+
 	public static int WoodVert2					= 2118;
 	public static int WoodHoriz3				= 2119;
 	public static int WoodHoriz4				= 2120;
@@ -144,6 +144,11 @@ public class TFCBlockID
 	public static int FenceGate2				= 2132;
 	public static int BasicPipe					= 2133;
 	public static int ValvePipe					= 2134;
+
+	public static int FreshWaterFlowing			= 2136;
+	public static int FreshWaterStill			= 2137;
+	public static int HotWaterFlowing			= 2138;
+	public static int HotWaterStill				= 2139;
 
 
 	static Configuration config;
@@ -255,9 +260,8 @@ public class TFCBlockID
 		WallSmoothSed = TFCOptions.getIntFor(config, "block", "WallSmoothSed", WallSmoothSed);
 		WallSmoothMM = TFCOptions.getIntFor(config, "block", "WallSmoothMM", WallSmoothMM);
 
-		for (int i=0; i < Global.WOOD_ALL.length; i++) {
+		for (int i=0; i < Global.WOOD_ALL.length; i++)
 			Doors[i] = TFCOptions.getIntFor(config,"block","Door"+Global.WOOD_ALL[i].replaceAll(" ", ""), Doors[i]);
-		}
 
 		IngotPile = TFCOptions.getIntFor(config, "block", "IngotPile", IngotPile);
 		Barrel = TFCOptions.getIntFor(config, "block", "Barrel", Barrel);
@@ -269,6 +273,11 @@ public class TFCBlockID
 		Tuyere = TFCOptions.getIntFor(config, "block", "Tuyere", Tuyere);
 		Crucible = TFCOptions.getIntFor(config, "block", "Crucible", Crucible);
 		BerryBush = TFCOptions.getIntFor(config, "block", "BerryBush", BerryBush);
+
+		FreshWaterFlowing = TFCOptions.getIntFor(config, "block", "FreshWaterFlowing", FreshWaterFlowing);
+		FreshWaterStill = TFCOptions.getIntFor(config, "block", "FreshWaterStill", FreshWaterStill);
+		HotWaterFlowing = TFCOptions.getIntFor(config, "block", "HotWaterFlowing", HotWaterFlowing);
+		HotWaterStill = TFCOptions.getIntFor(config, "block", "HotWaterStill", HotWaterStill);
 
 	}
 }

@@ -52,6 +52,10 @@ import TFC.Blocks.Flora.BlockLogHoriz2;
 import TFC.Blocks.Flora.BlockLogVert;
 import TFC.Blocks.Flora.BlockLogVert2;
 import TFC.Blocks.Terrain.BlockDryGrass;
+import TFC.Blocks.Terrain.BlockFreshWaterFlowing;
+import TFC.Blocks.Terrain.BlockFreshWaterStill;
+import TFC.Blocks.Terrain.BlockHotWaterFlowing;
+import TFC.Blocks.Terrain.BlockHotWaterStill;
 import TFC.Blocks.Terrain.BlockIgEx;
 import TFC.Blocks.Terrain.BlockIgExBrick;
 import TFC.Blocks.Terrain.BlockIgExCobble;
@@ -278,6 +282,11 @@ public class TFCBlocks
 	public static Block SteamPipe;
 	public static Block SteamPipeValve;
 
+	public static Block FreshWaterStill;
+	public static Block FreshWaterFlowing;
+	public static Block HotWaterStill;
+	public static Block HotWaterFlowing;
+
 	public static void RegisterBlocks()
 	{
 		GameRegistry.registerBlock(Ore, TFC.Items.ItemOre1.class, "Ore1");
@@ -393,6 +402,11 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WallSmoothMM, TFC.Items.ItemBlocks.ItemMM.class, "WallSmoothMM");
 		GameRegistry.registerBlock(SteamPipe, TFC.Items.ItemBlocks.ItemPipe.class, "BasicPipe");
 		GameRegistry.registerBlock(SteamPipeValve, TFC.Items.ItemBlocks.ItemPipeValve.class, "ValvePipe");
+
+		GameRegistry.registerBlock(FreshWaterStill,"FreshWaterStill");
+		GameRegistry.registerBlock(FreshWaterFlowing,"FreshWaterFlowing");
+		GameRegistry.registerBlock(HotWaterStill,"HotWaterStill");
+		GameRegistry.registerBlock(HotWaterFlowing,"HotWaterFlowing");
 
 		// Wooden Doors
 		for (int i=0; i < Global.WOOD_ALL.length - 1; i++)
@@ -631,6 +645,11 @@ public class TFCBlocks
 		TFCBlocks.SteamPipeValve = new BlockPipeValve(TFCBlockID.ValvePipe,Material.iron).setUnlocalizedName("ValvePipe").setHardness(2);
 
 		TFCBlocks.BerryBush = new BlockBerryBush(TFCBlockID.BerryBush).setUnlocalizedName("BerryBush").setHardness(0.3f).setStepSound(Block.soundGrassFootstep);
+
+		TFCBlocks.FreshWaterFlowing = (new BlockFreshWaterFlowing(TFCBlockID.FreshWaterFlowing)).setHardness(100.0F).setLightOpacity(6).setUnlocalizedName("water");
+		TFCBlocks.FreshWaterStill  = (new BlockFreshWaterStill(TFCBlockID.FreshWaterStill)).setHardness(100.0F).setLightOpacity(6).setUnlocalizedName("water");
+		TFCBlocks.HotWaterFlowing = (new BlockHotWaterFlowing(TFCBlockID.HotWaterFlowing)).setHardness(100.0F).setLightOpacity(9).setUnlocalizedName("water");
+		TFCBlocks.HotWaterStill  = (new BlockHotWaterStill(TFCBlockID.HotWaterStill)).setHardness(100.0F).setLightOpacity(9).setUnlocalizedName("water");
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

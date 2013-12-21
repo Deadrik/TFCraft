@@ -17,9 +17,7 @@ public class BlockCustomStationary extends BlockCustomFluid
 		this.setTickRandomly(false);
 
 		if (par2Material == Material.lava)
-		{
 			this.setTickRandomly(true);
-		}
 	}
 
 	@Override
@@ -46,9 +44,7 @@ public class BlockCustomStationary extends BlockCustomFluid
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 
 		if (par1World.getBlockId(par2, par3, par4) == this.blockID)
-		{
 			this.setNotStationary(par1World, par2, par3, par4);
-		}
 	}
 
 	/**
@@ -91,9 +87,7 @@ public class BlockCustomStationary extends BlockCustomFluid
 					}
 				}
 				else if (Block.blocksList[var8].blockMaterial.blocksMovement())
-				{
 					return;
-				}
 			}
 
 			if (var6 == 0)
@@ -107,9 +101,7 @@ public class BlockCustomStationary extends BlockCustomFluid
 					par4 = var8 + par5Random.nextInt(3) - 1;
 
 					if (par1World.isAirBlock(par2, par3 + 1, par4) && this.isFlammable(par1World, par2, par3, par4))
-					{
 						par1World.setBlock(par2, par3 + 1, par4, Block.fire.blockID);
-					}
 				}
 			}
 		}

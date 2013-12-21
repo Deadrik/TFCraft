@@ -7,7 +7,6 @@ import net.minecraft.block.BlockFluid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.src.ModLoader;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.util.Vec3;
@@ -24,7 +23,7 @@ public abstract class BlockCustomFluid extends Block
 {
 
 	@SideOnly(Side.CLIENT)
-	protected Icon[] theIcon;
+	public Icon[] theIcon;
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -42,13 +41,9 @@ public abstract class BlockCustomFluid extends Block
 	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
 		if (this.blockMaterial != Material.water)
-		{
 			return 16777215;
-		}
 		else
-		{
 			return TerraFirmaCraft.proxy.waterColorMultiplier(par1IBlockAccess, par2, par3, par4);
-		}
 	}
 
 
@@ -58,9 +53,7 @@ public abstract class BlockCustomFluid extends Block
 	public static float getFluidHeightPercent(int par0)
 	{
 		if (par0 >= 8)
-		{
 			par0 = 0;
-		}
 
 		float var1 = (par0 + 1) / 9.0F;
 		return var1;
@@ -82,17 +75,13 @@ public abstract class BlockCustomFluid extends Block
 	protected int getEffectiveFlowDecay(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
 		if (par1IBlockAccess.getBlockMaterial(par2, par3, par4) != this.blockMaterial)
-		{
 			return -1;
-		}
 		else
 		{
 			int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 
 			if (var5 >= 8)
-			{
 				var5 = 0;
-			}
 
 			return var5;
 		}
@@ -152,53 +141,37 @@ public abstract class BlockCustomFluid extends Block
 	private void checkForHarden(World par1World, int par2, int par3, int par4)
 	{
 		if (par1World.getBlockId(par2, par3, par4) == this.blockID)
-		{
 			if (this.blockMaterial == Material.lava)
 			{
 				boolean flag = false;
 
 				if (flag || par1World.getBlockMaterial(par2, par3, par4 - 1) == Material.water)
-				{
 					flag = true;
-				}
 
 				if (flag || par1World.getBlockMaterial(par2, par3, par4 + 1) == Material.water)
-				{
 					flag = true;
-				}
 
 				if (flag || par1World.getBlockMaterial(par2 - 1, par3, par4) == Material.water)
-				{
 					flag = true;
-				}
 
 				if (flag || par1World.getBlockMaterial(par2 + 1, par3, par4) == Material.water)
-				{
 					flag = true;
-				}
 
 				if (flag || par1World.getBlockMaterial(par2, par3 + 1, par4) == Material.water)
-				{
 					flag = true;
-				}
 
 				if (flag)
 				{
 					int l = par1World.getBlockMetadata(par2, par3, par4);
 
-					if (l == 0)		//non flowing rock
-					{
+					if (l == 0)
 						setBlockforLava(par1World, par2,  par3,  par4,0);
-					}
 					else if (l <= 4)
-					{
 						setBlockforLava(par1World, par2,  par3,  par4,1);
-					}
 
 					this.triggerLavaMixEffects(par1World, par2, par3, par4);
 				}
 			}
-		}
 	}
 
 	/**
@@ -230,6 +203,7 @@ public abstract class BlockCustomFluid extends Block
 		this.setTickRandomly(true);
 	}
 
+	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
 		return this.blockMaterial != Material.lava;
@@ -241,6 +215,7 @@ public abstract class BlockCustomFluid extends Block
 		return 1 - BlockFluid.getFluidHeightPercent(world.getBlockMetadata(x, y, z));
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**
@@ -254,6 +229,7 @@ public abstract class BlockCustomFluid extends Block
 	/**
 	 * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
 	 */
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
@@ -263,6 +239,7 @@ public abstract class BlockCustomFluid extends Block
 	 * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
 	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
 	 */
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
@@ -272,6 +249,7 @@ public abstract class BlockCustomFluid extends Block
 	 * Returns whether this block is collideable based on the arguments passed in \n@param par1 block metaData \n@param
 	 * par2 whether the player right-clicked while holding a boat
 	 */
+	@Override
 	public boolean canCollideCheck(int par1, boolean par2)
 	{
 		return par2 && par1 == 0;
@@ -281,12 +259,14 @@ public abstract class BlockCustomFluid extends Block
 	 * Returns Returns true if the given side of this block type should be rendered (if it's solid or not), if the
 	 * adjacent block is at the given coordinates. Args: blockAccess, x, y, z, side
 	 */
+	@Override
 	public boolean isBlockSolid(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 	{
 		Material material = par1IBlockAccess.getBlockMaterial(par2, par3, par4);
 		return material == this.blockMaterial ? false : (par5 == 1 ? true : (material == Material.ice ? false : super.isBlockSolid(par1IBlockAccess, par2, par3, par4, par5)));
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**
@@ -303,6 +283,7 @@ public abstract class BlockCustomFluid extends Block
 	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
 	 * cleared to be reused)
 	 */
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		return null;
@@ -311,6 +292,7 @@ public abstract class BlockCustomFluid extends Block
 	/**
 	 * The type of render function that is called for this block
 	 */
+	@Override
 	public int getRenderType()
 	{
 		return 4;
@@ -319,6 +301,7 @@ public abstract class BlockCustomFluid extends Block
 	/**
 	 * Returns the ID of the items to drop on destruction.
 	 */
+	@Override
 	public int idDropped(int par1, Random par2Random, int par3)
 	{
 		return 0;
@@ -327,6 +310,7 @@ public abstract class BlockCustomFluid extends Block
 	/**
 	 * Returns the quantity of items to drop on block destruction.
 	 */
+	@Override
 	public int quantityDropped(Random par1Random)
 	{
 		return 0;
@@ -346,24 +330,16 @@ public abstract class BlockCustomFluid extends Block
 			int k1 = par4;
 
 			if (i1 == 0)
-			{
 				j1 = par2 - 1;
-			}
 
 			if (i1 == 1)
-			{
 				k1 = par4 - 1;
-			}
 
 			if (i1 == 2)
-			{
 				++j1;
-			}
 
 			if (i1 == 3)
-			{
 				++k1;
-			}
 
 			int l1 = this.getEffectiveFlowDecay(par1IBlockAccess, j1, par3, k1);
 			int i2;
@@ -377,14 +353,14 @@ public abstract class BlockCustomFluid extends Block
 					if (l1 >= 0)
 					{
 						i2 = l1 - (l - 8);
-						vec3 = vec3.addVector((double)((j1 - par2) * i2), (double)((par3 - par3) * i2), (double)((k1 - par4) * i2));
+						vec3 = vec3.addVector((j1 - par2) * i2, (par3 - par3) * i2, (k1 - par4) * i2);
 					}
 				}
 			}
 			else if (l1 >= 0)
 			{
 				i2 = l1 - l;
-				vec3 = vec3.addVector((double)((j1 - par2) * i2), (double)((par3 - par3) * i2), (double)((k1 - par4) * i2));
+				vec3 = vec3.addVector((j1 - par2) * i2, (par3 - par3) * i2, (k1 - par4) * i2);
 			}
 		}
 
@@ -393,49 +369,31 @@ public abstract class BlockCustomFluid extends Block
 			boolean flag = false;
 
 			if (flag || this.isBlockSolid(par1IBlockAccess, par2, par3, par4 - 1, 2))
-			{
 				flag = true;
-			}
 
 			if (flag || this.isBlockSolid(par1IBlockAccess, par2, par3, par4 + 1, 3))
-			{
 				flag = true;
-			}
 
 			if (flag || this.isBlockSolid(par1IBlockAccess, par2 - 1, par3, par4, 4))
-			{
 				flag = true;
-			}
 
 			if (flag || this.isBlockSolid(par1IBlockAccess, par2 + 1, par3, par4, 5))
-			{
 				flag = true;
-			}
 
 			if (flag || this.isBlockSolid(par1IBlockAccess, par2, par3 + 1, par4 - 1, 2))
-			{
 				flag = true;
-			}
 
 			if (flag || this.isBlockSolid(par1IBlockAccess, par2, par3 + 1, par4 + 1, 3))
-			{
 				flag = true;
-			}
 
 			if (flag || this.isBlockSolid(par1IBlockAccess, par2 - 1, par3 + 1, par4, 4))
-			{
 				flag = true;
-			}
 
 			if (flag || this.isBlockSolid(par1IBlockAccess, par2 + 1, par3 + 1, par4, 5))
-			{
 				flag = true;
-			}
 
 			if (flag)
-			{
 				vec3 = vec3.normalize().addVector(0.0D, -6.0D, 0.0D);
-			}
 		}
 
 		vec3 = vec3.normalize();
@@ -445,6 +403,7 @@ public abstract class BlockCustomFluid extends Block
 	/**
 	 * Can add to the passed in vector for a movement vector to be applied to the entity. Args: x, y, z, entity, vec3d
 	 */
+	@Override
 	public void velocityToAddToEntity(World par1World, int par2, int par3, int par4, Entity par5Entity, Vec3 par6Vec3)
 	{
 		Vec3 vec31 = this.getFlowVector(par1World, par2, par3, par4);
@@ -454,6 +413,7 @@ public abstract class BlockCustomFluid extends Block
 	}
 
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**
@@ -464,6 +424,7 @@ public abstract class BlockCustomFluid extends Block
 		return this.blockMaterial == Material.water ? 1 : 0;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**
@@ -480,9 +441,7 @@ public abstract class BlockCustomFluid extends Block
 				l = par1World.getBlockMetadata(par2, par3, par4);
 
 				if (l <= 0 || l >= 8)
-				{
-					par1World.spawnParticle("suspended", (double)((float)par2 + par5Random.nextFloat()), (double)((float)par3 + par5Random.nextFloat()), (double)((float)par4 + par5Random.nextFloat()), 0.0D, 0.0D, 0.0D);
-				}
+					par1World.spawnParticle("suspended", par2 + par5Random.nextFloat(), par3 + par5Random.nextFloat(), par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
 			}
 
 			for (l = 0; l < 0; ++l)
@@ -492,74 +451,50 @@ public abstract class BlockCustomFluid extends Block
 				int k1 = par4;
 
 				if (i1 == 0)
-				{
 					j1 = par2 - 1;
-				}
 
 				if (i1 == 1)
-				{
 					++j1;
-				}
 
 				if (i1 == 2)
-				{
 					k1 = par4 - 1;
-				}
 
 				if (i1 == 3)
-				{
 					++k1;
-				}
 
 				if (par1World.getBlockMaterial(j1, par3, k1) == Material.air && (par1World.getBlockMaterial(j1, par3 - 1, k1).blocksMovement() || par1World.getBlockMaterial(j1, par3 - 1, k1).isLiquid()))
 				{
 					float f = 0.0625F;
-					double d0 = (double)((float)par2 + par5Random.nextFloat());
-					double d1 = (double)((float)par3 + par5Random.nextFloat());
-					double d2 = (double)((float)par4 + par5Random.nextFloat());
+					double d0 = par2 + par5Random.nextFloat();
+					double d1 = par3 + par5Random.nextFloat();
+					double d2 = par4 + par5Random.nextFloat();
 
 					if (i1 == 0)
-					{
-						d0 = (double)((float)par2 - f);
-					}
+						d0 = par2 - f;
 
 					if (i1 == 1)
-					{
-						d0 = (double)((float)(par2 + 1) + f);
-					}
+						d0 = par2 + 1 + f;
 
 					if (i1 == 2)
-					{
-						d2 = (double)((float)par4 - f);
-					}
+						d2 = par4 - f;
 
 					if (i1 == 3)
-					{
-						d2 = (double)((float)(par4 + 1) + f);
-					}
+						d2 = par4 + 1 + f;
 
 					double d3 = 0.0D;
 					double d4 = 0.0D;
 
 					if (i1 == 0)
-					{
-						d3 = (double)(-f);
-					}
+						d3 = (-f);
 
 					if (i1 == 1)
-					{
-						d3 = (double)f;
-					}
+						d3 = f;
 
 					if (i1 == 2)
-					{
-						d4 = (double)(-f);
-					}
+						d4 = (-f);
 
 					if (i1 == 3)
-					{
-						d4 = (double)f;
-					}
+						d4 = f;
 
 					par1World.spawnParticle("splash", d0, d1, d2, d3, 0.0D, d4);
 				}
@@ -571,9 +506,7 @@ public abstract class BlockCustomFluid extends Block
 			l = par1World.getBlockMetadata(par2, par3, par4);
 
 			if (l > 0 && l < 8)
-			{
-				par1World.playSound((double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), "liquid.water", par5Random.nextFloat() * 0.25F + 0.75F, par5Random.nextFloat() * 1.0F + 0.5F, false);
-			}
+				par1World.playSound(par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, "liquid.water", par5Random.nextFloat() * 0.25F + 0.75F, par5Random.nextFloat() * 1.0F + 0.5F, false);
 		}
 
 		double d5;
@@ -584,33 +517,27 @@ public abstract class BlockCustomFluid extends Block
 		{
 			if (par5Random.nextInt(100) == 0)
 			{
-				d5 = (double)((float)par2 + par5Random.nextFloat());
-				d7 = (double)par3 + this.maxY;
-				d6 = (double)((float)par4 + par5Random.nextFloat());
+				d5 = par2 + par5Random.nextFloat();
+				d7 = par3 + this.maxY;
+				d6 = par4 + par5Random.nextFloat();
 				par1World.spawnParticle("lava", d5, d7, d6, 0.0D, 0.0D, 0.0D);
 				par1World.playSound(d5, d7, d6, "liquid.lavapop", 0.2F + par5Random.nextFloat() * 0.2F, 0.9F + par5Random.nextFloat() * 0.15F, false);
 			}
 
 			if (par5Random.nextInt(200) == 0)
-			{
-				par1World.playSound((double)par2, (double)par3, (double)par4, "liquid.lava", 0.2F + par5Random.nextFloat() * 0.2F, 0.9F + par5Random.nextFloat() * 0.15F, false);
-			}
+				par1World.playSound(par2, par3, par4, "liquid.lava", 0.2F + par5Random.nextFloat() * 0.2F, 0.9F + par5Random.nextFloat() * 0.15F, false);
 		}
 
 		if (par5Random.nextInt(10) == 0 && par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) && !par1World.getBlockMaterial(par2, par3 - 2, par4).blocksMovement())
 		{
-			d5 = (double)((float)par2 + par5Random.nextFloat());
-			d7 = (double)par3 - 1.05D;
-			d6 = (double)((float)par4 + par5Random.nextFloat());
+			d5 = par2 + par5Random.nextFloat();
+			d7 = par3 - 1.05D;
+			d6 = par4 + par5Random.nextFloat();
 
 			if (this.blockMaterial == Material.water)
-			{
 				par1World.spawnParticle("dripWater", d5, d7, d6, 0.0D, 0.0D, 0.0D);
-			}
 			else
-			{
 				par1World.spawnParticle("dripLava", d5, d7, d6, 0.0D, 0.0D, 0.0D);
-			}
 		}
 	}
 
@@ -620,18 +547,15 @@ public abstract class BlockCustomFluid extends Block
 		int meta = rockLayer3.data2;
 		Random rand = new Random();
 		boolean felsicLava = true;
-		if(blockId == TFCBlocks.StoneIgIn.blockID && (meta == 2||meta == 1)){
+		if(blockId == TFCBlocks.StoneIgIn.blockID && (meta == 2||meta == 1))
 			felsicLava = false;
-		}
-		else if(blockId == TFCBlocks.StoneIgEx.blockID && (meta == 1||meta==2)){
+		else if(blockId == TFCBlocks.StoneIgEx.blockID && (meta == 1||meta==2))
 			felsicLava = false;
-		}
 		if (typeOfLava == 0 || typeOfLava == 2)		//non flowing rock
 		{
 			if(felsicLava){
-				if(rand.nextInt(10)==0 && typeOfLava == 0){
+				if(rand.nextInt(10)==0 && typeOfLava == 0)
 					par1World.setBlock(par2, par3, par4, Block.obsidian.blockID);
-				}
 				else{
 					par1World.setBlock(par2,par3,par4,TFCBlocks.StoneIgEx.blockID);
 					par1World.setBlockMetadataWithNotify(par2, par3, par4, 0,0);
@@ -645,12 +569,10 @@ public abstract class BlockCustomFluid extends Block
 		else if (typeOfLava == 1)
 		{
 			par1World.setBlock(par2,par3,par4,TFCBlocks.StoneIgExCobble.blockID);
-			if(felsicLava){
+			if(felsicLava)
 				par1World.setBlockMetadataWithNotify(par2, par3, par4, 0,0);
-			}
-			else{
+			else
 				par1World.setBlockMetadataWithNotify(par2, par3, par4, 1,0);
-			}
 		}
 	}
 
@@ -664,14 +586,10 @@ public abstract class BlockCustomFluid extends Block
 		Vec3 vec3 = null;
 
 		if (par4Material == Material.water)
-		{
 			vec3 = ((BlockCustomFluid)Block.blocksList[8]).getFlowVector(par0IBlockAccess, par1, par2, par3);
-		}
 
 		if (par4Material == Material.lava)
-		{
 			vec3 = ((BlockCustomFluid)Block.blocksList[10]).getFlowVector(par0IBlockAccess, par1, par2, par3);
-		}
 
 		return vec3.xCoord == 0.0D && vec3.zCoord == 0.0D ? -1000.0D : Math.atan2(vec3.zCoord, vec3.xCoord) - (Math.PI / 2D);
 	}
@@ -681,14 +599,13 @@ public abstract class BlockCustomFluid extends Block
 	 */
 	protected void triggerLavaMixEffects(World par1World, int par2, int par3, int par4)
 	{
-		par1World.playSoundEffect((double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), "random.fizz", 0.5F, 2.6F + (par1World.rand.nextFloat() - par1World.rand.nextFloat()) * 0.8F);
+		par1World.playSoundEffect(par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, "random.fizz", 0.5F, 2.6F + (par1World.rand.nextFloat() - par1World.rand.nextFloat()) * 0.8F);
 
 		for (int l = 0; l < 8; ++l)
-		{
-			par1World.spawnParticle("largesmoke", (double)par2 + Math.random(), (double)par3 + 1.2D, (double)par4 + Math.random(), 0.0D, 0.0D, 0.0D);
-		}
+			par1World.spawnParticle("largesmoke", par2 + Math.random(), par3 + 1.2D, par4 + Math.random(), 0.0D, 0.0D, 0.0D);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**
@@ -698,13 +615,9 @@ public abstract class BlockCustomFluid extends Block
 	public void registerIcons(IconRegister par1IconRegister)
 	{
 		if (this.blockMaterial == Material.lava)
-		{
 			this.theIcon = new Icon[] {par1IconRegister.registerIcon("lava_still"), par1IconRegister.registerIcon("lava_flow")};
-		}
 		else
-		{
 			this.theIcon = new Icon[] {par1IconRegister.registerIcon("water_still"), par1IconRegister.registerIcon("water_flow")};
-		}
 	}
 
 	@SideOnly(Side.CLIENT)

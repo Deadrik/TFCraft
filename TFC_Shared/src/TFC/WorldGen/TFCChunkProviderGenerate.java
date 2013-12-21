@@ -15,6 +15,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
+import TFC.TFCBlocks;
 import TFC.API.TFCOptions;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
@@ -28,7 +29,7 @@ import TFC.Entities.Mobs.EntityHorseTFC;
 import TFC.Entities.Mobs.EntityPigTFC;
 import TFC.Entities.Mobs.EntitySheepTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
-import TFC.WorldGen.Generators.WorldGenLakesTFC;
+import TFC.WorldGen.Generators.WorldGenFissure;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 {
@@ -147,7 +148,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 
 		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
-		new MapGenRavineTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+		new MapGenRavineTFC(110, 30).generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//surface
+		new MapGenRavineTFC(20, 50).generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//deep
 		new MapGenRiverRavine().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 
 		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
@@ -177,21 +179,25 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		int var13;
 		int var14;
 
-		if (!var11 && this.rand.nextInt(4) == 0)
+		int waterRand = 4;
+		if(TFC_Climate.getStability(xCoord, zCoord) == 1)
+			waterRand = 6;
+
+		if (!var11 && this.rand.nextInt(waterRand) == 0)
 		{
 			var12 = xCoord + this.rand.nextInt(16) + 8;
 			var13 = this.rand.nextInt(128);
 			var14 = zCoord + this.rand.nextInt(16) + 8;
-			(new WorldGenLakesTFC(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
+			(new WorldGenFissure(TFCBlocks.FreshWaterFlowing,1,false, 10)).generate(this.worldObj, this.rand, var12, var13, var14);
 		}
 
-		if (!var11 && this.rand.nextInt(8) == 0 && TFC_Climate.getStability(xCoord, zCoord) == 1)
+		/*if (!var11 && this.rand.nextInt(4) == 0 && TFC_Climate.getStability(xCoord, zCoord) == 1)
 		{
 			var12 = xCoord + this.rand.nextInt(16) + 8;
 			var13 = this.rand.nextInt(this.rand.nextInt(120) + 8);
 			var14 = zCoord + this.rand.nextInt(16) + 8;
-			(new WorldGenLakesTFC(Block.lavaStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
-		}
+			new WorldGenFissure(Block.lavaStill).generate(this.worldObj, this.rand, var12, var13, var14);
+		}*/
 
 		biome.decorate(this.worldObj, this.rand, xCoord, zCoord);
 		SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, biome, xCoord + 8, zCoord + 8, 16, 16, this.rand);
@@ -585,6 +591,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 									metaBig[indexBig] = 0;
 								}
 					}
+					else if(var18 == Block.waterStill.blockID && 
+							biomegenbase.biomeID != BiomeGenBase.ocean.biomeID&& biomegenbase.biomeID != BiomeGenBase.beach.biomeID)
+						idsBig[indexBig] = (short) TFCBlocks.FreshWaterStill.blockID;
 				}
 			}
 	}

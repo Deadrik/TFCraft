@@ -328,6 +328,11 @@ public class TFC_Core
 		return isGrass(id) || isDirt(id) || isClay(id) || isPeat(id);
 	}
 
+	public static boolean isGround(int id)
+	{
+		return isSoil(id)|| isRawStone(id) || isSand(id);
+	}
+
 	public static int getSoilMetaFromStone(int inType, int inMeta)
 	{
 		if(inType == TFCBlocks.StoneIgIn.blockID)

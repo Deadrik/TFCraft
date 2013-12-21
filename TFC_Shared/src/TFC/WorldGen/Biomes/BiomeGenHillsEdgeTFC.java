@@ -36,8 +36,6 @@ public class BiomeGenHillsEdgeTFC extends TFCBiome
 		this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 1, 1, 2));
 		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 2;
 		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 2;
-
-		setColor(HillsColor);
 	}
 
 	public void SetupTrees(World world, Random R)
@@ -51,18 +49,14 @@ public class BiomeGenHillsEdgeTFC extends TFCBiome
 		treeRare = R.nextInt(13);
 		treeRareSize = R.nextBoolean();
 
-		if(treeCommon1 == 15 || treeCommon1 == 9) {
+		if(treeCommon1 == 15 || treeCommon1 == 9)
 			treeCommon1 = R.nextInt(8);
-		}
-		if(treeCommon2 == 15 || treeCommon2 == 9) {
+		if(treeCommon2 == 15 || treeCommon2 == 9)
 			treeCommon2 = R.nextInt(8);
-		}
-		if(treeUncommon == 15) {
+		if(treeUncommon == 15)
 			treeUncommon = R.nextInt(13);
-		}
-		if(treeRare == 15) {
+		if(treeRare == 15)
 			treeRare = R.nextInt(13);
-		}
 
 	}
 

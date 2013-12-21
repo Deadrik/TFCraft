@@ -20,7 +20,7 @@ public class TFC_Textures
 	public static Icon AnvilBend;
 	public static Icon AnvilUpset;
 	public static Icon AnvilShrink;
-	
+
 	/**
 	 * These are defined in BlockTuyere
 	 */
@@ -45,4 +45,9 @@ public class TFC_Textures
 	public static Icon SheetTin;
 	public static Icon SheetWroughtIron;
 	public static Icon SheetZinc;
+
+	/**
+	 * Set in BlockGas
+	 */
+	public static Icon GasFXIcon;
 }

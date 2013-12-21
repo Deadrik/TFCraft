@@ -54,18 +54,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFCBiome extends BiomeGenBase
 {
-	public static int ForestColor = 0x56621;
-	public static int ForestWater = 0x228855;
-	public static int PlainsColor = 0x56621;
-	public static int PlainsWater = 0x228855;
-	public static int TaigaColor = 0xb6659;
-	public static int TaigaWater = 0x228855;
-	public static int SwampColor = 0x168e6b;
 	public static int SwampWater = 0x228855;//0x644c27;
-	public static int DesertColor = 0xb6659;
-	public static int DesertWater = 0x228855;
-	public static int HillsColor = 0xb6659;
-	public static int HillsWater = 0x228855;
+	public static int FreshWater = 0x80b280;
+	public static int DarkWater = 0x354d35;
 
 	public static float riverDepthMin = -0.5F;
 	public static float riverDepthMax = -0.3F;
@@ -75,11 +66,11 @@ public class TFCBiome extends BiomeGenBase
 
 	/** An array of all the biomes, indexed by biome id. */
 	public static final TFCBiome ocean = new BiomeGenOceanTFC(0).setBiomeName("Ocean").setMinMaxHeight(-0.9F, 0.1F);
-	public static final TFCBiome river = new BiomeGenRiverTFC(7).setColor(ForestColor).setBiomeName("River").setMinMaxHeight(riverDepthMin, riverDepthMax);
+	public static final TFCBiome river = new BiomeGenRiverTFC(7).setBiomeName("River").setMinMaxHeight(riverDepthMin, riverDepthMax);
 
 	public static final TFCBiome hell = (new BiomeGenHellTFC(8)).setColor(16711680).setBiomeName("Hell").setDisableRain().setTemperatureRainfall(2.0F, 0.0F);
 
-	public static final TFCBiome beach = (new BiomeGenBeachTFC(16)).setColor(0xfade55).setBiomeName("Beach").setMinMaxHeight(0.0F, 0.1F);
+	public static final TFCBiome beach = (new BiomeGenBeachTFC(16)).setColor(0xfade55).SetWaterMult(DarkWater).setBiomeName("Beach").setMinMaxHeight(0.0F, 0.02F);
 
 	public static final TFCBiome jungle = (new BiomeGenJungleTFC(21)).setColor(5470985).setBiomeName("Jungle").setMinMaxHeight(0.2F, 0.4F);
 
@@ -87,26 +78,26 @@ public class TFCBiome extends BiomeGenBase
 
 	public static final TFCBiome desert = (new BiomeGenDesertTFC(2)).setBiomeName("Desert").setDisableRain().setTemperatureRainfall(36F, 0.0F).setMinMaxHeight(0.1F, 0.15F);
 
-	public static final TFCBiome HighHills = (new BiomeGenHillsTFC(3)).setColor(HillsColor).setBiomeName("High Hills").setMinMaxHeight(0.8F, 1.6F);
+	public static final TFCBiome HighHills = (new BiomeGenHillsTFC(3)).setBiomeName("High Hills").setMinMaxHeight(0.8F, 1.6F);
 
-	public static final TFCBiome forest = (new BiomeGenForestTFC(4)).setColor(ForestColor).setBiomeName("Forest").setMinMaxHeight(0.1F, 0.3F);
+	public static final TFCBiome forest = (new BiomeGenForestTFC(4)).setBiomeName("Forest").setMinMaxHeight(0.1F, 0.3F);
 
-	public static final TFCBiome plains = (new BiomeGenPlainsTFC(1)).setColor(PlainsColor).setBiomeName("TFC Plains").setMinMaxHeight(0.1F, 0.2F);
+	public static final TFCBiome plains = (new BiomeGenPlainsTFC(1)).setBiomeName("TFC Plains").setMinMaxHeight(0.1F, 0.2F);
 
-	public static final TFCBiome taiga = (new BiomeGenTaigaTFC(5)).setColor(TaigaColor).setBiomeName("Taiga").setMinMaxHeight(0.2F, 0.5F);
+	public static final TFCBiome taiga = (new BiomeGenTaigaTFC(5)).setBiomeName("Taiga").setMinMaxHeight(0.2F, 0.5F);
 
-	public static final TFCBiome swampland = (new BiomeGenSwampTFC(6)).setColor(SwampColor).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.1F);
+	public static final TFCBiome swampland = (new BiomeGenSwampTFC(6)).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.1F);
 
-	public static final TFCBiome HighHillsEdge = (new BiomeGenHillsEdgeTFC(20)).setColor(HillsColor).setBiomeName("High Hills Edge").setMinMaxHeight(0.2F, 0.4F);
+	public static final TFCBiome HighHillsEdge = (new BiomeGenHillsEdgeTFC(20)).setBiomeName("High Hills Edge").setMinMaxHeight(0.2F, 0.4F);
 
-	public static final TFCBiome rollingHills = (new TFCBiome(30)).setColor(PlainsColor).setBiomeName("Rolling Hills").setMinMaxHeight(0.1F, 0.4F);
-	public static final TFCBiome Mountains = (new TFCBiome(31)).setColor(HillsColor).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F);
-	public static final TFCBiome MountainsEdge = (new TFCBiome(32)).setColor(HillsColor).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F);
+	public static final TFCBiome rollingHills = (new TFCBiome(30)).setBiomeName("Rolling Hills").setMinMaxHeight(0.1F, 0.4F);
+	public static final TFCBiome Mountains = (new TFCBiome(31)).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F);
+	public static final TFCBiome MountainsEdge = (new TFCBiome(32)).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F);
 
-	public static final TFCBiome MountainsSeismic = (new TFCBiome(33)).setColor(HillsColor).setBiomeName("Mountains Seismic").setMinMaxHeight(0.8F, 1.6F);
-	public static final TFCBiome MountainsEdgeSeismic = (new TFCBiome(34)).setColor(HillsColor).setBiomeName("Mountains Edge Seismic").setMinMaxHeight(0.4F, 0.8F);
+	public static final TFCBiome MountainsSeismic = (new TFCBiome(33)).setBiomeName("Mountains Seismic").setMinMaxHeight(0.8F, 1.6F);
+	public static final TFCBiome MountainsEdgeSeismic = (new TFCBiome(34)).setBiomeName("Mountains Edge Seismic").setMinMaxHeight(0.4F, 0.8F);
 
-	public static final TFCBiome PlainsSeismic = (new BiomeGenPlainsTFC(35)).setColor(PlainsColor).setBiomeName("TFC Plains Seismic").setMinMaxHeight(0.1F, 0.2F);
+	public static final TFCBiome PlainsSeismic = (new BiomeGenPlainsTFC(35)).setBiomeName("TFC Plains Seismic").setMinMaxHeight(0.1F, 0.2F);
 
 	protected static WorldGenAcaciaKoaTrees worldGenAcaciaKoaTrees;
 	protected static WorldGenCustomTallTrees worldGenAshTallTrees;
@@ -187,7 +178,7 @@ public class TFCBiome extends BiomeGenBase
 		worldGenWhiteElmShortTrees = new WorldGenCustomShortTrees(false,13);
 		worldGenWillowShortTrees = new WorldGenCustomWillowTrees(false,14);
 
-		this.waterColorMultiplier = ForestWater;
+		this.waterColorMultiplier = DarkWater;
 		//Default spawns. I didn't delete them so they could be referenced in the future. Nerfing animal spawns.
 		/*this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 12, 4, 6));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 10, 2, 4));
@@ -273,11 +264,10 @@ public class TFCBiome extends BiomeGenBase
 
 	public int getIntRain()
 	{
-		if(TFC_Time.getMonth() < 3 || TFC_Time.currentMonth >= 10) {
+		if(TFC_Time.getMonth() < 3 || TFC_Time.currentMonth >= 10)
 			return (int)((this.rainfall+0.1F) * 65536.0F);
-		} else {
+		else
 			return (int)(this.rainfall * 65536.0F);
-		}
 	}
 
 	/**
@@ -295,11 +285,9 @@ public class TFCBiome extends BiomeGenBase
 	{
 		float temp = getTemp();
 		if(temp <= 0)
-		{
 			return 0;
-		} else {
+		else
 			return 0.3f+temp/40;
-		}
 	}
 
 	private float getTemp(float day)
@@ -309,15 +297,13 @@ public class TFCBiome extends BiomeGenBase
 		float modLast = getMonthTemp(TFC_Time.lastMonth);
 		int day2 = TFC_Time.getDayOfMonth();
 		int hour = (int) TFC_Time.getHour()-3;
-		if(hour < 0) {
+		if(hour < 0)
 			hour = 23 + hour;
-		}
 		float hourMod = 0;
-		if(hour < 12) {
+		if(hour < 12)
 			hourMod = ((float)hour/11) * 0.2F;
-		} else {
+		else
 			hourMod = 0.2F - (((float)(hour-12)/11) * 0.2F);
-		}
 
 		float m = 0;
 		float temp = 0;
@@ -346,9 +332,8 @@ public class TFCBiome extends BiomeGenBase
 	{
 		float temp = getTemp();
 
-		if(y > 180) {
+		if(y > 180)
 			temp -= temp * (y-180)/90;
-		}
 		return temp;
 	}
 
@@ -357,11 +342,10 @@ public class TFCBiome extends BiomeGenBase
 	 */
 	public float getFloatRain()
 	{
-		if(TFC_Time.currentMonth < 3 || TFC_Time.currentMonth >= 9) {
+		if(TFC_Time.currentMonth < 3 || TFC_Time.currentMonth >= 9)
 			return this.rainfall+0.1F;
-		} else {
+		else
 			return this.rainfall;
-		}
 	}
 
 	@Override
@@ -376,9 +360,8 @@ public class TFCBiome extends BiomeGenBase
 			double var1 = Helper.clamp_float(this.getFloatTemp(), 0.0F, 1.0F);
 			double var3 = Helper.clamp_float(this.getFloatRain(), 0.0F, 1.0F);
 			return ColorizerGrassTFC.getGrassColor(var1, var3);
-		} else {
+		} else
 			return ColorizerGrassTFC.getGrassDead();
-		}
 	}
 
 	@Override
@@ -393,9 +376,8 @@ public class TFCBiome extends BiomeGenBase
 			double var1 = Helper.clamp_float(this.getFloatTemp(), 0.0F, 1.0F);
 			double var3 = Helper.clamp_float(this.getFloatRain(), 0.0F, 1.0F);
 			return ColorizerFoliageTFC.getFoliageColor(var1, var3);
-		} else {
+		} else
 			return ColorizerFoliageTFC.getFoliageDead();
-		}
 	}
 
 	/**
@@ -442,134 +424,86 @@ public class TFCBiome extends BiomeGenBase
 		case 7:
 		{
 			if(j)
-			{
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,7) : worldGenAshTallTrees;
-			}
-			else
-			{
-				return worldGenAshShortTrees;
-			}
+				else
+					return worldGenAshShortTrees;
 		}
 		case 1:
 		{
 			if(j)
-			{
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,1) :worldGenAspenTallTrees;
-			}
-			else
-			{
-				return worldGenAspenShortTrees;
-			}
+				else
+					return worldGenAspenShortTrees;
 		}
 		case 2:
 		{
 			if(j)
-			{
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,2) :worldGenBirchTallTrees;
-			}
-			else
-			{
-				return worldGenBirchShortTrees;
-			}
+				else
+					return worldGenBirchShortTrees;
 		}
 		case 3:
 		{
 			if(j)
-			{
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,3) :worldGenChestnutTallTrees;
-			}
-			else
-			{
-				return worldGenChestnutShortTrees;
-			}
+				else
+					return worldGenChestnutShortTrees;
 		}
 		case 4:
 		{
 			if(j)
-			{
 				return worldGenDouglasFirTallTrees;
-			}
 			else
-			{
 				return worldGenDouglasFirShortTrees;
-			}
 		}
 		case 5:
 		{
 			if(j)
-			{
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,5) :worldGenHickoryTallTrees;
-			}
-			else
-			{
-				return worldGenHickoryShortTrees;
-			}
+				else
+					return worldGenHickoryShortTrees;
 		}
 		case 6:
 		{
 			if(j)
-			{
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,6) :worldGenMapleTallTrees;
-			}
-			else
-			{
-				return worldGenMapleShortTrees;
-			}
+				else
+					return worldGenMapleShortTrees;
 		}
 		case 0:
 		{
 			if(j)
-			{
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,0) :worldGenOakTallTrees;
-			}
-			else
-			{
-				return worldGenOakShortTrees;
-			}
+				else
+					return worldGenOakShortTrees;
 		}
 		case 8:
 		{
 			if(j)
-			{
 				return worldGenPineTallTrees;
-			}
 			else
-			{
 				return worldGenPineShortTrees;
-			}
 		}
 		case 9:
 		{
 			if(j)
-			{
 				return worldGenRedwoodTallTrees;
-			}
 			else
-			{
 				return worldGenRedwoodShortTrees;
-			}
 		}
 		case 10:
 		{
 			if(j)
-			{
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,10) :worldGenSpruceTallTrees;
-			}
-			else
-			{
-				return worldGenSpruceShortTrees;
-			}
+				else
+					return worldGenSpruceShortTrees;
 		}
 		case 11:
 		{
 			if(j)
-			{
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,11) :worldGenSycamoreTallTrees;
-			}
-			else
-			{
-				return worldGenSycamoreShortTrees;
-			}
+				else
+					return worldGenSycamoreShortTrees;
 		}
 		case 12:
 		{
@@ -578,13 +512,9 @@ public class TFCBiome extends BiomeGenBase
 		case 13:
 		{
 			if(j)
-			{
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,13) :worldGenWhiteElmTallTrees;
-			}
-			else
-			{
-				return worldGenWhiteElmShortTrees;
-			}
+				else
+					return worldGenWhiteElmShortTrees;
 		}
 		case 14:
 		{
@@ -605,15 +535,12 @@ public class TFCBiome extends BiomeGenBase
 	public TFCBiome GetBiomeByName(String name)
 	{
 		for (int i = 0; i < this.biomeList.length; i++)
-		{
 			if(biomeList[i] != null)
 			{
 				String n = biomeList[i].biomeName.toLowerCase();
-				if(n.equalsIgnoreCase(name)) {
+				if(n.equalsIgnoreCase(name))
 					return (TFCBiome) biomeList[i];
-				}
 			}
-		}
 		return null;
 	}
 
