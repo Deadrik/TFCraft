@@ -1,0 +1,29 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "Minecraft Forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'forge'
+    group = 'TFCraft'
+    version = '0.22.77'
+
+    minecraft {
+        version = '1.6.4-9.11.1.964'
+    }
+}
+
+project(':shared') {
+    dependencies {
+        compile project(':api')
+    }
+}
