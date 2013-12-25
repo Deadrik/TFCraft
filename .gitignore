@@ -1,2 +1,29 @@
-*.pyc
-TFC Build/
+# gradle
+.gradle
+build
+gradle-app.setting
+
+
+# eclipse
+.settings
+.metadata
+.classpath
+.project
+bin
+eclipse
+
+# intellij
+out
+*.idea
+*.iml
+*.ipr
+*.iws
+*.log
+*.log.lck
+
+# minecraft runtime
+config/
+crash-reports/
+saves/
+stats/
+*.log*
