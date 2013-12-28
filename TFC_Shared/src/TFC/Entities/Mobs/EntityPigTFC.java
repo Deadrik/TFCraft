@@ -1,5 +1,7 @@
 package TFC.Entities.Mobs;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -39,6 +41,12 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	protected long timeOfConception;
 	protected float mateSizeMod;
 	public float size_mod = 1f;
+	public float strength_mod;
+	public float aggression_mod;
+	public float obedience_mod;
+	public float colour_mod;
+	public float climate_mod;
+	public float hard_mod;
 	public boolean inLove;
 
 	int degreeOfDiversion = 2;
@@ -81,13 +89,14 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 
-	public EntityPigTFC(World par1World, IAnimal mother, float F_size)
+	public EntityPigTFC(World par1World, IAnimal mother, ArrayList<Float> data)
 	{
 		this(par1World);
+		float father_size = data.get(0);
 		this.posX = ((EntityLivingBase)mother).posX;
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
-		size_mod = (((rand.nextInt (degreeOfDiversion+1)*10*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + F_size)/1.9F);
+		size_mod = (((rand.nextInt (degreeOfDiversion+1)*10*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size)/1.9F);
 		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 
 		//	We hijack the growingAge to hold the day of birth rather
@@ -119,6 +128,13 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		this.dataWatcher.addObject(13, Integer.valueOf(0));
 		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
 		this.dataWatcher.addObject(15, Integer.valueOf(0));
+		
+		this.dataWatcher.addObject(24, new Float(1));
+		this.dataWatcher.addObject(25, new Float(1));
+		this.dataWatcher.addObject(26, new Float(1));
+		this.dataWatcher.addObject(27, new Float(1));
+		this.dataWatcher.addObject(28, new Float(1));
+		this.dataWatcher.addObject(29, new Float(1));
 	}
 
 	@Override
@@ -183,10 +199,24 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			if(!this.worldObj.isRemote){
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
+				
+				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
+				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
+				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
+				this.dataWatcher.updateObject(27, Float.valueOf(colour_mod));
+				this.dataWatcher.updateObject(28, Float.valueOf(climate_mod));
+				this.dataWatcher.updateObject(29, Float.valueOf(hard_mod));
 			}
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
+				
+				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
+				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
+				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
+				colour_mod = this.dataWatcher.getWatchableObjectFloat(27);
+				climate_mod = this.dataWatcher.getWatchableObjectFloat(28);
+				hard_mod = this.dataWatcher.getWatchableObjectFloat(29);
 			}
 		}
 	}
@@ -198,6 +228,14 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
+		
+		nbt.setFloat ("Strength Modifier", strength_mod);
+		nbt.setFloat ("Aggression Modifier", aggression_mod);
+		nbt.setFloat ("Obedience Modifier", obedience_mod);
+		nbt.setFloat ("Colour Modifier", colour_mod);
+		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
+		nbt.setFloat ("Hardiness Modifier", hard_mod);
+		
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setBoolean("Pregnant", pregnant);
 		nbt.setFloat("MateSize", mateSizeMod);
@@ -213,6 +251,14 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
+		
+		strength_mod = nbt.getFloat ("Strength Modifier");
+		aggression_mod = nbt.getFloat ("Aggression Modifier");
+		obedience_mod = nbt.getFloat ("Obedience Modifier");
+		colour_mod = nbt.getFloat ("Colour Modifier");
+		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
+		hard_mod = nbt.getFloat ("Hardiness Modifier");
+		
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
@@ -391,7 +437,9 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public EntityAgeable createChildTFC(EntityAgeable entityageable) 
 	{
-		return new EntityPigTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
+		ArrayList<Float> data = new ArrayList<Float>();
+		data.add(entityageable.getEntityData().getFloat("MateSize"));
+		return new EntityPigTFC(worldObj, this, data);
 	}
 
 	@Override
@@ -494,5 +542,41 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	public void setHunger(int h) 
 	{
 		hunger = h;
+	}
+
+	@Override
+	public float getStrength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getAggression() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getObedience() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getColour() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getClimateAdaptation() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getHardiness() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
