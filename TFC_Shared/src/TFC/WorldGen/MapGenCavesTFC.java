@@ -256,6 +256,10 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 			width *= 0.65;
 		else if (yCoord < 96)
 			width *= 0.80;
+		else if (yCoord < 120)
+			width *= 0.90;
+		else
+			width *= 0.5;
 
 		if(this.rand.nextInt(8) == 0)
 			width += 1;
