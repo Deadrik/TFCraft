@@ -146,13 +146,13 @@ public class WorldGenFissure implements IWorldGenerator
 	private void carve(World world, int x, int y, int z, int id, int meta)
 	{
 		world.setBlock(x, y, z, 0);
-		if(world.getBlockMaterial(x-1, y, z) != Material.air && TFC_Core.isGround(world.getBlockId(x-1, y, z)))
+		if(world.getBlockMaterial(x-1, y, z) != Material.air && TFC_Core.isGround(world.getBlockId(x-1, y, z)) && !TFC_Core.isGrass(world.getBlockId(x-1, y, z)))
 			world.setBlock(x-1, y, z, id, meta, 2);
-		if(world.getBlockMaterial(x+1, y, z) != Material.air && TFC_Core.isGround(world.getBlockId(x+1, y, z)))
+		if(world.getBlockMaterial(x+1, y, z) != Material.air && TFC_Core.isGround(world.getBlockId(x+1, y, z)) && !TFC_Core.isGrass(world.getBlockId(x+1, y, z)))
 			world.setBlock(x+1, y, z, id, meta, 2);
-		if(world.getBlockMaterial(x, y, z-1) != Material.air && TFC_Core.isGround(world.getBlockId(x, y, z-1)))
+		if(world.getBlockMaterial(x, y, z-1) != Material.air && TFC_Core.isGround(world.getBlockId(x, y, z-1)) && !TFC_Core.isGrass(world.getBlockId(x, y, z-1)))
 			world.setBlock(x, y, z-1, id, meta, 2);
-		if(world.getBlockMaterial(x, y, z+1) != Material.air && TFC_Core.isGround(world.getBlockId(x, y, z+1)))
+		if(world.getBlockMaterial(x, y, z+1) != Material.air && TFC_Core.isGround(world.getBlockId(x, y, z+1)) && !TFC_Core.isGrass(world.getBlockId(x, y, z+1)))
 			world.setBlock(x, y, z+1, id, meta, 2);
 	}
 
