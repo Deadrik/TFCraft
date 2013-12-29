@@ -23,7 +23,7 @@ public class ItemWoodSupport2 extends ItemTerraBlock
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
-		String s = new StringBuilder().append((super.getItemDisplayName(itemstack)).substring(0, 18)).append(".").append(Global.WOOD_ALL[itemstack.getItemDamage()+16]).toString();
+		String s = new StringBuilder().append((super.getItemDisplayName(itemstack)).substring(0, 18)).append(".").append(Global.WOOD_ALL[(itemstack.getItemDamage()+16)<Global.WOOD_ALL.length?itemstack.getItemDamage()+16:16]).toString();
 		return s;
 	}
 }

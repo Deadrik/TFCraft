@@ -149,12 +149,15 @@ public class BlockForge extends BlockTerraContainer
 					(world.getBlockMaterial(x, y, z+1) == Material.rock && world.isBlockNormalCube(x, y, z+1));
 			boolean rockZN = world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID || 
 					(world.getBlockMaterial(x, y, z-1) == Material.rock && world.isBlockNormalCube(x, y, z-1));
+			boolean rockYN = world.getBlockId(x, y-1,  z ) == TFCBlocks.stoneSlabs.blockID ||
+					(world.getBlockMaterial(x, y-1, z) == Material.rock && world.isBlockNormalCube(x, y-1,z));
 
 
 			boolean validSlabs = TFC_Core.isNorthSolid(world, x, y, z) && TFC_Core.isSouthSolid(world, x, y, z) && 
 					TFC_Core.isEastSolid(world, x, y, z) && TFC_Core.isWestSolid(world, x, y, z);	
 
-			if(!(rockXP && rockXN && rockZP && rockZN) || !validSlabs)	
+			if (!(rockXP && rockXN && rockZP && rockZN && rockYN)
+					|| !validSlabs)
 			{
 				((TileEntityForge)world.getBlockTileEntity(x, y, z)).ejectContents();
 				world.setBlock(x, y, z, 0);

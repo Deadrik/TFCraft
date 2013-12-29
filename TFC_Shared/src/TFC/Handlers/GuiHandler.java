@@ -1,5 +1,7 @@
 package TFC.Handlers;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -12,6 +14,7 @@ import TFC.Containers.ContainerCrucible;
 import TFC.Containers.ContainerFirepit;
 import TFC.Containers.ContainerFoodPrep;
 import TFC.Containers.ContainerForge;
+import TFC.Containers.ContainerHorseInventoryTFC;
 import TFC.Containers.ContainerLiquidVessel;
 import TFC.Containers.ContainerLogPile;
 import TFC.Containers.ContainerMold;
@@ -25,6 +28,8 @@ import TFC.Containers.ContainerVessel;
 import TFC.Containers.ContainerWorkbench;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Entities.Mobs.EntityHorseTFC;
+import TFC.GUI.GuiScreenHorseInventoryTFC;
 import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TENestBox;
@@ -142,6 +147,14 @@ public class GuiHandler implements IGuiHandler
 		case 41:
 		{
 			return new ContainerNestBox(player.inventory,((TENestBox)te),world,x,y,z);
+		}
+		case 42:
+		{
+			System.out.println("found location");
+			List list = player.worldObj.getEntitiesWithinAABB(EntityHorseTFC.class, player.boundingBox.expand(2, 2, 2));
+			System.out.println((player.worldObj).getClass());
+			EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
+			return new ContainerHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
 		}
 		default:
 		{

@@ -1,6 +1,7 @@
 package TFC.Entities.Mobs;
 
 import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
@@ -9,6 +10,8 @@ import TFC.Entities.AI.AIEatGrass;
 import TFC.Entities.AI.EntityAIMateTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import net.minecraft.block.Block;
@@ -81,6 +84,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	protected long conception;
 	protected float mateSizeMod;
 	public float size_mod;
+	public float strength_mod;
+	public float aggression_mod;
+	public float obedience_mod;
+	public float colour_mod;
+	public float climate_mod;
+	public float hard_mod;
 	public boolean isInLove;
 
 	int degreeOfDiversion = 2;
@@ -135,9 +144,10 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 
-	public EntityHorseTFC(World par1World, IAnimal mother, float father_size)
+	public EntityHorseTFC(World par1World, IAnimal mother,  ArrayList<Float> data)
 	{
 		this(par1World);
+		float father_size = data.get(0);
 		this.posX = ((EntityLivingBase)mother).posX;
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
@@ -216,10 +226,24 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			if(!this.worldObj.isRemote){
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
+				
+				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
+				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
+				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
+				this.dataWatcher.updateObject(27, Float.valueOf(colour_mod));
+				this.dataWatcher.updateObject(28, Float.valueOf(climate_mod));
+				this.dataWatcher.updateObject(29, Float.valueOf(hard_mod));
 			}
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
+				
+				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
+				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
+				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
+				colour_mod = this.dataWatcher.getWatchableObjectFloat(27);
+				climate_mod = this.dataWatcher.getWatchableObjectFloat(28);
+				hard_mod = this.dataWatcher.getWatchableObjectFloat(29);
 			}
 		}
 	}
@@ -229,7 +253,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		super.entityInit();
 		this.dataWatcher.addObject(13, Integer.valueOf(0));
 		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
-		this.dataWatcher.addObject(15, Integer.valueOf(0));	
+		this.dataWatcher.addObject(15, Integer.valueOf(0));
+		
+		this.dataWatcher.addObject(24, new Float(1));
+		this.dataWatcher.addObject(25, new Float(1));
+		this.dataWatcher.addObject(26, new Float(1));
+		this.dataWatcher.addObject(27, new Float(1));
+		this.dataWatcher.addObject(28, new Float(1));
+		this.dataWatcher.addObject(29, new Float(1));
 	}
 
 	public void setHorseType(int par1)
@@ -862,8 +893,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		if (!this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == par1EntityPlayer) && this.isTame())
 		{
 			this.horseChest.func_110133_a(this.getEntityName());
-			par1EntityPlayer.displayGUIHorse(this, this.horseChest);
+			//par1EntityPlayer.displayGUIHorse(this, this.horseChest);
+			par1EntityPlayer.openGui(TerraFirmaCraft.instance, 42, par1EntityPlayer.worldObj, (int)par1EntityPlayer.posX, (int)par1EntityPlayer.posY, (int)par1EntityPlayer.posZ);
 		}
+	}
+	
+	public AnimalChest getHorseChest(){
+		return this.horseChest;
 	}
 
 	/**
@@ -908,7 +944,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		{
 			return false;
 		}
-		else if (this.isTame() && this.isAdultHorse() && par1EntityPlayer.isSneaking())
+		else if (this.isTame() && this.isAdultHorse() && par1EntityPlayer.isSneaking() && !this.getLeashed())
 		{
 			this.openGUI(par1EntityPlayer);
 			return true;
@@ -1027,7 +1063,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		Entity entity = getLeashedToEntity();
 		if(entity!= null && entity instanceof EntityPlayer){
 			ItemStack item = ((EntityPlayer)entity).inventory.getCurrentItem();
-			if(item != null && item.getItem() == Item.leash){
+			if(entity.isSneaking()){
 				super.clearLeashed(par1, par2);
 			}
 		}
@@ -1418,6 +1454,16 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		par1NBTTagCompound.setInteger ("Sex", sex);
 		par1NBTTagCompound.setLong ("Animal ID", animalID);
 		par1NBTTagCompound.setFloat ("Size Modifier", size_mod);
+		
+		
+		NBTTagCompound nbt = par1NBTTagCompound;
+		nbt.setFloat ("Strength Modifier", strength_mod);
+		nbt.setFloat ("Aggression Modifier", aggression_mod);
+		nbt.setFloat ("Obedience Modifier", obedience_mod);
+		nbt.setFloat ("Colour Modifier", colour_mod);
+		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
+		nbt.setFloat ("Hardiness Modifier", hard_mod);
+		
 		par1NBTTagCompound.setInteger ("Hunger", hunger);
 		par1NBTTagCompound.setBoolean("Pregnant", pregnant);
 		par1NBTTagCompound.setFloat("MateSize", mateSizeMod);
@@ -1473,6 +1519,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
+		
+		strength_mod = nbt.getFloat ("Strength Modifier");
+		aggression_mod = nbt.getFloat ("Aggression Modifier");
+		obedience_mod = nbt.getFloat ("Obedience Modifier");
+		colour_mod = nbt.getFloat ("Colour Modifier");
+		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
+		hard_mod = nbt.getFloat ("Hardiness Modifier");
+		
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
@@ -1880,7 +1934,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public EntityAgeable createChildTFC(EntityAgeable entityageable) 
 	{
 		EntityHorseTFC entityhorse = (EntityHorseTFC)entityageable;
-		EntityHorseTFC entityhorse1 = new EntityHorseTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
+		ArrayList<Float> data = new ArrayList<Float>();
+		data.add(entityageable.getEntityData().getFloat("MateSize"));
+		EntityHorseTFC entityhorse1 = new EntityHorseTFC(worldObj, this, data);
 		int i = this.getHorseType();
 		int j = entityhorse.getHorseType();
 		int k = 0;
@@ -1974,5 +2030,41 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public EntityLiving getEntity() {
 		// TODO Auto-generated method stub
 		return this;
+	}
+
+	@Override
+	public float getStrength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getAggression() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getObedience() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getColour() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getClimateAdaptation() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getHardiness() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
