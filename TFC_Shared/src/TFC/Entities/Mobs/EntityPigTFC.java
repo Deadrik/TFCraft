@@ -547,36 +547,41 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public float getStrength() {
 		// TODO Auto-generated method stub
-		return 0;
+		return strength_mod;
 	}
+
 
 	@Override
 	public float getAggression() {
 		// TODO Auto-generated method stub
-		return 0;
+		return aggression_mod;
 	}
+
 
 	@Override
 	public float getObedience() {
 		// TODO Auto-generated method stub
-		return 0;
+		return obedience_mod;
 	}
+
 
 	@Override
 	public float getColour() {
 		// TODO Auto-generated method stub
-		return 0;
+		return colour_mod;
 	}
+
 
 	@Override
 	public float getClimateAdaptation() {
 		// TODO Auto-generated method stub
-		return 0;
+		return climate_mod;
 	}
+
 
 	@Override
 	public float getHardiness() {
 		// TODO Auto-generated method stub
-		return 0;
+		return hard_mod;
 	}
 }

@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +40,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	public float climate_mod;
 	public float hard_mod;
 	public boolean inLove;
+	
+	public int angerTick;
+	
 	int degreeOfDiversion = 1;
 
 	public EntityCowTFC(World par1World)
@@ -121,6 +125,19 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		if(super.inLove > 0){
 			super.inLove = 0;
 			setInLove(true);
+		}
+		
+		if(angerTick > 0 && this.rand.nextInt(2)==0){
+			angerTick--;
+		}
+		
+		for(Object ai : tasks.taskEntries){
+			if(ai.getClass() == EntityAIMoveTowardsRestriction.class){
+				if(((EntityAIMoveTowardsRestriction)ai).shouldExecute()){
+					angerTick+=(int)(getAggression() * getObedience());
+					System.out.println("Getting Angrier: "+(int)(getAggression() * getObedience()));
+				}
+			}
 		}
 
 		syncData();
@@ -468,36 +485,41 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public float getStrength() {
 		// TODO Auto-generated method stub
-		return 0;
+		return strength_mod;
 	}
+
 
 	@Override
 	public float getAggression() {
 		// TODO Auto-generated method stub
-		return 0;
+		return aggression_mod;
 	}
+
 
 	@Override
 	public float getObedience() {
 		// TODO Auto-generated method stub
-		return 0;
+		return obedience_mod;
 	}
+
 
 	@Override
 	public float getColour() {
 		// TODO Auto-generated method stub
-		return 0;
+		return colour_mod;
 	}
+
 
 	@Override
 	public float getClimateAdaptation() {
 		// TODO Auto-generated method stub
-		return 0;
+		return climate_mod;
 	}
+
 
 	@Override
 	public float getHardiness() {
 		// TODO Auto-generated method stub
-		return 0;
+		return hard_mod;
 	}
 }

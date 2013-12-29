@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemFood;
@@ -232,7 +233,8 @@ public class FoodStatsTFC
 			for(int j = y-3;j<y+3;j++)
 				for(int k = z-10;k<z+10;k++){
 					TileEntity te = player.worldObj.getBlockTileEntity(i, j, k);
-					if(te != null && te instanceof TileEntityFireEntity && ((TileEntityFireEntity)te).fireTemperature > 100)
+					if((player.worldObj.getBlockId(x, y, z) == Block.lavaStill.blockID || player.worldObj.getBlockId(x, y, z) == Block.lavaMoving.blockID)
+					||(te != null && te instanceof TileEntityFireEntity && ((TileEntityFireEntity)te).fireTemperature > 100))
 						returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )==0?1:0);
 				}
 		return returnAmount;

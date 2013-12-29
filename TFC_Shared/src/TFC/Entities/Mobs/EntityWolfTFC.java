@@ -280,7 +280,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		int var2 = TFC_MobData.WolfDamage;
+		int var2 = (int)(TFC_MobData.WolfDamage * getStrength() * getAggression() * (getSize()/2 + 0.5F));
 		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 	}
 
@@ -458,34 +458,45 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		}
 		return super.interact(par1EntityPlayer);
 	}
+
 	@Override
 	public float getStrength() {
 		// TODO Auto-generated method stub
-		return 0;
+		return strength_mod;
 	}
+
+
 	@Override
 	public float getAggression() {
 		// TODO Auto-generated method stub
-		return 0;
+		return aggression_mod;
 	}
+
+
 	@Override
 	public float getObedience() {
 		// TODO Auto-generated method stub
-		return 0;
+		return obedience_mod;
 	}
+
+
 	@Override
 	public float getColour() {
 		// TODO Auto-generated method stub
-		return 0;
+		return colour_mod;
 	}
+
+
 	@Override
 	public float getClimateAdaptation() {
 		// TODO Auto-generated method stub
-		return 0;
+		return climate_mod;
 	}
+
+
 	@Override
 	public float getHardiness() {
 		// TODO Auto-generated method stub
-		return 0;
+		return hard_mod;
 	}
 }

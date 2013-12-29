@@ -363,7 +363,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public boolean attackEntityAsMob (Entity par1Entity)
 	{
-		int dam =  TFC_MobData.BearDamage;
+		int dam =  (int)(TFC_MobData.BearDamage * getStrength() * getAggression() * (getSize()/2 + 0.5F));
 		return par1Entity.attackEntityFrom (DamageSource.causeMobDamage (this), dam);
 	}
 
