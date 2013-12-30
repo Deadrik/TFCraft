@@ -1,5 +1,9 @@
 package TFC.TileEntities;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Random;
@@ -11,8 +15,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.Enums.EnumWoodMaterial;
@@ -20,6 +26,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.Vector3f;
+import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.TFCBiome;
 
@@ -33,6 +40,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 	private int oldWoodCount;
 	private boolean logPileChecked;
 	public int charcoalCounter;
+	public boolean hasCookingPot;
 
 	public final int FIREBURNTIME = (int) ((TFC_Time.hourLength*18)/100);//default 240
 
@@ -53,6 +61,8 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 		externalWoodCount = 0;
 		oldWoodCount = 0;
 		charcoalCounter = 0;
+		
+		hasCookingPot = false;
 	}
 
 	public Boolean addByproduct(ItemStack is)
@@ -786,6 +796,8 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 			{
 				inputItemTemp =  ((TFCBiome)worldObj.getBiomeGenForCoords(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord);
 			}
+			hasCookingPot = (fireItemStacks[1]!= null && fireItemStacks[1].getItem() == TFCItems.PotteryPot);
+			updateGui();
 			//careForInventorySlot(1,fireTemperature);
 			//careForInventorySlot(6,fireTemperature);
 			careForInventorySlot(7,fireTemperature);
@@ -938,4 +950,54 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 	{
 		return logPileChecked == false && charcoalCounter == 0;
 	}
+	
+	public void updateGui()
+	{
+		if(!worldObj.isRemote) {
+			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
+		}
+		else{
+			validate();
+		}
+	}
+	
+	@Override
+	public void handleDataPacket(DataInputStream inStream) throws IOException {
+		hasCookingPot = inStream.readBoolean();
+	}
+	
+	public Packet createUpdatePacket()
+	{
+		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+		DataOutputStream dos=new DataOutputStream(bos);	
+		try {
+			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
+			dos.writeInt(xCoord);
+			dos.writeInt(yCoord);
+			dos.writeInt(zCoord);
+			dos.writeBoolean(hasCookingPot);
+		} catch (IOException e) {
+		}
+		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	}
+
+	@Override
+	public void createInitPacket(DataOutputStream outStream) throws IOException {
+		outStream.writeBoolean(hasCookingPot);
+	}
+
+	@Override
+	public void handleInitPacket(DataInputStream inStream) throws IOException {
+
+		hasCookingPot = inStream.readBoolean();
+
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public void handleDataPacketServer(DataInputStream inStream)
+			throws IOException {
+		hasCookingPot = inStream.readBoolean();
+	}
+	
 }

@@ -15,6 +15,7 @@ import TFC.Containers.Slots.SlotForShowOnly;
 import TFC.Containers.Slots.SlotLiquidVessel;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.MetalRegistry;
+import TFC.Items.ItemMeltedMetal;
 
 public class ContainerLiquidVessel extends ContainerTFC 
 {
@@ -107,6 +108,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 					{
 						nbt.removeTag("MetalType");
 						nbt.removeTag("MetalAmount");
+						nbt.removeTag("TempTimer");
 						player.inventory.getStackInSlot(bagsSlotNum).setItemDamage(1);
 					} else 
 					{
@@ -123,6 +125,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 					{
 						nbt.removeTag("MetalType");
 						nbt.removeTag("MetalAmount");
+						nbt.removeTag("TempTimer");
 						player.inventory.getStackInSlot(bagsSlotNum).setItemDamage(1);
 					} else 
 					{
@@ -151,19 +154,19 @@ public class ContainerLiquidVessel extends ContainerTFC
 				if (!this.mergeItemStack(clickedStack, 1, inventorySlots.size(), true)) {
 					return null;
 				}
-			}
-			else if (clickedIndex > 0 && clickedIndex < inventorySlots.size() && clickedStack.getItem().itemID == TFCItems.CeramicMold.itemID && 
-					clickedStack.getItemDamage() == 1)
-				{
-				if(slot1.getHasStack())
-				{
+			} else if (clickedIndex > 0 && clickedIndex < inventorySlots.size() &&
+				  ((clickedStack.getItem().itemID == TFCItems.CeramicMold.itemID && clickedStack.getItemDamage() == 1) || 
+				   (clickedStack.getItem() instanceof ItemMeltedMetal && clickedStack.getItemDamage() > 1)))
+			{
+			    if(slot1.getHasStack())
+			    {
 					return null;
-				}
+			    }
 				ItemStack stack = clickedStack.copy();
 				stack.stackSize = 1;                            
 				slot1.putStack(stack);                          
 				clickedStack.stackSize--;
-			}
+			}	
 
 			if (clickedStack.stackSize == 0) {
 				clickedSlot.putStack((ItemStack)null);

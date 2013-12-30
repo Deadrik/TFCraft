@@ -32,7 +32,6 @@ public class BlockAnvil extends BlockTerraContainer
 {
 	private int anvilId = 0;
 
-
 	private Random random = new Random();
 
 	public BlockAnvil(int i)
@@ -49,7 +48,7 @@ public class BlockAnvil extends BlockTerraContainer
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
+	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
 		if(this.blockID == TFCBlocks.Anvil.blockID) {
 			for(int i = 1; i < 8; i++) {
@@ -78,7 +77,7 @@ public class BlockAnvil extends BlockTerraContainer
 		if(world.isRemote)
 		{
 			return true;
-		} 
+		}
 		else
 		{
 			if((TileEntityAnvil)world.getBlockTileEntity(i, j, k)!=null)
@@ -175,14 +174,21 @@ public class BlockAnvil extends BlockTerraContainer
 	{
 		int meta = getAnvilTypeFromMeta(j);
 
-		if(i == 0 || i == 1) 
+		if (j == 0 && this.blockID == TFCBlocks.Anvil.blockID)
 		{
-			return textureMapTop[meta];
-		} 
-		else 
+			return stoneAnvilIcon;
+		} else
 		{
-			return textureMapSide[meta];
+			if(i == 0 || i == 1)
+			{
+				return textureMapTop[meta];
+			}
+			else
+			{
+				return textureMapSide[meta];
+			}
 		}
+
 	}
 
 	@Override
@@ -193,7 +199,7 @@ public class BlockAnvil extends BlockTerraContainer
 
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-	{		
+	{
 		int type = BlockAnvil.getAnvilTypeFromMeta(l);
 
 		if(blockID == TFCBlocks.Anvil.blockID)
@@ -352,6 +358,7 @@ public class BlockAnvil extends BlockTerraContainer
 
 	Icon[] textureMapTop;
 	Icon[] textureMapSide;
+	Icon stoneAnvilIcon;
 
 	@Override
 	public void registerIcons(IconRegister registerer)
@@ -363,6 +370,8 @@ public class BlockAnvil extends BlockTerraContainer
 			textureMapTop[i] = registerer.registerIcon(Reference.ModID + ":" + "devices/Anvil_" + (i+anvilId) + "_Top");
 			textureMapSide[i] = registerer.registerIcon(Reference.ModID + ":" + "devices/Anvil_" + (i+anvilId) + "_Side");
 		}
+
+		stoneAnvilIcon = registerer.registerIcon(Reference.ModID + ":" + "rocks/" + "Gabbro Raw");
 
 		TFC_Textures.AnvilHit = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit");
 		TFC_Textures.AnvilHitHeavy = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit Heavy");

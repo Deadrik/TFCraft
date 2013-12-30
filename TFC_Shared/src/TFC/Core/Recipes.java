@@ -583,10 +583,10 @@ public class Recipes
 			GameRegistry.addRecipe(new ItemStack(Item.appleRed,1),new Object[]{"1",Character.valueOf('1'),new ItemStack(TFCItems.RedApple,1)});
 
 			//Terrastone to Cobblestone
-			GameRegistry.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.StoneSedCobble});
-			GameRegistry.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.StoneIgInCobble});
-			GameRegistry.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.StoneIgExCobble});
-			GameRegistry.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.StoneMMCobble});
+			GameRegistry.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneSedCobble});
+			GameRegistry.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneIgInCobble});
+			GameRegistry.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneIgExCobble});
+			GameRegistry.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneMMCobble});
 			GameRegistry.addShapelessRecipe(new ItemStack(Item.leather,1),new Object[]{new ItemStack(TFCItems.TerraLeather,1)});
 
 			//Conversion to vanilla tools for recipes in other mods

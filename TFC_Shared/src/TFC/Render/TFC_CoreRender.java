@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -23,6 +24,9 @@ import TFC.Blocks.Flora.BlockFruitLeaves;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
+import TFC.Render.Models.ModelCookingPot;
+import TFC.Render.Models.ModelPotteryBase;
+import TFC.Render.Models.ModelRendererTFC;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.WorldGen.DataLayer;
@@ -359,7 +363,7 @@ public class TFC_CoreRender
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 
-		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
+		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);		
 		return true;
 	}
 
@@ -973,7 +977,8 @@ public class TFC_CoreRender
 
 		return true;
 	}
-
+	
+	
 	private static void drawCrossedSquares(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
 		Tessellator var9 = Tessellator.instance;
