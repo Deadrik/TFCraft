@@ -1,7 +1,7 @@
 package TFC.API.Enums;
 
 
-public enum CraftingRuleEnum
+public enum RuleEnum
 {
 	ANY("gui.Anvil.Rule1", -1, 0, 2),
 	HITANY("gui.Anvil.Rule2", 0, 0, 2),
@@ -48,7 +48,7 @@ public enum CraftingRuleEnum
 	public final int Action;
 	public final String Name;
 
-	CraftingRuleEnum(String n, int action, int min, int max)
+	RuleEnum(String n, int action, int min, int max)
 	{
 		Name = n;
 		Min = min;
@@ -67,7 +67,7 @@ public enum CraftingRuleEnum
 		return false;
 	}
 
-	public boolean matches(CraftingRuleEnum R, int position)
+	public boolean matches(RuleEnum R, int position)
 	{
 		if((Action == R.Action || Action == this.ANY.Action)) {
 			if(position >= Min && position <= Max) {

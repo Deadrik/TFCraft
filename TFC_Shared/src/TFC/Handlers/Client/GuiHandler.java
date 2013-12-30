@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.gui.inventory.GuiScreenHorseInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -27,6 +26,7 @@ import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiLogPile;
 import TFC.GUI.GuiMold;
 import TFC.GUI.GuiNestBox;
+import TFC.GUI.GuiPlanSelection;
 import TFC.GUI.GuiQuern;
 import TFC.GUI.GuiQuiver;
 import TFC.GUI.GuiScreenHorseInventoryTFC;
@@ -98,7 +98,7 @@ public class GuiHandler extends TFC.Handlers.GuiHandler
 		}
 		case 24:
 		{
-			return null;//was metallurgy table
+			return new GuiPlanSelection(player, (TileEntityAnvil) te, world, x, y, z);//was metallurgy table
 		}
 		case 25:
 		{
@@ -183,8 +183,6 @@ public class GuiHandler extends TFC.Handlers.GuiHandler
 	public void openGuiHandler(GuiOpenEvent event)
 	{
 		if(event.gui instanceof GuiInventory && !(event.gui instanceof GuiInventoryTFC))
-		{
 			event.gui = new GuiInventoryTFC(Minecraft.getMinecraft().thePlayer);
-		}
 	}
 }

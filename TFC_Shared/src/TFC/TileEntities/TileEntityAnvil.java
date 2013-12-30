@@ -18,10 +18,10 @@ import net.minecraftforge.common.MinecraftForge;
 import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
-import TFC.API.Crafting.AnvilCraftingManagerTFC;
+import TFC.API.Crafting.AnvilManager;
 import TFC.API.Crafting.AnvilRecipe;
 import TFC.API.Crafting.AnvilReq;
-import TFC.API.Enums.CraftingRuleEnum;
+import TFC.API.Enums.RuleEnum;
 import TFC.API.Events.AnvilCraftEvent;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
@@ -37,7 +37,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	public int craftingValue;
 	public int craftingRange;
 	public int craftingReq;
-	public int[] craftingRules;
+	public String craftingPlan;
+
 	public int[] stonePair;
 
 	private boolean isDone = false;
@@ -51,11 +52,11 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 
 	private EntityPlayer lastWorker;
 
-	public static final int INPUT_SLOT = 1;
+	public static final int INPUT1_SLOT = 1;
 	public static final int WELD1_SLOT = 2;
 	public static final int WELD2_SLOT = 3;
 	public static final int WELDOUT_SLOT = 4;
-	public static final int RECIPE_SLOT = 5;
+	public static final int INPUT2_SLOT = 5;
 	public static final int FLUX_SLOT = 6;
 	public static final int HAMMER_SLOT = 0;
 
@@ -65,9 +66,9 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		itemCraftingValue = 0;
 		itemCraftingRules = new int[]{-1,-1,-1};
 		craftingValue = 0;
-		craftingRules = new int[]{-1,-1,-1};
 		AnvilTier = AnvilReq.STONE.Tier;
 		stonePair = new int[]{0,0};
+		craftingPlan = "";
 	}
 
 	@Override
@@ -77,23 +78,18 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		{
 			workRecipe = null;
 			craftingValue = 0;
-			craftingRules = new int[]{-1,-1,-1};
 		}
-		else if(anvilItemStacks[INPUT_SLOT] != null && workRecipe == null)
-		{
+		else if(anvilItemStacks[INPUT1_SLOT] != null || anvilItemStacks[INPUT2_SLOT] != null && workRecipe == null)
 			updateRecipe();
-		}
 		//make sure that the world is not remote
 		if(!worldObj.isRemote)
 		{
 			//if the item exceeds bounds, destroy it
-			if(getItemCraftingValue() < -50 || getItemCraftingValue() > 100) {
-				this.setInventorySlotContents(INPUT_SLOT, null);
-			}
+			if(getItemCraftingValue() > 150)
+				this.setInventorySlotContents(INPUT1_SLOT, null);
 
-			if(workedRecently > 0) {
+			if(workedRecently > 0)
 				workedRecently--;
-			}
 			//Deal with temperatures
 			TFC_ItemHeat.HandleContainerHeat(this.worldObj, anvilItemStacks, xCoord,yCoord,zCoord);
 			/**
@@ -103,94 +99,80 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			{
 				itemCraftingValue = getItemCraftingValue();
 
-				AnvilCraftingManagerTFC manager = AnvilCraftingManagerTFC.getInstance();
+				AnvilManager manager = AnvilManager.getInstance();
 				Random R = new Random(worldObj.getSeed());
 				AnvilRecipe recipe = null;
 				ItemStack result = null;
 				int offset = 0; 
 
 				for(int i = workRecipe.getCraftingValue() - 5; i < workRecipe.getCraftingValue() + 5; i++)
-				{
 					if(itemCraftingValue == i)
 					{
 						offset = i - workRecipe.getCraftingValue();
-						if(offset < 0) {
+						if(offset < 0)
 							offset = offset + (-2 * offset);
-						}
-						recipe = new AnvilRecipe(anvilItemStacks[INPUT_SLOT],anvilItemStacks[5],
-								workRecipe.getCraftingValue(),
-								CraftingRuleEnum.ANY,
-								CraftingRuleEnum.ANY,
-								CraftingRuleEnum.ANY, 
-								anvilItemStacks[6] != null ? true : false, AnvilTier, null);
+						recipe = new AnvilRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT], craftingPlan,
+								workRecipe.getCraftingValue(), 
+								anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);
 
 						result = manager.findCompleteRecipe(recipe, getItemRules());
-						if(result != null) {
+
+						if(result != null)
 							break;
-						}
 					}
-				}
 
 				//This is where the crafting is completed and the result is added to the anvil
 				if(result != null && entityplayer != null)
 				{
-					AnvilCraftEvent eventCraft = new AnvilCraftEvent(entityplayer, this, anvilItemStacks[INPUT_SLOT], result);
+					AnvilCraftEvent eventCraft = new AnvilCraftEvent(entityplayer, this, anvilItemStacks[INPUT1_SLOT], result);
 					MinecraftForge.EVENT_BUS.post(eventCraft);
 					if(!eventCraft.isCanceled())
 					{
 						NBTTagCompound Tag = new NBTTagCompound();
-						Tag.setFloat("temperature", TFC_ItemHeat.GetTemperature(anvilItemStacks[INPUT_SLOT]));
-						this.setInventorySlotContents(INPUT_SLOT, eventCraft.result);
-						if(anvilItemStacks[INPUT_SLOT] != null)
+						Tag.setFloat("temperature", TFC_ItemHeat.GetTemperature(anvilItemStacks[INPUT1_SLOT]));
+						this.setInventorySlotContents(INPUT1_SLOT, eventCraft.result);
+						if(anvilItemStacks[INPUT1_SLOT] != null)
 						{
-							anvilItemStacks[INPUT_SLOT].setTagCompound(Tag);
+							anvilItemStacks[INPUT1_SLOT].setTagCompound(Tag);
 							float pct = (offset*5);
-							if(anvilItemStacks[INPUT_SLOT].getItem().getMaxDamage() > 0 && !anvilItemStacks[INPUT_SLOT].getItem().getHasSubtypes()) {
-								anvilItemStacks[INPUT_SLOT].setItemDamage((int)(pct));
-							}
+							if(anvilItemStacks[INPUT1_SLOT].getItem().getMaxDamage() > 0 && !anvilItemStacks[INPUT1_SLOT].getItem().getHasSubtypes())
+								anvilItemStacks[INPUT1_SLOT].setItemDamage((int)(pct));
 						}
+						anvilItemStacks[INPUT2_SLOT] = null;
 
 					}
 					workRecipe = null;
 					craftingValue = 0;
-					craftingRules = new int[]{-1,-1,-1};
 				}
 			}
 		}
-		if(anvilItemStacks[INPUT_SLOT] != null && anvilItemStacks[INPUT_SLOT].stackSize < 1)
-		{
-			anvilItemStacks[INPUT_SLOT].stackSize = 1;
-		}
+		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].stackSize < 1)
+			anvilItemStacks[INPUT1_SLOT].stackSize = 1;
 	}
 
 	public void onSlotChanged(int slot)
 	{
-		if(slot == INPUT_SLOT || slot == RECIPE_SLOT || slot == FLUX_SLOT) 
-		{
+		if(slot == INPUT1_SLOT || slot == INPUT2_SLOT || slot == FLUX_SLOT)
 			updateRecipe();
-		}
 	}
 
 	public void updateRecipe()
 	{
-		AnvilRecipe recipe = AnvilCraftingManagerTFC.getInstance().findMatchingRecipe(new AnvilRecipe(anvilItemStacks[INPUT_SLOT],anvilItemStacks[RECIPE_SLOT], 
+		AnvilRecipe recipe = AnvilManager.getInstance().findMatchingRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT],this.craftingPlan, 
 				anvilItemStacks[FLUX_SLOT] != null ? true : false, this.AnvilTier));
 		if(recipe != null)
-		{
 			workRecipe = recipe;
-		}
+		else workRecipe = null;
 	}
 
 	public int getCraftingValue()
 	{
-		if(!worldObj.isRemote)
-		{
+		/*if(!worldObj.isRemote)
 			return workRecipe != null ? workRecipe.getCraftingValue() : 0;
-		}
-		else
-		{
-			return craftingValue;
-		}
+			else
+				return craftingValue;*/
+
+		return workRecipe != null ? workRecipe.getCraftingValue() : 0;
 	}
 
 	public void updateRules(int rule, int slot)
@@ -201,15 +183,12 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			int rule1 = -1;
 			int rule2 = -1;
 			int rule3 = -1;
-			if(Tag.hasKey("itemCraftingRule1")) {
+			if(Tag.hasKey("itemCraftingRule1"))
 				rule1 = Tag.getByte("itemCraftingRule1");
-			}
-			if(Tag.hasKey("itemCraftingRule2")) {
+			if(Tag.hasKey("itemCraftingRule2"))
 				rule2 = Tag.getByte("itemCraftingRule2");
-			}
-			if(Tag.hasKey("itemCraftingRule3")) {
+			if(Tag.hasKey("itemCraftingRule3"))
 				rule3 = Tag.getByte("itemCraftingRule3");
-			}
 
 			itemCraftingRules[2] = rule2;
 			itemCraftingRules[1] = rule1;
@@ -228,29 +207,26 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		int[] rules = new int[3];
 		if(anvilItemStacks[1] != null && anvilItemStacks[1].hasTagCompound())
 		{
-			if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule1")) {
+			if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule1"))
 				rules[0] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule1");
-			} else {
-				rules[0] = CraftingRuleEnum.ANY.Action;
-			}
+			else
+				rules[0] = RuleEnum.ANY.Action;
 
-			if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule2")) {
+			if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule2"))
 				rules[1] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule2");
-			} else {
-				rules[1] = CraftingRuleEnum.ANY.Action;
-			}
+			else
+				rules[1] = RuleEnum.ANY.Action;
 
-			if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule3")) {
+			if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule3"))
 				rules[2] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule3");
-			} else {
-				rules[2] = CraftingRuleEnum.ANY.Action;
-			}
+			else
+				rules[2] = RuleEnum.ANY.Action;
 		}
 		else
 		{
-			rules[0] = CraftingRuleEnum.ANY.Action;
-			rules[1] = CraftingRuleEnum.ANY.Action;
-			rules[2] = CraftingRuleEnum.ANY.Action;
+			rules[0] = RuleEnum.ANY.Action;
+			rules[1] = RuleEnum.ANY.Action;
+			rules[2] = RuleEnum.ANY.Action;
 		}
 		return rules;
 	}
@@ -259,19 +235,16 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	{
 		anvilItemStacks[HAMMER_SLOT].setItemDamage(anvilItemStacks[HAMMER_SLOT].getItemDamage()+1);
 
-		if(anvilItemStacks[HAMMER_SLOT].getItemDamage() == anvilItemStacks[HAMMER_SLOT].getMaxDamage()) {
+		if(anvilItemStacks[HAMMER_SLOT].getItemDamage() == anvilItemStacks[HAMMER_SLOT].getMaxDamage())
 			anvilItemStacks[HAMMER_SLOT] = null;
-		}
 	}
 
 	private boolean canBeWorked()
 	{
-		if(isTemperatureWorkable(INPUT_SLOT) && anvilItemStacks[HAMMER_SLOT] != null && 
-				(anvilItemStacks[INPUT_SLOT].getItemDamage() == 0 || anvilItemStacks[INPUT_SLOT].getItem().getHasSubtypes() == true) && 
-				getAnvilType() >= craftingReq && workedRecently == 0) 
-		{
+		if(isTemperatureWorkable(INPUT1_SLOT) && anvilItemStacks[HAMMER_SLOT] != null && 
+				(anvilItemStacks[INPUT1_SLOT].getItemDamage() == 0 || anvilItemStacks[INPUT1_SLOT].getItem().getHasSubtypes() == true) && 
+				getAnvilType() >= craftingReq && workedRecently == 0)
 			return true;
-		}
 		return false;
 	}
 
@@ -287,11 +260,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				updateRules(0,1);
 				damageHammer();
 			}
-		}
-		else
-		{
+		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(0));
-		}
 	}
 
 	public void actionLightHammer()
@@ -305,11 +275,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				updateRules(0,1);
 				damageHammer();
 			}
-		}
-		else
-		{
+		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(-1));
-		}
 
 	}
 
@@ -324,11 +291,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				updateRules(1,1);
 				damageHammer();
 			}
-		}
-		else
-		{
+		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(1));
-		}
 	}
 
 	public void actionHammer()
@@ -342,11 +306,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				updateRules(0,1);
 				damageHammer();
 			}
-		}
-		else
-		{
+		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(2));
-		}
 	}
 
 	public void actionPunch()
@@ -360,11 +321,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				updateRules(3,1);
 				damageHammer();
 			}
-		}
-		else
-		{
+		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(3));
-		}
 	}
 
 	public void actionBend()
@@ -378,11 +336,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				updateRules(4,1);
 				damageHammer();
 			}
-		}
-		else
-		{
+		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(4));
-		}
 	}
 
 	public void actionUpset()
@@ -396,11 +351,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				updateRules(5,1);
 				damageHammer();
 			}
-		}
-		else
-		{
+		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(5));
-		}
 	}
 
 	public void actionShrink()
@@ -414,11 +366,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				updateRules(6,1);
 				damageHammer();
 			}
-		}
-		else
-		{
+		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(6));
-		}
 	} 
 
 	public void actionWeld()
@@ -430,26 +379,19 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 					(anvilItemStacks[WELD2_SLOT].getItemDamage() == 0 || anvilItemStacks[WELD2_SLOT].getItem().getHasSubtypes() == true) && 
 					workedRecently == 0 && anvilItemStacks[WELDOUT_SLOT] == null)
 			{
-				AnvilCraftingManagerTFC manager = AnvilCraftingManagerTFC.getInstance();
+				AnvilManager manager = AnvilManager.getInstance();
 				Random R = new Random(worldObj.getSeed());
-				AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[WELD1_SLOT],anvilItemStacks[WELD2_SLOT],
+				AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[WELD1_SLOT],anvilItemStacks[WELD2_SLOT],craftingPlan, 
 						0,
-						CraftingRuleEnum.ANY,
-						CraftingRuleEnum.ANY,
-						CraftingRuleEnum.ANY, 
 						anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);
 
-				AnvilRecipe recipe2 = new AnvilRecipe(anvilItemStacks[WELD2_SLOT],anvilItemStacks[WELD1_SLOT],
+				AnvilRecipe recipe2 = new AnvilRecipe(anvilItemStacks[WELD2_SLOT],anvilItemStacks[WELD1_SLOT],craftingPlan,
 						0,
-						CraftingRuleEnum.ANY,
-						CraftingRuleEnum.ANY,
-						CraftingRuleEnum.ANY, 
 						anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);
 
 				ItemStack result = manager.findCompleteWeldRecipe(recipe);
-				if(result == null) {
+				if(result == null)
 					result = manager.findCompleteWeldRecipe(recipe2);
-				}
 
 				if(result != null)
 				{
@@ -464,11 +406,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				}
 
 			}
-		}
-		else
-		{
+		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(7));
-		}
 	}
 	@Override
 	public void closeChest() 
@@ -493,14 +432,10 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			}
 			ItemStack itemstack1 = anvilItemStacks[i].splitStack(j);
 			if(anvilItemStacks[i].stackSize == 0)
-			{
 				anvilItemStacks[i] = null;
-			}
 			return itemstack1;
 		} else
-		{
 			return null;
-		}
 
 	}
 
@@ -514,7 +449,6 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
-		{
 			if(anvilItemStacks[i]!= null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
@@ -524,7 +458,6 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
 				worldObj.spawnEntityInWorld(entityitem);
 			}
-		}
 	}
 	public int getAnvilType()
 	{
@@ -545,48 +478,47 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 
 	public boolean setItemCraftingValue(int i)
 	{
-		if(anvilItemStacks[INPUT_SLOT] != null && anvilItemStacks[INPUT_SLOT].hasTagCompound() && anvilItemStacks[INPUT_SLOT].getTagCompound().hasKey("itemCraftingValue"))
+		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].hasTagCompound() && anvilItemStacks[INPUT1_SLOT].getTagCompound().hasKey("itemCraftingValue"))
 		{
-			Byte icv = anvilItemStacks[INPUT_SLOT].getTagCompound().getByte("itemCraftingValue");
-			anvilItemStacks[INPUT_SLOT].getTagCompound().setByte("itemCraftingValue", (byte) (icv + i));
+			short icv = anvilItemStacks[INPUT1_SLOT].getTagCompound().getShort("itemCraftingValue");
+			if(icv+i >= 0)
+				anvilItemStacks[INPUT1_SLOT].getTagCompound().setShort("itemCraftingValue", (short) (icv + i));
 			return true;
 		}
-		else if(anvilItemStacks[INPUT_SLOT] != null && anvilItemStacks[INPUT_SLOT].hasTagCompound())
+		else if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].hasTagCompound())
 		{
-			anvilItemStacks[INPUT_SLOT].getTagCompound().setByte("itemCraftingValue", (byte)i);
+			if(i >= 0)
+				anvilItemStacks[INPUT1_SLOT].getTagCompound().setShort("itemCraftingValue", (short)i);
 			return true;
 		}
-		else if(anvilItemStacks[INPUT_SLOT] != null && !anvilItemStacks[INPUT_SLOT].hasTagCompound())
+		else if(anvilItemStacks[INPUT1_SLOT] != null && !anvilItemStacks[INPUT1_SLOT].hasTagCompound())
 		{
 			NBTTagCompound Tag = new NBTTagCompound();
-			Tag.setByte("itemCraftingValue", (byte)i);
-			anvilItemStacks[INPUT_SLOT].stackTagCompound = Tag;
+			Tag.setShort("itemCraftingValue", (short)i);
+			anvilItemStacks[INPUT1_SLOT].stackTagCompound = Tag;
 			return true;
 		}
 		return false;
 	}
 	public int getItemCraftingValue()
 	{
-		if(anvilItemStacks[INPUT_SLOT] != null && anvilItemStacks[INPUT_SLOT].hasTagCompound() && anvilItemStacks[INPUT_SLOT].getTagCompound().hasKey("itemCraftingValue"))
-		{
-			return anvilItemStacks[INPUT_SLOT].getTagCompound().getByte("itemCraftingValue");
-		}
-		else if(anvilItemStacks[INPUT_SLOT] != null && !anvilItemStacks[INPUT_SLOT].hasTagCompound() && craftingValue != 0)
+		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].hasTagCompound() && anvilItemStacks[INPUT1_SLOT].getTagCompound().hasKey("itemCraftingValue"))
+			return anvilItemStacks[INPUT1_SLOT].getTagCompound().getShort("itemCraftingValue");
+		else if(anvilItemStacks[INPUT1_SLOT] != null && !anvilItemStacks[INPUT1_SLOT].hasTagCompound() && craftingValue != 0)
 		{
 			NBTTagCompound Tag = new NBTTagCompound();
-			Tag.setByte("itemCraftingValue", (byte) 0);
-			anvilItemStacks[INPUT_SLOT].setTagCompound(Tag);
+			Tag.setShort("itemCraftingValue", (short) 0);
+			anvilItemStacks[INPUT1_SLOT].setTagCompound(Tag);
 			return 0;
 		}
-		else if(anvilItemStacks[INPUT_SLOT] != null && anvilItemStacks[INPUT_SLOT].hasTagCompound() && !anvilItemStacks[INPUT_SLOT].getTagCompound().hasKey("itemCraftingValue") && craftingValue != 0)
+		else if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].hasTagCompound() && !anvilItemStacks[INPUT1_SLOT].getTagCompound().hasKey("itemCraftingValue") && craftingValue != 0)
 		{
 			NBTTagCompound Tag = anvilItemStacks[1].getTagCompound();
-			Tag.setByte("itemCraftingValue", (byte) 0);
-			anvilItemStacks[INPUT_SLOT].setTagCompound(Tag);
+			Tag.setShort("itemCraftingValue", (short) 0);
+			anvilItemStacks[INPUT1_SLOT].setTagCompound(Tag);
 			return 0;
-		} else {
+		} else
 			return 0;
-		}
 	}
 
 	public int getItemCraftingValueNoSet(int i)
@@ -594,20 +526,14 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		if(anvilItemStacks[i] != null && anvilItemStacks[i].hasTagCompound())
 		{
 			if(!anvilItemStacks[i].getTagCompound().hasKey("itemCraftingValue"))
-			{
 				return 0;
-			}
-			else 
-			{
-				return anvilItemStacks[i].getTagCompound().getByte("itemCraftingValue");
-			}
+			else
+				return anvilItemStacks[i].getTagCompound().getShort("itemCraftingValue");
 		}
 		else if(anvilItemStacks[i] != null && !anvilItemStacks[i].hasTagCompound())
-		{
 			return 0;
-		} else {
+		else
 			return 0;
-		}
 	}
 
 	public Boolean isTemperatureWeldable(int i)
@@ -653,13 +579,9 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 		{
 			if(itemstack.stackSize > getInventoryStackLimit())
-			{
 				itemstack.stackSize = getInventoryStackLimit();
-			}
 			if(itemstack.stackSize <= 0)
-			{
 				itemstack = null;
-			}
 		}
 		anvilItemStacks[i] = itemstack;
 		onSlotChanged(i);
@@ -696,13 +618,12 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbttagcompound);
+		super.writeToNBT(nbt);
 
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < anvilItemStacks.length; i++)
-		{
 			if(anvilItemStacks[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -710,11 +631,12 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				anvilItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-		}
 
-		nbttagcompound.setTag("Items", nbttaglist);
-		nbttagcompound.setInteger("Tier", AnvilTier);
-		nbttagcompound.setIntArray("stonePair", stonePair);
+		nbt.setTag("Items", nbttaglist);
+		nbt.setInteger("Tier", AnvilTier);
+		nbt.setIntArray("stonePair", stonePair);
+		nbt.setString("plan", craftingPlan);
+
 
 	}
 
@@ -730,13 +652,12 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < anvilItemStacks.length)
-			{
 				anvilItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 
 		AnvilTier = nbttagcompound.getInteger("Tier");
 		stonePair = nbttagcompound.getIntArray("stonePair");
+		craftingPlan = nbttagcompound.getString("plan");
 	}
 
 	@Override
@@ -800,7 +721,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		outStream.writeInt(stonePair[0]);
 		outStream.writeInt(stonePair[1]);
 		outStream.writeInt(anvilItemStacks[this.HAMMER_SLOT]!= null ? anvilItemStacks[this.HAMMER_SLOT].itemID : 0);
-		outStream.writeInt(anvilItemStacks[this.INPUT_SLOT]!= null ? anvilItemStacks[this.INPUT_SLOT].itemID : 0);
+		outStream.writeInt(anvilItemStacks[this.INPUT1_SLOT]!= null ? anvilItemStacks[this.INPUT1_SLOT].itemID : 0);
 	}
 
 	@Override
@@ -811,14 +732,10 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		stonePair[1] = inStream.readInt();
 		int item = inStream.readInt();
 		if(Item.itemsList[item] != null)
-		{
 			anvilItemStacks[HAMMER_SLOT] = new ItemStack(Item.itemsList[item]);
-		}
 		item = inStream.readInt();
 		if(Item.itemsList[item] != null)
-		{
-			anvilItemStacks[INPUT_SLOT] = new ItemStack(Item.itemsList[item]);
-		}
+			anvilItemStacks[INPUT1_SLOT] = new ItemStack(Item.itemsList[item]);
 
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
@@ -834,6 +751,24 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			dos.writeInt(yCoord);
 			dos.writeInt(zCoord);
 			dos.writeInt(id);
+		} catch (IOException e) {
+		}
+
+		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	}
+
+	public Packet createAnvilPlanPacket(int id, String s)
+	{
+		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+		DataOutputStream dos=new DataOutputStream(bos);
+
+		try {
+			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
+			dos.writeInt(xCoord);
+			dos.writeInt(yCoord);
+			dos.writeInt(zCoord);
+			dos.writeInt(id);
+			dos.writeUTF(s);
 		} catch (IOException e) {
 		}
 
@@ -890,6 +825,11 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			actionWeld();
 			break;
 		}
+		case 8:
+		{
+			setPlan(inStream.readUTF());
+			return;
+		}
 		}		
 		worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
 	}
@@ -904,5 +844,12 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
 	{
 		return false;
+	}
+
+	public void setPlan(String s)
+	{
+		if(worldObj.isRemote)
+			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilPlanPacket(8, s));
+		this.craftingPlan = s;
 	}
 }

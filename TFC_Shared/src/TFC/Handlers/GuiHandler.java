@@ -19,6 +19,7 @@ import TFC.Containers.ContainerLiquidVessel;
 import TFC.Containers.ContainerLogPile;
 import TFC.Containers.ContainerMold;
 import TFC.Containers.ContainerNestBox;
+import TFC.Containers.ContainerPlanSelection;
 import TFC.Containers.ContainerQuern;
 import TFC.Containers.ContainerQuiver;
 import TFC.Containers.ContainerScribe;
@@ -29,7 +30,6 @@ import TFC.Containers.ContainerWorkbench;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Entities.Mobs.EntityHorseTFC;
-import TFC.GUI.GuiScreenHorseInventoryTFC;
 import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TENestBox;
@@ -85,7 +85,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 24:
 		{
-			return null;//was metallurgy table
+			return new ContainerPlanSelection(player, (TileEntityAnvil) te, world, x, y, z);//was metallurgy table
 		}
 		case 25:
 		{

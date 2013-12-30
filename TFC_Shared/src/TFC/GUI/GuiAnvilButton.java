@@ -10,7 +10,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.API.Enums.CraftingRuleEnum;
+import TFC.API.Crafting.AnvilManager;
+import TFC.API.Crafting.PlanRecipe;
+import TFC.API.Enums.RuleEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.Util.StringUtil;
 
@@ -69,7 +71,9 @@ public class GuiAnvilButton extends GuiButton
 				k = 0;
 				if(screen.AnvilEntity != null && screen.AnvilEntity.workRecipe != null)
 				{
-					CraftingRuleEnum[] Rules = screen.AnvilEntity.workRecipe.getRules();
+					PlanRecipe p = AnvilManager.getInstance().getPlan(screen.AnvilEntity.craftingPlan);
+					if(p == null) return;
+					RuleEnum[] Rules = p.rules;
 					int[] ItemRules = screen.AnvilEntity.getItemRules();
 					this.displayString = StringUtil.localize(Rules[ruleIndex].Name);
 				}
