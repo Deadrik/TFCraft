@@ -31,20 +31,26 @@ public class WorldGenFissureCluster implements IWorldGenerator
 			int num = 3 + rand.nextInt(10);
 			for(int i = 0; i < num; i++)
 			{
+				Block b = TFCBlocks.FreshWaterStill;
+				if(rand.nextInt(10) == 0)
+					b = null;
 				int x = startX - 30 + random.nextInt(60);
 				int z = chunkZ - 30 + random.nextInt(60);
 				int y = world.getTopSolidOrLiquidBlock(x, z)-1;
-				new WorldGenFissure(TFCBlocks.FreshWaterStill).generate(world, rand, x, y, z);
+				new WorldGenFissure(b).generate(world, rand, x, y, z);
 			}
 		}else if(rand.nextInt(300) == 0)
 		{
 			int num = 3 + rand.nextInt(10);
 			for(int i = 0; i < num; i++)
 			{
+				Block b = Block.lavaStill;
+				if(rand.nextInt(10) == 0)
+					b = null;
 				int x = startX - 30 + random.nextInt(60);
 				int z = chunkZ - 30 + random.nextInt(60);
 				int y = world.getTopSolidOrLiquidBlock(x, z)-1;
-				new WorldGenFissure(Block.lavaStill).generate(world, rand, x, y, z);
+				new WorldGenFissure(b).generate(world, rand, x, y, z);
 			}
 		}
 
