@@ -14,13 +14,14 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
-import TFC.API.Crafting.AnvilCraftingManagerTFC;
+import TFC.API.Crafting.AnvilManager;
 import TFC.API.Crafting.AnvilRecipe;
 import TFC.API.Crafting.AnvilReq;
 import TFC.API.Crafting.CraftingManagerTFC;
 import TFC.API.Crafting.KilnCraftingManager;
 import TFC.API.Crafting.KilnRecipe;
-import TFC.API.Enums.CraftingRuleEnum;
+import TFC.API.Crafting.PlanRecipe;
+import TFC.API.Enums.RuleEnum;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes 
@@ -160,9 +161,7 @@ public class Recipes
 		}
 
 		for(int i = 0; i < Global.WOOD_ALL.length -1; i++)
-		{
 			GameRegistry.addRecipe(new ItemStack(Doors[i], 1, i), new Object[] { "WW","WW","WW", Character.valueOf('W'), new ItemStack(TFCItems.SinglePlank, 1, i)});
-		}
 
 		for(int j = 0; j < Knives.length; j++)
 		{
@@ -180,9 +179,8 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(Item.painting,1),new Object[]{"###","#$#","###",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
 
 		GameRegistry.addRecipe(new ItemStack(Block.carpet,2,0),new Object[]{"$$",Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
-		for(int i = 0; i < 16;i++){
+		for(int i = 0; i < 16;i++)
 			GameRegistry.addShapelessRecipe(new ItemStack(Block.carpet,1,i),new Object[] {new ItemStack(Item.dyePowder,1,15-i),new ItemStack(Block.carpet,1,32767)});
-		}
 
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,4),new Object[]{new ItemStack(TFCItems.Powder,1,6)});
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,2),new Object[]{new ItemStack(TFCItems.Powder,1,8)});
@@ -246,9 +244,8 @@ public class Recipes
 
 		for(int j = 0; j < Recipes.Hammers.length; j++)
 		{
-			for (int i=0; i < Global.STONE_FLUXINDEX.length; i++) {
+			for (int i=0; i < Global.STONE_FLUXINDEX.length; i++)
 				GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 2, 0), new Object[] {new ItemStack(TFCItems.LooseRock, 1, Global.STONE_FLUXINDEX[i]), new ItemStack(Recipes.Hammers[j], 1, 32767)});
-			}
 			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 6, 0), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(Recipes.Hammers[j], 1, 32767)});
 		}
 
@@ -267,9 +264,8 @@ public class Recipes
 				new ItemStack(TFCBlocks.Planks,1,j)});
 		}
 
-		for (int i=0; i < Global.STONE_FLUXINDEX.length; i++) {
+		for (int i=0; i < Global.STONE_FLUXINDEX.length; i++)
 			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 1, 0), new Object[] {new ItemStack(TFCItems.LooseRock, 1, Global.STONE_FLUXINDEX[i]), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
-		}
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 4, 0), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Ink, 16, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(Item.dyePowder,1,0)});
@@ -316,7 +312,6 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(Item.sign, 1, 0), new Object[] { "###","###"," 1 ", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767),Character.valueOf('1'), new ItemStack(Item.stick,1,32767)});
 
 		for(int j = 0; j < Gems.length; j++)
-		{
 			for(int k = 0; k < 3; k++)
 			{
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP","GKG","PPP", 
@@ -328,7 +323,6 @@ public class Recipes
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP","GKG","PPP", 
 					Character.valueOf('P'), TFCBlocks.StoneMMSmooth, Character.valueOf('K'), new ItemStack(Gems[j],1,0), Character.valueOf('G'), new ItemStack(Block.glass,1)});
 			}
-		}
 
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Quern, 1), new Object[] { "PPP", 
 			Character.valueOf('P'), TFCBlocks.StoneIgExSmooth});
@@ -567,9 +561,8 @@ public class Recipes
 	}
 
 	private static ItemStack checkMelted(ItemStack is){
-		if(TFC_ItemHeat.GetTemperature(is)>TFC_ItemHeat.getMeltingPoint(is)){
+		if(TFC_ItemHeat.GetTemperature(is)>TFC_ItemHeat.getMeltingPoint(is))
 			return null;
-		}
 		return is;
 	}
 
@@ -582,14 +575,9 @@ public class Recipes
 			GameRegistry.addRecipe(new ItemStack(Item.diamond, 3), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GemDiamond,1,4)});
 		}
 		if(TFCOptions.enableVanillaIronRecipe== true)
-		{
 			GameRegistry.addRecipe(new ItemStack(Item.ingotIron, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.WroughtIronIngot,1)});
-
-		}
 		if(TFCOptions.enableVanillaGoldRecipe == true)
-		{
 			GameRegistry.addRecipe(new ItemStack(Item.ingotGold, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GoldIngot,1)});
-		}
 		if(TFCOptions.enableVanillaRecipes == true)
 		{
 			GameRegistry.addRecipe(new ItemStack(Item.appleRed,1),new Object[]{"1",Character.valueOf('1'),new ItemStack(TFCItems.RedApple,1)});
@@ -1341,9 +1329,399 @@ public class Recipes
 
 	public static void registerAnvilRecipes(Random R, World world)
 	{
-		AnvilCraftingManagerTFC manager = AnvilCraftingManagerTFC.getInstance();
+		AnvilManager manager = AnvilManager.getInstance();
+
+		manager.addPlan("ingot", new PlanRecipe(
+				new RuleEnum[] {RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));
+		manager.addPlan("sheet", new PlanRecipe(
+				new RuleEnum[] {RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));
+		manager.addPlan("pickaxe", new PlanRecipe(
+				new RuleEnum[] {RuleEnum.PUNCHLAST, RuleEnum.BENDNOTLAST, RuleEnum.DRAWNOTLAST}));
+		manager.addPlan("shovel", new PlanRecipe(new RuleEnum[]{RuleEnum.PUNCHLAST, RuleEnum.HITNOTLAST, RuleEnum.ANY}));
+
+		manager.addPlan("axe", new PlanRecipe(new RuleEnum[]{RuleEnum.PUNCHLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.UPSETTHIRDFROMLAST}));
+		manager.addPlan("hoe", new PlanRecipe(new RuleEnum[]{RuleEnum.PUNCHLAST, RuleEnum.HITNOTLAST, RuleEnum.BENDNOTLAST}));
+		manager.addPlan("hammer", new PlanRecipe(new RuleEnum[]{RuleEnum.PUNCHLAST, RuleEnum.ANY, RuleEnum.SHRINKNOTLAST}));
+		manager.addPlan("chisel", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.HITNOTLAST, RuleEnum.DRAWNOTLAST}));
+		manager.addPlan("propick", new PlanRecipe(new RuleEnum[]{RuleEnum.PUNCHLAST, RuleEnum.DRAWNOTLAST, RuleEnum.BENDNOTLAST}));
+		manager.addPlan("saw", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.ANY}));
+		manager.addPlan("sword", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.BENDTHIRDFROMLAST}));
+		manager.addPlan("mace", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.SHRINKNOTLAST, RuleEnum.BENDNOTLAST}));
+		manager.addPlan("scythe", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.DRAWSECONDFROMLAST, RuleEnum.BENDTHIRDFROMLAST}));
+		manager.addPlan("knife", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.DRAWSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
+		manager.addPlan("javelin", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
+		manager.addPlan("helmplate", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.BENDTHIRDFROMLAST}));
+		manager.addPlan("chestplate", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.UPSETTHIRDFROMLAST}));
+		manager.addPlan("legsplate", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDANY, RuleEnum.DRAWANY, RuleEnum.HITANY}));
+		manager.addPlan("bootsplate", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.SHRINKTHIRDFROMLAST}));
+		manager.addPlan("bucket", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.BENDTHIRDFROMLAST}));
+		manager.addPlan("refinebloom", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));
+		manager.addPlan("splitbloom", new PlanRecipe(new RuleEnum[]{RuleEnum.PUNCHLAST, RuleEnum.ANY, RuleEnum.ANY}));
+		manager.addPlan("tuyere", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.ANY}));
+
 		int v = -5 + R.nextInt(5);
 
+		addWeldRecipes(manager);
+
+		/**
+		 * Normal Recipes Start Here
+		 */
+		//Ingots
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.PigIronIngot), null, "ingot", false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.HCSteelIngot))); 
+
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.HCBlackSteelIngot), null, "ingot", false, AnvilReq.STEEL, new ItemStack(TFCItems.BlackSteelIngot)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.HCBlueSteelIngot), null, "ingot", false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlueSteelIngot)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.HCRedSteelIngot), null, "ingot",  false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.RedSteelIngot)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.HCSteelIngot), null, "ingot", false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.SteelIngot)));
+
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthIngot2x), null, "sheet", false, AnvilReq.STONE, new ItemStack(TFCItems.BismuthSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot2x), null, "sheet", false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot2x), null, "sheet", false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot2x), null, "sheet", false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot2x), null, "sheet", false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BrassIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.BrassSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot2x), null, "sheet", false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.GoldIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.GoldSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), null, "sheet", false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.LeadIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.LeadSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.NickelIngot2x), null, "sheet", false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.NickelSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.PigIronIngot2x), null, "sheet", false, AnvilReq.BRONZE, new ItemStack(TFCItems.PigIronSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.PlatinumIngot2x), null, "sheet", false, AnvilReq.BRONZE, new ItemStack(TFCItems.PlatinumSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot2x), null, "sheet", false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot2x), null, "sheet", false, AnvilReq.BRONZE, new ItemStack(TFCItems.RoseGoldSheet)));       
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SilverIngot2x), null, "sheet", false, AnvilReq.COPPER, new ItemStack(TFCItems.SilverSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot2x), null, "sheet", false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SterlingSilverIngot2x), null, "sheet", false, AnvilReq.BRONZE, new ItemStack(TFCItems.SterlingSilverSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.TinIngot2x), null, "sheet", false, AnvilReq.STONE, new ItemStack(TFCItems.TinSheet)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.ZincIngot2x), null, "sheet", false, AnvilReq.STONE, new ItemStack(TFCItems.ZincSheet)));
+
+		//Picks
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Picks") + world.getSeed());
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), null, "pickaxe", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzePickaxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null, "pickaxe", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzePickaxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), null, "pickaxe", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelPickaxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null, "pickaxe", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelPickaxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null, "pickaxe", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzePickaxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null, "pickaxe", AnvilReq.COPPER, new ItemStack(TFCItems.CopperPickaxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null, "pickaxe", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronPickaxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null, "pickaxe", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelPickaxeHead, 1, dam)));   
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null, "pickaxe", AnvilReq.STEEL, new ItemStack(TFCItems.SteelPickaxeHead, 1, dam)));
+
+		}
+		//shovels
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Shovels") + world.getSeed());
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), null, "shovel",  AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeShovelHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null, "shovel", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeShovelHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), null, "shovel", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelShovelHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null, "shovel",  AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelShovelHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null, "shovel",  AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeShovelHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null, "shovel", AnvilReq.COPPER, new ItemStack(TFCItems.CopperShovelHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null, "shovel", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronShovelHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null, "shovel", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelShovelHead, 1, dam)));   
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null, "shovel", AnvilReq.STEEL, new ItemStack(TFCItems.SteelShovelHead, 1, dam)));
+		}
+		//axes 
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Axes") + world.getSeed());
+			int dam = i * 5;
+
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), null, "axe", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeAxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null, "axe",  AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeAxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), null, "axe",  AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelAxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null, "axe",  AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelAxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null, "axe",  AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeAxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null, "axe",  AnvilReq.COPPER, new ItemStack(TFCItems.CopperAxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null, "axe",  AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronAxeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null, "axe",  AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelAxeHead, 1, dam)));    
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null, "axe", AnvilReq.STEEL, new ItemStack(TFCItems.SteelAxeHead, 1, dam)));
+		}
+		//hoes
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Hoes") + world.getSeed());
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), null, "hoe", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeHoeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null, "hoe", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeHoeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), null, "hoe", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelHoeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null, "hoe", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelHoeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null, "hoe", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeHoeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null, "hoe", AnvilReq.COPPER, new ItemStack(TFCItems.CopperHoeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null, "hoe", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronHoeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null, "hoe", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelHoeHead, 1, dam)));    
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null, "hoe", AnvilReq.STEEL, new ItemStack(TFCItems.SteelHoeHead, 1, dam)));
+		}
+		//Hammers
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Hammers") + world.getSeed());
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), null, "hammer", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeHammerHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null, "hammer", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeHammerHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), null, "hammer", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelHammerHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null, "hammer", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelHammerHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null, "hammer", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeHammerHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null, "hammer", AnvilReq.COPPER, new ItemStack(TFCItems.CopperHammerHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null, "hammer", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronHammerHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null, "hammer", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelHammerHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null, "hammer",AnvilReq.STEEL, new ItemStack(TFCItems.SteelHammerHead, 1, dam)));
+		}
+		//Chisels     
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Chisels") + world.getSeed());
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), null, "chisel", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeChiselHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null, "chisel", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeChiselHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), null, "chisel", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelChiselHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null, "chisel", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelChiselHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null, "chisel", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeChiselHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null, "chisel", AnvilReq.COPPER, new ItemStack(TFCItems.CopperChiselHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null, "chisel", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronChiselHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null, "chisel", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelChiselHead, 1, dam)));   
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null, "chisel", AnvilReq.STEEL, new ItemStack(TFCItems.SteelChiselHead, 1, dam)));
+		}
+		//ProPicks
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Pro Picks") + world.getSeed());
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), null, "propick", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeProPickHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null, "propick", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeProPickHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), null, "propick", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelProPickHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null, "propick", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelProPickHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null, "propick", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeProPickHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null, "propick", AnvilReq.COPPER, new ItemStack(TFCItems.CopperProPickHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null, "propick", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronProPickHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null, "propick", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelProPickHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null, "propick", AnvilReq.STEEL, new ItemStack(TFCItems.SteelProPickHead, 1, dam)));
+		}
+		//Saws
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Saws") + world.getSeed());
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), null, "saw", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeSawHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null,"saw", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeSawHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), null,"saw", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelSawHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null,"saw", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelSawHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null,"saw", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeSawHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null,"saw", AnvilReq.COPPER, new ItemStack(TFCItems.CopperSawHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null,"saw", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronSawHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null,"saw", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelSawHead, 1, dam)));     
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null,"saw", AnvilReq.STEEL, new ItemStack(TFCItems.SteelSawHead, 1, dam)));
+		}
+		//Swords
+		R = new Random (valueOfString("Swords") + world.getSeed());
+		for(int i = 0; i < 5; i++)
+		{
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot2x), null, "sword", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeSwordHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot2x), null, "sword", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeSwordHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot2x), null, "sword", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelSwordHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot2x), null, "sword", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelSwordHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot2x), null, "sword", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeSwordHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot2x), null, "sword", AnvilReq.COPPER, new ItemStack(TFCItems.CopperSwordHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), null, "sword", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronSwordHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot2x), null, "sword", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelSwordHead, 1, dam)));    
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot2x), null, "sword", AnvilReq.STEEL, new ItemStack(TFCItems.SteelSwordHead, 1, dam)));
+		}
+
+		//Maces
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Maces") + world.getSeed());
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot2x), null, "mace", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeMaceHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot2x), null, "mace", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeMaceHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot2x), null, "mace", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelMaceHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot2x), null, "mace", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelMaceHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot2x), null, "mace", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeMaceHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot2x), null, "mace", AnvilReq.COPPER, new ItemStack(TFCItems.CopperMaceHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), null, "mace", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronMaceHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot2x), null, "mace", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelMaceHead, 1, dam)));     
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot2x), null, "mace", AnvilReq.STEEL, new ItemStack(TFCItems.SteelMaceHead, 1, dam)));
+		}
+		//Scythes
+		R = new Random (valueOfString("Scythes") + world.getSeed());
+		for(int i = 0; i < 5; i++)
+		{
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), null, "scythe", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeScytheHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null,"scythe", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeScytheHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot),null,"scythe", false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelScytheHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null,"scythe", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelScytheHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null,"scythe", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeScytheHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null,"scythe", AnvilReq.COPPER, new ItemStack(TFCItems.CopperScytheHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null,"scythe", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronScytheHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null,"scythe", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelScytheHead, 1, dam)));    
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null,"scythe", AnvilReq.STEEL, new ItemStack(TFCItems.SteelScytheHead, 1, dam)));
+		}
+		//Knifes
+		R = new Random (valueOfString("Knifes") + world.getSeed());
+		for(int i = 0; i < 5; i++)
+		{
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot),null,"knife", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeKnifeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null,"knife", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeKnifeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), null,"knife", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelKnifeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null,"knife", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelKnifeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null,"knife", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeKnifeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null,"knife", AnvilReq.COPPER, new ItemStack(TFCItems.CopperKnifeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null,"knife", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronKnifeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null,"knife", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelKnifeHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null,"knife", AnvilReq.STEEL, new ItemStack(TFCItems.SteelKnifeHead, 1, dam)));
+		}
+
+		//javelin heads
+		R = new Random (valueOfString("Javelins") + world.getSeed());
+		for(int i = 0; i < 5; i++)
+		{
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), null,"javelin", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeJavelinHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), null,"javelin", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeJavelinHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), null,"javelin", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeJavelinHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), null,"javelin", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelJavelinHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), null,"javelin", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelJavelinHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), null,"javelin", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelJavelinHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), null,"javelin", AnvilReq.STEEL, new ItemStack(TFCItems.SteelJavelinHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), null,"javelin", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronJavelinHead, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), null,"javelin", AnvilReq.COPPER, new ItemStack(TFCItems.CopperJavelinHead, 1, dam)));   
+		}
+
+		R = new Random (valueOfString("Helmet") + world.getSeed());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeSheet), null,"helmPlate", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeUnfinishedHelmet, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeSheet), null,"helmPlate", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeUnfinishedHelmet, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelSheet), null,"helmPlate", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelUnfinishedHelmet, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet), null,"helmPlate", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelUnfinishedHelmet, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeSheet), null,"helmPlate", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeUnfinishedHelmet, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperSheet), null,"helmPlate", AnvilReq.COPPER, new ItemStack(TFCItems.CopperUnfinishedHelmet, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronSheet), null,"helmPlate", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronUnfinishedHelmet, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet), null,"helmPlate", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelUnfinishedHelmet, 1, 0)));     
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelSheet), null,"helmPlate", AnvilReq.STEEL, new ItemStack(TFCItems.SteelUnfinishedHelmet, 1, 0)));
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Helmet") + world.getSeed());
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeUnfinishedHelmet,1,1), null,"helmPlate", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeHelmet, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeUnfinishedHelmet,1,1), null,"helmPlate", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeHelmet, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelUnfinishedHelmet,1,1), null,"helmPlate", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelHelmet, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelUnfinishedHelmet,1,1), null,"helmPlate", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelHelmet, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeUnfinishedHelmet,1,1), null,"helmPlate", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeHelmet, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperUnfinishedHelmet,1,1), null,"helmPlate", AnvilReq.COPPER, new ItemStack(TFCItems.CopperHelmet, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronUnfinishedHelmet,1,1), null,"helmPlate", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronHelmet, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelUnfinishedHelmet,1,1), null,"helmPlate", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelHelmet, 1, dam)));    
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelUnfinishedHelmet,1,1), null,"helmPlate", AnvilReq.STEEL, new ItemStack(TFCItems.SteelHelmet, 1, dam)));
+		}
+
+		R = new Random (valueOfString("Chestplate") + world.getSeed());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeSheet2x), null,"chestPlate", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeUnfinishedChestplate, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeSheet2x), null,"chestPlate", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeUnfinishedChestplate, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelSheet2x), null,"chestPlate", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelUnfinishedChestplate, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet2x), null,"chestPlate", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelUnfinishedChestplate, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeSheet2x), null,"chestPlate", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeUnfinishedChestplate, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperSheet2x), null,"chestPlate", AnvilReq.COPPER, new ItemStack(TFCItems.CopperUnfinishedChestplate, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronSheet2x), null,"chestPlate", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronUnfinishedChestplate, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet2x), null,"chestPlate", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelUnfinishedChestplate, 1, 0)));   
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelSheet2x), null,"chestPlate", AnvilReq.STEEL, new ItemStack(TFCItems.SteelUnfinishedChestplate, 1, 0)));
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Chestplate") + world.getSeed());
+			int dam = i * 5;
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeUnfinishedChestplate,1,1), null,"chestPlate", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeChestplate, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeUnfinishedChestplate,1,1), null,"chestPlate", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeChestplate, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelUnfinishedChestplate,1,1), null,"chestPlate", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelChestplate, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelUnfinishedChestplate,1,1), null,"chestPlate", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelChestplate, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeUnfinishedChestplate,1,1), null,"chestPlate", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeChestplate, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperUnfinishedChestplate,1,1), null,"chestPlate", AnvilReq.COPPER, new ItemStack(TFCItems.CopperChestplate, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronUnfinishedChestplate,1,1), null,"chestPlate", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronChestplate, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelUnfinishedChestplate,1,1), null,"chestPlate", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelChestplate, 1, dam)));       
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelUnfinishedChestplate,1,1), null,"chestPlate", AnvilReq.STEEL, new ItemStack(TFCItems.SteelChestplate, 1, dam)));
+		}
+
+		R = new Random (valueOfString("Greaves") + world.getSeed());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeSheet2x), null,"legsPlate", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeUnfinishedGreaves, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeSheet2x), null,"legsPlate", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeUnfinishedGreaves, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelSheet2x), null,"legsPlate", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelUnfinishedGreaves, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet2x), null,"legsPlate", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelUnfinishedGreaves, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeSheet2x), null,"legsPlate", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeUnfinishedGreaves, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperSheet2x), null,"legsPlate", AnvilReq.COPPER, new ItemStack(TFCItems.CopperUnfinishedGreaves, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronSheet2x), null,"legsPlate", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronUnfinishedGreaves, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet2x), null, "legsPlate", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelUnfinishedGreaves, 1, 0)));     
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelSheet2x), null, "legsPlate", AnvilReq.STEEL, new ItemStack(TFCItems.SteelUnfinishedGreaves, 1, 0)));
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Greaves") + world.getSeed());
+			int dam = i * 5;
+
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeUnfinishedGreaves,1,1), null,"legsPlate", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeGreaves, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeUnfinishedGreaves,1,1), null,"legsPlate", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeGreaves, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelUnfinishedGreaves,1,1), null,"legsPlate", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelGreaves, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelUnfinishedGreaves,1,1), null,"legsPlate", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelGreaves, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeUnfinishedGreaves,1,1), null,"legsPlate", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeGreaves, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperUnfinishedGreaves,1,1), null,"legsPlate", AnvilReq.COPPER, new ItemStack(TFCItems.CopperGreaves, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronUnfinishedGreaves,1,1), null,"legsPlate", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronGreaves, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelUnfinishedGreaves,1,1), null,"legsPlate", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelGreaves, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelUnfinishedGreaves,1,1), null,"legsPlate", AnvilReq.STEEL, new ItemStack(TFCItems.SteelGreaves, 1, dam)));
+
+		}
+
+		R = new Random (valueOfString("Boots") + world.getSeed());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeSheet), null,"bootsplate", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeUnfinishedBoots, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeSheet), null,"bootsplate", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeUnfinishedBoots, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelSheet), null,"bootsplate", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelUnfinishedBoots, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet), null,"bootsplate", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelUnfinishedBoots, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeSheet), null,"bootsplate", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeUnfinishedBoots, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperSheet), null,"bootsplate", AnvilReq.COPPER, new ItemStack(TFCItems.CopperUnfinishedBoots, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronSheet), null,"bootsplate", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronUnfinishedBoots, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet), null,"bootsplate", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelUnfinishedBoots, 1, 0)));      
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelSheet), null,"bootsplate", AnvilReq.STEEL, new ItemStack(TFCItems.SteelUnfinishedBoots, 1, 0)));
+		for(int i = 0; i < 5; i++)
+		{
+			R = new Random (valueOfString("Boots") + world.getSeed());
+			int dam = i * 5;    
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeUnfinishedBoots,1,1), null,"bootsplate", AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeBoots, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeUnfinishedBoots,1,1), null,"bootsplate", AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeBoots, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelUnfinishedBoots,1,1), null,"bootsplate", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelBoots, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelUnfinishedBoots,1,1), null,"bootsplate", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelBoots, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeUnfinishedBoots,1,1), null,"bootsplate", AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeBoots, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperUnfinishedBoots,1,1), null,"bootsplate", AnvilReq.COPPER, new ItemStack(TFCItems.CopperBoots, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronUnfinishedBoots,1,1), null,"bootsplate", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronBoots, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelUnfinishedBoots,1,1), null,"bootsplate", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelBoots, 1, dam)));
+			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelUnfinishedBoots,1,1), null,"bootsplate", AnvilReq.STEEL, new ItemStack(TFCItems.SteelBoots, 1, dam)));
+		}
+
+		//Buckets
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet), null, "bucket", AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelBucketEmpty, 1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet),null, "bucket", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelBucketEmpty, 1)));
+
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RawBloom, 1, 32767), null, "refinebloom", AnvilReq.BRONZE, new ItemStack(TFCItems.Bloom, 1)).setInheritsDamage());
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.Bloom, 1, 100), null , "refinebloom", AnvilReq.BRONZE, new ItemStack(TFCItems.WroughtIronIngot, 1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.Bloom, 1, 32767), null , "splitbloom", AnvilReq.BRONZE, new ItemStack(TFCItems.Bloom, 1)));
+
+		//Tuyeres
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperSheet2x), null,"tuyere", AnvilReq.COPPER, new ItemStack(TFCItems.TuyereCopper, 1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeSheet2x), null,"tuyere", AnvilReq.BRONZE, new ItemStack(TFCItems.TuyereBronze, 1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeSheet2x), null,"tuyere", AnvilReq.BRONZE, new ItemStack(TFCItems.TuyereBismuthBronze, 1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeSheet2x), null,"tuyere", AnvilReq.BRONZE, new ItemStack(TFCItems.TuyereBlackBronze, 1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronSheet2x), null,"tuyere", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.TuyereWroughtIron, 1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelSheet2x), null,"tuyere", AnvilReq.STEEL, new ItemStack(TFCItems.TuyereSteel, 1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelSheet2x), null,"tuyere", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.TuyereBlackSteel, 1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet2x), null,"tuyere", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.TuyereBlueSteel, 1)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet2x), null,"tuyere", AnvilReq.REDSTEEL, new ItemStack(TFCItems.TuyereRedSteel, 1)));
+	}
+
+	/**
+	 * @param manager
+	 */
+	private static void addWeldRecipes(AnvilManager manager) {
 		/**
 		 * Weld Recipes
 		 */
@@ -1437,417 +1815,6 @@ public class Recipes
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronUnfinishedBoots,1,0),new ItemStack(TFCItems.WroughtIronSheet),true,AnvilReq.BRONZE, new ItemStack(TFCItems.WroughtIronUnfinishedBoots,1, 1)));
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelUnfinishedBoots,1,0),new ItemStack(TFCItems.RedSteelSheet),true,AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.RedSteelUnfinishedBoots,1, 1)));
 		manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelUnfinishedBoots,1,0),new ItemStack(TFCItems.SteelSheet),true,AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.SteelUnfinishedBoots,1, 1)));
-
-		/**
-		 * Normal Recipes Start Here
-		 */
-		//Ingots
-		/*manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.BismuthIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.BismuthBronzeIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.BlackBronzeIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.BlackSteelIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlueSteelIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BrassUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.BrassIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.BronzeIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.CopperIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.GoldUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.GoldIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.WroughtIronIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.LeadUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.LeadIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.NickelUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.NickelIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.PigIronUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.PigIronIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.PlatinumUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.PlatinumIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.RedSteelIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.RoseGoldIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SilverUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.SilverIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.SteelIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SterlingSilverUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.SterlingSilverIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.TinUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.TinIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.ZincUnshaped), null,19,CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.ZincIngot)));*/
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.PigIronIngot), null,70 + R.nextInt(15),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.HCSteelIngot))); 
-
-		/*manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WeakBlueSteelUnshaped), null,70 + R.nextInt(15),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.WeakBlueSteelIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WeakRedSteelUnshaped), null,70 + R.nextInt(15),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.WeakRedSteelIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WeakSteelUnshaped), null,70 + R.nextInt(15),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WeakSteelIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.HCBlackSteelUnshaped), null,70 + R.nextInt(15),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.HCBlackSteelIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.HCBlueSteelUnshaped), null,70 + R.nextInt(15),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.HCBlueSteelIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.HCRedSteelUnshaped), null,70 + R.nextInt(15),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.HCRedSteelIngot)));
-        manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.HCSteelUnshaped), null,70 + R.nextInt(15),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.HCSteelIngot)));*/
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.HCBlackSteelIngot), null,70 + R.nextInt(15),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.BlackSteelIngot)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.HCBlueSteelIngot), null,70 + R.nextInt(15),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlueSteelIngot)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.HCRedSteelIngot), null,70 + R.nextInt(15),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.RedSteelIngot)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.HCSteelIngot), null,70 + R.nextInt(15),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.SteelIngot)));
-
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthIngot2x), null, 20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.BismuthSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BrassIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.BrassSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.GoldIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.GoldSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.LeadIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.LeadSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.NickelIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.NickelSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.PigIronIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.PigIronSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.PlatinumIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.PlatinumSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.RoseGoldSheet)));       
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SilverIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.SilverSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SterlingSilverIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.SterlingSilverSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.TinIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.TinSheet)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.ZincIngot2x), null,20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.ZincSheet)));
-
-		//Picks
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Picks") + world.getSeed());
-			int dam = i * 5;
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthIngot), new ItemStack(TFCItems.PickaxeHeadPlan), 20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.BismuthPickaxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), new ItemStack(TFCItems.PickaxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzePickaxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), new ItemStack(TFCItems.PickaxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzePickaxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), new ItemStack(TFCItems.PickaxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelPickaxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), new ItemStack(TFCItems.PickaxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelPickaxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), new ItemStack(TFCItems.PickaxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzePickaxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), new ItemStack(TFCItems.PickaxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperPickaxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), new ItemStack(TFCItems.PickaxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronPickaxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.PickaxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelPickaxeHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot), new ItemStack(TFCItems.PickaxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.RoseGoldPickaxeHead, 1, dam)));       
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.PickaxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelPickaxeHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.TinIngot), new ItemStack(TFCItems.PickaxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.TinPickaxeHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.ZincIngot), new ItemStack(TFCItems.PickaxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.BENDNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.ZincPickaxeHead, 1, dam)));
-		}
-		//shovels
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Shovels") + world.getSeed());
-			int dam = i * 5;
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), new ItemStack(TFCItems.ShovelHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.ANY, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeShovelHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), new ItemStack(TFCItems.ShovelHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.ANY, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeShovelHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), new ItemStack(TFCItems.ShovelHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.ANY, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelShovelHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), new ItemStack(TFCItems.ShovelHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.ANY, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelShovelHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), new ItemStack(TFCItems.ShovelHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.ANY, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeShovelHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), new ItemStack(TFCItems.ShovelHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.ANY, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperShovelHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), new ItemStack(TFCItems.ShovelHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.ANY, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronShovelHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.ShovelHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.ANY, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelShovelHead, 1, dam)));   
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.ShovelHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.ANY, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelShovelHead, 1, dam)));
-		}
-		//axes 
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Axes") + world.getSeed());
-			int dam = i * 5;
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.BismuthAxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeAxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeAxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelAxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelAxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeAxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperAxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronAxeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelAxeHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.RoseGoldAxeHead, 1, dam)));       
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelAxeHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.TinIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.TinAxeHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.ZincIngot), new ItemStack(TFCItems.AxeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.ZincAxeHead, 1, dam)));
-		}
-		//hoes
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Hoes") + world.getSeed());
-			int dam = i * 5;
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), new ItemStack(TFCItems.HoeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeHoeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), new ItemStack(TFCItems.HoeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeHoeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), new ItemStack(TFCItems.HoeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelHoeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), new ItemStack(TFCItems.HoeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelHoeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), new ItemStack(TFCItems.HoeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeHoeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), new ItemStack(TFCItems.HoeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperHoeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), new ItemStack(TFCItems.HoeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronHoeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.HoeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelHoeHead, 1, dam)));    
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.HoeHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelHoeHead, 1, dam)));
-		}
-		//Hammers
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Hammers") + world.getSeed());
-			int dam = i * 5;
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.BismuthHammerHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeHammerHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeHammerHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelHammerHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelHammerHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeHammerHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperHammerHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronHammerHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelHammerHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.ROSEGOLD, new ItemStack(TFCItems.RoseGoldHammerHead, 1, dam)));       
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelHammerHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.TinIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.TinHammerHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.ZincIngot), new ItemStack(TFCItems.HammerHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.SHRINKNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.ZincHammerHead, 1, dam)));
-		}
-		//Chisels     
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Chisels") + world.getSeed());
-			int dam = i * 5;
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.BismuthChiselHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeChiselHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeChiselHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelChiselHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelChiselHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeChiselHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperChiselHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronChiselHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelChiselHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.ROSEGOLD, new ItemStack(TFCItems.RoseGoldChiselHead, 1, dam)));       
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelChiselHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.TinIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.TinChiselHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.ZincIngot), new ItemStack(TFCItems.ChiselHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITNOTLAST, CraftingRuleEnum.DRAWNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.ZincChiselHead, 1, dam)));
-		}
-		//ProPicks
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Pro Picks") + world.getSeed());
-			int dam = i * 5;
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.BismuthProPickHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeProPickHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeProPickHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelProPickHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelProPickHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeProPickHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperProPickHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronProPickHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelProPickHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.ROSEGOLD, new ItemStack(TFCItems.RoseGoldProPickHead, 1, dam)));       
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelProPickHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.TinIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.TinProPickHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.ZincIngot), new ItemStack(TFCItems.ProPickHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.DRAWNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.ZincProPickHead, 1, dam)));
-		}
-		//Saws
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Saws") + world.getSeed());
-			int dam = i * 5;
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.STONE, new ItemStack(TFCItems.BismuthSawHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeSawHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeSawHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelSawHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelSawHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeSawHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperSawHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronSawHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelSawHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.ROSEGOLD, new ItemStack(TFCItems.RoseGoldSawHead, 1, dam)));       
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelSawHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.TinIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.STONE, new ItemStack(TFCItems.TinSawHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.ZincIngot), new ItemStack(TFCItems.SawBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.STONE, new ItemStack(TFCItems.ZincSawHead, 1, dam)));
-		}
-		//Swords
-		R = new Random (valueOfString("Swords") + world.getSeed());
-		for(int i = 0; i < 5; i++)
-		{
-			int dam = i * 5;
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.BismuthSwordHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeSwordHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeSwordHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelSwordHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelSwordHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeSwordHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperSwordHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronSwordHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelSwordHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.ROSEGOLD, new ItemStack(TFCItems.RoseGoldSwordHead, 1, dam)));       
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelSwordHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.TinIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.TinSwordHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.ZincIngot2x), new ItemStack(TFCItems.SwordBladePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.ZincSwordHead, 1, dam)));
-		}
-		//Maces
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Maces") + world.getSeed());
-			int dam = i * 5;
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.BismuthMaceHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeMaceHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeMaceHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelMaceHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelMaceHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeMaceHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperMaceHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronMaceHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelMaceHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.ROSEGOLD, new ItemStack(TFCItems.RoseGoldMaceHead, 1, dam)));      
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelMaceHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.TinIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.TinMaceHead, 1, dam)));
-			//manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.ZincIngot2x), new ItemStack(TFCItems.MaceHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.SHRINKNOTLAST, CraftingRuleEnum.BENDNOTLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.ZincMaceHead, 1, dam)));
-		}
-		//Scythes
-		R = new Random (valueOfString("Scythes") + world.getSeed());
-		for(int i = 0; i < 5; i++)
-		{
-			int dam = i * 5;
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), new ItemStack(TFCItems.ScythePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeScytheHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), new ItemStack(TFCItems.ScythePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeScytheHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), new ItemStack(TFCItems.ScythePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelScytheHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), new ItemStack(TFCItems.ScythePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelScytheHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), new ItemStack(TFCItems.ScythePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeScytheHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), new ItemStack(TFCItems.ScythePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperScytheHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), new ItemStack(TFCItems.ScythePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronScytheHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.ScythePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelScytheHead, 1, dam)));    
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.ScythePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelScytheHead, 1, dam)));
-		}
-		//Knifes
-		R = new Random (valueOfString("Knifes") + world.getSeed());
-		for(int i = 0; i < 5; i++)
-		{
-			int dam = i * 5;
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), new ItemStack(TFCItems.KnifePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeKnifeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), new ItemStack(TFCItems.KnifePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeKnifeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), new ItemStack(TFCItems.KnifePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelKnifeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), new ItemStack(TFCItems.KnifePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelKnifeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), new ItemStack(TFCItems.KnifePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeKnifeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), new ItemStack(TFCItems.KnifePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperKnifeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), new ItemStack(TFCItems.KnifePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronKnifeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.KnifePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelKnifeHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.KnifePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelKnifeHead, 1, dam)));
-		}
-
-		//javelin heads
-		R = new Random (valueOfString("Javelins") + world.getSeed());
-		for(int i = 0; i < 5; i++)
-		{
-			int dam = i * 5;
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeJavelinHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeJavelinHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeJavelinHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelJavelinHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelJavelinHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelJavelinHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelJavelinHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronJavelinHead, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperJavelinHead, 1, dam)));   
-		}
-
-		R = new Random (valueOfString("Helmet") + world.getSeed());
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeSheet), new ItemStack(TFCItems.HelmetPlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeUnfinishedHelmet, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeSheet), new ItemStack(TFCItems.HelmetPlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeUnfinishedHelmet, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelSheet), new ItemStack(TFCItems.HelmetPlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelUnfinishedHelmet, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet), new ItemStack(TFCItems.HelmetPlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelUnfinishedHelmet, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeSheet), new ItemStack(TFCItems.HelmetPlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeUnfinishedHelmet, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperSheet), new ItemStack(TFCItems.HelmetPlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperUnfinishedHelmet, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronSheet), new ItemStack(TFCItems.HelmetPlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronUnfinishedHelmet, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet), new ItemStack(TFCItems.HelmetPlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelUnfinishedHelmet, 1, 0)));     
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelSheet), new ItemStack(TFCItems.HelmetPlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelUnfinishedHelmet, 1, 0)));
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Helmet") + world.getSeed());
-			int dam = i * 5;
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeUnfinishedHelmet,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeHelmet, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeUnfinishedHelmet,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeHelmet, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelUnfinishedHelmet,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelHelmet, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelUnfinishedHelmet,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelHelmet, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeUnfinishedHelmet,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeHelmet, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperUnfinishedHelmet,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperHelmet, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronUnfinishedHelmet,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronHelmet, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelUnfinishedHelmet,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelHelmet, 1, dam)));    
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelUnfinishedHelmet,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelHelmet, 1, dam)));
-		}
-
-		R = new Random (valueOfString("Chestplate") + world.getSeed());
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeSheet2x), new ItemStack(TFCItems.ChestplatePlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeUnfinishedChestplate, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeSheet2x), new ItemStack(TFCItems.ChestplatePlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeUnfinishedChestplate, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelSheet2x), new ItemStack(TFCItems.ChestplatePlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelUnfinishedChestplate, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet2x), new ItemStack(TFCItems.ChestplatePlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelUnfinishedChestplate, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeSheet2x), new ItemStack(TFCItems.ChestplatePlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeUnfinishedChestplate, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperSheet2x), new ItemStack(TFCItems.ChestplatePlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperUnfinishedChestplate, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronSheet2x), new ItemStack(TFCItems.ChestplatePlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronUnfinishedChestplate, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet2x), new ItemStack(TFCItems.ChestplatePlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelUnfinishedChestplate, 1, 0)));   
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelSheet2x), new ItemStack(TFCItems.ChestplatePlan),40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelUnfinishedChestplate, 1, 0)));
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Chestplate") + world.getSeed());
-			int dam = i * 5;
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeUnfinishedChestplate,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeChestplate, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeUnfinishedChestplate,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeChestplate, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelUnfinishedChestplate,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelChestplate, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelUnfinishedChestplate,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelChestplate, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeUnfinishedChestplate,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeChestplate, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperUnfinishedChestplate,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperChestplate, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronUnfinishedChestplate,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronChestplate, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelUnfinishedChestplate,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelChestplate, 1, dam)));       
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelUnfinishedChestplate,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.UPSETTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelChestplate, 1, dam)));
-		}
-
-		R = new Random (valueOfString("Greaves") + world.getSeed());
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeSheet2x), new ItemStack(TFCItems.GreavesPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeUnfinishedGreaves, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeSheet2x), new ItemStack(TFCItems.GreavesPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeUnfinishedGreaves, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelSheet2x), new ItemStack(TFCItems.GreavesPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelUnfinishedGreaves, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet2x), new ItemStack(TFCItems.GreavesPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelUnfinishedGreaves, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeSheet2x), new ItemStack(TFCItems.GreavesPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeUnfinishedGreaves, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperSheet2x), new ItemStack(TFCItems.GreavesPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperUnfinishedGreaves, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronSheet2x), new ItemStack(TFCItems.GreavesPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronUnfinishedGreaves, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet2x), new ItemStack(TFCItems.GreavesPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelUnfinishedGreaves, 1, 0)));     
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelSheet2x), new ItemStack(TFCItems.GreavesPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelUnfinishedGreaves, 1, 0)));
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Greaves") + world.getSeed());
-			int dam = i * 5;
-
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeUnfinishedGreaves,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeGreaves, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeUnfinishedGreaves,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeGreaves, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelUnfinishedGreaves,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelGreaves, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelUnfinishedGreaves,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelGreaves, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeUnfinishedGreaves,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeGreaves, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperUnfinishedGreaves,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperGreaves, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronUnfinishedGreaves,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronGreaves, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelUnfinishedGreaves,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelGreaves, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelUnfinishedGreaves,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDANY, CraftingRuleEnum.DRAWANY, CraftingRuleEnum.HITANY, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelGreaves, 1, dam)));
-
-		}
-
-		R = new Random (valueOfString("Boots") + world.getSeed());
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeSheet), new ItemStack(TFCItems.BootsPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeUnfinishedBoots, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeSheet), new ItemStack(TFCItems.BootsPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeUnfinishedBoots, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelSheet), new ItemStack(TFCItems.BootsPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelUnfinishedBoots, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet), new ItemStack(TFCItems.BootsPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelUnfinishedBoots, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeSheet), new ItemStack(TFCItems.BootsPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeUnfinishedBoots, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperSheet), new ItemStack(TFCItems.BootsPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperUnfinishedBoots, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronSheet), new ItemStack(TFCItems.BootsPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronUnfinishedBoots, 1, 0)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet), new ItemStack(TFCItems.BootsPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelUnfinishedBoots, 1, 0)));      
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelSheet), new ItemStack(TFCItems.BootsPlan),40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelUnfinishedBoots, 1, 0)));
-		for(int i = 0; i < 5; i++)
-		{
-			R = new Random (valueOfString("Boots") + world.getSeed());
-			int dam = i * 5;    
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeUnfinishedBoots,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeBoots, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeUnfinishedBoots,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeBoots, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelUnfinishedBoots,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelBoots, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelUnfinishedBoots,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelBoots, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeUnfinishedBoots,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeBoots, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperUnfinishedBoots,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperBoots, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronUnfinishedBoots,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronBoots, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelUnfinishedBoots,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelBoots, 1, dam)));
-			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelUnfinishedBoots,1,1), null,40 + R.nextInt(35),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.SHRINKTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelBoots, 1, dam)));
-		}
-
-		//Buckets
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet), new ItemStack(TFCItems.BucketPlan),20 + R.nextInt(55),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelBucketEmpty, 1)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet), new ItemStack(TFCItems.BucketPlan),20 + R.nextInt(55),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.BENDTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelBucketEmpty, 1)));
-
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RawBloom, 1, 32767), null, 60, CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.Bloom, 1)).setInheritsDamage());
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.Bloom, 1, 100), null, 20 + R.nextInt(55) , CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.WroughtIronIngot, 1)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.Bloom, 1, 32767), null, 20 + R.nextInt(55) , CraftingRuleEnum.PUNCHLAST, CraftingRuleEnum.ANY, CraftingRuleEnum.ANY, false, AnvilReq.BRONZE, new ItemStack(TFCItems.Bloom, 1)));
-
-		//Tuyeres
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperSheet2x), null,20 + R.nextInt(55),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.COPPER, new ItemStack(TFCItems.TuyereCopper, 1)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeSheet2x), null,20 + R.nextInt(55),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.BRONZE, new ItemStack(TFCItems.TuyereBronze, 1)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeSheet2x), null,20 + R.nextInt(55),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.BRONZE, new ItemStack(TFCItems.TuyereBismuthBronze, 1)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeSheet2x), null,20 + R.nextInt(55),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.BRONZE, new ItemStack(TFCItems.TuyereBlackBronze, 1)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronSheet2x), null,20 + R.nextInt(55),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.TuyereWroughtIron, 1)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelSheet2x), null,20 + R.nextInt(55),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.STEEL, new ItemStack(TFCItems.TuyereSteel, 1)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelSheet2x), null,20 + R.nextInt(55),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.TuyereBlackSteel, 1)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet2x), null,20 + R.nextInt(55),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.TuyereBlueSteel, 1)));
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet2x), null,20 + R.nextInt(55),CraftingRuleEnum.BENDLAST, CraftingRuleEnum.BENDSECONDFROMLAST, CraftingRuleEnum.ANY, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.TuyereRedSteel, 1)));
 	}
 
 	public static void registerFoodRecipes()
@@ -2028,13 +1995,10 @@ public class Recipes
 			byte[] b = s.getBytes();
 			int out = 0;
 			for(int i = 0; i < b.length; i++)
-			{
 				out+=b[i];
-			}
 			return out;
-		} else {
+		} else
 			return 0;
-		}
 	}
 
 	public static void RemoveRecipe(ItemStack resultItem) {
@@ -2046,9 +2010,8 @@ public class Recipes
 				IRecipe recipe = tmpRecipe;
 				ItemStack recipeResult = recipe.getRecipeOutput();
 
-				if (ItemStack.areItemStacksEqual(resultItem, recipeResult)) {
+				if (ItemStack.areItemStacksEqual(resultItem, recipeResult))
 					recipes.remove(i--);
-				}
 			}
 		}
 	}

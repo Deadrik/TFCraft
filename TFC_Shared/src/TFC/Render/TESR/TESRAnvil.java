@@ -32,7 +32,7 @@ public class TESRAnvil extends TESRBase
 			float blockScale = 1.0F;
 
 			drawItem(te, d, d1, d2, dir, customitem, blockScale, te.HAMMER_SLOT);
-			drawItem(te, d, d1, d2, dir, customitem, blockScale, te.INPUT_SLOT);
+			drawItem(te, d, d1, d2, dir, customitem, blockScale, te.INPUT1_SLOT);
 			//drawItem(te, d, d1, d2, dir, customitem, blockScale, te.FLUX_SLOT);
 		}
 	}
@@ -79,7 +79,7 @@ public class TESRAnvil extends TESRBase
 				out[1] = 0.61f; 
 				out[2] = 0.45f;
 			}
-			else if(slot == TileEntityAnvil.INPUT_SLOT)
+			else if(slot == TileEntityAnvil.INPUT1_SLOT)
 			{
 				out[0] = 0.55f; 
 				out[1] = 0.61f; 
@@ -102,7 +102,7 @@ public class TESRAnvil extends TESRBase
 				out[1] = 0.61f; 
 				out[2] = 0.25f;
 			}
-			else if(slot == TileEntityAnvil.INPUT_SLOT)
+			else if(slot == TileEntityAnvil.INPUT1_SLOT)
 			{
 				out[0] = 0.75f; 
 				out[1] = 0.61f; 

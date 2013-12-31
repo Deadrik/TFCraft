@@ -9,7 +9,9 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -17,8 +19,11 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
+import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
-import TFC.API.Enums.CraftingRuleEnum;
+import TFC.API.Crafting.AnvilManager;
+import TFC.API.Crafting.PlanRecipe;
+import TFC.API.Enums.RuleEnum;
 import TFC.Containers.ContainerAnvil;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Textures;
@@ -30,13 +35,22 @@ public class GuiAnvil extends GuiContainer
 {
 	TileEntityAnvil AnvilEntity;
 	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_anvil.png");
+	EntityPlayer player;
+	int x, y, z;
+	String plan = "";
+	ItemStack input = null;
+	ItemStack input2 = null;
+
 	public GuiAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil te, World world, int x, int y, int z)
 	{
 		super(new ContainerAnvil(inventoryplayer,te, world, x, y, z) );
 		AnvilEntity = te;
+		player = inventoryplayer.player;
 		this.xSize = 208;
 		this.ySize = 198;
-
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
 
 	@Override
@@ -57,47 +71,47 @@ public class GuiAnvil extends GuiContainer
 		buttonList.add(new GuiAnvilButton(9, guiLeft+113, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 2, TFCOptions.anvilRuleColor2[0], TFCOptions.anvilRuleColor2[1], TFCOptions.anvilRuleColor2[2]));
 		buttonList.add(new GuiAnvilButton(10, guiLeft+94, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 1, TFCOptions.anvilRuleColor1[0], TFCOptions.anvilRuleColor1[1], TFCOptions.anvilRuleColor1[2]));
 		buttonList.add(new GuiAnvilButton(11, guiLeft+75, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 0, TFCOptions.anvilRuleColor0[0], TFCOptions.anvilRuleColor0[1], TFCOptions.anvilRuleColor0[2]));
+		buttonList.add(new GuiAnvilPlanButton(12, guiLeft+122, guiTop + 45, 18, 18, this, StringUtil.localize("gui.Anvil.Plans")));
+	}
+
+	@Override
+	public void updateScreen()
+	{
+		super.updateScreen();
+
+		if(this.AnvilEntity.craftingPlan != plan || this.AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT] != input ||
+				this.AnvilEntity.anvilItemStacks[AnvilEntity.INPUT2_SLOT] != input2)
+		{
+			plan = this.AnvilEntity.craftingPlan;
+			this.AnvilEntity.updateRecipe();
+			input = this.AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT];
+			input2 = this.AnvilEntity.anvilItemStacks[AnvilEntity.INPUT2_SLOT];
+		}
 	}
 
 	@Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
 		if (guibutton.id == 0)
-		{
 			AnvilEntity.actionLightHammer();
-		}
 		else if (guibutton.id == 2)
-		{
 			AnvilEntity.actionHeavyHammer();
-		}
 		else if (guibutton.id == 1)
-		{
 			AnvilEntity.actionHammer();
-		}
 		else if (guibutton.id == 3)
-		{
 			AnvilEntity.actionDraw();
-		}
 		else if (guibutton.id == 4)
-		{
 			AnvilEntity.actionPunch();
-		}
 		else if (guibutton.id == 5)
-		{
 			AnvilEntity.actionBend();
-		}
 		else if (guibutton.id == 6)
-		{
 			AnvilEntity.actionUpset();
-		}
 		else if (guibutton.id == 7)
-		{
 			AnvilEntity.actionShrink();
-		}
 		else if (guibutton.id == 8)
-		{
 			AnvilEntity.actionWeld();
-		}
+		else if(guibutton.id == 12)
+			player.openGui(TerraFirmaCraft.instance, 24, player.worldObj, x, y, z);
 		this.inventorySlots.detectAndSendChanges();
 	}
 
@@ -113,10 +127,10 @@ public class GuiAnvil extends GuiContainer
 		if(AnvilEntity != null)
 		{
 			int i1 = AnvilEntity.getCraftingValue();
-			drawTexturedModalRect(w + 73 + i1, h + 103, 219, 9, 11, 6);
+			drawTexturedModalRect(w + 24 + i1, h + 103, 219, 9, 11, 6);
 
 			i1 = AnvilEntity.getItemCraftingValue();
-			drawTexturedModalRect(w + 76 + i1, h + 108, 208, 10, 5, 6);
+			drawTexturedModalRect(w + 27 + i1, h + 108, 208, 10, 5, 6);
 
 			drawItemRulesImages(w, h);
 			drawRulesImages(w,h);
@@ -127,7 +141,6 @@ public class GuiAnvil extends GuiContainer
 	public void drawTooltip(int mx, int my, String text) {
 		List list = new ArrayList();
 		list.add(text);
-		this.zLevel = 1;
 		this.drawHoveringText(list, mx, my+15, this.fontRenderer);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glDisable(GL11.GL_LIGHTING);
@@ -137,7 +150,9 @@ public class GuiAnvil extends GuiContainer
 	{		
 		if(AnvilEntity != null && AnvilEntity.itemCraftingRules != null)
 		{
-			CraftingRuleEnum[] Rules = AnvilEntity.workRecipe != null ? AnvilEntity.workRecipe.getRules() : null;
+			PlanRecipe p = AnvilManager.getInstance().getPlan(AnvilEntity.craftingPlan);
+			if(p == null) return;
+			RuleEnum[] Rules = AnvilEntity.workRecipe != null ? p.rules : null;
 			int[] ItemRules = AnvilEntity.getItemRules();
 
 			this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
@@ -147,21 +162,18 @@ public class GuiAnvil extends GuiContainer
 
 			this.mc.getTextureManager().bindTexture(texture);
 
-			if(Rules != null && Rules[0].matches(ItemRules, 0)) {
+			if(Rules != null && Rules[0].matches(ItemRules, 0))
 				GL11.glColor4f(0.0F, 1.0F, 0.0F, 1.0F);
-			}
 			drawTexturedModalRect(w + 77, h + 28, 210, 115, 15, 15);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-			if(Rules != null && Rules[1].matches(ItemRules, 1)) {
+			if(Rules != null && Rules[1].matches(ItemRules, 1))
 				GL11.glColor4f(0.0F, 1.0F, 0.0F, 1.0F);
-			}
 			drawTexturedModalRect(w + 96, h + 28, 210, 115, 15, 15);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-			if(Rules != null && Rules[2].matches(ItemRules, 2)) {
+			if(Rules != null && Rules[2].matches(ItemRules, 2))
 				GL11.glColor4f(0.0F, 1.0F, 0.0F, 1.0F);
-			}
 			drawTexturedModalRect(w + 115, h + 28, 210, 115, 15, 15);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		}
@@ -174,7 +186,9 @@ public class GuiAnvil extends GuiContainer
 	{		
 		if(AnvilEntity.workRecipe != null)
 		{
-			CraftingRuleEnum[] Rules = AnvilEntity.workRecipe.getRules();
+			PlanRecipe p = AnvilManager.getInstance().getPlan(AnvilEntity.craftingPlan);
+			if(p == null) return;
+			RuleEnum[] Rules = p.rules ;
 			int[] ItemRules = AnvilEntity.getItemRules();
 
 			TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
@@ -185,37 +199,28 @@ public class GuiAnvil extends GuiContainer
 			TFC_Core.bindTexture(texture);
 			//Bottom Row
 			GL11.glColor4ub(TFCOptions.anvilRuleColor0[0], TFCOptions.anvilRuleColor0[1], TFCOptions.anvilRuleColor0[2], (byte)255);
-			if(Rules[0].Min == 0) {
+			if(Rules[0].Min == 0)
 				drawTexturedModalRect(w + 75, h + 26, 228, 68, 19, 3);
-			}
-			if(Rules[0].Max > 0 && (Rules[0].Min <= 1 || Rules[0].Max == 1)) {
+			if(Rules[0].Max > 0 && (Rules[0].Min <= 1 || Rules[0].Max == 1))
 				drawTexturedModalRect(w + 94, h + 26, 228, 68, 19, 3);
-			}
-			if(Rules[0].Max > 1 && (Rules[0].Min <= 2 || Rules[0].Max == 2)) {
+			if(Rules[0].Max > 1 && (Rules[0].Min <= 2 || Rules[0].Max == 2))
 				drawTexturedModalRect(w + 113, h + 26, 228, 68, 19, 3);
-			}
 			//Middle Row
 			GL11.glColor4ub(TFCOptions.anvilRuleColor1[0], TFCOptions.anvilRuleColor1[1], TFCOptions.anvilRuleColor1[2], (byte)255);
-			if(Rules[1].Min == 0) {
+			if(Rules[1].Min == 0)
 				drawTexturedModalRect(w + 75, h + 24, 228, 68, 19, 3);
-			}
-			if(Rules[1].Max > 0 && (Rules[1].Min <= 1 || Rules[1].Max == 1)) {
+			if(Rules[1].Max > 0 && (Rules[1].Min <= 1 || Rules[1].Max == 1))
 				drawTexturedModalRect(w + 94, h + 24, 228, 68, 19, 3);
-			}
-			if(Rules[1].Max > 1 && (Rules[1].Min <= 2 || Rules[1].Max == 2)) {
+			if(Rules[1].Max > 1 && (Rules[1].Min <= 2 || Rules[1].Max == 2))
 				drawTexturedModalRect(w + 113, h + 24, 228, 68, 19, 3);
-			}
 			//Top Row
 			GL11.glColor4ub(TFCOptions.anvilRuleColor2[0], TFCOptions.anvilRuleColor2[1], TFCOptions.anvilRuleColor2[2], (byte)255);
-			if(Rules[2].Min == 0) {
+			if(Rules[2].Min == 0)
 				drawTexturedModalRect(w + 75, h + 22, 228, 68, 19, 3);
-			}
-			if(Rules[2].Max > 0 && (Rules[2].Min <= 1 || Rules[2].Max == 1)) {
+			if(Rules[2].Max > 0 && (Rules[2].Min <= 1 || Rules[2].Max == 1))
 				drawTexturedModalRect(w + 94, h + 22, 228, 68, 19, 3);
-			}
-			if(Rules[2].Max > 1 && (Rules[2].Min <= 2 || Rules[2].Max == 2)) {
+			if(Rules[2].Max > 1 && (Rules[2].Min <= 2 || Rules[2].Max == 2))
 				drawTexturedModalRect(w + 113, h + 22, 228, 68, 19, 3);
-			}
 		}
 
 		//GL11.glColor4f(1.0F, 0.0F, 0.0F, 1.0F);

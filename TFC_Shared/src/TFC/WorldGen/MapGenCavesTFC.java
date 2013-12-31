@@ -209,7 +209,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 		int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
 
 		double xCoord = par2 * 16 + this.rand.nextInt(16);
-		double yCoord = this.rand.nextInt(this.rand.nextInt(139)+1)+60;
+		double yCoord = this.rand.nextInt(1+this.rand.nextInt(140))+60;
 		double zCoord = par3 * 16 + this.rand.nextInt(16);
 		DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt((int)xCoord, (int)zCoord, 0);
 		DataLayer rainlayer = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRainfallLayerAt((int)xCoord, (int)zCoord);

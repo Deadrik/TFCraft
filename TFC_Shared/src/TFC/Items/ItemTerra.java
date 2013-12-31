@@ -52,26 +52,19 @@ public class ItemTerra extends Item implements ISize
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		if(MetaNames != null)
-		{
-			for(int i = 0; i < MetaNames.length; i++) 
-			{
+			for(int i = 0; i < MetaNames.length; i++)
 				list.add(new ItemStack(this,1,i));
-			}
-		}
 		else
-		{
 			list.add(new ItemStack(this,1));
-		}
 	}
 
 	@Override
 	public int getItemStackLimit()
 	{
-		if(canStack()) {
+		if(canStack())
 			return this.getSize(null).stackSize * getWeight(null).multiplier <= 64 ? this.getSize(null).stackSize * getWeight(null).multiplier : 64;
-		} else {
-			return 1;
-		}
+			else
+				return 1;
 	}
 
 	public ItemTerra setFolder(String s)
@@ -83,34 +76,30 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		if(this.MetaNames == null) {
+		if(this.MetaNames == null)
 			this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
-		} else
+		else
 		{
 			MetaIcons = new Icon[MetaNames.length];
-			for(int i = 0; i < MetaNames.length; i++) 
-			{
+			for(int i = 0; i < MetaNames.length; i++)
 				MetaIcons[i] = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + MetaNames[i]);
-			}
 		}
 	}
 
 	@Override
 	public Icon getIconFromDamage(int i)
 	{
-		if(MetaNames != null) {
+		if(MetaNames != null)
 			return MetaIcons[i];
-		} else {
+		else
 			return this.itemIcon;
-		}
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack)
 	{
-		if(MetaNames != null && itemstack.getItemDamage() < MetaNames.length) {
+		if(MetaNames != null && itemstack.getItemDamage() < MetaNames.length)
 			return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
-		}
 		return super.getUnlocalizedName(itemstack);
 	}
 
@@ -134,21 +123,17 @@ public class ItemTerra extends Item implements ISize
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
 			if(stackTagCompound.hasKey("temperature"))
-			{
 				TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
-			}
-			if(is.stackSize <= 0) {
+			if(is.stackSize <= 0)
 				is = null;
-			}
 		}
 	}
 
 	public static void addSizeInformation(ItemStack object, List arraylist)
 	{
-		if(((ISize)object.getItem()).getSize(object)!= null && ((ISize)object.getItem()).getWeight(object) != null) {
+		if(((ISize)object.getItem()).getSize(object)!= null && ((ISize)object.getItem()).getWeight(object) != null)
 			arraylist.add("\u2696" + StringUtil.localize("gui.Weight." + ((ISize)object.getItem()).getWeight(object).getName()) + " \u21F2" + 
 					StringUtil.localize("gui.Size." + ((ISize)object.getItem()).getSize(object).getName().replace(" ", "")));
-		}
 	}
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
@@ -160,12 +145,8 @@ public class ItemTerra extends Item implements ISize
 
 
 		if (is.hasTagCompound())
-		{
-			if(is.getTagCompound().hasKey("itemCraftingValue") && is.getTagCompound().getByte("itemCraftingValue") != 0)
-			{
+			if(is.getTagCompound().hasKey("itemCraftingValue") && is.getTagCompound().getShort("itemCraftingValue") != 0)
 				arraylist.add("This Item Has Been Worked");
-			}
-		}
 
 		addItemInformation(is, player, arraylist);
 
@@ -189,18 +170,13 @@ public class ItemTerra extends Item implements ISize
 				float meltTemp = -1;
 				HeatIndex hi = HeatRegistry.getInstance().findMatchingIndex(is);
 				if(hi != null)
-				{
 					meltTemp = hi.meltTemp;
-				}
 
 				if(meltTemp != -1)
-				{
-					if(is.itemID == Item.stick.itemID) {
+					if(is.itemID == Item.stick.itemID)
 						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
-					} else {
+					else
 						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));
-					}
-				}
 			}
 		}
 	}

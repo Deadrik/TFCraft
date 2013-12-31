@@ -53,12 +53,10 @@ public class BlockSluice extends BlockContainer
 		TileEntity te = world.getBlockTileEntity(i, j, k);
 
 		if(world.isRemote)
-		{
 			return true;
-		} else
+		else
 		{
 			if(!isBlockFootOfBed(meta))
-			{
 				if((TileEntitySluice)world.getBlockTileEntity(i, j, k)!=null)
 				{
 					TileEntitySluice tileentitysluice;
@@ -68,9 +66,8 @@ public class BlockSluice extends BlockContainer
 					{
 						tileentitysluice.soilAmount+=7;
 						tileentitysluice.soilType = (byte) is.getItemDamage();
-						if(tileentitysluice.soilAmount > 50) {
+						if(tileentitysluice.soilAmount > 50)
 							tileentitysluice.soilAmount = 50;
-						}
 						is.setItemDamage(0);
 						entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, is);
 						/*The line below was uncommented before the smp inclusion. If this section isn't working it's because the above line never worked properly.
@@ -81,7 +78,6 @@ public class BlockSluice extends BlockContainer
 					entityplayer.openGui(TerraFirmaCraft.instance, 25, world, i, j, k);
 					//ModLoader.openGUI(entityplayer, new GuiTerraSluice(entityplayer.inventory, tileentitysluice));
 				}
-			}
 			return true;
 		}
 	}
@@ -89,11 +85,10 @@ public class BlockSluice extends BlockContainer
 	@Override
 	public Icon getIcon(int i, int j)
 	{
-		if(j == 4) {
+		if(j == 4)
 			return Block.blocksList[Block.waterMoving.blockID].getIcon(i, 0);
-		} else {
-			return Block.planks.getIcon(i, 0);
-		}
+		else
+			return Block.blocksList[Block.planks.blockID].getIcon(i, 0);
 	}
 
 	public static int getDirectionFromMetadata(int i)
@@ -124,11 +119,10 @@ public class BlockSluice extends BlockContainer
 	@Override
 	public int idDropped(int i, Random random, int j)
 	{
-		if(!isBlockFootOfBed(i)) {
+		if(!isBlockFootOfBed(i))
 			return TFCItems.SluiceItem.itemID;
-		} else {
+		else
 			return 0;
-		}
 	}
 	@Override
 	public boolean isOpaqueCube()
@@ -141,27 +135,17 @@ public class BlockSluice extends BlockContainer
 		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
 		byte byte0 = 0;
 		byte byte1 = 0;
-		if(l == 0)//+z
-		{
+		if(l == 0)
 			byte1 = 1;
-		}
-		if(l == 1)//-x
-		{
+		if(l == 1)
 			byte0 = -1;
-		}
-		if(l == 2)//-z
-		{
+		if(l == 2)
 			byte1 = -1;
-		}
-		if(l == 3)//+x
-		{
+		if(l == 3)
 			byte0 = 1;
-		}
 		world.setBlockMetadataWithNotify(i, j, k, l, 3);
 		if(world.getBlockId(i, j, k) == this.blockID)
-		{
 			world.setBlock(i + byte0, j, k + byte1, this.blockID, l + 8, 3);
-		}
 
 		//Minecraft mc = ModLoader.getMinecraftInstance();
 		//mc.ingameGUI.addChatMessage("Dir = "+(new StringBuilder()).append(l).toString());
@@ -171,20 +155,18 @@ public class BlockSluice extends BlockContainer
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) 
 	{
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
-		if(this.isBlockFootOfBed(meta)) {
+		if(this.isBlockFootOfBed(meta))
 			setBlockBounds(0,0,0,1,0.5f,1);
-		} else {
+		else
 			setBlockBounds(0,0,0,1,1,1);
-		}
 	}
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
 		int meta = world.getBlockMetadata(i, j, k);
-		if(this.isBlockFootOfBed(meta)) {
+		if(this.isBlockFootOfBed(meta))
 			return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.5f, k+1);
-		}
 		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 1, k + 1);
 	}
 
@@ -219,74 +201,62 @@ public class BlockSluice extends BlockContainer
 	private boolean canStay(World world, int i, int j, int k, boolean foot, int dir)
 	{
 		int l = dir;
-		if(l == 0)//+z
-		{
+		if(l == 0)
 			if(!foot && 
 					(!world.isBlockNormalCube(i+1, j, k) || 
 							!world.isBlockNormalCube(i-1, j, k) || 
 							!world.isBlockNormalCube(i, j, k-1) || 
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k))) {
+							world.isBlockNormalCube(i, j+2, k)))
 				return false;
-			} else if(foot && 
+			else if(foot && 
 					(!world.isBlockNormalCube(i+1, j, k) || 
 							!world.isBlockNormalCube(i-1, j, k) || 
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k))) {
+							world.isBlockNormalCube(i, j+2, k)))
 				return false;
-			}
-		}
-		if(l == 1)//-x
-		{
+		if(l == 1)
 			if(!foot && 
 					(!world.isBlockNormalCube(i, j, k+1) || 
 							!world.isBlockNormalCube(i, j, k-1) || 
 							!world.isBlockNormalCube(i+1, j, k)  ||
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k))) {
+							world.isBlockNormalCube(i, j+2, k)))
 				return false;
-			} else if(foot && 
+			else if(foot && 
 					(!world.isBlockNormalCube(i, j, k+1) || 
 							!world.isBlockNormalCube(i, j, k-1) || 
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k))) {
+							world.isBlockNormalCube(i, j+2, k)))
 				return false;
-			}
-		}
-		if(l == 2)//-z
-		{
+		if(l == 2)
 			if(!foot && 
 					(!world.isBlockNormalCube(i+1, j, k) || 
 							!world.isBlockNormalCube(i-1, j, k) || 
 							!world.isBlockNormalCube(i, j, k+1) || 
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k))) {
+							world.isBlockNormalCube(i, j+2, k)))
 				return false;
-			} else if(foot && 
+			else if(foot && 
 					(!world.isBlockNormalCube(i+1, j, k) || 
 							!world.isBlockNormalCube(i-1, j, k) || 
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k))) {
+							world.isBlockNormalCube(i, j+2, k)))
 				return false;
-			}
-		}
-		if(l == 3)//+x
-		{
+		if(l == 3)
 			if(!foot && 
 					(!world.isBlockNormalCube(i, j, k+1) || 
 							!world.isBlockNormalCube(i, j, k-1) || 
 							!world.isBlockNormalCube(i-1, j, k)  ||
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k))) {
+							world.isBlockNormalCube(i, j+2, k)))
 				return false;
-			} else if(foot && 
+			else if(foot && 
 					(!world.isBlockNormalCube(i, j, k+1) || 
 							!world.isBlockNormalCube(i, j, k-1) || 
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k))) {
+							world.isBlockNormalCube(i, j+2, k)))
 				return false;
-			}
-		}
 		return true;
 	}
 
@@ -309,20 +279,12 @@ public class BlockSluice extends BlockContainer
 		if(isBlockFootOfBed(i1))
 		{
 			if(world.getBlockId(i - headBlockToFootBlockMap[j1][0], j, k - headBlockToFootBlockMap[j1][1]) != blockID || !canStay(world, i, j, k,true,j1))
-			{
 				world.setBlock(i, j, k, 0);
-			}
-		}
-		else
+		} else if(world.getBlockId(i + headBlockToFootBlockMap[j1][0], j, k + headBlockToFootBlockMap[j1][1]) != blockID || !canStay(world, i, j, k,false,j1))
 		{
-			if(world.getBlockId(i + headBlockToFootBlockMap[j1][0], j, k + headBlockToFootBlockMap[j1][1]) != blockID || !canStay(world, i, j, k,false,j1))
-			{
-				world.setBlock(i, j, k, 0);
-				if(!world.isRemote)
-				{
-					dropBlockAsItem(world, i, j, k, i1, 0);
-				}
-			}
+			world.setBlock(i, j, k, 0);
+			if(!world.isRemote)
+				dropBlockAsItem(world, i, j, k, i1, 0);
 		}
 	}
 	@Override
