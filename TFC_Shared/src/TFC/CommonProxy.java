@@ -29,6 +29,7 @@ import TFC.Entities.Mobs.EntityEndermanTFC;
 import TFC.Entities.Mobs.EntityGhastTFC;
 import TFC.Entities.Mobs.EntityHorseTFC;
 import TFC.Entities.Mobs.EntityIronGolemTFC;
+import TFC.Entities.Mobs.EntityPheasantTFC;
 import TFC.Entities.Mobs.EntityPigTFC;
 import TFC.Entities.Mobs.EntityPigZombieTFC;
 import TFC.Entities.Mobs.EntitySheepTFC;
@@ -152,6 +153,7 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "Sheep", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntityBear.class, "Bear", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntityChickenTFC.class, "Chicken", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
+		EntityRegistry.registerGlobalEntityID(EntityPheasantTFC.class, "Pheasant", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntityPigTFC.class, "Pig", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntitySquidTFC.class, "Squid", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntityDeer.class, "Deer", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
