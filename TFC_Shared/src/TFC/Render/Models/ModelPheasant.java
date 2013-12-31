@@ -226,7 +226,7 @@ public class ModelPheasant extends ModelBase
 		
 		this.Tail.rotateAngleZ = -((float)(Math.PI / 18F));
 		this.TailFeather.rotateAngleZ = -((float)(Math.PI / 36F));
-		this.RightLeg.rotateAngleZ = ((float)(Math.PI / 9F))+ MathHelper.cos(par1 * 0.222F) * 1.4F * par2;
+		this.RightLeg.rotateAngleZ = ((float)(Math.PI / 9F))+ MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
 		this.LeftLeg.rotateAngleZ = ((float)(Math.PI / 9F)) + MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
 		this.RightLowerLeg.rotateAngleZ = -((float)(Math.PI / 9F));
 		this.LeftLowerLeg.rotateAngleZ = -((float)(Math.PI / 9F));

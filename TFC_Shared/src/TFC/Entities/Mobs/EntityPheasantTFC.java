@@ -36,12 +36,12 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 	protected int age;
 	protected float mateSizeMod;
 	public float size_mod;
-	public float strength_mod;
-	public float aggression_mod;
-	public float obedience_mod;
-	public float colour_mod;
-	public float climate_mod;
-	public float hard_mod;
+	public float strength_mod = 1;
+	public float aggression_mod = 1;
+	public float obedience_mod = 1;
+	public float colour_mod = 1;
+	public float climate_mod = 1;
+	public float hard_mod = 1;
 	public boolean inLove;
 
 	int degreeOfDiversion = 2;

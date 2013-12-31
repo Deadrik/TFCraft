@@ -36,12 +36,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	protected long timeOfConception;
 	protected float mateSizeMod;
 	public float size_mod;
-	public float strength_mod;
-	public float aggression_mod;
-	public float obedience_mod;
-	public float colour_mod;
-	public float climate_mod;
-	public float hard_mod;
+	public float strength_mod = 1;
+	public float aggression_mod = 1;
+	public float obedience_mod = 1;
+	public float colour_mod = 1;
+	public float climate_mod = 1;
+	public float hard_mod = 1;
 	public boolean inLove;
 
 	private int degreeofdiversion = 1;
@@ -52,6 +52,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		this.tasks.addTask(6, new EntityAIMateTFC(this, worldObj, 1));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheepTFC.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityChickenTFC.class, 200, false));
+		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityPheasantTFC.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDeer.class, 200, false));
 
@@ -106,12 +107,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		this.dataWatcher.addObject(14, new Float(1));
 		this.dataWatcher.addObject(15, Integer.valueOf(0));
 		
-		this.dataWatcher.addObject(24, new Float(1));
-		this.dataWatcher.addObject(25, new Float(1));
-		this.dataWatcher.addObject(26, new Float(1));
-		this.dataWatcher.addObject(27, new Float(1));
-		this.dataWatcher.addObject(28, new Float(1));
-		this.dataWatcher.addObject(29, new Float(1));
+		this.dataWatcher.addObject(24, Float.valueOf(1.0f));
+		this.dataWatcher.addObject(25, Float.valueOf(1.0f));
+		this.dataWatcher.addObject(26, Float.valueOf(1.0f));
+		this.dataWatcher.addObject(27, Float.valueOf(1.0f));
+		this.dataWatcher.addObject(28, Float.valueOf(1.0f));
+		this.dataWatcher.addObject(29, Float.valueOf(1.0f));
 	}
 
 
@@ -127,8 +128,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
 		
-		nbt.setFloat ("Strength Modifier", strength_mod);
-		nbt.setFloat ("Aggression Modifier", aggression_mod);
+		nbt.setFloat ("Strength Modifier", getStrength());
+		nbt.setFloat ("Aggression Modifier", getAggression());
 		nbt.setFloat ("Obedience Modifier", obedience_mod);
 		nbt.setFloat ("Colour Modifier", colour_mod);
 		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
@@ -281,6 +282,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
 		int var2 = (int)(TFC_MobData.WolfDamage * getStrength() * getAggression() * (getSize()/2 + 0.5F));
+		System.out.println(var2+", s: "+getStrength()+", a: "+ getAggression());
 		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 	}
 
@@ -462,14 +464,14 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public float getStrength() {
 		// TODO Auto-generated method stub
-		return strength_mod;
+		return strength_mod!=0?strength_mod:1;
 	}
 
 
 	@Override
 	public float getAggression() {
 		// TODO Auto-generated method stub
-		return aggression_mod;
+		return aggression_mod!=0?aggression_mod:1;
 	}
 
 
