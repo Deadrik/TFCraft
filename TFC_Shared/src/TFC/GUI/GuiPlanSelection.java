@@ -90,8 +90,8 @@ public class GuiPlanSelection extends GuiContainerTFC
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
 		drawGui(texture);
-
-		drawCenteredString(this.fontRenderer, "Plans: "+ AnvilEntity.getStackInSlot(AnvilEntity.INPUT1_SLOT).getDisplayName(), guiLeft+xSize/2, guiTop+5, 0x000000);
+		if(AnvilEntity.getStackInSlot(AnvilEntity.INPUT1_SLOT) != null)
+			drawCenteredString(this.fontRenderer, "Plans: "+ AnvilEntity.getStackInSlot(AnvilEntity.INPUT1_SLOT).getDisplayName(), guiLeft+xSize/2, guiTop+5, 0x000000);
 	}
 
 	private ArrayList<Object[]> getRecipes()

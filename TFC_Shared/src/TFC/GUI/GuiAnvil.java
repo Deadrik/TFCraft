@@ -110,7 +110,7 @@ public class GuiAnvil extends GuiContainer
 			AnvilEntity.actionShrink();
 		else if (guibutton.id == 8)
 			AnvilEntity.actionWeld();
-		else if(guibutton.id == 12)
+		else if(guibutton.id == 12 && this.AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT] != null)
 			player.openGui(TerraFirmaCraft.instance, 24, player.worldObj, x, y, z);
 		this.inventorySlots.detectAndSendChanges();
 	}
