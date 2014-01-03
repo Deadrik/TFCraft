@@ -27,7 +27,7 @@ import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumWoodMaterial;
 import TFC.Blocks.BlockSlab;
 import TFC.Chunkdata.ChunkDataManager;
-import TFC.Food.FoodStatsTFC;
+import TFC.Core.Player.FoodStatsTFC;
 import TFC.Items.ItemOre;
 import TFC.TileEntities.TileEntityPartial;
 import cpw.mods.fml.common.FMLCommonHandler;

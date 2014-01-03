@@ -18,6 +18,7 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Util.StringUtil;
 
 public class ItemMeal extends ItemTerraFood

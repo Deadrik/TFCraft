@@ -1,4 +1,4 @@
-package TFC.Food;
+package TFC.Core.Player;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

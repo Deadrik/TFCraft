@@ -8,7 +8,7 @@ import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import TFC.Core.TFC_Core;
-import TFC.Food.FoodStatsTFC;
+import TFC.Core.Player.FoodStatsTFC;
 
 public class SetPlayerStatsCommand extends CommandBase{
 

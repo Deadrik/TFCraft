@@ -17,9 +17,9 @@ import TFC.Reference;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Food.FoodStatsTFC;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemCustomHoe;
 

@@ -16,7 +16,7 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Sounds;
-import TFC.Food.FoodStatsTFC;
+import TFC.Core.Player.FoodStatsTFC;
 
 public class ItemPotteryJug extends ItemPotteryBase
 {

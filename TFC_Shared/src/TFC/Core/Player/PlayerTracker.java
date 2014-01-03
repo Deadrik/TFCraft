@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import TFC.Core.TFC_Core;
-import TFC.Food.FoodStatsTFC;
 import cpw.mods.fml.common.IPlayerTracker;
 
 public class PlayerTracker implements IPlayerTracker
