@@ -20,6 +20,7 @@ import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
+import TFC.Core.Player.BodyTempStats;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -44,6 +45,10 @@ public class EntityLivingHandler
 			player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(getMaxHealth(player));
 			if(!player.worldObj.isRemote)
 			{
+				//Handle Food
+				BodyTempStats tempStats = TFC_Core.getBodyTempStats(player);
+				tempStats.onUpdate(player);
+				TFC_Core.setBodyTempStats(player, tempStats);
 				//Nullify the Old Food
 				player.getFoodStats().addStats(20 - player.getFoodStats().getFoodLevel(), 0.0F);
 				//Handle Food
@@ -53,16 +58,10 @@ public class EntityLivingHandler
 				TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, FoodStatsTFC.getStatusPacket(foodstats));
 
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
-				{
 					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,20,1));
-				}
 				else if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.5f)
-				{
 					if(player.isSprinting())
-					{
 						player.setSprinting(false);
-					}
-				}
 
 				//Handle Spawn Protection
 				long spawnProtectionTimer = nbt.hasKey("spawnProtectionTimer") ? 
@@ -72,14 +71,12 @@ public class EntityLivingHandler
 						{
 							//Add protection time to the chunks
 							for(int i = -2; i < 3; i++)
-							{
 								for(int k = -2; k < 3; k++)
 								{
 									int lastChunkX = (int)player.posX >> 4;
 								int lastChunkZ = (int)player.posZ >> 4;
 						ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFCOptions.protectionGain);
 								}
-							}
 
 							spawnProtectionTimer += TFC_Time.hourLength;
 						}
@@ -101,16 +98,10 @@ public class EntityLivingHandler
 					{
 						playerclient.guishowFoodRestoreAmount = true;
 						playerclient.guiFoodRestoreAmount = ((ItemTerraFood)player.inventory.getCurrentItem().getItem()).getHealAmount();
-					}
-					else
-					{
+					} else
 						playerclient.guishowFoodRestoreAmount = false;
-					}
-				}
-				else
-				{
+				} else
 					playerclient.guishowFoodRestoreAmount = false;
-				}
 			}
 
 		}
@@ -121,32 +112,25 @@ public class EntityLivingHandler
 		float bodyTemp = player.getEntityData().hasKey("bodyTemp") ? player.getEntityData().getFloat("bodyTemp") : 37;
 
 		TileEntityFireEntity te = null;
-		for (int i = -10;i<10;i++){
-			for(int j = -2; j < 3;j++){
-				for(int k = -10;k<10;k++){
-					if(player.worldObj.getBlockId((int)player.posX+i,(int)player.posY+j,(int)player.posZ+k)==TFCBlocks.Firepit.blockID){
+		for (int i = -10;i<10;i++)
+			for(int j = -2; j < 3;j++)
+				for(int k = -10;k<10;k++)
+					if(player.worldObj.getBlockId((int)player.posX+i,(int)player.posY+j,(int)player.posZ+k)==TFCBlocks.Firepit.blockID)
 						te = (TileEntityFireEntity)player.worldObj.getBlockTileEntity((int)player.posX+i, (int)player.posY+j, (int)player.posZ+k);
-					}
-				}
-			}
-		}
 		double netBodyTemp = 0;
 		double distanceTE = 0;
-		if (te!=null) {
+		if (te!=null)
 			distanceTE = Math.sqrt(Math.pow(player.posX-te.xCoord,2)+Math.pow(player.posY-te.yCoord,2)+Math.pow(player.posZ-te.zCoord,2));
-		}
 		float temp =TFC_Climate.getHeightAdjustedTemp((int)player.posX, (int)player.posY, (int)player.posZ);
-		if(temp<25) {
+		if(temp<25)
 			netBodyTemp-= (12*(te!=null&&te.fireTemperature>100?Math.pow(1d/(11-distanceTE),3):1))/(60*20*5*10*(Math.pow(5, temp<0?0:temp/10d)/temp<0?Math.abs(temp)/10d:1d));
-		} else if(temp>=30) {
+		else if(temp>=30)
 			netBodyTemp+=((temp+7)/bodyTemp)/(60*15*20);
-		}
 		netBodyTemp+=0.000017889*0.2D*(player.isSprinting()?12:1)*(player.inventory.armorInventory[3]!=null &&player.inventory.armorInventory[3].getItem() ==Item.helmetLeather?2.24:1)*(player.inventory.armorInventory[2]!=null &&player.inventory.armorInventory[2].getItem() ==Item.plateLeather?2.24:1)
 				*(player.inventory.armorInventory[1]!=null &&player.inventory.armorInventory[1].getItem() ==Item.legsLeather?2.24:1)*(player.inventory.armorInventory[0]!=null &&player.inventory.armorInventory[0].getItem() ==Item.bootsLeather?2.24:1);
 		bodyTemp+=netBodyTemp;
-		if(temp<25) {
+		if(temp<25)
 			bodyTemp=Math.max(temp, bodyTemp);
-		}
 
 		player.getEntityData().setFloat("bodyTemp", bodyTemp);
 	}
@@ -163,26 +147,20 @@ public class EntityLivingHandler
 		ItemStack quiver = null;
 		ItemStack ammo = event.item.getEntityItem();
 		boolean foundJav = false;
-		for(int i = 0; i < 9; i++) 
-		{
+		for(int i = 0; i < 9; i++)
 			if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemQuiver)
 			{
 				quiver = player.inventory.getStackInSlot(i);
 				break;
 			}
 			else if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemJavelin)
-			{
 				foundJav = true;
-			}
-		}
 
 		if(quiver != null && ammo.getItem() instanceof ItemArrow)
 		{
 			ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, ammo);
 			if(is != null)
-			{
 				event.item.setEntityItemStack(is);
-			}
 			else
 			{
 				is = event.item.getEntityItem();
@@ -192,7 +170,6 @@ public class EntityLivingHandler
 			}
 		}
 		else if(quiver != null && ammo.getItem() instanceof ItemJavelin)
-		{
 			if(foundJav)
 			{
 				ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, ammo);
@@ -204,6 +181,5 @@ public class EntityLivingHandler
 					event.setResult(Result.DENY);
 				}
 			}
-		}
 	}
 }

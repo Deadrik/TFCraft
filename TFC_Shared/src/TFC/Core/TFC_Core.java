@@ -27,6 +27,7 @@ import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumWoodMaterial;
 import TFC.Blocks.BlockSlab;
 import TFC.Chunkdata.ChunkDataManager;
+import TFC.Core.Player.BodyTempStats;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Items.ItemOre;
 import TFC.TileEntities.TileEntityPartial;
@@ -515,6 +516,18 @@ public class TFC_Core
 	public static void setPlayerFoodStats(EntityPlayer player, FoodStatsTFC foodstats)
 	{
 		foodstats.writeNBT(player.getEntityData());
+	}
+
+	public static BodyTempStats getBodyTempStats(EntityPlayer player)
+	{
+		BodyTempStats body = new BodyTempStats();
+		body.readNBT(player.getEntityData());
+		return body;
+	}
+
+	public static void setBodyTempStats(EntityPlayer player, BodyTempStats tempStats)
+	{
+		tempStats.writeNBT(player.getEntityData());
 	}
 
 	public static boolean isNorthSolid(World world, int x, int y, int z)
