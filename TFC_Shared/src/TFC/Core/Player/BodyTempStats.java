@@ -158,7 +158,7 @@ public class BodyTempStats
 
 	public void readNBT(NBTTagCompound nbt)
 	{
-		if (nbt.hasKey("foodCompound"))
+		if (nbt.hasKey("tempCompound"))
 		{
 			NBTTagCompound tempCompound = nbt.getCompoundTag("tempCompound");
 			this.temperatureLevel = tempCompound.getInteger("tempLev");
