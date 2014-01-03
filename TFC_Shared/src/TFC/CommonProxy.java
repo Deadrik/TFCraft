@@ -51,7 +51,7 @@ import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityBloom;
 import TFC.TileEntities.TileEntityChestTFC;
-import TFC.TileEntities.TileEntityCrop;
+import TFC.TileEntities.TECrop;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityEarlyBloomery;
 import TFC.TileEntities.TileEntityFarmland;
@@ -114,7 +114,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TileEntityEarlyBloomery.class, "TerraEarlyBloomery");
 		GameRegistry.registerTileEntity(TileEntitySluice.class, "TerraSluice");
 		GameRegistry.registerTileEntity(TileEntityFarmland.class, "TileEntityFarmland");
-		GameRegistry.registerTileEntity(TileEntityCrop.class, "TileEntityCrop");
+		GameRegistry.registerTileEntity(TECrop.class, "TileEntityCrop");
 
 		GameRegistry.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
 		GameRegistry.registerTileEntity(TileEntityPartial.class, "Partial");

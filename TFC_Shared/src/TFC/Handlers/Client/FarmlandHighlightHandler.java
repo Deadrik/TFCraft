@@ -17,7 +17,7 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.Items.Tools.ItemCustomHoe;
-import TFC.TileEntities.TileEntityCrop;
+import TFC.TileEntities.TECrop;
 import TFC.TileEntities.TileEntityFarmland;
 
 public class FarmlandHighlightHandler{
@@ -214,7 +214,7 @@ public class FarmlandHighlightHandler{
 			if(id == Block.crops.blockID && (world.getBlockId(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil.blockID ||
 					world.getBlockId(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil2.blockID))
 			{
-				TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(evt.target.blockX, evt.target.blockY, evt.target.blockZ);
+				TECrop te = (TECrop) world.getBlockTileEntity(evt.target.blockX, evt.target.blockY, evt.target.blockZ);
 				CropIndex index = CropManager.getInstance().getCropFromId(te.cropId);
 				boolean fullyGrown = te.growth >= index.numGrowthStages;
 

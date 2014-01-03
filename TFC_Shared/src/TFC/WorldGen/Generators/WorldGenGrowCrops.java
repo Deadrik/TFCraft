@@ -9,7 +9,7 @@ import TFC.Blocks.BlockCrop;
 import TFC.Core.TFC_Climate;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
-import TFC.TileEntities.TileEntityCrop;
+import TFC.TileEntities.TECrop;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenGrowCrops implements IWorldGenerator
@@ -39,7 +39,7 @@ public class WorldGenGrowCrops implements IWorldGenerator
 				if (world.isAirBlock(i, j, k) && ((BlockCrop)Block.blocksList[Block.crops.blockID]).canBlockStay(world, i, j, k))
 				{
 					world.setBlock(i, j, k, Block.crops.blockID, 0, 0x2);
-					TileEntityCrop te = (TileEntityCrop)world.getBlockTileEntity(i, j, k);
+					TECrop te = (TECrop)world.getBlockTileEntity(i, j, k);
 					te.cropId = cropBlockId;
 					te.growth = growth;
 					return true;

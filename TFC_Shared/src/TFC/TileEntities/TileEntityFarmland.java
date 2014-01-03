@@ -48,7 +48,7 @@ public class TileEntityFarmland extends NetworkTileEntity
 
 				if((worldObj.getBlockId(xCoord, yCoord+1, zCoord) == Block.crops.blockID))
 				{
-					crop = CropManager.getInstance().getCropFromId(((TileEntityCrop)worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord)).cropId);
+					crop = CropManager.getInstance().getCropFromId(((TECrop)worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord)).cropId);
 
 					if((crop.cycleType != 0))
 						if(nutrients[0] < soilMax)

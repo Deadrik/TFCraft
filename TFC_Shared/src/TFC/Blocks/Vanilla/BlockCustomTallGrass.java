@@ -13,12 +13,12 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.Recipes;
+import TFC.Core.TFC_Core;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -68,39 +68,31 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	{
 		super.harvestBlock(world, player, i, j, k, l);
 		ItemStack is = player.inventory.getCurrentItem();
-		for(int c = 0; c < Recipes.Knives.length && is != null; c++) 
-		{  
+		for(int c = 0; c < Recipes.Knives.length && is != null; c++)
 			if(is.getItem().itemID == Recipes.Knives[c].itemID)
 			{
 				createStraw(world, player, i, j, k);
 				is.damageItem(1, player);
 				break;
 			}
-		}
-		for(int c = 0; c < Recipes.Scythes.length && is != null; c++) 
-		{  
+		for(int c = 0; c < Recipes.Scythes.length && is != null; c++)
 			if(is.getItem().itemID == Recipes.Scythes[c].itemID)
 			{
 				//Spawn the straw for the block that we've already destroyed
 				createStraw(world, player, i, j, k );
 				//Now check each block around the destroyed block for AOE directions
 				for(int x = -1; x < 2; x++)
-				{
 					for(int z = -1; z < 2; z++)
-					{
 						if(world.getBlockId(i+x,  j,  k+z) == this.blockID)
 						{
 							createStraw(world, player, i + x, j, k + z);
 							is.damageItem(1, player);
 							world.setBlockToAir(i+x,  j,  k+z);
 						}
-					}
-				}
 				break;
 			}
-		}
 	}
-	
+
 	private void createStraw(World world, EntityPlayer player, int i, int j, int k)
 	{
 		EntityItem ei = new EntityItem(world, i+0.5F, j+0.5F, k+0.5F, new ItemStack(TFCItems.Straw, 1));
@@ -118,9 +110,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 
 		ItemStack item = GetSeeds(world.rand);
 		if (item != null)
-		{
 			ret.add(item);
-		}
 		return ret;
 	}
 
@@ -141,11 +131,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	@Override
 	protected boolean canThisPlantGrowOnThisBlockID(int par1)
 	{
-		return par1 == TFCBlocks.Grass.blockID || par1 == TFCBlocks.Grass2.blockID || 
-				par1 == TFCBlocks.Dirt.blockID || par1 == TFCBlocks.Dirt2.blockID ||
-				par1 == TFCBlocks.ClayGrass.blockID || par1 == TFCBlocks.ClayGrass2.blockID ||
-				par1 == TFCBlocks.PeatGrass.blockID ||
-				par1 == Block.tilledField.blockID;
+		return TFC_Core.isSoil(par1) || par1 == Block.tilledField.blockID;
 	}
 
 	/**
@@ -162,7 +148,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	public static ItemStack GetSeeds(Random R)
 	{
 		ItemStack is = null;
-		if(R.nextInt(100) == 0)
+		/*if(R.nextInt(100) == 0)
 		{
 			int r = R.nextInt(19);
 			switch(r)
@@ -202,7 +188,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 			case 16:
 				is = new ItemStack(TFCItems.SeedsSquash,1); break;
 			}
-		}
+		}*/
 		return is;
 	}
 
@@ -217,9 +203,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		this.field_94366_b = new Icon[field_94367_a.length];
 
 		for (int i = 0; i < this.field_94366_b.length; ++i)
-		{
 			this.field_94366_b[i] = par1IconRegister.registerIcon(field_94367_a[i]);
-		}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -227,9 +211,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	public Icon getIcon(int par1, int par2)
 	{
 		if (par2 >= this.field_94366_b.length)
-		{
 			par2 = 0;
-		}
 
 		return this.field_94366_b[par2];
 	}

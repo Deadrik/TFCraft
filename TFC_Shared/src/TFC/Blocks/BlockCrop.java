@@ -23,7 +23,7 @@ import TFC.Core.TFC_Core;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.Items.Tools.ItemCustomScythe;
-import TFC.TileEntities.TileEntityCrop;
+import TFC.TileEntities.TECrop;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -98,7 +98,7 @@ public class BlockCrop extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTexture(IBlockAccess access, int i, int j, int k, int meta)
 	{
-		TileEntityCrop te = (TileEntityCrop) access.getBlockTileEntity(i, j, k);
+		TECrop te = (TECrop) access.getBlockTileEntity(i, j, k);
 		CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
 
 		int stage = (int) Math.floor(te.growth);
@@ -188,7 +188,7 @@ public class BlockCrop extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
+		TECrop te = (TECrop) world.getBlockTileEntity(i, j, k);
 		CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
 		if(crop != null && !world.isRemote)
 		{
@@ -272,7 +272,7 @@ public class BlockCrop extends BlockContainer
 	@Override
 	public void breakBlock(World world, int i, int j, int k, int blockID, int metadata) 
 	{
-		TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
+		TECrop te = (TECrop) world.getBlockTileEntity(i, j, k);
 		if(te!= null && !world.isRemote)
 		{
 			CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
@@ -357,7 +357,7 @@ public class BlockCrop extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) 
 	{
-		return new TileEntityCrop();
+		return new TECrop();
 	}
 	
 	@Override

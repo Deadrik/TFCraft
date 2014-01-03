@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
-import TFC.TileEntities.TileEntityCrop;
+import TFC.TileEntities.TECrop;
 
 public class RenderCrop 
 {
@@ -18,7 +18,7 @@ public class RenderCrop
 	public static boolean render(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockaccess = renderblocks.blockAccess;
-		TileEntityCrop te = (TileEntityCrop)blockaccess.getBlockTileEntity(i, j, k);
+		TECrop te = (TECrop)blockaccess.getBlockTileEntity(i, j, k);
 		
 		CropIndex crop = null;
 		if(te != null)

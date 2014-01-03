@@ -10,7 +10,7 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
-import TFC.TileEntities.TileEntityCrop;
+import TFC.TileEntities.TECrop;
 
 public class ItemCustomSeeds extends ItemTerra
 {
@@ -60,7 +60,7 @@ public class ItemCustomSeeds extends ItemTerra
 
 				world.setBlock(x, y+1, z, Block.crops.blockID);
 				//world.setBlock(x, y+2, z, Block.crops.blockID, 8, 0x2);
-				TileEntityCrop te = ((TileEntityCrop)world.getBlockTileEntity(x, y+1, z));
+				TECrop te = ((TECrop)world.getBlockTileEntity(x, y+1, z));
 				te.cropId = cropId;
 				te.broadcastPacketInRange(te.createCropUpdatePacket());
 				world.markBlockForUpdate(x, y, z);

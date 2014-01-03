@@ -16,7 +16,7 @@ import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.Handlers.PacketHandler;
 
-public class TileEntityCrop extends NetworkTileEntity
+public class TECrop extends NetworkTileEntity
 {
 	public float growth;
 	public int cropId;
@@ -24,7 +24,7 @@ public class TileEntityCrop extends NetworkTileEntity
 	private long plantedTime;//Tracks the time when the plant was planted
 	private byte sunLevel;
 
-	public TileEntityCrop()
+	public TECrop()
 	{
 		growth = 0.1f;
 		plantedTime = TFC_Time.getTotalTicks();
@@ -40,7 +40,7 @@ public class TileEntityCrop extends NetworkTileEntity
 		if(!worldObj.isRemote)
 		{
 			float timeMultiplier = 360/TFC_Time.daysInYear;
-
+			sunLevel--;
 
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 
@@ -48,7 +48,8 @@ public class TileEntityCrop extends NetworkTileEntity
 
 			if(growthTimer < time && sunLevel > 0)
 			{
-				if(crop.needsSunlight && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord))
+
+				if(crop.needsSunlight && (worldObj.getBlockLightValue(xCoord, yCoord, zCoord) > 11 || worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)))
 				{
 					sunLevel++;
 					if(sunLevel > 30)
