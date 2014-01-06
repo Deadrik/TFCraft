@@ -795,6 +795,7 @@ public class TFCItems
 	public static Item DoorWhiteElm;
 	public static Item DoorWillow;
 	public static Item DoorKapok;
+	public static Item DoorAcacia;
 
 	public static Item Blueprint;
 	public static Item writabeBookTFC;
@@ -1466,6 +1467,7 @@ public class TFCItems
 		DoorWhiteElm = new ItemWoodDoor(TFCItemID.DoorWhiteElm, 13).setUnlocalizedName("White Elm Door");
 		DoorWillow = new ItemWoodDoor(TFCItemID.DoorWillow, 14).setUnlocalizedName("Willow Door");
 		DoorKapok = new ItemWoodDoor(TFCItemID.DoorKapok, 15).setUnlocalizedName("Kapok Door");
+		DoorAcacia = new ItemWoodDoor(TFCItemID.DoorKapok, 16).setUnlocalizedName("Acacia Door");
 
 		Beer = new ItemAlcohol(TFCItemID.Beer).setUnlocalizedName("Beer").setCreativeTab(CreativeTabs.tabFood);
 		Cider = new ItemAlcohol(TFCItemID.Cider).setUnlocalizedName("Cider").setCreativeTab(CreativeTabs.tabFood);
@@ -1710,7 +1712,7 @@ public class TFCItems
 
 		Recipes.Doors = new Item[]{DoorOak, DoorAspen, DoorBirch, DoorChestnut, DoorDouglasFir, 
 				DoorHickory, DoorMaple, DoorAsh, DoorPine, DoorSequoia, DoorSpruce, DoorSycamore, 
-				DoorWhiteCedar, DoorWhiteElm, DoorWillow, DoorKapok};
+				DoorWhiteCedar, DoorWhiteElm, DoorWillow, DoorKapok, DoorAcacia};
 
 		Recipes.Axes = new Item[]{SedAxe,IgInAxe,IgExAxe,MMAxe,
 				BismuthBronzeAxe,BlackBronzeAxe,

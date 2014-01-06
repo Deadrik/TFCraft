@@ -110,7 +110,7 @@ public class TFCBlockID
 	public static int WallSmoothMM				= 2040;
 
 	public static int[] Doors = {2041, 2042, 2043, 2044, 2045, 2046, 2047, 2048,
-		2049, 2050, 2051, 2052, 2053, 2054, 2055, 2056}; // 16 Doors
+		2049, 2050, 2051, 2052, 2053, 2054, 2055, 2056, 2057}; // 17 Doors
 
 	public static int IngotPile					= 2060;
 	public static int Barrel					= 2061;
@@ -149,6 +149,8 @@ public class TFCBlockID
 	public static int FreshWaterStill			= 2137;
 	public static int HotWaterFlowing			= 2138;
 	public static int HotWaterStill				= 2139;
+	
+	public static int SeaGrass					= 2140;
 
 
 	static Configuration config;

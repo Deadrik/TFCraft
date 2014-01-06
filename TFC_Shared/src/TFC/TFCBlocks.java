@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Constant.Global;
 import TFC.API.Constant.TFCBlockID;
@@ -25,6 +26,7 @@ import TFC.Blocks.BlockSulfur;
 import TFC.Blocks.BlockThatch;
 import TFC.Blocks.BlockTuyere;
 import TFC.Blocks.BlockWoodSupport;
+import TFC.Blocks.BlockWoodSupport2;
 import TFC.Blocks.Devices.BlockBarrel;
 import TFC.Blocks.Devices.BlockBarrel2;
 import TFC.Blocks.Devices.BlockBellows;
@@ -52,6 +54,7 @@ import TFC.Blocks.Flora.BlockLogHoriz;
 import TFC.Blocks.Flora.BlockLogHoriz2;
 import TFC.Blocks.Flora.BlockLogVert;
 import TFC.Blocks.Flora.BlockLogVert2;
+import TFC.Blocks.Flora.BlockTallSeaGrass;
 import TFC.Blocks.Terrain.BlockDryGrass;
 import TFC.Blocks.Terrain.BlockFreshWaterFlowing;
 import TFC.Blocks.Terrain.BlockFreshWaterStill;
@@ -155,6 +158,7 @@ public class TFCBlocks
 	public static int berryRenderId;
 	public static int pipeRenderId;
 	public static int pipeValveRenderId;
+	public static int seaWeedRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -288,6 +292,8 @@ public class TFCBlocks
 	public static Block FreshWaterFlowing;
 	public static Block HotWaterStill;
 	public static Block HotWaterFlowing;
+	
+	public static Block SeaGrass;
 
 	public static void RegisterBlocks()
 	{
@@ -409,9 +415,11 @@ public class TFCBlocks
 		GameRegistry.registerBlock(FreshWaterFlowing,"FreshWaterFlowing");
 		GameRegistry.registerBlock(HotWaterStill,"HotWaterStill");
 		GameRegistry.registerBlock(HotWaterFlowing,"HotWaterFlowing");
+		
+		GameRegistry.registerBlock(SeaGrass,"SeaGrass");
 
 		// Wooden Doors
-		for (int i=0; i < Global.WOOD_ALL.length - 1; i++)
+		for (int i=0; i < Global.WOOD_ALL.length; i++)
 			GameRegistry.registerBlock(Doors[i], "Door"+Global.WOOD_ALL[i].replaceAll(" ", ""));
 
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
@@ -548,8 +556,8 @@ public class TFCBlocks
 		TFCBlocks.Sulfur = new BlockSulfur(TFCBlockID.Sulfur, Material.rock).setUnlocalizedName("Sulfur").setHardness(0.5F).setResistance(1F);
 		TFCBlocks.WoodSupportV = new BlockWoodSupport(TFCBlockID.WoodSupportV, Material.wood).setUnlocalizedName("WoodSupportV").setHardness(0.5F).setResistance(1F);
 		TFCBlocks.WoodSupportH = new BlockWoodSupport(TFCBlockID.WoodSupportH, Material.wood).setUnlocalizedName("WoodSupportH").setHardness(0.5F).setResistance(1F);
-		TFCBlocks.WoodSupportV2 = new BlockWoodSupport(TFCBlockID.WoodSupportV2, Material.wood).setUnlocalizedName("WoodSupportV2").setHardness(0.5F).setResistance(1F);
-		TFCBlocks.WoodSupportH2 = new BlockWoodSupport(TFCBlockID.WoodSupportH2, Material.wood).setUnlocalizedName("WoodSupportH2").setHardness(0.5F).setResistance(1F);
+		TFCBlocks.WoodSupportV2 = new BlockWoodSupport2(TFCBlockID.WoodSupportV2, Material.wood).setUnlocalizedName("WoodSupportV2").setHardness(0.5F).setResistance(1F);
+		TFCBlocks.WoodSupportH2 = new BlockWoodSupport2(TFCBlockID.WoodSupportH2, Material.wood).setUnlocalizedName("WoodSupportH2").setHardness(0.5F).setResistance(1F);
 
 		TFCBlocks.tilledSoil = new TFC.Blocks.BlockFarmland(TFCBlockID.tilledSoil, TFCBlocks.Dirt.blockID, 0).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("tilledSoil");
 		TFCBlocks.tilledSoil2 = new TFC.Blocks.BlockFarmland(TFCBlockID.tilledSoil2, TFCBlocks.Dirt2.blockID, 16).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("tilledSoil2");
@@ -617,7 +625,7 @@ public class TFCBlocks
 		TFCBlocks.WallSmoothMM = new BlockCustomWall(TFCBlockID.WallSmoothMM, StoneMMSmooth, 6).setUnlocalizedName("WallSmooth");
 
 		// Wooden Doors
-		for (int i=0; i < Global.WOOD_ALL.length - 1; i++)
+		for (int i=0; i < Global.WOOD_ALL.length; i++)
 			TFCBlocks.Doors[i] = new BlockCustomDoor(TFCBlockID.Doors[i], i*2).setUnlocalizedName("Door "+Global.WOOD_ALL[i]);
 
 		TFCBlocks.IngotPile =  new BlockIngotPile(TFCBlockID.IngotPile).setUnlocalizedName("ingotpile").setHardness(3);
@@ -654,6 +662,8 @@ public class TFCBlocks
 		TFCBlocks.FreshWaterStill  = (new BlockFreshWaterStill(TFCBlockID.FreshWaterStill)).setHardness(100.0F).setLightOpacity(6).setUnlocalizedName("water");
 		TFCBlocks.HotWaterFlowing = (new BlockHotWaterFlowing(TFCBlockID.HotWaterFlowing)).setHardness(100.0F).setLightOpacity(9).setUnlocalizedName("water");
 		TFCBlocks.HotWaterStill  = (new BlockHotWaterStill(TFCBlockID.HotWaterStill)).setHardness(100.0F).setLightOpacity(9).setUnlocalizedName("water");
+		
+		TFCBlocks.SeaGrass = new BlockTallSeaGrass(TFCBlockID.SeaGrass).setUnlocalizedName("SeaGrass").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

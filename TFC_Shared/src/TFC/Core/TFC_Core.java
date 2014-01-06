@@ -320,7 +320,19 @@ public class TFC_Core
 
 	public static boolean isWater(int id)
 	{
-		if(id == Block.waterMoving.blockID || id == Block.waterMoving.blockID)
+		return isSaltWater(id) || isFreshWater(id);
+	}
+	
+	public static boolean isSaltWater(int id)
+	{
+		if(id == Block.waterMoving.blockID || id == Block.waterStill.blockID)
+			return true;
+		return false;
+	}
+	
+	public static boolean isFreshWater(int id)
+	{
+		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID)
 			return true;
 		return false;
 	}
@@ -328,6 +340,10 @@ public class TFC_Core
 	public static boolean isSoil(int id)
 	{
 		return isGrass(id) || isDirt(id) || isClay(id) || isPeat(id);
+	}
+	
+	public static boolean isGravel(int id){
+		return id == Block.gravel.blockID;
 	}
 
 	public static boolean isGround(int id)

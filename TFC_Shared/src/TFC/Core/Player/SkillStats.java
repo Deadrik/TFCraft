@@ -60,7 +60,9 @@ public class SkillStats
 			skillsMap.put(skillName, amount);
 
 		int i = (Integer) skillsMap.get(skillName);
-		TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, getStatusPacket(skillName, i));
+		if(player instanceof EntityPlayerMP){
+			TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, getStatusPacket(skillName, i));
+		}
 		writeNBT(player.getEntityData());
 	}
 

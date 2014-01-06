@@ -144,23 +144,27 @@ public class Recipes
 				for(int j = 0; j < Saws.length; j++)
 				{
 					GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 8, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(Saws[j], 1, 32767)});
+					GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 4, i), new Object[] {new ItemStack(Block.planks.blockID, 1, i), new ItemStack(Saws[j], 1, 32767)});
 					GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportV, 8, i), new Object[] { "A2"," 2", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
 					GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportH, 8, i), new Object[] { "A ","22", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
 				}
 				GameRegistry.addRecipe(new ItemStack(Block.planks.blockID, 1, i), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
+				GameRegistry.addRecipe(new ItemStack(TFCItems.SinglePlank, 3, i), new Object[] {"1", Character.valueOf('1'), new ItemStack(Block.planks.blockID, 1, i)});
 			}
-			else if(i/16 == 1){
+			else if((int)(i/16) == 1){
 				for(int j = 0; j < Saws.length; j++)
 				{
 					GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 8, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(Saws[j], 1, 32767)});
+					GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 4, i), new Object[] {new ItemStack(TFCBlocks.Planks2.blockID, 1, l), new ItemStack(Saws[j], 1, 32767)});
 					GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportV2, 8, l), new Object[] { "A2"," 2", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
 					GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportH2, 8, l), new Object[] { "A ","22", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
 				}
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Planks2.blockID, 1, l), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
+				GameRegistry.addRecipe(new ItemStack(TFCItems.SinglePlank, 3, i), new Object[] {"1", Character.valueOf('1'), new ItemStack(TFCBlocks.Planks2.blockID, 1, l)});
 			}
 		}
 
-		for(int i = 0; i < Global.WOOD_ALL.length -1; i++)
+		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 			GameRegistry.addRecipe(new ItemStack(Doors[i], 1, i), new Object[] { "WW","WW","WW", Character.valueOf('W'), new ItemStack(TFCItems.SinglePlank, 1, i)});
 
 		for(int j = 0; j < Knives.length; j++)
@@ -256,12 +260,21 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(Item.fishingRod,1), new Object[] {"#  ","$# ","$ #",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)});
 
 		//Tool Rack & Barrel & Armour Stands
-		for(int j = 0; j < 16; j++)
+		for(int j = 0; j < Global.WOOD_ALL.length; j++)
 		{
-			GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack, 1, j), new Object[] { "###","   ","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,j)});
-			GameRegistry.addRecipe(new ItemStack(TFCBlocks.Barrel,1,j), new Object[] { "# #","# #","###",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j)});
-			GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand,1,j), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j),Character.valueOf('%'),
-				new ItemStack(TFCBlocks.Planks,1,j)});
+			int l = j%16;
+			if(j == l){
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand,1,j), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j),Character.valueOf('%'),
+					new ItemStack(TFCBlocks.Planks,1,j)});
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack, 1, j), new Object[] { "###","   ","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,j)});
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Barrel,1,j), new Object[] { "# #","# #","###",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j)});
+			}
+			else if((int)(j/16)==1){
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand2,1,l), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j),Character.valueOf('%'),
+					new ItemStack(TFCBlocks.Planks2,1,l)});
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack2, 1, l), new Object[] { "###","   ","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,j)});
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Barrel2,1,l), new Object[] { "# #","# #","###",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j)});
+			}
 		}
 
 		for (int i=0; i < Global.STONE_FLUXINDEX.length; i++)
@@ -295,9 +308,16 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.NestBox,1), new Object[] {"S S","PSP","PPP",Character.valueOf('S'), new ItemStack(TFCItems.Straw,1),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,32767)});
 
-		for(int i = 0; i < 16; i++){
-			GameRegistry.addRecipe(new ItemStack(TFCBlocks.Fence,6,i), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.Logs,1,i),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,i)});
-			GameRegistry.addRecipe(new ItemStack(TFCBlocks.FenceGate,2,i), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank,1,i),Character.valueOf('P'),new ItemStack(TFCBlocks.Planks,1,i)});
+		for(int i = 0; i < Global.WOOD_ALL.length; i++){
+			int l = i%16;
+			if(i == l){
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Fence,6,i), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.Logs,1,i),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,i)});
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.FenceGate,2,i), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank,1,i),Character.valueOf('P'),new ItemStack(TFCBlocks.Planks,1,i)});
+			}
+			else if((int)(i/16) == 1){
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Fence2,6,l), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.Logs,1,i),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,i)});
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.FenceGate2,2,l), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank,1,i),Character.valueOf('P'),new ItemStack(TFCBlocks.Planks2,1,l)});
+			}
 		}
 
 		GameRegistry.addRecipe(new ItemStack(Item.leash,1),new Object[]{"RR ","RR ","  R",Character.valueOf('R'),new ItemStack(TFCItems.Rope,1)});
@@ -340,6 +360,7 @@ public class Recipes
 		//remove wool and book and quill recipes
 		//RemoveRecipe(new ItemStack(Item.writableBook));
 		RemoveRecipe(new ItemStack(Block.cloth));
+		RemoveRecipe(new ItemStack(Block.woodenButton));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.writabeBookTFC,1), new Object[]{new ItemStack(Item.book,1)});
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Spindle,1), new Object[] { "P","#",Character.valueOf('P'),
