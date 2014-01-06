@@ -7,8 +7,10 @@ import TFC.API.HeatRegistry;
 import TFC.API.IItemFoodBlock;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Textures;
+import TFC.Core.Player.FoodStatsTFC;
 import TFC.Food.ItemTerraFood;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -69,6 +71,58 @@ public class ItemFoodBlock extends ItemTerraBlock implements IItemFoodBlock
 			}
 		}
 		return EnumWeight.MEDIUM;
+	}
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
+	{
+		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+		if(!world.isRemote)
+		{
+			if (foodstats.needFood())
+			{
+				player.setItemInUse(is, this.getMaxItemUseDuration(is));
+			}
+		}
+		else
+		{
+			if (foodstats.needFood())
+			{
+				player.setItemInUse(is, this.getMaxItemUseDuration(is));
+			}
+		}
+
+		return is;
+	}
+	
+	@Override
+	public EnumAction getItemUseAction(ItemStack is)
+    {
+		if(is != null && is.getItem() instanceof ItemFoodBlock){
+			return EnumAction.eat;
+		}
+        return super.getItemUseAction(is);
+    }
+	
+	@Override
+	public int getMaxItemUseDuration(ItemStack par1ItemStack)
+    {
+        return 32;
+    }
+
+	@Override
+	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
+	{
+		is.stackSize--;
+		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+		player.getFoodStats().addStats(getHealAmount(is),-0.5F);
+		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+		if(!world.isRemote)
+		{
+			foodstats.addStats(getHealAmount(is),-0.5F);
+			TFC_Core.setPlayerFoodStats(player, foodstats);
+		}
+		return is;
 	}
 
 	@Override

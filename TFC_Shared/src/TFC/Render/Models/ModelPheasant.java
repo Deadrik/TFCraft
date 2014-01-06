@@ -196,8 +196,6 @@ public class ModelPheasant extends ModelBase
 		this.Body.rotateAngleZ = -((float)(Math.PI / 6F));
 		this.RightWing.rotateAngleZ = -((float)(Math.PI / 6F));
 		this.LeftWing.rotateAngleZ =  -((float)(Math.PI / 6F));
-		
-		System.out.println(((ModelBox)(RightWing.cubeList.get(0))).posX1);
 		if(par3!=0){
 			RightWing.setRotationPoint(4, 12, -2);
 			LeftWing.setRotationPoint(4, 12, 2);

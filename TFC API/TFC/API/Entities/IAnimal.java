@@ -1,7 +1,9 @@
 package TFC.API.Entities;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.Vec3;
 
 public interface IAnimal
 {
@@ -96,6 +98,14 @@ public interface IAnimal
 	public void setAnimalID(long id);
 
 	public int getHunger();
+	
+	public Vec3 getAttackedVec();
+	
+	public void setAttackedVec(Vec3 attackedVec);
+	
+	public Entity getFearSource();
+	
+	public void setFearSource(Entity fearSource);
 
 	public void setHunger(int h);
 

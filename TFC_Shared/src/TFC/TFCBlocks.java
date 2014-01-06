@@ -2,6 +2,7 @@ package TFC;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Constant.Global;
@@ -92,6 +93,7 @@ import TFC.Blocks.Vanilla.BlockCustomIce;
 import TFC.Blocks.Vanilla.BlockCustomLeaves;
 import TFC.Blocks.Vanilla.BlockCustomLeaves2;
 import TFC.Blocks.Vanilla.BlockCustomMushroom;
+import TFC.Blocks.Vanilla.BlockCustomPumpkin;
 import TFC.Blocks.Vanilla.BlockCustomReed;
 import TFC.Blocks.Vanilla.BlockCustomSapling;
 import TFC.Blocks.Vanilla.BlockCustomSapling2;
@@ -459,6 +461,7 @@ public class TFCBlocks
 		Block.blocksList[79] = null;
 		Block.blocksList[81] = null;
 		Block.blocksList[83] = null;
+		Block.blocksList[86] = null;
 		Block.blocksList[106] = null;
 		Block.blocksList[107] = null;
 		Block.blocksList[125].setCreativeTab(null);
@@ -490,6 +493,7 @@ public class TFCBlocks
 		Block.blocksList[79] = (new BlockCustomIce(79)).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("ice");
 		Block.blocksList[81] = (new BlockCustomCactus(81)).setHardness(0.4F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("cactus");
 		Block.blocksList[83] = (new BlockCustomReed(83)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("reeds").setTextureName("reeds");;
+		Block.blocksList[86] = (new BlockCustomPumpkin(86, false)).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("pumpkin").setTextureName("pumpkin");
 		Block.blocksList[106] = (new BlockCustomVine(106)).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("vine").setTextureName("vine");
 		Block.blocksList[107] = (new BlockCustomFenceGate(107)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("fenceGate");
 		Block.blocksList[143] = (new BlockCustomButtonWood(143)).setHardness(0.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("button");

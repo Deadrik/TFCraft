@@ -2,6 +2,7 @@ package TFC.Entities.Mobs;
 
 import java.util.ArrayList;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import TFC.TFCItems;
@@ -521,41 +523,61 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public float getStrength() {
 		// TODO Auto-generated method stub
-		return strength_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(24);
 	}
 
 
 	@Override
 	public float getAggression() {
 		// TODO Auto-generated method stub
-		return aggression_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(25);
 	}
 
 
 	@Override
 	public float getObedience() {
 		// TODO Auto-generated method stub
-		return obedience_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(26);
 	}
 
 
 	@Override
 	public float getColour() {
 		// TODO Auto-generated method stub
-		return colour_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(27);
 	}
 
 
 	@Override
 	public float getClimateAdaptation() {
 		// TODO Auto-generated method stub
-		return climate_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(28);
 	}
 
 
 	@Override
 	public float getHardiness() {
 		// TODO Auto-generated method stub
-		return hard_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(29);
+	}
+	@Override
+	public Vec3 getAttackedVec() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setAttackedVec(Vec3 attackedVec) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Entity getFearSource() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setFearSource(Entity fearSource) {
+		// TODO Auto-generated method stub
+		
 	}
 }

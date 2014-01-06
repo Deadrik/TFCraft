@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -17,12 +18,16 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
+import TFC.Entities.AI.EntityAIAvoidEntityTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
+import TFC.Entities.AI.EntityAIPanicTFC;
 
 public class EntityDeer extends EntityAnimal implements IAnimal
 {    
@@ -49,6 +54,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	public float climate_mod = 1;
 	public float hard_mod = 1;
 	public boolean inLove;
+	public Vec3 attackedVec = null;
+	public Entity fearSource = null;
 
 	public EntityDeer(World par1World)
 	{
@@ -58,12 +65,13 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		sex = rand.nextInt(2);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
+		this.tasks.addTask(1, new EntityAIPanicTFC(this, 0.68F,true));
 		this.tasks.addTask(2, new EntityAIMateTFC(this,worldObj, 1.0f));
-		//this.tasks.addTask(3, new EntityAIPanicTFC(this, var2*2, false, true));
-		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
-		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
-		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityBear.class, 16f, 0.25F, 0.3F));
+
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
+
 		//this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.itemID, false));
 		//this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
 		this.tasks.addTask(5, this.aiEatGrass);
@@ -123,7 +131,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 			if(!this.worldObj.isRemote){
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
-				
+
 				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
 				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
 				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
@@ -134,7 +142,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
-				
+
 				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
 				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
 				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
@@ -190,6 +198,16 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 			}
 		}
 
+		if(attackedVec != null){
+			//System.out.println(this.entityId+", Vec: "+attackedVec.xCoord+", "+attackedVec.yCoord+", "+attackedVec.zCoord);
+			if(this.getFearSource()!= null && this.getDistanceSqToEntity(this.getFearSource())>144){
+				this.setFearSource(null);
+			}
+			else if(this.getPosition(1).distanceTo(getAttackedVec())>16){
+				this.setAttackedVec(null);
+			}
+		}
+
 		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
 		{
 			this.heal(1);
@@ -200,6 +218,17 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		 * */
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+	{
+		Entity entity = par1DamageSource.getEntity();
+		if(entity != null){
+			setAttackedVec(Vec3.fakePool.getVecFromPool(entity.posX, entity.posY, entity.posZ));
+			setFearSource(entity);
+		}
+		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
 	@Override
@@ -217,7 +246,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		this.dataWatcher.addObject(13, new Integer(0));
 		this.dataWatcher.addObject(14, new Float(1));
 		this.dataWatcher.addObject(15, Integer.valueOf(0));
-		
+
 		this.dataWatcher.addObject(24, new Float(1));
 		this.dataWatcher.addObject(25, new Float(1));
 		this.dataWatcher.addObject(26, new Float(1));
@@ -286,14 +315,14 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
-		
+
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
 		nbt.setFloat ("Obedience Modifier", obedience_mod);
 		nbt.setFloat ("Colour Modifier", colour_mod);
 		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
 		nbt.setFloat ("Hardiness Modifier", hard_mod);
-		
+
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setBoolean("Pregnant", pregnant);
 		nbt.setFloat("MateSize", mateSizeMod);
@@ -311,14 +340,14 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
-		
+
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
 		colour_mod = nbt.getFloat ("Colour Modifier");
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
-		
+
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
@@ -471,8 +500,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	{
 		animalID = id;
 	}
-	
-	
+
+
 	@Override
 	public void eatGrassBonus()
 	{
@@ -548,5 +577,21 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	public float getHardiness() {
 		// TODO Auto-generated method stub
 		return hard_mod;
+	}
+	@Override
+	public Vec3 getAttackedVec() {
+		return attackedVec;
+	}
+	@Override
+	public void setAttackedVec(Vec3 attackedVec) {
+		this.attackedVec = attackedVec;
+	}
+	@Override
+	public Entity getFearSource() {
+		return this.fearSource;
+	}
+	@Override
+	public void setFearSource(Entity fearSource) {
+		this.fearSource = fearSource;
 	}
 }

@@ -310,7 +310,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						}
 
 						var4 = new ItemStack(0,1,0);//player.inventory.getCurrentItem();
-						System.out.println(var3.getTagCompound().getTags());
+						System.out.println("Tags: "+var3.getTagCompound().getTags());
 						System.out.println(var3);
 						if (var3 != null && var3.itemID == TFCItems.writabeBookTFC.itemID)
 						{

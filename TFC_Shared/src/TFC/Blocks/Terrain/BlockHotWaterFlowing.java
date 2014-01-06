@@ -26,8 +26,9 @@ public class BlockHotWaterFlowing extends BlockFreshWaterFlowing
 	{
 		return 0x1f5099;
 	}
-
+	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
 		if(world.isAirBlock(i-1, j, k) || world.isAirBlock(i+1, j, k) || 

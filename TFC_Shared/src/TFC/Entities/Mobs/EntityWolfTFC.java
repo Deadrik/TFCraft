@@ -14,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
@@ -54,7 +55,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityChickenTFC.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityPheasantTFC.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
+		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityCowTFC.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDeer.class, 200, false));
+		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false));
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + entityId;
@@ -464,41 +467,61 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public float getStrength() {
 		// TODO Auto-generated method stub
-		return strength_mod!=0?strength_mod:1;
+		return this.getDataWatcher().getWatchableObjectFloat(24);
 	}
 
 
 	@Override
 	public float getAggression() {
 		// TODO Auto-generated method stub
-		return aggression_mod!=0?aggression_mod:1;
+		return this.getDataWatcher().getWatchableObjectFloat(25);
 	}
 
 
 	@Override
 	public float getObedience() {
 		// TODO Auto-generated method stub
-		return obedience_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(26);
 	}
 
 
 	@Override
 	public float getColour() {
 		// TODO Auto-generated method stub
-		return colour_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(27);
 	}
 
 
 	@Override
 	public float getClimateAdaptation() {
 		// TODO Auto-generated method stub
-		return climate_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(28);
 	}
 
 
 	@Override
 	public float getHardiness() {
 		// TODO Auto-generated method stub
-		return hard_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(29);
+	}
+	@Override
+	public Vec3 getAttackedVec() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setAttackedVec(Vec3 attackedVec) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Entity getFearSource() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setFearSource(Entity fearSource) {
+		// TODO Auto-generated method stub
+		
 	}
 }

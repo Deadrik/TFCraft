@@ -7,7 +7,9 @@ import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
+import TFC.Entities.AI.EntityAIAvoidEntityTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
+import TFC.Entities.AI.EntityAIPanicTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -23,6 +25,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
@@ -51,6 +54,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
@@ -91,6 +95,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public float climate_mod = 1;
 	public float hard_mod = 1;
 	public boolean isInLove;
+	public Vec3 attackedVec = null;
+	public Entity fearSource = null;
 
 	int degreeOfDiversion = 2;
 
@@ -124,13 +130,20 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 1.0F));
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.RyeGrain.itemID, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.RiceGrain.itemID, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.BarleyGrain.itemID, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.OatGrain.itemID, false));
 		this.tasks.addTask(6, this.aiEatGrass);
-
+		for(Object aiTask : this.tasks.taskEntries){
+			if(aiTask instanceof EntityAIPanic){
+				this.tasks.removeTask((EntityAIBase)aiTask);
+			}
+		}
+		this.tasks.addTask(1, new EntityAIPanicTFC(this, 1.2D,true));
 		this.func_110226_cD();
 
 		//	We hijack the growingAge to hold the day of birth rather
@@ -498,6 +511,10 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		Entity entity = par1DamageSource.getEntity();
+		if(entity != null){
+			setAttackedVec(Vec3.fakePool.getVecFromPool(entity.posX, entity.posY, entity.posZ));
+			setFearSource(entity);
+		}
 		return this.riddenByEntity != null && this.riddenByEntity.equals(entity) ? false : super.attackEntityFrom(par1DamageSource, par2);
 	}
 
@@ -2035,41 +2052,61 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public float getStrength() {
 		// TODO Auto-generated method stub
-		return strength_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(24);
 	}
 
 
 	@Override
 	public float getAggression() {
 		// TODO Auto-generated method stub
-		return aggression_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(25);
 	}
 
 
 	@Override
 	public float getObedience() {
 		// TODO Auto-generated method stub
-		return obedience_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(26);
 	}
 
 
 	@Override
 	public float getColour() {
 		// TODO Auto-generated method stub
-		return colour_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(27);
 	}
 
 
 	@Override
 	public float getClimateAdaptation() {
 		// TODO Auto-generated method stub
-		return climate_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(28);
 	}
 
 
 	@Override
 	public float getHardiness() {
 		// TODO Auto-generated method stub
-		return hard_mod;
+		return this.getDataWatcher().getWatchableObjectFloat(29);
+	}
+
+	@Override
+	public Vec3 getAttackedVec() {
+		return this.attackedVec;
+	}
+
+	@Override
+	public void setAttackedVec(Vec3 attackedVec) {
+		this.attackedVec = attackedVec;
+	}
+
+	@Override
+	public Entity getFearSource() {
+		return this.fearSource;
+	}
+
+	@Override
+	public void setFearSource(Entity fearSource) {
+		this.fearSource = fearSource;
 	}
 }

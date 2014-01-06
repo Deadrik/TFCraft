@@ -29,6 +29,7 @@ public class BlockHotWaterStill extends BlockFreshWaterStill
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
 		if(world.isAirBlock(i-1, j, k) || world.isAirBlock(i+1, j, k) || 
