@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import TFC.API.Constant.Global;
 import TFC.Core.TFC_Core;
 
 public class AnvilRecipe
@@ -24,6 +25,18 @@ public class AnvilRecipe
 	{
 		for(String s : skillsList)
 			TFC_Core.getSkillStats(player).increaseSkill(s, craftingXP);
+	}
+
+	public AnvilRecipe clearRecipeSkills()
+	{
+		skillsList.clear();
+		return this;
+	}
+
+	public AnvilRecipe setCraftingXP(int xp)
+	{
+		this.craftingXP = xp;
+		return this;
 	}
 
 	/**
@@ -125,7 +138,7 @@ public class AnvilRecipe
 		this.result = result;
 		inheritsDamage = false;
 		this.plan = p;
-		skillsList.add("General_Smithing");
+		skillsList.add(Global.SKILL_GENERAL_SMITHING);
 	}
 
 	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req)
@@ -169,7 +182,7 @@ public class AnvilRecipe
 		return this;
 	}
 
-	public AnvilRecipe addSkill(String s)
+	public AnvilRecipe addRecipeSkill(String s)
 	{
 		this.skillsList.add(s);
 		return this;
@@ -189,7 +202,9 @@ public class AnvilRecipe
 			total++;
 			skill+=TFC_Core.getSkillStats(p).getSkill(s);
 		}
-		return skill/total;
+		if(total > 0)
+			return skill/total;
+		return 0;
 	}
 }
 

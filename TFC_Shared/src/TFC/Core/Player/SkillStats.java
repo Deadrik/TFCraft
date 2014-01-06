@@ -13,6 +13,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
+import TFC.API.Constant.Global;
 import TFC.Handlers.PacketHandler;
 
 public class SkillStats 
@@ -24,10 +25,10 @@ public class SkillStats
 	{
 		player = p;
 		skillsMap = new HashMap<String, Integer>();
-		setSkill("General_Smithing", 0);
-		setSkill("Toolsmith", 0);
-		setSkill("Weaponsmith", 0);
-		setSkill("Armorsmith", 0);
+		setSkill(Global.SKILL_GENERAL_SMITHING, 0);
+		setSkill(Global.SKILL_TOOLSMITH, 0);
+		setSkill(Global.SKILL_WEAPONSMITH, 0);
+		setSkill(Global.SKILL_ARMORSMITH, 0);
 	}
 
 	public void init()
