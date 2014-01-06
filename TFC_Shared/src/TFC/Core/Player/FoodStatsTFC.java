@@ -299,6 +299,7 @@ public class FoodStatsTFC
 		{
 			//The packet type sent determines who is expected to process this packet, the client or the server.
 			dos.writeByte(PacketHandler.Packet_Player_Status);
+			dos.writeByte((byte)0);
 			dos.writeFloat(foodstats.foodLevel);
 			dos.writeFloat(foodstats.waterLevel);
 

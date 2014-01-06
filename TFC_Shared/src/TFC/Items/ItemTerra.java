@@ -18,6 +18,7 @@ import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Util.StringUtil;
 
@@ -34,6 +35,8 @@ public class ItemTerra extends Item implements ISize
 	public Icon[] MetaIcons;
 	public String textureFolder;
 
+	private int craftingXP = 1;
+
 	public ItemTerra(int id) 
 	{
 		super(id);
@@ -46,6 +49,17 @@ public class ItemTerra extends Item implements ISize
 		MetaNames = metanames;
 		this.hasSubtypes = true;
 		return this;
+	}
+
+	public ItemTerra setCraftingXP(int m)
+	{
+		craftingXP = m;
+		return this;
+	}
+
+	public int getCraftingXP()
+	{
+		return this.craftingXP;
 	}
 
 	@Override
@@ -220,6 +234,12 @@ public class ItemTerra extends Item implements ISize
 	{
 		weight = e;
 		return this;
+	}
+
+	@Override
+	public void onCreated(ItemStack is, World world, EntityPlayer player)
+	{
+		TFC_Core.getSkillStats(player).increaseSkill("General_Smithing", getCraftingXP());
 	}
 
 

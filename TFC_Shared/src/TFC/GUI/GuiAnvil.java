@@ -27,6 +27,7 @@ import TFC.API.Enums.RuleEnum;
 import TFC.Containers.ContainerAnvil;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Textures;
+import TFC.Core.Player.SkillStats;
 import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityAnvil;
 
@@ -131,6 +132,15 @@ public class GuiAnvil extends GuiContainer
 
 			i1 = AnvilEntity.getItemCraftingValue();
 			drawTexturedModalRect(w + 27 + i1, h + 108, 208, 10, 5, 6);
+
+			//Round to 1 decimal place XX.X%
+			if(AnvilEntity.workRecipe != null)
+			{
+				int s0 =(int) (SkillStats.getSkillMult(AnvilEntity.workRecipe.getSkillTotal(player))*1000);
+				float s1 = s0/10f;
+
+				fontRenderer.drawString("Skill: "+s1+"%", w+150, h+8, 0xff6000);
+			}
 
 			drawItemRulesImages(w, h);
 			drawRulesImages(w,h);

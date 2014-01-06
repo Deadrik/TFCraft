@@ -1,8 +1,12 @@
 package TFC.API.Crafting;
 
+import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import TFC.API.Constant.Global;
+import TFC.Core.TFC_Core;
 
 public class AnvilRecipe
 {
@@ -14,7 +18,26 @@ public class AnvilRecipe
 	int craftingValue;
 	int anvilreq;
 	boolean inheritsDamage;
+	public int craftingXP = 1;
+	ArrayList<String> skillsList = new ArrayList<String>();
 
+	public void addSkills(EntityPlayer player)
+	{
+		for(String s : skillsList)
+			TFC_Core.getSkillStats(player).increaseSkill(s, craftingXP);
+	}
+
+	public AnvilRecipe clearRecipeSkills()
+	{
+		skillsList.clear();
+		return this;
+	}
+
+	public AnvilRecipe setCraftingXP(int xp)
+	{
+		this.craftingXP = xp;
+		return this;
+	}
 
 	/**
 	 * Used to check if a recipe matches current crafting inventory
@@ -115,6 +138,7 @@ public class AnvilRecipe
 		this.result = result;
 		inheritsDamage = false;
 		this.plan = p;
+		skillsList.add(Global.SKILL_GENERAL_SMITHING);
 	}
 
 	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req)
@@ -158,9 +182,29 @@ public class AnvilRecipe
 		return this;
 	}
 
+	public AnvilRecipe addRecipeSkill(String s)
+	{
+		this.skillsList.add(s);
+		return this;
+	}
+
 	public int getCraftingValue()
 	{
 		return craftingValue;
+	}
+
+	public int getSkillTotal(EntityPlayer p)
+	{
+		int skill = 0;
+		int total = 0;
+		for (String s : skillsList)
+		{
+			total++;
+			skill+=TFC_Core.getSkillStats(p).getSkill(s);
+		}
+		if(total > 0)
+			return skill/total;
+		return 0;
 	}
 }
 
