@@ -23,10 +23,14 @@ import TFC.API.Crafting.AnvilRecipe;
 import TFC.API.Crafting.AnvilReq;
 import TFC.API.Enums.RuleEnum;
 import TFC.API.Events.AnvilCraftEvent;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
+import TFC.Items.ItemTFCArmor;
+import TFC.Items.Tools.ItemMiscToolHead;
 
 public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 {
@@ -50,7 +54,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	private AnvilRecipe workWeldRecipe;
 	public int AnvilTier;
 
-	private EntityPlayer lastWorker;
+	public EntityPlayer lastWorker;
 
 	public static final int INPUT1_SLOT = 1;
 	public static final int WELD1_SLOT = 2;
@@ -101,25 +105,10 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 
 				AnvilManager manager = AnvilManager.getInstance();
 				Random R = new Random(worldObj.getSeed());
-				AnvilRecipe recipe = null;
-				ItemStack result = null;
-				int offset = 0; 
+				Object[] r = getRecipe(manager);
+				AnvilRecipe recipe = r[0] !=  null ? (AnvilRecipe) r[0] : null;
+				ItemStack result = r[1] !=  null ? (ItemStack) r[1] : null;
 
-				for(int i = workRecipe.getCraftingValue() - 5; i < workRecipe.getCraftingValue() + 5; i++)
-					if(itemCraftingValue == i)
-					{
-						offset = i - workRecipe.getCraftingValue();
-						if(offset < 0)
-							offset = offset + (-2 * offset);
-						recipe = new AnvilRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT], craftingPlan,
-								workRecipe.getCraftingValue(), 
-								anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);
-
-						result = manager.findCompleteRecipe(recipe, getItemRules());
-
-						if(result != null)
-							break;
-					}
 
 				//This is where the crafting is completed and the result is added to the anvil
 				if(result != null && entityplayer != null)
@@ -133,10 +122,20 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 						this.setInventorySlotContents(INPUT1_SLOT, eventCraft.result);
 						if(anvilItemStacks[INPUT1_SLOT] != null)
 						{
+							if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemMiscToolHead || anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemTFCArmor)
+							{
+								NBTTagCompound craftingTag = new NBTTagCompound();
+								craftingTag.setFloat("durabuff", recipe.getSkillTotal(lastWorker));
+								Tag.setCompoundTag("craftingTag", craftingTag);
+							}
+
 							anvilItemStacks[INPUT1_SLOT].setTagCompound(Tag);
-							float pct = (offset*5);
+							if(lastWorker!= null)
+								TFC_Core.getSkillStats(lastWorker).increaseSkill("General_Smithing", recipe.craftingXP);
+
+							/*float pct = (offset*5);
 							if(anvilItemStacks[INPUT1_SLOT].getItem().getMaxDamage() > 0 && !anvilItemStacks[INPUT1_SLOT].getItem().getHasSubtypes())
-								anvilItemStacks[INPUT1_SLOT].setItemDamage((int)(pct));
+								anvilItemStacks[INPUT1_SLOT].setItemDamage((int)(pct));*/
 						}
 						anvilItemStacks[INPUT2_SLOT] = null;
 
@@ -148,6 +147,24 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		}
 		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].stackSize < 1)
 			anvilItemStacks[INPUT1_SLOT].stackSize = 1;
+	}
+
+	/**
+	 * @return returns an array [AnvilRecipe,ItemStack]
+	 */
+	public Object[] getRecipe(AnvilManager manager)
+	{
+		Object[] out = new Object[2];
+
+		if(itemCraftingValue == workRecipe.getCraftingValue())
+		{
+			out[0] = new AnvilRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT], craftingPlan,
+					workRecipe.getCraftingValue(), 
+					anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);
+
+			out[1] = manager.findCompleteRecipe((AnvilRecipe)out[0], getItemRules());
+		}
+		return out;
 	}
 
 	public void onSlotChanged(int slot)
@@ -710,7 +727,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			actionWeld();
 			break;
 		}
-		}		
+		}	
 		worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 0.5F, 0.5F + (worldObj.rand.nextFloat()/2));
 	}
 
@@ -751,6 +768,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			dos.writeInt(yCoord);
 			dos.writeInt(zCoord);
 			dos.writeInt(id);
+			dos.writeUTF(PlayerManagerTFC.getInstance().getClientPlayer().Name);
 		} catch (IOException e) {
 		}
 
@@ -831,6 +849,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			return;
 		}
 		}		
+		this.lastWorker = worldObj.getPlayerEntityByName(inStream.readUTF());
 		worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
 	}
 

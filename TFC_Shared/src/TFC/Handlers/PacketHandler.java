@@ -33,6 +33,7 @@ import TFC.Core.TFC_Time;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Core.Player.SkillStats;
 import TFC.Items.Tools.ItemWritableBookTFC;
 import cpw.mods.fml.common.network.IConnectionHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
@@ -73,6 +74,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		foodstats.resetTimers();
 		foodstats.writeNBT(player.getEntityData());
+
 		World world= player.worldObj;
 
 		if(!world.isRemote)
@@ -89,6 +91,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 				dos.writeInt(TFCOptions.HealthGainRate);
 				dos.writeInt(TFCOptions.HealthGainCap);
+				TFC_Core.getSkillStats(player).toOutStream(dos);
 			} 
 			catch (IOException e)
 			{
@@ -122,11 +125,9 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			EntityPlayer player = (EntityPlayer)p;
 			World world= player.worldObj;
 
-			if(type == Packet_Init_Block_Client)//Client recieves the init packet from the server and assigns the data
-			{
-
+			if(type == Packet_Init_Block_Client)
 				try
-				{
+			{
 					x = dis.readInt();
 					y = dis.readInt();
 					z = dis.readInt();
@@ -134,14 +135,12 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					if(world != null && world.isRemote)
 					{
 						INetworkTE te = (INetworkTE) world.getBlockTileEntity(x, y, z);
-						if(te!= null) {
+						if(te!= null)
 							te.handleInitPacket(dis);
-						}
 					}
-				}catch(Exception e)
-				{
-					System.out.println("PacketHandler error in Packet Type: " + type + ", "+x + ", "+y + ", "+z);
-				}
+			}catch(Exception e)
+			{
+				System.out.println("PacketHandler error in Packet Type: " + type + ", "+x + ", "+y + ", "+z);
 			}
 			else if(type == Packet_Init_Block_Server)//Server builds the init packet and sends it to the client.
 			{
@@ -184,9 +183,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						{
 							PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
 
-							if(pi!=null) {
+							if(pi!=null)
 								pi.switchChiselMode();
-							}
 						}
 					} 
 					catch (IOException e) 
@@ -211,6 +209,10 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						TFCOptions.HealthGainRate = dis.readInt();
 						TFCOptions.HealthGainCap = dis.readInt();
 
+						SkillStats skills = TFC_Core.getSkillStats(player);
+						while(dis.available() > 0)
+							skills.setSkillSave(dis.readUTF(), dis.readInt());
+
 					} catch (IOException e) 
 					{
 						// IMPOSSIBLE?
@@ -227,9 +229,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					z = dis.readInt();
 
 					INetworkTE te = (INetworkTE) world.getBlockTileEntity(x, y, z);
-					if(te!= null) {
+					if(te!= null)
 						te.handleDataPacket(dis);
-					}
 				}
 			}
 			else if(type == Packet_Data_Block_Server)
@@ -241,24 +242,31 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					z = dis.readInt();
 
 					INetworkTE te = (INetworkTE) world.getBlockTileEntity(x, y, z);
-					if(te!= null) {
+					if(te!= null)
 						te.handleDataPacketServer(dis, player);
-					}
 				}
 			}
 			else if (type == Packet_Player_Status)
 			{
 				if(world.isRemote)
-				{
 					try 
-					{
-						FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-						foodstats.foodLevel = dis.readFloat();
-						foodstats.waterLevel = dis.readFloat();
-						TFC_Core.setPlayerFoodStats(player, foodstats);
+				{
+						byte flag = dis.readByte();
+						if(flag == 0)
+						{
+							FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+							foodstats.foodLevel = dis.readFloat();
+							foodstats.waterLevel = dis.readFloat();
+							TFC_Core.setPlayerFoodStats(player, foodstats);
+						}
+						else if(flag == 1)
+						{
+							SkillStats skills = TFC_Core.getSkillStats(player);
+							skills.setSkillSave(dis.readUTF(), dis.readInt());
+							skills = TFC_Core.getSkillStats(player);
+						}
 
-					} catch (IOException e) {}
-				}
+				} catch (IOException e) {}
 			}
 			else if(type == Packet_Rename_Item)
 			{
@@ -298,16 +306,13 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					}
 				}
 				else */if (true)
-				{
 					try
-					{
+				{
 						var2 = dis;//new DataInputStream(new ByteArrayInputStream(packet.data));
 						var3 = Packet.readItemStack(var2);
 
 						if (!ItemWritableBookTFC.validBookTagContents(var3.getTagCompound()))
-						{
 							throw new IOException("Invalid book tag!");
-						}
 
 						var4 = new ItemStack(0,1,0);//player.inventory.getCurrentItem();
 						System.out.println("Tags: "+var3.getTagCompound().getTags());
@@ -321,40 +326,21 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						}
 						//player.setCurrentItemOrArmor(0, var4);
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, var4);
-					}
-					catch (Exception var11)
-					{
-						var11.printStackTrace();
-					}
+				}
+				catch (Exception var11)
+				{
+					var11.printStackTrace();
 				}
 
 			}
 			else if (type == Packet_Update_Knapping)
-			{
-
 				if(!world.isRemote)
-				{
 					if(player.openContainer != null && player.openContainer instanceof ContainerSpecialCrafting)
 					{
 						byte index = dis.readByte();
 						((ContainerSpecialCrafting)player.openContainer).craftMatrix.setInventorySlotContents(index, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).specialCraftingTypeAlternate);
 						((ContainerSpecialCrafting)player.openContainer).onCraftMatrixChanged(((ContainerSpecialCrafting)player.openContainer).craftMatrix);
 					}
-				}
-			}
-			//This is commented out for being incorrect. This functionality can be performed without a separate packet.
-			/*else if (type == Packet_Scribe_Update)
-			{
-
-				if(!world.isRemote){
-					System.out.println("?");
-					int X = dis.readInt();
-					int Y = dis.readInt();
-					int Z = dis.readInt();
-					TileEntityTerraScribe te =(TileEntityTerraScribe)player.worldObj.getBlockTileEntity(X, Y, Z);
-					te.scribeItemStacks[1]=null;
-				}
-			}*/
 		} catch (Exception e) 
 		{
 			return;
@@ -365,12 +351,11 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	@SideOnly(Side.CLIENT)
 	public static void sendKeyPress(int type) //0 = chiselmode
 	{
-		if (!ModLoader.getMinecraftInstance().theWorld.isRemote) {
+		if (!ModLoader.getMinecraftInstance().theWorld.isRemote)
 			return;
-		} else 
-		{
+		else
 			try
-			{
+		{
 				ByteArrayOutputStream bos = new ByteArrayOutputStream();
 				DataOutputStream dos = new DataOutputStream(bos);
 				Packet250CustomPayload pkt = new Packet250CustomPayload();
@@ -385,9 +370,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				pkt.isChunkDataPacket=false;
 
 				TerraFirmaCraft.proxy.sendCustomPacket(pkt);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -416,7 +400,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	public void connectionClosed(INetworkManager manager) 
 	{
 		PlayerInfo playerToRemove = null;
-		
+
 		List<PlayerInfo> players = PlayerManagerTFC.getInstance().Players;
 		for(int i = 0; i < players.size(); i++)
 		{
@@ -427,19 +411,15 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				players.remove(i);
 			}  
 		}
-		
+
 		// Preventive cleanup of integrated server PlayerInfo instance in the case it doesn't call connectionClosed
 		if(playerToRemove != null && manager instanceof MemoryConnection)
-		{
 			for(int i = 0; i < players.size(); i++)
-			{
 				if(playerToRemove.Name == players.get(i).Name)
 				{
 					System.out.println("PlayerManager Successfully removed player " + players.get(i).Name);
 					players.remove(i);
 				}
-			}
-		}
 
 		//		if(TerraFirmaCraft.proxy.isRemote())
 		//			manager.closeConnections();

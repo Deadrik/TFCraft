@@ -29,6 +29,7 @@ import TFC.Blocks.BlockSlab;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.Player.BodyTempStats;
 import TFC.Core.Player.FoodStatsTFC;
+import TFC.Core.Player.SkillStats;
 import TFC.Items.ItemOre;
 import TFC.TileEntities.TileEntityPartial;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -528,6 +529,18 @@ public class TFC_Core
 	public static void setBodyTempStats(EntityPlayer player, BodyTempStats tempStats)
 	{
 		tempStats.writeNBT(player.getEntityData());
+	}
+
+	public static SkillStats getSkillStats(EntityPlayer player)
+	{
+		SkillStats skills = new SkillStats(player);
+		skills.readNBT(player.getEntityData());
+		return skills;
+	}
+
+	public static void setSkillStats(EntityPlayer player, SkillStats skills)
+	{
+		skills.writeNBT(player.getEntityData());
 	}
 
 	public static boolean isNorthSolid(World world, int x, int y, int z)

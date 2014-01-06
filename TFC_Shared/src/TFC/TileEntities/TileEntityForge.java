@@ -15,6 +15,7 @@ import net.minecraft.nbt.NBTTagList;
 import TFC.TFCItems;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.TFCBiome;
@@ -62,60 +63,53 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 		float mod = 1;
 		if(i == 0)
 		{
-			if(fireItemStacks[5] != null) {
+			if(fireItemStacks[5] != null)
 				mod = 0.8F;
-			} else
+			else
 			{
 				mod = 0.6F;
-				if(fireItemStacks[6] == null) {
+				if(fireItemStacks[6] == null)
 					mod = 0.3F;
-				}
 			}
 		}
 		else if(i == 1)
 		{
-			if(fireItemStacks[6] != null) {
+			if(fireItemStacks[6] != null)
 				mod = 0.9F;
-			} else
+			else
 			{
 				mod = 0.7F;
-				if(fireItemStacks[7] == null) {
+				if(fireItemStacks[7] == null)
 					mod = 0.4F;
-				}
 			}
 		}
 		else if(i == 2)
 		{
-			if(fireItemStacks[7] != null) {
+			if(fireItemStacks[7] != null)
 				mod = 1.0F;
-			} else {
+			else
 				mod = 0.5F;
-			}
 		}
 		else if(i == 3)
 		{
-			if(fireItemStacks[8] != null) {
+			if(fireItemStacks[8] != null)
 				mod = 0.9F;
-			} else
+			else
 			{
 				mod = 0.7F;
-				if(fireItemStacks[7] == null) {
+				if(fireItemStacks[7] == null)
 					mod = 0.4F;
-				}
 			}
 		}
 		else if(i == 4)
-		{
-			if(fireItemStacks[9] != null) {
+			if(fireItemStacks[9] != null)
 				mod = 0.8F;
-			} else
+			else
 			{
 				mod = 0.6F;
-				if(fireItemStacks[8] == null) {
+				if(fireItemStacks[8] == null)
 					mod = 0.3F;
-				}
 			}
-		}
 
 		HeatRegistry manager = HeatRegistry.getInstance();
 
@@ -125,11 +119,10 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 
 			inputCompound = fireItemStacks[i].getTagCompound();
 
-			if(inputCompound.hasKey("temperature")) {
+			if(inputCompound.hasKey("temperature"))
 				inputItemTemps[i] = inputCompound.getFloat("temperature");
-			} else {
+			else
 				inputItemTemps[i] = ambientTemp;
-			}
 
 			if(fireTemperature*mod > inputItemTemps[i])
 			{
@@ -171,57 +164,35 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			}
 		}
 		else if(fireItemStacks[i] == null)
-		{
 			inputItemTemps[i] = 0;
-		}
 	}
 
 	private Boolean CheckValidity() 
 	{
-		if(worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord))//Check if the forge can directly see the sky
-		{
+		if(worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord))
 			return true;
-		}
 		else if(!worldObj.isBlockOpaqueCube(xCoord+1, yCoord+1, zCoord) && worldObj.canBlockSeeTheSky(xCoord+1, yCoord+1, zCoord))
-		{
 			return true;
-		}
 		else if(!worldObj.isBlockOpaqueCube(xCoord-1, yCoord+1, zCoord) && worldObj.canBlockSeeTheSky(xCoord-1, yCoord+1, zCoord))
-		{
 			return true;
-		}
 		else if(!worldObj.isBlockOpaqueCube(xCoord, yCoord+1, zCoord+1) && worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord+1))
-		{
 			return true;
-		}
 		else if(!worldObj.isBlockOpaqueCube(xCoord, yCoord+1, zCoord-1) && worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord-1))
-		{
 			return true;
-		}
 		else if(!worldObj.isBlockOpaqueCube(xCoord+1, yCoord+1, zCoord) && !worldObj.isBlockOpaqueCube(xCoord+2, yCoord+1, zCoord) && 
 				worldObj.canBlockSeeTheSky(xCoord+2, yCoord+1, zCoord))
-		{
 			return true;
-		}
 		else if(!worldObj.isBlockOpaqueCube(xCoord-1, yCoord+1, zCoord) && !worldObj.isBlockOpaqueCube(xCoord-2, yCoord+1, zCoord) && 
 				worldObj.canBlockSeeTheSky(xCoord-2, yCoord+1, zCoord))
-		{
 			return true;
-		}
 		else if(!worldObj.isBlockOpaqueCube(xCoord, yCoord+1, zCoord+1) && !worldObj.isBlockOpaqueCube(xCoord, yCoord+1, zCoord+2) && 
 				worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord+2))
-		{
 			return true;
-		}
 		else if(!worldObj.isBlockOpaqueCube(xCoord, yCoord+1, zCoord-1) && !worldObj.isBlockOpaqueCube(xCoord, yCoord+1, zCoord-2) && 
 				worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord-2))
-		{
 			return true;
-		}
 		else
-		{
 			return false;
-		}
 	}
 
 	@Override
@@ -250,9 +221,8 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 				int dam = fireItemStacks[i].getItemDamage();
 				ItemStack is = fireItemStacks[i].copy();
 				//Morph the input
-				if(!(fireItemStacks[i].getItem() instanceof ItemMeltedMetal)) {
+				if(!(fireItemStacks[i].getItem() instanceof ItemMeltedMetal))
 					fireItemStacks[i] = index.getMorph();
-				}
 
 				if(fireItemStacks[i] != null)
 				{
@@ -277,56 +247,47 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 							count = 0;
 							int c = output.stackSize;
 							for(int iterations = 0;c > 0 && iterations <= 20;iterations++)
-							{
 								if(fireItemStacks[10] != null && fireItemStacks[10].getItem().itemID == TFCItems.CeramicMold.itemID)
 								{
 									fireItemStacks[10].stackSize--;
-									if(fireItemStacks[10].stackSize == 0) {
+									if(fireItemStacks[10].stackSize == 0)
 										fireItemStacks[10] = null;
-									}
 									c--;
 									count++;
 								}
 								else if(fireItemStacks[11] != null && fireItemStacks[11].getItem().itemID == TFCItems.CeramicMold.itemID)
 								{
 									fireItemStacks[11].stackSize--;
-									if(fireItemStacks[11].stackSize == 0) {
+									if(fireItemStacks[11].stackSize == 0)
 										fireItemStacks[11] = null;
-									}
 									c--;
 									count++;
 								}
 								else if(fireItemStacks[12] != null && fireItemStacks[12].getItem().itemID == TFCItems.CeramicMold.itemID)
 								{
 									fireItemStacks[12].stackSize--;
-									if(fireItemStacks[12].stackSize == 0) {
+									if(fireItemStacks[12].stackSize == 0)
 										fireItemStacks[12] = null;
-									}
 									c--;
 									count++;
 								}
 								else if(fireItemStacks[13] != null && fireItemStacks[13].getItem().itemID == TFCItems.CeramicMold.itemID)
 								{
 									fireItemStacks[13].stackSize--;
-									if(fireItemStacks[13].stackSize == 0) {
+									if(fireItemStacks[13].stackSize == 0)
 										fireItemStacks[13] = null;
-									}
 									c--;
 									count++;
 								}
-							}
 						}
 						useCount = true;
 					}
 					fireItemStacks[i] = output;
 					if(useCount)
-					{
-						if(count > 0) {
+						if(count > 0)
 							fireItemStacks[i].stackSize = count;
-						} else {
+						else
 							fireItemStacks[i] = null;
-						}
-					}
 
 					HeatIndex index2 = manager.findMatchingIndex(fireItemStacks[i]);
 					if(index2 != null)
@@ -337,9 +298,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 						fireItemStacks[i].stackTagCompound = nbt;
 					}
 					if(fireItemStacks[i] != null && fireItemStacks[i].getItem() instanceof ItemMeltedMetal && is.getItem() instanceof ItemMeltedMetal)
-					{
 						fireItemStacks[i].setItemDamage(dam);
-					}
 				}
 			}
 		}
@@ -358,14 +317,10 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			}
 			ItemStack itemstack1 = fireItemStacks[i].splitStack(j);
 			if(fireItemStacks[i].stackSize == 0)
-			{
 				fireItemStacks[i] = null;
-			}
 			return itemstack1;
 		} else
-		{
 			return null;
-		}
 
 	}
 
@@ -379,7 +334,6 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
-		{
 			if(fireItemStacks[i]!= null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
@@ -390,7 +344,6 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 				worldObj.spawnEntityInWorld(entityitem);
 				fireItemStacks[i] = null;
 			}
-		}
 	}
 
 	@Override
@@ -409,21 +362,13 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	public int getMoldIndex()
 	{
 		if(fireItemStacks[10] != null && fireItemStacks[10].itemID == TFCItems.CeramicMold.itemID)
-		{
 			return 10;
-		}
 		if(fireItemStacks[11] != null && fireItemStacks[11].itemID == TFCItems.CeramicMold.itemID)
-		{
 			return 11;
-		}
 		if(fireItemStacks[12] != null && fireItemStacks[12].itemID == TFCItems.CeramicMold.itemID)
-		{
 			return 12;
-		}
 		if(fireItemStacks[13] != null && fireItemStacks[13].itemID == TFCItems.CeramicMold.itemID)
-		{
 			return 13;
-		}
 		return -1;
 	}
 	@Override
@@ -449,7 +394,6 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	{
 		Random random = new Random();
 		if(fireItemStacks[7] == null)
-		{
 			if(random.nextBoolean() && fireItemStacks[6] != null)
 			{
 				fireItemStacks[7] = fireItemStacks[6];
@@ -460,23 +404,18 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 				fireItemStacks[7] = fireItemStacks[8];
 				fireItemStacks[8] = null;
 			}
-		}
 		if(fireItemStacks[6] == null)
-		{
 			if(fireItemStacks[5] != null)
 			{
 				fireItemStacks[6] = fireItemStacks[5];
 				fireItemStacks[5] = null;
 			}
-		}
 		if(fireItemStacks[8] == null)
-		{
 			if(fireItemStacks[9] != null)
 			{
 				fireItemStacks[8] = fireItemStacks[9];
 				fireItemStacks[9] = null;
 			}
-		}
 	}
 
 	@Override
@@ -510,9 +449,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < fireItemStacks.length)
-			{
 				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 	}
 
@@ -521,9 +458,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	{
 		fireItemStacks[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-		{
 			itemstack.stackSize = getInventoryStackLimit();
-		}
 
 
 	}
@@ -579,18 +514,12 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			//Play the fire sound
 			Random R = new Random();
 			if(R.nextInt(10) == 0 && fireTemperature > 210)
-			{
 				worldObj.playSoundEffect(xCoord,yCoord,zCoord, "fire.fire", 0.4F + (R.nextFloat()/2), 0.7F + R.nextFloat());
-			}
 
 			if(fireTemperature >= 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=1)
-			{
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
-			}
 			else if(fireTemperature < 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=0)
-			{
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
-			}
 
 			//If the fire is still burning and has fuel
 			if(fuelTimeLeft > 0 && fireTemperature >= 210 && (!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
@@ -598,10 +527,12 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 				float desiredTemp = handleTemp();
 
 				handleTempFlux(desiredTemp);
+
+				if(TFCOptions.enableDebugMode)
+					fuelTimeLeft = 9999;
 			}
 			else if(fuelTimeLeft <= 0 && fireTemperature >= 210 && fireItemStacks[7] != null && 
 					(!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
-			{
 				//here we set the temp and burn time based on the fuel in the bottom slot.
 				if(fireItemStacks[7] != null)
 				{
@@ -617,16 +548,12 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 					}
 					fireItemStacks[7] = null;
 				}
-			}
 			//If there is no more fuel and the fire is still hot, we start to cool it off.
 			if(fuelTimeLeft <= 0 && fireTemperature > ambientTemp || (worldObj.isRaining() && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)))
-			{
-				if(airFromBellows == 0) {
+				if(airFromBellows == 0)
 					fireTemperature-=0.125F;
-				} else {
+				else
 					fireTemperature-=0.1F;
-				}
-			}
 
 			//Here we handle the bellows
 			handleAirReduction();
@@ -636,14 +563,9 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 
 			//do a last minute check to verify stack size
 			for(int c = 0; c < 5; c++)
-			{
 				if(fireItemStacks[c] != null)
-				{
-					if(fireItemStacks[c].stackSize <= 0) {
+					if(fireItemStacks[c].stackSize <= 0)
 						fireItemStacks[c].stackSize = 1;
-					}
-				}
-			}
 		}
 	}
 
@@ -662,7 +584,6 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < fireItemStacks.length; i++)
-		{
 			if(fireItemStacks[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -670,7 +591,6 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 				fireItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-		}
 		nbttagcompound.setTag("Items", nbttaglist);
 	}
 
