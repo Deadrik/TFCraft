@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.TerraFirmaCraft;
 import TFC.API.Crafting.AnvilManager;
 import TFC.API.Crafting.AnvilRecipe;
 import TFC.API.Crafting.AnvilReq;
@@ -77,7 +76,6 @@ public class GuiPlanSelection extends GuiContainerTFC
 	{
 		Object[] p = (Object[]) plans.toArray()[guibutton.id];
 		AnvilEntity.setPlan((String)p[0]);
-		player.openGui(TerraFirmaCraft.instance, 21, world, x, y, z);
 	}
 
 	@Override

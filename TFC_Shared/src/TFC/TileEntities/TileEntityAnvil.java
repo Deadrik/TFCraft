@@ -787,6 +787,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			dos.writeInt(zCoord);
 			dos.writeInt(id);
 			dos.writeUTF(s);
+			dos.writeUTF(PlayerManagerTFC.getInstance().getClientPlayer().Name);
 		} catch (IOException e) {
 		}
 
@@ -846,6 +847,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		case 8:
 		{
 			setPlan(inStream.readUTF());
+			this.lastWorker = worldObj.getPlayerEntityByName(inStream.readUTF());
+			this.lastWorker.openGui(TerraFirmaCraft.instance, 21, worldObj, xCoord, yCoord, zCoord);
 			return;
 		}
 		}		
