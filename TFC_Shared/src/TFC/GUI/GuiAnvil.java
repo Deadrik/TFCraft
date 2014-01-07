@@ -128,7 +128,7 @@ public class GuiAnvil extends GuiContainer
 		if(AnvilEntity != null)
 		{
 			int i1 = AnvilEntity.getCraftingValue();
-			drawTexturedModalRect(w + 24 + i1, h + 103, 219, 9, 11, 6);
+			drawTexturedModalRect(w + 27 + i1, h + 103, 213, 10, 5, 5);
 
 			i1 = AnvilEntity.getItemCraftingValue();
 			drawTexturedModalRect(w + 27 + i1, h + 108, 208, 10, 5, 6);
