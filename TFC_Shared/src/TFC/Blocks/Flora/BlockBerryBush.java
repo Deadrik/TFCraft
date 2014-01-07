@@ -226,6 +226,7 @@ public class BlockBerryBush extends BlockTerraContainer
 		{
 			if(!canBlockStay(world, i, j, k))
 			{
+				this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
 				world.setBlockToAir(i, j, k);
 				return;
 			}
