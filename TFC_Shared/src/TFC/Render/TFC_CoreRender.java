@@ -21,6 +21,7 @@ import TFC.TFCBlocks;
 import TFC.API.TFCOptions;
 import TFC.Blocks.Devices.BlockSluice;
 import TFC.Blocks.Flora.BlockFruitLeaves;
+import TFC.Blocks.Flora.BlockTallSeaGrass;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
@@ -749,6 +750,13 @@ public class TFC_CoreRender
 			renderblocks.clearOverrideBlockTexture();
 		}
 		return true;
+	}
+	
+	public static boolean RenderSeaPlant(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks){
+		boolean plantRender,fluidRender;
+		//plantRender = renderblocks.renderCrossedSquares(par1Block, par2, par3, par4);
+		fluidRender = renderblocks.renderBlockFluids(Block.waterMoving, par2, par3, par4);
+		return /*plantRender && */fluidRender;
 	}
 
 	public static Icon getFruitTreeOverlay(IBlockAccess world, int x, int y, int z)

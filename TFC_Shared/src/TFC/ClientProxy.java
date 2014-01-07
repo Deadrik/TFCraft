@@ -114,7 +114,9 @@ import TFC.Render.TESR.TESRFirepit;
 import TFC.Render.TESR.TESRFoodPrep;
 import TFC.Render.TESR.TESRIngotPile;
 import TFC.Render.TESR.TESRPottery;
+import TFC.Render.TESR.TESRSeaWeed;
 import TFC.Render.TESR.TESRToolrack;
+import TFC.TileEntities.TESeaWeed;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityChestTFC;
@@ -210,6 +212,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.crucibleRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderCrucible());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.pipeRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPipeBasic());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.pipeValveRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPipeBasic());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.seaWeedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.berryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBerryBush());
 
 		//Register our overlay changes
@@ -240,6 +243,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TileEntityChestTFC.class, "chest", new TESRChest());
 		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TESRIngotPile());
 		ClientRegistry.registerTileEntity(TileEntityFirepit.class, "firepit",new TESRFirepit());
+		ClientRegistry.registerTileEntity(TESeaWeed.class, "seaweed",new TESRSeaWeed());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TESRPottery());
 		ClientRegistry.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep", new TESRFoodPrep());

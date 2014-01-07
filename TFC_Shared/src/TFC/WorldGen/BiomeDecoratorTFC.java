@@ -8,6 +8,7 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenDeadBush;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Climate;
 import TFC.WorldGen.Generators.WorldGenCustomCactus;
 import TFC.WorldGen.Generators.WorldGenCustomPumpkin;
@@ -15,6 +16,7 @@ import TFC.WorldGen.Generators.WorldGenCustomReed;
 import TFC.WorldGen.Generators.WorldGenCustomSand;
 import TFC.WorldGen.Generators.WorldGenGrowCrops;
 import TFC.WorldGen.Generators.WorldGenLiquidsTFC;
+import TFC.WorldGen.Generators.WorldGenSeaGrass;
 
 public class BiomeDecoratorTFC extends BiomeDecorator
 {
@@ -43,6 +45,8 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 
 	public int cactiPerChunk;
 
+	public int seaweedPerChunk;
+
 	/**
 	 * The number of reeds to generate per chunk. Reeds won't generate if the randomly selected placement is unsuitable.
 	 */
@@ -62,6 +66,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		treesPerChunk = 30;
 
 		this.cactiPerChunk = 2;
+		this.seaweedPerChunk = 3;
 
 		this.reedGen = new WorldGenCustomReed();
 		this.sandGen = new WorldGenCustomSand(7, Block.sand.blockID);
@@ -187,6 +192,14 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			if(temperature > 12 && rainfall < 125) {
 				new WorldGenCustomCactus().generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 			}
+		}
+
+		for (var2 = 0; var2 < this.seaweedPerChunk; ++var2)
+		{
+			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
+			new WorldGenSeaGrass(TFCBlocks.SeaGrass.blockID,TFC_Climate.isSwamp(xCoord, yCoord, zCoord)).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 
 		if (this.generateLakes)

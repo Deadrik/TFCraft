@@ -87,21 +87,30 @@ public class FoodStatsTFC
 				satisfaction = -foodSaturationLevel;
 
 
-
+			float tempWaterMod = temp;
+			if(tempWaterMod >= 30)
+				tempWaterMod = (tempWaterMod-30)*0.1f;
+			else
+				tempWaterMod = 0;
 
 			/*
 			 * Standard filling reduction based upon time.
 			 */
-			if(!player.capabilities.isCreativeMode)this.foodLevel -= bodyTemp.getExtraFood();
-			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength)
-			{
-				this.foodTimer += TFC_Time.hourLength;
-				if (this.foodSaturationLevel > 0.0F)
-					this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
-				else if(!player.capabilities.isCreativeMode)
-					this.foodLevel = Math.max(this.foodLevel - (1 + satisfaction), 0);
+			if(!player.capabilities.isCreativeMode){
+				if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength)
+				{
+					this.foodLevel -= bodyTemp.getExtraFood();
+					//Handle water related ticking
+					if(player.isSprinting()&& !player.capabilities.isCreativeMode)
+						waterLevel -= 5+(tempWaterMod);
+					if(!player.capabilities.isCreativeMode)waterLevel-=bodyTemp.getExtraWater();
+					this.foodTimer += TFC_Time.hourLength;
+					if (this.foodSaturationLevel > 0.0F)
+						this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
+					else if(!player.capabilities.isCreativeMode)
+						this.foodLevel = Math.max(this.foodLevel - (1 + satisfaction), 0);
+				}
 			}
-
 			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.hourLength/2)
 			{
 				this.foodHealTimer += TFC_Time.hourLength/2;
@@ -129,15 +138,7 @@ public class FoodStatsTFC
 				soberTime--;
 			player.getEntityData().setLong("soberTime", soberTime);
 
-			float tempWaterMod = temp;
-			if(tempWaterMod >= 30)
-				tempWaterMod = (tempWaterMod-30)*0.1f;
-			else
-				tempWaterMod = 0;
-			//Handle water related ticking
-			if(player.isSprinting()&& !player.capabilities.isCreativeMode)
-				waterLevel -= 5+(tempWaterMod);
-			if(!player.capabilities.isCreativeMode)waterLevel-=bodyTemp.getExtraWater();
+
 			long time = TFC_Time.getTotalTicks();
 
 			if(player.capabilities.isCreativeMode)

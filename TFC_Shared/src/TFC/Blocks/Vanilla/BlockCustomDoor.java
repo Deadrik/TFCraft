@@ -16,6 +16,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.Recipes;
 import cpw.mods.fml.relauncher.Side;
@@ -29,9 +30,9 @@ public class BlockCustomDoor extends BlockTerra
 			"Maple Door Lower","Maple Door Upper","Ash Door Lower","Ash Door Upper","Pine Door Lower","Pine Door Upper",
 			"Sequoia Door Lower","Sequoia Door Upper","Spruce Door Lower","Spruce Door Upper","Sycamore Door Lower","Sycamore Door Upper",
 			"White Cedar Door Lower","White Cedar Door Upper","White Elm Door Lower","White Elm Door Upper","Willow Door Lower","Willow Door Upper",
-			"Kapok Door Lower","Kapok Door Upper"};
+			"Kapok Door Lower","Kapok Door Upper","Acacia Door Lower","Acacia Door Upper"};
 
-	Icon[] icons = new Icon[32];
+	Icon[] icons = new Icon[Global.WOOD_ALL.length*2];
 	public BlockCustomDoor(int par1, int woodId)
 	{
 		super(par1, Material.wood);

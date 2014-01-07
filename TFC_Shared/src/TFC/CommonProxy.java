@@ -45,6 +45,7 @@ import TFC.TileEntities.TEBerryBush;
 import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TENestBox;
+import TFC.TileEntities.TESeaWeed;
 import TFC.TileEntities.TEStand;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
@@ -136,6 +137,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TENestBox.class, "Nest Box");
 		GameRegistry.registerTileEntity(TEStand.class, "Armour Stand");
 		GameRegistry.registerTileEntity(TEBerryBush.class, "Berry Bush");
+		GameRegistry.registerTileEntity(TESeaWeed.class, "Sea Weed");
 
 		if(b)
 		{
