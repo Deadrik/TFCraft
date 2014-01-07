@@ -398,11 +398,11 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			{
 				AnvilManager manager = AnvilManager.getInstance();
 				Random R = new Random(worldObj.getSeed());
-				AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[WELD1_SLOT],anvilItemStacks[WELD2_SLOT],craftingPlan, 
+				AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[WELD1_SLOT],anvilItemStacks[WELD2_SLOT],"", 
 						0,
 						anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);
 
-				AnvilRecipe recipe2 = new AnvilRecipe(anvilItemStacks[WELD2_SLOT],anvilItemStacks[WELD1_SLOT],craftingPlan,
+				AnvilRecipe recipe2 = new AnvilRecipe(anvilItemStacks[WELD2_SLOT],anvilItemStacks[WELD1_SLOT],"",
 						0,
 						anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);
 
