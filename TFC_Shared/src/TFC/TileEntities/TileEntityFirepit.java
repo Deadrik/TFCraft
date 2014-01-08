@@ -218,7 +218,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 
 					mold = new ItemStack(TFCItems.CeramicMold,1);
 					mold.stackSize = 1;
-					mold.setItemDamage(0);
+					mold.setItemDamage(1);
 				}
 				//Morph the input
 				fireItemStacks[1] = index.getMorph();

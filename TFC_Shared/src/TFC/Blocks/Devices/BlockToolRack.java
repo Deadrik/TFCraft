@@ -27,6 +27,7 @@ import TFC.API.IMultipleBlock;
 import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Items.Tools.ItemProPick;
+import TFC.Items.Tools.ItemSpindle;
 import TFC.Items.Tools.ItemWeapon;
 import TFC.TileEntities.TileEntityToolRack;
 import cpw.mods.fml.relauncher.Side;
@@ -175,7 +176,7 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 						entityplayer.getCurrentEquippedItem().getItem() instanceof ItemHoe || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemProPick || 
 						entityplayer.getCurrentEquippedItem().getItem() instanceof ItemBow || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSword || 
 						entityplayer.getCurrentEquippedItem().getItem() instanceof ItemAxe || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSpade  || 
-						entityplayer.getCurrentEquippedItem().getItem() instanceof ItemShears);
+						entityplayer.getCurrentEquippedItem().getItem() instanceof ItemShears || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSpindle);
 		if(te.storage[slot] == null && hasToolInHand)
 		{
 			te.storage[slot] = entityplayer.getCurrentEquippedItem().copy();
