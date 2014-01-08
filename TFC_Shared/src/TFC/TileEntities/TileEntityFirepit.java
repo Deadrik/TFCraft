@@ -5,6 +5,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 
@@ -29,6 +31,8 @@ import TFC.Core.Vector3f;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.TFCBiome;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityFirepit extends TileEntityFireEntity implements IInventory
 {
@@ -41,7 +45,11 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 	private boolean logPileChecked;
 	public int charcoalCounter;
 	public boolean hasCookingPot;
-
+	
+	private Map<Integer, int[]> topMap = new HashMap<Integer, int[]>();
+	private boolean topScan;
+	private int topY;
+	
 	public final int FIREBURNTIME = (int) ((TFC_Time.hourLength*18)/100);//default 240
 
 	public TileEntityFirepit()
@@ -63,6 +71,8 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 		charcoalCounter = 0;
 		
 		hasCookingPot = false;
+		
+		topScan = true;
 	}
 
 	public Boolean addByproduct(ItemStack is)
@@ -462,7 +472,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 				reachedTop = true;
 			}
 			checkOut(i, j+y, k, empty);
-			scanLogs(i,j+y,k,checkArray,(byte)12,(byte)y,(byte)12, empty);
+			scanLogs(i,j+y,k,checkArray,(byte)12,(byte)y,(byte)12, empty, false);
 			y++;
 		}
 	}
@@ -549,7 +559,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 		return false;
 	}
 
-	private void scanLogs(int i, int j, int k, boolean[][][] checkArray, byte x, byte y, byte z, boolean empty)
+	private void scanLogs(int i, int j, int k, boolean[][][] checkArray, byte x, byte y, byte z, boolean empty, boolean top)
 	{
 		if(y >= 0)
 		{
@@ -564,7 +574,11 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 					{
 						if(!checkArray[x+offsetX][y][z+offsetZ] && checkOut(i+offsetX, j, k+offsetZ, empty))
 						{
-							scanLogs(i+offsetX, j, k+offsetZ, checkArray,(byte)(x+offsetX),y,(byte)(z+offsetZ), empty);
+							scanLogs(i+offsetX, j, k+offsetZ, checkArray,(byte)(x+offsetX),y,(byte)(z+offsetZ), empty, top);
+							if(top)
+							{
+								topMap.put(topMap.size(), new int[] {i+offsetX, j+2, k+offsetZ});
+							}
 						}
 					}
 				}
@@ -734,6 +748,8 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 	@Override
 	public void updateEntity()
 	{
+		Random R = new Random();
+		
 		int Surrounded = getSurroundedByWood(xCoord,yCoord,zCoord);
 		if(fireTemperature > 210 && worldObj.getBlockId(xCoord, yCoord+1, zCoord) == TFCBlocks.LogPile.blockID)
 		{
@@ -746,14 +762,16 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 				}
 				externalFireCheckTimer = 100;
 			}
+			
+			if(R.nextInt(5) == 0) {
+				if(worldObj.isRemote) { GenerateSmoke(); }
+			}
 		}
 		else
 		{
 			charcoalCounter = 0;
 			logPileChecked = false;
 		}
-
-		Random R = new Random();            
 
 		if(!worldObj.isRemote)
 		{
@@ -1000,4 +1018,41 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 		hasCookingPot = inStream.readBoolean();
 	}
 	
+	@SideOnly(Side.CLIENT)
+	public void GenerateSmoke() {
+		if(topScan)
+		{
+			int y=0;
+			topY = yCoord;
+			boolean checkArray[][][] = new boolean[25][13][25];
+			while(worldObj.getBlockId(xCoord, topY+1, zCoord) == TFCBlocks.LogPile.blockID)
+			{
+				++topY;
+				++y;
+			}
+			topMap.put(0, new int[] {xCoord, topY+2, zCoord});
+			scanLogs(xCoord,topY,zCoord,checkArray,(byte)12,(byte)y,(byte)12, false, true);
+			topScan = false;
+		}
+		
+		Random random = new Random();
+		int sbkey = random.nextInt(topMap.size());
+		int[] sb = (int[])topMap.get(sbkey);
+		
+		int x = sb[0];
+		int y = sb[1];
+		int z = sb[2];
+		if(worldObj.getBlockId(x, y, z) == 0)
+		{
+			float f = (float) x + 0.5F;
+			float f1 = y + 0.1F + random.nextFloat() * 6F / 16F;
+			float f2 = (float) z + 0.5F;
+			float f4 = random.nextFloat() * 0.6F;
+			float f5 = random.nextFloat() * -0.6F;
+			worldObj.spawnParticle("smoke", f+f4 - 0.3F, f1, f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
+			worldObj.spawnParticle("smoke", f+f4 - 0.2F, f1, f2 + f5 + 0.4F, 0.0D, 0.0D, 0.0D);
+			worldObj.spawnParticle("smoke", f+f4 - 0.1F, f1, f2 + f5 + 0.1F, 0.0D, 0.0D, 0.0D);
+			if(random.nextInt(10) == 0) worldObj.spawnParticle("largesmoke", f+f4 - 0.2F, f1, f2 + f5 + 0.2F, 0.0D, 0.0D, 0.0D);
+		}
+	}
 }
