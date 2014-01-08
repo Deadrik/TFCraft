@@ -199,7 +199,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-			new WorldGenSeaGrass(TFCBlocks.SeaGrass.blockID,TFC_Climate.isSwamp(xCoord, yCoord, zCoord)).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+			new WorldGenSeaGrass(TFCBlocks.SeaGrassStill.blockID,TFC_Climate.isSwamp(xCoord, yCoord, zCoord)).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 
 		if (this.generateLakes)

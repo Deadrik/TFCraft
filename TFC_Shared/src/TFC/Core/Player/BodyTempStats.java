@@ -57,7 +57,7 @@ public class BodyTempStats
 				temperatureLevel++;
 			temperatureLevel+=applyTemperatureFromHeatSources(player);
 		}
-		if((player.isSprinting() || player.swingProgress != 0)&& rand.nextInt(1000- (getBaseBodyTempMod(player) )/2 ) == 0 )
+		if((player.isSprinting() || player.swingProgress != 0)&& rand.nextInt(1000- (getBaseBodyTempMod(player) )/2 ) < 20 )
 			temperatureLevel++;
 		if(temperatureLevel > 1 && rand.nextInt(1500 - (player.isInWater()?1000:0))<20 && food.waterLevel >= 500)
 			temperatureLevel--;
@@ -130,7 +130,7 @@ public class BodyTempStats
 			returnAmount += ((IClothing)itemLegs.getItem()).getThermal();
 		if(itemFeet !=null)
 			returnAmount += ((IClothing)itemFeet.getItem()).getThermal();
-		return returnAmount*2;
+		return returnAmount;
 	}
 
 	private void tellPlayerMessage(EntityPlayer player){

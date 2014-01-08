@@ -2,6 +2,8 @@ package TFC.Blocks.Vanilla;
 
 import java.util.Random;
 
+import TFC.Blocks.Flora.BlockTallSeaGrassFlowing;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlowing;
 import net.minecraft.block.material.Material;
@@ -51,7 +53,7 @@ public class BlockCustomFlowing extends BlockCustomFluid
 	/**
 	 * Updates the flow for the BlockFlowing object.
 	 */
-	private void updateFlow(World par1World, int par2, int par3, int par4)
+	protected void updateFlow(World par1World, int par2, int par3, int par4)
 	{
 		int var5 = par1World.getBlockMetadata(par2, par3, par4);
 		par1World.setBlock(par2, par3, par4, this.blockID + 1, var5, 2);
@@ -163,11 +165,11 @@ public class BlockCustomFlowing extends BlockCustomFluid
 
 			if (var6 >= 8)
 			{
-				this.flowIntoBlock(par1World, par2, par3 - 1, par4, var6);
+				this.flowIntoBlock(par1World, par2, par3 - 1, par4,par2, par3, par4, var6);
 			}
 			else
 			{
-				this.flowIntoBlock(par1World, par2, par3 - 1, par4, var6 + 8);
+				this.flowIntoBlock(par1World, par2, par3 - 1, par4,par2, par3, par4, var6 + 8);
 			}
 		}
 		else if (var6 >= 0 && (var6 == 0 || this.blockBlocksFlow(par1World, par2, par3 - 1, par4)))
@@ -187,22 +189,22 @@ public class BlockCustomFlowing extends BlockCustomFluid
 
 			if (var13[0])
 			{
-				this.flowIntoBlock(par1World, par2 - 1, par3, par4, var10);
+				this.flowIntoBlock(par1World, par2 - 1, par3, par4,par2, par3, par4, var10);
 			}
 
 			if (var13[1])
 			{
-				this.flowIntoBlock(par1World, par2 + 1, par3, par4, var10);
+				this.flowIntoBlock(par1World, par2 + 1, par3, par4,par2, par3, par4, var10);
 			}
 
 			if (var13[2])
 			{
-				this.flowIntoBlock(par1World, par2, par3, par4 - 1, var10);
+				this.flowIntoBlock(par1World, par2, par3, par4 - 1,par2, par3, par4, var10);
 			}
 
 			if (var13[3])
 			{
-				this.flowIntoBlock(par1World, par2, par3, par4 + 1, var10);
+				this.flowIntoBlock(par1World, par2, par3, par4 + 1,par2, par3, par4, var10);
 			}
 		}
 	}
@@ -211,25 +213,24 @@ public class BlockCustomFlowing extends BlockCustomFluid
 	 * flowIntoBlock(World world, int x, int y, int z, int newFlowDecay) - Flows into the block at the coordinates and
 	 * changes the block type to the liquid.
 	 */
-	private void flowIntoBlock(World par1World, int par2, int par3, int par4, int par5)
+	protected void flowIntoBlock(World world, int x, int y, int z, int oldX , int oldY , int oldZ, int newFlowDecay)
 	{
-		if (this.liquidCanDisplaceBlock(par1World, par2, par3, par4))
+		if (this.liquidCanDisplaceBlock(world, x, y, z))
 		{
-			int i1 = par1World.getBlockId(par2, par3, par4);
+			int i1 = world.getBlockId(x, y, z);
 
 			if (i1 > 0)
 			{
 				if (this.blockMaterial == Material.lava)
 				{
-					this.triggerLavaMixEffects(par1World, par2, par3, par4);
+					this.triggerLavaMixEffects(world, x, y, z);
 				}
 				else
 				{
-					Block.blocksList[i1].dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
+					Block.blocksList[i1].dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
 				}
 			}
-
-			par1World.setBlock(par2, par3, par4, this.blockID, par5, 2);
+			world.setBlock(x, y, z, this.blockID, newFlowDecay, 2);
 		}
 	}
 
@@ -417,7 +418,7 @@ public class BlockCustomFlowing extends BlockCustomFluid
 	/**
 	 * Returns true if the block at the coordinates can be displaced by the liquid.
 	 */
-	private boolean liquidCanDisplaceBlock(World par1World, int par2, int par3, int par4)
+	protected boolean liquidCanDisplaceBlock(World par1World, int par2, int par3, int par4)
 	{
 		Material var5 = par1World.getBlockMaterial(par2, par3, par4);
 		return var5 == this.blockMaterial ? false : (var5 == Material.lava ? false : !this.blockBlocksFlow(par1World, par2, par3, par4));

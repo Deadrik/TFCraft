@@ -18,12 +18,12 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TESeaWeed extends NetworkTileEntity {
 	private int type = -1;
-
+	
 	public TESeaWeed(){
 	}
 
 	public void setType(int type){	
-			if(this.type == -1){
+			if(this.type < 0){
 				this.type = type;
 			}
 	}

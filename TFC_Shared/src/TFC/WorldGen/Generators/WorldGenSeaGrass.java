@@ -2,7 +2,7 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 import TFC.*;
-import TFC.Blocks.Flora.BlockTallSeaGrass;
+import TFC.Blocks.Flora.BlockTallSeaGrassStill;
 import TFC.Core.TFC_Core;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -71,7 +71,7 @@ public class WorldGenSeaGrass extends WorldGenerator
 					}
 				}
 				var8++;
-				if(!randomTooDeepFlag && depthCounter >0&&((BlockTallSeaGrass)Block.blocksList[this.plantBlockId]).canBlockStay(par1World, var7, var8, var9))
+				if(!randomTooDeepFlag && depthCounter >0&&((BlockTallSeaGrassStill)Block.blocksList[this.plantBlockId]).canBlockStay(par1World, var7, var8, var9))
 				{
 					par1World.setBlock(var7, var8, var9, this.plantBlockId,0,1);
 					//Gravelly areas will spawn fewer plants

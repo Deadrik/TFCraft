@@ -54,7 +54,8 @@ import TFC.Blocks.Flora.BlockLogHoriz;
 import TFC.Blocks.Flora.BlockLogHoriz2;
 import TFC.Blocks.Flora.BlockLogVert;
 import TFC.Blocks.Flora.BlockLogVert2;
-import TFC.Blocks.Flora.BlockTallSeaGrass;
+import TFC.Blocks.Flora.BlockTallSeaGrassFlowing;
+import TFC.Blocks.Flora.BlockTallSeaGrassStill;
 import TFC.Blocks.Terrain.BlockDryGrass;
 import TFC.Blocks.Terrain.BlockFreshWaterFlowing;
 import TFC.Blocks.Terrain.BlockFreshWaterStill;
@@ -293,7 +294,8 @@ public class TFCBlocks
 	public static Block HotWaterStill;
 	public static Block HotWaterFlowing;
 	
-	public static Block SeaGrass;
+	public static Block SeaGrassStill;
+	public static Block SeaGrassFlowing;
 
 	public static void RegisterBlocks()
 	{
@@ -416,7 +418,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(HotWaterStill,"HotWaterStill");
 		GameRegistry.registerBlock(HotWaterFlowing,"HotWaterFlowing");
 		
-		GameRegistry.registerBlock(SeaGrass,"SeaGrass");
+		GameRegistry.registerBlock(SeaGrassStill,"SeaGrassStill");
+		GameRegistry.registerBlock(SeaGrassFlowing,"SeaGrassFlowing");
 
 		// Wooden Doors
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
@@ -663,7 +666,8 @@ public class TFCBlocks
 		TFCBlocks.HotWaterFlowing = (new BlockHotWaterFlowing(TFCBlockID.HotWaterFlowing)).setHardness(100.0F).setLightOpacity(9).setUnlocalizedName("water");
 		TFCBlocks.HotWaterStill  = (new BlockHotWaterStill(TFCBlockID.HotWaterStill)).setHardness(100.0F).setLightOpacity(9).setUnlocalizedName("water");
 		
-		TFCBlocks.SeaGrass = new BlockTallSeaGrass(TFCBlockID.SeaGrass).setUnlocalizedName("SeaGrass").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
+		TFCBlocks.SeaGrassStill = new BlockTallSeaGrassStill(TFCBlockID.SeaGrassStill).setUnlocalizedName("SeaGrassStill").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
+		TFCBlocks.SeaGrassFlowing = new BlockTallSeaGrassFlowing(TFCBlockID.SeaGrassFlowing).setUnlocalizedName("SeaGrassFlowing").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

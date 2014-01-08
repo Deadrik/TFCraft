@@ -150,7 +150,8 @@ public class TFCBlockID
 	public static int HotWaterFlowing			= 2138;
 	public static int HotWaterStill				= 2139;
 	
-	public static int SeaGrass					= 2140;
+	public static int SeaGrassFlowing			= 2140;
+	public static int SeaGrassStill				= 2141;
 
 
 	static Configuration config;

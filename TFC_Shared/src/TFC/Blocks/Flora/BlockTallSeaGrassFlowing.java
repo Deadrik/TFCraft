@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockFlowing;
 import net.minecraft.block.BlockFluid;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.ITileEntityProvider;
@@ -15,6 +16,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -26,6 +28,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.Blocks.Vanilla.BlockCustomFlowing;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.Recipes;
@@ -34,13 +37,13 @@ import TFC.TileEntities.TESeaWeed;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockTallSeaGrass extends BlockFluid implements ITileEntityProvider
+public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITileEntityProvider
 {
-	public BlockTallSeaGrass(int par1)
+	public BlockTallSeaGrassFlowing(int par1)
 	{
 		super(par1, Material.water);
-		float var3 = 0.4F;
-		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.8F, 0.5F + var3);
+		float var3 = 0.5F;
+		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 1.0F, 0.5F + var3);
 	}
 
 	@Override
@@ -92,16 +95,16 @@ public class BlockTallSeaGrass extends BlockFluid implements ITileEntityProvider
 	@Override
 	public void breakBlock(World world, int i, int j, int k, int l, int id)
 	{
-		super.breakBlock(world, i, j, k, l, id);
 		if(world.isAirBlock(i, j, k)){
 			TESeaWeed te = (TESeaWeed)(world.getBlockTileEntity(i, j, k));
 			if(te != null){
-				if(te.getType() == 1)
+				if(te.getType() == 1 || te.getType() == 2)
 					world.setBlock(i, j, k, TFCBlocks.FreshWaterStill.blockID, 0, 1);
 				else if(te.getType()==0)
 					world.setBlock(i, j, k, Block.waterStill.blockID, 0, 1);
 			}
 		}
+		super.breakBlock(world, i, j, k, l, id);
 	}
 
 	@Override
@@ -129,6 +132,22 @@ public class BlockTallSeaGrass extends BlockFluid implements ITileEntityProvider
 	{
 		return true;//TFC_Core.isSaltWater(par1)|| TFC_Core.isFreshWater(par1);
 	}
+	
+	@Override
+	protected void updateFlow(World par1World, int par2, int par3, int par4)
+	{
+		int var5 = par1World.getBlockMetadata(par2, par3, par4);
+		TESeaWeed te = (TESeaWeed)(par1World.getBlockTileEntity(par2,par3,par4));
+		int type = -1;
+		if(te!=null){
+			type = te.getType();
+		}
+		par1World.setBlock(par2, par3, par4, this.blockID + 1, var5, 2);
+		te = (TESeaWeed)(par1World.getBlockTileEntity(par2,par3,par4));
+		if(te!=null){
+			te.setType(type);
+		}
+	}
 
 	/**
 	 * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
@@ -147,18 +166,24 @@ public class BlockTallSeaGrass extends BlockFluid implements ITileEntityProvider
 
 	@Override
 	public void onBlockAdded(World world,int i,int j,int k){
-		int type = -1;
+		int type = 0;
 		if(!world.isAirBlock(i, j+1, k)){
 			type = TFC_Core.isFreshWater(world.getBlockId(i, j+1, k))?1:0;
 		}
 		else if(TFC_Core.isFreshWater(world.getBlockId(i+1, j, k))||
-				TFC_Core.isFreshWater(world.getBlockId(i, j+1, k+1))||
-				TFC_Core.isFreshWater(world.getBlockId(i-1, j+1, k))||
-				TFC_Core.isFreshWater(world.getBlockId(i, j+1, k-1))){
+				TFC_Core.isFreshWater(world.getBlockId(i, j, k+1))||
+				TFC_Core.isFreshWater(world.getBlockId(i-1, j, k))||
+				TFC_Core.isFreshWater(world.getBlockId(i, j, k-1))){
 			type = 2;
 		}
 		TESeaWeed te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
 		te.setType(type);
+	}
+
+	@Override
+	public boolean canCollideCheck(int par1, boolean par2)
+	{
+		return true;
 	}
 
 	public static ItemStack GetSeeds(Random R)
@@ -208,6 +233,44 @@ public class BlockTallSeaGrass extends BlockFluid implements ITileEntityProvider
 		return is;
 	}
 
+	@Override
+	protected void flowIntoBlock(World world, int x, int y, int z, int oldX , int oldY , int oldZ, int newFlowDecay)
+	{
+		if (this.liquidCanDisplaceBlock(world, x, y, z))
+		{
+			int i1 = world.getBlockId(x, y, z);
+
+			if (i1 > 0)
+			{
+				if (this.blockMaterial == Material.lava)
+				{
+					this.triggerLavaMixEffects(world, x, y, z);
+				}
+				else
+				{
+					Block.blocksList[i1].dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+				}
+			}
+
+			TESeaWeed te = (TESeaWeed)(world.getBlockTileEntity(oldX, oldY, oldZ));
+			int type = -1;
+			if(te != null)
+			{
+				te.getType();
+			}
+			if(!world.isRemote){
+				System.out.println("The type was "+type + " and the TE was " + (te!=null?te:"not found") + ", from the Flowing block.");
+			}
+			switch(type)
+			{
+			case 0: world.setBlock(x, y, z, Block.waterMoving.blockID, newFlowDecay, 2); break;
+			case 1:
+			case 2: world.setBlock(x, y, z, TFCBlocks.FreshWaterFlowing.blockID, newFlowDecay, 2); break;
+			default: break;
+			}
+		}
+	}
+
 	/**
 	 * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
 	 * blockID passed in. Args: blockID
@@ -233,7 +296,18 @@ public class BlockTallSeaGrass extends BlockFluid implements ITileEntityProvider
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		this.checkFlowerChange(par1World, par2, par3, par4);
+		TESeaWeed te = (TESeaWeed)(par1World.getBlockTileEntity(par2, par3, par4));
+		int type = -1;
+		if(te!= null){
+			type = te.getType();
+		}
+		System.out.println("Before the update tick, the type was " + type);
 		super.updateTick(par1World, par2, par3, par4, par5Random);
+		te = (TESeaWeed)(par1World.getBlockTileEntity(par2, par3, par4));
+		if(te!= null){
+			System.out.println("After the update tick, the type is "+te.getType());
+			te.setType(type);
+		}
 	}
 
 	protected final void checkFlowerChange(World par1World, int par2, int par3, int par4)

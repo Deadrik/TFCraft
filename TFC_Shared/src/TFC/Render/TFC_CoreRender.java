@@ -21,7 +21,7 @@ import TFC.TFCBlocks;
 import TFC.API.TFCOptions;
 import TFC.Blocks.Devices.BlockSluice;
 import TFC.Blocks.Flora.BlockFruitLeaves;
-import TFC.Blocks.Flora.BlockTallSeaGrass;
+import TFC.Blocks.Flora.BlockTallSeaGrassStill;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;

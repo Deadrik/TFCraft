@@ -50,7 +50,7 @@ public class BlockCustomStationary extends BlockCustomFluid
 	/**
 	 * Changes the block ID to that of an updating fluid.
 	 */
-	private void setNotStationary(World world, int i, int j, int k)
+	protected void setNotStationary(World world, int i, int j, int k)
 	{
 		BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
 
