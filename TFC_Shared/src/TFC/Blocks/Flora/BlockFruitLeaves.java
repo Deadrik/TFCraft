@@ -123,7 +123,7 @@ public class BlockFruitLeaves extends BlockTerra
 			{
 				if(temp >= fi2.minTemp && temp < fi2.maxTemp)
 				{
-					if(fi2.inHarvest(TFC_Time.currentMonth))
+					if(fi2.inHarvest(TFC_Time.getSeason(k)))
 					{
 						if(rand.nextInt(50) == 0)
 						{
@@ -145,7 +145,7 @@ public class BlockFruitLeaves extends BlockTerra
 			}
 			if(fi != null)
 			{
-				if(!fi.inHarvest(TFC_Time.currentMonth))
+				if(!fi.inHarvest(TFC_Time.getSeason(k)))
 				{
 					if(world.getBlockMetadata(i, j, k) >= 8)
 					{
@@ -381,7 +381,7 @@ public class BlockFruitLeaves extends BlockTerra
 			FloraManager manager = FloraManager.getInstance();
 			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(blockID, world.getBlockMetadata(i, j, k) & 7));
 
-			if(fi != null && (fi.inHarvest(TFC_Time.currentMonth) || fi.inHarvest(TFC_Time.lastMonth)) && (meta & 8) == 8)
+			if(fi != null && (fi.inHarvest(TFC_Time.getSeason(k)) || fi.inHarvest(((TFC_Time.getSeason(k)-1)+12)%12) && (meta & 8) == 8))
 			{
 				world.setBlockMetadataWithNotify(i, j, k, meta - 8, 3);
 				dropBlockAsItem_do(world, i, j, k, fi.getOutput());

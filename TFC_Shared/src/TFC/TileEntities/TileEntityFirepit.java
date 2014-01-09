@@ -24,6 +24,7 @@ import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.Enums.EnumWoodMaterial;
+import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
@@ -805,14 +806,14 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 				if(fireTemperature > 210 && index != null)
 				{
 					inputCompound = new NBTTagCompound();
-					inputCompound.setFloat("temperature",  ((TFCBiome)worldObj.getBiomeGenForCoords(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord)+10);
+					inputCompound.setFloat("temperature",  TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord)+10);
 					fireItemStacks[1].setTagCompound(inputCompound);
-					inputItemTemp = ((TFCBiome)worldObj.getBiomeGenForCoords(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord);
+					inputItemTemp = TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord);
 				}
 			}
 			else if(fireItemStacks[1] == null)
 			{
-				inputItemTemp =  ((TFCBiome)worldObj.getBiomeGenForCoords(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord);
+				inputItemTemp =  TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord);
 			}
 			hasCookingPot = (fireItemStacks[1]!= null && fireItemStacks[1].getItem() == TFCItems.PotteryPot);
 			updateGui();
@@ -837,7 +838,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 			if(ambientTemp == -1000)	
 			{
 				TFCBiome biome = (TFCBiome) worldObj.getBiomeGenForCoords(xCoord, zCoord);
-				ambientTemp = biome.getHeightAdjustedTemperature(yCoord);
+				ambientTemp = TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord);
 			}
 			//here we set the various temperatures to range
 			this.keepTempToRange();

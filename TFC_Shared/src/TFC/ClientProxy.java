@@ -363,7 +363,7 @@ public class ClientProxy extends CommonProxy
 		}
 		else if(par1IBlockAccess.getBlockId(i, j, k) == Block.vine.blockID)
 		{
-			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December && 
+			if(TFC_Time.getSeason(k) >= 6 && TFC_Time.getSeason(k) < 9 && 
 					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
 			{
 				int color = 0;
@@ -379,7 +379,7 @@ public class ClientProxy extends CommonProxy
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
 			}
-			else if(TFC_Time.currentMonth >= TFC_Time.February || TFC_Time.currentMonth <= TFC_Time.March && 
+			else if(TFC_Time.getSeason(k) >= 11 || TFC_Time.getSeason(k) <= 0 && 
 					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
@@ -395,7 +395,7 @@ public class ClientProxy extends CommonProxy
 				return x;
 
 			}
-			else if(TFC_Time.currentMonth >= 9 && 
+			else if(TFC_Time.getSeason(k) >= 9 && 
 					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
@@ -426,7 +426,7 @@ public class ClientProxy extends CommonProxy
 		}
 		else
 		{
-			if(TFC_Time.currentMonth >= TFC_Time.September && EnumTree.values()[meta].isEvergreen)
+			if(TFC_Time.getSeason(k) >= 6 && EnumTree.values()[meta].isEvergreen)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{
@@ -440,7 +440,7 @@ public class ClientProxy extends CommonProxy
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
 			}
-			else if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
+			else if(TFC_Time.getSeason(k) >= 6 && TFC_Time.getSeason(k) < 9 && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
 			{
 				int color = 0;
 				//Get the fade multiplie
@@ -456,7 +456,7 @@ public class ClientProxy extends CommonProxy
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
 			}
-			else if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December && (meta == 6))
+			else if(TFC_Time.getSeason(k) >= 6 && TFC_Time.getSeason(k) < 9 && (meta == 6))
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{
@@ -470,7 +470,7 @@ public class ClientProxy extends CommonProxy
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
 			}
-			else if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December && !(meta == 15))
+			else if(TFC_Time.getSeason(k) >= 6 && TFC_Time.getSeason(k) < 9 && !(meta == 15))
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{
@@ -484,7 +484,7 @@ public class ClientProxy extends CommonProxy
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
 			}
-			else if(TFC_Time.currentMonth >= TFC_Time.September && !(meta == 15))
+			else if(TFC_Time.getSeason(k) >= 6 && !(meta == 15))
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{

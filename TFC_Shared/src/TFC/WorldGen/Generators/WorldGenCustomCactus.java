@@ -37,7 +37,7 @@ public class WorldGenCustomCactus extends WorldGenerator
 {
     public boolean generate(World world, Random random, int i, int j, int k)
     {
-        for (int var6 = 0; var6 < 10; ++var6)
+        for (int var6 = 0; var6 < random.nextInt(2)+1; ++var6)
         {
             int xCoord = i + random.nextInt(8) - random.nextInt(8);
             int yCoord = j + random.nextInt(4) - random.nextInt(4);

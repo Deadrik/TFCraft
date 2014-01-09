@@ -52,38 +52,4 @@ public class BiomeGenJungleTFC extends TFCBiome
 	{
 		return par1Random.nextInt(4) == 0 ? grass2Gen : grass1Gen;
 	}
-
-	@Override
-	protected float getMonthTemp(int month)
-	{
-		switch(month)
-		{
-		case 11:
-			return 0.9F;
-		case 0:
-			return 0.92F;
-		case 1:
-			return 0.94F;
-		case 2:
-			return 0.96F;
-		case 3:
-			return 0.98F; 
-		case 4:
-			return 1F;
-		case 5:
-			return 0.98F;
-		case 6:
-			return 0.96F;
-		case 7:
-			return 0.94F;
-		case 8:
-			return 0.92F;
-		case 9:
-			return 0.90F;
-		case 10:
-			return 0.88F;
-		default:
-			return 1F;
-		}
-	}
 }

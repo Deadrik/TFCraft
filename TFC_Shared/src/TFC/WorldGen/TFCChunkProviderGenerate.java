@@ -221,7 +221,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	public static List getCreatureSpawnsByChunk(World world,BiomeGenBase biome, int x, int z){
 		List spawnableCreatureList = new ArrayList();
 		spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class,24,0,0));
-		float temp = TFC_Climate.getBioTemperature(x, z);
+		float temp = TFC_Climate.getBioTemperatureHeight(x, world.getTopSolidOrLiquidBlock(x, z), z);
 		float rain = TFC_Climate.getRainfall(x, 150, z);
 		float evt = TFC_Climate.manager.getEVTLayerAt(x, z).floatdata1;
 		boolean isMountainous = biome == TFCBiome.Mountains || biome == TFCBiome.HighHills;

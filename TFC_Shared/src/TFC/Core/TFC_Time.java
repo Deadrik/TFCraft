@@ -122,12 +122,28 @@ public class TFC_Time
 		return (int)years2;
 	}
 
+	/**Explicit month value, use getSeason(int zCoord) for anything related to a season, ie Summer, Winter etc.
+	 * 
+	 * @return		explicit month value
+	 */
 	public static int getMonth()
 	{
 		long totalmonths = getTotalMonths();
 		long totalmonths2 = totalmonths / 12;
 		long totalmonths3 = totalmonths-(totalmonths2*12);
 		return (int)totalmonths3;
+	}
+	/**Southern hemisphere reverses the season. Use getMonth() for the explicit month
+	 * 
+	 * @param z		integer z-coordinate
+	 * @return		adjusted season value
+	 */
+	public static int getSeason(int z)
+	{
+		if(z > 0){
+			return (getMonth()+6)%12;
+		}
+		return getMonth();
 	}
 
 	public static int getYear()
@@ -171,33 +187,37 @@ public class TFC_Time
 		return  h;
 	}
 
-	public static boolean isSpring()
+	public static boolean isSpring(int z)
 	{
-		if(getDayOfYear() >= 20 && getDayOfYear() <= 111) {
+		int day = (getDayOfYear() + (z > 0? (daysInYear)/2:0))%daysInYear;
+		if(day >= 20 && day <= 111) {
 			return true;
 		}
 
 		return false;
 	}
-	public static boolean isSummer()
+	public static boolean isSummer(int z)
 	{
-		if(getDayOfYear() >= 112 && getDayOfYear() <= 202) {
+		int day = (getDayOfYear() + (z > 0? (daysInYear)/2:0))%daysInYear;
+		if(day >= 112 && day <= 202) {
 			return true;
 		}
 
 		return false;
 	}
-	public static boolean isFall()
+	public static boolean isFall(int z)
 	{
-		if(getDayOfYear() >= 203 && getDayOfYear() <= 293) {
+		int day = (getDayOfYear() + (z > 0? (daysInYear)/2:0))%daysInYear;
+		if(day >= 203 && day <= 293) {
 			return true;
 		}
 
 		return false;
 	}
-	public static boolean isWinter()
+	public static boolean isWinter(int z)
 	{
-		if(getDayOfYear() >= 294 || getDayOfYear() < 20) {
+		int day = (getDayOfYear() + (z > 0? (daysInYear)/2:0))%daysInYear;
+		if(day >= 294 || day < 20) {
 			return true;
 		}
 
@@ -210,6 +230,19 @@ public class TFC_Time
 			day = daysInYear + day;
 		}
 		return day / (daysInMonth);
+	}
+	/**
+	 * Season is reversed in southern Hemisphere
+	 * @param day		day of year
+	 * @param z			integer z-coordinate
+	 * @return			adjusted season value
+	 */
+	public static int getSeasonFromDayOfYear(int day, int z)
+	{
+		if(day < 0) {
+			day = daysInYear + day;
+		}
+		return ((day / (daysInMonth))+(z>0?6:0))%12;
 	}
 
 	public static int getDayOfMonthFromDayOfYear(int day)

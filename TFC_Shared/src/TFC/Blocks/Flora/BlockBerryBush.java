@@ -239,7 +239,7 @@ public class BlockBerryBush extends BlockTerraContainer
 
 				if(_temp >= _fi.minTemp && _temp < _fi.maxTemp)
 				{
-					if(_fi.inHarvest(TFC_Time.currentMonth) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > _fi.fruitHangTime)
+					if(_fi.inHarvest(TFC_Time.getSeason(k)) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > _fi.fruitHangTime)
 					{
 						te.hasFruit = true;
 						te.dayFruited = (int) TFC_Time.getTotalDays();

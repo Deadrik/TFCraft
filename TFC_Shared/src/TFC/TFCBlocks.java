@@ -661,10 +661,10 @@ public class TFCBlocks
 
 		TFCBlocks.BerryBush = new BlockBerryBush(TFCBlockID.BerryBush).setUnlocalizedName("BerryBush").setHardness(0.3f).setStepSound(Block.soundGrassFootstep);
 
-		TFCBlocks.FreshWaterFlowing = (new BlockFreshWaterFlowing(TFCBlockID.FreshWaterFlowing)).setHardness(100.0F).setLightOpacity(6).setUnlocalizedName("water");
-		TFCBlocks.FreshWaterStill  = (new BlockFreshWaterStill(TFCBlockID.FreshWaterStill)).setHardness(100.0F).setLightOpacity(6).setUnlocalizedName("water");
-		TFCBlocks.HotWaterFlowing = (new BlockHotWaterFlowing(TFCBlockID.HotWaterFlowing)).setHardness(100.0F).setLightOpacity(9).setUnlocalizedName("water");
-		TFCBlocks.HotWaterStill  = (new BlockHotWaterStill(TFCBlockID.HotWaterStill)).setHardness(100.0F).setLightOpacity(9).setUnlocalizedName("water");
+		TFCBlocks.FreshWaterFlowing = (new BlockFreshWaterFlowing(TFCBlockID.FreshWaterFlowing)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water");
+		TFCBlocks.FreshWaterStill  = (new BlockFreshWaterStill(TFCBlockID.FreshWaterStill)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water");
+		TFCBlocks.HotWaterFlowing = (new BlockHotWaterFlowing(TFCBlockID.HotWaterFlowing)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water").setCreativeTab(CreativeTabs.tabDecorations);
+		TFCBlocks.HotWaterStill  = (new BlockHotWaterStill(TFCBlockID.HotWaterStill)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water").setCreativeTab(CreativeTabs.tabDecorations);
 		
 		TFCBlocks.SeaGrassStill = new BlockTallSeaGrassStill(TFCBlockID.SeaGrassStill).setUnlocalizedName("SeaGrassStill").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 		TFCBlocks.SeaGrassFlowing = new BlockTallSeaGrassFlowing(TFCBlockID.SeaGrassFlowing).setUnlocalizedName("SeaGrassFlowing").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);

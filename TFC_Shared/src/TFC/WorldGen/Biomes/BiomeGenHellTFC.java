@@ -33,10 +33,4 @@ public class BiomeGenHellTFC extends TFCBiome
 		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 0;
 		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 0;
 	}
-
-	@Override
-	protected float getMonthTemp(int month)
-	{
-		return 1F;
-	}
 }

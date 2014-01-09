@@ -16,6 +16,7 @@ import TFC.TFCItems;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.TFCOptions;
+import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.TFCBiome;
@@ -506,7 +507,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			if(ambientTemp == -1000)	
 			{
 				TFCBiome biome = (TFCBiome) worldObj.getBiomeGenForCoords(xCoord, zCoord);
-				ambientTemp = biome.getHeightAdjustedTemperature(yCoord);
+				ambientTemp = TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord);
 			}
 			//here we set the various temperatures to range
 			this.keepTempToRange();
