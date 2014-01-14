@@ -59,7 +59,7 @@ public class BlockFrozenSeaGrass extends BlockCustomIce implements ITileEntityPr
 	@Override
 	public Icon getIcon(int par1, int par2)
 	{
-		return Block.blocksList[Block.ice.blockID].getIcon(0,0);
+		return Block.blocksList[Block.ice.blockID].getIcon(par1,par2);
 	}
 
 	public int getBlockMeltId(World world, int i, int j, int k, boolean moving){

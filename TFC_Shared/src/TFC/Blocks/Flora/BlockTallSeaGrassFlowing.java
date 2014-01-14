@@ -131,7 +131,6 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 		int blockId = world.getBlockId(i,j,k);
 		if(blockId == Block.ice.blockID){
 			world.setBlock(i, j, k, TFCBlocks.SeaGrassFrozen.blockID);
-			System.out.println("Setting to frozen sea grass");
 		}
 		super.breakBlock(world, i, j, k, l, id);
 		if(blockId == Block.ice.blockID){
@@ -301,9 +300,6 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 			{
 				type = te.getType();
 			}
-			if(!world.isRemote){
-				System.out.println("The type was "+type + " and the TE was " + (te!=null?te:"not found") + ", from the Flowing block.");
-			}
 			switch(type)
 			{
 			case 0: world.setBlock(x, y, z, Block.waterMoving.blockID, newFlowDecay, 2); break;
@@ -344,11 +340,9 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 		if(te!= null){
 			type = te.getType();
 		}
-		System.out.println("Before the update tick, the type was " + type);
 		super.updateTick(par1World, par2, par3, par4, par5Random);
 		te = (TESeaWeed)(par1World.getBlockTileEntity(par2, par3, par4));
 		if(te!= null){
-			System.out.println("After the update tick, the type is "+te.getType());
 			te.setType(type);
 		}
 	}

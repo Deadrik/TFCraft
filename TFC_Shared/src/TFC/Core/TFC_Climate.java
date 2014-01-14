@@ -175,9 +175,9 @@ public class TFC_Climate
 		{
 
 			float zMod = getZFactor(z);
-			float zTemp = (zMod * getMaxTemperature())-20;
+			float zTemp = (zMod * getMaxTemperature())-25 + ((zMod - 0.5f)*10);
 
-			float rainMod = 1-manager.getRainfallLayerAt(x, z).floatdata1/4000;
+			float rainMod = 1-((manager.getRainfallLayerAt(x, z).floatdata1*zMod)/4000);
 
 			int _month = TFC_Time.getSeasonFromDayOfYear(day,z);
 			int _lastmonth = TFC_Time.getSeasonFromDayOfYear(day-TFC_Time.daysInMonth,z);
@@ -234,11 +234,11 @@ public class TFC_Climate
 		if(manager!= null)
 		{
 			float zMod = getZFactor(z);
-			float zTemp = (zMod * getMaxTemperature())-20;
+			float zTemp = (zMod * getMaxTemperature())-25 + ((zMod - 0.5f)*10);
 
 
 			float rain = manager.getRainfallLayerAt(x, z).floatdata1;
-			float rainMod = 1-(rain/4000);
+			float rainMod = 1-(rain*zMod/4000);
 
 			int _season = TFC_Time.getSeasonFromDayOfYear(day,z);
 			int _lastseason = TFC_Time.getSeasonFromDayOfYear(day-TFC_Time.daysInMonth,z);
@@ -374,8 +374,8 @@ public class TFC_Climate
 		for(int i = 0; i < 12; i++)
 		{
 			float t = getHeightAdjustedBioTemp(i*TFC_Time.daysInMonth, x, y, z);
-			if(t < 0)
-				t = 0;
+			//if(t < 0)
+			//	t = 0;
 
 			temp += t;
 		}

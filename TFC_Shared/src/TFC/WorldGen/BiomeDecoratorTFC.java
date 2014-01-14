@@ -14,6 +14,7 @@ import TFC.WorldGen.Generators.WorldGenCustomCactus;
 import TFC.WorldGen.Generators.WorldGenCustomPumpkin;
 import TFC.WorldGen.Generators.WorldGenCustomReed;
 import TFC.WorldGen.Generators.WorldGenCustomSand;
+import TFC.WorldGen.Generators.WorldGenCustomWaterlily;
 import TFC.WorldGen.Generators.WorldGenGrowCrops;
 import TFC.WorldGen.Generators.WorldGenLiquidsTFC;
 import TFC.WorldGen.Generators.WorldGenSeaGrass;
@@ -70,6 +71,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 
 		this.reedGen = new WorldGenCustomReed();
 		this.sandGen = new WorldGenCustomSand(7, Block.sand.blockID);
+		this.waterlilyGen = new WorldGenCustomWaterlily();
 		biome = par1BiomeGenBase;
 	}
 

@@ -2,6 +2,7 @@ package TFC;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockLilyPad;
 import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -97,6 +98,7 @@ import TFC.Blocks.Vanilla.BlockCustomFlowing;
 import TFC.Blocks.Vanilla.BlockCustomIce;
 import TFC.Blocks.Vanilla.BlockCustomLeaves;
 import TFC.Blocks.Vanilla.BlockCustomLeaves2;
+import TFC.Blocks.Vanilla.BlockCustomLilyPad;
 import TFC.Blocks.Vanilla.BlockCustomMushroom;
 import TFC.Blocks.Vanilla.BlockCustomPumpkin;
 import TFC.Blocks.Vanilla.BlockCustomReed;
@@ -478,6 +480,7 @@ public class TFCBlocks
 		Block.blocksList[86] = null;
 		Block.blocksList[106] = null;
 		Block.blocksList[107] = null;
+		Block.blocksList[111] = null;
 		Block.blocksList[125].setCreativeTab(null);
 		Block.blocksList[126].setCreativeTab(null);
 		Block.blocksList[134].setCreativeTab(null);
@@ -510,6 +513,7 @@ public class TFCBlocks
 		Block.blocksList[86] = (new BlockCustomPumpkin(86, false)).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("pumpkin").setTextureName("pumpkin");
 		Block.blocksList[106] = (new BlockCustomVine(106)).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("vine").setTextureName("vine");
 		Block.blocksList[107] = (new BlockCustomFenceGate(107)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("fenceGate");
+		Block.blocksList[111] = (new BlockCustomLilyPad(111)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("waterlily").setTextureName("waterlily");
 		Block.blocksList[143] = (new BlockCustomButtonWood(143)).setHardness(0.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("button");
 
 		TFCBlocks.Planks = Block.blocksList[5];

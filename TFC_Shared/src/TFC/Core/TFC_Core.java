@@ -336,6 +336,27 @@ public class TFC_Core
 			return true;
 		return false;
 	}
+	
+	public static boolean isFreshWaterIncludeIce(int id, int meta)
+	{
+		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID || (id == Block.ice.blockID && meta != 0))
+			return true;
+		return false;
+	}
+	
+	public static boolean isWaterStill(int id)
+	{
+		if(id == Block.waterStill.blockID || id == TFCBlocks.FreshWaterStill.blockID)
+			return true;
+		return false;
+	}
+	
+	public static boolean isWaterMoving(int id)
+	{
+		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == Block.waterMoving.blockID)
+			return true;
+		return false;
+	}
 
 	public static boolean isSoil(int id)
 	{

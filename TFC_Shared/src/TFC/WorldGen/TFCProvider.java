@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
@@ -17,6 +18,7 @@ import net.minecraftforge.client.IRenderHandler;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
+import TFC.TileEntities.TESeaWeed;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -160,8 +162,17 @@ public class TFCProvider extends WorldProvider
 		if (TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
 		{
 			Material mat = worldObj.getBlockMaterial(x, y, z);
-
-			return (mat == Material.water || mat == Material.ice);
+			int id = worldObj.getBlockId(x,y,z);
+			boolean salty = TFC_Core.isSaltWater(id);
+			TileEntity te = (worldObj.getBlockTileEntity(x, y, z));
+			if(te!=null && te instanceof TESeaWeed){
+				//in case the block is salty sea grass, we don't want that to freeze when it's too warm
+				salty = salty || (((TESeaWeed)te).getType()==0);
+			}
+			if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= -17.78){
+				salty = false;
+			}
+			return (mat == Material.water || mat == Material.ice) && !salty;
 		}
 
 		return false;

@@ -43,7 +43,13 @@ public class BlockCustomSnow extends BlockTerra
 	{
 		if (!this.canPlaceBlockAt(par1World, par2, par3, par4))
 		{
+			int meta = par1World.getBlockMetadata(par2, par3, par4);
+			if(meta <= 1){
 			par1World.setBlockToAir(par2, par3, par4);
+			}
+			else{
+				par1World.setBlockMetadataWithNotify(par2, par3,par4, meta - 1, 1);
+			}
 			return false;
 		}
 		else

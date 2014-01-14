@@ -1,13 +1,24 @@
 package TFC.Blocks.Vanilla;
 
+import static net.minecraftforge.common.ForgeDirection.UP;
+
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import TFC.Reference;
 import TFC.TFCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockIce;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.IPlantable;
 
 public class BlockCustomIce extends BlockIce
 {
@@ -31,6 +42,78 @@ public class BlockCustomIce extends BlockIce
 			par1World.setBlock(par3, par4, par5, getBlockMeltId(par1World,par3,par4,par5,true), 0, 2);
 		}
 	}
+	
+	@Override
+	/**
+     * Determines if this block can support the passed in plant, allowing it to be planted and grow.
+     * Some examples:
+     *   Reeds check if its a reed, or if its sand/dirt/grass and adjacent to water
+     *   Cacti checks if its a cacti, or if its sand
+     *   Nether types check for soul sand
+     *   Crops check for tilled soil
+     *   Caves check if it's a colid surface
+     *   Plains check if its grass or dirt
+     *   Water check if its still water
+     *
+     * @param world The current world
+     * @param x X Position
+     * @param y Y Position
+     * @param z Z position
+     * @param direction The direction relative to the given position the plant wants to be, typically its UP
+     * @param plant The plant that wants to check
+     * @return True to allow the plant to be planted/stay.
+     */
+    public boolean canSustainPlant(World world, int x, int y, int z, ForgeDirection direction, IPlantable plant)
+    {
+        int plantID = plant.getPlantID(world, x, y + 1, z);
+        EnumPlantType plantType = plant.getPlantType(world, x, y + 1, z);
+        int meta = world.getBlockMetadata(x,y,z);
+
+        if (plantID == cactus.blockID && blockID == cactus.blockID)
+        {
+            return true;
+        }
+
+        if (plantID == reed.blockID && blockID == reed.blockID)
+        {
+            return true;
+        }
+
+        if (plant instanceof BlockCustomLilyPad && ((BlockCustomLilyPad)plant).canThisPlantGrowOnThisBlockID(blockID,meta))
+        {
+            return true;
+        }
+
+        switch (plantType)
+        {
+            case Desert: return blockID == sand.blockID;
+            case Nether: return blockID == slowSand.blockID;
+            case Crop:   return blockID == tilledField.blockID;
+            case Cave:   return isBlockSolidOnSide(world, x, y, z, UP);
+            case Plains: return blockID == grass.blockID || blockID == dirt.blockID;
+            case Water:  return world.getBlockMaterial(x, y, z) == Material.water && world.getBlockMetadata(x, y, z) == 0;
+            case Beach:
+                boolean isBeach = (blockID == Block.grass.blockID || blockID == Block.dirt.blockID || blockID == Block.sand.blockID);
+                boolean hasWater = (world.getBlockMaterial(x - 1, y, z    ) == Material.water ||
+                                    world.getBlockMaterial(x + 1, y, z    ) == Material.water ||
+                                    world.getBlockMaterial(x,     y, z - 1) == Material.water ||
+                                    world.getBlockMaterial(x,     y, z + 1) == Material.water);
+                return isBeach && hasWater;
+        }
+
+        return false;
+    }
+	
+	@Override
+	public int getLightOpacity(World world, int x, int y, int z)
+    {
+		int meta = world.getBlockMetadata(x,y,z);
+		if (meta == 0){
+			//sea ice is cloudy
+			return 9;
+		}
+        return lightOpacity[blockID];
+    }
 
 	public int getBlockMeltId(World world, int i, int j, int k, boolean moving){
 		int meta = world.getBlockMetadata(i,j,k);
@@ -38,6 +121,28 @@ public class BlockCustomIce extends BlockIce
 		case 0: return moving? Block.waterMoving.blockID : Block.waterStill.blockID;
 		case 1: return moving? TFCBlocks.FreshWaterFlowing.blockID : TFCBlocks.FreshWaterStill.blockID;
 		default: return 0;
+		}
+	}
+	
+	Icon seaIce;
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerIcons(IconRegister registerer)
+	{
+		seaIce = registerer.registerIcon(Reference.ModID + ":" + "seaIce");
+		super.registerIcons(registerer);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public Icon getIcon(int par1, int par2)
+	{
+		if(par2 == 0){
+			return this.seaIce;
+		}
+		else{
+			return super.getIcon(par1, par2);
 		}
 	}
 
