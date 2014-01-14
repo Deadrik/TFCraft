@@ -751,11 +751,25 @@ public class TFC_CoreRender
 		}
 		return true;
 	}
-	
+
 	public static boolean RenderSeaPlant(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks){
 		boolean plantRender,fluidRender;
 		//plantRender = renderblocks.renderCrossedSquares(par1Block, par2, par3, par4);
-		fluidRender = renderblocks.renderBlockFluids(Block.waterMoving, par2, par3, par4);
+		if(par1Block.blockID == TFCBlocks.SeaGrassFrozen.blockID){
+			fluidRender = RenderSeaPlantFrozen(par1Block,par2,par3,par4,renderblocks);
+		}
+		else{
+			fluidRender = renderblocks.renderBlockFluids(par1Block, par2, par3, par4);
+		}
+		//fluidRender = renderblocks.renderStandardBlock(Block.blocksList[Block.ice.blockID],par2,par3,par4);
+		return /*plantRender && */fluidRender;
+	}
+
+	public static boolean RenderSeaPlantFrozen(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks){
+		boolean plantRender,fluidRender;
+		//plantRender = renderblocks.renderCrossedSquares(par1Block, par2, par3, par4);
+		//fluidRender = renderblocks.renderBlockFluids(Block.waterMoving, par2, par3, par4);
+		fluidRender = renderblocks.renderStandardBlock(par1Block,par2,par3,par4);
 		return /*plantRender && */fluidRender;
 	}
 
@@ -985,8 +999,8 @@ public class TFC_CoreRender
 
 		return true;
 	}
-	
-	
+
+
 	private static void drawCrossedSquares(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
 		Tessellator var9 = Tessellator.instance;

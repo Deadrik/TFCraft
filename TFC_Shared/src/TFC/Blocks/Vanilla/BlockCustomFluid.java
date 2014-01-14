@@ -14,6 +14,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
+import TFC.TileEntities.TESeaWeed;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.relauncher.Side;
@@ -191,7 +192,22 @@ public abstract class BlockCustomFluid extends Block
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
+
 		super.updateTick(par1World, par2, par3, par4, par5Random);
+
+	}
+
+	@Override
+	public void breakBlock(World world, int i, int j, int k, int id, int l)
+	{
+		Material m = world.getBlockMaterial(i, j, k);
+		int blockID = world.getBlockId(i,j,k);
+		super.breakBlock(world, i, j, k, id, l);
+		if(m == Block.ice.blockMaterial){
+			if(blockID == TFCBlocks.FreshWaterStill.blockID || blockID == TFCBlocks.FreshWaterFlowing.blockID){
+				world.setBlockMetadataWithNotify(i,j,k,1,1);
+			}
+		}
 	}
 
 	protected BlockCustomFluid(int par1, Material par2Material)

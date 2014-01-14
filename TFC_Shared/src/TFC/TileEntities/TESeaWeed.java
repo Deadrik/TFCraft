@@ -23,7 +23,7 @@ public class TESeaWeed extends NetworkTileEntity {
 	}
 
 	public void setType(int type){	
-			if(this.type < 0){
+			if(this.type < 0 && type >= 0){
 				this.type = type;
 			}
 	}

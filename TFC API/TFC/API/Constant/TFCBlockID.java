@@ -152,6 +152,7 @@ public class TFCBlockID
 	
 	public static int SeaGrassFlowing			= 2140;
 	public static int SeaGrassStill				= 2141;
+	public static int SeaGrassFrozen			= 2142;
 
 
 	static Configuration config;

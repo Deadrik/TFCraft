@@ -45,13 +45,32 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 		float var3 = 0.5F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 1.0F, 0.5F + var3);
 	}
-
+	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
 	{
-		double var1 = 0.5D;
-		double var3 = 1.0D;
-		return ColorizerGrassTFC.getGrassColor(var1, var3);
+		return 16777215;
+	}
+	
+	@Override
+	public float getBlockBrightness(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	{
+		float var5 = par1IBlockAccess.getLightBrightness(par2, par3, par4);
+		float var6 = par1IBlockAccess.getLightBrightness(par2, par3+1, par4);
+		return var5 > var6 ? var5 : var6;
+	}
+	
+	@Override
+	public int getMixedBrightnessForBlock(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	{
+		int var5 = par1IBlockAccess.getLightBrightnessForSkyBlocks(par2, par3, par4, 0);
+		int var6 = par1IBlockAccess.getLightBrightnessForSkyBlocks(par2, par3+1, par4, 0);
+		int var7 = var5 & 255;
+		int var8 = var6 & 255;
+		int var9 = var5 >> 16 & 255;
+		int var10 = var6 >> 16 & 255;
+		return (var7 > var8 ? var7 : var8) | (var9 > var10 ? var9 : var10) << 16;
 	}
 
 	@Override
@@ -61,9 +80,17 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	/**
+	 * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
+	 * when first determining what to render.
+	 */
 	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
-		return TerraFirmaCraft.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
+		if (this.blockMaterial != Material.water)
+			return 16777215;
+		else
+			return TerraFirmaCraft.proxy.waterColorMultiplier(par1IBlockAccess, par2, par3, par4);
 	}
 
 	@Override
@@ -95,16 +122,32 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 	@Override
 	public void breakBlock(World world, int i, int j, int k, int l, int id)
 	{
+		TESeaWeed te = (TESeaWeed)(world.getBlockTileEntity(i, j, k));
+		int type = -1;
+		if(te != null){
+			type = te.getType();
+		}
+		
+		int blockId = world.getBlockId(i,j,k);
+		if(blockId == Block.ice.blockID){
+			world.setBlock(i, j, k, TFCBlocks.SeaGrassFrozen.blockID);
+			System.out.println("Setting to frozen sea grass");
+		}
+		super.breakBlock(world, i, j, k, l, id);
+		if(blockId == Block.ice.blockID){
+			world.setBlockMetadataWithNotify(i, j, k, type, 1);
+			te = (TESeaWeed)(world.getBlockTileEntity(i, j, k));
+			te.setType(type);
+		}
+		
 		if(world.isAirBlock(i, j, k)){
-			TESeaWeed te = (TESeaWeed)(world.getBlockTileEntity(i, j, k));
 			if(te != null){
-				if(te.getType() == 1 || te.getType() == 2)
+				if(type == 1 || type == 2)
 					world.setBlock(i, j, k, TFCBlocks.FreshWaterStill.blockID, 0, 1);
-				else if(te.getType()==0)
+				else if(type==0)
 					world.setBlock(i, j, k, Block.waterStill.blockID, 0, 1);
 			}
 		}
-		super.breakBlock(world, i, j, k, l, id);
 	}
 
 	@Override
@@ -256,7 +299,7 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 			int type = -1;
 			if(te != null)
 			{
-				te.getType();
+				type = te.getType();
 			}
 			if(!world.isRemote){
 				System.out.println("The type was "+type + " and the TE was " + (te!=null?te:"not found") + ", from the Flowing block.");
@@ -346,7 +389,7 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 	@Override
 	public Icon getIcon(int par1, int par2)
 	{
-		return this.seaWeed;
+		return TFCBlocks.FreshWaterFlowing.getIcon(par1, par2);//this.seaWeed;
 	}
 
 	@Override

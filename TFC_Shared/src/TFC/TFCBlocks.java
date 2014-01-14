@@ -48,6 +48,7 @@ import TFC.Blocks.Devices.BlockToolRack;
 import TFC.Blocks.Devices.BlockToolRack2;
 import TFC.Blocks.Flora.BlockBerryBush;
 import TFC.Blocks.Flora.BlockFlora;
+import TFC.Blocks.Flora.BlockFrozenSeaGrass;
 import TFC.Blocks.Flora.BlockFruitLeaves;
 import TFC.Blocks.Flora.BlockFruitWood;
 import TFC.Blocks.Flora.BlockLogHoriz;
@@ -295,6 +296,7 @@ public class TFCBlocks
 	public static Block HotWaterFlowing;
 	
 	public static Block SeaGrassStill;
+	public static Block SeaGrassFrozen;
 	public static Block SeaGrassFlowing;
 
 	public static void RegisterBlocks()
@@ -419,6 +421,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(HotWaterFlowing,"HotWaterFlowing");
 		
 		GameRegistry.registerBlock(SeaGrassStill,"SeaGrassStill");
+		GameRegistry.registerBlock(SeaGrassFrozen,"SeaGrassFrozen");
 		GameRegistry.registerBlock(SeaGrassFlowing,"SeaGrassFlowing");
 
 		// Wooden Doors
@@ -667,6 +670,7 @@ public class TFCBlocks
 		TFCBlocks.HotWaterStill  = (new BlockHotWaterStill(TFCBlockID.HotWaterStill)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water").setCreativeTab(CreativeTabs.tabDecorations);
 		
 		TFCBlocks.SeaGrassStill = new BlockTallSeaGrassStill(TFCBlockID.SeaGrassStill).setUnlocalizedName("SeaGrassStill").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
+		TFCBlocks.SeaGrassFrozen = (new BlockFrozenSeaGrass(TFCBlockID.SeaGrassFrozen)).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("seagrassice");
 		TFCBlocks.SeaGrassFlowing = new BlockTallSeaGrassFlowing(TFCBlockID.SeaGrassFlowing).setUnlocalizedName("SeaGrassFlowing").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
