@@ -31,6 +31,7 @@ import TFC.Entities.Mobs.EntityPigTFC;
 import TFC.Entities.Mobs.EntitySheepTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.WorldGen.Generators.WorldGenFissure;
+import TFC.WorldGen.Generators.WorldGenFissureCluster;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 {
@@ -152,6 +153,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		new MapGenRavineTFC(110, 30).generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//surface
 		new MapGenRavineTFC(20, 50).generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//deep
 		new MapGenRiverRavine().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+		//Underground Lava
+		new WorldGenFissure(Block.lavaStill,2, true, 25).setUnderground(true, 20).setSeed(1).generate(this, rand, worldObj, chunkX, chunkZ);
+		//Surface Hotsprings
+		new WorldGenFissureCluster().generate(this, rand, worldObj, chunkX, chunkZ);
 
 		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
@@ -279,7 +284,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		//Swamp
 		if(TFC_Climate.isSwamp(x,150,z))
 			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
-			spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1+mountainousAreaModifier, 1, 1));
+		spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1+mountainousAreaModifier, 1, 1));
 
 		return spawnableCreatureList;
 	}
