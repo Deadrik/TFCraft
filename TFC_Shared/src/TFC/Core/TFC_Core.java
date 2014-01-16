@@ -330,6 +330,13 @@ public class TFC_Core
 		return false;
 	}
 	
+	public static boolean isSaltWaterIncludeIce(int id, int meta)
+	{
+		if(id == Block.waterMoving.blockID || id == Block.waterStill.blockID || (id == Block.ice.blockID && meta == 0))
+			return true;
+		return false;
+	}
+	
 	public static boolean isFreshWater(int id)
 	{
 		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID)

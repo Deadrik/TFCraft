@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import TFC.Reference;
 import TFC.TFCBlocks;
+import TFC.WorldGen.TFCProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockIce;
 import net.minecraft.block.material.Material;
@@ -44,76 +45,94 @@ public class BlockCustomIce extends BlockIce
 	}
 	
 	@Override
+	public void breakBlock(World world, int i, int j, int k, int l, int id)
+	{
+		if(world.getBlockId(i,j,k)==Block.waterStill.blockID && l != 0){
+			world.setBlock(i,j,k,TFCBlocks.FreshWaterStill.blockID);
+		}
+		else if( world.getBlockId(i,j,k)==Block.waterMoving.blockID && l != 0){
+			world.setBlock(i,j,k,TFCBlocks.FreshWaterFlowing.blockID);
+		}
+		else if(world.getBlockId(i,j,k)==TFCBlocks.FreshWaterStill.blockID && l != 1){
+			world.setBlock(i,j,k,Block.waterStill.blockID);
+		}
+		else if( world.getBlockId(i,j,k)==TFCBlocks.FreshWaterFlowing.blockID && l != 1){
+			world.setBlock(i,j,k,Block.waterMoving.blockID);
+		}
+		super.breakBlock(world,i,j,k,l,id);
+	}
+
+	@Override
 	/**
-     * Determines if this block can support the passed in plant, allowing it to be planted and grow.
-     * Some examples:
-     *   Reeds check if its a reed, or if its sand/dirt/grass and adjacent to water
-     *   Cacti checks if its a cacti, or if its sand
-     *   Nether types check for soul sand
-     *   Crops check for tilled soil
-     *   Caves check if it's a colid surface
-     *   Plains check if its grass or dirt
-     *   Water check if its still water
-     *
-     * @param world The current world
-     * @param x X Position
-     * @param y Y Position
-     * @param z Z position
-     * @param direction The direction relative to the given position the plant wants to be, typically its UP
-     * @param plant The plant that wants to check
-     * @return True to allow the plant to be planted/stay.
-     */
-    public boolean canSustainPlant(World world, int x, int y, int z, ForgeDirection direction, IPlantable plant)
-    {
-        int plantID = plant.getPlantID(world, x, y + 1, z);
-        EnumPlantType plantType = plant.getPlantType(world, x, y + 1, z);
-        int meta = world.getBlockMetadata(x,y,z);
+	 * Determines if this block can support the passed in plant, allowing it to be planted and grow.
+	 * Some examples:
+	 *   Reeds check if its a reed, or if its sand/dirt/grass and adjacent to water
+	 *   Cacti checks if its a cacti, or if its sand
+	 *   Nether types check for soul sand
+	 *   Crops check for tilled soil
+	 *   Caves check if it's a colid surface
+	 *   Plains check if its grass or dirt
+	 *   Water check if its still water
+	 *
+	 * @param world The current world
+	 * @param x X Position
+	 * @param y Y Position
+	 * @param z Z position
+	 * @param direction The direction relative to the given position the plant wants to be, typically its UP
+	 * @param plant The plant that wants to check
+	 * @return True to allow the plant to be planted/stay.
+	 */
+	public boolean canSustainPlant(World world, int x, int y, int z, ForgeDirection direction, IPlantable plant)
+	{
+		int plantID = plant.getPlantID(world, x, y + 1, z);
+		EnumPlantType plantType = plant.getPlantType(world, x, y + 1, z);
+		int meta = world.getBlockMetadata(x,y,z);
 
-        if (plantID == cactus.blockID && blockID == cactus.blockID)
-        {
-            return true;
-        }
+		if (plantID == cactus.blockID && blockID == cactus.blockID)
+		{
+			return true;
+		}
 
-        if (plantID == reed.blockID && blockID == reed.blockID)
-        {
-            return true;
-        }
+		if (plantID == reed.blockID && blockID == reed.blockID)
+		{
+			return true;
+		}
 
-        if (plant instanceof BlockCustomLilyPad && ((BlockCustomLilyPad)plant).canThisPlantGrowOnThisBlockID(blockID,meta))
-        {
-            return true;
-        }
+		if (plant instanceof BlockCustomLilyPad && ((BlockCustomLilyPad)plant).canThisPlantGrowOnThisBlockID(blockID,meta))
+		{
+			return true;
+		}
 
-        switch (plantType)
-        {
-            case Desert: return blockID == sand.blockID;
-            case Nether: return blockID == slowSand.blockID;
-            case Crop:   return blockID == tilledField.blockID;
-            case Cave:   return isBlockSolidOnSide(world, x, y, z, UP);
-            case Plains: return blockID == grass.blockID || blockID == dirt.blockID;
-            case Water:  return world.getBlockMaterial(x, y, z) == Material.water && world.getBlockMetadata(x, y, z) == 0;
-            case Beach:
-                boolean isBeach = (blockID == Block.grass.blockID || blockID == Block.dirt.blockID || blockID == Block.sand.blockID);
-                boolean hasWater = (world.getBlockMaterial(x - 1, y, z    ) == Material.water ||
-                                    world.getBlockMaterial(x + 1, y, z    ) == Material.water ||
-                                    world.getBlockMaterial(x,     y, z - 1) == Material.water ||
-                                    world.getBlockMaterial(x,     y, z + 1) == Material.water);
-                return isBeach && hasWater;
-        }
+		switch (plantType)
+		{
+		case Desert: return blockID == sand.blockID;
+		case Nether: return blockID == slowSand.blockID;
+		case Crop:   return blockID == tilledField.blockID;
+		case Cave:   return isBlockSolidOnSide(world, x, y, z, UP);
+		case Plains: return blockID == grass.blockID || blockID == dirt.blockID;
+		case Water:  return world.getBlockMaterial(x, y, z) == Material.water && world.getBlockMetadata(x, y, z) == 0;
+		case Beach:
+			boolean isBeach = (blockID == Block.grass.blockID || blockID == Block.dirt.blockID || blockID == Block.sand.blockID);
+			boolean hasWater = (world.getBlockMaterial(x - 1, y, z    ) == Material.water ||
+					world.getBlockMaterial(x + 1, y, z    ) == Material.water ||
+					world.getBlockMaterial(x,     y, z - 1) == Material.water ||
+					world.getBlockMaterial(x,     y, z + 1) == Material.water);
+			return isBeach && hasWater;
+		}
 
-        return false;
-    }
-	
+		return false;
+	}
+
 	@Override
 	public int getLightOpacity(World world, int x, int y, int z)
-    {
+	{
 		int meta = world.getBlockMetadata(x,y,z);
 		if (meta == 0){
 			//sea ice is cloudy
 			return 9;
 		}
-        return lightOpacity[blockID];
-    }
+		return lightOpacity[blockID];
+	}
 
 	public int getBlockMeltId(World world, int i, int j, int k, boolean moving){
 		int meta = world.getBlockMetadata(i,j,k);
@@ -123,9 +142,9 @@ public class BlockCustomIce extends BlockIce
 		default: return 0;
 		}
 	}
-	
+
 	Icon seaIce;
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IconRegister registerer)
@@ -152,25 +171,27 @@ public class BlockCustomIce extends BlockIce
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
-		if (!world.canBlockFreeze(i, j, k, false))
-		{
-			if (world.getBlockId(i, j+1, k) == Block.snow.blockID)
+		if((world.provider) instanceof TFCProvider){
+			if (!((TFCProvider)(world.provider)).canBlockFreezeTFC(i, j, k, false))
 			{
-				int meta = world.getBlockMetadata(i, j+1, k);
-				if (meta > 0) {
-					world.setBlockMetadataWithNotify(i, j+1, k, meta-1, 2);
+				if (world.getBlockId(i, j+1, k) == Block.snow.blockID)
+				{
+					int meta = world.getBlockMetadata(i, j+1, k);
+					if (meta > 0) {
+						world.setBlockMetadataWithNotify(i, j+1, k, meta-1, 2);
+					} else {
+						world.setBlockToAir(i, j+1, k);
+					}
 				} else {
-					world.setBlockToAir(i, j+1, k);
+					this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
+					world.setBlock(i, j, k, getBlockMeltId(world,i,j,k,false), 0, 2);
 				}
-			} else {
 				this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
-				world.setBlock(i, j, k, getBlockMeltId(world,i,j,k,false), 0, 2);
-			}
-			this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
-			if(j > 143){
-				world.setBlock(i, j, k, getBlockMeltId(world,i,j,k,true), 0, 2);
-			} else {
-				world.setBlock(i, j, k, getBlockMeltId(world,i,j,k,false), 0, 2);
+				if(j > 143){
+					world.setBlock(i, j, k, getBlockMeltId(world,i,j,k,true), 0, 2);
+				} else {
+					world.setBlock(i, j, k, getBlockMeltId(world,i,j,k,false), 0, 2);
+				}
 			}
 		}
 	}

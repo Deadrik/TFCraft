@@ -5,16 +5,20 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.client.IRenderHandler;
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
@@ -46,23 +50,6 @@ public class TFCProvider extends WorldProvider
 		int var3 = this.worldObj.getFirstUncoveredBlock(par1, par2);
 		//return var3 == Block.grass.blockID;
 		return TFC_Core.isGrass(var3);
-	}
-
-	@Override
-	public float calculateCelestialAngle(long par1, float par3)
-	{
-		int var4 = (int)(par1 % TFC_Time.dayLength);
-		float var5 = (var4 + par3) / TFC_Time.dayLength - 0.25F;
-
-		if (var5 < 0.0F)
-			++var5;
-		else if (var5 > 1.0F)
-			--var5;
-
-		float var6 = var5;
-		var5 = 1.0F - (float)((Math.cos(var5 * Math.PI) + 1.0D) / 2.0D);
-		var5 = var6 + (var5 - var6) / 3.0F;
-		return var5;
 	}
 
 	@Override
@@ -163,11 +150,59 @@ public class TFCProvider extends WorldProvider
 		{
 			Material mat = worldObj.getBlockMaterial(x, y, z);
 			int id = worldObj.getBlockId(x,y,z);
+			int meta = worldObj.getBlockMetadata(x, y, z);
+			boolean salty = TFC_Core.isSaltWaterIncludeIce(id,meta);
+			TileEntity te = (worldObj.getBlockTileEntity(x, y, z));
+			if(te!=null && te instanceof TESeaWeed){
+				//in case the block is salty sea grass, we don't want that to freeze when it's too warm
+				salty = salty || (((TESeaWeed)te).getType()!=1 && ((TESeaWeed)te).getType()!=2);
+			}
+			if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= -17.78){
+				salty = false;
+			}
+			if((mat == Material.water || mat == Material.ice) && !salty){
+				
+				if(id == TFCBlocks.FreshWaterStill.blockID || id == TFCBlocks.FreshWaterFlowing.blockID){
+					worldObj.setBlock(x, y, z, Block.ice.blockID,1,1);
+				}
+				else if(id == Block.waterStill.blockID || id == Block.waterMoving.blockID){
+					worldObj.setBlock(x, y, z, Block.ice.blockID,0,1);
+				}
+				else if(id == Block.ice.blockID || id == TFCBlocks.SeaGrassFrozen.blockID){
+					worldObj.setBlock(x, y, z, id,meta,1);
+				}
+				else if(id == TFCBlocks.SeaGrassStill.blockID || id == TFCBlocks.SeaGrassFlowing.blockID){
+					int type = -1;
+					if(te !=null){
+						type = ((TESeaWeed)te).getType();
+					}
+					worldObj.setBlock(x, y, z, id,worldObj.getBlockMetadata(x, y, z),1);
+					te = ((TESeaWeed)(worldObj.getBlockTileEntity(x,y,z)));
+					if(te!=null){
+						((TESeaWeed)te).setType(type);
+					}
+				}
+				else{
+					worldObj.setBlock(x, y, z, Block.ice.blockID,0,1);
+				}
+			}
+			return (mat == Material.water) && !salty;
+		}
+
+		return false;
+	}
+	//We use this in place of the vanilla method, for the vanilla, it allows us to stop it from doing things we don't like.
+	public boolean canBlockFreezeTFC(int x, int y, int z, boolean byWater)
+	{
+		if (TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
+		{
+			Material mat = worldObj.getBlockMaterial(x, y, z);
+			int id = worldObj.getBlockId(x,y,z);
 			boolean salty = TFC_Core.isSaltWater(id);
 			TileEntity te = (worldObj.getBlockTileEntity(x, y, z));
 			if(te!=null && te instanceof TESeaWeed){
 				//in case the block is salty sea grass, we don't want that to freeze when it's too warm
-				salty = salty || (((TESeaWeed)te).getType()==0);
+				salty = salty || (((TESeaWeed)te).getType()!=1 && ((TESeaWeed)te).getType()!=2);
 			}
 			if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= -17.78){
 				salty = false;
@@ -176,6 +211,13 @@ public class TFCProvider extends WorldProvider
 		}
 
 		return false;
+	}
+
+	@Override
+	public boolean canDoRainSnowIce(Chunk chunk)
+	{
+		
+		return true;
 	}
 
 	@Override
