@@ -215,9 +215,14 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			{
 				var14 = this.worldObj.getPrecipitationHeight(xCoord + var12, zCoord + var13);
 
-				if (this.worldObj.isBlockFreezable(var12 + xCoord, var14 - 1, var13 + zCoord))
+				if (this.worldObj.isBlockFreezable(var12 + xCoord, var14 - 1, var13 + zCoord)){
+					if(biome.biomeID != BiomeGenBase.ocean.biomeID&& biome.biomeID != BiomeGenBase.beach.biomeID){
+						this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID, 1, 0x2);
+					}
+					else{
 					this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID, 0, 0x2);
-
+					}
+				}
 				if (canSnowAt(worldObj, var12 + xCoord, var14, var13 + zCoord))
 					this.worldObj.setBlock(var12 + xCoord, var14, var13 + zCoord, Block.snow.blockID, 0, 0x2);
 			}
@@ -302,7 +307,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				int var6 = world.getBlockId(par1, par2 - 1, par3);
 				int var7 = world.getBlockId(par1, par2, par3);
 
-				if (var7 == 0 && Block.snow.canPlaceBlockAt(world, par1, par2, par3) && var6 != 0 && var6 != Block.ice.blockID && Block.blocksList[var6].blockMaterial.blocksMovement())
+				if (var7 == 0 && Block.snow.canPlaceBlockAt(world, par1, par2, par3) && var6 != 0 && Block.blocksList[var6].blockMaterial.blocksMovement())
 					return true;
 			}
 
@@ -687,7 +692,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					}
 				}
 		}
-		else if(height <= TFCOptions.RockLayer2Height + heightMap[indexArray] && height > 55+heightMap[indexArray])
+		else if(height <= TFCOptions.RockLayer2Height + heightMap[indexArray] && height > 55+heightMap[indexArray] && rock2!=null)
 		{
 			idsBig[indexBig] = (short) rock2.data1; 
 			metaBig[indexBig] = (byte) rock2.data2;

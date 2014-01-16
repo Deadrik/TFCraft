@@ -1,5 +1,7 @@
 package TFC.WorldGen;
 
+import TFC.Core.TFC_Time;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;

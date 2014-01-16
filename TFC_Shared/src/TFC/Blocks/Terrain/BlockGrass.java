@@ -67,6 +67,18 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	{
 		return side == 1 ? GrassTopTexture : (side == 0 ? TFC_Textures.InvisibleTexture : iconGrassSideOverlay);
 	}
+	
+	@Override
+	public void onBlockAdded(World world, int i, int j, int k)
+	{
+		if(world.getBlockId(i,j-1,k)==0){
+			int meta = world.getBlockMetadata(i,j,k);
+			int y = j-1;
+			while(!world.isBlockOpaqueCube(i, y--, k)){}
+			world.setBlock(i, y, k, this.blockID, meta, 0x2);
+			world.setBlockToAir(i, j, k);
+		}
+	}
 
 	/**
 	 * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
