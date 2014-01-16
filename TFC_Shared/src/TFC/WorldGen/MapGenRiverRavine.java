@@ -17,6 +17,7 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, short[] idsBig, byte[] metaBig)
 	{
 		metaArray = metaBig;
+		this.range = 16;
 		super.generate(par1IChunkProvider, par2World, par3, par4, idsBig);
 	}
 
