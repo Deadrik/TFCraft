@@ -172,7 +172,9 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 				xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 				zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 				yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-				this.reedGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+				if(TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord)>=14){
+					this.reedGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+				}
 			}
 		}
 
