@@ -66,6 +66,7 @@ public class BlockCustomStationary extends BlockCustomFluid
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
+		super.updateTick(par1World, par2, par3, par4, par5Random);
 		if (this.blockMaterial == Material.lava)
 		{
 			int var6 = par5Random.nextInt(3);

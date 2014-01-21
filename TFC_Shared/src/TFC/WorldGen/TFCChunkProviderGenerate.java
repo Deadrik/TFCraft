@@ -7,6 +7,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -154,10 +155,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		new MapGenRavineTFC(20, 50).generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//deep
 		new MapGenRiverRavine().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 		//Underground Lava
-		new WorldGenFissure(Block.lavaStill,2, true, 25).setUnderground(true, 20).setSeed(1).generate(this, rand, worldObj, chunkX, chunkZ);
+		//new WorldGenFissure(Block.lavaStill,2, true, 25).setUnderground(true, 20).setSeed(1).generate(this, rand, worldObj, chunkX, chunkZ);
 		//Surface Hotsprings
-		new WorldGenFissureCluster().generate(this, rand, worldObj, chunkX, chunkZ);
-
+		//new WorldGenFissureCluster().generate(this, rand, worldObj, chunkX, chunkZ);
 		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
 		data.heightmap = heightMap;
@@ -188,6 +188,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		int waterRand = 4;
 		if(TFC_Climate.getStability(xCoord, zCoord) == 1)
 			waterRand = 6;
+
+		//Underground Lava
+		//new WorldGenFissure(Block.lavaStill,2, true, 25).setUnderground(true, 20).setSeed(1).generate(this, rand, worldObj, chunkX, chunkZ);
+		//Surface Hotsprings
+		//new WorldGenFissureCluster().generate(this, rand, worldObj, chunkX, chunkZ);
 
 		if (!var11 && this.rand.nextInt(waterRand) == 0)
 		{
@@ -220,7 +225,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID, 1, 0x2);
 					}
 					else{
-					this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID, 0, 0x2);
+						this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID, 0, 0x2);
 					}
 				}
 				if (canSnowAt(worldObj, var12 + xCoord, var14, var13 + zCoord))
@@ -518,12 +523,12 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				DataLayer rock2 = rockLayer2[arrayIndexDL];
 				DataLayer rock3 = rockLayer3[arrayIndexDL];
 				DataLayer evt = evtLayer[arrayIndexDL];
-				DataLayer rainfall = rainfallLayer[arrayIndexDL];
+				float rain = TFC_Climate.getRainfall(chunkX*16 + xCoord, 144, chunkZ*16 + zCoord);
 
 				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 6.0D + rand.nextDouble() * 0.25D);  
 				int var13 = -1;
 
-				short surfaceBlock = (short) TFC_Core.getTypeForGrassWithRain(TFC_Core.getItemMetaFromStone(rock1.data1, rock1.data2), rainfall.floatdata1);
+				short surfaceBlock = (short) TFC_Core.getTypeForGrassWithRain(TFC_Core.getItemMetaFromStone(rock1.data1, rock1.data2), rain);
 				short subSurfaceBlock = (short)TFC_Core.getTypeForDirt(TFC_Core.getItemMetaFromStone(rock1.data1, rock1.data2));
 				byte soilMeta = (byte) TFC_Core.getSoilMetaFromStone(rock1.data1, rock1.data2);
 
@@ -549,14 +554,14 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 
 						//First we check to see if its a cold desert
-						if(rainfall.floatdata1 < 125 && 
+						if(rain < 125 && 
 								temp < 1.5f)
 						{
 							surfaceBlock = (short) TFC_Core.getTypeForSand(soilMeta);
 							subSurfaceBlock = (short) TFC_Core.getTypeForSand(soilMeta);
 						}
 						//Next we check for all other warm deserts
-						else if(rainfall.floatdata1 < 125 && biomegenbase.maxHeight < 0.5f && 
+						else if(rain < 125 && biomegenbase.maxHeight < 0.5f && 
 								temp > 20f)
 						{
 							surfaceBlock = (short) TFC_Core.getTypeForSand(soilMeta);

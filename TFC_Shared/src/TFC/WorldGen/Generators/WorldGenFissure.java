@@ -23,7 +23,7 @@ public class WorldGenFissure implements IWorldGenerator
 	int creviceDepth = 1;
 	Block fillBlock;
 	int depth = 20;
-
+	
 	int minTunnel = 1;
 	boolean checkStability = true;
 	boolean underground = false;

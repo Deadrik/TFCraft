@@ -22,6 +22,7 @@ import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.TileEntities.TESeaWeed;
 import TFC.WorldGen.DataLayer;
+import TFC.WorldGen.TFCProvider;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -196,11 +197,22 @@ public abstract class BlockCustomFluid extends Block
 	 * Ticks the block if it's been scheduled
 	 */
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
-
-		super.updateTick(par1World, par2, par3, par4, par5Random);
-
+		super.updateTick(world, i, j, k, rand);
+		if((world.provider) instanceof TFCProvider){
+			if (((TFCProvider)(world.provider)).canBlockFreezeTFC(i, j, k, false))
+			{
+				//setFreezeBlock(world,i,j,k,rand);
+			}
+		}
+	}
+	
+	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
+		Material mat = world.getBlockMaterial(i,j,k);
+		if(mat == Material.water){
+			world.setBlock(i,j,k, Block.ice.blockID);
+		}
 	}
 
 	@Override

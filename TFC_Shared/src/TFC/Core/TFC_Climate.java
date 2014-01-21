@@ -175,9 +175,9 @@ public class TFC_Climate
 		{
 
 			float zMod = getZFactor(z);
-			float zTemp = (zMod * getMaxTemperature())-25 + ((zMod - 0.5f)*10);
+			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
 
-			float rainMod = 1-((manager.getRainfallLayerAt(x, z).floatdata1*zMod)/4000);
+			float rainMod = (1-((getRainfall(x, 144, z))/4000))*zMod;
 
 			int _month = TFC_Time.getSeasonFromDayOfYear(day,z);
 			int _lastmonth = TFC_Time.getSeasonFromDayOfYear(day-TFC_Time.daysInMonth,z);
@@ -210,7 +210,12 @@ public class TFC_Climate
 				if(temp < 0)monthMod = 1 - monthMod;
 				temp *= monthMod;
 				temp += (hourMod*(zTemp + dailyTemp));
-				temp += (8*rainMod)*zMod;
+				if(temp >= 12){
+					temp += (8*rainMod)*zMod;
+				}
+				else{
+					temp -= (8*rainMod)*zMod;
+				}
 			}
 			else
 			{
@@ -221,7 +226,12 @@ public class TFC_Climate
 				if(temp < 0)monthMod = 1 - monthMod;
 				temp *= monthMod;
 				temp += (hourMod*(zTemp + dailyTemp));
-				temp += (8*rainMod)*zMod;
+				if(temp >= 12){
+					temp += (8*rainMod)*zMod;
+				}
+				else{
+					temp -= (8*rainMod)*zMod;
+				}
 			}
 
 			return temp;
@@ -234,11 +244,11 @@ public class TFC_Climate
 		if(manager!= null)
 		{
 			float zMod = getZFactor(z);
-			float zTemp = (zMod * getMaxTemperature())-25 + ((zMod - 0.5f)*10);
+			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
 
 
-			float rain = manager.getRainfallLayerAt(x, z).floatdata1;
-			float rainMod = 1-(rain*zMod/4000);
+			float rain = getRainfall(x, 144, z);
+			float rainMod = (1-(rain/4000))*zMod;
 
 			int _season = TFC_Time.getSeasonFromDayOfYear(day,z);
 			int _lastseason = TFC_Time.getSeasonFromDayOfYear(day-TFC_Time.daysInMonth,z);
@@ -262,7 +272,12 @@ public class TFC_Climate
 				if(temp < 0)monthMod = 1 - monthMod;
 				temp *= monthMod;
 				temp += (hourMod*(zTemp));
-				temp += (8*rainMod)*zMod;
+				if(temp >= 12){
+					temp += (8*rainMod)*zMod;
+				}
+				else{
+					temp -= (8*rainMod)*zMod;
+				}
 			}
 			else
 			{
@@ -273,7 +288,12 @@ public class TFC_Climate
 				if(temp < 0)monthMod = 1 - monthMod;
 				temp *= monthMod;
 				temp += (hourMod*(zTemp));
-				temp += (8*rainMod)*zMod;
+				if(temp >= 12){
+					temp += (8*rainMod)*zMod;
+				}
+				else{
+					temp -= (8*rainMod)*zMod;
+				}
 			}
 
 			return temp;
@@ -433,6 +453,22 @@ public class TFC_Climate
 			return ColorizerFoliageTFC.getFoliageDead();
 	}
 
+	@SideOnly(Side.CLIENT)
+	/**
+	 * Provides the basic foliage color based on the biome temperature and rainfall
+	 */
+	public static int getFoliageColorEvergreen(World world, int x, int y, int z)
+	{
+		int month = TFC_Time.getSeason(z);
+		float temp = (getTemp(x, z)+35)/(getMaxTemperature()+35);
+		//float evt = (1 - (((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z).floatdata1 / 16))*0.5f;
+		float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);
+
+		double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
+		double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
+		return ColorizerFoliageTFC.getFoliageColor(var1, var3);
+	}
+
 	/**
 	 * All Rainfall related code
 	 */
@@ -444,7 +480,7 @@ public class TFC_Climate
 
 	public static float getTerrainAdjustedRainfall(int x, int y, int z)
 	{
-		float rain = manager.getRainfallLayerAt(x, z).floatdata1;
+		float rain = getRainfall(x, y, z);
 		ArrayList biomes = new ArrayList<TFCBiome>();
 		biomes.add(TFCBiome.river);
 		biomes.add(TFCBiome.ocean);

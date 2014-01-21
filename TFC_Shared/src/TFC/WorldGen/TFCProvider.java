@@ -151,42 +151,46 @@ public class TFCProvider extends WorldProvider
 			Material mat = worldObj.getBlockMaterial(x, y, z);
 			int id = worldObj.getBlockId(x,y,z);
 			int meta = worldObj.getBlockMetadata(x, y, z);
-			boolean salty = TFC_Core.isSaltWaterIncludeIce(id,meta);
+			boolean salty = TFC_Core.isSaltWaterIncludeIce(id,meta,mat);
 			TileEntity te = (worldObj.getBlockTileEntity(x, y, z));
 			if(te!=null && te instanceof TESeaWeed){
 				//in case the block is salty sea grass, we don't want that to freeze when it's too warm
 				salty = salty || (((TESeaWeed)te).getType()!=1 && ((TESeaWeed)te).getType()!=2);
 			}
-			if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= -17.78){
+			if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= -2){
 				salty = false;
 			}
 			if((mat == Material.water || mat == Material.ice) && !salty){
-				
+
 				if(id == TFCBlocks.FreshWaterStill.blockID || id == TFCBlocks.FreshWaterFlowing.blockID){
-					worldObj.setBlock(x, y, z, Block.ice.blockID,1,1);
+					worldObj.setBlock(x, y, z, Block.ice.blockID,1,2);
 				}
 				else if(id == Block.waterStill.blockID || id == Block.waterMoving.blockID){
-					worldObj.setBlock(x, y, z, Block.ice.blockID,0,1);
+					worldObj.setBlock(x, y, z, Block.ice.blockID,0,2);
 				}
 				else if(id == Block.ice.blockID || id == TFCBlocks.SeaGrassFrozen.blockID){
 					worldObj.setBlock(x, y, z, id,meta,1);
+					te = (worldObj.getBlockTileEntity(x, y, z));
+					if(te!=null){
+						((TESeaWeed)te).setType(meta);
+					}
 				}
 				else if(id == TFCBlocks.SeaGrassStill.blockID || id == TFCBlocks.SeaGrassFlowing.blockID){
 					int type = -1;
 					if(te !=null){
 						type = ((TESeaWeed)te).getType();
 					}
-					worldObj.setBlock(x, y, z, id,worldObj.getBlockMetadata(x, y, z),1);
+					worldObj.setBlock(x, y, z, TFCBlocks.SeaGrassFrozen.blockID,type,2);
 					te = ((TESeaWeed)(worldObj.getBlockTileEntity(x,y,z)));
 					if(te!=null){
 						((TESeaWeed)te).setType(type);
 					}
 				}
 				else{
-					worldObj.setBlock(x, y, z, Block.ice.blockID,0,1);
+					worldObj.setBlock(x, y, z, Block.ice.blockID,0,2);
 				}
 			}
-			return (mat == Material.water) && !salty;
+			return false;//(mat == Material.water) && !salty;
 		}
 
 		return false;
@@ -198,13 +202,14 @@ public class TFCProvider extends WorldProvider
 		{
 			Material mat = worldObj.getBlockMaterial(x, y, z);
 			int id = worldObj.getBlockId(x,y,z);
-			boolean salty = TFC_Core.isSaltWater(id);
+			int meta = worldObj.getBlockMetadata(x, y, z);
+			boolean salty = TFC_Core.isSaltWaterIncludeIce(id,meta,mat);
 			TileEntity te = (worldObj.getBlockTileEntity(x, y, z));
 			if(te!=null && te instanceof TESeaWeed){
 				//in case the block is salty sea grass, we don't want that to freeze when it's too warm
 				salty = salty || (((TESeaWeed)te).getType()!=1 && ((TESeaWeed)te).getType()!=2);
 			}
-			if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= -17.78){
+			if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= -2){
 				salty = false;
 			}
 			return (mat == Material.water || mat == Material.ice) && !salty;
@@ -216,7 +221,7 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public boolean canDoRainSnowIce(Chunk chunk)
 	{
-		
+
 		return true;
 	}
 

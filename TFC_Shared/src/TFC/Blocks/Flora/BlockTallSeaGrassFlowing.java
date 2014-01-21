@@ -29,6 +29,7 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.Vanilla.BlockCustomFlowing;
+import TFC.Blocks.Vanilla.BlockCustomIce;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.Recipes;
@@ -45,14 +46,14 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 		float var3 = 0.5F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 1.0F, 0.5F + var3);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
 	{
 		return 16777215;
 	}
-	
+
 	@Override
 	public float getBlockBrightness(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
@@ -60,7 +61,7 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 		float var6 = par1IBlockAccess.getLightBrightness(par2, par3+1, par4);
 		return var5 > var6 ? var5 : var6;
 	}
-	
+
 	@Override
 	public int getMixedBrightnessForBlock(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
@@ -106,6 +107,19 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 	}
 
 	@Override
+	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
+		Material mat = world.getBlockMaterial(i,j,k);
+		TESeaWeed te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
+		int type = -1;
+		if(te!=null){
+			type = te.getType();
+		}
+		if(mat == Material.water){
+			world.setBlock(i,j,k, TFCBlocks.SeaGrassFrozen.blockID,type,1);
+		}
+	}
+
+	@Override
 	public int quantityDroppedWithBonus(int par1, Random par2Random)
 	{
 		return 1 + par2Random.nextInt(par1 * 2 + 1);
@@ -120,25 +134,25 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 	}
 
 	@Override
-	public void breakBlock(World world, int i, int j, int k, int l, int id)
+	public void breakBlock(World world, int i, int j, int k, int id, int l)
 	{
 		TESeaWeed te = (TESeaWeed)(world.getBlockTileEntity(i, j, k));
 		int type = -1;
 		if(te != null){
 			type = te.getType();
 		}
-		
+
 		int blockId = world.getBlockId(i,j,k);
 		if(blockId == Block.ice.blockID){
 			world.setBlock(i, j, k, TFCBlocks.SeaGrassFrozen.blockID);
 		}
-		super.breakBlock(world, i, j, k, l, id);
-		if(blockId == Block.ice.blockID){
+		super.breakBlock(world, i, j, k, id, l);
+		if((Block)(Block.blocksList[blockId]) instanceof BlockCustomIce){
 			world.setBlockMetadataWithNotify(i, j, k, type, 1);
 			te = (TESeaWeed)(world.getBlockTileEntity(i, j, k));
 			te.setType(type);
 		}
-		
+
 		if(world.isAirBlock(i, j, k)){
 			if(te != null){
 				if(type == 1 || type == 2)
@@ -174,7 +188,7 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 	{
 		return true;//TFC_Core.isSaltWater(par1)|| TFC_Core.isFreshWater(par1);
 	}
-	
+
 	@Override
 	protected void updateFlow(World par1World, int par2, int par3, int par4)
 	{

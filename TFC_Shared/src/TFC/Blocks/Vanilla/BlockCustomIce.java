@@ -43,23 +43,26 @@ public class BlockCustomIce extends BlockIce
 			par1World.setBlock(par3, par4, par5, getBlockMeltId(par1World,par3,par4,par5,true), 0, 2);
 		}
 	}
-	
+
 	@Override
-	public void breakBlock(World world, int i, int j, int k, int l, int id)
+	public void breakBlock(World world, int i, int j, int k, int id, int l)
 	{
-		if(world.getBlockId(i,j,k)==Block.waterStill.blockID && l != 0){
-			world.setBlock(i,j,k,TFCBlocks.FreshWaterStill.blockID);
-		}
-		else if( world.getBlockId(i,j,k)==Block.waterMoving.blockID && l != 0){
-			world.setBlock(i,j,k,TFCBlocks.FreshWaterFlowing.blockID);
-		}
-		else if(world.getBlockId(i,j,k)==TFCBlocks.FreshWaterStill.blockID && l != 1){
-			world.setBlock(i,j,k,Block.waterStill.blockID);
-		}
-		else if( world.getBlockId(i,j,k)==TFCBlocks.FreshWaterFlowing.blockID && l != 1){
-			world.setBlock(i,j,k,Block.waterMoving.blockID);
-		}
-		super.breakBlock(world,i,j,k,l,id);
+		/*
+		if(id == this.blockID){
+			if(world.getBlockId(i,j,k)==Block.waterStill.blockID && l != 0){
+				world.setBlock(i,j,k,TFCBlocks.FreshWaterStill.blockID);
+			}
+			else if( world.getBlockId(i,j,k)==Block.waterMoving.blockID && l != 0){
+				world.setBlock(i,j,k,TFCBlocks.FreshWaterFlowing.blockID);
+			}
+			else if(world.getBlockId(i,j,k)==TFCBlocks.FreshWaterStill.blockID && l != 1){
+				world.setBlock(i,j,k,Block.waterStill.blockID);
+			}
+			else if( world.getBlockId(i,j,k)==TFCBlocks.FreshWaterFlowing.blockID && l != 1){
+				world.setBlock(i,j,k,Block.waterMoving.blockID);
+			}
+		}*/
+		super.breakBlock(world,i,j,k,id,l);
 	}
 
 	@Override
@@ -134,8 +137,12 @@ public class BlockCustomIce extends BlockIce
 		return lightOpacity[blockID];
 	}
 
-	public int getBlockMeltId(World world, int i, int j, int k, boolean moving){
+	protected int getBlockMeltId(World world, int i, int j, int k, boolean moving){
 		int meta = world.getBlockMetadata(i,j,k);
+		int id = world.getBlockId(i,j,k);
+		if(id != this.blockID){
+			return id;
+		}
 		switch(meta){
 		case 0: return moving? Block.waterMoving.blockID : Block.waterStill.blockID;
 		case 1: return moving? TFCBlocks.FreshWaterFlowing.blockID : TFCBlocks.FreshWaterStill.blockID;
@@ -171,7 +178,7 @@ public class BlockCustomIce extends BlockIce
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
-		if((world.provider) instanceof TFCProvider){
+		if((world.provider) instanceof TFCProvider && !world.isRemote && world.getBlockId(i, j, k)==this.blockID){
 			if (!((TFCProvider)(world.provider)).canBlockFreezeTFC(i, j, k, false))
 			{
 				if (world.getBlockId(i, j+1, k) == Block.snow.blockID)

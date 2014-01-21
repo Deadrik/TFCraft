@@ -53,6 +53,19 @@ public class BlockTallSeaGrassStill extends BlockCustomStationary implements ITi
 	{
 		return 16777215;
 	}
+	
+	@Override
+	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
+		Material mat = world.getBlockMaterial(i,j,k);
+		TESeaWeed te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
+		int type = -1;
+		if(te!=null){
+			type = te.getType();
+		}
+		if(mat == Material.water){
+			world.setBlock(i,j,k, TFCBlocks.SeaGrassFrozen.blockID,type,1);
+		}
+	}
 
 	@Override
 	public float getBlockBrightness(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
@@ -121,7 +134,7 @@ public class BlockTallSeaGrassStill extends BlockCustomStationary implements ITi
 	}
 
 	@Override
-	public void breakBlock(World world, int i, int j, int k, int l, int id)
+	public void breakBlock(World world, int i, int j, int k, int id, int l)
 	{
 		TESeaWeed te = (TESeaWeed)(world.getBlockTileEntity(i, j, k));
 		int type = -1;
@@ -132,7 +145,7 @@ public class BlockTallSeaGrassStill extends BlockCustomStationary implements ITi
 		if(blockId == Block.ice.blockID){
 			world.setBlock(i, j, k, TFCBlocks.SeaGrassFrozen.blockID);
 		}
-		super.breakBlock(world, i, j, k, l, id);
+		super.breakBlock(world, i, j, k, id, l);
 		if(blockId == Block.ice.blockID){
 			world.setBlockMetadataWithNotify(i, j, k, type, 1);
 			te = (TESeaWeed)(world.getBlockTileEntity(i, j, k));

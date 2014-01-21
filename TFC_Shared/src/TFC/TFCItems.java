@@ -103,6 +103,7 @@ public class TFCItems
 	public static Item GemBeryl;
 	public static Item GemTourmaline;
 	public static Item GemJade;
+	
 	public static Item GemAgate;
 	public static Item GemDiamond;
 

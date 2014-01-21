@@ -68,6 +68,7 @@ public class BlockCustomFlowing extends BlockCustomFluid
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
+		super.updateTick(par1World, par2, par3, par4, par5Random);
 		int var6 = this.getFlowDecay(par1World, par2, par3, par4);
 		byte var7 = 1;
 

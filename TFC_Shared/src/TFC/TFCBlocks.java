@@ -7,6 +7,8 @@ import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import TFC.API.Constant.Global;
 import TFC.API.Constant.TFCBlockID;
 import TFC.Blocks.BlockBloom;
@@ -449,6 +451,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(ArmourStand,TFC.Items.ItemBlocks.ItemArmourStand.class,"ArmourStand");
 		GameRegistry.registerBlock(ArmourStand2,TFC.Items.ItemBlocks.ItemArmourStand2.class,"ArmourStand2");
 		GameRegistry.registerBlock(BerryBush,TFC.Items.ItemBlocks.ItemBerryBush.class,"BerryBush");
+		//FluidRegistry.registerFluid(new Fluid("freshWater").setBlockID(TFCBlocks.FreshWaterStill.blockID).setUnlocalizedName(TFCBlocks.FreshWaterStill.getUnlocalizedName()));
+		//FluidRegistry.registerFluid(new Fluid("hotWater").setBlockID(TFCBlocks.HotWaterStill.blockID).setUnlocalizedName(TFCBlocks.HotWaterStill.getUnlocalizedName()));
 	}
 
 	public static void LoadBlocks()
@@ -668,10 +672,10 @@ public class TFCBlocks
 
 		TFCBlocks.BerryBush = new BlockBerryBush(TFCBlockID.BerryBush).setUnlocalizedName("BerryBush").setHardness(0.3f).setStepSound(Block.soundGrassFootstep);
 
-		TFCBlocks.FreshWaterFlowing = (new BlockFreshWaterFlowing(TFCBlockID.FreshWaterFlowing)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water");
-		TFCBlocks.FreshWaterStill  = (new BlockFreshWaterStill(TFCBlockID.FreshWaterStill)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water");
-		TFCBlocks.HotWaterFlowing = (new BlockHotWaterFlowing(TFCBlockID.HotWaterFlowing)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water").setCreativeTab(CreativeTabs.tabDecorations);
-		TFCBlocks.HotWaterStill  = (new BlockHotWaterStill(TFCBlockID.HotWaterStill)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water").setCreativeTab(CreativeTabs.tabDecorations);
+		TFCBlocks.FreshWaterFlowing = (new BlockFreshWaterFlowing(TFCBlockID.FreshWaterFlowing)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water").setCreativeTab(CreativeTabs.tabDecorations);;
+		TFCBlocks.FreshWaterStill  = (new BlockFreshWaterStill(TFCBlockID.FreshWaterStill)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water").setCreativeTab(CreativeTabs.tabDecorations);;
+		TFCBlocks.HotWaterFlowing = (new BlockHotWaterFlowing(TFCBlockID.HotWaterFlowing)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water");
+		TFCBlocks.HotWaterStill  = (new BlockHotWaterStill(TFCBlockID.HotWaterStill)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water");
 		
 		TFCBlocks.SeaGrassStill = new BlockTallSeaGrassStill(TFCBlockID.SeaGrassStill).setUnlocalizedName("SeaGrassStill").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 		TFCBlocks.SeaGrassFrozen = (new BlockFrozenSeaGrass(TFCBlockID.SeaGrassFrozen)).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("seagrassice");

@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import TFC.TFCBlocks;
 import TFC.Blocks.Vanilla.BlockCustomIce;
 import TFC.TileEntities.TESeaWeed;
+import TFC.WorldGen.TFCProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockIce;
 import net.minecraft.block.ITileEntityProvider;
@@ -39,7 +40,7 @@ public class BlockFrozenSeaGrass extends BlockCustomIce implements ITileEntityPr
 			par1World.setBlock(par3, par4, par5, getBlockMeltId(par1World,par3,par4,par5,true), 0, 2);
 		}
 	}
-	
+
 	@Override
 	public void onBlockAdded(World world,int i,int j,int k){
 		super.onBlockAdded(world, i, j, k);
@@ -48,21 +49,21 @@ public class BlockFrozenSeaGrass extends BlockCustomIce implements ITileEntityPr
 			te.setType(world.getBlockMetadata(i,j,k));
 		}
 	}
-	
+
 	@Override
 	public int getRenderType()
 	{
 		return TFCBlocks.seaWeedRenderId;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public Icon getIcon(int par1, int par2)
 	{
 		return Block.blocksList[Block.ice.blockID].getIcon(par1,par2);
 	}
-
-	public int getBlockMeltId(World world, int i, int j, int k, boolean moving){
+	@Override
+	protected int getBlockMeltId(World world, int i, int j, int k, boolean moving){
 		int meta = world.getBlockMetadata(i,j,k);
 		switch(meta){
 		case 0: return moving? TFCBlocks.SeaGrassStill.blockID : TFCBlocks.SeaGrassStill.blockID;
@@ -78,64 +79,66 @@ public class BlockFrozenSeaGrass extends BlockCustomIce implements ITileEntityPr
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
-		if (!world.canBlockFreeze(i, j, k, false))
-		{
-			TESeaWeed te;
-			int type = -1;
-			int id;
-			if (world.getBlockId(i, j+1, k) == Block.snow.blockID)
+		if((world.provider) instanceof TFCProvider && !world.isRemote && world.getBlockId(i, j, k)==this.blockID){
+			if (!((TFCProvider)(world.provider)).canBlockFreezeTFC(i, j, k, false))
 			{
-				int meta = world.getBlockMetadata(i, j+1, k);
-				if (meta > 0) {
-					world.setBlockMetadataWithNotify(i, j+1, k, meta-1, 2);
+				TESeaWeed te;
+				int type = -1;
+				int id;
+				if (world.getBlockId(i, j+1, k) == Block.snow.blockID)
+				{
+					int meta = world.getBlockMetadata(i, j+1, k);
+					if (meta > 0) {
+						world.setBlockMetadataWithNotify(i, j+1, k, meta-1, 2);
+					} else {
+						world.setBlockToAir(i, j+1, k);
+					}
 				} else {
-					world.setBlockToAir(i, j+1, k);
+					this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
+					int meta = world.getBlockMetadata(i,j,k);
+					te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
+					if(te!=null){
+						type = te.getType();
+					}
+					id =  getBlockMeltId(world,i,j,k,false);
+					world.setBlock(i, j, k,id, 0, 2);
+					te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
+					if(te != null){
+						te.setType(type);
+						//redundancy, if this.type is set correctly, setType(meta) will do nothing
+						te.setType(meta);
+					}
 				}
-			} else {
 				this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
-				int meta = world.getBlockMetadata(i,j,k);
-				te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
-				if(te!=null){
-					type = te.getType();
+				if(j > 143){
+					int meta = world.getBlockMetadata(i,j,k);
+					te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
+					if(te!=null){
+						type = te.getType();
+					}
+					id =  getBlockMeltId(world,i,j,k,true);
+					world.setBlock(i, j, k,id, 0, 2);
+					te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
+					if(te != null){
+						te.setType(type);
+						te.setType(meta);
+					}
+				} else {
+					int meta = world.getBlockMetadata(i,j,k);
+					te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
+					if(te!=null){
+						type = te.getType();
+					}
+					id = getBlockMeltId(world,i,j,k,false);
+					world.setBlock(i, j, k, id, 0, 2);
+					te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
+					if(te != null){
+						te.setType(type);
+						te.setType(meta);	
+					}
 				}
-				id =  getBlockMeltId(world,i,j,k,false);
-				world.setBlock(i, j, k,id, 0, 2);
-				te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
-				if(te != null){
-					te.setType(type);
-					//redundancy, if this.type is set correctly, setType(meta) will do nothing
-					te.setType(meta);
-				}
+				world.scheduleBlockUpdate(i, j, k, id, this.tickRate(world));
 			}
-			this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
-			if(j > 143){
-				int meta = world.getBlockMetadata(i,j,k);
-				te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
-				if(te!=null){
-					type = te.getType();
-				}
-				id =  getBlockMeltId(world,i,j,k,true);
-				world.setBlock(i, j, k,id, 0, 2);
-				te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
-				if(te != null){
-					te.setType(type);
-					te.setType(meta);
-				}
-			} else {
-				int meta = world.getBlockMetadata(i,j,k);
-				te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
-				if(te!=null){
-					type = te.getType();
-				}
-				id = getBlockMeltId(world,i,j,k,false);
-				world.setBlock(i, j, k, id, 0, 2);
-				te = (TESeaWeed)(world.getBlockTileEntity(i,j,k));
-				if(te != null){
-					te.setType(type);
-					te.setType(meta);	
-				}
-			}
-			world.scheduleBlockUpdate(i, j, k, id, this.tickRate(world));
 		}
 	}
 

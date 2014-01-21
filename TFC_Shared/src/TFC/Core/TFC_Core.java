@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.EntityLivingBase;
@@ -330,9 +331,9 @@ public class TFC_Core
 		return false;
 	}
 	
-	public static boolean isSaltWaterIncludeIce(int id, int meta)
+	public static boolean isSaltWaterIncludeIce(int id, int meta, Material mat)
 	{
-		if(id == Block.waterMoving.blockID || id == Block.waterStill.blockID || (id == Block.ice.blockID && meta == 0))
+		if(id == Block.waterMoving.blockID || id == Block.waterStill.blockID || (mat == Material.ice && meta == 0))
 			return true;
 		return false;
 	}
@@ -347,6 +348,13 @@ public class TFC_Core
 	public static boolean isFreshWaterIncludeIce(int id, int meta)
 	{
 		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID || (id == Block.ice.blockID && meta != 0))
+			return true;
+		return false;
+	}
+	
+	public static boolean isFreshWaterIncludeIce(int id, int meta, Material mat)
+	{
+		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID || (mat == Material.ice && meta != 0))
 			return true;
 		return false;
 	}

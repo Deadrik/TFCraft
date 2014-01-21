@@ -7,6 +7,8 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Set;
 
+import net.minecraft.block.Block;
+import net.minecraft.command.CommandHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
@@ -17,6 +19,7 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.TFCBlockID;
 import TFC.API.Constant.TFCItemID;
+import TFC.Commands.CommandTime;
 import TFC.Commands.GSPVisualCommand;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetBodyTemp;
@@ -52,6 +55,8 @@ import TFC.WorldGen.TFCProviderHell;
 import TFC.WorldGen.TFCWorldType;
 import TFC.WorldGen.Generators.OreSpawnData;
 import TFC.WorldGen.Generators.WorldGenCaveDecor;
+import TFC.WorldGen.Generators.WorldGenFissure;
+import TFC.WorldGen.Generators.WorldGenFissureCluster;
 import TFC.WorldGen.Generators.WorldGenForests;
 import TFC.WorldGen.Generators.WorldGenLargeRock;
 import TFC.WorldGen.Generators.WorldGenLooseRocks;
@@ -125,9 +130,9 @@ public class TerraFirmaCraft
 		//Register Generators
 
 		//Underground Lava
-		//GameRegistry.registerWorldGenerator(new WorldGenFissure(Block.lavaStill,2, true, 25).setUnderground(true, 20).setSeed(1));
+		GameRegistry.registerWorldGenerator(new WorldGenFissure(Block.lavaStill,2, true, 25).setUnderground(true, 20).setSeed(1));
 		//Surface Hotsprings
-		//GameRegistry.registerWorldGenerator(new WorldGenFissureCluster());
+		GameRegistry.registerWorldGenerator(new WorldGenFissureCluster());
 
 		GameRegistry.registerWorldGenerator(new WorldGenOre());
 		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
@@ -262,6 +267,8 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new StripChunkCommand());
 		evt.registerServerCommand(new GSPVisualCommand());
 		evt.registerServerCommand(new RemoveAreaCommand());
+		//CommandHandler ch = (CommandHandler) evt.getServer().getCommandManager();
+		evt.registerServerCommand(new CommandTime());
 	}	
 
 	public void loadSettings()

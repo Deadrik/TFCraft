@@ -67,36 +67,36 @@ public class WorldGenPlants implements IWorldGenerator
 		int mushroomsPerChunk = 0;
 
 		DataLayer evt = ((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(chunkX, chunkZ);
-		DataLayer rainfall = ((TFCWorldChunkManager)world.provider.worldChunkMgr).getRainfallLayerAt(chunkX, chunkZ);
+		float rain = TFC_Climate.getRainfall(chunkX, 144, chunkZ);
 		float bioTemperature;
 
-		if(rainfall.floatdata1 >= 62.5f) 
+		if(rain >= 62.5f) 
 		{
 
 		}
-		if(rainfall.floatdata1 >= 125) 
+		if(rain >= 125) 
 		{
 			grassPerChunk+=12;
 			flowersPerChunk += 1;
 			mushroomsPerChunk += 1;
 		}
-		if(rainfall.floatdata1 >= 250) 
+		if(rain >= 250) 
 		{
 			grassPerChunk+=18;
 			flowersPerChunk += 1;
 			mushroomsPerChunk += 1;
 		}
-		if(rainfall.floatdata1 >= 500) 
+		if(rain >= 500) 
 		{
 			grassPerChunk+=24;
 			flowersPerChunk += 1;
 			mushroomsPerChunk += 1;
 		}
-		if(rainfall.floatdata1 >= 1000) 
+		if(rain >= 1000) 
 		{
 			mushroomsPerChunk += 1;
 		}
-		if(rainfall.floatdata1 >= 2000) 
+		if(rain >= 2000) 
 		{
 			mushroomsPerChunk += 1;
 		}

@@ -432,7 +432,7 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						int var10 = TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9);
+						int var10 = TFC_Climate.getFoliageColorEvergreen(getCurrentWorld(), i + var8, j ,k + var9);
 						rgb = applyColor(var10, rgb);
 					}
 				}
