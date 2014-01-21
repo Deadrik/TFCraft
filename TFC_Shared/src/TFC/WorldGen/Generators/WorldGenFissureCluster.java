@@ -13,10 +13,7 @@ public class WorldGenFissureCluster implements IWorldGenerator
 	Random rand;
 	int waterRarity = 150;
 
-	public void generate(IChunkProvider chunkprovider, Random rand, World world, int chunkX, int chunkZ)
-	{
-		generate(rand, chunkX, chunkZ, world, null, chunkprovider);
-	}
+
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
