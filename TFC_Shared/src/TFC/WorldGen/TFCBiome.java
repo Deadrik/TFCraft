@@ -188,7 +188,7 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 12, 2, 4));
 		//This is to balance out the spawning, so that entities with weight 1 spawn less
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class,16,0,0));
-		//this.spawnableWaterCreatureList.clear();
+		this.spawnableWaterCreatureList.clear();
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySpiderTFC.class, 10, 1, 2));
