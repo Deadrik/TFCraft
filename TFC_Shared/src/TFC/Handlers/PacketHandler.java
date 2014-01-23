@@ -43,6 +43,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
+	/**
+	 * Packets that are affixed with _Server are processed server side and 
+	 * _Client is processed on the client side. Therefore when the client wishes 
+	 * to request something from the server, _Server packets should be sent from the client.
+	 */
 	public static final byte Packet_Init_Block_Client = 0;
 	public static final byte Packet_Init_Block_Server = 1;
 	public static final byte Packet_Keypress_Server = 2;
@@ -53,6 +58,10 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	public static final byte Packet_Rename_Item = 7;
 	public static final byte Packet_Book_Sign = 8;
 	public static final byte Packet_Update_Knapping = 9;
+	public static final byte Packet_Update_Skills_Client = 10;
+	public static final byte Packet_Update_Skills_Server = 11;
+
+	private static long keyTimer = 0;
 
 	@Override
 	public void clientLoggedIn(NetHandler clientHandler,
@@ -99,13 +108,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				e.printStackTrace();
 			}
 
-			Packet250CustomPayload pkt=new Packet250CustomPayload();
-			pkt.channel="TerraFirmaCraft";
-			pkt.data=bos.toByteArray();
-			pkt.length=bos.size();
-			pkt.isChunkDataPacket=false;
-
-			((NetServerHandler)netHandler).sendPacketToPlayer(pkt);
+			((NetServerHandler)netHandler).sendPacketToPlayer(getPacket(bos));
 		}
 	}
 
@@ -161,13 +164,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					dos.writeInt(z);
 					te.createInitPacket(dos);
 
-					Packet250CustomPayload pkt=new Packet250CustomPayload();
-					pkt.channel="TerraFirmaCraft";
-					pkt.data=bos.toByteArray();
-					pkt.length=bos.size();
-					pkt.isChunkDataPacket=false;
-
-					TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP) player, pkt);
+					TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP) player, getPacket(bos));
 				}
 			}
 			else if(type == Packet_Keypress_Server)
@@ -334,6 +331,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 			}
 			else if (type == Packet_Update_Knapping)
+			{
 				if(!world.isRemote)
 					if(player.openContainer != null && player.openContainer instanceof ContainerSpecialCrafting)
 					{
@@ -341,12 +339,48 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						((ContainerSpecialCrafting)player.openContainer).craftMatrix.setInventorySlotContents(index, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).specialCraftingTypeAlternate);
 						((ContainerSpecialCrafting)player.openContainer).onCraftMatrixChanged(((ContainerSpecialCrafting)player.openContainer).craftMatrix);
 					}
+			}
+			else if (type == Packet_Update_Skills_Client)
+				process_Packet_Update_Skills_Client(dis, player);
+			else if (type == Packet_Update_Skills_Server)
+				process_Packet_Update_Skills_Server(player);
+
 		} catch (Exception e) 
 		{
 			return;
 		}
 	}
-	static long keyTimer = 0;
+
+	public void process_Packet_Update_Skills_Client(DataInputStream dis, EntityPlayer player)
+	{
+		SkillStats skills = TFC_Core.getSkillStats(player);
+		try 
+		{
+			while(dis.available() > 0)
+				skills.setSkillSave(dis.readUTF(), dis.readInt());
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public void process_Packet_Update_Skills_Server(EntityPlayer player)
+	{
+		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+		DataOutputStream dos=new DataOutputStream(bos);
+		try 
+		{
+			dos.writeByte(Packet_Update_Skills_Client);
+			TFC_Core.getSkillStats(player).toOutStream(dos);
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+
+		TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP) player, getPacket(bos));
+	}
 
 	@SideOnly(Side.CLIENT)
 	public static void sendKeyPress(int type) //0 = chiselmode
@@ -425,5 +459,16 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		//			manager.closeConnections();
 		//		else
 		//			manager.serverShutdown();
+	}
+
+	public static Packet250CustomPayload getPacket(ByteArrayOutputStream bos)
+	{
+		Packet250CustomPayload pkt=new Packet250CustomPayload();
+		pkt.channel=Reference.ModChannel;
+		pkt.data=bos.toByteArray();
+		pkt.length=bos.size();
+		pkt.isChunkDataPacket=false;
+
+		return pkt;
 	}
 }

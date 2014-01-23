@@ -10,8 +10,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import TFC.Reference;
 import TFC.TerraFirmaCraft;
 import TFC.API.Constant.Global;
 import TFC.Handlers.PacketHandler;
@@ -60,9 +58,8 @@ public class SkillStats
 			skillsMap.put(skillName, amount);
 
 		int i = (Integer) skillsMap.get(skillName);
-		if(player instanceof EntityPlayerMP){
+		if(player instanceof EntityPlayerMP)
 			TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, getStatusPacket(skillName, i));
-		}
 		writeNBT(player.getEntityData());
 	}
 
@@ -136,7 +133,6 @@ public class SkillStats
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(40);
 		DataOutputStream dos=new DataOutputStream(bos);
-		Packet250CustomPayload pkt=new Packet250CustomPayload();
 		try 
 		{
 			//The packet type sent determines who is expected to process this packet, the client or the server.
@@ -144,16 +140,11 @@ public class SkillStats
 			dos.writeByte(1);
 			dos.writeUTF(s);
 			dos.writeInt(skill);
-
-			pkt.channel=Reference.ModChannel;
-			pkt.data = bos.toByteArray();
-			pkt.length= pkt.data.length;
-			pkt.isChunkDataPacket=false;
 		} 
 		catch (IOException e) 
 		{
 
 		}
-		return pkt;
+		return PacketHandler.getPacket(bos);
 	}
 }

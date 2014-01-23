@@ -21,6 +21,64 @@ public class AnvilRecipe
 	public int craftingXP = 1;
 	ArrayList<String> skillsList = new ArrayList<String>();
 
+	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, AnvilReq req, ItemStack result)
+	{
+		this(in, in2, p.toLowerCase(), 70 + new Random((in != null ? in.itemID : 0) + (result != null ? result.itemID : 0)).nextInt(60), flux, req.Tier, result);
+	}
+
+	public AnvilRecipe(ItemStack in, ItemStack in2, String p, AnvilReq req, ItemStack result)
+	{
+		this(in, in2, p.toLowerCase(), 70 + new Random((in != null ? in.itemID : 0) + (result != null ? result.itemID : 0)).nextInt(60), false, req.Tier, result);
+	}
+
+	public AnvilRecipe(ItemStack in, ItemStack in2, String p, int cv, boolean flux, int req, ItemStack result)
+	{
+		input1 = in;
+		input2 = in2;
+		this.flux = flux;
+		this.craftingValue = cv;
+		anvilreq = req;
+		this.result = result;
+		inheritsDamage = false;
+		this.plan = p;
+		skillsList.add(Global.SKILL_GENERAL_SMITHING);
+	}
+
+	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req)
+	{
+		this(in, p, flux, req.Tier);
+	}
+
+	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, int req)
+	{
+		input1 = in;
+		input2 = p;
+		this.flux = flux;
+		anvilreq = req;
+		inheritsDamage = false;
+	}
+
+	public AnvilRecipe(ItemStack in, ItemStack p, String s, boolean flux, int req)
+	{
+		this(in, p, flux, req);
+		this.plan = s;
+	}
+
+	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req, ItemStack res)
+	{
+		this(in, p, req, res);
+		this.flux = flux;
+	}
+
+	public AnvilRecipe(ItemStack in, ItemStack p, AnvilReq req, ItemStack res)
+	{
+		input1 = in;
+		input2 = p;
+		anvilreq = req.Tier;
+		this.result = res;
+		inheritsDamage = false;
+	}
+
 	public void addSkills(EntityPlayer player)
 	{
 		for(String s : skillsList)
@@ -36,6 +94,18 @@ public class AnvilRecipe
 	public AnvilRecipe setCraftingXP(int xp)
 	{
 		this.craftingXP = xp;
+		return this;
+	}
+
+	public AnvilRecipe setInheritsDamage()
+	{
+		inheritsDamage = true;
+		return this;
+	}
+
+	public AnvilRecipe addRecipeSkill(String s)
+	{
+		this.skillsList.add(s);
 		return this;
 	}
 
@@ -118,75 +188,7 @@ public class AnvilRecipe
 		return is;
 	}
 
-	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, AnvilReq req, ItemStack result)
-	{
-		this(in, in2, p.toLowerCase(), 70 + new Random((in != null ? in.itemID : 0) + (result != null ? result.itemID : 0)).nextInt(60), flux, req.Tier, result);
-	}
 
-	public AnvilRecipe(ItemStack in, ItemStack in2, String p, AnvilReq req, ItemStack result)
-	{
-		this(in, in2, p.toLowerCase(), 70 + new Random((in != null ? in.itemID : 0) + (result != null ? result.itemID : 0)).nextInt(60), false, req.Tier, result);
-	}
-
-	public AnvilRecipe(ItemStack in, ItemStack in2, String p, int cv, boolean flux, int req, ItemStack result)
-	{
-		input1 = in;
-		input2 = in2;
-		this.flux = flux;
-		this.craftingValue = cv;
-		anvilreq = req;
-		this.result = result;
-		inheritsDamage = false;
-		this.plan = p;
-		skillsList.add(Global.SKILL_GENERAL_SMITHING);
-	}
-
-	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req)
-	{
-		this(in, p, flux, req.Tier);
-	}
-
-	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, int req)
-	{
-		input1 = in;
-		input2 = p;
-		this.flux = flux;
-		anvilreq = req;
-		inheritsDamage = false;
-	}
-
-	public AnvilRecipe(ItemStack in, ItemStack p, String s, boolean flux, int req)
-	{
-		this(in, p, flux, req);
-		this.plan = s;
-	}
-
-	public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req, ItemStack res)
-	{
-		this(in, p, req, res);
-		this.flux = flux;
-	}
-
-	public AnvilRecipe(ItemStack in, ItemStack p, AnvilReq req, ItemStack res)
-	{
-		input1 = in;
-		input2 = p;
-		anvilreq = req.Tier;
-		this.result = res;
-		inheritsDamage = false;
-	}
-
-	public AnvilRecipe setInheritsDamage()
-	{
-		inheritsDamage = true;
-		return this;
-	}
-
-	public AnvilRecipe addRecipeSkill(String s)
-	{
-		this.skillsList.add(s);
-		return this;
-	}
 
 	public int getCraftingValue()
 	{

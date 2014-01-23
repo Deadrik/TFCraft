@@ -27,6 +27,8 @@ public class PlayerInfo
 	public int guiFoodRestoreAmount = 0;
 	public boolean[] knappingInterface;
 
+	public SkillStats tempSkills;
+
 	public PlayerInfo(String name, INetworkManager nm)
 	{
 		Name = name;
@@ -64,9 +66,8 @@ public class PlayerInfo
 
 	public boolean lockMatches(int x, int y, int z)
 	{
-		if((lockX == -9999999 || lockX == x) && (lockY == -9999999 || lockY == y) && (lockZ == -9999999 || lockZ == z)) {
+		if((lockX == -9999999 || lockX == x) && (lockY == -9999999 || lockY == y) && (lockZ == -9999999 || lockZ == z))
 			return true;
-		}
 
 		return false;
 	}

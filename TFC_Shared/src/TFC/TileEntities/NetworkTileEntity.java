@@ -27,7 +27,7 @@ public abstract class NetworkTileEntity extends TileEntity implements INetworkTE
 	 */
 	@Override
 	public abstract void handleDataPacket(DataInputStream inStream) throws IOException;
-	
+
 	/**
 	 * The X/Y/Z has already been read from the input stream. Now read out the custom data that you needed to send across. Read by the server only.
 	 * @param inStream
@@ -70,24 +70,20 @@ public abstract class NetworkTileEntity extends TileEntity implements INetworkTE
 	public void requestInitialization() throws IOException
 	{
 		if (this.worldObj.isRemote)
-        {
 			TerraFirmaCraft.proxy.sendCustomPacket(needsInitPacket());
-        }
 	}
 
 	@Override
 	public void validate()
 	{
 		super.validate();
-		
+
 		if(worldObj.isRemote && this.shouldSendInitData)
-		{
 			try {
 				requestInitialization();
-			} catch (IOException e) {}  
-		}
+			} catch (IOException e) {}
 	}
-	
+
 	/**
 	 * Client Side Only.
 	 * @return A packet that is sent to the server when the client needs initialization.
@@ -112,7 +108,7 @@ public abstract class NetworkTileEntity extends TileEntity implements INetworkTE
 		}
 		return setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
-	
+
 	/**
 	 * Constructs a packet. Only called by the server.
 	 * @return A packet to be sent to the client that is requesting initialization of the block.
@@ -137,9 +133,9 @@ public abstract class NetworkTileEntity extends TileEntity implements INetworkTE
 		{
 
 		}
-		return setupCustomPacketData(bos.toByteArray(), bos.size());
+		return PacketHandler.getPacket(bos);
 	}
-	
+
 	/**
 	 * 
 	 * @param data A byte array contining the data to be sent
@@ -155,7 +151,7 @@ public abstract class NetworkTileEntity extends TileEntity implements INetworkTE
 		pkt.isChunkDataPacket=true;
 		return pkt;
 	}
-	
+
 	/**
 	 * Sends a packet to all players within 160 meters of the block. This should include all players that have the block loaded themselves.
 	 * @param packet The packet containing custom data that is to be sent.

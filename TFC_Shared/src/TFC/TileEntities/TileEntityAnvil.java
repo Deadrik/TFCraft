@@ -23,7 +23,6 @@ import TFC.API.Crafting.AnvilRecipe;
 import TFC.API.Crafting.AnvilReq;
 import TFC.API.Enums.RuleEnum;
 import TFC.API.Events.AnvilCraftEvent;
-import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -106,8 +105,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				AnvilManager manager = AnvilManager.getInstance();
 				Random R = new Random(worldObj.getSeed());
 				Object[] r = getRecipe(manager);
-				AnvilRecipe recipe = r[0] !=  null ? (AnvilRecipe) r[0] : null;
-				ItemStack result = r[1] !=  null ? (ItemStack) r[1] : null;
+				AnvilRecipe recipe = r != null && r[0] !=  null ? (AnvilRecipe) r[0] : null;
+				ItemStack result = r != null && r[1] !=  null ? (ItemStack) r[1] : null;
 
 
 				//This is where the crafting is completed and the result is added to the anvil
@@ -130,8 +129,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 							}
 
 							anvilItemStacks[INPUT1_SLOT].setTagCompound(Tag);
-							if(lastWorker!= null)
-								TFC_Core.getSkillStats(lastWorker).increaseSkill("General_Smithing", recipe.craftingXP);
+							increaseSkills(recipe);
 
 							/*float pct = (offset*5);
 							if(anvilItemStacks[INPUT1_SLOT].getItem().getMaxDamage() > 0 && !anvilItemStacks[INPUT1_SLOT].getItem().getHasSubtypes())
@@ -149,6 +147,12 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			anvilItemStacks[INPUT1_SLOT].stackSize = 1;
 	}
 
+	public void increaseSkills(AnvilRecipe recipe)
+	{
+		if(lastWorker!= null)
+			recipe.addSkills(lastWorker);
+	}
+
 	/**
 	 * @return returns an array [AnvilRecipe,ItemStack]
 	 */
@@ -157,13 +161,9 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		Object[] out = new Object[2];
 
 		if(itemCraftingValue == workRecipe.getCraftingValue())
-		{
-			out[0] = new AnvilRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT], craftingPlan,
+			out = manager.findCompleteRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT], craftingPlan,
 					workRecipe.getCraftingValue(), 
-					anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);
-
-			out[1] = manager.findCompleteRecipe((AnvilRecipe)out[0], getItemRules());
-		}
+					anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null), getItemRules());
 		return out;
 	}
 

@@ -55,20 +55,18 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++) {
+		for(int i = 0; i < MetaNames.length; i++)
 			list.add(new ItemStack(this,1,i));
-		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIconFromDamage(int damage)
 	{
-		if(damage == 0) {
+		if(damage == 0)
 			return this.ClayIcon;
-		} else {
-			return this.CeramicIcon;
-		}    		
+		else
+			return this.CeramicIcon;    		
 	}
 
 	@Override
@@ -78,11 +76,8 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 		{
 			arraylist.add(StringUtil.localize("gui.Help"));
 			arraylist.add(StringUtil.localize("gui.PotteryBase.Inst0"));
-		}
-		else
-		{
+		} else
 			arraylist.add(StringUtil.localize("gui.ShowHelp"));
-		}
 	}
 
 	@Override
@@ -98,9 +93,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 				{
 					//We only want the pottery to be placeable if the block is solid on top.
 					if(!world.isBlockSolidOnSide(x, y, z, ForgeDirection.UP))
-					{
 						return false;
-					}
 					world.setBlock(x, y+1, z, TFCBlocks.Pottery.blockID);
 					offset = 1;
 				}
@@ -146,7 +139,6 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 						}
 					}
 					else if(hitX > 0.5 && hitZ > 0.5)
-					{
 						if(te.inventory[3] == null)
 						{
 							te.inventory[3] = new ItemStack(this,1,itemstack.getItemDamage());
@@ -156,7 +148,6 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
 							} catch (IOException e) {}
 						}
-					}
 				}
 				return true;
 			}
@@ -190,7 +181,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 		{
 
 		}
-		return te.setupCustomPacketData(bos.toByteArray(), bos.size());
+		return PacketHandler.getPacket(bos);
 	}
 
 }

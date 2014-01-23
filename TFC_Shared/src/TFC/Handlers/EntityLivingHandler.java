@@ -4,32 +4,30 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
 import TFC.Chunkdata.ChunkDataManager;
-import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.BodyTempStats;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Core.Player.SkillStats;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemArrow;
 import TFC.Items.ItemQuiver;
 import TFC.Items.Tools.ItemJavelin;
-import TFC.TileEntities.TileEntityFireEntity;
 
 public class EntityLivingHandler
 {
@@ -150,5 +148,16 @@ public class EntityLivingHandler
 					event.setResult(Result.DENY);
 				}
 			}
+	}
+
+	@ForgeSubscribe
+	public void onEntityDeath(LivingDeathEvent event) 
+	{
+		if(event.entityLiving instanceof EntityPlayer)
+		{
+			SkillStats skills = TFC_Core.getSkillStats((EntityPlayer) event.entityLiving);
+			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer((EntityPlayer) event.entityLiving);
+			pi.tempSkills = skills;
+		}
 	}
 }

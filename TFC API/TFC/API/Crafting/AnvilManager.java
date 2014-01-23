@@ -77,13 +77,13 @@ public class AnvilManager
 		return null;
 	}
 
-	public ItemStack findCompleteRecipe(AnvilRecipe recipe, int[] rules)
+	public Object[] findCompleteRecipe(AnvilRecipe recipe, int[] rules)
 	{
 		for (int k = 0; k < recipes.size(); k++)
 		{
 			AnvilRecipe irecipe = (AnvilRecipe)recipes.get(k);
 			if (irecipe.isComplete(instance, recipe, rules))
-				return irecipe.getCraftingResult(recipe.input1);
+				return new Object[] {irecipe, irecipe.getCraftingResult(recipe.input1)};
 		}
 
 		return null;
