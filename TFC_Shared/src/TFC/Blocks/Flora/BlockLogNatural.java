@@ -14,10 +14,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.Reference;
-import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.Constant.Global;
-import TFC.API.Constant.TFCBlockID;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.Recipes;
 import cpw.mods.fml.relauncher.Side;
@@ -44,22 +42,16 @@ public class BlockLogNatural extends BlockTerra
 	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
 		if(!world.isRemote)
-		{
 			if(!world.isBlockOpaqueCube(i, j-1, k))
-			{
 				if(world.getBlockId(i+1, j, k) != blockID && world.getBlockId(i-1, j, k) != blockID && 
-						world.getBlockId(i, j, k+1) != blockID && world.getBlockId(i, j, k-1) != blockID && 
-						world.getBlockId(i+1, j, k+1) != blockID && world.getBlockId(i+1, j, k-1) != blockID && 
-						world.getBlockId(i-1, j, k+1) != blockID && world.getBlockId(i-1, j, k-1) != blockID&&
-						world.getBlockId(i+1, j-1, k) != blockID && world.getBlockId(i-1, j-1, k) != blockID && 
-						world.getBlockId(i, j-1, k+1) != blockID && world.getBlockId(i, j-1, k-1) != blockID && 
-						world.getBlockId(i+1, j-1, k+1) != blockID && world.getBlockId(i+1, j-1, k-1) != blockID && 
-						world.getBlockId(i-1, j-1, k+1) != blockID && world.getBlockId(i-1, j-1, k-1) != blockID)
-				{
+				world.getBlockId(i, j, k+1) != blockID && world.getBlockId(i, j, k-1) != blockID && 
+				world.getBlockId(i+1, j, k+1) != blockID && world.getBlockId(i+1, j, k-1) != blockID && 
+				world.getBlockId(i-1, j, k+1) != blockID && world.getBlockId(i-1, j, k-1) != blockID&&
+				world.getBlockId(i+1, j-1, k) != blockID && world.getBlockId(i-1, j-1, k) != blockID && 
+				world.getBlockId(i, j-1, k+1) != blockID && world.getBlockId(i, j-1, k-1) != blockID && 
+				world.getBlockId(i+1, j-1, k+1) != blockID && world.getBlockId(i+1, j-1, k-1) != blockID && 
+				world.getBlockId(i-1, j-1, k+1) != blockID && world.getBlockId(i-1, j-1, k-1) != blockID)
 					world.setBlock(i, j, k, 0, 0, 2);
-				}
-			}
-		}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -69,9 +61,8 @@ public class BlockLogNatural extends BlockTerra
 	 */
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < woodNames.length; i++) {
+		for(int i = 0; i < woodNames.length; i++)
 			list.add(new ItemStack(this,1,i));
-		}
 	}
 
 	@Override
@@ -83,28 +74,22 @@ public class BlockLogNatural extends BlockTerra
 	private boolean checkOut(World world, int i, int j, int k, int l)
 	{
 		if(world.getBlockId(i, j, k) == blockID && world.getBlockMetadata(i, j, k) == l)
-		{
 			return true;
-		}
 		return false;
 	}
 
-    @Override
-    public int damageDropped(int j) {
-        return j;
-    }	
+	@Override
+	public int damageDropped(int j) {
+		return j;
+	}	
 
 	@Override
 	public Icon getIcon(int i, int j) 
 	{
 		if (i == 1)
-		{
 			return innerIcons[j];
-		}
 		if (i == 0)
-		{
 			return innerIcons[j];
-		}
 		return sideIcons[j];
 	}
 
@@ -134,15 +119,12 @@ public class BlockLogNatural extends BlockTerra
 			if(equip!=null)
 			{
 				for(int cnt = 0; cnt < Recipes.Axes.length && !isAxeorSaw; cnt++)
-				{
 					if(equip.getItem() == Recipes.Axes[cnt])
 					{
 						isAxeorSaw = true;
-						if(cnt < 4) {
+						if(cnt < 4)
 							isStone = true;
-						}
 					}
-				}
 				//				for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
 				//				{
 				//					if(equip.getItem() == Recipes.Saws[cnt])
@@ -151,12 +133,8 @@ public class BlockLogNatural extends BlockTerra
 				//					}
 				//				}
 				for(int cnt = 0; cnt < Recipes.Hammers.length && !isAxeorSaw; cnt++)
-				{
 					if(equip.getItem() == Recipes.Hammers[cnt])
-					{
 						isHammer = true;
-					}
-				}
 			}
 			if(isAxeorSaw)
 			{
@@ -168,21 +146,15 @@ public class BlockLogNatural extends BlockTerra
 					int ind = entityplayer.inventory.currentItem;
 					entityplayer.inventory.setInventorySlotContents(ind, null);
 					world.setBlock(i, j, k, blockID, l, 0x2);
-				}
-				else
-				{
+				} else
 					equip.damageItem(damage, entityplayer);
-				}
 			}
 			else if(isHammer)
 			{
 				EntityItem item = new EntityItem(world, i+0.5, j+0.5, k+0.5, new ItemStack(Item.stick, 1+world.rand.nextInt(3)));
 				world.spawnEntityInWorld(item);
-			}
-			else
-			{
+			} else
 				world.setBlock(i, j, k, blockID, l, 0x2);
-			}
 		}
 	}
 
@@ -215,22 +187,17 @@ public class BlockLogNatural extends BlockTerra
 		while(!reachedTop)
 		{
 			if(l != 9 && l != 15 && world.getBlockId(x, j+y+1, z) == 0)
-			{
 				reachedTop = true;
-			}
 			else if((l == 9 || l == 15) && world.getBlockId(x, j+y+1, z) == 0
 					&& world.getBlockId(x+1, j+y+1, z) != blockID && world.getBlockId(x-1, j+y+1, z) != blockID && world.getBlockId(x, j+y+1, z+1) != blockID &&
 					world.getBlockId(x, j+y+1, z-1) != blockID && world.getBlockId(x-1, j+y+1, z-1) != blockID && world.getBlockId(x-1, j+y+1, z+1) != blockID && 
 					world.getBlockId(x+1, j+y+1, z+1) != blockID && world.getBlockId(x+1, j+y+1, z-1) != blockID)
-			{
 				reachedTop = true;
-			}
 
 			y++;
 		}
-		while (y >= 0) {
+		while (y >= 0)
 			scanLogs(world,i,j+y,k,l,checkArray,(byte)6,(byte)y--,(byte)6, stack);
-		}
 
 	}
 
@@ -245,18 +212,10 @@ public class BlockLogNatural extends BlockTerra
 	{
 		boolean check = false;
 		for(int h = -2; h <= 2; h++)
-		{
 			for(int g = -2; g <= 2; g++)
-			{
 				for(int f = -2; f <= 2; f++)
-				{
 					if(world.getBlockId(i+h, j+g, k+f) == blockID && world.getBlockMetadata(i+h, j+g, k+f) == world.getBlockMetadata(i, j, k))
-					{
 						check = true;
-					}
-				}
-			}
-		}
 		if(!check)
 		{
 			world.setBlock(i, j, k, 0, 0, 0x2);
@@ -272,18 +231,10 @@ public class BlockLogNatural extends BlockTerra
 			int offsetX = 0;int offsetY = 0;int offsetZ = 0;
 
 			for (offsetX = -2; offsetX <= 2; offsetX++)
-			{
 				for (offsetZ = -2; offsetZ <= 2; offsetZ++)
-				{
 					if(x+offsetX < 11 && x+offsetX >= 0 && z+offsetZ < 11 && z+offsetZ >= 0)
-					{
 						if(checkOut(world, i+offsetX, j, k+offsetZ, l) && !checkArray[x+offsetX][y][z+offsetZ])
-						{
 							scanLogs(world,i+offsetX, j, k+offsetZ, l, checkArray,(byte)(x+offsetX),y,(byte)(z+offsetZ), stack);
-						}
-					}
-				}
-			}
 
 
 			damage++;
@@ -292,9 +243,8 @@ public class BlockLogNatural extends BlockTerra
 				if(damage+stack.getItemDamage() <= stack.getMaxDamage())
 				{
 					world.setBlock(i, j, k, 0, 0, 0x3);
-					if((isStone && world.rand.nextInt(10) != 0) || !isStone) {
+					if((isStone && world.rand.nextInt(10) != 0) || !isStone)
 						dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.itemID],1,damageDropped(l)));
-					}
 				}
 			}
 			else

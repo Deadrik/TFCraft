@@ -132,18 +132,19 @@ public class GuiAnvil extends GuiContainer
 
 			i1 = AnvilEntity.getItemCraftingValue();
 			drawTexturedModalRect(w + 27 + i1, h + 108, 208, 10, 5, 6);
-
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 			//Round to 1 decimal place XX.X%
 			if(AnvilEntity.workRecipe != null)
 			{
 				int s0 =(int) (SkillStats.getSkillMult(AnvilEntity.workRecipe.getSkillTotal(player))*1000);
 				float s1 = s0/10f;
-
 				fontRenderer.drawString("Skill: "+s1+"%", w+150, h+8, 0xff6000);
 			}
 
 			drawItemRulesImages(w, h);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 			drawRulesImages(w,h);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		}
 
 	}
