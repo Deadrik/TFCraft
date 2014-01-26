@@ -7,6 +7,7 @@ import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerra;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -266,5 +267,11 @@ public class BlockCustomFence2 extends BlockFence implements IMultipleBlock
     @Override
 	public Block getBlockTypeForRender() {
 		return TFCBlocks.Fence2;
+	}
+    
+	@Override
+	public boolean canPlaceTorchOnTop(World world, int x, int y, int z)
+	{
+		return true;
 	}
 }
