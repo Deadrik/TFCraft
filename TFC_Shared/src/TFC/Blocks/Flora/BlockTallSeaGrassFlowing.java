@@ -147,7 +147,7 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 			world.setBlock(i, j, k, TFCBlocks.SeaGrassFrozen.blockID);
 		}
 		super.breakBlock(world, i, j, k, id, l);
-		if((Block)(Block.blocksList[blockId]) instanceof BlockCustomIce){
+		if((Block.blocksList[blockId]) instanceof BlockCustomIce){
 			world.setBlockMetadataWithNotify(i, j, k, type, 1);
 			te = (TESeaWeed)(world.getBlockTileEntity(i, j, k));
 			te.setType(type);

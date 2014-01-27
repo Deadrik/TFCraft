@@ -49,12 +49,12 @@ public class TESRSeaWeed extends TileEntitySpecialRenderer
 			plantModel = new ModelCrossedSquares(0,0,16,16,16,16,16);
 			int type = te.getType();
 			switch(type){
-				case 0: TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/plants/"+"Jute"+".png"));break;//texture
-				case 1: TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/plants/"+"Jute"+".png"));break;//temp texture
+				case 0: TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/plants/"+"seaweed"+".png"));break;//texture
+				case 1: TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/plants/"+"pondweed"+".png"));break;//temp texture
 				case 2: TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/plants/"+"Cat Tails"+".png"));
 				plantModel = new ModelCrossedSquares(0,0,32,32,32,32,32);
 				break;//temp texture
-				default: TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/plants/"+"Jute"+".png")); //texture
+				default: TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/plants/"+"seaweed"+".png")); //texture
 			}
 			GL11.glPushMatrix(); //start
 			GL11.glTranslatef((float)d + 0.0F, (float)d1 + 0F, (float)d2 + 0.0F); //size
