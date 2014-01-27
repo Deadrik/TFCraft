@@ -267,4 +267,10 @@ public class BlockCustomFence extends BlockFence implements IMultipleBlock
 	public Block getBlockTypeForRender() {
 		return TFCBlocks.Fence;
 	}
+	
+	@Override
+	public boolean canPlaceTorchOnTop(World world, int x, int y, int z)
+	{
+		return true;
+	}
 }

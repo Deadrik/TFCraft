@@ -639,6 +639,9 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Item.dyePowder,3, 15));
 			RemoveRecipe(new ItemStack(Item.dyePowder,2, 1));
 			RemoveRecipe(new ItemStack(Item.dyePowder,2, 11));
+			RemoveRecipe(new ItemStack(Block.fence,2));
+			RemoveRecipe(new ItemStack(Block.fenceGate,1));
+			
 
 			//Remove the vanilla stairs
 			RemoveRecipe(new ItemStack(Block.stairsWoodBirch, 4));

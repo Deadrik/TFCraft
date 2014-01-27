@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.API.TFCOptions;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -90,7 +91,10 @@ public class BlockCustomWall extends BlockWall
 	{
 		int id = access.getBlockId(i, j, k);
 
-		if (id != this.blockID && id != Block.fenceGate.blockID && !(Block.blocksList[id] instanceof BlockCustomWall))
+		if (id != this.blockID && id != Block.fenceGate.blockID &&
+				id != TFCBlocks.FenceGate.blockID &&
+				id != TFCBlocks.FenceGate2.blockID &&
+				!(Block.blocksList[id] instanceof BlockCustomWall))
 		{
 			Block var6 = Block.blocksList[id];
 			return var6 != null && var6.blockMaterial.isOpaque() && var6.renderAsNormalBlock() ? var6.blockMaterial != Material.pumpkin : false;
