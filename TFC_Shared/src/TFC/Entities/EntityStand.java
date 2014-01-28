@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -98,6 +99,11 @@ public class EntityStand extends EntityLiving
 	@Override
 	public ItemStack getCurrentItemOrArmor(int i) {
 		if(standTE !=null){
+			return standTE.getStackInSlot(i);
+		}
+		TileEntity te = worldObj.getBlockTileEntity((int)posX, (int)posY, (int)posZ);
+		if(te instanceof TEStand){
+			standTE = (TEStand)te;
 			return standTE.getStackInSlot(i);
 		}
 		return null;

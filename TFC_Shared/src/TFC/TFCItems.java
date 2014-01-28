@@ -1933,15 +1933,15 @@ public class TFCItems
 		TFCItems.SteelUnfinishedBoots = 			(new ItemUnfinishedArmor(TFCItemID.SteelUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots"));
 
 		i = 0;
-		TFCItems.BismuthBronzeBoots = 	(new ItemTFCArmor(TFCItemID.BismuthBronzeBoots, Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 3, 50).setUnlocalizedName(Names[i]+" Boots")); i++;
-		TFCItems.BlackBronzeBoots = 	(new ItemTFCArmor(TFCItemID.BlackBronzeBoots, Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 3, 50).setUnlocalizedName(Names[i]+" Boots")); i++;
-		TFCItems.BlackSteelBoots = 		(new ItemTFCArmor(TFCItemID.BlackSteelBoots, Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 3, 50).setUnlocalizedName(Names[i]+" Boots")); i++;
-		TFCItems.BlueSteelBoots = 		(new ItemTFCArmor(TFCItemID.BlueSteelBoots, Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 3, 50).setUnlocalizedName(Names[i]+" Boots")); i++;
-		TFCItems.BronzeBoots = 			(new ItemTFCArmor(TFCItemID.BronzeBoots, Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 3, 50).setUnlocalizedName(Names[i]+" Boots")); i++;
-		TFCItems.CopperBoots = 			(new ItemTFCArmor(TFCItemID.CopperBoots, Armor.CopperPlate, proxy.getArmorRenderID("copper"), 3, 50).setUnlocalizedName(Names[i]+" Boots")); i++;
-		TFCItems.WroughtIronBoots = 	(new ItemTFCArmor(TFCItemID.WroughtIronBoots, Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 3, 50).setUnlocalizedName(Names[i]+" Boots")); i++;
-		TFCItems.RedSteelBoots = 		(new ItemTFCArmor(TFCItemID.RedSteelBoots, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 3, 50).setUnlocalizedName(Names[i]+" Boots")); i++;
-		TFCItems.SteelBoots = 			(new ItemTFCArmor(TFCItemID.SteelBoots, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 3, 50).setUnlocalizedName(Names[i]+" Boots"));
+		TFCItems.BismuthBronzeBoots = 	(new ItemTFCArmor(TFCItemID.BismuthBronzeBoots, Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 3, 50,0).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.BlackBronzeBoots = 	(new ItemTFCArmor(TFCItemID.BlackBronzeBoots, Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 3, 50,0).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.BlackSteelBoots = 		(new ItemTFCArmor(TFCItemID.BlackSteelBoots, Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 3, 50,0).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.BlueSteelBoots = 		(new ItemTFCArmor(TFCItemID.BlueSteelBoots, Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 3, 50,0).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.BronzeBoots = 			(new ItemTFCArmor(TFCItemID.BronzeBoots, Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 3, 50,0).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.CopperBoots = 			(new ItemTFCArmor(TFCItemID.CopperBoots, Armor.CopperPlate, proxy.getArmorRenderID("copper"), 3, 50,0).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.WroughtIronBoots = 	(new ItemTFCArmor(TFCItemID.WroughtIronBoots, Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 3, 50,0).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.RedSteelBoots = 		(new ItemTFCArmor(TFCItemID.RedSteelBoots, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 3, 50,0).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.SteelBoots = 			(new ItemTFCArmor(TFCItemID.SteelBoots, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 3, 50,0).setUnlocalizedName(Names[i]+" Boots"));
 
 		i = 0;
 		TFCItems.BismuthBronzeUnfinishedGreaves = 	(new ItemUnfinishedArmor(TFCItemID.BismuthBronzeUnfinishedGreaves).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
@@ -1955,15 +1955,15 @@ public class TFCItems
 		TFCItems.SteelUnfinishedGreaves = 			(new ItemUnfinishedArmor(TFCItemID.SteelUnfinishedGreaves).setUnlocalizedName(Names[i]+" Unfinished Greaves"));
 
 		i = 0;
-		TFCItems.BismuthBronzeGreaves = 	(new ItemTFCArmor(TFCItemID.BismuthBronzeGreaves, Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 2, 50).setUnlocalizedName(Names[i]+" Greaves")); i++;
-		TFCItems.BlackBronzeGreaves = 		(new ItemTFCArmor(TFCItemID.BlackBronzeGreaves, Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 2, 50).setUnlocalizedName(Names[i]+" Greaves")); i++;
-		TFCItems.BlackSteelGreaves = 		(new ItemTFCArmor(TFCItemID.BlackSteelGreaves, Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 2, 50).setUnlocalizedName(Names[i]+" Greaves")); i++;
-		TFCItems.BlueSteelGreaves = 		(new ItemTFCArmor(TFCItemID.BlueSteelGreaves, Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 2, 50).setUnlocalizedName(Names[i]+" Greaves")); i++;
-		TFCItems.BronzeGreaves = 			(new ItemTFCArmor(TFCItemID.BronzeGreaves, Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 2, 50).setUnlocalizedName(Names[i]+" Greaves")); i++;
-		TFCItems.CopperGreaves = 			(new ItemTFCArmor(TFCItemID.CopperGreaves, Armor.CopperPlate, proxy.getArmorRenderID("copper"), 2, 50).setUnlocalizedName(Names[i]+" Greaves")); i++;
-		TFCItems.WroughtIronGreaves =		(new ItemTFCArmor(TFCItemID.WroughtIronGreaves, Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 2, 50).setUnlocalizedName(Names[i]+" Greaves")); i++;
-		TFCItems.RedSteelGreaves = 			(new ItemTFCArmor(TFCItemID.RedSteelGreaves, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 2, 50).setUnlocalizedName(Names[i]+" Greaves")); i++;
-		TFCItems.SteelGreaves = 			(new ItemTFCArmor(TFCItemID.SteelGreaves, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 2, 50).setUnlocalizedName(Names[i]+" Greaves"));
+		TFCItems.BismuthBronzeGreaves = 	(new ItemTFCArmor(TFCItemID.BismuthBronzeGreaves, Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 2, 50,1).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.BlackBronzeGreaves = 		(new ItemTFCArmor(TFCItemID.BlackBronzeGreaves, Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 2, 50,1).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.BlackSteelGreaves = 		(new ItemTFCArmor(TFCItemID.BlackSteelGreaves, Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 2, 50,1).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.BlueSteelGreaves = 		(new ItemTFCArmor(TFCItemID.BlueSteelGreaves, Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 2, 50,1).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.BronzeGreaves = 			(new ItemTFCArmor(TFCItemID.BronzeGreaves, Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 2, 50,1).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.CopperGreaves = 			(new ItemTFCArmor(TFCItemID.CopperGreaves, Armor.CopperPlate, proxy.getArmorRenderID("copper"), 2, 50,1).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.WroughtIronGreaves =		(new ItemTFCArmor(TFCItemID.WroughtIronGreaves, Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 2, 50,1).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.RedSteelGreaves = 			(new ItemTFCArmor(TFCItemID.RedSteelGreaves, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 2, 50,1).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.SteelGreaves = 			(new ItemTFCArmor(TFCItemID.SteelGreaves, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 2, 50,1).setUnlocalizedName(Names[i]+" Greaves"));
 
 		i = 0;
 		TFCItems.BismuthBronzeUnfinishedChestplate = 	(new ItemUnfinishedArmor(TFCItemID.BismuthBronzeUnfinishedChestplate).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
@@ -1977,15 +1977,15 @@ public class TFCItems
 		TFCItems.SteelUnfinishedChestplate = 			(new ItemUnfinishedArmor(TFCItemID.SteelUnfinishedChestplate).setUnlocalizedName(Names[i]+" Unfinished Chestplate"));
 
 		i = 0;
-		TFCItems.BismuthBronzeChestplate =	(new ItemTFCArmor(TFCItemID.BismuthBronzeChestplate, Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 1, 50).setUnlocalizedName(Names[i]+" Chestplate")); i++;
-		TFCItems.BlackBronzeChestplate = 	(new ItemTFCArmor(TFCItemID.BlackBronzeChestplate, Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 1, 50).setUnlocalizedName(Names[i]+" Chestplate")); i++;
-		TFCItems.BlackSteelChestplate = 	(new ItemTFCArmor(TFCItemID.BlackSteelChestplate, Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 1, 50).setUnlocalizedName(Names[i]+" Chestplate")); i++;
-		TFCItems.BlueSteelChestplate = 		(new ItemTFCArmor(TFCItemID.BlueSteelChestplate, Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 1, 50).setUnlocalizedName(Names[i]+" Chestplate")); i++;
-		TFCItems.BronzeChestplate = 		(new ItemTFCArmor(TFCItemID.BronzeChestplate, Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 1, 50).setUnlocalizedName(Names[i]+" Chestplate")); i++;
-		TFCItems.CopperChestplate = 		(new ItemTFCArmor(TFCItemID.CopperChestplate, Armor.CopperPlate, proxy.getArmorRenderID("copper"), 1, 50).setUnlocalizedName(Names[i]+" Chestplate")); i++;
-		TFCItems.WroughtIronChestplate = 	(new ItemTFCArmor(TFCItemID.WroughtIronChestplate, Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 1, 50).setUnlocalizedName(Names[i]+" Chestplate")); i++;
-		TFCItems.RedSteelChestplate = 		(new ItemTFCArmor(TFCItemID.RedSteelChestplate, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 1, 50).setUnlocalizedName(Names[i]+" Chestplate")); i++;
-		TFCItems.SteelChestplate = 			(new ItemTFCArmor(TFCItemID.SteelChestplate, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 1, 50).setUnlocalizedName(Names[i]+" Chestplate"));
+		TFCItems.BismuthBronzeChestplate =	(new ItemTFCArmor(TFCItemID.BismuthBronzeChestplate, Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 1, 50,2).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.BlackBronzeChestplate = 	(new ItemTFCArmor(TFCItemID.BlackBronzeChestplate, Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 1, 50,2).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.BlackSteelChestplate = 	(new ItemTFCArmor(TFCItemID.BlackSteelChestplate, Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 1, 50,2).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.BlueSteelChestplate = 		(new ItemTFCArmor(TFCItemID.BlueSteelChestplate, Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 1, 50,2).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.BronzeChestplate = 		(new ItemTFCArmor(TFCItemID.BronzeChestplate, Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 1, 50,2).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.CopperChestplate = 		(new ItemTFCArmor(TFCItemID.CopperChestplate, Armor.CopperPlate, proxy.getArmorRenderID("copper"), 1, 50,2).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.WroughtIronChestplate = 	(new ItemTFCArmor(TFCItemID.WroughtIronChestplate, Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 1, 50,2).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.RedSteelChestplate = 		(new ItemTFCArmor(TFCItemID.RedSteelChestplate, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 1, 50,2).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.SteelChestplate = 			(new ItemTFCArmor(TFCItemID.SteelChestplate, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 1, 50,2).setUnlocalizedName(Names[i]+" Chestplate"));
 
 		i = 0;
 		TFCItems.BismuthBronzeUnfinishedHelmet = 	(new ItemUnfinishedArmor(TFCItemID.BismuthBronzeUnfinishedHelmet).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
@@ -1999,15 +1999,15 @@ public class TFCItems
 		TFCItems.SteelUnfinishedHelmet = 			(new ItemUnfinishedArmor(TFCItemID.SteelUnfinishedHelmet).setUnlocalizedName(Names[i]+" Unfinished Helmet"));
 
 		i = 0;
-		TFCItems.BismuthBronzeHelmet = 	(new ItemTFCArmor(TFCItemID.BismuthBronzeHelmet, Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 0, 50).setUnlocalizedName(Names[i]+" Helmet")); i++;
-		TFCItems.BlackBronzeHelmet = 	(new ItemTFCArmor(TFCItemID.BlackBronzeHelmet, Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 0, 50).setUnlocalizedName(Names[i]+" Helmet")); i++;
-		TFCItems.BlackSteelHelmet = 	(new ItemTFCArmor(TFCItemID.BlackSteelHelmet, Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 0, 50).setUnlocalizedName(Names[i]+" Helmet")); i++;
-		TFCItems.BlueSteelHelmet = 		(new ItemTFCArmor(TFCItemID.BlueSteelHelmet, Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 0, 50).setUnlocalizedName(Names[i]+" Helmet")); i++;
-		TFCItems.BronzeHelmet = 		(new ItemTFCArmor(TFCItemID.BronzeHelmet, Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 0, 50).setUnlocalizedName(Names[i]+" Helmet")); i++;
-		TFCItems.CopperHelmet = 		(new ItemTFCArmor(TFCItemID.CopperHelmet, Armor.CopperPlate, proxy.getArmorRenderID("copper"), 0, 50).setUnlocalizedName(Names[i]+" Helmet")); i++;
-		TFCItems.WroughtIronHelmet = 	(new ItemTFCArmor(TFCItemID.WroughtIronHelmet, Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 0, 50).setUnlocalizedName(Names[i]+" Helmet")); i++;
-		TFCItems.RedSteelHelmet = 		(new ItemTFCArmor(TFCItemID.RedSteelHelmet, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 0, 50).setUnlocalizedName(Names[i]+" Helmet")); i++;
-		TFCItems.SteelHelmet = 			(new ItemTFCArmor(TFCItemID.SteelHelmet, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 0, 50).setUnlocalizedName(Names[i]+" Helmet")); 
+		TFCItems.BismuthBronzeHelmet = 	(new ItemTFCArmor(TFCItemID.BismuthBronzeHelmet, Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.BlackBronzeHelmet = 	(new ItemTFCArmor(TFCItemID.BlackBronzeHelmet, Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.BlackSteelHelmet = 	(new ItemTFCArmor(TFCItemID.BlackSteelHelmet, Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.BlueSteelHelmet = 		(new ItemTFCArmor(TFCItemID.BlueSteelHelmet, Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.BronzeHelmet = 		(new ItemTFCArmor(TFCItemID.BronzeHelmet, Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.CopperHelmet = 		(new ItemTFCArmor(TFCItemID.CopperHelmet, Armor.CopperPlate, proxy.getArmorRenderID("copper"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.WroughtIronHelmet = 	(new ItemTFCArmor(TFCItemID.WroughtIronHelmet, Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.RedSteelHelmet = 		(new ItemTFCArmor(TFCItemID.RedSteelHelmet, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.SteelHelmet = 			(new ItemTFCArmor(TFCItemID.SteelHelmet, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); 
 
 		i = 0;
 		TFCItems.BrassSheet = 			new ItemMetalSheet(TFCItemID.BrassSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
@@ -2029,10 +2029,10 @@ public class TFCItems
 		TFCItems.SilverSheet2x = 			new ItemMetalSheet2x(TFCItemID.SilverSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
 		TFCItems.SterlingSilverSheet2x = 	new ItemMetalSheet2x(TFCItemID.SterlingSilverSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
 
-		Item.itemsList[Item.helmetLeather.itemID] = null; Item.itemsList[Item.helmetLeather.itemID] = new ItemTFCArmor(Item.helmetLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 0, EnumArmorMaterial.CLOTH, 100).setUnlocalizedName("helmetCloth").setTextureName("leather_helmet");
-		Item.itemsList[Item.plateLeather.itemID] = null; Item.itemsList[Item.plateLeather.itemID] = new ItemTFCArmor(Item.plateLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 1, EnumArmorMaterial.CLOTH, 100).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate");
-		Item.itemsList[Item.legsLeather.itemID] = null; Item.itemsList[Item.legsLeather.itemID] = new ItemTFCArmor(Item.legsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 2, EnumArmorMaterial.CLOTH, 100).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings");
-		Item.itemsList[Item.bootsLeather.itemID] = null; Item.itemsList[Item.bootsLeather.itemID] = new ItemTFCArmor(Item.bootsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 3, EnumArmorMaterial.CLOTH, 100).setUnlocalizedName("bootsCloth").setTextureName("leather_boots");
+		Item.itemsList[Item.helmetLeather.itemID] = null; Item.itemsList[Item.helmetLeather.itemID] = new ItemTFCArmor(Item.helmetLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 0, EnumArmorMaterial.CLOTH, 100,3).setUnlocalizedName("helmetCloth").setTextureName("leather_helmet");
+		Item.itemsList[Item.plateLeather.itemID] = null; Item.itemsList[Item.plateLeather.itemID] = new ItemTFCArmor(Item.plateLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 1, EnumArmorMaterial.CLOTH, 100,2).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate");
+		Item.itemsList[Item.legsLeather.itemID] = null; Item.itemsList[Item.legsLeather.itemID] = new ItemTFCArmor(Item.legsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 2, EnumArmorMaterial.CLOTH, 100,1).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings");
+		Item.itemsList[Item.bootsLeather.itemID] = null; Item.itemsList[Item.bootsLeather.itemID] = new ItemTFCArmor(Item.bootsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 3, EnumArmorMaterial.CLOTH, 100,0).setUnlocalizedName("bootsCloth").setTextureName("leather_boots");
 	}
 
 	public static Item[] Meals;

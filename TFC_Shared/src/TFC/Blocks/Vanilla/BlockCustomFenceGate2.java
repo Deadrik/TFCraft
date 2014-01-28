@@ -50,7 +50,7 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
 	@Override
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
 	{
-		for(int i = 0; i < 16; i++) {
+		for(int i = 0; i < woodNames.length; i++) {
 			par3List.add(new ItemStack(this, 1, i));
 		}
 	}

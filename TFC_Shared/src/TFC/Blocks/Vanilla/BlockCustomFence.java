@@ -108,7 +108,7 @@ public class BlockCustomFence extends BlockFence implements IMultipleBlock
 	@Override
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
 	{
-		for(int i = 0; i < 16; i++) {
+		for(int i = 0; i < woodNames.length; i++) {
 			par3List.add(new ItemStack(this, 1, i));
 		}
 	}
@@ -125,7 +125,7 @@ public class BlockCustomFence extends BlockFence implements IMultipleBlock
     @Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < woodNames.length; i++)
 		{
 			iconsPost[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/" + woodNames[i] + " Fence");
 			iconsPostTop[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/" + woodNames[i] + " Fence Top");

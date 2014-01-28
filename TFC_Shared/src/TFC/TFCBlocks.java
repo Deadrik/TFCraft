@@ -444,8 +444,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Crucible, TFC.Items.ItemBlocks.ItemCrucible.class, "Crucible");
 		GameRegistry.registerBlock(NestBox, TFC.Items.ItemBlocks.ItemTerraBlock.class, "NestBox");
 		GameRegistry.registerBlock(Fence,TFC.Items.ItemBlocks.ItemFence.class,"Fence");
-		GameRegistry.registerBlock(FenceGate,TFC.Items.ItemBlocks.ItemFenceGate.class,"FenceGate");
 		GameRegistry.registerBlock(Fence2,TFC.Items.ItemBlocks.ItemFence2.class,"Fence2");
+		GameRegistry.registerBlock(FenceGate,TFC.Items.ItemBlocks.ItemFenceGate.class,"FenceGate");	
 		GameRegistry.registerBlock(FenceGate2,TFC.Items.ItemBlocks.ItemFenceGate2.class,"FenceGate2");
 		GameRegistry.registerBlock(StrawHideBed,"StrawHideBed");
 		GameRegistry.registerBlock(ArmourStand,TFC.Items.ItemBlocks.ItemArmourStand.class,"ArmourStand");
@@ -483,7 +483,7 @@ public class TFCBlocks
 		Block.blocksList[83] = null;
 		Block.blocksList[86] = null;
 		Block.blocksList[106] = null;
-		Block.blocksList[107] = null;
+		//Block.blocksList[107] = null;
 		Block.blocksList[111] = null;
 		Block.blocksList[125].setCreativeTab(null);
 		Block.blocksList[126].setCreativeTab(null);
@@ -516,7 +516,7 @@ public class TFCBlocks
 		Block.blocksList[83] = (new BlockCustomReed(83)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("reeds").setTextureName("reeds");;
 		Block.blocksList[86] = (new BlockCustomPumpkin(86, false)).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("pumpkin").setTextureName("pumpkin");
 		Block.blocksList[106] = (new BlockCustomVine(106)).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("vine").setTextureName("vine");
-		Block.blocksList[107] = (new BlockCustomFenceGate(107)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("fenceGate");
+		//Block.blocksList[107] = (new BlockCustomFenceGate(107)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("fenceGate");
 		Block.blocksList[111] = (new BlockCustomLilyPad(111)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("waterlily").setTextureName("waterlily");
 		Block.blocksList[143] = (new BlockCustomButtonWood(143)).setHardness(0.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("button");
 

@@ -29,8 +29,9 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	public Armor ArmorType;
 	public Icon overlayIcon;
 	private int thermal = 0;
+	private int type = 0;
 
-	public ItemTFCArmor(int itemID, Armor armor, int renderIndex, int armorSlot, int thermal)
+	public ItemTFCArmor(int itemID, Armor armor, int renderIndex, int armorSlot, int thermal, int type)
 	{
 		super(itemID,EnumArmorMaterial.IRON,renderIndex,armorSlot);
 		ArmorType = armor;
@@ -38,7 +39,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 		this.setMaxDamage(ArmorType.getDurability(armorSlot));
 	}
 
-	public ItemTFCArmor(int itemID, Armor armor, int renderIndex, int armorSlot, EnumArmorMaterial m, int thermal)
+	public ItemTFCArmor(int itemID, Armor armor, int renderIndex, int armorSlot, EnumArmorMaterial m, int thermal, int type)
 	{
 		super(itemID, m, renderIndex, armorSlot);
 		ArmorType = armor;
@@ -152,6 +153,11 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	public int getThermal() 
 	{
 		return thermal;
+	}
+
+	@Override
+	public int getBodyPart() {
+		return type;
 	}
 }
 
