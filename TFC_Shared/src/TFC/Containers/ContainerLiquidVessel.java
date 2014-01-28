@@ -16,6 +16,7 @@ import TFC.Containers.Slots.SlotLiquidVessel;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.MetalRegistry;
 import TFC.Items.ItemMeltedMetal;
+import TFC.Items.Pottery.ItemPotteryMold;
 
 public class ContainerLiquidVessel extends ContainerTFC 
 {
@@ -132,6 +133,69 @@ public class ContainerLiquidVessel extends ContainerTFC
 						nbt.setInteger("MetalAmount", metalAmount-1);
 					}
 				}
+				else if(input != null && input.getItem() instanceof ItemPotteryMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0)
+				{
+					int amt = -1;
+					if(m.Name.equals("Copper")){
+						amt = 398;
+					}
+					else if(m.Name.equals("Bronze")){
+						amt = 399;
+					}
+					else if(m.Name.equals("Bismuth Bronze")){
+						amt = 400;
+					}
+					else if(m.Name.equals("Black Bronze")){
+						amt = 401;
+					}
+					ItemStack is = new ItemStack(input.getItem().itemID, 1, amt);
+					TFC_ItemHeat.SetTemperature(is, HeatRegistry.getInstance().getMeltingPoint(is)*1.5f);
+					containerInv.setInventorySlotContents(0, is);
+					if(metalAmount-1 <= 0)
+					{
+						nbt.removeTag("MetalType");
+						nbt.removeTag("MetalAmount");
+						nbt.removeTag("TempTimer");
+						player.inventory.getStackInSlot(bagsSlotNum).setItemDamage(1);
+					} else 
+					{
+						nbt.setInteger("MetalAmount", metalAmount-2);
+					}
+
+					player.inventory.getStackInSlot(bagsSlotNum).setTagCompound(nbt);
+				}
+				else if(input != null && input.getItem() instanceof ItemPotteryMold && input.getItemDamage() > 1)
+				{
+					boolean correctMetalFlag = false;
+					if(m.Name.equals("Copper") && (input.getItemDamage()-2)%4 == 0){
+						correctMetalFlag = true;
+					}
+					else if(m.Name.equals("Bronze") && (input.getItemDamage()-2)%4 == 1){
+						correctMetalFlag = true;
+					}
+					else if(m.Name.equals("Bismuth Bronze") && (input.getItemDamage()-2)%4 == 2){
+						correctMetalFlag = true;
+					}
+					else if(m.Name.equals("Black Bronze") && (input.getItemDamage()-2)%4 == 3){
+						correctMetalFlag = true;
+					}
+					if(correctMetalFlag){
+						if(input.getItemDamage() > 5){
+							input.setItemDamage(input.getItemDamage() - 4);
+							TFC_ItemHeat.SetTemperature(input, HeatRegistry.getInstance().getMeltingPoint(input)*1.5f);
+							if(metalAmount-1 <= 0)
+							{
+								nbt.removeTag("MetalType");
+								nbt.removeTag("MetalAmount");
+								nbt.removeTag("TempTimer");
+								player.inventory.getStackInSlot(bagsSlotNum).setItemDamage(1);
+							} else 
+							{
+								nbt.setInteger("MetalAmount", metalAmount-1);
+							}
+						}
+					}
+				}
 			}
 		}
 		super.detectAndSendChanges();
@@ -155,13 +219,13 @@ public class ContainerLiquidVessel extends ContainerTFC
 					return null;
 				}
 			} else if (clickedIndex > 0 && clickedIndex < inventorySlots.size() &&
-				  ((clickedStack.getItem().itemID == TFCItems.CeramicMold.itemID && clickedStack.getItemDamage() == 1) || 
-				   (clickedStack.getItem() instanceof ItemMeltedMetal && clickedStack.getItemDamage() > 1)))
+					((clickedStack.getItem().itemID == TFCItems.CeramicMold.itemID && clickedStack.getItemDamage() == 1) || 
+							(clickedStack.getItem() instanceof ItemMeltedMetal && clickedStack.getItemDamage() > 1)))
 			{
-			    if(slot1.getHasStack())
-			    {
+				if(slot1.getHasStack())
+				{
 					return null;
-			    }
+				}
 				ItemStack stack = clickedStack.copy();
 				stack.stackSize = 1;                            
 				slot1.putStack(stack);                          

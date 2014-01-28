@@ -5,6 +5,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import TFC.TFCItems;
 import TFC.Items.ItemMeltedMetal;
+import TFC.Items.Pottery.ItemPotteryMold;
 
 public class SlotLiquidVessel extends Slot
 
@@ -19,7 +20,8 @@ public class SlotLiquidVessel extends Slot
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
 	    if ((itemstack.getItem() instanceof ItemMeltedMetal && itemstack.getItemDamage() > 1) || 
-		(itemstack.itemID == TFCItems.CeramicMold.itemID && itemstack.getItemDamage() == 1))
+		(itemstack.itemID == TFCItems.CeramicMold.itemID && itemstack.getItemDamage() == 1)
+		|| (itemstack.getItem() instanceof ItemPotteryMold && itemstack.getItemDamage() > 0))
 	    {
 			return true;
 	    }
