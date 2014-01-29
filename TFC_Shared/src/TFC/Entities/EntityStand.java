@@ -2,6 +2,9 @@ package TFC.Entities;
 
 import java.io.DataOutput;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import TFC.TileEntities.TEStand;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -12,6 +15,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class EntityStand extends EntityLiving
@@ -20,10 +25,18 @@ public class EntityStand extends EntityLiving
 	public EntityStand(World par1World)
 	{
 		super(par1World);
-		setSize(0.25f,2f);
+		setSize(0.125f,2f);
 		this.setHealth(1);
+		noClip = true;
+		ignoreFrustumCheck = true;
 	}
 
+	@Override
+	protected void doBlockCollisions()
+    {
+		
+    }
+	
 	public EntityStand(World par1World, TEStand TE){
 		this(par1World);
 		standTE = TE;
@@ -44,11 +57,16 @@ public class EntityStand extends EntityLiving
 
 	@Override
 	public void moveEntity(double d1,double d2,double d3){
-	this.isCollided = false;
+		this.isCollided = false;
 	}
 
 	@Override
 	public void onUpdate(){
+		if(this.worldObj.isRemote){
+			setSize(0.125f,2f);
+		}else{
+			setSize(0,0);
+		}
 		if(standTE == null){
 			standTE = (TEStand)worldObj.getBlockTileEntity((int)posX, (int)posY, (int)posZ);
 			if(standTE == null){
@@ -99,11 +117,17 @@ public class EntityStand extends EntityLiving
 	@Override
 	public ItemStack getCurrentItemOrArmor(int i) {
 		if(standTE !=null){
+			if(standTE.worldObj.isRemote){
+				standTE.validate();
+			}
 			return standTE.getStackInSlot(i);
 		}
 		TileEntity te = worldObj.getBlockTileEntity((int)posX, (int)posY, (int)posZ);
 		if(te instanceof TEStand){
 			standTE = (TEStand)te;
+			if(standTE.worldObj.isRemote){
+				standTE.validate();
+			}
 			return standTE.getStackInSlot(i);
 		}
 		return null;
@@ -119,10 +143,11 @@ public class EntityStand extends EntityLiving
 	@Override
 	public ItemStack[] getLastActiveItems() {
 		// TODO Auto-generated method stub
-		if(standTE!=null){
-			return standTE.items;
+		ItemStack[] items = new ItemStack[5];
+		for(int i = 0; i < 5; i++){
+			items[i] = this.getCurrentItemOrArmor(i);
 		}
-		return new ItemStack[5];
+		return items;
 	}
 
 }

@@ -297,6 +297,14 @@ public class TEStand extends NetworkTileEntity implements IInventory
 			dos.writeInt(zCoord);
 			dos.writeFloat(yaw);
 			dos.writeBoolean(isTop);
+			for(int j = 0; j < items.length;j++){
+				if(items[j]!=null){
+					dos.writeInt(items[j].itemID);
+				}
+				else{
+					dos.writeInt(0);
+				}
+			}
 		} catch (IOException e) {
 		}
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());

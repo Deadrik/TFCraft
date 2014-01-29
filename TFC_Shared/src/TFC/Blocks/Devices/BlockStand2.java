@@ -47,7 +47,7 @@ public class BlockStand2 extends BlockTerraContainer implements IMultipleBlock
 	{
 		super(par1, Material.wood);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
-		this.setBlockBounds(0f, 0, 0f, 1f, 1, 1f);
+		this.setBlockBounds(0.125f, 0, 0.125f, 0.875f, 1, 0.875f);
 		woodNames = new String[Global.WOOD_ALL.length - 16];
 		System.arraycopy(Global.WOOD_ALL, 16, woodNames, 0,Global.WOOD_ALL.length - 16);
 	}
