@@ -5,6 +5,10 @@ import net.minecraft.util.Icon;
 public class TFC_Textures 
 {
 	/**
+	 * Registered in ItemTerraTool
+	 */
+	public static Icon BrokenItem;
+	/**
 	 * These are defined in BlockGrass
 	 */
 	public static Icon InvisibleTexture;

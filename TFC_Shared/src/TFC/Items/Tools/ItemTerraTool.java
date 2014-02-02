@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.Icon;
 import TFC.Reference;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
@@ -19,6 +20,7 @@ import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Textures;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
@@ -27,6 +29,7 @@ import com.google.common.collect.Multimap;
 
 public class ItemTerraTool extends ItemTool implements ISize
 {
+	private static boolean registeredGlobalTex = false;
 
 	public ItemTerraTool(int par1, float par2,
 			EnumToolMaterial par3EnumToolMaterial, Block[] par4ArrayOfBlock) 
@@ -82,6 +85,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 	public void registerIcons(IconRegister registerer)
 	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
+		TFC_Textures.BrokenItem = registerer.registerIcon(Reference.ModID + ":" + "tools/Broken Item");
 	}
 
 	@Override
@@ -128,5 +132,21 @@ public class ItemTerraTool extends ItemTool implements ISize
 			return (int) (getMaxDamage()+(getMaxDamage()*(buff/100f)));
 		}
 		else return super.getMaxDamage(stack);
+	}
+
+	@Override
+	public boolean requiresMultipleRenderPasses()
+	{
+		return true;
+	}
+
+	@Override
+	public Icon getIcon(ItemStack stack, int pass)
+	{
+		NBTTagCompound nbt = stack.getTagCompound();
+		if(pass == 1 && nbt != null && nbt.hasKey("broken"))
+			return TFC_Textures.BrokenItem;
+		else
+			return getIconFromDamageForRenderPass(stack.getItemDamage(), pass);
 	}
 }

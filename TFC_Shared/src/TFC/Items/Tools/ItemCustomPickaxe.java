@@ -9,12 +9,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Icon;
 import TFC.Reference;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Textures;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
@@ -36,13 +39,22 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	}
 
 	@Override
+	public Icon getIcon(ItemStack stack, int pass)
+	{
+		NBTTagCompound nbt = stack.getTagCompound();
+		if(pass == 1 && nbt != null && nbt.hasKey("broken"))
+			return TFC_Textures.BrokenItem;
+		else
+			return getIconFromDamageForRenderPass(stack.getItemDamage(), pass);
+	}
+
+	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 
-		if(TFCOptions.enableDebugMode) {
+		if(TFCOptions.enableDebugMode)
 			arraylist.add("Damage: "+is.getItemDamage());
-		}
 	}
 
 	@Override
@@ -60,11 +72,10 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	@Override
 	public int getItemStackLimit()
 	{
-		if(canStack()) {
+		if(canStack())
 			return this.getSize(null).stackSize * getWeight(null).multiplier;
-		} else {
+		else
 			return 1;
-		}
 	}
 
 	@Override
