@@ -1,6 +1,5 @@
 package TFC.Blocks.Vanilla;
 
-import java.io.Console;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -9,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.stats.StatList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
@@ -17,6 +17,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.TFC_Climate;
+import TFC.TileEntities.TileEntityFireEntity;
 
 public class BlockCustomSnow extends BlockTerra
 {
@@ -30,6 +31,9 @@ public class BlockCustomSnow extends BlockTerra
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
+		if(checkHeatSources(par1World, par2, par3, par4))
+			return false;
+		
 		int var5 = par1World.getBlockId(par2, par3 - 1, par4);
 		if (var5 == Block.ice.blockID
 				|| var5 != TFCBlocks.LooseRock.blockID
@@ -256,5 +260,25 @@ public class BlockCustomSnow extends BlockTerra
 			return false;
 		}
 		return true;
+	}
+	
+	private static boolean checkHeatSources(World world, int x, int y, int z)
+	{
+		int r = 2;
+		for(int i = x-r; i<x+r; i++)
+			for(int j = y-r; j<y+r; j++)
+				for(int k = z-r; k<z+r; k++)
+				{
+					if(world.getBlockId(i, j, k) == Block.lavaStill.blockID || world.getBlockId(i, j, k) == Block.lavaMoving.blockID)
+						return true;
+
+					TileEntity te = world.getBlockTileEntity(i, j, k);
+					if(te != null && te instanceof TileEntityFireEntity && (x-i==1 || x-i==-1 || y-j==1 || y-j==-1 || z-k==1 || z-k==-1))
+					{
+						if(((TileEntityFireEntity)te).fireTemperature > 100)
+							return true;
+					}
+				}
+		return false;
 	}
 }

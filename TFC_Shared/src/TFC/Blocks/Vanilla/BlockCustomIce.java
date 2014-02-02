@@ -15,6 +15,7 @@ import net.minecraft.block.BlockIce;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
@@ -179,7 +180,7 @@ public class BlockCustomIce extends BlockIce
 	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
 		if((world.provider) instanceof TFCProvider && !world.isRemote && world.getBlockId(i, j, k)==this.blockID){
-			if (!((TFCProvider)(world.provider)).canBlockFreezeTFC(i, j, k, false))
+			if (!((TFCProvider)(world.provider)).canBlockFreezeTFC(i, j, k, false) || checkHeatSources(world, i, j, k))
 			{
 				if (world.getBlockId(i, j+1, k) == Block.snow.blockID)
 				{
@@ -201,5 +202,16 @@ public class BlockCustomIce extends BlockIce
 				}
 			}
 		}
+	}
+	
+	private static boolean checkHeatSources(World world, int x, int y, int z){
+		int r = 2; //radius
+		for(int i = x-r; i<x+r; i++)
+			for(int j = y-r; j<y+r; j++)
+				for(int k = z-r; k<z+r; k++)
+					if(world.getBlockId(i, j, k) == Block.lavaStill.blockID || world.getBlockId(i, j, k) == Block.lavaMoving.blockID)
+						return true;
+
+		return false;
 	}
 }
