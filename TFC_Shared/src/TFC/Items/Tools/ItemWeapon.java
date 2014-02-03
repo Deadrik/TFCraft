@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.Reference;
@@ -24,6 +25,7 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
 import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Textures;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
@@ -47,6 +49,16 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	public float getDamageVsEntity(Entity par1Entity, ItemStack itemStack)
 	{
 		return weaponDamage;
+	}
+
+	@Override
+	public Icon getIcon(ItemStack stack, int pass)
+	{
+		NBTTagCompound nbt = stack.getTagCompound();
+		if(pass == 1 && nbt != null && nbt.hasKey("broken"))
+			return TFC_Textures.BrokenItem;
+		else
+			return getIconFromDamageForRenderPass(stack.getItemDamage(), pass);
 	}
 
 	@Override

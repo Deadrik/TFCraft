@@ -8,6 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event.Result;
@@ -20,6 +22,7 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Textures;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityFarmland;
@@ -42,19 +45,25 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	}
 
 	@Override
+	public Icon getIcon(ItemStack stack, int pass)
+	{
+		NBTTagCompound nbt = stack.getTagCompound();
+		if(pass == 1 && nbt != null && nbt.hasKey("broken"))
+			return TFC_Textures.BrokenItem;
+		else
+			return getIconFromDamageForRenderPass(stack.getItemDamage(), pass);
+	}
+
+	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
 	{
 		if (world.isRemote || world.getBlockId(x, y, z) == TFCBlocks.ToolRack.blockID)
-		{
 			return false;
-		}
 		else
 		{
 			UseHoeEvent event = new UseHoeEvent(player, stack, world, x, y, z);
 			if (MinecraftForge.EVENT_BUS.post(event))
-			{
 				return false;
-			}
 
 			if (event.getResult() == Result.ALLOW)
 			{
@@ -68,9 +77,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 			boolean isDirt = TFC_Core.isDirt(var8);
 
 			if (side != 1 || var9 != 0 || (!TFC_Core.isGrass(var8) && !isDirt))
-			{
 				return false;
-			}
 			else
 			{
 				Block var10 = var8 == TFCBlocks.Dirt.blockID || var8 == TFCBlocks.Grass.blockID || var8 == TFCBlocks.DryGrass.blockID ? TFCBlocks.Dirt : 
@@ -83,9 +90,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 						world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, var10.stepSound.getStepSound(), (var10.stepSound.getVolume() + 1.0F) / 2.0F, var10.stepSound.getPitch() * 0.8F);
 
 						if (world.isRemote)
-						{
 							return true;
-						}
 						else
 						{
 							world.setBlock(x, y, z, TFCBlocks.tilledSoil.blockID, meta, 0x2);
@@ -107,9 +112,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 						world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, var10.stepSound.getStepSound(), (var10.stepSound.getVolume() + 1.0F) / 2.0F, var10.stepSound.getPitch() * 0.8F);
 
 						if (world.isRemote)
-						{
 							return true;
-						}
 						else
 						{
 							world.setBlock(x, y, z, TFCBlocks.tilledSoil2.blockID, meta, 0x2);
@@ -137,18 +140,16 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 
-		if(TFCOptions.enableDebugMode) {
+		if(TFCOptions.enableDebugMode)
 			arraylist.add("Damage: " + is.getItemDamage());
-		}
 	}
 	@Override
 	public int getItemStackLimit()
 	{
-		if(canStack()) {
+		if(canStack())
 			return this.getSize(null).stackSize * getWeight(null).multiplier;
-		} else {
+		else
 			return 1;
-		}
 	}
 
 	@Override

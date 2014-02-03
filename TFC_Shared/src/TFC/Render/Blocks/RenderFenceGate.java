@@ -8,7 +8,6 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.TFCBlocks;
 import TFC.API.IMultipleBlock;
 import TFC.TileEntities.TileEntityFenceGate;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -35,32 +34,22 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 		float f3 = 0.9375F;
 		float f4 = 0.3125F;
 		float f5 = 1.0F;
-		int[] wallIDs =
-				{ Block.cobblestoneWall.blockID, TFCBlocks.WallBrickIgEx.blockID, TFCBlocks.WallBrickIgIn.blockID,
-				        TFCBlocks.WallBrickMM.blockID, TFCBlocks.WallBrickSed.blockID, TFCBlocks.WallCobbleIgEx.blockID,
-				        TFCBlocks.WallCobbleIgIn.blockID, TFCBlocks.WallCobbleMM.blockID, TFCBlocks.WallCobbleSed.blockID,
-				        TFCBlocks.WallRawIgEx.blockID, TFCBlocks.WallRawIgIn.blockID, TFCBlocks.WallRawMM.blockID,
-				        TFCBlocks.WallRawSed.blockID, TFCBlocks.WallSmoothIgEx.blockID, TFCBlocks.WallSmoothIgIn.blockID,
-				        TFCBlocks.WallSmoothMM.blockID, TFCBlocks.WallSmoothSed.blockID };
 
-		for (int wallID : wallIDs)
-		{
-
-			if ((i1 == 2 || i1 == 0) && renderer.blockAccess.getBlockId(par2 - 1, par3, par4) == wallID &&
-			    renderer.blockAccess.getBlockId(par2 + 1, par3, par4) == wallID ||
+		if ((i1 == 2 || i1 == 0) && 
+				Block.blocksList[renderer.blockAccess.getBlockId(par2 - 1, par3, par4)] instanceof TFC.Blocks.Vanilla.BlockCustomWall &&
+				Block.blocksList[renderer.blockAccess.getBlockId(par2 + 1, par3, par4)] instanceof TFC.Blocks.Vanilla.BlockCustomWall ||
 			    (i1 == 3 || i1 == 1) &&
-			    renderer.blockAccess.getBlockId(par2, par3, par4 - 1) == wallID &&
-			    renderer.blockAccess.getBlockId(par2, par3, par4 + 1) == wallID)
-			{
-				f -= 0.1875F;
-				f1 -= 0.1875F;
-				f2 -= 0.1875F;
-				f3 -= 0.1875F;
-				f4 -= 0.1875F;
-				f5 -= 0.1875F;
-				break;
-			}
+			    Block.blocksList[renderer.blockAccess.getBlockId(par2, par3, par4 - 1)] instanceof TFC.Blocks.Vanilla.BlockCustomWall &&
+			    Block.blocksList[renderer.blockAccess.getBlockId(par2, par3, par4 + 1)] instanceof TFC.Blocks.Vanilla.BlockCustomWall)
+		{
+			f -= 0.1875F;
+			f1 -= 0.1875F;
+			f2 -= 0.1875F;
+			f3 -= 0.1875F;
+			f4 -= 0.1875F;
+			f5 -= 0.1875F;
 		}
+
 
 		renderer.renderAllFaces = true;
 		float f6;

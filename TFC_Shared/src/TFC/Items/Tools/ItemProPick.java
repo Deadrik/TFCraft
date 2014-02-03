@@ -6,12 +6,15 @@ import java.util.Random;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Textures;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
@@ -37,13 +40,22 @@ public class ItemProPick extends ItemTerra
 	}
 
 	@Override
+	public Icon getIcon(ItemStack stack, int pass)
+	{
+		NBTTagCompound nbt = stack.getTagCompound();
+		if(pass == 1 && nbt != null && nbt.hasKey("broken"))
+			return TFC_Textures.BrokenItem;
+		else
+			return getIconFromDamageForRenderPass(stack.getItemDamage(), pass);
+	}
+
+	@Override
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		int blockID = world.getBlockId(x, y, z);
 
 		// Negated the old condition and exiting the method here instead.
-		if (blockID == TFCBlocks.ToolRack.blockID) {
+		if (blockID == TFCBlocks.ToolRack.blockID)
 			return true;
-		}
 
 		// Getting the meta data only when we actually need it.
 		int meta = world.getBlockMetadata(x, y, z);
@@ -51,9 +63,8 @@ public class ItemProPick extends ItemTerra
 		// Damage the item on prospecting use.
 		if (!world.isRemote) {
 			itemStack.damageItem(1, player);
-			if (itemStack.getItemDamage() >= itemStack.getMaxDamage()) {
+			if (itemStack.getItemDamage() >= itemStack.getMaxDamage())
 				player.destroyCurrentEquippedItem();
-			}
 
 			return true;
 		}
@@ -77,8 +88,8 @@ public class ItemProPick extends ItemTerra
 		}
 
 		// Check all blocks in the 25x25 area, centered on the targeted block.
-		for (int i = -12; i < 12; i++) {
-			for (int j = -12; j < 12; j++) {
+		for (int i = -12; i < 12; i++)
+			for (int j = -12; j < 12; j++)
 				for(int k = -12; k < 12; k++) {
 					int blockX = x + i, 
 							blockY = y + j,
@@ -88,25 +99,21 @@ public class ItemProPick extends ItemTerra
 
 					if (blockID != TFCBlocks.Ore.blockID &&
 							blockID != TFCBlocks.Ore2.blockID &&
-							blockID != TFCBlocks.Ore3.blockID) {
+							blockID != TFCBlocks.Ore3.blockID)
 						continue;
-					}
 
 					meta = world.getBlockMetadata(blockX, blockY, blockZ);
 					ItemStack ore = new ItemStack(blockID, 1, meta);
 					String oreName = ore.getDisplayName();
 
-					if (results.containsKey(oreName)) {
+					if (results.containsKey(oreName))
 						results.get(oreName).Count++;
-					} else {
+					else
 						results.put(oreName, new ProspectResult(ore, 1));
-					}
 
 					ore = null;
 					oreName = null;
 				}
-			}
-		}
 
 		// Tell the player what was found.
 		TellResult(player);
@@ -139,17 +146,16 @@ public class ItemProPick extends ItemTerra
 		ProspectResult result = results.values().toArray(new ProspectResult[0])[index];
 		String oreName = result.ItemStack.getItem().getItemDisplayName(result.ItemStack);
 
-		if (result.Count < 10) {
+		if (result.Count < 10)
 			player.addChatMessage(String.format("%s %s", StringUtil.localize("gui.ProPick.FoundTraces"), oreName));
-		} else if(result.Count < 20) {
+		else if(result.Count < 20)
 			player.addChatMessage(String.format("%s %s", StringUtil.localize("gui.ProPick.FoundSmall"), oreName));
-		} else if (result.Count < 40) {
+		else if (result.Count < 40)
 			player.addChatMessage(String.format("%s %s", StringUtil.localize("gui.ProPick.FoundMedium"), oreName));
-		} else if (result.Count < 80) {
+		else if (result.Count < 80)
 			player.addChatMessage(String.format("%s %s", StringUtil.localize("gui.ProPick.FoundLarge"), oreName));
-		} else {
+		else
 			player.addChatMessage(String.format("%s %s", StringUtil.localize("gui.ProPick.FoundVeryLarge"), oreName));
-		}
 
 		oreName = null;
 		result = null;
