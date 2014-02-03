@@ -18,17 +18,6 @@ public class ClientTickHandler implements ITickHandler
 		{
 			EntityPlayer player = (EntityPlayer)tickData[0];
 			World world = player.worldObj;
-
-//			if(Minecraft.getMinecraft().currentScreen instanceof GuiContainer && 
-//					((GuiContainer)Minecraft.getMinecraft().currentScreen).inventorySlots instanceof ContainerTFC)
-//			{
-//				ContainerTFC cont = (ContainerTFC)((GuiContainer)Minecraft.getMinecraft().currentScreen).inventorySlots;
-//				int bagNum = cont.bagsSlotNum;
-//				if(Keyboard.isKeyDown(bagNum+2))
-//				{
-//					player.closeScreen();
-//				}
-//			}
 		}
 	}
 
