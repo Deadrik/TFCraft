@@ -74,6 +74,9 @@ public class ChunkData
 		lastVisited = TFC_Time.getTotalTicks();
 
 		heightmap = tag.getIntArray("heightmap");
+		if(heightmap.length == 0){
+			heightmap = new int[256];
+		}
 	}
 
 	public NBTTagCompound getTag()

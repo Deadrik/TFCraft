@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
@@ -131,7 +132,9 @@ public class TFCProvider extends WorldProvider
 			if (var9 == 1000)
 				break;
 		}
-
+		
+		WorldInfo info = worldObj.getWorldInfo();
+		info.setSpawnPosition(var6, this.worldObj.getHeightValue(var6, var8), var8);
 		return new ChunkCoordinates(var6, this.worldObj.getHeightValue(var6, var8), var8);
 	}
 
@@ -139,7 +142,10 @@ public class TFCProvider extends WorldProvider
 	public ChunkCoordinates getSpawnPoint()
 	{
 		WorldInfo info = worldObj.getWorldInfo();
-		return getRandomizedSpawnPoint();
+		if(info.getSpawnZ() > -2999){
+			return getRandomizedSpawnPoint();
+		}
+		return super.getSpawnPoint();
 		//return new ChunkCoordinates(info.getSpawnX(), info.getSpawnY(), info.getSpawnZ());
 	}
 

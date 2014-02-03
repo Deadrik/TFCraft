@@ -6,6 +6,7 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemColored;
+import net.minecraft.item.ItemLeash;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -31,6 +32,7 @@ import TFC.Items.ItemArrow;
 import TFC.Items.ItemBloom;
 import TFC.Items.ItemBlueprint;
 import TFC.Items.ItemClay;
+import TFC.Items.ItemCustomLeash;
 import TFC.Items.ItemCustomMinecart;
 import TFC.Items.ItemCustomPotion;
 import TFC.Items.ItemCustomSeeds;
@@ -868,7 +870,6 @@ public class TFCItems
 
 	public static Item Quiver;
 
-	public static Item Rope;
 	public static Item Jute;
 	public static Item JuteFibre;
 
@@ -1002,6 +1003,7 @@ public class TFCItems
 		//Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 25, 0.6F, false, 42)).setFolder("").setUnlocalizedName("bread");
 		Item.itemsList[Item.dyePowder.itemID] = null; Item.itemsList[Item.dyePowder.itemID] = new ItemDyeCustom(95).setUnlocalizedName("dyePowder").setTextureName("dye_powder");
 		Item.itemsList[Item.potion.itemID] = null; Item.itemsList[Item.potion.itemID] = (new ItemCustomPotion(117)).setUnlocalizedName("potion").setTextureName("potion");
+		Item.itemsList[Item.leash.itemID] = null; Item.itemsList[Item.leash.itemID] = new ItemCustomLeash(164).setUnlocalizedName("Rope");
 
 		Item.itemsList[Block.tallGrass.blockID] = null; Item.itemsList[Block.tallGrass.blockID] = (new ItemColored(Block.tallGrass.blockID - 256, true)).setBlockNames(new String[] {"shrub", "grass", "fern"});
 
@@ -1559,8 +1561,7 @@ public class TFCItems
 
 		Quiver = new ItemQuiver(TFCItemID.Quiver).setUnlocalizedName("Quiver");
 
-		Rope = new ItemTerra(TFCItemID.rope).setUnlocalizedName("Rope");
-		Jute = new ItemTerra(TFCItemID.jute).setUnlocalizedName("Jute");
+		Jute = new ItemTerra(TFCItemID.jute).setFolder("plants/").setUnlocalizedName("Jute");
 		JuteFibre = new ItemTerra(TFCItemID.juteFibre).setFolder("plants/").setUnlocalizedName("Jute Fibre");
 
 		// Plans

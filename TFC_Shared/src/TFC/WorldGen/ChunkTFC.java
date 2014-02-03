@@ -8,11 +8,12 @@ import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 
 public class ChunkTFC extends Chunk
 {
+	private ExtendedBlockStorage[] EBS;
 	public ChunkTFC(World world, short[] ids, byte[] metadata, int chunkX, int chunkZ)
 	{
 		super(world, chunkX, chunkZ);
 		int height = ids.length / 256;
-		ExtendedBlockStorage[] EBS = getBlockStorageArray();
+		EBS = getBlockStorageArray();
 		for (int x = 0; x < 16; ++x)
 		{
 			for (int z = 0; z < 16; ++z)
