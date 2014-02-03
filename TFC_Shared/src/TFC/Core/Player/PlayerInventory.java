@@ -18,27 +18,33 @@ public class PlayerInventory
 	public static int invYSize = 86;
 	private static ResourceLocation invTexture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_inventory_lower.png");
 
-	public static void buildInventoryLayout(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot)
+	public static void buildInventoryLayout(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot, boolean toolBarAfterMainInv)
 	{
-		for(int j = 0; j < 9; j++)
-		{
-			if(freezeSlot && j == inventory.currentItem) 
-			{
-				addSlotToContainer(container, new SlotForShowOnly(inventory, j, x + j * 18, y+58));
-			}
-			else
-			{
-				addSlotToContainer(container, new Slot(inventory, j, x + j * 18, y+58));
-			}
-		}
+		if(!toolBarAfterMainInv)
+			addToolbarSlots(container, inventory, x, y, freezeSlot);
 
 		for(int i = 0; i < 3; i++)
-		{
 			for(int k = 0; k < 9; k++)
 			{
-				addSlotToContainer(container, new Slot(inventory, k + i * 9 + 9, x + k * 18, y + i * 18));
+				int index =  k + (i+1) * 9;
+				addSlotToContainer(container, new Slot(inventory, index, x + k * 18, y + i * 18));
 			}
-		}
+		if(toolBarAfterMainInv)
+			addToolbarSlots(container, inventory, x, y, freezeSlot);
+	}
+
+	private static void addToolbarSlots(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot) 
+	{
+		for(int j = 0; j < 9; j++)
+			if(freezeSlot && j == inventory.currentItem)
+				addSlotToContainer(container, new SlotForShowOnly(inventory, j, x + j * 18, y+58));
+			else
+				addSlotToContainer(container, new Slot(inventory, j, x + j * 18, y+58));
+	}
+
+	public static void buildInventoryLayout(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot)
+	{
+		buildInventoryLayout(container, inventory, x, y, false);
 	}
 
 	public static void buildInventoryLayout(Container container, InventoryPlayer inventory, int x, int y)

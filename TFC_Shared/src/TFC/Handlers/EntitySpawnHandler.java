@@ -9,6 +9,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
+import TFC.Containers.ContainerPlayerTFC;
 
 public class EntitySpawnHandler
 {
@@ -23,9 +24,7 @@ public class EntitySpawnHandler
 
 		ChunkData data = (ChunkData) ChunkDataManager.chunkmap.get(x + "," + z);
 		if(!(data == null || data.getSpawnProtectionWithUpdate() <= 0))
-		{
 			event.setResult(Result.DENY);
-		}
 	}
 
 	@ForgeSubscribe
@@ -36,6 +35,13 @@ public class EntitySpawnHandler
 			((EntityPlayer)event.entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1000);
 			((EntityPlayer)event.entity).setHealth(1000);
 			event.entity.getEntityData().setBoolean("hasSpawned", true);
+		}
+
+		if (event.entity instanceof EntityPlayer)
+		{
+			((EntityPlayer)event.entity).inventoryContainer = 
+					new ContainerPlayerTFC(((EntityPlayer)event.entity).inventory, !event.world.isRemote, (EntityPlayer)event.entity);
+			((EntityPlayer)event.entity).openContainer = ((EntityPlayer)event.entity).inventoryContainer;
 		}
 	}
 }

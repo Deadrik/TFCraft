@@ -4,21 +4,76 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.Reference;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Food.TFCPotion;
 
 public class GuiInventoryTFC  extends GuiInventory
 {	
+	private float xSize_lo;
+	private float ySize_lo;
+	private boolean hasEffect;
+	protected static final ResourceLocation InventoryUpperTex = new ResourceLocation(Reference.ModID+":textures/gui/inventory.png");
+	protected static final ResourceLocation InventoryEffectsTex = new ResourceLocation(Reference.ModID+":textures/gui/inv_effects.png");
+
 	public GuiInventoryTFC(EntityPlayer player) 
 	{
 		super(player);
+		xSize = 175;
+		ySize = 85+PlayerInventory.invYSize;
+	}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
+	{
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		this.mc.getTextureManager().bindTexture(InventoryUpperTex);
+		int k = this.guiLeft;
+		int l = this.guiTop;
+		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+		//Draw the player avatar
+		func_110423_a(k + 51, l + 75, 30, k + 51 - this.xSize_lo, l + 75 - 50 - this.ySize_lo, this.mc.thePlayer);
+
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
+	}
+
+	@Override
+	protected void drawGuiContainerForegroundLayer(int par1, int par2)
+	{
+		this.fontRenderer.drawString(I18n.getString("container.crafting"), 86, 7, 4210752);
+	}
+
+	@Override
+	public void initGui()
+	{
+		super.initGui();
+
+		if (!this.mc.thePlayer.getActivePotionEffects().isEmpty())
+		{
+			//this.guiLeft = 160 + (this.width - this.xSize - 200) / 2;
+			this.guiLeft = (this.width - this.xSize) / 2;
+			this.hasEffect = true;
+		}
+	}
+
+	@Override
+	public void drawScreen(int par1, int par2, float par3)
+	{
+		super.drawScreen(par1, par2, par3);
+		this.xSize_lo = par1;
+		this.ySize_lo = par2;
+		if(hasEffect)
+			displayDebuffEffects();
 	}
 
 	/**
@@ -37,9 +92,7 @@ public class GuiInventoryTFC  extends GuiInventory
 			int var6 = 33;
 
 			if (var4.size() > 5)
-			{
 				var6 = 132 / (var4.size() - 1);
-			}
 
 			for (Iterator var7 = this.mc.thePlayer.getActivePotionEffects().iterator(); var7.hasNext(); var2 += var6)
 			{
@@ -48,7 +101,7 @@ public class GuiInventoryTFC  extends GuiInventory
 						((TFCPotion) Potion.potionTypes[var8.getPotionID()]) : 
 							Potion.potionTypes[var8.getPotionID()];
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-						TFC_Core.bindTexture(field_110408_a);
+						TFC_Core.bindTexture(InventoryEffectsTex);
 						this.drawTexturedModalRect(var1, var2, 0, 166, 140, 32);
 
 						if (var9.hasStatusIcon())
@@ -60,17 +113,11 @@ public class GuiInventoryTFC  extends GuiInventory
 						String var12 = StatCollector.translateToLocal(var9.getName());
 
 						if (var8.getAmplifier() == 1)
-						{
 							var12 = var12 + " II";
-						}
 						else if (var8.getAmplifier() == 2)
-						{
 							var12 = var12 + " III";
-						}
 						else if (var8.getAmplifier() == 3)
-						{
 							var12 = var12 + " IV";
-						}
 
 						this.fontRenderer.drawStringWithShadow(var12, var1 + 10 + 18, var2 + 6, 16777215);
 						String var11 = Potion.getDurationString(var8);
