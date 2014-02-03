@@ -34,10 +34,8 @@ public class BodyTempStats
 			this.tempTimer += 20;
 
 			if(heatStorage > temperatureLevel)
-			{
 				heatStorage--;
-				//player.addChatMessage("HS: "+heatStorage);
-			}
+			//player.addChatMessage("HS: "+heatStorage);
 
 
 
@@ -97,28 +95,21 @@ public class BodyTempStats
 		}
 		else if(temperature <20){
 			if(temperatureLevel <= -1){
-				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 10)*15))<10){
+				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 10)*15))<10)
 					return 1;
-				}
 			}
-			else if(temperature >= 1){
-				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 10)*15))<10){
+			else if(temperature >= 1)
+				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 10)*15))<10)
 					return -1;
-				}
-			}
 		}
-		else if(temperature > 20){
+		else if(temperature > 20)
 			if(temperatureLevel <= 1){
-				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 20)*10))<10){
+				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 20)*10))<10)
 					return 1;
-				}
 			}
-			else if(temperature > 1){
-				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 20)*10))<10){
+			else if(temperature > 1)
+				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 20)*10))<10)
 					return -1;
-				}
-			}
-		}
 		return 0;
 	}
 
@@ -136,10 +127,9 @@ public class BodyTempStats
 						//returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )<10?1:0);
 						//Lava averages 700-1200 C = 950 C, assume source is lava.
 						double tempValue = 950;
-						if(te instanceof TileEntityFireEntity){
+						if(te instanceof TileEntityFireEntity)
 							//if there is a firepit, use it's heat instead.
 							tempValue = ((TileEntityFireEntity)te).fireTemperature;
-						}
 						//Just to make sure it's not 0
 						double distanceSq = player.getDistanceSq(i, j, k) + 0.05;
 						//radiation isn't perfect, so I don't know what a good numerator is, but it decreases with the square of the distance.
@@ -190,8 +180,8 @@ public class BodyTempStats
 	}
 
 	private void killPlayer(EntityPlayer player){
-		player.inventory.dropAllItems();
-		player.setHealth(0);		
+		/*player.inventory.dropAllItems();
+		player.setHealth(0);	*/	
 	}
 
 	public void readNBT(NBTTagCompound nbt)
