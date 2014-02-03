@@ -738,7 +738,7 @@ public class TFCItemID {
 	public static int Vinegar					= 19115;
 
 	//b78 additions
-	public static int rope						= 19116;
+	//public static int rope						= 19116;
 	public static int venisonRaw				= 19117;
 	public static int venisonCooked				= 19118;
 	public static int jute						= 19119;

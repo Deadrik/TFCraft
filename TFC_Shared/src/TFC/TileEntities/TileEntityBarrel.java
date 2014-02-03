@@ -97,6 +97,17 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					output = itemstack2;
 				}
 			}
+			else if (itemstack.getItem() == TFCItems.Jute){
+				itemstack2 = new ItemStack(TFCItems.JuteFibre,0,0);
+				while(liquidLevel >= 20 && itemstack.stackSize >0){
+					liquidLevel-=20;
+					itemstack2.stackSize++;
+					itemstack.stackSize--;
+				}
+				if(itemstack2.stackSize > 0){
+					output = itemstack2;
+				}
+			}
 			else if(itemstack.getItem() == TFCItems.Logs){
 				itemstack.stackSize--;
 				if(itemstack.stackSize ==0){
@@ -701,6 +712,9 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				int id = itemstack.getItem().itemID;
 				if(Type == 1){
 					if(id == TFCItems.ScrapedHide.itemID){
+						return true;
+					}
+					if(id == TFCItems.Jute.itemID){
 						return true;
 					}
 					if(id == TFCItems.Logs.itemID){
