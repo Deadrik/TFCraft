@@ -44,7 +44,7 @@ public class PlayerInventory
 
 	public static void buildInventoryLayout(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot)
 	{
-		buildInventoryLayout(container, inventory, x, y, false);
+		buildInventoryLayout(container, inventory, x, y, false, false);
 	}
 
 	public static void buildInventoryLayout(Container container, InventoryPlayer inventory, int x, int y)
