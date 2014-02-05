@@ -43,16 +43,16 @@ public class BodyTempStats
 				applyTemperature(player);
 		}
 	}
-
+	
 	private void applyTemperature(EntityPlayer player)
 	{
 		FoodStatsTFC food = TFC_Core.getPlayerFoodStats(player);
 
 		//Player's basic body functions.
 		prevTemperatureLevel = temperatureLevel;
-		if(rand.nextInt(2000-getBaseBodyTempMod(player))<10 && food.foodLevel >= 500)
+		if(rand.nextInt(2000-getBaseBodyTempMod(player))<100 && food.foodLevel >= 500)
 			temperatureLevel++;
-		if((player.isSprinting() || player.swingProgress != 0)&& rand.nextInt(1000- (getBaseBodyTempMod(player) )/2 ) <10 )
+		if((player.isSprinting() || player.swingProgress != 0)&& rand.nextInt(1000- (getBaseBodyTempMod(player) )/2 ) <100 )
 			temperatureLevel++;
 		//if(rand.nextInt(1500 - (player.isInWater()?1000:0))<10 && food.waterLevel >= 500)
 		//	temperatureLevel--;
@@ -62,14 +62,14 @@ public class BodyTempStats
 		//If we are warm then add it to heat reserves
 		heatStorage = Math.max(Math.min(temperatureLevel+heatStorage, 14), 0);
 
-		extraFoodConsumed = (temperatureLevel <0 && heatStorage <= 0 && rand.nextInt(350)<10)?temperatureLevel*-1:0;
-		extraWaterConsumed = (temperatureLevel >0 && heatStorage <= 0 && rand.nextInt(350)<10)?temperatureLevel:0;
+		extraFoodConsumed = (temperatureLevel <0 && heatStorage <= 0 && rand.nextInt(350)<100)?temperatureLevel/-10:0;
+		extraWaterConsumed = (temperatureLevel >0 && heatStorage <= 0 && rand.nextInt(350)<100)?temperatureLevel/10:0;
 
-		if(temperatureLevel != prevTemperatureLevel && !((prevTemperatureLevel >=-1 && prevTemperatureLevel <=1)&&
-				(temperatureLevel >=-1 && temperatureLevel <=1)))
+		if(temperatureLevel != prevTemperatureLevel && !((prevTemperatureLevel >=-10 && prevTemperatureLevel <=10)&&
+				(temperatureLevel >=-10 && temperatureLevel <=10)))
 			tellPlayerMessage(player);
 		prevTemperatureLevel = temperatureLevel;
-		if(temperatureLevel >= -1 && temperatureLevel <= 1){
+		if(temperatureLevel >= -10 && temperatureLevel <= 10){
 			extraFoodConsumed = 0;
 			extraWaterConsumed = 0;
 		}
@@ -95,20 +95,20 @@ public class BodyTempStats
 		}
 		else if(temperature <20){
 			if(temperatureLevel <= -1){
-				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 10)*15))<10)
+				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 10)*15))<100)
 					return 1;
 			}
 			else if(temperature >= 1)
-				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 10)*15))<10)
+				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 10)*15))<100)
 					return -1;
 		}
 		else if(temperature > 20)
 			if(temperatureLevel <= 1){
-				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 20)*10))<10)
+				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 20)*10))<100)
 					return 1;
 			}
 			else if(temperature > 1)
-				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 20)*10))<10)
+				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 20)*10))<100)
 					return -1;
 		return 0;
 	}
@@ -160,7 +160,7 @@ public class BodyTempStats
 	}
 
 	private void tellPlayerMessage(EntityPlayer player){
-		switch(temperatureLevel){
+		switch(temperatureLevel/10){
 		case -1:
 		case 0:
 		case 1: player.addChatMessage("You feel comfortable");break;
