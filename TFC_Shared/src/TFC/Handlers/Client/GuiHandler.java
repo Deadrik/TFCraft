@@ -110,7 +110,7 @@ public class GuiHandler extends TFC.Handlers.GuiHandler
 		}
 		case 27:
 		{
-			return new GuiCalendar(player, world, x, y, z);
+			return new GuiCalendar(player);
 		}
 		case 28:
 		{

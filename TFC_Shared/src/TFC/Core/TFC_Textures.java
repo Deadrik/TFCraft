@@ -56,4 +56,5 @@ public class TFC_Textures
 	public static Icon GasFXIcon;
 	public static Icon GuiInventory;
 	public static Icon GuiSkills;
+	public static Icon GuiCalendar;
 }
