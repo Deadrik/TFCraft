@@ -51,7 +51,7 @@ public class Global
 		"White Cedar","White Elm","Willow","Kapok","Acacia"
 	};
 
-	public static final String SKILL_GENERAL_SMITHING = "Gensmith";
+	public static final String SKILL_GENERAL_SMITHING = "General Smithing";
 	public static final String SKILL_TOOLSMITH = "Toolsmith";
 	public static final String SKILL_WEAPONSMITH = "Weaponsmith";
 	public static final String SKILL_ARMORSMITH = "Armorsmith";

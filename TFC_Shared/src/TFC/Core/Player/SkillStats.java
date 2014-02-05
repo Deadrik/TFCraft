@@ -29,9 +29,9 @@ public class SkillStats
 		setSkill(Global.SKILL_ARMORSMITH, 0);
 	}
 
-	public void init()
+	public Object[] getSkillsKeysArray()
 	{
-
+		return skillsMap.keySet().toArray();
 	}
 
 	public void setSkill(String skillName, int amount)

@@ -13,7 +13,6 @@ import TFC.Core.Player.PlayerInventory;
 
 public class ContainerPlayerTFC extends ContainerPlayer 
 {
-
 	public ContainerPlayerTFC(InventoryPlayer playerInv,
 			boolean par2, EntityPlayer player) 
 	{

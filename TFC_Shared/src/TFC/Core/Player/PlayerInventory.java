@@ -14,8 +14,8 @@ import TFC.Core.TFC_Core;
 
 public class PlayerInventory 
 {
-	public static int invXSize = 175;
-	public static int invYSize = 86;
+	public static int invXSize = 176;
+	public static int invYSize = 87;
 	private static ResourceLocation invTexture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_inventory_lower.png");
 
 	public static void buildInventoryLayout(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot, boolean toolBarAfterMainInv)

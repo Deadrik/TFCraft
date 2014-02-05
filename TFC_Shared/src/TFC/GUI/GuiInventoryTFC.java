@@ -3,6 +3,8 @@ package TFC.GUI;
 import java.util.Collection;
 import java.util.Iterator;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +18,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
+import TFC.Core.Util.StringUtil;
 import TFC.Food.TFCPotion;
 
 public class GuiInventoryTFC  extends GuiInventory
@@ -25,12 +28,14 @@ public class GuiInventoryTFC  extends GuiInventory
 	private boolean hasEffect;
 	protected static final ResourceLocation InventoryUpperTex = new ResourceLocation(Reference.ModID+":textures/gui/inventory.png");
 	protected static final ResourceLocation InventoryEffectsTex = new ResourceLocation(Reference.ModID+":textures/gui/inv_effects.png");
+	protected EntityPlayer player;
 
 	public GuiInventoryTFC(EntityPlayer player) 
 	{
 		super(player);
-		xSize = 175;
+		xSize = 176;
 		ySize = 85+PlayerInventory.invYSize;
+		this.player = player;
 	}
 
 	@Override
@@ -64,6 +69,19 @@ public class GuiInventoryTFC  extends GuiInventory
 			this.guiLeft = (this.width - this.xSize) / 2;
 			this.hasEffect = true;
 		}
+
+		buttonList.clear();
+		buttonList.add(new GuiInventoryButton(0, guiLeft+176, guiTop + 3, 25, 20, 
+				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Inventory")));
+		buttonList.add(new GuiInventoryButton(1, guiLeft+176, guiTop + 23, 25, 20, 
+				25, 86, 25, 20, StringUtil.localize("gui.Inventory.Skills")));
+	}
+
+	@Override
+	protected void actionPerformed(GuiButton guibutton)
+	{
+		if (guibutton.id == 1)
+			Minecraft.getMinecraft().displayGuiScreen(new GuiSkills(this.player));
 	}
 
 	@Override

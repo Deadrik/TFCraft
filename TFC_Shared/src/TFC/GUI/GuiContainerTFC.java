@@ -27,6 +27,17 @@ public class GuiContainerTFC extends GuiContainer
 		ySize = ysize+PlayerInventory.invYSize;
 	}
 
+	protected void setDrawInventory(boolean b)
+	{
+		if(!drawInventory && b)
+			ySize +=PlayerInventory.invYSize;
+		else if(drawInventory && !b)
+			ySize -=PlayerInventory.invYSize;
+
+		drawInventory = b;
+
+	}
+
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
