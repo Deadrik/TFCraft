@@ -12,7 +12,7 @@ public class GuiQuiver extends GuiContainerTFC
 
 	public GuiQuiver(InventoryPlayer inventoryplayer, World world, int i, int j, int k)
 	{
-		super(new ContainerQuiver(inventoryplayer, world, i, j, k), 175, 49);
+		super(new ContainerQuiver(inventoryplayer, world, i, j, k), 176, 49);
 	}
 
 	@Override

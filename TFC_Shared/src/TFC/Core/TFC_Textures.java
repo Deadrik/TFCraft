@@ -51,7 +51,9 @@ public class TFC_Textures
 	public static Icon SheetZinc;
 
 	/**
-	 * Set in BlockGas
+	 * These are defined in BlockHotWaterStill
 	 */
 	public static Icon GasFXIcon;
+	public static Icon GuiInventory;
+	public static Icon GuiSkills;
 }
