@@ -17,6 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Textures;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Util.StringUtil;
 import TFC.Food.TFCPotion;
@@ -72,9 +73,9 @@ public class GuiInventoryTFC  extends GuiInventory
 
 		buttonList.clear();
 		buttonList.add(new GuiInventoryButton(0, guiLeft+176, guiTop + 3, 25, 20, 
-				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Inventory")));
-		buttonList.add(new GuiInventoryButton(1, guiLeft+176, guiTop + 23, 25, 20, 
-				25, 86, 25, 20, StringUtil.localize("gui.Inventory.Skills")));
+				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
+		buttonList.add(new GuiInventoryButton(1, guiLeft+176, guiTop + 22, 25, 20, 
+				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
 	}
 
 	@Override

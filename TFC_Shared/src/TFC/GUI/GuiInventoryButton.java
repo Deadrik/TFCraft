@@ -2,27 +2,33 @@ package TFC.GUI;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
 import TFC.Reference;
 import TFC.Core.TFC_Core;
 
 public class GuiInventoryButton extends GuiButton 
 {
 	private static ResourceLocation texture = new ResourceLocation(Reference.ModID+":textures/gui/inventory.png");
-
+	public Icon icon;
 	public int bX = 0;
 	public int bY = 0;
 	public int bW = 0;
 	public int bH = 0;
 
 	public GuiInventoryButton(int index, int xPos, int yPos, int width, int height, 
-			int buttonX, int buttonY, int buttonW, int buttonH, String s)
+			int buttonX, int buttonY, int buttonW, int buttonH, String s, Icon ico)
 	{
 		super(index, xPos, yPos, width, height, s);
 		bX = buttonX;
 		bY = buttonY;
 		bW = buttonW;
 		bH = buttonH;
+		icon = ico;
 	}
 
 
@@ -35,6 +41,13 @@ public class GuiInventoryButton extends GuiButton
 			this.drawTexturedModalRect(this.xPosition, this.yPosition, this.bX, this.bY, this.bW, this.bH);
 
 			this.field_82253_i = x >= this.xPosition && y >= this.yPosition && x < this.xPosition + this.width && y < this.yPosition + this.height;
+
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			if(icon != null) 
+			{
+				TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
+				this.drawTexturedModelRectFromIcon(this.xPosition+4, this.yPosition+2, icon, 16, 16);
+			}
 
 			this.mouseDragged(mc, x, y);
 

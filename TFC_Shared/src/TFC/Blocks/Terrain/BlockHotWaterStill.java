@@ -67,5 +67,7 @@ public class BlockHotWaterStill extends BlockFreshWaterStill
 	{
 		this.theIcon = new Icon[] {registerer.registerIcon(Reference.ModID+":water_still"), registerer.registerIcon(Reference.ModID+":water_flow")};
 		TFC_Textures.GasFXIcon = registerer.registerIcon(Reference.ModID + ":" + "Steam");
+		TFC_Textures.GuiInventory = registerer.registerIcon(Reference.ModID + ":" + "button_inv");
+		TFC_Textures.GuiSkills = registerer.registerIcon(Reference.ModID + ":" + "button_skills");
 	}
 }
