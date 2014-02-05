@@ -3,6 +3,7 @@ package TFC.GUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import TFC.Reference;
 import TFC.API.SkillsManager;
@@ -30,7 +31,8 @@ public class GuiSkills extends GuiContainerTFC
 		int y = 5;
 		for(String o : SkillsManager.instance.getSkillsArray())
 		{
-			this.drawString(this.fontRenderer, StringUtil.localize(o) + ": " + ss.getSkillMultiplier(o)+"%", 4, y, 0xeeeeee);
+			fontRenderer.drawString(StringUtil.localize(o) + ": " + EnumChatFormatting.AQUA + 
+					ss.getSkill(o), 4, y, 0, false);
 			y+=10;
 		}
 	}
