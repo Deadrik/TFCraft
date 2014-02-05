@@ -4,12 +4,10 @@ import java.util.EnumSet;
 
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.settings.KeyBinding;
-import TFC.TerraFirmaCraft;
 import TFC.API.Util.KeyBindings;
 import TFC.Blocks.BlockDetailed;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.GUI.GuiCalendar;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemCustomHoe;
@@ -19,7 +17,7 @@ import cpw.mods.fml.common.TickType;
 
 public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 {
-	KeyBinding Key_Calendar = new KeyBinding("Key_Calendar", 49);
+	//KeyBinding Key_Calendar = new KeyBinding("Key_Calendar", 49);
 	KeyBinding Key_ToolMode = new KeyBinding("Key_ToolMode", 50);
 	KeyBinding Key_LockTool = new KeyBinding("Key_LockTool", 38);
 
@@ -49,7 +47,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
 
 			EntityClientPlayerMP player = FMLClientHandler.instance().getClient().thePlayer;
-			if (bind.keyDescription == Key_Calendar.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().currentScreen == null)
+			/*if (bind.keyDescription == Key_Calendar.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().currentScreen == null)
 			{
 				player.openGui(TerraFirmaCraft.instance, 27, player.worldObj, 0, 0, 0);
 			}
@@ -57,8 +55,8 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 			{
 				player.closeScreen();
 			}
-			else if (bind.keyDescription == Key_ToolMode.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null 
-					 && FMLClientHandler.instance().getClient().currentScreen == null)
+			else*/ if (bind.keyDescription == Key_ToolMode.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null 
+					&& FMLClientHandler.instance().getClient().currentScreen == null)
 			{
 				if(player.getCurrentEquippedItem().getItem() instanceof ItemChisel)
 				{
@@ -66,15 +64,11 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 					PacketHandler.sendKeyPress(0);
 				}
 				else if(player.getCurrentEquippedItem().getItem() instanceof ItemCustomHoe)
-				{
 					pi.switchHoeMode();
-				}
 			}
 			else if (bind.keyDescription == Key_LockTool.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null 
-					 && FMLClientHandler.instance().getClient().currentScreen == null)
-			{
+					&& FMLClientHandler.instance().getClient().currentScreen == null)
 				if(player.getCurrentEquippedItem().getItem() instanceof ItemChisel)
-				{
 					if(pi.lockX == -9999999)
 					{
 						pi.lockX = BlockDetailed.lockX;
@@ -87,9 +81,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 						pi.lockY = -9999999;
 						pi.lockZ = -9999999;
 					}
-				}
-			}
-			
+
 		}
 	}
 
