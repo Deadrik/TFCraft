@@ -105,9 +105,13 @@ public class ItemTerraFood extends ItemFood implements ISize
 				meltTemp = TFC_ItemHeat.getMeltingPoint(is);
 
 				if(meltTemp != -1)
-				{
 					arraylist.add(TFC_ItemHeat.getHeatColorFood(temp, meltTemp));
-				}
+			}
+
+			if(stackTagCompound.hasKey("foodweight"))
+			{
+				float ounces = stackTagCompound.getFloat("foodweight");
+				arraylist.add(ounces+"oz/10.0oz");
 			}
 		}
 	}
@@ -127,13 +131,9 @@ public class ItemTerraFood extends ItemFood implements ISize
 			int blackstars = filling;
 
 			for(int i = 0; i < blackstars; i++)
-			{
 				stars += "\u272e";
-			}
 			for(int i = 0; i < whitestars; i++)
-			{
 				stars += "\u2729";
-			}
 
 			arraylist.add(StringUtil.localize("gui.FoodPrep.Filling") + ": " + stars);
 		}
@@ -147,9 +147,11 @@ public class ItemTerraFood extends ItemFood implements ISize
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
 			if(stackTagCompound.hasKey("temperature"))
-			{
 				TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
-			}
+		}
+		if (!world.isRemote && is.stackSize > 1)
+		{
+
 		}
 	}
 
@@ -160,17 +162,9 @@ public class ItemTerraFood extends ItemFood implements ISize
 		if(!world.isRemote)
 		{
 			if (foodstats.needFood())
-			{
 				player.setItemInUse(is, this.getMaxItemUseDuration(is));
-			}
-		}
-		else
-		{
-			if (foodstats.needFood())
-			{
-				player.setItemInUse(is, this.getMaxItemUseDuration(is));
-			}
-		}
+		} else if (foodstats.needFood())
+			player.setItemInUse(is, this.getMaxItemUseDuration(is));
 
 		return is;
 	}
@@ -199,20 +193,18 @@ public class ItemTerraFood extends ItemFood implements ISize
 	@Override
 	public int getItemStackLimit()
 	{
-		if(canStack()) {
+		if(canStack())
 			return this.getSize(null).stackSize * getWeight(null).multiplier <= 64 ? this.getSize(null).stackSize * getWeight(null).multiplier : 64;
-		} else {
-			return 1;
-		}
+			else
+				return 1;
 	}
 
 	public boolean isHot(ItemStack is)
 	{
-		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) *0.8) {
+		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) *0.8)
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 
 	public Item setSize(EnumSize s)
@@ -228,18 +220,18 @@ public class ItemTerraFood extends ItemFood implements ISize
 	}
 
 	@Override
-	public EnumSize getSize(ItemStack is) {
-		// TODO Auto-generated method stub
+	public EnumSize getSize(ItemStack is) 
+	{
 		return size;
 	}
 	@Override
-	public EnumWeight getWeight(ItemStack is) {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight(ItemStack is) 
+	{
 		return weight;
 	}
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public boolean canStack() 
+	{
 		return true;
 	}
 }

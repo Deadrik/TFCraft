@@ -6,7 +6,6 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemColored;
-import net.minecraft.item.ItemLeash;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -105,7 +104,7 @@ public class TFCItems
 	public static Item GemBeryl;
 	public static Item GemTourmaline;
 	public static Item GemJade;
-	
+
 	public static Item GemAgate;
 	public static Item GemDiamond;
 
@@ -986,20 +985,12 @@ public class TFCItems
 		Item.itemsList[Item.stick.itemID] = null; Item.itemsList[Item.stick.itemID] = new ItemStick(24).setFull3D().setUnlocalizedName("stick");
 		Item.itemsList[Item.leather.itemID] = null; Item.itemsList[Item.leather.itemID] = new ItemTerra(Item.leather.itemID).setFull3D().setUnlocalizedName("leather");
 		Item.itemsList[Block.vine.blockID] = new ItemColored(Block.vine.blockID - 256, false);
-		Item.itemsList[Item.egg.itemID] = new ItemEgg(Item.egg.itemID).setSize(EnumSize.SMALL).setUnlocalizedName("egg").setTextureName("egg");
-		Egg = Item.itemsList[Item.egg.itemID];
+
 		minecartCrate = (new ItemCustomMinecart(TFCItemID.minecartCrate, 1)).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 
 		Item.itemsList[Item.bow.itemID] = null; Item.itemsList[Item.bow.itemID] = (new ItemCustomBow(5)).setUnlocalizedName("bow").setTextureName("bow");
 		Item.itemsList[Item.arrow.itemID] = null; Item.itemsList[Item.arrow.itemID] = (new ItemArrow(6)).setUnlocalizedName("arrow");
-		Item.itemsList[Item.porkRaw.itemID] = null; Item.itemsList[Item.porkRaw.itemID] = new ItemTerra(63).setUnlocalizedName("porkchopRaw");
-		Item.itemsList[Item.porkCooked.itemID] = null; Item.itemsList[Item.porkCooked.itemID] = new ItemTerraFood(64, 35, 0.0F, true, 38).setFolder("").setUnlocalizedName("porkchopCooked");
-		Item.itemsList[Item.fishRaw.itemID] = null; Item.itemsList[Item.fishRaw.itemID] = new ItemTerra(93).setUnlocalizedName("fishRaw");
-		Item.itemsList[Item.fishCooked.itemID] = null; Item.itemsList[Item.fishCooked.itemID] = new ItemTerraFood(94, 30, 0.0F, true, 39).setFolder("").setUnlocalizedName("fishCooked");
-		Item.itemsList[Item.beefRaw.itemID] = null; Item.itemsList[Item.beefRaw.itemID] = new ItemTerra(107).setUnlocalizedName("beefRaw");
-		Item.itemsList[Item.beefCooked.itemID] = null; Item.itemsList[Item.beefCooked.itemID] = new ItemTerraFood(108, 40, 0.0F, true, 40).setFolder("").setUnlocalizedName("beefCooked");
-		Item.itemsList[Item.chickenRaw.itemID] = null; Item.itemsList[Item.chickenRaw.itemID] = new ItemTerra(109).setUnlocalizedName("chickenRaw");
-		Item.itemsList[Item.chickenCooked.itemID] = null; Item.itemsList[Item.chickenCooked.itemID] = new ItemTerraFood(110, 35, 0.0F, true, 41).setFolder("").setUnlocalizedName("chickenCooked");
+
 		//Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 25, 0.6F, false, 42)).setFolder("").setUnlocalizedName("bread");
 		Item.itemsList[Item.dyePowder.itemID] = null; Item.itemsList[Item.dyePowder.itemID] = new ItemDyeCustom(95).setUnlocalizedName("dyePowder").setTextureName("dye_powder");
 		Item.itemsList[Item.potion.itemID] = null; Item.itemsList[Item.potion.itemID] = (new ItemCustomPotion(117)).setUnlocalizedName("potion").setTextureName("potion");
@@ -1585,6 +1576,88 @@ public class TFCItems
 		JavelinHeadPlan = new ItemPlan(TFCItemID.JavelinHeadPlan).setUnlocalizedName("JavelinHeadPlan");
 
 		// Food related items
+		SetupFood();
+
+		Fertilizer = new ItemFertilizer(TFCItemID.Fertilizer).setUnlocalizedName("Fertilizer");
+
+		/**Armor Crafting related items*/
+		SetupArmor();
+
+		Recipes.Doors = new Item[]{DoorOak, DoorAspen, DoorBirch, DoorChestnut, DoorDouglasFir, 
+				DoorHickory, DoorMaple, DoorAsh, DoorPine, DoorSequoia, DoorSpruce, DoorSycamore, 
+				DoorWhiteCedar, DoorWhiteElm, DoorWillow, DoorKapok, DoorAcacia};
+
+		Recipes.Axes = new Item[]{SedAxe,IgInAxe,IgExAxe,MMAxe,
+				BismuthBronzeAxe,BlackBronzeAxe,
+				BlackSteelAxe,BlueSteelAxe,BronzeAxe,CopperAxe,
+				WroughtIronAxe,RedSteelAxe,SteelAxe};
+
+		Recipes.Chisels = new Item[]{BismuthBronzeChisel,BlackBronzeChisel,
+				BlackSteelChisel,BlueSteelChisel,BronzeChisel,CopperChisel,
+				WroughtIronChisel,RedSteelChisel,SteelChisel};
+
+		Recipes.Saws = new Item[]{BismuthBronzeSaw,BlackBronzeSaw,
+				BlackSteelSaw,BlueSteelSaw,BronzeSaw,CopperSaw,
+				WroughtIronSaw,RedSteelSaw,SteelSaw};
+
+		Recipes.Knives = new Item[]{StoneKnife,BismuthBronzeKnife,BlackBronzeKnife,
+				BlackSteelKnife,BlueSteelKnife,BronzeKnife,CopperKnife,
+				WroughtIronKnife,RedSteelKnife,SteelKnife};
+
+		Recipes.MeltedMetal = new Item[]{BismuthUnshaped, BismuthBronzeUnshaped,BlackBronzeUnshaped,
+				TFCItems.BlackSteelUnshaped,TFCItems.BlueSteelUnshaped,TFCItems.BrassUnshaped,TFCItems.BronzeUnshaped,
+				TFCItems.CopperUnshaped,TFCItems.GoldUnshaped,
+				TFCItems.WroughtIronUnshaped,TFCItems.LeadUnshaped,TFCItems.NickelUnshaped,TFCItems.PigIronUnshaped,
+				TFCItems.PlatinumUnshaped,TFCItems.RedSteelUnshaped,TFCItems.RoseGoldUnshaped,TFCItems.SilverUnshaped,
+				TFCItems.SteelUnshaped,TFCItems.SterlingSilverUnshaped,
+				TFCItems.TinUnshaped,TFCItems.ZincUnshaped, TFCItems.HCSteelUnshaped, TFCItems.WeakSteelUnshaped,
+				TFCItems.HCBlackSteelUnshaped, TFCItems.HCBlueSteelUnshaped, TFCItems.HCRedSteelUnshaped, 
+				TFCItems.WeakBlueSteelUnshaped, TFCItems.WeakRedSteelUnshaped};
+
+		Recipes.Hammers  = new Item[]{TFCItems.StoneHammer,TFCItems.BismuthBronzeHammer,TFCItems.BlackBronzeHammer,
+				TFCItems.BlackSteelHammer,TFCItems.BlueSteelHammer,TFCItems.BronzeHammer,TFCItems.CopperHammer,
+				TFCItems.WroughtIronHammer,TFCItems.RedSteelHammer,TFCItems.SteelHammer};
+
+		Recipes.Scythes = new Item[]{TFCItems.BismuthBronzeScythe,TFCItems.BlackBronzeScythe,
+				TFCItems.BlackSteelScythe,TFCItems.BlueSteelScythe,TFCItems.BronzeScythe,TFCItems.CopperScythe,
+				TFCItems.WroughtIronScythe,TFCItems.RedSteelScythe,TFCItems.SteelScythe};
+
+		Recipes.Spindle = new Item[]{TFCItems.Spindle};
+
+		Recipes.Gems  = new Item[]{TFCItems.GemAgate, TFCItems.GemAmethyst, TFCItems.GemBeryl, TFCItems.GemDiamond, TFCItems.GemEmerald, TFCItems.GemGarnet, 
+				TFCItems.GemJade, TFCItems.GemJasper, TFCItems.GemOpal,TFCItems.GemRuby,TFCItems.GemSapphire,TFCItems.GemTopaz,TFCItems.GemTourmaline};
+
+		Meals = new Item[]{MealMoveSpeed, MealDigSpeed, MealDamageBoost, MealJump, MealDamageResist, 
+				MealFireResist, MealWaterBreathing, MealNightVision};
+
+		((TFCTabs)TFCTabs.TFCTools).setTabIconItemIndex(TFCItems.SteelHammer.itemID);
+		((TFCTabs)TFCTabs.TFCMaterials).setTabIconItemIndex(TFCItems.LeadIngot.itemID);
+		((TFCTabs)TFCTabs.TFCUnfinished).setTabIconItemIndex(TFCItems.SteelHammerHead.itemID);
+		((TFCTabs)TFCTabs.TFCArmor).setTabIconItemIndex(TFCItems.SteelHelmet.itemID);      
+		((TFCTabs)TFCTabs.TFCMisc).setTabIconItemIndex(TFCItems.Spindle.itemID);  
+		((TFCTabs)TFCTabs.TFCPottery).setTabIconItemStack(new ItemStack(PotteryJug, 1, 1));  
+		((TFCTabs)TFCTabs.TFCWeapons).setTabIconItemStack(new ItemStack(SteelSword, 1));  
+
+		registerMetals();
+
+		System.out.println(new StringBuilder().append("[TFC] Done Loading Items").toString());
+	}
+
+	/**
+	 * 
+	 */
+	private static void SetupFood() 
+	{
+		Item.itemsList[Item.egg.itemID] = new ItemEgg(Item.egg.itemID).setSize(EnumSize.SMALL).setUnlocalizedName("egg").setTextureName("egg");
+		Egg = Item.itemsList[Item.egg.itemID];
+		Item.itemsList[Item.porkRaw.itemID] = null; Item.itemsList[Item.porkRaw.itemID] = new ItemTerra(63).setUnlocalizedName("porkchopRaw");
+		Item.itemsList[Item.porkCooked.itemID] = null; Item.itemsList[Item.porkCooked.itemID] = new ItemTerraFood(64, 35, 0.0F, true, 38).setFolder("").setUnlocalizedName("porkchopCooked");
+		Item.itemsList[Item.fishRaw.itemID] = null; Item.itemsList[Item.fishRaw.itemID] = new ItemTerra(93).setUnlocalizedName("fishRaw");
+		Item.itemsList[Item.fishCooked.itemID] = null; Item.itemsList[Item.fishCooked.itemID] = new ItemTerraFood(94, 30, 0.0F, true, 39).setFolder("").setUnlocalizedName("fishCooked");
+		Item.itemsList[Item.beefRaw.itemID] = null; Item.itemsList[Item.beefRaw.itemID] = new ItemTerra(107).setUnlocalizedName("beefRaw");
+		Item.itemsList[Item.beefCooked.itemID] = null; Item.itemsList[Item.beefCooked.itemID] = new ItemTerraFood(108, 40, 0.0F, true, 40).setFolder("").setUnlocalizedName("beefCooked");
+		Item.itemsList[Item.chickenRaw.itemID] = null; Item.itemsList[Item.chickenRaw.itemID] = new ItemTerra(109).setUnlocalizedName("chickenRaw");
+		Item.itemsList[Item.chickenCooked.itemID] = null; Item.itemsList[Item.chickenCooked.itemID] = new ItemTerraFood(110, 35, 0.0F, true, 41).setFolder("").setUnlocalizedName("chickenCooked");
 		FruitTreeSapling1 = new ItemFruitTreeSapling(TFCItemID.FruitTreeSapling1, 0).setUnlocalizedName("FruitSapling1");
 		FruitTreeSapling2 = new ItemFruitTreeSapling(TFCItemID.FruitTreeSapling2, 8).setUnlocalizedName("FruitSapling2");
 		RedApple = new ItemTerraFood(TFCItemID.RedApple, 15, -0.25F, 2).setUnlocalizedName("Red Apple");
@@ -1706,70 +1779,6 @@ public class TFCItems
 		ElderberryLeaf =  new ItemTerra(TFCItemID.ElderberryLeaf).setFolder("plants/").setUnlocalizedName("Elderberry Leaf");
 		GooseberryLeaf =  new ItemTerra(TFCItemID.GooseberryLeaf).setFolder("plants/").setUnlocalizedName("Gooseberry Leaf");
 		CloudberryLeaf =  new ItemTerra(TFCItemID.CloudberryLeaf).setFolder("plants/").setUnlocalizedName("Cloudberry Leaf");
-
-		Fertilizer = new ItemFertilizer(TFCItemID.Fertilizer).setUnlocalizedName("Fertilizer");
-
-		/**Armor Crafting related items*/
-		SetupArmor();
-
-		Recipes.Doors = new Item[]{DoorOak, DoorAspen, DoorBirch, DoorChestnut, DoorDouglasFir, 
-				DoorHickory, DoorMaple, DoorAsh, DoorPine, DoorSequoia, DoorSpruce, DoorSycamore, 
-				DoorWhiteCedar, DoorWhiteElm, DoorWillow, DoorKapok, DoorAcacia};
-
-		Recipes.Axes = new Item[]{SedAxe,IgInAxe,IgExAxe,MMAxe,
-				BismuthBronzeAxe,BlackBronzeAxe,
-				BlackSteelAxe,BlueSteelAxe,BronzeAxe,CopperAxe,
-				WroughtIronAxe,RedSteelAxe,SteelAxe};
-
-		Recipes.Chisels = new Item[]{BismuthBronzeChisel,BlackBronzeChisel,
-				BlackSteelChisel,BlueSteelChisel,BronzeChisel,CopperChisel,
-				WroughtIronChisel,RedSteelChisel,SteelChisel};
-
-		Recipes.Saws = new Item[]{BismuthBronzeSaw,BlackBronzeSaw,
-				BlackSteelSaw,BlueSteelSaw,BronzeSaw,CopperSaw,
-				WroughtIronSaw,RedSteelSaw,SteelSaw};
-
-		Recipes.Knives = new Item[]{StoneKnife,BismuthBronzeKnife,BlackBronzeKnife,
-				BlackSteelKnife,BlueSteelKnife,BronzeKnife,CopperKnife,
-				WroughtIronKnife,RedSteelKnife,SteelKnife};
-
-		Recipes.MeltedMetal = new Item[]{BismuthUnshaped, BismuthBronzeUnshaped,BlackBronzeUnshaped,
-				TFCItems.BlackSteelUnshaped,TFCItems.BlueSteelUnshaped,TFCItems.BrassUnshaped,TFCItems.BronzeUnshaped,
-				TFCItems.CopperUnshaped,TFCItems.GoldUnshaped,
-				TFCItems.WroughtIronUnshaped,TFCItems.LeadUnshaped,TFCItems.NickelUnshaped,TFCItems.PigIronUnshaped,
-				TFCItems.PlatinumUnshaped,TFCItems.RedSteelUnshaped,TFCItems.RoseGoldUnshaped,TFCItems.SilverUnshaped,
-				TFCItems.SteelUnshaped,TFCItems.SterlingSilverUnshaped,
-				TFCItems.TinUnshaped,TFCItems.ZincUnshaped, TFCItems.HCSteelUnshaped, TFCItems.WeakSteelUnshaped,
-				TFCItems.HCBlackSteelUnshaped, TFCItems.HCBlueSteelUnshaped, TFCItems.HCRedSteelUnshaped, 
-				TFCItems.WeakBlueSteelUnshaped, TFCItems.WeakRedSteelUnshaped};
-
-		Recipes.Hammers  = new Item[]{TFCItems.StoneHammer,TFCItems.BismuthBronzeHammer,TFCItems.BlackBronzeHammer,
-				TFCItems.BlackSteelHammer,TFCItems.BlueSteelHammer,TFCItems.BronzeHammer,TFCItems.CopperHammer,
-				TFCItems.WroughtIronHammer,TFCItems.RedSteelHammer,TFCItems.SteelHammer};
-
-		Recipes.Scythes = new Item[]{TFCItems.BismuthBronzeScythe,TFCItems.BlackBronzeScythe,
-				TFCItems.BlackSteelScythe,TFCItems.BlueSteelScythe,TFCItems.BronzeScythe,TFCItems.CopperScythe,
-				TFCItems.WroughtIronScythe,TFCItems.RedSteelScythe,TFCItems.SteelScythe};
-
-		Recipes.Spindle = new Item[]{TFCItems.Spindle};
-
-		Recipes.Gems  = new Item[]{TFCItems.GemAgate, TFCItems.GemAmethyst, TFCItems.GemBeryl, TFCItems.GemDiamond, TFCItems.GemEmerald, TFCItems.GemGarnet, 
-				TFCItems.GemJade, TFCItems.GemJasper, TFCItems.GemOpal,TFCItems.GemRuby,TFCItems.GemSapphire,TFCItems.GemTopaz,TFCItems.GemTourmaline};
-
-		Meals = new Item[]{MealMoveSpeed, MealDigSpeed, MealDamageBoost, MealJump, MealDamageResist, 
-				MealFireResist, MealWaterBreathing, MealNightVision};
-
-		((TFCTabs)TFCTabs.TFCTools).setTabIconItemIndex(TFCItems.SteelHammer.itemID);
-		((TFCTabs)TFCTabs.TFCMaterials).setTabIconItemIndex(TFCItems.LeadIngot.itemID);
-		((TFCTabs)TFCTabs.TFCUnfinished).setTabIconItemIndex(TFCItems.SteelHammerHead.itemID);
-		((TFCTabs)TFCTabs.TFCArmor).setTabIconItemIndex(TFCItems.SteelHelmet.itemID);      
-		((TFCTabs)TFCTabs.TFCMisc).setTabIconItemIndex(TFCItems.Spindle.itemID);  
-		((TFCTabs)TFCTabs.TFCPottery).setTabIconItemStack(new ItemStack(PotteryJug, 1, 1));  
-		((TFCTabs)TFCTabs.TFCWeapons).setTabIconItemStack(new ItemStack(SteelSword, 1));  
-
-		registerMetals();
-
-		System.out.println(new StringBuilder().append("[TFC] Done Loading Items").toString());
 	}
 
 	private static void registerMetals() 
