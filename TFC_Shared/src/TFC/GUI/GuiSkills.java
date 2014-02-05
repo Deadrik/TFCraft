@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import TFC.Reference;
+import TFC.API.SkillsManager;
 import TFC.Containers.ContainerSkills;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.SkillStats;
@@ -25,11 +26,10 @@ public class GuiSkills extends GuiContainerTFC
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) 
 	{
 		SkillStats ss = TFC_Core.getSkillStats(player);
-		Object[] skills = ss.getSkillsKeysArray();
 		int y = 5;
-		for(Object o : skills)
+		for(String o : SkillsManager.instance.getSkillsArray())
 		{
-			this.drawString(this.fontRenderer, (String)o + ": " + ss.getSkillMultiplier((String)o)+"%", 4, y, 0xeeeeee);
+			this.drawString(this.fontRenderer, StringUtil.localize(o) + ": " + ss.getSkillMultiplier(o)+"%", 4, y, 0xeeeeee);
 			y+=10;
 		}
 	}

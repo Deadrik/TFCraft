@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.network.packet.Packet;
 import TFC.TerraFirmaCraft;
-import TFC.API.Constant.Global;
+import TFC.API.SkillsManager;
 import TFC.Handlers.PacketHandler;
 
 public class SkillStats 
@@ -23,10 +23,8 @@ public class SkillStats
 	{
 		player = p;
 		skillsMap = new HashMap<String, Integer>();
-		setSkill(Global.SKILL_GENERAL_SMITHING, 0);
-		setSkill(Global.SKILL_TOOLSMITH, 0);
-		setSkill(Global.SKILL_WEAPONSMITH, 0);
-		setSkill(Global.SKILL_ARMORSMITH, 0);
+		for(String s : SkillsManager.instance.getSkillsArray())
+			setSkill(s, 0);
 	}
 
 	public Object[] getSkillsKeysArray()

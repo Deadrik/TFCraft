@@ -51,10 +51,10 @@ public class Global
 		"White Cedar","White Elm","Willow","Kapok","Acacia"
 	};
 
-	public static final String SKILL_GENERAL_SMITHING = "General Smithing";
-	public static final String SKILL_TOOLSMITH = "Toolsmith";
-	public static final String SKILL_WEAPONSMITH = "Weaponsmith";
-	public static final String SKILL_ARMORSMITH = "Armorsmith";
+	public static final String SKILL_GENERAL_SMITHING = "skill.gensmith";
+	public static final String SKILL_TOOLSMITH = "skill.toolsmith";
+	public static final String SKILL_WEAPONSMITH = "skill.weaponsmith";
+	public static final String SKILL_ARMORSMITH = "skill.armorsmith";
 
 
 	public static Metal BISMUTH;

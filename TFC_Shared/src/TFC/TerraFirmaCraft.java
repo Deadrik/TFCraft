@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import net.minecraft.block.Block;
-import net.minecraft.command.CommandHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
@@ -16,7 +15,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
+import TFC.API.SkillsManager;
 import TFC.API.TFCOptions;
+import TFC.API.Constant.Global;
 import TFC.API.Constant.TFCBlockID;
 import TFC.API.Constant.TFCItemID;
 import TFC.Commands.CommandTime;
@@ -167,6 +168,11 @@ public class TerraFirmaCraft
 
 		//Register Sound Handler (Client only)
 		proxy.registerSoundHandler();
+
+		SkillsManager.instance.registerSkill(Global.SKILL_GENERAL_SMITHING);
+		SkillsManager.instance.registerSkill(Global.SKILL_TOOLSMITH);
+		SkillsManager.instance.registerSkill(Global.SKILL_ARMORSMITH);
+		SkillsManager.instance.registerSkill(Global.SKILL_WEAPONSMITH);
 	}
 
 	@EventHandler
