@@ -144,6 +144,8 @@ public class ModelStand extends ModelBiped {
         //this.bipedBody.rotateAngleY = yaw;
         this.bipedHead.rotateAngleY = yaw;
         this.bipedHeadwear.rotateAngleY = yaw;
+        this.bipedLeftLeg.rotateAngleX+=0.01f;
+        this.bipedRightLeg.rotateAngleX+=0.01f;
         //this.bipedLeftArm.rotateAngleY = yaw;
         //this.bipedRightArm.rotateAngleY = yaw;
         //this.bipedLeftLeg.rotateAngleY = yaw;
