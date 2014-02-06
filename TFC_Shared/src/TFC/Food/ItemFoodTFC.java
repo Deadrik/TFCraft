@@ -3,15 +3,17 @@ package TFC.Food;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import TFC.Reference;
+import TFC.API.IFood;
 import TFC.API.ISize;
+import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
@@ -20,43 +22,21 @@ import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
-public class ItemTerraFood extends ItemFood implements ISize
+public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 {
 	public int foodID;
-	private EnumSize size = EnumSize.SMALL;
-	private EnumWeight weight = EnumWeight.LIGHT;
 
 	public String folder = "food/";
-
 	public static int[] FoodList = new int[1024];
+	private EnumFoodGroup foodgroup;
 
-	public ItemTerraFood(int id, int healAmt) 
+	public ItemFoodTFC(int id, int foodid, EnumFoodGroup fg)
 	{
-		super(id, healAmt, true);
-	}
-
-	public ItemTerraFood(int id, int healAmt, float saturation, int foodid)
-	{
-		this(id, healAmt, saturation, false, foodid);
-	}
-
-	public ItemTerraFood(int id, int healAmt, float saturation, boolean wolfFood, int foodid)
-	{
-		super(id, healAmt, saturation, wolfFood);
+		super(id);
+		this.setCreativeTab(CreativeTabs.tabFood);
 		foodID = foodid;
 		FoodList[foodID] = this.itemID;
-	}
-
-	public ItemTerraFood setFoodID(int id)
-	{
-		foodID = id;
-		return this;
-	}
-
-	public ItemTerraFood setFolder(String s)
-	{
-		folder = s;
-		return this;
+		foodgroup = fg;
 	}
 
 	@Override
@@ -64,13 +44,6 @@ public class ItemTerraFood extends ItemFood implements ISize
 	{
 		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
-
-
-	/***
-	 * This Method is a dummy to prevent the need to fix every single line in the TFCItems.java file
-	 */
-	public Item setIconCoord(int i, int j)
-	{return this;}
 
 	@Override
 	public void registerIcons(IconRegister registerer)
@@ -108,9 +81,21 @@ public class ItemTerraFood extends ItemFood implements ISize
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 
+		if(this.getFoodGroup() == EnumFoodGroup.Dairy)
+			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.Food.Dairy"));
+		else if(this.getFoodGroup() == EnumFoodGroup.Fruit)
+			arraylist.add(EnumChatFormatting.DARK_PURPLE + StringUtil.localize("gui.Food.Fruit"));
+		else if(this.getFoodGroup() == EnumFoodGroup.Vegetable)
+			arraylist.add(EnumChatFormatting.DARK_GREEN + StringUtil.localize("gui.Food.Vegetable"));
+		else if(this.getFoodGroup() == EnumFoodGroup.Protein)
+			arraylist.add(EnumChatFormatting.DARK_RED + StringUtil.localize("gui.Food.Protein"));
+		else if(this.getFoodGroup() == EnumFoodGroup.Grain)
+			arraylist.add(EnumChatFormatting.YELLOW + StringUtil.localize("gui.Food.Grain"));
+
 		this.addFoodTempInformation(is, arraylist);
 
-		int filling = this.getHealAmount() / 10;
+		//int filling = this.getHealAmount() / 10;
+		int filling = 10;
 		if(filling > 0)
 		{
 			String stars = "";
@@ -161,13 +146,11 @@ public class ItemTerraFood extends ItemFood implements ISize
 	{
 		is.stackSize--;
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-		player.getFoodStats().addStats(this);
+		//player.getFoodStats().addStats(this);
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		if(!world.isRemote)
-		{
-			foodstats.addStats(this);
+			//foodstats.addStats(this);
 			TFC_Core.setPlayerFoodStats(player, foodstats);
-		}
 		return is;
 	}
 
@@ -194,18 +177,6 @@ public class ItemTerraFood extends ItemFood implements ISize
 			return false;
 	}
 
-	public Item setSize(EnumSize s)
-	{
-		size = s;
-		return this;
-	}
-
-	public Item setWeight(EnumWeight w)
-	{
-		weight = w;
-		return this;
-	}
-
 	@Override
 	public EnumSize getSize(ItemStack is) 
 	{
@@ -214,11 +185,19 @@ public class ItemTerraFood extends ItemFood implements ISize
 	@Override
 	public EnumWeight getWeight(ItemStack is) 
 	{
+		if(is.getTagCompound() != null && is.getTagCompound().hasKey("foodweight"))
+			return EnumWeight.HEAVY;
 		return weight;
 	}
 	@Override
 	public boolean canStack() 
 	{
 		return true;
+	}
+
+	@Override
+	public EnumFoodGroup getFoodGroup() {
+		// TODO Auto-generated method stub
+		return foodgroup;
 	}
 }
