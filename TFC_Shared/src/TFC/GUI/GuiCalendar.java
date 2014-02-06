@@ -139,6 +139,13 @@ public class GuiCalendar extends GuiScreen
 	}
 
 	@Override
+	protected void keyTyped(char par1, int par2)
+	{
+		if (par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.keyCode)
+			this.mc.thePlayer.closeScreen();
+	}
+
+	@Override
 	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
 	{
 		fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
