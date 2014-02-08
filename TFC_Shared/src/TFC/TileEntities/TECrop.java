@@ -23,6 +23,7 @@ public class TECrop extends NetworkTileEntity
 	private long growthTimer;//Tracks the time since the plant was planted
 	private long plantedTime;//Tracks the time when the plant was planted
 	private byte sunLevel;
+	public int tendingLevel;
 
 	public TECrop()
 	{

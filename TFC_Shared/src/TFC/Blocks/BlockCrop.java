@@ -193,7 +193,7 @@ public class BlockCrop extends BlockContainer
 		if(crop != null && !world.isRemote)
 			if(crop.cropId == 4 && te.growth >= 7)
 			{
-				ItemStack is1 = crop.getOutput1(te.growth);
+				ItemStack is1 = crop.getOutput1(te);
 				if(is1 != null)
 					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
 				te.growth = 4;
@@ -202,7 +202,7 @@ public class BlockCrop extends BlockContainer
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 5 && te.growth < 6)
 			{
-				ItemStack is1 = crop.getOutput1(te.growth);
+				ItemStack is1 = crop.getOutput1(te);
 				if(is1 != null)
 					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
 				te.growth = 3;
@@ -211,7 +211,7 @@ public class BlockCrop extends BlockContainer
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 6)
 			{
-				ItemStack is1 = crop.getOutput2(te.growth);
+				ItemStack is1 = crop.getOutput2(te);
 				if(is1 != null)
 					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
 				te.growth = 3;
@@ -264,8 +264,8 @@ public class BlockCrop extends BlockContainer
 			CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
 			if(crop != null && te.growth >= crop.numGrowthStages-1)
 			{
-				ItemStack is1 = crop.getOutput1(te.growth);
-				ItemStack is2 = crop.getOutput2(te.growth);
+				ItemStack is1 = crop.getOutput1(te);
+				ItemStack is2 = crop.getOutput2(te);
 
 				if(is1 != null)
 					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));

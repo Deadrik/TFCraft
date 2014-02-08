@@ -24,6 +24,13 @@ import TFC.Items.ItemTerra;
 
 public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 {
+	/**
+	 * Food can contain multiple NBT Tags including
+	 * temperature:
+	 * foodWeight:
+	 * foodDecay
+	 */
+
 	public int foodID;
 
 	public String folder = "food/";
@@ -68,9 +75,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 					arraylist.add(TFC_ItemHeat.getHeatColorFood(temp, meltTemp));
 			}
 
-			if(stackTagCompound.hasKey("foodweight"))
+			if(stackTagCompound.hasKey("foodWeight"))
 			{
-				float ounces = stackTagCompound.getFloat("foodweight");
+				float ounces = stackTagCompound.getFloat("foodWeight");
 				arraylist.add(ounces+"oz/10.0oz");
 			}
 		}
@@ -155,12 +162,6 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	}
 
 	@Override
-	public boolean getShareTag()
-	{
-		return true;
-	}
-
-	@Override
 	public int getItemStackLimit()
 	{
 		if(canStack())
@@ -177,6 +178,16 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			return false;
 	}
 
+	public void createTag(ItemStack is, float weight)
+	{
+		if(!is.hasTagCompound())
+		{
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setFloat("foodWeight", weight);
+			nbt.setFloat("foodDecay", 0);
+		}
+	}
+
 	@Override
 	public EnumSize getSize(ItemStack is) 
 	{
@@ -185,7 +196,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public EnumWeight getWeight(ItemStack is) 
 	{
-		if(is.getTagCompound() != null && is.getTagCompound().hasKey("foodweight"))
+		if(is.getTagCompound() != null && is.getTagCompound().hasKey("foodWeight"))
 			return EnumWeight.HEAVY;
 		return weight;
 	}
