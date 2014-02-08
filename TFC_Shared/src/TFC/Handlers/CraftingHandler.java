@@ -19,6 +19,7 @@ import TFC.Core.TFC_Sounds;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Food.ItemFoodTFC;
 import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemIngot;
 import TFC.Items.ItemMeltedMetal;
@@ -69,6 +70,15 @@ public class CraftingHandler implements ICraftingHandler
 				HandleItem(player, iinventory, Recipes.Knives);
 				if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw,4)))
 					player.dropItem(TFCItems.Straw.itemID,4);
+
+				ItemStack item = null;
+				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+				{             
+					if(iinventory.getStackInSlot(i) == null)
+						continue;
+					if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("yield"))
+						((ItemFoodTFC)itemstack.getItem()).createTag(itemstack, iinventory.getStackInSlot(i).getTagCompound().getFloat("yield"));
+				}
 			}
 			else if(itemstack.itemID == TFCBlocks.WoodSupportH.blockID || itemstack.itemID == TFCBlocks.WoodSupportV.blockID)
 			{

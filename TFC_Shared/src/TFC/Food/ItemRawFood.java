@@ -12,4 +12,14 @@ public class ItemRawFood extends ItemFoodTFC implements ISize
 	{
 		super(id, foodid, fg);
 	}
+	public ItemRawFood(int id, int foodid, EnumFoodGroup fg, boolean edible)
+	{
+		this(id, foodid, fg);
+		edibleRaw = edible;
+	}
+	public ItemRawFood(int id, int foodid, EnumFoodGroup fg, boolean edible, boolean usable)
+	{
+		this(id, foodid, fg, edible);
+		canBeUsedRaw = usable;
+	}
 }
