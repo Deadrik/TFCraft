@@ -79,6 +79,15 @@ public class CraftingHandler implements ICraftingHandler
 					if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("yield"))
 						((ItemFoodTFC)itemstack.getItem()).createTag(itemstack, iinventory.getStackInSlot(i).getTagCompound().getFloat("yield"));
 				}
+
+				ItemStack item = null;
+				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+				{             
+					if(iinventory.getStackInSlot(i) == null)
+						continue;
+					if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("yield"))
+						((ItemFoodTFC)itemstack.getItem()).createTag(itemstack, iinventory.getStackInSlot(i).getTagCompound().getFloat("yield"));
+				}
 			}
 			else if(itemstack.itemID == TFCBlocks.WoodSupportH.blockID || itemstack.itemID == TFCBlocks.WoodSupportV.blockID)
 			{
