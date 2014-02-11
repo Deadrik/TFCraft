@@ -42,12 +42,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		super(id);
 		this.setCreativeTab(CreativeTabs.tabFood);
 		foodID = foodid;
-<<<<<<< HEAD
 		if(foodID != -1)
 			FoodList[foodID] = this.itemID;
-=======
-		FoodList[foodID] = this.itemID;
->>>>>>> Some more food stuff
 		foodgroup = fg;
 	}
 
