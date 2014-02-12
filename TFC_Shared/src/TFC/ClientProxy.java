@@ -512,9 +512,9 @@ public class ClientProxy extends CommonProxy
 	{
 		/*KeyBindings.addKeyBinding("Key_Calendar", 49);
 		KeyBindings.addIsRepeating(false);*/
-		KeyBindings.addKeyBinding("Key_ToolMode", 50);
+		KeyBindings.addKeyBinding(KeyBindingHandler.Key_ToolMode);
 		KeyBindings.addIsRepeating(false);
-		KeyBindings.addKeyBinding("Key_LockTool", 38);
+		KeyBindings.addKeyBinding(KeyBindingHandler.Key_LockTool);
 		KeyBindings.addIsRepeating(false);
 	}
 

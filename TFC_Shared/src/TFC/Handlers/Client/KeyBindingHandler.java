@@ -18,8 +18,8 @@ import cpw.mods.fml.common.TickType;
 public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 {
 	//KeyBinding Key_Calendar = new KeyBinding("Key_Calendar", 49);
-	KeyBinding Key_ToolMode = new KeyBinding("Key_ToolMode", 50);
-	KeyBinding Key_LockTool = new KeyBinding("Key_LockTool", 38);
+	public static KeyBinding Key_ToolMode = new KeyBinding("Key_ToolMode", 50);
+	public static KeyBinding Key_LockTool = new KeyBinding("Key_LockTool", 38);
 
 	private long keyTime = 0;
 
