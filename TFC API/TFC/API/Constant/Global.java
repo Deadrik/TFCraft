@@ -55,6 +55,7 @@ public class Global
 	public static final String SKILL_TOOLSMITH = "skill.toolsmith";
 	public static final String SKILL_WEAPONSMITH = "skill.weaponsmith";
 	public static final String SKILL_ARMORSMITH = "skill.armorsmith";
+	public static final String SKILL_AGRICULTURE = "skill.agriculture";
 
 
 	public static Metal BISMUTH;

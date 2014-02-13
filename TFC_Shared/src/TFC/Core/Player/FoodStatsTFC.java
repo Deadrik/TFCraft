@@ -96,7 +96,7 @@ public class FoodStatsTFC
 			/*
 			 * Standard filling reduction based upon time.
 			 */
-			if(!player.capabilities.isCreativeMode){
+			if(!player.capabilities.isCreativeMode)
 				if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength)
 				{
 					this.foodLevel -= bodyTemp.getExtraFood();
@@ -110,7 +110,6 @@ public class FoodStatsTFC
 					else if(!player.capabilities.isCreativeMode)
 						this.foodLevel = Math.max(this.foodLevel - (1 + satisfaction), 0);
 				}
-			}
 			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.hourLength/2)
 			{
 				this.foodHealTimer += TFC_Time.hourLength/2;
@@ -125,7 +124,7 @@ public class FoodStatsTFC
 						this.foodLevel = Math.max(this.foodLevel - 1, 0);
 				}
 				else if (this.foodLevel <= 0)
-					if (difficulty > 1 || (player.getMaxHealth() > 50))
+					if (!TFC_Core.isPlayerInDebugMode(player) && (difficulty > 1 || (player.getMaxHealth() > 50)))
 						player.attackEntityFrom(DamageSource.starve, 50);
 			}
 
@@ -156,7 +155,7 @@ public class FoodStatsTFC
 						this.restoreWater(player, 20);
 					if(waterLevel < 0)
 						waterLevel = 0;
-					if(waterLevel == 0 && temp > 30)
+					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 30)
 						player.attackEntityFrom(DamageSource.generic, 2);
 				}
 		}

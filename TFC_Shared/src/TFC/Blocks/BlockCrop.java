@@ -228,18 +228,22 @@ public class BlockCrop extends BlockContainer
 
 		return false;
 	}
+
+
 	@Override
-	public void harvestBlock(World world, EntityPlayer player, int i, int j, int k, int l)
+	public void onBlockHarvested(World world, int i, int j, int k, int l, EntityPlayer player) 
 	{
 		ItemStack itemstack = player.inventory.getCurrentItem();
+		TECrop te = (TECrop) world.getBlockTileEntity(i, j, k);
+		//Handle Scythe
 		if(!world.isRemote && itemstack != null && itemstack.getItem() instanceof ItemCustomScythe)
 			for(int x = -1; x < 2; x++)
 				for(int z = -1; z < 2; z++)
 					if(world.getBlockId( i+x, j, k+z) == this.blockID && player.inventory.getStackInSlot(player.inventory.currentItem) != null)
 					{
 						player.addStat(StatList.mineBlockStatArray[this.blockID], 1);
-						player.addExhaustion(0.045F);
-
+						TECrop teX = (TECrop) world.getBlockTileEntity(i+x, j, k+z);
+						teX.onHarvest(world, player);
 						//breakBlock(world, i+x, j, k+z, l, 0);
 						world.setBlockToAir(i+x, j, k+z);
 
@@ -253,35 +257,8 @@ public class BlockCrop extends BlockContainer
 							player.inventory.setInventorySlotContents(player.inventory.currentItem, 
 									new ItemStack(itemstack.getItem(),ss,dam));
 					}
-
-	}
-	@Override
-	public void breakBlock(World world, int i, int j, int k, int blockID, int metadata) 
-	{
-		TECrop te = (TECrop) world.getBlockTileEntity(i, j, k);
-		if(te!= null && !world.isRemote)
-		{
-			CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
-			if(crop != null && te.growth >= crop.numGrowthStages-1)
-			{
-				ItemStack is1 = crop.getOutput1(te);
-				ItemStack is2 = crop.getOutput2(te);
-
-				if(is1 != null)
-					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
-
-				if(is2 != null)
-					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is2));
-			}
-			else if (crop != null)
-			{
-				ItemStack is = crop.getSeed();
-
-				if(is != null)
-					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is));
-			}
-		}
-		super.breakBlock(world, i, j, k, blockID, metadata);
+		//Handle Loot Drop
+		te.onHarvest(world, player);
 	}
 
 	/**

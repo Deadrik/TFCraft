@@ -6,9 +6,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
@@ -41,7 +45,7 @@ public class TECrop extends NetworkTileEntity
 		if(!worldObj.isRemote)
 		{
 			float timeMultiplier = 360/TFC_Time.daysInYear;
-			sunLevel--;
+
 
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 
@@ -49,7 +53,7 @@ public class TECrop extends NetworkTileEntity
 
 			if(growthTimer < time && sunLevel > 0)
 			{
-
+				sunLevel--;
 				if(crop.needsSunlight && (worldObj.getBlockLightValue(xCoord, yCoord, zCoord) > 11 || worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)))
 				{
 					sunLevel++;
@@ -130,6 +134,32 @@ public class TECrop extends NetworkTileEntity
 	public float getEstimatedGrowth(CropIndex crop)
 	{
 		return ((float)crop.numGrowthStages/(growthTimer-plantedTime/TFC_Time.dayLength))*1.5f;
+	}
+
+	public void onHarvest(World world, EntityPlayer player)
+	{
+		if(!world.isRemote)
+		{
+			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
+			if(crop != null && growth >= crop.numGrowthStages-1)
+			{
+				ItemStack is1 = crop.getOutput1(this);
+				ItemStack is2 = crop.getOutput2(this);
+
+				if(is1 != null)
+					world.spawnEntityInWorld(new EntityItem(world, xCoord, yCoord, zCoord, is1));
+
+				if(is2 != null)
+					world.spawnEntityInWorld(new EntityItem(world, xCoord, yCoord, zCoord, is2));
+			}
+			else if (crop != null)
+			{
+				ItemStack is = crop.getSeed();
+
+				if(is != null)
+					world.spawnEntityInWorld(new EntityItem(world, xCoord, yCoord, zCoord, is));
+			}
+		}
 	}
 
 	/**

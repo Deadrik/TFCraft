@@ -22,6 +22,7 @@ import TFC.API.Constant.Global;
 import TFC.API.Constant.TFCBlockID;
 import TFC.API.Constant.TFCItemID;
 import TFC.Commands.CommandTime;
+import TFC.Commands.DebugModeCommand;
 import TFC.Commands.GSPVisualCommand;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetBodyTemp;
@@ -273,7 +274,7 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new StripChunkCommand());
 		evt.registerServerCommand(new GSPVisualCommand());
 		evt.registerServerCommand(new RemoveAreaCommand());
-		//CommandHandler ch = (CommandHandler) evt.getServer().getCommandManager();
+		evt.registerServerCommand(new DebugModeCommand());
 		evt.registerServerCommand(new CommandTime());
 	}	
 

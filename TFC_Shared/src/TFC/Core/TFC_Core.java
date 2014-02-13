@@ -791,4 +791,11 @@ public class TFC_Core
 	{
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 	}
+
+	public static boolean isPlayerInDebugMode(EntityPlayer player)
+	{
+		if(player.getEntityData() != null && player.getEntityData().hasKey("inDebugMode"))
+			return true;
+		return false;
+	}
 }
