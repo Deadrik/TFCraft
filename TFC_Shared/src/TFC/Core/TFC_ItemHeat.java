@@ -323,14 +323,6 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.CornBread, 1)));
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageBoost, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageResist, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDigSpeed, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealFireResist, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealJump, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealMoveSpeed, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealNightVision, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealWaterBreathing, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, 32767), 13.0F, 210F, new ItemStack(Block.torchWood, 2)));
 
@@ -338,12 +330,8 @@ public class TFC_ItemHeat
 	public static Boolean canRemoveTag(Object tag, String key, Class c)
 	{
 		if(tag.getClass() == c)
-		{
 			if (((NBTBase)c.cast(tag)).getName() == key)
-			{
 				return true;
-			}
-		}
 		return false;
 	}
 
@@ -353,172 +341,128 @@ public class TFC_ItemHeat
 		if(temp < 80)
 		{
 			phrase = StringUtil.localize("gui.ItemHeat.Warming");
-			if(temp>(80 * 0.2)) {
+			if(temp>(80 * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>(80 * 0.4)) {
+			if(temp>(80 * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>(80 * 0.6)) {
+			if(temp>(80 * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>(80 * 0.8)) {
+			if(temp>(80 * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 80 && temp < 210)
 		{
 			phrase = StringUtil.localize("gui.ItemHeat.Hot");
-			if(temp>80+((210-80) * 0.2)) {
+			if(temp>80+((210-80) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>80+((210-80) * 0.4)) {
+			if(temp>80+((210-80) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>80+((210-80) * 0.6)) {
+			if(temp>80+((210-80) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>80+((210-80) * 0.8)) {
+			if(temp>80+((210-80) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 210 &&  temp < 480)
 		{
 			phrase = StringUtil.localize("gui.ItemHeat.VeryHot");
-			if(temp>210+((480-210) * 0.2)) {
+			if(temp>210+((480-210) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>210+((480-210) * 0.4)) {
+			if(temp>210+((480-210) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>210+((480-210) * 0.6)) {
+			if(temp>210+((480-210) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>210+((480-210) * 0.8)) {
+			if(temp>210+((480-210) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 480 &&  temp < 580)
 		{
 			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.FaintRed");
-			if(temp>480+((580-480) * 0.2)) {
+			if(temp>480+((580-480) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>480+((580-480) * 0.4)) {
+			if(temp>480+((580-480) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>480+((580-480) * 0.6)) {
+			if(temp>480+((580-480) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>480+((580-480) * 0.8)) {
+			if(temp>480+((580-480) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 580 &&  temp < 730)
 		{
 			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.DarkRed");
-			if(temp>580+((730-580) * 0.2)) {
+			if(temp>580+((730-580) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>580+((730-580) * 0.4)) {
+			if(temp>580+((730-580) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>580+((730-580) * 0.6)) {
+			if(temp>580+((730-580) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>580+((730-580) * 0.8)) {
+			if(temp>580+((730-580) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 730 &&  temp < 930)
 		{
 			phrase = "\247c" + StringUtil.localize("gui.ItemHeat.BrightRed");
-			if(temp>730+((930-730) * 0.2)) {
+			if(temp>730+((930-730) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>730+((930-730) * 0.4)) {
+			if(temp>730+((930-730) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>730+((930-730) * 0.6)) {
+			if(temp>730+((930-730) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>730+((930-730) * 0.8)) {
+			if(temp>730+((930-730) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 930 &&  temp < 1100)
 		{
 			phrase = "\2476" + StringUtil.localize("gui.ItemHeat.Orange");
-			if(temp>930+((1100-930) * 0.2)) {
+			if(temp>930+((1100-930) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>930+((1100-930) * 0.4)) {
+			if(temp>930+((1100-930) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>930+((1100-930) * 0.6)) {
+			if(temp>930+((1100-930) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>930+((1100-930) * 0.8)) {
+			if(temp>930+((1100-930) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 1100 &&  temp < 1300)
 		{
 			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.Yellow");
-			if(temp>1100+((1300-1100) * 0.2)) {
+			if(temp>1100+((1300-1100) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1100+((1300-1100) * 0.4)) {
+			if(temp>1100+((1300-1100) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1100+((1300-1100) * 0.6)) {
+			if(temp>1100+((1300-1100) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1100+((1300-1100) * 0.8)) {
+			if(temp>1100+((1300-1100) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 1300 &&  temp < 1400)
 		{
 			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.YellowWhite");
-			if(temp>1300+((1400-1300) * 0.2)) {
+			if(temp>1300+((1400-1300) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1300+((1400-1300) * 0.4)) {
+			if(temp>1300+((1400-1300) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1300+((1400-1300) * 0.6)) {
+			if(temp>1300+((1400-1300) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1300+((1400-1300) * 0.8)) {
+			if(temp>1300+((1400-1300) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 1400 &&  temp < 1500)
 		{
 			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.White");
-			if(temp>1400+((1500-1400) * 0.2)) {
+			if(temp>1400+((1500-1400) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1400+((1500-1400) * 0.4)) {
+			if(temp>1400+((1500-1400) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1400+((1500-1400) * 0.6)) {
+			if(temp>1400+((1500-1400) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1400+((1500-1400) * 0.8)) {
+			if(temp>1400+((1500-1400) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 1500)
-		{
 			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.BrilliantWhite");
-		}
 
 		if(temp > meltTemp)
-		{
 			phrase = phrase + "\247f - " + StringUtil.localize("gui.ItemHeat.Liquid");
-		}
 
 		return phrase;
 	}
@@ -526,24 +470,14 @@ public class TFC_ItemHeat
 	public static String getHeatColorFood(float temp, float meltTemp)
 	{
 		if(temp < meltTemp)
-		{
 			if(temp < meltTemp*0.1F)
-			{
 				return StringUtil.localize("gui.FoodHeat.Cold");
-			}
 			else if(temp >= meltTemp*0.1F && temp < meltTemp*0.4F)
-			{
 				return "\2474" + StringUtil.localize("gui.FoodHeat.Warm");
-			}
 			else if(temp >= meltTemp*0.4F && temp < meltTemp*0.8F)
-			{
 				return "\2474" + StringUtil.localize("gui.ItemHeat.Hot");
-			}
 			else
-			{
 				return "\2474" + StringUtil.localize("gui.ItemHeat.VeryHot");
-			}
-		}
 
 		return StringUtil.localize("gui.ClearSlot");
 	}
@@ -551,16 +485,10 @@ public class TFC_ItemHeat
 	public static String getHeatColorTorch(float temp, float meltTemp)
 	{
 		if(temp < meltTemp)
-		{
 			if(temp > 0 && temp < meltTemp*0.8F)
-			{
 				return StringUtil.localize("gui.Torch.CatchingFire");
-			}
 			else if(temp >= meltTemp*0.8F)
-			{
 				return "\2474" + StringUtil.localize("gui.Torch.Lit");
-			}
-		}
 
 		return StringUtil.localize("gui.ClearSlot");
 	}
@@ -574,18 +502,13 @@ public class TFC_ItemHeat
 			if(hi != null && is.hasTagCompound())
 			{
 				float temp = 0;
-				if(is.getTagCompound().hasKey("temperature")) {
+				if(is.getTagCompound().hasKey("temperature"))
 					temp = is.getTagCompound().getFloat("temperature");
-				}
 				return temp >= hi.meltTemp;
-			} else {
+			} else
 				return false;
-			}
-		} 
-		else 
-		{
+		} else
 			return false;
-		}
 	}
 
 	public static float getMeltingPoint(ItemStack is)
@@ -595,16 +518,11 @@ public class TFC_ItemHeat
 		{
 			HeatIndex hi = manager.findMatchingIndex(is);
 			if(hi != null)
-			{
 				return hi.meltTemp;
-			} else {
+			else
 				return -1;
-			}
-		} 
-		else 
-		{
+		} else
 			return -1;
-		}
 	}
 
 	public static float getMeltingPoint(Metal m)
@@ -614,16 +532,11 @@ public class TFC_ItemHeat
 		{
 			HeatIndex hi = manager.findMatchingIndex(new ItemStack(Item.itemsList[m.MeltedItemID]));
 			if(hi != null)
-			{
 				return hi.meltTemp;
-			} else {
+			else
 				return -1;
-			}
-		} 
-		else 
-		{
+		} else
 			return -1;
-		}
 	}
 
 	public static float getSpecificHeat(ItemStack is)
@@ -633,16 +546,11 @@ public class TFC_ItemHeat
 		{
 			HeatIndex hi = manager.findMatchingIndex(is);
 			if(hi != null)
-			{
 				return hi.specificHeat;
-			} else {
+			else
 				return 0.7F;
-			}
-		} 
-		else 
-		{
+		} else
 			return 0.7F;
-		}
 	}
 
 	public static float getTempDecrease(ItemStack is)
@@ -655,25 +563,19 @@ public class TFC_ItemHeat
 		if(is != null)
 		{
 			if(is.hasTagCompound() && is.getTagCompound().hasKey("temperature"))
-			{
 				return is.getTagCompound().getFloat("temperature");
-			}
-			else 
-			{
+			else
 				return 0F;
-			}
-		} else {
+		} else
 			return 0F;
-		}
 
 	}
 
 	public static float getTempIncrease(ItemStack is, float fireTemp, float fireMaxTemp)
 	{
 		byte debugBump = 0;
-		if(TFCOptions.enableDebugMode) {
+		if(TFCOptions.enableDebugMode)
 			debugBump = 5;
-		}
 		return ((fireTemp / fireMaxTemp)) * getSpecificHeat(is) + debugBump;
 	}
 
@@ -691,13 +593,9 @@ public class TFC_ItemHeat
 					comp.setFloat("temperature",temp);
 				}
 				if(temp <= 0)
-				{
 					comp.removeTag("temperature");
-				}
 				if(comp.getTags().size() == 0)
-				{
 					is.stackTagCompound = null;
-				}
 			}
 		}
 	}
@@ -706,10 +604,8 @@ public class TFC_ItemHeat
 	{
 		for(int i = 0; i < inventory.length; i++)
 		{
-			if(inventory[i] != null && inventory[i].stackSize <= 0) 
-			{
+			if(inventory[i] != null && inventory[i].stackSize <= 0)
 				inventory[i].stackSize = 1;
-			}
 
 			if(inventory[i] != null && inventory[i].hasTagCompound() && !(inventory[i].getItem() instanceof ItemTerra))
 			{
@@ -738,9 +634,7 @@ public class TFC_ItemHeat
 						}
 					}
 					if(comp.getTags().size() == 0)
-					{
 						inventory[i].stackTagCompound = null;
-					}
 				}
 			}
 		}
@@ -750,10 +644,8 @@ public class TFC_ItemHeat
 	{
 		for(int i = 0; i < inventory.length; i++)
 		{
-			if(inventory[i] != null && inventory[i].stackSize <= 0) 
-			{
+			if(inventory[i] != null && inventory[i].stackSize <= 0)
 				inventory[i].stackSize = 1;
-			}
 
 			if(inventory[i] != null && inventory[i].hasTagCompound())
 			{
@@ -781,9 +673,7 @@ public class TFC_ItemHeat
 						}
 					}
 					if(comp.getTags().size() == 0)
-					{
 						inventory[i].stackTagCompound = null;
-					}
 				}
 			}
 		}
@@ -794,18 +684,15 @@ public class TFC_ItemHeat
 		if(is != null)
 		{
 			if(is.hasTagCompound())
-			{
 				is.getTagCompound().setFloat("temperature", Temp);
-			}
 			else 
 			{
 				NBTTagCompound nbt = new NBTTagCompound();
 				nbt.setFloat("temperature", Temp);
 				is.setTagCompound(nbt);
 			}
-		} else {
+		} else
 			return false;
-		}
 
 		return true;
 	}

@@ -79,7 +79,6 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			if(stackTagCompound.hasKey("foodWeight"))
 			{
 				float ounces = stackTagCompound.getFloat("foodWeight");
->>>>>>> Some more food stuff
 				arraylist.add(ounces+"oz/10.0oz");
 			}
 		}
@@ -91,15 +90,15 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		ItemTerra.addSizeInformation(is, arraylist);
 
 		if(this.getFoodGroup() == EnumFoodGroup.Dairy)
-			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.Food.Dairy"));
+			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.food.dairy"));
 		else if(this.getFoodGroup() == EnumFoodGroup.Fruit)
-			arraylist.add(EnumChatFormatting.DARK_PURPLE + StringUtil.localize("gui.Food.Fruit"));
+			arraylist.add(EnumChatFormatting.DARK_PURPLE + StringUtil.localize("gui.food.fruit"));
 		else if(this.getFoodGroup() == EnumFoodGroup.Vegetable)
-			arraylist.add(EnumChatFormatting.DARK_GREEN + StringUtil.localize("gui.Food.Vegetable"));
+			arraylist.add(EnumChatFormatting.DARK_GREEN + StringUtil.localize("gui.food.vegetable"));
 		else if(this.getFoodGroup() == EnumFoodGroup.Protein)
-			arraylist.add(EnumChatFormatting.DARK_RED + StringUtil.localize("gui.Food.Protein"));
+			arraylist.add(EnumChatFormatting.DARK_RED + StringUtil.localize("gui.food.protein"));
 		else if(this.getFoodGroup() == EnumFoodGroup.Grain)
-			arraylist.add(EnumChatFormatting.YELLOW + StringUtil.localize("gui.Food.Grain"));
+			arraylist.add(EnumChatFormatting.YELLOW + StringUtil.localize("gui.food.grain"));
 
 		this.addFoodTempInformation(is, arraylist);
 
@@ -168,7 +167,6 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		return true;
 	}
->>>>>>> Some more food stuff
 	public int getItemStackLimit()
 	{
 		if(canStack())
@@ -203,8 +201,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public EnumWeight getWeight(ItemStack is) 
 	{
-		if(is.getTagCompound() != null && is.getTagCompound().hasKey("foodWeight"))
->>>>>>> Some more food stuff
+		if(is!= null && is.getTagCompound() != null && is.getTagCompound().hasKey("foodWeight"))
 			return EnumWeight.HEAVY;
 		return weight;
 	}

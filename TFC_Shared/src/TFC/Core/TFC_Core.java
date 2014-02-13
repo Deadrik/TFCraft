@@ -323,49 +323,49 @@ public class TFC_Core
 	{
 		return isSaltWater(id) || isFreshWater(id);
 	}
-	
+
 	public static boolean isSaltWater(int id)
 	{
 		if(id == Block.waterMoving.blockID || id == Block.waterStill.blockID)
 			return true;
 		return false;
 	}
-	
+
 	public static boolean isSaltWaterIncludeIce(int id, int meta, Material mat)
 	{
 		if(id == Block.waterMoving.blockID || id == Block.waterStill.blockID || (mat == Material.ice && meta == 0))
 			return true;
 		return false;
 	}
-	
+
 	public static boolean isFreshWater(int id)
 	{
 		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID)
 			return true;
 		return false;
 	}
-	
+
 	public static boolean isFreshWaterIncludeIce(int id, int meta)
 	{
 		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID || (id == Block.ice.blockID && meta != 0))
 			return true;
 		return false;
 	}
-	
+
 	public static boolean isFreshWaterIncludeIce(int id, int meta, Material mat)
 	{
 		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID || (mat == Material.ice && meta != 0))
 			return true;
 		return false;
 	}
-	
+
 	public static boolean isWaterStill(int id)
 	{
 		if(id == Block.waterStill.blockID || id == TFCBlocks.FreshWaterStill.blockID)
 			return true;
 		return false;
 	}
-	
+
 	public static boolean isWaterMoving(int id)
 	{
 		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == Block.waterMoving.blockID)
@@ -377,7 +377,7 @@ public class TFC_Core
 	{
 		return isGrass(id) || isDirt(id) || isClay(id) || isPeat(id);
 	}
-	
+
 	public static boolean isGravel(int id){
 		return id == Block.gravel.blockID;
 	}
@@ -674,5 +674,12 @@ public class TFC_Core
 	public static void bindTexture(ResourceLocation texture)
 	{
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+	}
+
+	public static boolean isPlayerInDebugMode(EntityPlayer player)
+	{
+		if(player.getEntityData() != null && player.getEntityData().hasKey("inDebugMode"))
+			return true;
+		return false;
 	}
 }

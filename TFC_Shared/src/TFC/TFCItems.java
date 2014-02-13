@@ -7,8 +7,6 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemColored;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.EnumHelper;
 import TFC.API.Armor;
 import TFC.API.Metal;
@@ -28,7 +26,7 @@ import TFC.Food.ItemEgg;
 import TFC.Food.ItemFoodTFC;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemRawFood;
-import TFC.Food.ItemTerraFood;
+import TFC.Food.ItemRawFoodDough;
 import TFC.Items.ItemAlcohol;
 import TFC.Items.ItemArrow;
 import TFC.Items.ItemBloom;
@@ -772,14 +770,6 @@ public class TFCItems
 	public static Item BlueSteelBucketLava;
 
 	public static Item MealGeneric;
-	public static Item MealMoveSpeed;
-	public static Item MealDigSpeed;
-	public static Item MealDamageBoost;
-	public static Item MealJump;
-	public static Item MealDamageResist;
-	public static Item MealFireResist;
-	public static Item MealWaterBreathing;
-	public static Item MealNightVision;
 
 	public static Item Quern;
 	public static Item FlintSteel;
@@ -1494,10 +1484,7 @@ public class TFCItems
 		PrepHide = new ItemTerra(TFCItemID.PrepHide).setFolder("tools/").setFolder("tools/").setUnlocalizedName("Prep Hide").setCreativeTab(TFCTabs.TFCMaterials);
 
 		SheepSkin = new ItemTerra(TFCItemID.SheepSkin).setFolder("tools/").setUnlocalizedName("Sheep Skin").setCreativeTab(TFCTabs.TFCMaterials);
-		muttonRaw = new ItemTerra(TFCItemID.muttonRaw).setFolder("food/").setUnlocalizedName("Mutton Raw");
-		muttonCooked =  new ItemTerraFood(TFCItemID.muttonCooked, 40, 0.8F, true, 48).setUnlocalizedName("Mutton Cooked");
-		venisonRaw = new ItemTerra(TFCItemID.venisonRaw).setFolder("food/").setUnlocalizedName("Venison");
-		venisonCooked =  new ItemTerraFood(TFCItemID.venisonCooked, 40, 0.8F, true, 49).setUnlocalizedName("VenisonCooked");
+
 		FlatLeather = (new ItemFlatGeneric(TFCItemID.FlatLeather2).setFolder("tools/").setUnlocalizedName("Flat Leather"));
 		TerraLeather = new ItemLeather(TFCItemID.TFCLeather).setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather");
 
@@ -1630,9 +1617,6 @@ public class TFCItems
 		Recipes.Gems  = new Item[]{TFCItems.GemAgate, TFCItems.GemAmethyst, TFCItems.GemBeryl, TFCItems.GemDiamond, TFCItems.GemEmerald, TFCItems.GemGarnet, 
 				TFCItems.GemJade, TFCItems.GemJasper, TFCItems.GemOpal,TFCItems.GemRuby,TFCItems.GemSapphire,TFCItems.GemTopaz,TFCItems.GemTourmaline};
 
-		Meals = new Item[]{MealMoveSpeed, MealDigSpeed, MealDamageBoost, MealJump, MealDamageResist, 
-				MealFireResist, MealWaterBreathing, MealNightVision};
-
 		((TFCTabs)TFCTabs.TFCTools).setTabIconItemIndex(TFCItems.SteelHammer.itemID);
 		((TFCTabs)TFCTabs.TFCMaterials).setTabIconItemIndex(TFCItems.LeadIngot.itemID);
 		((TFCTabs)TFCTabs.TFCUnfinished).setTabIconItemIndex(TFCItems.SteelHammerHead.itemID);
@@ -1655,7 +1639,7 @@ public class TFCItems
 		Egg = Item.itemsList[Item.egg.itemID];
 		Item.itemsList[Item.porkRaw.itemID] = null; Item.itemsList[Item.porkRaw.itemID] = new ItemRawFood(63, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("porkchopRaw");
 		Item.itemsList[Item.porkCooked.itemID] = null; Item.itemsList[Item.porkCooked.itemID] = new ItemFoodTFC(64, 38, EnumFoodGroup.Protein).setFolder("").setUnlocalizedName("porkchopCooked");
-		Item.itemsList[Item.fishRaw.itemID] = null; Item.itemsList[Item.fishRaw.itemID] = new ItemRawFood(93, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("fishRaw");
+		Item.itemsList[Item.fishRaw.itemID] = null; Item.itemsList[Item.fishRaw.itemID] = new ItemRawFood(93, -1, EnumFoodGroup.Protein, false, true).setUnlocalizedName("fishRaw");
 		Item.itemsList[Item.fishCooked.itemID] = null; Item.itemsList[Item.fishCooked.itemID] = new ItemFoodTFC(94, 39, EnumFoodGroup.Protein).setFolder("").setUnlocalizedName("fishCooked");
 		Item.itemsList[Item.beefRaw.itemID] = null; Item.itemsList[Item.beefRaw.itemID] = new ItemRawFood(107, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("beefRaw");
 		Item.itemsList[Item.beefCooked.itemID] = null; Item.itemsList[Item.beefCooked.itemID] = new ItemFoodTFC(108, 40, EnumFoodGroup.Protein).setFolder("").setUnlocalizedName("beefCooked");
@@ -1672,7 +1656,7 @@ public class TFCItems
 		Cherry = new ItemRawFood(TFCItemID.Cherry, 8, EnumFoodGroup.Fruit, true).setUnlocalizedName("Cherry");
 		Peach = new ItemRawFood(TFCItemID.Peach, 9, EnumFoodGroup.Fruit, true).setUnlocalizedName("Peach");
 		Plum = new ItemRawFood(TFCItemID.Plum, 10, EnumFoodGroup.Fruit, true).setUnlocalizedName("Plum");
-		EggCooked = new ItemFoodTFC(TFCItemID.EggCooked, 11, EnumFoodGroup.Fruit).setUnlocalizedName("Egg Cooked");
+		EggCooked = new ItemFoodTFC(TFCItemID.EggCooked, 11, EnumFoodGroup.Protein).setUnlocalizedName("Egg Cooked");
 
 		WheatGrain = new ItemRawFood(TFCItemID.WheatGrain, 12, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Grain");
 		BarleyGrain = new ItemRawFood(TFCItemID.BarleyGrain, 14, EnumFoodGroup.Grain).setUnlocalizedName("Barley Grain");
@@ -1704,28 +1688,20 @@ public class TFCItems
 		RiceWhole = new ItemTerra(TFCItemID.RiceWhole).setFolder("food/").setUnlocalizedName("Rice Whole");
 
 		MealGeneric = new ItemMeal(TFCItemID.MealGeneric, 0).setUnlocalizedName("MealGeneric");
-		MealMoveSpeed = new ItemMeal(TFCItemID.MealMoveSpeed, 1).setPotionEffect(new PotionEffect(Potion.moveSpeed.id,8000,1)).setUnlocalizedName("MealGeneric");
-		MealDigSpeed = new ItemMeal(TFCItemID.MealDigSpeed, 2).setPotionEffect(new PotionEffect(Potion.digSpeed.id,8000,1)).setUnlocalizedName("MealGeneric");
-		MealDamageBoost = new ItemMeal(TFCItemID.MealDamageBoost, 3).setPotionEffect(new PotionEffect(Potion.damageBoost.id,4000,1)).setUnlocalizedName("MealGeneric");
-		MealJump = new ItemMeal(TFCItemID.MealJump, 4).setPotionEffect(new PotionEffect(Potion.jump.id,8000,1)).setUnlocalizedName("MealGeneric");
-		MealDamageResist = new ItemMeal(TFCItemID.MealDamageResist, 5).setPotionEffect(new PotionEffect(Potion.resistance.id,8000,1)).setUnlocalizedName("MealGeneric");
-		MealFireResist = new ItemMeal(TFCItemID.MealFireResist, 6).setPotionEffect(new PotionEffect(Potion.fireResistance.id,8000,1)).setUnlocalizedName("MealGeneric");
-		MealWaterBreathing = new ItemMeal(TFCItemID.MealWaterBreathing, 7).setPotionEffect(new PotionEffect(Potion.waterBreathing.id,8000,1)).setUnlocalizedName("MealGeneric");
-		MealNightVision = new ItemMeal(TFCItemID.MealNightVision, 8).setPotionEffect(new PotionEffect(Potion.nightVision.id,4000,1)).setUnlocalizedName("MealGeneric");
 
-		WheatGround = new ItemTerra(TFCItemID.WheatGround).setFolder("food/").setUnlocalizedName("Wheat Ground");
-		BarleyGround = new ItemTerra(TFCItemID.BarleyGround).setFolder("food/").setUnlocalizedName("Barley Ground");
-		OatGround = new ItemTerra(TFCItemID.OatGround).setFolder("food/").setUnlocalizedName("Oat Ground");
-		RyeGround = new ItemTerra(TFCItemID.RyeGround).setFolder("food/").setUnlocalizedName("Rye Ground");
-		RiceGround = new ItemTerra(TFCItemID.RiceGround).setFolder("food/").setUnlocalizedName("Rice Ground");
-		CornmealGround = new ItemTerra(TFCItemID.CornmealGround).setFolder("food/").setUnlocalizedName("Cornmeal Ground");
+		WheatGround = new ItemRawFood(TFCItemID.WheatGround, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Wheat Ground");
+		BarleyGround = new ItemRawFood(TFCItemID.BarleyGround, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Barley Ground");
+		OatGround = new ItemRawFood(TFCItemID.OatGround, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Oat Ground");
+		RyeGround = new ItemRawFood(TFCItemID.RyeGround, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rye Ground");
+		RiceGround = new ItemRawFood(TFCItemID.RiceGround, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rice Ground");
+		CornmealGround = new ItemRawFood(TFCItemID.CornmealGround, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Cornmeal Ground");
 
-		WheatDough = new ItemTerra(TFCItemID.WheatDough).setUnlocalizedName("Wheat Dough");
-		BarleyDough = new ItemTerra(TFCItemID.BarleyDough).setUnlocalizedName("Barley Dough");
-		OatDough = new ItemTerra(TFCItemID.OatDough).setUnlocalizedName("Oat Dough");
-		RyeDough = new ItemTerra(TFCItemID.RyeDough).setUnlocalizedName("Rye Dough");
-		RiceDough = new ItemTerra(TFCItemID.RiceDough).setUnlocalizedName("Rice Dough");
-		CornmealDough = new ItemTerra(TFCItemID.CornmealDough).setUnlocalizedName("Cornmeal Dough");
+		WheatDough = new ItemRawFoodDough(TFCItemID.WheatDough, 61, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Dough");
+		BarleyDough = new ItemRawFoodDough(TFCItemID.BarleyDough, 62, EnumFoodGroup.Grain).setUnlocalizedName("Barley Dough");
+		OatDough = new ItemRawFoodDough(TFCItemID.OatDough, 63, EnumFoodGroup.Grain).setUnlocalizedName("Oat Dough");
+		RyeDough = new ItemRawFoodDough(TFCItemID.RyeDough, 64, EnumFoodGroup.Grain).setUnlocalizedName("Rye Dough");
+		RiceDough = new ItemRawFoodDough(TFCItemID.RiceDough, 65, EnumFoodGroup.Grain).setUnlocalizedName("Rice Dough");
+		CornmealDough = new ItemRawFoodDough(TFCItemID.CornmealDough, 66, EnumFoodGroup.Grain).setUnlocalizedName("Cornmeal Dough");
 
 		WheatBread = new ItemFoodTFC(TFCItemID.WheatBread, 42, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Bread");
 		BarleyBread = new ItemFoodTFC(TFCItemID.BarleyBread, 43, EnumFoodGroup.Grain).setUnlocalizedName("Barley Bread");
@@ -1734,7 +1710,7 @@ public class TFCItems
 		RiceBread = new ItemFoodTFC(TFCItemID.RiceBread, 46, EnumFoodGroup.Grain).setUnlocalizedName("Rice Bread");
 		CornBread = new ItemFoodTFC(TFCItemID.CornBread, 47, EnumFoodGroup.Grain).setUnlocalizedName("Corn Bread");
 
-		CalamariRaw = new ItemTerra(TFCItemID.CalamariRaw).setFolder("").setUnlocalizedName("Calamari Raw");
+		CalamariRaw = new ItemRawFood(TFCItemID.CalamariRaw, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("Calamari Raw");
 		CalamariCooked = new ItemFoodTFC(TFCItemID.CalamariCooked, 49, EnumFoodGroup.Protein).setFolder("").setUnlocalizedName("Calamari Cooked");
 
 		SeedsWheat = new ItemCustomSeeds(TFCItemID.SeedsWheat,0).setUnlocalizedName("Seeds Wheat");
@@ -1757,6 +1733,11 @@ public class TFCItems
 		SeedsGreenbean = new ItemCustomSeeds(TFCItemID.SeedsGreenbean,22).setUnlocalizedName("Seeds Greenbean");
 		SeedsSquash = new ItemCustomSeeds(TFCItemID.SeedsSquash,23).setUnlocalizedName("Seeds Squash");
 
+		muttonRaw = new ItemRawFood(TFCItemID.muttonRaw, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("Mutton Raw");
+		muttonCooked =  new ItemFoodTFC(TFCItemID.muttonCooked, 48, EnumFoodGroup.Protein).setUnlocalizedName("Mutton Cooked");
+		venisonRaw = new ItemRawFood(TFCItemID.venisonRaw, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("Venison");
+		venisonCooked =  new ItemFoodTFC(TFCItemID.venisonCooked, 49, EnumFoodGroup.Protein).setUnlocalizedName("VenisonCooked");
+
 		WintergreenBerry =  new ItemFoodTFC(TFCItemID.WintergreenBerry, 50, EnumFoodGroup.Fruit).setUnlocalizedName("Wintergreen Berry");
 		Blueberry =  new ItemFoodTFC(TFCItemID.Blueberry, 51, EnumFoodGroup.Fruit).setUnlocalizedName("Blueberry");
 		Raspberry =  new ItemFoodTFC(TFCItemID.Raspberry, 52, EnumFoodGroup.Fruit).setUnlocalizedName("Raspberry");
@@ -1768,6 +1749,9 @@ public class TFCItems
 		Elderberry =  new ItemFoodTFC(TFCItemID.Elderberry, 58, EnumFoodGroup.Fruit).setUnlocalizedName("Elderberry");
 		Gooseberry =  new ItemFoodTFC(TFCItemID.Gooseberry, 59, EnumFoodGroup.Fruit).setUnlocalizedName("Gooseberry");
 		Cloudberry =  new ItemFoodTFC(TFCItemID.Cloudberry, 60, EnumFoodGroup.Fruit).setUnlocalizedName("Cloudberry");
+
+
+
 		//mushroom is a food now, with foodID 61
 		//pumpkin is a food now, id = 61
 		//melon is a food, not currently obtainable. id = 62. See ItemFoodBlock
