@@ -89,9 +89,7 @@ public class WorldGenRedwoodXL extends WorldGenerator {
 		int j2 = 1;
 		boolean flag1 = false;
 
-		final int j3 = rand.nextInt(3);
-
-		for (int y1 = 0; y1 < height - j3; y1++) {
+		for (int y1 = 0; y1 < height - 3; y1++) {
 			final int j4 = world.getBlockId(x, y + y1, z);
 
 			if (Block.blocksList[j4] == null
