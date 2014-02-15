@@ -2,7 +2,6 @@ package TFC.Food;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-import TFC.Reference;
 import TFC.API.IFood;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumFoodGroup;
@@ -33,8 +31,6 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	public int foodID;
 
-	public String folder = "food/";
-	public static int[] FoodList = new int[1024];
 	private EnumFoodGroup foodgroup;
 
 	public ItemFoodTFC(int id, int foodid, EnumFoodGroup fg)
@@ -42,24 +38,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		super(id);
 		this.setCreativeTab(CreativeTabs.tabFood);
 		foodID = foodid;
-		if(foodID != -1)
-			FoodList[foodID] = this.itemID;
 		foodgroup = fg;
 	}
 
-	@Override
-	public String getItemDisplayName(ItemStack itemstack) 
-	{
-		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
-	}
-
-	@Override
-	public void registerIcons(IconRegister registerer)
-	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + folder + this.getUnlocalizedName().replace("item.", ""));
-	}
-
-	public static void addFoodTempInformation(ItemStack is, List arraylist)
+	public static void addHeatInformation(ItemStack is, List arraylist)
 	{
 		if (is.hasTagCompound())
 		{
@@ -68,18 +50,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			if(stackTagCompound.hasKey("temperature"))
 			{
 				float temp = stackTagCompound.getFloat("temperature");
-				float meltTemp = 0;
-
-				meltTemp = TFC_ItemHeat.getMeltingPoint(is);
+				float meltTemp = TFC_ItemHeat.getMeltingPoint(is);
 
 				if(meltTemp != -1)
 					arraylist.add(TFC_ItemHeat.getHeatColorFood(temp, meltTemp));
-			}
-
-			if(stackTagCompound.hasKey("foodWeight"))
-			{
-				float ounces = stackTagCompound.getFloat("foodWeight");
-				arraylist.add(ounces+"oz/10.0oz");
 			}
 		}
 	}
@@ -100,7 +74,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		else if(this.getFoodGroup() == EnumFoodGroup.Grain)
 			arraylist.add(EnumChatFormatting.YELLOW + StringUtil.localize("gui.food.grain"));
 
-		this.addFoodTempInformation(is, arraylist);
+		addHeatInformation(is, arraylist);
 
 		//int filling = this.getHealAmount() / 10;
 		int filling = 10;
@@ -116,6 +90,15 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 				stars += "\u2729";
 
 			arraylist.add(StringUtil.localize("gui.FoodPrep.Filling") + ": " + stars);
+		}
+		if (is.hasTagCompound())
+		{
+			NBTTagCompound stackTagCompound = is.getTagCompound();
+			if(stackTagCompound.hasKey("foodWeight"))
+			{
+				float ounces = stackTagCompound.getFloat("foodWeight");
+				arraylist.add(ounces+"oz/10.0oz");
+			}
 		}
 	}
 
@@ -154,11 +137,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		is.stackSize--;
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-		//player.getFoodStats().addStats(this);
+
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		if(!world.isRemote)
-			//foodstats.addStats(this);
-			TFC_Core.setPlayerFoodStats(player, foodstats);
+			foodstats.addStats(is);
+		TFC_Core.setPlayerFoodStats(player, foodstats);
 		return is;
 	}
 
@@ -191,6 +174,26 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			nbt.setFloat("foodWeight", weight);
 			nbt.setFloat("foodDecay", 0);
 		}
+	}
+
+	public float getFoodWeight(ItemStack is)
+	{
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
+		{
+			NBTTagCompound nbt = new NBTTagCompound();
+			return nbt.getFloat("foodWeight");
+		}
+		return 0f;
+	}
+
+	public float getFoodDecay(ItemStack is)
+	{
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodDecay"))
+		{
+			NBTTagCompound nbt = new NBTTagCompound();
+			return nbt.getFloat("foodDecay");
+		}
+		return 0f;
 	}
 
 	@Override
