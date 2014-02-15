@@ -164,10 +164,8 @@ public class ItemTerraFood extends ItemFood implements ISize
 		player.getFoodStats().addStats(this);
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		if(!world.isRemote)
-		{
-			foodstats.addStats(this);
+			//foodstats.addStats(this);
 			TFC_Core.setPlayerFoodStats(player, foodstats);
-		}
 		return is;
 	}
 

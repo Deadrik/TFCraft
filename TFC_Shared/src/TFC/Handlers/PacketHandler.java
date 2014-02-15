@@ -96,7 +96,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				dos.writeLong(world.getSeed());
 				dos.writeInt(TFC_Time.daysInYear);
 
-				dos.writeFloat(foodstats.foodLevel);
+				dos.writeFloat(foodstats.stomachLevel);
 				dos.writeFloat(foodstats.waterLevel);	
 /*				dos.writeFloat(foodstats.nutrFruit);
 				dos.writeFloat(foodstats.nutrVeg);
@@ -212,7 +212,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						seed = dis.readLong();
 						TFC_Time.daysInYear = dis.readInt();
 						FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-						foodstats.foodLevel = dis.readFloat();
+						foodstats.stomachLevel = dis.readFloat();
 						foodstats.waterLevel = dis.readFloat();
 						TFC_Core.setPlayerFoodStats(player, foodstats);
 						TFCOptions.HealthGainRate = dis.readInt();
@@ -270,7 +270,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						if(flag == 0)
 						{
 							FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-							foodstats.foodLevel = dis.readFloat();
+							foodstats.stomachLevel = dis.readFloat();
 							foodstats.waterLevel = dis.readFloat();
 							TFC_Core.setPlayerFoodStats(player, foodstats);
 						}

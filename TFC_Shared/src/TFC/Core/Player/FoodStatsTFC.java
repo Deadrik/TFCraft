@@ -3,19 +3,19 @@ package TFC.Core.Player;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.DamageSource;
+import TFC.API.Enums.EnumFoodGroup;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
+import TFC.Food.ItemFoodTFC;
 import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,12 +23,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class FoodStatsTFC
 {
 	/** The player's food level. This measures how much food the player can handle.*/
-	public float foodLevel = 100;
+	public float stomachLevel = 100;
+	private int prevFoodLevel = 100;
+
+	private float nutrFruit = 20;
+	private float nutrVeg = 20;
+	private float nutrGrain = 20;
+	private float nutrDairy = 20;
+	private float nutrProtein = 20;
+
 	public long soberTime = 0;
 
-
 	/** The player's food saturation. This is how full the player is from the food that they've eaten.*/
-	private float foodSaturationLevel = 5.0F;
+	private float satisfaction = 5.0F;
 
 	/** The player's food exhaustion. This measures the rate of hunger decay. 
 	 * When this reaches 4, some of the stored food is consumed by either 
@@ -41,14 +48,6 @@ public class FoodStatsTFC
 
 	public float waterLevel = TFC_Time.dayLength*2;
 	public long waterTimer = 0;
-
-
-	private int prevFoodLevel = 100;
-
-
-
-	Random rand = new Random();
-	ItemStack itemHead,itemChest,itemLegs,itemFeet;
 
 	public FoodStatsTFC()
 	{
@@ -77,14 +76,14 @@ public class FoodStatsTFC
 			{
 				this.foodExhaustionLevel -= 4.0F;
 
-				if (this.foodSaturationLevel > 0.0F)
-					this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
+				if (this.satisfaction > 0.0F)
+					this.satisfaction = Math.max(this.satisfaction - 1.0F, 0.0F);
 				else if (!player.capabilities.isCreativeMode)
-					this.foodLevel = Math.max(this.foodLevel - 2, 0);
+					this.stomachLevel = Math.max(this.stomachLevel - 2, 0);
 			}
-			float satisfaction = 0;
-			if (this.foodSaturationLevel < 0.0F)
-				satisfaction = -foodSaturationLevel;
+			float satisf = 0;
+			if (this.satisfaction < 0.0F)
+				satisf = -satisfaction;
 
 
 			float tempWaterMod = temp;
@@ -99,31 +98,32 @@ public class FoodStatsTFC
 			if(!player.capabilities.isCreativeMode)
 				if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength)
 				{
-					this.foodLevel -= bodyTemp.getExtraFood();
+					this.stomachLevel -= bodyTemp.getExtraFood();
 					//Handle water related ticking
 					if(player.isSprinting()&& !player.capabilities.isCreativeMode)
 						waterLevel -= 5+(tempWaterMod);
 					if(!player.capabilities.isCreativeMode)waterLevel-=bodyTemp.getExtraWater();
 					this.foodTimer += TFC_Time.hourLength;
-					if (this.foodSaturationLevel > 0.0F)
-						this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
-					else if(!player.capabilities.isCreativeMode)
-						this.foodLevel = Math.max(this.foodLevel - (1 + satisfaction), 0);
+					/*if (this.satisfaction > 0.0F)
+						this.satisfaction = Math.max(this.satisfaction - 1.0F, 0.0F);
+					else*/ 
+					if(!player.capabilities.isCreativeMode)
+						this.stomachLevel = Math.max(this.stomachLevel - (1 + satisf), 0);
 				}
 			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.hourLength/2)
 			{
 				this.foodHealTimer += TFC_Time.hourLength/2;
 
-				if (this.foodLevel >= 25 && player.shouldHeal())
+				if (this.stomachLevel >= 25 && player.shouldHeal())
 				{
 					player.heal((int) (player.getMaxHealth()*0.01f));
 
-					if (this.foodSaturationLevel > 0.0F)
-						this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 4.0F, 0.0F);
+					if (this.satisfaction > 0.0F)
+						this.satisfaction = Math.max(this.satisfaction - 4.0F, 0.0F);
 					else if (!player.capabilities.isCreativeMode)
-						this.foodLevel = Math.max(this.foodLevel - 1, 0);
+						this.stomachLevel = Math.max(this.stomachLevel - 1, 0);
 				}
-				else if (this.foodLevel <= 0)
+				else if (this.stomachLevel <= 0)
 					if (!TFC_Core.isPlayerInDebugMode(player) && (difficulty > 1 || (player.getMaxHealth() > 50)))
 						player.attackEntityFrom(DamageSource.starve, 50);
 			}
@@ -161,21 +161,17 @@ public class FoodStatsTFC
 		}
 	}
 
-
-
 	public int getMaxWater(EntityPlayer player)
 	{
 		return (TFC_Time.dayLength*2)+(200*player.experienceLevel);
 	}
-
-
 
 	/**
 	 * Get the player's food level.
 	 */
 	public int getFoodLevel()
 	{
-		return (int) this.foodLevel;
+		return (int) this.stomachLevel;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -189,12 +185,12 @@ public class FoodStatsTFC
 	 */
 	public boolean needFood()
 	{
-		return this.foodLevel < 100;
+		return this.stomachLevel < 100;
 	}
 
 	public boolean needFood(int filling)
 	{
-		return needFood() && this.foodLevel + filling < 140;
+		return needFood() && this.stomachLevel + filling < 140;
 	}
 
 	/**
@@ -206,11 +202,11 @@ public class FoodStatsTFC
 		{
 			NBTTagCompound foodCompound = par1NBTTagCompound.getCompoundTag("foodCompound");
 			this.waterLevel = foodCompound.getFloat("waterLevel");
-			this.foodLevel = foodCompound.getFloat("foodLevel");
+			this.stomachLevel = foodCompound.getFloat("foodLevel");
 			this.foodTimer = foodCompound.getLong("foodTickTimer");
 			this.foodHealTimer = foodCompound.getLong("foodHealTimer");
 			this.waterTimer = foodCompound.getLong("waterTimer");
-			this.foodSaturationLevel = foodCompound.getFloat("foodSaturationLevel");
+			this.satisfaction = foodCompound.getFloat("foodSaturationLevel");
 			this.foodExhaustionLevel = foodCompound.getFloat("foodExhaustionLevel");
 		}
 	}
@@ -222,11 +218,11 @@ public class FoodStatsTFC
 	{
 		NBTTagCompound foodCompound = new NBTTagCompound();
 		foodCompound.setFloat("waterLevel", this.waterLevel);
-		foodCompound.setFloat("foodLevel", this.foodLevel);
+		foodCompound.setFloat("foodLevel", this.stomachLevel);
 		foodCompound.setLong("foodTickTimer", this.foodTimer);
 		foodCompound.setLong("foodHealTimer", this.foodHealTimer);
 		foodCompound.setLong("waterTimer", this.waterTimer);
-		foodCompound.setFloat("foodSaturationLevel", this.foodSaturationLevel);
+		foodCompound.setFloat("foodSaturationLevel", this.satisfaction);
 		foodCompound.setFloat("foodExhaustionLevel", this.foodExhaustionLevel);
 		par1NBTTagCompound.setCompoundTag("foodCompound", foodCompound);
 	}
@@ -244,17 +240,17 @@ public class FoodStatsTFC
 	 */
 	public float getSaturationLevel()
 	{
-		return this.foodSaturationLevel;
+		return this.satisfaction;
 	}
 
 	public void setFoodLevel(int par1)
 	{
-		this.foodLevel = par1;
+		this.stomachLevel = par1;
 	}
 
 	public void setFoodSaturationLevel(float par1)
 	{
-		this.foodSaturationLevel = par1;
+		this.satisfaction = par1;
 	}
 
 	/**
@@ -262,19 +258,50 @@ public class FoodStatsTFC
 	 */
 	public void addStats(int food, float satur)
 	{
-		this.foodLevel = Math.min(food + this.foodLevel, 100);
+		this.stomachLevel = Math.min(food + this.stomachLevel, 100);
 		if(satur < 0)
-			this.foodSaturationLevel = this.foodSaturationLevel + satur;
+			this.satisfaction = this.satisfaction + satur;
 		else
-			this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float)food / 3 * satur * 2.0F, this.foodLevel);
+			this.satisfaction = Math.min(this.satisfaction + (float)food / 3 * satur * 2.0F, this.stomachLevel);
 	}
 
 	/**
 	 * Eat some food.
 	 */
-	public void addStats(ItemFood par1ItemFood)
+	public void addStats(ItemStack is)
 	{
-		this.addStats(par1ItemFood.getHealAmount(), par1ItemFood.getSaturationModifier());
+		if(is.getItem() instanceof ItemFoodTFC)
+		{
+			ItemFoodTFC item = (ItemFoodTFC) is.getItem();
+			float weight = item.getFoodWeight(is);
+			float decay = item.getFoodDecay(is);
+
+		}
+	}
+
+	private void addNutrition(EnumFoodGroup fg, float amount)
+	{
+		switch(fg)
+		{
+		case Dairy:
+			this.nutrDairy += amount;
+			break;
+		case Fruit:
+			this.nutrFruit += amount;
+			break;
+		case Grain:
+			this.nutrGrain += amount;
+			break;
+		case Protein:
+			this.nutrProtein += amount;
+			break;
+		case Vegetable:
+			this.nutrVeg += amount;
+			break;
+		default:
+			break;
+
+		}
 	}
 
 	public void restoreWater(EntityPlayer player, int w)
@@ -300,7 +327,7 @@ public class FoodStatsTFC
 			//The packet type sent determines who is expected to process this packet, the client or the server.
 			dos.writeByte(PacketHandler.Packet_Player_Status);
 			dos.writeByte((byte)0);
-			dos.writeFloat(foodstats.foodLevel);
+			dos.writeFloat(foodstats.stomachLevel);
 			dos.writeFloat(foodstats.waterLevel);
 
 			pkt.channel="TerraFirmaCraft";
