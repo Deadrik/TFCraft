@@ -90,7 +90,7 @@ public class BlockCrop extends BlockContainer
 			iconsBarley[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Barley ("+i+")");
 			iconsOat[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Oat ("+i+")");
 			iconsRice[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Rice ("+i+")");
-			
+
 		}
 	}
 
@@ -191,7 +191,6 @@ public class BlockCrop extends BlockContainer
 		TECrop te = (TECrop) world.getBlockTileEntity(i, j, k);
 		CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
 		if(crop != null && !world.isRemote)
-		{
 			if(crop.cropId == 4 && te.growth >= 7)
 			{
 				ItemStack is1 = crop.getOutput1(te.growth);
@@ -220,9 +219,6 @@ public class BlockCrop extends BlockContainer
 				return true;
 			}
 
-
-		}
-
 		if(TFCOptions.enableDebugMode)
 		{
 			System.out.println("Crop ID: " + te.cropId);
@@ -237,11 +233,8 @@ public class BlockCrop extends BlockContainer
 	{
 		ItemStack itemstack = player.inventory.getCurrentItem();
 		if(!world.isRemote && itemstack != null && itemstack.getItem() instanceof ItemCustomScythe)
-		{
 			for(int x = -1; x < 2; x++)
-			{
 				for(int z = -1; z < 2; z++)
-				{
 					if(world.getBlockId( i+x, j, k+z) == this.blockID && player.inventory.getStackInSlot(player.inventory.currentItem) != null)
 					{
 						player.addStat(StatList.mineBlockStatArray[this.blockID], 1);
@@ -254,19 +247,12 @@ public class BlockCrop extends BlockContainer
 						int dam = itemstack.getItemDamage()+2;
 
 						if(dam >= itemstack.getItem().getMaxDamage())
-						{
 							player.inventory.setInventorySlotContents(player.inventory.currentItem, 
 									null);
-						}
 						else
-						{
 							player.inventory.setInventorySlotContents(player.inventory.currentItem, 
 									new ItemStack(itemstack.getItem(),ss,dam));
-						}
 					}
-				}
-			}
-		}
 
 	}
 	@Override
@@ -332,10 +318,8 @@ public class BlockCrop extends BlockContainer
 	{
 		super.onNeighborBlockChange(world, i, j, k, par5);
 
-		if (!(world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil.blockID || world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil2.blockID))
-		{
+		if (!canBlockStay(world, i, j, k))
 			world.setBlockToAir(i, j, k);
-		}
 
 	}
 
@@ -348,9 +332,7 @@ public class BlockCrop extends BlockContainer
 	public boolean canBlockStay(World world, int i, int j, int k)
 	{
 		if (!(world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil.blockID || world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil2.blockID || TFC_Core.isSoil(world.getBlockId(i, j-1, k))))
-		{
 			return false;
-		}
 		return true;
 	}
 
@@ -359,18 +341,18 @@ public class BlockCrop extends BlockContainer
 	{
 		return new TECrop();
 	}
-	
+
 	@Override
-    @SideOnly(Side.CLIENT)
-    public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
-    {
-        return true;
-    }
-    
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
-    {
-        return true;
-    }
+	@SideOnly(Side.CLIENT)
+	public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
+	{
+		return true;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
+	{
+		return true;
+	}
 }
