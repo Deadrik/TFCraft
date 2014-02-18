@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import TFC.API.Util.Helper;
 import TFC.TileEntities.TECrop;
 
 public class CropIndex
@@ -92,10 +93,7 @@ public class CropIndex
 			Random R = new Random();
 			if(R.nextInt(100) < chanceForOutput1)
 			{
-				//weight = avg +/-5%
-				float weight = Output1Avg + (Output1Avg * ((10*R.nextFloat())-5));
-
-				((ItemFoodTFC)is.getItem()).createTag(is, weight);
+				ItemFoodTFC.createTag(is, getWeight(Output1Avg, R));
 				return is;
 			}
 		}
@@ -109,14 +107,17 @@ public class CropIndex
 			Random R = new Random();
 			if(R.nextInt(100) < chanceForOutput2)
 			{
-				//weight = avg +/-5%
-				float weight = Output2Avg + (Output2Avg * ((10*R.nextFloat())-5));
-
-				((ItemFoodTFC)is.getItem()).createTag(is, weight);
+				ItemFoodTFC.createTag(is, getWeight(Output2Avg, R));
 				return is;
 			}
 		}
 		return null;
+	}
+
+	protected float getWeight(float average, Random R)
+	{
+		float weight = average + (average * ((10*R.nextFloat())-5)/100);
+		return Helper.roundNumber(weight, 10);
 	}
 
 	public CropIndex setNeedsSunlight(boolean b)

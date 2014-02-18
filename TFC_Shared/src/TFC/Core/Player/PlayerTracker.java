@@ -37,7 +37,7 @@ public class PlayerTracker implements IPlayerTracker
 		{
 			int foodLevel = (player.worldObj.rand.nextInt(25) + 35);
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-			foodstats.addStats(foodLevel - foodstats.getFoodLevel(), 0.0f);
+			//foodstats.addStats(foodLevel - foodstats.getFoodLevel(), 0.0f);
 			TFC_Core.setPlayerFoodStats(player, foodstats);
 			player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1000);
 			player.setHealth(1000f * (0.25f + (player.worldObj.rand.nextFloat()*0.25f)));

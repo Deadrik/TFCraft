@@ -68,8 +68,8 @@ public class CropManager
 
 		instance.addIndex(new CropIndex(/*ID*/18, /*Name*/"carrot", /*type*/2, /*time*/90, /*stages*/4, /*minGTemp*/8, /*minATemp*/0, /*nutrientUsage*/0.75f, TFCItems.SeedsCarrot).setOutput1(TFCItems.Carrot, 30.0f).setGoesDormant(true));
 
-		instance.addIndex(new CropIndexPepper(/*ID*/19, /*Name*/"yellowbellpepper", /*type*/2, /*time*/70, /*stages*/6, /*minGTemp*/8, /*minATemp*/0, /*nutrientUsage*/1.2f, TFCItems.SeedsYellowBellPepper).setOutput1(TFCItems.GreenBellPepper, 16).setOutput2(TFCItems.YellowBellPepper, 16));
-		instance.addIndex(new CropIndexPepper(/*ID*/20, /*Name*/"redbellpepper", /*type*/2, /*time*/70, /*stages*/6, /*minGTemp*/8, /*minATemp*/0, /*nutrientUsage*/1.2f, TFCItems.SeedsRedBellPepper).setOutput1(TFCItems.GreenBellPepper, 16).setOutput2(TFCItems.RedBellPepper, 16));
+		instance.addIndex(new CropIndexPepper(/*ID*/19, /*Name*/"yellowbellpepper", /*type*/2, /*time*/70, /*stages*/6, /*minGTemp*/8, /*minATemp*/0, /*nutrientUsage*/1.2f, TFCItems.SeedsYellowBellPepper).setOutput1(TFCItems.GreenBellPepper, 6).setOutput2(TFCItems.YellowBellPepper, 6));
+		instance.addIndex(new CropIndexPepper(/*ID*/20, /*Name*/"redbellpepper", /*type*/2, /*time*/70, /*stages*/6, /*minGTemp*/8, /*minATemp*/0, /*nutrientUsage*/1.2f, TFCItems.SeedsRedBellPepper).setOutput1(TFCItems.GreenBellPepper, 6).setOutput2(TFCItems.RedBellPepper, 6));
 
 		instance.addIndex(new CropIndex(/*ID*/21, /*Name*/"soybean", /*type*/1, /*time*/95, /*stages*/6, /*minGTemp*/8, /*minATemp*/0, /*nutrientUsage*/1.0f, TFCItems.SeedsSoybean, new int[]{10,10,0}).setOutput1(TFCItems.Soybean, 16));
 
