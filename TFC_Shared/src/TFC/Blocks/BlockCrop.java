@@ -6,7 +6,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -193,27 +192,21 @@ public class BlockCrop extends BlockContainer
 		if(crop != null && !world.isRemote)
 			if(crop.cropId == 4 && te.growth >= 7)
 			{
-				ItemStack is1 = crop.getOutput1(te);
-				if(is1 != null)
-					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
+				te.onHarvest(world, entityplayer);
 				te.growth = 4;
 				te.broadcastPacketInRange(te.createCropUpdatePacket());
 				return true;
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 5 && te.growth < 6)
 			{
-				ItemStack is1 = crop.getOutput1(te);
-				if(is1 != null)
-					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
+				te.onHarvest(world, entityplayer);
 				te.growth = 3;
 				te.broadcastPacketInRange(te.createCropUpdatePacket());
 				return true;
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 6)
 			{
-				ItemStack is1 = crop.getOutput2(te);
-				if(is1 != null)
-					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
+				te.onHarvest(world, entityplayer);
 				te.growth = 3;
 				te.broadcastPacketInRange(te.createCropUpdatePacket());
 				return true;
@@ -237,6 +230,7 @@ public class BlockCrop extends BlockContainer
 		TECrop te = (TECrop) world.getBlockTileEntity(i, j, k);
 		//Handle Scythe
 		if(!world.isRemote && itemstack != null && itemstack.getItem() instanceof ItemCustomScythe)
+		{
 			for(int x = -1; x < 2; x++)
 				for(int z = -1; z < 2; z++)
 					if(world.getBlockId( i+x, j, k+z) == this.blockID && player.inventory.getStackInSlot(player.inventory.currentItem) != null)
@@ -257,8 +251,10 @@ public class BlockCrop extends BlockContainer
 							player.inventory.setInventorySlotContents(player.inventory.currentItem, 
 									new ItemStack(itemstack.getItem(),ss,dam));
 					}
-		//Handle Loot Drop
-		te.onHarvest(world, player);
+		}
+		else
+			//Handle Loot Drop
+			te.onHarvest(world, player);
 	}
 
 	/**

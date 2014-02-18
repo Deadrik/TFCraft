@@ -58,9 +58,8 @@ public class ItemMeal extends ItemTerraFood
 
 
 
-			if(foodEffect != null) {
+			if(foodEffect != null)
 				arraylist.add(StringUtil.localize("gui.FoodPrep.Effect") + ": " + StatCollector.translateToLocal(foodEffect.getEffectName()));
-			}
 
 			int energy = getMealEnergy(is)/10;
 			int power = getMealPower(is)/10;
@@ -73,13 +72,9 @@ public class ItemMeal extends ItemTerraFood
 				int blackstars = energy;
 
 				for(int i = 0; i < blackstars; i++)
-				{
 					stars += "\u272e";
-				}
 				for(int i = 0; i < whitestars; i++)
-				{
 					stars += "\u2729";
-				}
 
 				arraylist.add(StringUtil.localize("gui.FoodPrep.Energy") + ": " + stars);
 			}
@@ -91,13 +86,9 @@ public class ItemMeal extends ItemTerraFood
 				int blackstars = power;
 
 				for(int i = 0; i < blackstars; i++)
-				{
 					stars += "\u272e";
-				}
 				for(int i = 0; i < whitestars; i++)
-				{
 					stars += "\u2729";
-				}
 
 				arraylist.add(StringUtil.localize("gui.FoodPrep.Power") + ": " + stars);
 			}
@@ -109,13 +100,9 @@ public class ItemMeal extends ItemTerraFood
 				int blackstars = filling;
 
 				for(int i = 0; i < blackstars; i++)
-				{
 					stars += "\u272e";
-				}
 				for(int i = 0; i < whitestars; i++)
-				{
 					stars += "\u2729";
-				}
 
 				arraylist.add(StringUtil.localize("gui.FoodPrep.Filling") + ": " + stars);
 			}
@@ -131,9 +118,7 @@ public class ItemMeal extends ItemTerraFood
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
 			if(stackTagCompound.hasKey("temperature"))
-			{
 				TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
-			}
 		}
 	}
 
@@ -148,7 +133,7 @@ public class ItemMeal extends ItemTerraFood
 			int energy = getMealEnergy(is);
 			int filling = getMealFilling(is);
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-			foodstats.addStats(filling, energy/100f);
+			//foodstats.addStats(filling, energy/100f);
 			TFC_Core.setPlayerFoodStats(player, foodstats);
 			player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
 		}
@@ -158,11 +143,10 @@ public class ItemMeal extends ItemTerraFood
 
 	public static boolean isWarm(ItemStack is)
 	{
-		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) * 0.1) {
+		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) * 0.1)
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 
 	public static int getMealPower(ItemStack is)
@@ -175,13 +159,10 @@ public class ItemMeal extends ItemTerraFood
 			{
 				int power = stackTagCompound.getByte("effectpower");
 				if(!isWarm(is))
-				{
 					power /= 2;
-				}
 				return power;
-			} else {
+			} else
 				return -1;
-			}
 		}
 		return -1;
 	}
@@ -196,13 +177,10 @@ public class ItemMeal extends ItemTerraFood
 			{
 				int filling = stackTagCompound.getByte("filling");
 				if(!isWarm(is))
-				{
 					filling /= 2;
-				}
 				return filling;
-			} else {
+			} else
 				return -1;
-			}
 		}
 		return -1;
 	}
@@ -220,13 +198,10 @@ public class ItemMeal extends ItemTerraFood
 			{
 				int energy = stackTagCompound.getByte("energy");
 				if(!isWarm(is))
-				{
 					energy /= 2;
-				}
 				return energy;
-			} else {
+			} else
 				return -1;
-			}
 		}
 		return -1;
 	}
@@ -277,9 +252,7 @@ public class ItemMeal extends ItemTerraFood
 			int filling = getMealFilling(is);
 
 			if (foodstats.needFood() && filling+(filling / 3 * energy * 2.0F) <= 140)
-			{
 				player.setItemInUse(is, this.getMaxItemUseDuration(is));
-			}
 		}
 		else if(world.isRemote)
 		{
@@ -288,9 +261,7 @@ public class ItemMeal extends ItemTerraFood
 			int filling = getMealFilling(is);
 
 			if (foodstats.needFood() && filling+(filling / 3 * energy * 2.0F) <= 140)
-			{
 				player.setItemInUse(is, this.getMaxItemUseDuration(is));
-			}
 		}
 
 		return is;

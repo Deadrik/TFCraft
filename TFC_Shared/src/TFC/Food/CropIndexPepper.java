@@ -34,10 +34,7 @@ public class CropIndexPepper extends CropIndex
 			Random R = new Random();
 			if(R.nextInt(100) < chanceForOutput1)
 			{
-				//weight = avg +/-5%
-				float weight = Output1Avg + (Output1Avg * ((10*R.nextFloat())-5));
-
-				((ItemFoodTFC)is.getItem()).createTag(is, weight);
+				ItemFoodTFC.createTag(is, getWeight(Output1Avg, R));
 				return is;
 			}
 		}
@@ -52,10 +49,7 @@ public class CropIndexPepper extends CropIndex
 			Random R = new Random();
 			if(R.nextInt(100) < chanceForOutput2)
 			{
-				//weight = avg +/-5%
-				float weight = Output2Avg + (Output2Avg * ((10*R.nextFloat())-5));
-
-				((ItemFoodTFC)is.getItem()).createTag(is, weight);
+				ItemFoodTFC.createTag(is, getWeight(Output2Avg, R));
 				return is;
 			}
 		}

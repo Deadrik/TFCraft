@@ -24,7 +24,7 @@ public class PlayerInfo
 
 	//Clientside only variables
 	public boolean guishowFoodRestoreAmount = false;
-	public int guiFoodRestoreAmount = 0;
+	public float guiFoodRestoreAmount = 0;
 	public boolean[] knappingInterface;
 
 	public SkillStats tempSkills;

@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -37,6 +38,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		super(id);
 		this.setCreativeTab(CreativeTabs.tabFood);
+		this.setFolder("food/");
 		foodID = foodid;
 		foodgroup = fg;
 	}
@@ -75,29 +77,15 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			arraylist.add(EnumChatFormatting.YELLOW + StringUtil.localize("gui.food.grain"));
 
 		addHeatInformation(is, arraylist);
-
-		//int filling = this.getHealAmount() / 10;
-		int filling = 10;
-		if(filling > 0)
-		{
-			String stars = "";
-			int whitestars = 5-filling;
-			int blackstars = filling;
-
-			for(int i = 0; i < blackstars; i++)
-				stars += "\u272e";
-			for(int i = 0; i < whitestars; i++)
-				stars += "\u2729";
-
-			arraylist.add(StringUtil.localize("gui.FoodPrep.Filling") + ": " + stars);
-		}
 		if (is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 			if(stackTagCompound.hasKey("foodWeight"))
 			{
 				float ounces = stackTagCompound.getFloat("foodWeight");
-				arraylist.add(ounces+"oz/10.0oz");
+				arraylist.add("Amount " + ounces+"oz / 80oz");
+				float decay = stackTagCompound.getFloat("foodDecay");
+				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + decay/ounces*100+"%");
 			}
 		}
 	}
@@ -135,7 +123,6 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
-		is.stackSize--;
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
@@ -143,19 +130,6 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			foodstats.addStats(is);
 		TFC_Core.setPlayerFoodStats(player, foodstats);
 		return is;
-	}
-
-	@Override
-	public boolean getShareTag()
-	{
-		return true;
-	}
-	public int getItemStackLimit()
-	{
-		if(canStack())
-			return this.getSize(null).stackSize * getWeight(null).multiplier <= 64 ? this.getSize(null).stackSize * getWeight(null).multiplier : 64;
-			else
-				return 1;
 	}
 
 	public boolean isHot(ItemStack is)
@@ -166,13 +140,15 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			return false;
 	}
 
-	public void createTag(ItemStack is, float weight)
+	public static void createTag(ItemStack is, float weight)
 	{
 		if(!is.hasTagCompound())
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
 			nbt.setFloat("foodWeight", weight);
 			nbt.setFloat("foodDecay", 0);
+
+			is.setTagCompound(nbt);
 		}
 	}
 
@@ -180,7 +156,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
 		{
-			NBTTagCompound nbt = new NBTTagCompound();
+			NBTTagCompound nbt = is.getTagCompound();
 			return nbt.getFloat("foodWeight");
 		}
 		return 0f;
@@ -190,10 +166,34 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodDecay"))
 		{
-			NBTTagCompound nbt = new NBTTagCompound();
+			NBTTagCompound nbt = is.getTagCompound();
 			return nbt.getFloat("foodDecay");
 		}
 		return 0f;
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack par1ItemStack)
+	{
+		return 32;
+	}
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack par1ItemStack)
+	{
+		return EnumAction.eat;
+	}
+
+	@Override
+	public int getDisplayDamage(ItemStack stack)
+	{
+		return (int)(getFoodDecay(stack)*10);
+	}
+
+	@Override
+	public int getMaxDamage(ItemStack stack)
+	{
+		return (int)(getFoodWeight(stack)*10);
 	}
 
 	@Override
@@ -211,7 +211,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public boolean canStack() 
 	{
-		return true;
+		return false;
 	}
 
 	@Override

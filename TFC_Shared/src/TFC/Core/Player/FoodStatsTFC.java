@@ -12,6 +12,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.DamageSource;
 import TFC.API.Enums.EnumFoodGroup;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
@@ -23,8 +24,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class FoodStatsTFC
 {
 	/** The player's food level. This measures how much food the player can handle.*/
-	public float stomachLevel = 100;
-	private int prevFoodLevel = 100;
+	public float stomachLevel = 24;
+	private float stomachMax = 24.0f;
+	private float prevFoodLevel = 24;
 
 	private float nutrFruit = 20;
 	private float nutrVeg = 20;
@@ -48,6 +50,8 @@ public class FoodStatsTFC
 
 	public float waterLevel = TFC_Time.dayLength*2;
 	public long waterTimer = 0;
+
+	public EntityPlayer player;
 
 	public FoodStatsTFC()
 	{
@@ -166,16 +170,21 @@ public class FoodStatsTFC
 		return (TFC_Time.dayLength*2)+(200*player.experienceLevel);
 	}
 
+	public float getMaxStomach(EntityPlayer player)
+	{
+		return this.stomachMax;
+	}
+
 	/**
 	 * Get the player's food level.
 	 */
-	public int getFoodLevel()
+	public float getFoodLevel()
 	{
-		return (int) this.stomachLevel;
+		return this.stomachLevel;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public int getPrevFoodLevel()
+	public float getPrevFoodLevel()
 	{
 		return this.prevFoodLevel ;
 	}
@@ -185,12 +194,7 @@ public class FoodStatsTFC
 	 */
 	public boolean needFood()
 	{
-		return this.stomachLevel < 100;
-	}
-
-	public boolean needFood(int filling)
-	{
-		return needFood() && this.stomachLevel + filling < 140;
+		return this.stomachLevel < getMaxStomach(this.player);
 	}
 
 	/**
@@ -254,18 +258,6 @@ public class FoodStatsTFC
 	}
 
 	/**
-	 * Args: int foodLevel, float foodSaturationModifier
-	 */
-	public void addStats(int food, float satur)
-	{
-		this.stomachLevel = Math.min(food + this.stomachLevel, 100);
-		if(satur < 0)
-			this.satisfaction = this.satisfaction + satur;
-		else
-			this.satisfaction = Math.min(this.satisfaction + (float)food / 3 * satur * 2.0F, this.stomachLevel);
-	}
-
-	/**
 	 * Eat some food.
 	 */
 	public void addStats(ItemStack is)
@@ -275,8 +267,32 @@ public class FoodStatsTFC
 			ItemFoodTFC item = (ItemFoodTFC) is.getItem();
 			float weight = item.getFoodWeight(is);
 			float decay = item.getFoodDecay(is);
-
+			float eatAmount = Math.min(weight - decay, 5f);
+			float stomachDiff = this.stomachLevel+eatAmount-getMaxStomach(this.player);
+			if(stomachDiff > 0)
+				eatAmount-=stomachDiff;
+			//add the nutrition contents
+			addNutrition(item.getFoodGroup(), eatAmount);
+			//fill the stomach
+			this.stomachLevel += eatAmount;
+			//Now remove the eaten amount from the itemstack.
+			if(reduceFood(is, eatAmount))
+				is.stackSize = 0;
 		}
+	}
+
+	/**
+	 * 
+	 * @return return true if the itemstack should be consumed, else return false
+	 */
+	private boolean reduceFood(ItemStack is, float amount)
+	{
+		float weight = is.getTagCompound().getFloat("foodWeight");
+		if(weight - amount <= 0)
+			return true;
+		else
+			is.getTagCompound().setFloat("foodWeight", Helper.roundNumber(weight - amount, 10));
+		return false;
 	}
 
 	private void addNutrition(EnumFoodGroup fg, float amount)

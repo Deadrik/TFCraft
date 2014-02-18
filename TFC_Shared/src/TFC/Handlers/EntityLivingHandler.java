@@ -23,8 +23,8 @@ import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.SkillStats;
+import TFC.Food.ItemFoodTFC;
 import TFC.Food.ItemMeal;
-import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemArrow;
 import TFC.Items.ItemQuiver;
 import TFC.Items.Tools.ItemJavelin;
@@ -89,10 +89,10 @@ public class EntityLivingHandler
 						playerclient.guishowFoodRestoreAmount = true;
 						playerclient.guiFoodRestoreAmount = ItemMeal.getMealFilling(player.inventory.getCurrentItem());
 					}
-					else if(player.inventory.getCurrentItem().getItem() instanceof ItemTerraFood)
+					else if(player.inventory.getCurrentItem().getItem() instanceof ItemFoodTFC)
 					{
 						playerclient.guishowFoodRestoreAmount = true;
-						playerclient.guiFoodRestoreAmount = ((ItemTerraFood)player.inventory.getCurrentItem().getItem()).getHealAmount();
+						playerclient.guiFoodRestoreAmount = ((ItemFoodTFC)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
 					} else
 						playerclient.guishowFoodRestoreAmount = false;
 				} else
