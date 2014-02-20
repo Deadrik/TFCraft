@@ -2,7 +2,6 @@ package TFC.Blocks;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,9 +11,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.Reference;
-import TFC.TFCBlocks;
 import TFC.API.Constant.Global;
-import TFC.API.Constant.TFCBlockID;
 import TFC.API.Tools.IToolChisel;
 import TFC.API.Util.Helper;
 import TFC.Items.Tools.ItemHammer;
@@ -42,9 +39,8 @@ public class BlockPlanks2 extends BlockTerra
 	 */
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < woodNames.length; i++) {
+		for(int i = 0; i < woodNames.length; i++)
 			list.add(new ItemStack(this,1,i));
-		}
 	}
 
 	@Override
@@ -63,17 +59,9 @@ public class BlockPlanks2 extends BlockTerra
 	public void registerIcons(IconRegister registerer)
 	{
 		for(int i = 0; i < woodNames.length; i++)
-		{
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+woodNames[i]+" Plank");
-		}
 
 		super.registerIcons(registerer);
-	}
-
-	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-	{
-		super.harvestBlock(world, entityplayer, i, j, k, l);
 	}
 
 	/**
@@ -84,18 +72,15 @@ public class BlockPlanks2 extends BlockTerra
 	{
 		boolean hasHammer = false;
 		for(int i = 0; i < 9;i++)
-		{
 			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
 				hasHammer = true;
-		}
 		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && 
 				entityplayer.getCurrentEquippedItem().getItem() instanceof IToolChisel && 
 				hasHammer && ((IToolChisel)entityplayer.getCurrentEquippedItem().getItem()).canChisel(entityplayer, x, y, z))
 		{
 			MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-			if(objectMouseOver == null) {
-				return false;
-			}       
+			if(objectMouseOver == null)
+				return false;       
 			int side = objectMouseOver.sideHit;
 
 			int id = world.getBlockId(x, y, z);
