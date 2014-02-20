@@ -39,10 +39,8 @@ public class FoodStatsTFC
 	/** The player's food saturation. This is how full the player is from the food that they've eaten.*/
 	private float satisfaction = 5.0F;
 
-	/** The player's food exhaustion. This measures the rate of hunger decay. 
-	 * When this reaches 4, some of the stored food is consumed by either 
-	 * reducing the satiation or the food level.*/
-	private float foodExhaustionLevel;
+	private float foodExhaustionLevel = 0;
+	private float waterExhaustionLevel = 0;
 
 	/** The player's food timer value. */
 	public long foodTimer = 0;
@@ -52,6 +50,7 @@ public class FoodStatsTFC
 	public long waterTimer = 0;
 
 	public EntityPlayer player;
+
 
 	public FoodStatsTFC()
 	{
@@ -112,20 +111,20 @@ public class FoodStatsTFC
 						this.satisfaction = Math.max(this.satisfaction - 1.0F, 0.0F);
 					else*/ 
 					if(!player.capabilities.isCreativeMode)
-						this.stomachLevel = Math.max(this.stomachLevel - (1 + satisf), 0);
+						this.stomachLevel = Math.max(this.stomachLevel - (1 + foodExhaustionLevel), 0);
 				}
 			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.hourLength/2)
 			{
 				this.foodHealTimer += TFC_Time.hourLength/2;
 
-				if (this.stomachLevel >= 25 && player.shouldHeal())
+				if (this.stomachLevel >= this.getMaxStomach(player)/4 && player.shouldHeal())
 				{
 					player.heal((int) (player.getMaxHealth()*0.01f));
 
 					if (this.satisfaction > 0.0F)
 						this.satisfaction = Math.max(this.satisfaction - 4.0F, 0.0F);
 					else if (!player.capabilities.isCreativeMode)
-						this.stomachLevel = Math.max(this.stomachLevel - 1, 0);
+						this.stomachLevel = Math.max(this.stomachLevel - 0.25f, 0);
 				}
 				else if (this.stomachLevel <= 0)
 					if (!TFC_Core.isPlayerInDebugMode(player) && (difficulty > 1 || (player.getMaxHealth() > 50)))
@@ -231,12 +230,14 @@ public class FoodStatsTFC
 		par1NBTTagCompound.setCompoundTag("foodCompound", foodCompound);
 	}
 
-	/**
-	 * adds input to foodExhaustionLevel to a max of 40
-	 */
-	public void addExhaustion(float par1)
+	public void addFoodExhaustion(float par1)
 	{
-		this.foodExhaustionLevel = Math.min(this.foodExhaustionLevel + par1, 40.0F);
+		this.foodExhaustionLevel = par1;
+	}
+
+	public void addWaterExhaustion(float par1)
+	{
+		this.waterExhaustionLevel = par1;
 	}
 
 	/**

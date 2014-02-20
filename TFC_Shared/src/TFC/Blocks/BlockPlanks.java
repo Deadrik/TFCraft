@@ -68,12 +68,6 @@ public class BlockPlanks extends BlockTerra
 		super.registerIcons(registerer);
 	}
 
-	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-	{
-		super.harvestBlock(world, entityplayer, i, j, k, l);
-	}
-
 	/**
 	 * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
 	 */

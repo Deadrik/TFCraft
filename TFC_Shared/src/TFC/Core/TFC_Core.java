@@ -682,4 +682,12 @@ public class TFC_Core
 			return true;
 		return false;
 	}
+
+	public static void addPlayerExhaustion(EntityPlayer player, float exhaustion)
+	{
+		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+		foodstats.addFoodExhaustion(exhaustion);
+		foodstats.addWaterExhaustion(exhaustion);
+		TFC_Core.setPlayerFoodStats(player, foodstats);
+	}
 }
