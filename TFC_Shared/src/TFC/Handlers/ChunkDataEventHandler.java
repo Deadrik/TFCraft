@@ -19,15 +19,13 @@ public class ChunkDataEventHandler
 			{
 				NBTTagCompound spawnProtectionTag = eventTag.getCompoundTag("Spawn Protection");
 				ChunkData data = new ChunkData(spawnProtectionTag);
-				String key = data.chunkX + "," + data.chunkZ;
-				ChunkDataManager.chunkmap.put(key, data);
+				ChunkDataManager.addData(data.chunkX, data.chunkZ, data);
 			}
 			else
 			{
 				NBTTagCompound levelTag = eventTag.getCompoundTag("Level");
 				ChunkData data = new ChunkData().CreateNew(levelTag.getInteger("xPos"), levelTag.getInteger("zPos"));
-				String key = data.chunkX + "," + data.chunkZ;
-				ChunkDataManager.chunkmap.put(key, data);
+				ChunkDataManager.addData(data.chunkX, data.chunkZ, data);
 			}
 		}
 	}
@@ -42,15 +40,14 @@ public class ChunkDataEventHandler
 
 			int x = levelTag.getInteger("xPos");
 			int z = levelTag.getInteger("zPos");
-			String key = x + "," + z;
-			if(ChunkDataManager.chunkmap.containsKey(key))
+			ChunkData data = ChunkDataManager.getData(x, z);
+
+			if(data != null)
 			{
-				NBTTagCompound spawnProtectionTag = ((ChunkData)ChunkDataManager.chunkmap.get(key)).getTag();
-				if(spawnProtectionTag != null)
-				{
-					eventTag.setCompoundTag("Spawn Protection", spawnProtectionTag);
-				}
-			}
+				NBTTagCompound spawnProtectionTag = data.getTag();
+				eventTag.setCompoundTag("Spawn Protection", spawnProtectionTag);
+			} else
+				System.out.println("Attempting to save Chunkdata that has already been unloaded.");
 		}
 	}
 }

@@ -7,7 +7,6 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -32,7 +31,6 @@ import TFC.Entities.Mobs.EntityPigTFC;
 import TFC.Entities.Mobs.EntitySheepTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.WorldGen.Generators.WorldGenFissure;
-import TFC.WorldGen.Generators.WorldGenFissureCluster;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 {
@@ -161,9 +159,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
 		data.heightmap = heightMap;
-		String key = data.chunkX + "," + data.chunkZ;
+
 		if(!this.worldObj.isRemote)
-			ChunkDataManager.chunkmap.put(key, data);
+			ChunkDataManager.addData(data.chunkX, data.chunkZ, data);
 
 		chunk.generateSkylightMap();
 		return chunk;
@@ -220,14 +218,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			{
 				var14 = this.worldObj.getPrecipitationHeight(xCoord + var12, zCoord + var13);
 
-				if (this.worldObj.isBlockFreezable(var12 + xCoord, var14 - 1, var13 + zCoord)){
-					if(biome.biomeID != BiomeGenBase.ocean.biomeID&& biome.biomeID != BiomeGenBase.beach.biomeID){
+				if (this.worldObj.isBlockFreezable(var12 + xCoord, var14 - 1, var13 + zCoord))
+					if(biome.biomeID != BiomeGenBase.ocean.biomeID&& biome.biomeID != BiomeGenBase.beach.biomeID)
 						this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID, 1, 0x2);
-					}
-					else{
+					else
 						this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID, 0, 0x2);
-					}
-				}
 				if (canSnowAt(worldObj, var12 + xCoord, var14, var13 + zCoord))
 					this.worldObj.setBlock(var12 + xCoord, var14, var13 + zCoord, Block.snow.blockID, 0, 0x2);
 			}

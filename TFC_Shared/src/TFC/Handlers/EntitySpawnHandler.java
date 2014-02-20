@@ -22,7 +22,7 @@ public class EntitySpawnHandler
 		int x = (int)entity.posX >> 4;
 		int z = (int)entity.posZ >> 4;
 
-		ChunkData data = (ChunkData) ChunkDataManager.chunkmap.get(x + "," + z);
+		ChunkData data = ChunkDataManager.getData(x, z);
 		if(!(data == null || data.getSpawnProtectionWithUpdate() <= 0))
 			event.setResult(Result.DENY);
 	}

@@ -28,13 +28,12 @@ public class GetSpawnProtectionCommand extends CommandBase{
 			int x = (int)var4.posX >> 4;
 			int z = (int)var4.posZ >> 4;
 
-			ChunkData d = (ChunkData) ChunkDataManager.chunkmap.get(x+","+z);
+			ChunkData d = ChunkDataManager.getData(x, z);
 
-			if(d != null) {
+			if(d != null)
 				throw new PlayerNotFoundException("SP: " + d.getSpawnProtectionWithUpdate());
-			} else {
+			else
 				throw new PlayerNotFoundException("Unable to find ChunkData for "+x+","+z);
-			}
 		}
 
 	}

@@ -22,9 +22,7 @@ public class GSPVisualCommand extends CommandBase{
 	public void processCommand(ICommandSender sender, String[] params) 
 	{
 		if(!TFCOptions.enableDebugMode)
-		{
 			return;
-		}
 		MinecraftServer server = MinecraftServer.getServer();
 		EntityPlayerMP player;
 
@@ -34,36 +32,26 @@ public class GSPVisualCommand extends CommandBase{
 		int px = (int)player.posX >> 4;
 		int pz = (int)player.posZ >> 4;
 
-		ChunkData d = (ChunkData) ChunkDataManager.chunkmap.get(px+","+pz);
+		ChunkData d = ChunkDataManager.getData(px, pz);
 
 		if(params.length == 0)
 		{
 			Chunk chunk = world.getChunkFromBlockCoords((int)player.posX, (int)player.posZ);
 			for(int x = 0; x < 16; x++)
-			{
 				for(int z = 0; z < 16; z++)
-				{
 					world.setBlock(x+(chunk.xPosition*16), (int)player.posY-1, z+(chunk.zPosition*16), Block.cloth.blockID, getColor(d.spawnProtection), 2);
-				}
-			}
 		}
 		else if(params.length == 1)
 		{
 			int radius = Integer.parseInt(params[0]);
 			for(int i = -radius; i <= radius;i++)
-			{
 				for(int k = -radius; k <= radius;k++)
 				{
 					Chunk chunk = world.getChunkFromBlockCoords((int)player.posX+(i*16), (int)player.posZ+(k*16));
 					for(int x = 0; x < 16; x++)
-					{
 						for(int z = 0; z < 16; z++)
-						{
 							world.setBlock(x+(chunk.xPosition*16), (int)player.posY-1, z+(chunk.zPosition*16), Block.cloth.blockID, getColor(d.spawnProtection), 2);
-						}
-					}
 				}
-			}
 		}
 	}
 
