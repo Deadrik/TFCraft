@@ -76,7 +76,7 @@ public class FoodStatsTFC
 			/*
 			 * Standard filling reduction based upon player exhaustion. This reduces filling faster than the standard time based reduction
 			 */
-			if (this.foodExhaustionLevel > 4.0F)
+			/*if (this.foodExhaustionLevel > 4.0F)
 			{
 				this.foodExhaustionLevel -= 4.0F;
 
@@ -84,7 +84,7 @@ public class FoodStatsTFC
 					this.satisfaction = Math.max(this.satisfaction - 1.0F, 0.0F);
 				else if (!player.capabilities.isCreativeMode)
 					this.stomachLevel = Math.max(this.stomachLevel - 2, 0);
-			}
+			}*/
 			float satisf = 0;
 			if (this.satisfaction < 0.0F)
 				satisf = -satisfaction;
