@@ -76,6 +76,8 @@ public class GuiCalendar extends GuiScreen
 				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
 		buttonList.add(new GuiInventoryButton(7, guiLeft+176, guiTop + 41, 25, 20, 
 				0, 86, 25, 20, StringUtil.localize("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
+		buttonList.add(new GuiInventoryButton(8, guiLeft+176, guiTop + 60, 25, 20, 
+				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Health"), TFC_Textures.GuiHealth));
 	}
 
 	@Override

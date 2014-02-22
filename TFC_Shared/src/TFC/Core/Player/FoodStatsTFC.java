@@ -28,11 +28,11 @@ public class FoodStatsTFC
 	private float stomachMax = 24.0f;
 	private float prevFoodLevel = 24;
 
-	private float nutrFruit = 20;
-	private float nutrVeg = 20;
-	private float nutrGrain = 20;
-	private float nutrDairy = 20;
-	private float nutrProtein = 20;
+	public float nutrFruit = 20;
+	public float nutrVeg = 20;
+	public float nutrGrain = 20;
+	public float nutrDairy = 20;
+	public float nutrProtein = 20;
 
 	public long soberTime = 0;
 
@@ -111,7 +111,14 @@ public class FoodStatsTFC
 						this.satisfaction = Math.max(this.satisfaction - 1.0F, 0.0F);
 					else*/ 
 					if(!player.capabilities.isCreativeMode)
+					{
 						this.stomachLevel = Math.max(this.stomachLevel - (1 + foodExhaustionLevel), 0);
+						nutrFruit = Math.max(this.nutrFruit - (1 + foodExhaustionLevel)/5, 0);
+						nutrVeg = Math.max(this.nutrVeg - (1 + foodExhaustionLevel)/5, 0);
+						nutrGrain = Math.max(this.nutrGrain - (1 + foodExhaustionLevel)/5, 0);
+						nutrProtein = Math.max(this.nutrProtein - (1 + foodExhaustionLevel)/5, 0);
+						nutrDairy = Math.max(this.nutrDairy - (1 + foodExhaustionLevel)/5, 0);
+					}
 				}
 			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.hourLength/2)
 			{
@@ -211,6 +218,11 @@ public class FoodStatsTFC
 			this.waterTimer = foodCompound.getLong("waterTimer");
 			this.satisfaction = foodCompound.getFloat("foodSaturationLevel");
 			this.foodExhaustionLevel = foodCompound.getFloat("foodExhaustionLevel");
+			this.nutrFruit = foodCompound.getFloat("nutrFruit");
+			this.nutrVeg = foodCompound.getFloat("nutrVeg");
+			this.nutrGrain = foodCompound.getFloat("nutrGrain");
+			this.nutrProtein = foodCompound.getFloat("nutrProtein");
+			this.nutrDairy = foodCompound.getFloat("nutrDairy");
 		}
 	}
 
@@ -227,6 +239,11 @@ public class FoodStatsTFC
 		foodCompound.setLong("waterTimer", this.waterTimer);
 		foodCompound.setFloat("foodSaturationLevel", this.satisfaction);
 		foodCompound.setFloat("foodExhaustionLevel", this.foodExhaustionLevel);
+		foodCompound.setFloat("nutrFruit", nutrFruit);
+		foodCompound.setFloat("nutrVeg", nutrVeg);
+		foodCompound.setFloat("nutrGrain", nutrGrain);
+		foodCompound.setFloat("nutrProtein", nutrProtein);
+		foodCompound.setFloat("nutrDairy", nutrDairy);
 		par1NBTTagCompound.setCompoundTag("foodCompound", foodCompound);
 	}
 
@@ -346,6 +363,11 @@ public class FoodStatsTFC
 			dos.writeByte((byte)0);
 			dos.writeFloat(foodstats.stomachLevel);
 			dos.writeFloat(foodstats.waterLevel);
+			dos.writeFloat(foodstats.nutrFruit);
+			dos.writeFloat(foodstats.nutrVeg);
+			dos.writeFloat(foodstats.nutrGrain);
+			dos.writeFloat(foodstats.nutrProtein);
+			dos.writeFloat(foodstats.nutrDairy);
 
 			pkt.channel="TerraFirmaCraft";
 			pkt.data = bos.toByteArray();

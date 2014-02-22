@@ -214,6 +214,11 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 						foodstats.stomachLevel = dis.readFloat();
 						foodstats.waterLevel = dis.readFloat();
+						foodstats.nutrFruit = dis.readFloat();
+						foodstats.nutrVeg = dis.readFloat();
+						foodstats.nutrGrain = dis.readFloat();
+						foodstats.nutrProtein = dis.readFloat();
+						foodstats.nutrDairy = dis.readFloat();
 						TFC_Core.setPlayerFoodStats(player, foodstats);
 						TFCOptions.HealthGainRate = dis.readInt();
 						TFCOptions.HealthGainCap = dis.readInt();
@@ -272,6 +277,11 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 							FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 							foodstats.stomachLevel = dis.readFloat();
 							foodstats.waterLevel = dis.readFloat();
+							foodstats.nutrFruit = dis.readFloat();
+							foodstats.nutrVeg = dis.readFloat();
+							foodstats.nutrGrain = dis.readFloat();
+							foodstats.nutrProtein = dis.readFloat();
+							foodstats.nutrDairy = dis.readFloat();
 							TFC_Core.setPlayerFoodStats(player, foodstats);
 						}
 						else if(flag == 1)
