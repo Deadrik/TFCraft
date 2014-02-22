@@ -28,6 +28,7 @@ public class GuiInventoryTFC  extends GuiInventory
 	private float ySize_lo;
 	private boolean hasEffect;
 	protected static final ResourceLocation InventoryUpperTex = new ResourceLocation(Reference.ModID+":textures/gui/inventory.png");
+	protected static final ResourceLocation InventoryUpperTex2x2 = new ResourceLocation(Reference.ModID+":textures/gui/gui_inventory2x2.png");
 	protected static final ResourceLocation InventoryEffectsTex = new ResourceLocation(Reference.ModID+":textures/gui/inv_effects.png");
 	protected EntityPlayer player;
 
@@ -43,7 +44,10 @@ public class GuiInventoryTFC  extends GuiInventory
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(InventoryUpperTex);
+		if(player.getEntityData().hasKey("craftingTable"))
+			TFC_Core.bindTexture(InventoryUpperTex);
+		else
+			TFC_Core.bindTexture(InventoryUpperTex2x2);
 		int k = this.guiLeft;
 		int l = this.guiTop;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

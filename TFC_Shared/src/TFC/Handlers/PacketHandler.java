@@ -27,6 +27,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.INetworkTE;
 import TFC.API.TFCOptions;
+import TFC.Containers.ContainerPlayerTFC;
 import TFC.Containers.ContainerSpecialCrafting;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
@@ -96,11 +97,17 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				dos.writeInt(TFC_Time.daysInYear);
 
 				dos.writeFloat(foodstats.foodLevel);
-				dos.writeFloat(foodstats.waterLevel);
+				dos.writeFloat(foodstats.waterLevel);			
 
 				dos.writeInt(TFCOptions.HealthGainRate);
 				dos.writeInt(TFCOptions.HealthGainCap);
+
+				if(player.getEntityData().hasKey("craftingTable"))
+					dos.writeBoolean(true);
+				else dos.writeBoolean(false);
+
 				TFC_Core.getSkillStats(player).toOutStream(dos);
+
 			} 
 			catch (IOException e)
 			{
@@ -205,10 +212,17 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						TFC_Core.setPlayerFoodStats(player, foodstats);
 						TFCOptions.HealthGainRate = dis.readInt();
 						TFCOptions.HealthGainCap = dis.readInt();
-
+						boolean craftingTable = dis.readBoolean();
+						if(craftingTable)
+						{
+							player.getEntityData().setBoolean("craftingTable", craftingTable);
+							player.inventoryContainer = new ContainerPlayerTFC(player.inventory, !player.worldObj.isRemote, player);
+							player.openContainer = player.inventoryContainer;
+						}
 						SkillStats skills = TFC_Core.getSkillStats(player);
 						while(dis.available() > 0)
 							skills.setSkillSave(dis.readUTF(), dis.readInt());
+
 
 					} catch (IOException e) 
 					{
@@ -356,6 +370,13 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		SkillStats skills = TFC_Core.getSkillStats(player);
 		try 
 		{
+			boolean craftingTable = dis.readBoolean();
+			if(craftingTable && !player.getEntityData().hasKey("craftingTable"))
+			{
+				player.getEntityData().setBoolean("craftingTable", craftingTable);
+				player.inventoryContainer = new ContainerPlayerTFC(player.inventory, !player.worldObj.isRemote, player);
+				player.openContainer = player.inventoryContainer;
+			}
 			while(dis.available() > 0)
 				skills.setSkillSave(dis.readUTF(), dis.readInt());
 		} 
@@ -372,6 +393,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		try 
 		{
 			dos.writeByte(Packet_Update_Skills_Client);
+			dos.writeBoolean(player.getEntityData().hasKey("craftingTable"));
 			TFC_Core.getSkillStats(player).toOutStream(dos);
 		} 
 		catch (IOException e) 

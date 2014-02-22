@@ -37,11 +37,23 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		PlayerInventory.buildInventoryLayout(this, playerInv, 8, 90, false, true);
 
 		//Manually built the remaining crafting slots because of an order issue. These have to be created after the default slots
-		x = 2; y = 0; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
-		x = 2; y = 1; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
-		x = 0; y = 2; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
-		x = 1; y = 2; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
-		x = 2; y = 2; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
+		if(player.getEntityData().hasKey("craftingTable") || !player.worldObj.isRemote)
+		{
+			x = 2; y = 0; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
+			x = 2; y = 1; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
+			x = 0; y = 2; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
+			x = 1; y = 2; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
+			x = 2; y = 2; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
+		}
+		else
+		{
+			//Have to create some dummy slots
+			this.addSlotToContainer(new Slot(craftMatrix, 6, -50000, 0));
+			this.addSlotToContainer(new Slot(craftMatrix, 7, -50000, 0));
+			this.addSlotToContainer(new Slot(craftMatrix, 2, -50000, 0));
+			this.addSlotToContainer(new Slot(craftMatrix, 5, -50000, 0));
+			this.addSlotToContainer(new Slot(craftMatrix, 8, -50000, 0));
+		}
 
 		this.onCraftMatrixChanged(this.craftMatrix);
 	}
@@ -63,7 +75,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlot(EntityPlayer player, int par2)
 	{
 		ItemStack itemstack = null;
 		Slot slot = (Slot)this.inventorySlots.get(par2);
@@ -80,7 +92,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 
 				slot.onSlotChange(itemstack1, itemstack);
 			}
-			else if ((par2 >= 1 && par2 < 5) || (par2 >= 45 && par2 < 50))
+			else if ((par2 >= 1 && par2 < 5) || (player.getEntityData().hasKey("craftingTable") && (par2 >= 45 && par2 < 50)))
 			{
 				if (!this.mergeItemStack(itemstack1, 9, 45, false))
 					return null;
@@ -118,7 +130,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			if (itemstack1.stackSize == itemstack.stackSize)
 				return null;
 
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			slot.onPickupFromSlot(player, itemstack1);
 		}
 
 		return itemstack;
