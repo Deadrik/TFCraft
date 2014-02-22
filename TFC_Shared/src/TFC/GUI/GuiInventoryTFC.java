@@ -82,6 +82,8 @@ public class GuiInventoryTFC  extends GuiInventory
 				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
 		buttonList.add(new GuiInventoryButton(2, guiLeft+176, guiTop + 41, 25, 20, 
 				0, 86, 25, 20, StringUtil.localize("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
+		buttonList.add(new GuiInventoryButton(3, guiLeft+176, guiTop + 60, 25, 20, 
+				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Health"), TFC_Textures.GuiHealth));
 	}
 
 	@Override
@@ -91,6 +93,8 @@ public class GuiInventoryTFC  extends GuiInventory
 			Minecraft.getMinecraft().displayGuiScreen(new GuiSkills(this.player));
 		else if (guibutton.id == 2)
 			Minecraft.getMinecraft().displayGuiScreen(new GuiCalendar(Minecraft.getMinecraft().thePlayer));
+		else if (guibutton.id == 3)
+			Minecraft.getMinecraft().displayGuiScreen(new GuiHealth(Minecraft.getMinecraft().thePlayer));
 	}
 
 	@Override
