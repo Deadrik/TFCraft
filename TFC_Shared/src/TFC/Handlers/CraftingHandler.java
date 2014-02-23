@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.Util.Helper;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
@@ -181,30 +182,41 @@ public class CraftingHandler implements ICraftingHandler
 						continue;
 					if(iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
 					{
-						float w = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight");
-						float wOld = w;
-						float myDecayPercent = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay") / wOld;
+						float myWeight = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight");
+						final float myOldWeight = myWeight;
+						float myDecayPercent = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay") / myOldWeight;
 						float myDecay = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay");
-
+						float w = 0;
 						//Check if we can add any more to this bundle of food
-						if (finalWeight+w >= 80)
+						if (finalWeight < 80)
 						{
-							w -= (80-finalWeight);
-							finalWeight = 80;
+							w = Math.min((80-finalWeight), myWeight);
+							myWeight -= w;
+							finalWeight += w;
 						}
 
 						//we only add the decay if food was actually added to the bundle
-						if(w != wOld)
+						if(myWeight != myOldWeight)
+							if(myWeight == 0)
+								finalDecay+=myDecay;
+							else
+							{
+								float d = w * myDecayPercent;
+								myDecay-= d;
+								finalDecay += d;
+							}
+
+						if(myWeight > 0)
 						{
-
+							iinventory.getStackInSlot(i).getTagCompound().setFloat("foodWeight", Helper.roundNumber(myWeight,10));
+							iinventory.getStackInSlot(i).getTagCompound().setFloat("foodDecay", Helper.roundNumber(myDecay,10));
+							iinventory.getStackInSlot(i).stackSize = iinventory.getStackInSlot(i).stackSize + 1;
+							if(iinventory.getStackInSlot(i).stackSize > 2)
+								iinventory.getStackInSlot(i).stackSize = 2;
 						}
-
-						iinventory.getStackInSlot(i).stackSize = iinventory.getStackInSlot(i).stackSize + 1;
-						if(iinventory.getStackInSlot(i).stackSize > 2)
-							iinventory.getStackInSlot(i).stackSize = 2;
 					}
-
 				}
+				itemstack = ItemFoodTFC.createTag(itemstack, Helper.roundNumber(finalWeight,10), Helper.roundNumber(finalDecay,10));
 			}
 
 			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
