@@ -30,30 +30,24 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
+		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage);
 	}
-	
+
 	public int getFoodIdFromItemStack(ItemStack is){
-		if(is != null){
-			if(is.getItem() instanceof ItemTerraFood){
+		if(is != null)
+			if(is.getItem() instanceof ItemTerraFood)
 				return ((ItemTerraFood)is.getItem()).foodID;
-			}
-			else if(is.getItem() instanceof IItemFoodBlock){
+			else if(is.getItem() instanceof IItemFoodBlock)
 				return ((IItemFoodBlock)is.getItem()).getFoodId(is);
-			}
-		}
 		return 1;
 	}
-	
+
 	public int getHealAmountFromItemStack(ItemStack is){
-		if(is != null){
-			if(is.getItem() instanceof ItemTerraFood){
+		if(is != null)
+			if(is.getItem() instanceof ItemTerraFood)
 				return ((ItemTerraFood)is.getItem()).foodID;
-			}
-			else if(is.getItem() instanceof IItemFoodBlock){
+			else if(is.getItem() instanceof IItemFoodBlock)
 				return ((IItemFoodBlock)is.getItem()).getHealAmount(is);
-			}
-		}
 		return 1;
 	}
 
@@ -73,9 +67,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 				int id4 = getFoodIdFromItemStack(storage[3]);
 
 				if((id1 == id2 || id1 == id3 || id1 == id4) || (id2 == id3 || id2 == id4) || id3 == id4)
-				{
 					return;
-				}
 
 				int seed = id1 * id2 * id3 * id4;
 
@@ -116,11 +108,8 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 					}
 				}
 			}
-		}
-		else
-		{
+		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createMealPacket());
-		}
 	}
 
 	public Packet createMealPacket()
@@ -151,9 +140,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < storage.length)
-			{
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 	}
 
@@ -163,7 +150,6 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		super.writeToNBT(nbttagcompound);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
-		{
 			if(storage[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -171,7 +157,6 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 				storage[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-		}
 		nbttagcompound.setTag("Items", nbttaglist);
 	}
 
@@ -250,14 +235,10 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
 			if(storage[i].stackSize == 0)
-			{
 				storage[i] = null;
-			}
 			return itemstack1;
 		} else
-		{
 			return null;
-		}
 
 	}
 
@@ -271,7 +252,6 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
-		{
 			if(storage[i]!= null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
@@ -282,7 +262,6 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 				worldObj.spawnEntityInWorld(entityitem);
 				storage[i] = null;
 			}
-		}
 	}
 
 	public void ejectItem(int index)
@@ -322,9 +301,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	{
 		storage[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-		{
 			itemstack.stackSize = getInventoryStackLimit();
-		}
 		TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 	}
 
@@ -355,18 +332,14 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	@Override
 	public void closeChest() 
 	{
-		if(worldObj.isRemote) {
+		if(worldObj.isRemote)
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-		} else
+		else if(storage[0] == null && storage[1] == null && storage[2] == null && storage[3] == null && storage[5] == null)
 		{
-			if(storage[0] == null && storage[1] == null && storage[2] == null && storage[3] == null && storage[5] == null)
-			{
-				if(storage[4] != null) {
-					this.ejectItem(4);
-				}
+			if(storage[4] != null)
+				this.ejectItem(4);
 
-				this.worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-			}
+			this.worldObj.setBlock(xCoord, yCoord, zCoord, 0);
 		}
 	}
 

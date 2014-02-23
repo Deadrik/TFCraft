@@ -492,7 +492,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			FuelStack[7] = fireItemStacks[12];
 			FuelStack[8] = fireItemStacks[13];
 
-			TFC_ItemHeat.HandleContainerHeat(this.worldObj, FuelStack, xCoord,yCoord,zCoord);
+			TFC_ItemHeat.HandleContainerHeat(this.worldObj, FuelStack);
 
 			//Now we cook the input item
 			CookItemsNew(0);

@@ -97,13 +97,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		if (!world.isRemote && is.hasTagCompound())
 		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
+			NBTTagCompound nbt = is.getTagCompound();
 
-			if(stackTagCompound.hasKey("temperature"))
-				TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
-		}
-		if (!world.isRemote && is.stackSize > 1)
-		{
+			if(nbt.hasKey("temperature"))
+				TFC_ItemHeat.HandleItemHeat(is);
 
 		}
 	}

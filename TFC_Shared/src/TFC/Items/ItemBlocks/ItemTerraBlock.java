@@ -46,9 +46,8 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	{
 		try
 		{
-			if(MetaNames != null) {
+			if(MetaNames != null)
 				return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
-			}
 		}
 		catch(Exception ex)
 		{
@@ -71,9 +70,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
 			if(stackTagCompound.hasKey("temperature"))
-			{
-				TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
-			}
+				TFC_ItemHeat.HandleItemHeat(is);
 		}
 	}
 
@@ -98,18 +95,13 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 				float meltTemp = -1;
 				HeatIndex hi = HeatRegistry.getInstance().findMatchingIndex(is);
 				if(hi != null)
-				{
 					meltTemp = hi.meltTemp;
-				}
 
 				if(meltTemp != -1)
-				{
-					if(is.itemID == Item.stick.itemID) {
+					if(is.itemID == Item.stick.itemID)
 						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
-					} else {
+					else
 						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));
-					}
-				}
 			}
 		}
 	}
@@ -123,11 +115,10 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	@Override
 	public int getItemStackLimit()
 	{
-		if(canStack()) {
+		if(canStack())
 			return this.getSize(null).stackSize * getWeight(null).multiplier;
-		} else {
+		else
 			return 1;
-		}
 	}
 
 	@Override

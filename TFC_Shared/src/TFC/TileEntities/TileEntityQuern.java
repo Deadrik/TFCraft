@@ -32,7 +32,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 	@Override
 	public void updateEntity() {
 		if(!worldObj.isRemote)
-			TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
+			TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage);
 
 		if(shouldRotate) {
 			rotatetimer++;

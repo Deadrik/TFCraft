@@ -134,7 +134,7 @@ public class ItemTerraFood extends ItemFood implements ISize
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
 			if(stackTagCompound.hasKey("temperature"))
-				TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
+				TFC_ItemHeat.HandleItemHeat(is);
 		}
 		if (!world.isRemote && is.stackSize > 1)
 		{
