@@ -128,6 +128,7 @@ public class GuiCalendar extends GuiScreen
 		for (int var6 = 0; var6 < this.buttonList.size(); ++var6)
 		{
 			GuiButton var7 = (GuiButton)this.buttonList.get(var6);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			var7.drawButton(this.mc, par1, par2);
 		}
 
@@ -171,7 +172,7 @@ public class GuiCalendar extends GuiScreen
 				Minecraft.getMinecraft().displayGuiScreen(new GuiInventoryTFC(Minecraft.getMinecraft().thePlayer));
 			else if (guibutton.id == 6)
 				Minecraft.getMinecraft().displayGuiScreen(new GuiSkills(Minecraft.getMinecraft().thePlayer));
-			else if (guibutton.id == 7)
+			else if (guibutton.id == 8)
 				Minecraft.getMinecraft().displayGuiScreen(new GuiHealth(Minecraft.getMinecraft().thePlayer));
 	}
 }

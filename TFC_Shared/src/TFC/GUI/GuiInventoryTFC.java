@@ -65,6 +65,7 @@ public class GuiInventoryTFC  extends InventoryEffectRenderer
 		func_110423_a(k + 51, l + 75, 30, k + 51 - this.xSize_lo, l + 75 - 50 - this.ySize_lo, this.mc.thePlayer);
 
 		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	public static void func_110423_a(int par0, int par1, int par2, float par3, float par4, EntityLivingBase par5EntityLivingBase)
@@ -168,6 +169,7 @@ public class GuiInventoryTFC  extends InventoryEffectRenderer
 	@Override
 	public void drawScreen(int par1, int par2, float par3)
 	{
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		super.drawScreen(par1, par2, par3);
 		this.xSize_lo = par1;
 		this.ySize_lo = par2;
