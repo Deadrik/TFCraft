@@ -6,10 +6,16 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
+import TFC.TFCItems;
+import TFC.API.HeatRegistry;
 import TFC.Containers.Slots.SlotFirepit;
 import TFC.Containers.Slots.SlotFirepitFuel;
 import TFC.Containers.Slots.SlotFirepitIn;
 import TFC.Containers.Slots.SlotFirepitOut;
+import TFC.Containers.Slots.SlotForShowOnly;
+import TFC.Core.Player.PlayerInventory;
+import TFC.Items.ItemOre;
 import TFC.TileEntities.TileEntityFirepit;
 
 public class ContainerFirepit extends ContainerTFC
@@ -37,32 +43,16 @@ public class ContainerFirepit extends ContainerTFC
 		//item output
 		addSlotToContainer(new SlotFirepitOut(inventoryplayer.player, tileentityfirepit, 7, 71, 48));
 		addSlotToContainer(new SlotFirepitOut(inventoryplayer.player, tileentityfirepit, 8, 89, 48));
+		
+		//dummy byproducts out
+		addSlotToContainer(new SlotForShowOnly(tileentityfirepit, 2, -50000, 0));
+		addSlotToContainer(new SlotForShowOnly(tileentityfirepit, 6, -50000, 0));
+		addSlotToContainer(new SlotForShowOnly(tileentityfirepit, 9, -50000, 0));
+		addSlotToContainer(new SlotForShowOnly(tileentityfirepit, 10, -50000, 0));
 
-		//byproducts out
-		addSlotToContainer(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 2, 127, 23));
-		addSlotToContainer(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 6, 145, 23));
-		addSlotToContainer(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 9, 127, 41));
-		addSlotToContainer(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 10, 145, 41));
-
-
-		//slag output
-		//addSlot(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 9, 98, 62));
-
-		for(int i = 0; i < 3; i++)
-		{
-			for(int k = 0; k < 9; k++)
-			{
-				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
-			}
-
-		}
-
-		for(int j = 0; j < 9; j++)
-		{
-			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
-		}
-
+		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 90, false, true);
 	}
+	
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
@@ -72,34 +62,57 @@ public class ContainerFirepit extends ContainerTFC
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer p, int i)
 	{
-		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(i);
-		if (slot != null && slot.getHasStack())
+		Slot slot = (Slot)inventorySlots.get(i);
+		Slot slotinput = (Slot)inventorySlots.get(0);
+		Slot[] slotoutput = {(Slot)inventorySlots.get(7), (Slot)inventorySlots.get(8)};
+		Slot[] slotfuel = {(Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(4), (Slot)inventorySlots.get(5)};
+		HeatRegistry manager = HeatRegistry.getInstance();
+		
+		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
-			itemstack = itemstack1.copy();
-			if (i < 11)
+			if(i <= 10)
 			{
-				if (!mergeItemStack(itemstack1, 11, inventorySlots.size(), true))
+				if(!this.mergeItemStack(itemstack1, 11, this.inventorySlots.size(), true))
 				{
 					return null;
 				}
 			}
-			else if (!mergeItemStack(itemstack1, 0, 10, true))
+			else
 			{
-				return null;
+				if(itemstack1.itemID == TFCItems.Logs.itemID || itemstack1.itemID == TFCBlocks.Peat.blockID)
+				{
+					if(slotfuel[0].getHasStack())
+					{
+						return null;
+					}
+					ItemStack stack = itemstack1.copy();
+					stack.stackSize = 1;                            
+					slotfuel[0].putStack(stack);                          
+					itemstack1.stackSize--;
+				}
+				else if(!(itemstack1.getItem() instanceof ItemOre) && manager.findMatchingIndex(itemstack1) != null)
+				{
+					if(slotinput.getHasStack())
+					{
+						return null;
+					}
+					ItemStack stack = itemstack1.copy();
+					stack.stackSize = 1;                            
+					slotinput.putStack(stack);                          
+					itemstack1.stackSize--;
+				}
 			}
-			if (itemstack1.stackSize == 0)
+			if(itemstack1.stackSize <= 0)
 			{
 				slot.putStack(null);
-			}
-			else
+			} else
 			{
 				slot.onSlotChanged();
 			}
 		}
 		detectAndSendChanges();
-		return itemstack;
+		return null;
 	}
 
 	@Override
