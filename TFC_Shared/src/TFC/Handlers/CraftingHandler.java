@@ -31,7 +31,6 @@ public class CraftingHandler implements ICraftingHandler
 	@Override
 	public void onCrafting(EntityPlayer player, ItemStack itemstack, IInventory iinventory) 
 	{
-		int index = 0;
 		if(iinventory != null)
 		{
 			if(itemstack.itemID == TFCItems.StoneBrick.itemID)
@@ -174,8 +173,8 @@ public class CraftingHandler implements ICraftingHandler
 			}
 			else if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("foodWeight"))
 			{
-				float weight = 0;
-				float decay = 0;
+				float finalWeight = 0;
+				float finalDecay = 0;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 				{       
 					if(iinventory.getStackInSlot(i) == null)
@@ -183,28 +182,26 @@ public class CraftingHandler implements ICraftingHandler
 					if(iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
 					{
 						float w = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight");
-						//Check if we can add any more to this bundle of food
-						if (weight+w >= 80)
-						{
-							w -= (80-weight);
+						float wOld = w;
+						float myDecayPercent = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay") / wOld;
+						float myDecay = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay");
 
-							float myDecayPercent = 0;
-							float myDecay = 0;
-							//we only add the decay if food was actually added to the bundle
-							if(iinventory.getStackInSlot(i).getTagCompound().hasKey("foodDecay"))
-							{
-								myDecayPercent = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay") / w;
-								myDecay = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay");
-							}
+						//Check if we can add any more to this bundle of food
+						if (finalWeight+w >= 80)
+						{
+							w -= (80-finalWeight);
+							finalWeight = 80;
+						}
+
+						//we only add the decay if food was actually added to the bundle
+						if(w != wOld)
+						{
 
 						}
-						weight = 80;
 
-
-
-						iinventory.getStackInSlot(index).stackSize = iinventory.getStackInSlot(index).stackSize + 1;
-						if(iinventory.getStackInSlot(index).stackSize > 2)
-							iinventory.getStackInSlot(index).stackSize = 2;
+						iinventory.getStackInSlot(i).stackSize = iinventory.getStackInSlot(i).stackSize + 1;
+						if(iinventory.getStackInSlot(i).stackSize > 2)
+							iinventory.getStackInSlot(i).stackSize = 2;
 					}
 
 				}
