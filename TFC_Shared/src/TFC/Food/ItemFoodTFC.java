@@ -85,9 +85,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			if(stackTagCompound.hasKey("foodWeight"))
 			{
 				float ounces = stackTagCompound.getFloat("foodWeight");
-				arraylist.add("Amount " + ounces+"oz / 80oz");
+				if(ounces > 0)
+					arraylist.add("Amount " + ounces+" oz / 80.0 oz");
 				float decay = stackTagCompound.getFloat("foodDecay");
-				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + decay/ounces*100+"%");
+				if(decay > 0)
+					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + decay/ounces*100+"%");
 			}
 		}
 	}
@@ -102,6 +104,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			if(nbt.hasKey("temperature"))
 				TFC_ItemHeat.HandleItemHeat(is);
 
+			if(nbt.getFloat("foodDecay") / nbt.getFloat("foodWeight") > 0.9f)
+				is.stackSize = 0;
 		}
 	}
 
