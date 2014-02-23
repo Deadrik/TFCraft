@@ -6,6 +6,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.Items.ItemOre;
 
 public class SlotFirepitIn extends Slot
 {
@@ -24,7 +25,7 @@ public class SlotFirepitIn extends Slot
 	@Override
 	public boolean isItemValid(ItemStack is)
     {
-		if(is.itemID == TFCItems.Logs.itemID || is.itemID == TFCBlocks.Peat.blockID || is.itemID == TFCItems.CeramicMold.itemID)
+		if(is.itemID == TFCItems.Logs.itemID || is.itemID == TFCBlocks.Peat.blockID || is.itemID == TFCItems.CeramicMold.itemID || is.getItem() instanceof ItemOre)
 			return false;
         return true;
     }

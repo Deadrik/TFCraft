@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.Containers.ContainerFirepit;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInventory;
 import TFC.TileEntities.TileEntityFirepit;
 
 
@@ -23,7 +24,8 @@ public class GuiFirepit extends GuiContainer
 	{
 		super(new ContainerFirepit(inventoryplayer,tileentityfirepit, world, x, y, z) );
 		FirepitEntity = tileentityfirepit;
-
+		xSize = 176;
+		ySize = 85+PlayerInventory.invYSize;
 	}
 
 	@Override
@@ -36,11 +38,13 @@ public class GuiFirepit extends GuiContainer
 		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
 		int i1 = FirepitEntity.getTemperatureScaled(49);
 		drawTexturedModalRect(w + 30, h + 65 - i1, 185, 31, 15, 6);
+		
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 	}
 
 	protected void drawGuiContainerForegroundLayer()
 	{
-
+		
 	}
 
 	@Override
