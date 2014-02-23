@@ -1,5 +1,7 @@
 package TFC;
 
+import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
@@ -946,6 +948,7 @@ public class TFCItems
 	public static EnumToolMaterial RedSteelToolMaterial;
 	public static EnumToolMaterial SteelToolMaterial;
 
+	public static ArrayList<Item> FoodList;
 
 	public static void Setup()
 	{
@@ -1635,6 +1638,7 @@ public class TFCItems
 	 */
 	private static void SetupFood() 
 	{
+		FoodList = new ArrayList<Item>();
 		Item.itemsList[Item.egg.itemID] = new ItemEgg(Item.egg.itemID).setSize(EnumSize.SMALL).setUnlocalizedName("egg").setTextureName("egg");
 		Egg = Item.itemsList[Item.egg.itemID];
 		Item.itemsList[Item.porkRaw.itemID] = null; Item.itemsList[Item.porkRaw.itemID] = new ItemRawFood(63, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("porkchopRaw");

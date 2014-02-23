@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import TFC.TFCItems;
 import TFC.API.IFood;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumFoodGroup;
@@ -41,6 +42,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		this.setFolder("food/");
 		foodID = foodid;
 		foodgroup = fg;
+		TFCItems.FoodList.add(this);
 	}
 
 	public static void addHeatInformation(ItemStack is, List arraylist)
@@ -142,14 +144,20 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	public static ItemStack createTag(ItemStack is, float weight)
 	{
-		if(!is.hasTagCompound())
-		{
-			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setFloat("foodWeight", weight);
-			nbt.setFloat("foodDecay", 0);
+		NBTTagCompound nbt = is.getTagCompound();
+		if(nbt == null)
+			nbt = new NBTTagCompound();
+		nbt.setFloat("foodWeight", weight);
+		nbt.setFloat("foodDecay", 0);
 
-			is.setTagCompound(nbt);
-		}
+		is.setTagCompound(nbt);
+		return is;
+	}
+
+	public static ItemStack createTag(ItemStack is, float weight, float decay)
+	{
+		is = createTag(is, weight);
+		is.getTagCompound().setFloat("foodDecay", decay);
 		return is;
 	}
 
