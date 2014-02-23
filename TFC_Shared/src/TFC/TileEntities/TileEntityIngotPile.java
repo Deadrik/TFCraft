@@ -25,7 +25,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	public ItemStack[] storage;
 	public String type;
 	public static int[] INGOTS;
-	
+
 	public TileEntityIngotPile()
 	{
 		storage = new ItemStack[1];
@@ -40,12 +40,12 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	public static int[] getIngots(){
 		return INGOTS;
 	}
-	
+
 	public void setType(String i)
 	{
 		type = i;
 	}
-	
+
 	public int getStack(){
 		return storage[0].stackSize;
 	}
@@ -56,9 +56,8 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 
 	public void addContents(int index, ItemStack is)
 	{
-		if(storage[index] == null) {
+		if(storage[index] == null)
 			storage[index] = is;
-		}
 		updateNeighbours();
 	}
 
@@ -75,16 +74,12 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 
 	public boolean contentsMatch(int index, ItemStack is)
 	{
-		if(storage[index] != null){
-			if(storage[index].stackSize == 0){
+		if(storage[index] != null)
+			if(storage[index].stackSize == 0)
 				return true;
-			}
-		}
 		if(storage[index].getItem() == is.getItem() && storage[index].getItem().itemID == is.getItem().itemID &&
 				/*storage[index].stackSize < storage[index].getMaxStackSize() &&*/ storage[index].stackSize+1 <= this.getInventoryStackLimit())
-		{
 			return true;
-		}
 
 
 		return false;
@@ -104,15 +99,11 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
 			if(storage[i].stackSize == 0)
-			{
 				storage[i] = null;
-			}
 			updateNeighbours();
 			return itemstack1;
 		} else
-		{
 			return null;
-		}
 	}
 
 	public void ejectContents()
@@ -125,7 +116,6 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
-		{
 			if(storage[i]!= null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
@@ -136,7 +126,6 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 				worldObj.spawnEntityInWorld(entityitem);
 				storage[i] = null;
 			}
-		}
 		updateNeighbours();
 	}
 
@@ -173,15 +162,12 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 
 	public void injectContents(int index, int count)
 	{
-		if(storage[index] != null) {
-			if(storage[index].stackSize > 0){
+		if(storage[index] != null)
+			if(storage[index].stackSize > 0)
 				storage[index] = 
-						new ItemStack(storage[index].getItem(),
-								storage[index].stackSize+count,
-								storage[index].getItemDamage());
-				
-			}
-		}
+				new ItemStack(storage[index].getItem(),
+						storage[index].stackSize+count,
+						storage[index].getItemDamage());
 		updateNeighbours();
 	}
 
@@ -209,9 +195,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < storage.length)
-			{
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 	}
 
@@ -220,15 +204,13 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	{
 		storage[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-		{
 			itemstack.stackSize = getInventoryStackLimit();
-		}
 	}
 
 	@Override
 	public void updateEntity()
 	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
+		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage);
 	}
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
@@ -237,15 +219,13 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		nbttagcompound.setString("type", type);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
-		{
 			if(storage[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte)i);
 				storage[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}	
+			}	
 		nbttagcompound.setTag("Items", nbttaglist);
 	}
 
@@ -259,8 +239,8 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	@Override
 	public void handleDataPacketServer(DataInputStream inStream)throws IOException 
 	{
-		
-		
+
+
 	}
 
 	@Override
@@ -269,12 +249,11 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		outStream.writeInt(storage[0] != null ? storage[0].itemID : -1);
 		outStream.writeInt(storage[0] != null ? storage[0].stackSize : 0);
 	}
-	
+
 	public void updateNeighbours(){
-		if(worldObj.blockExists(xCoord, yCoord+1, zCoord) && worldObj.getBlockId(xCoord, yCoord+1, zCoord)!= 0){
+		if(worldObj.blockExists(xCoord, yCoord+1, zCoord) && worldObj.getBlockId(xCoord, yCoord+1, zCoord)!= 0)
 			Block.blocksList[worldObj.getBlockId(xCoord, yCoord+1, zCoord)]
 					.onNeighborBlockChange(worldObj, xCoord, yCoord+1, zCoord, TFCBlocks.IngotPile.blockID);
-		}
 	}
 
 	@Override
@@ -287,7 +266,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		updateNeighbours();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-	
+
 	public Packet createUpdatePacket()
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);

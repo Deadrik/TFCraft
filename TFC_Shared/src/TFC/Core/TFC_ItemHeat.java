@@ -1,14 +1,10 @@
 package TFC.Core;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
@@ -579,7 +575,7 @@ public class TFC_ItemHeat
 		return ((fireTemp / fireMaxTemp)) * getSpecificHeat(is) + debugBump;
 	}
 
-	public static void HandleItemHeat(ItemStack is, int xCoord, int yCoord, int zCoord)
+	public static void HandleItemHeat(ItemStack is)
 	{
 		if(is.hasTagCompound())
 		{
@@ -600,7 +596,7 @@ public class TFC_ItemHeat
 		}
 	}
 
-	public static void HandleContainerHeat(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
+	public static void HandleContainerHeat(World world, ItemStack[] inventory)
 	{
 		for(int i = 0; i < inventory.length; i++)
 		{
@@ -618,21 +614,9 @@ public class TFC_ItemHeat
 						temp -= TFC_ItemHeat.getTempDecrease(inventory[i]);
 						comp.setFloat("temperature",temp);
 					}
-					//inventory[i].setTagCompound(comp);
+
 					if(temp <= 0)
-					{
-						Collection C = comp.getTags();
-						Iterator itr = C.iterator();
-						while(itr.hasNext())
-						{
-							Object tag = itr.next();
-							if(canRemoveTag(tag, "temperature", NBTTagFloat.class))
-							{
-								itr.remove();
-								break;
-							}
-						}
-					}
+						comp.removeTag("temperature");
 					if(comp.getTags().size() == 0)
 						inventory[i].stackTagCompound = null;
 				}
@@ -640,7 +624,7 @@ public class TFC_ItemHeat
 		}
 	}
 
-	public static void HandleContainerHeatChest(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
+	public static void HandleContainerHeatChest(World world, ItemStack[] inventory)
 	{
 		for(int i = 0; i < inventory.length; i++)
 		{
@@ -659,19 +643,7 @@ public class TFC_ItemHeat
 						comp.setFloat("temperature",temp);
 					}
 					if(temp <= 0)
-					{
-						Collection C = comp.getTags();
-						Iterator itr = C.iterator();
-						while(itr.hasNext())
-						{
-							Object tag = itr.next();
-							if(canRemoveTag(tag, "temperature", NBTTagFloat.class))
-							{
-								itr.remove();
-								break;
-							}
-						}
-					}
+						comp.removeTag("temperature");
 					if(comp.getTags().size() == 0)
 						inventory[i].stackTagCompound = null;
 				}

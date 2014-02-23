@@ -94,7 +94,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			if(workedRecently > 0)
 				workedRecently--;
 			//Deal with temperatures
-			TFC_ItemHeat.HandleContainerHeat(this.worldObj, anvilItemStacks, xCoord,yCoord,zCoord);
+			TFC_ItemHeat.HandleContainerHeat(this.worldObj, anvilItemStacks);
 			/**
 			 * Check if the recipe is considered complete
 			 * */

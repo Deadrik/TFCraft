@@ -18,13 +18,9 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.IPipeConnectable;
-import TFC.API.Metal;
 import TFC.API.TFCOptions;
-import TFC.Blocks.BlockPipeBasic;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
-import TFC.Core.Metal.MetalRegistry;
-import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
@@ -57,7 +53,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	public void careForInventorySlot()
 	{
 		if(Type ==1 && itemstack!=null&&  itemstack.getItem() instanceof ItemTerra )
-		{
 			if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("temperature"))
 			{
 				NBTTagCompound comp = itemstack.getTagCompound();
@@ -70,10 +65,9 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					comp.setFloat("temperature",temp);
 					itemstack.setTagCompound(comp);
 
-					TFC_ItemHeat.HandleItemHeat(itemstack, xCoord, yCoord, zCoord);
+					TFC_ItemHeat.HandleItemHeat(itemstack);
 				}
 			}
-		}
 	}
 
 	public boolean getSealed()
@@ -93,9 +87,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					itemstack2.stackSize++;
 					itemstack.stackSize--;
 				}
-				if(itemstack2.stackSize > 0){
+				if(itemstack2.stackSize > 0)
 					output = itemstack2;
-				}
 			}
 			else if (itemstack.getItem() == TFCItems.Jute){
 				itemstack2 = new ItemStack(TFCItems.JuteFibre,0,0);
@@ -104,64 +97,55 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					itemstack2.stackSize++;
 					itemstack.stackSize--;
 				}
-				if(itemstack2.stackSize > 0){
+				if(itemstack2.stackSize > 0)
 					output = itemstack2;
-				}
 			}
 			else if(itemstack.getItem() == TFCItems.Logs){
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 3;
 			}
 			else if(itemstack.getItem() == TFCItems.BarleyGrain){
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 5;
 			}
 			else if((itemstack.getItem() == TFCItems.RedApple||itemstack.getItem()==TFCItems.GreenApple)){
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 6;
 			}
 			else if(itemstack.getItem() == TFCItems.Potato){
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 7;
 			}
 			else if(itemstack.getItem() == TFCItems.WheatGrain){
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 8;
 			}
 			else if(itemstack.getItem() == TFCItems.RyeGrain){
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 9;
 			}
 			else if(itemstack.getItem() == TFCItems.RiceGrain){
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 10;
 			}
 			else if(itemstack.getItem() == Item.sugar){
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 11;
 			}
 
@@ -178,9 +162,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					itemstack.stackSize--;
 				}
 				if(itemstack2.stackSize > 0)
-				{
 					output = itemstack2;
-				}
 			}
 		}
 		else if(itemstack != null && Type == 3)
@@ -195,15 +177,11 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					itemstack.stackSize--;
 				}
 				if(itemstack2.stackSize > 0)
-				{
 					output = itemstack2;
-				}
 			}
 		}
 		else if(itemstack == null && Type >= 5 && Type <= 11)
-		{
 			Type = 12;
-		}
 		else if(itemstack == null && Type == 14)
 		{
 			itemstack2 = new ItemStack(TFCItems.Cheese,0,0);
@@ -213,18 +191,12 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				itemstack2.stackSize++;
 			}
 			if(itemstack2.stackSize > 0)
-			{
 				output = itemstack2;
-			}
 		}
 		if (liquidLevel == 0)
-		{
 			Type = 0;
-		}
 		if (itemstack!=null && itemstack.stackSize==0)
-		{
 			itemstack = null;
-		}
 
 	}
 
@@ -233,9 +205,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	}
 
 	public void setUnsealed(String reason){
-		if(reason.equals("killing fuse")){
+		if(reason.equals("killing fuse"))
 			sealed = false;
-		}
 	}
 
 	public static String getType(int type)
@@ -296,14 +267,10 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			}
 			ItemStack itemstack1 = itemstack.splitStack(j);
 			if(itemstack.stackSize == 0)
-			{
 				itemstack = null;
-			}
 			return itemstack1;
 		} else
-		{
 			return null;
-		}
 
 	}
 
@@ -317,7 +284,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
-		{
 			if(itemstack != null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
@@ -327,7 +293,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
 				worldObj.spawnEntityInWorld(entityitem);
 			}
-		}
 	}
 
 	@Override
@@ -374,9 +339,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < 2)
-			{
 				setInventorySlotContents(byte0,ItemStack.loadItemStackFromNBT(nbttagcompound1));
-			}
 		}
 	}
 
@@ -398,16 +361,12 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		if(i == 0){
 			this.itemstack = itemstack;
 			if(this.itemstack != null && this.itemstack.stackSize > getInventoryStackLimit())
-			{
 				this.itemstack.stackSize = getInventoryStackLimit();
-			}
 		}
 		else{
 			this.output = itemstack;
 			if(this.output != null && output.stackSize > getInventoryStackLimit())
-			{
 				output.stackSize = getInventoryStackLimit();
-			}
 		}
 
 
@@ -418,9 +377,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		{
 			liquidLevel = Math.min(liquidLevel+32, 256);
 			if(Type == 0)
-			{
 				Type = i==12 && Type == 13?14:i;
-			}
 			updateGui();
 			return true;
 		}
@@ -439,9 +396,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				//entityplayer.closeScreen();
 				//This is where we handle the counter for producing charcoal. Once it reaches 24hours, we add charcoal to the fire and remove the wood.
 				if(sealtimecounter == 0)
-				{
 					sealtimecounter = (int) TFC_Time.getTotalTicks();
-				}
 
 				if(sealtimecounter > 0 && sealtimecounter + (SEALTIME*100) < TFC_Time.getTotalTicks() )
 				{
@@ -450,27 +405,22 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					ProcessItems();                
 				}
 			}
-			
+
 			if(mode == 1 && liquidLevel > 0 && TFC_Time.getTotalTicks() % 2 == 0 &&
 					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj,0,xCoord,yCoord,zCoord,true)){
 				liquidLevel-=4;
 				updateGui();
 			}
 			if(liquidLevel == 0)
-			{
-				Type = 0; 
-			}
+				Type = 0;
 			if(mode == 0){
 				if(itemstack == null)
-				{
 					if(output != null)
 					{
 						itemstack = output;
 						output = null;
 					}
-				}
 				if (itemstack != null)
-				{
 					if ((Type ==0||Type == 2) && itemstack.getItem() == TFCItems.Limewater && liquidLevel < 256)
 					{
 						liquidLevel = Math.min(liquidLevel + 32, 256);
@@ -497,9 +447,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 						liquidLevel = Math.min(liquidLevel + 1, 256);
 						Type = 4;
 						itemstack.stackSize-=1;
-						if(itemstack.stackSize==0) {
+						if(itemstack.stackSize==0)
 							itemstack=null;
-						}
 						updateGui();
 					} 
 					else if((Type == 0||Type == 13 || Type == 14) && itemstack.getItem() == TFCItems.WoodenBucketMilk && liquidLevel < 256){
@@ -514,52 +463,46 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 						itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
 						updateGui();
 					}
-				}
-			}
-			else{
-				if (itemstack != null)
+			} else if (itemstack != null)
+				if((Type>=5&&Type<=11 )&& itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize)
 				{
-					if((Type>=5&&Type<=11 )&& itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize)
-					{
-						liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
-						itemstack.itemID = alcohols[Type-5];
-						updateGui();
-					}
-					/*Fill pottery jug*/
-					else if (Type == 1 && (itemstack.getItem() == TFCItems.PotteryJug && itemstack.getItemDamage() == 1) && liquidLevel >= 16)
-					{
-						liquidLevel = Math.max(liquidLevel - 16, 0);
-						Type = 1;
-						itemstack.setItemDamage(2);
-						updateGui();
-					}
-					/*Fill water bottle*/
-					else if(Type == 1 && itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize)
-					{
-						liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
-						itemstack.itemID = Item.potion.itemID;
-						updateGui();
-					}
-					else if(Type == 12 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
-						liquidLevel = Math.max(liquidLevel - 32, 0);
-						Type = liquidLevel>0?Type:0;
-						itemstack.itemID = TFCItems.Vinegar.itemID;
-						updateGui();
-					}
-					else if(Type == 1 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
-						liquidLevel = Math.max(liquidLevel - 32, 0);
-						Type = liquidLevel>0?Type:0;
-						itemstack.itemID = TFCItems.WoodenBucketWater.itemID;
-						updateGui();
-					}
-					else if(Type == 2 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
-						liquidLevel = Math.max(liquidLevel - 32, 0);
-						Type = liquidLevel>0?Type:0;
-						itemstack.itemID = TFCItems.Limewater.itemID;
-						updateGui();
-					}
+					liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
+					itemstack.itemID = alcohols[Type-5];
+					updateGui();
 				}
-			}
+			/*Fill pottery jug*/
+				else if (Type == 1 && (itemstack.getItem() == TFCItems.PotteryJug && itemstack.getItemDamage() == 1) && liquidLevel >= 16)
+				{
+					liquidLevel = Math.max(liquidLevel - 16, 0);
+					Type = 1;
+					itemstack.setItemDamage(2);
+					updateGui();
+				}
+			/*Fill water bottle*/
+				else if(Type == 1 && itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize)
+				{
+					liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
+					itemstack.itemID = Item.potion.itemID;
+					updateGui();
+				}
+				else if(Type == 12 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
+					liquidLevel = Math.max(liquidLevel - 32, 0);
+					Type = liquidLevel>0?Type:0;
+					itemstack.itemID = TFCItems.Vinegar.itemID;
+					updateGui();
+				}
+				else if(Type == 1 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
+					liquidLevel = Math.max(liquidLevel - 32, 0);
+					Type = liquidLevel>0?Type:0;
+					itemstack.itemID = TFCItems.WoodenBucketWater.itemID;
+					updateGui();
+				}
+				else if(Type == 2 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
+					liquidLevel = Math.max(liquidLevel - 32, 0);
+					Type = liquidLevel>0?Type:0;
+					itemstack.itemID = TFCItems.Limewater.itemID;
+					updateGui();
+				}
 		}
 	}
 
@@ -576,9 +519,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 
 		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 		nbttagcompound1.setByte("Slot", (byte)1);
-		if(itemstack != null){
+		if(itemstack != null)
 			itemstack.writeToNBT(nbttagcompound1);
-		}
 		nbttaglist.appendTag(nbttagcompound1);
 
 		nbttagcompound.setTag("Items", nbttaglist);
@@ -602,12 +544,10 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 
 	public void updateGui()
 	{
-		if(!worldObj.isRemote) {
+		if(!worldObj.isRemote)
 			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
-		}
-		else{
+		else
 			validate();
-		}
 	}
 
 	@Override
@@ -701,39 +641,30 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	}
 
 	private boolean isItemValid() {
-		if(mode == 0){
-			if(itemstack == null && ((Type >=5&& Type <=11)||Type == 14)){
+		if(mode == 0)
+			if(itemstack == null && ((Type >=5&& Type <=11)||Type == 14))
 				return true;
-			}
-			else if(itemstack == null){
+			else if(itemstack == null)
 				return false;
-			}
 			else{
 				int id = itemstack.getItem().itemID;
 				if(Type == 1){
-					if(id == TFCItems.ScrapedHide.itemID){
+					if(id == TFCItems.ScrapedHide.itemID)
 						return true;
-					}
-					if(id == TFCItems.Jute.itemID){
+					if(id == TFCItems.Jute.itemID)
 						return true;
-					}
-					if(id == TFCItems.Logs.itemID){
+					if(id == TFCItems.Logs.itemID)
 						return true;
-					}
 					if(id == TFCItems.WheatGrain.itemID||id == TFCItems.BarleyGrain.itemID||id == TFCItems.RyeGrain.itemID||id == TFCItems.RiceGrain.itemID||
-							id == TFCItems.Potato.itemID||id == TFCItems.RedApple.itemID||id == TFCItems.GreenApple.itemID||id == Item.sugar.itemID){
+							id == TFCItems.Potato.itemID||id == TFCItems.RedApple.itemID||id == TFCItems.GreenApple.itemID||id == Item.sugar.itemID)
 						return true;
-					}
 				}
-				if(id == TFCItems.Hide.itemID && Type == 2){
+				if(id == TFCItems.Hide.itemID && Type == 2)
 					return true;
-				}
-				if(id == TFCItems.PrepHide.itemID && Type == 3){
+				if(id == TFCItems.PrepHide.itemID && Type == 3)
 					return true;
-				}
 
 			}
-		}
 		return false;
 	}
 
