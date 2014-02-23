@@ -140,7 +140,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			return false;
 	}
 
-	public static void createTag(ItemStack is, float weight)
+	public static ItemStack createTag(ItemStack is, float weight)
 	{
 		if(!is.hasTagCompound())
 		{
@@ -150,6 +150,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 			is.setTagCompound(nbt);
 		}
+		return is;
 	}
 
 	public float getFoodWeight(ItemStack is)
