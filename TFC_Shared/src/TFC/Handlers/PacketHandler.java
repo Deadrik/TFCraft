@@ -27,12 +27,12 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.INetworkTE;
 import TFC.API.TFCOptions;
-import TFC.Containers.ContainerPlayerTFC;
 import TFC.Containers.ContainerSpecialCrafting;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.SkillStats;
 import TFC.Items.Tools.ItemWritableBookTFC;
@@ -97,7 +97,12 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				dos.writeInt(TFC_Time.daysInYear);
 
 				dos.writeFloat(foodstats.foodLevel);
-				dos.writeFloat(foodstats.waterLevel);			
+				dos.writeFloat(foodstats.waterLevel);	
+				dos.writeFloat(foodstats.nutrFruit);
+				dos.writeFloat(foodstats.nutrVeg);
+				dos.writeFloat(foodstats.nutrGrain);
+				dos.writeFloat(foodstats.nutrProtein);
+				dos.writeFloat(foodstats.nutrDairy);
 
 				dos.writeInt(TFCOptions.HealthGainRate);
 				dos.writeInt(TFCOptions.HealthGainCap);
@@ -216,8 +221,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						if(craftingTable)
 						{
 							player.getEntityData().setBoolean("craftingTable", craftingTable);
-							player.inventoryContainer = new ContainerPlayerTFC(player.inventory, !player.worldObj.isRemote, player);
-							player.openContainer = player.inventoryContainer;
+							PlayerInventory.upgradePlayerCrafting(player);
 						}
 						SkillStats skills = TFC_Core.getSkillStats(player);
 						while(dis.available() > 0)
@@ -374,9 +378,9 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			if(craftingTable && !player.getEntityData().hasKey("craftingTable"))
 			{
 				player.getEntityData().setBoolean("craftingTable", craftingTable);
-				player.inventoryContainer = new ContainerPlayerTFC(player.inventory, !player.worldObj.isRemote, player);
-				player.openContainer = player.inventoryContainer;
+				PlayerInventory.upgradePlayerCrafting(player);
 			}
+
 			while(dis.available() > 0)
 				skills.setSkillSave(dis.readUTF(), dis.readInt());
 		} 

@@ -1,6 +1,7 @@
 package TFC.Core.Player;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -67,5 +68,17 @@ public class PlayerInventory
 		int l = (screenWidth - invXSize) / 2;
 		int i1 = (screenHeight - (upperGuiHeight+invYSize)) / 2 + upperGuiHeight;
 		container.drawTexturedModalRect(l, i1, 0, 0, invXSize, invYSize);
+	}
+
+	public static void upgradePlayerCrafting(EntityPlayer player)
+	{
+		if(player.getEntityData().hasKey("craftingTable"))
+		{
+			player.inventoryContainer.getSlot(45).xDisplayPosition+=50000;
+			player.inventoryContainer.getSlot(46).xDisplayPosition+=50000;
+			player.inventoryContainer.getSlot(47).xDisplayPosition+=50000;
+			player.inventoryContainer.getSlot(48).xDisplayPosition+=50000;
+			player.inventoryContainer.getSlot(49).xDisplayPosition+=50000;
+		}
 	}
 }

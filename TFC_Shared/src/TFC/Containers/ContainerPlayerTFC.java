@@ -48,11 +48,11 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		else
 		{
 			//Have to create some dummy slots
-			this.addSlotToContainer(new Slot(craftMatrix, 6, -50000, 0));
-			this.addSlotToContainer(new Slot(craftMatrix, 7, -50000, 0));
-			this.addSlotToContainer(new Slot(craftMatrix, 2, -50000, 0));
-			this.addSlotToContainer(new Slot(craftMatrix, 5, -50000, 0));
-			this.addSlotToContainer(new Slot(craftMatrix, 8, -50000, 0));
+			x = 2; y = 0; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18-50000, 18 + x * 18));
+			x = 2; y = 1; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18-50000, 18 + x * 18));
+			x = 0; y = 2; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18-50000, 18 + x * 18));
+			x = 1; y = 2; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18-50000, 18 + x * 18));
+			x = 2; y = 2; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18-50000, 18 + x * 18));
 		}
 
 		this.onCraftMatrixChanged(this.craftMatrix);

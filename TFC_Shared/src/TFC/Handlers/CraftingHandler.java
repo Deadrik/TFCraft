@@ -13,11 +13,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.Containers.ContainerPlayerTFC;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemIngot;
@@ -53,8 +53,9 @@ public class CraftingHandler implements ICraftingHandler
 					e.printStackTrace();
 				}
 				pi.networkManager.addToSendQueue(PacketHandler.getPacket(bos));
-				player.inventoryContainer = new ContainerPlayerTFC(player.inventory, !player.worldObj.isRemote, player);
-				player.openContainer = player.inventoryContainer;
+				//player.inventoryContainer = new ContainerPlayerTFC(player.inventory, !player.worldObj.isRemote, player);
+				//player.openContainer = player.inventoryContainer;
+				PlayerInventory.upgradePlayerCrafting(player);
 			}	
 			else if(itemstack.itemID == TFCItems.SinglePlank.itemID)
 			{
