@@ -172,6 +172,43 @@ public class CraftingHandler implements ICraftingHandler
 				TFC_ItemHeat.SetTemperature(itemstack, temperature);
 
 			}
+			else if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("foodWeight"))
+			{
+				float weight = 0;
+				float decay = 0;
+				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+				{       
+					if(iinventory.getStackInSlot(i) == null)
+						continue;
+					if(iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
+					{
+						float w = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight");
+						//Check if we can add any more to this bundle of food
+						if (weight+w >= 80)
+						{
+							w -= (80-weight);
+
+							float myDecayPercent = 0;
+							float myDecay = 0;
+							//we only add the decay if food was actually added to the bundle
+							if(iinventory.getStackInSlot(i).getTagCompound().hasKey("foodDecay"))
+							{
+								myDecayPercent = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay") / w;
+								myDecay = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay");
+							}
+
+						}
+						weight = 80;
+
+
+
+						iinventory.getStackInSlot(index).stackSize = iinventory.getStackInSlot(index).stackSize + 1;
+						if(iinventory.getStackInSlot(index).stackSize > 2)
+							iinventory.getStackInSlot(index).stackSize = 2;
+					}
+
+				}
+			}
 
 			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 			{             

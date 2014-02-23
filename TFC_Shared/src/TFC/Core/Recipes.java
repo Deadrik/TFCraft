@@ -22,6 +22,7 @@ import TFC.API.Crafting.KilnCraftingManager;
 import TFC.API.Crafting.KilnRecipe;
 import TFC.API.Crafting.PlanRecipe;
 import TFC.API.Enums.RuleEnum;
+import TFC.Food.ItemFoodTFC;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes 
@@ -1774,6 +1775,8 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.OatDough, 2), new Object[] {TFCItems.OatGround,TFCItems.OatGround,TFCItems.RedSteelBucketWater});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RiceDough, 2), new Object[] {TFCItems.RiceGround,TFCItems.RiceGround,TFCItems.RedSteelBucketWater});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CornmealDough, 2), new Object[] {TFCItems.CornmealGround,TFCItems.CornmealGround, TFCItems.RedSteelBucketWater});
+
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.Carrot, 1), 0), new Object[] {new ItemStack(TFCItems.Carrot, 1), new ItemStack(TFCItems.Carrot, 1)});
 	}
 
 	public static void registerKilnRecipes()
