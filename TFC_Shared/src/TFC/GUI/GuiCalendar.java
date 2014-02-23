@@ -171,5 +171,7 @@ public class GuiCalendar extends GuiScreen
 				Minecraft.getMinecraft().displayGuiScreen(new GuiInventoryTFC(Minecraft.getMinecraft().thePlayer));
 			else if (guibutton.id == 6)
 				Minecraft.getMinecraft().displayGuiScreen(new GuiSkills(Minecraft.getMinecraft().thePlayer));
+			else if (guibutton.id == 7)
+				Minecraft.getMinecraft().displayGuiScreen(new GuiHealth(Minecraft.getMinecraft().thePlayer));
 	}
 }
