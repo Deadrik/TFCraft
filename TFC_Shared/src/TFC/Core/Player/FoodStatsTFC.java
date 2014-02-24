@@ -17,6 +17,7 @@ import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Food.ItemFoodTFC;
+import TFC.Food.ItemMeal;
 import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -262,7 +263,7 @@ public class FoodStatsTFC
 	/**
 	 * Eat some food.
 	 */
-	public void addStats(ItemStack is)
+	public void eatFood(ItemStack is)
 	{
 		if(is.getItem() instanceof ItemFoodTFC)
 		{
@@ -281,6 +282,34 @@ public class FoodStatsTFC
 			if(reduceFood(is, eatAmount))
 				is.stackSize = 0;
 		}
+		else if(is.getItem() instanceof ItemMeal)
+		{
+			ItemFoodTFC item = (ItemFoodTFC) is.getItem();
+			float weight = item.getFoodWeight(is);
+			float decay = item.getFoodDecay(is);
+			float eatAmount = Math.min(weight - decay, 5f);
+			float stomachDiff = this.stomachLevel+eatAmount-getMaxStomach(this.player);
+			if(stomachDiff > 0)
+				eatAmount-=stomachDiff;
+			//add the nutrition contents
+			byte[] fg = new byte[]{getfg(is, 0), getfg(is, 1), getfg(is, 2), getfg(is, 3)};
+			float[] weights = new float[]{0.5f,0.2f,0.2f,0.1f};
+			for(int i = 0; i < 4; i++)
+				if(fg[i] != -1)
+					addNutrition(EnumFoodGroup.values()[fg[i]], eatAmount*weights[i]);
+			//fill the stomach
+			this.stomachLevel += eatAmount;
+			//Now remove the eaten amount from the itemstack.
+			if(reduceFood(is, eatAmount))
+				is.stackSize = 0;
+		}
+	}
+
+	private byte getfg(ItemStack is, int i)
+	{
+		if(is.getTagCompound().hasKey("FG" + i))
+			return is.getTagCompound().getByte("FG" + i);
+		return -1;
 	}
 
 	public float getNutritionHealthModifier()

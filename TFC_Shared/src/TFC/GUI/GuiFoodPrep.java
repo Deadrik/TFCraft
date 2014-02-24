@@ -34,7 +34,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 		fontRenderer.drawString("4oz", 13, 30, 0x404040);
 		fontRenderer.drawString("4oz", 13, 48, 0x404040);
 		fontRenderer.drawString("2oz", 13, 66, 0x404040);
-		if(table.getMealWeight() < 14 && !table.areComponentsCorrect())
+		if(table.getMealWeight() < 14 || !table.areComponentsCorrect())
 			((GuiButton)buttonList.get(0)).enabled = false;
 		else ((GuiButton)buttonList.get(0)).enabled = true;
 	}
