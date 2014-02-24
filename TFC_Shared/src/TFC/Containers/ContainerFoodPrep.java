@@ -7,11 +7,11 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.API.IFood;
 import TFC.Containers.Slots.SlotBlocked;
 import TFC.Containers.Slots.SlotFoodBowl;
 import TFC.Containers.Slots.SlotFoodOnly;
 import TFC.Core.Player.PlayerInventory;
-import TFC.Food.ItemTerraFood;
 import TFC.TileEntities.TileEntityFoodPrep;
 
 public class ContainerFoodPrep extends ContainerTFC {
@@ -31,7 +31,7 @@ public class ContainerFoodPrep extends ContainerTFC {
 		this.posZ = z;
 		pile.openChest();
 		layoutContainer(playerinv, pile, 0, 0);
-		
+
 		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
 	}
 
@@ -69,35 +69,30 @@ public class ContainerFoodPrep extends ContainerTFC {
 
 		if (clickedSlot != null
 				&& clickedSlot.getHasStack()
-				&& (clickedSlot.getStack().getItem() instanceof ItemTerraFood || clickedSlot.getStack().itemID == Item.bowlEmpty.itemID))
+				&& (clickedSlot.getStack().getItem() instanceof IFood || clickedSlot.getStack().itemID == Item.bowlEmpty.itemID))
 		{
 			ItemStack clickedStack = clickedSlot.getStack();
 			returnedStack = clickedStack.copy();
 
 			if (clickedIndex < 6)
 			{
-				if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), true)) {
+				if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), true))
 					return null;
-				}
 			}
 			else if (clickedIndex >= 6 && clickedIndex < inventorySlots.size()) {
-				if (!this.mergeItemStack(clickedStack, 0, 6, false)) {
+				if (!this.mergeItemStack(clickedStack, 0, 6, false))
 					return null;
-				}
 			}
-			else if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), false)) {
+			else if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), false))
 				return null;
-			}
 
-			if (clickedStack.stackSize == 0) {
+			if (clickedStack.stackSize == 0)
 				clickedSlot.putStack((ItemStack)null);
-			} else {
+			else
 				clickedSlot.onSlotChanged();
-			}
 
-			if (clickedStack.stackSize == returnedStack.stackSize) {
+			if (clickedStack.stackSize == returnedStack.stackSize)
 				return null;
-			}
 			clickedSlot.onPickupFromSlot(player, clickedStack);
 		}
 		return returnedStack;
