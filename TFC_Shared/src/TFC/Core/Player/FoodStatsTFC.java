@@ -120,22 +120,17 @@ public class FoodStatsTFC
 						nutrDairy = Math.max(this.nutrDairy - (1 + foodExhaustionLevel)/5, 0);
 					}
 				}
+			//Heal or hurt the player based on hunger.
 			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.hourLength/2)
 			{
 				this.foodHealTimer += TFC_Time.hourLength/2;
 
 				if (this.stomachLevel >= this.getMaxStomach(player)/4 && player.shouldHeal())
-				{
+					//Player heals 1% per 30 in game minutes
 					player.heal((int) (player.getMaxHealth()*0.01f));
-
-					if (this.satisfaction > 0.0F)
-						this.satisfaction = Math.max(this.satisfaction - 4.0F, 0.0F);
-					else if (!player.capabilities.isCreativeMode)
-						this.stomachLevel = Math.max(this.stomachLevel - 0.25f, 0);
-				}
-				else if (this.stomachLevel <= 0)
-					if (!TFC_Core.isPlayerInDebugMode(player) && (difficulty > 1 || (player.getMaxHealth() > 50)))
-						player.attackEntityFrom(DamageSource.starve, 50);
+				else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.5f && !TFC_Core.isPlayerInDebugMode(player))
+					//Players loses health at a rate of 5% per 30 minutes if they are starving
+					player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth()*0.05f), 10));
 			}
 
 			/****************************************
