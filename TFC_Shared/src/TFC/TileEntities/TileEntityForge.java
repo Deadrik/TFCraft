@@ -1,7 +1,5 @@
 package TFC.TileEntities;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
@@ -10,7 +8,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.nbt.NBTTagList;
 import TFC.TFCItems;
 import TFC.API.HeatIndex;
@@ -140,18 +137,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 
 			if(inputItemTemps[i] <= ambientTemp)
 			{
-				Collection C = fireItemStacks[i].getTagCompound().getTags();
-				Iterator itr = C.iterator();
-				while(itr.hasNext())
-				{
-					Object tag = itr.next();
-					if(TFC_ItemHeat.canRemoveTag(tag, "temperature", NBTTagFloat.class))
-					{
-						itr.remove();
-						break;
-					}
-				}
-				//fireItemStacks[i].stackTagCompound = null;
+				fireItemStacks[i].getTagCompound().removeTag("temperature");
 			}
 		}
 		else if(fireItemStacks[i] != null && !fireItemStacks[i].hasTagCompound())

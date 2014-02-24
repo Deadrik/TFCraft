@@ -18,6 +18,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.IFood;
 import TFC.API.IItemFoodBlock;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Food.ItemFoodTFC;
 import TFC.Handlers.PacketHandler;
@@ -65,6 +66,12 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 					//set the icon for this meal
 					is.setItemDamage(R.nextInt(11));
 
+					nbt.setFloat("foodWeight", Helper.roundNumber(getMealWeight(), 10));
+					nbt.setFloat("foodDecay", 0);
+
+					is.setTagCompound(nbt);
+
+					this.setInventorySlotContents(5, is);
 				}
 		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createMealPacket());
@@ -109,6 +116,16 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		else if(f1 == -1 || f1==f2 || f1==f3)
 			return false;
 		else if(f2 != -1 && f2==f3)
+			return false;
+
+		//Next we make sure that each slot has enough food material
+		if(getStackInSlot(0) == null || ((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodWeight(getStackInSlot(0)) < 10)
+			return false;
+		if(getStackInSlot(1) == null || ((ItemFoodTFC)getStackInSlot(1).getItem()).getFoodWeight(getStackInSlot(1)) < 4)
+			return false;
+		if(getStackInSlot(2) != null && ((ItemFoodTFC)getStackInSlot(2).getItem()).getFoodWeight(getStackInSlot(2)) < 4)
+			return false;
+		if(getStackInSlot(3) != null && ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodWeight(getStackInSlot(3)) < 2)
 			return false;
 
 		return true;
