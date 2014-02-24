@@ -112,7 +112,8 @@ public class EntityLivingHandler
 
 	public int getMaxHealth(EntityPlayer player)
 	{
-		return Math.min(1000+(player.experienceLevel * TFCOptions.HealthGainRate), TFCOptions.HealthGainCap);
+		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.HealthGainRate), TFCOptions.HealthGainCap) * 
+				TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier());
 	}
 
 	@ForgeSubscribe
