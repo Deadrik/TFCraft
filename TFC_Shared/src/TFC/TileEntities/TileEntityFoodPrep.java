@@ -27,7 +27,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[6];
-
+	private float[] weights = new float[]{10,4,4,2};
 	@Override
 	public void updateEntity()
 	{
@@ -57,66 +57,62 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		if(!worldObj.isRemote)
 		{
 			if(storage[4] == null && storage[5].getItem().itemID == Item.bowlEmpty.itemID)
-			{
-				int count = (storage[0] != null ? 1 : 0) + 
-						(storage[1] != null ? 1 : 0) + 
-						(storage[2] != null ? 1 : 0) + 
-						(storage[3] != null ? 1 : 0);
-				int id1 = getFoodIdFromItemStack(storage[0]);
-				int id2 = getFoodIdFromItemStack(storage[1]);
-				int id3 = getFoodIdFromItemStack(storage[2]);
-				int id4 = getFoodIdFromItemStack(storage[3]);
-
-				if((id1 == id2 || id1 == id3 || id1 == id4) || (id2 == id3 || id2 == id4) || id3 == id4)
-					return;
-
-				int seed = id1 * id2 * id3 * id4;
-
-				int fill1 = getHealAmountFromItemStack(storage[0]);
-				int fill2 = getHealAmountFromItemStack(storage[1]);
-				int fill3 = getHealAmountFromItemStack(storage[2]);
-				int fill4 = getHealAmountFromItemStack(storage[3]);
-
-				int filling = Math.min(fill1 + fill2 + fill3 + fill4, 100);
-
-				if(count >= 2 && filling > 50)
+				if(getMealWeight() >= 14)
 				{
-					decrStackSize(0,1);
-					decrStackSize(1,1);
-					decrStackSize(2,1);
-					decrStackSize(3,1);
-					decrStackSize(5,1);
-					Random R = new Random(this.worldObj.getSeed()+seed);
-					if(R.nextInt(5) == 0)
-					{
-						byte power = (byte)R.nextInt(25*count);
+					NBTTagCompound nbt = new NBTTagCompound();
+					ItemStack is = new ItemStack(TFCItems.MealGeneric, 1);
+					Random R = new Random(getFoodSeed());
+					//set the icon for this meal
+					is.setItemDamage(R.nextInt(11));
 
-						storage[4] = new ItemStack(TFCItems.MealGeneric, 1);
-						//storage[4] = new ItemStack(TFCItems.Meals[R.nextInt(TFCItems.Meals.length)], 1);
-						NBTTagCompound nbt = new NBTTagCompound();
-						//nbt.setByte("effectpower", power);
-						nbt.setByte("energy", (byte) R.nextInt(100));
-						nbt.setByte("filling", (byte) Math.min(filling, 100));
-						storage[4].setTagCompound(nbt);
-					}
-					else
-					{
-						storage[4] = new ItemStack(TFCItems.MealGeneric, 1);
-						NBTTagCompound nbt = new NBTTagCompound();
-						nbt.setByte("energy", (byte) R.nextInt(100));
-						nbt.setByte("filling", (byte) Math.min(filling, 100));
-						storage[4].setTagCompound(nbt);
-					}
 				}
-			}
 		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createMealPacket());
+	}
+
+	public boolean areComponentsCorrect()
+	{
+		int f0 = -1;
+		int f1 = -1;
+		int f2 = -1;
+		int f3 = -1;
+
+		if(getStackInSlot(0) != null)
+			f0 = ((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodGroup().ordinal();
+		if(getStackInSlot(1) != null)
+			f1 = ((ItemFoodTFC)getStackInSlot(1).getItem()).getFoodGroup().ordinal();
+		if(getStackInSlot(2) != null)
+			f2 = ((ItemFoodTFC)getStackInSlot(2).getItem()).getFoodGroup().ordinal();
+		if(getStackInSlot(3) != null)
+			f3 = ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodGroup().ordinal();
+
+		if(f0 == -1 || f0==f1 || f0==f2 || f0==f3)
+			return false;
+		else if(f1 == -1 || f1==f3)
+			return false;
+		else if(f2 != -1 && f2==f3)
+			return false;
+
+		return true;
+	}
+
+	private int getFoodSeed()
+	{
+		int seed = 0;
+
+		for(int i = 0; i < 4; i++)
+		{
+			ItemStack is = getStackInSlot(i);
+			if(is != null)
+				seed += ((ItemFoodTFC)is.getItem()).getFoodID();
+		}
+
+		return seed;
 	}
 
 	public float getMealWeight()
 	{
 		float w = 0;
-		float[] weights = new float[]{10,4,4,2};
 		for(int i = 0; i < 4; i++)
 		{
 			ItemStack is = getStackInSlot(i);
