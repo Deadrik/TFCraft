@@ -1691,7 +1691,7 @@ public class TFCItems
 		RyeWhole = new ItemTerra(TFCItemID.RyeWhole).setFolder("food/").setUnlocalizedName("Rye Whole");
 		RiceWhole = new ItemTerra(TFCItemID.RiceWhole).setFolder("food/").setUnlocalizedName("Rice Whole");
 
-		MealGeneric = new ItemMeal(TFCItemID.MealGeneric, 0).setUnlocalizedName("MealGeneric");
+		MealGeneric = new ItemMeal(TFCItemID.MealGeneric).setUnlocalizedName("MealGeneric");
 
 		WheatGround = new ItemRawFood(TFCItemID.WheatGround, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Wheat Ground");
 		BarleyGround = new ItemRawFood(TFCItemID.BarleyGround, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Barley Ground");

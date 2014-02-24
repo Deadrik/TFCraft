@@ -67,16 +67,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 
-		if(this.getFoodGroup() == EnumFoodGroup.Dairy)
-			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.food.dairy"));
-		else if(this.getFoodGroup() == EnumFoodGroup.Fruit)
-			arraylist.add(EnumChatFormatting.DARK_PURPLE + StringUtil.localize("gui.food.fruit"));
-		else if(this.getFoodGroup() == EnumFoodGroup.Vegetable)
-			arraylist.add(EnumChatFormatting.DARK_GREEN + StringUtil.localize("gui.food.vegetable"));
-		else if(this.getFoodGroup() == EnumFoodGroup.Protein)
-			arraylist.add(EnumChatFormatting.DARK_RED + StringUtil.localize("gui.food.protein"));
-		else if(this.getFoodGroup() == EnumFoodGroup.Grain)
-			arraylist.add(EnumChatFormatting.YELLOW + StringUtil.localize("gui.food.grain"));
+		arraylist.add(getFoodGroupName(this.getFoodGroup()));
 
 		addHeatInformation(is, arraylist);
 		if (is.hasTagCompound())
@@ -92,6 +83,22 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + decay/ounces*100+"%");
 			}
 		}
+	}
+
+	public static String getFoodGroupName(EnumFoodGroup fg)
+	{
+		if(fg == EnumFoodGroup.Dairy)
+			return (EnumChatFormatting.WHITE + StringUtil.localize("gui.food.dairy"));
+		else if(fg == EnumFoodGroup.Fruit)
+			return (EnumChatFormatting.DARK_PURPLE + StringUtil.localize("gui.food.fruit"));
+		else if(fg == EnumFoodGroup.Vegetable)
+			return (EnumChatFormatting.DARK_GREEN + StringUtil.localize("gui.food.vegetable"));
+		else if(fg == EnumFoodGroup.Protein)
+			return (EnumChatFormatting.DARK_RED + StringUtil.localize("gui.food.protein"));
+		else if(fg == EnumFoodGroup.Grain)
+			return (EnumChatFormatting.YELLOW + StringUtil.localize("gui.food.grain"));
+		else
+			return "N/A";
 	}
 
 	@Override

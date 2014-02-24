@@ -2,7 +2,6 @@ package TFC.Food;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -10,104 +9,58 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import TFC.Reference;
+import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.FoodStatsTFC;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class ItemMeal extends ItemTerra
 {
 	PotionEffect foodEffect;
-
 	private boolean alwaysEdible = false;
-	private int iconid;
 
-	public ItemMeal(int id, int icon) 
+	public ItemMeal(int id) 
 	{
 		super(id);
 		this.hasSubtypes = true;
-		iconid = icon;
-	}
-
-	@Override
-	public Icon getIconFromDamage(int meta)
-	{        
-		return itemIcon;
-	}
-
-	@Override
-	public void registerIcons(IconRegister registerer)
-	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "food/Meal"+iconid);
+		this.MetaIcons = new Icon[11];
+		this.setFolder("food/");
 	}
 
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
+
 		ItemFoodTFC.addHeatInformation(is, arraylist);
 
 		if (is.hasTagCompound())
 		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
+			NBTTagCompound nbt = is.getTagCompound();
+			String fg = "";
+			if(nbt.hasKey("FG0"))
+				fg += ItemFoodTFC.getFoodGroupName(EnumFoodGroup.values()[nbt.getByte("FG0")]);
+			if(nbt.hasKey("FG1"))
+				fg += " / " + ItemFoodTFC.getFoodGroupName(EnumFoodGroup.values()[nbt.getByte("FG1")]);
+			if(nbt.hasKey("FG2"))
+				fg += " / " + ItemFoodTFC.getFoodGroupName(EnumFoodGroup.values()[nbt.getByte("FG2")]);
+			if(nbt.hasKey("FG3"))
+				fg += " / " + ItemFoodTFC.getFoodGroupName(EnumFoodGroup.values()[nbt.getByte("FG3")]);
 
-
-
-			if(foodEffect != null)
-				arraylist.add(StringUtil.localize("gui.FoodPrep.Effect") + ": " + StatCollector.translateToLocal(foodEffect.getEffectName()));
-
-			int energy = getMealEnergy(is)/10;
-			int power = getMealPower(is)/10;
-			int filling = getMealFilling(is)/10;
-
-			if(energy > 0)
+			if(nbt.hasKey("foodWeight"))
 			{
-				String stars = "";
-				int whitestars = 10-energy;
-				int blackstars = energy;
-
-				for(int i = 0; i < blackstars; i++)
-					stars += "\u272e";
-				for(int i = 0; i < whitestars; i++)
-					stars += "\u2729";
-
-				arraylist.add(StringUtil.localize("gui.FoodPrep.Energy") + ": " + stars);
+				float ounces = nbt.getFloat("foodWeight");
+				if(ounces > 0)
+					arraylist.add("Amount " + ounces+" oz / 80.0 oz");
+				float decay = nbt.getFloat("foodDecay");
+				if(decay > 0)
+					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + decay/ounces*100+"%");
 			}
-
-			if(power > 0)
-			{
-				String stars = "";
-				int whitestars = 10-power;
-				int blackstars = power;
-
-				for(int i = 0; i < blackstars; i++)
-					stars += "\u272e";
-				for(int i = 0; i < whitestars; i++)
-					stars += "\u2729";
-
-				arraylist.add(StringUtil.localize("gui.FoodPrep.Power") + ": " + stars);
-			}
-
-			if(filling > 0)
-			{
-				String stars = "";
-				int whitestars = 10-filling;
-				int blackstars = filling;
-
-				for(int i = 0; i < blackstars; i++)
-					stars += "\u272e";
-				for(int i = 0; i < whitestars; i++)
-					stars += "\u2729";
-
-				arraylist.add(StringUtil.localize("gui.FoodPrep.Filling") + ": " + stars);
-			}
-
 		}
 	}
 
@@ -127,12 +80,8 @@ public class ItemMeal extends ItemTerra
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-		this.addFoodEffect(is, world, player);
 		if(!world.isRemote)
 		{
-
-			int energy = getMealEnergy(is);
-			int filling = getMealFilling(is);
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 			//foodstats.addStats(filling, energy/100f);
 			TFC_Core.setPlayerFoodStats(player, foodstats);
@@ -150,72 +99,6 @@ public class ItemMeal extends ItemTerra
 			return false;
 	}
 
-	public static int getMealPower(ItemStack is)
-	{
-		if (is.hasTagCompound())
-		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-
-			if(stackTagCompound.hasKey("effectpower"))
-			{
-				int power = stackTagCompound.getByte("effectpower");
-				if(!isWarm(is))
-					power /= 2;
-				return power;
-			} else
-				return -1;
-		}
-		return -1;
-	}
-
-	public static int getMealFilling(ItemStack is)
-	{
-		if (is.hasTagCompound())
-		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-
-			if(stackTagCompound.hasKey("filling"))
-			{
-				int filling = stackTagCompound.getByte("filling");
-				if(!isWarm(is))
-					filling /= 2;
-				return filling;
-			} else
-				return -1;
-		}
-		return -1;
-	}
-
-	/**
-	 * Energy is divided by 100 when it is sent to food stats to give a 0.0 - 1.0 float
-	 * */
-	public static int getMealEnergy(ItemStack is)
-	{
-		if (is.hasTagCompound())
-		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-
-			if(stackTagCompound.hasKey("energy"))
-			{
-				int energy = stackTagCompound.getByte("energy");
-				if(!isWarm(is))
-					energy /= 2;
-				return energy;
-			} else
-				return -1;
-		}
-		return -1;
-	}
-
-	public void addFoodEffect(ItemStack is, World world, EntityPlayer player)
-	{
-		if (!world.isRemote && this.foodEffect != null)
-		{
-			float Power = (getMealPower(is)/100f);
-
-			player.addPotionEffect(new PotionEffect(foodEffect.getPotionID(), (int)(foodEffect.getDuration()*Power), (int)(foodEffect.getAmplifier()*Power)));
-		}
-	}
 	@Override
 	public boolean getShareTag()
 	{
@@ -247,35 +130,10 @@ public class ItemMeal extends ItemTerra
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-		if(!world.isRemote)
-		{
-			int energy = getMealEnergy(is)/100;
-			int filling = getMealFilling(is);
 
-			if (foodstats.needFood() && filling+(filling / 3 * energy * 2.0F) <= 140)
-				player.setItemInUse(is, this.getMaxItemUseDuration(is));
-		}
-		else if(world.isRemote)
-		{
-
-			int energy = getMealEnergy(is)/100;
-			int filling = getMealFilling(is);
-
-			if (foodstats.needFood() && filling+(filling / 3 * energy * 2.0F) <= 140)
-				player.setItemInUse(is, this.getMaxItemUseDuration(is));
-		}
+		player.setItemInUse(is, this.getMaxItemUseDuration(is));
 
 		return is;
-	}
-
-	/**
-	 * sets a potion effect on the item. Args: int potionId, int duration (will be multiplied by 20), int amplifier,
-	 * float probability of effect happening
-	 */
-	public ItemMeal setPotionEffect(PotionEffect potioneffect)
-	{
-		foodEffect = potioneffect;
-		return this;
 	}
 
 	@Override
