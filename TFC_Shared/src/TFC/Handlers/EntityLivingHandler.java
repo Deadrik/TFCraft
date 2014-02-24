@@ -95,7 +95,7 @@ public class EntityLivingHandler
 					if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)
 					{
 						playerclient.guishowFoodRestoreAmount = true;
-						playerclient.guiFoodRestoreAmount = ItemMeal.getMealFilling(player.inventory.getCurrentItem());
+						playerclient.guiFoodRestoreAmount = ((ItemMeal)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
 					}
 					else if(player.inventory.getCurrentItem().getItem() instanceof ItemFoodTFC)
 					{

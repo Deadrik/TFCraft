@@ -77,6 +77,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		int f2 = -1;
 		int f3 = -1;
 
+		//First we want to test the foodgroups to see if they match
 		if(getStackInSlot(0) != null)
 			f0 = ((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodGroup().ordinal();
 		if(getStackInSlot(1) != null)
@@ -89,6 +90,23 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		if(f0 == -1 || f0==f1 || f0==f2 || f0==f3)
 			return false;
 		else if(f1 == -1 || f1==f3)
+			return false;
+		else if(f2 != -1 && f2==f3)
+			return false;
+
+		//Now we test the food types to make sure that they are different
+		if(getStackInSlot(0) != null)
+			f0 = ((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodID();
+		if(getStackInSlot(1) != null)
+			f1 = ((ItemFoodTFC)getStackInSlot(1).getItem()).getFoodID();
+		if(getStackInSlot(2) != null)
+			f2 = ((ItemFoodTFC)getStackInSlot(2).getItem()).getFoodID();
+		if(getStackInSlot(3) != null)
+			f3 = ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodID();
+
+		if(f0 == -1 || f0==f1 || f0==f2 || f0==f3)
+			return false;
+		else if(f1 == -1 || f1==f2 || f1==f3)
 			return false;
 		else if(f2 != -1 && f2==f3)
 			return false;

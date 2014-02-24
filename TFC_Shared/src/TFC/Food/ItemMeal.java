@@ -83,7 +83,7 @@ public class ItemMeal extends ItemTerra
 		if(!world.isRemote)
 		{
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-			//foodstats.addStats(filling, energy/100f);
+			foodstats.eatFood(is);
 			TFC_Core.setPlayerFoodStats(player, foodstats);
 			player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
 		}
@@ -99,10 +99,24 @@ public class ItemMeal extends ItemTerra
 			return false;
 	}
 
-	@Override
-	public boolean getShareTag()
+	public float getFoodWeight(ItemStack is)
 	{
-		return true;
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
+		{
+			NBTTagCompound nbt = is.getTagCompound();
+			return nbt.getFloat("foodWeight");
+		}
+		return 0f;
+	}
+
+	public float getFoodDecay(ItemStack is)
+	{
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodDecay"))
+		{
+			NBTTagCompound nbt = is.getTagCompound();
+			return nbt.getFloat("foodDecay");
+		}
+		return 0f;
 	}
 
 	/**
@@ -131,7 +145,9 @@ public class ItemMeal extends ItemTerra
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 
-		player.setItemInUse(is, this.getMaxItemUseDuration(is));
+		//The player needs to be able to fit the food into his stomach
+		if(foodstats.needFood())
+			player.setItemInUse(is, this.getMaxItemUseDuration(is));
 
 		return is;
 	}
