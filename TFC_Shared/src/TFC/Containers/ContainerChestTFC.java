@@ -3,6 +3,7 @@ package TFC.Containers;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.inventory.Slot;
@@ -11,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.Containers.Slots.SlotChest;
+import TFC.Core.Player.PlayerInventory;
 import TFC.TileEntities.TileEntityChestTFC;
 
 public class ContainerChestTFC extends ContainerTFC
@@ -82,18 +84,8 @@ public class ContainerChestTFC extends ContainerTFC
 			}
 		}
 
-		for (var4 = 0; var4 < 3; ++var4)
-		{
-			for (var5 = 0; var5 < 9; ++var5)
-			{
-				this.addSlotToContainer(new Slot(playerInv, var5 + var4 * 9 + 9, 8 + var5 * 18, 103 + var4 * 18 + var3));
-			}
-		}
 
-		for (var4 = 0; var4 < 9; ++var4)
-		{
-			this.addSlotToContainer(new Slot(playerInv, var4, 8 + var4 * 18, 161 + var3));
-		}
+		PlayerInventory.buildInventoryLayout(this, (InventoryPlayer) playerInv, 8, var3 + 109, false, true);
 	}
 
 	@Override

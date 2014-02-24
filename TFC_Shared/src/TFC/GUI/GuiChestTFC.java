@@ -9,8 +9,10 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.Reference;
 import TFC.Containers.ContainerChestTFC;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInventory;
 import TFC.TileEntities.TileEntityChestTFC;
 
 public class GuiChestTFC extends GuiContainer
@@ -74,11 +76,13 @@ public class GuiChestTFC extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
-		TFC_Core.bindTexture(new ResourceLocation("textures/gui/container/generic_54.png"));
+		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_chest.png"));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int var5 = (this.width - this.xSize) / 2;
 		int var6 = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.inventoryRows * 18 + 17);
 		this.drawTexturedModalRect(var5, var6 + this.inventoryRows * 18 + 17, 0, 126, this.xSize, 96);
+		
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize + 10);
 	}
 }

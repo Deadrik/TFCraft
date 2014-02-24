@@ -27,6 +27,7 @@ import TFC.API.Enums.RuleEnum;
 import TFC.Containers.ContainerAnvil;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Textures;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.SkillStats;
 import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityAnvil;
@@ -145,7 +146,9 @@ public class GuiAnvil extends GuiContainer
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 			drawRulesImages(w,h);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
-		}
+		}	
+
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize+12);
 
 	}
 

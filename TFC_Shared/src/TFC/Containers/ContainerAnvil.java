@@ -11,6 +11,7 @@ import TFC.Containers.Slots.SlotAnvilFlux;
 import TFC.Containers.Slots.SlotAnvilHammer;
 import TFC.Containers.Slots.SlotAnvilIn;
 import TFC.Containers.Slots.SlotAnvilWeldOut;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Items.Tools.ItemHammer;
 import TFC.TileEntities.TileEntityAnvil;
 
@@ -55,15 +56,8 @@ public class ContainerAnvil extends ContainerTFC
 		addSlotToContainer(new SlotAnvilPlan(anvil, 17, 167, 61));
 		addSlotToContainer(new SlotAnvilPlan(anvil, 18, 185, 61));*/
 
-		for(int i = 0; i < 3; i++)
-			for(int k = 0; k < 9; k++)
-			{
-				int m = k + i * 9 + 9;
-				addSlotToContainer(new Slot(inventoryplayer, m, 24 + k * 18, 116 + i * 18));
-			}
 
-		for(int j = 0; j < 9; j++)
-			addSlotToContainer(new Slot(inventoryplayer, j, 24 + j * 18, 174));
+		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 24, 122, false, true);
 
 	}
 
