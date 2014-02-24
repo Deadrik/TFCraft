@@ -13,6 +13,7 @@ import TFC.Reference;
 import TFC.API.TFCOptions;
 import TFC.Containers.ContainerCrucible;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TECrucible;
 
@@ -26,8 +27,8 @@ public class GuiCrucible extends GuiContainer
 	{
 		super(new ContainerCrucible(inventoryplayer,tileEntity, world, x, y, z) );
 		te = tileEntity;
-		this.xSize = 175;
-		this.ySize = 193;
+		this.xSize = 176;
+		this.ySize = 113+PlayerInventory.invYSize;
 	}
 
 	@Override
@@ -42,10 +43,13 @@ public class GuiCrucible extends GuiContainer
 		int scale = 0;
 
 		scale = te.getTemperatureScaled(49);
-		drawTexturedModalRect(w + 153, h + 82 - scale, 185, 0, 15, 6);
+		drawTexturedModalRect(w + 153, h + 80 - scale, 185, 0, 15, 6);
 
 		scale = te.getOutCountScaled(100);
 		drawTexturedModalRect(w + 129, h + 106 - scale, 177, 6, 8, scale);
+		
+
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 
 	}
 

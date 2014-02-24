@@ -16,6 +16,7 @@ import TFC.Containers.Slots.SlotMoldTool;
 import TFC.Containers.Slots.SlotMoldTool2;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemMeltedMetal;
 import TFC.Items.Pottery.ItemPotteryMold;
@@ -36,6 +37,9 @@ public class ContainerMold extends ContainerTFC {
 		this.posY = y;
 		this.posZ = z;
 		layoutContainer(playerinv, 0, 0);
+
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 55, false, true);
+		
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(playerinv.player);
 		containerInv.setInventorySlotContents(0, pi.specialCraftingType);
 	}
@@ -71,23 +75,11 @@ public class ContainerMold extends ContainerTFC {
 		return true;
 	}
 
-	protected void layoutContainer(IInventory playerInventory, int xSize, int ySize) {
+	protected void layoutContainer(IInventory playerInventory, int xSize, int ySize) 
+	{
 		this.addSlotToContainer(new SlotMoldTool(containerInv, 0, 41, 17));
 		this.addSlotToContainer(new SlotMoldTool2(containerInv, 1, 62, 17));
 		this.addSlotToContainer(new SlotBlocked(craftResult, 0, 116, 17));
-
-		int row;
-		int col;
-
-		for (row = 0; row < 9; ++row) {
-			this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 107));
-		}
-
-		for (row = 0; row < 3; ++row) {
-			for (col = 0; col < 9; ++col) {
-				this.addSlotToContainer(new Slot(playerInventory, col + row * 9+9, 8 + col * 18, 49 + row * 18));
-			}
-		}
 	}
 
 

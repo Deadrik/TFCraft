@@ -7,6 +7,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.Containers.Slots.SlotLogPile;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Items.ItemLogs;
 import TFC.TileEntities.TileEntityLogPile;
 
@@ -30,6 +31,8 @@ public class ContainerLogPile extends ContainerTFC
 		pile.openChest();
 
 		layoutContainer(playerinv, pile, 0, 0);
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
+		
 	}
 
 	/**
@@ -111,23 +114,8 @@ public class ContainerLogPile extends ContainerTFC
 		this.addSlotToContainer(new SlotLogPile(getPlayer(),chestInventory, 1, 89, 25));
 		this.addSlotToContainer(new SlotLogPile(getPlayer(),chestInventory, 2, 71, 43));
 		this.addSlotToContainer(new SlotLogPile(getPlayer(),chestInventory, 3, 89, 43));
-
-		int row;
-		int col;
-
-		for (row = 0; row < 3; ++row)
-		{
-			for (col = 0; col < 9; ++col)
-			{
-				this.addSlotToContainer(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 84 + row * 18));
-			}
-		}
-
-		for (row = 0; row < 9; ++row)
-		{
-			this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 142));
-		}
 	}
+	
 	public EntityPlayer getPlayer() {
 		return player;
 	}

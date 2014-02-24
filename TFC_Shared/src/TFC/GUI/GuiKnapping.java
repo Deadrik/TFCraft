@@ -20,6 +20,7 @@ import TFC.Reference;
 import TFC.TerraFirmaCraft;
 import TFC.Containers.ContainerSpecialCrafting;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Handlers.PacketHandler;
 
@@ -31,6 +32,8 @@ public class GuiKnapping extends GuiContainer
 	{
 		super(new ContainerSpecialCrafting(inventoryplayer, is, world, x, y, z));
 		player = inventoryplayer.player;
+		this.xSize = 176;
+		this.ySize = 103+PlayerInventory.invYSize;
 	}
 
 	@Override
@@ -52,7 +55,7 @@ public class GuiKnapping extends GuiContainer
 		{
 			for (int x = 0; x < 5; x++)
 			{
-				buttonList.add(new GuiKnappingButton(x+(y*5), guiLeft+(x*16)+5, guiTop + (y*16)-5, 16, 16));
+				buttonList.add(new GuiKnappingButton(x+(y*5), guiLeft+(x*16)+10, guiTop + (y*16)+12, 16, 16));
 				if(PlayerManagerTFC.getInstance().getClientPlayer().knappingInterface[(y*5)+x]) {
 					resetButton((y*5)+x);
 				}
@@ -100,8 +103,10 @@ public class GuiKnapping extends GuiContainer
 	{
 		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_knapping.png"));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
-		int w = (width - 176) / 2;
-		int h = (height - 184) / 2;
-		drawTexturedModalRect(w, h, 0, 0, 175, 183);
+		int w = (width - xSize) / 2;
+		int h = (height - ySize) / 2;
+		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
+
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 	}
 }

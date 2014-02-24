@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.Containers.ContainerLiquidVessel;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Util.StringUtil;
 
 public class GuiVesselLiquid extends GuiContainer
@@ -25,6 +26,8 @@ public class GuiVesselLiquid extends GuiContainer
 		super(new ContainerLiquidVessel(inventoryplayer, world, i, j, k));
 		player = inventoryplayer.player;
 		bagsSlotNum = player.inventory.currentItem;
+		xSize = 176;
+		ySize = 85+PlayerInventory.invYSize;
 	}
 
 	@Override
@@ -46,6 +49,9 @@ public class GuiVesselLiquid extends GuiContainer
 		int l = (width - xSize) / 2;
 		int i1 = (height - ySize) / 2;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
+
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
+		
 		NBTTagCompound tags = player.inventory.mainInventory[this.bagsSlotNum].getTagCompound();
 		if((tags != null) && tags.hasKey("MetalType"))
 		{

@@ -7,6 +7,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.Containers.Slots.SlotSluice;
+import TFC.Core.Player.PlayerInventory;
 import TFC.TileEntities.TileEntitySluice;
 
 public class ContainerSluice extends ContainerTFC
@@ -28,19 +29,8 @@ public class ContainerSluice extends ContainerTFC
 		addSlotToContainer(new SlotSluice(inventoryplayer.player, tileentitysluice, 6, 116, 52));
 		addSlotToContainer(new SlotSluice(inventoryplayer.player, tileentitysluice, 7, 134, 52));
 		addSlotToContainer(new SlotSluice(inventoryplayer.player, tileentitysluice, 8, 152, 52));
-		for(int i = 0; i < 3; i++)
-		{
-			for(int k = 0; k < 9; k++)
-			{
-				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
-			}
 
-		}
-
-		for(int j = 0; j < 9; j++)
-		{
-			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
-		}
+		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 90, false, true);
 
 	}
 	@Override

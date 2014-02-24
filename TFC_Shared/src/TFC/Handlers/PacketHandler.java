@@ -98,12 +98,12 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 				dos.writeFloat(foodstats.foodLevel);
 				dos.writeFloat(foodstats.waterLevel);	
-				dos.writeFloat(foodstats.nutrFruit);
+/*				dos.writeFloat(foodstats.nutrFruit);
 				dos.writeFloat(foodstats.nutrVeg);
 				dos.writeFloat(foodstats.nutrGrain);
 				dos.writeFloat(foodstats.nutrProtein);
 				dos.writeFloat(foodstats.nutrDairy);
-
+*/
 				dos.writeInt(TFCOptions.HealthGainRate);
 				dos.writeInt(TFCOptions.HealthGainCap);
 

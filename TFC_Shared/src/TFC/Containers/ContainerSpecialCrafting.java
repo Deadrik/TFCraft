@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.API.Crafting.CraftingManagerTFC;
 import TFC.Containers.Slots.SlotCraftingMetal;
+import TFC.Core.Player.PlayerInventory;
 
 public class ContainerSpecialCrafting extends ContainerTFC
 {
@@ -38,22 +39,10 @@ public class ContainerSpecialCrafting extends ContainerTFC
 		int var7;
 
 		EP = inventoryplayer.player;
-		SCM = new SlotCraftingMetal(this,inventoryplayer.player, craftMatrix, craftResult,0, 128, 35);
+		SCM = new SlotCraftingMetal(this,inventoryplayer.player, craftMatrix, craftResult,0, 128, 44);
 		addSlotToContainer(SCM);
 
-		for(int j = 0; j < 9; j++)
-		{
-			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 151));
-		}
-
-		for(int i = 0; i < 3; i++)
-		{
-			for(int k = 0; k < 9; k++)
-			{
-				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 93 + i * 18));
-			}
-
-		}
+		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 108, false, true);
 
 		this.onCraftMatrixChanged(this.craftMatrix);
 	}

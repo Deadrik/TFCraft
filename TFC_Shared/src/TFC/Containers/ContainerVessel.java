@@ -144,9 +144,9 @@ public class ContainerVessel extends ContainerTFC {
 		for (row = 0; row < 9; ++row) 
 		{
 			if(row == bagsSlotNum) {
-				this.addSlotToContainer(new SlotForShowOnly(playerInventory, row, 8 + row * 18, 142));
+				this.addSlotToContainer(new SlotForShowOnly(playerInventory, row, 8 + row * 18, 148));
 			} else {
-				this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 142));
+				this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 148));
 			}
 		}
 
@@ -154,7 +154,7 @@ public class ContainerVessel extends ContainerTFC {
 		{
 			for (col = 0; col < 9; ++col) 
 			{
-				this.addSlotToContainer(new Slot(playerInventory, col + row * 9+9, 8 + col * 18, 84 + row * 18));
+				this.addSlotToContainer(new Slot(playerInventory, col + row * 9+9, 8 + col * 18, 90 + row * 18));
 			}
 		}
 	}
@@ -199,6 +199,7 @@ public class ContainerVessel extends ContainerTFC {
 			}
 			clickedSlot.onPickupFromSlot(player, clickedStack);
 		}
+		detectAndSendChanges();
 		return returnedStack;
 	}
 }

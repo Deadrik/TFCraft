@@ -11,6 +11,7 @@ import TFC.TFCItems;
 import TFC.Containers.Slots.SlotBlocked;
 import TFC.Containers.Slots.SlotQuern;
 import TFC.Containers.Slots.SlotQuernGrain;
+import TFC.Core.Player.PlayerInventory;
 import TFC.TileEntities.TileEntityQuern;
 
 public class ContainerQuern extends ContainerTFC {
@@ -30,6 +31,8 @@ public class ContainerQuern extends ContainerTFC {
 		this.posZ = z;
 		pile.openChest();
 		layoutContainer(playerinv, pile, 0, 0);
+		
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
 	}
 
 	/**
@@ -50,23 +53,11 @@ public class ContainerQuern extends ContainerTFC {
 		return true;
 	}
 
-	protected void layoutContainer(IInventory playerInventory, IInventory chestInventory, int xSize, int ySize) {
+	protected void layoutContainer(IInventory playerInventory, IInventory chestInventory, int xSize, int ySize)
+	{
 		this.addSlotToContainer(new SlotQuernGrain(chestInventory, 0, 66, 47));
 		this.addSlotToContainer(new SlotBlocked(chestInventory, 1, 93, 47));
 		this.addSlotToContainer(new SlotQuern(chestInventory, 2, 93, 20));
-
-		int row;
-		int col;
-
-		for (row = 0; row < 9; ++row) {
-			this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 142));
-		}
-
-		for (row = 0; row < 3; ++row) {
-			for (col = 0; col < 9; ++col) {
-				this.addSlotToContainer(new Slot(playerInventory, col + row * 9+9, 8 + col * 18, 84 + row * 18));
-			}
-		}
 	}
 
 	public EntityPlayer getPlayer() {

@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import TFC.API.HeatRegistry;
 import TFC.Containers.Slots.SlotForge;
 import TFC.Containers.Slots.SlotForgeFuel;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Items.ItemOre;
 import TFC.TileEntities.TileEntityForge;
 
@@ -48,19 +49,7 @@ public class ContainerForge extends ContainerTFC
 		addSlotToContainer(new Slot(tileentityforge, 12, 152, 44));
 		addSlotToContainer(new Slot(tileentityforge, 13, 152, 62));
 
-		for(int i = 0; i < 3; i++)
-		{
-			for(int k = 0; k < 9; k++)
-			{
-				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
-			}
-
-		}
-
-		for(int j = 0; j < 9; j++)
-		{
-			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
-		}
+		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 90, false, true);
 
 	}
 	@Override

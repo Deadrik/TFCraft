@@ -13,6 +13,7 @@ import TFC.Reference;
 import TFC.Containers.ContainerMold;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
 
 public class GuiMold extends GuiContainer
@@ -21,8 +22,8 @@ public class GuiMold extends GuiContainer
 	public GuiMold(InventoryPlayer inventoryplayer, World world, int i, int j, int k)
 	{
 		super(new ContainerMold(inventoryplayer, world, i, j, k));
-		this.xSize = 175;
-		this.ySize = 130;
+		this.xSize = 176;
+		this.ySize = 50+PlayerInventory.invYSize;
 		player = inventoryplayer.player;
 	}
 
@@ -42,6 +43,8 @@ public class GuiMold extends GuiContainer
 		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
 
 		drawTexturedModalRect(w+85, h+17, 176, 0, drawArrowScaled(22)+1, 15);
+
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 	}
 
 	private int drawArrowScaled(int scale)

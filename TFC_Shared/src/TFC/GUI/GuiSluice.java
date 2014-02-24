@@ -1,6 +1,5 @@
 package TFC.GUI;
 
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -11,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.Containers.ContainerSluice;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntitySluice;
 
@@ -24,6 +24,8 @@ public class GuiSluice extends GuiContainer
 	{
 		super(new ContainerSluice(inventoryplayer,tileEntitySluice, world, x, y, z) );
 		sluiceInventory = tileEntitySluice;
+		xSize = 176;
+		ySize = 85+PlayerInventory.invYSize;
 
 	}
 
@@ -38,26 +40,19 @@ public class GuiSluice extends GuiContainer
 		if(sluiceInventory.waterInput && sluiceInventory.waterOutput)
 		{
 			int l = 12;//sluiceInventory.getProcessScaled(12); 
-			drawTexturedModalRect(s + 62, (t + 36 + 12) - l, 176, 12 - l, 14, l + 2);
+			drawTexturedModalRect(s + 80, (t + 36 + 12 - 19) - l, 176, 12 - l, 14, l + 2);
 		}
 		int i1 = sluiceInventory.getProcessScaled(24);
-		drawTexturedModalRect(s + 79, t + 34, 176, 14, i1+1, 16);
+		drawTexturedModalRect(s + 76, t + 34, 176, 14, i1+1, 16);
+		
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		this.drawCenteredString(fontRenderer, StringUtil.localize("gui.Sluice"), 89, 6, 0x404040);
-		fontRenderer.drawString(StringUtil.localize("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
-		fontRenderer.drawString(StringUtil.localize("gui.Sluice.Soil") + ": " + sluiceInventory.soilAmount + "/50", 8, 20, 0x404040);
+		fontRenderer.drawString(StringUtil.localize("gui.Sluice.Soil") + ": " + sluiceInventory.soilAmount + "/50", 15, 39, 0x404040);
 	}
-
-	@Override
-	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
-	{
-		fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
-	}
-
 
 }

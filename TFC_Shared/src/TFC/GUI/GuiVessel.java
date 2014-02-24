@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.Containers.ContainerVessel;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Util.StringUtil;
 
 public class GuiVessel extends GuiContainer
@@ -18,6 +19,8 @@ public class GuiVessel extends GuiContainer
 	public GuiVessel(InventoryPlayer inventoryplayer, World world, int i, int j, int k)
 	{
 		super(new ContainerVessel(inventoryplayer, world, i, j, k));
+		xSize = 176;
+		ySize = 85+PlayerInventory.invYSize;
 	}
 
 	@Override
@@ -41,6 +44,8 @@ public class GuiVessel extends GuiContainer
 		int l = (width - xSize) / 2;
 		int i1 = (height - ySize) / 2;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
+
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 	}
 
 	@Override

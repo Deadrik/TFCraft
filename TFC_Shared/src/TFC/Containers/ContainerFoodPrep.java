@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import TFC.Containers.Slots.SlotBlocked;
 import TFC.Containers.Slots.SlotFoodBowl;
 import TFC.Containers.Slots.SlotFoodOnly;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Food.ItemTerraFood;
 import TFC.TileEntities.TileEntityFoodPrep;
 
@@ -30,6 +31,8 @@ public class ContainerFoodPrep extends ContainerTFC {
 		this.posZ = z;
 		pile.openChest();
 		layoutContainer(playerinv, pile, 0, 0);
+		
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
 	}
 
 	/**
@@ -53,19 +56,6 @@ public class ContainerFoodPrep extends ContainerTFC {
 		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 107, 24));
 		this.addSlotToContainer(new SlotBlocked(chestInventory, 4, 80, 53));
 		this.addSlotToContainer(new SlotFoodBowl(chestInventory, 5, 53, 53));
-
-		int row;
-		int col;
-
-		for (row = 0; row < 9; ++row) {
-			this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 142));
-		}
-
-		for (row = 0; row < 3; ++row) {
-			for (col = 0; col < 9; ++col) {
-				this.addSlotToContainer(new Slot(playerInventory, col + row * 9+9, 8 + col * 18, 84 + row * 18));
-			}
-		}
 	}
 
 	public EntityPlayer getPlayer() {

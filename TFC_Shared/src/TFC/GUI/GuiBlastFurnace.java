@@ -12,6 +12,7 @@ import TFC.Reference;
 import TFC.API.TFCOptions;
 import TFC.Containers.ContainerBlastFurnace;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TEBlastFurnace;
 
@@ -25,6 +26,8 @@ public class GuiBlastFurnace extends GuiContainer
 	{
 		super(new ContainerBlastFurnace(inventoryplayer,tileentityforge, world, x, y, z) );
 		bloomery = tileentityforge;
+		xSize = 176;
+		ySize = 85+PlayerInventory.invYSize;
 	}
 
 	@Override
@@ -35,6 +38,8 @@ public class GuiBlastFurnace extends GuiContainer
 		int w = (width - xSize) / 2;
 		int h = (height - ySize) / 2;
 		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
+		
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 
 		int scale = 0;
 

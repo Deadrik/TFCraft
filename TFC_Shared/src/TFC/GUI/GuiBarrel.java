@@ -14,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.Containers.ContainerBarrel;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityBarrel;
 
@@ -29,6 +30,8 @@ public class GuiBarrel extends GuiContainer
 		player = inventoryplayer.player;
 		guiLeft = (width - 208) / 2;
 		guiTop = (height - 198) / 2;
+		xSize = 176;
+		ySize = 85+PlayerInventory.invYSize;
 
 		//controlList.clear();
 
@@ -124,6 +127,8 @@ public class GuiBarrel extends GuiContainer
 			scale = barrel.getLiquidScaled(49);
 			drawTexturedModalRect(w + 8, h + 65 - scale, 185, 31, 15, 6);
 		}
+		
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 	}
 
 	@Override

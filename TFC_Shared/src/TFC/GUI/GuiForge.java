@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.Containers.ContainerForge;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInventory;
 import TFC.TileEntities.TileEntityForge;
 
 
@@ -23,6 +24,8 @@ public class GuiForge extends GuiContainer
 	{
 		super(new ContainerForge(inventoryplayer,tileentityforge, world, x, y, z) );
 		ForgeEntity = tileentityforge;
+		xSize = 176;
+		ySize = 85+PlayerInventory.invYSize;
 
 	}
 
@@ -37,6 +40,8 @@ public class GuiForge extends GuiContainer
 
 		int i1 = ForgeEntity.getTemperatureScaled(49);
 		drawTexturedModalRect(w + 8, h + 65 - i1, 185, 31, 15, 6);
+		
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 	}
 
 	@Override

@@ -70,9 +70,9 @@ public class ContainerLiquidVessel extends ContainerTFC
 		for (row = 0; row < 9; ++row) 
 		{
 			if(row == bagsSlotNum) {
-				this.addSlotToContainer(new SlotForShowOnly(playerInventory, row, 8 + row * 18, 142));
+				this.addSlotToContainer(new SlotForShowOnly(playerInventory, row, 8 + row * 18, 148));
 			} else {
-				this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 142));
+				this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 148));
 			}
 		}
 
@@ -80,7 +80,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 		{
 			for (col = 0; col < 9; ++col) 
 			{
-				this.addSlotToContainer(new Slot(playerInventory, col + row * 9+9, 8 + col * 18, 84 + row * 18));
+				this.addSlotToContainer(new Slot(playerInventory, col + row * 9+9, 8 + col * 18, 90 + row * 18));
 			}
 		}
 	}
@@ -220,7 +220,8 @@ public class ContainerLiquidVessel extends ContainerTFC
 				}
 			} else if (clickedIndex > 0 && clickedIndex < inventorySlots.size() &&
 					((clickedStack.getItem().itemID == TFCItems.CeramicMold.itemID && clickedStack.getItemDamage() == 1) || 
-							(clickedStack.getItem() instanceof ItemMeltedMetal && clickedStack.getItemDamage() > 1)))
+							(clickedStack.getItem() instanceof ItemMeltedMetal && clickedStack.getItemDamage() > 1) ||
+							(clickedStack.getItem() instanceof ItemPotteryMold && clickedStack.getItemDamage() > 0)))
 			{
 				if(slot1.getHasStack())
 				{

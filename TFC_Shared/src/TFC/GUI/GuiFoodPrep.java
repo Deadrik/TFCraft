@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.Containers.ContainerFoodPrep;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityFoodPrep;
 
@@ -23,6 +24,8 @@ public class GuiFoodPrep extends GuiContainer
 	{
 		super(new ContainerFoodPrep(inventoryplayer, wb,world, i, j, k));
 		table = wb;
+		xSize = 176;
+		ySize = 85+PlayerInventory.invYSize;
 	}
 
 	@Override
@@ -46,6 +49,8 @@ public class GuiFoodPrep extends GuiContainer
 		int l = (width - xSize) / 2;
 		int i1 = (height - ySize) / 2;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
+		
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 	}
 
 	@Override
