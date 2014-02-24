@@ -19,6 +19,7 @@ import TFC.TerraFirmaCraft;
 import TFC.API.IFood;
 import TFC.API.IItemFoodBlock;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Food.ItemFoodTFC;
 import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -110,6 +111,19 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 			}
 		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createMealPacket());
+	}
+
+	public float getMealWeight()
+	{
+		float w = 0;
+		float[] weights = new float[]{10,4,4,2};
+		for(int i = 0; i < 4; i++)
+		{
+			ItemStack is = getStackInSlot(i);
+			if(is != null && ((ItemFoodTFC)is.getItem()).getFoodWeight(is) >= weights[i])
+				w += weights[i];
+		}
+		return w;
 	}
 
 	public Packet createMealPacket()
