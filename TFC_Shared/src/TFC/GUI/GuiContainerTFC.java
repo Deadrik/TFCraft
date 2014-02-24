@@ -17,12 +17,10 @@ import TFC.Core.Player.PlayerInventory;
 
 public class GuiContainerTFC extends GuiContainer
 {
-	protected int guiLeft = 0;
-	protected int guiTop = 0;
 	protected boolean drawInventory = true;
-	public GuiContainerTFC(Container par1Container, int xsize, int ysize)
+	public GuiContainerTFC(Container container, int xsize, int ysize)
 	{
-		super(par1Container);
+		super(container);
 		xSize = xsize;
 		ySize = ysize+PlayerInventory.invYSize;
 	}

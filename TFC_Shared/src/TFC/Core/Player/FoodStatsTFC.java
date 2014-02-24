@@ -36,8 +36,9 @@ public class FoodStatsTFC
 
 	public long soberTime = 0;
 
-	/** The player's food saturation. This is how full the player is from the food that they've eaten.*/
-	private float satisfaction = 5.0F;
+	/**This is how full the player is from the food that they've eaten. 
+	 * It could also be how happy they are with what they've eaten*/
+	private float satisfaction = 0.0F;
 
 	private float foodExhaustionLevel = 0;
 	private float waterExhaustionLevel = 0;
@@ -72,23 +73,6 @@ public class FoodStatsTFC
 
 			float temp = TFC_Climate.getHeightAdjustedTemp((int)player.posX, (int)player.posY, (int)player.posZ);
 
-			/*
-			 * Standard filling reduction based upon player exhaustion. This reduces filling faster than the standard time based reduction
-			 */
-			/*if (this.foodExhaustionLevel > 4.0F)
-			{
-				this.foodExhaustionLevel -= 4.0F;
-
-				if (this.satisfaction > 0.0F)
-					this.satisfaction = Math.max(this.satisfaction - 1.0F, 0.0F);
-				else if (!player.capabilities.isCreativeMode)
-					this.stomachLevel = Math.max(this.stomachLevel - 2, 0);
-			}*/
-			float satisf = 0;
-			if (this.satisfaction < 0.0F)
-				satisf = -satisfaction;
-
-
 			float tempWaterMod = temp;
 			if(tempWaterMod >= 30)
 				tempWaterMod = (tempWaterMod-30)*0.1f;
@@ -98,28 +82,36 @@ public class FoodStatsTFC
 			/*
 			 * Standard filling reduction based upon time.
 			 */
-			if(!player.capabilities.isCreativeMode)
-				if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength)
+			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength && !player.capabilities.isCreativeMode)
+			{
+				this.foodTimer += TFC_Time.hourLength;
+
+				//Water
+				if(player.isSprinting())
+					waterLevel -= 5+(tempWaterMod);
+				if(!player.capabilities.isCreativeMode)
+					waterLevel -= bodyTemp.getExtraWater();
+
+				//Food
+				float hunger = (1 + foodExhaustionLevel) + bodyTemp.getExtraFood();
+				if(this.satisfaction >= hunger)
 				{
-					this.stomachLevel -= bodyTemp.getExtraFood();
-					//Handle water related ticking
-					if(player.isSprinting()&& !player.capabilities.isCreativeMode)
-						waterLevel -= 5+(tempWaterMod);
-					if(!player.capabilities.isCreativeMode)waterLevel-=bodyTemp.getExtraWater();
-					this.foodTimer += TFC_Time.hourLength;
-					/*if (this.satisfaction > 0.0F)
-						this.satisfaction = Math.max(this.satisfaction - 1.0F, 0.0F);
-					else*/ 
-					if(!player.capabilities.isCreativeMode)
-					{
-						this.stomachLevel = Math.max(this.stomachLevel - (1 + foodExhaustionLevel), 0);
-						nutrFruit = Math.max(this.nutrFruit - (1 + foodExhaustionLevel)/5, 0);
-						nutrVeg = Math.max(this.nutrVeg - (1 + foodExhaustionLevel)/5, 0);
-						nutrGrain = Math.max(this.nutrGrain - (1 + foodExhaustionLevel)/5, 0);
-						nutrProtein = Math.max(this.nutrProtein - (1 + foodExhaustionLevel)/5, 0);
-						nutrDairy = Math.max(this.nutrDairy - (1 + foodExhaustionLevel)/5, 0);
-					}
+					satisfaction -= hunger; 
+					hunger = 0;
 				}
+				else
+				{
+					hunger -= satisfaction; 
+					satisfaction = 0;
+				}
+				this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
+				nutrFruit = Math.max(this.nutrFruit - (1 + foodExhaustionLevel)/5, 0);
+				nutrVeg = Math.max(this.nutrVeg - (1 + foodExhaustionLevel)/5, 0);
+				nutrGrain = Math.max(this.nutrGrain - (1 + foodExhaustionLevel)/5, 0);
+				nutrProtein = Math.max(this.nutrProtein - (1 + foodExhaustionLevel)/5, 0);
+				nutrDairy = Math.max(this.nutrDairy - (1 + foodExhaustionLevel)/5, 0);
+			}
+
 			//Heal or hurt the player based on hunger.
 			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.hourLength/2)
 			{
@@ -252,10 +244,7 @@ public class FoodStatsTFC
 		this.waterExhaustionLevel = par1;
 	}
 
-	/**
-	 * Get the player's food saturation level.
-	 */
-	public float getSaturationLevel()
+	public float getSatisfaction()
 	{
 		return this.satisfaction;
 	}
@@ -265,7 +254,7 @@ public class FoodStatsTFC
 		this.stomachLevel = par1;
 	}
 
-	public void setFoodSaturationLevel(float par1)
+	public void setSatisfaction(float par1)
 	{
 		this.satisfaction = par1;
 	}
