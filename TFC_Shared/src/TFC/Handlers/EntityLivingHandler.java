@@ -40,8 +40,15 @@ public class EntityLivingHandler
 		{
 			EntityPlayer player = (EntityPlayer)entity;
 			//Set Max Health
+			float newMaxHealth = getMaxHealth(player);
 			if(player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue() != getMaxHealth(player))
+			{
+				float h = player.getHealth();
+				float hPercent = (float) (h / player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
 				player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(getMaxHealth(player));
+				player.setHealth(newMaxHealth*hPercent);
+			}
+
 			if(!player.worldObj.isRemote)
 			{
 				//Handle Food
