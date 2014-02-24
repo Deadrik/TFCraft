@@ -226,7 +226,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	@Override
 	public EnumFoodGroup getFoodGroup() {
-		// TODO Auto-generated method stub
 		return foodgroup;
+	}
+
+	@Override
+	public int getFoodID() {
+		return foodID;
 	}
 }

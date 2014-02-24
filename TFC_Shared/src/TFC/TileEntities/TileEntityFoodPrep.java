@@ -16,9 +16,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.IFood;
 import TFC.API.IItemFoodBlock;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Food.ItemTerraFood;
 import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -35,8 +35,8 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 
 	public int getFoodIdFromItemStack(ItemStack is){
 		if(is != null)
-			if(is.getItem() instanceof ItemTerraFood)
-				return ((ItemTerraFood)is.getItem()).foodID;
+			if(is.getItem() instanceof IFood)
+				return ((IFood)is.getItem()).getFoodID();
 			else if(is.getItem() instanceof IItemFoodBlock)
 				return ((IItemFoodBlock)is.getItem()).getFoodId(is);
 		return 1;
@@ -44,8 +44,8 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 
 	public int getHealAmountFromItemStack(ItemStack is){
 		if(is != null)
-			if(is.getItem() instanceof ItemTerraFood)
-				return ((ItemTerraFood)is.getItem()).foodID;
+			if(is.getItem() instanceof IFood)
+				return ((IFood)is.getItem()).getFoodID();
 			else if(is.getItem() instanceof IItemFoodBlock)
 				return ((IItemFoodBlock)is.getItem()).getHealAmount(is);
 		return 1;

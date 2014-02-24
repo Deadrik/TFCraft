@@ -21,7 +21,6 @@ import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.ItemFoodTFC;
-import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemIngot;
 import TFC.Items.ItemMeltedMetal;
 import cpw.mods.fml.common.ICraftingHandler;
@@ -86,7 +85,7 @@ public class CraftingHandler implements ICraftingHandler
 				HandleItem(player, iinventory, Recipes.Axes);
 			}
 			else if(itemstack.itemID == Item.bowlEmpty.itemID || 
-					itemstack.getItem() instanceof ItemTerraFood || itemstack.itemID == TFCItems.ScrapedHide.itemID
+					/*itemstack.getItem() instanceof ItemTerraFood ||*/ itemstack.itemID == TFCItems.ScrapedHide.itemID
 					|| itemstack.itemID == TFCItems.Wool.itemID||itemstack.itemID == TFCItems.TerraLeather.itemID)
 			{
 				HandleItem(player, iinventory, Recipes.Knives);

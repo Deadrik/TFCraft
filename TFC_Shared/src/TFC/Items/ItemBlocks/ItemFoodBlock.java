@@ -5,19 +5,20 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.API.IFood;
 import TFC.API.IItemFoodBlock;
+import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.FoodStatsTFC;
-import TFC.Food.ItemTerraFood;
 
-public class ItemFoodBlock extends ItemTerraBlock implements IItemFoodBlock
+public class ItemFoodBlock extends ItemTerraBlock implements IItemFoodBlock, IFood
 {
+	int foodID;
 	public ItemFoodBlock(int i) 
 	{
 		super(i);
-		ItemTerraFood.FoodList[this.getBlockID()] = this.getBlockID();
 	}
 
 	@Override
@@ -97,5 +98,17 @@ public class ItemFoodBlock extends ItemTerraBlock implements IItemFoodBlock
 		else if(is.getItem().itemID==Block.melon.blockID)
 			return 35;
 		return 0;
+	}
+
+	@Override
+	public EnumFoodGroup getFoodGroup() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getFoodID() {
+		// TODO Auto-generated method stub
+		return foodID;
 	}
 }

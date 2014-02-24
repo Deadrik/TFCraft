@@ -20,8 +20,9 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Util.StringUtil;
+import TFC.Items.ItemTerra;
 
-public class ItemMeal extends ItemTerraFood
+public class ItemMeal extends ItemTerra
 {
 	PotionEffect foodEffect;
 
@@ -30,7 +31,7 @@ public class ItemMeal extends ItemTerraFood
 
 	public ItemMeal(int id, int icon) 
 	{
-		super(id, 0);
+		super(id);
 		this.hasSubtypes = true;
 		iconid = icon;
 	}
@@ -50,7 +51,7 @@ public class ItemMeal extends ItemTerraFood
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
-		ItemTerraFood.addFoodTempInformation(is, arraylist);
+		ItemFoodTFC.addHeatInformation(is, arraylist);
 
 		if (is.hasTagCompound())
 		{
@@ -274,16 +275,6 @@ public class ItemMeal extends ItemTerraFood
 	public ItemMeal setPotionEffect(PotionEffect potioneffect)
 	{
 		foodEffect = potioneffect;
-		return this;
-	}
-
-	/**
-	 * Set the field 'alwaysEdible' to true, and make the food edible even if the player don't need to eat.
-	 */
-	@Override
-	public ItemMeal setAlwaysEdible()
-	{
-		this.alwaysEdible = true;
 		return this;
 	}
 
