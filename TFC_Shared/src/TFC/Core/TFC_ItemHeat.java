@@ -3,7 +3,6 @@ package TFC.Core;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
@@ -322,13 +321,6 @@ public class TFC_ItemHeat
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, 32767), 13.0F, 210F, new ItemStack(Block.torchWood, 2)));
 
-	}
-	public static Boolean canRemoveTag(Object tag, String key, Class c)
-	{
-		if(tag.getClass() == c)
-			if (((NBTBase)c.cast(tag)).getName() == key)
-				return true;
-		return false;
 	}
 
 	public static String getHeatColor(float temp, float meltTemp)

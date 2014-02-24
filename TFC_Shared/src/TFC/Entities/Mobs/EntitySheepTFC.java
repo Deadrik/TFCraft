@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
@@ -122,6 +123,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.dataWatcher.addObject(27, new Float(1));
 		this.dataWatcher.addObject(28, new Float(1));
 		this.dataWatcher.addObject(29, new Float(1));
+		this.dataWatcher.addObject(30, new Byte((byte)0));
 	}
 
 	@Override
@@ -134,8 +136,11 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	protected void updateAITasks()
 	{
-		this.sheepTimer = this.aiEatGrass.getEatGrassTick();
-		super.updateAITasks();
+		if(!isCorpse)
+		{
+			this.sheepTimer = this.aiEatGrass.getEatGrassTick();
+			super.updateAITasks();
+		}
 	}
 
 	private float getPercentGrown(IAnimal animal)
@@ -200,17 +205,18 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
-		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isCorpse)
+		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isCorpse && !isDead)
 			this.heal(1);
 	}
 
 	@Override
 	public void setDead()
 	{
-		if(!isCorpse)
+		//Uncommenting this will re-enable corpses which dont really work right now but would be preferable for a butchery skill
+		/*if(!isCorpse)
 			isCorpse = true;
-		else
-			isDead = true;
+		else*/
+		isDead = true;
 	}
 
 	public void syncData()
@@ -271,7 +277,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 
 		while(foodWeight > 0)
 		{
-			float fw = Math.min(80, foodWeight);
+			float fw = Helper.roundNumber(Math.min(80, foodWeight), 10);
 			foodWeight -= fw;
 			if (this.isBurning())
 				this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(TFCItems.muttonCooked, 1), fw), 0);
