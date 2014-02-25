@@ -104,6 +104,8 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 					is.setTagCompound(nbt);
 
 					this.setInventorySlotContents(4, is);
+
+					consumeFoodWeight();
 				}
 		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createMealPacket());
@@ -187,6 +189,22 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 			ItemStack is = getStackInSlot(i);
 			if(is != null && ((ItemFoodTFC)is.getItem()).getFoodWeight(is) >= weights[i])
 				w += weights[i];
+		}
+		return w;
+	}
+
+	public float consumeFoodWeight()
+	{
+		float w = 0;
+		for(int i = 0; i < 4; i++)
+		{
+			ItemStack is = getStackInSlot(i);
+			if(is != null)
+			{
+				is.getTagCompound().setFloat("foodWeight", ((ItemFoodTFC)is.getItem()).getFoodWeight(is) - weights[i]);
+				if(((ItemFoodTFC)is.getItem()).getFoodWeight(is) <= 0)
+					is.stackSize = 0;
+			}
 		}
 		return w;
 	}
