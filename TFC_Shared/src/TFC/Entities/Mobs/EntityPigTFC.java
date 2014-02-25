@@ -27,9 +27,11 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
+import TFC.Food.ItemFoodTFC;
 
 public class EntityPigTFC extends EntityPig implements IAnimal
 {
@@ -130,7 +132,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		this.dataWatcher.addObject(13, Integer.valueOf(0));
 		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
 		this.dataWatcher.addObject(15, Integer.valueOf(0));
-		
+
 		this.dataWatcher.addObject(24, new Float(1));
 		this.dataWatcher.addObject(25, new Float(1));
 		this.dataWatcher.addObject(26, new Float(1));
@@ -201,7 +203,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			if(!this.worldObj.isRemote){
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
-				
+
 				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
 				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
 				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
@@ -212,7 +214,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
-				
+
 				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
 				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
 				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
@@ -230,14 +232,14 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
-		
+
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
 		nbt.setFloat ("Obedience Modifier", obedience_mod);
 		nbt.setFloat ("Colour Modifier", colour_mod);
 		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
 		nbt.setFloat ("Hardiness Modifier", hard_mod);
-		
+
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setBoolean("Pregnant", pregnant);
 		nbt.setFloat("MateSize", mateSizeMod);
@@ -253,14 +255,14 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
-		
+
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
 		colour_mod = nbt.getFloat ("Colour Modifier");
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
-		
+
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
@@ -312,27 +314,21 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		int var4;
 		float ageMod = TFC_Core.getPercentGrown(this);
 
-		for (var4 = 0; var4 < var3; ++var4)
-		{
-			if(ageMod > 0.9){
-				this.dropItem(TFCItems.Hide.itemID,1);
-				this.dropItem(Item.bone.itemID, rand.nextInt(4)+2);
-			}
+		if(ageMod > 0.9){
+			this.dropItem(TFCItems.Hide.itemID,1);
+			this.dropItem(Item.bone.itemID, rand.nextInt(4)+2);
 		}
 
-		var3 = 1;
+		float foodWeight = ageMod*(this.size_mod * 2400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
-		for (var4 = 0; var4 < var3; ++var4)
+		while(foodWeight > 0)
 		{
+			float fw = Helper.roundNumber(Math.min(80, foodWeight), 10);
+			foodWeight -= fw;
 			if (this.isBurning())
-			{
-
-				this.dropItem(Item.porkCooked.itemID, (int) (ageMod*this.size_mod *(10+this.rand.nextInt(8))));
-			}
+				this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(Item.porkCooked, 1), fw), 0);
 			else
-			{
-				this.dropItem(Item.porkRaw.itemID, (int) (ageMod*this.size_mod *(10+this.rand.nextInt(8))));
-			}
+				this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(Item.porkRaw, 1), fw), 0);
 		}
 	}
 
@@ -504,7 +500,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		otherAnimal.setInLove(false);
 		mateSizeMod = otherAnimal.getSize();
 	}
-	
+
 	@Override
 	public void eatGrassBonus()
 	{
@@ -596,7 +592,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public void setAttackedVec(Vec3 attackedVec) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -608,6 +604,6 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public void setFearSource(Entity fearSource) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

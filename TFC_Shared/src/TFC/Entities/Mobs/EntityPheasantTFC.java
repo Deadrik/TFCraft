@@ -7,11 +7,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIEatGrass;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -22,10 +18,11 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Sounds;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIFindNest;
+import TFC.Food.ItemFoodTFC;
 
 public class EntityPheasantTFC extends EntityChicken implements IAnimal
 {
@@ -121,7 +118,7 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 		this.dataWatcher.addObject(13, Integer.valueOf(0));
 		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
 		this.dataWatcher.addObject(15, Integer.valueOf(0));
-		
+
 		this.dataWatcher.addObject(24, new Float(1));
 		this.dataWatcher.addObject(25, new Float(1));
 		this.dataWatcher.addObject(26, new Float(1));
@@ -207,7 +204,7 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 			if(!this.worldObj.isRemote){
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
-				
+
 				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
 				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
 				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
@@ -218,7 +215,7 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
-				
+
 				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
 				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
 				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
@@ -239,14 +236,14 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
-		
+
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
 		nbt.setFloat ("Obedience Modifier", obedience_mod);
 		nbt.setFloat ("Colour Modifier", colour_mod);
 		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
 		nbt.setFloat ("Hardiness Modifier", hard_mod);
-		
+
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setFloat("MateSize", mateSizeMod);
 		nbt.setInteger("Age", getBirthDay());
@@ -263,14 +260,14 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
-		
+
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
 		colour_mod = nbt.getFloat ("Colour Modifier");
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
-		
+
 		hunger = nbt.getInteger ("Hunger");
 		mateSizeMod = nbt.getFloat("MateSize");
 		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
@@ -306,13 +303,16 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 
 		if(isAdult())
 		{
-			if (this.isBurning())
+			float foodWeight = ageMod*(this.size_mod * 40);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+
+			while(foodWeight > 0)
 			{
-				this.dropItem(Item.chickenCooked.itemID, 1);
-			}
-			else
-			{
-				this.dropItem(Item.chickenRaw.itemID, 1);
+				float fw = Helper.roundNumber(Math.min(80, foodWeight), 10);
+				foodWeight -= fw;
+				if (this.isBurning())
+					this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(Item.chickenCooked, 1), fw), 0);
+				else
+					this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(Item.chickenRaw, 1), fw), 0);
 			}
 			this.dropItem(Item.bone.itemID, rand.nextInt(2)+1);
 		}
@@ -458,8 +458,8 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 			if(!par1EntityPlayer.isSneaking()){par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");}
 			//if(getGender()==GenderEnum.FEMALE && pregnant){
 			//	par1EntityPlayer.addChatMessage("Pregnant");
-			}
-			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		}
+		//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		if(!worldObj.isRemote && isAdult()&& par1EntityPlayer.isSneaking() && attackEntityFrom(DamageSource.generic, 25) ) {
 			par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Item.feather, 1));
 
@@ -517,7 +517,7 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 	@Override
 	public void setAttackedVec(Vec3 attackedVec) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -529,6 +529,6 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 	@Override
 	public void setFearSource(Entity fearSource) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
