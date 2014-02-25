@@ -284,7 +284,7 @@ public class FoodStatsTFC
 		}
 		else if(is.getItem() instanceof ItemMeal)
 		{
-			ItemFoodTFC item = (ItemFoodTFC) is.getItem();
+			ItemMeal item = (ItemMeal) is.getItem();
 			float weight = item.getFoodWeight(is);
 			float decay = item.getFoodDecay(is);
 			float eatAmount = Math.min(weight - decay, 5f);
@@ -299,6 +299,7 @@ public class FoodStatsTFC
 					addNutrition(EnumFoodGroup.values()[fg[i]], eatAmount*weights[i]);
 			//fill the stomach
 			this.stomachLevel += eatAmount;
+			this.satisfaction += eatAmount * item.getSatisfaction(is);
 			//Now remove the eaten amount from the itemstack.
 			if(reduceFood(is, eatAmount))
 				is.stackSize = 0;

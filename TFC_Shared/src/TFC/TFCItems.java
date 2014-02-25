@@ -1675,7 +1675,7 @@ public class TFCItems
 		Carrot = new ItemRawFood(TFCItemID.Carrot, 30, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Carrot");
 		Sugarcane = new ItemTerra(TFCItemID.Sugarcane).setFolder("plants/").setUnlocalizedName("Sugarcane");
 		Hemp = new ItemTerra(TFCItemID.Hemp).setFolder("plants/").setUnlocalizedName("Hemp");
-		Soybean = new ItemRawFood(TFCItemID.Soybean, 31, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Soybeans");
+		Soybean = new ItemRawFood(TFCItemID.Soybean, 31, EnumFoodGroup.Protein, true).setUnlocalizedName("Soybeans");
 		Greenbeans = new ItemRawFood(TFCItemID.Greenbeans, 32, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Greenbeans");
 		GreenBellPepper = new ItemRawFood(TFCItemID.GreenBellPepper, 34, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Green Bell Pepper");
 		YellowBellPepper = new ItemRawFood(TFCItemID.YellowBellPepper, 35, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Yellow Bell Pepper");

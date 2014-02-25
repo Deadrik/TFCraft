@@ -1,5 +1,6 @@
 package TFC.GUI;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -65,6 +66,6 @@ public class GuiFoodPrep extends GuiContainerTFC
 	protected void actionPerformed(GuiButton guibutton)
 	{
 		if (guibutton.id == 0)
-			table.actionCreate();
+			table.actionCreate(Minecraft.getMinecraft().thePlayer);
 	}
 }

@@ -35,6 +35,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	private EnumFoodGroup foodgroup;
 
+	public float decayRate = 1.0f;
+
 	public ItemFoodTFC(int id, int foodid, EnumFoodGroup fg)
 	{
 		super(id);
@@ -43,6 +45,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		foodID = foodid;
 		foodgroup = fg;
 		TFCItems.FoodList.add(this);
+	}
+	public ItemFoodTFC setDecayRate(float f)
+	{
+		this.decayRate = f;
+		return this;
 	}
 
 	public static void addHeatInformation(ItemStack is, List arraylist)
@@ -97,6 +104,22 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			return (EnumChatFormatting.DARK_RED + StringUtil.localize("gui.food.protein"));
 		else if(fg == EnumFoodGroup.Grain)
 			return (EnumChatFormatting.YELLOW + StringUtil.localize("gui.food.grain"));
+		else
+			return "N/A";
+	}
+
+	public static String getFoodGroupColor(EnumFoodGroup fg)
+	{
+		if(fg == EnumFoodGroup.Dairy)
+			return EnumChatFormatting.WHITE.toString();
+		else if(fg == EnumFoodGroup.Fruit)
+			return EnumChatFormatting.DARK_PURPLE.toString();
+		else if(fg == EnumFoodGroup.Vegetable)
+			return EnumChatFormatting.DARK_GREEN.toString();
+		else if(fg == EnumFoodGroup.Protein)
+			return EnumChatFormatting.DARK_RED.toString();
+		else if(fg == EnumFoodGroup.Grain)
+			return EnumChatFormatting.YELLOW.toString();
 		else
 			return "N/A";
 	}

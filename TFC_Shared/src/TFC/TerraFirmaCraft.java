@@ -50,6 +50,7 @@ import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.EntitySpawnHandler;
 import TFC.Handlers.PacketHandler;
 import TFC.Handlers.PickupHandler;
+import TFC.Handlers.PlayerSkillEventHandler;
 import TFC.Handlers.PlayerTossEventHandler;
 import TFC.Handlers.ServerTickHandler;
 import TFC.Handlers.Client.ClientTickHandler;
@@ -175,6 +176,8 @@ public class TerraFirmaCraft
 		SkillsManager.instance.registerSkill(Global.SKILL_TOOLSMITH);
 		SkillsManager.instance.registerSkill(Global.SKILL_ARMORSMITH);
 		SkillsManager.instance.registerSkill(Global.SKILL_WEAPONSMITH);
+		SkillsManager.instance.registerSkill(Global.SKILL_AGRICULTURE);
+		SkillsManager.instance.registerSkill(Global.SKILL_COOKING);
 	}
 
 	@EventHandler
@@ -229,6 +232,8 @@ public class TerraFirmaCraft
 
 		// Register Anvil Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
+
+		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
 
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());

@@ -10,8 +10,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.network.packet.Packet;
+import net.minecraftforge.common.MinecraftForge;
 import TFC.TerraFirmaCraft;
 import TFC.API.SkillsManager;
+import TFC.API.Events.GetSkillMultiplierEvent;
 import TFC.Handlers.PacketHandler;
 
 public class SkillStats 
@@ -72,7 +74,10 @@ public class SkillStats
 	public float getSkillMultiplier(String skillName)
 	{
 		int skill = getSkill(skillName);
-		return getSkillMult(skill);
+		float mult = getSkillMult(skill);
+		GetSkillMultiplierEvent event = new GetSkillMultiplierEvent(player, skillName, mult);
+		MinecraftForge.EVENT_BUS.post(event);
+		return event.skillResult;
 	}
 
 	public static float getSkillMult(int skill)

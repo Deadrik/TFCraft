@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -18,7 +19,9 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.IFood;
 import TFC.API.IItemFoodBlock;
+import TFC.API.Constant.Global;
 import TFC.API.Util.Helper;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Food.ItemFoodTFC;
 import TFC.Handlers.PacketHandler;
@@ -53,7 +56,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		return 1;
 	}
 
-	public void actionCreate()
+	public void actionCreate(EntityPlayer player)
 	{
 		if(!worldObj.isRemote)
 		{
@@ -63,15 +66,44 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 					NBTTagCompound nbt = new NBTTagCompound();
 					ItemStack is = new ItemStack(TFCItems.MealGeneric, 1);
 					Random R = new Random(getFoodSeed());
+
+					int count = -2;
+					if(getStackInSlot(0) != null) 
+					{
+						count++;
+						nbt.setString("FG0", getStackInSlot(0).getItem().getUnlocalizedName(getStackInSlot(0)));
+					}
+					if(getStackInSlot(1) != null) 
+					{
+						count++;
+						nbt.setString("FG1", getStackInSlot(1).getItem().getUnlocalizedName(getStackInSlot(1)));
+					}
+					if(getStackInSlot(2) != null) 
+					{
+						count++;
+						nbt.setString("FG2", getStackInSlot(2).getItem().getUnlocalizedName(getStackInSlot(2)));
+					}
+					if(getStackInSlot(3) != null) 
+					{
+						count++;
+						nbt.setString("FG3", getStackInSlot(3).getItem().getUnlocalizedName(getStackInSlot(3)));
+					}
+
+					float mult = 0.15f + 0.1f * count;
+
 					//set the icon for this meal
 					is.setItemDamage(R.nextInt(11));
-
+					if(R.nextFloat() < mult)
+					{
+						float s = R.nextFloat()*0.5f+(TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_COOKING)*0.5f);
+						nbt.setFloat("satisfaction", s);
+					}
 					nbt.setFloat("foodWeight", Helper.roundNumber(getMealWeight(), 10));
 					nbt.setFloat("foodDecay", 0);
 
 					is.setTagCompound(nbt);
 
-					this.setInventorySlotContents(5, is);
+					this.setInventorySlotContents(4, is);
 				}
 		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createMealPacket());
@@ -128,10 +160,12 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		if(getStackInSlot(3) != null && ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodWeight(getStackInSlot(3)) < 2)
 			return false;
 
+		if(storage[4] != null && storage[5].getItem().itemID != Item.bowlEmpty.itemID)
+			return false;
 		return true;
 	}
 
-	private int getFoodSeed()
+	private long getFoodSeed()
 	{
 		int seed = 0;
 
@@ -142,7 +176,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 				seed += ((ItemFoodTFC)is.getItem()).getFoodID();
 		}
 
-		return seed;
+		return seed + worldObj.getSeed();
 	}
 
 	public float getMealWeight()
@@ -167,6 +201,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 			dos.writeInt(xCoord);
 			dos.writeInt(yCoord);
 			dos.writeInt(zCoord);
+			dos.writeUTF(Minecraft.getMinecraft().thePlayer.username);
 		} catch (IOException e) {
 		}
 
@@ -216,7 +251,10 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	@Override
 	public void handleDataPacketServer(DataInputStream inStream) throws IOException 
 	{
-		actionCreate();
+		String user = inStream.readUTF();
+		EntityPlayer player = worldObj.getPlayerEntityByName(user);
+		TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_COOKING, 1);
+		actionCreate(player);
 	}
 
 	@Override

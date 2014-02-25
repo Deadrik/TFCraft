@@ -12,12 +12,12 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.FoodStatsTFC;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class ItemMeal extends ItemTerra
@@ -29,28 +29,39 @@ public class ItemMeal extends ItemTerra
 	{
 		super(id);
 		this.hasSubtypes = true;
+		this.MetaNames = new String[]{"Meal0","Meal1","Meal2","Meal3","Meal4","Meal5","Meal6","Meal7","Meal8","Meal9","Meal10",};
 		this.MetaIcons = new Icon[11];
 		this.setFolder("food/");
 	}
 
 	@Override
+	public String getUnlocalizedName(ItemStack itemstack)
+	{
+		return this.getUnlocalizedName();
+	}
+
+	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
-
 		ItemFoodTFC.addHeatInformation(is, arraylist);
 
 		if (is.hasTagCompound())
 		{
 			NBTTagCompound nbt = is.getTagCompound();
-			String fg = "";
+
 			if(nbt.hasKey("FG0"))
-				fg += ItemFoodTFC.getFoodGroupName(EnumFoodGroup.values()[nbt.getByte("FG0")]);
+				arraylist.add(EnumChatFormatting.WHITE+StringUtil.localize(nbt.getString("FG0")));
 			if(nbt.hasKey("FG1"))
-				fg += " / " + ItemFoodTFC.getFoodGroupName(EnumFoodGroup.values()[nbt.getByte("FG1")]);
+				arraylist.add(EnumChatFormatting.WHITE+StringUtil.localize(nbt.getString("FG1")));
 			if(nbt.hasKey("FG2"))
-				fg += " / " + ItemFoodTFC.getFoodGroupName(EnumFoodGroup.values()[nbt.getByte("FG2")]);
+				arraylist.add(EnumChatFormatting.WHITE+StringUtil.localize(nbt.getString("FG2")));
 			if(nbt.hasKey("FG3"))
-				fg += " / " + ItemFoodTFC.getFoodGroupName(EnumFoodGroup.values()[nbt.getByte("FG3")]);
+				arraylist.add(EnumChatFormatting.WHITE+StringUtil.localize(nbt.getString("FG3")));
+
+			if(nbt.hasKey("satisfaction"))
+			{
+				arraylist.add("Satisfaction Mult: " + 1+nbt.getFloat("satisfaction")+"x");
+			}
 
 			if(nbt.hasKey("foodWeight"))
 			{
@@ -119,6 +130,17 @@ public class ItemMeal extends ItemTerra
 		return 0f;
 	}
 
+	public float getSatisfaction(ItemStack is) 
+	{
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("satisfaction"))
+		{
+			NBTTagCompound nbt = is.getTagCompound();
+			return nbt.getFloat("satisfaction");
+		}
+		return 0f;
+	}
+
+
 	/**
 	 * How long it takes to use or consume an item
 	 */
@@ -162,5 +184,4 @@ public class ItemMeal extends ItemTerra
 	{
 		return EnumWeight.MEDIUM;
 	}
-
 }
