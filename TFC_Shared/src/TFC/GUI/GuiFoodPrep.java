@@ -17,7 +17,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 
 	public GuiFoodPrep(InventoryPlayer inventoryplayer, TileEntityFoodPrep wb, World world, int i, int j, int k)
 	{
-		super(new ContainerFoodPrep(inventoryplayer, wb,world, i, j, k), 97, 85);
+		super(new ContainerFoodPrep(inventoryplayer, wb,world, i, j, k), 103, 85);
 		table = wb;
 	}
 
@@ -57,7 +57,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 		super.initGui();
 		buttonList.clear();
 
-		buttonList.add(new GuiButton(0, guiLeft+52, guiTop + 59, 40, 20, StringUtil.localize("gui.FoodPrep.CreateMeal")));
+		buttonList.add(new GuiButton(0, guiLeft+56, guiTop + 59, 40, 20, StringUtil.localize("gui.FoodPrep.CreateMeal")));
 
 	}
 
