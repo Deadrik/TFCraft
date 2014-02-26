@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -805,5 +806,23 @@ public class TFC_Core
 		foodstats.addFoodExhaustion(exhaustion);
 		foodstats.addWaterExhaustion(exhaustion);
 		TFC_Core.setPlayerFoodStats(player, foodstats);
+	}
+
+	public static void handleTileEntityItemTicking(IInventory iinv, World world)
+	{
+		handleTileEntityItemTicking(iinv, world, null);
+	}
+	public static void handleTileEntityItemTicking(IInventory iinv, World world, Entity e)
+	{
+		for(int i = 0; i < iinv.getSizeInventory(); i++)
+		{
+			if(iinv.getStackInSlot(i) != null && iinv.getStackInSlot(i).stackSize <= 0)
+				iinv.setInventorySlotContents(i, null);
+
+			if(iinv.getStackInSlot(i) != null && iinv.getStackInSlot(i).hasTagCompound())
+			{
+				iinv.getStackInSlot(i).getItem().onUpdate(iinv.getStackInSlot(i), world, e, 0, false);
+			}
+		}
 	}
 }

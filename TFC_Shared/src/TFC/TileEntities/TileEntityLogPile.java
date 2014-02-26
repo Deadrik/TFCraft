@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Core;
 import TFC.Core.Vector3f;
 
 public class TileEntityLogPile extends TileEntity implements IInventory
@@ -234,7 +234,7 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage);
+		TFC_Core.handleTileEntityItemTicking(this, worldObj);
 
 		if(charcoalFirepit != null && !charcoalFirepit.isInactiveCharcoalFirepit())
 		{

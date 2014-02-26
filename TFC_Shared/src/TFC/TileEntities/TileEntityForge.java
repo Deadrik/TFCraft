@@ -14,6 +14,7 @@ import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.TFCBiome;
@@ -478,7 +479,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			FuelStack[7] = fireItemStacks[12];
 			FuelStack[8] = fireItemStacks[13];
 
-			TFC_ItemHeat.HandleContainerHeat(this.worldObj, FuelStack);
+			TFC_Core.handleTileEntityItemTicking(this, worldObj);
 
 			//Now we cook the input item
 			CookItemsNew(0);

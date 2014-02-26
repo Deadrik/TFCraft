@@ -17,7 +17,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 
 public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
@@ -207,11 +206,6 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 			itemstack.stackSize = getInventoryStackLimit();
 	}
 
-	@Override
-	public void updateEntity()
-	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage);
-	}
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{

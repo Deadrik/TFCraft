@@ -18,6 +18,7 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Time;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
@@ -29,6 +30,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	 * temperature:
 	 * foodWeight:
 	 * foodDecay
+	 * foodDecayTimer
 	 */
 
 	public int foodID;
@@ -127,12 +129,28 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
 	{
+		super.onUpdate(is, world, entity, i, isSelected);
 		if (!world.isRemote && is.hasTagCompound())
 		{
 			NBTTagCompound nbt = is.getTagCompound();
+			float decay = nbt.getFloat("foodDecay");
 
-			if(nbt.hasKey("temperature"))
-				TFC_ItemHeat.HandleItemHeat(is);
+
+			//if the tick timer is up then we cause decay.
+			if(nbt.getInteger("decayTimer") + 23 < TFC_Time.getTotalHours())
+			{
+				if(decay < 0)
+					decay++;
+				else if(decay == 0)
+				{
+					decay = nbt.getFloat("foodWeight") * 0.005f;
+					nbt.setFloat("foodDecay", decay);
+				}
+				else
+				{
+					decay = ((decay*1.5f)/24)*decayRate;
+				}
+			}
 
 			if(nbt.getFloat("foodDecay") / nbt.getFloat("foodWeight") > 0.9f)
 				is.stackSize = 0;
@@ -179,7 +197,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		if(nbt == null)
 			nbt = new NBTTagCompound();
 		nbt.setFloat("foodWeight", weight);
-		nbt.setFloat("foodDecay", 0);
+		nbt.setFloat("foodDecay", -24);
+		nbt.setInteger("foodTimer", (int)TFC_Time.getTotalHours());
 
 		is.setTagCompound(nbt);
 		return is;

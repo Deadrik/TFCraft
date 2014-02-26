@@ -22,7 +22,6 @@ import TFC.API.IItemFoodBlock;
 import TFC.API.Constant.Global;
 import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Food.ItemFoodTFC;
 import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -35,7 +34,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage);
+		TFC_Core.handleTileEntityItemTicking(this, worldObj);
 	}
 
 	public int getFoodIdFromItemStack(ItemStack is){
@@ -106,6 +105,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 					this.setInventorySlotContents(4, is);
 
 					consumeFoodWeight();
+					TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_COOKING, 1);
 				}
 		} else
 			TerraFirmaCraft.proxy.sendCustomPacket(createMealPacket());

@@ -14,6 +14,7 @@ import net.minecraftforge.common.MinecraftForge;
 import TFC.TerraFirmaCraft;
 import TFC.API.SkillsManager;
 import TFC.API.Events.GetSkillMultiplierEvent;
+import TFC.API.Events.PlayerSkillEvent;
 import TFC.Handlers.PacketHandler;
 
 public class SkillStats 
@@ -46,16 +47,19 @@ public class SkillStats
 
 	public void increaseSkill(String skillName, int amount)
 	{
-		if(skillsMap.containsKey(skillName))
+		PlayerSkillEvent.Increase event = new PlayerSkillEvent.Increase(this.player, skillName, amount);
+		if(!MinecraftForge.EVENT_BUS.post(event))
 		{
-			//First get what the skill level currently is
-			int i = (Integer) skillsMap.get(skillName);
-			//Remove the old skill and add the new skill level. 
-			//The put method replaces the old identical entry.
-			skillsMap.put(skillName, i+amount);
+			if(skillsMap.containsKey(skillName))
+			{
+				//First get what the skill level currently is
+				int i = (Integer) skillsMap.get(skillName);
+				//The put method replaces the old identical entry.
+				skillsMap.put(skillName, i+amount);
+			}
+			else
+				skillsMap.put(skillName, amount);
 		}
-		else
-			skillsMap.put(skillName, amount);
 
 		int i = (Integer) skillsMap.get(skillName);
 		if(player instanceof EntityPlayerMP)
