@@ -22,7 +22,6 @@ import TFC.API.IItemFoodBlock;
 import TFC.API.Constant.Global;
 import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Food.ItemFoodTFC;
 import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -35,7 +34,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage);
+		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 	}
 
 	public int getFoodIdFromItemStack(ItemStack is){

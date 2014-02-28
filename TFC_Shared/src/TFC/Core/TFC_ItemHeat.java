@@ -1,6 +1,7 @@
 package TFC.Core;
 
 import net.minecraft.block.Block;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,7 +14,6 @@ import TFC.API.HeatRegistry;
 import TFC.API.Metal;
 import TFC.API.TFCOptions;
 import TFC.Core.Util.StringUtil;
-import TFC.Items.ItemTerra;
 
 public class TFC_ItemHeat 
 {
@@ -593,57 +593,16 @@ public class TFC_ItemHeat
 		}
 	}
 
-	public static void HandleContainerHeat(World world, ItemStack[] inventory)
+	public static void HandleContainerHeat(IInventory iinv, World world)
 	{
-		for(int i = 0; i < inventory.length; i++)
+		for(int i = 0; i < iinv.getSizeInventory(); i++)
 		{
-			if(inventory[i] != null && inventory[i].stackSize <= 0)
-				inventory[i].stackSize = 1;
+			if(iinv.getStackInSlot(i) != null && iinv.getStackInSlot(i).stackSize <= 0)
+				iinv.getStackInSlot(i).stackSize = 1;
 
-			if(inventory[i] != null && inventory[i].hasTagCompound() && !(inventory[i].getItem() instanceof ItemTerra))
+			if(iinv.getStackInSlot(i) != null)
 			{
-				NBTTagCompound comp = inventory[i].getTagCompound();
-				if(comp.hasKey("temperature"))
-				{
-					float temp = comp.getFloat("temperature");
-					if(temp > 0)
-					{
-						temp -= TFC_ItemHeat.getTempDecrease(inventory[i]);
-						comp.setFloat("temperature",temp);
-					}
-
-					if(temp <= 0)
-						comp.removeTag("temperature");
-					if(comp.getTags().size() == 0)
-						inventory[i].stackTagCompound = null;
-				}
-			}
-		}
-	}
-
-	public static void HandleContainerHeatChest(World world, ItemStack[] inventory)
-	{
-		for(int i = 0; i < inventory.length; i++)
-		{
-			if(inventory[i] != null && inventory[i].stackSize <= 0)
-				inventory[i].stackSize = 1;
-
-			if(inventory[i] != null && inventory[i].hasTagCompound())
-			{
-				NBTTagCompound comp = inventory[i].getTagCompound();
-				if(comp.hasKey("temperature"))
-				{
-					float temp = comp.getFloat("temperature");
-					if(temp > 0)
-					{
-						temp -= TFC_ItemHeat.getTempDecrease(inventory[i])*3;
-						comp.setFloat("temperature",temp);
-					}
-					if(temp <= 0)
-						comp.removeTag("temperature");
-					if(comp.getTags().size() == 0)
-						inventory[i].stackTagCompound = null;
-				}
+				HandleItemHeat(iinv.getStackInSlot(i));
 			}
 		}
 	}

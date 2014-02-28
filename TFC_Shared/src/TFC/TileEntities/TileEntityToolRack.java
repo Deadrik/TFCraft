@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
-import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Core;
 import TFC.Handlers.PacketHandler;
 
 public class TileEntityToolRack extends NetworkTileEntity implements IInventory
@@ -196,7 +196,7 @@ public class TileEntityToolRack extends NetworkTileEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage);
+		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 	}
 
 	@Override

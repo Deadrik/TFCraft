@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,6 +35,7 @@ import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.Player.BodyTempStats;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.SkillStats;
+import TFC.Food.ItemFoodTFC;
 import TFC.Items.ItemOre;
 import TFC.Items.ItemQuiver;
 import TFC.Items.ItemTFCArmor;
@@ -808,21 +808,62 @@ public class TFC_Core
 		TFC_Core.setPlayerFoodStats(player, foodstats);
 	}
 
-	public static void handleTileEntityItemTicking(IInventory iinv, World world)
+	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z)
 	{
-		handleTileEntityItemTicking(iinv, world, null);
-	}
-	public static void handleTileEntityItemTicking(IInventory iinv, World world, Entity e)
-	{
-		for(int i = 0; i < iinv.getSizeInventory(); i++)
+		for(int i = 0; !world.isRemote && i < iinv.getSizeInventory(); i++)
 		{
-			if(iinv.getStackInSlot(i) != null && iinv.getStackInSlot(i).stackSize <= 0)
+			ItemStack is = iinv.getStackInSlot(i);
+			if(is != null && iinv.getStackInSlot(i).stackSize <= 0)
 				iinv.setInventorySlotContents(i, null);
 
-			if(iinv.getStackInSlot(i) != null && iinv.getStackInSlot(i).hasTagCompound())
+			if(is != null)
 			{
-				iinv.getStackInSlot(i).getItem().onUpdate(iinv.getStackInSlot(i), world, e, 0, false);
+				if((is.getItem() instanceof ItemTerra && 
+						!((ItemTerra)is.getItem()).onUpdate(is, world, x, y, z)) ||
+						is.getItem() instanceof ItemTerraBlock && 
+						!((ItemTerraBlock)is.getItem()).onUpdate(is, world, x, y, z) && is.hasTagCompound())
+				{
+					NBTTagCompound nbt = is.getTagCompound();
+
+					tickDecay(is, nbt, x, y, z);
+				}
 			}
 		}
+	}
+
+	/**
+	 * @param is
+	 * @param nbt
+	 */
+	private static void tickDecay(ItemStack is, NBTTagCompound nbt, int x, int y, int z) 
+	{
+		if(!nbt.hasKey("foodWeight") || !nbt.hasKey("foodDecay"))
+			return;
+
+		float decay = nbt.getFloat("foodDecay");
+		float decayRate = 1.0f;
+		if(is.getItem() instanceof ItemFoodTFC)
+			decayRate = ((ItemFoodTFC)is.getItem()).decayRate;
+		if(nbt.hasKey("decayRate"))
+			decayRate = nbt.getFloat("decayRate");
+
+		//if the tick timer is up then we cause decay.
+		if(nbt.getInteger("decayTimer") + 23 < TFC_Time.getTotalHours())
+		{
+			if(decay < 0)
+				decay++;
+			else if(decay == 0)
+			{
+				decay = nbt.getFloat("foodWeight") * 0.005f;
+				nbt.setFloat("foodDecay", decay);
+			}
+			else
+			{
+				decay = ((decay*1.5f)/24)*decayRate;
+			}
+		}
+
+		if(nbt.getFloat("foodDecay") / nbt.getFloat("foodWeight") > 0.9f)
+			is.stackSize = 0;
 	}
 }

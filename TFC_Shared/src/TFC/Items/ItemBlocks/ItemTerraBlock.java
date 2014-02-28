@@ -65,13 +65,22 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	@Override
 	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
 	{
-		if (!world.isRemote && is.hasTagCompound())
+		/*if (!world.isRemote && is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
 			if(stackTagCompound.hasKey("temperature"))
 				TFC_ItemHeat.HandleItemHeat(is);
-		}
+		}*/
+	}
+
+	/**
+	 * This is called by inventories in the world to tick things such as temperature and food decay. Override this and 
+	 * return true if you want the item to be handled differently than the standard code. True will stop he standard TFC code from running.
+	 */
+	public boolean onUpdate(ItemStack is, World world, int x, int y, int z)
+	{
+		return false;
 	}
 
 	@Override

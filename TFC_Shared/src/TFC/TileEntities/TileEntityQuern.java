@@ -16,7 +16,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -32,7 +32,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 	@Override
 	public void updateEntity() {
 		if(!worldObj.isRemote)
-			TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage);
+			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 
 		if(shouldRotate) {
 			rotatetimer++;
