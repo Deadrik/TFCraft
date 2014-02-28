@@ -5,7 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import TFC.Core.TFC_Core;
+import TFC.Core.TFC_ItemHeat;
 
 public class TileEntityWorkbench extends TileEntity implements IInventory
 {
@@ -102,7 +102,7 @@ public class TileEntityWorkbench extends TileEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		TFC_Core.handleTileEntityItemTicking(this, worldObj);
+		TFC_ItemHeat.HandleContainerHeat(this.worldObj,craftingMatrix);
 	}
 
 	@Override

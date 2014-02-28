@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityChest;
-import TFC.Core.TFC_Core;
+import TFC.Core.TFC_ItemHeat;
 public class TileEntityChestTFC extends TileEntityChest implements IInventory
 {
 	private ItemStack[] chestContents = new ItemStack[18];
@@ -180,7 +180,7 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 	{
 		super.updateEntity();
 
-		TFC_Core.handleTileEntityItemTicking(this, worldObj);
+		TFC_ItemHeat.HandleContainerHeatChest(this.worldObj, chestContents);
 
 		this.checkForAdjacentChests();
 

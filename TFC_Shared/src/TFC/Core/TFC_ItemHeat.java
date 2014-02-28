@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.HeatIndex;
@@ -12,6 +13,7 @@ import TFC.API.HeatRegistry;
 import TFC.API.Metal;
 import TFC.API.TFCOptions;
 import TFC.Core.Util.StringUtil;
+import TFC.Items.ItemTerra;
 
 public class TFC_ItemHeat 
 {
@@ -587,6 +589,61 @@ public class TFC_ItemHeat
 					comp.removeTag("temperature");
 				if(comp.getTags().size() == 0)
 					is.stackTagCompound = null;
+			}
+		}
+	}
+
+	public static void HandleContainerHeat(World world, ItemStack[] inventory)
+	{
+		for(int i = 0; i < inventory.length; i++)
+		{
+			if(inventory[i] != null && inventory[i].stackSize <= 0)
+				inventory[i].stackSize = 1;
+
+			if(inventory[i] != null && inventory[i].hasTagCompound() && !(inventory[i].getItem() instanceof ItemTerra))
+			{
+				NBTTagCompound comp = inventory[i].getTagCompound();
+				if(comp.hasKey("temperature"))
+				{
+					float temp = comp.getFloat("temperature");
+					if(temp > 0)
+					{
+						temp -= TFC_ItemHeat.getTempDecrease(inventory[i]);
+						comp.setFloat("temperature",temp);
+					}
+
+					if(temp <= 0)
+						comp.removeTag("temperature");
+					if(comp.getTags().size() == 0)
+						inventory[i].stackTagCompound = null;
+				}
+			}
+		}
+	}
+
+	public static void HandleContainerHeatChest(World world, ItemStack[] inventory)
+	{
+		for(int i = 0; i < inventory.length; i++)
+		{
+			if(inventory[i] != null && inventory[i].stackSize <= 0)
+				inventory[i].stackSize = 1;
+
+			if(inventory[i] != null && inventory[i].hasTagCompound())
+			{
+				NBTTagCompound comp = inventory[i].getTagCompound();
+				if(comp.hasKey("temperature"))
+				{
+					float temp = comp.getFloat("temperature");
+					if(temp > 0)
+					{
+						temp -= TFC_ItemHeat.getTempDecrease(inventory[i])*3;
+						comp.setFloat("temperature",temp);
+					}
+					if(temp <= 0)
+						comp.removeTag("temperature");
+					if(comp.getTags().size() == 0)
+						inventory[i].stackTagCompound = null;
+				}
 			}
 		}
 	}

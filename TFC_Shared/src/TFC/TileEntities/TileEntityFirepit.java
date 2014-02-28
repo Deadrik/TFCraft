@@ -739,6 +739,8 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 			FuelStack[2] = fireItemStacks[4];
 			FuelStack[3] = fireItemStacks[5];
 
+			TFC_ItemHeat.HandleContainerHeat(this.worldObj, FuelStack);
+
 			//Now we cook the input item
 			CookItemNew();
 
@@ -810,7 +812,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 					fireItemStacks[8].stackSize = 1;
 
 			if(fuelTimeLeft <= 0)
-				TFC_Core.handleTileEntityItemTicking(this, worldObj);
+				TFC_ItemHeat.HandleContainerHeat(this.worldObj, fireItemStacks);
 		}
 
 	}

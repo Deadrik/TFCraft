@@ -23,7 +23,6 @@ import TFC.API.Crafting.AnvilRecipe;
 import TFC.API.Crafting.AnvilReq;
 import TFC.API.Enums.RuleEnum;
 import TFC.API.Events.AnvilCraftEvent;
-import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -95,7 +94,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			if(workedRecently > 0)
 				workedRecently--;
 			//Deal with temperatures
-			TFC_Core.handleTileEntityItemTicking(this, worldObj);
+			TFC_ItemHeat.HandleContainerHeat(this.worldObj, anvilItemStacks);
 			/**
 			 * Check if the recipe is considered complete
 			 * */
