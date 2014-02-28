@@ -13,9 +13,11 @@ import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.IFood;
 import TFC.API.ISize;
+import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
@@ -89,7 +91,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 					arraylist.add("Amount " + ounces+" oz / 80.0 oz");
 				float decay = stackTagCompound.getFloat("foodDecay");
 				if(decay > 0)
-					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + decay/ounces*100+"%");
+					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100, 10)+"%");
+				if(TFCOptions.enableDebugMode)
+					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay: " + decay);
 			}
 		}
 	}
@@ -130,7 +134,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
 	{
 		super.onUpdate(is, world, entity, i, isSelected);
-		if (!world.isRemote && is.hasTagCompound())
+		/*if (!world.isRemote && is.hasTagCompound())
 		{
 			NBTTagCompound nbt = is.getTagCompound();
 			float decay = nbt.getFloat("foodDecay");
@@ -154,7 +158,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 			if(nbt.getFloat("foodDecay") / nbt.getFloat("foodWeight") > 0.9f)
 				is.stackSize = 0;
-		}
+		}*/
 	}
 
 	@Override
@@ -198,7 +202,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			nbt = new NBTTagCompound();
 		nbt.setFloat("foodWeight", weight);
 		nbt.setFloat("foodDecay", -24);
-		nbt.setInteger("foodTimer", (int)TFC_Time.getTotalHours());
+		nbt.setInteger("foodTimer", (int)TFC_Time.getTotalHours()+1);
 
 		is.setTagCompound(nbt);
 		return is;

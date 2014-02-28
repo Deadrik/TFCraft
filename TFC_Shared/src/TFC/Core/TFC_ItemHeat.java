@@ -1,11 +1,9 @@
 package TFC.Core;
 
 import net.minecraft.block.Block;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.HeatIndex;
@@ -589,20 +587,6 @@ public class TFC_ItemHeat
 					comp.removeTag("temperature");
 				if(comp.getTags().size() == 0)
 					is.stackTagCompound = null;
-			}
-		}
-	}
-
-	public static void HandleContainerHeat(IInventory iinv, World world)
-	{
-		for(int i = 0; i < iinv.getSizeInventory(); i++)
-		{
-			if(iinv.getStackInSlot(i) != null && iinv.getStackInSlot(i).stackSize <= 0)
-				iinv.getStackInSlot(i).stackSize = 1;
-
-			if(iinv.getStackInSlot(i) != null)
-			{
-				HandleItemHeat(iinv.getStackInSlot(i));
 			}
 		}
 	}

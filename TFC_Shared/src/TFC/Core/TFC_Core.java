@@ -810,6 +810,12 @@ public class TFC_Core
 
 	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z)
 	{
+		/*Here we calculate the decayRate based on the environment. We do this before everything else
+		 * so that its only done once per inventory
+		 */
+		float temp = TFC_Climate.getTemp(x, z);
+		float environmentalDecay = 1+((temp-4f)*0.01f);
+
 		for(int i = 0; !world.isRemote && i < iinv.getSizeInventory(); i++)
 		{
 			ItemStack is = iinv.getStackInSlot(i);
@@ -819,14 +825,17 @@ public class TFC_Core
 			if(is != null)
 			{
 				if((is.getItem() instanceof ItemTerra && 
-						!((ItemTerra)is.getItem()).onUpdate(is, world, x, y, z)) ||
-						is.getItem() instanceof ItemTerraBlock && 
-						!((ItemTerraBlock)is.getItem()).onUpdate(is, world, x, y, z) && is.hasTagCompound())
+						((ItemTerra)is.getItem()).onUpdate(is, world, x, y, z)))
 				{
-					NBTTagCompound nbt = is.getTagCompound();
-
-					tickDecay(is, nbt, x, y, z);
+					continue;
 				}
+				else if(is.getItem() instanceof ItemTerraBlock && 
+						((ItemTerraBlock)is.getItem()).onUpdate(is, world, x, y, z))
+				{
+					continue;
+				}
+				tickDecay(is, world, x, y, z, environmentalDecay);
+				TFC_ItemHeat.HandleItemHeat(is);
 			}
 		}
 	}
@@ -835,21 +844,24 @@ public class TFC_Core
 	 * @param is
 	 * @param nbt
 	 */
-	private static void tickDecay(ItemStack is, NBTTagCompound nbt, int x, int y, int z) 
+	private static void tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecay) 
 	{
-		if(!nbt.hasKey("foodWeight") || !nbt.hasKey("foodDecay"))
+		NBTTagCompound nbt = is.getTagCompound();
+		if(nbt == null || !nbt.hasKey("foodWeight") || !nbt.hasKey("foodDecay"))
 			return;
 
-		float decay = nbt.getFloat("foodDecay");
-		float decayRate = 1.0f;
-		if(is.getItem() instanceof ItemFoodTFC)
-			decayRate = ((ItemFoodTFC)is.getItem()).decayRate;
-		if(nbt.hasKey("decayRate"))
-			decayRate = nbt.getFloat("decayRate");
+
 
 		//if the tick timer is up then we cause decay.
-		if(nbt.getInteger("decayTimer") + 23 < TFC_Time.getTotalHours())
+		if(nbt.getInteger("decayTimer") + 1 < TFC_Time.getTotalHours())
 		{
+			float decay = nbt.getFloat("foodDecay");
+			float decayRate = 1.0f;
+			if(is.getItem() instanceof ItemFoodTFC)
+				decayRate = ((ItemFoodTFC)is.getItem()).decayRate;
+			if(nbt.hasKey("decayRate"))
+				decayRate = nbt.getFloat("decayRate");
+
 			if(decay < 0)
 				decay++;
 			else if(decay == 0)
@@ -859,11 +871,16 @@ public class TFC_Core
 			}
 			else
 			{
-				decay = ((decay*1.5f)/24)*decayRate;
+
+				decay += ((decay*1.5f)/24)*(decayRate*environmentalDecay);
 			}
+			nbt.setInteger("decayTimer", nbt.getInteger("decayTimer") + 1);
+			nbt.setFloat("foodDecay", decay);
 		}
 
 		if(nbt.getFloat("foodDecay") / nbt.getFloat("foodWeight") > 0.9f)
 			is.stackSize = 0;
+
+		is.setTagCompound(nbt);
 	}
 }
