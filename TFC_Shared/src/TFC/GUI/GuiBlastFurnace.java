@@ -39,8 +39,6 @@ public class GuiBlastFurnace extends GuiContainer
 		int h = (height - ySize) / 2;
 		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
 		
-		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
-
 		int scale = 0;
 
 		scale = bloomery.getTemperatureScaled(49);
@@ -51,6 +49,8 @@ public class GuiBlastFurnace extends GuiContainer
 
 		scale = bloomery.getCharcoalCountScaled(80);
 		drawTexturedModalRect(w + 40, h + 43, 176, 0, scale+1, 8);
+		
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 
 		/*scale = bloomery.getOutCountScaled(80);
         drawTexturedModalRect(w + 40, h + 61, 176, 0, scale+1, 8);
