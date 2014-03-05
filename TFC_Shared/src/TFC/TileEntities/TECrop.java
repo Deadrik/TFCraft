@@ -147,17 +147,17 @@ public class TECrop extends NetworkTileEntity
 				ItemStack is2 = crop.getOutput2(this);
 
 				if(is1 != null)
-					world.spawnEntityInWorld(new EntityItem(world, xCoord, yCoord, zCoord, is1));
+					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is1));
 
 				if(is2 != null)
-					world.spawnEntityInWorld(new EntityItem(world, xCoord, yCoord, zCoord, is2));
+					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is2));
 			}
 			else if (crop != null)
 			{
 				ItemStack is = crop.getSeed();
 
 				if(is != null)
-					world.spawnEntityInWorld(new EntityItem(world, xCoord, yCoord, zCoord, is));
+					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is));
 			}
 		}
 	}
