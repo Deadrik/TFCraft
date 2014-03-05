@@ -808,6 +808,10 @@ public class TFC_Core
 		TFC_Core.setPlayerFoodStats(player, foodstats);
 	}
 
+	/**
+	 * This is the default item ticking method for use by all containers. Call this if you don't want
+	 * to do custom environmental decay math.
+	 */
 	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z)
 	{
 		/*Here we calculate the decayRate based on the environment. We do this before everything else
@@ -815,7 +819,14 @@ public class TFC_Core
 		 */
 		float temp = TFC_Climate.getTemp(x, z);
 		float environmentalDecay = 1+((temp-4f)*0.01f);
+		handleItemTicking(iinv, world, x, y, z, environmentalDecay);
+	}
 
+	/**
+	 * This version of the method assumes that the environmental decay modifier has already been calculated.
+	 */
+	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z, float environmentalDecay)
+	{
 		for(int i = 0; !world.isRemote && i < iinv.getSizeInventory(); i++)
 		{
 			ItemStack is = iinv.getStackInSlot(i);
@@ -856,23 +867,28 @@ public class TFC_Core
 		if(nbt.getInteger("decayTimer") + 1 < TFC_Time.getTotalHours())
 		{
 			float decay = nbt.getFloat("foodDecay");
-			float decayRate = 1.0f;
+			float thisDecayRate = 1.0f;
 			if(is.getItem() instanceof ItemFoodTFC)
-				decayRate = ((ItemFoodTFC)is.getItem()).decayRate;
+				thisDecayRate = ((ItemFoodTFC)is.getItem()).decayRate;
 			if(nbt.hasKey("decayRate"))
-				decayRate = nbt.getFloat("decayRate");
+				thisDecayRate = nbt.getFloat("decayRate");
 
 			if(decay < 0)
-				decay++;
+			{
+				float d = 1 * (thisDecayRate * environmentalDecay);
+				if(decay + d < 0)
+					decay +=  d;
+				else decay = 0;
+			}
 			else if(decay == 0)
 			{
-				decay = nbt.getFloat("foodWeight") * 0.005f;
+				decay = nbt.getFloat("foodWeight") * (world.rand.nextFloat() * 0.005f);
 				nbt.setFloat("foodDecay", decay);
 			}
 			else
 			{
-
-				decay += ((decay*1.5f)/24)*(decayRate*environmentalDecay);
+				float d =  ((decay * Global.FOOD_DECAY_RATE) / 24) * (thisDecayRate * environmentalDecay);
+				decay += d;
 			}
 			nbt.setInteger("decayTimer", nbt.getInteger("decayTimer") + 1);
 			nbt.setFloat("foodDecay", decay);

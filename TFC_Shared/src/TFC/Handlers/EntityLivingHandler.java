@@ -55,6 +55,8 @@ public class EntityLivingHandler
 
 			if(!player.worldObj.isRemote)
 			{
+				//Tick Decay
+				TFC_Core.handleItemTicking(player.inventory, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 				//Handle Food
 				BodyTempStats tempStats = TFC_Core.getBodyTempStats(player);
 				tempStats.onUpdate(player);

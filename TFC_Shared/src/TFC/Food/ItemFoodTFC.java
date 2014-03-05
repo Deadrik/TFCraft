@@ -32,7 +32,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	 * temperature:
 	 * foodWeight:
 	 * foodDecay
-	 * foodDecayTimer
+	 * decayTimer
 	 */
 
 	public int foodID;
@@ -202,7 +202,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			nbt = new NBTTagCompound();
 		nbt.setFloat("foodWeight", weight);
 		nbt.setFloat("foodDecay", -24);
-		nbt.setInteger("foodTimer", (int)TFC_Time.getTotalHours()+1);
+		nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours()+1);
 
 		is.setTagCompound(nbt);
 		return is;
