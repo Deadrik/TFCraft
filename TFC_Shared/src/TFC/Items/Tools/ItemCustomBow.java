@@ -42,7 +42,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 		ItemStack quiver = null;
 		for(int i = 0; i < 9; i++) 
 		{
-			if(player.inventory.getStackInSlot(i).getItem() instanceof ItemQuiver)
+			if(player.inventory.getStackInSlot(i)!= null && player.inventory.getStackInSlot(i).getItem() instanceof ItemQuiver)
 			{
 				quiver = player.inventory.getStackInSlot(i);
 				break;
