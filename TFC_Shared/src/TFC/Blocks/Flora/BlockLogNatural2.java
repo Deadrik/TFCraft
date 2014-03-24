@@ -94,6 +94,9 @@ public class BlockLogNatural2 extends BlockTerra
 
     @Override
     public int damageDropped(int j) {
+    	if(blockID == TFCBlocks.LogNatural2.blockID){
+    		j+=16;
+    	}
         return j;
     }
     
