@@ -1559,8 +1559,6 @@ public class TFCItems
 		UnknownIngot = new ItemIngot(TFCItemID.UnknownIngot).setUnlocalizedName("Unknown Ingot");
 		UnknownUnshaped = new ItemMeltedMetal(TFCItemID.UnknownUnshaped).setUnlocalizedName("Unknown Unshaped");
 
-		Quiver = new ItemQuiver(TFCItemID.Quiver).setUnlocalizedName("Quiver");
-
 		Jute = new ItemTerra(TFCItemID.jute).setFolder("plants/").setUnlocalizedName("Jute");
 		JuteFibre = new ItemTerra(TFCItemID.juteFibre).setFolder("plants/").setUnlocalizedName("Jute Fibre");
 
@@ -2034,6 +2032,8 @@ public class TFCItems
 		Item.itemsList[Item.plateLeather.itemID] = null; Item.itemsList[Item.plateLeather.itemID] = new ItemTFCArmor(Item.plateLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 1, EnumArmorMaterial.CLOTH, 100,2).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate");
 		Item.itemsList[Item.legsLeather.itemID] = null; Item.itemsList[Item.legsLeather.itemID] = new ItemTFCArmor(Item.legsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 2, EnumArmorMaterial.CLOTH, 100,1).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings");
 		Item.itemsList[Item.bootsLeather.itemID] = null; Item.itemsList[Item.bootsLeather.itemID] = new ItemTFCArmor(Item.bootsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 3, EnumArmorMaterial.CLOTH, 100,0).setUnlocalizedName("bootsCloth").setTextureName("leather_boots");
+	
+		Quiver = new ItemQuiver(TFCItemID.Quiver, Armor.LeatherQuiver, proxy.getArmorRenderID("leather"), 4, EnumArmorMaterial.IRON, 0,-1).setUnlocalizedName("Quiver");
 	}
 
 	public static Item[] Meals;

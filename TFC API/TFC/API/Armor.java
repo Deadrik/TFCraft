@@ -6,6 +6,7 @@ public class Armor
 {
 	public static Armor[] armorArray = new Armor[256];
 	public static Armor Leather = 				new Armor(0, 200, 250, 300, "Leather");//Tier 0
+	public static Armor LeatherQuiver = 		new Armor(10, 0, 0, 0, "Leather Quiver");//Tier 0
 	public static Armor CopperPlate = 			new Armor(1, 400, 400, 250, "Copper");//Tier 0
 	public static Armor BismuthBronzePlate = 	new Armor(2, 600, 400, 330, "Bismuth Bronze");//Tier 1
 	public static Armor BlackBronzePlate = 		new Armor(3, 400, 600, 330, "Black Bronze");//Tier 1
@@ -20,7 +21,7 @@ public class Armor
 	private int armorRatingSlashing;
 	private int armorRatingCrushing;
 	public String metaltype;
-	public int[] baseDurability = new int[] {2500, 3750, 3000, 2500};//Helm,Chest,Legs,Boots
+	public int[] baseDurability = new int[] {2500, 3750, 3000, 2500,0};//Helm,Chest,Legs,Boots,back
 	public int armorId;
 
 	private Armor(int id, int ARP, int ARS, int ARC, String material)

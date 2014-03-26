@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
@@ -254,7 +255,6 @@ public class TerraFirmaCraft
 
 		TFC_Climate.initCache();
 	}
-
 	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt) 
 	{

@@ -30,19 +30,22 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	public Icon overlayIcon;
 	private int thermal = 0;
 	private int type = 0;
+	private int trueType = 0;
 
 	public ItemTFCArmor(int itemID, Armor armor, int renderIndex, int armorSlot, int thermal, int type)
 	{
-		super(itemID,EnumArmorMaterial.IRON,renderIndex,armorSlot);
+		super(itemID,EnumArmorMaterial.IRON,renderIndex,armorSlot%4);
 		ArmorType = armor;
+		this.trueType = armorSlot;
 		this.setCreativeTab(TFCTabs.TFCArmor);
 		this.setMaxDamage(ArmorType.getDurability(armorSlot));
 	}
 
 	public ItemTFCArmor(int itemID, Armor armor, int renderIndex, int armorSlot, EnumArmorMaterial m, int thermal, int type)
 	{
-		super(itemID, m, renderIndex, armorSlot);
+		super(itemID, m, renderIndex, armorSlot%4);
 		ArmorType = armor;
+		this.trueType = armorSlot;
 		this.setCreativeTab(TFCTabs.TFCArmor);
 		this.setMaxDamage(ArmorType.getDurability(armorSlot));
 	}
@@ -153,6 +156,11 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	public int getThermal() 
 	{
 		return thermal;
+	}
+	
+	//ItemArmor can't handle armor types >3, so this allows you to record the "true" armor type, whereas the value vanilla gets is %4
+	public int getUnadjustedArmorType(){
+		return trueType;
 	}
 
 	@Override

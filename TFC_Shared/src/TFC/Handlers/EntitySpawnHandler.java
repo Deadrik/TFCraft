@@ -10,6 +10,7 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Containers.ContainerPlayerTFC;
+import TFC.Core.TFC_Core;
 
 public class EntitySpawnHandler
 {
@@ -32,6 +33,9 @@ public class EntitySpawnHandler
 	{
 		if (event.entity instanceof EntityPlayer && !event.entity.getEntityData().hasKey("hasSpawned"))
 		{
+			if(((EntityPlayer)event.entity).inventory.armorInventory.length !=5){
+				((EntityPlayer)event.entity).inventory = TFC_Core.getNewInventory((EntityPlayer)event.entity);
+			}
 			((EntityPlayer)event.entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1000);
 			((EntityPlayer)event.entity).setHealth(1000);
 			event.entity.getEntityData().setBoolean("hasSpawned", true);
@@ -39,6 +43,9 @@ public class EntitySpawnHandler
 
 		if (event.entity instanceof EntityPlayer)
 		{
+			if(((EntityPlayer)event.entity).inventory.armorInventory.length !=5){
+				((EntityPlayer)event.entity).inventory = TFC_Core.getNewInventory((EntityPlayer)event.entity);
+			}
 			((EntityPlayer)event.entity).inventoryContainer = 
 					new ContainerPlayerTFC(((EntityPlayer)event.entity).inventory, !event.world.isRemote, (EntityPlayer)event.entity);
 			((EntityPlayer)event.entity).openContainer = ((EntityPlayer)event.entity).inventoryContainer;

@@ -39,15 +39,15 @@ public class ItemCustomBow extends ItemBow implements ISize
 
 	public boolean consumeArrowInQuiver(EntityPlayer player, boolean shouldConsume)
 	{
-		ItemStack quiver = null;
-		for(int i = 0; i < 9; i++) 
+		ItemStack quiver = player.inventory.armorItemInSlot(0);
+		/*for(int i = 0; i < 9; i++) 
 		{
 			if(player.inventory.getStackInSlot(i)!= null && player.inventory.getStackInSlot(i).getItem() instanceof ItemQuiver)
 			{
 				quiver = player.inventory.getStackInSlot(i);
 				break;
 			}
-		}
+		}*/
 		if(quiver != null && quiver.getItem() instanceof ItemQuiver)
 		{
 			if(((ItemQuiver)quiver.getItem()).consumeAmmo(quiver, EnumAmmo.ARROW, shouldConsume) != null) 
