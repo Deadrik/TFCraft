@@ -58,8 +58,8 @@ public class BodyTempStats
 		//If we are warm then add it to heat reserves
 		heatStorage = Math.max(Math.min(temperatureLevel+heatStorage, 14), 0);
 
-		extraFoodConsumed = (temperatureLevel <0 && heatStorage <= 0 && rand.nextInt(350)<100)?temperatureLevel/-10:0;
-		extraWaterConsumed = (temperatureLevel >0 && heatStorage <= 0 && rand.nextInt(350)<100)?temperatureLevel/10:0;
+		extraFoodConsumed = 0; //(temperatureLevel <0 && heatStorage <= 0 && rand.nextInt(350)<100)?temperatureLevel/-10:0;
+		extraWaterConsumed = 0; //(temperatureLevel >0 && heatStorage <= 0 && rand.nextInt(350)<100)?temperatureLevel/10:0;
 
 		if(temperatureLevel != prevTemperatureLevel && !((prevTemperatureLevel >=-10 && prevTemperatureLevel <=10)&&
 				(temperatureLevel >=-10 && temperatureLevel <=10)))
@@ -155,8 +155,9 @@ public class BodyTempStats
 		return returnAmount;
 	}
 
-	private void tellPlayerMessage(EntityPlayer player){
-		switch(temperatureLevel/10){
+	private void tellPlayerMessage(EntityPlayer player)
+	{
+/*		switch(temperatureLevel/10){
 		case -1:
 		case 0:
 		case 1: player.addChatMessage(new ChatComponentText("You feel comfortable"));break;
@@ -173,6 +174,7 @@ public class BodyTempStats
 		case 6: player.addChatMessage(new ChatComponentText("You feel extremely hot!"));break;
 		case 7: killPlayer(player);break;
 		}
+*/
 	}
 
 	private void killPlayer(EntityPlayer player){

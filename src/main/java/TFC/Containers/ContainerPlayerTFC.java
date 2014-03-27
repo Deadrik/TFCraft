@@ -10,6 +10,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import TFC.Containers.Slots.SlotArmorTFC;
 import TFC.Core.Player.PlayerInventory;
+import TFC.Items.ItemTFCArmor;
 
 public class ContainerPlayerTFC extends ContainerPlayer
 {
@@ -30,10 +31,19 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			for (y = 0; y < 2; ++y)
 				this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
 
-		for (x = 0; x < 4; ++x)
+		int indexForBack = -1;
+		for (x = 0; x < playerInv.armorInventory.length; ++x)
 		{
 			int index = playerInv.getSizeInventory() - 1 - x;
-			this.addSlotToContainer(new SlotArmorTFC(this, playerInv, index, 8, 8 + x * 18, x));
+			if(x == 4)
+			{
+				//this.addSlotToContainer(new SlotArmorTFC(this, playerInv, index, 8, 8 + x * 18, x));
+				indexForBack = index;
+			}
+			else
+			{
+				this.addSlotToContainer(new SlotArmorTFC(this, playerInv, index, 8, 8 + x * 18, x));
+			}
 		}
 		PlayerInventory.buildInventoryLayout(this, playerInv, 8, 90, false, true);
 
@@ -57,6 +67,8 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		}
 
 		this.onCraftMatrixChanged(this.craftMatrix);
+
+		this.addSlotToContainer(new SlotArmorTFC(this, playerInv, indexForBack, 8 + 18, 8 + 18, 4));
 	}
 
 	@Override
@@ -98,17 +110,30 @@ public class ContainerPlayerTFC extends ContainerPlayer
 				if (!this.mergeItemStack(itemstack1, 9, 45, false))
 					return null;
 			}
-			else if (par2 >= 5 && par2 < 9)
+			else if (par2 >= 5 && par2 < 9 || par2 == 50)
 			{
 				if (!this.mergeItemStack(itemstack1, 9, 45, false))
 					return null;
 			}
-			else if (itemstack.getItem() instanceof ItemArmor &&
-					!((Slot)this.inventorySlots.get(5 + ((ItemArmor)itemstack.getItem()).armorType)).getHasStack())
+			else if (itemstack.getItem() instanceof ItemArmor)
 			{
-				int j = 5 + ((ItemArmor)itemstack.getItem()).armorType;
-				if (!this.mergeItemStack(itemstack1, j, j + 1, false))
-					return null;
+				if(itemstack.getItem() instanceof ItemTFCArmor &&
+						((!((Slot)this.inventorySlots.get(5 + ((ItemTFCArmor)itemstack.getItem()).getUnadjustedArmorType())).getHasStack() &&
+						((ItemTFCArmor)itemstack.getItem()).getUnadjustedArmorType() != 4) ||
+						(!((Slot)this.inventorySlots.get(50)).getHasStack())))
+				{
+					int j = ((ItemTFCArmor)itemstack.getItem()).getUnadjustedArmorType() != 4 ? 5 + ((ItemTFCArmor)itemstack.getItem()).getUnadjustedArmorType() : 50;
+					if (!this.mergeItemStack(itemstack1, j, j + 1, false))
+						return null;
+				}
+				else if(((!((Slot)this.inventorySlots.get(5 + ((ItemArmor)itemstack.getItem()).armorType)).getHasStack() &&
+						((ItemArmor)itemstack.getItem()).armorType != 4) ||
+						(!((Slot)this.inventorySlots.get(50)).getHasStack())))
+				{
+					int j = ((ItemArmor)itemstack.getItem()).armorType != 4 ? 5 + ((ItemArmor)itemstack.getItem()).armorType : 50;
+					if (!this.mergeItemStack(itemstack1, j, j + 1, false))
+						return null;
+				}
 			}
 			else if (par2 >= 9 && par2 < 36)
 			{

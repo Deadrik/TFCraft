@@ -5,6 +5,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -13,6 +14,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
+import TFC.TFCItems;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
@@ -20,6 +22,7 @@ import TFC.Core.Player.BodyTempStats;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Items.ItemQuiver;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemCustomHoe;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -163,6 +166,29 @@ public class RenderOverlayHandler
 			event.left.add("Health: " + player.getHealth());
 			event.left.add("Stability: " + TFC_Climate.manager.getStabilityLayerAt(xCoord, zCoord).data1);
 		}
+		if(getQuiver() != null)
+		{
+			event.left.add("Arrows: "+ getQuiverArrows());
+			event.left.add("Javelins: "+ getQuiverJavelins());
+		}
+	}
+
+	private ItemStack getQuiver()
+	{
+		Minecraft mc = Minecraft.getMinecraft();
+		EntityPlayer player = mc.thePlayer;
+		ItemStack quiver = player.inventory.armorItemInSlot(0);
+		return quiver;
+	}
+
+	private int getQuiverArrows()
+	{
+		return ((ItemQuiver)(TFCItems.Quiver)).getQuiverArrows(getQuiver());
+	}
+
+	private int getQuiverJavelins()
+	{
+		return ((ItemQuiver)(TFCItems.Quiver)).getQuiverJavelins(getQuiver());
 	}
 
 	public void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6)

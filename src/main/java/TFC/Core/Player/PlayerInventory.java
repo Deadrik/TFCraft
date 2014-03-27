@@ -24,8 +24,8 @@ public class PlayerInventory
 		if(!toolBarAfterMainInv)
 			addToolbarSlots(container, inventory, x, y, freezeSlot);
 
-		for(int i = 0; i < 3; i++)
-			for(int k = 0; k < 9; k++)
+		for(int i = 0; i < 3; ++i)
+			for(int k = 0; k < 9; ++k)
 			{
 				int index =  k + (i+1) * 9;
 				addSlotToContainer(container, new Slot(inventory, index, x + k * 18, y + i * 18));
@@ -36,7 +36,7 @@ public class PlayerInventory
 
 	private static void addToolbarSlots(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot) 
 	{
-		for(int j = 0; j < 9; j++)
+		for(int j = 0; j < 9; ++j)
 			if(freezeSlot && j == inventory.currentItem)
 				addSlotToContainer(container, new SlotForShowOnly(inventory, j, x + j * 18, y+58));
 			else

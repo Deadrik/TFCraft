@@ -34,7 +34,6 @@ public class ItemCustomLeash extends ItemLead
         Block i1 = par3World.getBlock(par4, par5, par6);
         if (i1 != null && i1.getRenderType() == 11)
         {
-        	System.out.println(i1);
             if (par3World.isRemote)
             {
                 return true;

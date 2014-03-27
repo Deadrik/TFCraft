@@ -10,9 +10,13 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -34,6 +38,8 @@ import TFC.Core.Player.BodyTempStats;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.SkillStats;
 import TFC.Items.ItemOre;
+import TFC.Items.ItemQuiver;
+import TFC.Items.ItemTFCArmor;
 import TFC.TileEntities.TileEntityPartial;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -76,6 +82,107 @@ public class TFC_Core
 		return false;
 	}
 
+	public static InventoryPlayer getNewInventory(EntityPlayer player)
+	{
+		InventoryPlayer ip = player.inventory;
+		NBTTagList nbt = new NBTTagList();
+		nbt = player.inventory.writeToNBT(nbt);
+		ip = new InventoryPlayer(player)
+		{
+			@Override
+			public void damageArmor(float par1)
+			{
+				par1 /= 4.0F;
+				if (par1 < 1.0F)
+					par1 = 1.0F;
+
+				for (int i = 0; i < this.armorInventory.length; ++i)
+				{
+					if (this.armorInventory[i] != null && this.armorInventory[i].getItem() instanceof ItemArmor && !(this.armorInventory[i].getItem() instanceof ItemQuiver))
+					{
+						this.armorInventory[i].damageItem((int)par1, this.player);
+						if (this.armorInventory[i].stackSize == 0)
+							this.armorInventory[i] = null;
+					}
+				}
+			}
+
+			@Override
+			public int getSizeInventory()
+			{
+				return this.mainInventory.length + armorInventory.length;
+			}
+
+			@Override
+			public void readFromNBT(NBTTagList par1NBTTagList)
+			{
+				this.mainInventory = new ItemStack[36];
+				this.armorInventory = new ItemStack[5];
+
+				for (int i = 0; i < par1NBTTagList.tagCount(); ++i)
+				{
+					NBTTagCompound nbttagcompound = par1NBTTagList.getCompoundTagAt(i);
+					int j = nbttagcompound.getByte("Slot") & 255;
+					ItemStack itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound);
+					if (itemstack != null)
+					{
+						if (j >= 0 && j < this.mainInventory.length)
+							this.mainInventory[j] = itemstack;
+						if (j >= 100 && j < /*this.armorInventory.length*/4 + 100)
+							this.armorInventory[j - 100] = itemstack;
+					}
+				}
+				int j2 = player.getEntityData().getByte("Head") & 255;
+				ItemStack itemstack2 = ItemStack.loadItemStackFromNBT(player.getEntityData());
+				if(itemstack2!=null && itemstack2.getItem() instanceof ItemTFCArmor && ((ItemTFCArmor)(itemstack2.getItem())).getUnadjustedArmorType() == 0)
+					this.armorInventory[4] = itemstack2;
+			}
+
+			public NBTTagList writeToNBT(NBTTagList par1NBTTagList)
+			{
+				int i;
+				NBTTagCompound nbttagcompound;
+
+				for (i = 0; i < this.mainInventory.length; ++i)
+				{
+					if (this.mainInventory[i] != null)
+					{
+						nbttagcompound = new NBTTagCompound();
+						nbttagcompound.setByte("Slot", (byte)i);
+						this.mainInventory[i].writeToNBT(nbttagcompound);
+						par1NBTTagList.appendTag(nbttagcompound);
+					}
+				}
+				for (i = 0; i < /*this.armorInventory.length*/4; ++i)
+				{
+					if (this.armorInventory[i] != null)
+					{
+						nbttagcompound = new NBTTagCompound();
+						nbttagcompound.setByte("Slot", (byte)(i + 100));
+						this.armorInventory[i].writeToNBT(nbttagcompound);
+						par1NBTTagList.appendTag(nbttagcompound);
+					}
+				}
+				//Shitty workaround
+				nbttagcompound = player.getEntityData();
+				nbttagcompound.setByte("Head", (byte)(4 + 100));
+				if(this.armorInventory[4]!=null)
+				{
+					this.armorInventory[4].writeToNBT(nbttagcompound);
+					//par1NBTTagList.appendTag(nbttagcompound);
+				}
+				else
+				{
+					ItemStack is = new ItemStack(Item.getItemById(0),0,0);
+					is.writeToNBT(nbttagcompound);
+				}
+				return par1NBTTagList;
+			}
+		};
+		ip.readFromNBT(nbt);
+		return ip;
+	}
+	
 	public static ItemStack RandomGem(Random random, int rockType)
 	{
 		ItemStack is = null;

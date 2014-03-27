@@ -1,23 +1,66 @@
 package TFC.Items;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
+import TFC.API.Armor;
 import TFC.API.IQuiverAmmo;
 import TFC.API.Enums.EnumAmmo;
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
+import TFC.Core.Util.StringUtil;
+import TFC.Items.Tools.ItemJavelin;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemQuiver extends ItemTerra
+public class ItemQuiver extends ItemTFCArmor
 {
-
-	public ItemQuiver() 
+	public ItemQuiver(Armor armor, int renderIndex, int armorSlot, int thermal, int type)
 	{
-		super();
+		super(armor,renderIndex,armorSlot,thermal,type);
+		ArmorType = armor;
+		this.setCreativeTab(TFCTabs.TFCArmor);
+		//this.setMaxDamage(ArmorType.getDurability(armorSlot));
+	}
+
+	public ItemQuiver(Armor armor, int renderIndex, int armorSlot, ArmorMaterial m, int thermal, int type)
+	{
+		super(armor, renderIndex, armorSlot,m,thermal,type);
+		ArmorType = armor;
+		this.setCreativeTab(TFCTabs.TFCArmor);
+		//this.setMaxDamage(ArmorType.getDurability(armorSlot));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+
+	/**
+	 * Gets an icon index based on an item's damage value and the given render pass
+	 */
+	public IIcon getIconFromDamageForRenderPass(int par1, int par2)
+	{
+		return this.itemIcon;
+	}
+
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
+	{
+		String m = ArmorType.metaltype.replace(" ", "").toLowerCase();
+		return Reference.ModID+String.format(":textures/models/armor/%s_%d%s.png",
+				m, (slot == 2 ? 2 : 1), type == null ? "" : String.format("_%s", type));
 	}
 
 	@Override
@@ -37,6 +80,102 @@ public class ItemQuiver extends ItemTerra
 	public void registerIcons(IIconRegister registerer)
 	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":quiver");
+	}
+
+	@Override
+	/**
+	 * Determines if the specific ItemStack can be placed in the specified armor slot.
+	 *
+	 * @param stack The ItemStack
+	 * @param armorType Armor slot ID: 0: Helmet, 1: Chest, 2: Legs, 3: Boots
+	 * @param entity The entity trying to equip the armor
+	 * @return True if the given ItemStack can be inserted in the slot
+	 */
+	public boolean isValidArmor(ItemStack stack, int armorType, Entity entity)
+	{
+		return armorType == 4;
+	}
+
+	public int getQuiverArrows(ItemStack item){
+		int n = 0;
+		ItemStack[] inventory = loadInventory(item);
+		for(ItemStack i : inventory)
+			if(i!=null && i.getItem() instanceof ItemArrow)
+				n += i.stackSize;
+
+		return n;
+	}
+
+	public int getQuiverJavelins(ItemStack item)
+	{
+		int n = 0;
+		ItemStack[] inventory = loadInventory(item);
+		for(ItemStack i : inventory)
+			if(i!=null && i.getItem() instanceof ItemJavelin)
+				n += i.stackSize;
+
+		return n;
+	}
+
+	public ArrayList[] getQuiverJavelinTypes(ItemStack item)
+	{
+		ArrayList[] pair = new ArrayList[2];
+		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<Integer> listNum = new ArrayList<Integer>();
+		ItemStack[] inventory = loadInventory(item);
+		for(ItemStack i : inventory)
+		{
+			if(i!=null && i.getItem() instanceof ItemJavelin)
+			{
+				String s = i.getItem().getItemStackDisplayName(i);
+				if(!list.contains(s))
+					list.add(s);
+				int n = list.indexOf(s);
+				if(listNum.size() == n)
+					listNum.add(0);
+				listNum.set(n, listNum.get(n)+1);
+			}
+		}
+		pair[0] = list;
+		pair[1] = listNum;
+		return pair;
+	}
+
+	@Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
+	{
+		ItemTerra.addSizeInformation(is, arraylist);
+		ItemTerra.addHeatInformation(is, arraylist);
+
+		if (TFC_Core.showExtraInformation())
+		{
+			//arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.Armor.Advanced") + ":");
+			//arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.Pierce") + ": " + EnumChatFormatting.AQUA + ArmorType.getPiercingAR());
+			//arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.Slash") + ": " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
+			//arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.Crush") + ": " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
+			//arraylist.add("");
+			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.Bow.Advanced") + ":");
+			arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Bow.Arrows") + ": " + EnumChatFormatting.YELLOW + getQuiverArrows(is));
+			arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Bow.Javelins") + ": " + EnumChatFormatting.YELLOW + getQuiverJavelins(is));
+			ArrayList[] javData = getQuiverJavelinTypes(is);
+			for(int i = 0; i < javData[0].size();i++)
+			{
+				String s = (String)(javData[0].get(i));
+				int n = (Integer)(javData[1].get(i));
+				arraylist.add(EnumChatFormatting.ITALIC + "  -" + s + ": "+EnumChatFormatting.YELLOW+n);
+			}
+			if (is.hasTagCompound())
+			{
+				NBTTagCompound stackTagCompound = is.getTagCompound();
+				if(stackTagCompound.hasKey("creator"))
+					arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.ForgedBy") + " " + stackTagCompound.getString("creator"));
+			}
+		}
+		else
+			arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Armor.Advanced") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
+					EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
+					EnumChatFormatting.DARK_GRAY + ")");
+
 	}
 
 	public ItemStack addItem(ItemStack quiver, ItemStack ammo)
@@ -77,12 +216,10 @@ public class ItemQuiver extends ItemTerra
 			{
 				ItemStack out = inventory[i].copy();
 				out.stackSize = 1;
-				if(shouldConsume) {
+				if(shouldConsume)
 					inventory[i].stackSize--;
-				}
-				if(inventory[i].stackSize <= 0) {
+				if(inventory[i].stackSize <= 0)
 					inventory[i] = null;
-				}
 				saveInventory(quiver, inventory);
 				return out;
 			}
@@ -96,16 +233,14 @@ public class ItemQuiver extends ItemTerra
 		NBTTagCompound nbt = quiver.getTagCompound();
 		if(nbt != null && nbt.hasKey("Items"))
 		{
-			NBTTagList nbttaglist = nbt.getTagList("Items", nbt.getTag("Items").getId()); // or is it 10?
+			NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 
 			for(int i = 0; i < nbttaglist.tagCount(); i++)
 			{
 				NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 				byte byte0 = nbttagcompound1.getByte("Slot");
 				if(byte0 >= 0 && byte0 < 8)
-				{
 					inventory[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-				}
 			}
 		}
 		return inventory;
@@ -127,9 +262,7 @@ public class ItemQuiver extends ItemTerra
 		if(quiver != null)
 		{
 			if(!quiver.hasTagCompound()) 
-			{
 				quiver.setTagCompound(new NBTTagCompound());
-			}
 			quiver.getTagCompound().setTag("Items", nbttaglist);
 		}
 	}

@@ -112,13 +112,9 @@ public class EntityLivingHandler
 		ItemStack quiver = null;
 		ItemStack ammo = event.item.getEntityItem();
 		boolean foundJav = false;
+		quiver = player.inventory.armorItemInSlot(0);
 		for(int i = 0; i < 9; i++)
-			if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemQuiver)
-			{
-				quiver = player.inventory.getStackInSlot(i);
-				break;
-			}
-			else if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemJavelin)
+			if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemJavelin)
 				foundJav = true;
 
 		if(quiver != null && ammo.getItem() instanceof ItemArrow)

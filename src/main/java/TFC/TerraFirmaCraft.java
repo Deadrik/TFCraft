@@ -43,7 +43,6 @@ import TFC.Handlers.EnteringChunkHandler;
 import TFC.Handlers.EntityDamageHandler;
 import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.EntitySpawnHandler;
-import TFC.Handlers.PacketHandler;
 import TFC.Handlers.Network.PacketPipeline;
 import TFC.WorldGen.TFCProvider;
 import TFC.WorldGen.TFCProviderHell;
@@ -66,7 +65,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies)

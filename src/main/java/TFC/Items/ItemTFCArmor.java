@@ -29,19 +29,22 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	public IIcon overlayIcon;
 	private int thermal = 0;
 	private int type = 0;
+	private int trueType = 0;
 
 	public ItemTFCArmor(Armor armor, int renderIndex, int armorSlot, int thermal, int type)
 	{
-		super(ArmorMaterial.IRON,renderIndex,armorSlot);
+		super(ArmorMaterial.IRON,renderIndex,armorSlot%4);
 		ArmorType = armor;
+		this.trueType = armorSlot;
 		this.setCreativeTab(TFCTabs.TFCArmor);
 		this.setMaxDamage(ArmorType.getDurability(armorSlot));
 	}
 
 	public ItemTFCArmor(Armor armor, int renderIndex, int armorSlot, ArmorMaterial m, int thermal, int type)
 	{
-		super(m, renderIndex, armorSlot);
+		super(m, renderIndex, armorSlot%4);
 		ArmorType = armor;
+		this.trueType = armorSlot;
 		this.setCreativeTab(TFCTabs.TFCArmor);
 		this.setMaxDamage(ArmorType.getDurability(armorSlot));
 	}
@@ -73,23 +76,25 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 		{
 			this.itemIcon = registerer.registerIcon("minecraft:" + getIconString());
 			overlayIcon = registerer.registerIcon("minecraft:" + leatherNames[this.armorType]);
-		} else
+		}
+		else
 			this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "armor/"+this.getUnlocalizedName().replace("item.", ""));
 	}
 
 	@Override
-	public EnumSize getSize(ItemStack is) {
+	public EnumSize getSize(ItemStack is)
+	{
 		return EnumSize.LARGE;
 	}
 
 	@Override
-	public boolean canStack() 
+	public boolean canStack()
 	{
 		return false;
 	}
 
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 		ItemTerra.addHeatInformation(is, arraylist);
@@ -108,7 +113,8 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 				if(stackTagCompound.hasKey("creator"))
 					arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.ForgedBy") + " " + stackTagCompound.getString("creator"));
 			}
-		} else
+		}
+		else
 			arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Armor.Advanced") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
 					EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
 					EnumChatFormatting.DARK_GRAY + ")");
@@ -149,13 +155,20 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	}
 
 	@Override
-	public int getThermal() 
+	public int getThermal()
 	{
 		return thermal;
 	}
 
+	//ItemArmor can't handle armor types >3, so this allows you to record the "true" armor type, whereas the value vanilla gets is %4
+	public int getUnadjustedArmorType()
+	{
+		return trueType;
+	}
+
 	@Override
-	public int getBodyPart() {
+	public int getBodyPart()
+	{
 		return type;
 	}
 }

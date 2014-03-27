@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.client.renderer.entity.RenderSpider;
 import net.minecraft.client.renderer.entity.RenderZombie;
 import net.minecraft.client.resources.IReloadableResourceManager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.init.Blocks;
@@ -77,6 +78,7 @@ import TFC.Render.RenderEntityStand;
 import TFC.Render.RenderHorseTFC;
 import TFC.Render.RenderPheasantTFC;
 import TFC.Render.RenderPigTFC;
+import TFC.Render.RenderPlayerTFC;
 import TFC.Render.RenderSheepTFC;
 import TFC.Render.RenderSkeletonTFC;
 import TFC.Render.RenderSquidTFC;
@@ -171,7 +173,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityEndermanTFC.class, new RenderEnderman());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigZombieTFC.class, new RenderZombie());
 		RenderingRegistry.registerEntityRenderingHandler(EntityIronGolemTFC.class, new RenderIronGolem());
-		//RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerTFC());
+		RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerTFC());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityProjectileTFC.class, new RenderArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFallingStone.class, new RenderFallingBlock());
