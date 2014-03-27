@@ -1,0 +1,67 @@
+{
+  "player.ceramicbreak": {
+    "category": "ambient",
+    "sounds": [
+      "ceramicbreak1"
+    ]
+  },
+
+  "mob.rooster.cry": {
+    "category": "ambient",
+    "sounds": [
+      "rooster1"
+    ]
+  },
+
+  "quern.stonedrag": {
+    "category": "block",
+    "sounds": [
+      "stonedrag1",
+      "stonedrag2"
+    ]
+  },
+
+  "bellows.blow.air": {
+    "category": "block",
+    "sounds": [
+      "bellows1"
+    ]
+  },
+
+  "dirt.slide.short": {
+    "category": "block",
+    "sounds": [
+      "fDirtS1",
+      "fDirtS2"
+    ]
+  },
+
+  "rock.slide.long": {
+    "category": "block",
+    "sounds": [
+      "fRockL1",
+      "fRockL2"
+    ]
+  },
+
+  "rock.slide.short": {
+    "category": "block",
+    "sounds": [
+      "fRockS1",
+      "fRockS2"
+    ]
+  },
+
+  "anvil.metalimpact": {
+    "category": "block",
+    "sounds": [
+      "metalimpact1",
+      "metalimpact2",
+      "metalimpact3",
+      "metalimpact4"
+    ]
+  }
+}
+
+
+
