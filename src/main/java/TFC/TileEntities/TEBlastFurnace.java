@@ -17,7 +17,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
@@ -80,7 +82,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		airFromBellowsTime = 0;
 		charcoalCount = 0;
 		oreCount = 0;
-		shouldSendInitData = false;
+//		shouldSendInitData = false;
 	}
 
 	public boolean canLight()
@@ -171,7 +173,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	@Override
 	public void closeInventory()
 	{
-		// TODO Auto-generated method stub
 	}
 
 	public void CookItemsNew(int i)
@@ -411,7 +412,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	@Override
 	public void openInventory()
 	{
-		// TODO Auto-generated method stub
 	}
 
 	public boolean AddOreToFire(ItemStack is)
@@ -660,6 +660,28 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		return found;
 	}
 
+	public int getOreCountScaled(int l)
+	{
+		return (this.oreCount * l)/20;
+	}
+
+	public int getCharcoalCountScaled(int l)
+	{
+		return (this.charcoalCount * l)/20;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean hasCustomInventoryName()
+	{
+		return false;
+	}
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
@@ -757,20 +779,33 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		}
 	}
 
-	public void updateGui()
+	@Override
+	public Packet getDescriptionPacket()
 	{
-		if(!worldObj.isRemote)
-			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+///////////////////////////////////
+	//TODO
+	public void updateGui()
+	{
+//		if(!worldObj.isRemote)
+//			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
+	}
 	public void handleDataPacket(DataInputStream inStream) throws IOException
 	{
 		oreCount = inStream.readInt();
 		charcoalCount = inStream.readInt();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-
 	public Packet createUpdatePacket()
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
@@ -787,38 +822,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		catch (IOException e)
 		{
 		}
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+		return null;//this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
 
-	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException
-	{
-	}
-
-	@Override
-	public void handleInitPacket(DataInputStream inStream) throws IOException
-	{
-	}
-
-	public int getOreCountScaled(int l)
-	{
-		return (this.oreCount * l)/20;
-	}
-
-	public int getCharcoalCountScaled(int l)
-	{
-		return (this.charcoalCount * l)/20;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return false;
-	}
 }

@@ -15,7 +15,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
@@ -35,7 +38,7 @@ import TFC.Items.ItemMeltedMetal;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TECrucible extends NetworkTileEntity implements IInventory
+public class TECrucible extends TileEntity implements IInventory
 {
 	public HashMap metals = new HashMap();
 	public Alloy currentAlloy;
@@ -44,6 +47,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public byte inputTick = 0;
 	public byte outputTick = 0;
 	public byte tempTick = 0;
+
 	public TECrucible()
 	{
 		storage = new ItemStack[2];
@@ -95,7 +99,6 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public void readFromItemNBT(NBTTagCompound nbt)
 	{
 		temperature = nbt.getInteger("temp");
-
 		NBTTagList nbttaglist = nbt.getTagList("Metals", 10);
 
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
@@ -117,6 +120,20 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			if(byte0 >= 0 && byte0 < storage.length)
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
+	}
+
+	@Override
+	public Packet getDescriptionPacket()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
 	}
 
 	@Override
@@ -145,7 +162,6 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			if(stackToSmelt != null)
 			{
 				Item itemToSmelt = stackToSmelt.getItem();
-
 				if(itemToSmelt instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(storage[0]))
 				{
 					if(inputTick > 5)
@@ -292,42 +308,11 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			currentAlloy = new Alloy(match, totalAmount); 
 			currentAlloy.AlloyIngred = a;
 		}
-		else 
+		else
 		{
 			currentAlloy = new Alloy(Global.UNKNOWN, totalAmount);
 			currentAlloy.AlloyIngred = a;
 		}
-	}
-
-	@Override
-	public void handleDataPacket(DataInputStream inStream) throws IOException 
-	{
-		byte id = inStream.readByte();
-		if(id == 0 && inStream.available() > 0)
-			this.currentAlloy = new Alloy().fromPacket(inStream);
-		else if(id == 1)
-			currentAlloy.outputAmount = inStream.readFloat();
-		else if(id == 2)
-			currentAlloy = null;
-	}
-
-	@Override
-	public void handleDataPacketServer(DataInputStream inStream) throws IOException
-	{
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException
-	{
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void handleInitPacket(DataInputStream inStream) throws IOException
-	{
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -403,13 +388,11 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	@Override
 	public void openInventory()
 	{
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void closeInventory()
 	{
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -418,6 +401,31 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		return true;
 	}
 
+	public int getOutCountScaled(int length)
+	{
+		if(currentAlloy != null)
+			return ((int)this.currentAlloy.outputAmount * length)/3000;
+		else
+			return 0;
+	}
+
+	public int getTemperatureScaled(int s)
+	{
+		return (temperature * s) / 2500;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	//TODO Udate packet
+	public void handleDataPacket(DataInputStream inStream) throws IOException 
+	{
+		byte id = inStream.readByte();
+		if(id == 0 && inStream.available() > 0)
+			this.currentAlloy = new Alloy().fromPacket(inStream);
+		else if(id == 1)
+			currentAlloy.outputAmount = inStream.readFloat();
+		else if(id == 2)
+			currentAlloy = null;
+	}
 	public Packet createUpdatePacket(byte id)
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
@@ -446,22 +454,8 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		catch (IOException e)
 		{
 		}
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
-
-	public int getOutCountScaled(int length)
-	{
-		if(currentAlloy != null)
-			return ((int)this.currentAlloy.outputAmount * length)/3000;
-		else
-			return 0;
-	}
-
-	public int getTemperatureScaled(int s)
-	{
-		return (temperature * s) / 2500;
-	}
-
 	public void updateGui(byte id)
 	{
 		if(!worldObj.isRemote)

@@ -7,6 +7,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import TFC.Core.TFC_ItemHeat;
 public class TileEntityChestTFC extends TileEntityChest implements IInventory
@@ -80,12 +83,8 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
 	{
 		this.chestContents[par1] = par2ItemStack;
-
 		if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
-		{
 			par2ItemStack.stackSize = this.getInventoryStackLimit();
-		}
-
 		this.markDirty();
 	}
 
@@ -132,6 +131,20 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 		}
 
 		par1NBTTagCompound.setTag("Items", var2);
+	}
+
+	@Override
+	public Packet getDescriptionPacket()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
 	}
 
 	@Override

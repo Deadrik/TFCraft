@@ -14,7 +14,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
@@ -32,7 +35,7 @@ import TFC.Items.ItemMeltedMetal;
 import TFC.Items.ItemTFCArmor;
 import TFC.Items.Tools.ItemMiscToolHead;
 
-public class TileEntityAnvil extends NetworkTileEntity implements IInventory
+public class TileEntityAnvil extends TileEntity implements IInventory
 {
 	public ItemStack anvilItemStacks[];
 
@@ -95,7 +98,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			if(workedRecently > 0)
 				workedRecently--;
 			//Deal with temperatures
-			TFC_ItemHeat.HandleContainerHeat(this.worldObj, anvilItemStacks, xCoord,yCoord,zCoord);
+			TFC_ItemHeat.HandleContainerHeat(this.worldObj, anvilItemStacks, xCoord, yCoord, zCoord);
 			/**
 			 * Check if the recipe is considered complete
 			 * */
@@ -474,14 +477,15 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				worldObj.spawnEntityInWorld(entityitem);
 			}
 	}
+
 	public int getAnvilType()
 	{
 		return blockMetadata & 7;
 	}
+
 	@Override
 	public int getInventoryStackLimit()
 	{
-		// TODO Auto-generated method stub
 		return 64;
 	}
 
@@ -489,6 +493,18 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	public String getInventoryName()
 	{
 		return "Anvil";
+	}
+
+	@Override
+	public boolean hasCustomInventoryName()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack)
+	{
+		return false;
 	}
 
 	public boolean setItemCraftingValue(int i)
@@ -560,10 +576,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			if(index != null)
 			{
 				float temp = anvilItemStacks[i].getTagCompound().getFloat("temperature");
-
 				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.20 && 
 						(anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
-
 			}
 		}
 		return false;
@@ -579,10 +593,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			if(index != null)
 			{
 				float temp = anvilItemStacks[i].getTagCompound().getFloat("temperature");
-
 				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.40 && 
 						(anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
-
 			}
 		}
 		return false;
@@ -603,14 +615,14 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
+	public boolean isUseableByPlayer(EntityPlayer entityplayer)
+	{
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
+	public void openInventory()
+	{
 	}
 
 	@Override
@@ -622,13 +634,12 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		// TODO Auto-generated method stub  
 		return anvilItemStacks[i];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int var1)
+	{
 		return null;
 	}
 
@@ -651,8 +662,6 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		nbt.setInteger("Tier", AnvilTier);
 		nbt.setIntArray("stonePair", stonePair);
 		nbt.setString("plan", craftingPlan);
-
-
 	}
 
 	@Override
@@ -676,6 +685,20 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
+	public Packet getDescriptionPacket()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
+	}
+////////////////////////////////////////////////////////////////////////////
+	//TODO Update packet
 	public void handleDataPacket(DataInputStream inStream) throws IOException  
 	{
 		switch(inStream.readInt())
@@ -728,8 +751,6 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		}	
 		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "anvil.metalimpact", 0.5F, 0.5F + (worldObj.rand.nextFloat()/2));
 	}
-
-	@Override
 	public void createInitPacket(DataOutputStream outStream) throws IOException  
 	{
 		outStream.writeInt(AnvilTier);
@@ -738,8 +759,6 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		outStream.writeInt(anvilItemStacks[this.HAMMER_SLOT]!= null ? Item.getIdFromItem(anvilItemStacks[this.HAMMER_SLOT].getItem()) : 0);
 		outStream.writeInt(anvilItemStacks[this.INPUT1_SLOT]!= null ? Item.getIdFromItem(anvilItemStacks[this.INPUT1_SLOT].getItem()) : 0);
 	}
-
-	@Override
 	public void handleInitPacket(DataInputStream inStream) throws IOException 
 	{
 		AnvilTier = inStream.readInt();
@@ -756,7 +775,6 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-
 	public Packet createAnvilUsePacket(int id)
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
@@ -774,9 +792,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		catch (IOException e)
 		{
 		}
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
-
 	public Packet createAnvilPlanPacket(int id, String s)
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
@@ -795,10 +812,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		catch (IOException e)
 		{
 		}
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
-
-	@Override
 	public void handleDataPacketServer(DataInputStream inStream)throws IOException 
 	{
 		switch(inStream.readInt())
@@ -859,19 +874,6 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		this.lastWorker = worldObj.getPlayerEntityByName(inStream.readUTF());
 		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "anvil.metalimpact", 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
 	}
-
-	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack)
-	{
-		return false;
-	}
-
 	public void setPlan(String s)
 	{
 		if(worldObj.isRemote)

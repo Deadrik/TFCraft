@@ -131,7 +131,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
     // Method to call from FMLInitializationEvent
     public void initalise ()
     {
-        this.channels = NetworkRegistry.INSTANCE.newChannel(Reference.ModChannel, this);
+        this.channels = NetworkRegistry.INSTANCE.newChannel("TFCNew"/*Reference.ModChannel*/, this);
         registerPackets();
     }
 

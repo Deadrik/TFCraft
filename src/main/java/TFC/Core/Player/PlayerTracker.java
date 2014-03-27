@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
@@ -31,7 +32,7 @@ public class PlayerTracker
 		AbstractPacket pkt = new InitClientWorldPacket(event.player);
 		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
 	}
-	
+
 //	@SubscribeEvent
 	public void onClientConnect(ServerConnectionFromClientEvent event)
 	{

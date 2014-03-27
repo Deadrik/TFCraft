@@ -14,7 +14,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
@@ -26,7 +29,7 @@ import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
 
-public class TileEntityBarrel extends NetworkTileEntity implements IInventory
+public class TileEntityBarrel extends TileEntity implements IInventory
 {
 	public int liquidLevel;
 	public int Type;
@@ -42,7 +45,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	public TileEntityBarrel()
 	{
 		liquidLevel = 0;
-		shouldSendInitData = true;
 		sealed = false;
 		//itemstack = new ItemStack(1,0,0);
 		sealtimecounter = 0;
@@ -88,9 +90,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					itemstack2.stackSize++;
 					itemstack.stackSize--;
 				}
-				if(itemstack2.stackSize > 0){
+				if(itemstack2.stackSize > 0)
 					output = itemstack2;
-				}
 			}
 			else if (itemstack.getItem() == TFCItems.Jute){
 				itemstack2 = new ItemStack(TFCItems.JuteFibre,0,0);
@@ -99,9 +100,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					itemstack2.stackSize++;
 					itemstack.stackSize--;
 				}
-				if(itemstack2.stackSize > 0){
+				if(itemstack2.stackSize > 0)
 					output = itemstack2;
-				}
 			}
 			else if(itemstack.getItem() == TFCItems.Logs){
 				itemstack.stackSize--;
@@ -273,9 +273,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void closeInventory() {
-		// TODO Auto-generated method stub
-
+	public void closeInventory()
+	{
 	}
 
 	@Override
@@ -295,11 +294,11 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				itemstack = null;
 			}
 			return itemstack1;
-		} else
+		}
+		else
 		{
 			return null;
 		}
-
 	}
 
 	public void ejectContents()
@@ -315,8 +314,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		{
 			if(itemstack != null)
 			{
-				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
-						itemstack);
+				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, itemstack);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
@@ -328,7 +326,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit()
 	{
-		// TODO Auto-generated method stub
 		return 64;
 	}
 
@@ -347,13 +344,12 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		// TODO Auto-generated method stub
 		return i==0?itemstack:output;
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int var1)
+	{
 		return null;
 	}
 
@@ -369,43 +365,36 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < 2)
-			{
 				setInventorySlotContents(byte0,ItemStack.loadItemStackFromNBT(nbttagcompound1));
-			}
 		}
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
+	public boolean isUseableByPlayer(EntityPlayer entityplayer)
+	{
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
-
+	public void openInventory()
+	{
 	}
 
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
-		if(i == 0){
+		if(i == 0)
+		{
 			this.itemstack = itemstack;
 			if(this.itemstack != null && this.itemstack.stackSize > getInventoryStackLimit())
-			{
 				this.itemstack.stackSize = getInventoryStackLimit();
-			}
 		}
-		else{
+		else
+		{
 			this.output = itemstack;
 			if(this.output != null && output.stackSize > getInventoryStackLimit())
-			{
 				output.stackSize = getInventoryStackLimit();
-			}
 		}
-
-
 	}
 
 	public boolean checkValidAddition(int i){
@@ -413,9 +402,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		{
 			liquidLevel = Math.min(liquidLevel+32, 256);
 			if(Type == 0)
-			{
 				Type = i==12 && Type == 13?14:i;
-			}
 			updateGui();
 			return true;
 		}
@@ -434,20 +421,19 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				//entityplayer.closeScreen();
 				//This is where we handle the counter for producing charcoal. Once it reaches 24hours, we add charcoal to the fire and remove the wood.
 				if(sealtimecounter == 0)
-				{
 					sealtimecounter = (int) TFC_Time.getTotalTicks();
-				}
 
 				if(sealtimecounter > 0 && sealtimecounter + (SEALTIME*100) < TFC_Time.getTotalTicks() )
 				{
 					sealtimecounter = 0;
 					sealed = false;
-					ProcessItems();                
+					ProcessItems();
 				}
 			}
 			
 			if(mode == 1 && liquidLevel > 0 && TFC_Time.getTotalTicks() % 2 == 0 &&
-					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj,0,xCoord,yCoord,zCoord,true)){
+					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj,0,xCoord,yCoord,zCoord,true))
+			{
 				liquidLevel-=4;
 				updateGui();
 			}
@@ -455,7 +441,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			{
 				Type = 0; 
 			}
-			if(mode == 0){
+			if(mode == 0)
+			{
 				if(itemstack == null)
 				{
 					if(output != null)
@@ -511,7 +498,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					}
 				}
 			}
-			else{
+			else
+			{
 				if (itemstack != null)
 				{
 					if((Type>=5&&Type<=11 )&& itemstack.getItem() == Items.glass_bottle && liquidLevel >9*itemstack.stackSize)
@@ -558,6 +546,81 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		}
 	}
 
+	public int getLiquidScaled(int i)
+	{
+		return (int)((liquidLevel/256f)*i);
+	}
+
+	public boolean actionSeal()
+	{
+		if(output==null && liquidLevel > 0 && isItemValid())
+		{
+			sealed = true;
+			//TODO TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
+			return true;
+		}
+		return false;
+	}
+
+	private boolean isItemValid()
+	{
+		if(mode == 0)
+		{
+			if(itemstack == null && ((Type >=5&& Type <=11)||Type == 14))
+				return true;
+			else if(itemstack == null)
+				return false;
+			else
+			{
+				Item id = itemstack.getItem();
+				if(Type == 1)
+				{
+					if(id == TFCItems.ScrapedHide)
+						return true;
+					if(id == TFCItems.Jute)
+						return true;
+					if(id == TFCItems.Logs)
+						return true;
+					if(id == TFCItems.WheatGrain||id == TFCItems.BarleyGrain||id == TFCItems.RyeGrain||id == TFCItems.RiceGrain||
+							id == TFCItems.Potato||id == TFCItems.RedApple||id == TFCItems.GreenApple||id == Items.sugar)
+						return true;
+					if(id == TFCItems.Hide && Type == 2)
+						return true;
+					if(id == TFCItems.PrepHide && Type == 3)
+						return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public void actionEmpty()
+	{
+		liquidLevel =0;
+		Type = 0;
+		//TODO TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
+		updateGui();
+	}
+
+	public void actionMode()
+	{
+		mode= (mode-1)*-1;
+		//TODO TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
+		updateGui();
+	}
+
+	@Override
+	public boolean hasCustomInventoryName()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack)
+	{
+		return false;
+	}
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
@@ -595,17 +658,29 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 	}
 
-	public void updateGui()
+	@Override
+	public Packet getDescriptionPacket()
 	{
-		if(!worldObj.isRemote) {
-			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
-		}
-		else{
-			validate();
-		}
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
+	}
+///////////////////////////////////////////////////////////////////////////////////
+	//TODO Update packet
+	public void updateGui()
+	{
+//		if(!worldObj.isRemote)
+//			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
+//		else
+//			validate();
+	}
+
 	public void handleDataPacket(DataInputStream inStream) throws IOException {
 		Type = inStream.readInt();
 		liquidLevel = inStream.readInt();
@@ -614,7 +689,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		mode = inStream.readInt();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-
 	public Packet createUpdatePacket()
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
@@ -631,10 +705,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			dos.writeInt(mode);
 		} catch (IOException e) {
 		}
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
-
-	@Override
 	public void createInitPacket(DataOutputStream outStream) throws IOException {
 		outStream.writeInt(Type);
 		outStream.writeInt(liquidLevel);
@@ -642,7 +714,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		outStream.writeInt(sealtimecounter);
 		outStream.writeInt(mode);
 	}
-
 	public Packet createSealPacket()
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
@@ -659,11 +730,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			dos.writeInt(mode);
 		} catch (IOException e) {
 		}
-
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
-
-	@Override
 	public void handleInitPacket(DataInputStream inStream) throws IOException {
 		Type = inStream.readInt();
 		liquidLevel = inStream.readInt();
@@ -672,88 +740,11 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		mode = inStream.readInt();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-
-	@Override
-	public void handleDataPacketServer(DataInputStream inStream)
-			throws IOException {
+	public void handleDataPacketServer(DataInputStream inStream) throws IOException {
 		sealed = inStream.readBoolean();
 		liquidLevel = inStream.readInt();
 		Type = inStream.readInt();
 		mode = inStream.readInt();
 	}
 
-	public int getLiquidScaled(int i) {
-		return (int)((liquidLevel/256f)*i);
-	}
-
-	public boolean actionSeal() {
-		if(output==null && liquidLevel > 0 && isItemValid()){
-			sealed = true;
-			TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
-			return true;
-		}
-		return false;
-	}
-
-	private boolean isItemValid() {
-		if(mode == 0){
-			if(itemstack == null && ((Type >=5&& Type <=11)||Type == 14)){
-				return true;
-			}
-			else if(itemstack == null){
-				return false;
-			}
-			else{
-				Item id = itemstack.getItem();
-				if(Type == 1){
-					if(id == TFCItems.ScrapedHide){
-						return true;
-					}
-					if(id == TFCItems.Jute){
-						return true;
-					}
-					if(id == TFCItems.Logs){
-						return true;
-					}
-					if(id == TFCItems.WheatGrain||id == TFCItems.BarleyGrain||id == TFCItems.RyeGrain||id == TFCItems.RiceGrain||
-							id == TFCItems.Potato||id == TFCItems.RedApple||id == TFCItems.GreenApple||id == Items.sugar){
-						return true;
-					}
-				}
-				if(id == TFCItems.Hide && Type == 2){
-					return true;
-				}
-				if(id == TFCItems.PrepHide && Type == 3){
-					return true;
-				}
-
-			}
-		}
-		return false;
-	}
-
-	public void actionEmpty() {
-		liquidLevel =0;
-		Type = 0;
-		TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
-		updateGui();
-	}
-
-	public void actionMode() {
-		mode= (mode-1)*-1;
-		TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
-		updateGui();
-	}
-
-	@Override
-	public boolean hasCustomInventoryName() 
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
-	{
-		return false;
-	}
 }

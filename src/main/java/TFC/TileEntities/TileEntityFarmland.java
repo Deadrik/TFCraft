@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
+import net.minecraft.tileentity.TileEntity;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Time;
 import TFC.Food.CropIndex;
@@ -17,7 +18,7 @@ import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityFarmland extends NetworkTileEntity
+public class TileEntityFarmland extends TileEntity
 {
 	public long nutrientTimer = -1;
 	public int[] nutrients = {6666,6666,6666, 0};

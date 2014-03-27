@@ -14,13 +14,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import TFC.TerraFirmaCraft;
 import TFC.Entities.EntityStand;
 import TFC.Handlers.PacketHandler;
 
-public class TEStand extends NetworkTileEntity implements IInventory
+public class TEStand extends TileEntity implements IInventory
 {
 
 	public ItemStack[] items;
@@ -41,9 +44,13 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
+	public void openInventory()
+	{
+	}
+
+	@Override
 	public void closeInventory()
 	{
-		// TODO Auto-generated method stub
 	}
 
 	public void destroy()
@@ -137,12 +144,6 @@ public class TEStand extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void openInventory()
-	{
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
 		if(!isTop){
@@ -168,7 +169,7 @@ public class TEStand extends NetworkTileEntity implements IInventory
 			}
 			if(hasEntity && entity == null){
 				List list = worldObj.getEntitiesWithinAABB(EntityStand.class, AxisAlignedBB.getBoundingBox(
-						xCoord, yCoord, zCoord, 
+						xCoord, yCoord, zCoord,
 						xCoord+1, yCoord+2, zCoord+1));
 
 				if(list.size() != 0)
@@ -177,6 +178,18 @@ public class TEStand extends NetworkTileEntity implements IInventory
 					hasEntity = false;
 			}
 		}
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean hasCustomInventoryName()
+	{
+		return false;
 	}
 
 	@Override
@@ -218,10 +231,26 @@ public class TEStand extends NetworkTileEntity implements IInventory
 		}
 	}
 
+	@Override
+	public Packet getDescriptionPacket()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+///////////////////////////////////////////////////////////////////
+	//TODO Update packet
 	public void updateGui()
 	{
-		if(!worldObj.isRemote)
-			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
+//		if(!worldObj.isRemote)
+//			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
 	}
 
 	public Packet createHighlightPacket(int i)
@@ -241,16 +270,8 @@ public class TEStand extends NetworkTileEntity implements IInventory
 		{
 		}
 		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack)
-	{
-		return false;
-	}
-
-	@Override
 	public void handleDataPacket(DataInputStream inStream) throws IOException
 	{
 		this.yaw = inStream.readFloat();
@@ -265,9 +286,8 @@ public class TEStand extends NetworkTileEntity implements IInventory
 			if(item != null)
 				items[i] = new ItemStack(item);
 		}
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		
 	}
-
 	public Packet createUpdatePacket()
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
@@ -291,17 +311,13 @@ public class TEStand extends NetworkTileEntity implements IInventory
 		catch (IOException e)
 		{
 		}
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+		return null;//this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
-
-	@Override
 	public void handleDataPacketServer(DataInputStream inStream) throws IOException
 	{
 		highlightedSlot = inStream.readInt();
 		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-
-	@Override
 	public void createInitPacket(DataOutputStream outStream) throws IOException
 	{
 		outStream.writeFloat(yaw);
@@ -315,8 +331,6 @@ public class TEStand extends NetworkTileEntity implements IInventory
 				outStream.writeInt(0);
 		}
 	}
-
-	@Override
 	public void handleInitPacket(DataInputStream inStream) throws IOException
 	{
 		yaw = inStream.readFloat();
@@ -336,9 +350,4 @@ public class TEStand extends NetworkTileEntity implements IInventory
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
-	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return false;
-	}
 }

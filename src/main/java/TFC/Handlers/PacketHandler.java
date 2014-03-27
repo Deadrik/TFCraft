@@ -15,7 +15,9 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.network.play.server.S3FPacketCustomPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
@@ -118,8 +120,8 @@ public class PacketHandler// implements IPacketHandler, IConnectionHandler
 //	}
 
 //	@Override
-//	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player p)
-//	{
+//	public void onPacketData(NetworkManager manager, S35PacketUpdateTileEntity packet) //, Player p)
+//	{}
 //		DataInputStream dis=new DataInputStream(new ByteArrayInputStream(packet.data));
 //
 //		byte type = 0;

@@ -6,8 +6,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
+import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
@@ -16,7 +19,7 @@ import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.Handlers.PacketHandler;
 
-public class TECrop extends NetworkTileEntity
+public class TECrop extends TileEntity
 {
 	public float growth;
 	public int cropId;
@@ -43,12 +46,10 @@ public class TECrop extends NetworkTileEntity
 			sunLevel--;
 
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
-
 			long time = TFC_Time.getTotalTicks();
 
 			if(growthTimer < time && sunLevel > 0)
 			{
-
 				if(crop.needsSunlight && (worldObj.getBlockLightValue(xCoord, yCoord, zCoord) > 11 || worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)))
 				{
 					sunLevel++;
@@ -110,7 +111,8 @@ public class TECrop extends NetworkTileEntity
 				growth += growthRate;
 
 				if(oldGrowth < (int) Math.floor(growth))
-					this.broadcastPacketInRange(createCropUpdatePacket());
+					//TODO Send update packet
+					//this.broadcastPacketInRange(createCropUpdatePacket());
 
 				if((TFCOptions.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2))) || growth < 0)
 					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
@@ -158,46 +160,17 @@ public class TECrop extends NetworkTileEntity
 	}
 
 	@Override
-	public void handleDataPacket(DataInputStream inStream) throws IOException {
-
-		cropId = inStream.readInt();
-		growth = inStream.readFloat();
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-
-	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException {
-		outStream.writeInt(cropId);
-		outStream.writeFloat(growth);
-	}
-
-	@Override
-	public void handleInitPacket(DataInputStream inStream) throws IOException {
-		cropId = inStream.readInt();
-		growth = inStream.readFloat();
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-
-	public Packet createCropUpdatePacket()
+	public Packet getDescriptionPacket()
 	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);	
-		try {
-			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeInt(cropId);
-			dos.writeFloat(growth);
-		} catch (IOException e) {
-		}
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
-	public void handleDataPacketServer(DataInputStream inStream)
-			throws IOException {
-		// TODO Auto-generated method stub
-
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
 	}
+
 }

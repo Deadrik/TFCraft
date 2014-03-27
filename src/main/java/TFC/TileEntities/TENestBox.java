@@ -14,7 +14,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import TFC.TerraFirmaCraft;
 import TFC.API.Entities.IAnimal.GenderEnum;
@@ -22,20 +25,21 @@ import TFC.Core.TFC_Time;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.Handlers.PacketHandler;
 
-public class TENestBox extends NetworkTileEntity implements IInventory
+public class TENestBox extends TileEntity implements IInventory
 {
 	public ItemStack[] inventory = new ItemStack[4];
 
 	public TENestBox()
 	{
-		shouldSendInitData = true;
 	}
 
-	public boolean hasBird(){
+	public boolean hasBird()
+	{
 		return getBird() != null;
 	}
 
-	public EntityAnimal getBird(){
+	public EntityAnimal getBird()
+	{
 		List list = worldObj.getEntitiesWithinAABB(EntityChickenTFC.class, AxisAlignedBB.getBoundingBox(
 				xCoord+0.1, yCoord, zCoord+0.1, 
 				xCoord+0.9, yCoord+1.1, zCoord+0.9));
@@ -66,14 +70,12 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 			for(Object e : list)
 				if(((EntityChickenTFC)e).getGender() == GenderEnum.MALE && ((EntityChickenTFC)e).isAdult())
 					return (EntityChickenTFC)e;
-
 		return null;
 	}
 
 	@Override
 	public void closeInventory()
 	{
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -89,9 +91,7 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 			}
 			ItemStack itemstack1 = inventory[i].splitStack(j);
 			if(inventory[i].stackSize == 0)
-			{
 				inventory[i] = null;
-			}
 			return itemstack1;
 		}
 		else
@@ -223,6 +223,18 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 		}
 	}
 
+	@Override
+	public boolean hasCustomInventoryName()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack)
+	{
+		return false;
+	}
+
 	public NBTTagCompound createGenes(EntityChickenTFC mother, EntityChickenTFC father)
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
@@ -264,22 +276,38 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 		}
 	}
 
-	public void updateGui()
+	@Override
+	public Packet getDescriptionPacket()
 	{
-		if(!worldObj.isRemote)
-			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+/////////////////////////////////////////////////////
+	//TODO Update packet
+	public void updateGui()
+	{
+		
+		//if(!worldObj.isRemote)
+		//	TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
+	}
+
 	public void handleDataPacket(DataInputStream inStream) throws IOException
 	{
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-
 	public Packet createUpdatePacket()
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);	
+		DataOutputStream dos=new DataOutputStream(bos);
 		try
 		{
 			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
@@ -290,34 +318,7 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 		catch (IOException e)
 		{
 		}
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
 
-	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException
-	{
-	}
-
-	@Override
-	public void handleInitPacket(DataInputStream inStream) throws IOException
-	{
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-
-	@Override
-	public void handleDataPacketServer(DataInputStream inStream) throws IOException
-	{
-	}
-
-	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack)
-	{
-		return false;
-	}
 }
