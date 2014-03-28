@@ -42,7 +42,6 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 					rotation = 0;
 					shouldRotate = false;
 					if(!worldObj.isRemote) {
-						if(storage[0] != null) {
 							processItem(TFCItems.WheatGrain, 0, TFCItems.WheatGround, 0, 1);//cornmeal
 							processItem(TFCItems.RyeGrain, 0, TFCItems.RyeGround, 0, 1);//cornmeal
 							processItem(TFCItems.OatGrain, 0, TFCItems.OatGround, 0, 1);//cornmeal
@@ -53,13 +52,12 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 							processItem(TFCItems.OreChunk, 20, TFCItems.Powder, 2, 2);//graphite
 							processItem(TFCItems.OreChunk, 27, Item.redstone, 0, 8);//cinnabar
 							processItem(TFCItems.OreChunk, 28, Item.redstone, 0, 8);//cryolite
-							processItem(Item.bone, 0, TFCItems.Powder, 15, 2);//bone
+							processItem(Item.bone, 0, Item.dyePowder, 15, 2);//bone
 							processItem(TFCItems.OreChunk, 34, TFCItems.Powder, 6, 4);//lapis
 							processItem(TFCItems.OreChunk, 9, TFCItems.Powder, 8, 4);//malachite
 							processItem(TFCItems.OreChunk, 3, TFCItems.Powder, 5, 4);//hematite
 							processItem(TFCItems.OreChunk, 11, TFCItems.Powder, 7, 4);//limonite
 							processItem(TFCItems.OreChunk, 31, TFCItems.Fertilizer, 0, 4);//Sylvite
-						}
 
 						if(storage[2] != null)
 							damageStackInSlot(2);
@@ -73,7 +71,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 
 	public void processItem(Item inputItem, int damageIn, Item outputItem, int damageOut, int amountOut)
 	{
-		if(storage[0].getItem() == inputItem && storage[0].getItemDamage() == damageIn &&
+		if(storage[0] != null && storage[0].getItem() == inputItem && storage[0].getItemDamage() == damageIn &&
 				(storage[1] == null || (storage[1].getItem() == outputItem && storage[1].getItemDamage() == damageOut)))
 		{
 			if(storage[0].stackSize == 1)
