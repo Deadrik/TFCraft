@@ -341,7 +341,15 @@ public class TFC_Climate
 
 		temp = adjustHeightToTemp(y,temp);
 
-		return temp;
+		float bl = worldObj.getBlockLightValue(x, y, z);
+		float light = 0.25f*(1-(bl/15f));
+		//If this block can see the sky then we jsut want it to be ambient temp. 
+		//Shadows should only matter for darkness, not night time.
+		if(worldObj.canBlockSeeTheSky(x, y, z))
+			light = 0;
+
+		if(temp > 0) return temp-(temp*light);
+		else return temp;
 	}
 
 	public static float adjustHeightToTemp(int y, float temp)
