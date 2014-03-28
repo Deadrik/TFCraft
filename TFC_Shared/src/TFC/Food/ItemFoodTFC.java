@@ -3,7 +3,6 @@ package TFC.Food;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -84,6 +83,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		if (is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
+			if(stackTagCompound.hasKey("isSalted"))
+				arraylist.add("\u2022Salted");
 			if(stackTagCompound.hasKey("foodWeight"))
 			{
 				float ounces = stackTagCompound.getFloat("foodWeight");
@@ -128,37 +129,6 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			return EnumChatFormatting.YELLOW.toString();
 		else
 			return "N/A";
-	}
-
-	@Override
-	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
-	{
-		super.onUpdate(is, world, entity, i, isSelected);
-		/*if (!world.isRemote && is.hasTagCompound())
-		{
-			NBTTagCompound nbt = is.getTagCompound();
-			float decay = nbt.getFloat("foodDecay");
-
-
-			//if the tick timer is up then we cause decay.
-			if(nbt.getInteger("decayTimer") + 23 < TFC_Time.getTotalHours())
-			{
-				if(decay < 0)
-					decay++;
-				else if(decay == 0)
-				{
-					decay = nbt.getFloat("foodWeight") * 0.005f;
-					nbt.setFloat("foodDecay", decay);
-				}
-				else
-				{
-					decay = ((decay*1.5f)/24)*decayRate;
-				}
-			}
-
-			if(nbt.getFloat("foodDecay") / nbt.getFloat("foodWeight") > 0.9f)
-				is.stackSize = 0;
-		}*/
 	}
 
 	@Override

@@ -27,11 +27,9 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
-import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
-import TFC.Food.ItemFoodTFC;
 
 public class EntityPigTFC extends EntityPig implements IAnimal
 {
@@ -321,15 +319,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 
 		float foodWeight = ageMod*(this.size_mod * 2400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
-		while(foodWeight > 0)
-		{
-			float fw = Helper.roundNumber(Math.min(80, foodWeight), 10);
-			foodWeight -= fw;
-			if (this.isBurning())
-				this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(Item.porkCooked, 1), fw), 0);
-			else
-				this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(Item.porkRaw, 1), fw), 0);
-		}
+		TFC_Core.animalDropMeat(this, Item.porkRaw, foodWeight);
 	}
 
 	/**

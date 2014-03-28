@@ -20,12 +20,10 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
-import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIFindNest;
-import TFC.Food.ItemFoodTFC;
 
 public class EntityChickenTFC extends EntityChicken implements IAnimal
 {
@@ -308,15 +306,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		{
 			float foodWeight = ageMod*(this.size_mod * 40);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
-			while(foodWeight > 0)
-			{
-				float fw = Helper.roundNumber(Math.min(80, foodWeight), 10);
-				foodWeight -= fw;
-				if (this.isBurning())
-					this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(Item.chickenCooked, 1), fw), 0);
-				else
-					this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(Item.chickenRaw, 1), fw), 0);
-			}
+			TFC_Core.animalDropMeat(this, Item.chickenRaw, foodWeight);
 			this.dropItem(Item.bone.itemID, rand.nextInt(2)+1);
 		}
 	}

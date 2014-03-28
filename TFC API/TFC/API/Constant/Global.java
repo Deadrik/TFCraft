@@ -88,5 +88,11 @@ public class Global
 	public static Metal HCBLUESTEEL; 
 	public static Metal UNKNOWN; 
 
+	/*
+	 * This is the nth root of 1.5 where the root is 24. This means that, excluding 
+	 * environmental factors, food will decay at 50% per 24 hours.
+	 * Easy calculator here: http://www.basic-mathematics.com/nth-root-calculator.html
+	 */
 	public static float FOOD_DECAY_RATE = 1.0170378966055869517978300569768f;
+	public static float FOOD_MAX_WEIGHT = 80;
 }

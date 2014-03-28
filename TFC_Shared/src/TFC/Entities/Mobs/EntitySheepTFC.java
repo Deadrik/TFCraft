@@ -18,12 +18,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
-import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
 import TFC.Entities.AI.EntityAIMateTFC;
-import TFC.Food.ItemFoodTFC;
 import TFC.Items.Tools.ItemCustomKnife;
 
 public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
@@ -275,15 +273,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 
 		float foodWeight = ageMod*(this.size_mod * 1200);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
-		while(foodWeight > 0)
-		{
-			float fw = Helper.roundNumber(Math.min(80, foodWeight), 10);
-			foodWeight -= fw;
-			if (this.isBurning())
-				this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(TFCItems.muttonCooked, 1), fw), 0);
-			else
-				this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(TFCItems.muttonRaw, 1), fw), 0);
-		}
+		TFC_Core.animalDropMeat(this, TFCItems.muttonRaw, foodWeight);
 	}
 
 	@Override

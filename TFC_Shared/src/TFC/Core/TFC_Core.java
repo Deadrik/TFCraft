@@ -7,11 +7,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -30,6 +32,7 @@ import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumWoodMaterial;
+import TFC.API.Util.Helper;
 import TFC.Blocks.BlockSlab;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.Player.BodyTempStats;
@@ -868,10 +871,15 @@ public class TFC_Core
 		{
 			float decay = nbt.getFloat("foodDecay");
 			float thisDecayRate = 1.0f;
+			//Get the base food decay rate
 			if(is.getItem() instanceof ItemFoodTFC)
 				thisDecayRate = ((ItemFoodTFC)is.getItem()).decayRate;
+			//check if the food as a specially applied decay rate in its nbt for some reason
 			if(nbt.hasKey("decayRate"))
 				thisDecayRate = nbt.getFloat("decayRate");
+			//if the food is salted then we cut the decay rate in half
+			if(nbt.hasKey("isSalted"))
+				thisDecayRate *= 0.5f;
 
 			if(decay < 0)
 			{
@@ -898,5 +906,18 @@ public class TFC_Core
 			is.stackSize = 0;
 
 		is.setTagCompound(nbt);
+	}
+
+	public static void animalDropMeat(Entity e, Item i, float foodWeight)
+	{
+		while(foodWeight > 0)
+		{
+			float fw = Helper.roundNumber(Math.min(Global.FOOD_MAX_WEIGHT, foodWeight), 10);
+			if(fw<Global.FOOD_MAX_WEIGHT)
+				foodWeight = 0;
+			foodWeight -= fw;
+
+			e.entityDropItem(ItemFoodTFC.createTag(new ItemStack(i, 1), fw), 0);
+		}
 	}
 }

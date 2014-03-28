@@ -28,7 +28,8 @@ public class SlotQuernGrain extends Slot {
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 11)//Limonite
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 9)//Malachite
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 3)//Hematite
-				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 11))//Limonite
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 11)//Limonite
+				|| (itemstack.getItem() == TFCItems.LooseRock && itemstack.getItemDamage() == 5))//rock salt
 		{
 			return true;
 		}

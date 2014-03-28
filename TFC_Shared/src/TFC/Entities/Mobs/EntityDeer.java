@@ -14,20 +14,17 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
-import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIAvoidEntityTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
 import TFC.Entities.AI.EntityAIPanicTFC;
-import TFC.Food.ItemFoodTFC;
 
 public class EntityDeer extends EntityAnimal implements IAnimal
 {    
@@ -270,15 +267,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		}
 		float foodWeight = ageMod*(this.size_mod * 528);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
-		while(foodWeight > 0)
-		{
-			float fw = Helper.roundNumber(Math.min(80, foodWeight), 10);
-			foodWeight -= fw;
-			if (this.isBurning())
-				this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(TFCItems.venisonCooked, 1), fw), 0);
-			else
-				this.entityDropItem(ItemFoodTFC.createTag(new ItemStack(TFCItems.venisonRaw, 1), fw), 0);
-		}
+		TFC_Core.animalDropMeat(this, TFCItems.venisonRaw, foodWeight);
 	}
 
 

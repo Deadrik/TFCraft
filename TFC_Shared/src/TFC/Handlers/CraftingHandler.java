@@ -23,6 +23,7 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.ItemFoodTFC;
 import TFC.Items.ItemIngot;
 import TFC.Items.ItemMeltedMetal;
+import TFC.Items.Tools.ItemCustomKnife;
 import cpw.mods.fml.common.ICraftingHandler;
 
 public class CraftingHandler implements ICraftingHandler
@@ -175,17 +176,24 @@ public class CraftingHandler implements ICraftingHandler
 			{
 				float finalWeight = 0;
 				float finalDecay = 0;
+				boolean salted = true;
+				int foodSlot = 0; //This is used when cutting food to track where the food originally was since the merge code may remove the stack
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 				{       
 					if(iinventory.getStackInSlot(i) == null)
 						continue;
-					if(iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
+					if(iinventory.getStackInSlot(i).hasTagCompound() && 
+							iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
 					{
+						foodSlot = i;
 						float myWeight = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight");
 						final float myOldWeight = myWeight;
 						float myDecayPercent = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay") / myOldWeight;
 						float myDecay = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay");
 						float w = 0;
+
+						if(!iinventory.getStackInSlot(i).getTagCompound().hasKey("isSalted"))
+							salted = false;
 						//Check if we can add any more to this bundle of food
 						if (finalWeight < 80)
 						{
@@ -207,15 +215,45 @@ public class CraftingHandler implements ICraftingHandler
 
 						if(myWeight > 0)
 						{
-							iinventory.getStackInSlot(i).getTagCompound().setFloat("foodWeight", Helper.roundNumber(myWeight,10));
-							iinventory.getStackInSlot(i).getTagCompound().setFloat("foodDecay", Helper.roundNumber(myDecay,10));
+							iinventory.getStackInSlot(i).getTagCompound().setFloat("foodWeight", Helper.roundNumber(myWeight,100));
+							iinventory.getStackInSlot(i).getTagCompound().setFloat("foodDecay", Helper.roundNumber(myDecay,100));
 							iinventory.getStackInSlot(i).stackSize = iinventory.getStackInSlot(i).stackSize + 1;
 							if(iinventory.getStackInSlot(i).stackSize > 2)
 								iinventory.getStackInSlot(i).stackSize = 2;
 						}
 					}
 				}
-				itemstack = ItemFoodTFC.createTag(itemstack, Helper.roundNumber(finalWeight,10), Helper.roundNumber(finalDecay,10));
+				itemstack = ItemFoodTFC.createTag(itemstack, Helper.roundNumber(finalWeight,10), Helper.roundNumber(finalDecay,100));
+				if(salted)
+					itemstack.getTagCompound().setBoolean("isSalted", true);
+				//Check if we are doing anything other than combining the food
+				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+				{       
+					if(iinventory.getStackInSlot(i) == null)
+						continue;
+					//If we're salting the food
+					if(iinventory.getStackInSlot(i).getItem() == TFCItems.Powder && iinventory.getStackInSlot(i).getItemDamage() == 9)
+					{
+						itemstack.stackTagCompound.setBoolean("isSalted", true);
+					}
+					//if we're removing decay or splitting the stack
+					else if(iinventory.getStackInSlot(i).getItem() instanceof ItemCustomKnife)
+					{
+						if(itemstack.getTagCompound().hasKey("foodDecay") && itemstack.getTagCompound().getFloat("foodDecay") > 0)
+						{
+							itemstack.getTagCompound().setFloat("foodDecay", 0);
+							this.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem().itemID);
+						}
+						else if(itemstack.getTagCompound().hasKey("foodDecay") && itemstack.getTagCompound().getFloat("foodDecay") <= 0)
+						{
+							this.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem().itemID);
+							itemstack.getTagCompound().setFloat("foodWeight", finalWeight/2);
+							ItemStack is = itemstack.copy();
+							is.stackSize++;
+							iinventory.setInventorySlotContents(foodSlot, is);
+						}
+					}
+				}
 			}
 
 			for(int i = 0; i < iinventory.getSizeInventory(); i++) 

@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.Core.TFC_Core;
 
 public class EntitySquidTFC extends EntitySquid
 {
@@ -44,6 +45,7 @@ public class EntitySquidTFC extends EntitySquid
 		{
 			this.entityDropItem(new ItemStack(Item.dyePowder, 1, 0), 0.0F);
 		}
-		this.dropItem(TFCItems.CalamariRaw.itemID,((2+rand.nextInt(5))));
+		//this.dropItem(TFCItems.CalamariRaw.itemID,((2+rand.nextInt(5))));
+		TFC_Core.animalDropMeat(this, TFCItems.CalamariRaw, 0.5f+(1*this.rand.nextFloat()));
 	}
 }
