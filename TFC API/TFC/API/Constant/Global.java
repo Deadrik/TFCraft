@@ -88,5 +88,5 @@ public class Global
 	public static Metal HCBLUESTEEL; 
 	public static Metal UNKNOWN; 
 
-	public static float FOOD_DECAY_RATE = 1.05f;
+	public static float FOOD_DECAY_RATE = 1.0170378966055869517978300569768f;
 }

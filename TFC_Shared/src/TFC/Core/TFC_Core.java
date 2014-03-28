@@ -818,7 +818,7 @@ public class TFC_Core
 		 * so that its only done once per inventory
 		 */
 		float temp = TFC_Climate.getTemp(x, z);
-		float environmentalDecay = 1+((temp-4f)*0.01f);
+		float environmentalDecay = 1+((temp-4f)*0.002f);
 		handleItemTicking(iinv, world, x, y, z, environmentalDecay);
 	}
 
@@ -864,7 +864,7 @@ public class TFC_Core
 
 
 		//if the tick timer is up then we cause decay.
-		if(nbt.getInteger("decayTimer") + 1 < TFC_Time.getTotalHours())
+		if(nbt.getInteger("decayTimer") < TFC_Time.getTotalHours())
 		{
 			float decay = nbt.getFloat("foodDecay");
 			float thisDecayRate = 1.0f;

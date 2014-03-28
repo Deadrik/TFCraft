@@ -58,6 +58,8 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 							processItem(TFCItems.OreChunk, 3, TFCItems.Powder, 5, 4);//hematite
 							processItem(TFCItems.OreChunk, 11, TFCItems.Powder, 7, 4);//limonite
 							processItem(TFCItems.OreChunk, 31, TFCItems.Fertilizer, 0, 4);//Sylvite
+							processItem(TFCItems.LooseRock, 5, TFCItems.Powder, 9, 4);//Sylvite
+						}
 
 						if(storage[2] != null)
 							damageStackInSlot(2);
