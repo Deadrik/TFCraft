@@ -12,8 +12,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -42,6 +43,8 @@ import TFC.Food.ItemFoodTFC;
 import TFC.Items.ItemOre;
 import TFC.Items.ItemQuiver;
 import TFC.Items.ItemTFCArmor;
+import TFC.Items.ItemTerra;
+import TFC.Items.ItemBlocks.ItemTerraBlock;
 import TFC.TileEntities.TileEntityPartial;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -151,6 +154,7 @@ public class TFC_Core
 				}
 			}
 
+			@Override
 			public NBTTagList writeToNBT(NBTTagList par1NBTTagList)
 			{
 				int i;
