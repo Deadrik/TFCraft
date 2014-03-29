@@ -34,15 +34,12 @@ public class ItemBlueprint extends ItemTerra
 		return true;
 	}
 
-
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
 		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, world);
 		if(objectMouseOver == null) 
-		{
 			return stack;
-		}
 
 		int side = objectMouseOver.sideHit;
 		int x = objectMouseOver.blockX;
@@ -71,10 +68,9 @@ public class ItemBlueprint extends ItemTerra
 			NBTTagCompound nbt = new NBTTagCompound();
 			nbt.setByteArray("data", data);
 
-			stack.setTagCompound(nbt);		
+			stack.setTagCompound(nbt);
 		}
-		else if(stack.stackTagCompound != null &&
-				(world.getBlock(x, y, z) == TFCBlocks.Detailed))
+		else if(stack.stackTagCompound != null && (world.getBlock(x, y, z) == TFCBlocks.Detailed))
 		{
 			int hasChisel = -1;
 			int hasHammer = -1;
@@ -109,7 +105,7 @@ public class ItemBlueprint extends ItemTerra
 				//te.data.and(blueprintData);
 				if(!world.isRemote)
 				{
-					TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(x, y, z, te.createFullPacket(), 200);
+					//TODO TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(x, y, z, te.createFullPacket(), 200);
 					stack.stackSize--;
 				}
 			}

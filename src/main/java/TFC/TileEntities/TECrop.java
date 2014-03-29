@@ -1,12 +1,7 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
-import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -17,7 +12,6 @@ import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
-import TFC.Handlers.PacketHandler;
 
 public class TECrop extends TileEntity
 {
@@ -111,7 +105,7 @@ public class TECrop extends TileEntity
 				growth += growthRate;
 
 				if(oldGrowth < (int) Math.floor(growth))
-					//TODO Send update packet
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					//this.broadcastPacketInRange(createCropUpdatePacket());
 
 				if((TFCOptions.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2))) || growth < 0)

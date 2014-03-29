@@ -113,7 +113,8 @@ public class BlockDetailed extends BlockPartial
 		{
 			TileEntityDetailed te = (TileEntityDetailed) world.getTileEntity(x, y, z);
 			lockX = x; lockY = y; lockZ = z;
-			TerraFirmaCraft.proxy.sendCustomPacket(te.createActivatePacket(xSelected, ySelected, zSelected));
+			world.markBlockForUpdate(xSelected, ySelected, zSelected);
+			//TerraFirmaCraft.proxy.sendCustomPacket(te.createActivatePacket(xSelected, ySelected, zSelected));
 		}
 		return false;
 	}
@@ -154,7 +155,7 @@ public class BlockDetailed extends BlockPartial
 				if(player.inventory.mainInventory[hasHammer] != null)
 					player.inventory.mainInventory[hasHammer].damageItem(1, player);
 
-				te.broadcastPacketInRange(te.createUpdatePacket(index));
+				//TODO te.broadcastPacketInRange(te.createUpdatePacket(index));
 			}
 			return true;
 		}

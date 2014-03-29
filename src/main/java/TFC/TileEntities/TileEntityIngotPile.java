@@ -1,12 +1,7 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -14,13 +9,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Handlers.PacketHandler;
 
-public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
+public class TileEntityIngotPile extends TileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	public String type;
@@ -37,7 +34,8 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 				(TFCItems.RoseGoldIngot),(TFCItems.SilverIngot),(TFCItems.SteelIngot),(TFCItems.SterlingSilverIngot),
 				(TFCItems.TinIngot),(TFCItems.ZincIngot), TFCItems.UnknownIngot};
 	}
-	public static Item[] getIngots(){
+	public static Item[] getIngots()
+	{
 		return INGOTS;
 	}
 	
@@ -46,19 +44,20 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		type = i;
 	}
 	
-	public int getStack(){
+	public int getStack()
+	{
 		return storage[0].stackSize;
 	}
 
-	public String getType(){
+	public String getType()
+	{
 		return this.type;
 	}
 
 	public void addContents(int index, ItemStack is)
 	{
-		if(storage[index] == null) {
+		if(storage[index] == null)
 			storage[index] = is;
-		}
 		updateNeighbours();
 	}
 
@@ -69,23 +68,19 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void closeInventory() {
-
+	public void closeInventory()
+	{
 	}
 
 	public boolean contentsMatch(int index, ItemStack is)
 	{
-		if(storage[index] != null){
-			if(storage[index].stackSize == 0){
+		if(storage[index] != null)
+			if(storage[index].stackSize == 0)
 				return true;
-			}
-		}
+
 		if(storage[index].getItem() == is.getItem() && storage[index].getItem() == is.getItem() &&
 				/*storage[index].stackSize < storage[index].getMaxStackSize() &&*/ storage[index].stackSize+1 <= this.getInventoryStackLimit())
-		{
 			return true;
-		}
-
 
 		return false;
 	}
@@ -104,15 +99,12 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
 			if(storage[i].stackSize == 0)
-			{
 				storage[i] = null;
-			}
 			updateNeighbours();
 			return itemstack1;
-		} else
-		{
-			return null;
 		}
+		else
+			return null;
 	}
 
 	public void ejectContents()
@@ -128,8 +120,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		{
 			if(storage[i]!= null)
 			{
-				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
-						storage[i]);
+				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, storage[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
@@ -143,7 +134,6 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit()
 	{
-		// TODO Auto-generated method stub
 		return 64;
 	}
 
@@ -166,36 +156,62 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int var1)
+	{
 		return null;
 	}
 
 	public void injectContents(int index, int count)
 	{
-		if(storage[index] != null) {
-			if(storage[index].stackSize > 0){
-				storage[index] = 
-						new ItemStack(storage[index].getItem(),
-								storage[index].stackSize+count,
-								storage[index].getItemDamage());
-				
-			}
-		}
+		if(storage[index] != null)
+			if(storage[index].stackSize > 0)
+				storage[index] = new ItemStack(storage[index].getItem(), storage[index].stackSize+count, storage[index].getItemDamage());
 		updateNeighbours();
 	}
 
-
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
+	public boolean isUseableByPlayer(EntityPlayer entityplayer)
+	{
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
-
+	public void openInventory()
+	{
 	}
+
+	@Override
+	public void setInventorySlotContents(int i, ItemStack itemstack) 
+	{
+		storage[i] = itemstack;
+		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
+			itemstack.stackSize = getInventoryStackLimit();
+	}
+
+	@Override
+	public void updateEntity()
+	{
+		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
+	}
+
+	public void updateNeighbours()
+	{
+		if(worldObj.blockExists(xCoord, yCoord+1, zCoord) && !worldObj.isAirBlock(xCoord, yCoord+1, zCoord))
+			worldObj.getBlock(xCoord, yCoord+1, zCoord).onNeighborBlockChange(worldObj, xCoord, yCoord+1, zCoord, TFCBlocks.IngotPile);
+	}
+
+	@Override
+	public boolean hasCustomInventoryName()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack)
+	{
+		return false;
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
@@ -209,27 +225,10 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < storage.length)
-			{
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 	}
 
-	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack) 
-	{
-		storage[i] = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-		{
-			itemstack.stackSize = getInventoryStackLimit();
-		}
-	}
-
-	@Override
-	public void updateEntity()
-	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
-	}
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
@@ -250,69 +249,19 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void handleDataPacket(DataInputStream inStream) throws IOException 
+	public Packet getDescriptionPacket()
 	{
-		handleInitPacket(inStream);
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
-	public void handleDataPacketServer(DataInputStream inStream)throws IOException 
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
-		
-		
-	}
-
-	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException {
-		outStream.writeUTF(type);
-		outStream.writeInt(storage[0] != null ? Item.getIdFromItem(storage[0].getItem()) : -1);
-		outStream.writeInt(storage[0] != null ? storage[0].stackSize : 0);
-	}
-	
-	public void updateNeighbours()
-	{
-		if(worldObj.blockExists(xCoord, yCoord+1, zCoord) && !worldObj.isAirBlock(xCoord, yCoord+1, zCoord))
-			worldObj.getBlock(xCoord, yCoord+1, zCoord).onNeighborBlockChange(worldObj, xCoord, yCoord+1, zCoord, TFCBlocks.IngotPile);
-	}
-
-	@Override
-	public void handleInitPacket(DataInputStream inStream) throws IOException 
-	{
-		type = inStream.readUTF();
-		int s1 = inStream.readInt();
-		int size = inStream.readInt();
-		storage[0] = s1 != -1 ? new ItemStack(Item.getItemById(s1),size) : null;
+		readFromNBT(pkt.func_148857_g());
 		updateNeighbours();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-	
-	public Packet createUpdatePacket()
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-		try {
-			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeUTF(type);
-			dos.writeInt(storage[0] != null ? Item.getIdFromItem(storage[0].getItem()) : -1);
-			dos.writeInt(storage[0] != null ? storage[0].stackSize : 0);
-		} catch (IOException e) {
-		}
 
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
-	@Override
-	public boolean hasCustomInventoryName() 
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
-	{
-		return false;
-	}
 }

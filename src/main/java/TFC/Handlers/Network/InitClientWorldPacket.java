@@ -1,5 +1,9 @@
 package TFC.Handlers.Network;
 
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,6 +13,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.PlayerInventory;
+import TFC.Core.Player.SkillStats;
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class InitClientWorldPacket extends AbstractPacket
@@ -18,13 +23,15 @@ public class InitClientWorldPacket extends AbstractPacket
 	private long seed;
 	private FoodStatsTFC foodstats;
 	private boolean craftingTable = false;
+	private DataInputStream dis;
+	private SkillStats playerSkills;
+	private int daysInYear, HGRate, HGCap;
 	
 	public InitClientWorldPacket(EntityPlayer P)
 	{
 		player = P;
 		world = P.worldObj;
 		foodstats = TFC_Core.getPlayerFoodStats(P);
-
 		foodstats.resetTimers();
 		foodstats.writeNBT(P.getEntityData());
 	}
@@ -48,27 +55,39 @@ public class InitClientWorldPacket extends AbstractPacket
 	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
 	{
 		seed = buffer.readLong();
-		TFC_Time.daysInYear = buffer.readInt();
+		daysInYear = buffer.readInt();
 		foodstats.foodLevel = buffer.readFloat();
 		foodstats.waterLevel = buffer.readFloat();
-		TFCOptions.HealthGainRate = buffer.readInt();
-		TFCOptions.HealthGainCap = buffer.readInt();
+		HGRate = buffer.readInt();
+		HGCap = buffer.readInt();
 		craftingTable = buffer.readBoolean();
-		int i = buffer.readInt();
-		for(int l = 0; l < i; ++l)
-			TFC_Core.getSkillStats(player).setSkillSave(ByteBufUtils.readUTF8String(buffer), buffer.readInt());
+		dis = new DataInputStream(new ByteArrayInputStream(buffer.array()));
 	}
 
 	@Override
 	public void handleClientSide(EntityPlayer player)
 	{
 		TFC_Core.setPlayerFoodStats(player, foodstats);
+		TFC_Time.daysInYear = this.daysInYear;
+		TFC_Core.getPlayerFoodStats(player).foodLevel = foodstats.foodLevel;
+		TFC_Core.getPlayerFoodStats(player).waterLevel = foodstats.waterLevel;
+		TFCOptions.HealthGainRate = HGRate;
+		TFCOptions.HealthGainCap = HGCap;
 		if(craftingTable)
 		{
 			player.getEntityData().setBoolean("craftingTable", craftingTable);
 			PlayerInventory.upgradePlayerCrafting(player);
 		}
 		TFC_Core.SetupWorld(world, seed);
+		try
+		{
+			while(dis.available() > 0)
+				playerSkills.setSkillSave(dis.readUTF(), dis.readInt());
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override

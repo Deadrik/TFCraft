@@ -23,6 +23,8 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.SkillStats;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
+import TFC.Handlers.Network.AbstractPacket;
+import TFC.Handlers.Network.PlayerUpdatePacket;
 import TFC.Items.ItemArrow;
 import TFC.Items.ItemQuiver;
 import TFC.Items.Tools.ItemJavelin;
@@ -53,7 +55,10 @@ public class EntityLivingHandler
 				FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 				foodstats.onUpdate(player);
 				TFC_Core.setPlayerFoodStats(player, foodstats);
-				TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, FoodStatsTFC.getStatusPacket(foodstats));
+				//Send update packet
+				AbstractPacket pkt = new PlayerUpdatePacket(player, (byte)0);
+				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+				//TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, FoodStatsTFC.getStatusPacket(foodstats));
 
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
 					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,20,1));

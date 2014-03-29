@@ -103,7 +103,8 @@ public class BlockPottery extends BlockTerraContainer
 						te.ejectItem(2);
 					else if(hitX > 0.5 && hitZ > 0.5)
 						te.ejectItem(3);
-					te.broadcastPacketInRange(te.createUpdatePacket());
+					world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
+					//te.broadcastPacketInRange(te.createUpdatePacket());
 				}
 			}
 		}

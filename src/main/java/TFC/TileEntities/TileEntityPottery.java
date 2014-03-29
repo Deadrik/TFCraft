@@ -1,9 +1,5 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -11,11 +7,13 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import TFC.TFCItems;
 import TFC.API.TFCOptions;
@@ -24,10 +22,9 @@ import TFC.API.Crafting.KilnRecipe;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Core.Metal.Alloy;
-import TFC.Handlers.PacketHandler;
 import TFC.Items.Pottery.ItemPotteryBase;
 
-public class TileEntityPottery extends NetworkTileEntity implements IInventory
+public class TileEntityPottery extends TileEntity implements IInventory
 {
 	public ItemStack inventory[];
 	public boolean hasRack;
@@ -43,7 +40,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 
 	@Override
 	public void updateEntity()
-	{        
+	{
 		//If there are no logs for burning then we dont need to tick at all
 		if(!worldObj.isRemote && logsForBurn > 0)
 		{
@@ -52,13 +49,9 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 			if(blockAbove != Blocks.fire && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFCOptions.pitKilnBurnTime)
 			{
 				if((blockAbove == Blocks.air || worldObj.getBlock(xCoord, yCoord+1, zCoord).getMaterial().getCanBurn()) && isValid()) 
-				{
 					worldObj.setBlock(xCoord, yCoord+1, zCoord, Blocks.fire);
-				} 
 				else 
-				{
 					logsForBurn = 0;
-				}
 			}
 
 			//If the total time passes then we complete the burn and turn the clay into ceramic
@@ -71,43 +64,33 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				{
 					inventory[0] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[0], 0)).copy();
 					if(inventory[0].getItem() instanceof ItemPotteryBase)
-					{
 						((ItemPotteryBase)inventory[0].getItem()).onDoneCooking(worldObj, inventory[0], Alloy.EnumTier.TierI);
-					}
 				}
 				if(inventory[1] != null)
 				{
 					inventory[1] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[1], 0)).copy();
 					if(inventory[1].getItem() instanceof ItemPotteryBase)
-					{
 						((ItemPotteryBase)inventory[1].getItem()).onDoneCooking(worldObj, inventory[1], Alloy.EnumTier.TierI);
-					}
 				}
 				if(inventory[2] != null)
 				{
 					inventory[2] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[2], 0)).copy();
 					if(inventory[2].getItem() instanceof ItemPotteryBase)
-					{
 						((ItemPotteryBase)inventory[2].getItem()).onDoneCooking(worldObj, inventory[2], Alloy.EnumTier.TierI);
-					}
 				}
 				if(inventory[3] != null)
 				{
 					inventory[3] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[3], 0)).copy();
 					if(inventory[3].getItem() instanceof ItemPotteryBase)
-					{
 						((ItemPotteryBase)inventory[3].getItem()).onDoneCooking(worldObj, inventory[3], Alloy.EnumTier.TierI);
-					}
 				}
 
 				logsForBurn = 0;
-
-				broadcastPacketInRange(createUpdatePacket());
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+				//broadcastPacketInRange(createUpdatePacket());
 			}
-
-
 		}
-	}	
+	}
 
 	public void StartPitFire()
 	{
@@ -118,7 +101,6 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 			logsForBurn = telp.getNumberOfLogs();
 			telp.clearContents();
 			worldObj.setBlock(xCoord, yCoord+1, zCoord, Blocks.fire);
-
 			burnStart = TFC_Time.getTotalTicks();
 		}
 	}
@@ -137,9 +119,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 	{
 		inventory[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-		{
 			itemstack.stackSize = getInventoryStackLimit();
-		}
 	}
 
 	public void ejectContents()
@@ -155,8 +135,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 		{
 			if(inventory[i]!= null)
 			{
-				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
-						inventory[i]);
+				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, inventory[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
@@ -186,8 +165,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 			int m = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 			if(m > 0)
 			{
-				entityitem = new EntityItem(
-						worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, new ItemStack(TFCItems.Straw, m));
+				entityitem = new EntityItem(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, new ItemStack(TFCItems.Straw, m));
 				entityitem.lifespan = 48000;
 				worldObj.spawnEntityInWorld(entityitem);
 			}
@@ -195,72 +173,15 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 		}
 	}
 
-	public Packet createUpdatePacket()
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-
-		try {
-			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			if(inventory[0] != null)
-			{
-				dos.writeInt(Item.getIdFromItem(inventory[0].getItem()));
-				dos.writeInt(inventory[0].getItemDamage());
-			}
-			else
-			{
-				dos.writeInt(0);
-				dos.writeInt(0);
-			}
-			if(inventory[1] != null)
-			{
-				dos.writeInt(Item.getIdFromItem(inventory[1].getItem()));
-				dos.writeInt(inventory[1].getItemDamage());
-			}
-			else
-			{
-				dos.writeInt(0);
-				dos.writeInt(0);
-			}
-			if(inventory[2] != null)
-			{
-				dos.writeInt(Item.getIdFromItem(inventory[2].getItem()));
-				dos.writeInt(inventory[2].getItemDamage());
-			}
-			else
-			{
-				dos.writeInt(0);
-				dos.writeInt(0);
-			}
-			if(inventory[3] != null)
-			{
-				dos.writeInt(Item.getIdFromItem(inventory[3].getItem()));
-				dos.writeInt(inventory[3].getItemDamage());
-			}
-			else
-			{
-				dos.writeInt(0);
-				dos.writeInt(0);
-			}
-			dos.writeBoolean(hasRack);
-		} catch (IOException e) {
-		}
-
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
-
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
+	public boolean isUseableByPlayer(EntityPlayer entityplayer)
+	{
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
+	public void openInventory()
+	{
 	}
 
 	@Override
@@ -272,21 +193,54 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		// TODO Auto-generated method stub  
 		return inventory[i];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int var1)
+	{
 		return null;
+	}
+
+	@Override
+	public boolean hasCustomInventoryName()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack)
+	{
+		return false;
+	}
+
+	@Override
+	public ItemStack decrStackSize(int i, int j)
+	{
+		return null;
+	}
+
+	@Override
+	public String getInventoryName()
+	{
+		return "Pottery";
+	}
+
+	@Override
+	public int getInventoryStackLimit()
+	{
+		return 0;
+	}
+
+	@Override
+	public void closeInventory()
+	{
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
-
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < inventory.length; i++)
 		{
@@ -298,9 +252,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
-
 		nbttagcompound.setTag("Items", nbttaglist);
-
 		nbttagcompound.setLong("burnStart", burnStart);
 		nbttagcompound.setBoolean("hasRack", hasRack);
 		nbttagcompound.setInteger("logsForBurn", logsForBurn);
@@ -310,7 +262,6 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		inventory = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
@@ -318,9 +269,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < inventory.length)
-			{
 				inventory[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 		burnStart = nbt.getLong("burnStart");
 		logsForBurn = nbt.getInteger("logsForBurn");
@@ -328,128 +277,168 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException  
+	public Packet getDescriptionPacket()
 	{
-		if(inventory[0] != null)
-		{
-			outStream.writeInt(Item.getIdFromItem(inventory[0].getItem()));
-			outStream.writeInt(inventory[0].getItemDamage());
-		}
-		else
-		{
-			outStream.writeInt(0);
-			outStream.writeInt(0);
-		}
-		if(inventory[1] != null)
-		{
-			outStream.writeInt(Item.getIdFromItem(inventory[1].getItem()));
-			outStream.writeInt(inventory[1].getItemDamage());
-		}
-		else
-		{
-			outStream.writeInt(0);
-			outStream.writeInt(0);
-		}
-		if(inventory[2] != null)
-		{
-			outStream.writeInt(Item.getIdFromItem(inventory[2].getItem()));
-			outStream.writeInt(inventory[2].getItemDamage());
-		}
-		else
-		{
-			outStream.writeInt(0);
-			outStream.writeInt(0);
-		}
-		if(inventory[3] != null)
-		{
-			outStream.writeInt(Item.getIdFromItem(inventory[3].getItem()));
-			outStream.writeInt(inventory[3].getItemDamage());
-		}
-		else
-		{
-			outStream.writeInt(0);
-			outStream.writeInt(0);
-		}
-		outStream.writeBoolean(hasRack);
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
-	public void handleInitPacket(DataInputStream inStream) throws IOException 
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
-		int inv0 = inStream.readInt();
-		int inv0d = inStream.readInt();
-		int inv1 = inStream.readInt();
-		int inv1d = inStream.readInt();
-		int inv2 = inStream.readInt();
-		int inv2d = inStream.readInt();
-		int inv3 = inStream.readInt();
-		int inv3d = inStream.readInt();
-
-		hasRack = inStream.readBoolean();
-
-		inventory[0] = inv0 != 0 ? new ItemStack(Item.getItemById(inv0), 1, inv0d) : null;
-		inventory[1] = inv1 != 0 ? new ItemStack(Item.getItemById(inv1), 1, inv1d) : null;
-		inventory[2] = inv2 != 0 ? new ItemStack(Item.getItemById(inv2), 1, inv2d) : null;
-		inventory[3] = inv3 != 0 ? new ItemStack(Item.getItemById(inv3), 1, inv3d) : null;
-		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		readFromNBT(pkt.func_148857_g());
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
-	@Override
-	public void handleDataPacketServer(DataInputStream inStream)throws IOException 
-	{
 
-	}
 
-	@Override
-	public boolean hasCustomInventoryName() 
-	{
-		return false;
-	}
 
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
-	{
-		return false;
-	}
 
-	@Override
-	public ItemStack decrStackSize(int i, int j) {
-		return null;
-	}
 
-	@Override
-	public String getInventoryName() {
-		return "Pottery";
-	}
 
-	@Override
-	public int getInventoryStackLimit() {
-		return 0;
-	}
-
-	@Override
-	public void closeInventory() 
-	{		
-	}
-
-	@Override
-	public void handleDataPacket(DataInputStream inStream) throws IOException 
-	{
-		int inv0 = inStream.readInt();
-		int inv0d = inStream.readInt();
-		int inv1 = inStream.readInt();
-		int inv1d = inStream.readInt();
-		int inv2 = inStream.readInt();
-		int inv2d = inStream.readInt();
-		int inv3 = inStream.readInt();
-		int inv3d = inStream.readInt();
-
-		hasRack = inStream.readBoolean();
-
-		inventory[0] = inv0 != 0 ? new ItemStack(Item.getItemById(inv0), 1, inv0d) : null;
-		inventory[1] = inv1 != 0 ? new ItemStack(Item.getItemById(inv1), 1, inv1d) : null;
-		inventory[2] = inv2 != 0 ? new ItemStack(Item.getItemById(inv2), 1, inv2d) : null;
-		inventory[3] = inv3 != 0 ? new ItemStack(Item.getItemById(inv3), 1, inv3d) : null;
-		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
+//TODO
+//	@Override
+//	public void createInitPacket(DataOutputStream outStream) throws IOException  
+//	{
+//		if(inventory[0] != null)
+//		{
+//			outStream.writeInt(Item.getIdFromItem(inventory[0].getItem()));
+//			outStream.writeInt(inventory[0].getItemDamage());
+//		}
+//		else
+//		{
+//			outStream.writeInt(0);
+//			outStream.writeInt(0);
+//		}
+//		if(inventory[1] != null)
+//		{
+//			outStream.writeInt(Item.getIdFromItem(inventory[1].getItem()));
+//			outStream.writeInt(inventory[1].getItemDamage());
+//		}
+//		else
+//		{
+//			outStream.writeInt(0);
+//			outStream.writeInt(0);
+//		}
+//		if(inventory[2] != null)
+//		{
+//			outStream.writeInt(Item.getIdFromItem(inventory[2].getItem()));
+//			outStream.writeInt(inventory[2].getItemDamage());
+//		}
+//		else
+//		{
+//			outStream.writeInt(0);
+//			outStream.writeInt(0);
+//		}
+//		if(inventory[3] != null)
+//		{
+//			outStream.writeInt(Item.getIdFromItem(inventory[3].getItem()));
+//			outStream.writeInt(inventory[3].getItemDamage());
+//		}
+//		else
+//		{
+//			outStream.writeInt(0);
+//			outStream.writeInt(0);
+//		}
+//		outStream.writeBoolean(hasRack);
+//	}
+//
+//	@Override
+//	public void handleInitPacket(DataInputStream inStream) throws IOException 
+//	{
+//		int inv0 = inStream.readInt();
+//		int inv0d = inStream.readInt();
+//		int inv1 = inStream.readInt();
+//		int inv1d = inStream.readInt();
+//		int inv2 = inStream.readInt();
+//		int inv2d = inStream.readInt();
+//		int inv3 = inStream.readInt();
+//		int inv3d = inStream.readInt();
+//
+//		hasRack = inStream.readBoolean();
+//
+//		inventory[0] = inv0 != 0 ? new ItemStack(Item.getItemById(inv0), 1, inv0d) : null;
+//		inventory[1] = inv1 != 0 ? new ItemStack(Item.getItemById(inv1), 1, inv1d) : null;
+//		inventory[2] = inv2 != 0 ? new ItemStack(Item.getItemById(inv2), 1, inv2d) : null;
+//		inventory[3] = inv3 != 0 ? new ItemStack(Item.getItemById(inv3), 1, inv3d) : null;
+//		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//	}
+//
+//	@Override
+//	public void handleDataPacket(DataInputStream inStream) throws IOException 
+//	{
+//		int inv0 = inStream.readInt();
+//		int inv0d = inStream.readInt();
+//		int inv1 = inStream.readInt();
+//		int inv1d = inStream.readInt();
+//		int inv2 = inStream.readInt();
+//		int inv2d = inStream.readInt();
+//		int inv3 = inStream.readInt();
+//		int inv3d = inStream.readInt();
+//
+//		hasRack = inStream.readBoolean();
+//
+//		inventory[0] = inv0 != 0 ? new ItemStack(Item.getItemById(inv0), 1, inv0d) : null;
+//		inventory[1] = inv1 != 0 ? new ItemStack(Item.getItemById(inv1), 1, inv1d) : null;
+//		inventory[2] = inv2 != 0 ? new ItemStack(Item.getItemById(inv2), 1, inv2d) : null;
+//		inventory[3] = inv3 != 0 ? new ItemStack(Item.getItemById(inv3), 1, inv3d) : null;
+//		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//	}
+//	public Packet createUpdatePacket()
+//	{
+//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+//		DataOutputStream dos=new DataOutputStream(bos);
+//
+//		try {
+//			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
+//			dos.writeInt(xCoord);
+//			dos.writeInt(yCoord);
+//			dos.writeInt(zCoord);
+//			if(inventory[0] != null)
+//			{
+//				dos.writeInt(Item.getIdFromItem(inventory[0].getItem()));
+//				dos.writeInt(inventory[0].getItemDamage());
+//			}
+//			else
+//			{
+//				dos.writeInt(0);
+//				dos.writeInt(0);
+//			}
+//			if(inventory[1] != null)
+//			{
+//				dos.writeInt(Item.getIdFromItem(inventory[1].getItem()));
+//				dos.writeInt(inventory[1].getItemDamage());
+//			}
+//			else
+//			{
+//				dos.writeInt(0);
+//				dos.writeInt(0);
+//			}
+//			if(inventory[2] != null)
+//			{
+//				dos.writeInt(Item.getIdFromItem(inventory[2].getItem()));
+//				dos.writeInt(inventory[2].getItemDamage());
+//			}
+//			else
+//			{
+//				dos.writeInt(0);
+//				dos.writeInt(0);
+//			}
+//			if(inventory[3] != null)
+//			{
+//				dos.writeInt(Item.getIdFromItem(inventory[3].getItem()));
+//				dos.writeInt(inventory[3].getItemDamage());
+//			}
+//			else
+//			{
+//				dos.writeInt(0);
+//				dos.writeInt(0);
+//			}
+//			dos.writeBoolean(hasRack);
+//		} catch (IOException e) {
+//		}
+//
+//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+//	}
 }

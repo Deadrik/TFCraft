@@ -1,22 +1,14 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Time;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
-import TFC.Handlers.PacketHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityFarmland extends TileEntity
 {
@@ -30,7 +22,6 @@ public class TileEntityFarmland extends TileEntity
 
 	public TileEntityFarmland()
 	{
-		this.shouldSendInitData = false;
 	}
 
 	@Override
@@ -44,7 +35,6 @@ public class TileEntityFarmland extends TileEntity
 			if(nutrientTimer < TFC_Time.getTotalHours())
 			{
 				CropIndex crop = null;
-
 				int soilMax = getSoilMax();
 				int restoreAmount = 139;
 
@@ -81,23 +71,23 @@ public class TileEntityFarmland extends TileEntity
 
 				nutrientTimer+=24;
 
-				//                if(BlockFarmland.isWaterNearby(worldObj, xCoord, yCoord, zCoord))
-				//                {
-				//                    waterSaturation += 1;
-				//                    if(waterSaturation > 30)
-				//                        waterSaturation = 30;
-				//                }
-				//                else if((worldObj.getBlockId(xCoord, yCoord+1, zCoord) == Block.crops.blockID) && crop != null)
-				//                {
-				//                    waterSaturation -= 1*crop.waterUsageMult;
-				//                }
-				//                
-				//                if(worldObj.isRaining() && worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord))
-				//                {
-				//                    waterSaturation += 3;
-				//                    if(waterSaturation > 30)
-				//                        waterSaturation = 30;
-				//                }
+//                if(BlockFarmland.isWaterNearby(worldObj, xCoord, yCoord, zCoord))
+//                {
+//                    waterSaturation += 1;
+//                    if(waterSaturation > 30)
+//                        waterSaturation = 30;
+//                }
+//                else if((worldObj.getBlockId(xCoord, yCoord+1, zCoord) == Block.crops.blockID) && crop != null)
+//                {
+//                    waterSaturation -= 1*crop.waterUsageMult;
+//                }
+//                
+//                if(worldObj.isRaining() && worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord))
+//                {
+//                    waterSaturation += 3;
+//                    if(waterSaturation > 30)
+//                        waterSaturation = 30;
+//                }
 			}
 		}
 	}
@@ -121,7 +111,6 @@ public class TileEntityFarmland extends TileEntity
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-
 		nutrients = nbt.getIntArray("nutrients");
 		nutrientTimer = nbt.getLong("nutrientTimer");
 	}
@@ -138,30 +127,17 @@ public class TileEntityFarmland extends TileEntity
 	}
 
 	@Override
-	public void handleDataPacket(DataInputStream inStream) throws IOException 
+	public Packet getDescriptionPacket()
 	{
-		nutrients[0] = inStream.readInt();
-		nutrients[1] = inStream.readInt();
-		nutrients[2] = inStream.readInt();		
-		nutrients[3] = inStream.readInt();	
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
-	public void handleDataPacketServer(DataInputStream inStream) throws IOException {
-		TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createNutrientPacket(), 5);
-	}
-
-	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void handleInitPacket(DataInputStream inStream) throws IOException {
-		// TODO Auto-generated method stub
-
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
 	}
 
 	public void requestNutrientData()
@@ -169,43 +145,66 @@ public class TileEntityFarmland extends TileEntity
 		if(TFC_Time.getTotalTicks() > timeSinceUpdate + 1000)
 		{
 			timeSinceUpdate = TFC_Time.getTotalTicks();
-			TerraFirmaCraft.proxy.sendCustomPacket(createNutrientRequestPacket());
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			//TerraFirmaCraft.proxy.sendCustomPacket(createNutrientRequestPacket());
 		}
 	}
 
-	public Packet createNutrientRequestPacket()
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
 
-		try {
-			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-		} catch (IOException e) {
-		}
 
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
 
-	public Packet createNutrientPacket()
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
 
-		try {
-			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeInt(nutrients[0]);
-			dos.writeInt(nutrients[1]);
-			dos.writeInt(nutrients[2]);
-			dos.writeInt(nutrients[3]);
-		} catch (IOException e) {
-		}
 
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
+
+//	
+//	@Override
+//	public void handleDataPacket(DataInputStream inStream) throws IOException 
+//	{
+//		nutrients[0] = inStream.readInt();
+//		nutrients[1] = inStream.readInt();
+//		nutrients[2] = inStream.readInt();		
+//		nutrients[3] = inStream.readInt();	
+//	}
+//
+//	@Override
+//	public void handleDataPacketServer(DataInputStream inStream) throws IOException {
+//		TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createNutrientPacket(), 5);
+//	}
+//
+//
+//	public Packet createNutrientRequestPacket()
+//	{
+//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+//		DataOutputStream dos=new DataOutputStream(bos);
+//
+//		try {
+//			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
+//			dos.writeInt(xCoord);
+//			dos.writeInt(yCoord);
+//			dos.writeInt(zCoord);
+//		} catch (IOException e) {
+//		}
+//
+//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+//	}
+//
+//	public Packet createNutrientPacket()
+//	{
+//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+//		DataOutputStream dos=new DataOutputStream(bos);
+//
+//		try {
+//			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
+//			dos.writeInt(xCoord);
+//			dos.writeInt(yCoord);
+//			dos.writeInt(zCoord);
+//			dos.writeInt(nutrients[0]);
+//			dos.writeInt(nutrients[1]);
+//			dos.writeInt(nutrients[2]);
+//			dos.writeInt(nutrients[3]);
+//		} catch (IOException e) {
+//		}
+//
+//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+//	}
 }

@@ -1,9 +1,5 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,7 +7,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import TFC.Handlers.PacketHandler;
 
 public class TileEntityBellows extends TileEntity
 {
@@ -45,9 +40,9 @@ public class TileEntityBellows extends TileEntity
 				{
 					blowDirection = 0;
 					shouldBlow = false;
+					this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 			}
-//			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord); // Needed only if RenderBellows is being used.
 		}
 	}
 
@@ -114,25 +109,4 @@ public class TileEntityBellows extends TileEntity
 		readFromNBT(pkt.func_148857_g());
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////
-	//TODO
-
-	public void handleDataPacket(DataInputStream inStream) throws IOException {
-		this.shouldBlow = inStream.readBoolean();
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-	public Packet createUpdatePacket() {
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-		try {
-			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeBoolean(shouldBlow);
-		} catch (IOException e) {
-		}
-		return null;//this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
-
 }

@@ -39,12 +39,15 @@ public class BlockBellows extends BlockTerraContainer
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		super.onBlockActivated(world, i, j, k, entityplayer, par6, par7, par8, par9);
-		TileEntityBellows te = (TileEntityBellows) world.getTileEntity(i, j, k);
-		if (!world.isRemote)
-			if (!te.shouldBlow)
+		TileEntityBellows teb = null;
+		TileEntity te = world.getTileEntity(i, j, k);
+		if (!world.isRemote && te != null && te instanceof TileEntityBellows)
+			teb = (TileEntityBellows) te;
+			if (!teb.shouldBlow)
 			{
-				te.shouldBlow = true;
-				TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(i, j, k, te.createUpdatePacket(), 160);
+				teb.shouldBlow = true;
+				world.markBlockForUpdate(i, j, k);
+				//TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(i, j, k, te.createUpdatePacket(), 160);
 				world.playSoundEffect(i, j, k, "bellows.blow.air", 0.4F, 1);
 			}
 		return true;

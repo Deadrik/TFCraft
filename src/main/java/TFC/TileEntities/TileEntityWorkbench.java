@@ -4,6 +4,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import TFC.Core.TFC_ItemHeat;
 
@@ -29,23 +32,20 @@ public class TileEntityWorkbench extends TileEntity implements IInventory
 			}
 			ItemStack itemstack1 = craftingMatrix[i].splitStack(j);
 			if(craftingMatrix[i].stackSize == 0)
-			{
 				craftingMatrix[i] = null;
-			}
 			return itemstack1;
-		} else
-		{
-			return null;
 		}
+		else
+			return null;
 	}
 
 	@Override
 	public int getInventoryStackLimit()
 	{
-		// TODO Auto-generated method stub
 		return 64;
 	}
 
+	@Override
 	public int getSizeInventory()
 	{
 		return craftingMatrix.length;
@@ -57,22 +57,16 @@ public class TileEntityWorkbench extends TileEntity implements IInventory
 		return craftingMatrix[i];
 	}
 
-
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int var1)
+	{
 		return null;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public boolean isUseableByPlayer(EntityPlayer entityplayer)
 	{
-		super.readFromNBT(nbttagcompound);
+		return true;
 	}
 
 	@Override
@@ -80,19 +74,13 @@ public class TileEntityWorkbench extends TileEntity implements IInventory
 	{
 		craftingMatrix[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-		{
 			itemstack.stackSize = getInventoryStackLimit();
-		}
 	}
 
+	@Override
 	public void updateEntity()
 	{
 		TFC_ItemHeat.HandleContainerHeat(this.worldObj,craftingMatrix, (int)xCoord,(int)yCoord,(int)zCoord);
-	}
-
-	public void writeToNBT(NBTTagCompound nbttagcompound)
-	{
-		super.writeToNBT(nbttagcompound);
 	}
 
 	@Override
@@ -102,25 +90,50 @@ public class TileEntityWorkbench extends TileEntity implements IInventory
 	}
 
 	@Override
-	public String getInventoryName() {
+	public String getInventoryName()
+	{
 		return "Workbench";
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
-		// TODO Auto-generated method stub
+	public boolean hasCustomInventoryName()
+	{
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
-		
+	public void openInventory()
+	{
 	}
 
 	@Override
-	public void closeInventory() {
-		// TODO Auto-generated method stub
-		
+	public void closeInventory()
+	{
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbttagcompound)
+	{
+		super.readFromNBT(nbttagcompound);
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbttagcompound)
+	{
+		super.writeToNBT(nbttagcompound);
+	}
+
+	@Override
+	public Packet getDescriptionPacket()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
 	}
 }

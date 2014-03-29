@@ -65,20 +65,18 @@ public class ItemPlank extends ItemTerra
 
 			if(side == 0)
 			{
-				if((!isConstruct && isAir) || (isConstruct && isEdge && world.isAirBlock(i, j-offset, k))) {
+				if((!isConstruct && isAir) || (isConstruct && isEdge && world.isAirBlock(i, j-offset, k)))
 					world.setBlock(i, j-1, k, TFCBlocks.WoodConstruct);
-				}
 
 				TileEntity tile = world.getTileEntity(i, j-offset, k);
-				if((tile == null) || (!(tile instanceof TileEntityWoodConstruct))) {
+				if((tile == null) || (!(tile instanceof TileEntityWoodConstruct)))
 					return false;
-				}
 
 				TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
 				te.data.set(dd+(x+(z*d)));
 				te.woodTypes[dd+(x+(z*d))] = (byte) is.getItemDamage();
-
-				te.broadcastPacketInRange(te.createUpdatePacket(dd+(x+(z*d)), (byte) is.getItemDamage()));
+				world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
+				//te.broadcastPacketInRange(te.createUpdatePacket(dd+(x+(z*d)), (byte) is.getItemDamage()));
 			}
 			else if(side == 1)
 			{
@@ -94,8 +92,8 @@ public class ItemPlank extends ItemTerra
 				TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
 				te.data.set(dd+(x+(z*d)));
 				te.woodTypes[dd+(x+(z*d))] = (byte) is.getItemDamage();
-
-				te.broadcastPacketInRange(te.createUpdatePacket(dd+(x+(z*d)), (byte) is.getItemDamage()));
+				world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
+				//te.broadcastPacketInRange(te.createUpdatePacket(dd+(x+(z*d)), (byte) is.getItemDamage()));
 			}
 			else if(side == 2)
 			{
@@ -111,8 +109,8 @@ public class ItemPlank extends ItemTerra
 				TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
 				te.data.set(dd2+(x+(y*d)));
 				te.woodTypes[dd2+(x+(y*d))] = (byte) is.getItemDamage();
-
-				te.broadcastPacketInRange(te.createUpdatePacket(dd2+(x+(y*d)), (byte) is.getItemDamage()));
+				world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
+				//te.broadcastPacketInRange(te.createUpdatePacket(dd2+(x+(y*d)), (byte) is.getItemDamage()));
 			}
 			else if(side == 3)
 			{
@@ -128,8 +126,8 @@ public class ItemPlank extends ItemTerra
 				TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
 				te.data.set(dd2+(x+(y*d)));
 				te.woodTypes[dd2+(x+(y*d))] = (byte) is.getItemDamage();
-
-				te.broadcastPacketInRange(te.createUpdatePacket(dd2+(x+(y*d)), (byte) is.getItemDamage()));
+				world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
+				//te.broadcastPacketInRange(te.createUpdatePacket(dd2+(x+(y*d)), (byte) is.getItemDamage()));
 			}
 			else if(side == 4)
 			{
@@ -145,8 +143,8 @@ public class ItemPlank extends ItemTerra
 				TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
 				te.data.set((y+(z*d)));
 				te.woodTypes[(y+(z*d))] = (byte) is.getItemDamage();
-
-				te.broadcastPacketInRange(te.createUpdatePacket((y+(z*d)), (byte) is.getItemDamage()));
+				world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
+				//te.broadcastPacketInRange(te.createUpdatePacket((y+(z*d)), (byte) is.getItemDamage()));
 			}
 			else if(side == 5)
 			{
@@ -162,8 +160,8 @@ public class ItemPlank extends ItemTerra
 				TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
 				te.data.set((y+(z*d)));
 				te.woodTypes[(y+(z*d))] = (byte) is.getItemDamage();
-
-				te.broadcastPacketInRange(te.createUpdatePacket((y+(z*d)), (byte) is.getItemDamage()));
+				world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
+				//te.broadcastPacketInRange(te.createUpdatePacket((y+(z*d)), (byte) is.getItemDamage()));
 			}
 			is.stackSize--;
 			return true;

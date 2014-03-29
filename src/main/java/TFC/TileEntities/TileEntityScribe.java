@@ -9,6 +9,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityScribe extends TileEntity implements IInventory
@@ -18,7 +21,6 @@ public class TileEntityScribe extends TileEntity implements IInventory
 
 	static
 	{
-
 	}
 
 	public TileEntityScribe()
@@ -27,9 +29,8 @@ public class TileEntityScribe extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void closeInventory() {
-
-
+	public void closeInventory()
+	{
 	}
 
 	@Override
@@ -45,21 +46,16 @@ public class TileEntityScribe extends TileEntity implements IInventory
 			}
 			ItemStack itemstack1 = scribeItemStacks[i].splitStack(j);
 			if(scribeItemStacks[i].stackSize == 0)
-			{
 				scribeItemStacks[i] = null;
-			}
 			return itemstack1;
-		} else
-		{
-			return null;
 		}
-
+		else
+			return null;
 	}
 
 	@Override
 	public int getInventoryStackLimit()
 	{
-		// TODO Auto-generated method stub
 		return 64;
 	}
 
@@ -78,45 +74,24 @@ public class TileEntityScribe extends TileEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		// TODO Auto-generated method stub
 		return scribeItemStacks[i];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int var1)
+	{
 		return null;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
+	public boolean isUseableByPlayer(EntityPlayer entityplayer)
+	{
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void openInventory()
 	{
-		super.readFromNBT(nbttagcompound);
-		//timeleft = nbttagcompound.getInteger("timeleft");
-
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
-		scribeItemStacks = new ItemStack[getSizeInventory()];
-		for(int i = 0; i < nbttaglist.tagCount(); i++)
-		{
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte byte0 = nbttagcompound1.getByte("Slot");
-			if(byte0 >= 0 && byte0 < scribeItemStacks.length)
-			{
-				scribeItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
 	}
 
 	@Override
@@ -124,18 +99,28 @@ public class TileEntityScribe extends TileEntity implements IInventory
 	{
 		scribeItemStacks[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-		{
 			itemstack.stackSize = getInventoryStackLimit();
-		}
 	}
 
 	@Override
 	public void updateEntity()
 	{
-
-
 	}
-	public void nullifyBook(){
+
+	@Override
+	public boolean hasCustomInventoryName() 
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
+	{
+		return false;
+	}
+
+	public void nullifyBook()
+	{
 		ByteArrayOutputStream var3 = new ByteArrayOutputStream(1000);
         DataOutputStream var4 = new DataOutputStream(var3);
         //Commented out for being incorrect. See Packethandler for more information.
@@ -152,11 +137,26 @@ public class TileEntityScribe extends TileEntity implements IInventory
 	}
 
 	@Override
+	public void readFromNBT(NBTTagCompound nbttagcompound)
+	{
+		super.readFromNBT(nbttagcompound);
+		//timeleft = nbttagcompound.getInteger("timeleft");
+		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
+		scribeItemStacks = new ItemStack[getSizeInventory()];
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			byte byte0 = nbttagcompound1.getByte("Slot");
+			if(byte0 >= 0 && byte0 < scribeItemStacks.length)
+				scribeItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		}
+	}
+
+	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
 		//nbttagcompound.setInteger("timeleft", timeleft);
-
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < scribeItemStacks.length; i++)
 		{
@@ -168,22 +168,21 @@ public class TileEntityScribe extends TileEntity implements IInventory
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
-
 		nbttagcompound.setTag("Items", nbttaglist);
-
-
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() 
+	public Packet getDescriptionPacket()
 	{
-		return false;
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
-		return false;
+		readFromNBT(pkt.func_148857_g());
 	}
 
 }

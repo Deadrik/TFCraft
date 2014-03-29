@@ -1,42 +1,5 @@
 package TFC.Handlers;
 
-import ibxm.Player;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.List;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.network.play.server.S3FPacketCustomPayload;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
-import TFC.Reference;
-import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
-import TFC.API.INetworkTE;
-import TFC.API.TFCOptions;
-import TFC.Containers.ContainerSpecialCrafting;
-import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Time;
-import TFC.Core.Player.FoodStatsTFC;
-import TFC.Core.Player.PlayerInfo;
-import TFC.Core.Player.PlayerInventory;
-import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Core.Player.SkillStats;
-import TFC.Items.Tools.ItemWritableBookTFC;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class PacketHandler// implements IPacketHandler, IConnectionHandler
 {
@@ -45,20 +8,20 @@ public class PacketHandler// implements IPacketHandler, IConnectionHandler
 	 * _Client is processed on the client side. Therefore when the client wishes 
 	 * to request something from the server, _Server packets should be sent from the client.
 	 */
-	public static final byte Packet_Init_Block_Client = 0;
-	public static final byte Packet_Init_Block_Server = 1;
-	public static final byte Packet_Keypress_Server = 2;
-	public static final byte Packet_Init_World_Client = 3;
-	public static final byte Packet_Data_Block_Client = 4;
-	public static final byte Packet_Data_Block_Server = 5;
-	public static final byte Packet_Player_Status = 6;
-	public static final byte Packet_Rename_Item = 7;
-	public static final byte Packet_Book_Sign = 8;
-	public static final byte Packet_Update_Knapping = 9;
-	public static final byte Packet_Update_Skills_Client = 10;
-	public static final byte Packet_Update_Skills_Server = 11;
-
-	private static long keyTimer = 0;
+//	public static final byte Packet_Init_Block_Client = 0;
+//	public static final byte Packet_Init_Block_Server = 1;
+//	public static final byte Packet_Keypress_Server = 2;
+//	public static final byte Packet_Init_World_Client = 3;
+//	public static final byte Packet_Data_Block_Client = 4;
+//	public static final byte Packet_Data_Block_Server = 5;
+//	public static final byte Packet_Player_Status = 6;
+//	public static final byte Packet_Rename_Item = 7;
+//	public static final byte Packet_Book_Sign = 8;
+//	public static final byte Packet_Update_Knapping = 9;
+//	public static final byte Packet_Update_Skills_Client = 10;
+//	public static final byte Packet_Update_Skills_Server = 11;
+//
+//	private static long keyTimer = 0;
 
 //	@Override
 //	public void clientLoggedIn(NetHandler clientHandler, INetworkManager manager, Packet1Login login) 
@@ -473,9 +436,9 @@ public class PacketHandler// implements IPacketHandler, IConnectionHandler
 //		//			manager.serverShutdown();
 //	}
 
-	public static S3FPacketCustomPayload getPacket(ByteArrayOutputStream bos)
-	{
-		S3FPacketCustomPayload pkt=new S3FPacketCustomPayload(Reference.ModChannel, bos.toByteArray());
-		return pkt;
-	}
+//	public static S3FPacketCustomPayload getPacket(ByteArrayOutputStream bos)
+//	{
+//		S3FPacketCustomPayload pkt=new S3FPacketCustomPayload(Reference.ModChannel, bos.toByteArray());
+//		return pkt;
+//	}
 }

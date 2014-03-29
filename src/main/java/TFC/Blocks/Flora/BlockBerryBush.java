@@ -203,7 +203,8 @@ public class BlockBerryBush extends BlockTerraContainer
 			{
 				te.hasFruit = false;
 				te.dayHarvested = (int) TFC_Time.getTotalDays();
-				te.broadcastPacketInRange(te.createUpdatePacket());
+				world.markBlockForUpdate(i, j, k);
+				//te.broadcastPacketInRange(te.createUpdatePacket());
 				dropBlockAsItem(world, i, j, k, fi.getOutput());
 				return true;
 			}
@@ -239,7 +240,8 @@ public class BlockBerryBush extends BlockTerraContainer
 					{
 						te.hasFruit = true;
 						te.dayFruited = (int) TFC_Time.getTotalDays();
-						te.broadcastPacketInRange(te.createUpdatePacket());
+						world.markBlockForUpdate(i, j, k);
+						//te.broadcastPacketInRange(te.createUpdatePacket());
 					}
 				}
 				else if(_temp < _fi.minTemp - 5 && _temp > _fi.maxTemp + 5)
@@ -247,14 +249,16 @@ public class BlockBerryBush extends BlockTerraContainer
 					if(te.hasFruit)
 					{
 						te.hasFruit = false;
-						te.broadcastPacketInRange(te.createUpdatePacket());
+						world.markBlockForUpdate(i, j, k);
+						//te.broadcastPacketInRange(te.createUpdatePacket());
 					}
 				}
 
 				if(te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayFruited) > _fi.fruitHangTime)
 				{
 					te.hasFruit = false;
-					te.broadcastPacketInRange(te.createUpdatePacket());
+					world.markBlockForUpdate(i, j, k);
+					//te.broadcastPacketInRange(te.createUpdatePacket());
 				}
 			}
 		}

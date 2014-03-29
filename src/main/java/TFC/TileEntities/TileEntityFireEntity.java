@@ -1,9 +1,5 @@
 package TFC.TileEntities;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityFireEntity extends TileEntity
@@ -50,11 +46,9 @@ public class TileEntityFireEntity extends TileEntity
 		fuelTimeLeft--;
 		if(airFromBellowsTime > 0)
 			fuelTimeLeft--;
-
 		float bAir = airFromBellows*(1+airFromBellowsTime/AIRTOADD);
 		AddedAir = (26+bAir)/25/16;//1038.225 Max //0.3625
 		AddedAir += 0.1045F;//Added to make up for removing the height from the equation.
-
 		return fuelBurnTemp + (fuelBurnTemp * AddedAir);
 	}
 

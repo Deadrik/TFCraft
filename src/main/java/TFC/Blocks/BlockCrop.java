@@ -171,7 +171,8 @@ public class BlockCrop extends BlockContainer
 				if(is1 != null)
 					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
 				te.growth = 4;
-				te.broadcastPacketInRange(te.createCropUpdatePacket());
+				world.markBlockForUpdate(i, j, k);
+				//te.broadcastPacketInRange(te.createCropUpdatePacket());
 				return true;
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 5 && te.growth < 6)
@@ -180,7 +181,8 @@ public class BlockCrop extends BlockContainer
 				if(is1 != null)
 					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
 				te.growth = 3;
-				te.broadcastPacketInRange(te.createCropUpdatePacket());
+				world.markBlockForUpdate(i, j, k);
+				//te.broadcastPacketInRange(te.createCropUpdatePacket());
 				return true;
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 6)
@@ -189,7 +191,8 @@ public class BlockCrop extends BlockContainer
 				if(is1 != null)
 					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
 				te.growth = 3;
-				te.broadcastPacketInRange(te.createCropUpdatePacket());
+				world.markBlockForUpdate(i, j, k);
+				//te.broadcastPacketInRange(te.createCropUpdatePacket());
 				return true;
 			}
 

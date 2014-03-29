@@ -4,7 +4,6 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -12,6 +11,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Vector3f;
@@ -20,7 +22,6 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	private int logPileOpeners;
-
 	private TileEntityFirepit charcoalFirepit;
 	private boolean isOnFire;
 	private int fireTimer;
@@ -35,14 +36,14 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 
 	public void addContents(int index, ItemStack is)
 	{
-		if(storage[index] == null) {
+		if(storage[index] == null)
+		{
 			storage[index] = is;
-
 			if(charcoalFirepit != null)
 			{
 				if(charcoalFirepit.isInactiveCharcoalFirepit())
 					charcoalFirepit.logPileUpdate(is.stackSize);
-				else 
+				else
 					setCharcoalFirepit(null);
 			}
 		}
@@ -57,27 +58,23 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void closeInventory() {
+	public void closeInventory()
+	{
 		--logPileOpeners;
-
-		if(logPileOpeners == 0 && storage[0] == null && storage[1] == null &&
-				storage[2] == null && storage[3] == null)
-		{	
+		if(logPileOpeners == 0 && storage[0] == null && storage[1] == null && storage[2] == null && storage[3] == null)
+		{
 			extinguishFire();
 			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 		}
-
 	}
 
 	public boolean contentsMatch(int index, ItemStack is)
 	{
 		if(storage[index] != null && storage[index].getItem() == is.getItem() && storage[index].getItemDamage() == is.getItemDamage() &&
 				storage[index].stackSize < storage[index].getMaxStackSize() && storage[index].stackSize+1 <= this.getInventoryStackLimit())
-		{
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 
 	public int getNumberOfLogs()
@@ -87,7 +84,6 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 		count[1] = storage[1] != null ? storage[1].stackSize : 0;
 		count[2] = storage[2] != null ? storage[2].stackSize : 0;
 		count[3] = storage[3] != null ? storage[3].stackSize : 0;
-
 		return count[0] + count[1] + count[2] + count[3];
 	}
 
@@ -100,7 +96,6 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 			{
 				ItemStack itemstack = storage[i];
 				storage[i] = null;
-
 				if(charcoalFirepit != null)
 				{
 					if(charcoalFirepit.isInactiveCharcoalFirepit())
@@ -108,14 +103,11 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 					else
 						setCharcoalFirepit(null);
 				}
-
 				return itemstack;
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
 			if(storage[i].stackSize == 0)
-			{
 				storage[i] = null;
-			}
 
 			if(charcoalFirepit != null)
 			{
@@ -124,12 +116,10 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 				else
 					setCharcoalFirepit(null);
 			}
-
 			return itemstack1;
-		} else
-		{
-			return null;
 		}
+		else
+			return null;
 	}
 
 	public void ejectContents()
@@ -153,22 +143,19 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 		{
 			if(storage[i]!= null)
 			{
-				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
-						storage[i]);
+				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, storage[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
 				worldObj.spawnEntityInWorld(entityitem);
 			}
 		}
-
 		extinguishFire();
 	}
 
 	@Override
 	public int getInventoryStackLimit()
 	{
-		// TODO Auto-generated method stub
 		return 4;
 	}
 
@@ -191,14 +178,15 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int var1)
+	{
 		return null;
 	}
 
 	public void injectContents(int index, int count)
 	{
-		if(storage[index] != null) {
+		if(storage[index] != null)
+		{
 			if(charcoalFirepit != null)
 			{
 				if(charcoalFirepit.isInactiveCharcoalFirepit())
@@ -206,42 +194,20 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 				else
 					setCharcoalFirepit(null);
 			}
-
-			storage[index] = 
-					new ItemStack(storage[index].getItem(),
-							storage[index].stackSize+count,
-							storage[index].getItemDamage());
+			storage[index] = new ItemStack(storage[index].getItem(), storage[index].stackSize+count, storage[index].getItemDamage());
 		}
 	}
 
-
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
+	public boolean isUseableByPlayer(EntityPlayer entityplayer)
+	{
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
-		++logPileOpeners;
-	}
-	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void openInventory()
 	{
-		super.readFromNBT(nbttagcompound);
-
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
-		storage = new ItemStack[getSizeInventory()];
-		for(int i = 0; i < nbttaglist.tagCount(); i++)
-		{
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte byte0 = nbttagcompound1.getByte("Slot");
-			if(byte0 >= 0 && byte0 < storage.length)
-			{
-				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
+		++logPileOpeners;
 	}
 
 	@Override
@@ -249,16 +215,13 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 	{
 		storage[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-		{
 			itemstack.stackSize = getInventoryStackLimit();
-		}
 	}
 
 	@Override
 	public void updateEntity()
 	{
 		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
-
 		if(charcoalFirepit != null && !charcoalFirepit.isInactiveCharcoalFirepit())
 		{
 			--fireTimer;
@@ -266,11 +229,26 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 			{
 				if(blocksToBeSetOnFire.size() > 0)
 					setOnFire(blocksToBeSetOnFire);
-
 				fireTimer = 100;
 			}
 		}
 	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbttagcompound)
+	{
+		super.readFromNBT(nbttagcompound);
+		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
+		storage = new ItemStack[getSizeInventory()];
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			byte byte0 = nbttagcompound1.getByte("Slot");
+			if(byte0 >= 0 && byte0 < storage.length)
+				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		}
+	}
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
@@ -289,11 +267,21 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 		nbttagcompound.setTag("Items", nbttaglist);
 	}
 
-	public void handlePacketData() 
+	@Override
+	public Packet getDescriptionPacket()
 	{
-		TileEntityLogPile pile = this;
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
+		//TileEntityLogPile pile = this;
+	}
+	
 	@Override
 	public boolean hasCustomInventoryName() 
 	{
@@ -319,11 +307,10 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 	public void neighborChanged()
 	{
 		if(charcoalFirepit != null)
-		{	
+		{
 			if(!charcoalFirepit.isInactiveCharcoalFirepit())
 			{
 				blocksToBeSetOnFire = new ArrayDeque<Vector3f>();
-
 				if(worldObj.isAirBlock(xCoord+1, yCoord, zCoord))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord+1, yCoord, zCoord));
 				if(worldObj.isAirBlock(xCoord-1, yCoord, zCoord))
@@ -336,10 +323,9 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord+1, zCoord));
 				if(worldObj.isAirBlock(xCoord, yCoord-1, zCoord))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord-1, zCoord));
-
 			}
 			else
-			{			
+			{
 				setCharcoalFirepit(null);
 				extinguishFire();
 				blocksToBeSetOnFire = null;
@@ -365,32 +351,32 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 			if(worldObj.getBlock(xCoord+1, yCoord, zCoord) == Blocks.fire)
 			{
 				worldObj.setBlockToAir(xCoord+1, yCoord, zCoord);
-				worldObj.markBlockForUpdate(xCoord+1, yCoord, zCoord); 
+				worldObj.markBlockForUpdate(xCoord+1, yCoord, zCoord);
 			}
 			if(worldObj.getBlock(xCoord-1, yCoord, zCoord) == Blocks.fire)
 			{
 				worldObj.setBlockToAir(xCoord-1, yCoord, zCoord);
-				worldObj.markBlockForUpdate(xCoord+1, yCoord, zCoord); 
+				worldObj.markBlockForUpdate(xCoord+1, yCoord, zCoord);
 			}
 			if(worldObj.getBlock(xCoord, yCoord, zCoord+1) == Blocks.fire)
 			{
 				worldObj.setBlockToAir(xCoord, yCoord, zCoord+1);
-				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord+1); 
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord+1);
 			}
 			if(worldObj.getBlock(xCoord, yCoord, zCoord-1) == Blocks.fire)
 			{
 				worldObj.setBlockToAir(xCoord+1, yCoord, zCoord-1);
-				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord-1); 
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord-1);
 			}
 			if(worldObj.getBlock(xCoord, yCoord+1, zCoord) == Blocks.fire)
 			{
 				worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);
-				worldObj.markBlockForUpdate(xCoord, yCoord+1, zCoord); 
+				worldObj.markBlockForUpdate(xCoord, yCoord+1, zCoord);
 			}
 			if(worldObj.getBlock(xCoord, yCoord-1, zCoord) == Blocks.fire)
 			{
 				worldObj.setBlockToAir(xCoord, yCoord-1, zCoord);
-				worldObj.markBlockForUpdate(xCoord, yCoord-1, zCoord); 
+				worldObj.markBlockForUpdate(xCoord, yCoord-1, zCoord);
 			}
 			isOnFire = false;
 		}

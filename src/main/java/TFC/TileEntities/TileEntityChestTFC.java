@@ -1,6 +1,5 @@
 package TFC.TileEntities;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
@@ -12,6 +11,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import TFC.Core.TFC_ItemHeat;
+
 public class TileEntityChestTFC extends TileEntityChest implements IInventory
 {
 	private ItemStack[] chestContents = new ItemStack[18];
@@ -37,7 +37,6 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 		if (this.chestContents[par1] != null)
 		{
 			ItemStack var3;
-
 			if (this.chestContents[par1].stackSize <= par2)
 			{
 				var3 = this.chestContents[par1];
@@ -48,12 +47,8 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 			else
 			{
 				var3 = this.chestContents[par1].splitStack(par2);
-
 				if (this.chestContents[par1].stackSize == 0)
-				{
 					this.chestContents[par1] = null;
-				}
-
 				this.markDirty();
 				return var3;
 			}
@@ -105,11 +100,8 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 		{
 			NBTTagCompound var4 = var2.getCompoundTagAt(var3);
 			int var5 = var4.getByte("Slot") & 255;
-
 			if (var5 >= 0 && var5 < this.chestContents.length)
-			{
 				this.chestContents[var5] = ItemStack.loadItemStackFromNBT(var4);
-			}
 		}
 	}
 
@@ -129,7 +121,6 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 				var2.appendTag(var4);
 			}
 		}
-
 		par1NBTTagCompound.setTag("Items", var2);
 	}
 
@@ -178,44 +169,28 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 			this.adjacentChestZPos = null;
 
 			if (this.worldObj.getBlock(this.xCoord - 1, this.yCoord, this.zCoord) == Blocks.chest)
-			{
 				this.adjacentChestXNeg = (TileEntityChestTFC)this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
-			}
 
 			if (this.worldObj.getBlock(this.xCoord + 1, this.yCoord, this.zCoord) == Blocks.chest)
-			{
 				this.adjacentChestXPos = (TileEntityChestTFC)this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
-			}
 
 			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord - 1) == Blocks.chest)
-			{
 				this.adjacentChestZNeg = (TileEntityChestTFC)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
-			}
 
 			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord + 1) == Blocks.chest)
-			{
 				this.adjacentChestZPos = (TileEntityChestTFC)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
-			}
 
 			if (this.adjacentChestZNeg != null)
-			{
 				this.adjacentChestZNeg.updateContainingBlockInfo();
-			}
 
 			if (this.adjacentChestZPos != null)
-			{
 				this.adjacentChestZPos.updateContainingBlockInfo();
-			}
 
 			if (this.adjacentChestXPos != null)
-			{
 				this.adjacentChestXPos.updateContainingBlockInfo();
-			}
 
 			if (this.adjacentChestXNeg != null)
-			{
 				this.adjacentChestXNeg.updateContainingBlockInfo();
-			}
 		}
 	}
 
@@ -225,12 +200,9 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 		super.updateEntity();
 
 		TFC_ItemHeat.HandleContainerHeatChest(this.worldObj, chestContents, xCoord, yCoord, zCoord);
-
 		this.checkForAdjacentChests();
-
 		if (++this.ticksSinceSync % 20 * 4 == 0)
 		{
-
 		}
 
 		this.prevLidAngle = this.lidAngle;
@@ -241,62 +213,38 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 		{
 			double var2 = this.xCoord + 0.5D;
 			var4 = this.zCoord + 0.5D;
-
 			if (this.adjacentChestZPos != null)
-			{
 				var4 += 0.5D;
-			}
-
 			if (this.adjacentChestXPos != null)
-			{
 				var2 += 0.5D;
-			}
-
 			this.worldObj.playSoundEffect(var2, this.yCoord + 0.5D, var4, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 		}
 
 		if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
 		{
-			float var8 = this.lidAngle;
-
+			
 			if (this.numPlayersUsing > 0)
-			{
 				this.lidAngle += var1;
-			}
 			else
-			{
 				this.lidAngle -= var1;
-			}
-
 			if (this.lidAngle > 1.0F)
-			{
 				this.lidAngle = 1.0F;
-			}
 
+			float var8 = this.lidAngle;
 			float var3 = 0.5F;
-
 			if (this.lidAngle < var3 && var8 >= var3 && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
 			{
 				var4 = this.xCoord + 0.5D;
 				double var6 = this.zCoord + 0.5D;
-
 				if (this.adjacentChestZPos != null)
-				{
 					var6 += 0.5D;
-				}
-
 				if (this.adjacentChestXPos != null)
-				{
 					var4 += 0.5D;
-				}
-
 				this.worldObj.playSoundEffect(var4, this.yCoord + 0.5D, var6, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
 
 			if (this.lidAngle < 0.0F)
-			{
 				this.lidAngle = 0.0F;
-			}
 		}
 	}
 
@@ -304,17 +252,17 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 	public boolean receiveClientEvent(int par1, int par2)
 	{
 		if (par1 == 1)
-		{
 			this.numPlayersUsing = par2;
-		}
 		return true;
 	}
+
 	@Override
 	public void openInventory()
 	{
 		++this.numPlayersUsing;
 		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, Blocks.chest, 1, this.numPlayersUsing);
 	}
+
 	@Override
 	public void closeInventory()
 	{
@@ -331,13 +279,13 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() 
+	public boolean hasCustomInventoryName()
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
+	public boolean isItemValidForSlot(int i, ItemStack itemstack)
 	{
 		return true;
 	}

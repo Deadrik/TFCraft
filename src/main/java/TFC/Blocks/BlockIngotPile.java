@@ -49,7 +49,7 @@ public class BlockIngotPile extends BlockTerraContainer
 
 		if(world.isRemote)
 		{
-			((NetworkTileEntity)world.getTileEntity(i,j,k)).validate();
+			world.getTileEntity(i,j,k).validate();
 			return true;
 		}
 		else
@@ -77,7 +77,8 @@ public class BlockIngotPile extends BlockTerraContainer
 					if (tileentityingotpile.getStackInSlot(0).stackSize < 1)
 						world.setBlockToAir(i, j, k);
 
-					tileentityingotpile.broadcastPacketInRange(tileentityingotpile.createUpdatePacket());
+					world.markBlockForUpdate(i, j, k);
+					//tileentityingotpile.broadcastPacketInRange(tileentityingotpile.createUpdatePacket());
 				}
 				//damage = tileentityingotpile.getStackInSlot(0).getItem().itemID - 16028 - 256;
 				//stack = tileentityingotpile.getStackInSlot(0).stackSize;
@@ -110,7 +111,8 @@ public class BlockIngotPile extends BlockTerraContainer
 			{
 				teip.injectContents(0, m2-topSize);
 				world.notifyBlockOfNeighborChange(i, j+1, k, this);
-				teip.broadcastPacketInRange(teip.createUpdatePacket());
+				world.markBlockForUpdate(teip.xCoord, teip.yCoord, teip.zCoord);
+				//teip.broadcastPacketInRange(teip.createUpdatePacket());
 			}
 			else
 				world.setBlockToAir(i, j, k);
@@ -140,7 +142,8 @@ public class BlockIngotPile extends BlockTerraContainer
 			{
 				teip.injectContents(0, m2-topSize);
 				world.notifyBlockOfNeighborChange(i, j+2, k, this);
-				teip.broadcastPacketInRange(teip.createUpdatePacket());
+				world.markBlockForUpdate(teip.xCoord, teip.yCoord, teip.zCoord);
+				//teip.broadcastPacketInRange(teip.createUpdatePacket());
 			}
 			else
 				world.setBlockToAir(i, j+1, k);

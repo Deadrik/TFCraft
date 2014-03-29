@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -23,7 +23,6 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.ISmeltable;
@@ -33,7 +32,9 @@ import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.MetalRegistry;
+import TFC.GUI.GuiBlastFurnace;
 import TFC.Handlers.PacketHandler;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 {
@@ -792,37 +793,15 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	{
 		readFromNBT(pkt.func_148857_g());
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		
+		GuiScreen gui = FMLClientHandler.instance().getClient().currentScreen;
+		if(gui != null && gui instanceof GuiBlastFurnace)
+			((GuiBlastFurnace)gui).updateScreen();
 	}
-///////////////////////////////////
-	//TODO
+
 	public void updateGui()
 	{
-//		if(!worldObj.isRemote)
-//			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
-	}
-	public void handleDataPacket(DataInputStream inStream) throws IOException
-	{
-		oreCount = inStream.readInt();
-		charcoalCount = inStream.readInt();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-	public Packet createUpdatePacket()
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);	
-		try
-		{
-			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeInt(oreCount);
-			dos.writeInt(charcoalCount);
-		}
-		catch (IOException e)
-		{
-		}
-		return null;//this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
 
 }

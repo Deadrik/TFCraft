@@ -6,9 +6,11 @@ import java.util.List;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import TFC.TFCBlocks;
@@ -23,7 +25,6 @@ public class TileEntityEarlyBloomery extends TileEntity
 {
 	public boolean isValid;
 	public boolean bloomeryLit;
-
 	private int prevStackSize;
 	private int numAirBlocks;
 
@@ -46,14 +47,9 @@ public class TileEntityEarlyBloomery extends TileEntity
 	private Boolean CheckValidity() 
 	{
 		if(!worldObj.getBlock(xCoord, yCoord+1, zCoord).isNormalCube())
-		{
 			return false;
-		}
 		if(!worldObj.getBlock(xCoord, yCoord-1, zCoord).isNormalCube())
-		{
 			return false;
-		}
-
 		return true;
 	}
 
@@ -63,29 +59,17 @@ public class TileEntityEarlyBloomery extends TileEntity
 				worldObj.getBlock(i, j-1, k).getMaterial() != Material.rock) ||
 				(!worldObj.getBlock(i, j-1, k).isNormalCube())) &&
 				worldObj.getBlock(i, j-1, k) != TFCBlocks.Charcoal)
-		{
 			return false;
-		}
 		if(worldObj.getBlock(i+1, j, k).getMaterial() != Material.rock || !worldObj.getBlock(i+1, j, k).isNormalCube())
-		{
 			return false;
-		}
 		if(worldObj.getBlock(i-1, j, k).getMaterial() != Material.rock || !worldObj.getBlock(i-1, j, k).isNormalCube())
-		{
 			return false;
-		}
 		if(worldObj.getBlock(i, j, k+1).getMaterial() != Material.rock || !worldObj.getBlock(i, j, k+1).isNormalCube())
-		{
 			return false;
-		}
 		if(worldObj.getBlock(i, j, k-1).getMaterial() != Material.rock || !worldObj.getBlock(i, j, k-1).isNormalCube())
-		{
 			return false;
-		}
-
 		return true;
 	}
-
 
 	public boolean AddOreToFire(ItemStack is)
 	{
@@ -97,7 +81,6 @@ public class TileEntityEarlyBloomery extends TileEntity
 		return false;
 	}
 
-
 	public boolean canLight()
 	{
 		if(!worldObj.isRemote)
@@ -107,9 +90,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 			int[] direction = BlockEarlyBloomery.headBlockToFootBlockMap[meta];
 
 			if (this.charcoalCount < this.oreCount) 
-			{
 				return false;
-			}
 
 			if(worldObj.getBlock(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Charcoal && 
 					worldObj.getBlockMetadata(xCoord+direction[0], yCoord, zCoord+direction[1]) >= 7 && !bloomeryLit)
@@ -117,9 +98,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 				bloomeryLit = true;
 				this.fuelTimeLeft = TFC_Time.getTotalTicks() + 14400;
 				if((meta & 4) == 0) 
-				{
 					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 3);
-				}
 				return true;
 			}
 		}
@@ -160,26 +139,20 @@ public class TileEntityEarlyBloomery extends TileEntity
 				}
 			}
 
-			if(outCount < 0) {
+			if(outCount < 0)
 				outCount = 0;
-			}
-			if(oreCount < 0) {
+			if(oreCount < 0)
 				oreCount = 0;
-			}
-			if(charcoalCount < 0) {
+			if(charcoalCount < 0)
 				charcoalCount = 0;
-			}
 			
 			/* Calculate how much ore the bloomery can hold. */
-			if(isStackValid(xCoord+direction[0], yCoord+3, zCoord+direction[1])) {
+			if(isStackValid(xCoord+direction[0], yCoord+3, zCoord+direction[1]))
 				maxCount = 16;
-			}
-			else if(isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1])) {
+			else if(isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]))
 				maxCount = 12;
-			}
-			else if(isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
+			else if(isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1]))
 				maxCount = 8;
-			}
 
 			/*Fill the bloomery stack with molten ore. */
 			for (int i = 1; i < moltenCount; i++)
@@ -190,20 +163,17 @@ public class TileEntityEarlyBloomery extends TileEntity
 						worldObj.getBlock(xCoord+direction[0], yCoord-1, zCoord+direction[1]).getMaterial() == Material.rock)
 				{
 					//Make sure that the Stack is surrounded by rock
-					if(isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) {
+					if(isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1]))
 						validCount++;
-					}
 
 					if(i-1 < moltenCount && i <= validCount) 
 					{
 						if(this.bloomeryLit)
-						{
 							worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten, 15, 2);
-						} else {
+						else
 							worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten, 0, 2);
-						}
-					} 
-					else 
+					}
+					else
 					{
 						worldObj.setBlockToAir(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
 					}
@@ -214,9 +184,9 @@ public class TileEntityEarlyBloomery extends TileEntity
 					xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1], 
 					xCoord+direction[0]+1, yCoord+moltenCount+1.1, zCoord+direction[1]+1));
 
-			if(moltenCount == 0) {
+			if(moltenCount == 0)
 				moltenCount = 1;
-			}
+
 			/*Make sure the list isn't null or empty and that the stack is valid 1 layer above the Molten Ore*/
 			if (list != null && !list.isEmpty() && isStackValid(xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1]) && !bloomeryLit)
 			{
@@ -234,9 +204,8 @@ public class TileEntityEarlyBloomery extends TileEntity
 								entity.getEntityItem().stackSize--;
 							}
 						}
-						if(entity.getEntityItem().stackSize == 0) {
+						if(entity.getEntityItem().stackSize == 0)
 							entity.setDead();
-						}
 					}
 					/*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
 					else if(entity.getEntityItem().getItem() instanceof ItemOre && ((ItemOre)entity.getEntityItem().getItem()).isSmeltable(entity.getEntityItem()))
@@ -246,22 +215,21 @@ public class TileEntityEarlyBloomery extends TileEntity
 						{
 							if(charcoalCount+oreCount < (2*maxCount) && oreCount < (maxCount) && outCount < 1000)
 							{
-								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(),1,entity.getEntityItem().getItemDamage()))) 
+								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(),1,entity.getEntityItem().getItemDamage())))
 								{
 									oreCount+=1;
 									c--;
-								} else {
-									break;
 								}
-							} else {
-								break;
+								else
+									break;
 							}
+							else
+								break;
 						}
-						if(c == 0) {
+						if(c == 0)
 							entity.setDead();
-						} else {
+						else
 							entity.getEntityItem().stackSize = c;
-						} 
 					}
 					else if(entity.getEntityItem().getItem() instanceof ISmeltable && 
 							((ISmeltable)entity.getEntityItem().getItem()).isSmeltable(entity.getEntityItem()))
@@ -275,22 +243,20 @@ public class TileEntityEarlyBloomery extends TileEntity
 								{
 									oreCount+=1;
 									c--;
-								} else {
-									break;
 								}
-							} else {
-								break;
+								else
+									break;
 							}
+							else
+								break;
 						}
-						if(c == 0) {
+						if(c == 0)
 							entity.setDead();
-						} else {
+						else
 							entity.getEntityItem().stackSize = c;
-						} 
 					}
 				}
 			}
-
 			//Here we make sure that the forge is valid
 			isValid = CheckValidity();
 		}
@@ -318,5 +284,19 @@ public class TileEntityEarlyBloomery extends TileEntity
 		outCount = nbttagcompound.getInteger("outCount");
 		oreCount = nbttagcompound.getInteger("oreCount");
 		bloomeryLit = nbttagcompound.getBoolean("isLit");
+	}
+	
+	@Override
+	public Packet getDescriptionPacket()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
 	}
 }

@@ -1,16 +1,13 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import TFC.Handlers.PacketHandler;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityPartial extends NetworkTileEntity
+public class TileEntityPartial extends TileEntity
 {
 	public short TypeID = -1;
 	public byte MetaID = 0;
@@ -19,7 +16,6 @@ public class TileEntityPartial extends NetworkTileEntity
 
 	public TileEntityPartial()
 	{
-
 	}
 
 	@Override
@@ -154,51 +150,18 @@ public class TileEntityPartial extends NetworkTileEntity
 	}
 
 	@Override
-	public void handleDataPacket(DataInputStream inStream) throws IOException 
+	public Packet getDescriptionPacket()
 	{
-		extraData = inStream.readLong();
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
-	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException 
-	{
-		outStream.writeShort(TypeID);
-		outStream.writeByte(MetaID);
-		outStream.writeByte(material);
-		outStream.writeLong(extraData);
-	}
-
-	@Override
-	public void handleInitPacket(DataInputStream inStream) throws IOException 
-	{
-		TypeID = inStream.readShort();
-		MetaID = inStream.readByte();
-		material = inStream.readByte();
-		extraData = inStream.readLong();
-
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-
-	@Override
-	public void handleDataPacketServer(DataInputStream inStream)
-			throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	public Packet createUpdatePacket()
-	{
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
-		DataOutputStream outStream = new DataOutputStream(bos);	
-		try {
-			outStream.writeByte(PacketHandler.Packet_Data_Block_Client);
-			outStream.writeInt(xCoord);
-			outStream.writeInt(yCoord);
-			outStream.writeInt(zCoord);
-			outStream.writeLong(extraData);	
-		} catch (IOException e) {
-		}
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
 }

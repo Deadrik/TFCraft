@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -21,6 +22,8 @@ import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.ItemTerraFood;
+import TFC.Handlers.Network.AbstractPacket;
+import TFC.Handlers.Network.PlayerUpdatePacket;
 import TFC.Items.ItemIngot;
 import TFC.Items.ItemMeltedMetal;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -30,8 +33,7 @@ public class CraftingHandler// implements ICraftingHandler
 {
 
 	@SubscribeEvent
-	//public void onCrafting(EntityPlayer player, ItemStack itemstack, IInventory iinventory) 
-	public void onCrafting(ItemCraftedEvent e)
+	public void onCrafting(ItemCraftedEvent e)//(EntityPlayer player, ItemStack itemstack, IInventory iinventory)
 	{
 		EntityPlayer player = e.player;
 		Item item = e.crafting.getItem();
@@ -48,20 +50,11 @@ public class CraftingHandler// implements ICraftingHandler
 			{
 				player.getEntityData().setBoolean("craftingTable", true);
 				player.inventory.clearInventory(Item.getItemFromBlock(Blocks.crafting_table), -1);
-				PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
-				//Send a request to the server for the skills data.
-				ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-				DataOutputStream dos=new DataOutputStream(bos);
-				try 
-				{
-					dos.writeByte(PacketHandler.Packet_Update_Skills_Client);
-					dos.writeBoolean(true);
-				}
-				catch (IOException event)
-				{
-					event.printStackTrace();
-				}
-//				pi.networkManager.scheduleOutboundPacket(PacketHandler.getPacket(bos));
+				
+				AbstractPacket pkt = new PlayerUpdatePacket(player, (byte)2);
+				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+
+				//PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
 				//player.inventoryContainer = new ContainerPlayerTFC(player.inventory, !player.worldObj.isRemote, player);
 				//player.openContainer = player.inventoryContainer;
 				PlayerInventory.upgradePlayerCrafting(player);
@@ -227,11 +220,5 @@ public class CraftingHandler// implements ICraftingHandler
 			}
 		}
 	}
-
-//	@Override
-//	public void onSmelting(EntityPlayer player, ItemStack item) {
-//		// TODO Auto-generated method stub
-//
-//	}
 
 }

@@ -114,12 +114,14 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase player, ItemStack is)
 	{
 		super.onBlockPlacedBy(world, i, j, k, player, is);
-		TileEntityBarrel te = (TileEntityBarrel)world.getTileEntity(i, j, k);
-
-		if (te != null && is.hasTagCompound())
+		TileEntityBarrel teb = null;
+		TileEntity te = world.getTileEntity(i, j, k);
+		if (te != null && is.hasTagCompound() && te instanceof TileEntityBarrel)
 		{
-			te.readFromItemNBT(is.getTagCompound());
-			TerraFirmaCraft.proxy.sendCustomPacket(te.createUpdatePacket());
+			teb = (TileEntityBarrel) te;
+			teb.readFromItemNBT(is.getTagCompound());
+			world.markBlockForUpdate(i, j, k);
+			//TerraFirmaCraft.proxy.sendCustomPacket(teb.createUpdatePacket());
 		}
 	}
 
@@ -198,7 +200,6 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 		@Override
 		protected void entityInit()
 		{
-			// TODO Auto-generated method stub
 		}
 
 		@Override
@@ -293,7 +294,8 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	{
 		if (world.isRemote)
 		{
-			((NetworkTileEntity)world.getTileEntity(x,y,z)).validate();
+			//((NetworkTileEntity)world.getTileEntity(x,y,z)).validate();
+			world.markBlockForUpdate(x, y, z);
 			return true;
 		}
 		else

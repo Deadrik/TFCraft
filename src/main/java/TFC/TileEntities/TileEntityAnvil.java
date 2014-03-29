@@ -1,16 +1,11 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -19,7 +14,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
-import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.Crafting.AnvilManager;
@@ -28,9 +22,6 @@ import TFC.API.Crafting.AnvilReq;
 import TFC.API.Enums.RuleEnum;
 import TFC.API.Events.AnvilCraftEvent;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Core.TFC_Sounds;
-import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
 import TFC.Items.ItemTFCArmor;
 import TFC.Items.Tools.ItemMiscToolHead;
@@ -191,7 +182,6 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 			return workRecipe != null ? workRecipe.getCraftingValue() : 0;
 			else
 				return craftingValue;*/
-
 		return workRecipe != null ? workRecipe.getCraftingValue() : 0;
 	}
 
@@ -254,7 +244,6 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 	private void damageHammer()
 	{
 		anvilItemStacks[HAMMER_SLOT].setItemDamage(anvilItemStacks[HAMMER_SLOT].getItemDamage()+1);
-
 		if(anvilItemStacks[HAMMER_SLOT].getItemDamage() == anvilItemStacks[HAMMER_SLOT].getMaxDamage())
 			anvilItemStacks[HAMMER_SLOT] = null;
 	}
@@ -279,8 +268,9 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				updateRules(0,1);
 				damageHammer();
 			}
-		} else
-			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(0));
+		}
+		else
+			;//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(0));
 	}
 
 	public void actionLightHammer()
@@ -294,8 +284,9 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				updateRules(0,1);
 				damageHammer();
 			}
-		} else
-			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(-1));
+		}
+		else
+			;//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(-1));
 	}
 
 	public void actionDraw()
@@ -309,8 +300,9 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				updateRules(1,1);
 				damageHammer();
 			}
-		} else
-			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(1));
+		}
+		else
+			;//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(1));
 	}
 
 	public void actionHammer()
@@ -324,8 +316,9 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				updateRules(0,1);
 				damageHammer();
 			}
-		} else
-			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(2));
+		}
+		else
+			;//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(2));
 	}
 
 	public void actionPunch()
@@ -339,8 +332,9 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				updateRules(3,1);
 				damageHammer();
 			}
-		} else
-			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(3));
+		}
+		else
+			;//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(3));
 	}
 
 	public void actionBend()
@@ -354,8 +348,9 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				updateRules(4,1);
 				damageHammer();
 			}
-		} else
-			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(4));
+		}
+		else
+			;//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(4));
 	}
 
 	public void actionUpset()
@@ -369,8 +364,9 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				updateRules(5,1);
 				damageHammer();
 			}
-		} else
-			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(5));
+		}
+		else
+			;//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(5));
 	}
 
 	public void actionShrink()
@@ -384,9 +380,10 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				updateRules(6,1);
 				damageHammer();
 			}
-		} else
-			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(6));
-	} 
+		}
+		else
+			;//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(6));
+	}
 
 	public void actionWeld()
 	{
@@ -422,10 +419,10 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 					decrStackSize(FLUX_SLOT, 1);
 					damageHammer();
 				}
-
 			}
-		} else
-			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(7));
+		}
+		else
+			;//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(7));
 	}
 	@Override
 	public void closeInventory()
@@ -437,6 +434,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 			worldObj.setBlock(xCoord, yCoord, zCoord, Block.getBlockById(stonePair[0]), stonePair[1], 0x2);
 		}
 	}
+
 	@Override
 	public ItemStack decrStackSize(int i, int j)
 	{
@@ -452,7 +450,8 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 			if(anvilItemStacks[i].stackSize == 0)
 				anvilItemStacks[i] = null;
 			return itemstack1;
-		} else
+		}
+		else
 			return null;
 
 	}
@@ -531,6 +530,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 		}
 		return false;
 	}
+
 	public int getItemCraftingValue()
 	{
 		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].hasTagCompound() && anvilItemStacks[INPUT1_SLOT].getTagCompound().hasKey("itemCraftingValue"))
@@ -647,7 +647,6 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < anvilItemStacks.length; i++)
 			if(anvilItemStacks[i] != null)
@@ -657,7 +656,6 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				anvilItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-
 		nbt.setTag("Items", nbttaglist);
 		nbt.setInteger("Tier", AnvilTier);
 		nbt.setIntArray("stonePair", stonePair);
@@ -668,7 +666,6 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
-
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
 		anvilItemStacks = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
@@ -678,7 +675,6 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 			if(byte0 >= 0 && byte0 < anvilItemStacks.length)
 				anvilItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
-
 		AnvilTier = nbttagcompound.getInteger("Tier");
 		stonePair = nbttagcompound.getIntArray("stonePair");
 		craftingPlan = nbttagcompound.getString("plan");
@@ -697,187 +693,193 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 	{
 		readFromNBT(pkt.func_148857_g());
 	}
+
+
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////
 	//TODO Update packet
-	public void handleDataPacket(DataInputStream inStream) throws IOException  
-	{
-		switch(inStream.readInt())
-		{
-		case -1:
-		{
-			actionLightHammer();
-			break;
-		}
-		case 0:
-		{
-			actionHeavyHammer();
-			break;
-		}
-		case 1:
-		{
-			actionDraw();
-			break;
-		}
-		case 2:
-		{
-			actionHammer();
-			break;
-		}
-		case 3:
-		{
-			actionPunch();
-			break;
-		}
-		case 4:
-		{
-			actionBend();
-			break;
-		}
-		case 5:
-		{
-			actionUpset();
-			break;
-		}
-		case 6:   
-		{
-			actionShrink();
-			break;
-		}
-		case 7:
-		{
-			actionWeld();
-			break;
-		}
-		}	
-		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "anvil.metalimpact", 0.5F, 0.5F + (worldObj.rand.nextFloat()/2));
-	}
-	public void createInitPacket(DataOutputStream outStream) throws IOException  
-	{
-		outStream.writeInt(AnvilTier);
-		outStream.writeInt(stonePair[0]);
-		outStream.writeInt(stonePair[1]);
-		outStream.writeInt(anvilItemStacks[this.HAMMER_SLOT]!= null ? Item.getIdFromItem(anvilItemStacks[this.HAMMER_SLOT].getItem()) : 0);
-		outStream.writeInt(anvilItemStacks[this.INPUT1_SLOT]!= null ? Item.getIdFromItem(anvilItemStacks[this.INPUT1_SLOT].getItem()) : 0);
-	}
-	public void handleInitPacket(DataInputStream inStream) throws IOException 
-	{
-		AnvilTier = inStream.readInt();
-		stonePair[0] = inStream.readInt();
-		stonePair[1] = inStream.readInt();
-		int id = inStream.readInt();
-		Item item = Item.getItemById(id);
-		if(item != null)
-			anvilItemStacks[HAMMER_SLOT] = new ItemStack(item);
-		id = inStream.readInt();
-		item = Item.getItemById(id);
-		if(item != null)
-			anvilItemStacks[INPUT1_SLOT] = new ItemStack(item);
-
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-	public Packet createAnvilUsePacket(int id)
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-
-		try
-		{
-			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeInt(id);
-			dos.writeUTF(PlayerManagerTFC.getInstance().getClientPlayer().Name);
-		}
-		catch (IOException e)
-		{
-		}
-		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
-	public Packet createAnvilPlanPacket(int id, String s)
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-
-		try
-		{
-			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeInt(id);
-			dos.writeUTF(s);
-			dos.writeUTF(PlayerManagerTFC.getInstance().getClientPlayer().Name);
-		}
-		catch (IOException e)
-		{
-		}
-		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
-	public void handleDataPacketServer(DataInputStream inStream)throws IOException 
-	{
-		switch(inStream.readInt())
-		{
-		case -1:
-		{
-			actionLightHammer();
-			break;
-		}
-		case 0:
-		{
-			actionHeavyHammer();
-			break;
-		}
-		case 1:
-		{
-			actionDraw();
-			break;
-		}
-		case 2:
-		{
-			actionHammer();
-			break;
-		}
-		case 3:
-		{
-			actionPunch();
-			break;
-		}
-		case 4:
-		{
-			actionBend();
-			break;
-		}
-		case 5:
-		{
-			actionUpset();
-			break;
-		}
-		case 6:   
-		{
-			actionShrink();
-			break;
-		}
-		case 7:
-		{
-			actionWeld();
-			break;
-		}
-		case 8:
-		{
-			setPlan(inStream.readUTF());
-			this.lastWorker = worldObj.getPlayerEntityByName(inStream.readUTF());
-			this.lastWorker.openGui(TerraFirmaCraft.instance, 21, worldObj, xCoord, yCoord, zCoord);
-			return;
-		}
-		}		
-		this.lastWorker = worldObj.getPlayerEntityByName(inStream.readUTF());
-		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "anvil.metalimpact", 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
-	}
-	public void setPlan(String s)
-	{
-		if(worldObj.isRemote)
-			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilPlanPacket(8, s));
-		this.craftingPlan = s;
-	}
+//	public void handleDataPacket(DataInputStream inStream) throws IOException  
+//	{
+//		switch(inStream.readInt())
+//		{
+//		case -1:
+//		{
+//			actionLightHammer();
+//			break;
+//		}
+//		case 0:
+//		{
+//			actionHeavyHammer();
+//			break;
+//		}
+//		case 1:
+//		{
+//			actionDraw();
+//			break;
+//		}
+//		case 2:
+//		{
+//			actionHammer();
+//			break;
+//		}
+//		case 3:
+//		{
+//			actionPunch();
+//			break;
+//		}
+//		case 4:
+//		{
+//			actionBend();
+//			break;
+//		}
+//		case 5:
+//		{
+//			actionUpset();
+//			break;
+//		}
+//		case 6:   
+//		{
+//			actionShrink();
+//			break;
+//		}
+//		case 7:
+//		{
+//			actionWeld();
+//			break;
+//		}
+//		}	
+//		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "anvil.metalimpact", 0.5F, 0.5F + (worldObj.rand.nextFloat()/2));
+//	}
+//	public void createInitPacket(DataOutputStream outStream) throws IOException  
+//	{
+//		outStream.writeInt(AnvilTier);
+//		outStream.writeInt(stonePair[0]);
+//		outStream.writeInt(stonePair[1]);
+//		outStream.writeInt(anvilItemStacks[this.HAMMER_SLOT]!= null ? Item.getIdFromItem(anvilItemStacks[this.HAMMER_SLOT].getItem()) : 0);
+//		outStream.writeInt(anvilItemStacks[this.INPUT1_SLOT]!= null ? Item.getIdFromItem(anvilItemStacks[this.INPUT1_SLOT].getItem()) : 0);
+//	}
+//	public void handleInitPacket(DataInputStream inStream) throws IOException 
+//	{
+//		AnvilTier = inStream.readInt();
+//		stonePair[0] = inStream.readInt();
+//		stonePair[1] = inStream.readInt();
+//		int id = inStream.readInt();
+//		Item item = Item.getItemById(id);
+//		if(item != null)
+//			anvilItemStacks[HAMMER_SLOT] = new ItemStack(item);
+//		id = inStream.readInt();
+//		item = Item.getItemById(id);
+//		if(item != null)
+//			anvilItemStacks[INPUT1_SLOT] = new ItemStack(item);
+//
+//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//	}
+//	public Packet createAnvilUsePacket(int id)
+//	{
+//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+//		DataOutputStream dos=new DataOutputStream(bos);
+//
+//		try
+//		{
+//			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
+//			dos.writeInt(xCoord);
+//			dos.writeInt(yCoord);
+//			dos.writeInt(zCoord);
+//			dos.writeInt(id);
+//			dos.writeUTF(PlayerManagerTFC.getInstance().getClientPlayer().Name);
+//		}
+//		catch (IOException e)
+//		{
+//		}
+//		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
+//	}
+//	public Packet createAnvilPlanPacket(int id, String s)
+//	{
+//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+//		DataOutputStream dos=new DataOutputStream(bos);
+//
+//		try
+//		{
+//			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
+//			dos.writeInt(xCoord);
+//			dos.writeInt(yCoord);
+//			dos.writeInt(zCoord);
+//			dos.writeInt(id);
+//			dos.writeUTF(s);
+//			dos.writeUTF(PlayerManagerTFC.getInstance().getClientPlayer().Name);
+//		}
+//		catch (IOException e)
+//		{
+//		}
+//		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
+//	}
+//	public void handleDataPacketServer(DataInputStream inStream)throws IOException 
+//	{
+//		switch(inStream.readInt())
+//		{
+//		case -1:
+//		{
+//			actionLightHammer();
+//			break;
+//		}
+//		case 0:
+//		{
+//			actionHeavyHammer();
+//			break;
+//		}
+//		case 1:
+//		{
+//			actionDraw();
+//			break;
+//		}
+//		case 2:
+//		{
+//			actionHammer();
+//			break;
+//		}
+//		case 3:
+//		{
+//			actionPunch();
+//			break;
+//		}
+//		case 4:
+//		{
+//			actionBend();
+//			break;
+//		}
+//		case 5:
+//		{
+//			actionUpset();
+//			break;
+//		}
+//		case 6:   
+//		{
+//			actionShrink();
+//			break;
+//		}
+//		case 7:
+//		{
+//			actionWeld();
+//			break;
+//		}
+//		case 8:
+//		{
+//			setPlan(inStream.readUTF());
+//			this.lastWorker = worldObj.getPlayerEntityByName(inStream.readUTF());
+//			this.lastWorker.openGui(TerraFirmaCraft.instance, 21, worldObj, xCoord, yCoord, zCoord);
+//			return;
+//		}
+//		}		
+//		this.lastWorker = worldObj.getPlayerEntityByName(inStream.readUTF());
+//		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "anvil.metalimpact", 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
+//	}
+//	public void setPlan(String s)
+//	{
+//		if(worldObj.isRemote)
+//			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilPlanPacket(8, s));
+//		this.craftingPlan = s;
+//	}
 }

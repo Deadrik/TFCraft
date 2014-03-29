@@ -1,9 +1,5 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
@@ -20,13 +16,11 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
 import TFC.API.IPipeConnectable;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.Util.StringUtil;
-import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
 
 public class TileEntityBarrel extends TileEntity implements IInventory
@@ -83,9 +77,11 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		ItemStack itemstack2;
 		if(itemstack != null && Type == 1)
 		{
-			if (itemstack.getItem() == TFCItems.ScrapedHide){
+			if (itemstack.getItem() == TFCItems.ScrapedHide)
+			{
 				itemstack2 = new ItemStack(TFCItems.PrepHide,0,0);
-				while(liquidLevel >= 20 && itemstack.stackSize >0){
+				while(liquidLevel >= 20 && itemstack.stackSize >0)
+				{
 					liquidLevel-=20;
 					itemstack2.stackSize++;
 					itemstack.stackSize--;
@@ -93,9 +89,11 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 				if(itemstack2.stackSize > 0)
 					output = itemstack2;
 			}
-			else if (itemstack.getItem() == TFCItems.Jute){
+			else if (itemstack.getItem() == TFCItems.Jute)
+			{
 				itemstack2 = new ItemStack(TFCItems.JuteFibre,0,0);
-				while(liquidLevel >= 20 && itemstack.stackSize >0){
+				while(liquidLevel >= 20 && itemstack.stackSize >0)
+				{
 					liquidLevel-=20;
 					itemstack2.stackSize++;
 					itemstack.stackSize--;
@@ -103,63 +101,62 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 				if(itemstack2.stackSize > 0)
 					output = itemstack2;
 			}
-			else if(itemstack.getItem() == TFCItems.Logs){
+			else if(itemstack.getItem() == TFCItems.Logs)
+			{
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 3;
 			}
-			else if(itemstack.getItem() == TFCItems.BarleyGrain){
+			else if(itemstack.getItem() == TFCItems.BarleyGrain)
+			{
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 5;
 			}
-			else if((itemstack.getItem() == TFCItems.RedApple||itemstack.getItem()==TFCItems.GreenApple)){
+			else if((itemstack.getItem() == TFCItems.RedApple||itemstack.getItem()==TFCItems.GreenApple))
+			{
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 6;
 			}
-			else if(itemstack.getItem() == TFCItems.Potato){
+			else if(itemstack.getItem() == TFCItems.Potato)
+			{
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 7;
 			}
-			else if(itemstack.getItem() == TFCItems.WheatGrain){
+			else if(itemstack.getItem() == TFCItems.WheatGrain)
+			{
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 8;
 			}
-			else if(itemstack.getItem() == TFCItems.RyeGrain){
+			else if(itemstack.getItem() == TFCItems.RyeGrain)
+			{
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 9;
 			}
-			else if(itemstack.getItem() == TFCItems.RiceGrain){
+			else if(itemstack.getItem() == TFCItems.RiceGrain)
+			{
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 10;
 			}
-			else if(itemstack.getItem() == Items.sugar){
+			else if(itemstack.getItem() == Items.sugar)
+			{
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0){
+				if(itemstack.stackSize ==0)
 					itemstack=null;
-				}
 				Type = 11;
 			}
-
 		}
 		else if(itemstack != null && Type == 2)
 		{
@@ -173,9 +170,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 					itemstack.stackSize--;
 				}
 				if(itemstack2.stackSize > 0)
-				{
 					output = itemstack2;
-				}
 			}
 		}
 		else if(itemstack != null && Type == 3)
@@ -190,9 +185,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 					itemstack.stackSize--;
 				}
 				if(itemstack2.stackSize > 0)
-				{
 					output = itemstack2;
-				}
 			}
 		}
 		else if(itemstack == null && Type >= 5 && Type <= 11)
@@ -208,29 +201,24 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 				itemstack2.stackSize++;
 			}
 			if(itemstack2.stackSize > 0)
-			{
 				output = itemstack2;
-			}
 		}
 		if (liquidLevel == 0)
-		{
 			Type = 0;
-		}
 		if (itemstack!=null && itemstack.stackSize==0)
-		{
 			itemstack = null;
-		}
 
 	}
 
-	public void setSealed(){
+	public void setSealed()
+	{
 		sealed = true;
 	}
 
-	public void setUnsealed(String reason){
-		if(reason.equals("killing fuse")){
+	public void setUnsealed(String reason)
+	{
+		if(reason.equals("killing fuse"))
 			sealed = false;
-		}
 	}
 
 	public static String getType(int type)
@@ -556,7 +544,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		if(output==null && liquidLevel > 0 && isItemValid())
 		{
 			sealed = true;
-			//TODO TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
+			updateGui();
 			return true;
 		}
 		return false;
@@ -596,16 +584,14 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 
 	public void actionEmpty()
 	{
-		liquidLevel =0;
+		liquidLevel = 0;
 		Type = 0;
-		//TODO TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
 		updateGui();
 	}
 
 	public void actionMode()
 	{
-		mode= (mode-1)*-1;
-		//TODO TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
+		mode = (mode-1)*-1;
 		updateGui();
 	}
 
@@ -631,14 +617,11 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		nbttagcompound.setInteger("SealTime", sealtimecounter);
 		nbttagcompound.setInteger("mode", mode);
 		NBTTagList nbttaglist = new NBTTagList();
-
 		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 		nbttagcompound1.setByte("Slot", (byte)1);
-		if(itemstack != null){
+		if(itemstack != null)
 			itemstack.writeToNBT(nbttagcompound1);
-		}
 		nbttaglist.appendTag(nbttagcompound1);
-
 		nbttagcompound.setTag("Items", nbttaglist);
 	}
 
@@ -652,7 +635,6 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		sealtimecounter = nbttagcompound.getInteger("SealTime");
 		mode = nbttagcompound.getInteger("mode");
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
-
 		NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(0);
 		byte byte0 = nbttagcompound1.getByte("Slot");
 		itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
@@ -671,80 +653,11 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 	{
 		readFromNBT(pkt.func_148857_g());
 	}
-///////////////////////////////////////////////////////////////////////////////////
-	//TODO Update packet
+
 	public void updateGui()
 	{
-//		if(!worldObj.isRemote)
-//			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
-//		else
-//			validate();
-	}
-
-	public void handleDataPacket(DataInputStream inStream) throws IOException {
-		Type = inStream.readInt();
-		liquidLevel = inStream.readInt();
-		sealed = inStream.readBoolean();
-		sealtimecounter = inStream.readInt();
-		mode = inStream.readInt();
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-	public Packet createUpdatePacket()
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);	
-		try {
-			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeInt(Type);
-			dos.writeInt(liquidLevel);
-			dos.writeBoolean(sealed);
-			dos.writeInt(sealtimecounter);
-			dos.writeInt(mode);
-		} catch (IOException e) {
-		}
-		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
-	public void createInitPacket(DataOutputStream outStream) throws IOException {
-		outStream.writeInt(Type);
-		outStream.writeInt(liquidLevel);
-		outStream.writeBoolean(sealed);
-		outStream.writeInt(sealtimecounter);
-		outStream.writeInt(mode);
-	}
-	public Packet createSealPacket()
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-
-		try {
-			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeBoolean(sealed);
-			dos.writeInt(liquidLevel);
-			dos.writeInt(Type);
-			dos.writeInt(mode);
-		} catch (IOException e) {
-		}
-		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
-	public void handleInitPacket(DataInputStream inStream) throws IOException {
-		Type = inStream.readInt();
-		liquidLevel = inStream.readInt();
-		sealed = inStream.readBoolean();
-		sealtimecounter = inStream.readInt();
-		mode = inStream.readInt();
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-	public void handleDataPacketServer(DataInputStream inStream) throws IOException {
-		sealed = inStream.readBoolean();
-		liquidLevel = inStream.readInt();
-		Type = inStream.readInt();
-		mode = inStream.readInt();
+		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		//validate();
 	}
 
 }

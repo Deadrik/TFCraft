@@ -2,11 +2,13 @@ package TFC.TileEntities;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
-import net.minecraft.block.BlockSand;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import TFC.TFCBlocks;
 import TFC.Blocks.Flora.BlockFruitLeaves;
@@ -19,7 +21,6 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 	public int height;
 	public long birthTimeWood;
 	public long birthTimeLeaves;
-
 	final long leafGrowthRate = 3;
 	final long GrowTime = 30;
 	final long branchGrowTime = 20;
@@ -37,10 +38,12 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 		birthTimeWood = TFC_Time.getTotalDays();
 		birthTimeLeaves = TFC_Time.getTotalDays();
 	}
+
 	public void setBirthWood(long t)
 	{
 		birthTimeWood += t;
 	}
+
 	public void setBirthLeaves(long t)
 	{
 		birthTimeLeaves += t;
@@ -179,13 +182,11 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 	@Override
 	public void closeInventory() 
 	{
-
 	}
 
 	@Override
 	public int getInventoryStackLimit()
 	{
-		// TODO Auto-generated method stub
 		return 1;
 	}
 
@@ -196,21 +197,20 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int var1)
+	{
 		return null;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
+	public boolean isUseableByPlayer(EntityPlayer entityplayer)
+	{
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
-
+	public void openInventory()
+	{
 	}
 
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -222,7 +222,6 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 		height = nbttagcompound.getInteger("height");
 	}
 
-
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
@@ -232,37 +231,42 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 		nbttagcompound.setInteger("height", height);
 	}
 
-	public void handlePacketData() 
+	@Override
+	public Packet getDescriptionPacket()
 	{
-		TileEntityFruitTreeWood pile = this;
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
+		//TileEntityFruitTreeWood pile = this;
 	}
 
 	@Override
 	public int getSizeInventory()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int var1)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ItemStack decrStackSize(int var1, int var2)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void setInventorySlotContents(int var1, ItemStack var2)
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

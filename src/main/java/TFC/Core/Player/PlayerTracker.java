@@ -15,6 +15,7 @@ import TFC.Core.TFC_Core;
 import TFC.Handlers.PacketHandler;
 import TFC.Handlers.Network.AbstractPacket;
 import TFC.Handlers.Network.InitClientWorldPacket;
+import TFC.Handlers.Network.PlayerUpdatePacket;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -62,18 +63,8 @@ public class PlayerTracker
 		if( pi.tempSkills != null)
 			TFC_Core.setSkillStats(event.player, pi.tempSkills);
 
-		//Send a request to the server for the skills data.
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-		try
-		{
-			dos.writeByte(PacketHandler.Packet_Update_Skills_Server);
-		}
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-//		pi.networkManager.scheduleOutboundPacket(PacketHandler.getPacket(bos));
+		AbstractPacket pkt = new PlayerUpdatePacket(event.player, 3);
+		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
 	}
 
 	@SubscribeEvent

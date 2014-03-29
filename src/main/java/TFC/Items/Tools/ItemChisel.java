@@ -184,8 +184,10 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		}
 
 		te = (TileEntityPartial)world.getTileEntity(x, y, z);
-		if(te != null) {
-			te.broadcastPacketInRange(te.createUpdatePacket());
+		if(te != null)
+		{
+			world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
+			//te.broadcastPacketInRange(te.createUpdatePacket());
 		}
 
 		world.markBlockForUpdate(x, y, z);

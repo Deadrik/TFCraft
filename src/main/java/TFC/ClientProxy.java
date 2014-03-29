@@ -500,11 +500,11 @@ public class ClientProxy extends CommonProxy
 		return rgb;
 	}
 
-	@Override
-	public void sendCustomPacket(Packet packet)
-	{
-//		FMLCommonHandler.instance().getClientToServerNetworkManager().scheduleOutboundPacket(packet);
-	}
+//	@Override
+//	public void sendCustomPacket(Packet packet)
+//	{
+////		FMLCommonHandler.instance().getClientToServerNetworkManager().scheduleOutboundPacket(packet);
+//	}
 
 	@Override
 	public int getArmorRenderID(String name)

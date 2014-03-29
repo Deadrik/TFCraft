@@ -16,6 +16,8 @@ import net.minecraft.network.Packet;
 import TFC.TerraFirmaCraft;
 import TFC.API.SkillsManager;
 import TFC.Handlers.PacketHandler;
+import TFC.Handlers.Network.AbstractPacket;
+import TFC.Handlers.Network.PlayerUpdatePacket;
 
 public class SkillStats
 {
@@ -60,7 +62,11 @@ public class SkillStats
 
 		int i = (Integer) skillsMap.get(skillName);
 		if(player instanceof EntityPlayerMP)
-			TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, getStatusPacket(skillName, i));
+		{
+			AbstractPacket pkt = new PlayerUpdatePacket(player, (byte) 1, skillName, i);
+			TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+			//TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, getStatusPacket(skillName, i));
+		}
 		writeNBT(player.getEntityData());
 	}
 
@@ -125,21 +131,21 @@ public class SkillStats
 		}
 	}
 
-	public static Packet getStatusPacket(String s, int skill)
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(40);
-		DataOutputStream dos=new DataOutputStream(bos);
-		try
-		{
-			//The packet type sent determines who is expected to process this packet, the client or the server.
-			dos.writeByte(PacketHandler.Packet_Player_Status);
-			dos.writeByte(1);
-			dos.writeUTF(s);
-			dos.writeInt(skill);
-		}
-		catch (IOException e)
-		{
-		}
-		return PacketHandler.getPacket(bos);
-	}
+//	public static Packet getStatusPacket(String s, int skill)
+//	{
+//		ByteArrayOutputStream bos=new ByteArrayOutputStream(40);
+//		DataOutputStream dos=new DataOutputStream(bos);
+//		try
+//		{
+//			//The packet type sent determines who is expected to process this packet, the client or the server.
+//			dos.writeByte(PacketHandler.Packet_Player_Status);
+//			dos.writeByte(1);
+//			dos.writeUTF(s);
+//			dos.writeInt(skill);
+//		}
+//		catch (IOException e)
+//		{
+//		}
+//		return PacketHandler.getPacket(bos);
+//	}
 }

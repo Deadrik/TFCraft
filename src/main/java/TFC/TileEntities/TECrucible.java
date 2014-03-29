@@ -21,7 +21,6 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
 import TFC.API.Constant.Global;
@@ -35,8 +34,6 @@ import TFC.Core.Metal.MetalPair;
 import TFC.Core.Metal.MetalRegistry;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TECrucible extends TileEntity implements IInventory
 {
@@ -183,7 +180,7 @@ public class TECrucible extends TileEntity implements IInventory
 								stackToSmelt.setItemDamage(stackToSmelt.getItemDamage() + 1);
 						}
 						inputTick = 0;
-						updateGui((byte) 0);
+						updateGui((byte) 0); //TODO
 					}
 				}
 				else if(itemToSmelt instanceof ISmeltable && (
@@ -197,7 +194,7 @@ public class TECrucible extends TileEntity implements IInventory
 						temperature *= 0.9f;
 						if(stackToSmelt.stackSize <= 1)
 							storage[0] = null;
-						updateGui((byte) 0);
+						updateGui((byte) 0); //TODO
 					}
 				}
 			}
@@ -214,7 +211,7 @@ public class TECrucible extends TileEntity implements IInventory
 					TFC_ItemHeat.SetTemperature(storage[1], temperature);
 					//currentAlloy.outputAmount--;
 					drainOutput(1.0f);
-					updateGui((byte) 1);
+					updateGui((byte) 1); //TODO
 				}
 				else if(storage[1].getItem() == currentAlloy.outputType.MeltedItem && storage[1].getItemDamage() > 0)
 				{
@@ -225,7 +222,7 @@ public class TECrucible extends TileEntity implements IInventory
 					//System.out.println(temperature +", "+inTemp+", "+temp);
 					drainOutput(1.0f);
 					storage[1].stackSize = 1;
-					updateGui((byte) 1);
+					updateGui((byte) 1); //TODO
 				}
 				outputTick = 0;
 			}
@@ -234,7 +231,7 @@ public class TECrucible extends TileEntity implements IInventory
 			{
 				metals = new HashMap();
 				updateCurrentAlloy();
-				this.updateGui((byte) 2);
+				this.updateGui((byte) 2); //TODO
 				currentAlloy = null;
 			}
 
@@ -416,49 +413,50 @@ public class TECrucible extends TileEntity implements IInventory
 
 	//////////////////////////////////////////////////////////////////////////
 	//TODO Udate packet
-	public void handleDataPacket(DataInputStream inStream) throws IOException 
-	{
-		byte id = inStream.readByte();
-		if(id == 0 && inStream.available() > 0)
-			this.currentAlloy = new Alloy().fromPacket(inStream);
-		else if(id == 1)
-			currentAlloy.outputAmount = inStream.readFloat();
-		else if(id == 2)
-			currentAlloy = null;
-	}
-	public Packet createUpdatePacket(byte id)
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);	
-		try
-		{
-			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			if(id == 0 && currentAlloy != null)
-			{
-				dos.writeByte(0);
-				currentAlloy.toPacket(dos);
-			}
-			else if(id == 1 && currentAlloy != null)
-			{
-				dos.writeByte(1);
-				dos.writeFloat(this.getTotalMetal());
-			}
-			else if(id == 2)
-			{
-				dos.writeByte(2);
-			}
-		}
-		catch (IOException e)
-		{
-		}
-		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
 	public void updateGui(byte id)
 	{
-		if(!worldObj.isRemote)
-			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(id), 5);
+//		if(!worldObj.isRemote)
+//			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(id), 5);
 	}
+//	public void handleDataPacket(DataInputStream inStream) throws IOException 
+//	{
+//		byte id = inStream.readByte();
+//		if(id == 0 && inStream.available() > 0)
+//			this.currentAlloy = new Alloy().fromPacket(inStream);
+//		else if(id == 1)
+//			currentAlloy.outputAmount = inStream.readFloat();
+//		else if(id == 2)
+//			currentAlloy = null;
+//	}
+//	public Packet createUpdatePacket(byte id)
+//	{
+//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+//		DataOutputStream dos=new DataOutputStream(bos);	
+//		try
+//		{
+//			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
+//			dos.writeInt(xCoord);
+//			dos.writeInt(yCoord);
+//			dos.writeInt(zCoord);
+//			if(id == 0 && currentAlloy != null)
+//			{
+//				dos.writeByte(0);
+//				currentAlloy.toPacket(dos);
+//			}
+//			else if(id == 1 && currentAlloy != null)
+//			{
+//				dos.writeByte(1);
+//				dos.writeFloat(this.getTotalMetal());
+//			}
+//			else if(id == 2)
+//			{
+//				dos.writeByte(2);
+//			}
+//		}
+//		catch (IOException e)
+//		{
+//		}
+//		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
+//	}
+
 }

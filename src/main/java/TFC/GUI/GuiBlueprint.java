@@ -25,6 +25,8 @@ import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Core;
 import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
+import TFC.Handlers.Network.AbstractPacket;
+import TFC.Handlers.Network.ItemRenamePacket;
 
 public class GuiBlueprint extends GuiScreen
 {
@@ -101,13 +103,9 @@ public class GuiBlueprint extends GuiScreen
 	{
 		this.theGuiTextField.textboxKeyTyped(par1, par2);
 		((GuiButton)this.buttonList.get(0)).enabled = this.theGuiTextField.getText().trim().length() > 0;
-
 		if (par1 == 13)
-		{
 			this.actionPerformed((GuiButton)this.buttonList.get(0));
-		}
 	}
-
 
 	@Override
 	public boolean doesGuiPauseGame()
@@ -129,36 +127,15 @@ public class GuiBlueprint extends GuiScreen
 			ItemStack stack = player.inventory.getCurrentItem();
 			stack.stackTagCompound.setString("Name", theGuiTextField.getText());
 
-			ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-			DataOutputStream dos=new DataOutputStream(bos);
-			int x=0;
-			int y=0;
-			int z=0;
-			try 
-			{
-				dos.writeByte(PacketHandler.Packet_Rename_Item);
-				String n = theGuiTextField.getText();
-				dos.writeUTF(n);
-
-				TerraFirmaCraft.proxy.sendCustomPacket(setupCustomPacketData(bos.toByteArray(), bos.size()));
-			} 
-			catch (IOException e) 
-			{
-
-			}
-
+			AbstractPacket pkt = new ItemRenamePacket(theGuiTextField.getText());
+			TerraFirmaCraft.packetPipeline.sendToAll(pkt);
+			
 			Minecraft.getMinecraft().displayGuiScreen(null);//player.closeScreen();
 		}
 		else if (guibutton.id == 1 && world.isRemote)
 		{
 			Minecraft.getMinecraft().displayGuiScreen(null);//player.closeScreen();
 		}
-	}
-
-	public Packet setupCustomPacketData(byte[] data, int length)
-	{
-		S3FPacketCustomPayload pkt=new S3FPacketCustomPayload(Reference.ModChannel, data);
-		return pkt;
 	}
 
 	@Override

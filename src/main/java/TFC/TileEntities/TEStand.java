@@ -19,7 +19,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import TFC.TerraFirmaCraft;
 import TFC.Entities.EntityStand;
 import TFC.Handlers.PacketHandler;
 
@@ -253,101 +252,101 @@ public class TEStand extends TileEntity implements IInventory
 //			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
 	}
 
-	public Packet createHighlightPacket(int i)
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-		this.highlightedSlot = i;
-		try
-		{
-			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeInt(i);
-		}
-		catch (IOException e)
-		{
-		}
-		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
-	public void handleDataPacket(DataInputStream inStream) throws IOException
-	{
-		this.yaw = inStream.readFloat();
-		this.isTop = inStream.readBoolean();
-		highlightedSlot = inStream.readInt();
-		int id;
-		Item item;
-		for(int i = 0; i < items.length;i++)
-		{
-			id = inStream.readInt();
-			item = Item.getItemById(id);
-			if(item != null)
-				items[i] = new ItemStack(item);
-		}
-		
-	}
-	public Packet createUpdatePacket()
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-		try
-		{
-			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeFloat(yaw);
-			dos.writeBoolean(isTop);
-			for(int j = 0; j < items.length;j++)
-			{
-				if(items[j] != null)
-					dos.writeInt(Item.getIdFromItem(items[j].getItem()));
-				else
-					dos.writeInt(0);
-			}
-		}
-		catch (IOException e)
-		{
-		}
-		return null;//this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
-	public void handleDataPacketServer(DataInputStream inStream) throws IOException
-	{
-		highlightedSlot = inStream.readInt();
-		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-	public void createInitPacket(DataOutputStream outStream) throws IOException
-	{
-		outStream.writeFloat(yaw);
-		outStream.writeBoolean(isTop);
-		outStream.writeInt(highlightedSlot);
-		for(int i = 0; i < items.length;i++)
-		{
-			if(items[i] != null)
-				outStream.writeInt(Item.getIdFromItem(items[i].getItem()));
-			else
-				outStream.writeInt(0);
-		}
-	}
-	public void handleInitPacket(DataInputStream inStream) throws IOException
-	{
-		yaw = inStream.readFloat();
-		isTop = inStream.readBoolean();
-		highlightedSlot = inStream.readInt();
-		int id;
-		Item item;
-		for(int i = 0; i < items.length;i++)
-		{
-			id = inStream.readInt();
-			item = Item.getItemById(id);
-			if(item != null)
-				items[i] = new ItemStack(item);
-			else
-				items[i] = null;
-		}
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
+//	public Packet createHighlightPacket(int i)
+//	{
+//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+//		DataOutputStream dos=new DataOutputStream(bos);
+//		this.highlightedSlot = i;
+//		try
+//		{
+//			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
+//			dos.writeInt(xCoord);
+//			dos.writeInt(yCoord);
+//			dos.writeInt(zCoord);
+//			dos.writeInt(i);
+//		}
+//		catch (IOException e)
+//		{
+//		}
+//		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
+//	}
+//	public void handleDataPacket(DataInputStream inStream) throws IOException
+//	{
+//		this.yaw = inStream.readFloat();
+//		this.isTop = inStream.readBoolean();
+//		highlightedSlot = inStream.readInt();
+//		int id;
+//		Item item;
+//		for(int i = 0; i < items.length;i++)
+//		{
+//			id = inStream.readInt();
+//			item = Item.getItemById(id);
+//			if(item != null)
+//				items[i] = new ItemStack(item);
+//		}
+//		
+//	}
+//	public Packet createUpdatePacket()
+//	{
+//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+//		DataOutputStream dos=new DataOutputStream(bos);
+//		try
+//		{
+//			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
+//			dos.writeInt(xCoord);
+//			dos.writeInt(yCoord);
+//			dos.writeInt(zCoord);
+//			dos.writeFloat(yaw);
+//			dos.writeBoolean(isTop);
+//			for(int j = 0; j < items.length;j++)
+//			{
+//				if(items[j] != null)
+//					dos.writeInt(Item.getIdFromItem(items[j].getItem()));
+//				else
+//					dos.writeInt(0);
+//			}
+//		}
+//		catch (IOException e)
+//		{
+//		}
+//		return null;//this.setupCustomPacketData(bos.toByteArray(), bos.size());
+//	}
+//	public void handleDataPacketServer(DataInputStream inStream) throws IOException
+//	{
+//		highlightedSlot = inStream.readInt();
+//		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//	}
+//	public void createInitPacket(DataOutputStream outStream) throws IOException
+//	{
+//		outStream.writeFloat(yaw);
+//		outStream.writeBoolean(isTop);
+//		outStream.writeInt(highlightedSlot);
+//		for(int i = 0; i < items.length;i++)
+//		{
+//			if(items[i] != null)
+//				outStream.writeInt(Item.getIdFromItem(items[i].getItem()));
+//			else
+//				outStream.writeInt(0);
+//		}
+//	}
+//	public void handleInitPacket(DataInputStream inStream) throws IOException
+//	{
+//		yaw = inStream.readFloat();
+//		isTop = inStream.readBoolean();
+//		highlightedSlot = inStream.readInt();
+//		int id;
+//		Item item;
+//		for(int i = 0; i < items.length;i++)
+//		{
+//			id = inStream.readInt();
+//			item = Item.getItemById(id);
+//			if(item != null)
+//				items[i] = new ItemStack(item);
+//			else
+//				items[i] = null;
+//		}
+//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//	}
 
 }

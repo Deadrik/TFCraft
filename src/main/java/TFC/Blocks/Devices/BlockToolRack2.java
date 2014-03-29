@@ -133,7 +133,8 @@ public class BlockToolRack2 extends BlockTerraContainer implements IMultipleBloc
 					else if(hitZ > 0.5)
 						handleArea(world, i, j, k, entityplayer, tet, 3, 3);
 				}
-				tet.broadcastPacketInRange(tet.createUpdatePacket());
+				world.markBlockForUpdate(i, j, k);
+				//tet.broadcastPacketInRange(tet.createUpdatePacket());
 				return true;
 			}
 		}
@@ -276,7 +277,8 @@ public class BlockToolRack2 extends BlockTerraContainer implements IMultipleBloc
 			{
 				TileEntityToolRack tet = (TileEntityToolRack) te;
 				tet.woodType = (byte)is.getItemDamage();
-				tet.broadcastPacketInRange(tet.createUpdatePacket());
+				world.markBlockForUpdate(i, j, k);
+				//tet.broadcastPacketInRange(tet.createUpdatePacket());
 			}
 		}
 	}

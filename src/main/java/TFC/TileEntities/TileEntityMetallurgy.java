@@ -5,6 +5,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import TFC.Core.TFC_ItemHeat;
 
@@ -15,7 +18,6 @@ public class TileEntityMetallurgy extends TileEntity implements IInventory
 
 	static
 	{
-
 	}
 
 	public TileEntityMetallurgy()
@@ -36,17 +38,13 @@ public class TileEntityMetallurgy extends TileEntity implements IInventory
 				{
 					temp1[i] = is.getTagCompound().getFloat("temperature");
 					if(temp1[i] < TFC_ItemHeat.getMeltingPoint(is))
-					{
 						return (float) -1;
-					}
-				} else {
-					return (float) -1;
 				}
+				else
+					return (float) -1;
 			}
 			else if(is == null)
-			{
 				temp1[i] = -1;
-			}
 		}
 		int  temp2 = 0;
 		for (int i = 0; i < inv.getSizeInventory(); i++)
@@ -56,19 +54,15 @@ public class TileEntityMetallurgy extends TileEntity implements IInventory
 				temp += temp1[i];
 				temp2++;
 			}
-
 		}
 		if (temp2 > 0)
-		{
 			temp /= temp2;
-		} 
 		return temp;
 	}
 
 	@Override
-	public void closeInventory() {
-
-
+	public void closeInventory()
+	{
 	}
 
 	@Override
@@ -84,21 +78,16 @@ public class TileEntityMetallurgy extends TileEntity implements IInventory
 			}
 			ItemStack itemstack1 = metalItemStacks[i].splitStack(j);
 			if(metalItemStacks[i].stackSize == 0)
-			{
 				metalItemStacks[i] = null;
-			}
 			return itemstack1;
-		} else
-		{
-			return null;
 		}
-
+		else
+			return null;
 	}
 
 	@Override
 	public int getInventoryStackLimit()
 	{
-		// TODO Auto-generated method stub
 		return 1;
 	}
 
@@ -116,46 +105,24 @@ public class TileEntityMetallurgy extends TileEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		// TODO Auto-generated method stub
 		return metalItemStacks[i];
 	}
 
-
-
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int var1)
+	{
 		return null;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
+	public boolean isUseableByPlayer(EntityPlayer entityplayer)
+	{
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void openInventory()
 	{
-		super.readFromNBT(nbttagcompound);
-		//timeleft = nbttagcompound.getInteger("timeleft");
-
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
-		metalItemStacks = new ItemStack[getSizeInventory()];
-		for(int i = 0; i < nbttaglist.tagCount(); i++)
-		{
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte byte0 = nbttagcompound1.getByte("Slot");
-			if(byte0 >= 0 && byte0 < metalItemStacks.length)
-			{
-				metalItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
 	}
 
 	@Override
@@ -163,36 +130,13 @@ public class TileEntityMetallurgy extends TileEntity implements IInventory
 	{
 		metalItemStacks[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-		{
 			itemstack.stackSize = getInventoryStackLimit();
-		}
 	}
 
+	@Override
 	public void updateEntity()
 	{
 		//AllMelted = checkTemps();
-	}
-
-	public void writeToNBT(NBTTagCompound nbttagcompound)
-	{
-		super.writeToNBT(nbttagcompound);
-		//nbttagcompound.setInteger("timeleft", timeleft);
-
-		NBTTagList nbttaglist = new NBTTagList();
-		for(int i = 0; i < metalItemStacks.length; i++)
-		{
-			if(metalItemStacks[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				metalItemStacks[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
-
-		nbttagcompound.setTag("Items", nbttaglist);
-
-
 	}
 
 	@Override
@@ -206,4 +150,54 @@ public class TileEntityMetallurgy extends TileEntity implements IInventory
 	{
 		return false;
 	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbttagcompound)
+	{
+		super.readFromNBT(nbttagcompound);
+		//timeleft = nbttagcompound.getInteger("timeleft");
+		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
+		metalItemStacks = new ItemStack[getSizeInventory()];
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			byte byte0 = nbttagcompound1.getByte("Slot");
+			if(byte0 >= 0 && byte0 < metalItemStacks.length)
+				metalItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		}
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbttagcompound)
+	{
+		super.writeToNBT(nbttagcompound);
+		//nbttagcompound.setInteger("timeleft", timeleft);
+		NBTTagList nbttaglist = new NBTTagList();
+		for(int i = 0; i < metalItemStacks.length; i++)
+		{
+			if(metalItemStacks[i] != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				metalItemStacks[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+		nbttagcompound.setTag("Items", nbttaglist);
+	}
+
+	@Override
+	public Packet getDescriptionPacket()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
+	}
+
 }

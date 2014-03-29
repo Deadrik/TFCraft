@@ -23,6 +23,8 @@ import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Handlers.PacketHandler;
+import TFC.Handlers.Network.AbstractPacket;
+import TFC.Handlers.Network.KnappingUpdatePacket;
 
 public class GuiKnapping extends GuiContainer
 {
@@ -67,7 +69,8 @@ public class GuiKnapping extends GuiContainer
 	protected void actionPerformed(GuiButton guibutton)
 	{
 		resetButton(guibutton.id);
-		TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket(guibutton.id));
+		AbstractPacket pkt = new KnappingUpdatePacket(guibutton.id);
+		TerraFirmaCraft.packetPipeline.sendToAll(pkt);
 	}
 
 	public void resetButton(int id)
@@ -77,21 +80,6 @@ public class GuiKnapping extends GuiContainer
 		}
 		PlayerManagerTFC.getInstance().getClientPlayer().knappingInterface[id] = true;
 		((GuiKnappingButton) this.buttonList.get(id)).enabled = false;
-	}
-
-	public Packet createUpdatePacket(int id)
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-
-		try {
-			dos.writeByte(PacketHandler.Packet_Update_Knapping);
-			dos.writeByte(id);
-		} catch (IOException e) {
-		}
-
-		S3FPacketCustomPayload pkt=new S3FPacketCustomPayload(Reference.ModChannel, bos.toByteArray());
-		return pkt;
 	}
 
 	@Override

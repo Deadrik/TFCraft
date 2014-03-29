@@ -288,22 +288,22 @@ public class FoodStatsTFC
 		foodHealTimer = TFC_Time.getTotalTicks();
 	}
 
-	public static Packet getStatusPacket(FoodStatsTFC foodstats)
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(10);
-		DataOutputStream dos=new DataOutputStream(bos);
-		try
-		{
-			//The packet type sent determines who is expected to process this packet, the client or the server.
-			dos.writeByte(PacketHandler.Packet_Player_Status);
-			dos.writeByte((byte)0);
-			dos.writeFloat(foodstats.foodLevel);
-			dos.writeFloat(foodstats.waterLevel);
-		}
-		catch (IOException e)
-		{
-		}
-		S3FPacketCustomPayload pkt = new S3FPacketCustomPayload(Reference.ModChannel, bos.toByteArray());
-		return pkt;
-	}
+//	public static Packet getStatusPacket(FoodStatsTFC foodstats)
+//	{
+//		ByteArrayOutputStream bos=new ByteArrayOutputStream(10);
+//		DataOutputStream dos=new DataOutputStream(bos);
+//		try
+//		{
+//			//The packet type sent determines who is expected to process this packet, the client or the server.
+//			dos.writeByte(PacketHandler.Packet_Player_Status);
+//			dos.writeByte((byte)0);
+//			dos.writeFloat(foodstats.foodLevel);
+//			dos.writeFloat(foodstats.waterLevel);
+//		}
+//		catch (IOException e)
+//		{
+//		}
+//		S3FPacketCustomPayload pkt = new S3FPacketCustomPayload(Reference.ModChannel, bos.toByteArray());
+//		return pkt;
+//	}
 }

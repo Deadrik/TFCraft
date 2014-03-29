@@ -77,26 +77,26 @@ public class ArmourStandHighlightHandler
 			if(isVecInsideBox(head,player,unit,var8,var10,var12)&& stand.items[4]!=null)
 			{
 				boxToRender = head;
-				TerraFirmaCraft.proxy.sendCustomPacket(stand.createHighlightPacket(4));
+				//TerraFirmaCraft.proxy.sendCustomPacket(stand.createHighlightPacket(4));
 			}
 			else if(isVecInsideBox(body,player,unit,var8,var10,var12)&& stand.items[3]!=null)
 			{
 				boxToRender = body;
-				TerraFirmaCraft.proxy.sendCustomPacket(stand.createHighlightPacket(3));
+				//TerraFirmaCraft.proxy.sendCustomPacket(stand.createHighlightPacket(3));
 			}
 			else if(isVecInsideBox(legs,player,unit,var8,var10,var12)&&stand.items[2]!=null)
 			{
 				boxToRender = legs;
-				TerraFirmaCraft.proxy.sendCustomPacket(stand.createHighlightPacket(2));
+				//TerraFirmaCraft.proxy.sendCustomPacket(stand.createHighlightPacket(2));
 			}
 			else if(isVecInsideBox(feet,player,unit,var8,var10,var12)&&stand.items[1]!=null)
 			{
 				boxToRender = feet;
-				TerraFirmaCraft.proxy.sendCustomPacket(stand.createHighlightPacket(1));
+				//TerraFirmaCraft.proxy.sendCustomPacket(stand.createHighlightPacket(1));
 			}
 			else
 			{
-				TerraFirmaCraft.proxy.sendCustomPacket(stand.createHighlightPacket(-1));
+				//TerraFirmaCraft.proxy.sendCustomPacket(stand.createHighlightPacket(-1));
 			}
 
 			if(boxToRender != null)

@@ -110,9 +110,10 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 							te.inventory[0] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[0].stackTagCompound = itemstack.stackTagCompound;
 							itemstack.stackSize--;
-							try {
-								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
-							} catch (IOException e) {}
+							world.markBlockForUpdate(x, y+offset, z);
+//							try {
+//								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
+//							} catch (IOException e) {}
 						}
 					}
 					else if(hitX > 0.5 && hitZ < 0.5)
@@ -122,9 +123,10 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 							te.inventory[1] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[1].stackTagCompound = itemstack.stackTagCompound;
 							itemstack.stackSize--;
-							try {
-								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
-							} catch (IOException e) {}
+							world.markBlockForUpdate(x, y+offset, z);
+//							try {
+//								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
+//							} catch (IOException e) {}
 						}
 					}
 					else if(hitX < 0.5 && hitZ > 0.5)
@@ -134,9 +136,10 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 							te.inventory[2] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[2].stackTagCompound = itemstack.stackTagCompound;
 							itemstack.stackSize--;
-							try {
-								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
-							} catch (IOException e) {}
+							world.markBlockForUpdate(x, y+offset, z);
+//							try {
+//								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
+//							} catch (IOException e) {}
 						}
 					}
 					else if(hitX > 0.5 && hitZ > 0.5)
@@ -145,9 +148,10 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 							te.inventory[3] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[3].stackTagCompound = itemstack.stackTagCompound;
 							itemstack.stackSize--;
-							try {
-								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
-							} catch (IOException e) {}
+							world.markBlockForUpdate(x, y+offset, z);
+//							try {
+//								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
+//							} catch (IOException e) {}
 						}
 				}
 				return true;
@@ -164,23 +168,23 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	{
 	}
 
-	private Packet sendInitPacket(NetworkTileEntity te, int x, int y, int z) throws IOException
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-		try
-		{
-			//The packet type sent determines who is expected to process this packet, the client or the server.
-			dos.writeByte(PacketHandler.Packet_Init_Block_Client);
-			dos.writeInt(x);
-			dos.writeInt(y);
-			dos.writeInt(z);
-			te.createInitPacket(dos);
-		} 
-		catch (IOException e)
-		{
-		}
-		return PacketHandler.getPacket(bos);
-	}
+//	private Packet sendInitPacket(NetworkTileEntity te, int x, int y, int z) throws IOException
+//	{
+//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+//		DataOutputStream dos=new DataOutputStream(bos);
+//		try
+//		{
+//			//The packet type sent determines who is expected to process this packet, the client or the server.
+//			dos.writeByte(PacketHandler.Packet_Init_Block_Client);
+//			dos.writeInt(x);
+//			dos.writeInt(y);
+//			dos.writeInt(z);
+//			te.createInitPacket(dos);
+//		} 
+//		catch (IOException e)
+//		{
+//		}
+//		return PacketHandler.getPacket(bos);
+//	}
 
 }

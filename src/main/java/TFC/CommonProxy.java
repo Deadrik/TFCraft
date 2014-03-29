@@ -360,18 +360,18 @@ public class CommonProxy
 		NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.instance, new GuiHandler());
 	}
 
-	public void sendCustomPacket(Packet packet)
-	{
-//		FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);
-	}
-
-	public void sendCustomPacketToPlayer(EntityPlayerMP player, Packet packet)
-	{
-//		player.playerNetServerHandler.sendPacket(packet);
-	}
-
-	public void sendCustomPacketToPlayersInRange(double X, double Y, double Z, Packet packet, double range)
-	{
-//		FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendToAllNear(X, Y, Z, range, 0, packet);
-	}
+//	public void sendCustomPacket(Packet packet)
+//	{
+////		FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);
+//	}
+//
+//	public void sendCustomPacketToPlayer(EntityPlayerMP player, Packet packet)
+//	{
+////		player.playerNetServerHandler.sendPacket(packet);
+//	}
+//
+//	public void sendCustomPacketToPlayersInRange(double X, double Y, double Z, Packet packet, double range)
+//	{
+////		FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendToAllNear(X, Y, Z, range, 0, packet);
+//	}
 }

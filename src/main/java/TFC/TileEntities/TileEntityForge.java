@@ -8,11 +8,13 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import TFC.TFCItems;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
@@ -25,14 +27,11 @@ import TFC.WorldGen.TFCBiome;
 public class TileEntityForge extends TileEntityFireEntity implements IInventory
 {
 	public boolean isValid;
-
 	public ItemStack fireItemStacks[];
 	public float inputItemTemps[];
-
 	private int prevStackSize;
 	private int numAirBlocks;
 	private ItemStack prevWorkItemStack;
-
 	private int externalFireCheckTimer;
 	public Boolean canCreateFire;
 	private int externalWoodCount;
@@ -46,17 +45,14 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 		fireTemperature = 400;
 		AddedAir = 0F;
 		isValid = false;
-
 		fireItemStacks = new ItemStack[14];
 		inputItemTemps = new float[5];
 		ambientTemp = -1000;
 		numAirBlocks = 0;
-
 		externalFireCheckTimer = 0;
 		externalWoodCount = 0;
 		charcoalCounter = 0;
 		MaxFireTemp = 2500;
-
 	}
 
 	public void careForInventorySlot(int i, float startTemp)
@@ -198,9 +194,8 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	}
 
 	@Override
-	public void closeInventory() {
-		// TODO Auto-generated method stub
-
+	public void closeInventory()
+	{
 	}
 
 	public void combineMetals(ItemStack InputItem, ItemStack DestItem)
@@ -321,9 +316,9 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			if(fireItemStacks[i].stackSize == 0)
 				fireItemStacks[i] = null;
 			return itemstack1;
-		} else
+		}
+		else
 			return null;
-
 	}
 
 	public void ejectContents()
@@ -351,7 +346,6 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit()
 	{
-		// TODO Auto-generated method stub
 		return 64;
 	}
 
@@ -373,6 +367,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			return 13;
 		return -1;
 	}
+
 	@Override
 	public int getSizeInventory()
 	{
@@ -382,13 +377,12 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		// TODO Auto-generated method stub
 		return fireItemStacks[i];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int var1)
+	{
 		return null;
 	}
 
@@ -421,38 +415,14 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
+	public boolean isUseableByPlayer(EntityPlayer entityplayer)
+	{
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void openInventory()
 	{
-		super.readFromNBT(nbttagcompound);
-		fireTemperature = nbttagcompound.getFloat("temperature");
-		fuelTimeLeft = nbttagcompound.getFloat("fuelTimeLeft");
-		fuelBurnTemp = nbttagcompound.getFloat("fuelBurnTemp");
-		charcoalCounter = nbttagcompound.getInteger("charcoalCounter");
-		airFromBellowsTime = nbttagcompound.getFloat("airFromBellowsTime");
-		airFromBellows = nbttagcompound.getFloat("airFromBellows");
-		isValid = nbttagcompound.getBoolean("isValid");
-
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
-		fireItemStacks = new ItemStack[getSizeInventory()];
-		for(int i = 0; i < nbttaglist.tagCount(); i++)
-		{
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte byte0 = nbttagcompound1.getByte("Slot");
-			if(byte0 >= 0 && byte0 < fireItemStacks.length)
-				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		}
 	}
 
 	@Override
@@ -461,8 +431,6 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 		fireItemStacks[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 			itemstack.stackSize = getInventoryStackLimit();
-
-
 	}
 
 	public void setNumAirBlocks(int n)
@@ -572,6 +540,40 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	}
 
 	@Override
+	public boolean hasCustomInventoryName()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack)
+	{
+		return false;
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbttagcompound)
+	{
+		super.readFromNBT(nbttagcompound);
+		fireTemperature = nbttagcompound.getFloat("temperature");
+		fuelTimeLeft = nbttagcompound.getFloat("fuelTimeLeft");
+		fuelBurnTemp = nbttagcompound.getFloat("fuelBurnTemp");
+		charcoalCounter = nbttagcompound.getInteger("charcoalCounter");
+		airFromBellowsTime = nbttagcompound.getFloat("airFromBellowsTime");
+		airFromBellows = nbttagcompound.getFloat("airFromBellows");
+		isValid = nbttagcompound.getBoolean("isValid");
+		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
+		fireItemStacks = new ItemStack[getSizeInventory()];
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			byte byte0 = nbttagcompound1.getByte("Slot");
+			if(byte0 >= 0 && byte0 < fireItemStacks.length)
+				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		}
+	}
+
+	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
@@ -582,8 +584,6 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 		nbttagcompound.setFloat("airFromBellowsTime", airFromBellowsTime);
 		nbttagcompound.setFloat("airFromBellows", airFromBellows);
 		nbttagcompound.setBoolean("isValid", isValid);
-
-
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < fireItemStacks.length; i++)
 			if(fireItemStacks[i] != null)
@@ -597,14 +597,17 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() 
+	public Packet getDescriptionPacket()
 	{
-		return false;
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
-		return false;
+		readFromNBT(pkt.func_148857_g());
 	}
+	
 }
