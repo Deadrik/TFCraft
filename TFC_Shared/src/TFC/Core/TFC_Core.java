@@ -815,6 +815,11 @@ public class TFC_Core
 		TFC_Core.setPlayerFoodStats(player, foodstats);
 	}
 
+	public static float getEnvironmentalDecay(float temp)
+	{
+		return 1+((temp-4f)*0.002f);
+	}
+
 	/**
 	 * This is the default item ticking method for use by all containers. Call this if you don't want
 	 * to do custom environmental decay math.
@@ -824,8 +829,22 @@ public class TFC_Core
 		/*Here we calculate the decayRate based on the environment. We do this before everything else
 		 * so that its only done once per inventory
 		 */
-		float temp = TFC_Climate.getTemp(x, z);
-		float environmentalDecay = 1+((temp-4f)*0.002f);
+		float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
+		float environmentalDecay = getEnvironmentalDecay(temp);
+		handleItemTicking(iinv, world, x, y, z, environmentalDecay);
+	}
+
+	/**
+	 * This is the default item ticking method for use by all containers. Call this if you don't want
+	 * to do custom environmental decay math.
+	 */
+	public static void handleItemTicking(ItemStack[] iinv, World world, int x, int y, int z)
+	{
+		/*Here we calculate the decayRate based on the environment. We do this before everything else
+		 * so that its only done once per inventory
+		 */
+		float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
+		float environmentalDecay = getEnvironmentalDecay(temp);
 		handleItemTicking(iinv, world, x, y, z, environmentalDecay);
 	}
 
@@ -839,6 +858,35 @@ public class TFC_Core
 			ItemStack is = iinv.getStackInSlot(i);
 			if(is != null && iinv.getStackInSlot(i).stackSize <= 0)
 				iinv.setInventorySlotContents(i, null);
+
+			if(is != null)
+			{
+				if((is.getItem() instanceof ItemTerra && 
+						((ItemTerra)is.getItem()).onUpdate(is, world, x, y, z)))
+				{
+					continue;
+				}
+				else if(is.getItem() instanceof ItemTerraBlock && 
+						((ItemTerraBlock)is.getItem()).onUpdate(is, world, x, y, z))
+				{
+					continue;
+				}
+				tickDecay(is, world, x, y, z, environmentalDecay);
+				TFC_ItemHeat.HandleItemHeat(is);
+			}
+		}
+	}
+
+	/**
+	 * This version of the method assumes that the environmental decay modifier has already been calculated.
+	 */
+	public static void handleItemTicking(ItemStack[] iinv, World world, int x, int y, int z, float environmentalDecay)
+	{
+		for(int i = 0; !world.isRemote && i < iinv.length; i++)
+		{
+			ItemStack is = iinv[i];
+			if(is != null && iinv[i].stackSize <= 0)
+				iinv[i] = null;
 
 			if(is != null)
 			{

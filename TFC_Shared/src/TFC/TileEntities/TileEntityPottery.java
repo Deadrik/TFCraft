@@ -41,7 +41,8 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 
 	@Override
 	public void updateEntity()
-	{        
+	{       
+		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 		//If there are no logs for burning then we dont need to tick at all
 		if(!worldObj.isRemote && logsForBurn > 0)
 		{			
@@ -103,8 +104,6 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 
 				broadcastPacketInRange(createUpdatePacket());
 			}
-
-
 		}
 	}	
 
@@ -164,7 +163,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 			}
 		}
 	}
-	
+
 	public void ejectItem(int index)
 	{
 		float f3 = 0.01F;

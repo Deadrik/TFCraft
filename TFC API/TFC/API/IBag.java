@@ -1,5 +1,8 @@
 package TFC.API;
 
-public interface IBag {
+import net.minecraft.item.ItemStack;
 
+public interface IBag 
+{
+	public abstract ItemStack[] loadBagInventory(ItemStack is);
 }

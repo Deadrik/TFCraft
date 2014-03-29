@@ -5,20 +5,18 @@ import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-import TFC.TFCBlocks;
-import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.IBag;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Core.Metal.Alloy;
@@ -57,7 +55,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	{
 		ItemStack[] bag = loadBagInventory(is);
 		boolean canCookAlloy = true;
-		for(int i = 0; i < 4; i++)
+		for(int i = 0; bag != null && i < 4; i++)
 		{
 			if(bag[i] != null)
 			{
@@ -192,7 +190,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				}
 			}
 		}
-		
+
 	}
 
 	private int mergeMetals(Metal mt0, Metal mt1, int m0, int m1)
@@ -207,11 +205,12 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		return m0;
 	}
 
+	@Override
 	public ItemStack[] loadBagInventory(ItemStack is)
 	{
 		ItemStack[] bag = new ItemStack[4];
 
-		if(is != null && is.hasTagCompound())
+		if(is != null && is.hasTagCompound() && is.getTagCompound().hasKey("Items"))
 		{
 			NBTTagList nbttaglist = is.getTagCompound().getTagList("Items");
 
@@ -225,8 +224,28 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				}
 			}
 		}
+		else return null;
 
 		return bag;
+	}
+
+	@Override
+	public boolean onUpdate(ItemStack is, World world, int x, int y, int z)
+	{
+		ItemStack[] bag = loadBagInventory(is);
+		if(bag != null)
+		{
+			float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
+			float environmentalDecay = TFC_Core.getEnvironmentalDecay(temp)*0.5f;
+			TFC_Core.handleItemTicking(bag, world, x, y, z, environmentalDecay);
+			for(ItemStack i : bag)
+			{
+				if(i != null && i.stackSize == 0)
+					i = null;
+			}
+		}
+
+		return true;
 	}
 
 	@Override

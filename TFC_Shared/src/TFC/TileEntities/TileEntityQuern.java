@@ -34,40 +34,40 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 		if(!worldObj.isRemote)
 			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 
-		if(shouldRotate) {
+		if(shouldRotate) 
+		{
 			rotatetimer++;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-			if(rotatetimer == 20) {
-				if(rotation == 3) {
+			if(rotatetimer == 20) 
+			{
+				if(rotation == 3) 
+				{
 					rotation = 0;
 					shouldRotate = false;
-					if(!worldObj.isRemote) {
-							processItem(TFCItems.WheatGrain, 0, TFCItems.WheatGround, 0, 1);//cornmeal
-							processItem(TFCItems.RyeGrain, 0, TFCItems.RyeGround, 0, 1);//cornmeal
-							processItem(TFCItems.OatGrain, 0, TFCItems.OatGround, 0, 1);//cornmeal
-							processItem(TFCItems.BarleyGrain, 0, TFCItems.BarleyGround, 0, 1);//cornmeal
-							processItem(TFCItems.RiceGrain, 0, TFCItems.RiceGround, 0, 1);//cornmeal
-							processItem(TFCItems.MaizeEar, 0, TFCItems.CornmealGround, 0, 1);//cornmeal
-							processItem(TFCItems.OreChunk, 16, TFCItems.Powder, 1, 1);//kaolinite
-							processItem(TFCItems.OreChunk, 20, TFCItems.Powder, 2, 2);//graphite
-							processItem(TFCItems.OreChunk, 27, Item.redstone, 0, 8);//cinnabar
-							processItem(TFCItems.OreChunk, 28, Item.redstone, 0, 8);//cryolite
-							processItem(Item.bone, 0, Item.dyePowder, 15, 2);//bone
-							processItem(TFCItems.OreChunk, 34, TFCItems.Powder, 6, 4);//lapis
-							processItem(TFCItems.OreChunk, 9, TFCItems.Powder, 8, 4);//malachite
-							processItem(TFCItems.OreChunk, 3, TFCItems.Powder, 5, 4);//hematite
-							processItem(TFCItems.OreChunk, 11, TFCItems.Powder, 7, 4);//limonite
-							processItem(TFCItems.OreChunk, 31, TFCItems.Fertilizer, 0, 4);//Sylvite
-							processItem(TFCItems.LooseRock, 5, TFCItems.Powder, 9, 4);//Sylvite
-						}
+					processItem(TFCItems.WheatGrain, 0, TFCItems.WheatGround, 0, 1);//cornmeal
+					processItem(TFCItems.RyeGrain, 0, TFCItems.RyeGround, 0, 1);//cornmeal
+					processItem(TFCItems.OatGrain, 0, TFCItems.OatGround, 0, 1);//cornmeal
+					processItem(TFCItems.BarleyGrain, 0, TFCItems.BarleyGround, 0, 1);//cornmeal
+					processItem(TFCItems.RiceGrain, 0, TFCItems.RiceGround, 0, 1);//cornmeal
+					processItem(TFCItems.MaizeEar, 0, TFCItems.CornmealGround, 0, 1);//cornmeal
+					processItem(TFCItems.OreChunk, 16, TFCItems.Powder, 1, 1);//kaolinite
+					processItem(TFCItems.OreChunk, 20, TFCItems.Powder, 2, 2);//graphite
+					processItem(TFCItems.OreChunk, 27, Item.redstone, 0, 8);//cinnabar
+					processItem(TFCItems.OreChunk, 28, Item.redstone, 0, 8);//cryolite
+					processItem(Item.bone, 0, Item.dyePowder, 15, 2);//bone
+					processItem(TFCItems.OreChunk, 34, TFCItems.Powder, 6, 4);//lapis
+					processItem(TFCItems.OreChunk, 9, TFCItems.Powder, 8, 4);//malachite
+					processItem(TFCItems.OreChunk, 3, TFCItems.Powder, 5, 4);//hematite
+					processItem(TFCItems.OreChunk, 11, TFCItems.Powder, 7, 4);//limonite
+					processItem(TFCItems.OreChunk, 31, TFCItems.Fertilizer, 0, 4);//Sylvite
+					processItem(TFCItems.LooseRock, 5, TFCItems.Powder, 9, 4);//Sylvite
 
-						if(storage[2] != null)
-							damageStackInSlot(2);
-					}
-				} else
-					rotation++;
-				rotatetimer = 0;
-			}
+					if(storage[2] != null)
+						damageStackInSlot(2);
+				}
+			} else
+				rotation++;
+			rotatetimer = 0;
 		}
 	}
 
