@@ -19,7 +19,6 @@ import TFC.Reference;
 import TFC.API.Tools.IToolChisel;
 import TFC.API.Util.Helper;
 import TFC.Blocks.BlockTerra;
-import TFC.Core.TFC_Sounds;
 import TFC.Entities.EntityFallingStone;
 import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;

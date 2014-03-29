@@ -88,7 +88,7 @@ public class ContainerBlastFurnace extends ContainerTFC
 
 		if(orecount != this.bloomery.oreCount || coalcount != this.bloomery.charcoalCount || updatecounter == 1000)
 		{
-			bloomery.broadcastPacketInRange(bloomery.createUpdatePacket());
+			//TODO bloomery.broadcastPacketInRange(bloomery.createUpdatePacket());
 			updatecounter = 0;
 		}
 		orecount = this.bloomery.oreCount;

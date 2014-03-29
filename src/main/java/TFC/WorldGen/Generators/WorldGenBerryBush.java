@@ -46,7 +46,6 @@ public class WorldGenBerryBush extends WorldGenerator
 		float evt = TFC_Climate.manager.getEVTLayerAt(i, k).floatdata1;
 
 		FloraIndex _fi = FloraManager.getInstance().findMatchingIndex(((BlockBerryBush)TFCBlocks.BerryBush).getType(meta));
-
 		if(world.isAirBlock(i, j, k) && j < 250 && temp > _fi.minBioTemp && temp < _fi.maxBioTemp && 
 				rain >= _fi.minRain && rain <= _fi.maxRain && evt >= _fi.minEVT && evt <= _fi.maxEVT)
 		{
@@ -56,9 +55,8 @@ public class WorldGenBerryBush extends WorldGenerator
 			{
 				int x = random.nextInt(spawnRadius*2);
 				int z = random.nextInt(spawnRadius*2);
-				if(createBush(world, random, i - spawnRadius+x, world.getHeightValue(i - spawnRadius+x, k - spawnRadius+z), k - spawnRadius+z, _fi)) {
+				if(createBush(world, random, i - spawnRadius+x, world.getHeightValue(i - spawnRadius+x, k - spawnRadius+z), k - spawnRadius+z, _fi))
 					count++;
-				}
 			}
 			//System.out.println(_fi.type + ": " + count + " bushes spawned of " + _cluster + " expected. [" + i +"]" + "[" + j +"]" + "[" + k +"]");
 		}

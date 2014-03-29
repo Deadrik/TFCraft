@@ -67,8 +67,6 @@ public class GuiPlanSelection extends GuiContainerTFC
 				yOffset+=18;
 			}
 		}
-
-
 	}
 
 	@Override

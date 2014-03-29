@@ -2,11 +2,9 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import TFC.Blocks.BlockCrop;
 import TFC.Core.TFC_Climate;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
@@ -28,13 +26,11 @@ public class WorldGenGrowCrops implements IWorldGenerator
 		int i = x - 5 + par2Random.nextInt(10);
 		int k = z - 5 + par2Random.nextInt(10);
 		int j = world.getHeightValue(x, z)+1;
-
 		CropIndex crop = CropManager.getInstance().getCropFromId(cropBlockId);
 		if(crop != null)
 		{
 			float temp = TFC_Climate.getHeightAdjustedTemp(i, j, k);
 			float growth =  Math.min(crop.numGrowthStages-par2Random.nextInt(3), crop.numGrowthStages);
-
 			if(temp > crop.minAliveTemp)
 			{
 				if (world.isAirBlock(i, j, k) && Blocks.wheat.canBlockStay(world, i, j, k)) // ((BlockCrop)Blocks.wheat).canBlockStay(world, i, j, k))
@@ -51,9 +47,9 @@ public class WorldGenGrowCrops implements IWorldGenerator
 	}
 
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world,
-			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		// TODO Auto-generated method stub
-
+	public void generate(Random par2Random, int x, int z, World world,
+			IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
+	{
 	}
+
 }

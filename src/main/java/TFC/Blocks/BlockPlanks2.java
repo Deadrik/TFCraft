@@ -41,9 +41,8 @@ public class BlockPlanks2 extends BlockTerra
 	 */
 	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < woodNames.length; i++) {
+		for(int i = 0; i < woodNames.length; i++)
 			list.add(new ItemStack(this,1,i));
-		}
 	}
 
 	@Override
@@ -62,11 +61,7 @@ public class BlockPlanks2 extends BlockTerra
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < woodNames.length; i++)
-		{
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+woodNames[i]+" Plank");
-		}
-
-		super.registerBlockIcons(registerer);
 	}
 
 	@Override

@@ -10,7 +10,6 @@ import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import org.lwjgl.opengl.GL11;
 
 import TFC.TFCBlocks;
-import TFC.TerraFirmaCraft;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.TileEntities.TEStand;

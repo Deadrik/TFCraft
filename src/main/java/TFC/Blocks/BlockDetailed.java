@@ -16,7 +16,6 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
-import TFC.TerraFirmaCraft;
 import TFC.Core.CollisionRayTraceDetailed;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;

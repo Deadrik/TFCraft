@@ -1,9 +1,5 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -24,7 +20,6 @@ import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Time;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.GUI.GuiNestBox;
-import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class TENestBox extends TileEntity implements IInventory

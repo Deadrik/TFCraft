@@ -10,7 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import TFC.TFCItems;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
 

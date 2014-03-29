@@ -2,8 +2,6 @@ package TFC.Handlers;
 
 import java.util.Random;
 
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraftforge.event.ServerChatEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

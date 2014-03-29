@@ -24,7 +24,6 @@ public class WorldGenLooseRocks implements IWorldGenerator
 		{
 			world.setBlock(var8, var9+1, var10, TFCBlocks.LooseRock, 0, 2);
 		}
-
 		return true;
 	}
 
@@ -35,17 +34,15 @@ public class WorldGenLooseRocks implements IWorldGenerator
 		chunkX *= 16;
 		chunkZ *= 16;
 		BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
-		if(biome == TFCBiome.ocean) {
+		if(biome == TFCBiome.ocean)
 			return;
-		}
 
 		for (int var2 = 0; var2 < 8; var2++)
 		{
 			int var7 = chunkX + random.nextInt(16) + 8;
 			int var3 = chunkZ + random.nextInt(16) + 8;
-
 			generate(world, random, var7, world.getTopSolidOrLiquidBlock(var7, var3)-1, var3);
 		}
-
 	}
+
 }

@@ -49,14 +49,12 @@ public class WorldGenForests implements IWorldGenerator
 		int xCoord = chunkX;
 		int yCoord = 145;
 		int zCoord = chunkZ;
-
 		int numTreesBase = 5;
 
 		if (random.nextInt(10) == 0)
 			numTreesBase -= 4;
 
 		int numTrees = 1;
-
 		for (int var2 = 0; var2 < numTrees; ++var2)
 		{
 			xCoord = chunkX + random.nextInt(16);
@@ -74,7 +72,6 @@ public class WorldGenForests implements IWorldGenerator
 			int TreeType0 = trees[0];//= TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 0);
 			int TreeType1 = trees[1];//= TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
 			int TreeType2 = trees[2];//= TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
-			
 
 			/*
 			if(TreeType0 < 0 || TreeType0 > 15) {
@@ -86,7 +83,6 @@ public class WorldGenForests implements IWorldGenerator
 			if(TreeType2 < 0 || TreeType2 > 15) {
 				TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
 			}*/
-
 
 			float evt = TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1;
 			WorldGenerator gen0 = TFCBiome.getTreeGen(TreeType0, random.nextBoolean());
@@ -103,9 +99,7 @@ public class WorldGenForests implements IWorldGenerator
 			try
 			{
 				if(zCoord > 14500 || zCoord < -14500)
-				{
 					gen2 = TFCBiome.getTreeGen(8, random.nextBoolean());
-				}
 				int randomNumber = random.nextInt(100);
 
 				float tree0EVTMin = EnumTree.values()[TreeType0].minEVT;
@@ -150,17 +144,15 @@ public class WorldGenForests implements IWorldGenerator
 						rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 2 : 
 							(evt >= tree2EVTMin && evt <= tree2EVTMax) || (rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 1 : 0;
 
-
-
-				if(!canSpawnTemp2 || canSpawnEVTRain2 == 0) {
+				if(!canSpawnTemp2 || canSpawnEVTRain2 == 0)
 					randomNumber -= 20;
-				} else if(canSpawnTemp2 && canSpawnEVTRain2 == 1)
-				{randomNumber -= 10;}
+				else if(canSpawnTemp2 && canSpawnEVTRain2 == 1)
+					randomNumber -= 10;
 
-				if(!canSpawnTemp1 || canSpawnEVTRain1 == 0) {
+				if(!canSpawnTemp1 || canSpawnEVTRain1 == 0)
 					randomNumber -= 30;
-				} else if(canSpawnTemp1 && canSpawnEVTRain1 == 1)
-				{randomNumber -= 15;}
+				else if(canSpawnTemp1 && canSpawnEVTRain1 == 1)
+					randomNumber -= 15;
 
 				//if at least one of the trees is within the temperature zone otherewise no trees
 				if(canSpawnTemp0 || canSpawnTemp1 || canSpawnTemp2)
@@ -170,22 +162,18 @@ public class WorldGenForests implements IWorldGenerator
 					{
 						//there is a 1 in 10 chance for a tree otherwise no trees
 						if(random.nextInt(10) == 0)
-						{
 							numTrees = 1;
-						} else {
+						else
 							return;
-						}
 					}
 				}
 				else
-				{
 					return;
-				}
 
 				if(randomNumber < 40 && gen0 != null)
 				{
 					if(canSpawnTemp0 && canSpawnEVTRain0 > 1)
-					{							
+					{
 						gen0.setScale(1.0D, 1.0D, 1.0D);
 						gen0.generate(world, random, xCoord, yCoord, zCoord);
 					}
@@ -207,40 +195,33 @@ public class WorldGenForests implements IWorldGenerator
 					}
 				}
 
-			}catch(IndexOutOfBoundsException e)
+			}
+			catch(IndexOutOfBoundsException e)
 			{
-
 			}
 		}
 	}
 
 	public boolean generateJungle(Random random, int chunkX, int chunkZ, World world) 
-	{		
+	{
 		BiomeGenBase biome;
 		boolean completed = false;
 
 		int xCoord = chunkX;
 		int yCoord = 145;
 		int zCoord = chunkZ;
-
 		int numTreesBase = 5;
 
 		if (random.nextInt(10) == 0)
-		{
 			numTreesBase -= 4;
-		}
 
 		int numTrees = 50;
-
 		for (int var2 = 0; var2 < numTrees; ++var2)
 		{
 			xCoord = chunkX + 8 + random.nextInt(16);
 			zCoord = chunkZ + 8 + random.nextInt(16);
 			yCoord = world.getHeightValue(xCoord, zCoord);
-
 			float rainfall = TFC_Climate.getRainfall(xCoord, 0, zCoord);
-
-
 			DataLayer EVT = ((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(xCoord, zCoord);
 			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
 			float temperatureAvg = TFC_Climate.getBioTemperature(xCoord, zCoord);
@@ -261,7 +242,6 @@ public class WorldGenForests implements IWorldGenerator
 					gen0.generate(world, random, xCoord, yCoord, zCoord);
 					completed = true;
 				}
-
 			}
 			catch(IndexOutOfBoundsException e)
 			{
@@ -271,7 +251,6 @@ public class WorldGenForests implements IWorldGenerator
 		if(completed)
 		{
 			WorldGenCustomVines var5 = new WorldGenCustomVines();
-
 			for (int var6 = 0; var6 < 50; ++var6)
 			{
 				int var7 = chunkX + random.nextInt(16);

@@ -12,9 +12,7 @@ import TFC.Core.TFC_Core;
 public class MapGenRavineTFC extends MapGenBaseTFC
 {
 	private float[] field_35627_a = new float[1024];
-
 	private byte[] metaArray;
-
 	private int height = 0;
 	private int variability = 0;
 
@@ -46,7 +44,6 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 		}
 
 		boolean var54 = false;
-
 		if (par15 == -1)
 		{
 			par15 = par16 / 2;
@@ -54,12 +51,10 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 		}
 
 		float var27 = 1.0F;
-
 		for (int var28 = 0; var28 < 256; ++var28)
 		{
 			if (var28 == 0 || var19.nextInt(3) == 0)
 				var27 = 1.0F + var19.nextFloat() * var19.nextFloat() * 1.0F;
-
 			this.field_35627_a[var28] = var27 * var27;
 		}
 
@@ -133,7 +128,6 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 								{
 									if (block == Blocks.flowing_water || block == Blocks.water)
 										var58 = true;
-
 									if (var43 != var55 - 1 && var41 != var56 && var41 != var35 - 1 && var42 != var57 && var42 != var39 - 1)
 										var43 = var55;
 								}
@@ -144,36 +138,30 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 						for (var41 = var56; var41 < var35; ++var41)
 						{
 							double var59 = (var41 + par3 * 16 + 0.5D - xCoord) / var53;
-
 							for (var44 = var57; var44 < var39; ++var44)
 							{
 								double var45 = (var44 + par4 * 16 + 0.5D - zCoord) / var53;
 								int index = (var41 * 16 + var44) * 256 + var37;
 								boolean isGrass = false;
-
 								if (var59 * var59 + var45 * var45 < 1.0D)
 									for (int var49 = var37 - 1; var49 >= var55; --var49)
 									{
 										double var50 = (var49 + 0.5D - yCoord) / var30;
-
 										if ((var59 * var59 + var45 * var45) * this.field_35627_a[var49] + var50 * var50 / 6.0D < 1.0D)
 										{
 											block = blockArray[index];
 											if (TFC_Core.isGrass(block))
 												isGrass = true;
-
 											if (TFC_Core.isRawStone(block) || TFC_Core.isSoil(block))
 												if (var49 < 10)
 													blockArray[index] = Blocks.lava;
 												else
 													blockArray[index] = Blocks.air;
 										}
-
 										--index;
 									}
 							}
 						}
-
 						if (var54)
 							break;
 					}
@@ -194,7 +182,6 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 			double startY = this.rand.nextInt(variability) + height;
 			double startZ = chunkZ * 16 + this.rand.nextInt(16);
 			byte var13 = 1;
-
 			for (int var14 = 0; var14 < var13; ++var14)
 			{
 				float angleY = this.rand.nextFloat() * (float)Math.PI * 2.0F;

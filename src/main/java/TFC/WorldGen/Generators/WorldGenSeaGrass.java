@@ -55,7 +55,6 @@ public class WorldGenSeaGrass extends WorldGenerator
 				}
 			}
 		}
-
 		return true;
 	}
 }

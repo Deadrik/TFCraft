@@ -6,7 +6,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import TFC.TFCBlocks;
-import TFC.Blocks.Vanilla.BlockCustomTallGrass;
 import TFC.Core.TFC_Climate;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -47,13 +46,11 @@ public class WorldGenPlants implements IWorldGenerator
 
 	public WorldGenPlants()
 	{
-
 	}
-
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
-			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
+			IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
 		chunkX *= 16;
 		chunkZ *= 16;
@@ -70,33 +67,32 @@ public class WorldGenPlants implements IWorldGenerator
 		float rain = TFC_Climate.getRainfall(chunkX, 144, chunkZ);
 		float bioTemperature;
 
-		if(rain >= 62.5f) 
+		if(rain >= 62.5f)
 		{
-
 		}
-		if(rain >= 125) 
+		if(rain >= 125)
 		{
 			grassPerChunk+=12;
 			flowersPerChunk += 1;
 			mushroomsPerChunk += 1;
 		}
-		if(rain >= 250) 
+		if(rain >= 250)
 		{
 			grassPerChunk+=18;
 			flowersPerChunk += 1;
 			mushroomsPerChunk += 1;
 		}
-		if(rain >= 500) 
+		if(rain >= 500)
 		{
 			grassPerChunk+=24;
 			flowersPerChunk += 1;
 			mushroomsPerChunk += 1;
 		}
-		if(rain >= 1000) 
+		if(rain >= 1000)
 		{
 			mushroomsPerChunk += 1;
 		}
-		if(rain >= 2000) 
+		if(rain >= 2000)
 		{
 			mushroomsPerChunk += 1;
 		}
@@ -107,11 +103,9 @@ public class WorldGenPlants implements IWorldGenerator
 			zCoord = chunkZ + random.nextInt(16) + 8;
 			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
 			bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
-
 			if(bioTemperature > 1.5)
 			{
 				plantYellowGen.generate(world, random, xCoord, yCoord, zCoord);
-
 				if (random.nextInt(4) == 0)
 				{
 					xCoord = chunkX + random.nextInt(16) + 8;
@@ -119,23 +113,17 @@ public class WorldGenPlants implements IWorldGenerator
 					yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
 					bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
 					if(bioTemperature > 1.5)
-					{
 						plantRedGen.generate(world, random, xCoord, yCoord, zCoord);
-					}
 				}
 			}
 		}
 
 		genBushes(random, chunkX, chunkZ, world);
-
-
 		for (int i  = 0; i < grassPerChunk; ++i)
 		{
-
 			xCoord = chunkX + random.nextInt(16) + 8;
 			zCoord = chunkZ + random.nextInt(16) + 8;
 			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
-
 			bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
 			if(bioTemperature >= 1.5)
 			{
@@ -167,7 +155,6 @@ public class WorldGenPlants implements IWorldGenerator
 				mushroomRedGen.generate(world, random, xCoord, yCoord, zCoord);
 			}
 		}
-
 
 		/*if (random.nextInt(70) == 0  && rainfall.floatdata1 > 500)
 		{
@@ -247,11 +234,10 @@ public class WorldGenPlants implements IWorldGenerator
 			//                }
 			}
 		}*/
-
 	}
 
-
-	private void genBushes(Random random, int chunkX, int chunkZ, World world) {
+	private void genBushes(Random random, int chunkX, int chunkZ, World world)
+	{
 		int xCoord;
 		int yCoord;
 		int zCoord;

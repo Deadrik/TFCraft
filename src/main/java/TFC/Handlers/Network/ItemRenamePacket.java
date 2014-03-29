@@ -1,9 +1,9 @@
 package TFC.Handlers.Network;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
+import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class ItemRenamePacket extends AbstractPacket
 {

@@ -19,7 +19,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.ChunkPosition;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -76,13 +75,9 @@ public final class SpawnerAnimalsTFC
 						ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(l + k, i1 + j);
 
 						if (!flag3)
-						{
 							this.eligibleChunksForSpawning.put(chunkcoordintpair, Boolean.valueOf(false));
-						}
 						else if (!this.eligibleChunksForSpawning.containsKey(chunkcoordintpair))
-						{
 							this.eligibleChunksForSpawning.put(chunkcoordintpair, Boolean.valueOf(true));
-						}
 					}
 				}
 			}
@@ -96,7 +91,10 @@ public final class SpawnerAnimalsTFC
 			{
 				EnumCreatureType enumcreaturetype = aenumcreaturetype[j1];
 
-				if ((!enumcreaturetype.getPeacefulCreature() || par3) && (enumcreaturetype.getPeacefulCreature() || par2) && (!enumcreaturetype.getAnimal() || par4) && par1WorldServer.countEntities(enumcreaturetype, true) <= enumcreaturetype.getMaxNumberOfCreature() * this.eligibleChunksForSpawning.size() / 256)
+				if ((!enumcreaturetype.getPeacefulCreature() || par3) &&
+						(enumcreaturetype.getPeacefulCreature() || par2) &&
+						(!enumcreaturetype.getAnimal() || par4) &&
+						par1WorldServer.countEntities(enumcreaturetype, true) <= enumcreaturetype.getMaxNumberOfCreature() * this.eligibleChunksForSpawning.size() / 256)
 				{
 					Iterator iterator = this.eligibleChunksForSpawning.keySet().iterator();
 					ArrayList<ChunkCoordIntPair> tmp = new ArrayList(eligibleChunksForSpawning.keySet());
@@ -158,15 +156,11 @@ public final class SpawnerAnimalsTFC
 															if (spawnlistentry == null)
 															{
 																spawnlistentry = par1WorldServer.spawnRandomCreature(enumcreaturetype, l2, i3, j3);
-
 																if (spawnlistentry == null)
-																{
 																	break label103;
-																}
 															}
 
 															EntityLiving entityliving;
-
 															try
 															{
 																entityliving = (EntityLiving)spawnlistentry.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par1WorldServer});
@@ -178,33 +172,24 @@ public final class SpawnerAnimalsTFC
 															}
 
 															entityliving.setLocationAndAngles(f, f1, f2, par1WorldServer.rand.nextFloat() * 360.0F, 0.0F);
-
 															Result canSpawn = ForgeEventFactory.canEntitySpawn(entityliving, par1WorldServer, f, f1, f2);
 															if (canSpawn == Result.ALLOW || (canSpawn == Result.DEFAULT && entityliving.getCanSpawnHere()))
 															{
 																++j2;
 																par1WorldServer.spawnEntityInWorld(entityliving);
 																if (!ForgeEventFactory.doSpecialSpawn(entityliving, par1WorldServer, f, f1, f2))
-																{
 																	entitylivingdata = entityliving.onSpawnWithEgg(entitylivingdata);
-																}
-
 																if (j2 >= ForgeEventFactory.getMaxSpawnPackSize(entityliving))
-																{
 																	continue label110;
-																}
 															}
-
 															i += j2;
 														}
 													}
 												}
-
 												++k3;
 												continue;
 												}
 											}
-
 											++k2;
 											break;
 										}
@@ -214,7 +199,6 @@ public final class SpawnerAnimalsTFC
 						}
 				}
 			}
-
 			return i;
 		}
 	}
@@ -267,11 +251,9 @@ public final class SpawnerAnimalsTFC
 				for (int j2 = 0; j2 < i1; ++j2)
 				{
 					boolean flag = false;
-
 					for (int k2 = 0; !flag && k2 < 4; ++k2)
 					{
 						int l2 = par0World.getTopSolidOrLiquidBlock(j1, k1);
-
 						if (canCreatureTypeSpawnAtLocation(EnumCreatureType.creature, par0World, j1, l2, k1))
 						{
 							float f = j1 + 0.5F;
@@ -296,8 +278,9 @@ public final class SpawnerAnimalsTFC
 						}
 
 						j1 += par6Random.nextInt(5) - par6Random.nextInt(5);
-
-						for (k1 += par6Random.nextInt(5) - par6Random.nextInt(5); j1 < par2 || j1 >= par2 + par4 || k1 < par3 || k1 >= par3 + par4; k1 = i2 + par6Random.nextInt(5) - par6Random.nextInt(5))
+						for (k1 += par6Random.nextInt(5) - par6Random.nextInt(5);
+								j1 < par2 || j1 >= par2 + par4 || k1 < par3 || k1 >= par3 + par4;
+								k1 = i2 + par6Random.nextInt(5) - par6Random.nextInt(5))
 						{
 							j1 = l1 + par6Random.nextInt(5) - par6Random.nextInt(5);
 						}

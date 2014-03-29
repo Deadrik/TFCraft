@@ -1,13 +1,11 @@
 package TFC.Handlers.Network;
 
-import java.io.IOException;
-
-import TFC.Core.TFC_Time;
-import TFC.Core.Player.PlayerInfo;
-import TFC.Core.Player.PlayerManagerTFC;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
+import TFC.Core.TFC_Time;
+import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerManagerTFC;
 
 public class KeyPressPacket extends AbstractPacket
 {

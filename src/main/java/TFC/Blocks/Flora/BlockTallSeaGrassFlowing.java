@@ -3,8 +3,6 @@ package TFC.Blocks.Flora;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.Icon;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;

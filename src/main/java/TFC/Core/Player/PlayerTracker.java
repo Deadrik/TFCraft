@@ -1,10 +1,5 @@
 package TFC.Core.Player;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
@@ -12,14 +7,12 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Core;
-import TFC.Handlers.PacketHandler;
 import TFC.Handlers.Network.AbstractPacket;
 import TFC.Handlers.Network.InitClientWorldPacket;
 import TFC.Handlers.Network.PlayerUpdatePacket;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ServerConnectionFromClientEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ServerDisconnectionFromClientEvent;

@@ -1,7 +1,6 @@
 package TFC.Core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;

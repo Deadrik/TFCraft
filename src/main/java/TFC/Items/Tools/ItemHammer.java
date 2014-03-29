@@ -2,8 +2,6 @@ package TFC.Items.Tools;
 
 import java.util.Set;
 
-import com.google.common.collect.Sets;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +10,8 @@ import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.Enums.EnumSize;
 import TFC.TileEntities.TileEntityAnvil;
+
+import com.google.common.collect.Sets;
 
 public class ItemHammer extends ItemTerraTool
 {

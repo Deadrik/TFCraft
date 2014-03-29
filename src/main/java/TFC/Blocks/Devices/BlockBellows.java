@@ -1,7 +1,5 @@
 package TFC.Blocks.Devices;
 
-import javax.swing.Icon;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,9 +12,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
-import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
-import TFC.Core.TFC_Sounds;
 import TFC.TileEntities.TileEntityBellows;
 
 public class BlockBellows extends BlockTerraContainer

@@ -25,11 +25,9 @@ public class WorldGenFissure implements IWorldGenerator
 	int creviceDepth = 1;
 	Block fillBlock;
 	int depth = 20;
-	
 	int minTunnel = 1;
 	boolean checkStability = true;
 	boolean underground = false;
-
 	int seed = 0;
 	int rarity = 10;
 
@@ -118,7 +116,6 @@ public class WorldGenFissure implements IWorldGenerator
 
 			int rx = 0;
 			int rz = 0;
-
 			for(int d = 0; d <= creviceDepth; d++)
 			{
 				carve(world, x+b.x, y+b.y+d, z+b.z, rockLayer.block, rockLayer.meta);

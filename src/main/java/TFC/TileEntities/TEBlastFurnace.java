@@ -1,9 +1,5 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -33,7 +29,6 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.MetalRegistry;
 import TFC.GUI.GuiBlastFurnace;
-import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class TEBlastFurnace extends TileEntityFireEntity implements IInventory

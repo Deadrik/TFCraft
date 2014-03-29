@@ -65,7 +65,6 @@ public class WorldGenMinable extends WorldGenerator
 	private int genInBlockMeta = 1;
 	private boolean useMarcoVeins = false;
 
-
 	//==========================================mp mod
 	private Block minableBlock;
 	private int numberOfBlocks;
@@ -74,13 +73,12 @@ public class WorldGenMinable extends WorldGenerator
 			int veinAmount, int height, int diameter, int vDensity, int hDensity, boolean vein)
 	{
 		int emptyHolder = 0;
-		minableBlock = block;
-		minableBlockMeta = j;
 		emptyHolder = j;
 
-		genInBlock = layerBlock;
-		genInBlockMeta = layerMeta;
-
+		this.minableBlock = block;
+		this.minableBlockMeta = j;
+		this.genInBlock = layerBlock;
+		this.genInBlockMeta = layerMeta;
 		this.rarity = rarity;
 		this.veinSi = veinSize;
 		this.veinAm = veinAmount;
@@ -127,15 +125,12 @@ public class WorldGenMinable extends WorldGenerator
 	{
 		MPChunk_X = x;// set output chunk x // snap to grid
 		MPChunk_Z = z;// set output chunk z    
-
 		rand = random;
-
 		worldObj = world; // set world
 		mineCount = 0; // this is a new chunk, so list gets set to the beginning
-
 		oreList.clear(); // clear the list of ores, this is a new chunk   
-
 		MPBlock = minableBlock;// set output block
+
 		if(MPChunk_X != MPPrevX || MPChunk_Z != MPPrevZ || MPPrevBlock != MPBlock || minableBlockMeta != MPPrevMeta)
 			if (generateBeforeCheck() == false)
 			{
@@ -154,7 +149,6 @@ public class WorldGenMinable extends WorldGenerator
 
 	public int mPCalculateDensity(int oreDistance, float oreDensity) // returns the density value
 	{
-
 		int loopCount = 0;
 		int densityValuePassInner = 0;
 		int densityValuePass = 0;
@@ -219,7 +213,8 @@ public class WorldGenMinable extends WorldGenerator
 					posZ = posZ + rand.nextInt(2);
 				if(directionZ == 1 && directionChange != 3)
 					posZ = posZ - rand.nextInt(2);
-				if(rand.nextInt(4) == 0){
+				if(rand.nextInt(4) == 0)
+				{
 					posX2 = posX2 + rand.nextInt(2);
 					posY2 = posY2 + rand.nextInt(2);
 					posZ2 = posZ2 + rand.nextInt(2);
@@ -232,7 +227,6 @@ public class WorldGenMinable extends WorldGenerator
 					posX2 = posX;
 					posY2 = posY;
 					posZ2 = posZ;
-
 					directionX2 = rand.nextInt(2);
 					directionY2 = rand.nextInt(2);
 					directionZ2 = rand.nextInt(2);
@@ -252,7 +246,6 @@ public class WorldGenMinable extends WorldGenerator
 
 					for(int blocksMade2 = 0; blocksMade2 <= (1 +(blocksToUse2/5)); )
 					{
-
 						if(directionX2 == 0 && directionChange2 != 0)
 							posX2 = posX2 + rand.nextInt(2);
 						if(directionY2 == 0 && directionChange2 != 1)
@@ -265,7 +258,6 @@ public class WorldGenMinable extends WorldGenerator
 							posY2 = posY2 - rand.nextInt(2);
 						if(directionZ2 == 1 && directionChange2 != 2)
 							posZ2 = posZ2 - rand.nextInt(2);
-
 
 						boolean isCorrectRockType = false;
 						boolean isCorrectMeta = false;
@@ -330,16 +322,12 @@ public class WorldGenMinable extends WorldGenerator
 			posX = parX;
 			posY = parY;
 			posZ = parZ;
-
 		}
-
-
 		return true;
 	}
 
 	public boolean BODgenerate(World world, Random rand, int par3, int par4, int par5, int xyz)
 	{
-
 		//==========================================mp mod
 		numberOfBlocks = xyz; //input number of blocks per vein
 
@@ -370,21 +358,17 @@ public class WorldGenMinable extends WorldGenerator
 			for (int posX = var32; posX <= var35; ++posX)
 			{
 				double var39 = (posX + 0.5D - var20) / (var28 / 2.0D);
-
 				if (var39 * var39 < 1.0D)
 					for (int posY = var33; posY <= var36; ++posY)
 					{
 						double var42 = (posY + 0.5D - var22) / (var30 / 2.0D);
-
 						if (var39 * var39 + var42 * var42 < 1.0D)
 							for (int posZ = var34; posZ <= var37; ++posZ)
 							{
 								double var45 = (posZ + 0.5D - var24) / (var28 / 2.0D);
-
 								int m = world.getBlockMetadata(posX, posY, posZ);
 								boolean isCorrectRockType = false;
 								boolean isCorrectMeta = false;
-
 								if(TFCOptions.enableOreTest)
 								{
 									DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(world, posX, posY, posZ));
@@ -413,8 +397,9 @@ public class WorldGenMinable extends WorldGenerator
 	}
 
 	@Override
-	public boolean generate(World world, Random random, int i, int j, int k) 
+	public boolean generate(World world, Random random, int i, int j, int k)
 	{
 		return false;
 	}
+
 }

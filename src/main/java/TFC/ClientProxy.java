@@ -260,21 +260,23 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void onClientLogin()
 	{
-
 	}
 
 	@Override
-	public World getCurrentWorld() {
+	public World getCurrentWorld()
+	{
 		return Minecraft.getMinecraft().theWorld;
 	}
 
 	@Override
-	public boolean isRemote() {
+	public boolean isRemote()
+	{
 		return true;
 	}
 
 	@Override
-	public File getMinecraftDir() {
+	public File getMinecraftDir()
+	{
 		return Minecraft.getMinecraft().mcDataDir;
 	}
 

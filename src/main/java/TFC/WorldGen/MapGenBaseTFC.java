@@ -28,7 +28,6 @@ public class MapGenBaseTFC
 		for (int var11 = par3 - var6; var11 <= par3 + var6; ++var11)
 		{
 			long var13 = var11 * var7;
-
 			for (int var12 = par4 - var6; var12 <= par4 + var6; ++var12)
 			{
 				long var15 = var12 * var9;
@@ -41,5 +40,5 @@ public class MapGenBaseTFC
 	/**
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
-	 protected void recursiveGenerate(World par1World, int par2, int par3, int par4, int par5, Block[] idsBig) {}
+	protected void recursiveGenerate(World par1World, int par2, int par3, int par4, int par5, Block[] idsBig) {}
 }

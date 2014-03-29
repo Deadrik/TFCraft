@@ -3,7 +3,6 @@ package TFC.Core;
 import java.util.Collection;
 import java.util.Iterator;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

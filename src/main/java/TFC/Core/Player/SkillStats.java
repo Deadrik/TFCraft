@@ -2,22 +2,17 @@ package TFC.Core.Player;
 
 import io.netty.buffer.ByteBuf;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
-import net.minecraft.network.Packet;
 import TFC.TerraFirmaCraft;
 import TFC.API.SkillsManager;
-import TFC.Handlers.PacketHandler;
 import TFC.Handlers.Network.AbstractPacket;
 import TFC.Handlers.Network.PlayerUpdatePacket;
+import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class SkillStats
 {

@@ -9,7 +9,7 @@ import TFC.API.Enums.EnumTree;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 
-public class WorldGenGrowTrees 
+public class WorldGenGrowTrees
 {
 	public void generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
@@ -123,55 +123,34 @@ public class WorldGenGrowTrees
 					//there is a 1 in 10 chance for a tree otherwise no trees
 					if(random.nextInt(10) == 0)
 					{
-
 					}
-					else return;
+					else
+						return;
 				}
 			}
 			else
-			{
 				return;
-			}
 
 			if(randomNumber < 40)
-			{
 				if(canSpawnTemp0 && canSpawnEVTRain0 > 0)
-				{							
 					world.setBlock(xCoord, yCoord+1, zCoord, Blocks.sapling, TreeType0, 0x2);
-				}
-			}
 			else if(randomNumber < 70)
-			{
 				if(canSpawnTemp1)
-				{
 					world.setBlock(xCoord, yCoord+1, zCoord, Blocks.sapling, TreeType1, 0x2);
-				}
-			}
 			else if(randomNumber < 100)
-			{
 				if(canSpawnTemp2)
-				{
 					world.setBlock(xCoord, yCoord+1, zCoord, Blocks.sapling, TreeType2, 0x2);
-				}
-			}
 		}
 	}
 	
 	public boolean getNearWater(World world, int x, int y, int z)
 	{
 		for (int x1 = -4; x1 < 5; ++x1)
-		{
 			for (int z1 = -4; z1 < 5; ++z1)
-			{
 				for (int y1 = -2; y1 < 1; ++y1)
-				{
 					if(world.blockExists(x+x1, y+y1, z+z1) == true && TFC_Core.isWater(world.getBlock(x+x1, y+y1, z+z1)))
-					{
 						return true;
-					}
-				}
-			}
-		}
 		return false;
 	}
+
 }

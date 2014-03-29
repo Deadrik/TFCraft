@@ -9,7 +9,6 @@ import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import TFC.Core.TFC_Sounds;
 
 public class BlockDirt2 extends BlockDirt
 {

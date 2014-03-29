@@ -42,14 +42,12 @@ import TFC.WorldGen.Generators.Trees.WorldGenDouglasFir;
 import TFC.WorldGen.Generators.Trees.WorldGenPineShort;
 import TFC.WorldGen.Generators.Trees.WorldGenPineTall;
 import TFC.WorldGen.Generators.Trees.WorldGenRedwoodXL;
-import cpw.mods.fml.common.ObfuscationReflectionHelper;
 
 public class TFCBiome extends BiomeGenBase
 {
 	public static int SwampWater = 0x228855;//0x644c27;
 	public static int FreshWater = 0x80b280;
 	public static int DarkWater = 0x354d35;
-
 	public static float riverDepthMin = -0.5F;
 	public static float riverDepthMax = -0.3F;
 	public float temperatureTFC;
@@ -59,36 +57,22 @@ public class TFCBiome extends BiomeGenBase
 	/** An array of all the biomes, indexed by biome id. */
 	public static final TFCBiome ocean = new BiomeGenOceanTFC(0).setBiomeName("Ocean").setMinMaxHeight(-0.9F, 0.1F);
 	public static final TFCBiome river = new BiomeGenRiverTFC(7).setBiomeName("River").setMinMaxHeight(riverDepthMin, riverDepthMax);
-
 	public static final TFCBiome hell = (new BiomeGenHellTFC(8)).setColor(16711680).setBiomeName("Hell").setDisableRain().setTemperatureRainfall(2.0F, 0.0F);
-
 	public static final TFCBiome beach = (new BiomeGenBeachTFC(16)).setColor(0xfade55).SetWaterMult(DarkWater).setBiomeName("Beach").setMinMaxHeight(0.0F, 0.02F);
-
 	public static final TFCBiome jungle = (new BiomeGenJungleTFC(21)).setColor(5470985).setBiomeName("Jungle").setMinMaxHeight(0.2F, 0.4F);
-
 	public static final TFCBiome jungleHills = (new BiomeGenJungleTFC(22)).setColor(2900485).setBiomeName("JungleHills").setMinMaxHeight(0.3F, 0.8F);
-
 	public static final TFCBiome desert = (new BiomeGenDesertTFC(2)).setBiomeName("Desert").setDisableRain().setTemperatureRainfall(36F, 0.0F).setMinMaxHeight(0.1F, 0.15F);
-
 	public static final TFCBiome HighHills = (new BiomeGenHillsTFC(3)).setBiomeName("High Hills").setMinMaxHeight(0.8F, 1.6F);
-
 	public static final TFCBiome forest = (new BiomeGenForestTFC(4)).setBiomeName("Forest").setMinMaxHeight(0.1F, 0.3F);
-
 	public static final TFCBiome plains = (new BiomeGenPlainsTFC(1)).setBiomeName("TFC Plains").setMinMaxHeight(0.1F, 0.2F);
-
 	public static final TFCBiome taiga = (new BiomeGenTaigaTFC(5)).setBiomeName("Taiga").setMinMaxHeight(0.2F, 0.5F);
-
 	public static final TFCBiome swampland = (new BiomeGenSwampTFC(6)).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.1F);
-
 	public static final TFCBiome HighHillsEdge = (new BiomeGenHillsEdgeTFC(20)).setBiomeName("High Hills Edge").setMinMaxHeight(0.2F, 0.4F);
-
 	public static final TFCBiome rollingHills = (new TFCBiome(30)).setBiomeName("Rolling Hills").setMinMaxHeight(0.1F, 0.4F);
 	public static final TFCBiome Mountains = (new TFCBiome(31)).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F);
 	public static final TFCBiome MountainsEdge = (new TFCBiome(32)).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F);
-
 	public static final TFCBiome MountainsSeismic = (new TFCBiome(33)).setBiomeName("Mountains Seismic").setMinMaxHeight(0.8F, 1.6F);
 	public static final TFCBiome MountainsEdgeSeismic = (new TFCBiome(34)).setBiomeName("Mountains Edge Seismic").setMinMaxHeight(0.4F, 0.8F);
-
 	public static final TFCBiome PlainsSeismic = (new BiomeGenPlainsTFC(35)).setBiomeName("TFC Plains Seismic").setMinMaxHeight(0.1F, 0.2F);
 
 	protected static WorldGenAcaciaKoaTrees worldGenAcaciaKoaTrees;
@@ -135,8 +119,6 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableMonsterList = new ArrayList();
 		this.spawnableCreatureList = new ArrayList();
 		this.spawnableWaterCreatureList = new ArrayList();
-
-		getBiomeGenArray()[par1] = this;
 
 		worldGenAcaciaKoaTrees = new WorldGenAcaciaKoaTrees(false,0);
 		worldGenAshTallTrees = new WorldGenCustomTallTrees(false,7);
@@ -188,6 +170,9 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeperTFC.class, 3, 1, 2));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySlimeTFC.class, 8, 1, 2));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityEndermanTFC.class, 1, 1, 2));
+		
+		getBiomeGenArray()[par1] = this;
+		//biomeList[par1] = this;
 	}
 
 	/**

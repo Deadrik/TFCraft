@@ -14,8 +14,6 @@ public class WorldGenFissureCluster implements IWorldGenerator
 	Random rand;
 	int waterRarity = 150;
 
-
-
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
@@ -40,7 +38,8 @@ public class WorldGenFissureCluster implements IWorldGenerator
 				int y = world.getTopSolidOrLiquidBlock(x, z)-1;
 				new WorldGenFissure(b).generate(world, rand, x, y, z);
 			}
-		}else if(rand.nextInt(300) == 0)
+		}
+		else if(rand.nextInt(300) == 0)
 		{
 			int num = 3 + rand.nextInt(10);
 			for(int i = 0; i < num; i++)
@@ -54,7 +53,6 @@ public class WorldGenFissureCluster implements IWorldGenerator
 				new WorldGenFissure(b).generate(world, rand, x, y, z);
 			}
 		}
-
 	}
 
 }

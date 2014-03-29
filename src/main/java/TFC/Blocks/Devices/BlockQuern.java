@@ -13,7 +13,6 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
-import TFC.Core.TFC_Sounds;
 import TFC.TileEntities.TileEntityQuern;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

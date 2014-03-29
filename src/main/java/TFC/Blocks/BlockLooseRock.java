@@ -53,11 +53,8 @@ public class BlockLooseRock extends BlockTerra
 		ArrayList coreSampleStacks = new ArrayList<ItemStack>();
 
 		for(int x = -15; x <= 15; x++)
-		{
 			for(int z = -15; z <= 15; z++)
-			{
 				for(int y = yCoord; y > yCoord-35; y--)
-				{
 					if(world.getBlock(xCoord+x, y, zCoord+z) == TFCBlocks.Ore)
 					{
 						int m = world.getBlockMetadata(xCoord+x, y, zCoord+z);
@@ -71,15 +68,10 @@ public class BlockLooseRock extends BlockTerra
 							}
 						}
 					}
-				}
-			}
-		}
-		Random R = new Random();
 
+		Random R = new Random();
 		if(!coreSampleStacks.isEmpty() && R.nextInt(3) == 0)
-		{
 			dropBlockAsItem(world, xCoord, yCoord, zCoord,(ItemStack)coreSampleStacks.toArray()[R.nextInt(coreSampleStacks.toArray().length)]);
-		}
 		else
 			dropBlockAsItem(world, xCoord, yCoord, zCoord, new ItemStack(TFCItems.LooseRock, 1, TFC_Core.getItemMetaFromStone(rockLayer.block, rockLayer.data2)));
 

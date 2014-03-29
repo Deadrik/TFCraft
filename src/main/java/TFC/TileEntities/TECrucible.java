@@ -1,9 +1,5 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,7 +28,6 @@ import TFC.Core.Metal.AlloyManager;
 import TFC.Core.Metal.AlloyMetal;
 import TFC.Core.Metal.MetalPair;
 import TFC.Core.Metal.MetalRegistry;
-import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
 
 public class TECrucible extends TileEntity implements IInventory

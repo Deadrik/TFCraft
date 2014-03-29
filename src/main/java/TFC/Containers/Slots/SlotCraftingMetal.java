@@ -14,8 +14,6 @@ import TFC.TerraFirmaCraft;
 import TFC.Containers.ContainerSpecialCrafting;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.GUI.GuiKnapping;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class SlotCraftingMetal extends Slot
 {

@@ -20,7 +20,6 @@ public class WorldGenFixGrass implements IWorldGenerator
 	{
 	}
 
-
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
@@ -37,7 +36,6 @@ public class WorldGenFixGrass implements IWorldGenerator
 		{
 			for (int z = 0; z < 16; ++z)
 			{
-
 				xCoord = chunkX + x;
 				zCoord = chunkZ + z;
 				yCoord = world.getHeightValue(xCoord, zCoord);
@@ -46,21 +44,17 @@ public class WorldGenFixGrass implements IWorldGenerator
 				if(TFC_Core.isDryGrass(world.getBlock(xCoord, yCoord, zCoord)))
 				{
 					if(getNearWater(world, xCoord, yCoord, zCoord))
-					{
 						rainfall*=2;
-					}
-					
+
 					if(rainfall >= 500)
 					{
 						world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForGrass(world.getBlockMetadata(xCoord, yCoord, zCoord)), 0, 0x2);
 						converted = true;
 					}
+
 					for (int x1 = -4; x1 < 5 && !converted; ++x1)
-					{
 						for (int z1 = -4; z1 < 5 && !converted; ++z1)
-						{
 							for (int y1 = -2; y1 < 1 && !converted; ++y1)
-							{
 								if(TFC_Core.isWater(world.getBlock(xCoord+x1, yCoord+y1, zCoord+z1)))
 								{
 									world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForGrass(world.getBlockMetadata(xCoord, yCoord, zCoord)), 0, 0x2);
@@ -71,13 +65,9 @@ public class WorldGenFixGrass implements IWorldGenerator
 										numX = -numX;
 									if(numZ < 0)
 										numZ = -numZ;
-
 									if(random.nextInt(1+((numX+numZ)/2)) == 0)
 										world.setBlock(xCoord, yCoord+1, zCoord,Blocks.tallgrass, 0, 0x2);
 								}
-							}
-						}
-					}
 				}
 			}
 		}
@@ -86,16 +76,14 @@ public class WorldGenFixGrass implements IWorldGenerator
 	public boolean getNearWater(World world, int x, int y, int z)
 	{
 		BiomeGenBase biome;
-
 		for(int i = -2; i <= 2; i++)
-		{
 			for(int k = -2; k <= 2; k++)
 			{
 				biome = world.getBiomeGenForCoords(x+(i * 8), z+(k * 8));
 				if(biome.biomeID == TFCBiome.ocean.biomeID || biome.biomeID == TFCBiome.river.biomeID || biome.biomeID == TFCBiome.swampland.biomeID)
 					return true;
 			}
-		}
 		return false;
 	}
+
 }

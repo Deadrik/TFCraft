@@ -3,7 +3,6 @@ package TFC.WorldGen.Generators;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlower;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -26,11 +25,8 @@ public class WorldGenCustomFlowers extends WorldGenerator
 			int var9 = par5 + par2Random.nextInt(8) - par2Random.nextInt(8);
 
 			if (par1World.isAirBlock(var7, var8, var9) && this.plantBlock.canBlockStay(par1World, var7, var8, var9)) // ((BlockFlower)this.plantBlock).canBlockStay(par1World, var7, var8, var9))
-			{
 				par1World.setBlock(var7, var8, var9, this.plantBlock);
-			}
 		}
-
 		return true;
 	}
 }

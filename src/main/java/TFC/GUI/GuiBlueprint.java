@@ -1,9 +1,5 @@
 package TFC.GUI;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -12,8 +8,6 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S3FPacketCustomPayload;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -24,7 +18,6 @@ import TFC.Reference;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Core;
 import TFC.Core.Util.StringUtil;
-import TFC.Handlers.PacketHandler;
 import TFC.Handlers.Network.AbstractPacket;
 import TFC.Handlers.Network.ItemRenamePacket;
 

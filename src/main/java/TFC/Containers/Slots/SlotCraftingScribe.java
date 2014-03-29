@@ -6,7 +6,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import TFC.TerraFirmaCraft;
 import TFC.TileEntities.TileEntityScribe;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class SlotCraftingScribe extends Slot
 {

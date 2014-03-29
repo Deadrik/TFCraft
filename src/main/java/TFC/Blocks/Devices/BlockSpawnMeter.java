@@ -1,7 +1,5 @@
 package TFC.Blocks.Devices;
 
-import javax.swing.Icon;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;

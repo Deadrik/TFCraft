@@ -90,8 +90,6 @@ public class TerraFirmaCraft
 		//Load our settings from the TFCOptions file
 		loadSettings();
 
-//		MinecraftForge.EVENT_BUS.register(new ServerTickHandler());
-//		MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
 		proxy.registerTickHandler();
 
 		TFCBlocks.LoadBlocks();
@@ -141,63 +139,55 @@ public class TerraFirmaCraft
 		TFCWorldType.DEFAULT = new TFCWorldType("DEFAULT");
 		TFCWorldType.FLAT = new TFCWorldType("FLAT");
 		DimensionManager.unregisterProviderType(-1);
-		DimensionManager.registerProviderType(-1, TFCProviderHell.class, true);
 		DimensionManager.unregisterProviderType(0);
-		DimensionManager.registerProviderType(0, TFCProvider.class, true);
 		DimensionManager.unregisterProviderType(1);
+
+		DimensionManager.registerProviderType(-1, TFCProviderHell.class, true);
+		DimensionManager.registerProviderType(0, TFCProvider.class, true);
 		DimensionManager.registerProviderType(1, TFCProvider.class, true);
+
+		DimensionManager.registerDimension(-1, -1);
+		DimensionManager.registerDimension(0, 0);
+		DimensionManager.registerDimension(1, 1);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent evt)
 	{
 		//Add Item Name Localizations
-		Localization.addLocalization("/assets/terrafirmacraft/lang/", "en_US");
+		//Localization.addLocalization("/assets/terrafirmacraft/lang/", "en_US");
 		//LanguageRegistry.instance().loadLocalization("assets/terrafirmacraft/lang/", "en_US", false);
-		proxy.registerTranslations();
-
-		//Register all of the recipes
-		Recipes.registerRecipes();
-
-		//Register the tool classes
-		proxy.registerToolClasses();
-
-		// Register Crafting Handler
-		MinecraftForge.EVENT_BUS.register(new CraftingHandler());
-
-		// Register the Entity Spawn Handler
-		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
-
-		// Register the Entity Living Update Handler
-		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
-
-		// Register the Entity Hurt Handler
-		MinecraftForge.EVENT_BUS.register(new EntityDamageHandler());
-
-		// Register Chat Listener
-		MinecraftForge.EVENT_BUS.register(new ChatListenerTFC());
+		//proxy.registerTranslations();
 
 		// Register Packet Handler
-//		NetworkRegistry.INSTANCE.registerConnectionHandler(new PacketHandler());
+		//NetworkRegistry.INSTANCE.registerConnectionHandler(new PacketHandler());
 		packetPipeline.initalise();
-
-		// Register all the render stuff for the client
-		proxy.registerRenderInformation();
-
+		//Register all of the recipes
+		Recipes.registerRecipes();
+		//Register the tool classes
+		proxy.registerToolClasses();
+		// Register Crafting Handler
+		MinecraftForge.EVENT_BUS.register(new CraftingHandler());
+		// Register the Entity Spawn Handler
+		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
+		// Register the Entity Living Update Handler
+		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+		// Register the Entity Hurt Handler
+		MinecraftForge.EVENT_BUS.register(new EntityDamageHandler());
+		// Register Chat Listener
+		MinecraftForge.EVENT_BUS.register(new ChatListenerTFC());
 		// Register the Chunk Data Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new ChunkDataEventHandler());
-
 		// Register the Chunk Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
-
 		// Register the Chunk Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
-
 		// Register Anvil Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
-
 		//Register our player tracker
 		MinecraftForge.EVENT_BUS.register(new PlayerTracker());
+		// Register all the render stuff for the client
+		proxy.registerRenderInformation();
 
 		proxy.registerBiomeEventHandler();
 		proxy.setupGuiIngameForge();

@@ -66,8 +66,6 @@ public class BlockPlanks extends BlockTerra
 	{
 		for(int i = 0; i < woodNames.length; i++)
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+woodNames[i]+" Plank");
-		Blocks.planks.registerBlockIcons(registerer);
-		super.registerBlockIcons(registerer);
 	}
 
 	@Override

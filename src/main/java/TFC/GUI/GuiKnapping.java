@@ -1,16 +1,10 @@
 package TFC.GUI;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S3FPacketCustomPayload;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -22,7 +16,6 @@ import TFC.Containers.ContainerSpecialCrafting;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Handlers.PacketHandler;
 import TFC.Handlers.Network.AbstractPacket;
 import TFC.Handlers.Network.KnappingUpdatePacket;
 

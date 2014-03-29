@@ -12,7 +12,6 @@ import TFC.Core.TFC_Core;
 public class MapGenRiverRavine extends MapGenBaseTFC
 {
 	private float[] field_35627_a = new float[1024];
-
 	private byte[] metaArray;
 
 	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, Block[] idsBig, byte[] metaBig)
@@ -51,7 +50,6 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 		{
 			if (var28 == 0 || rand.nextInt(3) == 0)
 				var27 = 1.0F + rand.nextFloat() * rand.nextFloat() * 1.0F;
-
 			this.field_35627_a[var28] = var27 * var27;
 		}
 
@@ -120,7 +118,6 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 							for (int var43 = var37 + 1; !var58 && var43 >= var55 - 1; --var43)
 							{
 								z = (x * 16 + var42) * 256 + var43;
-
 								if (var43 >= 0 && var43 < 256)
 									if (var43 != var55 - 1 && x != var56 && x != var35 - 1 && var42 != var57 && var42 != var39 - 1)
 										var43 = var55;
@@ -131,24 +128,20 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 						for (x = var56; x < var35; ++x)
 						{
 							double var59 = (x + chunkX * 16 + 0.5D - par6) / var53;
-
 							for (z = var57; z < var39; ++z)
 							{
 								double var45 = (z + chunkZ * 16 + 0.5D - par10) / var53;
 								int var47 = (x * 16 + z) * 256 + var37;
 								boolean var48 = false;
-
 								if (var59 * var59 + var45 * var45 < 1.0D)
 									for (int var49 = var37 - 1; var49 >= var55; --var49)
 									{
 										double var50 = (var49 + 0.5D - startY) / var30;
-
 										if ((var59 * var59 + var45 * var45) * this.field_35627_a[var49] + var50 * var50 / 6.0D < 1.0D)
 										{
 											block = blockArray[var47];
 											if (TFC_Core.isGrass(block))
 												var48 = true;
-
 											if (TFC_Core.isRawStone(block) || TFC_Core.isSoil(block))
 												if (var49 < 10)
 													blockArray[var47] = Blocks.flowing_lava;
@@ -164,7 +157,6 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 														blockArray[var47] = Blocks.air;
 														metaArray[var47] = 0;
 													}
-
 													DataLayer rockLayer1 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(x + chunkX * 16, z + chunkZ * 16, 0);
 													block = blockArray[var47 - 1];
 													if (var48 && TFC_Core.isDirt(block))
@@ -197,7 +189,6 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 			double var9 = 80 + r.nextInt(20);
 			double var11 = par3 * 16 + this.rand.nextInt(16);
 			int var13 = 1;
-
 			for (int var14 = 0; var14 < var13; ++var14)
 			{
 				float var15 = this.rand.nextFloat() * (float)Math.PI * 2.0F;

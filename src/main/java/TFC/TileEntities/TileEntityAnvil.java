@@ -3,6 +3,7 @@ package TFC.TileEntities;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -96,12 +97,12 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 			if(workRecipe!= null && getItemCraftingValue() != itemCraftingValue)
 			{
 				itemCraftingValue = getItemCraftingValue();
-
 				AnvilManager manager = AnvilManager.getInstance();
 				Random R = new Random(worldObj.getSeed());
 				Object[] r = getRecipe(manager);
 				AnvilRecipe recipe = r != null && r[0] !=  null ? (AnvilRecipe) r[0] : null;
 				ItemStack result = r != null && r[1] !=  null ? (ItemStack) r[1] : null;
+				EntityPlayer entityplayer = Minecraft.getMinecraft().thePlayer;
 
 				//This is where the crafting is completed and the result is added to the anvil
 				if(result != null && entityplayer != null)
@@ -694,7 +695,13 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 		readFromNBT(pkt.func_148857_g());
 	}
 
-
+	public void setPlan(String s)
+	{
+		if(worldObj.isRemote)
+			//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilPlanPacket(8, s));
+		this.craftingPlan = s;
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
 
 
 
@@ -875,11 +882,5 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 //		}		
 //		this.lastWorker = worldObj.getPlayerEntityByName(inStream.readUTF());
 //		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "anvil.metalimpact", 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
-//	}
-//	public void setPlan(String s)
-//	{
-//		if(worldObj.isRemote)
-//			TerraFirmaCraft.proxy.sendCustomPacket(createAnvilPlanPacket(8, s));
-//		this.craftingPlan = s;
 //	}
 }

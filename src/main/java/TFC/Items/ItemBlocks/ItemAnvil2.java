@@ -4,8 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import TFC.API.Metal;
 import TFC.API.Constant.Global;
-import TFC.API.Enums.EnumSize;
-import TFC.API.Enums.EnumWeight;
 
 public class ItemAnvil2 extends ItemAnvil
 {

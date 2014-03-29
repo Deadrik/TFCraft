@@ -13,7 +13,6 @@ public class WorldGenCustomVines extends WorldGenerator
 	public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
 	{
 		int var6 = par3;
-
 		int var7 = par5;
 		if (par1World.canBlockSeeTheSky(par3, par4, par5))
 		{
@@ -31,7 +30,6 @@ public class WorldGenCustomVines extends WorldGenerator
 			par3 = var6 + par2Random.nextInt(4) - par2Random.nextInt(4);
 			par5 = var7 + par2Random.nextInt(4) - par2Random.nextInt(4);
 		}
-
 		return true;
 	}
 }

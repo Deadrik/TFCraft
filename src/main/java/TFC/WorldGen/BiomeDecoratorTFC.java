@@ -2,7 +2,6 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeDecorator;
@@ -56,9 +55,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 
 	public int waterlilyPerChunk;
 
-
 	/**Added By TFC**/
-
 	public BiomeDecoratorTFC(BiomeGenBase par1BiomeGenBase)
 	{
 		super();
@@ -66,10 +63,8 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		this.grassPerChunk = 1;
 		this.mushroomsPerChunk = 0;
 		treesPerChunk = 30;
-
 		this.cactiPerChunk = 2;
 		this.seaweedPerChunk = 3;
-
 		this.reedGen = new WorldGenCustomReed();
 		this.sandGen = new WorldGenCustomSand(7, Blocks.sand);
 		this.waterlilyGen = new WorldGenCustomWaterlily();
@@ -107,7 +102,6 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 
 		//new WorldGenFixGrass().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
 
-
 		Random rand = new Random((chunk_X-chunk_Z)*chunk_Z);
 		int crop = rand.nextInt(24);
 		if(randomGenerator.nextInt(9) == 0)
@@ -118,9 +112,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord)+1;
 			for (int count = 0 ; count < 16 && num > 0; ++count)
-			{
 				num -= new WorldGenGrowCrops(crop).generate(currentWorld, randomGenerator, xCoord, yCoord, zCoord) ? 1 : 0;
-			}
 		}
 
 		for (var2 = 0; var2 < this.deadBushPerChunk; ++var2)
@@ -128,13 +120,10 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-
 			float rain = TFC_Climate.getRainfall(chunk_X, 144, chunk_Z);
-
 			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, this.currentWorld.getHeightValue(xCoord, zCoord), zCoord);
-			if(temperature < 18 && rain < 250) {
+			if(temperature < 18 && rain < 250)
 				new WorldGenDeadBush(Blocks.deadbush).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-			}
 		}
 
 		/*int catTailsNum = 10;
@@ -160,10 +149,8 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-
-			if(TFC_Climate.isSwamp(xCoord, yCoord, zCoord)) {
+			if(TFC_Climate.isSwamp(xCoord, yCoord, zCoord))
 				this.waterlilyGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-			}
 		}
 
 		for (var2 = 0; var2 < 10; ++var2)
@@ -173,9 +160,8 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 				xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 				zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 				yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-				if(TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord)>=14){
+				if(TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord)>=14)
 					this.reedGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-				}
 			}
 		}
 
@@ -194,20 +180,18 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, this.currentWorld.getHeightValue(xCoord, zCoord), zCoord);
 			float rainfall = TFC_Climate.getRainfall(xCoord, yCoord, zCoord);
-			if(temperature > 12 && rainfall < 125) {
+			if(temperature > 12 && rainfall < 125)
 				new WorldGenCustomCactus().generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-			}
 		}
 
-//		for (var2 = 0; var2 < this.seaweedPerChunk; ++var2)
-//		{
-//			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-//			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-//			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-//			if(TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord)>=7){
-//				new WorldGenSeaGrass(TFCBlocks.SeaGrassStill,TFC_Climate.isSwamp(xCoord, yCoord, zCoord)).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-//			}
-//		}
+		for (var2 = 0; var2 < this.seaweedPerChunk; ++var2)
+		{
+			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
+			if(TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord)>=7)
+				new WorldGenSeaGrass(TFCBlocks.SeaGrassStill,TFC_Climate.isSwamp(xCoord, yCoord, zCoord)).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+		}
 
 		if (this.generateLakes)
 		{
@@ -257,7 +241,6 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	@Override
 	protected void generateOres()
 	{
-
 	}
 
 	/**

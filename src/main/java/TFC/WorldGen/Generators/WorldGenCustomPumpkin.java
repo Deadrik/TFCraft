@@ -27,7 +27,6 @@ public class WorldGenCustomPumpkin extends WorldGenerator
 				par1World.setBlock(var7, var8, var9, Blocks.pumpkin, par2Random.nextInt(4), 0x2);
 			}
 		}
-
 		return true;
 	}
 }

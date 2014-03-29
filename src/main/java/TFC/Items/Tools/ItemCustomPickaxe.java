@@ -3,8 +3,6 @@ package TFC.Items.Tools;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
@@ -20,7 +18,6 @@ import TFC.Core.TFC_Textures;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 public class ItemCustomPickaxe extends ItemPickaxe implements ISize

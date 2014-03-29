@@ -40,7 +40,6 @@ public class WorldGenCaveDecor implements IWorldGenerator
 							if(rand.nextInt(25) == 0)
 							{
 								int type = rand.nextInt(4);
-
 								switch(type)
 								{
 								case 0:
@@ -67,7 +66,6 @@ public class WorldGenCaveDecor implements IWorldGenerator
 								}
 								case 1:
 								{
-
 									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac) && world.getTileEntity(x, y, z) != null)
 									{
 										((TileEntityPartial)world.getTileEntity(x, y, z)).extraData = 1052929 + 16777216L;
@@ -84,7 +82,6 @@ public class WorldGenCaveDecor implements IWorldGenerator
 								}
 								case 2:
 								{
-
 									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac) && world.getTileEntity(x, y, z) != null)
 									{
 										((TileEntityPartial)world.getTileEntity(x, y, z)).extraData = 3158785 + 16777216L;
@@ -165,7 +162,6 @@ public class WorldGenCaveDecor implements IWorldGenerator
 							if(rand.nextInt(25) == 0)
 							{
 								int type = rand.nextInt(3);
-
 								switch(type)
 								{
 								case 0:

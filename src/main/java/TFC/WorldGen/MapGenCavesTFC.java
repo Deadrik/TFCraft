@@ -48,7 +48,6 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 		}
 
 		boolean var54 = false;
-
 		if (par15 == -1)
 		{
 			par15 = par16 / 2;
@@ -56,7 +55,6 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 		}
 
 		int var27 = var25.nextInt(par16 / 2) + par16 / 4;
-
 		for (boolean var28 = var25.nextInt(6) == 0; par15 < par16; ++par15)
 		{
 			double var29 = width + MathHelper.sin(par15 * (float)Math.PI / par16) * par12 * 1.0F;
@@ -137,7 +135,6 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 								{
 									if (block == Blocks.flowing_water || block == Blocks.water)
 										var58 = true;
-
 									if (y != var57 - 1 && xCoord != var55 && xCoord != var36 - 1 && zCoord != var56 && zCoord != var40 - 1)
 										y = var57;
 								}
@@ -148,7 +145,6 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 						for (xCoord = var55; xCoord < var36; ++xCoord)
 						{
 							double var59 = (xCoord + chunkX * 16 + 0.5D - i) / var29;
-
 							for (zCoord = var56; zCoord < var40; ++zCoord)
 							{
 								double var46 = (zCoord + chunkZ * 16 + 0.5D - k) / var29;
@@ -178,7 +174,6 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 												{
 													idArray[index] = Blocks.air;
 													metaArray[index] = 0;
-
 													if (isGrass && TFC_Core.isDirt(idArray[index - 1]))
 													{
 														int meta = metaArray[index - 1];
@@ -186,12 +181,10 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 													}
 												}
 										}
-
 										--index;
 									}
 							}
 						}
-
 						if (var54)
 							break;
 					}
@@ -207,34 +200,37 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, Block[] ids)
 	{
 		int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
-
 		double xCoord = par2 * 16 + this.rand.nextInt(16);
 		double yCoord = this.rand.nextInt(1+this.rand.nextInt(140))+60;
 		double zCoord = par3 * 16 + this.rand.nextInt(16);
 		DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt((int)xCoord, (int)zCoord, 0);
 		float rain = TFC_Climate.getRainfall((int)xCoord, 144, (int)zCoord);
-
 		double width = 2;
 		int caveChance = 25;
-
 		if(rain > 1000)
 		{
-			width += 0.5; caveChance -= 5;
+			width += 0.5;
+			caveChance -= 5;
 		}
 		else if(rain > 2000)
 		{
-			width += 1; caveChance -= 10;
+			width += 1;
+			caveChance -= 10;
 		}
-		else if(rain < 1000){
-			width -= 0.5; caveChance += 5;
+		else if(rain < 1000)
+		{
+			width -= 0.5;
+			caveChance += 5;
 		}
 		else if(rain < 500)
 		{
-			width -= 1; caveChance += 10;
+			width -= 1;
+			caveChance += 10;
 		}
 		else if(rain < 250)
 		{
-			width -= 1.25; caveChance += 15;
+			width -= 1.25;
+			caveChance += 15;
 		}
 
 		Block layerID = rockLayer1.block;
@@ -244,7 +240,8 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 			width -= 0.5;
 		else if(layerID == TFCBlocks.StoneSed)
 		{
-			width += 0.2; var7 += 5;
+			width += 0.2;
+			var7 += 5;
 		}
 		else if(layerID == TFCBlocks.StoneMM)
 			width += 0.3;
@@ -282,10 +279,8 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 				float var17 = this.rand.nextFloat() * (float)Math.PI * 2.0F;
 				float var18 = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
 				float var19 = this.rand.nextFloat() * 2.0F + this.rand.nextFloat();
-
 				if (this.rand.nextInt(10) == 0)
 					var19 *= this.rand.nextFloat() * this.rand.nextFloat() * 3.0F + 1.0F;
-
 				this.generateCaveNode(this.rand.nextLong(), par4, par5, ids, xCoord, yCoord, zCoord, var19, var17, var18, 0, 0, 1.0D, width);
 			}
 		}

@@ -54,23 +54,17 @@ public class WorldGenLiquidsTFC extends WorldGenerator
 		{
 			l++;
 		}
+
 		int i1 = 0;
 		if (world.isAirBlock(i - 1, j, k))
-		{
 			i1++;
-		}
 		if (world.isAirBlock(i + 1, j, k))
-		{
 			i1++;
-		}
 		if (world.isAirBlock(i, j, k - 1))
-		{
 			i1++;
-		}
 		if (world.isAirBlock(i, j, k + 1))
-		{
 			i1++;
-		}
+
 		if (l == 3 && i1 == 1)
 		{
 			world.setBlock(i, j, k, liquidBlock, 0, 0x2);

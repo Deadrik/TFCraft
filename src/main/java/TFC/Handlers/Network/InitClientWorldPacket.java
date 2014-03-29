@@ -1,11 +1,12 @@
 package TFC.Handlers.Network;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import TFC.API.TFCOptions;
@@ -14,7 +15,6 @@ import TFC.Core.TFC_Time;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.SkillStats;
-import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class InitClientWorldPacket extends AbstractPacket
 {

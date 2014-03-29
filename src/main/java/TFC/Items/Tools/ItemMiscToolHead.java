@@ -3,7 +3,6 @@ package TFC.Items.Tools;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
-import TFC.Core.TFC_Core;
 import TFC.Items.ItemTerra;
 public class ItemMiscToolHead extends ItemTerra
 {

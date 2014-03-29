@@ -32,7 +32,6 @@ import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Textures;
 import TFC.Items.ItemBarrels2;
-import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityBarrel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
