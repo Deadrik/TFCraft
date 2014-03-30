@@ -238,7 +238,9 @@ public class CraftingHandler// implements ICraftingHandler
 					{
 						if(itemstack.getTagCompound().hasKey("foodDecay") && itemstack.getTagCompound().getFloat("foodDecay") > 0)
 						{
+							float decay = itemstack.getTagCompound().getFloat("foodDecay");
 							itemstack.getTagCompound().setFloat("foodDecay", 0);
+							itemstack.getTagCompound().setFloat("foodWeight", itemstack.getTagCompound().getFloat("foodWeight")-decay);
 							this.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
 						}
 						else if(itemstack.getTagCompound().hasKey("foodDecay") && itemstack.getTagCompound().getFloat("foodDecay") <= 0)
