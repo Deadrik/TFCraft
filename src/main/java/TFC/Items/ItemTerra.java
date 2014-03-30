@@ -131,7 +131,7 @@ public class ItemTerra extends Item implements ISize
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
 			if(stackTagCompound.hasKey("temperature"))
-				TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
+				TFC_ItemHeat.HandleItemHeat(is);
 			if(is.stackSize <= 0)
 				is = null;
 		}*/

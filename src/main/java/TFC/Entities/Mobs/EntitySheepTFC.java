@@ -222,7 +222,6 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	public void syncData()
 	{
 		if(dataWatcher!= null)
-		{
 			if(!this.worldObj.isRemote){
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
@@ -247,7 +246,6 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 				hard_mod = this.dataWatcher.getWatchableObjectFloat(29);
 				isCorpse = this.dataWatcher.getWatchableObjectByte(30) == 0 ? false : true;
 			}
-		}
 	}
 
 	@Override

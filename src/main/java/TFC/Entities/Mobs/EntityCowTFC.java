@@ -44,9 +44,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	public float climate_mod = 1;
 	public float hard_mod = 1;
 	public boolean inLove;
-	
+
 	public int angerTick;
-	
+
 	int degreeOfDiversion = 1;
 
 	public EntityCowTFC(World par1World)
@@ -104,7 +104,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		this.dataWatcher.addObject(13, Integer.valueOf(0));
 		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
 		this.dataWatcher.addObject(15, Integer.valueOf(0));
-		
+
 		this.dataWatcher.addObject(24, new Float(1));
 		this.dataWatcher.addObject(25, new Float(1));
 		this.dataWatcher.addObject(26, new Float(1));
@@ -130,11 +130,11 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			super.resetInLove();
 			setInLove(true);
 		}
-		
+
 		if(angerTick > 0 && this.rand.nextInt(2)==0){
 			angerTick--;
 		}
-		
+
 		for(Object ai : tasks.taskEntries){
 			if(ai.getClass() == EntityAIMoveTowardsRestriction.class){
 				if(((EntityAIMoveTowardsRestriction)ai).shouldExecute()){
@@ -185,7 +185,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			if(!this.worldObj.isRemote){
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
-				
+
 				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
 				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
 				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
@@ -196,7 +196,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
-				
+
 				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
 				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
 				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
@@ -229,7 +229,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		par1NBTTagCompound.setInteger ("Sex", sex);
 		par1NBTTagCompound.setLong ("Animal ID", animalID);
 		par1NBTTagCompound.setFloat ("Size Modifier", size_mod);
-		
+
 		NBTTagCompound nbt = par1NBTTagCompound;
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
@@ -237,7 +237,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		nbt.setFloat ("Colour Modifier", colour_mod);
 		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
 		nbt.setFloat ("Hardiness Modifier", hard_mod);
-		
+
 		par1NBTTagCompound.setInteger ("Hunger", hunger);
 		par1NBTTagCompound.setBoolean("Pregnant", pregnant);
 		par1NBTTagCompound.setFloat("MateSize", mateSizeMod);
@@ -253,14 +253,14 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
-		
+
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
 		colour_mod = nbt.getFloat ("Colour Modifier");
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
-		
+
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
@@ -421,7 +421,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			return false;
 		}
 	}
-	
+
 	@Override
 	public void eatGrassBonus()
 	{
@@ -528,7 +528,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public void setAttackedVec(Vec3 attackedVec) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -540,6 +540,6 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public void setFearSource(Entity fearSource) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

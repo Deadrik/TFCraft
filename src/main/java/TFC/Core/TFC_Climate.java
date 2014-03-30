@@ -186,7 +186,7 @@ public class TFC_Climate
 			float mod = getMonthTempFactor(_month, z);
 			float modLast = getMonthTempFactor(_lastmonth, z);
 			int day2 = day - ((day/TFC_Time.daysInMonth)*TFC_Time.daysInMonth);
-			int hour = (int) TFC_Time.getHour();
+			int hour = TFC_Time.getHour();
 
 			if(hour < 0)
 				hour = 23 + hour;

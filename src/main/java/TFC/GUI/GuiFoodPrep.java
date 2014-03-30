@@ -21,8 +21,6 @@ public class GuiFoodPrep extends GuiContainerTFC
 	{
 		super(new ContainerFoodPrep(inventoryplayer, wb,world, i, j, k), 103, 85);
 		table = wb;
-		xSize = 176;
-		ySize = 85+PlayerInventory.invYSize;
 	}
 
 	@Override

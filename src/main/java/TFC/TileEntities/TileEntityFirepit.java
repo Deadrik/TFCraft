@@ -138,19 +138,16 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 			fireItemStacks[i].setTagCompound(inputCompound);
 
 			if(itemTemp <= ambientTemp)
-			{
 				fireItemStacks[i].stackTagCompound = null;
 			}
 		}
 		else if(fireItemStacks[i] != null && !fireItemStacks[i].hasTagCompound())
-		{
 			if(index != null && fireTemperature > 210)
 			{
 				inputCompound = new NBTTagCompound();
 				inputCompound.setFloat("temperature", startTemp);
 				fireItemStacks[i].setTagCompound(inputCompound);
 			}
-		}
 	}
 
 	@Override
@@ -194,14 +191,12 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 					//Otherwise if the first output has an item that doesnt match the input item then put the item in the second output slot
 					else if(fireItemStacks[7] != null && fireItemStacks[7].getItem() != TFCItems.CeramicMold && 
 							(fireItemStacks[7].getItem() != fireItemStacks[1].getItem() || fireItemStacks[7].getItemDamage() == 0))
-					{
 						if(fireItemStacks[8] == null)
 						{
 							fireItemStacks[8] = fireItemStacks[1].copy();
 							fireItemStacks[1] = null;
 							return;
 						}
-					}
 
 					mold = new ItemStack(TFCItems.CeramicMold,1);
 					mold.stackSize = 1;
@@ -370,7 +365,6 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
-		{
 			if(fireItemStacks[i]!= null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, fireItemStacks[i]);
@@ -380,7 +374,6 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 				worldObj.spawnEntityInWorld(entityitem);
 				fireItemStacks[i] = null;
 			}
-		}
 	}
 
 	public void externalFireCheck()
@@ -755,7 +748,6 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 			}
 			else if(fuelTimeLeft <= 0 && fireTemperature >= 210 && fireItemStacks[5] != null &&
 					(!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
-			{
 				if(fireItemStacks[5] != null)
 				{
 					EnumWoodMaterial m = TFC_Core.getWoodMaterial(fireItemStacks[5]);
@@ -763,7 +755,6 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 					fuelTimeLeft = m.burnTimeMax;
 					fuelBurnTemp = m.burnTempMax;
 				}
-			}
 			//If there is no more fuel and the fire is still hot, we start to cool it off.
 			if(fuelTimeLeft <= 0 && fireTemperature > ambientTemp)
 			{
@@ -824,7 +815,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 			scanLogs(xCoord,topY,zCoord,checkArray,(byte)12,(byte)y,(byte)12, false, true);
 			topScan = false;
 		}
-		
+
 		Random random = new Random();
 		int sbkey = random.nextInt(topMap.size());
 		int[] sb = topMap.get(sbkey);

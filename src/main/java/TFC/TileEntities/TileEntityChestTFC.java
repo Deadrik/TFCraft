@@ -52,11 +52,8 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 				this.markDirty();
 				return var3;
 			}
-		}
-		else
-		{
+		} else
 			return null;
-		}
 	}
 
 	@Override
@@ -67,11 +64,8 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 			ItemStack var2 = this.chestContents[par1];
 			this.chestContents[par1] = null;
 			return var2;
-		}
-		else
-		{
+		} else
 			return null;
-		}
 	}
 
 	@Override
@@ -112,7 +106,6 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 		NBTTagList var2 = new NBTTagList();
 
 		for (int var3 = 0; var3 < this.chestContents.length; ++var3)
-		{
 			if (this.chestContents[var3] != null)
 			{
 				NBTTagCompound var4 = new NBTTagCompound();

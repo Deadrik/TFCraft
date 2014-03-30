@@ -144,6 +144,7 @@ public class TFC_Core
 					this.armorInventory[4] = itemstack2;
 			}
 
+			@Override
 			public NBTTagList writeToNBT(NBTTagList par1NBTTagList)
 			{
 				int i;

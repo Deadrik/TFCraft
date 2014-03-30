@@ -204,8 +204,10 @@ public class BlockCrop extends BlockContainer
 	{
 		ItemStack itemstack = player.inventory.getCurrentItem();
 		TECrop te = (TECrop) world.getTileEntity(i, j, k);
+
 		//Handle Scythe
 		if(!world.isRemote && itemstack != null && itemstack.getItem() instanceof ItemCustomScythe)
+		{
 			for(int x = -1; x < 2; x++)
 				for(int z = -1; z < 2; z++)
 					if(world.getBlock( i+x, j, k+z) == this && player.inventory.getStackInSlot(player.inventory.currentItem) != null)
@@ -225,9 +227,9 @@ public class BlockCrop extends BlockContainer
 						else
 							player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(itemstack.getItem(),ss,dam));
 					}
-		else
-			//Handle Loot Drop
-			te.onHarvest(world, player);
+			else
+				//Handle Loot Drop
+				te.onHarvest(world, player);
 	}
 
 	/**

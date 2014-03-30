@@ -36,6 +36,15 @@ public class ContainerTFC extends Container
 		return null;
 	}
 
+	/**
+	 * Used by containers that represent items and need to load an item from nbt
+	 * @return 
+	 */
+	public ItemStack loadContents(int slot) 
+	{
+		return null;
+	}
+
 	@Override
 	public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer)
 	{
@@ -163,8 +172,8 @@ public class ContainerTFC extends Container
 
 		for (int i = 0; i < this.inventorySlots.size(); ++i)
 		{
-			ItemStack itemstack = ((Slot)this.inventorySlots.get(i)).getStack();
-			ItemStack itemstack1 = (ItemStack)this.inventoryItemStacks.get(i);
+			ItemStack itemstack = ((Slot)this.inventorySlots.get(i)).getStack();//the visible slot item
+			ItemStack itemstack1 = (ItemStack)this.inventoryItemStacks.get(i);//the real invisible item
 
 			if (!areItemStacksEqual(itemstack1, itemstack))
 			{

@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -187,7 +186,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				}
 			}
 		}
-		
+
 	}
 
 	private int mergeMetals(Metal mt0, Metal mt1, int m0, int m1)
@@ -198,6 +197,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		return m0;
 	}
 
+	@Override
 	public ItemStack[] loadBagInventory(ItemStack is)
 	{
 		ItemStack[] bag = new ItemStack[4];

@@ -449,8 +449,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			if(!par1EntityPlayer.isSneaking()){par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));}
 			//if(getGender()==GenderEnum.FEMALE && pregnant){
 			//	par1EntityPlayer.addChatMessage("Pregnant");
-			}
-			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		}
+		//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		if(!worldObj.isRemote && isAdult()&& par1EntityPlayer.isSneaking() && attackEntityFrom(DamageSource.generic, 25) ) {
 			par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Items.feather, 1));
 
@@ -508,7 +508,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public void setAttackedVec(Vec3 attackedVec) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -520,6 +520,6 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public void setFearSource(Entity fearSource) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

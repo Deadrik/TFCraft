@@ -48,7 +48,6 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 	public void careForInventorySlot()
 	{
 		if(Type ==1 && itemstack!=null&&  itemstack.getItem() instanceof ItemTerra )
-		{
 			if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("temperature"))
 			{
 				NBTTagCompound comp = itemstack.getTagCompound();
@@ -64,7 +63,6 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 					TFC_ItemHeat.HandleItemHeat(itemstack);
 				}
 			}
-		}
 	}
 
 	public boolean getSealed()
@@ -189,9 +187,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			}
 		}
 		else if(itemstack == null && Type >= 5 && Type <= 11)
-		{
 			Type = 12;
-		}
 		else if(itemstack == null && Type == 14)
 		{
 			itemstack2 = new ItemStack(TFCItems.Cheese,0,0);
@@ -278,9 +274,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			}
 			ItemStack itemstack1 = itemstack.splitStack(j);
 			if(itemstack.stackSize == 0)
-			{
 				itemstack = null;
-			}
 			return itemstack1;
 		}
 		else
@@ -299,7 +293,6 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
-		{
 			if(itemstack != null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, itemstack);
@@ -308,7 +301,6 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
 				worldObj.spawnEntityInWorld(entityitem);
 			}
-		}
 	}
 
 	@Override
@@ -418,7 +410,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 					ProcessItems();
 				}
 			}
-			
+
 			if(mode == 1 && liquidLevel > 0 && TFC_Time.getTotalTicks() % 2 == 0 &&
 					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj,0,xCoord,yCoord,zCoord,true))
 			{
@@ -432,15 +424,12 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			if(mode == 0)
 			{
 				if(itemstack == null)
-				{
 					if(output != null)
 					{
 						itemstack = output;
 						output = null;
 					}
-				}
 				if (itemstack != null)
-				{
 					if ((Type ==0||Type == 2) && itemstack.getItem() == TFCItems.Limewater && liquidLevel < 256)
 					{
 						liquidLevel = Math.min(liquidLevel + 32, 256);
@@ -467,9 +456,8 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 						liquidLevel = Math.min(liquidLevel + 1, 256);
 						Type = 4;
 						itemstack.stackSize-=1;
-						if(itemstack.stackSize==0) {
+						if(itemstack.stackSize==0)
 							itemstack=null;
-						}
 						updateGui();
 					} 
 					else if((Type == 0||Type == 13 || Type == 14) && itemstack.getItem() == TFCItems.WoodenBucketMilk && liquidLevel < 256){
@@ -484,6 +472,12 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 						itemstack = new ItemStack(TFCItems.WoodenBucketEmpty);
 						updateGui();
 					}
+			} else if (itemstack != null)
+				if((Type>=5&&Type<=11 )&& itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize)
+				{
+					liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
+					itemstack.itemID = alcohols[Type-5];
+					updateGui();
 				}
 			}
 			else
@@ -530,7 +524,6 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 						updateGui();
 					}
 				}
-			}
 		}
 	}
 
