@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -17,7 +18,6 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Core;
-import TFC.Core.Util.StringUtil;
 import TFC.Handlers.Network.AbstractPacket;
 import TFC.Handlers.Network.ItemRenamePacket;
 
@@ -74,7 +74,7 @@ public class GuiBlueprint extends GuiScreen
 
 		Keyboard.enableRepeatEvents(true);
 		this.buttonList.clear();
-		this.buttonList.add(new GuiButton(0, this.width / 2 - 100, guiTop + 180, StringUtil.localize("gui.done")));
+		this.buttonList.add(new GuiButton(0, this.width / 2 - 100, guiTop + 180, StatCollector.translateToLocal("gui.done")));
 		//this.controlList.add(new GuiButton(1, this.width / 2 - 100, guiTop + 210, var1.translateKey("gui.cancel")));
 
 		this.theGuiTextField = new GuiTextField(this.fontRendererObj, this.width / 2 - 90, guiTop + 150, 180, 20);
@@ -144,7 +144,7 @@ public class GuiBlueprint extends GuiScreen
 		int i1 = (height - ySize) / 2;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
 
-		drawCenteredString(fontRendererObj,StringUtil.localize("gui.Blueprint"), this.width / 2, i1+8, 0x000000);
+		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Blueprint"), this.width / 2, i1+8, 0x000000);
 		this.theGuiTextField.drawTextBox();
 
 		super.drawScreen(par1, par2, par3);

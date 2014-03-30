@@ -3,13 +3,13 @@ package TFC.GUI;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
 import TFC.Containers.ContainerWorkbench;
 import TFC.Core.TFC_Core;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityWorkbench;
 
 public class GuiWorkbench extends GuiContainer
@@ -27,8 +27,8 @@ public class GuiWorkbench extends GuiContainer
 
 	protected void drawGuiContainerForegroundLayer()
 	{
-		fontRendererObj.drawString(StringUtil.localize("gui.Workbench.Crafting"), 28, 6, 0x404040);
-		fontRendererObj.drawString(StringUtil.localize("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("gui.Workbench.Crafting"), 28, 6, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -14,7 +15,6 @@ import TFC.API.TFCOptions;
 import TFC.Containers.ContainerCrucible;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TECrucible;
 
 
@@ -60,10 +60,10 @@ public class GuiCrucible extends GuiContainer
 		{
 			if(te.currentAlloy.outputType != null)
 			{
-				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE+StringUtil.localize("gui.metal." + te.currentAlloy.outputType.Name.replace(" ", "")),7,7,0x000000);
+				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE+StatCollector.translateToLocal("gui.metal." + te.currentAlloy.outputType.Name.replace(" ", "")),7,7,0x000000);
 			} else
 			{
-				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE+StringUtil.localize("gui.metal.Unknown"),7,7,0x000000);
+				this.fontRendererObj.drawString(EnumChatFormatting.UNDERLINE+StatCollector.translateToLocal("gui.metal.Unknown"),7,7,0x000000);
 			}
 
 			for(int c = 0; c < te.currentAlloy.AlloyIngred.size(); c++)
@@ -72,7 +72,7 @@ public class GuiCrucible extends GuiContainer
 				m = Math.round(m * 100d)/100d;
 				if(te.currentAlloy.AlloyIngred.get(c).metalType != null)
 				{
-					this.fontRendererObj.drawString(EnumChatFormatting.DARK_GRAY+StringUtil.localize("gui.metal." + te.currentAlloy.AlloyIngred.get(c).metalType.Name.replace(" ", "")) + 
+					this.fontRendererObj.drawString(EnumChatFormatting.DARK_GRAY+StatCollector.translateToLocal("gui.metal." + te.currentAlloy.AlloyIngred.get(c).metalType.Name.replace(" ", "")) + 
 							": "+ EnumChatFormatting.DARK_GREEN + m + "%", 7,18 + 10 * (c),0x000000);
 				}
 			}

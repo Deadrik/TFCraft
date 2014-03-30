@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import TFC.Reference;
@@ -18,7 +19,6 @@ import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Core.Metal.Alloy;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityPottery;
 import cpw.mods.fml.relauncher.Side;
@@ -61,7 +61,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 		if(damage == 0)
 			return this.ClayIcon;
 		else
-			return this.CeramicIcon;    		
+			return this.CeramicIcon;
 	}
 
 	@Override
@@ -69,10 +69,10 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	{
 		if (TFC_Core.showExtraInformation()) 
 		{
-			arraylist.add(StringUtil.localize("gui.Help"));
-			arraylist.add(StringUtil.localize("gui.PotteryBase.Inst0"));
+			arraylist.add(StatCollector.translateToLocal("gui.Help"));
+			arraylist.add(StatCollector.translateToLocal("gui.PotteryBase.Inst0"));
 		} else
-			arraylist.add(StringUtil.localize("gui.ShowHelp"));
+			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -12,7 +13,6 @@ import TFC.Reference;
 import TFC.Containers.ContainerQuern;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityQuern;
 
 public class GuiQuern extends GuiContainer
@@ -35,7 +35,7 @@ public class GuiQuern extends GuiContainer
 
 	protected void drawGuiContainerForegroundLayer()
 	{
-		fontRendererObj.drawString(StringUtil.localize("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
 	}
 
 	@Override

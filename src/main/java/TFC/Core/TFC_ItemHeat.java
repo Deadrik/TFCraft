@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagFloat;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
@@ -17,7 +18,6 @@ import TFC.API.HeatRaw;
 import TFC.API.HeatRegistry;
 import TFC.API.Metal;
 import TFC.API.TFCOptions;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class TFC_ItemHeat
@@ -351,7 +351,7 @@ public class TFC_ItemHeat
 		String phrase = "";
 		if(temp < 80)
 		{
-			phrase = StringUtil.localize("gui.ItemHeat.Warming");
+			phrase = StatCollector.translateToLocal("gui.ItemHeat.Warming");
 			if(temp>(80 * 0.2)) {
 				phrase = phrase + "\u2605";
 			}
@@ -367,7 +367,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 80 && temp < 210)
 		{
-			phrase = StringUtil.localize("gui.ItemHeat.Hot");
+			phrase = StatCollector.translateToLocal("gui.ItemHeat.Hot");
 			if(temp>80+((210-80) * 0.2)) {
 				phrase = phrase + "\u2605";
 			}
@@ -383,7 +383,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 210 &&  temp < 480)
 		{
-			phrase = StringUtil.localize("gui.ItemHeat.VeryHot");
+			phrase = StatCollector.translateToLocal("gui.ItemHeat.VeryHot");
 			if(temp>210+((480-210) * 0.2)) {
 				phrase = phrase + "\u2605";
 			}
@@ -399,7 +399,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 480 &&  temp < 580)
 		{
-			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.FaintRed");
+			phrase = "\2474" + StatCollector.translateToLocal("gui.ItemHeat.FaintRed");
 			if(temp>480+((580-480) * 0.2)) {
 				phrase = phrase + "\u2605";
 			}
@@ -415,7 +415,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 580 &&  temp < 730)
 		{
-			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.DarkRed");
+			phrase = "\2474" + StatCollector.translateToLocal("gui.ItemHeat.DarkRed");
 			if(temp>580+((730-580) * 0.2)) {
 				phrase = phrase + "\u2605";
 			}
@@ -431,7 +431,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 730 &&  temp < 930)
 		{
-			phrase = "\247c" + StringUtil.localize("gui.ItemHeat.BrightRed");
+			phrase = "\247c" + StatCollector.translateToLocal("gui.ItemHeat.BrightRed");
 			if(temp>730+((930-730) * 0.2)) {
 				phrase = phrase + "\u2605";
 			}
@@ -447,7 +447,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 930 &&  temp < 1100)
 		{
-			phrase = "\2476" + StringUtil.localize("gui.ItemHeat.Orange");
+			phrase = "\2476" + StatCollector.translateToLocal("gui.ItemHeat.Orange");
 			if(temp>930+((1100-930) * 0.2)) {
 				phrase = phrase + "\u2605";
 			}
@@ -463,7 +463,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 1100 &&  temp < 1300)
 		{
-			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.Yellow");
+			phrase = "\247e" + StatCollector.translateToLocal("gui.ItemHeat.Yellow");
 			if(temp>1100+((1300-1100) * 0.2)) {
 				phrase = phrase + "\u2605";
 			}
@@ -479,7 +479,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 1300 &&  temp < 1400)
 		{
-			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.YellowWhite");
+			phrase = "\247e" + StatCollector.translateToLocal("gui.ItemHeat.YellowWhite");
 			if(temp>1300+((1400-1300) * 0.2)) {
 				phrase = phrase + "\u2605";
 			}
@@ -495,7 +495,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 1400 &&  temp < 1500)
 		{
-			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.White");
+			phrase = "\247f" + StatCollector.translateToLocal("gui.ItemHeat.White");
 			if(temp>1400+((1500-1400) * 0.2)) {
 				phrase = phrase + "\u2605";
 			}
@@ -511,12 +511,12 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 1500)
 		{
-			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.BrilliantWhite");
+			phrase = "\247f" + StatCollector.translateToLocal("gui.ItemHeat.BrilliantWhite");
 		}
 
 		if(temp > meltTemp)
 		{
-			phrase = phrase + "\247f - " + StringUtil.localize("gui.ItemHeat.Liquid");
+			phrase = phrase + "\247f - " + StatCollector.translateToLocal("gui.ItemHeat.Liquid");
 		}
 
 		return phrase;
@@ -528,23 +528,23 @@ public class TFC_ItemHeat
 		{
 			if(temp < meltTemp*0.1F)
 			{
-				return StringUtil.localize("gui.FoodHeat.Cold");
+				return StatCollector.translateToLocal("gui.FoodHeat.Cold");
 			}
 			else if(temp >= meltTemp*0.1F && temp < meltTemp*0.4F)
 			{
-				return "\2474" + StringUtil.localize("gui.FoodHeat.Warm");
+				return "\2474" + StatCollector.translateToLocal("gui.FoodHeat.Warm");
 			}
 			else if(temp >= meltTemp*0.4F && temp < meltTemp*0.8F)
 			{
-				return "\2474" + StringUtil.localize("gui.ItemHeat.Hot");
+				return "\2474" + StatCollector.translateToLocal("gui.ItemHeat.Hot");
 			}
 			else
 			{
-				return "\2474" + StringUtil.localize("gui.ItemHeat.VeryHot");
+				return "\2474" + StatCollector.translateToLocal("gui.ItemHeat.VeryHot");
 			}
 		}
 
-		return StringUtil.localize("gui.ClearSlot");
+		return StatCollector.translateToLocal("gui.ClearSlot");
 	}
 
 	public static String getHeatColorTorch(float temp, float meltTemp)
@@ -553,15 +553,15 @@ public class TFC_ItemHeat
 		{
 			if(temp > 0 && temp < meltTemp*0.8F)
 			{
-				return StringUtil.localize("gui.Torch.CatchingFire");
+				return StatCollector.translateToLocal("gui.Torch.CatchingFire");
 			}
 			else if(temp >= meltTemp*0.8F)
 			{
-				return "\2474" + StringUtil.localize("gui.Torch.Lit");
+				return "\2474" + StatCollector.translateToLocal("gui.Torch.Lit");
 			}
 		}
 
-		return StringUtil.localize("gui.ClearSlot");
+		return StatCollector.translateToLocal("gui.ClearSlot");
 	}
 
 	public static Boolean getIsLiquid(ItemStack is)

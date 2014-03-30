@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -17,7 +18,6 @@ import TFC.API.Crafting.AnvilManager;
 import TFC.API.Crafting.AnvilRecipe;
 import TFC.API.Crafting.AnvilReq;
 import TFC.Containers.ContainerPlanSelection;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityAnvil;
 
 public class GuiPlanSelection extends GuiContainerTFC
@@ -57,7 +57,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 		{
 			String p = (String) o[0];
 			AnvilRecipe a = (AnvilRecipe) o[1];
-			buttonList.add(0,new GuiPlanButton(plans.size()-1-index, guiLeft + xOffset, guiTop + yOffset, 16, 16, a.getCraftingResult().getIconIndex(), this, StringUtil.localize("gui.plans."+p)));
+			buttonList.add(0,new GuiPlanButton(plans.size()-1-index, guiLeft + xOffset, guiTop + yOffset, 16, 16, a.getCraftingResult().getIconIndex(), this, StatCollector.translateToLocal("gui.plans."+p)));
 			index--;
 			if(xOffset+36 < xSize)
 				xOffset+=18;

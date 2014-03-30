@@ -332,18 +332,15 @@ public class TFC_Climate
 	public static float getHeightAdjustedTemp(int x, int y, int z)
 	{
 		float temp = getTemp(x, z);
-
 		temp += getTemp(x+1, z);
 		temp += getTemp(x-1, z);
 		temp += getTemp(x, z+1);
 		temp += getTemp(x, z-1);
-
-		temp/= 5;
-
+		temp /= 5;
 		temp = adjustHeightToTemp(y,temp);
 
-		float bl = worldObj.getBlockLightValue(x, y, z);
-		float light = 0.25f*(1-(bl/15f));
+		int bl = worldObj.getBlockLightValue(x, y, z);
+		float light = 0.25f * (1-(bl/15f));
 		//If this block can see the sky then we jsut want it to be ambient temp. 
 		//Shadows should only matter for darkness, not night time.
 		if(worldObj.canBlockSeeTheSky(x, y, z))
@@ -355,7 +352,6 @@ public class TFC_Climate
 
 	public static float adjustHeightToTemp(int y, float temp)
 	{
-
 		//internationally accepted average lapse time is 6.49 K / 1000 m, for the first 11 km of the atmosphere. I suggest graphing our temperature
 		//across the 110 m against 2750 m, so that gives us a change of 1.6225 / 10 blocks, which isn't /terrible/
 		//Now going to attemp exonential growth. calculations but change in temperature at 17.8475 for our system, so that should be the drop at 255.
@@ -365,7 +361,8 @@ public class TFC_Climate
 		//The equation looks rather complicated, but you can see it here:
 		// http://www.wolframalpha.com/input/?i=%28%28%28x%5E2+%2F+677.966%29+*+%280.5%29*%28%28%28110+-+x%29+%2B+%7C110+-+x%7C%29%2F%28110+-
 		// +x%29%29%29+%2B+%28%280.5%29*%28%28%28x+-+110%29+%2B+%7Cx+-+110%7C%29%2F%28x+-+110%29%29+*+x+*+0.16225%29%29+0+to+440
-		if(y > 144){
+		if(y > 144)
+		{
 			y-=144;
 			y = Math.min(y, 440);
 			float ySq = y * y;
@@ -379,7 +376,6 @@ public class TFC_Climate
 	{
 		float temp = getTempSpecificDay(day, x, z);
 		temp = adjustHeightToTemp(y,temp);
-
 		return temp;
 	}
 
@@ -501,43 +497,33 @@ public class TFC_Climate
 		float rainModEast = 1;
 
 		BiomeGenBase biome = null;
-
-
 		for(int i = 0; i < 8; i++)
 		{
 			biome = worldObj.getBiomeGenForCoords((x-512)+(64*i), z);
-
 			if(biome.biomeID == TFCBiome.Mountains.biomeID)
 				rainModWest = 1 - (i * 0.0625f);
 			else if(biome.biomeID == TFCBiome.ocean.biomeID)
 				rainModWest = 1 + (i * 0.125f);
-
 		}
 		for(int i = 0; i < 8; i++)
 		{
 			biome =  worldObj.getBiomeGenForCoords(x, (z+512)-(64*i));
-
 			if(biome.biomeID == TFCBiome.Mountains.biomeID)
 				rainModSouth = 1 - (i * 0.0625f);
 			else if(biome.biomeID == TFCBiome.ocean.biomeID)
 				rainModSouth = 1 + (i * 0.125f);
-
 		}
 		for(int i = 0; i < 2; i++)
 		{
 			biome = worldObj.getBiomeGenForCoords(x, (z-128)+(64*i));
-
 			if(biome.biomeID == TFCBiome.ocean.biomeID)
 				rainModNorth +=  0.35f;
-
 		}
 		for(int i = 0; i < 2; i++)
 		{
 			biome = worldObj.getBiomeGenForCoords((x+128)-(64*i), z);
-
 			if(biome.biomeID == TFCBiome.ocean.biomeID)
 				rainModEast += 0.35f;
-
 		}
 
 		float addMoisture = 1;

@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -14,7 +15,6 @@ import TFC.API.Crafting.AnvilManager;
 import TFC.API.Crafting.PlanRecipe;
 import TFC.API.Enums.RuleEnum;
 import TFC.Core.TFC_Core;
-import TFC.Core.Util.StringUtil;
 
 public class GuiAnvilButton extends GuiButton 
 {
@@ -73,7 +73,7 @@ public class GuiAnvilButton extends GuiButton
 					if(p == null) return;
 					RuleEnum[] Rules = p.rules;
 					int[] ItemRules = screen.AnvilEntity.getItemRules();
-					this.displayString = StringUtil.localize(Rules[ruleIndex].Name);
+					this.displayString = StatCollector.translateToLocal(Rules[ruleIndex].Name);
 				}
 			}
 

@@ -1,5 +1,6 @@
 package TFC.WorldGen;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -15,15 +16,15 @@ import TFC.WorldGen.GenLayers.GenTreeLayerTFC;
 public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 {
 	/** The biome generator object. */
-	private BiomeGenBase biomeGenerator;
+	private TFCBiome biomeGenerator;
 	private float hellTemperature;
 
 	/** The rainfall in the world */
 	private float rainfall;
 
-	public TFCWorldChunkManagerHell(BiomeGenBase par1BiomeGenBase, float par2, float par3)
+	public TFCWorldChunkManagerHell(TFCBiome par1, float par2, float par3)
 	{
-		this.biomeGenerator = par1BiomeGenBase;
+		this.biomeGenerator = par1;
 		this.hellTemperature = par2;
 		this.rainfall = par3;
 
@@ -79,13 +80,25 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 		var8 = GenRainLayerTFC.initializeAllBiomeGenerators(seed+8, TFCWorldType.DEFAULT);
 		genRainfall = var8[0];
 		rainfallIndexLayer = var8[1];
+		
+		this.biomesToSpawnIn = new ArrayList();
+		this.biomesToSpawnIn.add(TFCBiome.hell);
+	}
+
+	/**
+	 * Gets the list of valid biomes for the player to spawn in.
+	 */
+	@Override
+	public List getBiomesToSpawnIn()
+	{
+		return this.biomesToSpawnIn;
 	}
 
 	/**
 	 * Returns the BiomeGenBase related to the x, z position on the world.
 	 */
 	@Override
-	public BiomeGenBase getBiomeGenAt(int par1, int par2)
+	public TFCBiome getBiomeGenAt(int par1, int par2)
 	{
 		return this.biomeGenerator;
 	}
@@ -94,12 +107,12 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 	 * Returns an array of biomes for the location input.
 	 */
 	@Override
-	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5)
+	public TFCBiome[] getBiomesForGeneration(BiomeGenBase[] par1, int par2, int par3, int par4, int par5)
 	{
-		if (par1ArrayOfBiomeGenBase == null || par1ArrayOfBiomeGenBase.length < par4 * par5)
-			par1ArrayOfBiomeGenBase = new BiomeGenBase[par4 * par5];
-		Arrays.fill(par1ArrayOfBiomeGenBase, 0, par4 * par5, this.biomeGenerator);
-		return par1ArrayOfBiomeGenBase;
+		if (par1 == null || par1.length < par4 * par5)
+			par1 = new TFCBiome[par4 * par5];
+		Arrays.fill(par1, 0, par4 * par5, this.biomeGenerator);
+		return (TFCBiome[]) par1;
 	}
 
 	/**
@@ -131,12 +144,12 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 	 * WorldChunkManager Args: oldBiomeList, x, z, width, depth
 	 */
 	@Override
-	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5)
+	public TFCBiome[] loadBlockGeneratorData(BiomeGenBase[] par1, int par2, int par3, int par4, int par5)
 	{
-		if (par1ArrayOfBiomeGenBase == null || par1ArrayOfBiomeGenBase.length < par4 * par5)
-			par1ArrayOfBiomeGenBase = new BiomeGenBase[par4 * par5];
-		Arrays.fill(par1ArrayOfBiomeGenBase, 0, par4 * par5, this.biomeGenerator);
-		return par1ArrayOfBiomeGenBase;
+		if (par1 == null || par1.length < par4 * par5)
+			par1 = new TFCBiome[par4 * par5];
+		Arrays.fill(par1, 0, par4 * par5, this.biomeGenerator);
+		return (TFCBiome[]) par1;
 	}
 
 	/**
@@ -144,9 +157,9 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 	 * don't check biomeCache to avoid infinite loop in BiomeCacheBlock)
 	 */
 	@Override
-	public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5, boolean par6)
+	public TFCBiome[] getBiomeGenAt(BiomeGenBase[] par1, int par2, int par3, int par4, int par5, boolean par6)
 	{
-		return this.loadBlockGeneratorData(par1ArrayOfBiomeGenBase, par2, par3, par4, par5);
+		return this.loadBlockGeneratorData(par1, par2, par3, par4, par5);
 	}
 
 	/**

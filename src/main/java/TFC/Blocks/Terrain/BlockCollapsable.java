@@ -14,7 +14,6 @@ import net.minecraft.stats.StatList;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import TFC.TFCBlocks;
 import TFC.API.TFCOptions;
 import TFC.API.Enums.TFCDirection;
@@ -24,6 +23,7 @@ import TFC.API.Util.CollapseList;
 import TFC.Blocks.BlockTerra;
 import TFC.Entities.EntityFallingStone;
 import TFC.TileEntities.TileEntityPartial;
+import TFC.WorldGen.TFCBiome;
 
 public class BlockCollapsable extends BlockTerra
 {
@@ -202,7 +202,7 @@ public class BlockCollapsable extends BlockTerra
 	{
 		float seismicModifier = 0.2f;
 		float softModifier = 0.1f;
-		BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
+		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(i, k);
 		int finalCollapseRatio = TFCOptions.initialCollapseRatio;
 
 		//Make sure that the player gets exhausted from harvesting this block since we override the vanilla method

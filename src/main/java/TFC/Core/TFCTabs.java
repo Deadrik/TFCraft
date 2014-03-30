@@ -3,7 +3,7 @@ package TFC.Core;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import TFC.Core.Util.StringUtil;
+import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -57,6 +57,6 @@ public class TFCTabs extends CreativeTabs
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getTranslatedTabLabel() {
-		return StringUtil.localize("itemGroup." + this.getTabLabel());
+		return StatCollector.translateToLocal("itemGroup." + this.getTabLabel());
 	}
 }

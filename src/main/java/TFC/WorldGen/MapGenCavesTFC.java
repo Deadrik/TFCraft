@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import TFC.TFCBlocks;
 import TFC.Core.TFC_Climate;
@@ -163,7 +162,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 												grassBlock = block;
 												isGrass = true;
 											}
-											BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords((int)worldX, (int)worldZ);
+											//TFCBiome biomegenbase = (TFCBiome) this.worldObj.getBiomeGenForCoords((int)worldX, (int)worldZ);
 											if (TFC_Core.isSoil(block) || TFC_Core.isRawStone(block))
 												if (var50 < 10 && TFC_Climate.getStability((int)worldX, (int)worldZ) == 1)
 												{

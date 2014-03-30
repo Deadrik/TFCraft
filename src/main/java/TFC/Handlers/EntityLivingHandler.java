@@ -3,7 +3,6 @@ package TFC.Handlers;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -11,7 +10,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Core;
@@ -23,8 +21,6 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.SkillStats;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
-import TFC.Handlers.Network.AbstractPacket;
-import TFC.Handlers.Network.PlayerUpdatePacket;
 import TFC.Items.ItemArrow;
 import TFC.Items.ItemQuiver;
 import TFC.Items.Tools.ItemJavelin;
@@ -56,8 +52,9 @@ public class EntityLivingHandler
 				foodstats.onUpdate(player);
 				TFC_Core.setPlayerFoodStats(player, foodstats);
 				//Send update packet
-				AbstractPacket pkt = new PlayerUpdatePacket(player, (byte)0);
-				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+//				System.out.println("-----------------------------Sending PlayerUpdatePacket flag: 0");
+//				AbstractPacket pkt = new PlayerUpdatePacket(player, 0);
+//				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
 				//TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, FoodStatsTFC.getStatusPacket(foodstats));
 
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
@@ -97,9 +94,11 @@ public class EntityLivingHandler
 					{
 						playerclient.guishowFoodRestoreAmount = true;
 						playerclient.guiFoodRestoreAmount = ((ItemTerraFood)player.inventory.getCurrentItem().getItem()).func_150905_g(null);
-					} else
+					}
+					else
 						playerclient.guishowFoodRestoreAmount = false;
-				} else
+				}
+				else
 					playerclient.guishowFoodRestoreAmount = false;
 			}
 		}

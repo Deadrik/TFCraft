@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.API.ISize;
@@ -17,7 +18,6 @@ import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.FoodStatsTFC;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class ItemTerraFood extends ItemFood implements ISize
@@ -73,7 +73,7 @@ public class ItemTerraFood extends ItemFood implements ISize
 	@Override
 	public String getItemStackDisplayName(ItemStack itemstack) 
 	{
-		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
+		return StatCollector.translateToLocal(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 
 	/***
@@ -127,7 +127,7 @@ public class ItemTerraFood extends ItemFood implements ISize
 			for(int i = 0; i < whitestars; i++)
 				stars += "\u2729";
 
-			arraylist.add(StringUtil.localize("gui.FoodPrep.Filling") + ": " + stars);
+			arraylist.add(StatCollector.translateToLocal("gui.FoodPrep.Filling") + ": " + stars);
 		}
 	}
 

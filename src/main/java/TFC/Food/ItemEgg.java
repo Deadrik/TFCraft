@@ -6,8 +6,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class ItemEgg extends ItemTerra
@@ -22,7 +22,7 @@ public class ItemEgg extends ItemTerra
 	{
 		if(is.hasTagCompound())
 			if(is.getTagCompound().hasKey("Fertilized"))
-				arraylist.add(EnumChatFormatting.GOLD + StringUtil.localize("gui.fertilized"));
+				arraylist.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("gui.fertilized"));
 	}
 
 	@Override

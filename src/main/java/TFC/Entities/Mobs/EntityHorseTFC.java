@@ -1643,7 +1643,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 
 		this.setHealth(this.getMaxHealth());
-		return (IEntityLivingData)par1EntityLivingData1;
+		return (IEntityLivingData)par1EntityLivingData1; //TODO TFC.Entities.Mobs.EntityHorseGroupData cannot be cast to net.minecraft.entity.IEntityLivingData
 	}
 
 	@SideOnly(Side.CLIENT)

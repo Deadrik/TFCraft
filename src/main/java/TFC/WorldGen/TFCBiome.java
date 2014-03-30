@@ -52,7 +52,7 @@ public class TFCBiome extends BiomeGenBase
 	public static float riverDepthMax = -0.3F;
 	public float temperatureTFC;
 
-	//public static TFCBiome[] biomeList = new TFCBiome[256];
+	public static TFCBiome[] biomeList = new TFCBiome[256];
 
 	/** An array of all the biomes, indexed by biome id. */
 	public static final TFCBiome ocean = new BiomeGenOceanTFC(0).setBiomeName("Ocean").setMinMaxHeight(-0.9F, 0.1F);
@@ -171,8 +171,8 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySlimeTFC.class, 8, 1, 2));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityEndermanTFC.class, 1, 1, 2));
 		
-		getBiomeGenArray()[par1] = this;
-		//biomeList[par1] = this;
+		//getBiomeGenArray()[par1] = this;
+		biomeList[par1] = this;
 	}
 
 	/**
@@ -355,9 +355,25 @@ public class TFCBiome extends BiomeGenBase
 		return null;
 	}
 
-	public TFCBiome GetBiomeByName(String name)
+	/**
+	 * return the biome specified by biomeID, or 0 (ocean) if out of bounds
+	 */
+	public static TFCBiome getBiome(int id)
 	{
-		for (int i = 0; i < this.getBiomeGenArray().length; i++)
+		if (id >= 0 && id <= biomeList.length)
+		{
+			return biomeList[id];
+		}
+		else
+		{
+//			logger.warn("Biome ID is out of bounds: " + p_150568_0_ + ", defaulting to 0 (Ocean)");
+			return ocean;
+		}
+	}
+
+	public static TFCBiome GetBiomeByName(String name)
+	{
+		for (int i = 0; i < getBiomeGenArray().length; i++)
 			if(getBiomeGenArray()[i] != null)
 			{
 				String n = getBiomeGenArray()[i].biomeName.toLowerCase();
@@ -372,4 +388,8 @@ public class TFCBiome extends BiomeGenBase
 		return ((TFCWorldChunkManager)world.provider.worldChunkMgr).getRockLayerAt(i, k, 0).data2;
 	}
 
+	public static TFCBiome[] getBiomeGenArray()
+	{
+		return biomeList;
+	}
 }

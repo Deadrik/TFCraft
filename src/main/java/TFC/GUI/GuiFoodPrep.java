@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -13,7 +14,6 @@ import TFC.Reference;
 import TFC.Containers.ContainerFoodPrep;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityFoodPrep;
 
 public class GuiFoodPrep extends GuiContainer
@@ -38,7 +38,7 @@ public class GuiFoodPrep extends GuiContainer
 	{
 		//drawCenteredString(fontRenderer,"Log Pile", 87, 6, 0x000000);
 		//fontRenderer.drawString("Log Pile", 28, 6, 0x404040);
-		fontRendererObj.drawString(StringUtil.localize("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class GuiFoodPrep extends GuiContainer
 		super.initGui();
 		buttonList.clear();
 
-		buttonList.add(new GuiButton(0, guiLeft+105, guiTop + 52, 66, 20, StringUtil.localize("gui.FoodPrep.CreateMeal")));
+		buttonList.add(new GuiButton(0, guiLeft+105, guiTop + 52, 66, 20, StatCollector.translateToLocal("gui.FoodPrep.CreateMeal")));
 
 	}
 

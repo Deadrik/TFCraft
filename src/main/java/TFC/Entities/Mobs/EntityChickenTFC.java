@@ -23,7 +23,6 @@ import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Sounds;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIFindNest;
 

@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
@@ -17,7 +18,6 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Textures;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class ItemProPick extends ItemTerra
@@ -85,7 +85,7 @@ public class ItemProPick extends ItemTerra
 		// If random(100) is less than 60, it used to succeed. we don't need to
 		// gather the blocks in a 25x25 area if it doesn't.
 		if (random.nextInt(100) >= 60) {
-			player.addChatMessage(new ChatComponentText(StringUtil.localize("gui.ProPick.FoundNothing")));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.ProPick.FoundNothing")));
 			return true;
 		}
 
@@ -130,7 +130,7 @@ public class ItemProPick extends ItemTerra
 	 * Tells the player what block of ore he found, when directly targeting an ore block.
 	 */
 	private void TellResult(EntityPlayer player, ItemStack ore) {
-		player.addChatMessage(new ChatComponentText(String.format("%s %s", StringUtil.localize("gui.ProPick.Found"), ore.getItem().getItemStackDisplayName(ore))));
+		player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.Found"), ore.getItem().getItemStackDisplayName(ore))));
 	}
 
 	/*
@@ -138,7 +138,7 @@ public class ItemProPick extends ItemTerra
 	 */
 	private void TellResult(EntityPlayer player) {
 		if (results == null || results.size() == 0) {
-			player.addChatMessage(new ChatComponentText(StringUtil.localize("gui.ProPick.FoundNothing")));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.ProPick.FoundNothing")));
 			return;
 		}
 
@@ -147,15 +147,15 @@ public class ItemProPick extends ItemTerra
 		String oreName = result.ItemStack.getItem().getItemStackDisplayName(result.ItemStack);
 
 		if (result.Count < 10)
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StringUtil.localize("gui.ProPick.FoundTraces"), oreName)));
+			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundTraces"), oreName)));
 		else if(result.Count < 20)
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StringUtil.localize("gui.ProPick.FoundSmall"), oreName)));
+			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundSmall"), oreName)));
 		else if (result.Count < 40)
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StringUtil.localize("gui.ProPick.FoundMedium"), oreName)));
+			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundMedium"), oreName)));
 		else if (result.Count < 80)
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StringUtil.localize("gui.ProPick.FoundLarge"), oreName)));
+			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundLarge"), oreName)));
 		else
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StringUtil.localize("gui.ProPick.FoundVeryLarge"), oreName)));
+			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundVeryLarge"), oreName)));
 
 		oreName = null;
 		result = null;

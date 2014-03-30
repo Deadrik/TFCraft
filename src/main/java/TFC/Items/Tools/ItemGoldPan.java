@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
@@ -24,7 +25,6 @@ import TFC.API.Util.Helper;
 import TFC.Blocks.Terrain.BlockOre;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 
@@ -171,7 +171,7 @@ public class ItemGoldPan extends ItemTerra
 					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, itemstack);
 					return true;
 				}
-				entityplayer.addChatMessage(new ChatComponentText(StringUtil.localize("gui.GoldPan.UseEmpty")));
+				entityplayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.GoldPan.UseEmpty")));
 			}
 			else
 			{
@@ -338,7 +338,7 @@ public class ItemGoldPan extends ItemTerra
 				}
 				else
 				{
-					entityplayer.addChatMessage(new ChatComponentText(StringUtil.localize("gui.GoldPan.UseFull")));
+					entityplayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.GoldPan.UseFull")));
 				}
 			}
 		}

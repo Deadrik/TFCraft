@@ -106,9 +106,7 @@ public class BlockFruitWood extends BlockTerraContainer
 						{
 							reachedTop = true;
 						}
-
 						scanLogs(world,i,j+y,k,l,checkArray,6,y,6);
-
 						y++;
 					}
 				}

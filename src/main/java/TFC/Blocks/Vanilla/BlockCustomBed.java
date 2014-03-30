@@ -19,13 +19,13 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.Core.Util.StringUtil;
+import TFC.WorldGen.TFCBiome;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -72,7 +72,7 @@ public class BlockCustomBed extends BlockDirectional
 				i1 = par1World.getBlockMetadata(par2, par3, par4);
 			}
 
-			if (par1World.provider.canRespawnHere() && par1World.getBiomeGenForCoords(par2, par4) != BiomeGenBase.hell)
+			if (par1World.provider.canRespawnHere() && par1World.getBiomeGenForCoords(par2, par4) != TFCBiome.hell)
 			{
 				if (isBedOccupied(i1))
 				{
@@ -96,7 +96,7 @@ public class BlockCustomBed extends BlockDirectional
 
 					if (entityplayer1 != null)
 					{
-						par5EntityPlayer.addChatMessage(new ChatComponentText("tile.bed.occupied"));
+						par5EntityPlayer.addChatMessage(new ChatComponentText("tile.bed.occupied.name"));
 						return true;
 					}
 
@@ -107,16 +107,16 @@ public class BlockCustomBed extends BlockDirectional
 
 				if (enumstatus == EnumStatus.OK)
 				{
-					par5EntityPlayer.addChatMessage(new ChatComponentText(StringUtil.localize("tile.customBed.sleep")));
+					par5EntityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tile.customBed.sleep.name")));
 					setBedOccupied(par1World, par2, par3, par4, true);
 					return true;
 				}
 				else
 				{
 					if (enumstatus == EnumStatus.NOT_POSSIBLE_NOW)
-						par5EntityPlayer.addChatMessage(new ChatComponentText("tile.bed.noSleep"));
+						par5EntityPlayer.addChatMessage(new ChatComponentText("tile.bed.noSleep.name"));
 					else if (enumstatus == EnumStatus.NOT_SAFE)
-						par5EntityPlayer.addChatMessage(new ChatComponentText("tile.bed.notSafe"));
+						par5EntityPlayer.addChatMessage(new ChatComponentText("tile.bed.notSafe.name"));
 
 					return true;
 				}

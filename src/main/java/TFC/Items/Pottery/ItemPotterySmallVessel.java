@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.TerraFirmaCraft;
 import TFC.API.IBag;
@@ -22,7 +23,6 @@ import TFC.Core.TFC_Time;
 import TFC.Core.Metal.Alloy;
 import TFC.Core.Metal.AlloyManager;
 import TFC.Core.Metal.AlloyMetal;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemOre;
 import TFC.Items.ItemOreSmall;
 
@@ -262,7 +262,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			{
 				String name = tag.getString("MetalType");
 				name = name.replace(" ", "");
-				arraylist.add(EnumChatFormatting.DARK_GREEN + StringUtil.localize("gui.metal."+name));
+				arraylist.add(EnumChatFormatting.DARK_GREEN + StatCollector.translateToLocal("gui.metal."+name));
 			}
 
 			if(tag.hasKey("TempTimer"))
@@ -271,7 +271,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				long temp = tag.getLong("TempTimer");
 				if(total - temp < 11) 
 				{
-					arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.ItemHeat.Liquid"));
+					arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ItemHeat.Liquid"));
 				}
 			}
 
@@ -297,13 +297,13 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	{
 		if (TFC_Core.showExtraInformation()) 
 		{
-			arraylist.add(StringUtil.localize("gui.Help"));
-			arraylist.add(StringUtil.localize("gui.PotteryBase.Inst0"));
-			arraylist.add(StringUtil.localize("gui.PotteryVesselSmall.Inst0"));
+			arraylist.add(StatCollector.translateToLocal("gui.Help"));
+			arraylist.add(StatCollector.translateToLocal("gui.PotteryBase.Inst0"));
+			arraylist.add(StatCollector.translateToLocal("gui.PotteryVesselSmall.Inst0"));
 		}
 		else
 		{
-			arraylist.add(StringUtil.localize("gui.ShowHelp"));
+			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
 		}
 	}
 

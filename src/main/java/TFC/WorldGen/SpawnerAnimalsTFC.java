@@ -21,7 +21,6 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -232,13 +231,13 @@ public final class SpawnerAnimalsTFC
 	/**
 	 * Called during chunk generation to spawn initial creatures.
 	 */
-	public static void performWorldGenSpawning(World par0World, BiomeGenBase par1BiomeGenBase, int par2, int par3, int par4, int par5, Random par6Random)
+	public static void performWorldGenSpawning(World par0World, TFCBiome par1TFCBiome, int par2, int par3, int par4, int par5, Random par6Random)
 	{
-		List list = TFCChunkProviderGenerate.getCreatureSpawnsByChunk(par0World,par1BiomeGenBase, par2, par3);//par1BiomeGenBase.getSpawnableList(EnumCreatureType.creature);
+		List list = TFCChunkProviderGenerate.getCreatureSpawnsByChunk(par0World, par1TFCBiome, par2, par3);//par1BiomeGenBase.getSpawnableList(EnumCreatureType.creature);
 
 		if (!list.isEmpty())
 		{
-			while (par6Random.nextFloat() < par1BiomeGenBase.getSpawningChance())
+			while (par6Random.nextFloat() < par1TFCBiome.getSpawningChance())
 			{
 				SpawnListEntry spawnlistentry = (SpawnListEntry)WeightedRandom.getRandomItem(par0World.rand, list);
 				IEntityLivingData entitylivingdata = null;

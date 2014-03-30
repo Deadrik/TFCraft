@@ -7,6 +7,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -15,7 +16,6 @@ import TFC.Reference;
 import TFC.Containers.ContainerBarrel;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityBarrel;
 
 public class GuiBarrel extends GuiContainer
@@ -47,9 +47,9 @@ public class GuiBarrel extends GuiContainer
 
 		buttonList.clear();
 
-		buttonList.add(new GuiButton(0, guiLeft+38, guiTop + 50, 50, 20, StringUtil.localize("gui.Barrel.Seal")));
-		buttonList.add(new GuiButton(1, guiLeft+88, guiTop + 50, 50, 20, StringUtil.localize("gui.Barrel.Empty")));
-		GuiButton buttonMode = new GuiButtonMode(2, guiLeft+140, guiTop + 5, 30,20, barrel.mode==0?StringUtil.localize("gui.Barrel.ToggleOn"):StringUtil.localize("gui.Barrel.ToggleOff"));
+		buttonList.add(new GuiButton(0, guiLeft+38, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Seal")));
+		buttonList.add(new GuiButton(1, guiLeft+88, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Empty")));
+		GuiButton buttonMode = new GuiButtonMode(2, guiLeft+140, guiTop + 5, 30,20, barrel.mode==0?StatCollector.translateToLocal("gui.Barrel.ToggleOn"):StatCollector.translateToLocal("gui.Barrel.ToggleOff"));
 		buttonList.add(buttonMode);
 	}
 	
@@ -89,7 +89,7 @@ public class GuiBarrel extends GuiContainer
 	                l = 16777120;
 	            }
 
-	            this.drawCenteredString(fontrenderer,  barrel.mode==0?StringUtil.localize("gui.Barrel.ToggleOn"):StringUtil.localize("gui.Barrel.ToggleOff"), this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, l);
+	            this.drawCenteredString(fontrenderer,  barrel.mode==0?StatCollector.translateToLocal("gui.Barrel.ToggleOn"):StatCollector.translateToLocal("gui.Barrel.ToggleOff"), this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, l);
 	        }
 	    }
 	}

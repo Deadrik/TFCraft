@@ -3,10 +3,8 @@ package TFC;
 import java.io.File;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.Packet;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -25,12 +23,10 @@ import TFC.Entities.Mobs.EntityCreeperTFC;
 import TFC.Entities.Mobs.EntityDeer;
 import TFC.Entities.Mobs.EntityEndermanTFC;
 import TFC.Entities.Mobs.EntityGhastTFC;
-import TFC.Entities.Mobs.EntityHorseTFC;
 import TFC.Entities.Mobs.EntityIronGolemTFC;
 import TFC.Entities.Mobs.EntityPheasantTFC;
 import TFC.Entities.Mobs.EntityPigTFC;
 import TFC.Entities.Mobs.EntityPigZombieTFC;
-import TFC.Entities.Mobs.EntitySheepTFC;
 import TFC.Entities.Mobs.EntitySilverfishTFC;
 import TFC.Entities.Mobs.EntitySkeletonTFC;
 import TFC.Entities.Mobs.EntitySlimeTFC;
@@ -75,7 +71,6 @@ import TFC.TileEntities.TileEntityWoodConstruct;
 import TFC.TileEntities.TileEntityWorkbench;
 import TFC.WorldGen.TFCProvider;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.ModClassLoader;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -276,10 +271,6 @@ public class CommonProxy
 	{
 	}
 
-	public void registerTranslations()
-	{
-	}
-
 	public File getMinecraftDir()
 	{
 		return FMLCommonHandler.instance().getMinecraftServerInstance().getFile("");/*new File(".");*/
@@ -359,19 +350,4 @@ public class CommonProxy
 	{
 		NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.instance, new GuiHandler());
 	}
-
-//	public void sendCustomPacket(Packet packet)
-//	{
-////		FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);
-//	}
-//
-//	public void sendCustomPacketToPlayer(EntityPlayerMP player, Packet packet)
-//	{
-////		player.playerNetServerHandler.sendPacket(packet);
-//	}
-//
-//	public void sendCustomPacketToPlayersInRange(double X, double Y, double Z, Packet packet, double range)
-//	{
-////		FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendToAllNear(X, Y, Z, range, 0, packet);
-//	}
 }

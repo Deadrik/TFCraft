@@ -14,13 +14,13 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.IPipeConnectable;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class TileEntityBarrel extends TileEntity implements IInventory
@@ -226,35 +226,35 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		switch (type)
 		{
 		case 0:
-			return StringUtil.localize("gui.Barrel.Empty");
+			return StatCollector.translateToLocal("gui.Barrel.Empty");
 		case 1:
-			return StringUtil.localize("gui.Barrel.Water");
+			return StatCollector.translateToLocal("gui.Barrel.Water");
 		case 2:
-			return StringUtil.localize("gui.Barrel.Limewater");
+			return StatCollector.translateToLocal("gui.Barrel.Limewater");
 		case 3:
-			return StringUtil.localize("gui.Barrel.Tannin");
+			return StatCollector.translateToLocal("gui.Barrel.Tannin");
 		case 4:
-			return StringUtil.localize("gui.Barrel.Gunpowder");
+			return StatCollector.translateToLocal("gui.Barrel.Gunpowder");
 		case 5:
-			return StringUtil.localize("gui.Barrel.Beer");
+			return StatCollector.translateToLocal("gui.Barrel.Beer");
 		case 6:
-			return StringUtil.localize("gui.Barrel.Cider");
+			return StatCollector.translateToLocal("gui.Barrel.Cider");
 		case 7:
-			return StringUtil.localize("gui.Barrel.Vodka");
+			return StatCollector.translateToLocal("gui.Barrel.Vodka");
 		case 8:
-			return StringUtil.localize("gui.Barrel.Whiskey");
+			return StatCollector.translateToLocal("gui.Barrel.Whiskey");
 		case 9:
-			return StringUtil.localize("gui.Barrel.RyeWhiskey");
+			return StatCollector.translateToLocal("gui.Barrel.RyeWhiskey");
 		case 10:
-			return StringUtil.localize("gui.Barrel.Sake");
+			return StatCollector.translateToLocal("gui.Barrel.Sake");
 		case 11:
-			return StringUtil.localize("gui.Barrel.Rum");
+			return StatCollector.translateToLocal("gui.Barrel.Rum");
 		case 12:
-			return StringUtil.localize("gui.Barrel.Vinegar");
+			return StatCollector.translateToLocal("gui.Barrel.Vinegar");
 		case 13:
-			return StringUtil.localize("gui.Barrel.Milk");
+			return StatCollector.translateToLocal("gui.Barrel.Milk");
 		case 14:
-			return StringUtil.localize("gui.Barrel.CurdledMilk");
+			return StatCollector.translateToLocal("gui.Barrel.CurdledMilk");
 		default:
 			return "";
 		}
@@ -645,7 +645,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
 	}
 
 	@Override

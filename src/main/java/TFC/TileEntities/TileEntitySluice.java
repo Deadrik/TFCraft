@@ -19,7 +19,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.biome.BiomeGenBase;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Blocks.Devices.BlockSluice;
@@ -289,10 +288,10 @@ public class TileEntitySluice extends TileEntity implements IInventory
 					//items.add(mod_TFCraft.terraSmallOre);
 					//items.add(mod_TFCraft.terraTinyOre);
 
-					BiomeGenBase biome1 = worldObj.getBiomeGenForCoords(xCoord+100, zCoord);
-					BiomeGenBase biome2 = worldObj.getBiomeGenForCoords(xCoord-100, zCoord);
-					BiomeGenBase biome3 = worldObj.getBiomeGenForCoords(xCoord, zCoord+100);
-					BiomeGenBase biome4 = worldObj.getBiomeGenForCoords(xCoord, zCoord-100);
+					//BiomeGenBase biome1 = worldObj.getBiomeGenForCoords(xCoord+100, zCoord);
+					//BiomeGenBase biome2 = worldObj.getBiomeGenForCoords(xCoord-100, zCoord);
+					//BiomeGenBase biome3 = worldObj.getBiomeGenForCoords(xCoord, zCoord+100);
+					//BiomeGenBase biome4 = worldObj.getBiomeGenForCoords(xCoord, zCoord-100);
 
 					float gemMod = 1;
 					float oreMod = 1;
@@ -645,7 +644,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
 	}
 
 	@Override

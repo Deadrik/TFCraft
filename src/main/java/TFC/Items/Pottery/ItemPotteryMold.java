@@ -8,8 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import TFC.Reference;
-import TFC.Core.Util.StringUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -35,7 +35,7 @@ public class ItemPotteryMold extends ItemPotteryBase
 	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{		
 		if(is.getItemDamage() > 5) {
-			arraylist.add(StringUtil.localize("gui.MeltedMetal.NotFull"));
+			arraylist.add(StatCollector.translateToLocal("gui.MeltedMetal.NotFull"));
 		}
 	}
 

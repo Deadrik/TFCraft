@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import TFC.Reference;
 import TFC.API.Armor;
 import TFC.API.IClothing;
@@ -18,7 +19,6 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
-import TFC.Core.Util.StringUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -101,22 +101,22 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 
 		if (TFC_Core.showExtraInformation()) 
 		{
-			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.Armor.Advanced") + ":");
-			arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.Pierce") + ": " + EnumChatFormatting.AQUA + ArmorType.getPiercingAR());
-			arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.Slash") + ": " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
-			arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.Crush") + ": " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
+			arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.Armor.Advanced") + ":");
+			arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Pierce") + ": " + EnumChatFormatting.AQUA + ArmorType.getPiercingAR());
+			arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Slash") + ": " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
+			arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Crush") + ": " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
 			arraylist.add("");
 			if (is.hasTagCompound())
 			{
 				NBTTagCompound stackTagCompound = is.getTagCompound();
 
 				if(stackTagCompound.hasKey("creator"))
-					arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.ForgedBy") + " " + stackTagCompound.getString("creator"));
+					arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.ForgedBy") + " " + stackTagCompound.getString("creator"));
 			}
 		}
 		else
-			arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Armor.Advanced") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
-					EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
+			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.Armor.Advanced") + ": (" + StatCollector.translateToLocal("gui.Armor.Hold") + " " + 
+					EnumChatFormatting.GRAY + StatCollector.translateToLocal("gui.Armor.Shift") + 
 					EnumChatFormatting.DARK_GRAY + ")");
 
 	}
@@ -138,12 +138,6 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 		if (this.getArmorMaterial() == ArmorMaterial.CLOTH)
 			return EnumWeight.LIGHT;
 		return EnumWeight.HEAVY;
-	}
-
-	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) 
-	{
-		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 
 	@Override

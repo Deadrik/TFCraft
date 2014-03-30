@@ -3,8 +3,8 @@ package TFC.Items.ItemBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import TFC.API.Constant.Global;
-import TFC.Core.Util.StringUtil;
 
 public class ItemCustomLeaves2 extends ItemTerraBlock
 {
@@ -24,7 +24,7 @@ public class ItemCustomLeaves2 extends ItemTerraBlock
 			n=16;
 		}
 		
-		String s = StringUtil.localize("tile.leaves." + Global.WOOD_ALL[itemstack.getItemDamage()+n]).toString();
+		String s = StatCollector.translateToLocal("tile.leaves." + Global.WOOD_ALL[itemstack.getItemDamage()+n] + ".name").toString();
 		return s;
 	}
 	

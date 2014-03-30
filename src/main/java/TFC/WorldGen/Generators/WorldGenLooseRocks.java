@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import TFC.TFCBlocks;
 import TFC.WorldGen.TFCBiome;
@@ -33,7 +32,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 	{
 		chunkX *= 16;
 		chunkZ *= 16;
-		BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
+		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
 		if(biome == TFCBiome.ocean)
 			return;
 

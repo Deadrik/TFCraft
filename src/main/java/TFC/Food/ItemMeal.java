@@ -19,7 +19,6 @@ import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.FoodStatsTFC;
-import TFC.Core.Util.StringUtil;
 
 public class ItemMeal extends ItemTerraFood
 {
@@ -59,7 +58,7 @@ public class ItemMeal extends ItemTerraFood
 
 
 			if(foodEffect != null) {
-				arraylist.add(StringUtil.localize("gui.FoodPrep.Effect") + ": " + StatCollector.translateToLocal(foodEffect.getEffectName()));
+				arraylist.add(StatCollector.translateToLocal("gui.FoodPrep.Effect") + ": " + StatCollector.translateToLocal(foodEffect.getEffectName()));
 			}
 
 			int energy = getMealEnergy(is)/10;
@@ -81,7 +80,7 @@ public class ItemMeal extends ItemTerraFood
 					stars += "\u2729";
 				}
 
-				arraylist.add(StringUtil.localize("gui.FoodPrep.Energy") + ": " + stars);
+				arraylist.add(StatCollector.translateToLocal("gui.FoodPrep.Energy") + ": " + stars);
 			}
 
 			if(power > 0)
@@ -99,7 +98,7 @@ public class ItemMeal extends ItemTerraFood
 					stars += "\u2729";
 				}
 
-				arraylist.add(StringUtil.localize("gui.FoodPrep.Power") + ": " + stars);
+				arraylist.add(StatCollector.translateToLocal("gui.FoodPrep.Power") + ": " + stars);
 			}
 
 			if(filling > 0)
@@ -117,7 +116,7 @@ public class ItemMeal extends ItemTerraFood
 					stars += "\u2729";
 				}
 
-				arraylist.add(StringUtil.localize("gui.FoodPrep.Filling") + ": " + stars);
+				arraylist.add(StatCollector.translateToLocal("gui.FoodPrep.Filling") + ": " + stars);
 			}
 
 		}
@@ -317,12 +316,12 @@ public class ItemMeal extends ItemTerraFood
 	}
 
 	@Override
-	public EnumSize getSize(ItemStack is) 
+	public EnumSize getSize(ItemStack is)
 	{
 		return EnumSize.SMALL;
 	}
 	@Override
-	public EnumWeight getWeight(ItemStack is) 
+	public EnumWeight getWeight(ItemStack is)
 	{
 		return EnumWeight.MEDIUM;
 	}

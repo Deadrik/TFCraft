@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
@@ -24,7 +25,6 @@ import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Textures;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 import com.google.common.collect.HashMultimap;
@@ -70,7 +70,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 		ItemTerra.addHeatInformation(is, arraylist);
 
 		if(is.getItem() instanceof ICausesDamage)
-			arraylist.add(EnumChatFormatting.AQUA + StringUtil.localize(((ICausesDamage)this).GetDamageType().toString()));
+			arraylist.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal(((ICausesDamage)this).GetDamageType().toString()));
 
 		addItemInformation(is, player, arraylist);
 		addExtraInformation(is, player, arraylist);
@@ -145,12 +145,6 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	public EnumDamageType GetDamageType() 
 	{
 		return damageType;
-	}
-
-	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) 
-	{
-		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 
 	@Override

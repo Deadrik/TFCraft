@@ -253,7 +253,7 @@ public class TileEntityIngotPile extends TileEntity implements IInventory
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
 	}
 
 	@Override
@@ -261,7 +261,6 @@ public class TileEntityIngotPile extends TileEntity implements IInventory
 	{
 		readFromNBT(pkt.func_148857_g());
 		updateNeighbours();
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 }

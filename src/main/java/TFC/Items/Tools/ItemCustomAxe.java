@@ -19,7 +19,6 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Textures;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 import com.google.common.collect.HashMultimap;
@@ -90,12 +89,6 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	public EnumDamageType GetDamageType()
 	{
 		return EnumDamageType.SLASHING;
-	}
-
-	@Override
-	public String getItemStackDisplayName(ItemStack itemstack)
-	{
-		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
@@ -17,7 +18,6 @@ import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Core.Util.StringUtil;
 
 public class ItemLooseRock extends ItemTerra
 {
@@ -87,12 +87,12 @@ public class ItemLooseRock extends ItemTerra
 	{
 		if (TFC_Core.showExtraInformation()) 
 		{
-			arraylist.add(StringUtil.localize("gui.Help"));
-			arraylist.add(StringUtil.localize("gui.LooseRock.Inst0"));
+			arraylist.add(StatCollector.translateToLocal("gui.Help"));
+			arraylist.add(StatCollector.translateToLocal("gui.LooseRock.Inst0"));
 		}
 		else
 		{
-			arraylist.add(StringUtil.localize("gui.ShowHelp"));
+			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
 		}
 	}
 

@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.API.HeatIndex;
@@ -20,7 +21,6 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Core.Util.StringUtil;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -118,12 +118,6 @@ public class ItemTerra extends Item implements ISize
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) 
-	{
-		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
-	}
-
-	@Override
 	public boolean getShareTag()
 	{
 		return true;
@@ -146,8 +140,8 @@ public class ItemTerra extends Item implements ISize
 	public static void addSizeInformation(ItemStack object, List arraylist)
 	{
 		if(((ISize)object.getItem()).getSize(object)!= null && ((ISize)object.getItem()).getWeight(object) != null)
-			arraylist.add("\u2696" + StringUtil.localize("gui.Weight." + ((ISize)object.getItem()).getWeight(object).getName()) + " \u21F2" + 
-					StringUtil.localize("gui.Size." + ((ISize)object.getItem()).getSize(object).getName().replace(" ", "")));
+			arraylist.add("\u2696" + StatCollector.translateToLocal("gui.Weight." + ((ISize)object.getItem()).getWeight(object).getName()) + " \u21F2" + 
+					StatCollector.translateToLocal("gui.Size." + ((ISize)object.getItem()).getSize(object).getName().replace(" ", "")));
 	}
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 

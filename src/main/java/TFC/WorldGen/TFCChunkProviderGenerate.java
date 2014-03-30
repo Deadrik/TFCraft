@@ -10,7 +10,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -65,7 +64,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	private double[] stoneNoise = new double[256];
 
 	/** The biomes that are used to generate the chunk */
-	private BiomeGenBase[] biomesForGeneration;
+	private TFCBiome[] biomesForGeneration;
 
 	private DataLayer[] rockLayer1;
 	private DataLayer[] rockLayer2;
@@ -171,7 +170,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	{
 		int xCoord = chunkX * 16;
 		int zCoord = chunkZ * 16;
-		BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
+		TFCBiome biome = (TFCBiome) this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
 		this.rand.setSeed(this.worldObj.getSeed());
 		long var7 = this.rand.nextLong() / 2L * 2L + 1L;
 		long var9 = this.rand.nextLong() / 2L * 2L + 1L;
@@ -218,7 +217,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				var14 = this.worldObj.getPrecipitationHeight(xCoord + var12, zCoord + var13);
 
 				if (this.worldObj.isBlockFreezable(var12 + xCoord, var14 - 1, var13 + zCoord))
-					if(biome.biomeID != BiomeGenBase.ocean.biomeID&& biome.biomeID != BiomeGenBase.beach.biomeID)
+					if(biome != TFCBiome.ocean && biome != TFCBiome.beach)
 						this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Blocks.ice, 1, 0x2);
 					else
 						this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Blocks.ice, 0, 0x2);
@@ -227,7 +226,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			}
 	}
 
-	public static List getCreatureSpawnsByChunk(World world,BiomeGenBase biome, int x, int z)
+	public static List getCreatureSpawnsByChunk(World world, TFCBiome biome, int x, int z)
 	{
 		List spawnableCreatureList = new ArrayList();
 		spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class,24,0,0));
@@ -252,13 +251,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				if(temp < 30)
 				{
 					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 2, 2, 4));
-					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,2,2,3));
+//					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,2,2,3));
 					spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
 				}
 				else
 				{
 					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 1, 1, 2));
-					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,1,2,3));
+//					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,1,2,3));
 				}
 		//regular temperate forest
 		if(temp > 0 &&temp < 21 && rain > 250)
@@ -419,12 +418,12 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				float var17 = 0.0F;
 				float var18 = 0.0F;
 				byte var19 = 2;
-				BiomeGenBase baseBiome = this.biomesForGeneration[var14 + 2 + (var15 + 2) * (par5 + 5)];
+				TFCBiome baseBiome = this.biomesForGeneration[var14 + 2 + (var15 + 2) * (par5 + 5)];
 
 				for (int var21 = -var19; var21 <= var19; ++var21)
 					for (int var22 = -var19; var22 <= var19; ++var22)
 					{
-						BiomeGenBase blendBiome = this.biomesForGeneration[var14 + var21 + 2 + (var15 + var22 + 2) * (par5 + 5)];
+						TFCBiome blendBiome = this.biomesForGeneration[var14 + var21 + 2 + (var15 + var22 + 2) * (par5 + 5)];
 						float blendedHeight = this.parabolicField[var21 + 2 + (var22 + 2) * 5] / (/*blendBiome.minHeight*/ + 2.0F);//<---blendBiome.minHeight was commented out
 
 						if (blendBiome.rootHeight > baseBiome.rootHeight)
@@ -512,7 +511,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			{
 				int arrayIndex = xCoord + zCoord * 16;
 				int arrayIndexDL = zCoord + xCoord * 16;
-				BiomeGenBase biomegenbase = biomesForGeneration[arrayIndexDL];
+				TFCBiome biomegenbase = biomesForGeneration[arrayIndexDL];
 				DataLayer rock1 = rockLayer1[arrayIndexDL];
 				DataLayer rock2 = rockLayer2[arrayIndexDL];
 				DataLayer rock3 = rockLayer3[arrayIndexDL];
@@ -576,7 +575,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							metaBig[indexBig] = soilMeta;
 						}
 
-						if(biomegenbase.biomeID == 0)
+						if(biomegenbase == TFCBiome.ocean)
 						{
 							if(((height > var5-2 && height <= var5+1) || (height < var5 && idsTop[index+2] == Blocks.water)))//If its an ocean give it a sandy bottom
 							{
@@ -584,7 +583,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 								metaBig[indexBig] = soilMeta;
 							}
 						}
-						else if(!(biomegenbase.biomeID == TFCBiome.swampland.biomeID))
+						else if(!(biomegenbase == TFCBiome.swampland))
 							if(((height > var5-2 && height < var5 && idsTop[index+1] == Blocks.water)) || (height < var5 && idsTop[index+1] == Blocks.water))
 								if(idsBig[indexBig] != TFC_Core.getTypeForSand(soilMeta) && rand.nextInt(5) != 0)
 								{
@@ -592,7 +591,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 									metaBig[indexBig] = 0;
 								}
 					}
-					else if(idsTop[index] == Blocks.water && biomegenbase.biomeID != BiomeGenBase.ocean.biomeID && biomegenbase.biomeID != BiomeGenBase.beach.biomeID)
+					else if(idsTop[index] == Blocks.water && biomegenbase != TFCBiome.ocean && biomegenbase != TFCBiome.beach)
 						idsBig[indexBig] = TFCBlocks.FreshWaterStill;
 				}
 			}
@@ -614,7 +613,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				DataLayer rock2 = rockLayer2[arrayIndexDL];
 				DataLayer rock3 = rockLayer3[arrayIndexDL];
 				DataLayer stability = stabilityLayer[arrayIndexDL];
-				BiomeGenBase biomegenbase = biomesForGeneration[arrayIndexDL];
+				TFCBiome biomegenbase = biomesForGeneration[arrayIndexDL];
 
 				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
 				int var13 = -1;

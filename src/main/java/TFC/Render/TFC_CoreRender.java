@@ -12,7 +12,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 import org.lwjgl.opengl.GL11;
 
@@ -69,7 +68,7 @@ public class TFC_CoreRender
 		IIcon over = renderblocks.overrideBlockTexture;
 		if(!breaking && (block == TFCBlocks.Ore || block == TFCBlocks.Ore2 || block == TFCBlocks.Ore3))
 		{
-			BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(par2, par4);
+			//TFCBiome biome = (TFCBiome) renderblocks.blockAccess.getBiomeGenForCoords(par2, par4);
 			renderblocks.overrideBlockTexture = getRockTexture(Minecraft.getMinecraft().theWorld, par2, par3, par4);
 			renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
 			renderblocks.overrideBlockTexture = over;

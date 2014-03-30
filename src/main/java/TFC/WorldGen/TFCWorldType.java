@@ -2,10 +2,8 @@ package TFC.WorldGen;
 
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.FlatGeneratorInfo;
 
 public class TFCWorldType extends WorldType
 {
@@ -15,10 +13,11 @@ public class TFCWorldType extends WorldType
 //	private static final  BiomeGenBase[] tfcBiomes = new BiomeGenBase[] {
 //		TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains,
 //		TFCBiome.plains, TFCBiome.rollingHills, TFCBiome.Mountains };
-	private static final  BiomeGenBase[] tfcBiomes = new BiomeGenBase[] {
+	private static final  TFCBiome[] biomesUNKNOWN = new TFCBiome[] { TFCBiome.ocean };
+	private static final  TFCBiome[] biomesFLAT = new TFCBiome[] { TFCBiome.hell };
+	private static final  TFCBiome[] biomesDEFAULT = new TFCBiome[] {
 		TFCBiome.ocean,
 		TFCBiome.river,
-//		TFCBiome.hell,
 		TFCBiome.beach,
 		TFCBiome.jungle,
 		TFCBiome.jungleHills,
@@ -36,26 +35,20 @@ public class TFCWorldType extends WorldType
 		TFCBiome.MountainsEdgeSeismic,
 		TFCBiome.PlainsSeismic
 	};
-	
+
 	public TFCWorldType(String par2Str)
 	{
 		super(par2Str);
 	}
 
-	//@Override // ??Was commented out in WorldType??
-	public BiomeGenBase[] getBiomesForWorldType()
+	public TFCBiome[] getBiomesForWorldType()
 	{
-		BiomeGenBase[] bgb0 = null;
-		BiomeGenBase[] bgb = TFCBiome.getBiomeGenArray();
-		for(int i=0; i < bgb.length; i++)
-		{
-			if(!bgb[i].biomeName.equalsIgnoreCase("hell"))
-			{
-				bgb0[i] = bgb[i];
-				System.out.println(bgb[i].biomeID+" : "+bgb[i].biomeName);
-			}
-		}
-		return bgb0;
+		if(this == this.DEFAULT)
+			return biomesDEFAULT;
+		else if(this == this.FLAT)
+			return biomesFLAT;
+
+		return biomesUNKNOWN;
 	}
 
 	@Override

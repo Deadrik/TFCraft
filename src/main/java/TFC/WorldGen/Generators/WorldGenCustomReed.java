@@ -6,7 +6,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import TFC.Blocks.Vanilla.BlockCustomReed;
 
 public class WorldGenCustomReed extends WorldGenerator
 {
@@ -27,7 +26,8 @@ public class WorldGenCustomReed extends WorldGenerator
 				int var10 = 2 + par2Random.nextInt(par2Random.nextInt(3) + 1);
 				for (int var11 = 0; var11 < var10; ++var11)
 				{
-					if (((BlockCustomReed)Blocks.reeds).canBlockStay(par1World, var7, var8 + var11, var9))
+					//if (((BlockCustomReed)Blocks.reeds).canBlockStay(par1World, var7, var8 + var11, var9))
+					if (Blocks.reeds.canBlockStay(par1World, var7, var8 + var11, var9))
 						par1World.setBlock(var7, var8 + var11, var9, Blocks.reeds);
 				}
 			}

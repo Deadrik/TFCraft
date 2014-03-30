@@ -1,40 +1,19 @@
 package TFC.WorldGen.GenLayers;
 
-import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldType;
 
 public class GenLayerBiomeTFC extends GenLayerTFC
 {
-	public static BiomeGenBase[] biomeArray = new BiomeGenBase[] {
-		TFCBiome.ocean,
-		TFCBiome.river,
-		TFCBiome.beach,
-		TFCBiome.jungle,
-		TFCBiome.jungleHills,
-		TFCBiome.jungleEdge,
-		TFCBiome.desert,
-		TFCBiome.desertHills,
-		TFCBiome.HighHills,
-		TFCBiome.swampland,
-		TFCBiome.forest,
-		TFCBiome.forestHills,
-		TFCBiome.plains,
-		TFCBiome.PlainsSeismic,
-		TFCBiome.rollingHills,
-		TFCBiome.Mountains,
-		TFCBiome.MountainsSeismic
-	};
-
 	/** this sets all the biomes that are allowed to appear in the overworld */
-	//private BiomeGenBase[] allowedBiomes;
+	private TFCBiome[] allowedBiomes;
 
-	public GenLayerBiomeTFC(long par1, GenLayer par3GenLayer, WorldType par4WorldType)
+	public GenLayerBiomeTFC(long par1, GenLayer par3GenLayer, TFCWorldType par4)
 	{
 		super(par1);
-		//this.allowedBiomes = par4WorldType.getBiomesForWorldType(); //getBiomesForWorldType() is commented out in WorldType class
+		this.allowedBiomes = par4.getBiomesForWorldType();
 		this.parent = (GenLayerTFC) par3GenLayer;
 	}
 
@@ -57,8 +36,7 @@ public class GenLayerBiomeTFC extends GenLayerTFC
 				if (var9 == 0)
 					var6[var8 + var7 * par3] = 0;
 				else
-					//var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].biomeID;
-					var6[var8 + var7 * par3] = this.biomeArray[this.nextInt(this.biomeArray.length)].biomeID;
+					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].biomeID;
 			}
 		}
 		return var6;

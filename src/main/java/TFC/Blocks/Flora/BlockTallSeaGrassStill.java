@@ -15,7 +15,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.Vanilla.BlockCustomStationary;
@@ -199,17 +198,20 @@ public class BlockTallSeaGrassStill extends BlockCustomStationary implements ITi
 	@Override
 	protected void setNotStationary(World world, int i, int j, int k)
 	{
-		BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
-
 		int var5 = world.getBlockMetadata(i, j, k);
-		TESeaWeed te = (TESeaWeed)(world.getTileEntity(i,j,k));
-		int type = te.getType();
-		world.setBlock(i, j, k, Block.getBlockById(Block.getIdFromBlock(this) - 1), var5, 0x2);
-		//world.setBlockToAir(i, j, k);
-		//this.breakBlock(world, i, j, k, var5, this.blockID);
-		te = (TESeaWeed)(world.getTileEntity(i,j,k));
-		te.setType(type);
-		world.scheduleBlockUpdate(i, j, k, Block.getBlockById(Block.getIdFromBlock(this) - 1), this.tickRate(world));
+		TESeaWeed tes;
+		TileEntity te = world.getTileEntity(i,j,k);
+		if(te != null && te instanceof TESeaWeed)
+		{
+			tes = (TESeaWeed) te;
+			int type = tes.getType();
+			world.setBlock(i, j, k, TFCBlocks.SeaGrassFlowing, var5, 0x2);
+			//world.setBlockToAir(i, j, k);
+			//this.breakBlock(world, i, j, k, var5, this.blockID);
+			tes = (TESeaWeed)world.getTileEntity(i, j, k);
+			tes.setType(type);
+			world.scheduleBlockUpdate(i, j, k, TFCBlocks.SeaGrassFlowing, this.tickRate(world));
+		}
 	}
 
 	@Override

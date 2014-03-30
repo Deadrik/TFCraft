@@ -10,6 +10,7 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import TFC.Reference;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
@@ -18,7 +19,6 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Textures;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 import com.google.common.collect.Multimap;
@@ -42,7 +42,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 		ItemTerra.addHeatInformation(is, arraylist);
 
 		if(is.getItem() instanceof ICausesDamage)
-			arraylist.add(EnumChatFormatting.AQUA + StringUtil.localize(((ICausesDamage)this).GetDamageType().toString()));
+			arraylist.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal(((ICausesDamage)this).GetDamageType().toString()));
 
 		addItemInformation(is, player, arraylist);
 		addExtraInformation(is, player, arraylist);
@@ -77,12 +77,6 @@ public class ItemTerraTool extends ItemTool implements ISize
 	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
 		TFC_Textures.BrokenItem = registerer.registerIcon(Reference.ModID + ":" + "tools/Broken Item");
-	}
-
-	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) 
-	{
-		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 
 	@Override

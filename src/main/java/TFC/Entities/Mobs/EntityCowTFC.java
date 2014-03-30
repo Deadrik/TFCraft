@@ -296,11 +296,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 				this.dropItem(Items.beef, (int) (ageMod*this.size_mod *(15+this.rand.nextInt(10))));
 			}
 		}
-
-
-
 	}
-
 
 	/**
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.

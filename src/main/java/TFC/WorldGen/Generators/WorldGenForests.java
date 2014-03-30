@@ -44,8 +44,6 @@ public class WorldGenForests implements IWorldGenerator
 
 	private void generateForest(Random random, int chunkX, int chunkZ, World world)
 	{
-		BiomeGenBase biome;
-
 		int xCoord = chunkX;
 		int yCoord = 145;
 		int zCoord = chunkZ;
@@ -62,9 +60,7 @@ public class WorldGenForests implements IWorldGenerator
 			yCoord = world.getHeightValue(xCoord, zCoord);
 
 			float rainfall = TFC_Climate.getRainfall(xCoord, 0, zCoord);
-			biome = world.getBiomeGenForCoords(xCoord, zCoord);
 			numTrees = (int) (numTreesBase + ((rainfall / 1000)*2));
-
 			if(numTrees > 30)
 				numTrees = 30;
 
@@ -204,9 +200,7 @@ public class WorldGenForests implements IWorldGenerator
 
 	public boolean generateJungle(Random random, int chunkX, int chunkZ, World world) 
 	{
-		BiomeGenBase biome;
 		boolean completed = false;
-
 		int xCoord = chunkX;
 		int yCoord = 145;
 		int zCoord = chunkZ;
@@ -232,8 +226,8 @@ public class WorldGenForests implements IWorldGenerator
 						rainfall >= EnumTree.KAPOK.minRain && rainfall <= EnumTree.KAPOK.maxRain && 
 						temperatureAvg >= EnumTree.KAPOK.minTemp && temperatureAvg <= EnumTree.KAPOK.maxTemp)
 				{
-					//					WorldGenerator gen0 = (WorldGenerator)(random.nextInt(10) == 0 ? new WorldGenCustomShortTrees(false,15) : random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : 
-					//						random.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + random.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15));
+					//WorldGenerator gen0 = (WorldGenerator)(random.nextInt(10) == 0 ? new WorldGenCustomShortTrees(false,15) : random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : 
+					//	random.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + random.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15));
 
 					WorldGenerator gen0 = ( (random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : 
 						(random.nextInt(3) == 0 ? (random.nextInt(2) == 0 ?new WorldGenKapokTrees(false,15)/*new WorldGenCustomHugeTrees(false, 10 + random.nextInt(20), 15, 15)*/: new WorldGenAcaciaKoaTrees(false,0) ): new WorldGenCustomShortTrees(false, 15))));

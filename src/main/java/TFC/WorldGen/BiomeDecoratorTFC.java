@@ -30,7 +30,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	/** The amount of tall grass to generate per chunk. */
 	public int grassPerChunk;
 
-	public BiomeGenBase biome;
+	public TFCBiome biome;
 
 	/**
 	 * The number of extra mushroom patches per chunk. It generates 1/4 this number in brown mushroom patches, and 1/8
@@ -56,7 +56,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	public int waterlilyPerChunk;
 
 	/**Added By TFC**/
-	public BiomeDecoratorTFC(BiomeGenBase par1BiomeGenBase)
+	public BiomeDecoratorTFC(TFCBiome par1)
 	{
 		super();
 		this.flowersPerChunk = 2;
@@ -68,7 +68,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		this.reedGen = new WorldGenCustomReed();
 		this.sandGen = new WorldGenCustomSand(7, Blocks.sand);
 		this.waterlilyGen = new WorldGenCustomWaterlily();
-		biome = par1BiomeGenBase;
+		biome = par1;
 	}
 
 	/**

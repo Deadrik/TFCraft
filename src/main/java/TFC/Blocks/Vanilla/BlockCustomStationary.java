@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 public class BlockCustomStationary extends BlockCustomLiquid
 {
@@ -53,8 +52,6 @@ public class BlockCustomStationary extends BlockCustomLiquid
 	 */
 	protected void setNotStationary(World world, int i, int j, int k)
 	{
-		BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
-
 		int var5 = world.getBlockMetadata(i, j, k);
 		world.setBlock(i, j, k, Block.getBlockById(Block.getIdFromBlock(this) - 1), var5, 0x2);
 		world.scheduleBlockUpdate(i, j, k, Block.getBlockById(Block.getIdFromBlock(this) - 1), this.tickRate(world));

@@ -1,21 +1,15 @@
 package TFC.Entities.AI;
 
-import java.util.Random;
-
-import TFC.TFCBlocks;
-import TFC.API.Entities.IAnimal.GenderEnum;
-import TFC.TileEntities.TENestBox;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockBed;
 import net.minecraft.entity.EntityCreature;
-import TFC.Entities.Mobs.EntityChickenTFC;
-import TFC.Entities.Mobs.EntityPheasantTFC;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
+import TFC.API.Entities.IAnimal.GenderEnum;
+import TFC.Entities.Mobs.EntityChickenTFC;
+import TFC.Entities.Mobs.EntityPheasantTFC;
+import TFC.TileEntities.TENestBox;
 
 public class EntityAIFindNest extends EntityAIBase
 {

@@ -1,7 +1,5 @@
 package TFC.API.Crafting;
 
-import javax.swing.Icon;
-
 import net.minecraft.util.IIcon;
 import TFC.API.Enums.RuleEnum;
 

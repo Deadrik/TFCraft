@@ -6,3 +6,103 @@
 
 generator.TFCDefault=TFC Default
 generator.TFCFlat=TFC Flat
+
+key.ToolMode=Cycle Tool Mode
+key.LockTool=Lock Tool Location
+
+effect.bleed=Bleeding
+
+item.minecartChest.name=Minecart Chest
+
+#========Spawn Eggs========
+entity.Bear.name=Bear
+entity.Deer.name=Deer
+entity.irongolem.name=Iron Golem
+
+#=====================
+#========Items========
+#=====================
+#========Foods========
+item.MealGeneric.name=Meal
+item.bread.name=Bread
+item.RedApple.name=Red Apple
+item.Banana.name=Banana
+item.Orange.name=Orange
+item.GreenApple.name=Green Apple
+item.Lemon.name=Lemon
+item.Olive.name=Olive
+item.Cherry.name=Cherry
+item.Peach.name=Peach
+item.Plum.name=Plum
+item.Cacao.name=Cacao
+item.porkchopRaw.name=Raw Pork Chop
+item.porkchopCooked.name=Cooked Pork Chop
+item.MuttonRaw.name=Raw Mutton
+item.MuttonCooked.name=Cooked Mutton
+item.CalamariRaw.name=Raw Calamari
+item.CalamariCooked.name=Cooked Calamari
+item.fishRaw.name=Raw Fish
+item.fishCooked.name=Cooked Fish
+item.beefRaw.name=Raw Beef
+item.beefCooked.name=Cooked Beef
+item.chickenRaw.name=Raw Chicken
+item.chickenCooked.name=Cooked Chicken
+item.egg.name=Raw Egg
+item.EggCooked.name=Cooked Egg
+item.Cheese.name=Cheese
+item.WheatWhole.name=Wheat
+item.WheatGrain.name=Wheat Grain
+item.WheatGround.name=Wheat Flour
+item.WheatDough.name=Wheat Dough
+item.WheatBread.name=Wheat Bread
+item.BarleyWhole.name=Barley
+item.BarleyGrain.name=Barley Grain
+item.BarleyGround.name=Barley Flour
+item.BarleyDough.name=Barley Dough
+item.BarleyBread.name=Barley Bread
+item.OatGrain.name=Oat Grain
+item.OatWhole.name=Oat
+item.OatDough.name=Oat Dough
+item.OatGround.name=Oat Flour
+item.OatBread.name=Oat Bread
+item.RyeGrain.name=Rye Grain
+item.RyeWhole.name=Rye
+item.RyeGround.name=Rye Flour
+item.RyeDough.name=Rye Dough
+item.RyeBread.name=Rye Bread
+item.RiceGrain.name=Rice Grain
+item.RiceWhole.name=Rice
+item.RiceGround.name=Rice Flour
+item.RiceDough.name=Rice Dough
+item.RiceBread.name=Rice Bread
+item.CornmealGround.name=Cornmeal
+item.CornmealDough.name=Cornmeal Dough
+item.CornBread.name=Cornbread
+item.MaizeEar.name=Maize Ear
+item.Tomato.name=Tomato
+item.Potato.name=Potato
+item.Onion.name=Onion
+item.Rutabaga.name=Rutabaga
+item.Cabbage.name=Cabbage
+item.Garlic.name=Garlic
+item.Carrot.name=Carrot
+item.Sugarcane.name=Sugarcane
+item.Hemp.name=Hemp
+item.Soybeans.name=Soybeans
+item.Greenbeans.name=Green Beans
+item.Yam.name=Yam
+item.GreenBellPepper.name=Green Bell Pepper
+item.YellowBellPepper.name=Yellow Bell Pepper
+item.RedBellPepper.name=Red Bell Pepper
+item.Squash.name=Squash
+item.Beer.name=Beer
+item.Cider.name=Cider
+item.Sake.name=Sake
+item.Whiskey.name=Whiskey
+item.RyeWhiskey.name=Rye Whiskey
+item.Vodka.name=Vodka
+item.Rum.name=Rum
+item.Venison.name=Raw Venison
+item.VenisonCooked.name=Cooked Venison
+#========Tree Saplings========
+item.FruitSapling1.RedApple.name=Red Apple Tree Sapling

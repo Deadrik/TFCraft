@@ -4,6 +4,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -13,7 +14,6 @@ import TFC.API.TFCOptions;
 import TFC.Containers.ContainerBlastFurnace;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TEBlastFurnace;
 
 
@@ -60,10 +60,10 @@ public class GuiBlastFurnace extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j)
 	{
-		//drawCenteredString(this.fontRenderer,StringUtil.localize("item.Ore." + bloomery.OreType.replace(" ", "")),88,7,0x555555);
-		this.fontRendererObj.drawString(StringUtil.localize("gui.Bloomery.Ore") ,40, 17, 0x000000);
-		this.fontRendererObj.drawString(StringUtil.localize("gui.Bloomery.Charcoal") ,40, 35, 0x000000);
-		this.fontRendererObj.drawString(StringUtil.localize("gui.Bloomery.Output"),40, 53, 0x000000);
+		//drawCenteredString(this.fontRenderer,StatCollector.translateToLocal("item.Ore." + bloomery.OreType.replace(" ", "")),88,7,0x555555);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.Bloomery.Ore") ,40, 17, 0x000000);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.Bloomery.Charcoal") ,40, 35, 0x000000);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.Bloomery.Output"),40, 53, 0x000000);
 		if(TFCOptions.enableDebugMode)
 		{
 			this.fontRendererObj.drawString("Temp : " + bloomery.fireTemperature ,40, 71, 0x000000);

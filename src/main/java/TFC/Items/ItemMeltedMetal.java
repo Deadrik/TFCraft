@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCItems;
@@ -18,7 +19,6 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Core.Util.StringUtil;
 
 public class ItemMeltedMetal extends ItemTerra
 {
@@ -58,7 +58,7 @@ public class ItemMeltedMetal extends ItemTerra
 	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{		
 		if(is.getItemDamage() > 1) {
-			arraylist.add(StringUtil.localize("gui.MeltedMetal.NotFull"));
+			arraylist.add(StatCollector.translateToLocal("gui.MeltedMetal.NotFull"));
 		}
 	}
 	
@@ -102,12 +102,12 @@ public class ItemMeltedMetal extends ItemTerra
 		{
 			if (TFC_Core.showExtraInformation()) 
 			{
-				arraylist.add(StringUtil.localize("gui.Help"));
-				arraylist.add(StringUtil.localize("gui.MeltedMetal.Inst0"));
+				arraylist.add(StatCollector.translateToLocal("gui.Help"));
+				arraylist.add(StatCollector.translateToLocal("gui.MeltedMetal.Inst0"));
 			}
 			else
 			{
-				arraylist.add(StringUtil.localize("gui.ShowHelp"));
+				arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
 			}
 		}
 	}

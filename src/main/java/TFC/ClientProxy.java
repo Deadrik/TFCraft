@@ -16,14 +16,12 @@ import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.client.renderer.entity.RenderSpider;
 import net.minecraft.client.renderer.entity.RenderZombie;
 import net.minecraft.client.resources.IReloadableResourceManager;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.network.Packet;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Enums.EnumTree;
@@ -31,7 +29,6 @@ import TFC.API.Util.KeyBindings;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
-import TFC.Core.Util.StringUtil;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityFallingStone;
 import TFC.Entities.EntityJavelin;
@@ -129,12 +126,12 @@ import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TileEntityPottery;
 import TFC.TileEntities.TileEntityToolRack;
+import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -280,7 +277,7 @@ public class ClientProxy extends CommonProxy
 		return Minecraft.getMinecraft().mcDataDir;
 	}
 
-	private BiomeGenBase lastBiomeGen;
+	private TFCBiome lastBiomeGen;
 	private int waterColorMultiplier;
 
 	@Override
@@ -291,10 +288,9 @@ public class ClientProxy extends CommonProxy
 		int var7 = 0;
 
 		for (int var8 = -1; var8 <= 1; ++var8)
-		{
 			for (int var9 = -1; var9 <= 1; ++var9)
 			{
-				BiomeGenBase biome = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
+				TFCBiome biome = (TFCBiome) par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
 				if(biome != null)
 				{
 					if(lastBiomeGen != biome)
@@ -307,7 +303,6 @@ public class ClientProxy extends CommonProxy
 					var7 += waterColorMultiplier & 255;
 				}
 			}
-		}
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
 	}
 
@@ -502,12 +497,6 @@ public class ClientProxy extends CommonProxy
 		return rgb;
 	}
 
-//	@Override
-//	public void sendCustomPacket(Packet packet)
-//	{
-////		FMLCommonHandler.instance().getClientToServerNetworkManager().scheduleOutboundPacket(packet);
-//	}
-
 	@Override
 	public int getArmorRenderID(String name)
 	{
@@ -517,8 +506,6 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerKeys()
 	{
-		/*KeyBindings.addKeyBinding("Key_Calendar", 49);
-		KeyBindings.addIsRepeating(false);*/
 		KeyBindings.addKeyBinding(KeyBindingHandler.Key_ToolMode);
 		KeyBindings.addIsRepeating(false);
 		KeyBindings.addKeyBinding(KeyBindingHandler.Key_LockTool);
@@ -580,20 +567,6 @@ public class ClientProxy extends CommonProxy
 	public String getCurrentLanguage()
 	{
 		return Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode();
-	}
-
-	@Override
-	public void registerTranslations() {
-		LanguageRegistry LR = LanguageRegistry.instance();
-		LR.addStringLocalization("entity.Bear.name", StringUtil.localize("entity.Bear"));
-		LR.addStringLocalization("entity.Deer.name", StringUtil.localize("entity.Deer"));
-		LR.addStringLocalization("entity.irongolem.name", StringUtil.localize("entity.irongolem"));
-		LR.addStringLocalization("item.minecartChest.name", StringUtil.localize("item.minecartChest"));
-		LR.addStringLocalization("Key_Calendar", StringUtil.localize("Key_Calendar"));
-		LR.addStringLocalization("Key_ToolMode", StringUtil.localize("Key_ToolMode"));
-		LR.addStringLocalization("Key_LockTool", StringUtil.localize("Key_LockTool"));
-		LR.addStringLocalization("generator.DEFAULT", StringUtil.localize("generator.DEFAULT"));
-		LR.addStringLocalization("effect.bleed",StringUtil.localize("effect.bleed"));
 	}
 
 	@Override

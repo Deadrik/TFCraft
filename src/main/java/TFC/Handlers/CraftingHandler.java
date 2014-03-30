@@ -46,7 +46,7 @@ public class CraftingHandler// implements ICraftingHandler
 				player.getEntityData().setBoolean("craftingTable", true);
 				player.inventory.clearInventory(Item.getItemFromBlock(Blocks.crafting_table), -1);
 				
-				AbstractPacket pkt = new PlayerUpdatePacket(player, (byte)2);
+				AbstractPacket pkt = new PlayerUpdatePacket(player, 2);
 				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
 
 				//PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);

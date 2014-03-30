@@ -32,7 +32,6 @@ import TFC.Core.Recipes;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
-import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
 import TFC.Handlers.AnvilCraftingHandler;
 import TFC.Handlers.ChatListenerTFC;
@@ -98,16 +97,12 @@ public class TerraFirmaCraft
 
 		//Register Key Bindings(Client only)
 		proxy.registerKeys();
-
 		//Register KeyBinding Handler (Client only)
 		proxy.registerKeyBindingHandler();
-
 		//Register Block Highlight Handler (Client only)
 		proxy.registerHighlightHandler();
-
 		//Register Tile Entites
 		proxy.registerTileEntities(true);
-
 		//Register Sound Handler (Client only)
 		proxy.registerSoundHandler();
 
@@ -136,8 +131,13 @@ public class TerraFirmaCraft
 		GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
 		GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
 
-		TFCWorldType.DEFAULT = new TFCWorldType("DEFAULT");
-		TFCWorldType.FLAT = new TFCWorldType("FLAT");
+		TFCWorldType.DEFAULT = new TFCWorldType("TFCDefault");
+		TFCWorldType.FLAT = new TFCWorldType("TFCFlat");
+		
+		DimensionManager.unregisterDimension(-1);
+		DimensionManager.unregisterDimension(0);
+		DimensionManager.unregisterDimension(1);
+		
 		DimensionManager.unregisterProviderType(-1);
 		DimensionManager.unregisterProviderType(0);
 		DimensionManager.unregisterProviderType(1);
@@ -154,14 +154,9 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void init(FMLInitializationEvent evt)
 	{
-		//Add Item Name Localizations
-		//Localization.addLocalization("/assets/terrafirmacraft/lang/", "en_US");
-		//LanguageRegistry.instance().loadLocalization("assets/terrafirmacraft/lang/", "en_US", false);
-		//proxy.registerTranslations();
-
 		// Register Packet Handler
 		//NetworkRegistry.INSTANCE.registerConnectionHandler(new PacketHandler());
-		packetPipeline.initalise();
+//		packetPipeline.initalise();
 		//Register all of the recipes
 		Recipes.registerRecipes();
 		//Register the tool classes

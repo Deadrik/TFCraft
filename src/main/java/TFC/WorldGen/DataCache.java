@@ -3,56 +3,78 @@ package TFC.WorldGen;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.LongHashMap;
 import TFC.WorldGen.GenLayers.GenLayerTFC;
+
 public class DataCache
 {
 	/** Reference to the WorldChunkManager */
 	private final TFCWorldChunkManager chunkManager;
-
-	/** The last time this BiomeCache was cleaned, in milliseconds. */
+	/** The last time this BiomeCache was cleaned, in milliseconds.*/
 	private long lastCleanupTime = 0L;
-
-	int index;
-	/**
-	 * The map of keys to BiomeCacheBlocks. Keys are based on the chunk x, z coordinates as (x | z << 32).
-	 */
+	/** The map of keys to BiomeCacheBlocks. Keys are based on the chunk x, z coordinates as (x | z << 32). */
 	private LongHashMap cacheMap = new LongHashMap();
-
 	/** The list of cached BiomeCacheBlocks */
 	private List cache = new ArrayList();
+	private int index;
 
-	public DataCache(TFCWorldChunkManager par1WorldChunkManager, int ind)
+	public DataCache(TFCWorldChunkManager par1)
 	{
-		this.chunkManager = par1WorldChunkManager;
+		this.chunkManager = par1;
+	}
+	
+	public DataCache(TFCWorldChunkManager par1, int ind)
+	{
+		this.chunkManager = par1;
 		index = ind;
 	}
 
 	/**
 	 * Returns a biome cache block at location specified.
 	 */
+	public DataCacheBlockTFC getBiomeCacheBlock(int x, int y)
+	{
+		x >>= 4;
+		y >>= 4;
+		long var3 = (long)x & 4294967295L | ((long)y & 4294967295L) << 32;
+		DataCacheBlockTFC var5 = (DataCacheBlockTFC)this.cacheMap.getValueByKey(var3);
+		if (var5 == null)
+		{
+			var5 = new DataCacheBlockTFC(this, x, y);
+			this.cacheMap.add(var3, var5);
+			this.cache.add(var5);
+		}
+		var5.lastAccessTime = MinecraftServer.getSystemTimeMillis();
+		return var5;
+	}
+
 	public DataCacheBlockTFC getDataCacheBlock(GenLayerTFC indexLayers, int x, int y)
 	{
 		x >>= 4;
 		y >>= 4;
-
 		long var3 = (long)x & 4294967295L | ((long)y & 4294967295L) << 32;
 		DataCacheBlockTFC var5 = (DataCacheBlockTFC)this.cacheMap.getValueByKey(var3);
 
 		if (var5 == null)
 		{
-			var5 = new DataCacheBlockTFC(this,indexLayers, x, y, index);
+			var5 = new DataCacheBlockTFC(this, indexLayers, x, y, index);
 			this.cacheMap.add(var3, var5);
 			this.cache.add(var5);
 		}
 
-		var5.lastAccessTime = System.currentTimeMillis();
+		var5.lastAccessTime = MinecraftServer.getSystemTimeMillis();
 		return var5;
 	}
 
 	/**
 	 * Returns the BiomeGenBase related to the x, z position from the cache.
 	 */
+	public TFCBiome getBiomeGenAt(int par1, int par2)
+	{
+		return this.getBiomeCacheBlock(par1, par2).getBiomeGenAt(par1, par2);
+	}
+
 	public DataLayer getDataLayerAt(GenLayerTFC indexLayers, int par1, int par2)
 	{
 		return this.getDataCacheBlock(indexLayers, par1, par2).getDataLayerAt(par1, par2);
@@ -60,13 +82,12 @@ public class DataCache
 
 	public void cleanupCache()
 	{
-		long var1 = System.currentTimeMillis();
+		long var1 = MinecraftServer.getSystemTimeMillis();
 		long var3 = var1 - this.lastCleanupTime;
 
 		if (var3 > 7500L || var3 < 0L)
 		{
 			this.lastCleanupTime = var1;
-
 			for (int var5 = 0; var5 < this.cache.size(); ++var5)
 			{
 				DataCacheBlockTFC var6 = (DataCacheBlockTFC)this.cache.get(var5);
@@ -86,7 +107,12 @@ public class DataCache
 	 * @param indexLayers 
 	 * @param cache2 
 	 */
-	public DataLayer[] getCachedData( GenLayerTFC indexLayers, int par1, int par2)
+	public TFCBiome[] getCachedBiomes(int par1, int par2)
+	{
+		return this.getBiomeCacheBlock(par1, par2).biomes;
+	}
+	
+	public DataLayer[] getCachedData(GenLayerTFC indexLayers, int par1, int par2)
 	{
 		return this.getDataCacheBlock(indexLayers, par1, par2).data;
 	}
@@ -94,8 +120,8 @@ public class DataCache
 	/**
 	 * Get the world chunk manager object for a biome list.
 	 */
-	static TFCWorldChunkManager getChunkManager(DataCache par0BiomeCache)
+	static TFCWorldChunkManager getChunkManager(DataCache cache)
 	{
-		return par0BiomeCache.chunkManager;
+		return cache.chunkManager;
 	}
 }

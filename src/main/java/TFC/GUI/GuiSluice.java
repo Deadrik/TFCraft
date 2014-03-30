@@ -3,6 +3,7 @@ package TFC.GUI;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -11,7 +12,6 @@ import TFC.Reference;
 import TFC.Containers.ContainerSluice;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntitySluice;
 
 
@@ -52,7 +52,7 @@ public class GuiSluice extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRendererObj.drawString(StringUtil.localize("gui.Sluice.Soil") + ": " + sluiceInventory.soilAmount + "/50", 15, 39, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("gui.Sluice.Soil") + ": " + sluiceInventory.soilAmount + "/50", 15, 39, 0x404040);
 	}
 
 }

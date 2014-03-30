@@ -12,7 +12,6 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
@@ -71,12 +70,12 @@ public class TFCProvider extends WorldProvider
 	}
 
 	@Override
-	public BiomeGenBase getBiomeGenForCoords(int x, int z)
+	public TFCBiome getBiomeGenForCoords(int x, int z)
 	{
-		BiomeGenBase biome = TFCBiome.ocean;
+		TFCBiome biome = TFCBiome.ocean;
 		try
 		{
-			biome = worldObj.getBiomeGenForCoordsBody(x, z);
+			biome = (TFCBiome) worldObj.getBiomeGenForCoordsBody(x, z);
 			if(canSnowAtTemp(x,145,z))
 				biome.temperature = 0;
 			else
@@ -196,8 +195,8 @@ public class TFCProvider extends WorldProvider
 			Material mat = worldObj.getBlock(x, y, z).getMaterial();
 			Block id = worldObj.getBlock(x,y,z);
 			int meta = worldObj.getBlockMetadata(x, y, z);
-			boolean salty = TFC_Core.isSaltWaterIncludeIce(id,meta,mat);
-			TileEntity te = (worldObj.getTileEntity(x, y, z));
+			boolean salty = TFC_Core.isSaltWaterIncludeIce(id, meta, mat);
+			TileEntity te = worldObj.getTileEntity(x, y, z);
 			if(te!=null && te instanceof TESeaWeed)
 			{
 				//in case the block is salty sea grass, we don't want that to freeze when it's too warm

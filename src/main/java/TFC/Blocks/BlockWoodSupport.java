@@ -25,7 +25,7 @@ public class BlockWoodSupport extends BlockTerra
 	String[] woodNames;
 	IIcon[] icons;
 
-	public BlockWoodSupport(Material material) 
+	public BlockWoodSupport(Material material)
 	{
 		super(Material.wood);
 		this.setCreativeTab(CreativeTabs.tabBlock);

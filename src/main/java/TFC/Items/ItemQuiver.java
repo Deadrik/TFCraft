@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
@@ -19,7 +20,6 @@ import TFC.API.IQuiverAmmo;
 import TFC.API.Enums.EnumAmmo;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.Tools.ItemJavelin;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -147,14 +147,14 @@ public class ItemQuiver extends ItemTFCArmor
 
 		if (TFC_Core.showExtraInformation())
 		{
-			//arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.Armor.Advanced") + ":");
-			//arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.Pierce") + ": " + EnumChatFormatting.AQUA + ArmorType.getPiercingAR());
-			//arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.Slash") + ": " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
-			//arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.Crush") + ": " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
+			//arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.Armor.Advanced") + ":");
+			//arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Pierce") + ": " + EnumChatFormatting.AQUA + ArmorType.getPiercingAR());
+			//arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Slash") + ": " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
+			//arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Crush") + ": " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
 			//arraylist.add("");
-			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.Bow.Advanced") + ":");
-			arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Bow.Arrows") + ": " + EnumChatFormatting.YELLOW + getQuiverArrows(is));
-			arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Bow.Javelins") + ": " + EnumChatFormatting.YELLOW + getQuiverJavelins(is));
+			arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.Bow.Advanced") + ":");
+			arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Bow.Arrows") + ": " + EnumChatFormatting.YELLOW + getQuiverArrows(is));
+			arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Bow.Javelins") + ": " + EnumChatFormatting.YELLOW + getQuiverJavelins(is));
 			ArrayList[] javData = getQuiverJavelinTypes(is);
 			for(int i = 0; i < javData[0].size();i++)
 			{
@@ -166,12 +166,12 @@ public class ItemQuiver extends ItemTFCArmor
 			{
 				NBTTagCompound stackTagCompound = is.getTagCompound();
 				if(stackTagCompound.hasKey("creator"))
-					arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.ForgedBy") + " " + stackTagCompound.getString("creator"));
+					arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.ForgedBy") + " " + stackTagCompound.getString("creator"));
 			}
 		}
 		else
-			arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Armor.Advanced") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
-					EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
+			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.Armor.Advanced") + ": (" + StatCollector.translateToLocal("gui.Armor.Hold") + " " + 
+					EnumChatFormatting.GRAY + StatCollector.translateToLocal("gui.Armor.Shift") + 
 					EnumChatFormatting.DARK_GRAY + ")");
 
 	}

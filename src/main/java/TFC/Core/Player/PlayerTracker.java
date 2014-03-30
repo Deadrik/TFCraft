@@ -23,6 +23,7 @@ public class PlayerTracker
 	public void onPlayerLoggedIn(PlayerLoggedInEvent event)
 	{
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(event.player.getDisplayName(), event.player.getUniqueID()));
+		System.out.println("-----------------------------Sending InitClientWorldPacket");
 		AbstractPacket pkt = new InitClientWorldPacket(event.player);
 		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
 	}

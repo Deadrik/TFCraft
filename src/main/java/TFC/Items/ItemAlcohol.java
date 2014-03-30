@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import TFC.Core.TFC_Core;
-import TFC.Core.Util.StringUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -35,12 +34,6 @@ public class ItemAlcohol extends ItemTerra
 	public EnumAction getItemUseAction(ItemStack par1ItemStack)
 	{
 		return EnumAction.drink;
-	}
-
-	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) 
-	{
-		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 
 	/*	

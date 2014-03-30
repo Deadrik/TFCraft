@@ -3,9 +3,7 @@ package TFC.Handlers.Network;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
-import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -48,7 +46,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		if(player.getEntityData().hasKey("craftingTable"))
 			craftingTable = true;
 		buffer.writeBoolean(craftingTable);
-		TFC_Core.getSkillStats(player).toOutBuffer(buffer);
+//		TFC_Core.getSkillStats(player).toOutBuffer(buffer);
 	}
 
 	@Override
@@ -61,7 +59,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		HGRate = buffer.readInt();
 		HGCap = buffer.readInt();
 		craftingTable = buffer.readBoolean();
-		dis = new DataInputStream(new ByteArrayInputStream(buffer.array()));
+//		dis = new DataInputStream(new ByteArrayInputStream(buffer.array()));
 	}
 
 	@Override
@@ -79,15 +77,15 @@ public class InitClientWorldPacket extends AbstractPacket
 			PlayerInventory.upgradePlayerCrafting(player);
 		}
 		TFC_Core.SetupWorld(world, seed);
-		try
-		{
-			while(dis.available() > 0)
-				playerSkills.setSkillSave(dis.readUTF(), dis.readInt());
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+//		try
+//		{
+//			while(dis.available() > 0)
+//				playerSkills.setSkillSave(dis.readUTF(), dis.readInt());
+//		}
+//		catch (IOException e)
+//		{
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override

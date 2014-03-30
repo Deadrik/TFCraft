@@ -7,12 +7,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.Core.TFC_Core;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityFoodPrep;
 
 public class ItemCustomKnife extends ItemWeapon
@@ -73,14 +73,14 @@ public class ItemCustomKnife extends ItemWeapon
 	{
 		if (TFC_Core.showExtraInformation()) 
 		{
-			arraylist.add(StringUtil.localize("gui.Help"));
-			arraylist.add(StringUtil.localize("gui.Knife.Inst0"));
-			arraylist.add(StringUtil.localize("gui.Knife.Inst1"));
-			arraylist.add(StringUtil.localize("gui.Knife.Inst2"));
+			arraylist.add(StatCollector.translateToLocal("gui.Help"));
+			arraylist.add(StatCollector.translateToLocal("gui.Knife.Inst0"));
+			arraylist.add(StatCollector.translateToLocal("gui.Knife.Inst1"));
+			arraylist.add(StatCollector.translateToLocal("gui.Knife.Inst2"));
 		}
 		else
 		{
-			arraylist.add(StringUtil.localize("gui.ShowHelp"));
+			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
 		}
 	}
 

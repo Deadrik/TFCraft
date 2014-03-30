@@ -68,9 +68,6 @@ public class InitBlockPacket extends AbstractPacket
 	@Override
 	public void handleServerSide(EntityPlayer player)
 	{
-		TileEntity te = player.worldObj.getTileEntity(x, y, z);
-		if (te != null)
-			te.readFromNBT(nbtData);
 	}
 
 }
