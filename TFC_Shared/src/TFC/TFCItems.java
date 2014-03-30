@@ -1639,26 +1639,26 @@ public class TFCItems
 		FoodList = new ArrayList<Item>();
 		Item.itemsList[Item.egg.itemID] = new ItemEgg(Item.egg.itemID).setSize(EnumSize.SMALL).setUnlocalizedName("egg").setTextureName("egg");
 		Egg = Item.itemsList[Item.egg.itemID];
-		Item.itemsList[Item.porkRaw.itemID] = null; Item.itemsList[Item.porkRaw.itemID] = new ItemRawFood(63, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("porkchopRaw");
-		Item.itemsList[Item.porkCooked.itemID] = null; Item.itemsList[Item.porkCooked.itemID] = new ItemFoodTFC(64, 38, EnumFoodGroup.Protein).setUnlocalizedName("porkchopCooked");
-		Item.itemsList[Item.fishRaw.itemID] = null; Item.itemsList[Item.fishRaw.itemID] = new ItemRawFood(93, -1, EnumFoodGroup.Protein, false, true).setUnlocalizedName("fishRaw");
-		Item.itemsList[Item.fishCooked.itemID] = null; Item.itemsList[Item.fishCooked.itemID] = new ItemFoodTFC(94, 39, EnumFoodGroup.Protein).setUnlocalizedName("fishCooked");
-		Item.itemsList[Item.beefRaw.itemID] = null; Item.itemsList[Item.beefRaw.itemID] = new ItemRawFood(107, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("beefRaw");
-		Item.itemsList[Item.beefCooked.itemID] = null; Item.itemsList[Item.beefCooked.itemID] = new ItemFoodTFC(108, 40, EnumFoodGroup.Protein).setUnlocalizedName("beefCooked");
-		Item.itemsList[Item.chickenRaw.itemID] = null; Item.itemsList[Item.chickenRaw.itemID] = new ItemRawFood(109, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("chickenRaw");
-		Item.itemsList[Item.chickenCooked.itemID] = null; Item.itemsList[Item.chickenCooked.itemID] = new ItemFoodTFC(110, 41, EnumFoodGroup.Protein).setUnlocalizedName("chickenCooked");
+		Item.itemsList[Item.porkRaw.itemID] = null; Item.itemsList[Item.porkRaw.itemID] = new ItemRawFood(63, -1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("porkchopRaw");
+		Item.itemsList[Item.porkCooked.itemID] = null; Item.itemsList[Item.porkCooked.itemID] = new ItemFoodTFC(64, 38, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("porkchopCooked");
+		Item.itemsList[Item.fishRaw.itemID] = null; Item.itemsList[Item.fishRaw.itemID] = new ItemRawFood(93, -1, EnumFoodGroup.Protein, false, true).setDecayRate(3.0f).setUnlocalizedName("fishRaw");
+		Item.itemsList[Item.fishCooked.itemID] = null; Item.itemsList[Item.fishCooked.itemID] = new ItemFoodTFC(94, 39, EnumFoodGroup.Protein).setDecayRate(2.0f).setUnlocalizedName("fishCooked");
+		Item.itemsList[Item.beefRaw.itemID] = null; Item.itemsList[Item.beefRaw.itemID] = new ItemRawFood(107, -1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("beefRaw");
+		Item.itemsList[Item.beefCooked.itemID] = null; Item.itemsList[Item.beefCooked.itemID] = new ItemFoodTFC(108, 40, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("beefCooked");
+		Item.itemsList[Item.chickenRaw.itemID] = null; Item.itemsList[Item.chickenRaw.itemID] = new ItemRawFood(109, -1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("chickenRaw");
+		Item.itemsList[Item.chickenCooked.itemID] = null; Item.itemsList[Item.chickenCooked.itemID] = new ItemFoodTFC(110, 41, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("chickenCooked");
 		FruitTreeSapling1 = new ItemFruitTreeSapling(TFCItemID.FruitTreeSapling1, 0).setUnlocalizedName("FruitSapling1");
 		FruitTreeSapling2 = new ItemFruitTreeSapling(TFCItemID.FruitTreeSapling2, 8).setUnlocalizedName("FruitSapling2");
-		RedApple = new ItemRawFood(TFCItemID.RedApple, 2, EnumFoodGroup.Fruit, true).setUnlocalizedName("Red Apple");
-		Banana = new ItemRawFood(TFCItemID.Banana, 3, EnumFoodGroup.Fruit, true).setUnlocalizedName("Banana");
-		Orange = new ItemRawFood(TFCItemID.Orange, 4, EnumFoodGroup.Fruit, true).setUnlocalizedName("Orange");
-		GreenApple = new ItemRawFood(TFCItemID.GreenApple, 5, EnumFoodGroup.Fruit, true).setUnlocalizedName("Green Apple");
-		Lemon = new ItemRawFood(TFCItemID.Lemon,  6, EnumFoodGroup.Fruit, true).setUnlocalizedName("Lemon");
-		Olive = new ItemRawFood(TFCItemID.Olive, 7, EnumFoodGroup.Fruit, true).setUnlocalizedName("Olive");
-		Cherry = new ItemRawFood(TFCItemID.Cherry, 8, EnumFoodGroup.Fruit, true).setUnlocalizedName("Cherry");
-		Peach = new ItemRawFood(TFCItemID.Peach, 9, EnumFoodGroup.Fruit, true).setUnlocalizedName("Peach");
-		Plum = new ItemRawFood(TFCItemID.Plum, 10, EnumFoodGroup.Fruit, true).setUnlocalizedName("Plum");
-		EggCooked = new ItemFoodTFC(TFCItemID.EggCooked, 11, EnumFoodGroup.Protein).setUnlocalizedName("Egg Cooked");
+		RedApple = new ItemRawFood(TFCItemID.RedApple, 2, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Red Apple");
+		Banana = new ItemRawFood(TFCItemID.Banana, 3, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Banana");
+		Orange = new ItemRawFood(TFCItemID.Orange, 4, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Orange");
+		GreenApple = new ItemRawFood(TFCItemID.GreenApple, 5, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Green Apple");
+		Lemon = new ItemRawFood(TFCItemID.Lemon,  6, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Lemon");
+		Olive = new ItemRawFood(TFCItemID.Olive, 7, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Olive");
+		Cherry = new ItemRawFood(TFCItemID.Cherry, 8, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Cherry");
+		Peach = new ItemRawFood(TFCItemID.Peach, 9, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Peach");
+		Plum = new ItemRawFood(TFCItemID.Plum, 10, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Plum");
+		EggCooked = new ItemFoodTFC(TFCItemID.EggCooked, 11, EnumFoodGroup.Protein).setDecayRate(3.0f).setUnlocalizedName("Egg Cooked");
 
 		WheatGrain = new ItemRawFood(TFCItemID.WheatGrain, 12, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Grain");
 		BarleyGrain = new ItemRawFood(TFCItemID.BarleyGrain, 14, EnumFoodGroup.Grain).setUnlocalizedName("Barley Grain");
@@ -1681,7 +1681,7 @@ public class TFCItems
 		YellowBellPepper = new ItemRawFood(TFCItemID.YellowBellPepper, 35, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Yellow Bell Pepper");
 		RedBellPepper = new ItemRawFood(TFCItemID.RedBellPepper, 36, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Red Bell Pepper");
 		Squash = new ItemRawFood(TFCItemID.Squash, 37, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Squash");
-		Cheese = new ItemFoodTFC(TFCItemID.Cheese, 26, EnumFoodGroup.Dairy).setUnlocalizedName("Cheese");
+		Cheese = new ItemFoodTFC(TFCItemID.Cheese, 26, EnumFoodGroup.Dairy).setDecayRate(0.5f).setUnlocalizedName("Cheese");
 
 		WheatWhole = new ItemTerra(TFCItemID.WheatWhole).setFolder("food/").setUnlocalizedName("Wheat Whole");
 		BarleyWhole = new ItemTerra(TFCItemID.BarleyWhole).setFolder("food/").setUnlocalizedName("Barley Whole");
@@ -1712,8 +1712,8 @@ public class TFCItems
 		RiceBread = new ItemFoodTFC(TFCItemID.RiceBread, 46, EnumFoodGroup.Grain).setUnlocalizedName("Rice Bread");
 		CornBread = new ItemFoodTFC(TFCItemID.CornBread, 47, EnumFoodGroup.Grain).setUnlocalizedName("Corn Bread");
 
-		CalamariRaw = new ItemRawFood(TFCItemID.CalamariRaw, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("Calamari Raw");
-		CalamariCooked = new ItemFoodTFC(TFCItemID.CalamariCooked, 49, EnumFoodGroup.Protein).setUnlocalizedName("Calamari Cooked");
+		CalamariRaw = new ItemRawFood(TFCItemID.CalamariRaw, -1, EnumFoodGroup.Protein, false, false).setDecayRate(4.0f).setUnlocalizedName("Calamari Raw");
+		CalamariCooked = new ItemFoodTFC(TFCItemID.CalamariCooked, 49, EnumFoodGroup.Protein).setDecayRate(2.0f).setUnlocalizedName("Calamari Cooked");
 
 		SeedsWheat = new ItemCustomSeeds(TFCItemID.SeedsWheat,0).setUnlocalizedName("Seeds Wheat");
 		SeedsBarley = new ItemCustomSeeds(TFCItemID.SeedsBarley,5).setUnlocalizedName("Seeds Barley");
@@ -1735,22 +1735,22 @@ public class TFCItems
 		SeedsGreenbean = new ItemCustomSeeds(TFCItemID.SeedsGreenbean,22).setUnlocalizedName("Seeds Greenbean");
 		SeedsSquash = new ItemCustomSeeds(TFCItemID.SeedsSquash,23).setUnlocalizedName("Seeds Squash");
 
-		muttonRaw = new ItemRawFood(TFCItemID.muttonRaw, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("Mutton Raw");
-		muttonCooked =  new ItemFoodTFC(TFCItemID.muttonCooked, 48, EnumFoodGroup.Protein).setUnlocalizedName("Mutton Cooked");
-		venisonRaw = new ItemRawFood(TFCItemID.venisonRaw, -1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("Venison");
-		venisonCooked =  new ItemFoodTFC(TFCItemID.venisonCooked, 49, EnumFoodGroup.Protein).setUnlocalizedName("VenisonCooked");
+		muttonRaw = new ItemRawFood(TFCItemID.muttonRaw, -1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("Mutton Raw");
+		muttonCooked =  new ItemFoodTFC(TFCItemID.muttonCooked, 48, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("Mutton Cooked");
+		venisonRaw = new ItemRawFood(TFCItemID.venisonRaw, -1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("Venison");
+		venisonCooked =  new ItemFoodTFC(TFCItemID.venisonCooked, 49, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("VenisonCooked");
 
-		WintergreenBerry =  new ItemFoodTFC(TFCItemID.WintergreenBerry, 50, EnumFoodGroup.Fruit).setUnlocalizedName("Wintergreen Berry");
-		Blueberry =  new ItemFoodTFC(TFCItemID.Blueberry, 51, EnumFoodGroup.Fruit).setUnlocalizedName("Blueberry");
-		Raspberry =  new ItemFoodTFC(TFCItemID.Raspberry, 52, EnumFoodGroup.Fruit).setUnlocalizedName("Raspberry");
-		Strawberry =  new ItemFoodTFC(TFCItemID.Strawberry, 53, EnumFoodGroup.Fruit).setUnlocalizedName("Strawberry");
-		Blackberry =  new ItemFoodTFC(TFCItemID.Blackberry, 54, EnumFoodGroup.Fruit).setUnlocalizedName("Blackberry");
-		Bunchberry =  new ItemFoodTFC(TFCItemID.Bunchberry, 55, EnumFoodGroup.Fruit).setUnlocalizedName("Bunchberry");
-		Cranberry =  new ItemFoodTFC(TFCItemID.Cranberry,56, EnumFoodGroup.Fruit).setUnlocalizedName("Cranberry");
-		Snowberry =  new ItemFoodTFC(TFCItemID.Snowberry, 57, EnumFoodGroup.Fruit).setUnlocalizedName("Snowberry");	
-		Elderberry =  new ItemFoodTFC(TFCItemID.Elderberry, 58, EnumFoodGroup.Fruit).setUnlocalizedName("Elderberry");
-		Gooseberry =  new ItemFoodTFC(TFCItemID.Gooseberry, 59, EnumFoodGroup.Fruit).setUnlocalizedName("Gooseberry");
-		Cloudberry =  new ItemFoodTFC(TFCItemID.Cloudberry, 60, EnumFoodGroup.Fruit).setUnlocalizedName("Cloudberry");
+		WintergreenBerry =  new ItemFoodTFC(TFCItemID.WintergreenBerry, 50, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Wintergreen Berry");
+		Blueberry =  new ItemFoodTFC(TFCItemID.Blueberry, 51, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Blueberry");
+		Raspberry =  new ItemFoodTFC(TFCItemID.Raspberry, 52, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Raspberry");
+		Strawberry =  new ItemFoodTFC(TFCItemID.Strawberry, 53, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Strawberry");
+		Blackberry =  new ItemFoodTFC(TFCItemID.Blackberry, 54, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Blackberry");
+		Bunchberry =  new ItemFoodTFC(TFCItemID.Bunchberry, 55, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Bunchberry");
+		Cranberry =  new ItemFoodTFC(TFCItemID.Cranberry,56, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Cranberry");
+		Snowberry =  new ItemFoodTFC(TFCItemID.Snowberry, 57, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Snowberry");	
+		Elderberry =  new ItemFoodTFC(TFCItemID.Elderberry, 58, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Elderberry");
+		Gooseberry =  new ItemFoodTFC(TFCItemID.Gooseberry, 59, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Gooseberry");
+		Cloudberry =  new ItemFoodTFC(TFCItemID.Cloudberry, 60, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Cloudberry");
 
 
 
@@ -2032,7 +2032,7 @@ public class TFCItems
 		Item.itemsList[Item.plateLeather.itemID] = null; Item.itemsList[Item.plateLeather.itemID] = new ItemTFCArmor(Item.plateLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 1, EnumArmorMaterial.CLOTH, 100,2).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate");
 		Item.itemsList[Item.legsLeather.itemID] = null; Item.itemsList[Item.legsLeather.itemID] = new ItemTFCArmor(Item.legsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 2, EnumArmorMaterial.CLOTH, 100,1).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings");
 		Item.itemsList[Item.bootsLeather.itemID] = null; Item.itemsList[Item.bootsLeather.itemID] = new ItemTFCArmor(Item.bootsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 3, EnumArmorMaterial.CLOTH, 100,0).setUnlocalizedName("bootsCloth").setTextureName("leather_boots");
-	
+
 		Quiver = new ItemQuiver(TFCItemID.Quiver, Armor.LeatherQuiver, proxy.getArmorRenderID("leather"), 4, EnumArmorMaterial.IRON, 0,-1).setUnlocalizedName("Quiver");
 	}
 
