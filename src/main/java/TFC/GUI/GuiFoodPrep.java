@@ -9,7 +9,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.Containers.ContainerFoodPrep;
-import TFC.Core.Player.PlayerInventory;
 import TFC.TileEntities.TileEntityFoodPrep;
 
 public class GuiFoodPrep extends GuiContainerTFC

@@ -227,9 +227,10 @@ public class BlockCrop extends BlockContainer
 						else
 							player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(itemstack.getItem(),ss,dam));
 					}
-			else
-				//Handle Loot Drop
-				te.onHarvest(world, player);
+		}
+		else
+			//Handle Loot Drop
+			te.onHarvest(world, player);
 	}
 
 	/**

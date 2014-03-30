@@ -455,6 +455,7 @@ public class TFC_ItemHeat
 	public static String getHeatColorFood(float temp, float meltTemp)
 	{
 		if(temp < meltTemp)
+		{
 			if(temp < meltTemp*0.1F)
 				return StatCollector.translateToLocal("gui.FoodHeat.Cold");
 			else if(temp >= meltTemp*0.1F && temp < meltTemp*0.4F)
@@ -471,6 +472,7 @@ public class TFC_ItemHeat
 	public static String getHeatColorTorch(float temp, float meltTemp)
 	{
 		if(temp < meltTemp)
+		{
 			if(temp > 0 && temp < meltTemp*0.8F)
 				return StatCollector.translateToLocal("gui.Torch.CatchingFire");
 			else if(temp >= meltTemp*0.8F)

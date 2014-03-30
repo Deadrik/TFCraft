@@ -139,15 +139,16 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 
 			if(itemTemp <= ambientTemp)
 				fireItemStacks[i].stackTagCompound = null;
-			}
 		}
 		else if(fireItemStacks[i] != null && !fireItemStacks[i].hasTagCompound())
+		{
 			if(index != null && fireTemperature > 210)
 			{
 				inputCompound = new NBTTagCompound();
 				inputCompound.setFloat("temperature", startTemp);
 				fireItemStacks[i].setTagCompound(inputCompound);
 			}
+		}
 	}
 
 	@Override

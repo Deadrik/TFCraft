@@ -113,7 +113,7 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 				this.chestContents[var3].writeToNBT(var4);
 				var2.appendTag(var4);
 			}
-		}
+
 		par1NBTTagCompound.setTag("Items", var2);
 	}
 

@@ -473,10 +473,10 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 						updateGui();
 					}
 			} else if (itemstack != null)
-				if((Type>=5&&Type<=11 )&& itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize)
+				if((Type>=5&&Type<=11 )&& itemstack.getItem() == Items.glass_bottle && liquidLevel >9*itemstack.stackSize)
 				{
 					liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
-					itemstack.itemID = alcohols[Type-5];
+					itemstack = new ItemStack(alcohols[Type-5]);
 					updateGui();
 				}
 			}

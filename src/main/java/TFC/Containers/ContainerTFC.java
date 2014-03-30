@@ -36,15 +36,6 @@ public class ContainerTFC extends Container
 		return null;
 	}
 
-	/**
-	 * Used by containers that represent items and need to load an item from nbt
-	 * @return 
-	 */
-	public ItemStack loadContents(int slot) 
-	{
-		return null;
-	}
-
 	@Override
 	public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer)
 	{

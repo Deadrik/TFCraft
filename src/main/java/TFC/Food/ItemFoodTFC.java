@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -58,7 +59,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	}
 
 	@Override
-	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		list.add(createTag(new ItemStack(this, 1), Global.FOOD_MAX_WEIGHT));
 	}
