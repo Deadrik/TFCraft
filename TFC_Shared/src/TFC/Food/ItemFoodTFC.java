@@ -13,6 +13,7 @@ import TFC.TFCItems;
 import TFC.API.IFood;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
+import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -49,10 +50,17 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		foodgroup = fg;
 		TFCItems.FoodList.add(this);
 	}
+
 	public ItemFoodTFC setDecayRate(float f)
 	{
 		this.decayRate = f;
 		return this;
+	}
+
+	@Override
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
+	{
+		list.add(createTag(new ItemStack(this, 1), Global.FOOD_MAX_WEIGHT));
 	}
 
 	public static void addHeatInformation(ItemStack is, List arraylist)
