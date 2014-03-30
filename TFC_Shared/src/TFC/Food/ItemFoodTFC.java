@@ -57,6 +57,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		return this;
 	}
 
+	public float getDecayRate()
+	{
+		return decayRate*(TFC_Time.getYearRatio(96));
+	}
+
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{

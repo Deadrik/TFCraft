@@ -916,8 +916,6 @@ public class TFC_Core
 		if(nbt == null || !nbt.hasKey("foodWeight") || !nbt.hasKey("foodDecay"))
 			return;
 
-
-
 		//if the tick timer is up then we cause decay.
 		if(nbt.getInteger("decayTimer") < TFC_Time.getTotalHours())
 		{
@@ -925,8 +923,8 @@ public class TFC_Core
 			float thisDecayRate = 1.0f;
 			//Get the base food decay rate
 			if(is.getItem() instanceof ItemFoodTFC)
-				thisDecayRate = ((ItemFoodTFC)is.getItem()).decayRate;
-			//check if the food as a specially applied decay rate in its nbt for some reason
+				thisDecayRate = ((ItemFoodTFC)is.getItem()).getDecayRate();
+			//check if the food has a specially applied decay rate in its nbt for some reason
 			if(nbt.hasKey("decayRate"))
 				thisDecayRate = nbt.getFloat("decayRate");
 			//if the food is salted then we cut the decay rate in half

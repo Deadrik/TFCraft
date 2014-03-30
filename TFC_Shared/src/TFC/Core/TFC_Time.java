@@ -50,12 +50,21 @@ public class TFC_Time
 	public static final long hourLength = 1000;
 	public static final int dayLength = 24000;
 
-	public static float timeRatio = TFCOptions.yearLength/360f;
+	/**
+	 * This is the year length ratio for use when your numbers are based on a 360 day year and 
+	 * you want to bring it in line with the current year length.
+	 */
+	public static float timeRatio360 = TFCOptions.yearLength/360f;
+	/**
+	 * This is the year length ratio for use when your numbers are based on a 96 day year and 
+	 * you want to bring it in line with the current year length.
+	 */
+	public static float timeRatio96 = TFCOptions.yearLength/96f;
+
 	public static int daysInYear = TFCOptions.yearLength;
 	public static int daysInMonth = daysInYear/12;
 	public static long ticksInYear = daysInYear * dayLength;
-	public static long ticksInMonth = daysInMonth * dayLength;
-
+	public static long ticksInMonth = daysInMonth * dayLength;	
 
 	public static void UpdateTime(World world)
 	{
@@ -266,9 +275,9 @@ public class TFC_Time
 		return month - 1;
 	}
 
-	public static float getYearRatio()
+	public static float getYearRatio(float expectedDays)
 	{
-		return daysInYear / 360f;
+		return expectedDays / daysInYear;
 	}
 
 	public static int getMonthsSinceDay(int totalDay)
