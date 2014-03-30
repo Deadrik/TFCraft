@@ -72,15 +72,24 @@ public class ContainerVessel extends ContainerTFC {
 		this.doItemSaving = true;
 	}
 
+	@Override
+	public void reloadContainer()
+	{
+		if(!world.isRemote)
+		{
+			loadBagInventory();
+		}
+	}
+
 	public void loadBagInventory()
 	{
 		if(player.inventory.getStackInSlot(bagsSlotNum) != null && 
 				player.inventory.getStackInSlot(bagsSlotNum).hasTagCompound())
 		{
 			NBTTagList nbttaglist = player.inventory.getStackInSlot(bagsSlotNum).getTagCompound().getTagList("Items");
-			this.isLoading = true;
 			for(int i = 0; i < nbttaglist.tagCount(); i++)
 			{
+				this.isLoading = true;
 				NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
 				byte byte0 = nbttagcompound1.getByte("Slot");
 				if(byte0 >= 0 && byte0 < 4)
@@ -143,8 +152,15 @@ public class ContainerVessel extends ContainerTFC {
 			NBTTagList nbttaglist = player.inventory.getStackInSlot(bagsSlotNum).getTagCompound().getTagList("Items");
 			if(nbttaglist != null)
 			{
-				NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(slot);
-				return ItemStack.loadItemStackFromNBT(nbttagcompound1);
+				for(int i = 0; i < nbttaglist.tagCount(); i++)
+				{
+					NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+					byte byte0 = nbttagcompound1.getByte("Slot");
+					if(byte0 == slot)
+					{
+						return ItemStack.loadItemStackFromNBT(nbttagcompound1);
+					}
+				}
 			}
 		}
 		return null;

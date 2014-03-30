@@ -16,6 +16,7 @@ import TFC.API.ISmeltable;
 import TFC.API.Metal;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
@@ -23,6 +24,7 @@ import TFC.Core.Metal.Alloy;
 import TFC.Core.Metal.AlloyManager;
 import TFC.Core.Metal.AlloyMetal;
 import TFC.Core.Util.StringUtil;
+import TFC.Food.ItemFoodTFC;
 import TFC.Items.ItemOre;
 import TFC.Items.ItemOreSmall;
 
@@ -330,7 +332,19 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					if(byte0 >= 0 && byte0 < 4)
 					{
 						ItemStack itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-						arraylist.add(EnumChatFormatting.GOLD + "" + itemstack.stackSize + "x " + itemstack.getItem().getItemDisplayName(itemstack));
+						if(itemstack.getItem() instanceof ItemFoodTFC)
+						{
+							float decay = itemstack.getTagCompound().getFloat("foodDecay");
+							float weight = itemstack.getTagCompound().getFloat("foodWeight");
+
+							String ds = " " +EnumChatFormatting.DARK_GRAY + Helper.roundNumber(decay/weight*100, 10)+"%";
+							if (decay <= 0)
+								ds = "";
+
+							arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.getItem().getItemDisplayName(itemstack) + " " + EnumChatFormatting.WHITE+weight + ds);
+						}
+						else
+							arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.stackSize + "x " + itemstack.getItem().getItemDisplayName(itemstack));
 					}
 				}
 			}

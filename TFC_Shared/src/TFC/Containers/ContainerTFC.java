@@ -163,17 +163,7 @@ public class ContainerTFC extends Container
 	public void detectAndSendChanges()
 	{
 		boolean _shouldSave = false;
-
-		/*for (int i = 0; i < this.inventorySlots.size()-36; ++i)
-		{
-			ItemStack itemstack = this.loadContents(i);
-			ItemStack itemstack1 = (ItemStack)this.inventoryItemStacks.get(i);//the real invisible item
-			if (!areItemStacksEqual(itemstack1, itemstack))
-			{
-				inventoryItemStacks.set(i, itemstack);
-				((Slot)this.inventorySlots.get(i)).inventory.setInventorySlotContents(i,itemstack);
-			}
-		}*/
+		boolean _shouldReload = false;
 
 		for (int i = 0; i < this.inventorySlots.size(); ++i)
 		{
@@ -209,8 +199,33 @@ public class ContainerTFC extends Container
 				}
 			}
 		}
+
+		for (int i = 0; i < this.inventorySlots.size()-36; ++i)
+		{
+			ItemStack itemstack = this.loadContents(i);
+			ItemStack itemstack1 = (ItemStack)this.inventoryItemStacks.get(i);//the real invisible item
+			if (!areItemStacksEqual(itemstack1, itemstack) && player.inventory.getItemStack() == null)
+			{
+				_shouldReload = true;
+			}
+		}
+
+		if(_shouldReload)
+		{
+			reloadContainer();
+		}
+
 		this.isLoading = false;
 	}	
+
+	/**
+	 * This is only used if the container should be reloaded due to some change in information 
+	 * that can't be updated in some other way.
+	 */
+	public void reloadContainer()
+	{
+
+	}
 
 	public static boolean areItemStacksEqual(ItemStack is1, ItemStack is2)
 	{
