@@ -243,9 +243,33 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				if(i != null && i.stackSize == 0)
 					i = null;
 			}
+			saveContents(is, bag);
 		}
 
 		return true;
+	}
+
+	public void saveContents(ItemStack vessel, ItemStack[] bag) 
+	{
+		NBTTagList nbttaglist = new NBTTagList();
+		for(int i = 0; i < 4; i++)
+		{
+			if(bag[i] != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				bag[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+		if(vessel != null)
+		{
+			if(!vessel.hasTagCompound()) {
+				vessel.setTagCompound(new NBTTagCompound());
+			}
+			vessel.getTagCompound().setTag("Items", nbttaglist);
+
+		}
 	}
 
 	@Override
