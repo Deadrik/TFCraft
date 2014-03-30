@@ -21,7 +21,6 @@ public class GuiBlastFurnace extends GuiContainer
 {
 	private TEBlastFurnace bloomery;
 
-
 	public GuiBlastFurnace(InventoryPlayer inventoryplayer, TEBlastFurnace tileentityforge, World world, int x, int y, int z)
 	{
 		super(new ContainerBlastFurnace(inventoryplayer,tileentityforge, world, x, y, z) );
@@ -38,8 +37,6 @@ public class GuiBlastFurnace extends GuiContainer
 		int w = (width - xSize) / 2;
 		int h = (height - ySize) / 2;
 		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
-		
-		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 
 		int scale = 0;
 
@@ -51,6 +48,8 @@ public class GuiBlastFurnace extends GuiContainer
 
 		scale = bloomery.getCharcoalCountScaled(80);
 		drawTexturedModalRect(w + 40, h + 43, 176, 0, scale+1, 8);
+
+		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 
 		/*scale = bloomery.getOutCountScaled(80);
         drawTexturedModalRect(w + 40, h + 61, 176, 0, scale+1, 8);

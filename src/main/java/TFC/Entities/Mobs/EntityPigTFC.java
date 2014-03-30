@@ -308,10 +308,8 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			this.dropItem(Items.bone, rand.nextInt(4)+2);
 		}
 
-		if (this.isBurning())
-			this.dropItem(Items.cooked_porkchop, (int) (ageMod * this.size_mod * (10+this.rand.nextInt(8))));
-		else
-			this.dropItem(Items.porkchop, (int) (ageMod * this.size_mod * (10+this.rand.nextInt(8))));
+		float foodWeight = ageMod*(this.size_mod * 2400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		TFC_Core.animalDropMeat(this, Items.porkchop, foodWeight);
 	}
 
 	/**

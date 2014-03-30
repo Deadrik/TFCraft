@@ -10,7 +10,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityChest;
-import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Core;
 
 public class TileEntityChestTFC extends TileEntityChest implements IInventory
 {
@@ -199,7 +199,7 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 	{
 		super.updateEntity();
 
-		TFC_ItemHeat.HandleContainerHeatChest(this.worldObj, chestContents, xCoord, yCoord, zCoord);
+		TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
 		this.checkForAdjacentChests();
 		if (++this.ticksSinceSync % 20 * 4 == 0)
 		{

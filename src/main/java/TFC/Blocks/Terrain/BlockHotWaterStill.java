@@ -69,5 +69,6 @@ public class BlockHotWaterStill extends BlockFreshWaterStill
 		TFC_Textures.GuiInventory = registerer.registerIcon(Reference.ModID + ":" + "button_inv");
 		TFC_Textures.GuiSkills = registerer.registerIcon(Reference.ModID + ":" + "button_skills");
 		TFC_Textures.GuiCalendar = registerer.registerIcon(Reference.ModID + ":" + "button_calendar");
+		TFC_Textures.GuiHealth = registerer.registerIcon(Reference.ModID + ":" + "button_health");
 	}
 }

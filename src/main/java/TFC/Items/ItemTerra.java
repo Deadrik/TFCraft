@@ -113,7 +113,7 @@ public class ItemTerra extends Item implements ISize
 	public String getUnlocalizedName(ItemStack itemstack)
 	{
 		if(MetaNames != null && itemstack.getItemDamage() < MetaNames.length)
-			return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
+			return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()] + ".name");
 		return super.getUnlocalizedName(itemstack);
 	}
 
@@ -126,7 +126,7 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
 	{
-		if (is.hasTagCompound())
+		/*if (is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
@@ -134,7 +134,16 @@ public class ItemTerra extends Item implements ISize
 				TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
 			if(is.stackSize <= 0)
 				is = null;
-		}
+		}*/
+	}
+
+	/**
+	 * This is called by inventories in the world to tick things such as temperature and food decay. Override this and 
+	 * return true if you want the item to be handled differently than the standard code. True will stop he standard TFC code from running.
+	 */
+	public boolean onUpdate(ItemStack is, World world, int x, int y, int z)
+	{
+		return false;
 	}
 
 	public static void addSizeInformation(ItemStack object, List arraylist)

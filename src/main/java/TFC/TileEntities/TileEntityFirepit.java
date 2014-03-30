@@ -713,8 +713,6 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 			FuelStack[2] = fireItemStacks[4];
 			FuelStack[3] = fireItemStacks[5];
 
-			TFC_ItemHeat.HandleContainerHeat(this.worldObj, FuelStack, xCoord,yCoord,zCoord);
-
 			//Now we cook the input item
 			CookItemNew();
 			//push the input fuel down the stack
@@ -788,7 +786,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 					fireItemStacks[8].stackSize = 1;
 
 			if(fuelTimeLeft <= 0)
-				TFC_ItemHeat.HandleContainerHeat(this.worldObj, fireItemStacks, xCoord,yCoord,zCoord);
+				TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 		}
 	}
 
@@ -829,16 +827,16 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 		
 		Random random = new Random();
 		int sbkey = random.nextInt(topMap.size());
-		int[] sb = (int[])topMap.get(sbkey);
+		int[] sb = topMap.get(sbkey);
 		
 		int x = sb[0];
 		int y = sb[1];
 		int z = sb[2];
 		if(worldObj.isAirBlock(x, y, z))
 		{
-			float f = (float) x + 0.5F;
+			float f = x + 0.5F;
 			float f1 = y + 0.1F + random.nextFloat() * 6F / 16F;
-			float f2 = (float) z + 0.5F;
+			float f2 = z + 0.5F;
 			float f4 = random.nextFloat() * 0.6F;
 			float f5 = random.nextFloat() * -0.6F;
 			worldObj.spawnParticle("smoke", f+f4 - 0.3F, f1, f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);

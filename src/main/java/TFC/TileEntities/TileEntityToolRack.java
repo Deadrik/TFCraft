@@ -12,7 +12,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Core;
 
 public class TileEntityToolRack extends TileEntity implements IInventory
 {
@@ -159,7 +159,7 @@ public class TileEntityToolRack extends TileEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, (int)xCoord,(int)yCoord,(int)zCoord);
+		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 	}
 
 	@Override

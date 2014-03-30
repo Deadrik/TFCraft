@@ -173,9 +173,9 @@ public class TFC_Time
 		return getTotalMonths() / 12;
 	}
 
-	public static long getHour()
+	public static int getHour()
 	{
-		long h = (time - ((time / dayLength)*dayLength))/hourLength;
+		int h = (int)((time - ((time / dayLength)*dayLength))/hourLength);
 		h -= 6;
 		if(h < 0) {
 			h = 23 + h;

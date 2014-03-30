@@ -18,6 +18,7 @@ import TFC.API.SkillsManager;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
 import TFC.Commands.CommandTime;
+import TFC.Commands.DebugModeCommand;
 import TFC.Commands.GSPVisualCommand;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetBodyTemp;
@@ -42,6 +43,7 @@ import TFC.Handlers.EnteringChunkHandler;
 import TFC.Handlers.EntityDamageHandler;
 import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.EntitySpawnHandler;
+import TFC.Handlers.PlayerSkillEventHandler;
 import TFC.Handlers.Network.PacketPipeline;
 import TFC.WorldGen.TFCProvider;
 import TFC.WorldGen.TFCProviderHell;
@@ -110,7 +112,9 @@ public class TerraFirmaCraft
 		SkillsManager.instance.registerSkill(Global.SKILL_TOOLSMITH);
 		SkillsManager.instance.registerSkill(Global.SKILL_ARMORSMITH);
 		SkillsManager.instance.registerSkill(Global.SKILL_WEAPONSMITH);
-		
+		SkillsManager.instance.registerSkill(Global.SKILL_AGRICULTURE);
+		SkillsManager.instance.registerSkill(Global.SKILL_COOKING);
+
 		//Load Items
 		TFCItems.Setup();
 
@@ -179,6 +183,7 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
 		// Register Anvil Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
+		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
 		//Register our player tracker
 		MinecraftForge.EVENT_BUS.register(new PlayerTracker());
 		// Register all the render stuff for the client
@@ -223,7 +228,7 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new StripChunkCommand());
 		evt.registerServerCommand(new GSPVisualCommand());
 		evt.registerServerCommand(new RemoveAreaCommand());
-		//CommandHandler ch = (CommandHandler) evt.getServer().getCommandManager();
+		evt.registerServerCommand(new DebugModeCommand());
 		evt.registerServerCommand(new CommandTime());
 	}
 

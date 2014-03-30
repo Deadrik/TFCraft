@@ -81,7 +81,7 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 		HornR1 = new ModelRenderer(modelArmorChestplate,40,0);
 		HornR1.addBox(-6,-1.5f,-1.5f,3,3,6);
 		HornL1 = new ModelRenderer(modelArmorChestplate,40,0);
-		HornL1.addBox(6,-1.5f,-1.5f,3,3,6);       
+		HornL1.addBox(6,-1.5f,-1.5f,3,3,6);
 		HornR1.setRotationPoint(-6, -6, 5);
 		HornL1.setRotationPoint(6, -6, 8);
 		HornR1.rotateAngleY=(float)(Math.PI/-2);

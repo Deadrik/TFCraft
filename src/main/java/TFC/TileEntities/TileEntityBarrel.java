@@ -61,7 +61,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 					comp.setFloat("temperature",temp);
 					itemstack.setTagCompound(comp);
 
-					TFC_ItemHeat.HandleItemHeat(itemstack, xCoord, yCoord, zCoord);
+					TFC_ItemHeat.HandleItemHeat(itemstack);
 				}
 			}
 		}

@@ -19,8 +19,8 @@ import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.SkillStats;
+import TFC.Food.ItemFoodTFC;
 import TFC.Food.ItemMeal;
-import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemArrow;
 import TFC.Items.ItemQuiver;
 import TFC.Items.Tools.ItemJavelin;
@@ -38,9 +38,18 @@ public class EntityLivingHandler
 		{
 			EntityPlayer player = (EntityPlayer)entity;
 			//Set Max Health
-			player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getMaxHealth(player));
+			float newMaxHealth = getMaxHealth(player);
+			if(player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue() != getMaxHealth(player))
+			{
+				float h = player.getHealth();
+				float hPercent = (float) (h / player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
+				player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getMaxHealth(player));
+				player.setHealth(newMaxHealth*hPercent);
+			}
 			if(!player.worldObj.isRemote)
 			{
+				//Tick Decay
+				TFC_Core.handleItemTicking(player.inventory, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 				//Handle Food
 				BodyTempStats tempStats = TFC_Core.getBodyTempStats(player);
 				tempStats.onUpdate(player);
@@ -88,14 +97,13 @@ public class EntityLivingHandler
 					if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)
 					{
 						playerclient.guishowFoodRestoreAmount = true;
-						playerclient.guiFoodRestoreAmount = ItemMeal.getMealFilling(player.inventory.getCurrentItem());
+						playerclient.guiFoodRestoreAmount = ((ItemMeal)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
 					}
-					else if(player.inventory.getCurrentItem().getItem() instanceof ItemTerraFood)
+					else if(player.inventory.getCurrentItem().getItem() instanceof ItemFoodTFC)
 					{
 						playerclient.guishowFoodRestoreAmount = true;
-						playerclient.guiFoodRestoreAmount = ((ItemTerraFood)player.inventory.getCurrentItem().getItem()).func_150905_g(null);
-					}
-					else
+						playerclient.guiFoodRestoreAmount = ((ItemFoodTFC)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
+					} else
 						playerclient.guishowFoodRestoreAmount = false;
 				}
 				else
@@ -106,7 +114,8 @@ public class EntityLivingHandler
 
 	public int getMaxHealth(EntityPlayer player)
 	{
-		return Math.min(1000+(player.experienceLevel * TFCOptions.HealthGainRate), TFCOptions.HealthGainCap);
+		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.HealthGainRate), TFCOptions.HealthGainCap) * 
+				TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier());
 	}
 
 	@SubscribeEvent

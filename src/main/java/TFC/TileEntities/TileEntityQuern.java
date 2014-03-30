@@ -15,7 +15,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import TFC.TFCItems;
-import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntityCowTFC;
 
 public class TileEntityQuern extends TileEntity implements IInventory
@@ -30,7 +30,7 @@ public class TileEntityQuern extends TileEntity implements IInventory
 	public void updateEntity()
 	{
 		if(!worldObj.isRemote)
-			TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
+			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 
 		if(shouldRotate)
 		{
@@ -60,6 +60,7 @@ public class TileEntityQuern extends TileEntity implements IInventory
 							processItem(TFCItems.OreChunk, 3, TFCItems.Powder, 5, 4);//hematite
 							processItem(TFCItems.OreChunk, 11, TFCItems.Powder, 7, 4);//limonite
 							processItem(TFCItems.OreChunk, 31, TFCItems.Fertilizer, 0, 4);//Sylvite
+							processItem(TFCItems.LooseRock, 5, TFCItems.Powder, 9, 4);//Sylvite
 
 						if(storage[2] != null)
 							damageStackInSlot(2);

@@ -83,9 +83,7 @@ public class Helper {
 			int var5 = field_modifiers.getInt(var4);
 
 			if ((var5 & 16) != 0)
-			{
 				field_modifiers.setInt(var4, var5 & -17);
-			}
 
 			var4.setAccessible(true);
 			var4.set(var1, var3);
@@ -96,4 +94,9 @@ public class Helper {
 		}
 	}
 
+	public static float roundNumber(float input, float rounding)
+	{
+		int o = (int)(input * rounding);
+		return o / rounding;
+	}
 }

@@ -14,26 +14,30 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import TFC.TFCItems;
+import TFC.API.IFood;
 import TFC.API.IItemFoodBlock;
-import TFC.Core.TFC_ItemHeat;
-import TFC.Food.ItemTerraFood;
+import TFC.API.Constant.Global;
+import TFC.API.Util.Helper;
+import TFC.Core.TFC_Core;
+import TFC.Food.ItemFoodTFC;
 
 public class TileEntityFoodPrep extends TileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[6];
+	private float[] weights = new float[]{10,4,4,2};
 
 	@Override
 	public void updateEntity()
 	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
+		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 	}
 	
 	public int getFoodIdFromItemStack(ItemStack is)
 	{
 		if(is != null)
 		{
-			if(is.getItem() instanceof ItemTerraFood)
-				return ((ItemTerraFood)is.getItem()).foodID;
+			if(is.getItem() instanceof IFood)
+				return ((IFood)is.getItem()).getFoodID();
 			else if(is.getItem() instanceof IItemFoodBlock)
 				return ((IItemFoodBlock)is.getItem()).getFoodId(is);
 		}
@@ -44,73 +48,170 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 	{
 		if(is != null)
 		{
-			if(is.getItem() instanceof ItemTerraFood)
-				return ((ItemTerraFood)is.getItem()).foodID;
+			if(is.getItem() instanceof IFood)
+				return ((IFood)is.getItem()).getFoodID();
 			else if(is.getItem() instanceof IItemFoodBlock)
 				return ((IItemFoodBlock)is.getItem()).getHealAmount(is);
 		}
 		return 1;
 	}
 
-	public void actionCreate()
+	public void actionCreate(EntityPlayer player)
 	{
 		if(!worldObj.isRemote)
 		{
 			if(storage[4] == null && storage[5].getItem() == Items.bowl)
 			{
-				int count = (storage[0] != null ? 1 : 0) + 
-						(storage[1] != null ? 1 : 0) + 
-						(storage[2] != null ? 1 : 0) + 
-						(storage[3] != null ? 1 : 0);
-				int id1 = getFoodIdFromItemStack(storage[0]);
-				int id2 = getFoodIdFromItemStack(storage[1]);
-				int id3 = getFoodIdFromItemStack(storage[2]);
-				int id4 = getFoodIdFromItemStack(storage[3]);
-
-				if((id1 == id2 || id1 == id3 || id1 == id4) || (id2 == id3 || id2 == id4) || id3 == id4)
-					return;
-
-				int seed = id1 * id2 * id3 * id4;
-				int fill1 = getHealAmountFromItemStack(storage[0]);
-				int fill2 = getHealAmountFromItemStack(storage[1]);
-				int fill3 = getHealAmountFromItemStack(storage[2]);
-				int fill4 = getHealAmountFromItemStack(storage[3]);
-				int filling = Math.min(fill1 + fill2 + fill3 + fill4, 100);
-
-				if(count >= 2 && filling > 50)
+				if(getMealWeight() >= 14)
 				{
-					decrStackSize(0,1);
-					decrStackSize(1,1);
-					decrStackSize(2,1);
-					decrStackSize(3,1);
-					decrStackSize(5,1);
-					Random R = new Random(this.worldObj.getSeed()+seed);
-					if(R.nextInt(5) == 0)
+					NBTTagCompound nbt = new NBTTagCompound();
+					ItemStack is = new ItemStack(TFCItems.MealGeneric, 1);
+					Random R = new Random(getFoodSeed());
+
+					int count = -2;
+					if(getStackInSlot(0) != null) 
 					{
-						byte power = (byte)R.nextInt(25*count);
-						storage[4] = new ItemStack(TFCItems.MealGeneric, 1);
-						//storage[4] = new ItemStack(TFCItems.Meals[R.nextInt(TFCItems.Meals.length)], 1);
-						NBTTagCompound nbt = new NBTTagCompound();
-						//nbt.setByte("effectpower", power);
-						nbt.setByte("energy", (byte) R.nextInt(100));
-						nbt.setByte("filling", (byte) Math.min(filling, 100));
-						storage[4].setTagCompound(nbt);
+						count++;
+						nbt.setString("FG0", getStackInSlot(0).getItem().getUnlocalizedName(getStackInSlot(0)));
 					}
-					else
+					if(getStackInSlot(1) != null) 
 					{
-						storage[4] = new ItemStack(TFCItems.MealGeneric, 1);
-						NBTTagCompound nbt = new NBTTagCompound();
-						nbt.setByte("energy", (byte) R.nextInt(100));
-						nbt.setByte("filling", (byte) Math.min(filling, 100));
-						storage[4].setTagCompound(nbt);
+						count++;
+						nbt.setString("FG1", getStackInSlot(1).getItem().getUnlocalizedName(getStackInSlot(1)));
 					}
+					if(getStackInSlot(2) != null) 
+					{
+						count++;
+						nbt.setString("FG2", getStackInSlot(2).getItem().getUnlocalizedName(getStackInSlot(2)));
+					}
+					if(getStackInSlot(3) != null) 
+					{
+						count++;
+						nbt.setString("FG3", getStackInSlot(3).getItem().getUnlocalizedName(getStackInSlot(3)));
+					}
+
+					float mult = 0.15f + 0.1f * count;
+
+					//set the icon for this meal
+					is.setItemDamage(R.nextInt(11));
+					if(R.nextFloat() < mult)
+					{
+						float s = R.nextFloat()*0.5f+(TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_COOKING)*0.5f);
+						nbt.setFloat("satisfaction", s);
+					}
+					nbt.setFloat("foodWeight", Helper.roundNumber(getMealWeight(), 10));
+					nbt.setFloat("foodDecay", 0);
+
+					is.setTagCompound(nbt);
+
+					this.setInventorySlotContents(4, is);
+
+					consumeFoodWeight();
 				}
 			}
+			else
+			{
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+				//TODO TerraFirmaCraft.proxy.sendCustomPacket(createMealPacket());
+			}
 		}
-		else
+	}
+
+	public boolean areComponentsCorrect()
+	{
+		int f0 = -1;
+		int f1 = -1;
+		int f2 = -1;
+		int f3 = -1;
+
+		//First we want to test the foodgroups to see if they match
+		if(getStackInSlot(0) != null)
+			f0 = ((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodGroup().ordinal();
+		if(getStackInSlot(1) != null)
+			f1 = ((ItemFoodTFC)getStackInSlot(1).getItem()).getFoodGroup().ordinal();
+		if(getStackInSlot(2) != null)
+			f2 = ((ItemFoodTFC)getStackInSlot(2).getItem()).getFoodGroup().ordinal();
+		if(getStackInSlot(3) != null)
+			f3 = ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodGroup().ordinal();
+
+		if(f0 == -1 || f0==f1 || f0==f2 || f0==f3)
+			return false;
+		else if(f1 == -1 || f1==f3)
+			return false;
+		else if(f2 != -1 && f2==f3)
+			return false;
+
+		//Now we test the food types to make sure that they are different
+		if(getStackInSlot(0) != null)
+			f0 = ((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodID();
+		if(getStackInSlot(1) != null)
+			f1 = ((ItemFoodTFC)getStackInSlot(1).getItem()).getFoodID();
+		if(getStackInSlot(2) != null)
+			f2 = ((ItemFoodTFC)getStackInSlot(2).getItem()).getFoodID();
+		if(getStackInSlot(3) != null)
+			f3 = ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodID();
+
+		if(f0 == -1 || f0==f1 || f0==f2 || f0==f3)
+			return false;
+		else if(f1 == -1 || f1==f2 || f1==f3)
+			return false;
+		else if(f2 != -1 && f2==f3)
+			return false;
+
+		//Next we make sure that each slot has enough food material
+		if(getStackInSlot(0) == null || ((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodWeight(getStackInSlot(0)) < 10)
+			return false;
+		if(getStackInSlot(1) == null || ((ItemFoodTFC)getStackInSlot(1).getItem()).getFoodWeight(getStackInSlot(1)) < 4)
+			return false;
+		if(getStackInSlot(2) != null && ((ItemFoodTFC)getStackInSlot(2).getItem()).getFoodWeight(getStackInSlot(2)) < 4)
+			return false;
+		if(getStackInSlot(3) != null && ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodWeight(getStackInSlot(3)) < 2)
+			return false;
+
+		if(storage[4] != null && storage[5].getItem() != Items.bowl)
+			return false;
+		return true;
+	}
+
+	private long getFoodSeed()
+	{
+		int seed = 0;
+
+		for(int i = 0; i < 4; i++)
 		{
-			//TODO TerraFirmaCraft.proxy.sendCustomPacket(createMealPacket());
+			ItemStack is = getStackInSlot(i);
+			if(is != null)
+				seed += ((ItemFoodTFC)is.getItem()).getFoodID();
 		}
+
+		return seed + worldObj.getSeed();
+	}
+	public float getMealWeight()
+	{
+		float w = 0;
+		for(int i = 0; i < 4; i++)
+		{
+			ItemStack is = getStackInSlot(i);
+			if(is != null && ((ItemFoodTFC)is.getItem()).getFoodWeight(is) >= weights[i])
+				w += weights[i];
+		}
+		return w;
+	}
+
+	public float consumeFoodWeight()
+	{
+		float w = 0;
+		for(int i = 0; i < 4; i++)
+		{
+			ItemStack is = getStackInSlot(i);
+			if(is != null)
+			{
+				is.getTagCompound().setFloat("foodWeight", ((ItemFoodTFC)is.getItem()).getFoodWeight(is) - weights[i]);
+				if(((ItemFoodTFC)is.getItem()).getFoodWeight(is) <= 0)
+					is.stackSize = 0;
+			}
+		}
+		return w;
 	}
 
 	@Override
@@ -338,6 +439,7 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 //			dos.writeInt(xCoord);
 //			dos.writeInt(yCoord);
 //			dos.writeInt(zCoord);
+//			dos.writeUTF(Minecraft.getMinecraft().thePlayer.username);
 //		} catch (IOException e) {
 //		}
 //
@@ -346,8 +448,10 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 //	@Override
 //	public void handleDataPacket(DataInputStream inStream) throws IOException 
 //	{
-//		handleInitPacket(inStream);
-//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//		String user = inStream.readUTF();
+//		EntityPlayer player = worldObj.getPlayerEntityByName(user);
+//		TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_COOKING, 1);
+//		actionCreate(player);
 //	}
 //
 //	@Override

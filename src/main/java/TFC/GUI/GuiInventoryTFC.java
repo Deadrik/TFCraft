@@ -27,8 +27,8 @@ import TFC.Core.TFC_Textures;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Food.TFCPotion;
 
-public class GuiInventoryTFC  extends InventoryEffectRenderer
-{	
+public class GuiInventoryTFC extends InventoryEffectRenderer
+{
 	private float xSize_lo;
 	private float ySize_lo;
 	private boolean hasEffect;
@@ -37,7 +37,7 @@ public class GuiInventoryTFC  extends InventoryEffectRenderer
 	protected static final ResourceLocation InventoryEffectsTex = new ResourceLocation(Reference.ModID+":textures/gui/inv_effects.png");
 	protected EntityPlayer player;
 
-	public GuiInventoryTFC(EntityPlayer player) 
+	public GuiInventoryTFC(EntityPlayer player)
 	{
 		super(player.inventoryContainer);
 		this.allowUserInput = true;
@@ -62,6 +62,7 @@ public class GuiInventoryTFC  extends InventoryEffectRenderer
 		func_110423_a(k + 51, l + 75, 30, k + 51 - this.xSize_lo, l + 75 - 50 - this.ySize_lo, this.mc.thePlayer);
 
 		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	public static void func_110423_a(int par0, int par1, int par2, float par3, float par4, EntityLivingBase par5EntityLivingBase)
@@ -100,7 +101,7 @@ public class GuiInventoryTFC  extends InventoryEffectRenderer
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
 	}
-	
+
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
@@ -121,7 +122,7 @@ public class GuiInventoryTFC  extends InventoryEffectRenderer
 	public void initGui()
 	{
 		super.buttonList.clear();
-		
+
 		if (this.mc.playerController.isInCreativeMode())
 			this.mc.displayGuiScreen(new GuiContainerCreativeTFC(this.mc.thePlayer));
 		else
@@ -141,6 +142,8 @@ public class GuiInventoryTFC  extends InventoryEffectRenderer
 				0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
 		buttonList.add(new GuiInventoryButton(2, guiLeft+176, guiTop + 41, 25, 20, 
 				0, 86, 25, 20, StatCollector.translateToLocal("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
+		buttonList.add(new GuiInventoryButton(3, guiLeft+176, guiTop + 60, 25, 20, 
+				0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Health"), TFC_Textures.GuiHealth));
 	}
 
 	@Override
@@ -150,11 +153,14 @@ public class GuiInventoryTFC  extends InventoryEffectRenderer
 			Minecraft.getMinecraft().displayGuiScreen(new GuiSkills(this.player));
 		else if (guibutton.id == 2)
 			Minecraft.getMinecraft().displayGuiScreen(new GuiCalendar(Minecraft.getMinecraft().thePlayer));
+		else if (guibutton.id == 3)
+			Minecraft.getMinecraft().displayGuiScreen(new GuiHealth(Minecraft.getMinecraft().thePlayer));
 	}
 
 	@Override
 	public void drawScreen(int par1, int par2, float par3)
 	{
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		super.drawScreen(par1, par2, par3);
 		this.xSize_lo = par1;
 		this.ySize_lo = par2;

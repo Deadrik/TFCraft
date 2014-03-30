@@ -291,10 +291,8 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 
 		if(isAdult())
 		{
-			if (this.isBurning())
-				this.dropItem(Items.cooked_chicken, 1);
-			else
-				this.dropItem(Items.chicken, 1);
+			float foodWeight = ageMod*(this.size_mod * 40);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+			TFC_Core.animalDropMeat(this, Items.chicken, foodWeight);
 			this.dropItem(Items.bone, rand.nextInt(2)+1);
 		}
 	}

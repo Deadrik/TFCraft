@@ -8,7 +8,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import TFC.Core.TFC_ItemHeat;
 
 public class TileEntityWorkbench extends TileEntity implements IInventory
 {
@@ -80,7 +79,6 @@ public class TileEntityWorkbench extends TileEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,craftingMatrix, (int)xCoord,(int)yCoord,(int)zCoord);
 	}
 
 	@Override

@@ -47,7 +47,7 @@ public class PlayerTracker
 		{
 			int foodLevel = (event.player.worldObj.rand.nextInt(25) + 35);
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(event.player);
-			foodstats.addStats(foodLevel - foodstats.getFoodLevel(), 0.0f);
+			//foodstats.addStats(foodLevel - foodstats.getFoodLevel(), 0.0f);
 			TFC_Core.setPlayerFoodStats(event.player, foodstats);
 			event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000);
 			event.player.setHealth(1000f * (0.25f + (event.player.worldObj.rand.nextFloat()*0.25f)));

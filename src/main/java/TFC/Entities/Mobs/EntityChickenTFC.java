@@ -120,7 +120,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.dataWatcher.addObject(13, Integer.valueOf(0));
 		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
 		this.dataWatcher.addObject(15, Integer.valueOf(0));
-		
+
 		this.dataWatcher.addObject(24, new Float(1));
 		this.dataWatcher.addObject(25, new Float(1));
 		this.dataWatcher.addObject(26, new Float(1));
@@ -206,7 +206,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			if(!this.worldObj.isRemote){
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
-				
+
 				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
 				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
 				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
@@ -217,7 +217,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
-				
+
 				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
 				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
 				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
@@ -238,14 +238,14 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
-		
+
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
 		nbt.setFloat ("Obedience Modifier", obedience_mod);
 		nbt.setFloat ("Colour Modifier", colour_mod);
 		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
 		nbt.setFloat ("Hardiness Modifier", hard_mod);
-		
+
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setFloat("MateSize", mateSizeMod);
 		nbt.setInteger("Age", getBirthDay());
@@ -262,14 +262,14 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
-		
+
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
 		colour_mod = nbt.getFloat ("Colour Modifier");
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
-		
+
 		hunger = nbt.getInteger ("Hunger");
 		mateSizeMod = nbt.getFloat("MateSize");
 		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
@@ -305,14 +305,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 
 		if(isAdult())
 		{
-			if (this.isBurning())
-			{
-				this.dropItem(Items.cooked_chicken, 1);
-			}
-			else
-			{
-				this.dropItem(Items.chicken, 1);
-			}
+			float foodWeight = ageMod*(this.size_mod * 40);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+			TFC_Core.animalDropMeat(this, Items.chicken, foodWeight);
 			this.dropItem(Items.bone, rand.nextInt(2)+1);
 		}
 	}
@@ -320,9 +314,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public void setGrowingAge(int par1)
 	{
-		if(!TFC_Core.PreventEntityDataUpdate) {
+		if(!TFC_Core.PreventEntityDataUpdate)
 			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
-		}
 	}
 
 	@Override

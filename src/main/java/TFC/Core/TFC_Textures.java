@@ -57,4 +57,5 @@ public class TFC_Textures
 	public static IIcon GuiInventory;
 	public static IIcon GuiSkills;
 	public static IIcon GuiCalendar;
+	public static IIcon GuiHealth;
 }

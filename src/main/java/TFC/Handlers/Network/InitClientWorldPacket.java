@@ -39,7 +39,7 @@ public class InitClientWorldPacket extends AbstractPacket
 	{
 		buffer.writeLong(world.getSeed());
 		buffer.writeInt(TFC_Time.daysInYear);
-		buffer.writeFloat(foodstats.foodLevel);
+		buffer.writeFloat(foodstats.stomachLevel);
 		buffer.writeFloat(foodstats.waterLevel);
 		buffer.writeInt(TFCOptions.HealthGainRate);
 		buffer.writeInt(TFCOptions.HealthGainCap);
@@ -54,7 +54,7 @@ public class InitClientWorldPacket extends AbstractPacket
 	{
 		seed = buffer.readLong();
 		daysInYear = buffer.readInt();
-		foodstats.foodLevel = buffer.readFloat();
+		foodstats.stomachLevel = buffer.readFloat();
 		foodstats.waterLevel = buffer.readFloat();
 		HGRate = buffer.readInt();
 		HGCap = buffer.readInt();
@@ -67,8 +67,6 @@ public class InitClientWorldPacket extends AbstractPacket
 	{
 		TFC_Core.setPlayerFoodStats(player, foodstats);
 		TFC_Time.daysInYear = this.daysInYear;
-		TFC_Core.getPlayerFoodStats(player).foodLevel = foodstats.foodLevel;
-		TFC_Core.getPlayerFoodStats(player).waterLevel = foodstats.waterLevel;
 		TFCOptions.HealthGainRate = HGRate;
 		TFCOptions.HealthGainCap = HGCap;
 		if(craftingTable)

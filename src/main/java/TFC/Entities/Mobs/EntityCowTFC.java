@@ -289,13 +289,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		{
 			this.dropItem(TFCItems.Hide,1);
 			this.dropItem(Items.bone, rand.nextInt(6)+3);
-
-			if (this.isBurning()) {
-				this.dropItem(Items.cooked_beef, (int) (ageMod*this.size_mod *(15+this.rand.nextInt(10))));
-			} else {
-				this.dropItem(Items.beef, (int) (ageMod*this.size_mod *(15+this.rand.nextInt(10))));
-			}
 		}
+		float foodWeight = ageMod*(this.size_mod * 6400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		TFC_Core.animalDropMeat(this, Items.beef, foodWeight);
 	}
 
 	/**

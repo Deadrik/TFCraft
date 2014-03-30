@@ -7,11 +7,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.API.IFood;
 import TFC.Containers.Slots.SlotBlocked;
 import TFC.Containers.Slots.SlotFoodBowl;
 import TFC.Containers.Slots.SlotFoodOnly;
 import TFC.Core.Player.PlayerInventory;
-import TFC.Food.ItemTerraFood;
 import TFC.TileEntities.TileEntityFoodPrep;
 
 public class ContainerFoodPrep extends ContainerTFC
@@ -34,7 +34,7 @@ public class ContainerFoodPrep extends ContainerTFC
 		pile.openInventory();
 		layoutContainer(playerinv, pile, 0, 0);
 		
-		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
+		PlayerInventory.buildInventoryLayout(this, playerinv, -28, 90, false, true);
 	}
 
 	/**
@@ -55,12 +55,12 @@ public class ContainerFoodPrep extends ContainerTFC
 
 	protected void layoutContainer(IInventory playerInventory, IInventory chestInventory, int xSize, int ySize)
 	{
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 53, 24));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 71, 24));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 89, 24));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 107, 24));
-		this.addSlotToContainer(new SlotBlocked(chestInventory, 4, 80, 53));
-		this.addSlotToContainer(new SlotFoodBowl(chestInventory, 5, 53, 53));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 35, 8));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 35, 26));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 35, 44));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 35, 62));
+		this.addSlotToContainer(new SlotBlocked(chestInventory, 4, 79, 35));
+		this.addSlotToContainer(new SlotFoodBowl(chestInventory, 5, 57, 35));
 	}
 
 	public EntityPlayer getPlayer()
@@ -76,7 +76,7 @@ public class ContainerFoodPrep extends ContainerTFC
 
 		if (clickedSlot != null
 				&& clickedSlot.getHasStack()
-				&& (clickedSlot.getStack().getItem() instanceof ItemTerraFood || clickedSlot.getStack().getItem() == Items.bowl))
+				&& (clickedSlot.getStack().getItem() instanceof IFood || clickedSlot.getStack().getItem() == Items.bowl))
 		{
 			ItemStack clickedStack = clickedSlot.getStack();
 			returnedStack = clickedStack.copy();

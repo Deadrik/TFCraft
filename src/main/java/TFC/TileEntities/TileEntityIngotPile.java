@@ -15,7 +15,6 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.Core.TFC_ItemHeat;
 
 public class TileEntityIngotPile extends TileEntity implements IInventory
 {
@@ -165,7 +164,10 @@ public class TileEntityIngotPile extends TileEntity implements IInventory
 	{
 		if(storage[index] != null)
 			if(storage[index].stackSize > 0)
-				storage[index] = new ItemStack(storage[index].getItem(), storage[index].stackSize+count, storage[index].getItemDamage());
+				storage[index] =
+				new ItemStack(storage[index].getItem(),
+						storage[index].stackSize+count,
+						storage[index].getItemDamage());
 		updateNeighbours();
 	}
 
@@ -186,12 +188,6 @@ public class TileEntityIngotPile extends TileEntity implements IInventory
 		storage[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 			itemstack.stackSize = getInventoryStackLimit();
-	}
-
-	@Override
-	public void updateEntity()
-	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
 	}
 
 	public void updateNeighbours()

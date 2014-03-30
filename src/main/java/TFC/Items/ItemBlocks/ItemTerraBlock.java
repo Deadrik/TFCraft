@@ -46,9 +46,8 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	{
 		try
 		{
-			if(MetaNames != null) {
-				return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
-			}
+			if(MetaNames != null)
+				return getUnlocalizedName().concat("." + MetaNames[itemstack.getItemDamage()] + ".name");
 		}
 		catch(Exception ex)
 		{
@@ -66,15 +65,22 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	@Override
 	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
 	{
-		if (!world.isRemote && is.hasTagCompound())
+		/*if (!world.isRemote && is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
 			if(stackTagCompound.hasKey("temperature"))
-			{
 				TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
-			}
-		}
+		}*/
+	}
+
+	/**
+	 * This is called by inventories in the world to tick things such as temperature and food decay. Override this and 
+	 * return true if you want the item to be handled differently than the standard code. True will stop he standard TFC code from running.
+	 */
+	public boolean onUpdate(ItemStack is, World world, int x, int y, int z)
+	{
+		return false;
 	}
 
 	@Override
@@ -98,18 +104,13 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 				float meltTemp = -1;
 				HeatIndex hi = HeatRegistry.getInstance().findMatchingIndex(is);
 				if(hi != null)
-				{
 					meltTemp = hi.meltTemp;
-				}
 
 				if(meltTemp != -1)
-				{
-					if(is.getItem() == Items.stick) {
+					if(is.getItem() == Items.stick)
 						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
-					} else {
+					else
 						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));
-					}
-				}
 			}
 		}
 	}
@@ -123,28 +124,27 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	@Override
 	public int getItemStackLimit()
 	{
-		if(canStack()) {
+		if(canStack())
 			return this.getSize(null).stackSize * getWeight(null).multiplier;
-		} else {
+		else
 			return 1;
-		}
 	}
 
 	@Override
-	public EnumSize getSize(ItemStack is) {
-		// TODO Auto-generated method stub
+	public EnumSize getSize(ItemStack is)
+	{
 		return EnumSize.VERYSMALL;
 	}
 
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public boolean canStack()
+	{
 		return true;
 	}
 
 	@Override
-	public EnumWeight getWeight(ItemStack is) {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight(ItemStack is)
+	{
 		return EnumWeight.HEAVY;
 	}
 

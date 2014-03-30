@@ -57,7 +57,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 		buffer.writeByte(flag);
 		if(flag == 0)
 		{
-			buffer.writeFloat(foodstats.foodLevel);
+			buffer.writeFloat(foodstats.stomachLevel);
 			buffer.writeFloat(foodstats.waterLevel);
 		}
 		else if(flag == 1)
@@ -81,7 +81,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 		flag = buffer.readByte();
 		if(flag == 0)
 		{
-			foodstats.foodLevel = buffer.readFloat();
+			foodstats.stomachLevel = buffer.readFloat();
 			foodstats.waterLevel = buffer.readFloat();
 		}
 		else if(flag == 1)
@@ -104,10 +104,10 @@ public class PlayerUpdatePacket extends AbstractPacket
 	{
 		if(flag == 0)
 		{
-			FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
-			fs.foodLevel = this.foodstats.foodLevel;
-			fs.waterLevel = this.foodstats.waterLevel;
 			TFC_Core.setPlayerFoodStats(player, foodstats);
+			FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
+			fs.stomachLevel = this.foodstats.stomachLevel;
+			fs.waterLevel = this.foodstats.waterLevel;
 		}
 		else if(flag == 1)
 		{

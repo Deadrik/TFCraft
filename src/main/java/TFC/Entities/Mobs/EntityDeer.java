@@ -29,7 +29,7 @@ import TFC.Entities.AI.EntityAIMateTFC;
 import TFC.Entities.AI.EntityAIPanicTFC;
 
 public class EntityDeer extends EntityAnimal implements IAnimal
-{    
+{
 
 	/** The eat grass AI task for this mob. */
 	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
@@ -267,14 +267,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 			this.dropItem(TFCItems.Hide,1);
 			this.dropItem(Items.bone, rand.nextInt(4)+2);
 		}
-		if (this.isBurning())
-		{
-			this.dropItem(TFCItems.venisonCooked, (int) (ageMod*this.size_mod *(6+this.rand.nextInt(5))));
-		}
-		else
-		{
-			this.dropItem(TFCItems.venisonRaw, (int) (ageMod*this.size_mod *(6+this.rand.nextInt(5))));
-		}
+		float foodWeight = ageMod*(this.size_mod * 528);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		TFC_Core.animalDropMeat(this, TFCItems.venisonRaw, foodWeight);
 	}
 
 

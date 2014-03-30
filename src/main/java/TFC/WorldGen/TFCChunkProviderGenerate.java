@@ -25,7 +25,6 @@ import TFC.Entities.Mobs.EntityBear;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Entities.Mobs.EntityDeer;
-import TFC.Entities.Mobs.EntityHorseTFC;
 import TFC.Entities.Mobs.EntityPheasantTFC;
 import TFC.Entities.Mobs.EntityPigTFC;
 import TFC.Entities.Mobs.EntitySheepTFC;

@@ -22,6 +22,7 @@ import TFC.API.Crafting.AnvilRecipe;
 import TFC.API.Crafting.AnvilReq;
 import TFC.API.Enums.RuleEnum;
 import TFC.API.Events.AnvilCraftEvent;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Items.ItemMeltedMetal;
 import TFC.Items.ItemTFCArmor;
@@ -90,7 +91,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 			if(workedRecently > 0)
 				workedRecently--;
 			//Deal with temperatures
-			TFC_ItemHeat.HandleContainerHeat(this.worldObj, anvilItemStacks, xCoord, yCoord, zCoord);
+			TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
 			/**
 			 * Check if the recipe is considered complete
 			 * */

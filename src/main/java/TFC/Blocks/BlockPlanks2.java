@@ -64,12 +64,6 @@ public class BlockPlanks2 extends BlockTerra
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+woodNames[i]+" Plank");
 	}
 
-	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-	{
-		super.harvestBlock(world, entityplayer, i, j, k, l);
-	}
-
 	/**
 	 * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
 	 */
@@ -78,18 +72,15 @@ public class BlockPlanks2 extends BlockTerra
 	{
 		boolean hasHammer = false;
 		for(int i = 0; i < 9;i++)
-		{
 			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
 				hasHammer = true;
-		}
 		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && 
 				entityplayer.getCurrentEquippedItem().getItem() instanceof IToolChisel && 
 				hasHammer && ((IToolChisel)entityplayer.getCurrentEquippedItem().getItem()).canChisel(entityplayer, x, y, z))
 		{
 			MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-			if(objectMouseOver == null) {
+			if(objectMouseOver == null)
 				return false;
-			}
 			int side = objectMouseOver.sideHit;
 
 			Block block = world.getBlock(x, y, z);

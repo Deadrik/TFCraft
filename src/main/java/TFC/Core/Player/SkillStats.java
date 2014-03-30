@@ -8,8 +8,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
+import net.minecraftforge.common.MinecraftForge;
 import TFC.TerraFirmaCraft;
 import TFC.API.SkillsManager;
+import TFC.API.Events.GetSkillMultiplierEvent;
+import TFC.API.Events.PlayerSkillEvent;
 import TFC.Handlers.Network.AbstractPacket;
 import TFC.Handlers.Network.PlayerUpdatePacket;
 import cpw.mods.fml.common.network.ByteBufUtils;
@@ -44,16 +47,19 @@ public class SkillStats
 
 	public void increaseSkill(String skillName, int amount)
 	{
-		if(skillsMap.containsKey(skillName))
+		PlayerSkillEvent.Increase event = new PlayerSkillEvent.Increase(this.player, skillName, amount);
+		if(!MinecraftForge.EVENT_BUS.post(event))
 		{
-			//First get what the skill level currently is
-			int i = (Integer) skillsMap.get(skillName);
-			//Remove the old skill and add the new skill level. 
-			//The put method replaces the old identical entry.
-			skillsMap.put(skillName, i+amount);
+			if(skillsMap.containsKey(skillName))
+			{
+				//First get what the skill level currently is
+				int i = (Integer) skillsMap.get(skillName);
+				//The put method replaces the old identical entry.
+				skillsMap.put(skillName, i+amount);
+			}
+			else
+				skillsMap.put(skillName, amount);
 		}
-		else
-			skillsMap.put(skillName, amount);
 
 		int i = (Integer) skillsMap.get(skillName);
 		if(player instanceof EntityPlayerMP)
@@ -76,7 +82,10 @@ public class SkillStats
 	public float getSkillMultiplier(String skillName)
 	{
 		int skill = getSkill(skillName);
-		return getSkillMult(skill);
+		float mult = getSkillMult(skill);
+		GetSkillMultiplierEvent event = new GetSkillMultiplierEvent(player, skillName, mult);
+		MinecraftForge.EVENT_BUS.post(event);
+		return event.skillResult;
 	}
 
 	public static float getSkillMult(int skill)

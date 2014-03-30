@@ -44,7 +44,7 @@ public class BodyTempStats
 
 		//Player's basic body functions.
 		prevTemperatureLevel = temperatureLevel;
-		if(rand.nextInt(2000-getBaseBodyTempMod(player))<100 && food.foodLevel >= 500)
+		if(rand.nextInt(2000-getBaseBodyTempMod(player))<100 && food.stomachLevel >= 500)
 			temperatureLevel++;
 		if((player.isSprinting() || player.swingProgress != 0)&& rand.nextInt(1000- (getBaseBodyTempMod(player) )/2 ) <100 )
 			temperatureLevel++;

@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.API.TFCOptions;
+import TFC.Core.TFC_Core;
 
 public abstract class BlockTerra extends Block
 {
@@ -52,5 +53,12 @@ public abstract class BlockTerra extends Block
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
 	{
 		onBlockPlacedBy(world, i, j, k, entityliving, null);
+	}
+	
+	@Override
+	public void harvestBlock(World world, EntityPlayer player, int i, int j, int k, int l)
+	{
+		super.harvestBlock(world, player, i, j, k, l);
+		TFC_Core.addPlayerExhaustion(player, 0.001f);
 	}
 }

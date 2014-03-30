@@ -1,7 +1,5 @@
 package TFC.TileEntities;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
@@ -10,7 +8,6 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -20,6 +17,7 @@ import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.TFCBiome;
@@ -136,20 +134,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			fireItemStacks[i].setTagCompound(inputCompound);
 
 			if(inputItemTemps[i] <= ambientTemp)
-			{
-				Collection C = (Collection) fireItemStacks[i].getTagCompound().getTagList("temperature", 10);
-				Iterator itr = C.iterator();
-				while(itr.hasNext())
-				{
-					Object tag = itr.next();
-					if(TFC_ItemHeat.canRemoveTag(tag, "temperature", NBTTagFloat.class))
-					{
-						itr.remove();
-						break;
-					}
-				}
-				//fireItemStacks[i].stackTagCompound = null;
-			}
+				fireItemStacks[i].getTagCompound().removeTag("temperature");
 		}
 		else if(fireItemStacks[i] != null && !fireItemStacks[i].hasTagCompound())
 		{
@@ -461,7 +446,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			FuelStack[7] = fireItemStacks[12];
 			FuelStack[8] = fireItemStacks[13];
 
-			TFC_ItemHeat.HandleContainerHeat(this.worldObj, FuelStack, xCoord,yCoord,zCoord);
+			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 
 			//Now we cook the input item
 			CookItemsNew(0);

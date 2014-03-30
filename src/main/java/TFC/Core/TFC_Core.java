@@ -7,11 +7,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -32,14 +34,18 @@ import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumWoodMaterial;
+import TFC.API.Util.Helper;
 import TFC.Blocks.BlockSlab;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.Player.BodyTempStats;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.SkillStats;
+import TFC.Food.ItemFoodTFC;
 import TFC.Items.ItemOre;
 import TFC.Items.ItemQuiver;
 import TFC.Items.ItemTFCArmor;
+import TFC.Items.ItemTerra;
+import TFC.Items.ItemBlocks.ItemTerraBlock;
 import TFC.TileEntities.TileEntityPartial;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -792,5 +798,178 @@ public class TFC_Core
 	public static void bindTexture(ResourceLocation texture)
 	{
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+	}
+
+	public static boolean isPlayerInDebugMode(EntityPlayer player)
+	{
+		if(player.getEntityData() != null && player.getEntityData().hasKey("inDebugMode"))
+			return true;
+		return false;
+	}
+
+	public static void addPlayerExhaustion(EntityPlayer player, float exhaustion)
+	{
+		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+		foodstats.addFoodExhaustion(exhaustion);
+		foodstats.addWaterExhaustion(exhaustion);
+		TFC_Core.setPlayerFoodStats(player, foodstats);
+	}
+
+	public static float getEnvironmentalDecay(float temp)
+	{
+		return 1+((temp-4f)*0.002f);
+	}
+
+	/**
+	 * This is the default item ticking method for use by all containers. Call this if you don't want
+	 * to do custom environmental decay math.
+	 */
+	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z)
+	{
+		/*Here we calculate the decayRate based on the environment. We do this before everything else
+		 * so that its only done once per inventory
+		 */
+		float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
+		float environmentalDecay = getEnvironmentalDecay(temp);
+		handleItemTicking(iinv, world, x, y, z, environmentalDecay);
+	}
+
+	/**
+	 * This is the default item ticking method for use by all containers. Call this if you don't want
+	 * to do custom environmental decay math.
+	 */
+	public static void handleItemTicking(ItemStack[] iinv, World world, int x, int y, int z)
+	{
+		/*Here we calculate the decayRate based on the environment. We do this before everything else
+		 * so that its only done once per inventory
+		 */
+		float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
+		float environmentalDecay = getEnvironmentalDecay(temp);
+		handleItemTicking(iinv, world, x, y, z, environmentalDecay);
+	}
+
+	/**
+	 * This version of the method assumes that the environmental decay modifier has already been calculated.
+	 */
+	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z, float environmentalDecay)
+	{
+		for(int i = 0; !world.isRemote && i < iinv.getSizeInventory(); i++)
+		{
+			ItemStack is = iinv.getStackInSlot(i);
+			if(is != null && iinv.getStackInSlot(i).stackSize <= 0)
+				iinv.setInventorySlotContents(i, null);
+
+			if(is != null)
+			{
+				if((is.getItem() instanceof ItemTerra && 
+						((ItemTerra)is.getItem()).onUpdate(is, world, x, y, z)))
+				{
+					continue;
+				}
+				else if(is.getItem() instanceof ItemTerraBlock && 
+						((ItemTerraBlock)is.getItem()).onUpdate(is, world, x, y, z))
+				{
+					continue;
+				}
+				tickDecay(is, world, x, y, z, environmentalDecay);
+				TFC_ItemHeat.HandleItemHeat(is);
+			}
+		}
+	}
+
+	/**
+	 * This version of the method assumes that the environmental decay modifier has already been calculated.
+	 */
+	public static void handleItemTicking(ItemStack[] iinv, World world, int x, int y, int z, float environmentalDecay)
+	{
+		for(int i = 0; !world.isRemote && i < iinv.length; i++)
+		{
+			ItemStack is = iinv[i];
+			if(is != null && iinv[i].stackSize <= 0)
+				iinv[i] = null;
+
+			if(is != null)
+			{
+				if((is.getItem() instanceof ItemTerra && 
+						((ItemTerra)is.getItem()).onUpdate(is, world, x, y, z)))
+				{
+					continue;
+				}
+				else if(is.getItem() instanceof ItemTerraBlock && 
+						((ItemTerraBlock)is.getItem()).onUpdate(is, world, x, y, z))
+				{
+					continue;
+				}
+				tickDecay(is, world, x, y, z, environmentalDecay);
+				TFC_ItemHeat.HandleItemHeat(is);
+			}
+		}
+	}
+
+	/**
+	 * @param is
+	 * @param nbt
+	 */
+	private static void tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecay) 
+	{
+		NBTTagCompound nbt = is.getTagCompound();
+		if(nbt == null || !nbt.hasKey("foodWeight") || !nbt.hasKey("foodDecay"))
+			return;
+
+
+
+		//if the tick timer is up then we cause decay.
+		if(nbt.getInteger("decayTimer") < TFC_Time.getTotalHours())
+		{
+			float decay = nbt.getFloat("foodDecay");
+			float thisDecayRate = 1.0f;
+			//Get the base food decay rate
+			if(is.getItem() instanceof ItemFoodTFC)
+				thisDecayRate = ((ItemFoodTFC)is.getItem()).decayRate;
+			//check if the food as a specially applied decay rate in its nbt for some reason
+			if(nbt.hasKey("decayRate"))
+				thisDecayRate = nbt.getFloat("decayRate");
+			//if the food is salted then we cut the decay rate in half
+			if(nbt.hasKey("isSalted"))
+				thisDecayRate *= 0.5f;
+
+			if(decay < 0)
+			{
+				float d = 1 * (thisDecayRate * environmentalDecay);
+				if(decay + d < 0)
+					decay +=  d;
+				else decay = 0;
+			}
+			else if(decay == 0)
+			{
+				decay = nbt.getFloat("foodWeight") * (world.rand.nextFloat() * 0.005f);
+				nbt.setFloat("foodDecay", decay);
+			}
+			else
+			{
+				float d =  ((decay * Global.FOOD_DECAY_RATE) / 24) * (thisDecayRate * environmentalDecay);
+				decay += d;
+			}
+			nbt.setInteger("decayTimer", nbt.getInteger("decayTimer") + 1);
+			nbt.setFloat("foodDecay", decay);
+		}
+
+		if(nbt.getFloat("foodDecay") / nbt.getFloat("foodWeight") > 0.9f)
+			is.stackSize = 0;
+
+		is.setTagCompound(nbt);
+	}
+
+	public static void animalDropMeat(Entity e, Item i, float foodWeight)
+	{
+		while(foodWeight > 0)
+		{
+			float fw = Helper.roundNumber(Math.min(Global.FOOD_MAX_WEIGHT, foodWeight), 10);
+			if(fw<Global.FOOD_MAX_WEIGHT)
+				foodWeight = 0;
+			foodWeight -= fw;
+
+			e.entityDropItem(ItemFoodTFC.createTag(new ItemStack(i, 1), fw), 0);
+		}
 	}
 }

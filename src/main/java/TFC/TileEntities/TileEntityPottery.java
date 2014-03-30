@@ -41,6 +41,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
+		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 		//If there are no logs for burning then we dont need to tick at all
 		if(!worldObj.isRemote && logsForBurn > 0)
 		{

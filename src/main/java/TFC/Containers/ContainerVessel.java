@@ -13,8 +13,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.API.Constant.Global;
 import TFC.Containers.Slots.SlotForShowOnly;
 import TFC.Containers.Slots.SlotSizeSmallVessel;
+import TFC.Food.ItemFoodTFC;
 
 public class ContainerVessel extends ContainerTFC
 {
@@ -77,7 +79,11 @@ public class ContainerVessel extends ContainerTFC
 				NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 				byte byte0 = nbttagcompound1.getByte("Slot");
 				if(byte0 >= 0 && byte0 < 4)
+				{
 					this.containerInv.setInventorySlotContents(byte0, ItemStack.loadItemStackFromNBT(nbttagcompound1));
+					if(this.containerInv.getStackInSlot(byte0).stackSize == 0)
+						this.containerInv.setInventorySlotContents(byte0, null);
+				}
 			}
 		}
 	}
@@ -100,6 +106,12 @@ public class ContainerVessel extends ContainerTFC
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < containerInv.getSizeInventory(); i++)
 		{
+			if(containerInv.getStackInSlot(i) != null && containerInv.getStackInSlot(i).getItem() instanceof ItemFoodTFC)
+			{
+				NBTTagCompound nbt = containerInv.getStackInSlot(i).getTagCompound();
+				if(nbt.getFloat("foodDecay")/Global.FOOD_MAX_WEIGHT > 0.9f)
+					containerInv.setInventorySlotContents(i, null);
+			}
 			if(containerInv.getStackInSlot(i) != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -114,6 +126,22 @@ public class ContainerVessel extends ContainerTFC
 				is.setTagCompound(new NBTTagCompound());
 			is.getTagCompound().setTag("Items", nbttaglist);
 		}
+	}
+
+	@Override
+	public ItemStack loadContents(int slot) 
+	{
+		if(player.inventory.getStackInSlot(bagsSlotNum) != null && 
+				player.inventory.getStackInSlot(bagsSlotNum).hasTagCompound())
+		{
+			NBTTagList nbttaglist = player.inventory.getStackInSlot(bagsSlotNum).getTagCompound().getTagList("Items", 10);
+			if(nbttaglist != null)
+			{
+				NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(slot);
+				return ItemStack.loadItemStackFromNBT(nbttagcompound1);
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -143,12 +171,6 @@ public class ContainerVessel extends ContainerTFC
 		for (row = 0; row < 3; ++row)
 			for (col = 0; col < 9; ++col)
 				this.addSlotToContainer(new Slot(playerInventory, col + row * 9+9, 8 + col * 18, 90 + row * 18));
-	}
-
-	@Override
-	public void detectAndSendChanges()
-	{
-		super.detectAndSendChanges();
 	}
 
 	@Override

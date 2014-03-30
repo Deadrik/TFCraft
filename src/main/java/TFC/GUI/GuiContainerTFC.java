@@ -17,12 +17,11 @@ import TFC.Core.Player.PlayerInventory;
 
 public class GuiContainerTFC extends GuiContainer
 {
-	protected int guiLeft = 0;
-	protected int guiTop = 0;
 	protected boolean drawInventory = true;
-	public GuiContainerTFC(Container par1Container, int xsize, int ysize)
+
+	public GuiContainerTFC(Container Container, int xsize, int ysize)
 	{
-		super(par1Container);
+		super(Container);
 		xSize = xsize;
 		ySize = ysize+PlayerInventory.invYSize;
 	}
@@ -33,9 +32,7 @@ public class GuiContainerTFC extends GuiContainer
 			ySize +=PlayerInventory.invYSize;
 		else if(drawInventory && !b)
 			ySize -=PlayerInventory.invYSize;
-
 		drawInventory = b;
-
 	}
 
 	@Override
@@ -78,7 +75,6 @@ public class GuiContainerTFC extends GuiContainer
 			{
 				String s = (String)iterator.next();
 				int l = font.getStringWidth(s);
-
 				if (l > k)
 					k = l;
 			}
@@ -118,7 +114,6 @@ public class GuiContainerTFC extends GuiContainer
 
 				if (k2 == 0)
 					j1 += 2;
-
 				j1 += 10;
 			}
 

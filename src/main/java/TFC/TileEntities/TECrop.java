@@ -2,11 +2,15 @@ package TFC.TileEntities;
 
 import java.util.Random;
 
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
@@ -20,6 +24,7 @@ public class TECrop extends TileEntity
 	private long growthTimer;//Tracks the time since the plant was planted
 	private long plantedTime;//Tracks the time when the plant was planted
 	private byte sunLevel;
+	public int tendingLevel;
 
 	public TECrop()
 	{
@@ -37,13 +42,12 @@ public class TECrop extends TileEntity
 		if(!worldObj.isRemote)
 		{
 			float timeMultiplier = 360/TFC_Time.daysInYear;
-			sunLevel--;
-
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 			long time = TFC_Time.getTotalTicks();
 
 			if(growthTimer < time && sunLevel > 0)
 			{
+				sunLevel--;
 				if(crop.needsSunlight && (worldObj.getBlockLightValue(xCoord, yCoord, zCoord) > 11 || worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)))
 				{
 					sunLevel++;
@@ -125,6 +129,32 @@ public class TECrop extends TileEntity
 	public float getEstimatedGrowth(CropIndex crop)
 	{
 		return ((float)crop.numGrowthStages/(growthTimer-plantedTime/TFC_Time.dayLength))*1.5f;
+	}
+
+	public void onHarvest(World world, EntityPlayer player)
+	{
+		if(!world.isRemote)
+		{
+			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
+			if(crop != null && growth >= crop.numGrowthStages-1)
+			{
+				ItemStack is1 = crop.getOutput1(this);
+				ItemStack is2 = crop.getOutput2(this);
+
+				if(is1 != null)
+					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is1));
+
+				if(is2 != null)
+					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is2));
+			}
+			else if (crop != null)
+			{
+				ItemStack is = crop.getSeed();
+
+				if(is != null)
+					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is));
+			}
+		}
 	}
 
 	/**

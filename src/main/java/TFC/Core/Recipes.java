@@ -23,6 +23,7 @@ import TFC.API.Crafting.KilnCraftingManager;
 import TFC.API.Crafting.KilnRecipe;
 import TFC.API.Crafting.PlanRecipe;
 import TFC.API.Enums.RuleEnum;
+import TFC.Food.ItemFoodTFC;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes 
@@ -143,7 +144,7 @@ public class Recipes
 				GameRegistry.addRecipe(new ItemStack(Blocks.planks, 1, i), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
 				GameRegistry.addRecipe(new ItemStack(TFCItems.SinglePlank, 3, i), new Object[] {"1", Character.valueOf('1'), new ItemStack(Blocks.planks, 1, i)});
 			}
-			else if((int)(i/16) == 1){
+			else if(i/16 == 1){
 				for(int j = 0; j < Saws.length; j++)
 				{
 					GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 8, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(Saws[j], 1, 32767)});
@@ -261,7 +262,7 @@ public class Recipes
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack, 1, j), new Object[] { "###","   ","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,j)});
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Barrel,1,j), new Object[] { "# #","# #","###",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j)});
 			}
-			else if((int)(j/16)==1){
+			else if(j/16==1){
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand2,1,l), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j),Character.valueOf('%'),
 					new ItemStack(TFCBlocks.Planks2,1,l)});
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack2, 1, l), new Object[] { "###","   ","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,j)});
@@ -306,7 +307,7 @@ public class Recipes
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Fence,6,i), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.Logs,1,i),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,i)});
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.FenceGate,2,i), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank,1,i),Character.valueOf('P'),new ItemStack(TFCBlocks.Planks,1,i)});
 			}
-			else if((int)(i/16) == 1){
+			else if(i/16 == 1){
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Fence2,6,l), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.Logs,1,i),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,i)});
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.FenceGate2,2,l), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank,1,i),Character.valueOf('P'),new ItemStack(TFCBlocks.Planks2,1,l)});
 			}
@@ -1730,11 +1731,11 @@ public class Recipes
 	{
 		for(int j = 0; j < Knives.length; j++)
 		{
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.WheatGrain, 4), new Object[] {new ItemStack(TFCItems.WheatWhole, 1),new ItemStack(Knives[j], 1, 32767)});
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RyeGrain, 4), new Object[] {new ItemStack(TFCItems.RyeWhole, 1),new ItemStack(Knives[j], 1, 32767)});
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BarleyGrain, 4), new Object[] {new ItemStack(TFCItems.BarleyWhole, 1),new ItemStack(Knives[j], 1, 32767)});
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.OatGrain, 4), new Object[] {new ItemStack(TFCItems.OatWhole, 1),new ItemStack(Knives[j], 1, 32767)});
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RiceGrain, 4), new Object[] {new ItemStack(TFCItems.RiceWhole, 1),new ItemStack(Knives[j], 1, 32767)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.WheatGrain, 1), new Object[] {new ItemStack(TFCItems.WheatWhole, 1),new ItemStack(Knives[j], 1, 32767)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RyeGrain, 1), new Object[] {new ItemStack(TFCItems.RyeWhole, 1),new ItemStack(Knives[j], 1, 32767)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BarleyGrain, 1), new Object[] {new ItemStack(TFCItems.BarleyWhole, 1),new ItemStack(Knives[j], 1, 32767)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.OatGrain, 1), new Object[] {new ItemStack(TFCItems.OatWhole, 1),new ItemStack(Knives[j], 1, 32767)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RiceGrain, 1), new Object[] {new ItemStack(TFCItems.RiceWhole, 1),new ItemStack(Knives[j], 1, 32767)});
 		}
 
 
@@ -1770,6 +1771,39 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.OatDough, 2), new Object[] {TFCItems.OatGround,TFCItems.OatGround,TFCItems.RedSteelBucketWater});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RiceDough, 2), new Object[] {TFCItems.RiceGround,TFCItems.RiceGround,TFCItems.RedSteelBucketWater});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CornmealDough, 2), new Object[] {TFCItems.CornmealGround,TFCItems.CornmealGround, TFCItems.RedSteelBucketWater});
+
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.venisonRaw, 1), 0), new Object[] {new ItemStack(TFCItems.venisonRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(Items.beef, 1), 0), new Object[] {new ItemStack(Items.beef, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(Items.chicken, 1), 0), new Object[] {new ItemStack(Items.chicken, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(Items.porkchop, 1), 0), new Object[] {new ItemStack(Items.porkchop, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(Items.fish, 1), 0), new Object[] {new ItemStack(Items.fish, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.CalamariRaw, 1), 0), new Object[] {new ItemStack(TFCItems.CalamariRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.muttonRaw, 1), 0), new Object[] {new ItemStack(TFCItems.muttonRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+
+		for(Item i : TFCItems.FoodList)
+		{
+			addFoodMergeRecipe(i);
+			for(int j = 0; j < Knives.length; j++)
+				GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(i, 1), 0), new Object[] {new ItemStack(i, 1), new ItemStack(Knives[j], 1, 32767)});
+		}
+	}
+
+	public static void addFoodMergeRecipe(Item food)
+	{
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new Object[] {new ItemStack(food, 1), new ItemStack(food, 1)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new Object[] {new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new Object[] {new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), 
+			new ItemStack(food, 1)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new Object[] {new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), 
+			new ItemStack(food, 1), new ItemStack(food, 1)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new Object[] {new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), 
+			new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new Object[] {new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), 
+			new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new Object[] {new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), 
+			new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(food, 1), 0), new Object[] {new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), 
+			new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1), new ItemStack(food, 1)});
 	}
 
 	public static void registerKilnRecipes()

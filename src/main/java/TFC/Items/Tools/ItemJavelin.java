@@ -155,9 +155,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	{
 		ItemStack quiver = player.inventory.armorItemInSlot(0);
 		if(quiver != null && quiver.getItem() instanceof ItemQuiver)
-		{
 			return ((ItemQuiver)quiver.getItem()).consumeAmmo(quiver, EnumAmmo.JAVELIN, shouldConsume);
-		}
 		return null;
 	}
 

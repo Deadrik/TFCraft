@@ -7,6 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import TFC.TFCItems;
 import TFC.API.Events.AnvilCraftEvent;
 import TFC.API.Events.ItemMeltEvent;
+import TFC.Food.ItemFoodTFC;
+import TFC.Food.ItemRawFood;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class AnvilCraftingHandler
@@ -46,6 +48,11 @@ public class AnvilCraftingHandler
 			else if((event.input1.getItem() == TFCItems.Bloom || event.input1.getItem() == TFCItems.RawBloom) && event.result.getItemDamage() <= 100)
 			{
 				event.result.setItemDamage(100-event.input1.getItemDamage());
+			}
+			else if (event.input1.getItem() instanceof ItemRawFood && 
+					event.result != null && event.result.getItem() instanceof ItemFoodTFC)
+			{
+				event.result.stackTagCompound = event.input1.stackTagCompound;
 			}
 		}
 	}

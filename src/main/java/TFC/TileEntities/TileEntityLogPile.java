@@ -15,7 +15,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Core;
 import TFC.Core.Vector3f;
 
 public class TileEntityLogPile extends TileEntity implements IInventory
@@ -194,7 +194,10 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 				else
 					setCharcoalFirepit(null);
 			}
-			storage[index] = new ItemStack(storage[index].getItem(), storage[index].stackSize+count, storage[index].getItemDamage());
+			storage[index] =
+					new ItemStack(storage[index].getItem(),
+							storage[index].stackSize+count,
+							storage[index].getItemDamage());
 		}
 	}
 
@@ -221,7 +224,7 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
+		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 		if(charcoalFirepit != null && !charcoalFirepit.isInactiveCharcoalFirepit())
 		{
 			--fireTimer;

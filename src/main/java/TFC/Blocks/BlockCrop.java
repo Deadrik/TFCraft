@@ -7,7 +7,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -167,9 +166,7 @@ public class BlockCrop extends BlockContainer
 		if(crop != null && !world.isRemote)
 			if(crop.cropId == 4 && te.growth >= 7)
 			{
-				ItemStack is1 = crop.getOutput1(te.growth);
-				if(is1 != null)
-					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
+				te.onHarvest(world, entityplayer);
 				te.growth = 4;
 				world.markBlockForUpdate(i, j, k);
 				//te.broadcastPacketInRange(te.createCropUpdatePacket());
@@ -177,9 +174,7 @@ public class BlockCrop extends BlockContainer
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 5 && te.growth < 6)
 			{
-				ItemStack is1 = crop.getOutput1(te.growth);
-				if(is1 != null)
-					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
+				te.onHarvest(world, entityplayer);
 				te.growth = 3;
 				world.markBlockForUpdate(i, j, k);
 				//te.broadcastPacketInRange(te.createCropUpdatePacket());
@@ -187,9 +182,7 @@ public class BlockCrop extends BlockContainer
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 6)
 			{
-				ItemStack is1 = crop.getOutput2(te.growth);
-				if(is1 != null)
-					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
+				te.onHarvest(world, entityplayer);
 				te.growth = 3;
 				world.markBlockForUpdate(i, j, k);
 				//te.broadcastPacketInRange(te.createCropUpdatePacket());
@@ -207,16 +200,19 @@ public class BlockCrop extends BlockContainer
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer player, int i, int j, int k, int l)
+	public void onBlockHarvested(World world, int i, int j, int k, int l, EntityPlayer player)
 	{
 		ItemStack itemstack = player.inventory.getCurrentItem();
+		TECrop te = (TECrop) world.getTileEntity(i, j, k);
+		//Handle Scythe
 		if(!world.isRemote && itemstack != null && itemstack.getItem() instanceof ItemCustomScythe)
 			for(int x = -1; x < 2; x++)
 				for(int z = -1; z < 2; z++)
 					if(world.getBlock( i+x, j, k+z) == this && player.inventory.getStackInSlot(player.inventory.currentItem) != null)
 					{
 						player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
-						player.addExhaustion(0.045F);
+						TECrop teX = (TECrop) world.getTileEntity(i+x, j, k+z);
+						teX.onHarvest(world, player);
 
 						//breakBlock(world, i+x, j, k+z, l, 0);
 						world.setBlockToAir(i+x, j, k+z);
@@ -229,35 +225,9 @@ public class BlockCrop extends BlockContainer
 						else
 							player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(itemstack.getItem(),ss,dam));
 					}
-	}
-
-	@Override
-	public void breakBlock(World world, int i, int j, int k, Block block, int metadata) 
-	{
-		TECrop te = (TECrop) world.getTileEntity(i, j, k);
-		if(te!= null && !world.isRemote)
-		{
-			CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
-			if(crop != null && te.growth >= crop.numGrowthStages-1)
-			{
-				ItemStack is1 = crop.getOutput1(te.growth);
-				ItemStack is2 = crop.getOutput2(te.growth);
-
-				if(is1 != null)
-					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
-
-				if(is2 != null)
-					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is2));
-			}
-			else if (crop != null)
-			{
-				ItemStack is = crop.getSeed();
-
-				if(is != null)
-					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is));
-			}
-		}
-		super.breakBlock(world, i, j, k, block, metadata);
+		else
+			//Handle Loot Drop
+			te.onHarvest(world, player);
 	}
 
 	/**

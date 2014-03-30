@@ -1,16 +1,10 @@
 package TFC.Core;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.HeatIndex;
@@ -18,7 +12,6 @@ import TFC.API.HeatRaw;
 import TFC.API.HeatRegistry;
 import TFC.API.Metal;
 import TFC.API.TFCOptions;
-import TFC.Items.ItemTerra;
 
 public class TFC_ItemHeat
 {
@@ -322,28 +315,9 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.CornBread, 1)));
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1), 0.85F, 135.5F, new ItemStack(Items.bowl, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageBoost, 1), 0.85F, 135.5F, new ItemStack(Items.bowl, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageResist, 1), 0.85F, 135.5F, new ItemStack(Items.bowl, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDigSpeed, 1), 0.85F, 135.5F, new ItemStack(Items.bowl, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealFireResist, 1), 0.85F, 135.5F, new ItemStack(Items.bowl, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealJump, 1), 0.85F, 135.5F, new ItemStack(Items.bowl, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealMoveSpeed, 1), 0.85F, 135.5F, new ItemStack(Items.bowl, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealNightVision, 1), 0.85F, 135.5F, new ItemStack(Items.bowl, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealWaterBreathing, 1), 0.85F, 135.5F, new ItemStack(Items.bowl, 1)));
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(Items.stick, 1, 32767), 13.0F, 210F, new ItemStack(Blocks.torch, 2)));
 
-	}
-	public static Boolean canRemoveTag(Object tag, String key, Class c)
-	{
-		if(tag.getClass() == c)
-		{
-			if (((NBTBase)c.cast(tag)).func_150283_g(5).equalsIgnoreCase(key))
-			{
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public static String getHeatColor(float temp, float meltTemp)
@@ -352,172 +326,128 @@ public class TFC_ItemHeat
 		if(temp < 80)
 		{
 			phrase = StatCollector.translateToLocal("gui.ItemHeat.Warming");
-			if(temp>(80 * 0.2)) {
+			if(temp>(80 * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>(80 * 0.4)) {
+			if(temp>(80 * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>(80 * 0.6)) {
+			if(temp>(80 * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>(80 * 0.8)) {
+			if(temp>(80 * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 80 && temp < 210)
 		{
 			phrase = StatCollector.translateToLocal("gui.ItemHeat.Hot");
-			if(temp>80+((210-80) * 0.2)) {
+			if(temp>80+((210-80) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>80+((210-80) * 0.4)) {
+			if(temp>80+((210-80) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>80+((210-80) * 0.6)) {
+			if(temp>80+((210-80) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>80+((210-80) * 0.8)) {
+			if(temp>80+((210-80) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 210 &&  temp < 480)
 		{
 			phrase = StatCollector.translateToLocal("gui.ItemHeat.VeryHot");
-			if(temp>210+((480-210) * 0.2)) {
+			if(temp>210+((480-210) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>210+((480-210) * 0.4)) {
+			if(temp>210+((480-210) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>210+((480-210) * 0.6)) {
+			if(temp>210+((480-210) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>210+((480-210) * 0.8)) {
+			if(temp>210+((480-210) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 480 &&  temp < 580)
 		{
 			phrase = "\2474" + StatCollector.translateToLocal("gui.ItemHeat.FaintRed");
-			if(temp>480+((580-480) * 0.2)) {
+			if(temp>480+((580-480) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>480+((580-480) * 0.4)) {
+			if(temp>480+((580-480) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>480+((580-480) * 0.6)) {
+			if(temp>480+((580-480) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>480+((580-480) * 0.8)) {
+			if(temp>480+((580-480) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 580 &&  temp < 730)
 		{
 			phrase = "\2474" + StatCollector.translateToLocal("gui.ItemHeat.DarkRed");
-			if(temp>580+((730-580) * 0.2)) {
+			if(temp>580+((730-580) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>580+((730-580) * 0.4)) {
+			if(temp>580+((730-580) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>580+((730-580) * 0.6)) {
+			if(temp>580+((730-580) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>580+((730-580) * 0.8)) {
+			if(temp>580+((730-580) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 730 &&  temp < 930)
 		{
 			phrase = "\247c" + StatCollector.translateToLocal("gui.ItemHeat.BrightRed");
-			if(temp>730+((930-730) * 0.2)) {
+			if(temp>730+((930-730) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>730+((930-730) * 0.4)) {
+			if(temp>730+((930-730) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>730+((930-730) * 0.6)) {
+			if(temp>730+((930-730) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>730+((930-730) * 0.8)) {
+			if(temp>730+((930-730) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 930 &&  temp < 1100)
 		{
 			phrase = "\2476" + StatCollector.translateToLocal("gui.ItemHeat.Orange");
-			if(temp>930+((1100-930) * 0.2)) {
+			if(temp>930+((1100-930) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>930+((1100-930) * 0.4)) {
+			if(temp>930+((1100-930) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>930+((1100-930) * 0.6)) {
+			if(temp>930+((1100-930) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>930+((1100-930) * 0.8)) {
+			if(temp>930+((1100-930) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 1100 &&  temp < 1300)
 		{
 			phrase = "\247e" + StatCollector.translateToLocal("gui.ItemHeat.Yellow");
-			if(temp>1100+((1300-1100) * 0.2)) {
+			if(temp>1100+((1300-1100) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1100+((1300-1100) * 0.4)) {
+			if(temp>1100+((1300-1100) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1100+((1300-1100) * 0.6)) {
+			if(temp>1100+((1300-1100) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1100+((1300-1100) * 0.8)) {
+			if(temp>1100+((1300-1100) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 1300 &&  temp < 1400)
 		{
 			phrase = "\247e" + StatCollector.translateToLocal("gui.ItemHeat.YellowWhite");
-			if(temp>1300+((1400-1300) * 0.2)) {
+			if(temp>1300+((1400-1300) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1300+((1400-1300) * 0.4)) {
+			if(temp>1300+((1400-1300) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1300+((1400-1300) * 0.6)) {
+			if(temp>1300+((1400-1300) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1300+((1400-1300) * 0.8)) {
+			if(temp>1300+((1400-1300) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 1400 &&  temp < 1500)
 		{
 			phrase = "\247f" + StatCollector.translateToLocal("gui.ItemHeat.White");
-			if(temp>1400+((1500-1400) * 0.2)) {
+			if(temp>1400+((1500-1400) * 0.2))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1400+((1500-1400) * 0.4)) {
+			if(temp>1400+((1500-1400) * 0.4))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1400+((1500-1400) * 0.6)) {
+			if(temp>1400+((1500-1400) * 0.6))
 				phrase = phrase + "\u2605";
-			}
-			if(temp>1400+((1500-1400) * 0.8)) {
+			if(temp>1400+((1500-1400) * 0.8))
 				phrase = phrase + "\u2605";
-			}
 		}
 		else if(temp >= 1500)
-		{
 			phrase = "\247f" + StatCollector.translateToLocal("gui.ItemHeat.BrilliantWhite");
-		}
 
 		if(temp > meltTemp)
-		{
 			phrase = phrase + "\247f - " + StatCollector.translateToLocal("gui.ItemHeat.Liquid");
-		}
 
 		return phrase;
 	}
@@ -527,21 +457,13 @@ public class TFC_ItemHeat
 		if(temp < meltTemp)
 		{
 			if(temp < meltTemp*0.1F)
-			{
 				return StatCollector.translateToLocal("gui.FoodHeat.Cold");
-			}
 			else if(temp >= meltTemp*0.1F && temp < meltTemp*0.4F)
-			{
 				return "\2474" + StatCollector.translateToLocal("gui.FoodHeat.Warm");
-			}
 			else if(temp >= meltTemp*0.4F && temp < meltTemp*0.8F)
-			{
 				return "\2474" + StatCollector.translateToLocal("gui.ItemHeat.Hot");
-			}
 			else
-			{
 				return "\2474" + StatCollector.translateToLocal("gui.ItemHeat.VeryHot");
-			}
 		}
 
 		return StatCollector.translateToLocal("gui.ClearSlot");
@@ -552,20 +474,16 @@ public class TFC_ItemHeat
 		if(temp < meltTemp)
 		{
 			if(temp > 0 && temp < meltTemp*0.8F)
-			{
 				return StatCollector.translateToLocal("gui.Torch.CatchingFire");
-			}
 			else if(temp >= meltTemp*0.8F)
-			{
 				return "\2474" + StatCollector.translateToLocal("gui.Torch.Lit");
-			}
 		}
 
 		return StatCollector.translateToLocal("gui.ClearSlot");
 	}
 
 	public static Boolean getIsLiquid(ItemStack is)
-	{       
+	{
 		HeatRegistry manager = HeatRegistry.getInstance();
 		if(manager != null && is != null)
 		{
@@ -573,37 +491,30 @@ public class TFC_ItemHeat
 			if(hi != null && is.hasTagCompound())
 			{
 				float temp = 0;
-				if(is.getTagCompound().hasKey("temperature")) {
+				if(is.getTagCompound().hasKey("temperature"))
 					temp = is.getTagCompound().getFloat("temperature");
-				}
 				return temp >= hi.meltTemp;
-			} else {
-				return false;
 			}
-		} 
-		else 
-		{
-			return false;
+			else
+				return false;
 		}
+		else
+			return false;
 	}
 
 	public static float getMeltingPoint(ItemStack is)
-	{       
+	{
 		HeatRegistry manager = HeatRegistry.getInstance();
 		if(manager!=null)
 		{
 			HeatIndex hi = manager.findMatchingIndex(is);
 			if(hi != null)
-			{
 				return hi.meltTemp;
-			} else {
+			else
 				return -1;
-			}
-		} 
-		else 
-		{
-			return -1;
 		}
+		else
+			return -1;
 	}
 
 	public static float getMeltingPoint(Metal m)
@@ -618,9 +529,7 @@ public class TFC_ItemHeat
 				return -1;
 		}
 		else
-		{
 			return -1;
-		}
 	}
 
 	public static float getSpecificHeat(ItemStack is)
@@ -633,11 +542,9 @@ public class TFC_ItemHeat
 				return hi.specificHeat;
 			else
 				return 0.7F;
-		} 
-		else 
-		{
-			return 0.7F;
 		}
+		else
+			return 0.7F;
 	}
 
 	public static float getTempDecrease(ItemStack is)
@@ -655,9 +562,7 @@ public class TFC_ItemHeat
 				return 0F;
 		}
 		else
-		{
 			return 0F;
-		}
 	}
 
 	public static float getTempIncrease(ItemStack is, float fireTemp, float fireMaxTemp)
@@ -668,7 +573,12 @@ public class TFC_ItemHeat
 		return ((fireTemp / fireMaxTemp)) * getSpecificHeat(is) + debugBump;
 	}
 
-	public static void HandleItemHeat(ItemStack is, int xCoord, int yCoord, int zCoord)
+	public static void HandleItemHeat(ItemStack is)
+	{
+		HandleItemHeat(is, 1f);
+	}
+
+	public static void HandleItemHeat(ItemStack is, float tempModifier)
 	{
 		if(is.hasTagCompound())
 		{
@@ -678,7 +588,7 @@ public class TFC_ItemHeat
 				float temp = comp.getFloat("temperature");
 				if(temp > 0)
 				{
-					temp -= TFC_ItemHeat.getTempDecrease(is);
+					temp -= TFC_ItemHeat.getTempDecrease(is)*tempModifier;
 					comp.setFloat("temperature",temp);
 				}
 
@@ -691,110 +601,21 @@ public class TFC_ItemHeat
 		}
 	}
 
-	public static void HandleContainerHeat(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
-	{
-		for(int i = 0; i < inventory.length; i++)
-		{
-			if(inventory[i] != null && inventory[i].stackSize <= 0) 
-			{
-				inventory[i].stackSize = 1;
-			}
-
-			if(inventory[i] != null && inventory[i].hasTagCompound() && !(inventory[i].getItem() instanceof ItemTerra))
-			{
-				NBTTagCompound comp = inventory[i].getTagCompound();
-				if(comp.hasKey("temperature"))
-				{
-					float temp = comp.getFloat("temperature");
-					if(temp > 0)
-					{
-						temp -= TFC_ItemHeat.getTempDecrease(inventory[i]);
-						comp.setFloat("temperature",temp);
-					}
-					//inventory[i].setTagCompound(comp);
-					if(temp <= 0)
-					{
-						Collection C = (Collection) comp.getTagList("temperature", 5);
-						Iterator itr = C.iterator();
-						while(itr.hasNext())
-						{
-							Object tag = itr.next();
-							if(canRemoveTag(tag, "temperature", NBTTagFloat.class))
-							{
-								itr.remove();
-								break;
-							}
-						}
-					}
-					if(comp.getTagList("temperature", 5).tagCount() == 0)
-					{
-						inventory[i].stackTagCompound = null;
-					}
-				}
-			}
-		}
-	}
-
-	public static void HandleContainerHeatChest(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
-	{
-		for(int i = 0; i < inventory.length; i++)
-		{
-			if(inventory[i] != null && inventory[i].stackSize <= 0) 
-			{
-				inventory[i].stackSize = 1;
-			}
-
-			if(inventory[i] != null && inventory[i].hasTagCompound())
-			{
-				NBTTagCompound comp = inventory[i].getTagCompound();
-				if(comp.hasKey("temperature"))
-				{
-					float temp = comp.getFloat("temperature");
-					if(temp > 0)
-					{
-						temp -= TFC_ItemHeat.getTempDecrease(inventory[i])*3;
-						comp.setFloat("temperature",temp);
-					}
-					if(temp <= 0)
-					{
-						Collection C = (Collection) comp.getTagList("temperature", 5);
-						Iterator itr = C.iterator();
-						while(itr.hasNext())
-						{
-							Object tag = itr.next();
-							if(canRemoveTag(tag, "temperature", NBTTagFloat.class))
-							{
-								itr.remove();
-								break;
-							}
-						}
-					}
-					if(comp.getTagList("temperature", 5).tagCount() == 0)
-					{
-						inventory[i].stackTagCompound = null;
-					}
-				}
-			}
-		}
-	}
-
 	public static Boolean SetTemperature(ItemStack is, float Temp)
 	{
 		if(is != null)
 		{
 			if(is.hasTagCompound())
-			{
 				is.getTagCompound().setFloat("temperature", Temp);
-			}
-			else 
+			else
 			{
 				NBTTagCompound nbt = new NBTTagCompound();
 				nbt.setFloat("temperature", Temp);
 				is.setTagCompound(nbt);
 			}
-		} else {
-			return false;
 		}
+		else
+			return false;
 
 		return true;
 	}
