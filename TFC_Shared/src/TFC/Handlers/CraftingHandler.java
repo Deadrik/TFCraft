@@ -241,7 +241,9 @@ public class CraftingHandler implements ICraftingHandler
 					{
 						if(itemstack.getTagCompound().hasKey("foodDecay") && itemstack.getTagCompound().getFloat("foodDecay") > 0)
 						{
+							float decay = itemstack.getTagCompound().getFloat("foodDecay");
 							itemstack.getTagCompound().setFloat("foodDecay", 0);
+							itemstack.getTagCompound().setFloat("foodWeight", itemstack.getTagCompound().getFloat("foodWeight")-decay);
 							this.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem().itemID);
 						}
 						else if(itemstack.getTagCompound().hasKey("foodDecay") && itemstack.getTagCompound().getFloat("foodDecay") <= 0)
@@ -265,9 +267,9 @@ public class CraftingHandler implements ICraftingHandler
 					if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1)))
 						player.dropItem(TFCItems.WoodenBucketEmpty.itemID, 1);
 				}
-//				else if(iinventory.getStackInSlot(i).itemID == TFCItems.RedSteelBucketWater.itemID)
-//					if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
-//						player.dropItem(TFCItems.RedSteelBucketEmpty.itemID, 1);
+				//				else if(iinventory.getStackInSlot(i).itemID == TFCItems.RedSteelBucketWater.itemID)
+				//					if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
+				//						player.dropItem(TFCItems.RedSteelBucketEmpty.itemID, 1);
 
 				if(iinventory.getStackInSlot(i).hasTagCompound() && 
 						iinventory.getStackInSlot(i).getTagCompound().hasKey("craftingTag"))
