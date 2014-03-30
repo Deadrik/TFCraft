@@ -250,7 +250,7 @@ public class FoodStatsTFC
 		return this.satisfaction;
 	}
 
-	public void setFoodLevel(int par1)
+	public void setFoodLevel(float par1)
 	{
 		this.stomachLevel = par1;
 	}
