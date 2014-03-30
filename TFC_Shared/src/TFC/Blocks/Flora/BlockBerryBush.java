@@ -17,6 +17,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
+import TFC.API.Util.Helper;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
@@ -209,7 +210,7 @@ public class BlockBerryBush extends BlockTerraContainer
 				te.hasFruit = false;
 				te.dayHarvested = (int) TFC_Time.getTotalDays();
 				te.broadcastPacketInRange(te.createUpdatePacket());
-				dropBlockAsItem_do(world, i, j, k, ItemFoodTFC.createTag(fi.getOutput(), 3+world.rand.nextFloat()*5));
+				dropBlockAsItem_do(world, i, j, k, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(3+world.rand.nextFloat()*5,10)));
 				return true;
 			}
 		}

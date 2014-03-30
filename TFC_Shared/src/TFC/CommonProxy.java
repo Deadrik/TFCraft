@@ -43,7 +43,9 @@ import TFC.Entities.Mobs.EntityZombieTFC;
 import TFC.Handlers.GuiHandler;
 import TFC.TileEntities.TEBerryBush;
 import TFC.TileEntities.TEBlastFurnace;
+import TFC.TileEntities.TECrop;
 import TFC.TileEntities.TECrucible;
+import TFC.TileEntities.TEFruitLeaves;
 import TFC.TileEntities.TENestBox;
 import TFC.TileEntities.TESeaWeed;
 import TFC.TileEntities.TEStand;
@@ -52,7 +54,6 @@ import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityBloom;
 import TFC.TileEntities.TileEntityChestTFC;
-import TFC.TileEntities.TECrop;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityEarlyBloomery;
 import TFC.TileEntities.TileEntityFarmland;
@@ -138,6 +139,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TEStand.class, "Armour Stand");
 		GameRegistry.registerTileEntity(TEBerryBush.class, "Berry Bush");
 		GameRegistry.registerTileEntity(TESeaWeed.class, "Sea Weed");
+		GameRegistry.registerTileEntity(TEFruitLeaves.class, "Fruit Leaves");
 
 		if(b)
 		{
