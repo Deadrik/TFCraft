@@ -19,20 +19,21 @@ import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
+import TFC.Food.ItemFoodTFC;
 
 public class BlockFruitLeaves extends BlockTerra
 {
 	int adjacentTreeBlocks[];
-	
+
 	Icon[] icons = new Icon[16];
 	Icon[] iconsDead = new Icon[16];
 	public static Icon[] iconsFruit = new Icon[16];
 	Icon[] iconsOpaque = new Icon[16];
 	Icon[] iconsDeadOpaque = new Icon[16];
 	public static Icon[] iconsFlowers = new Icon[16];
-	
+
 	int Offset = 0;
-	
+
 	public BlockFruitLeaves(int i, int offset) 
 	{
 		super(i, Material.leaves);
@@ -72,12 +73,12 @@ public class BlockFruitLeaves extends BlockTerra
 			return iconsOpaque[(meta & 7)];
 		}
 	}
-	
+
 	String[] WoodNames = {"Red Apple","Banana","Orange","Green Apple","Lemon","Olive","Cherry","Peach","Plum"};
-	
+
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
+	{
 		for(int i = 0; i < 9; i++)
 		{
 			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves");
@@ -87,7 +88,7 @@ public class BlockFruitLeaves extends BlockTerra
 			iconsFruit[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Fruit");
 			iconsFlowers[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Flowers");
 		}
-    }
+	}
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
@@ -116,9 +117,9 @@ public class BlockFruitLeaves extends BlockTerra
 			FloraManager manager = FloraManager.getInstance();
 			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(blockID, m));
 			FloraIndex fi2 = FloraManager.getInstance().findMatchingIndex(getType(blockID, meta));
-			
+
 			float temp = TFC_Climate.getHeightAdjustedTemp(i, j, k);
-			
+
 			if(fi2 != null)
 			{
 				if(temp >= fi2.minTemp && temp < fi2.maxTemp)
@@ -384,7 +385,7 @@ public class BlockFruitLeaves extends BlockTerra
 			if(fi != null && (fi.inHarvest(TFC_Time.getSeason(k)) || fi.inHarvest(((TFC_Time.getSeason(k)-1)+12)%12) && (meta & 8) == 8))
 			{
 				world.setBlockMetadataWithNotify(i, j, k, meta - 8, 3);
-				dropBlockAsItem_do(world, i, j, k, fi.getOutput());
+				dropBlockAsItem_do(world, i, j, k, ItemFoodTFC.createTag(fi.getOutput(), 5+(world.rand.nextFloat()*20)));
 				return true;
 			}
 		}

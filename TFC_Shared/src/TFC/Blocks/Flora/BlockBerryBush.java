@@ -23,6 +23,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
+import TFC.Food.ItemFoodTFC;
 import TFC.TileEntities.TEBerryBush;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -208,7 +209,7 @@ public class BlockBerryBush extends BlockTerraContainer
 				te.hasFruit = false;
 				te.dayHarvested = (int) TFC_Time.getTotalDays();
 				te.broadcastPacketInRange(te.createUpdatePacket());
-				dropBlockAsItem_do(world, i, j, k, fi.getOutput());
+				dropBlockAsItem_do(world, i, j, k, ItemFoodTFC.createTag(fi.getOutput(), 3+world.rand.nextFloat()*5));
 				return true;
 			}
 		}
@@ -326,10 +327,26 @@ public class BlockBerryBush extends BlockTerraContainer
 	@Override
 	public boolean canBlockStay(World world, int i, int j, int k)
 	{
+		int meta = world.getBlockMetadata(i, j, k);
 		return (world.getFullBlockLightValue(i, j, k) >= 8 || 
 				world.canBlockSeeTheSky(i, j, k)) && 
 				(this.canThisPlantGrowOnThisBlockID(world.getBlockId(i, j - 1, k)) || 
-						isSamePlant(world, i, j-1, k, world.getBlockMetadata(i, j, k)));
+						(isSamePlant(world, i, j-1, k, world.getBlockMetadata(i, j, k)) && (meta == 2 || meta == 4 || meta == 8)));
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack is) 
+	{
+		super.onBlockPlacedBy(world, i, j, k, entityliving, is);
+		if(!canBlockStay(world, i, j, k))
+		{
+			onNeighborBlockChange(world, i, j, k, world.getBlockMetadata(i, j, k));
+		}
+		else
+		{
+			TEBerryBush te = (TEBerryBush)world.getBlockTileEntity(i, j, k);
+			te.dayHarvested = (int)TFC_Time.getTotalDays();
+		}
 	}
 
 	@Override
