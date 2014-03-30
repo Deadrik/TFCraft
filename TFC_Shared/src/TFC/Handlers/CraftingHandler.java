@@ -265,9 +265,9 @@ public class CraftingHandler implements ICraftingHandler
 					if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1)))
 						player.dropItem(TFCItems.WoodenBucketEmpty.itemID, 1);
 				}
-				else if(iinventory.getStackInSlot(i).itemID == TFCItems.RedSteelBucketWater.itemID)
-					if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
-						player.dropItem(TFCItems.RedSteelBucketEmpty.itemID, 1);
+//				else if(iinventory.getStackInSlot(i).itemID == TFCItems.RedSteelBucketWater.itemID)
+//					if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
+//						player.dropItem(TFCItems.RedSteelBucketEmpty.itemID, 1);
 
 				if(iinventory.getStackInSlot(i).hasTagCompound() && 
 						iinventory.getStackInSlot(i).getTagCompound().hasKey("craftingTag"))
