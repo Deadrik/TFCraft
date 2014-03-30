@@ -341,7 +341,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 							if (decay <= 0)
 								ds = "";
 
-							arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.getItem().getItemDisplayName(itemstack) + " " + EnumChatFormatting.WHITE+weight + ds);
+							arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.getItem().getItemDisplayName(itemstack) + " " + EnumChatFormatting.WHITE+weight+"oz" + ds);
 						}
 						else
 							arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.stackSize + "x " + itemstack.getItem().getItemDisplayName(itemstack));
