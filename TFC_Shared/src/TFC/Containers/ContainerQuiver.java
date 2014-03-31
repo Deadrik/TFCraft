@@ -8,8 +8,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
+import TFC.API.Constant.Global;
 import TFC.Containers.Slots.SlotQuiver;
 import TFC.Core.Player.PlayerInventory;
+import TFC.Food.ItemFoodTFC;
 
 public class ContainerQuiver extends ContainerTFC {
 	private World world;
@@ -61,6 +63,53 @@ public class ContainerQuiver extends ContainerTFC {
 				}
 			}
 		}
+	}
+	
+	@Override
+	public void saveContents(ItemStack is) 
+	{
+		NBTTagList nbttaglist = new NBTTagList();
+		for(int i = 0; i < containerInv.getSizeInventory(); i++)
+		{
+			if(containerInv.getStackInSlot(i) != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				containerInv.getStackInSlot(i).writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+		if(is != null)
+		{
+			if(!is.hasTagCompound()) {
+				is.setTagCompound(new NBTTagCompound());
+			}
+			is.getTagCompound().setTag("Items", nbttaglist);
+
+		}
+	}
+
+	@Override
+	public ItemStack loadContents(int slot) 
+	{
+		if(player.inventory.getStackInSlot(bagsSlotNum) != null && 
+				player.inventory.getStackInSlot(bagsSlotNum).hasTagCompound())
+		{
+			NBTTagList nbttaglist = player.inventory.getStackInSlot(bagsSlotNum).getTagCompound().getTagList("Items");
+			if(nbttaglist != null)
+			{
+				for(int i = 0; i < nbttaglist.tagCount(); i++)
+				{
+					NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+					byte byte0 = nbttagcompound1.getByte("Slot");
+					if(byte0 == slot)
+					{
+						return ItemStack.loadItemStackFromNBT(nbttagcompound1);
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 
