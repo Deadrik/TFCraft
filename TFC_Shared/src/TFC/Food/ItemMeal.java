@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
@@ -90,14 +89,13 @@ public class ItemMeal extends ItemTerra
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+
+		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		if(!world.isRemote)
 		{
-			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 			foodstats.eatFood(is);
-			TFC_Core.setPlayerFoodStats(player, foodstats);
-			player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
 		}
-		is.stackSize--;
+		TFC_Core.setPlayerFoodStats(player, foodstats);
 		return is;
 	}
 

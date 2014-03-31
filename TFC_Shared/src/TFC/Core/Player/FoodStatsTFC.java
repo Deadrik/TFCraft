@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
@@ -292,7 +293,7 @@ public class FoodStatsTFC
 			if(stomachDiff > 0)
 				eatAmount-=stomachDiff;
 			//add the nutrition contents
-			byte[] fg = new byte[]{getfg(is, 0), getfg(is, 1), getfg(is, 2), getfg(is, 3)};
+			int[] fg = new int[]{getfg(is, 0), getfg(is, 1), getfg(is, 2), getfg(is, 3)};
 			float[] weights = new float[]{0.5f,0.2f,0.2f,0.1f};
 			for(int i = 0; i < 4; i++)
 				if(fg[i] != -1)
@@ -305,14 +306,17 @@ public class FoodStatsTFC
 			this.satisfaction += eatAmount * item.getSatisfaction(is);
 			//Now remove the eaten amount from the itemstack.
 			if(reduceFood(is, eatAmount))
+			{
 				is.stackSize = 0;
+				player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
+			}
 		}
 	}
 
-	private byte getfg(ItemStack is, int i)
+	private int getfg(ItemStack is, int i)
 	{
 		if(is.getTagCompound().hasKey("FG" + i))
-			return is.getTagCompound().getByte("FG" + i);
+			return Integer.parseInt(is.getTagCompound().getString("FG" + i).split("\\:")[1]);
 		return -1;
 	}
 
