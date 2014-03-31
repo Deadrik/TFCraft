@@ -205,12 +205,26 @@ public class CraftingHandler implements ICraftingHandler
 						//we only add the decay if food was actually added to the bundle
 						if(myWeight != myOldWeight)
 							if(myWeight == 0)
-								finalDecay+=myDecay;
+							{
+								if(finalDecay < 0)
+								{
+									if(myDecay > finalDecay)
+										finalDecay = myDecay;
+								}
+								else
+									finalDecay+=myDecay;
+							}
 							else
 							{
 								float d = w * myDecayPercent;
 								myDecay-= d;
-								finalDecay += d;
+								if(finalDecay < 0)
+								{
+									if(myDecay > finalDecay)
+										finalDecay = myDecay;
+								}
+								else
+									finalDecay += d;
 							}
 
 						if(myWeight > 0)
