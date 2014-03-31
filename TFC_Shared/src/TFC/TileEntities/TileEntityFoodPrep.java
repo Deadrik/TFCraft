@@ -22,6 +22,7 @@ import TFC.API.IItemFoodBlock;
 import TFC.API.Constant.Global;
 import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Time;
 import TFC.Food.ItemFoodTFC;
 import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -70,22 +71,22 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 					if(getStackInSlot(0) != null) 
 					{
 						count++;
-						nbt.setString("FG0", getStackInSlot(0).getItem().getUnlocalizedName(getStackInSlot(0)));
+						nbt.setString("FG0", getStackInSlot(0).getItem().getUnlocalizedName(getStackInSlot(0))+":"+((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodGroup().ordinal());
 					}
 					if(getStackInSlot(1) != null) 
 					{
 						count++;
-						nbt.setString("FG1", getStackInSlot(1).getItem().getUnlocalizedName(getStackInSlot(1)));
+						nbt.setString("FG1", getStackInSlot(1).getItem().getUnlocalizedName(getStackInSlot(1))+":"+((ItemFoodTFC)getStackInSlot(1).getItem()).getFoodGroup().ordinal());
 					}
 					if(getStackInSlot(2) != null) 
 					{
 						count++;
-						nbt.setString("FG2", getStackInSlot(2).getItem().getUnlocalizedName(getStackInSlot(2)));
+						nbt.setString("FG2", getStackInSlot(2).getItem().getUnlocalizedName(getStackInSlot(2))+":"+((ItemFoodTFC)getStackInSlot(2).getItem()).getFoodGroup().ordinal());
 					}
 					if(getStackInSlot(3) != null) 
 					{
 						count++;
-						nbt.setString("FG3", getStackInSlot(3).getItem().getUnlocalizedName(getStackInSlot(3)));
+						nbt.setString("FG3", getStackInSlot(3).getItem().getUnlocalizedName(getStackInSlot(3))+":"+((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodGroup().ordinal());
 					}
 
 					float mult = 0.15f + 0.1f * count;
@@ -98,7 +99,9 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 						nbt.setFloat("satisfaction", s);
 					}
 					nbt.setFloat("foodWeight", Helper.roundNumber(getMealWeight(), 10));
-					nbt.setFloat("foodDecay", 0);
+					nbt.setFloat("foodDecay", -24);
+					nbt.setFloat("decayRate", 2.0f);
+					nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours()+1);
 
 					is.setTagCompound(nbt);
 

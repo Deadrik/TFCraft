@@ -2,7 +2,6 @@ package TFC.Food;
 
 import java.util.List;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -12,8 +11,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.FoodStatsTFC;
@@ -50,13 +51,13 @@ public class ItemMeal extends ItemTerra
 			NBTTagCompound nbt = is.getTagCompound();
 
 			if(nbt.hasKey("FG0"))
-				arraylist.add(EnumChatFormatting.WHITE+StringUtil.localize(nbt.getString("FG0")));
+				arraylist.add(localize(nbt.getString("FG0").split("\\:")));
 			if(nbt.hasKey("FG1"))
-				arraylist.add(EnumChatFormatting.WHITE+StringUtil.localize(nbt.getString("FG1")));
+				arraylist.add(localize(nbt.getString("FG1").split("\\:")));
 			if(nbt.hasKey("FG2"))
-				arraylist.add(EnumChatFormatting.WHITE+StringUtil.localize(nbt.getString("FG2")));
+				arraylist.add(localize(nbt.getString("FG2").split("\\:")));
 			if(nbt.hasKey("FG3"))
-				arraylist.add(EnumChatFormatting.WHITE+StringUtil.localize(nbt.getString("FG3")));
+				arraylist.add(localize(nbt.getString("FG3").split("\\:")));
 
 			if(nbt.hasKey("satisfaction"))
 			{
@@ -67,24 +68,18 @@ public class ItemMeal extends ItemTerra
 			{
 				float ounces = nbt.getFloat("foodWeight");
 				if(ounces > 0)
-					arraylist.add("Amount " + ounces+" oz / 80.0 oz");
+					arraylist.add("Amount " + Helper.roundNumber(ounces,10)+" oz / 80.0 oz");
 				float decay = nbt.getFloat("foodDecay");
 				if(decay > 0)
-					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + decay/ounces*100+"%");
+					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100,10)+"%");
 			}
 		}
 	}
 
-	@Override
-	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
+	private String localize(String[] in)
 	{
-		if (!world.isRemote && is.hasTagCompound())
-		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-
-			if(stackTagCompound.hasKey("temperature"))
-				TFC_ItemHeat.HandleItemHeat(is);
-		}
+		int ordinal = Integer.parseInt(in[1]);
+		return ItemFoodTFC.getFoodGroupColor(EnumFoodGroup.values()[ordinal]) + StringUtil.localize(in[0]);
 	}
 
 	@Override
