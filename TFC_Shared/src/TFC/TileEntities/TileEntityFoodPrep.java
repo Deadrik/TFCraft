@@ -95,7 +95,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 					is.setItemDamage(R.nextInt(11));
 					if(R.nextFloat() < mult)
 					{
-						float s = R.nextFloat()*0.5f+(TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_COOKING)*0.5f);
+						float s = R.nextFloat()*0.25f+(TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_COOKING)*0.5f);
 						nbt.setFloat("satisfaction", s);
 					}
 					nbt.setFloat("foodWeight", Helper.roundNumber(getMealWeight(), 10));

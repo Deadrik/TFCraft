@@ -61,7 +61,11 @@ public class ItemMeal extends ItemTerra
 
 			if(nbt.hasKey("satisfaction"))
 			{
-				arraylist.add("Satisfaction Mult: " + 1+nbt.getFloat("satisfaction")+"x");
+				float _sat = Helper.roundNumber(nbt.getFloat("satisfaction")/1*100,10);
+
+				if(!isWarm(is))
+					_sat*=0.25f;
+				arraylist.add("Satisfaction: " + _sat+"%");
 			}
 
 			if(nbt.hasKey("foodWeight"))

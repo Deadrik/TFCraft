@@ -299,14 +299,14 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand, 1, 32767), 0.95F, 800F, new ItemStack(Block.glass, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand2, 1, 32767), 0.95F, 800F, new ItemStack(Block.glass, 1)));
 		//Food
-		manager.addIndex(new HeatIndex(new ItemStack(Item.porkRaw, 1), 0.85F, 130.5F, new ItemStack(Item.porkCooked, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(Item.beefRaw, 1), 0.85F, 135.5F, new ItemStack(Item.beefCooked, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.muttonRaw,1),0.85F,135.5F, new ItemStack(TFCItems.muttonCooked,1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.venisonRaw,1),0.85F,135.5F, new ItemStack(TFCItems.venisonCooked,1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CalamariRaw,1),0.85F,135.5F, new ItemStack(TFCItems.CalamariCooked,1)));
-		manager.addIndex(new HeatIndex(new ItemStack(Item.chickenRaw, 1), 0.85F, 120.5F, new ItemStack(Item.chickenCooked, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(Item.fishRaw, 1), 0.85F, 120.5F, new ItemStack(Item.fishCooked, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(Item.egg, 1), 0.90F, 110.5F, new ItemStack(TFCItems.EggCooked, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.porkRaw, 1), 0.85F, 130.5F, new ItemStack(Item.porkCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.beefRaw, 1), 0.85F, 135.5F, new ItemStack(Item.beefCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.muttonRaw,1),0.85F,135.5F, new ItemStack(TFCItems.muttonCooked,1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.venisonRaw,1),0.85F,135.5F, new ItemStack(TFCItems.venisonCooked,1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CalamariRaw,1),0.85F,135.5F, new ItemStack(TFCItems.CalamariCooked,1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.chickenRaw, 1), 0.85F, 120.5F, new ItemStack(Item.chickenCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.fishRaw, 1), 0.85F, 120.5F, new ItemStack(Item.fishCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.egg, 1), 0.90F, 110.5F, new ItemStack(TFCItems.EggCooked, 1)).setKeepNBT(true));
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WheatDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.WheatBread, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BarleyDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.BarleyBread, 1)));
@@ -315,7 +315,8 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RiceDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.RiceBread, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.CornBread, 1)));
 
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, 32767), 0.9F, 150.5F, new ItemStack(Item.bowlEmpty, 1)));
+
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, 32767), 13.0F, 210F, new ItemStack(Block.torchWood, 2)));
 
