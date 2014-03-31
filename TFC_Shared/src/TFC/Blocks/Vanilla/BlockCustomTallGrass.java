@@ -67,11 +67,18 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	public void harvestBlock(World world, EntityPlayer player, int i, int j, int k, int l)
 	{
 		super.harvestBlock(world, player, i, j, k, l);
+		Random rand = new Random();
 		ItemStack is = player.inventory.getCurrentItem();
 		for(int c = 0; c < Recipes.Knives.length && is != null; c++)
 			if(is.getItem().itemID == Recipes.Knives[c].itemID)
 			{
-				createStraw(world, player, i, j, k);
+				//createStraw(world, player, i, j, k);
+				if(rand.nextInt(16)==0){
+					createJute(world,player,i,j,k);
+				}
+				else{
+					createStraw(world, player, i, j, k);
+				}
 				is.damageItem(1, player);
 				break;
 			}
@@ -79,13 +86,25 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 			if(is.getItem().itemID == Recipes.Scythes[c].itemID)
 			{
 				//Spawn the straw for the block that we've already destroyed
-				createStraw(world, player, i, j, k );
+				//createStraw(world, player, i, j, k );
+				if(rand.nextInt(16)==0){
+					createJute(world,player,i,j,k);
+				}
+				else{
+					createStraw(world, player, i, j, k );
+				}
 				//Now check each block around the destroyed block for AOE directions
 				for(int x = -1; x < 2; x++)
 					for(int z = -1; z < 2; z++)
 						if(world.getBlockId(i+x,  j,  k+z) == this.blockID)
 						{
-							createStraw(world, player, i + x, j, k + z);
+							//createStraw(world, player, i + x, j, k + z);
+							if(rand.nextInt(16)==0){
+								createJute(world,player,i,j,k);
+							}
+							else{
+								createStraw(world, player, i, j, k );
+							}
 							is.damageItem(1, player);
 							world.setBlockToAir(i+x,  j,  k+z);
 						}
@@ -96,6 +115,12 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	private void createStraw(World world, EntityPlayer player, int i, int j, int k)
 	{
 		EntityItem ei = new EntityItem(world, i+0.5F, j+0.5F, k+0.5F, new ItemStack(TFCItems.Straw, 1));
+		world.spawnEntityInWorld(ei);
+	}
+	
+	private void createJute(World world, EntityPlayer player, int i, int j, int k)
+	{
+		EntityItem ei = new EntityItem(world, i+0.5F, j+0.5F, k+0.5F, new ItemStack(TFCItems.Jute, 1));
 		world.spawnEntityInWorld(ei);
 	}
 
