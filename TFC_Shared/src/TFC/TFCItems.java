@@ -977,6 +977,7 @@ public class TFCItems
 		System.out.println(new StringBuilder().append("[TFC] Loading Items").toString());
 
 		//Replace any vanilla Items here
+		Item.itemsList[Item.fishingRod.itemID] = null; Item.itemsList[Item.fishingRod.itemID] = (new TFC.Items.Tools.ItemFishingRod(90)).setUnlocalizedName("fishingRod").setTextureName("fishing_rod");
 		Item.itemsList[Item.coal.itemID] = null; Item.itemsList[Item.coal.itemID] = (new TFC.Items.ItemCoal(7)).setUnlocalizedName("coal");
 		Item.itemsList[Item.stick.itemID] = null; Item.itemsList[Item.stick.itemID] = new ItemStick(24).setFull3D().setUnlocalizedName("stick");
 		Item.itemsList[Item.leather.itemID] = null; Item.itemsList[Item.leather.itemID] = new ItemTerra(Item.leather.itemID).setFull3D().setUnlocalizedName("leather");

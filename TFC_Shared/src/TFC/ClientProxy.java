@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderBlaze;
 import net.minecraft.client.renderer.entity.RenderEnderman;
 import net.minecraft.client.renderer.entity.RenderFallingSand;
+import net.minecraft.client.renderer.entity.RenderFish;
 import net.minecraft.client.renderer.entity.RenderGhast;
 import net.minecraft.client.renderer.entity.RenderIronGolem;
 import net.minecraft.client.renderer.entity.RenderMinecart;
@@ -33,6 +34,7 @@ import TFC.Core.TFC_Time;
 import TFC.Core.Util.StringUtil;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityFallingStone;
+import TFC.Entities.EntityFishHookTFC;
 import TFC.Entities.EntityJavelin;
 import TFC.Entities.EntityProjectileTFC;
 import TFC.Entities.EntityStand;
@@ -174,6 +176,7 @@ public class ClientProxy extends CommonProxy
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityProjectileTFC.class, new RenderArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFallingStone.class, new RenderFallingSand());
+		RenderingRegistry.registerEntityRenderingHandler(EntityFishHookTFC.class, new RenderFish());
 
 		RenderingRegistry.registerBlockHandler(TFCBlocks.clayGrassRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.peatGrassRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
