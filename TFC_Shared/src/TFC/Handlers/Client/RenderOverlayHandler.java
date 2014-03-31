@@ -1,5 +1,7 @@
 package TFC.Handlers.Client;
 
+import java.awt.Color;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -70,6 +72,20 @@ public class RenderOverlayHandler
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 58, 20, 20);
 		}
 
+		//Render Arrow and Javelin for Quiver
+		if(getQuiver()!=null && getQuiver().getItem() instanceof ItemQuiver){
+			fontrenderer = mc.fontRenderer;
+			
+			this.drawTexturedModalRect(1, sr.getScaledHeight() - 34, 0, 78, 16, 16);
+			this.drawTexturedModalRect(1, sr.getScaledHeight() - 17, 0, 94, 16, 16);
+			
+			fontrenderer.drawString("" +getQuiverArrows(), 20,  sr.getScaledHeight() - 30, Color.white.getRGB());
+			fontrenderer.drawString("" +getQuiverJavelins(), 20,  sr.getScaledHeight() - 13, Color.white.getRGB());
+			
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			TFC_Core.bindTexture(tfcicons);
+		}
+		
 		PlayerInfo playerclient = PlayerManagerTFC.getInstance().getClientPlayer();
 		if(playerclient != null && mc.playerController.func_78763_f())
 		{
@@ -162,10 +178,6 @@ public class RenderOverlayHandler
 
 			event.left.add("Health: " + player.getHealth());
 			event.left.add("Stability: " + TFC_Climate.manager.getStabilityLayerAt(xCoord, zCoord).data1);
-		}
-		if(getQuiver()!=null){
-			event.left.add("Arrows: "+ getQuiverArrows());
-			event.left.add("Javelins: "+ getQuiverJavelins());
 		}
 	}
 
