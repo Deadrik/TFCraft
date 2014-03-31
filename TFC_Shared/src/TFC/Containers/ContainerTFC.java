@@ -212,7 +212,7 @@ public class ContainerTFC extends Container
 			}
 		}
 
-		if(_shouldReload)
+		if(_shouldReload && !isLoading)
 		{
 			reloadContainer();
 		}

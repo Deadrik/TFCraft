@@ -27,6 +27,8 @@ import TFC.Core.Util.StringUtil;
 import TFC.Food.ItemFoodTFC;
 import TFC.Items.ItemOre;
 import TFC.Items.ItemOreSmall;
+import TFC.WorldGen.DataLayer;
+import TFC.WorldGen.TFCWorldChunkManager;
 
 public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 {
@@ -75,7 +77,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			tag.setLong("TempTimer", totalH);
 		}
 
-		if(canCookAlloy)
+		if(canCookAlloy && bag != null)
 		{
 			Metal[] types = new Metal[4];
 			int[] metalAmounts = new int[4];
@@ -238,7 +240,8 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		if(bag != null)
 		{
 			float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
-			float environmentalDecay = TFC_Core.getEnvironmentalDecay(temp)*0.5f;
+			DataLayer rain = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRainfallLayerAt(x, z);
+			float environmentalDecay = TFC_Core.getEnvironmentalDecay(temp, rain)*0.5f;
 			TFC_Core.handleItemTicking(bag, world, x, y, z, environmentalDecay);
 			for(ItemStack i : bag)
 			{

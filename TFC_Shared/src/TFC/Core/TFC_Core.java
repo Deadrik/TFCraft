@@ -46,6 +46,8 @@ import TFC.Items.ItemTFCArmor;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemBlocks.ItemTerraBlock;
 import TFC.TileEntities.TileEntityPartial;
+import TFC.WorldGen.DataLayer;
+import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -815,9 +817,12 @@ public class TFC_Core
 		TFC_Core.setPlayerFoodStats(player, foodstats);
 	}
 
-	public static float getEnvironmentalDecay(float temp)
+	public static float getEnvironmentalDecay(float temp, DataLayer rain)
 	{
-		return 1+((temp-4f)*0.002f);
+		//return 1+((temp-4f)*0.002f);
+		if(temp > 0)
+			return ((1f - (15f / (15f + temp))) * 2+(rain.floatdata1/8000));
+		else return 0;
 	}
 
 	/**
@@ -830,7 +835,8 @@ public class TFC_Core
 		 * so that its only done once per inventory
 		 */
 		float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
-		float environmentalDecay = getEnvironmentalDecay(temp);
+		DataLayer rain = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRainfallLayerAt(x, z);
+		float environmentalDecay = getEnvironmentalDecay(temp, rain);
 		handleItemTicking(iinv, world, x, y, z, environmentalDecay);
 	}
 
@@ -844,7 +850,8 @@ public class TFC_Core
 		 * so that its only done once per inventory
 		 */
 		float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
-		float environmentalDecay = getEnvironmentalDecay(temp);
+		DataLayer rain = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRainfallLayerAt(x, z);
+		float environmentalDecay = getEnvironmentalDecay(temp, rain);
 		handleItemTicking(iinv, world, x, y, z, environmentalDecay);
 	}
 
