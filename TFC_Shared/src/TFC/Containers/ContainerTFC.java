@@ -13,6 +13,9 @@ public class ContainerTFC extends Container
 	public EntityPlayer player;
 	protected boolean isLoading = false;
 	protected boolean doItemSaving = false;
+
+
+
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 		// TODO Auto-generated method stub
@@ -204,7 +207,6 @@ public class ContainerTFC extends Container
 		{
 			ItemStack itemstack = this.loadContents(i);
 			ItemStack itemstack1 = (ItemStack)this.inventoryItemStacks.get(i);//the real invisible item
-			if (!areItemStacksEqual(itemstack1, itemstack) && player.inventory.getItemStack() == null)
 			{
 				_shouldReload = true;
 			}
