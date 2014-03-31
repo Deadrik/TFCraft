@@ -258,8 +258,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(Item.bow,1), new Object[] {"$# ","$ #","$# ",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)});
 
 		GameRegistry.addRecipe(new ItemStack(Item.fishingRod,1), new Object[] {"  #"," #$","# $",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)});
-		GameRegistry.addRecipe(new ItemStack(Item.fishingRod,1), new Object[] {"#  ","$# ","$ #",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)});
-
+		
 		//Tool Rack & Barrel & Armour Stands
 		for(int j = 0; j < Global.WOOD_ALL.length; j++)
 		{
