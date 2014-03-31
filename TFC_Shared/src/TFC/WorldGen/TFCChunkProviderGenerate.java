@@ -127,7 +127,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		//	constructor and then just clear them to all zeroes before each
 		//	use.
 		//
-		Arrays.fill(idsTop, (short)0);
+		Arrays.fill(idsTop, (short)0); 
 		Arrays.fill(idsBig, (short)0);
 		Arrays.fill(metaBig, (byte)0);
 
@@ -146,16 +146,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
 		replaceBlocksForBiomeLow(chunkX, chunkZ, rand, idsBig, metaBig);
 
-
-
 		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 		new MapGenRavineTFC(110, 30).generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//surface
 		new MapGenRavineTFC(20, 50).generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//deep
 		new MapGenRiverRavine().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
-		//Underground Lava
-		//new WorldGenFissure(Block.lavaStill,2, true, 25).setUnderground(true, 20).setSeed(1).generate(this, rand, worldObj, chunkX, chunkZ);
-		//Surface Hotsprings
-		//new WorldGenFissureCluster().generate(this, rand, worldObj, chunkX, chunkZ);
+
 		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
 		data.heightmap = heightMap;

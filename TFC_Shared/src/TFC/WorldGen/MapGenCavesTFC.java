@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import TFC.TFCBlocks;
 import TFC.Core.TFC_Climate;
@@ -167,7 +166,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 												grassId = id;
 												isGrass = true;
 											}
-											BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords((int)worldX, (int)worldZ);
+
 											if (TFC_Core.isSoil(id) || TFC_Core.isRawStone(id))
 												if (var50 < 10 && TFC_Climate.getStability((int)worldX, (int)worldZ) == 1)
 												{
