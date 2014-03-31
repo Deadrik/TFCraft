@@ -195,6 +195,30 @@ public class TFC_Time
 		}
 		return  h;
 	}
+	
+	public static int getHourOfDayFromTotalHours()
+	{
+		return  getHourOfDayFromTotalHours((int)getTotalHours());
+	}
+	
+	public static int getHourOfDayFromTotalHours(int th)
+	{
+		int h = (th-(th/24)*24);//gives us the remainder
+		h -= 6;
+		if(h < 0) {
+			h = 23 + h;
+		}
+		h -= 12;
+		if(h < 0) {
+			h = 23+h;
+		}
+		return  h;
+	}
+	
+	public static int getDayFromTotalHours(int th)
+	{
+		return th/24;
+	}
 
 	public static boolean isSpring(int z)
 	{

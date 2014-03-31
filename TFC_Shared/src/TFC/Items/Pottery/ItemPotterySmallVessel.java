@@ -239,10 +239,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		ItemStack[] bag = loadBagInventory(is);
 		if(bag != null)
 		{
-			float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
-			DataLayer rain = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRainfallLayerAt(x, z);
-			float environmentalDecay = TFC_Core.getEnvironmentalDecay(temp, rain)*0.5f;
-			TFC_Core.handleItemTicking(bag, world, x, y, z, environmentalDecay);
+			TFC_Core.handleItemTicking(bag, world, x, y, z, 0.5f);
 			for(ItemStack i : bag)
 			{
 				if(i != null && i.stackSize == 0)

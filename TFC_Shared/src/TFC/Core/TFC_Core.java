@@ -821,7 +821,7 @@ public class TFC_Core
 	{
 		//return 1+((temp-4f)*0.002f);
 		if(temp > 0)
-			return ((1f - (15f / (15f + temp))) * 2+(rain.floatdata1/8000));
+			return ((1f - (15f / (15f + temp))) * 2+(rain.floatdata1/16000));
 		else return 0;
 	}
 
@@ -831,13 +831,8 @@ public class TFC_Core
 	 */
 	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z)
 	{
-		/*Here we calculate the decayRate based on the environment. We do this before everything else
-		 * so that its only done once per inventory
-		 */
-		float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
-		DataLayer rain = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRainfallLayerAt(x, z);
-		float environmentalDecay = getEnvironmentalDecay(temp, rain);
-		handleItemTicking(iinv, world, x, y, z, environmentalDecay);
+		
+		handleItemTicking(iinv, world, x, y, z, 1);
 	}
 
 	/**
@@ -846,19 +841,13 @@ public class TFC_Core
 	 */
 	public static void handleItemTicking(ItemStack[] iinv, World world, int x, int y, int z)
 	{
-		/*Here we calculate the decayRate based on the environment. We do this before everything else
-		 * so that its only done once per inventory
-		 */
-		float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
-		DataLayer rain = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRainfallLayerAt(x, z);
-		float environmentalDecay = getEnvironmentalDecay(temp, rain);
-		handleItemTicking(iinv, world, x, y, z, environmentalDecay);
+		handleItemTicking(iinv, world, x, y, z, 1);
 	}
 
 	/**
 	 * This version of the method assumes that the environmental decay modifier has already been calculated.
 	 */
-	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z, float environmentalDecay)
+	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z, float environmentalDecayFactor)
 	{
 		for(int i = 0; !world.isRemote && i < iinv.getSizeInventory(); i++)
 		{
@@ -878,7 +867,7 @@ public class TFC_Core
 				{
 					continue;
 				}
-				tickDecay(is, world, x, y, z, environmentalDecay);
+				tickDecay(is, world, x, y, z, environmentalDecayFactor);
 				TFC_ItemHeat.HandleItemHeat(is);
 			}
 		}
@@ -887,7 +876,7 @@ public class TFC_Core
 	/**
 	 * This version of the method assumes that the environmental decay modifier has already been calculated.
 	 */
-	public static void handleItemTicking(ItemStack[] iinv, World world, int x, int y, int z, float environmentalDecay)
+	public static void handleItemTicking(ItemStack[] iinv, World world, int x, int y, int z, float environmentalDecayFactor)
 	{
 		for(int i = 0; !world.isRemote && i < iinv.length; i++)
 		{
@@ -907,7 +896,7 @@ public class TFC_Core
 				{
 					continue;
 				}
-				tickDecay(is, world, x, y, z, environmentalDecay);
+				tickDecay(is, world, x, y, z, environmentalDecayFactor);
 				TFC_ItemHeat.HandleItemHeat(is);
 			}
 		}
@@ -917,8 +906,8 @@ public class TFC_Core
 	 * @param is
 	 * @param nbt
 	 */
-	private static void tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecay) 
-	{
+	private static void tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor) 
+	{		
 		NBTTagCompound nbt = is.getTagCompound();
 		if(nbt == null || !nbt.hasKey("foodWeight") || !nbt.hasKey("foodDecay"))
 			return;
@@ -937,6 +926,16 @@ public class TFC_Core
 			//if the food is salted then we cut the decay rate in half
 			if(nbt.hasKey("isSalted"))
 				thisDecayRate *= 0.5f;
+			
+			/*Here we calculate the decayRate based on the environment. We do this before everything else
+			 * so that its only done once per inventory
+			 */
+			float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(
+					TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")), 
+					TFC_Time.getHourOfDayFromTotalHours(nbt.getInteger("decayTimer")), 
+					x, y, z);
+			DataLayer rain = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRainfallLayerAt(x, z);
+			float environmentalDecay = getEnvironmentalDecay(temp, rain)*environmentalDecayFactor;
 
 			if(decay < 0)
 			{

@@ -166,10 +166,10 @@ public class TFC_Climate
 
 	protected static float getTemp(int x, int z)
 	{
-		return getTemp(TFC_Time.currentDay, x, z);
+		return getTemp(TFC_Time.currentDay,TFC_Time.getHour(), x, z);
 	}
 
-	protected static float getTemp(int day, int x, int z)
+	protected static float getTemp(int day, int th, int x, int z)
 	{
 		if(manager!= null)
 		{
@@ -185,7 +185,7 @@ public class TFC_Climate
 			float mod = getMonthTempFactor(_month, z);
 			float modLast = getMonthTempFactor(_lastmonth, z);
 			int day2 = day - ((day/TFC_Time.daysInMonth)*TFC_Time.daysInMonth);
-			int hour = TFC_Time.getHour();
+			int hour = TFC_Time.getHourOfDayFromTotalHours(th);
 
 			if(hour < 0)
 				hour = 23 + hour;
@@ -325,7 +325,7 @@ public class TFC_Climate
 
 	protected static float getTempSpecificDay(int day, int x, int z)
 	{
-		return getTemp(day, x, z);
+		return getTemp(day,12, x, z);
 	}
 
 	public static float getHeightAdjustedTemp(int x, int y, int z)
@@ -380,6 +380,14 @@ public class TFC_Climate
 	public static float getHeightAdjustedTempSpecificDay(int day, int x, int y, int z)
 	{
 		float temp = getTempSpecificDay(day, x, z);
+		temp = adjustHeightToTemp(y,temp);
+
+		return temp;
+	}
+	
+	public static float getHeightAdjustedTempSpecificDay(int day, int hour, int x, int y, int z)
+	{
+		float temp = getTemp(day, hour, x, z);
 		temp = adjustHeightToTemp(y,temp);
 
 		return temp;
