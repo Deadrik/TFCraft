@@ -14,7 +14,9 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TFC.API.TFCOptions;
+import TFC.API.Constant.Global;
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
@@ -151,10 +153,17 @@ public class TECrop extends NetworkTileEntity
 
 				if(is2 != null)
 					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is2));
+
+				ItemStack is = crop.getSeed();
+				if(is != null)
+					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is));
+
+				TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_AGRICULTURE, 1);
 			}
 			else if (crop != null)
 			{
 				ItemStack is = crop.getSeed();
+				is.stackSize = 1+(world.rand.nextInt(20-(int)(20*TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_AGRICULTURE)) == 0 ? 1 : 0));
 
 				if(is != null)
 					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is));
