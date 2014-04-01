@@ -69,10 +69,17 @@ public class TFC_Time
 	public static void UpdateTime(World world)
 	{
 		time = world.getWorldInfo().getWorldTime();
+<<<<<<< HEAD
+		if(time < dayLength * daysInMonth * 3){
+			world.getWorldInfo().setWorldTime(dayLength * daysInMonth * 3);
+			time = world.getWorldInfo().getWorldTime();
+		}
+=======
 		
 		if(time < ticksInMonth* 3)
 			world.getWorldInfo().setWorldTime(ticksInMonth* 3);
 		
+>>>>>>> 0185af06be457812e2d5c33305504abc66dd8ab5
 		int m = getMonth();
 		int m1 = m - 1;
 
