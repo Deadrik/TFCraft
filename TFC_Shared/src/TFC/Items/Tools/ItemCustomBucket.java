@@ -13,6 +13,7 @@ import TFC.TFCItems;
 import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Util.Helper;
+import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityBarrel;
@@ -84,7 +85,7 @@ public class ItemCustomBucket extends ItemTerra
 						return event.result;
 					}
 
-					if ((world.getBlockId(i, j, k) == Block.waterStill.blockID) && world.getBlockMetadata(i, j, k) <=2)
+					if (TFC_Core.isFreshWater(world.getBlockId(i, j, k)) && world.getBlockMetadata(i, j, k) <=2)
 					{
 						world.setBlock(i, j, k, 0);
 
@@ -94,6 +95,17 @@ public class ItemCustomBucket extends ItemTerra
 						}
 
 						return new ItemStack(TFCItems.WoodenBucketWater);
+					}
+					else if (TFC_Core.isSaltWater(world.getBlockId(i, j, k)) && world.getBlockMetadata(i, j, k) <=2)
+					{
+						world.setBlock(i, j, k, 0);
+
+						if (par3EntityPlayer.capabilities.isCreativeMode)
+						{
+							return is;
+						}
+
+						return new ItemStack(TFCItems.WoodenBucketSaltWater);
 					}
 				}
 				else

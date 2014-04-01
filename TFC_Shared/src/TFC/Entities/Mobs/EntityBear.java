@@ -22,6 +22,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
@@ -145,7 +146,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		this.dataWatcher.addObject(13, new Integer(0));
 		this.dataWatcher.addObject(14, new Float(1));
 		this.dataWatcher.addObject(15, Integer.valueOf(0));
-		
+
 		this.dataWatcher.addObject(24, new Float(1));
 		this.dataWatcher.addObject(25, new Float(1));
 		this.dataWatcher.addObject(26, new Float(1));
@@ -183,14 +184,14 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
-		
+
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
 		nbt.setFloat ("Obedience Modifier", obedience_mod);
 		nbt.setFloat ("Colour Modifier", colour_mod);
 		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
 		nbt.setFloat ("Hardiness Modifier", hard_mod);
-		
+
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setBoolean("Pregnant", pregnant);
 		nbt.setFloat("MateSize", mateSizeMod);
@@ -209,14 +210,14 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
-		
+
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
 		colour_mod = nbt.getFloat ("Colour Modifier");
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
-		
+
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
@@ -292,13 +293,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		if(isAdult())
-		{
-			this.dropItem(TFCItems.Hide.itemID,1);
-			this.dropItem(Item.bone.itemID, rand.nextInt(6)+2);
-		}
+		float ageMod = TFC_Core.getPercentGrown(this);
 
-
+		this.entityDropItem(new ItemStack(TFCItems.Hide.itemID,1,(int)(ageMod*3)),0);
+		this.dropItem(Item.bone.itemID,(int) ((rand.nextInt(6)+2)*ageMod));
 	}
 
 
@@ -381,7 +379,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			super.handleHealthUpdate (par1);
 		}
 	}
-	
+
 	public void syncData()
 	{
 		if(dataWatcher!= null)
@@ -389,7 +387,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			if(!this.worldObj.isRemote){
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
-				
+
 				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
 				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
 				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
@@ -400,7 +398,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
-				
+
 				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
 				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
 				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
@@ -647,7 +645,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public void setAttackedVec(Vec3 attackedVec) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
@@ -661,6 +659,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public void setFearSource(Entity fearSource) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
