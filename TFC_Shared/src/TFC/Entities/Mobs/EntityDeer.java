@@ -263,7 +263,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		float ageMod = TFC_Core.getPercentGrown(this);	
 		this.entityDropItem(new ItemStack(TFCItems.Hide.itemID,1,(int)(ageMod*size_mod*1.84)),0);
 		this.dropItem(Item.bone.itemID, (int)((rand.nextInt(4)+2)*ageMod));
-		float foodWeight = ageMod*(this.size_mod * 528);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		float foodWeight = ageMod*(this.size_mod * 2400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
 		TFC_Core.animalDropMeat(this, TFCItems.venisonRaw, foodWeight);
 	}

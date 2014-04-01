@@ -270,7 +270,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 
 
 
-		float foodWeight = ageMod*(this.size_mod * 1200);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		float foodWeight = ageMod*(this.size_mod * 640);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
 		TFC_Core.animalDropMeat(this, TFCItems.muttonRaw, foodWeight);
 	}
