@@ -42,11 +42,11 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		this.setSize(EnumSize.SMALL);
 	}
 
-	@Override
+	/*@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		list.add(new ItemStack(this,1,0));
-	}
+	}*/
 
 	@Override
 	public boolean canStack()

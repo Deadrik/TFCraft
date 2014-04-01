@@ -312,10 +312,8 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		int var4;
 		float ageMod = TFC_Core.getPercentGrown(this);
 
-		if(ageMod > 0.9){
-			this.dropItem(TFCItems.Hide.itemID,1);
-			this.dropItem(Item.bone.itemID, rand.nextInt(4)+2);
-		}
+		this.entityDropItem(new ItemStack(TFCItems.Hide.itemID,1,(int)(ageMod*size_mod)),0);
+		this.dropItem(Item.bone.itemID, (int) ((rand.nextInt(4)+2)*ageMod));
 
 		float foodWeight = ageMod*(this.size_mod * 2400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 

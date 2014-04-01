@@ -369,8 +369,8 @@ public class BlockCustomBed extends BlockDirectional
 	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-
-		ret.add(new ItemStack(TFCItems.Hide,1,0));
+		
+		ret.add(new ItemStack(TFCItems.Hide,1,2));
 		ret.add(new ItemStack(TFCBlocks.Thatch,2,0));
 		return ret;
 	}

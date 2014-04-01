@@ -767,6 +767,10 @@ public class TFCItemID {
 	public static int CloudberryLeaf			= 19142;
 
 	public static int Fertilizer				= 19143;
+	
+	public static int horseMeatRaw				= 19144;
+	public static int horseMeatCooked			= 19145;
+	public static int WoodenBucketSaltWater		= 19146;
 
 
 	public static void Setup(Configuration config)

@@ -239,7 +239,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			if(!this.worldObj.isRemote){
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
-				
+
 				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
 				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
 				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
@@ -250,7 +250,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
-				
+
 				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
 				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
 				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
@@ -267,7 +267,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.dataWatcher.addObject(13, Integer.valueOf(0));
 		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
 		this.dataWatcher.addObject(15, Integer.valueOf(0));
-		
+
 		this.dataWatcher.addObject(24, new Float(1));
 		this.dataWatcher.addObject(25, new Float(1));
 		this.dataWatcher.addObject(26, new Float(1));
@@ -914,7 +914,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			par1EntityPlayer.openGui(TerraFirmaCraft.instance, 42, par1EntityPlayer.worldObj, (int)par1EntityPlayer.posX, (int)par1EntityPlayer.posY, (int)par1EntityPlayer.posZ);
 		}
 	}
-	
+
 	public AnimalChest getHorseChest(){
 		return this.horseChest;
 	}
@@ -1049,7 +1049,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				}
 				else
 				{
-					
+
 					if(this.getLeashedToEntity() != null && this.getLeashedToEntity() instanceof EntityPlayer &&
 							this.getLeashedToEntity() == par1EntityPlayer){
 						this.func_110237_h(par1EntityPlayer);
@@ -1063,7 +1063,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			}
 		}
 	}
-	
+
 	//We use this to catch the EntityLiving check, so that other interactions can be performed on leashed animals
 	@Override
 	public boolean getLeashed(){
@@ -1149,15 +1149,18 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			this.dropChestItems();
 		}
 	}
-	
+
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		if(isAdult())
-		{
-			this.dropItem(TFCItems.Hide.itemID,1);
-			this.dropItem(Item.bone.itemID, rand.nextInt(8)+3);
-		}
+		float ageMod = TFC_Core.getPercentGrown(this);
+
+		this.entityDropItem(new ItemStack(TFCItems.Hide.itemID,1,(int)(ageMod*3)),0);
+		this.dropItem(Item.bone.itemID,(int) ((rand.nextInt(8)+3)*ageMod));
+
+		float foodWeight = ageMod*(this.size_mod * 6400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+
+		TFC_Core.animalDropMeat(this, TFCItems.horseMeatRaw, foodWeight);
 	}
 
 	/**
@@ -1471,8 +1474,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		par1NBTTagCompound.setInteger ("Sex", sex);
 		par1NBTTagCompound.setLong ("Animal ID", animalID);
 		par1NBTTagCompound.setFloat ("Size Modifier", size_mod);
-		
-		
+
+
 		NBTTagCompound nbt = par1NBTTagCompound;
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
@@ -1480,7 +1483,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		nbt.setFloat ("Colour Modifier", colour_mod);
 		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
 		nbt.setFloat ("Hardiness Modifier", hard_mod);
-		
+
 		par1NBTTagCompound.setInteger ("Hunger", hunger);
 		par1NBTTagCompound.setBoolean("Pregnant", pregnant);
 		par1NBTTagCompound.setFloat("MateSize", mateSizeMod);
@@ -1536,14 +1539,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
-		
+
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
 		colour_mod = nbt.getFloat ("Colour Modifier");
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
-		
+
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");

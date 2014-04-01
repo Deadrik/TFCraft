@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.DamageSource;
+import TFC.API.IFood;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Util.Helper;
 import TFC.Core.TFC_Climate;
@@ -311,6 +312,9 @@ public class FoodStatsTFC
 				is.stackSize = 0;
 				player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
 			}
+		}
+		else if(is.getItem() instanceof IFood){
+			addNutrition(((IFood)(is.getItem())).getFoodGroup(), 10f);
 		}
 	}
 

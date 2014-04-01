@@ -14,6 +14,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
@@ -259,12 +260,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		float ageMod = TFC_Core.getPercentGrown(this);
-		if(isAdult())
-		{
-			this.dropItem(TFCItems.Hide.itemID,1);
-			this.dropItem(Item.bone.itemID, rand.nextInt(4)+2);
-		}
+		float ageMod = TFC_Core.getPercentGrown(this);	
+		this.entityDropItem(new ItemStack(TFCItems.Hide.itemID,1,(int)(ageMod*size_mod*1.84)),0);
+		this.dropItem(Item.bone.itemID, (int)((rand.nextInt(4)+2)*ageMod));
 		float foodWeight = ageMod*(this.size_mod * 528);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
 		TFC_Core.animalDropMeat(this, TFCItems.venisonRaw, foodWeight);
