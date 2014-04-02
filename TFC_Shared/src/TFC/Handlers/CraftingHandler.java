@@ -63,9 +63,11 @@ public class CraftingHandler implements ICraftingHandler
 				HandleItem(player, iinventory, Recipes.Axes);
 				HandleItem(player, iinventory, Recipes.Saws);
 			}
-			else if(itemstack.itemID == TFCItems.WheatGrain.itemID || itemstack.itemID == TFCItems.RyeGrain.itemID || 
-					itemstack.itemID == TFCItems.OatGrain.itemID || itemstack.itemID == TFCItems.BarleyGrain.itemID || 
-					itemstack.itemID == TFCItems.RiceGrain.itemID)
+			else if((itemstack.itemID == TFCItems.WheatGrain.itemID && gridHasItem(iinventory, TFCItems.WheatWhole.itemID)) ||
+					(itemstack.itemID == TFCItems.RyeGrain.itemID && gridHasItem(iinventory, TFCItems.RyeWhole.itemID)) || 
+					(itemstack.itemID == TFCItems.OatGrain.itemID && gridHasItem(iinventory, TFCItems.OatWhole.itemID)) || 
+					(itemstack.itemID == TFCItems.BarleyGrain.itemID && gridHasItem(iinventory, TFCItems.BarleyWhole.itemID)) || 
+					(itemstack.itemID == TFCItems.RiceGrain.itemID && gridHasItem(iinventory, TFCItems.RiceWhole.itemID)))
 			{
 				HandleItem(player, iinventory, Recipes.Knives);
 				if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw,4)))
@@ -295,6 +297,18 @@ public class CraftingHandler implements ICraftingHandler
 
 			}
 		}
+	}
+
+	public static boolean gridHasItem(IInventory iinventory, int id)
+	{
+		for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+		{             
+			if(iinventory.getStackInSlot(i) == null)
+				continue;
+			if(iinventory.getStackInSlot(i).getItem().itemID == id)
+				return true;
+		}
+		return false;
 	}
 
 	public static void HandleItem(EntityPlayer entityplayer, IInventory iinventory, Item[] Items)

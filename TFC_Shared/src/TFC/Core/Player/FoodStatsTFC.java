@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.DamageSource;
+import TFC.API.IFood;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Util.Helper;
 import TFC.Core.TFC_Climate;
@@ -138,19 +139,20 @@ public class FoodStatsTFC
 
 
 			long time = TFC_Time.getTotalTicks();
-
+			int blockId = player.worldObj.getBlockId((int)player.posX,(int)player.posY,(int)player.posZ);
+			int blockId2 = player.worldObj.getBlockId((int)player.posX,(int)player.posY-1,(int)player.posZ);
 			if(player.capabilities.isCreativeMode)
 			{
 				long oldWaterTimer = waterTimer;
 				waterTimer = time;
-				if(player.isInWater())
+				if(player.isInWater() && (TFC_Core.isFreshWater(blockId)||TFC_Core.isFreshWater(blockId2)))
 					this.restoreWater(player, 20*(int)(time - oldWaterTimer));
 			} else
 				for(;waterTimer < time;  waterTimer++)
 				{
 					/**Reduce the player's water for normal living*/
 					waterLevel -= 1+(tempWaterMod/2);
-					if(player.isInWater())
+					if(player.isInWater() && (TFC_Core.isFreshWater(blockId)||TFC_Core.isFreshWater(blockId2)))
 						this.restoreWater(player, 20);
 					if(waterLevel < 0)
 						waterLevel = 0;
@@ -310,6 +312,9 @@ public class FoodStatsTFC
 				is.stackSize = 0;
 				player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
 			}
+		}
+		else if(is.getItem() instanceof IFood){
+			addNutrition(((IFood)(is.getItem())).getFoodGroup(), 10f);
 		}
 	}
 

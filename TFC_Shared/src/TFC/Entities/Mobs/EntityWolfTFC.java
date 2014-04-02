@@ -109,7 +109,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		this.dataWatcher.addObject(13, new Integer(0));
 		this.dataWatcher.addObject(14, new Float(1));
 		this.dataWatcher.addObject(15, Integer.valueOf(0));
-		
+
 		this.dataWatcher.addObject(24, Float.valueOf(1.0f));
 		this.dataWatcher.addObject(25, Float.valueOf(1.0f));
 		this.dataWatcher.addObject(26, Float.valueOf(1.0f));
@@ -130,14 +130,14 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
-		
+
 		nbt.setFloat ("Strength Modifier", getStrength());
 		nbt.setFloat ("Aggression Modifier", getAggression());
 		nbt.setFloat ("Obedience Modifier", obedience_mod);
 		nbt.setFloat ("Colour Modifier", colour_mod);
 		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
 		nbt.setFloat ("Hardiness Modifier", hard_mod);
-		
+
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setBoolean("Pregnant", pregnant);
 		nbt.setFloat("MateSize", mateSizeMod);
@@ -156,35 +156,35 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
-		
+
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
 		obedience_mod = nbt.getFloat ("Obedience Modifier");
 		colour_mod = nbt.getFloat ("Colour Modifier");
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
-		
+
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
 		timeOfConception = nbt.getLong("ConceptionTime");
 		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
 	}
-	
+
 	@Override
 	public void setTamed(boolean par1)
-    {
-        super.setTamed(par1);
+	{
+		super.setTamed(par1);
 
-        if (par1)
-        {
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(TFC_MobData.WolfHealth);
-        }
-        else
-        {
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(TFC_MobData.WolfHealth);
-        }
-    }
+		if (par1)
+		{
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(TFC_MobData.WolfHealth);
+		}
+		else
+		{
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(TFC_MobData.WolfHealth);
+		}
+	}
 
 	/**
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
@@ -220,7 +220,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime){
 				int i = rand.nextInt(5) + 3;
 				for (int x = 0; x<i;x++){
-					
+
 					ArrayList<Float> data = new ArrayList<Float>();
 					data.add(mateSizeMod);
 					EntityWolfTFC baby = new EntityWolfTFC(worldObj, this,data);
@@ -252,7 +252,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 			if(!this.worldObj.isRemote){
 				this.dataWatcher.updateObject(21, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(22, Float.valueOf(size_mod));
-				
+
 				this.dataWatcher.updateObject(24, Float.valueOf(strength_mod));
 				this.dataWatcher.updateObject(25, Float.valueOf(aggression_mod));
 				this.dataWatcher.updateObject(26, Float.valueOf(obedience_mod));
@@ -263,7 +263,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 			else{
 				sex = this.dataWatcher.getWatchableObjectInt(21);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(22);
-				
+
 				strength_mod = this.dataWatcher.getWatchableObjectFloat(24);
 				aggression_mod = this.dataWatcher.getWatchableObjectFloat(25);
 				obedience_mod = this.dataWatcher.getWatchableObjectFloat(26);
@@ -333,13 +333,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		if(isAdult())
-		{
-			this.dropItem(TFCItems.Hide.itemID,1);
-			this.dropItem(Item.bone.itemID, rand.nextInt(3)+1);
-		}
+		float ageMod = TFC_Core.getPercentGrown(this);
 
-
+		this.entityDropItem(new ItemStack(TFCItems.Hide.itemID,1,(int)(size_mod*ageMod*0.9)),0);
+		this.dropItem(Item.bone.itemID, (int)((rand.nextInt(3)+1)*ageMod));
 	}
 
 	@Override
@@ -439,7 +436,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 
 	@Override
 	public EntityAgeable createChildTFC(EntityAgeable entityageable) {
-		
+
 		ArrayList<Float> data = new ArrayList<Float>();
 		data.add(entityageable.getEntityData().getFloat("MateSize"));
 		return new EntityWolfTFC(worldObj, this, data);
@@ -512,7 +509,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public void setAttackedVec(Vec3 attackedVec) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public Entity getFearSource() {
@@ -522,6 +519,6 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public void setFearSource(Entity fearSource) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

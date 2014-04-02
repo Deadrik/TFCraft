@@ -109,7 +109,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 					return is;
 				}
 
-				if(!world.isRemote && world.getBlockMaterial(x, y, z) == Material.water && !entity.isSneaking())
+				if(!world.isRemote && TFC_Core.isFreshWater(world.getBlockId(x, y, z)) && !entity.isSneaking())
 				{
 					if(is.getItemDamage() == 1)
 					{

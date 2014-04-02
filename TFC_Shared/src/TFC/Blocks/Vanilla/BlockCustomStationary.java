@@ -2,6 +2,7 @@ package TFC.Blocks.Vanilla;
 
 import java.util.Random;
 
+import TFC.TFCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -64,27 +65,27 @@ public class BlockCustomStationary extends BlockCustomFluid
 	 * Ticks the block if it's been scheduled
 	 */
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
-		super.updateTick(par1World, par2, par3, par4, par5Random);
+		super.updateTick(world, i, j, k, rand);
 		if (this.blockMaterial == Material.lava)
 		{
-			int var6 = par5Random.nextInt(3);
+			int var6 = rand.nextInt(3);
 			int var7;
 			int var8;
 
 			for (var7 = 0; var7 < var6; ++var7)
 			{
-				par2 += par5Random.nextInt(3) - 1;
-				++par3;
-				par4 += par5Random.nextInt(3) - 1;
-				var8 = par1World.getBlockId(par2, par3, par4);
+				i += rand.nextInt(3) - 1;
+				++j;
+				k += rand.nextInt(3) - 1;
+				var8 = world.getBlockId(i, j, k);
 
 				if (var8 == 0)
 				{
-					if (this.isFlammable(par1World, par2 - 1, par3, par4) || this.isFlammable(par1World, par2 + 1, par3, par4) || this.isFlammable(par1World, par2, par3, par4 - 1) || this.isFlammable(par1World, par2, par3, par4 + 1) || this.isFlammable(par1World, par2, par3 - 1, par4) || this.isFlammable(par1World, par2, par3 + 1, par4))
+					if (this.isFlammable(world, i - 1, j, k) || this.isFlammable(world, i + 1, j, k) || this.isFlammable(world, i, j, k - 1) || this.isFlammable(world, i, j, k + 1) || this.isFlammable(world, i, j - 1, k) || this.isFlammable(world, i, j + 1, k))
 					{
-						par1World.setBlock(par2, par3, par4, Block.fire.blockID);
+						world.setBlock(i, j, k, Block.fire.blockID);
 						return;
 					}
 				}
@@ -94,19 +95,46 @@ public class BlockCustomStationary extends BlockCustomFluid
 
 			if (var6 == 0)
 			{
-				var7 = par2;
-				var8 = par4;
+				var7 = i;
+				var8 = k;
 
 				for (int var9 = 0; var9 < 3; ++var9)
 				{
-					par2 = var7 + par5Random.nextInt(3) - 1;
-					par4 = var8 + par5Random.nextInt(3) - 1;
+					i = var7 + rand.nextInt(3) - 1;
+					k = var8 + rand.nextInt(3) - 1;
 
-					if (par1World.isAirBlock(par2, par3 + 1, par4) && this.isFlammable(par1World, par2, par3, par4))
-						par1World.setBlock(par2, par3 + 1, par4, Block.fire.blockID);
+					if (world.isAirBlock(i, j + 1, k) && this.isFlammable(world, i, j, k))
+						world.setBlock(i, j + 1, k, Block.fire.blockID);
 				}
 			}
 		}
+		else if(this == TFCBlocks.FreshWaterStill)
+		{
+			if(j== 144 && scanForOcean(world,i,j,k))
+			{
+				world.setBlock(i, j, k, Block.waterStill.blockID);
+			}
+		}
+	}
+	
+	private boolean scanForOcean(World world, int i, int j, int k)
+	{
+		if(world.getBiomeGenForCoords(i+5, k).biomeID == BiomeGenBase.ocean.biomeID ||
+				world.getBiomeGenForCoords(i+10, k).biomeID == BiomeGenBase.ocean.biomeID || 
+				world.getBiomeGenForCoords(i+20, k).biomeID == BiomeGenBase.ocean.biomeID || 
+						world.getBiomeGenForCoords(i-5, k).biomeID == BiomeGenBase.ocean.biomeID ||
+						world.getBiomeGenForCoords(i-10, k).biomeID == BiomeGenBase.ocean.biomeID || 
+						world.getBiomeGenForCoords(i-20, k).biomeID == BiomeGenBase.ocean.biomeID || 
+				world.getBiomeGenForCoords(i, k+5).biomeID == BiomeGenBase.ocean.biomeID ||
+				world.getBiomeGenForCoords(i, k+10).biomeID == BiomeGenBase.ocean.biomeID || 
+				world.getBiomeGenForCoords(i, k+20).biomeID == BiomeGenBase.ocean.biomeID|| 
+				world.getBiomeGenForCoords(i, k-5).biomeID == BiomeGenBase.ocean.biomeID ||
+				world.getBiomeGenForCoords(i, k-10).biomeID == BiomeGenBase.ocean.biomeID || 
+				world.getBiomeGenForCoords(i, k-20).biomeID == BiomeGenBase.ocean.biomeID)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	/**

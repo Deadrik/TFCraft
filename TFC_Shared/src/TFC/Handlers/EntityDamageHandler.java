@@ -28,6 +28,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Events.EntityArmorCalcEvent;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
 import TFC.Entities.EntityJavelin;
 import TFC.Items.ItemTFCArmor;
@@ -46,7 +47,8 @@ public class EntityDamageHandler
 		}
 		else if(event.source == DamageSource.fall)
 		{
-			event.ammount *= 80;
+			float healthMod = TFC_Core.getEntityMaxHealth(entity)/1000f;
+			event.ammount *= 80*healthMod;
 		}
 		else if(event.source == DamageSource.drown)
 		{
