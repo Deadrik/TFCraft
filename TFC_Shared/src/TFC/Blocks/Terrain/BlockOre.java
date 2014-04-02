@@ -34,8 +34,13 @@ public class BlockOre extends BlockCollapsable
 	{
 		int[] data = new int[2];
 		DataLayer dl =((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(i, k, TFC_Core.getRockLayerFromHeight(world,i,j,k));
-		data[0] = ((BlockCollapsable)Block.blocksList[dl.data1]).dropBlock;
-		data[1] = dl.data2;
+		if(dl != null)
+		{
+			data[0] = ((BlockCollapsable)Block.blocksList[dl.data1]).dropBlock;
+			data[1] = dl.data2;
+		}
+		data[0] = -1;
+		data[1] = -1;
 		return data;
 	}
 

@@ -23,7 +23,7 @@ public class WorldGenFissure implements IWorldGenerator
 	int creviceDepth = 1;
 	Block fillBlock;
 	int depth = 20;
-	
+
 	int minTunnel = 1;
 	boolean checkStability = true;
 	boolean underground = false;
@@ -115,6 +115,8 @@ public class WorldGenFissure implements IWorldGenerator
 		int[] rockLayer = fillBlock != null && fillBlock.blockMaterial == Material.lava ? TFC_Climate.getRockLayer(x, y, z, 2) : 
 			TFC_Climate.getRockLayer(x, y, z, TFC_Core.getRockLayerFromHeight(world, x, y, z));
 		boolean makeTunnel = map.size() > 10;
+		if(rockLayer[0] == -1)
+			return;
 		for(ByteCoord b : map)
 		{
 			world.setBlock(x+b.x, y+b.y, z+b.z, 0);
@@ -322,7 +324,7 @@ public class WorldGenFissure implements IWorldGenerator
 			}
 			else if(block.collapseChance < 100)
 				for(int d = 0; d <= poolDepth; d++)
-					if(TFC_Core.isGround(world.getBlockId(worldX, worldY-d, worldZ)))
+					if(TFC_Core.isGround(world.getBlockId(worldX, worldY-d, worldZ)) && rockLayer[0] != -1)
 						world.setBlock(worldX, worldY-d, worldZ, rockLayer[0], rockLayer[1], 2);
 			checkedmap.add(block.coords);
 			checkQueue.removeFirst();
