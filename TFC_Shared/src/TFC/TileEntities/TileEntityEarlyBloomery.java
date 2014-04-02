@@ -1,30 +1,37 @@
 package TFC.TileEntities;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.API.ISmeltable;
 import TFC.API.Constant.Global;
 import TFC.Blocks.Devices.BlockEarlyBloomery;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Items.ItemOre;
 
-public class TileEntityEarlyBloomery extends TileEntity
+public class TileEntityEarlyBloomery extends NetworkTileEntity
 {
-	public boolean isValid;
+	public boolean isFlipped;
 	public boolean bloomeryLit;
 
 	private int prevStackSize;
 	private int numAirBlocks;
+
+	private int validationCheck = 60;
 
 	//Bloomery
 	public int charcoalCount;
@@ -34,7 +41,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 
 	public TileEntityEarlyBloomery()
 	{
-		isValid = false;
+		isFlipped = false;
 		bloomeryLit = false;
 		numAirBlocks = 0;
 		charcoalCount = 0;
@@ -42,39 +49,50 @@ public class TileEntityEarlyBloomery extends TileEntity
 		outCount = 0;
 	}
 
-	private Boolean CheckValidity() 
+	public void swapFlipped()
 	{
-		if(!worldObj.isBlockNormalCube(xCoord, yCoord+1, zCoord))
+		if(isFlipped)isFlipped = false;
+		else isFlipped = true;
+		if(!worldObj.isRemote)
 		{
-			return false;
+			try
+			{
+				TerraFirmaCraft.proxy.sendCustomPacket(sendInitPacket());
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
-		if(!worldObj.isBlockNormalCube(xCoord, yCoord-1, zCoord))
-		{
-			return false;
-		}
-
-		return true;
 	}
 
 	public boolean isStackValid(int i, int j, int k)
 	{
-		if(((worldObj.getBlockId(i, j-1, k) != TFCBlocks.Molten.blockID && worldObj.getBlockMaterial(i, j-1, k) != Material.rock) || (!worldObj.isBlockNormalCube(i, j-1, k)))&& worldObj.getBlockId(i, j-1, k) != TFCBlocks.Charcoal.blockID)
+		int yNegID = worldObj.getBlockId(i, j-1, k);
+		if(yNegID != TFCBlocks.Molten.blockID &&
+				worldObj.getBlockMaterial(i, j-1, k) != Material.rock && 
+				!worldObj.isBlockNormalCube(i, j-1, k) && 
+				yNegID != TFCBlocks.Charcoal.blockID)
 		{
 			return false;
 		}
-		if(worldObj.getBlockMaterial(i+1, j, k) != Material.rock || !worldObj.isBlockNormalCube(i+1, j, k))
+		if(worldObj.getBlockMaterial(i+1, j, k) != Material.rock &&
+				worldObj.getBlockMaterial(i+1, j, k) != Material.iron && !TFC_Core.isWestSolid(worldObj, xCoord, yCoord, zCoord))
 		{
 			return false;
 		}
-		if(worldObj.getBlockMaterial(i-1, j, k) != Material.rock || !worldObj.isBlockNormalCube(i-1, j, k))
+		if(worldObj.getBlockMaterial(i-1, j, k) != Material.rock &&
+				worldObj.getBlockMaterial(i-1, j, k) != Material.iron && !TFC_Core.isEastSolid(worldObj, xCoord, yCoord, zCoord))
 		{
 			return false;
 		}
-		if(worldObj.getBlockMaterial(i, j, k+1) != Material.rock || !worldObj.isBlockNormalCube(i, j, k+1))
+		if(worldObj.getBlockMaterial(i, j, k+1) != Material.rock &&
+				worldObj.getBlockMaterial(i, j, k+1) != Material.iron && !TFC_Core.isSouthSolid(worldObj, xCoord, yCoord, zCoord))
 		{
 			return false;
 		}
-		if(worldObj.getBlockMaterial(i, j, k-1) != Material.rock || !worldObj.isBlockNormalCube(i, j, k-1))
+		if(worldObj.getBlockMaterial(i, j, k-1) != Material.rock &&
+				worldObj.getBlockMaterial(i, j, k-1) != Material.iron && !TFC_Core.isNorthSolid(worldObj, xCoord, yCoord, zCoord))
 		{
 			return false;
 		}
@@ -99,15 +117,15 @@ public class TileEntityEarlyBloomery extends TileEntity
 		if(!worldObj.isRemote)
 		{
 			//get the direction that the bloomery is facing so that we know where the stack should be
-			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
-			int[] direction = BlockEarlyBloomery.headBlockToFootBlockMap[meta];
+			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+			int[] direction = BlockEarlyBloomery.bloomeryToStackMap[getCharcoalDir(meta)];
 
 			if (this.charcoalCount < this.oreCount) 
 			{
 				return false;
 			}
-
-			if(worldObj.getBlockId(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Charcoal.blockID && 
+			int bid = worldObj.getBlockId(xCoord+direction[0], yCoord, zCoord+direction[1]);
+			if(bid == TFCBlocks.Charcoal.blockID && 
 					worldObj.getBlockMetadata(xCoord+direction[0], yCoord, zCoord+direction[1]) >= 7 && !bloomeryLit)
 			{
 				bloomeryLit = true;
@@ -120,6 +138,12 @@ public class TileEntityEarlyBloomery extends TileEntity
 			}
 		}
 		return false;
+	}
+
+	private int getCharcoalDir(int meta)
+	{
+		int dir = meta & 3;
+		return dir;
 	}
 
 	@Override
@@ -136,10 +160,10 @@ public class TileEntityEarlyBloomery extends TileEntity
 
 			//get the direction that the bloomery is facing so that we know where the stack should be
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-			int[] direction = BlockEarlyBloomery.headBlockToFootBlockMap[meta & 3];
+			int[] direction = BlockEarlyBloomery.bloomeryToStackMap[getCharcoalDir(meta)];
 			if(bloomeryLit && TFC_Time.getTotalTicks() > fuelTimeLeft)
 			{
-				if((worldObj.getBlockId(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Charcoal.blockID))
+				if((worldObj.getBlockId(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Molten.blockID))
 				{
 					bloomeryLit = false;
 					worldObj.setBlock(xCoord+direction[0], yCoord, zCoord+direction[1], TFCBlocks.Bloom.blockID);
@@ -165,7 +189,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 			if(charcoalCount < 0) {
 				charcoalCount = 0;
 			}
-			
+
 			/* Calculate how much ore the bloomery can hold. */
 			if(isStackValid(xCoord+direction[0], yCoord+3, zCoord+direction[1])) {
 				maxCount = 16;
@@ -177,12 +201,13 @@ public class TileEntityEarlyBloomery extends TileEntity
 				maxCount = 8;
 			}
 
+			int moltenHeight = count-1;
 			/*Fill the bloomery stack with molten ore. */
-			for (int i = 1; i < moltenCount; i++)
+			for (int i = bloomeryLit ? 0:1, j = bloomeryLit ? moltenHeight+7 : moltenHeight; j > 0; i++,j-=8)
 			{
+				int bid = worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
 				/*The stack must be air or already be molten rock*/
-				if((worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == 0 ||
-						worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == TFCBlocks.Molten.blockID) &&
+				if((bid == 0 ||bid == TFCBlocks.Molten.blockID || bid == TFCBlocks.Charcoal.blockID) &&
 						worldObj.getBlockMaterial(xCoord+direction[0], yCoord-1, zCoord+direction[1]) == Material.rock)
 				{
 					//Make sure that the Stack is surrounded by rock
@@ -190,13 +215,19 @@ public class TileEntityEarlyBloomery extends TileEntity
 						validCount++;
 					}
 
-					if(i-1 < moltenCount && i <= validCount) 
+					if(i <= validCount) 
 					{
+						int mMeta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+						int m = j > 7 ? 7 : j;
 						if(this.bloomeryLit)
 						{
-							worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 15, 2);
+							if((bid == TFCBlocks.Molten.blockID && (mMeta & 8) == 0) || bid == 0 || bid == TFCBlocks.Charcoal.blockID)
+							{
+								m += 8;
+								worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, m, 2);
+							}
 						} else {
-							worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 0, 2);
+							worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, m, 2);
 						}
 					} 
 					else 
@@ -288,15 +319,23 @@ public class TileEntityEarlyBloomery extends TileEntity
 			}
 
 			//Here we make sure that the forge is valid
-			isValid = CheckValidity();
+			if(this.validationCheck <= 0)
+				if(((BlockEarlyBloomery)Block.blocksList[worldObj.getBlockId(xCoord, yCoord, zCoord)]).canBlockStay(worldObj, xCoord, yCoord, zCoord))
+					validationCheck = 600;
+				else
+					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+			else
+				validationCheck--;
 		}
+		if(this.isInvalid())
+			this.validate();
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setBoolean("isValid", isValid);
+		nbttagcompound.setBoolean("isFlipped", isFlipped);
 		nbttagcompound.setLong("fuelTimeLeft", fuelTimeLeft);
 		nbttagcompound.setInteger("charcoalCount", charcoalCount);
 		nbttagcompound.setInteger("outCount", outCount);
@@ -308,11 +347,37 @@ public class TileEntityEarlyBloomery extends TileEntity
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
-		isValid = nbttagcompound.getBoolean("isValid");
+		isFlipped = nbttagcompound.getBoolean("isFlipped");
 		fuelTimeLeft = nbttagcompound.getLong("fuelTimeLeft");
 		charcoalCount = nbttagcompound.getInteger("charcoalCount");
 		outCount = nbttagcompound.getInteger("outCount");
 		oreCount = nbttagcompound.getInteger("oreCount");
 		bloomeryLit = nbttagcompound.getBoolean("isLit");
+	}
+
+	@Override
+	public void handleDataPacket(DataInputStream inStream) throws IOException
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void handleDataPacketServer(DataInputStream inStream) throws IOException
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createInitPacket(DataOutputStream outStream) throws IOException
+	{
+		outStream.writeBoolean(isFlipped);
+	}
+
+	@Override
+	public void handleInitPacket(DataInputStream inStream) throws IOException
+	{
+		isFlipped = inStream.readBoolean();
 	}
 }

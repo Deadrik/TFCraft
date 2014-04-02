@@ -88,7 +88,7 @@ public abstract class NetworkTileEntity extends TileEntity implements INetworkTE
 	 * Client Side Only.
 	 * @return A packet that is sent to the server when the client needs initialization.
 	 */
-	private Packet needsInitPacket() throws IOException
+	protected Packet needsInitPacket() throws IOException
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 		DataOutputStream dos=new DataOutputStream(bos);
@@ -113,7 +113,7 @@ public abstract class NetworkTileEntity extends TileEntity implements INetworkTE
 	 * Constructs a packet. Only called by the server.
 	 * @return A packet to be sent to the client that is requesting initialization of the block.
 	 */
-	private Packet sendInitPacket() throws IOException
+	protected Packet sendInitPacket() throws IOException
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 		DataOutputStream dos=new DataOutputStream(bos);

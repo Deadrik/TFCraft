@@ -88,7 +88,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		{
 			//get the direction that the bloomery is facing so that we know where the stack should be
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
-			int[] direction = BlockEarlyBloomery.headBlockToFootBlockMap[meta];
+			int[] direction = BlockEarlyBloomery.bloomeryToStackMap[meta];
 
 			if (this.charcoalCount < this.oreCount) 
 			{

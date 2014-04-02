@@ -727,6 +727,34 @@ public class TFC_Core
 		skills.writeNBT(player.getEntityData());
 	}
 
+	public static boolean isTopFaceSolid (World world, int x, int y, int z)
+	{
+		if(world.isBlockNormalCube(x, y, z))
+			return true;
+		else if(world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
+		{
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+			if(BlockSlab.getTopChiselLevel(te.extraData) != 0)
+				return false;
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean isBottomFaceSolid (World world, int x, int y, int z)
+	{
+		if(world.isBlockNormalCube(x, y, z))
+			return true;
+		else if(world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
+		{
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+			if(BlockSlab.getBottomChiselLevel(te.extraData) != 0)
+				return false;
+			return true;
+		}
+		return false;
+	}
+
 	public static boolean isNorthSolid(World world, int x, int y, int z)
 	{
 		if(world.isBlockNormalCube(x, y, z-1))
@@ -734,6 +762,20 @@ public class TFC_Core
 		else if(world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z-1);
+			if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
+				return false;
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean isNorthFaceSolid (World world, int x, int y, int z)
+	{
+		if(world.isBlockNormalCube(x, y, z))
+			return true;
+		else if(world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
+		{
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
 			if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -755,6 +797,20 @@ public class TFC_Core
 		return false;
 	}
 
+	public static boolean isSouthFaceSolid(World world, int x, int y, int z)
+	{
+		if(world.isBlockNormalCube(x, y, z))
+			return true;
+		else if(world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
+		{
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+			if(BlockSlab.getSouthChiselLevel(te.extraData) != 0)
+				return false;
+			return true;
+		}
+		return false;
+	}
+
 	public static boolean isEastSolid(World world, int x, int y, int z)
 	{
 		if(world.isBlockNormalCube(x-1, y, z))
@@ -769,6 +825,20 @@ public class TFC_Core
 		return false;
 	}
 
+	public static boolean isEastFaceSolid(World world, int x, int y, int z)
+	{
+		if(world.isBlockNormalCube(x, y, z))
+			return true;
+		else if(world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
+		{
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+			if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
+				return false;
+			return true;
+		}
+		return false;
+	}
+
 	public static boolean isWestSolid(World world, int x, int y, int z)
 	{
 		if(world.isBlockNormalCube(x+1, y, z))
@@ -776,6 +846,20 @@ public class TFC_Core
 		else if(world.getBlockId(x+1, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x+1, y, z);
+			if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
+				return false;
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean isWestFaceSolid(World world, int x, int y, int z)
+	{
+		if(world.isBlockNormalCube(x, y, z))
+			return true;
+		else if(world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
+		{
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
 			if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -837,7 +921,7 @@ public class TFC_Core
 	 */
 	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z)
 	{
-		
+
 		handleItemTicking(iinv, world, x, y, z, 1);
 	}
 
@@ -932,7 +1016,7 @@ public class TFC_Core
 			//if the food is salted then we cut the decay rate in half
 			if(nbt.hasKey("isSalted"))
 				thisDecayRate *= 0.5f;
-			
+
 			/*Here we calculate the decayRate based on the environment. We do this before everything else
 			 * so that its only done once per inventory
 			 */
