@@ -36,6 +36,7 @@ import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumWoodMaterial;
 import TFC.API.Util.Helper;
 import TFC.Blocks.BlockSlab;
+import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.Player.BodyTempStats;
 import TFC.Core.Player.FoodStatsTFC;
@@ -606,16 +607,21 @@ public class TFC_Core
 
 	public static int getRockLayerFromHeight(World world, int x, int y, int z)
 	{
-		int[] hm = ChunkDataManager.getData(x >> 4, z >> 4).heightmap;
-		int localX = x & 15;
-		int localZ = z & 15;
-		int localY = localX + localZ * 16;
-		if(y <= TFCOptions.RockLayer3Height + hm[localY])
-			return 2;
-		else if(y <= TFCOptions.RockLayer2Height + hm[localY])
-			return 1;
-		else
-			return 0;
+		ChunkData cd = ChunkDataManager.getData(x >> 4, z >> 4);
+		if(cd != null)
+		{
+			int[] hm = cd.heightmap;
+			int localX = x & 15;
+			int localZ = z & 15;
+			int localY = localX + localZ * 16;
+			if(y <= TFCOptions.RockLayer3Height + hm[localY])
+				return 2;
+			else if(y <= TFCOptions.RockLayer2Height + hm[localY])
+				return 1;
+			else
+				return 0;
+		}
+		return -1;
 	}
 
 	public static boolean convertGrassToDirt(World world, int i, int j, int k)
@@ -688,7 +694,7 @@ public class TFC_Core
 
 	public static FoodStatsTFC getPlayerFoodStats(EntityPlayer player)
 	{
-		FoodStatsTFC foodstats = new FoodStatsTFC();
+		FoodStatsTFC foodstats = new FoodStatsTFC(player);
 		foodstats.readNBT(player.getEntityData());
 		return foodstats;
 	}

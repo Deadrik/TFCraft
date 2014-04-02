@@ -167,12 +167,16 @@ public class BlockCollapsable extends BlockTerra
 		if (canFallBelow(world, xCoord, yCoord - 1, zCoord)  && !isNearSupport(world, i, j, k, 4, collapseChance)  && isUnderLoad(world, i, j, k))
 			if (!world.isRemote && fallingBlock != Blocks.air)
 			{
-				EntityFallingStone ent = new EntityFallingStone(world, i + 0.5F, j + 0.5F, k + 0.5F, fallingBlock, fallingBlockMeta+8);
-//				ent.fallTime = -5000;
-				world.spawnEntityInWorld(ent);
-				Random R = new Random(i*j+k);
-				if(R.nextInt(100) > 90)
-					world.playSoundAtEntity((Entity)ent, "rock.slide.long", 1.0F, 0.8F + (R.nextFloat()/2));
+				if(fallingBlock != null)
+				{
+					EntityFallingStone ent = new EntityFallingStone(world, i + 0.5F, j + 0.5F, k + 0.5F, fallingBlock, fallingBlockMeta+8);
+//					ent.fallTime = -5000;
+					world.spawnEntityInWorld(ent);
+
+					Random R = new Random(i*j+k);
+					if(R.nextInt(100) > 90)
+						world.playSoundAtEntity(ent, "rock.slide.long", 1.0F, 0.8F + (R.nextFloat()/2));
+				}
 
 				world.setBlockToAir(i, j, k);
 

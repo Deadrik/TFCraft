@@ -271,7 +271,7 @@ public class WorldGenMinable extends WorldGenerator
 						if(TFCOptions.enableOreTest)
 						{
 							DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(world, posX, posY, posZ));
-							if(rockLayer.block == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
+							if(rockLayer.block != null && rockLayer.block == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
 							{
 								isCorrectRockType = true;
 								isCorrectMeta = true;
@@ -372,7 +372,7 @@ public class WorldGenMinable extends WorldGenerator
 								if(TFCOptions.enableOreTest)
 								{
 									DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(world, posX, posY, posZ));
-									if(rockLayer.block == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
+									if(rockLayer.block != null && rockLayer.block == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
 									{
 										isCorrectRockType = true;
 										isCorrectMeta = true;

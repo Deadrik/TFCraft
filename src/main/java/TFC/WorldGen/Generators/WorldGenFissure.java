@@ -108,6 +108,8 @@ public class WorldGenFissure implements IWorldGenerator
 				TFC_Climate.getRockLayer(x, y, z, 2) : TFC_Climate.getRockLayer(x, y, z, TFC_Core.getRockLayerFromHeight(world, x, y, z));
 
 		boolean makeTunnel = map.size() > 10;
+		if(rockLayer.block == null)
+			return;
 		for(ByteCoord b : map)
 		{
 			world.setBlockToAir(x+b.x, y+b.y, z+b.z);

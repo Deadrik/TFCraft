@@ -48,8 +48,9 @@ public class FoodStatsTFC
 	
 	public EntityPlayer player;
 
-	public FoodStatsTFC()
+	public FoodStatsTFC(EntityPlayer player)
 	{
+		this.player = player;
 		waterTimer = TFC_Time.getTotalTicks();
 		foodTimer = TFC_Time.getTotalTicks();
 		foodHealTimer = TFC_Time.getTotalTicks();
@@ -59,7 +60,7 @@ public class FoodStatsTFC
 	 * Handles the food game logic.
 	 */
 	public void onUpdate(EntityPlayer player)
-	{
+	{	
 		if(!player.worldObj.isRemote)
 		{
 			int difficulty = player.worldObj.difficultySetting.getDifficultyId();
