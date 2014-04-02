@@ -28,6 +28,10 @@ public class RenderBloomery implements ISimpleBlockRenderingHandler
 		}
 		float f = 0.125F;
 
+		float xMin = 0.0625f;
+		float yMin = 0.0625f;
+		float zMin = 0.0625f;
+
 		if (!BlockEarlyBloomery.isOpen(meta))
 		{
 			switch(dir)
@@ -47,30 +51,70 @@ public class RenderBloomery implements ISimpleBlockRenderingHandler
 		{
 			if (dir == 0)
 			{
-				renderblocks.setRenderBounds(0.0F, 0.0F, 0.0f, f, 1.0F, 0.5F);
+				//Render frame
+				renderblocks.setRenderBounds(0, 0, 0, 1, 0.0625, f);
 				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(1 - f, 0.0F, 0.0f, 1, 1.0F, 0.5F);
+				renderblocks.setRenderBounds(0, 0.9375, 0, 1, 1, f);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				renderblocks.setRenderBounds(0, 0.0625, 0, 0.0625, 0.9375, f);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				renderblocks.setRenderBounds(0.9375, 0.0625, 0, 1, 0.9375, f);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				//Render doors
+				renderblocks.setRenderBounds(0, 0.0625f, 0.0625f, f, 0.9375, 0.5F);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				renderblocks.setRenderBounds(1 - f, 0.0625f, 0.0625f, 1, 0.9375, 0.5F);
 				renderblocks.renderStandardBlock(block, i, j, k);
 			}
 			else if (dir == 1)
 			{
-				renderblocks.setRenderBounds(0.5, 0.0, 1.0 - f, 1.0, 1.0, 1.0);
+				//Render frame
+				renderblocks.setRenderBounds(1-f, 0, 0, 1, 0.0625, 1);
 				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.5, 0.0, 0.0, 1.0, 1.0, f);
+				renderblocks.setRenderBounds(1-f, 0.9375, 0, 1, 1, 1);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				renderblocks.setRenderBounds(1-f, 0.0625, 0, 1, 0.9375, 0.0625);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				renderblocks.setRenderBounds(1-f, 0.0625, 0.9375, 1, 0.9375, 1);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				//Render doors
+				renderblocks.setRenderBounds(0.5, 0.0625f, 1 - f, 0.9375, 0.9375, 1);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				renderblocks.setRenderBounds(0.5, 0.0625f, 0, 0.9375, 0.9375, f);
 				renderblocks.renderStandardBlock(block, i, j, k);
 			}
 			else if (dir == 2)
 			{
-				renderblocks.setRenderBounds(0.0F, 0.0F, 0.5f, f, 1.0F, 1F);
+				//Render frame
+				renderblocks.setRenderBounds(0, 0, 1-f, 1, 0.0625, 1);
 				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(1 - f, 0.0F, 0.5f, 1, 1.0F, 1F);
+				renderblocks.setRenderBounds(0, 0.9375, 1-f, 1, 1, 1);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				renderblocks.setRenderBounds(0, 0.0625, 1-f, 0.0625, 0.9375, 1);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				renderblocks.setRenderBounds(0.9375, 0.0625, 1-f, 1, 0.9375, 1);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				//Render doors
+				renderblocks.setRenderBounds(0, 0.0625f, 0.5f, f, 0.9375, 0.9375);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				renderblocks.setRenderBounds(1 - f, 0.0625f, 0.5f, 1, 0.9375, 0.9375);
 				renderblocks.renderStandardBlock(block, i, j, k);
 			}
 			else if (dir == 3)
 			{
-				renderblocks.setRenderBounds(0.0, 0.0, 1.0 - f, 0.5, 1.0, 1.0);
+				//Render frame
+				renderblocks.setRenderBounds(0, 0, 0, f, 0.0625, 1);
 				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.0, 0.0, 0.0, 0.5, 1.0, f);
+				renderblocks.setRenderBounds(0, 0.9375, 0, f, 1, 1);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				renderblocks.setRenderBounds(0, 0.0625, 0, f, 0.9375, 0.0625);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				renderblocks.setRenderBounds(0, 0.0625, 0.9375, f, 0.9375, 1);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				//Render doors
+				renderblocks.setRenderBounds(0.0625f, 0.0625f, 1 - f, 0.5, 0.9375, 1);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				renderblocks.setRenderBounds(0.0625f, 0.0625f, 0, 0.5, 0.9375, f);
 				renderblocks.renderStandardBlock(block, i, j, k);
 			}
 		}
