@@ -7,12 +7,15 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import TFC.TFCItems;
-import TFC.API.Util.Helper;
+import TFC.API.IFood;
+import TFC.API.Enums.EnumFoodGroup;
 import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
+import TFC.Core.Player.FoodStatsTFC;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityBarrel;
 
-public class ItemCustomBucketMilk extends ItemTerra
+public class ItemCustomBucketMilk extends ItemTerra implements IFood
 {
 	public ItemCustomBucketMilk()
 	{
@@ -22,16 +25,21 @@ public class ItemCustomBucketMilk extends ItemTerra
 		this.setFolder("tools/");
 	}
 
-	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
-		--par1ItemStack.stackSize;
-
-		if (!par2World.isRemote)
+		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+		if(!world.isRemote && foodstats.needFood())
 		{
-			par3EntityPlayer.clearActivePotions();
-		}
+			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 
-		return par1ItemStack.stackSize <= 0 ? new ItemStack(TFCItems.WoodenBucketEmpty) : par1ItemStack;
+			foodstats.eatFood(is);
+			foodstats.restoreWater(player, 8000);
+
+			TFC_Core.setPlayerFoodStats(player, foodstats);
+
+			is = new ItemStack(TFCItems.WoodenBucketEmpty);
+		}
+		return is;
 	}
 
 	/**
@@ -53,35 +61,46 @@ public class ItemCustomBucketMilk extends ItemTerra
 	/**
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
-	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer par3EntityPlayer)
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer entity)
 	{
-		float var4 = 1.0F;
-		double var5 = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * var4;
-		double var7 = par3EntityPlayer.prevPosY + (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) * var4 + 1.62D - par3EntityPlayer.yOffset;
-		double var9 = par3EntityPlayer.prevPosZ + (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) * var4;
-		MovingObjectPosition var12 = Helper.getMovingObjectPositionFromPlayer(world, par3EntityPlayer, false);
+		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, entity, true);
+		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(entity);
+		Boolean canDrink = fs.getMaxWater(entity) - 500 > fs.waterLevel;
 
-		if (var12 == null)
+		if(mop == null)
 		{
-			return is;
+			if(is.getItemDamage() > 1 && canDrink)
+				entity.setItemInUse(is, this.getMaxItemUseDuration(is));
 		}
 		else
 		{
-			if (var12.typeOfHit == MovingObjectType.BLOCK)
+			if (mop.typeOfHit == MovingObjectType.BLOCK)
 			{
-				int i = var12.blockX;
-				int j = var12.blockY;
-				int k = var12.blockZ;
-				if(world.getTileEntity(i,j,k) != null && world.getTileEntity(i,j,k) instanceof TileEntityBarrel){
+				int i = mop.blockX;
+				int j = mop.blockY;
+				int k = mop.blockZ;
+				if(world.getTileEntity(i,j,k) != null && world.getTileEntity(i,j,k) instanceof TileEntityBarrel)
+				{
 					TileEntityBarrel TE = (TileEntityBarrel) world.getTileEntity(i,j,k);
-					if(TE.checkValidAddition(13)){
+					if(TE.checkValidAddition(13))
 						return new ItemStack(TFCItems.WoodenBucketEmpty);
-					}
 				}
 			}
 		}
-		par3EntityPlayer.setItemInUse(is, this.getMaxItemUseDuration(is));
+		entity.setItemInUse(is, this.getMaxItemUseDuration(is));
 		return is;
+	}
+
+	@Override
+	public EnumFoodGroup getFoodGroup()
+	{
+		return EnumFoodGroup.Dairy;
+	}
+
+	@Override
+	public int getFoodID()
+	{
+		return -1;
 	}
 
 }

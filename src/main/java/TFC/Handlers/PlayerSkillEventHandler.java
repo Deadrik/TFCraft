@@ -17,7 +17,7 @@ public class PlayerSkillEventHandler
 		}
 		else if(event.skillname == Global.SKILL_AGRICULTURE)
 		{
-			event.skillResult = 1-(500f/(500f+TFC_Core.getSkillStats((EntityPlayer)event.entity).getSkill(event.skillname)));
+			event.skillResult = 1-(300f/(300f+TFC_Core.getSkillStats((EntityPlayer)event.entity).getSkill(event.skillname)));
 		}
 	}
 }

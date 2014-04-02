@@ -2,9 +2,7 @@ package TFC.Food;
 
 import java.util.List;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,8 +11,10 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.FoodStatsTFC;
@@ -41,7 +41,7 @@ public class ItemMeal extends ItemTerra
 	}
 
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemFoodTFC.addHeatInformation(is, arraylist);
 
@@ -50,55 +50,50 @@ public class ItemMeal extends ItemTerra
 			NBTTagCompound nbt = is.getTagCompound();
 
 			if(nbt.hasKey("FG0"))
-				arraylist.add(EnumChatFormatting.WHITE+StatCollector.translateToLocal(nbt.getString("FG0")));
+				arraylist.add(StatCollector.translateToLocal(nbt.getString("FG0")).split("\\:"));
 			if(nbt.hasKey("FG1"))
-				arraylist.add(EnumChatFormatting.WHITE+StatCollector.translateToLocal(nbt.getString("FG1")));
+				arraylist.add(StatCollector.translateToLocal(nbt.getString("FG1")).split("\\:"));
 			if(nbt.hasKey("FG2"))
-				arraylist.add(EnumChatFormatting.WHITE+StatCollector.translateToLocal(nbt.getString("FG2")));
+				arraylist.add(StatCollector.translateToLocal(nbt.getString("FG2")).split("\\:"));
 			if(nbt.hasKey("FG3"))
-				arraylist.add(EnumChatFormatting.WHITE+StatCollector.translateToLocal(nbt.getString("FG3")));
+				arraylist.add(StatCollector.translateToLocal(nbt.getString("FG3")).split("\\:"));
 
 			if(nbt.hasKey("satisfaction"))
 			{
-				arraylist.add("Satisfaction Mult: " + 1+nbt.getFloat("satisfaction")+"x");
+				float _sat = Helper.roundNumber(nbt.getFloat("satisfaction")/1*100,10);
+
+				if(!isWarm(is))
+					_sat*=0.25f;
+				arraylist.add("Satisfaction: " + _sat+"%");
 			}
 
 			if(nbt.hasKey("foodWeight"))
 			{
 				float ounces = nbt.getFloat("foodWeight");
 				if(ounces > 0)
-					arraylist.add("Amount " + ounces+" oz / 80.0 oz");
+					arraylist.add("Amount " + Helper.roundNumber(ounces,10)+" oz / 80.0 oz");
 				float decay = nbt.getFloat("foodDecay");
 				if(decay > 0)
-					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + decay/ounces*100+"%");
+					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100,10)+"%");
 			}
 		}
 	}
 
-	@Override
-	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
+	private String localize(String[] in)
 	{
-		if (!world.isRemote && is.hasTagCompound())
-		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-
-			if(stackTagCompound.hasKey("temperature"))
-				TFC_ItemHeat.HandleItemHeat(is);
-		}
+		int ordinal = Integer.parseInt(in[1]);
+		return ItemFoodTFC.getFoodGroupColor(EnumFoodGroup.values()[ordinal]) + StatCollector.translateToLocal(in[0]);
 	}
 
 	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+
+		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		if(!world.isRemote)
-		{
-			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 			foodstats.eatFood(is);
-			TFC_Core.setPlayerFoodStats(player, foodstats);
-			player.inventory.addItemStackToInventory(new ItemStack(Items.bowl,1));
-		}
-		is.stackSize--;
+		TFC_Core.setPlayerFoodStats(player, foodstats);
 		return is;
 	}
 

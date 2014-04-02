@@ -76,11 +76,12 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		if(itemstack != null && Type == 1)
 		{
 			if (itemstack.getItem() == TFCItems.ScrapedHide)
-			{
-				itemstack2 = new ItemStack(TFCItems.PrepHide,0,0);
-				while(liquidLevel >= 20 && itemstack.stackSize >0)
-				{
-					liquidLevel-=20;
+            {
+				int damage = itemstack.getItemDamage();
+				itemstack2 = new ItemStack(TFCItems.PrepHide,0,damage);
+				while(liquidLevel >= (16 + (damage * 10)) && itemstack.stackSize >0)
+                {
+					liquidLevel-=(16 + (damage * 10));
 					itemstack2.stackSize++;
 					itemstack.stackSize--;
 				}
@@ -90,9 +91,9 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			else if (itemstack.getItem() == TFCItems.Jute)
 			{
 				itemstack2 = new ItemStack(TFCItems.JuteFibre,0,0);
-				while(liquidLevel >= 20 && itemstack.stackSize >0)
-				{
-					liquidLevel-=20;
+				while(liquidLevel >= 18 && itemstack.stackSize >0)
+                {
+					liquidLevel-=18;
 					itemstack2.stackSize++;
 					itemstack.stackSize--;
 				}
@@ -160,10 +161,11 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		{
 			if(itemstack.getItem() == TFCItems.Hide)
 			{
-				itemstack2 = new ItemStack(TFCItems.SoakedHide,0,0);
-				while(liquidLevel >= 20 && itemstack.stackSize >0)
+				int damage = itemstack.getItemDamage();
+				itemstack2 = new ItemStack(TFCItems.SoakedHide,0,damage);
+				while(liquidLevel >= (16 + (damage * 10)) && itemstack.stackSize >0)
 				{
-					liquidLevel-=20;
+					liquidLevel-=(16 + (damage * 10));
 					itemstack2.stackSize++;
 					itemstack.stackSize--;
 				}
@@ -175,11 +177,13 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		{
 			if(itemstack.getItem() == TFCItems.PrepHide)
 			{
+				Random rand = new Random();
+				int damage = itemstack.getItemDamage();
 				itemstack2 = new ItemStack(TFCItems.TerraLeather,0,0);
-				while(liquidLevel >= 20 && itemstack.stackSize >0)
+				while(liquidLevel >= (16 + (damage * 10)) && itemstack.stackSize >0)
 				{
-					liquidLevel-=20;
-					itemstack2.stackSize++;
+					liquidLevel-=(16 + (damage * 10));
+					itemstack2.stackSize+=(1 + (rand.nextBoolean()?damage:(damage>0?damage-1:0)));
 					itemstack.stackSize--;
 				}
 				if(itemstack2.stackSize > 0)
@@ -251,6 +255,8 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			return StatCollector.translateToLocal("gui.Barrel.Milk");
 		case 14:
 			return StatCollector.translateToLocal("gui.Barrel.CurdledMilk");
+		case 15:
+			return StatCollector.translateToLocal("gui.Barrel.SaltWater");
 		default:
 			return "";
 		}
@@ -444,6 +450,13 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 						itemstack = new ItemStack(TFCItems.WoodenBucketEmpty);
 						updateGui();
 					}
+					else if ((Type == 0||Type == 15) && (itemstack.getItem() == TFCItems.WoodenBucketSaltWater) && liquidLevel < 256)
+					{
+						liquidLevel = Math.min(liquidLevel + 32, 256);
+						Type = 15;
+						itemstack = new ItemStack(TFCItems.WoodenBucketEmpty);
+						updateGui();
+					}
 					else if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.RedSteelBucketWater) && liquidLevel < 256)
 					{
 						liquidLevel = Math.min(liquidLevel + 32, 256);
@@ -569,6 +582,13 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 						return true;
 					if(id == TFCItems.PrepHide && Type == 3)
 						return true;
+				}
+				else if(Type == 15 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32)
+				{
+					liquidLevel = Math.max(liquidLevel - 32, 0);
+					Type = liquidLevel>0?Type:0;
+					itemstack = new ItemStack(TFCItems.WoodenBucketSaltWater);
+					updateGui();
 				}
 			}
 		}

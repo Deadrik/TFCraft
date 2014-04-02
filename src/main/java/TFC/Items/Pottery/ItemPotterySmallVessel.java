@@ -3,9 +3,7 @@ package TFC.Items.Pottery;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -18,18 +16,18 @@ import TFC.API.ISmeltable;
 import TFC.API.Metal;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.Core.TFC_Climate;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Core.Metal.Alloy;
 import TFC.Core.Metal.AlloyManager;
 import TFC.Core.Metal.AlloyMetal;
+import TFC.Food.ItemFoodTFC;
 import TFC.Items.ItemOre;
 import TFC.Items.ItemOreSmall;
 
 public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 {
-
 	public ItemPotterySmallVessel()
 	{
 		super();
@@ -39,11 +37,11 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		this.setSize(EnumSize.SMALL);
 	}
 
-	@Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
+	/*@Override
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		list.add(new ItemStack(this,1,0));
-	}
+	}*/
 
 	@Override
 	public boolean canStack()
@@ -70,7 +68,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			tag.setLong("TempTimer", totalH);
 		}
 
-		if(canCookAlloy)
+		if(canCookAlloy && bag != null)
 		{
 			Metal[] types = new Metal[4];
 			int[] metalAmounts = new int[4];
@@ -138,18 +136,14 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			}
 			int total = metalAmounts[0] + metalAmounts[1] + metalAmounts[2] + metalAmounts[3];
 			int numMetals = 0;
-			if(metalAmounts[0] > 0) {
+			if(metalAmounts[0] > 0)
 				numMetals++;
-			}
-			if(metalAmounts[1] > 0) {
+			if(metalAmounts[1] > 0)
 				numMetals++;
-			}
-			if(metalAmounts[2] > 0) {
+			if(metalAmounts[2] > 0)
 				numMetals++;
-			}
-			if(metalAmounts[3] > 0) {
+			if(metalAmounts[3] > 0)
 				numMetals++;
-			}
 
 			if(total > 0)
 			{
@@ -160,18 +154,14 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				metalPercent[3] = ((float)metalAmounts[3] / (float)total) * 100f;
 
 				List<AlloyMetal> a = new ArrayList<AlloyMetal>();
-				if(types[0] != null) {
+				if(types[0] != null)
 					a.add(new AlloyMetal(types[0], metalPercent[0]));
-				}
-				if(types[1] != null) {
+				if(types[1] != null)
 					a.add(new AlloyMetal(types[1], metalPercent[1]));
-				}
-				if(types[2] != null) {
+				if(types[2] != null)
 					a.add(new AlloyMetal(types[2], metalPercent[2]));
-				}
-				if(types[3] != null) {
+				if(types[3] != null)
 					a.add(new AlloyMetal(types[3], metalPercent[3]));
-				}
 
 				Metal match = AlloyManager.instance.matchesAlloy(a, furnaceTier);
 				if(match != null)
@@ -225,14 +215,35 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		ItemStack[] bag = loadBagInventory(is);
 		if(bag != null)
 		{
-			float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
-			float environmentalDecay = TFC_Core.getEnvironmentalDecay(temp)*0.5f;
-			TFC_Core.handleItemTicking(bag, world, x, y, z, environmentalDecay);
+			TFC_Core.handleItemTicking(bag, world, x, y, z, 0.5f);
 			for(ItemStack i : bag)
 				if(i != null && i.stackSize == 0)
 					i = null;
+
+			saveContents(is, bag);
 		}
 		return true;
+	}
+
+	public void saveContents(ItemStack vessel, ItemStack[] bag) 
+	{
+		NBTTagList nbttaglist = new NBTTagList();
+		for(int i = 0; i < 4; i++)
+		{
+			if(bag[i] != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				bag[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+		if(vessel != null)
+		{
+			if(!vessel.hasTagCompound())
+				vessel.setTagCompound(new NBTTagCompound());
+			vessel.getTagCompound().setTag("Items", nbttaglist);
+		}
 	}
 
 	@Override
@@ -241,19 +252,17 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		if(!entityplayer.isSneaking())
 		{
 			NBTTagCompound nbt = itemstack.getTagCompound();
-
 			if(itemstack.getItemDamage() == 2) 
 			{
 				if(nbt.hasKey("TempTimer"))
 				{
 					long temp = nbt.getLong("TempTimer");
 					if(TFC_Time.getTotalHours() - temp < 11) 
-					{
 						entityplayer.openGui(TerraFirmaCraft.instance, 19, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
-					}
 				}
-			} 
-			else if(itemstack.getItemDamage() == 1) {
+			}
+			else if(itemstack.getItemDamage() == 1)
+			{
 				entityplayer.openGui(TerraFirmaCraft.instance, 39, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 			}
 		}
@@ -278,9 +287,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				long total = TFC_Time.getTotalHours();
 				long temp = tag.getLong("TempTimer");
 				if(total - temp < 11) 
-				{
 					arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ItemHeat.Liquid"));
-				}
 			}
 
 			if(tag.hasKey("Items"))
@@ -293,7 +300,19 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					if(byte0 >= 0 && byte0 < 4)
 					{
 						ItemStack itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-						arraylist.add(EnumChatFormatting.GOLD + "" + itemstack.stackSize + "x " + itemstack.getItem().getItemStackDisplayName(itemstack));
+						if(itemstack.getItem() instanceof ItemFoodTFC)
+						{
+							float decay = itemstack.getTagCompound().getFloat("foodDecay");
+							float weight = itemstack.getTagCompound().getFloat("foodWeight");
+
+							String ds = " " +EnumChatFormatting.DARK_GRAY + Helper.roundNumber(decay/weight*100, 10)+"%";
+							if (decay <= 0)
+								ds = "";
+
+							arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.getItem().getItemStackDisplayName(itemstack) + " " + EnumChatFormatting.WHITE+weight+"oz" + ds);
+						}
+						else
+							arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.stackSize + "x " + itemstack.getItem().getItemStackDisplayName(itemstack));
 					}
 				}
 			}

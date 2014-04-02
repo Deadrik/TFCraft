@@ -108,7 +108,7 @@ public class TFCItems
 	public static Item GemBeryl;
 	public static Item GemTourmaline;
 	public static Item GemJade;
-	
+
 	public static Item GemAgate;
 	public static Item GemDiamond;
 
@@ -649,6 +649,7 @@ public class TFCItems
 
 	public static Item WoodenBucketEmpty;
 	public static Item WoodenBucketWater;
+	public static Item WoodenBucketSaltWater;
 	public static Item WoodenBucketMilk;
 
 	/**Food Related Items and Blocks*/
@@ -740,6 +741,8 @@ public class TFCItems
 
 	public static Item venisonRaw;
 	public static Item venisonCooked;
+	public static Item horseMeatRaw;
+	public static Item horseMeatCooked;
 
 	public static Item LooseRock;
 	public static Item FlatRock;
@@ -976,6 +979,7 @@ public class TFCItems
 		System.out.println(new StringBuilder().append("[TFC] Loading Items").toString());
 
 		//Replace any vanilla Items here
+		Item.itemRegistry.addObject(Item.getIdFromItem(Items.fishing_rod), "fishingRod", (new TFC.Items.Tools.ItemFishingRod()).setUnlocalizedName("fishingRod").setTextureName("fishing_rod"));
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.coal), "coal", new TFC.Items.ItemCoal().setUnlocalizedName("coal"));
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.stick), "stick", new ItemStick().setFull3D().setUnlocalizedName("stick"));
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.leather), "leather", new ItemTerra().setFull3D().setUnlocalizedName("leather"));
@@ -1379,6 +1383,7 @@ public class TFCItems
 
 		WoodenBucketEmpty = (new ItemCustomBucket(0)).setUnlocalizedName("Wooden Bucket Empty");
 		WoodenBucketWater = (new ItemCustomBucket(1)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);
+		WoodenBucketSaltWater = (new ItemCustomBucket(1)).setUnlocalizedName("Wooden Bucket Salt Water").setContainerItem(WoodenBucketEmpty);
 		WoodenBucketMilk = (new ItemCustomBucketMilk()).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty);
 
 		BismuthBronzeKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Bismuth Bronze Knife Blade");
@@ -1474,11 +1479,11 @@ public class TFCItems
 		Limewater = new ItemCustomBucket(2).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
 		Vinegar = new ItemCustomBucket(12).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
 		Hide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFCMaterials);
-		SoakedHide = new ItemTerra().setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
-		ScrapedHide = new ItemTerra().setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFCMaterials);
-		PrepHide = new ItemTerra().setFolder("tools/").setFolder("tools/").setUnlocalizedName("Prep Hide").setCreativeTab(TFCTabs.TFCMaterials);
+		SoakedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
+		ScrapedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFCMaterials);
+		PrepHide = new ItemRawHide().setFolder("tools/").setFolder("tools/").setUnlocalizedName("Prep Hide").setCreativeTab(TFCTabs.TFCMaterials);
 
-		SheepSkin = new ItemTerra().setFolder("tools/").setUnlocalizedName("Sheep Skin").setCreativeTab(TFCTabs.TFCMaterials);
+		SheepSkin = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Sheep Skin").setCreativeTab(TFCTabs.TFCMaterials);
 		FlatLeather = (new ItemFlatGeneric().setFolder("tools/").setUnlocalizedName("Flat Leather"));
 		TerraLeather = new ItemLeather().setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather");
 
@@ -1732,6 +1737,8 @@ public class TFCItems
 		muttonCooked =  new ItemFoodTFC(48, EnumFoodGroup.Protein).setUnlocalizedName("Mutton Cooked");
 		venisonRaw = new ItemRawFood(-1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("Venison");
 		venisonCooked =  new ItemFoodTFC(49, EnumFoodGroup.Protein).setUnlocalizedName("VenisonCooked");
+		horseMeatRaw = new ItemRawFood(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("HorseMeat");
+		horseMeatCooked =  new ItemFoodTFC(50, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("HorseMeatCooked");
 
 		WintergreenBerry =  new ItemFoodTFC(50, EnumFoodGroup.Fruit).setUnlocalizedName("Wintergreen Berry");
 		Blueberry =  new ItemFoodTFC(51, EnumFoodGroup.Fruit).setUnlocalizedName("Blueberry");

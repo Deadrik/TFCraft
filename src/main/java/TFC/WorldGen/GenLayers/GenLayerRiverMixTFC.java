@@ -31,9 +31,9 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 			int b = layerBiomes[var8];
 			int r = layerRivers[var8];
 
-			if (layerBiomes[var8] == TFCBiome.ocean.biomeID || layerBiomes[var8] == -1)
+			if (layerBiomes[var8] == TFCBiome.ocean.biomeID|| layerBiomes[var8] == TFCBiome.beach.biomeID || layerBiomes[var8] == -1)
             {
-                layerOut[var8] = TFCBiome.ocean.biomeID;
+                layerOut[var8] = b;
             }
             else if (layerRivers[var8] >= 0)
             {

@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -16,13 +17,16 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
-import TFC.Blocks.BlockTerra;
+import TFC.API.Util.Helper;
+import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
+import TFC.Food.ItemFoodTFC;
+import TFC.TileEntities.TEFruitLeaves;
 
-public class BlockFruitLeaves extends BlockTerra
+public class BlockFruitLeaves extends BlockTerraContainer
 {
 	int adjacentTreeBlocks[];
 	String[] WoodNames = {"Red Apple","Banana","Orange","Green Apple","Lemon","Olive","Cherry","Peach","Plum"};
@@ -120,35 +124,50 @@ public class BlockFruitLeaves extends BlockTerra
 			FloraIndex fi2 = FloraManager.getInstance().findMatchingIndex(getType(this, meta));
 			
 			float temp = TFC_Climate.getHeightAdjustedTemp(i, j, k);
-			
-			if(fi2 != null)
+			TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(i, j, k);
+			if(te != null)
 			{
-				if(temp >= fi2.minTemp && temp < fi2.maxTemp)
+				if(fi2 != null)
 				{
-					if(fi2.inHarvest(TFC_Time.getSeason(k)))
-						if(rand.nextInt(50) == 0)
+					if(temp >= fi2.minTemp && temp < fi2.maxTemp)
+					{
+						if(fi2.inHarvest(TFC_Time.getSeason(k)) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > 2)
 						{
 							if(meta < 8)
+							{
 								meta += 8;
+								te.hasFruit = true;
+								te.dayFruited = (int) TFC_Time.getTotalDays();
+							}
 							world.setBlockMetadataWithNotify(i, j, k, meta, 0x2); 
 						}
+					}
+					else
+					{
+						if(meta >= 8 && rand.nextInt(10) == 0)
+						{
+							if(te.hasFruit)
+							{
+								te.hasFruit = false;
+								world.setBlockMetadataWithNotify(i, j, k, meta-8, 0x2); 
+							}
+						}
+					}
 				}
-				else
-				{
-					if(meta >= 8 && rand.nextInt(10) == 0)
-						world.setBlockMetadataWithNotify(i, j, k, meta-8, 0x2); 
-				}
+
+				if(fi != null)
+					if(!fi.inHarvest(TFC_Time.getSeason(k)))
+						if(world.getBlockMetadata(i, j, k) >= 8)
+							if(te.hasFruit)
+							{
+								te.hasFruit = false;
+								world.setBlockMetadataWithNotify(i, j, k, meta-8, 0x2); 
+							}
+
+				if(rand.nextInt(100) > 50)
+					world.markBlockForUpdate(i, j, k);
 			}
-
-			if(fi != null)
-				if(!fi.inHarvest(TFC_Time.getSeason(k)))
-					if(world.getBlockMetadata(i, j, k) >= 8)
-						world.setBlockMetadataWithNotify(i, j, k, meta-8, 0x2); 
-
-			if(rand.nextInt(100) > 50)
-				world.markBlockForUpdate(i, j, k);
 		}
-		return;
 	}
 
 	public static boolean canStay(World world, int i, int j, int k, Block block)
@@ -310,9 +329,15 @@ public class BlockFruitLeaves extends BlockTerra
 
 			if(fi != null && (fi.inHarvest(TFC_Time.getSeason(k)) || fi.inHarvest(((TFC_Time.getSeason(k)-1)+12)%12) && (meta & 8) == 8))
 			{
-				world.setBlockMetadataWithNotify(i, j, k, meta - 8, 3);
-				dropBlockAsItem(world, i, j, k, fi.getOutput());
-				return true;
+				TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(i, j, k);
+				if(te != null && te.hasFruit)
+				{
+					te.hasFruit = false;
+					te.dayHarvested = (int) TFC_Time.getTotalDays();
+					world.setBlockMetadataWithNotify(i, j, k, meta - 8, 3);
+					dropBlockAsItem(world, i, j, k, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(5+(world.rand.nextFloat()*20),10)));
+					return true;
+				}
 			}
 		}
 		return false;
@@ -323,4 +348,11 @@ public class BlockFruitLeaves extends BlockTerra
 	{
 		super.onEntityWalking(world, i, j, k, entity);
 	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1, int var2)
+	{
+		return new TEFruitLeaves();
+	}
+
 }

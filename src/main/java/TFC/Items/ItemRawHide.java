@@ -13,23 +13,30 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
+import TFC.TFCItems;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 
 public class ItemRawHide extends ItemLooseRock
 {
-	public ItemRawHide() 
+	public ItemRawHide()
 	{
 		super();
-		this.setCreativeTab(TFCTabs.TFCMaterials);
-		this.MetaNames = null;
+		this.hasSubtypes = true;
+		this.setMaxDamage(0);
+		setCreativeTab(TFCTabs.TFCMaterials);
+		this.MetaNames = new String[]{"small","medium","large"};
+		this.setWeight(EnumWeight.LIGHT);
+		this.setSize(EnumSize.MEDIUM);
 	}
 
 
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		if(!world.isRemote){
+		if(!world.isRemote && itemstack.getItem() == TFCItems.Hide && itemstack.getItemDamage() == 2){
 			int d = (int)((45 + ((entityplayer.rotationYaw % 360)+360f)%360)/90)%4; //direction
 			int x2 = x+(d==1?-1:(d==3?1:0)); // the x-coord of the second block
 			int z2 = z+(d==2?-1:(d==0?1:0));
@@ -54,7 +61,7 @@ public class ItemRawHide extends ItemLooseRock
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
-		if (TFC_Core.showExtraInformation()) 
+		if (TFC_Core.showExtraInformation() && is.getItem() == TFCItems.Hide) 
 		{
 			arraylist.add(StatCollector.translateToLocal("gui.Help"));
 			arraylist.add(StatCollector.translateToLocal("gui.RawHide.Inst0"));
@@ -89,5 +96,7 @@ public class ItemRawHide extends ItemLooseRock
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		list.add(new ItemStack(this,1,0));
+		list.add(new ItemStack(this,1,1));
+		list.add(new ItemStack(this,1,2));
 	}
 }

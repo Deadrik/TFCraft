@@ -262,15 +262,15 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);
-		if(this.isAdult())
-		{
-			if(!this.getSheared())
-				this.entityDropItem(new ItemStack(TFCItems.SheepSkin,1), 0.0F);
-			else
-				this.dropItem(TFCItems.Hide,1);
-			this.dropItem(Items.bone, rand.nextInt(5)+2);
-		}
-		float foodWeight = ageMod*(this.size_mod * 1200);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+
+		if(!this.getSheared())
+			this.entityDropItem(new ItemStack(TFCItems.SheepSkin,1,(int)(ageMod * size_mod)), 0.0F);
+		else
+			this.entityDropItem(new ItemStack(TFCItems.Hide,1,(int)(ageMod * size_mod)), 0.0F);
+		this.dropItem(Items.bone, (int)((rand.nextInt(5)+2)*ageMod));
+
+		float foodWeight = ageMod*(this.size_mod * 640);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+
 		TFC_Core.animalDropMeat(this, TFCItems.muttonRaw, foodWeight);
 	}
 

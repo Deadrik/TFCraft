@@ -1,8 +1,8 @@
 #en_US
-#This is the Main language configuration file
+#This is the Main language configuration file for references ending in ".name"
 #
 #If you want to color code the text then I recommend you visit http://www.minecraftwiki.net/wiki/Formatting_codes#Color_codes
-#To create the ง symbol which is used for assigning a color to the following text press Alt + 21 on Windows. For other OSes, view the above link.
+#To create the ยง symbol which is used for assigning a color to the following text press Alt + 21 on Windows. For other OSes, view the above link.
 
 generator.TFCDefault=TFC Default
 generator.TFCFlat=TFC Flat
@@ -14,95 +14,128 @@ effect.bleed=Bleeding
 
 item.minecartChest.name=Minecart Chest
 
-#========Spawn Eggs========
+tile.LooseRock.name=Loose Rock
+
+tile.WoodConstruct.name=Planks
+
+tile.WoodVert.name=Log
+tile.WoodVert.Oak.name=Oak Log
+tile.WoodVert.Aspen.name=Aspen Log
+tile.WoodVert.Birch.name=Birch Log
+tile.WoodVert.Chestnut.name=Chestnut Log
+tile.WoodVert.Douglas Fir.name=Douglas Fir Log
+tile.WoodVert.Hickory.name=Hickory Log
+tile.WoodVert.Maple.name=Maple Log
+tile.WoodVert.Ash.name=Ash Log
+tile.WoodVert.Pine.name=Pine Log
+tile.WoodVert.Sequoia.name=Sequoia Log
+tile.WoodVert.Spruce.name=Spruce Log
+tile.WoodVert.Sycamore.name=Sycamore Log
+tile.WoodVert.White Cedar.name=White Cedar Log
+tile.WoodVert.White Elm.name=White Elm Log
+tile.WoodVert.Willow.name=Willow Log
+tile.WoodVert.Kapok.name=Kapok Log
+
+tile.WoodVert2.name=Log
+tile.WoodVert2.Acacia.name=Acacia Log
+
+tile.WoodHoriz.name=Log
+tile.WoodHoriz.Oak.name=Oak Log
+tile.WoodHoriz.Aspen.name=Aspen Log
+tile.WoodHoriz.Birch.name=Birch Log
+tile.WoodHoriz.Chestnut.name=Chestnut Log
+tile.WoodHoriz.Douglas Fir.name=Douglas Fir Log
+tile.WoodHoriz.Hickory.name=Hickory Log
+tile.WoodHoriz.Maple.name=Maple Log
+tile.WoodHoriz.Ash.name=Ash Log
+
+tile.WoodHoriz2.name=Log
+tile.WoodHoriz2.Pine.name=Pine Log
+tile.WoodHoriz2.Sequoia.name=Sequoia Log
+tile.WoodHoriz2.Spruce.name=Spruce Log
+tile.WoodHoriz2.Sycamore.name=Sycamore Log
+tile.WoodHoriz2.White Cedar.name=White Cedar Log
+tile.WoodHoriz2.White Elm.name=White Elm Log
+tile.WoodHoriz2.Willow.name=Willow Log
+tile.WoodHoriz2.Kapok.name=Kapok Log
+
+tile.WoodHoriz3.name=Log
+tile.WoodHoriz3.Acacia.name=Acacia Log
+
+tile.WoodHoriz4.name=Log
+
+tile.log.Oak=Oak Log
+tile.log.Aspen=Aspen Log
+tile.log.Birch=Birch Log
+tile.log.Chestnut=Chestnut Log
+tile.log.Douglas Fir=Douglas Fir Log
+tile.log.Hickory=Hickory Log
+tile.log.Maple=Maple Log
+tile.log.Ash=Ash Log
+tile.log.Pine=Pine Log
+tile.log.Sequoia=Sequoia Log
+tile.log.Spruce=Spruce Log
+tile.log.Sycamore=Sycamore Log
+tile.log.White Cedar=White Cedar Log
+tile.log.White Elm=White Elm Log
+tile.log.Willow=Willow Log
+tile.log.Kapok=Kapok Log
+tile.log.Acacia=Acacia Log
+tile.log2.Acacia=Acacia Log
+
+tile.Door Oak.name=Oak Door
+tile.Door Aspen.name=Aspen Door
+tile.Door Birch.name=Birch Door
+tile.Door Chestnut.name=Chestnut Door
+tile.Door Douglas Fir.name=Douglas Fir Door
+tile.Door Hickory.name=Hickory Door
+tile.Door Maple.name=Maple Door
+tile.Door Ash.name=Ash Door
+tile.Door Pine.name=Pine Door
+tile.Door Sequoia.name=Sequoia Door
+tile.Door Spruce.name=Spruce Door
+tile.Door Sycamore.name=Sycamore Door
+tile.Door White Cedar.name=White Cedar Door
+tile.Door White Elm.name=White Elm Door
+tile.Door Willow.name=Willow Door
+tile.Door Kapok.name=Kapok Door
+tile.Door Acacia.name=Acacia Door
+
+tile.LogPile.name=Log Pile
+tile.ingotpile.name=Ingot Pile
+tile.Firepit.name=Fire Pit
+tile.FoodPrep.name=Food Preparation
+tile.Charcoal.name=Charcoal
+tile.Forge.name=Forge
+tile.Molten.name=Molten Ore
+tile.Pottery.name=Pottery
+tile.Sluice.name=Sluice
+tile.StrawHideBed.name=Straw & Hide Bed
+
+tile.stoneStairs.name=Stairs
+tile.stoneSlabs.name=Slab
+tile.StoneDetailed.name=Chiselled Block
+tile.stoneStalac.name=Stalactite
+
+tile.Sulfur.name=Sulfur
+tile.Tuyere.name=Tuyere
+
+tile.fruitTreeWood.name=Fruit Tree
+tile.fruitTreeLeaves.name=Fruit Tree Leaves
+tile.fruitTreeLeaves2.name=Fruit Tree Leaves
+
+tile.tilledSoil.name=Farmland
+tile.tilledSoil2.name=Farmland
+
+tile.SeaGrassStill.name=Water Plant
+tile.SeaGrassFlowing.name=Water Plant
+tile.seagrassice.name=Water Plant
+tile.Flora.name=Goldenrod Flower
+tile.Moss.name=Moss
+
+========Spawn Eggs========
 entity.Bear.name=Bear
 entity.Deer.name=Deer
 entity.irongolem.name=Iron Golem
-
-#=====================
-#========Items========
-#=====================
-#========Foods========
-item.MealGeneric.name=Meal
-item.bread.name=Bread
-item.RedApple.name=Red Apple
-item.Banana.name=Banana
-item.Orange.name=Orange
-item.GreenApple.name=Green Apple
-item.Lemon.name=Lemon
-item.Olive.name=Olive
-item.Cherry.name=Cherry
-item.Peach.name=Peach
-item.Plum.name=Plum
-item.Cacao.name=Cacao
-item.porkchopRaw.name=Raw Pork Chop
-item.porkchopCooked.name=Cooked Pork Chop
-item.MuttonRaw.name=Raw Mutton
-item.MuttonCooked.name=Cooked Mutton
-item.CalamariRaw.name=Raw Calamari
-item.CalamariCooked.name=Cooked Calamari
-item.fishRaw.name=Raw Fish
-item.fishCooked.name=Cooked Fish
-item.beefRaw.name=Raw Beef
-item.beefCooked.name=Cooked Beef
-item.chickenRaw.name=Raw Chicken
-item.chickenCooked.name=Cooked Chicken
-item.egg.name=Raw Egg
-item.EggCooked.name=Cooked Egg
-item.Cheese.name=Cheese
-item.WheatWhole.name=Wheat
-item.WheatGrain.name=Wheat Grain
-item.WheatGround.name=Wheat Flour
-item.WheatDough.name=Wheat Dough
-item.WheatBread.name=Wheat Bread
-item.BarleyWhole.name=Barley
-item.BarleyGrain.name=Barley Grain
-item.BarleyGround.name=Barley Flour
-item.BarleyDough.name=Barley Dough
-item.BarleyBread.name=Barley Bread
-item.OatGrain.name=Oat Grain
-item.OatWhole.name=Oat
-item.OatDough.name=Oat Dough
-item.OatGround.name=Oat Flour
-item.OatBread.name=Oat Bread
-item.RyeGrain.name=Rye Grain
-item.RyeWhole.name=Rye
-item.RyeGround.name=Rye Flour
-item.RyeDough.name=Rye Dough
-item.RyeBread.name=Rye Bread
-item.RiceGrain.name=Rice Grain
-item.RiceWhole.name=Rice
-item.RiceGround.name=Rice Flour
-item.RiceDough.name=Rice Dough
-item.RiceBread.name=Rice Bread
-item.CornmealGround.name=Cornmeal
-item.CornmealDough.name=Cornmeal Dough
-item.CornBread.name=Cornbread
-item.MaizeEar.name=Maize Ear
-item.Tomato.name=Tomato
-item.Potato.name=Potato
-item.Onion.name=Onion
-item.Rutabaga.name=Rutabaga
-item.Cabbage.name=Cabbage
-item.Garlic.name=Garlic
-item.Carrot.name=Carrot
-item.Sugarcane.name=Sugarcane
-item.Hemp.name=Hemp
-item.Soybeans.name=Soybeans
-item.Greenbeans.name=Green Beans
-item.Yam.name=Yam
-item.GreenBellPepper.name=Green Bell Pepper
-item.YellowBellPepper.name=Yellow Bell Pepper
-item.RedBellPepper.name=Red Bell Pepper
-item.Squash.name=Squash
-item.Beer.name=Beer
-item.Cider.name=Cider
-item.Sake.name=Sake
-item.Whiskey.name=Whiskey
-item.RyeWhiskey.name=Rye Whiskey
-item.Vodka.name=Vodka
-item.Rum.name=Rum
-item.Venison.name=Raw Venison
-item.VenisonCooked.name=Cooked Venison
-#========Tree Saplings========
-item.FruitSapling1.RedApple.name=Red Apple Tree Sapling
+entity.Pheasant.name=Pheasant
+entity.Horse.name=Horse

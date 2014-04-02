@@ -1,10 +1,13 @@
 package TFC.Core.Player;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import TFC.API.IFood;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Util.Helper;
 import TFC.Core.TFC_Climate;
@@ -125,12 +128,13 @@ public class FoodStatsTFC
 				soberTime--;
 			player.getEntityData().setLong("soberTime", soberTime);
 			long time = TFC_Time.getTotalTicks();
-
+			Block block = player.worldObj.getBlock((int)player.posX,(int)player.posY,(int)player.posZ);
+			Block block2 = player.worldObj.getBlock((int)player.posX,(int)player.posY-1,(int)player.posZ);
 			if(player.capabilities.isCreativeMode)
 			{
 				long oldWaterTimer = waterTimer;
 				waterTimer = time;
-				if(player.isInWater())
+				if(player.isInWater() && (TFC_Core.isFreshWater(block)||TFC_Core.isFreshWater(block2)))
 					this.restoreWater(player, 20*(int)(time - oldWaterTimer));
 			}
 			else
@@ -139,7 +143,7 @@ public class FoodStatsTFC
 				{
 					/**Reduce the player's water for normal living*/
 					waterLevel -= 1+(tempWaterMod/2);
-					if(player.isInWater())
+					if(player.isInWater() && (TFC_Core.isFreshWater(block)||TFC_Core.isFreshWater(block2)))
 						this.restoreWater(player, 20);
 					if(waterLevel < 0)
 						waterLevel = 0;
@@ -283,24 +287,33 @@ public class FoodStatsTFC
 			if(stomachDiff > 0)
 				eatAmount-=stomachDiff;
 			//add the nutrition contents
-			byte[] fg = new byte[]{getfg(is, 0), getfg(is, 1), getfg(is, 2), getfg(is, 3)};
+			int[] fg = new int[]{getfg(is, 0), getfg(is, 1), getfg(is, 2), getfg(is, 3)};
 			float[] weights = new float[]{0.5f,0.2f,0.2f,0.1f};
 			for(int i = 0; i < 4; i++)
 				if(fg[i] != -1)
 					addNutrition(EnumFoodGroup.values()[fg[i]], eatAmount*weights[i]);
 			//fill the stomach
 			this.stomachLevel += eatAmount;
+			float _sat = item.getSatisfaction(is);
+			if(!item.isWarm(is))
+				_sat *= 0.25f;
 			this.satisfaction += eatAmount * item.getSatisfaction(is);
 			//Now remove the eaten amount from the itemstack.
 			if(reduceFood(is, eatAmount))
+			{
 				is.stackSize = 0;
+				player.inventory.addItemStackToInventory(new ItemStack(Items.bowl,1));
+			}
+		}
+		else if(is.getItem() instanceof IFood){
+			addNutrition(((IFood)(is.getItem())).getFoodGroup(), 10f);
 		}
 	}
 
-	private byte getfg(ItemStack is, int i)
+	private int getfg(ItemStack is, int i)
 	{
 		if(is.getTagCompound().hasKey("FG" + i))
-			return is.getTagCompound().getByte("FG" + i);
+			return Integer.parseInt(is.getTagCompound().getString("FG" + i).split("\\:")[1]);
 		return -1;
 	}
 

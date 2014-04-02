@@ -123,7 +123,7 @@ public class TerraFirmaCraft
 
 		//Register Generators
 		//Underground Lava
-		GameRegistry.registerWorldGenerator(new WorldGenFissure(Blocks.lava,2, true, 25).setUnderground(true, 20).setSeed(1), 0);
+		GameRegistry.registerWorldGenerator(new WorldGenFissure(Blocks.lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
 		//Surface Hotsprings
 		GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
 

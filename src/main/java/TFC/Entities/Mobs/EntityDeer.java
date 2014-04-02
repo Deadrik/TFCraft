@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
@@ -71,7 +72,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
 
-		//this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.itemID, false));
+		//this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat, false));
 		//this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
 		this.tasks.addTask(5, this.aiEatGrass);
 		//this.tasks.addTask(5, new EntityAIRutt(this, var2));
@@ -261,13 +262,11 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		float ageMod = TFC_Core.getPercentGrown(this);
-		if(isAdult())
-		{
-			this.dropItem(TFCItems.Hide,1);
-			this.dropItem(Items.bone, rand.nextInt(4)+2);
-		}
-		float foodWeight = ageMod*(this.size_mod * 528);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		float ageMod = TFC_Core.getPercentGrown(this);	
+		this.entityDropItem(new ItemStack(TFCItems.Hide,1,(int)(ageMod*size_mod*1.84)),0);
+		this.dropItem(Items.bone, (int)((rand.nextInt(4)+2)*ageMod));
+		float foodWeight = ageMod*(this.size_mod * 2400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+
 		TFC_Core.animalDropMeat(this, TFCItems.venisonRaw, foodWeight);
 	}
 

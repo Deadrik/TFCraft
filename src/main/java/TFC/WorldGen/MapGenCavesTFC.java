@@ -162,7 +162,6 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 												grassBlock = block;
 												isGrass = true;
 											}
-											//TFCBiome biomegenbase = (TFCBiome) this.worldObj.getBiomeGenForCoords((int)worldX, (int)worldZ);
 											if (TFC_Core.isSoil(block) || TFC_Core.isRawStone(block))
 												if (var50 < 10 && TFC_Climate.getStability((int)worldX, (int)worldZ) == 1)
 												{

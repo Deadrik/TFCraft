@@ -61,9 +61,11 @@ public class CraftingHandler// implements ICraftingHandler
 				HandleItem(e.player, e.craftMatrix, Recipes.Axes);
 				HandleItem(e.player, e.craftMatrix, Recipes.Saws);
 			}
-			else if(item == TFCItems.WheatGrain || item == TFCItems.RyeGrain ||
-					item == TFCItems.OatGrain || item == TFCItems.BarleyGrain ||
-					item == TFCItems.RiceGrain)
+			else if((item == TFCItems.WheatGrain && gridHasItem(iinventory, TFCItems.WheatWhole)) ||
+					(item == TFCItems.RyeGrain && gridHasItem(iinventory, TFCItems.RyeWhole)) || 
+					(item == TFCItems.OatGrain && gridHasItem(iinventory, TFCItems.OatWhole)) || 
+					(item == TFCItems.BarleyGrain && gridHasItem(iinventory, TFCItems.BarleyWhole)) || 
+					(item == TFCItems.RiceGrain && gridHasItem(iinventory, TFCItems.RiceWhole)))
 			{
 				HandleItem(e.player, e.craftMatrix, Recipes.Knives);
 				if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw,4)))
@@ -202,12 +204,26 @@ public class CraftingHandler// implements ICraftingHandler
 						//we only add the decay if food was actually added to the bundle
 						if(myWeight != myOldWeight)
 							if(myWeight == 0)
-								finalDecay+=myDecay;
+							{
+								if(finalDecay < 0)
+								{
+									if(myDecay > finalDecay)
+										finalDecay = myDecay;
+								}
+								else
+									finalDecay+=myDecay;
+							}
 							else
 							{
 								float d = w * myDecayPercent;
 								myDecay-= d;
-								finalDecay += d;
+								if(finalDecay < 0)
+								{
+									if(myDecay > finalDecay)
+										finalDecay = myDecay;
+								}
+								else
+									finalDecay += d;
 							}
 
 						if(myWeight > 0)
@@ -277,6 +293,18 @@ public class CraftingHandler// implements ICraftingHandler
 				}
 			}
 		}
+	}
+
+	public static boolean gridHasItem(IInventory iinventory, Item item)
+	{
+		for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+		{
+			if(iinventory.getStackInSlot(i) == null)
+				continue;
+			if(iinventory.getStackInSlot(i).getItem() == item)
+				return true;
+		}
+		return false;
 	}
 
 	public static void HandleItem(EntityPlayer entityplayer, IInventory iinventory, Item[] Items)

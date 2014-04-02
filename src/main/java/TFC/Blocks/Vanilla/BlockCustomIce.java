@@ -11,6 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -189,6 +190,34 @@ public class BlockCustomIce extends BlockIce
 				else
 					world.setBlock(i, j, k, getBlockMelt(world,i,j,k,false), 0, 2);
 			}
+			
+			if(world.getBlockMetadata(i, j, k) == 1)
+			{
+				if(j== 144 && scanForOcean(world,i,j,k))
+				{
+					world.setBlockMetadataWithNotify(i, j, k, 0, 3);
+				}
+			}
 		}
+	}
+	
+	private boolean scanForOcean(World world, int i, int j, int k)
+	{
+		if(world.getBiomeGenForCoords(i+5, k).biomeID == BiomeGenBase.ocean.biomeID ||
+				world.getBiomeGenForCoords(i+10, k).biomeID == BiomeGenBase.ocean.biomeID || 
+				world.getBiomeGenForCoords(i+20, k).biomeID == BiomeGenBase.ocean.biomeID || 
+						world.getBiomeGenForCoords(i-5, k).biomeID == BiomeGenBase.ocean.biomeID ||
+						world.getBiomeGenForCoords(i-10, k).biomeID == BiomeGenBase.ocean.biomeID || 
+						world.getBiomeGenForCoords(i-20, k).biomeID == BiomeGenBase.ocean.biomeID || 
+				world.getBiomeGenForCoords(i, k+5).biomeID == BiomeGenBase.ocean.biomeID ||
+				world.getBiomeGenForCoords(i, k+10).biomeID == BiomeGenBase.ocean.biomeID || 
+				world.getBiomeGenForCoords(i, k+20).biomeID == BiomeGenBase.ocean.biomeID|| 
+				world.getBiomeGenForCoords(i, k-5).biomeID == BiomeGenBase.ocean.biomeID ||
+				world.getBiomeGenForCoords(i, k-10).biomeID == BiomeGenBase.ocean.biomeID || 
+				world.getBiomeGenForCoords(i, k-20).biomeID == BiomeGenBase.ocean.biomeID)
+		{
+			return true;
+		}
+		return false;
 	}
 }

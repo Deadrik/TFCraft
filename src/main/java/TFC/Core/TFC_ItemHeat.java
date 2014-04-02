@@ -314,7 +314,8 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RiceDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.RiceBread, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.CornBread, 1)));
 
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1), 0.85F, 135.5F, new ItemStack(Items.bowl, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, 32767), 0.9F, 150.5F, new ItemStack(Items.bowl, 1)));
+
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(Items.stick, 1, 32767), 13.0F, 210F, new ItemStack(Blocks.torch, 2)));
 

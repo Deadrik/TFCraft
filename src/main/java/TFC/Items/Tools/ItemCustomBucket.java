@@ -1,7 +1,6 @@
 package TFC.Items.Tools;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
@@ -12,6 +11,7 @@ import TFC.TFCItems;
 import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Util.Helper;
+import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityBarrel;
@@ -31,8 +31,8 @@ public class ItemCustomBucket extends ItemTerra
 	}
 
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public boolean canStack()
+	{
 		return false;
 	}
 
@@ -62,54 +62,46 @@ public class ItemCustomBucket extends ItemTerra
 				int k = var12.blockZ;
 
 				if (!world.canMineBlock(par3EntityPlayer, i, j, k))
-				{
 					return is;
-				}
 
 				if (this.isFull == 0)
 				{
 					if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, is))
-					{
 						return is;
-					}
 
 					FillBucketEvent event = new FillBucketEvent(par3EntityPlayer, is, world, var12);
 					if (event.isCanceled())
-					{
 						return is;
-					}
 
 					if (event.getResult() == Event.Result.ALLOW)
-					{
 						return event.result;
-					}
 
-					if ((world.getBlock(i, j, k) == Blocks.water) && world.getBlockMetadata(i, j, k) <=2)
+					if (TFC_Core.isFreshWater(world.getBlock(i, j, k)) && world.getBlockMetadata(i, j, k) <=2)
 					{
 						world.setBlockToAir(i, j, k);
-
 						if (par3EntityPlayer.capabilities.isCreativeMode)
-						{
 							return is;
-						}
 
 						return new ItemStack(TFCItems.WoodenBucketWater);
+					}
+					else if (TFC_Core.isSaltWater(world.getBlock(i, j, k)) && world.getBlockMetadata(i, j, k) <=2)
+					{
+						world.setBlockToAir(i, j, k);
+						if (par3EntityPlayer.capabilities.isCreativeMode)
+							return is;
+						return new ItemStack(TFCItems.WoodenBucketSaltWater);
 					}
 				}
 				else
 				{
 					if (this.isFull < 0)
-					{
 						return new ItemStack(TFCItems.WoodenBucketEmpty);
-					}
 
 					if(world.getBlock(i,j,k)==TFCBlocks.Barrel)
 					{
 						TileEntityBarrel te = (TileEntityBarrel)world.getTileEntity(i, j, k);
 						if(te.checkValidAddition(this.isFull))
-						{
 							return new ItemStack(TFCItems.WoodenBucketEmpty);
-						}
 					}
 					return new ItemStack(TFCItems.WoodenBucketEmpty);
 				}
@@ -118,7 +110,6 @@ public class ItemCustomBucket extends ItemTerra
 			{
 				return new ItemStack(TFCItems.WoodenBucketMilk);
 			}
-
 			return is;
 		}
 	}

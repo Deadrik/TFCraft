@@ -1092,11 +1092,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		if(isAdult())
-		{
-			this.dropItem(TFCItems.Hide,1);
-			this.dropItem(Items.bone, rand.nextInt(8)+3);
-		}
+		float ageMod = TFC_Core.getPercentGrown(this);
+
+		this.entityDropItem(new ItemStack(TFCItems.Hide,1,(int)(ageMod*3)),0);
+		this.dropItem(Items.bone,(int) ((rand.nextInt(8)+3)*ageMod));
+
+		float foodWeight = ageMod*(this.size_mod * 4000);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+
+		TFC_Core.animalDropMeat(this, TFCItems.horseMeatRaw, foodWeight);
 	}
 
 	/**

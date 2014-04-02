@@ -319,11 +319,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		if(isAdult())
-		{
-			this.dropItem(TFCItems.Hide,1);
-			this.dropItem(Items.bone, rand.nextInt(3)+1);
-		}
+		float ageMod = TFC_Core.getPercentGrown(this);
+
+		this.entityDropItem(new ItemStack(TFCItems.Hide,1,(int)(size_mod*ageMod*0.9)),0);
+		this.dropItem(Items.bone, (int)((rand.nextInt(3)+1)*ageMod));
 	}
 
 	@Override
@@ -498,7 +497,6 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public void setAttackedVec(Vec3 attackedVec)
 	{
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -510,6 +508,5 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public void setFearSource(Entity fearSource)
 	{
-		// TODO Auto-generated method stub
 	}
 }

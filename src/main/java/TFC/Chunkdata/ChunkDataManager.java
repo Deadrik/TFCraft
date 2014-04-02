@@ -20,8 +20,8 @@ public class ChunkDataManager
 			else
 				System.out.println("Tried to unload chunkdata from the chunkmap that didnt exist at " + x + "," + z);
 		}
-		if(TFCOptions.enableDebugMode)
-			System.out.println("ChunkDataManager chunkmap size: "+chunkmap.size());
+		/*if(TFCOptions.enableDebugMode)
+			System.out.println("ChunkDataManager chunkmap size: "+chunkmap.size());*/
 	}
 
 	public static void addData(int x, int z, ChunkData cd)
@@ -30,8 +30,8 @@ public class ChunkDataManager
 		{
 			chunkmap.put(x + "," + z, cd);
 		}
-		if(TFCOptions.enableDebugMode)
-			System.out.println("ChunkDataManager chunkmap size: "+chunkmap.size());
+		/*if(TFCOptions.enableDebugMode)
+			System.out.println("ChunkDataManager chunkmap size: "+chunkmap.size());*/
 	}
 
 	public static ChunkData getData(int x, int z)

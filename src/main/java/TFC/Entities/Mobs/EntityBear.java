@@ -22,6 +22,7 @@ import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
@@ -282,11 +283,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		if(isAdult())
-		{
-			this.dropItem(TFCItems.Hide,1);
-			this.dropItem(Items.bone, rand.nextInt(6)+2);
-		}
+		float ageMod = TFC_Core.getPercentGrown(this);
+
+		this.entityDropItem(new ItemStack(TFCItems.Hide,1,(int)(ageMod*3)),0);
+		this.dropItem(Items.bone,(int) ((rand.nextInt(6)+2)*ageMod));
 	}
 
 
