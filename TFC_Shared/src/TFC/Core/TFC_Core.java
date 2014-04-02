@@ -693,7 +693,7 @@ public class TFC_Core
 
 	public static FoodStatsTFC getPlayerFoodStats(EntityPlayer player)
 	{
-		FoodStatsTFC foodstats = new FoodStatsTFC();
+		FoodStatsTFC foodstats = new FoodStatsTFC(player);
 		foodstats.readNBT(player.getEntityData());
 		return foodstats;
 	}
