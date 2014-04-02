@@ -16,7 +16,7 @@ public class ItemCustomWood2 extends ItemTerraBlock
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
-		String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(Global.WOOD_ALL[itemstack.getItemDamage()+16]).toString();
+		String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(Global.WOOD_ALL[itemstack.getItemDamage()]).toString();
 		return s;
 	}
 
