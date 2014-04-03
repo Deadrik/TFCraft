@@ -377,5 +377,6 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 	public void handleInitPacket(DataInputStream inStream) throws IOException
 	{
 		isFlipped = inStream.readBoolean();
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 }
