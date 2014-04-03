@@ -13,8 +13,6 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.Items.Tools.ItemFirestarter;
-import TFC.Items.Tools.ItemFlintSteel;
 import TFC.TileEntities.TileEntityLogPile;
 
 public class BlockLogPile extends BlockTerraContainer
@@ -26,11 +24,11 @@ public class BlockLogPile extends BlockTerraContainer
 		super(i, Material.wood);
 		this.setBurnProperties(blockID, 5, 30);
 	}
-	
+
 	public static int getDirectionFromMetadata(int i)
-    {
-        return i & 3;
-    }
+	{
+		return i & 3;
+	}
 
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
@@ -39,8 +37,7 @@ public class BlockLogPile extends BlockTerraContainer
 		{
 			return true;
 		}
-		else if(entityplayer.inventory.getCurrentItem() == null || (!(entityplayer.inventory.getCurrentItem().getItem() instanceof ItemFirestarter) && 
-				!(entityplayer.inventory.getCurrentItem().getItem() instanceof ItemFlintSteel)))
+		else
 		{
 			if((TileEntityLogPile)world.getBlockTileEntity(i, j, k)!=null)
 			{
@@ -62,7 +59,7 @@ public class BlockLogPile extends BlockTerraContainer
 			}
 
 		}
-		else return false;
+
 	}
 
 	@Override
@@ -104,31 +101,31 @@ public class BlockLogPile extends BlockTerraContainer
 		return icons[0];
 
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
+	{
 		icons[0] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Log Pile Side 0");
 		icons[1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Log Pile Side 1");
 		icons[2] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Log Pile End");
-    }
-	
+	}
+
 	public void Eject(World par1World, int par2, int par3, int par4)
-    {
-        if(!par1World.isRemote && (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4)!=null)
-        {
-            TileEntityLogPile tileentitylogpile;
-            tileentitylogpile = (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4);
-            tileentitylogpile.ejectContents();
-            par1World.removeBlockTileEntity(par2, par3, par4);
-        }
-    }
-	
+	{
+		if(!par1World.isRemote && (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4)!=null)
+		{
+			TileEntityLogPile tileentitylogpile;
+			tileentitylogpile = (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4);
+			tileentitylogpile.ejectContents();
+			par1World.removeBlockTileEntity(par2, par3, par4);
+		}
+	}
+
 	@Override
-    public int idDropped(int i, Random random, int j)
-    {
-        return 0;
-    }
+	public int idDropped(int i, Random random, int j)
+	{
+		return 0;
+	}
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{		
@@ -155,7 +152,7 @@ public class BlockLogPile extends BlockTerraContainer
 		// TODO Auto-generated method stub
 		return new TileEntityLogPile();
 	}
-	
+
 	@Override
 	public void onNeighborBlockChange(World par1World, int x, int y, int z, int blockId)
 	{	

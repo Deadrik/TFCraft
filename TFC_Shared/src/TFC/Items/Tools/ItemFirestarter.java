@@ -62,12 +62,8 @@ public class ItemFirestarter extends ItemTerra
 			int z = objectMouseOver.blockZ;
 			int side = objectMouseOver.sideHit;
 
-			boolean surroundSolids = TFC_Core.isNorthSolid(world, x, y, z) && TFC_Core.isSouthSolid(world, x, y, z) && 
-					TFC_Core.isEastSolid(world, x, y, z) && TFC_Core.isWestSolid(world, x, y, z);
-			boolean surroundSolidsUp1 = TFC_Core.isNorthSolid(world, x, y+1, z) && TFC_Core.isSouthSolid(world, x, y+1, z) && 
-					TFC_Core.isEastSolid(world, x, y+1, z) && TFC_Core.isWestSolid(world, x, y+1, z);
-			boolean surroundSolids2 = TFC_Core.isNorthSolid(world, x, y-1, z) && TFC_Core.isSouthSolid(world, x, y-1, z) && 
-					TFC_Core.isEastSolid(world, x, y-1, z) && TFC_Core.isWestSolid(world, x, y-1, z);
+			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, i, j, k-1) && TFC_Core.isSouthFaceSolid(world, i, j, k+1) && 
+					TFC_Core.isEastFaceSolid(world, i-1, j, k) && TFC_Core.isWestFaceSolid(world, i+1, j, k);
 
 			if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
 					world.getBlockMaterial(x, y, z) != Material.wood && world.getBlockMaterial(x, y, z) != Material.cloth &&
@@ -77,7 +73,6 @@ public class ItemFirestarter extends ItemTerra
 				List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y+1, z, x+1, y+2, z+1));
 				int numsticks = 0;
 				int hasPaper = 0;
-				int numcoal = 0;
 
 				if (list != null && !list.isEmpty())
 				{
@@ -91,10 +86,6 @@ public class ItemFirestarter extends ItemTerra
 						else if(entity.getEntityItem().itemID == Item.stick.itemID)
 						{
 							numsticks+=entity.getEntityItem().stackSize;
-						}
-						else if(entity.getEntityItem().itemID == Item.coal.itemID)
-						{
-							numcoal+=entity.getEntityItem().stackSize;
 						}
 					}
 				}
@@ -124,27 +115,6 @@ public class ItemFirestarter extends ItemTerra
 						}
 						world.setBlock(x, y+1, z, TFCBlocks.Firepit.blockID, 1, 2);
 					}
-					else if(numcoal >= 7 && world.getBlockMaterial(x, y, z) == Material.rock && 
-							world.getBlockMaterial(x+1, y+1, z) == Material.rock && world.getBlockMaterial(x-1, y+1, z) == Material.rock && 
-							world.getBlockMaterial(x, y+1, z+1) == Material.rock && world.getBlockMaterial(x, y+1, z-1) == Material.rock &&
-							world.isBlockNormalCube(x, y, z) && surroundSolidsUp1)
-					{
-						for (Iterator iterator = list.iterator(); iterator.hasNext();)
-						{
-							EntityItem entity = (EntityItem)iterator.next();
-							if(entity.getEntityItem().itemID == Item.stick.itemID)
-							{
-								entity.setDead();
-							}
-							if(entity.getEntityItem().itemID == Item.coal.itemID)
-							{
-								entity.setDead();
-							}
-						}
-						itemstack.damageItem(1, entityplayer);
-						world.setBlock(x, y+1, z, TFCBlocks.Forge.blockID, 1, 2);
-					}
-
 					return true;
 				}
 			}
@@ -164,19 +134,16 @@ public class ItemFirestarter extends ItemTerra
 					return true;
 				}
 			}
-			else if(world.getBlockId(x, y, z) == TFCBlocks.LogPile.blockID)
+			else if(world.getBlockId(x, y-1, z) == TFCBlocks.Pottery.blockID && surroundSolids)
 			{
-				if(world.getBlockId(x, y-1, z) == TFCBlocks.Pottery.blockID && surroundSolids && surroundSolids2)
+				int chance = new Random().nextInt(100);
+				if(chance > 70)
 				{
-					int chance = new Random().nextInt(100);
-					if(chance > 70)
-					{
-						TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y-1, z);
-						te.StartPitFire();
-					}
-					itemstack.damageItem(1, entityplayer);
-					return true;
+					TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y, z);
+					te.StartPitFire();
 				}
+				itemstack.damageItem(1, entityplayer);
+				return true;
 			}
 			return false;
 		}

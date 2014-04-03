@@ -1,9 +1,9 @@
 package TFC.Render.Blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.src.ModLoader;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -37,7 +37,7 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 		if(!breaking)
 		{
 			//render the background rock
-			renderer.overrideBlockTexture = getRockTexture(ModLoader.getMinecraftInstance().theWorld, x, y, z);
+			renderer.overrideBlockTexture = getRockTexture(Minecraft.getMinecraft().theWorld, x, y, z);
 			renderer.renderStandardBlock(block, x, y, z);
 			renderer.clearOverrideBlockTexture();
 
