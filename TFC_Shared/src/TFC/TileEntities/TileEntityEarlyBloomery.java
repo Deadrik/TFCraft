@@ -327,8 +327,6 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 			else
 				validationCheck--;
 		}
-		if(this.isInvalid())
-			this.validate();
 	}
 
 	@Override
