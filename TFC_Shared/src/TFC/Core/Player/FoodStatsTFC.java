@@ -328,12 +328,12 @@ public class FoodStatsTFC
 
 	public float getNutritionHealthModifier()
 	{
-		float nMod = 1.00f;
-		nMod -= 0.2f * (nutrFruit/24f);
-		nMod -= 0.2f * (nutrVeg/24f);
-		nMod -= 0.2f * (nutrGrain/24f);
-		nMod -= 0.2f * (nutrProtein/24f);
-		nMod -= 0.2f * (nutrDairy/24f);
+		float nMod = 0.00f;
+		nMod += 0.2f * (nutrFruit/24f);
+		nMod += 0.2f * (nutrVeg/24f);
+		nMod += 0.2f * (nutrGrain/24f);
+		nMod += 0.2f * (nutrProtein/24f);
+		nMod += 0.2f * (nutrDairy/24f);
 		return Math.max(nMod, 0.1f);
 
 	}
@@ -357,19 +357,19 @@ public class FoodStatsTFC
 		switch(fg)
 		{
 		case Dairy:
-			this.nutrDairy += amount;
+			this.nutrDairy = Math.min(nutrDairy+amount, 24);
 			break;
 		case Fruit:
-			this.nutrFruit += amount;
+			this.nutrFruit += Math.min(nutrFruit+amount, 24);
 			break;
 		case Grain:
-			this.nutrGrain += amount;
+			this.nutrGrain += Math.min(nutrGrain+amount, 24);
 			break;
 		case Protein:
-			this.nutrProtein += amount;
+			this.nutrProtein += Math.min(nutrProtein+amount, 24);
 			break;
 		case Vegetable:
-			this.nutrVeg += amount;
+			this.nutrVeg += Math.min(nutrVeg+amount, 24);
 			break;
 		default:
 			break;
