@@ -100,7 +100,7 @@ public class ItemLooseRock extends ItemTerra
 	@Override
 	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) 
 	{
-
+		
 	}
 
 	@Override

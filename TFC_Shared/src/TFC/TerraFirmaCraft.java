@@ -33,6 +33,7 @@ import TFC.Commands.RemoveChunkCommand;
 import TFC.Commands.SetPlayerStatsCommand;
 import TFC.Commands.StripChunkCommand;
 import TFC.Core.Recipes;
+import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
@@ -177,6 +178,13 @@ public class TerraFirmaCraft
 		SkillsManager.instance.registerSkill(Global.SKILL_WEAPONSMITH);
 		SkillsManager.instance.registerSkill(Global.SKILL_AGRICULTURE);
 		SkillsManager.instance.registerSkill(Global.SKILL_COOKING);
+	}
+
+	@EventHandler
+	public void load(FMLInitializationEvent event)
+	{
+		//Register Achievements
+		MinecraftForge.EVENT_BUS.register(new TFC_Achievements());
 	}
 
 	@EventHandler
