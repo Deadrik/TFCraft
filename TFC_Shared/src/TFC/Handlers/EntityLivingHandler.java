@@ -5,11 +5,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.Event.Result;
@@ -54,7 +51,7 @@ public class EntityLivingHandler
 				float h = player.getHealth();
 				float hPercent = (float) (h / player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
 				player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(getMaxHealth(player));
-				player.setHealth(newMaxHealth*hPercent);
+				//player.setHealth(newMaxHealth*hPercent);
 			}
 
 			if(!player.worldObj.isRemote)
