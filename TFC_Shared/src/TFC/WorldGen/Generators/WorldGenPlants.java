@@ -8,6 +8,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import TFC.TFCBlocks;
 import TFC.Blocks.Vanilla.BlockCustomTallGrass;
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomFruitTree;
@@ -137,14 +138,25 @@ public class WorldGenPlants implements IWorldGenerator
 			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
 
 			bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
-			if(bioTemperature >= 1.5)
+			if(bioTemperature >= 5)
+			{
+				if (world.isAirBlock(xCoord, yCoord, zCoord) && 
+						((BlockCustomTallGrass)Block.blocksList[Block.tallGrass.blockID]).canBlockStay(world, xCoord, yCoord, zCoord) &&
+						!TFC_Core.isDryGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
+				{
+					world.setBlock(xCoord, yCoord, zCoord, Block.tallGrass.blockID, 1, 0x2);
+				}
+			}
+
+			if(bioTemperature >= 0)
 			{
 				//				WorldGenerator var6 = new WorldGenCustomTallGrass(Block.tallGrass.blockID, 1);
 				//				var6.generate(world, random, xCoord, yCoord, zCoord);
 				if (world.isAirBlock(xCoord, yCoord, zCoord) && 
-						((BlockCustomTallGrass)Block.blocksList[Block.tallGrass.blockID]).canBlockStay(world, xCoord, yCoord, zCoord))
+						((BlockCustomTallGrass)Block.blocksList[Block.tallGrass.blockID]).canBlockStay(world, xCoord, yCoord, zCoord) &&
+						TFC_Core.isDryGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
 				{
-					world.setBlock(xCoord, yCoord, zCoord, Block.tallGrass.blockID, 1, 0x2);
+					world.setBlock(xCoord, yCoord, zCoord, Block.tallGrass.blockID, 3, 0x2);
 				}
 			}
 		}

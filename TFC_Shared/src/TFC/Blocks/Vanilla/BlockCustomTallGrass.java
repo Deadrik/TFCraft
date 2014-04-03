@@ -13,6 +13,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import TFC.Reference;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.ColorizerFoliageTFC;
@@ -117,7 +118,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		EntityItem ei = new EntityItem(world, i+0.5F, j+0.5F, k+0.5F, new ItemStack(TFCItems.Straw, 1));
 		world.spawnEntityInWorld(ei);
 	}
-	
+
 	private void createJute(World world, EntityPlayer player, int i, int j, int k)
 	{
 		EntityItem ei = new EntityItem(world, i+0.5F, j+0.5F, k+0.5F, new ItemStack(TFCItems.Jute, 1));
@@ -217,27 +218,27 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		return is;
 	}
 
-	private static final String[] field_94367_a = new String[] {"deadbush", "tallgrass", "fern"};
+	private static final String[] MetaNames = new String[] {"deadbush", "tallgrass", "fern", "shortgrass"};
 	@SideOnly(Side.CLIENT)
-	private Icon[] field_94366_b;
+	private Icon[] icons;
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void registerIcons(IconRegister par1IconRegister)
+	public void registerIcons(IconRegister register)
 	{
-		this.field_94366_b = new Icon[field_94367_a.length];
+		this.icons = new Icon[MetaNames.length];
 
-		for (int i = 0; i < this.field_94366_b.length; ++i)
-			this.field_94366_b[i] = par1IconRegister.registerIcon(field_94367_a[i]);
+		for (int i = 0; i < this.icons.length; ++i)
+			this.icons[i] = register.registerIcon((i > 2 ?Reference.ModID+":plants/" : "")+MetaNames[i]);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public Icon getIcon(int par1, int par2)
 	{
-		if (par2 >= this.field_94366_b.length)
+		if (par2 >= this.icons.length)
 			par2 = 0;
 
-		return this.field_94366_b[par2];
+		return this.icons[par2];
 	}
 }
