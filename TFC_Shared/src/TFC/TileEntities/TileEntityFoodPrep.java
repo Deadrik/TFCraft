@@ -66,6 +66,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 					NBTTagCompound nbt = new NBTTagCompound();
 					ItemStack is = new ItemStack(TFCItems.MealGeneric, 1);
 					Random R = new Random(getFoodSeed());
+					Random Ri = new Random(getIconSeed());
 
 					int count = -2;
 					if(getStackInSlot(0) != null) 
@@ -89,10 +90,10 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 						nbt.setString("FG3", getStackInSlot(3).getItem().getUnlocalizedName(getStackInSlot(3))+":"+((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodGroup().ordinal());
 					}
 
-					float mult = 0.15f + 0.1f * count;
+					float mult = 0.15f + 0.12f * count;
 
 					//set the icon for this meal
-					is.setItemDamage(R.nextInt(11));
+					is.setItemDamage(Ri.nextInt(11));
 					if(R.nextFloat() < mult)
 					{
 						float s = R.nextFloat()*0.25f+(TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_COOKING)*0.5f);
@@ -174,6 +175,20 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		int seed = 0;
 
 		for(int i = 0; i < 4; i++)
+		{
+			ItemStack is = getStackInSlot(i);
+			if(is != null)
+				seed += ((ItemFoodTFC)is.getItem()).getFoodID();
+		}
+
+		return seed + worldObj.getSeed();
+	}
+
+	private long getIconSeed()
+	{
+		int seed = 0;
+
+		for(int i = 0; i < 2; i++)
 		{
 			ItemStack is = getStackInSlot(i);
 			if(is != null)

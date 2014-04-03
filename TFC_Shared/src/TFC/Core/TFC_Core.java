@@ -549,7 +549,13 @@ public class TFC_Core
 		if(rain >= 500)
 			return getTypeForGrass(inMeta);
 		return getTypeForDryGrass(inMeta);
+	}
 
+	public static int getTypeForGrassWithRainByID(int inID, float rain)
+	{
+		if(rain >= 500)
+			return getTypeForGrassFromSoil(inID);
+		return getTypeForDryGrassFromSoil(inID);
 	}
 
 	public static int getTypeForGrass(int inMeta)
@@ -571,6 +577,26 @@ public class TFC_Core
 		if(inMeta < 16)
 			return TFCBlocks.DryGrass.blockID;
 		return TFCBlocks.DryGrass2.blockID;
+	}
+
+	public static int getTypeForDryGrassFromSoil(int inID)
+	{
+		if(inID == TFCBlocks.Grass.blockID)
+			return TFCBlocks.DryGrass.blockID;
+		else if(inID == TFCBlocks.Dirt.blockID)
+			return TFCBlocks.DryGrass.blockID;
+		return TFCBlocks.DryGrass2.blockID;
+	}
+
+	public static int getTypeForGrassFromSoil(int inID)
+	{
+		if(inID == TFCBlocks.DryGrass.blockID)
+			return TFCBlocks.Grass.blockID;
+		else if(inID == TFCBlocks.DryGrass2.blockID)
+			return TFCBlocks.Grass2.blockID;
+		else if(inID == TFCBlocks.Dirt.blockID)
+			return TFCBlocks.Grass.blockID;
+		return TFCBlocks.Grass2.blockID;
 	}
 
 	public static int getTypeForClayGrass(int inMeta)

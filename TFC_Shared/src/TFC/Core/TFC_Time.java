@@ -151,7 +151,7 @@ public class TFC_Time
 	 * @param z		integer z-coordinate
 	 * @return		adjusted season value
 	 */
-	public static int getSeason(int z)
+	public static int getSeasonAdjustedMonth(int z)
 	{
 		if(z > 0){
 			return (getMonth()+6)%12;

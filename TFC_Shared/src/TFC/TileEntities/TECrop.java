@@ -15,7 +15,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
-import TFC.Blocks.BlockCrop;
 import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
@@ -112,7 +111,7 @@ public class TECrop extends NetworkTileEntity
 						tef.DrainNutrients(3, crop.nutrientUsageMult);
 				}
 
-				float growthRate = (((crop.numGrowthStages/(crop.growthTime*TFC_Time.timeRatio360))+tempAdded)*nutriMult) * timeMultiplier;
+				float growthRate = (((crop.numGrowthStages/(crop.growthTime*TFC_Time.timeRatio96))+tempAdded)*nutriMult) * timeMultiplier;
 
 				int oldGrowth = (int) Math.floor(growth);
 
@@ -161,7 +160,7 @@ public class TECrop extends NetworkTileEntity
 					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is));
 
 				TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_AGRICULTURE, 1);
-				
+
 				if(TFC_Core.isSoil(world.getBlockId(xCoord, yCoord - 1, zCoord))){
 					player.addStat(TFC_Achievements.achWildVegetable, 1);
 				}

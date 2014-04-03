@@ -502,6 +502,8 @@ public class TFCItemID {
 
 	public static int UnknownIngot				= 16779;
 	public static int UnknownUnshaped			= 16780;
+
+	public static int FireBrick					= 16781;
 	// Plans
 	public static int PickaxeHeadPlan			= 20000;
 	public static int ShovelHeadPlan			= 20001;
@@ -767,7 +769,7 @@ public class TFCItemID {
 	public static int CloudberryLeaf			= 19142;
 
 	public static int Fertilizer				= 19143;
-	
+
 	public static int horseMeatRaw				= 19144;
 	public static int horseMeatCooked			= 19145;
 	public static int WoodenBucketSaltWater		= 19146;

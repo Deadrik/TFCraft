@@ -342,13 +342,13 @@ public class TFC_Climate
 		temp = adjustHeightToTemp(y,temp);
 		float light = 1;
 
-		if(worldObj.getChunkProvider() != null && worldObj.blockExists(x, y, z)){
+		if(worldObj.getChunkProvider() != null /*&& worldObj.blockExists(x, y, z)*/){
 			float bl = worldObj.getBlockLightValue(x, y, z);
 			light = 0.25f*(1-(bl/15f));
 		}
 		//If this block can see the sky then we jsut want it to be ambient temp. 
 		//Shadows should only matter for darkness, not night time.
-		if(worldObj.getChunkProvider() != null && worldObj.blockExists(x, y, z)){
+		if(worldObj.getChunkProvider() != null /*&& worldObj.blockExists(x, y, z)*/){
 			if(worldObj.canBlockSeeTheSky(x, y, z))
 				light = 0;
 		}
@@ -458,7 +458,7 @@ public class TFC_Climate
 	 */
 	public static int getFoliageColor(World world, int x, int y, int z)
 	{
-		int month = TFC_Time.getSeason(z);
+		int month = TFC_Time.getSeasonAdjustedMonth(z);
 		if(month < 9)
 		{
 			float temp = (getTemp(x, z)+35)/(getMaxTemperature()+35);
@@ -479,7 +479,7 @@ public class TFC_Climate
 	 */
 	public static int getFoliageColorEvergreen(World world, int x, int y, int z)
 	{
-		int month = TFC_Time.getSeason(z);
+		int month = TFC_Time.getSeasonAdjustedMonth(z);
 		float temp = (getTemp(x, z)+35)/(getMaxTemperature()+35);
 		//float evt = (1 - (((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z).floatdata1 / 16))*0.5f;
 		float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);

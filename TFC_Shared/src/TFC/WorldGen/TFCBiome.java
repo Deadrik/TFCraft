@@ -9,11 +9,6 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import TFC.API.Util.Helper;
-import TFC.Core.ColorizerFoliageTFC;
-import TFC.Core.ColorizerGrassTFC;
-import TFC.Core.TFC_Time;
-import TFC.Core.WeatherManager;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.Entities.Mobs.EntityCreeperTFC;
 import TFC.Entities.Mobs.EntityEndermanTFC;
@@ -23,17 +18,13 @@ import TFC.Entities.Mobs.EntitySpiderTFC;
 import TFC.Entities.Mobs.EntitySquidTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
 import TFC.WorldGen.Biomes.BiomeGenBeachTFC;
-import TFC.WorldGen.Biomes.BiomeGenDesertTFC;
-import TFC.WorldGen.Biomes.BiomeGenForestTFC;
 import TFC.WorldGen.Biomes.BiomeGenHellTFC;
 import TFC.WorldGen.Biomes.BiomeGenHillsEdgeTFC;
 import TFC.WorldGen.Biomes.BiomeGenHillsTFC;
-import TFC.WorldGen.Biomes.BiomeGenJungleTFC;
 import TFC.WorldGen.Biomes.BiomeGenOceanTFC;
 import TFC.WorldGen.Biomes.BiomeGenPlainsTFC;
 import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 import TFC.WorldGen.Biomes.BiomeGenSwampTFC;
-import TFC.WorldGen.Biomes.BiomeGenTaigaTFC;
 import TFC.WorldGen.Generators.WorldGenCustomShrub;
 import TFC.WorldGen.Generators.Trees.WorldGenAcaciaKoaTrees;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomBigTree;
@@ -49,8 +40,6 @@ import TFC.WorldGen.Generators.Trees.WorldGenPineShort;
 import TFC.WorldGen.Generators.Trees.WorldGenPineTall;
 import TFC.WorldGen.Generators.Trees.WorldGenRedwoodXL;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFCBiome extends BiomeGenBase
 {
@@ -72,19 +61,9 @@ public class TFCBiome extends BiomeGenBase
 
 	public static final TFCBiome beach = (new BiomeGenBeachTFC(16)).setColor(0xfade55).SetWaterMult(DarkWater).setBiomeName("Beach").setMinMaxHeight(0.0F, 0.02F);
 
-	public static final TFCBiome jungle = (new BiomeGenJungleTFC(21)).setColor(5470985).setBiomeName("Jungle").setMinMaxHeight(0.2F, 0.4F);
-
-	public static final TFCBiome jungleHills = (new BiomeGenJungleTFC(22)).setColor(2900485).setBiomeName("JungleHills").setMinMaxHeight(0.3F, 0.8F);
-
-	public static final TFCBiome desert = (new BiomeGenDesertTFC(2)).setBiomeName("Desert").setDisableRain().setTemperatureRainfall(36F, 0.0F).setMinMaxHeight(0.1F, 0.15F);
-
 	public static final TFCBiome HighHills = (new BiomeGenHillsTFC(3)).setBiomeName("High Hills").setMinMaxHeight(0.8F, 1.6F);
 
-	public static final TFCBiome forest = (new BiomeGenForestTFC(4)).setBiomeName("Forest").setMinMaxHeight(0.1F, 0.3F);
-
-	public static final TFCBiome plains = (new BiomeGenPlainsTFC(1)).setBiomeName("TFC Plains").setMinMaxHeight(0.1F, 0.2F);
-
-	public static final TFCBiome taiga = (new BiomeGenTaigaTFC(5)).setBiomeName("Taiga").setMinMaxHeight(0.2F, 0.5F);
+	public static final TFCBiome plains = (new BiomeGenPlainsTFC(1)).setBiomeName("TFC Plains").setMinMaxHeight(0.1F, 0.16F);
 
 	public static final TFCBiome swampland = (new BiomeGenSwampTFC(6)).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.1F);
 
@@ -94,10 +73,7 @@ public class TFCBiome extends BiomeGenBase
 	public static final TFCBiome Mountains = (new TFCBiome(31)).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F);
 	public static final TFCBiome MountainsEdge = (new TFCBiome(32)).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F);
 
-	public static final TFCBiome MountainsSeismic = (new TFCBiome(33)).setBiomeName("Mountains Seismic").setMinMaxHeight(0.8F, 1.6F);
-	public static final TFCBiome MountainsEdgeSeismic = (new TFCBiome(34)).setBiomeName("Mountains Edge Seismic").setMinMaxHeight(0.4F, 0.8F);
-
-	public static final TFCBiome PlainsSeismic = (new BiomeGenPlainsTFC(35)).setBiomeName("TFC Plains Seismic").setMinMaxHeight(0.1F, 0.2F);
+	public static final TFCBiome HighPlains = (new BiomeGenPlainsTFC(35)).setBiomeName("TFC High Plains").setMinMaxHeight(0.4F, 0.43F);
 
 	protected static WorldGenAcaciaKoaTrees worldGenAcaciaKoaTrees;
 	protected static WorldGenCustomTallTrees worldGenAshTallTrees;

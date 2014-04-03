@@ -245,12 +245,12 @@ public class BlockFruitWood extends BlockTerraContainer
         
         float temp = TFC_Climate.getHeightAdjustedTemp(i, j, k);
         
-        if(!world.isRemote && world.getBlockTileEntity(i, j, k) != null && TFC_Time.getSeason(k) < 6 && 
+        if(!world.isRemote && world.getBlockTileEntity(i, j, k) != null && TFC_Time.getSeasonAdjustedMonth(k) < 6 && 
                 fi != null && temp >= fi.minTemp && temp < fi.maxTemp)
         {
             TileEntityFruitTreeWood te = (TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k);
             int t = 1;
-            if(TFC_Time.getSeason(k) < 3)
+            if(TFC_Time.getSeasonAdjustedMonth(k) < 3)
                 t = 2;
             
             int leafGrowthRate = 20;

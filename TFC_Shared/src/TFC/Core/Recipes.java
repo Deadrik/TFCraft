@@ -174,10 +174,10 @@ public class Recipes
 				"2","1", Character.valueOf('1'),new ItemStack(TFCItems.Logs,1,32767), Character.valueOf('2'),new ItemStack(Knives[j], 1, 32767)});
 			for(int k = 0; k < 3; k ++)
 			{
-			GameRegistry.addRecipe(new ItemStack(TFCItems.ScrapedHide,1,k), new Object[] {				
-				"2","1", Character.valueOf('1'), new ItemStack(TFCItems.SoakedHide,1,k),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
-			GameRegistry.addRecipe(new ItemStack(TFCItems.Wool,1+k,0), new Object[] {				
-				"2","1", Character.valueOf('1'), new ItemStack(TFCItems.SheepSkin,1,k),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
+				GameRegistry.addRecipe(new ItemStack(TFCItems.ScrapedHide,1,k), new Object[] {				
+					"2","1", Character.valueOf('1'), new ItemStack(TFCItems.SoakedHide,1,k),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
+				GameRegistry.addRecipe(new ItemStack(TFCItems.Wool,1+k,0), new Object[] {				
+					"2","1", Character.valueOf('1'), new ItemStack(TFCItems.SheepSkin,1,k),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
 			}
 			GameRegistry.addRecipe(new ItemStack(TFCItems.TerraLeather,0,0), new Object[] {				
 				"2","1", Character.valueOf('1'), new ItemStack(TFCItems.TerraLeather,1),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
@@ -576,6 +576,9 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Thatch,1), 
 				new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.Straw, 1)});
+
+		GameRegistry.addRecipe(new ItemStack(TFCItems.FireBrick,1), 
+				new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(Item.clay,1,1)});
 
 		RegisterToolRecipes();
 		registerFoodRecipes();

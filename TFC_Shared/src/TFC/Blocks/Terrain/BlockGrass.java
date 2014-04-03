@@ -67,7 +67,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	{
 		return side == 1 ? GrassTopTexture : (side == 0 ? TFC_Textures.InvisibleTexture : iconGrassSideOverlay);
 	}
-	
+
 	@Override
 	public void onBlockAdded(World world, int i, int j, int k)
 	{
@@ -192,7 +192,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 
 					if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 &&
 							world.getBlockLightValue(x, y + 1, z) >= 4 && world.getBlockMaterial(x, y + 1, z) != Material.water)
-						world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRain(meta, rain), meta, 0x2);
+						world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByID(id, rain), meta, 0x2);
 					else if (TFC_Core.isClay(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlockMaterial(x, y + 1, z) != Material.water)
 						world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
 					else if (TFC_Core.isPeat(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlockMaterial(x, y + 1, z) != Material.water)

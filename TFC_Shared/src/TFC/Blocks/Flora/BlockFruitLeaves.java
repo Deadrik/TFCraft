@@ -129,7 +129,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 				{
 					if(temp >= fi2.minTemp && temp < fi2.maxTemp)
 					{
-						if(fi2.inHarvest(TFC_Time.getSeason(k)) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > 2)
+						if(fi2.inHarvest(TFC_Time.getSeasonAdjustedMonth(k)) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > 2)
 						{
 							if(meta < 8)
 							{
@@ -154,7 +154,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 				}
 				if(fi != null)
 				{
-					if(!fi.inHarvest(TFC_Time.getSeason(k)))
+					if(!fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(k)))
 					{
 						if(world.getBlockMetadata(i, j, k) >= 8)
 						{
@@ -394,7 +394,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 			FloraManager manager = FloraManager.getInstance();
 			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(blockID, world.getBlockMetadata(i, j, k) & 7));
 
-			if(fi != null && (fi.inHarvest(TFC_Time.getSeason(k)) || fi.inHarvest(((TFC_Time.getSeason(k)-1)+12)%12) && (meta & 8) == 8))
+			if(fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(k)) || fi.inHarvest(((TFC_Time.getSeasonAdjustedMonth(k)-1)+12)%12) && (meta & 8) == 8))
 			{
 				TEFruitLeaves te = (TEFruitLeaves) world.getBlockTileEntity(i, j, k);
 				if(te != null && te.hasFruit)

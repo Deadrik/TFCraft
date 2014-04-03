@@ -77,22 +77,22 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 			return false;
 		}
 		if(worldObj.getBlockMaterial(i+1, j, k) != Material.rock &&
-				worldObj.getBlockMaterial(i+1, j, k) != Material.iron && !TFC_Core.isWestSolid(worldObj, xCoord, yCoord, zCoord))
+				worldObj.getBlockMaterial(i+1, j, k) != Material.iron && !TFC_Core.isWestSolid(worldObj, i, j, k))
 		{
 			return false;
 		}
 		if(worldObj.getBlockMaterial(i-1, j, k) != Material.rock &&
-				worldObj.getBlockMaterial(i-1, j, k) != Material.iron && !TFC_Core.isEastSolid(worldObj, xCoord, yCoord, zCoord))
+				worldObj.getBlockMaterial(i-1, j, k) != Material.iron && !TFC_Core.isEastSolid(worldObj, i, j, k))
 		{
 			return false;
 		}
 		if(worldObj.getBlockMaterial(i, j, k+1) != Material.rock &&
-				worldObj.getBlockMaterial(i, j, k+1) != Material.iron && !TFC_Core.isSouthSolid(worldObj, xCoord, yCoord, zCoord))
+				worldObj.getBlockMaterial(i, j, k+1) != Material.iron && !TFC_Core.isSouthSolid(worldObj, i, j, k))
 		{
 			return false;
 		}
 		if(worldObj.getBlockMaterial(i, j, k-1) != Material.rock &&
-				worldObj.getBlockMaterial(i, j, k-1) != Material.iron && !TFC_Core.isNorthSolid(worldObj, xCoord, yCoord, zCoord))
+				worldObj.getBlockMaterial(i, j, k-1) != Material.iron && !TFC_Core.isNorthSolid(worldObj, i, j, k))
 		{
 			return false;
 		}
