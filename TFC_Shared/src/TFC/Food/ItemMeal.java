@@ -71,7 +71,7 @@ public class ItemMeal extends ItemTerra
 			{
 				float ounces = nbt.getFloat("foodWeight");
 				if(ounces > 0)
-					arraylist.add("Amount " + Helper.roundNumber(ounces,10)+" oz / 80.0 oz");
+					arraylist.add("Amount " + Helper.roundNumber(ounces,10)+"oz");
 				float decay = nbt.getFloat("foodDecay");
 				if(decay > 0)
 					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100,10)+"%");

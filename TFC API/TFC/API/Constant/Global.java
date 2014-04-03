@@ -94,5 +94,5 @@ public class Global
 	 * Easy calculator here: http://www.basic-mathematics.com/nth-root-calculator.html
 	 */
 	public static float FOOD_DECAY_RATE = 1.0170378966055869517978300569768f;
-	public static float FOOD_MAX_WEIGHT = 80;
+	public static float FOOD_MAX_WEIGHT = 160;
 }
