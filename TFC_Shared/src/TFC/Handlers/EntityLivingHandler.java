@@ -176,6 +176,9 @@ public class EntityLivingHandler
 		else if(item.getItem().equals(TFCItems.GemDiamond)){
 			player.triggerAchievement(TFC_Achievements.achDiamond);
 		}
+		else if(item.getItem().equals(TFCItems.Onion) && TFCOptions.iDontLikeOnions){
+			player.triggerAchievement(TFC_Achievements.achRutabaga);
+		}
 	}
 
 	@ForgeSubscribe
