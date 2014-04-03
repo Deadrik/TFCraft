@@ -458,7 +458,7 @@ public class TFC_Climate
 	 */
 	public static int getFoliageColor(World world, int x, int y, int z)
 	{
-		int month = TFC_Time.getSeason(z);
+		int month = TFC_Time.getSeasonAdjustedMonth(z);
 		if(month < 9)
 		{
 			float temp = (getTemp(x, z)+35)/(getMaxTemperature()+35);
@@ -479,7 +479,7 @@ public class TFC_Climate
 	 */
 	public static int getFoliageColorEvergreen(World world, int x, int y, int z)
 	{
-		int month = TFC_Time.getSeason(z);
+		int month = TFC_Time.getSeasonAdjustedMonth(z);
 		float temp = (getTemp(x, z)+35)/(getMaxTemperature()+35);
 		//float evt = (1 - (((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z).floatdata1 / 16))*0.5f;
 		float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);

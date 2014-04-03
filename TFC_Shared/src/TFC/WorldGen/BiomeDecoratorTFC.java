@@ -6,10 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenDeadBush;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import TFC.TFCBlocks;
 import TFC.Core.TFC_Climate;
+import TFC.Food.CropIndex;
+import TFC.Food.CropManager;
 import TFC.WorldGen.Generators.WorldGenCustomCactus;
 import TFC.WorldGen.Generators.WorldGenCustomPumpkin;
 import TFC.WorldGen.Generators.WorldGenCustomReed;
@@ -88,53 +89,34 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		int yCoord;
 		int zCoord;
 
-		/*for (var2 = 0; var2 < 1; ++var2)
+		Random rand = new Random(this.currentWorld.getSeed()+((chunk_X>>7)-(chunk_Z>>7))*(chunk_Z>>7));
+		int cropid = rand.nextInt(24);
+		CropIndex crop = CropManager.getInstance().getCropFromId(cropid);
+		if(randomGenerator.nextInt(9) == 0 && crop != null)
 		{
-			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord)-1;
-
-			int x1 = 2+randomGenerator.nextInt(6);
-			int x2 = 2+randomGenerator.nextInt(6);
-			int z1 = 2+randomGenerator.nextInt(6);
-			int z2 = 2+randomGenerator.nextInt(6);
-
-			if(randomGenerator.nextInt(20) == 0 && TFC_Core.isSoil(currentWorld.getBlockId(xCoord, yCoord, zCoord))) {
-				new WorldGenLargeRock(x1,x2,z1,z2, 3).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-			}
-		}*/
-
-		//new WorldGenFixGrass().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
-
-
-		Random rand = new Random((chunk_X-chunk_Z)*chunk_Z);
-		int crop = rand.nextInt(24);
-		if(randomGenerator.nextInt(9) == 0)
-		{
-			int num = randomGenerator.nextInt(8);
-			boolean grown = false;
+			int num = 2+randomGenerator.nextInt(8);
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord)+1;
-			for (int count = 0 ; count < 16 && num > 0; ++count)
+			for (int count = 0 ; count < num; ++count)
 			{
-				num -= new WorldGenGrowCrops(crop).generate(currentWorld, randomGenerator, xCoord, yCoord, zCoord) ? 1 : 0;
+				new WorldGenGrowCrops(cropid).generate(currentWorld, randomGenerator, xCoord, yCoord, zCoord);
 			}
 		}
 
-		for (var2 = 0; var2 < this.deadBushPerChunk; ++var2)
+		/*for (var2 = 0; var2 < this.deadBushPerChunk; ++var2)
 		{
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 
-			float rain = TFC_Climate.getRainfall(chunk_X, 144, chunk_Z);
+			float rain = TFC_Climate.getRainfall(xCoord, yCoord, zCoord);
 
 			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, this.currentWorld.getHeightValue(xCoord, zCoord), zCoord);
 			if(temperature < 18 && rain < 250) {
 				new WorldGenDeadBush(Block.deadBush.blockID).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 			}
-		}
+		}*/
 
 		/*int catTailsNum = 10;
 		for (var2 = 0; var2 < catTailsNum; ++var2)
