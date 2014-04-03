@@ -23,12 +23,8 @@ public class WorldGenGrowCrops implements IWorldGenerator
 		this.cropBlockId = par1;
 	}
 
-	public boolean generate(World world, Random rand, int x, int y, int z)
+	public boolean generate(World world, Random rand, int i, int j, int k)
 	{
-		int i = x - 5 + rand.nextInt(10);
-		int k = z - 5 + rand.nextInt(10);
-		int j = world.getHeightValue(x, z)+1;
-
 		CropIndex crop = CropManager.getInstance().getCropFromId(cropBlockId);
 		if(crop != null)
 		{

@@ -92,7 +92,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		Random rand = new Random(this.currentWorld.getSeed()+((chunk_X>>7)-(chunk_Z>>7))*(chunk_Z>>7));
 		int cropid = rand.nextInt(24);
 		CropIndex crop = CropManager.getInstance().getCropFromId(cropid);
-		if(randomGenerator.nextInt(9) == 0 && crop != null)
+		if(randomGenerator.nextInt(8) == 0 && crop != null)
 		{
 			int num = 2+randomGenerator.nextInt(8);
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
