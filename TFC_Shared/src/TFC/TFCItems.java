@@ -837,6 +837,7 @@ public class TFCItems
 	public static Item KilnRack;
 	public static Item Straw;
 	public static Item FlatClay;
+	public static Item FireBrick;
 
 	public static Item ClayMoldAxe;
 	public static Item ClayMoldChisel;
@@ -1499,7 +1500,7 @@ public class TFCItems
 		TerraLeather = new ItemLeather(TFCItemID.TFCLeather).setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather");
 
 		Straw = new ItemTerra(TFCItemID.Straw).setFolder("plants/").setUnlocalizedName("Straw");
-		FlatClay = (new ItemFlatGeneric(TFCItemID.FlatClay).setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName(""));
+		FlatClay = (new ItemFlatGeneric(TFCItemID.FlatClay).setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName("clay"));
 
 		PotteryJug = new ItemPotteryJug(TFCItemID.PotteryJug).setUnlocalizedName("Jug");
 		PotterySmallVessel = new ItemPotterySmallVessel(TFCItemID.PotterySmallVessel).setUnlocalizedName("Small Vessel");
@@ -1507,6 +1508,8 @@ public class TFCItems
 		PotteryPot = new ItemPotteryPot(TFCItemID.PotteryPot).setUnlocalizedName("Pot");
 		CeramicMold = new ItemPotteryBase(TFCItemID.CeramicMold).setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
 		Item.itemsList[Item.clay.itemID] = null; Item.itemsList[Item.clay.itemID] = (new ItemClay(Item.clay.itemID).setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1))).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("clay");
+		FireBrick = new ItemPotteryBase(TFCItemID.FireBrick).setMetaNames(new String[]{"Clay Fire Brick","Fire Brick"}).setUnlocalizedName("Fire Brick");
+
 		ClayMoldAxe = new ItemPotteryMold(TFCItemID.ClayMoldAxe).setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
 				"Ceramic Mold Axe Copper","Ceramic Mold Axe Bronze","Ceramic Mold Axe Bismuth Bronze","Ceramic Mold Axe Black Bronze"}).setUnlocalizedName("Axe Mold");
 		ClayMoldChisel = new ItemPotteryMold(TFCItemID.ClayMoldChisel).setMetaNames(new String[]{"Clay Mold Chisel","Ceramic Mold Chisel",
@@ -1686,7 +1689,7 @@ public class TFCItems
 				this.MetaIcons[0] = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
 				this.MetaIcons[1] = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + "Rutabaga");
 			}
-			
+
 			@Override
 			public Icon getIconFromDamage(int i)
 			{
