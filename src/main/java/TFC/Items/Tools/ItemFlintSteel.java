@@ -32,14 +32,8 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 	{
 		if(!world.isRemote)
 		{
-			boolean surroundSolids = TFC_Core.isNorthSolid(world, x, y, z) && 
-					TFC_Core.isSouthSolid(world, x, y, z) && 
-					TFC_Core.isEastSolid(world, x, y, z) && 
-					TFC_Core.isWestSolid(world, x, y, z);
-			boolean surroundSolidsUp1 = TFC_Core.isNorthSolid(world, x, y+1, z) && TFC_Core.isSouthSolid(world, x, y+1, z) && 
-					TFC_Core.isEastSolid(world, x, y+1, z) && TFC_Core.isWestSolid(world, x, y+1, z);
-			boolean surroundSolidsDown1 = TFC_Core.isNorthSolid(world, x, y-1, z) && TFC_Core.isSouthSolid(world, x, y-1, z) && 
-					TFC_Core.isEastSolid(world, x, y-1, z) && TFC_Core.isWestSolid(world, x, y-1, z);
+			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, x, y, z-1) && TFC_Core.isSouthFaceSolid(world, x, y, z+1) &&
+					TFC_Core.isEastFaceSolid(world, x-1, y, z) && TFC_Core.isWestFaceSolid(world, x+1, y, z);
 
 			if(side == 1 && world.getBlock(x, y, z).isNormalCube() && world.getBlock(x, y, z).isOpaqueCube() && 
 					world.getBlock(x, y, z).getMaterial() != Material.wood && world.getBlock(x, y, z).getMaterial() != Material.cloth &&
@@ -49,7 +43,6 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 				List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y+1, z, x+1, y+2, z+1));
 				int numsticks = 0;
 				int hasPaper = 0;
-				int numcoal = 0;
 
 				if (list != null && !list.isEmpty())
 				{
@@ -57,26 +50,15 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 					{
 						EntityItem entity = (EntityItem)iterator.next();
 						if(entity.getEntityItem().getItem() == Items.paper)
-						{
 							hasPaper = 20;
-						}
 						else if(entity.getEntityItem().getItem() == Items.stick)
-						{
 							numsticks+=entity.getEntityItem().stackSize;
-						}
-						else if(entity.getEntityItem().getItem() == Items.coal)
-						{
-							numcoal+=entity.getEntityItem().stackSize;
-						}
 					}
 				}
 
 				itemstack.setItemDamage(itemstack.getItemDamage()+1);
-
-				if(itemstack.getItemDamage() >= itemstack.getMaxDamage()) {
+				if(itemstack.getItemDamage() >= itemstack.getMaxDamage())
 					itemstack.stackSize = 0;
-				}
-
 
 				if(numsticks >= 3)
 				{
@@ -84,41 +66,17 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 					{
 						EntityItem entity = (EntityItem)iterator.next();
 						if(entity.getEntityItem().getItem() == Items.stick)
-						{
 							entity.setDead();
-						}
 						if(entity.getEntityItem().getItem() == Items.paper)
-						{
 							entity.setDead();
-						}
 					}
 					itemstack.damageItem(1, entityplayer);
 					world.setBlock(x, y+1, z, TFCBlocks.Firepit, 1, 0x2);
 					if(world.isRemote) {
 						world.markBlockForUpdate(x, y+1, z);
 					}
+					return true;
 				}
-				else if(numcoal >= 7 && world.getBlock(x, y, z).getMaterial() == Material.rock && 
-						world.getBlock(x+1, y+1, z).getMaterial() == Material.rock && world.getBlock(x-1, y+1, z).getMaterial() == Material.rock && 
-						world.getBlock(x, y+1, z+1).getMaterial() == Material.rock && world.getBlock(x, y+1, z-1).getMaterial() == Material.rock &&
-						surroundSolidsUp1)
-				{
-					for (Iterator iterator = list.iterator(); iterator.hasNext();)
-					{
-						EntityItem entity = (EntityItem)iterator.next();
-						if(entity.getEntityItem().getItem() == Items.stick)
-						{
-							entity.setDead();
-						}
-						if(entity.getEntityItem().getItem() == Items.coal)
-						{
-							entity.setDead();
-						}
-					}
-					itemstack.damageItem(1, entityplayer);
-					world.setBlock(x, y+1, z, TFCBlocks.Forge, 1, 0x2);
-				}
-
 				return true;
 			}
 			else if(world.getBlock(x, y, z) == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6)
@@ -130,18 +88,15 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 				{
 					itemstack.damageItem(1, entityplayer);
 					world.setBlock(x, y, z, TFCBlocks.Forge, 1, 0x2);
+					return true;
 				}
 			}
-			else if(world.getBlock(x, y, z) == TFCBlocks.LogPile)
+			else if(world.getBlock(x, y, z) == TFCBlocks.Pottery && surroundSolids)
 			{
-				if(world.getBlock(x, y-1, z) == TFCBlocks.Pottery && 
-						surroundSolids && 
-						surroundSolidsDown1)
-				{
-					TileEntityPottery te = (TileEntityPottery) world.getTileEntity(x, y-1, z);
-					te.StartPitFire();					
-					itemstack.damageItem(1, entityplayer);
-				}
+				TileEntityPottery te = (TileEntityPottery) world.getTileEntity(x, y, z);
+				te.StartPitFire();
+				itemstack.damageItem(1, entityplayer);
+				return true;
 			}
 			else
 			{
@@ -153,20 +108,20 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 	}
 
 	@Override
-	public EnumSize getSize(ItemStack is) {
-		// TODO Auto-generated method stub
+	public EnumSize getSize(ItemStack is)
+	{
 		return EnumSize.VERYSMALL;
 	}
 
 	@Override
-	public EnumWeight getWeight(ItemStack is) {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight(ItemStack is)
+	{
 		return EnumWeight.LIGHT;
 	}
 
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public boolean canStack()
+	{
 		return false;
 	}
 }

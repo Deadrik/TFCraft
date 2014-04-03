@@ -86,6 +86,7 @@ import TFC.Render.RenderWolfTFC;
 import TFC.Render.Blocks.RenderAnvil;
 import TFC.Render.Blocks.RenderBarrel;
 import TFC.Render.Blocks.RenderBellows;
+import TFC.Render.Blocks.RenderBloomery;
 import TFC.Render.Blocks.RenderCrucible;
 import TFC.Render.Blocks.RenderFence;
 import TFC.Render.Blocks.RenderFenceGate;
@@ -137,7 +138,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ClientProxy extends CommonProxy 
+public class ClientProxy extends CommonProxy
 {
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -150,8 +151,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderTerraJavelin());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySquidTFC.class, new RenderSquidTFC(new ModelSquidTFC(), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCowTFC.class, new RenderCowTFC(new ModelCowTFC(), 0.7F));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySheepTFC.class, new RenderSheepTFC(new ModelSheep2TFC(),new ModelSheep1TFC(), 0.4F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityWolfTFC.class, new RenderWolfTFC(new ModelWolfTFC(),new ModelWolfTFC(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySheepTFC.class, new RenderSheepTFC(new ModelSheep2TFC(), new ModelSheep1TFC(), 0.4F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityWolfTFC.class, new RenderWolfTFC(new ModelWolfTFC(), new ModelWolfTFC(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBear.class, new RenderBear(new ModelBear(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPheasantTFC.class, new RenderPheasantTFC(new ModelPheasant(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityChickenTFC.class, new RenderChickenTFC(new ModelChickenTFC(), 0.3F));
@@ -219,6 +220,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.pipeValveRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPipeBasic());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.seaWeedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.berryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBerryBush());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.bloomeryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBloomery());
 
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
@@ -246,9 +248,9 @@ public class ClientProxy extends CommonProxy
 	{
 		super.registerTileEntities(false);
 		ClientRegistry.registerTileEntity(TileEntityChestTFC.class, "chest", new TESRChest());
-		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TESRIngotPile());
-		ClientRegistry.registerTileEntity(TileEntityFirepit.class, "firepit",new TESRFirepit());
-		ClientRegistry.registerTileEntity(TESeaWeed.class, "seaweed",new TESRSeaWeed());
+		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile2", new TESRIngotPile());
+		ClientRegistry.registerTileEntity(TileEntityFirepit.class, "firepit", new TESRFirepit());
+		ClientRegistry.registerTileEntity(TESeaWeed.class, "seaweed", new TESRSeaWeed());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TESRPottery());
 		ClientRegistry.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep", new TESRFoodPrep());
@@ -296,7 +298,7 @@ public class ClientProxy extends CommonProxy
 				TFCBiome biome = (TFCBiome) par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
 				if(biome != null)
 				{
-					if(lastBiomeGen != biome)
+					if (lastBiomeGen != biome)
 					{
 						waterColorMultiplier = biome.getWaterColorMultiplier();
 						lastBiomeGen = biome;
@@ -319,10 +321,10 @@ public class ClientProxy extends CommonProxy
 		for (int z = -1; z <= 1; ++z)
 			for (int x = -1; x <= 1; ++x)
 			{
-				int var10 = TFC_Climate.getGrassColor(getCurrentWorld(), i + x, j ,k + z);
+				int var10 = TFC_Climate.getGrassColor(getCurrentWorld(), i + x, j, k + z);
 				var5 += (var10 & 16711680) >> 16;
-			var6 += (var10 & 65280) >> 8;
-		var7 += var10 & 255;
+				var6 += (var10 & 65280) >> 8;
+				var7 += var10 & 255;
 			}
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
 	}
@@ -334,7 +336,7 @@ public class ClientProxy extends CommonProxy
 		int var6 = 0;
 		int var7 = 0;
 
-		int[] rgb = {0,0,0};
+		int[] rgb = { 0, 0, 0 };
 
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
 		if(par1IBlockAccess.getBlock(i, j, k) == TFCBlocks.fruitTreeLeaves) //			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December)
@@ -350,35 +352,38 @@ public class ClientProxy extends CommonProxy
 			for (int var8 = -1; var8 <= 1; ++var8)
 				for (int var9 = -1; var9 <= 1; ++var9)
 				{
-					int var10 = TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9);
+					int var10 = TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j, k + var9);
 					rgb = applyColor(var10, rgb);
 				}
 
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
-		} else if(par1IBlockAccess.getBlock(i, j, k) == Blocks.vine)
+		}
+		else if(par1IBlockAccess.getBlock(i, j, k) == Blocks.vine)
 		{
-			if(TFC_Time.getSeason(k) >= 6 && TFC_Time.getSeason(k) < 9 && 
-					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
+			if (TFC_Time.getSeason(k) >= 6 && TFC_Time.getSeason(k) < 9
+					&& !(((TFCWorldChunkManager) getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8)
+					&& TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
 			{
 				int color = 0;
 				for (int var8 = -1; var8 <= 1; ++var8)
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						color = (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9));
+						color = (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j, k + var9));
 						rgb = applyColor(color, rgb);
 					}
 
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
 			}
-			else if(TFC_Time.getSeason(k) >= 11 || TFC_Time.getSeason(k) <= 0 && 
-					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
+			else if (TFC_Time.getSeason(k) >= 11 || TFC_Time.getSeason(k) <= 0
+					&& !(((TFCWorldChunkManager) getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8)
+					&& TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						int color = (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9));
+						int color = (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j, k + var9));
 						rgb = applyColor(color, rgb);
 					}
 
@@ -386,8 +391,8 @@ public class ClientProxy extends CommonProxy
 				return x;
 
 			}
-			else if(TFC_Time.getSeason(k) >= 9 && 
-					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
+			else if (TFC_Time.getSeason(k) >= 9 && !(((TFCWorldChunkManager) getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8)
+					&& TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
 					for (int var9 = -1; var9 <= 1; ++var9)
@@ -404,25 +409,26 @@ public class ClientProxy extends CommonProxy
 				for (int var8 = -1; var8 <= 1; ++var8)
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						int color = (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9));
+						int color = (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j, k + var9));
 						rgb = applyColor(color, rgb);
 					}
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
 			}
-		} else if(TFC_Time.getSeason(k) >= 6 && EnumTree.values()[meta].isEvergreen)
+		}
+		else if (TFC_Time.getSeason(k) >= 6 && EnumTree.values()[meta].isEvergreen)
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 				for (int var9 = -1; var9 <= 1; ++var9)
 				{
-					int var10 = TFC_Climate.getFoliageColorEvergreen(getCurrentWorld(), i + var8, j ,k + var9);
+					int var10 = TFC_Climate.getFoliageColorEvergreen(getCurrentWorld(), i + var8, j, k + var9);
 					rgb = applyColor(var10, rgb);
 				}
 
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if(TFC_Time.getSeason(k) >= 6 && TFC_Time.getSeason(k) < 9 && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
+		else if (TFC_Time.getSeason(k) >= 6 && TFC_Time.getSeason(k) < 9 && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
 		{
 			int color = 0;
 			//Get the fade multiplie
@@ -436,7 +442,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if(TFC_Time.getSeason(k) >= 6 && TFC_Time.getSeason(k) < 9 && (meta == 6))
+		else if (TFC_Time.getSeason(k) >= 6 && TFC_Time.getSeason(k) < 9 && (meta == 6))
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 				for (int var9 = -1; var9 <= 1; ++var9)
@@ -448,7 +454,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if(TFC_Time.getSeason(k) >= 6 && TFC_Time.getSeason(k) < 9 && !(meta == 15))
+		else if (TFC_Time.getSeason(k) >= 6 && TFC_Time.getSeason(k) < 9 && !(meta == 15))
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 				for (int var9 = -1; var9 <= 1; ++var9)
@@ -460,7 +466,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if(TFC_Time.getSeason(k) >= 6 && !(meta == 15))
+		else if (TFC_Time.getSeason(k) >= 6 && !(meta == 15))
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 				for (int var9 = -1; var9 <= 1; ++var9)
@@ -477,7 +483,7 @@ public class ClientProxy extends CommonProxy
 			for (int var8 = -1; var8 <= 1; ++var8)
 				for (int var9 = -1; var9 <= 1; ++var9)
 				{
-					int var10 = TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9);
+					int var10 = TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j, k + var9);
 					rgb = applyColor(var10, rgb);
 				}
 
@@ -489,8 +495,9 @@ public class ClientProxy extends CommonProxy
 	private float getTimeMult(long day, long start, long end)
 	{
 		float total = end - start;
-		return total-(day-start)/total;
+		return total - (day - start) / total;
 	}
+
 	private int[] applyColor(int c, int[] rgb)
 	{
 		rgb[0] += ((c & 16711680) >> 16);

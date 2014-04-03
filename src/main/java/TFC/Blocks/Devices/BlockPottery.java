@@ -1,12 +1,11 @@
 package TFC.Blocks.Devices;
 
-import java.util.ArrayList;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -17,6 +16,8 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Items.ItemLogs;
+import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.TileEntities.TileEntityPottery;
 
 public class BlockPottery extends BlockTerraContainer
@@ -29,7 +30,6 @@ public class BlockPottery extends BlockTerraContainer
 	{
 		super(Material.glass);
 		this.setBlockBounds(0, 0, 0, 1, 0.05f, 1);
-		this.setTickRandomly(true);
 		this.setHardness(2.0f);
 	}
 
@@ -48,6 +48,12 @@ public class BlockPottery extends BlockTerraContainer
 	}
 
 	@Override
+	public IIcon getIcon(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	{
+		return this.getIcon(par5, par1IBlockAccess.getBlockMetadata(par2, par3, par4));
+	}
+
+	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		if(side == ForgeDirection.UP)
@@ -55,13 +61,9 @@ public class BlockPottery extends BlockTerraContainer
 		return false;
 	}
 
-	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	public int idDropped(int i, Random random, int j)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		if(metadata > 0)
-			ret.add(new ItemStack(TFCItems.Straw, metadata));
-		return ret;
+		return 0;
 	}
 
 	@Override
@@ -69,32 +71,28 @@ public class BlockPottery extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == TFCItems.Straw)
+			TileEntityPottery te = (TileEntityPottery) world.getTileEntity(x, y, z);
+			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == TFCItems.Straw && !player.isSneaking())
 			{
-				int meta = world.getBlockMetadata(x, y, z);
-				if(world.getBlockMetadata(x, y, z) < 15)
-				{
-					if(player.capabilities.isCreativeMode)
-						world.setBlockMetadataWithNotify(x, y, z, 15, 2);
-					else
-						world.setBlockMetadataWithNotify(x, y, z, meta+1, 2);
-
-					player.inventory.decrStackSize(player.inventory.currentItem, 1);
-					return true;
-				}
+				te.addStraw(player.inventory.getCurrentItem());
+				return true;
 			}
-			else
+			else if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemLogs && !player.isSneaking() && te.straw == 8)
 			{
-				if(side == 1 && player.isSneaking())
+				te.addLog(player.inventory.getCurrentItem());
+				return true;
+			}
+			else if((player.inventory.getCurrentItem() == null || !(player.inventory.getCurrentItem().getItem() instanceof ItemPotteryBase)))
+			{
+				if(te.wood > 0)
 				{
-					int offset = 0;
-					/*if(world.getBlockId(x, y, z) != TFCBlocks.Pottery.blockID)
-					{
-						world.setBlock(x, y+1, z, TFCBlocks.Pottery.blockID);
-						offset = 1;
-					}*/
-
-					TileEntityPottery te = (TileEntityPottery) world.getTileEntity(x, y+offset, z);
+					te.ejectItem(3+te.wood);
+					te.wood--;
+					//te.broadcastPacketInRange(te.createUpdatePacket());
+					world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
+				}
+				else if(te.wood == 0 && side == 1 && player.isSneaking())
+				{
 					if(hitX < 0.5 && hitZ < 0.5)
 						te.ejectItem(0);
 					else if(hitX > 0.5 && hitZ < 0.5)
@@ -114,15 +112,19 @@ public class BlockPottery extends BlockTerraContainer
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
-		int md = world.getBlockMetadata(i, j, k);
-		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.0625f * (md == 0 ? 1 : md)), k + 1);
+		TileEntityPottery te = (TileEntityPottery) world.getTileEntity(i, j, k);
+		int h =te.straw == 0 ? 1 : te.straw;
+		int w = (te.wood > 0 ? 1 : 0) + (te.wood > 4 ? 1 : 0);
+		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.0625f*h) + (0.25f * w), k + 1);
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k)
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k) 
 	{
-		int md = par1IBlockAccess.getBlockMetadata(i, j, k);
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, (0.0625f * (md == 0 ? 1 : md)), 1.0F);
+		TileEntityPottery te = (TileEntityPottery) access.getTileEntity(i, j, k);
+		int h =te.straw == 0 ? 1 : te.straw;
+		int w = (te.wood > 0 ? 1 : 0) + (te.wood > 4 ? 1 : 0);
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, (0.0625f*h) + (0.25f * w), 1.0F);
 	}
 
 	@Override
@@ -143,12 +145,30 @@ public class BlockPottery extends BlockTerraContainer
 		return false;
 	}
 
+	public void Eject(World world, int par2, int par3, int par4)
+	{
+		if(!world.isRemote && (TileEntityPottery)world.getTileEntity(par2, par3, par4)!=null)
+		{
+			TileEntityPottery te;
+			te = (TileEntityPottery)world.getTileEntity(par2, par3, par4);
+			te.ejectContents();
+			world.removeTileEntity(par2, par3, par4);
+		}
+	}
+
+	@Override
+	public boolean removedByPlayer(World par1World, EntityPlayer player, int par2, int par3, int par4)
+	{
+		Eject(par1World,par2,par3,par4);
+		return par1World.setBlockToAir(par2,par3,par4);
+	}
+
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
 		return new TileEntityPottery();
 	}
-	
+
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, Block block)
 	{

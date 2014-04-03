@@ -3,6 +3,7 @@ package TFC;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -11,6 +12,7 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemColored;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.EnumHelper;
 import TFC.API.Armor;
 import TFC.API.Metal;
@@ -836,6 +838,7 @@ public class TFCItems
 	public static Item KilnRack;
 	public static Item Straw;
 	public static Item FlatClay;
+	public static Item FireBrick;
 
 	public static Item ClayMoldAxe;
 	public static Item ClayMoldChisel;
@@ -1488,16 +1491,16 @@ public class TFCItems
 		TerraLeather = new ItemLeather().setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather");
 
 		Straw = new ItemTerra().setFolder("plants/").setUnlocalizedName("Straw");
-		FlatClay = (new ItemFlatGeneric().setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName(""));
+		FlatClay = (new ItemFlatGeneric().setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName("clay"));
 
 		PotteryJug = new ItemPotteryJug().setUnlocalizedName("Jug");
 		PotterySmallVessel = new ItemPotterySmallVessel().setUnlocalizedName("Small Vessel");
 		PotteryLargeVessel = new ItemPotteryLargeVessel().setUnlocalizedName("Large Vessel");
 		PotteryPot = new ItemPotteryPot().setUnlocalizedName("Pot");
 		CeramicMold = new ItemPotteryBase().setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
-		
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.clay_ball), "clay", new ItemClay().setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1)).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("clay"));
-		
+		FireBrick = new ItemPotteryBase().setMetaNames(new String[]{"Clay Fire Brick","Fire Brick"}).setUnlocalizedName("Fire Brick");
+
 		ClayMoldAxe = new ItemPotteryMold().setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
 				"Ceramic Mold Axe Copper","Ceramic Mold Axe Bronze","Ceramic Mold Axe Bismuth Bronze","Ceramic Mold Axe Black Bronze"}).setUnlocalizedName("Axe Mold");
 		ClayMoldChisel = new ItemPotteryMold().setMetaNames(new String[]{"Clay Mold Chisel","Ceramic Mold Chisel",
@@ -1667,7 +1670,25 @@ public class TFCItems
 
 		Tomato = new ItemRawFood(24, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Tomato");
 		Potato = new ItemRawFood(25, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Potato");
-		Onion = new ItemRawFood(27, EnumFoodGroup.Vegetable, true).setUnlocalizedName(TFCOptions.iDontLikeOnions?"Rutabaga":"Onion");
+		Onion = new ItemRawFood(27, EnumFoodGroup.Vegetable, true){
+			@Override
+			public void registerIcons(IIconRegister registerer)
+			{
+				super.registerIcons(registerer);
+				this.hasSubtypes = true;
+				this.MetaIcons = new IIcon[2];
+				this.MetaIcons[0] = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
+				this.MetaIcons[1] = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + "Rutabaga");
+			}
+
+			@Override
+			public IIcon getIconFromDamage(int i)
+			{
+				if(i == 1)
+					return this.MetaIcons[1];
+				return super.getIconFromDamage(i);
+			}
+		}.setUnlocalizedName(TFCOptions.iDontLikeOnions?"Rutabaga":"Onion");
 		Cabbage = new ItemRawFood(28, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Cabbage");
 		Garlic = new ItemRawFood(29, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Garlic");
 		Carrot = new ItemRawFood(30, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Carrot");

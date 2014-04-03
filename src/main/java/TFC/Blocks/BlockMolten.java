@@ -19,18 +19,24 @@ public class BlockMolten extends BlockTerra
 	public int getLightValue(IBlockAccess world, int x, int y, int z)
 	{
 		int _meta = world.getBlockMetadata(x, y, z);
-		if(_meta != 0) {
-			return _meta;
-		}
+		if((_meta & 8) > 0)
+			return 15;
 		return 0;
+	}
+
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k)
+	{
+		int meta = access.getBlockMetadata(i, j, k) & 7;
+		float f = 0.125F;
+		setBlockBounds(0.0F, 0.0F, 0.0f, 1f, f+(f*meta), 1F);
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
-		if(meta == 0) {
+		if((meta & 8) == 0)
 			return this.moltenOff;
-		}
 		return this.blockIcon;
 	}
 
@@ -45,6 +51,18 @@ public class BlockMolten extends BlockTerra
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
+	}
+
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
 	}
 
 }

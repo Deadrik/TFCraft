@@ -163,6 +163,7 @@ public class TFCBlocks
 	public static int pipeRenderId;
 	public static int pipeValveRenderId;
 	public static int seaWeedRenderId;
+	public static int bloomeryRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;

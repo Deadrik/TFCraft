@@ -15,8 +15,6 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.Items.Tools.ItemFirestarter;
-import TFC.Items.Tools.ItemFlintSteel;
 import TFC.TileEntities.TileEntityLogPile;
 
 public class BlockLogPile extends BlockTerraContainer
@@ -41,8 +39,7 @@ public class BlockLogPile extends BlockTerraContainer
 		{
 			return true;
 		}
-		else if(entityplayer.inventory.getCurrentItem() == null || (!(entityplayer.inventory.getCurrentItem().getItem() instanceof ItemFirestarter) && 
-				!(entityplayer.inventory.getCurrentItem().getItem() instanceof ItemFlintSteel)))
+		else
 		{
 			if((TileEntityLogPile)world.getTileEntity(i, j, k)!=null)
 			{
@@ -64,7 +61,7 @@ public class BlockLogPile extends BlockTerraContainer
 			}
 
 		}
-		else return false;
+
 	}
 
 	@Override
@@ -127,8 +124,9 @@ public class BlockLogPile extends BlockTerraContainer
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3) {
-		return null;
+	public Item getItemDropped(int par1, Random par2Random, int par3)
+	{
+		return Item.getItemById(0);
 	}
 
 	@Override
@@ -138,23 +136,27 @@ public class BlockLogPile extends BlockTerraContainer
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion ex) {
+	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion ex)
+	{
 		Eject(par1World,par2,par3,par4);
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
+	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5)
+	{
 		Eject(par1World,par2,par3,par4);
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z) {
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
+	{
 		Eject(world, x, y, z);
 		return super.removedByPlayer(world, player, x, y, z);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
+	public TileEntity createNewTileEntity(World var1, int var2)
+	{
 		return new TileEntityLogPile();
 	}
 

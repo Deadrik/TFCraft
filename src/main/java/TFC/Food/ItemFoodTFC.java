@@ -103,7 +103,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			{
 				float ounces = stackTagCompound.getFloat("foodWeight");
 				if(ounces > 0)
-					arraylist.add("Amount " + ounces+" oz / 80.0 oz");
+					arraylist.add("Amount " + ounces+" oz / "+Global.FOOD_MAX_WEIGHT+" oz");
 				float decay = stackTagCompound.getFloat("foodDecay");
 				if(decay > 0)
 					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100, 10)+"%");

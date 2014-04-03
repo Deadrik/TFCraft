@@ -25,15 +25,13 @@ public class TFCWorldType extends WorldType
 		TFCBiome.HighHills,
 		TFCBiome.forest,
 		TFCBiome.plains,
+		TFCBiome.HighPlains,
 		TFCBiome.taiga,
 		TFCBiome.swampland,
 		TFCBiome.HighHillsEdge,
 		TFCBiome.rollingHills,
 		TFCBiome.Mountains,
 		TFCBiome.MountainsEdge,
-		TFCBiome.MountainsSeismic,
-		TFCBiome.MountainsEdgeSeismic,
-		TFCBiome.PlainsSeismic
 	};
 
 	public TFCWorldType(String par2Str)

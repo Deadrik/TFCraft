@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.item.EntityItem;
@@ -23,7 +24,6 @@ import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
-import TFC.Blocks.Devices.BlockEarlyBloomery;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
@@ -86,15 +86,15 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		if(!worldObj.isRemote)
 		{
 			//get the direction that the bloomery is facing so that we know where the stack should be
-			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
-			int[] direction = BlockEarlyBloomery.headBlockToFootBlockMap[meta];
+			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 
 			if (this.charcoalCount < this.oreCount) 
 				return false;
 
-			if(worldObj.getBlock(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Charcoal && 
-					worldObj.getBlockMetadata(xCoord+direction[0], yCoord, zCoord+direction[1]) >= 7 && this.fireTemperature < 200)
+			if(this.charcoalCount >= 8 && this.fireTemperature < 200)
 			{
+				fireTemperature = 250f;
+				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta+4, 0x2);
 				return true;
 			}
 		}
@@ -157,13 +157,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	private Boolean CheckValidity() 
 	{
 		int y = yCoord+1;
-
-		if(worldObj.getBlock(xCoord+1, y, zCoord).getMaterial() == Material.rock || worldObj.getBlock(xCoord+1, y, zCoord).getMaterial() == Material.iron)
-			if(worldObj.getBlock(xCoord-1, y, zCoord).getMaterial() == Material.rock || worldObj.getBlock(xCoord-1, y, zCoord).getMaterial() == Material.iron)
-				if(worldObj.getBlock(xCoord, y, zCoord+1).getMaterial() == Material.rock || worldObj.getBlock(xCoord, y, zCoord+1).getMaterial() == Material.iron)
-					if(worldObj.getBlock(xCoord, y, zCoord-1).getMaterial() == Material.rock || worldObj.getBlock(xCoord, y, zCoord-1).getMaterial() == Material.iron)
-						return true;
-		return true;
+		if(this.isStackValid(xCoord, y, zCoord))
+			return true;
+		return false;
 	}
 
 	@Override
@@ -342,30 +338,28 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				}
 			}
 		}
-		else if(fuelTimeLeft <= 0 && charcoalCount > 0)
+		else if(fuelTimeLeft <= 0 && charcoalCount > 0 && (meta & 4) > 0)
 		{
 			charcoalCount--;
 
 			fuelTimeLeft = 1875;
 			fuelBurnTemp = 1350;
-			if(fireTemperature < 210)
+			/*if(fireTemperature < 210)
+			{
 				fireTemperature = 220;
 
 			if((meta & 4) == 0)
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta+4, 3);
-
-			//updateGui();
+			}*/
 		}
 		else
 		{
-			if((meta & 4) == 4)
+			if((meta & 4) > 0)
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta & 3, 3);
 
 			fuelBurnTemp = 0;
 			if(fireTemperature > ambientTemp)
 				fireTemperature-=0.425F;
-
-			//updateGui();
 		}
 
 		//here we set the various temperatures to range
@@ -380,22 +374,34 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 	public boolean isStackValid(int i, int j, int k)
 	{
-		if((worldObj.getBlock(i, j-1, k) != TFCBlocks.Molten &&
-				worldObj.getBlock(i, j-1, k).getMaterial() != Material.rock &&
-				worldObj.getBlock(i, j-1, k) != TFCBlocks.BlastFurnace))
+		Block yNegBlock = worldObj.getBlock(i, j-1, k);
+		if(yNegBlock != TFCBlocks.Molten &&
+				worldObj.getBlock(i, j-1, k).getMaterial() != Material.rock && 
+				!worldObj.getBlock(i, j-1, k).isNormalCube() && 
+				yNegBlock != TFCBlocks.BlastFurnace && TFC_Core.isTopFaceSolid(worldObj, i, j-1, k))
+		{
 			return false;
-		if(worldObj.getBlock(i+1, j, k).getMaterial() != Material.rock || !worldObj.getBlock(i+1, j, k).isNormalCube())
+		}
+		if(worldObj.getBlock(i+1, j, k).getMaterial() != Material.rock &&
+				worldObj.getBlock(i+1, j, k).getMaterial() != Material.iron && !TFC_Core.isWestSolid(worldObj, i, j, k))
+		{
 			return false;
-		if(worldObj.getBlock(i-1, j, k).getMaterial() != Material.rock || !worldObj.getBlock(i-1, j, k).isNormalCube())
+		}
+		if(worldObj.getBlock(i-1, j, k).getMaterial() != Material.rock &&
+				worldObj.getBlock(i-1, j, k).getMaterial() != Material.iron && !TFC_Core.isEastSolid(worldObj, i, j, k))
+		{
 			return false;
-		if(worldObj.getBlock(i, j, k+1).getMaterial() != Material.rock || !worldObj.getBlock(i, j, k+1).isNormalCube())
+		}
+		if(worldObj.getBlock(i, j, k+1).getMaterial() != Material.rock &&
+				worldObj.getBlock(i, j, k+1).getMaterial() != Material.iron && !TFC_Core.isSouthSolid(worldObj, i, j, k))
+		{
 			return false;
-		if(worldObj.getBlock(i, j, k-1).getMaterial() != Material.rock || !worldObj.getBlock(i, j, k-1).isNormalCube())
+		}
+		if(worldObj.getBlock(i, j, k-1).getMaterial() != Material.rock &&
+				worldObj.getBlock(i, j, k-1).getMaterial() != Material.iron && !TFC_Core.isNorthSolid(worldObj, i, j, k))
+		{
 			return false;
-
-		if(input[1] == null)
-			return false;
-
+		}
 		return true;
 	}
 
@@ -506,7 +512,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 			/*Create a list of all the items that are falling into the stack */
 			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
-					xCoord, yCoord+moltenCount, zCoord, 
+					xCoord, yCoord, zCoord, 
 					xCoord+1, yCoord+moltenCount+1.1, zCoord+1));
 
 			if(moltenCount == 0)
@@ -600,10 +606,8 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	/**
 	 * @return Number of molten blocks
 	 */
-	private int updateMoltenBlocks()
-	{
-		//Do the funky math to find how many molten blocks should be placed
-		float count = charcoalCount+oreCount;
+	private int updateMoltenBlocks() {
+		int count = charcoalCount+oreCount;
 
 		int moltenCount = 0;
 		if(count > 0 && count <= 8) {moltenCount = 1;} 
@@ -615,7 +619,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		int validCount = 0;
 
 		/*Fill the bloomery stack with molten ore. */
-		for (int i = 1; i < 5; i++)
+		for (int i = 1; i <= 5; i++)
 		{
 			/*The stack must be air or already be molten rock*/
 			if((worldObj.isAirBlock(xCoord, yCoord+i, zCoord) ||
@@ -626,8 +630,20 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 					validCount++;
 				if(i <= moltenCount && i <= validCount)
 					if(this.fireTemperature > 200)
-						worldObj.setBlock(xCoord, yCoord+i, zCoord, TFCBlocks.Molten, (int) (Math.min(15, fireTemperature/(this.MaxFireTemp*0.75f))*15), 2);
-				else
+					{
+						int m = count > 7 ? 7 : count;
+						worldObj.setBlock(xCoord, yCoord+i, zCoord, TFCBlocks.Molten, m+8, 2);
+						count-=8;
+					}
+					else
+					{
+						int m = count > 7 ? 7 : count;
+						worldObj.setBlock(xCoord, yCoord+i, zCoord, TFCBlocks.Molten, m, 2);
+						count-=8;
+					}
+				} 
+				else 
+				{
 					worldObj.setBlockToAir(xCoord, yCoord+i, zCoord);
 			}
 		}

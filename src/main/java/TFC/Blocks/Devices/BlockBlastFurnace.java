@@ -69,7 +69,6 @@ public class BlockBlastFurnace extends BlockTerraContainer
 					if(te.canLight())
 					{
 						entityplayer.getCurrentEquippedItem().damageItem(1,entityplayer);
-						te.fireTemperature = 250;
 					}
 				}
 				entityplayer.openGui(TerraFirmaCraft.instance, 26, world, i, j, k);

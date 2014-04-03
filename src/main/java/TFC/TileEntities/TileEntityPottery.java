@@ -30,12 +30,13 @@ public class TileEntityPottery extends TileEntity implements IInventory
 	public boolean hasRack;
 	public int logsForBurn;
 	public long burnStart;
+	public int straw = 0;
+	public int wood = 0;
 
 	public TileEntityPottery()
 	{
 		inventory = new ItemStack[4];
 		hasRack = false;
-		logsForBurn = 0;
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 	{
 		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 		//If there are no logs for burning then we dont need to tick at all
-		if(!worldObj.isRemote && logsForBurn > 0)
+		if(!worldObj.isRemote && wood > 0)
 		{
 			Block blockAbove = worldObj.getBlock(xCoord, yCoord+1, zCoord);
 			//Make sure to keep the fire going throughout the length of the burn
@@ -52,11 +53,16 @@ public class TileEntityPottery extends TileEntity implements IInventory
 				if((blockAbove == Blocks.air || worldObj.getBlock(xCoord, yCoord+1, zCoord).getMaterial().getCanBurn()) && isValid()) 
 					worldObj.setBlock(xCoord, yCoord+1, zCoord, Blocks.fire);
 				else 
-					logsForBurn = 0;
+					wood = 0;
+					this.setInventorySlotContents(4, null);this.setInventorySlotContents(5, null);
+					this.setInventorySlotContents(6, null);this.setInventorySlotContents(7, null);
+					this.setInventorySlotContents(8, null);this.setInventorySlotContents(9, null);
+					this.setInventorySlotContents(10, null);this.setInventorySlotContents(11, null);
+					straw = 0;
 			}
 
 			//If the total time passes then we complete the burn and turn the clay into ceramic
-			if(logsForBurn > 0 && blockAbove == Blocks.fire && 
+			if(wood > 0 && blockAbove == Blocks.fire && 
 					TFC_Time.getTotalTicks() > burnStart + (TFCOptions.pitKilnBurnTime * TFC_Time.hourLength))
 			{
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
@@ -86,7 +92,8 @@ public class TileEntityPottery extends TileEntity implements IInventory
 						((ItemPotteryBase)inventory[3].getItem()).onDoneCooking(worldObj, inventory[3], Alloy.EnumTier.TierI);
 				}
 
-				logsForBurn = 0;
+				wood = 0;
+				straw = 0;
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				//broadcastPacketInRange(createUpdatePacket());
 			}
@@ -95,24 +102,50 @@ public class TileEntityPottery extends TileEntity implements IInventory
 
 	public void StartPitFire()
 	{
-		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		TileEntityLogPile telp = (TileEntityLogPile) worldObj.getTileEntity(xCoord, yCoord+1, zCoord);
-		if(meta == 15 && telp.getNumberOfLogs() == 16)
+		if(straw == 8 && wood == 8)
 		{
-			logsForBurn = telp.getNumberOfLogs();
-			telp.clearContents();
 			worldObj.setBlock(xCoord, yCoord+1, zCoord, Blocks.fire);
 			burnStart = TFC_Time.getTotalTicks();
 		}
 	}
 
+	public void addLog(ItemStack is)
+	{
+		if(wood < 8)
+		{
+			for(int i = 4; i < 12; i++)
+			{
+				if(this.inventory[i] == null)
+				{
+					wood++;
+					ItemStack _is = is.copy();
+					is.stackSize--;
+					_is.stackSize = 1;
+					this.setInventorySlotContents(i, _is);
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+					//broadcastPacketInRange(createUpdatePacket());
+					break;
+				}
+			}
+		}
+	}
+
+	public void addStraw(ItemStack is)
+	{
+		if(straw < 8)
+		{
+			straw++;
+			is.stackSize--;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			//broadcastPacketInRange(createUpdatePacket());
+		}
+	}
+
 	public boolean isValid()
 	{
-		boolean surroundSolids = TFC_Core.isNorthSolid(worldObj, xCoord, yCoord, zCoord) && TFC_Core.isSouthSolid(worldObj, xCoord, yCoord, zCoord) && 
-				TFC_Core.isEastSolid(worldObj, xCoord, yCoord, zCoord) && TFC_Core.isWestSolid(worldObj, xCoord, yCoord, zCoord);
-		boolean surroundSolidsUp1 = TFC_Core.isNorthSolid(worldObj, xCoord, yCoord+1, zCoord) && TFC_Core.isSouthSolid(worldObj, xCoord, yCoord+1, zCoord) && 
-				TFC_Core.isEastSolid(worldObj, xCoord, yCoord+1, zCoord) && TFC_Core.isWestSolid(worldObj, xCoord, yCoord+1, zCoord);
-		return surroundSolids && surroundSolidsUp1 && worldObj.isSideSolid(xCoord, yCoord-1, zCoord, ForgeDirection.UP);
+		boolean surroundSolids = TFC_Core.isNorthSolid(worldObj, xCoord, yCoord, zCoord-1) && TFC_Core.isSouthSolid(worldObj, xCoord, yCoord, zCoord+1) && 
+				TFC_Core.isEastSolid(worldObj, xCoord-1, yCoord, zCoord) && TFC_Core.isWestSolid(worldObj, xCoord+1, yCoord, zCoord);
+		return surroundSolids && worldObj.isSideSolid(xCoord, yCoord-1, zCoord, ForgeDirection.UP);
 	}
 
 	@Override
@@ -128,9 +161,9 @@ public class TileEntityPottery extends TileEntity implements IInventory
 		float f3 = 0.05F;
 		EntityItem entityitem;
 		Random rand = new Random();
-		float f = rand.nextFloat() * 0.8F + 0.1F;
-		float f1 = rand.nextFloat() * 2.0F + 0.4F;
-		float f2 = rand.nextFloat() * 0.8F + 0.1F;
+		float f = rand.nextFloat() * 0.8F;
+		float f1 = rand.nextFloat() * 0.4F;
+		float f2 = rand.nextFloat() * 0.8F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
 		{
@@ -143,6 +176,14 @@ public class TileEntityPottery extends TileEntity implements IInventory
 				worldObj.spawnEntityInWorld(entityitem);
 				inventory[i] = null;
 			}
+		}
+		if(straw > 0)
+		{
+			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(TFCItems.Straw, straw));
+			entityitem.motionX = (float)rand.nextGaussian() * f3;
+			entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
+			entityitem.motionZ = (float)rand.nextGaussian() * f3;
+			worldObj.spawnEntityInWorld(entityitem);
 		}
 	}
 	
@@ -230,7 +271,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit()
 	{
-		return 0;
+		return 1;
 	}
 
 	@Override
@@ -256,7 +297,8 @@ public class TileEntityPottery extends TileEntity implements IInventory
 		nbttagcompound.setTag("Items", nbttaglist);
 		nbttagcompound.setLong("burnStart", burnStart);
 		nbttagcompound.setBoolean("hasRack", hasRack);
-		nbttagcompound.setInteger("logsForBurn", logsForBurn);
+		nbttagcompound.setInteger("wood", wood);
+		nbttagcompound.setInteger("straw", straw);
 	}
 
 	@Override
@@ -273,8 +315,9 @@ public class TileEntityPottery extends TileEntity implements IInventory
 				inventory[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
 		burnStart = nbt.getLong("burnStart");
-		logsForBurn = nbt.getInteger("logsForBurn");
+		wood = nbt.getInteger("wood");
 		hasRack = nbt.getBoolean("hasRack");
+		straw = nbt.getInteger("straw");
 	}
 
 	@Override
@@ -342,6 +385,8 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //			outStream.writeInt(0);
 //		}
 //		outStream.writeBoolean(hasRack);
+//		outStream.writeInt(straw);
+//		outStream.writeInt(wood);
 //	}
 //
 //	@Override
@@ -362,6 +407,8 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //		inventory[1] = inv1 != 0 ? new ItemStack(Item.getItemById(inv1), 1, inv1d) : null;
 //		inventory[2] = inv2 != 0 ? new ItemStack(Item.getItemById(inv2), 1, inv2d) : null;
 //		inventory[3] = inv3 != 0 ? new ItemStack(Item.getItemById(inv3), 1, inv3d) : null;
+//		straw = inStream.readInt();
+//		wood = inStream.readInt();
 //		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 //	}
 //
@@ -383,6 +430,10 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //		inventory[1] = inv1 != 0 ? new ItemStack(Item.getItemById(inv1), 1, inv1d) : null;
 //		inventory[2] = inv2 != 0 ? new ItemStack(Item.getItemById(inv2), 1, inv2d) : null;
 //		inventory[3] = inv3 != 0 ? new ItemStack(Item.getItemById(inv3), 1, inv3d) : null;
+//
+//		straw = inStream.readInt();
+//		wood = inStream.readInt();
+//
 //		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 //	}
 //	public Packet createUpdatePacket()
@@ -436,6 +487,8 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //				dos.writeInt(0);
 //			}
 //			dos.writeBoolean(hasRack);
+//			dos.writeInt(straw);
+//			dos.writeInt(wood);
 //		} catch (IOException e) {
 //		}
 //

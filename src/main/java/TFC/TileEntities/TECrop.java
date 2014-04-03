@@ -13,6 +13,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
+import TFC.Blocks.BlockCrop;
+import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
@@ -154,11 +156,14 @@ public class TECrop extends TileEntity
 					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is));
 
 				TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_AGRICULTURE, 1);
+				
+				if(TFC_Core.isSoil(world.getBlock(xCoord, yCoord - 1, zCoord)))
+					player.addStat(TFC_Achievements.achWildVegetable, 1);
 			}
 			else if (crop != null)
 			{
 				ItemStack is = crop.getSeed();
-				is.stackSize = 1+(world.rand.nextInt(20-(int)(20*TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_AGRICULTURE)) == 0 ? 1 : 0));
+				is.stackSize = 1+(world.rand.nextInt(1+(20-(int)(20*TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_AGRICULTURE)) == 0 ? 1 : 0)));
 
 				if(is != null)
 					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is));
