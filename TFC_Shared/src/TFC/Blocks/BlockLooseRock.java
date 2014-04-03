@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.AchievementList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -16,6 +17,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Blocks.Terrain.BlockOre;
+import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
@@ -78,9 +80,9 @@ public class BlockLooseRock extends BlockTerra
 	    {
 	        dropBlockAsItem_do(world, xCoord, yCoord, zCoord,(ItemStack)coreSampleStacks.toArray()[R.nextInt(coreSampleStacks.toArray().length)]);
 	    }
-	    else
+	    else{
 	        dropBlockAsItem_do(world, xCoord, yCoord, zCoord, new ItemStack(TFCItems.LooseRock, 1, TFC_Core.getItemMetaFromStone(rockLayer.data1, rockLayer.data2)));
-	    
+	    }
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
 	}
 

@@ -17,9 +17,11 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
 import TFC.Chunkdata.ChunkDataManager;
+import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.BodyTempStats;
@@ -30,6 +32,8 @@ import TFC.Core.Player.SkillStats;
 import TFC.Food.ItemFoodTFC;
 import TFC.Food.ItemMeal;
 import TFC.Items.ItemArrow;
+import TFC.Items.ItemLooseRock;
+import TFC.Items.ItemOreSmall;
 import TFC.Items.ItemQuiver;
 import TFC.Items.Tools.ItemJavelin;
 
@@ -127,31 +131,20 @@ public class EntityLivingHandler
 	{
 		EntityPlayer player = event.entityPlayer;
 		ItemStack quiver = null;
-		ItemStack ammo = event.item.getEntityItem();
+		ItemStack item = event.item.getEntityItem();
 		boolean foundJav = false;
 		quiver = player.inventory.armorItemInSlot(0);
 		for(int i = 0; i < 9; i++)
 			if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemJavelin)
 				foundJav = true;
 
-		if(quiver != null && ammo.getItem() instanceof ItemArrow)
+		if(quiver != null)
 		{
-			ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, ammo);
-			if(is != null)
-				event.item.setEntityItemStack(is);
-			else
-			{
-				is = event.item.getEntityItem();
-				is.stackSize = 0;
-				event.item.setEntityItemStack(is);
-				event.setResult(Result.DENY);
-			}
-		}
-		else if(quiver != null && ammo.getItem() instanceof ItemJavelin)
-			if(foundJav)
-			{
-				ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, ammo);
-				if(is == null)
+			if(item.getItem() instanceof ItemArrow){
+				ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, item);
+				if(is != null)
+					event.item.setEntityItemStack(is);
+				else
 				{
 					is = event.item.getEntityItem();
 					is.stackSize = 0;
@@ -159,6 +152,30 @@ public class EntityLivingHandler
 					event.setResult(Result.DENY);
 				}
 			}
+			else if(item.getItem() instanceof ItemJavelin)
+			{
+				if(foundJav)
+				{
+					ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, item);
+					if(is == null)
+					{
+						is = event.item.getEntityItem();
+						is.stackSize = 0;
+						event.item.setEntityItemStack(is);
+						event.setResult(Result.DENY);
+					}
+				}
+			}
+		}
+		if(item.getItem() instanceof ItemLooseRock){
+			player.triggerAchievement(TFC_Achievements.achLooseRock);
+		}
+		else if(item.getItem()  instanceof ItemOreSmall){
+			player.triggerAchievement(TFC_Achievements.achSmallOre);
+		}
+		else if(item.getItem().equals(TFCItems.GemDiamond)){
+			player.triggerAchievement(TFC_Achievements.achDiamond);
+		}
 	}
 
 	@ForgeSubscribe

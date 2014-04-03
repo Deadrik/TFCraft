@@ -3,12 +3,14 @@ package TFC;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemColored;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraftforge.common.EnumHelper;
 import TFC.API.Armor;
 import TFC.API.Metal;
@@ -1674,7 +1676,26 @@ public class TFCItems
 
 		Tomato = new ItemRawFood(TFCItemID.Tomato, 24, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Tomato");
 		Potato = new ItemRawFood(TFCItemID.Potato, 25, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Potato");
-		Onion = new ItemRawFood(TFCItemID.Onion, 27, EnumFoodGroup.Vegetable, true).setUnlocalizedName(TFCOptions.iDontLikeOnions?"Rutabaga":"Onion");
+		Onion = new ItemRawFood(TFCItemID.Onion, 27, EnumFoodGroup.Vegetable, true){
+			@Override
+			public void registerIcons(IconRegister registerer)
+			{
+				super.registerIcons(registerer);
+				this.hasSubtypes = true;
+				this.MetaIcons = new Icon[2];
+				this.MetaIcons[0] = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
+				this.MetaIcons[1] = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + "Rutabaga");
+			}
+			
+			@Override
+			public Icon getIconFromDamage(int i)
+			{
+				if(i == 1){
+					return this.MetaIcons[1];
+				}
+				return super.getIconFromDamage(i);
+			}
+		}.setUnlocalizedName(TFCOptions.iDontLikeOnions?"Rutabaga":"Onion");
 		Cabbage = new ItemRawFood(TFCItemID.Cabbage, 28, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Cabbage");
 		Garlic = new ItemRawFood(TFCItemID.Garlic, 29, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Garlic");
 		Carrot = new ItemRawFood(TFCItemID.Carrot, 30, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Carrot");
