@@ -24,6 +24,7 @@ public class ItemMeal extends ItemTerra
 {
 	PotionEffect foodEffect;
 	private boolean alwaysEdible = false;
+	private String[] tasteArray = {"item.meal.terrible", "item.meal.poor", "item.meal.decent", "item.meal.good","item.meal.great","item.meal.fantastic"};
 
 	public ItemMeal(int id) 
 	{
@@ -61,10 +62,14 @@ public class ItemMeal extends ItemTerra
 			if(nbt.hasKey("satisfaction"))
 			{
 				float _sat = Helper.roundNumber(nbt.getFloat("satisfaction")/1*100,10);
-
 				if(!isWarm(is))
 					_sat*=0.25f;
-				arraylist.add("Satisfaction: " + _sat+"%");
+				int satIndex = 1+(int)(5 *_sat);
+				arraylist.add("Taste: "+ StringUtil.localize(tasteArray[satIndex]) + EnumChatFormatting.DARK_GRAY + " (" + _sat+"%)");
+			}
+			else
+			{
+				arraylist.add("Taste: " + StringUtil.localize(tasteArray[0]));
 			}
 
 			if(nbt.hasKey("foodWeight"))
