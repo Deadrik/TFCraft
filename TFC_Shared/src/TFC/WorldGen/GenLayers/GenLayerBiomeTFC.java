@@ -4,14 +4,9 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
-import TFC.WorldGen.TFCBiome;
 
 public class GenLayerBiomeTFC extends GenLayerTFC
 {
-	public static BiomeGenBase[] biomeArray = new BiomeGenBase[] {TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains, TFCBiome.PlainsSeismic, 
-		TFCBiome.rollingHills, TFCBiome.Mountains, TFCBiome.MountainsSeismic};
-
-
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private BiomeGenBase[] allowedBiomes;
 

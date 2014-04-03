@@ -9,11 +9,6 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import TFC.API.Util.Helper;
-import TFC.Core.ColorizerFoliageTFC;
-import TFC.Core.ColorizerGrassTFC;
-import TFC.Core.TFC_Time;
-import TFC.Core.WeatherManager;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.Entities.Mobs.EntityCreeperTFC;
 import TFC.Entities.Mobs.EntityEndermanTFC;
@@ -49,8 +44,6 @@ import TFC.WorldGen.Generators.Trees.WorldGenPineShort;
 import TFC.WorldGen.Generators.Trees.WorldGenPineTall;
 import TFC.WorldGen.Generators.Trees.WorldGenRedwoodXL;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFCBiome extends BiomeGenBase
 {
@@ -82,7 +75,7 @@ public class TFCBiome extends BiomeGenBase
 
 	public static final TFCBiome forest = (new BiomeGenForestTFC(4)).setBiomeName("Forest").setMinMaxHeight(0.1F, 0.3F);
 
-	public static final TFCBiome plains = (new BiomeGenPlainsTFC(1)).setBiomeName("TFC Plains").setMinMaxHeight(0.1F, 0.2F);
+	public static final TFCBiome plains = (new BiomeGenPlainsTFC(1)).setBiomeName("TFC Plains").setMinMaxHeight(0.1F, 0.16F);
 
 	public static final TFCBiome taiga = (new BiomeGenTaigaTFC(5)).setBiomeName("Taiga").setMinMaxHeight(0.2F, 0.5F);
 
@@ -94,10 +87,7 @@ public class TFCBiome extends BiomeGenBase
 	public static final TFCBiome Mountains = (new TFCBiome(31)).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F);
 	public static final TFCBiome MountainsEdge = (new TFCBiome(32)).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F);
 
-	public static final TFCBiome MountainsSeismic = (new TFCBiome(33)).setBiomeName("Mountains Seismic").setMinMaxHeight(0.8F, 1.6F);
-	public static final TFCBiome MountainsEdgeSeismic = (new TFCBiome(34)).setBiomeName("Mountains Edge Seismic").setMinMaxHeight(0.4F, 0.8F);
-
-	public static final TFCBiome PlainsSeismic = (new BiomeGenPlainsTFC(35)).setBiomeName("TFC Plains Seismic").setMinMaxHeight(0.1F, 0.2F);
+	public static final TFCBiome HighPlains = (new BiomeGenPlainsTFC(35)).setBiomeName("TFC High Plains").setMinMaxHeight(0.4F, 0.43F);
 
 	protected static WorldGenAcaciaKoaTrees worldGenAcaciaKoaTrees;
 	protected static WorldGenCustomTallTrees worldGenAshTallTrees;

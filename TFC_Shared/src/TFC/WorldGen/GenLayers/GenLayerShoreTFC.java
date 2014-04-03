@@ -81,22 +81,6 @@ public class GenLayerShoreTFC extends GenLayerTFC
 						var6[var8 + var7 * par3] = TFCBiome.MountainsEdge.biomeID;
 					}
 				}
-				else if (var9 == TFCBiome.MountainsSeismic.biomeID)
-				{
-					var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
-					var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
-					var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
-					var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
-
-					if (var10 == TFCBiome.MountainsSeismic.biomeID && var11 == TFCBiome.MountainsSeismic.biomeID && var12 == TFCBiome.MountainsSeismic.biomeID && var13 == TFCBiome.MountainsSeismic.biomeID)
-					{
-						var6[var8 + var7 * par3] = var9;
-					}
-					else
-					{
-						var6[var8 + var7 * par3] = TFCBiome.MountainsEdge.biomeID;
-					}
-				}
 				else
 				{
 					var6[var8 + var7 * par3] = var9;
