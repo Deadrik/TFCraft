@@ -158,7 +158,6 @@ public class TileEntityPartial extends NetworkTileEntity
 	{
 		extraData = inStream.readLong();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord));
 	}
 
 	@Override

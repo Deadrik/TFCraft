@@ -74,12 +74,12 @@ public class BlockSlab extends BlockPartial
 
 	public static int getNorthChiselLevel(long data)
 	{
-		return (int) ((data >> 20) & 0xf);
+		return (int) ((data >> 8) & 0xf);
 	}
 
 	public static int getSouthChiselLevel(long data)
 	{
-		return (int) ((data >> 8) & 0xf);
+		return (int) ((data >> 20) & 0xf);
 	}
 
 	/**
@@ -213,8 +213,8 @@ public class BlockSlab extends BlockPartial
 	}
 
 	@Override
-    public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side)
-    {
+	public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side)
+	{
 		int shift[] = { 4, 16, 0, 12, 8, 20 };
 		int opposite[] = { 1, 0, 3, 2, 5, 4 };
 
@@ -222,5 +222,5 @@ public class BlockSlab extends BlockPartial
 		long opChip = (te.extraData >> shift[opposite[side.ordinal()]]) & 0xf;
 		long consolidatedChip = te.extraData - (opChip << shift[opposite[side.ordinal()]]);
 		return ((consolidatedChip & 0xffffff) == 0);
-    }
+	}
 }
