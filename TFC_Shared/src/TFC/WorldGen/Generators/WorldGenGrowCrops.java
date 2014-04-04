@@ -23,30 +23,37 @@ public class WorldGenGrowCrops implements IWorldGenerator
 		this.cropBlockId = par1;
 	}
 
-	public boolean generate(World world, Random rand, int i, int j, int k)
+	public void generate(World world, Random rand, int x, int z, int numToGen)
 	{
-		CropIndex crop = CropManager.getInstance().getCropFromId(cropBlockId);
-		if(crop != null)
+		int i = x,j = 150,k = z;
+		CropIndex crop;
+		TECrop te;
+		for(int c = 0; c < numToGen; c++)
 		{
-			float temp = TFC_Climate.getHeightAdjustedTemp(i, j, k);
-
-
-			int month = TFC_Time.getSeasonAdjustedMonth(k);
-			if(temp > crop.minAliveTemp && month > 0 && month <= 6)
+			i = x-8+rand.nextInt(16);
+			k = z-8+rand.nextInt(16);
+			j = world.getTopSolidOrLiquidBlock(i, k);
+			crop = CropManager.getInstance().getCropFromId(cropBlockId);
+			if(crop != null)
 			{
-				if (world.isAirBlock(i, j, k) && ((BlockCrop)Block.blocksList[Block.crops.blockID]).canBlockStay(world, i, j, k))
+				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay((int)TFC_Time.getTotalDays(), i, j, k);
+
+				int month = TFC_Time.getSeasonAdjustedMonth(k);
+				if(temp > crop.minAliveTemp && month > 0 && month <= 6)
 				{
-					world.setBlock(i, j, k, Block.crops.blockID, 0, 0x2);
-					TECrop te = (TECrop)world.getBlockTileEntity(i, j, k);
-					te.cropId = cropBlockId;
-					float mg = Math.min(month/(crop.growthTime/TFC_Time.daysInMonth), 1.0f)*(0.75f+(rand.nextFloat()*0.25f));
-					float growth =  Math.min(crop.numGrowthStages*mg, crop.numGrowthStages);
-					te.growth = growth;
-					return true;
+					int bid = world.getBlockId(i, j, k);
+					if (((BlockCrop)Block.blocksList[Block.crops.blockID]).canBlockStay(world, i, j, k) && (bid == 0 || bid == Block.tallGrass.blockID))
+					{
+						world.setBlock(i, j, k, Block.crops.blockID, 0, 0x2);
+						te = (TECrop)world.getBlockTileEntity(i, j, k);
+						te.cropId = cropBlockId;
+						float mg = Math.min(month/(crop.growthTime/TFC_Time.daysInMonth), 1.0f)*(0.75f+(rand.nextFloat()*0.25f));
+						float growth =  Math.min(crop.numGrowthStages*mg, crop.numGrowthStages);
+						te.growth = growth;
+					}
 				}
 			}
 		}
-		return false;
 	}
 
 	@Override
