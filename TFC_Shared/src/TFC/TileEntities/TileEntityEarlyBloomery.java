@@ -75,7 +75,7 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 		{
 			return false;
 		}
-		return ((BlockEarlyBloomery)TFCBlocks.EarlyBloomery).checkStack(worldObj, xCoord, j, zCoord, worldObj.getBlockMetadata(xCoord, yNegID, zCoord)&3);
+		return ((BlockEarlyBloomery)TFCBlocks.EarlyBloomery).checkStack(worldObj, xCoord, j, zCoord, worldObj.getBlockMetadata(xCoord, yCoord, zCoord)&3);
 	}
 
 
@@ -182,7 +182,7 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 				maxCount = 8;
 			}
 
-			int moltenHeight = (count/2)-1;
+			int moltenHeight = Math.max((count/2)-1, 0);
 			/*Fill the bloomery stack with molten ore. */
 			for (int i = bloomeryLit ? 0:1, j = bloomeryLit ? moltenHeight+7 : moltenHeight; j > 0; i++,j-=8)
 			{
@@ -208,13 +208,35 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 								worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, m, 2);
 							}
 						} else {
-							worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, m, 2);
+							if(count > 0)
+								worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, m, 2);
+							else
+								worldObj.setBlockToAir(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
 						}
 					} 
 					else 
 					{
 						worldObj.setBlockToAir(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
 					}
+				}
+			}
+
+			if(!bloomeryLit && worldObj.getBlockId(xCoord+direction[0], yCoord, zCoord+direction[1]) == TFCBlocks.Bloom.blockID)
+			{
+				if(isStackValid(xCoord+direction[0], yCoord+3, zCoord+direction[1]) && 
+						isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]) && 
+						isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
+					if(worldObj.getBlockId(xCoord+direction[0], yCoord+3, zCoord+direction[1]) == TFCBlocks.Molten.blockID)
+						worldObj.setBlockToAir(xCoord+direction[0], yCoord+3, zCoord+direction[1]);
+				}
+				if(isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]) &&
+						isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
+					if(worldObj.getBlockId(xCoord+direction[0], yCoord+2, zCoord+direction[1]) == TFCBlocks.Molten.blockID)
+						worldObj.setBlockToAir(xCoord+direction[0], yCoord+2, zCoord+direction[1]);
+				}
+				if(isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
+					if(worldObj.getBlockId(xCoord+direction[0], yCoord+1, zCoord+direction[1]) == TFCBlocks.Molten.blockID)
+						worldObj.setBlockToAir(xCoord+direction[0], yCoord+1, zCoord+direction[1]);
 				}
 			}
 
@@ -225,7 +247,7 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 			/*Create a list of all the items that are falling into the stack */
 			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
 					xCoord+direction[0], yCoord, zCoord+direction[1], 
-					xCoord+direction[0]+1, yCoord+(maxCount/8)+1, zCoord+direction[1]+1));
+					xCoord+direction[0]+1, yCoord+(maxCount/8)+1.1, zCoord+direction[1]+1));
 
 			/*Make sure the list isn't null or empty and that the stack is valid 1 layer above the Molten Ore*/
 			if (list != null && !list.isEmpty() && !bloomeryLit)

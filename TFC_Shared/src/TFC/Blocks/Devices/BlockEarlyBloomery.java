@@ -392,33 +392,34 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int i, int j, int k)
 	{
+		clearStack(world,i,j,k);
+		return true;
+	}
+
+	public void clearStack(World world, int i, int j, int k)
+	{
 		if (!world.isRemote)
 		{
 			int meta = world.getBlockMetadata(i, j, k);
 			int[] dir = bloomeryToStackMap[meta & 3];
 			if (world.getBlockId(i + dir[0], j, k + dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i + dir[0], j, k + dir[1], 0, 0, 0x2);
+				world.setBlockToAir(i + dir[0], j, k + dir[1]);
 			}
 			if (world.getBlockId(i + dir[0], j + 1, k + dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i + dir[0], j + 1, k + dir[1], 0, 0, 0x2);
+				world.setBlockToAir(i + dir[0], j + 1, k + dir[1]);
 			}
 			if (world.getBlockId(i + dir[0], j + 2, k + dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i + dir[0], j + 2, k + dir[1], 0, 0, 0x2);
+				world.setBlockToAir(i + dir[0], j + 2, k + dir[1]);
 			}
 			if (world.getBlockId(i + dir[0], j + 3, k + dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i + dir[0], j + 3, k + dir[1], 0, 0, 0x2);
-			}
-			if (world.getBlockId(i + dir[0], j + 4, k + dir[1]) == TFCBlocks.Molten.blockID)
-			{
-				world.setBlock(i + dir[0], j + 4, k + dir[1], 0, 0, 0x2);
+				world.setBlockToAir(i + dir[0], j + 3, k + dir[1]);
 			}
 			world.setBlockToAir(i, j, k);
 		}
-		return true;
 	}
 
 	@Override
@@ -430,11 +431,13 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			if (!tryFlip(world, i, j, k))
 			{
 				world.setBlockToAir(i, j, k);
+				clearStack(world,i,j,k);
 				world.spawnEntityInWorld(new EntityItem(world, i, j, k, new ItemStack(this, 1)));
 			}
 			else if (!canBlockStay(world, i, j, k))
 			{
 				world.setBlockToAir(i, j, k);
+				clearStack(world,i,j,k);
 				world.spawnEntityInWorld(new EntityItem(world, i, j, k, new ItemStack(this, 1)));
 			}
 		}
