@@ -1,6 +1,5 @@
 package TFC.Blocks.Devices;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -31,11 +30,10 @@ import TFC.API.IMultipleBlock;
 import TFC.API.IPipeConnectable;
 import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Textures;
-import TFC.Core.Metal.MetalPair;
 import TFC.Items.ItemBarrels;
 import TFC.TileEntities.NetworkTileEntity;
-import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TileEntityBarrel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -48,7 +46,7 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	public BlockBarrel(int par1)
 	{
 		super(par1, Material.wood);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 1, 0.9f);
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0,16);

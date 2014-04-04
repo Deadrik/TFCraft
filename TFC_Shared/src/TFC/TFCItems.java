@@ -986,23 +986,22 @@ public class TFCItems
 		Item.itemsList[Item.fishingRod.itemID] = null; Item.itemsList[Item.fishingRod.itemID] = (new TFC.Items.Tools.ItemFishingRod(90)).setUnlocalizedName("fishingRod").setTextureName("fishing_rod");
 		Item.itemsList[Item.coal.itemID] = null; Item.itemsList[Item.coal.itemID] = (new TFC.Items.ItemCoal(7)).setUnlocalizedName("coal");
 		Item.itemsList[Item.stick.itemID] = null; Item.itemsList[Item.stick.itemID] = new ItemStick(24).setFull3D().setUnlocalizedName("stick");
-		Item.itemsList[Item.leather.itemID] = null; Item.itemsList[Item.leather.itemID] = new ItemTerra(Item.leather.itemID).setFull3D().setUnlocalizedName("leather");
 		Item.itemsList[Block.vine.blockID] = new ItemColored(Block.vine.blockID - 256, false);
 
 		minecartCrate = (new ItemCustomMinecart(TFCItemID.minecartCrate, 1)).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 
 		Item.itemsList[Item.bow.itemID] = null; Item.itemsList[Item.bow.itemID] = (new ItemCustomBow(5)).setUnlocalizedName("bow").setTextureName("bow");
-		Item.itemsList[Item.arrow.itemID] = null; Item.itemsList[Item.arrow.itemID] = (new ItemArrow(6)).setUnlocalizedName("arrow");
+		Item.itemsList[Item.arrow.itemID] = null; Item.itemsList[Item.arrow.itemID] = (new ItemArrow(6)).setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFCWeapons);
 
 		//Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 25, 0.6F, false, 42)).setFolder("").setUnlocalizedName("bread");
 		Item.itemsList[Item.dyePowder.itemID] = null; Item.itemsList[Item.dyePowder.itemID] = new ItemDyeCustom(95).setUnlocalizedName("dyePowder").setTextureName("dye_powder");
 		Item.itemsList[Item.potion.itemID] = null; Item.itemsList[Item.potion.itemID] = (new ItemCustomPotion(117)).setUnlocalizedName("potion").setTextureName("potion");
-		Item.itemsList[Item.leash.itemID] = null; Item.itemsList[Item.leash.itemID] = new ItemCustomLeash(164).setUnlocalizedName("Rope");
+		Item.itemsList[Item.leash.itemID] = null; Item.itemsList[Item.leash.itemID] = new ItemCustomLeash(164).setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFCTools);
 
 		Item.itemsList[Block.tallGrass.blockID] = null; Item.itemsList[Block.tallGrass.blockID] = (new ItemColored(Block.tallGrass.blockID - 256, true)).setBlockNames(new String[] {"shrub", "grass", "fern"});
 
 		GoldPan = new ItemGoldPan(TFCItemID.GoldPan).setUnlocalizedName("GoldPan");
-		SluiceItem = new ItemSluice(TFCItemID.SluiceItem).setFolder("devices/").setUnlocalizedName("SluiceItem");
+		SluiceItem = new ItemSluice(TFCItemID.SluiceItem).setFolder("devices/").setUnlocalizedName("SluiceItem").setCreativeTab(TFCTabs.TFCDevices);
 
 		ProPickBismuthBronze = new ItemProPick(TFCItemID.ProPickBismuthBronze).setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses);
 		ProPickBlackBronze = new ItemProPick(TFCItemID.ProPickBlackBronze).setUnlocalizedName("Black Bronze ProPick").setMaxDamage(BlackBronzeUses);
@@ -1365,7 +1364,7 @@ public class TFCItems
 		SteelProPickHead = new ItemMiscToolHead(TFCItemID.SteelProPickHead).setUnlocalizedName("Steel ProPick Head");
 
 		Powder = new ItemTerra(TFCItemID.Flux).setMetaNames(new String[]
-				{"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder","Hematite Powder", "Lapis Lazuli Powder", "Limonite Powder", "Malachite Powder", "Salt"}).setUnlocalizedName("Powder");
+				{"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder","Hematite Powder", "Lapis Lazuli Powder", "Limonite Powder", "Malachite Powder", "Salt"}).setUnlocalizedName("Powder").setCreativeTab(TFCTabs.TFCMaterials);
 
 		/**
 		 * Scythe
@@ -1393,7 +1392,7 @@ public class TFCItems
 		WoodenBucketEmpty = (new ItemCustomBucket(TFCItemID.WoodenBucketEmpty, 0)).setUnlocalizedName("Wooden Bucket Empty");
 		WoodenBucketWater = (new ItemCustomBucket(TFCItemID.WoodenBucketWater, 1)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);
 		WoodenBucketSaltWater = (new ItemCustomBucket(TFCItemID.WoodenBucketSaltWater, 1)).setUnlocalizedName("Wooden Bucket Salt Water").setContainerItem(WoodenBucketEmpty);
-		WoodenBucketMilk = (new ItemCustomBucketMilk(TFCItemID.WoodenBucketMilk)).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty);
+		WoodenBucketMilk = (new ItemCustomBucketMilk(TFCItemID.WoodenBucketMilk)).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty).setCreativeTab(CreativeTabs.tabFood);
 
 		BismuthBronzeKnifeHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeKnifeHead).setUnlocalizedName("Bismuth Bronze Knife Blade");
 		BlackBronzeKnifeHead = new ItemMiscToolHead(TFCItemID.BlackBronzeKnifeHead).setUnlocalizedName("Black Bronze Knife Blade");
@@ -1479,16 +1478,16 @@ public class TFCItems
 
 		Blueprint = new ItemBlueprint(TFCItemID.Blueprint);
 		writabeBookTFC = new ItemWritableBookTFC(TFCItemID.WritableBookTFC,"Fix Me I'm Broken").setUnlocalizedName("book");
-		WoolYarn = new ItemTerra(TFCItemID.WoolYarn).setUnlocalizedName("WoolYarn");
+		WoolYarn = new ItemTerra(TFCItemID.WoolYarn).setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
 		Wool = new ItemTerra(TFCItemID.Wool).setUnlocalizedName("Wool").setCreativeTab(TFCTabs.TFCMaterials);
 		WoolCloth = new ItemTerra(TFCItemID.WoolCloth).setUnlocalizedName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
-		Spindle = new ItemSpindle(TFCItemID.Spindle).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCMaterials);
+		Spindle = new ItemSpindle(TFCItemID.Spindle).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCTools);
 
-		SpindleHead = new ItemPotteryBase(TFCItemID.SpindleHead).setMetaNames(new String[]{"Clay Spindle", "Spindle Head"}).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCMaterials);
+		SpindleHead = new ItemPotteryBase(TFCItemID.SpindleHead).setMetaNames(new String[]{"Clay Spindle", "Spindle Head"}).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCUnfinished);
 		StoneBrick = (new ItemStoneBrick(TFCItemID.ItemStoneBrick2).setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
 		Mortar = new ItemTerra(TFCItemID.Mortar).setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
 		Limewater = new ItemCustomBucket(TFCItemID.Limewater,2).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
-		Vinegar = new ItemCustomBucket(TFCItemID.Vinegar,12).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
+		Vinegar = new ItemCustomBucket(TFCItemID.Vinegar,12).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(WoodenBucketEmpty).setCreativeTab(CreativeTabs.tabFood);
 		Hide = new ItemRawHide(TFCItemID.Hide).setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		SoakedHide = new ItemRawHide(TFCItemID.SoakedHide).setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		ScrapedHide = new ItemRawHide(TFCItemID.ScrapedHide).setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFCMaterials);
@@ -1499,7 +1498,7 @@ public class TFCItems
 		FlatLeather = (new ItemFlatGeneric(TFCItemID.FlatLeather2).setFolder("tools/").setUnlocalizedName("Flat Leather"));
 		TerraLeather = new ItemLeather(TFCItemID.TFCLeather).setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather");
 
-		Straw = new ItemTerra(TFCItemID.Straw).setFolder("plants/").setUnlocalizedName("Straw");
+		Straw = new ItemTerra(TFCItemID.Straw).setFolder("plants/").setUnlocalizedName("Straw").setCreativeTab(TFCTabs.TFCMaterials);
 		FlatClay = (new ItemFlatGeneric(TFCItemID.FlatClay).setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName("clay"));
 
 		PotteryJug = new ItemPotteryJug(TFCItemID.PotteryJug).setUnlocalizedName("Jug");
@@ -1553,8 +1552,8 @@ public class TFCItems
 		UnknownIngot = new ItemIngot(TFCItemID.UnknownIngot).setUnlocalizedName("Unknown Ingot");
 		UnknownUnshaped = new ItemMeltedMetal(TFCItemID.UnknownUnshaped).setUnlocalizedName("Unknown Unshaped");
 
-		Jute = new ItemTerra(TFCItemID.jute).setFolder("plants/").setUnlocalizedName("Jute");
-		JuteFibre = new ItemTerra(TFCItemID.juteFibre).setFolder("plants/").setUnlocalizedName("Jute Fibre");
+		Jute = new ItemTerra(TFCItemID.jute).setFolder("plants/").setUnlocalizedName("Jute").setCreativeTab(TFCTabs.TFCMaterials);
+		JuteFibre = new ItemTerra(TFCItemID.juteFibre).setFolder("plants/").setUnlocalizedName("Jute Fibre").setCreativeTab(TFCTabs.TFCMaterials);
 
 		// Plans
 		PickaxeHeadPlan = new ItemPlan(TFCItemID.PickaxeHeadPlan).setUnlocalizedName("PickaxeHeadPlan");
@@ -1632,9 +1631,10 @@ public class TFCItems
 		((TFCTabs)TFCTabs.TFCMaterials).setTabIconItemIndex(TFCItems.LeadIngot.itemID);
 		((TFCTabs)TFCTabs.TFCUnfinished).setTabIconItemIndex(TFCItems.SteelHammerHead.itemID);
 		((TFCTabs)TFCTabs.TFCArmor).setTabIconItemIndex(TFCItems.SteelHelmet.itemID);      
-		((TFCTabs)TFCTabs.TFCMisc).setTabIconItemIndex(TFCItems.Spindle.itemID);  
+		((TFCTabs)TFCTabs.TFCMisc).setTabIconItemIndex(TFCItems.BlueSteelBucketLava.itemID);  
 		((TFCTabs)TFCTabs.TFCPottery).setTabIconItemStack(new ItemStack(PotteryJug, 1, 1));  
 		((TFCTabs)TFCTabs.TFCWeapons).setTabIconItemStack(new ItemStack(SteelSword, 1));  
+		((TFCTabs)TFCTabs.TFCDevices).setTabIconItemStack(new ItemStack(SluiceItem, 1));
 
 		registerMetals();
 
@@ -1647,7 +1647,7 @@ public class TFCItems
 	private static void SetupFood() 
 	{
 		FoodList = new ArrayList<Item>();
-		Item.itemsList[Item.egg.itemID] = new ItemEgg(Item.egg.itemID).setSize(EnumSize.SMALL).setUnlocalizedName("egg").setTextureName("egg");
+		Item.itemsList[Item.egg.itemID] = new ItemEgg(Item.egg.itemID-256).setSize(EnumSize.SMALL).setUnlocalizedName("egg").setTextureName("egg").setCreativeTab(CreativeTabs.tabFood);
 		Egg = Item.itemsList[Item.egg.itemID];
 		Item.itemsList[Item.porkRaw.itemID] = null; Item.itemsList[Item.porkRaw.itemID] = new ItemRawFood(63, -1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("porkchopRaw");
 		Item.itemsList[Item.porkCooked.itemID] = null; Item.itemsList[Item.porkCooked.itemID] = new ItemFoodTFC(64, 38, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("porkchopCooked");
@@ -1712,13 +1712,13 @@ public class TFCItems
 		Squash = new ItemRawFood(TFCItemID.Squash, 37, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Squash");
 		Cheese = new ItemFoodTFC(TFCItemID.Cheese, 26, EnumFoodGroup.Dairy).setDecayRate(0.5f).setUnlocalizedName("Cheese");
 
-		WheatWhole = new ItemTerra(TFCItemID.WheatWhole).setFolder("food/").setUnlocalizedName("Wheat Whole");
-		BarleyWhole = new ItemTerra(TFCItemID.BarleyWhole).setFolder("food/").setUnlocalizedName("Barley Whole");
-		OatWhole = new ItemTerra(TFCItemID.OatWhole).setFolder("food/").setUnlocalizedName("Oat Whole");
-		RyeWhole = new ItemTerra(TFCItemID.RyeWhole).setFolder("food/").setUnlocalizedName("Rye Whole");
-		RiceWhole = new ItemTerra(TFCItemID.RiceWhole).setFolder("food/").setUnlocalizedName("Rice Whole");
+		WheatWhole = new ItemTerra(TFCItemID.WheatWhole).setFolder("food/").setUnlocalizedName("Wheat Whole").setCreativeTab(CreativeTabs.tabFood);
+		BarleyWhole = new ItemTerra(TFCItemID.BarleyWhole).setFolder("food/").setUnlocalizedName("Barley Whole").setCreativeTab(CreativeTabs.tabFood);
+		OatWhole = new ItemTerra(TFCItemID.OatWhole).setFolder("food/").setUnlocalizedName("Oat Whole").setCreativeTab(CreativeTabs.tabFood);
+		RyeWhole = new ItemTerra(TFCItemID.RyeWhole).setFolder("food/").setUnlocalizedName("Rye Whole").setCreativeTab(CreativeTabs.tabFood);
+		RiceWhole = new ItemTerra(TFCItemID.RiceWhole).setFolder("food/").setUnlocalizedName("Rice Whole").setCreativeTab(CreativeTabs.tabFood);
 
-		MealGeneric = new ItemMeal(TFCItemID.MealGeneric).setUnlocalizedName("MealGeneric");
+		MealGeneric = new ItemMeal(TFCItemID.MealGeneric).setUnlocalizedName("MealGeneric").setCreativeTab(CreativeTabs.tabFood);
 
 		WheatGround = new ItemRawFood(TFCItemID.WheatGround, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Wheat Ground");
 		BarleyGround = new ItemRawFood(TFCItemID.BarleyGround, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Barley Ground");
@@ -2063,10 +2063,10 @@ public class TFCItems
 
 
 
-		Item.itemsList[Item.helmetLeather.itemID] = null; Item.itemsList[Item.helmetLeather.itemID] = new ItemTFCArmor(Item.helmetLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 0, EnumArmorMaterial.CLOTH, 100,3).setUnlocalizedName("helmetCloth").setTextureName("leather_helmet");
-		Item.itemsList[Item.plateLeather.itemID] = null; Item.itemsList[Item.plateLeather.itemID] = new ItemTFCArmor(Item.plateLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 1, EnumArmorMaterial.CLOTH, 100,2).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate");
-		Item.itemsList[Item.legsLeather.itemID] = null; Item.itemsList[Item.legsLeather.itemID] = new ItemTFCArmor(Item.legsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 2, EnumArmorMaterial.CLOTH, 100,1).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings");
-		Item.itemsList[Item.bootsLeather.itemID] = null; Item.itemsList[Item.bootsLeather.itemID] = new ItemTFCArmor(Item.bootsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 3, EnumArmorMaterial.CLOTH, 100,0).setUnlocalizedName("bootsCloth").setTextureName("leather_boots");
+		Item.itemsList[Item.helmetLeather.itemID] = null; Item.itemsList[Item.helmetLeather.itemID] = new ItemTFCArmor(Item.helmetLeather.itemID-256, Armor.Leather, proxy.getArmorRenderID("leather"), 0, EnumArmorMaterial.CLOTH, 100,3).setUnlocalizedName("helmetCloth").setTextureName("leather_helmet");
+		Item.itemsList[Item.plateLeather.itemID] = null; Item.itemsList[Item.plateLeather.itemID] = new ItemTFCArmor(Item.plateLeather.itemID-256, Armor.Leather, proxy.getArmorRenderID("leather"), 1, EnumArmorMaterial.CLOTH, 100,2).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate");
+		Item.itemsList[Item.legsLeather.itemID] = null; Item.itemsList[Item.legsLeather.itemID] = new ItemTFCArmor(Item.legsLeather.itemID-256, Armor.Leather, proxy.getArmorRenderID("leather"), 2, EnumArmorMaterial.CLOTH, 100,1).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings");
+		Item.itemsList[Item.bootsLeather.itemID] = null; Item.itemsList[Item.bootsLeather.itemID] = new ItemTFCArmor(Item.bootsLeather.itemID-256, Armor.Leather, proxy.getArmorRenderID("leather"), 3, EnumArmorMaterial.CLOTH, 100,0).setUnlocalizedName("bootsCloth").setTextureName("leather_boots");
 
 		Quiver = new ItemQuiver(TFCItemID.Quiver, Armor.LeatherQuiver, proxy.getArmorRenderID("leather"), 4, EnumArmorMaterial.IRON, 0,-1).setUnlocalizedName("Quiver");
 	}

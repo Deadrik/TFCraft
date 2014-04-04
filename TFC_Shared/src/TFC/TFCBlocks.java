@@ -652,7 +652,7 @@ public class TFCBlocks
 
 		TFCBlocks.Barrel = new BlockBarrel(TFCBlockID.Barrel).setUnlocalizedName("Barrel").setHardness(2);
 		TFCBlocks.Barrel2 = new BlockBarrel2(TFCBlockID.Barrel2).setUnlocalizedName("Barrel").setHardness(2);
-		TFCBlocks.Thatch =  new BlockThatch(TFCBlockID.Thatch).setUnlocalizedName("Thatch").setHardness(1).setStepSound(Block.soundGrassFootstep);
+		TFCBlocks.Thatch =  new BlockThatch(TFCBlockID.Thatch).setUnlocalizedName("Thatch").setHardness(1).setStepSound(Block.soundGrassFootstep).setCreativeTab(CreativeTabs.tabBlock);
 		TFCBlocks.Moss =  new BlockMoss(TFCBlockID.Moss).setUnlocalizedName("Moss").setHardness(1).setStepSound(Block.soundGrassFootstep);
 
 
