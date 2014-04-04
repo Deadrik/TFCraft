@@ -31,6 +31,7 @@ import TFC.API.IMultipleBlock;
 import TFC.API.IPipeConnectable;
 import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Textures;
 import TFC.Items.ItemBarrels;
 import TFC.TileEntities.TileEntityBarrel;
@@ -45,7 +46,7 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	public BlockBarrel()
 	{
 		super(Material.wood);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 1, 0.9f);
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0,16);

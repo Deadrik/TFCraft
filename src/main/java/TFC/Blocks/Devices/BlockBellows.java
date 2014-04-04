@@ -2,7 +2,6 @@ package TFC.Blocks.Devices;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,6 +12,7 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Core.TFCTabs;
 import TFC.TileEntities.TileEntityBellows;
 
 public class BlockBellows extends BlockTerraContainer
@@ -26,9 +26,10 @@ public class BlockBellows extends BlockTerraContainer
 		return i & 3;
 	}
 
-	public BlockBellows(Material material) {
+	public BlockBellows(Material material)
+	{
 		super(material);
-		this.setCreativeTab(CreativeTabs.tabRedstone);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 	}
 
 	@Override

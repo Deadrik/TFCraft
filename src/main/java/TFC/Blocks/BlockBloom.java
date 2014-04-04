@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.Reference;
+import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TileEntities.TileEntityBloom;
 
@@ -76,9 +77,24 @@ public class BlockBloom extends BlockTerraContainer
 		TileEntityBloom te = (TileEntityBloom)world.getTileEntity(i, j, k);
 		if(te != null)
 		{
+			int[] b = getBloomery(world, i, j, k);
 			te = (TileEntityBloom)world.getTileEntity(i, j, k);
-			dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.RawBloom, 1, te.size));
+			dropBlockAsItem(world, i+b[0], j, k+b[1], new ItemStack(TFCItems.RawBloom, 1, te.size));
 			world.removeTileEntity(i, j, k);
 		}
+	}
+
+	public int[] getBloomery(World world, int i, int j, int k)
+	{
+		if(world.getBlock(i+1, j, k) == TFCBlocks.EarlyBloomery)
+			return new int[]{1,0};
+		if(world.getBlock(i-1, j, k) == TFCBlocks.EarlyBloomery)
+			return new int[]{-1,0};
+		if(world.getBlock(i, j, k+1) == TFCBlocks.EarlyBloomery)
+			return new int[]{0,1};
+		if(world.getBlock(i, j, k-1) == TFCBlocks.EarlyBloomery)
+			return new int[]{0,-1};
+
+		return new int[]{0,0};
 	}
 }

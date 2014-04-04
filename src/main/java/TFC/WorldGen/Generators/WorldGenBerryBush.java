@@ -71,7 +71,7 @@ public class WorldGenBerryBush extends WorldGenerator
 			for(short h = 0; h < bushHeight && random.nextBoolean(); h++) 
 			{
 				world.setBlock(i, j+h, k, TFCBlocks.BerryBush, meta, 2);
-				if(TFC_Time.getSeason(k) > fi.harvestStart && TFC_Time.getSeason(k) < fi.harvestFinish+fi.fruitHangTime)
+				if(TFC_Time.getSeasonAdjustedMonth(k) > fi.harvestStart && TFC_Time.getSeasonAdjustedMonth(k) < fi.harvestFinish+fi.fruitHangTime)
 				{
 					TEBerryBush te = (TEBerryBush) world.getTileEntity(i, j+h, k);
 					te.hasFruit = true;

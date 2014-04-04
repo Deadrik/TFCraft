@@ -78,17 +78,17 @@ public class RenderOverlayHandler
 		//Render Arrow and Javelin for Quiver
 		if(getQuiver()!=null && getQuiver().getItem() instanceof ItemQuiver){
 			fontrenderer = mc.fontRenderer;
-			
+
 			this.drawTexturedModalRect(1, sr.getScaledHeight() - 34, 0, 78, 16, 16);
 			this.drawTexturedModalRect(1, sr.getScaledHeight() - 17, 0, 94, 16, 16);
-			
+
 			fontrenderer.drawString("" +getQuiverArrows(), 20,  sr.getScaledHeight() - 30, Color.white.getRGB());
 			fontrenderer.drawString("" +getQuiverJavelins(), 20,  sr.getScaledHeight() - 13, Color.white.getRGB());
-			
+
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			TFC_Core.bindTexture(tfcicons);
 		}
-		
+
 		PlayerInfo playerclient = PlayerManagerTFC.getInstance().getClientPlayer();
 		if(playerclient != null && mc.playerController.gameIsSurvivalOrAdventure())
 		{
@@ -96,7 +96,7 @@ public class RenderOverlayHandler
 
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 0, 90, 10);
 			float maxHealth = mc.thePlayer.getMaxHealth();
-			float percentHealth = mc.thePlayer.getHealth()/maxHealth;
+			float percentHealth = Math.min(mc.thePlayer.getHealth()/maxHealth, 1.0f);
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
 
 			//Draw Food and Water

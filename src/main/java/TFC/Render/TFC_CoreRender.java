@@ -720,7 +720,7 @@ public class TFC_CoreRender
 		FloraIndex index = manager.findMatchingIndex(BlockFruitLeaves.getType(block, meta));
 
 		renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
-		if(index.inBloom(TFC_Time.getSeason(zCoord)) || index.inHarvest(TFC_Time.getSeason(zCoord)))
+		if(index.inBloom(TFC_Time.getSeasonAdjustedMonth(zCoord)) || index.inHarvest(TFC_Time.getSeasonAdjustedMonth(zCoord)))
 		{
 			renderblocks.overrideBlockTexture = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
 			if(renderblocks.overrideBlockTexture != null)
@@ -764,7 +764,7 @@ public class TFC_CoreRender
 		FloraIndex index = manager.findMatchingIndex(BlockFruitLeaves.getType(id, meta & 7));
 		if(index != null)
 		{
-			if(index.inBloom(TFC_Time.getSeason(z)))//blooming
+			if(index.inBloom(TFC_Time.getSeasonAdjustedMonth(z)))//blooming
 				out = BlockFruitLeaves.iconsFlowers[(meta & 7)+offset];
 			else if(meta >= 8)//fruit
 				out = BlockFruitLeaves.iconsFruit[(meta & 7)+offset];

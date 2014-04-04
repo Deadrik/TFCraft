@@ -62,8 +62,6 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		te.extraData = 0;
 		te.setMaterial(world.getBlock(x, y, z).getMaterial());
 		te.validate();
-		world.markBlockForUpdate(x, y, z);
-
 	}
 
 	public static void CreateSlab(World world, int x, int y, int z, Block id, int meta, int side, Block Slab)
@@ -185,7 +183,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 			//te.broadcastPacketInRange(te.createUpdatePacket());
 		}
 
-		world.markBlockForUpdate(x, y, z);
+		world.notifyBlocksOfNeighborChange(x, y, z, world.getBlock(x, y, z));
 	}
 
 	public static void CreateSlab(World world, int x, int y, int z, Block id, int meta, int side)
@@ -248,6 +246,8 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				}
 			}
 		}
+
+		world.notifyBlocksOfNeighborChange(x, y, z, world.getBlock(x, y, z));
 	}
 
 	@Override

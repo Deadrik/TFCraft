@@ -14,6 +14,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import TFC.Reference;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.ColorizerFoliageTFC;
@@ -25,6 +26,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 {
+	private static final String[] MetaNames = new String[] {"deadbush", "tallgrass", "fern", "shortgrass"};
+	@SideOnly(Side.CLIENT)
+	private IIcon[] icons;
+
 	public BlockCustomTallGrass()
 	{
 		super();
@@ -74,12 +79,10 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 			if(is.getItem() == Recipes.Knives[c])
 			{
 				//createStraw(world, player, i, j, k);
-				if(rand.nextInt(16)==0){
+				if(rand.nextInt(16)==0)
 					createJute(world,player,i,j,k);
-				}
-				else{
+				else
 					createStraw(world, player, i, j, k);
-				}
 				is.damageItem(1, player);
 				break;
 			}
@@ -89,24 +92,22 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 			{
 				//Spawn the straw for the block that we've already destroyed
 				//createStraw(world, player, i, j, k );
-				if(rand.nextInt(16)==0){
+				if(rand.nextInt(16)==0)
 					createJute(world,player,i,j,k);
-				}
-				else{
+				else
 					createStraw(world, player, i, j, k );
-				}
+
 				//Now check each block around the destroyed block for AOE directions
 				for(int x = -1; x < 2; x++)
 					for(int z = -1; z < 2; z++)
 						if(world.getBlock(i+x,  j,  k+z) == this)
 						{
 							//createStraw(world, player, i + x, j, k + z);
-							if(rand.nextInt(16)==0){
+							if(rand.nextInt(16)==0)
 								createJute(world,player,i,j,k);
-							}
-							else{
+							else
 								createStraw(world, player, i, j, k );
-							}
+
 							is.damageItem(1, player);
 							world.setBlockToAir(i+x,  j,  k+z);
 						}
@@ -119,7 +120,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		EntityItem ei = new EntityItem(world, i+0.5F, j+0.5F, k+0.5F, new ItemStack(TFCItems.Straw, 1));
 		world.spawnEntityInWorld(ei);
 	}
-	
+
 	private void createJute(World world, EntityPlayer player, int i, int j, int k)
 	{
 		EntityItem ei = new EntityItem(world, i+0.5F, j+0.5F, k+0.5F, new ItemStack(TFCItems.Jute, 1));
@@ -218,27 +219,21 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		return is;
 	}
 
-	private static final String[] field_94367_a = new String[] {"deadbush", "tallgrass", "fern"};
-	@SideOnly(Side.CLIENT)
-	private IIcon[] field_94366_b;
-
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void registerBlockIcons(IIconRegister par1IconRegister)
+	public void registerBlockIcons(IIconRegister register)
 	{
-		this.field_94366_b = new IIcon[field_94367_a.length];
-
-		for (int i = 0; i < this.field_94366_b.length; ++i)
-			this.field_94366_b[i] = par1IconRegister.registerIcon(field_94367_a[i]);
+		this.icons = new IIcon[MetaNames.length];
+		for (int i = 0; i < this.icons.length; ++i)
+			this.icons[i] = register.registerIcon((i > 2 ?Reference.ModID+":plants/" : "")+MetaNames[i]);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int par1, int par2)
 	{
-		if (par2 >= this.field_94366_b.length)
+		if (par2 >= this.icons.length)
 			par2 = 0;
-
-		return this.field_94366_b[par2];
+		return this.icons[par2];
 	}
 }

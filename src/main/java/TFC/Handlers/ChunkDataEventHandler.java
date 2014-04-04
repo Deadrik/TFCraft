@@ -47,7 +47,7 @@ public class ChunkDataEventHandler
 				NBTTagCompound spawnProtectionTag = data.getTag();
 				eventTag.setTag("Spawn Protection", spawnProtectionTag);
 			} else
-				System.out.println("Attempting to save Chunkdata that has already been unloaded.");
+				;//System.out.println("Attempting to save Chunkdata that has already been unloaded.");
 		}
 	}
 }

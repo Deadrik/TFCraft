@@ -2,10 +2,12 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Time;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.TileEntities.TECrop;
@@ -21,29 +23,37 @@ public class WorldGenGrowCrops implements IWorldGenerator
 		this.cropBlockId = par1;
 	}
 
-	public boolean generate(World world, Random par2Random, int x, int y, int z)
+	public void generate(World world, Random rand, int x, int z, int numToGen)
 	{
-		int i = x - 5 + par2Random.nextInt(10);
-		int k = z - 5 + par2Random.nextInt(10);
-		int j = world.getHeightValue(x, z)+1;
-		CropIndex crop = CropManager.getInstance().getCropFromId(cropBlockId);
-		if(crop != null)
+		int i = x,j = 150,k = z;
+		CropIndex crop;
+		TECrop te;
+		for(int c = 0; c < numToGen; c++)
 		{
-			float temp = TFC_Climate.getHeightAdjustedTemp(i, j, k);
-			float growth =  Math.min(crop.numGrowthStages-par2Random.nextInt(3), crop.numGrowthStages);
-			if(temp > crop.minAliveTemp)
+			i = x-8+rand.nextInt(16);
+			k = z-8+rand.nextInt(16);
+			j = world.getTopSolidOrLiquidBlock(i, k);
+			crop = CropManager.getInstance().getCropFromId(cropBlockId);
+			if(crop != null)
 			{
-				if (world.isAirBlock(i, j, k) && Blocks.wheat.canBlockStay(world, i, j, k)) // ((BlockCrop)Blocks.wheat).canBlockStay(world, i, j, k))
+				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay((int)TFC_Time.getTotalDays(), i, j, k);
+
+				int month = TFC_Time.getSeasonAdjustedMonth(k);
+				if(temp > crop.minAliveTemp && month > 0 && month <= 6)
 				{
-					world.setBlock(i, j, k, Blocks.wheat, 0, 0x2);
-					TECrop te = (TECrop)world.getTileEntity(i, j, k);
-					te.cropId = cropBlockId;
-					te.growth = growth;
-					return true;
+					Block bid = world.getBlock(i, j, k);
+					if (Blocks.wheat.canBlockStay(world, i, j, k) && (bid == Blocks.air || bid == Blocks.tallgrass))
+					{
+						world.setBlock(i, j, k, Blocks.wheat, 0, 0x2);
+						te = (TECrop)world.getTileEntity(i, j, k);
+						te.cropId = cropBlockId;
+						float mg = Math.min(month/(crop.growthTime/TFC_Time.daysInMonth), 1.0f)*(0.75f+(rand.nextFloat()*0.25f));
+						float growth =  Math.min(crop.numGrowthStages*mg, crop.numGrowthStages);
+						te.growth = growth;
+					}
 				}
 			}
 		}
-		return false;
 	}
 
 	@Override

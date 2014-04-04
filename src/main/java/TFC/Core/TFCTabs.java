@@ -16,6 +16,7 @@ public class TFCTabs extends CreativeTabs
 	public static CreativeTabs TFCMaterials = new TFCTabs("TFCMaterials");
 	public static CreativeTabs TFCArmor = new TFCTabs("TFCArmor");
 	public static CreativeTabs TFCPottery = new TFCTabs("TFCPottery");
+	public static CreativeTabs TFCDevices = new TFCTabs("TFCDevices");
 
 	private int itemIndex;
 	private ItemStack is;

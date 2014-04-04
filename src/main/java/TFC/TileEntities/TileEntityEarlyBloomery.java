@@ -20,7 +20,6 @@ import TFC.TFCItems;
 import TFC.API.ISmeltable;
 import TFC.API.Constant.Global;
 import TFC.Blocks.Devices.BlockEarlyBloomery;
-import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Items.ItemOre;
 
@@ -77,27 +76,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 		{
 			return false;
 		}
-		if(worldObj.getBlock(i+1, j, k).getMaterial() != Material.rock &&
-				worldObj.getBlock(i+1, j, k).getMaterial() != Material.iron && !TFC_Core.isWestSolid(worldObj, i, j, k))
-		{
-			return false;
-		}
-		if(worldObj.getBlock(i-1, j, k).getMaterial() != Material.rock &&
-				worldObj.getBlock(i-1, j, k).getMaterial() != Material.iron && !TFC_Core.isEastSolid(worldObj, i, j, k))
-		{
-			return false;
-		}
-		if(worldObj.getBlock(i, j, k+1).getMaterial() != Material.rock &&
-				worldObj.getBlock(i, j, k+1).getMaterial() != Material.iron && !TFC_Core.isSouthSolid(worldObj, i, j, k))
-		{
-			return false;
-		}
-		if(worldObj.getBlock(i, j, k-1).getMaterial() != Material.rock &&
-				worldObj.getBlock(i, j, k-1).getMaterial() != Material.iron && !TFC_Core.isNorthSolid(worldObj, i, j, k))
-		{
-			return false;
-		}
-		return true;
+		return ((BlockEarlyBloomery)TFCBlocks.EarlyBloomery).checkStack(worldObj, xCoord, j, zCoord, worldObj.getBlockMetadata(xCoord, yCoord, zCoord)&3);
 	}
 
 	public boolean AddOreToFire(ItemStack is)
@@ -183,14 +162,23 @@ public class TileEntityEarlyBloomery extends TileEntity
 				charcoalCount = 0;
 
 			/* Calculate how much ore the bloomery can hold. */
-			if(isStackValid(xCoord+direction[0], yCoord+3, zCoord+direction[1]))
+			if(isStackValid(xCoord+direction[0], yCoord+3, zCoord+direction[1]) && 
+					isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]) && 
+					isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1]))
+			{
+				maxCount = 24;
+			}
+			else if(isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]) &&
+					isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1]))
+			{
 				maxCount = 16;
-			else if(isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]))
-				maxCount = 12;
+			}
 			else if(isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1]))
+			{
 				maxCount = 8;
+			}
 
-			int moltenHeight = count-1;
+			int moltenHeight = Math.max((count/2)-1, 0);
 			/*Fill the bloomery stack with molten ore. */
 			for (int i = bloomeryLit ? 0:1, j = bloomeryLit ? moltenHeight+7 : moltenHeight; j > 0; i++,j-=8)
 			{
@@ -215,7 +203,10 @@ public class TileEntityEarlyBloomery extends TileEntity
 								worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten, m, 2);
 							}
 						} else {
-							worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten, m, 2);
+							if(count > 0)
+								worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten, m, 2);
+							else
+								worldObj.setBlockToAir(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
 						}
 					} 
 					else 
@@ -224,16 +215,36 @@ public class TileEntityEarlyBloomery extends TileEntity
 					}
 				}
 			}
-			/*Create a list of all the items that are falling into the stack */
-			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
-					xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1], 
-					xCoord+direction[0]+1, yCoord+moltenCount+1.1, zCoord+direction[1]+1));
+
+			if(!bloomeryLit && worldObj.getBlock(xCoord+direction[0], yCoord, zCoord+direction[1]) == TFCBlocks.Bloom)
+			{
+				if(isStackValid(xCoord+direction[0], yCoord+3, zCoord+direction[1]) && 
+						isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]) && 
+						isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
+					if(worldObj.getBlock(xCoord+direction[0], yCoord+3, zCoord+direction[1]) == TFCBlocks.Molten)
+						worldObj.setBlockToAir(xCoord+direction[0], yCoord+3, zCoord+direction[1]);
+				}
+				if(isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]) &&
+						isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
+					if(worldObj.getBlock(xCoord+direction[0], yCoord+2, zCoord+direction[1]) == TFCBlocks.Molten)
+						worldObj.setBlockToAir(xCoord+direction[0], yCoord+2, zCoord+direction[1]);
+				}
+				if(isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
+					if(worldObj.getBlock(xCoord+direction[0], yCoord+1, zCoord+direction[1]) == TFCBlocks.Molten)
+						worldObj.setBlockToAir(xCoord+direction[0], yCoord+1, zCoord+direction[1]);
+				}
+			}
 
 			if(moltenCount == 0)
 				moltenCount = 1;
 
+			/*Create a list of all the items that are falling into the stack */
+			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
+					xCoord+direction[0], yCoord, zCoord+direction[1], 
+					xCoord+direction[0]+1, yCoord+(maxCount/8)+1.1, zCoord+direction[1]+1));
+
 			/*Make sure the list isn't null or empty and that the stack is valid 1 layer above the Molten Ore*/
-			if (list != null && !list.isEmpty() && isStackValid(xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1]) && !bloomeryLit)
+			if (list != null && !list.isEmpty() && !bloomeryLit)
 			{
 				/*Iterate through the list and check for charcoal, coke, and ore*/
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)

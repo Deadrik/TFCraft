@@ -2,13 +2,13 @@ package TFC.Blocks.Devices;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Core.TFCTabs;
 import TFC.TileEntities.TileEntitySpawnMeter;
 
 public class BlockSpawnMeter extends BlockTerraContainer
@@ -19,7 +19,7 @@ public class BlockSpawnMeter extends BlockTerraContainer
 	public BlockSpawnMeter()
 	{
 		super(Material.rock);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 		this.setLightLevel(1F);
 	}
 

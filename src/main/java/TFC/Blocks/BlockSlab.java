@@ -72,12 +72,12 @@ public class BlockSlab extends BlockPartial
 
 	public static int getNorthChiselLevel(long data)
 	{
-		return (int) ((data >> 20) & 0xf);
+		return (int) ((data >> 8) & 0xf);
 	}
 
 	public static int getSouthChiselLevel(long data)
 	{
-		return (int) ((data >> 8) & 0xf);
+		return (int) ((data >> 20) & 0xf);
 	}
 
 	/**

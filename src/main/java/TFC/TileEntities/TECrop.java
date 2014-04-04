@@ -13,7 +13,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
-import TFC.Blocks.BlockCrop;
 import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
@@ -106,7 +105,7 @@ public class TECrop extends TileEntity
 						tef.DrainNutrients(3, crop.nutrientUsageMult);
 				}
 
-				float growthRate = (((crop.numGrowthStages/(crop.growthTime*TFC_Time.timeRatio360))+tempAdded)*nutriMult) * timeMultiplier;
+				float growthRate = (((crop.numGrowthStages/(crop.growthTime*TFC_Time.timeRatio96))+tempAdded)*nutriMult) * timeMultiplier;
 
 				int oldGrowth = (int) Math.floor(growth);
 

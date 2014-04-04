@@ -643,7 +643,7 @@ public class TFCBlocks
 
 		Barrel = new BlockBarrel().setBlockName("Barrel").setHardness(2);
 		Barrel2 = new BlockBarrel2().setBlockName("Barrel").setHardness(2);
-		Thatch =  new BlockThatch().setBlockName("Thatch").setHardness(1).setStepSound(Block.soundTypeGrass);
+		Thatch =  new BlockThatch().setBlockName("Thatch").setHardness(1).setStepSound(Block.soundTypeGrass).setCreativeTab(CreativeTabs.tabBlock);
 		Moss =  new BlockMoss().setBlockName("Moss").setHardness(1).setStepSound(Block.soundTypeGrass);
 
 

@@ -77,13 +77,12 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		stabilityCache = new DataCache(this, 0);
 
 		this.biomesToSpawnIn = new ArrayList();
-		this.biomesToSpawnIn.add(TFCBiome.forest);
 		this.biomesToSpawnIn.add(TFCBiome.HighHills);
 		this.biomesToSpawnIn.add(TFCBiome.plains);
 		this.biomesToSpawnIn.add(TFCBiome.rollingHills);
-		this.biomesToSpawnIn.add(TFCBiome.taiga);
 		this.biomesToSpawnIn.add(TFCBiome.swampland);
 		this.biomesToSpawnIn.add(TFCBiome.Mountains);
+		this.biomesToSpawnIn.add(TFCBiome.HighPlains);
 	}
 	
 	public TFCWorldChunkManager(World world)

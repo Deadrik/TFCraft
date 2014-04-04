@@ -54,6 +54,7 @@ public class BlockBerryBush extends BlockTerraContainer
 		icons = new IIcon[MetaNames.length];
 		iconsBerries = new IIcon[MetaNames.length];
 		this.setTickRandomly(true);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -237,7 +238,7 @@ public class BlockBerryBush extends BlockTerraContainer
 
 				if(_temp >= _fi.minTemp && _temp < _fi.maxTemp)
 				{
-					if(_fi.inHarvest(TFC_Time.getSeason(k)) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > _fi.fruitHangTime)
+					if(_fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(k)) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > _fi.fruitHangTime)
 					{
 						te.hasFruit = true;
 						te.dayFruited = (int) TFC_Time.getTotalDays();

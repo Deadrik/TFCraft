@@ -186,7 +186,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 					int meta = world.getBlockMetadata(x, y, z);
 
 					if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 && world.getBlockLightValue(x, y + 1, z) >= 4 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
-						world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRain(meta, rain), meta, 0x2);
+							world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
 					else if (TFC_Core.isClay(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
 						world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
 					else if (TFC_Core.isPeat(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)

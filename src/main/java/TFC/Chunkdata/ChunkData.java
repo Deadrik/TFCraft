@@ -8,8 +8,11 @@ public class ChunkData
 	public int chunkX;
 	public int chunkZ;
 	public long lastVisited;
+	public long previousVisit;
 	public int spawnProtection;
 	public int[] heightmap;
+
+	public int lastSpringGen;
 
 	public ChunkData()
 	{
@@ -33,6 +36,8 @@ public class ChunkData
 		heightmap = tag.getIntArray("heightmap");
 		if(heightmap.length == 0)
 			heightmap = new int[256];
+
+		lastSpringGen = tag.getInteger("lastSpringGen");
 	}
 
 	public NBTTagCompound getTag()
@@ -48,6 +53,7 @@ public class ChunkData
 		tag.setInteger("spawnProtection", spawnProtection);
 		tag.setLong("lastVisited", lastVisited);
 		tag.setIntArray("heightmap", heightmap);
+		tag.setInteger("lastSpringGen", lastSpringGen);
 		return tag;
 	}
 
@@ -57,6 +63,7 @@ public class ChunkData
 		chunkZ = z;
 		lastVisited = 0;
 		spawnProtection = -24;
+		lastSpringGen = TFC_Time.getYear();
 		return this;
 	}
 

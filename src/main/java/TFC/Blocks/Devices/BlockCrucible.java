@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,6 +19,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Core.TFCTabs;
 import TFC.Core.Metal.MetalPair;
 import TFC.TileEntities.TECrucible;
 import cpw.mods.fml.relauncher.Side;
@@ -32,7 +32,7 @@ public class BlockCrucible extends BlockTerraContainer
 	public BlockCrucible()
 	{
 		super();
-		this.setCreativeTab(CreativeTabs.tabRedstone);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 		this.setBlockBounds(0.0625f, 0f, 0.0625f, 0.9375f, 0.9375f, 0.9375f);
 	}
 

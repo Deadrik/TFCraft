@@ -93,7 +93,7 @@ public class GuiCalendar extends GuiScreen
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
 
 		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Calendar"), l+87, i1+16, 0xFFFFFF);
-		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Season") + " : " + TFC_Time.seasons[TFC_Time.getSeason((int)(player.posZ))], l + 87, i1+26, 0x000000);
+		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Season") + " : " + TFC_Time.seasons[TFC_Time.getSeasonAdjustedMonth((int)(player.posZ))], l + 87, i1+26, 0x000000);
 
 		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Day") + " : " + TFC_Time.Days[TFC_Time.getDayOfWeek()], l + 87, i1+36, 0x000000);
 		int dom = TFC_Time.getDayOfMonth();

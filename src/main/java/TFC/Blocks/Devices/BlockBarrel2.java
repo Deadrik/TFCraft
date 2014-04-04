@@ -30,6 +30,7 @@ import TFC.TerraFirmaCraft;
 import TFC.API.IMultipleBlock;
 import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Textures;
 import TFC.Items.ItemBarrels2;
 import TFC.TileEntities.TileEntityBarrel;
@@ -44,7 +45,7 @@ public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock
 	public BlockBarrel2()
 	{
 		super(Material.wood);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 1, 0.9f);
 		woodNames = new String[Global.WOOD_ALL.length - 16];
 		System.arraycopy(Global.WOOD_ALL, 16, woodNames, 0, Global.WOOD_ALL.length - 16);
