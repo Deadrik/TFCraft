@@ -197,8 +197,8 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			switch(dir)
 			{
 			case 0:
-				if(TFC_Core.isSouthFaceSolid(world, i-map[0], j, k-map[1]) && TFC_Core.isEastFaceSolid(world, i-map[0], j, k-map[1]))
-					if((!flip && TFC_Core.isNorthFaceSolid(world, i-map[0], j, k-map[1])) || flip)
+				if(TFC_Core.isNorthFaceSolid(world, i-map[0], j, k-map[1]) && TFC_Core.isEastFaceSolid(world, i-map[0], j, k-map[1]))
+					if((!flip && TFC_Core.isSouthFaceSolid(world, i-map[0], j, k-map[1])) || flip)
 						l=true;
 				break;
 			case 1:
@@ -207,8 +207,8 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 						l=true;
 				break;
 			case 2:
-				if(TFC_Core.isNorthFaceSolid(world, i-map[0], j, k-map[1]) && TFC_Core.isEastFaceSolid(world, i-map[0], j, k-map[1]))
-					if((!flip && TFC_Core.isSouthFaceSolid(world, i-map[0], j, k-map[1])) || flip)
+				if(TFC_Core.isSouthFaceSolid(world, i-map[0], j, k-map[1]) && TFC_Core.isEastFaceSolid(world, i-map[0], j, k-map[1]))
+					if((!flip && TFC_Core.isNorthFaceSolid(world, i-map[0], j, k-map[1])) || flip)
 						l=true;
 				break;
 			case 3:
@@ -232,8 +232,8 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			switch(dir)
 			{
 			case 0:
-				if(TFC_Core.isSouthFaceSolid(world, i+map[0], j, k+map[1]) && TFC_Core.isWestFaceSolid(world, i+map[0], j, k+map[1]))
-					if((!flip && TFC_Core.isNorthFaceSolid(world, i+map[0], j, k+map[1])) || flip)
+				if(TFC_Core.isNorthFaceSolid(world, i+map[0], j, k+map[1]) && TFC_Core.isWestFaceSolid(world, i+map[0], j, k+map[1]))
+					if((!flip && TFC_Core.isSouthFaceSolid(world, i+map[0], j, k+map[1])) || flip)
 						r=true;
 				break;
 			case 1:
@@ -242,8 +242,8 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 						r=true;
 				break;
 			case 2:
-				if(TFC_Core.isNorthFaceSolid(world, i+map[0], j, k+map[1]) && TFC_Core.isWestFaceSolid(world, i+map[0], j, k+map[1]))
-					if((!flip && TFC_Core.isSouthFaceSolid(world, i+map[0], j, k+map[1])) || flip)
+				if(TFC_Core.isSouthFaceSolid(world, i+map[0], j, k+map[1]) && TFC_Core.isWestFaceSolid(world, i+map[0], j, k+map[1]))
+					if((!flip && TFC_Core.isNorthFaceSolid(world, i+map[0], j, k+map[1])) || flip)
 						r=true;
 				break;
 			case 3:
@@ -283,8 +283,8 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			switch(dir)
 			{
 			case 0:
-				if(TFC_Core.isSouthFaceSolid(world, i, j-1, k) && TFC_Core.isEastFaceSolid(world, i, j-1, k) && TFC_Core.isWestFaceSolid(world, i, j-1, k))
-					if((!flip && TFC_Core.isNorthFaceSolid(world, i, j-1, k)) || flip)
+				if(TFC_Core.isNorthFaceSolid(world, i, j-1, k) && TFC_Core.isEastFaceSolid(world, i, j-1, k) && TFC_Core.isWestFaceSolid(world, i, j-1, k))
+					if((!flip && TFC_Core.isSouthFaceSolid(world, i, j-1, k)) || flip)
 						b=true;
 				break;
 			case 1:
@@ -293,8 +293,8 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 						b=true;
 				break;
 			case 2:
-				if(TFC_Core.isNorthFaceSolid(world, i, j-1, k) && TFC_Core.isEastFaceSolid(world, i, j-1, k) && TFC_Core.isWestFaceSolid(world, i, j-1, k))
-					if((!flip && TFC_Core.isSouthFaceSolid(world, i, j-1, k)) || flip)
+				if(TFC_Core.isSouthFaceSolid(world, i, j-1, k) && TFC_Core.isEastFaceSolid(world, i, j-1, k) && TFC_Core.isWestFaceSolid(world, i, j-1, k))
+					if((!flip && TFC_Core.isNorthFaceSolid(world, i, j-1, k)) || flip)
 						b=true;
 				break;
 			case 3:
@@ -316,8 +316,8 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			switch(dir)
 			{
 			case 0:
-				if(TFC_Core.isSouthFaceSolid(world, i, j+1, k) && TFC_Core.isEastFaceSolid(world, i, j+1, k) && TFC_Core.isWestFaceSolid(world, i, j+1, k))
-					if((!flip && TFC_Core.isNorthFaceSolid(world, i, j+1, k)) || flip)
+				if(TFC_Core.isNorthFaceSolid(world, i, j+1, k) && TFC_Core.isEastFaceSolid(world, i, j+1, k) && TFC_Core.isWestFaceSolid(world, i, j+1, k))
+					if((!flip && TFC_Core.isSouthFaceSolid(world, i, j+1, k)) || flip)
 						t=true;
 				break;
 			case 1:
@@ -326,8 +326,8 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 						t=true;
 				break;
 			case 2:
-				if(TFC_Core.isNorthFaceSolid(world, i, j+1, k) && TFC_Core.isEastFaceSolid(world, i, j+1, k) && TFC_Core.isWestFaceSolid(world, i, j+1, k))
-					if((!flip && TFC_Core.isSouthFaceSolid(world, i, j+1, k)) || flip)
+				if(TFC_Core.isSouthFaceSolid(world, i, j+1, k) && TFC_Core.isEastFaceSolid(world, i, j+1, k) && TFC_Core.isWestFaceSolid(world, i, j+1, k))
+					if((!flip && TFC_Core.isNorthFaceSolid(world, i, j+1, k)) || flip)
 						t=true;
 				break;
 			case 3:

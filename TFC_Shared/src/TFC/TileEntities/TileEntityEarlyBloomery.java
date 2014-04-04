@@ -19,7 +19,6 @@ import TFC.TerraFirmaCraft;
 import TFC.API.ISmeltable;
 import TFC.API.Constant.Global;
 import TFC.Blocks.Devices.BlockEarlyBloomery;
-import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Items.ItemOre;
 
@@ -76,28 +75,7 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 		{
 			return false;
 		}
-		if(worldObj.getBlockMaterial(i+1, j, k) != Material.rock &&
-				worldObj.getBlockMaterial(i+1, j, k) != Material.iron && !TFC_Core.isWestSolid(worldObj, i, j, k))
-		{
-			return false;
-		}
-		if(worldObj.getBlockMaterial(i-1, j, k) != Material.rock &&
-				worldObj.getBlockMaterial(i-1, j, k) != Material.iron && !TFC_Core.isEastSolid(worldObj, i, j, k))
-		{
-			return false;
-		}
-		if(worldObj.getBlockMaterial(i, j, k+1) != Material.rock &&
-				worldObj.getBlockMaterial(i, j, k+1) != Material.iron && !TFC_Core.isSouthSolid(worldObj, i, j, k))
-		{
-			return false;
-		}
-		if(worldObj.getBlockMaterial(i, j, k-1) != Material.rock &&
-				worldObj.getBlockMaterial(i, j, k-1) != Material.iron && !TFC_Core.isNorthSolid(worldObj, i, j, k))
-		{
-			return false;
-		}
-
-		return true;
+		return ((BlockEarlyBloomery)TFCBlocks.EarlyBloomery).checkStack(worldObj, xCoord, j, zCoord, worldObj.getBlockMetadata(xCoord, yNegID, zCoord)&3);
 	}
 
 
