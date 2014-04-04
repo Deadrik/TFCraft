@@ -195,7 +195,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 					if(m != null)
 						te.addMetal(m, (short)(100-output));
 				}
-				cookDelay = 60;
+				cookDelay = 100;
 				fireItemStacks[i] = null;
 				input[1].setItemDamage(input[1].getItemDamage()+1);
 				if( input[1] != null && input[1].getItemDamage() == input[1].getMaxDamage())

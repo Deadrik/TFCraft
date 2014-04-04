@@ -10,10 +10,12 @@ import TFC.Blocks.BlockBloom;
 import TFC.Blocks.BlockCharcoal;
 import TFC.Blocks.BlockCrop;
 import TFC.Blocks.BlockDetailed;
+import TFC.Blocks.BlockFireBrick;
 import TFC.Blocks.BlockFoodPrep;
 import TFC.Blocks.BlockIngotPile;
 import TFC.Blocks.BlockLogPile;
 import TFC.Blocks.BlockLooseRock;
+import TFC.Blocks.BlockMetalSheet;
 import TFC.Blocks.BlockMolten;
 import TFC.Blocks.BlockPipeBasic;
 import TFC.Blocks.BlockPipeValve;
@@ -164,6 +166,7 @@ public class TFCBlocks
 	public static int pipeValveRenderId;
 	public static int seaWeedRenderId;
 	public static int bloomeryRenderId;
+	public static int metalsheetRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -272,6 +275,8 @@ public class TFCBlocks
 	public static Block EarlyBloomery;
 	public static Block Bloom;
 	public static Block Crucible;
+	public static Block FireBrick;
+	public static Block MetalSheet;
 
 	public static Block NestBox;
 
@@ -425,6 +430,9 @@ public class TFCBlocks
 		GameRegistry.registerBlock(SeaGrassStill,"SeaGrassStill");
 		GameRegistry.registerBlock(SeaGrassFrozen,"SeaGrassFrozen");
 		GameRegistry.registerBlock(SeaGrassFlowing,"SeaGrassFlowing");
+
+		GameRegistry.registerBlock(FireBrick, "FireBrick");
+		GameRegistry.registerBlock(MetalSheet, "MetalSheet");
 
 		// Wooden Doors
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
@@ -676,6 +684,9 @@ public class TFCBlocks
 		SeaGrassStill = new BlockTallSeaGrassStill().setBlockName("SeaGrassStill").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 		SeaGrassFrozen = (new BlockFrozenSeaGrass()).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("seagrassice");
 		SeaGrassFlowing = new BlockTallSeaGrassFlowing().setBlockName("SeaGrassFlowing").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
+
+		TFCBlocks.FireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);
+		TFCBlocks.MetalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(8).setResistance(20f);
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);
 		StoneIgEx.setHarvestLevel("pickaxe", 0);

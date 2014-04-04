@@ -90,6 +90,7 @@ import TFC.Render.Blocks.RenderBloomery;
 import TFC.Render.Blocks.RenderCrucible;
 import TFC.Render.Blocks.RenderFence;
 import TFC.Render.Blocks.RenderFenceGate;
+import TFC.Render.Blocks.RenderMetalSheet;
 import TFC.Render.Blocks.RenderNestBox;
 import TFC.Render.Blocks.RenderOre;
 import TFC.Render.Blocks.RenderPipeBasic;
@@ -221,6 +222,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.seaWeedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.berryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBerryBush());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.bloomeryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBloomery());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.metalsheetRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderMetalSheet());
 
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());

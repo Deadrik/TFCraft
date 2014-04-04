@@ -799,9 +799,10 @@ public class TFC_Core
 
 	public static boolean isNorthFaceSolid (World world, int x, int y, int z)
 	{
-		if(world.getBlock(x, y, z).isNormalCube())
+		Block bid = world.getBlock(x, y, z);
+		if(bid.isNormalCube())
 			return true;
-		else if(world.getBlock(x, y, z) == TFCBlocks.stoneSlabs)
+		else if(bid == TFCBlocks.stoneSlabs)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x, y, z);
 			if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
