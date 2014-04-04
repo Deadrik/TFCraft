@@ -1938,21 +1938,42 @@ public class TFCItems
 		TFCItems.TinSheet = 			(new ItemMetalSheet(TFCItemID.TinSheet).setUnlocalizedName("Tin Sheet"));
 		TFCItems.ZincSheet = 			(new ItemMetalSheet(TFCItemID.ZincSheet).setUnlocalizedName("Zinc Sheet"));
 
-		TFCItems.BismuthSheet2x = 		(new ItemMetalSheet2x(TFCItemID.BismuthSheet2x).setUnlocalizedName("Bismuth Double Sheet"));
-		TFCItems.BismuthBronzeSheet2x = (new ItemMetalSheet2x(TFCItemID.BismuthBronzeSheet2x).setUnlocalizedName("Bismuth Bronze Double Sheet"));
-		TFCItems.BlackBronzeSheet2x = 	(new ItemMetalSheet2x(TFCItemID.BlackBronzeSheet2x).setUnlocalizedName("Black Bronze Double Sheet"));
-		TFCItems.BlackSteelSheet2x = 	(new ItemMetalSheet2x(TFCItemID.BlackSteelSheet2x).setUnlocalizedName("Black Steel Double Sheet"));
-		TFCItems.BlueSteelSheet2x = 	(new ItemMetalSheet2x(TFCItemID.BlueSteelSheet2x).setUnlocalizedName("Blue Steel Double Sheet"));
-		TFCItems.BronzeSheet2x = 		(new ItemMetalSheet2x(TFCItemID.BronzeSheet2x).setUnlocalizedName("Bronze Double Sheet"));
-		TFCItems.CopperSheet2x = 		(new ItemMetalSheet2x(TFCItemID.CopperSheet2x).setUnlocalizedName("Copper Double Sheet"));
-		TFCItems.WroughtIronSheet2x = 	(new ItemMetalSheet2x(TFCItemID.WroughtIronSheet2x).setUnlocalizedName("Wrought Iron Double Sheet"));
-		TFCItems.RedSteelSheet2x = 		(new ItemMetalSheet2x(TFCItemID.RedSteelSheet2x).setUnlocalizedName("Red Steel Double Sheet"));
-		TFCItems.RoseGoldSheet2x = 		(new ItemMetalSheet2x(TFCItemID.RoseGoldSheet2x).setUnlocalizedName("Rose Gold Double Sheet"));
-		TFCItems.SteelSheet2x = 		(new ItemMetalSheet2x(TFCItemID.SteelSheet2x).setUnlocalizedName("Steel Double Sheet"));
-		TFCItems.TinSheet2x = 			(new ItemMetalSheet2x(TFCItemID.TinSheet2x).setUnlocalizedName("Tin Double Sheet"));
-		TFCItems.ZincSheet2x = 			(new ItemMetalSheet2x(TFCItemID.ZincSheet2x).setUnlocalizedName("Zinc Double Sheet"));
+		TFCItems.BismuthSheet2x = 		(new ItemMetalSheet2x(TFCItemID.BismuthSheet2x, 0).setUnlocalizedName("Bismuth Double Sheet"));
+		TFCItems.BismuthBronzeSheet2x = (new ItemMetalSheet2x(TFCItemID.BismuthBronzeSheet2x, 1).setUnlocalizedName("Bismuth Bronze Double Sheet"));
+		TFCItems.BlackBronzeSheet2x = 	(new ItemMetalSheet2x(TFCItemID.BlackBronzeSheet2x, 2).setUnlocalizedName("Black Bronze Double Sheet"));
+		TFCItems.BlackSteelSheet2x = 	(new ItemMetalSheet2x(TFCItemID.BlackSteelSheet2x, 3).setUnlocalizedName("Black Steel Double Sheet"));
+		TFCItems.BlueSteelSheet2x = 	(new ItemMetalSheet2x(TFCItemID.BlueSteelSheet2x, 4).setUnlocalizedName("Blue Steel Double Sheet"));
+		TFCItems.BronzeSheet2x = 		(new ItemMetalSheet2x(TFCItemID.BronzeSheet2x,6).setUnlocalizedName("Bronze Double Sheet"));
+		TFCItems.CopperSheet2x = 		(new ItemMetalSheet2x(TFCItemID.CopperSheet2x, 7).setUnlocalizedName("Copper Double Sheet"));
+		TFCItems.WroughtIronSheet2x = 	(new ItemMetalSheet2x(TFCItemID.WroughtIronSheet2x, 19).setUnlocalizedName("Wrought Iron Double Sheet"));
+		TFCItems.RedSteelSheet2x = 		(new ItemMetalSheet2x(TFCItemID.RedSteelSheet2x, 13).setUnlocalizedName("Red Steel Double Sheet"));
+		TFCItems.RoseGoldSheet2x = 		(new ItemMetalSheet2x(TFCItemID.RoseGoldSheet2x, 14).setUnlocalizedName("Rose Gold Double Sheet"));
+		TFCItems.SteelSheet2x = 		(new ItemMetalSheet2x(TFCItemID.SteelSheet2x, 16).setUnlocalizedName("Steel Double Sheet"));
+		TFCItems.TinSheet2x = 			(new ItemMetalSheet2x(TFCItemID.TinSheet2x, 18).setUnlocalizedName("Tin Double Sheet"));
+		TFCItems.ZincSheet2x = 			(new ItemMetalSheet2x(TFCItemID.ZincSheet2x, 20).setUnlocalizedName("Zinc Double Sheet"));
+
 
 		int i = 0;
+		TFCItems.BrassSheet = 			new ItemMetalSheet(TFCItemID.BrassSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.GoldSheet = 			new ItemMetalSheet(TFCItemID.GoldSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.LeadSheet = 			new ItemMetalSheet(TFCItemID.LeadSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.NickelSheet = 			new ItemMetalSheet(TFCItemID.NickelSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.PigIronSheet = 		new ItemMetalSheet(TFCItemID.PigIronSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.PlatinumSheet = 		new ItemMetalSheet(TFCItemID.PlatinumSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.SilverSheet = 			new ItemMetalSheet(TFCItemID.SilverSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.SterlingSilverSheet = 	new ItemMetalSheet(TFCItemID.SterlingSilverSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+
+		i = 0;
+		TFCItems.BrassSheet2x = 			new ItemMetalSheet2x(TFCItemID.BrassSheet2x, 5).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.GoldSheet2x = 				new ItemMetalSheet2x(TFCItemID.GoldSheet2x, 8).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.LeadSheet2x = 				new ItemMetalSheet2x(TFCItemID.LeadSheet2x, 9).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.NickelSheet2x = 			new ItemMetalSheet2x(TFCItemID.NickelSheet2x, 10).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.PigIronSheet2x = 			new ItemMetalSheet2x(TFCItemID.PigIronSheet2x, 11).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.PlatinumSheet2x = 			new ItemMetalSheet2x(TFCItemID.PlatinumSheet2x, 12).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.SilverSheet2x = 			new ItemMetalSheet2x(TFCItemID.SilverSheet2x, 15).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.SterlingSilverSheet2x = 	new ItemMetalSheet2x(TFCItemID.SterlingSilverSheet2x, 17).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+
+		i = 0;
 		TFCItems.BismuthBronzeUnfinishedBoots = 	(new ItemUnfinishedArmor(TFCItemID.BismuthBronzeUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
 		TFCItems.BlackBronzeUnfinishedBoots = 		(new ItemUnfinishedArmor(TFCItemID.BlackBronzeUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
 		TFCItems.BlackSteelUnfinishedBoots = 		(new ItemUnfinishedArmor(TFCItemID.BlackSteelUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
@@ -2040,25 +2061,7 @@ public class TFCItems
 		TFCItems.RedSteelHelmet = 		(new ItemTFCArmor(TFCItemID.RedSteelHelmet, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); i++;
 		TFCItems.SteelHelmet = 			(new ItemTFCArmor(TFCItemID.SteelHelmet, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); 
 
-		i = 0;
-		TFCItems.BrassSheet = 			new ItemMetalSheet(TFCItemID.BrassSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.GoldSheet = 			new ItemMetalSheet(TFCItemID.GoldSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.LeadSheet = 			new ItemMetalSheet(TFCItemID.LeadSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.NickelSheet = 			new ItemMetalSheet(TFCItemID.NickelSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.PigIronSheet = 		new ItemMetalSheet(TFCItemID.PigIronSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.PlatinumSheet = 		new ItemMetalSheet(TFCItemID.PlatinumSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.SilverSheet = 			new ItemMetalSheet(TFCItemID.SilverSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.SterlingSilverSheet = 	new ItemMetalSheet(TFCItemID.SterlingSilverSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
 
-		i = 0;
-		TFCItems.BrassSheet2x = 			new ItemMetalSheet2x(TFCItemID.BrassSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.GoldSheet2x = 				new ItemMetalSheet2x(TFCItemID.GoldSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.LeadSheet2x = 				new ItemMetalSheet2x(TFCItemID.LeadSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.NickelSheet2x = 			new ItemMetalSheet2x(TFCItemID.NickelSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.PigIronSheet2x = 			new ItemMetalSheet2x(TFCItemID.PigIronSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.PlatinumSheet2x = 			new ItemMetalSheet2x(TFCItemID.PlatinumSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.SilverSheet2x = 			new ItemMetalSheet2x(TFCItemID.SilverSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.SterlingSilverSheet2x = 	new ItemMetalSheet2x(TFCItemID.SterlingSilverSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
 
 		Item.itemsList[Item.helmetLeather.itemID] = null; Item.itemsList[Item.helmetLeather.itemID] = new ItemTFCArmor(Item.helmetLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 0, EnumArmorMaterial.CLOTH, 100,3).setUnlocalizedName("helmetCloth").setTextureName("leather_helmet");
 		Item.itemsList[Item.plateLeather.itemID] = null; Item.itemsList[Item.plateLeather.itemID] = new ItemTFCArmor(Item.plateLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 1, EnumArmorMaterial.CLOTH, 100,2).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate");

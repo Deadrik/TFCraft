@@ -91,6 +91,7 @@ import TFC.Render.Blocks.RenderBloomery;
 import TFC.Render.Blocks.RenderCrucible;
 import TFC.Render.Blocks.RenderFence;
 import TFC.Render.Blocks.RenderFenceGate;
+import TFC.Render.Blocks.RenderMetalSheet;
 import TFC.Render.Blocks.RenderNestBox;
 import TFC.Render.Blocks.RenderOre;
 import TFC.Render.Blocks.RenderPipeBasic;
@@ -221,6 +222,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.seaWeedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.berryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBerryBush());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.bloomeryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBloomery());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.metalsheetRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderMetalSheet());
 
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
@@ -307,8 +309,8 @@ public class ClientProxy extends CommonProxy
 					}
 
 					var5 += (waterColorMultiplier & 16711680) >> 16;
-					var6 += (waterColorMultiplier & 65280) >> 8;
-					var7 += waterColorMultiplier & 255;
+			var6 += (waterColorMultiplier & 65280) >> 8;
+			var7 += waterColorMultiplier & 255;
 				}
 			}
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
@@ -326,8 +328,8 @@ public class ClientProxy extends CommonProxy
 			{
 				int var10 = TFC_Climate.getGrassColor(getCurrentWorld(), i + x, j, k + z);
 				var5 += (var10 & 16711680) >> 16;
-				var6 += (var10 & 65280) >> 8;
-				var7 += var10 & 255;
+			var6 += (var10 & 65280) >> 8;
+		var7 += var10 & 255;
 			}
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
 	}
@@ -343,14 +345,14 @@ public class ClientProxy extends CommonProxy
 
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
 		if (par1IBlockAccess.getBlockId(i, j, k) == TFCBlocks.fruitTreeLeaves.blockID) //			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December)
-		//			{
-		//				int var10 = ColorizerFoliageTFC.getFoliageYellow();
-		//				rgb = applyColor(var10, rgb);
-		//
-		//				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-		//				return x;
-		//			}
-		//			else
+			//			{
+			//				int var10 = ColorizerFoliageTFC.getFoliageYellow();
+			//				rgb = applyColor(var10, rgb);
+			//
+			//				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+			//				return x;
+			//			}
+			//			else
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 				for (int var9 = -1; var9 <= 1; ++var9)

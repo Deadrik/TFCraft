@@ -120,6 +120,7 @@ public class TFCBlockID
 	public static int Pottery					= 2065;
 	public static int Tuyere					= 2066;
 	public static int Crucible					= 2067;
+
 	public static int NestBox					= 2112;
 	public static int Fence						= 2113;
 	public static int FenceGate					= 2114;
@@ -149,10 +150,12 @@ public class TFCBlockID
 	public static int FreshWaterStill			= 2137;
 	public static int HotWaterFlowing			= 2138;
 	public static int HotWaterStill				= 2139;
-	
+
 	public static int SeaGrassFlowing			= 2140;
 	public static int SeaGrassStill				= 2141;
 	public static int SeaGrassFrozen			= 2142;
+	public static int FireBrick					= 2143;
+	public static int MetalSheet				= 2144;
 
 
 	static Configuration config;
@@ -282,6 +285,9 @@ public class TFCBlockID
 		FreshWaterStill = TFCOptions.getIntFor(config, "block", "FreshWaterStill", FreshWaterStill);
 		HotWaterFlowing = TFCOptions.getIntFor(config, "block", "HotWaterFlowing", HotWaterFlowing);
 		HotWaterStill = TFCOptions.getIntFor(config, "block", "HotWaterStill", HotWaterStill);
+
+		FireBrick = TFCOptions.getIntFor(config, "block", "FireBrick", FireBrick);
+		MetalSheet = TFCOptions.getIntFor(config, "block", "MetalSheet", MetalSheet);
 
 	}
 }

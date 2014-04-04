@@ -2,23 +2,21 @@ package TFC;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
-import net.minecraft.block.BlockLilyPad;
-import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import TFC.API.Constant.Global;
 import TFC.API.Constant.TFCBlockID;
 import TFC.Blocks.BlockBloom;
 import TFC.Blocks.BlockCharcoal;
 import TFC.Blocks.BlockCrop;
 import TFC.Blocks.BlockDetailed;
+import TFC.Blocks.BlockFireBrick;
 import TFC.Blocks.BlockFoodPrep;
 import TFC.Blocks.BlockIngotPile;
 import TFC.Blocks.BlockLogPile;
 import TFC.Blocks.BlockLooseRock;
+import TFC.Blocks.BlockMetalSheet;
 import TFC.Blocks.BlockMolten;
 import TFC.Blocks.BlockPipeBasic;
 import TFC.Blocks.BlockPipeValve;
@@ -166,6 +164,7 @@ public class TFCBlocks
 	public static int pipeValveRenderId;
 	public static int seaWeedRenderId;
 	public static int bloomeryRenderId;
+	public static int metalsheetRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -274,6 +273,8 @@ public class TFCBlocks
 	public static Block EarlyBloomery;
 	public static Block Bloom;
 	public static Block Crucible;
+	public static Block FireBrick;
+	public static Block MetalSheet;
 
 	public static Block NestBox;
 
@@ -299,7 +300,7 @@ public class TFCBlocks
 	public static Block FreshWaterFlowing;
 	public static Block HotWaterStill;
 	public static Block HotWaterFlowing;
-	
+
 	public static Block SeaGrassStill;
 	public static Block SeaGrassFrozen;
 	public static Block SeaGrassFlowing;
@@ -424,10 +425,13 @@ public class TFCBlocks
 		GameRegistry.registerBlock(FreshWaterFlowing,"FreshWaterFlowing");
 		GameRegistry.registerBlock(HotWaterStill,"HotWaterStill");
 		GameRegistry.registerBlock(HotWaterFlowing,"HotWaterFlowing");
-		
+
 		GameRegistry.registerBlock(SeaGrassStill,"SeaGrassStill");
 		GameRegistry.registerBlock(SeaGrassFrozen,"SeaGrassFrozen");
 		GameRegistry.registerBlock(SeaGrassFlowing,"SeaGrassFlowing");
+
+		GameRegistry.registerBlock(FireBrick, "FireBrick");
+		GameRegistry.registerBlock(MetalSheet, "MetalSheet");
 
 		// Wooden Doors
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
@@ -677,10 +681,13 @@ public class TFCBlocks
 		TFCBlocks.FreshWaterStill  = (new BlockFreshWaterStill(TFCBlockID.FreshWaterStill)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water").setCreativeTab(CreativeTabs.tabDecorations);;
 		TFCBlocks.HotWaterFlowing = (new BlockHotWaterFlowing(TFCBlockID.HotWaterFlowing)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water");
 		TFCBlocks.HotWaterStill  = (new BlockHotWaterStill(TFCBlockID.HotWaterStill)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water");
-		
+
 		TFCBlocks.SeaGrassStill = new BlockTallSeaGrassStill(TFCBlockID.SeaGrassStill).setUnlocalizedName("SeaGrassStill").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 		TFCBlocks.SeaGrassFrozen = (new BlockFrozenSeaGrass(TFCBlockID.SeaGrassFrozen)).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("seagrassice");
 		TFCBlocks.SeaGrassFlowing = new BlockTallSeaGrassFlowing(TFCBlockID.SeaGrassFlowing).setUnlocalizedName("SeaGrassFlowing").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
+
+		TFCBlocks.FireBrick = new BlockFireBrick(TFCBlockID.FireBrick).setUnlocalizedName("FireBrick").setHardness(8);
+		TFCBlocks.MetalSheet = new BlockMetalSheet(TFCBlockID.MetalSheet).setUnlocalizedName("MetalSheet").setHardness(8).setResistance(20f);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);
