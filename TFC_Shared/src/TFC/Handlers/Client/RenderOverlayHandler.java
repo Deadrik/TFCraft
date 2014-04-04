@@ -7,7 +7,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.GuiIngameForge;
@@ -26,11 +25,9 @@ import TFC.Core.Player.BodyTempStats;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Items.ItemArrow;
 import TFC.Items.ItemQuiver;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemCustomHoe;
-import TFC.Items.Tools.ItemJavelin;
 
 public class RenderOverlayHandler 
 {
@@ -75,17 +72,17 @@ public class RenderOverlayHandler
 		//Render Arrow and Javelin for Quiver
 		if(getQuiver()!=null && getQuiver().getItem() instanceof ItemQuiver){
 			fontrenderer = mc.fontRenderer;
-			
+
 			this.drawTexturedModalRect(1, sr.getScaledHeight() - 34, 0, 78, 16, 16);
 			this.drawTexturedModalRect(1, sr.getScaledHeight() - 17, 0, 94, 16, 16);
-			
+
 			fontrenderer.drawString("" +getQuiverArrows(), 20,  sr.getScaledHeight() - 30, Color.white.getRGB());
 			fontrenderer.drawString("" +getQuiverJavelins(), 20,  sr.getScaledHeight() - 13, Color.white.getRGB());
-			
+
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			TFC_Core.bindTexture(tfcicons);
 		}
-		
+
 		PlayerInfo playerclient = PlayerManagerTFC.getInstance().getClientPlayer();
 		if(playerclient != null && mc.playerController.func_78763_f())
 		{
@@ -93,7 +90,7 @@ public class RenderOverlayHandler
 
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 0, 90, 10);
 			float maxHealth = mc.thePlayer.getMaxHealth();
-			float percentHealth = mc.thePlayer.getHealth()/maxHealth;
+			float percentHealth = Math.min(mc.thePlayer.getHealth()/maxHealth, 1.0f);
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
 
 			//Draw Food and Water
@@ -191,7 +188,7 @@ public class RenderOverlayHandler
 	private int getQuiverArrows(){
 		return ((ItemQuiver)(TFCItems.Quiver)).getQuiverArrows(getQuiver());
 	}
-	
+
 	private int getQuiverJavelins(){
 		return ((ItemQuiver)(TFCItems.Quiver)).getQuiverJavelins(getQuiver());
 	}
