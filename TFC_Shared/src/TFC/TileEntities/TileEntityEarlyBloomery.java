@@ -191,17 +191,20 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 			}
 
 			/* Calculate how much ore the bloomery can hold. */
-			if(isStackValid(xCoord+direction[0], yCoord+3, zCoord+direction[1])) {
-				maxCount = 16;
+			if(isStackValid(xCoord+direction[0], yCoord+3, zCoord+direction[1]) && 
+					isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]) && 
+					isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
+				maxCount = 24;
 			}
-			else if(isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1])) {
-				maxCount = 12;
+			else if(isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]) &&
+					isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
+				maxCount = 16;
 			}
 			else if(isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
 				maxCount = 8;
 			}
 
-			int moltenHeight = count-1;
+			int moltenHeight = (count/2)-1;
 			/*Fill the bloomery stack with molten ore. */
 			for (int i = bloomeryLit ? 0:1, j = bloomeryLit ? moltenHeight+7 : moltenHeight; j > 0; i++,j-=8)
 			{
@@ -236,16 +239,18 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 					}
 				}
 			}
-			/*Create a list of all the items that are falling into the stack */
-			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
-					xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1], 
-					xCoord+direction[0]+1, yCoord+moltenCount+1.1, zCoord+direction[1]+1));
 
 			if(moltenCount == 0) {
 				moltenCount = 1;
 			}
+
+			/*Create a list of all the items that are falling into the stack */
+			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
+					xCoord+direction[0], yCoord, zCoord+direction[1], 
+					xCoord+direction[0]+1, yCoord+(maxCount/8)+1, zCoord+direction[1]+1));
+
 			/*Make sure the list isn't null or empty and that the stack is valid 1 layer above the Molten Ore*/
-			if (list != null && !list.isEmpty() && isStackValid(xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1]) && !bloomeryLit)
+			if (list != null && !list.isEmpty() && !bloomeryLit)
 			{
 				/*Iterate through the list and check for charcoal, coke, and ore*/
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
