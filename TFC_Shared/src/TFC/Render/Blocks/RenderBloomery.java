@@ -126,7 +126,7 @@ public class RenderBloomery implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == TFCBlocks.bloomeryRenderId)
 		{
-			renderer.setRenderBounds(0F, 0F, 0F, 0.2F, 1F, 1f);
+			renderer.setRenderBounds(0.5F, 0.0F, 0F, 0.7F, 1F, 1f);
 			renderInvBlock(block, metadata, renderer);
 		}
 	}
