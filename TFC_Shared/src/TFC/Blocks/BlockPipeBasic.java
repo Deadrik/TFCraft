@@ -1,22 +1,12 @@
 package TFC.Blocks;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -24,6 +14,9 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.IPipeConnectable;
 import TFC.API.TFCOptions;
+import TFC.Core.TFCTabs;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPipeBasic extends BlockTerra implements IPipeConnectable
 {
@@ -32,7 +25,7 @@ public class BlockPipeBasic extends BlockTerra implements IPipeConnectable
 	public BlockPipeBasic(int par1, Material material) 
 	{
 		super(par1, material);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 	}
 
 	@Override

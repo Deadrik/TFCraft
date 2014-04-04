@@ -28,6 +28,7 @@ public class BlockCobble extends BlockTerra
 	protected BlockCobble(int i, Material material)
 	{
 		super(i, material);
+		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
 	protected String[] names;

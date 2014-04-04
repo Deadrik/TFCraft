@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
@@ -25,6 +26,7 @@ public class BlockFlora extends BlockTerra
 		MetaNames = new String[]{"Golden Rod", "Cat Tails"};
 		icons = new Icon[MetaNames.length];
 		this.setBlockBounds(0.3f, 0.0f, 0.3f, 0.7f, 0.7f, 0.7f);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 
 	@Override

@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,6 +22,7 @@ import TFC.TFCItems;
 import TFC.API.ICustomCollision;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.CollisionRayTraceStandard;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityEarlyBloomery;
 
@@ -41,7 +41,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	public BlockEarlyBloomery(int i)
 	{
 		super(i, Material.rock);
-		this.setCreativeTab(CreativeTabs.tabRedstone);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 		setBlockBounds(0.0F, 0.0F, 0.0f, 0.0f, 0.0F, 0.0F);
 	}
 

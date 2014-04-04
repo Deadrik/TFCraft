@@ -23,6 +23,7 @@ import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.API.Crafting.AnvilReq;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TileEntityAnvil;
 import cpw.mods.fml.relauncher.Side;
@@ -37,7 +38,7 @@ public class BlockAnvil extends BlockTerraContainer
 	public BlockAnvil(int i)
 	{
 		super(i, Material.iron);
-		this.setCreativeTab(CreativeTabs.tabRedstone);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 	}
 
 	public BlockAnvil(int i, int offset)
