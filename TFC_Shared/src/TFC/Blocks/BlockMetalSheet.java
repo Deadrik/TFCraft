@@ -16,6 +16,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ICustomCollision;
@@ -122,17 +123,17 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 		double yMin = 0;
 
 		if(te.TopExists())
-			list.add(AxisAlignedBB.getBoundingBox(0.0, f1, 0.0, 1.0, 1.0, 1.0));
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0, f1, 0.0, 1.0, 1.0, 1.0), 0});
 		if(te.BottomExists())
-			list.add(AxisAlignedBB.getBoundingBox(0.0, 0, 0.0, 1.0, f0, 1.0));
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0, 0, 0.0, 1.0, f0, 1.0), 1});
 		if(te.NorthExists())
-			list.add(AxisAlignedBB.getBoundingBox(0, yMin, 0, 1, yMax, f0));
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0, yMin, 0, 1, yMax, f0), 2});
 		if(te.SouthExists())
-			list.add(AxisAlignedBB.getBoundingBox(0, yMin, f1, 1, yMax, 1));
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0, yMin, f1, 1, yMax, 1), 3});
 		if(te.EastExists())
-			list.add(AxisAlignedBB.getBoundingBox(0, yMin, 0, f0, yMax, 1));
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0, yMin, 0, f0, yMax, 1), 4});
 		if(te.WestExists())
-			list.add(AxisAlignedBB.getBoundingBox(f1, yMin, 0, 1, yMax, 1));
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(f1, yMin, 0, 1, yMax, 1), 5});
 	}
 
 
@@ -140,76 +141,62 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	@Override
 	public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB aabb, List list, Entity entity)
 	{
-		ArrayList<AxisAlignedBB> l = new ArrayList<AxisAlignedBB>();
+		ArrayList<Object[]> l = new ArrayList<Object[]>();
 		addCollisionBoxesToList(world,i,j,k,l);
-		for(AxisAlignedBB a : l)
+		for(Object[] o : l)
 		{
-			this.setBlockBounds((float)a.minX, (float)a.minY, (float)a.minZ, (float)a.maxX, (float)a.maxY, (float)a.maxZ);
-			super.addCollisionBoxesToList(world, i, j, k, aabb, list, entity);
+			AxisAlignedBB a = (AxisAlignedBB)o[0];
+			if (a != null && aabb.intersectsWith(a))
+			{
+				list.add(a);
+			}
 		}
-		//this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		//setBlockBoundsBasedOnState(world,i,j,k);
 	}
 
 	@Override
 	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 player, Vec3 view)
 	{
-		MovingObjectPosition mop =CollisionRayTraceStandard.collisionRayTrace(this, world, x, y, z, player, view);
-		return mop;
+		return CollisionRayTraceStandard.collisionRayTrace(this, world, x, y, z, player, view);
+	}
+
+	@Override
+	public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side)
+	{
+		TEMetalSheet te = (TEMetalSheet)world.getBlockTileEntity(x, y, z);
+		switch(side)
+		{
+		case UP:return te.TopExists();
+		case DOWN:return te.BottomExists();
+		case NORTH:return te.NorthExists();
+		case SOUTH:return te.SouthExists();
+		case EAST:return te.EastExists();
+		case WEST:return te.WestExists();
+		default: return false;
+		}
 	}
 
 	/*@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z)
+	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
-		TEMetalSheet te = (TEMetalSheet) access.getBlockTileEntity(x, y, z);
-		float minX = 1;
-		float maxX = 0;
-		float minY = 1;
-		float maxY = 0;
-		float minZ = 1;
-		float maxZ = 0;
-
-		if(te.TopExists())
+		if(!world.isRemote)
 		{
-			maxY = Math.max(1f, maxY);
-			minY = Math.min(0.9375f, minY);
+			Vec3 posVec = player.getPosition(1.0F);
+			Vec3 lookVec = player.getLookVec();
+			Vec3 vec32 = posVec.addVector(lookVec.xCoord * 5, lookVec.yCoord * 5, lookVec.zCoord * 5f);
+			MovingObjectPosition mop = world.clip(posVec, vec32);
+			if(mop != null)
+			{
+				Object[] o = (Object[])mop.hitInfo;
+				if(o != null && o.length > 1)
+				{
+					TEMetalSheet te = (TEMetalSheet)world.getBlockTileEntity(x, y, z);
+					te.toggleBySide((Integer)o[1], false);
+					return true;
+				}	
+			}
+
+			return world.setBlockToAir(x, y, z);
 		}
-
-		if(te.BottomExists())
-		{
-			maxY = Math.max(0.0625f, maxY);
-			minY = Math.min(0, minY);
-		}
-
-		if(te.NorthExists())
-		{
-			maxZ = Math.max(0.0625f, maxZ);
-			minZ = Math.min(0, minZ);
-		}
-
-		if(te.SouthExists())
-		{
-			maxZ = Math.max(1f, maxZ);
-			minZ = Math.min(0.9375f, minZ);
-		}
-
-		if(te.EastExists())
-		{
-			maxX = Math.max(0.0625f, maxX);
-			minX = Math.min(0, minX);
-		}
-
-		if(te.WestExists())
-		{
-			maxX = Math.max(1f, maxX);
-			minX = Math.min(0.9375f, minX);
-		}
-
-		setBlockBounds(minX,minY,minZ,maxX,maxY,maxZ);
-	}*/
-
-	/*public void setBlockBoundsBasedOnSelection(IBlockAccess access, int x, int y, int z) 
-	{
-		setBlockBoundsBasedOnState(access,x,y,z);
+		return false;
 	}*/
 }
