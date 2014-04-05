@@ -38,12 +38,12 @@ public class CollisionRayTraceStandard
 			}
 			if (min != null)
 			{
-
-				((Block) b).setBlockBounds(0, 0, 0, 1, 1, 1);
+				AxisAlignedBB aabb = (AxisAlignedBB)min[3];
+				((Block) b).setBlockBounds((float)aabb.minX, (float)aabb.minY,(float)aabb.minZ,(float)aabb.maxX,(float)aabb.maxY,(float)aabb.maxZ);
 				CollisionRayTraceStandard.rayTraceBound(
 						AxisAlignedBB.getBoundingBox(((Block) b).getBlockBoundsMinX(), ((Block) b).getBlockBoundsMinY(), ((Block) b).getBlockBoundsMinZ(),
 								((Block) b).getBlockBoundsMaxX(), ((Block) b).getBlockBoundsMaxY(), ((Block) b).getBlockBoundsMaxZ()), x, y, z, player, view);
-				((Block) b).setBlockBounds(1, 1, 1, 1, 1, 1);
+				((Block) b).setBlockBoundsBasedOnState(world, x, y, z);
 
 				return new MovingObjectPosition(x, y, z, (Byte) min[1], ((Vec3) min[0]).addVector(x, y, z));
 			}
@@ -136,7 +136,7 @@ public class CollisionRayTraceStandard
 		{
 			side = 3;
 		}
-		return new Object[] { tracedBound, side, player.distanceTo(tracedBound) };
+		return new Object[] { tracedBound, side, player.distanceTo(tracedBound), bound };
 	}
 
 	public static List<Object[]> rayTraceSubBlocks(ICustomCollision b, World world, Vec3 player, Vec3 view, int i, int j, int k, List<Object[]> returns)
@@ -149,7 +149,7 @@ public class CollisionRayTraceStandard
 
 			if (ret != null)
 			{
-				returns.add(new Object[] { ret[0], ret[1], ret[2] });
+				returns.add(new Object[] { ret[0], ret[1], ret[2], ret[3] });
 			}
 		}
 

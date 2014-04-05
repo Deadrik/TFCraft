@@ -37,6 +37,12 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	}
 
 	@Override
+	public Icon getIcon(int side, int meta)
+	{
+		return icons[19];
+	}
+
+	@Override
 	public int idDropped(int i, Random random, int j)
 	{
 		return 0;
@@ -100,7 +106,10 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	public Icon getBlockTexture(IBlockAccess access, int i, int j, int k, int meta)
 	{
 		TEMetalSheet te = (TEMetalSheet) access.getBlockTileEntity(i, j, k);
-		return icons[te.metalID];
+		if(te!= null)
+			return icons[te.metalID];
+		else
+			return icons[19];
 	}
 
 	@Override
@@ -145,7 +154,8 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	@Override
 	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 player, Vec3 view)
 	{
-		return CollisionRayTraceStandard.collisionRayTrace(this, world, x, y, z, player, view);
+		MovingObjectPosition mop =CollisionRayTraceStandard.collisionRayTrace(this, world, x, y, z, player, view);
+		return mop;
 	}
 
 	/*@Override
