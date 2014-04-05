@@ -3,9 +3,12 @@ package TFC.Handlers.Client;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundPoolEntry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.sound.PlayBackgroundMusicEvent;
+import net.minecraftforge.client.event.sound.PlaySoundEvent17;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import TFC.Reference;
 import TFC.Core.TFC_Sounds;
@@ -16,20 +19,24 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class SoundHandler
 {
-	private final List<SoundPoolEntry> TFCMusic = Lists.newArrayList();
+	private ISound iSound;
 
 	@SubscribeEvent
-	public void onSoundLoad(SoundLoadEvent event)
+	public void onSound17(PlaySoundEvent17 event)
 	{
-		for (String soundFile : TFC_Sounds.musicFiles)
-			TFCMusic.add(new SoundPoolEntry(new ResourceLocation(Reference.ModID, soundFile), 0, 1, true));
-	}
-
-	@SubscribeEvent
-	public void onBackgroundMusic(PlayBackgroundMusicEvent event)
-	{
-		int m = new Random().nextInt(TFCMusic.size());
-		/*if(TFC_Settings.enableDebugMode) System.out.println("Playing " + TFCMusic.get(m).func_110458_a());*/
-		event.result = TFCMusic.get(m);
+		if(event.category.getCategoryName().equalsIgnoreCase("music"))
+		{
+			//System.out.println("Now Playing: " + event.sound.getPositionedSoundLocation().getResourcePath() + " : " + event.manager.isSoundPlaying(iSound));
+			if(event.manager.isSoundPlaying(iSound))
+			{
+				event.result = null;
+			}
+			else
+			{
+				iSound = PositionedSoundRecord.func_147673_a(new ResourceLocation(Reference.ModID + ":music.tfc"));
+				//System.out.println("START Playing: " + event.name + " : " + iSound.getPositionedSoundLocation().getResourcePath());
+				event.result = iSound;
+			}
+		}
 	}
 }
