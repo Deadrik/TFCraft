@@ -364,7 +364,6 @@ public class FoodStatsTFC
 			break;
 		default:
 			break;
-
 		}
 	}
 

@@ -113,13 +113,12 @@ public class HeatIndex
 			if(is.hasTagCompound())
 			{
 				NBTTagCompound nbt = is.getTagCompound();
-				for(Object o : in.getTagCompound().getTags())
+				for(Object o : in.getTagCompound().func_150296_c())
 				{
 					NBTBase n = (NBTBase)o;
-					if(nbt.hasKey(n.getName()))
-						nbt.removeTag(n.getName());
-
-					nbt.getTags().add(o);
+					if(nbt.hasKey(n.toString()))
+						nbt.removeTag(n.toString());
+					nbt.func_150296_c().add(o);
 				}
 			}
 			else

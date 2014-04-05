@@ -63,7 +63,8 @@ public class BodyTempStats
 				(temperatureLevel >=-10 && temperatureLevel <=10)))
 			tellPlayerMessage(player);
 		prevTemperatureLevel = temperatureLevel;
-		if(temperatureLevel >= -10 && temperatureLevel <= 10){
+		if(temperatureLevel >= -10 && temperatureLevel <= 10)
+		{
 			extraFoodConsumed = 0;
 			extraWaterConsumed = 0;
 		}
@@ -175,9 +176,10 @@ public class BodyTempStats
 */
 	}
 
-	private void killPlayer(EntityPlayer player){
-		/*player.inventory.dropAllItems();
-		player.setHealth(0);	*/	
+	private void killPlayer(EntityPlayer player)
+	{
+		player.inventory.dropAllItems();
+		player.setHealth(0);
 	}
 
 	public void readNBT(NBTTagCompound nbt)

@@ -8,8 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 public class PlayerManagerTFC
 {
 	public List<PlayerInfo> Players;
-
 	private static final PlayerManagerTFC instance = new PlayerManagerTFC();
+
 	public static final PlayerManagerTFC getInstance()
 	{
 		return instance;

@@ -127,7 +127,6 @@ public class TerraFirmaCraft
 		GameRegistry.registerWorldGenerator(new WorldGenFissure(Blocks.lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
 		//Surface Hotsprings
 		GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
-
 		GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);
 		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor(), 3);
 		GameRegistry.registerWorldGenerator(new WorldGenForests(), 4);
@@ -157,22 +156,16 @@ public class TerraFirmaCraft
 	}
 
 	@EventHandler
-	public void load(FMLInitializationEvent event)
-	{
-		//Register Achievements
-		MinecraftForge.EVENT_BUS.register(new TFC_Achievements());
-	}
-
-	@EventHandler
 	public void initialize(FMLInitializationEvent event)
 	{
 		// Register Packet Handler
-		//NetworkRegistry.INSTANCE.registerConnectionHandler(new PacketHandler());
-//		packetPipeline.initalise();
+		packetPipeline.initalise();
 		//Register all of the recipes
 		Recipes.registerRecipes();
 		//Register the tool classes
 		proxy.registerToolClasses();
+		//Register Achievements
+		MinecraftForge.EVENT_BUS.register(new TFC_Achievements());
 		// Register Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new CraftingHandler());
 		// Register the Entity Spawn Handler

@@ -32,14 +32,14 @@ public class PlayerInfo
 
 	public SkillStats tempSkills;
 
-	public PlayerInfo(String name, UUID uuid) //, NetworkManager nm)
+	public PlayerInfo(String name, UUID uuid, NetworkManager nm)
 	{
 		Name = name;
 		PlayerUUID = uuid;
 		ChiselMode = 0;
 		specialCraftingType = null;
 		specialCraftingTypeAlternate = null;
-//		networkManager = nm;
+		networkManager = nm;
 		lastChange = 0;
 		hoeMode = 0;
 		knappingInterface = new boolean[25];

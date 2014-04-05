@@ -1,5 +1,6 @@
 package TFC.Core.Player;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
@@ -14,7 +15,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
-import cpw.mods.fml.common.network.FMLNetworkEvent.ServerConnectionFromClientEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ServerDisconnectionFromClientEvent;
 
 public class PlayerTracker
@@ -22,18 +23,27 @@ public class PlayerTracker
 	@SubscribeEvent
 	public void onPlayerLoggedIn(PlayerLoggedInEvent event)
 	{
-		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(event.player.getDisplayName(), event.player.getUniqueID()));
+		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
+				event.player.getDisplayName(),
+				event.player.getUniqueID(),
+				Minecraft.getMinecraft().getNetHandler().getNetworkManager()));
+
 		System.out.println("-----------------------------Sending InitClientWorldPacket");
 		AbstractPacket pkt = new InitClientWorldPacket(event.player);
 		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
 	}
 
-//	@SubscribeEvent
-	public void onClientConnect(ServerConnectionFromClientEvent event)
+	@SubscribeEvent
+	public void onClientConnect(ClientConnectedToServerEvent event)
 	{
+		System.out.println("-----------------------------CLIENT CONNECT EVENT------------------");
+		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
+				Minecraft.getMinecraft().thePlayer.getDisplayName(),
+				Minecraft.getMinecraft().thePlayer.getUniqueID(),
+				event.manager));
 	}
 
-//	@SubscribeEvent
+	@SubscribeEvent
 	public void onClientDisconnect(ServerDisconnectionFromClientEvent event)
 	{
 //			PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(event.manager.clientHandler.getPlayer().username, manager));

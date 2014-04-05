@@ -139,3 +139,15 @@ entity.Deer.name=Deer
 entity.irongolem.name=Iron Golem
 entity.Pheasant.name=Pheasant
 entity.Horse.name=Horse
+
+=======Achievements=======
+achievement.TFC.achLooseRock=Definitely a rock
+achievement.TFC.achLooseRock.desc=Pick up a rock
+achievement.TFC.achSmallOre=No stone unturned
+achievement.TFC.achSmallOre.desc=Find an ore nugget
+achievement.TFC.achWildVegetable=Gatherer
+achievement.TFC.achWildVegetable.desc=Find a wild vegetable
+achievement.TFC.achRutabaga=Stupid onions...
+achievement.TFC.achRutabaga.desc=Find a rutabaga
+achievement.TFC.achDiamond=DIAM- oh wait, no
+achievement.TFC.achDiamond.desc=Find a diamond
