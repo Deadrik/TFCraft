@@ -91,7 +91,6 @@ import TFC.Items.Tools.ItemGoldPan;
 import TFC.Items.Tools.ItemHammer;
 import TFC.Items.Tools.ItemJavelin;
 import TFC.Items.Tools.ItemMiscToolHead;
-import TFC.Items.Tools.ItemPlan;
 import TFC.Items.Tools.ItemProPick;
 import TFC.Items.Tools.ItemSpindle;
 import TFC.Items.Tools.ItemWritableBookTFC;
@@ -1554,26 +1553,6 @@ public class TFCItems
 
 		Jute = new ItemTerra(TFCItemID.jute).setFolder("plants/").setUnlocalizedName("Jute").setCreativeTab(TFCTabs.TFCMaterials);
 		JuteFibre = new ItemTerra(TFCItemID.juteFibre).setFolder("plants/").setUnlocalizedName("Jute Fibre").setCreativeTab(TFCTabs.TFCMaterials);
-
-		// Plans
-		PickaxeHeadPlan = new ItemPlan(TFCItemID.PickaxeHeadPlan).setUnlocalizedName("PickaxeHeadPlan");
-		ShovelHeadPlan = new ItemPlan(TFCItemID.ShovelHeadPlan).setUnlocalizedName("ShovelHeadPlan");
-		HoeHeadPlan = new ItemPlan(TFCItemID.HoeHeadPlan).setUnlocalizedName("HoeHeadPlan");
-		AxeHeadPlan = new ItemPlan(TFCItemID.AxeHeadPlan).setUnlocalizedName("AxeHeadPlan");
-		HammerHeadPlan = new ItemPlan(TFCItemID.HammerHeadPlan).setUnlocalizedName("HammerHeadPlan");
-		ChiselHeadPlan = new ItemPlan(TFCItemID.ChiselHeadPlan).setUnlocalizedName("ChiselHeadPlan");
-		SwordBladePlan = new ItemPlan(TFCItemID.SwordBladePlan).setUnlocalizedName("SwordBladePlan");
-		MaceHeadPlan = new ItemPlan(TFCItemID.MaceHeadPlan).setUnlocalizedName("MaceHeadPlan");
-		SawBladePlan = new ItemPlan(TFCItemID.SawBladePlan).setUnlocalizedName("SawBladePlan");
-		ProPickHeadPlan = new ItemPlan(TFCItemID.ProPickHeadPlan).setUnlocalizedName("ProPickHeadPlan");
-		HelmetPlan = new ItemPlan(TFCItemID.HelmetPlan).setUnlocalizedName("HelmetPlan");
-		ChestplatePlan = new ItemPlan(TFCItemID.ChestplatePlan).setUnlocalizedName("ChestplatePlan");
-		GreavesPlan = new ItemPlan(TFCItemID.GreavesPlan).setUnlocalizedName("GreavesPlan");
-		BootsPlan = new ItemPlan(TFCItemID.BootsPlan).setUnlocalizedName("BootsPlan");
-		ScythePlan = new ItemPlan(TFCItemID.ScythePlan).setUnlocalizedName("ScythePlan");
-		KnifePlan = new ItemPlan(TFCItemID.KnifePlan).setUnlocalizedName("KnifePlan");
-		BucketPlan = new ItemPlan(TFCItemID.BucketPlan).setUnlocalizedName("BucketPlan");
-		JavelinHeadPlan = new ItemPlan(TFCItemID.JavelinHeadPlan).setUnlocalizedName("JavelinHeadPlan");
 
 		// Food related items
 		SetupFood();
