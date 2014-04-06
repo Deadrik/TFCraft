@@ -21,7 +21,7 @@ public class TFC_Achievements {
 	public static Achievement achAnvil;
 	public static Achievement achQuern;
 	
-	private static int achievementIndex = 1000;
+	private static int achievementIndex = 5536123;
 	private static ArrayList<Achievement> achlist;
 	
 	public static AchievementPage pageBiome;
