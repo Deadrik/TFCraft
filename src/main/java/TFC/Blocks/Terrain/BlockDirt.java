@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.Blocks.BlockTerra;
-import TFC.Entities.EntityFallingStone;
+import TFC.Core.TFC_Sounds;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -113,10 +114,11 @@ public class BlockDirt extends BlockTerra
 				}
 				else
 				{
-					EntityFallingStone ent = new EntityFallingStone(world, i + 0.5F, j + 0.5F, k + 0.5F, this, meta);
+					//EntityFallingStone ent = new EntityFallingStone(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), this, meta);
+					EntityFallingBlock ent = new EntityFallingBlock(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), this, meta);
 					world.spawnEntityInWorld(ent);
 					Random R = new Random(i*j+k);
-					world.playSoundAtEntity(ent, "dirt.slide.short", 1.0F, 0.8F + (R.nextFloat()/2));
+					world.playSoundAtEntity(ent, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
 				}
 			}
 		}

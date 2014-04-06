@@ -9,7 +9,9 @@ import TFC.Core.Player.PlayerManagerTFC;
 public class KnappingUpdatePacket extends AbstractPacket
 {
 	private int index;
-	
+
+	public KnappingUpdatePacket(){}
+
 	public KnappingUpdatePacket(int i)
 	{
 		index = i;

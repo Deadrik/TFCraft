@@ -8,12 +8,14 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.Util.Helper;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Sounds;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -146,7 +148,7 @@ public class CraftingHandler// implements ICraftingHandler
 			else if(item instanceof ItemIngot)
 			{
 				if(player.worldObj.rand.nextInt(20) == 0)
-					player.playSound("player.ceramicbreak", 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+					player.playSound(TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
 				else if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1)))
 					player.entityDropItem(new ItemStack(TFCItems.CeramicMold, 1, 1), 1);
 				float temperature = 0;

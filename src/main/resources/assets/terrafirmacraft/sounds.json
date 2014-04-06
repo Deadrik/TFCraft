@@ -1,5 +1,5 @@
 {
-  "player.ceramicbreak": {
+  "item.ceramicbreak": {
     "category": "ambient",
     "sounds": [
       "ceramicbreak1"
@@ -64,12 +64,12 @@
 
   "music.tfc": {
     "category": "music",
-	"sounds": [
-	  {"name": "music/m0", "stream": true},
-	  {"name": "music/m1", "stream": true},
-	  {"name": "music/m2", "stream": true},
-	  {"name": "music/m3", "stream": true},
-	  {"name": "music/m4", "stream": true}
-	]
+    "sounds": [
+      {"name": "music/m0", "stream": true},
+      {"name": "music/m1", "stream": true},
+      {"name": "music/m2", "stream": true},
+      {"name": "music/m3", "stream": true},
+      {"name": "music/m4", "stream": true}
+    ]
   }
 }

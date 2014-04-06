@@ -151,3 +151,317 @@ achievement.TFC.achRutabaga=Stupid onions...
 achievement.TFC.achRutabaga.desc=Find a rutabaga
 achievement.TFC.achDiamond=DIAM- oh wait, no
 achievement.TFC.achDiamond.desc=Find a diamond
+
+#=======
+#= GUI =
+#=======
+#== Anvil GUI ==
+gui.Anvil.Plans=Plans
+gui.Anvil.Weld=Weld
+
+gui.Anvil.LightHit=Light Hit
+gui.Anvil.MediumHit=Medium Hit
+gui.Anvil.HeavyHit=Heavy Hit
+gui.Anvil.Draw=Draw
+
+gui.Anvil.Punch=Punch
+gui.Anvil.Bend=Bend
+gui.Anvil.Upset=Upset
+gui.Anvil.Shrink=Shrink
+
+gui.Anvil.Rules=Rules
+gui.Anvil.Rule1=Any
+gui.Anvil.Rule10=Punch, Last
+gui.Anvil.Rule11=Punch, Second From Last
+gui.Anvil.Rule12=Punch, Third From Last
+gui.Anvil.Rule13=Punch, Last Two
+gui.Anvil.Rule14=Punch, Last Three
+gui.Anvil.Rule15=Punch, Not Last
+gui.Anvil.Rule16=Shrink, Any
+gui.Anvil.Rule17=Shrink, Last
+gui.Anvil.Rule18=Shrink, Second From Last
+gui.Anvil.Rule19=Shrink, Third From Last
+gui.Anvil.Rule2=Hit, Any
+gui.Anvil.Rule20=Shrink, Last Two
+gui.Anvil.Rule21=Shrink, Last Three
+gui.Anvil.Rule22=Shrink, Not Last
+gui.Anvil.Rule23=Draw, Any
+gui.Anvil.Rule24=Draw, Last
+gui.Anvil.Rule25=Draw, Second From Last
+gui.Anvil.Rule26=Draw, Third From Last
+gui.Anvil.Rule27=Draw, Last Two
+gui.Anvil.Rule28=Draw, Last Three
+gui.Anvil.Rule29=Draw, Not Last
+gui.Anvil.Rule3=Hit, Last
+gui.Anvil.Rule30=Upset, Any
+gui.Anvil.Rule31=Upset, Last
+gui.Anvil.Rule32=Upset, Second From Last
+gui.Anvil.Rule33=Upset, Third From Last
+gui.Anvil.Rule34=Upset, Last Two From Last
+gui.Anvil.Rule35=Upset, Last Three
+gui.Anvil.Rule36=Upset, Not Last
+gui.Anvil.Rule37=Bend, Any
+gui.Anvil.Rule38=Bend, Last
+gui.Anvil.Rule39=Bend, Second From Last
+gui.Anvil.Rule4=Hit, Second From Last
+gui.Anvil.Rule40=Bend, Third From Last
+gui.Anvil.Rule41=Bend, Last Two
+gui.Anvil.Rule42=Bend, Last Three
+gui.Anvil.Rule43=Bend, Not Last
+gui.Anvil.Rule5=Hit, Third From Last
+gui.Anvil.Rule6=Hit, Last Two
+gui.Anvil.Rule7=Hit, Last Three
+gui.Anvil.Rule8=Hit, Not Last
+gui.Anvil.Rule9=Punch, Any
+
+#== Tools/Weapons/Armor GUI ==
+gui.Armor.Advanced=Advanced
+gui.Armor.Shift=Shift
+gui.Armor.ForgedBy=Forged By
+gui.Armor.Hold=Hold
+gui.Armor.Crush=Crush
+gui.Armor.Pierce=Pierce
+gui.Armor.Slash=Slash
+
+gui.Bow.Advanced=Advanced
+gui.Bow.Javelins=Javelins
+gui.Bow.Arrows=Arrows
+gui.Bow.ForgedBy=Made By
+
+gui.DamageType.Error=Error: Bad Damage Type
+gui.DamageType.Crushing=Crushing
+gui.DamageType.Piercing=Piercing
+gui.DamageType.Slashing=Slashing
+
+#== Barrel GUI ==
+gui.Barrel.Empty=Empty
+gui.Barrel.Seal=Seal
+gui.Barrel.ToggleOff=Out
+gui.Barrel.ToggleOn=In
+
+gui.Barrel.Beer=Beer
+gui.Barrel.Cider=Cider
+gui.Barrel.Rum=Rum
+gui.Barrel.RyeWhiskey=Rye Whiskey
+gui.Barrel.Sake=Sake
+gui.Barrel.Vodka=Vodka
+gui.Barrel.Whiskey=Whiskey
+gui.Barrel.Milk=Milk
+gui.Barrel.CurdledMilk=Curdled Milk
+gui.Barrel.SaltWater=Salt Water
+gui.Barrel.Vinegar=Vinegar
+gui.Barrel.Water=Water
+gui.Barrel.Limewater=Limewater
+gui.Barrel.Tannin=Tannin
+gui.Barrel.Gunpowder=Gunpowder
+
+#== Bloomery GUI ==
+gui.Bloomery.Charcoal=Charcoal
+gui.Bloomery.Ore=Ore
+gui.Bloomery.Output=Output
+
+#== Calendar GUI ==
+gui.Calendar.Calendar=Calendar
+gui.Calendar.DateBioxx=Date : Bioxx's Birthday!
+gui.Calendar.DateDunk=Date : Dunk's Birthday!
+
+gui.Calendar.Hour=Hour
+gui.Calendar.WitchHour=The Witching Hour
+
+gui.Calendar.Day=Day
+gui.Calendar.Sunday=Sunday
+gui.Calendar.Monday=Monday
+gui.Calendar.Tuesday=Tuesday
+gui.Calendar.Wednesday=Wednesday
+gui.Calendar.Thursday=Thursday
+gui.Calendar.Friday=Friday
+gui.Calendar.Saturday=Saturday
+
+gui.Calendar.Season=Season
+gui.Calendar.EarlySpring=Early Spring
+gui.Calendar.Spring=Spring
+gui.Calendar.LateSpring=Late Spring
+gui.Calendar.EarlySummer=Early Summer
+gui.Calendar.Summer=Summer
+gui.Calendar.LateSummer=Late Summer
+gui.Calendar.EarlyAutumn=Early Autumn
+gui.Calendar.Autumn=Autumn
+gui.Calendar.LateAutumn=Late Autumn
+gui.Calendar.EarlyWinter=Early Winter
+gui.Calendar.Winter=Winter
+gui.Calendar.LateWinter=Late Winter
+
+gui.Calendar.Date=Date
+gui.Calendar.January=January
+gui.Calendar.February=February
+gui.Calendar.March=March
+gui.Calendar.April=April
+gui.Calendar.May=May
+gui.Calendar.June=June
+gui.Calendar.July=July
+gui.Calendar.August=August
+gui.Calendar.September=September
+gui.Calendar.October=October
+gui.Calendar.November=November
+gui.Calendar.December=December
+
+gui.Calendar.1Hour=1 Hour
+gui.Calendar.1Day=1 Day
+gui.Calendar.1Week=1 Week
+gui.Calendar.1Month=1 Month
+gui.Calendar.1Year=1 Year
+
+#== Food Prep GUI ==
+gui.FoodPrep.CreateMeal=Create
+gui.FoodPrep.Effect=Effect
+gui.FoodPrep.Energy=Energy
+gui.FoodPrep.Filling=Filling
+gui.FoodPrep.Power=Power
+
+#== Metals ==
+gui.metal.Bismuth=Bismuth
+gui.metal.BismuthBronze=Bismuth Bronze
+gui.metal.BlackBronze=Black Bronze
+gui.metal.BlackSteel=Black Steel
+gui.metal.BlueSteel=Blue Steel
+gui.metal.Brass=Brass
+gui.metal.Bronze=Bronze
+gui.metal.Copper=Copper
+gui.metal.Gold=Gold
+gui.metal.HCBlackSteel=High Carbon Black Steel
+gui.metal.HCBlueSteel=High Carbon Blue Steel
+gui.metal.HCRedSteel=High Carbon Red Steel
+gui.metal.Lead=Lead
+gui.metal.Nickel=Nickel
+gui.metal.PigIron=Pig Iron
+gui.metal.Platinum=Platinum
+gui.metal.RedSteel=Red Steel
+gui.metal.RoseGold=Rose Gold
+gui.metal.Silver=Silver
+gui.metal.Steel=Steel
+gui.metal.SterlingSilver=Sterling Silver
+gui.metal.Tin=Tin
+gui.metal.Unknown=Unknown
+gui.metal.WeakBlueSteel=Weak Blue Steel
+gui.metal.WeakRedSteel=Weak Red Steel
+gui.metal.WeakSteel=Weak Steel
+gui.metal.WroughtIron=Wrought Iron
+gui.metal.Zinc=Zinc
+
+#== Plans GUI ==
+gui.plans.axe=Axe
+gui.plans.bootsplate=Boots
+gui.plans.bucket=Bucket
+gui.plans.chestplate=Chestplate
+gui.plans.chisel=Chisel
+gui.plans.hammer=Hammer
+gui.plans.helmplate=Helmet
+gui.plans.hoe=Hoe
+gui.plans.javelin=Javelin
+gui.plans.knife=Knife
+gui.plans.legsplate=Leggings
+gui.plans.mace=Mace
+gui.plans.pickaxe=Pickaxe
+gui.plans.propick=Prospector's Pickaxe
+gui.plans.refinebloom=Refine
+gui.plans.saw=Saw
+gui.plans.scythe=Scythe
+gui.plans.sheet=Sheet
+gui.plans.shovel=Shovel
+gui.plans.splitbloom=Split
+gui.plans.sword=Sword
+gui.plans.tuyere=Tuyere
+
+#== Misc GUI ==
+gui.Blueprint=Blueprint
+gui.fertilized=Fertilized
+gui.Inventory=Inventory
+gui.ClearSlot=Clear an output slot.
+gui.LogPile=Log Pile
+gui.Scribe.Write=Write
+gui.done=Done
+gui.Sluice.Soil=Soil
+gui.Sluice=Sluice
+gui.Workbench.Crafting=Crafting
+
+#== Tooltips ==
+gui.ShowHelp=?8Help: (Hold ?fShift?8)
+gui.Help=?8Help:
+gui.Clay.Inst0=?bRight Click ?7with 5 in a stack to shape.
+gui.Knife.Inst0=?bRight Click ?7the top of a block with a 
+gui.Knife.Inst1=bowl in your inventory to create a
+gui.Knife.Inst2=meal preparation area.
+gui.Leather.Inst0=?bRight Click ?7with a knife in your inventory to cut.
+gui.LooseRock.Inst0=?bRight Click ?7with 2 in a stack to knap.
+gui.MeltedMetal.Inst0=?bRight Click ?7to pour into a tool mold.
+gui.MeltedMetal.NotFull=Not Full
+gui.PotteryBase.Inst0=Sneak and ?bRight Click ?7to place object.
+gui.PotteryVesselSmall.Inst0=Or ?bRight Click ?7to open inventory.
+
+gui.Size.Tiny=Tiny
+gui.Size.VerySmall=Very Small
+gui.Size.Small=Small
+gui.Size.Medium=Medium
+gui.Size.Large=Large
+gui.Size.VeryLarge=Very Large
+gui.Size.Huge=Huge
+
+gui.Weight.Light=Light
+gui.Weight.Medium=Medium
+gui.Weight.Heavy=Heavy
+
+gui.food.fruit=Fruit
+gui.food.vegetable=Vegetable
+gui.food.grain=Grain
+gui.food.protein=Protein
+gui.food.dairy=Dairy
+
+gui.FoodHeat.Cold=Cold
+gui.FoodHeat.Warm=Warm
+
+gui.Torch.CatchingFire=Catching Fire
+gui.Torch.Lit=Lit
+
+gui.ItemHeat.Liquid=Liquid
+gui.ItemHeat.Caution=Caution
+gui.ItemHeat.Warming=Warming
+gui.ItemHeat.Hot=Hot
+gui.ItemHeat.VeryHot=Very Hot
+gui.ItemHeat.FaintRed=Faint Red
+gui.ItemHeat.DarkRed=Dark Red
+gui.ItemHeat.BrightRed=Bright Red
+gui.ItemHeat.Orange=Orange
+gui.ItemHeat.Yellow=Yellow
+gui.ItemHeat.YellowWhite=Yellow White
+gui.ItemHeat.White=White
+gui.ItemHeat.BrilliantWhite=Brilliant White
+
+#== Chat Messages ==
+gui.GoldPan.UseEmpty=Must use on sand in or near a river. Or gravel from under a water source.
+gui.GoldPan.UseFull=Must use under flowing water.
+
+gui.ProPick.Found=Found
+gui.ProPick.FoundLarge=Found a large sample of
+gui.ProPick.FoundMedium=Found a medium sample of
+gui.ProPick.FoundNothing=Found nothing of interest.
+gui.ProPick.FoundSmall=Found a small sample of
+gui.ProPick.FoundTraces=Found traces of
+gui.ProPick.FoundVeryLarge=Found a very large sample of
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Armor
+itemGroup.TFCMaterials=(TFC) Materials
+itemGroup.TFCMisc=(TFC) Misc
+itemGroup.TFCPottery=(TFC) Pottery
+itemGroup.TFCTools=(TFC) Tools
+itemGroup.TFCUnfinished=(TFC) Unfinished Items
+itemGroup.TFCWeapons=(TFC) Weapons
+itemGroup.TFCDevices=(TFC) Devices
+
+#== Skill GUI ==
+skill.armorsmith=Armor Smithing
+skill.gensmith=General Smithing
+skill.toolsmith=Tool Smithing
+skill.weaponsmith=Weapon Smithing
+skill.agriculture=Agriculture
+skill.cooking=Cooking

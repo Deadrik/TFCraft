@@ -13,6 +13,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Sounds;
 import TFC.TileEntities.TileEntityBellows;
 
 public class BlockBellows extends BlockTerraContainer
@@ -45,7 +46,7 @@ public class BlockBellows extends BlockTerraContainer
 				teb.shouldBlow = true;
 				world.markBlockForUpdate(i, j, k);
 				//TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(i, j, k, te.createUpdatePacket(), 160);
-				world.playSoundEffect(i, j, k, "bellows.blow.air", 0.4F, 1);
+				world.playSoundEffect(i, j, k, TFC_Sounds.BELLOWS, 0.4F, 1);
 			}
 		return true;
 	}

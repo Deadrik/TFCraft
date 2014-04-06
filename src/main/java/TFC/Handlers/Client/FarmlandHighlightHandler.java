@@ -21,8 +21,8 @@ import TFC.TileEntities.TECrop;
 import TFC.TileEntities.TileEntityFarmland;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class FarmlandHighlightHandler{
-
+public class FarmlandHighlightHandler
+{
 	@SubscribeEvent
 	public void DrawBlockHighlightEvent(DrawBlockHighlightEvent evt)
 	{

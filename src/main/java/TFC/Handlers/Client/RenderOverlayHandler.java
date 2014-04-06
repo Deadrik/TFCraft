@@ -37,7 +37,11 @@ public class RenderOverlayHandler
 	@SubscribeEvent
 	public void renderText(RenderGameOverlayEvent.Chat event)
 	{
-		event.posX += 20; // Render chat window above health bar.
+		// Render chat window above health bar.
+		if(Minecraft.getMinecraft().playerController.isInCreativeMode())
+			event.posY += 4;
+		else
+			event.posY -= 12;
 	}
 
 	@SubscribeEvent

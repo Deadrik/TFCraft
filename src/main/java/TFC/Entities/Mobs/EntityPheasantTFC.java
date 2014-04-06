@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Sounds;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIFindNest;
 
@@ -161,7 +162,7 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 			setGrowingAge(-1);
 
 		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE && isAdult())
-			this.playSound("mob.rooster.cry", 10, rand.nextFloat()+0.5F);
+			this.playSound(TFC_Sounds.ROOSTERCROW, 10, rand.nextFloat()+0.5F);
 
 		if (--this.timeUntilNextEgg < 0)
 			this.timeUntilNextEgg = 0;

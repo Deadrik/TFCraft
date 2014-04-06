@@ -38,7 +38,6 @@ import TFC.Food.TFCPotion;
 import TFC.Handlers.AnvilCraftingHandler;
 import TFC.Handlers.ChatListenerTFC;
 import TFC.Handlers.ChunkDataEventHandler;
-import TFC.Handlers.ChunkEventHandler;
 import TFC.Handlers.CraftingHandler;
 import TFC.Handlers.EnteringChunkHandler;
 import TFC.Handlers.EntityDamageHandler;
@@ -59,6 +58,7 @@ import TFC.WorldGen.Generators.WorldGenLooseRocks;
 import TFC.WorldGen.Generators.WorldGenOre;
 import TFC.WorldGen.Generators.WorldGenPlants;
 import TFC.WorldGen.Generators.WorldGenSoilPits;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -122,37 +122,39 @@ public class TerraFirmaCraft
 		// Register Gui Handler
 		proxy.registerGuiHandler();
 
-		//Register Generators
-		//Underground Lava
-		GameRegistry.registerWorldGenerator(new WorldGenFissure(Blocks.lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
-		//Surface Hotsprings
-		GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
-		GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);
-		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor(), 3);
-		GameRegistry.registerWorldGenerator(new WorldGenForests(), 4);
-		GameRegistry.registerWorldGenerator(new WorldGenLooseRocks(), 5);
-		GameRegistry.registerWorldGenerator(new WorldGenSoilPits(), 6);
-		GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
-		GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
-
-		TFCWorldType.DEFAULT = new TFCWorldType("TFCDefault");
-		TFCWorldType.FLAT = new TFCWorldType("TFCFlat");
-		
-		DimensionManager.unregisterDimension(-1);
-		DimensionManager.unregisterDimension(0);
-		DimensionManager.unregisterDimension(1);
-		
-		DimensionManager.unregisterProviderType(-1);
-		DimensionManager.unregisterProviderType(0);
-		DimensionManager.unregisterProviderType(1);
-
-		DimensionManager.registerProviderType(-1, TFCProviderHell.class, true);
-		DimensionManager.registerProviderType(0, TFCProvider.class, true);
-		DimensionManager.registerProviderType(1, TFCProvider.class, true);
-
-		DimensionManager.registerDimension(-1, -1);
-		DimensionManager.registerDimension(0, 0);
-		DimensionManager.registerDimension(1, 1);
+		if(false)
+		{
+			//Register Generators
+			//Underground Lava
+			GameRegistry.registerWorldGenerator(new WorldGenFissure(Blocks.lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
+			//Surface Hotsprings
+			GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
+			GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);
+			GameRegistry.registerWorldGenerator(new WorldGenCaveDecor(), 3);
+			GameRegistry.registerWorldGenerator(new WorldGenForests(), 4);
+			GameRegistry.registerWorldGenerator(new WorldGenLooseRocks(), 5);
+			GameRegistry.registerWorldGenerator(new WorldGenSoilPits(), 6);
+			GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
+			GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
+	
+			TFCWorldType.DEFAULT = new TFCWorldType("TFCDefault");
+			TFCWorldType.FLAT = new TFCWorldType("TFCFlat");
+			
+//			DimensionManager.unregisterDimension(-1);
+//			DimensionManager.unregisterDimension(0);
+//			DimensionManager.unregisterDimension(1);
+			
+			DimensionManager.unregisterProviderType(-1);
+			DimensionManager.unregisterProviderType(0);
+			DimensionManager.unregisterProviderType(1);
+			DimensionManager.registerProviderType(-1, TFCProviderHell.class, true);
+			DimensionManager.registerProviderType(0, TFCProvider.class, true);
+			DimensionManager.registerProviderType(1, TFCProvider.class, true);
+	
+//			DimensionManager.registerDimension(-1, -1);
+//			DimensionManager.registerDimension(0, 0);
+//			DimensionManager.registerDimension(1, 1);
+		}
 	}
 
 	@EventHandler
@@ -160,33 +162,44 @@ public class TerraFirmaCraft
 	{
 		// Register Packet Handler
 		packetPipeline.initalise();
-		//Register all of the recipes
-		Recipes.registerRecipes();
+
+		//Register our player tracker
+		FMLCommonHandler.instance().bus().register(new PlayerTracker());
+
 		//Register the tool classes
 		proxy.registerToolClasses();
+
 		//Register Achievements
 		MinecraftForge.EVENT_BUS.register(new TFC_Achievements());
+
 		// Register Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new CraftingHandler());
+
 		// Register the Entity Spawn Handler
 		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
-		// Register the Entity Living Update Handler
-		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+
 		// Register the Entity Hurt Handler
 		MinecraftForge.EVENT_BUS.register(new EntityDamageHandler());
+
 		// Register Chat Listener
 		MinecraftForge.EVENT_BUS.register(new ChatListenerTFC());
+
+		// Register the Chunk Load/Save Handler
+//		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
+
 		// Register the Chunk Data Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new ChunkDataEventHandler());
 		// Register the Chunk Load/Save Handler
-		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
-		// Register the Chunk Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
+
 		// Register Anvil Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
+
 		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
-		//Register our player tracker
-		MinecraftForge.EVENT_BUS.register(new PlayerTracker());
+		
+		// Register the Entity Living Update Handler
+		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+
 		// Register all the render stuff for the client
 		proxy.registerRenderInformation();
 
@@ -195,6 +208,9 @@ public class TerraFirmaCraft
 
 		//Setup custom potion effects
 		TFCPotion.Setup();
+
+		//Register all of the recipes
+		Recipes.registerRecipes();
 
 		TFC_ItemHeat.SetupItemHeat();
 

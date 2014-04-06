@@ -62,12 +62,9 @@ public class BlockCharcoal extends BlockTerra
 			boolean isShovel = false;
 			ItemStack equip = entityplayer.getCurrentEquippedItem();
 			if(equip!=null)
-			{
 				if(equip.getItem() instanceof ItemCustomShovel)
-				{
 					isShovel = true;
-				}
-			}
+
 			if(isShovel)
 			{
 				int top = 0;
@@ -91,7 +88,6 @@ public class BlockCharcoal extends BlockTerra
 					{
 						world.setBlock(i, j, k, this, l-1, 2);
 					}
-
 					world.markBlockForUpdate(i, j, k);
 					world.markBlockForUpdate(i, j+top, k);
 				}
@@ -102,17 +98,16 @@ public class BlockCharcoal extends BlockTerra
 			{
 				world.setBlock(i, j, k, this, l, 2);
 			}
-
 			if(l == 0)
 				world.setBlockToAir(i, j, k);
 		}
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z) {
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
+	{
 		if(world.getBlockMetadata(x, y, z) > 0)
 			return false;
-
 		return super.removedByPlayer(world, player, x, y, z);
 	}
 

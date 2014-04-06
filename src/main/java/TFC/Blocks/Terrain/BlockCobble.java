@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -19,7 +20,7 @@ import TFC.Reference;
 import TFC.API.Tools.IToolChisel;
 import TFC.API.Util.Helper;
 import TFC.Blocks.BlockTerra;
-import TFC.Entities.EntityFallingStone;
+import TFC.Core.TFC_Sounds;
 import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -147,11 +148,11 @@ public class BlockCobble extends BlockTerra
 			}
 			else if (!world.isRemote)
 			{
-				EntityFallingStone ent = new EntityFallingStone(world, i + 0.5F, j + 0.5F, k + 0.5F, this, meta);
+				//EntityFallingStone ent = new EntityFallingStone(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), this, meta);
+				EntityFallingBlock ent = new EntityFallingBlock(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), this, meta);
 				world.spawnEntityInWorld(ent);
-
 				Random R = new Random(i*j+k);
-				world.playSoundAtEntity(ent, "rock.slide.short", 1.0F, 0.8F + (R.nextFloat()/2));
+				world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
 			}
 		}
 	}

@@ -3,9 +3,7 @@ package TFC.Handlers.Network;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
-import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import TFC.Core.TFC_Core;
@@ -17,121 +15,167 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 public class PlayerUpdatePacket extends AbstractPacket
 {
 	private byte flag;
-	private FoodStatsTFC foodstats;
+	private float stomachLevel;
+	private float waterLevel;
+	private float nutrFruit;
+	private float nutrVeg;
+	private float nutrGrain;
+	private float nutrProtein;
+	private float nutrDairy;
 	private SkillStats playerSkills;
 	private String skillName;
 	private int skillLevel;
 	private boolean craftingTable = false;
 	private DataInputStream dis;
-	
+
+	public PlayerUpdatePacket() {}
+
 	public PlayerUpdatePacket(EntityPlayer P, int f)
 	{
-		flag = (byte)f;
-		if(flag == 0)
+		this.flag = (byte)f;
+		if(this.flag == 0)
 		{
-			foodstats = TFC_Core.getPlayerFoodStats(P);
+			FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(P);
+			this.stomachLevel = fs.stomachLevel;
+			this.waterLevel = fs.waterLevel;
+			this.nutrFruit = fs.nutrFruit;
+			this.nutrVeg = fs.nutrVeg;
+			this.nutrGrain = fs.nutrGrain;
+			this.nutrProtein = fs.nutrProtein;
+			this.nutrDairy = fs.nutrDairy;
 		}
-		else if(flag == 2)
+		else if(this.flag == 2)
 		{
-			craftingTable = P.getEntityData().getBoolean("craftingTable");
+			this.craftingTable = P.getEntityData().getBoolean("craftingTable");
 		}
-		else if(flag == 3)
+		else if(this.flag == 3)
 		{
-			playerSkills = TFC_Core.getSkillStats(P);
+//			this.playerSkills = TFC_Core.getSkillStats(P);
 		}
 	}
 	
-	public PlayerUpdatePacket(EntityPlayer P, byte f, String s, int i)
+	public PlayerUpdatePacket(EntityPlayer P, byte f, String name, int lvl)
 	{
-		flag = f;
-		if(flag == 1)
+		this.flag = f;
+		if(this.flag == 1)
 		{
-			skillName = s;
-			skillLevel = i;
+			this.skillName = name;
+			this.skillLevel = lvl;
 		}
 	}
 
 	@Override
 	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
 	{
-		buffer.writeByte(flag);
-		if(flag == 0)
+		buffer.writeByte(this.flag);
+		if(this.flag == 0)
 		{
-			buffer.writeFloat(foodstats.stomachLevel);
-			buffer.writeFloat(foodstats.waterLevel);
+			buffer.writeFloat(this.stomachLevel);
+			buffer.writeFloat(this.waterLevel);
+			buffer.writeFloat(this.nutrFruit);
+			buffer.writeFloat(this.nutrVeg);
+			buffer.writeFloat(this.nutrGrain);
+			buffer.writeFloat(this.nutrProtein);
+			buffer.writeFloat(this.nutrDairy);
 		}
-		else if(flag == 1)
+		else if(this.flag == 1)
 		{
-			ByteBufUtils.writeUTF8String(buffer, skillName);
-			buffer.writeInt(skillLevel);
+			ByteBufUtils.writeUTF8String(buffer, this.skillName);
+			buffer.writeInt(this.skillLevel);
 		}
-		else if(flag == 2)
+		else if(this.flag == 2)
 		{
-			buffer.writeBoolean(craftingTable);
+			buffer.writeBoolean(this.craftingTable);
 		}
-		else if(flag == 3)
+		else if(this.flag == 3)
 		{
-			playerSkills.toOutBuffer(buffer);
+//			this.playerSkills.toOutBuffer(buffer);
 		}
 	}
 
 	@Override
 	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
 	{
-		flag = buffer.readByte();
-		if(flag == 0)
+		this.flag = buffer.readByte();
+		if(this.flag == 0)
 		{
-			foodstats.stomachLevel = buffer.readFloat();
-			foodstats.waterLevel = buffer.readFloat();
+			this.stomachLevel = buffer.readFloat();
+			this.waterLevel = buffer.readFloat();
+			this.nutrFruit = buffer.readFloat();
+			this.nutrVeg = buffer.readFloat();
+			this.nutrGrain = buffer.readFloat();
+			this.nutrProtein = buffer.readFloat();
+			this.nutrDairy = buffer.readFloat();
 		}
-		else if(flag == 1)
+		else if(this.flag == 1)
 		{
-			skillName = ByteBufUtils.readUTF8String(buffer);
-			skillLevel = buffer.readInt();
+			this.skillName = ByteBufUtils.readUTF8String(buffer);
+			this.skillLevel = buffer.readInt();
 		}
-		else if(flag == 2)
+		else if(this.flag == 2)
 		{
-			craftingTable = buffer.readBoolean();
+			this.craftingTable = buffer.readBoolean();
 		}
-		else if(flag == 3)
+		else if(this.flag == 3)
 		{
-			dis = new DataInputStream(new ByteArrayInputStream(buffer.array()));
+//			this.dis = new DataInputStream(new ByteArrayInputStream(buffer.array()));
 		}
 	}
 
 	@Override
 	public void handleClientSide(EntityPlayer player)
 	{
-		if(flag == 0)
+		if(this.flag == 0)
 		{
-			TFC_Core.setPlayerFoodStats(player, foodstats);
+//			System.out.println("-----------------------------Handle PlayerUpdatePacket flag:0");
+//			System.out.println("stomachLevel :"+ this.stomachLevel);
+//			System.out.println("waterLevel :"+ this.waterLevel);
+//			System.out.println("nutrFruit :"+ this.nutrFruit);
+//			System.out.println("nutrVeg :"+ this.nutrVeg);
+//			System.out.println("nutrProtein :"+ this.nutrProtein);
+//			System.out.println("nutrDairy :"+ this.nutrDairy);
+			
 			FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
-			fs.stomachLevel = this.foodstats.stomachLevel;
-			fs.waterLevel = this.foodstats.waterLevel;
+			fs.stomachLevel = this.stomachLevel;
+			fs.waterLevel = this.waterLevel;
+			fs.nutrFruit = this.nutrFruit;
+			fs.nutrVeg = this.nutrVeg;
+			fs.nutrProtein = this.nutrProtein;
+			fs.nutrDairy = this.nutrDairy;
+			TFC_Core.setPlayerFoodStats(player, fs);
 		}
-		else if(flag == 1)
+		else if(this.flag == 1)
 		{
+			System.out.println("-----------------------------Handle PlayerUpdatePacket flag:1");
+			System.out.println("Skill : "+this.skillName+" : "+this.skillLevel);
+
 			playerSkills.setSkillSave(skillName, skillLevel);
 		}
-		else if(flag == 2)
+		else if(this.flag == 2)
 		{
-			if(craftingTable && !player.getEntityData().hasKey("craftingTable"))
+			System.out.println("-----------------------------Handle PlayerUpdatePacket flag:2");
+			System.out.println("craftingTable : "+this.craftingTable);
+			
+			if(this.craftingTable && !player.getEntityData().hasKey("craftingTable"))
 			{
-				player.getEntityData().setBoolean("craftingTable", craftingTable);
+				player.getEntityData().setBoolean("craftingTable", this.craftingTable);
 				PlayerInventory.upgradePlayerCrafting(player);
 			}
 		}
-		else if(flag == 3)
+		else if(this.flag == 3)
 		{
-			try
-			{
-				while(dis.available() > 0)
-					playerSkills.setSkillSave(dis.readUTF(), dis.readInt());
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			System.out.println("-----------------------------Handle PlayerUpdatePacket flag:3");
+			System.out.println("Skill : ");
+			
+//			try
+//			{
+//				while(dis.available() > 0)
+//					playerSkills.setSkillSave(dis.readUTF(), dis.readInt());
+//			}
+//			catch (IOException e)
+//			{
+//				e.printStackTrace();
+//			}
 		}
 	}
 

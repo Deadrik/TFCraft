@@ -340,18 +340,24 @@ public class TFC_Climate
 		temp = adjustHeightToTemp(y,temp);
 		float light = 1;
 
-		if(worldObj.getChunkProvider() != null /*&& worldObj.blockExists(x, y, z)*/){
-			float bl = worldObj.getBlockLightValue(x, y, z);
-			light = 0.25f*(1-(bl/15f));
-		}
-		//If this block can see the sky then we jsut want it to be ambient temp. 
-		//Shadows should only matter for darkness, not night time.
-		if(worldObj.getChunkProvider() != null /*&& worldObj.blockExists(x, y, z)*/){
-			if(worldObj.canBlockSeeTheSky(x, y, z))
-				light = 0;
-		}
-		if(temp > 0) return temp-(temp*light);
-		else return temp;
+//		if(worldObj.getChunkProvider() != null /*&& worldObj.blockExists(x, y, z)*/)
+//		{
+			//If this block can see the sky then we jsut want it to be ambient temp. 
+			//Shadows should only matter for darkness, not night time.
+//			if(worldObj.canBlockSeeTheSky(x, y, z))
+//			{
+//				light = 0;
+//			}
+//			else
+//			{
+//				float bl = worldObj.getBlockLightValue(x, y, z);
+//				light = 0.25f*(1-(bl/15f));
+//			}
+//		}
+		if(temp > 0)
+			return temp-(temp*light);
+		else
+			return temp;
 	}
 
 	public static float adjustHeightToTemp(int y, float temp)

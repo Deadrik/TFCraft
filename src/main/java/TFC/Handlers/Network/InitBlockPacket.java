@@ -13,7 +13,9 @@ public class InitBlockPacket extends AbstractPacket
 	private int y;
 	private int z;
 	private NBTTagCompound nbtData;
-	
+
+	public InitBlockPacket() {}
+
 	public InitBlockPacket(int x, int y, int z, NBTTagCompound data)
 	{
 		this.x = x;

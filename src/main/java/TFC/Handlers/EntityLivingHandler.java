@@ -1,8 +1,8 @@
 package TFC.Handlers;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -11,6 +11,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Achievements;
@@ -23,6 +24,8 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.SkillStats;
 import TFC.Food.ItemFoodTFC;
 import TFC.Food.ItemMeal;
+import TFC.Handlers.Network.AbstractPacket;
+import TFC.Handlers.Network.PlayerUpdatePacket;
 import TFC.Items.ItemArrow;
 import TFC.Items.ItemLooseRock;
 import TFC.Items.ItemOreSmall;
@@ -36,28 +39,27 @@ public class EntityLivingHandler
 	@SubscribeEvent
 	public void onEntityLivingUpdate(LivingUpdateEvent event)
 	{
-		EntityLivingBase entity = event.entityLiving;
-		NBTTagCompound nbt = entity.getEntityData();
-		if (entity instanceof EntityPlayer)
+		if (event.entityLiving instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer)entity;
-			//Set Max Health
+			EntityPlayer player = (EntityPlayer)event.entityLiving;
 			float newMaxHealth = getMaxHealth(player);
-			if(player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue() != getMaxHealth(player))
+			if(player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue() != newMaxHealth)
 			{
 				float h = player.getHealth();
 				float hPercent = (float) (h / player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
-				player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getMaxHealth(player));
+				player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(newMaxHealth);
 				//player.setHealth(newMaxHealth*hPercent);
 			}
 			if(!player.worldObj.isRemote)
 			{
 				//Tick Decay
-				TFC_Core.handleItemTicking(player.inventory, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
-				//Handle Food
+//				TFC_Core.handleItemTicking(player.inventory, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+
+				//Handle Body Temp
 				BodyTempStats tempStats = TFC_Core.getBodyTempStats(player);
 				tempStats.onUpdate(player);
 				TFC_Core.setBodyTempStats(player, tempStats);
+
 				//Nullify the Old Food
 				player.getFoodStats().addStats(20 - player.getFoodStats().getFoodLevel(), 0.0F);
 				//Handle Food
@@ -65,11 +67,9 @@ public class EntityLivingHandler
 				foodstats.onUpdate(player);
 				TFC_Core.setPlayerFoodStats(player, foodstats);
 				//Send update packet
-//				System.out.println("-----------------------------Sending PlayerUpdatePacket flag: 0");
-//				AbstractPacket pkt = new PlayerUpdatePacket(player, 0);
-//				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
-				//TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, FoodStatsTFC.getStatusPacket(foodstats));
-
+				AbstractPacket pkt = new PlayerUpdatePacket(player, 0);
+				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+				
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
 					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,20,1));
 				else if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.5f)
@@ -77,8 +77,8 @@ public class EntityLivingHandler
 						player.setSprinting(false);
 
 				//Handle Spawn Protection
+				NBTTagCompound nbt = player.getEntityData();
 				long spawnProtectionTimer = nbt.hasKey("spawnProtectionTimer") ? nbt.getLong("spawnProtectionTimer") : TFC_Time.getTotalTicks() + TFC_Time.hourLength;
-
 				if(spawnProtectionTimer < TFC_Time.getTotalTicks())
 				{
 					//Add protection time to the chunks

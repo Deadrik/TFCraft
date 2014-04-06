@@ -15,6 +15,7 @@ import TFC.Reference;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Sounds;
 import TFC.Core.Player.FoodStatsTFC;
 
 public class ItemPotteryJug extends ItemPotteryBase
@@ -45,7 +46,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 				if(world.rand.nextInt(50) == 0)
 				{
 					is.stackSize--;
-					player.playSound("player.ceramicbreak", 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+					player.playSound(TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
 				}
 				else
 				{

@@ -6,7 +6,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -21,7 +21,7 @@ import TFC.API.Util.ByteCoord;
 import TFC.API.Util.CollapseData;
 import TFC.API.Util.CollapseList;
 import TFC.Blocks.BlockTerra;
-import TFC.Entities.EntityFallingStone;
+import TFC.Core.TFC_Sounds;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.WorldGen.TFCBiome;
 
@@ -169,13 +169,13 @@ public class BlockCollapsable extends BlockTerra
 			{
 				if(fallingBlock != null)
 				{
-					EntityFallingStone ent = new EntityFallingStone(world, i + 0.5F, j + 0.5F, k + 0.5F, fallingBlock, fallingBlockMeta+8);
-//					ent.fallTime = -5000;
+					//EntityFallingStone ent = new EntityFallingStone(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), fallingBlock, fallingBlockMeta+8);
+					EntityFallingBlock ent = new EntityFallingBlock(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), fallingBlock, fallingBlockMeta+8);
+					ent.field_145812_b/*fallTime*/ = -5000;
 					world.spawnEntityInWorld(ent);
-
 					Random R = new Random(i*j+k);
 					if(R.nextInt(100) > 90)
-						world.playSoundAtEntity(ent, "rock.slide.long", 1.0F, 0.8F + (R.nextFloat()/2));
+						world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKLONG, 1.0F, 0.8F + (R.nextFloat()/2));
 				}
 
 				world.setBlockToAir(i, j, k);

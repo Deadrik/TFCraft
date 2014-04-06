@@ -20,13 +20,13 @@ public abstract class BlockTerraContainer extends BlockContainer
 		super(Material.rock);
 	}
 
-	public BlockTerraContainer(Material material) 
+	public BlockTerraContainer(Material material)
 	{
 		super(material);
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack is) 
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack is)
 	{
 		//TODO: Debug Message should go here if debug is toggled on
 		if(TFCOptions.enableDebugMode && world.isRemote)
@@ -43,7 +43,7 @@ public abstract class BlockTerraContainer extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)  
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
@@ -64,20 +64,15 @@ public abstract class BlockTerraContainer extends BlockContainer
 	{
 		TileEntity te = world.getTileEntity(x, y, z);
 		if(te != null)
-		{
 			if(te instanceof IInventory)
-			{
 				for(int i = 0; i< ((IInventory)te).getSizeInventory(); i++)
-				{
 					if(((IInventory)te).getStackInSlot(i) != null)
 					{
 						EntityItem ei = new EntityItem(world, x, y, z, ((IInventory)te).getStackInSlot(i));
 						ei.motionY = 0.4;
 						world.spawnEntityInWorld(ei);
 					}
-				}
-			}
-		}
+
 		super.breakBlock(world, x, y, z, block, metadata);
 	}
 }

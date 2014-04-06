@@ -17,8 +17,6 @@ public class BlockBloom extends BlockTerraContainer
 	public BlockBloom()
 	{
 		super(Material.iron);
-		//this.setCreativeTab(CreativeTabs.tabDecorations);
-		//this.setLightValue(1F);
 	}
 
 	@Override
@@ -28,7 +26,7 @@ public class BlockBloom extends BlockTerraContainer
 	}
 
 	@Override
-	public int damageDropped(int j) 
+	public int damageDropped(int j)
 	{
 		return j;
 	}
@@ -52,12 +50,14 @@ public class BlockBloom extends BlockTerraContainer
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
+	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion)
+	{
 		Eject(par1World,par2,par3,par4);
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
+	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5)
+	{
 		Eject(par1World,par2,par3,par4);
 	}
 
@@ -66,11 +66,8 @@ public class BlockBloom extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 			Eject(world,i,j,k);
-
 		return super.removedByPlayer(world, player, i, j, k);
 	}
-
-	//public void onBlockRemoval(World par1World, int par2, int par3, int par4) {Eject(par1World,par2,par3,par4);}
 
 	public void Eject(World world, int i, int j, int k)
 	{

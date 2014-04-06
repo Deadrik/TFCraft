@@ -16,6 +16,7 @@ public class ServerTickHandler
 	{
 		if(event.phase == Phase.START)
 		{
+//			System.out.println("-------------WORLD SERVER TICK START--------------");
 			World world = event.world;
 			if(world.provider.dimensionId == 0)
 				TFC_Core.SetupWorld(world);
@@ -28,8 +29,9 @@ public class ServerTickHandler
 	{
 		if(event.phase == Phase.START)
 		{
-			EntityPlayer player = event.player;
-			World world = player.worldObj;
+//			System.out.println("-------------PLAYER SERVER TICK START--------------");
+//			EntityPlayer player = event.player;
+//			World world = player.worldObj;
 		}
 	}
 

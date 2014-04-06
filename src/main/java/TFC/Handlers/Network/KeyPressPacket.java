@@ -11,7 +11,9 @@ public class KeyPressPacket extends AbstractPacket
 {
 	private int type;
 	private static long keyTimer = 0;
-	
+
+	public KeyPressPacket(){}
+
 	public KeyPressPacket(int t)
 	{
 		type = t;

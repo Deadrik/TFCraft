@@ -5,7 +5,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import TFC.API.Constant.Global;
 
-public class BlockIgExCobble extends BlockCobble {
+public class BlockIgExCobble extends BlockCobble
+{
 	public BlockIgExCobble(Material material)
 	{
 		super(material);

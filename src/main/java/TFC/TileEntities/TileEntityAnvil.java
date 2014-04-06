@@ -24,6 +24,7 @@ import TFC.API.Enums.RuleEnum;
 import TFC.API.Events.AnvilCraftEvent;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Sounds;
 import TFC.Items.ItemMeltedMetal;
 import TFC.Items.ItemTFCArmor;
 import TFC.Items.Tools.ItemMiscToolHead;
@@ -699,7 +700,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 	public void setPlan(String s)
 	{
 		if(worldObj.isRemote)
-			//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilPlanPacket(8, s));
+			;//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilPlanPacket(8, s));
 		this.craftingPlan = s;
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
@@ -759,7 +760,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 //			break;
 //		}
 //		}	
-//		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "anvil.metalimpact", 0.5F, 0.5F + (worldObj.rand.nextFloat()/2));
+//		worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 0.5F, 0.5F + (worldObj.rand.nextFloat()/2));
 //	}
 //	public void createInitPacket(DataOutputStream outStream) throws IOException  
 //	{
@@ -882,6 +883,6 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 //		}
 //		}		
 //		this.lastWorker = worldObj.getPlayerEntityByName(inStream.readUTF());
-//		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "anvil.metalimpact", 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
+//		worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
 //	}
 }

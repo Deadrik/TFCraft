@@ -31,7 +31,7 @@ public class ChunkDataEventHandler
 	}
 
 	@SubscribeEvent
-	public void onDataSave(ChunkDataEvent.Save event) 
+	public void onDataSave(ChunkDataEvent.Save event)
 	{
 		if(!event.world.isRemote)
 		{

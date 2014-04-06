@@ -17,6 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.Blocks.BlockTerra;
+import TFC.Core.TFC_Sounds;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -48,15 +49,13 @@ public class BlockSand extends BlockTerra
 
 	public static boolean canFallBelow(World world, int i, int j, int k)
 	{
-		Block l = world.getBlock(i, j, k);
+		Block block = world.getBlock(i, j, k);
 		if (world.isAirBlock(i, j, k))
 			return true;
-		if (l == Blocks.fire)
+		if (block == Blocks.fire)
 			return true;
-		Material material = l.getMaterial();
-		if (material == Material.water)
-			return true;
-		return material == Material.lava;
+		Material material = block.getMaterial();
+		return material == Material.water ? true : material == Material.lava;
 	}
 
 	/**
@@ -107,10 +106,10 @@ public class BlockSand extends BlockTerra
 				}
 				else
 				{
-					EntityFallingBlock ent = new EntityFallingBlock(world, i + 0.5F, j + 0.5F, k + 0.5F, this, meta);
+					EntityFallingBlock ent = new EntityFallingBlock(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), this, meta);
 					world.spawnEntityInWorld(ent);
 					Random R = new Random(i*j+k);
-					world.playSoundAtEntity(ent, "dirt.slide.short", 1.0F, 0.8F + (R.nextFloat()/2));
+					world.playSoundAtEntity(ent, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
 				}
 			}
 		}

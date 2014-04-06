@@ -1,6 +1,5 @@
 package TFC.Core.Player;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
@@ -11,6 +10,7 @@ import TFC.Core.TFC_Core;
 import TFC.Handlers.Network.AbstractPacket;
 import TFC.Handlers.Network.InitClientWorldPacket;
 import TFC.Handlers.Network.PlayerUpdatePacket;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -23,31 +23,38 @@ public class PlayerTracker
 	@SubscribeEvent
 	public void onPlayerLoggedIn(PlayerLoggedInEvent event)
 	{
+//		System.out.println("-----------------------------PLAYER LOGGIN EVENT-------------------");
+//		System.out.println("------"+event.player.getDisplayName()+" : "+ event.player.getUniqueID().toString()+"--------");
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
 				event.player.getDisplayName(),
 				event.player.getUniqueID(),
-				Minecraft.getMinecraft().getNetHandler().getNetworkManager()));
-
+				FMLClientHandler.instance().getClientToServerNetworkManager()));
+		
 		System.out.println("-----------------------------Sending InitClientWorldPacket");
 		AbstractPacket pkt = new InitClientWorldPacket(event.player);
 		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
+		
+//		System.out.println("-----------------------------Sending TestPacket");
+//		AbstractPacket pkt2 = new TestPacket("Sent to Player: "+event.player.getDisplayName());
+//		TerraFirmaCraft.packetPipeline.sendTo(pkt2, (EntityPlayerMP) event.player);
 	}
 
 	@SubscribeEvent
 	public void onClientConnect(ClientConnectedToServerEvent event)
 	{
 		System.out.println("-----------------------------CLIENT CONNECT EVENT------------------");
-		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
-				Minecraft.getMinecraft().thePlayer.getDisplayName(),
-				Minecraft.getMinecraft().thePlayer.getUniqueID(),
-				event.manager));
+//		System.out.println("-----"+FMLClientHandler.instance().getClientPlayerEntity().getDisplayName()+" : "+
+//				FMLClientHandler.instance().getClientPlayerEntity().getUniqueID().toString()+"-------");
+//
+//		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
+//				Minecraft.getMinecraft().thePlayer.getDisplayName(),
+//				Minecraft.getMinecraft().thePlayer.getUniqueID(),
+//				event.manager));
 	}
 
 	@SubscribeEvent
 	public void onClientDisconnect(ServerDisconnectionFromClientEvent event)
 	{
-//			PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(event.manager.clientHandler.getPlayer().username, manager));
-//			TerraFirmaCraft.proxy.onClientLogin();
 	}
 
 	@SubscribeEvent
@@ -67,7 +74,7 @@ public class PlayerTracker
 		if( pi.tempSkills != null)
 			TFC_Core.setSkillStats(event.player, pi.tempSkills);
 
-		AbstractPacket pkt = new PlayerUpdatePacket(event.player, 3);
+		AbstractPacket pkt = new PlayerUpdatePacket(event.player, 3);// Update Skills
 		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
 	}
 

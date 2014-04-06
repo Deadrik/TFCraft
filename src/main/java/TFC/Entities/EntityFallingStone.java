@@ -9,9 +9,8 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntityFallingStone extends EntityFallingBlock implements IEntityAdditionalSpawnData
 {
-	private Block block;
-	private int meta;
-	
+	// Block field_145811_e is private, therefore it's not possible at the moment
+	// to extend EntityFallingBlock class. metadata field_145814_a is public.
 	public EntityFallingStone(World par1World)
 	{
 		super(par1World);
@@ -23,8 +22,8 @@ public class EntityFallingStone extends EntityFallingBlock implements IEntityAdd
 	{
 		super(par1World, par2, par4, par6, par8, par9);
 		this.func_145806_a/*setIsAnvil*/(true);
-		this.block = par8;
-		this.meta = par1World.getBlockMetadata((int)par2, (int)par4, (int)par6);
+//		this.field_145811_e = par8;
+		this.field_145814_a = par9;
 	}
 
 	@Override
@@ -39,14 +38,14 @@ public class EntityFallingStone extends EntityFallingBlock implements IEntityAdd
 	@Override
 	public void writeSpawnData(ByteBuf buffer)
 	{
-		buffer.writeInt(Block.getIdFromBlock(this.block));
-		buffer.writeInt(this.meta);
+//		buffer.writeInt(Block.getIdFromBlock(this.field_145811_e));
+		buffer.writeInt(this.field_145814_a);
 	}
 
 	@Override
 	public void readSpawnData(ByteBuf additionalData)
 	{
-		this.block = Block.getBlockById(additionalData.readInt());
-		this.meta = additionalData.readInt();
+//		this.field_145811_e = Block.getBlockById(additionalData.readInt());
+		this.field_145814_a = additionalData.readInt();
 	}
 }

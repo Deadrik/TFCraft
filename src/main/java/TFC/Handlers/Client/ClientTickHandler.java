@@ -14,12 +14,14 @@ public class ClientTickHandler// implements ITickHandler
 	{
 		if(event.phase == Phase.START)
 		{
-			EntityPlayer player = event.player;
-			World world = player.worldObj;
+//			System.out.println("-------------PLAYER CLIENT TICK START--------------");
+//			EntityPlayer player = event.player;
+//			World world = player.worldObj;
 		}
 		
 		if(event.phase == Phase.END)
 		{
+//			System.out.println("-------------PLAYER CLIENT TICK END--------------");
 			EntityPlayer player = event.player;
 			World world = player.worldObj;
 
