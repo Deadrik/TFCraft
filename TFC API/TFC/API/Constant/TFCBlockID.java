@@ -65,7 +65,6 @@ public class TFCBlockID
 	public static int Firepit					= 2015;
 	public static int Bellows					= 2014;
 	public static int Forge						= 2013;
-	public static int Scribe					= 2012;
 	public static int Anvil						= 2011;
 	public static int Anvil2					= 2010;
 
@@ -223,7 +222,6 @@ public class TFCBlockID
 		Firepit = TFCOptions.getIntFor(config, "block", "Firepit", Firepit);
 		Bellows = TFCOptions.getIntFor(config, "block", "Bellows", Bellows);
 		Forge = TFCOptions.getIntFor(config, "block", "Forge", Forge);
-		Scribe = TFCOptions.getIntFor(config, "block", "Scribe", Scribe);
 		Anvil = TFCOptions.getIntFor(config, "block", "Anvil", Anvil);
 		Anvil2 = TFCOptions.getIntFor(config, "block", "Anvil2", Anvil2);
 
