@@ -21,6 +21,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ICustomCollision;
 import TFC.Core.CollisionRayTraceStandard;
+import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TEMetalSheet;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -91,10 +92,32 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister registerer)
 	{
 		for(int i = 0; i < icons.length; i++)
-			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "metal/"+metalNames[i]);
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "metal/"+metalNames[i]);
+
+		TFC_Textures.SheetBismuth = registerer.registerIcon(Reference.ModID + ":" + "metal/Bismuth");
+		TFC_Textures.SheetBismuthBronze = registerer.registerIcon(Reference.ModID + ":" + "metal/Bismuth Bronze");
+		TFC_Textures.SheetBlackBronze = registerer.registerIcon(Reference.ModID + ":" + "metal/Black Bronze");
+		TFC_Textures.SheetBlackSteel = registerer.registerIcon(Reference.ModID + ":" + "metal/Black Steel");
+		TFC_Textures.SheetBlueSteel = registerer.registerIcon(Reference.ModID + ":" + "metal/Blue Steel");
+		TFC_Textures.SheetBrass = registerer.registerIcon(Reference.ModID + ":" + "metal/Brass");
+		TFC_Textures.SheetBronze = registerer.registerIcon(Reference.ModID + ":" + "metal/Bronze");
+		TFC_Textures.SheetCopper = registerer.registerIcon(Reference.ModID + ":" + "metal/Copper");
+		TFC_Textures.SheetGold = registerer.registerIcon(Reference.ModID + ":" + "metal/Gold");
+		TFC_Textures.SheetLead = registerer.registerIcon(Reference.ModID + ":" + "metal/Lead");
+		TFC_Textures.SheetNickel = registerer.registerIcon(Reference.ModID + ":" + "metal/Nickel");
+		TFC_Textures.SheetPigIron = registerer.registerIcon(Reference.ModID + ":" + "metal/Pig Iron");
+		TFC_Textures.SheetPlatinum = registerer.registerIcon(Reference.ModID + ":" + "metal/Platinum");
+		TFC_Textures.SheetRedSteel = registerer.registerIcon(Reference.ModID + ":" + "metal/Red Steel");
+		TFC_Textures.SheetRoseGold = registerer.registerIcon(Reference.ModID + ":" + "metal/Rose Gold");
+		TFC_Textures.SheetSilver = registerer.registerIcon(Reference.ModID + ":" + "metal/Silver");
+		TFC_Textures.SheetSteel = registerer.registerIcon(Reference.ModID + ":" + "metal/Steel");
+		TFC_Textures.SheetSterlingSilver = registerer.registerIcon(Reference.ModID + ":" + "metal/Sterling Silver");
+		TFC_Textures.SheetTin = registerer.registerIcon(Reference.ModID + ":" + "metal/Tin");
+		TFC_Textures.SheetWroughtIron = registerer.registerIcon(Reference.ModID + ":" + "metal/Wrought Iron");
+		TFC_Textures.SheetZinc = registerer.registerIcon(Reference.ModID + ":" + "metal/Zinc");
 	}
 
 	@Override

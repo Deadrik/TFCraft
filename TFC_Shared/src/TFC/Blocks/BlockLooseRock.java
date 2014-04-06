@@ -45,7 +45,6 @@ public class BlockLooseRock extends BlockTerra
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int xCoord, int yCoord, int zCoord, int l)
 	{		
-	    TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(xCoord, zCoord);
 	    
 	    DataLayer rockLayer = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 	    
