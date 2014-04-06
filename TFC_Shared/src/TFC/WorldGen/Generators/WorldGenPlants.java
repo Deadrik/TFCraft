@@ -12,7 +12,6 @@ import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomFruitTree;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomFruitTree2;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenPlants implements IWorldGenerator
@@ -31,8 +30,8 @@ public class WorldGenPlants implements IWorldGenerator
 	static WorldGenCustomFruitTree cherryTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 6);
 	static WorldGenCustomFruitTree peachTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 7);
 
-	static WorldGenCustomFruitTree2 plumTree = new WorldGenCustomFruitTree2(false, TFCBlocks.fruitTreeLeaves2.blockID, 0);
-	static WorldGenCustomFruitTree2 cacaoTree = new WorldGenCustomFruitTree2(false, TFCBlocks.fruitTreeLeaves2.blockID, 1);
+	static WorldGenCustomFruitTree plumTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves2.blockID, 0);
+	static WorldGenCustomFruitTree cacaoTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves2.blockID, 1);
 
 	static WorldGenBerryBush wintergreenGen = new WorldGenBerryBush(false, 0, 12, 1, 5);
 	static WorldGenBerryBush blueberryGen = new WorldGenBerryBush(false, 1, 6, 1, 4);
@@ -44,7 +43,7 @@ public class WorldGenPlants implements IWorldGenerator
 	static WorldGenBerryBush snowberryGen = new WorldGenBerryBush(false, 7, 6, 1, 4);
 	static WorldGenBerryBush elderberryGen = new WorldGenBerryBush(false, 8, 5, 2, 4);
 	static WorldGenBerryBush gooseberryGen = new WorldGenBerryBush(false, 9, 8, 1, 4);
-	//static WorldGenBerryBush cloudberryGen = new WorldGenBerryBush(false, 10, 12, 1, 6, TFCBlocks.Peat.blockID);
+	static WorldGenBerryBush cloudberryGen = new WorldGenBerryBush(false, 10, 12, 1, 6, TFCBlocks.Peat.blockID);
 
 	public WorldGenPlants()
 	{
@@ -181,72 +180,73 @@ public class WorldGenPlants implements IWorldGenerator
 		}
 
 
-		/*if (random.nextInt(70) == 0  && rainfall.floatdata1 > 500)
+		if (random.nextInt(70) == 0 && rain > 500)
 		{
 			xCoord = chunkX + random.nextInt(16) + 8;
 			zCoord = chunkZ + random.nextInt(16) + 8;
 			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
+			bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
 			switch(random.nextInt(9))
 			{
 			default:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
+				if(bioTemperature > 8 && world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					appleTree.generate(world, random, xCoord, yCoord, zCoord);
 				}
 				break;
 			}
 			case 1:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
+				if(bioTemperature > 15 && world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					bananaTree.generate(world, random, xCoord, yCoord, zCoord);
 				}
 				break;
 			}
 			case 2:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
+				if(bioTemperature > 12 && bioTemperature > 8 && world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					orangeTree.generate(world, random, xCoord, yCoord, zCoord);
 				}
 				break;
 			}
 			case 3:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
+				if(bioTemperature > 8 && world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					grappleTree.generate(world, random, xCoord, yCoord, zCoord);
 				}
 				break;
 			}
 			case 4:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
+				if(bioTemperature > 10 && world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					lemonTree.generate(world, random, xCoord, yCoord, zCoord);
 				}
 				break;
 			}
 			case 5:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
+				if(bioTemperature > 10 && world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					oliveTree.generate(world, random, xCoord, yCoord, zCoord);
 				}
 				break;
 			}
 			case 6:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
+				if(bioTemperature > 8 && world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					cherryTree.generate(world, random, xCoord, yCoord, zCoord);
 				}
 				break;
 			}
 			case 7:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
+				if(bioTemperature > 10 && world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					peachTree.generate(world, random, xCoord, yCoord, zCoord);
 				}
 				break;
 			}
 			case 8:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
+				if(bioTemperature > 10 && world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					plumTree.generate(world, random, xCoord, yCoord, zCoord);
 				}
 				break;
@@ -258,7 +258,7 @@ public class WorldGenPlants implements IWorldGenerator
 			//                    break;
 			//                }
 			}
-		}*/
+		}
 
 	}
 
@@ -304,9 +304,9 @@ public class WorldGenPlants implements IWorldGenerator
 			case 9:
 				gooseberryGen.generate(world, random, xCoord, yCoord, zCoord);
 				break;
-				/*case 10:
+				case 10:
 				cloudberryGen.generate(world, random, xCoord, yCoord, zCoord);
-				break;*/
+				break;
 			}
 		}
 	}
