@@ -71,6 +71,7 @@ public class TECrop extends NetworkTileEntity
 
 				float ambientTemp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYearFromTick(growthTimer), xCoord, yCoord, zCoord);
 				float tempAdded = 0;
+				boolean isDormant = false;
 
 				if(!crop.dormantInFrost && ambientTemp < crop.minGrowthTemp)
 					tempAdded = -0.03f * (crop.minGrowthTemp - ambientTemp);
@@ -78,6 +79,7 @@ public class TECrop extends NetworkTileEntity
 				{
 					if(growth > 1)
 						tempAdded = -0.03f * (crop.minGrowthTemp - ambientTemp);
+					isDormant = true;
 				}
 				else if(ambientTemp < 28)
 					tempAdded = ambientTemp* 0.00035f;
@@ -102,7 +104,7 @@ public class TECrop extends NetworkTileEntity
 
 				float nutriMult = (0.2f + ((float)nutri/(float)soilMax) * 0.5f) + waterBoost;
 
-				if(tef != null)
+				if(tef != null && !isDormant)
 				{
 					if(tef.nutrients[nutriType] > 0)
 						tef.DrainNutrients(nutriType, crop.nutrientUsageMult);
@@ -115,7 +117,8 @@ public class TECrop extends NetworkTileEntity
 
 				int oldGrowth = (int) Math.floor(growth);
 
-				growth += growthRate;
+				if(!isDormant)
+					growth += growthRate;
 
 				if(oldGrowth < (int) Math.floor(growth))
 					this.broadcastPacketInRange(createCropUpdatePacket());

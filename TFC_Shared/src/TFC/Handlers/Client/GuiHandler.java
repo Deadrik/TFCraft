@@ -30,7 +30,6 @@ import TFC.GUI.GuiPlanSelection;
 import TFC.GUI.GuiQuern;
 import TFC.GUI.GuiQuiver;
 import TFC.GUI.GuiScreenHorseInventoryTFC;
-import TFC.GUI.GuiScribe;
 import TFC.GUI.GuiSluice;
 import TFC.GUI.GuiVessel;
 import TFC.GUI.GuiVesselLiquid;
@@ -46,7 +45,6 @@ import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityForge;
 import TFC.TileEntities.TileEntityLogPile;
 import TFC.TileEntities.TileEntityQuern;
-import TFC.TileEntities.TileEntityScribe;
 import TFC.TileEntities.TileEntitySluice;
 import TFC.TileEntities.TileEntityWorkbench;
 
@@ -90,7 +88,7 @@ public class GuiHandler extends TFC.Handlers.GuiHandler
 		}
 		case 22:
 		{
-			return new GuiScribe(player.inventory, (TileEntityScribe) te, world, x, y, z);
+			return null;//was scribing table
 		}
 		case 23:
 		{

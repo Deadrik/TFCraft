@@ -75,24 +75,27 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	@Override
 	public boolean canBlockStay(World world, int i, int j, int k)
 	{
+		return checkStackAt(world,i,j+1,k);
+	}
+	
+	public boolean checkStackAt(World world, int x, int y, int z)
+	{
 		int firebrick = TFCBlocks.FireBrick.blockID;
 
-		int y = j+1;
-
-		if(world.getBlockId(i+1, y, k) == firebrick && checkBlock(world, i+1, y, k, i, k))
+		if(world.getBlockId(x+1, y, z) == firebrick && checkBlock(world, x+1, y, z, x, z))
 		{
-			if(world.getBlockId(i-1, y, k) == firebrick && checkBlock(world, i-1, y, k, i, k))
+			if(world.getBlockId(x-1, y, z) == firebrick && checkBlock(world, x-1, y, z, x, z))
 			{
-				if(world.getBlockId(i, y, k+1) == firebrick && checkBlock(world, i, y, k+1, i, k))
+				if(world.getBlockId(x, y, z+1) == firebrick && checkBlock(world, x, y, z+1, x, z))
 				{
-					if(world.getBlockId(i, y, k-1) == firebrick && checkBlock(world, i, y, k-1, i, k))
+					if(world.getBlockId(x, y, z-1) == firebrick && checkBlock(world, x, y, z-1, x, z))
 					{
-						return true;
+						if(world.getBlockId(x, y, z) == 0 || world.getBlockId(x, y, z) == TFCBlocks.Molten.blockID)
+							return true;
 					}
 				}
 			}
 		}
-
 		return false;
 	}
 
@@ -103,7 +106,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlockId(xCoord, y, zCoord) == TFCBlocks.MetalSheet.blockID)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getBlockTileEntity(xCoord, y, zCoord);
-			if(!te.EastExists())
+			if(!te.WestExists())
 				return false;
 		}
 		xCoord = x+1;
@@ -111,7 +114,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlockId(xCoord, y, zCoord) == TFCBlocks.MetalSheet.blockID)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getBlockTileEntity(xCoord, y, zCoord);
-			if(!te.WestExists())
+			if(!te.EastExists())
 				return false;
 		}
 		xCoord = x;
@@ -119,7 +122,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlockId(xCoord, y, zCoord) == TFCBlocks.MetalSheet.blockID)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getBlockTileEntity(xCoord, y, zCoord);
-			if(!te.NorthExists())
+			if(!te.SouthExists())
 				return false;
 		}
 		xCoord = x;
@@ -127,7 +130,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlockId(xCoord, y, zCoord) == TFCBlocks.MetalSheet.blockID)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getBlockTileEntity(xCoord, y, zCoord);
-			if(!te.SouthExists())
+			if(!te.NorthExists())
 				return false;
 		}
 		return true;

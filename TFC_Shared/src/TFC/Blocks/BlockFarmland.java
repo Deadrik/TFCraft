@@ -20,10 +20,10 @@ import net.minecraftforge.common.ForgeDirection;
 import TFC.Reference;
 import TFC.TileEntities.TileEntityFarmland;
 
-public class BlockFarmland extends BlockContainer
+public class BlockFarmland extends BlockTerraContainer
 {
 	int dirtID;
-	Icon[] DirtTexture = new Icon[23];
+	Icon[] DirtTexture = new Icon[20];
 	int textureOffset = 0;
 	
 	public BlockFarmland(int par1, int id, int tex)
@@ -38,7 +38,7 @@ public class BlockFarmland extends BlockContainer
 	@Override
     public void registerIcons(IconRegister registerer)
     {
-		for(int i = textureOffset; i < (textureOffset == 0 ? 16 : 23); i++)
+		for(int i = textureOffset; i < (textureOffset == 0 ? 16 : 20); i++)
 		{
 			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "farmland/Farmland"+(i));
 		}
@@ -46,17 +46,17 @@ public class BlockFarmland extends BlockContainer
     
 	@SideOnly(Side.CLIENT)
     @Override
-    public Icon getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int par5)
+    public Icon getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int side)
     {
     	Block blk = Block.blocksList[dirtID];
-    	
-        if (par5 == 1)//top
+    	int meta = access.getBlockMetadata(xCoord, yCoord, zCoord);
+        if (side == 1)//top
         {
-            return DirtTexture[access.getBlockMetadata(xCoord, yCoord, zCoord)+textureOffset];
+            return DirtTexture[meta+textureOffset];
         }
         else
         {
-            return blk.getIcon(0, access.getBlockMetadata(xCoord, yCoord, zCoord));
+            return blk.getIcon(side, meta);
         }
     }
     
