@@ -122,6 +122,7 @@ tile.SeaGrassFlowing.name=Water Plant
 tile.seagrassice.name=Water Plant
 tile.Flora.name=Goldenrod Flower
 tile.Moss.name=Moss
+tile.FireBrick.name=Fire Brick Block
 
 entity.Pheasant.name=Pheasant
 entity.Horse.name=Horse
