@@ -504,6 +504,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
 
 		for (int xCoord = 0; xCoord < 16; ++xCoord)
+		{
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
 			{
 				int arrayIndex = xCoord + zCoord * 16;
@@ -561,21 +562,77 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 						if (var13 == -1)
 						{
-							var13 = var12;
+							//The following makes dirt behave nicer and more smoothly, instead of forming sharp cliffs.
+							int arrayIndexx = xCoord > 0? (xCoord - 1) + (zCoord * 16):-1;
+							int arrayIndexX = xCoord < 15? (xCoord + 1) + (zCoord * 16):-1;
+							int arrayIndexz = zCoord > 0? xCoord + ((zCoord-1) * 16):-1;
+							int arrayIndexZ = zCoord < 15? xCoord + ((zCoord+1) * 16):-1;
+							int var12Temp = var12;
+							for(int counter = 1; counter < var12Temp / 3; counter++){
+								if(arrayIndexx >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexx]){
+									heightMap[arrayIndex]--;
+									var12--;
+									height--;
+									indexBig = ((arrayIndex) * 256 + height + 128);
+									index = ((arrayIndex) * 128 + height);
 
+								}
+								else if(arrayIndexX >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexX]){
+									heightMap[arrayIndex]--;
+									var12--;
+									height--;
+									indexBig = ((arrayIndex) * 256 + height + 128);
+									index = ((arrayIndex) * 128 + height);
 
-							if (height >= var5 - 1 && index+1 < idsTop.length && idsTop[index+1] != Block.waterStill.blockID)
-							{
-								idsBig[indexBig] = surfaceBlock;
-								metaBig[indexBig] = soilMeta;
+								}
+								else if(arrayIndexz >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexz]){
+									heightMap[arrayIndex]--;
+									var12--;
+									height--;
+									indexBig = ((arrayIndex) * 256 + height + 128);
+									index = ((arrayIndex) * 128 + height);
+
+								}
+								else if(arrayIndexZ >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexZ]){
+									heightMap[arrayIndex]--;
+									var12--;
+									height--;
+									indexBig = ((arrayIndex) * 256 + height + 128);
+									index = ((arrayIndex) * 128 + height);
+
+								}
 							}
-							else
-							{
-								idsBig[indexBig] = subSurfaceBlock;
-								metaBig[indexBig] = soilMeta;
+							var13 = (int)(var12 * (1d-Math.max(Math.min(((double)(height-20) / 80d),1),0)));
+
+
+							for(int c = 1; c < 4; c++){
+								if(indexBig + c < idsBig.length && ((idsBig[indexBig + c] != surfaceBlock)&&(idsBig[indexBig + c]!=subSurfaceBlock) && (idsBig[indexBig+c]!=Block.waterStill.blockID)
+										 && (idsBig[indexBig+c]!=TFCBlocks.FreshWaterStill.blockID)  && (idsBig[indexBig+c]!=TFCBlocks.HotWaterStill.blockID))){
+									idsBig[indexBig+c] = 0;
+									metaBig[indexBig + c] = 0;
+									if(indexBig+c+1 < idsBig.length && idsBig[indexBig+c+1] == Block.waterStill.blockID){
+										idsBig[indexBig+c] = subSurfaceBlock;
+										metaBig[indexBig + c] = soilMeta;
+									}
+								}
+							}
+							
+							if(var13>0){
+
+
+								if (height >= var5 - 1 && index+1 < idsTop.length && idsTop[index+1] != Block.waterStill.blockID)
+								{
+									idsBig[indexBig] = surfaceBlock;
+									metaBig[indexBig] = soilMeta;
+								}
+								else
+								{
+									idsBig[indexBig] = subSurfaceBlock;
+									metaBig[indexBig] = soilMeta;
+								}
 							}
 						}
-						else if (var13 > 0)
+						else if (var13 > 1)
 						{
 							--var13;
 							idsBig[indexBig] = subSurfaceBlock;
@@ -604,6 +661,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						idsBig[indexBig] = (short) TFCBlocks.FreshWaterStill.blockID;
 				}
 			}
+		}
 	}
 
 	private double[] layer2Noise = new double[256];
