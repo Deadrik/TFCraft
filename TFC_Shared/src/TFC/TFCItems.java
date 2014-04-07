@@ -1200,10 +1200,10 @@ public class TFCItems
 		RedSteelJavelin = new ItemJavelin(TFCItemID.RedSteelJavelin,RedSteelToolMaterial, 240).setUnlocalizedName("Red Steel Javelin");
 
 		//javelin heads
-		IgInStoneJavelinHead = new ItemMiscToolHead(TFCItemID.IgInJavelinHead).setUnlocalizedName("Stone Javelin Head");
-		SedStoneJavelinHead = new ItemMiscToolHead(TFCItemID.SedJavelinHead).setUnlocalizedName("Stone Javelin Head");
-		IgExStoneJavelinHead = new ItemMiscToolHead(TFCItemID.IgExJavelinHead).setUnlocalizedName("Stone Javelin Head");
-		MMStoneJavelinHead = new ItemMiscToolHead(TFCItemID.MMJavelinHead).setUnlocalizedName("Stone Javelin Head");
+		IgInStoneJavelinHead = new ItemMiscToolHead(TFCItemID.IgInJavelinHead,IgInToolMaterial).setUnlocalizedName("Stone Javelin Head");
+		SedStoneJavelinHead = new ItemMiscToolHead(TFCItemID.SedJavelinHead,SedToolMaterial).setUnlocalizedName("Stone Javelin Head");
+		IgExStoneJavelinHead = new ItemMiscToolHead(TFCItemID.IgExJavelinHead,IgExToolMaterial).setUnlocalizedName("Stone Javelin Head");
+		MMStoneJavelinHead = new ItemMiscToolHead(TFCItemID.MMJavelinHead,MMToolMaterial).setUnlocalizedName("Stone Javelin Head");
 		CopperJavelinHead = new ItemMiscToolHead(TFCItemID.CopperJavelinHead).setUnlocalizedName("Copper Javelin Head");
 		BismuthBronzeJavelinHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeJavelinHead).setUnlocalizedName("Bismuth Bronze Javelin Head");
 		BronzeJavelinHead = new ItemMiscToolHead(TFCItemID.BronzeJavelinHead).setUnlocalizedName("Bronze Javelin Head");
@@ -1416,23 +1416,23 @@ public class TFCItems
 		FlatRock = (new ItemFlatGeneric(TFCItemID.FlatRock).setFolder("rocks/flatrocks/").setMetaNames(Global.STONE_ALL).setUnlocalizedName("FlatRock"));
 		LooseRock = (new ItemLooseRock(TFCItemID.LooseRock).setSpecialCraftingType(FlatRock).setFolder("rocks/").setMetaNames(Global.STONE_ALL).setUnlocalizedName("LooseRock"));
 
-		IgInStoneShovelHead = new ItemMiscToolHead(TFCItemID.IgInStoneShovelHead).setUnlocalizedName("Stone Shovel Head");
-		SedStoneShovelHead = new ItemMiscToolHead(TFCItemID.SedStoneShovelHead).setUnlocalizedName("Stone Shovel Head");
-		IgExStoneShovelHead = new ItemMiscToolHead(TFCItemID.IgExStoneShovelHead).setUnlocalizedName("Stone Shovel Head");
-		MMStoneShovelHead = new ItemMiscToolHead(TFCItemID.MMStoneShovelHead).setUnlocalizedName("Stone Shovel Head");
+		IgInStoneShovelHead = new ItemMiscToolHead(TFCItemID.IgInStoneShovelHead,IgInToolMaterial).setUnlocalizedName("Stone Shovel Head");
+		SedStoneShovelHead = new ItemMiscToolHead(TFCItemID.SedStoneShovelHead,SedToolMaterial).setUnlocalizedName("Stone Shovel Head");
+		IgExStoneShovelHead = new ItemMiscToolHead(TFCItemID.IgExStoneShovelHead,IgExToolMaterial).setUnlocalizedName("Stone Shovel Head");
+		MMStoneShovelHead = new ItemMiscToolHead(TFCItemID.MMStoneShovelHead,MMToolMaterial).setUnlocalizedName("Stone Shovel Head");
 
-		IgInStoneAxeHead = new ItemMiscToolHead(TFCItemID.IgInStoneAxeHead).setUnlocalizedName("Stone Axe Head");
-		SedStoneAxeHead = new ItemMiscToolHead(TFCItemID.SedStoneAxeHead).setUnlocalizedName("Stone Axe Head");
-		IgExStoneAxeHead = new ItemMiscToolHead(TFCItemID.IgExStoneAxeHead).setUnlocalizedName("Stone Axe Head");
-		MMStoneAxeHead = new ItemMiscToolHead(TFCItemID.MMStoneAxeHead).setUnlocalizedName("Stone Axe Head");
+		IgInStoneAxeHead = new ItemMiscToolHead(TFCItemID.IgInStoneAxeHead,IgInToolMaterial).setUnlocalizedName("Stone Axe Head");
+		SedStoneAxeHead = new ItemMiscToolHead(TFCItemID.SedStoneAxeHead,SedToolMaterial).setUnlocalizedName("Stone Axe Head");
+		IgExStoneAxeHead = new ItemMiscToolHead(TFCItemID.IgExStoneAxeHead,IgExToolMaterial).setUnlocalizedName("Stone Axe Head");
+		MMStoneAxeHead = new ItemMiscToolHead(TFCItemID.MMStoneAxeHead,MMToolMaterial).setUnlocalizedName("Stone Axe Head");
 
-		IgInStoneHoeHead = new ItemMiscToolHead(TFCItemID.IgInStoneHoeHead).setUnlocalizedName("Stone Hoe Head");
-		SedStoneHoeHead = new ItemMiscToolHead(TFCItemID.SedStoneHoeHead).setUnlocalizedName("Stone Hoe Head");
-		IgExStoneHoeHead = new ItemMiscToolHead(TFCItemID.IgExStoneHoeHead).setUnlocalizedName("Stone Hoe Head");
-		MMStoneHoeHead = new ItemMiscToolHead(TFCItemID.MMStoneHoeHead).setUnlocalizedName("Stone Hoe Head");
+		IgInStoneHoeHead = new ItemMiscToolHead(TFCItemID.IgInStoneHoeHead,IgInToolMaterial).setUnlocalizedName("Stone Hoe Head");
+		SedStoneHoeHead = new ItemMiscToolHead(TFCItemID.SedStoneHoeHead,SedToolMaterial).setUnlocalizedName("Stone Hoe Head");
+		IgExStoneHoeHead = new ItemMiscToolHead(TFCItemID.IgExStoneHoeHead,IgExToolMaterial).setUnlocalizedName("Stone Hoe Head");
+		MMStoneHoeHead = new ItemMiscToolHead(TFCItemID.MMStoneHoeHead,MMToolMaterial).setUnlocalizedName("Stone Hoe Head");
 
-		StoneKnifeHead = new ItemMiscToolHead(TFCItemID.StoneKnifeHead).setUnlocalizedName("Stone Knife Blade");
-		StoneHammerHead = new ItemMiscToolHead(TFCItemID.StoneHammerHead).setUnlocalizedName("Stone Hammer Head");
+		StoneKnifeHead = new ItemMiscToolHead(TFCItemID.StoneKnifeHead,IgInToolMaterial).setUnlocalizedName("Stone Knife Blade");
+		StoneHammerHead = new ItemMiscToolHead(TFCItemID.StoneHammerHead,IgInToolMaterial).setUnlocalizedName("Stone Hammer Head");
 
 		StoneKnife = new ItemCustomKnife(TFCItemID.StoneKnife,IgExToolMaterial, 75).setUnlocalizedName("Stone Knife").setMaxDamage(IgExStoneUses);
 		SmallOreChunk = new ItemOreSmall(TFCItemID.SmallOreChunk).setUnlocalizedName("Small Ore");

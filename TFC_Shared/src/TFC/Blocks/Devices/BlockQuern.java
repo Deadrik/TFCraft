@@ -13,6 +13,7 @@ import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_Sounds;
 import TFC.TileEntities.TileEntityQuern;
 import cpw.mods.fml.relauncher.Side;
@@ -34,6 +35,8 @@ public class BlockQuern extends BlockTerraContainer {
 				te.shouldRotate = true;
 				TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(x, y, z, te.createUpdatePacket(), 160);
 				world.playSoundEffect(x, y, z, TFC_Sounds.STONEDRAG, 1, 1);
+				
+				entityplayer.triggerAchievement(TFC_Achievements.achQuern);
 			}	
 			else if((!te.shouldRotate && (hitX < 0.65 || hitZ < 0.65)) || te.storage[2] == null) {
 				entityplayer.openGui(TerraFirmaCraft.instance, 33, world, x, y, z);

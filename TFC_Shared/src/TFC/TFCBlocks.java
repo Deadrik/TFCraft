@@ -446,7 +446,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(NestBox, TFC.Items.ItemBlocks.ItemTerraBlock.class, "NestBox");
 		GameRegistry.registerBlock(Fence,TFC.Items.ItemBlocks.ItemFence.class,"Fence");
 		GameRegistry.registerBlock(Fence2,TFC.Items.ItemBlocks.ItemFence2.class,"Fence2");
-		GameRegistry.registerBlock(FenceGate,TFC.Items.ItemBlocks.ItemFenceGate.class,"FenceGate");	
+		GameRegistry.registerBlock(Block.fenceGate,TFC.Items.ItemBlocks.ItemFenceGate.class,"FenceGate");	
 		GameRegistry.registerBlock(FenceGate2,TFC.Items.ItemBlocks.ItemFenceGate2.class,"FenceGate2");
 		GameRegistry.registerBlock(StrawHideBed,"StrawHideBed");
 		GameRegistry.registerBlock(ArmourStand,TFC.Items.ItemBlocks.ItemArmourStand.class,"ArmourStand");
@@ -484,7 +484,7 @@ public class TFCBlocks
 		Block.blocksList[83] = null;
 		Block.blocksList[86] = null;
 		Block.blocksList[106] = null;
-		//Block.blocksList[107] = null;
+		Block.blocksList[107] = null;
 		Block.blocksList[111] = null;
 		Block.blocksList[125].setCreativeTab(null);
 		Block.blocksList[126].setCreativeTab(null);
@@ -517,7 +517,7 @@ public class TFCBlocks
 		Block.blocksList[83] = (new BlockCustomReed(83)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("reeds").setTextureName("reeds");;
 		Block.blocksList[86] = (new BlockCustomPumpkin(86, false)).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("pumpkin").setTextureName("pumpkin");
 		Block.blocksList[106] = (new BlockCustomVine(106)).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("vine").setTextureName("vine");
-		//Block.blocksList[107] = (new BlockCustomFenceGate(107)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("fenceGate");
+		Block.blocksList[107] = (new BlockCustomFenceGate(107).setUnlocalizedName("FenceGateTFC").setHardness(2));
 		Block.blocksList[111] = (new BlockCustomLilyPad(111)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("waterlily").setTextureName("waterlily");
 		Block.blocksList[143] = (new BlockCustomButtonWood(143)).setHardness(0.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("button");
 
@@ -660,7 +660,7 @@ public class TFCBlocks
 		TFCBlocks.NestBox = new BlockNestBox(TFCBlockID.NestBox).setUnlocalizedName("NestBox").setHardness(1);
 
 		TFCBlocks.Fence = new BlockCustomFence(TFCBlockID.Fence,"Fence",Material.wood).setUnlocalizedName("FenceTFC").setHardness(2);
-		TFCBlocks.FenceGate = new BlockCustomFenceGate(TFCBlockID.FenceGate).setUnlocalizedName("FenceGateTFC").setHardness(2);
+		TFCBlocks.FenceGate = Block.blocksList[107];//new BlockCustomFenceGate(TFCBlockID.FenceGate).setUnlocalizedName("FenceGateTFC").setHardness(2);
 		TFCBlocks.Fence2 = new BlockCustomFence2(TFCBlockID.Fence2,"Fence2",Material.wood).setUnlocalizedName("FenceTFC").setHardness(2);
 		TFCBlocks.FenceGate2 = new BlockCustomFenceGate2(TFCBlockID.FenceGate2).setUnlocalizedName("FenceGateTFC").setHardness(2);
 		TFCBlocks.StrawHideBed = new BlockCustomBed(TFCBlockID.StrawHideBed).setUnlocalizedName("StrawHideBed").setHardness(1);

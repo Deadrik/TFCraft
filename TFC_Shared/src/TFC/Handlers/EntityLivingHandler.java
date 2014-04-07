@@ -176,6 +176,9 @@ public class EntityLivingHandler
 		else if(item.getItem().equals(TFCItems.Onion) && TFCOptions.iDontLikeOnions){
 			player.triggerAchievement(TFC_Achievements.achRutabaga);
 		}
+		else if(item.getItem().equals(TFCItems.OreChunk) && (item.getItemDamage() == 11 || item.getItemDamage()== 46 || item.getItemDamage() == 60)){
+			player.triggerAchievement(TFC_Achievements.achLimonite);
+		}
 	}
 
 	@ForgeSubscribe
