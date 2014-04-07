@@ -234,6 +234,9 @@ public class Recipes
 				GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_MM_START), 
 						new Object[] {new ItemStack(TFCItems.LooseRock,1,j+Global.STONE_MM_START),new ItemStack(Chisels[i],1,32767)});
 			}
+			GameRegistry.addRecipe(new ItemStack(TFCBlocks.FireBrick,1,0), 
+					new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.FireBrick,1,1),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
+			
 		}
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand,1,32767),Character.valueOf('X'),new ItemStack(TFCItems.Limewater,1,32767)});
@@ -571,11 +574,8 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Thatch,1), 
 				new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.Straw, 1)});
 
-		GameRegistry.addRecipe(new ItemStack(TFCItems.FireBrick,1), 
+		GameRegistry.addRecipe(new ItemStack(TFCItems.FireBrick,1,0), 
 				new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(Item.clay,1,1)});
-		
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.FireBrick,1), 
-				new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.FireBrick,1)});
 
 		RegisterToolRecipes();
 		registerFoodRecipes();

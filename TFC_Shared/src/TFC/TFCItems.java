@@ -1505,7 +1505,7 @@ public class TFCItems
 		PotteryLargeVessel = new ItemPotteryLargeVessel(TFCItemID.PotteryLargeVessel).setUnlocalizedName("Large Vessel");
 		PotteryPot = new ItemPotteryPot(TFCItemID.PotteryPot).setUnlocalizedName("Pot");
 		CeramicMold = new ItemPotteryBase(TFCItemID.CeramicMold).setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
-		Item.itemsList[Item.clay.itemID] = null; Item.itemsList[Item.clay.itemID] = (new ItemClay(Item.clay.itemID).setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1))).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("clay");
+		Item.itemsList[Item.clay.itemID] = null; Item.itemsList[Item.clay.itemID] = (new ItemClay(Item.clay.itemID - 256).setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1))).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("clay");
 		FireBrick = new ItemPotteryBase(TFCItemID.FireBrick).setMetaNames(new String[]{"Clay Fire Brick","Fire Brick"}).setUnlocalizedName("Fire Brick");
 
 		ClayMoldAxe = new ItemPotteryMold(TFCItemID.ClayMoldAxe).setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
