@@ -7,6 +7,7 @@ import java.io.IOException;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +16,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.Util.Helper;
 import TFC.Core.Recipes;
+import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.Player.PlayerInfo;
@@ -23,7 +25,11 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.ItemFoodTFC;
 import TFC.Items.ItemIngot;
 import TFC.Items.ItemMeltedMetal;
+import TFC.Items.ItemBlocks.ItemAnvil1;
 import TFC.Items.Tools.ItemCustomKnife;
+import TFC.Items.Tools.ItemCustomPickaxe;
+import TFC.Items.Tools.ItemCustomSaw;
+import TFC.Items.Tools.ItemMiscToolHead;
 import cpw.mods.fml.common.ICraftingHandler;
 
 public class CraftingHandler implements ICraftingHandler
@@ -86,6 +92,12 @@ public class CraftingHandler implements ICraftingHandler
 				HandleItem(player, iinventory, Recipes.Saws);
 				HandleItem(player, iinventory, Recipes.Axes);
 			}
+			else if(itemstack.getItem() instanceof ItemCustomPickaxe){
+				player.triggerAchievement(TFC_Achievements.achPickaxe);
+			}
+			else if(itemstack.getItem() instanceof ItemCustomSaw){
+				player.triggerAchievement(TFC_Achievements.achSaw);
+			}
 			else if(itemstack.itemID == Item.bowlEmpty.itemID || 
 					/*itemstack.getItem() instanceof ItemTerraFood ||*/ itemstack.itemID == TFCItems.ScrapedHide.itemID
 					|| itemstack.itemID == TFCItems.Wool.itemID||itemstack.itemID == TFCItems.TerraLeather.itemID)
@@ -144,6 +156,9 @@ public class CraftingHandler implements ICraftingHandler
 					if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
 						iinventory.getStackInSlot(i).itemID = TFCItems.Mortar.itemID;
 				}
+			else if(itemstack.getItem() instanceof ItemAnvil1 && itemstack.getItemDamage() == 2){
+				player.triggerAchievement(TFC_Achievements.achBronzeAge);
+			}
 			else if(itemstack.getItem() instanceof ItemIngot)
 			{
 				if(player.worldObj.rand.nextInt(20) == 0)
@@ -276,6 +291,15 @@ public class CraftingHandler implements ICraftingHandler
 						}
 					}
 				}
+			}
+			else if(itemstack.getItem() instanceof ItemMiscToolHead &&
+					((ItemMiscToolHead)(itemstack.getItem())).getMaterial()!= null &&
+					(((ItemMiscToolHead)(itemstack.getItem())).getMaterial() == TFCItems.IgInToolMaterial ||
+					((ItemMiscToolHead)(itemstack.getItem())).getMaterial() == TFCItems.SedToolMaterial ||
+					((ItemMiscToolHead)(itemstack.getItem())).getMaterial() == TFCItems.IgExToolMaterial ||
+					((ItemMiscToolHead)(itemstack.getItem())).getMaterial() == TFCItems.MMToolMaterial))
+			{
+				player.triggerAchievement(TFC_Achievements.achStoneAge);
 			}
 
 			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
