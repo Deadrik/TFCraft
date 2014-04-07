@@ -99,6 +99,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 	int[] heightMap = new int[256];
 
+	WorldGenFissure fissureGen = new WorldGenFissure(TFCBlocks.FreshWaterFlowing,1,false, 10);
 
 	public TFCChunkProviderGenerate(World par1World, long par2, boolean par4) {
 		super(par1World, par2, par4);
@@ -174,9 +175,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		this.rand.setSeed(chunkX * var7 + chunkZ * var9 ^ this.worldObj.getSeed());
 		boolean var11 = false;
 
-		int var12;
-		int var13;
-		int var14;
+		int x;
+		int y;
+		int z;
 
 		int waterRand = 4;
 		if(TFC_Climate.getStability(xCoord, zCoord) == 1)
@@ -189,10 +190,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 		if (!var11 && this.rand.nextInt(waterRand) == 0)
 		{
-			var12 = xCoord + this.rand.nextInt(16) + 8;
-			var13 = this.rand.nextInt(128);
-			var14 = zCoord + this.rand.nextInt(16) + 8;
-			(new WorldGenFissure(TFCBlocks.FreshWaterFlowing,1,false, 10)).generate(this.worldObj, this.rand, var12, var13, var14);
+			x = xCoord + this.rand.nextInt(16) + 8;
+			z = zCoord + this.rand.nextInt(16) + 8;
+			y = 145 - rand.nextInt(45);
+			fissureGen.generate(this.worldObj, this.rand, x, y, z);
 		}
 
 		/*if (!var11 && this.rand.nextInt(4) == 0 && TFC_Climate.getStability(xCoord, zCoord) == 1)
@@ -208,18 +209,18 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		xCoord += 8;
 		zCoord += 8;
 
-		for (var12 = 0; var12 < 16; ++var12)
-			for (var13 = 0; var13 < 16; ++var13)
+		for (x = 0; x < 16; ++x)
+			for (y = 0; y < 16; ++y)
 			{
-				var14 = this.worldObj.getPrecipitationHeight(xCoord + var12, zCoord + var13);
+				z = this.worldObj.getPrecipitationHeight(xCoord + x, zCoord + y);
 
-				if (this.worldObj.isBlockFreezable(var12 + xCoord, var14 - 1, var13 + zCoord))
+				if (this.worldObj.isBlockFreezable(x + xCoord, z - 1, y + zCoord))
 					if(biome.biomeID != BiomeGenBase.ocean.biomeID&& biome.biomeID != BiomeGenBase.beach.biomeID)
-						this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID, 1, 0x2);
+						this.worldObj.setBlock(x + xCoord, z - 1, y + zCoord, Block.ice.blockID, 1, 0x2);
 					else
-						this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID, 0, 0x2);
-				if (canSnowAt(worldObj, var12 + xCoord, var14, var13 + zCoord))
-					this.worldObj.setBlock(var12 + xCoord, var14, var13 + zCoord, Block.snow.blockID, 0, 0x2);
+						this.worldObj.setBlock(x + xCoord, z - 1, y + zCoord, Block.ice.blockID, 0, 0x2);
+				if (canSnowAt(worldObj, x + xCoord, z, y + zCoord))
+					this.worldObj.setBlock(x + xCoord, z, y + zCoord, Block.snow.blockID, 0, 0x2);
 			}
 	}
 
@@ -607,7 +608,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 							for(int c = 1; c < 4; c++){
 								if(indexBig + c < idsBig.length && ((idsBig[indexBig + c] != surfaceBlock)&&(idsBig[indexBig + c]!=subSurfaceBlock) && (idsBig[indexBig+c]!=Block.waterStill.blockID)
-										 && (idsBig[indexBig+c]!=TFCBlocks.FreshWaterStill.blockID)  && (idsBig[indexBig+c]!=TFCBlocks.HotWaterStill.blockID))){
+										&& (idsBig[indexBig+c]!=TFCBlocks.FreshWaterStill.blockID)  && (idsBig[indexBig+c]!=TFCBlocks.HotWaterStill.blockID))){
 									idsBig[indexBig+c] = 0;
 									metaBig[indexBig + c] = 0;
 									if(indexBig+c+1 < idsBig.length && idsBig[indexBig+c+1] == Block.waterStill.blockID){
@@ -616,7 +617,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 									}
 								}
 							}
-							
+
 							if(var13>0){
 
 
