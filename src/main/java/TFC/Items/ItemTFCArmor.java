@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -11,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.API.Armor;
 import TFC.API.IClothing;
@@ -88,7 +90,25 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	}
 
 	@Override
-	public boolean canStack()
+	/**
+	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+	 */
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	{
+		int i = EntityLiving.getArmorPosition(par1ItemStack);
+		ItemStack itemstack1 = par3EntityPlayer.getCurrentArmor(i);
+
+		if (itemstack1 == null)
+		{
+			par3EntityPlayer.setCurrentItemOrArmor(i + 1, par1ItemStack.copy()); //Forge: Vanilla bug fix associated with fixed setCurrentItemOrArmor indexs for players.
+			par1ItemStack.stackSize = 0;
+		}
+
+		return par1ItemStack;
+	}
+
+	@Override
+	public boolean canStack() 
 	{
 		return false;
 	}

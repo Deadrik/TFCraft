@@ -8,7 +8,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
@@ -72,7 +71,7 @@ public class CraftingHandler// implements ICraftingHandler
 				HandleItem(e.player, e.craftMatrix, Recipes.Knives);
 				if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw,4)))
 					player.dropItem(TFCItems.Straw,4);
-				ItemStack is = null;
+
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 				{
 					if(iinventory.getStackInSlot(i) == null)
@@ -259,15 +258,20 @@ public class CraftingHandler// implements ICraftingHandler
 							float decay = itemstack.getTagCompound().getFloat("foodDecay");
 							itemstack.getTagCompound().setFloat("foodDecay", 0);
 							itemstack.getTagCompound().setFloat("foodWeight", itemstack.getTagCompound().getFloat("foodWeight")-decay);
-							this.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
+							CraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
 						}
 						else if(itemstack.getTagCompound().hasKey("foodDecay") && itemstack.getTagCompound().getFloat("foodDecay") <= 0)
 						{
-							this.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
-							itemstack.getTagCompound().setFloat("foodWeight", finalWeight/2);
-							ItemStack is = itemstack.copy();
-							is.stackSize++;
-							iinventory.setInventorySlotContents(foodSlot, is);
+							CraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
+							if(finalWeight/2 < 1)
+								itemstack.getTagCompound().setFloat("foodWeight", finalWeight);
+							else
+							{
+								itemstack.getTagCompound().setFloat("foodWeight", finalWeight/2);
+								ItemStack is = itemstack.copy();
+								is.stackSize++;
+								iinventory.setInventorySlotContents(foodSlot, is);
+							}
 						}
 					}
 				}

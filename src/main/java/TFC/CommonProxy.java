@@ -67,7 +67,6 @@ import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityPottery;
 import TFC.TileEntities.TileEntityQuern;
 import TFC.TileEntities.TileEntitySapling;
-import TFC.TileEntities.TileEntityScribe;
 import TFC.TileEntities.TileEntitySluice;
 import TFC.TileEntities.TileEntitySpawnMeter;
 import TFC.TileEntities.TileEntityToolRack;
@@ -106,7 +105,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TileEntityLogPile.class, "TerraLogPile");
 		GameRegistry.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
 		GameRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit");
-		GameRegistry.registerTileEntity(TileEntityScribe.class, "TerraScribe");
+
 		GameRegistry.registerTileEntity(TileEntityForge.class, "TerraForge");
 		GameRegistry.registerTileEntity(TileEntityMetallurgy.class, "TerraMetallurgy");
 		GameRegistry.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");

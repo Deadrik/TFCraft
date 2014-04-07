@@ -22,7 +22,6 @@ import TFC.Containers.ContainerNestBox;
 import TFC.Containers.ContainerPlanSelection;
 import TFC.Containers.ContainerQuern;
 import TFC.Containers.ContainerQuiver;
-import TFC.Containers.ContainerScribe;
 import TFC.Containers.ContainerSluice;
 import TFC.Containers.ContainerSpecialCrafting;
 import TFC.Containers.ContainerVessel;
@@ -41,7 +40,6 @@ import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityForge;
 import TFC.TileEntities.TileEntityLogPile;
 import TFC.TileEntities.TileEntityQuern;
-import TFC.TileEntities.TileEntityScribe;
 import TFC.TileEntities.TileEntitySluice;
 import TFC.TileEntities.TileEntityWorkbench;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -77,7 +75,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 22:
 		{
-			return new ContainerScribe(player.inventory, (TileEntityScribe) te, world, x, y, z);
+			return null;//was scribing table
 		}
 		case 23:
 		{

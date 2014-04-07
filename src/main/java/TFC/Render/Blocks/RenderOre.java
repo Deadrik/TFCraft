@@ -8,8 +8,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.API.TFCOptions;
-import TFC.Chunkdata.ChunkData;
-import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Textures;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -26,38 +24,39 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
 		boolean breaking = false;
-		if(renderer.overrideBlockTexture != null)
+		if (renderer.overrideBlockTexture != null)
 			breaking = true;
 
-		if(!breaking)
+		if (!breaking)
 		{
-			//render the background rock
+			// render the background rock
 			renderer.overrideBlockTexture = getRockTexture(Minecraft.getMinecraft().theWorld, x, y, z);
 			renderer.renderStandardBlock(block, x, y, z);
 			renderer.clearOverrideBlockTexture();
 
-			//render the ore overlay
+			// render the ore overlay
 			renderer.renderStandardBlock(block, x, y, z);
 		}
 
 		return true;
 	}
 
-	public static IIcon getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord) 
+	public static IIcon getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord)
 	{
 		IIcon var27 = null;
 		int localX = xCoord & 15;
 		int localZ = zCoord & 15;
-		DataLayer rockLayer1 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
-		DataLayer rockLayer2 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 1);
-		DataLayer rockLayer3 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);
-		ChunkData data = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
+		DataLayer rockLayer1 = ((TFCWorldChunkManager) worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
+		DataLayer rockLayer2 = ((TFCWorldChunkManager) worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 1);
+		DataLayer rockLayer3 = ((TFCWorldChunkManager) worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);
+		// ChunkData data = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
+		int hmY = worldObj.getTopSolidOrLiquidBlock(xCoord, zCoord);
 		try
 		{
 			int localY = localX + localZ * 16;
-			if(yCoord <= TFCOptions.RockLayer3Height+(data.heightmap[localY]))
+			if(yCoord <= TFCOptions.RockLayer3Height + (hmY))
 				var27 = rockLayer3.block.getIcon(5, rockLayer3.data2);
-			else if(yCoord <= TFCOptions.RockLayer2Height+data.heightmap[localY])
+			else if(yCoord <= TFCOptions.RockLayer2Height + hmY)
 				var27 = rockLayer2.block.getIcon(5, rockLayer2.data2);
 			else
 				var27 = rockLayer1.block.getIcon(5, rockLayer1.data2);
@@ -113,4 +112,5 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 		renderer.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(5, meta));
 		var14.draw();
 	}
+
 }

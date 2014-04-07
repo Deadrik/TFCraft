@@ -214,19 +214,6 @@ public class BlockDetailed extends BlockPartial
 				te);
 
 		//Check if the block itself is being collided with
-		/*
-		 * With this enabled, the chisel can't chisel past the outer layer
-		 * */
-		//			returns = CollisionRayTraceDetailed.collisionRayTracer(
-		//					this,
-		//					world,
-		//					player,
-		//					view,
-		//					x,
-		//					y,
-		//					z,
-		//					returns);
-
 		if (!returns.isEmpty()) {
 			Object[] min = null;
 			double distMin = 0;

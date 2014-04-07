@@ -116,6 +116,13 @@ public class TEMetalSheet extends TileEntity
 			sides += 32;
 	}
 
+	public boolean isEmpty()
+	{
+		if(!TopExists() && !BottomExists() && !NorthExists() && !SouthExists() && !EastExists() && !WestExists())
+			return true;
+		return false;
+	}
+
 	@Override
 	public boolean canUpdate()
 	{

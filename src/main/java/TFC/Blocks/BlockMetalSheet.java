@@ -21,6 +21,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ICustomCollision;
 import TFC.Core.CollisionRayTraceStandard;
+import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TEMetalSheet;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -85,10 +86,32 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegisterer)
+	public void registerBlockIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < icons.length; i++)
-			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "metal/"+metalNames[i]);
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "metal/"+metalNames[i]);
+
+		TFC_Textures.SheetBismuth = registerer.registerIcon(Reference.ModID + ":" + "metal/Bismuth");
+		TFC_Textures.SheetBismuthBronze = registerer.registerIcon(Reference.ModID + ":" + "metal/Bismuth Bronze");
+		TFC_Textures.SheetBlackBronze = registerer.registerIcon(Reference.ModID + ":" + "metal/Black Bronze");
+		TFC_Textures.SheetBlackSteel = registerer.registerIcon(Reference.ModID + ":" + "metal/Black Steel");
+		TFC_Textures.SheetBlueSteel = registerer.registerIcon(Reference.ModID + ":" + "metal/Blue Steel");
+		TFC_Textures.SheetBrass = registerer.registerIcon(Reference.ModID + ":" + "metal/Brass");
+		TFC_Textures.SheetBronze = registerer.registerIcon(Reference.ModID + ":" + "metal/Bronze");
+		TFC_Textures.SheetCopper = registerer.registerIcon(Reference.ModID + ":" + "metal/Copper");
+		TFC_Textures.SheetGold = registerer.registerIcon(Reference.ModID + ":" + "metal/Gold");
+		TFC_Textures.SheetLead = registerer.registerIcon(Reference.ModID + ":" + "metal/Lead");
+		TFC_Textures.SheetNickel = registerer.registerIcon(Reference.ModID + ":" + "metal/Nickel");
+		TFC_Textures.SheetPigIron = registerer.registerIcon(Reference.ModID + ":" + "metal/Pig Iron");
+		TFC_Textures.SheetPlatinum = registerer.registerIcon(Reference.ModID + ":" + "metal/Platinum");
+		TFC_Textures.SheetRedSteel = registerer.registerIcon(Reference.ModID + ":" + "metal/Red Steel");
+		TFC_Textures.SheetRoseGold = registerer.registerIcon(Reference.ModID + ":" + "metal/Rose Gold");
+		TFC_Textures.SheetSilver = registerer.registerIcon(Reference.ModID + ":" + "metal/Silver");
+		TFC_Textures.SheetSteel = registerer.registerIcon(Reference.ModID + ":" + "metal/Steel");
+		TFC_Textures.SheetSterlingSilver = registerer.registerIcon(Reference.ModID + ":" + "metal/Sterling Silver");
+		TFC_Textures.SheetTin = registerer.registerIcon(Reference.ModID + ":" + "metal/Tin");
+		TFC_Textures.SheetWroughtIron = registerer.registerIcon(Reference.ModID + ":" + "metal/Wrought Iron");
+		TFC_Textures.SheetZinc = registerer.registerIcon(Reference.ModID + ":" + "metal/Zinc");
 	}
 
 	@Override
@@ -102,7 +125,10 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	public IIcon getIcon(IBlockAccess access, int i, int j, int k, int meta)
 	{
 		TEMetalSheet te = (TEMetalSheet) access.getTileEntity(i, j, k);
-		return icons[te.metalID];
+		if(te!= null)
+			return icons[te.metalID];
+		else
+			return icons[19];
 	}
 
 	@Override
@@ -115,31 +141,30 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 		double yMin = 0;
 
 		if(te.TopExists())
-			list.add(AxisAlignedBB.getBoundingBox(0.0, f1, 0.0, 1.0, 1.0, 1.0));
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0, f1, 0.0, 1.0, 1.0, 1.0), 0});
 		if(te.BottomExists())
-			list.add(AxisAlignedBB.getBoundingBox(0.0, 0, 0.0, 1.0, f0, 1.0));
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0, 0, 0.0, 1.0, f0, 1.0), 1});
 		if(te.NorthExists())
-			list.add(AxisAlignedBB.getBoundingBox(0, yMin, 0, 1, yMax, f0));
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0, yMin, 0, 1, yMax, f0), 2});
 		if(te.SouthExists())
-			list.add(AxisAlignedBB.getBoundingBox(0, yMin, f1, 1, yMax, 1));
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0, yMin, f1, 1, yMax, 1), 3});
 		if(te.EastExists())
-			list.add(AxisAlignedBB.getBoundingBox(0, yMin, 0, f0, yMax, 1));
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0, yMin, 0, f0, yMax, 1), 4});
 		if(te.WestExists())
-			list.add(AxisAlignedBB.getBoundingBox(f1, yMin, 0, 1, yMax, 1));
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(f1, yMin, 0, 1, yMax, 1), 5});
 	}
 
 	@Override
 	public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB aabb, List list, Entity entity)
 	{
-		ArrayList<AxisAlignedBB> l = new ArrayList<AxisAlignedBB>();
+		ArrayList<Object[]> l = new ArrayList<Object[]>();
 		addCollisionBoxesToList(world,i,j,k,l);
-		for(AxisAlignedBB a : l)
+		for(Object[] o : l)
 		{
-			this.setBlockBounds((float)a.minX, (float)a.minY, (float)a.minZ, (float)a.maxX, (float)a.maxY, (float)a.maxZ);
-			super.addCollisionBoxesToList(world, i, j, k, aabb, list, entity);
+			AxisAlignedBB a = (AxisAlignedBB)o[0];
+			if (a != null && aabb.intersectsWith(a))
+				list.add(a);
 		}
-		//this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		//setBlockBoundsBasedOnState(world,i,j,k);
 	}
 
 	@Override
@@ -148,58 +173,44 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 		return CollisionRayTraceStandard.collisionRayTrace(this, world, x, y, z, player, view);
 	}
 
+	@Override
+	public boolean isBlockSolid(IBlockAccess world, int x, int y, int z, int side)
+	{
+		TEMetalSheet te = (TEMetalSheet)world.getTileEntity(x, y, z);
+		switch(side)
+		{
+		case 0:return te.TopExists();
+		case 1:return te.BottomExists();
+		case 3:return te.NorthExists();
+		case 2:return te.SouthExists();
+		case 6:return te.EastExists();
+		case 4:return te.WestExists();
+		default: return false;
+		}
+	}
+
 	/*@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z)
+	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
-		TEMetalSheet te = (TEMetalSheet) access.getBlockTileEntity(x, y, z);
-		float minX = 1;
-		float maxX = 0;
-		float minY = 1;
-		float maxY = 0;
-		float minZ = 1;
-		float maxZ = 0;
-
-		if(te.TopExists())
+		if(!world.isRemote)
 		{
-			maxY = Math.max(1f, maxY);
-			minY = Math.min(0.9375f, minY);
+			Vec3 posVec = player.getPosition(1.0F);
+			Vec3 lookVec = player.getLookVec();
+			Vec3 vec32 = posVec.addVector(lookVec.xCoord * 5, lookVec.yCoord * 5, lookVec.zCoord * 5f);
+			MovingObjectPosition mop = world.clip(posVec, vec32);
+			if(mop != null)
+			{
+				Object[] o = (Object[])mop.hitInfo;
+				if(o != null && o.length > 1)
+				{
+					TEMetalSheet te = (TEMetalSheet)world.getBlockTileEntity(x, y, z);
+					te.toggleBySide((Integer)o[1], false);
+					return true;
+				}	
+			}
+
+			return world.setBlockToAir(x, y, z);
 		}
-
-		if(te.BottomExists())
-		{
-			maxY = Math.max(0.0625f, maxY);
-			minY = Math.min(0, minY);
-		}
-
-		if(te.NorthExists())
-		{
-			maxZ = Math.max(0.0625f, maxZ);
-			minZ = Math.min(0, minZ);
-		}
-
-		if(te.SouthExists())
-		{
-			maxZ = Math.max(1f, maxZ);
-			minZ = Math.min(0.9375f, minZ);
-		}
-
-		if(te.EastExists())
-		{
-			maxX = Math.max(0.0625f, maxX);
-			minX = Math.min(0, minX);
-		}
-
-		if(te.WestExists())
-		{
-			maxX = Math.max(1f, maxX);
-			minX = Math.min(0.9375f, minX);
-		}
-
-		setBlockBounds(minX,minY,minZ,maxX,maxY,maxZ);
-	}*/
-
-	/*public void setBlockBoundsBasedOnSelection(IBlockAccess access, int x, int y, int z) 
-	{
-		setBlockBoundsBasedOnState(access,x,y,z);
+		return false;
 	}*/
 }

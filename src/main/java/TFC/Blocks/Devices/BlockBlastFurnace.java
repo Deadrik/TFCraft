@@ -19,6 +19,7 @@ import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFCTabs;
 import TFC.TileEntities.TEBlastFurnace;
+import TFC.TileEntities.TEMetalSheet;
 
 public class BlockBlastFurnace extends BlockTerraContainer
 {
@@ -45,12 +46,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
-		int meta = world.getBlockMetadata(i, j, k);
-		int xCoord = i;
-		int yCoord = j;
-		int zCoord = k;
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
-		int itemid;
 
 		if(!canBlockStay(world,i,j,k))
 		{
@@ -60,17 +56,13 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		else if(world.getTileEntity(i, j, k) != null)
 		{
 			TEBlastFurnace te = (TEBlastFurnace)world.getTileEntity(i, j, k);
-			ItemStack is = entityplayer.getCurrentEquippedItem();
 
 			if(te.isValid)
 			{
 				if(equippedItem != null && (equippedItem.getItem() == TFCItems.FireStarter || equippedItem.getItem() == TFCItems.FlintSteel))
-				{
 					if(te.canLight())
-					{
 						entityplayer.getCurrentEquippedItem().damageItem(1,entityplayer);
-					}
-				}
+
 				entityplayer.openGui(TerraFirmaCraft.instance, 26, world, i, j, k);
 			}
 		}
@@ -80,16 +72,57 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	@Override
 	public boolean canBlockStay(World world, int i, int j, int k)
 	{
-		int meta = world.getBlockMetadata(i, j, k) & 3;
-		int y = j+1;
+		return checkStackAt(world,i,j+1,k);
+	}
+	
+	public boolean checkStackAt(World world, int x, int y, int z)
+	{
+		Block firebrick = TFCBlocks.FireBrick;
 
-		if(world.getBlock(i+1, y, k).getMaterial() == Material.rock || world.getBlock(i+1, y, k).getMaterial() == Material.iron)
-			if(world.getBlock(i-1, y, k).getMaterial() == Material.rock || world.getBlock(i-1, y, k).getMaterial() == Material.iron)
-				if(world.getBlock(i, y, k+1).getMaterial() == Material.rock || world.getBlock(i, y, k+1).getMaterial() == Material.iron)
-					if(world.getBlock(i, y, k-1).getMaterial() == Material.rock || world.getBlock(i, y, k-1).getMaterial() == Material.iron)
-						return true;
-
+		if(world.getBlock(x+1, y, z) == firebrick && checkBlock(world, x+1, y, z, x, z))
+			if(world.getBlock(x-1, y, z) == firebrick && checkBlock(world, x-1, y, z, x, z))
+				if(world.getBlock(x, y, z+1) == firebrick && checkBlock(world, x, y, z+1, x, z))
+					if(world.getBlock(x, y, z-1) == firebrick && checkBlock(world, x, y, z-1, x, z))
+						if(world.isAirBlock(x, y, z) || world.getBlock(x, y, z) == TFCBlocks.Molten)
+							return true;
 		return false;
+	}
+
+	public boolean checkBlock(World world, int x, int y, int z, int stackX, int stackZ)
+	{
+		int xCoord = x-1;
+		int zCoord = z;
+		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlock(xCoord, y, zCoord) == TFCBlocks.MetalSheet)
+		{
+			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(xCoord, y, zCoord);
+			if(!te.WestExists())
+				return false;
+		}
+		xCoord = x+1;
+		zCoord = z;
+		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlock(xCoord, y, zCoord) == TFCBlocks.MetalSheet)
+		{
+			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(xCoord, y, zCoord);
+			if(!te.EastExists())
+				return false;
+		}
+		xCoord = x;
+		zCoord = z-1;
+		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlock(xCoord, y, zCoord) == TFCBlocks.MetalSheet)
+		{
+			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(xCoord, y, zCoord);
+			if(!te.SouthExists())
+				return false;
+		}
+		xCoord = x;
+		zCoord = z+1;
+		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlock(xCoord, y, zCoord) == TFCBlocks.MetalSheet)
+		{
+			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(xCoord, y, zCoord);
+			if(!te.NorthExists())
+				return false;
+		}
+		return true;
 	}
 
 	@Override

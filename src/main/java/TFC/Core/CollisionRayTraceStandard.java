@@ -38,14 +38,12 @@ public class CollisionRayTraceStandard
 			}
 			if (min != null)
 			{
-
-				((Block) b).setBlockBounds(0, 0, 0, 1, 1, 1);
-				CollisionRayTraceStandard.rayTraceBound(
-						AxisAlignedBB.getBoundingBox(((Block) b).getBlockBoundsMinX(), ((Block) b).getBlockBoundsMinY(), ((Block) b).getBlockBoundsMinZ(),
-								((Block) b).getBlockBoundsMaxX(), ((Block) b).getBlockBoundsMaxY(), ((Block) b).getBlockBoundsMaxZ()), x, y, z, player, view);
-				((Block) b).setBlockBounds(1, 1, 1, 1, 1, 1);
-
-				return new MovingObjectPosition(x, y, z, (Byte) min[1], ((Vec3) min[0]).addVector(x, y, z));
+				AxisAlignedBB aabb = (AxisAlignedBB)((Object[])min[3])[0];
+				((Block) b).setBlockBounds((float)aabb.minX, (float)aabb.minY,(float)aabb.minZ,(float)aabb.maxX,(float)aabb.maxY,(float)aabb.maxZ);
+				CollisionRayTraceStandard.rayTraceBound(aabb, x, y, z, player, view);
+				MovingObjectPosition mop = new MovingObjectPosition(x, y, z, (Byte) min[1], ((Vec3) min[0]).addVector(x, y, z));
+				mop.hitInfo = min[3];
+				return mop;
 			}
 		}
 		((Block) b).setBlockBounds(0, 0, 0, 1, 1, 1);
@@ -136,20 +134,21 @@ public class CollisionRayTraceStandard
 		{
 			side = 3;
 		}
-		return new Object[] { tracedBound, side, player.distanceTo(tracedBound) };
+		return new Object[] { tracedBound, side, player.distanceTo(tracedBound), bound };
 	}
 
 	public static List<Object[]> rayTraceSubBlocks(ICustomCollision b, World world, Vec3 player, Vec3 view, int i, int j, int k, List<Object[]> returns)
 	{
-		List<AxisAlignedBB> bblist = new ArrayList<AxisAlignedBB>();
+		List<Object[]> bblist = new ArrayList<Object[]>();
 		b.addCollisionBoxesToList(world, i, j, k, bblist);
-		for (AxisAlignedBB o : bblist)
+		for (Object[] o : bblist)
 		{
-			Object[] ret = CollisionRayTraceStandard.rayTraceBound(o, i, j, k, player, view);
+			AxisAlignedBB aabb = (AxisAlignedBB)o[0];
+			Object[] ret = CollisionRayTraceStandard.rayTraceBound(aabb, i, j, k, player, view);
 
 			if (ret != null)
 			{
-				returns.add(new Object[] { ret[0], ret[1], ret[2] });
+				returns.add(new Object[] { ret[0], ret[1], ret[2], o});
 			}
 		}
 

@@ -292,9 +292,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil2, 1, 1), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.BismuthBronzeIngot2x});
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil2, 1, 2), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.BlackBronzeIngot2x});
 
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Scribe, 1), new Object[] { " L ","#P#","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767),
-			Character.valueOf('P'), Items.paper,Character.valueOf('L'), Items.feather});
-		//GameRegistry.addRecipe(new ItemStack(TFCItems.CeramicMold, 4, 0), new Object[] { "# #","###", Character.valueOf('#'), new ItemStack(Items.clay,1,32767)});
+		//GameRegistry.addRecipe(new ItemStack(TFCItems.CeramicMold, 4, 0), new Object[] { "# #","###", Character.valueOf('#'), new ItemStack(Item.clay,1,32767)});
 
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.EarlyBloomery, 1), new Object[] { "PPP","P P","PPP", Character.valueOf('P'), new ItemStack(TFCItems.BronzeSheet2x, 1)});
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.EarlyBloomery, 1), new Object[] { "PPP","P P","PPP", Character.valueOf('P'), new ItemStack(TFCItems.BismuthBronzeSheet2x, 1)});
@@ -347,16 +345,12 @@ public class Recipes
 			Character.valueOf('P'), TFCBlocks.StoneSedSmooth});
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Quern, 1), new Object[] { "PPP", 
 			Character.valueOf('P'), TFCBlocks.StoneMMSmooth});
-		GameRegistry.addRecipe(new ItemStack(Items.book,1),new Object[]{" P "," P "," PQ",Character.valueOf('P'),new ItemStack(Items.paper,1),		
-			Character.valueOf('Q'),new ItemStack(TFCItems.TerraLeather,1)});
-		GameRegistry.addRecipe(new ItemStack(Items.book,1),new Object[]{" P "," P ","QP ",Character.valueOf('P'),new ItemStack(Items.paper,1),		
-			Character.valueOf('Q'),new ItemStack(TFCItems.TerraLeather,1)});
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.book,1),new Object[]{new ItemStack(Items.paper,3),new ItemStack(TFCItems.TerraLeather,1)});
 
 		//remove wool and book and quill recipes
-		//RemoveRecipe(new ItemStack(Items.writableBook));
-		RemoveRecipe(new ItemStack(Blocks.wool));
+		//RemoveRecipe(new ItemStack(Item.writableBook));
 		RemoveRecipe(new ItemStack(Blocks.wooden_button));
-
+		
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.writabeBookTFC,1), new Object[]{new ItemStack(Items.book,1)});
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Spindle,1), new Object[] { "P","#",Character.valueOf('P'),
 			new ItemStack(TFCItems.SpindleHead,1, 1),Character.valueOf('#'),new ItemStack(Items.stick,1)});
@@ -639,6 +633,12 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Items.dye,2, 11));
 			RemoveRecipe(new ItemStack(Blocks.fence,2));
 			RemoveRecipe(new ItemStack(Blocks.fence_gate,1));
+			RemoveRecipe(new ItemStack(Blocks.wool));
+
+			RemoveRecipe(new ItemStack(Items.leather_helmet));
+			RemoveRecipe(new ItemStack(Items.leather_chestplate));
+			RemoveRecipe(new ItemStack(Items.leather_leggings));
+			RemoveRecipe(new ItemStack(Items.leather_boots));
 
 			//Remove the vanilla stairs
 			RemoveRecipe(new ItemStack(Blocks.birch_stairs, 4));
@@ -934,10 +934,6 @@ public class Recipes
 		registerKnapping();
 
 		//Leather Working
-		RemoveRecipe(new ItemStack(Items.leather_helmet));
-		RemoveRecipe(new ItemStack(Items.leather_chestplate));
-		RemoveRecipe(new ItemStack(Items.leather_leggings));
-		RemoveRecipe(new ItemStack(Items.leather_boots));
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Items.leather_helmet, 1), new Object[] { "#####","#   #","#   #", Character.valueOf('#'), TFCItems.FlatLeather});
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Items.leather_chestplate, 1), new Object[] { "#   #","#####","#####","#####","#####", Character.valueOf('#'), TFCItems.FlatLeather});
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Items.leather_leggings, 1), new Object[] { "#####","#####","## ##","## ##","## ##", Character.valueOf('#'), TFCItems.FlatLeather});

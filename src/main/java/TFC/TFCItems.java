@@ -92,7 +92,6 @@ import TFC.Items.Tools.ItemGoldPan;
 import TFC.Items.Tools.ItemHammer;
 import TFC.Items.Tools.ItemJavelin;
 import TFC.Items.Tools.ItemMiscToolHead;
-import TFC.Items.Tools.ItemPlan;
 import TFC.Items.Tools.ItemProPick;
 import TFC.Items.Tools.ItemSpindle;
 import TFC.Items.Tools.ItemWritableBookTFC;
@@ -1546,26 +1545,6 @@ public class TFCItems
 		Jute = new ItemTerra().setFolder("plants/").setUnlocalizedName("Jute").setCreativeTab(TFCTabs.TFCMaterials);
 		JuteFibre = new ItemTerra().setFolder("plants/").setUnlocalizedName("Jute Fibre").setCreativeTab(TFCTabs.TFCMaterials);
 
-		// Plans
-		PickaxeHeadPlan = new ItemPlan().setUnlocalizedName("PickaxeHeadPlan");
-		ShovelHeadPlan = new ItemPlan().setUnlocalizedName("ShovelHeadPlan");
-		HoeHeadPlan = new ItemPlan().setUnlocalizedName("HoeHeadPlan");
-		AxeHeadPlan = new ItemPlan().setUnlocalizedName("AxeHeadPlan");
-		HammerHeadPlan = new ItemPlan().setUnlocalizedName("HammerHeadPlan");
-		ChiselHeadPlan = new ItemPlan().setUnlocalizedName("ChiselHeadPlan");
-		SwordBladePlan = new ItemPlan().setUnlocalizedName("SwordBladePlan");
-		MaceHeadPlan = new ItemPlan().setUnlocalizedName("MaceHeadPlan");
-		SawBladePlan = new ItemPlan().setUnlocalizedName("SawBladePlan");
-		ProPickHeadPlan = new ItemPlan().setUnlocalizedName("ProPickHeadPlan");
-		HelmetPlan = new ItemPlan().setUnlocalizedName("HelmetPlan");
-		ChestplatePlan = new ItemPlan().setUnlocalizedName("ChestplatePlan");
-		GreavesPlan = new ItemPlan().setUnlocalizedName("GreavesPlan");
-		BootsPlan = new ItemPlan().setUnlocalizedName("BootsPlan");
-		ScythePlan = new ItemPlan().setUnlocalizedName("ScythePlan");
-		KnifePlan = new ItemPlan().setUnlocalizedName("KnifePlan");
-		BucketPlan = new ItemPlan().setUnlocalizedName("BucketPlan");
-		JavelinHeadPlan = new ItemPlan().setUnlocalizedName("JavelinHeadPlan");
-
 		// Food related items
 		SetupFood();
 
@@ -1912,19 +1891,19 @@ public class TFCItems
 		CommonProxy proxy = TerraFirmaCraft.proxy;
 		int i = 0;
 
-		BismuthSheet = 			(new ItemMetalSheet().setUnlocalizedName("Bismuth Sheet"));
-		BismuthBronzeSheet = 	(new ItemMetalSheet().setUnlocalizedName("Bismuth Bronze Sheet"));
-		BlackBronzeSheet = 		(new ItemMetalSheet().setUnlocalizedName("Black Bronze Sheet"));
-		BlackSteelSheet = 		(new ItemMetalSheet().setUnlocalizedName("Black Steel Sheet"));
-		BlueSteelSheet = 		(new ItemMetalSheet().setUnlocalizedName("Blue Steel Sheet"));
-		BronzeSheet = 			(new ItemMetalSheet().setUnlocalizedName("Bronze Sheet"));
-		CopperSheet = 			(new ItemMetalSheet().setUnlocalizedName("Copper Sheet"));
-		WroughtIronSheet = 		(new ItemMetalSheet().setUnlocalizedName("Wrought Iron Sheet"));
-		RedSteelSheet = 		(new ItemMetalSheet().setUnlocalizedName("Red Steel Sheet"));
-		RoseGoldSheet = 		(new ItemMetalSheet().setUnlocalizedName("Rose Gold Sheet"));
-		SteelSheet = 			(new ItemMetalSheet().setUnlocalizedName("Steel Sheet"));
-		TinSheet = 				(new ItemMetalSheet().setUnlocalizedName("Tin Sheet"));
-		ZincSheet = 			(new ItemMetalSheet().setUnlocalizedName("Zinc Sheet"));
+		BismuthSheet = 			(new ItemMetalSheet(0).setUnlocalizedName("Bismuth Sheet"));
+		BismuthBronzeSheet = 	(new ItemMetalSheet(1).setUnlocalizedName("Bismuth Bronze Sheet"));
+		BlackBronzeSheet = 		(new ItemMetalSheet(2).setUnlocalizedName("Black Bronze Sheet"));
+		BlackSteelSheet = 		(new ItemMetalSheet(3).setUnlocalizedName("Black Steel Sheet"));
+		BlueSteelSheet = 		(new ItemMetalSheet(4).setUnlocalizedName("Blue Steel Sheet"));
+		BronzeSheet = 			(new ItemMetalSheet(6).setUnlocalizedName("Bronze Sheet"));
+		CopperSheet = 			(new ItemMetalSheet(7).setUnlocalizedName("Copper Sheet"));
+		WroughtIronSheet = 		(new ItemMetalSheet(19).setUnlocalizedName("Wrought Iron Sheet"));
+		RedSteelSheet = 		(new ItemMetalSheet(13).setUnlocalizedName("Red Steel Sheet"));
+		RoseGoldSheet = 		(new ItemMetalSheet(14).setUnlocalizedName("Rose Gold Sheet"));
+		SteelSheet = 			(new ItemMetalSheet(16).setUnlocalizedName("Steel Sheet"));
+		TinSheet = 				(new ItemMetalSheet(18).setUnlocalizedName("Tin Sheet"));
+		ZincSheet = 			(new ItemMetalSheet(20).setUnlocalizedName("Zinc Sheet"));
 
 		BismuthSheet2x = 		(new ItemMetalSheet2x(0).setUnlocalizedName("Bismuth Double Sheet"));
 		BismuthBronzeSheet2x = 	(new ItemMetalSheet2x(1).setUnlocalizedName("Bismuth Bronze Double Sheet"));
@@ -1941,14 +1920,14 @@ public class TFCItems
 		ZincSheet2x = 			(new ItemMetalSheet2x(20).setUnlocalizedName("Zinc Double Sheet"));
 
 		i = 0;
-		BrassSheet = 			new ItemMetalSheet().setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		GoldSheet = 			new ItemMetalSheet().setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		LeadSheet = 			new ItemMetalSheet().setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		NickelSheet = 			new ItemMetalSheet().setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		PigIronSheet = 			new ItemMetalSheet().setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		PlatinumSheet = 		new ItemMetalSheet().setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		SilverSheet = 			new ItemMetalSheet().setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		SterlingSilverSheet = 	new ItemMetalSheet().setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		BrassSheet = 			new ItemMetalSheet(5).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		GoldSheet = 			new ItemMetalSheet(8).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		LeadSheet = 			new ItemMetalSheet(9).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		NickelSheet = 			new ItemMetalSheet(10).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		PigIronSheet = 			new ItemMetalSheet(11).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		PlatinumSheet = 		new ItemMetalSheet(12).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		SilverSheet = 			new ItemMetalSheet(15).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		SterlingSilverSheet = 	new ItemMetalSheet(17).setUnlocalizedName(NamesNSO[i++]+" Sheet");
 
 		i = 0;
 		BrassSheet2x = 			new ItemMetalSheet2x(5).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");

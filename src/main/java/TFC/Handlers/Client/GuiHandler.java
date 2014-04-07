@@ -29,7 +29,6 @@ import TFC.GUI.GuiPlanSelection;
 import TFC.GUI.GuiQuern;
 import TFC.GUI.GuiQuiver;
 import TFC.GUI.GuiScreenHorseInventoryTFC;
-import TFC.GUI.GuiScribe;
 import TFC.GUI.GuiSluice;
 import TFC.GUI.GuiVessel;
 import TFC.GUI.GuiVesselLiquid;
@@ -45,7 +44,6 @@ import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityForge;
 import TFC.TileEntities.TileEntityLogPile;
 import TFC.TileEntities.TileEntityQuern;
-import TFC.TileEntities.TileEntityScribe;
 import TFC.TileEntities.TileEntitySluice;
 import TFC.TileEntities.TileEntityWorkbench;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -78,7 +76,7 @@ public class GuiHandler extends TFC.Handlers.GuiHandler
 		case 21:
 			return new GuiAnvil(player.inventory, (TileEntityAnvil) te, world, x, y, z);
 		case 22:
-			return new GuiScribe(player.inventory, (TileEntityScribe) te, world, x, y, z);
+			return null;//was scribing table
 		case 23:
 			return new GuiForge(player.inventory, (TileEntityForge) te, world, x, y, z);
 		case 24:

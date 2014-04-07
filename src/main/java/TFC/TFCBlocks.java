@@ -40,7 +40,6 @@ import TFC.Blocks.Devices.BlockForge;
 import TFC.Blocks.Devices.BlockNestBox;
 import TFC.Blocks.Devices.BlockPottery;
 import TFC.Blocks.Devices.BlockQuern;
-import TFC.Blocks.Devices.BlockScribe;
 import TFC.Blocks.Devices.BlockSluice;
 import TFC.Blocks.Devices.BlockSpawnMeter;
 import TFC.Blocks.Devices.BlockStand;
@@ -142,7 +141,6 @@ public class TFCBlocks
 	public static int FenceGateRenderId;
 	public static int NestBoxRenderId;
 	public static int BellowsRenderId;
-	public static int ScribeRenderId;
 	public static int ForgeRenderId;
 	public static int sluiceRenderId;
 	public static int toolRackRenderId;
@@ -217,7 +215,6 @@ public class TFCBlocks
 	public static Block Bellows;
 	public static Block Anvil;
 	public static Block Anvil2;
-	public static Block Scribe;
 	public static Block Forge;
 	public static Block BlastFurnace;
 	public static Block Molten;
@@ -372,7 +369,6 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Bellows, TFC.Items.ItemBlocks.ItemBellows.class, "Bellows");
 		GameRegistry.registerBlock(Anvil, TFC.Items.ItemBlocks.ItemAnvil1.class, "Anvil");
 		GameRegistry.registerBlock(Anvil2, TFC.Items.ItemBlocks.ItemAnvil2.class, "Anvil2");
-		GameRegistry.registerBlock(Scribe, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Scribe");
 		GameRegistry.registerBlock(Forge, "Forge");
 
 		GameRegistry.registerBlock(Molten, "Molten");
@@ -593,7 +589,6 @@ public class TFCBlocks
 		Firepit = new BlockFirepit().setBlockName("Firepit").setHardness(1).setLightLevel(0F);
 		Bellows = new BlockBellows(Material.wood).setBlockName("Bellows").setHardness(2);
 		Forge= new BlockForge().setBlockName("Forge").setHardness(20).setLightLevel(0F);
-		Scribe = new BlockScribe().setBlockName("Scribe").setHardness(2);
 		Anvil = new TFC.Blocks.Devices.BlockAnvil().setBlockName("Anvil").setHardness(3).setResistance(100F);
 		Anvil2 = new TFC.Blocks.Devices.BlockAnvil(8).setBlockName("Anvil2").setHardness(3).setResistance(100F);
 
@@ -685,8 +680,8 @@ public class TFCBlocks
 		SeaGrassFrozen = (new BlockFrozenSeaGrass()).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("seagrassice");
 		SeaGrassFlowing = new BlockTallSeaGrassFlowing().setBlockName("SeaGrassFlowing").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 
-		TFCBlocks.FireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);
-		TFCBlocks.MetalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(8).setResistance(20f);
+		FireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);
+		MetalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(8).setResistance(20f);
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);
 		StoneIgEx.setHarvestLevel("pickaxe", 0);

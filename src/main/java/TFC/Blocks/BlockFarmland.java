@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFarmland extends BlockContainer
 {
-	IIcon[] DirtTexture = new IIcon[23];
+	IIcon[] DirtTexture = new IIcon[20];
 	int textureOffset = 0;
 
 	public BlockFarmland(int tex)
@@ -36,20 +36,20 @@ public class BlockFarmland extends BlockContainer
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		for(int i = textureOffset; i < (textureOffset == 0 ? 16 : 23); i++)
+		for(int i = textureOffset; i < (textureOffset == 0 ? 16 : 20); i++)
 			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "farmland/Farmland"+(i));
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public IIcon getIcon(IBlockAccess access, int xCoord, int yCoord, int zCoord, int par5)
+	public IIcon getIcon(IBlockAccess access, int xCoord, int yCoord, int zCoord, int side)
 	{
 		Block blk = Blocks.dirt;
-
-		if (par5 == 1)//top
-			return DirtTexture[access.getBlockMetadata(xCoord, yCoord, zCoord)+textureOffset];
+		int meta = access.getBlockMetadata(xCoord, yCoord, zCoord);
+		if (side == 1)//top
+			return DirtTexture[meta + textureOffset];
 		else
-			return blk.getIcon(0, access.getBlockMetadata(xCoord, yCoord, zCoord));
+			return blk.getIcon(side, meta);
 	}
 
 	@SideOnly(Side.CLIENT)
