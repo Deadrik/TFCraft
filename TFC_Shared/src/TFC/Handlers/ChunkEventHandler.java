@@ -16,25 +16,28 @@ public class ChunkEventHandler
 	@ForgeSubscribe
 	public void onLoad(ChunkEvent.Load event)
 	{
-		ChunkData cd = ChunkDataManager.getData(event.getChunk().xPosition, event.getChunk().zPosition);
-
-		int month = TFC_Time.getSeasonAdjustedMonth(event.getChunk().zPosition << 4);
-		if (TFC_Time.getYear() > cd.lastSpringGen && month > 1 && month < 6)
+		if (!event.world.isRemote)
 		{
-			int chunk_X = event.getChunk().xPosition;
-			int chunk_Z = event.getChunk().zPosition;
-			cd.lastSpringGen = TFC_Time.getYear();
+			ChunkData cd = ChunkDataManager.getData(event.getChunk().xPosition, event.getChunk().zPosition);
 
-			Random rand = new Random(event.world.getSeed() + ((chunk_X >> 3) - (chunk_Z >> 3)) * (chunk_Z >> 3));
-			int cropid = rand.nextInt(24);
-			CropIndex crop = CropManager.getInstance().getCropFromId(cropid);
-			if (event.world.rand.nextInt(25) == 0 && crop != null)
+			int month = TFC_Time.getSeasonAdjustedMonth(event.getChunk().zPosition << 4);
+			if (TFC_Time.getYear() > cd.lastSpringGen && month > 1 && month < 6)
 			{
-				int num = 1 + event.world.rand.nextInt(5);
-				WorldGenGrowCrops cropGen = new WorldGenGrowCrops(cropid);
-				int x = (chunk_X << 4) + event.world.rand.nextInt(16) + 8;
-				int z = (chunk_Z << 4) + event.world.rand.nextInt(16) + 8;
-				cropGen.generate(event.world, event.world.rand, x, z, num);
+				int chunk_X = event.getChunk().xPosition;
+				int chunk_Z = event.getChunk().zPosition;
+				cd.lastSpringGen = TFC_Time.getYear();
+
+				Random rand = new Random(event.world.getSeed() + ((chunk_X >> 3) - (chunk_Z >> 3)) * (chunk_Z >> 3));
+				int cropid = rand.nextInt(24);
+				CropIndex crop = CropManager.getInstance().getCropFromId(cropid);
+				if (event.world.rand.nextInt(25) == 0 && crop != null)
+				{
+					int num = 1 + event.world.rand.nextInt(5);
+					WorldGenGrowCrops cropGen = new WorldGenGrowCrops(cropid);
+					int x = (chunk_X << 4) + event.world.rand.nextInt(16) + 8;
+					int z = (chunk_Z << 4) + event.world.rand.nextInt(16) + 8;
+					cropGen.generate(event.world, event.world.rand, x, z, num);
+				}
 			}
 		}
 	}
