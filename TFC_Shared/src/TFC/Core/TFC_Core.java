@@ -19,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
@@ -56,15 +57,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFC_Core
 {
-	public enum Direction{PosX,PosZ,NegX,NegZ,None,PosXPosZ,PosXNegZ,NegXPosZ,NegXNegZ,NegY,PosY}
+	public enum Direction
+	{
+		PosX, PosZ, NegX, NegZ, None, PosXPosZ, PosXNegZ, NegXPosZ, NegXNegZ, NegY, PosY
+	}
 
 	public static boolean PreventEntityDataUpdate = false;
 
 	@SideOnly(Side.CLIENT)
 	public static int getMouseX()
 	{
-		ScaledResolution scaledresolution = new ScaledResolution(
-				Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+		ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth,
+				Minecraft.getMinecraft().displayHeight);
 		int i = scaledresolution.getScaledWidth();
 		int k = Mouse.getX() * i / Minecraft.getMinecraft().displayWidth;
 
@@ -74,8 +78,8 @@ public class TFC_Core
 	@SideOnly(Side.CLIENT)
 	public static int getMouseY()
 	{
-		ScaledResolution scaledresolution = new ScaledResolution(
-				Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+		ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth,
+				Minecraft.getMinecraft().displayHeight);
 		int j = scaledresolution.getScaledHeight();
 		int l = j - Mouse.getY() * j / Minecraft.getMinecraft().displayHeight - 1;
 
@@ -84,17 +88,19 @@ public class TFC_Core
 
 	static Boolean isBlockAboveSolid(IBlockAccess blockAccess, int i, int j, int k)
 	{
-		if(TerraFirmaCraft.proxy.getCurrentWorld().isBlockOpaqueCube(i, j+1, k))
+		if (TerraFirmaCraft.proxy.getCurrentWorld().isBlockOpaqueCube(i, j + 1, k))
 			return true;
 
 		return false;
 	}
 
-	public static InventoryPlayer getNewInventory(EntityPlayer player){
+	public static InventoryPlayer getNewInventory(EntityPlayer player)
+	{
 		InventoryPlayer ip = player.inventory;
 		NBTTagList nbt = new NBTTagList();
 		nbt = player.inventory.writeToNBT(nbt);
-		ip = new InventoryPlayer(player){
+		ip = new InventoryPlayer(player)
+		{
 
 			@Override
 			public void damageArmor(float par1)
@@ -108,9 +114,10 @@ public class TFC_Core
 
 				for (int i = 0; i < this.armorInventory.length; ++i)
 				{
-					if (this.armorInventory[i] != null && this.armorInventory[i].getItem() instanceof ItemArmor && !(this.armorInventory[i].getItem() instanceof ItemQuiver))
+					if (this.armorInventory[i] != null && this.armorInventory[i].getItem() instanceof ItemArmor
+							&& !(this.armorInventory[i].getItem() instanceof ItemQuiver))
 					{
-						this.armorInventory[i].damageItem((int)par1, this.player);
+						this.armorInventory[i].damageItem((int) par1, this.player);
 
 						if (this.armorInventory[i].stackSize == 0)
 						{
@@ -134,7 +141,7 @@ public class TFC_Core
 
 				for (int i = 0; i < par1NBTTagList.tagCount(); ++i)
 				{
-					NBTTagCompound nbttagcompound = (NBTTagCompound)par1NBTTagList.tagAt(i);
+					NBTTagCompound nbttagcompound = (NBTTagCompound) par1NBTTagList.tagAt(i);
 					int j = nbttagcompound.getByte("Slot") & 255;
 					ItemStack itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound);
 					if (itemstack != null)
@@ -144,7 +151,7 @@ public class TFC_Core
 							this.mainInventory[j] = itemstack;
 						}
 
-						if (j >= 100 && j < /*this.armorInventory.length*/4 + 100)
+						if (j >= 100 && j < /* this.armorInventory.length */4 + 100)
 						{
 							this.armorInventory[j - 100] = itemstack;
 						}
@@ -152,7 +159,8 @@ public class TFC_Core
 				}
 				int j2 = player.getEntityData().getByte("Head") & 255;
 				ItemStack itemstack2 = ItemStack.loadItemStackFromNBT(player.getEntityData());
-				if(itemstack2!=null && itemstack2.getItem() instanceof ItemTFCArmor && ((ItemTFCArmor)(itemstack2.getItem())).getUnadjustedArmorType() == 0){
+				if (itemstack2 != null && itemstack2.getItem() instanceof ItemTFCArmor && ((ItemTFCArmor) (itemstack2.getItem())).getUnadjustedArmorType() == 0)
+				{
 					this.armorInventory[4] = itemstack2;
 				}
 			}
@@ -168,30 +176,31 @@ public class TFC_Core
 					if (this.mainInventory[i] != null)
 					{
 						nbttagcompound = new NBTTagCompound();
-						nbttagcompound.setByte("Slot", (byte)i);
+						nbttagcompound.setByte("Slot", (byte) i);
 						this.mainInventory[i].writeToNBT(nbttagcompound);
 						par1NBTTagList.appendTag(nbttagcompound);
 					}
 				}
-				for (i = 0; i < /*this.armorInventory.length*/4; ++i)
+				for (i = 0; i < /* this.armorInventory.length */4; ++i)
 				{
 					if (this.armorInventory[i] != null)
 					{
 						nbttagcompound = new NBTTagCompound();
-						nbttagcompound.setByte("Slot", (byte)(i + 100));
+						nbttagcompound.setByte("Slot", (byte) (i + 100));
 						this.armorInventory[i].writeToNBT(nbttagcompound);
 						par1NBTTagList.appendTag(nbttagcompound);
 					}
 				}
-				//Shitty workaround
+				// Shitty workaround
 				nbttagcompound = player.getEntityData();
-				nbttagcompound.setByte("Head", (byte)(4 + 100));
-				if(this.armorInventory[4]!=null){
+				nbttagcompound.setByte("Head", (byte) (4 + 100));
+				if (this.armorInventory[4] != null)
+				{
 					this.armorInventory[4].writeToNBT(nbttagcompound);
-					//par1NBTTagList.appendTag(nbttagcompound);
-				}
-				else{
-					ItemStack is = new ItemStack(0,0,0);
+					// par1NBTTagList.appendTag(nbttagcompound);
+				} else
+				{
+					ItemStack is = new ItemStack(0, 0, 0);
 					is.writeToNBT(nbttagcompound);
 				}
 				return par1NBTTagList;
@@ -204,96 +213,92 @@ public class TFC_Core
 	public static ItemStack RandomGem(Random random, int rockType)
 	{
 		ItemStack is = null;
-		if(random.nextInt(500) == 0)
+		if (random.nextInt(500) == 0)
 		{
 			ArrayList items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(TFCItems.GemAgate,1,0));
-			items.add(new ItemStack(TFCItems.GemAmethyst,1,0));
-			items.add(new ItemStack(TFCItems.GemBeryl,1,0));
-			items.add(new ItemStack(TFCItems.GemEmerald,1,0));
-			items.add(new ItemStack(TFCItems.GemGarnet,1,0));
-			items.add(new ItemStack(TFCItems.GemJade,1,0));
-			items.add(new ItemStack(TFCItems.GemJasper,1,0));
-			items.add(new ItemStack(TFCItems.GemOpal,1,0));
-			items.add(new ItemStack(TFCItems.GemRuby,1,0));
-			items.add(new ItemStack(TFCItems.GemSapphire,1,0));
-			items.add(new ItemStack(TFCItems.GemTourmaline,1,0));
-			items.add(new ItemStack(TFCItems.GemTopaz,1,0));
+			items.add(new ItemStack(TFCItems.GemAgate, 1, 0));
+			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 0));
+			items.add(new ItemStack(TFCItems.GemBeryl, 1, 0));
+			items.add(new ItemStack(TFCItems.GemEmerald, 1, 0));
+			items.add(new ItemStack(TFCItems.GemGarnet, 1, 0));
+			items.add(new ItemStack(TFCItems.GemJade, 1, 0));
+			items.add(new ItemStack(TFCItems.GemJasper, 1, 0));
+			items.add(new ItemStack(TFCItems.GemOpal, 1, 0));
+			items.add(new ItemStack(TFCItems.GemRuby, 1, 0));
+			items.add(new ItemStack(TFCItems.GemSapphire, 1, 0));
+			items.add(new ItemStack(TFCItems.GemTourmaline, 1, 0));
+			items.add(new ItemStack(TFCItems.GemTopaz, 1, 0));
 
-			is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
+			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
 
-		}
-		else if(random.nextInt(1000) == 0)
+		} else if (random.nextInt(1000) == 0)
 		{
 			ArrayList items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(TFCItems.GemAgate,1,1));
-			items.add(new ItemStack(TFCItems.GemAmethyst,1,1));
-			items.add(new ItemStack(TFCItems.GemBeryl,1,1));
-			items.add(new ItemStack(TFCItems.GemEmerald,1,1));
-			items.add(new ItemStack(TFCItems.GemGarnet,1,1));
-			items.add(new ItemStack(TFCItems.GemJade,1,1));
-			items.add(new ItemStack(TFCItems.GemJasper,1,1));
-			items.add(new ItemStack(TFCItems.GemOpal,1,1));
-			items.add(new ItemStack(TFCItems.GemRuby,1,1));
-			items.add(new ItemStack(TFCItems.GemSapphire,1,1));
-			items.add(new ItemStack(TFCItems.GemTourmaline,1,1));
-			items.add(new ItemStack(TFCItems.GemTopaz,1,1));
+			items.add(new ItemStack(TFCItems.GemAgate, 1, 1));
+			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 1));
+			items.add(new ItemStack(TFCItems.GemBeryl, 1, 1));
+			items.add(new ItemStack(TFCItems.GemEmerald, 1, 1));
+			items.add(new ItemStack(TFCItems.GemGarnet, 1, 1));
+			items.add(new ItemStack(TFCItems.GemJade, 1, 1));
+			items.add(new ItemStack(TFCItems.GemJasper, 1, 1));
+			items.add(new ItemStack(TFCItems.GemOpal, 1, 1));
+			items.add(new ItemStack(TFCItems.GemRuby, 1, 1));
+			items.add(new ItemStack(TFCItems.GemSapphire, 1, 1));
+			items.add(new ItemStack(TFCItems.GemTourmaline, 1, 1));
+			items.add(new ItemStack(TFCItems.GemTopaz, 1, 1));
 
-			is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
-		}
-		else if(random.nextInt(2000) == 0)
+			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
+		} else if (random.nextInt(2000) == 0)
 		{
 			ArrayList items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(TFCItems.GemAgate,1,2));
-			items.add(new ItemStack(TFCItems.GemAmethyst,1,2));
-			items.add(new ItemStack(TFCItems.GemBeryl,1,2));
-			items.add(new ItemStack(TFCItems.GemEmerald,1,2));
-			items.add(new ItemStack(TFCItems.GemGarnet,1,2));
-			items.add(new ItemStack(TFCItems.GemJade,1,2));
-			items.add(new ItemStack(TFCItems.GemJasper,1,2));
-			items.add(new ItemStack(TFCItems.GemOpal,1,2));
-			items.add(new ItemStack(TFCItems.GemRuby,1,2));
-			items.add(new ItemStack(TFCItems.GemSapphire,1,2));
-			items.add(new ItemStack(TFCItems.GemTourmaline,1,2));
-			items.add(new ItemStack(TFCItems.GemTopaz,1,2));
+			items.add(new ItemStack(TFCItems.GemAgate, 1, 2));
+			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 2));
+			items.add(new ItemStack(TFCItems.GemBeryl, 1, 2));
+			items.add(new ItemStack(TFCItems.GemEmerald, 1, 2));
+			items.add(new ItemStack(TFCItems.GemGarnet, 1, 2));
+			items.add(new ItemStack(TFCItems.GemJade, 1, 2));
+			items.add(new ItemStack(TFCItems.GemJasper, 1, 2));
+			items.add(new ItemStack(TFCItems.GemOpal, 1, 2));
+			items.add(new ItemStack(TFCItems.GemRuby, 1, 2));
+			items.add(new ItemStack(TFCItems.GemSapphire, 1, 2));
+			items.add(new ItemStack(TFCItems.GemTourmaline, 1, 2));
+			items.add(new ItemStack(TFCItems.GemTopaz, 1, 2));
 
-			is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
-		}
-		else if(random.nextInt(4000) == 0)
+			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
+		} else if (random.nextInt(4000) == 0)
 		{
 			ArrayList items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(TFCItems.GemAgate,1,3));
-			items.add(new ItemStack(TFCItems.GemAmethyst,1,3));
-			items.add(new ItemStack(TFCItems.GemBeryl,1,3));
-			items.add(new ItemStack(TFCItems.GemEmerald,1,3));
-			items.add(new ItemStack(TFCItems.GemGarnet,1,3));
-			items.add(new ItemStack(TFCItems.GemJade,1,3));
-			items.add(new ItemStack(TFCItems.GemJasper,1,3));
-			items.add(new ItemStack(TFCItems.GemOpal,1,3));
-			items.add(new ItemStack(TFCItems.GemRuby,1,3));
-			items.add(new ItemStack(TFCItems.GemSapphire,1,3));
-			items.add(new ItemStack(TFCItems.GemTourmaline,1,3));
-			items.add(new ItemStack(TFCItems.GemTopaz,1,3));
+			items.add(new ItemStack(TFCItems.GemAgate, 1, 3));
+			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 3));
+			items.add(new ItemStack(TFCItems.GemBeryl, 1, 3));
+			items.add(new ItemStack(TFCItems.GemEmerald, 1, 3));
+			items.add(new ItemStack(TFCItems.GemGarnet, 1, 3));
+			items.add(new ItemStack(TFCItems.GemJade, 1, 3));
+			items.add(new ItemStack(TFCItems.GemJasper, 1, 3));
+			items.add(new ItemStack(TFCItems.GemOpal, 1, 3));
+			items.add(new ItemStack(TFCItems.GemRuby, 1, 3));
+			items.add(new ItemStack(TFCItems.GemSapphire, 1, 3));
+			items.add(new ItemStack(TFCItems.GemTourmaline, 1, 3));
+			items.add(new ItemStack(TFCItems.GemTopaz, 1, 3));
 
-			is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
-		}
-		else if(random.nextInt(8000) == 0)
+			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
+		} else if (random.nextInt(8000) == 0)
 		{
 			ArrayList items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(TFCItems.GemAgate,1,4));
-			items.add(new ItemStack(TFCItems.GemAmethyst,1,4));
-			items.add(new ItemStack(TFCItems.GemBeryl,1,4));
-			items.add(new ItemStack(TFCItems.GemEmerald,1,4));
-			items.add(new ItemStack(TFCItems.GemGarnet,1,4));
-			items.add(new ItemStack(TFCItems.GemJade,1,4));
-			items.add(new ItemStack(TFCItems.GemJasper,1,4));
-			items.add(new ItemStack(TFCItems.GemOpal,1,4));
-			items.add(new ItemStack(TFCItems.GemRuby,1,4));
-			items.add(new ItemStack(TFCItems.GemSapphire,1,4));
-			items.add(new ItemStack(TFCItems.GemTourmaline,1,4));
-			items.add(new ItemStack(TFCItems.GemTopaz,1,4));
+			items.add(new ItemStack(TFCItems.GemAgate, 1, 4));
+			items.add(new ItemStack(TFCItems.GemAmethyst, 1, 4));
+			items.add(new ItemStack(TFCItems.GemBeryl, 1, 4));
+			items.add(new ItemStack(TFCItems.GemEmerald, 1, 4));
+			items.add(new ItemStack(TFCItems.GemGarnet, 1, 4));
+			items.add(new ItemStack(TFCItems.GemJade, 1, 4));
+			items.add(new ItemStack(TFCItems.GemJasper, 1, 4));
+			items.add(new ItemStack(TFCItems.GemOpal, 1, 4));
+			items.add(new ItemStack(TFCItems.GemRuby, 1, 4));
+			items.add(new ItemStack(TFCItems.GemSapphire, 1, 4));
+			items.add(new ItemStack(TFCItems.GemTourmaline, 1, 4));
+			items.add(new ItemStack(TFCItems.GemTopaz, 1, 4));
 
-			is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
+			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
 
 		}
 		return is;
@@ -304,8 +309,8 @@ public class TFC_Core
 		for (int y = 2; y >= -2; y--)
 			for (int x = 2; x >= -2; x--)
 				for (int z = 2; z >= -2; z--)
-					if(world.getBlockId(i+x, j+y, k+z) == 0)
-						world.setBlock(i+x, j+y, k+z, Block.leaves.blockID, meta, 2);
+					if (world.getBlockId(i + x, j + y, k + z) == 0)
+						world.setBlock(i + x, j + y, k + z, Block.leaves.blockID, meta, 2);
 	}
 
 	public static void SetupWorld(World world)
@@ -314,7 +319,7 @@ public class TFC_Core
 		Random R = new Random(seed);
 		world.provider.registerWorld(world);
 		Recipes.registerAnvilRecipes(R, world);
-		//TerraFirmaCraft.proxy.registerSkyProvider(world.provider);
+		// TerraFirmaCraft.proxy.registerSkyProvider(world.provider);
 	}
 
 	public static void SetupWorld(World w, long seed)
@@ -322,47 +327,45 @@ public class TFC_Core
 		World world = w;
 		try
 		{
-			//ReflectionHelper.setPrivateValue(WorldInfo.class, w.getWorldInfo(), "randomSeed", seed);
+			// ReflectionHelper.setPrivateValue(WorldInfo.class,
+			// w.getWorldInfo(), "randomSeed", seed);
 			ReflectionHelper.setPrivateValue(WorldInfo.class, w.getWorldInfo(), seed, 0);
 			SetupWorld(w);
-		}
-		catch(Exception ex)
+		} catch (Exception ex)
 		{
 
 		}
 
 	}
 
-	public static boolean isRawStone(World world,int x, int y, int z)
+	public static boolean isRawStone(World world, int x, int y, int z)
 	{
 		int id = world.getBlockId(x, y, z);
-		return id == TFCBlocks.StoneIgEx.blockID || id == TFCBlocks.StoneIgIn.blockID || 
-				id == TFCBlocks.StoneSed.blockID || id == TFCBlocks.StoneMM.blockID;
+		return id == TFCBlocks.StoneIgEx.blockID || id == TFCBlocks.StoneIgIn.blockID || id == TFCBlocks.StoneSed.blockID || id == TFCBlocks.StoneMM.blockID;
 	}
 
-	public static boolean isSmoothStone(World world,int x, int y, int z)
+	public static boolean isSmoothStone(World world, int x, int y, int z)
 	{
 		int id = world.getBlockId(x, y, z);
-		return id == TFCBlocks.StoneIgExSmooth.blockID || id == TFCBlocks.StoneIgInSmooth.blockID || 
-				id == TFCBlocks.StoneSedSmooth.blockID || id == TFCBlocks.StoneMMSmooth.blockID;
+		return id == TFCBlocks.StoneIgExSmooth.blockID || id == TFCBlocks.StoneIgInSmooth.blockID || id == TFCBlocks.StoneSedSmooth.blockID
+				|| id == TFCBlocks.StoneMMSmooth.blockID;
 	}
 
 	public static boolean isSmoothStone(int id)
 	{
-		return id == TFCBlocks.StoneIgExSmooth.blockID || id == TFCBlocks.StoneIgInSmooth.blockID || 
-				id == TFCBlocks.StoneSedSmooth.blockID || id == TFCBlocks.StoneMMSmooth.blockID;
+		return id == TFCBlocks.StoneIgExSmooth.blockID || id == TFCBlocks.StoneIgInSmooth.blockID || id == TFCBlocks.StoneSedSmooth.blockID
+				|| id == TFCBlocks.StoneMMSmooth.blockID;
 	}
 
 	public static boolean isBrickStone(int id)
 	{
-		return id == TFCBlocks.StoneIgExBrick.blockID || id == TFCBlocks.StoneIgInBrick.blockID || 
-				id == TFCBlocks.StoneSedBrick.blockID || id == TFCBlocks.StoneMMBrick.blockID;
+		return id == TFCBlocks.StoneIgExBrick.blockID || id == TFCBlocks.StoneIgInBrick.blockID || id == TFCBlocks.StoneSedBrick.blockID
+				|| id == TFCBlocks.StoneMMBrick.blockID;
 	}
 
 	public static boolean isRawStone(int id)
 	{
-		return id == TFCBlocks.StoneIgEx.blockID || id == TFCBlocks.StoneIgIn.blockID || 
-				id == TFCBlocks.StoneSed.blockID || id == TFCBlocks.StoneMM.blockID;
+		return id == TFCBlocks.StoneIgEx.blockID || id == TFCBlocks.StoneIgIn.blockID || id == TFCBlocks.StoneSed.blockID || id == TFCBlocks.StoneMM.blockID;
 	}
 
 	public static boolean isDirt(int id)
@@ -377,17 +380,14 @@ public class TFC_Core
 
 	public static boolean isGrass(int id)
 	{
-		return (id == TFCBlocks.Grass.blockID || id == TFCBlocks.Grass2.blockID ||
-				id == TFCBlocks.ClayGrass.blockID || id == TFCBlocks.ClayGrass2.blockID ||
-				id == TFCBlocks.PeatGrass.blockID || id == TFCBlocks.DryGrass.blockID || id == TFCBlocks.DryGrass2.blockID);
+		return (id == TFCBlocks.Grass.blockID || id == TFCBlocks.Grass2.blockID || id == TFCBlocks.ClayGrass.blockID || id == TFCBlocks.ClayGrass2.blockID
+				|| id == TFCBlocks.PeatGrass.blockID || id == TFCBlocks.DryGrass.blockID || id == TFCBlocks.DryGrass2.blockID);
 
 	}
 
 	public static boolean isLushGrass(int id)
 	{
-		return (id == TFCBlocks.Grass.blockID || id == TFCBlocks.Grass2.blockID ||
-				id == TFCBlocks.ClayGrass.blockID || id == TFCBlocks.ClayGrass2.blockID ||
-				id == TFCBlocks.PeatGrass.blockID);
+		return (id == TFCBlocks.Grass.blockID || id == TFCBlocks.Grass2.blockID || id == TFCBlocks.ClayGrass.blockID || id == TFCBlocks.ClayGrass2.blockID || id == TFCBlocks.PeatGrass.blockID);
 
 	}
 
@@ -411,37 +411,33 @@ public class TFC_Core
 
 	public static boolean isGrassType1(int id)
 	{
-		return (id == TFCBlocks.Grass.blockID ||
-				id == TFCBlocks.ClayGrass.blockID ||
-				id == TFCBlocks.DryGrass.blockID);
+		return (id == TFCBlocks.Grass.blockID || id == TFCBlocks.ClayGrass.blockID || id == TFCBlocks.DryGrass.blockID);
 
 	}
 
 	public static boolean isGrassType2(int id)
 	{
-		return (id == TFCBlocks.Grass2.blockID ||
-				id == TFCBlocks.ClayGrass2.blockID ||
-				id == TFCBlocks.DryGrass2.blockID);
+		return (id == TFCBlocks.Grass2.blockID || id == TFCBlocks.ClayGrass2.blockID || id == TFCBlocks.DryGrass2.blockID);
 
 	}
 
 	public static boolean isClay(int id)
 	{
-		if(id == TFCBlocks.Clay.blockID || id == TFCBlocks.Clay2.blockID)
+		if (id == TFCBlocks.Clay.blockID || id == TFCBlocks.Clay2.blockID)
 			return true;
 		return false;
 	}
 
 	public static boolean isSand(int id)
 	{
-		if(id == TFCBlocks.Sand.blockID || id == TFCBlocks.Sand2.blockID)
+		if (id == TFCBlocks.Sand.blockID || id == TFCBlocks.Sand2.blockID)
 			return true;
 		return false;
 	}
 
 	public static boolean isPeat(int id)
 	{
-		if(id == TFCBlocks.Peat.blockID)
+		if (id == TFCBlocks.Peat.blockID)
 			return true;
 		return false;
 	}
@@ -453,49 +449,49 @@ public class TFC_Core
 
 	public static boolean isSaltWater(int id)
 	{
-		if(id == Block.waterMoving.blockID || id == Block.waterStill.blockID)
+		if (id == Block.waterMoving.blockID || id == Block.waterStill.blockID)
 			return true;
 		return false;
 	}
 
 	public static boolean isSaltWaterIncludeIce(int id, int meta, Material mat)
 	{
-		if(id == Block.waterMoving.blockID || id == Block.waterStill.blockID || (mat == Material.ice && meta == 0))
+		if (id == Block.waterMoving.blockID || id == Block.waterStill.blockID || (mat == Material.ice && meta == 0))
 			return true;
 		return false;
 	}
 
 	public static boolean isFreshWater(int id)
 	{
-		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID)
+		if (id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID)
 			return true;
 		return false;
 	}
 
 	public static boolean isFreshWaterIncludeIce(int id, int meta)
 	{
-		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID || (id == Block.ice.blockID && meta != 0))
+		if (id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID || (id == Block.ice.blockID && meta != 0))
 			return true;
 		return false;
 	}
 
 	public static boolean isFreshWaterIncludeIce(int id, int meta, Material mat)
 	{
-		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID || (mat == Material.ice && meta != 0))
+		if (id == TFCBlocks.FreshWaterFlowing.blockID || id == TFCBlocks.FreshWaterStill.blockID || (mat == Material.ice && meta != 0))
 			return true;
 		return false;
 	}
 
 	public static boolean isWaterStill(int id)
 	{
-		if(id == Block.waterStill.blockID || id == TFCBlocks.FreshWaterStill.blockID)
+		if (id == Block.waterStill.blockID || id == TFCBlocks.FreshWaterStill.blockID)
 			return true;
 		return false;
 	}
 
 	public static boolean isWaterMoving(int id)
 	{
-		if(id == TFCBlocks.FreshWaterFlowing.blockID || id == Block.waterMoving.blockID)
+		if (id == TFCBlocks.FreshWaterFlowing.blockID || id == Block.waterMoving.blockID)
 			return true;
 		return false;
 	}
@@ -505,117 +501,118 @@ public class TFC_Core
 		return isGrass(id) || isDirt(id) || isClay(id) || isPeat(id);
 	}
 
-	public static boolean isGravel(int id){
+	public static boolean isGravel(int id)
+	{
 		return id == Block.gravel.blockID;
 	}
 
 	public static boolean isGround(int id)
 	{
-		return isSoil(id)|| isRawStone(id) || isSand(id);
+		return isSoil(id) || isRawStone(id) || isSand(id);
 	}
 
 	public static int getSoilMetaFromStone(int inType, int inMeta)
 	{
-		if(inType == TFCBlocks.StoneIgIn.blockID)
+		if (inType == TFCBlocks.StoneIgIn.blockID)
 			return inMeta;
-		else if(inType == TFCBlocks.StoneSed.blockID)
-			return inMeta+3;
-		else if(inType == TFCBlocks.StoneIgEx.blockID)
-			return inMeta+11;
-		else 
+		else if (inType == TFCBlocks.StoneSed.blockID)
+			return inMeta + 3;
+		else if (inType == TFCBlocks.StoneIgEx.blockID)
+			return inMeta + 11;
+		else
 		{
-			if(inMeta == 0)
-				return inMeta+15;
+			if (inMeta == 0)
+				return inMeta + 15;
 			return inMeta;
 		}
 	}
 
 	public static int getItemMetaFromStone(int inType, int inMeta)
 	{
-		if(inType == TFCBlocks.StoneIgIn.blockID)
+		if (inType == TFCBlocks.StoneIgIn.blockID)
 			return inMeta;
-		else if(inType == TFCBlocks.StoneSed.blockID)
-			return inMeta+3;
-		else if(inType == TFCBlocks.StoneIgEx.blockID)
-			return inMeta+11;
-		else if(inType == TFCBlocks.StoneMM.blockID)
-			return inMeta+15;
+		else if (inType == TFCBlocks.StoneSed.blockID)
+			return inMeta + 3;
+		else if (inType == TFCBlocks.StoneIgEx.blockID)
+			return inMeta + 11;
+		else if (inType == TFCBlocks.StoneMM.blockID)
+			return inMeta + 15;
 		else
 			return 0;
 	}
 
 	public static int getTypeForGrassWithRain(int inMeta, float rain)
 	{
-		if(rain >= 500)
+		if (rain >= 500)
 			return getTypeForGrass(inMeta);
 		return getTypeForDryGrass(inMeta);
 	}
 
 	public static int getTypeForGrassWithRainByID(int inID, float rain)
 	{
-		if(rain >= 500)
+		if (rain >= 500)
 			return getTypeForGrassFromSoil(inID);
 		return getTypeForDryGrassFromSoil(inID);
 	}
 
 	public static int getTypeForGrass(int inMeta)
 	{
-		if(inMeta < 16)
+		if (inMeta < 16)
 			return TFCBlocks.Grass.blockID;
 		return TFCBlocks.Grass2.blockID;
 	}
 
 	public static int getTypeForGrassFromDirt(int inID)
 	{
-		if(inID == TFCBlocks.Dirt.blockID)
+		if (inID == TFCBlocks.Dirt.blockID)
 			return TFCBlocks.Grass.blockID;
 		return TFCBlocks.Grass2.blockID;
 	}
 
 	public static int getTypeForDryGrass(int inMeta)
 	{
-		if(inMeta < 16)
+		if (inMeta < 16)
 			return TFCBlocks.DryGrass.blockID;
 		return TFCBlocks.DryGrass2.blockID;
 	}
 
 	public static int getTypeForDryGrassFromSoil(int inID)
 	{
-		if(inID == TFCBlocks.Grass.blockID)
+		if (inID == TFCBlocks.Grass.blockID)
 			return TFCBlocks.DryGrass.blockID;
-		else if(inID == TFCBlocks.Dirt.blockID)
+		else if (inID == TFCBlocks.Dirt.blockID)
 			return TFCBlocks.DryGrass.blockID;
 		return TFCBlocks.DryGrass2.blockID;
 	}
 
 	public static int getTypeForGrassFromSoil(int inID)
 	{
-		if(inID == TFCBlocks.DryGrass.blockID)
+		if (inID == TFCBlocks.DryGrass.blockID)
 			return TFCBlocks.Grass.blockID;
-		else if(inID == TFCBlocks.DryGrass2.blockID)
+		else if (inID == TFCBlocks.DryGrass2.blockID)
 			return TFCBlocks.Grass2.blockID;
-		else if(inID == TFCBlocks.Dirt.blockID)
+		else if (inID == TFCBlocks.Dirt.blockID)
 			return TFCBlocks.Grass.blockID;
 		return TFCBlocks.Grass2.blockID;
 	}
 
 	public static int getTypeForClayGrass(int inMeta)
 	{
-		if(inMeta < 16)
+		if (inMeta < 16)
 			return TFCBlocks.ClayGrass.blockID;
 		return TFCBlocks.ClayGrass2.blockID;
 	}
 
 	public static int getTypeForDirt(int inMeta)
 	{
-		if(inMeta < 16)
+		if (inMeta < 16)
 			return TFCBlocks.Dirt.blockID;
 		return TFCBlocks.Dirt2.blockID;
 	}
 
 	public static int getTypeForClay(int inMeta)
 	{
-		if(inMeta < 16)
+		if (inMeta < 16)
 			return TFCBlocks.Clay.blockID;
 		return TFCBlocks.Clay2.blockID;
 
@@ -623,7 +620,7 @@ public class TFC_Core
 
 	public static int getTypeForSand(int inMeta)
 	{
-		if(inMeta < 16)
+		if (inMeta < 16)
 			return TFCBlocks.Sand.blockID;
 		return TFCBlocks.Sand2.blockID;
 
@@ -632,15 +629,15 @@ public class TFC_Core
 	public static int getRockLayerFromHeight(World world, int x, int y, int z)
 	{
 		ChunkData cd = ChunkDataManager.getData(x >> 4, z >> 4);
-		if(cd != null)
+		if (cd != null)
 		{
 			int[] hm = cd.heightmap;
 			int localX = x & 15;
 			int localZ = z & 15;
 			int localY = localX + localZ * 16;
-			if(y <= TFCOptions.RockLayer3Height + hm[localY])
+			if (y <= TFCOptions.RockLayer3Height + hm[localY])
 				return 2;
-			else if(y <= TFCOptions.RockLayer2Height + hm[localY])
+			else if (y <= TFCOptions.RockLayer2Height + hm[localY])
 				return 1;
 			else
 				return 0;
@@ -652,13 +649,12 @@ public class TFC_Core
 	{
 		int id = world.getBlockId(i, j, k);
 		int meta = world.getBlockMetadata(i, j, k);
-		if(TFC_Core.isGrass(id))
-			if(TFC_Core.isGrassType1(id)) 
+		if (TFC_Core.isGrass(id))
+			if (TFC_Core.isGrassType1(id))
 			{
 				world.setBlock(i, j, k, TFCBlocks.Dirt.blockID, meta, 2);
 				return true;
-			}
-			else if(TFC_Core.isGrassType2(id)) 
+			} else if (TFC_Core.isGrassType2(id))
 			{
 				world.setBlock(i, j, k, TFCBlocks.Dirt2.blockID, meta, 2);
 				return true;
@@ -668,51 +664,50 @@ public class TFC_Core
 
 	public static EnumWoodMaterial getWoodMaterial(ItemStack is)
 	{
-		if(is.itemID == TFCBlocks.Peat.blockID)
+		if (is.itemID == TFCBlocks.Peat.blockID)
 			return EnumWoodMaterial.PEAT;
-		if(is.itemID == TFCBlocks.LogNatural2.blockID){
-			if(is.getItemDamage() == 0)
+		if (is.itemID == TFCBlocks.LogNatural2.blockID)
+		{
+			if (is.getItemDamage() == 0)
 				return EnumWoodMaterial.ACACIA;
-		}
-		else if(is.getItemDamage() == 0)
+		} else if (is.getItemDamage() == 0)
 			return EnumWoodMaterial.ASH;
-		else if(is.getItemDamage() == 1)
+		else if (is.getItemDamage() == 1)
 			return EnumWoodMaterial.ASPEN;
-		else if(is.getItemDamage() == 2)
+		else if (is.getItemDamage() == 2)
 			return EnumWoodMaterial.BIRCH;
-		else if(is.getItemDamage() == 3)
+		else if (is.getItemDamage() == 3)
 			return EnumWoodMaterial.CHESTNUT;
-		else if(is.getItemDamage() == 4)
+		else if (is.getItemDamage() == 4)
 			return EnumWoodMaterial.DOUGLASFIR;
-		else if(is.getItemDamage() == 5)
+		else if (is.getItemDamage() == 5)
 			return EnumWoodMaterial.HICKORY;
-		else if(is.getItemDamage() == 6)
+		else if (is.getItemDamage() == 6)
 			return EnumWoodMaterial.MAPLE;
-		else if(is.getItemDamage() == 7)
+		else if (is.getItemDamage() == 7)
 			return EnumWoodMaterial.OAK;
-		else if(is.getItemDamage() == 8)
+		else if (is.getItemDamage() == 8)
 			return EnumWoodMaterial.PINE;
-		else if(is.getItemDamage() == 9)
+		else if (is.getItemDamage() == 9)
 			return EnumWoodMaterial.REDWOOD;
-		else if(is.getItemDamage() == 10)
+		else if (is.getItemDamage() == 10)
 			return EnumWoodMaterial.SPRUCE;
-		else if(is.getItemDamage() == 11)
+		else if (is.getItemDamage() == 11)
 			return EnumWoodMaterial.SYCAMORE;
-		else if(is.getItemDamage() == 12)
+		else if (is.getItemDamage() == 12)
 			return EnumWoodMaterial.WHITECEDAR;
-		else if(is.getItemDamage() == 13)
+		else if (is.getItemDamage() == 13)
 			return EnumWoodMaterial.WHITEELM;
-		else if(is.getItemDamage() == 14)
+		else if (is.getItemDamage() == 14)
 			return EnumWoodMaterial.WILLOW;
-		else if(is.getItemDamage() == 15)
+		else if (is.getItemDamage() == 15)
 			return EnumWoodMaterial.KAPOK;
 		return EnumWoodMaterial.ASPEN;
 	}
 
 	public static boolean showExtraInformation()
 	{
-		if ((FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) && 
-				(Keyboard.isKeyDown(42)))
+		if ((FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) && (Keyboard.isKeyDown(42)))
 			return true;
 		return false;
 	}
@@ -753,28 +748,28 @@ public class TFC_Core
 		skills.writeNBT(player.getEntityData());
 	}
 
-	public static boolean isTopFaceSolid (World world, int x, int y, int z)
+	public static boolean isTopFaceSolid(World world, int x, int y, int z)
 	{
-		if(world.isBlockNormalCube(x, y, z))
+		if (world.isBlockNormalCube(x, y, z))
 			return true;
-		else if(world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
+		else if (world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
-			if(BlockSlab.getTopChiselLevel(te.extraData) != 0)
+			if (BlockSlab.getTopChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
 		}
 		return false;
 	}
 
-	public static boolean isBottomFaceSolid (World world, int x, int y, int z)
+	public static boolean isBottomFaceSolid(World world, int x, int y, int z)
 	{
-		if(world.isBlockNormalCube(x, y, z))
+		if (world.isBlockNormalCube(x, y, z))
 			return true;
-		else if(world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
+		else if (world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
-			if(BlockSlab.getBottomChiselLevel(te.extraData) != 0)
+			if (BlockSlab.getBottomChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
 		}
@@ -783,27 +778,27 @@ public class TFC_Core
 
 	public static boolean isNorthSolid(World world, int x, int y, int z)
 	{
-		if(world.isBlockNormalCube(x, y, z-1))
+		if (world.isBlockNormalCube(x, y, z - 1))
 			return true;
-		else if(world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID)
+		else if (world.getBlockId(x, y, z - 1) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z-1);
-			if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z - 1);
+			if (BlockSlab.getNorthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
 		}
 		return false;
 	}
 
-	public static boolean isNorthFaceSolid (World world, int x, int y, int z)
+	public static boolean isNorthFaceSolid(World world, int x, int y, int z)
 	{
 		int bid = world.getBlockId(x, y, z);
-		if(world.isBlockNormalCube(x, y, z))
+		if (world.isBlockNormalCube(x, y, z))
 			return true;
-		else if(bid == TFCBlocks.stoneSlabs.blockID)
+		else if (bid == TFCBlocks.stoneSlabs.blockID)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
-			if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
+			if (BlockSlab.getNorthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
 		}
@@ -812,12 +807,12 @@ public class TFC_Core
 
 	public static boolean isSouthSolid(World world, int x, int y, int z)
 	{
-		if(world.isBlockNormalCube(x, y, z+1))
+		if (world.isBlockNormalCube(x, y, z + 1))
 			return true;
-		else if(world.getBlockId(x, y, z+1) == TFCBlocks.stoneSlabs.blockID)
+		else if (world.getBlockId(x, y, z + 1) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z+1);
-			if(BlockSlab.getSouthChiselLevel(te.extraData) != 0)
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z + 1);
+			if (BlockSlab.getSouthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
 		}
@@ -826,12 +821,12 @@ public class TFC_Core
 
 	public static boolean isSouthFaceSolid(World world, int x, int y, int z)
 	{
-		if(world.isBlockNormalCube(x, y, z))
+		if (world.isBlockNormalCube(x, y, z))
 			return true;
-		else if(world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
+		else if (world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
-			if(BlockSlab.getSouthChiselLevel(te.extraData) != 0)
+			if (BlockSlab.getSouthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
 		}
@@ -840,12 +835,12 @@ public class TFC_Core
 
 	public static boolean isEastSolid(World world, int x, int y, int z)
 	{
-		if(world.isBlockNormalCube(x-1, y, z))
+		if (world.isBlockNormalCube(x - 1, y, z))
 			return true;
-		else if(world.getBlockId(x-1, y, z) == TFCBlocks.stoneSlabs.blockID)
+		else if (world.getBlockId(x - 1, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x-1, y, z);
-			if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x - 1, y, z);
+			if (BlockSlab.getEastChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
 		}
@@ -854,12 +849,12 @@ public class TFC_Core
 
 	public static boolean isEastFaceSolid(World world, int x, int y, int z)
 	{
-		if(world.isBlockNormalCube(x, y, z))
+		if (world.isBlockNormalCube(x, y, z))
 			return true;
-		else if(world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
+		else if (world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
-			if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
+			if (BlockSlab.getEastChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
 		}
@@ -868,12 +863,12 @@ public class TFC_Core
 
 	public static boolean isWestSolid(World world, int x, int y, int z)
 	{
-		if(world.isBlockNormalCube(x+1, y, z))
+		if (world.isBlockNormalCube(x + 1, y, z))
 			return true;
-		else if(world.getBlockId(x+1, y, z) == TFCBlocks.stoneSlabs.blockID)
+		else if (world.getBlockId(x + 1, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x+1, y, z);
-			if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x + 1, y, z);
+			if (BlockSlab.getWestChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
 		}
@@ -882,12 +877,12 @@ public class TFC_Core
 
 	public static boolean isWestFaceSolid(World world, int x, int y, int z)
 	{
-		if(world.isBlockNormalCube(x, y, z))
+		if (world.isBlockNormalCube(x, y, z))
 			return true;
-		else if(world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
+		else if (world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
 			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
-			if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
+			if (BlockSlab.getWestChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
 		}
@@ -896,7 +891,7 @@ public class TFC_Core
 
 	public static boolean isOreIron(ItemStack is)
 	{
-		if(is.getItem() instanceof ItemOre && ((ItemOre)is.getItem()).GetMetalType(is) == Global.PIGIRON)
+		if (is.getItem() instanceof ItemOre && ((ItemOre) is.getItem()).GetMetalType(is) == Global.PIGIRON)
 			return true;
 		return false;
 	}
@@ -910,7 +905,7 @@ public class TFC_Core
 	{
 		float birth = animal.getBirthDay();
 		float time = (int) TFC_Time.getTotalDays();
-		float percent =(time-birth)/animal.getNumberOfDaysToAdult();
+		float percent = (time - birth) / animal.getNumberOfDaysToAdult();
 		return Math.min(percent, 1f);
 	}
 
@@ -921,7 +916,7 @@ public class TFC_Core
 
 	public static boolean isPlayerInDebugMode(EntityPlayer player)
 	{
-		if(player.getEntityData() != null && player.getEntityData().hasKey("inDebugMode"))
+		if (player.getEntityData() != null && player.getEntityData().hasKey("inDebugMode"))
 			return true;
 		return false;
 	}
@@ -936,15 +931,16 @@ public class TFC_Core
 
 	public static float getEnvironmentalDecay(float temp, DataLayer rain)
 	{
-		//return 1+((temp-4f)*0.002f);
-		if(temp > 0)
-			return ((1f - (15f / (15f + temp))) * 2+(rain.floatdata1/16000));
-		else return 0;
+		// return 1+((temp-4f)*0.002f);
+		if (temp > 0)
+			return ((1f - (15f / (15f + temp))) * 2 + (rain.floatdata1 / 16000));
+		else
+			return 0;
 	}
 
 	/**
-	 * This is the default item ticking method for use by all containers. Call this if you don't want
-	 * to do custom environmental decay math.
+	 * This is the default item ticking method for use by all containers. Call
+	 * this if you don't want to do custom environmental decay math.
 	 */
 	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z)
 	{
@@ -953,8 +949,8 @@ public class TFC_Core
 	}
 
 	/**
-	 * This is the default item ticking method for use by all containers. Call this if you don't want
-	 * to do custom environmental decay math.
+	 * This is the default item ticking method for use by all containers. Call
+	 * this if you don't want to do custom environmental decay math.
 	 */
 	public static void handleItemTicking(ItemStack[] iinv, World world, int x, int y, int z)
 	{
@@ -962,25 +958,23 @@ public class TFC_Core
 	}
 
 	/**
-	 * This version of the method assumes that the environmental decay modifier has already been calculated.
+	 * This version of the method assumes that the environmental decay modifier
+	 * has already been calculated.
 	 */
 	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z, float environmentalDecayFactor)
 	{
-		for(int i = 0; !world.isRemote && i < iinv.getSizeInventory(); i++)
+		for (int i = 0; !world.isRemote && i < iinv.getSizeInventory(); i++)
 		{
 			ItemStack is = iinv.getStackInSlot(i);
-			if(is != null && iinv.getStackInSlot(i).stackSize <= 0)
+			if (is != null && iinv.getStackInSlot(i).stackSize <= 0)
 				iinv.setInventorySlotContents(i, null);
 
-			if(is != null)
+			if (is != null)
 			{
-				if((is.getItem() instanceof ItemTerra && 
-						((ItemTerra)is.getItem()).onUpdate(is, world, x, y, z)))
+				if ((is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z)))
 				{
 					continue;
-				}
-				else if(is.getItem() instanceof ItemTerraBlock && 
-						((ItemTerraBlock)is.getItem()).onUpdate(is, world, x, y, z))
+				} else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
 				{
 					continue;
 				}
@@ -991,25 +985,23 @@ public class TFC_Core
 	}
 
 	/**
-	 * This version of the method assumes that the environmental decay modifier has already been calculated.
+	 * This version of the method assumes that the environmental decay modifier
+	 * has already been calculated.
 	 */
 	public static void handleItemTicking(ItemStack[] iinv, World world, int x, int y, int z, float environmentalDecayFactor)
 	{
-		for(int i = 0; !world.isRemote && i < iinv.length; i++)
+		for (int i = 0; !world.isRemote && i < iinv.length; i++)
 		{
 			ItemStack is = iinv[i];
-			if(is != null && iinv[i].stackSize <= 0)
+			if (is != null && iinv[i].stackSize <= 0)
 				iinv[i] = null;
 
-			if(is != null)
+			if (is != null)
 			{
-				if((is.getItem() instanceof ItemTerra && 
-						((ItemTerra)is.getItem()).onUpdate(is, world, x, y, z)))
+				if ((is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z)))
 				{
 					continue;
-				}
-				else if(is.getItem() instanceof ItemTerraBlock && 
-						((ItemTerraBlock)is.getItem()).onUpdate(is, world, x, y, z))
+				} else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
 				{
 					continue;
 				}
@@ -1023,59 +1015,59 @@ public class TFC_Core
 	 * @param is
 	 * @param nbt
 	 */
-	private static void tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor) 
-	{		
+	private static void tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor)
+	{
 		NBTTagCompound nbt = is.getTagCompound();
-		if(nbt == null || !nbt.hasKey("foodWeight") || !nbt.hasKey("foodDecay"))
+		if (nbt == null || !nbt.hasKey("foodWeight") || !nbt.hasKey("foodDecay"))
 			return;
 
-		//if the tick timer is up then we cause decay.
-		if(nbt.getInteger("decayTimer") < TFC_Time.getTotalHours())
+		// if the tick timer is up then we cause decay.
+		if (nbt.getInteger("decayTimer") < TFC_Time.getTotalHours())
 		{
 			float decay = nbt.getFloat("foodDecay");
 			float thisDecayRate = 1.0f;
-			//Get the base food decay rate
-			if(is.getItem() instanceof ItemFoodTFC)
-				thisDecayRate = ((ItemFoodTFC)is.getItem()).getDecayRate();
-			//check if the food has a specially applied decay rate in its nbt for some reason
-			if(nbt.hasKey("decayRate"))
+			// Get the base food decay rate
+			if (is.getItem() instanceof ItemFoodTFC)
+				thisDecayRate = ((ItemFoodTFC) is.getItem()).getDecayRate();
+			// check if the food has a specially applied decay rate in its nbt
+			// for some reason
+			if (nbt.hasKey("decayRate"))
 				thisDecayRate = nbt.getFloat("decayRate");
-			//if the food is salted then we cut the decay rate in half
-			if(nbt.hasKey("isSalted"))
+			// if the food is salted then we cut the decay rate in half
+			if (nbt.hasKey("isSalted"))
 				thisDecayRate *= 0.5f;
 
-			/*Here we calculate the decayRate based on the environment. We do this before everything else
-			 * so that its only done once per inventory
+			/*
+			 * Here we calculate the decayRate based on the environment. We do
+			 * this before everything else so that its only done once per
+			 * inventory
 			 */
-			float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(
-					TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")), 
-					TFC_Time.getHourOfDayFromTotalHours(nbt.getInteger("decayTimer")), 
-					x, y, z);
-			DataLayer rain = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRainfallLayerAt(x, z);
-			float environmentalDecay = getEnvironmentalDecay(temp, rain)*environmentalDecayFactor;
+			float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")),
+					TFC_Time.getHourOfDayFromTotalHours(nbt.getInteger("decayTimer")), x, y, z);
+			DataLayer rain = ((TFCWorldChunkManager) world.getWorldChunkManager()).getRainfallLayerAt(x, z);
+			float environmentalDecay = getEnvironmentalDecay(temp, rain) * environmentalDecayFactor;
 
-			if(decay < 0)
+			if (decay < 0)
 			{
 				float d = 1 * (thisDecayRate * environmentalDecay);
-				if(decay + d < 0)
-					decay +=  d;
-				else decay = 0;
-			}
-			else if(decay == 0)
+				if (decay + d < 0)
+					decay += d;
+				else
+					decay = 0;
+			} else if (decay == 0)
 			{
 				decay = nbt.getFloat("foodWeight") * (world.rand.nextFloat() * 0.005f);
 				nbt.setFloat("foodDecay", decay);
-			}
-			else
+			} else
 			{
-				float d =  ((decay * Global.FOOD_DECAY_RATE) / 24) * (thisDecayRate * environmentalDecay);
+				float d = ((decay * Global.FOOD_DECAY_RATE) / 24) * (thisDecayRate * environmentalDecay);
 				decay += d;
 			}
 			nbt.setInteger("decayTimer", nbt.getInteger("decayTimer") + 1);
 			nbt.setFloat("foodDecay", decay);
 		}
 
-		if(nbt.getFloat("foodDecay") / nbt.getFloat("foodWeight") > 0.9f)
+		if (nbt.getFloat("foodDecay") / nbt.getFloat("foodWeight") > 0.9f)
 			is.stackSize = 0;
 
 		is.setTagCompound(nbt);
@@ -1083,14 +1075,19 @@ public class TFC_Core
 
 	public static void animalDropMeat(Entity e, Item i, float foodWeight)
 	{
-		while(foodWeight > 0)
+		while (foodWeight > 0)
 		{
 			float fw = Helper.roundNumber(Math.min(Global.FOOD_MAX_WEIGHT, foodWeight), 10);
-			if(fw<Global.FOOD_MAX_WEIGHT)
+			if (fw < Global.FOOD_MAX_WEIGHT)
 				foodWeight = 0;
 			foodWeight -= fw;
 
 			e.entityDropItem(ItemFoodTFC.createTag(new ItemStack(i, 1), fw), 0);
 		}
+	}
+
+	public static Vec3 getEntityPos(Entity e)
+	{
+		return Vec3.createVectorHelper(e.posX, e.posY, e.posZ);
 	}
 }
