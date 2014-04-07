@@ -522,6 +522,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				short subSurfaceBlock = (short)TFC_Core.getTypeForDirt(TFC_Core.getItemMetaFromStone(rock1.data1, rock1.data2));
 				byte soilMeta = (byte) TFC_Core.getSoilMetaFromStone(rock1.data1, rock1.data2);
 
+				boolean isMountain = biomegenbase == TFCBiome.Mountains;
+
 				float _temp = TFC_Climate.getBioTemperature(chunkX * 16 + xCoord, chunkZ * 16 + zCoord);
 
 				for (int height = 127; height >= 0; --height)
@@ -568,14 +570,12 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							{
 								idsBig[indexBig] = surfaceBlock;
 								metaBig[indexBig] = soilMeta;
-							}
-							else
+							} else if (!isMountain)
 							{
 								idsBig[indexBig] = subSurfaceBlock;
 								metaBig[indexBig] = soilMeta;
 							}
-						}
-						else if (var13 > 0)
+						} else if (var13 > 0 && !isMountain)
 						{
 							--var13;
 							idsBig[indexBig] = subSurfaceBlock;
