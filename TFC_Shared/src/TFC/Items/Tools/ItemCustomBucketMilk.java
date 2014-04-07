@@ -52,6 +52,12 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		setCreativeTab(TFCTabs.TFCTools);
 		this.setFolder("tools/");
 	}
+	
+	@Override
+	public boolean canStack() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{

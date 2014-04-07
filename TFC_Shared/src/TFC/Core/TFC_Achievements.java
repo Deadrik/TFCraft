@@ -7,6 +7,7 @@ import TFC.TFCItems;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
+import net.minecraft.stats.StatList;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.EntityEvent;
@@ -21,7 +22,7 @@ public class TFC_Achievements {
 	public static Achievement achAnvil;
 	public static Achievement achQuern;
 	
-	private static int achievementIndex = 5536123;
+	private static int achievementIndex = 1000;
 	private static ArrayList<Achievement> achlist;
 	
 	public static AchievementPage pageBiome;
@@ -57,7 +58,8 @@ public class TFC_Achievements {
 	}
 	
 	private static Achievement createAchievement(String name, int posX, int posY, ItemStack is, Achievement preReq, String IGN,String desc){
-		Achievement a = (new Achievement(achievementIndex++, name,posX,posY,is,preReq)).registerAchievement();
+		while(StatList.getOneShotStat(achievementIndex++) == null){}
+		Achievement a = (new Achievement(achievementIndex, name,posX,posY,is,preReq)).registerAchievement();
 		addAchievementDesc(name,IGN, desc);
 		achlist.add(a);
 		return a;
