@@ -58,8 +58,7 @@ public class TFC_Achievements {
 	}
 	
 	private static Achievement createAchievement(String name, int posX, int posY, ItemStack is, Achievement preReq, String IGN,String desc){
-		while(StatList.getOneShotStat(achievementIndex++) == null){}
-		Achievement a = (new Achievement(achievementIndex, name,posX,posY,is,preReq)).registerAchievement();
+		Achievement a = (new Achievement(achievementIndex++, name,posX,posY,is,preReq)).registerAchievement();
 		addAchievementDesc(name,IGN, desc);
 		achlist.add(a);
 		return a;
