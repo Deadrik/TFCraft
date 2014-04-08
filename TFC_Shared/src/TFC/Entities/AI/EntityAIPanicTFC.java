@@ -40,7 +40,7 @@ public class EntityAIPanicTFC extends EntityAIBase
 		} else
 		{
 			Vec3 attackedVec = this.theEntityCreature instanceof IAnimal ? ((IAnimal) this.theEntityCreature).getAttackedVec() : null;
-			System.out.println(attackedVec != null);
+			//System.out.println(attackedVec != null);
 			Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.theEntityCreature, 5, 4);
 			if (attackedVec != null)
 			{
@@ -64,7 +64,7 @@ public class EntityAIPanicTFC extends EntityAIBase
 							this.theEntityCreature.boundingBox.expand(8, 8, 8));
 					for (Object entity : list)
 					{
-						System.out.println(entity);
+						//System.out.println(entity);
 						((IAnimal) entity).setAttackedVec(attackedVec);
 					}
 				}

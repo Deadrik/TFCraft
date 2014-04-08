@@ -59,9 +59,9 @@ public class FoodStatsTFC
 	public FoodStatsTFC(EntityPlayer player)
 	{
 		this.player = player;
-		waterTimer = TFC_Time.getTotalTicks();
-		foodTimer = TFC_Time.getTotalTicks();
-		foodHealTimer = TFC_Time.getTotalTicks();
+		waterTimer = Math.max(TFC_Time.getTotalTicks(),TFC_Time.startTime);
+		foodTimer = Math.max(TFC_Time.getTotalTicks(),TFC_Time.startTime);
+		foodHealTimer = Math.max(TFC_Time.getTotalTicks(),TFC_Time.startTime);
 	}
 
 	/**
@@ -86,6 +86,11 @@ public class FoodStatsTFC
 			/*
 			 * Standard filling reduction based upon time.
 			 */
+			if(this.foodTimer < TFC_Time.startTime){
+				this.foodTimer = TFC_Time.startTime;
+				this.foodHealTimer = TFC_Time.startTime;
+				this.waterTimer = TFC_Time.startTime;
+			}
 			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength && !player.capabilities.isCreativeMode)
 			{
 				this.foodTimer += TFC_Time.hourLength;
