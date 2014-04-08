@@ -85,7 +85,8 @@ public class BlockPottery extends BlockTerraContainer
 				te.addLog(player.inventory.getCurrentItem());
 				return true;
 			}
-			else if((player.inventory.getCurrentItem() == null || !(player.inventory.getCurrentItem().getItem() instanceof ItemPotteryBase)))
+			else if(((player.inventory.getCurrentItem() == null || !(player.inventory.getCurrentItem().getItem() instanceof ItemPotteryBase))) && 
+					player.inventory.getCurrentItem().getItem() != TFCItems.FireStarter && player.inventory.getCurrentItem().getItem() != TFCItems.FlintSteel)
 			{
 				if(te.wood > 0)
 				{

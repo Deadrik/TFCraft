@@ -7,13 +7,13 @@ import java.io.IOException;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.Constant.Global;
 import TFC.API.Util.Helper;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_Achievements;
@@ -211,9 +211,9 @@ public class CraftingHandler implements ICraftingHandler
 						if(!iinventory.getStackInSlot(i).getTagCompound().hasKey("isSalted"))
 							salted = false;
 						//Check if we can add any more to this bundle of food
-						if (finalWeight < 80)
+						if (finalWeight < Global.FOOD_MAX_WEIGHT)
 						{
-							w = Math.min((80-finalWeight), myWeight);
+							w = Math.min((Global.FOOD_MAX_WEIGHT-finalWeight), myWeight);
 							myWeight -= w;
 							finalWeight += w;
 						}
@@ -341,7 +341,6 @@ public class CraftingHandler implements ICraftingHandler
 
 	public static void HandleItem(EntityPlayer entityplayer, IInventory iinventory, Item[] Items)
 	{
-		ItemStack item = null;
 		for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 		{             
 			if(iinventory.getStackInSlot(i) == null)
