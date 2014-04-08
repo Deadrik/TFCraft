@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,6 +12,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.DamageSource;
 import TFC.API.IFood;
+import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Util.Helper;
 import TFC.Core.TFC_Climate;
@@ -71,8 +71,6 @@ public class FoodStatsTFC
 	{	
 		if(!player.worldObj.isRemote)
 		{
-			int difficulty = player.worldObj.difficultySetting;
-			EntityPlayerMP playermp = (EntityPlayerMP)player;
 			BodyTempStats bodyTemp = TFC_Core.getBodyTempStats(player);
 
 			float temp = TFC_Climate.getHeightAdjustedTemp((int)player.posX, (int)player.posY, (int)player.posZ);
@@ -308,9 +306,9 @@ public class FoodStatsTFC
 					addNutrition(EnumFoodGroup.values()[fg[i]], eatAmount*weights[i]);
 			//fill the stomach
 			this.stomachLevel += eatAmount;
-			float _sat = item.getSatisfaction(is);
-			if(!item.isWarm(is))
-				_sat *= 0.25f;
+			item.getSatisfaction(is);
+			if(!item.isWarm(is)) {
+			}
 			this.satisfaction += eatAmount * item.getSatisfaction(is);
 			//Now remove the eaten amount from the itemstack.
 			if(reduceFood(is, eatAmount))
@@ -342,6 +340,12 @@ public class FoodStatsTFC
 		return Math.max(nMod, 0.1f);
 
 	}
+	
+	public static int getMaxHealth(EntityPlayer player)
+	{
+		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.HealthGainRate), TFCOptions.HealthGainCap) * 
+				TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier());
+	}
 
 	/**
 	 * 
@@ -365,16 +369,16 @@ public class FoodStatsTFC
 			this.nutrDairy = Math.min(nutrDairy+amount, 24);
 			break;
 		case Fruit:
-			this.nutrFruit += Math.min(nutrFruit+amount, 24);
+			this.nutrFruit = Math.min(nutrFruit+amount, 24);
 			break;
 		case Grain:
-			this.nutrGrain += Math.min(nutrGrain+amount, 24);
+			this.nutrGrain = Math.min(nutrGrain+amount, 24);
 			break;
 		case Protein:
-			this.nutrProtein += Math.min(nutrProtein+amount, 24);
+			this.nutrProtein = Math.min(nutrProtein+amount, 24);
 			break;
 		case Vegetable:
-			this.nutrVeg += Math.min(nutrVeg+amount, 24);
+			this.nutrVeg = Math.min(nutrVeg+amount, 24);
 			break;
 		default:
 			break;
