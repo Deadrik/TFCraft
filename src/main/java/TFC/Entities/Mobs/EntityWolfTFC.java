@@ -274,7 +274,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
 		int var2 = (int)(TFC_MobData.WolfDamage * getStrength() * getAggression() * (getSize()/2 + 0.5F));
-		System.out.println(var2+", s: "+getStrength()+", a: "+ getAggression());
+		//System.out.println(var2+", s: "+getStrength()+", a: "+ getAggression());
 		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 	}
 

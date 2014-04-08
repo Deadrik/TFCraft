@@ -88,7 +88,7 @@ public class BlockSand extends BlockTerra
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < Global.STONE_ALL.length; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "sand/Sand" + Global.STONE_ALL[i]);
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "sand/Sand " + Global.STONE_ALL[i]);
 	}
 
 	@Override
