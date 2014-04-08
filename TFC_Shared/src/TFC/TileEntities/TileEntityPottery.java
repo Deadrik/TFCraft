@@ -58,10 +58,8 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				else 
 				{
 					wood = 0;
-					this.setInventorySlotContents(4, null);this.setInventorySlotContents(5, null);
-					this.setInventorySlotContents(6, null);this.setInventorySlotContents(7, null);
-					this.setInventorySlotContents(8, null);this.setInventorySlotContents(9, null);
-					this.setInventorySlotContents(10, null);this.setInventorySlotContents(11, null);
+					inventory[4] = null;inventory[5] = null;inventory[6] = null;inventory[7] = null;
+					inventory[8] = null;inventory[9] = null;inventory[10] = null;inventory[11] = null;
 					straw = 0;
 				}
 			}
@@ -105,6 +103,8 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				}
 
 				wood = 0;
+				inventory[4] = null;inventory[5] = null;inventory[6] = null;inventory[7] = null;
+				inventory[8] = null;inventory[9] = null;inventory[10] = null;inventory[11] = null;
 				straw = 0;
 				broadcastPacketInRange(createUpdatePacket());
 			}
@@ -203,9 +203,8 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 
 	public void ejectItem(int index)
 	{
-		float f3 = 0.01F;
 		EntityItem entityitem;
-		Random rand = new Random();
+		new Random();
 
 		if(inventory[index] != null)
 		{
