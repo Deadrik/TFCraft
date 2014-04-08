@@ -577,6 +577,9 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCItems.FireBrick,1,0), 
 				new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(Item.clay,1,1)});
 
+		GameRegistry.addRecipe(new ItemStack(Block.workbench,1),
+				new Object[]{"PP","PP", Character.valueOf('P'),new ItemStack(TFCBlocks.Planks2,1,32767)});
+		
 		RegisterToolRecipes();
 		registerFoodRecipes();
 		VanillaRecipes();
