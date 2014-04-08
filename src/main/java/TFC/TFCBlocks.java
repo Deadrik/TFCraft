@@ -576,15 +576,15 @@ public class TFCBlocks
 		WoodSupportV2 = new BlockWoodSupport2(Material.wood).setBlockName("WoodSupportV2").setHardness(0.5F).setResistance(1F);
 		WoodSupportH2 = new BlockWoodSupport2(Material.wood).setBlockName("WoodSupportH2").setHardness(0.5F).setResistance(1F);
 
-		tilledSoil = new TFC.Blocks.BlockFarmland(0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
-		tilledSoil2 = new TFC.Blocks.BlockFarmland(16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil2");
+		tilledSoil = new TFC.Blocks.BlockFarmland(TFCBlocks.Dirt, 0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
+		tilledSoil2 = new TFC.Blocks.BlockFarmland(TFCBlocks.Dirt2, 16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil2");
 
 		fruitTreeWood = new BlockFruitWood().setBlockName("fruitTreeWood").setHardness(5.5F).setResistance(2F);
 		fruitTreeLeaves = new BlockFruitLeaves(0).setBlockName("fruitTreeLeaves").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundTypeGrass);
 		fruitTreeLeaves2 = new BlockFruitLeaves(8).setBlockName("fruitTreeLeaves2").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundTypeGrass);
 
-		Sand = new TFC.Blocks.Terrain.BlockSand().setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
-		Sand2 = new BlockSand2().setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
+		Sand = new TFC.Blocks.Terrain.BlockSand(0).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
+		Sand2 = new BlockSand2(16).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
 
 		WoodConstruct = (new TFC.Blocks.BlockWoodConstruct()).setHardness(4F).setStepSound(Block.soundTypeWood).setBlockName("WoodConstruct");
 

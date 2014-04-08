@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -16,52 +15,52 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 import TFC.Reference;
+import TFC.API.Constant.Global;
 import TFC.TileEntities.TileEntityFarmland;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFarmland extends BlockContainer
 {
-	IIcon[] DirtTexture = new IIcon[20];
-	int textureOffset = 0;
+	private Block dirtBlock;
+	private IIcon[] DirtTexture = new IIcon[Global.STONE_ALL.length];
+	private int textureOffset = 0;
 
-	public BlockFarmland(int tex)
+	public BlockFarmland(Block block, int tex)
 	{
 		super(Material.ground);
 		this.setTickRandomly(true);
-		textureOffset = tex;
+		this.dirtBlock = block;
+		this.textureOffset = tex;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		for(int i = textureOffset; i < (textureOffset == 0 ? 16 : 20); i++)
-			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "farmland/Farmland"+(i));
+		for(int i = textureOffset; i < (textureOffset == 0 ? 16 : Global.STONE_ALL.length); i++)
+			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "farmland/Farmland " + Global.STONE_ALL[i]);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(IBlockAccess access, int xCoord, int yCoord, int zCoord, int side)
 	{
-		Block blk = Blocks.dirt;
 		int meta = access.getBlockMetadata(xCoord, yCoord, zCoord);
 		if (side == 1)//top
 			return DirtTexture[meta + textureOffset];
 		else
-			return blk.getIcon(side, meta);
+			return this.dirtBlock.getIcon(side, meta);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
-		Block blk = Blocks.dirt;
-
 		if (side == ForgeDirection.UP.ordinal())
 			return DirtTexture[meta + textureOffset];
 		else
-			return blk.getIcon(0, meta);
+			return this.dirtBlock.getIcon(0, meta);
 	}
 
 	@Override
@@ -71,8 +70,9 @@ public class BlockFarmland extends BlockContainer
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3) {
-		return null;
+	public Item getItemDropped(int par1, Random par2Random, int par3)
+	{
+		return Item.getItemById(0);
 	}
 
 	/**

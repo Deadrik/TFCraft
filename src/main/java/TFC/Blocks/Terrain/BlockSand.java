@@ -16,6 +16,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.TFC_Sounds;
 import cpw.mods.fml.relauncher.Side;
@@ -23,12 +24,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSand extends BlockTerra
 {
-	IIcon[] icons = new IIcon[16];
+	protected IIcon[] icons = new IIcon[21];
+	protected int textureOffset = 0;
 
-	public BlockSand()
+	public BlockSand(int texOff)
 	{
 		super(Material.sand);
 		this.setCreativeTab(CreativeTabs.tabBlock);
+		textureOffset = texOff;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -43,7 +46,8 @@ public class BlockSand extends BlockTerra
 	}
 
 	@Override
-	public int damageDropped(int i) {
+	public int damageDropped(int i)
+	{
 		return i;
 	}
 
@@ -64,7 +68,9 @@ public class BlockSand extends BlockTerra
 	@Override
 	public IIcon getIcon(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 	{
-		return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
+		if (par1IBlockAccess.getBlockMetadata(par2, par3, par4) + textureOffset < 21)
+			return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4) + textureOffset];
+		return icons[20];
 	}
 
 	/**
@@ -73,14 +79,16 @@ public class BlockSand extends BlockTerra
 	@Override
 	public IIcon getIcon(int par1, int par2)
 	{
-		return icons[par2];
+		if (par2 + textureOffset < 21)
+			return icons[par2 + textureOffset];
+		return icons[20];
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		for(int i = 0; i < 16; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "sand/Sand"+i);
+		for(int i = 0; i < Global.STONE_ALL.length; i++)
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "sand/Sand" + Global.STONE_ALL[i]);
 	}
 
 	@Override
