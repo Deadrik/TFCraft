@@ -59,6 +59,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	int outMetal1Count;
 
 	private int cookDelay = 0;
+	private int maxValidStackSize = 0;
 
 	public TEBlastFurnace()
 	{
@@ -248,6 +249,17 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				worldObj.spawnEntityInWorld(entityitem);
 			}
 		}
+		
+		//charcoal
+		if(this.charcoalCount > 0)
+		{
+			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(Items.coal, charcoalCount, 1));
+			entityitem.motionX = (float) rand.nextGaussian() * f3;
+			entityitem.motionY = (float) rand.nextGaussian() * f3 + 0.2F;
+			entityitem.motionZ = (float) rand.nextGaussian() * f3;
+			worldObj.spawnEntityInWorld(entityitem);
+		}
+		
 	}
 
 	@Override
@@ -379,13 +391,15 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			return false;
 		}
 
-		int num = this.moltenCount;
-		while (num > 0)
+		maxValidStackSize = 0;
+		for (int num = 0; num < 5; num++)
 		{
-			if (!((BlockBlastFurnace) TFCBlocks.BlastFurnace).checkStackAt(worldObj, i, j, k))
-				return false;
-			num--;
+			if (!((BlockBlastFurnace) TFCBlocks.BlastFurnace).checkStackAt(worldObj, i, j+num, k))
+				break;
+			maxValidStackSize++;
 		}
+		if(maxValidStackSize == 0)
+			return false;
 		return true;
 	}
 
@@ -471,6 +485,11 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		 * zCoord-1); } }
 		 */
 	}
+	
+	public int getTotalCount()
+	{
+		return charcoalCount+oreCount;
+	}
 
 	int moltenCount = 0;
 
@@ -498,7 +517,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			 */
 			if (list != null && !list.isEmpty() && ((BlockBlastFurnace) TFCBlocks.BlastFurnace).checkStackAt(worldObj, xCoord, yCoord + moltenCount, zCoord))
 			{
-
 				/*
 				 * Iterate through the list and check for charcoal, coke, and
 				 * ore
@@ -514,7 +532,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 					{
 						for (int c = 0; c < entity.getEntityItem().stackSize; c++)
 						{
-							if (charcoalCount + oreCount < 40 && charcoalCount < 20)
+							if (getTotalCount() < 40 && charcoalCount < (this.maxValidStackSize*4))
 							{
 								charcoalCount++;
 								entity.getEntityItem().stackSize--;
@@ -536,7 +554,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 						int nonConsumedOre = 0;
 						for (; c > 0; c--)
 						{
-							if (charcoalCount + oreCount < 40 && oreCount < 20)
+							if (getTotalCount() < 40 && oreCount < (this.maxValidStackSize*4))
 							{
 								if (foundFlux(moltenCount) && AddOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage())))
 									oreCount+=1;
@@ -602,8 +620,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		else if(count > 24 && count <= 32) {moltenCount = 4;}
 		else if(count > 32 && count <= 40) {moltenCount = 5;}
 
-		int validCount = 0;
-
 		/* Fill the bloomery stack with molten ore. */
 		for (int i = 1; i <= 5; i++)
 		{
@@ -611,11 +627,12 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			if((worldObj.isAirBlock(xCoord, yCoord+i, zCoord) ||
 					worldObj.getBlock(xCoord, yCoord+i, zCoord) == TFCBlocks.Molten))
 			{
-				//Make sure that the Stack is surrounded by rock
-				if(isStackValid(xCoord, yCoord + i, zCoord))
+				// Make sure that the Stack is surrounded by rock
+				/*if (isStackValid(xCoord, yCoord + i, zCoord))
+				{
 					validCount++;
-
-				if(i <= moltenCount && i <= validCount)
+				}*/
+				if (i <= moltenCount && i <= this.maxValidStackSize)
 				{
 					if(this.fireTemperature > 200)
 					{
@@ -684,17 +701,19 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setFloat("temperature", fireTemperature);
-		nbttagcompound.setFloat("fuelTimeLeft", fuelTimeLeft);
-		nbttagcompound.setFloat("fuelBurnTemp", fuelBurnTemp);
-		nbttagcompound.setFloat("airFromBellowsTime", airFromBellowsTime);
-		nbttagcompound.setFloat("airFromBellows", airFromBellows);
-		nbttagcompound.setInteger("charcoalCount", charcoalCount);
-		nbttagcompound.setInteger("outMetal1Count", outMetal1Count);
-		nbttagcompound.setByte("oreCount", (byte) oreCount);
+		super.writeToNBT(nbt);
+		nbt.setFloat("temperature", fireTemperature);
+		nbt.setFloat("fuelTimeLeft", fuelTimeLeft);
+		nbt.setFloat("fuelBurnTemp", fuelBurnTemp);
+		nbt.setFloat("airFromBellowsTime", airFromBellowsTime);
+		nbt.setFloat("airFromBellows", airFromBellows);
+		nbt.setInteger("charcoalCount", charcoalCount);
+		nbt.setInteger("outMetal1Count", outMetal1Count);
+		nbt.setByte("oreCount", (byte) oreCount);
+		nbt.setInteger("maxValidStackSize", maxValidStackSize);
+		
 
 		NBTTagList nbttaglist = new NBTTagList();
 		for (int i = 0; i < fireItemStacks.length; i++)
@@ -707,7 +726,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
-		nbttagcompound.setTag("Items", nbttaglist);
+		nbt.setTag("Items", nbttaglist);
 
 		NBTTagList nbttaglist2 = new NBTTagList();
 		for (int i = 0; i < input.length; i++)
@@ -720,7 +739,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				nbttaglist2.appendTag(nbttagcompound1);
 			}
 		}
-		nbttagcompound.setTag("Input", nbttaglist2);
+		nbt.setTag("Input", nbttaglist2);
 
 		NBTTagList nbttaglist3 = new NBTTagList();
 		for (int i = 0; i < outputItemStacks.length; i++)
@@ -733,23 +752,24 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				nbttaglist3.appendTag(nbttagcompound1);
 			}
 		}
-		nbttagcompound.setTag("Output", nbttaglist3);
+		nbt.setTag("Output", nbttaglist3);
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbttagcompound);
-		fireTemperature = nbttagcompound.getFloat("temperature");
-		fuelTimeLeft = nbttagcompound.getFloat("fuelTimeLeft");
-		fuelBurnTemp = nbttagcompound.getFloat("fuelBurnTemp");
-		airFromBellowsTime = nbttagcompound.getFloat("airFromBellowsTime");
-		airFromBellows = nbttagcompound.getFloat("airFromBellows");
-		charcoalCount = nbttagcompound.getInteger("charcoalCount");
-		outMetal1Count = nbttagcompound.getInteger("outMetal1Count");
-		oreCount = nbttagcompound.getByte("oreCount");
+		super.readFromNBT(nbt);
+		fireTemperature = nbt.getFloat("temperature");
+		fuelTimeLeft = nbt.getFloat("fuelTimeLeft");
+		fuelBurnTemp = nbt.getFloat("fuelBurnTemp");
+		airFromBellowsTime = nbt.getFloat("airFromBellowsTime");
+		airFromBellows = nbt.getFloat("airFromBellows");
+		charcoalCount = nbt.getInteger("charcoalCount");
+		outMetal1Count = nbt.getInteger("outMetal1Count");
+		oreCount = nbt.getByte("oreCount");
+		maxValidStackSize = nbt.getInteger("maxValidStackSize");
 
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
+		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		fireItemStacks = new ItemStack[20];
 		for (int i = 0; i < nbttaglist.tagCount(); i++)
 		{
@@ -759,7 +779,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
 
-		NBTTagList nbttaglist2 = nbttagcompound.getTagList("Input", 10);
+		NBTTagList nbttaglist2 = nbt.getTagList("Input", 10);
 		input = new ItemStack[2];
 		for (int i = 0; i < nbttaglist2.tagCount(); i++)
 		{
@@ -769,7 +789,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				input[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
 
-		NBTTagList nbttaglist3 = nbttagcompound.getTagList("Output", 10);
+		NBTTagList nbttaglist3 = nbt.getTagList("Output", 10);
 		outputItemStacks = new ItemStack[20];
 		for (int i = 0; i < nbttaglist3.tagCount(); i++)
 		{

@@ -13,6 +13,7 @@ import TFC.API.HeatRegistry;
 import TFC.API.Metal;
 import TFC.Containers.Slots.SlotForShowOnly;
 import TFC.Containers.Slots.SlotLiquidVessel;
+import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.MetalRegistry;
 import TFC.Items.ItemMeltedMetal;
@@ -183,6 +184,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 								nbt.removeTag("MetalAmount");
 								nbt.removeTag("TempTimer");
 								player.inventory.getStackInSlot(bagsSlotNum).setItemDamage(1);
+								player.triggerAchievement(TFC_Achievements.achCopperAge);
 							}
 							else
 							{

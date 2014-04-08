@@ -98,6 +98,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 	int[] heightMap = new int[256];
 
+	WorldGenFissure fissureGen = new WorldGenFissure(TFCBlocks.FreshWaterFlowing,1,false, 10);
+
 	public TFCChunkProviderGenerate(World par1World, long par2, boolean par4)
 	{
 		super(par1World, par2, par4);
@@ -173,9 +175,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		this.rand.setSeed(chunkX * var7 + chunkZ * var9 ^ this.worldObj.getSeed());
 		boolean var11 = false;
 
-		int var12;
-		int var13;
-		int var14;
+		int x;
+		int y;
+		int z;
 
 		int waterRand = 4;
 		if(TFC_Climate.getStability(xCoord, zCoord) == 1)
@@ -188,10 +190,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 		if (!var11 && this.rand.nextInt(waterRand) == 0)
 		{
-			var12 = xCoord + this.rand.nextInt(16) + 8;
-			var13 = this.rand.nextInt(128);
-			var14 = zCoord + this.rand.nextInt(16) + 8;
-			(new WorldGenFissure(TFCBlocks.FreshWaterFlowing,1,false, 10)).generate(this.worldObj, this.rand, var12, var13, var14);
+			x = xCoord + this.rand.nextInt(16) + 8;
+			z = zCoord + this.rand.nextInt(16) + 8;
+			y = 145 - rand.nextInt(45);
+			fissureGen.generate(this.worldObj, this.rand, x, y, z);
 		}
 
 		/*if (!var11 && this.rand.nextInt(4) == 0 && TFC_Climate.getStability(xCoord, zCoord) == 1)
@@ -207,18 +209,18 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		xCoord += 8;
 		zCoord += 8;
 
-		for (var12 = 0; var12 < 16; ++var12)
-			for (var13 = 0; var13 < 16; ++var13)
+		for (x = 0; x < 16; ++x)
+			for (y = 0; y < 16; ++y)
 			{
-				var14 = this.worldObj.getPrecipitationHeight(xCoord + var12, zCoord + var13);
+				z = this.worldObj.getPrecipitationHeight(xCoord + x, zCoord + y);
 
-				if (this.worldObj.isBlockFreezable(var12 + xCoord, var14 - 1, var13 + zCoord))
-					if(biome != TFCBiome.ocean && biome != TFCBiome.beach)
-						this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Blocks.ice, 1, 0x2);
+				if (this.worldObj.isBlockFreezable(x + xCoord, z - 1, y + zCoord))
+					if(biome.biomeID != TFCBiome.ocean.biomeID && biome.biomeID != TFCBiome.beach.biomeID)
+						this.worldObj.setBlock(x + xCoord, z - 1, y + zCoord, Blocks.ice, 1, 0x2);
 					else
-						this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Blocks.ice, 0, 0x2);
-				if (canSnowAt(worldObj, var12 + xCoord, var14, var13 + zCoord))
-					this.worldObj.setBlock(var12 + xCoord, var14, var13 + zCoord, Blocks.snow, 0, 0x2);
+						this.worldObj.setBlock(x + xCoord, z - 1, y + zCoord, Blocks.ice, 0, 0x2);
+				if (canSnowAt(worldObj, x + xCoord, z, y + zCoord))
+					this.worldObj.setBlock(x + xCoord, z, y + zCoord, Blocks.snow, 0, 0x2);
 			}
 	}
 
@@ -503,6 +505,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
 
 		for (int xCoord = 0; xCoord < 16; ++xCoord)
+		{
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
 			{
 				int arrayIndex = xCoord + zCoord * 16;
@@ -552,19 +555,78 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 						if (var13 == -1)
 						{
-							var13 = var12;
-							if (height >= var5 - 1 && index+1 < idsTop.length && idsTop[index+1] != Blocks.water)
-							{
-								idsBig[indexBig] = surfaceBlock;
-								metaBig[indexBig] = soilMeta;
+							//The following makes dirt behave nicer and more smoothly, instead of forming sharp cliffs.
+							int arrayIndexx = xCoord > 0? (xCoord - 1) + (zCoord * 16):-1;
+							int arrayIndexX = xCoord < 15? (xCoord + 1) + (zCoord * 16):-1;
+							int arrayIndexz = zCoord > 0? xCoord + ((zCoord-1) * 16):-1;
+							int arrayIndexZ = zCoord < 15? xCoord + ((zCoord+1) * 16):-1;
+							int var12Temp = var12;
+							for(int counter = 1; counter < var12Temp / 3; counter++){
+								if(arrayIndexx >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexx]){
+									heightMap[arrayIndex]--;
+									var12--;
+									height--;
+									indexBig = ((arrayIndex) * 256 + height + 128);
+									index = ((arrayIndex) * 128 + height);
+
+								}
+								else if(arrayIndexX >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexX]){
+									heightMap[arrayIndex]--;
+									var12--;
+									height--;
+									indexBig = ((arrayIndex) * 256 + height + 128);
+									index = ((arrayIndex) * 128 + height);
+
+								}
+								else if(arrayIndexz >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexz]){
+									heightMap[arrayIndex]--;
+									var12--;
+									height--;
+									indexBig = ((arrayIndex) * 256 + height + 128);
+									index = ((arrayIndex) * 128 + height);
+
+								}
+								else if(arrayIndexZ >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexZ]){
+									heightMap[arrayIndex]--;
+									var12--;
+									height--;
+									indexBig = ((arrayIndex) * 256 + height + 128);
+									index = ((arrayIndex) * 128 + height);
+
+								}
 							}
-							else
+
+							var13 = (int)(var12 * (1d-Math.max(Math.min(((double)(height-20) / 80d),1),0)));
+							for(int c = 1; c < 4; c++)
 							{
-								idsBig[indexBig] = subSurfaceBlock;
-								metaBig[indexBig] = soilMeta;
+								if(indexBig + c < idsBig.length && ((idsBig[indexBig + c] != surfaceBlock)&&(idsBig[indexBig + c]!=subSurfaceBlock) && (idsBig[indexBig+c]!=Blocks.water)
+										&& (idsBig[indexBig+c]!=TFCBlocks.FreshWaterStill) && (idsBig[indexBig+c]!=TFCBlocks.HotWaterStill)))
+								{
+									idsBig[indexBig+c] = Blocks.air;
+									metaBig[indexBig + c] = 0;
+									if(indexBig+c+1 < idsBig.length && idsBig[indexBig+c+1] == Blocks.water)
+									{
+										idsBig[indexBig+c] = subSurfaceBlock;
+										metaBig[indexBig + c] = soilMeta;
+									}
+								}
+							}
+
+							if(var13>0)
+							{
+								if (height >= var5 - 1 && index+1 < idsTop.length && idsTop[index+1] != Blocks.water)
+								{
+									idsBig[indexBig] = surfaceBlock;
+									metaBig[indexBig] = soilMeta;
+								}
+								else
+								{
+									idsBig[indexBig] = subSurfaceBlock;
+									metaBig[indexBig] = soilMeta;
+								}
 							}
 						}
-						else if (var13 > 0)
+						else if (var13 > 1)
 						{
 							--var13;
 							idsBig[indexBig] = subSurfaceBlock;
@@ -591,6 +653,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						idsBig[indexBig] = TFCBlocks.FreshWaterStill;
 				}
 			}
+		}
 	}
 
 	private double[] layer2Noise = new double[256];

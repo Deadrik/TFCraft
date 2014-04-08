@@ -6,7 +6,9 @@ import TFC.Core.TFCTabs;
 import TFC.Items.ItemTerra;
 public class ItemMiscToolHead extends ItemTerra
 {
-	public ItemMiscToolHead() 
+	private ToolMaterial material = null;
+
+	public ItemMiscToolHead()
 	{
 		super();
 		this.setMaxDamage(100);
@@ -15,5 +17,16 @@ public class ItemMiscToolHead extends ItemTerra
 		this.setFolder("toolheads/");
 		this.setWeight(EnumWeight.MEDIUM);
 		this.setSize(EnumSize.SMALL);
+	}
+
+	public ItemMiscToolHead(ToolMaterial m)
+	{
+		this();
+		material = m;
+	}
+
+	public ToolMaterial getMaterial()
+	{
+		return material;
 	}
 }

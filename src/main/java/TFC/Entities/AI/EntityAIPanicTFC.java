@@ -7,12 +7,13 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.Vec3;
 import TFC.API.Entities.IAnimal;
+import TFC.Core.TFC_Core;
 
 public class EntityAIPanicTFC extends EntityAIBase
 {
-	private EntityCreature theEntityCreature;
-	private boolean alertHerd;
-	private double speed;
+	private final EntityCreature theEntityCreature;
+	private final boolean alertHerd;
+	private final double speed;
 	private double randPosX;
 	private double randPosY;
 	private double randPosZ;
@@ -28,23 +29,24 @@ public class EntityAIPanicTFC extends EntityAIBase
 	/**
 	 * Returns whether the EntityAIBase should begin execution.
 	 */
+	@Override
 	public boolean shouldExecute()
 	{
-		if (this.theEntityCreature.getAITarget() == null && !this.theEntityCreature.isBurning() && 
-				((this.theEntityCreature instanceof IAnimal && ((IAnimal)this.theEntityCreature).getAttackedVec() == null)||
-						!(this.theEntityCreature instanceof IAnimal)))
+		if (this.theEntityCreature.getAITarget() == null
+				&& !this.theEntityCreature.isBurning()
+				&& ((this.theEntityCreature instanceof IAnimal && ((IAnimal) this.theEntityCreature).getAttackedVec() == null) || !(this.theEntityCreature instanceof IAnimal)))
 		{
 			return false;
 		}
 		else
 		{
-			Vec3 attackedVec = this.theEntityCreature instanceof IAnimal?((IAnimal)this.theEntityCreature).getAttackedVec() : null;
+			Vec3 attackedVec = this.theEntityCreature instanceof IAnimal ? ((IAnimal) this.theEntityCreature).getAttackedVec() : null;
 			System.out.println(attackedVec != null);
 			Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.theEntityCreature, 5, 4);
-			if(attackedVec != null){
-				if(this.theEntityCreature instanceof IAnimal){
-					attackedVec = updateAttackVec((IAnimal)this.theEntityCreature,attackedVec);
-				}
+			if (attackedVec != null)
+			{
+				if (this.theEntityCreature instanceof IAnimal)
+					attackedVec = updateAttackVec((IAnimal) this.theEntityCreature, attackedVec);
 				vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntityCreature, 5, 4, attackedVec);
 			}
 			if (vec3 == null)
@@ -56,11 +58,14 @@ public class EntityAIPanicTFC extends EntityAIBase
 				this.randPosX = vec3.xCoord;
 				this.randPosY = vec3.yCoord;
 				this.randPosZ = vec3.zCoord;
-				if(alertHerd && this.theEntityCreature instanceof IAnimal){
-					List list = this.theEntityCreature.worldObj.getEntitiesWithinAABB(this.theEntityCreature.getClass(), this.theEntityCreature.boundingBox.expand(8, 8, 8));
-					for(Object entity : list){
+				if (alertHerd && this.theEntityCreature instanceof IAnimal)
+				{
+					List list = this.theEntityCreature.worldObj.getEntitiesWithinAABB(this.theEntityCreature.getClass(),
+							this.theEntityCreature.boundingBox.expand(8, 8, 8));
+					for (Object entity : list)
+					{
 						System.out.println(entity);
-						((IAnimal)entity).setAttackedVec(attackedVec);
+						((IAnimal) entity).setAttackedVec(attackedVec);
 					}
 				}
 				return true;
@@ -68,9 +73,12 @@ public class EntityAIPanicTFC extends EntityAIBase
 		}
 	}
 
-	public Vec3 updateAttackVec(IAnimal theCreature, Vec3 attackedVec){
-		if(theCreature.getFearSource() != null && (this.theEntityCreature.getPosition(1).distanceTo(attackedVec)>this.theEntityCreature.getDistanceToEntity(theCreature.getFearSource()))){
-			Vec3 newVec = Vec3.fakePool.getVecFromPool(theCreature.getFearSource().posX, theCreature.getFearSource().posY, theCreature.getFearSource().posZ);
+	public Vec3 updateAttackVec(IAnimal theCreature, Vec3 attackedVec)
+	{
+		if (theCreature.getFearSource() != null
+				&& (TFC_Core.getEntityPos(theEntityCreature).distanceTo(attackedVec) > this.theEntityCreature.getDistanceToEntity(theCreature.getFearSource())))
+		{
+			Vec3 newVec = Vec3.createVectorHelper(theCreature.getFearSource().posX, theCreature.getFearSource().posY, theCreature.getFearSource().posZ);
 			theCreature.setAttackedVec(newVec);
 			return newVec;
 		}
@@ -80,6 +88,7 @@ public class EntityAIPanicTFC extends EntityAIBase
 	/**
 	 * Execute a one shot task or start executing a continuous task
 	 */
+	@Override
 	public void startExecuting()
 	{
 		this.theEntityCreature.getNavigator().tryMoveToXYZ(this.randPosX, this.randPosY, this.randPosZ, this.speed);
@@ -88,6 +97,7 @@ public class EntityAIPanicTFC extends EntityAIBase
 	/**
 	 * Returns whether an in-progress EntityAIBase should continue executing
 	 */
+	@Override
 	public boolean continueExecuting()
 	{
 		return !this.theEntityCreature.getNavigator().noPath();

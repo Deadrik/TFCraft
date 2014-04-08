@@ -90,6 +90,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 
 	public boolean checkBlock(World world, int x, int y, int z, int stackX, int stackZ)
 	{
+		int count = 0;
 		int xCoord = x-1;
 		int zCoord = z;
 		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlock(xCoord, y, zCoord) == TFCBlocks.MetalSheet)
@@ -97,6 +98,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(xCoord, y, zCoord);
 			if(!te.WestExists())
 				return false;
+			count++;
 		}
 		xCoord = x+1;
 		zCoord = z;
@@ -105,6 +107,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(xCoord, y, zCoord);
 			if(!te.EastExists())
 				return false;
+			count++;
 		}
 		xCoord = x;
 		zCoord = z-1;
@@ -113,6 +116,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(xCoord, y, zCoord);
 			if(!te.SouthExists())
 				return false;
+			count++;
 		}
 		xCoord = x;
 		zCoord = z+1;
@@ -121,7 +125,10 @@ public class BlockBlastFurnace extends BlockTerraContainer
 			TEMetalSheet te = (TEMetalSheet)world.getTileEntity(xCoord, y, zCoord);
 			if(!te.NorthExists())
 				return false;
+			count++;
 		}
+		if(count < 3)
+			return false;
 		return true;
 	}
 
