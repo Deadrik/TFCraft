@@ -581,8 +581,8 @@ public class TFCBlocks
 		TFCBlocks.fruitTreeLeaves = new BlockFruitLeaves(TFCBlockID.fruitTreeLeaves, 0).setUnlocalizedName("fruitTreeLeaves").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundGrassFootstep);
 		TFCBlocks.fruitTreeLeaves2 = new BlockFruitLeaves(TFCBlockID.fruitTreeLeaves2, 8).setUnlocalizedName("fruitTreeLeaves2").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundGrassFootstep);
 
-		TFCBlocks.Sand = new TFC.Blocks.Terrain.BlockSand(TFCBlockID.Sand).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("sand");
-		TFCBlocks.Sand2 = new BlockSand2(TFCBlockID.Sand2).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("sand");
+		TFCBlocks.Sand = new TFC.Blocks.Terrain.BlockSand(TFCBlockID.Sand, 0).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("sand");
+		TFCBlocks.Sand2 = new BlockSand2(TFCBlockID.Sand2, 16).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("sand");
 
 		TFCBlocks.WoodConstruct = (new TFC.Blocks.BlockWoodConstruct(TFCBlockID.WoodConstruct)).setHardness(4F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("WoodConstruct");
 

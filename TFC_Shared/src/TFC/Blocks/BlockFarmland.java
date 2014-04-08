@@ -2,28 +2,25 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
-import net.minecraft.util.Vec3Pool;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.ForgeDirection;
 import TFC.Reference;
+import TFC.API.Constant.Global;
 import TFC.TileEntities.TileEntityFarmland;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFarmland extends BlockTerraContainer
 {
 	int dirtID;
-	Icon[] DirtTexture = new Icon[20];
+	Icon[] DirtTexture = new Icon[21];
 	int textureOffset = 0;
 	
 	public BlockFarmland(int par1, int id, int tex)
@@ -37,12 +34,10 @@ public class BlockFarmland extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	@Override
     public void registerIcons(IconRegister registerer)
-    {
-		for(int i = textureOffset; i < (textureOffset == 0 ? 16 : 20); i++)
-		{
-			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "farmland/Farmland"+(i));
-		}
-    }
+	{
+		for(int i = textureOffset; i < (textureOffset == 0 ? 16 : Global.STONE_ALL.length); i++)
+			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "farmland/Farmland " + Global.STONE_ALL[i]);
+	}
     
 	@SideOnly(Side.CLIENT)
     @Override

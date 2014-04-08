@@ -14,6 +14,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.TFC_Sounds;
 import cpw.mods.fml.relauncher.Side;
@@ -21,10 +22,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSand extends BlockTerra
 {
-	public BlockSand(int i)
+	protected Icon[] icons = new Icon[21];
+	protected int textureOffset = 0;
+	
+	public BlockSand(int i, int texOff)
 	{
 		super(i, Material.sand);
 		this.setCreativeTab(CreativeTabs.tabBlock);
+		textureOffset = texOff;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -66,30 +71,30 @@ public class BlockSand extends BlockTerra
 	/**
 	 * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
 	 */
-	 @Override
-	 public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-	 {
-		 return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
-	 }
-
-	 /**
-	  * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-	  */
-	 @Override
-	 public Icon getIcon(int par1, int par2)
-	 {
-		 return icons[par2];
-	 }
-
-	 Icon[] icons = new Icon[16];
+	@Override
+	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	{
+		if (par1IBlockAccess.getBlockMetadata(par2, par3, par4) + textureOffset < 21)
+			return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4) + textureOffset];
+		return icons[20];
+	}
+	
+	/**
+	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
+	 */
+	@Override
+	public Icon getIcon(int par1, int par2)
+	{
+		if (par2 + textureOffset < 21)
+			return icons[par2 + textureOffset];
+		return icons[20];
+	}
 
 	 @Override
 	 public void registerIcons(IconRegister registerer)
 	 {
-		 for(int i = 0; i < 16; i++)
-		 {
-			 icons[i] = registerer.registerIcon(Reference.ModID + ":" + "sand/Sand"+i);
-		 }
+		for (int i = 0; i < Global.STONE_ALL.length; i++)
+				icons[i] = registerer.registerIcon(Reference.ModID + ":" + "sand/Sand " + Global.STONE_ALL[i]);
 	 }
 
 	 @Override
