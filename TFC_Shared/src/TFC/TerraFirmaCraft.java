@@ -387,7 +387,7 @@ public class TerraFirmaCraft
 		WorldGenOre.OreList.put("Cassiterite", getOreData(config, "Cassiterite", "veins", "medium", TFCBlocks.Ore.blockID, 5, 100, new String[]{"igneous intrusive"}, 5, 128, 80, 60));
 		WorldGenOre.OreList.put("Galena", getOreData(config, "Galena", "veins", "medium", TFCBlocks.Ore.blockID, 6, 100, new String[]{"igneous extrusive", "metamorphic", "granite", "limestone"}, 5, 128, 80, 60));
 		WorldGenOre.OreList.put("Bismuthinite", getOreData(config, "Bismuthinite", "veins", "medium", TFCBlocks.Ore.blockID, 7, 100, new String[]{"igneous extrusive", "sedimentary"}, 5, 128, 80, 60));
-		WorldGenOre.OreList.put("Garnierite", getOreData(config, "Garnierite", "veins", "large", TFCBlocks.Ore.blockID, 8, 110, new String[]{"gabbro"}, 5, 128, 80, 60));
+		WorldGenOre.OreList.put("Garnierite", getOreData(config, "Garnierite", "veins", "medium", TFCBlocks.Ore.blockID, 8, 150, new String[]{"gabbro"}, 5, 128, 80, 60));
 		WorldGenOre.OreList.put("Malachite", getOreData(config, "Malachite", "veins", "large", TFCBlocks.Ore.blockID, 9, 100, new String[]{"limestone", "marble"}, 5, 128, 80, 60));
 		WorldGenOre.OreList.put("Magnetite", getOreData(config, "Magnetite", "veins", "medium", TFCBlocks.Ore.blockID, 10, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
 		WorldGenOre.OreList.put("Limonite", getOreData(config, "Limonite", "veins", "medium", TFCBlocks.Ore.blockID, 11, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
