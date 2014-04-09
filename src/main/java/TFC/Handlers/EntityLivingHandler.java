@@ -42,13 +42,14 @@ public class EntityLivingHandler
 		if (event.entityLiving instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer)event.entityLiving;
-			float newMaxHealth = getMaxHealth(player);
-			if(player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue() != newMaxHealth)
+			//Set Max Health
+			float newMaxHealth = FoodStatsTFC.getMaxHealth(player);
+			float oldMaxHealth = (float)player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
+			if(oldMaxHealth != newMaxHealth)
 			{
-				float h = player.getHealth();
-				float hPercent = (float) (h / player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
 				player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(newMaxHealth);
-				//player.setHealth(newMaxHealth*hPercent);
+				/*if(diff > 0)
+					player.heal(diff);*/
 			}
 			if(!player.worldObj.isRemote)
 			{
@@ -114,12 +115,6 @@ public class EntityLivingHandler
 					playerclient.guishowFoodRestoreAmount = false;
 			}
 		}
-	}
-
-	public int getMaxHealth(EntityPlayer player)
-	{
-		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.HealthGainRate), TFCOptions.HealthGainCap) * 
-				TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier());
 	}
 
 	@SubscribeEvent

@@ -35,7 +35,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 
 	public TileEntityPottery()
 	{
-		inventory = new ItemStack[4];
+		inventory = new ItemStack[12];
 		hasRack = false;
 	}
 
@@ -46,18 +46,16 @@ public class TileEntityPottery extends TileEntity implements IInventory
 		//If there are no logs for burning then we dont need to tick at all
 		if(!worldObj.isRemote && wood > 0)
 		{
-			Block blockAbove = worldObj.getBlock(xCoord, yCoord+1, zCoord);
+			Block blockAbove = worldObj.getBlock(xCoord, yCoord + 1, zCoord);
 			//Make sure to keep the fire going throughout the length of the burn
 			if(blockAbove != Blocks.fire && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFCOptions.pitKilnBurnTime)
 			{
-				if((blockAbove == Blocks.air || worldObj.getBlock(xCoord, yCoord+1, zCoord).getMaterial().getCanBurn()) && isValid()) 
-					worldObj.setBlock(xCoord, yCoord+1, zCoord, Blocks.fire);
+				if((blockAbove == Blocks.air || worldObj.getBlock(xCoord, yCoord+1, zCoord).getMaterial().getCanBurn()) && isValid())
+					worldObj.setBlock(xCoord, yCoord + 1, zCoord, Blocks.fire);
 				else 
 					wood = 0;
-					this.setInventorySlotContents(4, null);this.setInventorySlotContents(5, null);
-					this.setInventorySlotContents(6, null);this.setInventorySlotContents(7, null);
-					this.setInventorySlotContents(8, null);this.setInventorySlotContents(9, null);
-					this.setInventorySlotContents(10, null);this.setInventorySlotContents(11, null);
+					inventory[4] = null;inventory[5] = null;inventory[6] = null;inventory[7] = null;
+					inventory[8] = null;inventory[9] = null;inventory[10] = null;inventory[11] = null;
 					straw = 0;
 			}
 
@@ -65,8 +63,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 			if(wood > 0 && blockAbove == Blocks.fire && 
 					TFC_Time.getTotalTicks() > burnStart + (TFCOptions.pitKilnBurnTime * TFC_Time.hourLength))
 			{
-				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
-				worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);
+				worldObj.setBlockToAir(xCoord, yCoord + 1, zCoord);
 				if(inventory[0] != null)
 				{
 					inventory[0] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[0], 0)).copy();
@@ -93,8 +90,10 @@ public class TileEntityPottery extends TileEntity implements IInventory
 				}
 
 				wood = 0;
+				inventory[4] = null;inventory[5] = null;inventory[6] = null;inventory[7] = null;
+				inventory[8] = null;inventory[9] = null;inventory[10] = null;inventory[11] = null;
 				straw = 0;
-				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord); //TODO
 				//broadcastPacketInRange(createUpdatePacket());
 			}
 		}
@@ -122,7 +121,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 					is.stackSize--;
 					_is.stackSize = 1;
 					this.setInventorySlotContents(i, _is);
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord); //TODO
 					//broadcastPacketInRange(createUpdatePacket());
 					break;
 				}
@@ -136,16 +135,18 @@ public class TileEntityPottery extends TileEntity implements IInventory
 		{
 			straw++;
 			is.stackSize--;
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord); //TODO
 			//broadcastPacketInRange(createUpdatePacket());
 		}
 	}
 
 	public boolean isValid()
 	{
-		boolean surroundSolids = TFC_Core.isNorthSolid(worldObj, xCoord, yCoord, zCoord-1) && TFC_Core.isSouthSolid(worldObj, xCoord, yCoord, zCoord+1) && 
-				TFC_Core.isEastSolid(worldObj, xCoord-1, yCoord, zCoord) && TFC_Core.isWestSolid(worldObj, xCoord+1, yCoord, zCoord);
-		return surroundSolids && worldObj.isSideSolid(xCoord, yCoord-1, zCoord, ForgeDirection.UP);
+		boolean surroundSolids = TFC_Core.isNorthSolid(worldObj, xCoord, yCoord, zCoord-1) &&
+				TFC_Core.isSouthSolid(worldObj, xCoord, yCoord, zCoord+1) &&
+				TFC_Core.isEastSolid(worldObj, xCoord-1, yCoord, zCoord) &&
+				TFC_Core.isWestSolid(worldObj, xCoord+1, yCoord, zCoord);
+		return surroundSolids && worldObj.isSideSolid(xCoord, yCoord - 1, zCoord, ForgeDirection.UP);
 	}
 
 	@Override
@@ -189,9 +190,8 @@ public class TileEntityPottery extends TileEntity implements IInventory
 	
 	public void ejectItem(int index)
 	{
-		float f3 = 0.01F;
 		EntityItem entityitem;
-		Random rand = new Random();
+		new Random();
 
 		if(inventory[index] != null)
 		{
@@ -346,7 +346,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //	{
 //		if(inventory[0] != null)
 //		{
-//			outStream.writeInt(Item.getIdFromItem(inventory[0].getItem()));
+//			outStream.writeInt(inventory[0].itemID);
 //			outStream.writeInt(inventory[0].getItemDamage());
 //		}
 //		else
@@ -356,7 +356,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //		}
 //		if(inventory[1] != null)
 //		{
-//			outStream.writeInt(Item.getIdFromItem(inventory[1].getItem()));
+//			outStream.writeInt(inventory[1].itemID);
 //			outStream.writeInt(inventory[1].getItemDamage());
 //		}
 //		else
@@ -366,7 +366,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //		}
 //		if(inventory[2] != null)
 //		{
-//			outStream.writeInt(Item.getIdFromItem(inventory[2].getItem()));
+//			outStream.writeInt(inventory[2].itemID);
 //			outStream.writeInt(inventory[2].getItemDamage());
 //		}
 //		else
@@ -376,7 +376,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //		}
 //		if(inventory[3] != null)
 //		{
-//			outStream.writeInt(Item.getIdFromItem(inventory[3].getItem()));
+//			outStream.writeInt(inventory[3].itemID);
 //			outStream.writeInt(inventory[3].getItemDamage());
 //		}
 //		else
@@ -388,7 +388,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //		outStream.writeInt(straw);
 //		outStream.writeInt(wood);
 //	}
-//
+
 //	@Override
 //	public void handleInitPacket(DataInputStream inStream) throws IOException 
 //	{
@@ -403,39 +403,15 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //
 //		hasRack = inStream.readBoolean();
 //
-//		inventory[0] = inv0 != 0 ? new ItemStack(Item.getItemById(inv0), 1, inv0d) : null;
-//		inventory[1] = inv1 != 0 ? new ItemStack(Item.getItemById(inv1), 1, inv1d) : null;
-//		inventory[2] = inv2 != 0 ? new ItemStack(Item.getItemById(inv2), 1, inv2d) : null;
-//		inventory[3] = inv3 != 0 ? new ItemStack(Item.getItemById(inv3), 1, inv3d) : null;
+//		inventory[0] = inv0 != 0 ? new ItemStack(inv0, 1, inv0d) : null;
+//		inventory[1] = inv1 != 0 ? new ItemStack(inv1, 1, inv1d) : null;
+//		inventory[2] = inv2 != 0 ? new ItemStack(inv2, 1, inv2d) : null;
+//		inventory[3] = inv3 != 0 ? new ItemStack(inv3, 1, inv3d) : null;
 //		straw = inStream.readInt();
 //		wood = inStream.readInt();
-//		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 //	}
-//
-//	@Override
-//	public void handleDataPacket(DataInputStream inStream) throws IOException 
-//	{
-//		int inv0 = inStream.readInt();
-//		int inv0d = inStream.readInt();
-//		int inv1 = inStream.readInt();
-//		int inv1d = inStream.readInt();
-//		int inv2 = inStream.readInt();
-//		int inv2d = inStream.readInt();
-//		int inv3 = inStream.readInt();
-//		int inv3d = inStream.readInt();
-//
-//		hasRack = inStream.readBoolean();
-//
-//		inventory[0] = inv0 != 0 ? new ItemStack(Item.getItemById(inv0), 1, inv0d) : null;
-//		inventory[1] = inv1 != 0 ? new ItemStack(Item.getItemById(inv1), 1, inv1d) : null;
-//		inventory[2] = inv2 != 0 ? new ItemStack(Item.getItemById(inv2), 1, inv2d) : null;
-//		inventory[3] = inv3 != 0 ? new ItemStack(Item.getItemById(inv3), 1, inv3d) : null;
-//
-//		straw = inStream.readInt();
-//		wood = inStream.readInt();
-//
-//		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-//	}
+
 //	public Packet createUpdatePacket()
 //	{
 //		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
@@ -448,7 +424,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //			dos.writeInt(zCoord);
 //			if(inventory[0] != null)
 //			{
-//				dos.writeInt(Item.getIdFromItem(inventory[0].getItem()));
+//				dos.writeInt(inventory[0].itemID);
 //				dos.writeInt(inventory[0].getItemDamage());
 //			}
 //			else
@@ -458,7 +434,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //			}
 //			if(inventory[1] != null)
 //			{
-//				dos.writeInt(Item.getIdFromItem(inventory[1].getItem()));
+//				dos.writeInt(inventory[1].itemID);
 //				dos.writeInt(inventory[1].getItemDamage());
 //			}
 //			else
@@ -468,7 +444,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //			}
 //			if(inventory[2] != null)
 //			{
-//				dos.writeInt(Item.getIdFromItem(inventory[2].getItem()));
+//				dos.writeInt(inventory[2].itemID);
 //				dos.writeInt(inventory[2].getItemDamage());
 //			}
 //			else
@@ -478,7 +454,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //			}
 //			if(inventory[3] != null)
 //			{
-//				dos.writeInt(Item.getIdFromItem(inventory[3].getItem()));
+//				dos.writeInt(inventory[3].itemID);
 //				dos.writeInt(inventory[3].getItemDamage());
 //			}
 //			else
@@ -493,5 +469,30 @@ public class TileEntityPottery extends TileEntity implements IInventory
 //		}
 //
 //		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+//	}
+
+//	@Override
+//	public void handleDataPacket(DataInputStream inStream) throws IOException 
+//	{
+//		int inv0 = inStream.readInt();
+//		int inv0d = inStream.readInt();
+//		int inv1 = inStream.readInt();
+//		int inv1d = inStream.readInt();
+//		int inv2 = inStream.readInt();
+//		int inv2d = inStream.readInt();
+//		int inv3 = inStream.readInt();
+//		int inv3d = inStream.readInt();
+//
+//		hasRack = inStream.readBoolean();
+//
+//		inventory[0] = inv0 != 0 ? new ItemStack(inv0, 1, inv0d) : null;
+//		inventory[1] = inv1 != 0 ? new ItemStack(inv1, 1, inv1d) : null;
+//		inventory[2] = inv2 != 0 ? new ItemStack(inv2, 1, inv2d) : null;
+//		inventory[3] = inv3 != 0 ? new ItemStack(inv3, 1, inv3d) : null;
+//
+//		straw = inStream.readInt();
+//		wood = inStream.readInt();
+//
+//		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 //	}
 }

@@ -82,7 +82,7 @@ public class BlockPottery extends BlockTerraContainer
 				te.addLog(player.inventory.getCurrentItem());
 				return true;
 			}
-			else if((player.inventory.getCurrentItem() == null || !(player.inventory.getCurrentItem().getItem() instanceof ItemPotteryBase)))
+			else if(((player.inventory.getCurrentItem() == null || !(player.inventory.getCurrentItem().getItem() instanceof ItemPotteryBase))))
 			{
 				if(te.wood > 0)
 				{
@@ -113,8 +113,13 @@ public class BlockPottery extends BlockTerraContainer
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
 		TileEntityPottery te = (TileEntityPottery) world.getTileEntity(i, j, k);
-		int h =te.straw == 0 ? 1 : te.straw;
-		int w = (te.wood > 0 ? 1 : 0) + (te.wood > 4 ? 1 : 0);
+		int h = 0;
+		int w = 0;
+		if(te!= null)
+		{
+			h = te.straw == 0 ? 1 : te.straw;
+			w = (te.wood > 0 ? 1 : 0) + (te.wood > 4 ? 1 : 0);
+		}
 		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.0625f*h) + (0.25f * w), k + 1);
 	}
 
@@ -122,8 +127,13 @@ public class BlockPottery extends BlockTerraContainer
 	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k) 
 	{
 		TileEntityPottery te = (TileEntityPottery) access.getTileEntity(i, j, k);
-		int h =te.straw == 0 ? 1 : te.straw;
-		int w = (te.wood > 0 ? 1 : 0) + (te.wood > 4 ? 1 : 0);
+		int h = 0;
+		int w = 0;
+		if(te!= null)
+		{
+			h = te.straw == 0 ? 1 : te.straw;
+			w = (te.wood > 0 ? 1 : 0) + (te.wood > 4 ? 1 : 0);
+		}
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, (0.0625f*h) + (0.25f * w), 1.0F);
 	}
 

@@ -95,7 +95,8 @@ public class ContainerPlayerTFC extends ContainerPlayer
 
 		if (slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
+			ItemStack itemstack1 = slot.getStack(); 
+			slot.onPickupFromSlot(thePlayer, itemstack1);
 			itemstack = itemstack1.copy();
 
 			if (par2 == 0)

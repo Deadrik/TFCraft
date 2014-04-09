@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -65,6 +66,7 @@ public class BlockPlanks extends BlockTerra
 	{
 		for(int i = 0; i < woodNames.length; i++)
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+woodNames[i]+" Plank");
+		Blocks.planks.registerBlockIcons(registerer);
 	}
 
 	/**

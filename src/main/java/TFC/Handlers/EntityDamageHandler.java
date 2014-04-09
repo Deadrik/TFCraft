@@ -27,6 +27,7 @@ import TFC.API.Enums.EnumDamageType;
 import TFC.API.Events.EntityArmorCalcEvent;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
+import TFC.Core.Player.FoodStatsTFC;
 import TFC.Entities.EntityJavelin;
 import TFC.Items.ItemTFCArmor;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -39,12 +40,13 @@ public class EntityDamageHandler
 		EntityLivingBase entity = event.entityLiving;
 		if(entity instanceof EntityPlayer)
 		{
-			float newMaxHealth = (float)((EntityPlayer)entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
+			float curMaxHealth = (float)((EntityPlayer)entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
+			float newMaxHealth = FoodStatsTFC.getMaxHealth((EntityPlayer)entity);
 			float h = ((EntityPlayer)entity).getHealth();
-			if(((EntityPlayer)entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue() < h)
-			{
+			if(newMaxHealth != curMaxHealth)
+				((EntityPlayer)entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(newMaxHealth);
+			if(newMaxHealth < h)
 				((EntityPlayer)entity).setHealth(newMaxHealth);
-			}
 		}
 
 		if(event.source == DamageSource.onFire)

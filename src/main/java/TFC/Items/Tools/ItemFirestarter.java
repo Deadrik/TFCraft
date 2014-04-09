@@ -123,7 +123,7 @@ public class ItemFirestarter extends ItemTerra
 					return true;
 				}
 			}
-			else if(world.getBlock(x, y-1, z) == TFCBlocks.Pottery && surroundSolids)
+			else if(world.getBlock(x, y, z) == TFCBlocks.Pottery && surroundSolids)
 			{
 				int chance = new Random().nextInt(100);
 				if(chance > 70)
