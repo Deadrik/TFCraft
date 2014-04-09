@@ -8,7 +8,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import TFC.API.IFood;
 import TFC.Containers.Slots.SlotArmorTFC;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Items.ItemTFCArmor;
@@ -93,12 +92,13 @@ public class ContainerPlayerTFC extends ContainerPlayer
 
 		if (slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
+			ItemStack itemstack1 = slot.getStack(); 
+			slot.onPickupFromSlot(thePlayer, itemstack1);
 			itemstack = itemstack1.copy();
 
 			if (par2 == 0)
 			{
-				if (itemstack1.getItem() instanceof IFood || !this.mergeItemStack(itemstack1, 9, 45, true))
+				if (!this.mergeItemStack(itemstack1, 9, 45, true))
 					return null;
 
 				slot.onSlotChange(itemstack1, itemstack);
