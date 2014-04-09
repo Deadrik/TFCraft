@@ -254,6 +254,8 @@ public class CraftingHandler implements ICraftingHandler
 					}
 				}
 				itemstack = ItemFoodTFC.createTag(itemstack, Helper.roundNumber(finalWeight,10), Helper.roundNumber(finalDecay,100));
+				if(itemstack.stackSize == 0)
+					itemstack.stackSize = 1;
 				if(salted)
 					itemstack.getTagCompound().setBoolean("isSalted", true);
 				//Check if we are doing anything other than combining the food

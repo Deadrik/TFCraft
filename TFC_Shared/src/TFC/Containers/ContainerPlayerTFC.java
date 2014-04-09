@@ -8,8 +8,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import TFC.API.IFood;
 import TFC.Containers.Slots.SlotArmorTFC;
-import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Items.ItemTFCArmor;
 
@@ -98,7 +98,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 
 			if (par2 == 0)
 			{
-				if (!this.mergeItemStack(itemstack1, 9, 45, true))
+				if (itemstack1.getItem() instanceof IFood || !this.mergeItemStack(itemstack1, 9, 45, true))
 					return null;
 
 				slot.onSlotChange(itemstack1, itemstack);
