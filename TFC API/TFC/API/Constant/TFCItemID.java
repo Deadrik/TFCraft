@@ -618,6 +618,7 @@ public class TFCItemID {
 	public static int SeedsSoybean				= 18916;
 	public static int SeedsGreenbean			= 18917;
 	public static int SeedsSquash				= 18918;
+	public static int SeedsJute 				= 18919;
 
 	// Armor
 	public static int BismuthSheet				= 19000;
@@ -1406,6 +1407,7 @@ public class TFCItemID {
 		SeedsSoybean = TFCOptions.getIntFor(config, "item", "SeedsSoybean", SeedsSoybean);
 		SeedsGreenbean = TFCOptions.getIntFor(config, "item", "SeedsGreenbean", SeedsGreenbean);
 		SeedsSquash = TFCOptions.getIntFor(config, "item", "SeedsSquash", SeedsSquash);
+		SeedsJute = TFCOptions.getIntFor(config, "item", "SeedsJute", SeedsJute);
 
 		// Armor
 		BismuthSheet = TFCOptions.getIntFor(config, "item", "Bismuth Sheet", BismuthSheet);

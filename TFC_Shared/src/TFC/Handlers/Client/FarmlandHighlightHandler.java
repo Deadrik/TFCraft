@@ -182,7 +182,7 @@ public class FarmlandHighlightHandler{
 
 			if(id == TFCBlocks.tilledSoil.blockID || id == TFCBlocks.tilledSoil2.blockID)
 			{				
-				boolean water = TFC.Blocks.BlockFarmland.isWaterNearby(world, evt.target.blockX, evt.target.blockY-crop, evt.target.blockZ);
+				boolean water = TFC.Blocks.BlockFarmland.isFreshWaterNearby(world, evt.target.blockX, evt.target.blockY-crop, evt.target.blockZ);
 
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

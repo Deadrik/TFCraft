@@ -12,6 +12,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import TFC.Reference;
+import TFC.TFCBlocks;
 import TFC.API.Constant.Global;
 import TFC.TileEntities.TileEntityFarmland;
 import cpw.mods.fml.relauncher.Side;
@@ -22,7 +23,7 @@ public class BlockFarmland extends BlockTerraContainer
 	int dirtID;
 	Icon[] DirtTexture = new Icon[21];
 	int textureOffset = 0;
-	
+
 	public BlockFarmland(int par1, int id, int tex)
 	{
 		super(par1, Material.ground);
@@ -33,45 +34,45 @@ public class BlockFarmland extends BlockTerraContainer
 
 	@SideOnly(Side.CLIENT)
 	@Override
-    public void registerIcons(IconRegister registerer)
+	public void registerIcons(IconRegister registerer)
 	{
 		for(int i = textureOffset; i < (textureOffset == 0 ? 16 : Global.STONE_ALL.length); i++)
 			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "farmland/Farmland " + Global.STONE_ALL[i]);
 	}
-    
+
 	@SideOnly(Side.CLIENT)
-    @Override
-    public Icon getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int side)
-    {
-    	Block blk = Block.blocksList[dirtID];
-    	int meta = access.getBlockMetadata(xCoord, yCoord, zCoord);
-        if (side == 1)//top
-        {
-            return DirtTexture[meta+textureOffset];
-        }
-        else
-        {
-            return blk.getIcon(side, meta);
-        }
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public Icon getIcon(int side, int meta)
-    {
-        Block blk = Block.blocksList[dirtID];
-        
-        if (side == ForgeDirection.UP.ordinal())
-        {
-            return DirtTexture[meta + textureOffset];
-        }
-        else
-        {
-            return blk.getIcon(0, meta);
-        }
-    }
-    
-    @Override
+	@Override
+	public Icon getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int side)
+	{
+		Block blk = Block.blocksList[dirtID];
+		int meta = access.getBlockMetadata(xCoord, yCoord, zCoord);
+		if (side == 1)//top
+		{
+			return DirtTexture[meta+textureOffset];
+		}
+		else
+		{
+			return blk.getIcon(side, meta);
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public Icon getIcon(int side, int meta)
+	{
+		Block blk = Block.blocksList[dirtID];
+
+		if (side == ForgeDirection.UP.ordinal())
+		{
+			return DirtTexture[meta + textureOffset];
+		}
+		else
+		{
+			return blk.getIcon(0, meta);
+		}
+	}
+
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		return AxisAlignedBB.getBoundingBox(par2 + 0, par3 + 0, par4 + 0, par2 + 1, par3 + 1, par4 + 1);
@@ -105,30 +106,51 @@ public class BlockFarmland extends BlockTerraContainer
 
 		return false;
 	}
-	
+
 	/**
-     * returns true if there's water nearby (x-4 to x+4, y to y+1, k-4 to k+4)
-     */
-    public static boolean isWaterNearby(World world, int i, int j, int k)
-    {
-        for (int x = i - 4; x <= i + 4; ++x)
-        {
-            for (int y = j; y <= j + 1; ++y)
-            {
-                for (int z = k - 4; z <= k + 4; ++z)
-                {
-                    if (world.getBlockMaterial(x, y, z) == Material.water)
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
+	 * returns true if there's water nearby (x-4 to x+4, y to y+1, k-4 to k+4)
+	 */
+	public static boolean isFreshWaterNearby(World world, int i, int j, int k)
+	{
+		for (int x = i - 4; x <= i + 4; ++x)
+		{
+			for (int y = j; y <= j + 1; ++y)
+			{
+				for (int z = k - 4; z <= k + 4; ++z)
+				{
+					if (world.getBlockId(x, y, z) == TFCBlocks.FreshWaterStill.blockID ||
+							world.getBlockId(x, y, z) == TFCBlocks.FreshWaterFlowing.blockID)
+					{
+						return true;
+					}
+				}
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    @Override
+	public static boolean isSaltWaterNearby(World world, int i, int j, int k)
+	{
+		for (int x = i - 4; x <= i + 4; ++x)
+		{
+			for (int y = j; y <= j + 1; ++y)
+			{
+				for (int z = k - 4; z <= k + 4; ++z)
+				{
+					if (world.getBlockId(x, y, z) == Block.waterStill.blockID ||
+							world.getBlockId(x, y, z) == Block.waterMoving.blockID)
+					{
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
