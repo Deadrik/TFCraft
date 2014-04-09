@@ -2,6 +2,7 @@ package TFC.Blocks;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -63,6 +64,7 @@ public class BlockPlanks extends BlockTerra
 	{
 		for(int i = 0; i < woodNames.length; i++)
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+woodNames[i]+" Plank");
+		Block.planks.registerIcons(registerer);
 	}
 
 	/**
