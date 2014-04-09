@@ -353,11 +353,14 @@ public class FoodStatsTFC
 	 */
 	private boolean reduceFood(ItemStack is, float amount)
 	{
-		float weight = is.getTagCompound().getFloat("foodWeight");
-		if(weight - amount <= 0)
-			return true;
-		else
-			is.getTagCompound().setFloat("foodWeight", Helper.roundNumber(weight - amount, 10));
+		if(is.hasTagCompound())
+		{
+			float weight = is.getTagCompound().getFloat("foodWeight");
+			if(weight - amount <= 0)
+				return true;
+			else
+				is.getTagCompound().setFloat("foodWeight", Helper.roundNumber(weight - amount, 10));
+		}
 		return false;
 	}
 
