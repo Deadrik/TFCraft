@@ -9,6 +9,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.Chunkdata.ChunkData;
+import TFC.Chunkdata.ChunkDataManager;
 import TFC.TileEntities.TEOre;
 // remove for multiplayer server
 
@@ -268,15 +270,19 @@ public class WorldGenMinable extends WorldGenerator
 						boolean isCorrectMeta = false;
 						int localX = posX & 15;
 						int localZ = posZ & 15;
+
+						ChunkData data = ChunkDataManager.getData(posX >> 4, posZ >> 4);
+						int hm = data != null ? data.heightmap[localX + localZ * 16] : 0;
+						posY = Math.min(255, posY + hm);
+
 						int m = world.getBlockMetadata(posX, posY, posZ);
-
-
-						isCorrectRockType = world.getBlockId(posX, posY, posZ) == this.genInBlock;
+						int id = world.getBlockId(posX, posY, posZ);
+						isCorrectRockType = id == this.genInBlock;
 						isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
 						if(isCorrectRockType && isCorrectMeta)
 						{
-							int id = world.getBlockId(posX, posY, posZ);
+
 							world.setBlock(posX, posY, posZ, MPBlockID, minableBlockMeta, 2);
 							TEOre te = (TEOre)world.getBlockTileEntity(posX, posY, posZ);
 							if(te!= null)
@@ -292,14 +298,19 @@ public class WorldGenMinable extends WorldGenerator
 					}
 				}
 
-				int m = world.getBlockMetadata(posX, posY, posZ);
+				int localX = posX & 15;
+				int localZ = posZ & 15;
+				ChunkData data = ChunkDataManager.getData(posX >> 4, posZ >> 4);
+				int hm = data != null ? data.heightmap[localX + localZ * 16] : 0;
+				posY = Math.min(255, posY + hm);
 
-				boolean	isCorrectRockType = world.getBlockId(posX, posY, posZ) == this.genInBlock;
+				int m = world.getBlockMetadata(posX, posY, posZ);
+				int id = world.getBlockId(posX, posY, posZ);
+				boolean	isCorrectRockType = id == this.genInBlock;
 				boolean	isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
 				if(isCorrectRockType && isCorrectMeta)
-				{
-					int id = world.getBlockId(posX, posY, posZ);
+				{					
 					world.setBlock(posX, posY, posZ, MPBlockID, minableBlockMeta, 2);
 					TEOre te = (TEOre)world.getBlockTileEntity(posX, posY, posZ);
 					if(te!= null)
@@ -372,15 +383,20 @@ public class WorldGenMinable extends WorldGenerator
 							{
 								double var45 = (posZ + 0.5D - var24) / (var28 / 2.0D);
 
+								int localX = posX & 15;
+								int localZ = posZ & 15;
+								ChunkData data = ChunkDataManager.getData(posX >> 4, posZ >> 4);
+								int hm = data != null ? data.heightmap[localX + localZ * 16] : 0;
+								posY = Math.min(255, posY + hm);
+
 								int m = world.getBlockMetadata(posX, posY, posZ);
+								int id = world.getBlockId(posX, posY, posZ);
 								boolean	isCorrectRockType = world.getBlockId(posX, posY, posZ) == this.genInBlock;
 								boolean	isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
 								if(isCorrectRockType && isCorrectMeta)
 									if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D)
 									{
-										int id = world.getBlockId(posX, posY, posZ);
-										int meta = world.getBlockMetadata(posX, posY, posZ);
 										world.setBlock(posX, posY, posZ, MPBlockID, minableBlockMeta, 2);
 										TEOre te = (TEOre)world.getBlockTileEntity(posX, posY, posZ);
 										if(te!= null)
