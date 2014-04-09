@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -15,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 import TFC.Reference;
+import TFC.TFCBlocks;
 import TFC.API.Constant.Global;
 import TFC.TileEntities.TileEntityFarmland;
 import cpw.mods.fml.relauncher.Side;
@@ -95,14 +97,29 @@ public class BlockFarmland extends BlockContainer
 	/**
 	 * returns true if there's water nearby (x-4 to x+4, y to y+1, k-4 to k+4)
 	 */
-	public static boolean isWaterNearby(World world, int i, int j, int k)
+	public static boolean isFreshWaterNearby(World world, int i, int j, int k)
 	{
 		for (int x = i - 4; x <= i + 4; ++x)
 			for (int y = j; y <= j + 1; ++y)
 				for (int z = k - 4; z <= k + 4; ++z)
-					if (world.getBlock(x, y, z).getMaterial() == Material.water)
+				{
+					Block b = world.getBlock(x, y, z);
+					if (b == TFCBlocks.FreshWaterStill || b == TFCBlocks.FreshWaterFlowing)
 						return true;
+				}
+		return false;
+	}
 
+	public static boolean isSaltWaterNearby(World world, int i, int j, int k)
+	{
+		for (int x = i - 4; x <= i + 4; ++x)
+			for (int y = j; y <= j + 1; ++y)
+				for (int z = k - 4; z <= k + 4; ++z)
+				{
+					Block b = world.getBlock(x, y, z);
+					if (b == Blocks.water || b == Blocks.flowing_water)
+						return true;
+				}
 		return false;
 	}
 

@@ -675,6 +675,7 @@ public class TFCItems
 	public static Item SeedsSoybean;
 	public static Item SeedsGreenbean;
 	public static Item SeedsSquash;
+	public static Item SeedsJute;
 
 	public static Item FruitTreeSapling1;
 	public static Item FruitTreeSapling2;
@@ -1732,6 +1733,7 @@ public class TFCItems
 		SeedsSoybean = new ItemCustomSeeds(21).setUnlocalizedName("Seeds Soybean");
 		SeedsGreenbean = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Greenbean");
 		SeedsSquash = new ItemCustomSeeds(23).setUnlocalizedName("Seeds Squash");
+		SeedsJute = new ItemCustomSeeds(24).setUnlocalizedName("Seeds Jute");
 
 		muttonRaw = new ItemRawFood(-1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("Mutton Raw");
 		muttonCooked =  new ItemFoodTFC(48, EnumFoodGroup.Protein).setUnlocalizedName("Mutton Cooked");

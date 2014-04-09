@@ -82,14 +82,13 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	protected void genDecorations(BiomeGenBase bgb)
 	{
 		this.generateOres();
-		int var1;
 		int var2;
 		int xCoord;
 		int yCoord;
 		int zCoord;
 
 		Random rand = new Random(this.currentWorld.getSeed() + ((chunk_X >> 7) - (chunk_Z >> 7)) * (chunk_Z >> 7));
-		int cropid = rand.nextInt(24);
+		int cropid = rand.nextInt(25);
 		CropIndex crop = CropManager.getInstance().getCropFromId(cropid);
 		WorldGenGrowCrops cropGen = new WorldGenGrowCrops(cropid);
 		if (randomGenerator.nextInt(20) == 0 && crop != null)

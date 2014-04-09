@@ -8,7 +8,6 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.TileEntities.TECrop;
 
@@ -19,9 +18,8 @@ public class RenderCrop
 		IBlockAccess blockaccess = renderblocks.blockAccess;
 		TECrop te = (TECrop)blockaccess.getTileEntity(i, j, k);
 
-		CropIndex crop = null;
 		if(te != null)
-			crop = CropManager.getInstance().getCropFromId(te.cropId);
+			CropManager.getInstance().getCropFromId(te.cropId);
 		else
 			return false;
 
@@ -121,6 +119,11 @@ public class RenderCrop
 			drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
 			break;
 		}
+		case 24://Jute
+		{
+			renderBlockCropsImpl(block, i, j, k, renderblocks, 0.8, 2.0);
+			break;
+		}
 		default:
 		{
 			renderblocks.renderBlockCrops(block, i, j, k);
@@ -175,12 +178,21 @@ public class RenderCrop
 
 		if(icon != null)
 		{
+			if(((int)i & 1) > 0)
+			{
+				k+=0.0001;
+			}
+			if(((int)k & 1) > 0)
+			{
+				i+=0.0001;
+			}
+
 			double minU = icon.getMinU();
 			double maxU = icon.getMaxU();
 			double minV = icon.getMinV();
 			double maxV = icon.getMaxV();
-			double minX = i + 0.5D - 0.25D;
-			double maxX = i + 0.5D + 0.25D;
+			double minX = i + 0.25D;
+			double maxX = i + 0.75D;
 			double minZ = k + 0.5D - width;
 			double maxZ = k + 0.5D + width;
 			double y = j;

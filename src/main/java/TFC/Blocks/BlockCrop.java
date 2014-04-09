@@ -47,6 +47,7 @@ public class BlockCrop extends BlockContainer
 	IIcon[] iconsPotato = new IIcon[7];
 	IIcon[] iconsSoybean = new IIcon[7];
 	IIcon[] iconsSquash = new IIcon[7];
+	IIcon[] iconsJute = new IIcon[6];
 
 	public BlockCrop()
 	{
@@ -61,36 +62,37 @@ public class BlockCrop extends BlockContainer
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegisterer)
+	public void registerBlockIcons(IIconRegister register)
 	{
 		for(int i = 1; i < 6; i++)
 		{
-			iconsCarrots[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Carrots ("+i+")");
-			iconsGarlic[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Garlic ("+i+")");
+			iconsCarrots[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Carrots (" + i + ")");
+			iconsGarlic[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Garlic (" + i + ")");
 		}
 		for(int i = 1; i < 7; i++)
 		{
-			iconsCorn[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Corn ("+i+")");
-			iconsCabbage[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Cabbage ("+i+")");
+			iconsCorn[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Corn (" + i + ")");
+			iconsCabbage[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Cabbage (" + i + ")");
+			iconsJute[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Jute (" + i + ")");
 		}
 		for(int i = 1; i < 8; i++)
 		{
-			iconsPepperRed[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/PepperRed ("+i+")");
-			iconsPepperYellow[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/PepperYellow ("+i+")");
-			iconsGreenbean[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Greenbean ("+i+")");
-			iconsOnion[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Onion ("+i+")");
-			iconsPotato[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Potato ("+i+")");
-			iconsSquash[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Squash ("+i+")");
-			iconsSoybean[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Soybean ("+i+")");
+			iconsPepperRed[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/PepperRed (" + i + ")");
+			iconsPepperYellow[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/PepperYellow (" + i + ")");
+			iconsGreenbean[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Greenbean (" + i + ")");
+			iconsOnion[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Onion (" + i + ")");
+			iconsPotato[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Potato (" + i + ")");
+			iconsSquash[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Squash (" + i + ")");
+			iconsSoybean[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Soybean (" + i + ")");
 		}
 		for(int i = 1; i < 9; i++)
 		{
-			iconsTomato[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Tomato ("+i+")");
-			iconsWheat[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Wheat ("+i+")");
-			iconsRye[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Rye ("+i+")");
-			iconsBarley[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Barley ("+i+")");
-			iconsOat[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Oat ("+i+")");
-			iconsRice[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Rice ("+i+")");
+			iconsTomato[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Tomato (" + i + ")");
+			iconsWheat[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Wheat (" + i + ")");
+			iconsRye[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Rye (" + i + ")");
+			iconsBarley[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Barley (" + i + ")");
+			iconsOat[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Oat (" + i + ")");
+			iconsRice[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Rice (" + i + ")");
 		}
 	}
 
@@ -148,8 +150,9 @@ public class BlockCrop extends BlockContainer
 			return iconsGreenbean[stage];
 		case 23://Squash
 			return iconsSquash[stage];
+		case 24://Jute
+			return iconsJute[stage];
 		}
-
 		return iconsCorn[6];
 	}
 
@@ -158,6 +161,7 @@ public class BlockCrop extends BlockContainer
 	{
 		return true;
 	}
+
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
