@@ -120,7 +120,6 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	{
 		int[] map = bloomeryToStackMap[dir];
 		int centerX = i + map[0];
-		int centerY = j;
 		int centerZ = k + map[1];
 		if (isNorthStackValid(world, centerX, j, centerZ-1) || (centerX == i && centerZ-1 == k))
 		{
@@ -425,7 +424,6 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
-		int meta = world.getBlockMetadata(i, j, k) & 3;
 		if (!canBlockStay(world, i, j, k))
 		{
 			if (!tryFlip(world, i, j, k))
@@ -544,42 +542,42 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 		{
 			if (dir == 0)
 			{
-				list.add(AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0f, 1.0f, 1.0F, f));
+				list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0f, 1.0f, 1.0F, f)});
 			}
 			else if (dir == 1)
 			{
-				list.add(AxisAlignedBB.getBoundingBox(1.0f - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0f));
+				list.add(new Object[]{AxisAlignedBB.getBoundingBox(1.0f - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0f)});
 			}
 			else if (dir == 2)
 			{
-				list.add(AxisAlignedBB.getBoundingBox(0.0f, 0.0F, 1.0f - f, 1.0F, 1.0F, 1.0F));
+				list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0f, 0.0F, 1.0f - f, 1.0F, 1.0F, 1.0F)});
 			}
 			else if (dir == 3)
 			{
-				list.add(AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F));
+				list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F)});
 			}
 		}
 		else
 		{
 			if (dir == 0)
 			{
-				list.add(AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0f, f, 1.0F, 0.5F));
-				list.add(AxisAlignedBB.getBoundingBox(1 - f, 0.0F, 0.0f, 1, 1.0F, 0.5F));
+				list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0f, f, 1.0F, 0.5F)});
+				list.add(new Object[]{AxisAlignedBB.getBoundingBox(1 - f, 0.0F, 0.0f, 1, 1.0F, 0.5F)});
 			}
 			else if (dir == 1)
 			{
-				list.add(AxisAlignedBB.getBoundingBox(0.5F, 0.0F, 0, 1.0F, 1.0F, f));
-				list.add(AxisAlignedBB.getBoundingBox(0.5F, 0.0F, 1-f, 1.0F, 1.0F, 1));
+				list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.5F, 0.0F, 0, 1.0F, 1.0F, f)});
+				list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.5F, 0.0F, 1-f, 1.0F, 1.0F, 1)});
 			}
 			else if (dir == 2)
 			{
-				list.add(AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.5f, f, 1.0F, 1.0F));
-				list.add(AxisAlignedBB.getBoundingBox(1 - f, 0.0F, 0.5f, 1, 1.0F, 1.0F));
+				list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.5f, f, 1.0F, 1.0F)});
+				list.add(new Object[]{AxisAlignedBB.getBoundingBox(1 - f, 0.0F, 0.5f, 1, 1.0F, 1.0F)});
 			}
 			else if (dir == 3)
 			{
-				list.add(AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0F, 0.5F, 1.0F, f));
-				list.add(AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 1-f, 0.5F, 1.0F, 1.0));
+				list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0F, 0.5F, 1.0F, f)});
+				list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 1-f, 0.5F, 1.0F, 1.0)});
 			}
 		}
 	}
