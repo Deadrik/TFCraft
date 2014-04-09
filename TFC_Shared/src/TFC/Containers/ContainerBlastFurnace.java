@@ -13,24 +13,24 @@ import TFC.TileEntities.TEBlastFurnace;
 
 public class ContainerBlastFurnace extends ContainerTFC
 {
-	private TEBlastFurnace bloomery;
+	private TEBlastFurnace tileentity;
     private float firetemp;
     private int orecount;
     private int coalcount;
 
 
-	public ContainerBlastFurnace(InventoryPlayer inventoryplayer, TEBlastFurnace tileentityforge, World world, int x, int y, int z)
+	public ContainerBlastFurnace(InventoryPlayer inventoryplayer, TEBlastFurnace te, World world, int x, int y, int z)
 	{
-	    bloomery = tileentityforge;
+	    tileentity = te;
 	    firetemp = 0;
 		//Input slot
 	    //addSlotToContainer(new Slot(tileentityforge, 0, 134, 52));
 	    
-	    addSlotToContainer(new SlotTuyere(tileentityforge, 1, 153, 7));
+	    addSlotToContainer(new SlotTuyere(te, 1, 153, 7));
 
 	    PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 90, false, true);
 	    
-		bloomery.updateGui();
+		tileentity.updateGui();
 	}
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
@@ -88,20 +88,20 @@ public class ContainerBlastFurnace extends ContainerTFC
         for (int var1 = 0; var1 < this.crafters.size(); ++var1)
         {
             ICrafting var2 = (ICrafting)this.crafters.get(var1);
-            if (this.firetemp != this.bloomery.fireTemperature)
+            if (this.firetemp != this.tileentity.fireTemperature)
             {
-                var2.sendProgressBarUpdate(this, 0, (int)this.bloomery.fireTemperature);
+                var2.sendProgressBarUpdate(this, 0, (int)this.tileentity.fireTemperature);
             }
         }
         
-        if(orecount != this.bloomery.oreCount || coalcount != this.bloomery.charcoalCount || updatecounter == 1000)
+        if(orecount != this.tileentity.oreCount || coalcount != this.tileentity.charcoalCount || updatecounter == 1000)
         {
-        	bloomery.broadcastPacketInRange(bloomery.createUpdatePacket());
+        	tileentity.broadcastPacketInRange(tileentity.createUpdatePacket());
             updatecounter = 0;
         }
-        orecount = this.bloomery.oreCount;
-        coalcount = this.bloomery.charcoalCount;
-        firetemp = this.bloomery.fireTemperature;
+        orecount = this.tileentity.oreCount;
+        coalcount = this.tileentity.charcoalCount;
+        firetemp = this.tileentity.fireTemperature;
         updatecounter += 1;
     }
 	
@@ -110,7 +110,7 @@ public class ContainerBlastFurnace extends ContainerTFC
     {
         if (par1 == 0)
         {
-            this.bloomery.fireTemperature = par2;
+            this.tileentity.fireTemperature = par2;
         }
 
     }

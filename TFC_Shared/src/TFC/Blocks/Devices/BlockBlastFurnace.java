@@ -47,7 +47,8 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
-
+		if(!world.isRemote)
+		{
 		if(!canBlockStay(world,i,j,k))
 		{
 			world.setBlockToAir(i, j, k);
@@ -68,6 +69,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 				}
 				entityplayer.openGui(TerraFirmaCraft.instance, 26, world, i, j, k);
 			}
+		}
 		}
 		return true;
 	}
@@ -107,7 +109,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlockId(xCoord, y, zCoord) == TFCBlocks.MetalSheet.blockID)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getBlockTileEntity(xCoord, y, zCoord);
-			if(!te.WestExists())
+			if(!te.WestExists() || !isValidMetalSheet(te))
 				return false;
 			count++;
 		}
@@ -116,7 +118,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlockId(xCoord, y, zCoord) == TFCBlocks.MetalSheet.blockID)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getBlockTileEntity(xCoord, y, zCoord);
-			if(!te.EastExists())
+			if(!te.EastExists() || !isValidMetalSheet(te))
 				return false;
 			count++;
 		}
@@ -125,7 +127,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlockId(xCoord, y, zCoord) == TFCBlocks.MetalSheet.blockID)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getBlockTileEntity(xCoord, y, zCoord);
-			if(!te.SouthExists())
+			if(!te.SouthExists() || !isValidMetalSheet(te))
 				return false;
 			count++;
 		}
@@ -134,13 +136,26 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		if(!(xCoord == stackX && zCoord == stackZ) && world.getBlockId(xCoord, y, zCoord) == TFCBlocks.MetalSheet.blockID)
 		{
 			TEMetalSheet te = (TEMetalSheet)world.getBlockTileEntity(xCoord, y, zCoord);
-			if(!te.NorthExists())
+			if(!te.NorthExists() || !isValidMetalSheet(te))
 				return false;
 			count++;
 		}
 		if(count < 3)
 			return false;
 		return true;
+	}
+	
+	public boolean isValidMetalSheet(TEMetalSheet te)
+	{
+		if(te != null)
+		{
+			ItemStack sheet = te.sheetStack;
+			if(sheet != null && (sheet.getItem() == TFCItems.WroughtIronSheet || sheet.getItem() == TFCItems.SteelSheet ||
+					sheet.getItem() == TFCItems.BlackSteelSheet || sheet.getItem() == TFCItems.BlueSteelSheet ||
+					sheet.getItem() == TFCItems.RedSteelSheet))
+				return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -207,7 +222,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(i, j, k);
+			world.getBlockMetadata(i, j, k);
 
 			if(world.getBlockId(i, j, k) == TFCBlocks.Molten.blockID)
 			{
@@ -246,8 +261,8 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		// TODO Auto-generated method stub
+	public TileEntity createNewTileEntity(World var1) 
+	{
 		return new TEBlastFurnace();
 	}
 }

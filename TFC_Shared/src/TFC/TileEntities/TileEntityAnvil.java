@@ -104,7 +104,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				itemCraftingValue = getItemCraftingValue();
 
 				AnvilManager manager = AnvilManager.getInstance();
-				Random R = new Random(worldObj.getSeed());
+				new Random(worldObj.getSeed());
 				Object[] r = getRecipe(manager);
 				AnvilRecipe recipe = r != null && r[0] !=  null ? (AnvilRecipe) r[0] : null;
 				ItemStack result = r != null && r[1] !=  null ? (ItemStack) r[1] : null;
@@ -200,13 +200,12 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			NBTTagCompound Tag = anvilItemStacks[slot].getTagCompound();
 			int rule1 = -1;
 			int rule2 = -1;
-			int rule3 = -1;
 			if(Tag.hasKey("itemCraftingRule1"))
 				rule1 = Tag.getByte("itemCraftingRule1");
 			if(Tag.hasKey("itemCraftingRule2"))
 				rule2 = Tag.getByte("itemCraftingRule2");
 			if(Tag.hasKey("itemCraftingRule3"))
-				rule3 = Tag.getByte("itemCraftingRule3");
+				Tag.getByte("itemCraftingRule3");
 
 			itemCraftingRules[2] = rule2;
 			itemCraftingRules[1] = rule1;
@@ -398,7 +397,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 					workedRecently == 0 && anvilItemStacks[WELDOUT_SLOT] == null)
 			{
 				AnvilManager manager = AnvilManager.getInstance();
-				Random R = new Random(worldObj.getSeed());
+				new Random(worldObj.getSeed());
 				AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[WELD1_SLOT],anvilItemStacks[WELD2_SLOT],"", 
 						0,
 						anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null);
@@ -729,7 +728,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			break;
 		}
 		}	
-		worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 0.5F, 0.5F + (worldObj.rand.nextFloat()/2));
+		//worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 0.1F, 0.1F + (worldObj.rand.nextFloat()/4));
 	}
 
 	@Override
@@ -854,7 +853,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		}
 		}		
 		this.lastWorker = worldObj.getPlayerEntityByName(inStream.readUTF());
-		worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
+		worldObj.playSoundEffect(xCoord, yCoord, zCoord, TFC_Sounds.METALIMPACT, 0.1F, 0.5F + (worldObj.rand.nextFloat() / 2));
 	}
 
 	@Override
