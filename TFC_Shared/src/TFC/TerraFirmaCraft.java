@@ -419,10 +419,10 @@ public class TerraFirmaCraft
 
 		//Surface Ore
 		WorldGenOre.OreList.put("Native Copper Surface", getOreData(config, "Native Copper Surface", "veins", "small", TFCBlocks.Ore.blockID, 0, 35, new String[]{"igneous extrusive"}, 128, 240, 40, 40));
-		WorldGenOre.OreList.put("Cassiterite Surface", getOreData(config, "Cassiterite Surface", "veins", "small", TFCBlocks.Ore.blockID, 5, 20, new String[]{"granite"}, 128, 240, 40, 40));
-		WorldGenOre.OreList.put("Bismuthinite Surface", getOreData(config, "Bismuthinite Surface", "veins", "small", TFCBlocks.Ore.blockID, 7, 25, new String[]{"igneous intrusive", "sedimentary"}, 128, 240, 40, 40));
-		WorldGenOre.OreList.put("Sphalerite Surface", getOreData(config, "Sphalerite Surface", "veins", "small", TFCBlocks.Ore.blockID, 12, 25, new String[]{"metamorphic"}, 128, 240, 40, 40));
-		WorldGenOre.OreList.put("Tetrahedrite Surface", getOreData(config, "Tetrahedrite Surface", "veins", "small", TFCBlocks.Ore.blockID, 13, 25, new String[]{"metamorphic"}, 128, 240, 40, 40));
+		WorldGenOre.OreList.put("Cassiterite Surface", getOreData(config, "Cassiterite Surface", "veins", "small", TFCBlocks.Ore.blockID, 5, 35, new String[]{"granite"}, 128, 240, 40, 40));
+		WorldGenOre.OreList.put("Bismuthinite Surface", getOreData(config, "Bismuthinite Surface", "veins", "small", TFCBlocks.Ore.blockID, 7, 35, new String[]{"igneous intrusive", "sedimentary"}, 128, 240, 40, 40));
+		WorldGenOre.OreList.put("Sphalerite Surface", getOreData(config, "Sphalerite Surface", "veins", "small", TFCBlocks.Ore.blockID, 12, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
+		WorldGenOre.OreList.put("Tetrahedrite Surface", getOreData(config, "Tetrahedrite Surface", "veins", "small", TFCBlocks.Ore.blockID, 13, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
 
 
 		/**Start setup here*/

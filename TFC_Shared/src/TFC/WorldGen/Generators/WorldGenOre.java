@@ -4,10 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import TFC.TFCBlocks;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.common.IWorldGenerator;
@@ -79,7 +77,7 @@ public class WorldGenOre implements IWorldGenerator
 	private void oreSmallVein(int id, int meta, int[] baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(id, meta ,baseRocks,
-				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/20,/*height*/5,/*diameter*/40,/*vDensity*/vDensity,/*hDensity*/hDensity,        
+				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/30,/*height*/5,/*diameter*/40,/*vDensity*/vDensity,/*hDensity*/hDensity,        
 				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
 
 	}
@@ -87,7 +85,7 @@ public class WorldGenOre implements IWorldGenerator
 	private void oreMediumVein(int id, int meta, int[] baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(id, meta ,baseRocks,
-				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/30,/*height*/10,/*diameter*/60,/*vDensity*/vDensity,/*hDensity*/hDensity,        
+				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/40,/*height*/10,/*diameter*/60,/*vDensity*/vDensity,/*hDensity*/hDensity,        
 				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
 
 	}
@@ -103,7 +101,7 @@ public class WorldGenOre implements IWorldGenerator
 	private void oreSmall(int id, int meta, int[] baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(id, meta ,baseRocks,
-				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/20,/*height*/5,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,        
+				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/30,/*height*/5,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,        
 				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
 
 	}
@@ -111,7 +109,7 @@ public class WorldGenOre implements IWorldGenerator
 	private void oreMedium(int id, int meta, int[] baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOre(id, meta ,baseRocks,
-				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/30,/*height*/10,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,        
+				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/40,/*height*/10,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,        
 				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
 
 	}
@@ -138,7 +136,14 @@ public class WorldGenOre implements IWorldGenerator
 						(rockLayer2.data1 == Layers[n] && (rockLayer2.data2 == Layers[n+1] || Layers[n+1] == -1)) ||
 						(rockLayer3.data1 == Layers[n] && (rockLayer3.data2 == Layers[n+1] || Layers[n+1] == -1)))
 				{
-					new WorldGenMinable(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity, false).generate(
+					int grade = rand.nextInt(100);
+					if(grade<20)
+						grade = 1;
+					else if(grade <50)
+						grade = 2;
+					else
+						grade = 0;
+					new WorldGenMinable(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity, false, grade).generate(
 							world, rand, chunkX, chunkZ, min, max, name);
 				}
 				n+=2;
@@ -160,7 +165,14 @@ public class WorldGenOre implements IWorldGenerator
 						(rockLayer2.data1 == Layers[n] && (rockLayer2.data2 == Layers[n+1] || Layers[n+1] == -1)) ||
 						(rockLayer3.data1 == Layers[n] && (rockLayer3.data2 == Layers[n+1] || Layers[n+1] == -1)))
 				{
-					new WorldGenMinable(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity, true).generate(
+					int grade = rand.nextInt(100);
+					if(grade<20)
+						grade = 1;
+					else if(grade <50)
+						grade = 2;
+					else
+						grade = 0;
+					new WorldGenMinable(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity, true, grade).generate(
 							world, rand, chunkX, chunkZ, min, max, name);
 				}
 				n+=2;

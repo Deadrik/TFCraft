@@ -143,8 +143,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		stabilityLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadStabilityLayerGeneratorData(stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
 
 		heightMap = new int[256];
-		if(!TFCOptions.enableOreTest)
-			replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
+
+		replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
 		replaceBlocksForBiomeLow(chunkX, chunkZ, rand, idsBig, metaBig);
 
 		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
@@ -603,7 +603,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 								}
 							}
-							var13 = (int)(var12 * (1d-Math.max(Math.min(((double)(height-20) / 80d),1),0)));
+							var13 = (int)(var12 * (1d-Math.max(Math.min(((height-20) / 80d),1),0)));
 
 
 							for(int c = 1; c < 4; c++){
@@ -697,7 +697,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 					if (height <= 1 + (heightMap[arrayIndex] / 3) + this.rand.nextInt(3))
 						idsBig[indexBig] = (byte) Block.bedrock.blockID;
-					else if(!TFCOptions.enableOreTest)
+					else
 					{
 						convertStone(height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);      
 

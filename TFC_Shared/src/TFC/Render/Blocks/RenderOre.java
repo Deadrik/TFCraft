@@ -7,10 +7,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import TFC.API.TFCOptions;
-import TFC.Core.TFC_Textures;
-import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCWorldChunkManager;
+import TFC.TileEntities.TEOre;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderOre implements ISimpleBlockRenderingHandler
@@ -46,34 +43,13 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 
 	public static Icon getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord)
 	{
-		Icon var27 = null;
-		int localX = xCoord & 15;
-		int localZ = zCoord & 15;
-		DataLayer rockLayer1 = ((TFCWorldChunkManager) worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
-		DataLayer rockLayer2 = ((TFCWorldChunkManager) worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 1);
-		DataLayer rockLayer3 = ((TFCWorldChunkManager) worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);
-		// ChunkData data = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
-		int hmY = worldObj.getTopSolidOrLiquidBlock(xCoord, zCoord);
-		try
+		TEOre te = (TEOre)worldObj.getBlockTileEntity(xCoord, yCoord, zCoord);
+		if(te!= null && te.baseBlockID > 0)
 		{
-			int localY = localX + localZ * 16;
-			if (yCoord <= TFCOptions.RockLayer3Height + (hmY))
-			{
-				var27 = Block.blocksList[rockLayer3.data1].getIcon(5, rockLayer3.data2);
-			} else if (yCoord <= TFCOptions.RockLayer2Height + hmY)
-			{
-				var27 = Block.blocksList[rockLayer2.data1].getIcon(5, rockLayer2.data2);
-			} else
-			{
-				var27 = Block.blocksList[rockLayer1.data1].getIcon(5, rockLayer1.data2);
-			}
-		} catch (Exception ex)
-		{
-			System.out.println("Ore getRockTexture crash! " + "rock1: " + rockLayer1.data1 + "/" + rockLayer1.data2 + "rock2: " + rockLayer2.data1 + "/"
-					+ rockLayer2.data2 + "rock3: " + rockLayer3.data1 + "/" + rockLayer3.data2);
-			var27 = TFC_Textures.InvisibleTexture;
+			Icon var27 = Block.blocksList[te.baseBlockID].getIcon(5, te.baseBlockMeta);
+			return var27;
 		}
-		return var27;
+		return null;
 	}
 
 	@Override
@@ -85,7 +61,6 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 	@Override
 	public int getRenderId()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
