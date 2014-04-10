@@ -40,7 +40,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
-		if(is.getTagCompound().hasKey("foodWeight"))
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
 		{
 			float ounces = is.getTagCompound().getFloat("foodWeight");
 			if(ounces > 0)
