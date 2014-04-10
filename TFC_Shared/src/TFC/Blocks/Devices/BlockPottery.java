@@ -18,6 +18,8 @@ import TFC.Blocks.BlockTerraContainer;
 import TFC.Items.ItemLogs;
 import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.TileEntities.TileEntityPottery;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPottery extends BlockTerraContainer
 {
@@ -126,8 +128,8 @@ public class BlockPottery extends BlockTerraContainer
 		int w = 0;
 		if(te!= null)
 		{
-		h =te.straw == 0 ? 1 : te.straw;
-		w = (te.wood > 0 ? 1 : 0) + (te.wood > 4 ? 1 : 0);
+			h =te.straw == 0 ? 1 : te.straw;
+			w = (te.wood > 0 ? 1 : 0) + (te.wood > 4 ? 1 : 0);
 		}
 		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.0625f*h) + (0.25f * w), k + 1);
 	}
@@ -140,8 +142,8 @@ public class BlockPottery extends BlockTerraContainer
 		int w = 0;
 		if(te!= null)
 		{
-		h =te.straw == 0 ? 1 : te.straw;
-		w = (te.wood > 0 ? 1 : 0) + (te.wood > 4 ? 1 : 0);
+			h =te.straw == 0 ? 1 : te.straw;
+			w = (te.wood > 0 ? 1 : 0) + (te.wood > 4 ? 1 : 0);
 		}
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, (0.0625f*h) + (0.25f * w), 1.0F);
 	}
@@ -200,5 +202,12 @@ public class BlockPottery extends BlockTerraContainer
 				return;
 			}
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess access, int x, int y, int z, int side)
+	{
+		return true;
 	}
 }
