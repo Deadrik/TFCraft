@@ -5,12 +5,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import TFC.Containers.Slots.SlotArmorTFC;
+import TFC.Containers.Slots.SlotCraftingTFC;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Items.ItemTFCArmor;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ContainerPlayerTFC extends ContainerPlayer 
 {
@@ -22,7 +23,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		inventorySlots.clear();
 		inventoryItemStacks.clear();
 
-		this.addSlotToContainer(new SlotCrafting(player, craftMatrix, craftResult, 0, 152, 36));
+		this.addSlotToContainer(new SlotCraftingTFC(player, craftMatrix, craftResult, 0, 152, 36));
 		int x;
 		int y;
 
@@ -93,11 +94,15 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		if (slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack(); 
-			slot.onPickupFromSlot(thePlayer, itemstack1);
+			/*if(itemstack1.hasTagCompound())
+				slot.onPickupFromSlot(thePlayer, itemstack1);*/
+
 			itemstack = itemstack1.copy();
 
 			if (par2 == 0)
 			{
+				GameRegistry.onItemCrafted(player, itemstack1, craftMatrix);
+				((SlotCraftingTFC)slot).onCrafting(itemstack1);
 				if (!this.mergeItemStack(itemstack1, 9, 45, true))
 					return null;
 

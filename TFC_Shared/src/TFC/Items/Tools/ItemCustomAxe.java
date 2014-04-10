@@ -34,6 +34,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 		this.setMaxDamage(e.getMaxUses());
 		this.damageVsEntity = damage;
 		setCreativeTab(TFCTabs.TFCTools);
+		setNoRepair();
 	}
 
 	@Override

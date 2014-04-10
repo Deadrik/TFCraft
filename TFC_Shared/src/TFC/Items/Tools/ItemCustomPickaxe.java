@@ -30,6 +30,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	{
 		super(i, e);
 		setCreativeTab(TFCTabs.TFCTools);
+		setNoRepair();
 	}
 
 	@Override

@@ -41,6 +41,7 @@ public class ItemTerra extends Item implements ISize
 		super(id);
 		this.setCreativeTab(TFCTabs.TFCMisc);
 		textureFolder = "";
+		setNoRepair();
 	}
 
 	public ItemTerra setMetaNames(String[] metanames)
