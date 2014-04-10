@@ -45,6 +45,7 @@ import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TEFruitLeaves;
 import TFC.TileEntities.TEMetalSheet;
 import TFC.TileEntities.TENestBox;
+import TFC.TileEntities.TEOre;
 import TFC.TileEntities.TESeaWeed;
 import TFC.TileEntities.TEStand;
 import TFC.TileEntities.TileEntityAnvil;
@@ -130,6 +131,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TESeaWeed.class, "Sea Weed");
 		GameRegistry.registerTileEntity(TEFruitLeaves.class, "Fruit Leaves");
 		GameRegistry.registerTileEntity(TEMetalSheet.class, "Metal Sheet");
+		GameRegistry.registerTileEntity(TEOre.class, "ore");
 
 		if(b)
 		{

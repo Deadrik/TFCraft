@@ -309,8 +309,19 @@ public class FoodStatsTFC
 				player.inventory.addItemStackToInventory(new ItemStack(Items.bowl,1));
 			}
 		}
-		else if(is.getItem() instanceof IFood){
-			addNutrition(((IFood)(is.getItem())).getFoodGroup(), 10f);
+		else if(is.getItem() instanceof IFood)
+		{
+			if(is.hasTagCompound())
+			{
+				NBTTagCompound nbt = is.getTagCompound();
+				float weight = nbt.hasKey("foodWeight") ? nbt.getFloat("foodWeight") : 0;
+				float decay = nbt.hasKey("foodDecay") ? nbt.getFloat("foodDecay") : 0;
+				float eatAmount = Math.min(weight - decay, 5f);
+				addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount);
+				this.stomachLevel += eatAmount;
+			}
+			else
+				addNutrition(((IFood)(is.getItem())).getFoodGroup(), 10f);
 		}
 	}
 
@@ -331,7 +342,7 @@ public class FoodStatsTFC
 		nMod += 0.2f * (nutrDairy/24f);
 		return Math.max(nMod, 0.1f);
 	}
-	
+
 	public static int getMaxHealth(EntityPlayer player)
 	{
 		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.HealthGainRate), TFCOptions.HealthGainCap) * 

@@ -50,7 +50,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		foodID = foodid;
 		foodgroup = fg;
 		TFCItems.FoodList.add(this);
+		this.setMaxDamage(100);
+		this.hasSubtypes = false;
 	}
+
 
 	public ItemFoodTFC setDecayRate(float f)
 	{
@@ -58,6 +61,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		return this;
 	}
 
+	@Override
 	public float getDecayRate()
 	{
 		return decayRate*(TFC_Time.getYearRatio(96));
@@ -96,20 +100,25 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		addHeatInformation(is, arraylist);
 		if (is.hasTagCompound())
 		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-			if(stackTagCompound.hasKey("isSalted"))
-				arraylist.add("\u2022Salted");
-			if(stackTagCompound.hasKey("foodWeight"))
-			{
-				float ounces = stackTagCompound.getFloat("foodWeight");
-				if(ounces > 0)
-					arraylist.add("Amount " + ounces+" oz / "+Global.FOOD_MAX_WEIGHT+" oz");
-				float decay = stackTagCompound.getFloat("foodDecay");
-				if(decay > 0)
-					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100, 10)+"%");
-				if(TFCOptions.enableDebugMode)
-					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay: " + decay);
-			}
+			addFoodInformation(is, player, arraylist);
+		}
+	}
+
+	public static void addFoodInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{
+		NBTTagCompound stackTagCompound = is.getTagCompound();
+		if(stackTagCompound.hasKey("isSalted"))
+			arraylist.add("\u2022Salted");
+		if(stackTagCompound.hasKey("foodWeight"))
+		{
+			float ounces = stackTagCompound.getFloat("foodWeight");
+			if(ounces > 0)
+				arraylist.add("Amount " + ounces+" oz / "+Global.FOOD_MAX_WEIGHT+" oz");
+			float decay = stackTagCompound.getFloat("foodDecay");
+			if(decay > 0)
+				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100, 10)+"%");
+			if(TFCOptions.enableDebugMode)
+				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay: " + decay);
 		}
 	}
 
@@ -234,7 +243,14 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getDisplayDamage(ItemStack stack)
 	{
-		return (int)(getFoodDecay(stack)*10);
+		int percent = (int)((getFoodDecay(stack)/getFoodWeight(stack))*100);
+		return percent > 0 ? percent < 100 ? percent : 100 : 0;
+	}
+
+	@Override
+	public boolean isDamaged(ItemStack stack)
+	{
+		return true;
 	}
 
 	@Override
@@ -269,5 +285,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getFoodID() {
 		return foodID;
+	}
+
+	@Override
+	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) 
+	{
+		return null;
 	}
 }

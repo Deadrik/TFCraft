@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.Enums.EnumSize;
+import TFC.Core.TFC_Achievements;
 import TFC.TileEntities.TileEntityAnvil;
 
 import com.google.common.collect.Sets;
@@ -33,6 +34,7 @@ public class ItemHammer extends ItemTerraTool
 			if(side == 1)
 			{
 				world.setBlock(x, y, z, TFCBlocks.Anvil);
+				player.triggerAchievement(TFC_Achievements.achAnvil);
 				TileEntityAnvil te = (TileEntityAnvil) world.getTileEntity(x, y, z);
 				if(te == null)
 				{

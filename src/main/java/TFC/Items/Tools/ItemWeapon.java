@@ -42,7 +42,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 		this.setMaxDamage(par2.getMaxUses());
 		this.toolMat = par2;
 		setCreativeTab(TFCTabs.TFCWeapons);
-		this.weaponDamage = damage + par2.getDamageVsEntity();
+		setNoRepair();
 	}
 
 	@Override

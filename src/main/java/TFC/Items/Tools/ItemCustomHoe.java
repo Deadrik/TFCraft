@@ -36,6 +36,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	{
 		super(e);
 		setCreativeTab(TFCTabs.TFCTools);
+		setNoRepair();
 	}
 
 	@Override

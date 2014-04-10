@@ -66,14 +66,14 @@ public class WorldGenOre implements IWorldGenerator
 	private void oreSmallVein(Block block, int meta, HashMap<Block, Integer> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(block, meta ,baseRocks,
-				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/20,/*height*/5,/*diameter*/40,/*vDensity*/vDensity,/*hDensity*/hDensity,
+				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/30,/*height*/5,/*diameter*/40,/*vDensity*/vDensity,/*hDensity*/hDensity,
 				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
 	}
 
 	private void oreMediumVein(Block block, int meta, HashMap<Block, Integer> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(block, meta ,baseRocks,
-				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/30,/*height*/10,/*diameter*/60,/*vDensity*/vDensity,/*hDensity*/hDensity,
+				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/40,/*height*/10,/*diameter*/60,/*vDensity*/vDensity,/*hDensity*/hDensity,
 				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
 	}
 
@@ -87,14 +87,14 @@ public class WorldGenOre implements IWorldGenerator
 	private void oreSmall(Block block, int meta, HashMap<Block, Integer> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOreVein(block, meta ,baseRocks,
-				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/20,/*height*/5,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,
+				/*rarity*/rarity,/*veinSize*/20,/*veinAmt*/30,/*height*/5,/*diameter*/80,/*vDensity*/vDensity,/*hDensity*/hDensity,
 				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
 	}
 
 	private void oreMedium(Block block, int meta, HashMap<Block, Integer> baseRocks, int rarity, int min, int max, int vDensity, int hDensity)
 	{
 		createOre(block, meta ,baseRocks,
-				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/30,/*height*/10,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,
+				/*rarity*/rarity,/*veinSize*/30,/*veinAmt*/40,/*height*/10,/*diameter*/120,/*vDensity*/vDensity,/*hDensity*/hDensity,
 				worldObj, random, ChunkX, ChunkZ, min, max, "Graphite");
 	}
 
@@ -119,7 +119,14 @@ public class WorldGenOre implements IWorldGenerator
 						(rockLayer2.block == B && (rockLayer2.data2 == Layers.get(B) || Layers.get(B) == -1)) ||
 						(rockLayer3.block == B && (rockLayer3.data2 == Layers.get(B) || Layers.get(B) == -1)))
 				{
-					new WorldGenMinable(block, j, B, Layers.get(B), rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, false).generate(
+					int grade = rand.nextInt(100);
+					if(grade<20)
+						grade = 1;
+					else if(grade <50)
+						grade = 2;
+					else
+						grade = 0;
+					new WorldGenMinable(block, j, B, Layers.get(B), rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, false, grade).generate(
 							world, rand, chunkX, chunkZ, min, max, name);
 				}
 			}
@@ -141,7 +148,14 @@ public class WorldGenOre implements IWorldGenerator
 						(rockLayer2.block == B && (rockLayer2.data2 == Layers.get(B) || Layers.get(B) == -1)) ||
 						(rockLayer3.block == B && (rockLayer3.data2 == Layers.get(B) || Layers.get(B) == -1)))
 				{
-					new WorldGenMinable(block, j, B, Layers.get(B), rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, true).generate(
+					int grade = rand.nextInt(100);
+					if(grade<20)
+						grade = 1;
+					else if(grade <50)
+						grade = 2;
+					else
+						grade = 0;
+					new WorldGenMinable(block, j, B, Layers.get(B), rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, true, grade).generate(
 							world, rand, chunkX, chunkZ, min, max, name);
 				}
 			}

@@ -62,12 +62,12 @@ public class WorldGenSoilPits implements IWorldGenerator
 							{
 								if (TFC_Core.isDirt(block) || TFC_Core.isClay(block) || TFC_Core.isPeat(block))
 								{
-									par1World.setBlock(x, y, z, TFCBlocks.Peat);
+									par1World.setBlock(x, y, z, TFCBlocks.Peat, 0, 2);
 									flag = true;
 								}
 								else if(TFC_Core.isGrass(block))
 								{
-									par1World.setBlock(x, y, z, TFCBlocks.PeatGrass);
+									par1World.setBlock(x, y, z, TFCBlocks.PeatGrass, 0, 2);
 									flag = true;
 								}
 							}

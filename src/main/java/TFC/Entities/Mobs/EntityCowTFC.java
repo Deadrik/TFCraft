@@ -24,6 +24,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
 import TFC.Entities.AI.EntityAIMateTFC;
+import TFC.Items.Tools.ItemCustomBucketMilk;
 
 public class EntityCowTFC extends EntityCow implements IAnimal
 {
@@ -301,7 +302,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	public boolean interact(EntityPlayer player)
 	{
 		if(!worldObj.isRemote){
-			player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
+			//player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
 			if(getGender()==GenderEnum.FEMALE && pregnant){
 				player.addChatMessage(new ChatComponentText("Pregnant"));
 			}
@@ -312,7 +313,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			ItemStack var2 = player.inventory.getCurrentItem();
 			if (var2 != null && var2.getItem() == TFCItems.WoodenBucketEmpty) 
 			{
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(TFCItems.WoodenBucketMilk));
+				ItemStack is = new ItemStack(TFCItems.WoodenBucketMilk);
+				ItemCustomBucketMilk.createTag(is, 20f);
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
 				hasMilkTime = TFC_Time.getTotalTicks() + TFC_Time.dayLength;//Can be milked once every day
 				return true;
 			}

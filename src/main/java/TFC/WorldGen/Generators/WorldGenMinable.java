@@ -11,13 +11,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import TFC.API.TFCOptions;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
-import TFC.Core.TFC_Core;
-import TFC.WorldGen.DataLayer;
+import TFC.TileEntities.TEOre;
 // remove for multiplayer server
-import TFC.WorldGen.TFCWorldChunkManager;
 
 // Referenced classes of package net.minecraft.src:
 //                      WorldGenerator, MathHelper, World, Block
@@ -64,13 +61,14 @@ public class WorldGenMinable extends WorldGenerator
 	private Block genInBlock = Blocks.air;
 	private int genInBlockMeta = 1;
 	private boolean useMarcoVeins = false;
+	private int grade = 0;
 
 	//==========================================mp mod
 	private Block minableBlock;
 	private int numberOfBlocks;
 
-	public WorldGenMinable(Block block, int j, Block layerBlock, int layerMeta, int rarity, int veinSize, 
-			int veinAmount, int height, int diameter, int vDensity, int hDensity, boolean vein)
+	public WorldGenMinable(Block block, int j, Block layerBlock, int layerMeta, int rarity, int veinSize,
+			int veinAmount, int height, int diameter, int vDensity, int hDensity, boolean vein, int oreGrade)
 	{
 		int emptyHolder = 0;
 		emptyHolder = j;
@@ -87,6 +85,7 @@ public class WorldGenMinable extends WorldGenerator
 		this.vDens = vDensity;
 		this.hDens = hDensity;
 		this.useMarcoVeins = vein;
+		grade = oreGrade;
 	}
 
 	public boolean generateBeforeCheck() // takes a set of current global variables and checks to see if this ore has spawned before in this chunk
@@ -105,13 +104,13 @@ public class WorldGenMinable extends WorldGenerator
 			int temp1 = mPCalculateDensity(diameter, hDens);
 			int temp2 = mineHeight + mPCalculateDensity(height, vDens);
 			int temp3 = mPCalculateDensity(diameter, hDens);
-			int l5 = x + temp1;
-			int i9 = temp2;
-			int k13 = z + temp3;
+			int posX = x + temp1;
+			int posY = temp2;
+			int posZ = z + temp3;
 			if(useMarcoVeins == false)
-				BODgenerate(worldObj, rand, l5, i9, k13, veinSi); // generate based on values
+				BODgenerate(worldObj, rand, posX, posY, posZ, veinSi); // generate based on values
 			else
-				BODgenerateVein(worldObj, rand, l5, i9, k13, veinSi);
+				BODgenerateVein(worldObj, rand, posX, posY, posZ, veinSi);
 		}
 	}
 
@@ -263,55 +262,55 @@ public class WorldGenMinable extends WorldGenerator
 						boolean isCorrectMeta = false;
 						int localX = posX & 15;
 						int localZ = posZ & 15;
+
 						ChunkData data = ChunkDataManager.getData(posX >> 4, posZ >> 4);
 						int hm = data != null ? data.heightmap[localX + localZ * 16] : 0;
 						posY = Math.min(255, posY + hm);
-						int m = world.getBlockMetadata(posX, posY, posZ);
 
-						if(TFCOptions.enableOreTest)
+						int m = world.getBlockMetadata(posX, posY, posZ);
+						Block b = world.getBlock(posX, posY, posZ);
+						isCorrectRockType = b == this.genInBlock;
+						isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
+
+						if(isCorrectRockType && isCorrectMeta)
 						{
-							DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(world, posX, posY, posZ));
-							if(rockLayer.block != null && rockLayer.block == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
+							world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
+							TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
+							if(te!= null)
 							{
-								isCorrectRockType = true;
-								isCorrectMeta = true;
+								te.baseBlockID = Block.getIdFromBlock(b);
+								te.baseBlockMeta = m;
+								te.grade = (byte)grade;
 							}
 						}
-						else
-						{
-							isCorrectRockType = world.getBlock(posX, Math.min(255, posY+hm), posZ) == this.genInBlock;
-							isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
-						}
-						if(MPBlock != null && isCorrectRockType && isCorrectMeta)
-							world.setBlock(posX, Math.min(255, posY+hm), posZ, MPBlock, minableBlockMeta, 2);
 						blocksMade++;
 						blocksMade1++;
 						blocksMade2++;
 					}
 				}
 
-				int m = world.getBlockMetadata(posX, posY, posZ);
-				boolean isCorrectRockType = false;
-				boolean isCorrectMeta = false;
+				int localX = posX & 15;
+				int localZ = posZ & 15;
+				ChunkData data = ChunkDataManager.getData(posX >> 4, posZ >> 4);
+				int hm = data != null ? data.heightmap[localX + localZ * 16] : 0;
+				posY = Math.min(255, posY + hm);
 
-				if(TFCOptions.enableOreTest)
+				int m = world.getBlockMetadata(posX, posY, posZ);
+				Block b = world.getBlock(posX, posY, posZ);
+				boolean	isCorrectRockType = b == this.genInBlock;
+				boolean	isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
+
+				if(isCorrectRockType && isCorrectMeta)
 				{
-					DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(world, posX, posY, posZ));
-					if(rockLayer.block == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
+					world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
+					TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
+					if(te!= null)
 					{
-						isCorrectRockType = true;
-						isCorrectMeta = true;
+						te.baseBlockID = Block.getIdFromBlock(b);
+						te.baseBlockMeta = m;
+						te.grade = (byte)grade;
 					}
 				}
-				else
-				{
-					isCorrectRockType = world.getBlock(posX, posY, posZ) == this.genInBlock;
-					isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
-				}
-
-				if(MPBlock != null && isCorrectRockType && isCorrectMeta)
-					world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
-
 				blocksMade++;
 				blocksMade1++;
 			}
@@ -366,28 +365,29 @@ public class WorldGenMinable extends WorldGenerator
 							for (int posZ = var34; posZ <= var37; ++posZ)
 							{
 								double var45 = (posZ + 0.5D - var24) / (var28 / 2.0D);
+								int localX = posX & 15;
+								int localZ = posZ & 15;
+								ChunkData data = ChunkDataManager.getData(posX >> 4, posZ >> 4);
+								int hm = data != null ? data.heightmap[localX + localZ * 16] : 0;
+								posY = Math.min(255, posY + hm);
+
 								int m = world.getBlockMetadata(posX, posY, posZ);
-								boolean isCorrectRockType = false;
-								boolean isCorrectMeta = false;
-								if(TFCOptions.enableOreTest)
-								{
-									DataLayer rockLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(posX, posZ, TFC_Core.getRockLayerFromHeight(world, posX, posY, posZ));
-									if(rockLayer.block != null && rockLayer.block == genInBlock && (rockLayer.data2 == this.genInBlockMeta || this.genInBlockMeta == -1))
-									{
-										isCorrectRockType = true;
-										isCorrectMeta = true;
-									}
-								}
-								else
-								{
-									isCorrectRockType = world.getBlock(posX, posY, posZ) == this.genInBlock;
-									isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
-								}
-								if(MPBlock != null && isCorrectRockType && isCorrectMeta)
+								Block b = world.getBlock(posX, posY, posZ);
+								boolean isCorrectRockType = b == this.genInBlock;
+								boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
+
+								if(isCorrectRockType && isCorrectMeta)
 									if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D)
-										//world.setBlockAndMetadata(var38, var41, var44, minableBlockId, minableBlockMeta);
-										world.setBlock(posX, posY, posZ, minableBlock, minableBlockMeta, 2);
-								//System.out.println("block at " + var38 +" "+var41+" "+var44); /// for debugging
+									{
+										world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
+										TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
+										if(te!= null)
+										{
+											te.baseBlockID = Block.getIdFromBlock(b);
+											te.baseBlockMeta = m;
+											te.grade = (byte)grade;
+										}
+									}
 							}
 					}
 			}

@@ -41,59 +41,66 @@ public class BlockOre2 extends BlockOre
 	}
 
 	@Override
-	public int damageDropped(int j) 
+	public int damageDropped(int j)
 	{
 		return j + Global.ORE_METAL.length;
 	}
 
 	@Override
+	public boolean removedByPlayer(World world, EntityPlayer player, int i, int j, int k)
+	{
+		if(!world.isRemote)
+		{
+			int meta = world.getBlockMetadata(i, j, k);
+			if(player != null)
+			{
+				player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
+				player.addExhaustion(0.075F);
+			}
+			Random random = new Random();
+	
+			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1 , damageDropped(meta));
+	
+			if(meta == 5)
+				itemstack = KimberliteGemSpawn(); //Drop diamonds
+			else if(meta == 13)
+				itemstack = new ItemStack(TFCItems.Powder, 1 + random.nextInt(3), 4);
+	
+			if (itemstack != null)
+			{
+				if (!world.isRemote/* && (random.nextInt(4) == 0)*/)
+				{
+					float var6 = 0.7F;
+					double var7 = world.rand.nextFloat() * var6 + (1.0F - var6) * 0.5D;
+					double var9 = world.rand.nextFloat() * var6 + (1.0F - var6) * 0.5D;
+					double var11 = world.rand.nextFloat() * var6 + (1.0F - var6) * 0.5D;
+					EntityItem var13 = new EntityItem(world, i + var7, j + var9, k + var11, itemstack);
+					var13.delayBeforeCanPickup = 10;
+					world.spawnEntityInWorld(var13);
+				}
+			}
+		}
+		return world.setBlockToAir(i, j, k);
+	}
+
+	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
-		if(entityplayer != null)
-		{
-			entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
-			entityplayer.addExhaustion(0.075F);
-		}
-		Random random = new Random();
-
-		ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1 , damageDropped(l));
-
-		if(l == 5)
-			itemstack = KimberliteGemSpawn(); //Drop diamonds
-		else if(l == 13)
-			itemstack = new ItemStack(TFCItems.Powder, 1 + random.nextInt(3), 4);
-
-		if (itemstack != null)
-		{
-			if (!world.isRemote/* && (random.nextInt(4) == 0)*/)
-			{
-				float var6 = 0.7F;
-				double var7 = world.rand.nextFloat() * var6 + (1.0F - var6) * 0.5D;
-				double var9 = world.rand.nextFloat() * var6 + (1.0F - var6) * 0.5D;
-				double var11 = world.rand.nextFloat() * var6 + (1.0F - var6) * 0.5D;
-				EntityItem var13 = new EntityItem(world, i + var7, j + var9, k + var11, itemstack);
-				var13.delayBeforeCanPickup = 10;
-				world.spawnEntityInWorld(var13);
-			}
-
-			//		    if(random.nextInt(100) != 0)
-			//                world.setBlockAndMetadata(i, j, k, blockID, l);
-		}
 	}
 
 	public ItemStack KimberliteGemSpawn()
 	{
 		Random random = new Random();
 		if(random.nextInt(25) == 0)
-			return new ItemStack(TFCItems.GemDiamond,1,0);
+			return new ItemStack(TFCItems.GemDiamond, 1, 0);
 		if(random.nextInt(50) == 0)
-			return new ItemStack(TFCItems.GemDiamond,1,1);
+			return new ItemStack(TFCItems.GemDiamond, 1, 1);
 		if(random.nextInt(75) == 0)
-			return new ItemStack(TFCItems.GemDiamond,1,2);
+			return new ItemStack(TFCItems.GemDiamond, 1, 2);
 		if(random.nextInt(150) == 0)
-			return new ItemStack(TFCItems.GemDiamond,1,3);
+			return new ItemStack(TFCItems.GemDiamond, 1, 3);
 		if(random.nextInt(300) == 0)
-			return new ItemStack(TFCItems.GemDiamond,1,4);
+			return new ItemStack(TFCItems.GemDiamond, 1, 4);
 		else
 			return null;
 	}

@@ -346,7 +346,7 @@ public class TerraFirmaCraft
 		WorldGenOre.OreList.put("Cassiterite", getOreData(config, "Cassiterite", "veins", "medium", Global.ORE_METAL[5], 5, 100, new String[]{"igneous intrusive"}, 5, 128, 80, 60));
 		WorldGenOre.OreList.put("Galena", getOreData(config, "Galena", "veins", "medium", Global.ORE_METAL[6], 6, 100, new String[]{"igneous extrusive", "metamorphic", "granite", "limestone"}, 5, 128, 80, 60));
 		WorldGenOre.OreList.put("Bismuthinite", getOreData(config, "Bismuthinite", "veins", "medium", Global.ORE_METAL[7], 7, 100, new String[]{"igneous extrusive", "sedimentary"}, 5, 128, 80, 60));
-		WorldGenOre.OreList.put("Garnierite", getOreData(config, "Garnierite", "veins", "large", Global.ORE_METAL[8], 8, 110, new String[]{"gabbro"}, 5, 128, 80, 60));
+		WorldGenOre.OreList.put("Garnierite", getOreData(config, "Garnierite", "veins", "medium", Global.ORE_METAL[8], 8, 150, new String[]{"gabbro"}, 5, 128, 80, 60));
 		WorldGenOre.OreList.put("Malachite", getOreData(config, "Malachite", "veins", "large", Global.ORE_METAL[9], 9, 100, new String[]{"limestone", "marble"}, 5, 128, 80, 60));
 		WorldGenOre.OreList.put("Magnetite", getOreData(config, "Magnetite", "veins", "medium", Global.ORE_METAL[10], 10, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
 		WorldGenOre.OreList.put("Limonite", getOreData(config, "Limonite", "veins", "medium", Global.ORE_METAL[11], 11, 150, new String[]{"sedimentary"}, 5, 128, 80, 60));
@@ -373,16 +373,15 @@ public class TerraFirmaCraft
 		WorldGenOre.OreList.put("Sylvite", getOreData(config, "Sylvite", "veins", "medium", Global.ORE_MINERAL[15], 15, 100, new String[]{"rock salt"}, 5, 128, 90, 40));
 
 		WorldGenOre.OreList.put("Borax", getOreData(config, "Borax", "veins", "large", Global.ORE_MINERAL2[0], 0, 120, new String[]{"rock salt"}, 5, 128, 80, 60));
-		WorldGenOre.OreList.put("Lapis Lazuli", getOreData(config, "Lapis Lazuli", "veins", "large", Global.ORE_MINERAL2[1], 1, 120, new String[]{"marble"}, 5, 128, 80, 60));
-		//WorldGenOre.OreList.put("Olivine", getOreData(config, "Olivine", "veins", "small", Global.ORE_MINERAL2[2], 2, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
+		WorldGenOre.OreList.put("Lapis Lazuli", getOreData(config, "Lapis Lazuli", "veins", "large", Global.ORE_MINERAL2[1], 2, 120, new String[]{"marble"}, 5, 128, 80, 60));
+		//WorldGenOre.OreList.put("Olivine", getOreData(config, "Olivine", "veins", "small", Global.ORE_MINERAL2[2], 1, 150, new String[]{"sedimentary"}, 5, 128, 40, 80));
 
 		//Surface Ore
 		WorldGenOre.OreList.put("Native Copper Surface", getOreData(config, "Native Copper Surface", "veins", "small", Global.ORE_METAL[0], 0, 35, new String[]{"igneous extrusive"}, 128, 240, 40, 40));
-		WorldGenOre.OreList.put("Cassiterite Surface", getOreData(config, "Cassiterite Surface", "veins", "small", Global.ORE_METAL[5], 5, 20, new String[]{"granite"}, 128, 240, 40, 40));
-		WorldGenOre.OreList.put("Bismuthinite Surface", getOreData(config, "Bismuthinite Surface", "veins", "small", Global.ORE_METAL[7], 7, 25, new String[]{"igneous intrusive", "sedimentary"}, 128, 240, 40, 40));
-		WorldGenOre.OreList.put("Sphalerite Surface", getOreData(config, "Sphalerite Surface", "veins", "small", Global.ORE_METAL[12], 12, 25, new String[]{"metamorphic"}, 128, 240, 40, 40));
-		WorldGenOre.OreList.put("Tetrahedrite Surface", getOreData(config, "Tetrahedrite Surface", "veins", "small", Global.ORE_METAL[13], 13, 25, new String[]{"metamorphic"}, 128, 240, 40, 40));
-
+		WorldGenOre.OreList.put("Cassiterite Surface", getOreData(config, "Cassiterite Surface", "veins", "small", Global.ORE_METAL[5], 5, 35, new String[]{"granite"}, 128, 240, 40, 40));
+		WorldGenOre.OreList.put("Bismuthinite Surface", getOreData(config, "Bismuthinite Surface", "veins", "small", Global.ORE_METAL[7], 7, 35, new String[]{"igneous intrusive", "sedimentary"}, 128, 240, 40, 40));
+		WorldGenOre.OreList.put("Sphalerite Surface", getOreData(config, "Sphalerite Surface", "veins", "small", Global.ORE_METAL[12], 12, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
+		WorldGenOre.OreList.put("Tetrahedrite Surface", getOreData(config, "Tetrahedrite Surface", "veins", "small", Global.ORE_METAL[13], 13, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
 
 		/**Start setup here*/
 		Set<String> names = config.getCategoryNames();

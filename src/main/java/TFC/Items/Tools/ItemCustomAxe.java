@@ -9,7 +9,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import TFC.Reference;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
@@ -34,6 +36,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 		this.setMaxDamage(e.getMaxUses());
 		this.toolDamage = damage;
 		setCreativeTab(TFCTabs.TFCTools);
+		setNoRepair();
 	}
 
 	@Override
@@ -56,6 +59,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
+		arraylist.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal(GetDamageType().toString()));
 
 		if(TFCOptions.enableDebugMode)
 			arraylist.add("Damage: " + is.getItemDamage());

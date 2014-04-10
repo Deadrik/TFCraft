@@ -45,29 +45,31 @@ public class BlockOre3 extends BlockOre
 		return j + Global.ORE_METAL.length+Global.ORE_MINERAL.length;
 	}
 
+	@Override
+	public boolean removedByPlayer(World world, EntityPlayer player, int i, int j, int k)
+	{
+		if(!world.isRemote)
+		{
+			int meta = world.getBlockMetadata(i, j, k);
+			if(player != null)
+			{
+				player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
+				player.addExhaustion(0.075F);
+			}
+			Random random = new Random();
+			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(meta));
+			if (itemstack != null)
+				dropBlockAsItem(world, i, j, k, itemstack);
+		}
+		return world.setBlockToAir(i, j, k);
+	}
+
 	/*
 	 * Mapping from metadata value to damage value
 	 */
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
-		if(entityplayer != null)
-		{
-			entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
-			entityplayer.addExhaustion(0.075F);
-		}
-		Random random = new Random();
-
-		ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(l));
-
-		if (itemstack != null)
-		{
-			// if(random.nextInt(4) == 0)
-			dropBlockAsItem(world, i, j, k, itemstack);
-
-			//			if(random.nextInt(100) != 0)
-			//                world.setBlockAndMetadata(i, j, k, blockID, l);
-		}
 	}
 
 

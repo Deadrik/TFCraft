@@ -49,7 +49,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	int degreeOfDiversion = 2;
 	/** The time until the next egg is spawned. */
 	public long nextEgg;
-	public int EggTime = 1000;
+	public int EggTime = TFC_Time.dayLength*2;
 
 	public EntityChickenTFC(World par1World)
 	{

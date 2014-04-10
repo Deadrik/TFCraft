@@ -104,9 +104,7 @@ public class WorldGenFissure implements IWorldGenerator
 			return;
 
 		ArrayList<ByteCoord> map = getCollapseMap(world, x,y-creviceDepth,z);
-		BlockMeta rockLayer = fillBlock != null && fillBlock.getMaterial() == Material.lava ?
-				TFC_Climate.getRockLayer(x, y, z, 2) : TFC_Climate.getRockLayer(x, y, z, TFC_Core.getRockLayerFromHeight(world, x, y, z));
-
+		BlockMeta rockLayer = fillBlock != null ? TFC_Climate.getRockLayer(x, y, z, 2) : new BlockMeta(Blocks.air, -1);
 		boolean makeTunnel = map.size() > 10;
 		if(rockLayer.block == null)
 			return;
@@ -138,7 +136,8 @@ public class WorldGenFissure implements IWorldGenerator
 
 	private void carve(World world, int x, int y, int z, Block block, int meta)
 	{
-		world.setBlockToAir(x, y, z);
+		if(world.getBlock(x, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x, y, z)))
+			world.setBlockToAir(x, y, z);
 		if(world.getBlock(x-1, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x-1, y, z)) && !TFC_Core.isGrass(world.getBlock(x-1, y, z)))
 			world.setBlock(x-1, y, z, block, meta, 2);
 		if(world.getBlock(x+1, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x+1, y, z)) && !TFC_Core.isGrass(world.getBlock(x+1, y, z)))

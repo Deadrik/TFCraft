@@ -1,16 +1,23 @@
 package TFC.Items.Tools;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.IFood;
+import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Time;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityBarrel;
@@ -31,6 +38,44 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		return false;
 	}
 
+	@Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	{
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
+		{
+			float ounces = is.getTagCompound().getFloat("foodWeight");
+			if(ounces > 0)
+				arraylist.add(ounces+" oz");
+			float decay = is.getTagCompound().getFloat("foodDecay");
+			if(decay > 0)
+			{
+				float perc = decay/ounces;
+				String s = EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.milk.fresh");
+				if(perc > 50)
+					s = EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.milk.old");
+				if(perc > 70)
+					s = EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.milk.sour");
+
+				arraylist.add(s);
+			}
+			if(TFCOptions.enableDebugMode)
+				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay: " + decay);
+		}
+	}
+
+	public static ItemStack createTag(ItemStack is, float weight)
+	{
+		NBTTagCompound nbt = is.getTagCompound();
+		if(nbt == null)
+			nbt = new NBTTagCompound();
+		nbt.setFloat("foodWeight", weight);
+		nbt.setFloat("foodDecay", 0);
+		nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours()+1);
+
+		is.setTagCompound(nbt);
+		return is;
+	}
+
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
@@ -44,6 +89,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 			TFC_Core.setPlayerFoodStats(player, foodstats);
 
 			is = new ItemStack(TFCItems.WoodenBucketEmpty);
+			is.stackTagCompound = null;
 		}
 		return is;
 	}
@@ -109,4 +155,15 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		return -1;
 	}
 
+	@Override
+	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) 
+	{
+		return new ItemStack(TFCItems.WoodenBucketEmpty);
+	}
+
+	@Override
+	public float getDecayRate()
+	{
+		return 6f;
+	}
 }

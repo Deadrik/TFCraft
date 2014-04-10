@@ -31,6 +31,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 	{
 		super(par2, par3, par4);
 		this.setCreativeTab(TFCTabs.TFCTools);
+		setNoRepair();
 	}
 
 	@Override

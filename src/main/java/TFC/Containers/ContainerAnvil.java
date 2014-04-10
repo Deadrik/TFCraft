@@ -78,12 +78,8 @@ public class ContainerAnvil extends ContainerTFC
 				slot.putStack(null);
 			} else if(itemstack1.getItem() == TFCItems.Powder && itemstack1.getItemDamage() == 0)
 			{
-				if(slotflux.getHasStack())
+				if (!this.mergeItemStack(itemstack1, 6, 7, false))
 					return null;
-				ItemStack stack = itemstack1.copy();
-				stack.stackSize = 1;
-				slotflux.putStack(stack);
-				itemstack1.stackSize--;
 			}
 			else if(itemstack1.getItem() instanceof ItemHammer)
 			{
@@ -156,8 +152,8 @@ public class ContainerAnvil extends ContainerTFC
 				this.anvil.itemCraftingValue = par2;
 			else if (par1 == 2)
 				this.anvil.AnvilTier = par2;
-
 	}
+
 	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer)
 	{

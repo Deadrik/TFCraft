@@ -9,8 +9,10 @@ import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import TFC.Containers.Slots.SlotArmorTFC;
+import TFC.Containers.Slots.SlotCraftingTFC;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Items.ItemTFCArmor;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ContainerPlayerTFC extends ContainerPlayer
 {
@@ -96,11 +98,16 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		if (slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack(); 
-			slot.onPickupFromSlot(thePlayer, itemstack1);
+			/*if(itemstack1.hasTagCompound())
+				slot.onPickupFromSlot(thePlayer, itemstack1);*/
+
 			itemstack = itemstack1.copy();
 
 			if (par2 == 0)
 			{
+				// Is this done in the CraftingHandler now ???
+				//GameRegistry.onItemCrafted(player, itemstack1, craftMatrix);
+				((SlotCraftingTFC)slot).onCrafting(itemstack1);
 				if (!this.mergeItemStack(itemstack1, 9, 45, true))
 					return null;
 

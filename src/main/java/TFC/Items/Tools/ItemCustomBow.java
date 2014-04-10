@@ -35,6 +35,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 		this.maxStackSize = 1;
 		this.setMaxDamage(384);
 		setCreativeTab(TFCTabs.TFCWeapons);
+		setNoRepair();
 	}
 
 	public boolean consumeArrowInQuiver(EntityPlayer player, boolean shouldConsume)

@@ -109,7 +109,7 @@ public class ItemFoodBlock extends ItemTerraBlock implements IItemFoodBlock, IFo
 	@Override
 	public EnumFoodGroup getFoodGroup()
 	{
-		return null;
+		return EnumFoodGroup.None;
 	}
 
 	@Override
@@ -118,4 +118,15 @@ public class ItemFoodBlock extends ItemTerraBlock implements IItemFoodBlock, IFo
 		return foodID;
 	}
 
+	@Override
+	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k)
+	{
+		return null;
+	}
+
+	@Override
+	public float getDecayRate()
+	{
+		return 0;
+	}
 }

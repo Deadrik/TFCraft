@@ -20,12 +20,12 @@ import TFC.API.Enums.TFCDirection;
 import TFC.API.Util.ByteCoord;
 import TFC.API.Util.CollapseData;
 import TFC.API.Util.CollapseList;
-import TFC.Blocks.BlockTerra;
+import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Sounds;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.WorldGen.TFCBiome;
 
-public class BlockCollapsable extends BlockTerra
+public class BlockCollapsable extends BlockTerraContainer
 {
 	public Block dropBlock;
 

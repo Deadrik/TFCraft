@@ -78,11 +78,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		for(int c = 0; c < Recipes.Knives.length && is != null; c++)
 			if(is.getItem() == Recipes.Knives[c])
 			{
-				//createStraw(world, player, i, j, k);
-				if(rand.nextInt(16)==0)
-					createJute(world,player,i,j,k);
-				else
-					createStraw(world, player, i, j, k);
+				createStraw(world, player, i, j, k);
 				is.damageItem(1, player);
 				break;
 			}
@@ -91,23 +87,13 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 			if(is.getItem() == Recipes.Scythes[c])
 			{
 				//Spawn the straw for the block that we've already destroyed
-				//createStraw(world, player, i, j, k );
-				if(rand.nextInt(16)==0)
-					createJute(world,player,i,j,k);
-				else
-					createStraw(world, player, i, j, k );
-
+				createStraw(world, player, i, j, k );
 				//Now check each block around the destroyed block for AOE directions
 				for(int x = -1; x < 2; x++)
 					for(int z = -1; z < 2; z++)
 						if(world.getBlock(i+x,  j,  k+z) == this)
 						{
-							//createStraw(world, player, i + x, j, k + z);
-							if(rand.nextInt(16)==0)
-								createJute(world,player,i,j,k);
-							else
-								createStraw(world, player, i, j, k );
-
+							createStraw(world, player, i + x, j, k + z);
 							is.damageItem(1, player);
 							world.setBlockToAir(i+x,  j,  k+z);
 						}
