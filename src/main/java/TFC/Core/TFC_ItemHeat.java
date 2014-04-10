@@ -306,6 +306,7 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(Items.chicken, 1), 0.85F, 120.5F, new ItemStack(Items.cooked_chicken, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(Items.fish, 1), 0.85F, 120.5F, new ItemStack(Items.cooked_fished, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(Items.egg, 1), 0.90F, 110.5F, new ItemStack(TFCItems.EggCooked, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.horseMeatRaw, 1), 0.85F, 130.5F, new ItemStack(TFCItems.horseMeatCooked, 1)).setKeepNBT(true));
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WheatDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.WheatBread, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BarleyDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.BarleyBread, 1)));
