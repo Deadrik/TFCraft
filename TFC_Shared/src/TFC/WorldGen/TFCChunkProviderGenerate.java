@@ -525,7 +525,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				int var13 = -1;
 
 				short surfaceBlock = (short) TFC_Core.getTypeForGrassWithRain(TFC_Core.getItemMetaFromStone(rock1.data1, rock1.data2), rain);
-				short subSurfaceBlock = (short)TFC_Core.getTypeForDirt(TFC_Core.getItemMetaFromStone(rock1.data1, rock1.data2));
+				short subSurfaceBlock = (short)TFC_Core.getTypeForDirtFromGrass(surfaceBlock);
 				byte soilMeta = (byte) TFC_Core.getSoilMetaFromStone(rock1.data1, rock1.data2);
 
 				float _temp = TFC_Climate.getBioTemperature(chunkX * 16 + xCoord, chunkZ * 16 + zCoord);

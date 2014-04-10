@@ -86,7 +86,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	@Override
 	public Icon getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int side)
 	{
-		Block blk = Block.blocksList[TFC_Core.getTypeForDirt(access.getBlockMetadata(xCoord, yCoord, zCoord) + textureOffset)];
+		Block blk = Block.blocksList[TFC_Core.getTypeForDirtFromGrass(this.blockID)];
 
 		if (side == 1)
 			return GrassTopTexture;
@@ -262,7 +262,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 			if(!BlockCollapsable.isNearSupport(world, i, j, k, 4, 0) && BlockDirt.canFallBelow(world, i, j - 1, k) && R.nextInt(10) == 0)
 			{
 				int meta = world.getBlockMetadata(i, j, k);
-				world.setBlock(i, j, k, TFC_Core.getTypeForDirt(meta), meta, 0x2);
+				world.setBlock(i, j, k, TFC_Core.getTypeForDirtFromGrass(this.blockID), meta, 0x2);
 			}
 		}
 	}
@@ -273,7 +273,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	@Override
 	public int idDropped(int par1, Random par2Random, int par3)
 	{
-		return Block.blocksList[TFC_Core.getTypeForDirt(par1)].idDropped(par1, par2Random, par3);
+		return Block.blocksList[TFC_Core.getTypeForDirtFromGrass(this.blockID)].idDropped(par1, par2Random, par3);
 	}
 
 	@Override
@@ -282,7 +282,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 		if(!world.blockExists(i, j-1, k))
 		{
 			int meta = world.getBlockMetadata(i, j, k);
-			world.setBlock(i, j, k, TFC_Core.getTypeForDirt(meta), meta, 0x2);
+			world.setBlock(i, j, k, TFC_Core.getTypeForDirtFromGrass(this.blockID), meta, 0x2);
 		}
 	}
 }

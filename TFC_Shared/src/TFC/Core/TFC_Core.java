@@ -524,7 +524,7 @@ public class TFC_Core
 		{
 			if (inMeta == 0)
 				return inMeta + 15;
-			return inMeta;
+			return inMeta-1;
 		}
 	}
 
@@ -607,6 +607,13 @@ public class TFC_Core
 	public static int getTypeForDirt(int inMeta)
 	{
 		if (inMeta < 16)
+			return TFCBlocks.Dirt.blockID;
+		return TFCBlocks.Dirt2.blockID;
+	}
+
+	public static int getTypeForDirtFromGrass(int inID)
+	{
+		if (inID == TFCBlocks.Grass.blockID)
 			return TFCBlocks.Dirt.blockID;
 		return TFCBlocks.Dirt2.blockID;
 	}

@@ -39,7 +39,7 @@ public class BlockDirt extends BlockTerra
 	 */
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
-		for (int i = 0; i < 15; i++)
+		for (int i = 0; i <= 15; i++)
 			par3List.add(new ItemStack(par1, 1, i));
 	}
 
@@ -47,6 +47,12 @@ public class BlockDirt extends BlockTerra
 	public int damageDropped(int i)
 	{
 		return i;
+	}
+
+	@Override
+	public int idDropped(int par1, Random par2Random, int par3)
+	{
+		return this.blockID;
 	}
 
 	public static boolean canFallBelow(World world, int i, int j, int k)
@@ -163,34 +169,34 @@ public class BlockDirt extends BlockTerra
 			if (!isBelowAir && (count > 2) && sides.size() >= 1)
 				switch ((Integer) sides.get(random.nextInt(sides.size())))
 				{
-					case 0:
-					{
-						world.setBlockToAir(i, j, k);
-						world.setBlock(i + 1, j, k, blockID, meta, 0x2);
-						tryToFall(world, i + 1, j, k);
-						break;
-					}
-					case 1:
-					{
-						world.setBlockToAir(i, j, k);
-						world.setBlock(i, j, k + 1, blockID, meta, 0x2);
-						tryToFall(world, i, j, k + 1);
-						break;
-					}
-					case 2:
-					{
-						world.setBlockToAir(i, j, k);
-						world.setBlock(i - 1, j, k, blockID, meta, 3);
-						tryToFall(world, i - 1, j, k);
-						break;
-					}
-					case 3:
-					{
-						world.setBlockToAir(i, j, k);
-						world.setBlock(i, j, k - 1, blockID, meta, 3);
-						tryToFall(world, i, j, k - 1);
-						break;
-					}
+				case 0:
+				{
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i + 1, j, k, blockID, meta, 0x2);
+					tryToFall(world, i + 1, j, k);
+					break;
+				}
+				case 1:
+				{
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i, j, k + 1, blockID, meta, 0x2);
+					tryToFall(world, i, j, k + 1);
+					break;
+				}
+				case 2:
+				{
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i - 1, j, k, blockID, meta, 3);
+					tryToFall(world, i - 1, j, k);
+					break;
+				}
+				case 3:
+				{
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i, j, k - 1, blockID, meta, 3);
+					tryToFall(world, i, j, k - 1);
+					break;
+				}
 				}
 			else if (isBelowAir)
 				tryToFall(world, i, j, k);
