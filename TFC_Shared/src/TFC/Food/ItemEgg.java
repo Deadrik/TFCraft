@@ -2,6 +2,7 @@ package TFC.Food;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -16,6 +17,12 @@ public class ItemEgg extends ItemFoodTFC implements IFood
 	public ItemEgg(int id)
 	{
 		super(id, -1, EnumFoodGroup.Protein);
+	}
+
+	@Override
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
+	{
+		list.add(createTag(new ItemStack(this, 1), 2));
 	}
 
 	@Override

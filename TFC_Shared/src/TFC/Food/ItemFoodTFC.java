@@ -49,7 +49,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		foodID = foodid;
 		foodgroup = fg;
 		TFCItems.FoodList.add(this);
+		this.setMaxDamage(100);
+		this.hasSubtypes = false;
 	}
+
 
 	public ItemFoodTFC setDecayRate(float f)
 	{
@@ -57,6 +60,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		return this;
 	}
 
+	@Override
 	public float getDecayRate()
 	{
 		return decayRate*(TFC_Time.getYearRatio(96));
@@ -238,7 +242,14 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getDisplayDamage(ItemStack stack)
 	{
-		return (int)(getFoodDecay(stack)*10);
+		int percent = (int)((getFoodDecay(stack)/getFoodWeight(stack))*100);
+		return percent > 0 ? percent < 100 ? percent : 100 : 0;
+	}
+
+	@Override
+	public boolean isDamaged(ItemStack stack)
+	{
+		return true;
 	}
 
 	@Override
