@@ -95,20 +95,25 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		addHeatInformation(is, arraylist);
 		if (is.hasTagCompound())
 		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-			if(stackTagCompound.hasKey("isSalted"))
-				arraylist.add("\u2022Salted");
-			if(stackTagCompound.hasKey("foodWeight"))
-			{
-				float ounces = stackTagCompound.getFloat("foodWeight");
-				if(ounces > 0)
-					arraylist.add("Amount " + ounces+" oz / "+Global.FOOD_MAX_WEIGHT+" oz");
-				float decay = stackTagCompound.getFloat("foodDecay");
-				if(decay > 0)
-					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100, 10)+"%");
-				if(TFCOptions.enableDebugMode)
-					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay: " + decay);
-			}
+			addFoodInformation(is, player, arraylist);
+		}
+	}
+
+	public static void addFoodInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{
+		NBTTagCompound stackTagCompound = is.getTagCompound();
+		if(stackTagCompound.hasKey("isSalted"))
+			arraylist.add("\u2022Salted");
+		if(stackTagCompound.hasKey("foodWeight"))
+		{
+			float ounces = stackTagCompound.getFloat("foodWeight");
+			if(ounces > 0)
+				arraylist.add("Amount " + ounces+" oz / "+Global.FOOD_MAX_WEIGHT+" oz");
+			float decay = stackTagCompound.getFloat("foodDecay");
+			if(decay > 0)
+				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100, 10)+"%");
+			if(TFCOptions.enableDebugMode)
+				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay: " + decay);
 		}
 	}
 
@@ -268,5 +273,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getFoodID() {
 		return foodID;
+	}
+
+	@Override
+	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) 
+	{
+		return null;
 	}
 }

@@ -30,6 +30,7 @@ import org.lwjgl.input.Mouse;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.IFood;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
 import TFC.API.Entities.IAnimal;
@@ -978,9 +979,10 @@ public class TFC_Core
 				{
 					continue;
 				}
-				tickDecay(is, world, x, y, z, environmentalDecayFactor);
+				is = tickDecay(is, world, x, y, z, environmentalDecayFactor);
 				TFC_ItemHeat.HandleItemHeat(is);
 			}
+			iinv.setInventorySlotContents(i, is);
 		}
 	}
 
@@ -1005,9 +1007,10 @@ public class TFC_Core
 				{
 					continue;
 				}
-				tickDecay(is, world, x, y, z, environmentalDecayFactor);
+				is = tickDecay(is, world, x, y, z, environmentalDecayFactor);
 				TFC_ItemHeat.HandleItemHeat(is);
 			}
+			iinv[i] = is;
 		}
 	}
 
@@ -1015,11 +1018,11 @@ public class TFC_Core
 	 * @param is
 	 * @param nbt
 	 */
-	private static void tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor)
+	private static ItemStack tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor)
 	{
 		NBTTagCompound nbt = is.getTagCompound();
 		if (nbt == null || !nbt.hasKey("foodWeight") || !nbt.hasKey("foodDecay"))
-			return;
+			return is;
 
 		// if the tick timer is up then we cause decay.
 		if (nbt.getInteger("decayTimer") < TFC_Time.getTotalHours())
@@ -1068,9 +1071,18 @@ public class TFC_Core
 		}
 
 		if (nbt.getFloat("foodDecay") / nbt.getFloat("foodWeight") > 0.9f)
-			is.stackSize = 0;
+		{
+			if(is.getItem() instanceof IFood)
+			{
+				is = ((IFood)is.getItem()).onDecayed(is, world, x, y, z);
+			}
+			else
+				is.stackSize = 0;
+		}
+		else
+			is.setTagCompound(nbt);
 
-		is.setTagCompound(nbt);
+		return is;
 	}
 
 	public static void animalDropMeat(Entity e, Item i, float foodWeight)

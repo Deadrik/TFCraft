@@ -1,47 +1,26 @@
 package TFC.Items.Tools;
 
-import TFC.*;
+import java.util.List;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumMovingObjectType;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
+import TFC.TFCItems;
 import TFC.API.IFood;
+import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumFoodGroup;
-import TFC.API.Util.Helper;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Sounds;
+import TFC.Core.TFC_Time;
 import TFC.Core.Player.FoodStatsTFC;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityBarrel;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.*;
-import net.minecraft.world.gen.feature.*;
 
 public class ItemCustomBucketMilk extends ItemTerra implements IFood
 {
@@ -52,26 +31,66 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		setCreativeTab(TFCTabs.TFCTools);
 		this.setFolder("tools/");
 	}
-	
+
 	@Override
 	public boolean canStack() {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	@Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	{
+		if(is.getTagCompound().hasKey("foodWeight"))
+		{
+			float ounces = is.getTagCompound().getFloat("foodWeight");
+			if(ounces > 0)
+				arraylist.add(ounces+" oz");
+			float decay = is.getTagCompound().getFloat("foodDecay");
+			if(decay > 0)
+			{
+				float perc = decay/ounces;
+				String s = EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.milk.fresh");
+				if(perc > 50)
+					s = EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.milk.old");
+				if(perc > 70)
+					s = EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.milk.sour");
 
+				arraylist.add(s);
+			}
+			if(TFCOptions.enableDebugMode)
+				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay: " + decay);
+		}
+	}
+
+	public static ItemStack createTag(ItemStack is, float weight)
+	{
+		NBTTagCompound nbt = is.getTagCompound();
+		if(nbt == null)
+			nbt = new NBTTagCompound();
+		nbt.setFloat("foodWeight", weight);
+		nbt.setFloat("foodDecay", 0);
+		nbt.setFloat("decayRate", 5f);
+		nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours()+1);
+
+		is.setTagCompound(nbt);
+		return is;
+	}
+
+	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		if(!world.isRemote && foodstats.needFood()){
-			
+
 			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 
 			foodstats.eatFood(is);
 			foodstats.restoreWater(player, 8000);
 
 			TFC_Core.setPlayerFoodStats(player, foodstats);
-			
+
 			is.itemID = TFCItems.WoodenBucketEmpty.itemID;
+			is.stackTagCompound = null;
 		}
 		return is;
 	}
@@ -79,6 +98,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	/**
 	 * How long it takes to use or consume an item
 	 */
+	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack)
 	{
 		return 32;
@@ -87,6 +107,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	/**
 	 * returns the action that specifies what animation to play when the items is being used
 	 */
+	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack)
 	{
 		return EnumAction.drink;
@@ -95,6 +116,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	/**
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
+	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer entity)
 	{
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, entity, true);
@@ -137,4 +159,9 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		return -1;
 	}
 
+	@Override
+	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) 
+	{
+		return new ItemStack(TFCItems.WoodenBucketEmpty);
+	}
 }
