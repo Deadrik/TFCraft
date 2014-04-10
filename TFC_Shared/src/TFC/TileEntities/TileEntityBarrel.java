@@ -60,7 +60,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				if(liquidLevel >= 12 && temp >20)
 				{
 					temp-=100;
-					liquidLevel-=12;
+					liquidLevel-=1;
 
 					comp.setFloat("temperature",temp);
 					itemstack.setTagCompound(comp);

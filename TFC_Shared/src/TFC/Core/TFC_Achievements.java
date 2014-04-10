@@ -53,7 +53,7 @@ public class TFC_Achievements {
 
 		achRutabaga = createAchievement("TFC.achRutabaga",-1,-5,new ItemStack(TFCItems.Onion,1,1),achWildVegetable,"Stupid onions...","Find a rutabaga");
 
-		achQuern = createAchievement("TFC.achQuern",2,-5, new ItemStack(TFCBlocks.Quern,1,0),achWildVegetable,"The Grind","Use a quern");
+		achQuern = createAchievement("TFC.achQuern",2,-6, new ItemStack(TFCBlocks.Quern,1,0),achWildVegetable,"The Grind","Use a quern");
 		
 		achStoneAge = createAchievement("TFC.achStoneAge",0,-1, new ItemStack(TFCItems.IgInStoneAxeHead,1,0),achLooseRock,"Paleolithic!","Knap a stone tool to enter the Stone Age");
 		
@@ -61,7 +61,7 @@ public class TFC_Achievements {
 		
 		achSaw = createAchievement("TFC.achSaw",1,2, new ItemStack(TFCItems.CopperSaw,1,0),achCopperAge,"Carpenter","Craft a saw");
 		
-		achAnvil = createAchievement("TFC.achAnvil",3,3, new ItemStack(TFCBlocks.Anvil,1,2),achCopperAge,"Hammer Time","Make an anvil");
+		achAnvil = createAchievement("TFC.achAnvil",3,3, new ItemStack(TFCItems.StoneHammer,1,2),achStoneAge,"Hammer Time","Make a stone anvil");
 		
 		achPickaxe = createAchievement("TFC.achPickaxe",2,-1, new ItemStack(TFCItems.CopperPick,1,0),achCopperAge,"Time to Mine! (finally)","Make a pickaxe");
 		
