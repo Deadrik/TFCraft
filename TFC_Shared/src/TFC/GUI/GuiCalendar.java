@@ -59,10 +59,10 @@ public class GuiCalendar extends GuiScreen
 	{
 		super.initGui();
 		buttonList.clear();
+		guiLeft = (width - xSize) / 2;
+		guiTop = (height - ySize) / 2;
 		if(TFCOptions.enableDebugMode)
 		{
-			guiLeft = (width - xSize) / 2;
-			guiTop = (height - ySize) / 2;
 			buttonList.add(new GuiButton(0, guiLeft+20, guiTop + 118, 66, 20, StringUtil.localize("gui.Calendar.1Hour")));
 			buttonList.add(new GuiButton(1, guiLeft+20, guiTop + 137, 66, 20, StringUtil.localize("gui.Calendar.1Day")));
 			buttonList.add(new GuiButton(2, guiLeft+20, guiTop + 156, 66, 20, StringUtil.localize("gui.Calendar.1Week")));
