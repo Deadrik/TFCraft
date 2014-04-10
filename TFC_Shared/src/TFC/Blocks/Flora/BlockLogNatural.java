@@ -51,7 +51,7 @@ public class BlockLogNatural extends BlockTerra
 				world.getBlockId(i, j-1, k+1) != blockID && world.getBlockId(i, j-1, k-1) != blockID && 
 				world.getBlockId(i+1, j-1, k+1) != blockID && world.getBlockId(i+1, j-1, k-1) != blockID && 
 				world.getBlockId(i-1, j-1, k+1) != blockID && world.getBlockId(i-1, j-1, k-1) != blockID)
-					world.setBlock(i, j, k, 0, 0, 2);
+					world.setBlock(i, j, k, 0, 0, 0x2);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -242,7 +242,7 @@ public class BlockLogNatural extends BlockTerra
 			{
 				if(damage+stack.getItemDamage() <= stack.getMaxDamage())
 				{
-					world.setBlock(i, j, k, 0, 0, 0x3);
+					world.setBlock(i, j, k, 0, 0, 0x2);
 					if((isStone && world.rand.nextInt(10) != 0) || !isStone)
 						dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.itemID],1,damageDropped(l)));
 				}
