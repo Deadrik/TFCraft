@@ -69,7 +69,6 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 			nbt = new NBTTagCompound();
 		nbt.setFloat("foodWeight", weight);
 		nbt.setFloat("foodDecay", 0);
-		nbt.setFloat("decayRate", 5f);
 		nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours()+1);
 
 		is.setTagCompound(nbt);
@@ -163,5 +162,11 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) 
 	{
 		return new ItemStack(TFCItems.WoodenBucketEmpty);
+	}
+
+	@Override
+	public float getDecayRate()
+	{
+		return 6f;
 	}
 }

@@ -1030,8 +1030,8 @@ public class TFC_Core
 			float decay = nbt.getFloat("foodDecay");
 			float thisDecayRate = 1.0f;
 			// Get the base food decay rate
-			if (is.getItem() instanceof ItemFoodTFC)
-				thisDecayRate = ((ItemFoodTFC) is.getItem()).getDecayRate();
+			if (is.getItem() instanceof IFood)
+				thisDecayRate = ((IFood) is.getItem()).getDecayRate();
 			// check if the food has a specially applied decay rate in its nbt
 			// for some reason
 			if (nbt.hasKey("decayRate"))

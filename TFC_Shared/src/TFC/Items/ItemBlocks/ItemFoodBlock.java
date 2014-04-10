@@ -114,4 +114,10 @@ public class ItemFoodBlock extends ItemTerraBlock implements IItemFoodBlock, IFo
 	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) {
 		return null;
 	}
+
+	@Override
+	public float getDecayRate() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
