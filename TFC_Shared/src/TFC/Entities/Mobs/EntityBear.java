@@ -1,7 +1,6 @@
 package TFC.Entities.Mobs;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
@@ -29,13 +28,14 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.ICausesDamage;
+import TFC.API.IInnateArmor;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumDamageType;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
 import TFC.Core.TFC_Time;
 
-public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
+public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal, IInnateArmor
 {
 	/**
 	 * This flag is set when the bear is looking at a player with interest, i.e. with tilted head. This happens when
@@ -660,5 +660,18 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	public void setFearSource(Entity fearSource) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public int GetCrushArmor() {
+		return 0;
+	}
+	@Override
+	public int GetSlashArmor() {
+		return 0;
+	}
+	@Override
+	public int GetPierceArmor() {
+		return -335;
 	}
 }

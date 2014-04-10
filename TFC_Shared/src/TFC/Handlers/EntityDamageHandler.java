@@ -26,6 +26,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import TFC.API.ICausesDamage;
+import TFC.API.IInnateArmor;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Events.EntityArmorCalcEvent;
 import TFC.Core.TFC_Core;
@@ -126,6 +127,12 @@ public class EntityDamageHandler
 				pierceRating = ((ItemTFCArmor)armor[location].getItem()).ArmorType.getPiercingAR();
 				slashRating = ((ItemTFCArmor)armor[location].getItem()).ArmorType.getSlashingAR();
 				crushRating = ((ItemTFCArmor)armor[location].getItem()).ArmorType.getCrushingAR();
+				if(entity instanceof IInnateArmor)
+				{
+					pierceRating += ((IInnateArmor)entity).GetPierceArmor();
+					slashRating += ((IInnateArmor)entity).GetSlashArmor();
+					crushRating += ((IInnateArmor)entity).GetCrushArmor();
+				}
 
 				//3. Convert the armor rating to % damage reduction
 				float pierceMult = getDamageReduction(pierceRating);
@@ -223,6 +230,8 @@ public class EntityDamageHandler
 	 */
 	protected float getDamageReduction(int AR)
 	{
+		if(AR == -1000)
+			AR=-999;
 		return (1000f / (1000f + AR));
 	}
 
