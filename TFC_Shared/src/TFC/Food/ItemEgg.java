@@ -2,38 +2,45 @@ package TFC.Food;
 
 import java.util.List;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import TFC.API.IFood;
+import TFC.API.Enums.EnumFoodGroup;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
-public class ItemEgg extends ItemTerra
+public class ItemEgg extends ItemFoodTFC implements IFood
 {
-
 	public ItemEgg(int id)
 	{
-		super(id);
+		super(id, -1, EnumFoodGroup.Protein);
 	}
 
 	@Override
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
+		ItemTerra.addSizeInformation(is, arraylist);
+
+		arraylist.add(getFoodGroupName(this.getFoodGroup()));
+
+		addHeatInformation(is, arraylist);
+
 		if(is.hasTagCompound())
 		{
 			if(is.getTagCompound().hasKey("Fertilized"))
 			{
 				arraylist.add(EnumChatFormatting.GOLD + StringUtil.localize("gui.fertilized"));
 			}
+			else
+				ItemFoodTFC.addFoodInformation(is, player, arraylist);
 		}
 	}
 
 	@Override
-	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
+	public boolean onUpdate(ItemStack is, World world, int x, int y, int z)
 	{
-		super.onUpdate(is, world, entity, i, isSelected);
 		if (is.hasTagCompound())
 		{
 			if(is.getTagCompound().hasKey("Fertilized"))
@@ -41,11 +48,18 @@ public class ItemEgg extends ItemTerra
 				is.stackTagCompound.removeTag("Fertilized");
 				is.stackTagCompound.removeTag("Genes");
 			}
-			if(!is.getTagCompound().hasNoTags())
+			if(is.getTagCompound().hasKey("Fertilized"))
 			{
-				is.stackTagCompound = null;
+				return true;
 			}
 		}
+		return false;
+	}
+
+	@Override
+	public float getDecayRate()
+	{
+		return 0.5f;
 	}
 
 }

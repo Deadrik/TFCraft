@@ -102,13 +102,22 @@ public class ItemFoodBlock extends ItemTerraBlock implements IItemFoodBlock, IFo
 
 	@Override
 	public EnumFoodGroup getFoodGroup() {
-		// TODO Auto-generated method stub
-		return null;
+		return EnumFoodGroup.None;
 	}
 
 	@Override
 	public int getFoodID() {
-		// TODO Auto-generated method stub
 		return foodID;
+	}
+
+	@Override
+	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) {
+		return null;
+	}
+
+	@Override
+	public float getDecayRate() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

@@ -20,6 +20,7 @@ import TFC.TerraFirmaCraft;
 import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Time;
 import TFC.Entities.Mobs.EntityChickenTFC;
+import TFC.Food.ItemFoodTFC;
 import TFC.Handlers.PacketHandler;
 
 public class TENestBox extends NetworkTileEntity implements IInventory
@@ -193,6 +194,7 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 			if(bird!=null)
 			{
 				ItemStack item = ((EntityChickenTFC)bird).getEggs();
+
 				EntityChickenTFC father = (EntityChickenTFC) getRooster();
 				for(int i = 0; item != null && i < this.getSizeInventory();i++)
 				{
@@ -200,7 +202,8 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 					{
 						if(father != null)
 						{
-							NBTTagCompound nbt = new NBTTagCompound();
+							ItemFoodTFC.createTag(item, 2.0f);
+							NBTTagCompound nbt = item.getTagCompound();
 							nbt.setLong("Fertilized", TFC_Time.getTotalTicks()+(long)(TFC_Time.ticksInMonth*0.75f));
 							nbt.setTag("Genes", this.createGenes((EntityChickenTFC) bird, father));
 							item.setTagCompound(nbt);
