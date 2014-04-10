@@ -100,6 +100,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	int[] heightMap = new int[256];
 
 	WorldGenFissure fissureGen = new WorldGenFissure(TFCBlocks.FreshWaterFlowing,1,false, 10);
+	MapGenCavesTFC caveGen = new MapGenCavesTFC();
+	MapGenRavineTFC surfaceRavineGen = new MapGenRavineTFC(110, 30);//surface
+	MapGenRavineTFC ravineGen = new MapGenRavineTFC(20, 50);//deep
+	MapGenRiverRavine riverRavineGen = new MapGenRiverRavine();
 
 	public TFCChunkProviderGenerate(World par1World, long par2, boolean par4) {
 		super(par1World, par2, par4);
@@ -147,10 +151,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
 		replaceBlocksForBiomeLow(chunkX, chunkZ, rand, idsBig, metaBig);
 
-		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
-		new MapGenRavineTFC(110, 30).generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//surface
-		new MapGenRavineTFC(20, 50).generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//deep
-		new MapGenRiverRavine().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+		caveGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+		surfaceRavineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//surface
+		ravineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//deep
+		riverRavineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 
 		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
