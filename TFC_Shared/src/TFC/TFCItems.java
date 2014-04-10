@@ -1435,7 +1435,7 @@ public class TFCItems
 		StoneKnifeHead = new ItemMiscToolHead(TFCItemID.StoneKnifeHead,IgInToolMaterial).setUnlocalizedName("Stone Knife Blade");
 		StoneHammerHead = new ItemMiscToolHead(TFCItemID.StoneHammerHead,IgInToolMaterial).setUnlocalizedName("Stone Hammer Head");
 
-		StoneKnife = new ItemCustomKnife(TFCItemID.StoneKnife,IgExToolMaterial, 75).setUnlocalizedName("Stone Knife").setMaxDamage(IgExStoneUses);
+		StoneKnife = new ItemCustomKnife(TFCItemID.StoneKnife,IgExToolMaterial, 40).setUnlocalizedName("Stone Knife").setMaxDamage(IgExStoneUses);
 		SmallOreChunk = new ItemOreSmall(TFCItemID.SmallOreChunk).setUnlocalizedName("Small Ore");
 		SinglePlank = new ItemPlank(TFCItemID.SinglePlank).setUnlocalizedName("SinglePlank");
 
