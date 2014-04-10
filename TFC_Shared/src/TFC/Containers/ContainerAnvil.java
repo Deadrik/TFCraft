@@ -76,14 +76,12 @@ public class ContainerAnvil extends ContainerTFC
 				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
 					return null;
 				slot.putStack(null);
-			} else if(itemstack1.itemID == TFCItems.Powder.itemID && itemstack1.getItemDamage() == 0)
+			}
+			else if(itemstack1.itemID == TFCItems.Powder.itemID && itemstack1.getItemDamage() == 0)
 			{
-				if(slotflux.getHasStack())
+				if (!this.mergeItemStack(itemstack1, 6, 7, false)) {
 					return null;
-				ItemStack stack = itemstack1.copy();
-				stack.stackSize = 1;
-				slotflux.putStack(stack);
-				itemstack1.stackSize--;
+				}
 			}
 			else if(itemstack1.getItem() instanceof ItemHammer)
 			{
