@@ -136,9 +136,9 @@ public class ContainerPlayerTFC extends ContainerPlayer
 						return null;
 				}
 			}
-			else if (par2 >= 9 && par2 < 45 && itemstack.getItem() instanceof IFood)
+			else if (par2 >= 9 && par2 < 45 && itemstack.getItem() instanceof IFood && !isCraftingGridFull())
 			{
-				if (!this.mergeItemStack(itemstack1, 1, 5, false))
+				if (!this.mergeItemStack(itemstack1, 1, 5, false) && itemstack1.stackSize == 0)
 					return null;
 				else if (itemstack1.stackSize > 0 && player.getEntityData().hasKey("craftingTable") && !this.mergeItemStack(itemstack1, 45, 50, false))
 					return null;
@@ -178,6 +178,16 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		}
 
 		return itemstack;
+	}
+
+	protected boolean isCraftingGridFull()
+	{
+		for(int i = 0; i < this.craftMatrix.getSizeInventory(); i++)
+		{
+			if(this.craftMatrix.getStackInSlot(i) == null)
+				return false;
+		}
+		return true;
 	}
 
 	public EntityPlayer getPlayer()
