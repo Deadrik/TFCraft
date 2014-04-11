@@ -1707,12 +1707,12 @@ public class TFCItems
 		RiceGround = new ItemRawFood(TFCItemID.RiceGround, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rice Ground");
 		CornmealGround = new ItemRawFood(TFCItemID.CornmealGround, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Cornmeal Ground");
 
-		WheatDough = new ItemRawFoodDough(TFCItemID.WheatDough, 61, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Dough");
-		BarleyDough = new ItemRawFoodDough(TFCItemID.BarleyDough, 62, EnumFoodGroup.Grain).setUnlocalizedName("Barley Dough");
-		OatDough = new ItemRawFoodDough(TFCItemID.OatDough, 63, EnumFoodGroup.Grain).setUnlocalizedName("Oat Dough");
-		RyeDough = new ItemRawFoodDough(TFCItemID.RyeDough, 64, EnumFoodGroup.Grain).setUnlocalizedName("Rye Dough");
-		RiceDough = new ItemRawFoodDough(TFCItemID.RiceDough, 65, EnumFoodGroup.Grain).setUnlocalizedName("Rice Dough");
-		CornmealDough = new ItemRawFoodDough(TFCItemID.CornmealDough, 66, EnumFoodGroup.Grain).setUnlocalizedName("Cornmeal Dough");
+		WheatDough = new ItemRawFoodDough(TFCItemID.WheatDough, 61, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Wheat Dough");
+		BarleyDough = new ItemRawFoodDough(TFCItemID.BarleyDough, 62, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Barley Dough");
+		OatDough = new ItemRawFoodDough(TFCItemID.OatDough, 63, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Oat Dough");
+		RyeDough = new ItemRawFoodDough(TFCItemID.RyeDough, 64, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Rye Dough");
+		RiceDough = new ItemRawFoodDough(TFCItemID.RiceDough, 65, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Rice Dough");
+		CornmealDough = new ItemRawFoodDough(TFCItemID.CornmealDough, 66, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Cornmeal Dough");
 
 		WheatBread = new ItemFoodTFC(TFCItemID.WheatBread, 42, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Bread");
 		BarleyBread = new ItemFoodTFC(TFCItemID.BarleyBread, 43, EnumFoodGroup.Grain).setUnlocalizedName("Barley Bread");
