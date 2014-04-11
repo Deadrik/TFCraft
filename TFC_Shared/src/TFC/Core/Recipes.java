@@ -236,7 +236,7 @@ public class Recipes
 			}
 			GameRegistry.addRecipe(new ItemStack(TFCBlocks.FireBrick,2,0), 
 					new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.FireBrick,1,1),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
-			
+
 		}
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand,1,32767),Character.valueOf('X'),new ItemStack(TFCItems.Limewater,1,32767)});
@@ -361,7 +361,7 @@ public class Recipes
 		//remove wool and book and quill recipes
 		//RemoveRecipe(new ItemStack(Item.writableBook));
 		RemoveRecipe(new ItemStack(Block.woodenButton));
-		
+
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.writabeBookTFC,1), new Object[]{new ItemStack(Item.book,1)});
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Spindle,1), new Object[] { "P","#",Character.valueOf('P'),
 			new ItemStack(TFCItems.SpindleHead,1, 1),Character.valueOf('#'),new ItemStack(Item.stick,1)});
@@ -579,7 +579,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(Block.workbench,1),
 				new Object[]{"PP","PP", Character.valueOf('P'),new ItemStack(TFCBlocks.Planks2,1,32767)});
-		
+
 		RegisterToolRecipes();
 		registerFoodRecipes();
 		VanillaRecipes();
@@ -1770,18 +1770,18 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SeedsGreenbean, 2), new Object[] {new ItemStack(TFCItems.Greenbeans, 1)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SeedsSquash, 2), new Object[] {new ItemStack(TFCItems.Squash, 1)});*/
 
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.WheatDough, 2), new Object[] {TFCItems.WheatGround,TFCItems.WheatGround,TFCItems.WoodenBucketWater});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BarleyDough, 2), new Object[] {TFCItems.BarleyGround,TFCItems.BarleyGround,TFCItems.WoodenBucketWater});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RyeDough, 2), new Object[] {TFCItems.RyeGround,TFCItems.RyeGround,TFCItems.WoodenBucketWater});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.OatDough, 2), new Object[] {TFCItems.OatGround,TFCItems.OatGround,TFCItems.WoodenBucketWater});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RiceDough, 2), new Object[] {TFCItems.RiceGround,TFCItems.RiceGround,TFCItems.WoodenBucketWater});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CornmealDough, 2), new Object[] {TFCItems.CornmealGround,TFCItems.CornmealGround, TFCItems.WoodenBucketWater});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.WheatDough, 2), new Object[] {TFCItems.WheatGround,TFCItems.WheatGround,TFCItems.RedSteelBucketWater});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BarleyDough, 2), new Object[] {TFCItems.BarleyGround,TFCItems.BarleyGround,TFCItems.RedSteelBucketWater});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RyeDough, 2), new Object[] {TFCItems.RyeGround,TFCItems.RyeGround,TFCItems.RedSteelBucketWater});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.OatDough, 2), new Object[] {TFCItems.OatGround,TFCItems.OatGround,TFCItems.RedSteelBucketWater});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RiceDough, 2), new Object[] {TFCItems.RiceGround,TFCItems.RiceGround,TFCItems.RedSteelBucketWater});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CornmealDough, 2), new Object[] {TFCItems.CornmealGround,TFCItems.CornmealGround, TFCItems.RedSteelBucketWater});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.WheatDough, 1), new Object[] {TFCItems.WheatGround,TFCItems.WoodenBucketWater});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BarleyDough, 1), new Object[] {TFCItems.BarleyGround,TFCItems.WoodenBucketWater});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RyeDough, 1), new Object[] {TFCItems.RyeGround,TFCItems.WoodenBucketWater});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.OatDough, 1), new Object[] {TFCItems.OatGround,TFCItems.WoodenBucketWater});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RiceDough, 1), new Object[] {TFCItems.RiceGround,TFCItems.WoodenBucketWater});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CornmealDough, 1), new Object[] {TFCItems.CornmealGround, TFCItems.WoodenBucketWater});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.WheatDough, 1), new Object[] {TFCItems.WheatGround,TFCItems.RedSteelBucketWater});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BarleyDough, 1), new Object[] {TFCItems.BarleyGround,TFCItems.RedSteelBucketWater});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RyeDough, 1), new Object[] {TFCItems.RyeGround,TFCItems.RedSteelBucketWater});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.OatDough, 1), new Object[] {TFCItems.OatGround,TFCItems.RedSteelBucketWater});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RiceDough, 1), new Object[] {TFCItems.RiceGround,TFCItems.RedSteelBucketWater});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CornmealDough, 1), new Object[] {TFCItems.CornmealGround, TFCItems.RedSteelBucketWater});
 
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.venisonRaw, 1), 0), new Object[] {new ItemStack(TFCItems.venisonRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(Item.beefRaw, 1), 0), new Object[] {new ItemStack(Item.beefRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});

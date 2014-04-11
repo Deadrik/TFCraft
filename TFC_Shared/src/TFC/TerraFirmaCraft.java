@@ -48,6 +48,7 @@ import TFC.Handlers.EnteringChunkHandler;
 import TFC.Handlers.EntityDamageHandler;
 import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.EntitySpawnHandler;
+import TFC.Handlers.FoodCraftingHandler;
 import TFC.Handlers.PacketHandler;
 import TFC.Handlers.PickupHandler;
 import TFC.Handlers.PlayerSkillEventHandler;
@@ -203,6 +204,7 @@ public class TerraFirmaCraft
 
 		// Register Crafting Handler
 		GameRegistry.registerCraftingHandler(new CraftingHandler());
+		GameRegistry.registerCraftingHandler(new FoodCraftingHandler());
 
 		// Register the Entity Spawn Handler
 		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
