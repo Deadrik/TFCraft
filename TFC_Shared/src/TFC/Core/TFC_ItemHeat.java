@@ -574,21 +574,24 @@ public class TFC_ItemHeat
 
 	public static void HandleItemHeat(ItemStack is, float tempModifier)
 	{
-		if(is.hasTagCompound())
+		if (is != null)
 		{
-			NBTTagCompound comp = is.getTagCompound();
-			if(comp.hasKey("temperature"))
+			if(is.hasTagCompound())
 			{
-				float temp = comp.getFloat("temperature");
-				if(temp > 0)
+				NBTTagCompound comp = is.getTagCompound();
+				if(comp.hasKey("temperature"))
 				{
-					temp -= TFC_ItemHeat.getTempDecrease(is)*tempModifier;
-					comp.setFloat("temperature",temp);
+					float temp = comp.getFloat("temperature");
+					if(temp > 0)
+					{
+						temp -= TFC_ItemHeat.getTempDecrease(is)*tempModifier;
+						comp.setFloat("temperature",temp);
+					}
+					if(temp <= 0)
+						comp.removeTag("temperature");
+					if(comp.getTags().size() == 0)
+						is.stackTagCompound = null;
 				}
-				if(temp <= 0)
-					comp.removeTag("temperature");
-				if(comp.getTags().size() == 0)
-					is.stackTagCompound = null;
 			}
 		}
 	}
