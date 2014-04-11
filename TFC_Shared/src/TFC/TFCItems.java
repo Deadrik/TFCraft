@@ -1692,11 +1692,11 @@ public class TFCItems
 		Squash = new ItemRawFood(TFCItemID.Squash, 37, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Squash");
 		Cheese = new ItemFoodTFC(TFCItemID.Cheese, 26, EnumFoodGroup.Dairy).setDecayRate(0.5f).setUnlocalizedName("Cheese");
 
-		WheatWhole = new ItemTerra(TFCItemID.WheatWhole).setFolder("food/").setUnlocalizedName("Wheat Whole").setCreativeTab(CreativeTabs.tabFood);
-		BarleyWhole = new ItemTerra(TFCItemID.BarleyWhole).setFolder("food/").setUnlocalizedName("Barley Whole").setCreativeTab(CreativeTabs.tabFood);
-		OatWhole = new ItemTerra(TFCItemID.OatWhole).setFolder("food/").setUnlocalizedName("Oat Whole").setCreativeTab(CreativeTabs.tabFood);
-		RyeWhole = new ItemTerra(TFCItemID.RyeWhole).setFolder("food/").setUnlocalizedName("Rye Whole").setCreativeTab(CreativeTabs.tabFood);
-		RiceWhole = new ItemTerra(TFCItemID.RiceWhole).setFolder("food/").setUnlocalizedName("Rice Whole").setCreativeTab(CreativeTabs.tabFood);
+		WheatWhole = new ItemRawFood(TFCItemID.WheatWhole, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Wheat Whole").setCreativeTab(CreativeTabs.tabFood);
+		BarleyWhole = new ItemRawFood(TFCItemID.BarleyWhole, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Barley Whole").setCreativeTab(CreativeTabs.tabFood);
+		OatWhole = new ItemRawFood(TFCItemID.OatWhole, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Oat Whole").setCreativeTab(CreativeTabs.tabFood);
+		RyeWhole = new ItemRawFood(TFCItemID.RyeWhole, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rye Whole").setCreativeTab(CreativeTabs.tabFood);
+		RiceWhole = new ItemRawFood(TFCItemID.RiceWhole, -1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rice Whole").setCreativeTab(CreativeTabs.tabFood);
 
 		MealGeneric = new ItemMeal(TFCItemID.MealGeneric).setUnlocalizedName("MealGeneric").setCreativeTab(CreativeTabs.tabFood);
 
