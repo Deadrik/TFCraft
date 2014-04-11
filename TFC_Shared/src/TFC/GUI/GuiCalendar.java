@@ -83,6 +83,9 @@ public class GuiCalendar extends GuiScreen
 	@Override
 	public void drawScreen(int par1, int par2, float par3)
 	{
+
+		drawWorldBackground(0);
+
 		TFC_Core.bindTexture(texture);
 
 		int var4 = this.guiLeft;
