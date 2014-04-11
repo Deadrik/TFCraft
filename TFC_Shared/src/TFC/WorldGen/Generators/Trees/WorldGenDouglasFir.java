@@ -120,7 +120,7 @@ public class WorldGenDouglasFir extends WorldGenerator
 			}
 		}
 		setBlockAndMetadata(world, par3, par4+i, par5, Block.leaves.blockID, metaID);
-		for (int l1 = 0; l1 < i-1; l1++)
+		for (int l1 = 0; l1 < i; l1++)
 		{
 			int l2 = world.getBlockId(par3, par4 + l1, par5);
 
