@@ -1,39 +1,25 @@
 package TFC.Render.TESR;
 
-import java.util.Calendar;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
-import net.minecraft.client.model.ModelChest;
-import net.minecraft.client.model.ModelLargeChest;
-import net.minecraft.client.renderer.EntityRenderer;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import TFC.Reference;
-import TFC.Blocks.Devices.BlockChestTFC;
 import TFC.Core.TFC_Core;
 import TFC.Render.Models.ModelCrossedSquares;
-import TFC.Render.Models.ModelIngotPile;
 import TFC.TileEntities.TESeaWeed;
-import TFC.TileEntities.TileEntityChestTFC;
-import TFC.TileEntities.TileEntityIngotPile;
-import cpw.mods.fml.common.FMLLog;
 
 public class TESRSeaWeed extends TileEntitySpecialRenderer
 {
-	/** The normal small chest model. */
-	private ModelCrossedSquares plantModel;
-	/**
-	 * Renders the TileEntity for the chest at a position.
-	 */
+	static ResourceLocation seaweed = new ResourceLocation(Reference.ModID, "textures/blocks/plants/seaweed.png");
+	static ResourceLocation pondweed = new ResourceLocation(Reference.ModID, "textures/blocks/plants/pondweed.png");
+	static ResourceLocation cattails = new ResourceLocation(Reference.ModID, "textures/blocks/plants/Cat Tails.png");
+
+	private ModelCrossedSquares plantModelSmall = new ModelCrossedSquares(0,0,16,16,16,16,16);
+	private ModelCrossedSquares plantModelLarge = new ModelCrossedSquares(0,0,32,32,32,32,32);
+
 	public void renderTileEntitySeaWeedAt(TESeaWeed te, double d, double d1, double d2, float f)
 	{
 		int var9;
@@ -44,22 +30,25 @@ public class TESRSeaWeed extends TileEntitySpecialRenderer
 		}
 		else
 		{
-			Block var10 = te.getBlockType();
-			var9 = te.getBlockMetadata();
-			plantModel = new ModelCrossedSquares(0,0,16,16,16,16,16);
-			int type = te.getType();
-			switch(type){
-				case 0: TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/plants/"+"seaweed"+".png"));break;//texture
-				case 1: TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/plants/"+"pondweed"+".png"));break;//temp texture
-				case 2: TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/plants/"+"Cat Tails"+".png"));
-				plantModel = new ModelCrossedSquares(0,0,32,32,32,32,32);
-				break;//temp texture
-				default: TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/plants/"+"seaweed"+".png")); //texture
+			boolean isSmall = true;
+
+			switch(te.getType())
+			{
+			case 0: TFC_Core.bindTexture(seaweed);break;//texture
+			case 1: TFC_Core.bindTexture(pondweed);break;//temp texture
+			case 2: TFC_Core.bindTexture(cattails);
+			isSmall = false;
+			break;//temp texture
+			default: TFC_Core.bindTexture(seaweed); //texture
 			}
 			GL11.glPushMatrix(); //start
 			GL11.glTranslatef((float)d + 0.0F, (float)d1 + 0F, (float)d2 + 0.0F); //size
 
-			plantModel.renderSquares();
+			if(isSmall)
+				plantModelSmall.renderSquares();
+			else
+				plantModelLarge.renderSquares();
+
 			GL11.glPopMatrix(); //end
 
 		}
