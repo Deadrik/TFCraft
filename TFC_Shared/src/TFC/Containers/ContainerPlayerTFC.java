@@ -7,6 +7,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import TFC.API.IFood;
 import TFC.Containers.Slots.SlotArmorTFC;
 import TFC.Containers.Slots.SlotCraftingTFC;
 import TFC.Core.Player.PlayerInventory;
@@ -132,6 +133,23 @@ public class ContainerPlayerTFC extends ContainerPlayer
 					int j = ((ItemArmor)itemstack.getItem()).armorType != 4 ? 5 + ((ItemArmor)itemstack.getItem()).armorType : 50;
 
 					if (!this.mergeItemStack(itemstack1, j, j + 1, false))
+						return null;
+				}
+			}
+			else if (par2 >= 9 && par2 < 45 && itemstack.getItem() instanceof IFood)
+			{
+				if (!this.mergeItemStack(itemstack1, 1, 5, false))
+					return null;
+				else if (itemstack1.stackSize > 0 && player.getEntityData().hasKey("craftingTable") && !this.mergeItemStack(itemstack1, 45, 50, false))
+					return null;
+				else if (itemstack1.stackSize > 0 && par2 >= 9 && par2 < 36)
+				{
+					if (!this.mergeItemStack(itemstack1, 36, 45, false))
+						return null;
+				}
+				else if (itemstack1.stackSize > 0 && par2 >= 36 && par2 < 45)
+				{
+					if (!this.mergeItemStack(itemstack1, 9, 36, false))
 						return null;
 				}
 			}
