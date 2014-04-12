@@ -34,6 +34,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.ICausesDamage;
+import TFC.API.IInnateArmor;
 import TFC.API.IProjectile;
 import TFC.API.Enums.EnumDamageType;
 import TFC.Core.TFC_MobData;
@@ -42,9 +43,9 @@ import TFC.Entities.EntityProjectileTFC;
 import TFC.Items.Tools.ItemCustomBow;
 import TFC.Items.Tools.ItemJavelin;
 
-public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, ICausesDamage
+public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, ICausesDamage, IInnateArmor
 {
-	private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
+	private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 120, 15.0F);
 	private EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false);
 	private static final float[] armorProbability = new float[] {0.0F, 0.5F, 0.10F, 0.15F};
 
@@ -483,5 +484,18 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	public EnumDamageType GetDamageType()
 	{
 		return EnumDamageType.PIERCING;
+	}
+
+	@Override
+	public int GetCrushArmor() {
+		return -335;
+	}
+	@Override
+	public int GetSlashArmor() {
+		return 1000;
+	}
+	@Override
+	public int GetPierceArmor() {
+		return 500000;//this is not an error. this makes piercing damage useless.
 	}
 }

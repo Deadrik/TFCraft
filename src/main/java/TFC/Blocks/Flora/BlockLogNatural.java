@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -57,7 +58,7 @@ public class BlockLogNatural extends BlockTerra
 				world.getBlock(i, j-1, k+1) != this && world.getBlock(i, j-1, k-1) != this && 
 				world.getBlock(i+1, j-1, k+1) != this && world.getBlock(i+1, j-1, k-1) != this && 
 				world.getBlock(i-1, j-1, k+1) != this && world.getBlock(i-1, j-1, k-1) != this)
-					world.setBlockToAir(i, j, k);
+					world.setBlock(i, j, k, Blocks.air, 0, 0x2);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -247,7 +248,8 @@ public class BlockLogNatural extends BlockTerra
 			{
 				if(damage+stack.getItemDamage() <= stack.getMaxDamage())
 				{
-					world.setBlockToAir(i, j, k);
+					world.setBlock(i, j, k, Blocks.air, 0, 0x2);
+					notifyLeaves(world, i, j, k);
 					if((isStone && world.rand.nextInt(10) != 0) || !isStone)
 						dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Logs, 1, damageDropped(l)));
 				}
@@ -259,4 +261,21 @@ public class BlockLogNatural extends BlockTerra
 			}
 		}
 	}
+
+	private void notifyLeaves(World world, int i, int j, int k)
+	{
+		if(world.getBlock(i+1, j, k).getMaterial() == Material.leaves)
+			world.notifyBlockOfNeighborChange(i+1, j, k, Blocks.air);
+		if(world.getBlock(i-1, j, k).getMaterial() == Material.leaves)
+			world.notifyBlockOfNeighborChange(i, j, k-1, Blocks.air);
+		if(world.getBlock(i, j, k+1).getMaterial() == Material.leaves)
+			world.notifyBlockOfNeighborChange(i, j, k+1, Blocks.air);
+		if(world.getBlock(i, j, k-1).getMaterial() == Material.leaves)
+			world.notifyBlockOfNeighborChange(i, j, k-1, Blocks.air);
+		if(world.getBlock(i, j+1, k).getMaterial() == Material.leaves)
+			world.notifyBlockOfNeighborChange(i, j+1, k, Blocks.air);
+		if(world.getBlock(i, j-1, k-1).getMaterial() == Material.leaves)
+			world.notifyBlockOfNeighborChange(i, j-1, k, Blocks.air);
+	}
+
 }

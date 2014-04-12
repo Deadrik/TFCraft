@@ -111,7 +111,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			arraylist.add("\u2022Salted");
 		if(stackTagCompound.hasKey("foodWeight"))
 		{
-			float ounces = stackTagCompound.getFloat("foodWeight");
+			float ounces = Helper.roundNumber(stackTagCompound.getFloat("foodWeight"), 100);
 			if(ounces > 0)
 				arraylist.add("Amount " + ounces+" oz / "+Global.FOOD_MAX_WEIGHT+" oz");
 			float decay = stackTagCompound.getFloat("foodDecay");
@@ -158,12 +158,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-		if(!world.isRemote)
-		{
-			if (foodstats.needFood())
-				player.setItemInUse(is, this.getMaxItemUseDuration(is));
-		} else if (foodstats.needFood())
-			player.setItemInUse(is, this.getMaxItemUseDuration(is));
+		if (foodstats.needFood())
+			player.setItemInUse(is, 32);
 
 		return is;
 	}
@@ -172,10 +168,12 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-
-		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		if(!world.isRemote)
+		{
 			foodstats.eatFood(is);
+
+		}
+		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		TFC_Core.setPlayerFoodStats(player, foodstats);
 		return is;
 	}

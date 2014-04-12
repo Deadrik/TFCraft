@@ -35,7 +35,7 @@ public class TileEntityQuern extends TileEntity implements IInventory
 		if(shouldRotate)
 		{
 			rotatetimer++;
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);//Disabled this to stop the rendering lag until we have a better solution like the bellows
 			if(rotatetimer == 20)
 			{
 				if(rotation == 3)

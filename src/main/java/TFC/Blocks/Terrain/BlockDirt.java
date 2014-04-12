@@ -41,7 +41,7 @@ public class BlockDirt extends BlockTerra
 	 */
 	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
-		for (int i = 0; i < 15; i++)
+		for (int i = 0; i <= 15; i++)
 			par3List.add(new ItemStack(par1, 1, i));
 	}
 
@@ -49,6 +49,12 @@ public class BlockDirt extends BlockTerra
 	public int damageDropped(int i)
 	{
 		return i;
+	}
+
+	@Override
+	public Item getItemDropped(int par1, Random par2Random, int par3)
+	{
+		return Item.getItemFromBlock(this);
 	}
 
 	public static boolean canFallBelow(World world, int i, int j, int k)

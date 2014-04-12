@@ -8,11 +8,11 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import TFC.API.IFood;
 import TFC.Containers.Slots.SlotArmorTFC;
-import TFC.Containers.Slots.SlotCraftingTFC;
 import TFC.Core.Player.PlayerInventory;
+import TFC.Handlers.FoodCraftingHandler;
 import TFC.Items.ItemTFCArmor;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ContainerPlayerTFC extends ContainerPlayer
 {
@@ -69,7 +69,6 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		}
 
 		this.onCraftMatrixChanged(this.craftMatrix);
-
 		this.addSlotToContainer(new SlotArmorTFC(this, playerInv, indexForBack, 8 + 18, 8 + 18, 4));
 	}
 
@@ -81,7 +80,6 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		for (int i = 0; i < 9; ++i)
 		{
 			ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
-
 			if (itemstack != null)
 				par1EntityPlayer.dropItem(itemstack.getItem(), itemstack.stackSize);
 		}
@@ -92,82 +90,102 @@ public class ContainerPlayerTFC extends ContainerPlayer
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int par2)
 	{
-		ItemStack itemstack = null;
+		ItemStack origStack = null;
 		Slot slot = (Slot)this.inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack(); 
-			/*if(itemstack1.hasTagCompound())
-				slot.onPickupFromSlot(thePlayer, itemstack1);*/
-
-			itemstack = itemstack1.copy();
+			ItemStack slotStack = slot.getStack(); 
+			origStack = slotStack.copy();
 
 			if (par2 == 0)
 			{
-				// Is this done in the CraftingHandler now ???
-				//GameRegistry.onItemCrafted(player, itemstack1, craftMatrix);
-				((SlotCraftingTFC)slot).onCrafting(itemstack1);
-				if (!this.mergeItemStack(itemstack1, 9, 45, true))
+				FoodCraftingHandler.preCraft(player, slotStack, craftMatrix);
+				if (!this.mergeItemStack(slotStack, 9, 45, true))
 					return null;
 
-				slot.onSlotChange(itemstack1, itemstack);
+				slot.onSlotChange(slotStack, origStack);
 			}
 			else if ((par2 >= 1 && par2 < 5) || (player.getEntityData().hasKey("craftingTable") && (par2 >= 45 && par2 < 50)))
 			{
-				if (!this.mergeItemStack(itemstack1, 9, 45, false))
+				if (!this.mergeItemStack(slotStack, 9, 45, false))
 					return null;
 			}
 			else if (par2 >= 5 && par2 < 9 || par2 == 50)
 			{
-				if (!this.mergeItemStack(itemstack1, 9, 45, false))
+				if (!this.mergeItemStack(slotStack, 9, 45, false))
 					return null;
 			}
-			else if (itemstack.getItem() instanceof ItemArmor)
+			else if (origStack.getItem() instanceof ItemArmor)
 			{
-				if(itemstack.getItem() instanceof ItemTFCArmor &&
-						((!((Slot)this.inventorySlots.get(5 + ((ItemTFCArmor)itemstack.getItem()).getUnadjustedArmorType())).getHasStack() &&
-						((ItemTFCArmor)itemstack.getItem()).getUnadjustedArmorType() != 4) ||
+				if(origStack.getItem() instanceof ItemTFCArmor &&
+						((!((Slot)this.inventorySlots.get(5 + ((ItemTFCArmor)origStack.getItem()).getUnadjustedArmorType())).getHasStack() && ((ItemTFCArmor)origStack.getItem()).getUnadjustedArmorType() != 4)||
 						(!((Slot)this.inventorySlots.get(50)).getHasStack())))
 				{
-					int j = ((ItemTFCArmor)itemstack.getItem()).getUnadjustedArmorType() != 4 ? 5 + ((ItemTFCArmor)itemstack.getItem()).getUnadjustedArmorType() : 50;
-					if (!this.mergeItemStack(itemstack1, j, j + 1, false))
+					int j = ((ItemTFCArmor)origStack.getItem()).getUnadjustedArmorType() != 4 ? 5 + ((ItemTFCArmor)origStack.getItem()).getUnadjustedArmorType() : 50;
+					if (!this.mergeItemStack(slotStack, j, j + 1, false))
 						return null;
 				}
-				else if(((!((Slot)this.inventorySlots.get(5 + ((ItemArmor)itemstack.getItem()).armorType)).getHasStack() &&
-						((ItemArmor)itemstack.getItem()).armorType != 4) ||
+				else if(((!((Slot)this.inventorySlots.get(5 + ((ItemArmor)origStack.getItem()).armorType)).getHasStack() && ((ItemArmor)origStack.getItem()).armorType != 4)||
 						(!((Slot)this.inventorySlots.get(50)).getHasStack())))
 				{
-					int j = ((ItemArmor)itemstack.getItem()).armorType != 4 ? 5 + ((ItemArmor)itemstack.getItem()).armorType : 50;
-					if (!this.mergeItemStack(itemstack1, j, j + 1, false))
+					int j = ((ItemArmor)origStack.getItem()).armorType != 4 ? 5 + ((ItemArmor)origStack.getItem()).armorType : 50;
+					if (!this.mergeItemStack(slotStack, j, j + 1, false))
+						return null;
+				}
+			}
+			else if (par2 >= 9 && par2 < 45 && origStack.getItem() instanceof IFood && !isCraftingGridFull())
+			{
+				if (!this.mergeItemStack(slotStack, 1, 5, false) && slotStack.stackSize == 0)
+					return null;
+				else if (slotStack.stackSize > 0 && player.getEntityData().hasKey("craftingTable") && !this.mergeItemStack(slotStack, 45, 50, false))
+					return null;
+				else if (slotStack.stackSize > 0 && par2 >= 9 && par2 < 36)
+				{
+					if (!this.mergeItemStack(slotStack, 36, 45, false))
+						return null;
+				}
+				else if (slotStack.stackSize > 0 && par2 >= 36 && par2 < 45)
+				{
+					if (!this.mergeItemStack(slotStack, 9, 36, false))
 						return null;
 				}
 			}
 			else if (par2 >= 9 && par2 < 36)
 			{
-				if (!this.mergeItemStack(itemstack1, 36, 45, false))
+				if (!this.mergeItemStack(slotStack, 36, 45, false))
 					return null;
 			}
 			else if (par2 >= 36 && par2 < 45)
 			{
-				if (!this.mergeItemStack(itemstack1, 9, 36, false))
+				if (!this.mergeItemStack(slotStack, 9, 36, false))
 					return null;
 			}
-			else if (!this.mergeItemStack(itemstack1, 9, 45, false))
+			else if (!this.mergeItemStack(slotStack, 9, 45, false))
 				return null;
 
-			if (itemstack1.stackSize == 0)
+			if (slotStack.stackSize == 0)
 				slot.putStack((ItemStack)null);
 			else
 				slot.onSlotChanged();
 
-			if (itemstack1.stackSize == itemstack.stackSize)
+			if (slotStack.stackSize == origStack.stackSize)
 				return null;
 
-			slot.onPickupFromSlot(player, itemstack1);
+			slot.onPickupFromSlot(player, slotStack);
 		}
 
-		return itemstack;
+		return origStack;
+	}
+
+	protected boolean isCraftingGridFull()
+	{
+		for(int i = 0; i < this.craftMatrix.getSizeInventory(); i++)
+		{
+			if(this.craftMatrix.getStackInSlot(i) == null)
+				return false;
+		}
+		return true;
 	}
 
 	public EntityPlayer getPlayer()

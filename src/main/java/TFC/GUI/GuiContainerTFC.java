@@ -7,6 +7,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -18,6 +19,7 @@ import TFC.Core.Player.PlayerInventory;
 public class GuiContainerTFC extends GuiContainer
 {
 	protected boolean drawInventory = true;
+	protected Slot activeSlot;
 
 	public GuiContainerTFC(Container Container, int xsize, int ysize)
 	{
@@ -33,6 +35,23 @@ public class GuiContainerTFC extends GuiContainer
 		else if(drawInventory && !b)
 			ySize -=PlayerInventory.invYSize;
 		drawInventory = b;
+	}
+
+	@Override
+	public void drawScreen(int par1, int par2, float par3)
+	{
+		super.drawScreen(par1, par2, par3);
+		for (int j1 = 0; j1 < this.inventorySlots.inventorySlots.size(); ++j1)
+		{
+			Slot slot = (Slot)this.inventorySlots.inventorySlots.get(j1);
+			if (this.isMouseOverSlot(slot, par1, par2) && slot.func_111238_b())
+				this.activeSlot = slot;
+		}
+	}
+
+	protected boolean isMouseOverSlot(Slot par1Slot, int par2, int par3)
+	{
+		return this.func_146978_c/*isPointInRegion*/(par1Slot.xDisplayPosition, par1Slot.yDisplayPosition, 16, 16, par2, par3);
 	}
 
 	@Override

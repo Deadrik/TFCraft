@@ -19,6 +19,8 @@ import TFC.Blocks.BlockTerraContainer;
 import TFC.Items.ItemLogs;
 import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.TileEntities.TileEntityPottery;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPottery extends BlockTerraContainer
 {
@@ -189,5 +191,12 @@ public class BlockPottery extends BlockTerraContainer
 				world.setBlockToAir(i, j, k);
 				return;
 			}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess access, int x, int y, int z, int side)
+	{
+		return true;
 	}
 }

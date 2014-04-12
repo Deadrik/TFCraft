@@ -11,8 +11,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.API.Constant.Global;
-import TFC.API.Util.Helper;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_ItemHeat;
@@ -20,20 +18,18 @@ import TFC.Core.TFC_Sounds;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Food.ItemFoodTFC;
 import TFC.Handlers.Network.AbstractPacket;
 import TFC.Handlers.Network.PlayerUpdatePacket;
 import TFC.Items.ItemIngot;
 import TFC.Items.ItemMeltedMetal;
 import TFC.Items.ItemBlocks.ItemAnvil1;
-import TFC.Items.Tools.ItemCustomKnife;
 import TFC.Items.Tools.ItemCustomPickaxe;
 import TFC.Items.Tools.ItemCustomSaw;
 import TFC.Items.Tools.ItemMiscToolHead;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
-public class CraftingHandler// implements ICraftingHandler
+public class CraftingHandler
 {
 
 	@SubscribeEvent
@@ -52,49 +48,28 @@ public class CraftingHandler// implements ICraftingHandler
 				HandleItem(e.player, e.craftMatrix, Recipes.Chisels);
 			else if(item == Item.getItemFromBlock(Blocks.crafting_table))
 			{
-				player.getEntityData().setBoolean("craftingTable", true);
 				player.inventory.clearInventory(Item.getItemFromBlock(Blocks.crafting_table), -1);
-				
-				AbstractPacket pkt = new PlayerUpdatePacket(player, 2);
-				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
-
-				//PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
-				//player.inventoryContainer = new ContainerPlayerTFC(player.inventory, !player.worldObj.isRemote, player);
-				//player.openContainer = player.inventoryContainer;
-				PlayerInventory.upgradePlayerCrafting(player);
-			}
-			else if(item == TFCItems.SinglePlank)
-			{
-				HandleItem(e.player, e.craftMatrix, Recipes.Axes);
-				HandleItem(e.player, e.craftMatrix, Recipes.Saws);
-			}
-			else if((item == TFCItems.WheatGrain && gridHasItem(iinventory, TFCItems.WheatWhole)) ||
-					(item == TFCItems.RyeGrain && gridHasItem(iinventory, TFCItems.RyeWhole)) || 
-					(item == TFCItems.OatGrain && gridHasItem(iinventory, TFCItems.OatWhole)) || 
-					(item == TFCItems.BarleyGrain && gridHasItem(iinventory, TFCItems.BarleyWhole)) || 
-					(item == TFCItems.RiceGrain && gridHasItem(iinventory, TFCItems.RiceWhole)))
-			{
-				HandleItem(e.player, e.craftMatrix, Recipes.Knives);
-				if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw,4)))
-					player.dropItem(TFCItems.Straw,4);
-
-				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+				if(!player.getEntityData().hasKey("craftingTable") || !player.worldObj.isRemote)
 				{
-					if(iinventory.getStackInSlot(i) == null)
-						continue;
-					if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
-						ItemFoodTFC.createTag(itemstack, iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight"));
+					player.getEntityData().setBoolean("craftingTable", true);
+					AbstractPacket pkt = new PlayerUpdatePacket(player, 2);
+					TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+					PlayerInventory.upgradePlayerCrafting(player);
 				}
 			}
-			else if(item == Item.getItemFromBlock(TFCBlocks.WoodSupportH) || item == Item.getItemFromBlock(TFCBlocks.WoodSupportV))
+			else if(item == TFCItems.SinglePlank ||
+					item == Item.getItemFromBlock(TFCBlocks.WoodSupportH) || item == Item.getItemFromBlock(TFCBlocks.WoodSupportH2) ||
+					item == Item.getItemFromBlock(TFCBlocks.WoodSupportV) || item == Item.getItemFromBlock(TFCBlocks.WoodSupportV2))
 			{
-				HandleItem(e.player, e.craftMatrix, Recipes.Saws);
 				HandleItem(e.player, e.craftMatrix, Recipes.Axes);
+				HandleItem(e.player, e.craftMatrix, Recipes.Saws);
 			}
-			else if(itemstack.getItem() instanceof ItemCustomPickaxe){
+			else if(itemstack.getItem() instanceof ItemCustomPickaxe)
+			{
 				player.triggerAchievement(TFC_Achievements.achPickaxe);
 			}
-			else if(itemstack.getItem() instanceof ItemCustomSaw){
+			else if(itemstack.getItem() instanceof ItemCustomSaw)
+			{
 				player.triggerAchievement(TFC_Achievements.achSaw);
 			}
 			else if(itemstack.getItem() == Items.bowl || 
@@ -167,7 +142,7 @@ public class CraftingHandler// implements ICraftingHandler
 				else if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1)))
 					player.entityDropItem(new ItemStack(TFCItems.CeramicMold, 1, 1), 1);
 				float temperature = 0;
-				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
 					if(iinventory.getStackInSlot(i) == null)
 						continue;
@@ -187,112 +162,6 @@ public class CraftingHandler// implements ICraftingHandler
 						temperature = TFC_ItemHeat.GetTemperature(iinventory.getStackInSlot(i));
 				}
 				TFC_ItemHeat.SetTemperature(e.crafting, temperature);
-			}
-			else if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("foodWeight"))
-			{
-				float finalWeight = 0;
-				float finalDecay = 0;
-				boolean salted = true;
-				int foodSlot = 0; //This is used when cutting food to track where the food originally was since the merge code may remove the stack
-				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
-				{       
-					if(iinventory.getStackInSlot(i) == null)
-						continue;
-					if(iinventory.getStackInSlot(i).hasTagCompound() && 
-							iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
-					{
-						foodSlot = i;
-						float myWeight = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight");
-						final float myOldWeight = myWeight;
-						float myDecayPercent = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay") / myOldWeight;
-						float myDecay = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay");
-						float w = 0;
-
-						if(!iinventory.getStackInSlot(i).getTagCompound().hasKey("isSalted"))
-							salted = false;
-						//Check if we can add any more to this bundle of food
-						if (finalWeight < Global.FOOD_MAX_WEIGHT)
-						{
-							w = Math.min((Global.FOOD_MAX_WEIGHT-finalWeight), myWeight);
-							myWeight -= w;
-							finalWeight += w;
-						}
-
-						//we only add the decay if food was actually added to the bundle
-						if(myWeight != myOldWeight)
-							if(myWeight == 0)
-							{
-								if(finalDecay < 0)
-								{
-									if(myDecay > finalDecay)
-										finalDecay = myDecay;
-								}
-								else
-									finalDecay+=myDecay;
-							}
-							else
-							{
-								float d = w * myDecayPercent;
-								myDecay-= d;
-								if(finalDecay < 0)
-								{
-									if(myDecay > finalDecay)
-										finalDecay = myDecay;
-								}
-								else
-									finalDecay += d;
-							}
-
-						if(myWeight > 0)
-						{
-							iinventory.getStackInSlot(i).getTagCompound().setFloat("foodWeight", Helper.roundNumber(myWeight,100));
-							iinventory.getStackInSlot(i).getTagCompound().setFloat("foodDecay", Helper.roundNumber(myDecay,100));
-							iinventory.getStackInSlot(i).stackSize = iinventory.getStackInSlot(i).stackSize + 1;
-							if(iinventory.getStackInSlot(i).stackSize > 2)
-								iinventory.getStackInSlot(i).stackSize = 2;
-						}
-					}
-				}
-				itemstack = ItemFoodTFC.createTag(itemstack, Helper.roundNumber(finalWeight,10), Helper.roundNumber(finalDecay,100));
-				if(itemstack.stackSize == 0)
-					itemstack.stackSize = 1;
-				if(salted)
-					itemstack.getTagCompound().setBoolean("isSalted", true);
-				//Check if we are doing anything other than combining the food
-				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
-				{
-					if(iinventory.getStackInSlot(i) == null)
-						continue;
-					//If we're salting the food
-					if(iinventory.getStackInSlot(i).getItem() == TFCItems.Powder && iinventory.getStackInSlot(i).getItemDamage() == 9)
-					{
-						itemstack.stackTagCompound.setBoolean("isSalted", true);
-					}
-					//if we're removing decay or splitting the stack
-					else if(iinventory.getStackInSlot(i).getItem() instanceof ItemCustomKnife)
-					{
-						if(itemstack.getTagCompound().hasKey("foodDecay") && itemstack.getTagCompound().getFloat("foodDecay") > 0)
-						{
-							float decay = itemstack.getTagCompound().getFloat("foodDecay");
-							itemstack.getTagCompound().setFloat("foodDecay", 0);
-							itemstack.getTagCompound().setFloat("foodWeight", itemstack.getTagCompound().getFloat("foodWeight")-decay);
-							CraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
-						}
-						else if(itemstack.getTagCompound().hasKey("foodDecay") && itemstack.getTagCompound().getFloat("foodDecay") <= 0)
-						{
-							CraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
-							if(finalWeight/2 < 1)
-								itemstack.getTagCompound().setFloat("foodWeight", finalWeight);
-							else
-							{
-								itemstack.getTagCompound().setFloat("foodWeight", finalWeight/2);
-								ItemStack is = itemstack.copy();
-								is.stackSize++;
-								iinventory.setInventorySlotContents(foodSlot, is);
-							}
-						}
-					}
-				}
 			}
 			else if(itemstack.getItem() instanceof ItemMiscToolHead &&
 					((ItemMiscToolHead)(itemstack.getItem())).getMaterial()!= null &&

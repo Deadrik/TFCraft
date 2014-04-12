@@ -25,6 +25,7 @@ import TFC.Entities.Mobs.EntityBear;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Entities.Mobs.EntityDeer;
+import TFC.Entities.Mobs.EntityHorseTFC;
 import TFC.Entities.Mobs.EntityPheasantTFC;
 import TFC.Entities.Mobs.EntityPigTFC;
 import TFC.Entities.Mobs.EntitySheepTFC;
@@ -99,6 +100,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	int[] heightMap = new int[256];
 
 	WorldGenFissure fissureGen = new WorldGenFissure(TFCBlocks.FreshWaterFlowing,1,false, 10);
+	MapGenCavesTFC caveGen = new MapGenCavesTFC();
+	MapGenRavineTFC surfaceRavineGen = new MapGenRavineTFC(110, 30);//surface
+	MapGenRavineTFC ravineGen = new MapGenRavineTFC(20, 50);//deep
+	MapGenRiverRavine riverRavineGen = new MapGenRiverRavine();
 
 	public TFCChunkProviderGenerate(World par1World, long par2, boolean par4)
 	{
@@ -147,10 +152,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
 		replaceBlocksForBiomeLow(chunkX, chunkZ, rand, idsBig, metaBig);
 
-		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
-		new MapGenRavineTFC(110, 30).generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//surface
-		new MapGenRavineTFC(20, 50).generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//deep
-		new MapGenRiverRavine().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+		caveGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+		surfaceRavineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//surface
+		ravineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//deep
+		riverRavineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 
 		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
@@ -249,13 +254,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				if(temp < 30)
 				{
 					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 2, 2, 4));
-//					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,2,2,3));
+					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,2,2,3));
 					spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
 				}
 				else
 				{
 					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 1, 1, 2));
-//					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,1,2,3));
+					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,1,2,3));
 				}
 		//regular temperate forest
 		if(temp > 0 &&temp < 21 && rain > 250)
@@ -521,7 +526,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				int var13 = -1;
 
 				Block surfaceBlock = TFC_Core.getTypeForGrassWithRain(TFC_Core.getItemMetaFromStone(rock1.block, rock1.data2), rain);
-				Block subSurfaceBlock = TFC_Core.getTypeForDirt(TFC_Core.getItemMetaFromStone(rock1.block, rock1.data2));
+				Block subSurfaceBlock = TFC_Core.getTypeForDirtFromGrass(surfaceBlock);
 				byte soilMeta = (byte) TFC_Core.getSoilMetaFromStone(rock1.block, rock1.data2);
 				float _temp = TFC_Climate.getBioTemperature(chunkX * 16 + xCoord, chunkZ * 16 + zCoord);
 

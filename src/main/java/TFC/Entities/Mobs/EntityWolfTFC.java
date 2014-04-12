@@ -18,6 +18,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.API.IInnateArmor;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
@@ -26,7 +27,7 @@ import TFC.Entities.AI.EntityAIMateTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityWolfTFC extends EntityWolf implements IAnimal
+public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 {
 	protected long animalID;
 	protected int sex;
@@ -508,5 +509,18 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public void setFearSource(Entity fearSource)
 	{
+	}
+
+	@Override
+	public int GetCrushArmor() {
+		return 0;
+	}
+	@Override
+	public int GetSlashArmor() {
+		return 0;
+	}
+	@Override
+	public int GetPierceArmor() {
+		return -335;
 	}
 }

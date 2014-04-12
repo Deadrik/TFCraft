@@ -75,11 +75,6 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 		return 72000;
 	}
 
-	public ItemStack onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-	{
-		return par1ItemStack;
-	}
-
 	/**
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */

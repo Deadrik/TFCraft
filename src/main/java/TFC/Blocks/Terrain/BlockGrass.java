@@ -90,6 +90,8 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	@Override
 	public IIcon getIcon(IBlockAccess access, int xCoord, int yCoord, int zCoord, int side)
 	{
+		Block blk_ = TFC_Core.getTypeForDirtFromGrass(this);
+
 		if (side == 1)
 			return GrassTopTexture;
 		else if (side == 0)
@@ -255,7 +257,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 			if(!BlockCollapsable.isNearSupport(world, i, j, k, 4, 0) && BlockDirt.canFallBelow(world, i, j - 1, k) && R.nextInt(10) == 0)
 			{
 				int meta = world.getBlockMetadata(i, j, k);
-				world.setBlock(i, j, k, TFC_Core.getTypeForDirt(meta), meta, 0x2);
+				world.setBlock(i, j, k, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);
 			}
 		}
 	}
@@ -266,7 +268,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return TFC_Core.getTypeForDirt(par1).getItemDropped(par1, par2Random, par3);
+		return TFC_Core.getTypeForDirtFromGrass(this).getItemDropped(par1, par2Random, par3);
 	}
 
 	@Override
@@ -275,7 +277,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 		if(!world.blockExists(i, j-1, k))
 		{
 			int meta = world.getBlockMetadata(i, j, k);
-			world.setBlock(i, j, k, TFC_Core.getTypeForDirt(meta), meta, 0x2);
+			world.setBlock(i, j, k, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);
 		}
 	}
 }

@@ -192,6 +192,7 @@ public class TENestBox extends TileEntity implements IInventory
 							nbt.setTag("Genes", this.createGenes((EntityChickenTFC) bird, father));
 							item.setTagCompound(nbt);
 						}
+						worldObj.playSoundAtEntity(bird,"mob.chicken.plop", 1.0F, (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F + 1.0F);
 						setInventorySlotContents(i,item);
 						break;
 					}

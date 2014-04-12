@@ -25,32 +25,22 @@ public class WorldGenDouglasFir extends WorldGenerator
 	public boolean generate(World world, Random par2Random, int par3, int par4, int par5)
 	{
 		int i = par2Random.nextInt(10) + 10;
-		if(par2Random.nextInt(20)==0){
+		if(par2Random.nextInt(20)==0)
 			Tall=true;
-		}
-		if(Tall){
+		if(Tall)
 			i += par2Random.nextInt(10);
-		}
 		boolean flag = true;
 
 		if (par4 < 1 || par4 + i + 1 > 256)
-		{
 			return false;
-		}
 
 		for (int j = par4; j <= par4 + 1 + i; j++)
 		{
 			byte byte0 = 1;
-
 			if (j == par4)
-			{
 				byte0 = 0;
-			}
-
 			if (j >= (par4 + 1 + i) - 2)
-			{
 				byte0 = 2;
-			}
 
 			for (int l = par3 - byte0; l <= par3 + byte0 && flag; l++)
 			{
@@ -74,15 +64,11 @@ public class WorldGenDouglasFir extends WorldGenerator
 		}
 
 		if (!flag)
-		{
 			return false;
-		}
 
 		Block id = world.getBlock(par3, par4 - 1, par5);
 		if (!TFC_Core.isSoil(id) || par4 >= 256 - i - 1)
-		{
 			return false;
-		}
 
 		byte byte1 = 3;
 		int i1 = 0;
@@ -92,20 +78,17 @@ public class WorldGenDouglasFir extends WorldGenerator
 			int k2 = k1 - (par4 + i);
 			int j3 = 1 - k2 / 2;
 			int z=i;
-			if (i>20){
+			if (i>20)
 				z=20;
-			}
 			int x = z/10 +1;
-			if (k1-par4>i/2||k1-par4-(i/3)+2<3){
+			if (k1-par4>i/2||k1-par4-(i/3)+2<3)
 				x--;
-			}
-			if(par4+i-k1<4){
+			if(par4+i-k1<4)
 				x=1;
-			}
+
 			for (int l3 = par3 -x; l3 <= par3 +x; l3++)
 			{
 				int j4 = l3 - par3;
-
 				for (int l4 = par5-x; l4 <= par5 +x; l4++)
 				{
 					int i5 = l4 - par5;
@@ -119,18 +102,14 @@ public class WorldGenDouglasFir extends WorldGenerator
 				}
 			}
 		}
-		setBlockAndNotifyAdequately(world, par3, par4+i, par5, Blocks.leaves, metaID);
-		for (int l1 = 0; l1 < i-1; l1++)
+		setBlockAndNotifyAdequately(world, par3, par4 + i, par5, Blocks.leaves, metaID);
+
+		for (int l1 = 0; l1 < i; l1++)
 		{
 			Block l2 = world.getBlock(par3, par4 + l1, par5);
-
 			if (l2 != Blocks.air && (l2 != Blocks.leaves || l2 != Blocks.leaves2))
-			{
 				continue;
-			}
-
 			setBlockAndNotifyAdequately(world, par3, par4 + l1, par5, Blocks.log, metaID);
-
 		}
 		return true;
 	}

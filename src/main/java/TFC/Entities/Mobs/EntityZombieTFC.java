@@ -1,5 +1,7 @@
 package TFC.Entities.Mobs;
 
+import java.util.Random;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -14,12 +16,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import TFC.TFCItems;
 import TFC.API.ICausesDamage;
+import TFC.API.IInnateArmor;
 import TFC.API.Enums.EnumDamageType;
 import TFC.Core.TFC_MobData;
+import TFC.Food.CropIndex;
+import TFC.Food.ItemFoodTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityZombieTFC extends EntityZombie implements ICausesDamage
+public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInnateArmor
 {
 	private int field_82234_d = 0;
 
@@ -56,10 +61,24 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage
 			this.dropItem(TFCItems.WroughtIronIngot, 1);
 			break;
 		case 1:
-			this.dropItem(TFCItems.Carrot, 1);
+			ItemStack is1 = new ItemStack(TFCItems.Carrot);
+			Random R1 = new Random();
+			if(R1.nextInt(100) < 100)
+			{
+				float weight = CropIndex.getWeight(30.0f, R1);
+				ItemFoodTFC.createTag(is1, weight, weight/2);
+				entityDropItem(is1, 0);
+			}
 			break;
 		case 2:
-			this.dropItem(TFCItems.Potato, 1);
+			ItemStack is2 = new ItemStack(TFCItems.Potato);
+			Random R2 = new Random();
+			if(R2.nextInt(100) < 100)
+			{
+				float weight = CropIndex.getWeight(55.0f, R2);
+				ItemFoodTFC.createTag(is2, weight, weight/2);
+				entityDropItem(is2, 0);
+			}
 		}
 	}
 
@@ -139,7 +158,7 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage
 				this.limbSwingAmount = 1.5F;
 				boolean flag = true;
 
-				if ((float)this.hurtResistantTime > (float)this.maxHurtResistantTime / 2.0F)
+				if (this.hurtResistantTime > this.maxHurtResistantTime / 2.0F)
 				{
 					if (par2 <= this.lastDamage)
 						return false;
@@ -220,5 +239,23 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage
 				return true;
 			}
 		}
+	}
+
+	@Override
+	public int GetCrushArmor()
+	{
+		return 1000;//equates to ~50% less damage taken
+	}
+
+	@Override
+	public int GetSlashArmor()
+	{
+		return -335;//equates to ~50% more damage taken
+	}
+
+	@Override
+	public int GetPierceArmor()
+	{
+		return 0;
 	}
 }

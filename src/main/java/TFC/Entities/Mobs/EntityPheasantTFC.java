@@ -164,8 +164,8 @@ public class EntityPheasantTFC extends EntityChicken implements IAnimal
 		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE && isAdult())
 			this.playSound(TFC_Sounds.ROOSTERCROW, 10, rand.nextFloat()+0.5F);
 
-		if (--this.timeUntilNextEgg < 0)
-			this.timeUntilNextEgg = 0;
+//		if (--this.timeUntilNextEgg < 0)
+//			this.timeUntilNextEgg = 0;
 
 		/**
 		 * This Cancels out the changes made to growingAge by EntityAgeable

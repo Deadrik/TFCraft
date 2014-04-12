@@ -1646,7 +1646,7 @@ public class TFCItems
 		OatGrain = new ItemRawFood(16, EnumFoodGroup.Grain).setUnlocalizedName("Oat Grain");
 		RyeGrain = new ItemRawFood(18, EnumFoodGroup.Grain).setUnlocalizedName("Rye Grain");
 		RiceGrain = new ItemRawFood(20, EnumFoodGroup.Grain).setUnlocalizedName("Rice Grain");
-		MaizeEar = new ItemRawFood(22, EnumFoodGroup.Grain).setUnlocalizedName("Maize Ear");
+		MaizeEar = new ItemRawFood(22, EnumFoodGroup.Grain, true).setUnlocalizedName("Maize Ear");
 
 		Tomato = new ItemRawFood(24, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Tomato");
 		Potato = new ItemRawFood(25, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Potato");
@@ -1682,11 +1682,11 @@ public class TFCItems
 		Squash = new ItemRawFood(37, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Squash");
 		Cheese = new ItemFoodTFC(26, EnumFoodGroup.Dairy).setUnlocalizedName("Cheese");
 
-		WheatWhole = new ItemTerra().setFolder("food/").setUnlocalizedName("Wheat Whole").setCreativeTab(CreativeTabs.tabFood);
-		BarleyWhole = new ItemTerra().setFolder("food/").setUnlocalizedName("Barley Whole").setCreativeTab(CreativeTabs.tabFood);
-		OatWhole = new ItemTerra().setFolder("food/").setUnlocalizedName("Oat Whole").setCreativeTab(CreativeTabs.tabFood);
-		RyeWhole = new ItemTerra().setFolder("food/").setUnlocalizedName("Rye Whole").setCreativeTab(CreativeTabs.tabFood);
-		RiceWhole = new ItemTerra().setFolder("food/").setUnlocalizedName("Rice Whole").setCreativeTab(CreativeTabs.tabFood);
+		WheatWhole = new ItemRawFood(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Wheat Whole").setCreativeTab(CreativeTabs.tabFood);
+		BarleyWhole = new ItemRawFood(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Barley Whole").setCreativeTab(CreativeTabs.tabFood);
+		OatWhole = new ItemRawFood(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Oat Whole").setCreativeTab(CreativeTabs.tabFood);
+		RyeWhole = new ItemRawFood(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rye Whole").setCreativeTab(CreativeTabs.tabFood);
+		RiceWhole = new ItemRawFood(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rice Whole").setCreativeTab(CreativeTabs.tabFood);
 
 		MealGeneric = new ItemMeal().setUnlocalizedName("MealGeneric").setCreativeTab(CreativeTabs.tabFood);
 
@@ -1697,12 +1697,12 @@ public class TFCItems
 		RiceGround = new ItemRawFood(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rice Ground");
 		CornmealGround = new ItemRawFood(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Cornmeal Ground");
 
-		WheatDough = new ItemRawFoodDough(61, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Dough");
-		BarleyDough = new ItemRawFoodDough(62, EnumFoodGroup.Grain).setUnlocalizedName("Barley Dough");
-		OatDough = new ItemRawFoodDough(63, EnumFoodGroup.Grain).setUnlocalizedName("Oat Dough");
-		RyeDough = new ItemRawFoodDough(64, EnumFoodGroup.Grain).setUnlocalizedName("Rye Dough");
-		RiceDough = new ItemRawFoodDough(65, EnumFoodGroup.Grain).setUnlocalizedName("Rice Dough");
-		CornmealDough = new ItemRawFoodDough(66, EnumFoodGroup.Grain).setUnlocalizedName("Cornmeal Dough");
+		WheatDough = new ItemRawFoodDough(61, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Wheat Dough");
+		BarleyDough = new ItemRawFoodDough(62, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Barley Dough");
+		OatDough = new ItemRawFoodDough(63, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Oat Dough");
+		RyeDough = new ItemRawFoodDough(64, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Rye Dough");
+		RiceDough = new ItemRawFoodDough(65, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Rice Dough");
+		CornmealDough = new ItemRawFoodDough(66, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Cornmeal Dough");
 
 		WheatBread = new ItemFoodTFC(42, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Bread");
 		BarleyBread = new ItemFoodTFC(43, EnumFoodGroup.Grain).setUnlocalizedName("Barley Bread");

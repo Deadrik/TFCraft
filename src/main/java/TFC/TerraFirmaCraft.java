@@ -38,11 +38,13 @@ import TFC.Food.TFCPotion;
 import TFC.Handlers.AnvilCraftingHandler;
 import TFC.Handlers.ChatListenerTFC;
 import TFC.Handlers.ChunkDataEventHandler;
+import TFC.Handlers.ChunkEventHandler;
 import TFC.Handlers.CraftingHandler;
 import TFC.Handlers.EnteringChunkHandler;
 import TFC.Handlers.EntityDamageHandler;
 import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.EntitySpawnHandler;
+import TFC.Handlers.FoodCraftingHandler;
 import TFC.Handlers.PlayerSkillEventHandler;
 import TFC.Handlers.Network.PacketPipeline;
 import TFC.WorldGen.TFCProvider;
@@ -122,7 +124,7 @@ public class TerraFirmaCraft
 		// Register Gui Handler
 		proxy.registerGuiHandler();
 
-		if(false)
+		if(true)
 		{
 			//Register Generators
 			//Underground Lava
@@ -174,6 +176,7 @@ public class TerraFirmaCraft
 
 		// Register Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new CraftingHandler());
+		MinecraftForge.EVENT_BUS.register(new FoodCraftingHandler());
 
 		// Register the Entity Spawn Handler
 		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
@@ -185,7 +188,7 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new ChatListenerTFC());
 
 		// Register the Chunk Load/Save Handler
-//		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
+		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
 
 		// Register the Chunk Data Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new ChunkDataEventHandler());
