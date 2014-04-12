@@ -110,7 +110,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			arraylist.add("\u2022Salted");
 		if(stackTagCompound.hasKey("foodWeight"))
 		{
-			float ounces = stackTagCompound.getFloat("foodWeight");
+			float ounces = Helper.roundNumber(stackTagCompound.getFloat("foodWeight"), 100);
 			if(ounces > 0)
 				arraylist.add("Amount " + ounces+" oz / "+Global.FOOD_MAX_WEIGHT+" oz");
 			float decay = stackTagCompound.getFloat("foodDecay");
