@@ -1,5 +1,7 @@
 package TFC.Entities.Mobs;
 
+import java.util.Random;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -16,6 +18,8 @@ import TFC.API.ICausesDamage;
 import TFC.API.IInnateArmor;
 import TFC.API.Enums.EnumDamageType;
 import TFC.Core.TFC_MobData;
+import TFC.Food.CropIndex;
+import TFC.Food.ItemFoodTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -60,10 +64,24 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 			this.dropItem(TFCItems.WroughtIronIngot.itemID, 1);
 			break;
 		case 1:
-			this.dropItem(TFCItems.Carrot.itemID, 1);
+			ItemStack is1 = new ItemStack(TFCItems.Carrot);
+			Random R1 = new Random();
+			if(R1.nextInt(100) < 100)
+			{
+				float weight = CropIndex.getWeight(30.0f, R1);
+				ItemFoodTFC.createTag(is1, weight, weight/2);
+				entityDropItem(is1, 0);
+			}
 			break;
 		case 2:
-			this.dropItem(TFCItems.Potato.itemID, 1);
+			ItemStack is2 = new ItemStack(TFCItems.Potato);
+			Random R2 = new Random();
+			if(R2.nextInt(100) < 100)
+			{
+				float weight = CropIndex.getWeight(55.0f, R2);
+				ItemFoodTFC.createTag(is2, weight, weight/2);
+				entityDropItem(is2, 0);
+			}
 		}
 	}
 
