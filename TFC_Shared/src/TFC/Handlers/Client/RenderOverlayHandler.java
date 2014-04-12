@@ -35,6 +35,16 @@ public class RenderOverlayHandler
 	private FontRenderer fontrenderer = null;
 
 	@ForgeSubscribe
+	public void renderText(RenderGameOverlayEvent.Chat event)
+	{
+		// Render chat window above health bar.
+		if(Minecraft.getMinecraft().playerController.isInCreativeMode())
+			event.posY += 4;
+		else
+			event.posY -= 12;
+	}
+
+	@ForgeSubscribe
 	public void render(RenderGameOverlayEvent.Pre event)
 	{
 		GuiIngameForge.renderFood = false;
