@@ -1655,7 +1655,7 @@ public class TFCItems
 		OatGrain = new ItemRawFood(TFCItemID.OatGrain, 16, EnumFoodGroup.Grain).setUnlocalizedName("Oat Grain");
 		RyeGrain = new ItemRawFood(TFCItemID.RyeGrain, 18, EnumFoodGroup.Grain).setUnlocalizedName("Rye Grain");
 		RiceGrain = new ItemRawFood(TFCItemID.RiceGrain, 20, EnumFoodGroup.Grain).setUnlocalizedName("Rice Grain");
-		MaizeEar = new ItemRawFood(TFCItemID.MaizeEar, 22, EnumFoodGroup.Grain).setUnlocalizedName("Maize Ear");
+		MaizeEar = new ItemRawFood(TFCItemID.MaizeEar, 22, EnumFoodGroup.Grain, true).setUnlocalizedName("Maize Ear");
 
 		Tomato = new ItemRawFood(TFCItemID.Tomato, 24, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Tomato");
 		Potato = new ItemRawFood(TFCItemID.Potato, 25, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Potato");
