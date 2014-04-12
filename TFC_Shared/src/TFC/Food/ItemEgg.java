@@ -12,11 +12,11 @@ import TFC.API.Enums.EnumFoodGroup;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
-public class ItemEgg extends ItemFoodTFC implements IFood
+public class ItemEgg extends ItemRawFood implements IFood
 {
 	public ItemEgg(int id)
 	{
-		super(id, -1, EnumFoodGroup.Protein);
+		super(id, -1, EnumFoodGroup.Protein, false, false);
 	}
 
 	@Override

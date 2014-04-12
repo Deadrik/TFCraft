@@ -276,7 +276,7 @@ public class FoodStatsTFC
 		{
 			ItemFoodTFC item = (ItemFoodTFC) is.getItem();
 			float weight = item.getFoodWeight(is);
-			float decay = item.getFoodDecay(is);
+			float decay = Math.max(item.getFoodDecay(is), 0);
 			float eatAmount = Math.min(weight - decay, 5f);
 			float stomachDiff = this.stomachLevel+eatAmount-getMaxStomach(this.player);
 			if(stomachDiff > 0)
@@ -293,7 +293,7 @@ public class FoodStatsTFC
 		{
 			ItemMeal item = (ItemMeal) is.getItem();
 			float weight = item.getFoodWeight(is);
-			float decay = item.getFoodDecay(is);
+			float decay = Math.max(item.getFoodDecay(is), 0);
 			float eatAmount = Math.min(weight - decay, 5f);
 			float stomachDiff = this.stomachLevel+eatAmount-getMaxStomach(this.player);
 			if(stomachDiff > 0)
@@ -323,7 +323,7 @@ public class FoodStatsTFC
 			{
 				NBTTagCompound nbt = is.getTagCompound();
 				float weight = nbt.hasKey("foodWeight") ? nbt.getFloat("foodWeight") : 0;
-				float decay = nbt.hasKey("foodDecay") ? nbt.getFloat("foodDecay") : 0;
+				float decay = Math.max(nbt.hasKey("foodDecay") ? nbt.getFloat("foodDecay") : 0, 0);
 				float eatAmount = Math.min(weight - decay, 5f);
 				addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount);
 				this.stomachLevel += eatAmount;
