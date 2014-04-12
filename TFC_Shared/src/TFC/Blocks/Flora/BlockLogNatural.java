@@ -243,6 +243,7 @@ public class BlockLogNatural extends BlockTerra
 				if(damage+stack.getItemDamage() <= stack.getMaxDamage())
 				{
 					world.setBlock(i, j, k, 0, 0, 0x2);
+					notifyLeaves(world, i,j,k);
 					if((isStone && world.rand.nextInt(10) != 0) || !isStone)
 						dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.itemID],1,damageDropped(l)));
 				}
@@ -253,6 +254,22 @@ public class BlockLogNatural extends BlockTerra
 				dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.itemID],1,damageDropped(l)));
 			}
 		}
+	}
+
+	private void notifyLeaves(World world, int i, int j, int k)
+	{
+		if(world.getBlockMaterial(i+1, j, k) == Material.leaves)
+			world.notifyBlockOfNeighborChange(i+1, j, k, 0);
+		if(world.getBlockMaterial(i-1, j, k) == Material.leaves)
+			world.notifyBlockOfNeighborChange(i, j, k-1, 0);
+		if(world.getBlockMaterial(i, j, k+1) == Material.leaves)
+			world.notifyBlockOfNeighborChange(i, j, k+1, 0);
+		if(world.getBlockMaterial(i, j, k-1) == Material.leaves)
+			world.notifyBlockOfNeighborChange(i, j, k-1, 0);
+		if(world.getBlockMaterial(i, j+1, k) == Material.leaves)
+			world.notifyBlockOfNeighborChange(i, j+1, k, 0);
+		if(world.getBlockMaterial(i, j-1, k-1) == Material.leaves)
+			world.notifyBlockOfNeighborChange(i, j-1, k, 0);
 	}
 
 }
