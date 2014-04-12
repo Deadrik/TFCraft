@@ -251,7 +251,7 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 	@Override
 	protected boolean checkHotbarKeys(int par1)
 	{
-		if(this.activeSlot.slotNumber == 0 && this.activeSlot.getHasStack() &&
+		if(this.activeSlot != null && this.activeSlot.slotNumber == 0 && this.activeSlot.getHasStack() &&
 				this.activeSlot.getStack().getItem() instanceof IFood)
 			return false;
 		else return super.checkHotbarKeys(par1);
