@@ -40,25 +40,29 @@ public class CraftingHandler implements ICraftingHandler
 				HandleItem(player, iinventory, Recipes.Chisels);
 			else if(itemstack.itemID == Block.workbench.blockID)
 			{
-				player.getEntityData().setBoolean("craftingTable", true);
 				player.inventory.clearInventory(Block.workbench.blockID, -1);
-				PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
-				//Send a request to the server for the skills data.
-				ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-				DataOutputStream dos=new DataOutputStream(bos);
-				try 
+				
+				if(!player.getEntityData().hasKey("craftingTable") || !player.worldObj.isRemote)
 				{
-					dos.writeByte(PacketHandler.Packet_Update_Skills_Client);
-					dos.writeBoolean(true);
-				} 
-				catch (IOException e) 
-				{
-					e.printStackTrace();
+					player.getEntityData().setBoolean("craftingTable", true);
+					PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+					//Send a request to the server for the skills data.
+					ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+					DataOutputStream dos=new DataOutputStream(bos);
+					try 
+					{
+						dos.writeByte(PacketHandler.Packet_Update_Skills_Client);
+						dos.writeBoolean(true);
+					} 
+					catch (IOException e) 
+					{
+						e.printStackTrace();
+					}
+					pi.networkManager.addToSendQueue(PacketHandler.getPacket(bos));
+					//player.inventoryContainer = new ContainerPlayerTFC(player.inventory, !player.worldObj.isRemote, player);
+					//player.openContainer = player.inventoryContainer;
+					PlayerInventory.upgradePlayerCrafting(player);
 				}
-				pi.networkManager.addToSendQueue(PacketHandler.getPacket(bos));
-				//player.inventoryContainer = new ContainerPlayerTFC(player.inventory, !player.worldObj.isRemote, player);
-				//player.openContainer = player.inventoryContainer;
-				PlayerInventory.upgradePlayerCrafting(player);
 			}	
 			else if(itemstack.itemID == TFCItems.SinglePlank.itemID)
 			{
