@@ -73,11 +73,29 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 							;
 						else if(processItem(TFCItems.OreChunk, 34, TFCItems.Powder, 6, 4))//Lapis Powder
 							;
+						else if(processItem(TFCItems.SmallOreChunk, 9, TFCItems.Powder, 8, 1))//Small Malachite Powder
+							;
+						else if(processItem(TFCItems.OreChunk, 58, TFCItems.Powder, 8, 2))//Poor Malachite Powder
+							;
 						else if(processItem(TFCItems.OreChunk, 9, TFCItems.Powder, 8, 4))//Malachite Powder
+							;
+						else if(processItem(TFCItems.OreChunk, 44, TFCItems.Powder, 8, 6))//Rich Malachite Powder
+							;
+						else if(processItem(TFCItems.SmallOreChunk, 3, TFCItems.Powder, 5, 1))//Small Hematite Powder
+							;
+						else if(processItem(TFCItems.OreChunk, 52, TFCItems.Powder, 5, 2))//Poor Hematite Powder
 							;
 						else if(processItem(TFCItems.OreChunk, 3, TFCItems.Powder, 5, 4))//Hematite Powder
 							;
+						else if(processItem(TFCItems.OreChunk, 38, TFCItems.Powder, 5, 6))//Rich Hematite Powder
+							;
+						else if(processItem(TFCItems.SmallOreChunk, 11, TFCItems.Powder, 7, 1))//Small Limonite Powder
+							;
+						else if(processItem(TFCItems.OreChunk, 60, TFCItems.Powder, 7, 2))//Poor Limonite Powder
+							;
 						else if(processItem(TFCItems.OreChunk, 11, TFCItems.Powder, 7, 4))//Limonite Powder
+							;
+						else if(processItem(TFCItems.OreChunk, 46, TFCItems.Powder, 7, 6))//Rich Limonite Powder
 							;
 						else if(processItem(TFCItems.OreChunk, 31, TFCItems.Fertilizer, 0, 4))//Sylvite to Fertilizer
 							;
@@ -96,7 +114,8 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 
 	public boolean processItem(Item inputItem, int damageIn, Item outputItem, int damageOut, int amountOut)
 	{
-		if(storage[1] == null || (storage[1].getItem() == outputItem && storage[1].getItemDamage() == damageOut))
+		if(storage[0] != null && storage[0].getItem() == inputItem && storage[0].getItemDamage() == damageIn && 
+				(storage[1] == null || (storage[1].getItem().itemID == outputItem.itemID && storage[1].getItemDamage() == damageOut)))
 		{
 			if (inputItem instanceof IFood)
 			{
@@ -237,7 +256,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 		storage[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 			itemstack.stackSize = getInventoryStackLimit();
-		TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
+//		TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 	}
 
 	@Override

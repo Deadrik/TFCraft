@@ -92,9 +92,18 @@ public class ContainerQuern extends ContainerTFC {
 					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 27)//Cinnabar
 					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 28)//Cryolite
 					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 34)//Lapis Lazuli
+					|| (clickedStack.getItem() == TFCItems.SmallOreChunk && clickedStack.getItemDamage() == 11)//Small Limonite
 					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 11)//Limonite
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 46)//Rich Limonite
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 60)//Poor Limonite
+					|| (clickedStack.getItem() == TFCItems.SmallOreChunk && clickedStack.getItemDamage() == 9)//Small Malachite
 					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 9)//Malachite
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 44)//Rich Malachite
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 58)//Poor Malachite
+					|| (clickedStack.getItem() == TFCItems.SmallOreChunk && clickedStack.getItemDamage() == 3)//Small Hematite
 					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 3)//Hematite
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 38)//Rich Hematite
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 52)//Poor Hematite
 					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 31)//Sylvite
 					|| (clickedStack.getItem() == TFCItems.LooseRock && clickedStack.getItemDamage() == 5))//Rock Salt
 

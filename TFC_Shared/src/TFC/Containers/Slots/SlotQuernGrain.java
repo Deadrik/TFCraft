@@ -25,9 +25,18 @@ public class SlotQuernGrain extends Slot {
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 27)//Cinnabar
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 28)//Cryolite
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 34)//Lapis Lazuli
+				|| (itemstack.getItem() == TFCItems.SmallOreChunk && itemstack.getItemDamage() == 11)//Small Limonite
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 11)//Limonite
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 46)//Rich Limonite
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 60)//Poor Limonite
+				|| (itemstack.getItem() == TFCItems.SmallOreChunk && itemstack.getItemDamage() == 9)//Small Malachite
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 9)//Malachite
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 44)//Rich Malachite
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 58)//Poor Malachite
+				|| (itemstack.getItem() == TFCItems.SmallOreChunk && itemstack.getItemDamage() == 3)//Small Hematite
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 3)//Hematite
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 38)//Rich Hematite
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 52)//Poor Hematite
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 31)//Sylvite
 				|| (itemstack.getItem() == TFCItems.LooseRock && itemstack.getItemDamage() == 5))//Rock Salt
 		{
