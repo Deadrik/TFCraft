@@ -107,6 +107,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 					is.setTagCompound(nbt);
 
 					this.setInventorySlotContents(4, is);
+					this.getStackInSlot(5).stackSize--;
 
 					consumeFoodWeight();
 				}
@@ -165,7 +166,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		if(getStackInSlot(3) != null && ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodWeight(getStackInSlot(3)) < 2)
 			return false;
 
-		if(storage[4] != null && storage[5].getItem().itemID != Item.bowlEmpty.itemID)
+		if(storage[4] != null || (storage[5] == null || storage[5].getItem().itemID != Item.bowlEmpty.itemID))
 			return false;
 		return true;
 	}
