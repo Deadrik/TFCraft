@@ -64,7 +64,7 @@ public class ItemFruitTreeSapling extends ItemTerra
 		}
 		else
 		{
-			list.add(new ItemStack(this,1,0+offset));
+			list.add(new ItemStack(this,1,0));
 		}
 	}
 
@@ -79,7 +79,7 @@ public class ItemFruitTreeSapling extends ItemTerra
 	@Override
 	public Icon getIconFromDamage(int meta)
 	{        
-		return icons[meta+offset];
+		return icons[meta];
 	}
 
 	@Override

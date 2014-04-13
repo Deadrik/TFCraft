@@ -70,10 +70,10 @@ public class TFC_Time
 	public static void UpdateTime(World world)
 	{
 		time = world.getWorldInfo().getWorldTime();
-		
+
 		if(time < startTime)
 			world.getWorldInfo().setWorldTime(startTime);
-		
+
 		int m = getMonth();
 		int m1 = m - 1;
 
@@ -85,6 +85,11 @@ public class TFC_Time
 		currentDay = getDayOfYear();
 		currentMonth = m;
 		currentYear = getYear();
+	}
+
+	public static int getHoursInMonth()
+	{
+		return 24*daysInMonth;
 	}
 
 	public static String getSeason()
@@ -200,12 +205,12 @@ public class TFC_Time
 		}
 		return  h;
 	}
-	
+
 	public static int getHourOfDayFromTotalHours()
 	{
 		return  getHourOfDayFromTotalHours((int)getTotalHours());
 	}
-	
+
 	public static int getHourOfDayFromTotalHours(int th)
 	{
 		int h = (th-(th/24)*24);//gives us the remainder
@@ -219,7 +224,7 @@ public class TFC_Time
 		}
 		return  h;
 	}
-	
+
 	public static int getDayFromTotalHours(int th)
 	{
 		return th/24;
