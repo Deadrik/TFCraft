@@ -22,6 +22,9 @@ public class ItemDirt extends ItemTerraBlock
 		int dam = is.getItemDamage();
 		if (is.itemID == TFCBlocks.Dirt2.blockID)
 			dam += 16;
-		arraylist.add(EnumChatFormatting.DARK_GRAY + Global.STONE_ALL[dam]);
+		if (dam < 21)
+			arraylist.add(EnumChatFormatting.DARK_GRAY + Global.STONE_ALL[dam]);
+		else
+			arraylist.add(EnumChatFormatting.DARK_RED + "Unknown");
 	}
 }
