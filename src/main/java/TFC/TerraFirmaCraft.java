@@ -277,6 +277,7 @@ public class TerraFirmaCraft
 		TFCOptions.yearLength = TFCOptions.getIntFor(config,"General","yearLength",96, "This is how many days are in a year. Keep this to multiples of 12.");
 		TFCOptions.iDontLikeOnions = TFCOptions.getBooleanFor(config, "General", "enableNotOnions", false,"Set this to true if you don't like onions.");
 		TFCOptions.enableOreTest = TFCOptions.getBooleanFor(config, "General","enableOreTest", false, "This will generate only ore in your world with nothing else. *Caution Unsupported*");
+		Global.FOOD_DECAY_RATE = (float)TFCOptions.getDoubleFor(config,"General","FoodDecayRate", 1.0170378966055869517978300569768, "This number causes base decay to equal 50% gain per day. If you wish to change, I recommend you look up a y-root calculator 1.0170378966055869517978300569768^24 = 1.5");
 		//Caveins
 		TFCOptions.minimumRockLoad = TFCOptions.getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
 		TFCOptions.initialCollapseRatio = TFCOptions.getIntFor(config,"Cavein Options","initialCollapseRatio",50, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");

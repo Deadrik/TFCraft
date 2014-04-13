@@ -116,7 +116,10 @@ public class BlockFruitWood extends BlockTerraContainer
 				Random R = new Random();
 				if(R.nextInt(100) > 50 && isAxeorSaw)
 				{
-					dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling1, 1, l));
+					if(world.getBlockMetadata(i, j, k) < 8)
+						dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling1, 1, l));
+					else
+						dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling2, 1, l));
 				}
 			}
 		}
@@ -137,11 +140,16 @@ public class BlockFruitWood extends BlockTerraContainer
 	{
 		boolean check = false;
 		for(int h = -1; h <= 1; h++)
+		{
 			for(int g = -1; g <= 1; g++)
+			{
 				for(int f = -1; f <= 1; f++)
-					if(world.getBlock(i+h, j+g, k+f) == this && world.getBlockMetadata(i+h, j+g, k+f) == world.getBlockMetadata(i, j, k))
+				{
+					if(world.getBlock(i + h, j + g, k + f) == this && world.getBlockMetadata(i + h, j + g, k + f) == world.getBlockMetadata(i, j, k))
 						check = true;
-
+				}
+			}
+		}
 		if(!check)
 			world.setBlockToAir(i, j, k);
 	}
@@ -151,15 +159,24 @@ public class BlockFruitWood extends BlockTerraContainer
 		if(y >= 0)
 		{
 			checkArray[x][y][z] = true;
-			int offsetX = 0;int offsetY = 0;int offsetZ = 0;
+			int offsetX = 0;
+			int offsetY = 0;
+			int offsetZ = 0;
 
 			for (offsetY = 0; offsetY <= 1; offsetY++)
+			{
 				for (offsetX = -1; offsetX <= 1; offsetX++)
+				{
 					for (offsetZ = -1; offsetZ <= 1; offsetZ++)
-						if(x+offsetX < 11 && x+offsetX >= 0 && z+offsetZ < 11 && z+offsetZ >= 0 && y+offsetY < 50 && y+offsetY >= 0)
-							if(checkOut(world, i+offsetX, j+offsetY, k+offsetZ, l) && !checkArray[x+offsetX][y+offsetY][z+offsetZ])
-								scanLogs(world,i+offsetX, j+offsetY, k+offsetZ, l, checkArray,x+offsetX,y+offsetY,z+offsetZ);
-
+					{
+						if(x + offsetX < 11 && x + offsetX >= 0 && z + offsetZ < 11 && z + offsetZ >= 0 && y + offsetY < 50 && y + offsetY >= 0)
+						{
+							if(checkOut(world, i + offsetX, j + offsetY, k + offsetZ, l) && !checkArray[x + offsetX][y + offsetY][z + offsetZ])
+								scanLogs(world,i + offsetX, j + offsetY, k + offsetZ, l, checkArray, x + offsetX, y + offsetY, z + offsetZ);
+						}
+					}
+				}
+			}
 			world.setBlockToAir(i, j, k);
 		}
 	}
@@ -212,7 +229,8 @@ public class BlockFruitWood extends BlockTerraContainer
 
 		float temp = TFC_Climate.getHeightAdjustedTemp(i, j, k);
 
-		if(!world.isRemote && world.getTileEntity(i, j, k) != null && TFC_Time.getSeasonAdjustedMonth(k) < 6 && 
+		if(!world.isRemote && world.getTileEntity(i, j, k) != null &&
+				TFC_Time.getSeasonAdjustedMonth(k) < 6 &&
 				fi != null && temp >= fi.minTemp && temp < fi.maxTemp)
 		{
 			TileEntityFruitTreeWood te = (TileEntityFruitTreeWood)world.getTileEntity(i, j, k);
@@ -225,14 +243,14 @@ public class BlockFruitWood extends BlockTerraContainer
 			int branchGrowTime = 20;
 
 			//grow upward
-			if(te.birthTimeWood + trunkGrowTime < TFC_Time.getTotalDays() && te.height < 3 && te.isTrunk && rand.nextInt(16/t) == 0 &&
+			if(te.birthTimeWood + trunkGrowTime < TFC_Time.getTotalDays() &&
+					te.height < 3 && te.isTrunk && rand.nextInt(16/t) == 0 &&
 					(world.isAirBlock(i, j+1, k) || world.getBlock(i, j+1, k) == TFCBlocks.fruitTreeLeaves))
 			{
 				world.setBlock(i, j+1, k, this, world.getBlockMetadata(i, j, k), 0x2);
 				((TileEntityFruitTreeWood)world.getTileEntity(i, j+1, k)).setTrunk(true);
 				((TileEntityFruitTreeWood)world.getTileEntity(i, j+1, k)).setHeight(te.height+1);
 				((TileEntityFruitTreeWood)world.getTileEntity(i, j+1, k)).setBirth();
-
 				((TileEntityFruitTreeWood)world.getTileEntity(i, j, k)).setBirthWood(trunkGrowTime);
 			}
 			else if(te.birthTimeWood + branchGrowTime < TFC_Time.getTotalDays() && te.height == 2 && te.isTrunk && rand.nextInt(16/t) == 0 &&
@@ -297,18 +315,22 @@ public class BlockFruitWood extends BlockTerraContainer
 	public void SurroundWithLeaves(World world, int i, int j, int k)
 	{
 		for (int y = 0; y <= 1; y++)
+		{
 			for (int x = 1; x >= -1; x--)
+			{
 				for (int z = 1; z >= -1; z--)
+				{
 					if(world.isAirBlock(i+x, j+y, k+z) && (world.isAirBlock(i+x, j+y+1, k+z) || world.isAirBlock(i+x, j+y+2, k+z))) 
 					{
 						int meta = world.getBlockMetadata(i, j, k);
 						Block block = meta < 8 ? TFCBlocks.fruitTreeLeaves : TFCBlocks.fruitTreeLeaves2;
-
 						if(world.getBlock(i, j, k) != TFCBlocks.fruitTreeWood)
 							block = Blocks.air;
-
 						world.setBlock(i+x, j+y, k+z, block, world.getBlockMetadata(i, j, k), 0x2);
 					}
+				}
+			}
+		}
 	}
 
 	public String getType(int meta)

@@ -24,7 +24,7 @@ public class BlockCharcoal extends BlockTerra
 	}
 
 	@Override
-	public IIcon getIcon(int i, int j) 
+	public IIcon getIcon(int i, int j)
 	{
 		return blockIcon;
 	}

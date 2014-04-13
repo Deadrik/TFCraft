@@ -34,7 +34,7 @@ public class BlockCustomSnow extends BlockTerra
 	{
 		Block block = par1World.getBlock(par2, par3 - 1, par4);
 		if (block == Blocks.ice ||
-			block != TFCBlocks.LooseRock ||
+			block != TFCBlocks.worldItem ||
 			block == Blocks.leaves ||
 			block.isOpaqueCube())
 			return true;

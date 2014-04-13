@@ -10,10 +10,8 @@ import TFC.TileEntities.TileEntityToolRack;
 
 public class TESRToolrack extends TESRBase
 {
-
 	public TESRToolrack()
 	{
-
 	}
 
 	/**
@@ -44,10 +42,8 @@ public class TESRToolrack extends TESRBase
 					customitem.setEntityItemStack(te.getStackInSlot(i));
 					itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
 					GL11.glPopMatrix(); //end
-
 				}
 			}
-
 		}
 	}
 

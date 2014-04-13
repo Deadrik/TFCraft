@@ -14,7 +14,6 @@ import TFC.Blocks.BlockFireBrick;
 import TFC.Blocks.BlockFoodPrep;
 import TFC.Blocks.BlockIngotPile;
 import TFC.Blocks.BlockLogPile;
-import TFC.Blocks.BlockLooseRock;
 import TFC.Blocks.BlockMetalSheet;
 import TFC.Blocks.BlockMolten;
 import TFC.Blocks.BlockPipeBasic;
@@ -28,6 +27,7 @@ import TFC.Blocks.BlockThatch;
 import TFC.Blocks.BlockTuyere;
 import TFC.Blocks.BlockWoodSupport;
 import TFC.Blocks.BlockWoodSupport2;
+import TFC.Blocks.BlockWorldItem;
 import TFC.Blocks.Devices.BlockBarrel;
 import TFC.Blocks.Devices.BlockBarrel2;
 import TFC.Blocks.Devices.BlockBellows;
@@ -207,7 +207,7 @@ public class TFCBlocks
 	public static Block ClayGrass2;
 	public static Block Peat;
 	public static Block PeatGrass;
-	public static Block LooseRock;
+	public static Block worldItem;
 	public static Block LogPile;
 	public static Block tilledSoil;
 	public static Block tilledSoil2;
@@ -341,7 +341,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Peat, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Peat");
 		GameRegistry.registerBlock(DryGrass, TFC.Items.ItemBlocks.ItemTerraBlock.class, "DryGrass");
 		GameRegistry.registerBlock(DryGrass2, TFC.Items.ItemBlocks.ItemTerraBlock.class, "DryGrass2");
-		GameRegistry.registerBlock(LooseRock, "LooseRock");
+		GameRegistry.registerBlock(worldItem, "LooseRock");
 		GameRegistry.registerBlock(LogPile, "LogPile");
 		GameRegistry.registerBlock(Charcoal, "Charcoal");
 		GameRegistry.registerBlock(Detailed, "Detailed");
@@ -567,7 +567,7 @@ public class TFCBlocks
 		Ore = new BlockOre(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		Ore2 = new BlockOre2(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		Ore3 = new BlockOre3(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
-		LooseRock = new BlockLooseRock().setHardness(0.05F).setResistance(1F).setBlockName("LooseRock");
+		worldItem = new BlockWorldItem().setHardness(0.05F).setResistance(1F).setBlockName("LooseRock");
 		LogPile = new BlockLogPile().setHardness(10F).setResistance(1F).setBlockName("LogPile");
 
 		Sulfur = new BlockSulfur(Material.rock).setBlockName("Sulfur").setHardness(0.5F).setResistance(1F);

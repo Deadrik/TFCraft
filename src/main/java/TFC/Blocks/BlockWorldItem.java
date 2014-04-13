@@ -1,40 +1,31 @@
 package TFC.Blocks;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import TFC.Reference;
-import TFC.TFCBlocks;
-import TFC.TFCItems;
-import TFC.Blocks.Terrain.BlockOre;
-import TFC.Core.TFC_Core;
-import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCBiome;
-import TFC.WorldGen.TFCWorldChunkManager;
+import TFC.Core.TFC_Textures;
+import TFC.TileEntities.TEWorldItem;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockLooseRock extends BlockTerra
+public class BlockWorldItem extends BlockTerraContainer
 {
-	public BlockLooseRock()
+	public BlockWorldItem()
 	{
 		super(Material.wood);
-		this.setBlockBounds(0.20F, 0.00F, 0.2F, 0.8F, 0.25F, 0.8F);
+		this.setBlockBounds(0.20F, 0.00F, 0.2F, 0.8F, 0.1F, 0.8F);
 	}
-	@Override
+
+	/*@Override
 	public int getRenderType()
 	{
 		return TFCBlocks.looseRockRenderId;
-	}
+	}*/
 
 	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
@@ -44,16 +35,19 @@ public class BlockLooseRock extends BlockTerra
 
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int xCoord, int yCoord, int zCoord, int l)
-	{
-		DataLayer rockLayer = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
+	{		
+		/*DataLayer rockLayer = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 
 		ArrayList coreSample = new ArrayList<Item>();
 		ArrayList coreSampleStacks = new ArrayList<ItemStack>();
 
 		for(int x = -15; x <= 15; x++)
+		{
 			for(int z = -15; z <= 15; z++)
+			{
 				for(int y = yCoord; y > yCoord-35; y--)
-					if(world.getBlock(xCoord+x, y, zCoord+z) == TFCBlocks.Ore)
+				{
+					if(world.getBlockId(xCoord+x, y, zCoord+z) == TFCBlocks.Ore.blockID)
 					{
 						int m = world.getBlockMetadata(xCoord+x, y, zCoord+z);
 						if(!coreSample.contains(BlockOre.getDroppedItem(m)))
@@ -66,13 +60,18 @@ public class BlockLooseRock extends BlockTerra
 							}
 						}
 					}
-
+				}
+			}
+		}
 		Random R = new Random();
-		if(!coreSampleStacks.isEmpty() && R.nextInt(3) == 0)
-			dropBlockAsItem(world, xCoord, yCoord, zCoord,(ItemStack)coreSampleStacks.toArray()[R.nextInt(coreSampleStacks.toArray().length)]);
-		else
-			dropBlockAsItem(world, xCoord, yCoord, zCoord, new ItemStack(TFCItems.LooseRock, 1, TFC_Core.getItemMetaFromStone(rockLayer.block, rockLayer.data2)));
 
+		if(!coreSampleStacks.isEmpty() && R.nextInt(3) == 0)
+		{
+			dropBlockAsItem_do(world, xCoord, yCoord, zCoord,(ItemStack)coreSampleStacks.toArray()[R.nextInt(coreSampleStacks.toArray().length)]);
+		}
+		else{
+			dropBlockAsItem_do(world, xCoord, yCoord, zCoord, new ItemStack(TFCItems.LooseRock, 1, TFC_Core.getItemMetaFromStone(rockLayer.data1, rockLayer.data2)));
+		}*/
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
 	}
 
@@ -83,17 +82,15 @@ public class BlockLooseRock extends BlockTerra
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block par5)
+	public void onNeighborBlockChange(World world, int i, int j, int k, Block block)
 	{
-		if (world.isAirBlock(i, j-1, k))
+		if (world.isAirBlock(i, j - 1, k))
 		{
-			this.harvestBlock(world,null,i,j,k,par5.getDamageValue(world, i, j, k));
 			world.setBlockToAir(i, j, k);
 			return;
 		}
-		if (!world.getBlock(i, j-1, k).isOpaqueCube())
+		if (!world.getBlock(i, j - 1, k).isOpaqueCube())
 		{
-			this.harvestBlock(world,null,i,j,k,par5.getDamageValue(world, i, j, k));
 			world.setBlockToAir(i, j, k);
 			return;
 		}
@@ -121,6 +118,12 @@ public class BlockLooseRock extends BlockTerra
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon(Reference.ModID + ":" + "rocks/Granite Raw");
+		this.blockIcon = TFC_Textures.InvisibleTexture;
+	}
+
+	@Override
+	public TileEntity createTileEntity(World var1, int var2)
+	{
+		return new TEWorldItem();
 	}
 }

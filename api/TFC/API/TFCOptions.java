@@ -3,7 +3,7 @@ package TFC.API;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
-public class TFCOptions 
+public class TFCOptions
 {
 	public static boolean enableVanillaDiamondRecipe;
 	public static boolean enableVanillaIronRecipe;
@@ -56,7 +56,8 @@ public class TFCOptions
 		catch (Exception e)
 		{
 			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Integer, config wasn't loaded properly!").toString());
-		}return value;
+		}
+		return value;
 	}
 
 	public static boolean getBooleanFor(Configuration config,String heading, String item, boolean value, String comment)
@@ -72,7 +73,8 @@ public class TFCOptions
 		catch (Exception e)
 		{
 			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Integer, config wasn't loaded properly!").toString());
-		}return value;
+		}
+		return value;
 	}
 
 	public static int getIntFor(Configuration config, String heading, String item, int value)
@@ -87,7 +89,8 @@ public class TFCOptions
 		catch (Exception e)
 		{
 			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Integer, config wasn't loaded properly!").toString());
-		}return value;
+		}
+		return value;
 	}
 
 	public static int getIntFor(Configuration config,String heading, String item, int value, String comment)
@@ -103,6 +106,24 @@ public class TFCOptions
 		catch (Exception e)
 		{
 			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Integer, config wasn't loaded properly!").toString());
-		}return value;
+		}
+		return value;
+	}
+
+	public static double getDoubleFor(Configuration config,String heading, String item, double value, String comment)
+	{
+		if (config == null)
+			return value;
+		try
+		{
+			Property prop = config.get(heading, item, value);
+			prop.comment = comment;
+			return prop.getDouble(value);
+		}
+		catch (Exception e)
+		{
+			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Double, config wasn't loaded properly!").toString());
+		}
+		return value;
 	}
 }

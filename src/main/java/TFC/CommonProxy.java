@@ -48,6 +48,7 @@ import TFC.TileEntities.TENestBox;
 import TFC.TileEntities.TEOre;
 import TFC.TileEntities.TESeaWeed;
 import TFC.TileEntities.TEStand;
+import TFC.TileEntities.TEWorldItem;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityBellows;
@@ -142,6 +143,7 @@ public class CommonProxy
 			GameRegistry.registerTileEntity(TileEntityBellows.class, "Bellows");
 			GameRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack");
 			GameRegistry.registerTileEntity(TileEntityAnvil.class, "TerraAnvil");
+			GameRegistry.registerTileEntity(TEWorldItem.class, "worldItem");
 		}
 
 		EntityRegistry.registerGlobalEntityID(EntityWolfTFC.class, "TFCWolf", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0xaaaaaa);

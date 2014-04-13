@@ -23,7 +23,6 @@ public class TESRSeaWeed extends TileEntitySpecialRenderer
 	public void renderTileEntitySeaWeedAt(TESeaWeed te, double d, double d1, double d2, float f)
 	{
 		int var9;
-
 		if (te.getWorldObj() == null)
 		{
 			var9 = 0;
@@ -31,14 +30,11 @@ public class TESRSeaWeed extends TileEntitySpecialRenderer
 		else
 		{
 			boolean isSmall = true;
-
 			switch(te.getType())
 			{
 			case 0: TFC_Core.bindTexture(seaweed);break;//texture
 			case 1: TFC_Core.bindTexture(pondweed);break;//temp texture
-			case 2: TFC_Core.bindTexture(cattails);
-			isSmall = false;
-			break;//temp texture
+			case 2: TFC_Core.bindTexture(cattails);isSmall = false;break;//temp texture
 			default: TFC_Core.bindTexture(seaweed); //texture
 			}
 			GL11.glPushMatrix(); //start
@@ -50,10 +46,8 @@ public class TESRSeaWeed extends TileEntitySpecialRenderer
 				plantModelLarge.renderSquares();
 
 			GL11.glPopMatrix(); //end
-
 		}
 	}
-
 
 	@Override
 	public void renderTileEntityAt(TileEntity te, double par2, double par4, double par6, float par8)
