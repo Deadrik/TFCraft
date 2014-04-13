@@ -16,8 +16,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.IFood;
 import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntityCowTFC;
+import TFC.Food.ItemFoodTFC;
 import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -53,8 +55,8 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 						processItem(TFCItems.BarleyGrain, 0, TFCItems.BarleyGround, 0, 1);//Barley Flour
 						processItem(TFCItems.RiceGrain, 0, TFCItems.RiceGround, 0, 1);//Rice Flour
 						processItem(TFCItems.MaizeEar, 0, TFCItems.CornmealGround, 0, 1);//Cornmeal
-						processItem(TFCItems.OreChunk, 16, TFCItems.Powder, 1, 1);//Kaolinite Powder
-						processItem(TFCItems.OreChunk, 20, TFCItems.Powder, 2, 2);//Graphite Powder
+						processItem(TFCItems.OreChunk, 16, TFCItems.Powder, 1, 4);//Kaolinite Powder
+						processItem(TFCItems.OreChunk, 20, TFCItems.Powder, 2, 4);//Graphite Powder
 						processItem(TFCItems.OreChunk, 27, Item.redstone, 0, 8);//Cinnabar to Redstone
 						processItem(TFCItems.OreChunk, 28, Item.redstone, 0, 8);//Cryolite to Redstone
 						processItem(Item.bone, 0, Item.dyePowder, 15, 2);//Bone Meal
@@ -80,16 +82,32 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 		if(storage[0] != null && storage[0].getItem() == inputItem && storage[0].getItemDamage() == damageIn &&
 				(storage[1] == null || (storage[1].getItem() == outputItem && storage[1].getItemDamage() == damageOut)))
 		{
-			if(storage[0].stackSize == 1)
-				storage[0] = null;
+			if (inputItem instanceof IFood)
+			{
+				if(storage[0].hasTagCompound() && storage[0].getTagCompound().hasKey("foodWeight")
+						&& storage[0].getTagCompound().hasKey("foodDecay") && storage[1] == null)
+				{
+					storage [1] = new ItemStack(outputItem, amountOut, damageOut);
+					NBTTagCompound grainNBT = storage[0].getTagCompound();
+					float flourWeight = grainNBT.getFloat("foodWeight");
+					float flourDecay = grainNBT.getFloat("foodDecay");
+					ItemFoodTFC.createTag(storage[1], flourWeight, flourDecay);
+					storage[0] = null;
+				}
+			}
 			else
-				storage[0].stackSize--;
-			if(storage[1] == null)
-				storage[1] = new ItemStack(outputItem,amountOut,damageOut);
-			else if(storage[1].stackSize < outputItem.getItemStackLimit())
-				storage[1].stackSize += amountOut;
-			else
-				ejectItem(new ItemStack(outputItem, amountOut, damageOut));
+			{
+				if(storage[0].stackSize == 1)
+					storage[0] = null;
+				else
+					storage[0].stackSize--;
+				if(storage[1] == null)
+					storage[1] = new ItemStack(outputItem,amountOut,damageOut);
+				else if(storage[1].stackSize < outputItem.getItemStackLimit())
+					storage[1].stackSize += amountOut;
+				else
+					ejectItem(new ItemStack(outputItem, amountOut, damageOut));
+			}
 		}
 	}
 
