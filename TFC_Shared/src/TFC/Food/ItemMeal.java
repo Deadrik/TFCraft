@@ -61,15 +61,15 @@ public class ItemMeal extends ItemTerra
 
 			if(nbt.hasKey("satisfaction"))
 			{
-				float _sat = Helper.roundNumber(nbt.getFloat("satisfaction")/1*100,10);
+				float _sat = Helper.roundNumber(nbt.getFloat("satisfaction"),100);
 				if(!isWarm(is))
 					_sat*=0.25f;
-				int satIndex = 1+(int)(5 *_sat);
+				int satIndex = Math.min(1+(int)(5 *_sat), 5);
 				arraylist.add("Taste: "+ StringUtil.localize(tasteArray[satIndex]) + EnumChatFormatting.DARK_GRAY + " (" + _sat+"%)");
 			}
 			else
 			{
-				arraylist.add("Taste: " + StringUtil.localize(tasteArray[0]));
+				arraylist.add("Taste: " + StringUtil.localize(tasteArray[0])+ EnumChatFormatting.DARK_GRAY + " (0.0%)");
 			}
 
 			if(nbt.hasKey("foodWeight"))
