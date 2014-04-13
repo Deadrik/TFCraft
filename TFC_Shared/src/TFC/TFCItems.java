@@ -1238,16 +1238,16 @@ public class TFCItems
 		ZincUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedZinc).setUnlocalizedName("Zinc Unshaped");
 
 		//Hammers
-		StoneHammer = new ItemHammer(TFCItemID.StoneHammer,TFCItems.IgInToolMaterial).setUnlocalizedName("Stone Hammer").setMaxDamage(TFCItems.IgInStoneUses);
-		BismuthBronzeHammer = new ItemHammer(TFCItemID.BismuthBronzeHammer,TFCItems.BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Hammer").setMaxDamage(TFCItems.BismuthBronzeUses);
-		BlackBronzeHammer = new ItemHammer(TFCItemID.BlackBronzeHammer,TFCItems.BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Hammer").setMaxDamage(TFCItems.BlackBronzeUses);
-		BlackSteelHammer = new ItemHammer(TFCItemID.BlackSteelHammer,TFCItems.BlackSteelToolMaterial).setUnlocalizedName("Black Steel Hammer").setMaxDamage(TFCItems.BlackSteelUses);
-		BlueSteelHammer = new ItemHammer(TFCItemID.BlueSteelHammer,TFCItems.BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Hammer").setMaxDamage(TFCItems.BlueSteelUses);
-		BronzeHammer = new ItemHammer(TFCItemID.BronzeHammer,TFCItems.BronzeToolMaterial).setUnlocalizedName("Bronze Hammer").setMaxDamage(TFCItems.BronzeUses);
-		CopperHammer = new ItemHammer(TFCItemID.CopperHammer,TFCItems.CopperToolMaterial).setUnlocalizedName("Copper Hammer").setMaxDamage(TFCItems.CopperUses);
-		WroughtIronHammer = new ItemHammer(TFCItemID.WroughtIronHammer,TFCItems.IronToolMaterial).setUnlocalizedName("Wrought Iron Hammer").setMaxDamage(TFCItems.WroughtIronUses);
-		RedSteelHammer = new ItemHammer(TFCItemID.RedSteelHammer,TFCItems.RedSteelToolMaterial).setUnlocalizedName("Red Steel Hammer").setMaxDamage(TFCItems.RedSteelUses);
-		SteelHammer = new ItemHammer(TFCItemID.SteelHammer,TFCItems.SteelToolMaterial).setUnlocalizedName("Steel Hammer").setMaxDamage(TFCItems.SteelUses);
+		StoneHammer = new ItemHammer(TFCItemID.StoneHammer,TFCItems.IgInToolMaterial, 60).setUnlocalizedName("Stone Hammer").setMaxDamage(TFCItems.IgInStoneUses);
+		BismuthBronzeHammer = new ItemHammer(TFCItemID.BismuthBronzeHammer,TFCItems.BismuthBronzeToolMaterial, 90).setUnlocalizedName("Bismuth Bronze Hammer").setMaxDamage(TFCItems.BismuthBronzeUses);
+		BlackBronzeHammer = new ItemHammer(TFCItemID.BlackBronzeHammer,TFCItems.BlackBronzeToolMaterial, 95).setUnlocalizedName("Black Bronze Hammer").setMaxDamage(TFCItems.BlackBronzeUses);
+		BlackSteelHammer = new ItemHammer(TFCItemID.BlackSteelHammer,TFCItems.BlackSteelToolMaterial, 205).setUnlocalizedName("Black Steel Hammer").setMaxDamage(TFCItems.BlackSteelUses);
+		BlueSteelHammer = new ItemHammer(TFCItemID.BlueSteelHammer,TFCItems.BlueSteelToolMaterial, 240).setUnlocalizedName("Blue Steel Hammer").setMaxDamage(TFCItems.BlueSteelUses);
+		BronzeHammer = new ItemHammer(TFCItemID.BronzeHammer,TFCItems.BronzeToolMaterial, 100).setUnlocalizedName("Bronze Hammer").setMaxDamage(TFCItems.BronzeUses);
+		CopperHammer = new ItemHammer(TFCItemID.CopperHammer,TFCItems.CopperToolMaterial, 80).setUnlocalizedName("Copper Hammer").setMaxDamage(TFCItems.CopperUses);
+		WroughtIronHammer = new ItemHammer(TFCItemID.WroughtIronHammer,TFCItems.IronToolMaterial, 135).setUnlocalizedName("Wrought Iron Hammer").setMaxDamage(TFCItems.WroughtIronUses);
+		RedSteelHammer = new ItemHammer(TFCItemID.RedSteelHammer,TFCItems.RedSteelToolMaterial, 240).setUnlocalizedName("Red Steel Hammer").setMaxDamage(TFCItems.RedSteelUses);
+		SteelHammer = new ItemHammer(TFCItemID.SteelHammer,TFCItems.SteelToolMaterial, 170).setUnlocalizedName("Steel Hammer").setMaxDamage(TFCItems.SteelUses);
 
 		Ink = new ItemTerra(TFCItemID.Ink).setUnlocalizedName("Ink");
 		FireStarter = new ItemFirestarter(TFCItemID.FireStarter).setFolder("tools/").setUnlocalizedName("Firestarter");
