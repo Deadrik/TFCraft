@@ -15,7 +15,7 @@ import TFC.Blocks.BlockFireBrick;
 import TFC.Blocks.BlockFoodPrep;
 import TFC.Blocks.BlockIngotPile;
 import TFC.Blocks.BlockLogPile;
-import TFC.Blocks.BlockLooseRock;
+import TFC.Blocks.BlockWorldItem;
 import TFC.Blocks.BlockMetalSheet;
 import TFC.Blocks.BlockMolten;
 import TFC.Blocks.BlockPipeBasic;
@@ -205,7 +205,7 @@ public class TFCBlocks
 	public static Block ClayGrass2;
 	public static Block Peat;
 	public static Block PeatGrass;
-	public static Block LooseRock;
+	public static Block worldItem;
 	public static Block LogPile;
 	public static Block tilledSoil;
 	public static Block tilledSoil2;
@@ -339,7 +339,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Peat, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Peat");
 		GameRegistry.registerBlock(DryGrass, TFC.Items.ItemBlocks.ItemTerraBlock.class, "DryGrass");
 		GameRegistry.registerBlock(DryGrass2, TFC.Items.ItemBlocks.ItemTerraBlock.class, "DryGrass2");
-		GameRegistry.registerBlock(LooseRock, "LooseRock");
+		GameRegistry.registerBlock(worldItem, "LooseRock");
 		GameRegistry.registerBlock(LogPile, "LogPile");
 		GameRegistry.registerBlock(Charcoal, "Charcoal");
 		GameRegistry.registerBlock(Detailed, "Detailed");
@@ -565,7 +565,7 @@ public class TFCBlocks
 		TFCBlocks.Ore = new BlockOre(TFCBlockID.Ore, Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
 		TFCBlocks.Ore2 = new BlockOre2(TFCBlockID.Ore2, Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
 		TFCBlocks.Ore3 = new BlockOre3(TFCBlockID.Ore3, Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
-		TFCBlocks.LooseRock = new BlockLooseRock(TFCBlockID.LooseRock).setHardness(0.05F).setResistance(1F).setUnlocalizedName("LooseRock");
+		TFCBlocks.worldItem = new BlockWorldItem(TFCBlockID.LooseRock).setHardness(0.05F).setResistance(1F).setUnlocalizedName("LooseRock");
 		TFCBlocks.LogPile = new BlockLogPile(TFCBlockID.LogPile).setHardness(10F).setResistance(1F).setUnlocalizedName("LogPile");
 
 		TFCBlocks.Sulfur = new BlockSulfur(TFCBlockID.Sulfur, Material.rock).setUnlocalizedName("Sulfur").setHardness(0.5F).setResistance(1F);
