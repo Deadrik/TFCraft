@@ -929,6 +929,9 @@ public class TFC_Core
 		return false;
 	}
 
+	/**
+	 * Adds exhaustion to the player. 0.001 is a standard amount.
+	 */
 	public static void addPlayerExhaustion(EntityPlayer player, float exhaustion)
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);

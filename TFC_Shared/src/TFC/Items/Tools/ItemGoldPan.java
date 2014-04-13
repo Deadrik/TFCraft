@@ -1,34 +1,29 @@
 package TFC.Items.Tools;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Util.Helper;
-import TFC.Blocks.Terrain.BlockOre;
+import TFC.Chunkdata.ChunkData;
+import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
-import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 
 public class ItemGoldPan extends ItemTerra
 {
-	public static String[] MetaNames = {"", "Sand", "Gravel", "Clay", "Dirt"};
-	public Icon[] icons = new Icon[MetaNames.length];
+	public Icon[] icons = new Icon[5];
 
 	private int useTimer = 0;
 	public ItemGoldPan(int i) 
@@ -54,6 +49,7 @@ public class ItemGoldPan extends ItemTerra
 	@Override
 	public Icon getIconFromDamage(int i)
 	{
+		i = i & 15;
 		if(i == 1) {
 			return icons[1];
 		}
@@ -81,264 +77,125 @@ public class ItemGoldPan extends ItemTerra
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack itemstack) 
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
-		return this.getUnlocalizedName();//"GoldPan";//blockNames[itemstack.getItemDamage()];
-	}
+		if(world.isRemote)
+			return is;
 
-	public String getName(ItemStack itemstack) 
-	{
-		return this.getUnlocalizedName();//MetaNames[itemstack.getItemDamage()];
-	}
+		float distMod = 1.0F;
+		double var5 = player.prevPosX + (player.posX - player.prevPosX) * distMod;
+		double var7 = player.prevPosY + (player.posY - player.prevPosY) * distMod + 1.62D - player.yOffset;
+		double var9 = player.prevPosZ + (player.posZ - player.prevPosZ) * distMod;
+		MovingObjectPosition mop = Helper.getMovingObjectPositionFromPlayer(world, player, true);
 
-	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x0, int y0, int z0, int l, float par8, float par9, float par10)
-	{
-
-		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-		if(objectMouseOver == null) {
-			return false;
-		}		
-		int x = objectMouseOver.blockX;
-		int y = objectMouseOver.blockY;
-		int z = objectMouseOver.blockZ;
-		int side = objectMouseOver.sideHit;
-
-		if(!world.isRemote)
-		{            
-			//Do this if it's an empty pan
-			if(itemstack.getItemDamage() == 0)
+		if (mop == null)
+		{
+			return is;
+		}
+		else
+		{
+			int x = mop.blockX;
+			int y = mop.blockY;
+			int z = mop.blockZ;
+			Block blockHit = Block.blocksList[world.getBlockId(x, y, z)];
+			if (mop.typeOfHit == EnumMovingObjectType.TILE)
 			{
-				boolean isBiomeRiver = false;
-				for (int i = -25; i < 25; i++)
+				if(is.getItemDamage() == 0)
 				{
-					for (int j = -25; j < 25; j++)
+					ChunkData cd = ChunkDataManager.getData(x >> 4, z >> 4);
+
+					if(cd.sluicedAmount < 100)
 					{
-						if(world.getBiomeGenForCoords(x+i, z+j) instanceof BiomeGenRiverTFC)
-						{					
-							isBiomeRiver = true;
-						}
-					}
-				}
-				List L = new ArrayList<Integer>();
-				for (int i = -10; i < 10; i++)
-				{
-					for (int j = -10; j < 10; j++)
-					{
-						int k = world.getBiomeGenForCoords(x+i, z+j).biomeID;
-						if(!L.contains(k)) {
-							L.add(k);
-						}
-					}
-				}
-				Random R = new Random();
-				if(TFC_Core.isSand(world.getBlockId(x, y-1, z)) && isBiomeRiver)
-				{
-					if(R.nextInt(10) == 0) {
-						world.setBlock(x, y-1, z, 0);
-					}
-					itemstack.setItemDamage(1);
-					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, itemstack);
-					return true;
-				}
-				else if(world.getBlockId(x, y-1, z) == Block.gravel.blockID)
-				{
-					if(R.nextInt(10) == 0) {
-						world.setBlock(x, y-1, z, 0);
-					}
-					itemstack.setItemDamage(2);
-					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, itemstack);
-					return true;
-				}
-				else if(TFC_Core.isSand(world.getBlockId(x, y-2, z)) && isBiomeRiver)
-				{
-					if(R.nextInt(10) == 0) {
-						world.setBlock(x, y-2, z, 0);
-					}
-					itemstack.setItemDamage(1);
-					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, itemstack);
-					return true;
-				}
-				else if(world.getBlockId(x, y-2, z) == Block.gravel.blockID)
-				{
-					if(R.nextInt(10) == 0) {
-						world.setBlock(x, y-2, z, 0);
-					}
-					itemstack.setItemDamage(2);
-					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, itemstack);
-					return true;
-				}
-				entityplayer.addChatMessage(StringUtil.localize("gui.GoldPan.UseEmpty"));
-			}
-			else
-			{
-				entityplayer.addExhaustion(0.2f);
-
-				float gemMod = 1;
-				float oreMod = 1;
-				if(itemstack.getItemDamage() == 1) {
-					gemMod = 0.75f;
-				} else if(itemstack.getItemDamage() == 2) {
-					oreMod = 0.7f;
-				}
-
-				int blockAboveId = world.getBlockId(x, y+1, z);
-				int blockAboveMeta = world.getBlockMetadata(x, y+1, z);
-
-				if(TFCOptions.enableDebugMode) {
-					System.out.println(new StringBuilder().append(blockAboveId).append(" ").append(blockAboveMeta).toString());
-				}
-
-				if(blockAboveId == Block.waterStill.blockID && blockAboveMeta > 0)
-				{
-					if(TFCOptions.enableDebugMode) {
-						System.out.println(new StringBuilder().append("True").toString());
-					}
-					useTimer = 20;
-					Random random = new Random();
-
-					ArrayList coreSample = new ArrayList<Item>();
-					ArrayList coreSampleStacks = new ArrayList<ItemStack>();
-
-					for(int i = -50; i <= 50; i += 2)
-					{
-						for(int k = -50; k <= 50; k += 2)
+						if(world.getBlockId(x, y, z) == Block.gravel.blockID)
 						{
-							for(int j = y; j > y-35; j--)
+							is.setItemDamage((5 << 4) + 2);
+							if(world.rand.nextInt(10) == 0) {
+								world.setBlock(x, y, z, 0);
+							}
+							TFC_Core.addPlayerExhaustion(player, 0.0005f);
+							cd.sluicedAmount++;
+						}
+						else if(world.getBlockId(x, y, z) == TFCBlocks.Sand.blockID || world.getBlockId(x, y, z) == TFCBlocks.Sand2.blockID)
+						{
+							is.setItemDamage((5 << 4) + 1);
+							if(world.rand.nextInt(10) == 0) {
+								world.setBlock(x, y, z, 0);
+							}
+							TFC_Core.addPlayerExhaustion(player, 0.0005f);
+							cd.sluicedAmount++;
+						}
+						else if(world.getBlockMaterial(x, y, z) == Material.water)
+						{
+							if(world.getBlockId(x, y-1, z) == Block.gravel.blockID)
 							{
-								if(world.getBlockId(i+x, j, k+z) == TFCBlocks.Ore.blockID)
-								{
-									int m = world.getBlockMetadata(i+x, j, k+z);
-									if(!coreSample.contains(BlockOre.getDroppedItem(m)))
-									{
-										//coreSample.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
-										if(m!= 14 && m != 15)
-										{
-											coreSample.add(BlockOre.getDroppedItem(m));
-											coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m));
-										}
-									}
+								is.setItemDamage((5 << 4) + 2);
+								if(world.rand.nextInt(10) == 0) {
+									world.setBlock(x, y-1, z, 0);
 								}
+								TFC_Core.addPlayerExhaustion(player, 0.0005f);
+								cd.sluicedAmount++;
+							}
+							else if(world.getBlockId(x, y-1, z) == TFCBlocks.Sand.blockID || world.getBlockId(x, y-1, z) == TFCBlocks.Sand2.blockID)
+							{
+								is.setItemDamage((5 << 4) + 1);
+								if(world.rand.nextInt(10) == 0) {
+									world.setBlock(x, y-1, z, 0);
+								}
+								TFC_Core.addPlayerExhaustion(player, 0.0005f);
+								cd.sluicedAmount++;
 							}
 						}
 					}
-					if(random.nextInt((int) (250 * oreMod)) == 0 && !coreSampleStacks.isEmpty())
+					else
 					{
-						entityplayer.inventory.addItemStackToInventory((ItemStack)coreSampleStacks.toArray()[random.nextInt(coreSampleStacks.toArray().length)]);
+						player.addChatMessage(StringUtil.localize("gui.goldpan.overused"));
 					}
-					else if(random.nextInt((int) (400 * gemMod)) == 0)
-					{
-						ArrayList items = new ArrayList<ItemStack>();
-						items.add(new ItemStack(TFCItems.GemAgate,1,0));
-						items.add(new ItemStack(TFCItems.GemAmethyst,1,0));
-						items.add(new ItemStack(TFCItems.GemBeryl,1,0));
-						items.add(new ItemStack(TFCItems.GemEmerald,1,0));
-						items.add(new ItemStack(TFCItems.GemGarnet,1,0));
-						items.add(new ItemStack(TFCItems.GemJade,1,0));
-						items.add(new ItemStack(TFCItems.GemJasper,1,0));
-						items.add(new ItemStack(TFCItems.GemOpal,1,0));
-						items.add(new ItemStack(TFCItems.GemRuby,1,0));
-						items.add(new ItemStack(TFCItems.GemSapphire,1,0));
-						items.add(new ItemStack(TFCItems.GemTourmaline,1,0));
-						items.add(new ItemStack(TFCItems.GemTopaz,1,0));
-						items.add(new ItemStack(Item.goldNugget,1,0));
-
-						entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
-
-					}
-					else if(random.nextInt((int) (800 * gemMod)) == 0)
-					{
-						ArrayList items = new ArrayList<ItemStack>();
-						items.add(new ItemStack(TFCItems.GemAgate,1,1));
-						items.add(new ItemStack(TFCItems.GemAmethyst,1,1));
-						items.add(new ItemStack(TFCItems.GemBeryl,1,1));
-						items.add(new ItemStack(TFCItems.GemEmerald,1,1));
-						items.add(new ItemStack(TFCItems.GemGarnet,1,1));
-						items.add(new ItemStack(TFCItems.GemJade,1,1));
-						items.add(new ItemStack(TFCItems.GemJasper,1,1));
-						items.add(new ItemStack(TFCItems.GemOpal,1,1));
-						items.add(new ItemStack(TFCItems.GemRuby,1,1));
-						items.add(new ItemStack(TFCItems.GemSapphire,1,1));
-						items.add(new ItemStack(TFCItems.GemTourmaline,1,1));
-						items.add(new ItemStack(TFCItems.GemTopaz,1,1));
-						items.add(new ItemStack(TFCItems.GemDiamond,1,0));
-						items.add(new ItemStack(Item.goldNugget,2,0));
-
-						entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
-					}
-					else if(random.nextInt((int) (1600 * gemMod)) == 0)
-					{
-						ArrayList items = new ArrayList<ItemStack>();
-						items.add(new ItemStack(TFCItems.GemAgate,1,2));
-						items.add(new ItemStack(TFCItems.GemAmethyst,1,2));
-						items.add(new ItemStack(TFCItems.GemBeryl,1,2));
-						items.add(new ItemStack(TFCItems.GemEmerald,1,2));
-						items.add(new ItemStack(TFCItems.GemGarnet,1,2));
-						items.add(new ItemStack(TFCItems.GemJade,1,2));
-						items.add(new ItemStack(TFCItems.GemJasper,1,2));
-						items.add(new ItemStack(TFCItems.GemOpal,1,2));
-						items.add(new ItemStack(TFCItems.GemRuby,1,2));
-						items.add(new ItemStack(TFCItems.GemSapphire,1,2));
-						items.add(new ItemStack(TFCItems.GemTourmaline,1,2));
-						items.add(new ItemStack(TFCItems.GemTopaz,1,2));
-						items.add(new ItemStack(TFCItems.GemDiamond,1,1));
-
-						entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
-					}
-					else if(random.nextInt((int) (3200 * gemMod)) == 0)
-					{
-						ArrayList items = new ArrayList<ItemStack>();
-						items.add(new ItemStack(TFCItems.GemAgate,1,3));
-						items.add(new ItemStack(TFCItems.GemAmethyst,1,3));
-						items.add(new ItemStack(TFCItems.GemBeryl,1,3));
-						items.add(new ItemStack(TFCItems.GemEmerald,1,3));
-						items.add(new ItemStack(TFCItems.GemGarnet,1,3));
-						items.add(new ItemStack(TFCItems.GemJade,1,3));
-						items.add(new ItemStack(TFCItems.GemJasper,1,3));
-						items.add(new ItemStack(TFCItems.GemOpal,1,3));
-						items.add(new ItemStack(TFCItems.GemRuby,1,3));
-						items.add(new ItemStack(TFCItems.GemSapphire,1,3));
-						items.add(new ItemStack(TFCItems.GemTourmaline,1,3));
-						items.add(new ItemStack(TFCItems.GemTopaz,1,3));
-						items.add(new ItemStack(TFCItems.GemDiamond,1,2));
-
-						entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
-					}
-					else if(random.nextInt((int) (6400 * gemMod)) == 0)
-					{
-						ArrayList items = new ArrayList<ItemStack>();
-						items.add(new ItemStack(TFCItems.GemAgate,1,4));
-						items.add(new ItemStack(TFCItems.GemAmethyst,1,4));
-						items.add(new ItemStack(TFCItems.GemBeryl,1,4));
-						items.add(new ItemStack(TFCItems.GemEmerald,1,4));
-						items.add(new ItemStack(TFCItems.GemGarnet,1,4));
-						items.add(new ItemStack(TFCItems.GemJade,1,4));
-						items.add(new ItemStack(TFCItems.GemJasper,1,4));
-						items.add(new ItemStack(TFCItems.GemOpal,1,4));
-						items.add(new ItemStack(TFCItems.GemRuby,1,4));
-						items.add(new ItemStack(TFCItems.GemSapphire,1,4));
-						items.add(new ItemStack(TFCItems.GemTourmaline,1,4));
-						items.add(new ItemStack(TFCItems.GemTopaz,1,4));
-						items.add(new ItemStack(TFCItems.GemDiamond,1,3));
-
-						entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
-
-					}
-					else if(random.nextInt((int) (12800 * gemMod)) == 0)
-					{
-						entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.GemDiamond,1,2));
-					}
-
-					itemstack.setItemDamage(0);
-					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, itemstack);
-					return true;
 				}
 				else
 				{
-					entityplayer.addChatMessage(StringUtil.localize("gui.GoldPan.UseFull"));
+					int bMeta = world.getBlockMetadata(x, y+1, z);
+					if(world.getBlockMaterial(x, y+1, z) == Material.water && bMeta > 0)
+					{
+						int uses = (is.getItemDamage() >> 4);
+						if(uses > 0)
+						{
+							int type = -1;
+
+							if (type == -1 && world.rand.nextInt(40) == 0) type = 0;
+							if (type == -1 && world.rand.nextInt(90) == 0) type = 1;
+							if (type == -1 && world.rand.nextInt(90) == 0) type = 3;
+							if (type == -1 && world.rand.nextInt(250) == 0) type = 2;
+
+							if(type != -1)
+							{
+								ItemStack out = null;
+								switch(type)
+								{
+								case 0://Copper
+								out = new ItemStack(TFCItems.SmallOreChunk, 1, 0); break;
+								case 1://Gold
+									out = new ItemStack(TFCItems.SmallOreChunk, 1, 1); break;
+								case 2://Platinum
+									out = new ItemStack(TFCItems.SmallOreChunk, 1, 2); break;
+								case 3://Silver
+									out = new ItemStack(TFCItems.SmallOreChunk, 1, 4); break;
+								}
+								if(!player.inventory.addItemStackToInventory(out))
+								{
+									player.dropPlayerItem(out);
+								}
+							}
+							uses--;
+							if(uses > 0)
+								is.setItemDamage((is.getItemDamage() & 15) + (uses << 4));
+							else
+								is.setItemDamage(0);
+
+						}
+					}
 				}
 			}
 		}
-		return true;
+		return is;
 	}
 }
