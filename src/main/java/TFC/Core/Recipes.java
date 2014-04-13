@@ -947,7 +947,8 @@ public class Recipes
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Items.leather_leggings, 1), new Object[] { "#####","#####","## ##","## ##","## ##", Character.valueOf('#'), TFCItems.FlatLeather});
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Items.leather_boots, 1), new Object[] { "##   ","##   ","##   ","#### ","#####", Character.valueOf('#'), TFCItems.FlatLeather});
 
-		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.Quiver, 1), new Object[] { "#### ","# ###","#### ","###  "," #   ",Character.valueOf('#'), TFCItems.FlatLeather});
+		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.Quiver, 1), new Object[] { " ####","# ###","# ###","# ###"," ####",Character.valueOf('#'), TFCItems.FlatLeather});
+		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Items.saddle, 1), new Object[] { "  #  ","#####","#####","#####","  #  ",Character.valueOf('#'), TFCItems.FlatLeather});
 	}
 
 	private static void registerKnapping()

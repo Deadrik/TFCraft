@@ -11,6 +11,7 @@ import TFC.API.SkillsManager;
 import TFC.Containers.ContainerSkills;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Textures;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.SkillStats;
 
 public class GuiSkills extends GuiContainerTFC
@@ -29,7 +30,7 @@ public class GuiSkills extends GuiContainerTFC
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) 
 	{
 		SkillStats ss = TFC_Core.getSkillStats(player);
-		int y = 5;
+		int y = 10;
 		for(String o : SkillsManager.instance.getSkillsArray())
 		{
 			fontRendererObj.drawString(StatCollector.translateToLocal(o) + ": " + EnumChatFormatting.DARK_BLUE + ss.getSkill(o), 4, y, 0, false);
@@ -42,6 +43,20 @@ public class GuiSkills extends GuiContainerTFC
 	{
 		this.drawGui(GuiTex);
 	}
+	
+	@Override
+	protected void drawGui(ResourceLocation rl)
+	{
+		if(rl != null)
+		{
+			bindTexture(rl);
+			guiLeft = (width - xSize) / 2;
+			guiTop = ((height - ySize) / 2)-3;
+			drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		}
+		if(drawInventory)
+			PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
+	}
 
 	@Override
 	public void initGui()
@@ -50,13 +65,13 @@ public class GuiSkills extends GuiContainerTFC
 		this.guiLeft = (this.width - this.xSize) / 2;
 		this.guiTop = (this.height - this.ySize) / 2;
 		buttonList.clear();
-		buttonList.add(new GuiInventoryButton(0, guiLeft+176, guiTop + 3, 25, 20, 
+		buttonList.add(new GuiInventoryButton(0, guiLeft+176, guiTop, 25, 20, 
 				0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
-		buttonList.add(new GuiInventoryButton(1, guiLeft+176, guiTop + 22, 25, 20, 
+		buttonList.add(new GuiInventoryButton(1, guiLeft+176, guiTop + 19, 25, 20, 
 				0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
-		buttonList.add(new GuiInventoryButton(2, guiLeft+176, guiTop + 41, 25, 20, 
+		buttonList.add(new GuiInventoryButton(2, guiLeft+176, guiTop + 38, 25, 20, 
 				0, 86, 25, 20, StatCollector.translateToLocal("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
-		buttonList.add(new GuiInventoryButton(3, guiLeft+176, guiTop + 60, 25, 20, 
+		buttonList.add(new GuiInventoryButton(3, guiLeft+176, guiTop + 57, 25, 20, 
 				0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Health"), TFC_Textures.GuiHealth));
 	}
 

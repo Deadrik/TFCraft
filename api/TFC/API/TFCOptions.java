@@ -43,6 +43,8 @@ public class TFCOptions
 	public static byte[] anvilRuleColor2 = {(byte) 247, (byte) 148, (byte) 49, (byte) 255};
 
 	public static int pitKilnBurnTime = 8;
+	public static boolean useDecayProtection = true;
+	public static int decayProtectionDays = 24;
 
 	public static boolean getBooleanFor(Configuration config,String heading, String item, boolean value)
 	{

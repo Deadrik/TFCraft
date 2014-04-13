@@ -1036,6 +1036,21 @@ public class TFC_Core
 		// if the tick timer is up then we cause decay.
 		if (nbt.getInteger("decayTimer") < TFC_Time.getTotalHours())
 		{
+			int timeDiff = (int) (TFC_Time.getTotalHours() - nbt.getInteger("decayTimer"));
+			float protMult = 1;
+
+			if(TFCOptions.useDecayProtection)
+			{
+				if(timeDiff > TFCOptions.decayProtectionDays * 24)
+				{
+					nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() - 24);
+				}
+				else if(timeDiff > 24)
+				{
+					protMult = 1-(timeDiff/(TFCOptions.decayProtectionDays * 24));
+				}
+			}
+
 			float decay = nbt.getFloat("foodDecay");
 			float thisDecayRate = 1.0f;
 			// Get the base food decay rate
@@ -1072,7 +1087,7 @@ public class TFC_Core
 				nbt.setFloat("foodDecay", decay);
 			} else
 			{
-				float d = ((decay * Global.FOOD_DECAY_RATE) / 24) * (thisDecayRate * environmentalDecay);
+				float d = ((decay * Global.FOOD_DECAY_RATE) / 24) * (thisDecayRate * environmentalDecay) * protMult;
 				decay += d;
 			}
 			nbt.setInteger("decayTimer", nbt.getInteger("decayTimer") + 1);
