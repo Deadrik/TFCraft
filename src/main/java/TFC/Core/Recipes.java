@@ -244,8 +244,8 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCItems.GoldPan, 1, 0), new Object[] { 
 			"1", Character.valueOf('1'),Items.bowl});
 		//Sluice
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SluiceItem, 1), new Object[] { 
-			"  1"," 12","122", Character.valueOf('1'),new ItemStack(Items.stick,1,32767), Character.valueOf('2'),new ItemStack(TFCItems.SinglePlank,1,32767)});
+		/*GameRegistry.addRecipe(new ItemStack(TFCItems.SluiceItem, 1), new Object[] { 
+			"  1"," 12","122", Character.valueOf('1'),new ItemStack(Items.stick,1,32767), Character.valueOf('2'),new ItemStack(TFCItems.SinglePlank,1,32767)});*/
 
 		for(int j = 0; j < Recipes.Hammers.length; j++)
 		{

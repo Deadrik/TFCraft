@@ -109,6 +109,7 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 					is.setTagCompound(nbt);
 
 					this.setInventorySlotContents(4, is);
+					this.getStackInSlot(5).stackSize--;
 
 					consumeFoodWeight();
 				}
@@ -171,8 +172,7 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 			return false;
 		if(getStackInSlot(3) != null && ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodWeight(getStackInSlot(3)) < 2)
 			return false;
-
-		if(storage[4] != null && storage[5].getItem() != Items.bowl)
+		if(storage[4] != null || (storage[5] == null || storage[5].getItem() != Items.bowl))
 			return false;
 		return true;
 	}

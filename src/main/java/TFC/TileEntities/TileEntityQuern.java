@@ -15,8 +15,10 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import TFC.TFCItems;
+import TFC.API.IFood;
 import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntityCowTFC;
+import TFC.Food.ItemFoodTFC;
 
 public class TileEntityQuern extends TileEntity implements IInventory
 {
@@ -44,23 +46,40 @@ public class TileEntityQuern extends TileEntity implements IInventory
 					shouldRotate = false;
 					if(!worldObj.isRemote)
 					{
-						processItem(TFCItems.WheatGrain, 0, TFCItems.WheatGround, 0, 1);//Wheat Flour
-						processItem(TFCItems.RyeGrain, 0, TFCItems.RyeGround, 0, 1);//Rye Flour
-						processItem(TFCItems.OatGrain, 0, TFCItems.OatGround, 0, 1);//Oat Flour
-						processItem(TFCItems.BarleyGrain, 0, TFCItems.BarleyGround, 0, 1);//Barley Flour
-						processItem(TFCItems.RiceGrain, 0, TFCItems.RiceGround, 0, 1);//Rice Flour
-						processItem(TFCItems.MaizeEar, 0, TFCItems.CornmealGround, 0, 1);//Cornmeal
-						processItem(TFCItems.OreChunk, 16, TFCItems.Powder, 1, 1);//Kaolinite Powder
-						processItem(TFCItems.OreChunk, 20, TFCItems.Powder, 2, 2);//Graphite Powder
-						processItem(TFCItems.OreChunk, 27, Items.redstone, 0, 8);//Cinnabar to Redstone
-						processItem(TFCItems.OreChunk, 28, Items.redstone, 0, 8);//Cryolite to Redstone
-						processItem(Items.bone, 0, Items.dye, 15, 2);//Bone Meal
-						processItem(TFCItems.OreChunk, 34, TFCItems.Powder, 6, 4);//Lapis Powder
-						processItem(TFCItems.OreChunk, 9, TFCItems.Powder, 8, 4);//Malachite Powder
-						processItem(TFCItems.OreChunk, 3, TFCItems.Powder, 5, 4);//Hematite Powder
-						processItem(TFCItems.OreChunk, 11, TFCItems.Powder, 7, 4);//Limonite Powder
-						processItem(TFCItems.OreChunk, 31, TFCItems.Fertilizer, 0, 4);//Sylvite to Fertilizer
-						processItem(TFCItems.LooseRock, 5, TFCItems.Powder, 9, 4);//Rock Salt to Salt
+						if(processItem(TFCItems.WheatGrain, 0, TFCItems.WheatGround, 0, 1))//Wheat Flour
+							;
+						else if(processItem(TFCItems.RyeGrain, 0, TFCItems.RyeGround, 0, 1))//Rye Flour
+							;
+						else if(processItem(TFCItems.OatGrain, 0, TFCItems.OatGround, 0, 1))//Oat Flour
+							;
+						else if(processItem(TFCItems.BarleyGrain, 0, TFCItems.BarleyGround, 0, 1))//Barley Flour
+							;
+						else if(processItem(TFCItems.RiceGrain, 0, TFCItems.RiceGround, 0, 1))//Rice Flour
+							;
+						else if(processItem(TFCItems.MaizeEar, 0, TFCItems.CornmealGround, 0, 1))//Cornmeal
+							;
+						else if(processItem(TFCItems.OreChunk, 16, TFCItems.Powder, 1, 4))//Kaolinite Powder
+							;
+						else if(processItem(TFCItems.OreChunk, 20, TFCItems.Powder, 2, 4))//Graphite Powder
+							;
+						else if(processItem(TFCItems.OreChunk, 27, Items.redstone, 0, 8))//Cinnabar to Redstone
+							;
+						else if(processItem(TFCItems.OreChunk, 28, Items.redstone, 0, 8))//Cryolite to Redstone
+							;
+						else if(processItem(Items.bone, 0, Items.dye, 15, 2))//Bone Meal
+							;
+						else if(processItem(TFCItems.OreChunk, 34, TFCItems.Powder, 6, 4))//Lapis Powder
+							;
+						else if(processItem(TFCItems.OreChunk, 9, TFCItems.Powder, 8, 4))//Malachite Powder
+							;
+						else if(processItem(TFCItems.OreChunk, 3, TFCItems.Powder, 5, 4))//Hematite Powder
+							;
+						else if(processItem(TFCItems.OreChunk, 11, TFCItems.Powder, 7, 4))//Limonite Powder
+							;
+						else if(processItem(TFCItems.OreChunk, 31, TFCItems.Fertilizer, 0, 4))//Sylvite to Fertilizer
+							;
+						else if(processItem(TFCItems.LooseRock, 5, TFCItems.Powder, 9, 4))//Rock Salt to Salt
+							;
 
 						if(storage[2] != null)
 							damageStackInSlot(2);
@@ -73,22 +92,40 @@ public class TileEntityQuern extends TileEntity implements IInventory
 		}
 	}
 
-	public void processItem(Item inputItem, int damageIn, Item outputItem, int damageOut, int amountOut)
+	public boolean processItem(Item inputItem, int damageIn, Item outputItem, int damageOut, int amountOut)
 	{
-		if(storage[0] != null && storage[0].getItem() == inputItem && storage[0].getItemDamage() == damageIn &&
-				(storage[1] == null || (storage[1].getItem() == outputItem && storage[1].getItemDamage() == damageOut)))
+		if(storage[1] == null || (storage[1].getItem() == outputItem && storage[1].getItemDamage() == damageOut))
 		{
-			if(storage[0].stackSize == 1)
-				storage[0] = null;
+			if (inputItem instanceof IFood)
+			{
+				if(storage[0].hasTagCompound() && storage[0].getTagCompound().hasKey("foodWeight")
+						&& storage[0].getTagCompound().hasKey("foodDecay") && storage[1] == null)
+				{
+					storage [1] = new ItemStack(outputItem, amountOut, damageOut);
+					NBTTagCompound grainNBT = storage[0].getTagCompound();
+					float flourWeight = grainNBT.getFloat("foodWeight");
+					float flourDecay = grainNBT.getFloat("foodDecay");
+					ItemFoodTFC.createTag(storage[1], flourWeight, flourDecay);
+					storage[0] = null;
+					return true;
+				}
+			}
 			else
-				storage[0].stackSize--;
-			if(storage[1] == null)
-				storage[1] = new ItemStack(outputItem,amountOut,damageOut);
-			else if(storage[1].stackSize < outputItem.getItemStackLimit())
-				storage[1].stackSize += amountOut;
-			else
-				ejectItem(new ItemStack(outputItem, amountOut, damageOut));
+			{
+				if(storage[0].stackSize == 1)
+					storage[0] = null;
+				else
+					storage[0].stackSize--;
+				if(storage[1] == null)
+					storage[1] = new ItemStack(outputItem,amountOut,damageOut);
+				else if(storage[1].stackSize < storage[1].getMaxStackSize())
+					storage[1].stackSize += amountOut;
+				else
+					ejectItem(new ItemStack(outputItem, amountOut, damageOut));
+				return true;
+			}
 		}
+		return false;
 	}
 
 	public void damageStackInSlot(int i)

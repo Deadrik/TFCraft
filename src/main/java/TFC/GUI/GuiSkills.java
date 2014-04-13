@@ -17,9 +17,10 @@ public class GuiSkills extends GuiContainerTFC
 {
 	public static ResourceLocation GuiTex = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_skills.png");
 	protected EntityPlayer player;
+
 	public GuiSkills(EntityPlayer player)
 	{
-		super(new ContainerSkills(), 176, 166);
+		super(new ContainerSkills(player), 176, 166);
 		this.setDrawInventory(false);
 		this.player = player;
 	}

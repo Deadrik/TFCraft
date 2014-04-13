@@ -4,27 +4,35 @@ import java.util.Set;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.ICausesDamage;
+import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.Core.TFC_Achievements;
 import TFC.TileEntities.TileEntityAnvil;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
-public class ItemHammer extends ItemTerraTool
+public class ItemHammer extends ItemTerraTool implements ICausesDamage
 {
 	private static final Set blocks = Sets.newHashSet( new Block[] {});
-	
-	public ItemHammer(ToolMaterial e)
+	private float damageVsEntity;
+
+	public ItemHammer(ToolMaterial e, float damage)
 	{
 		super(0, e, blocks);
+		this.damageVsEntity = damage;
 	}
 
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		Block id2 = player.worldObj.getBlock(x, y, z);
 		int meta2 = player.worldObj.getBlockMetadata(x, y, z);
@@ -37,9 +45,7 @@ public class ItemHammer extends ItemTerraTool
 				player.triggerAchievement(TFC_Achievements.achAnvil);
 				TileEntityAnvil te = (TileEntityAnvil) world.getTileEntity(x, y, z);
 				if(te == null)
-				{
 					world.setTileEntity(x, y, z, new TileEntityAnvil());
-				}
 				if(te != null)
 				{
 					te.stonePair[0] = Block.getIdFromBlock(id2);
@@ -62,5 +68,19 @@ public class ItemHammer extends ItemTerraTool
 	public EnumSize getSize(ItemStack is)
 	{
 		return EnumSize.SMALL;
+	}
+
+	@Override
+	public EnumDamageType GetDamageType()
+	{
+		return EnumDamageType.CRUSHING;
+	}
+
+	@Override
+	public Multimap getItemAttributeModifiers()
+	{
+		Multimap multimap = HashMultimap.create();
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
+		return multimap;
 	}
 }

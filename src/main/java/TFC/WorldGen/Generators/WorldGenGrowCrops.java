@@ -44,13 +44,15 @@ public class WorldGenGrowCrops implements IWorldGenerator
 					Block bid = world.getBlock(i, j, k);
 					if (Blocks.wheat.canBlockStay(world, i, j, k) && (bid == Blocks.air || bid == Blocks.tallgrass))
 					{
-						world.setBlock(i, j, k, Blocks.wheat, 0, 0x2);
-						te = (TECrop)world.getTileEntity(i, j, k);
-						te.cropId = cropBlockId;
-						float gt = Math.max(crop.growthTime/TFC_Time.daysInMonth, 0.01f);
-						float mg = Math.min(month/gt, 1.0f)*(0.75f+(rand.nextFloat()*0.25f));
-						float growth =  Math.min(crop.numGrowthStages*mg, crop.numGrowthStages);
-						te.growth = growth;
+						if(world.setBlock(i, j, k, Blocks.wheat, 0, 0x2))
+						{
+							te = (TECrop)world.getTileEntity(i, j, k);
+							te.cropId = cropBlockId;
+							float gt = Math.max(crop.growthTime/TFC_Time.daysInMonth, 0.01f);
+							float mg = Math.min(month/gt, 1.0f)*(0.75f+(rand.nextFloat()*0.25f));
+							float growth =  Math.min(crop.numGrowthStages*mg, crop.numGrowthStages);
+							te.growth = growth;
+						}
 					}
 				}
 			}

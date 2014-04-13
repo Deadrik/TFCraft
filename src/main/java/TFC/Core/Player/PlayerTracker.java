@@ -2,8 +2,6 @@ package TFC.Core.Player;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Core;
@@ -62,13 +60,12 @@ public class PlayerTracker
 	{
 		if(!event.player.worldObj.isRemote)
 		{
-			int foodLevel = (event.player.worldObj.rand.nextInt(25) + 35);
+			float foodLevel = (event.player.worldObj.rand.nextFloat() * 12) + 12;
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(event.player);
-			//foodstats.addStats(foodLevel - foodstats.getFoodLevel(), 0.0f);
+			foodstats.setFoodLevel(foodLevel);
 			TFC_Core.setPlayerFoodStats(event.player, foodstats);
 			event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000);
 			event.player.setHealth(1000f * (0.25f + (event.player.worldObj.rand.nextFloat()*0.25f)));
-			event.player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*(event.player.worldObj.rand.nextInt(45)+45), 0));
 		}
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(event.player);
 		if( pi.tempSkills != null)

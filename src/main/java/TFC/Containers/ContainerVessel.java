@@ -13,10 +13,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.API.IFood;
 import TFC.API.Constant.Global;
 import TFC.Containers.Slots.SlotForShowOnly;
 import TFC.Containers.Slots.SlotSizeSmallVessel;
-import TFC.Food.ItemFoodTFC;
 
 public class ContainerVessel extends ContainerTFC
 {
@@ -115,10 +115,10 @@ public class ContainerVessel extends ContainerTFC
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < containerInv.getSizeInventory(); i++)
 		{
-			if(containerInv.getStackInSlot(i) != null && containerInv.getStackInSlot(i).getItem() instanceof ItemFoodTFC)
+			if(containerInv.getStackInSlot(i) != null && containerInv.getStackInSlot(i).getItem() instanceof IFood)
 			{
 				NBTTagCompound nbt = containerInv.getStackInSlot(i).getTagCompound();
-				if(nbt.getFloat("foodDecay")/Global.FOOD_MAX_WEIGHT > 0.9f)
+				if(nbt.hasKey("foodDecay") && nbt.getFloat("foodDecay")/Global.FOOD_MAX_WEIGHT > 0.9f)
 					containerInv.setInventorySlotContents(i, null);
 			}
 			if(containerInv.getStackInSlot(i) != null)

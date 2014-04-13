@@ -1233,16 +1233,16 @@ public class TFCItems
 		ZincUnshaped = new ItemMeltedMetal().setUnlocalizedName("Zinc Unshaped");
 
 		//Hammers
-		StoneHammer = new ItemHammer(IgInToolMaterial).setUnlocalizedName("Stone Hammer").setMaxDamage(IgInStoneUses);
-		BismuthBronzeHammer = new ItemHammer(BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Hammer").setMaxDamage(BismuthBronzeUses);
-		BlackBronzeHammer = new ItemHammer(BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Hammer").setMaxDamage(BlackBronzeUses);
-		BlackSteelHammer = new ItemHammer(BlackSteelToolMaterial).setUnlocalizedName("Black Steel Hammer").setMaxDamage(BlackSteelUses);
-		BlueSteelHammer = new ItemHammer(BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Hammer").setMaxDamage(BlueSteelUses);
-		BronzeHammer = new ItemHammer(BronzeToolMaterial).setUnlocalizedName("Bronze Hammer").setMaxDamage(BronzeUses);
-		CopperHammer = new ItemHammer(CopperToolMaterial).setUnlocalizedName("Copper Hammer").setMaxDamage(CopperUses);
-		WroughtIronHammer = new ItemHammer(IronToolMaterial).setUnlocalizedName("Wrought Iron Hammer").setMaxDamage(WroughtIronUses);
-		RedSteelHammer = new ItemHammer(RedSteelToolMaterial).setUnlocalizedName("Red Steel Hammer").setMaxDamage(RedSteelUses);
-		SteelHammer = new ItemHammer(SteelToolMaterial).setUnlocalizedName("Steel Hammer").setMaxDamage(SteelUses);
+		StoneHammer = new ItemHammer(IgInToolMaterial, 60).setUnlocalizedName("Stone Hammer").setMaxDamage(IgInStoneUses);
+		BismuthBronzeHammer = new ItemHammer(BismuthBronzeToolMaterial, 90).setUnlocalizedName("Bismuth Bronze Hammer").setMaxDamage(BismuthBronzeUses);
+		BlackBronzeHammer = new ItemHammer(BlackBronzeToolMaterial, 95).setUnlocalizedName("Black Bronze Hammer").setMaxDamage(BlackBronzeUses);
+		BlackSteelHammer = new ItemHammer(BlackSteelToolMaterial, 205).setUnlocalizedName("Black Steel Hammer").setMaxDamage(BlackSteelUses);
+		BlueSteelHammer = new ItemHammer(BlueSteelToolMaterial, 240).setUnlocalizedName("Blue Steel Hammer").setMaxDamage(BlueSteelUses);
+		BronzeHammer = new ItemHammer(BronzeToolMaterial, 100).setUnlocalizedName("Bronze Hammer").setMaxDamage(BronzeUses);
+		CopperHammer = new ItemHammer(CopperToolMaterial, 80).setUnlocalizedName("Copper Hammer").setMaxDamage(CopperUses);
+		WroughtIronHammer = new ItemHammer(IronToolMaterial, 135).setUnlocalizedName("Wrought Iron Hammer").setMaxDamage(WroughtIronUses);
+		RedSteelHammer = new ItemHammer(RedSteelToolMaterial, 240).setUnlocalizedName("Red Steel Hammer").setMaxDamage(RedSteelUses);
+		SteelHammer = new ItemHammer(SteelToolMaterial, 170).setUnlocalizedName("Steel Hammer").setMaxDamage(SteelUses);
 
 		Ink = new ItemTerra().setUnlocalizedName("Ink");
 		FireStarter = new ItemFirestarter().setFolder("tools/").setUnlocalizedName("Firestarter");

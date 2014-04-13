@@ -17,7 +17,7 @@ public class GuiHealth extends GuiContainerTFC
 	protected EntityPlayer player;
 	public GuiHealth(EntityPlayer player)
 	{
-		super(new ContainerSkills(), 176, 104);
+		super(new ContainerSkills(player), 176, 104);
 		this.setDrawInventory(false);
 		this.player = player;
 	}
