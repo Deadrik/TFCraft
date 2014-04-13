@@ -11,6 +11,7 @@ public class ChunkData
 	public long previousVisit;
 	public int spawnProtection;
 	public int[] heightmap;
+	public int sluicedAmount = 0;
 
 	public int lastSpringGen;
 
@@ -36,6 +37,7 @@ public class ChunkData
 		heightmap = tag.getIntArray("heightmap");
 		if(heightmap.length == 0)
 			heightmap = new int[256];
+		sluicedAmount = tag.getInteger("sluicedAmount");
 
 		lastSpringGen = tag.getInteger("lastSpringGen");
 	}
@@ -54,6 +56,7 @@ public class ChunkData
 		tag.setLong("lastVisited", lastVisited);
 		tag.setIntArray("heightmap", heightmap);
 		tag.setInteger("lastSpringGen", lastSpringGen);
+		tag.setInteger("sluicedAmount", sluicedAmount);
 		return tag;
 	}
 
