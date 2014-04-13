@@ -19,7 +19,7 @@ public class GuiSkills extends GuiContainerTFC
 	protected EntityPlayer player;
 	public GuiSkills(EntityPlayer player)
 	{
-		super(new ContainerSkills(), 176, 166);
+		super(new ContainerSkills(player), 176, 166);
 		this.setDrawInventory(false);
 		this.player = player;
 	}
