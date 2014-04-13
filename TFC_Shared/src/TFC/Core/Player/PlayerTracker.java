@@ -6,8 +6,6 @@ import java.io.IOException;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import TFC.Core.TFC_Core;
 import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.common.IPlayerTracker;
@@ -35,13 +33,12 @@ public class PlayerTracker implements IPlayerTracker
 	{
 		if(!player.worldObj.isRemote)
 		{
-			int foodLevel = (player.worldObj.rand.nextInt(25) + 35);
+			float foodLevel = (player.worldObj.rand.nextFloat() * 12) + 12;
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-			//foodstats.addStats(foodLevel - foodstats.getFoodLevel(), 0.0f);
+			foodstats.setFoodLevel(foodLevel);
 			TFC_Core.setPlayerFoodStats(player, foodstats);
 			player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1000);
 			player.setHealth(1000f * (0.25f + (player.worldObj.rand.nextFloat()*0.25f)));
-			player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*(player.worldObj.rand.nextInt(45)+45), 0));
 		}
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
 		if( pi.tempSkills != null)
