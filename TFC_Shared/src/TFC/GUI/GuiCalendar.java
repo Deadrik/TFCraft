@@ -70,13 +70,13 @@ public class GuiCalendar extends GuiScreen
 			buttonList.add(new GuiButton(4, guiLeft+85, guiTop + 137, 66, 20, StringUtil.localize("gui.Calendar.1Year")));
 		}
 
-		buttonList.add(new GuiInventoryButton(5, guiLeft+176, guiTop + 3, 25, 20, 
+		buttonList.add(new GuiInventoryButton(5, guiLeft+176, guiTop + 9, 25, 20, 
 				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
-		buttonList.add(new GuiInventoryButton(6, guiLeft+176, guiTop + 22, 25, 20, 
+		buttonList.add(new GuiInventoryButton(6, guiLeft+176, guiTop + 28, 25, 20, 
 				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
-		buttonList.add(new GuiInventoryButton(7, guiLeft+176, guiTop + 41, 25, 20, 
+		buttonList.add(new GuiInventoryButton(7, guiLeft+176, guiTop + 47, 25, 20, 
 				0, 86, 25, 20, StringUtil.localize("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
-		buttonList.add(new GuiInventoryButton(8, guiLeft+176, guiTop + 60, 25, 20, 
+		buttonList.add(new GuiInventoryButton(8, guiLeft+176, guiTop + 66, 25, 20, 
 				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Health"), TFC_Textures.GuiHealth));
 	}
 
@@ -89,12 +89,12 @@ public class GuiCalendar extends GuiScreen
 		TFC_Core.bindTexture(texture);
 
 		int var4 = this.guiLeft;
-		int var5 = this.guiTop;
+		int var5 = this.guiTop+6;
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int l = (width - xSize) / 2;
 		int i1 = (height - ySize) / 2;
-		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
+		drawTexturedModalRect(l, i1+6, 0, 0, xSize, ySize);
 
 		drawCenteredString(fontRenderer,StringUtil.localize("gui.Calendar.Calendar"), l+87, i1+16, 0xFFFFFF);
 		drawCenteredString(fontRenderer,StringUtil.localize("gui.Calendar.Season") + " : " + TFC_Time.seasons[TFC_Time.getSeasonAdjustedMonth((int)(player.posZ))], l + 87, i1+26, 0x000000);

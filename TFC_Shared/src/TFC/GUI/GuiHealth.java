@@ -9,6 +9,7 @@ import TFC.Containers.ContainerSkills;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Textures;
 import TFC.Core.Player.FoodStatsTFC;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Util.StringUtil;
 
 public class GuiHealth extends GuiContainerTFC
@@ -40,11 +41,11 @@ public class GuiHealth extends GuiContainerTFC
 		int h = (height - this.ySize) / 2;
 		FoodStatsTFC food = TFC_Core.getPlayerFoodStats(player);
 		int fr = (int)food.nutrFruit;
-		drawTexturedModalRect(w+55, h+14, 0, 106, (int)food.nutrFruit, 6);
-		drawTexturedModalRect(w+55, h+24, 0, 106, (int)food.nutrVeg, 6);
-		drawTexturedModalRect(w+55, h+34, 0, 106, (int)food.nutrGrain, 6);
-		drawTexturedModalRect(w+55, h+44, 0, 106, (int)food.nutrProtein, 6);
-		drawTexturedModalRect(w+55, h+54, 0, 106, (int)food.nutrDairy, 6);	
+		drawTexturedModalRect(w+55, h-20, 0, 106, (int)food.nutrFruit, 6);
+		drawTexturedModalRect(w+55, h-10, 0, 106, (int)food.nutrVeg, 6);
+		drawTexturedModalRect(w+55, h, 0, 106, (int)food.nutrGrain, 6);
+		drawTexturedModalRect(w+55, h+10, 0, 106, (int)food.nutrProtein, 6);
+		drawTexturedModalRect(w+55, h+20, 0, 106, (int)food.nutrDairy, 6);	
 	}
 
 	@Override
@@ -54,14 +55,28 @@ public class GuiHealth extends GuiContainerTFC
 		this.guiLeft = (this.width - this.xSize) / 2;
 		this.guiTop = (this.height - this.ySize) / 2;
 		buttonList.clear();
-		buttonList.add(new GuiInventoryButton(0, guiLeft+176, guiTop + 3, 25, 20, 
+		buttonList.add(new GuiInventoryButton(0, guiLeft+176, guiTop-31, 25, 20, 
 				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Inventory"), TFC_Textures.GuiInventory));
-		buttonList.add(new GuiInventoryButton(1, guiLeft+176, guiTop + 22, 25, 20, 
+		buttonList.add(new GuiInventoryButton(1, guiLeft+176, guiTop-12, 25, 20, 
 				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Skills"), TFC_Textures.GuiSkills));
-		buttonList.add(new GuiInventoryButton(2, guiLeft+176, guiTop + 41, 25, 20, 
+		buttonList.add(new GuiInventoryButton(2, guiLeft+176, guiTop+7, 25, 20, 
 				0, 86, 25, 20, StringUtil.localize("gui.Calendar.Calendar"), TFC_Textures.GuiCalendar));
-		buttonList.add(new GuiInventoryButton(3, guiLeft+176, guiTop + 60, 25, 20, 
+		buttonList.add(new GuiInventoryButton(3, guiLeft+176, guiTop+26, 25, 20, 
 				0, 86, 25, 20, StringUtil.localize("gui.Inventory.Health"), TFC_Textures.GuiHealth));
+	}
+	
+	@Override
+	protected void drawGui(ResourceLocation rl)
+	{
+		if(rl != null)
+		{
+			bindTexture(rl);
+			guiLeft = (width - xSize) / 2;
+			guiTop = ((height - ySize) / 2)-34;
+			drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		}
+		if(drawInventory)
+			PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 	}
 
 	@Override
