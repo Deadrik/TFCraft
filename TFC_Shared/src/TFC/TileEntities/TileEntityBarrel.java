@@ -22,6 +22,7 @@ import TFC.API.TFCOptions;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.Util.StringUtil;
+import TFC.Food.ItemFoodTFC;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
 
@@ -107,42 +108,42 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					itemstack=null;
 				Type = 3;
 			}
-			else if(itemstack.getItem() == TFCItems.BarleyGrain){
-				itemstack.stackSize--;
-				if(itemstack.stackSize ==0)
-					itemstack=null;
-				Type = 5;
-			}
-			else if((itemstack.getItem() == TFCItems.RedApple||itemstack.getItem()==TFCItems.GreenApple)){
-				itemstack.stackSize--;
-				if(itemstack.stackSize ==0)
-					itemstack=null;
-				Type = 6;
-			}
-			else if(itemstack.getItem() == TFCItems.Potato){
-				itemstack.stackSize--;
-				if(itemstack.stackSize ==0)
-					itemstack=null;
-				Type = 7;
-			}
-			else if(itemstack.getItem() == TFCItems.WheatGrain){
-				itemstack.stackSize--;
-				if(itemstack.stackSize ==0)
-					itemstack=null;
-				Type = 8;
-			}
-			else if(itemstack.getItem() == TFCItems.RyeGrain){
-				itemstack.stackSize--;
-				if(itemstack.stackSize ==0)
-					itemstack=null;
-				Type = 9;
-			}
-			else if(itemstack.getItem() == TFCItems.RiceGrain){
-				itemstack.stackSize--;
-				if(itemstack.stackSize ==0)
-					itemstack=null;
-				Type = 10;
-			}
+//			else if(itemstack.getItem() == TFCItems.BarleyGrain){
+//				itemstack.stackSize--;
+//				if(itemstack.stackSize ==0)
+//					itemstack=null;
+//				Type = 5;
+//			}
+//			else if((itemstack.getItem() == TFCItems.RedApple||itemstack.getItem()==TFCItems.GreenApple)){
+//				itemstack.stackSize--;
+//				if(itemstack.stackSize ==0)
+//					itemstack=null;
+//				Type = 6;
+//			}
+//			else if(itemstack.getItem() == TFCItems.Potato){
+//				itemstack.stackSize--;
+//				if(itemstack.stackSize ==0)
+//					itemstack=null;
+//				Type = 7;
+//			}
+//			else if(itemstack.getItem() == TFCItems.WheatGrain){
+//				itemstack.stackSize--;
+//				if(itemstack.stackSize ==0)
+//					itemstack=null;
+//				Type = 8;
+//			}
+//			else if(itemstack.getItem() == TFCItems.RyeGrain){
+//				itemstack.stackSize--;
+//				if(itemstack.stackSize ==0)
+//					itemstack=null;
+//				Type = 9;
+//			}
+//			else if(itemstack.getItem() == TFCItems.RiceGrain){
+//				itemstack.stackSize--;
+//				if(itemstack.stackSize ==0)
+//					itemstack=null;
+//				Type = 10;
+//			}
 			else if(itemstack.getItem() == Item.sugar){
 				itemstack.stackSize--;
 				if(itemstack.stackSize ==0)
@@ -188,14 +189,15 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			Type = 12;
 		else if(itemstack == null && Type == 14)
 		{
-			itemstack2 = new ItemStack(TFCItems.Cheese,0,0);
+			itemstack2 = new ItemStack(TFCItems.Cheese);
+			float cheeseWeight = 0.00f;
 			while(liquidLevel >= 32)
 			{
 				liquidLevel-=32;
-				itemstack2.stackSize++;
+				cheeseWeight += 20;
 			}
-			if(itemstack2.stackSize > 0)
-				output = itemstack2;
+			ItemFoodTFC.createTag(itemstack2, cheeseWeight, -24.0f);
+			output = itemstack2;
 		}
 		if (liquidLevel == 0)
 			Type = 0;
