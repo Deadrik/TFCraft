@@ -5,10 +5,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
@@ -132,7 +129,7 @@ public class TFCProvider extends WorldProvider
 			if (var9 == 1000)
 				break;
 		}
-		
+
 		WorldInfo info = worldObj.getWorldInfo();
 		info.setSpawnPosition(var6, this.worldObj.getHeightValue(var6, var8), var8);
 		return new ChunkCoordinates(var6, this.worldObj.getHeightValue(var6, var8), var8);
@@ -152,13 +149,14 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public boolean canBlockFreeze(int x, int y, int z, boolean byWater)
 	{
+		TileEntity te = (worldObj.getBlockTileEntity(x, y, z));
+		int id = worldObj.getBlockId(x,y,z);
+		int meta = worldObj.getBlockMetadata(x, y, z);
 		if (TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
 		{
 			Material mat = worldObj.getBlockMaterial(x, y, z);
-			int id = worldObj.getBlockId(x,y,z);
-			int meta = worldObj.getBlockMetadata(x, y, z);
 			boolean salty = TFC_Core.isSaltWaterIncludeIce(id,meta,mat);
-			TileEntity te = (worldObj.getBlockTileEntity(x, y, z));
+
 			if(te!=null && te instanceof TESeaWeed){
 				//in case the block is salty sea grass, we don't want that to freeze when it's too warm
 				salty = salty || (((TESeaWeed)te).getType()!=1 && ((TESeaWeed)te).getType()!=2);
@@ -168,39 +166,54 @@ public class TFCProvider extends WorldProvider
 			}
 			if((mat == Material.water || mat == Material.ice) && !salty){
 
-				if(id == TFCBlocks.FreshWaterStill.blockID || id == TFCBlocks.FreshWaterFlowing.blockID){
-					worldObj.setBlock(x, y, z, Block.ice.blockID,1,2);
+				if(id == TFCBlocks.FreshWaterStill.blockID && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
+				{
+					worldObj.setBlock(x, y, z, Block.ice.blockID,1,3);
 				}
-				else if(id == Block.waterStill.blockID || id == Block.waterMoving.blockID){
-					worldObj.setBlock(x, y, z, Block.ice.blockID,0,2);
-				}
-				else if(id == Block.ice.blockID || id == TFCBlocks.SeaGrassFrozen.blockID){
-					worldObj.setBlock(x, y, z, id,meta,1);
-					te = (worldObj.getBlockTileEntity(x, y, z));
-					if(te!=null){
-						((TESeaWeed)te).setType(meta);
-					}
+				else if(id == Block.waterStill.blockID && meta == 0/* || id == Block.waterMoving.blockID*/)
+				{
+					worldObj.setBlock(x, y, z, Block.ice.blockID,0,3);
 				}
 				else if(id == TFCBlocks.SeaGrassStill.blockID || id == TFCBlocks.SeaGrassFlowing.blockID){
 					int type = -1;
 					if(te !=null){
 						type = ((TESeaWeed)te).getType();
 					}
-					worldObj.setBlock(x, y, z, TFCBlocks.SeaGrassFrozen.blockID,type,2);
-					te = ((TESeaWeed)(worldObj.getBlockTileEntity(x,y,z)));
+					worldObj.setBlock(x, y, z, TFCBlocks.SeaGrassFrozen.blockID,type,3);
+					te = ((worldObj.getBlockTileEntity(x,y,z)));
 					if(te!=null){
 						((TESeaWeed)te).setType(type);
 					}
 				}
-				else{
-					worldObj.setBlock(x, y, z, Block.ice.blockID,0,2);
-				}
 			}
 			return false;//(mat == Material.water) && !salty;
+		}
+		else
+		{
+			if(id == Block.ice.blockID)
+			{
+				if((meta & 1) == 0)
+				{
+					worldObj.setBlock(x, y, z, Block.waterStill.blockID,0,3);
+				}
+				else if((meta & 1) == 1)
+				{
+					worldObj.setBlock(x, y, z, TFCBlocks.FreshWaterStill.blockID,0,3);
+				}
+				else if(id == TFCBlocks.SeaGrassFrozen.blockID)
+				{
+					worldObj.setBlock(x, y, z, id,meta,3);
+					te = (worldObj.getBlockTileEntity(x, y, z));
+					if(te!=null){
+						((TESeaWeed)te).setType(meta);
+					}
+				}
+			}
 		}
 
 		return false;
 	}
+
 	//We use this in place of the vanilla method, for the vanilla, it allows us to stop it from doing things we don't like.
 	public boolean canBlockFreezeTFC(int x, int y, int z, boolean byWater)
 	{

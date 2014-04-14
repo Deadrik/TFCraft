@@ -5,7 +5,6 @@ import static net.minecraftforge.common.ForgeDirection.UP;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockFluid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -20,7 +19,7 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
-import TFC.TileEntities.TESeaWeed;
+import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCProvider;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -29,6 +28,35 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class BlockCustomFluid extends Block
 {
+	protected BlockCustomFluid(int par1, Material par2Material)
+	{
+		super(par1, par2Material);
+		float f = 0.0F;
+		float f1 = 0.0F;
+		this.setBlockBounds(0.0F + f1, 0.0F + f, 0.0F + f1, 1.0F + f1, 1.0F + f, 1.0F + f1);
+		this.setTickRandomly(true);
+	}
+
+	/**
+	 * Ticks the block if it's been scheduled
+	 */
+	@Override
+	public void updateTick(World world, int i, int j, int k, Random rand)
+	{
+		if((world.provider) instanceof TFCProvider){
+			if (((TFCProvider)(world.provider)).canBlockFreezeTFC(i, j, k, false))
+			{
+				setFreezeBlock(world,i,j,k,rand);
+			}
+		}
+	}
+
+	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
+		Material mat = world.getBlockMaterial(i,j,k);
+		if(mat == Material.water){
+			world.setBlock(i,j,k, Block.ice.blockID);
+		}
+	}
 
 	@SideOnly(Side.CLIENT)
 	public Icon[] theIcon;
@@ -193,41 +221,10 @@ public abstract class BlockCustomFluid extends Block
 		return var5 > var6 ? var5 : var6;
 	}
 
-	/**
-	 * Ticks the block if it's been scheduled
-	 */
-	@Override
-	public void updateTick(World world, int i, int j, int k, Random rand)
-	{
-		super.updateTick(world, i, j, k, rand);
-		if((world.provider) instanceof TFCProvider){
-			if (((TFCProvider)(world.provider)).canBlockFreezeTFC(i, j, k, false))
-			{
-				//setFreezeBlock(world,i,j,k,rand);
-			}
-		}
-	}
-	
-	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
-		Material mat = world.getBlockMaterial(i,j,k);
-		if(mat == Material.water){
-			world.setBlock(i,j,k, Block.ice.blockID);
-		}
-	}
-
 	@Override
 	public void breakBlock(World world, int i, int j, int k, int id, int l)
 	{
 		super.breakBlock(world, i, j, k, id, l);
-	}
-
-	protected BlockCustomFluid(int par1, Material par2Material)
-	{
-		super(par1, par2Material);
-		float f = 0.0F;
-		float f1 = 0.0F;
-		this.setBlockBounds(0.0F + f1, 0.0F + f, 0.0F + f1, 1.0F + f1, 1.0F + f, 1.0F + f1);
-		this.setTickRandomly(true);
 	}
 
 	@Override
@@ -333,67 +330,67 @@ public abstract class BlockCustomFluid extends Block
 	{
 		return 0;
 	}
-	
+
 	@Override
 	/**
-     * Determines if this block can support the passed in plant, allowing it to be planted and grow.
-     * Some examples:
-     *   Reeds check if its a reed, or if its sand/dirt/grass and adjacent to water
-     *   Cacti checks if its a cacti, or if its sand
-     *   Nether types check for soul sand
-     *   Crops check for tilled soil
-     *   Caves check if it's a colid surface
-     *   Plains check if its grass or dirt
-     *   Water check if its still water
-     *
-     * @param world The current world
-     * @param x X Position
-     * @param y Y Position
-     * @param z Z position
-     * @param direction The direction relative to the given position the plant wants to be, typically its UP
-     * @param plant The plant that wants to check
-     * @return True to allow the plant to be planted/stay.
-     */
-    public boolean canSustainPlant(World world, int x, int y, int z, ForgeDirection direction, IPlantable plant)
-    {
-        int plantID = plant.getPlantID(world, x, y + 1, z);
-        EnumPlantType plantType = plant.getPlantType(world, x, y + 1, z);
-        int meta = world.getBlockMetadata(x,y,z);
+	 * Determines if this block can support the passed in plant, allowing it to be planted and grow.
+	 * Some examples:
+	 *   Reeds check if its a reed, or if its sand/dirt/grass and adjacent to water
+	 *   Cacti checks if its a cacti, or if its sand
+	 *   Nether types check for soul sand
+	 *   Crops check for tilled soil
+	 *   Caves check if it's a colid surface
+	 *   Plains check if its grass or dirt
+	 *   Water check if its still water
+	 *
+	 * @param world The current world
+	 * @param x X Position
+	 * @param y Y Position
+	 * @param z Z position
+	 * @param direction The direction relative to the given position the plant wants to be, typically its UP
+	 * @param plant The plant that wants to check
+	 * @return True to allow the plant to be planted/stay.
+	 */
+	public boolean canSustainPlant(World world, int x, int y, int z, ForgeDirection direction, IPlantable plant)
+	{
+		int plantID = plant.getPlantID(world, x, y + 1, z);
+		EnumPlantType plantType = plant.getPlantType(world, x, y + 1, z);
+		int meta = world.getBlockMetadata(x,y,z);
 
-        if (plantID == cactus.blockID && blockID == cactus.blockID)
-        {
-            return true;
-        }
+		if (plantID == cactus.blockID && blockID == cactus.blockID)
+		{
+			return true;
+		}
 
-        if (plantID == reed.blockID && blockID == reed.blockID)
-        {
-            return true;
-        }
+		if (plantID == reed.blockID && blockID == reed.blockID)
+		{
+			return true;
+		}
 
-        if (plant instanceof BlockCustomLilyPad && ((BlockCustomLilyPad)plant).canThisPlantGrowOnThisBlockID(blockID,meta))
-        {
-            return true;
-        }
+		if (plant instanceof BlockCustomLilyPad && ((BlockCustomLilyPad)plant).canThisPlantGrowOnThisBlockID(blockID,meta))
+		{
+			return true;
+		}
 
-        switch (plantType)
-        {
-            case Desert: return blockID == sand.blockID;
-            case Nether: return blockID == slowSand.blockID;
-            case Crop:   return blockID == tilledField.blockID;
-            case Cave:   return isBlockSolidOnSide(world, x, y, z, UP);
-            case Plains: return blockID == grass.blockID || blockID == dirt.blockID;
-            case Water:  return world.getBlockMaterial(x, y, z) == Material.water && world.getBlockMetadata(x, y, z) == 0;
-            case Beach:
-                boolean isBeach = (blockID == Block.grass.blockID || blockID == Block.dirt.blockID || blockID == Block.sand.blockID);
-                boolean hasWater = (world.getBlockMaterial(x - 1, y, z    ) == Material.water ||
-                                    world.getBlockMaterial(x + 1, y, z    ) == Material.water ||
-                                    world.getBlockMaterial(x,     y, z - 1) == Material.water ||
-                                    world.getBlockMaterial(x,     y, z + 1) == Material.water);
-                return isBeach && hasWater;
-        }
+		switch (plantType)
+		{
+		case Desert: return blockID == sand.blockID;
+		case Nether: return blockID == slowSand.blockID;
+		case Crop:   return blockID == tilledField.blockID;
+		case Cave:   return isBlockSolidOnSide(world, x, y, z, UP);
+		case Plains: return blockID == grass.blockID || blockID == dirt.blockID;
+		case Water:  return world.getBlockMaterial(x, y, z) == Material.water && world.getBlockMetadata(x, y, z) == 0;
+		case Beach:
+			boolean isBeach = TFC_Core.isGround(blockID);
+			boolean hasWater = (world.getBlockMaterial(x - 1, y, z    ) == Material.water ||
+					world.getBlockMaterial(x + 1, y, z    ) == Material.water ||
+					world.getBlockMaterial(x,     y, z - 1) == Material.water ||
+					world.getBlockMaterial(x,     y, z + 1) == Material.water);
+			return isBeach && hasWater;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
 	/**
 	 * Returns the quantity of items to drop on block destruction.

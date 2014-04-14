@@ -2,16 +2,14 @@ package TFC.Blocks.Terrain;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.Vanilla.BlockCustomFlowing;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFreshWaterFlowing extends BlockCustomFlowing
 {
@@ -19,7 +17,7 @@ public class BlockFreshWaterFlowing extends BlockCustomFlowing
 	{
 		super(par1, Material.water);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	/**
@@ -33,7 +31,7 @@ public class BlockFreshWaterFlowing extends BlockCustomFlowing
 		else
 			return TerraFirmaCraft.proxy.waterColorMultiplier(par1IBlockAccess, par2, par3, par4);
 	}
-	
+
 	@Override
 	public void breakBlock(World world, int i, int j, int k, int id, int l)
 	{
@@ -41,17 +39,17 @@ public class BlockFreshWaterFlowing extends BlockCustomFlowing
 		int blockID = world.getBlockId(i,j,k);
 		super.breakBlock(world, i, j, k, id, l);
 		if(blockID == Block.ice.blockID){
-				//world.setBlockMetadataWithNotify(i,j,k,1,1);
-				//world.setBlockToAir(i, j, k);
+			//world.setBlockMetadataWithNotify(i,j,k,1,1);
+			//world.setBlockToAir(i, j, k);
 		}
 
 	}
-	
+
 	@Override
 	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
 		Material mat = world.getBlockMaterial(i,j,k);
-		if(mat == Material.water){
+		/*if(mat == Material.water){
 			world.setBlock(i,j,k, Block.ice.blockID,1,1);
-		}
+		}*/
 	}
 }

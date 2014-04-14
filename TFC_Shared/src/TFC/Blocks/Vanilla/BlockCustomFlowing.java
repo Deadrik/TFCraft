@@ -2,10 +2,7 @@ package TFC.Blocks.Vanilla;
 
 import java.util.Random;
 
-import TFC.Blocks.Flora.BlockTallSeaGrassFlowing;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlowing;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
@@ -35,6 +32,14 @@ public class BlockCustomFlowing extends BlockCustomFluid
 	public BlockCustomFlowing(int par1, Material par2Material)
 	{
 		super(par1, par2Material);
+	}
+
+	@Override
+	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
+		Material mat = world.getBlockMaterial(i,j,k);
+		if(mat == Material.water){
+			//world.setBlock(i,j,k, Block.ice.blockID);
+		}
 	}
 
 	@Override
