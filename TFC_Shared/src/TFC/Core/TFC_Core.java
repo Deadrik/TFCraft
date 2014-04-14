@@ -613,7 +613,7 @@ public class TFC_Core
 
 	public static int getTypeForDirtFromGrass(int inID)
 	{
-		if (inID == TFCBlocks.Grass.blockID)
+		if (inID == TFCBlocks.Grass.blockID || inID == TFCBlocks.DryGrass.blockID)
 			return TFCBlocks.Dirt.blockID;
 		return TFCBlocks.Dirt2.blockID;
 	}
