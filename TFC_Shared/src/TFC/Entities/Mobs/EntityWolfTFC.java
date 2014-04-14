@@ -336,7 +336,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);
 
-		this.entityDropItem(new ItemStack(TFCItems.Hide.itemID,1,(int)(size_mod*ageMod*0.9)),0);
+		this.entityDropItem(new ItemStack(TFCItems.Hide.itemID,1,Math.max(0,Math.min(2,(int)(size_mod*ageMod*0.9))),0);
 		this.dropItem(Item.bone.itemID, (int)((rand.nextInt(3)+1)*ageMod));
 	}
 
