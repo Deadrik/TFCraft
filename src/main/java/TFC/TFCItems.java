@@ -2,6 +2,7 @@ package TFC;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -1067,21 +1068,21 @@ public class TFCItems
 		GemDiamond = new ItemGem().setUnlocalizedName("Diamond");
 
 		//Tools
-		IgInShovel = new ItemCustomShovel(IgInToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(IgInStoneUses);
-		IgInAxe = new ItemCustomAxe(IgInToolMaterial, 60).setUnlocalizedName("Stone Axe").setMaxDamage(IgInStoneUses);
-		IgInHoe = new ItemCustomHoe(IgInToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(IgInStoneUses);
+		IgInShovel = new ItemCustomShovel(IgInToolMaterial).setUnlocalizedName("IgIn Stone Shovel").setMaxDamage(IgInStoneUses);
+		IgInAxe = new ItemCustomAxe(IgInToolMaterial, 60).setUnlocalizedName("IgIn Stone Axe").setMaxDamage(IgInStoneUses);
+		IgInHoe = new ItemCustomHoe(IgInToolMaterial).setUnlocalizedName("IgIn Stone Hoe").setMaxDamage(IgInStoneUses);
 
-		SedShovel= new ItemCustomShovel(SedToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(SedStoneUses);
-		SedAxe = new ItemCustomAxe(SedToolMaterial, 60).setUnlocalizedName("Stone Axe").setMaxDamage(SedStoneUses);
-		SedHoe = new ItemCustomHoe(SedToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(SedStoneUses);
+		SedShovel= new ItemCustomShovel(SedToolMaterial).setUnlocalizedName("Sed Stone Shovel").setMaxDamage(SedStoneUses);
+		SedAxe = new ItemCustomAxe(SedToolMaterial, 60).setUnlocalizedName("Sed Stone Axe").setMaxDamage(SedStoneUses);
+		SedHoe = new ItemCustomHoe(SedToolMaterial).setUnlocalizedName("Sed Stone Hoe").setMaxDamage(SedStoneUses);
 
-		IgExShovel= new ItemCustomShovel(IgExToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(IgExStoneUses);
-		IgExAxe = new ItemCustomAxe(IgExToolMaterial, 60).setUnlocalizedName("Stone Axe").setMaxDamage(IgExStoneUses);
-		IgExHoe = new ItemCustomHoe(IgExToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(IgExStoneUses);
+		IgExShovel= new ItemCustomShovel(IgExToolMaterial).setUnlocalizedName("IgEx Stone Shovel").setMaxDamage(IgExStoneUses);
+		IgExAxe = new ItemCustomAxe(IgExToolMaterial, 60).setUnlocalizedName("IgEx Stone Axe").setMaxDamage(IgExStoneUses);
+		IgExHoe = new ItemCustomHoe(IgExToolMaterial).setUnlocalizedName("IgEx Stone Hoe").setMaxDamage(IgExStoneUses);
 
-		MMShovel = new ItemCustomShovel(MMToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(MMStoneUses);
-		MMAxe = new ItemCustomAxe(MMToolMaterial, 60).setUnlocalizedName("Stone Axe").setMaxDamage(MMStoneUses);
-		MMHoe = new ItemCustomHoe(MMToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(MMStoneUses);
+		MMShovel = new ItemCustomShovel(MMToolMaterial).setUnlocalizedName("MM Stone Shovel").setMaxDamage(MMStoneUses);
+		MMAxe = new ItemCustomAxe(MMToolMaterial, 60).setUnlocalizedName("MM Stone Axe").setMaxDamage(MMStoneUses);
+		MMHoe = new ItemCustomHoe(MMToolMaterial).setUnlocalizedName("MM Stone Hoe").setMaxDamage(MMStoneUses);
 
 		BismuthBronzePick = new ItemCustomPickaxe(BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Pick").setMaxDamage(BismuthBronzeUses);
 		BismuthBronzeShovel = new ItemCustomShovel(BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Shovel").setMaxDamage(BismuthBronzeUses);
@@ -1181,10 +1182,10 @@ public class TFCItems
 		Logs = new ItemLogs().setUnlocalizedName("Log");
 
 		//javelins
-		IgInStoneJavelin = new ItemJavelin(IgInToolMaterial, 60).setUnlocalizedName("Stone Javelin");
-		SedStoneJavelin = new ItemJavelin(SedToolMaterial, 60).setUnlocalizedName("Stone Javelin");
-		IgExStoneJavelin = new ItemJavelin(IgExToolMaterial, 60).setUnlocalizedName("Stone Javelin");
-		MMStoneJavelin = new ItemJavelin(MMToolMaterial, 60).setUnlocalizedName("Stone Javelin");
+		IgInStoneJavelin = new ItemJavelin(IgInToolMaterial, 60).setUnlocalizedName("IgIn Stone Javelin");
+		SedStoneJavelin = new ItemJavelin(SedToolMaterial, 60).setUnlocalizedName("Sed Stone Javelin");
+		IgExStoneJavelin = new ItemJavelin(IgExToolMaterial, 60).setUnlocalizedName("IgEx Stone Javelin");
+		MMStoneJavelin = new ItemJavelin(MMToolMaterial, 60).setUnlocalizedName("MM Stone Javelin");
 		CopperJavelin = new ItemJavelin(CopperToolMaterial, 80).setUnlocalizedName("Copper Javelin");
 		BismuthBronzeJavelin = new ItemJavelin(BismuthBronzeToolMaterial, 90).setUnlocalizedName("Bismuth Bronze Javelin");
 		BronzeJavelin = new ItemJavelin(BronzeToolMaterial, 100).setUnlocalizedName("Bronze Javelin");
@@ -1196,10 +1197,10 @@ public class TFCItems
 		RedSteelJavelin = new ItemJavelin(RedSteelToolMaterial, 240).setUnlocalizedName("Red Steel Javelin");
 
 		//javelin heads
-		IgInStoneJavelinHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("Stone Javelin Head");
-		SedStoneJavelinHead = new ItemMiscToolHead(SedToolMaterial).setUnlocalizedName("Stone Javelin Head");
-		IgExStoneJavelinHead = new ItemMiscToolHead(IgExToolMaterial).setUnlocalizedName("Stone Javelin Head");
-		MMStoneJavelinHead = new ItemMiscToolHead(MMToolMaterial).setUnlocalizedName("Stone Javelin Head");
+		IgInStoneJavelinHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("IgIn Stone Javelin Head");
+		SedStoneJavelinHead = new ItemMiscToolHead(SedToolMaterial).setUnlocalizedName("Sed Stone Javelin Head");
+		IgExStoneJavelinHead = new ItemMiscToolHead(IgExToolMaterial).setUnlocalizedName("IgEx Stone Javelin Head");
+		MMStoneJavelinHead = new ItemMiscToolHead(MMToolMaterial).setUnlocalizedName("MM Stone Javelin Head");
 		CopperJavelinHead = new ItemMiscToolHead().setUnlocalizedName("Copper Javelin Head");
 		BismuthBronzeJavelinHead = new ItemMiscToolHead().setUnlocalizedName("Bismuth Bronze Javelin Head");
 		BronzeJavelinHead = new ItemMiscToolHead().setUnlocalizedName("Bronze Javelin Head");
@@ -1411,20 +1412,20 @@ public class TFCItems
 		FlatRock = (new ItemFlatGeneric().setFolder("rocks/flatrocks/").setMetaNames(Global.STONE_ALL).setUnlocalizedName("FlatRock"));
 		LooseRock = (new ItemLooseRock().setSpecialCraftingType(FlatRock).setFolder("rocks/").setMetaNames(Global.STONE_ALL).setUnlocalizedName("LooseRock"));
 
-		IgInStoneShovelHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("Stone Shovel Head");
-		SedStoneShovelHead = new ItemMiscToolHead(SedToolMaterial).setUnlocalizedName("Stone Shovel Head");
-		IgExStoneShovelHead = new ItemMiscToolHead(IgExToolMaterial).setUnlocalizedName("Stone Shovel Head");
-		MMStoneShovelHead = new ItemMiscToolHead(MMToolMaterial).setUnlocalizedName("Stone Shovel Head");
+		IgInStoneShovelHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("IgIn Stone Shovel Head");
+		SedStoneShovelHead = new ItemMiscToolHead(SedToolMaterial).setUnlocalizedName("Sed Stone Shovel Head");
+		IgExStoneShovelHead = new ItemMiscToolHead(IgExToolMaterial).setUnlocalizedName("IgEx Stone Shovel Head");
+		MMStoneShovelHead = new ItemMiscToolHead(MMToolMaterial).setUnlocalizedName("MM Stone Shovel Head");
 
-		IgInStoneAxeHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("Stone Axe Head");
-		SedStoneAxeHead = new ItemMiscToolHead(SedToolMaterial).setUnlocalizedName("Stone Axe Head");
-		IgExStoneAxeHead = new ItemMiscToolHead(IgExToolMaterial).setUnlocalizedName("Stone Axe Head");
-		MMStoneAxeHead = new ItemMiscToolHead(MMToolMaterial).setUnlocalizedName("Stone Axe Head");
+		IgInStoneAxeHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("IgIn Stone Axe Head");
+		SedStoneAxeHead = new ItemMiscToolHead(SedToolMaterial).setUnlocalizedName("Sed Stone Axe Head");
+		IgExStoneAxeHead = new ItemMiscToolHead(IgExToolMaterial).setUnlocalizedName("IgEx Stone Axe Head");
+		MMStoneAxeHead = new ItemMiscToolHead(MMToolMaterial).setUnlocalizedName("MM Stone Axe Head");
 
-		IgInStoneHoeHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("Stone Hoe Head");
-		SedStoneHoeHead = new ItemMiscToolHead(SedToolMaterial).setUnlocalizedName("Stone Hoe Head");
-		IgExStoneHoeHead = new ItemMiscToolHead(IgExToolMaterial).setUnlocalizedName("Stone Hoe Head");
-		MMStoneHoeHead = new ItemMiscToolHead(MMToolMaterial).setUnlocalizedName("Stone Hoe Head");
+		IgInStoneHoeHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("IgIn Stone Hoe Head");
+		SedStoneHoeHead = new ItemMiscToolHead(SedToolMaterial).setUnlocalizedName("Sed Stone Hoe Head");
+		IgExStoneHoeHead = new ItemMiscToolHead(IgExToolMaterial).setUnlocalizedName("IgEx Stone Hoe Head");
+		MMStoneHoeHead = new ItemMiscToolHead(MMToolMaterial).setUnlocalizedName("MM Stone Hoe Head");
 
 		StoneKnifeHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("Stone Knife Blade");
 		StoneHammerHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("Stone Hammer Head");
@@ -1475,7 +1476,7 @@ public class TFCItems
 		WoolCloth = new ItemTerra().setUnlocalizedName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
 		Spindle = new ItemSpindle().setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCMaterials).setCreativeTab(TFCTabs.TFCTools);
 
-		SpindleHead = new ItemPotteryBase().setMetaNames(new String[]{"Clay Spindle", "Spindle Head"}).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCUnfinished);
+		SpindleHead = new ItemPotteryBase().setMetaNames(new String[]{"Clay Spindle", "Spindle Head"}).setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCUnfinished);
 		StoneBrick = (new ItemStoneBrick().setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
 		Mortar = new ItemTerra().setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
 		Limewater = new ItemCustomBucket(2).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
@@ -1490,14 +1491,14 @@ public class TFCItems
 		TerraLeather = new ItemLeather().setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather");
 
 		Straw = new ItemTerra().setFolder("plants/").setUnlocalizedName("Straw").setCreativeTab(TFCTabs.TFCMaterials);
-		FlatClay = (new ItemFlatGeneric().setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName("clay"));
+		FlatClay = (new ItemFlatGeneric().setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName("Flat Clay"));
 
 		PotteryJug = new ItemPotteryJug().setUnlocalizedName("Jug");
 		PotterySmallVessel = new ItemPotterySmallVessel().setUnlocalizedName("Small Vessel");
 		PotteryLargeVessel = new ItemPotteryLargeVessel().setUnlocalizedName("Large Vessel");
 		PotteryPot = new ItemPotteryPot().setUnlocalizedName("Pot");
 		CeramicMold = new ItemPotteryBase().setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.clay_ball), "clay", new ItemClay().setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1)).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("clay"));
+		Item.itemRegistry.addObject(Item.getIdFromItem(Items.clay_ball), "clay", new ItemClay().setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1)).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("Clay"));
 		FireBrick = new ItemPotteryBase().setMetaNames(new String[]{"Clay Fire Brick","Fire Brick"}).setUnlocalizedName("Fire Brick");
 
 		ClayMoldAxe = new ItemPotteryMold().setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
@@ -1607,6 +1608,7 @@ public class TFCItems
 
 		registerMetals();
 
+		registerItems();
 		System.out.println(new StringBuilder().append("[TFC] Done Loading Items").toString());
 	}
 
@@ -2038,4 +2040,532 @@ public class TFCItems
 	}
 
 	public static Item[] Meals;
+
+	public static void registerItems()
+	{
+		System.out.println(new StringBuilder().append("[TFC] Registering Items").toString());
+//		GameRegistry.registerItem(minecartCrate, minecartCrate.getUnlocalizedName());
+		GameRegistry.registerItem(GoldPan, GoldPan.getUnlocalizedName());
+		GameRegistry.registerItem(SluiceItem, SluiceItem.getUnlocalizedName());
+
+		GameRegistry.registerItem(ProPickBismuthBronze, ProPickBismuthBronze.getUnlocalizedName());
+		GameRegistry.registerItem(ProPickBlackBronze, ProPickBlackBronze.getUnlocalizedName());
+		GameRegistry.registerItem(ProPickBlackSteel, ProPickBlackSteel.getUnlocalizedName());
+		GameRegistry.registerItem(ProPickBlueSteel, ProPickBlueSteel.getUnlocalizedName());
+		GameRegistry.registerItem(ProPickBronze, ProPickBronze.getUnlocalizedName());
+		GameRegistry.registerItem(ProPickCopper, ProPickCopper.getUnlocalizedName());
+		GameRegistry.registerItem(ProPickIron, ProPickIron.getUnlocalizedName());
+		GameRegistry.registerItem(ProPickRedSteel, ProPickRedSteel.getUnlocalizedName());
+		GameRegistry.registerItem(ProPickSteel, ProPickSteel.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthIngot, BismuthIngot.getUnlocalizedName());
+		GameRegistry.registerItem(BismuthBronzeIngot, BismuthBronzeIngot.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeIngot, BlackBronzeIngot.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelIngot, BlackSteelIngot.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelIngot, BlueSteelIngot.getUnlocalizedName());
+		GameRegistry.registerItem(BrassIngot, BrassIngot.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeIngot, BronzeIngot.getUnlocalizedName());
+		GameRegistry.registerItem(CopperIngot, CopperIngot.getUnlocalizedName());
+		GameRegistry.registerItem(GoldIngot, GoldIngot.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronIngot, WroughtIronIngot.getUnlocalizedName());
+		GameRegistry.registerItem(LeadIngot, LeadIngot.getUnlocalizedName());
+		GameRegistry.registerItem(NickelIngot, NickelIngot.getUnlocalizedName());
+		GameRegistry.registerItem(PigIronIngot, PigIronIngot.getUnlocalizedName());
+		GameRegistry.registerItem(PlatinumIngot, PlatinumIngot.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelIngot, RedSteelIngot.getUnlocalizedName());
+		GameRegistry.registerItem(RoseGoldIngot, RoseGoldIngot.getUnlocalizedName());
+		GameRegistry.registerItem(SilverIngot, SilverIngot.getUnlocalizedName());
+		GameRegistry.registerItem(SteelIngot, SteelIngot.getUnlocalizedName());
+		GameRegistry.registerItem(SterlingSilverIngot, SterlingSilverIngot.getUnlocalizedName());
+		GameRegistry.registerItem(TinIngot, TinIngot.getUnlocalizedName());
+		GameRegistry.registerItem(ZincIngot, ZincIngot.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthIngot2x, BismuthIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(BismuthBronzeIngot2x, BismuthBronzeIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeIngot2x, BlackBronzeIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelIngot2x, BlackSteelIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelIngot2x, BlueSteelIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(BrassIngot2x, BrassIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeIngot2x, BronzeIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(CopperIngot2x, CopperIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(GoldIngot2x, GoldIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronIngot2x, WroughtIronIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(LeadIngot2x, LeadIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(NickelIngot2x, NickelIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(PigIronIngot2x, PigIronIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(PlatinumIngot2x, PlatinumIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelIngot2x, RedSteelIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(RoseGoldIngot2x, RoseGoldIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(SilverIngot2x, SilverIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(SteelIngot2x, SteelIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(SterlingSilverIngot2x, SterlingSilverIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(TinIngot2x, TinIngot2x.getUnlocalizedName());
+		GameRegistry.registerItem(ZincIngot2x, ZincIngot2x.getUnlocalizedName());
+
+		GameRegistry.registerItem(GemRuby, GemRuby.getUnlocalizedName());
+		GameRegistry.registerItem(GemSapphire, GemSapphire.getUnlocalizedName());
+		GameRegistry.registerItem(GemEmerald, GemEmerald.getUnlocalizedName());
+		GameRegistry.registerItem(GemTopaz, GemTopaz.getUnlocalizedName());
+		GameRegistry.registerItem(GemTourmaline, GemTourmaline.getUnlocalizedName());
+		GameRegistry.registerItem(GemJade, GemJade.getUnlocalizedName());
+		GameRegistry.registerItem(GemBeryl, GemBeryl.getUnlocalizedName());
+		GameRegistry.registerItem(GemAgate, GemAgate.getUnlocalizedName());
+		GameRegistry.registerItem(GemOpal, GemOpal.getUnlocalizedName());
+		GameRegistry.registerItem(GemGarnet, GemGarnet.getUnlocalizedName());
+		GameRegistry.registerItem(GemJasper, GemJasper.getUnlocalizedName());
+		GameRegistry.registerItem(GemAmethyst, GemAmethyst.getUnlocalizedName());
+		GameRegistry.registerItem(GemDiamond, GemDiamond.getUnlocalizedName());
+
+		GameRegistry.registerItem(IgInShovel, IgInShovel.getUnlocalizedName());
+		GameRegistry.registerItem(IgInAxe, IgInAxe.getUnlocalizedName());
+		GameRegistry.registerItem(IgInHoe, IgInHoe.getUnlocalizedName());
+		GameRegistry.registerItem(SedShovel, SedShovel.getUnlocalizedName());
+		GameRegistry.registerItem(SedAxe, SedAxe.getUnlocalizedName());
+		GameRegistry.registerItem(SedHoe, SedHoe.getUnlocalizedName());
+		GameRegistry.registerItem(IgExShovel, IgExShovel.getUnlocalizedName());
+		GameRegistry.registerItem(IgExAxe, IgExAxe.getUnlocalizedName());
+		GameRegistry.registerItem(IgExHoe, IgExHoe.getUnlocalizedName());
+		GameRegistry.registerItem(MMShovel, MMShovel.getUnlocalizedName());
+		GameRegistry.registerItem(MMAxe, MMAxe.getUnlocalizedName());
+		GameRegistry.registerItem(MMHoe, MMHoe.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzePick, BismuthBronzePick.getUnlocalizedName());
+		GameRegistry.registerItem(BismuthBronzeShovel, BismuthBronzeShovel.getUnlocalizedName());
+		GameRegistry.registerItem(BismuthBronzeAxe, BismuthBronzeAxe.getUnlocalizedName());
+		GameRegistry.registerItem(BismuthBronzeHoe, BismuthBronzeHoe.getUnlocalizedName());
+
+		GameRegistry.registerItem(BlackBronzePick, BlackBronzePick.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeShovel, BlackBronzeShovel.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeAxe, BlackBronzeAxe.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeHoe, BlackBronzeHoe.getUnlocalizedName());
+
+		GameRegistry.registerItem(BlackSteelPick, BlackSteelPick.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelShovel, BlackSteelShovel.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelAxe, BlackSteelAxe.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelHoe, BlackSteelHoe.getUnlocalizedName());
+
+		GameRegistry.registerItem(BlueSteelPick, BlueSteelPick.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelShovel, BlueSteelShovel.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelAxe, BlueSteelAxe.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelHoe, BlueSteelHoe.getUnlocalizedName());
+
+		GameRegistry.registerItem(BronzePick, BronzePick.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeShovel, BronzeShovel.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeAxe, BronzeAxe.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeHoe, BronzeHoe.getUnlocalizedName());
+
+		GameRegistry.registerItem(CopperPick, CopperPick.getUnlocalizedName());
+		GameRegistry.registerItem(CopperShovel, CopperShovel.getUnlocalizedName());
+		GameRegistry.registerItem(CopperAxe, CopperAxe.getUnlocalizedName());
+		GameRegistry.registerItem(CopperHoe, CopperHoe.getUnlocalizedName());
+
+		GameRegistry.registerItem(WroughtIronPick, WroughtIronPick.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronShovel, WroughtIronShovel.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronAxe, WroughtIronAxe.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronHoe, WroughtIronHoe.getUnlocalizedName());
+
+		GameRegistry.registerItem(RedSteelPick, RedSteelPick.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelShovel, RedSteelShovel.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelAxe, RedSteelAxe.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelHoe, RedSteelHoe.getUnlocalizedName());
+
+		GameRegistry.registerItem(SteelPick, SteelPick.getUnlocalizedName());
+		GameRegistry.registerItem(SteelShovel, SteelShovel.getUnlocalizedName());
+		GameRegistry.registerItem(SteelAxe, SteelAxe.getUnlocalizedName());
+		GameRegistry.registerItem(SteelHoe, SteelHoe.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeChisel, BismuthBronzeChisel.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeChisel, BlackBronzeChisel.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelChisel, BlackSteelChisel.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelChisel, BlueSteelChisel.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeChisel, BronzeChisel.getUnlocalizedName());
+		GameRegistry.registerItem(CopperChisel, CopperChisel.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronChisel, WroughtIronChisel.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelChisel, RedSteelChisel.getUnlocalizedName());
+		GameRegistry.registerItem(SteelChisel, SteelChisel.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeSword, BismuthBronzeSword.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeSword, BlackBronzeSword.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelSword, BlackSteelSword.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelSword, BlueSteelSword.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeSword, BronzeSword.getUnlocalizedName());
+		GameRegistry.registerItem(CopperSword, CopperSword.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronSword, WroughtIronSword.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelSword, RedSteelSword.getUnlocalizedName());
+		GameRegistry.registerItem(SteelSword, SteelSword.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeMace, BismuthBronzeMace.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeMace, BlackBronzeMace.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelMace, BlackSteelMace.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelMace, BlueSteelMace.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeMace, BronzeMace.getUnlocalizedName());
+		GameRegistry.registerItem(CopperMace, CopperMace.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronMace, WroughtIronMace.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelMace, RedSteelMace.getUnlocalizedName());
+		GameRegistry.registerItem(SteelMace, SteelMace.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeSaw, BismuthBronzeSaw.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeSaw, BlackBronzeSaw.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelSaw, BlackSteelSaw.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelSaw, BlueSteelSaw.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeSaw, BronzeSaw.getUnlocalizedName());
+		GameRegistry.registerItem(CopperSaw, CopperSaw.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronSaw, WroughtIronSaw.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelSaw, RedSteelSaw.getUnlocalizedName());
+		GameRegistry.registerItem(SteelSaw, SteelSaw.getUnlocalizedName());
+
+		GameRegistry.registerItem(HCBlackSteelIngot, HCBlackSteelIngot.getUnlocalizedName());
+		GameRegistry.registerItem(WeakBlueSteelIngot, WeakBlueSteelIngot.getUnlocalizedName());
+		GameRegistry.registerItem(WeakRedSteelIngot, WeakRedSteelIngot.getUnlocalizedName());
+		GameRegistry.registerItem(WeakSteelIngot, WeakSteelIngot.getUnlocalizedName());
+		GameRegistry.registerItem(HCBlueSteelIngot, HCBlueSteelIngot.getUnlocalizedName());
+		GameRegistry.registerItem(HCRedSteelIngot, HCRedSteelIngot.getUnlocalizedName());
+		GameRegistry.registerItem(HCSteelIngot, HCSteelIngot.getUnlocalizedName());
+
+		GameRegistry.registerItem(OreChunk, OreChunk.getUnlocalizedName());
+		GameRegistry.registerItem(Logs, Logs.getUnlocalizedName());
+
+		GameRegistry.registerItem(IgInStoneJavelin, IgInStoneJavelin.getUnlocalizedName());
+		GameRegistry.registerItem(SedStoneJavelin, SedStoneJavelin.getUnlocalizedName());
+		GameRegistry.registerItem(IgExStoneJavelin, IgExStoneJavelin.getUnlocalizedName());
+		GameRegistry.registerItem(MMStoneJavelin, MMStoneJavelin.getUnlocalizedName());
+		GameRegistry.registerItem(CopperJavelin, CopperJavelin.getUnlocalizedName());
+		GameRegistry.registerItem(BismuthBronzeJavelin, BismuthBronzeJavelin.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeJavelin, BronzeJavelin.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeJavelin, BlackBronzeJavelin.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronJavelin, WroughtIronJavelin.getUnlocalizedName());
+		GameRegistry.registerItem(SteelJavelin, SteelJavelin.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelJavelin, BlackSteelJavelin.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelJavelin, BlueSteelJavelin.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelJavelin, RedSteelJavelin.getUnlocalizedName());
+
+		GameRegistry.registerItem(IgInStoneJavelinHead, IgInStoneJavelinHead.getUnlocalizedName());
+		GameRegistry.registerItem(SedStoneJavelinHead, SedStoneJavelinHead.getUnlocalizedName());
+		GameRegistry.registerItem(IgExStoneJavelinHead, IgExStoneJavelinHead.getUnlocalizedName());
+		GameRegistry.registerItem(MMStoneJavelinHead, MMStoneJavelinHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperJavelinHead, CopperJavelinHead.getUnlocalizedName());
+		GameRegistry.registerItem(BismuthBronzeJavelinHead, BismuthBronzeJavelinHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeJavelinHead, BronzeJavelinHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeJavelinHead, BlackBronzeJavelinHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronJavelinHead, WroughtIronJavelinHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelJavelinHead, SteelJavelinHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelJavelinHead, BlackSteelJavelinHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelJavelinHead, BlueSteelJavelinHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelJavelinHead, RedSteelJavelinHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthUnshaped, BismuthUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(BismuthBronzeUnshaped, BismuthBronzeUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeUnshaped, BlackBronzeUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelUnshaped, BlackSteelUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelUnshaped, BlueSteelUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(BrassUnshaped, BrassUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeUnshaped, BronzeUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(CopperUnshaped, CopperUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(GoldUnshaped, GoldUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronUnshaped, WroughtIronUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(LeadUnshaped, LeadUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(NickelUnshaped, NickelUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(PigIronUnshaped, PigIronUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(PlatinumUnshaped, PlatinumUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelUnshaped, RedSteelUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(RoseGoldUnshaped, RoseGoldUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(SilverUnshaped, SilverUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(SteelUnshaped, SteelUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(SterlingSilverUnshaped, SterlingSilverUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(TinUnshaped, TinUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(ZincUnshaped, ZincUnshaped.getUnlocalizedName());
+
+		GameRegistry.registerItem(StoneHammer, StoneHammer.getUnlocalizedName());
+		GameRegistry.registerItem(BismuthBronzeHammer, BismuthBronzeHammer.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeHammer, BlackBronzeHammer.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelHammer, BlackSteelHammer.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelHammer, BlueSteelHammer.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeHammer, BronzeHammer.getUnlocalizedName());
+		GameRegistry.registerItem(CopperHammer, CopperHammer.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronHammer, WroughtIronHammer.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelHammer, RedSteelHammer.getUnlocalizedName());
+		GameRegistry.registerItem(SteelHammer, SteelHammer.getUnlocalizedName());
+
+		GameRegistry.registerItem(Ink, Ink.getUnlocalizedName());
+		GameRegistry.registerItem(FireStarter, FireStarter.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzePickaxeHead, BismuthBronzePickaxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzePickaxeHead, BlackBronzePickaxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelPickaxeHead, BlackSteelPickaxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelPickaxeHead, BlueSteelPickaxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzePickaxeHead, BronzePickaxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperPickaxeHead, CopperPickaxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronPickaxeHead, WroughtIronPickaxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelPickaxeHead, RedSteelPickaxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelPickaxeHead, SteelPickaxeHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeShovelHead, BismuthBronzeShovelHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeShovelHead, BlackBronzeShovelHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelShovelHead, BlackSteelShovelHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelShovelHead, BlueSteelShovelHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeShovelHead, BronzeShovelHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperShovelHead, CopperShovelHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronShovelHead, WroughtIronShovelHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelShovelHead, RedSteelShovelHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelShovelHead, SteelShovelHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeHoeHead, BismuthBronzeHoeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeHoeHead, BlackBronzeHoeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelHoeHead, BlackSteelHoeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelHoeHead, BlueSteelHoeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeHoeHead, BronzeHoeHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperHoeHead, CopperHoeHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronHoeHead, WroughtIronHoeHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelHoeHead, RedSteelHoeHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelHoeHead, SteelHoeHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeAxeHead, BismuthBronzeAxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeAxeHead, BlackBronzeAxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelAxeHead, BlackSteelAxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelAxeHead, BlueSteelAxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeAxeHead, BronzeAxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperAxeHead, CopperAxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronAxeHead, WroughtIronAxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelAxeHead, RedSteelAxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelAxeHead, SteelAxeHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeHammerHead, BismuthBronzeHammerHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeHammerHead, BlackBronzeHammerHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelHammerHead, BlackSteelHammerHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelHammerHead, BlueSteelHammerHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeHammerHead, BronzeHammerHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperHammerHead, CopperHammerHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronHammerHead, WroughtIronHammerHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelHammerHead, RedSteelHammerHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelHammerHead, SteelHammerHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeChiselHead, BismuthBronzeChiselHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeChiselHead, BlackBronzeChiselHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelChiselHead, BlackSteelChiselHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelChiselHead, BlueSteelChiselHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeChiselHead, BronzeChiselHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperChiselHead, CopperChiselHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronChiselHead, WroughtIronChiselHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelChiselHead, RedSteelChiselHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelChiselHead, SteelChiselHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeSwordHead, BismuthBronzeSwordHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeSwordHead, BlackBronzeSwordHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelSwordHead, BlackSteelSwordHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelSwordHead, BlueSteelSwordHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeSwordHead, BronzeSwordHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperSwordHead, CopperSwordHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronSwordHead, WroughtIronSwordHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelSwordHead, RedSteelSwordHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelSwordHead, SteelSwordHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeMaceHead, BismuthBronzeMaceHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeMaceHead, BlackBronzeMaceHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelMaceHead, BlackSteelMaceHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelMaceHead, BlueSteelMaceHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeMaceHead, BronzeMaceHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperMaceHead, CopperMaceHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronMaceHead, WroughtIronMaceHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelMaceHead, RedSteelMaceHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelMaceHead, SteelMaceHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeSawHead, BismuthBronzeSawHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeSawHead, BlackBronzeSawHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelSawHead, BlackSteelSawHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelSawHead, BlueSteelSawHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeSawHead, BronzeSawHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperSawHead, CopperSawHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronSawHead, WroughtIronSawHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelSawHead, RedSteelSawHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelSawHead, SteelSawHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(HCBlackSteelUnshaped, HCBlackSteelUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(WeakBlueSteelUnshaped, WeakBlueSteelUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(HCBlueSteelUnshaped, HCBlueSteelUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(WeakRedSteelUnshaped, WeakRedSteelUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(HCRedSteelUnshaped, HCRedSteelUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(WeakSteelUnshaped, WeakSteelUnshaped.getUnlocalizedName());
+		GameRegistry.registerItem(HCSteelUnshaped, HCSteelUnshaped.getUnlocalizedName());
+
+		GameRegistry.registerItem(Coke, Coke.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeProPickHead, BismuthBronzeProPickHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeProPickHead, BlackBronzeProPickHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelProPickHead, BlackSteelProPickHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelProPickHead, BlueSteelProPickHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeProPickHead, BronzeProPickHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperProPickHead, CopperProPickHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronProPickHead, WroughtIronProPickHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelProPickHead, RedSteelProPickHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelProPickHead, SteelProPickHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeScythe, BismuthBronzeScythe.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeScythe, BlackBronzeScythe.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelScythe, BlackSteelScythe.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelScythe, BlueSteelScythe.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeScythe, BronzeScythe.getUnlocalizedName());
+		GameRegistry.registerItem(CopperScythe, CopperScythe.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronScythe, WroughtIronScythe.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelScythe, RedSteelScythe.getUnlocalizedName());
+		GameRegistry.registerItem(SteelScythe, SteelScythe.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeScytheHead, BismuthBronzeScytheHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeScytheHead, BlackBronzeScytheHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelScytheHead, BlackSteelScytheHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelScytheHead, BlueSteelScytheHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeScytheHead, BronzeScytheHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperScytheHead, CopperScytheHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronScytheHead, WroughtIronScytheHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelScytheHead, RedSteelScytheHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelScytheHead, SteelScytheHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(WoodenBucketEmpty, WoodenBucketEmpty.getUnlocalizedName());
+		GameRegistry.registerItem(WoodenBucketWater, WoodenBucketWater.getUnlocalizedName());
+		GameRegistry.registerItem(WoodenBucketSaltWater, WoodenBucketSaltWater.getUnlocalizedName());
+		GameRegistry.registerItem(WoodenBucketMilk, WoodenBucketMilk.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeKnifeHead, BismuthBronzeKnifeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeKnifeHead, BlackBronzeKnifeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelKnifeHead, BlackSteelKnifeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelKnifeHead, BlueSteelKnifeHead.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeKnifeHead, BronzeKnifeHead.getUnlocalizedName());
+		GameRegistry.registerItem(CopperKnifeHead, CopperKnifeHead.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronKnifeHead, WroughtIronKnifeHead.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelKnifeHead, RedSteelKnifeHead.getUnlocalizedName());
+		GameRegistry.registerItem(SteelKnifeHead, SteelKnifeHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(BismuthBronzeKnife, BismuthBronzeKnife.getUnlocalizedName());
+		GameRegistry.registerItem(BlackBronzeKnife, BlackBronzeKnife.getUnlocalizedName());
+		GameRegistry.registerItem(BlackSteelKnife, BlackSteelKnife.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelKnife, BlueSteelKnife.getUnlocalizedName());
+		GameRegistry.registerItem(BronzeKnife, BronzeKnife.getUnlocalizedName());
+		GameRegistry.registerItem(CopperKnife, CopperKnife.getUnlocalizedName());
+		GameRegistry.registerItem(WroughtIronKnife, WroughtIronKnife.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelKnife, RedSteelKnife.getUnlocalizedName());
+		GameRegistry.registerItem(SteelKnife, SteelKnife.getUnlocalizedName());
+
+		GameRegistry.registerItem(FlatRock, FlatRock.getUnlocalizedName());
+		GameRegistry.registerItem(LooseRock, LooseRock.getUnlocalizedName());
+
+		GameRegistry.registerItem(IgInStoneShovelHead, IgInStoneShovelHead.getUnlocalizedName());
+		GameRegistry.registerItem(SedStoneShovelHead, SedStoneShovelHead.getUnlocalizedName());
+		GameRegistry.registerItem(IgExStoneShovelHead, IgExStoneShovelHead.getUnlocalizedName());
+		GameRegistry.registerItem(MMStoneShovelHead, MMStoneShovelHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(IgInStoneAxeHead, IgInStoneAxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(SedStoneAxeHead, SedStoneAxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(IgExStoneAxeHead, IgExStoneAxeHead.getUnlocalizedName());
+		GameRegistry.registerItem(MMStoneAxeHead, MMStoneAxeHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(IgInStoneHoeHead, IgInStoneHoeHead.getUnlocalizedName());
+		GameRegistry.registerItem(SedStoneHoeHead, SedStoneHoeHead.getUnlocalizedName());
+		GameRegistry.registerItem(IgExStoneHoeHead, IgExStoneHoeHead.getUnlocalizedName());
+		GameRegistry.registerItem(MMStoneHoeHead, MMStoneHoeHead.getUnlocalizedName());
+
+		GameRegistry.registerItem(StoneKnifeHead, StoneKnifeHead.getUnlocalizedName());
+		GameRegistry.registerItem(StoneHammerHead, StoneHammerHead.getUnlocalizedName());
+		GameRegistry.registerItem(StoneKnife, StoneKnife.getUnlocalizedName());
+
+		GameRegistry.registerItem(SmallOreChunk, SmallOreChunk.getUnlocalizedName());
+		GameRegistry.registerItem(SinglePlank, SinglePlank.getUnlocalizedName());
+
+		GameRegistry.registerItem(RedSteelBucketEmpty, RedSteelBucketEmpty.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelBucketWater, RedSteelBucketWater.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelBucketEmpty, BlueSteelBucketEmpty.getUnlocalizedName());
+		GameRegistry.registerItem(BlueSteelBucketLava, BlueSteelBucketLava.getUnlocalizedName());
+
+		GameRegistry.registerItem(Quern, Quern.getUnlocalizedName());
+		GameRegistry.registerItem(FlintSteel, FlintSteel.getUnlocalizedName());
+
+		GameRegistry.registerItem(DoorOak, DoorOak.getUnlocalizedName());
+		GameRegistry.registerItem(DoorAspen, DoorAspen.getUnlocalizedName());
+		GameRegistry.registerItem(DoorBirch, DoorBirch.getUnlocalizedName());
+		GameRegistry.registerItem(DoorChestnut, DoorChestnut.getUnlocalizedName());
+		GameRegistry.registerItem(DoorDouglasFir, DoorDouglasFir.getUnlocalizedName());
+		GameRegistry.registerItem(DoorHickory, DoorHickory.getUnlocalizedName());
+		GameRegistry.registerItem(DoorMaple, DoorMaple.getUnlocalizedName());
+		GameRegistry.registerItem(DoorAsh, DoorAsh.getUnlocalizedName());
+		GameRegistry.registerItem(DoorPine, DoorPine.getUnlocalizedName());
+		GameRegistry.registerItem(DoorSequoia, DoorSequoia.getUnlocalizedName());
+		GameRegistry.registerItem(DoorSpruce, DoorSpruce.getUnlocalizedName());
+		GameRegistry.registerItem(DoorSycamore, DoorSycamore.getUnlocalizedName());
+		GameRegistry.registerItem(DoorWhiteCedar, DoorWhiteCedar.getUnlocalizedName());
+		GameRegistry.registerItem(DoorWhiteElm, DoorWhiteElm.getUnlocalizedName());
+		GameRegistry.registerItem(DoorWillow, DoorWillow.getUnlocalizedName());
+		GameRegistry.registerItem(DoorKapok, DoorKapok.getUnlocalizedName());
+		GameRegistry.registerItem(DoorAcacia, DoorAcacia.getUnlocalizedName());
+
+		GameRegistry.registerItem(Beer, Beer.getUnlocalizedName());
+		GameRegistry.registerItem(Cider, Cider.getUnlocalizedName());
+		GameRegistry.registerItem(Rum, Rum.getUnlocalizedName());
+		GameRegistry.registerItem(RyeWhiskey, RyeWhiskey.getUnlocalizedName());
+		GameRegistry.registerItem(Sake, Sake.getUnlocalizedName());
+		GameRegistry.registerItem(Vodka, Vodka.getUnlocalizedName());
+		GameRegistry.registerItem(Whiskey, Whiskey.getUnlocalizedName());
+
+		GameRegistry.registerItem(Blueprint, Blueprint.getUnlocalizedName());
+		GameRegistry.registerItem(writabeBookTFC, writabeBookTFC.getUnlocalizedName());
+		GameRegistry.registerItem(WoolYarn, WoolYarn.getUnlocalizedName());
+		GameRegistry.registerItem(Wool, Wool.getUnlocalizedName());
+		GameRegistry.registerItem(WoolCloth, WoolCloth.getUnlocalizedName());
+		GameRegistry.registerItem(Spindle, Spindle.getUnlocalizedName());
+		GameRegistry.registerItem(SpindleHead, SpindleHead.getUnlocalizedName());
+		GameRegistry.registerItem(StoneBrick , StoneBrick .getUnlocalizedName());
+
+		GameRegistry.registerItem(Mortar , Mortar .getUnlocalizedName());
+		GameRegistry.registerItem(Limewater , Limewater .getUnlocalizedName());
+		GameRegistry.registerItem(Vinegar , Vinegar .getUnlocalizedName());
+
+		GameRegistry.registerItem(Hide , Hide .getUnlocalizedName());
+		GameRegistry.registerItem(SoakedHide , SoakedHide .getUnlocalizedName());
+		GameRegistry.registerItem(ScrapedHide , ScrapedHide .getUnlocalizedName());
+		GameRegistry.registerItem(PrepHide , PrepHide .getUnlocalizedName());
+		GameRegistry.registerItem(SheepSkin , SheepSkin .getUnlocalizedName());
+		GameRegistry.registerItem(FlatLeather , FlatLeather .getUnlocalizedName());
+		GameRegistry.registerItem(TerraLeather , TerraLeather .getUnlocalizedName());
+		GameRegistry.registerItem(Straw , Straw .getUnlocalizedName());
+		GameRegistry.registerItem(FlatClay , FlatClay .getUnlocalizedName());
+
+		GameRegistry.registerItem(PotteryJug , PotteryJug .getUnlocalizedName());
+		GameRegistry.registerItem(PotterySmallVessel , PotterySmallVessel .getUnlocalizedName());
+		GameRegistry.registerItem(PotteryLargeVessel , PotteryLargeVessel .getUnlocalizedName());
+		GameRegistry.registerItem(PotteryPot , PotteryPot .getUnlocalizedName());
+
+		GameRegistry.registerItem(CeramicMold , CeramicMold .getUnlocalizedName());
+		GameRegistry.registerItem(FireBrick , FireBrick .getUnlocalizedName());
+
+		GameRegistry.registerItem(ClayMoldAxe , ClayMoldAxe .getUnlocalizedName());
+		GameRegistry.registerItem(ClayMoldChisel , ClayMoldChisel .getUnlocalizedName());
+		GameRegistry.registerItem(ClayMoldHammer , ClayMoldHammer .getUnlocalizedName());
+		GameRegistry.registerItem(ClayMoldHoe , ClayMoldHoe .getUnlocalizedName());
+		GameRegistry.registerItem(ClayMoldKnife , ClayMoldKnife .getUnlocalizedName());
+		GameRegistry.registerItem(ClayMoldMace , ClayMoldMace .getUnlocalizedName());
+		GameRegistry.registerItem(ClayMoldPick , ClayMoldPick .getUnlocalizedName());
+		GameRegistry.registerItem(ClayMoldProPick , ClayMoldProPick .getUnlocalizedName());
+		GameRegistry.registerItem(ClayMoldSaw , ClayMoldSaw .getUnlocalizedName());
+		GameRegistry.registerItem(ClayMoldScythe , ClayMoldScythe .getUnlocalizedName());
+		GameRegistry.registerItem(ClayMoldShovel , ClayMoldShovel .getUnlocalizedName());
+		GameRegistry.registerItem(ClayMoldSword , ClayMoldSword .getUnlocalizedName());
+		GameRegistry.registerItem(ClayMoldJavelin , ClayMoldJavelin .getUnlocalizedName());
+
+		GameRegistry.registerItem(TuyereCopper , TuyereCopper .getUnlocalizedName());
+		GameRegistry.registerItem(TuyereBronze , TuyereBronze .getUnlocalizedName());
+		GameRegistry.registerItem(TuyereBlackBronze , TuyereBlackBronze .getUnlocalizedName());
+		GameRegistry.registerItem(TuyereBismuthBronze , TuyereBismuthBronze .getUnlocalizedName());
+		GameRegistry.registerItem(TuyereWroughtIron , TuyereWroughtIron .getUnlocalizedName());
+		GameRegistry.registerItem(TuyereSteel , TuyereSteel .getUnlocalizedName());
+		GameRegistry.registerItem(TuyereBlackSteel , TuyereBlackSteel .getUnlocalizedName());
+		GameRegistry.registerItem(TuyereRedSteel , TuyereRedSteel .getUnlocalizedName());
+		GameRegistry.registerItem(TuyereBlueSteel , TuyereBlueSteel .getUnlocalizedName());
+
+		GameRegistry.registerItem(Bloom , Bloom .getUnlocalizedName());
+		GameRegistry.registerItem(RawBloom , RawBloom .getUnlocalizedName());
+
+		GameRegistry.registerItem(UnknownIngot , UnknownIngot .getUnlocalizedName());
+		GameRegistry.registerItem(UnknownUnshaped , UnknownUnshaped .getUnlocalizedName());
+
+		GameRegistry.registerItem(Jute , Jute .getUnlocalizedName());
+		GameRegistry.registerItem(JuteFibre , JuteFibre .getUnlocalizedName());
+		System.out.println(new StringBuilder().append("[TFC] All Items Registered").toString());
+	}
 }

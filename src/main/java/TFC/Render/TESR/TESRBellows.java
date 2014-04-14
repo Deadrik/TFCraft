@@ -19,9 +19,11 @@ public class TESRBellows extends TESRBase
 	private static final ResourceLocation SIDE4_TEXTURE = new ResourceLocation(Reference.ModID + ":textures/blocks/devices/Bellows85.png");
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f)
+	{
 		TileEntityBellows bellows = (TileEntityBellows) tileentity;
-		if (bellows != null) {
+		if (bellows != null)
+		{
 			int meta = bellows.getWorldObj().getBlockMetadata(bellows.xCoord, bellows.yCoord, bellows.zCoord);
 			float pos = bellows.blowTimer * 0.1F;
 			if(pos < 0) { pos = 0; }

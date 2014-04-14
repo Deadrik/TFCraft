@@ -67,10 +67,16 @@ public class ItemTerra extends Item implements ISize
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		if(MetaNames != null)
+		{
 			for(int i = 0; i < MetaNames.length; i++)
+			{
 				list.add(new ItemStack(this,1,i));
+			}
+		}
 		else
+		{
 			list.add(new ItemStack(this,1));
+		}
 	}
 
 	@Override
@@ -92,12 +98,16 @@ public class ItemTerra extends Item implements ISize
 	public void registerIcons(IIconRegister registerer)
 	{
 		if(this.MetaNames == null)
-			this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
+		{
+			this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + this.getUnlocalizedName().replace("item.", ""));
+		}
 		else
 		{
 			MetaIcons = new IIcon[MetaNames.length];
 			for(int i = 0; i < MetaNames.length; i++)
+			{
 				MetaIcons[i] = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + MetaNames[i]);
+			}
 		}
 	}
 
@@ -162,8 +172,10 @@ public class ItemTerra extends Item implements ISize
 		addHeatInformation(is, arraylist);
 
 		if (is.hasTagCompound())
+		{
 			if(is.getTagCompound().hasKey("itemCraftingValue") && is.getTagCompound().getShort("itemCraftingValue") != 0)
 				arraylist.add("This Item Has Been Worked");
+		}
 
 		addItemInformation(is, player, arraylist);
 		addExtraInformation(is, player, arraylist);
@@ -188,10 +200,12 @@ public class ItemTerra extends Item implements ISize
 					meltTemp = hi.meltTemp;
 
 				if(meltTemp != -1)
+				{
 					if(is.getItem() == Items.stick)
 						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
 					else
 						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));
+				}
 			}
 		}
 	}

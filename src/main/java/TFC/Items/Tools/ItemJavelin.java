@@ -3,6 +3,7 @@ package TFC.Items.Tools;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -14,6 +15,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.API.ICausesDamage;
 import TFC.API.IProjectile;
 import TFC.API.IQuiverAmmo;
@@ -46,6 +48,17 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		list.add(new ItemStack(this));
+	}
+
+	@Override
+	public void registerIcons(IIconRegister registerer)
+	{
+		String name = this.getUnlocalizedName().replace("item.", "");
+		name = name.replace("IgIn ", "");
+		name = name.replace("IgEx ", "");
+		name = name.replace("Sed ", "");
+		name = name.replace("MM ", "");
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + name);
 	}
 
 	/**

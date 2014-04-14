@@ -42,7 +42,12 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
+		String name = this.getUnlocalizedName().replace("item.", "");
+		name = name.replace("IgIn ", "");
+		name = name.replace("IgEx ", "");
+		name = name.replace("Sed ", "");
+		name = name.replace("MM ", "");
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + name);
 	}
 
 	@Override

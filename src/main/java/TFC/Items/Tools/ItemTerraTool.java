@@ -76,8 +76,8 @@ public class ItemTerraTool extends ItemTool implements ISize
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
-		TFC_Textures.BrokenItem = registerer.registerIcon(Reference.ModID + ":" + "tools/Broken Item");
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + this.getUnlocalizedName().replace("item.", ""));
+		if (TFC_Textures.BrokenItem == null) TFC_Textures.BrokenItem = registerer.registerIcon(Reference.ModID + ":" + "tools/Broken Item");
 	}
 
 	@Override

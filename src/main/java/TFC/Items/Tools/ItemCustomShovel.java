@@ -3,8 +3,11 @@ package TFC.Items.Tools;
 import java.util.Set;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
+import TFC.Reference;
 import TFC.TFCBlocks;
+import TFC.Core.TFC_Textures;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -39,5 +42,16 @@ public class ItemCustomShovel extends ItemTerraTool
 	{
 		Multimap multimap = HashMultimap.create();
 		return multimap;
+	}
+
+	@Override
+	public void registerIcons(IIconRegister registerer)
+	{
+		String name = this.getUnlocalizedName().replace("item.", "");
+		name = name.replace("IgIn ", "");
+		name = name.replace("IgEx ", "");
+		name = name.replace("Sed ", "");
+		name = name.replace("MM ", "");
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + name);
 	}
 }

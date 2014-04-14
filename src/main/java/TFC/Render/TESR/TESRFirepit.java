@@ -28,9 +28,10 @@ public class TESRFirepit extends TESRBase
 		}
 		else
 		{
-			if(par1TileEntityPit.hasCookingPot){
-			Block var10 = par1TileEntityPit.getBlockType();
-			var9 = par1TileEntityPit.getBlockMetadata();
+			if(par1TileEntityPit.hasCookingPot)
+			{
+				Block var10 = par1TileEntityPit.getBlockType();
+				var9 = par1TileEntityPit.getBlockMetadata();
 				TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, "textures/blocks/clay/Ceramic.png")); //texture
 				GL11.glPushMatrix(); //start
 				GL11.glTranslatef((float)d + 0.0F, (float)d1 + 0F, (float)d2 + 0.0F); //size

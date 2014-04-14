@@ -41,9 +41,7 @@ public class TFC_CoreRender
         }*/
 
 		if(te.TypeID <= 0)
-		{
 			return false;
-		}
 
 		int type = te.TypeID;
 		int meta = te.MetaID;
@@ -106,11 +104,10 @@ public class TFC_CoreRender
 			var9 = 0.0F;
 			var10 = 0.5F;
 		}
+
 		TileEntityPartial te = (TileEntityPartial) renderblocks.blockAccess.getTileEntity(par2, par3, par4);
 		if(te.TypeID <= 0)
-		{
 			return false;
-		}
 
 		int type = te.TypeID;
 		int meta = te.MetaID;
@@ -188,9 +185,7 @@ public class TFC_CoreRender
 	public static boolean RenderSnow(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
-
 		float drift = 0.04F + (meta * 0.06F);
-
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0F, 1.0F, drift, 1.0F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 		return true;
@@ -232,7 +227,6 @@ public class TFC_CoreRender
 
 		if(!((TileEntityFruitTreeWood)blockAccess.getTileEntity(i, j, k)).isTrunk && blockAccess.getBlock(i, j-1, k) != TFCBlocks.fruitTreeWood && !blockAccess.getBlock(i, j-1, k).isOpaqueCube())
 		{
-
 			renderblocks.setRenderBounds(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
 			renderblocks.renderStandardBlock(block, i, j, k);
 
@@ -244,7 +238,6 @@ public class TFC_CoreRender
 
 			renderblocks.setRenderBounds(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
 			renderblocks.renderStandardBlock(block, i, j, k);
-
 		}
 
 		//renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1F, 1F, 1F);
@@ -270,7 +263,7 @@ public class TFC_CoreRender
 		if(rockLayer1 != null && rockLayer1.block != null && !breaking)
 			renderblocks.overrideBlockTexture = rockLayer1.block.getIcon(0, rockLayer1.data2);
 
-		int seed = i*k+j;
+		int seed = i * k + j;
 		renderRandom.setSeed(seed);
 
 		float xOffset = (renderRandom.nextInt(5) - 2) * 0.05f;
@@ -332,7 +325,6 @@ public class TFC_CoreRender
 	{
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		renderblocks.renderStandardBlock(block, i, j, k);
-
 		//renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 0.001F, 0.001F, 0.001F);
 		return true;
 	}
@@ -340,10 +332,8 @@ public class TFC_CoreRender
 	public static boolean renderFirepit(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
-
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
 		renderblocks.renderStandardBlock(block, i, j, k);
-
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);		
 		return true;
 	}
@@ -351,11 +341,8 @@ public class TFC_CoreRender
 	public static boolean renderForge(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
-
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
 		renderblocks.renderStandardBlock(block, i, j, k);
-
-
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
 		return true;
 	}
@@ -504,7 +491,7 @@ public class TFC_CoreRender
 
 			}
 			else if(i1 == 3)
-			{        
+			{
 				//ribs
 				renderblocks.setRenderBounds(0.75F, 0.0F, 0.0F, 0.8F, 0.75F, 1.0F);
 				renderblocks.renderStandardBlock(block, i, j, k);
@@ -609,7 +596,7 @@ public class TFC_CoreRender
 				}
 			}
 			if(i1 == 2)
-			{               
+			{
 				//ribs
 				renderblocks.setRenderBounds(0.0F, 0.0F, 0.3F, 1F, 0.3F, 0.35F);
 				renderblocks.renderStandardBlock(block, i, j, k);
@@ -644,7 +631,7 @@ public class TFC_CoreRender
 				}
 			}
 			if(i1 == 3)
-			{               
+			{
 				//ribs
 				renderblocks.setRenderBounds(0.7F, 0.0F, 0.0F, 0.75F, 0.3F, 1.0F);
 				renderblocks.renderStandardBlock(block, i, j, k);
@@ -677,7 +664,6 @@ public class TFC_CoreRender
 				}
 			}
 		}
-
 
 		//set the block collision box
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
@@ -713,9 +699,8 @@ public class TFC_CoreRender
 	{
 		int meta = renderblocks.blockAccess.getBlockMetadata(xCoord, yCoord, zCoord);
 		if(meta >= 8)
-		{
 			meta-=8;
-		}
+
 		FloraManager manager = FloraManager.getInstance();
 		FloraIndex index = manager.findMatchingIndex(BlockFruitLeaves.getType(block, meta));
 
@@ -724,9 +709,7 @@ public class TFC_CoreRender
 		{
 			renderblocks.overrideBlockTexture = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
 			if(renderblocks.overrideBlockTexture != null)
-			{
 				RenderBlockWithCustomColorMultiplier(block, renderblocks, xCoord, yCoord, zCoord, 16777215);
-			}
 			renderblocks.clearOverrideBlockTexture();
 		}
 		return true;
@@ -735,12 +718,12 @@ public class TFC_CoreRender
 	public static boolean RenderSeaPlant(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks){
 		boolean plantRender,fluidRender;
 		//plantRender = renderblocks.renderCrossedSquares(par1Block, par2, par3, par4);
-		if(par1Block == TFCBlocks.SeaGrassFrozen){
+
+		if(par1Block == TFCBlocks.SeaGrassFrozen)
 			fluidRender = RenderSeaPlantFrozen(par1Block,par2,par3,par4,renderblocks);
-		}
-		else{
+		else
 			fluidRender = renderblocks.renderBlockLiquid(par1Block, par2, par3, par4);
-		}
+
 		//fluidRender = renderblocks.renderStandardBlock(Block.blocksList[Block.ice],par2,par3,par4);
 		return /*plantRender && */fluidRender;
 	}

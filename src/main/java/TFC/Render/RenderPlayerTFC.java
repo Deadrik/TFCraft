@@ -154,29 +154,29 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 
 				//Move outside if to allow for more then just CLOTH
 				int j = itemarmor.getColor(itemstack);
-						if (j != -1)
-						{
-							float f2 = (float)(j >> 16 & 255) / 255.0F;
-							float f3 = (float)(j >> 8 & 255) / 255.0F;
-							float f4 = (float)(j & 255) / 255.0F;
-							GL11.glColor3f(f1 * f2, f1 * f3, f1 * f4);
+				if (j != -1)
+				{
+					float f2 = (float)(j >> 16 & 255) / 255.0F;
+					float f3 = (float)(j >> 8 & 255) / 255.0F;
+					float f4 = (float)(j & 255) / 255.0F;
+					GL11.glColor3f(f1 * f2, f1 * f3, f1 * f4);
 
-							if (itemstack.isItemEnchanted())
-							{
-								return 31;
-							}
+					if (itemstack.isItemEnchanted())
+					{
+						return 31;
+					}
 
-							return 16;
-						}
+					return 16;
+				}
 
-						GL11.glColor3f(f1, f1, f1);
+				GL11.glColor3f(f1, f1, f1);
 
-						if (itemstack.isItemEnchanted())
-						{
-							return 15;
-						}
+				if (itemstack.isItemEnchanted())
+				{
+					return 15;
+				}
 
-						return 1;
+				return 1;
 			}
 		}
 		return -1;

@@ -60,8 +60,8 @@ public class ItemFirestarter extends ItemTerra
 			int z = objectMouseOver.blockZ;
 			int side = objectMouseOver.sideHit;
 
-			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, i, j, k-1) && TFC_Core.isSouthFaceSolid(world, i, j, k+1) && 
-					TFC_Core.isEastFaceSolid(world, i-1, j, k) && TFC_Core.isWestFaceSolid(world, i+1, j, k);
+			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, i, j, k - 1) && TFC_Core.isSouthFaceSolid(world, i, j, k + 1) && 
+					TFC_Core.isEastFaceSolid(world, i - 1, j, k) && TFC_Core.isWestFaceSolid(world, i + 1, j, k);
 
 			if(side == 1 && world.getBlock(x, y, z).isNormalCube() && world.getBlock(x, y, z).isOpaqueCube() && 
 					world.getBlock(x, y, z).getMaterial() != Material.wood && world.getBlock(x, y, z).getMaterial() != Material.cloth &&
@@ -116,9 +116,7 @@ public class ItemFirestarter extends ItemTerra
 				{
 					int chance = new Random().nextInt(100);
 					if(chance > 70)
-					{
 						world.setBlock(x, y, z, TFCBlocks.Forge, 1, 2);
-					}
 					itemstack.damageItem(1, entityplayer);
 					return true;
 				}

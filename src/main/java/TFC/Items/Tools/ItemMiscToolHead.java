@@ -1,5 +1,7 @@
 package TFC.Items.Tools;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import TFC.Reference;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
@@ -28,5 +30,16 @@ public class ItemMiscToolHead extends ItemTerra
 	public ToolMaterial getMaterial()
 	{
 		return material;
+	}
+	
+	@Override
+	public void registerIcons(IIconRegister registerer)
+	{
+		String name = this.getUnlocalizedName().replace("item.", "");
+		name = name.replace("IgIn ", "");
+		name = name.replace("IgEx ", "");
+		name = name.replace("Sed ", "");
+		name = name.replace("MM ", "");
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + name);
 	}
 }
