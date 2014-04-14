@@ -627,7 +627,7 @@ public class TFC_Core
 
 	public static Block getTypeForDirtFromGrass(Block block)
 	{
-		if (block == TFCBlocks.Grass)
+		if (block == TFCBlocks.Grass || block == TFCBlocks.DryGrass)
 			return TFCBlocks.Dirt;
 		return TFCBlocks.Dirt2;
 	}

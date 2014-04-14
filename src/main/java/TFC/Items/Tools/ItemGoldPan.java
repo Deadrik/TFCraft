@@ -154,10 +154,10 @@ public class ItemGoldPan extends ItemTerra
 						if(uses > 0)
 						{
 							int type = -1;
-							if (type == -1 && world.rand.nextInt(40) == 0) type = 0;
-							if (type == -1 && world.rand.nextInt(90) == 0) type = 1;
-							if (type == -1 && world.rand.nextInt(90) == 0) type = 3;
-							if (type == -1 && world.rand.nextInt(250) == 0) type = 2;
+							if (type == -1 && world.rand.nextInt(60) == 0) type = 0;
+							if (type == -1 && world.rand.nextInt(150) == 0) type = 1;
+							if (type == -1 && world.rand.nextInt(120) == 0) type = 3;
+							if (type == -1 && world.rand.nextInt(500) == 0) type = 2;
 
 							if(type != -1)
 							{

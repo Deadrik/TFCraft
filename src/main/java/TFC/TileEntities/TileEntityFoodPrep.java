@@ -110,6 +110,8 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 
 					this.setInventorySlotContents(4, is);
 					this.getStackInSlot(5).stackSize--;
+					if(getStackInSlot(5).stackSize == 0)
+						setInventorySlotContents(5, null);
 
 					consumeFoodWeight();
 				}
@@ -433,11 +435,11 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 //			dos.writeInt(yCoord);
 //			dos.writeInt(zCoord);
 //
-//			dos.writeInt(storage[0] != null ? Item.getIdFromItem(storage[0].getItem()) : -1);
-//			dos.writeInt(storage[1] != null ? Item.getIdFromItem(storage[1].getItem()) : -1);
-//			dos.writeInt(storage[2] != null ? Item.getIdFromItem(storage[2].getItem()) : -1);
-//			dos.writeInt(storage[3] != null ? Item.getIdFromItem(storage[3].getItem()) : -1);
-//			dos.writeInt(storage[5] != null ? Item.getIdFromItem(storage[5].getItem()) : -1);
+//			writeItemToStream(dos, 0);
+//			writeItemToStream(dos, 1);
+//			writeItemToStream(dos, 2);
+//			writeItemToStream(dos, 3);
+//			dos.writeInt(storage[5] != null ? storage[5].itemID : -1);
 //		} catch (IOException e) {
 //		}
 //
@@ -476,13 +478,16 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 //	}
 //
 //	@Override
-//	public void createInitPacket(DataOutputStream outStream) throws IOException 
-//	{
-//		outStream.writeInt(storage[0] != null ? Item.getIdFromItem(storage[0].getItem()) : -1);
-//		outStream.writeInt(storage[1] != null ? Item.getIdFromItem(storage[1].getItem()) : -1);
-//		outStream.writeInt(storage[2] != null ? Item.getIdFromItem(storage[2].getItem()) : -1);
-//		outStream.writeInt(storage[3] != null ? Item.getIdFromItem(storage[3].getItem()) : -1);
-//		outStream.writeInt(storage[5] != null ? Item.getIdFromItem(storage[5].getItem()) : -1);
+//	@SideOnly(Side.CLIENT)
+//	public void handleInitPacket(DataInputStream inStream) throws IOException {
+//		readItemFromStream(inStream, 0);
+//		readItemFromStream(inStream, 1);
+//		readItemFromStream(inStream, 2);
+//		readItemFromStream(inStream, 3);
+//		int s5 = inStream.readInt();
+//		storage[5] = s5 != -1 ? new ItemStack(Item.itemsList[s5]) : null;
+//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//
 //	}
 //
 //	@Override
@@ -500,5 +505,52 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 //		storage[5] = s5 != -1 ? new ItemStack(Item.getItemById(s5)) : null;
 //		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 //
+//	}
+//	public void writeItemToStream(DataOutputStream outStream, int index) throws IOException 
+//	{
+//		if(storage[index] != null)
+//		{
+//			outStream.writeInt(storage[index].itemID);
+//			if(storage[index].hasTagCompound())
+//			{
+//				NBTTagCompound nbt = storage[index].getTagCompound();
+//				outStream.writeFloat(nbt.hasKey("foodWeight") ? nbt.getFloat("foodWeight") : -1);
+//				outStream.writeFloat(nbt.hasKey("foodDecay") ? nbt.getFloat("foodDecay") : -1);
+//			}
+//			else
+//			{
+//				outStream.writeFloat(-1);
+//				outStream.writeFloat(-1);
+//			}
+//		}
+//		else
+//		{
+//			outStream.writeInt(-1);
+//			outStream.writeFloat(-1);
+//			outStream.writeFloat(-1);
+//		}
+//	}
+//	public void readItemFromStream(DataInputStream inStream, int index) throws IOException 
+//	{
+//		int id = inStream.readInt();
+//		float weight = inStream.readFloat();
+//		float decay = inStream.readFloat();
+//		if(id != -1 && storage[index] == null || storage[index].getItem().itemID != id)
+//		{
+//			storage[index] = new ItemStack(Item.itemsList[id]);
+//
+//			NBTTagCompound nbt = new NBTTagCompound();
+//			nbt.setFloat("foodWeight", weight);
+//			nbt.setFloat("foodDecay", decay);
+//		}
+//		else if(id != -1 && storage[index] != null && storage[index].getItem().itemID == id)
+//		{
+//			storage[index].getTagCompound().setFloat("foodWeight", weight);
+//			storage[index].getTagCompound().setFloat("foodDecay", decay);
+//		}
+//		else if(id == -1)
+//		{
+//			storage[index] = null;
+//		}
 //	}
 }

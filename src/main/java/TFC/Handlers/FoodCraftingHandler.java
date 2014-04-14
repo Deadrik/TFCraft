@@ -158,7 +158,7 @@ public class FoodCraftingHandler
 						continue;
 					if(iinventory.getStackInSlot(i).hasTagCompound() &&
 							iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight") &&
-							iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay") <= 0)
+							iinventory.getStackInSlot(i).getTagCompound().hasKey("foodDecay"))
 					{
 						NBTTagCompound grainNBT = iinventory.getStackInSlot(i).getTagCompound();
 						float grainWeight = grainNBT.getFloat("foodWeight");
@@ -166,7 +166,6 @@ public class FoodCraftingHandler
 						grainWeight -= breadWeight;
 						breadWeight *= 2;
 						grainNBT.setFloat("foodWeight", grainWeight);
-						ItemFoodTFC.createTag(craftResult, breadWeight);
 						if(grainWeight > 0)
 							iinventory.getStackInSlot(i).stackSize++;
 					}
@@ -288,15 +287,14 @@ public class FoodCraftingHandler
 			{
 				if(iinventory.getStackInSlot(i) == null)
 					continue;
-				if(iinventory.getStackInSlot(i).hasTagCompound() &&
-						iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight") &&
-						iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay") <= 0)
+				if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
 				{
 					NBTTagCompound grainNBT = iinventory.getStackInSlot(i).getTagCompound();
 					float grainWeight = grainNBT.getFloat("foodWeight");
 					float breadWeight = Math.min(grainWeight,80);
+					float breadDecay = grainNBT.getFloat("foodDecay");
 					breadWeight *= 2;
-					ItemFoodTFC.createTag(craftResult, breadWeight);
+					ItemFoodTFC.createTag(craftResult, breadWeight, breadDecay);
 				}
 			}
 		}

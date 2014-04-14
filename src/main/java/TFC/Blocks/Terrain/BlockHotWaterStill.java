@@ -28,6 +28,14 @@ public class BlockHotWaterStill extends BlockFreshWaterStill
 	}
 
 	@Override
+	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
+		/*Material mat = world.getBlockMaterial(i,j,k);
+		if(mat == Material.water){
+			world.setBlock(i,j,k, Block.ice.blockID,1,1);
+		}*/
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{

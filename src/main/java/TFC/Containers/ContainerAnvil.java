@@ -64,32 +64,34 @@ public class ContainerAnvil extends ContainerTFC
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
 	{
+		ItemStack origStack = null;
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slothammer = (Slot)inventorySlots.get(0);
 		Slot[] slotinput = {(Slot)inventorySlots.get(1), (Slot)inventorySlots.get(2), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(5)};
 		Slot slotflux = (Slot)inventorySlots.get(6);
+
 		if(slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
 			if(i <= 6)
 			{
-				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
+				if(!this.mergeItemStack(slotStack, 7, inventorySlots.size(), false))
 					return null;
-				slot.putStack(null);
 			}
-			else if(itemstack1.getItem() == TFCItems.Powder && itemstack1.getItemDamage() == 0)
+			else if(slotStack.getItem() == TFCItems.Powder && slotStack.getItemDamage() == 0)
 			{
-				if (!this.mergeItemStack(itemstack1, 6, 7, false))
+				if (!this.mergeItemStack(slotStack, 6, 7, false))
 					return null;
 			}
-			else if(itemstack1.getItem() instanceof ItemHammer)
+			else if(slotStack.getItem() instanceof ItemHammer)
 			{
 				if(slothammer.getHasStack())
 					return null;
-				ItemStack stack = itemstack1.copy();
+				ItemStack stack = slotStack.copy();
 				stack.stackSize = 1;
 				slothammer.putStack(stack);
-				itemstack1.stackSize--;
+				slotStack.stackSize--;
 			}
 			else
 			{
@@ -100,20 +102,20 @@ public class ContainerAnvil extends ContainerTFC
 						j++;
 					else
 					{
-						ItemStack stack = itemstack1.copy();
+						ItemStack stack = slotStack.copy();
 						stack.stackSize = 1;
 						slotinput[j].putStack(stack);
-						itemstack1.stackSize--;
+						slotStack.stackSize--;
 						break;
 					}
 				}
 			}
-			if(itemstack1.stackSize == 0)
+			if(slotStack.stackSize == 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 		}
-		return null;
+		return origStack;
 	}
 
 	@Override

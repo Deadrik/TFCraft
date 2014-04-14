@@ -36,7 +36,10 @@ public class BlockFreshWaterFlowing extends BlockCustomFlowing
 	@Override
 	public void breakBlock(World world, int i, int j, int k, Block block, int l)
 	{
-		if(block == Blocks.ice){
+		Material m = world.getBlock(i, j, k).getMaterial();
+		Block b = world.getBlock(i, j, k);
+		super.breakBlock(world, i, j, k, b, l);
+		if(this == Blocks.ice){
 			//world.setBlockMetadataWithNotify(i,j,k,1,1);
 			//world.setBlockToAir(i, j, k);
 		}
@@ -45,7 +48,9 @@ public class BlockFreshWaterFlowing extends BlockCustomFlowing
 
 	@Override
 	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
-		if(world.getBlock(i,j,k).getMaterial() == Material.water)
-			world.setBlock(i, j, k, Blocks.ice, 1, 1);
+		Material mat = world.getBlock(i, j, k).getMaterial();
+		/*if(mat == Material.water){
+			world.setBlock(i,j,k, Block.ice.blockID,1,1);
+		}*/
 	}
 }

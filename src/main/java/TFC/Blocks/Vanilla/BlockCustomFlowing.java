@@ -36,6 +36,14 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 	}
 
 	@Override
+	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
+		Material mat = world.getBlock(i, j, k).getMaterial();
+		if(mat == Material.water){
+			//world.setBlock(i,j,k, Block.ice.blockID);
+		}
+	}
+
+	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
 		if (this.blockMaterial == Material.lava)

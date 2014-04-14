@@ -58,24 +58,28 @@ public class ContainerForge extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
+	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int slotNum)
 	{
-		Slot slot = (Slot)inventorySlots.get(i);
+		ItemStack origStack = null;
+		Slot slot = (Slot)inventorySlots.get(slotNum);
 		Slot[] slotinput = {(Slot)inventorySlots.get(2), (Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(0), (Slot)inventorySlots.get(4)};
 		Slot[] slotstorage = {(Slot)inventorySlots.get(10), (Slot)inventorySlots.get(11), (Slot)inventorySlots.get(12), (Slot)inventorySlots.get(13)};
 		Slot[] slotfuel = {(Slot)inventorySlots.get(7), (Slot)inventorySlots.get(6), (Slot)inventorySlots.get(8), (Slot)inventorySlots.get(5), (Slot)inventorySlots.get(9)};
 		HeatRegistry manager = HeatRegistry.getInstance();
+
 		if(slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
-			if(i <= 13)
+			ItemStack slotStack = slot.getStack();
+			origStack = slotStack.copy();
+
+			if(slotNum <= 13)//If the player shift clicked one of the forge slots
 			{
-				if(!this.mergeItemStack(itemstack1, 14, this.inventorySlots.size(), true))
+				if(!this.mergeItemStack(slotStack, 14, this.inventorySlots.size(), true))
 					return null;
 			}
-			else
+			else //Otherwise the shift clicked an item in their inventory and are trying to put it in the forge.
 			{
-				if(itemstack1.getItem() == Items.coal)
+				if(slotStack.getItem() == Items.coal)
 				{
 					int j = 0;
 					while(j < 5)
@@ -86,10 +90,10 @@ public class ContainerForge extends ContainerTFC
 						}
 						else
 						{
-							ItemStack stack = itemstack1.copy();
+							ItemStack stack = slotStack.copy();
 							stack.stackSize = 1;
 							slotfuel[j].putStack(stack);
-							itemstack1.stackSize--;
+							slotStack.stackSize--;
 							j = -1;
 							break;
 						}
@@ -105,16 +109,16 @@ public class ContainerForge extends ContainerTFC
 							}
 							else
 							{
-								ItemStack stack = itemstack1.copy();
+								ItemStack stack = slotStack.copy();
 								stack.stackSize = 1;
 								slotstorage[j].putStack(stack);
-								itemstack1.stackSize--;
+								slotStack.stackSize--;
 								break;
 							}
 						}
 					}
 				}
-				else if(!(itemstack1.getItem() instanceof ItemOre) && manager.findMatchingIndex(itemstack1) != null)
+				else if(!(slotStack.getItem() instanceof ItemOre) && manager.findMatchingIndex(slotStack) != null)//Try to add the item to the input slots
 				{
 					int j = 0;
 					while(j < 5)
@@ -123,12 +127,12 @@ public class ContainerForge extends ContainerTFC
 						{
 							j++;
 						}
-						else if(itemstack1 != null)
+						else if(slotStack != null)
 						{
-							ItemStack stack = itemstack1.copy();
+							ItemStack stack = slotStack.copy();
 							stack.stackSize = 1;
 							slotinput[j].putStack(stack);
-							itemstack1.stackSize--;
+							slotStack.stackSize--;
 							j = -1;
 							break;
 						}
@@ -144,16 +148,16 @@ public class ContainerForge extends ContainerTFC
 							}
 							else
 							{
-								ItemStack stack = itemstack1.copy();
+								ItemStack stack = slotStack.copy();
 								stack.stackSize = 1;
 								slotstorage[j].putStack(stack);
-								itemstack1.stackSize--;
+								slotStack.stackSize--;
 								break;
 							}
 						}
 					}
 				}
-				else
+				else//Try to store the item in the side storage slots.
 				{
 					int j = 0;
 					while(j < 4)
@@ -164,22 +168,27 @@ public class ContainerForge extends ContainerTFC
 						}
 						else
 						{
-							ItemStack stack = itemstack1.copy();
+							ItemStack stack = slotStack.copy();
 							stack.stackSize = 1;
 							slotstorage[j].putStack(stack);
-							itemstack1.stackSize--;
+							slotStack.stackSize--;
 							break;
 						}
 					}
 				}
 			}
 
-			if(itemstack1.stackSize <= 0)
+			if(slotStack.stackSize <= 0)
 				slot.putStack(null);
 			else
 				slot.onSlotChanged();
+
+			if (slotStack.stackSize == origStack.stackSize)
+				return null;
+
+			slot.onPickupFromSlot(player, slotStack);
 		}
-		return null;
+		return origStack;
 	}
 
 	@Override
