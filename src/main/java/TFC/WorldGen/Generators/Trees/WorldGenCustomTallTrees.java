@@ -18,26 +18,23 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 		super(flag);
 		treeId=id;
 	}
+
 	@Override
 	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		int l = random.nextInt(5) + 6;
 		boolean flag = true;
 		if (yCoord < 1 || yCoord + l + 1 > world.getHeight())
-		{
 			return false;
-		}
+
 		for (int i1 = yCoord; i1 <= yCoord + 1 + l; i1++)
 		{
 			byte byte0 = 1;
 			if (i1 == yCoord)
-			{
 				byte0 = 0;
-			}
 			if (i1 >= yCoord + 1 + l - 2)
-			{
 				byte0 = 2;
-			}
+
 			for (int i2 = xCoord - byte0; i2 <= xCoord + byte0 && flag; i2++)
 			{
 				for (int l2 = zCoord - byte0; l2 <= zCoord + byte0 && flag; l2++)
@@ -46,9 +43,7 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 					{
 						Block j3 = world.getBlock(i2, i1, l2);
 						if (j3 != Blocks.air && (j3 != TFCBlocks.Leaves || j3 != TFCBlocks.Leaves2))
-						{
 							flag = false;
-						}
 					}
 					else
 					{
@@ -59,18 +54,16 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 		}
 
 		if (!flag)
-		{
 			return false;
-		}
 		if (treeId == 15)
 		{
-			int x = 0;
+			int x = 0; // ???
 		}
+
 		Block var8 = world.getBlock(xCoord, yCoord - 1, zCoord);
 		if (!(TFC_Core.isSoil(var8)) || yCoord >= world.getHeight() - l - 1)
-		{
 			return false;
-		}
+
 		//DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 		//set the block below the tree to dirt.
 		//world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2));
@@ -85,9 +78,7 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 				{
 					int j4 = i4 - zCoord;
 					if ((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0) && world.isAirBlock(k3, k1, i4))
-					{
 						setBlockAndNotifyAdequately(world, k3, k1, i4, TFCBlocks.Leaves, treeId);
-					}
 				}
 			}
 		}
@@ -96,9 +87,7 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 		{
 			Block k2 = world.getBlock(xCoord, yCoord + l1, zCoord);
 			if (k2 == Blocks.air || k2 == TFCBlocks.Leaves || k2 == TFCBlocks.Leaves2 || k2.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
-			{
-				setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.Wood, treeId);
-			}
+				setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
 		}
 
 		return true;

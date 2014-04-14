@@ -105,8 +105,10 @@ public class BlockDetailed extends BlockPartial
 		boolean hasHammer = false;
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
 		for(int i = 0; i < 9;i++)
+		{
 			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
 				hasHammer = true;
+		}
 
 		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && world.isRemote && pi.lockMatches(x, y, z))
 		{
@@ -168,8 +170,11 @@ public class BlockDetailed extends BlockPartial
 		float div = 1f / 8;
 
 		for(int subX = 0; subX < 8; subX++)
+		{
 			for(int subZ = 0; subZ < 8; subZ++)
+			{
 				for(int subY = 0; subY < 8; subY++)
+				{
 					if (te.data.get((subX * 8 + subZ)*8 + subY))
 					{
 						float minX = subX * div;
@@ -182,7 +187,9 @@ public class BlockDetailed extends BlockPartial
 						this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
 						super.addCollisionBoxesToList(world, i, j, k, aabb, list, entity);
 					}
-
+				}
+			}
+		}
 		setBlockBoundsBasedOnSelection(world, i, j, k);
 	}
 
@@ -226,7 +233,8 @@ public class BlockDetailed extends BlockPartial
 					min = ret;
 				}
 			}
-			if (min != null) {
+			if (min != null)
+			{
 				side = (Byte) min[1];
 				xSelected = (Integer) min[3];
 				ySelected = (Integer) min[4];

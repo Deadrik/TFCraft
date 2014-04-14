@@ -50,6 +50,7 @@ public class WorldGenFissure implements IWorldGenerator
 		seed = i;
 		return this;
 	}
+
 	public WorldGenFissure setUnderground(boolean i, int d)
 	{
 		underground = i;
@@ -86,8 +87,10 @@ public class WorldGenFissure implements IWorldGenerator
 		poolDepth = 1+rand.nextInt(2);
 
 		for(int d = 1; d <= poolDepth; d++)
+		{
 			if(!world.getBlock(x, y-d, z).isNormalCube())
 				return;
+		}
 
 		int stability = TFC_Climate.getStability(x, z);
 		Block block = world.getBlock(x,y,z);
@@ -110,24 +113,24 @@ public class WorldGenFissure implements IWorldGenerator
 			return;
 		for(ByteCoord b : map)
 		{
-			world.setBlockToAir(x+b.x, y+b.y, z+b.z);
+			world.setBlockToAir(x + b.x, y + b.y, z + b.z);
 			for(int d = 1; d <= poolDepth; d++)
-				fill(world, x+b.x, y+b.y-d, z+b.z, rockLayer.block, rockLayer.meta, fillBlock != null ? fillBlock : Blocks.air);
+				fill(world, x + b.x, y + b.y - d, z + b.z, rockLayer.block, rockLayer.meta, fillBlock != null ? fillBlock : Blocks.air);
 
 			int rx = 0;
 			int rz = 0;
 			for(int d = 0; d <= creviceDepth; d++)
 			{
-				carve(world, x+b.x, y+b.y+d, z+b.z, rockLayer.block, rockLayer.meta);
+				carve(world, x + b.x, y + b.y + d, z + b.z, rockLayer.block, rockLayer.meta);
 				if(rand.nextInt(3) == 0)
 				{
 					rx = -1 + rand.nextInt(3);
 					rz = -1 + rand.nextInt(3);
-					carve(world, x+b.x+rx, y+b.y+d, z+b.z+rz, rockLayer.block, rockLayer.meta);
+					carve(world, x + b.x + rx, y + b.y + d, z + b.z + rz, rockLayer.block, rockLayer.meta);
 				}
 			}
 			if(fillBlock != null && fillBlock.getMaterial() == Material.lava)
-				world.setBlock(x+b.x, y+b.y-poolDepth-1, z+b.z, rockLayer.block, rockLayer.meta, 2);
+				world.setBlock(x + b.x, y + b.y-poolDepth-1, z + b.z, rockLayer.block, rockLayer.meta, 2);
 		}
 
 		if(makeTunnel)
@@ -138,29 +141,29 @@ public class WorldGenFissure implements IWorldGenerator
 	{
 		if(world.getBlock(x, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x, y, z)))
 			world.setBlockToAir(x, y, z);
-		if(world.getBlock(x-1, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x-1, y, z)) && !TFC_Core.isGrass(world.getBlock(x-1, y, z)))
-			world.setBlock(x-1, y, z, block, meta, 2);
-		if(world.getBlock(x+1, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x+1, y, z)) && !TFC_Core.isGrass(world.getBlock(x+1, y, z)))
-			world.setBlock(x+1, y, z, block, meta, 2);
-		if(world.getBlock(x, y, z-1).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x, y, z-1)) && !TFC_Core.isGrass(world.getBlock(x, y, z-1)))
-			world.setBlock(x, y, z-1, block, meta, 2);
-		if(world.getBlock(x, y, z+1).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x, y, z+1)) && !TFC_Core.isGrass(world.getBlock(x, y, z+1)))
-			world.setBlock(x, y, z+1, block, meta, 2);
+		if(world.getBlock(x - 1, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x - 1, y, z)) && !TFC_Core.isGrass(world.getBlock(x - 1, y, z)))
+			world.setBlock(x - 1, y, z, block, meta, 2);
+		if(world.getBlock(x + 1, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x + 1, y, z)) && !TFC_Core.isGrass(world.getBlock(x + 1, y, z)))
+			world.setBlock(x + 1, y, z, block, meta, 2);
+		if(world.getBlock(x, y, z - 1).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x, y, z - 1)) && !TFC_Core.isGrass(world.getBlock(x, y, z - 1)))
+			world.setBlock(x, y, z - 1, block, meta, 2);
+		if(world.getBlock(x, y, z + 1).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x, y, z + 1)) && !TFC_Core.isGrass(world.getBlock(x, y, z + 1)))
+			world.setBlock(x, y, z + 1, block, meta, 2);
 	}
 
 	private void fill(World world, int x, int y, int z, Block block, int meta, Block fill)
 	{
 		world.setBlock(x, y, z, fill);
-		if(world.getBlock(x-1, y, z).getMaterial() == Material.air)
-			world.setBlock(x-1, y, z, block, meta, 2);
-		if(world.getBlock(x+1, y, z).getMaterial() == Material.air)
-			world.setBlock(x+1, y, z, block, meta, 2);
-		if(world.getBlock(x, y, z-1).getMaterial() == Material.air)
-			world.setBlock(x, y, z-1, block, meta, 2);
-		if(world.getBlock(x, y, z+1).getMaterial() == Material.air)
-			world.setBlock(x, y, z+1, block, meta, 2);
-		if(world.getBlock(x, y-1, z).getMaterial() == Material.air)
-			world.setBlock(x, y-1, z, block, meta, 2);
+		if(world.getBlock(x - 1, y, z).getMaterial() == Material.air)
+			world.setBlock(x - 1, y, z, block, meta, 2);
+		if(world.getBlock(x + 1, y, z).getMaterial() == Material.air)
+			world.setBlock(x + 1, y, z, block, meta, 2);
+		if(world.getBlock(x, y, z - 1).getMaterial() == Material.air)
+			world.setBlock(x, y, z - 1, block, meta, 2);
+		if(world.getBlock(x, y, z + 1).getMaterial() == Material.air)
+			world.setBlock(x, y, z + 1, block, meta, 2);
+		if(world.getBlock(x, y - 1, z).getMaterial() == Material.air)
+			world.setBlock(x, y - 1, z, block, meta, 2);
 	}
 
 	private void makeTunnel(Random random, World world, int x, int z, int y, BlockMeta rockLayer)
@@ -171,8 +174,10 @@ public class WorldGenFissure implements IWorldGenerator
 		{
 			if(world.getBlock(xCoord, yCoord, zCoord) == Blocks.bedrock)
 				break;
-			if(random.nextFloat() < downChance/100f)
+			if(random.nextFloat() < downChance / 100f)
+			{
 				yCoord--;
+			}
 			else
 			{
 				int dir = random.nextInt(3);
@@ -313,13 +318,16 @@ public class WorldGenFissure implements IWorldGenerator
 					}
 			}
 			else if(block.collapseChance < 100)
+			{
 				for(int d = 0; d <= poolDepth; d++)
+				{
 					if(TFC_Core.isGround(world.getBlock(worldX, worldY-d, worldZ)))
 						world.setBlock(worldX, worldY-d, worldZ, rockLayer.block, rockLayer.meta, 2);
+				}
+			}
 			checkedmap.add(block.coords);
 			checkQueue.removeFirst();
 		}
-
 		return map;
 	}
 }

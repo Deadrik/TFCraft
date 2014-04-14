@@ -23,24 +23,30 @@ public class PlayerManagerTFC
 	public PlayerInfo getPlayerInfoFromPlayer(EntityPlayer player)
 	{
 		for(PlayerInfo pi : Players)
+		{
 			if(pi.Name.equals(player.getDisplayName()) && pi.PlayerUUID.equals(player.getUniqueID()))
 				return pi;
+		}
 		return null;
 	}
 
 	public PlayerInfo getPlayerInfoFromName(String name)
 	{
 		for(PlayerInfo pi : Players)
+		{
 			if(pi.Name.equals(name))
 				return pi;
+		}
 		return null;
 	}
 
 	public PlayerInfo getPlayerInfoFromUUID(String uuid)
 	{
 		for(PlayerInfo pi : Players)
+		{
 			if(pi.PlayerUUID.equals(uuid))
 				return pi;
+		}
 		return null;
 	}
 

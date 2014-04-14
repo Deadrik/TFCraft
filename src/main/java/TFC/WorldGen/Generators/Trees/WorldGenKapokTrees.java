@@ -69,11 +69,8 @@ public class WorldGenKapokTrees extends WorldGenerator
 		for (var5 = 0; var4 < 3; ++var4)
 		{
 			var3[var4] = par2ArrayOfInteger[var4] - par1ArrayOfInteger[var4];
-
 			if (Math.abs(var3[var4]) > Math.abs(var3[var5]))
-			{
 				var5 = var4;
-			}
 		}
 
 		if (var3[var5] == 0)
@@ -87,13 +84,9 @@ public class WorldGenKapokTrees extends WorldGenerator
 			byte var8;
 
 			if (var3[var5] > 0)
-			{
 				var8 = 1;
-			}
 			else
-			{
 				var8 = -1;
-			}
 
 			double var9 = (double)var3[var6] / (double)var3[var5];
 			double var11 = (double)var3[var7] / (double)var3[var5];
@@ -107,13 +100,9 @@ public class WorldGenKapokTrees extends WorldGenerator
 				var13[var6] = MathHelper.floor_double(par1ArrayOfInteger[var6] + var14 * var9);
 				var13[var7] = MathHelper.floor_double(par1ArrayOfInteger[var7] + var14 * var11);
 				Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
-
-				if (var16 != Blocks.air && (var16 != Blocks.leaves || var16 != Blocks.leaves2) && var16!= Blocks.vine && var16 != TFCBlocks.Leaves)
-				{
+				if (var16 != Blocks.air && (var16 != TFCBlocks.Leaves || var16 != TFCBlocks.Leaves2) && var16!= Blocks.vine)
 					break;
-				}
 			}
-
 			return var14 == var15 ? -1 : Math.abs(var14);
 		}
 	}
@@ -128,11 +117,8 @@ public class WorldGenKapokTrees extends WorldGenerator
 		this.basePos[1] = par4;
 		this.basePos[2] = par5;
 
-		
 		if (this.heightLimit == 0)
-		{
 			this.heightLimit = 15 + this.rand.nextInt(this.heightLimitLimit/2);
-		}
 		
 		trunkSize = heightLimit > 25?2:1;
 
@@ -157,7 +143,6 @@ public class WorldGenKapokTrees extends WorldGenerator
 	void generateLeafNode(int par1, int par2, int par3)
 	{
 		int var4 = par2;
-
 		for (int var5 = par2 + this.leafDistanceLimit; var4 < var5; ++var4)
 		{
 			float var6 = this.leafSize(var4 - par2);
@@ -165,25 +150,27 @@ public class WorldGenKapokTrees extends WorldGenerator
 		}
 	}
 
-	void generateBranchPoints(){
+	void generateBranchPoints()
+	{
 		double branchSlope = 0;			//starts out horizontal and becomes more vertical. should be 0.2-1.5, trying out constant 0.5
 		int branchRange = height/3;			
 		int branchLength = 0;			//length of the branch in XZ
 		double x,z,y;
-		for(int j1 = basePos[1]+height-branchRange; j1 < basePos[1]+height;j1++){			
+		for(int j1 = basePos[1]+height-branchRange; j1 < basePos[1]+height;j1++)
+		{			
 				branchSlope = 0.5;
 				x = rand.nextFloat();
 				z = 1 - x;
-				x*=rand.nextBoolean()?1:-1;
-				z*=rand.nextBoolean()?1:-1;
-				branchLength = (int) (((1.5D - branchSlope)*5) + rand.nextInt(4)) + 3;
-				if(trunkSize == 1)branchLength*=0.66;
+				x*=rand.nextBoolean()? 1 : -1;
+				z*=rand.nextBoolean()? 1 : -1;
+				branchLength = (int) (((1.5D - branchSlope) * 5) + rand.nextInt(4)) + 3;
+				if(trunkSize == 1)branchLength *= 0.66;
 				x*=branchLength;
 				z*=branchLength;
 				y = branchLength * branchSlope;
 				int[] branchDestination = {(int)(basePos[0] + x), (int)(j1 + y), (int)(basePos[2] + z)};
 				int[] branchOrigin =  {basePos[0], j1, basePos[2]};
-				placeBlockLineCurved(branchOrigin,branchDestination,TFCBlocks.Wood);
+				placeBlockLineCurved(branchOrigin, branchDestination, TFCBlocks.LogNatural);
 		}
 	}
 
@@ -201,7 +188,6 @@ public class WorldGenKapokTrees extends WorldGenerator
 			int[] var5 = new int[] {var4[0], var4[1], var4[2]};
 			var3[1] = var4[3];
 			int var6 = var3[1] - this.basePos[1];
-
 			if (this.leafNodeNeedsBase(var6))
 			{
 				//this.placeBlockLine(var3, var5, TFCBlocks.LogNatural2);
@@ -217,16 +203,11 @@ public class WorldGenKapokTrees extends WorldGenerator
 		this.height = (int)(this.heightLimit * this.heightAttenuation);
 
 		if (this.height >= this.heightLimit)
-		{
 			this.height = this.heightLimit - 1;
-		}
 
 		int var1 = (int)(1.382D + Math.pow(this.leafDensity * this.heightLimit / 13.0D, 2.0D));
-
 		if (var1 < 1)
-		{
 			var1 = 1;
-		}
 
 		int[][] var2 = new int[var1 * this.heightLimit][4];
 		int var3 = this.basePos[1] + this.heightLimit - this.leafDistanceLimit;
@@ -267,13 +248,9 @@ public class WorldGenKapokTrees extends WorldGenerator
 						double var22 = var20 * this.branchSlope;
 
 						if (var17[1] - var22 > var5)
-						{
 							var19[1] = var5;
-						}
 						else
-						{
 							var19[1] = (int)(var17[1] - var22);
-						}
 
 						if (this.checkBlockLine(var19, var17) == -1)
 						{
@@ -285,12 +262,10 @@ public class WorldGenKapokTrees extends WorldGenerator
 						}
 					}
 				}
-
 				--var3;
 				--var6;
 			}
 		}
-
 		this.leafNodes = new int[var4][4];
 		System.arraycopy(var2, 0, this.leafNodes, 0, var4);
 	}
@@ -330,19 +305,19 @@ public class WorldGenKapokTrees extends WorldGenerator
 		int var4 = this.basePos[2];
 		int[] var5 = new int[] {var1, var2, var4};
 		int[] var6 = new int[] {var1, var3, var4};
-		this.placeBlockLine(var5, var6, TFCBlocks.Wood);
+		this.placeBlockLine(var5, var6, TFCBlocks.LogNatural);
 
 		if (this.trunkSize == 2)
 		{
 			++var5[0];
 			++var6[0];
-			this.placeBlockLine(var5, var6, TFCBlocks.Wood);
+			this.placeBlockLine(var5, var6, TFCBlocks.LogNatural);
 			++var5[2];
 			++var6[2];
-			this.placeBlockLine(var5, var6, TFCBlocks.Wood);
+			this.placeBlockLine(var5, var6, TFCBlocks.LogNatural);
 			var5[0] += -1;
 			var6[0] += -1;
-			this.placeBlockLine(var5, var6, TFCBlocks.Wood);
+			this.placeBlockLine(var5, var6, TFCBlocks.LogNatural);
 		}
 	}
 
@@ -374,7 +349,7 @@ public class WorldGenKapokTrees extends WorldGenerator
 					var11[var9] = var10[var9] + var13;
 					Block var14 = this.worldObj.getBlock(var11[0], var11[1], var11[2]);
 
-					if (var14 != Blocks.air && (var14 != Blocks.leaves || var14 != Blocks.leaves))
+					if (var14 != Blocks.air && (var14 != TFCBlocks.Leaves || var14 != TFCBlocks.Leaves2))
 					{
 						++var13;
 					}
@@ -404,17 +379,11 @@ public class WorldGenKapokTrees extends WorldGenerator
 			float var4;
 
 			if (var3 == 0.0F)
-			{
 				var4 = var2;
-			}
 			else if (Math.abs(var3) >= var2)
-			{
 				var4 = 0.0F;
-			}
 			else
-			{
 				var4 = (float)Math.sqrt(Math.pow(Math.abs(var2), 2.0D) - Math.pow(Math.abs(var3), 2.0D));
-			}
 
 			var4 *= 0.5F;
 			return var4;
@@ -446,11 +415,8 @@ public class WorldGenKapokTrees extends WorldGenerator
 		for (var6 = 0; var5 < 3; ++var5)
 		{
 			var4[var5] = par2ArrayOfInteger[var5] - par1ArrayOfInteger[var5];
-
 			if (Math.abs(var4[var5]) > Math.abs(var4[var6]))
-			{
 				var6 = var5;
-			}
 		}
 
 		if (var4[var6] != 0)
@@ -460,13 +426,9 @@ public class WorldGenKapokTrees extends WorldGenerator
 			byte var9;
 
 			if (var4[var6] > 0)
-			{
 				var9 = 1;
-			}
 			else
-			{
 				var9 = -1;
-			}
 
 			double var10 = (double)var4[var7] / (double)var4[var6];
 			double var12 = (double)var4[var8] / (double)var4[var6];
@@ -484,10 +446,16 @@ public class WorldGenKapokTrees extends WorldGenerator
 					this.setBlockAndNotifyAdequately(this.worldObj, var14[0], var14[1], var14[2], par3, treeId);
 				}
 			}
-			if(par1ArrayOfInteger[0]==par2ArrayOfInteger[0] && par1ArrayOfInteger[2]==par2ArrayOfInteger[2] && par1ArrayOfInteger[1]<par2ArrayOfInteger[1]){
-				for(int i = -1; i <2;i++){
-					for(int k = -1; k < 2; k++){
-						if(rand.nextBoolean() &&  par1ArrayOfInteger[1] > 1&& Math.abs(i)!=Math.abs(k) && !worldObj.isAirBlock(i + par1ArrayOfInteger[0], par1ArrayOfInteger[1]-1, par1ArrayOfInteger[2]+k)){
+			if(par1ArrayOfInteger[0]==par2ArrayOfInteger[0] && par1ArrayOfInteger[2]==par2ArrayOfInteger[2] && par1ArrayOfInteger[1]<par2ArrayOfInteger[1])
+			{
+				for(int i = -1; i <2;i++)
+				{
+					for(int k = -1; k < 2; k++)
+					{
+						if(rand.nextBoolean() && par1ArrayOfInteger[1] > 1 &&
+								Math.abs(i)!=Math.abs(k) &&
+								!worldObj.isAirBlock(i + par1ArrayOfInteger[0], par1ArrayOfInteger[1] - 1, par1ArrayOfInteger[2] + k))
+						{
 							this.setBlockAndNotifyAdequately(this.worldObj,i + par1ArrayOfInteger[0], par1ArrayOfInteger[1], par1ArrayOfInteger[2]+k, par3, treeId);
 						}
 					}
@@ -505,11 +473,8 @@ public class WorldGenKapokTrees extends WorldGenerator
 		for (var6 = 0; var5 < 3; ++var5)
 		{
 			var4[var5] = par2ArrayOfInteger[var5] - par1ArrayOfInteger[var5];
-
 			if (Math.abs(var4[var5]) > Math.abs(var4[var6]))
-			{
 				var6 = var5;
-			}
 		}
 
 		if (var4[var6] != 0)
@@ -519,13 +484,9 @@ public class WorldGenKapokTrees extends WorldGenerator
 			byte var9;
 
 			if (var4[var6] > 0)
-			{
 				var9 = 1;
-			}
 			else
-			{
 				var9 = -1;
-			}
 
 			double var10 = (double)var4[var7] / (double)var4[var6];
 			double var12 = (double)var4[var8] / (double)var4[var6];
@@ -537,17 +498,21 @@ public class WorldGenKapokTrees extends WorldGenerator
 				var14[var6] = MathHelper.floor_double(par1ArrayOfInteger[var6] + var15 + 0.5D);
 				var14[var7] = MathHelper.floor_double(par1ArrayOfInteger[var7] + var15 * var10 + 0.5D);
 				var14[var8] = MathHelper.floor_double(par1ArrayOfInteger[var8] + var15 * var12 + 0.5D);
-				if(worldObj.isAirBlock(var14[0], var14[1], var14[2]) || worldObj.getBlock(var14[0], var14[1], var14[2]) == TFCBlocks.Leaves ||
+				if(worldObj.isAirBlock(var14[0], var14[1], var14[2]) ||
+						worldObj.getBlock(var14[0], var14[1], var14[2]) == TFCBlocks.Leaves ||
 						worldObj.getBlock(var14[0], var14[1], var14[2]) == TFCBlocks.Leaves2)
 				{
-					if(rand.nextInt(3)==0 && Math.abs(var15) > 2){
+					if(rand.nextInt(3)==0 && Math.abs(var15) > 2)
+					{
 						int[] currentBlock = {var14[0],var14[1],var14[2]};
 						int distance = 5;
 						float x = rand.nextFloat();
 						float y = Math.min(rand.nextFloat(), 1-x);
 						float z = 1 - x -y;
-						int[] destinationBlock = {var14[0] + (int)(distance * x * (rand.nextBoolean()?1:-1)),
-								var14[1] + (int)(distance * y * (rand.nextBoolean()?1:-1)), var14[2] + (int)(distance * z * (rand.nextBoolean()?1:-1))};
+						int[] destinationBlock = {
+								var14[0] + (int)(distance * x * (rand.nextBoolean() ? 1 : -1)),
+								var14[1] + (int)(distance * y * (rand.nextBoolean() ? 1 : -1)),
+								var14[2] + (int)(distance * z * (rand.nextBoolean() ? 1 : -1))};
 						placeBlockLineSecondary(currentBlock, destinationBlock,  par3);
 					}
 					this.setBlockAndNotifyAdequately(this.worldObj, var14[0], var14[1], var14[2], par3, treeId);
@@ -559,10 +524,10 @@ public class WorldGenKapokTrees extends WorldGenerator
 
 	void placeBlockLineCurved(int[] startingPos, int[] endingPos,Block par3)
 	{	
-		int[] midPointRaised = {(endingPos[0]-startingPos[0])/2,(int)((endingPos[1]-startingPos[1])/1.5D),(endingPos[1]-startingPos[1])/2};
-		int[] newDest = {startingPos[0]+midPointRaised[0],startingPos[1]+midPointRaised[1],startingPos[2]+midPointRaised[2]};
-		placeBlockLinePrimary(startingPos,newDest,par3);
-		placeBlockLinePrimary(newDest,endingPos,par3);
+		int[] midPointRaised = {(endingPos[0] - startingPos[0]) / 2, (int)((endingPos[1] - startingPos[1]) / 1.5D), (endingPos[1] - startingPos[1]) / 2};
+		int[] newDest = {startingPos[0] + midPointRaised[0], startingPos[1] + midPointRaised[1], startingPos[2] + midPointRaised[2]};
+		placeBlockLinePrimary(startingPos, newDest, par3);
+		placeBlockLinePrimary(newDest, endingPos, par3);
 	}
 
 	void placeBlockLineSecondary(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger, Block par3)
@@ -574,11 +539,8 @@ public class WorldGenKapokTrees extends WorldGenerator
 		for (var6 = 0; var5 < 3; ++var5)
 		{
 			var4[var5] = par2ArrayOfInteger[var5] - par1ArrayOfInteger[var5];
-
 			if (Math.abs(var4[var5]) > Math.abs(var4[var6]))
-			{
 				var6 = var5;
-			}
 		}
 
 		if (var4[var6] != 0)
@@ -588,13 +550,9 @@ public class WorldGenKapokTrees extends WorldGenerator
 			byte var9;
 
 			if (var4[var6] > 0)
-			{
 				var9 = 1;
-			}
 			else
-			{
 				var9 = -1;
-			}
 
 			double var10 = (double)var4[var7] / (double)var4[var6];
 			double var12 = (double)var4[var8] / (double)var4[var6];
@@ -606,7 +564,8 @@ public class WorldGenKapokTrees extends WorldGenerator
 				var14[var6] = MathHelper.floor_double(par1ArrayOfInteger[var6] + var15 + 0.5D);
 				var14[var7] = MathHelper.floor_double(par1ArrayOfInteger[var7] + var15 * var10 + 0.5D);
 				var14[var8] = MathHelper.floor_double(par1ArrayOfInteger[var8] + var15 * var12 + 0.5D);
-				if(worldObj.isAirBlock(var14[0], var14[1], var14[2]) || worldObj.getBlock(var14[0], var14[1], var14[2]) == TFCBlocks.Leaves ||
+				if(worldObj.isAirBlock(var14[0], var14[1], var14[2]) ||
+						worldObj.getBlock(var14[0], var14[1], var14[2]) == TFCBlocks.Leaves ||
 						worldObj.getBlock(var14[0], var14[1], var14[2]) == TFCBlocks.Leaves2)
 				{
 					this.setBlockAndNotifyAdequately(this.worldObj, var14[0], var14[1], var14[2], par3, treeId);
@@ -625,9 +584,7 @@ public class WorldGenKapokTrees extends WorldGenerator
 		this.heightLimitLimit = (int)(par1 * 35.0D);
 
 		if (par1 > 0.5D)
-		{
 			this.leafDistanceLimit = 5;
-		}
 
 		this.scaleWidth = par3;
 		this.leafDensity = par5;

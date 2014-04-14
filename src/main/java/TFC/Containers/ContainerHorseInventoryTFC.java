@@ -27,13 +27,23 @@ public class ContainerHorseInventoryTFC extends Container
 		int k;
 
 		if (par3EntityHorse.isChested())
+		{
 			for (j = 0; j < b0; ++j)
+			{
 				for (k = 0; k < 5; ++k)
+				{
 					this.addSlotToContainer(new Slot(par2IInventory, 2 + k + j * 5, 80 + k * 18, 18 + j * 18));
+				}
+			}
+		}
 
 		for (j = 0; j < 3; ++j)
+		{
 			for (k = 0; k < 9; ++k)
+			{
 				this.addSlotToContainer(new Slot(par1IInventory, k + j * 9 + 9, 8 + k * 18, 102 + j * 18 + i));
+			}
+		}
 
 		for (j = 0; j < 9; ++j)
 			this.addSlotToContainer(new Slot(par1IInventory, j, 8 + j * 18, 160 + i));
@@ -58,14 +68,20 @@ public class ContainerHorseInventoryTFC extends Container
 			itemstack = itemstack1.copy();
 
 			if (par2 < this.field_111243_a.getSizeInventory())
+			{
 				if (!this.mergeItemStack(itemstack1, this.field_111243_a.getSizeInventory(), this.inventorySlots.size(), true))
 					return null;
+			}
 			else if (this.getSlot(1).isItemValid(itemstack1) && !this.getSlot(1).getHasStack())
+			{
 				if (!this.mergeItemStack(itemstack1, 1, 2, false))
 					return null;
+			}
 			else if (this.getSlot(0).isItemValid(itemstack1))
+			{
 				if (!this.mergeItemStack(itemstack1, 0, 1, false))
 					return null;
+			}
 			else if (this.field_111243_a.getSizeInventory() <= 2 || !this.mergeItemStack(itemstack1, 2, this.field_111243_a.getSizeInventory(), false))
 				return null;
 

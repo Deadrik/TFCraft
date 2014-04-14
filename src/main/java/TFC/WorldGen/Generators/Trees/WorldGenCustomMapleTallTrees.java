@@ -88,7 +88,7 @@ public class WorldGenCustomMapleTallTrees extends WorldGenerator
 		{
 			Block k2 = world.getBlock(xCoord, yCoord + l1, zCoord);
 			if (k2 == Blocks.air || k2 == TFCBlocks.Leaves || k2.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
-				setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.Wood, treeId);
+				setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
 		}
 
 		return true;

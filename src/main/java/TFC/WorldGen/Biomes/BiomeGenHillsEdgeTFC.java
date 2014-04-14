@@ -9,7 +9,6 @@ import java.util.Random;
 import net.minecraft.world.World;
 import TFC.Entities.Mobs.EntitySheepTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
-import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
 
 // Referenced classes of package net.minecraft.src:
@@ -18,7 +17,6 @@ import TFC.WorldGen.TFCBiome;
 
 public class BiomeGenHillsEdgeTFC extends TFCBiome
 {
-
 	int treeCommon1 = -1;
 	Boolean treeCommon1Size;
 	int treeCommon2 = -1;
@@ -31,10 +29,10 @@ public class BiomeGenHillsEdgeTFC extends TFCBiome
 	public BiomeGenHillsEdgeTFC(int i)
 	{
 		super(i);
-		spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 1, 1, 2));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 1, 1, 2));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 1, 1, 2));
-		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 2;
-		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 2;
+		this.theBiomeDecorator.treesPerChunk = 2;
+		this.theBiomeDecorator.grassPerChunk = 2;
 	}
 
 	public void SetupTrees(World world, Random R)

@@ -71,12 +71,16 @@ public class BlockFruitWood extends BlockTerraContainer
 		if(equip!=null)
 		{
 			for(int cnt = 0; cnt < Recipes.Axes.length && !isAxeorSaw; cnt++)
+			{
 				if(equip.getItem() == Recipes.Axes[cnt])
 					isAxeorSaw = true;
+			}
 
 			for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
+			{
 				if(equip.getItem() == Recipes.Saws[cnt])
 					isAxeorSaw = true;
+			}
 		}
 		if(isAxeorSaw)
 		{

@@ -2,12 +2,14 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import TFC.Reference;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Textures;
 import cpw.mods.fml.relauncher.Side;
@@ -166,5 +168,10 @@ public class BlockStalactite extends BlockTerra
 	public boolean renderAsNormalBlock()
 	{
 		return false;
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister registerer)
+	{
 	}
 }

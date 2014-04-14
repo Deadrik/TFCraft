@@ -53,10 +53,12 @@ public class CommandTime extends CommandBase
 					{
 						i = parseIntWithMin(par1ICommandSender, par2ArrayOfStr[1], 0);
 					}
-					if(i < currentTime){
+					if(i < currentTime)
+					{
 						par1ICommandSender.addChatMessage(new ChatComponentText("Cannot set time to before current time."));
 					}
-					else{
+					else
+					{
 						this.setTime(par1ICommandSender, i);
 						notifyAdmins(par1ICommandSender, "commands.time.set", new Object[] {Integer.valueOf(i)});
 					}
@@ -66,10 +68,12 @@ public class CommandTime extends CommandBase
 				if (par2ArrayOfStr[0].equals("add"))
 				{
 					i = parseIntWithMin(par1ICommandSender, par2ArrayOfStr[1], 0);
-					if(i+ currentTime < currentTime){
+					if(i+ currentTime < currentTime)
+					{
 						par1ICommandSender.addChatMessage(new ChatComponentText("Cannot set time to before current time."));
 					}
-					else{
+					else
+					{
 						this.addTime(par1ICommandSender, i);
 						notifyAdmins(par1ICommandSender, "commands.time.added", new Object[] {Integer.valueOf(i)});
 					}

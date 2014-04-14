@@ -35,9 +35,13 @@ public class WorldGenSoilPits implements IWorldGenerator
 		x = chunkX + random.nextInt(16) + 8;
 		z = chunkZ + random.nextInt(16) + 8;
 		if(generatePeat(world, random, x, world.getTopSolidOrLiquidBlock(x, z), z))
+		{
 			if(random.nextInt(5) == 0)
-				if(!cranberryGen.generate(world, random, x, world.getTopSolidOrLiquidBlock(x, z)+1, z))
-					cloudberryGen.generate(world, random, x, world.getTopSolidOrLiquidBlock(x, z)+1, z);
+			{
+				if(!cranberryGen.generate(world, random, x, world.getTopSolidOrLiquidBlock(x, z) + 1, z))
+					cloudberryGen.generate(world, random, x, world.getTopSolidOrLiquidBlock(x, z) + 1, z);
+			}
+		}
 	}
 
 	public boolean generatePeat(World par1World, Random par2Random, int xCoord, int yCoord, int zCoord)
@@ -45,6 +49,7 @@ public class WorldGenSoilPits implements IWorldGenerator
 		int var6 = par2Random.nextInt(16) + 8;
 		byte var7 = 2;
 		boolean flag = false;
+
 		if(par2Random.nextInt(50) == 0 && yCoord <= 145)
 		{
 			for (int x = xCoord - var6; x <= xCoord + var6; ++x)

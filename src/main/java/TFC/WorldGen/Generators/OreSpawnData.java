@@ -20,6 +20,7 @@ public class OreSpawnData
 			type = 0;
 		else
 			type = 1;
+
 		if(S.equals("small"))
 			size = 0;
 		else if(S.equals("medium"))
@@ -29,7 +30,9 @@ public class OreSpawnData
 
 		base = new HashMap<Block, Integer>();
 		for(int i = 0, j = 0; i < baseRocks.length; i++)
+		{
 			getOre(baseRocks[i]);
+		}
 	}
 
 	public OreSpawnData(String T, String S, String BN, int M, int R, String[] baseRocks, int Min, int Max, int v, int h)

@@ -34,7 +34,9 @@ public class WorldGenCaveDecor implements IWorldGenerator
 							createStalagmite(world, rand, x, y - 6, z);
 					}
 					else if(rand.nextInt(35) == 0)
+					{
 						createStalagmite(world, rand, x, y, z);
+					}
 				}
 			}
 		}

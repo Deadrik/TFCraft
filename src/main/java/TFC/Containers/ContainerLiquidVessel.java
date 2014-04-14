@@ -76,9 +76,11 @@ public class ContainerLiquidVessel extends ContainerTFC
 				this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 148));
 		}
 
-		for (row = 0; row < 3; ++row) 
+		for (row = 0; row < 3; ++row)
+		{
 			for (col = 0; col < 9; ++col) 
 				this.addSlotToContainer(new Slot(playerInventory, col + row * 9+9, 8 + col * 18, 90 + row * 18));
+		}
 	}
 
 	@Override

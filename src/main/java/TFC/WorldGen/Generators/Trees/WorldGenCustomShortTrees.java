@@ -26,20 +26,16 @@ public class WorldGenCustomShortTrees extends WorldGenerator
 		int l = random.nextInt(3) + 4;
 		boolean flag = true;
 		if (yCoord < 1 || yCoord + l + 1 > world.getHeight())
-		{
 			return false;
-		}
+
 		for (int i1 = yCoord; i1 <= yCoord + 1 + l; i1++)
 		{
 			byte byte0 = 1;
 			if (i1 == yCoord)
-			{
 				byte0 = 0;
-			}
 			if (i1 >= yCoord + 1 + l - 2)
-			{
 				byte0 = 2;
-			}
+
 			for (int i2 = xCoord - byte0; i2 <= xCoord + byte0 && flag; i2++)
 			{
 				for (int l2 = zCoord - byte0; l2 <= zCoord + byte0 && flag; l2++)
@@ -47,10 +43,8 @@ public class WorldGenCustomShortTrees extends WorldGenerator
 					if (i1 >= 0 && i1 < world.getHeight())
 					{
 						Block j3 = world.getBlock(i2, i1, l2);
-						if (j3 != Blocks.air && j3 != TFCBlocks.Leaves && j3 != TFCBlocks.Sapling)
-						{
+						if (j3 != Blocks.air && (j3 != TFCBlocks.Leaves || j3 != TFCBlocks.Leaves2) && (j3 != TFCBlocks.Sapling || j3 != TFCBlocks.Sapling2))
 							flag = false;
-						}
 					}
 					else
 					{
@@ -59,19 +53,19 @@ public class WorldGenCustomShortTrees extends WorldGenerator
 				}
 			}
 		}
+
 		if (!flag)
-		{
 			return false;
-		}
+
 		Block var3 = world.getBlock(xCoord, yCoord - 1, zCoord);
 		if (treeId == 15)
 		{
-			int x = 0;
+			int x = 0; // ???
 		}
+
 		if (!(TFC_Core.isSoil(var3))|| yCoord >= world.getHeight() - l - 1)
-		{
 			return false;
-		}
+
 		DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 		//set the block below the tree to dirt.
 		//world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2));
@@ -86,20 +80,16 @@ public class WorldGenCustomShortTrees extends WorldGenerator
 				{
 					int j4 = i4 - zCoord;
 					if ((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0) && world.isAirBlock(k3, k1, i4))
-					{
 						setBlockAndNotifyAdequately(world, k3, k1, i4, TFCBlocks.Leaves, treeId);
-					}
 				}
 			}
 		}
 
 		for (int l1 = 0; l1 < l; l1++)
 		{
-			Block id = world.getBlock(xCoord, yCoord + l1, zCoord);
-			if (id == Blocks.air || id == TFCBlocks.Leaves || id.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
-			{
-				setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.Wood, treeId);
-			}
+			Block b = world.getBlock(xCoord, yCoord + l1, zCoord);
+			if (b == Blocks.air || b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2 || b.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
+				setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
 		}
 
 		return true;

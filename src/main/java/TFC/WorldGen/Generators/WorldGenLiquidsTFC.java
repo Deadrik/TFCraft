@@ -33,6 +33,7 @@ public class WorldGenLiquidsTFC extends WorldGenerator
 		{
 			return false;
 		}
+
 		int l = 0;
 		if (world.getBlock(i - 1, j, k) == TFCBlocks.StoneIgIn && world.getBlock(i - 1, j, k) == TFCBlocks.StoneSed &&
 				world.getBlock(i - 1, j, k) == TFCBlocks.StoneIgEx &&world.getBlock(i - 1, j, k) == TFCBlocks.StoneMM)

@@ -46,7 +46,7 @@ public class BodyTempStats
 		prevTemperatureLevel = temperatureLevel;
 		if(rand.nextInt(2000-getBaseBodyTempMod(player))<100 && food.stomachLevel >= 500)
 			temperatureLevel++;
-		if((player.isSprinting() || player.swingProgress != 0)&& rand.nextInt(1000- (getBaseBodyTempMod(player) )/2 ) <100 )
+		if((player.isSprinting() || player.swingProgress != 0) && rand.nextInt(1000 - (getBaseBodyTempMod(player)) / 2) < 100)
 			temperatureLevel++;
 		//if(rand.nextInt(1500 - (player.isInWater()?1000:0))<10 && food.waterLevel >= 500)
 		//	temperatureLevel--;
@@ -59,9 +59,12 @@ public class BodyTempStats
 		extraFoodConsumed = 0; //(temperatureLevel <0 && heatStorage <= 0 && rand.nextInt(350)<100)?temperatureLevel/-10:0;
 		extraWaterConsumed = 0; //(temperatureLevel >0 && heatStorage <= 0 && rand.nextInt(350)<100)?temperatureLevel/10:0;
 
-		if(temperatureLevel != prevTemperatureLevel && !((prevTemperatureLevel >=-10 && prevTemperatureLevel <=10)&&
+		if(temperatureLevel != prevTemperatureLevel &&
+				!((prevTemperatureLevel >=-10 && prevTemperatureLevel <=10) &&
 				(temperatureLevel >=-10 && temperatureLevel <=10)))
+		{
 			tellPlayerMessage(player);
+		}
 		prevTemperatureLevel = temperatureLevel;
 		if(temperatureLevel >= -10 && temperatureLevel <= 10)
 		{
@@ -70,61 +73,80 @@ public class BodyTempStats
 		}
 	}
 
-	public int applyTemperatureFromEnvironment(EntityPlayer player){
+	public int applyTemperatureFromEnvironment(EntityPlayer player)
+	{
 		int x = (int)(player.posX);
 		int y = (int)(player.posY);
 		int z = (int)(player.posZ);
 		float temperature = TFC_Climate.getHeightAdjustedTemp(x, y, z);
 		temperature += applyTemperatureFromHeatSources(player);
+
 		//if it's cold
-		if(temperature <=10){
-			int modifier = (int)((temperature - 10)*15);
-			if(rand.nextInt(1200 + modifier)<10)
+		if(temperature <= 10)
+		{
+			int modifier = (int)((temperature - 10) * 15);
+			if(rand.nextInt(1200 + modifier) < 10)
 				return -1;
 		}
 		//if it's warm
-		else if(temperature >=30){
-			int modifier = Math.min(1199,(int)((temperature - 30)*15));
-			if(rand.nextInt(1200-modifier)<10)
+		else if(temperature >= 30)
+		{
+			int modifier = Math.min(1199, (int)((temperature - 30) * 15));
+			if(rand.nextInt(1200 - modifier) < 10)
 				return 1;
 		}
-		else if(temperature <20){
-			if(temperatureLevel <= -1){
+		else if(temperature <20)
+		{
+			if(temperatureLevel <= -1)
+			{
 				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 10)*15))<100)
 					return 1;
 			}
 			else if(temperature >= 1)
-				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 10)*15))<100)
+			{
+				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 10) * 15)) < 100)
 					return -1;
+			}
 		}
 		else if(temperature > 20)
-			if(temperatureLevel <= 1){
+		{
+			if(temperatureLevel <= 1)
+			{
 				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 20)*10))<100)
 					return 1;
 			}
 			else if(temperature > 1)
+			{
 				if(rand.nextInt(1200 -  Math.min(1199,(int)(temperature - 20)*10))<100)
 					return -1;
+			}
+		}
 		return 0;
 	}
 
-	public static float applyTemperatureFromHeatSources(EntityPlayer player){
+	public static float applyTemperatureFromHeatSources(EntityPlayer player)
+	{
 		int x = (int)(player.posX);
 		int y = (int)(player.posY);
 		int z = (int)(player.posZ);
 		float temperatureMod = 0;
+
 		for(int i = x - 7; i<x +7;i++)
+		{
 			for(int j = y-3;j<y+3;j++)
-				for(int k = z-7;k<z+7;k++){
+			{
+				for(int k = z-7;k<z+7;k++)
+				{
 					TileEntity te = player.worldObj.getTileEntity(i, j, k);
-					if((player.worldObj.getBlock(i, j, k) == Blocks.lava || player.worldObj.getBlock(i, j, k) == Blocks.flowing_lava)
-							||(te != null && te instanceof TileEntityFireEntity)){
+					if((player.worldObj.getBlock(i, j, k) == Blocks.lava || player.worldObj.getBlock(i, j, k) == Blocks.flowing_lava) ||
+							(te != null && te instanceof TileEntityFireEntity))
+					{
 						//returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )<10?1:0);
 						//Lava averages 700-1200 C = 950 C, assume source is lava.
 						double tempValue = 950;
 						if(te instanceof TileEntityFireEntity)
-							//if there is a firepit, use it's heat instead.
-							tempValue = ((TileEntityFireEntity)te).fireTemperature;
+						//if there is a firepit, use it's heat instead.
+						tempValue = ((TileEntityFireEntity)te).fireTemperature;
 						//Just to make sure it's not 0
 						double distanceSq = player.getDistanceSq(i, j, k) + 0.05;
 						//radiation isn't perfect, so I don't know what a good numerator is, but it decreases with the square of the distance.
@@ -134,10 +156,13 @@ public class BodyTempStats
 						temperatureMod += tempValue;
 					}
 				}
+			}
+		}
 		return temperatureMod;
 	}
 
-	public int getBaseBodyTempMod(EntityPlayer player){
+	public int getBaseBodyTempMod(EntityPlayer player)
+	{
 		itemHead = player.inventory.armorItemInSlot(3);
 		itemChest = player.inventory.armorItemInSlot(2);
 		itemLegs = player.inventory.armorItemInSlot(1);
@@ -156,7 +181,8 @@ public class BodyTempStats
 
 	private void tellPlayerMessage(EntityPlayer player)
 	{
-/*		switch(temperatureLevel/10){
+/*		switch(temperatureLevel/10)
+		{
 		case -1:
 		case 0:
 		case 1: player.addChatMessage(new ChatComponentText("You feel comfortable"));break;

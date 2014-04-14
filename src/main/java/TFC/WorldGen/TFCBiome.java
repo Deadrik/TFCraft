@@ -5,7 +5,6 @@ import java.util.Random;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import TFC.Entities.Mobs.EntityChickenTFC;
@@ -47,6 +46,8 @@ public class TFCBiome extends BiomeGenBase
 	public static float riverDepthMin = -0.5F;
 	public static float riverDepthMax = -0.3F;
 	public float temperatureTFC;
+	
+	public BiomeDecoratorTFC theBiomeDecorator;
 
 	public static TFCBiome[] biomeList = new TFCBiome[256];
 
@@ -142,15 +143,18 @@ public class TFCBiome extends BiomeGenBase
 
 		this.waterColorMultiplier = DarkWater;
 		//Default spawns. I didn't delete them so they could be referenced in the future. Nerfing animal spawns.
-		/*this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 12, 4, 6));
+		this.spawnableCreatureList.clear();
+		/*
+		this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 12, 4, 6));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 10, 2, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 10, 2, 4));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 2, 4));*/
-		this.spawnableCreatureList.clear();
-		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 12, 2, 4));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 2, 4));
+		*/
 		//This is to balance out the spawning, so that entities with weight 1 spawn less
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class,16,0,0));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 16, 0, 0));
+
 		this.spawnableWaterCreatureList.clear();
+		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 12, 2, 4));
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySpiderTFC.class, 10, 1, 2));
@@ -162,13 +166,14 @@ public class TFCBiome extends BiomeGenBase
 		
 		//getBiomeGenArray()[par1] = this;
 		biomeList[par1] = this;
+		this.theBiomeDecorator = this.createBiomeDecorator();
 	}
 
 	/**
 	 * Allocate a new BiomeDecorator for this BiomeGenBase
 	 */
 	@Override
-	public BiomeDecorator createBiomeDecorator()
+	public BiomeDecoratorTFC createBiomeDecorator()
 	{
 		return new BiomeDecoratorTFC(this);
 	}
@@ -210,6 +215,7 @@ public class TFCBiome extends BiomeGenBase
 		this.waterColorMultiplier = par1;
 		return this;
 	}
+
 	@Override
 	public TFCBiome setColor(int par1)
 	{
@@ -237,29 +243,29 @@ public class TFCBiome extends BiomeGenBase
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,7) : worldGenAshTallTrees;
-				else
-					return worldGenAshShortTrees;
+			else
+				return worldGenAshShortTrees;
 		}
 		case 1:
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,1) :worldGenAspenTallTrees;
-				else
-					return worldGenAspenShortTrees;
+			else
+				return worldGenAspenShortTrees;
 		}
 		case 2:
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,2) :worldGenBirchTallTrees;
-				else
-					return worldGenBirchShortTrees;
+			else
+				return worldGenBirchShortTrees;
 		}
 		case 3:
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,3) :worldGenChestnutTallTrees;
-				else
-					return worldGenChestnutShortTrees;
+			else
+				return worldGenChestnutShortTrees;
 		}
 		case 4:
 		{
@@ -272,22 +278,22 @@ public class TFCBiome extends BiomeGenBase
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,5) :worldGenHickoryTallTrees;
-				else
-					return worldGenHickoryShortTrees;
+			else
+				return worldGenHickoryShortTrees;
 		}
 		case 6:
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,6) :worldGenMapleTallTrees;
-				else
-					return worldGenMapleShortTrees;
+			else
+				return worldGenMapleShortTrees;
 		}
 		case 0:
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,0) :worldGenOakTallTrees;
-				else
-					return worldGenOakShortTrees;
+			else
+				return worldGenOakShortTrees;
 		}
 		case 8:
 		{
@@ -307,15 +313,15 @@ public class TFCBiome extends BiomeGenBase
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,10) :worldGenSpruceTallTrees;
-				else
-					return worldGenSpruceShortTrees;
+			else
+				return worldGenSpruceShortTrees;
 		}
 		case 11:
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,11) :worldGenSycamoreTallTrees;
-				else
-					return worldGenSycamoreShortTrees;
+			else
+				return worldGenSycamoreShortTrees;
 		}
 		case 12:
 		{
@@ -325,8 +331,8 @@ public class TFCBiome extends BiomeGenBase
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,13) :worldGenWhiteElmTallTrees;
-				else
-					return worldGenWhiteElmShortTrees;
+			else
+				return worldGenWhiteElmShortTrees;
 		}
 		case 14:
 		{
@@ -355,7 +361,7 @@ public class TFCBiome extends BiomeGenBase
 		}
 		else
 		{
-//			logger.warn("Biome ID is out of bounds: " + p_150568_0_ + ", defaulting to 0 (Ocean)");
+			System.out.println("Biome ID is out of bounds: " + id + ", defaulting to 0 (Ocean)");
 			return ocean;
 		}
 	}
@@ -363,12 +369,14 @@ public class TFCBiome extends BiomeGenBase
 	public static TFCBiome GetBiomeByName(String name)
 	{
 		for (int i = 0; i < getBiomeGenArray().length; i++)
+		{
 			if(getBiomeGenArray()[i] != null)
 			{
 				String n = getBiomeGenArray()[i].biomeName.toLowerCase();
 				if(n.equalsIgnoreCase(name))
-					return (TFCBiome) getBiomeGenArray()[i];
+					return getBiomeGenArray()[i];
 			}
+		}
 		return null;
 	}
 

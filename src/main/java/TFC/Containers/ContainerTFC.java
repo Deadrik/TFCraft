@@ -190,9 +190,7 @@ public class ContainerTFC extends Container
 		}
 
 		if(_shouldReload && !isLoading)
-		{
 			reloadContainer();
-		}
 
 		this.isLoading = false;
 	}
@@ -203,7 +201,6 @@ public class ContainerTFC extends Container
 	 */
 	public void reloadContainer()
 	{
-
 	}
 
 	public static boolean areItemStacksEqual(ItemStack is1, ItemStack is2)

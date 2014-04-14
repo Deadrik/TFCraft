@@ -21,7 +21,7 @@ public class WorldGenPineShort extends WorldGenerator
 		metaLeaf = id;
 		blockLeaf = TFCBlocks.Leaves;
 		metaWood = id;
-		blockWood = TFCBlocks.Wood;
+		blockWood = TFCBlocks.LogNatural;
 	}
 
 	public boolean generate(World world, Random par2Random, int x, int y, int z)
@@ -45,13 +45,9 @@ public class WorldGenPineShort extends WorldGenerator
 				boolean var12 = true;
 
 				if (var11 - y < var7)
-				{
 					var21 = 0;
-				}
 				else
-				{
 					var21 = var9;
-				}
 
 				for (var13 = x - var21; var13 <= x + var21 && var10; ++var13)
 				{
@@ -77,7 +73,6 @@ public class WorldGenPineShort extends WorldGenerator
 			}
 			else
 			{
-
 				block = world.getBlock(x, y - 1, z);
 				int meta = TFCBiome.getSurfaceRockLayer(world, x, z);
 				Block dirt =  TFC_Core.getTypeForDirt(meta);
@@ -95,15 +90,12 @@ public class WorldGenPineShort extends WorldGenerator
 					for (var15 = 0; var15 <= var8; ++var15)
 					{
 						var16 = y + var6 - var15;
-
 						for (var17 = x - var21; var17 <= x + var21; ++var17)
 						{
 							int var18 = var17 - x;
-
 							for (int var19 = z - var21; var19 <= z + var21; ++var19)
 							{
 								int var20 = var19 - z;
-
 								block = world.getBlock(var17, var16, var19);
 								if ((Math.abs(var18) != var21 || Math.abs(var20) != var21 || var21 <= 0) && 
 										(block == null || block.canBeReplacedByLeaves(world, var17, var16, var19)))
@@ -118,11 +110,8 @@ public class WorldGenPineShort extends WorldGenerator
 							var21 = var22;
 							var22 = 1;
 							++var13;
-
 							if (var13 > var9)
-							{
 								var13 = var9;
-							}
 						}
 						else
 						{
@@ -131,7 +120,6 @@ public class WorldGenPineShort extends WorldGenerator
 					}
 
 					var15 = par2Random.nextInt(3);
-
 					for (var16 = 0; var16 < var6 - var15; ++var16)
 					{
 						block = world.getBlock(x, y + var16, z);
@@ -141,7 +129,6 @@ public class WorldGenPineShort extends WorldGenerator
 							this.setBlockAndNotifyAdequately(world, x, y + var16, z, blockWood, metaWood);
 						}
 					}
-
 					return true;
 				}
 				else

@@ -307,7 +307,8 @@ public class BlockIngotPile extends BlockTerraContainer
 					}
 				}
 			}
-			super.breakBlock(par1World, par2, par3, par4, par5, par6);}
+			super.breakBlock(par1World, par2, par3, par4, par5, par6);
+		}
 	}
 
 	@Override
@@ -347,9 +348,13 @@ public class BlockIngotPile extends BlockTerraContainer
 			if(!world.getBlock(i, j-1, k).isOpaqueCube())
 			{
 				if(world.getBlock(i, j-1, k) == this && ((TileEntityIngotPile)world.getTileEntity(i, j, k)).storage[0].getItem() == ((TileEntityIngotPile)world.getTileEntity(i, j-1, k)).storage[0].getItem())
+				{
 					combineIngotsDown(world, i, j, k);
+				}
 				else if(world.getBlock(i, j+1, k) == this && ((TileEntityIngotPile)world.getTileEntity(i, j, k)).storage[0].getItem() == ((TileEntityIngotPile)world.getTileEntity(i, j+1, k)).storage[0].getItem())
+				{
 					combineIngotsUp(world, i, j, k);
+				}
 				else
 				{
 					((TileEntityIngotPile)world.getTileEntity(i, j, k)).ejectContents();

@@ -7,8 +7,10 @@ import TFC.WorldGen.DataLayer;
 
 public class GenLayerRainAmount extends GenLayerTFC
 {
-	public static DataLayer[] biomeArray = new DataLayer[] {DataLayer.Rain_62_5,DataLayer.Rain_125,DataLayer.Rain_250,DataLayer.Rain_500, DataLayer.Rain_2000,DataLayer.Rain_4000,
-		DataLayer.Rain_8000, DataLayer.Rain_500, DataLayer.Rain_2000, DataLayer.Rain_4000, DataLayer.Rain_8000};
+	public static DataLayer[] biomeArray = new DataLayer[]{
+		DataLayer.Rain_62_5, DataLayer.Rain_125, DataLayer.Rain_250, DataLayer.Rain_500,
+		DataLayer.Rain_2000, DataLayer.Rain_4000, DataLayer.Rain_8000, DataLayer.Rain_500,
+		DataLayer.Rain_2000, DataLayer.Rain_4000, DataLayer.Rain_8000};
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private DataLayer[] allowedBiomes;
@@ -37,16 +39,11 @@ public class GenLayerRainAmount extends GenLayerTFC
 				int var9 = var5[var8 + var7 * par3];
 
 				if (var9 == 0)
-				{
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
-				}
 				else
-				{
 					var6[var8 + var7 * par3] = DataLayer.Rain_1000.ID;
-				}
 			}
 		}
-
 		return var6;
 	}
 }

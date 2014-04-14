@@ -68,9 +68,10 @@ public class WorldGenMinableTFC extends WorldGenerator
 		this.hDens = hDensity;
 	}
 
-	public boolean BetterOreDistribution(int xChunk, int zChunk, Block MPMinableBlock, int MPMinableBlockMeta, int min, int max, Random rand)//======================================================================================
+	public boolean BetterOreDistribution(int xChunk, int zChunk, Block MPMinableBlock, int MPMinableBlockMeta, int min, int max, Random rand)
 	{
 		if (rand.nextInt(rarity) == 0)
+		{
 			for(int loopCount = 0; loopCount < veinAm; loopCount++)
 			{
 				int temp1 = mPCalculateDensity(rand, diameter, hDens);
@@ -81,12 +82,14 @@ public class WorldGenMinableTFC extends WorldGenerator
 				int k13 = zChunk*16 + temp3;
 				BODgenerate(worldObj, rand, l5, i9, k13, veinSi);
 			}
+		}
 		return true;
 	}
 
-	public boolean BetterOreDistributionVein(int xChunk, int zChunk, Block MPMinableBlock, int MPMinableBlockMeta, int min, int max, Random rand)//======================================================================================
+	public boolean BetterOreDistributionVein(int xChunk, int zChunk, Block MPMinableBlock, int MPMinableBlockMeta, int min, int max, Random rand)
 	{
 		if (rand.nextInt(rarity) == 0)
+		{
 			for(int loopCount = 0; loopCount < veinAm; loopCount++)
 			{
 				int temp1 = mPCalculateDensity(rand, diameter, hDens);
@@ -97,6 +100,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 				int k13 = zChunk*16 + temp3;
 				BODgenerateVein(worldObj, rand, l5, i9, k13, veinSi);
 			}
+		}
 		return true;
 	}
 
@@ -127,6 +131,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 		int directionChange2 =0;
 		int blocksToUse = xyz;//input number of blocks per vein
 		int blocksToUse2 =0; 
+
 		for(int  blocksMade=0; blocksMade <= blocksToUse;) // make veins
 		{
 			blocksToUse2 = 1 + (blocksToUse/30);
@@ -217,6 +222,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 		double d3 = z + 8 - MathHelper.cos(f) * numberOfBlocks / 8F;
 		double d4 = y + rand.nextInt(3) - 2;
 		double d5 = y + rand.nextInt(3) - 2;
+
 		for(int l = 0; l <= numberOfBlocks; l++)
 		{
 			double d6 = d + (d1 - d) * l / numberOfBlocks;
@@ -231,6 +237,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 			int l1 = MathHelper.floor_double(d6 + d10 / 2D);
 			int i2 = MathHelper.floor_double(d7 + d11 / 2D);
 			int j2 = MathHelper.floor_double(d8 + d10 / 2D);
+
 			for(int xCoord = i1; xCoord <= l1; xCoord++)
 			{
 				double d12 = (xCoord + 0.5D - d6) / (d10 / 2D);

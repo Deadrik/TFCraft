@@ -69,8 +69,12 @@ public class ContainerChestTFC extends ContainerTFC
 		exceptions.add(TFCItems.ZincIngot);
 
 		for (var4 = 0; var4 < this.numRows; ++var4)
+		{
 			for (var5 = 0; var5 < 9; ++var5)
+			{
 				this.addSlotToContainer(new SlotChest(lowerChestInventory, var5 + var4 * 9, 8 + var5 * 18, 18 + var4 * 18).addItemException(exceptions));
+			}
+		}
 
 		PlayerInventory.buildInventoryLayout(this, (InventoryPlayer) playerInv, 8, var3 + 109, false, true);
 	}
@@ -96,8 +100,10 @@ public class ContainerChestTFC extends ContainerTFC
 			var2 = var4.copy();
 
 			if (par1 < this.numRows * 9)
+			{
 				if (!this.mergeItemStack(var4, this.numRows * 9, this.inventorySlots.size(), true))
 					return null;
+			}
 			else if (!this.mergeItemStack(var4, 0, this.numRows * 9, false))
 				return null;
 

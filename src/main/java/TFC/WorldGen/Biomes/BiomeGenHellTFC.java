@@ -7,7 +7,6 @@ package TFC.WorldGen.Biomes;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityPigZombie;
-import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
 
 
@@ -29,7 +28,7 @@ public class BiomeGenHellTFC extends TFCBiome
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityPigZombie.class, 100, 4, 4));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityMagmaCube.class, 1, 4, 4));
 
-		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 0;
-		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 0;
+		this.theBiomeDecorator.treesPerChunk = 0;
+		this.theBiomeDecorator.grassPerChunk = 0;
 	}
 }

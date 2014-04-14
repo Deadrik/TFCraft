@@ -251,11 +251,14 @@ public class BlockMoss extends BlockTerra
 			int i1;
 			int j1;
 			int k1;
-			label138:
 
+			label138:
 				for (i1 = par2 - b0; i1 <= par2 + b0; ++i1)
+				{
 					for (j1 = par4 - b0; j1 <= par4 + b0; ++j1)
+					{
 						for (k1 = par3 - 1; k1 <= par3 + 1; ++k1)
+						{
 							if (par1World.getBlock(i1, k1, j1) == this)
 							{
 								--l;
@@ -265,6 +268,9 @@ public class BlockMoss extends BlockTerra
 									break label138;
 								}
 							}
+						}
+					}
+				}
 
 			i1 = par1World.getBlockMetadata(par2, par3, par4);
 			j1 = par1World.rand.nextInt(6);
@@ -282,8 +288,10 @@ public class BlockMoss extends BlockTerra
 				if (l1 > 0)
 				{
 					for (i2 = 0; i2 <= 3; ++i2)
+					{
 						if (!this.canBePlacedOn(par1World.getBlock(par2 + Direction.offsetX[i2], par3 + 1, par4 + Direction.offsetZ[i2])))
 							l1 &= ~(1 << i2);
+					}
 
 					if (l1 > 0)
 						par1World.setBlock(par2, par3 + 1, par4, this, l1, 2);

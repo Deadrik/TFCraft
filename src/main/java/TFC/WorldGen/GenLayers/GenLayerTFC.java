@@ -82,6 +82,7 @@ public abstract class GenLayerTFC extends GenLayer
 		worldGenSeed = par1;
 		if (this.parent != null)
 			parent.initWorldGenSeed(par1);
+
 		worldGenSeed *= worldGenSeed * 6364136223846793005L + 1442695040888963407L;
 		worldGenSeed += baseSeed;
 		worldGenSeed *= worldGenSeed * 6364136223846793005L + 1442695040888963407L;

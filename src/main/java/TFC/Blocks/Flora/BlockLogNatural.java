@@ -219,10 +219,16 @@ public class BlockLogNatural extends BlockTerra
 		int meta = world.getBlockMetadata(i, j, k);
 		boolean check = false;
 		for(int h = -2; h <= 2; h++)
+		{
 			for(int g = -2; g <= 2; g++)
+			{
 				for(int f = -2; f <= 2; f++)
+				{
 					if(world.getBlock(i+h, j+g, k+f) == this && world.getBlockMetadata(i+h, j+g, k+f) == meta)
 						check = true;
+				}
+			}
+		}
 		if(!check)
 		{
 			world.setBlockToAir(i, j, k);
@@ -238,10 +244,16 @@ public class BlockLogNatural extends BlockTerra
 			int offsetX = 0;int offsetY = 0;int offsetZ = 0;
 
 			for (offsetX = -2; offsetX <= 2; offsetX++)
+			{
 				for (offsetZ = -2; offsetZ <= 2; offsetZ++)
+				{
 					if(x+offsetX < 11 && x+offsetX >= 0 && z+offsetZ < 11 && z+offsetZ >= 0)
+					{
 						if(checkOut(world, i+offsetX, j, k+offsetZ, l) && !checkArray[x+offsetX][y][z+offsetZ])
 							scanLogs(world,i+offsetX, j, k+offsetZ, l, checkArray,(byte)(x+offsetX),y,(byte)(z+offsetZ), stack);
+					}
+				}
+			}
 
 			damage++;
 			if(stack != null)

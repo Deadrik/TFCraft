@@ -142,9 +142,9 @@ public class TerraFirmaCraft
 			TFCWorldType.DEFAULT = new TFCWorldType("TFCDefault");
 			TFCWorldType.FLAT = new TFCWorldType("TFCFlat");
 			
-//			DimensionManager.unregisterDimension(-1);
-//			DimensionManager.unregisterDimension(0);
-//			DimensionManager.unregisterDimension(1);
+			DimensionManager.unregisterDimension(-1);
+			DimensionManager.unregisterDimension(0);
+			DimensionManager.unregisterDimension(1);
 			
 			DimensionManager.unregisterProviderType(-1);
 			DimensionManager.unregisterProviderType(0);
@@ -153,9 +153,9 @@ public class TerraFirmaCraft
 			DimensionManager.registerProviderType(0, TFCProvider.class, true);
 			DimensionManager.registerProviderType(1, TFCProvider.class, true);
 	
-//			DimensionManager.registerDimension(-1, -1);
-//			DimensionManager.registerDimension(0, 0);
-//			DimensionManager.registerDimension(1, 1);
+			DimensionManager.registerDimension(-1, -1);
+			DimensionManager.registerDimension(0, 0);
+			DimensionManager.registerDimension(1, 1);
 		}
 	}
 

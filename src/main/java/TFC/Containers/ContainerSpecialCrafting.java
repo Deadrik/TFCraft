@@ -28,8 +28,10 @@ public class ContainerSpecialCrafting extends ContainerTFC
 	public ContainerSpecialCrafting(InventoryPlayer inventoryplayer, ItemStack is, World world, int x, int y, int z)
 	{
 		for (int j1 = 0; j1 < 25; j1++)
+		{
 			if(is != null)
 				craftMatrix.setInventorySlotContents(j1, is.copy());
+		}
 
 		this.worldObj = world;
 
@@ -82,14 +84,20 @@ public class ContainerSpecialCrafting extends ContainerTFC
 			var2 = var4.copy();
 
 			if(clickedIndex < 10)
+			{
 				if (!this.mergeItemStack(var4, 10, 36, true))
 					return null;
+			}
 			else if(clickedIndex >= 10 && clickedIndex < 37)
+			{
 				if (!this.mergeItemStack(var4, 0, 9, true))
 					return null;
+			}
 			else if(clickedIndex >= 37 && clickedIndex < 62)
+			{
 				if (!this.mergeItemStack(var4, 0, 36, true))
 					return null;
+			}
 
 			if (var4.stackSize == 0)
 				grabbedSlot.putStack((ItemStack)null);

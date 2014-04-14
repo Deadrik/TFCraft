@@ -27,7 +27,9 @@ public class SkillStats
 		player = p;
 		skillsMap = new HashMap<String, Integer>();
 		for(String s : SkillsManager.instance.getSkillsArray())
+		{
 			setSkill(s, 0);
+		}
 	}
 
 	public Object[] getSkillsKeysArray()
@@ -58,7 +60,9 @@ public class SkillStats
 				skillsMap.put(skillName, i+amount);
 			}
 			else
+			{
 				skillsMap.put(skillName, amount);
+			}
 		}
 
 		int i = (Integer) skillsMap.get(skillName);
@@ -90,7 +94,7 @@ public class SkillStats
 
 	public static float getSkillMult(int skill)
 	{
-		return 1-(100f/(100f+skill));
+		return 1 - (100f / (100f + skill));
 	}
 
 	public void readNBT(NBTTagCompound nbt)

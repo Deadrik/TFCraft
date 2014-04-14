@@ -87,10 +87,16 @@ public class WorldGenCustomFruitTree extends WorldGenerator
 	public void SurroundWithLeaves(World world, int i, int j, int k)
 	{
 		for (int y = 1; y >= 0; y--)
+		{
 			for (int x = 1; x >= -1; x--)
+			{
 				for (int z = 1; z >= -1; z--)
+				{
 					if(world.isAirBlock(i+x, j+y, k+z))
 						world.setBlock(i+x, j+y, k+z, leavesBlock, metaId, 0x2);
+				}
+			}
+		}
 	}
 
 }

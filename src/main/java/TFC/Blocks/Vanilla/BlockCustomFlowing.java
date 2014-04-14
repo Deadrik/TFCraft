@@ -279,8 +279,10 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 		var5 = this.flowCost[0];
 
 		for (var6 = 1; var6 < 4; ++var6)
+		{
 			if (this.flowCost[var6] < var5)
 				var5 = this.flowCost[var6];
+		}
 
 		for (var6 = 0; var6 < 4; ++var6)
 			this.isOptimalFlowDirection[var6] = this.flowCost[var6] == var5;

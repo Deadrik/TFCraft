@@ -84,13 +84,14 @@ public class BlockFarmland extends BlockContainer
 	{
 		byte var5 = 0;
 		for (int var6 = par2 - var5; var6 <= par2 + var5; ++var6)
+		{
 			for (int var7 = par4 - var5; var7 <= par4 + var5; ++var7)
 			{
 				Block var8 = par1World.getBlock(var6, par3 + 1, var7);
 				if (var8 instanceof IPlantable && canSustainPlant(par1World, par2, par3, par4, ForgeDirection.UP, (IPlantable)var8))
 					return true;
 			}
-
+		}
 		return false;
 	}
 	
@@ -100,26 +101,34 @@ public class BlockFarmland extends BlockContainer
 	public static boolean isFreshWaterNearby(World world, int i, int j, int k)
 	{
 		for (int x = i - 4; x <= i + 4; ++x)
+		{
 			for (int y = j; y <= j + 1; ++y)
+			{
 				for (int z = k - 4; z <= k + 4; ++z)
 				{
 					Block b = world.getBlock(x, y, z);
 					if (b == TFCBlocks.FreshWaterStill || b == TFCBlocks.FreshWaterFlowing)
 						return true;
 				}
+			}
+		}
 		return false;
 	}
 
 	public static boolean isSaltWaterNearby(World world, int i, int j, int k)
 	{
 		for (int x = i - 4; x <= i + 4; ++x)
+		{
 			for (int y = j; y <= j + 1; ++y)
+			{
 				for (int z = k - 4; z <= k + 4; ++z)
 				{
 					Block b = world.getBlock(x, y, z);
 					if (b == Blocks.water || b == Blocks.flowing_water)
 						return true;
 				}
+			}
+		}
 		return false;
 	}
 

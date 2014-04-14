@@ -76,7 +76,8 @@ public class ContainerAnvil extends ContainerTFC
 				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
 					return null;
 				slot.putStack(null);
-			} else if(itemstack1.getItem() == TFCItems.Powder && itemstack1.getItemDamage() == 0)
+			}
+			else if(itemstack1.getItem() == TFCItems.Powder && itemstack1.getItemDamage() == 0)
 			{
 				if (!this.mergeItemStack(itemstack1, 6, 7, false))
 					return null;
@@ -94,6 +95,7 @@ public class ContainerAnvil extends ContainerTFC
 			{
 				int j = 0;
 				while(j < slotinput.length)
+				{
 					if(slotinput[j].getHasStack())
 						j++;
 					else
@@ -104,6 +106,7 @@ public class ContainerAnvil extends ContainerTFC
 						itemstack1.stackSize--;
 						break;
 					}
+				}
 			}
 			if(itemstack1.stackSize == 0)
 				slot.putStack(null);
@@ -146,12 +149,14 @@ public class ContainerAnvil extends ContainerTFC
 	public void updateProgressBar(int par1, int par2)
 	{
 		if(anvil != null)
+		{
 			if (par1 == 0)
 				this.anvil.craftingValue = par2;
 			else if (par1 == 1)
 				this.anvil.itemCraftingValue = par2;
 			else if (par1 == 2)
 				this.anvil.AnvilTier = par2;
+		}
 	}
 
 	@Override

@@ -263,13 +263,15 @@ public class Recipes
 		for(int j = 0; j < Global.WOOD_ALL.length; j++)
 		{
 			int l = j%16;
-			if(j == l){
+			if(j == l)
+			{
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand,1,j), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j),Character.valueOf('%'),
 					new ItemStack(TFCBlocks.Planks,1,j)});
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack, 1, j), new Object[] { "###","   ","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,j)});
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Barrel,1,j), new Object[] { "# #","# #","###",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j)});
 			}
-			else if(j/16==1){
+			else if(j/16==1)
+			{
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand2,1,l), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j),Character.valueOf('%'),
 					new ItemStack(TFCBlocks.Planks2,1,l)});
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack2, 1, l), new Object[] { "###","   ","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,j)});
@@ -306,13 +308,16 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.NestBox,1), new Object[] {"S S","PSP","PPP",Character.valueOf('S'), new ItemStack(TFCItems.Straw,1),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,32767)});
 
-		for(int i = 0; i < Global.WOOD_ALL.length; i++){
+		for(int i = 0; i < Global.WOOD_ALL.length; i++)
+		{
 			int l = i%16;
-			if(i == l){
+			if(i == l)
+			{
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Fence,6,i), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.Logs,1,i),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,i)});
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.FenceGate,2,i), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank,1,i),Character.valueOf('P'),new ItemStack(TFCBlocks.Planks,1,i)});
 			}
-			else if(i/16 == 1){
+			else if(i/16 == 1)
+			{
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Fence2,6,l), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.Logs,1,i),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,i)});
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.FenceGate2,2,l), new Object[]{"LPL","LPL",Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank,1,i),Character.valueOf('P'),new ItemStack(TFCBlocks.Planks2,1,l)});
 			}
@@ -330,6 +335,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(Items.sign, 1, 0), new Object[] { "###","###"," 1 ", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767),Character.valueOf('1'), new ItemStack(Items.stick,1,32767)});
 
 		for(int j = 0; j < Gems.length; j++)
+		{
 			for(int k = 0; k < 3; k++)
 			{
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP","GKG","PPP", 
@@ -341,6 +347,7 @@ public class Recipes
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP","GKG","PPP", 
 					Character.valueOf('P'), TFCBlocks.StoneMMSmooth, Character.valueOf('K'), new ItemStack(Gems[j],1,0), Character.valueOf('G'), new ItemStack(Blocks.glass,1)});
 			}
+		}
 
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Quern, 1), new Object[] { "PPP", 
 			Character.valueOf('P'), TFCBlocks.StoneIgExSmooth});
@@ -581,7 +588,8 @@ public class Recipes
 		registerToolMolds();
 	}
 
-	private static ItemStack checkMelted(ItemStack is){
+	private static ItemStack checkMelted(ItemStack is)
+	{
 		if(TFC_ItemHeat.GetTemperature(is)>TFC_ItemHeat.getMeltingPoint(is))
 			return null;
 		return is;
@@ -1641,7 +1649,8 @@ public class Recipes
 	/**
 	 * @param manager
 	 */
-	private static void addWeldRecipes(AnvilManager manager) {
+	private static void addWeldRecipes(AnvilManager manager)
+	{
 		/**
 		 * Weld Recipes
 		 */
@@ -1954,12 +1963,14 @@ public class Recipes
 			return 0;
 	}
 
-	public static void RemoveRecipe(ItemStack resultItem) {
+	public static void RemoveRecipe(ItemStack resultItem)
+	{
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++)
 		{
 			IRecipe tmpRecipe = recipes.get(i);
-			if (tmpRecipe instanceof IRecipe) {
+			if (tmpRecipe instanceof IRecipe)
+			{
 				IRecipe recipe = tmpRecipe;
 				ItemStack recipeResult = recipe.getRecipeOutput();
 

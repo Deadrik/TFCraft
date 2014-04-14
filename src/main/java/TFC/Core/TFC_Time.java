@@ -77,9 +77,8 @@ public class TFC_Time
 		int m = getMonth();
 		int m1 = m - 1;
 
-		if(m1 < 0) {
+		if(m1 < 0)
 			m1 = 11;
-		}
 
 		lastMonth = m1;
 		currentDay = getDayOfYear();
@@ -105,7 +104,6 @@ public class TFC_Time
 	public static int getDayOfWeek()
 	{
 		long day = getTotalDays()+1;
-
 		long days = day / 7;
 		long days2 = day - (days*7);
 		return (int)days2;
@@ -149,7 +147,7 @@ public class TFC_Time
 	{
 		long totalmonths = getTotalMonths();
 		long totalmonths2 = totalmonths / 12;
-		long totalmonths3 = totalmonths-(totalmonths2*12);
+		long totalmonths3 = totalmonths-(totalmonths2 * 12);
 		return (int)totalmonths3;
 	}
 	/**Southern hemisphere reverses the season. Use getMonth() for the explicit month
@@ -159,9 +157,8 @@ public class TFC_Time
 	 */
 	public static int getSeasonAdjustedMonth(int z)
 	{
-		if(z > 0){
+		if(z > 0)
 			return (getMonth()+6)%12;
-		}
 		return getMonth();
 	}
 
@@ -196,13 +193,11 @@ public class TFC_Time
 	{
 		int h = (int)((time - ((time / dayLength)*dayLength))/hourLength);
 		h -= 6;
-		if(h < 0) {
+		if(h < 0)
 			h = 23 + h;
-		}
 		h -= 12;
-		if(h < 0) {
+		if(h < 0)
 			h = 23+h;
-		}
 		return  h;
 	}
 
@@ -215,13 +210,11 @@ public class TFC_Time
 	{
 		int h = (th-(th/24)*24);//gives us the remainder
 		h -= 6;
-		if(h < 0) {
+		if(h < 0)
 			h = 23 + h;
-		}
 		h -= 12;
-		if(h < 0) {
+		if(h < 0)
 			h = 23+h;
-		}
 		return  h;
 	}
 
@@ -232,48 +225,43 @@ public class TFC_Time
 
 	public static boolean isSpring(int z)
 	{
-		int day = (getDayOfYear() + (z > 0? (daysInYear)/2:0))%daysInYear;
-		if(day >= 20 && day <= 111) {
+		int day = (getDayOfYear() + (z > 0 ? (daysInYear) / 2 : 0)) % daysInYear;
+		if(day >= 20 && day <= 111)
 			return true;
-		}
-
 		return false;
 	}
+
 	public static boolean isSummer(int z)
 	{
-		int day = (getDayOfYear() + (z > 0? (daysInYear)/2:0))%daysInYear;
-		if(day >= 112 && day <= 202) {
+		int day = (getDayOfYear() + (z > 0 ? (daysInYear) / 2 : 0)) % daysInYear;
+		if(day >= 112 && day <= 202)
 			return true;
-		}
-
 		return false;
 	}
+
 	public static boolean isFall(int z)
 	{
-		int day = (getDayOfYear() + (z > 0? (daysInYear)/2:0))%daysInYear;
-		if(day >= 203 && day <= 293) {
+		int day = (getDayOfYear() + (z > 0 ? (daysInYear) / 2 : 0)) % daysInYear;
+		if(day >= 203 && day <= 293)
 			return true;
-		}
-
 		return false;
 	}
+
 	public static boolean isWinter(int z)
 	{
-		int day = (getDayOfYear() + (z > 0? (daysInYear)/2:0))%daysInYear;
-		if(day >= 294 || day < 20) {
+		int day = (getDayOfYear() + (z > 0 ? (daysInYear) / 2 : 0)) % daysInYear;
+		if(day >= 294 || day < 20)
 			return true;
-		}
-
 		return false;
 	}
 
 	public static int getMonthFromDayOfYear(int day)
 	{
-		if(day < 0) {
+		if(day < 0)
 			day = daysInYear + day;
-		}
 		return day / (daysInMonth);
 	}
+
 	/**
 	 * Season is reversed in southern Hemisphere
 	 * @param day		day of year
@@ -282,18 +270,16 @@ public class TFC_Time
 	 */
 	public static int getSeasonFromDayOfYear(int day, int z)
 	{
-		if(day < 0) {
+		if(day < 0)
 			day = daysInYear + day;
-		}
-		return ((day / (daysInMonth))+(z>0?6:0))%12;
+		return ((day / (daysInMonth))+(z > 0 ? 6 : 0)) % 12;
 	}
 
 	public static int getDayOfMonthFromDayOfYear(int day)
 	{
-		if(day < 0) {
+		if(day < 0)
 			day = daysInYear + day;
-		}
-		return (day - ((int)Math.floor((day/daysInMonth))*daysInMonth));
+		return (day - ((int)Math.floor((day / daysInMonth)) * daysInMonth));
 	}
 
 	public static int getPrevMonth()
@@ -303,9 +289,8 @@ public class TFC_Time
 
 	public static int getPrevMonth(int month)
 	{
-		if(month == 0) {
+		if(month == 0)
 			return 11;
-		}
 		return month - 1;
 	}
 

@@ -54,7 +54,6 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 		this.genRocks[2] = var7[0];
 		this.rocksIndexLayer[2] = var7[1];
 
-
 		//Setup Trees
 		genTrees = new GenLayerTFC[3];
 		treesIndexLayer = new GenLayerTFC[3];

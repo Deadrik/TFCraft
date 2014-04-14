@@ -31,23 +31,16 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 			int b = layerBiomes[var8];
 			int r = layerRivers[var8];
 
-			if (layerBiomes[var8] == TFCBiome.ocean.biomeID|| layerBiomes[var8] == TFCBiome.beach.biomeID || layerBiomes[var8] == -1)
-            {
-                layerOut[var8] = b;
-            }
-            else if (layerRivers[var8] >= 0)
-            {
-                layerOut[var8] = TFCBiome.river.biomeID;
-			}
+			if (layerBiomes[var8] == TFCBiome.ocean.biomeID || layerBiomes[var8] == TFCBiome.beach.biomeID || layerBiomes[var8] == -1)
+				layerOut[var8] = b;
+			else if (layerRivers[var8] >= 0)
+				layerOut[var8] = TFCBiome.river.biomeID;
 			else
-			{
 				layerOut[var8] = layerBiomes[var8];
-			}
 
-			//            if(layerOut[var8] == 7)
-				//            	System.out.println("Made a Normal River");
+//			if(layerOut[var8] == 7)
+//				System.out.println("Made a Normal River");
 		}
-
 		return layerOut;
 	}
 

@@ -991,8 +991,8 @@ public class TFCItems
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.potionitem), "potionitem", new ItemCustomPotion().setUnlocalizedName("potion").setTextureName("potion"));
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.lead), "lead", new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFCTools));
 
-		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.tallgrass), "tallgrass", (new ItemColored(Blocks.tallgrass, true)).func_150943_a(new String[] {"shrub", "grass", "fern"}));
-		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.vine), "vine", new ItemColored(Blocks.vine, false));
+//		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.tallgrass), "tallgrass", (new ItemColored(Blocks.tallgrass, true)).func_150943_a(new String[] {"shrub", "grass", "fern"}));
+//		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.vine), "vine", new ItemColored(Blocks.vine, false));
 
 		minecartCrate = new ItemCustomMinecart(1).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 		GoldPan = new ItemGoldPan().setUnlocalizedName("GoldPan");
@@ -1603,7 +1603,7 @@ public class TFCItems
 		((TFCTabs)TFCTabs.TFCMisc).setTabIconItem(BlueSteelBucketLava);
 		((TFCTabs)TFCTabs.TFCPottery).setTabIconItemStack(new ItemStack(PotteryJug, 1, 1));
 		((TFCTabs)TFCTabs.TFCWeapons).setTabIconItemStack(new ItemStack(SteelSword, 1));
-        ((TFCTabs)TFCTabs.TFCDevices).setTabIconItemStack(new ItemStack(SluiceItem, 1));
+		((TFCTabs)TFCTabs.TFCDevices).setTabIconItemStack(new ItemStack(SluiceItem, 1));
 
 		registerMetals();
 

@@ -159,7 +159,8 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock
 		if(te != null && te instanceof TEStand)
 		{
 			var5 = (TEStand) te;
-			if(var5.isTop){
+			if(var5.isTop)
+			{
 				breakBlock(par1World,par2,par3-1,par4,par5,par6);
 				par1World.setBlockToAir(par2,par3-1,par4);
 				return;

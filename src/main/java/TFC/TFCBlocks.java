@@ -112,7 +112,6 @@ import TFC.Blocks.Vanilla.BlockCustomWall;
 import TFC.Blocks.Vanilla.BlockTorch;
 import TFC.Items.ItemBarrels;
 import TFC.Items.ItemBarrels2;
-import TFC.Items.ItemBlocks.ItemCustomWood2;
 import TFC.Items.ItemBlocks.ItemToolRack;
 import TFC.Items.ItemBlocks.ItemToolRack2;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -186,7 +185,6 @@ public class TFCBlocks
 	public static Block Ore2;
 	public static Block Ore3;
 	public static Block Sulfur;
-	public static Block Wood;
 	public static Block Planks;
 	public static Block Planks2;
 	public static Block Leaves;
@@ -287,6 +285,7 @@ public class TFCBlocks
 	public static Block ArmourStand;
 	public static Block ArmourStand2;
 
+	public static Block LogNatural;
 	public static Block LogNatural2;
 	public static Block WoodHoriz3;
 	public static Block WoodHoriz4;
@@ -354,12 +353,13 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WoodSupportV2, TFC.Items.ItemBlocks.ItemWoodSupport2.class,"WoodSupportV2");
 		GameRegistry.registerBlock(WoodSupportH2, TFC.Items.ItemBlocks.ItemWoodSupport2.class, "WoodSupportH2");
 		GameRegistry.registerBlock(Sulfur, "Sulfur");
-//		GameRegistry.registerBlock(Blocks.log, TFC.Items.ItemBlocks.ItemCustomWood.class, "log");
-//		GameRegistry.registerBlock(Blocks.leaves, TFC.Items.ItemBlocks.ItemCustomLeaves.class, "leaves");
-//		GameRegistry.registerBlock(Blocks.sapling, TFC.Items.ItemBlocks.ItemSapling.class, "sapling");
+		GameRegistry.registerBlock(LogNatural, TFC.Items.ItemBlocks.ItemCustomWood.class, "log");
+		GameRegistry.registerBlock(LogNatural2, TFC.Items.ItemBlocks.ItemCustomWood2.class, "log2");
+		GameRegistry.registerBlock(Leaves, TFC.Items.ItemBlocks.ItemCustomLeaves.class, "leaves");
 		GameRegistry.registerBlock(Leaves2, TFC.Items.ItemBlocks.ItemCustomLeaves2.class, "leaves2");
+		GameRegistry.registerBlock(Sapling, TFC.Items.ItemBlocks.ItemSapling.class, "sapling");
 		GameRegistry.registerBlock(Sapling2, TFC.Items.ItemBlocks.ItemSapling2.class, "sapling2");
-//		GameRegistry.registerBlock(Blocks.planks, TFC.Items.ItemBlocks.ItemPlankBlock.class, "planks");
+		GameRegistry.registerBlock(Planks, TFC.Items.ItemBlocks.ItemPlankBlock.class, "planks");
 		GameRegistry.registerBlock(Planks2, TFC.Items.ItemBlocks.ItemPlankBlock2.class, "planks2");
 //		GameRegistry.registerBlock(Blocks.brown_mushroom, TFC.Items.ItemBlocks.ItemFoodBlock.class, "mushroom");
 //		GameRegistry.registerBlock(Blocks.pumpkin, TFC.Items.ItemBlocks.ItemFoodBlock.class, "pumpkin");
@@ -386,11 +386,9 @@ public class TFCBlocks
 
 		GameRegistry.registerBlock(WoodConstruct, "WoodConstruct");
 		GameRegistry.registerBlock(WoodVert, "WoodVert");
+		GameRegistry.registerBlock(WoodVert2, "WoodVert2");
 		GameRegistry.registerBlock(WoodHoriz, "WoodHoriz");
 		GameRegistry.registerBlock(WoodHoriz2, "WoodHoriz2");
-
-		GameRegistry.registerBlock(LogNatural2,ItemCustomWood2.class,"LogNatural2");
-		GameRegistry.registerBlock(WoodVert2, "WoodVert2");
 		GameRegistry.registerBlock(WoodHoriz3, "WoodHoriz3");
 		GameRegistry.registerBlock(WoodHoriz4, "WoodHoriz4");
 
@@ -467,20 +465,13 @@ public class TFCBlocks
 		Blocks.birch_stairs.setCreativeTab(null);
 		Blocks.jungle_stairs.setCreativeTab(null);
 
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.planks), "planks",
-				(new BlockPlanks(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood").setBlockTextureName("planks"));
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.sapling), "sapling",
-				(new BlockCustomSapling()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.flowing_water), "flowing_water",
 				(new BlockCustomFlowing(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water_flow"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.water), "water",
 				(new BlockCustomStationary(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water_still"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.flowing_lava), "flowing_lava",
 				(new BlockCustomFlowing(Material.lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("lava_flow"));
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.flowing_water), "log",
-				(new TFC.Blocks.Flora.BlockLogNatural()).setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log"));
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.leaves), "leaves",
-				(new BlockCustomLeaves()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves"));
+
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.tallgrass), "tallgrass",
 				(new BlockCustomTallGrass()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("tallgrass"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.yellow_flower), "yellow_flower",
@@ -523,13 +514,6 @@ public class TFCBlocks
 				(new BlockCustomButtonWood()).setHardness(0.5F).setStepSound(Block.soundTypeWood).setBlockName("button"));
 
 
-		Planks = Blocks.planks;
-		Planks2 = (new TFC.Blocks.BlockPlanks2(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood2").setBlockTextureName("planks");
-		Wood = Blocks.log;
-		Leaves = Blocks.leaves;
-		Leaves2 = (new BlockCustomLeaves2()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves2");
-		Sapling = Blocks.sapling;
-		Sapling2 = (new BlockCustomSapling2()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling2");
 
 		StoneIgInCobble = new BlockIgInCobble(Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgInRockCobble");
 		StoneIgIn = new BlockIgIn(Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgInRock");
@@ -563,14 +547,16 @@ public class TFCBlocks
 		PeatGrass = new TFC.Blocks.Terrain.BlockPeatGrass().setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("PeatGrass");
 		DryGrass = new BlockDryGrass(0).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("DryGrass");
 		DryGrass2 =new BlockDryGrass(16).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("DryGrass");
+		Sand = new TFC.Blocks.Terrain.BlockSand(0).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
+		Sand2 = new BlockSand2(16).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
 
 		Ore = new BlockOre(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		Ore2 = new BlockOre2(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		Ore3 = new BlockOre3(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		worldItem = new BlockWorldItem().setHardness(0.05F).setResistance(1F).setBlockName("LooseRock");
-		LogPile = new BlockLogPile().setHardness(10F).setResistance(1F).setBlockName("LogPile");
-
 		Sulfur = new BlockSulfur(Material.rock).setBlockName("Sulfur").setHardness(0.5F).setResistance(1F);
+
+		LogPile = new BlockLogPile().setHardness(10F).setResistance(1F).setBlockName("LogPile");
 		WoodSupportV = new BlockWoodSupport(Material.wood).setBlockName("WoodSupportV").setHardness(0.5F).setResistance(1F);
 		WoodSupportH = new BlockWoodSupport(Material.wood).setBlockName("WoodSupportH").setHardness(0.5F).setResistance(1F);
 		WoodSupportV2 = new BlockWoodSupport2(Material.wood).setBlockName("WoodSupportV2").setHardness(0.5F).setResistance(1F);
@@ -582,9 +568,6 @@ public class TFCBlocks
 		fruitTreeWood = new BlockFruitWood().setBlockName("fruitTreeWood").setHardness(5.5F).setResistance(2F);
 		fruitTreeLeaves = new BlockFruitLeaves(0).setBlockName("fruitTreeLeaves").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundTypeGrass);
 		fruitTreeLeaves2 = new BlockFruitLeaves(8).setBlockName("fruitTreeLeaves2").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundTypeGrass);
-
-		Sand = new TFC.Blocks.Terrain.BlockSand(0).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
-		Sand2 = new BlockSand2(16).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
 
 		WoodConstruct = (new TFC.Blocks.BlockWoodConstruct()).setHardness(4F).setStepSound(Block.soundTypeWood).setBlockName("WoodConstruct");
 
@@ -608,12 +591,19 @@ public class TFCBlocks
 
 		Detailed = new BlockDetailed().setBlockName("StoneDetailed").setHardness(10).setResistance(15F);
 
+		Planks = (new BlockPlanks(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood").setBlockTextureName("planks");
+		Planks2 = (new TFC.Blocks.BlockPlanks2(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood2").setBlockTextureName("planks");
+		Leaves = (new BlockCustomLeaves()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves");
+		Leaves2 = (new BlockCustomLeaves2()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves2");
+		Sapling = (new BlockCustomSapling()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling");
+		Sapling2 = (new BlockCustomSapling2()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling2");
+
+		LogNatural = new TFC.Blocks.Flora.BlockLogNatural().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log");
+		LogNatural2 = new TFC.Blocks.Flora.BlockLogNatural2().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log2");
 		WoodVert = new BlockLogVert().setBlockName("WoodVert").setHardness(40).setResistance(15F);
+		WoodVert2 = new BlockLogVert2().setBlockName("WoodVert2").setHardness(40).setResistance(15F);
 		WoodHoriz = new BlockLogHoriz(0).setBlockName("WoodHoriz").setHardness(40).setResistance(15F);
 		WoodHoriz2 = new BlockLogHoriz(8).setBlockName("WoodHoriz2").setHardness(40).setResistance(15F);
-
-		LogNatural2 = new TFC.Blocks.Flora.BlockLogNatural2().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log2");
-		WoodVert2 = new BlockLogVert2().setBlockName("WoodVert2").setHardness(40).setResistance(15F);
 		WoodHoriz3 = new BlockLogHoriz2(0).setBlockName("WoodHoriz3").setHardness(40).setResistance(15F);
 		WoodHoriz4 = new BlockLogHoriz2(8).setBlockName("WoodHoriz4").setHardness(40).setResistance(15F);
 
@@ -713,13 +703,23 @@ public class TFCBlocks
 		Detailed.setHarvestLevel("axe", 0);
 		Blocks.oak_stairs.setHarvestLevel("axe", 0);
 		WoodConstruct.setHarvestLevel("axe", 0);
-		Wood.setHarvestLevel("axe", 1);
+		LogNatural.setHarvestLevel("axe", 1);
+		LogNatural2.setHarvestLevel("axe", 1);
 		WoodHoriz.setHarvestLevel("axe", 1);
+		WoodHoriz2.setHarvestLevel("axe", 1);
+		WoodHoriz3.setHarvestLevel("axe", 1);
+		WoodHoriz4.setHarvestLevel("axe", 1);
 		WoodVert.setHarvestLevel("axe", 1);
+		WoodVert2.setHarvestLevel("axe", 1);
 
-		Wood.setHarvestLevel("hammer", 1);
+		LogNatural.setHarvestLevel("hammer", 1);
+		LogNatural2.setHarvestLevel("hammer", 1);
 		WoodHoriz.setHarvestLevel("hammer", 1);
+		WoodHoriz2.setHarvestLevel("hammer", 1);
+		WoodHoriz3.setHarvestLevel("hammer", 1);
+		WoodHoriz4.setHarvestLevel("hammer", 1);
 		WoodVert.setHarvestLevel("hammer", 1);
+		WoodVert2.setHarvestLevel("hammer", 1);
 	}
 
 	public static boolean isBlockVSupport(Block block)

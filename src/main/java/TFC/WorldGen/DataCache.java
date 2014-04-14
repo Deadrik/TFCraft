@@ -55,14 +55,12 @@ public class DataCache
 		y >>= 4;
 		long var3 = (long)x & 4294967295L | ((long)y & 4294967295L) << 32;
 		DataCacheBlockTFC var5 = (DataCacheBlockTFC)this.cacheMap.getValueByKey(var3);
-
 		if (var5 == null)
 		{
 			var5 = new DataCacheBlockTFC(this, indexLayers, x, y, index);
 			this.cacheMap.add(var3, var5);
 			this.cache.add(var5);
 		}
-
 		var5.lastAccessTime = MinecraftServer.getSystemTimeMillis();
 		return var5;
 	}
@@ -84,7 +82,6 @@ public class DataCache
 	{
 		long var1 = MinecraftServer.getSystemTimeMillis();
 		long var3 = var1 - this.lastCleanupTime;
-
 		if (var3 > 7500L || var3 < 0L)
 		{
 			this.lastCleanupTime = var1;

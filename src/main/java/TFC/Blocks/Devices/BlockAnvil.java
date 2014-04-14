@@ -56,12 +56,16 @@ public class BlockAnvil extends BlockTerraContainer
 	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
 		if(this == TFCBlocks.Anvil)
+		{
 			for(int i = 1; i < 8; i++) 
 				par3List.add(new ItemStack(this, 1, i));
+		}
 
 		if(this == TFCBlocks.Anvil2)
+		{
 			for(int i = 0; i < 3; i++)
 				par3List.add(new ItemStack(this, 1, i));
+		}
 	}
 
 	@Override
@@ -78,7 +82,6 @@ public class BlockAnvil extends BlockTerraContainer
 				TileEntityAnvil tileentityanvil;
 				tileentityanvil = (TileEntityAnvil)world.getTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
-
 				entityplayer.openGui(TerraFirmaCraft.instance, 21, world, i, j, k);
 			}
 			return true;
@@ -189,8 +192,10 @@ public class BlockAnvil extends BlockTerraContainer
 	{
 		int type = BlockAnvil.getAnvilTypeFromMeta(l);
 		if(this == TFCBlocks.Anvil)
+		{
 			if(type == 0)
 				return;
+		}
 		super.harvestBlock(world, entityplayer, i, j, k, type);
 	}
 

@@ -69,11 +69,8 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 		for (var5 = 0; var4 < 3; ++var4)
 		{
 			var3[var4] = par2ArrayOfInteger[var4] - par1ArrayOfInteger[var4];
-
 			if (Math.abs(var3[var4]) > Math.abs(var3[var5]))
-			{
 				var5 = var4;
-			}
 		}
 
 		if (var3[var5] == 0)
@@ -87,13 +84,9 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 			byte var8;
 
 			if (var3[var5] > 0)
-			{
 				var8 = 1;
-			}
 			else
-			{
 				var8 = -1;
-			}
 
 			double var9 = (double)var3[var6] / (double)var3[var5];
 			double var11 = (double)var3[var7] / (double)var3[var5];
@@ -107,7 +100,6 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 				var13[var6] = MathHelper.floor_double(par1ArrayOfInteger[var6] + var14 * var9);
 				var13[var7] = MathHelper.floor_double(par1ArrayOfInteger[var7] + var14 * var11);
 				Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
-
 				if (var16 != Blocks.air && (var16 != Blocks.leaves || var16 != Blocks.leaves2) && var16!= Blocks.vine && var16 != TFCBlocks.Leaves2)
 					break;
 			}
@@ -127,9 +119,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 		this.basePos[2] = par5;
 
 		if (this.heightLimit == 0)
-		{
 			this.heightLimit = 5 + this.rand.nextInt(this.heightLimitLimit/2) + this.heightLimitLimit/2;
-		}
 
 		if (!this.validTreeLocation())
 		{
@@ -151,7 +141,6 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	void generateLeafNode(int par1, int par2, int par3)
 	{
 		int var4 = par2;
-
 		for (int var5 = par2 + this.leafDistanceLimit; var4 < var5; ++var4)
 		{
 			float var6 = this.leafSize(var4 - par2);
@@ -173,11 +162,8 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 			int[] var5 = new int[] {var4[0], var4[1], var4[2]};
 			var3[1] = var4[3];
 			int var6 = var3[1] - this.basePos[1];
-
 			if (this.leafNodeNeedsBase(var6))
-			{
 				this.placeBlockLine(var3, var5, TFCBlocks.LogNatural2);
-			}
 		}
 	}
 
@@ -187,18 +173,12 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	void generateLeafNodeList()
 	{
 		this.height = (int)(this.heightLimit * this.heightAttenuation);
-
 		if (this.height >= this.heightLimit)
-		{
 			this.height = this.heightLimit - 1;
-		}
 
 		int var1 = (int)(1.382D + Math.pow(this.leafDensity * this.heightLimit / 13.0D, 2.0D));
-
 		if (var1 < 1)
-		{
 			var1 = 1;
-		}
 
 		int[][] var2 = new int[var1 * this.heightLimit][4];
 		int var3 = this.basePos[1] + this.heightLimit - this.leafDistanceLimit;
@@ -239,13 +219,9 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 						double var22 = var20 * this.branchSlope;
 
 						if (var17[1] - var22 > var5)
-						{
 							var19[1] = var5;
-						}
 						else
-						{
 							var19[1] = (int)(var17[1] - var22);
-						}
 
 						if (this.checkBlockLine(var19, var17) == -1)
 						{
@@ -257,12 +233,10 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 						}
 					}
 				}
-
 				--var3;
 				--var6;
 			}
 		}
-
 		this.leafNodes = new int[var4][4];
 		System.arraycopy(var2, 0, this.leafNodes, 0, var4);
 	}
@@ -281,6 +255,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 			int var5 = this.leafNodes[var1][2];
 			this.generateLeafNode(var3, var4, var5);
 		}
+
 		var1 = 0;
 		for (int var2 = this.leafNodes.length; var1 < var2; ++var1)
 		{
@@ -376,17 +351,11 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 			float var4;
 
 			if (var3 == 0.0F)
-			{
 				var4 = var2;
-			}
 			else if (Math.abs(var3) >= var2)
-			{
 				var4 = 0.0F;
-			}
 			else
-			{
 				var4 = (float)Math.sqrt(Math.pow(Math.abs(var2), 2.0D) - Math.pow(Math.abs(var3), 2.0D));
-			}
 
 			var4 *= 0.5F;
 			return var4;
@@ -418,11 +387,8 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 		for (var6 = 0; var5 < 3; ++var5)
 		{
 			var4[var5] = par2ArrayOfInteger[var5] - par1ArrayOfInteger[var5];
-
 			if (Math.abs(var4[var5]) > Math.abs(var4[var6]))
-			{
 				var6 = var5;
-			}
 		}
 
 		if (var4[var6] != 0)
@@ -432,13 +398,9 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 			byte var9;
 
 			if (var4[var6] > 0)
-			{
 				var9 = 1;
-			}
 			else
-			{
 				var9 = -1;
-			}
 
 			double var10 = (double)var4[var7] / (double)var4[var6];
 			double var12 = (double)var4[var8] / (double)var4[var6];
@@ -450,7 +412,8 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 				var14[var6] = MathHelper.floor_double(par1ArrayOfInteger[var6] + var15 + 0.5D);
 				var14[var7] = MathHelper.floor_double(par1ArrayOfInteger[var7] + var15 * var10 + 0.5D);
 				var14[var8] = MathHelper.floor_double(par1ArrayOfInteger[var8] + var15 * var12 + 0.5D);
-				if(worldObj.isAirBlock(var14[0], var14[1], var14[2]) || worldObj.getBlock(var14[0], var14[1], var14[2]) == TFCBlocks.Leaves ||
+				if(worldObj.isAirBlock(var14[0], var14[1], var14[2]) ||
+						worldObj.getBlock(var14[0], var14[1], var14[2]) == TFCBlocks.Leaves ||
 						worldObj.getBlock(var14[0], var14[1], var14[2]) == TFCBlocks.Leaves2)
 				{
 					this.setBlockAndNotifyAdequately(this.worldObj, var14[0], var14[1], var14[2], par3, treeId);
@@ -466,12 +429,8 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 	public void setScale(double par1, double par3, double par5)
 	{
 		this.heightLimitLimit = (int)(par1 * 12.0D);
-
 		if (par1 > 0.5D)
-		{
 			this.leafDistanceLimit = 5;
-		}
-
 		this.scaleWidth = par3;
 		this.leafDensity = par5;
 	}
@@ -493,7 +452,6 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 		else
 		{
 			int var4 = this.checkBlockLine(var1, var2);
-
 			if (var4 == -1)
 			{
 				return true;

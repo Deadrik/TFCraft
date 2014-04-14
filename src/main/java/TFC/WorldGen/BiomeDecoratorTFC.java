@@ -98,7 +98,9 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord) + 1;
 			for (int count = 0; count < num; ++count)
+			{
 				cropGen.generate(currentWorld, randomGenerator, xCoord, zCoord, 1);
+			}
 		}
 
 		/*
@@ -211,7 +213,8 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		if (this.currentWorld != null)
 		{
 			// throw new RuntimeException("Already decorating!!");
-		} else
+		}
+		else
 		{
 			this.currentWorld = par1World;
 			this.randomGenerator = par2Random;

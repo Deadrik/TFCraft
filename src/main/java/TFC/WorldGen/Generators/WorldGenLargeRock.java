@@ -29,10 +29,12 @@ public class WorldGenLargeRock implements IWorldGenerator
 
 		for(; yOffset > -2 && !isFlatEnough; yOffset--)
 		{
-			if(world.getBlock(i, j+yOffset, k).isNormalCube())
-				if(world.getBlock(i+1, j+yOffset, k).isNormalCube() && world.getBlock(i-1, j+yOffset, k).isNormalCube() && 
-						world.getBlock(i-1, j+yOffset, k).isNormalCube() && world.getBlock(i, j+yOffset, k+1).isNormalCube())
+			if(world.getBlock(i, j + yOffset, k).isNormalCube())
+			{
+				if(world.getBlock(i + 1, j + yOffset, k).isNormalCube() && world.getBlock(i - 1, j + yOffset, k).isNormalCube() && 
+						world.getBlock(i - 1, j + yOffset, k).isNormalCube() && world.getBlock(i, j + yOffset, k + 1).isNormalCube())
 					isFlatEnough = true;
+			}
 		}
 
 		if(j <= 155)
@@ -55,8 +57,11 @@ public class WorldGenLargeRock implements IWorldGenerator
 		xWidth2 = 3;
 		zWidth = 3;
 		zWidth2 = 3;
+
 		for (int xCoord = i - xWidth; xCoord <= i + xWidth2; ++xCoord)
+		{
 			for (int zCoord = k - zWidth; zCoord <= k + zWidth2; ++zCoord)
+			{
 				for (int yCoord = j + yOffset - height; yCoord <= j + yOffset + height; ++yCoord)
 				{
 					Vec3 point = Vec3.createVectorHelper(xCoord, yCoord, zCoord);
@@ -74,6 +79,8 @@ public class WorldGenLargeRock implements IWorldGenerator
 					if(rand.nextInt(10)+1 != 0 && canPlaceX && canPlaceZ)
 						world.setBlock(xCoord, yCoord, zCoord, rockLayer1.block, rockLayer1.data2, 0x2);
 				}
+			}
+		}
 	}
 
 	@Override

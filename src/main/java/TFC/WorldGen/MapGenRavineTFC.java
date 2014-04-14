@@ -119,7 +119,9 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 					int var44;
 
 					for (var41 = var56; !var58 && var41 < var35; ++var41)
+					{
 						for (int var42 = var57; !var58 && var42 < var39; ++var42)
+						{
 							for (int var43 = var37 + 1; !var58 && var43 >= var55 - 1; --var43)
 							{
 								var44 = (var41 * 16 + var42) * 256 + var43;
@@ -132,6 +134,8 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 										var43 = var55;
 								}
 							}
+						}
+					}
 
 					if (!var58)
 					{
@@ -144,6 +148,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 								int index = (var41 * 16 + var44) * 256 + var37;
 								boolean isGrass = false;
 								if (var59 * var59 + var45 * var45 < 1.0D)
+								{
 									for (int var49 = var37 - 1; var49 >= var55; --var49)
 									{
 										double var50 = (var49 + 0.5D - yCoord) / var30;
@@ -153,13 +158,16 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 											if (TFC_Core.isGrass(block))
 												isGrass = true;
 											if (TFC_Core.isRawStone(block) || TFC_Core.isSoil(block))
+											{
 												if (var49 < 10)
 													blockArray[index] = Blocks.lava;
 												else
 													blockArray[index] = Blocks.air;
+											}
 										}
 										--index;
 									}
+								}
 							}
 						}
 						if (var54)

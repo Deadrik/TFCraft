@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -34,7 +35,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 			for (int a = 0 ; a < length ; a++)
 			{
 				if(world.isAirBlock(X * a / length + x, Y * a / length + y, Z * a / length + z))
-					world.setBlock (X * a / length + x, Y * a / length + y, Z * a / length + z, Blocks.log, treeId, 0x2);
+					world.setBlock (X * a / length + x, Y * a / length + y, Z * a / length + z, TFCBlocks.LogNatural, treeId, 0x2);
 			}
 			createLeafGroup (X + x, Y + y, Z + z, random, world);
 		}
@@ -50,14 +51,12 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 				{
 					if (!world.getBlock(x1, y1 + y, z1).isOpaqueCube())
 					{
-						world.setBlock (x1, y1 + y, z1, Blocks.leaves, treeId, 0x2);
+						world.setBlock (x1, y1 + y, z1, TFCBlocks.Leaves, treeId, 0x2);
 						for (int a = 0 ; a < random.nextInt (2) + 2 ; a++)
 						{
-							Block id = world.getBlock(x1, y1 - 1 - a + y, z1);
-							if (!id.isOpaqueCube() && id == Blocks.air)
-							{
-								world.setBlock (x1, y1 - 1 - a + y, z1, Blocks.leaves, treeId, 0x2);
-							}
+							Block b = world.getBlock(x1, y1 - 1 - a + y, z1);
+							if (!b.isOpaqueCube() && b == Blocks.air)
+								world.setBlock (x1, y1 - 1 - a + y, z1, TFCBlocks.Leaves, treeId, 0x2);
 						}
 					}
 				}
@@ -102,13 +101,17 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 					if (i1 >= 0 && i1 < world.getHeight())
 					{
 						Block i4 = world.getBlock(j2, i1, j3);
-						if (i4 == Blocks.air || i4 == Blocks.leaves || i4 == Blocks.leaves2)
+						if (i4 == Blocks.air || i4 == TFCBlocks.Leaves || i4 == TFCBlocks.Leaves2)
 							continue;
 						if (i4 == Blocks.water || i4 == Blocks.flowing_water)
+						{
 							if (i1 > yCoord)
 								flag = false;
+						}
 						else
+						{
 							flag = false;
+						}
 					}
 					else
 					{
@@ -122,21 +125,24 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 			return false;
 
 		Block var3 = world.getBlock(xCoord, yCoord - 1, zCoord);
-		if (!(TFC_Core.isSoil(var3))|| yCoord >= world.getHeight() - height - 1 || 
+		if (!(TFC_Core.isSoil(var3))|| yCoord >= world.getHeight() - height - 1 ||
 				world.getBlock(xCoord, yCoord, zCoord).getMaterial() == Material.water)
 		{
 			return false;
 		}
+
 		if(world.isAirBlock(xCoord, yCoord - 1, zCoord))
 		{
 			DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 			//set the block below the tree to dirt.
 			world.setBlock(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
 		}
+
 		int z1, x1, y,x,z;
 		y = height+yCoord;
 		x = xCoord;
 		z = zCoord;
+
 		for (int n = 0 ; n < 2 ; n++)
 		{
 			x1 = 1 - n * (random.nextInt (1) - random.nextInt (1));
@@ -150,7 +156,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 			for (int a = 0 ; a < length ; a++)
 			{
 				if(world.isAirBlock(X * a / length + x, Y * a / length + y, Z * a / length + z))
-					world.setBlock (X * a / length + x, Y * a / length + y, Z * a / length + z, Blocks.log, treeId, 0x2);
+					world.setBlock (X * a / length + x, Y * a / length + y, Z * a / length + z, TFCBlocks.LogNatural, treeId, 0x2);
 				addBranch (X * a / length + x, Y * a / length + y, Z * a / length + z, -1, 0, random, world);
 				addBranch (X * a / length + x, Y * a / length + y, Z * a / length + z, 0, -1, random, world);
 				addBranch (X * a / length + x, Y * a / length + y, Z * a / length + z, 1, 0, random, world);
@@ -162,10 +168,10 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 		for (int l1 = 0 ; l1 < height ; l1++)
 		{
 			Block l2 = world.getBlock(xCoord, yCoord + l1, zCoord);
-			if (l2 == Blocks.air || l2 == Blocks.leaves || l2 == Blocks.leaves2 || l2 == Blocks.flowing_water || l2 == Blocks.water ||
+			if (l2 == Blocks.air || l2 == TFCBlocks.Leaves || l2 == TFCBlocks.Leaves2 || l2 == Blocks.flowing_water || l2 == Blocks.water ||
 					l2.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
 			{
-				world.setBlock(xCoord, yCoord + l1, zCoord, Blocks.log, treeId, 0x2);
+				world.setBlock(xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId, 0x2);
 			}
 		}
 

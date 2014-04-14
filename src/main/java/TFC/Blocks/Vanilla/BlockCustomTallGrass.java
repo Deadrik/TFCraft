@@ -76,29 +76,37 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		Random rand = new Random();
 		ItemStack is = player.inventory.getCurrentItem();
 		for(int c = 0; c < Recipes.Knives.length && is != null; c++)
+		{
 			if(is.getItem() == Recipes.Knives[c])
 			{
 				createStraw(world, player, i, j, k);
 				is.damageItem(1, player);
 				break;
 			}
+		}
 
 		for(int c = 0; c < Recipes.Scythes.length && is != null; c++)
+		{
 			if(is.getItem() == Recipes.Scythes[c])
 			{
 				//Spawn the straw for the block that we've already destroyed
 				createStraw(world, player, i, j, k );
 				//Now check each block around the destroyed block for AOE directions
 				for(int x = -1; x < 2; x++)
+				{
 					for(int z = -1; z < 2; z++)
+					{
 						if(world.getBlock(i+x,  j,  k+z) == this)
 						{
 							createStraw(world, player, i + x, j, k + z);
 							is.damageItem(1, player);
 							world.setBlockToAir(i+x,  j,  k+z);
 						}
+					}
+				}
 				break;
 			}
+		}
 	}
 
 	private void createStraw(World world, EntityPlayer player, int i, int j, int k)

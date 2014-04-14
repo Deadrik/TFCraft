@@ -20,9 +20,8 @@ public class ItemCustomLeaves2 extends ItemTerraBlock
 	public String getItemStackDisplayName(ItemStack itemstack) 
 	{
 		int n = 0;
-		if(itemstack!=null && 16 + itemstack.getItemDamage() < Global.WOOD_ALL.length){
+		if(itemstack!=null && 16 + itemstack.getItemDamage() < Global.WOOD_ALL.length)
 			n=16;
-		}
 		
 		String s = StatCollector.translateToLocal("tile.leaves." + Global.WOOD_ALL[itemstack.getItemDamage()+n] + ".name").toString();
 		return s;
@@ -30,7 +29,7 @@ public class ItemCustomLeaves2 extends ItemTerraBlock
 	
 	@Override
 	public void registerIcons(IIconRegister registerer)
-    {
+	{
+	}
 
-    }
 }

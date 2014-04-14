@@ -24,20 +24,16 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 		int treeHeight = random.nextInt(6) + 3;
 		boolean flag = true;
 		if (yCoord < 1 || yCoord + treeHeight + 1 > world.getHeight())
-		{
 			return false;
-		}
+
 		for (int i1 = yCoord; i1 <= yCoord + 1 + treeHeight; i1++)
 		{
 			byte byte0 = 1;
 			if (i1 == yCoord)
-			{
 				byte0 = 0;
-			}
 			if (i1 >= yCoord + 1 + treeHeight - 2)
-			{
 				byte0 = 2;
-			}
+
 			for (int i2 = xCoord - byte0; i2 <= xCoord + byte0 && flag; i2++)
 			{
 				for (int l2 = zCoord - byte0; l2 <= zCoord + byte0 && flag; l2++)
@@ -57,14 +53,12 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 		}
 
 		if (!flag)
-		{
 			return false;
-		}
+
 		Block var3 = world.getBlock(xCoord, yCoord - 1, zCoord);
 		if (!(TFC_Core.isSoil(var3))|| yCoord >= world.getHeight() - treeHeight - 1)
-		{
 			return false;
-		}
+
 		//DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 		//set the block below the tree to dirt.
 		//world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2));
@@ -73,7 +67,6 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 		{
 			int treeDiameter = treeHeightOffset - (yCoord + treeHeight);
 			int treeRadius = 1 - treeDiameter / 2;
-
 			for (int xPos = xCoord - 1; xPos <= xCoord + 1; xPos++)
 			{
 				int l3 = xPos - xCoord;
@@ -93,9 +86,7 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 		{
 			Block k2 = world.getBlock(xCoord, yCoord + l1, zCoord);
 			if (k2 == Blocks.air || k2 == TFCBlocks.Leaves || k2.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
-			{
-				setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.Wood, treeId);
-			}
+				setBlockAndNotifyAdequately(world, xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId);
 		}
 		return true;
 	}

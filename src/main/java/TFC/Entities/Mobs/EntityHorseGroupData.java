@@ -1,7 +1,8 @@
 package TFC.Entities.Mobs;
 
+import net.minecraft.entity.IEntityLivingData;
 
-public class EntityHorseGroupData // implements EntityLivingData
+public class EntityHorseGroupData implements IEntityLivingData
 {
     public int field_111107_a;
     public int field_111106_b;

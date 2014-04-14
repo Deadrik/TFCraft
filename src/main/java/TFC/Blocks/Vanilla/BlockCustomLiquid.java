@@ -103,7 +103,9 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 	protected int getEffectiveFlowDecay(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
 		if (par1IBlockAccess.getBlock(par2, par3, par4).getMaterial() != this.blockMaterial)
+		{
 			return -1;
+		}
 		else
 		{
 			int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
@@ -467,6 +469,7 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 	private void checkForHarden(World par1World, int par2, int par3, int par4)
 	{
 		if (par1World.getBlock(par2, par3, par4) == this)
+		{
 			if (this.blockMaterial == Material.lava)
 			{
 				boolean flag = false;
@@ -490,6 +493,7 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 					this.triggerLavaMixEffects(par1World, par2, par3, par4);
 				}
 			}
+		}
 	}
 
 	/**
@@ -529,7 +533,8 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
 		super.updateTick(world, i, j, k, rand);
-		if((world.provider) instanceof TFCProvider){
+		if((world.provider) instanceof TFCProvider)
+		{
 			if (((TFCProvider)(world.provider)).canBlockFreezeTFC(i, j, k, false))
 			{
 				//setFreezeBlock(world,i,j,k,rand);

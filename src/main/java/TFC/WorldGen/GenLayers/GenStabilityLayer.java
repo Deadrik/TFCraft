@@ -46,14 +46,13 @@ public abstract class GenStabilityLayer extends GenLayerTFC
 		var6 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var17, 2);
 
 		Object var18 = new GenLayerSmoothTFC(1000L, var6);
-
 		for (int var7 = 0; var7 < var4; ++var7)
 		{
 			var18 = new GenLayerZoomTFC((long)(1000 + var7), (GenLayerTFC)var18);
-
 			if (var7 == 0)
 				var18 = new GenLayerAddIslandTFC(3L, (GenLayerTFC)var18);
 		}
+
 		GenLayerSmoothTFC var19 = new GenLayerSmoothTFC(1000L, (GenLayerTFC)var18);
 		GenLayerVoronoiZoomTFC var8 = new GenLayerVoronoiZoomTFC(10L, var19);
 		var19.initWorldGenSeed(par0);
@@ -74,7 +73,6 @@ public abstract class GenStabilityLayer extends GenLayerTFC
 	public void initWorldGenSeed(long par1)
 	{
 		worldGenSeed = par1;
-
 		if (this.parent != null)
 			parent.initWorldGenSeed(par1);
 
@@ -110,10 +108,8 @@ public abstract class GenStabilityLayer extends GenLayerTFC
 	protected int nextInt(int par1)
 	{
 		int var2 = (int)((this.chunkSeed >> 24) % par1);
-
 		if (var2 < 0)
 			var2 += par1;
-
 		chunkSeed *= chunkSeed * 6364136223846793005L + 1442695040888963407L;
 		chunkSeed += worldGenSeed;
 		return var2;

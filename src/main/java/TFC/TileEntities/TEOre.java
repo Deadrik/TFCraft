@@ -28,7 +28,7 @@ public class TEOre extends TileEntity
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) 
+	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
 		baseBlockID = nbt.getInteger("baseBlockID");

@@ -7,8 +7,9 @@ import TFC.WorldGen.DataLayer;
 
 public class GenLayerStability extends GenLayerTFC
 {
-	public static DataLayer[] biomeArray = new DataLayer[] {DataLayer.SeismicStable, DataLayer.SeismicStable, DataLayer.SeismicStable, DataLayer.SeismicStable,
-		DataLayer.SeismicStable, DataLayer.SeismicUnStable};
+	public static DataLayer[] biomeArray = new DataLayer[] {
+		DataLayer.SeismicStable, DataLayer.SeismicStable, DataLayer.SeismicStable,
+		DataLayer.SeismicStable, DataLayer.SeismicStable, DataLayer.SeismicUnStable};
 
 	private DataLayer[] allowedBiomes;
 
@@ -28,19 +29,18 @@ public class GenLayerStability extends GenLayerTFC
 	{
 		int[] var5 = this.parent.getInts(par1, par2, par3, par4);
 		int[] var6 = IntCache.getIntCache(par3 * par4);
-
 		for (int var7 = 0; var7 < par4; ++var7)
+		{
 			for (int var8 = 0; var8 < par3; ++var8)
 			{
 				this.initChunkSeed(var8 + par1, var7 + par2);
 				int var9 = var5[var8 + var7 * par3];
-
 				if (var9 == 0)
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
 				else
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
 			}
-
+		}
 		return var6;
 	}
 }

@@ -113,7 +113,7 @@ public class BlockCustomLeaves extends BlockLeaves
 						{
 							Block block = par1World.getBlock(xOrig + xd, yOrig + yd, zOrig + zd);
 
-							if (block == TFCBlocks.Wood || block == TFCBlocks.LogNatural2)
+							if (block == TFCBlocks.LogNatural || block == TFCBlocks.LogNatural2)
 								this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = 0;
 							else if ((block == this) && var6 == par1World.getBlockMetadata(xOrig + xd, yOrig + yd, zOrig + zd))
 								this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = -2;
@@ -136,34 +136,22 @@ public class BlockCustomLeaves extends BlockLeaves
 								if (this.adjacentTreeBlocks[xd + center][yd + center][zd + center] == pass - 1)
 								{
 									if (this.adjacentTreeBlocks[xd + center - 1][yd + center][zd + center] == -2)
-									{
 										this.adjacentTreeBlocks[xd + center - 1][yd + center][zd + center] = pass;
-									}
 
 									if (this.adjacentTreeBlocks[xd + center + 1][yd + center][zd + center] == -2)
-									{
 										this.adjacentTreeBlocks[xd + center + 1][yd + center][zd + center] = pass;
-									}
 
 									if (this.adjacentTreeBlocks[xd + center][yd + center - 1][zd + center] == -2)
-									{
 										this.adjacentTreeBlocks[xd + center][yd + center - 1][zd + center] = pass;
-									}
 
 									if (this.adjacentTreeBlocks[xd + center][yd + center + 1][zd + center] == -2)
-									{
 										this.adjacentTreeBlocks[xd + center][yd + center + 1][zd + center] = pass;
-									}
 
 									if (this.adjacentTreeBlocks[xd + center][yd + center][zd + center - 1] == -2)
-									{
 										this.adjacentTreeBlocks[xd + center][yd + center][zd + center - 1] = pass;
-									}
 
 									if (this.adjacentTreeBlocks[xd + center][yd + center][zd + center + 1] == -2)
-									{
 										this.adjacentTreeBlocks[xd + center][yd + center][zd + center + 1] = pass;
-									}
 								}
 							}
 						}
@@ -176,9 +164,7 @@ public class BlockCustomLeaves extends BlockLeaves
 			if (res < 0)
 			{
 				if(par1World.getChunkFromBlockCoords(xOrig, zOrig) != null)
-				{
 					this.destroyLeaves(par1World, xOrig, yOrig, zOrig);
-				}
 			}
 		}
 	}
@@ -243,15 +229,9 @@ public class BlockCustomLeaves extends BlockLeaves
 							int dam = itemstack.getItemDamage()+2;
 
 							if(dam >= itemstack.getItem().getMaxDamage())
-							{
-								entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
-										null);
-							}
+								entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
 							else
-							{
-								entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
-										new ItemStack(itemstack.getItem(),ss,dam));
-							}
+								entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, new ItemStack(itemstack.getItem(),ss,dam));
 						}
 					}
 				}

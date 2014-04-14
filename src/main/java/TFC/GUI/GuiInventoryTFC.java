@@ -46,7 +46,7 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 		this.allowUserInput = true;
 		player.addStat(AchievementList.openInventory, 1);
 		xSize = 176;
-		ySize = 85+PlayerInventory.invYSize;
+		ySize = 85 + PlayerInventory.invYSize;
 		this.player = player;
 	}
 

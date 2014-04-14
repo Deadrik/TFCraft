@@ -10,6 +10,6 @@ public class BiomeGenRiverTFC extends TFCBiome
 		super(i);
 		//spawnableCreatureList.clear();
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 1));
-		setMinMaxHeight(-0.8F, -0.4F);
+		this.setMinMaxHeight(-0.8F, -0.4F);
 	}
 }

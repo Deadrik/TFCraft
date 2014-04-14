@@ -26,20 +26,16 @@ public class WorldGenCustomRedwoodTrees extends WorldGenerator
 		int treeType = random.nextInt (2);
 		boolean flag = true;
 		if (yCoord < 1 || yCoord + treeHeight + 4 > world.getHeight())
-		{
 			return false;
-		}
+
 		for (int i1 = yCoord ; i1 <= yCoord + 4 + treeHeight ; i1++)
 		{
 			byte byte0 = 1;
 			if (i1 == yCoord)
-			{
 				byte0 = 0;
-			}
 			if (i1 >= yCoord + 4 + treeHeight - 2)
-			{
 				byte0 = 2;
-			}
+
 			for (int l1 = xCoord - byte0 ; l1 <= xCoord + byte0 && flag ; l1++)
 			{
 				for (int k2 = zCoord - byte0 ; k2 <= zCoord + byte0 && flag ; k2++)
@@ -47,25 +43,20 @@ public class WorldGenCustomRedwoodTrees extends WorldGenerator
 					if (i1 >= 0 && i1 < world.getHeight())
 					{
 						Block j3 = world.getBlock (l1, i1, k2);
-						if (j3 != Blocks.air && (j3 != Blocks.leaves || j3 != Blocks.leaves2))
-						{
+						if (j3 != Blocks.air && (j3 != TFCBlocks.Leaves || j3 != TFCBlocks.Leaves2))
 							flag = false;
-						}
 					}
 					else
 					{
 						flag = false;
 					}
 				}
-
 			}
-
 		}
 
 		if (!flag)
-		{
 			return false;
-		}
+
 		Block var3 = world.getBlock (xCoord, yCoord - 1, zCoord);
 		if (!(var3 == TFCBlocks.Dirt || var3 == TFCBlocks.Dirt2 || var3 == TFCBlocks.Grass || var3 == TFCBlocks.Grass2 ||
 				var3 == TFCBlocks.ClayGrass || var3 == TFCBlocks.ClayGrass2)|| yCoord >= world.getHeight() - treeHeight - 1)
@@ -85,25 +76,16 @@ public class WorldGenCustomRedwoodTrees extends WorldGenerator
 				int leafLayer = yPos - (yCoord + treeHeight - covTrunk);
 				int width = leafLayer + 2;
 				if (leafLayer <= lay3 + 1 && leafLayer > 1)
-				{
 					width = 4;
-				}
 				else if (leafLayer <= lay3 + 1 + lay4 && leafLayer > lay3 + 1)
-				{
 					width = 3;
-				}
 				else if (leafLayer <= lay3 + 1 + lay4 + lay5 && leafLayer > lay3 + 1 + lay4)
-				{
 					width = 2;
-				}
 				else if (leafLayer <= lay3 + 1 + lay4 + lay5 + lay6 && leafLayer > lay3 + 1 + lay4 + lay5)
-				{
 					width = 1;
-				}
 				else if (leafLayer > lay3 + 1 + lay4 + lay5 + lay6)
-				{
 					width = 0;
-				}
+
 				for (int xPos = xCoord - width ; xPos <= xCoord + width + w ; xPos++)
 				{
 					int l3 = xPos - xCoord;
@@ -112,14 +94,12 @@ public class WorldGenCustomRedwoodTrees extends WorldGenerator
 						int j4 = zPos - zCoord;
 						if ((Math.abs(l3) != width || Math.abs(j4) != width ||random.nextInt (2) != 0) && 
 								!world.getBlock (xPos, yPos, zPos).isOpaqueCube() &&
-								world.getBlock (xPos, yPos, zPos) != TFCBlocks.Wood)
+								world.getBlock (xPos, yPos, zPos) != TFCBlocks.LogNatural)
 						{
-							setBlockAndNotifyAdequately(world, xPos, yPos, zPos, Blocks.leaves, treeId);
+							setBlockAndNotifyAdequately(world, xPos, yPos, zPos, TFCBlocks.Leaves, treeId);
 						}
 					}
-
 				}
-
 			}
 		}
 		else if (treeType != 1)
@@ -136,25 +116,16 @@ public class WorldGenCustomRedwoodTrees extends WorldGenerator
 				int leafLayer = yPos - (yCoord + treeHeight - covTrunk);
 				int width = leafLayer + 1;
 				if (leafLayer <= lay2 && leafLayer > 0)
-				{
 					width = 2;
-				}
 				else if (leafLayer <= lay2 +  lay3 && leafLayer > lay2)
-				{
 					width = 3;
-				}
 				else if (leafLayer <= lay2 +  lay4 + lay3 && leafLayer > lay3 +  lay2)
-				{
 					width = 2;
-				}
 				else if (leafLayer <= lay3 +  lay4 + lay5 + lay2 && leafLayer > lay3 +  lay4 + lay2)
-				{
 					width = 1;
-				}
 				else if (leafLayer > lay3 +  lay4 + lay5 + lay2)
-				{
 					width = 0;
-				}
+
 				for (int xPos = xCoord - width ; xPos <= xCoord + width + w ; xPos++)
 				{
 					int l3 = xPos - xCoord;
@@ -163,27 +134,25 @@ public class WorldGenCustomRedwoodTrees extends WorldGenerator
 						int j4 = zPos - zCoord;
 						if ((Math.abs(l3) != width || Math.abs(j4) != width ||random.nextInt (2) != 0) && 
 								!world.getBlock(xPos, yPos, zPos).isOpaqueCube() &&
-								world.getBlock(xPos, yPos, zPos) != TFCBlocks.Wood)
+								world.getBlock(xPos, yPos, zPos) != TFCBlocks.LogNatural)
 						{
-							setBlockAndNotifyAdequately(world, xPos, yPos, zPos, Blocks.leaves, treeId);
+							setBlockAndNotifyAdequately(world, xPos, yPos, zPos, TFCBlocks.Leaves, treeId);
 						}
 					}
-
 				}
-
 			}
 		}
 		//Create the tree Trunk
 		for (int j2 = 0 ; j2 < treeHeight ; j2++)
 		{
 			Block i3 = world.getBlock(xCoord, yCoord + j2, zCoord);
-			if (i3 == Blocks.air || i3 == Blocks.leaves || i3 == Blocks.leaves2)
+			if (i3 == Blocks.air || i3 == TFCBlocks.Leaves || i3 == TFCBlocks.Leaves2)
 			{
 				for (int x = xCoord ; x <= xCoord + w ; x++)
 				{
 					for (int z = zCoord ; z <= zCoord + w ; z++)
 					{
-						setBlockAndNotifyAdequately(world, x, yCoord + j2, z, Blocks.log, treeId);
+						setBlockAndNotifyAdequately(world, x, yCoord + j2, z, TFCBlocks.LogNatural, treeId);
 					}
 				}
 			}
@@ -214,7 +183,6 @@ public class WorldGenCustomRedwoodTrees extends WorldGenerator
 //				}
 //			}
 //		}
-
 		return true;
 	}
 }

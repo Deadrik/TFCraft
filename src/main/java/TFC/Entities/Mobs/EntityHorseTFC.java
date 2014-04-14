@@ -131,7 +131,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.BarleyGrain, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.OatGrain, false));
 		this.tasks.addTask(6, this.aiEatGrass);
-		for(Object aiTask : this.tasks.taskEntries){
+		for(Object aiTask : this.tasks.taskEntries)
+		{
 			if(aiTask instanceof EntityAIPanic)
 				this.tasks.removeTask((EntityAIBase)aiTask);
 		}
@@ -222,7 +223,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	{
 		if(dataWatcher!= null)
 		{
-			if(!this.worldObj.isRemote){
+			if(!this.worldObj.isRemote)
+			{
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
 
@@ -233,7 +235,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				this.dataWatcher.updateObject(28, Float.valueOf(climate_mod));
 				this.dataWatcher.updateObject(29, Float.valueOf(hard_mod));
 			}
-			else{
+			else
+			{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
 
@@ -990,7 +993,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				{
 
 					if(this.getLeashedToEntity() != null && this.getLeashedToEntity() instanceof EntityPlayer &&
-							this.getLeashedToEntity() == par1EntityPlayer){
+							this.getLeashedToEntity() == par1EntityPlayer)
+					{
 						this.func_110237_h(par1EntityPlayer);
 					}
 					return true;
@@ -1007,7 +1011,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public boolean getLeashed(){
 		if(super.getLeashed() && getLeashedToEntity() instanceof EntityPlayer && 
-				((EntityPlayer)getLeashedToEntity()).inventory.getCurrentItem() == null && func_110174_bM() != -1){
+				((EntityPlayer)getLeashedToEntity()).inventory.getCurrentItem() == null && func_110174_bM() != -1)
+		{
 			return false;
 		}
 		return super.getLeashed();
@@ -1017,13 +1022,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public void clearLeashed(boolean par1, boolean par2)
 	{
 		Entity entity = getLeashedToEntity();
-		if(entity!= null && entity instanceof EntityPlayer){
+		if(entity!= null && entity instanceof EntityPlayer)
+		{
 			ItemStack item = ((EntityPlayer)entity).inventory.getCurrentItem();
-			if(entity.isSneaking()){
+			if(entity.isSneaking())
 				super.clearLeashed(par1, par2);
-			}
 		}
-		else{
+		else
+		{
 			super.clearLeashed(par1, par2);
 		}
 	}
@@ -1036,9 +1042,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.setRearing(false);
 
 		if (!this.worldObj.isRemote)
-		{
 			par1EntityPlayer.mountEntity(this);
-		}
 	}
 
 	public boolean func_110259_cr()
@@ -1082,11 +1086,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public void onDeath(DamageSource par1DamageSource)
 	{
 		super.onDeath(par1DamageSource);
-
 		if (!this.worldObj.isRemote)
-		{
 			this.dropChestItems();
-		}
 	}
 
 	@Override
@@ -1646,7 +1647,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 
 		this.setHealth(this.getMaxHealth());
-		return (IEntityLivingData)par1EntityLivingData1; //TODO TFC.Entities.Mobs.EntityHorseGroupData cannot be cast to net.minecraft.entity.IEntityLivingData
+		return (IEntityLivingData)par1EntityLivingData1;
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -74,13 +74,11 @@ public class Alloy
 			matches = searchForAlloyMetal(am);
 			amount += am.metal;
 		}
+
 		if(!matches)
-		{
 			return null;
-		} else
-		{
+		else
 			return new Alloy(this.outputType, amount);
-		}
 	}
 
 	public boolean searchForAlloyMetal(AlloyMetal am)
@@ -90,9 +88,7 @@ public class Alloy
 		{
 			AlloyMetalCompare amc = (AlloyMetalCompare) iter.next();
 			if(amc.compare(am))
-			{
 				return true;
-			}
 		}
 		return false;
 	}
@@ -105,11 +101,8 @@ public class Alloy
 		{
 			AlloyMetal amc = iter.next();
 			if(amc.metalType == m)
-			{
 				return amc.metal;
-			}
 		}
-
 		return 0;
 	}
 
@@ -132,15 +125,13 @@ public class Alloy
 
 	public void toPacket(DataOutputStream dos)
 	{
-		try 
+		try
 		{
 			if(outputType != null)
-			{
 				dos.writeUTF(outputType.Name);
-			} else
-			{
+			else
 				dos.writeUTF("Unknown");
-			}
+
 			dos.writeFloat(outputAmount);
 			dos.writeInt(AlloyIngred.size());
 			for(int i = 0; i < AlloyIngred.size(); i++)
@@ -149,7 +140,8 @@ public class Alloy
 				dos.writeUTF(am.metalType.Name);
 				dos.writeFloat(am.metal);
 			}
-		} catch (IOException e) 
+		}
+		catch (IOException e) 
 		{
 			e.printStackTrace();
 		}
@@ -157,7 +149,7 @@ public class Alloy
 
 	public Alloy fromPacket(DataInputStream dis)
 	{
-		try 
+		try
 		{
 			outputType = MetalRegistry.instance.getMetalFromString(dis.readUTF());
 			outputAmount = dis.readFloat();
@@ -167,8 +159,8 @@ public class Alloy
 				AlloyMetal am = new AlloyMetal(MetalRegistry.instance.getMetalFromString(dis.readUTF()), dis.readFloat());
 				this.AlloyIngred.add(am);
 			}
-		} 
-		catch (IOException e) 
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}

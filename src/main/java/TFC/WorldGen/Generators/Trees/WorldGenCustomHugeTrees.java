@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -47,7 +48,7 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 							(par6Random.nextInt(4) != 0 || var12 * var12 + var14 * var14 <= (var10 - 1) * (var10 - 1)) && 
 							!par1World.getBlock(var11, var8, var13).isOpaqueCube())
 					{
-						this.setBlockAndNotifyAdequately(par1World, var11, var8, var13, Blocks.leaves, this.leavesMetadata);
+						this.setBlockAndNotifyAdequately(par1World, var11, var8, var13, TFCBlocks.Leaves, this.leavesMetadata);
 					}
 				}
 			}
@@ -80,8 +81,12 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 						if (blockUnder >= 0 && blockUnder < 256)
 						{
 							Block block = world.getBlock(tempX, blockUnder, tempZ);
-							if (block != Blocks.air && (block != Blocks.leaves || block != Blocks.leaves2) && block != Blocks.grass &&
-									block != Blocks.dirt && (block != Blocks.log || block != Blocks.log2) && block != Blocks.sapling &&
+							if (block != Blocks.air &&
+									(block != TFCBlocks.Leaves || block != TFCBlocks.Leaves2) &&
+									(block != TFCBlocks.Grass || block != TFCBlocks.Grass2) &&
+									(block != TFCBlocks.Dirt || block != TFCBlocks.Dirt2) &&
+									(block != TFCBlocks.LogNatural || block != TFCBlocks.LogNatural2) &&
+									(block != TFCBlocks.Sapling || block != TFCBlocks.Sapling2) &&
 									!(TFC_Core.isSoil(block)))
 							{
 								canGenHere = false;
@@ -121,16 +126,16 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 						{
 							tempZ = xCoord + (int)(1.5F + MathHelper.cos(var15) * (float)var13);
 							var12 = zCoord + (int)(1.5F + MathHelper.sin(var15) * (float)var13);
-							this.setBlockAndNotifyAdequately(world, tempZ, var14 - 3 + var13 / 2, var12, Blocks.log, this.woodMetadata);
+							this.setBlockAndNotifyAdequately(world, tempZ, var14 - 3 + var13 / 2, var12, TFCBlocks.LogNatural, this.woodMetadata);
 						}
 					}
 
 					for (tempX = 0; tempX < var6; ++tempX)
 					{
 						Block id = world.getBlock(xCoord, yCoord + tempX, zCoord);
-						if (id == Blocks.air || id == Blocks.leaves)
+						if (id == Blocks.air || id == TFCBlocks.Leaves || id == TFCBlocks.Leaves2)
 						{
-							this.setBlockAndNotifyAdequately(world, xCoord, yCoord + tempX, zCoord, Blocks.log, this.woodMetadata);
+							this.setBlockAndNotifyAdequately(world, xCoord, yCoord + tempX, zCoord, TFCBlocks.LogNatural, this.woodMetadata);
 							if (tempX > 0)
 							{
 								if (rand.nextInt(3) > 0 && world.isAirBlock(xCoord - 1, yCoord + tempX, zCoord))
@@ -143,9 +148,9 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 						if (tempX < var6 - 1)
 						{
 							id = world.getBlock(xCoord + 1, yCoord + tempX, zCoord);
-							if (id == Blocks.air || id == Blocks.leaves || id == Blocks.leaves2)
+							if (id == Blocks.air || id == TFCBlocks.Leaves || id == TFCBlocks.Leaves2)
 							{
-								this.setBlockAndNotifyAdequately(world, xCoord + 1, yCoord + tempX, zCoord, Blocks.log, this.woodMetadata);
+								this.setBlockAndNotifyAdequately(world, xCoord + 1, yCoord + tempX, zCoord, TFCBlocks.LogNatural, this.woodMetadata);
 								if (tempX > 0)
 								{
 									if (rand.nextInt(3) > 0 && world.isAirBlock(xCoord + 2, yCoord + tempX, zCoord))
@@ -156,9 +161,9 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 							}
 
 							id = world.getBlock(xCoord + 1, yCoord + tempX, zCoord + 1);
-							if (id == Blocks.air || id == Blocks.leaves || id == Blocks.leaves2)
+							if (id == Blocks.air || id == TFCBlocks.Leaves || id == TFCBlocks.Leaves2)
 							{
-								this.setBlockAndNotifyAdequately(world, xCoord + 1, yCoord + tempX, zCoord + 1, Blocks.log, this.woodMetadata);
+								this.setBlockAndNotifyAdequately(world, xCoord + 1, yCoord + tempX, zCoord + 1, TFCBlocks.LogNatural, this.woodMetadata);
 								if (tempX > 0)
 								{
 									if (rand.nextInt(3) > 0 && world.isAirBlock(xCoord + 2, yCoord + tempX, zCoord + 1))
@@ -169,9 +174,9 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 							}
 
 							id = world.getBlock(xCoord, yCoord + tempX, zCoord + 1);
-							if (id == Blocks.air || id == Blocks.leaves || id == Blocks.leaves2)
+							if (id == Blocks.air || id == TFCBlocks.Leaves || id == TFCBlocks.Leaves2)
 							{
-								this.setBlockAndNotifyAdequately(world, xCoord, yCoord + tempX, zCoord + 1, Blocks.log, this.woodMetadata);
+								this.setBlockAndNotifyAdequately(world, xCoord, yCoord + tempX, zCoord + 1, TFCBlocks.LogNatural, this.woodMetadata);
 								if (tempX > 0)
 								{
 									if (rand.nextInt(3) > 0 && world.isAirBlock(xCoord - 1, yCoord + tempX, zCoord + 1))

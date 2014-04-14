@@ -31,26 +31,22 @@ public class GenLayerHillsTFC extends GenLayerTFC
 				{
 					int var10 = var9;
 
-                    if (var10 != var9)
-                    {
-                    	int var11 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
-                    	int var12 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
-                    	int var13 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
-                    	int var14 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
+					if (var10 != var9)
+					{
+						int var11 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
+						int var12 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
+						int var13 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
+						int var14 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
 
-                    	if (var11 == var9 && var12 == var9 && var13 == var9 && var14 == var9)
-                    	{
-                    		var6[var8 + var7 * par3] = var10;
-                    	}
-                    	else
-                    	{
-                    		var6[var8 + var7 * par3] = var9;
-                    	}
-                    }
-                    else
-                    {
-                    	var6[var8 + var7 * par3] = var9;
-                    }
+						if (var11 == var9 && var12 == var9 && var13 == var9 && var14 == var9)
+							var6[var8 + var7 * par3] = var10;
+						else
+							var6[var8 + var7 * par3] = var9;
+					}
+					else
+					{
+						var6[var8 + var7 * par3] = var9;
+					}
 				}
 				else
 				{
@@ -58,7 +54,6 @@ public class GenLayerHillsTFC extends GenLayerTFC
 				}
 			}
 		}
-
 		return var6;
 	}
 }

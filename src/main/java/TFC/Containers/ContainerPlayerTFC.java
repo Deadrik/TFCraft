@@ -30,8 +30,10 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		int y;
 
 		for (x = 0; x < 2; ++x)
+		{
 			for (y = 0; y < 2; ++y)
 				this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
+		}
 
 		int indexForBack = -1;
 		for (x = 0; x < playerInv.armorInventory.length; ++x)

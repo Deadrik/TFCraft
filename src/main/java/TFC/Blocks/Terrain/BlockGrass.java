@@ -171,9 +171,13 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 		if (!world.isRemote)
 		{
 			if(world.getBlock(i, j+1, k) == Blocks.snow)
+			{
 				world.setBlock(i, j, k, TFC_Core.getTypeForDryGrass(world.getBlockMetadata(i, j, k)), world.getBlockMetadata(i, j, k), 0x2);
+			}
 			else if (world.getBlockLightValue(i, j + 1, k) < 4 && world.getBlock(i, j + 1, k).getLightOpacity() > 2)
+			{
 				world.setBlock(i, j, k, TFC_Core.getTypeForDirt(world.getBlockMetadata(i, j, k) + textureOffset), world.getBlockMetadata(i, j, k), 0x2);
+			}
 			else if (world.getBlockLightValue(i, j + 1, k) >= 9)
 			{
 				for (int var6 = 0; var6 < 4; ++var6)
@@ -188,7 +192,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 					int meta = world.getBlockMetadata(x, y, z);
 
 					if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 && world.getBlockLightValue(x, y + 1, z) >= 4 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
-							world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
+						world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
 					else if (TFC_Core.isClay(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
 						world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
 					else if (TFC_Core.isPeat(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
@@ -201,18 +205,26 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 
 				if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlockLightValue(i, j + 1, k) >= 4 && 
 						world.getBlock(i, j + 1, k).getMaterial() != Material.water && world.isAirBlock(i, j + 1, k))
+				{
 					if(rand.nextInt((int) ((16800-rain)/4)) == 0 && temp > 20)
 						world.setBlock(i, j + 1, k, Blocks.tallgrass, 1, 0x2);
 					else if(rand.nextInt(15000) == 0 && temp > 20 && world.canBlockSeeTheSky(i, j, k))
 						new WorldGenGrowTrees().generate(world, rand, i, j, k);
+				}
 
 				boolean nearWater = false;
 
 				for(int y = 0; y < 2 && !nearWater; y++)
+				{
 					for(int x = -4; x < 5 && !nearWater; x++)
+					{
 						for(int z = -4; z < 5 && !nearWater; z++)
+						{
 							if(world.getBlock(i+x, j-y, k+z).getMaterial() == Material.water)
 								nearWater = true;
+						}
+					}
+				}
 
 				BlockMeta rock1 = TFC_Climate.getRockLayer(i, j, k, 0);
 				if(TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && !nearWater && rain < 500)
@@ -227,22 +239,22 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 				}
 			}
 
-			//            if(!(this.blockID >= 2080 && this.blockID < 2088))
-			//            {
-			//            	boolean hasBeenSet = false;
-			//            	int meta = world.getBlockMetadata(i, j, k);
-			//            	for(int x = i-1; x <= i+1 && !hasBeenSet; x++)
-			//            	{
-			//            		for(int z = k-1; z <= k+1 && !hasBeenSet; z++)
-			//                	{
-			//            			if(!world.isBlockNormalCube(x, j, z))
-			//            			{
-			//            				hasBeenSet = true;
-			//            				world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForRaisedGrass(meta), meta);
-			//            			}
-			//                	}
-			//            	}
-			//            }
+//            if(!(this.blockID >= 2080 && this.blockID < 2088))
+//            {
+//            	boolean hasBeenSet = false;
+//            	int meta = world.getBlockMetadata(i, j, k);
+//            	for(int x = i-1; x <= i+1 && !hasBeenSet; x++)
+//            	{
+//            		for(int z = k-1; z <= k+1 && !hasBeenSet; z++)
+//                	{
+//            			if(!world.isBlockNormalCube(x, j, z))
+//            			{
+//            				hasBeenSet = true;
+//            				world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForRaisedGrass(meta), meta);
+//            			}
+//                	}
+//            	}
+//            }
 
 			world.markBlockForUpdate(i, j, k);
 		}

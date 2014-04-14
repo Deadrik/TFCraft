@@ -47,7 +47,8 @@ public class EntityAIFindNest extends EntityAIBase
 	 */
 	public boolean shouldExecute()
 	{
-		if(theCreature instanceof EntityChickenTFC){
+		if(theCreature instanceof EntityChickenTFC)
+		{
 			if(((EntityChickenTFC)theCreature).isAdult() &&
 					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY,(int)theCreature.posZ) != TFCBlocks.NestBox &&
 					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY-1,(int)theCreature.posZ) != TFCBlocks.NestBox &&
@@ -84,7 +85,9 @@ public class EntityAIFindNest extends EntityAIBase
 		double d0 = 2.147483647E9D;
 
 		for (int j = (int)this.theCreature.posX - 16; (double)j < this.theCreature.posX + 16.0D; ++j)
+		{
 			for (int k = (int)this.theCreature.posZ - 16; (double)k < this.theCreature.posZ + 16.0D; ++k)
+			{
 				if (this.isSittableBlock(this.theCreature.worldObj, j, i, k) && this.theCreature.worldObj.isAirBlock(j, i + 1, k))
 				{
 					double d1 = this.theCreature.getDistanceSq((double)j, (double)i, (double)k);
@@ -96,7 +99,8 @@ public class EntityAIFindNest extends EntityAIBase
 						d0 = d1;
 					}
 				}
-
+			}
+		}
 		return d0 < 2.147483647E9D;
 	}
 

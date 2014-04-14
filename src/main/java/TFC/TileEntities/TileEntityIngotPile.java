@@ -74,8 +74,10 @@ public class TileEntityIngotPile extends TileEntity implements IInventory
 	public boolean contentsMatch(int index, ItemStack is)
 	{
 		if(storage[index] != null)
+		{
 			if(storage[index].stackSize == 0)
 				return true;
+		}
 
 		if(storage[index].getItem() == is.getItem() && storage[index].getItem() == is.getItem() &&
 				/*storage[index].stackSize < storage[index].getMaxStackSize() &&*/ storage[index].stackSize+1 <= this.getInventoryStackLimit())
@@ -163,11 +165,15 @@ public class TileEntityIngotPile extends TileEntity implements IInventory
 	public void injectContents(int index, int count)
 	{
 		if(storage[index] != null)
+		{
 			if(storage[index].stackSize > 0)
+			{
 				storage[index] =
 				new ItemStack(storage[index].getItem(),
 						storage[index].stackSize+count,
 						storage[index].getItemDamage());
+			}
+		}
 		updateNeighbours();
 	}
 

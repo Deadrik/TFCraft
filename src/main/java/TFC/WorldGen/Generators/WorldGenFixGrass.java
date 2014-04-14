@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
@@ -53,8 +52,11 @@ public class WorldGenFixGrass implements IWorldGenerator
 					}
 
 					for (int x1 = -4; x1 < 5 && !converted; ++x1)
+					{
 						for (int z1 = -4; z1 < 5 && !converted; ++z1)
+						{
 							for (int y1 = -2; y1 < 1 && !converted; ++y1)
+							{
 								if(TFC_Core.isWater(world.getBlock(xCoord+x1, yCoord+y1, zCoord+z1)))
 								{
 									world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForGrass(world.getBlockMetadata(xCoord, yCoord, zCoord)), 0, 0x2);
@@ -68,6 +70,9 @@ public class WorldGenFixGrass implements IWorldGenerator
 									if(random.nextInt(1+((numX+numZ)/2)) == 0)
 										world.setBlock(xCoord, yCoord+1, zCoord,Blocks.tallgrass, 0, 0x2);
 								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -75,14 +80,16 @@ public class WorldGenFixGrass implements IWorldGenerator
 
 	public boolean getNearWater(World world, int x, int y, int z)
 	{
-		BiomeGenBase biome;
+		TFCBiome biome;
 		for(int i = -2; i <= 2; i++)
+		{
 			for(int k = -2; k <= 2; k++)
 			{
-				biome = world.getBiomeGenForCoords(x+(i * 8), z+(k * 8));
-				if(biome.biomeID == TFCBiome.ocean.biomeID || biome.biomeID == TFCBiome.river.biomeID || biome.biomeID == TFCBiome.swampland.biomeID)
+				biome = (TFCBiome) world.getBiomeGenForCoords(x+(i * 8), z+(k * 8));
+				if(biome == TFCBiome.ocean || biome == TFCBiome.river || biome == TFCBiome.swampland)
 					return true;
 			}
+		}
 		return false;
 	}
 

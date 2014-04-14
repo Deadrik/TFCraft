@@ -1,7 +1,6 @@
 package TFC.Containers.Slots;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
@@ -19,11 +18,8 @@ public class SlotFirepitFuel extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.getItem() == TFCItems.Logs || itemstack.getItem() == Item.getItemFromBlock(Blocks.log) ||
-				itemstack.getItem() == Item.getItemFromBlock(Blocks.log2) || itemstack.getItem() == Item.getItemFromBlock(TFCBlocks.Peat))
-		{
+		if(itemstack.getItem() == TFCItems.Logs || itemstack.getItem() == Item.getItemFromBlock(TFCBlocks.Peat))
 			return true;
-		}
 		return false;
 	}
 

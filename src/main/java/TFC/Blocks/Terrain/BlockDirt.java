@@ -169,6 +169,7 @@ public class BlockDirt extends BlockTerra
 			}
 
 			if(!isBelowAir && (count > 2) && sides.size() >= 1)
+			{
 				switch((Integer)sides.get(random.nextInt(sides.size())))
 				{
 				case 0:
@@ -200,8 +201,11 @@ public class BlockDirt extends BlockTerra
 					break;
 				}
 				}
+			}
 			else if(isBelowAir)
+			{
 				tryToFall(world, i, j, k);
+			}
 		}
 	}
 

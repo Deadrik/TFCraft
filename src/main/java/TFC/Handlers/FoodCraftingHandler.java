@@ -12,13 +12,19 @@ import TFC.Core.Recipes;
 import TFC.Food.ItemFoodTFC;
 import TFC.Items.Tools.ItemCustomKnife;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
 public class FoodCraftingHandler
 {
-
 	@SubscribeEvent
-	public void onCrafting(EntityPlayer player, ItemStack craftResult, IInventory iinventory) 
+	public void onFoodCrafting(ItemCraftedEvent e)//(EntityPlayer player, ItemStack itemstack, IInventory iinventory)
 	{
+		EntityPlayer player = e.player;
+		Item item = e.crafting.getItem();
+		ItemStack craftResult = e.crafting;
+		int isDmg = e.crafting.getItemDamage();
+		IInventory iinventory = e.craftMatrix;
+		
 		if(iinventory != null)
 		{
 			if((craftResult.getItem() == TFCItems.WheatGrain && gridHasItem(iinventory, TFCItems.WheatWhole)) ||

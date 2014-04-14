@@ -19,7 +19,7 @@ public class WorldGenPineTall extends WorldGenerator
 		metaLeaf = id;
 		blockLeaf = TFCBlocks.Leaves;
 		metaWood = id;
-		blockWood = TFCBlocks.Wood;
+		blockWood = TFCBlocks.LogNatural;
 	}
 
 	public boolean generate(World world, Random par2Random, int i, int j, int k)
@@ -44,13 +44,9 @@ public class WorldGenPineTall extends WorldGenerator
 				boolean var12 = true;
 
 				if (var11 - j < var7)
-				{
 					var18 = 0;
-				}
 				else
-				{
 					var18 = var9;
-				}
 
 				for (var13 = i - var18; var13 <= i + var18 && var10; ++var13)
 				{
@@ -60,9 +56,7 @@ public class WorldGenPineTall extends WorldGenerator
 						{
 							block = world.getBlock(var13, var11, var14);
 							if (block != Blocks.air && (block == null || !block.isLeaves(world, var13, var11, var14)))
-							{
 								var10 = false;
-							}
 						}
 						else
 						{
@@ -97,7 +91,6 @@ public class WorldGenPineTall extends WorldGenerator
 							for (int var16 = k - var18; var16 <= k + var18; ++var16)
 							{
 								int var17 = var16 - k;
-
 								block = world.getBlock(var14, var13, var16);
 								if ((Math.abs(var15) != var18 || Math.abs(var17) != var18 || var18 <= 0) && 
 										(block == null || block.canBeReplacedByLeaves(world, var14, var13, var16)))
@@ -108,13 +101,9 @@ public class WorldGenPineTall extends WorldGenerator
 						}
 
 						if (var18 >= 1 && var13 == j + var7 + 1)
-						{
 							--var18;
-						}
 						else if (var18 < var9)
-						{
 							++var18;
-						}
 					}
 
 					for (var13 = 0; var13 < var6 - 1; ++var13)
@@ -126,7 +115,6 @@ public class WorldGenPineTall extends WorldGenerator
 							this.setBlockAndNotifyAdequately(world, i, j + var13, k, blockWood, metaWood);
 						}
 					}
-
 					return true;
 				}
 				else

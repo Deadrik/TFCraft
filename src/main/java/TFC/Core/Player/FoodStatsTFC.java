@@ -60,7 +60,7 @@ public class FoodStatsTFC
 	 * Handles the food game logic.
 	 */
 	public void onUpdate(EntityPlayer player)
-	{	
+	{
 		if(!player.worldObj.isRemote)
 		{
 			BodyTempStats bodyTemp = TFC_Core.getBodyTempStats(player);
@@ -75,11 +75,13 @@ public class FoodStatsTFC
 			/*
 			 * Standard filling reduction based upon time.
 			 */
-			if(this.foodTimer < TFC_Time.startTime){
+			if(this.foodTimer < TFC_Time.startTime)
+			{
 				this.foodTimer = TFC_Time.startTime;
 				this.foodHealTimer = TFC_Time.startTime;
 				this.waterTimer = TFC_Time.startTime;
 			}
+
 			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength && !player.capabilities.isCreativeMode)
 			{
 				this.foodTimer += TFC_Time.hourLength;
@@ -116,17 +118,20 @@ public class FoodStatsTFC
 				this.foodHealTimer += TFC_Time.hourLength/2;
 
 				if (this.stomachLevel >= this.getMaxStomach(player)/4 && player.shouldHeal())
+				{
 					//Player heals 1% per 30 in game minutes
-					player.heal((int) (player.getMaxHealth()*0.01f));
+					player.heal((int) (player.getMaxHealth() * 0.01f));
+				}
 				else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.5f && !TFC_Core.isPlayerInDebugMode(player))
+				{
 					//Players loses health at a rate of 5% per 30 minutes if they are starving
-					player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth()*0.05f), 10));
+					player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth() * 0.05f), 10));
+				}
 			}
 
 			/****************************************
 			 * Handle Alcohol
 			 ****************************************/
-
 			soberTime = player.getEntityData().hasKey("soberTime") ? player.getEntityData().getLong("soberTime") : 0;
 			if(soberTime > 0)
 				soberTime--;
@@ -138,7 +143,7 @@ public class FoodStatsTFC
 			{
 				long oldWaterTimer = waterTimer;
 				waterTimer = time;
-				if(player.isInWater() && (TFC_Core.isFreshWater(block)||TFC_Core.isFreshWater(block2)))
+				if(player.isInWater() && (TFC_Core.isFreshWater(block) || TFC_Core.isFreshWater(block2)))
 					this.restoreWater(player, 20*(int)(time - oldWaterTimer));
 			}
 			else
@@ -147,7 +152,7 @@ public class FoodStatsTFC
 				{
 					/**Reduce the player's water for normal living*/
 					waterLevel -= 1+(tempWaterMod/2);
-					if(player.isInWater() && (TFC_Core.isFreshWater(block)||TFC_Core.isFreshWater(block2)))
+					if(player.isInWater() && (TFC_Core.isFreshWater(block) || TFC_Core.isFreshWater(block2)))
 						this.restoreWater(player, 20);
 					if(waterLevel < 0)
 						waterLevel = 0;
@@ -290,18 +295,24 @@ public class FoodStatsTFC
 			float stomachDiff = this.stomachLevel+eatAmount-getMaxStomach(this.player);
 			if(stomachDiff > 0)
 				eatAmount-=stomachDiff;
+
 			//add the nutrition contents
 			int[] fg = new int[]{getfg(is, 0), getfg(is, 1), getfg(is, 2), getfg(is, 3)};
 			float[] weights = new float[]{0.5f,0.2f,0.2f,0.1f};
 			for(int i = 0; i < 4; i++)
+			{
 				if(fg[i] != -1)
 					addNutrition(EnumFoodGroup.values()[fg[i]], eatAmount*weights[i]);
+			}
+
 			//fill the stomach
 			this.stomachLevel += eatAmount;
 			item.getSatisfaction(is);
-			if(!item.isWarm(is)) {
+			if(!item.isWarm(is))
+			{
 			}
 			this.satisfaction += eatAmount * item.getSatisfaction(is);
+
 			//Now remove the eaten amount from the itemstack.
 			if(reduceFood(is, eatAmount))
 			{
@@ -321,7 +332,9 @@ public class FoodStatsTFC
 				this.stomachLevel += eatAmount;
 			}
 			else
+			{
 				addNutrition(((IFood)(is.getItem())).getFoodGroup(), 10f);
+			}
 		}
 	}
 

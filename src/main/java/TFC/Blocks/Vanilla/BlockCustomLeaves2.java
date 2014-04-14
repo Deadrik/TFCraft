@@ -116,7 +116,7 @@ public class BlockCustomLeaves2 extends BlockLeaves
 						for (int zd = -searchZ; zd <= searchZ; ++zd)
 						{
 							Block block = par1World.getBlock(xOrig + xd, yOrig + yd, zOrig + zd);
-							if (block == TFCBlocks.Wood || block == TFCBlocks.LogNatural2)
+							if (block == TFCBlocks.LogNatural || block == TFCBlocks.LogNatural2)
 								this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = 0;
 							else if ((block == this) && var6 == par1World.getBlockMetadata(xOrig + xd, yOrig + yd, zOrig + zd))
 								this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = -2;
@@ -268,7 +268,7 @@ public class BlockCustomLeaves2 extends BlockLeaves
 	@Override
 	public IIcon getIcon(int i, int j)
 	{
-		if(j>woodNames.length-1)
+		if(j > woodNames.length - 1)
 			j=0;
 		if (TerraFirmaCraft.proxy.getGraphicsLevel())
 			return icons[j];
@@ -293,7 +293,8 @@ public class BlockCustomLeaves2 extends BlockLeaves
 	}
 
 	@Override
-	public String[] func_150125_e() {
+	public String[] func_150125_e()
+	{
 		return woodNames;
 	}
 }

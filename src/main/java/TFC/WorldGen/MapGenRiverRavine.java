@@ -37,7 +37,6 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 		}
 
 		boolean var54 = false;
-
 		if (par15 == -1)
 		{
 			par15 = par16 / 2;
@@ -45,7 +44,6 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 		}
 
 		float var27 = 1.0F;
-
 		for (int var28 = 0; var28 < 256; ++var28)
 		{
 			if (var28 == 0 || rand.nextInt(3) == 0)
@@ -114,14 +112,20 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 					int z;
 
 					for (x = var56; !var58 && x < var35; ++x)
+					{
 						for (int var42 = var57; !var58 && var42 < var39; ++var42)
+						{
 							for (int var43 = var37 + 1; !var58 && var43 >= var55 - 1; --var43)
 							{
 								z = (x * 16 + var42) * 256 + var43;
 								if (var43 >= 0 && var43 < 256)
+								{
 									if (var43 != var55 - 1 && x != var56 && x != var35 - 1 && var42 != var57 && var42 != var39 - 1)
 										var43 = var55;
+								}
 							}
+						}
+					}
 
 					if (!var58)
 					{
@@ -134,6 +138,7 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 								int var47 = (x * 16 + z) * 256 + var37;
 								boolean var48 = false;
 								if (var59 * var59 + var45 * var45 < 1.0D)
+								{
 									for (int var49 = var37 - 1; var49 >= var55; --var49)
 									{
 										double var50 = (var49 + 0.5D - startY) / var30;
@@ -143,8 +148,11 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 											if (TFC_Core.isGrass(block))
 												var48 = true;
 											if (TFC_Core.isRawStone(block) || TFC_Core.isSoil(block))
+											{
 												if (var49 < 10)
+												{
 													blockArray[var47] = Blocks.flowing_lava;
+												}
 												else
 												{
 													if(var49 < waterHeight)
@@ -162,9 +170,11 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 													if (var48 && TFC_Core.isDirt(block))
 														blockArray[var47 - 1] = TFC_Core.getTypeForGrass(rockLayer1.data2);
 												}
+											}
 										}
 										--var47;
 									}
+								}
 							}
 						}
 						if (var54)

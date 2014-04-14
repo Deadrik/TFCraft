@@ -57,7 +57,8 @@ public class TFCTabs extends CreativeTabs
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public String getTranslatedTabLabel() {
+	public String getTranslatedTabLabel()
+	{
 		return StatCollector.translateToLocal("itemGroup." + this.getTabLabel());
 	}
 }

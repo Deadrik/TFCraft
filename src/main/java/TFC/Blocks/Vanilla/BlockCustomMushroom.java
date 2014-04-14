@@ -104,14 +104,20 @@ public class BlockCustomMushroom extends BlockMushroom
 			int var10;
 
 			for (var8 = par2 - var6; var8 <= par2 + var6; ++var8)
+			{
 				for (var9 = par4 - var6; var9 <= par4 + var6; ++var9)
+				{
 					for (var10 = par3 - 1; var10 <= par3 + 1; ++var10)
+					{
 						if (par1World.getBlock(var8, var10, var9) == this)
 						{
 							--var7;
 							if (var7 <= 0)
 								return;
 						}
+					}
+				}
+			}
 
 			var8 = par2 + par5Random.nextInt(3) - 1;
 			var9 = par3 + par5Random.nextInt(2) - par5Random.nextInt(2);

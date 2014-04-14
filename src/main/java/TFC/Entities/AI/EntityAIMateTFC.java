@@ -40,7 +40,8 @@ public class EntityAIMateTFC extends EntityAIBase
 		else
 		{
 			targetMate = getLocalMate();
-			if (targetMate != null){
+			if (targetMate != null)
+			{
 				if (targetMate.getGender() == theAnimal.getGender() || 
 						theAnimal.isPregnant() || targetMate.isPregnant())
 				{
@@ -86,9 +87,7 @@ public class EntityAIMateTFC extends EntityAIBase
 		matingCounter++;
 
 		if (matingCounter >= 60 && theAnimal.getEntity().getDistanceSqToEntity(this.targetMate.getEntity()) < 9.0D)
-		{
 			theAnimal.mate(targetMate);
-		}
 	}
 
 
@@ -104,9 +103,7 @@ public class EntityAIMateTFC extends EntityAIBase
 			{
 				IAnimal entityanimal = (IAnimal) entity;
 				if (theAnimal.canMateWith(entityanimal))
-				{
 					return entityanimal;
-				}
 			}
 		}
 

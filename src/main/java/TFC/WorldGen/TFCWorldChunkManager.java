@@ -398,7 +398,9 @@ public class TFCWorldChunkManager extends WorldChunkManager
 			IntCache.resetIntCache();
 			int[] var7 = indexLayers[layer].getInts(x, y, width, height);
 			for (int var8 = 0; var8 < width * height; ++var8)
+			{
 				layers[var8] = DataLayer.layers[var7[var8]];
+			}
 			return layers;
 		}
 	}
@@ -419,7 +421,9 @@ public class TFCWorldChunkManager extends WorldChunkManager
 			IntCache.resetIntCache();
 			int[] var7 = indexLayers.getInts(x, y, width, height);
 			for (int var8 = 0; var8 < width * height; ++var8)
+			{
 				layers[var8] = DataLayer.layers[var7[var8]];
+			}
 			return layers;
 		}
 	}

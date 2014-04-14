@@ -1,7 +1,6 @@
 package TFC.WorldGen.Biomes;
 
-import net.minecraft.init.Blocks;
-import TFC.WorldGen.BiomeDecoratorTFC;
+import TFC.TFCBlocks;
 import TFC.WorldGen.TFCBiome;
 
 public class BiomeGenBeachTFC extends TFCBiome
@@ -10,11 +9,11 @@ public class BiomeGenBeachTFC extends TFCBiome
 	{
 		super(i);
 		spawnableCreatureList.clear();
-		topBlock = Blocks.sand;
-		fillerBlock = Blocks.sand;
-		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = -999;
-		((BiomeDecoratorTFC)this.theBiomeDecorator).deadBushPerChunk = 0;
-		((BiomeDecoratorTFC)this.theBiomeDecorator).reedsPerChunk = 0;
-		((BiomeDecoratorTFC)this.theBiomeDecorator).cactiPerChunk = 0;
+		topBlock = TFCBlocks.Sand;
+		fillerBlock = TFCBlocks.Sand;
+		this.theBiomeDecorator.treesPerChunk = -999;
+		this.theBiomeDecorator.deadBushPerChunk = 0;
+		this.theBiomeDecorator.reedsPerChunk = 0;
+		this.theBiomeDecorator.cactiPerChunk = 0;
 	}
 }

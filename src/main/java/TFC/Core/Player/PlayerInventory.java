@@ -25,11 +25,14 @@ public class PlayerInventory
 			addToolbarSlots(container, inventory, x, y, freezeSlot);
 
 		for(int i = 0; i < 3; ++i)
+		{
 			for(int k = 0; k < 9; ++k)
 			{
 				int index =  k + (i+1) * 9;
 				addSlotToContainer(container, new Slot(inventory, index, x + k * 18, y + i * 18));
 			}
+		}
+
 		if(toolBarAfterMainInv)
 			addToolbarSlots(container, inventory, x, y, freezeSlot);
 	}
@@ -37,10 +40,12 @@ public class PlayerInventory
 	private static void addToolbarSlots(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot) 
 	{
 		for(int j = 0; j < 9; ++j)
+		{
 			if(freezeSlot && j == inventory.currentItem)
 				addSlotToContainer(container, new SlotForShowOnly(inventory, j, x + j * 18, y+58));
 			else
 				addSlotToContainer(container, new Slot(inventory, j, x + j * 18, y+58));
+		}
 	}
 
 	public static void buildInventoryLayout(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot)
@@ -74,11 +79,11 @@ public class PlayerInventory
 	{
 		if(player.getEntityData().hasKey("craftingTable"))
 		{
-			player.inventoryContainer.getSlot(45).xDisplayPosition+=50000;
-			player.inventoryContainer.getSlot(46).xDisplayPosition+=50000;
-			player.inventoryContainer.getSlot(47).xDisplayPosition+=50000;
-			player.inventoryContainer.getSlot(48).xDisplayPosition+=50000;
-			player.inventoryContainer.getSlot(49).xDisplayPosition+=50000;
+			player.inventoryContainer.getSlot(45).xDisplayPosition += 50000;
+			player.inventoryContainer.getSlot(46).xDisplayPosition += 50000;
+			player.inventoryContainer.getSlot(47).xDisplayPosition += 50000;
+			player.inventoryContainer.getSlot(48).xDisplayPosition += 50000;
+			player.inventoryContainer.getSlot(49).xDisplayPosition += 50000;
 		}
 	}
 }

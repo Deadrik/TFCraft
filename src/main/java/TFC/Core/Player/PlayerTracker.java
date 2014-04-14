@@ -65,8 +65,9 @@ public class PlayerTracker
 			foodstats.setFoodLevel(foodLevel);
 			TFC_Core.setPlayerFoodStats(event.player, foodstats);
 			event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000);
-			event.player.setHealth(1000f * (0.25f + (event.player.worldObj.rand.nextFloat()*0.25f)));
+			event.player.setHealth(1000f * (0.25f + (event.player.worldObj.rand.nextFloat() * 0.25f)));
 		}
+
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(event.player);
 		if( pi.tempSkills != null)
 			TFC_Core.setSkillStats(event.player, pi.tempSkills);

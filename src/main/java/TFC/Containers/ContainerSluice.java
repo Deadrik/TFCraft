@@ -48,8 +48,10 @@ public class ContainerSluice extends ContainerTFC
 		{
 			ItemStack itemstack1 = slot.getStack();
 			if(i <= 8)
+			{
 				if(!this.mergeItemStack(itemstack1, 9, this.inventorySlots.size(), true))
 					return null;
+			}
 
 			if(itemstack1.stackSize == 0)
 				slot.putStack(null);

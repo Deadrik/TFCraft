@@ -20,25 +20,25 @@ public class WeatherManager
 	public float getDailyTemp()
 	{
 		rand.setSeed(seed+TFC_Time.getTotalDays());
-		return (rand.nextInt(200)-100)/10;
+		return (rand.nextInt(200) - 100) / 10;
 	}
 
 	public float getDailyTemp(int day)
 	{
 		rand.setSeed(seed + day);
-		return (rand.nextInt(200)-100)/20;
+		return (rand.nextInt(200) - 100) / 20;
 	}
 
 	public float getWeeklyTemp(int week)
 	{
 		rand.setSeed(seed + week);
-		return (rand.nextInt(200)-100)/10;
+		return (rand.nextInt(200) - 100) / 10;
 	}
 
 	public static int getDayOfWeek(long day)
 	{
 		long days = day / 6;
-		long days2 = day - (days*6);
+		long days2 = day - (days * 6);
 		return (int)days2;
 	}
 }

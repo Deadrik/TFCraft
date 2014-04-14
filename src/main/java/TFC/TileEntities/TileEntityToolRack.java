@@ -67,7 +67,9 @@ public class TileEntityToolRack extends TileEntity implements IInventory
 			return itemstack1;
 		}
 		else
+		{
 			return null;
+		}
 	}
 
 	public void ejectContents()

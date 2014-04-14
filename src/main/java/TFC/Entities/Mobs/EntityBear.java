@@ -307,10 +307,13 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			field_25052_g = true;
 			worldObj.setEntityState (this, (byte) 8);
 		}
-		if(this.isPregnant()){
-			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Time.dayLength){
+		if(this.isPregnant())
+		{
+			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Time.dayLength)
+			{
 				int i = rand.nextInt(3) + 1;
-				for (int x = 0; x<i;x++){
+				for (int x = 0; x<i;x++)
+				{
 					ArrayList<Float> data = new ArrayList<Float>();
 					data.add(mateSizeMod);
 					EntityBear baby = new EntityBear(worldObj, this,data);
@@ -386,7 +389,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 				this.dataWatcher.updateObject(28, Float.valueOf(climate_mod));
 				this.dataWatcher.updateObject(29, Float.valueOf(hard_mod));
 			}
-			else{
+			else
+			{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
 
@@ -414,13 +418,9 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	public boolean canMateWith (EntityAnimal par1EntityAnimal)
 	{
 		if (par1EntityAnimal == this)
-		{
 			return false;
-		}
 		if (!(par1EntityAnimal instanceof EntityBear))
-		{
 			return false;
-		}
 		EntityBear entitybear = (EntityBear) par1EntityAnimal;
 		return getInLove () && entitybear.getInLove ();
 	}
@@ -428,9 +428,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public void setGrowingAge(int par1)
 	{
-		if(!TFC_Core.PreventEntityDataUpdate) {
+		if(!TFC_Core.PreventEntityDataUpdate)
 			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
-		}
 	}
 
 	@Override
@@ -440,11 +439,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	}
 
 	@Override
-	public EnumDamageType GetDamageType() {
+	public EnumDamageType GetDamageType()
+	{
 		return EnumDamageType.SLASHING;
 	}
-
-
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
@@ -493,11 +491,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityBear) {
+		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityBear)
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 
 	@Override
@@ -541,7 +538,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	}
 
 	@Override
-	public int getHunger() {
+	public int getHunger()
+	{
 		return hunger;
 	}
 
@@ -550,32 +548,40 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		hunger = h;
 	}
+
 	@Override
 	public GenderEnum getGender() 
 	{
 		return GenderEnum.genders[getSex()];
 	}
+
 	@Override
 	public int getSex() {
 		return dataWatcher.getWatchableObjectInt(13);
 	}
+
 	@Override
-	public EntityAgeable createChildTFC(EntityAgeable entityageable) {
+	public EntityAgeable createChildTFC(EntityAgeable entityageable)
+	{
 		ArrayList<Float> data = new ArrayList<Float>();
 		data.add(entityageable.getEntityData().getFloat("MateSize"));
 		return new EntityBear(worldObj, this, data);
 	}
+
 	@Override
-	public void setAge(int par1) {
+	public void setAge(int par1)
+	{
 		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
 	}
 
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		if(!worldObj.isRemote){
+		if(!worldObj.isRemote)
+		{
 			par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
-			if(getGender()==GenderEnum.FEMALE && pregnant){
+			if(getGender()==GenderEnum.FEMALE && pregnant)
+			{
 				par1EntityPlayer.addChatMessage(new ChatComponentText("Pregnant"));
 			}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
@@ -583,86 +589,80 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		return true;
 	}
 
-
 	@Override
-	public float getStrength() {
-		// TODO Auto-generated method stub
+	public float getStrength()
+	{
 		return this.getDataWatcher().getWatchableObjectFloat(24);
 	}
 
-
 	@Override
-	public float getAggression() {
-		// TODO Auto-generated method stub
+	public float getAggression()
+	{
 		return this.getDataWatcher().getWatchableObjectFloat(25);
 	}
 
-
 	@Override
-	public float getObedience() {
-		// TODO Auto-generated method stub
+	public float getObedience()
+	{
 		return this.getDataWatcher().getWatchableObjectFloat(26);
 	}
 
 
 	@Override
-	public float getColour() {
-		// TODO Auto-generated method stub
+	public float getColour()
+	{
 		return this.getDataWatcher().getWatchableObjectFloat(27);
 	}
 
-
 	@Override
-	public float getClimateAdaptation() {
-		// TODO Auto-generated method stub
+	public float getClimateAdaptation()
+	{
 		return this.getDataWatcher().getWatchableObjectFloat(28);
 	}
 
-
 	@Override
-	public float getHardiness() {
-		// TODO Auto-generated method stub
+	public float getHardiness()
+	{
 		return this.getDataWatcher().getWatchableObjectFloat(29);
 	}
 
-
 	@Override
-	public Vec3 getAttackedVec() {
-		// TODO Auto-generated method stub
+	public Vec3 getAttackedVec()
+	{
 		return null;
 	}
 
-
 	@Override
-	public void setAttackedVec(Vec3 attackedVec) {
-		// TODO Auto-generated method stub
-
+	public void setAttackedVec(Vec3 attackedVec)
+	{
 	}
 
-
 	@Override
-	public Entity getFearSource() {
-		// TODO Auto-generated method stub
+	public Entity getFearSource()
+	{
 		return null;
 	}
 
-
 	@Override
-	public void setFearSource(Entity fearSource) {
-		// TODO Auto-generated method stub
-
+	public void setFearSource(Entity fearSource)
+	{
 	}
 
 	@Override
-	public int GetCrushArmor() {
+	public int GetCrushArmor()
+	{
 		return 0;
 	}
+
 	@Override
-	public int GetSlashArmor() {
+	public int GetSlashArmor()
+	{
 		return 0;
 	}
+
 	@Override
-	public int GetPierceArmor() {
+	public int GetPierceArmor()
+	{
 		return -335;
 	}
 }

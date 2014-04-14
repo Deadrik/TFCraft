@@ -115,8 +115,10 @@ public class BlockCobble extends BlockTerra
 	{
 		boolean hasHammer = false;
 		for(int i = 0; i < 9;i++)
+		{
 			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
 				hasHammer = true;
+		}
 		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof IToolChisel && 
 				hasHammer && !world.isRemote && ((IToolChisel)entityplayer.getCurrentEquippedItem().getItem()).canChisel(entityplayer, x, y, z))
 		{
@@ -194,6 +196,7 @@ public class BlockCobble extends BlockTerra
 			}
 
 			if(!isBelowAir && (count > 2) && sides.size() >= 1)
+			{
 				switch((Integer)sides.get(random.nextInt(sides.size())))
 				{
 				case 0:
@@ -225,8 +228,11 @@ public class BlockCobble extends BlockTerra
 					break;
 				}
 				}
+			}
 			else if(isBelowAir)
+			{
 				tryToFall(world, i, j, k);
+			}
 		}
 	}
 }

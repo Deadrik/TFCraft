@@ -76,13 +76,14 @@ public class TFCProvider extends WorldProvider
 		try
 		{
 			biome = (TFCBiome) worldObj.getBiomeGenForCoordsBody(x, z);
-			if(canSnowAtTemp(x,145,z))
+			if(canSnowAtTemp(x, 145, z))
 				biome.temperature = 0;
 			else
 				biome.temperature = 0.21f;
 		}
 		catch(Exception Ex)
 		{
+			Ex.printStackTrace();
 		}
 		return biome;
 	}
@@ -111,8 +112,10 @@ public class TFCProvider extends WorldProvider
 				var8 = chunkcoordinates.chunkPosZ;
 			}
 			else
+			{
 				xOffset += 512;
-			//System.out.println("Unable to find spawn biome");
+				//System.out.println("Unable to find spawn biome");
+			}
 		}
 
 		int var9 = 0;
@@ -121,7 +124,6 @@ public class TFCProvider extends WorldProvider
 			var6 += var4.nextInt(64) - var4.nextInt(64);
 			var8 += var4.nextInt(64) - var4.nextInt(64);
 			++var9;
-
 			if (var9 == 1000)
 				break;
 		}
@@ -150,7 +152,8 @@ public class TFCProvider extends WorldProvider
 			int meta = worldObj.getBlockMetadata(x, y, z);
 			boolean salty = TFC_Core.isSaltWaterIncludeIce(id,meta,mat);
 			TileEntity te = (worldObj.getTileEntity(x, y, z));
-			if(te!=null && te instanceof TESeaWeed){
+			if(te!=null && te instanceof TESeaWeed)
+			{
 				//in case the block is salty sea grass, we don't want that to freeze when it's too warm
 				salty = salty || (((TESeaWeed)te).getType()!=1 && ((TESeaWeed)te).getType()!=2);
 			}
@@ -159,9 +162,13 @@ public class TFCProvider extends WorldProvider
 			if((mat == Material.water || mat == Material.ice) && !salty)
 			{
 				if(id == TFCBlocks.FreshWaterStill || id == TFCBlocks.FreshWaterFlowing)
+				{
 					worldObj.setBlock(x, y, z, Blocks.ice, 1, 2);
+				}
 				else if(id == Blocks.water || id == Blocks.flowing_water)
+				{
 					worldObj.setBlock(x, y, z, Blocks.ice, 0, 2);
+				}
 				else if(id == Blocks.ice || id == TFCBlocks.SeaGrassFrozen)
 				{
 					worldObj.setBlock(x, y, z, id, meta, 1);
@@ -180,7 +187,9 @@ public class TFCProvider extends WorldProvider
 						((TESeaWeed)te).setType(type);
 				}
 				else
+				{
 					worldObj.setBlock(x, y, z, Blocks.ice,0,2);
+				}
 			}
 			return false;//(mat == Material.water) && !salty;
 		}
@@ -218,10 +227,12 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public boolean canSnowAt(int x, int y, int z, boolean checkLight)
 	{
-		Block id = worldObj.getBlock(x, y, z);
-		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0
-				&& Blocks.snow.canPlaceBlockAt(worldObj, x, y, z) && worldObj.getBlock(x, y, z).getMaterial().isReplaceable())
+		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0 &&
+				Blocks.snow.canPlaceBlockAt(worldObj, x, y, z) &&
+				worldObj.getBlock(x, y, z).getMaterial().isReplaceable())
+		{
 			return true;
+		}
 		return false;
 	}
 

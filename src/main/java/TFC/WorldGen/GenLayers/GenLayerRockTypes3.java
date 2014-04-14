@@ -7,9 +7,9 @@ import TFC.WorldGen.DataLayer;
 
 public class GenLayerRockTypes3 extends GenLayerTFC
 {
-	public static DataLayer[] biomeArray1 = new DataLayer[] {DataLayer.Rhyolite,DataLayer.Basalt,DataLayer.Andesite,DataLayer.Dacite,
-		DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro};
-
+	public static DataLayer[] biomeArray = new DataLayer[]{
+		DataLayer.Rhyolite, DataLayer.Basalt, DataLayer.Andesite,
+		DataLayer.Dacite, DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro};
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private DataLayer[] allowedBiomes;
@@ -17,9 +17,7 @@ public class GenLayerRockTypes3 extends GenLayerTFC
 	public GenLayerRockTypes3(long par1, GenLayer par3GenLayer, WorldType par4WorldType, int layer)
 	{
 		super(par1);
-
-		this.allowedBiomes = biomeArray1;
-
+		this.allowedBiomes = biomeArray;
 		this.parent = (GenLayerTFC) par3GenLayer;
 	}
 
@@ -41,18 +39,13 @@ public class GenLayerRockTypes3 extends GenLayerTFC
 				int var9 = var5[var8 + var7 * par3];
 
 				if (var9 == 0)
-				{
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
-				}
 				else if (var9 == 1)
-				{
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
-				} else {
+				else
 					var6[var8 + var7 * par3] = 0;
-				}
 			}
 		}
-
 		return var6;
 	}
 }

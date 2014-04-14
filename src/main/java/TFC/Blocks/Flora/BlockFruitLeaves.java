@@ -240,7 +240,9 @@ public class BlockFruitLeaves extends BlockTerraContainer
 					Block block;
 
 					for (var12 = -var7; var12 <= var7; ++var12)
+					{
 						for (var13 = -var7; var13 <= var7; ++var13)
+						{
 							for (var14 = -var7; var14 <= var7; ++var14)
 							{
 								block = par1World.getBlock(par2 + var12, par3 + var13, par4 + var14);
@@ -251,11 +253,17 @@ public class BlockFruitLeaves extends BlockTerraContainer
 								else
 									this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = -1;
 							}
+						}
+					}
 
 					for (var12 = 1; var12 <= 4; ++var12)
+					{
 						for (var13 = -var7; var13 <= var7; ++var13)
+						{
 							for (var14 = -var7; var14 <= var7; ++var14)
+							{
 								for (var15 = -var7; var15 <= var7; ++var15)
+								{
 									if (this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11] == var12 - 1)
 									{
 										if (this.adjacentTreeBlocks[(var13 + var11 - 1) * var10 + (var14 + var11) * var9 + var15 + var11] == -2)
@@ -276,6 +284,10 @@ public class BlockFruitLeaves extends BlockTerraContainer
 										if (this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11 + 1] == -2)
 											this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11 + 1] = var12;
 									}
+								}
+							}
+						}
+					}
 				}
 
 				var12 = this.adjacentTreeBlocks[var11 * var10 + var11 * var9 + var11];

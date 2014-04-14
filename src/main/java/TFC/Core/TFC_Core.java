@@ -294,10 +294,16 @@ public class TFC_Core
 	public static void SurroundWithLeaves(World world, int i, int j, int k, int meta, Random R)
 	{
 		for (int y = 2; y >= -2; y--)
+		{
 			for (int x = 2; x >= -2; x--)
+			{
 				for (int z = 2; z >= -2; z--)
+				{
 					if(world.isAirBlock(i + x, j + y, k + z))
 						world.setBlock(i + x, j + y, k + z, Blocks.leaves, meta, 2);
+				}
+			}
+		}
 	}
 
 	public static void SetupWorld(World world)
@@ -318,7 +324,8 @@ public class TFC_Core
 			// w.getWorldInfo(), "randomSeed", seed);
 			ReflectionHelper.setPrivateValue(WorldInfo.class, w.getWorldInfo(), seed, 0);
 			SetupWorld(w);
-		} catch (Exception ex)
+		}
+		catch (Exception ex)
 		{
 		}
 	}
@@ -663,6 +670,7 @@ public class TFC_Core
 		Block block = world.getBlock(i, j, k);
 		int meta = world.getBlockMetadata(i, j, k);
 		if(TFC_Core.isGrass(block))
+		{
 			if(TFC_Core.isGrassType1(block))
 			{
 				world.setBlock(i, j, k, TFCBlocks.Dirt, meta, 2);
@@ -673,6 +681,7 @@ public class TFC_Core
 				world.setBlock(i, j, k, TFCBlocks.Dirt2, meta, 2);
 				return true;
 			}
+		}
 		return false;
 	}
 
@@ -681,8 +690,10 @@ public class TFC_Core
 		if(is.getItem() == Item.getItemFromBlock(TFCBlocks.Peat))
 			return EnumWoodMaterial.PEAT;
 		if(is.getItem() == Item.getItemFromBlock(TFCBlocks.LogNatural2))
+		{
 			if(is.getItemDamage() == 0)
 				return EnumWoodMaterial.ACACIA;
+		}
 		else if(is.getItemDamage() == 0)
 			return EnumWoodMaterial.ASH;
 		else if (is.getItemDamage() == 1)
@@ -1081,11 +1092,13 @@ public class TFC_Core
 					decay += d;
 				else
 					decay = 0;
-			} else if (decay == 0)
+			}
+			else if (decay == 0)
 			{
 				decay = nbt.getFloat("foodWeight") * (world.rand.nextFloat() * 0.005f);
 				nbt.setFloat("foodDecay", decay);
-			} else
+			}
+			else
 			{
 				float d = ((decay * Global.FOOD_DECAY_RATE) / 24) * (thisDecayRate * environmentalDecay) * protMult;
 				decay += d;
@@ -1097,9 +1110,7 @@ public class TFC_Core
 		if (nbt.getFloat("foodDecay") / nbt.getFloat("foodWeight") > 0.9f)
 		{
 			if(is.getItem() instanceof IFood)
-			{
 				is = ((IFood)is.getItem()).onDecayed(is, world, x, y, z);
-			}
 			else
 				is.stackSize = 0;
 		}
@@ -1117,7 +1128,6 @@ public class TFC_Core
 			if (fw < Global.FOOD_MAX_WEIGHT)
 				foodWeight = 0;
 			foodWeight -= fw;
-
 			e.entityDropItem(ItemFoodTFC.createTag(new ItemStack(i, 1), fw), 0);
 		}
 	}

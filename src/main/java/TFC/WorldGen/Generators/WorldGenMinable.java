@@ -131,6 +131,7 @@ public class WorldGenMinable extends WorldGenerator
 		MPBlock = minableBlock;// set output block
 
 		if(MPChunk_X != MPPrevX || MPChunk_Z != MPPrevZ || MPPrevBlock != MPBlock || minableBlockMeta != MPPrevMeta)
+		{
 			if (generateBeforeCheck() == false)
 			{
 				MPPrevX = MPChunk_X;
@@ -143,6 +144,7 @@ public class WorldGenMinable extends WorldGenerator
 				if (rarity == 1 || (rarity > 0 && rand.nextInt(rarity) == 0))
 					createMine(worldObj, rand, x_Chunk, z_Chunk);
 			}
+		}
 		return true;
 	}
 
@@ -190,6 +192,7 @@ public class WorldGenMinable extends WorldGenerator
 		int directionChange2 =0;
 		int blocksToUse = xyz;//input number of blocks per vein
 		int blocksToUse2 =0;
+
 		for(int blocksMade=0; blocksMade <= blocksToUse;) // make veins
 		{
 			blocksToUse2 = 1 + (blocksToUse/30);
@@ -272,7 +275,7 @@ public class WorldGenMinable extends WorldGenerator
 						isCorrectRockType = b == this.genInBlock;
 						isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-						if(isCorrectRockType && isCorrectMeta)
+						if(isCorrectRockType && isCorrectMeta && MPBlock != null)
 						{
 							world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
 							TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
@@ -300,7 +303,7 @@ public class WorldGenMinable extends WorldGenerator
 				boolean	isCorrectRockType = b == this.genInBlock;
 				boolean	isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-				if(isCorrectRockType && isCorrectMeta)
+				if(isCorrectRockType && isCorrectMeta && MPBlock != null)
 				{
 					world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
 					TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
@@ -358,10 +361,12 @@ public class WorldGenMinable extends WorldGenerator
 			{
 				double var39 = (posX + 0.5D - var20) / (var28 / 2.0D);
 				if (var39 * var39 < 1.0D)
+				{
 					for (int posY = var33; posY <= var36; ++posY)
 					{
 						double var42 = (posY + 0.5D - var22) / (var30 / 2.0D);
 						if (var39 * var39 + var42 * var42 < 1.0D)
+						{
 							for (int posZ = var34; posZ <= var37; ++posZ)
 							{
 								double var45 = (posZ + 0.5D - var24) / (var28 / 2.0D);
@@ -376,7 +381,8 @@ public class WorldGenMinable extends WorldGenerator
 								boolean isCorrectRockType = b == this.genInBlock;
 								boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-								if(isCorrectRockType && isCorrectMeta)
+								if(isCorrectRockType && isCorrectMeta && MPBlock != null)
+								{
 									if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D)
 									{
 										world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
@@ -388,8 +394,11 @@ public class WorldGenMinable extends WorldGenerator
 											te.grade = (byte)grade;
 										}
 									}
+								}
 							}
+						}
 					}
+				}
 			}
 		}
 		//System.out.println("a vein was placed " + minableBlockId + "." + minableBlockMeta+ " at " + par3 +" "+par4+" "+par5); /// for debugging

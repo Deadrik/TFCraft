@@ -178,15 +178,15 @@ public class BlockWoodConstruct extends BlockTerraContainer
 	public static int index = -10, side = -1;
 
 	@Override
-	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 player, Vec3 view) {
+	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 player, Vec3 view)
+	{
 
 		TileEntityWoodConstruct te = (TileEntityWoodConstruct) world.getTileEntity(x, y, z);
 
 		player = player.addVector(-x, -y, -z);
 		view = view.addVector(-x, -y, -z);
-		if (te == null) {
+		if (te == null)
 			return null;
-		}
 
 		List<Object[]> returns = new ArrayList<Object[]>();
 
@@ -213,7 +213,8 @@ public class BlockWoodConstruct extends BlockTerraContainer
 		//				z,
 		//				returns);
 
-		if (!returns.isEmpty()) {
+		if (!returns.isEmpty())
+		{
 			Object[] min = null;
 			double distMin = 0;
 			for (Object[] ret : returns) 
@@ -225,7 +226,8 @@ public class BlockWoodConstruct extends BlockTerraContainer
 					min = ret;
 				}
 			}
-			if (min != null) {
+			if (min != null)
+			{
 				side = (Byte) min[1];
 				index = (Integer) min[3];
 				if (te.data.get(index)) 
@@ -403,21 +405,24 @@ public class BlockWoodConstruct extends BlockTerraContainer
 		return new Object[] { tracedBound, side, player.distanceTo(tracedBound) };
 	}
 
-	private boolean isVecInsideYZBounds(AxisAlignedBB bound, Vec3 Vec3) {
+	private boolean isVecInsideYZBounds(AxisAlignedBB bound, Vec3 Vec3)
+	{
 		if (Vec3 == null)
 			return false;
 		else
 			return Vec3.yCoord >= bound.minY && Vec3.yCoord <= bound.maxY && Vec3.zCoord >= bound.minZ && Vec3.zCoord <= bound.maxZ;
 	}
 
-	private boolean isVecInsideXZBounds(AxisAlignedBB bound, Vec3 Vec3) {
+	private boolean isVecInsideXZBounds(AxisAlignedBB bound, Vec3 Vec3)
+	{
 		if (Vec3 == null)
 			return false;
 		else
 			return Vec3.xCoord >= bound.minX && Vec3.xCoord <= bound.maxX && Vec3.zCoord >= bound.minZ && Vec3.zCoord <= bound.maxZ;
 	}
 
-	private boolean isVecInsideXYBounds(AxisAlignedBB bound, Vec3 Vec3) {
+	private boolean isVecInsideXYBounds(AxisAlignedBB bound, Vec3 Vec3)
+	{
 		if (Vec3 == null)
 			return false;
 		else

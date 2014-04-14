@@ -29,10 +29,10 @@ public class WorldGenCustomShrub extends WorldGenerator
 
 		Block var7 = par1World.getBlock(par3, par4, par5);
 		if (var7 == TFCBlocks.Dirt || var7 == TFCBlocks.Dirt2 || var7 == TFCBlocks.Grass || var7 == TFCBlocks.Grass2 ||
-				var7 == TFCBlocks.ClayGrass ||var7 == TFCBlocks.ClayGrass2)
+				var7 == TFCBlocks.ClayGrass || var7 == TFCBlocks.ClayGrass2)
 		{
 			++par4;
-			par1World.setBlock(par3, par4, par5, Blocks.log, this.field_48196_b, 0x2);
+			par1World.setBlock(par3, par4, par5, TFCBlocks.LogNatural, this.field_48196_b, 0x2);
 			for (int var8 = par4; var8 <= par4 + 2; ++var8)
 			{
 				int var9 = var8 - par4;

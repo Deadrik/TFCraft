@@ -16,8 +16,8 @@ public class WorldGenGrowTrees
 		boolean hasSpaceToGrow = true;
 		
 		int TreeType0 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 0);
-		int	TreeType1 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
-		int	TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
+		int TreeType1 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
+		int TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
 		
 		for(int y = -3; y < 6 && hasSpaceToGrow; y++)
 		{
@@ -25,7 +25,7 @@ public class WorldGenGrowTrees
 			{
 				for(int z = -7; z < 8 && hasSpaceToGrow; z++)
 				{
-					if(world.getBlock(xCoord + x, yCoord + y, zCoord + z) == TFCBlocks.Wood || 
+					if(world.getBlock(xCoord + x, yCoord + y, zCoord + z) == TFCBlocks.LogNatural || 
 							world.getBlock(xCoord + x, yCoord + y, zCoord + z) == TFCBlocks.Sapling)
 					{
 						hasSpaceToGrow = false;
@@ -39,7 +39,6 @@ public class WorldGenGrowTrees
 			float rainfall = TFC_Climate.getRainfall(xCoord, yCoord, zCoord);
 			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
 			float evt = TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1;
-			
 
 			if(TreeType0 < 0 || TreeType0 > 15)
 				TreeType0 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
@@ -62,9 +61,7 @@ public class WorldGenGrowTrees
 			 * If the location is near the arctic circle then we want pine trees to definitely show up.
 			 * */
 			if(zCoord > 14500 || zCoord < -14500)
-			{
 				TreeType2 = 8;
-			}
 			
 			float tree0EVTMin = EnumTree.values()[TreeType0].minEVT;
 			float tree0EVTMax = EnumTree.values()[TreeType0].maxEVT;
@@ -107,12 +104,12 @@ public class WorldGenGrowTrees
 			if(!canSpawnTemp2 || canSpawnEVTRain2 == 0)
 				randomNumber -= 20;
 			else if(canSpawnTemp2 && canSpawnEVTRain2 == 1)
-			{randomNumber -= 10;}
+				randomNumber -= 10;
 
 			if(!canSpawnTemp1 || canSpawnEVTRain1 == 0)
 				randomNumber -= 30;
 			else if(canSpawnTemp1 && canSpawnEVTRain1 == 1)
-			{randomNumber -= 15;}
+				randomNumber -= 15;
 
 			//if at least one of the trees is within the temperature zone otherewise no trees
 			if(canSpawnTemp0 || canSpawnTemp1 || canSpawnTemp2)
@@ -121,36 +118,46 @@ public class WorldGenGrowTrees
 				if(canSpawnEVTRain0 <= 1 && canSpawnEVTRain1 <= 1 && canSpawnEVTRain2 <= 1)
 				{
 					//there is a 1 in 10 chance for a tree otherwise no trees
-					if(random.nextInt(10) == 0)
-					{
-					}
-					else
+					if(random.nextInt(10) > 0)
 						return;
 				}
 			}
 			else
+			{
 				return;
+			}
 
 			if(randomNumber < 40)
+			{
 				if(canSpawnTemp0 && canSpawnEVTRain0 > 0)
 					world.setBlock(xCoord, yCoord+1, zCoord, Blocks.sapling, TreeType0, 0x2);
+			}
 			else if(randomNumber < 70)
+			{
 				if(canSpawnTemp1)
 					world.setBlock(xCoord, yCoord+1, zCoord, Blocks.sapling, TreeType1, 0x2);
+			}
 			else if(randomNumber < 100)
+			{
 				if(canSpawnTemp2)
 					world.setBlock(xCoord, yCoord+1, zCoord, Blocks.sapling, TreeType2, 0x2);
+			}
 		}
 	}
 	
 	public boolean getNearWater(World world, int x, int y, int z)
 	{
 		for (int x1 = -4; x1 < 5; ++x1)
+		{
 			for (int z1 = -4; z1 < 5; ++z1)
+			{
 				for (int y1 = -2; y1 < 1; ++y1)
-					if(world.blockExists(x+x1, y+y1, z+z1) == true && TFC_Core.isWater(world.getBlock(x+x1, y+y1, z+z1)))
+				{
+					if(world.blockExists(x + x1, y + y1, z + z1) == true && TFC_Core.isWater(world.getBlock(x + x1, y + y1, z + z1)))
 						return true;
+				}
+			}
+		}
 		return false;
 	}
-
 }

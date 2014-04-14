@@ -41,8 +41,8 @@ public class WorldGenGrowCrops implements IWorldGenerator
 				int month = TFC_Time.getSeasonAdjustedMonth(k);
 				if(temp > crop.minAliveTemp && month > 0 && month <= 6)
 				{
-					Block bid = world.getBlock(i, j, k);
-					if (Blocks.wheat.canBlockStay(world, i, j, k) && (bid == Blocks.air || bid == Blocks.tallgrass))
+					Block b = world.getBlock(i, j, k);
+					if (Blocks.wheat.canBlockStay(world, i, j, k) && (b == Blocks.air || b == Blocks.tallgrass))
 					{
 						if(world.setBlock(i, j, k, Blocks.wheat, 0, 0x2))
 						{

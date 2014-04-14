@@ -328,7 +328,9 @@ public class BlockCustomBed extends BlockDirectional
 			int k2 = i2 + 2;
 
 			for (int l2 = l1; l2 <= j2; ++l2)
+			{
 				for (int i3 = i2; i3 <= k2; ++i3)
+				{
 					if (par0World.doesBlockHaveSolidTopSurface(par0World, l2, par2 - 1, i3) && !par0World.getBlock(l2, par2, i3).getMaterial().isOpaque() && !par0World.getBlock(l2, par2 + 1, i3).getMaterial().isOpaque())
 					{
 						if (par4 <= 0)
@@ -336,6 +338,8 @@ public class BlockCustomBed extends BlockDirectional
 
 						--par4;
 					}
+				}
+			}
 		}
 
 		return null;

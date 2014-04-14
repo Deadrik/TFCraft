@@ -151,10 +151,16 @@ public class BlockForge extends BlockTerraContainer
 			{
 				int numAirBlocks = 0;
 				for (int i = -1; i < 2; i++)
+				{
 					for (int j = 0; j < 2; j++)
+					{
 						for (int k = -1; k < 2; k++)
+						{
 							if(world.isAirBlock(x+i, y+j, z+k))
 								numAirBlocks++;
+						}
+					}
+				}
 
 				if(world.getTileEntity(x, y, z) != null)
 				{
@@ -192,6 +198,7 @@ public class BlockForge extends BlockTerraContainer
 			world.spawnParticle("flame", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("smoke", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
+
 			if (((TileEntityForge)world.getTileEntity(i, j, k)).fireTemperature > 550)
 			{
 				world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f6 + 0.2F, 0.0D, 0.0D, 0.0D);

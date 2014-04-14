@@ -7,8 +7,11 @@ import TFC.WorldGen.DataLayer;
 
 public class GenLayerTreeTypes extends GenLayerTFC
 {
-	public static DataLayer[] biomeArray = new DataLayer[] {DataLayer.Ash, DataLayer.Aspen, DataLayer.Birch, DataLayer.Chestnut, DataLayer.DouglasFir, DataLayer.Hickory,DataLayer.Koa, DataLayer.Maple, DataLayer.Oak, DataLayer.Pine, DataLayer.Redwood, 
-		DataLayer.Pine, DataLayer.Spruce, DataLayer.Sycamore, DataLayer.UTAcacia, DataLayer.WhiteCedar, DataLayer.WhiteElm, DataLayer.Willow};
+	public static DataLayer[] biomeArray = new DataLayer[] {
+		DataLayer.Ash, DataLayer.Aspen, DataLayer.Birch, DataLayer.Chestnut,
+		DataLayer.DouglasFir, DataLayer.Hickory,DataLayer.Koa, DataLayer.Maple,
+		DataLayer.Oak, DataLayer.Pine, DataLayer.Redwood, DataLayer.Pine, DataLayer.Spruce,
+		DataLayer.Sycamore, DataLayer.UTAcacia, DataLayer.WhiteCedar, DataLayer.WhiteElm, DataLayer.Willow};
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private DataLayer[] allowedBiomes;
@@ -28,25 +31,18 @@ public class GenLayerTreeTypes extends GenLayerTFC
 	{
 		int[] var5 = this.parent.getInts(par1, par2, par3, par4);
 		int[] var6 = IntCache.getIntCache(par3 * par4);
-
 		for (int var7 = 0; var7 < par4; ++var7)
 		{
 			for (int var8 = 0; var8 < par3; ++var8)
 			{
 				this.initChunkSeed((long)(var8 + par1), (long)(var7 + par2));
 				int var9 = var5[var8 + var7 * par3];
-
 				if (var9 == 0)
-				{
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
-				}
 				else
-				{
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
-				}
 			}
 		}
-
 		return var6;
 	}
 }

@@ -114,7 +114,9 @@ public class TileEntitySluice extends TileEntity implements IInventory
 			return itemstack1;
 		}
 		else
+		{
 			return null;
+		}
 	}
 
 	private void ejectItem(ItemStack is)
@@ -135,8 +137,10 @@ public class TileEntitySluice extends TileEntity implements IInventory
 	public int getFirstFreeSlot()
 	{
 		for(int i = 0; i < this.getSizeInventory(); i++)
+		{
 			if(this.getStackInSlot(i) == null)
 				return i;
+		}
 		return -1;
 	}
 

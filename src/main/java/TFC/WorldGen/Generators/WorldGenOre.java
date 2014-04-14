@@ -126,8 +126,9 @@ public class WorldGenOre implements IWorldGenerator
 						grade = 2;
 					else
 						grade = 0;
-					new WorldGenMinable(block, j, B, Layers.get(B), rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, false, grade).generate(
-							world, rand, chunkX, chunkZ, min, max, name);
+
+					new WorldGenMinable(block, j, B, Layers.get(B), rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, false, grade)
+							.generate(world, rand, chunkX, chunkZ, min, max, name);
 				}
 			}
 		}
@@ -155,8 +156,9 @@ public class WorldGenOre implements IWorldGenerator
 						grade = 2;
 					else
 						grade = 0;
-					new WorldGenMinable(block, j, B, Layers.get(B), rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, true, grade).generate(
-							world, rand, chunkX, chunkZ, min, max, name);
+
+					new WorldGenMinable(block, j, B, Layers.get(B), rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, true, grade)
+							.generate(world, rand, chunkX, chunkZ, min, max, name);
 				}
 			}
 		}

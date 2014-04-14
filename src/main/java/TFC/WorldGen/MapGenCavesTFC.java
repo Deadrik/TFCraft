@@ -125,7 +125,9 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 					int zCoord;
 
 					for (xCoord = var55; !var58 && xCoord < var36; ++xCoord)
+					{
 						for (zCoord = var56; !var58 && zCoord < var40; ++zCoord)
+						{
 							for (int y = yCoord + 1; !var58 && y >= var57 - 1; --y)
 							{
 								int index = (xCoord * 16 + zCoord) * 256 + y;
@@ -138,6 +140,8 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 										y = var57;
 								}
 							}
+						}
+					}
 
 					if (!var58)
 					{
@@ -151,6 +155,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 								boolean isGrass = false;
 								Block grassBlock = Blocks.air;
 								if (var59 * var59 + var46 * var46 < 1.0D)
+								{
 									for (int var50 = yCoord - 1; var50 >= var57; --var50)
 									{
 										double var51 = (var50 + 0.5D - j) / var31;
@@ -163,6 +168,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 												isGrass = true;
 											}
 											if (TFC_Core.isSoil(block) || TFC_Core.isRawStone(block))
+											{
 												if (var50 < 10 && TFC_Climate.getStability((int)worldX, (int)worldZ) == 1)
 												{
 													idArray[index] = Blocks.flowing_lava;
@@ -178,9 +184,11 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 														idArray[index - 1] = grassBlock;
 													}
 												}
+											}
 										}
 										--index;
 									}
+								}
 							}
 						}
 						if (var54)
@@ -233,16 +241,22 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 
 		Block layerID = rockLayer1.block;
 		if(layerID == TFCBlocks.StoneIgEx)
+		{
 			width -= 0.4;
+		}
 		else if(layerID == TFCBlocks.StoneIgIn)
+		{
 			width -= 0.5;
+		}
 		else if(layerID == TFCBlocks.StoneSed)
 		{
 			width += 0.2;
 			var7 += 5;
 		}
 		else if(layerID == TFCBlocks.StoneMM)
+		{
 			width += 0.3;
+		}
 
 		if(yCoord < 32)
 			width *= 0.5;
@@ -263,9 +277,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 
 		for (int var8 = 0; var8 < var7; ++var8)
 		{
-
 			int var15 = 1;
-
 			if (this.rand.nextInt(4) == 0)
 			{
 				this.generateLargeCaveNode(this.rand.nextLong(), par4, par5, ids, xCoord, yCoord, zCoord);

@@ -137,8 +137,8 @@ public class WorldGenPlants implements IWorldGenerator
 
 			if(bioTemperature >= 0)
 			{
-				//				WorldGenerator var6 = new WorldGenCustomTallGrass(Block.tallGrass, 1);
-				//				var6.generate(world, random, xCoord, yCoord, zCoord);
+//				WorldGenerator var6 = new WorldGenCustomTallGrass(Block.tallGrass, 1);
+//				var6.generate(world, random, xCoord, yCoord, zCoord);
 				if (world.isAirBlock(xCoord, yCoord, zCoord) && 
 						Blocks.tallgrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
 						TFC_Core.isDryGrass(world.getBlock(xCoord, yCoord-1, zCoord)))
