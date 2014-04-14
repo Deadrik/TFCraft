@@ -108,6 +108,8 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 
 					this.setInventorySlotContents(4, is);
 					this.getStackInSlot(5).stackSize--;
+					if(getStackInSlot(5).stackSize == 0)
+						setInventorySlotContents(5, null);
 
 					consumeFoodWeight();
 				}
@@ -296,25 +298,70 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	@Override
 	public void createInitPacket(DataOutputStream outStream) throws IOException 
 	{
-		outStream.writeInt(storage[0] != null ? storage[0].itemID : -1);
-		outStream.writeInt(storage[1] != null ? storage[1].itemID : -1);
-		outStream.writeInt(storage[2] != null ? storage[2].itemID : -1);
-		outStream.writeInt(storage[3] != null ? storage[3].itemID : -1);
+		writeItemToStream(outStream, 0);
+		writeItemToStream(outStream, 1);
+		writeItemToStream(outStream, 2);
+		writeItemToStream(outStream, 3);
 		outStream.writeInt(storage[5] != null ? storage[5].itemID : -1);
+	}
+
+	public void writeItemToStream(DataOutputStream outStream, int index) throws IOException 
+	{
+		if(storage[index] != null)
+		{
+			outStream.writeInt(storage[index].itemID);
+			if(storage[index].hasTagCompound())
+			{
+				NBTTagCompound nbt = storage[index].getTagCompound();
+				outStream.writeFloat(nbt.hasKey("foodWeight") ? nbt.getFloat("foodWeight") : -1);
+				outStream.writeFloat(nbt.hasKey("foodDecay") ? nbt.getFloat("foodDecay") : -1);
+			}
+			else
+			{
+				outStream.writeFloat(-1);
+				outStream.writeFloat(-1);
+			}
+		}
+		else
+		{
+			outStream.writeInt(-1);
+			outStream.writeFloat(-1);
+			outStream.writeFloat(-1);
+		}
+	}
+
+	public void readItemFromStream(DataInputStream inStream, int index) throws IOException 
+	{
+		int id = inStream.readInt();
+		float weight = inStream.readFloat();
+		float decay = inStream.readFloat();
+		if(id != -1 && storage[index] == null || storage[index].getItem().itemID != id)
+		{
+			storage[index] = new ItemStack(Item.itemsList[id]);
+
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setFloat("foodWeight", weight);
+			nbt.setFloat("foodDecay", decay);
+		}
+		else if(id != -1 && storage[index] != null && storage[index].getItem().itemID == id)
+		{
+			storage[index].getTagCompound().setFloat("foodWeight", weight);
+			storage[index].getTagCompound().setFloat("foodDecay", decay);
+		}
+		else if(id == -1)
+		{
+			storage[index] = null;
+		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void handleInitPacket(DataInputStream inStream) throws IOException {
-		int s1 = inStream.readInt();
-		int s2 = inStream.readInt();
-		int s3 = inStream.readInt();
-		int s4 = inStream.readInt();
+		readItemFromStream(inStream, 0);
+		readItemFromStream(inStream, 1);
+		readItemFromStream(inStream, 2);
+		readItemFromStream(inStream, 3);
 		int s5 = inStream.readInt();
-		storage[0] = s1 != -1 ? new ItemStack(Item.itemsList[s1]) : null;
-		storage[1] = s2 != -1 ? new ItemStack(Item.itemsList[s2]) : null;
-		storage[2] = s3 != -1 ? new ItemStack(Item.itemsList[s3]) : null;
-		storage[3] = s4 != -1 ? new ItemStack(Item.itemsList[s4]) : null;
 		storage[5] = s5 != -1 ? new ItemStack(Item.itemsList[s5]) : null;
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 
@@ -331,10 +378,10 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 			dos.writeInt(yCoord);
 			dos.writeInt(zCoord);
 
-			dos.writeInt(storage[0] != null ? storage[0].itemID : -1);
-			dos.writeInt(storage[1] != null ? storage[1].itemID : -1);
-			dos.writeInt(storage[2] != null ? storage[2].itemID : -1);
-			dos.writeInt(storage[3] != null ? storage[3].itemID : -1);
+			writeItemToStream(dos, 0);
+			writeItemToStream(dos, 1);
+			writeItemToStream(dos, 2);
+			writeItemToStream(dos, 3);
 			dos.writeInt(storage[5] != null ? storage[5].itemID : -1);
 		} catch (IOException e) {
 		}
