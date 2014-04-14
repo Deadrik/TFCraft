@@ -1943,6 +1943,12 @@ public class Recipes
 						new ItemStack(TFCItems.ClayMoldJavelin,1,0),
 						0, 
 						new ItemStack(TFCItems.ClayMoldJavelin,1,1)));
+
+		manager.addRecipe(
+				new KilnRecipe(
+						new ItemStack(TFCItems.FireBrick,1,0),
+						0, 
+						new ItemStack(TFCItems.FireBrick,1,1)));
 	}
 
 	public static int valueOfString(String s)
