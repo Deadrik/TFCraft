@@ -44,7 +44,7 @@ public class TFCOptions
 
 	public static int pitKilnBurnTime = 8;
 	public static boolean useDecayProtection = true;
-	public static int decayProtectionDays = 24;
+	public static int decayProtectionDays = 18;
 
 	public static boolean getBooleanFor(Configuration config,String heading, String item, boolean value)
 	{
