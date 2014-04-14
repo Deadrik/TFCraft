@@ -163,11 +163,13 @@ public class FoodCraftingHandler
 						NBTTagCompound grainNBT = iinventory.getStackInSlot(i).getTagCompound();
 						float grainWeight = grainNBT.getFloat("foodWeight");
 						float breadWeight = Math.min(grainWeight,80);
+						float breadDecay = grainNBT.getFloat("foodDecay");
 						grainWeight -= breadWeight;
 						breadWeight *= 2;
 						grainNBT.setFloat("foodWeight", grainWeight);
 						if(grainWeight > 0)
 							iinventory.getStackInSlot(i).stackSize++;
+						ItemFoodTFC.createTag(craftResult, breadWeight, breadDecay);
 					}
 				}
 			}
