@@ -161,10 +161,10 @@ public class ItemGoldPan extends ItemTerra
 						{
 							int type = -1;
 
-							if (type == -1 && world.rand.nextInt(40) == 0) type = 0;
-							if (type == -1 && world.rand.nextInt(90) == 0) type = 1;
-							if (type == -1 && world.rand.nextInt(90) == 0) type = 3;
-							if (type == -1 && world.rand.nextInt(250) == 0) type = 2;
+							if (type == -1 && world.rand.nextInt(60) == 0) type = 0;
+							if (type == -1 && world.rand.nextInt(150) == 0) type = 1;
+							if (type == -1 && world.rand.nextInt(120) == 0) type = 3;
+							if (type == -1 && world.rand.nextInt(500) == 0) type = 2;
 
 							if(type != -1)
 							{
@@ -172,7 +172,7 @@ public class ItemGoldPan extends ItemTerra
 								switch(type)
 								{
 								case 0://Copper
-								out = new ItemStack(TFCItems.SmallOreChunk, 1, 0); break;
+									out = new ItemStack(TFCItems.SmallOreChunk, 1, 0); break;
 								case 1://Gold
 									out = new ItemStack(TFCItems.SmallOreChunk, 1, 1); break;
 								case 2://Platinum
