@@ -1155,7 +1155,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);
 
-		this.entityDropItem(new ItemStack(TFCItems.Hide.itemID,1,(int)(ageMod*3)),0);
+		this.entityDropItem(new ItemStack(TFCItems.Hide.itemID,1,Math.max(0,Math.min(2,(int)(ageMod*3-1)))),0);
 		this.dropItem(Item.bone.itemID,(int) ((rand.nextInt(8)+3)*ageMod));
 
 		float foodWeight = ageMod*(this.size_mod * 4000);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
