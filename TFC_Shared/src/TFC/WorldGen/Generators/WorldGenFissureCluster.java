@@ -12,10 +12,10 @@ public class WorldGenFissureCluster implements IWorldGenerator {
 	Random rand;
 	int waterRarity = 150;
 
-	WorldGenFissure fissureGenWater = new WorldGenFissure(
+	GenFissure fissureGenWater = new GenFissure(
 			TFCBlocks.FreshWaterStill);
-	WorldGenFissure fissureGenLava = new WorldGenFissure(Block.lavaStill);
-	WorldGenFissure fissureGenAir = new WorldGenFissure(null);
+	GenFissure fissureGenLava = new GenFissure(Block.lavaStill);
+	GenFissure fissureGenAir = new GenFissure(null);
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,

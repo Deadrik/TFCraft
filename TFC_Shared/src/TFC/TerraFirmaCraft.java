@@ -7,7 +7,6 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Set;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
@@ -23,6 +22,7 @@ import TFC.API.Constant.TFCItemID;
 import TFC.Commands.CommandTime;
 import TFC.Commands.DebugModeCommand;
 import TFC.Commands.GSPVisualCommand;
+import TFC.Commands.GenCommand;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetBodyTemp;
 import TFC.Commands.GetRocksCommand;
@@ -60,13 +60,13 @@ import TFC.WorldGen.TFCProviderHell;
 import TFC.WorldGen.TFCWorldType;
 import TFC.WorldGen.Generators.OreSpawnData;
 import TFC.WorldGen.Generators.WorldGenCaveDecor;
-import TFC.WorldGen.Generators.WorldGenFissure;
 import TFC.WorldGen.Generators.WorldGenFissureCluster;
 import TFC.WorldGen.Generators.WorldGenForests;
 import TFC.WorldGen.Generators.WorldGenLargeRock;
 import TFC.WorldGen.Generators.WorldGenLooseRocks;
 import TFC.WorldGen.Generators.WorldGenOre;
 import TFC.WorldGen.Generators.WorldGenPlants;
+import TFC.WorldGen.Generators.WorldGenRandomFissure;
 import TFC.WorldGen.Generators.WorldGenSoilPits;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -134,8 +134,7 @@ public class TerraFirmaCraft
 
 		//Register Generators
 
-		//Underground Lava
-		GameRegistry.registerWorldGenerator(new WorldGenFissure(Block.lavaStill,2, true, 25).setUnderground(true, 20).setSeed(1));
+		GameRegistry.registerWorldGenerator(new WorldGenRandomFissure());
 		//Surface Hotsprings
 		GameRegistry.registerWorldGenerator(new WorldGenFissureCluster());
 
@@ -290,6 +289,7 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new RemoveAreaCommand());
 		evt.registerServerCommand(new DebugModeCommand());
 		evt.registerServerCommand(new CommandTime());
+		evt.registerServerCommand(new GenCommand());
 	}	
 
 	public void loadSettings()

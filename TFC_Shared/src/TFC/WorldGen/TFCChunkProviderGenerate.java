@@ -30,7 +30,7 @@ import TFC.Entities.Mobs.EntityPheasantTFC;
 import TFC.Entities.Mobs.EntityPigTFC;
 import TFC.Entities.Mobs.EntitySheepTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
-import TFC.WorldGen.Generators.WorldGenFissure;
+import TFC.WorldGen.Generators.GenFissure;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 {
@@ -99,7 +99,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 	int[] heightMap = new int[256];
 
-	WorldGenFissure fissureGen = new WorldGenFissure(TFCBlocks.FreshWaterFlowing,1,false, 10);
+	GenFissure fissureGen = new GenFissure(TFCBlocks.FreshWaterFlowing,1,false, 10);
 	MapGenCavesTFC caveGen = new MapGenCavesTFC();
 	MapGenRavineTFC surfaceRavineGen = new MapGenRavineTFC(110, 30);//surface
 	MapGenRavineTFC ravineGen = new MapGenRavineTFC(20, 50);//deep
