@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
 import TFC.TFCBlocks;
 import TFC.API.Enums.TFCDirection;
 import TFC.API.Util.ByteCoord;
@@ -13,31 +14,30 @@ import TFC.API.Util.CollapseData;
 import TFC.API.Util.CollapseList;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
+import cpw.mods.fml.common.IWorldGenerator;
 
-public class GenFissure
+public class WorldGenFissure implements IWorldGenerator
 {
 	Random rand;
-	int poolDepthFromTop;
-	int fissureDepthFromTop = 1;
+	int poolDepth;
+	int creviceDepth = 1;
 	Block fillBlock;
-	int startingDepth = 20;
+	int depth = 20;
 
-	int minTunnel = 2;
+	int minTunnel = 1;
 	boolean checkStability = true;
 	boolean underground = false;
 
+	int seed = 0;
 	int rarity = 10;
 
-	public int maxDepth = 15;
-	public int maxStart = 90;
-
 	//Basic constructor
-	public GenFissure(Block b)
+	public WorldGenFissure(Block b)
 	{
 		fillBlock = b;
 	}
 
-	public GenFissure(Block b, int minTunnel, boolean s, int rare)
+	public WorldGenFissure(Block b, int minTunnel, boolean s, int rare)
 	{
 		this(b);
 		this.minTunnel = minTunnel;
@@ -45,24 +45,51 @@ public class GenFissure
 		rarity = rare;
 	}
 
-	public GenFissure setUnderground(boolean i, int d)
+	public WorldGenFissure setSeed(int i)
+	{
+		seed = i;
+		return this;
+	}
+	public WorldGenFissure setUnderground(boolean i, int d)
 	{
 		underground = i;
-		startingDepth = d;
+		depth = d;
 		return this;
+	}
+
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world,
+			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
+	{
+		rand = random;
+		chunkX *= 16;
+		chunkZ *= 16;
+
+		int startX = chunkX + random.nextInt(16) + 8;
+		int startZ = chunkZ + random.nextInt(16) + 8;
+		int startY = world.getTopSolidOrLiquidBlock(startX, startZ)-1;
+
+		if(rand.nextInt(rarity) != 0)
+			return;
+
+		if(underground)
+			startY = depth + rand.nextInt(60);
+
+		generate(world, rand, startX, startY, startZ);
 	}
 
 	public void generate(World world, Random rand, int x, int y, int z)
 	{
-		fissureDepthFromTop = 1 + rand.nextInt(maxDepth);
-		poolDepthFromTop = Math.min(1+rand.nextInt(maxDepth), fissureDepthFromTop-2);
 
-		for(int d = 1; d <= poolDepthFromTop; d++)
+
+		creviceDepth = 1;
+		if(rand.nextInt(100) < 50)
+			creviceDepth += 4 + rand.nextInt(15);
+		poolDepth = 1+rand.nextInt(2);
+
+		for(int d = 1; d <= poolDepth; d++)
 			if(!world.isBlockNormalCube(x, y-d, z))
 				return;
-
-		if(world.getBlockMaterial(x, y+1, z) == Material.water)
-			return;
 
 		int stability = TFC_Climate.getStability(x, z);
 		int id = world.getBlockId(x,y,z);
@@ -71,7 +98,7 @@ public class GenFissure
 			return;
 
 		if(underground)
-			y = startingDepth + rand.nextInt(maxStart-startingDepth);
+			y-= 20+rand.nextInt(depth);
 
 		if(checkStability && stability == 0)
 			return;
@@ -84,39 +111,33 @@ public class GenFissure
 
 
 
-		ArrayList<ByteCoord> map = getCollapseMap(world, x,y-fissureDepthFromTop,z);
-		int[] rockLayer = TFC_Climate.getRockLayer(x, y, z, 2);
+		ArrayList<ByteCoord> map = getCollapseMap(world, x,y-creviceDepth,z);
+		int[] rockLayer = fillBlock != null ? TFC_Climate.getRockLayer(x, y, z, 2) : new int[]{-1, -1};
 		boolean makeTunnel = map.size() > 10;
 		if(rockLayer[0] == -1)
 			return;
-		//Take the 2d XZ map of the fissure that we've created and carve the ground
 		for(ByteCoord b : map)
 		{
-			//converted these to i,j,k to make the code more legible
-			int i = x+b.x, j = y-fissureDepthFromTop, k = z+b.z;
-
-			world.setBlock(i, j, k, fillBlock != null ? fillBlock.blockID : 0);
-
-			for(int d = 1; d <= fissureDepthFromTop - poolDepthFromTop; d++)
-				fill(world, i, j+d, k, rockLayer[0], rockLayer[1], fillBlock != null ? fillBlock.blockID : 0);
+			world.setBlock(x+b.x, y+b.y, z+b.z, 0);
+			for(int d = 1; d <= poolDepth; d++)
+				fill(world, x+b.x, y+b.y-d, z+b.z, rockLayer[0], rockLayer[1], fillBlock != null ? fillBlock.blockID : 0);
 
 			int rx = 0;
 			int rz = 0;
 
-			for(int d = 0; d <= fissureDepthFromTop; d++)
+			for(int d = 0; d <= creviceDepth; d++)
 			{
-				carve(world, i, j+d, k, rockLayer[0], rockLayer[1]);
+				carve(world, x+b.x, y+b.y+d, z+b.z, rockLayer[0], rockLayer[1]);
 
-				//Sometimes we carve the walls of the fissure slightly the make them less uniform
 				if(rand.nextInt(3) == 0)
 				{
 					rx = -1 + rand.nextInt(3);
 					rz = -1 + rand.nextInt(3);
-					carve(world, i+rx, j+d, k+rz, rockLayer[0], rockLayer[1]);
+					carve(world, x+b.x+rx, y+b.y+d, z+b.z+rz, rockLayer[0], rockLayer[1]);
 				}
 			}
-			/*if(fillBlock != null)
-				world.setBlock(i, j-1, k, rockLayer[0], rockLayer[1], 2);*/
+			if(fillBlock != null && fillBlock.blockMaterial == Material.lava)
+				world.setBlock(x+b.x, y+b.y-poolDepth-1, z+b.z, rockLayer[0], rockLayer[1], 2);
 		}
 
 		if(makeTunnel)
@@ -125,15 +146,15 @@ public class GenFissure
 
 	private void carve(World world, int x, int y, int z, int id, int meta)
 	{
-		if(TFC_Core.isGround(world.getBlockId(x, y, z)))
-			world.setBlockToAir(x, y, z);
-		if(world.getBlockMaterial(x-1, y, z) != Material.air && (TFC_Core.isGround(world.getBlockId(x-1, y, z)) && !TFC_Core.isSoil(world.getBlockId(x-1, y, z))) || !world.isBlockNormalCube(x-1, y, z))
+		if(world.getBlockMaterial(x, y, z) != Material.air && TFC_Core.isGround(world.getBlockId(x, y, z)))
+			world.setBlock(x, y, z, 0);
+		if(world.getBlockMaterial(x-1, y, z) != Material.air && TFC_Core.isGround(world.getBlockId(x-1, y, z)) && !TFC_Core.isGrass(world.getBlockId(x-1, y, z)))
 			world.setBlock(x-1, y, z, id, meta, 2);
-		if(world.getBlockMaterial(x+1, y, z) != Material.air && (TFC_Core.isGround(world.getBlockId(x+1, y, z)) && !TFC_Core.isSoil(world.getBlockId(x+1, y, z))) || !world.isBlockNormalCube(x+1, y, z))
+		if(world.getBlockMaterial(x+1, y, z) != Material.air && TFC_Core.isGround(world.getBlockId(x+1, y, z)) && !TFC_Core.isGrass(world.getBlockId(x+1, y, z)))
 			world.setBlock(x+1, y, z, id, meta, 2);
-		if(world.getBlockMaterial(x, y, z-1) != Material.air && (TFC_Core.isGround(world.getBlockId(x, y, z-1)) && !TFC_Core.isSoil(world.getBlockId(x, y, z-1))) || !world.isBlockNormalCube(x, y, z-1))
+		if(world.getBlockMaterial(x, y, z-1) != Material.air && TFC_Core.isGround(world.getBlockId(x, y, z-1)) && !TFC_Core.isGrass(world.getBlockId(x, y, z-1)))
 			world.setBlock(x, y, z-1, id, meta, 2);
-		if(world.getBlockMaterial(x, y, z+1) != Material.air && (TFC_Core.isGround(world.getBlockId(x, y, z+1)) && !TFC_Core.isSoil(world.getBlockId(x, y, z+1))) || !world.isBlockNormalCube(x, y, z+1))
+		if(world.getBlockMaterial(x, y, z+1) != Material.air && TFC_Core.isGround(world.getBlockId(x, y, z+1)) && !TFC_Core.isGrass(world.getBlockId(x, y, z+1)))
 			world.setBlock(x, y, z+1, id, meta, 2);
 	}
 
@@ -154,7 +175,7 @@ public class GenFissure
 
 	private void makeTunnel(Random random, World world, int x, int z, int y,
 			int[] rockLayer) {
-		int xCoord = x, yCoord = y-poolDepthFromTop-1, zCoord = z;
+		int xCoord = x, yCoord = y-poolDepth-1, zCoord = z;
 		float downChance = 75;
 		while(yCoord > minTunnel)
 		{
@@ -302,7 +323,7 @@ public class GenFissure
 					}
 			}
 			else if(block.collapseChance < 100)
-				for(int d = 0; d <= poolDepthFromTop; d++)
+				for(int d = 0; d <= poolDepth; d++)
 					if(TFC_Core.isGround(world.getBlockId(worldX, worldY-d, worldZ)) && rockLayer[0] != -1)
 						world.setBlock(worldX, worldY-d, worldZ, rockLayer[0], rockLayer[1], 2);
 			checkedmap.add(block.coords);
