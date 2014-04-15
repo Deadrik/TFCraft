@@ -45,7 +45,7 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public boolean canCoordinateBeSpawn(int par1, int par2)
 	{
-		int var3 = this.worldObj.getFirstUncoveredBlock(par1, par2);
+		int var3 = worldObj.getBlockId(par1,worldObj.getTopSolidOrLiquidBlock(par1, par2), par2);
 		//return var3 == Block.grass.blockID;
 		return TFC_Core.isGrass(var3);
 	}
@@ -131,8 +131,8 @@ public class TFCProvider extends WorldProvider
 		}
 
 		WorldInfo info = worldObj.getWorldInfo();
-		info.setSpawnPosition(var6, worldObj.getFirstUncoveredBlock(var6, var8), var8);
-		return new ChunkCoordinates(var6, worldObj.getFirstUncoveredBlock(var6, var8), var8);
+		info.setSpawnPosition(var6, worldObj.getTopSolidOrLiquidBlock(var6, var8), var8);
+		return new ChunkCoordinates(var6, worldObj.getTopSolidOrLiquidBlock(var6, var8), var8);
 	}
 
 	@Override
