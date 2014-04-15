@@ -69,8 +69,10 @@ public abstract class BlockTerraContainer extends BlockContainer
 				{
 					if(((IInventory)te).getStackInSlot(i) != null)
 					{
-						EntityItem ei = new EntityItem(world, x, y, z, ((IInventory)te).getStackInSlot(i));
-						ei.motionY = 0.4;
+						EntityItem ei = new EntityItem(world, x+0.5, y+0.5, z+0.5, ((IInventory)te).getStackInSlot(i));
+						ei.motionX = 0;
+						ei.motionY = 0;
+						ei.motionZ = 0;
 						world.spawnEntityInWorld(ei);
 					}
 				}
