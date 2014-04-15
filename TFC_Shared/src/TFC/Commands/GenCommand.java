@@ -5,7 +5,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import TFC.TFCBlocks;
 import TFC.API.TFCOptions;
-import TFC.WorldGen.Generators.GenFissure;
+import TFC.WorldGen.Generators.WorldGenFissure;
 
 public class GenCommand extends CommandBase{
 
@@ -28,11 +28,11 @@ public class GenCommand extends CommandBase{
 		{
 			if(params[0].equals("fissure"))
 			{
-				GenFissure gen = null;
+				WorldGenFissure gen = null;
 				if(params[1].equals("water"))
-					gen = new GenFissure(TFCBlocks.HotWaterStill);
+					gen = new WorldGenFissure(TFCBlocks.HotWaterStill);
 				else
-					gen = new GenFissure(null);
+					gen = new WorldGenFissure(null);
 				gen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int)player.posX, (int)player.posY-1, (int)player.posZ);
 			}
 		}
