@@ -3,9 +3,7 @@ package TFC.Items;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
@@ -31,7 +29,7 @@ public class ItemClay extends ItemLooseRock
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World par2World, EntityPlayer entityplayer)
 	{
-		System.out.println(itemstack.stackSize+", "+itemstack.getItem().getClass() +": "+Item.clay.getClass());
+		//System.out.println(itemstack.stackSize+", "+itemstack.getItem().getClass() +": "+Item.clay.getClass());
 		if(itemstack.stackSize >= 5)
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);

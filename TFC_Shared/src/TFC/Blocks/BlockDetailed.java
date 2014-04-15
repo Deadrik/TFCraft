@@ -157,7 +157,7 @@ public class BlockDetailed extends BlockPartial
 
 			if(index >= 0)
 			{
-				System.out.println("xSelected: " +xSelected + " ySelected: " + ySelected + " zSelected: " + zSelected + " index: " + index);
+				//System.out.println("xSelected: " +xSelected + " ySelected: " + ySelected + " zSelected: " + zSelected + " index: " + index);
 				te.data.clear(index);
 				te.clearQuad(xSelected, ySelected, zSelected);
 
