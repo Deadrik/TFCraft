@@ -263,9 +263,9 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		float ageMod = TFC_Core.getPercentGrown(this);
 
 		if(!this.getSheared())
-			this.entityDropItem(new ItemStack(TFCItems.SheepSkin,1,(int)(ageMod * size_mod)), 0.0F);
+			this.entityDropItem(new ItemStack(TFCItems.SheepSkin,1,Math.max(0,Math.min(2,(int)(ageMod * size_mod)))), 0.0F);
 		else
-			this.entityDropItem(new ItemStack(TFCItems.Hide,1,(int)(ageMod * size_mod)), 0.0F);
+			this.entityDropItem(new ItemStack(TFCItems.Hide,1,Math.max(0,Math.min(2,(int)(ageMod * size_mod)))), 0.0F);
 		this.dropItem(Item.bone.itemID, (int)((rand.nextInt(5)+2)*ageMod));
 
 
