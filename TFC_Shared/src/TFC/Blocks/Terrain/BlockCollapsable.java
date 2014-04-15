@@ -250,7 +250,6 @@ public class BlockCollapsable extends BlockTerraContainer
 	public void triggerCollapse(World world, EntityPlayer entityplayer, int i, int j, int k, int meta)
 	{  
 		ArrayList<ByteCoord> collapseMap = getCollapseMap(world, i, j, k);
-		System.out.println("Collapse Map Complete");
 		/*int height = 4;
 		int range = 5 + world.rand.nextInt(30);
 		for(int y = -4; y <= 1; y++)
