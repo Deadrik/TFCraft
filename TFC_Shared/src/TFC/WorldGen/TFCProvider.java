@@ -77,10 +77,10 @@ public class TFCProvider extends WorldProvider
 		try
 		{
 			biome = worldObj.getBiomeGenForCoordsBody(x, z);
-			if(canSnowAtTemp(x,145,z))
+			/*if(canSnowAtTemp(x,145,z))
 				biome.temperature = 0;
 			else
-				biome.temperature = 0.21f;
+				biome.temperature = 0.21f;*/
 		}
 		catch(Exception Ex)
 		{
@@ -131,8 +131,8 @@ public class TFCProvider extends WorldProvider
 		}
 
 		WorldInfo info = worldObj.getWorldInfo();
-		info.setSpawnPosition(var6, this.worldObj.getHeightValue(var6, var8), var8);
-		return new ChunkCoordinates(var6, this.worldObj.getHeightValue(var6, var8), var8);
+		info.setSpawnPosition(var6, worldObj.getFirstUncoveredBlock(var6, var8), var8);
+		return new ChunkCoordinates(var6, worldObj.getFirstUncoveredBlock(var6, var8), var8);
 	}
 
 	@Override
