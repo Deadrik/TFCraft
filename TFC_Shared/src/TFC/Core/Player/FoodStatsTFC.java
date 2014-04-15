@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
@@ -105,18 +104,20 @@ public class FoodStatsTFC
 				{
 					satisfaction -= hunger; 
 					hunger = 0;
+					foodExhaustionLevel = 0;
 				}
 				else
 				{
 					hunger -= satisfaction; 
 					satisfaction = 0;
+					foodExhaustionLevel = 0;
 				}
 				this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
-				nutrFruit = Math.max(this.nutrFruit - (1 + foodExhaustionLevel)/5, 0);
-				nutrVeg = Math.max(this.nutrVeg - (1 + foodExhaustionLevel)/5, 0);
-				nutrGrain = Math.max(this.nutrGrain - (1 + foodExhaustionLevel)/5, 0);
-				nutrProtein = Math.max(this.nutrProtein - (1 + foodExhaustionLevel)/5, 0);
-				nutrDairy = Math.max(this.nutrDairy - (1 + foodExhaustionLevel)/5, 0);
+				nutrFruit = Math.max(this.nutrFruit - (1 + foodExhaustionLevel)/10, 0);
+				nutrVeg = Math.max(this.nutrVeg - (1 + foodExhaustionLevel)/10, 0);
+				nutrGrain = Math.max(this.nutrGrain - (1 + foodExhaustionLevel)/10, 0);
+				nutrProtein = Math.max(this.nutrProtein - (1 + foodExhaustionLevel)/10, 0);
+				nutrDairy = Math.max(this.nutrDairy - (1 + foodExhaustionLevel)/10, 0);
 			}
 
 			//Heal or hurt the player based on hunger.
@@ -314,7 +315,7 @@ public class FoodStatsTFC
 			if(reduceFood(is, eatAmount))
 			{
 				is.stackSize = 0;
-				player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
+				//player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
 			}
 		}
 		else if(is.getItem() instanceof IFood)
@@ -327,6 +328,10 @@ public class FoodStatsTFC
 				float eatAmount = Math.min(weight - decay, 5f);
 				addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount);
 				this.stomachLevel += eatAmount;
+				if(reduceFood(is, eatAmount))
+				{
+					is.stackSize = 0;
+				}
 			}
 			else
 				addNutrition(((IFood)(is.getItem())).getFoodGroup(), 10f);
@@ -348,7 +353,7 @@ public class FoodStatsTFC
 		nMod += 0.2f * (nutrGrain/24f);
 		nMod += 0.2f * (nutrProtein/24f);
 		nMod += 0.2f * (nutrDairy/24f);
-		return Math.max(nMod, 0.1f);
+		return Math.max(nMod, 0.05f);
 
 	}
 
@@ -367,10 +372,14 @@ public class FoodStatsTFC
 		if(is.hasTagCompound())
 		{
 			float weight = is.getTagCompound().getFloat("foodWeight");
-			if(weight - amount <= 0)
+			float decay = is.getTagCompound().hasKey("foodDecay") ? is.getTagCompound().getFloat("foodDecay") : 0;
+			if((weight - decay) - amount <= 0)
 				return true;
 			else
+			{
 				is.getTagCompound().setFloat("foodWeight", Helper.roundNumber(weight - amount, 10));
+				is.getTagCompound().setFloat("foodDecay", Helper.roundNumber(decay - amount, 10));
+			}
 		}
 		return false;
 	}
