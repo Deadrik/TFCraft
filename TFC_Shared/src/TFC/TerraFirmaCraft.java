@@ -60,13 +60,13 @@ import TFC.WorldGen.TFCProviderHell;
 import TFC.WorldGen.TFCWorldType;
 import TFC.WorldGen.Generators.OreSpawnData;
 import TFC.WorldGen.Generators.WorldGenCaveDecor;
+import TFC.WorldGen.Generators.WorldGenFissure;
 import TFC.WorldGen.Generators.WorldGenFissureCluster;
 import TFC.WorldGen.Generators.WorldGenForests;
 import TFC.WorldGen.Generators.WorldGenLargeRock;
 import TFC.WorldGen.Generators.WorldGenLooseRocks;
 import TFC.WorldGen.Generators.WorldGenOre;
 import TFC.WorldGen.Generators.WorldGenPlants;
-import TFC.WorldGen.Generators.WorldGenRandomFissure;
 import TFC.WorldGen.Generators.WorldGenSoilPits;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -134,7 +134,8 @@ public class TerraFirmaCraft
 
 		//Register Generators
 
-		GameRegistry.registerWorldGenerator(new WorldGenRandomFissure());
+		//Underground Lava
+		GameRegistry.registerWorldGenerator(new WorldGenFissure(Block.lavaStill,2, true, 25).setUnderground(true, 20).setSeed(1));
 		//Surface Hotsprings
 		GameRegistry.registerWorldGenerator(new WorldGenFissureCluster());
 
