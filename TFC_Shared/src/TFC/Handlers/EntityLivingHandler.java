@@ -1,6 +1,7 @@
 package TFC.Handlers;
 
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +18,7 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
+import TFC.API.Util.Helper;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_Core;
@@ -54,6 +56,8 @@ public class EntityLivingHandler
 					player.heal(diff);*/
 			}
 
+			
+			
 			if(!player.worldObj.isRemote)
 			{
 				//Tick Decay
@@ -97,6 +101,7 @@ public class EntityLivingHandler
 			else
 			{
 				PlayerInfo playerclient = PlayerManagerTFC.getInstance().getClientPlayer();
+				//Minecraft.getMinecraft().playerController.getBlockReachDistance()
 				if(player.inventory.getCurrentItem() != null)
 				{
 					if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)

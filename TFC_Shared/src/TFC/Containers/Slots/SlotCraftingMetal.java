@@ -44,7 +44,7 @@ public class SlotCraftingMetal extends Slot
 	{
 		super.onSlotChanged();
 		if (inventory.getStackInSlot(0)!=null){
-			System.out.println(getStack()+", "+PlayerManagerTFC.getInstance().getPlayerInfoFromName(thePlayer.username).specialCraftingType);
+			//System.out.println(getStack()+", "+PlayerManagerTFC.getInstance().getPlayerInfoFromName(thePlayer.username).specialCraftingType);
 			if (valids.contains(getStack().getItem()) && container != null && getStack().getItemDamage()== 
 					PlayerManagerTFC.getInstance().getPlayerInfoFromName(thePlayer.username).specialCraftingType.getItemDamage()){
 				container.onCraftMatrixChanged(craftMatrix);

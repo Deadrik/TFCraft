@@ -2,7 +2,9 @@ package TFC.Items.Tools;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemStack;
 import TFC.TFCBlocks;
+import TFC.API.Enums.EnumItemReach;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -35,4 +37,8 @@ public class ItemCustomShovel extends ItemTerraTool
 		return multimap;
 	}
 
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.FAR;
+	}
 }

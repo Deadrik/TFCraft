@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.entity.RenderFallingSand;
 import net.minecraft.client.renderer.entity.RenderFish;
 import net.minecraft.client.renderer.entity.RenderGhast;
 import net.minecraft.client.renderer.entity.RenderIronGolem;
+import net.minecraft.client.renderer.entity.RenderLeashKnot;
 import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.entity.RenderSilverfish;
 import net.minecraft.client.renderer.entity.RenderSlime;
@@ -21,6 +22,7 @@ import net.minecraft.client.resources.ReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.src.ModLoader;
+import net.minecraft.world.EnumGameType;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -224,7 +226,7 @@ public class ClientProxy extends CommonProxy
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.berryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBerryBush());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.bloomeryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBloomery());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.metalsheetRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderMetalSheet());
-
+		
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 	}
@@ -266,7 +268,6 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void onClientLogin()
 	{
-
 	}
 
 	@Override

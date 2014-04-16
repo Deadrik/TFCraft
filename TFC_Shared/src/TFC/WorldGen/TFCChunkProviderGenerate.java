@@ -101,7 +101,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 	WorldGenFissure fissureGen = new WorldGenFissure(TFCBlocks.FreshWaterFlowing,1,false, 10);
 	MapGenCavesTFC caveGen = new MapGenCavesTFC();
-	MapGenRavineTFC surfaceRavineGen = new MapGenRavineTFC(110, 30);//surface
+	MapGenRavineTFC surfaceRavineGen = new MapGenRavineTFC(125, 30);//surface
 	MapGenRavineTFC ravineGen = new MapGenRavineTFC(20, 50);//deep
 	MapGenRiverRavine riverRavineGen = new MapGenRiverRavine();
 

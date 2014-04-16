@@ -7,16 +7,22 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
@@ -47,6 +53,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 		ItemTerra.addSizeInformation(is, arraylist);
 
 		ItemTerra.addHeatInformation(is, arraylist);
+		
 
 		if(is.getItem() instanceof ICausesDamage)
 			arraylist.add(EnumChatFormatting.AQUA + StringUtil.localize(((ICausesDamage)this).GetDamageType().toString()));
@@ -93,6 +100,11 @@ public class ItemTerraTool extends ItemTool implements ISize
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
 		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.SHORT;
 	}
 
 	@Override

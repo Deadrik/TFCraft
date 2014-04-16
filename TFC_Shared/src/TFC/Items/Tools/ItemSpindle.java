@@ -1,5 +1,7 @@
 package TFC.Items.Tools;
 
+import net.minecraft.item.ItemStack;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.Items.ItemTerra;
 
@@ -22,5 +24,10 @@ public class ItemSpindle extends ItemTerra
 	{
 		Multimap multimap = HashMultimap.create();
 		return multimap;
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.SHORT;
 	}
 }

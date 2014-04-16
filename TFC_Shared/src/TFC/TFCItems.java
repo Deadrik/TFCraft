@@ -9,6 +9,7 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemColored;
+import net.minecraft.item.ItemLilyPad;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraftforge.common.EnumHelper;
@@ -64,6 +65,7 @@ import TFC.Items.ItemTFCArmor;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemTuyere;
 import TFC.Items.ItemUnfinishedArmor;
+import TFC.Items.ItemBlocks.ItemCustomLilyPad;
 import TFC.Items.ItemBlocks.ItemWoodDoor;
 import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.Items.Pottery.ItemPotteryJug;
@@ -987,6 +989,7 @@ public class TFCItems
 		Item.itemsList[Item.coal.itemID] = null; Item.itemsList[Item.coal.itemID] = (new TFC.Items.ItemCoal(7)).setUnlocalizedName("coal");
 		Item.itemsList[Item.stick.itemID] = null; Item.itemsList[Item.stick.itemID] = new ItemStick(24).setFull3D().setUnlocalizedName("stick");
 		Item.itemsList[Block.vine.blockID] = new ItemColored(Block.vine.blockID - 256, false);
+		Item.itemsList[Block.waterlily.blockID] = new ItemCustomLilyPad(Block.waterlily.blockID - 256);
 
 		minecartCrate = (new ItemCustomMinecart(TFCItemID.minecartCrate, 1)).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 
@@ -1464,7 +1467,7 @@ public class TFCItems
 		DoorWhiteElm = new ItemWoodDoor(TFCItemID.DoorWhiteElm, 13).setUnlocalizedName("White Elm Door");
 		DoorWillow = new ItemWoodDoor(TFCItemID.DoorWillow, 14).setUnlocalizedName("Willow Door");
 		DoorKapok = new ItemWoodDoor(TFCItemID.DoorKapok, 15).setUnlocalizedName("Kapok Door");
-		DoorAcacia = new ItemWoodDoor(TFCItemID.DoorKapok, 16).setUnlocalizedName("Acacia Door");
+		DoorAcacia = new ItemWoodDoor(TFCItemID.DoorAcacia, 16).setUnlocalizedName("Acacia Door");
 
 		Beer = new ItemAlcohol(TFCItemID.Beer).setUnlocalizedName("Beer").setCreativeTab(CreativeTabs.tabFood);
 		Cider = new ItemAlcohol(TFCItemID.Cider).setUnlocalizedName("Cider").setCreativeTab(CreativeTabs.tabFood);

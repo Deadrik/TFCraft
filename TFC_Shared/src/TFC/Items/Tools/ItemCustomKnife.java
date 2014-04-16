@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.Enums.EnumDamageType;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.Core.TFC_Core;
 import TFC.Core.Util.StringUtil;
@@ -83,6 +84,11 @@ public class ItemCustomKnife extends ItemWeapon
 		{
 			arraylist.add(StringUtil.localize("gui.ShowHelp"));
 		}
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.SHORT;
 	}
 
 }

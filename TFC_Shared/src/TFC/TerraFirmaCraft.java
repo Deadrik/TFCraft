@@ -23,6 +23,7 @@ import TFC.API.Constant.TFCItemID;
 import TFC.Commands.CommandTime;
 import TFC.Commands.DebugModeCommand;
 import TFC.Commands.GSPVisualCommand;
+import TFC.Commands.GenCommand;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetBodyTemp;
 import TFC.Commands.GetRocksCommand;
@@ -290,6 +291,7 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new RemoveAreaCommand());
 		evt.registerServerCommand(new DebugModeCommand());
 		evt.registerServerCommand(new CommandTime());
+		evt.registerServerCommand(new GenCommand());
 	}	
 
 	public void loadSettings()

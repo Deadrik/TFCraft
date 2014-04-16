@@ -69,7 +69,7 @@ public class CraftingHandler implements ICraftingHandler
 				HandleItem(player, iinventory, Recipes.Axes);
 				HandleItem(player, iinventory, Recipes.Saws);
 			}
-			else if(itemstack.itemID == TFCBlocks.WoodSupportH.blockID || itemstack.itemID == TFCBlocks.WoodSupportV.blockID)
+			else if(itemstack.itemID == TFCBlocks.WoodSupportH.blockID || itemstack.itemID == TFCBlocks.WoodSupportV.blockID || itemstack.itemID == TFCBlocks.WoodSupportH2.blockID || itemstack.itemID == TFCBlocks.WoodSupportV2.blockID)
 			{
 				HandleItem(player, iinventory, Recipes.Saws);
 				HandleItem(player, iinventory, Recipes.Axes);

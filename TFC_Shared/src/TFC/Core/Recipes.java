@@ -270,14 +270,14 @@ public class Recipes
 		{
 			int l = j%16;
 			if(j == l){
-				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand,1,j), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j),Character.valueOf('%'),
-					new ItemStack(TFCBlocks.Planks,1,j)});
+				/*GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand,1,j), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j),Character.valueOf('%'),
+					new ItemStack(TFCBlocks.Planks,1,j)});*/
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack, 1, j), new Object[] { "###","   ","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,j)});
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Barrel,1,j), new Object[] { "# #","# #","###",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j)});
 			}
 			else if(j/16==1){
-				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand2,1,l), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j),Character.valueOf('%'),
-					new ItemStack(TFCBlocks.Planks2,1,l)});
+				/*GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand2,1,l), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j),Character.valueOf('%'),
+					new ItemStack(TFCBlocks.Planks2,1,l)});*/
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack2, 1, l), new Object[] { "###","   ","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,j)});
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Barrel2,1,l), new Object[] { "# #","# #","###",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j)});
 			}
@@ -579,6 +579,8 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(Block.workbench,1),
 				new Object[]{"PP","PP", Character.valueOf('P'),new ItemStack(TFCBlocks.Planks2,1,32767)});
+		GameRegistry.addRecipe(new ItemStack(Item.boat,1),
+				new Object[]{"P P","PPP", Character.valueOf('P'),new ItemStack(TFCBlocks.Planks2,1,32767)});
 
 		RegisterToolRecipes();
 		registerFoodRecipes();

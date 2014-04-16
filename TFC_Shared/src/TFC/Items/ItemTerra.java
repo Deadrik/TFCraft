@@ -6,15 +6,20 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.ISize;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
@@ -154,10 +159,12 @@ public class ItemTerra extends Item implements ISize
 
 	public static void addSizeInformation(ItemStack object, List arraylist)
 	{
-		if(((ISize)object.getItem()).getSize(object)!= null && ((ISize)object.getItem()).getWeight(object) != null)
-			arraylist.add("\u2696" + StringUtil.localize("gui.Weight." + ((ISize)object.getItem()).getWeight(object).getName()) + " \u21F2" + 
-					StringUtil.localize("gui.Size." + ((ISize)object.getItem()).getSize(object).getName().replace(" ", "")));
+		if(((ISize)object.getItem()).getSize(object)!= null && ((ISize)object.getItem()).getWeight(object) != null && ((ISize)object.getItem()).getReach(object)!= null)
+			arraylist.add("\u2696" + StringUtil.localize("gui.Weight." + ((ISize)object.getItem()).getWeight(object).getName()) + " \u2195" + 
+					StringUtil.localize("gui.Size." + ((ISize)object.getItem()).getSize(object).getName().replace(" ", "")) /*+
+					" \u2192" + StringUtil.localize("gui.Reach." + ((ISize)object.getItem()).getReach(object).getName())*/);
 	}
+	
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
@@ -243,5 +250,10 @@ public class ItemTerra extends Item implements ISize
 	{
 		weight = e;
 		return this;
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is) {
+		return EnumItemReach.SHORT;
 	}
 }

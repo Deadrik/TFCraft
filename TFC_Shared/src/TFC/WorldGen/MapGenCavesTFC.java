@@ -214,7 +214,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 		float rain = TFC_Climate.getRainfall((int)xCoord, 144, (int)zCoord);
 
 		double width = 2;
-		int caveChance = 25;		
+		int caveChance = 35;		
 
 		if(rain > 1000)
 		{

@@ -362,7 +362,8 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		readItemFromStream(inStream, 2);
 		readItemFromStream(inStream, 3);
 		int s5 = inStream.readInt();
-		storage[5] = s5 != -1 ? new ItemStack(Item.itemsList[s5]) : null;
+		if(storage[5] == null)
+		{storage[5] = s5 != -1 ? new ItemStack(Item.itemsList[s5]) : null;}
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 
 	}

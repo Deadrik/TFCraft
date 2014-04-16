@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
@@ -107,5 +108,10 @@ public class TFC_Achievements {
 	{
 		LanguageRegistry.instance().addStringLocalization("achievement." + ach, "en_US", name);
 		LanguageRegistry.instance().addStringLocalization("achievement." + ach + ".desc", "en_US", desc);
+		
+		if(LanguageRegistry.instance().getStringLocalization("achievement." + ach).equals("")){
+			LanguageRegistry.instance().addStringLocalization("achievement." + ach,FMLCommonHandler.instance().getCurrentLanguage(), name);
+			LanguageRegistry.instance().addStringLocalization("achievement." + ach + ".desc", FMLCommonHandler.instance().getCurrentLanguage(), desc);
+		}
 	}
 }

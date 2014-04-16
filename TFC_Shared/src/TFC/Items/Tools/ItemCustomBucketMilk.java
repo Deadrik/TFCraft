@@ -14,6 +14,7 @@ import TFC.TFCItems;
 import TFC.API.IFood;
 import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumFoodGroup;
+import TFC.API.Enums.EnumItemReach;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
@@ -168,5 +169,10 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	public float getDecayRate()
 	{
 		return 6f;
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.SHORT;
 	}
 }

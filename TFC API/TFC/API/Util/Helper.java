@@ -2,6 +2,9 @@ package TFC.API.Util;
 
 import java.lang.reflect.Field;
 
+import TFC.API.ISize;
+import TFC.API.Enums.EnumItemReach;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -16,6 +19,18 @@ public class Helper {
 		return getMovingObjectPositionFromPlayer(world, player, true);
 	}
 
+	public static double getReachDistance(World par1World, EntityLivingBase entity, boolean par3)
+	{
+		double var21 = 1; /*ModLoader.getMinecraftInstance().playerController.getBlockReachDistance()*/
+		if(entity.getHeldItem()!=null && (entity.getHeldItem().getItem()) instanceof ISize){
+			var21 *= ((ISize)(entity.getHeldItem().getItem())).getReach(null).multiplier;
+		}
+		
+		else{
+			var21 *= EnumItemReach.SHORT.multiplier;
+		}
+		return var21;
+	}
 	public static MovingObjectPosition getMovingObjectPositionFromPlayer(World par1World, EntityLivingBase entity, boolean par3)
 	{
 		float var4 = 1.0F;
@@ -32,6 +47,13 @@ public class Helper {
 		float var18 = var15 * var16;
 		float var20 = var14 * var16;
 		double var21 = 4; /*ModLoader.getMinecraftInstance().playerController.getBlockReachDistance()*/
+		if(entity.getHeldItem()!=null && (entity.getHeldItem().getItem()) instanceof ISize){
+			var21 *= ((ISize)(entity.getHeldItem().getItem())).getReach(null).multiplier;
+		}
+		
+		else{
+			var21 *= EnumItemReach.SHORT.multiplier;
+		}
 		Vec3 var23 = var13.addVector(var18 * var21, var17 * var21, var20 * var21);
 		MovingObjectPosition var24 = par1World.rayTraceBlocks_do_do(var13, var23, par3, !par3);
 		return var24;

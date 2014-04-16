@@ -4,6 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import TFC.Reference;
+import TFC.TFCBlocks;
+import TFC.API.ISize;
+import TFC.API.Enums.EnumItemReach;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.Util.StringUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -18,7 +23,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class ItemCustomLeash extends ItemLeash
+public class ItemCustomLeash extends ItemLeash implements ISize
 {
 	public String textureFolder;
     public ItemCustomLeash(int par1)
@@ -34,7 +39,7 @@ public class ItemCustomLeash extends ItemLeash
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
     {
         int i1 = par3World.getBlockId(par4, par5, par6);
-        if (Block.blocksList[i1] != null && Block.blocksList[i1].getRenderType() == 11)
+        if (TFCBlocks.isIdAFence(i1))
         {
             if (par3World.isRemote)
             {
@@ -89,6 +94,15 @@ public class ItemCustomLeash extends ItemLeash
 	{        
 		return this.itemIcon;
 	}
+    
+    @Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	{
+		//Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
+		ItemTerra.addSizeInformation(is, arraylist);
+
+		ItemTerra.addHeatInformation(is, arraylist);
+	}
 	
 	
 	@Override
@@ -101,6 +115,22 @@ public class ItemCustomLeash extends ItemLeash
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
 		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
+	}
+	@Override
+	public EnumSize getSize(ItemStack is) {
+		return EnumSize.MEDIUM;
+	}
+	@Override
+	public EnumWeight getWeight(ItemStack is) {
+		return EnumWeight.MEDIUM;
+	}
+	@Override
+	public EnumItemReach getReach(ItemStack is) {
+		return EnumItemReach.FAR;
+	}
+	@Override
+	public boolean canStack() {
+		return true;
 	}
 	
 }

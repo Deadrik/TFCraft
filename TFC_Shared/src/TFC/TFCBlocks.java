@@ -15,7 +15,6 @@ import TFC.Blocks.BlockFireBrick;
 import TFC.Blocks.BlockFoodPrep;
 import TFC.Blocks.BlockIngotPile;
 import TFC.Blocks.BlockLogPile;
-import TFC.Blocks.BlockWorldItem;
 import TFC.Blocks.BlockMetalSheet;
 import TFC.Blocks.BlockMolten;
 import TFC.Blocks.BlockPipeBasic;
@@ -28,6 +27,7 @@ import TFC.Blocks.BlockThatch;
 import TFC.Blocks.BlockTuyere;
 import TFC.Blocks.BlockWoodSupport;
 import TFC.Blocks.BlockWoodSupport2;
+import TFC.Blocks.BlockWorldItem;
 import TFC.Blocks.Devices.BlockBarrel;
 import TFC.Blocks.Devices.BlockBarrel2;
 import TFC.Blocks.Devices.BlockBellows;
@@ -359,9 +359,9 @@ public class TFCBlocks
 		GameRegistry.registerBlock(TFCBlocks.Sapling2, TFC.Items.ItemBlocks.ItemSapling2.class, "sapling2");
 		GameRegistry.registerBlock(Block.planks, TFC.Items.ItemBlocks.ItemPlankBlock.class, "planks");
 		GameRegistry.registerBlock(TFCBlocks.Planks2, TFC.Items.ItemBlocks.ItemPlankBlock2.class, "planks2");
-		GameRegistry.registerBlock(Block.mushroomBrown, TFC.Items.ItemBlocks.ItemFoodBlock.class, "mushroom");
+		/*GameRegistry.registerBlock(Block.mushroomBrown, TFC.Items.ItemBlocks.ItemFoodBlock.class, "mushroom");
 		GameRegistry.registerBlock(Block.pumpkin, TFC.Items.ItemBlocks.ItemFoodBlock.class, "pumpkin");
-		GameRegistry.registerBlock(Block.melon, TFC.Items.ItemBlocks.ItemFoodBlock.class, "melon");
+		GameRegistry.registerBlock(Block.melon, TFC.Items.ItemBlocks.ItemFoodBlock.class, "melon");*/
 
 		GameRegistry.registerBlock(Firepit, "Firepit");
 		GameRegistry.registerBlock(Bellows, TFC.Items.ItemBlocks.ItemBellows.class, "Bellows");
