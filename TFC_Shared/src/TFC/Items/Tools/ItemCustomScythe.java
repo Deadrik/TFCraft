@@ -4,6 +4,7 @@ import java.util.List;
 
 import TFC.*;
 import TFC.API.TFCOptions;
+import TFC.API.Enums.EnumItemReach;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import cpw.mods.fml.relauncher.Side;
@@ -58,4 +59,8 @@ public class ItemCustomScythe extends ItemTerraTool
 		return true;
 	}
 
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.FAR;
+	}
 }

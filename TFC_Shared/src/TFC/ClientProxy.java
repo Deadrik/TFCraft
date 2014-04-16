@@ -21,6 +21,7 @@ import net.minecraft.client.resources.ReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.src.ModLoader;
+import net.minecraft.world.EnumGameType;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -29,6 +30,7 @@ import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Enums.EnumTree;
 import TFC.API.Util.KeyBindings;
 import TFC.Core.ColorizerFoliageTFC;
+import TFC.Core.CustomPlayerControllerMP;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Core.Util.StringUtil;
@@ -266,7 +268,11 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void onClientLogin()
 	{
-
+		if(Minecraft.getMinecraft().thePlayer.worldObj.isRemote){
+			EnumGameType gt = Minecraft.getMinecraft().thePlayer.worldObj.getWorldInfo().getGameType();
+			Minecraft.getMinecraft().playerController = new CustomPlayerControllerMP(Minecraft.getMinecraft(),Minecraft.getMinecraft().getNetHandler());
+			Minecraft.getMinecraft().playerController.setGameType(gt);
+		}
 	}
 
 	@Override

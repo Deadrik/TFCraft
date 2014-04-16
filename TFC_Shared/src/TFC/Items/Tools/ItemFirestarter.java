@@ -13,6 +13,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Util.Helper;
 import TFC.Core.TFCTabs;
@@ -148,5 +149,10 @@ public class ItemFirestarter extends ItemTerra
 			return false;
 		}
 		return false;
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.SHORT;
 	}
 }

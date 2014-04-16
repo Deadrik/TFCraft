@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import TFC.TFCItems;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Util.Helper;
 import TFC.Items.ItemTerra;
@@ -189,4 +190,8 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 		}
 	}
 
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.SHORT;
+	}
 }

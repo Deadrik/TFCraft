@@ -4,6 +4,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import TFC.Reference;
+import TFC.API.ISize;
+import TFC.API.Enums.EnumItemReach;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.Util.StringUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -18,7 +22,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class ItemCustomLeash extends ItemLeash
+public class ItemCustomLeash extends ItemLeash implements ISize
 {
 	public String textureFolder;
     public ItemCustomLeash(int par1)
@@ -101,6 +105,22 @@ public class ItemCustomLeash extends ItemLeash
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
 		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
+	}
+	@Override
+	public EnumSize getSize(ItemStack is) {
+		return EnumSize.MEDIUM;
+	}
+	@Override
+	public EnumWeight getWeight(ItemStack is) {
+		return EnumWeight.MEDIUM;
+	}
+	@Override
+	public EnumItemReach getReach(ItemStack is) {
+		return EnumItemReach.FAR;
+	}
+	@Override
+	public boolean canStack() {
+		return true;
 	}
 	
 }

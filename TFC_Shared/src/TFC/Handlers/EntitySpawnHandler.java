@@ -1,8 +1,10 @@
 package TFC.Handlers;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.EnumGameType;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -10,6 +12,7 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Containers.ContainerPlayerTFC;
+import TFC.Core.CustomPlayerControllerMP;
 import TFC.Core.TFC_Core;
 
 public class EntitySpawnHandler

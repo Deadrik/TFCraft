@@ -9,6 +9,7 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Items.ItemTerra;
@@ -62,5 +63,10 @@ public class ItemCustomSaw extends ItemCustomAxe implements ISize
 	{
 		Multimap multimap = HashMultimap.create();
 		return multimap;
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.SHORT;
 	}
 }

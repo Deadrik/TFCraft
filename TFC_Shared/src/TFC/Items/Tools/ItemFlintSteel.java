@@ -13,6 +13,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.ISize;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
@@ -136,5 +137,10 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 	public boolean canStack() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is) {
+		return EnumItemReach.SHORT;
 	}
 }
