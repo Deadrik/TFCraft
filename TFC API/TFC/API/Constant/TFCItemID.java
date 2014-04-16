@@ -504,6 +504,9 @@ public class TFCItemID {
 	public static int UnknownUnshaped			= 16780;
 
 	public static int FireBrick					= 16781;
+	
+	//Whoops
+	public static int DoorAcacia				= 16782;
 	// Plans
 	public static int PickaxeHeadPlan			= 20000;
 	public static int ShovelHeadPlan			= 20001;

@@ -33,10 +33,10 @@ public class EntityStand extends EntityLiving
 
 	@Override
 	protected void doBlockCollisions()
-    {
-		
-    }
-	
+	{
+
+	}
+
 	public EntityStand(World par1World, TEStand TE){
 		this(par1World);
 		standTE = TE;
@@ -68,7 +68,10 @@ public class EntityStand extends EntityLiving
 			setSize(0,0);
 		}
 		if(standTE == null){
-			standTE = (TEStand)worldObj.getBlockTileEntity((int)posX, (int)posY, (int)posZ);
+			TileEntity t = worldObj.getBlockTileEntity((int)posX, (int)posY, (int)posZ);
+			if(t instanceof TEStand){
+				standTE = (TEStand)t;
+			}
 			if(standTE == null){
 				setDead();
 			}

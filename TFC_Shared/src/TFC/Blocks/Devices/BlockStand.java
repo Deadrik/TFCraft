@@ -143,7 +143,7 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
-		return true;
+		return par1World.isBlockOpaqueCube(par2, par3-1, par4) && par1World.isAirBlock(par2, par3, par4)  && par1World.isAirBlock(par2, par3+1, par4);
 	}
 
 	@Override
