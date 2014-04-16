@@ -579,6 +579,8 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(Block.workbench,1),
 				new Object[]{"PP","PP", Character.valueOf('P'),new ItemStack(TFCBlocks.Planks2,1,32767)});
+		GameRegistry.addRecipe(new ItemStack(Item.boat,1),
+				new Object[]{"P P","PPP", Character.valueOf('P'),new ItemStack(TFCBlocks.Planks2,1,32767)});
 
 		RegisterToolRecipes();
 		registerFoodRecipes();
