@@ -3,6 +3,7 @@ package TFC.Food;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -14,6 +15,7 @@ import TFC.API.IFood;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
+import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -174,6 +176,24 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		}
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		TFC_Core.setPlayerFoodStats(player, foodstats);
+		return is;
+	}
+
+	public ItemStack onConsumedByEntity(ItemStack is, World world, EntityLivingBase entity)
+	{
+		if(entity instanceof IAnimal){
+			if(!world.isRemote)
+			{
+				ItemFoodTFC item = (ItemFoodTFC) is.getItem();
+				float weight = item.getFoodWeight(is);
+				float decay = Math.max(item.getFoodDecay(is), 0);
+				float eatAmount = Math.min(weight - decay, 5f);
+				if(FoodStatsTFC.reduceFood(is, eatAmount)){
+					is.stackSize = 0;
+				}
+			}
+			world.playSoundAtEntity(entity, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+		}
 		return is;
 	}
 
