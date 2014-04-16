@@ -10,9 +10,9 @@ public class ColorizerGrassTFC
         grassBuffer = par0ArrayOfInteger;
     }
 
-    /**
+    /*
      * Gets grass color from temperature and humidity. Args: temperature, humidity
-     */
+     *
     public static int getGrassColor(double par0, double par2)
     {
     	//ratio of 75:129:40 is good for R:G:B, which = 0.58 : 1 : 0.33; 0.58 * 0.58 ~= 0.33 for warmish temperatures
@@ -30,18 +30,18 @@ public class ColorizerGrassTFC
         int var5 = (int)(blue * 255.0D / (1.8D+par2));
         int var7 = (int)( 255.0D / (1.8D));
         return (var4 << 16 )| (var7 << 8 )| var5;
-    }
+    }*/
     
-    /*
+    /**
      * Gets grass color from temperature and humidity. Args: temperature, humidity
-     *
+     */
     public static int getGrassColor(double par0, double par2)
     {
         par2 *= par0;
         int var4 = (int)((1.0D - par0) * 255.0D);
         int var5 = (int)((1.0D - par2) * 255.0D);
         return grassBuffer[var5 << 8 | var4];
-    }*/
+    }
     
     public static int getGrassDead()
     {

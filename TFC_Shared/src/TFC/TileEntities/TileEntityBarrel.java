@@ -384,8 +384,9 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		if((i == Type || Type == 0 || (Type == 13 && i == 12))&& !sealed && liquidLevel < 256)
 		{
 			liquidLevel = Math.min(liquidLevel+32, 256);
-			if(Type == 0)
+			if(Type == 0 || Type == 13){
 				Type = i==12 && Type == 13?14:i;
+			}
 			updateGui();
 			return true;
 		}

@@ -1019,7 +1019,8 @@ public class TFC_Core
 					continue;
 				}
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor);
-				TFC_ItemHeat.HandleItemHeat(is);
+				if(is != null)
+					TFC_ItemHeat.HandleItemHeat(is);
 			}
 			iinv[i] = is;
 		}

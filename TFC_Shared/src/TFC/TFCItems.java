@@ -774,6 +774,7 @@ public class TFCItems
 
 	public static Item RedSteelBucketEmpty;
 	public static Item RedSteelBucketWater;
+	public static Item RedSteelBucketSaltWater;
 
 	public static Item BlueSteelBucketEmpty;
 	public static Item BlueSteelBucketLava;
@@ -1443,7 +1444,8 @@ public class TFCItems
 		SinglePlank = new ItemPlank(TFCItemID.SinglePlank).setUnlocalizedName("SinglePlank");
 
 		RedSteelBucketEmpty = (new ItemCustomRedSteelBucket(TFCItemID.RedSteelBucketEmpty, 0)).setUnlocalizedName("Red Steel Bucket Empty");
-		RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFCItemID.RedSteelBucketWater, Block.waterMoving.blockID)).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(RedSteelBucketEmpty);
+		RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFCItemID.RedSteelBucketWater, TFCBlocks.FreshWaterFlowing.blockID)).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(RedSteelBucketEmpty);
+		RedSteelBucketSaltWater = (new ItemCustomRedSteelBucket(TFCItemID.RedSteelBucketSaltWater, Block.waterMoving.blockID)).setUnlocalizedName("Red Steel Bucket Salt Water").setContainerItem(RedSteelBucketEmpty);
 
 		BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(TFCItemID.BlueSteelBucketEmpty, 0)).setUnlocalizedName("Blue Steel Bucket Empty");
 		BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFCItemID.BlueSteelBucketLava, Block.lavaMoving.blockID)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);
