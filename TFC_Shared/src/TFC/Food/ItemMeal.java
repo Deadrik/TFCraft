@@ -10,6 +10,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.API.IFood;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -20,7 +21,7 @@ import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
-public class ItemMeal extends ItemTerra
+public class ItemMeal extends ItemTerra implements IFood
 {
 	PotionEffect foodEffect;
 	private boolean alwaysEdible = false;
@@ -207,5 +208,29 @@ public class ItemMeal extends ItemTerra
 	public EnumWeight getWeight(ItemStack is) 
 	{
 		return EnumWeight.MEDIUM;
+	}
+
+	@Override
+	public EnumFoodGroup getFoodGroup() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getFoodID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getDecayRate() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) 
+	{
+		return null;
 	}
 }
