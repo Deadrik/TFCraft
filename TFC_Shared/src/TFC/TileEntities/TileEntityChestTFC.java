@@ -1,15 +1,21 @@
 package TFC.TileEntities;
 
+import java.util.Iterator;
+import java.util.List;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
+import TFC.Containers.ContainerChestTFC;
 import TFC.Core.TFC_Core;
 public class TileEntityChestTFC extends TileEntityChest implements IInventory
 {
@@ -181,17 +187,35 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		super.updateEntity();
+		//super.updateEntity();
 
 		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 
 		this.checkForAdjacentChests();
 
-		if (++this.ticksSinceSync % 20 * 4 == 0)
-		{
+        if (!this.worldObj.isRemote && this.numUsingPlayers != 0 && (this.ticksSinceSync + this.xCoord + this.yCoord + this.zCoord) % 200 == 0)
+        {
+            this.numUsingPlayers = 0;
+            float f = 5.0F;
+            List list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getAABBPool().getAABB((double)((float)this.xCoord - f), (double)((float)this.yCoord - f), (double)((float)this.zCoord - f), (double)((float)(this.xCoord + 1) + f), (double)((float)(this.yCoord + 1) + f), (double)((float)(this.zCoord + 1) + f)));
+            Iterator iterator = list.iterator();
 
-		}
+            while (iterator.hasNext())
+            {
+                EntityPlayer entityplayer = (EntityPlayer)iterator.next();
 
+                if (entityplayer.openContainer instanceof ContainerChestTFC)
+                {
+                    IInventory iinventory = ((ContainerChestTFC)entityplayer.openContainer).getLowerChestInventory();
+
+                    if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest)iinventory).isPartOfLargeChest(this))
+                    {
+                        ++this.numUsingPlayers;
+                    }
+                }
+            }
+        }
+		
 		this.prevLidAngle = this.lidAngle;
 		float var1 = 0.1F;
 		double var4;
