@@ -1,5 +1,7 @@
 package TFC.TileEntities;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -7,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.AxisAlignedBB;
 import TFC.Core.TFC_Core;
 public class TileEntityChestTFC extends TileEntityChest implements IInventory
 {
@@ -240,6 +243,14 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 		}
 	}
 
+	@Override
+    @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getRenderBoundingBox()
+    {
+        AxisAlignedBB bb = AxisAlignedBB.getAABBPool().getAABB(xCoord - 1, yCoord, zCoord - 1, xCoord + 2, yCoord + 2, zCoord + 2);
+        return bb;
+    }	
+	
 	@Override
 	public boolean receiveClientEvent(int par1, int par2)
 	{
