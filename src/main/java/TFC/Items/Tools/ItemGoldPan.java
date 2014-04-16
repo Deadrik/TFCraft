@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Util.Helper;
 import TFC.Chunkdata.ChunkData;
@@ -187,5 +188,10 @@ public class ItemGoldPan extends ItemTerra
 			}
 		}
 		return is;
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.SHORT;
 	}
 }

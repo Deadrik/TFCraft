@@ -11,6 +11,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.TFCOptions;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Tools.IToolChisel;
 import TFC.Blocks.BlockSlab;
@@ -375,5 +376,10 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 	{
 		Multimap multimap = HashMultimap.create();
 		return multimap;
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.SHORT;
 	}
 }

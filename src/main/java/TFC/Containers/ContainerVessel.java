@@ -87,8 +87,10 @@ public class ContainerVessel extends ContainerTFC
 				byte byte0 = nbttagcompound1.getByte("Slot");
 				if(byte0 >= 0 && byte0 < 4)
 				{
-					this.containerInv.setInventorySlotContents(byte0, ItemStack.loadItemStackFromNBT(nbttagcompound1));
-					if(this.containerInv.getStackInSlot(byte0).stackSize == 0)
+					ItemStack is = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+					if(is.stackSize >= 1)
+						this.containerInv.setInventorySlotContents(byte0, is);
+					else
 						this.containerInv.setInventorySlotContents(byte0, null);
 				}
 			}

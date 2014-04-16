@@ -3,6 +3,7 @@ package TFC.Food;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -16,6 +17,7 @@ import TFC.API.IFood;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
+import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -178,6 +180,24 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		return is;
 	}
 
+	public ItemStack onConsumedByEntity(ItemStack is, World world, EntityLivingBase entity)
+	{
+		if(entity instanceof IAnimal){
+			if(!world.isRemote)
+			{
+				ItemFoodTFC item = (ItemFoodTFC) is.getItem();
+				float weight = item.getFoodWeight(is);
+				float decay = Math.max(item.getFoodDecay(is), 0);
+				float eatAmount = Math.min(weight - decay, 5f);
+				if(FoodStatsTFC.reduceFood(is, eatAmount)){
+					is.stackSize = 0;
+				}
+			}
+			world.playSoundAtEntity(entity, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+		}
+		return is;
+	}
+
 	public boolean isHot(ItemStack is)
 	{
 		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) *0.8)
@@ -241,8 +261,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getDisplayDamage(ItemStack stack)
 	{
-		int percent = (int)((getFoodDecay(stack)/getFoodWeight(stack))*100);
-		return percent > 0 ? percent < 100 ? percent : 100 : 0;
+		float decay = getFoodDecay(stack);
+		float weight = getFoodWeight(stack);
+		int percent = (int)((decay/weight)*100);
+		percent = percent > 0 ? percent < 100 ? percent : 100 : 0;
+		return percent;
 	}
 
 	@Override
@@ -254,7 +277,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getMaxDamage(ItemStack stack)
 	{
-		return (int)(getFoodWeight(stack)*10);
+		return 100;
 	}
 
 	@Override

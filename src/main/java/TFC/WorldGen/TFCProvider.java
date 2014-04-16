@@ -43,10 +43,11 @@ public class TFCProvider extends WorldProvider
 	}
 
 	@Override
-	public boolean canCoordinateBeSpawn(int par1, int par2)
+	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		Block var3 = this.worldObj.getTopBlock(par1, par2);
-		return TFC_Core.isGrass(var3);
+		int y = worldObj.getTopSolidOrLiquidBlock(x, z)-1;
+		Block b = worldObj.getBlock(x, y, z);
+		return y > 144 && TFC_Core.isGrass(b);
 	}
 
 	@Override
@@ -76,10 +77,10 @@ public class TFCProvider extends WorldProvider
 		try
 		{
 			biome = (TFCBiome) worldObj.getBiomeGenForCoordsBody(x, z);
-			if(canSnowAtTemp(x, 145, z))
+			/*if(canSnowAtTemp(x, 145, z))
 				biome.temperature = 0;
 			else
-				biome.temperature = 0.21f;
+				biome.temperature = 0.21f;*/
 		}
 		catch(Exception Ex)
 		{
@@ -91,25 +92,25 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public ChunkCoordinates getRandomizedSpawnPoint()
 	{
-		TFCWorldChunkManager var2 = (TFCWorldChunkManager) worldChunkMgr;
-		List var3 = var2.getBiomesToSpawnIn();
+		TFCWorldChunkManager chunkManager = (TFCWorldChunkManager) worldChunkMgr;
+		List var3 = chunkManager.getBiomesToSpawnIn();
 		long seed = worldObj.getWorldInfo().getSeed();
-		Random var4 = new Random(seed);
+		Random rand = new Random(seed);
 
 		ChunkPosition chunkcoordinates = null;
 		int xOffset = 0;
-		int var6 = 0;
-		int var7 = getAverageGroundLevel();
-		int var8 = 10000;
-		int startingZ = 3000 + var4.nextInt(12000);
+		int xCoord = 0;
+		int yCoord = 145;
+		int zCoord = 10000;
+		int startingZ = 3000 + rand.nextInt(12000);
 
 		while(chunkcoordinates == null)
 		{
-			chunkcoordinates = var2.findBiomePosition(xOffset, -startingZ, 64, var3, var4);
+			chunkcoordinates = chunkManager.findBiomePosition(xOffset, -startingZ, 64, var3, rand);
 			if (chunkcoordinates != null)
 			{
-				var6 = chunkcoordinates.chunkPosX;
-				var8 = chunkcoordinates.chunkPosZ;
+				xCoord = chunkcoordinates.chunkPosX;
+				zCoord = chunkcoordinates.chunkPosZ;
 			}
 			else
 			{
@@ -119,18 +120,18 @@ public class TFCProvider extends WorldProvider
 		}
 
 		int var9 = 0;
-		while (!canCoordinateBeSpawn(var6, var8))
+		while (!canCoordinateBeSpawn(xCoord, zCoord))
 		{
-			var6 += var4.nextInt(64) - var4.nextInt(64);
-			var8 += var4.nextInt(64) - var4.nextInt(64);
+			xCoord += rand.nextInt(64) - rand.nextInt(64);
+			zCoord += rand.nextInt(64) - rand.nextInt(64);
 			++var9;
 			if (var9 == 1000)
 				break;
 		}
 
 		WorldInfo info = worldObj.getWorldInfo();
-		info.setSpawnPosition(var6, this.worldObj.getHeightValue(var6, var8), var8);
-		return new ChunkCoordinates(var6, this.worldObj.getHeightValue(var6, var8), var8);
+		info.setSpawnPosition(xCoord, worldObj.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
+		return new ChunkCoordinates(xCoord, worldObj.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
 	}
 
 	@Override

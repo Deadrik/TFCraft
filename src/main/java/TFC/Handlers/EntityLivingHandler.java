@@ -51,6 +51,7 @@ public class EntityLivingHandler
 				/*if(diff > 0)
 					player.heal(diff);*/
 			}
+
 			if(!player.worldObj.isRemote)
 			{
 				//Tick Decay
@@ -73,8 +74,10 @@ public class EntityLivingHandler
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
 					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,20,1));
 				else if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.5f)
+				{
 					if(player.isSprinting())
 						player.setSprinting(false);
+				}
 
 				//Handle Spawn Protection
 				NBTTagCompound nbt = player.getEntityData();
@@ -83,12 +86,14 @@ public class EntityLivingHandler
 				{
 					//Add protection time to the chunks
 					for(int i = -2; i < 3; i++)
+					{
 						for(int k = -2; k < 3; k++)
 						{
 							int lastChunkX = (int)player.posX >> 4;
 							int lastChunkZ = (int)player.posZ >> 4;
 							ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFCOptions.protectionGain);
 						}
+					}
 
 					spawnProtectionTimer += TFC_Time.hourLength;
 				}
@@ -96,6 +101,7 @@ public class EntityLivingHandler
 			else
 			{
 				PlayerInfo playerclient = PlayerManagerTFC.getInstance().getClientPlayer();
+				//Minecraft.getMinecraft().playerController.getBlockReachDistance()
 				if(player.inventory.getCurrentItem() != null)
 				{
 					if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)
@@ -107,7 +113,8 @@ public class EntityLivingHandler
 					{
 						playerclient.guishowFoodRestoreAmount = true;
 						playerclient.guiFoodRestoreAmount = ((ItemFoodTFC)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
-					} else
+					}
+					else
 						playerclient.guishowFoodRestoreAmount = false;
 				}
 				else
@@ -125,12 +132,15 @@ public class EntityLivingHandler
 		boolean foundJav = false;
 		quiver = player.inventory.armorItemInSlot(0);
 		for(int i = 0; i < 9; i++)
+		{
 			if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemJavelin)
 				foundJav = true;
+		}
 
 		if(quiver != null)
 		{
-			if(item.getItem() instanceof ItemArrow){
+			if(item.getItem() instanceof ItemArrow)
+			{
 				ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, item);
 				if(is != null)
 					event.item.setEntityItemStack(is);
@@ -157,25 +167,21 @@ public class EntityLivingHandler
 				}
 			}
 		}
-		if(item.getItem() instanceof ItemLooseRock){
+
+		if(item.getItem() instanceof ItemLooseRock)
 			player.triggerAchievement(TFC_Achievements.achLooseRock);
-		}
-		else if(item.getItem()  instanceof ItemOreSmall){
+		else if(item.getItem() instanceof ItemOreSmall)
 			player.triggerAchievement(TFC_Achievements.achSmallOre);
-		}
-		else if(item.getItem().equals(TFCItems.GemDiamond)){
+		else if(item.getItem().equals(TFCItems.GemDiamond))
 			player.triggerAchievement(TFC_Achievements.achDiamond);
-		}
-		else if(item.getItem().equals(TFCItems.Onion) && TFCOptions.iDontLikeOnions){
+		else if(item.getItem().equals(TFCItems.Onion) && TFCOptions.iDontLikeOnions)
 			player.triggerAchievement(TFC_Achievements.achRutabaga);
-		}
-		else if(item.getItem().equals(TFCItems.OreChunk) && (item.getItemDamage() == 11 || item.getItemDamage()== 46 || item.getItemDamage() == 60)){
+		else if(item.getItem().equals(TFCItems.OreChunk) && (item.getItemDamage() == 11 || item.getItemDamage()== 46 || item.getItemDamage() == 60))
 			player.triggerAchievement(TFC_Achievements.achLimonite);
-		}
 	}
 
 	@SubscribeEvent
-	public void onEntityDeath(LivingDeathEvent event) 
+	public void onEntityDeath(LivingDeathEvent event)
 	{
 		if(event.entityLiving instanceof EntityPlayer)
 		{

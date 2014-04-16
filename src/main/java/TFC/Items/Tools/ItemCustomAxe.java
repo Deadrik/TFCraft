@@ -17,6 +17,7 @@ import TFC.API.ICausesDamage;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumDamageType;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
@@ -106,5 +107,11 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 		Multimap multimap = HashMultimap.create();
 		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", this.toolDamage, 0));
 		return multimap;
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is)
+	{
+		return EnumItemReach.MEDIUM;
 	}
 }

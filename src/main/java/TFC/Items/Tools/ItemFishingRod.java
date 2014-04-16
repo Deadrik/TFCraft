@@ -7,6 +7,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import TFC.API.Enums.EnumItemReach;
 import TFC.Entities.EntityFishHookTFC;
 import TFC.Items.ItemTerra;
 import cpw.mods.fml.relauncher.Side;
@@ -83,5 +84,10 @@ public class ItemFishingRod extends ItemTerra
 	public IIcon func_94597_g()
 	{
 		return this.theIcon;
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.FAR;
 	}
 }

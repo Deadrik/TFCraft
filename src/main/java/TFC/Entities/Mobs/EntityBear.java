@@ -78,6 +78,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		tasks.addTask (1, new EntityAISwimming (this));
 		tasks.addTask (4, new EntityAIAttackOnCollide (this, moveSpeed * 1.5F, true));
 		size_mod = (((rand.nextInt (4+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
+		sex = rand.nextInt(2);
 		if (getGender() == GenderEnum.MALE)
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
 		tasks.addTask (7, new EntityAIWander (this, moveSpeed));
@@ -286,8 +287,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);
 
-		this.entityDropItem(new ItemStack(TFCItems.Hide,1,(int)(ageMod*3)),0);
-		this.dropItem(Items.bone,(int) ((rand.nextInt(6)+2)*ageMod));
+		this.entityDropItem(new ItemStack(TFCItems.Hide, 1, Math.max(0, Math.min(2, (int)(ageMod * 3 - 1)))), 0);
+		this.dropItem(Items.bone, (int) ((rand.nextInt(6) + 2) * ageMod));
 	}
 
 

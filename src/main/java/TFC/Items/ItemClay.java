@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
@@ -19,7 +18,7 @@ import TFC.Core.Player.PlayerManagerTFC;
 public class ItemClay extends ItemLooseRock
 {
 
-	public ItemClay() 
+	public ItemClay()
 	{
 		super();
 		this.setCreativeTab(TFCTabs.TFCPottery);
@@ -30,7 +29,7 @@ public class ItemClay extends ItemLooseRock
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World par2World, EntityPlayer entityplayer)
 	{
-		System.out.println(itemstack.stackSize+", "+itemstack.getItem().getClass() +": "+Items.clay_ball.getClass());
+		//System.out.println(itemstack.stackSize+", "+itemstack.getItem().getClass() +": "+Items.clay_ball.getClass());
 		if(itemstack.stackSize >= 5)
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
@@ -68,7 +67,7 @@ public class ItemClay extends ItemLooseRock
 
 	@Override
 	public IIcon getIconFromDamage(int meta)
-	{        
+	{
 		return icons[meta];
 	}	
 

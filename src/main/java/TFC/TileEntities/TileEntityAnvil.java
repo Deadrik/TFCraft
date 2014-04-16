@@ -414,6 +414,8 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 					NBTTagCompound Tag = new NBTTagCompound();
 					Tag.setFloat("temperature", (TFC_ItemHeat.GetTemperature(anvilItemStacks[2])+TFC_ItemHeat.GetTemperature(anvilItemStacks[3]))/2);
 					result.setTagCompound(Tag);
+					if(result.stackSize <= 0)
+						result.stackSize = 1;
 					setInventorySlotContents(WELDOUT_SLOT, result);
 					setInventorySlotContents(WELD1_SLOT, null);
 					setInventorySlotContents(WELD2_SLOT, null);

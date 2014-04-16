@@ -135,7 +135,7 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
-		return true;
+		return par1World.getBlock(par2, par3-1, par4).isOpaqueCube() && par1World.isAirBlock(par2, par3, par4)  && par1World.isAirBlock(par2, par3+1, par4);
 	}
 
 	@Override
@@ -143,8 +143,8 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock
 	{
 		int j = 0;
 		String s = this.getUnlocalizedName();
-		for(int i = 0; i < ((ItemBarrels)(TFCItems.Barrel)).MetaNames.length;i++)
-			j = s.substring(s.indexOf("l",s.length()))==((ItemBarrels)(TFCItems.Barrel)).MetaNames[i]?i:0;
+		for(int i = 0; i < ((ItemBarrels)(TFCItems.Barrel)).MetaNames.length; i++)
+			j = s.substring(s.indexOf("l", s.length())) == ((ItemBarrels)(TFCItems.Barrel)).MetaNames[i] ? i : 0;
 		return new ItemStack(TFCItems.Barrel, 1, j);
 	}
 
@@ -271,7 +271,8 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5)
+	{
 		return true;
 	}
 

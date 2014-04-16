@@ -29,6 +29,7 @@ public class SlotCraftingMetal extends Slot
 		craftMatrix = iinventory;
 		valids = new ArrayList<Item>();
 	}
+
 	public SlotCraftingMetal(Container container, EntityPlayer entityplayer, IInventory iinventory, IInventory iinventory1, int i, int j, int k)
 	{
 		super(iinventory1, i, j, k);
@@ -44,7 +45,7 @@ public class SlotCraftingMetal extends Slot
 		super.onSlotChanged();
 		if (inventory.getStackInSlot(0)!=null)
 		{
-			System.out.println(getStack()+", "+PlayerManagerTFC.getInstance().getPlayerInfoFromName(thePlayer.getDisplayName()).specialCraftingType);
+			//System.out.println(getStack()+", "+PlayerManagerTFC.getInstance().getPlayerInfoFromName(thePlayer.getDisplayName()).specialCraftingType);
 			if (valids.contains(getStack().getItem()) && container != null &&
 					getStack().getItemDamage() == PlayerManagerTFC.getInstance().getPlayerInfoFromName(thePlayer.getDisplayName()).specialCraftingType.getItemDamage())
 			{
@@ -64,11 +65,15 @@ public class SlotCraftingMetal extends Slot
 	public void setValidity(Item item,boolean TF)
 	{
 		if(TF)
+		{
 			if (!valids.contains(item))
 				valids.add(item);
+		}
 		else
+		{
 			if (valids.contains(item))
 				valids.remove(item);
+		}
 	}
 
 	@Override

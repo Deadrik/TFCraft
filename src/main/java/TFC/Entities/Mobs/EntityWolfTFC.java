@@ -11,6 +11,7 @@ import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
@@ -24,6 +25,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
+import TFC.Food.ItemFoodTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -321,9 +323,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);
-
-		this.entityDropItem(new ItemStack(TFCItems.Hide,1,(int)(size_mod*ageMod*0.9)),0);
-		this.dropItem(Items.bone, (int)((rand.nextInt(3)+1)*ageMod));
+		this.entityDropItem(new ItemStack(TFCItems.Hide, 1, Math.max(0, Math.min(2, (int)(size_mod * ageMod * 0.9)))), 0);
+		this.dropItem(Items.bone, (int)((rand.nextInt(3) + 1) * ageMod));
 	}
 
 	@Override
@@ -443,11 +444,42 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		if(!worldObj.isRemote){
-			par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
-			if(getGender()==GenderEnum.FEMALE && pregnant){
-				par1EntityPlayer.addChatMessage(new ChatComponentText("Pregnant"));
+		if(!worldObj.isRemote)
+		{
+			if(par1EntityPlayer.getHeldItem()!=null)
+			{
+				Item i = par1EntityPlayer.getHeldItem().getItem();
+				Item item = par1EntityPlayer.getHeldItem().getItem();
+				if(i==(TFCItems.muttonRaw)||
+						i==(TFCItems.muttonCooked)||
+						i==(TFCItems.horseMeatRaw)||
+						i==(TFCItems.horseMeatCooked)||
+						i==(TFCItems.venisonRaw)||
+						i==(TFCItems.venisonCooked)||
+						i==(Items.porkchop)||
+						i==(Items.cooked_porkchop)||
+						i==(Items.beef)||
+						i==(Items.cooked_beef)||
+						i==(Items.chicken)||
+						i==(Items.cooked_chicken)||
+						i==(Items.fish)||
+						i==(Items.cooked_fished)||
+						i==(TFCItems.CalamariRaw)||
+						i==(TFCItems.CalamariCooked))
+				{
+					if(item instanceof ItemFoodTFC && hunger <= 160000)
+					{
+						par1EntityPlayer.inventory.setItemStack(((ItemFoodTFC)item).onConsumedByEntity(par1EntityPlayer.getHeldItem(), worldObj, this));
+						this.hunger += 24000;
+						return true;
+					}
+				}
 			}
+			par1EntityPlayer.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
+
+			if(getGender() == GenderEnum.FEMALE && pregnant)
+				par1EntityPlayer.addChatMessage(new ChatComponentText("Pregnant"));
+
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
 		return super.interact(par1EntityPlayer);
@@ -512,15 +544,20 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	}
 
 	@Override
-	public int GetCrushArmor() {
+	public int GetCrushArmor()
+	{
 		return 0;
 	}
+
 	@Override
-	public int GetSlashArmor() {
+	public int GetSlashArmor()
+	{
 		return 0;
 	}
+
 	@Override
-	public int GetPierceArmor() {
+	public int GetPierceArmor()
+	{
 		return -335;
 	}
 }

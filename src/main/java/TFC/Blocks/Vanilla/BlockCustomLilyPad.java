@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLilyPad;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
@@ -40,9 +41,7 @@ public class BlockCustomLilyPad extends BlockLilyPad
 	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
 	{
 		if (par7Entity == null || !(par7Entity instanceof EntityBoat))
-		{
 			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
-		}
 	}
 
 	/**
@@ -61,7 +60,6 @@ public class BlockCustomLilyPad extends BlockLilyPad
 	}
 
 	@SideOnly(Side.CLIENT)
-
 	/**
 	 * Returns the color this block should be rendered. Used by leaves.
 	 */
@@ -70,6 +68,17 @@ public class BlockCustomLilyPad extends BlockLilyPad
 		return 2129968;
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	/**
+	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This
+	 * is the only chance you get to register icons.
+	 */
+	public void registerBlockIcons(IIconRegister par1IconRegister)
+	{
+		this.blockIcon = par1IconRegister.registerIcon(this.getTextureName());
+	}
+	
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called

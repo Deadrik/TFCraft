@@ -146,7 +146,6 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 							{
 								double var45 = (var44 + par4 * 16 + 0.5D - zCoord) / var53;
 								int index = (var41 * 16 + var44) * 256 + var37;
-								boolean isGrass = false;
 								if (var59 * var59 + var45 * var45 < 1.0D)
 								{
 									for (int var49 = var37 - 1; var49 >= var55; --var49)
@@ -155,9 +154,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 										if ((var59 * var59 + var45 * var45) * this.field_35627_a[var49] + var50 * var50 / 6.0D < 1.0D)
 										{
 											block = blockArray[index];
-											if (TFC_Core.isGrass(block))
-												isGrass = true;
-											if (TFC_Core.isRawStone(block) || TFC_Core.isSoil(block))
+											if (TFC_Core.isGround(block))
 											{
 												if (var49 < 10)
 													blockArray[index] = Blocks.lava;
@@ -184,7 +181,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 	@Override
 	protected void recursiveGenerate(World par1World, int chunkX, int chunkZ, int par4, int par5, Block[] par6)
 	{
-		if (this.rand.nextInt(50) == 0)
+		if (this.rand.nextInt(100) == 0)
 		{
 			double startX = chunkX * 16 + this.rand.nextInt(16);
 			double startY = this.rand.nextInt(variability) + height;

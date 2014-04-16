@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.ISize;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
@@ -28,7 +30,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
 		{
@@ -37,7 +39,8 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 
 			if(side == 1 && world.getBlock(x, y, z).isNormalCube() && world.getBlock(x, y, z).isOpaqueCube() && 
 					world.getBlock(x, y, z).getMaterial() != Material.wood && world.getBlock(x, y, z).getMaterial() != Material.cloth &&
-					world.isAirBlock(x, y+1, z) && world.getBlock(x, y, z) != TFCBlocks.Charcoal)
+					world.isAirBlock(x, y + 1, z) && world.getBlock(x, y, z) != TFCBlocks.Charcoal &&
+					world.getBlock(x, y, z) != Blocks.coal_block)
 			{
 
 				List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y+1, z, x+1, y+2, z+1));
@@ -79,7 +82,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 				}
 				return true;
 			}
-			else if(world.getBlock(x, y, z) == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6)
+			else if((world.getBlock(x, y, z) == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6) || world.getBlock(x, y, z) == Blocks.coal_block)
 			{
 				if(world.getBlock(x, y-1, z).getMaterial() == Material.rock && 
 						world.getBlock(x+1, y, z).getMaterial() == Material.rock && world.getBlock(x-1, y, z).getMaterial() == Material.rock && 
@@ -123,5 +126,11 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 	public boolean canStack()
 	{
 		return false;
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is)
+	{
+		return EnumItemReach.SHORT;
 	}
 }

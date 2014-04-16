@@ -16,6 +16,7 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumAmmo;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
@@ -197,5 +198,10 @@ public class ItemCustomBow extends ItemBow implements ISize
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{
 		return getIcon(stack, renderPass);
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is) {
+		return EnumItemReach.SHORT;
 	}
 }

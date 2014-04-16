@@ -139,8 +139,7 @@ public class EntityDamageHandler
 				float crushMult = getDamageReduction(crushRating);
 				//4. Reduce incoming damage
 				EnumDamageType damageType = EnumDamageType.GENERIC;
-				damage = processDamageSource(source, damage, pierceMult,
-						slashMult, crushMult, damageType);
+				damage = processDamageSource(source, damage, pierceMult, slashMult, crushMult, damageType);
 
 				//a. If the attack hits an unprotected head, it does 75% more damage
 				//b. If the attack hits unprotected feet, it applies a slow to the player
@@ -160,7 +159,8 @@ public class EntityDamageHandler
 
 	private float processDamageSource(DamageSource source, float damage,
 			float pierceMult, float slashMult, float crushMult,
-			EnumDamageType damageType) {
+			EnumDamageType damageType)
+	{
 		//4.1 Determine the source of the damage and get the appropriate Damage Type
 		if(source.getSourceOfDamage() instanceof EntityPlayer)
 		{

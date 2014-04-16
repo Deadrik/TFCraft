@@ -66,6 +66,7 @@ import TFC.Items.ItemTFCArmor;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemTuyere;
 import TFC.Items.ItemUnfinishedArmor;
+import TFC.Items.ItemBlocks.ItemCustomLilyPad;
 import TFC.Items.ItemBlocks.ItemWoodDoor;
 import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.Items.Pottery.ItemPotteryJug;
@@ -164,7 +165,6 @@ public class TFCItems
 	public static Item SterlingSilverIngot2x;
 	public static Item TinIngot2x;
 	public static Item ZincIngot2x;
-
 
 	public static Item IgInShovel;
 	public static Item IgInAxe;
@@ -774,6 +774,7 @@ public class TFCItems
 
 	public static Item RedSteelBucketEmpty;
 	public static Item RedSteelBucketWater;
+	public static Item RedSteelBucketSaltWater;
 
 	public static Item BlueSteelBucketEmpty;
 	public static Item BlueSteelBucketLava;
@@ -899,6 +900,8 @@ public class TFCItems
 	public static Item CloudberryLeaf;
 	public static Item Fertilizer;
 
+	public static Item LilyPad;
+
 	/**
 	 * Item Uses Setup
 	 * */
@@ -995,6 +998,7 @@ public class TFCItems
 //		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.tallgrass), "tallgrass", (new ItemColored(Blocks.tallgrass, true)).func_150943_a(new String[] {"shrub", "grass", "fern"}));
 //		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.vine), "vine", new ItemColored(Blocks.vine, false));
 
+		LilyPad = new ItemCustomLilyPad(Blocks.waterlily);
 		minecartCrate = new ItemCustomMinecart(1).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 		GoldPan = new ItemGoldPan().setUnlocalizedName("GoldPan");
 		SluiceItem = new ItemSluice().setFolder("devices/").setUnlocalizedName("SluiceItem").setCreativeTab(TFCTabs.TFCDevices);
@@ -1435,7 +1439,8 @@ public class TFCItems
 		SinglePlank = new ItemPlank().setUnlocalizedName("SinglePlank");
 
 		RedSteelBucketEmpty = (new ItemCustomRedSteelBucket(Blocks.air)).setUnlocalizedName("Red Steel Bucket Empty");
-		RedSteelBucketWater = (new ItemCustomRedSteelBucket(Blocks.flowing_water)).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(RedSteelBucketEmpty);
+		RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFCBlocks.FreshWaterFlowing)).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(RedSteelBucketEmpty);
+		RedSteelBucketSaltWater = (new ItemCustomRedSteelBucket(Blocks.flowing_water)).setUnlocalizedName("Red Steel Bucket Salt Water").setContainerItem(RedSteelBucketEmpty);
 
 		BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(Blocks.air)).setUnlocalizedName("Blue Steel Bucket Empty");
 		BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(Blocks.flowing_lava)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);

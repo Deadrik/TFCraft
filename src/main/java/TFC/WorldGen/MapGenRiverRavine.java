@@ -17,7 +17,7 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, Block[] idsBig, byte[] metaBig)
 	{
 		metaArray = metaBig;
-		this.range = 16;
+		this.range = 12;
 		super.generate(par1IChunkProvider, par2World, par3, par4, idsBig);
 	}
 
@@ -191,7 +191,7 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 	@Override
 	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, Block[] par6)
 	{
-		if (this.rand.nextInt(400) == 0)
+		if (this.rand.nextInt(882) == 0)
 		{
 			range = 32;
 			double var7 = par2 * 16 + this.rand.nextInt(16);

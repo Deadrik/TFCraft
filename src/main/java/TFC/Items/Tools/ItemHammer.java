@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.Core.TFC_Achievements;
 import TFC.TileEntities.TileEntityAnvil;
@@ -82,5 +83,11 @@ public class ItemHammer extends ItemTerraTool implements ICausesDamage
 		Multimap multimap = HashMultimap.create();
 		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
 		return multimap;
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is)
+	{
+		return EnumItemReach.MEDIUM;
 	}
 }

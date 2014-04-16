@@ -286,11 +286,11 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);
-		
-		this.entityDropItem(new ItemStack(TFCItems.Hide,1,(int)(ageMod*3)),0);
-		this.dropItem(Items.bone,(int) ((rand.nextInt(6)+3)*ageMod));
 
-		float foodWeight = ageMod*(this.size_mod * 4000);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		this.entityDropItem(new ItemStack(TFCItems.Hide, 1, Math.max(0, Math.min(2, (int)(ageMod * 3 - 1)))), 0);
+		this.dropItem(Items.bone, (int) ((rand.nextInt(6) + 3) * ageMod));
+
+		float foodWeight = ageMod * (this.size_mod * 4000);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
 		TFC_Core.animalDropMeat(this, Items.beef, foodWeight);
 	}

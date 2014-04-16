@@ -2,7 +2,9 @@ package TFC.Items;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import TFC.TFCItems;
 import TFC.API.ISmeltable;
@@ -29,9 +31,13 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 		arraylist.add(is.getItemDamage()+"%");
 	}
 
-	public void addCreativeItems(java.util.ArrayList list)
+	@Override
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		list.add(new ItemStack(this));
+		list.add(new ItemStack(this, 1, 100));
+		list.add(new ItemStack(this, 1, 200));
+		list.add(new ItemStack(this, 1, 300));
+		list.add(new ItemStack(this, 1, 400));
 	}
 
 	@Override

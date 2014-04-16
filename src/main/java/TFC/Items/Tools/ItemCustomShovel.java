@@ -5,9 +5,10 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import TFC.Reference;
 import TFC.TFCBlocks;
-import TFC.Core.TFC_Textures;
+import TFC.API.Enums.EnumItemReach;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -53,5 +54,11 @@ public class ItemCustomShovel extends ItemTerraTool
 		name = name.replace("Sed ", "");
 		name = name.replace("MM ", "");
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + name);
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is)
+	{
+		return EnumItemReach.FAR;
 	}
 }

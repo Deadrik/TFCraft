@@ -14,6 +14,7 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
@@ -112,7 +113,15 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.setAge((int) TFC_Time.getTotalDays());
 	}
 
-
+	@Override
+	/**
+     * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
+     * the animal type)
+     */
+    public boolean isBreedingItem(ItemStack par1ItemStack)
+    {
+        return false;
+    }
 
 	@Override
 	protected void entityInit()

@@ -1028,7 +1028,8 @@ public class TFC_Core
 				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor);
-				TFC_ItemHeat.HandleItemHeat(is);
+				if(is != null)
+					TFC_ItemHeat.HandleItemHeat(is);
 			}
 			iinv[i] = is;
 		}
@@ -1100,7 +1101,7 @@ public class TFC_Core
 			}
 			else
 			{
-				float d = ((decay * Global.FOOD_DECAY_RATE) / 24) * (thisDecayRate * environmentalDecay) * protMult;
+				float d = (((decay * Global.FOOD_DECAY_RATE) / 24) * (thisDecayRate * environmentalDecay) * protMult)*TFCOptions.decayMultiplier;
 				decay += d;
 			}
 			nbt.setInteger("decayTimer", nbt.getInteger("decayTimer") + 1);

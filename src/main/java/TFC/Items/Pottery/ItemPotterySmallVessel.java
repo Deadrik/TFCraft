@@ -300,19 +300,22 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					if(byte0 >= 0 && byte0 < 4)
 					{
 						ItemStack itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-						if(itemstack.getItem() instanceof ItemFoodTFC)
+						if(itemstack.stackSize > 0)
 						{
-							float decay = itemstack.getTagCompound().getFloat("foodDecay");
-							float weight = itemstack.getTagCompound().getFloat("foodWeight");
+							if(itemstack.getItem() instanceof ItemFoodTFC)
+							{
+								float decay = itemstack.getTagCompound().getFloat("foodDecay");
+								float weight = itemstack.getTagCompound().getFloat("foodWeight");
 
-							String ds = " " +EnumChatFormatting.DARK_GRAY + Helper.roundNumber(decay/weight*100, 10)+"%";
-							if (decay <= 0)
-								ds = "";
+								String ds = " " +EnumChatFormatting.DARK_GRAY + Helper.roundNumber(decay/weight*100, 10)+"%";
+								if (decay <= 0)
+									ds = "";
 
-							arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.getItem().getItemStackDisplayName(itemstack) + " " + EnumChatFormatting.WHITE+weight+"oz" + ds);
+								arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.getItem().getItemStackDisplayName(itemstack) + " " + EnumChatFormatting.WHITE+weight+"oz" + ds);
+							}
+							else
+								arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.stackSize + "x " + itemstack.getItem().getItemStackDisplayName(itemstack));
 						}
-						else
-							arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.stackSize + "x " + itemstack.getItem().getItemStackDisplayName(itemstack));
 					}
 				}
 			}

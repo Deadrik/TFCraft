@@ -150,7 +150,8 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		if (hunger > 0)
 			hunger--;
 
-		if(super.isInLove()){
+		if(super.isInLove())
+		{
 			super.resetInLove();;
 			setInLove(true);
 		}
@@ -165,7 +166,8 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		{
 			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
-				for(int i = 0; i < 8 + rand.nextInt(5);i++){
+				for(int i = 0; i < 8 + rand.nextInt(5);i++)
+				{
 					EntityPigTFC baby = (EntityPigTFC) createChildTFC(this);
 					baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
 					baby.rotationYawHead = baby.rotationYaw;
@@ -302,10 +304,10 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	{
 		float ageMod = TFC_Core.getPercentGrown(this);
 
-		this.entityDropItem(new ItemStack(TFCItems.Hide,1,(int)(ageMod*size_mod)),0);
-		this.dropItem(Items.bone, (int) ((rand.nextInt(4)+2)*ageMod));
+		this.entityDropItem(new ItemStack(TFCItems.Hide, 1, Math.max(0, Math.min(2, (int)(ageMod * size_mod)))), 0);
+		this.dropItem(Items.bone, (int) ((rand.nextInt(4) + 2) * ageMod));
 
-		float foodWeight = ageMod*(this.size_mod * 2400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
+		float foodWeight = ageMod * (this.size_mod * 2400);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 		TFC_Core.animalDropMeat(this, Items.porkchop, foodWeight);
 	}
 

@@ -12,10 +12,16 @@ import net.minecraft.item.ItemLead;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.Reference;
+import TFC.TFCBlocks;
+import TFC.API.ISize;
+import TFC.API.Enums.EnumItemReach;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 
-public class ItemCustomLeash extends ItemLead
+public class ItemCustomLeash extends ItemLead implements ISize
 {
 	public String textureFolder;
 	public ItemCustomLeash()
@@ -30,8 +36,8 @@ public class ItemCustomLeash extends ItemLead
 	 */
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
 	{
-		Block i1 = par3World.getBlock(par4, par5, par6);
-		if (i1 != null && i1.getRenderType() == 11)
+		Block b = par3World.getBlock(par4, par5, par6);
+		if (TFCBlocks.isBlockAFence(b))
 		{
 			if (par3World.isRemote)
 			{
@@ -49,7 +55,6 @@ public class ItemCustomLeash extends ItemLead
 		}
 	}
 
-
 	public static boolean func_135066_a(EntityPlayer par0EntityPlayer, World par1World, int par2, int par3, int par4)
 	{
 		EntityLeashKnot entityleashknot = EntityLeashKnot.getKnotForBlock(par1World, par2, par3, par4);
@@ -60,31 +65,33 @@ public class ItemCustomLeash extends ItemLead
 		if (list != null)
 		{
 			Iterator iterator = list.iterator();
-
 			while (iterator.hasNext())
 			{
 				EntityLiving entityliving = (EntityLiving)iterator.next();
-
 				if (entityliving.getLeashed() && entityliving.getLeashedToEntity() == par0EntityPlayer)
 				{
 					if (entityleashknot == null)
-					{
 						entityleashknot = EntityLeashKnot.func_110129_a(par1World, par2, par3, par4);
-					}
-
 					entityliving.setLeashedToEntity(entityleashknot, true);
 					flag = true;
 				}
 			}
 		}
-
 		return flag;
 	}
 
 	@Override
 	public IIcon getIconFromDamage(int meta)
-	{        
+	{
 		return this.itemIcon;
+	}
+
+	@Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
+	{
+		//Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
+		ItemTerra.addSizeInformation(is, arraylist);
+		ItemTerra.addHeatInformation(is, arraylist);
 	}
 
 	@Override
@@ -93,4 +100,33 @@ public class ItemCustomLeash extends ItemLead
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
 	}
 
+	@Override
+	public String getItemStackDisplayName(ItemStack itemstack)
+	{
+		return StatCollector.translateToLocal(getUnlocalizedName(itemstack).replace(" ", ""));
+	}
+
+	@Override
+	public EnumSize getSize(ItemStack is)
+	{
+		return EnumSize.MEDIUM;
+	}
+
+	@Override
+	public EnumWeight getWeight(ItemStack is)
+	{
+		return EnumWeight.MEDIUM;
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is)
+	{
+		return EnumItemReach.FAR;
+	}
+
+	@Override
+	public boolean canStack()
+	{
+		return true;
+	}
 }

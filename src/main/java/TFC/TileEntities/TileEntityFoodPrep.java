@@ -231,26 +231,6 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 		return w;
 	}
 
-	@Override
-	public ItemStack decrStackSize(int i, int j)
-	{
-		if(storage[i] != null)
-		{
-			if(storage[i].stackSize <= j)
-			{
-				ItemStack itemstack = storage[i];
-				storage[i] = null;
-				return itemstack;
-			}
-			ItemStack itemstack1 = storage[i].splitStack(j);
-			if(storage[i].stackSize == 0)
-				storage[i] = null;
-			return itemstack1;
-		}
-		else
-			return null;
-	}
-
 	public void ejectContents()
 	{
 		float f3 = 0.05F;
@@ -272,6 +252,26 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 				storage[i] = null;
 			}
 		}
+	}
+
+	@Override
+	public ItemStack decrStackSize(int i, int j)
+	{
+		if(storage[i] != null)
+		{
+			if(storage[i].stackSize <= j)
+			{
+				ItemStack itemstack = storage[i];
+				storage[i] = null;
+				return itemstack;
+			}
+			ItemStack itemstack1 = storage[i].splitStack(j);
+			if(storage[i].stackSize == 0)
+				storage[i] = null;
+			return itemstack1;
+		}
+		else
+			return null;
 	}
 
 	public void ejectItem(int index)
@@ -423,27 +423,39 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 
 
 
+
 //TODO
+//	@Override
+//	@SideOnly(Side.CLIENT)
+//	public void handleInitPacket(DataInputStream inStream) throws IOException {
+//		readItemFromStream(inStream, 0);
+//		readItemFromStream(inStream, 1);
+//		readItemFromStream(inStream, 2);
+//		readItemFromStream(inStream, 3);
+//		int s5 = inStream.readInt();
+//		if(storage[5] == null)
+//		{storage[5] = s5 != -1 ? new ItemStack(Item.itemsList[s5]) : null;}
+//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//
+//	}
+//
 //	public Packet createUpdatePacket()
 //	{
-//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-//		DataOutputStream dos=new DataOutputStream(bos);
-//
-//		try {
-//			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-//			dos.writeInt(xCoord);
-//			dos.writeInt(yCoord);
-//			dos.writeInt(zCoord);
-//
-//			writeItemToStream(dos, 0);
-//			writeItemToStream(dos, 1);
-//			writeItemToStream(dos, 2);
-//			writeItemToStream(dos, 3);
-//			dos.writeInt(storage[5] != null ? storage[5].itemID : -1);
-//		} catch (IOException e) {
+//		if(storage[i] != null)
+//		{
+//			if(storage[i].stackSize <= j)
+//			{
+//				ItemStack itemstack = storage[i];
+//				storage[i] = null;
+//				return itemstack;
+//			}
+//			ItemStack itemstack1 = storage[i].splitStack(j);
+//			if(storage[i].stackSize == 0)
+//				storage[i] = null;
+//			return itemstack1;
 //		}
-//
-//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+//		else
+//			return null;
 //	}
 //
 //	public Packet createMealPacket()
@@ -477,33 +489,6 @@ public class TileEntityFoodPrep extends TileEntity implements IInventory
 //		actionCreate();
 //	}
 //
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public void handleInitPacket(DataInputStream inStream) throws IOException {
-//		readItemFromStream(inStream, 0);
-//		readItemFromStream(inStream, 1);
-//		readItemFromStream(inStream, 2);
-//		readItemFromStream(inStream, 3);
-//		int s5 = inStream.readInt();
-//		storage[5] = s5 != -1 ? new ItemStack(Item.itemsList[s5]) : null;
-//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-//
-//	}
-//
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public void handleInitPacket(DataInputStream inStream) throws IOException {
-//		int s1 = inStream.readInt();
-//		int s2 = inStream.readInt();
-//		int s3 = inStream.readInt();
-//		int s4 = inStream.readInt();
-//		int s5 = inStream.readInt();
-//		storage[0] = s1 != -1 ? new ItemStack(Item.getItemById(s1)) : null;
-//		storage[1] = s2 != -1 ? new ItemStack(Item.getItemById(s2)) : null;
-//		storage[2] = s3 != -1 ? new ItemStack(Item.getItemById(s3)) : null;
-//		storage[3] = s4 != -1 ? new ItemStack(Item.getItemById(s4)) : null;
-//		storage[5] = s5 != -1 ? new ItemStack(Item.getItemById(s5)) : null;
-//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 //
 //	}
 //	public void writeItemToStream(DataOutputStream outStream, int index) throws IOException 

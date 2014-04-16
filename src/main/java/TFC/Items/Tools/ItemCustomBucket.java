@@ -9,6 +9,7 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal.GenderEnum;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
@@ -112,5 +113,10 @@ public class ItemCustomBucket extends ItemTerra
 			}
 			return is;
 		}
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.SHORT;
 	}
 }

@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.ISize;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_ItemHeat;
@@ -159,6 +160,11 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 				icons[i] = registerer.registerIcon(folder+MetaNames[i]);
 			}
 		}*/
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is) {
+		return EnumItemReach.SHORT;
 	}
 
 }

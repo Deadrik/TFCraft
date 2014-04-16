@@ -11,6 +11,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.Enums.EnumDamageType;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityFoodPrep;
@@ -82,6 +83,11 @@ public class ItemCustomKnife extends ItemWeapon
 		{
 			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
 		}
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.SHORT;
 	}
 
 }

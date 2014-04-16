@@ -15,6 +15,7 @@ import TFC.Reference;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
@@ -41,6 +42,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 
 		ItemTerra.addSizeInformation(is, arraylist);
 		ItemTerra.addHeatInformation(is, arraylist);
+		
 
 		if(is.getItem() instanceof ICausesDamage)
 			arraylist.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal(((ICausesDamage)this).GetDamageType().toString()));
@@ -78,6 +80,18 @@ public class ItemTerraTool extends ItemTool implements ISize
 	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + this.getUnlocalizedName().replace("item.", ""));
 		if (TFC_Textures.BrokenItem == null) TFC_Textures.BrokenItem = registerer.registerIcon(Reference.ModID + ":" + "tools/Broken Item");
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack is)
+	{
+		return StatCollector.translateToLocal(getUnlocalizedName(is).replace(" ", ""));
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is)
+	{
+		return EnumItemReach.SHORT;
 	}
 
 	@Override

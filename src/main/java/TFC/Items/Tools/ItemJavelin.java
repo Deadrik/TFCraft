@@ -21,6 +21,7 @@ import TFC.API.IProjectile;
 import TFC.API.IQuiverAmmo;
 import TFC.API.Enums.EnumAmmo;
 import TFC.API.Enums.EnumDamageType;
+import TFC.API.Enums.EnumItemReach;
 import TFC.Core.TFCTabs;
 import TFC.Entities.EntityJavelin;
 import TFC.Items.ItemQuiver;
@@ -218,5 +219,10 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	public EnumAmmo getAmmoType() 
 	{
 		return EnumAmmo.JAVELIN;
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.FAR;
 	}
 }

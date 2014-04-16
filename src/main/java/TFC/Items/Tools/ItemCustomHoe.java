@@ -17,6 +17,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
@@ -145,7 +146,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-
+		
 		if(TFCOptions.enableDebugMode)
 			arraylist.add("Damage: " + is.getItemDamage());
 	}
@@ -181,5 +182,10 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	{
 		Multimap multimap = HashMultimap.create();
 		return multimap;
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is) {
+		return EnumItemReach.FAR;
 	}
 }

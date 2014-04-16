@@ -133,7 +133,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 						nbt.setInteger("MetalAmount", metalAmount-1);
 					}
 				}
-				else if(input != null && input.getItem() instanceof ItemPotteryMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0)
+				else if(input != null && input.getItem() instanceof ItemPotteryMold && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0  && (m.Name.equals("Copper") || m.Name.equals("Bronze") || m.Name.equals("Bismuth Bronze") || m.Name.equals("Black Bronze")))
 				{
 					int amt = -1;
 					if(m.Name.equals("Copper"))

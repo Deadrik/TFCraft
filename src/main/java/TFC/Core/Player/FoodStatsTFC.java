@@ -2,7 +2,6 @@ package TFC.Core.Player;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -98,18 +97,20 @@ public class FoodStatsTFC
 				{
 					satisfaction -= hunger; 
 					hunger = 0;
+					foodExhaustionLevel = 0;
 				}
 				else
 				{
 					hunger -= satisfaction; 
 					satisfaction = 0;
+					foodExhaustionLevel = 0;
 				}
 				this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
-				nutrFruit = Math.max(this.nutrFruit - (1 + foodExhaustionLevel)/5, 0);
-				nutrVeg = Math.max(this.nutrVeg - (1 + foodExhaustionLevel)/5, 0);
-				nutrGrain = Math.max(this.nutrGrain - (1 + foodExhaustionLevel)/5, 0);
-				nutrProtein = Math.max(this.nutrProtein - (1 + foodExhaustionLevel)/5, 0);
-				nutrDairy = Math.max(this.nutrDairy - (1 + foodExhaustionLevel)/5, 0);
+				nutrFruit = Math.max(this.nutrFruit - (1 + foodExhaustionLevel)/10, 0);
+				nutrVeg = Math.max(this.nutrVeg - (1 + foodExhaustionLevel)/10, 0);
+				nutrGrain = Math.max(this.nutrGrain - (1 + foodExhaustionLevel)/10, 0);
+				nutrProtein = Math.max(this.nutrProtein - (1 + foodExhaustionLevel)/10, 0);
+				nutrDairy = Math.max(this.nutrDairy - (1 + foodExhaustionLevel)/10, 0);
 			}
 
 			//Heal or hurt the player based on hunger.
@@ -307,17 +308,15 @@ public class FoodStatsTFC
 
 			//fill the stomach
 			this.stomachLevel += eatAmount;
-			item.getSatisfaction(is);
+			float _sat = item.getSatisfaction(is);
 			if(!item.isWarm(is))
-			{
-			}
-			this.satisfaction += eatAmount * item.getSatisfaction(is);
-
+				_sat *= 0.25f;
+			this.satisfaction += eatAmount * _sat;
 			//Now remove the eaten amount from the itemstack.
 			if(reduceFood(is, eatAmount))
 			{
 				is.stackSize = 0;
-				player.inventory.addItemStackToInventory(new ItemStack(Items.bowl,1));
+				//player.inventory.addItemStackToInventory(new ItemStack(Items.bowl,1));
 			}
 		}
 		else if(is.getItem() instanceof IFood)
@@ -330,6 +329,8 @@ public class FoodStatsTFC
 				float eatAmount = Math.min(weight - decay, 5f);
 				addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount);
 				this.stomachLevel += eatAmount;
+				if(reduceFood(is, eatAmount))
+					is.stackSize = 0;
 			}
 			else
 			{
@@ -353,28 +354,34 @@ public class FoodStatsTFC
 		nMod += 0.2f * (nutrGrain/24f);
 		nMod += 0.2f * (nutrProtein/24f);
 		nMod += 0.2f * (nutrDairy/24f);
-		return Math.max(nMod, 0.1f);
+		return Math.max(nMod, 0.05f);
 	}
 
 	public static int getMaxHealth(EntityPlayer player)
 	{
-		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.HealthGainRate), TFCOptions.HealthGainCap) * 
-				TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier());
+		return (int)(Math.min(1000+(player.experienceLevel * TFCOptions.HealthGainRate),
+				TFCOptions.HealthGainCap) * TFC_Core.getPlayerFoodStats(player).getNutritionHealthModifier());
 	}
 
 	/**
 	 * 
 	 * @return return true if the itemstack should be consumed, else return false
 	 */
-	private boolean reduceFood(ItemStack is, float amount)
+	public static boolean reduceFood(ItemStack is, float amount)
 	{
 		if(is.hasTagCompound())
 		{
 			float weight = is.getTagCompound().getFloat("foodWeight");
-			if(weight - amount <= 0)
+			float decay = is.getTagCompound().hasKey("foodDecay") ? is.getTagCompound().getFloat("foodDecay") : 0;
+			if(decay > 0 && (weight - decay) - amount <= 0)
+				return true;
+			else if(decay < 0 && weight - amount <= 0)
 				return true;
 			else
+			{
 				is.getTagCompound().setFloat("foodWeight", Helper.roundNumber(weight - amount, 10));
+				is.getTagCompound().setFloat("foodDecay", Helper.roundNumber(decay - amount, 10));
+			}
 		}
 		return false;
 	}
@@ -384,19 +391,19 @@ public class FoodStatsTFC
 		switch(fg)
 		{
 		case Dairy:
-			this.nutrDairy = Math.min(nutrDairy+amount, 24);
+			this.nutrDairy = Math.min(nutrDairy + amount, 24);
 			break;
 		case Fruit:
-			this.nutrFruit = Math.min(nutrFruit+amount, 24);
+			this.nutrFruit = Math.min(nutrFruit + amount, 24);
 			break;
 		case Grain:
-			this.nutrGrain = Math.min(nutrGrain+amount, 24);
+			this.nutrGrain = Math.min(nutrGrain + amount, 24);
 			break;
 		case Protein:
-			this.nutrProtein = Math.min(nutrProtein+amount, 24);
+			this.nutrProtein = Math.min(nutrProtein + amount, 24);
 			break;
 		case Vegetable:
-			this.nutrVeg = Math.min(nutrVeg+amount, 24);
+			this.nutrVeg = Math.min(nutrVeg + amount, 24);
 			break;
 		default:
 			break;

@@ -9,6 +9,7 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import TFC.TFCItems;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Util.Helper;
 import TFC.Items.ItemTerra;
@@ -170,6 +171,11 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 			par1World.setBlock(par8, par9, par10, this.isFull);
 			return true;
 		}
+	}
+	
+	@Override
+	public EnumItemReach getReach(ItemStack is){
+		return EnumItemReach.SHORT;
 	}
 
 }

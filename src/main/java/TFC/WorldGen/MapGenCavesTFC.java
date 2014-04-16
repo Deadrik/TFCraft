@@ -212,7 +212,8 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 		DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt((int)xCoord, (int)zCoord, 0);
 		float rain = TFC_Climate.getRainfall((int)xCoord, 144, (int)zCoord);
 		double width = 2;
-		int caveChance = 25;
+		int caveChance = 35;
+
 		if(rain > 1000)
 		{
 			width += 0.5;

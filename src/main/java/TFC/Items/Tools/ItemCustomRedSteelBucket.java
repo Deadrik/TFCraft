@@ -8,7 +8,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Util.Helper;
 import TFC.Items.ItemTerra;
@@ -97,13 +99,28 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 
 						if (--par1ItemStack.stackSize <= 0)
 						{
-							return new ItemStack(TFCItems.RedSteelBucketWater);
+							return new ItemStack(TFCItems.RedSteelBucketSaltWater);
 						}
 
-						if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketWater)))
+						if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketSaltWater)))
 						{
-							par3EntityPlayer.entityDropItem(new ItemStack(TFCItems.RedSteelBucketWater, 1, 0), 0);
+							par3EntityPlayer.dropItem(TFCItems.RedSteelBucketSaltWater, 1);
 						}
+
+						return par1ItemStack;
+					}
+					else if ((world.getBlock(i, j, k) == TFCBlocks.FreshWaterStill || world.getBlock(i, j, k) == TFCBlocks.HotWaterStill ) && world.getBlockMetadata(i, j, k) == 0)
+					{
+						world.setBlockToAir(i, j, k);
+
+						if (par3EntityPlayer.capabilities.isCreativeMode)
+							return par1ItemStack;
+
+						if (--par1ItemStack.stackSize <= 0)
+							return new ItemStack(TFCItems.RedSteelBucketWater);
+
+						if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketWater)))
+							par3EntityPlayer.entityDropItem(new ItemStack(TFCItems.RedSteelBucketWater, 1, 0), 0);
 
 						return par1ItemStack;
 					}
@@ -190,4 +207,9 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 		}
 	}
 
+	@Override
+	public EnumItemReach getReach(ItemStack is)
+	{
+		return EnumItemReach.SHORT;
+	}
 }

@@ -22,9 +22,9 @@ public class EntityStand extends EntityLiving
 
 //	@Override
 //	protected void doBlockCollisions()
-//    {
-//    }
-	
+//	{
+//	}
+
 	public EntityStand(World par1World, TEStand TE)
 	{
 		this(par1World);
@@ -62,7 +62,9 @@ public class EntityStand extends EntityLiving
 
 		if(standTE == null)
 		{
-			standTE = (TEStand)worldObj.getTileEntity((int)posX, (int)posY, (int)posZ);
+			TileEntity t = worldObj.getTileEntity((int)posX, (int)posY, (int)posZ);
+			if(t instanceof TEStand)
+				standTE = (TEStand)t;
 			if(standTE == null)
 				setDead();
 		}
@@ -90,7 +92,8 @@ public class EntityStand extends EntityLiving
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
+	public void readEntityFromNBT(NBTTagCompound nbttagcompound)
+	{
 		super.readEntityFromNBT(nbttagcompound);
 		//posX = nbttagcompound.getDouble("X");
 		//posY = nbttagcompound.getDouble("Y");
@@ -98,7 +101,8 @@ public class EntityStand extends EntityLiving
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
+	public void writeEntityToNBT(NBTTagCompound nbttagcompound)
+	{
 		super.writeEntityToNBT(nbttagcompound);
 		//nbttagcompound.setDouble("X", posX);
 		//nbttagcompound.setDouble("Y", posY);

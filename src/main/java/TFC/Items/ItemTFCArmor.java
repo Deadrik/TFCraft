@@ -6,17 +6,22 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.API.Armor;
 import TFC.API.IClothing;
 import TFC.API.ISize;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
@@ -140,6 +145,35 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 					EnumChatFormatting.DARK_GRAY + ")");
 
 	}
+	
+	/**
+	 * Copy-paste the old vanilla code
+	 */
+	@Override
+	protected MovingObjectPosition getMovingObjectPositionFromPlayer(World par1World, EntityPlayer par2EntityPlayer, boolean par3)
+    {
+		float f = 1.0F;
+        float f1 = par2EntityPlayer.prevRotationPitch + (par2EntityPlayer.rotationPitch - par2EntityPlayer.prevRotationPitch) * f;
+        float f2 = par2EntityPlayer.prevRotationYaw + (par2EntityPlayer.rotationYaw - par2EntityPlayer.prevRotationYaw) * f;
+        double d0 = par2EntityPlayer.prevPosX + (par2EntityPlayer.posX - par2EntityPlayer.prevPosX) * (double)f;
+        double d1 = par2EntityPlayer.prevPosY + (par2EntityPlayer.posY - par2EntityPlayer.prevPosY) * (double)f + (double)(par1World.isRemote ? par2EntityPlayer.getEyeHeight() - par2EntityPlayer.getDefaultEyeHeight() : par2EntityPlayer.getEyeHeight()); // isRemote check to revert changes to ray trace position due to adding the eye height clientside and player yOffset differences
+        double d2 = par2EntityPlayer.prevPosZ + (par2EntityPlayer.posZ - par2EntityPlayer.prevPosZ) * (double)f;
+        Vec3 vec3 = par1World.getWorldVec3Pool().getVecFromPool(d0, d1, d2);
+        float f3 = MathHelper.cos(-f2 * 0.017453292F - (float)Math.PI);
+        float f4 = MathHelper.sin(-f2 * 0.017453292F - (float)Math.PI);
+        float f5 = -MathHelper.cos(-f1 * 0.017453292F);
+        float f6 = MathHelper.sin(-f1 * 0.017453292F);
+        float f7 = f4 * f5;
+        float f8 = f3 * f5;
+        double d3 = 5.0D;
+        if (par2EntityPlayer instanceof EntityPlayerMP)
+        {
+            d3 = ((EntityPlayerMP)par2EntityPlayer).theItemInWorldManager.getBlockReachDistance();
+        }
+        d3 *= getReach(null).multiplier;
+        Vec3 vec31 = vec3.addVector((double)f7 * d3, (double)f6 * d3, (double)f8 * d3);
+        return par1World.rayTraceBlocks(vec3, vec31, par3);
+    }
 
 	@Override
 	public int getMaxDamage(ItemStack stack)
@@ -154,7 +188,8 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	}
 
 	@Override
-	public EnumWeight getWeight(ItemStack is) {
+	public EnumWeight getWeight(ItemStack is)
+	{
 		if (this.getArmorMaterial() == ArmorMaterial.CLOTH)
 			return EnumWeight.LIGHT;
 		return EnumWeight.HEAVY;
@@ -164,7 +199,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
 		String m = ArmorType.metaltype.replace(" ", "").toLowerCase();
-		return Reference.ModID+String.format(":textures/models/armor/%s_%d%s.png",
+		return Reference.ModID + String.format(":textures/models/armor/%s_%d%s.png",
 				m, (slot == 2 ? 2 : 1), type == null ? "" : String.format("_%s", type));
 	}
 
@@ -184,6 +219,12 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	public int getBodyPart()
 	{
 		return type;
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is)
+	{
+		return EnumItemReach.SHORT;
 	}
 }
 

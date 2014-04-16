@@ -20,6 +20,7 @@ import TFC.API.ICausesDamage;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumDamageType;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
@@ -68,6 +69,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 
 		ItemTerra.addSizeInformation(is, arraylist);
 		ItemTerra.addHeatInformation(is, arraylist);
+		
 
 		if(is.getItem() instanceof ICausesDamage)
 			arraylist.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal(((ICausesDamage)this).GetDamageType().toString()));
@@ -167,5 +169,10 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 			return (int) (getMaxDamage()+(getMaxDamage()*(buff/100f)));
 		}
 		else return super.getMaxDamage(stack);
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is) {
+		return EnumItemReach.MEDIUM;
 	}
 }

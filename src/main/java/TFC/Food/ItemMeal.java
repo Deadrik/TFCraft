@@ -11,6 +11,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import TFC.API.IFood;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -20,7 +21,7 @@ import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Items.ItemTerra;
 
-public class ItemMeal extends ItemTerra
+public class ItemMeal extends ItemTerra implements IFood
 {
 	PotionEffect foodEffect;
 	private boolean alwaysEdible = false;
@@ -82,6 +83,28 @@ public class ItemMeal extends ItemTerra
 					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100,10)+"%");
 			}
 		}
+	}
+
+	@Override
+	public int getDisplayDamage(ItemStack stack)
+	{
+		float decay = getFoodDecay(stack);
+		float weight = getFoodWeight(stack);
+		int percent = (int)((decay/weight)*100);
+		percent = percent > 0 ? percent < 100 ? percent : 100 : 0;
+		return percent;
+	}
+
+	@Override
+	public boolean isDamaged(ItemStack stack)
+	{
+		return true;
+	}
+
+	@Override
+	public int getMaxDamage(ItemStack stack)
+	{
+		return 100;
 	}
 
 	private String localize(String[] in)
@@ -174,15 +197,38 @@ public class ItemMeal extends ItemTerra
 	}
 
 	@Override
-	public EnumSize getSize(ItemStack is) 
+	public EnumSize getSize(ItemStack is)
 	{
 		return EnumSize.SMALL;
 	}
 
 	@Override
-	public EnumWeight getWeight(ItemStack is) 
+	public EnumWeight getWeight(ItemStack is)
 	{
 		return EnumWeight.MEDIUM;
 	}
 
+	@Override
+	public EnumFoodGroup getFoodGroup()
+	{
+		return null;
+	}
+
+	@Override
+	public int getFoodID()
+	{
+		return 0;
+	}
+
+	@Override
+	public float getDecayRate()
+	{
+		return 0;
+	}
+
+	@Override
+	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k)
+	{
+		return null;
+	}
 }

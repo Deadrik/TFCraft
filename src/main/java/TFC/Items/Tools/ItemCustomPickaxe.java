@@ -11,6 +11,7 @@ import net.minecraft.util.IIcon;
 import TFC.Reference;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
+import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
@@ -86,5 +87,11 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 //		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
 //		return multimap;
 		return super.getItemAttributeModifiers();
+	}
+
+	@Override
+	public EnumItemReach getReach(ItemStack is)
+	{
+		return EnumItemReach.MEDIUM;
 	}
 }

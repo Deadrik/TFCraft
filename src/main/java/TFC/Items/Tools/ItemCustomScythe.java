@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import TFC.API.Enums.EnumItemReach;
 import TFC.Core.TFCTabs;
 
 import com.google.common.collect.Sets;
@@ -30,4 +31,9 @@ public class ItemCustomScythe extends ItemTerraTool
 		return true;
 	}
 
+	@Override
+	public EnumItemReach getReach(ItemStack is)
+	{
+		return EnumItemReach.FAR;
+	}
 }

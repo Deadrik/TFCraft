@@ -36,7 +36,7 @@ public class ItemRawHide extends ItemLooseRock
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		if(!world.isRemote && itemstack.getItem() == TFCItems.Hide && itemstack.getItemDamage() == 2){
+		if(!world.isRemote && itemstack.getItem() == TFCItems.Hide && itemstack.getItemDamage() >= 2){
 			int d = (int)((45 + ((entityplayer.rotationYaw % 360)+360f)%360)/90)%4; //direction
 			int x2 = x+(d==1?-1:(d==3?1:0)); // the x-coord of the second block
 			int z2 = z+(d==2?-1:(d==0?1:0));
