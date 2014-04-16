@@ -30,7 +30,6 @@ import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Enums.EnumTree;
 import TFC.API.Util.KeyBindings;
 import TFC.Core.ColorizerFoliageTFC;
-import TFC.Core.CustomPlayerControllerMP;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Core.Util.StringUtil;
@@ -268,11 +267,6 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void onClientLogin()
 	{
-		if(Minecraft.getMinecraft().thePlayer.worldObj.isRemote){
-			EnumGameType gt = Minecraft.getMinecraft().thePlayer.worldObj.getWorldInfo().getGameType();
-			Minecraft.getMinecraft().playerController = new CustomPlayerControllerMP(Minecraft.getMinecraft(),Minecraft.getMinecraft().getNetHandler());
-			Minecraft.getMinecraft().playerController.setGameType(gt);
-		}
 	}
 
 	@Override

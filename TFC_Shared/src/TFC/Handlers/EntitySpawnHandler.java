@@ -12,7 +12,6 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Containers.ContainerPlayerTFC;
-import TFC.Core.CustomPlayerControllerMP;
 import TFC.Core.TFC_Core;
 
 public class EntitySpawnHandler
