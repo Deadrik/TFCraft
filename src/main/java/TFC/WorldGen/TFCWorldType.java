@@ -20,7 +20,7 @@ public class TFCWorldType extends WorldType
 		TFCBiome.hell
 	};
 	private static final TFCBiome[] biomesDEFAULT = new TFCBiome[] {
-//		TFCBiome.ocean,
+		TFCBiome.ocean,
 		TFCBiome.river,
 		TFCBiome.beach,
 		TFCBiome.HighHills,
@@ -45,7 +45,8 @@ public class TFCWorldType extends WorldType
 		else if(this == this.FLAT)
 			return biomesFLAT;
 
-		return new TFCBiome[] {TFCBiome.HighHills};//biomesUNKNOWN;
+		return biomesUNKNOWN;
+		//return new TFCBiome[] {TFCBiome.HighHills};
 	}
 
 	@Override

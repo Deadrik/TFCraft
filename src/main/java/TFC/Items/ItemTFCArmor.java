@@ -40,7 +40,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 
 	public ItemTFCArmor(Armor armor, int renderIndex, int armorSlot, int thermal, int type)
 	{
-		super(ArmorMaterial.IRON,renderIndex,armorSlot%4);
+		super(ArmorMaterial.IRON, renderIndex, armorSlot%4);
 		ArmorType = armor;
 		this.trueType = armorSlot;
 		this.setCreativeTab(TFCTabs.TFCArmor);

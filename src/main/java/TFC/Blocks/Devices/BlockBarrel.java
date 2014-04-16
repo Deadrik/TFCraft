@@ -41,7 +41,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, IPipeConnectable
 {
 	private final Random random = new Random();
-	String[] woodNames;
+	private String[] woodNames;
+	private static IIcon blockIcon;
 	
 	public BlockBarrel()
 	{
@@ -149,7 +150,7 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 		int j = 0;
 		String s = this.getUnlocalizedName();
 		for(int i = 0; i < woodNames.length;i++)
-			j = s.substring(s.indexOf("l",s.length()))==((ItemBarrels)(TFCItems.Barrel)).MetaNames[i]?i:0;
+			j = s.substring(s.indexOf("l", s.length())) == ((ItemBarrels)(TFCItems.Barrel)).MetaNames[i] ? i : 0;
 		return new ItemStack(TFCItems.Barrel, 1, j);
 	}
 
@@ -181,12 +182,12 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 		}
 
 		@Override
-		public void onUpdate(){
+		public void onUpdate()
+		{
 			fuse--;
 			world.playSoundAtEntity(this, "random.fuse", 1.0F, 1.0F);
-			if(fuse == 0){
+			if(fuse == 0)
 				explode();
-			}
 			worldObj.spawnParticle("smoke", posX, posY + 0.5D, posZ, new Random().nextFloat(), 1.0D, new Random().nextFloat());
 		}
 
@@ -220,10 +221,11 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	{
 		if (par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
 		{
-			TileEntityBarrel TE = (TileEntityBarrel)par1World.getTileEntity(par2,par3,par4);
-			if(TE.liquidLevel == 256 && TE.Type == 4 && !TE.getSealed()){
+			TileEntityBarrel TE = (TileEntityBarrel)par1World.getTileEntity(par2, par3, par4);
+			if(TE.liquidLevel == 256 && TE.Type == 4 && !TE.getSealed())
+			{
 				TE.setSealed();
-				BarrelEntity BE = new BarrelEntity(par1World,par2,par3,par4);
+				BarrelEntity BE = new BarrelEntity(par1World, par2, par3, par4);
 				par1World.spawnEntityInWorld(BE);
 				par1World.playSoundAtEntity(BE, "random.fuse", 1.0F, 1.0F);
 				//float f = 16.0F;
@@ -271,14 +273,16 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 		NBTTagList nbttaglist = new NBTTagList();
 		nbttaglist = new NBTTagList();
 		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-		if(te.getStackInSlot(0)!=null){
+		if(te.getStackInSlot(0)!=null)
+		{
 			nbttagcompound1.setByte("Slot", (byte)0);
 			te.getStackInSlot(0).writeToNBT(nbttagcompound1);
 			nbttaglist.appendTag(nbttagcompound1);
 		}
 
 		nbttagcompound1 = new NBTTagCompound();
-		if(te.getStackInSlot(1)!=null){
+		if(te.getStackInSlot(1)!=null)
+		{
 			nbttagcompound1.setByte("Slot", (byte)1);
 			te.getStackInSlot(1).writeToNBT(nbttagcompound1);
 			nbttaglist.appendTag(nbttagcompound1);
@@ -301,17 +305,21 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 		else
 		{
 
-			if(world.getTileEntity(x, y, z) != null){
+			if(world.getTileEntity(x, y, z) != null)
+			{
 				TileEntityBarrel TeBarrel = (TileEntityBarrel)(world.getTileEntity(x, y, z));
-				if(TeBarrel.liquidLevel == 256 && TeBarrel.Type == 4 && TeBarrel.getSealed()){
-					List<Entity> list = world.getEntitiesWithinAABB(BarrelEntity.class, AxisAlignedBB.getBoundingBox(x,y,z,x+1,y+1,z+1));
-					for(Entity entity : list){
+				if(TeBarrel.liquidLevel == 256 && TeBarrel.Type == 4 && TeBarrel.getSealed())
+				{
+					List<Entity> list = world.getEntitiesWithinAABB(BarrelEntity.class, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1));
+					for(Entity entity : list)
+					{
 						entity.setDead();
 					}
 					TeBarrel.setUnsealed("killing fuse");
 					return true;
 				}
-				if (TeBarrel.getSealed()||entityplayer.isSneaking()){
+				if (TeBarrel.getSealed()||entityplayer.isSneaking())
+				{
 					return false;
 				}
 				entityplayer.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);

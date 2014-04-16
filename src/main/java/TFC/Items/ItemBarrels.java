@@ -29,36 +29,37 @@ public class ItemBarrels extends ItemTerraBlock
 	}
 
 	@Override
-	public EnumSize getSize(ItemStack is) {
+	public EnumSize getSize(ItemStack is)
+	{
 		return EnumSize.LARGE;
 	}
 
 	@Override
-	public EnumWeight getWeight(ItemStack is) {
+	public EnumWeight getWeight(ItemStack is)
+	{
 		return EnumWeight.HEAVY;
 	}
 
 	public void readFromItemNBT(NBTTagCompound nbt, List arraylist)
 	{
-		if(nbt != null && nbt.hasKey("type")){
+		if(nbt != null && nbt.hasKey("type"))
+		{
 			type = nbt.getInteger("type");
 			arraylist.add(EnumChatFormatting.YELLOW + TileEntityBarrel.getType(type));
 		}
 	}
 
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-
 		readFromItemNBT(is.getTagCompound(), arraylist);
 	}
 
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++) {
-			list.add(new ItemStack(this,1,i));
-		}
+		for(int i = 0; i < MetaNames.length; i++)
+			list.add(new ItemStack(this, 1, i));
 	}
 }

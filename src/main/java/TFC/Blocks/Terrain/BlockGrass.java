@@ -61,7 +61,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 		iconSnowSide = registerer.registerIcon(Reference.ModID + ":" + "snow");
 		iconGrassSideOverlay = registerer.registerIcon(Reference.ModID + ":" + "GrassSide");
 		
-		//TFC_Textures.InvisibleTexture = registerer.registerIcon(Reference.ModID + ":" + "Invisible"); // This gets registered in BlockWorldItem class
+		TFC_Textures.InvisibleTexture = registerer.registerIcon(Reference.ModID + ":" + "Invisible");
 	}
 
 	/**

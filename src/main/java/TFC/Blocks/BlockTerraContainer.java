@@ -64,8 +64,11 @@ public abstract class BlockTerraContainer extends BlockContainer
 	{
 		TileEntity te = world.getTileEntity(x, y, z);
 		if(te != null)
+		{
 			if(te instanceof IInventory)
+			{
 				for(int i = 0; i< ((IInventory)te).getSizeInventory(); i++)
+				{
 					if(((IInventory)te).getStackInSlot(i) != null)
 					{
 						EntityItem ei = new EntityItem(world, x+0.5, y+0.5, z+0.5, ((IInventory)te).getStackInSlot(i));
@@ -74,7 +77,9 @@ public abstract class BlockTerraContainer extends BlockContainer
 						ei.motionZ = 0;
 						world.spawnEntityInWorld(ei);
 					}
-
+				}
+			}
+		}
 		super.breakBlock(world, x, y, z, block, metadata);
 	}
 }

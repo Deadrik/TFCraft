@@ -118,7 +118,7 @@ public class BlockWorldItem extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.blockIcon = TFC_Textures.InvisibleTexture;
+		this.blockIcon = TFC_Textures.InvisibleTexture; // This gets registered in BlockGrass
 	}
 
 	@Override

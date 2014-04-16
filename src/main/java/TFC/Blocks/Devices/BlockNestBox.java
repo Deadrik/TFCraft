@@ -48,7 +48,7 @@ public class BlockNestBox extends BlockTerraContainer
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = TFC_Textures.InvisibleTexture;//iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/Thatch");
+		this.blockIcon = TFC_Textures.InvisibleTexture; // This gets registered in TFC.Blocks.Terrain.BlockGrass
 	}
 
 	@Override
