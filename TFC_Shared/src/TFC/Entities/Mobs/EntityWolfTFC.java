@@ -475,9 +475,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 						i==(TFCItems.CalamariRaw.itemID)||
 						i==(TFCItems.CalamariCooked.itemID)
 						){
-					if(item instanceof ItemFoodTFC){
+					if(item instanceof ItemFoodTFC && hunger <= 160000){
 						par1EntityPlayer.inventory.setItemStack(((ItemFoodTFC)item).onConsumedByEntity(par1EntityPlayer.getHeldItem(), worldObj, this));
 						this.hunger+=24000;
+						return true;
 					}
 				}
 			}
