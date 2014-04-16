@@ -1090,7 +1090,7 @@ public class TFC_Core
 				nbt.setFloat("foodDecay", decay);
 			} else
 			{
-				float d = ((decay * Global.FOOD_DECAY_RATE) / 24) * (thisDecayRate * environmentalDecay) * protMult;
+				float d = (((decay * Global.FOOD_DECAY_RATE) / 24) * (thisDecayRate * environmentalDecay) * protMult)*TFCOptions.decayMultiplier;
 				decay += d;
 			}
 			nbt.setInteger("decayTimer", nbt.getInteger("decayTimer") + 1);
