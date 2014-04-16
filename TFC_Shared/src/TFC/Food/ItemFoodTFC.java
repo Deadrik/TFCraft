@@ -240,8 +240,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getDisplayDamage(ItemStack stack)
 	{
-		int percent = (int)((getFoodDecay(stack)/getFoodWeight(stack))*100);
-		return percent > 0 ? percent < 100 ? percent : 100 : 0;
+		float decay = getFoodDecay(stack);
+		float weight = getFoodWeight(stack);
+		int percent = (int)((decay/weight)*100);
+		percent = percent > 0 ? percent < 100 ? percent : 100 : 0;
+		return percent;
 	}
 
 	@Override
@@ -253,7 +256,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getMaxDamage(ItemStack stack)
 	{
-		return (int)(getFoodWeight(stack)*10);
+		return 100;
 	}
 
 	@Override
