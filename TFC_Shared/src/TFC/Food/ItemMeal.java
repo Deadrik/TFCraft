@@ -84,6 +84,28 @@ public class ItemMeal extends ItemTerra
 		}
 	}
 
+	@Override
+	public int getDisplayDamage(ItemStack stack)
+	{
+		float decay = getFoodDecay(stack);
+		float weight = getFoodWeight(stack);
+		int percent = (int)((decay/weight)*100);
+		percent = percent > 0 ? percent < 100 ? percent : 100 : 0;
+		return percent;
+	}
+
+	@Override
+	public boolean isDamaged(ItemStack stack)
+	{
+		return true;
+	}
+
+	@Override
+	public int getMaxDamage(ItemStack stack)
+	{
+		return 100;
+	}
+
 	private String localize(String[] in)
 	{
 		int ordinal = Integer.parseInt(in[1]);
