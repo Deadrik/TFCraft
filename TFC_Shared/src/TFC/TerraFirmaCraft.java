@@ -326,7 +326,7 @@ public class TerraFirmaCraft
 		TFCOptions.decayMultiplier = (float)TFCOptions.getDoubleFor(config,"Food Decay","FoodDecayMultiplier", 1.0, "This is a global multiplier for food decay. Unlike FoodDecayRate which only modifies the base decay and not the environmental effect upon decay, this multiplier will multiply against the entire amount. Set to 0 to turn decay off.");
 		//Caveins
 		TFCOptions.minimumRockLoad = TFCOptions.getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
-		TFCOptions.initialCollapseRatio = TFCOptions.getIntFor(config,"Cavein Options","initialCollapseRatio",50, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
+		TFCOptions.initialCollapseRatio = TFCOptions.getIntFor(config,"Cavein Options","initialCollapseRatio",20, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
 		TFCOptions.propogateCollapseChance = TFCOptions.getIntFor(config,"Cavein Options","propogateCollapseChance",55, "This number is the likelihood for each block to propagate the collapse farther.");
 
 		TFCOptions.cropNutrientAColor[0] = (byte)TFCOptions.getIntFor(config,"ColorNutrientA","Red", 237);
