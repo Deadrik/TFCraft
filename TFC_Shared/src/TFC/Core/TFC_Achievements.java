@@ -78,7 +78,6 @@ public class TFC_Achievements {
 		achievementsTFC = achlist.toArray(achievementsTFC);
 
 		pageBiome = new AchievementPage("TerraFirmaCraft", achievementsTFC);
-
 		AchievementPage.registerAchievementPage(pageBiome);
 	}
 
