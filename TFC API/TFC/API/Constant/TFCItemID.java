@@ -507,6 +507,8 @@ public class TFCItemID {
 	
 	//Whoops
 	public static int DoorAcacia				= 16782;
+	
+	public static int RedSteelBucketSaltWater	= 16783;
 	// Plans
 	public static int PickaxeHeadPlan			= 20000;
 	public static int ShovelHeadPlan			= 20001;

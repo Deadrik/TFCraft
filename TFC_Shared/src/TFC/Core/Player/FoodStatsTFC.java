@@ -367,7 +367,7 @@ public class FoodStatsTFC
 	 * 
 	 * @return return true if the itemstack should be consumed, else return false
 	 */
-	private boolean reduceFood(ItemStack is, float amount)
+	public static boolean reduceFood(ItemStack is, float amount)
 	{
 		if(is.hasTagCompound())
 		{
