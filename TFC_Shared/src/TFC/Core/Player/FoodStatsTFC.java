@@ -307,10 +307,12 @@ public class FoodStatsTFC
 					addNutrition(EnumFoodGroup.values()[fg[i]], eatAmount*weights[i]);
 			//fill the stomach
 			this.stomachLevel += eatAmount;
-			item.getSatisfaction(is);
-			if(!item.isWarm(is)) {
+			float _sat = item.getSatisfaction(is);
+			if(!item.isWarm(is)) 
+			{
+				_sat *= 0.25f;
 			}
-			this.satisfaction += eatAmount * item.getSatisfaction(is);
+			this.satisfaction += eatAmount * _sat;
 			//Now remove the eaten amount from the itemstack.
 			if(reduceFood(is, eatAmount))
 			{
@@ -373,7 +375,9 @@ public class FoodStatsTFC
 		{
 			float weight = is.getTagCompound().getFloat("foodWeight");
 			float decay = is.getTagCompound().hasKey("foodDecay") ? is.getTagCompound().getFloat("foodDecay") : 0;
-			if((weight - decay) - amount <= 0)
+			if(decay > 0 && (weight - decay) - amount <= 0)
+				return true;
+			else if(decay < 0 && weight - amount <= 0)
 				return true;
 			else
 			{
