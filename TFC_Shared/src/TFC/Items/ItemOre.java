@@ -90,7 +90,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 		{
 			if (TFC_Core.showExtraInformation()) 
 			{
-				arraylist.add(StringUtil.localize("gui.units") + ":" + GetMetalReturnAmount(is));
+				arraylist.add(StringUtil.localize("gui.units") + ": " + GetMetalReturnAmount(is));
 			}
 			else
 			{
