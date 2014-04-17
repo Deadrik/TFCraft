@@ -26,7 +26,7 @@ public class CropIndexJute extends CropIndex
 	@Override
 	public ItemStack getOutput1(TECrop crop)
 	{
-		if(Output1 != null && crop.growth >= 5 && crop.growth < 6)
+		if (Output1 != null && crop.growth >= 5)
 		{
 			ItemStack is = new ItemStack(Output1, (int)this.Output1Avg);
 			return is;
