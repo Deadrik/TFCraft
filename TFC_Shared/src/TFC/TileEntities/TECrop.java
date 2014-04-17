@@ -170,7 +170,6 @@ public class TECrop extends NetworkTileEntity
 
 				ItemStack seedStack = crop.getSeed();
 				int skill = 20-(int)(20*TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_AGRICULTURE));
-				System.out.println("Skill: " + skill);
 				seedStack.stackSize = 1 + (world.rand.nextInt(1 + skill) == 0 ? 1 : 0);
 				if(seedStack != null)
 					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, seedStack));
