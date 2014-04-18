@@ -1,8 +1,12 @@
 package TFC.TileEntities;
 
+import java.util.Iterator;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -10,7 +14,11 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.AxisAlignedBB;
+import TFC.Containers.ContainerChestTFC;
 import TFC.Core.TFC_Core;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityChestTFC extends TileEntityChest implements IInventory
 {
@@ -52,7 +60,8 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 				this.markDirty();
 				return var3;
 			}
-		} else
+		}
+		else
 			return null;
 	}
 
@@ -64,7 +73,8 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 			ItemStack var2 = this.chestContents[par1];
 			this.chestContents[par1] = null;
 			return var2;
-		} else
+		}
+		else
 			return null;
 	}
 
@@ -106,6 +116,7 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 		NBTTagList var2 = new NBTTagList();
 
 		for (int var3 = 0; var3 < this.chestContents.length; ++var3)
+		{
 			if (this.chestContents[var3] != null)
 			{
 				NBTTagCompound var4 = new NBTTagCompound();
@@ -113,6 +124,7 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 				this.chestContents[var3].writeToNBT(var4);
 				var2.appendTag(var4);
 			}
+		}
 
 		par1NBTTagCompound.setTag("Items", var2);
 	}
@@ -190,12 +202,32 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		super.updateEntity();
+		//super.updateEntity();
 
 		TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
 		this.checkForAdjacentChests();
-		if (++this.ticksSinceSync % 20 * 4 == 0)
+
+		if (!this.worldObj.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + this.xCoord + this.yCoord + this.zCoord) % 200 == 0)
 		{
+			this.numPlayersUsing = 0;
+			float f = 5.0F;
+			List list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getAABBPool().getAABB((double)((float)this.xCoord - f), (double)((float)this.yCoord - f), (double)((float)this.zCoord - f), (double)((float)(this.xCoord + 1) + f), (double)((float)(this.yCoord + 1) + f), (double)((float)(this.zCoord + 1) + f)));
+			Iterator iterator = list.iterator();
+
+			while (iterator.hasNext())
+			{
+				EntityPlayer entityplayer = (EntityPlayer)iterator.next();
+
+				if (entityplayer.openContainer instanceof ContainerChestTFC)
+				{
+					IInventory iinventory = ((ContainerChestTFC)entityplayer.openContainer).getLowerChestInventory();
+
+					if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest)iinventory).isPartOfLargeChest(this))
+					{
+						++this.numPlayersUsing;
+					}
+				}
+			}
 		}
 
 		this.prevLidAngle = this.lidAngle;
@@ -215,11 +247,12 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 
 		if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
 		{
-			
+
 			if (this.numPlayersUsing > 0)
 				this.lidAngle += var1;
 			else
 				this.lidAngle -= var1;
+
 			if (this.lidAngle > 1.0F)
 				this.lidAngle = 1.0F;
 
@@ -239,6 +272,14 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 			if (this.lidAngle < 0.0F)
 				this.lidAngle = 0.0F;
 		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		AxisAlignedBB bb = AxisAlignedBB.getAABBPool().getAABB(xCoord - 1, yCoord, zCoord - 1, xCoord + 2, yCoord + 2, zCoord + 2);
+		return bb;
 	}
 
 	@Override

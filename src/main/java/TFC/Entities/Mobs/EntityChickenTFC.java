@@ -14,7 +14,6 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
@@ -57,17 +56,14 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		super(par1World);
 		this.setSize(0.3F, 0.7F);
 		this.timeUntilNextEgg = this.rand.nextInt(6000) + 24000;
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain, false));
-		this.tasks.addTask(3, new EntityAIFindNest(this,1.2F));
 		//this.tasks.addTask(6, this.aiEatGrass);
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		mateSizeMod = 1f;
 		sex = rand.nextInt(2);
-		if(sex==0){
-			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		}
+		addAI();
+
 		size_mod = (((rand.nextInt ((degreeOfDiversion+1)*10)*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex);
 
 		//	We hijack the growingAge to hold the day of birth rather
@@ -113,15 +109,25 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.setAge((int) TFC_Time.getTotalDays());
 	}
 
+	public void addAI()
+	{
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain, false));
+		this.tasks.addTask(3, new EntityAIFindNest(this,1.2F));
+		if(sex==0)
+		{
+			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		}
+	}
+
 	@Override
 	/**
-     * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
-     * the animal type)
-     */
-    public boolean isBreedingItem(ItemStack par1ItemStack)
-    {
-        return false;
-    }
+	 * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
+	 * the animal type)
+	 */
+	public boolean isBreedingItem(ItemStack par1ItemStack)
+	{
+		return false;
+	}
 
 	@Override
 	protected void entityInit()
@@ -173,14 +179,17 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		}
 
 		syncData();
-		if(isAdult()){
+		if(isAdult())
+		{
 			setGrowingAge(0);
 		}
-		else{
+		else
+		{
 			setGrowingAge(-1);
 		}
 
-		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE && isAdult()){
+		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE && isAdult())
+		{
 			this.playSound(TFC_Sounds.ROOSTERCROW, 10, rand.nextFloat()+0.5F);
 		}
 
@@ -192,7 +201,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		 * This Cancels out the changes made to growingAge by EntityAgeable
 		 * */
 		TFC_Core.PreventEntityDataUpdate = true;
-		if(getGender()==GenderEnum.MALE){
+		if(getGender()==GenderEnum.MALE)
+		{
 			timeUntilNextEgg=10000;
 		}
 		else if(timeUntilNextEgg == 0)
@@ -200,6 +210,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			//This prevents the vanilla chicken from ever laying an egg.
 			timeUntilNextEgg = 2;
 		}
+
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
@@ -213,7 +224,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	{
 		if(dataWatcher!= null)
 		{
-			if(!this.worldObj.isRemote){
+			if(!this.worldObj.isRemote)
+			{
 				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
 				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
 
@@ -224,7 +236,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 				this.dataWatcher.updateObject(28, Float.valueOf(climate_mod));
 				this.dataWatcher.updateObject(29, Float.valueOf(hard_mod));
 			}
-			else{
+			else
+			{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
 
@@ -295,7 +308,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		return Items.feather;
 	}
 
-	public ItemStack getEggs(){
+	public ItemStack getEggs()
+	{
 		if(TFC_Time.getTotalTicks() >= this.nextEgg)
 		{
 			this.nextEgg = TFC_Time.getTotalTicks() + EggTime;
@@ -344,25 +358,25 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 
 	@Override
-	public int getBirthDay() 
+	public int getBirthDay()
 	{
 		return this.dataWatcher.getWatchableObjectInt(15);
 	}
 
 	@Override
-	public int getNumberOfDaysToAdult() 
+	public int getNumberOfDaysToAdult()
 	{
 		return TFC_Time.daysInMonth * 3;
 	}
 
 	@Override
-	public boolean isAdult() 
+	public boolean isAdult()
 	{
 		return getBirthDay()+getNumberOfDaysToAdult() <= TFC_Time.getTotalDays();
 	}
 
 	@Override
-	public float getSize() 
+	public float getSize()
 	{
 		return size_mod;
 	}
@@ -380,19 +394,17 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 
 	@Override
-	public boolean canMateWith(IAnimal animal) 
+	public boolean canMateWith(IAnimal animal)
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityChickenTFC) {
+		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityChickenTFC)
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 
 	@Override
-	public void mate(IAnimal otherAnimal) 
+	public void mate(IAnimal otherAnimal)
 	{
-
 	}
 
 	@Override
@@ -402,50 +414,58 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 
 	@Override
-	public void setInLove(boolean b) 
+	public void setInLove(boolean b)
 	{
 		this.inLove = b;
 	}
 
 	@Override
-	public long getAnimalID() 
+	public long getAnimalID()
 	{
 		return animalID;
 	}
 
 	@Override
-	public void setAnimalID(long id) 
+	public void setAnimalID(long id)
 	{
 		animalID = id;
 	}
 
 	@Override
-	public int getHunger() {
+	public int getHunger()
+	{
 		return hunger;
 	}
 
 	@Override
-	public void setHunger(int h) 
+	public void setHunger(int h)
 	{
 		hunger = h;
 	}
+
 	@Override
-	public GenderEnum getGender() 
+	public GenderEnum getGender()
 	{
 		return GenderEnum.genders[getSex()];
 	}
+
 	@Override
-	public int getSex() {
+	public int getSex()
+	{
 		return dataWatcher.getWatchableObjectInt(13);
 	}
+
 	@Override
-	public EntityAgeable createChildTFC(EntityAgeable entityageable) {
+	public EntityAgeable createChildTFC(EntityAgeable entityageable)
+	{
 		ArrayList<Float> data = new ArrayList<Float>();
 		data.add(entityageable.getEntityData().getFloat("MateSize"));
 		return new EntityChickenTFC(worldObj, this, data);
 	}
+
 	@Override
-	public void setAge(int par1) {
+	public void setAge(int par1)
+	{
 		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
 	}
 
@@ -455,81 +475,78 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		if(!worldObj.isRemote){
-			if(!par1EntityPlayer.isSneaking()){par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));}
-			//if(getGender()==GenderEnum.FEMALE && pregnant){
+		if(!worldObj.isRemote)
+		{
+			if(!par1EntityPlayer.isSneaking())
+			{
+				par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
+			}
+			//if(getGender()==GenderEnum.FEMALE && pregnant)
 			//	par1EntityPlayer.addChatMessage("Pregnant");
 		}
 		//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
-		if(!worldObj.isRemote && isAdult()&& par1EntityPlayer.isSneaking() && attackEntityFrom(DamageSource.generic, 25) ) {
+		if(!worldObj.isRemote && isAdult()&& par1EntityPlayer.isSneaking() && attackEntityFrom(DamageSource.generic, 25) )
+		{
 			par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Items.feather, 1));
-
 		}
 		return super.interact(par1EntityPlayer);
 	}
 
 	@Override
-	public float getStrength() {
-		// TODO Auto-generated method stub
+	public float getStrength()
+	{
 		return this.getDataWatcher().getWatchableObjectFloat(24);
 	}
 
-
 	@Override
-	public float getAggression() {
-		// TODO Auto-generated method stub
+	public float getAggression()
+	{
 		return this.getDataWatcher().getWatchableObjectFloat(25);
 	}
 
-
 	@Override
-	public float getObedience() {
-		// TODO Auto-generated method stub
+	public float getObedience()
+	{
 		return this.getDataWatcher().getWatchableObjectFloat(26);
 	}
 
-
 	@Override
-	public float getColour() {
-		// TODO Auto-generated method stub
+	public float getColour()
+	{
 		return this.getDataWatcher().getWatchableObjectFloat(27);
 	}
 
-
 	@Override
-	public float getClimateAdaptation() {
-		// TODO Auto-generated method stub
+	public float getClimateAdaptation()
+	{
 		return this.getDataWatcher().getWatchableObjectFloat(28);
 	}
 
-
 	@Override
-	public float getHardiness() {
-		// TODO Auto-generated method stub
+	public float getHardiness()
+	{
 		return this.getDataWatcher().getWatchableObjectFloat(29);
 	}
 
 	@Override
-	public Vec3 getAttackedVec() {
-		// TODO Auto-generated method stub
+	public Vec3 getAttackedVec()
+	{
 		return null;
 	}
 
 	@Override
-	public void setAttackedVec(Vec3 attackedVec) {
-		// TODO Auto-generated method stub
-
+	public void setAttackedVec(Vec3 attackedVec)
+	{
 	}
 
 	@Override
-	public Entity getFearSource() {
-		// TODO Auto-generated method stub
+	public Entity getFearSource()
+	{
 		return null;
 	}
 
 	@Override
-	public void setFearSource(Entity fearSource) {
-		// TODO Auto-generated method stub
-
+	public void setFearSource(Entity fearSource)
+	{
 	}
 }

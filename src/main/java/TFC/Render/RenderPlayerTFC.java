@@ -63,7 +63,8 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 		quiver.rotateAngleZ = (float)(Math.PI/4) + (float)(Math.PI);
 		quiver.setTextureSize(64, 32);
 
-		for(int i = 0; i < arrows.length; i++){
+		for(int i = 0; i < arrows.length; i++)
+		{
 			arrows[i] = new ModelRenderer(quiverModel,59,0);
 			arrows[i].addBox(-1,-8,0,2,14,0);
 			arrows[i].setRotationPoint(0,0,0f);
@@ -123,7 +124,8 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 	@Override
 	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
 	{
-		if(par1EntityLivingBase instanceof EntityStand){
+		if(par1EntityLivingBase instanceof EntityStand)
+		{
 			return this.setArmorModelTFC((EntityStand)par1EntityLivingBase, par2, par3);
 		}
 		return this.shouldRenderPass/*setArmorModel*/((AbstractClientPlayer)par1EntityLivingBase, par2, par3);
@@ -160,9 +162,9 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 				int j = itemarmor.getColor(itemstack);
 				if (j != -1)
 				{
-					float f2 = (float)(j >> 16 & 255) / 255.0F;
-					float f3 = (float)(j >> 8 & 255) / 255.0F;
-					float f4 = (float)(j & 255) / 255.0F;
+					float f2 = (j >> 16 & 255) / 255.0F;
+					float f3 = (j >> 8 & 255) / 255.0F;
+					float f4 = (j & 255) / 255.0F;
 					GL11.glColor3f(f1 * f2, f1 * f3, f1 * f4);
 
 					if (itemstack.isItemEnchanted())
@@ -278,7 +280,7 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 
 			if ((i & 15) == 15)
 			{
-				f9 = (float)par1EntityLivingBase.ticksExisted + par9;
+				f9 = par1EntityLivingBase.ticksExisted + par9;
 				this.bindTexture(RES_ITEM_GLINT);
 				GL11.glEnable(GL11.GL_BLEND);
 				f10 = 0.5F;
@@ -294,10 +296,10 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 					GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
 					GL11.glMatrixMode(GL11.GL_TEXTURE);
 					GL11.glLoadIdentity();
-					float f12 = f9 * (0.001F + (float)k * 0.003F) * 20.0F;
+					float f12 = f9 * (0.001F + k * 0.003F) * 20.0F;
 					float f13 = 0.33333334F;
 					GL11.glScalef(f13, f13, f13);
-					GL11.glRotatef(30.0F - (float)k * 60.0F, 0.0F, 0.0F, 1.0F);
+					GL11.glRotatef(30.0F - k * 60.0F, 0.0F, 0.0F, 1.0F);
 					GL11.glTranslatef(0.0F, f12, 0.0F);
 					GL11.glMatrixMode(GL11.GL_MODELVIEW);
 					this.renderPassModel.render(par1EntityLivingBase, f8, f7, f4, f3 - f2, f5, f6);
@@ -320,15 +322,15 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 
 
 	@Override
-	public void doRender(AbstractClientPlayer par1AbstractClientPlayer, double par2, double par4, double par6, float par8, float par9)
+	public void doRender(AbstractClientPlayer player, double par2, double par4, double par6, float par8, float partialTick)
 	{
-		if (MinecraftForge.EVENT_BUS.post(new RenderPlayerEvent.Pre(par1AbstractClientPlayer, this, par9))) return;
+		if (MinecraftForge.EVENT_BUS.post(new RenderPlayerEvent.Pre(player, this, partialTick))) return;
 		float f2 = 1.0F;
 		GL11.glColor3f(f2, f2, f2);
-		ItemStack itemstack = par1AbstractClientPlayer.inventory.getCurrentItem();
+		ItemStack itemstack = player.inventory.getCurrentItem();
 		this.quiverModel.heldItemRight = this.modelArmorChestplate.heldItemRight = this.modelArmor.heldItemRight = this.modelBipedMain.heldItemRight = itemstack != null ? 1 : 0;
 
-		if (itemstack != null && par1AbstractClientPlayer.getItemInUseCount() > 0)
+		if (itemstack != null && player.getItemInUseCount() > 0)
 		{
 			EnumAction enumaction = itemstack.getItemUseAction();
 
@@ -342,37 +344,38 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 			}
 		}
 
-		this.quiverModel.isSneak = this.modelArmorChestplate.isSneak = this.modelArmor.isSneak = this.modelBipedMain.isSneak = par1AbstractClientPlayer.isSneaking();
-		double d3 = par4 - (double)par1AbstractClientPlayer.yOffset;
+		this.quiverModel.isSneak = this.modelArmorChestplate.isSneak = this.modelArmor.isSneak = this.modelBipedMain.isSneak = player.isSneaking();
+		double d3 = par4 - player.yOffset;
 
-		if (par1AbstractClientPlayer.isSneaking() && !(par1AbstractClientPlayer instanceof EntityPlayerSP))
+		if (player.isSneaking() && !(player instanceof EntityPlayerSP))
 		{
 			d3 -= 0.125D;
 		}
 
-		super.doRender(par1AbstractClientPlayer, par2, par4, par6, par8, par9);
+		super.doRender(player, par2, par4, par6, par8, partialTick);
 		this.quiverModel.aimedBow = this.modelArmorChestplate.aimedBow = this.modelArmor.aimedBow = this.modelBipedMain.aimedBow = false;
 		this.quiverModel.isSneak = this.modelArmorChestplate.isSneak = this.modelArmor.isSneak = this.modelBipedMain.isSneak = false;
 		this.quiverModel.heldItemRight = this.modelArmorChestplate.heldItemRight = this.modelArmor.heldItemRight = this.modelBipedMain.heldItemRight = 0;
-		MinecraftForge.EVENT_BUS.post(new RenderPlayerEvent.Post(par1AbstractClientPlayer, this, par9));
+		MinecraftForge.EVENT_BUS.post(new RenderPlayerEvent.Post(player, this, partialTick));
 	}
 
 	/**
 	 * Set the specified armor model as the player model. Args: player, armorSlot, partialTick
 	 */
 	@Override
-	protected int shouldRenderPass/*setArmorModel*/(AbstractClientPlayer par1AbstractClientPlayer, int par2, float par3)
+	protected int shouldRenderPass/*setArmorModel*/(AbstractClientPlayer par1AbstractClientPlayer, int slotIndex, float partialTick)
 	{
 		ItemStack itemstack;
-		itemstack = par1AbstractClientPlayer.inventory.armorItemInSlot(4 - (par2<4?par2:4));
+		itemstack = par1AbstractClientPlayer.inventory.armorItemInSlot(4 - (slotIndex<4?slotIndex:4));
 		//RenderPlayerTFC.armorFilenamePrefix = RenderPlayer.armorFilenamePrefix;
 		plume.showModel = false;
 		plume2.showModel = false;
 		HornR1.showModel = false;
 		HornL1.showModel = false;
 		quiver.showModel = false;
-		if(par2 == 3){
-			this.backSlot(par1AbstractClientPlayer, par1AbstractClientPlayer.posX, par1AbstractClientPlayer.posY, par1AbstractClientPlayer.posZ, 0, par3);
+		if(slotIndex == 3)
+		{
+			this.backSlot(par1AbstractClientPlayer, par1AbstractClientPlayer.posX, par1AbstractClientPlayer.posY, par1AbstractClientPlayer.posZ, 0, partialTick);
 		}
 		if (itemstack != null)
 		{
@@ -381,27 +384,29 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 			if (item instanceof ItemArmor)
 			{
 				ItemArmor itemarmor = (ItemArmor)item;
-				this.bindTexture(RenderBiped.getArmorResource(par1AbstractClientPlayer, itemstack, par2, null));
-				ModelBiped modelbiped = par2 == 2 ? this.modelArmor : this.modelArmorChestplate;
-				modelbiped.bipedHead.showModel = par2 == 0;
+				this.bindTexture(RenderBiped.getArmorResource(par1AbstractClientPlayer, itemstack, slotIndex, null));
+				ModelBiped modelbiped = slotIndex == 2 ? this.modelArmor : this.modelArmorChestplate;
+				modelbiped.bipedHead.showModel = slotIndex == 0;
 				plume.showModel = false;//(itemstack.getItem() == TFCItems.BronzeHelmet);
 				plume2.showModel = false;//(itemstack.getItem() == TFCItems.BronzeHelmet);
 				HornR1.showModel = false;//(itemstack.getItem() == TFCItems.WroughtIronHelmet);
 				HornL1.showModel = false;//(itemstack.getItem() == TFCItems.WroughtIronHelmet);
 				quiver.showModel = (itemstack.getItem() == TFCItems.Quiver);
-				if(quiver.showModel){
+				if(quiver.showModel)
+				{
 					int n = ((ItemQuiver)TFCItems.Quiver).getQuiverArrows(itemstack);
 					int arrowRenders = Math.min(n/4, 16);
-					for(int i = 0; i < 16;i++){
+					for(int i = 0; i < 16;i++)
+					{
 						arrows[i].showModel = i < arrowRenders;
 					}
 				}
-				modelbiped.bipedHeadwear.showModel = par2 == 0 && (itemstack.getItem() != TFCItems.BronzeHelmet&&itemstack.getItem() != TFCItems.WroughtIronHelmet);
-				modelbiped.bipedBody.showModel = par2 == 1 || par2 == 2;
-				modelbiped.bipedRightArm.showModel = par2 == 1;
-				modelbiped.bipedLeftArm.showModel = par2 == 1;
-				modelbiped.bipedRightLeg.showModel = par2 == 2 || par2 == 3;
-				modelbiped.bipedLeftLeg.showModel = par2 == 2 || par2 == 3;
+				modelbiped.bipedHeadwear.showModel = slotIndex == 0 && (itemstack.getItem() != TFCItems.BronzeHelmet&&itemstack.getItem() != TFCItems.WroughtIronHelmet);
+				modelbiped.bipedBody.showModel = slotIndex == 1 || slotIndex == 2;
+				modelbiped.bipedRightArm.showModel = slotIndex == 1;
+				modelbiped.bipedLeftArm.showModel = slotIndex == 1;
+				modelbiped.bipedRightLeg.showModel = slotIndex == 2 || slotIndex == 3;
+				modelbiped.bipedLeftLeg.showModel = slotIndex == 2 || slotIndex == 3;
 				modelbiped = quiver.showModel?quiverModel:modelbiped;
 				this.setRenderPassModel(modelbiped);
 

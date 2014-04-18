@@ -158,6 +158,7 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntityHorseTFC.class, "TFCHorse", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityCustomMinecart.class, "minecart", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntitySkeletonTFC.class, "TFCSkeleton", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntitySkeletonTFC.class, "TFCSkeleton", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityZombieTFC.class, "TFCZombie", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntitySpiderTFC.class, "TFCSpider", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntitySlimeTFC.class, "TFCSlime", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
@@ -181,6 +182,7 @@ public class CommonProxy
 		EntityRegistry.registerModEntity(EntityWolfTFC.class, "wolfTFC", 7,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityBear.class, "bearTFC", 8,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityChickenTFC.class, "chickenTFC", 9,TerraFirmaCraft.instance, 160, 5, true);
+
 		EntityRegistry.registerModEntity(EntityPigTFC.class, "pigTFC", 10,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityDeer.class, "deerTFC", 11,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityCustomMinecart.class, "TFC minecart", 12,TerraFirmaCraft.instance, 160, 5, true);
@@ -197,6 +199,8 @@ public class CommonProxy
 		EntityRegistry.registerModEntity(EntityIronGolemTFC.class, "irongolemTFC", 23,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityCreeperTFC.class, "creeperTFC", 24,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityStand.class, "standTFC", 25,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntityPheasantTFC.class, "PheasantTFC", 26,TerraFirmaCraft.instance, 160, 5, true);
+
 		//EntityRegistry.registerModEntity(EntityArrowTFC.class, "deerTFC", 25,TerraFirmaCraft.instance, 160, 5, true);
 	}
 

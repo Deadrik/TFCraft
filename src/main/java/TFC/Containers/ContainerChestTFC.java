@@ -125,4 +125,12 @@ public class ContainerChestTFC extends ContainerTFC
 		super.onContainerClosed(par1EntityPlayer);
 		this.lowerChestInventory.closeInventory();
 	}
+	
+    /**
+     * Return this chest container's lower chest inventory.
+     */
+    public IInventory getLowerChestInventory()
+    {
+        return this.lowerChestInventory;
+    }	
 }

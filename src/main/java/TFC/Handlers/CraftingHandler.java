@@ -15,9 +15,7 @@ import TFC.Core.Recipes;
 import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
-import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerInventory;
-import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Handlers.Network.AbstractPacket;
 import TFC.Handlers.Network.PlayerUpdatePacket;
 import TFC.Items.ItemIngot;
@@ -81,7 +79,7 @@ public class CraftingHandler
 					if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Hide, 1, 0)))
 						player.entityDropItem(new ItemStack(TFCItems.Hide, 1, 0), 1);
 				}
-				else if(item == TFCItems.TerraLeather)
+				/*else if(item == TFCItems.TerraLeather)
 				{
 					boolean openGui = false;
 					for(int i = 0; i < iinventory.getSizeInventory(); i++)
@@ -109,13 +107,18 @@ public class CraftingHandler
 						pi.specialCraftingType = new ItemStack(TFCItems.FlatLeather, 1, itemstack.getItemDamage());
 						player.openGui(TerraFirmaCraft.instance, 28, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 					}
-				}
+				}*/
 			}
 			else if(item == TFCItems.WoolYarn)
+			{
 				HandleItem(e.player,e.craftMatrix,Recipes.Spindle);
+			}
 			else if(item == TFCItems.Powder && isDmg == 0)
+			{
 				HandleItem(e.player, e.craftMatrix, Recipes.Hammers);
+			}
 			else if(item == TFCItems.Mortar)
+			{
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
 					if(iinventory.getStackInSlot(i) == null)
@@ -123,7 +126,9 @@ public class CraftingHandler
 					if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
 						iinventory.setInventorySlotContents(i, new ItemStack(TFCItems.Limewater));
 				}
+			}
 			else if(item == TFCItems.Limewater)
+			{
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
 					if(iinventory.getStackInSlot(i) == null)
@@ -131,7 +136,9 @@ public class CraftingHandler
 					if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
 						iinventory.setInventorySlotContents(i, new ItemStack(TFCItems.Mortar));
 				}
-			else if(itemstack.getItem() instanceof ItemAnvil1 && itemstack.getItemDamage() == 2){
+			}
+			else if(itemstack.getItem() instanceof ItemAnvil1 && itemstack.getItemDamage() == 2)
+			{
 				player.triggerAchievement(TFC_Achievements.achBronzeAge);
 			}
 			else if(itemstack.getItem() instanceof ItemIngot)
@@ -140,6 +147,7 @@ public class CraftingHandler
 					player.playSound(TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
 				else if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1)))
 					player.entityDropItem(new ItemStack(TFCItems.CeramicMold, 1, 1), 1);
+
 				float temperature = 0;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
@@ -198,7 +206,7 @@ public class CraftingHandler
 
 	public static boolean gridHasItem(IInventory iinventory, Item item)
 	{
-		for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+		for(int i = 0; i < iinventory.getSizeInventory(); i++)
 		{
 			if(iinventory.getStackInSlot(i) == null)
 				continue;

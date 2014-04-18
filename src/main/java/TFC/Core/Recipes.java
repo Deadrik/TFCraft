@@ -173,8 +173,8 @@ public class Recipes
 				GameRegistry.addRecipe(new ItemStack(TFCItems.Wool,1+k,0), new Object[] {
 					"2","1", Character.valueOf('1'), new ItemStack(TFCItems.SheepSkin,1,k),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
 			}
-			GameRegistry.addRecipe(new ItemStack(TFCItems.TerraLeather,0,0), new Object[] {
-				"2","1", Character.valueOf('1'), new ItemStack(TFCItems.TerraLeather,1),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
+			//GameRegistry.addRecipe(new ItemStack(TFCItems.TerraLeather,0,0), new Object[] {
+			//	"2","1", Character.valueOf('1'), new ItemStack(TFCItems.TerraLeather,1),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
 		}
 
 		GameRegistry.addRecipe(new ItemStack(Items.item_frame,1),new Object[]{"###","#$#","###",Character.valueOf('#'),new ItemStack(Items.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.TerraLeather,1)});
@@ -1803,6 +1803,7 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(Items.fish, 1), 0), new Object[] {new ItemStack(Items.fish, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.CalamariRaw, 1), 0), new Object[] {new ItemStack(TFCItems.CalamariRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.muttonRaw, 1), 0), new Object[] {new ItemStack(TFCItems.muttonRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.horseMeatRaw, 1), 0), new Object[] {new ItemStack(TFCItems.horseMeatRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 
 		for(Item i : TFCItems.FoodList)
 		{

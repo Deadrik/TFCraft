@@ -3,7 +3,9 @@ package TFC.Items.Pottery;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -37,11 +39,12 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		this.setSize(EnumSize.SMALL);
 	}
 
-	/*@Override
-	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
+	@Override
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		list.add(new ItemStack(this,1,0));
-	}*/
+		list.add(new ItemStack(this, 1, 0));
+		list.add(new ItemStack(this, 1, 1));
+	}
 
 	@Override
 	public boolean canStack()
@@ -57,8 +60,10 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		for(int i = 0; bag != null && i < 4; i++)
 		{
 			if(bag[i] != null)
+			{
 				if(!(bag[i].getItem() instanceof ItemOreSmall) && !(bag[i].getItem() instanceof ItemOre))
 					canCookAlloy = false;
+			}
 		}
 
 		if(is.getItemDamage() == 2)
@@ -134,6 +139,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					metalAmounts[3] = 0;
 				}
 			}
+
 			int total = metalAmounts[0] + metalAmounts[1] + metalAmounts[2] + metalAmounts[3];
 			int numMetals = 0;
 			if(metalAmounts[0] > 0)
@@ -183,8 +189,10 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	private int mergeMetals(Metal mt0, Metal mt1, int m0, int m1)
 	{
 		if(mt0 != null && mt1 != null && m0 > 0)
+		{
 			if(mt0.Name.equals(mt1.Name))
 				return m0 + m1;
+		}
 		return m0;
 	}
 
@@ -217,9 +225,10 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		{
 			TFC_Core.handleItemTicking(bag, world, x, y, z, 0.5f);
 			for(ItemStack i : bag)
+			{
 				if(i != null && i.stackSize == 0)
 					i = null;
-
+			}
 			saveContents(is, bag);
 		}
 		return true;

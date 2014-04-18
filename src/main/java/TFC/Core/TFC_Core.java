@@ -50,8 +50,6 @@ import TFC.Items.ItemTFCArmor;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemBlocks.ItemTerraBlock;
 import TFC.TileEntities.TileEntityPartial;
-import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -956,11 +954,13 @@ public class TFC_Core
 		TFC_Core.setPlayerFoodStats(player, foodstats);
 	}
 
-	public static float getEnvironmentalDecay(float temp, DataLayer rain)
+	public static float getEnvironmentalDecay(float temp)
 	{
-		// return 1+((temp-4f)*0.002f);
 		if (temp > 0)
-			return ((1f - (15f / (15f + temp))) * 2 + (rain.floatdata1 / 16000));
+		{
+			float tempFactor = 1f - (15f / (15f + temp));
+			return tempFactor * 2;
+		}
 		else
 			return 0;
 	}
@@ -1083,8 +1083,7 @@ public class TFC_Core
 			 */
 			float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")),
 					TFC_Time.getHourOfDayFromTotalHours(nbt.getInteger("decayTimer")), x, y, z);
-			DataLayer rain = ((TFCWorldChunkManager) world.getWorldChunkManager()).getRainfallLayerAt(x, z);
-			float environmentalDecay = getEnvironmentalDecay(temp, rain) * environmentalDecayFactor;
+			float environmentalDecay = getEnvironmentalDecay(temp) * environmentalDecayFactor;
 
 			if (decay < 0)
 			{
@@ -1101,7 +1100,8 @@ public class TFC_Core
 			}
 			else
 			{
-				float d = (((decay * Global.FOOD_DECAY_RATE) / 24) * (thisDecayRate * environmentalDecay) * protMult)*TFCOptions.decayMultiplier;
+				//current decay level * global decay rate / 24 * this item decay rate * environmentla decay rate * protection multiplier * global decay multiplier
+				float d = (((decay * Global.FOOD_DECAY_RATE) / 24) * thisDecayRate * environmentalDecay * protMult)*TFCOptions.decayMultiplier;
 				decay += d;
 			}
 			nbt.setInteger("decayTimer", nbt.getInteger("decayTimer") + 1);

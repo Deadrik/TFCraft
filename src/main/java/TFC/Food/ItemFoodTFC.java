@@ -110,17 +110,17 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		NBTTagCompound stackTagCompound = is.getTagCompound();
 		if(stackTagCompound.hasKey("isSalted"))
-			arraylist.add("\u2022Salted");
+			arraylist.add("\u2022" + StatCollector.translateToLocal("gui.food.salted"));
 		if(stackTagCompound.hasKey("foodWeight"))
 		{
 			float ounces = Helper.roundNumber(stackTagCompound.getFloat("foodWeight"), 100);
 			if(ounces > 0)
-				arraylist.add("Amount " + ounces+" oz / "+Global.FOOD_MAX_WEIGHT+" oz");
+				arraylist.add(StatCollector.translateToLocal("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
 			float decay = stackTagCompound.getFloat("foodDecay");
 			if(decay > 0)
-				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100, 10)+"%");
+				arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
 			if(TFCOptions.enableDebugMode)
-				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay: " + decay);
+				arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.food.decay") + ": " + decay);
 		}
 	}
 
@@ -171,10 +171,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		if(!world.isRemote)
-		{
 			foodstats.eatFood(is);
 
-		}
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		TFC_Core.setPlayerFoodStats(player, foodstats);
 		return is;
@@ -182,16 +180,16 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	public ItemStack onConsumedByEntity(ItemStack is, World world, EntityLivingBase entity)
 	{
-		if(entity instanceof IAnimal){
+		if(entity instanceof IAnimal)
+		{
 			if(!world.isRemote)
 			{
 				ItemFoodTFC item = (ItemFoodTFC) is.getItem();
 				float weight = item.getFoodWeight(is);
 				float decay = Math.max(item.getFoodDecay(is), 0);
 				float eatAmount = Math.min(weight - decay, 5f);
-				if(FoodStatsTFC.reduceFood(is, eatAmount)){
+				if(FoodStatsTFC.reduceFood(is, eatAmount))
 					is.stackSize = 0;
-				}
 			}
 			world.playSoundAtEntity(entity, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		}
@@ -293,23 +291,25 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		return weight;
 	}
 	@Override
-	public boolean canStack() 
+	public boolean canStack()
 	{
 		return false;
 	}
 
 	@Override
-	public EnumFoodGroup getFoodGroup() {
+	public EnumFoodGroup getFoodGroup()
+	{
 		return foodgroup;
 	}
 
 	@Override
-	public int getFoodID() {
+	public int getFoodID()
+	{
 		return foodID;
 	}
 
 	@Override
-	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) 
+	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k)
 	{
 		return null;
 	}

@@ -184,9 +184,9 @@ public class TENestBox extends TileEntity implements IInventory
 				{
 					if(inventory[i] == null)
 					{
+						ItemFoodTFC.createTag(item, 2.0f);
 						if(father != null)
 						{
-							ItemFoodTFC.createTag(item, 2.0f);
 							NBTTagCompound nbt = item.getTagCompound();
 							nbt.setLong("Fertilized", TFC_Time.getTotalTicks()+(long)(TFC_Time.ticksInMonth*0.75f));
 							nbt.setTag("Genes", this.createGenes((EntityChickenTFC) bird, father));

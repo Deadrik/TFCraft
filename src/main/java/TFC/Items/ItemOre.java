@@ -4,9 +4,11 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import TFC.Reference;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
@@ -14,17 +16,19 @@ import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 
 public class ItemOre extends ItemTerra implements ISmeltable
 {	
 	public IIcon[] icons;
 
-	public ItemOre() 
+	public ItemOre()
 	{
 		super();
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		MetaNames = new String[]{"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
+		MetaNames = new String[]{
+				"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
 				"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
 				"Bituminous Coal", "Lignite", "Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
 				/*22*/"Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite", 
@@ -39,20 +43,22 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public EnumSize getSize(ItemStack is) {
+	public EnumSize getSize(ItemStack is)
+	{
 		return EnumSize.SMALL;
 	}
 
 	@Override
-	public EnumWeight getWeight(ItemStack is) {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight(ItemStack is)
+	{
 		return EnumWeight.HEAVY;
 	}
 
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++) {
+		for(int i = 0; i < MetaNames.length; i++)
+		{
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -67,22 +73,40 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	public void registerIcons(IIconRegister registerer)
 	{
 		icons = new IIcon[MetaNames.length];
-		for(int i = 0; i < MetaNames.length; i++) {
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + textureFolder+MetaNames[i]+" Ore");
+		for(int i = 0; i < MetaNames.length; i++)
+		{
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + textureFolder+MetaNames[i] + " Ore");
 		}
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack)
 	{
-		if(MetaNames != null) {
+		if(MetaNames != null)
+		{
 			return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
 		}
 		return super.getUnlocalizedName(itemstack);
 	}
 
 	@Override
-	public Metal GetMetalType(ItemStack is) 
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{
+		if(GetMetalType(is) != null)
+		{
+			if (TFC_Core.showExtraInformation()) 
+			{
+				arraylist.add(StatCollector.translateToLocal("gui.units") + ": " + GetMetalReturnAmount(is));
+			}
+			else
+			{
+				arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
+			}
+		}
+	}
+
+	@Override
+	public Metal GetMetalType(ItemStack is)
 	{
 		int dam = is.getItemDamage();
 		switch(dam)
@@ -136,7 +160,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public short GetMetalReturnAmount(ItemStack is) 
+	public short GetMetalReturnAmount(ItemStack is)
 	{
 		int dam = is.getItemDamage();
 		switch(dam)
@@ -155,7 +179,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 		case 11:
 		case 12:
 		case 13: return 25;
-		case 35: 
+		case 35:
 		case 36:
 		case 37:
 		case 38:
@@ -169,7 +193,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 		case 46:
 		case 47:
 		case 48: return 35;
-		case 49: 
+		case 49:
 		case 50:
 		case 51:
 		case 52:
@@ -188,7 +212,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public boolean isSmeltable(ItemStack is) 
+	public boolean isSmeltable(ItemStack is)
 	{
 		switch(is.getItemDamage())
 		{
@@ -206,7 +230,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 		case 11:
 		case 12:
 		case 13:
-		case 35: 
+		case 35:
 		case 36:
 		case 37:
 		case 38:
@@ -220,7 +244,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 		case 46:
 		case 47:
 		case 48:
-		case 49: 
+		case 49:
 		case 50:
 		case 51:
 		case 52:
@@ -241,7 +265,8 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public EnumTier GetSmeltTier(ItemStack is) {
+	public EnumTier GetSmeltTier(ItemStack is)
+	{
 		int dam = is.getItemDamage();
 		switch(dam)
 		{
