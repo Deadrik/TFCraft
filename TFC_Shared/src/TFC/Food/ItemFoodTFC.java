@@ -109,17 +109,17 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		NBTTagCompound stackTagCompound = is.getTagCompound();
 		if(stackTagCompound.hasKey("isSalted"))
-			arraylist.add("\u2022Salted");
+			arraylist.add("\u2022" + StringUtil.localize("gui.food.salted"));
 		if(stackTagCompound.hasKey("foodWeight"))
 		{
 			float ounces = Helper.roundNumber(stackTagCompound.getFloat("foodWeight"), 100);
 			if(ounces > 0)
-				arraylist.add("Amount " + ounces+" oz / "+Global.FOOD_MAX_WEIGHT+" oz");
+				arraylist.add(StringUtil.localize("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
 			float decay = stackTagCompound.getFloat("foodDecay");
 			if(decay > 0)
-				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100, 10)+"%");
+				arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
 			if(TFCOptions.enableDebugMode)
-				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay: " + decay);
+				arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.food.decay") + ": " + decay);
 		}
 	}
 

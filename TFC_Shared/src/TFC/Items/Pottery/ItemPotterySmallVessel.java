@@ -3,6 +3,7 @@ package TFC.Items.Pottery;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -38,11 +39,12 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		this.setSize(EnumSize.SMALL);
 	}
 
-	/*@Override
+	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		list.add(new ItemStack(this,1,0));
-	}*/
+		list.add(new ItemStack(this, 1, 1));
+	}
 
 	@Override
 	public boolean canStack()

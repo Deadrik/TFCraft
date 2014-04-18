@@ -87,10 +87,14 @@ public class TECrop extends NetworkTileEntity
 					tempAdded = (28-(ambientTemp-28))* 0.0003f;
 
 				if(!crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
-					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+				{
+					killCrop(crop);
+				}
 				else if(crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
 					if(growth > 1)
-						worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+					{
+						killCrop(crop);
+					}
 
 				int nutriType = crop.cycleType;
 				int nutri = tef != null ? tef.nutrients[nutriType] : 18000;
@@ -124,16 +128,22 @@ public class TECrop extends NetworkTileEntity
 					this.broadcastPacketInRange(createCropUpdatePacket());
 
 				if((TFCOptions.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2))) || growth < 0)
+				{
 					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+				}
 
 				growthTimer += (R.nextInt(2)+23)*TFC_Time.hourLength;
 			}
 			else if(crop.needsSunlight && sunLevel <= 0)
-				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+			{
+				killCrop(crop);
+			}
 
 			if(worldObj.isRaining() && TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord) < 0)
 				if(!crop.dormantInFrost || growth > 1)
-					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+				{
+					killCrop(crop);
+				}
 		}
 	}
 
@@ -160,7 +170,7 @@ public class TECrop extends NetworkTileEntity
 
 				ItemStack seedStack = crop.getSeed();
 				int skill = 20-(int)(20*TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_AGRICULTURE));
-				seedStack.stackSize = 1+(world.rand.nextInt(1+skill == 0 ? 1 : 0));
+				seedStack.stackSize = 1 + (world.rand.nextInt(1 + skill) == 0 ? 1 : 0);
 				if(seedStack != null)
 					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, seedStack));
 
@@ -177,6 +187,17 @@ public class TECrop extends NetworkTileEntity
 				if(is != null)
 					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is));
 			}
+		}
+	}
+
+	public void killCrop(CropIndex crop)
+	{
+		ItemStack is = crop.getSeed();
+		is.stackSize = 1;
+		if (is != null)
+		{
+			worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, is));
+			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 		}
 	}
 
