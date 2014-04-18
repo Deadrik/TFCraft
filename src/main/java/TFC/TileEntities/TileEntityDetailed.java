@@ -42,12 +42,12 @@ public class TileEntityDetailed extends TileEntity
 
 	public boolean getBlockExists(int x, int y, int z)
 	{
-		return data.get((x * 8 + z)*8 + y);
+		return data.get((x * 8 + z) * 8 + y);
 	}
 	
 	public void setBlock(int x, int y, int z)
 	{
-		data.set((x * 8 + z)*8 + y);
+		data.set((x * 8 + z) * 8 + y);
 	}
 	
 	public void setQuad(int x, int y, int z)
@@ -70,15 +70,17 @@ public class TileEntityDetailed extends TileEntity
 	
 	public boolean isQuadSolid(int x, int y, int z)
 	{
-		return !quads.get((x * 2 + z)*2 + y);
+		return !quads.get((x * 2 + z) * 2 + y);
 	}
 	
 	public static BitSet fromByteArray(byte[] bytes, int size)
 	{
 		BitSet bits = new BitSet(size);
 		for (int i = 0; i < bytes.length * 8; i++)
+		{
 			if ((bytes[bytes.length - i / 8 - 1] & (1 << (i % 8))) > 0)
 				bits.set(i);
+		}
 		return bits;
 	}
 
@@ -86,8 +88,10 @@ public class TileEntityDetailed extends TileEntity
 	{
 		byte[] bytes = new byte[bits.length()/8+1];
 		for (int i=0; i<bits.length(); i++)
+		{
 			if (bits.get(i))
-				bytes[bytes.length-i/8-1] |= 1<<(i%8);
+				bytes[bytes.length - i / 8-1] |= 1 << (i%8);
+		}
 		return bytes;
 	}
 
@@ -128,6 +132,18 @@ public class TileEntityDetailed extends TileEntity
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
 		readFromNBT(pkt.func_148857_g());
+
+		for(int subX = 0; subX < 8; subX++)
+		{
+			for(int subZ = 0; subZ < 8; subZ++)
+			{
+				for(int subY = 0; subY < 8; subY++)
+				{
+					if(!getBlockExists(subX, subY, subZ))
+						setQuad(subX, subY, subZ);
+				}
+			}
+		}
 	}
 
 

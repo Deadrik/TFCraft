@@ -46,6 +46,7 @@ public class TEWorldItem extends TileEntity implements IInventory
 		super.writeToNBT(nbt);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
+		{
 			if(storage[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -53,6 +54,7 @@ public class TEWorldItem extends TileEntity implements IInventory
 				storage[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
+		}
 		nbt.setTag("Items", nbttaglist);
 	}
 

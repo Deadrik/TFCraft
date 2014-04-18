@@ -135,12 +135,14 @@ public class TileEntityQuern extends TileEntity implements IInventory
 					storage[0] = null;
 				else
 					storage[0].stackSize--;
+
 				if(storage[1] == null)
 					storage[1] = new ItemStack(outputItem,amountOut,damageOut);
 				else if(storage[1].stackSize < storage[1].getMaxStackSize())
 					storage[1].stackSize += amountOut;
 				else
 					ejectItem(new ItemStack(outputItem, amountOut, damageOut));
+
 				return true;
 			}
 		}
@@ -191,6 +193,7 @@ public class TileEntityQuern extends TileEntity implements IInventory
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
+		{
 			if(storage[i]!= null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, storage[i]);
@@ -199,6 +202,7 @@ public class TileEntityQuern extends TileEntity implements IInventory
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
 				worldObj.spawnEntityInWorld(entityitem);
 			}
+		}
 	}
 
 	public void ejectItem(ItemStack item)
@@ -311,6 +315,7 @@ public class TileEntityQuern extends TileEntity implements IInventory
 		super.writeToNBT(nbttagcompound);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
+		{
 			if(storage[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -318,6 +323,7 @@ public class TileEntityQuern extends TileEntity implements IInventory
 				storage[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
+		}
 		nbttagcompound.setTag("Items", nbttaglist);
 		nbttagcompound.setBoolean("hasQuern", hasQuern);
 	}

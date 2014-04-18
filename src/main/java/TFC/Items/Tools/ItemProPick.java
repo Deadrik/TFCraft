@@ -64,7 +64,8 @@ public class ItemProPick extends ItemTerra
 		int meta = world.getBlockMetadata(x, y, z);
 
 		// Damage the item on prospecting use.
-		if (!world.isRemote) {
+		if (!world.isRemote)
+		{
 			itemStack.damageItem(1, player);
 			if (itemStack.getItemDamage() >= itemStack.getMaxDamage())
 				player.destroyCurrentEquippedItem();
@@ -92,11 +93,14 @@ public class ItemProPick extends ItemTerra
 
 		// Check all blocks in the 25x25 area, centered on the targeted block.
 		for (int i = -12; i < 12; i++)
+		{
 			for (int j = -12; j < 12; j++)
-				for(int k = -12; k < 12; k++) {
-					int blockX = x + i, 
-							blockY = y + j,
-							blockZ = z + k;
+			{
+				for(int k = -12; k < 12; k++)
+				{
+					int blockX = x + i;
+					int blockY = y + j;
+					int blockZ = z + k;
 
 					block = world.getBlock(blockX, blockY, blockZ);
 
@@ -117,6 +121,8 @@ public class ItemProPick extends ItemTerra
 					ore = null;
 					oreName = null;
 				}
+			}
+		}
 
 		// Tell the player what was found.
 		TellResult(player);
@@ -130,15 +136,18 @@ public class ItemProPick extends ItemTerra
 	/*
 	 * Tells the player what block of ore he found, when directly targeting an ore block.
 	 */
-	private void TellResult(EntityPlayer player, ItemStack ore) {
+	private void TellResult(EntityPlayer player, ItemStack ore)
+	{
 		player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.Found"), ore.getItem().getItemStackDisplayName(ore))));
 	}
 
 	/*
 	 * Tells the player what ore has been found, randomly picked off the HashMap.
 	 */
-	private void TellResult(EntityPlayer player) {
-		if (results == null || results.size() == 0) {
+	private void TellResult(EntityPlayer player)
+	{
+		if (results == null || results.size() == 0)
+		{
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.ProPick.FoundNothing")));
 			return;
 		}
@@ -163,23 +172,26 @@ public class ItemProPick extends ItemTerra
 	}
 
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public boolean canStack()
+	{
 		return false;
 	}
 
-	private class ProspectResult {
+	private class ProspectResult
+	{
 		public ItemStack ItemStack;
 		public int Count;
 
-		public ProspectResult(ItemStack itemStack, int count) {
+		public ProspectResult(ItemStack itemStack, int count)
+		{
 			ItemStack = itemStack;
 			Count = count;
 		}
 	}
 	
 	@Override
-	public EnumItemReach getReach(ItemStack is){
+	public EnumItemReach getReach(ItemStack is)
+	{
 		return EnumItemReach.SHORT;
 	}
 }

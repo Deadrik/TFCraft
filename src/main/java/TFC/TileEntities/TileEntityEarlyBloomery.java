@@ -68,10 +68,10 @@ public class TileEntityEarlyBloomery extends TileEntity
 
 	public boolean isStackValid(int i, int j, int k)
 	{
-		Block yNegBlock = worldObj.getBlock(i, j-1, k);
+		Block yNegBlock = worldObj.getBlock(i, j - 1, k);
 		if(yNegBlock != TFCBlocks.Molten &&
-				worldObj.getBlock(i, j-1, k).getMaterial() != Material.rock && 
-				!worldObj.getBlock(i, j-1, k).isNormalCube() && 
+				worldObj.getBlock(i, j - 1, k).getMaterial() != Material.rock && 
+				!worldObj.getBlock(i, j - 1, k).isNormalCube() && 
 				yNegBlock != TFCBlocks.Charcoal)
 		{
 			return false;
@@ -100,9 +100,9 @@ public class TileEntityEarlyBloomery extends TileEntity
 			if (this.charcoalCount < this.oreCount)
 				return false;
 
-			Block bid = worldObj.getBlock(xCoord+direction[0], yCoord, zCoord+direction[1]);
+			Block bid = worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1]);
 			if(bid == TFCBlocks.Charcoal && 
-					worldObj.getBlockMetadata(xCoord+direction[0], yCoord, zCoord+direction[1]) >= 7 && !bloomeryLit)
+					worldObj.getBlockMetadata(xCoord + direction[0], yCoord, zCoord + direction[1]) >= 7 && !bloomeryLit)
 			{
 				bloomeryLit = true;
 				this.fuelTimeLeft = TFC_Time.getTotalTicks() + 14400;
@@ -137,17 +137,18 @@ public class TileEntityEarlyBloomery extends TileEntity
 			int[] direction = BlockEarlyBloomery.bloomeryToStackMap[getCharcoalDir(meta)];
 			if(bloomeryLit && TFC_Time.getTotalTicks() > fuelTimeLeft)
 			{
-				if((worldObj.getBlock(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Molten))
+				if((worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1])==TFCBlocks.Molten))
 				{
 					bloomeryLit = false;
-					worldObj.setBlock(xCoord+direction[0], yCoord, zCoord+direction[1], TFCBlocks.Bloom);
-					worldObj.setBlockToAir(xCoord+direction[0], yCoord+(moltenCount<2?2:moltenCount)-1, zCoord+direction[1]);
+					worldObj.setBlock(xCoord + direction[0], yCoord, zCoord + direction[1], TFCBlocks.Bloom);
+					worldObj.setBlockToAir(xCoord + direction[0], yCoord + (moltenCount < 2 ? 2 : moltenCount) - 1, zCoord + direction[1]);
 
 					oreCount = 0;
 					charcoalCount = 0;
-					((TileEntityBloom)(worldObj.getTileEntity(xCoord+direction[0], yCoord, zCoord+direction[1]))).setSize(outCount);
+					((TileEntityBloom)(worldObj.getTileEntity(xCoord + direction[0], yCoord, zCoord + direction[1]))).setSize(outCount);
 					outCount = 0;
 				}
+
 				if((meta & 4) != 0) 
 				{
 					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta & 3, 3);
@@ -162,33 +163,33 @@ public class TileEntityEarlyBloomery extends TileEntity
 				charcoalCount = 0;
 
 			/* Calculate how much ore the bloomery can hold. */
-			if(isStackValid(xCoord+direction[0], yCoord+3, zCoord+direction[1]) && 
-					isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]) && 
-					isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1]))
+			if(isStackValid(xCoord + direction[0], yCoord + 3, zCoord + direction[1]) && 
+					isStackValid(xCoord + direction[0], yCoord + 2, zCoord + direction[1]) && 
+					isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
 			{
 				maxCount = 24;
 			}
-			else if(isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]) &&
-					isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1]))
+			else if(isStackValid(xCoord + direction[0], yCoord + 2, zCoord + direction[1]) &&
+					isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
 			{
 				maxCount = 16;
 			}
-			else if(isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1]))
+			else if(isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
 			{
 				maxCount = 8;
 			}
 
-			int moltenHeight = Math.max((count/2)-1, 0);
+			int moltenHeight = Math.max((count/2) - 1, 0);
 			/*Fill the bloomery stack with molten ore. */
-			for (int i = bloomeryLit ? 0:1, j = bloomeryLit ? moltenHeight+7 : moltenHeight; j > 0; i++,j-=8)
+			for (int i = bloomeryLit ? 0:1, j = bloomeryLit ? moltenHeight + 7 : moltenHeight; j > 0; i++, j-=8)
 			{
-				Block bid = worldObj.getBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
+				Block bid = worldObj.getBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1]);
 				/*The stack must be air or already be molten rock*/
 				if((bid == Blocks.air ||bid == TFCBlocks.Molten || bid == TFCBlocks.Charcoal) &&
-						worldObj.getBlock(xCoord+direction[0], yCoord-1, zCoord+direction[1]).getMaterial() == Material.rock)
+						worldObj.getBlock(xCoord + direction[0], yCoord - 1, zCoord + direction[1]).getMaterial() == Material.rock)
 				{
 					//Make sure that the Stack is surrounded by rock
-					if(isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1]))
+					if(isStackValid(xCoord + direction[0], yCoord+i, zCoord + direction[1]))
 						validCount++;
 
 					if(i <= validCount) 
@@ -200,38 +201,45 @@ public class TileEntityEarlyBloomery extends TileEntity
 							if((bid == TFCBlocks.Molten && (mMeta & 8) == 0) || bid == Blocks.air || bid == TFCBlocks.Charcoal)
 							{
 								m += 8;
-								worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten, m, 2);
+								worldObj.setBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1], TFCBlocks.Molten, m, 2);
 							}
-						} else {
-							if(count > 0)
-								worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten, m, 2);
-							else
-								worldObj.setBlockToAir(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
 						}
-					} 
-					else 
+						else
+						{
+							if(count > 0)
+								worldObj.setBlock(xCoord + direction[0], yCoord + i, zCoord + direction[1], TFCBlocks.Molten, m, 2);
+							else
+								worldObj.setBlockToAir(xCoord + direction[0], yCoord + i, zCoord + direction[1]);
+						}
+					}
+					else
 					{
-						worldObj.setBlockToAir(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
+						worldObj.setBlockToAir(xCoord + direction[0], yCoord+i, zCoord + direction[1]);
 					}
 				}
 			}
 
-			if(!bloomeryLit && worldObj.getBlock(xCoord+direction[0], yCoord, zCoord+direction[1]) == TFCBlocks.Bloom)
+			if(!bloomeryLit && worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1]) == TFCBlocks.Bloom)
 			{
-				if(isStackValid(xCoord+direction[0], yCoord+3, zCoord+direction[1]) && 
-						isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]) && 
-						isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
-					if(worldObj.getBlock(xCoord+direction[0], yCoord+3, zCoord+direction[1]) == TFCBlocks.Molten)
-						worldObj.setBlockToAir(xCoord+direction[0], yCoord+3, zCoord+direction[1]);
+				if(isStackValid(xCoord + direction[0], yCoord + 3, zCoord + direction[1]) && 
+						isStackValid(xCoord + direction[0], yCoord + 2, zCoord + direction[1]) && 
+						isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
+				{
+					if(worldObj.getBlock(xCoord + direction[0], yCoord + 3, zCoord + direction[1]) == TFCBlocks.Molten)
+						worldObj.setBlockToAir(xCoord + direction[0], yCoord + 3, zCoord + direction[1]);
 				}
-				if(isStackValid(xCoord+direction[0], yCoord+2, zCoord+direction[1]) &&
-						isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
-					if(worldObj.getBlock(xCoord+direction[0], yCoord+2, zCoord+direction[1]) == TFCBlocks.Molten)
-						worldObj.setBlockToAir(xCoord+direction[0], yCoord+2, zCoord+direction[1]);
+
+				if(isStackValid(xCoord + direction[0], yCoord + 2, zCoord + direction[1]) &&
+						isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
+				{
+					if(worldObj.getBlock(xCoord + direction[0], yCoord + 2, zCoord + direction[1]) == TFCBlocks.Molten)
+						worldObj.setBlockToAir(xCoord + direction[0], yCoord + 2, zCoord + direction[1]);
 				}
-				if(isStackValid(xCoord+direction[0], yCoord+1, zCoord+direction[1])) {
-					if(worldObj.getBlock(xCoord+direction[0], yCoord+1, zCoord+direction[1]) == TFCBlocks.Molten)
-						worldObj.setBlockToAir(xCoord+direction[0], yCoord+1, zCoord+direction[1]);
+
+				if(isStackValid(xCoord + direction[0], yCoord + 1, zCoord + direction[1]))
+				{
+					if(worldObj.getBlock(xCoord + direction[0], yCoord + 1, zCoord + direction[1]) == TFCBlocks.Molten)
+						worldObj.setBlockToAir(xCoord + direction[0], yCoord + 1, zCoord + direction[1]);
 				}
 			}
 
@@ -240,8 +248,8 @@ public class TileEntityEarlyBloomery extends TileEntity
 
 			/*Create a list of all the items that are falling into the stack */
 			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
-					xCoord+direction[0], yCoord, zCoord+direction[1], 
-					xCoord+direction[0]+1, yCoord+(maxCount/8)+1.1, zCoord+direction[1]+1));
+					xCoord + direction[0], yCoord, zCoord + direction[1], 
+					xCoord + direction[0] + 1, yCoord+(maxCount/8) + 1.1, zCoord + direction[1] + 1));
 
 			/*Make sure the list isn't null or empty and that the stack is valid 1 layer above the Molten Ore*/
 			if (list != null && !list.isEmpty() && !bloomeryLit)
@@ -271,7 +279,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 						{
 							if(charcoalCount+oreCount < (2*maxCount) && oreCount < (maxCount) && outCount < 1000)
 							{
-								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(),1,entity.getEntityItem().getItemDamage())))
+								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage())))
 								{
 									oreCount+=1;
 									c--;
@@ -295,7 +303,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 						{
 							if(((ISmeltable)entity.getEntityItem().getItem()).GetMetalReturnAmount(entity.getEntityItem()) < 100 && outCount < 1000)
 							{
-								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(),1,entity.getEntityItem().getItemDamage()))) 
+								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(), 1, entity.getEntityItem().getItemDamage()))) 
 								{
 									oreCount+=1;
 									c--;
@@ -306,6 +314,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 							else
 								break;
 						}
+
 						if(c == 0)
 							entity.setDead();
 						else

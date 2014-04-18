@@ -138,7 +138,8 @@ public class BodyTempStats
 				for(int k = z-7;k<z+7;k++)
 				{
 					TileEntity te = player.worldObj.getTileEntity(i, j, k);
-					if((player.worldObj.getBlock(i, j, k) == Blocks.lava || player.worldObj.getBlock(i, j, k) == Blocks.flowing_lava) ||
+					if((player.worldObj.getBlock(i, j, k) == Blocks.lava ||
+							player.worldObj.getBlock(i, j, k) == Blocks.flowing_lava) ||
 							(te != null && te instanceof TileEntityFireEntity))
 					{
 						//returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )<10?1:0);

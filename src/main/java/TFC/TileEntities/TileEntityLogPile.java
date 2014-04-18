@@ -71,7 +71,7 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 	public boolean contentsMatch(int index, ItemStack is)
 	{
 		if(storage[index] != null && storage[index].getItem() == is.getItem() && storage[index].getItemDamage() == is.getItemDamage() &&
-				storage[index].stackSize < storage[index].getMaxStackSize() && storage[index].stackSize+1 <= this.getInventoryStackLimit())
+				storage[index].stackSize < storage[index].getMaxStackSize() && storage[index].stackSize + 1 <= this.getInventoryStackLimit())
 			return true;
 		else
 			return false;
@@ -194,10 +194,7 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 				else
 					setCharcoalFirepit(null);
 			}
-			storage[index] =
-					new ItemStack(storage[index].getItem(),
-							storage[index].stackSize+count,
-							storage[index].getItemDamage());
+			storage[index] = new ItemStack(storage[index].getItem(), storage[index].stackSize + count, storage[index].getItemDamage());
 		}
 	}
 
@@ -314,18 +311,18 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 			if(!charcoalFirepit.isInactiveCharcoalFirepit())
 			{
 				blocksToBeSetOnFire = new ArrayDeque<Vector3f>();
-				if(worldObj.isAirBlock(xCoord+1, yCoord, zCoord))
-					blocksToBeSetOnFire.add(new Vector3f(xCoord+1, yCoord, zCoord));
-				if(worldObj.isAirBlock(xCoord-1, yCoord, zCoord))
-					blocksToBeSetOnFire.add(new Vector3f(xCoord-1, yCoord, zCoord));
-				if(worldObj.isAirBlock(xCoord, yCoord, zCoord+1))
-					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord+1));
-				if(worldObj.isAirBlock(xCoord, yCoord, zCoord-1))
-					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord-1));
-				if(worldObj.isAirBlock(xCoord, yCoord+1, zCoord))
-					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord+1, zCoord));
-				if(worldObj.isAirBlock(xCoord, yCoord-1, zCoord))
-					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord-1, zCoord));
+				if(worldObj.isAirBlock(xCoord + 1, yCoord, zCoord))
+					blocksToBeSetOnFire.add(new Vector3f(xCoord + 1, yCoord, zCoord));
+				if(worldObj.isAirBlock(xCoord - 1, yCoord, zCoord))
+					blocksToBeSetOnFire.add(new Vector3f(xCoord - 1, yCoord, zCoord));
+				if(worldObj.isAirBlock(xCoord, yCoord, zCoord + 1))
+					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord + 1));
+				if(worldObj.isAirBlock(xCoord, yCoord, zCoord - 1))
+					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord - 1));
+				if(worldObj.isAirBlock(xCoord, yCoord + 1, zCoord))
+					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord + 1, zCoord));
+				if(worldObj.isAirBlock(xCoord, yCoord - 1, zCoord))
+					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord - 1, zCoord));
 			}
 			else
 			{
@@ -351,35 +348,35 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 	{
 		if(isOnFire)
 		{
-			if(worldObj.getBlock(xCoord+1, yCoord, zCoord) == Blocks.fire)
+			if(worldObj.getBlock(xCoord + 1, yCoord, zCoord) == Blocks.fire)
 			{
-				worldObj.setBlockToAir(xCoord+1, yCoord, zCoord);
-				worldObj.markBlockForUpdate(xCoord+1, yCoord, zCoord);
+				worldObj.setBlockToAir(xCoord + 1, yCoord, zCoord);
+				worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord);
 			}
-			if(worldObj.getBlock(xCoord-1, yCoord, zCoord) == Blocks.fire)
+			if(worldObj.getBlock(xCoord - 1, yCoord, zCoord) == Blocks.fire)
 			{
-				worldObj.setBlockToAir(xCoord-1, yCoord, zCoord);
-				worldObj.markBlockForUpdate(xCoord+1, yCoord, zCoord);
+				worldObj.setBlockToAir(xCoord - 1, yCoord, zCoord);
+				worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord);
 			}
-			if(worldObj.getBlock(xCoord, yCoord, zCoord+1) == Blocks.fire)
+			if(worldObj.getBlock(xCoord, yCoord, zCoord + 1) == Blocks.fire)
 			{
-				worldObj.setBlockToAir(xCoord, yCoord, zCoord+1);
-				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord+1);
+				worldObj.setBlockToAir(xCoord, yCoord, zCoord + 1);
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord + 1);
 			}
-			if(worldObj.getBlock(xCoord, yCoord, zCoord-1) == Blocks.fire)
+			if(worldObj.getBlock(xCoord, yCoord, zCoord - 1) == Blocks.fire)
 			{
-				worldObj.setBlockToAir(xCoord+1, yCoord, zCoord-1);
-				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord-1);
+				worldObj.setBlockToAir(xCoord + 1, yCoord, zCoord - 1);
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord - 1);
 			}
-			if(worldObj.getBlock(xCoord, yCoord+1, zCoord) == Blocks.fire)
+			if(worldObj.getBlock(xCoord, yCoord + 1, zCoord) == Blocks.fire)
 			{
-				worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);
-				worldObj.markBlockForUpdate(xCoord, yCoord+1, zCoord);
+				worldObj.setBlockToAir(xCoord, yCoord + 1, zCoord);
+				worldObj.markBlockForUpdate(xCoord, yCoord + 1, zCoord);
 			}
-			if(worldObj.getBlock(xCoord, yCoord-1, zCoord) == Blocks.fire)
+			if(worldObj.getBlock(xCoord, yCoord - 1, zCoord) == Blocks.fire)
 			{
-				worldObj.setBlockToAir(xCoord, yCoord-1, zCoord);
-				worldObj.markBlockForUpdate(xCoord, yCoord-1, zCoord);
+				worldObj.setBlockToAir(xCoord, yCoord - 1, zCoord);
+				worldObj.markBlockForUpdate(xCoord, yCoord - 1, zCoord);
 			}
 			isOnFire = false;
 		}

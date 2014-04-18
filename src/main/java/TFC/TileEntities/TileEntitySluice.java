@@ -141,7 +141,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
 			if(this.getStackInSlot(i) == null)
 				return i;
 		}
-		return -1;
+		return  - 1;
 	}
 
 	@Override
@@ -212,9 +212,9 @@ public class TileEntitySluice extends TileEntity implements IInventory
 		{
 			if(!initialized)
 			{
-				for(int x = -100; x <= 100; x += 2)
+				for(int x =  - 100; x <= 100; x += 2)
 				{
-					for(int z = -100; z <= 100; z += 2)
+					for(int z =  - 100; z <= 100; z += 2)
 					{
 						for(int y = yCoord; y > yCoord-50; y--)
 						{
@@ -241,13 +241,13 @@ public class TileEntitySluice extends TileEntity implements IInventory
 			{
 				int[] dir = BlockSluice.headBlockToFootBlockMap[BlockSluice.getDirectionFromMetadata(meta)];
 				List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
-						xCoord, yCoord, zCoord, 
-						xCoord+1, yCoord+1.1f, zCoord+1));
+						xCoord, yCoord, zCoord,
+						xCoord + 1, yCoord + 1.1f, zCoord + 1));
 
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
 				{
 					EntityItem entity = (EntityItem)iterator.next();
-					Item item = entity.getEntityItem().getItem(); 
+					Item item = entity.getEntityItem().getItem();
 					if(item == Item.getItemFromBlock(Blocks.gravel) || item == Item.getItemFromBlock(TFCBlocks.Sand) || item == Item.getItemFromBlock(TFCBlocks.Sand2))
 					{
 						int stackSize = entity.getEntityItem().stackSize;
@@ -287,15 +287,16 @@ public class TileEntitySluice extends TileEntity implements IInventory
 					// overflow?
 					processTimeRemaining = 0;
 				}
+
 				while(processTimeRemaining > 100 && soilAmount > 0)
 				{
 					//items.add(mod_TFCraft.terraSmallOre);
 					//items.add(mod_TFCraft.terraTinyOre);
 
-					//BiomeGenBase biome1 = worldObj.getBiomeGenForCoords(xCoord+100, zCoord);
-					//BiomeGenBase biome2 = worldObj.getBiomeGenForCoords(xCoord-100, zCoord);
-					//BiomeGenBase biome3 = worldObj.getBiomeGenForCoords(xCoord, zCoord+100);
-					//BiomeGenBase biome4 = worldObj.getBiomeGenForCoords(xCoord, zCoord-100);
+					//BiomeGenBase biome1 = worldObj.getBiomeGenForCoords(xCoord + 100, zCoord);
+					//BiomeGenBase biome2 = worldObj.getBiomeGenForCoords(xCoord - 100, zCoord);
+					//BiomeGenBase biome3 = worldObj.getBiomeGenForCoords(xCoord, zCoord + 100);
+					//BiomeGenBase biome4 = worldObj.getBiomeGenForCoords(xCoord, zCoord - 100);
 
 					float gemMod = 1;
 					float oreMod = 1;
@@ -305,99 +306,99 @@ public class TileEntitySluice extends TileEntity implements IInventory
 						oreMod = 0.6f;
 
 					ArrayList items = new ArrayList<ItemStack>();
-					if(random.nextInt((int) (200*oreMod)) == 0 && !coreSampleStacks.isEmpty())
+					if(random.nextInt((int) (200 * oreMod)) == 0 && !coreSampleStacks.isEmpty())
 						addToInventory(coreSampleStacks.get(random.nextInt(coreSampleStacks.size())).copy());
-					else if(random.nextInt((int) (400*gemMod)) == 0)
+					else if(random.nextInt((int) (400 * gemMod)) == 0)
 					{
-						items.add(new ItemStack(TFCItems.GemAgate,1,0));
-						items.add(new ItemStack(TFCItems.GemAmethyst,1,0));
-						items.add(new ItemStack(TFCItems.GemBeryl,1,0));
-						items.add(new ItemStack(TFCItems.GemEmerald,1,0));
-						items.add(new ItemStack(TFCItems.GemGarnet,1,0));
-						items.add(new ItemStack(TFCItems.GemJade,1,0));
-						items.add(new ItemStack(TFCItems.GemJasper,1,0));
-						items.add(new ItemStack(TFCItems.GemOpal,1,0));
-						items.add(new ItemStack(TFCItems.GemRuby,1,0));
-						items.add(new ItemStack(TFCItems.GemSapphire,1,0));
-						items.add(new ItemStack(TFCItems.GemTourmaline,1,0));
-						items.add(new ItemStack(TFCItems.GemTopaz,1,0));
+						items.add(new ItemStack(TFCItems.GemAgate, 1, 0));
+						items.add(new ItemStack(TFCItems.GemAmethyst, 1, 0));
+						items.add(new ItemStack(TFCItems.GemBeryl, 1, 0));
+						items.add(new ItemStack(TFCItems.GemEmerald, 1, 0));
+						items.add(new ItemStack(TFCItems.GemGarnet, 1, 0));
+						items.add(new ItemStack(TFCItems.GemJade, 1, 0));
+						items.add(new ItemStack(TFCItems.GemJasper, 1, 0));
+						items.add(new ItemStack(TFCItems.GemOpal, 1, 0));
+						items.add(new ItemStack(TFCItems.GemRuby, 1, 0));
+						items.add(new ItemStack(TFCItems.GemSapphire, 1, 0));
+						items.add(new ItemStack(TFCItems.GemTourmaline, 1, 0));
+						items.add(new ItemStack(TFCItems.GemTopaz, 1, 0));
 						addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
 					}
-					else if(random.nextInt((int) (800*gemMod)) == 0)
+					else if(random.nextInt((int) (800 * gemMod)) == 0)
 					{
-						items.add(new ItemStack(TFCItems.GemAgate,1,1));
-						items.add(new ItemStack(TFCItems.GemAmethyst,1,1));
-						items.add(new ItemStack(TFCItems.GemBeryl,1,1));
-						items.add(new ItemStack(TFCItems.GemEmerald,1,1));
-						items.add(new ItemStack(TFCItems.GemGarnet,1,1));
-						items.add(new ItemStack(TFCItems.GemJade,1,1));
-						items.add(new ItemStack(TFCItems.GemJasper,1,1));
-						items.add(new ItemStack(TFCItems.GemOpal,1,1));
-						items.add(new ItemStack(TFCItems.GemRuby,1,1));
-						items.add(new ItemStack(TFCItems.GemSapphire,1,1));
-						items.add(new ItemStack(TFCItems.GemTourmaline,1,1));
-						items.add(new ItemStack(TFCItems.GemTopaz,1,1));
+						items.add(new ItemStack(TFCItems.GemAgate, 1, 1));
+						items.add(new ItemStack(TFCItems.GemAmethyst, 1, 1));
+						items.add(new ItemStack(TFCItems.GemBeryl, 1, 1));
+						items.add(new ItemStack(TFCItems.GemEmerald, 1, 1));
+						items.add(new ItemStack(TFCItems.GemGarnet, 1, 1));
+						items.add(new ItemStack(TFCItems.GemJade, 1, 1));
+						items.add(new ItemStack(TFCItems.GemJasper, 1, 1));
+						items.add(new ItemStack(TFCItems.GemOpal, 1, 1));
+						items.add(new ItemStack(TFCItems.GemRuby, 1, 1));
+						items.add(new ItemStack(TFCItems.GemSapphire, 1, 1));
+						items.add(new ItemStack(TFCItems.GemTourmaline, 1, 1));
+						items.add(new ItemStack(TFCItems.GemTopaz, 1, 1));
 						addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
 					}
-					else if(random.nextInt((int) (1600*gemMod)) == 0)
+					else if(random.nextInt((int) (1600 * gemMod)) == 0)
 					{
-						items.add(new ItemStack(TFCItems.GemAgate,1,2));
-						items.add(new ItemStack(TFCItems.GemAmethyst,1,2));
-						items.add(new ItemStack(TFCItems.GemBeryl,1,2));
-						items.add(new ItemStack(TFCItems.GemEmerald,1,2));
-						items.add(new ItemStack(TFCItems.GemGarnet,1,2));
-						items.add(new ItemStack(TFCItems.GemJade,1,2));
-						items.add(new ItemStack(TFCItems.GemJasper,1,2));
-						items.add(new ItemStack(TFCItems.GemOpal,1,2));
-						items.add(new ItemStack(TFCItems.GemRuby,1,2));
-						items.add(new ItemStack(TFCItems.GemSapphire,1,2));
-						items.add(new ItemStack(TFCItems.GemTourmaline,1,2));
-						items.add(new ItemStack(TFCItems.GemTopaz,1,2));
+						items.add(new ItemStack(TFCItems.GemAgate, 1, 2));
+						items.add(new ItemStack(TFCItems.GemAmethyst, 1, 2));
+						items.add(new ItemStack(TFCItems.GemBeryl, 1, 2));
+						items.add(new ItemStack(TFCItems.GemEmerald, 1, 2));
+						items.add(new ItemStack(TFCItems.GemGarnet, 1, 2));
+						items.add(new ItemStack(TFCItems.GemJade, 1, 2));
+						items.add(new ItemStack(TFCItems.GemJasper, 1, 2));
+						items.add(new ItemStack(TFCItems.GemOpal, 1, 2));
+						items.add(new ItemStack(TFCItems.GemRuby, 1, 2));
+						items.add(new ItemStack(TFCItems.GemSapphire, 1, 2));
+						items.add(new ItemStack(TFCItems.GemTourmaline, 1, 2));
+						items.add(new ItemStack(TFCItems.GemTopaz, 1, 2));
 						addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
 					}
-					else if(random.nextInt((int) (3200*gemMod)) == 0)
+					else if(random.nextInt((int) (3200 * gemMod)) == 0)
 					{
-						items.add(new ItemStack(TFCItems.GemAgate,1,3));
-						items.add(new ItemStack(TFCItems.GemAmethyst,1,3));
-						items.add(new ItemStack(TFCItems.GemBeryl,1,3));
-						items.add(new ItemStack(TFCItems.GemEmerald,1,3));
-						items.add(new ItemStack(TFCItems.GemGarnet,1,3));
-						items.add(new ItemStack(TFCItems.GemJade,1,3));
-						items.add(new ItemStack(TFCItems.GemJasper,1,3));
-						items.add(new ItemStack(TFCItems.GemOpal,1,3));
-						items.add(new ItemStack(TFCItems.GemRuby,1,3));
-						items.add(new ItemStack(TFCItems.GemSapphire,1,3));
-						items.add(new ItemStack(TFCItems.GemTourmaline,1,3));
-						items.add(new ItemStack(TFCItems.GemTopaz,1,3));
+						items.add(new ItemStack(TFCItems.GemAgate, 1, 3));
+						items.add(new ItemStack(TFCItems.GemAmethyst, 1, 3));
+						items.add(new ItemStack(TFCItems.GemBeryl, 1, 3));
+						items.add(new ItemStack(TFCItems.GemEmerald, 1, 3));
+						items.add(new ItemStack(TFCItems.GemGarnet, 1, 3));
+						items.add(new ItemStack(TFCItems.GemJade, 1, 3));
+						items.add(new ItemStack(TFCItems.GemJasper, 1, 3));
+						items.add(new ItemStack(TFCItems.GemOpal, 1, 3));
+						items.add(new ItemStack(TFCItems.GemRuby, 1, 3));
+						items.add(new ItemStack(TFCItems.GemSapphire, 1, 3));
+						items.add(new ItemStack(TFCItems.GemTourmaline, 1, 3));
+						items.add(new ItemStack(TFCItems.GemTopaz, 1, 3));
 						addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
 					}
-					else if(random.nextInt((int) (6400*gemMod)) == 0)
+					else if(random.nextInt((int) (6400 * gemMod)) == 0)
 					{
-						items.add(new ItemStack(TFCItems.GemAgate,1,4));
-						items.add(new ItemStack(TFCItems.GemAmethyst,1,4));
-						items.add(new ItemStack(TFCItems.GemBeryl,1,4));
-						items.add(new ItemStack(TFCItems.GemEmerald,1,4));
-						items.add(new ItemStack(TFCItems.GemGarnet,1,4));
-						items.add(new ItemStack(TFCItems.GemJade,1,4));
-						items.add(new ItemStack(TFCItems.GemJasper,1,4));
-						items.add(new ItemStack(TFCItems.GemOpal,1,4));
-						items.add(new ItemStack(TFCItems.GemRuby,1,4));
-						items.add(new ItemStack(TFCItems.GemSapphire,1,4));
-						items.add(new ItemStack(TFCItems.GemTourmaline,1,4));
-						items.add(new ItemStack(TFCItems.GemTopaz,1,4));
+						items.add(new ItemStack(TFCItems.GemAgate, 1, 4));
+						items.add(new ItemStack(TFCItems.GemAmethyst, 1, 4));
+						items.add(new ItemStack(TFCItems.GemBeryl, 1, 4));
+						items.add(new ItemStack(TFCItems.GemEmerald, 1, 4));
+						items.add(new ItemStack(TFCItems.GemGarnet, 1, 4));
+						items.add(new ItemStack(TFCItems.GemJade, 1, 4));
+						items.add(new ItemStack(TFCItems.GemJasper, 1, 4));
+						items.add(new ItemStack(TFCItems.GemOpal, 1, 4));
+						items.add(new ItemStack(TFCItems.GemRuby, 1, 4));
+						items.add(new ItemStack(TFCItems.GemSapphire, 1, 4));
+						items.add(new ItemStack(TFCItems.GemTourmaline, 1, 4));
+						items.add(new ItemStack(TFCItems.GemTopaz, 1, 4));
 						addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
 					}
-					else if(random.nextInt((int) (12800*gemMod)) == 0)
+					else if(random.nextInt((int) (12800 * gemMod)) == 0)
 					{
 						int r = random.nextInt(50);
 						if(r == 0)
-							addToInventory(new ItemStack(TFCItems.GemDiamond,1,3));
+							addToInventory(new ItemStack(TFCItems.GemDiamond, 1, 3));
 						else if(r < 15)
-							addToInventory(new ItemStack(TFCItems.GemDiamond,1,2));
+							addToInventory(new ItemStack(TFCItems.GemDiamond, 1, 2));
 						else if(r < 25)
-							addToInventory(new ItemStack(TFCItems.GemDiamond,1,1));
+							addToInventory(new ItemStack(TFCItems.GemDiamond, 1, 1));
 						else if(r < 50)
-							addToInventory(new ItemStack(TFCItems.GemDiamond,1,0));
+							addToInventory(new ItemStack(TFCItems.GemDiamond, 1, 0));
 					}
 					processTimeRemaining -= 100;
 					soilAmount--;
@@ -412,27 +413,27 @@ public class TileEntitySluice extends TileEntity implements IInventory
 		//Here we make sure that the water flags are checked
 		if((meta & 3 )== 0)
 		{
-			waterInput = worldObj.getBlock(xCoord, yCoord+1, zCoord-1) == Blocks.water;
-			waterOutput = worldObj.getBlock(xCoord, yCoord-1, zCoord+2) == Blocks.water || 
-					worldObj.getBlock(xCoord, yCoord-1, zCoord+2) == Blocks.flowing_water;
+			waterInput = worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1) == Blocks.water;
+			waterOutput = worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == Blocks.water || 
+					worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == Blocks.flowing_water;
 		}
 		if((meta & 3 )== 1)
 		{
-			waterInput = worldObj.getBlock(xCoord+1, yCoord+1, zCoord) == Blocks.water;
-			waterOutput = worldObj.getBlock(xCoord-2, yCoord-1, zCoord) == Blocks.water || 
-					worldObj.getBlock(xCoord-2, yCoord-1, zCoord) == Blocks.flowing_water;
+			waterInput = worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord) == Blocks.water;
+			waterOutput = worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == Blocks.water || 
+					worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == Blocks.flowing_water;
 		}
 		if((meta & 3 )== 2)
 		{
-			waterInput = worldObj.getBlock(xCoord, yCoord+1, zCoord+1) == Blocks.water;
-			waterOutput = worldObj.getBlock(xCoord, yCoord-1, zCoord-2) == Blocks.water || 
-					worldObj.getBlock(xCoord, yCoord-1, zCoord-2) == Blocks.flowing_water;
+			waterInput = worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1) == Blocks.water;
+			waterOutput = worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2) == Blocks.water || 
+					worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2) == Blocks.flowing_water;
 		}
 		if((meta & 3 )== 3)
 		{
-			waterInput = worldObj.getBlock(xCoord-1, yCoord+1, zCoord) == Blocks.water;
-			waterOutput = worldObj.getBlock(xCoord+2, yCoord-1, zCoord) == Blocks.water ||
-					worldObj.getBlock(xCoord+2, yCoord-1, zCoord) == Blocks.flowing_water;
+			waterInput = worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord) == Blocks.water;
+			waterOutput = worldObj.getBlock(xCoord + 2, yCoord - 1, zCoord) == Blocks.water ||
+					worldObj.getBlock(xCoord + 2, yCoord - 1, zCoord) == Blocks.flowing_water;
 		}
 
 		/////////////////////////////////////////////////////////
@@ -441,12 +442,12 @@ public class TileEntitySluice extends TileEntity implements IInventory
 		boolean isFlowing = (meta & 4) == 4;
 		if((meta & 3) == 0 && !isFoot)
 		{
-			boolean isInputWater = worldObj.getBlock(xCoord, yCoord+1, zCoord-1) == Blocks.water;
-			boolean isOutputAir = worldObj.isAirBlock(xCoord, yCoord-1, zCoord+2);
-			boolean isOutputWater = worldObj.getBlock(xCoord, yCoord-1, zCoord+2) == Blocks.water || 
-					worldObj.getBlock(xCoord, yCoord-1, zCoord+2) == Blocks.flowing_water;
-			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord, yCoord+1, zCoord-1) == 7;
-			int meta2 = worldObj.getBlockMetadata(xCoord, yCoord, zCoord+1);
+			boolean isInputWater = worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1) == Blocks.water;
+			boolean isOutputAir = worldObj.isAirBlock(xCoord, yCoord - 1, zCoord + 2);
+			boolean isOutputWater = worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == Blocks.water || 
+					worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == Blocks.flowing_water;
+			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord, yCoord + 1, zCoord - 1) == 7;
+			int meta2 = worldObj.getBlockMetadata(xCoord, yCoord, zCoord + 1);
 			if(isInputWater && isWaterDepth7 && !isFlowing && (isOutputAir || isOutputWater))
 			{
 				//set main block to water on
@@ -455,69 +456,70 @@ public class TileEntitySluice extends TileEntity implements IInventory
 				if((meta2 & 4) == 0)
 				{
 					//set second block to water on
-					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord+1, meta2 + 4, 3);
+					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord + 1, meta2 + 4, 3);
 				}
 
 				//Set output water
-				worldObj.setBlock(xCoord, yCoord-1, zCoord+2, Blocks.water);
+				worldObj.setBlock(xCoord, yCoord - 1, zCoord + 2, Blocks.water);
 			}
-			if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater)&& isFlowing)
+			if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater) && isFlowing)
 			{
 				//set main block to water off
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4, 3);
 				if((meta2 & 4) != 0)
 				{
 					//set second block to water off
-					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord+1, meta2 - 4, 3);
+					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord + 1, meta2 - 4, 3);
 				}
 				//Set output water
 				if(!isOutputAir && isOutputWater)
-					worldObj.setBlockToAir(xCoord, yCoord-1, zCoord+2);
+					worldObj.setBlockToAir(xCoord, yCoord - 1, zCoord + 2);
 			}
 		}
 		if((meta & 3) == 1 && !isFoot)
 		{
-			boolean isInputWater = worldObj.getBlock(xCoord+1, yCoord+1, zCoord) == Blocks.water;
-			boolean isOutputAir = worldObj.isAirBlock(xCoord-2, yCoord-1, zCoord);
-			boolean isOutputWater = worldObj.getBlock(xCoord-2, yCoord-1, zCoord) == Blocks.water || 
-					worldObj.getBlock(xCoord-2, yCoord-1, zCoord) == Blocks.flowing_water;
-			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord+1, yCoord+1, zCoord) == 7;
-			int meta2 = worldObj.getBlockMetadata(xCoord-1, yCoord, zCoord);
+			boolean isInputWater = worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord) == Blocks.water;
+			boolean isOutputAir = worldObj.isAirBlock(xCoord - 2, yCoord - 1, zCoord);
+			boolean isOutputWater = worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == Blocks.water || 
+					worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == Blocks.flowing_water;
+			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord + 1, yCoord + 1, zCoord) == 7;
+			int meta2 = worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord);
 			if(isInputWater && isWaterDepth7 && !isFlowing && (isOutputAir || isOutputWater))
 			{
 				//set main block to water on
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 3);
-				if((worldObj.getBlockMetadata(xCoord-1, yCoord, zCoord) & 4) == 0)
+				if((worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord) & 4) == 0)
 				{
 					//set second block to water on
-					worldObj.setBlockMetadataWithNotify(xCoord-1, yCoord, zCoord, meta2 + 4, 3);
+					worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord, zCoord, meta2 + 4, 3);
 				}
 				//Set output water
-				worldObj.setBlock(xCoord-2, yCoord-1, zCoord, Blocks.water);
+				worldObj.setBlock(xCoord-2, yCoord - 1, zCoord, Blocks.water);
 			}
 			if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater)&& isFlowing)
 			{
 				//set main block to water off
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4, 3);
-				if((worldObj.getBlockMetadata(xCoord-1, yCoord, zCoord) & 4) != 0)
+				if((worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord) & 4) != 0)
 				{
 					//set second block to water off
-					worldObj.setBlockMetadataWithNotify(xCoord-1, yCoord, zCoord, meta2 - 4, 3);
+					worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord, zCoord, meta2 - 4, 3);
 				}
 				//Set output water
-				if(!isOutputAir && isOutputWater) {
-					worldObj.setBlockToAir(xCoord-2, yCoord-1, zCoord);
+				if(!isOutputAir && isOutputWater)
+				{
+					worldObj.setBlockToAir(xCoord - 2, yCoord - 1, zCoord);
 				}
 			}
 		}
 		if((meta & 3) == 2 && !isFoot)
 		{
-			boolean isInputWater = worldObj.getBlock(xCoord, yCoord+1, zCoord+1) == Blocks.water;
-			boolean isOutputAir = worldObj.isAirBlock(xCoord, yCoord-1, zCoord-2);
-			boolean isOutputWater = worldObj.getBlock(xCoord, yCoord-1, zCoord-2) == Blocks.water || 
-					worldObj.getBlock(xCoord, yCoord-1, zCoord-2) == Blocks.flowing_water;
-			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord, yCoord+1, zCoord+1) == 7;
-			int meta2 = worldObj.getBlockMetadata(xCoord, yCoord, zCoord-1);
+			boolean isInputWater = worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1) == Blocks.water;
+			boolean isOutputAir = worldObj.isAirBlock(xCoord, yCoord - 1, zCoord - 2);
+			boolean isOutputWater = worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2) == Blocks.water || 
+					worldObj.getBlock(xCoord, yCoord - 1, zCoord-2) == Blocks.flowing_water;
+			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord, yCoord + 1, zCoord + 1) == 7;
+			int meta2 = worldObj.getBlockMetadata(xCoord, yCoord, zCoord - 1);
 
 			if(isInputWater && isWaterDepth7 && !isFlowing && (isOutputAir || isOutputWater))
 			{
@@ -527,11 +529,11 @@ public class TileEntitySluice extends TileEntity implements IInventory
 				if((meta2 & 4) == 0)
 				{
 					//set second block to water on
-					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord-1, meta2 + 4, 3);
+					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord - 1, meta2 + 4, 3);
 				}
 
 				//Set output water
-				worldObj.setBlock(xCoord, yCoord-1, zCoord-2, Blocks.water);
+				worldObj.setBlock(xCoord, yCoord - 1, zCoord - 2, Blocks.water);
 			}
 			if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater)&& isFlowing)
 			{
@@ -540,47 +542,49 @@ public class TileEntitySluice extends TileEntity implements IInventory
 				if((meta2 & 4) != 0)
 				{
 					//set second block to water off
-					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord-1, meta2 - 4, 3);
+					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord - 1, meta2 - 4, 3);
 				}
 				//Set output water
-				if(!isOutputAir && isOutputWater) {
-					worldObj.setBlockToAir(xCoord, yCoord-1, zCoord-2);
+				if(!isOutputAir && isOutputWater)
+				{
+					worldObj.setBlockToAir(xCoord, yCoord - 1, zCoord - 2);
 				}
 			}
 		}
 		if((meta & 3) == 3 && !isFoot)
 		{
-			boolean isInputWater = worldObj.getBlock(xCoord-1, yCoord+1, zCoord) == Blocks.water;
-			boolean isOutputAir = worldObj.isAirBlock(xCoord+2, yCoord-1, zCoord);
-			boolean isOutputWater = worldObj.getBlock(xCoord+2, yCoord-1, zCoord) == Blocks.water ||
-					worldObj.getBlock(xCoord+2, yCoord-1, zCoord) == Blocks.flowing_water;
-			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord-1, yCoord+1, zCoord) == 7;
-			int meta2 = worldObj.getBlockMetadata(xCoord+1, yCoord, zCoord);
+			boolean isInputWater = worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord) == Blocks.water;
+			boolean isOutputAir = worldObj.isAirBlock(xCoord+2, yCoord - 1, zCoord);
+			boolean isOutputWater = worldObj.getBlock(xCoord+2, yCoord - 1, zCoord) == Blocks.water ||
+					worldObj.getBlock(xCoord+2, yCoord - 1, zCoord) == Blocks.flowing_water;
+			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord - 1, yCoord + 1, zCoord) == 7;
+			int meta2 = worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord);
 
 			if(isInputWater && isWaterDepth7 && !isFlowing && (isOutputAir || isOutputWater))
 			{
 				//set main block to water on
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 3);
-				if((worldObj.getBlockMetadata(xCoord+1, yCoord, zCoord) & 4) == 0)
+				if((worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord) & 4) == 0)
 				{
 					//set second block to water on
-					worldObj.setBlockMetadataWithNotify(xCoord+1, yCoord, zCoord, meta2 + 4, 3);
+					worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord, zCoord, meta2 + 4, 3);
 				}
 				//Set output water
-				worldObj.setBlock(xCoord+2, yCoord-1, zCoord, Blocks.water);
+				worldObj.setBlock(xCoord + 2, yCoord - 1, zCoord, Blocks.water);
 			}
 			if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater)&& isFlowing)
 			{
 				//set main block to water off
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4, 3);
-				if((worldObj.getBlockMetadata(xCoord+1, yCoord, zCoord) & 4) != 0)
+				if((worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord) & 4) != 0)
 				{
 					//set second block to water off
-					worldObj.setBlockMetadataWithNotify(xCoord+1, yCoord, zCoord, meta2 - 4, 3);
+					worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord, zCoord, meta2 - 4, 3);
 				}
 				//Set output water
-				if(!isOutputAir && isOutputWater) {
-					worldObj.setBlockToAir(xCoord+2, yCoord-1, zCoord);
+				if(!isOutputAir && isOutputWater)
+				{
+					worldObj.setBlockToAir(xCoord + 2, yCoord - 1, zCoord);
 				}
 			}
 		}

@@ -88,7 +88,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 			else
 			{
 				Block var10 = var8 == TFCBlocks.Dirt || var8 == TFCBlocks.Grass || var8 == TFCBlocks.DryGrass ? TFCBlocks.Dirt : 
-					var8 == TFCBlocks.Dirt2 || var8 == TFCBlocks.Grass2 || var8 == TFCBlocks.DryGrass2 ? TFCBlocks.Dirt2 : null;
+						var8 == TFCBlocks.Dirt2 || var8 == TFCBlocks.Grass2 || var8 == TFCBlocks.DryGrass2 ? TFCBlocks.Dirt2 : null;
 				if(var10 != null)
 				{
 					int meta = world.getBlockMetadata(x, y, z);
@@ -143,7 +143,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	}
 
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 		
@@ -166,7 +166,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	}
 
 	@Override
-	public boolean canStack() 
+	public boolean canStack()
 	{
 		return false;
 	}
@@ -185,7 +185,8 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	}
 
 	@Override
-	public EnumItemReach getReach(ItemStack is) {
+	public EnumItemReach getReach(ItemStack is)
+	{
 		return EnumItemReach.FAR;
 	}
 }

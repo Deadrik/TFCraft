@@ -210,10 +210,10 @@ public class TECrucible extends TileEntity implements IInventory
 				}
 				else if(storage[1].getItem() == currentAlloy.outputType.MeltedItem && storage[1].getItemDamage() > 0)
 				{
-					storage[1].setItemDamage(storage[1].getItemDamage()-1);
+					storage[1].setItemDamage(storage[1].getItemDamage() - 1);
 					float inTemp =TFC_ItemHeat.GetTemperature(storage[1]);
 					float temp = (temperature - inTemp) / 2;
-					TFC_ItemHeat.SetTemperature(storage[1], inTemp+temp);
+					TFC_ItemHeat.SetTemperature(storage[1], inTemp + temp);
 					//System.out.println(temperature +", "+inTemp+", "+temp);
 					drainOutput(1.0f);
 					storage[1].stackSize = 1;
@@ -255,7 +255,7 @@ public class TECrucible extends TileEntity implements IInventory
 
 	public boolean addMetal(Metal m, float amt)
 	{
-		if(getTotalMetal()+amt <= 3000 && m.Name != "Unknown")
+		if(getTotalMetal() + amt <= 3000 && m.Name != "Unknown")
 		{
 			if(metals.containsKey(m.Name))
 				((MetalPair)metals.get(m.Name)).amount += amt;
@@ -291,7 +291,7 @@ public class TECrucible extends TileEntity implements IInventory
 		{
 			MetalPair m = (MetalPair) iter.next();
 			if(m != null)
-				a.add(new AlloyMetal(m.type, (m.amount/totalAmount) * 100f));
+				a.add(new AlloyMetal(m.type, (m.amount / totalAmount) * 100f));
 		}
 
 		Metal match = AlloyManager.instance.matchesAlloy(a, Alloy.EnumTier.TierV);

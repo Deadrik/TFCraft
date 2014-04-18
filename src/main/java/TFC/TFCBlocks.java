@@ -265,6 +265,7 @@ public class TFCBlocks
 	public static Block Thatch;
 	public static Block Moss;
 	public static Block BerryBush;
+	public static Block Crops;
 	public static Block Flora;
 	public static Block Tuyere;
 	public static Block EarlyBloomery;
@@ -392,8 +393,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WoodHoriz3, "WoodHoriz3");
 		GameRegistry.registerBlock(WoodHoriz4, "WoodHoriz4");
 
-		GameRegistry.registerBlock(ToolRack, ItemToolRack.class,"ToolRack");
-		GameRegistry.registerBlock(ToolRack2, ItemToolRack2.class,"ToolRack2");
+		GameRegistry.registerBlock(ToolRack, ItemToolRack.class, "ToolRack");
+		GameRegistry.registerBlock(ToolRack2, ItemToolRack2.class, "ToolRack2");
 		GameRegistry.registerBlock(SpawnMeter, TFC.Items.ItemBlocks.ItemTerraBlock.class, "SpawnMeter");
 		GameRegistry.registerBlock(FoodPrep, "FoodPrep");
 		GameRegistry.registerBlock(Quern, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Quern");
@@ -430,11 +431,11 @@ public class TFCBlocks
 
 		// Wooden Doors
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
-			GameRegistry.registerBlock(Doors[i], "Door"+Global.WOOD_ALL[i].replaceAll(" ", ""));
+			GameRegistry.registerBlock(Doors[i], "Door" + Global.WOOD_ALL[i].replaceAll(" ", ""));
 
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
-		GameRegistry.registerBlock(Barrel, ItemBarrels.class,"Barrel");
-		GameRegistry.registerBlock(Barrel2, ItemBarrels2.class,"Barrel2");
+		GameRegistry.registerBlock(Barrel, ItemBarrels.class, "Barrel");
+		GameRegistry.registerBlock(Barrel2, ItemBarrels2.class, "Barrel2");
 		GameRegistry.registerBlock(Moss, "Moss");
 
 		GameRegistry.registerBlock(Flora, TFC.Items.ItemBlocks.ItemFlora.class,"Flora");
@@ -443,14 +444,15 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Tuyere, "Tuyere");
 		GameRegistry.registerBlock(Crucible, TFC.Items.ItemBlocks.ItemCrucible.class, "Crucible");
 		GameRegistry.registerBlock(NestBox, TFC.Items.ItemBlocks.ItemTerraBlock.class, "NestBox");
-		GameRegistry.registerBlock(Fence,TFC.Items.ItemBlocks.ItemFence.class,"Fence");
-		GameRegistry.registerBlock(Fence2,TFC.Items.ItemBlocks.ItemFence2.class,"Fence2");
-//		GameRegistry.registerBlock(Blocks.fence_gate,TFC.Items.ItemBlocks.ItemFenceGate.class,"FenceGate");
-		GameRegistry.registerBlock(FenceGate2,TFC.Items.ItemBlocks.ItemFenceGate2.class,"FenceGate2");
-		GameRegistry.registerBlock(StrawHideBed,"StrawHideBed");
-		GameRegistry.registerBlock(ArmourStand,TFC.Items.ItemBlocks.ItemArmourStand.class,"ArmourStand");
-		GameRegistry.registerBlock(ArmourStand2,TFC.Items.ItemBlocks.ItemArmourStand2.class,"ArmourStand2");
-		GameRegistry.registerBlock(BerryBush,TFC.Items.ItemBlocks.ItemBerryBush.class,"BerryBush");
+		GameRegistry.registerBlock(Fence,TFC.Items.ItemBlocks.ItemFence.class, "Fence");
+		GameRegistry.registerBlock(Fence2,TFC.Items.ItemBlocks.ItemFence2.class, "Fence2");
+//		GameRegistry.registerBlock(Blocks.fence_gate,TFC.Items.ItemBlocks.ItemFenceGate.class, "FenceGate");
+		GameRegistry.registerBlock(FenceGate2,TFC.Items.ItemBlocks.ItemFenceGate2.class, "FenceGate2");
+		GameRegistry.registerBlock(StrawHideBed, "StrawHideBed");
+		GameRegistry.registerBlock(ArmourStand,TFC.Items.ItemBlocks.ItemArmourStand.class, "ArmourStand");
+		GameRegistry.registerBlock(ArmourStand2,TFC.Items.ItemBlocks.ItemArmourStand2.class, "ArmourStand2");
+		GameRegistry.registerBlock(BerryBush,TFC.Items.ItemBlocks.ItemBerryBush.class, "BerryBush");
+
 		//FluidRegistry.registerFluid(new Fluid("freshWater").setBlockID(FreshWaterStill.blockID).setBlockName(FreshWaterStill.getUnlocalizedName()));
 		//FluidRegistry.registerFluid(new Fluid("hotWater").setBlockID(HotWaterStill.blockID).setBlockName(HotWaterStill.getUnlocalizedName()));
 	}
@@ -492,8 +494,7 @@ public class TFCBlocks
 				(new BlockChestTFC(0)).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("chest"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.crafting_table), "crafting_table",
 				(new BlockWorkbench()).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("workbench").setBlockTextureName("crafting_table"));
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.wheat), "wheat",
-				(new BlockCrop()).setHardness(0.3F).setStepSound(Block.soundTypeGrass).setBlockName("crops").setBlockTextureName("wheat"));
+
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.snow_layer), "snow_layer",
 				(new BlockCustomSnow()).setHardness(0.1F).setStepSound(Block.soundTypeSnow).setBlockName("snow").setLightOpacity(1).setBlockTextureName("snow"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.ice), "ice",
@@ -661,6 +662,7 @@ public class TFCBlocks
 		SteamPipeValve = new BlockPipeValve(Material.iron).setBlockName("ValvePipe").setHardness(2);
 
 		BerryBush = new BlockBerryBush().setBlockName("BerryBush").setHardness(0.3f).setStepSound(Block.soundTypeGrass);
+		Crops = new BlockCrop().setBlockName("crops").setHardness(0.3F).setStepSound(Block.soundTypeGrass);
 
 		FreshWaterFlowing = (new BlockFreshWaterFlowing()).setHardness(100.0F).setLightOpacity(3).setBlockName("water").setCreativeTab(CreativeTabs.tabDecorations);;
 		FreshWaterStill  = (new BlockFreshWaterStill()).setHardness(100.0F).setLightOpacity(3).setBlockName("water").setCreativeTab(CreativeTabs.tabDecorations);;

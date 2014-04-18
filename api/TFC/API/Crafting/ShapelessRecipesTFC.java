@@ -72,7 +72,9 @@ public class ShapelessRecipesTFC implements IRecipe
 					{
 						ItemStack recipeIS = (ItemStack)var7.next();
 
-						if (inputIS.getItem() == recipeIS.getItem() && (recipeIS.getItemDamage() == 32767 || inputIS.getItemDamage() == recipeIS.getItemDamage()) &&
+						if (inputIS.getItem() == recipeIS.getItem() && (
+								recipeIS.getItemDamage() == 32767 ||
+								inputIS.getItemDamage() == recipeIS.getItemDamage()) &&
 								tempMatch(recipeIS, inputIS))
 						{
 							var6 = true;

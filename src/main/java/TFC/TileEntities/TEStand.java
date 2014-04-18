@@ -76,7 +76,8 @@ public class TEStand extends TileEntity implements IInventory
 
 	public void ejectContents()
 	{
-		if(!isTop){
+		if(!isTop)
+		{
 			float f3 = 0.05F;
 			EntityItem entityitem;
 			Random rand = new Random();
@@ -139,7 +140,8 @@ public class TEStand extends TileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
-		if(!isTop){
+		if(!isTop)
+		{
 			if(items[i]==null || itemstack == null)
 				items[i] = itemstack;
 
@@ -153,14 +155,17 @@ public class TEStand extends TileEntity implements IInventory
 	{
 		if(!worldObj.isRemote && !isTop)
 		{
-			if(hasWorldObj() && !hasEntity){
+			if(hasWorldObj() && !hasEntity)
+			{
 				entity = new EntityStand(worldObj,this);
 				entity.setLocationAndAngles(xCoord, yCoord, zCoord, yaw, 0);
 				worldObj.spawnEntityInWorld(entity);
 				entity.standTE = this;
 				hasEntity = true;
 			}
-			if(hasEntity && entity == null){
+
+			if(hasEntity && entity == null)
+			{
 				List list = worldObj.getEntitiesWithinAABB(EntityStand.class, AxisAlignedBB.getBoundingBox(
 						xCoord, yCoord, zCoord,
 						xCoord+1, yCoord+2, zCoord+1));

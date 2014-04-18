@@ -157,9 +157,11 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 		Object[] out = new Object[2];
 
 		if(itemCraftingValue == workRecipe.getCraftingValue())
+		{
 			out = manager.findCompleteRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT], craftingPlan,
 					workRecipe.getCraftingValue(), 
 					anvilItemStacks[FLUX_SLOT] != null ? true : false, AnvilTier, null), getItemRules());
+		}
 		return out;
 	}
 
@@ -173,9 +175,11 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 	{
 		AnvilRecipe recipe = AnvilManager.getInstance().findMatchingRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT],this.craftingPlan, 
 				anvilItemStacks[FLUX_SLOT] != null ? true : false, this.AnvilTier));
+
 		if(recipe != null)
 			workRecipe = recipe;
-		else workRecipe = null;
+		else
+			workRecipe = null;
 	}
 
 	public int getCraftingValue()
@@ -254,7 +258,9 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 		if(isTemperatureWorkable(INPUT1_SLOT) && anvilItemStacks[HAMMER_SLOT] != null && 
 				(anvilItemStacks[INPUT1_SLOT].getItemDamage() == 0 || anvilItemStacks[INPUT1_SLOT].getItem().getHasSubtypes() == true) && 
 				getAnvilType() >= craftingReq && workedRecently == 0)
+		{
 			return true;
+		}
 		return false;
 	}
 
@@ -412,7 +418,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				if(result != null)
 				{
 					NBTTagCompound Tag = new NBTTagCompound();
-					Tag.setFloat("temperature", (TFC_ItemHeat.GetTemperature(anvilItemStacks[2])+TFC_ItemHeat.GetTemperature(anvilItemStacks[3]))/2);
+					Tag.setFloat("temperature", (TFC_ItemHeat.GetTemperature(anvilItemStacks[2]) + TFC_ItemHeat.GetTemperature(anvilItemStacks[3])) / 2);
 					result.setTagCompound(Tag);
 					if(result.stackSize <= 0)
 						result.stackSize = 1;
@@ -469,6 +475,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
+		{
 			if(anvilItemStacks[i]!= null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
@@ -478,6 +485,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
 				worldObj.spawnEntityInWorld(entityitem);
 			}
+		}
 	}
 
 	public int getAnvilType()
@@ -551,7 +559,8 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 			Tag.setShort("itemCraftingValue", (short) 0);
 			anvilItemStacks[INPUT1_SLOT].setTagCompound(Tag);
 			return 0;
-		} else
+		}
+		else
 			return 0;
 	}
 
@@ -652,6 +661,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 		super.writeToNBT(nbt);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < anvilItemStacks.length; i++)
+		{
 			if(anvilItemStacks[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -659,6 +669,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				anvilItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
+		}
 		nbt.setTag("Items", nbttaglist);
 		nbt.setInteger("Tier", AnvilTier);
 		nbt.setIntArray("stonePair", stonePair);

@@ -119,18 +119,20 @@ public class ShapedRecipesTFC implements IRecipe
 			{
 				return true;//Recipe expects a cold item and either the input has not tag at all or at the least is missing a temperature tag
 			}
-			else {
+			else
+			{
 				return false;//Recipe expects a cold item and the input is not cold
 			}
 		}
 
 		if(rnbt != null && rnbt.hasKey("temperature"))
-		{			
+		{
 			if(inbt != null && inbt.hasKey("temperature"))
-			{				
+			{
 				return HeatRegistry.getInstance().getIsLiquid(inputIS);//Recipe expects a hot item and the input is liquid
 			}
-			else {
+			else
+			{
 				return false;//Recipe expects a cold item and the input is not cold
 			}
 		}

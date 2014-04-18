@@ -1321,7 +1321,7 @@ public class Recipes
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldSword, 1, 5))});
 	}
 
-	public static ItemStack	getStackTemp(ItemStack is)
+	public static ItemStack getStackTemp(ItemStack is)
 	{
 		NBTTagCompound Temp = new NBTTagCompound();
 		Temp.setBoolean("temperature", true);

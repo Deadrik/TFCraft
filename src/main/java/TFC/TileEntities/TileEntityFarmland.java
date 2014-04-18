@@ -1,11 +1,11 @@
 package TFC.TileEntities;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Time;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
@@ -38,19 +38,27 @@ public class TileEntityFarmland extends TileEntity
 				int soilMax = getSoilMax();
 				int restoreAmount = 139;
 
-				if((worldObj.getBlock(xCoord, yCoord+1, zCoord) == Blocks.wheat))
+				if((worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.Crops))
 				{
-					crop = CropManager.getInstance().getCropFromId(((TECrop)worldObj.getTileEntity(xCoord, yCoord+1, zCoord)).cropId);
+					crop = CropManager.getInstance().getCropFromId(((TECrop)worldObj.getTileEntity(xCoord, yCoord + 1, zCoord)).cropId);
 
 					if((crop.cycleType != 0))
+					{
 						if(nutrients[0] < soilMax)
 							nutrients[0] += restoreAmount + crop.nutrientExtraRestore[0];
+					}
+
 					if((crop.cycleType != 1))
+					{
 						if(nutrients[1] < soilMax)
 							nutrients[1] += restoreAmount + crop.nutrientExtraRestore[1];
+					}
+
 					if((crop.cycleType != 2))
+					{
 						if(nutrients[2] < soilMax)
 							nutrients[2] += restoreAmount + crop.nutrientExtraRestore[2];
+					}
 				}
 				else
 				{
@@ -101,7 +109,7 @@ public class TileEntityFarmland extends TileEntity
 	public void DrainNutrients(int type, float multiplier)
 	{
 		float timeMultiplier = 360f / TFC_Time.daysInYear;
-		nutrients[type] -= (100*multiplier)*timeMultiplier;
+		nutrients[type] -= (100 * multiplier) * timeMultiplier;
 	}
 
 	/**

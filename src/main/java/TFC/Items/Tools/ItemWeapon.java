@@ -69,7 +69,6 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 
 		ItemTerra.addSizeInformation(is, arraylist);
 		ItemTerra.addHeatInformation(is, arraylist);
-		
 
 		if(is.getItem() instanceof ICausesDamage)
 			arraylist.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal(((ICausesDamage)this).GetDamageType().toString()));
@@ -87,12 +86,10 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 
 	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
-
 	}
 
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
-
 	}
 
 	@Override
@@ -166,13 +163,14 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 			float buff = 0;
 			if(nbt.hasKey("craftingTag") && nbt.getCompoundTag("craftingTag").hasKey("durabuff"))
 				buff = nbt.getCompoundTag("craftingTag").getFloat("durabuff");
-			return (int) (getMaxDamage()+(getMaxDamage()*(buff/100f)));
+			return (int) (getMaxDamage() + (getMaxDamage() * (buff / 100f)));
 		}
 		else return super.getMaxDamage(stack);
 	}
 
 	@Override
-	public EnumItemReach getReach(ItemStack is) {
+	public EnumItemReach getReach(ItemStack is)
+	{
 		return EnumItemReach.MEDIUM;
 	}
 }

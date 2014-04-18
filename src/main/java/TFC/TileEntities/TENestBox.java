@@ -51,10 +51,15 @@ public class TENestBox extends TileEntity implements IInventory
 			}
 			return ea;//(EntityAnimal)list.get(0);
 		}*/
+
 		if(list.size()!=0)
+		{
 			for(Object e : list)
+			{
 				if(((EntityChickenTFC)e).getGender() == GenderEnum.FEMALE && ((EntityChickenTFC)e).isAdult())
 					return (EntityChickenTFC)e;
+			}
+		}
 
 		return null;
 	}
@@ -64,10 +69,15 @@ public class TENestBox extends TileEntity implements IInventory
 		List list = worldObj.getEntitiesWithinAABB(EntityChickenTFC.class, AxisAlignedBB.getBoundingBox(
 				xCoord-5, yCoord, zCoord-5, 
 				xCoord+5, yCoord+2, zCoord+5));
+
 		if(list.size() != 0)
+		{
 			for(Object e : list)
+			{
 				if(((EntityChickenTFC)e).getGender() == GenderEnum.MALE && ((EntityChickenTFC)e).isAdult())
 					return (EntityChickenTFC)e;
+			}
+		}
 		return null;
 	}
 
@@ -209,10 +219,10 @@ public class TENestBox extends TileEntity implements IInventory
 						long _time = inventory[i].getTagCompound().getLong("Fertilized");
 						if(_time <= TFC_Time.getTotalTicks())
 						{
-							EntityChickenTFC chick = new EntityChickenTFC(worldObj,xCoord+0.5,yCoord+1,zCoord+0.5, 
+							EntityChickenTFC chick = new EntityChickenTFC(worldObj, xCoord + 0.5, yCoord + 1, zCoord + 0.5, 
 									(NBTTagCompound) inventory[i].getTagCompound().getTag("Genes"));
 							Random rand = new Random();
-							chick.setLocationAndAngles (xCoord+(rand.nextFloat()-0.5F)*2F,yCoord,zCoord+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
+							chick.setLocationAndAngles (xCoord + (rand.nextFloat() - 0.5F) * 2F, yCoord, zCoord + (rand.nextFloat() - 0.5F) * 2F, 0.0F, 0.0F);
 							chick.rotationYawHead = chick.rotationYaw;
 							chick.renderYawOffset = chick.rotationYaw;
 							worldObj.spawnEntityInWorld(chick);

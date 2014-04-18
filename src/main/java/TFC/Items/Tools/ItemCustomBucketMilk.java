@@ -132,9 +132,9 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 				int i = mop.blockX;
 				int j = mop.blockY;
 				int k = mop.blockZ;
-				if(world.getTileEntity(i,j,k) != null && world.getTileEntity(i,j,k) instanceof TileEntityBarrel)
+				if(world.getTileEntity(i, j, k) != null && world.getTileEntity(i, j, k) instanceof TileEntityBarrel)
 				{
-					TileEntityBarrel TE = (TileEntityBarrel) world.getTileEntity(i,j,k);
+					TileEntityBarrel TE = (TileEntityBarrel) world.getTileEntity(i, j, k);
 					if(TE.checkValidAddition(13))
 						return new ItemStack(TFCItems.WoodenBucketEmpty);
 				}
@@ -169,7 +169,8 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	}
 	
 	@Override
-	public EnumItemReach getReach(ItemStack is){
+	public EnumItemReach getReach(ItemStack is)
+	{
 		return EnumItemReach.SHORT;
 	}
 }

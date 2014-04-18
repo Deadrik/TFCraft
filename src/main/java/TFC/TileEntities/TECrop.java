@@ -44,7 +44,7 @@ public class TECrop extends TileEntity
 		Random R = new Random();
 		if(!worldObj.isRemote)
 		{
-			float timeMultiplier = 360/TFC_Time.daysInYear;
+			float timeMultiplier = 360 / TFC_Time.daysInYear;
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 			long time = TFC_Time.getTotalTicks();
 
@@ -59,7 +59,7 @@ public class TECrop extends TileEntity
 				}
 
 				TileEntityFarmland tef = null;
-				TileEntity te = worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
+				TileEntity te = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
 				if(te != null && te instanceof TileEntityFarmland)
 					tef = (TileEntityFarmland) te;
 
@@ -76,19 +76,21 @@ public class TECrop extends TileEntity
 					isDormant = true;
 				}
 				else if(ambientTemp < 28)
-					tempAdded = ambientTemp* 0.00035f;
+					tempAdded = ambientTemp * 0.00035f;
 				else if(ambientTemp < 37)
-					tempAdded = (28-(ambientTemp-28))* 0.0003f;
+					tempAdded = (28 - (ambientTemp-28)) * 0.0003f;
 
 				if(!crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
 				{
 					killCrop(crop);
 				}
 				else if(crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
+				{
 					if(growth > 1)
 					{
 						killCrop(crop);
 					}
+				}
 
 				int nutriType = crop.cycleType;
 				int nutri = tef != null ? tef.nutrients[nutriType] : 18000;
@@ -98,7 +100,7 @@ public class TECrop extends TileEntity
 				float waterBoost = TFC.Blocks.BlockFarmland.isFreshWaterNearby(worldObj, xCoord, yCoord, zCoord) ? 0.1f : 0;
 
 				//Allow the fertilizer to make up for lost nutrients
-				nutri = Math.min(nutri+fert, (int)(soilMax*1.25f));
+				nutri = Math.min(nutri + fert, (int)(soilMax * 1.25f));
 
 				float nutriMult = (0.2f + ((float)nutri/(float)soilMax) * 0.5f) + waterBoost;
 
@@ -111,7 +113,7 @@ public class TECrop extends TileEntity
 						tef.DrainNutrients(3, crop.nutrientUsageMult);
 				}
 
-				float growthRate = (((crop.numGrowthStages/(crop.growthTime*TFC_Time.timeRatio96))+tempAdded)*nutriMult) * timeMultiplier;
+				float growthRate = (((crop.numGrowthStages / (crop.growthTime * TFC_Time.timeRatio96)) + tempAdded) * nutriMult) * timeMultiplier;
 
 				int oldGrowth = (int) Math.floor(growth);
 
@@ -122,12 +124,12 @@ public class TECrop extends TileEntity
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					//this.broadcastPacketInRange(createCropUpdatePacket());
 
-				if((TFCOptions.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2))) || growth < 0)
+				if((TFCOptions.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages + ((float)crop.numGrowthStages / 2))) || growth < 0)
 				{
 					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 				}
 
-				growthTimer += (R.nextInt(2)+23)*TFC_Time.hourLength;
+				growthTimer += (R.nextInt(2) + 23) * TFC_Time.hourLength;
 			}
 			else if(crop.needsSunlight && sunLevel <= 0)
 			{
@@ -135,16 +137,18 @@ public class TECrop extends TileEntity
 			}
 
 			if(worldObj.isRaining() && TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord) < 0)
+			{
 				if(!crop.dormantInFrost || growth > 1)
 				{
 					killCrop(crop);
 				}
+			}
 		}
 	}
 
 	public float getEstimatedGrowth(CropIndex crop)
 	{
-		return ((float)crop.numGrowthStages/(growthTimer-plantedTime/TFC_Time.dayLength))*1.5f;
+		return ((float)crop.numGrowthStages / (growthTimer - plantedTime / TFC_Time.dayLength)) * 1.5f;
 	}
 
 	public void onHarvest(World world, EntityPlayer player)
@@ -152,25 +156,25 @@ public class TECrop extends TileEntity
 		if(!world.isRemote)
 		{
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
-			if(crop != null && growth >= crop.numGrowthStages-1)
+			if(crop != null && growth >= crop.numGrowthStages - 1)
 			{
 				ItemStack is1 = crop.getOutput1(this);
 				ItemStack is2 = crop.getOutput2(this);
 
 				if(is1 != null)
-					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is1));
+					world.spawnEntityInWorld(new EntityItem(world, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, is1));
 
 				if(is2 != null)
-					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is2));
+					world.spawnEntityInWorld(new EntityItem(world, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, is2));
 
 				ItemStack seedStack = crop.getSeed();
-				int skill = 20-(int)(20*TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_AGRICULTURE));
+				int skill = 20 - (int)(20 * TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_AGRICULTURE));
 				seedStack.stackSize = 1 + (world.rand.nextInt(1 + skill) == 0 ? 1 : 0);
 				if(seedStack != null)
-					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, seedStack));
+					world.spawnEntityInWorld(new EntityItem(world, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, seedStack));
 
 				TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_AGRICULTURE, 1);
-				
+
 				if(TFC_Core.isSoil(world.getBlock(xCoord, yCoord - 1, zCoord)))
 					player.addStat(TFC_Achievements.achWildVegetable, 1);
 			}
@@ -179,7 +183,7 @@ public class TECrop extends TileEntity
 				ItemStack is = crop.getSeed();
 				is.stackSize = 1;
 				if(is != null)
-					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, is));
+					world.spawnEntityInWorld(new EntityItem(world, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, is));
 			}
 		}
 	}

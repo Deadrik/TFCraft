@@ -108,10 +108,12 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 					meltTemp = hi.meltTemp;
 
 				if(meltTemp != -1)
+				{
 					if(is.getItem() == Items.stick)
 						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
 					else
 						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));
+				}
 			}
 		}
 	}
@@ -163,7 +165,8 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	}
 
 	@Override
-	public EnumItemReach getReach(ItemStack is) {
+	public EnumItemReach getReach(ItemStack is)
+	{
 		return EnumItemReach.SHORT;
 	}
 

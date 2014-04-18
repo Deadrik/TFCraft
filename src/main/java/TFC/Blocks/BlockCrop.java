@@ -167,7 +167,9 @@ public class BlockCrop extends BlockContainer
 	{
 		TECrop te = (TECrop) world.getTileEntity(i, j, k);
 		CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
+
 		if(crop != null && !world.isRemote)
+		{
 			if(crop.cropId == 4 && te.growth >= 7)
 			{
 				te.onHarvest(world, entityplayer);
@@ -192,6 +194,7 @@ public class BlockCrop extends BlockContainer
 				//te.broadcastPacketInRange(te.createCropUpdatePacket());
 				return true;
 			}
+		}
 
 		if(TFCOptions.enableDebugMode)
 		{
@@ -213,24 +216,28 @@ public class BlockCrop extends BlockContainer
 		if(!world.isRemote && itemstack != null && itemstack.getItem() instanceof ItemCustomScythe)
 		{
 			for(int x = -1; x < 2; x++)
+			{
 				for(int z = -1; z < 2; z++)
+				{
 					if(world.getBlock( i+x, j, k+z) == this && player.inventory.getStackInSlot(player.inventory.currentItem) != null)
 					{
 						player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
-						TECrop teX = (TECrop) world.getTileEntity(i+x, j, k+z);
+						TECrop teX = (TECrop) world.getTileEntity(i + x, j, k + z);
 						teX.onHarvest(world, player);
 
-						//breakBlock(world, i+x, j, k+z, l, 0);
-						world.setBlockToAir(i+x, j, k+z);
+						//breakBlock(world, i + x, j, k + z, l, 0);
+						world.setBlockToAir(i + x, j, k + z);
 
 						int ss = itemstack.stackSize;
-						int dam = itemstack.getItemDamage()+2;
+						int dam = itemstack.getItemDamage() + 2;
 
 						if(dam >= itemstack.getItem().getMaxDamage())
 							player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 						else
-							player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(itemstack.getItem(),ss,dam));
+							player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(itemstack.getItem(), ss, dam));
 					}
+				}
+			}
 		}
 		else
 			//Handle Loot Drop
@@ -250,11 +257,12 @@ public class BlockCrop extends BlockContainer
 	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
 	{
-		return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.3, k+1);
+		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 0.3, k + 1);
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3) {
+	public Item getItemDropped(int par1, Random par2Random, int par3)
+	{
 		return null;
 	}
 
@@ -282,7 +290,7 @@ public class BlockCrop extends BlockContainer
 	@Override
 	public boolean canBlockStay(World world, int i, int j, int k)
 	{
-		if (!(world.getBlock(i, j-1, k) == TFCBlocks.tilledSoil || world.getBlock(i, j-1, k) == TFCBlocks.tilledSoil2 || TFC_Core.isSoil(world.getBlock(i, j-1, k))))
+		if (!(world.getBlock(i, j - 1, k) == TFCBlocks.tilledSoil || world.getBlock(i, j - 1, k) == TFCBlocks.tilledSoil2 || TFC_Core.isSoil(world.getBlock(i, j - 1, k))))
 			return false;
 		return true;
 	}

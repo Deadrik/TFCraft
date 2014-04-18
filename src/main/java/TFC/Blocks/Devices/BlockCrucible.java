@@ -59,10 +59,11 @@ public class BlockCrucible extends BlockTerraContainer
 			ItemStack is = new ItemStack(Item.getItemFromBlock(block), 1);
 			NBTTagCompound nbt = writeCrucibleToNBT(te);
 			is.setTagCompound(nbt);
-			EntityItem ei = new EntityItem(world,i,j,k,is);
+			EntityItem ei = new EntityItem(world, i, j, k, is);
 			world.spawnEntityInWorld(ei);
 
-			for(int s = 0; s < te.getSizeInventory(); ++s) {
+			for(int s = 0; s < te.getSizeInventory(); ++s)
+			{
 				te.setInventorySlotContents(s, null);
 			}
 		}
@@ -143,7 +144,8 @@ public class BlockCrucible extends BlockTerraContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5)
+	{
 		return true;
 	}
 
@@ -158,7 +160,8 @@ public class BlockCrucible extends BlockTerraContainer
 	@Override
 	public IIcon getIcon(int i, int j) 
 	{
-		if(i < 2) {
+		if(i < 2)
+		{
 			return icons[0];
 		}
 

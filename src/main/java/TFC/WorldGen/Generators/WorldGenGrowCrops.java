@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Food.CropIndex;
@@ -25,32 +26,34 @@ public class WorldGenGrowCrops implements IWorldGenerator
 
 	public void generate(World world, Random rand, int x, int z, int numToGen)
 	{
-		int i = x,j = 150,k = z;
+		int i = x, j = 150, k = z;
 		CropIndex crop;
 		TECrop te;
+
 		for(int c = 0; c < numToGen; c++)
 		{
-			i = x-8+rand.nextInt(16);
-			k = z-8+rand.nextInt(16);
+			i = x - 8 + rand.nextInt(16);
+			k = z - 8 + rand.nextInt(16);
 			j = world.getTopSolidOrLiquidBlock(i, k);
 			crop = CropManager.getInstance().getCropFromId(cropBlockId);
+
 			if(crop != null)
 			{
 				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay((int)TFC_Time.getTotalDays(), i, j, k);
-
 				int month = TFC_Time.getSeasonAdjustedMonth(k);
+
 				if(temp > crop.minAliveTemp && month > 0 && month <= 6)
 				{
 					Block b = world.getBlock(i, j, k);
-					if (Blocks.wheat.canBlockStay(world, i, j, k) && (b == Blocks.air || b == Blocks.tallgrass))
+					if (TFCBlocks.Crops.canBlockStay(world, i, j, k) && (b == Blocks.air || b == Blocks.tallgrass))
 					{
-						if(world.setBlock(i, j, k, Blocks.wheat, 0, 0x2))
+						if(world.setBlock(i, j, k, TFCBlocks.Crops, 0, 0x2))
 						{
 							te = (TECrop)world.getTileEntity(i, j, k);
 							te.cropId = cropBlockId;
-							float gt = Math.max(crop.growthTime/TFC_Time.daysInMonth, 0.01f);
-							float mg = Math.min(month/gt, 1.0f)*(0.75f+(rand.nextFloat()*0.25f));
-							float growth =  Math.min(crop.numGrowthStages*mg, crop.numGrowthStages);
+							float gt = Math.max(crop.growthTime / TFC_Time.daysInMonth, 0.01f);
+							float mg = Math.min(month / gt, 1.0f) * (0.75f + (rand.nextFloat() * 0.25f));
+							float growth = Math.min(crop.numGrowthStages * mg, crop.numGrowthStages);
 							te.growth = growth;
 						}
 					}

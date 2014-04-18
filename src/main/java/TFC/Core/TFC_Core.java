@@ -186,7 +186,7 @@ public class TFC_Core
 				}
 				else
 				{
-					ItemStack is = new ItemStack(Item.getItemById(0),0,0);
+					ItemStack is = new ItemStack(Item.getItemById(0), 0, 0);
 					is.writeToNBT(nbttagcompound);
 				}
 				return par1NBTTagList;
@@ -216,8 +216,8 @@ public class TFC_Core
 			items.add(new ItemStack(TFCItems.GemTopaz, 1, 0));
 
 			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
-
-		} else if (random.nextInt(1000) == 0)
+		}
+		else if (random.nextInt(1000) == 0)
 		{
 			ArrayList items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 1));
@@ -234,7 +234,8 @@ public class TFC_Core
 			items.add(new ItemStack(TFCItems.GemTopaz, 1, 1));
 
 			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
-		} else if (random.nextInt(2000) == 0)
+		}
+		else if (random.nextInt(2000) == 0)
 		{
 			ArrayList items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 2));
@@ -251,7 +252,8 @@ public class TFC_Core
 			items.add(new ItemStack(TFCItems.GemTopaz, 1, 2));
 
 			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
-		} else if (random.nextInt(4000) == 0)
+		}
+		else if (random.nextInt(4000) == 0)
 		{
 			ArrayList items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 3));
@@ -268,7 +270,8 @@ public class TFC_Core
 			items.add(new ItemStack(TFCItems.GemTopaz, 1, 3));
 
 			is = (ItemStack) items.toArray()[random.nextInt(items.toArray().length)];
-		} else if (random.nextInt(8000) == 0)
+		}
+		else if (random.nextInt(8000) == 0)
 		{
 			ArrayList items = new ArrayList<ItemStack>();
 			items.add(new ItemStack(TFCItems.GemAgate, 1, 4));
@@ -298,7 +301,7 @@ public class TFC_Core
 				for (int z = 2; z >= -2; z--)
 				{
 					if(world.isAirBlock(i + x, j + y, k + z))
-						world.setBlock(i + x, j + y, k + z, Blocks.leaves, meta, 2);
+						world.setBlock(i + x, j + y, k + z, TFCBlocks.Leaves, meta, 2);
 				}
 			}
 		}

@@ -38,21 +38,23 @@ public class FarmlandHighlightHandler
 				evt.currentItem.getItem() != TFCItems.IgExHoe &&
 				evt.currentItem.getItem() != TFCItems.SedHoe &&
 				evt.currentItem.getItem() != TFCItems.MMHoe)
+		{
 			isMetalHoe = true;
+		}
 
 		if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && isMetalHoe && PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 1)
 		{
-			Block id = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
+			Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 			int crop = 0;
-			if(id == Blocks.wheat && (
-					world.getBlock(evt.target.blockX, evt.target.blockY-1, evt.target.blockZ) == TFCBlocks.tilledSoil ||
-					world.getBlock(evt.target.blockX, evt.target.blockY-1, evt.target.blockZ) == TFCBlocks.tilledSoil2))
+			if(b == TFCBlocks.Crops && (
+					world.getBlock(evt.target.blockX, evt.target.blockY - 1, evt.target.blockZ) == TFCBlocks.tilledSoil ||
+					world.getBlock(evt.target.blockX, evt.target.blockY - 1, evt.target.blockZ) == TFCBlocks.tilledSoil2))
 			{
-				id = TFCBlocks.tilledSoil;
+				b = TFCBlocks.tilledSoil;
 				crop = 1;
 			}
 
-			if(id == TFCBlocks.tilledSoil || id == TFCBlocks.tilledSoil2)
+			if(b == TFCBlocks.tilledSoil || b == TFCBlocks.tilledSoil2)
 			{
 				TileEntityFarmland te = (TileEntityFarmland) world.getTileEntity(evt.target.blockX, evt.target.blockY - crop, evt.target.blockZ);
 				te.requestNutrientData();
@@ -77,42 +79,42 @@ public class FarmlandHighlightHandler
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
 						evt.target.blockX + 1,
-						evt.target.blockY + fertilizer - crop, 
+						evt.target.blockY + fertilizer - crop,
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 
-				double nutrient = 1.02 + ((double)te.nutrients[0] / (double)soilMax)*0.5;
+				double nutrient = 1.02 + ((double)te.nutrients[0] / (double)soilMax) * 0.5;
 				GL11.glColor4ub(TFCOptions.cropNutrientAColor[0], TFCOptions.cropNutrientAColor[1], TFCOptions.cropNutrientAColor[2], TFCOptions.cropNutrientAColor[3]);
 				drawBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
-						evt.target.blockY + 1.01 - crop + fertilizer-1.02,
+						evt.target.blockY + 1.01 - crop + fertilizer - 1.02,
 						evt.target.blockZ,
 						evt.target.blockX + offset + 0.3333,
-						evt.target.blockY + nutrient - crop + fertilizer-1.02, 
+						evt.target.blockY + nutrient - crop + fertilizer - 1.02,
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 
 				offset = 0.3333;
-				nutrient = 1.02 + ((double)te.nutrients[1] / (double)soilMax)*0.5;
+				nutrient = 1.02 + ((double)te.nutrients[1] / (double)soilMax) * 0.5;
 				GL11.glColor4ub(TFCOptions.cropNutrientBColor[0], TFCOptions.cropNutrientBColor[1], TFCOptions.cropNutrientBColor[2], TFCOptions.cropNutrientBColor[3]);
 				drawBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
-						evt.target.blockY + 1.01 - crop + fertilizer-1.02,
+						evt.target.blockY + 1.01 - crop + fertilizer - 1.02,
 						evt.target.blockZ,
 						evt.target.blockX + offset + 0.3333,
-						evt.target.blockY + nutrient - crop + fertilizer-1.02, 
+						evt.target.blockY + nutrient - crop + fertilizer - 1.02,
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 
 				offset = 0.6666;
-				nutrient = 1.02 + ((double)te.nutrients[2] / (double)soilMax)*0.5;
+				nutrient = 1.02 + ((double)te.nutrients[2] / (double)soilMax) * 0.5;
 				GL11.glColor4ub(TFCOptions.cropNutrientCColor[0], TFCOptions.cropNutrientCColor[1], TFCOptions.cropNutrientCColor[2], TFCOptions.cropNutrientCColor[3]);
 				drawBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
-						evt.target.blockY + 1.01 - crop + fertilizer-1.02,
+						evt.target.blockY + 1.01 - crop + fertilizer - 1.02,
 						evt.target.blockZ,
 						evt.target.blockX + offset + 0.3333,
-						evt.target.blockY + nutrient - crop + fertilizer-1.02, 
+						evt.target.blockY + nutrient - crop + fertilizer - 1.02,
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 
@@ -134,39 +136,39 @@ public class FarmlandHighlightHandler
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
 						evt.target.blockX + 1,
-						evt.target.blockY + fertilizer - crop, 
+						evt.target.blockY + fertilizer - crop,
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 
-				nutrient = 1.02 + ((double)te.nutrients[0] / (double)soilMax)*0.5;
+				nutrient = 1.02 + ((double)te.nutrients[0] / (double)soilMax) * 0.5;
 				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
-						evt.target.blockY + 1.01 - crop + fertilizer-1.02,
+						evt.target.blockY + 1.01 - crop + fertilizer - 1.02,
 						evt.target.blockZ,
 						evt.target.blockX + offset + 0.3333,
-						evt.target.blockY + nutrient - crop + fertilizer-1.02, 
+						evt.target.blockY + nutrient - crop + fertilizer - 1.02,
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 
 				offset = 0.3333;
-				nutrient = 1.02 + ((double)te.nutrients[1] / (double)soilMax)*0.5;
+				nutrient = 1.02 + ((double)te.nutrients[1] / (double)soilMax) * 0.5;
 				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
-						evt.target.blockY + 1.01 - crop + fertilizer-1.02,
+						evt.target.blockY + 1.01 - crop + fertilizer - 1.02,
 						evt.target.blockZ,
 						evt.target.blockX + offset + 0.3333,
-						evt.target.blockY + nutrient - crop + fertilizer-1.02, 
+						evt.target.blockY + nutrient - crop + fertilizer - 1.02,
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 
 				offset = 0.6666;
-				nutrient = 1.02 + ((double)te.nutrients[2] / (double)soilMax)*0.5;
+				nutrient = 1.02 + ((double)te.nutrients[2] / (double)soilMax) * 0.5;
 				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
-						evt.target.blockY + 1.01 - crop + fertilizer-1.02,
+						evt.target.blockY + 1.01 - crop + fertilizer - 1.02,
 						evt.target.blockZ,
 						evt.target.blockX + offset + 0.3333,
-						evt.target.blockY + nutrient - crop + fertilizer-1.02, 
+						evt.target.blockY + nutrient - crop + fertilizer - 1.02,
 						evt.target.blockZ + 1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 			}
@@ -174,17 +176,17 @@ public class FarmlandHighlightHandler
 		else if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && 
 				PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 2)
 		{
-			Block id = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
+			Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 			int crop = 0;
-			if(id == Blocks.wheat && (
+			if(b == TFCBlocks.Crops && (
 					world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil ||
 					world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil2))
 			{
-				id = TFCBlocks.tilledSoil;
+				b = TFCBlocks.tilledSoil;
 				crop = 1;
 			}
 
-			if(id == TFCBlocks.tilledSoil || id == TFCBlocks.tilledSoil2)
+			if(b == TFCBlocks.tilledSoil || b == TFCBlocks.tilledSoil2)
 			{
 				boolean water = TFC.Blocks.BlockFarmland.isFreshWaterNearby(world, evt.target.blockX, evt.target.blockY-crop, evt.target.blockZ);
 
@@ -204,7 +206,7 @@ public class FarmlandHighlightHandler
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
 						evt.target.blockX+1,
-						evt.target.blockY + 1.02 - crop, 
+						evt.target.blockY + 1.02 - crop,
 						evt.target.blockZ+1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 
@@ -214,8 +216,8 @@ public class FarmlandHighlightHandler
 		else if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && 
 				PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 3)
 		{
-			Block id = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
-			if(id == Blocks.wheat && (
+			Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
+			if(b == TFCBlocks.Crops && (
 					world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil ||
 					world.getBlock(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil2))
 			{
@@ -239,7 +241,7 @@ public class FarmlandHighlightHandler
 						evt.target.blockY + 0.01,
 						evt.target.blockZ,
 						evt.target.blockX+1,
-						evt.target.blockY + 0.02, 
+						evt.target.blockY + 0.02,
 						evt.target.blockZ+1
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 

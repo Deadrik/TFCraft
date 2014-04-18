@@ -41,6 +41,7 @@ public class SkillStats
 	{
 		skillsMap.put(skillName, amount);
 	}
+
 	public void setSkillSave(String skillName, int amount)
 	{
 		skillsMap.put(skillName, amount);

@@ -391,10 +391,11 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 	}
 
 	public boolean checkValidAddition(int i){
-		if((i == Type || Type == 0 || (Type == 13 && i == 12))&& !sealed && liquidLevel < 256)
+		if((i == Type || Type == 0 || (Type == 13 && i == 12)) && !sealed && liquidLevel < 256)
 		{
 			liquidLevel = Math.min(liquidLevel+32, 256);
-			if(Type == 0 || Type == 13){
+			if(Type == 0 || Type == 13)
+			{
 				Type = i==12 && Type == 13?14:i;
 			}
 			updateGui();
@@ -417,7 +418,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 				if(sealtimecounter == 0)
 					sealtimecounter = (int) TFC_Time.getTotalTicks();
 
-				if(sealtimecounter > 0 && sealtimecounter + (SEALTIME*100) < TFC_Time.getTotalTicks() )
+				if(sealtimecounter > 0 && sealtimecounter + (SEALTIME * 100) < TFC_Time.getTotalTicks())
 				{
 					sealtimecounter = 0;
 					sealed = false;
@@ -426,7 +427,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			}
 
 			if(mode == 1 && liquidLevel > 0 && TFC_Time.getTotalTicks() % 2 == 0 &&
-					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj,0,xCoord,yCoord,zCoord,true))
+					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj, 0, xCoord, yCoord, zCoord, true))
 			{
 				liquidLevel-=4;
 				updateGui();

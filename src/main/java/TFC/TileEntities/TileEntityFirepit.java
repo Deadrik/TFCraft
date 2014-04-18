@@ -44,7 +44,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 	private Map<Integer, int[]> topMap = new HashMap<Integer, int[]>();
 	private boolean topScan;
 	private int topY;
-	public final int FIREBURNTIME = (int) ((TFC_Time.hourLength*18)/100);//default 240
+	public final int FIREBURNTIME = (int) ((TFC_Time.hourLength * 18) / 100);//default 240
 
 	public TileEntityFirepit()
 	{
@@ -192,13 +192,14 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 					//Otherwise if the first output has an item that doesnt match the input item then put the item in the second output slot
 					else if(fireItemStacks[7] != null && fireItemStacks[7].getItem() != TFCItems.CeramicMold && 
 							(fireItemStacks[7].getItem() != fireItemStacks[1].getItem() || fireItemStacks[7].getItemDamage() == 0))
+					{
 						if(fireItemStacks[8] == null)
 						{
 							fireItemStacks[8] = fireItemStacks[1].copy();
 							fireItemStacks[1] = null;
 							return;
 						}
-
+					}
 					mold = new ItemStack(TFCItems.CeramicMold,1);
 					mold.stackSize = 1;
 					mold.setItemDamage(1);
@@ -366,6 +367,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
+		{
 			if(fireItemStacks[i]!= null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, fireItemStacks[i]);
@@ -375,6 +377,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 				worldObj.spawnEntityInWorld(entityitem);
 				fireItemStacks[i] = null;
 			}
+		}
 	}
 
 	public void externalFireCheck()
@@ -503,14 +506,20 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 			checkArray[x][y][z] = true;
 			int offsetX = 0;int offsetZ = 0;
 			for (offsetX = -1; offsetX <= 1; offsetX++)
+			{
 				for (offsetZ = -1; offsetZ <= 1; offsetZ++)
+				{
 					if(x+offsetX < 25 && x+offsetX >= 0 && z+offsetZ < 25 && z+offsetZ >= 0 && y < 13 && y >= 0)
+					{
 						if(!checkArray[x+offsetX][y][z+offsetZ] && checkOut(i+offsetX, j, k+offsetZ, empty))
 						{
 							scanLogs(i+offsetX, j, k+offsetZ, checkArray,(byte)(x+offsetX),y,(byte)(z+offsetZ), empty, top);
 							if(top)
 								topMap.put(topMap.size(), new int[] {i+offsetX, j+2, k+offsetZ});
 						}
+					}
+				}
+			}
 		}
 	}
 
@@ -647,8 +656,10 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 			}
 			
 			if(R.nextInt(5) == 0)
+			{
 				if(worldObj.isRemote)
 					GenerateSmoke();
+			}
 		}
 		else
 		{
@@ -694,6 +705,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 			}
 			else if(fireItemStacks[1] == null)
 				inputItemTemp = TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord);
+
 			hasCookingPot = (fireItemStacks[1] != null && fireItemStacks[1].getItem() == TFCItems.PotteryPot);
 			updateGui();
 			//careForInventorySlot(1,fireTemperature);
@@ -745,10 +757,12 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 					desiredTemp = handleTemp();
 				else
 					desiredTemp = 300;
+
 				handleTempFlux(desiredTemp);
 			}
 			else if(fuelTimeLeft <= 0 && fireTemperature >= 210 && fireItemStacks[5] != null &&
 					(!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
+			{
 				if(fireItemStacks[5] != null)
 				{
 					EnumWoodMaterial m = TFC_Core.getWoodMaterial(fireItemStacks[5]);
@@ -756,6 +770,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 					fuelTimeLeft = m.burnTimeMax;
 					fuelBurnTemp = m.burnTempMax;
 				}
+			}
 			//If there is no more fuel and the fire is still hot, we start to cool it off.
 			if(fuelTimeLeft <= 0 && fireTemperature > ambientTemp)
 			{
@@ -770,12 +785,16 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 
 			//do a last minute check to verify stack size
 			if(fireItemStacks[7] != null)
+			{
 				if(fireItemStacks[7].stackSize <= 0)
 					fireItemStacks[7].stackSize = 1;
+			}
 
 			if(fireItemStacks[8] != null)
+			{
 				if(fireItemStacks[8].stackSize <= 0)
 					fireItemStacks[8].stackSize = 1;
+			}
 
 			if(fuelTimeLeft <= 0)
 				TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);

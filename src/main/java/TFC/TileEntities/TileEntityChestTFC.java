@@ -247,7 +247,6 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 
 		if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
 		{
-
 			if (this.numPlayersUsing > 0)
 				this.lidAngle += var1;
 			else

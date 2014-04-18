@@ -86,12 +86,13 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 					t = 2;
 
 				//First we attempt to grow the trunk of the tree higher
-				if(height <= 2 && isTrunk && worldObj.rand.nextInt(16/t) == 0 &&
-						(worldObj.isAirBlock(xCoord, yCoord+1, zCoord) || 
-								worldObj.getBlock(xCoord, yCoord+1, zCoord) == TFCBlocks.fruitTreeLeaves || worldObj.getBlock(xCoord, yCoord+1, zCoord) == TFCBlocks.fruitTreeLeaves2))
+				if(height <= 2 && isTrunk && worldObj.rand.nextInt(16/t) == 0 && (
+						worldObj.isAirBlock(xCoord, yCoord + 1, zCoord) || 
+						worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.fruitTreeLeaves ||
+						worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.fruitTreeLeaves2))
 				{
-					worldObj.setBlock(xCoord, yCoord+1, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
-					((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord+1, zCoord)).setup(true, height+1, GrowTime);
+					worldObj.setBlock(xCoord, yCoord + 1, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
+					((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord + 1, zCoord)).setup(true, height + 1, GrowTime);
 
 					setBirthWood(GrowTime);
 				}
@@ -99,25 +100,25 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 				else if(height == 2 && isTrunk && worldObj.rand.nextInt(16/t) == 0)
 				{
 					int r = worldObj.rand.nextInt(4);
-					if(r == 0 && BlockFalling.func_149831_e(worldObj, xCoord+1, yCoord, zCoord) || worldObj.getBlock(xCoord+1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves)
+					if(r == 0 && BlockFalling.func_149831_e(worldObj, xCoord + 1, yCoord, zCoord) || worldObj.getBlock(xCoord + 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves)
 					{
-						worldObj.setBlock(xCoord+1, yCoord, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
-						((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord+1, yCoord, zCoord)).setupBirth(false, height);
+						worldObj.setBlock(xCoord + 1, yCoord, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
+						((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord + 1, yCoord, zCoord)).setupBirth(false, height);
 					}
-					else if(r == 1 && BlockFalling.func_149831_e(worldObj, xCoord, yCoord, zCoord-1) || worldObj.getBlock(xCoord, yCoord, zCoord-1) == TFCBlocks.fruitTreeLeaves)
+					else if(r == 1 && BlockFalling.func_149831_e(worldObj, xCoord, yCoord, zCoord - 1) || worldObj.getBlock(xCoord, yCoord, zCoord - 1) == TFCBlocks.fruitTreeLeaves)
 					{
-						worldObj.setBlock(xCoord, yCoord, zCoord-1, TFCBlocks.fruitTreeWood, meta, 0x2);
-						((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord-1)).setupBirth(false, height);
+						worldObj.setBlock(xCoord, yCoord, zCoord - 1, TFCBlocks.fruitTreeWood, meta, 0x2);
+						((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord - 1)).setupBirth(false, height);
 					}
-					else if(r == 2 && BlockFalling.func_149831_e(worldObj, xCoord-1, yCoord, zCoord) || worldObj.getBlock(xCoord-1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves)
+					else if(r == 2 && BlockFalling.func_149831_e(worldObj, xCoord - 1, yCoord, zCoord) || worldObj.getBlock(xCoord - 1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves)
 					{
-						worldObj.setBlock(xCoord-1, yCoord, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
-						((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord-1, yCoord, zCoord)).setupBirth(false, height);
+						worldObj.setBlock(xCoord - 1, yCoord, zCoord, TFCBlocks.fruitTreeWood, meta, 0x2);
+						((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord - 1, yCoord, zCoord)).setupBirth(false, height);
 					}
-					else if(r == 3 && BlockFalling.func_149831_e(worldObj, xCoord, yCoord, zCoord+1) || worldObj.getBlock(xCoord, yCoord, zCoord+1) == TFCBlocks.fruitTreeLeaves)
+					else if(r == 3 && BlockFalling.func_149831_e(worldObj, xCoord, yCoord, zCoord + 1) || worldObj.getBlock(xCoord, yCoord, zCoord + 1) == TFCBlocks.fruitTreeLeaves)
 					{
-						worldObj.setBlock(xCoord, yCoord, zCoord+1, TFCBlocks.fruitTreeWood, meta, 0x2);
-						((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord+1)).setupBirth(false, height);
+						worldObj.setBlock(xCoord, yCoord, zCoord + 1, TFCBlocks.fruitTreeWood, meta, 0x2);
+						((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord + 1)).setupBirth(false, height);
 					}
 
 					((TileEntityFruitTreeWood)worldObj.getTileEntity(xCoord, yCoord, zCoord)).setBirthWood(branchGrowTime);
@@ -129,50 +130,50 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 				int m = meta & 7;
 				Block bid = meta < 8 ? TFCBlocks.fruitTreeLeaves : TFCBlocks.fruitTreeLeaves2;
 
-				if(worldObj.isAirBlock(xCoord, yCoord+1, zCoord) && worldObj.isAirBlock(xCoord, yCoord+2, zCoord) && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord+1, zCoord, TFCBlocks.fruitTreeLeaves))//above
+				if(worldObj.isAirBlock(xCoord, yCoord + 1, zCoord) && worldObj.isAirBlock(xCoord, yCoord+2, zCoord) && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord + 1, zCoord, TFCBlocks.fruitTreeLeaves))//above
 				{
-					worldObj.setBlock(xCoord, yCoord+1, zCoord, bid, m, 0x2);
-					worldObj.markBlockForUpdate(xCoord, yCoord+1, zCoord);
+					worldObj.setBlock(xCoord, yCoord + 1, zCoord, bid, m, 0x2);
+					worldObj.markBlockForUpdate(xCoord, yCoord + 1, zCoord);
 				}
-				else if(worldObj.isAirBlock(xCoord+1, yCoord, zCoord) && worldObj.isAirBlock(xCoord+1, yCoord+1, zCoord) && BlockFruitLeaves.canStay(worldObj, xCoord+1, yCoord, zCoord, TFCBlocks.fruitTreeLeaves))//+x
+				else if(worldObj.isAirBlock(xCoord + 1, yCoord, zCoord) && worldObj.isAirBlock(xCoord + 1, yCoord + 1, zCoord) && BlockFruitLeaves.canStay(worldObj, xCoord + 1, yCoord, zCoord, TFCBlocks.fruitTreeLeaves))//+x
 				{
-					worldObj.setBlock(xCoord+1, yCoord, zCoord, bid, m, 0x2);
-					worldObj.markBlockForUpdate(xCoord+1, yCoord, zCoord);
+					worldObj.setBlock(xCoord + 1, yCoord, zCoord, bid, m, 0x2);
+					worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord);
 				}
-				else if(worldObj.isAirBlock(xCoord-1, yCoord, zCoord) && worldObj.isAirBlock(xCoord-1, yCoord+1, zCoord) && BlockFruitLeaves.canStay(worldObj, xCoord-1, yCoord, zCoord, TFCBlocks.fruitTreeLeaves))//-x
+				else if(worldObj.isAirBlock(xCoord - 1, yCoord, zCoord) && worldObj.isAirBlock(xCoord - 1, yCoord + 1, zCoord) && BlockFruitLeaves.canStay(worldObj, xCoord - 1, yCoord, zCoord, TFCBlocks.fruitTreeLeaves))//-x
 				{
-					worldObj.setBlock(xCoord-1, yCoord, zCoord, bid, m, 0x2);
-					worldObj.markBlockForUpdate(xCoord-1, yCoord, zCoord);
+					worldObj.setBlock(xCoord - 1, yCoord, zCoord, bid, m, 0x2);
+					worldObj.markBlockForUpdate(xCoord - 1, yCoord, zCoord);
 				}
-				else if(worldObj.isAirBlock(xCoord, yCoord, zCoord+1) && worldObj.isAirBlock(xCoord, yCoord+1, zCoord+1) && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord, zCoord+1, TFCBlocks.fruitTreeLeaves))//+z
+				else if(worldObj.isAirBlock(xCoord, yCoord, zCoord + 1) && worldObj.isAirBlock(xCoord, yCoord + 1, zCoord + 1) && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord, zCoord + 1, TFCBlocks.fruitTreeLeaves))//+z
 				{
-					worldObj.setBlock(xCoord, yCoord, zCoord+1, bid, m, 0x2);
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord+1);
+					worldObj.setBlock(xCoord, yCoord, zCoord + 1, bid, m, 0x2);
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord + 1);
 				}
-				else if(worldObj.isAirBlock(xCoord, yCoord, zCoord-1) && worldObj.isAirBlock(xCoord, yCoord+1, zCoord-1) && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord, zCoord-1, TFCBlocks.fruitTreeLeaves))//-z
+				else if(worldObj.isAirBlock(xCoord, yCoord, zCoord - 1) && worldObj.isAirBlock(xCoord, yCoord + 1, zCoord - 1) && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord, zCoord - 1, TFCBlocks.fruitTreeLeaves))//-z
 				{
-					worldObj.setBlock(xCoord, yCoord, zCoord-1, bid, m, 0x2);
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord-1);
+					worldObj.setBlock(xCoord, yCoord, zCoord - 1, bid, m, 0x2);
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord - 1);
 				}
-				else if(worldObj.isAirBlock(xCoord+1, yCoord, zCoord-1) && worldObj.isAirBlock(xCoord+1, yCoord+1, zCoord-1) && BlockFruitLeaves.canStay(worldObj, xCoord+1, yCoord, zCoord-1, TFCBlocks.fruitTreeLeaves))//+x/-z
+				else if(worldObj.isAirBlock(xCoord + 1, yCoord, zCoord - 1) && worldObj.isAirBlock(xCoord + 1, yCoord + 1, zCoord - 1) && BlockFruitLeaves.canStay(worldObj, xCoord + 1, yCoord, zCoord - 1, TFCBlocks.fruitTreeLeaves))//+x/-z
 				{
-					worldObj.setBlock(xCoord+1, yCoord, zCoord-1, bid, m, 0x2);
-					worldObj.markBlockForUpdate(xCoord+1, yCoord, zCoord-1);
+					worldObj.setBlock(xCoord + 1, yCoord, zCoord - 1, bid, m, 0x2);
+					worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord - 1);
 				}
-				else if(worldObj.isAirBlock(xCoord+1, yCoord, zCoord+1) && worldObj.isAirBlock(xCoord+1, yCoord+1, zCoord+1) && BlockFruitLeaves.canStay(worldObj, xCoord+1, yCoord, zCoord+1, TFCBlocks.fruitTreeLeaves))//+x/+z
+				else if(worldObj.isAirBlock(xCoord + 1, yCoord, zCoord + 1) && worldObj.isAirBlock(xCoord + 1, yCoord + 1, zCoord + 1) && BlockFruitLeaves.canStay(worldObj, xCoord + 1, yCoord, zCoord + 1, TFCBlocks.fruitTreeLeaves))//+x/+z
 				{
-					worldObj.setBlock(xCoord+1, yCoord, zCoord+1, bid, m, 0x2);
-					worldObj.markBlockForUpdate(xCoord+1, yCoord, zCoord+1);
+					worldObj.setBlock(xCoord + 1, yCoord, zCoord + 1, bid, m, 0x2);
+					worldObj.markBlockForUpdate(xCoord + 1, yCoord, zCoord + 1);
 				}
-				else if(worldObj.isAirBlock(xCoord-1, yCoord, zCoord-1) && worldObj.isAirBlock(xCoord-1, yCoord+1, zCoord-1) && BlockFruitLeaves.canStay(worldObj, xCoord-1, yCoord, zCoord-1, TFCBlocks.fruitTreeLeaves))//-x/-z
+				else if(worldObj.isAirBlock(xCoord - 1, yCoord, zCoord - 1) && worldObj.isAirBlock(xCoord - 1, yCoord + 1, zCoord - 1) && BlockFruitLeaves.canStay(worldObj, xCoord - 1, yCoord, zCoord - 1, TFCBlocks.fruitTreeLeaves))//-x/-z
 				{
-					worldObj.setBlock(xCoord-1, yCoord, zCoord-1, bid, m, 0x2);
-					worldObj.markBlockForUpdate(xCoord-1, yCoord, zCoord-1);
+					worldObj.setBlock(xCoord - 1, yCoord, zCoord - 1, bid, m, 0x2);
+					worldObj.markBlockForUpdate(xCoord - 1, yCoord, zCoord - 1);
 				}
-				else if(worldObj.isAirBlock(xCoord-1, yCoord, zCoord+1) && worldObj.isAirBlock(xCoord-1, yCoord+1, zCoord+1) && BlockFruitLeaves.canStay(worldObj, xCoord-1, yCoord, zCoord+1, TFCBlocks.fruitTreeLeaves))//-x/+z
+				else if(worldObj.isAirBlock(xCoord - 1, yCoord, zCoord + 1) && worldObj.isAirBlock(xCoord - 1, yCoord + 1, zCoord + 1) && BlockFruitLeaves.canStay(worldObj, xCoord - 1, yCoord, zCoord + 1, TFCBlocks.fruitTreeLeaves))//-x/+z
 				{
-					worldObj.setBlock(xCoord-1, yCoord, zCoord+1, bid, m, 0x2);
-					worldObj.markBlockForUpdate(xCoord-1, yCoord, zCoord+1);
+					worldObj.setBlock(xCoord - 1, yCoord, zCoord + 1, bid, m, 0x2);
+					worldObj.markBlockForUpdate(xCoord - 1, yCoord, zCoord + 1);
 				}
 				setBirthLeaves(2);
 			}

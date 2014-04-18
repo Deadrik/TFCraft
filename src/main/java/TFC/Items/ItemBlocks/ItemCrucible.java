@@ -67,7 +67,8 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 			{
 				double m = currentAlloy.AlloyIngred.get(c).metal;
 				m = Math.round(m * 100d)/100d;
-				if(currentAlloy.AlloyIngred.get(c).metalType != null) {
+				if(currentAlloy.AlloyIngred.get(c).metalType != null)
+				{
 					arraylist.add(EnumChatFormatting.DARK_GRAY + currentAlloy.AlloyIngred.get(c).metalType.Name + " " + EnumChatFormatting.DARK_GREEN + m + "%");
 				}
 			}
@@ -78,9 +79,12 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 	{
 		if(getTotalMetal()+amt <= 3000 && m.Name != "Unknown")
 		{
-			if(metals.containsKey(m.Name)) {
+			if(metals.containsKey(m.Name))
+			{
 				((MetalPair)metals.get(m.Name)).amount += amt;
-			} else {
+			}
+			else
+			{
 				metals.put(m.Name, new MetalPair(m, amt));
 			}
 
@@ -138,20 +142,20 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 
 
 	@Override
-	public EnumSize getSize(ItemStack is) {
-		// TODO Auto-generated method stub
+	public EnumSize getSize(ItemStack is)
+	{
 		return EnumSize.HUGE;
 	}
 
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public boolean canStack()
+	{
 		return false;
 	}
 
 	@Override
-	public EnumWeight getWeight(ItemStack is) {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight(ItemStack is)
+	{
 		return EnumWeight.HEAVY;
 	}
 

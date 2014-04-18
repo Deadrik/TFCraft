@@ -50,13 +50,15 @@ public class TileEntityPottery extends TileEntity implements IInventory
 			//Make sure to keep the fire going throughout the length of the burn
 			if(blockAbove != Blocks.fire && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFCOptions.pitKilnBurnTime)
 			{
-				if((blockAbove == Blocks.air || worldObj.getBlock(xCoord, yCoord+1, zCoord).getMaterial().getCanBurn()) && isValid())
+				if((blockAbove == Blocks.air || worldObj.getBlock(xCoord, yCoord + 1, zCoord).getMaterial().getCanBurn()) && isValid())
 					worldObj.setBlock(xCoord, yCoord + 1, zCoord, Blocks.fire);
-				else 
+				else
+				{
 					wood = 0;
 					inventory[4] = null;inventory[5] = null;inventory[6] = null;inventory[7] = null;
 					inventory[8] = null;inventory[9] = null;inventory[10] = null;inventory[11] = null;
 					straw = 0;
+				}
 			}
 
 			//If the total time passes then we complete the burn and turn the clay into ceramic
@@ -178,6 +180,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 				inventory[i] = null;
 			}
 		}
+
 		if(straw > 0)
 		{
 			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(TFCItems.Straw, straw));

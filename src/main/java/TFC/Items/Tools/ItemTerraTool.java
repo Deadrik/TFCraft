@@ -130,7 +130,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 			float buff = 0;
 			if(nbt.hasKey("craftingTag") && nbt.getCompoundTag("craftingTag").hasKey("durabuff"))
 				buff = nbt.getCompoundTag("craftingTag").getFloat("durabuff");
-			return (int) (getMaxDamage()+(getMaxDamage()*(buff/100f)));
+			return (int) (getMaxDamage()+(getMaxDamage() * (buff / 100f)));
 		}
 		else return super.getMaxDamage(stack);
 	}

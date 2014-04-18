@@ -168,10 +168,7 @@ public class TileEntityIngotPile extends TileEntity implements IInventory
 		{
 			if(storage[index].stackSize > 0)
 			{
-				storage[index] =
-				new ItemStack(storage[index].getItem(),
-						storage[index].stackSize+count,
-						storage[index].getItemDamage());
+				storage[index] = new ItemStack(storage[index].getItem(), storage[index].stackSize + count, storage[index].getItemDamage());
 			}
 		}
 		updateNeighbours();
