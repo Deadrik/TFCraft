@@ -258,6 +258,11 @@ public class FoodCraftingHandler implements ICraftingHandler
 			{       
 				if(iinventory.getStackInSlot(i) == null)
 					continue;
+				// If we're salting the food
+				if (iinventory.getStackInSlot(i).getItem() == TFCItems.Powder && iinventory.getStackInSlot(i).getItemDamage() == 9)
+				{
+					craftResult.stackTagCompound.setBoolean("isSalted", true);
+				}
 				if(iinventory.getStackInSlot(i).getItem() instanceof ItemCustomKnife)
 				{
 					if(craftResult.getTagCompound().hasKey("foodDecay") && craftResult.getTagCompound().getFloat("foodDecay") > 0)

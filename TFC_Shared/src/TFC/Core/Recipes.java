@@ -1792,6 +1792,7 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(Item.fishRaw, 1), 0), new Object[] {new ItemStack(Item.fishRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.CalamariRaw, 1), 0), new Object[] {new ItemStack(TFCItems.CalamariRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.muttonRaw, 1), 0), new Object[] {new ItemStack(TFCItems.muttonRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.horseMeatRaw, 1), 0), new Object[] {new ItemStack(TFCItems.horseMeatRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 
 
 		for(Item i : TFCItems.FoodList)
