@@ -179,8 +179,8 @@ public class Recipes
 				GameRegistry.addRecipe(new ItemStack(TFCItems.Wool,1+k,0), new Object[] {				
 					"2","1", Character.valueOf('1'), new ItemStack(TFCItems.SheepSkin,1,k),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
 			}
-			GameRegistry.addRecipe(new ItemStack(TFCItems.TerraLeather,0,0), new Object[] {				
-				"2","1", Character.valueOf('1'), new ItemStack(TFCItems.TerraLeather,1),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
+			//GameRegistry.addRecipe(new ItemStack(TFCItems.TerraLeather,0,0), new Object[] {				
+			//"2","1", Character.valueOf('1'), new ItemStack(TFCItems.TerraLeather,1),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
 		}
 
 		GameRegistry.addRecipe(new ItemStack(Item.itemFrame,1),new Object[]{"###","#$#","###",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.TerraLeather,1)});
