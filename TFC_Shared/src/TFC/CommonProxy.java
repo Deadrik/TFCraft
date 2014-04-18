@@ -12,6 +12,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import TFC.Core.TFC_Achievements;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityFallingDirt;
 import TFC.Entities.EntityFallingStone;
@@ -182,6 +183,8 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntityProjectileTFC.class, "arrow", ModLoader.getUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityStand.class, "stand", ModLoader.getUniqueEntityId());
 
+		//registering it over in TerraFirmaCraft.java seems to reset it when you load up the game
+		MinecraftForge.EVENT_BUS.register(new TFC_Achievements());
 
 		EntityRegistry.registerModEntity(EntityJavelin.class, "javelin", 1,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntitySquidTFC.class, "squid", 2,TerraFirmaCraft.instance, 160, 5, true);

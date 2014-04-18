@@ -186,7 +186,7 @@ public class TerraFirmaCraft
 	public void load(FMLInitializationEvent event)
 	{
 		//Register Achievements
-		MinecraftForge.EVENT_BUS.register(new TFC_Achievements());
+		//MinecraftForge.EVENT_BUS.register(new TFC_Achievements());
 	}
 
 	@EventHandler
