@@ -15,8 +15,8 @@ import TFC.WorldGen.Generators.WorldGenCustomCactus;
 import TFC.WorldGen.Generators.WorldGenCustomPumpkin;
 import TFC.WorldGen.Generators.WorldGenCustomReed;
 import TFC.WorldGen.Generators.WorldGenCustomSand;
-import TFC.WorldGen.Generators.WorldGenCustomWaterlily;
 import TFC.WorldGen.Generators.WorldGenGrowCrops;
+import TFC.WorldGen.Generators.WorldGenLilyPad;
 import TFC.WorldGen.Generators.WorldGenLiquidsTFC;
 import TFC.WorldGen.Generators.WorldGenSeaGrass;
 
@@ -57,7 +57,11 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	 */
 	public int reedsPerChunk;
 
-	public int waterlilyPerChunk;
+	/** The water lily generation! */
+	public WorldGenLilyPad lilyPadGen;
+	/** Amount of waterlilys per chunk. */
+	public int lilyPadPerChunk;
+
 
 	/**Added By TFC**/
 	public BiomeDecoratorTFC(TFCBiome par1)
@@ -71,7 +75,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		this.seaweedPerChunk = 3;
 		this.reedGen = new WorldGenCustomReed();
 		this.sandGen = new WorldGenCustomSand(7, Blocks.sand);
-		this.waterlilyGen = new WorldGenCustomWaterlily();
+		this.lilyPadGen = new WorldGenLilyPad();
 		biome = par1;
 	}
 
@@ -91,6 +95,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		int cropid = rand.nextInt(25);
 		CropIndex crop = CropManager.getInstance().getCropFromId(cropid);
 		WorldGenGrowCrops cropGen = new WorldGenGrowCrops(cropid);
+
 		if (randomGenerator.nextInt(20) == 0 && crop != null)
 		{
 			int num = 2 + randomGenerator.nextInt(8);
@@ -134,13 +139,15 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		 * }
 		 */
 
-		for (var2 = 0; var2 < this.waterlilyPerChunk; ++var2)
+		for (var2 = 0; var2 < this.lilyPadPerChunk; ++var2)
 		{
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 			if(TFC_Climate.isSwamp(xCoord, yCoord, zCoord))
-				this.waterlilyGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+			{
+				this.lilyPadGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+			}
 		}
 
 		for (var2 = 0; var2 < 10; ++var2)

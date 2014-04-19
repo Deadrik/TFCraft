@@ -27,6 +27,6 @@ public class BiomeGenSwampTFC extends TFCBiome
 		this.theBiomeDecorator.mushroomsPerChunk = 8;
 		this.theBiomeDecorator.reedsPerChunk = 2;
 		this.theBiomeDecorator.clayPerChunk = 2;
-		this.theBiomeDecorator.waterlilyPerChunk = 4;
+		this.theBiomeDecorator.lilyPadPerChunk = 4;
 	}
 }

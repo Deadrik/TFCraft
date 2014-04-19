@@ -2,12 +2,12 @@ package TFC.Items.ItemBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemColored;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -43,9 +43,9 @@ public class ItemCustomLilyPad extends ItemColored
 				if (!par3EntityPlayer.canPlayerEdit(i, j, k, movingobjectposition.sideHit, par1ItemStack))
 					return par1ItemStack;
 
-				if (Blocks.waterlily.canBlockStay(par2World, i, j+1, k)&& par2World.isAirBlock(i, j + 1, k))
+				if (TFCBlocks.LilyPad.canBlockStay(par2World, i, j + 1, k)&& par2World.isAirBlock(i, j + 1, k))
 				{
-					par2World.setBlock(i, j + 1, k, Blocks.waterlily);
+					par2World.setBlock(i, j + 1, k, TFCBlocks.LilyPad);
 					if (!par3EntityPlayer.capabilities.isCreativeMode)
 						--par1ItemStack.stackSize;
 				}
@@ -57,6 +57,6 @@ public class ItemCustomLilyPad extends ItemColored
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
-		return Blocks.waterlily.getRenderColor(par1ItemStack.getItemDamage());
+		return TFCBlocks.LilyPad.getRenderColor(par1ItemStack.getItemDamage());
 	}
 }

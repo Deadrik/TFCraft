@@ -538,12 +538,14 @@ public class TFC_Climate
 
 		float addMoisture = 1;
 		for(int i = -2; i <= 2 && addMoisture == 1; i++)
+		{
 			for(int k = -2; k <= 2 && addMoisture == 1; k++)
 			{
 				biome = worldObj.getBiomeGenForCoords(x + (i * 8), z + (k * 8));
 				if(biome.biomeID == TFCBiome.ocean.biomeID || biome.biomeID == TFCBiome.river.biomeID || biome.biomeID == TFCBiome.swampland.biomeID)
 					addMoisture = 2f;
 			}
+		}
 		return rain * ((rainModEast + rainModWest + rainModNorth + rainModSouth + addMoisture) / 5);
 	}
 

@@ -2,11 +2,10 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.TFCBlocks;
 
-public class WorldGenCustomWaterlily extends WorldGenerator
+public class WorldGenLilyPad
 {
 	public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
 	{
@@ -16,9 +15,12 @@ public class WorldGenCustomWaterlily extends WorldGenerator
 			int j1 = par4 + par2Random.nextInt(4) - par2Random.nextInt(4);
 			int k1 = par5 + par2Random.nextInt(8) - par2Random.nextInt(8);
 
-			if (par1World.isAirBlock(i1, j1, k1) && Blocks.waterlily.canPlaceBlockAt(par1World, i1, j1, k1))
-				par1World.setBlock(i1, j1, k1, Blocks.waterlily, 0, 2);
+			if (par1World.isAirBlock(i1, j1, k1) && TFCBlocks.LilyPad.canPlaceBlockAt(par1World, i1, j1, k1))
+			{
+				par1World.setBlock(i1, j1, k1, TFCBlocks.LilyPad, 0, 2);
+			}
 		}
+
 		return true;
 	}
 }

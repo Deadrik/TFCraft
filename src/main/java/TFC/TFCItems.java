@@ -997,7 +997,7 @@ public class TFCItems
 //		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.tallgrass), "tallgrass", (new ItemColored(Blocks.tallgrass, true)).func_150943_a(new String[] {"shrub", "grass", "fern"}));
 //		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.vine), "vine", new ItemColored(Blocks.vine, false));
 
-		LilyPad = new ItemCustomLilyPad(Blocks.waterlily);
+		LilyPad = new ItemCustomLilyPad(TFCBlocks.LilyPad);
 		minecartCrate = new ItemCustomMinecart(1).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 		GoldPan = new ItemGoldPan().setUnlocalizedName("GoldPan");
 		SluiceItem = new ItemSluice().setFolder("devices/").setUnlocalizedName("SluiceItem").setCreativeTab(TFCTabs.TFCDevices);
@@ -2048,6 +2048,7 @@ public class TFCItems
 	public static void registerItems()
 	{
 		System.out.println(new StringBuilder().append("[TFC] Registering Items").toString());
+
 //		GameRegistry.registerItem(minecartCrate, minecartCrate.getUnlocalizedName());
 		GameRegistry.registerItem(GoldPan, GoldPan.getUnlocalizedName());
 		GameRegistry.registerItem(SluiceItem, SluiceItem.getUnlocalizedName());

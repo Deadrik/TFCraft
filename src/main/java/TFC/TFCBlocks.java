@@ -266,6 +266,7 @@ public class TFCBlocks
 	public static Block Moss;
 	public static Block BerryBush;
 	public static Block Crops;
+	public static Block LilyPad;
 	public static Block Flora;
 	public static Block Tuyere;
 	public static Block EarlyBloomery;
@@ -444,14 +445,15 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Tuyere, "Tuyere");
 		GameRegistry.registerBlock(Crucible, TFC.Items.ItemBlocks.ItemCrucible.class, "Crucible");
 		GameRegistry.registerBlock(NestBox, TFC.Items.ItemBlocks.ItemTerraBlock.class, "NestBox");
-		GameRegistry.registerBlock(Fence,TFC.Items.ItemBlocks.ItemFence.class, "Fence");
-		GameRegistry.registerBlock(Fence2,TFC.Items.ItemBlocks.ItemFence2.class, "Fence2");
-//		GameRegistry.registerBlock(Blocks.fence_gate,TFC.Items.ItemBlocks.ItemFenceGate.class, "FenceGate");
-		GameRegistry.registerBlock(FenceGate2,TFC.Items.ItemBlocks.ItemFenceGate2.class, "FenceGate2");
+		GameRegistry.registerBlock(Fence, TFC.Items.ItemBlocks.ItemFence.class, "Fence");
+		GameRegistry.registerBlock(Fence2, TFC.Items.ItemBlocks.ItemFence2.class, "Fence2");
+//		GameRegistry.registerBlock(Blocks.fence_gate, TFC.Items.ItemBlocks.ItemFenceGate.class, "FenceGate");
+		GameRegistry.registerBlock(FenceGate2, TFC.Items.ItemBlocks.ItemFenceGate2.class, "FenceGate2");
 		GameRegistry.registerBlock(StrawHideBed, "StrawHideBed");
-		GameRegistry.registerBlock(ArmourStand,TFC.Items.ItemBlocks.ItemArmourStand.class, "ArmourStand");
-		GameRegistry.registerBlock(ArmourStand2,TFC.Items.ItemBlocks.ItemArmourStand2.class, "ArmourStand2");
-		GameRegistry.registerBlock(BerryBush,TFC.Items.ItemBlocks.ItemBerryBush.class, "BerryBush");
+		GameRegistry.registerBlock(ArmourStand, TFC.Items.ItemBlocks.ItemArmourStand.class, "ArmourStand");
+		GameRegistry.registerBlock(ArmourStand2, TFC.Items.ItemBlocks.ItemArmourStand2.class, "ArmourStand2");
+		GameRegistry.registerBlock(BerryBush, TFC.Items.ItemBlocks.ItemBerryBush.class, "BerryBush");
+		GameRegistry.registerBlock(LilyPad, TFC.Items.ItemBlocks.ItemCustomLilyPad.class, "LilyPad");
 
 		//FluidRegistry.registerFluid(new Fluid("freshWater").setBlockID(FreshWaterStill.blockID).setBlockName(FreshWaterStill.getUnlocalizedName()));
 		//FluidRegistry.registerFluid(new Fluid("hotWater").setBlockID(HotWaterStill.blockID).setBlockName(HotWaterStill.getUnlocalizedName()));
@@ -461,11 +463,13 @@ public class TFCBlocks
 	{
 		System.out.println(new StringBuilder().append("[TFC] Loading Blocks").toString());
 
+		// Remove Items from Creative Tabs
 		Blocks.double_wooden_slab.setCreativeTab(null);
 		Blocks.wooden_slab.setCreativeTab(null);
 		Blocks.spruce_stairs.setCreativeTab(null);
 		Blocks.birch_stairs.setCreativeTab(null);
 		Blocks.jungle_stairs.setCreativeTab(null);
+		Blocks.waterlily.setCreativeTab(null);
 
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.flowing_water), "flowing_water",
 				(new BlockCustomFlowing(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water_flow"));
@@ -509,8 +513,7 @@ public class TFCBlocks
 				(new BlockCustomVine()).setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("vine").setBlockTextureName("vine"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.fence_gate), "FenceGateTFC",
 				(new BlockCustomFenceGate()).setBlockName("FenceGateTFC").setHardness(2));
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.waterlily), "waterlily",
-				(new BlockCustomLilyPad()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("waterlily").setBlockTextureName("waterlily"));
+		
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.wooden_button), "wooden_button",
 				(new BlockCustomButtonWood()).setHardness(0.5F).setStepSound(Block.soundTypeWood).setBlockName("button"));
 
@@ -663,6 +666,7 @@ public class TFCBlocks
 
 		BerryBush = new BlockBerryBush().setBlockName("BerryBush").setHardness(0.3f).setStepSound(Block.soundTypeGrass);
 		Crops = new BlockCrop().setBlockName("crops").setHardness(0.3F).setStepSound(Block.soundTypeGrass);
+		LilyPad = new BlockCustomLilyPad().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("LilyPad").setBlockTextureName("waterlily");
 
 		FreshWaterFlowing = (new BlockFreshWaterFlowing()).setHardness(100.0F).setLightOpacity(3).setBlockName("water").setCreativeTab(CreativeTabs.tabDecorations);;
 		FreshWaterStill  = (new BlockFreshWaterStill()).setHardness(100.0F).setLightOpacity(3).setBlockName("water").setCreativeTab(CreativeTabs.tabDecorations);;
