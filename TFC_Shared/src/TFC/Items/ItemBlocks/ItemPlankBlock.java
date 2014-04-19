@@ -1,9 +1,7 @@
 package TFC.Items.ItemBlocks;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.item.ItemStack;
 import TFC.API.Constant.Global;
-import TFC.API.Enums.EnumSize;
 
 public class ItemPlankBlock extends ItemTerraBlock
 {
@@ -18,10 +16,5 @@ public class ItemPlankBlock extends ItemTerraBlock
 	public void registerIcons(IconRegister registerer)
 	{
 
-	}
-
-	@Override
-	public EnumSize getSize(ItemStack is) {
-		return EnumSize.MEDIUM;
 	}
 }
