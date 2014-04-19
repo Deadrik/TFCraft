@@ -529,8 +529,7 @@ public class TFCItemID {
 	public static int BucketPlan				= 20016;
 	public static int JavelinHeadPlan			= 20017;
 	//Fruits
-	public static int FruitTreeSapling1			= 18000;
-	public static int FruitTreeSapling2			= 18001;
+	public static int FruitTreeSapling			= 18000;
 	public static int RedApple					= 18002;
 	public static int Banana					= 18003;
 	public static int Orange					= 18004;
@@ -1296,8 +1295,7 @@ public class TFCItemID {
 		BucketPlan = TFCOptions.getIntFor(config,"item","BucketPlan", BucketPlan);
 		JavelinHeadPlan = TFCOptions.getIntFor(config,"item","JavelinHeadPlan", JavelinHeadPlan);
 		// Foods
-		FruitTreeSapling1 = TFCOptions.getIntFor(config, "item", "FruitSapling1", FruitTreeSapling1);
-		FruitTreeSapling2 = TFCOptions.getIntFor(config, "item", "FruitSapling2", FruitTreeSapling2);
+		FruitTreeSapling = TFCOptions.getIntFor(config, "item", "FruitSapling", FruitTreeSapling);
 		RedApple = TFCOptions.getIntFor(config, "item", "Fruit.Red Apple", RedApple);
 		Banana = TFCOptions.getIntFor(config, "item", "Fruit.Banana", Banana);
 		Orange = TFCOptions.getIntFor(config, "item", "Fruit.Orange", Orange);

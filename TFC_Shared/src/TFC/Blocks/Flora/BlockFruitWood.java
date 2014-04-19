@@ -127,10 +127,7 @@ public class BlockFruitWood extends BlockTerraContainer
 				Random R = new Random();
 				if(R.nextInt(100) > 50 && isAxeorSaw)
 				{
-					if(world.getBlockMetadata(i, j, k) < 8)
-						dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling1, 1, l));
-					else
-						dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling2, 1, l));
+					dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling, 1, l));
 				}
 			}
 		}
