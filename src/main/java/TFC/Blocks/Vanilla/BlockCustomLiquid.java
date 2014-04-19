@@ -679,6 +679,6 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 	@SideOnly(Side.CLIENT)
 	public static IIcon getFluidIcon(String par0Str)
 	{
-		return par0Str == "water_still" ? TFCBlocks.SaltWaterFlowing.getIcon(0, 0) : (par0Str == "water_flow" ? TFCBlocks.SaltWaterFlowing.getIcon(1, 0) : (par0Str == "lava_still" ? Blocks.flowing_lava.getIcon(0, 0) : (par0Str == "lava_flow" ? Blocks.flowing_lava.getIcon(1, 0) : null)));
+		return par0Str == "water_still" ? TFCBlocks.SaltWaterFlowing.getIcon(0, 0) : (par0Str == "water_flow" ? TFCBlocks.SaltWaterFlowing.getIcon(1, 0) : (par0Str == "lava_still" ? TFCBlocks.LavaFlowing.getIcon(0, 0) : (par0Str == "lava_flow" ? TFCBlocks.LavaFlowing.getIcon(1, 0) : null)));
 	}
 }

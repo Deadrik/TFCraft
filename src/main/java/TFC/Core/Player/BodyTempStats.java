@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import TFC.TFCBlocks;
 import TFC.API.IClothing;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
@@ -139,7 +140,7 @@ public class BodyTempStats
 				{
 					TileEntity te = player.worldObj.getTileEntity(i, j, k);
 					if((player.worldObj.getBlock(i, j, k) == Blocks.lava ||
-							player.worldObj.getBlock(i, j, k) == Blocks.flowing_lava) ||
+							player.worldObj.getBlock(i, j, k) == TFCBlocks.LavaFlowing) ||
 							(te != null && te instanceof TileEntityFireEntity))
 					{
 						//returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )<10?1:0);

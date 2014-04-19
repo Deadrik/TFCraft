@@ -4,6 +4,7 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import TFC.API.TFCOptions;
 
 public class DebugModeCommand extends CommandBase{
@@ -27,9 +28,15 @@ public class DebugModeCommand extends CommandBase{
 		{
 			NBTTagCompound nbt = player.getEntityData();
 			if(nbt != null && nbt.hasKey("inDebugMode"))
+			{
 				player.getEntityData().removeTag("inDebugMode");
+				sender.addChatMessage(new ChatComponentText("Debug Mode is OFF"));
+			}
 			else
+			{
 				player.getEntityData().setBoolean("inDebugMode", true);
+				sender.addChatMessage(new ChatComponentText("Debug Mode is ON"));
+			}
 		}
 	}
 

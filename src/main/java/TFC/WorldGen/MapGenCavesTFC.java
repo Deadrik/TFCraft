@@ -171,7 +171,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 											{
 												if (var50 < 10 && TFC_Climate.getStability((int)worldX, (int)worldZ) == 1)
 												{
-													idArray[index] = Blocks.flowing_lava;
+													idArray[index] = TFCBlocks.LavaFlowing;
 													metaArray[index] = 0;
 												}
 												else

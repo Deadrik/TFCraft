@@ -302,6 +302,8 @@ public class TFCBlocks
 	public static Block HotWaterStill;
 	public static Block HotWaterFlowing;
 	
+	public static Block LavaFlowing;
+	
 	public static Block SeaGrassStill;
 	public static Block SeaGrassFrozen;
 	public static Block SeaGrassFlowing;
@@ -426,6 +428,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(HotWaterStill, "HotWaterStill");
 		GameRegistry.registerBlock(HotWaterFlowing, "HotWaterFlowing");
 		
+		GameRegistry.registerBlock(LavaFlowing, "LavaFlowing");
+		
 		GameRegistry.registerBlock(SeaGrassStill, "SeaGrassStill");
 		GameRegistry.registerBlock(SeaGrassFrozen, "SeaGrassFrozen");
 		GameRegistry.registerBlock(SeaGrassFlowing, "SeaGrassFlowing");
@@ -471,9 +475,6 @@ public class TFCBlocks
 		Blocks.jungle_stairs.setCreativeTab(null);
 		Blocks.waterlily.setCreativeTab(null);
 
-
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.flowing_lava), "flowing_lava",
-				(new BlockCustomFlowing(Material.lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("lava_flow"));
 
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.tallgrass), "tallgrass",
 				(new BlockCustomTallGrass()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("tallgrass"));
@@ -671,6 +672,8 @@ public class TFCBlocks
 		FreshWaterStill = (new BlockFreshWaterStill()).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterStill");
 		HotWaterFlowing = (new BlockHotWaterFlowing()).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWaterFlowing");
 		HotWaterStill = (new BlockHotWaterStill()).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWaterStill");
+
+		LavaFlowing = (new BlockCustomFlowing(Material.lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("LavaFlowing");
 
 		SeaGrassStill = new BlockTallSeaGrassStill().setBlockName("SeaGrassStill").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 		SeaGrassFrozen = (new BlockFrozenSeaGrass()).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("SeaGrassIce");

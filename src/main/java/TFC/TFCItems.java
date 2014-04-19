@@ -32,7 +32,6 @@ import TFC.Food.ItemRawFood;
 import TFC.Food.ItemRawFoodDough;
 import TFC.Items.ItemAlcohol;
 import TFC.Items.ItemArrow;
-import TFC.Items.ItemBarrels;
 import TFC.Items.ItemBloom;
 import TFC.Items.ItemBlueprint;
 import TFC.Items.ItemClay;
@@ -1442,7 +1441,7 @@ public class TFCItems
 		RedSteelBucketSaltWater = (new ItemCustomRedSteelBucket(TFCBlocks.SaltWaterFlowing)).setUnlocalizedName("Red Steel Bucket Salt Water").setContainerItem(RedSteelBucketEmpty);
 
 		BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(Blocks.air)).setUnlocalizedName("Blue Steel Bucket Empty");
-		BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(Blocks.flowing_lava)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);
+		BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFCBlocks.LavaFlowing)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);
 
 		Quern = ((ItemTerra) new ItemTerra().setUnlocalizedName("Quern").setMaxDamage(250)).setSize(EnumSize.MEDIUM).setWeight(EnumWeight.HEAVY);
 		FlintSteel = new ItemFlintSteel().setUnlocalizedName("flintAndSteel").setMaxDamage(200).setTextureName("flint_and_steel");

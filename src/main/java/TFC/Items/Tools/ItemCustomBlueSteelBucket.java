@@ -17,23 +17,24 @@ import cpw.mods.fml.common.eventhandler.Event;
 
 public class ItemCustomBlueSteelBucket extends ItemTerra
 {
-	/** field for checking if the bucket has been filled. */
-	private Block isFull;
+	private Block bucketContent;
 
 	public ItemCustomBlueSteelBucket(Block par2)
 	{
 		super();
-		this.isFull = par2;
+		this.bucketContent = par2;
 		this.setFolder("tools/");
 	}
 
 	@Override
-	public EnumSize getSize(ItemStack is) {
+	public EnumSize getSize(ItemStack is)
+	{
 		return EnumSize.LARGE;
 	}
 
 	@Override
-	public boolean canStack() {
+	public boolean canStack()
+	{
 		return false;
 	}
 
@@ -47,7 +48,7 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 		double var5 = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * var4;
 		double var7 = par3EntityPlayer.prevPosY + (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) * var4 + 1.62D - par3EntityPlayer.yOffset;
 		double var9 = par3EntityPlayer.prevPosZ + (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) * var4;
-		boolean var11 = this.isFull != Blocks.flowing_lava;
+		boolean var11 = this.bucketContent == Blocks.air;
 		MovingObjectPosition var12 = Helper.getMovingObjectPositionFromPlayer(world, par3EntityPlayer, var11);
 
 		if (var12 == null)
@@ -67,7 +68,7 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 					return par1ItemStack;
 				}
 
-				if (this.isFull != Blocks.flowing_lava)
+				if (this.bucketContent == Blocks.air)
 				{
 					if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, par1ItemStack))
 					{
@@ -109,40 +110,17 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 				}
 				else
 				{
-					if (this.isFull != Blocks.flowing_lava)
+					if (this.bucketContent == Blocks.air)
 					{
 						return new ItemStack(TFCItems.BlueSteelBucketEmpty);
 					}
 
-					if (var12.sideHit == 0)
-					{
-						--j;
-					}
-
-					if (var12.sideHit == 1)
-					{
-						++j;
-					}
-
-					if (var12.sideHit == 2)
-					{
-						--k;
-					}
-
-					if (var12.sideHit == 3)
-					{
-						++k;
-					}
-
-					if (var12.sideHit == 4)
-					{
-						--i;
-					}
-
-					if (var12.sideHit == 5)
-					{
-						++i;
-					}
+					if (var12.sideHit == 0) --j;
+					if (var12.sideHit == 1) ++j;
+					if (var12.sideHit == 2) --k;
+					if (var12.sideHit == 3) ++k;
+					if (var12.sideHit == 4) --i;
+					if (var12.sideHit == 5) ++i;
 
 					if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, par1ItemStack))
 					{
@@ -161,20 +139,24 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 
 	public boolean handleLava(World par1World, double par2, double par4, double par6, int par8, int par9, int par10)
 	{
-		if (this.isFull != Blocks.flowing_lava) {
+		if (this.bucketContent == Blocks.air)
+		{
 			return false;
 		}
-		else if (!par1World.isAirBlock(par8, par9, par10) && par1World.getBlock(par8, par9, par10).getMaterial().isSolid()) {
+		else if (!par1World.isAirBlock(par8, par9, par10) && par1World.getBlock(par8, par9, par10).getMaterial().isSolid())
+		{
 			return false;
 		}
-		else {
-			par1World.setBlock(par8, par9, par10, this.isFull);
+		else
+		{
+			par1World.setBlock(par8, par9, par10, this.bucketContent);
 			return true;
 		}
 	}
 	
 	@Override
-	public EnumItemReach getReach(ItemStack is){
+	public EnumItemReach getReach(ItemStack is)
+	{
 		return EnumItemReach.SHORT;
 	}
 

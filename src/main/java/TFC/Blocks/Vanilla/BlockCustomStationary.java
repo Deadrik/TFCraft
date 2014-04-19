@@ -27,7 +27,7 @@ public class BlockCustomStationary extends BlockCustomLiquid
 	{
 		super.registerBlockIcons(par1IconRegister);
 		TFCBlocks.SaltWaterFlowing.registerBlockIcons(par1IconRegister);
-		Blocks.flowing_lava.registerBlockIcons(par1IconRegister);
+		TFCBlocks.LavaFlowing.registerBlockIcons(par1IconRegister);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class BlockCustomStationary extends BlockCustomLiquid
 	{
 		int m = world.getBlockMetadata(i, j, k);
 
-		Block b = Blocks.flowing_lava;
+		Block b = TFCBlocks.LavaFlowing;
 		if (this == TFCBlocks.FreshWaterStill) b = TFCBlocks.FreshWaterFlowing;
 		if (this == TFCBlocks.HotWaterStill) b = TFCBlocks.HotWaterFlowing;
 		if (this == TFCBlocks.SaltWaterStill) b = TFCBlocks.SaltWaterFlowing;

@@ -152,7 +152,7 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 											{
 												if (var49 < 10)
 												{
-													blockArray[var47] = Blocks.flowing_lava;
+													blockArray[var47] = TFCBlocks.LavaFlowing;
 												}
 												else
 												{
