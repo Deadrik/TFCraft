@@ -31,7 +31,6 @@ import TFC.Commands.RemoveChunkCommand;
 import TFC.Commands.SetPlayerStatsCommand;
 import TFC.Commands.StripChunkCommand;
 import TFC.Core.Recipes;
-import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
@@ -173,7 +172,7 @@ public class TerraFirmaCraft
 		proxy.registerToolClasses();
 
 		//Register Achievements
-		MinecraftForge.EVENT_BUS.register(new TFC_Achievements());
+		//MinecraftForge.EVENT_BUS.register(new TFC_Achievements());
 
 		// Register Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new CraftingHandler());

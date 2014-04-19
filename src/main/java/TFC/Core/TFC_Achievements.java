@@ -40,20 +40,20 @@ public class TFC_Achievements
 	{
 		achlist = new ArrayList<Achievement>();
 
-		achLooseRock = createAchievement("achievement.TFC.achLooseRock", "TFC.achLooseRock", 0, 0, new ItemStack(TFCItems.LooseRock, 1, 0), (Achievement)null);
-		achSmallOre = createAchievement("achievement.TFC.achSmallOre", "TFC.achSmallOre", 2, 0, new ItemStack(TFCItems.SmallOreChunk, 1, 0), achLooseRock);
-		achWildVegetable = createAchievement("achievement.TFC.achWildVegetable", "TFC.achWildVegetable", 0, -5, new ItemStack(TFCItems.Onion, 1, 1), (Achievement)null);
-		achRutabaga = createAchievement("achievement.TFC.achRutabaga", "TFC.achRutabaga", -1, -5, new ItemStack(TFCItems.Onion, 1, 1), achWildVegetable);
-		achQuern = createAchievement("achievement.TFC.achQuern", "TFC.achQuern", 2, -6, new ItemStack(TFCBlocks.Quern,1,0), achWildVegetable);
-		achStoneAge = createAchievement("achievement.TFC.achStoneAge", "TFC.achStoneAge", 0, -1, new ItemStack(TFCItems.IgInStoneAxeHead, 1, 0),achLooseRock);
-		achCopperAge = createAchievement("achievement.TFC.achCopperAge", "TFC.achCopperAge", 2, 1, new ItemStack(TFCItems.CopperAxeHead, 1, 0),achSmallOre);
-		achSaw = createAchievement("achievement.TFC.achSaw", "TFC.achSaw",1,2, new ItemStack(TFCItems.CopperSaw, 1, 0),achCopperAge);
-		achAnvil = createAchievement("achievement.TFC.achAnvil", "TFC.achAnvil", 3, 3, new ItemStack(TFCItems.StoneHammer, 1, 2), achStoneAge);
-		achPickaxe = createAchievement("achievement.TFC.achPickaxe", "TFC.achPickaxe",2,-1, new ItemStack(TFCItems.CopperPick, 1, 0),achCopperAge);
-		achDiamond = createAchievement("achievement.TFC.achDiamond", "TFC.achDiamond", 0, 5, new ItemStack(TFCItems.GemDiamond, 1, 4), achDiamond);
-		achLimonite = createAchievement("achievement.TFC.achLimonite", "TFC.achLimonite", 3, -2, new ItemStack(TFCItems.OreChunk, 1, 11),achPickaxe);
-		achBronzeAge = createAchievement("achievement.TFC.achBronzeAge", "TFC.achBronzeAge", 4, 1, new ItemStack(TFCBlocks.Anvil, 1, 2),achCopperAge);
-		achIronAge = createAchievement("achievement.TFC.achIronAge", "TFC.achIronAge", 6, 2, new ItemStack(TFCItems.Bloom, 1, 0),achBronzeAge);
+		achLooseRock = createAchievement("achievement.achLooseRock", "achLooseRock", 0, 0, new ItemStack(TFCItems.LooseRock, 1, 0), (Achievement)null);
+		achSmallOre = createAchievement("achievement.achSmallOre", "achSmallOre", 2, 0, new ItemStack(TFCItems.SmallOreChunk, 1, 0), achLooseRock);
+		achWildVegetable = createAchievement("achievement.achWildVegetable", "achWildVegetable", 0, -5, new ItemStack(TFCItems.Onion, 1, 1), (Achievement)null);
+		achRutabaga = createAchievement("achievement.achRutabaga", "achRutabaga", -1, -5, new ItemStack(TFCItems.Onion, 1, 1), achWildVegetable);
+		achQuern = createAchievement("achievement.achQuern", "achQuern", 2, -6, new ItemStack(TFCBlocks.Quern,1,0), achWildVegetable);
+		achStoneAge = createAchievement("achievement.achStoneAge", "achStoneAge", 0, -1, new ItemStack(TFCItems.IgInStoneAxeHead, 1, 0),achLooseRock);
+		achCopperAge = createAchievement("achievement.achCopperAge", "achCopperAge", 2, 1, new ItemStack(TFCItems.CopperAxeHead, 1, 0),achSmallOre);
+		achSaw = createAchievement("achievement.achSaw", "achSaw",1,2, new ItemStack(TFCItems.CopperSaw, 1, 0),achCopperAge);
+		achAnvil = createAchievement("achievement.achAnvil", "achAnvil", 3, 3, new ItemStack(TFCItems.StoneHammer, 1, 2), achStoneAge);
+		achPickaxe = createAchievement("achievement.achPickaxe", "achPickaxe",2,-1, new ItemStack(TFCItems.CopperPick, 1, 0),achCopperAge);
+		achDiamond = createAchievement("achievement.achDiamond", "achDiamond", 0, 5, new ItemStack(TFCItems.GemDiamond, 1, 4), achDiamond);
+		achLimonite = createAchievement("achievement.achLimonite", "achLimonite", 3, -2, new ItemStack(TFCItems.OreChunk, 1, 11),achPickaxe);
+		achBronzeAge = createAchievement("achievement.achBronzeAge", "achBronzeAge", 4, 1, new ItemStack(TFCBlocks.Anvil, 1, 2),achCopperAge);
+		achIronAge = createAchievement("achievement.achIronAge", "achIronAge", 6, 2, new ItemStack(TFCItems.Bloom, 1, 0),achBronzeAge);
 
 		achievementsTFC = new Achievement[achlist.size()];
 		achievementsTFC = achlist.toArray(achievementsTFC);
@@ -63,7 +63,7 @@ public class TFC_Achievements
 
 	private static Achievement createAchievement(String id, String name, int posX, int posY, ItemStack is, Achievement preReq)
 	{
-		Achievement a = (new Achievement(id, name,posX,posY,is,preReq)).registerStat();
+		Achievement a = (new Achievement(id, name, posX, posY, is, preReq)).registerStat();
 		achlist.add(a);
 		return a;
 	}
