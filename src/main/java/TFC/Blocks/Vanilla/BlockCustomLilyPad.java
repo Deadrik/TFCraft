@@ -89,6 +89,12 @@ public class BlockCustomLilyPad extends BlockLilyPad
 		return 2129968;
 	}
 
+	@Override
+	protected boolean canPlaceBlockOn(Block block)
+	{
+		return canThisPlantGrowOnThisBlock(block);
+	}
+
 	protected boolean canThisPlantGrowOnThisBlock(Block par1)
 	{
 		return TFC_Core.isFreshWater(par1);
@@ -108,4 +114,5 @@ public class BlockCustomLilyPad extends BlockLilyPad
 		int meta = par1World.getBlockMetadata(par2, par3 - 1, par4);
 		return par3 >= 0 && par3 < 256 ? TFC_Core.isFreshWaterIncludeIce(id, meta) && !TFC_Core.isWaterMoving(id) : false;
 	}
+
 }
