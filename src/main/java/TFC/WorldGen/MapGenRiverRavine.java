@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Core;
 
 public class MapGenRiverRavine extends MapGenBaseTFC
@@ -157,7 +158,7 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 												{
 													if(var49 < waterHeight)
 													{
-														blockArray[var47] = Blocks.water;
+														blockArray[var47] = TFCBlocks.SaltWaterStill;
 														metaArray[var47] = 0;
 													}
 													else

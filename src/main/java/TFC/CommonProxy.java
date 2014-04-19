@@ -2,6 +2,7 @@ package TFC;
 
 import java.io.File;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -9,6 +10,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.Fluid;
 import TFC.Core.TFC_Achievements;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityFallingDirt;
@@ -84,6 +86,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CommonProxy
 {
+	public void registerFluidIcons(Fluid f, Block b)
+	{
+		// NOOP on server
+	}
+	
 	public void registerRenderInformation()
 	{
 		// NOOP on server

@@ -143,7 +143,7 @@ public class BlockTallSeaGrassStill extends BlockCustomStationary implements ITi
 				if(type == 1 || type == 2)
 					world.setBlock(i, j, k, TFCBlocks.FreshWaterStill, 0, 1);
 				else if(type==0)
-					world.setBlock(i, j, k, Blocks.water, 0, 1);
+					world.setBlock(i, j, k, TFCBlocks.SaltWaterStill, 0, 1);
 			}
 		}
 	}

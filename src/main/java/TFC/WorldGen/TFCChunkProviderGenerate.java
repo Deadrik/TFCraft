@@ -380,7 +380,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 								if ((var47 += var49) > 0.0D)
 									idsTop[var43 += var44] = Blocks.stone;
 								else if (var12 * 8 + var31 < seaLevel)
-									idsTop[var43 += var44] = Blocks.water;
+									idsTop[var43 += var44] = TFCBlocks.SaltWaterStill;
 								else
 									idsTop[var43 += var44] = Blocks.air;
 							}
@@ -624,13 +624,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 								if(indexBig + c < idsBig.length && (
 										(idsBig[indexBig + c] != surfaceBlock) &&
 										(idsBig[indexBig + c] != subSurfaceBlock) &&
-										(idsBig[indexBig + c] != Blocks.water) &&
+										(idsBig[indexBig + c] != TFCBlocks.SaltWaterStill) &&
 										(idsBig[indexBig + c] != TFCBlocks.FreshWaterStill) &&
 										(idsBig[indexBig + c] != TFCBlocks.HotWaterStill)))
 								{
 									idsBig[indexBig + c] = Blocks.air;
 									metaBig[indexBig + c] = 0;
-									if(indexBig + c + 1 < idsBig.length && idsBig[indexBig + c + 1] == Blocks.water)
+									if(indexBig + c + 1 < idsBig.length && idsBig[indexBig + c + 1] == TFCBlocks.SaltWaterStill)
 									{
 										idsBig[indexBig + c] = subSurfaceBlock;
 										metaBig[indexBig + c] = soilMeta;
@@ -640,7 +640,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 							if(var13 > 0)
 							{
-								if (height >= var5 - 1 && index+1 < idsTop.length && idsTop[index + 1] != Blocks.water)
+								if (height >= var5 - 1 && index+1 < idsTop.length && idsTop[index + 1] != TFCBlocks.SaltWaterStill)
 								{
 									idsBig[indexBig] = surfaceBlock;
 									metaBig[indexBig] = soilMeta;
@@ -661,7 +661,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 						if(biome == TFCBiome.ocean)
 						{
-							if(((height > var5 - 2 && height <= var5 + 1) || (height < var5 && idsTop[index + 2] == Blocks.water)))//If its an ocean give it a sandy bottom
+							if(((height > var5 - 2 && height <= var5 + 1) || (height < var5 && idsTop[index + 2] == TFCBlocks.SaltWaterStill)))//If its an ocean give it a sandy bottom
 							{
 								idsBig[indexBig] = TFC_Core.getTypeForSand(soilMeta);
 								metaBig[indexBig] = soilMeta;
@@ -669,7 +669,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						}
 						else if(!(biome == TFCBiome.swampland))
 						{
-							if(((height > var5 - 2 && height < var5 && idsTop[index + 1] == Blocks.water)) || (height < var5 && idsTop[index + 1] == Blocks.water))
+							if(((height > var5 - 2 && height < var5 && idsTop[index + 1] == TFCBlocks.SaltWaterStill)) || (height < var5 && idsTop[index + 1] == TFCBlocks.SaltWaterStill))
 							{
 								if(idsBig[indexBig] != TFC_Core.getTypeForSand(soilMeta) && rand.nextInt(5) != 0)
 								{
@@ -679,7 +679,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							}
 						}
 					}
-					else if(idsTop[index] == Blocks.water && biome != TFCBiome.ocean && biome != TFCBiome.beach)
+					else if(idsTop[index] == TFCBlocks.SaltWaterStill && biome != TFCBiome.ocean && biome != TFCBiome.beach)
 					{
 						idsBig[indexBig] = TFCBlocks.FreshWaterStill;
 					}

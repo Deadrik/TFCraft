@@ -642,7 +642,7 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 		Vec3 vec3 = null;
 
 		if (par4Material == Material.water)
-			vec3 = ((BlockCustomLiquid)Blocks.flowing_water).getFlowVector(par0IBlockAccess, par1, par2, par3);
+			vec3 = ((BlockCustomLiquid)TFCBlocks.SaltWaterFlowing).getFlowVector(par0IBlockAccess, par1, par2, par3);
 
 		if (par4Material == Material.lava)
 			vec3 = ((BlockCustomLiquid)Blocks.lava).getFlowVector(par0IBlockAccess, par1, par2, par3);
@@ -679,6 +679,6 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 	@SideOnly(Side.CLIENT)
 	public static IIcon getFluidIcon(String par0Str)
 	{
-		return par0Str == "water_still" ? Blocks.flowing_water.getIcon(0, 0) : (par0Str == "water_flow" ? Blocks.flowing_water.getIcon(1, 0) : (par0Str == "lava_still" ? Blocks.flowing_lava.getIcon(0, 0) : (par0Str == "lava_flow" ? Blocks.flowing_lava.getIcon(1, 0) : null)));
+		return par0Str == "water_still" ? TFCBlocks.SaltWaterFlowing.getIcon(0, 0) : (par0Str == "water_flow" ? TFCBlocks.SaltWaterFlowing.getIcon(1, 0) : (par0Str == "lava_still" ? Blocks.flowing_lava.getIcon(0, 0) : (par0Str == "lava_flow" ? Blocks.flowing_lava.getIcon(1, 0) : null)));
 	}
 }

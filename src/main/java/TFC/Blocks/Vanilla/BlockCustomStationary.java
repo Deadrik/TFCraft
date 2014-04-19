@@ -26,7 +26,7 @@ public class BlockCustomStationary extends BlockCustomLiquid
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
 		super.registerBlockIcons(par1IconRegister);
-		Blocks.flowing_water.registerBlockIcons(par1IconRegister);
+		TFCBlocks.SaltWaterFlowing.registerBlockIcons(par1IconRegister);
 		Blocks.flowing_lava.registerBlockIcons(par1IconRegister);
 	}
 
@@ -59,7 +59,7 @@ public class BlockCustomStationary extends BlockCustomLiquid
 		Block b = Blocks.flowing_lava;
 		if (this == TFCBlocks.FreshWaterStill) b = TFCBlocks.FreshWaterFlowing;
 		if (this == TFCBlocks.HotWaterStill) b = TFCBlocks.HotWaterFlowing;
-		if (this == Blocks.water) b = Blocks.flowing_water;
+		if (this == TFCBlocks.SaltWaterStill) b = TFCBlocks.SaltWaterFlowing;
 
 		world.setBlock(i, j, k, b, m, 0x2);
 		world.scheduleBlockUpdate(i, j, k, b, this.tickRate(world));
@@ -119,7 +119,7 @@ public class BlockCustomStationary extends BlockCustomLiquid
 		else if(this == TFCBlocks.FreshWaterStill)
 		{
 			if(j == 144 && scanForOcean(world, i, j, k))
-				world.setBlock(i, j, k, Blocks.water);
+				world.setBlock(i, j, k, TFCBlocks.SaltWaterStill);
 		}
 	}
 	

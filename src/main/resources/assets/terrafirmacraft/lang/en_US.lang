@@ -134,6 +134,10 @@ tile.Flora.name=Goldenrod Flower
 tile.Moss.name=Moss
 tile.FireBrick.name=Fire Brick Block
 
+tile.Salt Water.name=Salt Water
+tile.Fresh Water.name=Fresh Water
+tile.Hot Water.name=Hot Water
+
 ========Spawn Eggs========
 entity.Bear.name=Bear
 entity.Deer.name=Deer

@@ -2,6 +2,7 @@ package TFC;
 
 import java.io.File;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.RenderArrow;
@@ -25,6 +26,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.Fluid;
 import TFC.API.Enums.EnumTree;
 import TFC.API.Util.KeyBindings;
 import TFC.Core.ColorizerFoliageTFC;
@@ -143,6 +145,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy
 {
+	@Override
+	public void registerFluidIcons(Fluid f, Block b)
+	{
+		f.setIcons(b.getIcon(0, 0), b.getIcon(2, 0));
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerRenderInformation()

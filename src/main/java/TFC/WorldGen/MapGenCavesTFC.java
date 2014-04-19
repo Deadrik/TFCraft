@@ -134,7 +134,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 								block = idArray[index];
 								if (y >= 0 && y < 256)
 								{
-									if (block == Blocks.flowing_water || block == Blocks.water)
+									if (block == TFCBlocks.SaltWaterFlowing || block == TFCBlocks.SaltWaterStill)
 										var58 = true;
 									if (y != var57 - 1 && xCoord != var55 && xCoord != var36 - 1 && zCoord != var56 && zCoord != var40 - 1)
 										y = var57;

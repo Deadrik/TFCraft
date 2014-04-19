@@ -64,7 +64,7 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 		Block b = Blocks.lava;
 		if (this == TFCBlocks.FreshWaterFlowing) b = TFCBlocks.FreshWaterStill;
 		if (this == TFCBlocks.HotWaterFlowing) b = TFCBlocks.HotWaterStill;
-		if (this == Blocks.flowing_water) b = Blocks.water;
+		if (this == TFCBlocks.SaltWaterFlowing) b = TFCBlocks.SaltWaterStill;
 		
 		par1World.setBlock(par2, par3, par4, b, m, 2);
 	}

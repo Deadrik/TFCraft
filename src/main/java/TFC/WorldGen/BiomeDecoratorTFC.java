@@ -197,7 +197,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 				xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 				zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 				yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-				new WorldGenLiquidsTFC(Blocks.flowing_water).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+				new WorldGenLiquidsTFC(TFCBlocks.SaltWaterFlowing).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 			}
 
 			for (var2 = 0; var2 < 20; ++var2)

@@ -295,6 +295,8 @@ public class TFCBlocks
 	public static Block SteamPipe;
 	public static Block SteamPipeValve;
 
+	public static Block SaltWaterStill;
+	public static Block SaltWaterFlowing;
 	public static Block FreshWaterStill;
 	public static Block FreshWaterFlowing;
 	public static Block HotWaterStill;
@@ -417,6 +419,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(SteamPipe, TFC.Items.ItemBlocks.ItemPipe.class, "BasicPipe");
 		GameRegistry.registerBlock(SteamPipeValve, TFC.Items.ItemBlocks.ItemPipeValve.class, "ValvePipe");
 
+		GameRegistry.registerBlock(SaltWaterStill, "SaltWaterStill");
+		GameRegistry.registerBlock(SaltWaterFlowing, "SaltWaterFlowing");
 		GameRegistry.registerBlock(FreshWaterStill, "FreshWaterStill");
 		GameRegistry.registerBlock(FreshWaterFlowing, "FreshWaterFlowing");
 		GameRegistry.registerBlock(HotWaterStill, "HotWaterStill");
@@ -453,9 +457,6 @@ public class TFCBlocks
 		GameRegistry.registerBlock(ArmourStand2, TFC.Items.ItemBlocks.ItemArmourStand2.class, "ArmourStand2");
 		GameRegistry.registerBlock(BerryBush, TFC.Items.ItemBlocks.ItemBerryBush.class, "BerryBush");
 		GameRegistry.registerBlock(LilyPad, TFC.Items.ItemBlocks.ItemCustomLilyPad.class, "LilyPad");
-
-		//FluidRegistry.registerFluid(new Fluid("freshWater").setBlockID(FreshWaterStill.blockID).setBlockName(FreshWaterStill.getUnlocalizedName()));
-		//FluidRegistry.registerFluid(new Fluid("hotWater").setBlockID(HotWaterStill.blockID).setBlockName(HotWaterStill.getUnlocalizedName()));
 	}
 
 	public static void LoadBlocks()
@@ -470,10 +471,7 @@ public class TFCBlocks
 		Blocks.jungle_stairs.setCreativeTab(null);
 		Blocks.waterlily.setCreativeTab(null);
 
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.flowing_water), "flowing_water",
-				(new BlockCustomFlowing(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water_flow"));
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.water), "water",
-				(new BlockCustomStationary(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water_still"));
+
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.flowing_lava), "flowing_lava",
 				(new BlockCustomFlowing(Material.lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("lava_flow"));
 
@@ -667,6 +665,8 @@ public class TFCBlocks
 		Crops = new BlockCrop().setBlockName("crops").setHardness(0.3F).setStepSound(Block.soundTypeGrass);
 		LilyPad = new BlockCustomLilyPad().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("LilyPad").setBlockTextureName("waterlily");
 
+		SaltWaterFlowing = (new BlockCustomFlowing(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterFlowing");
+		SaltWaterStill = (new BlockCustomStationary(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterStill");
 		FreshWaterFlowing = (new BlockFreshWaterFlowing()).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterFlowing");
 		FreshWaterStill = (new BlockFreshWaterStill()).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterStill");
 		HotWaterFlowing = (new BlockHotWaterFlowing()).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWaterFlowing");

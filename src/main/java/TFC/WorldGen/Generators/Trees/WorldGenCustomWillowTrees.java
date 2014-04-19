@@ -103,7 +103,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 						Block i4 = world.getBlock(j2, i1, j3);
 						if (i4 == Blocks.air || i4 == TFCBlocks.Leaves || i4 == TFCBlocks.Leaves2)
 							continue;
-						if (i4 == Blocks.water || i4 == Blocks.flowing_water)
+						if (i4 == TFCBlocks.SaltWaterStill || i4 == TFCBlocks.SaltWaterFlowing)
 						{
 							if (i1 > yCoord)
 								flag = false;
@@ -168,7 +168,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 		for (int l1 = 0 ; l1 < height ; l1++)
 		{
 			Block l2 = world.getBlock(xCoord, yCoord + l1, zCoord);
-			if (l2 == Blocks.air || l2 == TFCBlocks.Leaves || l2 == TFCBlocks.Leaves2 || l2 == Blocks.flowing_water || l2 == Blocks.water ||
+			if (l2 == Blocks.air || l2 == TFCBlocks.Leaves || l2 == TFCBlocks.Leaves2 || l2 == TFCBlocks.SaltWaterFlowing || l2 == TFCBlocks.SaltWaterStill ||
 					l2.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
 			{
 				world.setBlock(xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId, 0x2);

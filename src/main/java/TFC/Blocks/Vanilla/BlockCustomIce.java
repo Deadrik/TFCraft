@@ -129,7 +129,8 @@ public class BlockCustomIce extends BlockIce
 		return this.getLightOpacity();
 	}
 
-	protected Block getBlockMelt(World world, int i, int j, int k, boolean moving){
+	protected Block getBlockMelt(World world, int i, int j, int k, boolean moving)
+	{
 		int meta = world.getBlockMetadata(i,j,k);
 		Block block = world.getBlock(i,j,k);
 
@@ -137,9 +138,9 @@ public class BlockCustomIce extends BlockIce
 			return block;
 
 		switch(meta){
-		case 0: return moving ? Blocks.flowing_water : Blocks.water;
+		case 0: return moving ? TFCBlocks.SaltWaterFlowing : TFCBlocks.SaltWaterStill;
 		case 1: return moving ? TFCBlocks.FreshWaterFlowing : TFCBlocks.FreshWaterStill;
-		default: return Blocks.water;
+		default: return TFCBlocks.SaltWaterStill;
 		}
 	}
 

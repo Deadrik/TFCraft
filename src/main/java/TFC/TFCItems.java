@@ -1439,7 +1439,7 @@ public class TFCItems
 
 		RedSteelBucketEmpty = (new ItemCustomRedSteelBucket(Blocks.air)).setUnlocalizedName("Red Steel Bucket Empty");
 		RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFCBlocks.FreshWaterFlowing)).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(RedSteelBucketEmpty);
-		RedSteelBucketSaltWater = (new ItemCustomRedSteelBucket(Blocks.flowing_water)).setUnlocalizedName("Red Steel Bucket Salt Water").setContainerItem(RedSteelBucketEmpty);
+		RedSteelBucketSaltWater = (new ItemCustomRedSteelBucket(TFCBlocks.SaltWaterFlowing)).setUnlocalizedName("Red Steel Bucket Salt Water").setContainerItem(RedSteelBucketEmpty);
 
 		BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(Blocks.air)).setUnlocalizedName("Blue Steel Bucket Empty");
 		BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(Blocks.flowing_lava)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);

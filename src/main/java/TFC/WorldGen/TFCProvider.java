@@ -173,7 +173,7 @@ public class TFCProvider extends WorldProvider
 				{
 					worldObj.setBlock(x, y, z, Blocks.ice, 1, 3);
 				}
-				else if(id == Blocks.water && meta == 0/* || id == Block.waterMoving.blockID*/)
+				else if(id == TFCBlocks.SaltWaterStill && meta == 0/* || id == Block.waterMoving.blockID*/)
 				{
 					worldObj.setBlock(x, y, z, Blocks.ice, 0, 3);
 				}
@@ -200,7 +200,7 @@ public class TFCProvider extends WorldProvider
 			{
 				if((meta & 1) == 0)
 				{
-					worldObj.setBlock(x, y, z, Blocks.water, 0, 3);
+					worldObj.setBlock(x, y, z, TFCBlocks.SaltWaterStill, 0, 3);
 				}
 				else if((meta & 1) == 1)
 				{

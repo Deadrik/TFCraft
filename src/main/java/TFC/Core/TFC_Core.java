@@ -465,14 +465,14 @@ public class TFC_Core
 	
 	public static boolean isSaltWater(Block block)
 	{
-		if(block == Blocks.water || block == Blocks.flowing_water)
+		if(block == TFCBlocks.SaltWaterStill || block == TFCBlocks.SaltWaterFlowing)
 			return true;
 		return false;
 	}
 	
 	public static boolean isSaltWaterIncludeIce(Block block, int meta, Material mat)
 	{
-		if(block == Blocks.water || block == Blocks.flowing_water || (mat == Material.ice && meta == 0))
+		if(block == TFCBlocks.SaltWaterStill || block == TFCBlocks.SaltWaterFlowing || (mat == Material.ice && meta == 0))
 			return true;
 		return false;
 	}
@@ -500,14 +500,14 @@ public class TFC_Core
 	
 	public static boolean isWaterStill(Block block)
 	{
-		if(block == Blocks.water || block == TFCBlocks.FreshWaterStill)
+		if(block == TFCBlocks.SaltWaterStill || block == TFCBlocks.FreshWaterStill)
 			return true;
 		return false;
 	}
 	
 	public static boolean isWaterMoving(Block block)
 	{
-		if(block == TFCBlocks.FreshWaterFlowing || block == Blocks.flowing_water)
+		if(block == TFCBlocks.FreshWaterFlowing || block == TFCBlocks.SaltWaterFlowing)
 			return true;
 		return false;
 	}

@@ -100,7 +100,7 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 						return event.result;
 					}
 
-					if (b == Blocks.water && meta == 0)
+					if (b == TFCBlocks.SaltWaterStill && meta == 0)
 					{
 						world.setBlockToAir(i, j, k);
 
@@ -189,7 +189,7 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 			}
 			else
 			{
-				if (par1World.provider.isHellWorld && this.bucketContent == Blocks.flowing_water)
+				if (par1World.provider.isHellWorld && this.bucketContent == TFCBlocks.SaltWaterFlowing)
 				{
 					par1World.playSoundEffect(par2 + 0.5D, par4 + 0.5D, par6 + 0.5D, "random.fizz", 0.5F, 2.6F + (par1World.rand.nextFloat() - par1World.rand.nextFloat()) * 0.8F);
 	

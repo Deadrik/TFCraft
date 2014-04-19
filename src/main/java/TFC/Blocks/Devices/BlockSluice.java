@@ -78,9 +78,9 @@ public class BlockSluice extends BlockContainer
 	public IIcon getIcon(int i, int j)
 	{
 		if(j == 4)
-			return Blocks.flowing_water.getIcon(i, 0);
+			return TFCBlocks.SaltWaterFlowing.getIcon(i, 0);
 		else
-			return Blocks.planks.getIcon(i, 0);
+			return TFCBlocks.Planks.getIcon(i, 0);
 	}
 
 	public static int getDirectionFromMetadata(int i)

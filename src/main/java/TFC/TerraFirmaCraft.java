@@ -8,15 +8,13 @@ import java.util.Iterator;
 import java.util.Set;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 import TFC.API.SkillsManager;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
+import TFC.Blocks.Terrain.TFC_Fluids;
 import TFC.Commands.CommandTime;
 import TFC.Commands.DebugModeCommand;
 import TFC.Commands.GSPVisualCommand;
@@ -121,6 +119,9 @@ public class TerraFirmaCraft
 		//Load Items
 		TFCItems.Setup();
 
+		// Register Liquids
+		TFC_Fluids.register();
+
 		// Register Gui Handler
 		proxy.registerGuiHandler();
 
@@ -209,6 +210,10 @@ public class TerraFirmaCraft
 		proxy.registerBiomeEventHandler();
 		proxy.setupGuiIngameForge();
 
+		// Register Liquids
+		TFC_Fluids.registerFluidContainers();
+		TFC_Fluids.registerFluidIcons();
+
 		//Setup custom potion effects
 		TFCPotion.Setup();
 
@@ -216,11 +221,6 @@ public class TerraFirmaCraft
 		Recipes.registerRecipes();
 
 		TFC_ItemHeat.SetupItemHeat();
-
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.LAVA, new ItemStack(TFCItems.BlueSteelBucketLava), new ItemStack(TFCItems.BlueSteelBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(TFCItems.RedSteelBucketWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(TFCItems.RedSteelBucketSaltWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty));
 
 		TFC_Climate.initCache();
 	}

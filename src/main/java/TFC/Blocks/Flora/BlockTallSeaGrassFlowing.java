@@ -147,7 +147,7 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 				if(type == 1 || type == 2)
 					world.setBlock(i, j, k, TFCBlocks.FreshWaterStill, 0, 1);
 				else if(type==0)
-					world.setBlock(i, j, k, Blocks.water, 0, 1);
+					world.setBlock(i, j, k, TFCBlocks.SaltWaterStill, 0, 1);
 			}
 		}
 	}
@@ -295,7 +295,7 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 				type = te.getType();
 			switch(type)
 			{
-			case 0: world.setBlock(x, y, z, Blocks.water, newFlowDecay, 2); break;
+			case 0: world.setBlock(x, y, z, TFCBlocks.SaltWaterStill, newFlowDecay, 2); break;
 			case 1:
 			case 2: world.setBlock(x, y, z, TFCBlocks.FreshWaterFlowing, newFlowDecay, 2); break;
 			default: break;
