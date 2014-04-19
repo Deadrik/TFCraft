@@ -302,7 +302,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	public boolean interact(EntityPlayer player)
 	{
 		if(!worldObj.isRemote){
-			player.addChatMessage(getGender() == GenderEnum.FEMALE ? "Female" : "Male");
+			//player.addChatMessage(getGender() == GenderEnum.FEMALE ? "Female" : "Male");
 			if(getGender()==GenderEnum.FEMALE && pregnant){
 				player.addChatMessage("Pregnant");
 			}
