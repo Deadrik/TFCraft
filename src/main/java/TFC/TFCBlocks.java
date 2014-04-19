@@ -143,7 +143,6 @@ public class TFCBlocks
 	public static int ForgeRenderId;
 	public static int sluiceRenderId;
 	public static int toolRackRenderId;
-	public static int finiteWaterRenderId;
 	public static int partialRenderId;
 	public static int stairRenderId;
 	public static int slabRenderId;
@@ -154,7 +153,7 @@ public class TFCBlocks
 	public static int foodPrepRenderId;
 	public static int quernRenderId;
 	public static int fluidRenderId;
-	public static int woodConstructRenderId;	
+	public static int woodConstructRenderId;
 	public static int potteryRenderId;
 	public static int tuyereRenderId;
 	public static int crucibleRenderId;
@@ -418,14 +417,14 @@ public class TFCBlocks
 		GameRegistry.registerBlock(SteamPipe, TFC.Items.ItemBlocks.ItemPipe.class, "BasicPipe");
 		GameRegistry.registerBlock(SteamPipeValve, TFC.Items.ItemBlocks.ItemPipeValve.class, "ValvePipe");
 
-		GameRegistry.registerBlock(FreshWaterStill,"FreshWaterStill");
-		GameRegistry.registerBlock(FreshWaterFlowing,"FreshWaterFlowing");
-		GameRegistry.registerBlock(HotWaterStill,"HotWaterStill");
-		GameRegistry.registerBlock(HotWaterFlowing,"HotWaterFlowing");
+		GameRegistry.registerBlock(FreshWaterStill, "FreshWaterStill");
+		GameRegistry.registerBlock(FreshWaterFlowing, "FreshWaterFlowing");
+		GameRegistry.registerBlock(HotWaterStill, "HotWaterStill");
+		GameRegistry.registerBlock(HotWaterFlowing, "HotWaterFlowing");
 		
-		GameRegistry.registerBlock(SeaGrassStill,"SeaGrassStill");
-		GameRegistry.registerBlock(SeaGrassFrozen,"SeaGrassFrozen");
-		GameRegistry.registerBlock(SeaGrassFlowing,"SeaGrassFlowing");
+		GameRegistry.registerBlock(SeaGrassStill, "SeaGrassStill");
+		GameRegistry.registerBlock(SeaGrassFrozen, "SeaGrassFrozen");
+		GameRegistry.registerBlock(SeaGrassFlowing, "SeaGrassFlowing");
 
 		GameRegistry.registerBlock(FireBrick, "FireBrick");
 		GameRegistry.registerBlock(MetalSheet, "MetalSheet");
@@ -668,13 +667,13 @@ public class TFCBlocks
 		Crops = new BlockCrop().setBlockName("crops").setHardness(0.3F).setStepSound(Block.soundTypeGrass);
 		LilyPad = new BlockCustomLilyPad().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("LilyPad").setBlockTextureName("waterlily");
 
-		FreshWaterFlowing = (new BlockFreshWaterFlowing()).setHardness(100.0F).setLightOpacity(3).setBlockName("water").setCreativeTab(CreativeTabs.tabDecorations);;
-		FreshWaterStill  = (new BlockFreshWaterStill()).setHardness(100.0F).setLightOpacity(3).setBlockName("water").setCreativeTab(CreativeTabs.tabDecorations);;
-		HotWaterFlowing = (new BlockHotWaterFlowing()).setHardness(100.0F).setLightOpacity(3).setBlockName("water");
-		HotWaterStill  = (new BlockHotWaterStill()).setHardness(100.0F).setLightOpacity(3).setBlockName("water");
-		
+		FreshWaterFlowing = (new BlockFreshWaterFlowing()).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterFlowing");
+		FreshWaterStill = (new BlockFreshWaterStill()).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterStill");
+		HotWaterFlowing = (new BlockHotWaterFlowing()).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWaterFlowing");
+		HotWaterStill = (new BlockHotWaterStill()).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWaterStill");
+
 		SeaGrassStill = new BlockTallSeaGrassStill().setBlockName("SeaGrassStill").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
-		SeaGrassFrozen = (new BlockFrozenSeaGrass()).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("seagrassice");
+		SeaGrassFrozen = (new BlockFrozenSeaGrass()).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("SeaGrassIce");
 		SeaGrassFlowing = new BlockTallSeaGrassFlowing().setBlockName("SeaGrassFlowing").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 
 		FireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);

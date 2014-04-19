@@ -83,10 +83,6 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 		{
 			return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, renderer);
 		}
-		else if (modelId == TFCBlocks.finiteWaterRenderId)
-		{
-			return TFC_CoreRender.RenderFiniteWater(block, i, j, k, renderer);
-		}
 		else if (modelId == TFCBlocks.stairRenderId)
 		{
 			return TFC_CoreRender.renderBlockStairs(block, i, j, k, renderer);

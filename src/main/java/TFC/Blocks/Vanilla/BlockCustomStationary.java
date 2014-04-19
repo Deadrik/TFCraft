@@ -54,9 +54,15 @@ public class BlockCustomStationary extends BlockCustomLiquid
 	 */
 	protected void setNotStationary(World world, int i, int j, int k)
 	{
-		int var5 = world.getBlockMetadata(i, j, k);
-		world.setBlock(i, j, k, Block.getBlockById(Block.getIdFromBlock(this) - 1), var5, 0x2);
-		world.scheduleBlockUpdate(i, j, k, Block.getBlockById(Block.getIdFromBlock(this) - 1), this.tickRate(world));
+		int m = world.getBlockMetadata(i, j, k);
+
+		Block b = Blocks.flowing_lava;
+		if (this == TFCBlocks.FreshWaterStill) b = TFCBlocks.FreshWaterFlowing;
+		if (this == TFCBlocks.HotWaterStill) b = TFCBlocks.HotWaterFlowing;
+		if (this == Blocks.water) b = Blocks.flowing_water;
+
+		world.setBlock(i, j, k, b, m, 0x2);
+		world.scheduleBlockUpdate(i, j, k, b, this.tickRate(world));
 	}
 
 	/**
@@ -82,7 +88,12 @@ public class BlockCustomStationary extends BlockCustomLiquid
 
 				if (block == Blocks.air)
 				{
-					if (this.isFlammable(world, i - 1, j, k) || this.isFlammable(world, i + 1, j, k) || this.isFlammable(world, i, j, k - 1) || this.isFlammable(world, i, j, k + 1) || this.isFlammable(world, i, j - 1, k) || this.isFlammable(world, i, j + 1, k))
+					if (this.isFlammable(world, i - 1, j, k) ||
+						this.isFlammable(world, i + 1, j, k) ||
+						this.isFlammable(world, i, j, k - 1) ||
+						this.isFlammable(world, i, j, k + 1) ||
+						this.isFlammable(world, i, j - 1, k) ||
+						this.isFlammable(world, i, j + 1, k))
 					{
 						world.setBlock(i, j, k, Blocks.fire);
 						return;
@@ -107,25 +118,25 @@ public class BlockCustomStationary extends BlockCustomLiquid
 		}
 		else if(this == TFCBlocks.FreshWaterStill)
 		{
-			if(j== 144 && scanForOcean(world,i,j,k))
+			if(j == 144 && scanForOcean(world, i, j, k))
 				world.setBlock(i, j, k, Blocks.water);
 		}
 	}
 	
 	private boolean scanForOcean(World world, int i, int j, int k)
 	{
-		if(world.getBiomeGenForCoords(i+5, k).biomeID == TFCBiome.ocean.biomeID ||
-				world.getBiomeGenForCoords(i+10, k).biomeID == TFCBiome.ocean.biomeID || 
-				world.getBiomeGenForCoords(i+20, k).biomeID == TFCBiome.ocean.biomeID || 
-				world.getBiomeGenForCoords(i-5, k).biomeID == TFCBiome.ocean.biomeID ||
-				world.getBiomeGenForCoords(i-10, k).biomeID == TFCBiome.ocean.biomeID || 
-				world.getBiomeGenForCoords(i-20, k).biomeID == TFCBiome.ocean.biomeID || 
-				world.getBiomeGenForCoords(i, k+5).biomeID == TFCBiome.ocean.biomeID ||
-				world.getBiomeGenForCoords(i, k+10).biomeID == TFCBiome.ocean.biomeID || 
-				world.getBiomeGenForCoords(i, k+20).biomeID == TFCBiome.ocean.biomeID|| 
-				world.getBiomeGenForCoords(i, k-5).biomeID == TFCBiome.ocean.biomeID ||
-				world.getBiomeGenForCoords(i, k-10).biomeID == TFCBiome.ocean.biomeID || 
-				world.getBiomeGenForCoords(i, k-20).biomeID == TFCBiome.ocean.biomeID)
+		if(world.getBiomeGenForCoords(i + 5, k).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i + 10, k).biomeID == TFCBiome.ocean.biomeID || 
+				world.getBiomeGenForCoords(i + 20, k).biomeID == TFCBiome.ocean.biomeID || 
+				world.getBiomeGenForCoords(i - 5, k).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i - 10, k).biomeID == TFCBiome.ocean.biomeID || 
+				world.getBiomeGenForCoords(i - 20, k).biomeID == TFCBiome.ocean.biomeID || 
+				world.getBiomeGenForCoords(i, k + 5).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i, k + 10).biomeID == TFCBiome.ocean.biomeID || 
+				world.getBiomeGenForCoords(i, k + 20).biomeID == TFCBiome.ocean.biomeID|| 
+				world.getBiomeGenForCoords(i, k - 5).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i, k - 10).biomeID == TFCBiome.ocean.biomeID || 
+				world.getBiomeGenForCoords(i, k - 20).biomeID == TFCBiome.ocean.biomeID)
 		{
 			return true;
 		}

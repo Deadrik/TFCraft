@@ -9,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 
 public class BlockCustomFlowing extends BlockCustomLiquid
 {
@@ -36,9 +37,11 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 	}
 
 	@Override
-	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
+	protected void setFreezeBlock(World world, int i, int j, int k, Random rand)
+	{
 		Material mat = world.getBlock(i, j, k).getMaterial();
-		if(mat == Material.water){
+		if(mat == Material.water)
+		{
 			//world.setBlock(i,j,k, Block.ice.blockID);
 		}
 	}
@@ -57,8 +60,13 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 	 */
 	protected void updateFlow(World par1World, int par2, int par3, int par4)
 	{
-		int var5 = par1World.getBlockMetadata(par2, par3, par4);
-		par1World.setBlock(par2, par3, par4, Block.getBlockById(Block.getIdFromBlock(this) + 1), var5, 2);
+		int m = par1World.getBlockMetadata(par2, par3, par4);
+		Block b = Blocks.lava;
+		if (this == TFCBlocks.FreshWaterFlowing) b = TFCBlocks.FreshWaterStill;
+		if (this == TFCBlocks.HotWaterFlowing) b = TFCBlocks.HotWaterStill;
+		if (this == Blocks.flowing_water) b = Blocks.water;
+		
+		par1World.setBlock(par2, par3, par4, b, m, 2);
 	}
 
 	@Override
@@ -116,10 +124,9 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 				var8 = false;
 			}
 
-			if (var10 == var6)
+			if (var10 == var6 && var8)
 			{
-				if (var8)
-					this.updateFlow(par1World, par2, par3, par4);
+				this.updateFlow(par1World, par2, par3, par4);
 			}
 			else
 			{
@@ -161,23 +168,13 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 			boolean[] var13 = this.getOptimalFlowDirections(par1World, par2, par3, par4);
 			var10 = var6 + var7;
 
-			if (var6 >= 8)
-				var10 = 1;
+			if (var6 >= 8) var10 = 1;
+			if (var10 >= 8) return;
 
-			if (var10 >= 8)
-				return;
-
-			if (var13[0])
-				this.flowIntoBlock(par1World, par2 - 1, par3, par4,par2, par3, par4, var10);
-
-			if (var13[1])
-				this.flowIntoBlock(par1World, par2 + 1, par3, par4,par2, par3, par4, var10);
-
-			if (var13[2])
-				this.flowIntoBlock(par1World, par2, par3, par4 - 1,par2, par3, par4, var10);
-
-			if (var13[3])
-				this.flowIntoBlock(par1World, par2, par3, par4 + 1,par2, par3, par4, var10);
+			if (var13[0]) this.flowIntoBlock(par1World, par2 - 1, par3, par4,par2, par3, par4, var10);
+			if (var13[1]) this.flowIntoBlock(par1World, par2 + 1, par3, par4,par2, par3, par4, var10);
+			if (var13[2]) this.flowIntoBlock(par1World, par2, par3, par4 - 1,par2, par3, par4, var10);
+			if (var13[3]) this.flowIntoBlock(par1World, par2, par3, par4 + 1,par2, par3, par4, var10);
 		}
 	}
 
@@ -189,14 +186,14 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 	{
 		if (this.liquidCanDisplaceBlock(world, x, y, z))
 		{
-			Block i1 = world.getBlock(x, y, z);
+			Block b = world.getBlock(x, y, z);
 
-			if (i1 != Blocks.air)
+			if (b != Blocks.air)
 			{
 				if (this.blockMaterial == Material.lava)
 					this.triggerLavaMixEffects(world, x, y, z);
 				else
-					i1.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+					b.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
 			}
 			world.setBlock(x, y, z, this, newFlowDecay, 2);
 		}
@@ -218,19 +215,14 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 				int var9 = par2;
 				int var11 = par4;
 
-				if (var8 == 0)
-					var9 = par2 - 1;
+				if (var8 == 0) var9 = par2 - 1;
+				if (var8 == 1) ++var9;
+				if (var8 == 2) var11 = par4 - 1;
+				if (var8 == 3) ++var11;
 
-				if (var8 == 1)
-					++var9;
-
-				if (var8 == 2)
-					var11 = par4 - 1;
-
-				if (var8 == 3)
-					++var11;
-
-				if (!this.blockBlocksFlow(par1World, var9, par3, var11) && (par1World.getBlock(var9, par3, var11).getMaterial() != this.blockMaterial || par1World.getBlockMetadata(var9, par3, var11) != 0))
+				if (!this.blockBlocksFlow(par1World, var9, par3, var11) && (
+						par1World.getBlock(var9, par3, var11).getMaterial() != this.blockMaterial ||
+						par1World.getBlockMetadata(var9, par3, var11) != 0))
 				{
 					if (!this.blockBlocksFlow(par1World, var9, par3 - 1, var11))
 						return par5;
@@ -238,8 +230,7 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 					if (par5 < 4)
 					{
 						int var12 = this.calculateFlowCost(par1World, var9, par3, var11, par5 + 1, var8);
-						if (var12 < var7)
-							var7 = var12;
+						if (var12 < var7) var7 = var12;
 					}
 				}
 			}
@@ -263,19 +254,14 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 			var6 = par2;
 			int var8 = par4;
 
-			if (var5 == 0)
-				var6 = par2 - 1;
+			if (var5 == 0) var6 = par2 - 1;
+			if (var5 == 1) ++var6;
+			if (var5 == 2) var8 = par4 - 1;
+			if (var5 == 3) ++var8;
 
-			if (var5 == 1)
-				++var6;
-
-			if (var5 == 2)
-				var8 = par4 - 1;
-
-			if (var5 == 3)
-				++var8;
-
-			if (!this.blockBlocksFlow(par1World, var6, par3, var8) && (par1World.getBlock(var6, par3, var8).getMaterial() != this.blockMaterial || par1World.getBlockMetadata(var6, par3, var8) != 0))
+			if (!this.blockBlocksFlow(par1World, var6, par3, var8) && (
+					par1World.getBlock(var6, par3, var8).getMaterial() != this.blockMaterial ||
+					par1World.getBlockMetadata(var6, par3, var8) != 0))
 			{
 				if (this.blockBlocksFlow(par1World, var6, par3 - 1, var8))
 					this.flowCost[var5] = this.calculateFlowCost(par1World, var6, par3, var8, 1, var5);
@@ -338,12 +324,8 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 		}
 		else
 		{
-			if (var6 == 0)
-				++this.numAdjacentSources;
-
-			if (var6 >= 8)
-				var6 = 0;
-
+			if (var6 == 0) ++this.numAdjacentSources;
+			if (var6 >= 8) var6 = 0;
 			return par5 >= 0 && var6 >= par5 ? par5 : var6;
 		}
 	}

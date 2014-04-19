@@ -36,14 +36,16 @@ public class BlockFreshWaterStill extends BlockCustomStationary
 	@Override
 	public void breakBlock(World world, int i, int j, int k, Block block, int l)
 	{
-		if(block == Blocks.ice){
+		if(block == Blocks.ice)
+		{
 			//world.setBlockMetadataWithNotify(i,j,k,1,1);
 		}
 		super.breakBlock(world, i, j, k, block, l);
 	}
 
 	@Override
-	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
+	protected void setFreezeBlock(World world, int i, int j, int k, Random rand)
+	{
 		if(world.getBlock(i,j,k).getMaterial() == Material.water)
 			world.setBlock(i, j, k, Blocks.ice, 1, 1);
 	}

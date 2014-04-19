@@ -43,18 +43,21 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
-		if((world.provider) instanceof TFCProvider){
+		if((world.provider) instanceof TFCProvider)
+		{
 			if (((TFCProvider)(world.provider)).canBlockFreezeTFC(i, j, k, false))
 			{
-				setFreezeBlock(world,i,j,k,rand);
+				setFreezeBlock(world, i, j, k, rand);
 			}
 		}
 	}
 
-	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
-		Material mat = world.getBlock(i,j,k).getMaterial();
-		if(mat == Material.water){
-			world.setBlock(i,j,k, Blocks.ice);
+	protected void setFreezeBlock(World world, int i, int j, int k, Random rand)
+	{
+		Material mat = world.getBlock(i, j, k).getMaterial();
+		if(mat == Material.water)
+		{
+			world.setBlock(i, j, k, Blocks.ice);
 		}
 	}
 
@@ -230,7 +233,6 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 
 	@Override
 	@SideOnly(Side.CLIENT)
-
 	/**
 	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
 	 */
@@ -404,17 +406,10 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 			int j1 = par2;
 			int k1 = par4;
 
-			if (i1 == 0)
-				j1 = par2 - 1;
-
-			if (i1 == 1)
-				k1 = par4 - 1;
-
-			if (i1 == 2)
-				++j1;
-
-			if (i1 == 3)
-				++k1;
+			if (i1 == 0) j1 = par2 - 1;
+			if (i1 == 1) k1 = par4 - 1;
+			if (i1 == 2) ++j1;
+			if (i1 == 3) ++k1;
 
 			int l1 = this.getEffectiveFlowDecay(par1IBlockAccess, j1, par3, k1);
 			int i2;
@@ -525,51 +520,32 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 				int j1 = par2;
 				int k1 = par4;
 
-				if (i1 == 0)
-					j1 = par2 - 1;
+				if (i1 == 0) j1 = par2 - 1;
+				if (i1 == 1) ++j1;
+				if (i1 == 2) k1 = par4 - 1;
+				if (i1 == 3) ++k1;
 
-				if (i1 == 1)
-					++j1;
-
-				if (i1 == 2)
-					k1 = par4 - 1;
-
-				if (i1 == 3)
-					++k1;
-
-				if (par1World.getBlock(j1, par3, k1).getMaterial() == Material.air && (par1World.getBlock(j1, par3 - 1, k1).getMaterial().blocksMovement() || par1World.getBlock(j1, par3 - 1, k1).getMaterial().isLiquid()))
+				if (par1World.getBlock(j1, par3, k1).getMaterial() == Material.air && (
+						par1World.getBlock(j1, par3 - 1, k1).getMaterial().blocksMovement() ||
+						par1World.getBlock(j1, par3 - 1, k1).getMaterial().isLiquid()))
 				{
 					float f = 0.0625F;
 					double d0 = par2 + par5Random.nextFloat();
 					double d1 = par3 + par5Random.nextFloat();
 					double d2 = par4 + par5Random.nextFloat();
 
-					if (i1 == 0)
-						d0 = par2 - f;
-
-					if (i1 == 1)
-						d0 = par2 + 1 + f;
-
-					if (i1 == 2)
-						d2 = par4 - f;
-
-					if (i1 == 3)
-						d2 = par4 + 1 + f;
+					if (i1 == 0) d0 = par2 - f;
+					if (i1 == 1) d0 = par2 + 1 + f;
+					if (i1 == 2) d2 = par4 - f;
+					if (i1 == 3) d2 = par4 + 1 + f;
 
 					double d3 = 0.0D;
 					double d4 = 0.0D;
 
-					if (i1 == 0)
-						d3 = (-f);
-
-					if (i1 == 1)
-						d3 = f;
-
-					if (i1 == 2)
-						d4 = (-f);
-
-					if (i1 == 3)
-						d4 = f;
+					if (i1 == 0) d3 = (-f);
+					if (i1 == 1) d3 = f;
+					if (i1 == 2) d4 = (-f);
+					if (i1 == 3) d4 = f;
 
 					par1World.spawnParticle("splash", d0, d1, d2, d3, 0.0D, d4);
 				}
@@ -616,38 +592,43 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 		}
 	}
 
-	public void setBlockforLava(World par1World, int par2, int par3, int par4, int typeOfLava){
+	public void setBlockforLava(World par1World, int par2, int par3, int par4, int typeOfLava)
+	{
 		DataLayer rockLayer3 = ((TFCWorldChunkManager)par1World.getWorldChunkManager()).getRockLayerAt(par2, par3, 2);
 		int blockId = rockLayer3.data1;
 		int meta = rockLayer3.data2;
 		Random rand = new Random();
 		boolean felsicLava = true;
-		if(this == TFCBlocks.StoneIgIn && (meta == 2||meta == 1))
+
+		if(this == TFCBlocks.StoneIgIn && (meta == 2 || meta == 1))
 			felsicLava = false;
-		else if(this == TFCBlocks.StoneIgEx && (meta == 1||meta==2))
+		else if(this == TFCBlocks.StoneIgEx && (meta == 1 || meta == 2))
 			felsicLava = false;
-		if (typeOfLava == 0 || typeOfLava == 2)		//non flowing rock
+		if (typeOfLava == 0 || typeOfLava == 2) //non flowing rock
 		{
-			if(felsicLava){
+			if(felsicLava)
+			{
 				if(rand.nextInt(10)==0 && typeOfLava == 0)
 					par1World.setBlock(par2, par3, par4, Blocks.obsidian);
-				else{
-					par1World.setBlock(par2,par3,par4,TFCBlocks.StoneIgEx);
-					par1World.setBlockMetadataWithNotify(par2, par3, par4, 0,0);
+				else
+				{
+					par1World.setBlock(par2, par3, par4, TFCBlocks.StoneIgEx);
+					par1World.setBlockMetadataWithNotify(par2, par3, par4, 0, 0);
 				}
 			}
-			else{
-				par1World.setBlock(par2,par3,par4,TFCBlocks.StoneIgEx);
-				par1World.setBlockMetadataWithNotify(par2, par3, par4, 1,0);
+			else
+			{
+				par1World.setBlock(par2, par3, par4, TFCBlocks.StoneIgEx);
+				par1World.setBlockMetadataWithNotify(par2, par3, par4, 1, 0);
 			}
 		}
 		else if (typeOfLava == 1)
 		{
-			par1World.setBlock(par2,par3,par4,TFCBlocks.StoneIgExCobble);
+			par1World.setBlock(par2, par3, par4, TFCBlocks.StoneIgExCobble);
 			if(felsicLava)
-				par1World.setBlockMetadataWithNotify(par2, par3, par4, 0,0);
+				par1World.setBlockMetadataWithNotify(par2, par3, par4, 0, 0);
 			else
-				par1World.setBlockMetadataWithNotify(par2, par3, par4, 1,0);
+				par1World.setBlockMetadataWithNotify(par2, par3, par4, 1, 0);
 		}
 	}
 

@@ -36,21 +36,13 @@ public class BlockFreshWaterFlowing extends BlockCustomFlowing
 	@Override
 	public void breakBlock(World world, int i, int j, int k, Block block, int l)
 	{
-		Material m = world.getBlock(i, j, k).getMaterial();
-		Block b = world.getBlock(i, j, k);
-		super.breakBlock(world, i, j, k, b, l);
-		if(this == Blocks.ice){
-			//world.setBlockMetadataWithNotify(i,j,k,1,1);
-			//world.setBlockToAir(i, j, k);
-		}
+		//TODO break a frozen block back into fresh water flowing block
 		super.breakBlock(world, i, j, k, block, l);
 	}
 
 	@Override
-	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
-		Material mat = world.getBlock(i, j, k).getMaterial();
-		/*if(mat == Material.water){
-			world.setBlock(i,j,k, Block.ice.blockID,1,1);
-		}*/
+	protected void setFreezeBlock(World world, int i, int j, int k, Random rand)
+	{
+		//TODO turn into a fresh flowing water ice block
 	}
 }

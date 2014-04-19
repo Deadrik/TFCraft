@@ -140,7 +140,8 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 			te.setType(type);
 		}
 
-		if(world.isAirBlock(i, j, k)){
+		if(world.isAirBlock(i, j, k))
+		{
 			if(te != null)
 			{
 				if(type == 1 || type == 2)
@@ -180,13 +181,13 @@ public class BlockTallSeaGrassFlowing extends BlockCustomFlowing implements ITil
 	@Override
 	protected void updateFlow(World par1World, int par2, int par3, int par4)
 	{
-		int var5 = par1World.getBlockMetadata(par2, par3, par4);
-		TESeaWeed te = (TESeaWeed)(par1World.getTileEntity(par2,par3,par4));
+		int m = par1World.getBlockMetadata(par2, par3, par4);
+		TESeaWeed te = (TESeaWeed)(par1World.getTileEntity(par2, par3, par4));
 		int type = -1;
 		if(te!=null)
 			type = te.getType();
-		par1World.setBlock(par2, par3, par4, Block.getBlockById(Block.getIdFromBlock(this) + 1), var5, 2);
-		te = (TESeaWeed)(par1World.getTileEntity(par2,par3,par4));
+		par1World.setBlock(par2, par3, par4, TFCBlocks.SeaGrassStill, m, 2);
+		te = (TESeaWeed)(par1World.getTileEntity(par2, par3, par4));
 		if(te!=null)
 			te.setType(type);
 	}
