@@ -219,6 +219,7 @@ public class TerraFirmaCraft
 
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.LAVA, new ItemStack(TFCItems.BlueSteelBucketLava), new ItemStack(TFCItems.BlueSteelBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(TFCItems.RedSteelBucketWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(TFCItems.RedSteelBucketSaltWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty));
 
 		TFC_Climate.initCache();

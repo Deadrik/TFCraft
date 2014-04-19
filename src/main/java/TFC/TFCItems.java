@@ -2476,6 +2476,7 @@ public class TFCItems
 
 		GameRegistry.registerItem(RedSteelBucketEmpty, RedSteelBucketEmpty.getUnlocalizedName());
 		GameRegistry.registerItem(RedSteelBucketWater, RedSteelBucketWater.getUnlocalizedName());
+		GameRegistry.registerItem(RedSteelBucketSaltWater, RedSteelBucketSaltWater.getUnlocalizedName());
 		GameRegistry.registerItem(BlueSteelBucketEmpty, BlueSteelBucketEmpty.getUnlocalizedName());
 		GameRegistry.registerItem(BlueSteelBucketLava, BlueSteelBucketLava.getUnlocalizedName());
 
