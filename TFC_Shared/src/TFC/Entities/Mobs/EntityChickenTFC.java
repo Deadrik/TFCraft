@@ -54,17 +54,16 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		super(par1World);
 		this.setSize(0.3F, 0.7F);
 		this.timeUntilNextEgg = this.rand.nextInt(6000) + 24000;
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
-		this.tasks.addTask(3, new EntityAIFindNest(this,1.2F));
+
+
 		//this.tasks.addTask(6, this.aiEatGrass);
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + entityId;
 		mateSizeMod = 1f;
 		sex = rand.nextInt(2);
-		if(sex==0){
-			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		}
+		addAI();
+
 		size_mod = (((rand.nextInt ((degreeOfDiversion+1)*10)*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex);
 
 		//	We hijack the growingAge to hold the day of birth rather
@@ -110,7 +109,24 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.setAge((int) TFC_Time.getTotalDays());
 	}
 
+	public void addAI()
+	{
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAIFindNest(this,1.2F));
+		if(sex==0){
+			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		}
+	}
 
+	@Override
+	/**
+	 * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
+	 * the animal type)
+	 */
+	public boolean isBreedingItem(ItemStack par1ItemStack)
+	{
+		return false;
+	}
 
 	@Override
 	protected void entityInit()

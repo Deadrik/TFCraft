@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import TFC.Reference;
@@ -13,6 +14,8 @@ import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
+import TFC.Core.Util.StringUtil;
 
 public class ItemOre extends ItemTerra implements ISmeltable
 {	
@@ -78,6 +81,22 @@ public class ItemOre extends ItemTerra implements ISmeltable
 			return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
 		}
 		return super.getUnlocalizedName(itemstack);
+	}
+
+	@Override
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{		
+		if(GetMetalType(is) != null)
+		{
+			if (TFC_Core.showExtraInformation()) 
+			{
+				arraylist.add(StringUtil.localize("gui.units") + ": " + GetMetalReturnAmount(is));
+			}
+			else
+			{
+				arraylist.add(StringUtil.localize("gui.ShowHelp"));
+			}
+		}
 	}
 
 	@Override

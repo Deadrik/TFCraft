@@ -198,7 +198,7 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 
 					if(i <= validCount) 
 					{
-						int mMeta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+						int mMeta = worldObj.getBlockMetadata(xCoord, yCoord+i, zCoord);
 						int m = j > 7 ? 7 : j;
 						if(this.bloomeryLit)
 						{
@@ -207,7 +207,9 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 								m += 8;
 								worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, m, 2);
 							}
-						} else {
+						} 
+						else 
+						{
 							if(count > 0)
 								worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, m, 2);
 							else

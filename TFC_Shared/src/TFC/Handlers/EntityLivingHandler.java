@@ -1,6 +1,8 @@
 package TFC.Handlers;
 
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -10,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.stats.Achievement;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -56,8 +59,8 @@ public class EntityLivingHandler
 					player.heal(diff);*/
 			}
 
-			
-			
+
+
 			if(!player.worldObj.isRemote)
 			{
 				//Tick Decay

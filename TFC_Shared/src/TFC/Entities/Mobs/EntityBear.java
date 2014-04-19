@@ -76,6 +76,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		tasks.addTask (1, new EntityAISwimming (this));
 		tasks.addTask (4, new EntityAIAttackOnCollide (this, moveSpeed * 1.5F, true));
 		size_mod = (((rand.nextInt (4+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
+		sex = rand.nextInt(2);
 		if (getGender() == GenderEnum.MALE)
 		{
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));

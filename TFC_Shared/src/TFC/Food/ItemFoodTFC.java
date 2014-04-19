@@ -3,6 +3,7 @@ package TFC.Food;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -14,6 +15,7 @@ import TFC.API.IFood;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
+import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -107,17 +109,17 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		NBTTagCompound stackTagCompound = is.getTagCompound();
 		if(stackTagCompound.hasKey("isSalted"))
-			arraylist.add("\u2022Salted");
+			arraylist.add("\u2022" + StringUtil.localize("gui.food.salted"));
 		if(stackTagCompound.hasKey("foodWeight"))
 		{
 			float ounces = Helper.roundNumber(stackTagCompound.getFloat("foodWeight"), 100);
 			if(ounces > 0)
-				arraylist.add("Amount " + ounces+" oz / "+Global.FOOD_MAX_WEIGHT+" oz");
+				arraylist.add(StringUtil.localize("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
 			float decay = stackTagCompound.getFloat("foodDecay");
 			if(decay > 0)
-				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100, 10)+"%");
+				arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
 			if(TFCOptions.enableDebugMode)
-				arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay: " + decay);
+				arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.food.decay") + ": " + decay);
 		}
 	}
 
@@ -174,6 +176,24 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		}
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		TFC_Core.setPlayerFoodStats(player, foodstats);
+		return is;
+	}
+
+	public ItemStack onConsumedByEntity(ItemStack is, World world, EntityLivingBase entity)
+	{
+		if(entity instanceof IAnimal){
+			if(!world.isRemote)
+			{
+				ItemFoodTFC item = (ItemFoodTFC) is.getItem();
+				float weight = item.getFoodWeight(is);
+				float decay = Math.max(item.getFoodDecay(is), 0);
+				float eatAmount = Math.min(weight - decay, 5f);
+				if(FoodStatsTFC.reduceFood(is, eatAmount)){
+					is.stackSize = 0;
+				}
+			}
+			world.playSoundAtEntity(entity, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+		}
 		return is;
 	}
 

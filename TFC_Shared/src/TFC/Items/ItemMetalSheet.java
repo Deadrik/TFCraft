@@ -27,6 +27,7 @@ public class ItemMetalSheet extends ItemTerra
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
+		boolean isSuccessful = false;
 		if(!world.isRemote)
 		{
 			TEMetalSheet te = null;
@@ -40,37 +41,43 @@ public class ItemMetalSheet extends ItemTerra
 					if(!te.BottomExists())
 					{
 						te.toggleBottom(true);
-						return true;
+						isSuccessful = true;
+						break;
 					}
 				case 1:
 					if(!te.TopExists())
 					{
 						te.toggleTop(true);
-						return true;
+						isSuccessful = true;
+						break;
 					}
 				case 2:
 					if(!te.NorthExists())
 					{
 						te.toggleNorth(true);
-						return true;
+						isSuccessful = true;
+						break;
 					}
 				case 3:
 					if(!te.SouthExists())
 					{
 						te.toggleSouth(true);
-						return true;
+						isSuccessful = true;
+						break;
 					}
 				case 4:
 					if(!te.EastExists())
 					{
 						te.toggleEast(true);
-						return true;
+						isSuccessful = true;
+						break;
 					}
 				case 5:
 					if(!te.WestExists())
 					{
 						te.toggleWest(true);
-						return true;
+						isSuccessful = true;
+						break;
 					}
 				}
 			}
@@ -84,16 +91,21 @@ public class ItemMetalSheet extends ItemTerra
 					te.sheetStack = itemstack.copy();
 					te.sheetStack.stackSize = 1;
 					te.toggleBySide(flipSide(side), true);
+					isSuccessful = true;
 				}
 			}
 			else
 			{
-				return false;
+				isSuccessful = false;
 			}
 
+			if(isSuccessful)
+			{
+				itemstack.stackSize--;
+			}
 
 		}
-		return false;
+		return isSuccessful;
 	}
 	public int flipSide(int side)
 	{

@@ -17,12 +17,14 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.API.IFood;
 import TFC.API.IInnateArmor;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
+import TFC.Food.ItemFoodTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -453,6 +455,33 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
 		if(!worldObj.isRemote){
+			if(par1EntityPlayer.getHeldItem()!=null){
+				int i = par1EntityPlayer.getHeldItem().getItem().itemID;
+				Item item = par1EntityPlayer.getHeldItem().getItem();
+				if(i==(TFCItems.muttonRaw.itemID)||
+						i==(TFCItems.muttonCooked.itemID)||
+						i==(TFCItems.horseMeatRaw.itemID)||
+						i==(TFCItems.horseMeatCooked.itemID)||
+						i==(TFCItems.venisonRaw.itemID)||
+						i==(TFCItems.venisonCooked.itemID)||
+						i==(Item.porkRaw.itemID)||
+						i==(Item.porkCooked.itemID)||
+						i==(Item.beefRaw.itemID)||
+						i==(Item.beefCooked.itemID)||
+						i==(Item.chickenRaw.itemID)||
+						i==(Item.chickenCooked.itemID)||
+						i==(Item.fishRaw.itemID)||
+						i==(Item.fishCooked.itemID)||
+						i==(TFCItems.CalamariRaw.itemID)||
+						i==(TFCItems.CalamariCooked.itemID)
+						){
+					if(item instanceof ItemFoodTFC && hunger <= 160000){
+						par1EntityPlayer.inventory.setItemStack(((ItemFoodTFC)item).onConsumedByEntity(par1EntityPlayer.getHeldItem(), worldObj, this));
+						this.hunger+=24000;
+						return true;
+					}
+				}
+			}
 			par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
 			if(getGender()==GenderEnum.FEMALE && pregnant){
 				par1EntityPlayer.addChatMessage("Pregnant");

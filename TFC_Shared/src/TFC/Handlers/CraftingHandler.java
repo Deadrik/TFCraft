@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_ItemHeat;
@@ -85,11 +84,13 @@ public class CraftingHandler implements ICraftingHandler
 					|| itemstack.itemID == TFCItems.Wool.itemID||itemstack.itemID == TFCItems.TerraLeather.itemID)
 			{
 				HandleItem(player, iinventory, Recipes.Knives);
-				if (itemstack.itemID == TFCItems.Wool.itemID && !player.worldObj.isRemote){
+				if (itemstack.itemID == TFCItems.Wool.itemID && !player.worldObj.isRemote)
+				{
 					if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Hide, 1, 0)))
 						player.entityDropItem(new ItemStack(TFCItems.Hide, 1, 0), 1);
 				}
-				else if(itemstack.itemID == TFCItems.TerraLeather.itemID){
+				/*else if(itemstack.itemID == TFCItems.TerraLeather.itemID)
+				{
 					boolean openGui = false;
 					for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 					{             
@@ -116,7 +117,7 @@ public class CraftingHandler implements ICraftingHandler
 						pi.specialCraftingType = new ItemStack(TFCItems.FlatLeather, 1, itemstack.getItemDamage());
 						player.openGui(TerraFirmaCraft.instance, 28, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 					}
-				}
+				}*/
 			}
 			else if(itemstack.itemID == TFCItems.WoolYarn.itemID)
 				HandleItem(player,iinventory,Recipes.Spindle);

@@ -22,6 +22,7 @@ import net.minecraft.client.resources.ReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.src.ModLoader;
+import net.minecraft.stats.Achievement;
 import net.minecraft.world.EnumGameType;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -31,6 +32,7 @@ import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Enums.EnumTree;
 import TFC.API.Util.KeyBindings;
 import TFC.Core.ColorizerFoliageTFC;
+import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Core.Util.StringUtil;
@@ -589,6 +591,12 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("generator.DEFAULT", StringUtil.localize("generator.DEFAULT"));
 		LR.addStringLocalization("effect.bleed", StringUtil.localize("effect.bleed"));
 
+		//LR.addStringLocalization("achievement.achLooseRock", StringUtil.localize("achievement.achLooseRock"));
+		//LR.addStringLocalization("achievement.achLooseRock.desc", StringUtil.localize("achievement.achLooseRock.desc"));
+		for(Achievement a : TFC_Achievements.getTFCAchievementList()){
+			LR.addStringLocalization(a.getName(), StringUtil.localize(a.getName()));
+			LR.addStringLocalization(a.getName()+".desc", StringUtil.localize(a.getName()+".desc"));
+		}
 	}
 
 	@Override

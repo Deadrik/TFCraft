@@ -25,6 +25,12 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	}
 
 	@Override
+	public void addAI()
+	{
+
+	}
+
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
