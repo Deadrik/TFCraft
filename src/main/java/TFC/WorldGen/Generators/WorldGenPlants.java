@@ -128,10 +128,10 @@ public class WorldGenPlants implements IWorldGenerator
 			if(bioTemperature >= 5)
 			{
 				if (world.isAirBlock(xCoord, yCoord, zCoord) && 
-						Blocks.tallgrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
-						!TFC_Core.isDryGrass(world.getBlock(xCoord, yCoord-1, zCoord)))
+						TFCBlocks.TallGrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
+						!TFC_Core.isDryGrass(world.getBlock(xCoord, yCoord - 1, zCoord)))
 				{
-					world.setBlock(xCoord, yCoord, zCoord, Blocks.tallgrass, 1, 0x2);
+					world.setBlock(xCoord, yCoord, zCoord, TFCBlocks.TallGrass, (world.rand.nextInt(20) == 0 ? 1 : 0), 0x2); // tallgrass with 1/20 chance to spawn a fern
 				}
 			}
 
@@ -140,10 +140,10 @@ public class WorldGenPlants implements IWorldGenerator
 //				WorldGenerator var6 = new WorldGenCustomTallGrass(Block.tallGrass, 1);
 //				var6.generate(world, random, xCoord, yCoord, zCoord);
 				if (world.isAirBlock(xCoord, yCoord, zCoord) && 
-						Blocks.tallgrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
-						TFC_Core.isDryGrass(world.getBlock(xCoord, yCoord-1, zCoord)))
+						TFCBlocks.TallGrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
+						TFC_Core.isDryGrass(world.getBlock(xCoord, yCoord - 1, zCoord)))
 				{
-					world.setBlock(xCoord, yCoord, zCoord, Blocks.tallgrass, 3, 0x2);
+					world.setBlock(xCoord, yCoord, zCoord, TFCBlocks.TallGrass, (world.rand.nextInt(60) == 0 ? 1 : 2), 0x2); // shortgrass with 1/60 chance to spawn a fern
 				}
 			}
 		}

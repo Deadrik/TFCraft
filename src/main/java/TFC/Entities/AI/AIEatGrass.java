@@ -6,6 +6,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
 
@@ -34,7 +35,7 @@ public class AIEatGrass extends EntityAIBase
 			int j = MathHelper.floor_double(this.theEntity.posY);
 			int k = MathHelper.floor_double(this.theEntity.posZ);
 			boolean isGrass = TFC_Core.isLushGrass(theWorld.getBlock(i, j-1, k));
-			boolean isTallGrass = (this.theWorld.getBlock(i, j, k) == Blocks.tallgrass && this.theWorld.getBlockMetadata(i, j, k) == 1);
+			boolean isTallGrass = (this.theWorld.getBlock(i, j, k) == TFCBlocks.TallGrass && this.theWorld.getBlockMetadata(i, j, k) == 1);
 			return isGrass || isTallGrass;
 		}
 		return false;
@@ -90,7 +91,7 @@ public class AIEatGrass extends EntityAIBase
 
 			Block grass = this.theWorld.getBlock(i, j - 1, k);
 
-			if (this.theWorld.getBlock(i, j, k) == Blocks.tallgrass)
+			if (this.theWorld.getBlock(i, j, k) == TFCBlocks.TallGrass)
 			{
 				this.theWorld.func_147480_a/*destroyBlock*/(i, j, k, false);
 				this.theEntity.eatGrassBonus();

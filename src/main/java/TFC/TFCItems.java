@@ -2044,7 +2044,6 @@ public class TFCItems
 	{
 		System.out.println(new StringBuilder().append("[TFC] Registering Items").toString());
 
-//		GameRegistry.registerItem(minecartCrate, minecartCrate.getUnlocalizedName());
 		GameRegistry.registerItem(GoldPan, GoldPan.getUnlocalizedName());
 		GameRegistry.registerItem(SluiceItem, SluiceItem.getUnlocalizedName());
 

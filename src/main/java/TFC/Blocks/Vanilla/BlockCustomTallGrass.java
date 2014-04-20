@@ -1,11 +1,13 @@
 package TFC.Blocks.Vanilla;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -26,7 +28,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 {
-	private static final String[] MetaNames = new String[] {"deadbush", "tallgrass", "fern", "shortgrass"};
+	private static final String[] MetaNames = new String[] {"tallgrass", "fern", "shortgrass"};
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
@@ -35,6 +37,15 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		super();
 		float var3 = 0.4F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.8F, 0.5F + var3);
+	}
+
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tab, List list)
+	{
+		for (int i = 0; i < MetaNames.length; ++i)
+		{
+			list.add(new ItemStack(item, 1, i));
+		}
 	}
 
 	@Override
@@ -96,11 +107,11 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 				{
 					for(int z = -1; z < 2; z++)
 					{
-						if(world.getBlock(i+x,  j,  k+z) == this)
+						if(world.getBlock(i + x, j, k + z) == this)
 						{
 							createStraw(world, player, i + x, j, k + z);
 							is.damageItem(1, player);
-							world.setBlockToAir(i+x,  j,  k+z);
+							world.setBlockToAir(i + x, j, k + z);
 						}
 					}
 				}
@@ -117,7 +128,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 
 	private void createJute(World world, EntityPlayer player, int i, int j, int k)
 	{
-		EntityItem ei = new EntityItem(world, i+0.5F, j+0.5F, k+0.5F, new ItemStack(TFCItems.Jute, 1));
+		EntityItem ei = new EntityItem(world, i + 0.5F, j + 0.5F, k + 0.5F, new ItemStack(TFCItems.Jute, 1));
 		world.spawnEntityInWorld(ei);
 	}
 
@@ -125,11 +136,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		//        if (world.rand.nextInt(8) != 0)
-		//        {
-		//            return ret;
-		//        }
-
+		//if (world.rand.nextInt(8) != 0) return ret;
 		ItemStack item = GetSeeds(world.rand);
 		if (item != null)
 			ret.add(item);
@@ -219,15 +226,16 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	{
 		this.icons = new IIcon[MetaNames.length];
 		for (int i = 0; i < this.icons.length; ++i)
-			this.icons[i] = register.registerIcon((i > 2 ?Reference.ModID+":plants/" : "")+MetaNames[i]);
+		{
+			this.icons[i] = register.registerIcon((i > 1 ? Reference.ModID + ":plants/" : "") + MetaNames[i]);
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int par1, int par2)
 	{
-		if (par2 >= this.icons.length)
-			par2 = 0;
+		if (par2 >= this.icons.length) par2 = 0;
 		return this.icons[par2];
 	}
 }

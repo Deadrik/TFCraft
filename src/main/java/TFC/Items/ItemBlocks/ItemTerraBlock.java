@@ -48,12 +48,13 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 		try
 		{
 			if(MetaNames != null)
-				return getUnlocalizedName().concat("." + MetaNames[itemstack.getItemDamage()] + ".name");
+				return getUnlocalizedName().concat("." + MetaNames[itemstack.getItemDamage()]);
 		}
 		catch(Exception ex)
 		{
 			System.out.println(ex.getLocalizedMessage());
 		}
+
 		return super.getUnlocalizedName(itemstack);
 	}
 
@@ -64,7 +65,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 //	}
 
 	@Override
-	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
+	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected)
 	{
 		/*if (!world.isRemote && is.hasTagCompound())
 		{
@@ -85,7 +86,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	}
 
 	@Override
-	public int getMetadata(int i) 
+	public int getMetadata(int i)
 	{
 		return i;
 	}

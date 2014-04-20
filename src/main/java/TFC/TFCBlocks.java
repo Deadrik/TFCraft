@@ -226,6 +226,7 @@ public class TFCBlocks
 	public static Block Sand2;
 	public static Block DryGrass;
 	public static Block DryGrass2;
+	public static Block TallGrass;
 	public static Block Charcoal;
 	public static Block Detailed;
 
@@ -345,6 +346,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Peat, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Peat");
 		GameRegistry.registerBlock(DryGrass, TFC.Items.ItemBlocks.ItemTerraBlock.class, "DryGrass");
 		GameRegistry.registerBlock(DryGrass2, TFC.Items.ItemBlocks.ItemTerraBlock.class, "DryGrass2");
+		GameRegistry.registerBlock(TallGrass, TFC.Items.ItemBlocks.ItemCustomTallGrass.class, "TallGrass");
 		GameRegistry.registerBlock(worldItem, "LooseRock");
 		GameRegistry.registerBlock(LogPile, "LogPile");
 		GameRegistry.registerBlock(Charcoal, "Charcoal");
@@ -474,10 +476,9 @@ public class TFCBlocks
 		Blocks.birch_stairs.setCreativeTab(null);
 		Blocks.jungle_stairs.setCreativeTab(null);
 		Blocks.waterlily.setCreativeTab(null);
+		Blocks.tallgrass.setCreativeTab(null);
 
 
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.tallgrass), "tallgrass",
-				(new BlockCustomTallGrass()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("tallgrass"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.yellow_flower), "yellow_flower",
 				(new BlockCustomFlower(0)).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("flower1").setBlockTextureName("flower_dandelion"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.red_flower), "red_flower",
@@ -549,6 +550,7 @@ public class TFCBlocks
 		PeatGrass = new TFC.Blocks.Terrain.BlockPeatGrass().setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("PeatGrass");
 		DryGrass = new BlockDryGrass(0).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("DryGrass");
 		DryGrass2 =new BlockDryGrass(16).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("DryGrass");
+		TallGrass = new BlockCustomTallGrass().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("TallGrass");
 		Sand = new TFC.Blocks.Terrain.BlockSand(0).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
 		Sand2 = new BlockSand2(16).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
 

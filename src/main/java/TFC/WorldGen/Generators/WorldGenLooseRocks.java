@@ -28,7 +28,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 
 	private boolean generateRocks(World world, Random random, int i, int j, int k)
 	{
-		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j+1, k) == Blocks.tallgrass) && 
+		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.TallGrass) && 
 				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock) && world.getBlock(i, j, k).isOpaqueCube())
 		{
 			if(world.setBlock(i, j+1, k, TFCBlocks.worldItem, 0, 2))
@@ -110,7 +110,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 
 	private boolean generateSticks(World world, Random random, int i, int j, int k)
 	{
-		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == Blocks.tallgrass) && 
+		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.TallGrass) && 
 				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock) && world.getBlock(i, j, k).isOpaqueCube())
 		{
 			TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(i, k);

@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.TFCBiome;
@@ -57,7 +58,7 @@ public class WorldGenFixGrass implements IWorldGenerator
 						{
 							for (int y1 = -2; y1 < 1 && !converted; ++y1)
 							{
-								if(TFC_Core.isWater(world.getBlock(xCoord+x1, yCoord+y1, zCoord+z1)))
+								if(TFC_Core.isWater(world.getBlock(xCoord + x1, yCoord + y1, zCoord + z1)))
 								{
 									world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForGrass(world.getBlockMetadata(xCoord, yCoord, zCoord)), 0, 0x2);
 									converted = true;
@@ -67,8 +68,8 @@ public class WorldGenFixGrass implements IWorldGenerator
 										numX = -numX;
 									if(numZ < 0)
 										numZ = -numZ;
-									if(random.nextInt(1+((numX+numZ)/2)) == 0)
-										world.setBlock(xCoord, yCoord+1, zCoord,Blocks.tallgrass, 0, 0x2);
+									if(random.nextInt(1 + ((numX + numZ) / 2)) == 0)
+										world.setBlock(xCoord, yCoord + 1, zCoord, TFCBlocks.TallGrass, 0, 0x2);
 								}
 							}
 						}
@@ -85,7 +86,7 @@ public class WorldGenFixGrass implements IWorldGenerator
 		{
 			for(int k = -2; k <= 2; k++)
 			{
-				biome = (TFCBiome) world.getBiomeGenForCoords(x+(i * 8), z+(k * 8));
+				biome = (TFCBiome) world.getBiomeGenForCoords(x + (i * 8), z + (k * 8));
 				if(biome == TFCBiome.ocean || biome == TFCBiome.river || biome == TFCBiome.swampland)
 					return true;
 			}

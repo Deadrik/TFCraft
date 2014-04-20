@@ -61,7 +61,7 @@ public class BlockCollapsable extends BlockTerraContainer
 			return false;
 		if (l == Blocks.fire)
 			return true;
-		if (l == Blocks.tallgrass)
+		if (l == TFCBlocks.TallGrass)
 			return true;
 		if (l == Blocks.torch)
 			return true;

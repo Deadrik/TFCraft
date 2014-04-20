@@ -45,7 +45,7 @@ public class WorldGenGrowCrops implements IWorldGenerator
 				if(temp > crop.minAliveTemp && month > 0 && month <= 6)
 				{
 					Block b = world.getBlock(i, j, k);
-					if (TFCBlocks.Crops.canBlockStay(world, i, j, k) && (b == Blocks.air || b == Blocks.tallgrass))
+					if (TFCBlocks.Crops.canBlockStay(world, i, j, k) && (b == Blocks.air || b == TFCBlocks.TallGrass))
 					{
 						if(world.setBlock(i, j, k, TFCBlocks.Crops, 0, 0x2))
 						{

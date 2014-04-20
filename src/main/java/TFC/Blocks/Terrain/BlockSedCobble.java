@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.API.Constant.Global;
 
 public class BlockSedCobble extends BlockCobble
@@ -24,7 +25,7 @@ public class BlockSedCobble extends BlockCobble
 			return true;
 		if (l == Blocks.fire)
 			return true;
-		if (l == Blocks.tallgrass)
+		if (l == TFCBlocks.TallGrass)
 			return true;
 		Material material = l.getMaterial();
 		if (material == Material.water)
