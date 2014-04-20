@@ -8,6 +8,13 @@ import com.google.common.collect.ObjectArrays;
 
 public class Global
 {
+	/* Flower Meta Names
+	 * The first 10 flowers are from vanilla */
+	public static final String[] FLOWER_META_NAMES = new String[] {
+		"flower_dandelion", "flower_rose", "flower_blue_orchid", "flower_allium", "flower_houstonia",
+		"flower_tulip_red", "flower_tulip_orange", "flower_tulip_white", "flower_tulip_pink", "flower_oxeye_daisy"
+	};
+
 	/* Powder */
 	public static final String[] POWDER = {
 		"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder",

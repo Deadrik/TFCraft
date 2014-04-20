@@ -59,6 +59,7 @@ import TFC.Blocks.Flora.BlockLogVert2;
 import TFC.Blocks.Flora.BlockTallSeaGrassFlowing;
 import TFC.Blocks.Flora.BlockTallSeaGrassStill;
 import TFC.Blocks.Terrain.BlockDryGrass;
+import TFC.Blocks.Terrain.BlockFlowers;
 import TFC.Blocks.Terrain.BlockFreshWaterFlowing;
 import TFC.Blocks.Terrain.BlockFreshWaterStill;
 import TFC.Blocks.Terrain.BlockHotWaterFlowing;
@@ -93,7 +94,6 @@ import TFC.Blocks.Vanilla.BlockCustomFence;
 import TFC.Blocks.Vanilla.BlockCustomFence2;
 import TFC.Blocks.Vanilla.BlockCustomFenceGate;
 import TFC.Blocks.Vanilla.BlockCustomFenceGate2;
-import TFC.Blocks.Vanilla.BlockCustomFlower;
 import TFC.Blocks.Vanilla.BlockCustomFlowing;
 import TFC.Blocks.Vanilla.BlockCustomIce;
 import TFC.Blocks.Vanilla.BlockCustomLeaves;
@@ -267,6 +267,7 @@ public class TFCBlocks
 	public static Block BerryBush;
 	public static Block Crops;
 	public static Block LilyPad;
+	public static Block Flowers;
 	public static Block Flora;
 	public static Block Tuyere;
 	public static Block EarlyBloomery;
@@ -463,6 +464,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(ArmourStand2, TFC.Items.ItemBlocks.ItemArmourStand2.class, "ArmourStand2");
 		GameRegistry.registerBlock(BerryBush, TFC.Items.ItemBlocks.ItemBerryBush.class, "BerryBush");
 		GameRegistry.registerBlock(LilyPad, TFC.Items.ItemBlocks.ItemCustomLilyPad.class, "LilyPad");
+		GameRegistry.registerBlock(Flowers, TFC.Items.ItemBlocks.ItemFlowers.class, "Flowers");
 	}
 
 	public static void LoadBlocks()
@@ -477,12 +479,11 @@ public class TFCBlocks
 		Blocks.jungle_stairs.setCreativeTab(null);
 		Blocks.waterlily.setCreativeTab(null);
 		Blocks.tallgrass.setCreativeTab(null);
+		Blocks.yellow_flower.setCreativeTab(null);
+		Blocks.red_flower.setCreativeTab(null);
 
 
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.yellow_flower), "yellow_flower",
-				(new BlockCustomFlower(0)).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("flower1").setBlockTextureName("flower_dandelion"));
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.red_flower), "red_flower",
-				(new BlockCustomFlower(1)).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("flower2").setBlockTextureName("flower_rose"));
+
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.brown_mushroom), "brown_mushroom",
 				(new BlockCustomMushroom("mushroom_brown")).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setLightLevel(0.125F).setBlockName("mushroom").setBlockTextureName("mushroom_brown"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.red_mushroom), "red_mushroom",
@@ -667,6 +668,7 @@ public class TFCBlocks
 		BerryBush = new BlockBerryBush().setBlockName("BerryBush").setHardness(0.3f).setStepSound(Block.soundTypeGrass);
 		Crops = new BlockCrop().setBlockName("crops").setHardness(0.3F).setStepSound(Block.soundTypeGrass);
 		LilyPad = new BlockCustomLilyPad().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("LilyPad").setBlockTextureName("waterlily");
+		Flowers = new BlockFlowers().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers");
 
 		SaltWaterFlowing = (new BlockCustomFlowing(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterFlowing");
 		SaltWaterStill = (new BlockCustomStationary(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterStill");

@@ -15,8 +15,7 @@ import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenPlants implements IWorldGenerator
 {
-	static WorldGenCustomFlowers plantYellowGen = new WorldGenCustomFlowers(Blocks.yellow_flower);
-	static WorldGenCustomFlowers plantRedGen = new WorldGenCustomFlowers(Blocks.red_flower);
+	static WorldGenFlowers plantFlowersGen = new WorldGenFlowers();
 	static WorldGenCustomFlowers mushroomBrownGen = new WorldGenCustomFlowers(Blocks.brown_mushroom);
 	static WorldGenCustomFlowers mushroomRedGen = new WorldGenCustomFlowers(Blocks.red_mushroom);
 
@@ -105,16 +104,7 @@ public class WorldGenPlants implements IWorldGenerator
 			bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
 			if(bioTemperature > 1.5)
 			{
-				plantYellowGen.generate(world, random, xCoord, yCoord, zCoord);
-				if (random.nextInt(4) == 0)
-				{
-					xCoord = chunkX + random.nextInt(16) + 8;
-					zCoord = chunkZ + random.nextInt(16) + 8;
-					yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
-					bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
-					if(bioTemperature > 1.5)
-						plantRedGen.generate(world, random, xCoord, yCoord, zCoord);
-				}
+				plantFlowersGen.generate(world, random, xCoord, yCoord, zCoord);
 			}
 		}
 
