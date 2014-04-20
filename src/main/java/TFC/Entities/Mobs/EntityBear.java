@@ -86,7 +86,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		tasks.addTask (9, new EntityAILookIdle (this));
 		tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntitySheepTFC.class,200, false));
-		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityDeer.class,200, false));
+		//targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityDeer.class,200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityPlayer.class, 200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false));

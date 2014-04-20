@@ -26,12 +26,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInnateArmor
 {
-	private int field_82234_d = 0;
-
 	public EntityZombieTFC(World par1World)
 	{
 		super(par1World);
 	}
+
 	@Override
 	protected void applyEntityAttributes()
 	{

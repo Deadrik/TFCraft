@@ -52,7 +52,6 @@ public class RenderDeer extends RenderLiving
 		GL11.glScalef (par1EntityDeer.size_mod-0.3f,par1EntityDeer.size_mod-0.3f,par1EntityDeer.size_mod-0.3f);
 	}
 
-
 	/**
 	 * Defines what float the third param in setRotationAngles of ModelBase is
 	 */
@@ -67,7 +66,6 @@ public class RenderDeer extends RenderLiving
 	{
 		renderDeer ((EntityDeer) par1EntityLiving, par2, par4, par6, par8, par9);
 	}
-
 
 	/**
 	 * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
@@ -94,8 +92,8 @@ public class RenderDeer extends RenderLiving
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		// TODO Auto-generated method stub
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return getTexture((IAnimal)entity);
 	}
 }

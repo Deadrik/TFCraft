@@ -15,6 +15,7 @@ public class ChunkTFC extends Chunk
 		super(world, chunkX, chunkZ);
 		int height = blocks.length / 256;
 		EBS = getBlockStorageArray();
+
 		for (int x = 0; x < 16; ++x)
 		{
 			for (int z = 0; z < 16; ++z)
@@ -23,14 +24,16 @@ public class ChunkTFC extends Chunk
 				{
 					int index = (x << 12 | z << 8 | y);
 					Block b = blocks[index];
-					int meta = metadata[index];
+
 					if (b != null && b != Blocks.air)
 					{
 						int chunkY = (y >> 4);
 						if (EBS[chunkY] == null)
+						{
 							EBS[chunkY] = new ExtendedBlockStorage(chunkY << 4, !world.provider.hasNoSky);
+						}
 						EBS[chunkY].func_150818_a/*setExtBlock*/(x, y & 15, z, b);
-						EBS[chunkY].setExtBlockMetadata(x, y & 15, z, meta);
+						EBS[chunkY].setExtBlockMetadata(x, y & 15, z, metadata[index]);
 					}
 				}
 			}
