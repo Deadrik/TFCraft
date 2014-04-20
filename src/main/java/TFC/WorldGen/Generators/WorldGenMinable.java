@@ -173,29 +173,29 @@ public class WorldGenMinable extends WorldGenerator
 		int posX = parX;
 		int posY = parY;
 		int posZ = parZ;
-		int tempPosX =0;
-		int tempPosY =0;
-		int tempPosZ =0;
+		int tempPosX = 0;
+		int tempPosY = 0;
+		int tempPosZ = 0;
 		int posX2 = 0;
 		int posY2 = 0;
 		int posZ2 = 0;
-		int directionX =0;
-		int directionY =0;
-		int directionZ =0;
+		int directionX = 0;
+		int directionY = 0;
+		int directionZ = 0;
 		int directionX2 = 0;
 		int directionY2 = 0;
 		int directionZ2 = 0;
-		int directionX3 =0;
-		int directionY3 =0;
-		int directionZ3 =0;
-		int directionChange =0;
-		int directionChange2 =0;
+		int directionX3 = 0;
+		int directionY3 = 0;
+		int directionZ3 = 0;
+		int directionChange = 0;
+		int directionChange2 = 0;
 		int blocksToUse = xyz;//input number of blocks per vein
-		int blocksToUse2 =0;
+		int blocksToUse2 = 0;
 
-		for(int blocksMade=0; blocksMade <= blocksToUse;) // make veins
+		for(int blocksMade = 0; blocksMade <= blocksToUse;) // make veins
 		{
-			blocksToUse2 = 1 + (blocksToUse/30);
+			blocksToUse2 = 1 + (blocksToUse / 30);
 			directionChange = rand.nextInt(6);
 			directionX = rand.nextInt(2);
 			directionY = rand.nextInt(2);
@@ -246,7 +246,7 @@ public class WorldGenMinable extends WorldGenerator
 					if(directionZ2 == 1 && directionChange2 != 2)
 						posZ2 = posZ2 - rand.nextInt(2);
 
-					for(int blocksMade2 = 0; blocksMade2 <= (1 +(blocksToUse2/5)); )
+					for(int blocksMade2 = 0; blocksMade2 <= (1 + (blocksToUse2 / 5)); )
 					{
 						if(directionX2 == 0 && directionChange2 != 0)
 							posX2 = posX2 + rand.nextInt(2);
@@ -275,7 +275,7 @@ public class WorldGenMinable extends WorldGenerator
 						isCorrectRockType = b == this.genInBlock;
 						isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-						if(isCorrectRockType && isCorrectMeta && MPBlock != null)
+						if(isCorrectRockType && isCorrectMeta)
 						{
 							world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
 							TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
@@ -300,10 +300,10 @@ public class WorldGenMinable extends WorldGenerator
 
 				int m = world.getBlockMetadata(posX, posY, posZ);
 				Block b = world.getBlock(posX, posY, posZ);
-				boolean	isCorrectRockType = b == this.genInBlock;
-				boolean	isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
+				boolean isCorrectRockType = b == this.genInBlock;
+				boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-				if(isCorrectRockType && isCorrectMeta && MPBlock != null)
+				if(isCorrectRockType && isCorrectMeta)
 				{
 					world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
 					TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
@@ -381,7 +381,7 @@ public class WorldGenMinable extends WorldGenerator
 								boolean isCorrectRockType = b == this.genInBlock;
 								boolean isCorrectMeta = (m == this.genInBlockMeta || this.genInBlockMeta == -1);
 
-								if(isCorrectRockType && isCorrectMeta && MPBlock != null)
+								if(isCorrectRockType && isCorrectMeta)
 								{
 									if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D)
 									{
