@@ -63,7 +63,6 @@ import TFC.Items.ItemTFCArmor;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemTuyere;
 import TFC.Items.ItemUnfinishedArmor;
-import TFC.Items.ItemBlocks.ItemCustomLilyPad;
 import TFC.Items.ItemBlocks.ItemWoodDoor;
 import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.Items.Pottery.ItemPotteryJug;
@@ -898,8 +897,6 @@ public class TFCItems
 	public static Item CloudberryLeaf;
 	public static Item Fertilizer;
 
-	public static Item LilyPad;
-
 	/**
 	 * Item Uses Setup
 	 * */
@@ -996,7 +993,6 @@ public class TFCItems
 //		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.tallgrass), "tallgrass", (new ItemColored(Blocks.tallgrass, true)).func_150943_a(new String[] {"shrub", "grass", "fern"}));
 //		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.vine), "vine", new ItemColored(Blocks.vine, false));
 
-		LilyPad = new ItemCustomLilyPad(TFCBlocks.LilyPad);
 		minecartCrate = new ItemCustomMinecart(1).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 		GoldPan = new ItemGoldPan().setUnlocalizedName("GoldPan");
 		SluiceItem = new ItemSluice().setFolder("devices/").setUnlocalizedName("SluiceItem").setCreativeTab(TFCTabs.TFCDevices);
