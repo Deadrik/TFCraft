@@ -194,7 +194,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 
 					if(i <= validCount) 
 					{
-						int mMeta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+						int mMeta = worldObj.getBlockMetadata(xCoord, yCoord+i, zCoord);
 						int m = j > 7 ? 7 : j;
 						if(this.bloomeryLit)
 						{
