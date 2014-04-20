@@ -104,14 +104,7 @@ public class BlockFruitWood extends BlockTerraContainer
 					boolean reachedTop = false;
 					while(!reachedTop)
 					{
-						if(l != 9 && l != 15 && world.getBlockId(x, j+y+1, z) == 0)
-						{
-							reachedTop = true;
-						}
-						else if((l == 9 || l == 15) && world.getBlockId(x, j+y+1, z) == 0
-								&& world.getBlockId(x+1, j+y+1, z) != blockID && world.getBlockId(x-1, j+y+1, z) != blockID && world.getBlockId(x, j+y+1, z+1) != blockID &&
-								world.getBlockId(x, j+y+1, z-1) != blockID && world.getBlockId(x-1, j+y+1, z-1) != blockID && world.getBlockId(x-1, j+y+1, z+1) != blockID && 
-								world.getBlockId(x+1, j+y+1, z+1) != blockID && world.getBlockId(x+1, j+y+1, z-1) != blockID)
+						if (world.getBlockId(x, j+y+1, z) == 0)
 						{
 							reachedTop = true;
 						}
