@@ -167,7 +167,6 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntityHorseTFC.class, "TFCHorse", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityCustomMinecart.class, "minecart", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntitySkeletonTFC.class, "TFCSkeleton", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntitySkeletonTFC.class, "TFCSkeleton", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityZombieTFC.class, "TFCZombie", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntitySpiderTFC.class, "TFCSpider", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntitySlimeTFC.class, "TFCSlime", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
