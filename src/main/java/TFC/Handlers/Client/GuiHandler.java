@@ -62,7 +62,7 @@ public class GuiHandler extends TFC.Handlers.GuiHandler
 		{
 			te = null;
 		}
-		System.out.println("CLIENT GUI ID: "+ID);
+
 		switch(ID)
 		{
 		case 0:

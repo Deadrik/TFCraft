@@ -62,6 +62,7 @@ import TFC.Blocks.Terrain.BlockDryGrass;
 import TFC.Blocks.Terrain.BlockFlowers;
 import TFC.Blocks.Terrain.BlockFreshWaterFlowing;
 import TFC.Blocks.Terrain.BlockFreshWaterStill;
+import TFC.Blocks.Terrain.BlockFungi;
 import TFC.Blocks.Terrain.BlockHotWaterFlowing;
 import TFC.Blocks.Terrain.BlockHotWaterStill;
 import TFC.Blocks.Terrain.BlockIgEx;
@@ -99,7 +100,6 @@ import TFC.Blocks.Vanilla.BlockCustomIce;
 import TFC.Blocks.Vanilla.BlockCustomLeaves;
 import TFC.Blocks.Vanilla.BlockCustomLeaves2;
 import TFC.Blocks.Vanilla.BlockCustomLilyPad;
-import TFC.Blocks.Vanilla.BlockCustomMushroom;
 import TFC.Blocks.Vanilla.BlockCustomPumpkin;
 import TFC.Blocks.Vanilla.BlockCustomReed;
 import TFC.Blocks.Vanilla.BlockCustomSapling;
@@ -268,6 +268,7 @@ public class TFCBlocks
 	public static Block Crops;
 	public static Block LilyPad;
 	public static Block Flowers;
+	public static Block Fungi;
 	public static Block Flora;
 	public static Block Tuyere;
 	public static Block EarlyBloomery;
@@ -369,9 +370,6 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Sapling2, TFC.Items.ItemBlocks.ItemSapling2.class, "sapling2");
 		GameRegistry.registerBlock(Planks, TFC.Items.ItemBlocks.ItemPlankBlock.class, "planks");
 		GameRegistry.registerBlock(Planks2, TFC.Items.ItemBlocks.ItemPlankBlock2.class, "planks2");
-//		GameRegistry.registerBlock(Blocks.brown_mushroom, TFC.Items.ItemBlocks.ItemFoodBlock.class, "mushroom");
-//		GameRegistry.registerBlock(Blocks.pumpkin, TFC.Items.ItemBlocks.ItemFoodBlock.class, "pumpkin");
-//		GameRegistry.registerBlock(Blocks.melon_block, TFC.Items.ItemBlocks.ItemFoodBlock.class, "melon");
 
 		GameRegistry.registerBlock(Firepit, "Firepit");
 		GameRegistry.registerBlock(Bellows, TFC.Items.ItemBlocks.ItemBellows.class, "Bellows");
@@ -465,6 +463,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(BerryBush, TFC.Items.ItemBlocks.ItemBerryBush.class, "BerryBush");
 		GameRegistry.registerBlock(LilyPad, TFC.Items.ItemBlocks.ItemCustomLilyPad.class, "LilyPad");
 		GameRegistry.registerBlock(Flowers, TFC.Items.ItemBlocks.ItemFlowers.class, "Flowers");
+		GameRegistry.registerBlock(Fungi, TFC.Items.ItemBlocks.ItemFungi.class, "Fungi");
 	}
 
 	public static void LoadBlocks()
@@ -481,13 +480,12 @@ public class TFCBlocks
 		Blocks.tallgrass.setCreativeTab(null);
 		Blocks.yellow_flower.setCreativeTab(null);
 		Blocks.red_flower.setCreativeTab(null);
+		Blocks.brown_mushroom.setCreativeTab(null);
+		Blocks.red_mushroom.setCreativeTab(null);
 
 
 
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.brown_mushroom), "brown_mushroom",
-				(new BlockCustomMushroom("mushroom_brown")).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setLightLevel(0.125F).setBlockName("mushroom").setBlockTextureName("mushroom_brown"));
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.red_mushroom), "red_mushroom",
-				(new BlockCustomMushroom("mushroom_red")).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("mushroom").setBlockTextureName("mushroom_red"));
+
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.bookshelf), "bookshelf",
 				(new BlockCustomBookshelf()).setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("bookshelf").setBlockTextureName("bookshelf"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.torch), "torch",
@@ -639,12 +637,12 @@ public class TFCBlocks
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
 			Doors[i] = new BlockCustomDoor(i*2).setBlockName("Door "+Global.WOOD_ALL[i]);
 
-		IngotPile =  new BlockIngotPile().setBlockName("ingotpile").setHardness(3);
+		IngotPile = new BlockIngotPile().setBlockName("ingotpile").setHardness(3);
 
 		Barrel = new BlockBarrel().setBlockName("Barrel").setHardness(2);
 		Barrel2 = new BlockBarrel2().setBlockName("Barrel").setHardness(2);
-		Thatch =  new BlockThatch().setBlockName("Thatch").setHardness(1).setStepSound(Block.soundTypeGrass).setCreativeTab(CreativeTabs.tabBlock);
-		Moss =  new BlockMoss().setBlockName("Moss").setHardness(1).setStepSound(Block.soundTypeGrass);
+		Thatch = new BlockThatch().setBlockName("Thatch").setHardness(1).setStepSound(Block.soundTypeGrass).setCreativeTab(CreativeTabs.tabBlock);
+		Moss = new BlockMoss().setBlockName("Moss").setHardness(1).setStepSound(Block.soundTypeGrass);
 
 		Flora = new BlockFlora().setBlockName("Flora").setHardness(0.1f).setStepSound(Block.soundTypeGrass);
 		Pottery = new BlockPottery().setBlockName("Pottery").setHardness(1.0f);
@@ -669,6 +667,7 @@ public class TFCBlocks
 		Crops = new BlockCrop().setBlockName("crops").setHardness(0.3F).setStepSound(Block.soundTypeGrass);
 		LilyPad = new BlockCustomLilyPad().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("LilyPad").setBlockTextureName("waterlily");
 		Flowers = new BlockFlowers().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers");
+		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");//.setCreativeTab(CreativeTabs.tabFood);
 
 		SaltWaterFlowing = (new BlockCustomFlowing(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterFlowing");
 		SaltWaterStill = (new BlockCustomStationary(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterStill");

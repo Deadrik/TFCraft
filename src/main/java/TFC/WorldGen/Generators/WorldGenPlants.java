@@ -2,7 +2,6 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import TFC.TFCBlocks;
@@ -16,8 +15,7 @@ import cpw.mods.fml.common.IWorldGenerator;
 public class WorldGenPlants implements IWorldGenerator
 {
 	static WorldGenFlowers plantFlowersGen = new WorldGenFlowers();
-	static WorldGenCustomFlowers mushroomBrownGen = new WorldGenCustomFlowers(Blocks.brown_mushroom);
-	static WorldGenCustomFlowers mushroomRedGen = new WorldGenCustomFlowers(Blocks.red_mushroom);
+	static WorldGenFungi plantFungiGen = new WorldGenFungi();
 
 	static WorldGenCustomFruitTree appleTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves, 0);
 	static WorldGenCustomFruitTree bananaTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves, 1);
@@ -145,7 +143,7 @@ public class WorldGenPlants implements IWorldGenerator
 				xCoord = chunkX + random.nextInt(16) + 8;
 				zCoord = chunkZ + random.nextInt(16) + 8;
 				yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
-				mushroomBrownGen.generate(world, random, xCoord, yCoord, zCoord);
+				plantFungiGen.genWithMeta(world, random, xCoord, yCoord, zCoord, 0); // vanilla brown mushroom
 			}
 
 			if (random.nextInt(8) == 0)
@@ -153,7 +151,7 @@ public class WorldGenPlants implements IWorldGenerator
 				xCoord = chunkX + random.nextInt(16) + 8;
 				zCoord = chunkZ + random.nextInt(16) + 8;
 				yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
-				mushroomRedGen.generate(world, random, xCoord, yCoord, zCoord);
+				plantFungiGen.genWithMeta(world, random, xCoord, yCoord, zCoord, 1); // vanilla red mushroom
 			}
 		}
 

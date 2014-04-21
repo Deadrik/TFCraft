@@ -1736,38 +1736,38 @@ public class TFCItems
 		SeedsJute = new ItemCustomSeeds(24).setUnlocalizedName("Seeds Jute");
 
 		muttonRaw = new ItemRawFood(-1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("Mutton Raw");
-		muttonCooked =  new ItemFoodTFC(48, EnumFoodGroup.Protein).setUnlocalizedName("Mutton Cooked");
+		muttonCooked = new ItemFoodTFC(48, EnumFoodGroup.Protein).setUnlocalizedName("Mutton Cooked");
 		venisonRaw = new ItemRawFood(-1, EnumFoodGroup.Protein, false, false).setUnlocalizedName("Venison");
-		venisonCooked =  new ItemFoodTFC(49, EnumFoodGroup.Protein).setUnlocalizedName("VenisonCooked");
+		venisonCooked = new ItemFoodTFC(49, EnumFoodGroup.Protein).setUnlocalizedName("VenisonCooked");
 		horseMeatRaw = new ItemRawFood(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("HorseMeat");
-		horseMeatCooked =  new ItemFoodTFC(50, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("HorseMeatCooked");
+		horseMeatCooked = new ItemFoodTFC(50, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("HorseMeatCooked");
 
-		WintergreenBerry =  new ItemFoodTFC(50, EnumFoodGroup.Fruit).setUnlocalizedName("Wintergreen Berry");
-		Blueberry =  new ItemFoodTFC(51, EnumFoodGroup.Fruit).setUnlocalizedName("Blueberry");
-		Raspberry =  new ItemFoodTFC(52, EnumFoodGroup.Fruit).setUnlocalizedName("Raspberry");
-		Strawberry =  new ItemFoodTFC(53, EnumFoodGroup.Fruit).setUnlocalizedName("Strawberry");
-		Blackberry =  new ItemFoodTFC(54, EnumFoodGroup.Fruit).setUnlocalizedName("Blackberry");
-		Bunchberry =  new ItemFoodTFC(55, EnumFoodGroup.Fruit).setUnlocalizedName("Bunchberry");
-		Cranberry =  new ItemFoodTFC(56, EnumFoodGroup.Fruit).setUnlocalizedName("Cranberry");
-		Snowberry =  new ItemFoodTFC(57, EnumFoodGroup.Fruit).setUnlocalizedName("Snowberry");	
-		Elderberry =  new ItemFoodTFC(58, EnumFoodGroup.Fruit).setUnlocalizedName("Elderberry");
-		Gooseberry =  new ItemFoodTFC(59, EnumFoodGroup.Fruit).setUnlocalizedName("Gooseberry");
-		Cloudberry =  new ItemFoodTFC(60, EnumFoodGroup.Fruit).setUnlocalizedName("Cloudberry");
+		WintergreenBerry = new ItemFoodTFC(50, EnumFoodGroup.Fruit).setUnlocalizedName("Wintergreen Berry");
+		Blueberry = new ItemFoodTFC(51, EnumFoodGroup.Fruit).setUnlocalizedName("Blueberry");
+		Raspberry = new ItemFoodTFC(52, EnumFoodGroup.Fruit).setUnlocalizedName("Raspberry");
+		Strawberry = new ItemFoodTFC(53, EnumFoodGroup.Fruit).setUnlocalizedName("Strawberry");
+		Blackberry = new ItemFoodTFC(54, EnumFoodGroup.Fruit).setUnlocalizedName("Blackberry");
+		Bunchberry = new ItemFoodTFC(55, EnumFoodGroup.Fruit).setUnlocalizedName("Bunchberry");
+		Cranberry = new ItemFoodTFC(56, EnumFoodGroup.Fruit).setUnlocalizedName("Cranberry");
+		Snowberry = new ItemFoodTFC(57, EnumFoodGroup.Fruit).setUnlocalizedName("Snowberry");
+		Elderberry = new ItemFoodTFC(58, EnumFoodGroup.Fruit).setUnlocalizedName("Elderberry");
+		Gooseberry = new ItemFoodTFC(59, EnumFoodGroup.Fruit).setUnlocalizedName("Gooseberry");
+		Cloudberry = new ItemFoodTFC(60, EnumFoodGroup.Fruit).setUnlocalizedName("Cloudberry");
 
 		//mushroom is a food now, with foodID 61
 		//pumpkin is a food now, id = 61
 		//melon is a food, not currently obtainable. id = 62. See ItemFoodBlock
-		WintergreenLeaf =  new ItemTerra().setFolder("plants/").setUnlocalizedName("Wintergreen Leaf");	
-		BlueberryLeaf =  new ItemTerra().setFolder("plants/").setUnlocalizedName("Blueberry Leaf");
-		RaspberryLeaf =  new ItemTerra().setFolder("plants/").setUnlocalizedName("Raspberry Leaf");
-		StrawberryLeaf =  new ItemTerra().setFolder("plants/").setUnlocalizedName("Strawberry Leaf");
-		BlackberryLeaf =  new ItemTerra().setFolder("plants/").setUnlocalizedName("Blackberry Leaf");
-		BunchberryLeaf =  new ItemTerra().setFolder("plants/").setUnlocalizedName("Bunchberry Leaf");
-		CranberryLeaf =  new ItemTerra().setFolder("plants/").setUnlocalizedName("Cranberry Leaf");
-		SnowberryLeaf =  new ItemTerra().setFolder("plants/").setUnlocalizedName("Snowberry Leaf");
-		ElderberryLeaf =  new ItemTerra().setFolder("plants/").setUnlocalizedName("Elderberry Leaf");
-		GooseberryLeaf =  new ItemTerra().setFolder("plants/").setUnlocalizedName("Gooseberry Leaf");
-		CloudberryLeaf =  new ItemTerra().setFolder("plants/").setUnlocalizedName("Cloudberry Leaf");
+		WintergreenLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Wintergreen Leaf");
+		BlueberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Blueberry Leaf");
+		RaspberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Raspberry Leaf");
+		StrawberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Strawberry Leaf");
+		BlackberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Blackberry Leaf");
+		BunchberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Bunchberry Leaf");
+		CranberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Cranberry Leaf");
+		SnowberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Snowberry Leaf");
+		ElderberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Elderberry Leaf");
+		GooseberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Gooseberry Leaf");
+		CloudberryLeaf = new ItemTerra().setFolder("plants/").setUnlocalizedName("Cloudberry Leaf");
 	}
 
 	private static void registerMetals()

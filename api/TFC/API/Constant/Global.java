@@ -15,6 +15,12 @@ public class Global
 		"flower_tulip_red", "flower_tulip_orange", "flower_tulip_white", "flower_tulip_pink", "flower_oxeye_daisy"
 	};
 
+	/* Fungi Meta Names
+	 * The first 2 are vanilla mushrooms */
+	public static final String[] FUNGI_META_NAMES = new String[] {
+		"mushroom_brown", "mushroom_red"
+	};
+	
 	/* Powder */
 	public static final String[] POWDER = {
 		"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder",
