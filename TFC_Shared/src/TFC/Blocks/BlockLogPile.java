@@ -7,12 +7,15 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TileEntityLogPile;
 
 public class BlockLogPile extends BlockTerraContainer
@@ -163,4 +166,56 @@ public class BlockLogPile extends BlockTerraContainer
 				teLogPile.neighborChanged();
 		}
 	}
+	
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+	/**
+	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
+	 * cleared to be reused)
+	 */
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	{
+		int meta = par1World.getBlockMetadata(par2, par3, par4);
+		int direction = getDirectionFromMetadata(meta);
+		TileEntityLogPile te = (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4);
+
+		if (te != null && te.getNumberOfLogs() > 0)
+		{
+			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + ((te.getNumberOfLogs() + 3) / 4) * 0.25, (double)par4 + 1);
+		} else {
+			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + 0.25, (double)par4 + 1);
+		}
+	}
+
+	@Override
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	{
+		return getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
+	}
+
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	{
+		int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+		int direction = getDirectionFromMetadata(meta);
+		TileEntityLogPile te = (TileEntityLogPile)par1IBlockAccess.getBlockTileEntity(par2, par3, par4);
+
+		if (te.getNumberOfLogs() > 0)
+		{
+			this.setBlockBounds(0f, 0f, 0f, 1f, (float) (((te.getNumberOfLogs() + 3) / 4) * 0.25), 1f);
+		} else {
+			this.setBlockBounds(0f, 0f, 0f, 0f, 0.25f, 0f);
+		}
+
+	}	
 }

@@ -188,6 +188,7 @@ public class ItemLogs extends ItemTerra
 
 					}
 					itemstack.stackSize = itemstack.stackSize-1;
+					te.worldObj.markBlockForUpdate(x, y, z);
 					return true;
 				}
 
