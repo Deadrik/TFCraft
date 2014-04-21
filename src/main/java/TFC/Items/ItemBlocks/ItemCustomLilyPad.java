@@ -46,6 +46,8 @@ public class ItemCustomLilyPad extends ItemColored
 				if (TFCBlocks.LilyPad.canBlockStay(par2World, i, j + 1, k)&& par2World.isAirBlock(i, j + 1, k))
 				{
 					par2World.setBlock(i, j + 1, k, TFCBlocks.LilyPad);
+					par2World.spawnParticle("splash", i, j + 2, k, 0.0D, 0.0D, 0.0D);
+					par2World.playSoundEffect((double)((float)i + 0.5F), (double)((float)j + 0.5F), (double)((float)k + 0.5F), "random.splash", 0.5F, TFCBlocks.LilyPad.stepSound.getPitch() * 0.8F);
 					if (!par3EntityPlayer.capabilities.isCreativeMode)
 						--par1ItemStack.stackSize;
 				}
