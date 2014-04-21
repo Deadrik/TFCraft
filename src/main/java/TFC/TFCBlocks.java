@@ -313,6 +313,7 @@ public class TFCBlocks
 
 	public static Block Bookshelf;
 	public static Block Torch;
+	public static Block Chest;
 
 	public static void RegisterBlocks()
 	{
@@ -469,6 +470,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Fungi, TFC.Items.ItemBlocks.ItemFungi.class, "Fungi");
 		GameRegistry.registerBlock(Bookshelf, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Bookshelf");
 		GameRegistry.registerBlock(Torch, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Torch");
+		GameRegistry.registerBlock(Chest, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Chest");
 	}
 
 	public static void LoadBlocks()
@@ -489,17 +491,16 @@ public class TFCBlocks
 		Blocks.red_mushroom.setCreativeTab(null);
 		Blocks.bookshelf.setCreativeTab(null);
 		Blocks.torch.setCreativeTab(null);
+		Blocks.chest.setCreativeTab(null);
 
 
 		Bookshelf = new BlockCustomBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("Bookshelf").setBlockTextureName("bookshelf");
 		Torch = new BlockTorch().setHardness(0.0F).setLightLevel(0.9375F).setStepSound(Block.soundTypeWood).setBlockName("Torch").setBlockTextureName("torch_on");
+		Chest = new BlockChestTFC(0).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("Chest");
 
+		// This is not used anywhere
+		//Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.oak_stairs), "oak_stairs", (new BlockStair(Material.wood)).setBlockName("stairsWood"));
 
-
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.oak_stairs), "oak_stairs",
-				(new BlockStair(Material.wood)).setBlockName("stairsWood"));
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.chest), "chest",
-				(new BlockChestTFC(0)).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("chest"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.crafting_table), "crafting_table",
 				(new BlockWorkbench()).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("workbench").setBlockTextureName("crafting_table"));
 

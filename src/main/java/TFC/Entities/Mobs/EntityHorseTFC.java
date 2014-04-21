@@ -39,6 +39,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.Entities.IAnimal;
@@ -526,7 +527,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	{
 		if (!this.worldObj.isRemote && this.isChested())
 		{
-			this.dropItem(Item.getItemFromBlock(Blocks.chest), 1);
+			this.dropItem(Item.getItemFromBlock(TFCBlocks.Chest), 1);
 			this.setChested(false);
 		}
 	}
@@ -959,7 +960,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 					return true;
 				}
 
-				if (!flag && this.func_110229_cs() && !this.isChested() && itemstack.getItem() == Item.getItemFromBlock(Blocks.chest))
+				if (!flag && this.func_110229_cs() && !this.isChested() && itemstack.getItem() == Item.getItemFromBlock(TFCBlocks.Chest))
 				{
 					this.setChested(true);
 					this.playSound("mob.chickenplop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);

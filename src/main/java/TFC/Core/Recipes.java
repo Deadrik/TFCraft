@@ -192,7 +192,7 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.dye,1,12),new Object[]{new ItemStack(TFCItems.Powder,1,8),new ItemStack(TFCItems.Powder,1,0),new ItemStack(TFCBlocks.Sand2,1,32767)});
 
 		//Chest
-		GameRegistry.addRecipe(new ItemStack(Blocks.chest, 1), new Object[] { "###","# #","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, 32767)});
+		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Chest, 1), new Object[] { "###","# #","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, 32767)});
 
 		// Stone Bricks
 		for(int i = 0; i < Chisels.length; i++)
@@ -328,7 +328,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(Blocks.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), TFCItems.WroughtIronIngot, Character.valueOf('s'), new ItemStack(Items.stick,1,32767)});
 		GameRegistry.addRecipe(new ItemStack(Blocks.golden_rail, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), TFCItems.GoldIngot, Character.valueOf('s'), new ItemStack(Items.stick,1,32767), Character.valueOf('r'), Items.redstone});
 		GameRegistry.addRecipe(new ItemStack(Items.minecart, 1), new Object[] { "P P","PPP", Character.valueOf('P'), TFCItems.WroughtIronSheet});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.minecartCrate, 1), new Object[] { new ItemStack(Blocks.chest), new ItemStack(Items.minecart)});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.minecartCrate, 1), new Object[] { new ItemStack(TFCBlocks.Chest), new ItemStack(Items.minecart)});
 		GameRegistry.addRecipe(new ItemStack(Items.shears, 1), new Object[] { "P "," P", Character.valueOf('P'), TFCItems.WroughtIronIngot});
 		GameRegistry.addRecipe(new ItemStack(Blocks.lever, 1), new Object[] { "P","H", Character.valueOf('P'), new ItemStack(Items.stick,1,32767), Character.valueOf('H'), new ItemStack(TFCItems.LooseRock,1,32767)});
 		GameRegistry.addRecipe(new ItemStack(Blocks.trapdoor, 1, 0), new Object[] { "###","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767)});

@@ -15,6 +15,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
+import TFC.TFCBlocks;
 import TFC.Containers.ContainerChestTFC;
 import TFC.Core.TFC_Core;
 import cpw.mods.fml.relauncher.Side;
@@ -173,16 +174,16 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 			this.adjacentChestXNeg = null;
 			this.adjacentChestZPos = null;
 
-			if (this.worldObj.getBlock(this.xCoord - 1, this.yCoord, this.zCoord) == Blocks.chest)
+			if (this.worldObj.getBlock(this.xCoord - 1, this.yCoord, this.zCoord) == TFCBlocks.Chest)
 				this.adjacentChestXNeg = (TileEntityChestTFC)this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
 
-			if (this.worldObj.getBlock(this.xCoord + 1, this.yCoord, this.zCoord) == Blocks.chest)
+			if (this.worldObj.getBlock(this.xCoord + 1, this.yCoord, this.zCoord) == TFCBlocks.Chest)
 				this.adjacentChestXPos = (TileEntityChestTFC)this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
 
-			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord - 1) == Blocks.chest)
+			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord - 1) == TFCBlocks.Chest)
 				this.adjacentChestZNeg = (TileEntityChestTFC)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
 
-			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord + 1) == Blocks.chest)
+			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord + 1) == TFCBlocks.Chest)
 				this.adjacentChestZPos = (TileEntityChestTFC)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
 
 			if (this.adjacentChestZNeg != null)
@@ -293,14 +294,14 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 	public void openInventory()
 	{
 		++this.numPlayersUsing;
-		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, Blocks.chest, 1, this.numPlayersUsing);
+		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, TFCBlocks.Chest, 1, this.numPlayersUsing);
 	}
 
 	@Override
 	public void closeInventory()
 	{
 		--this.numPlayersUsing;
-		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, Blocks.chest, 1, this.numPlayersUsing);
+		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, TFCBlocks.Chest, 1, this.numPlayersUsing);
 	}
 
 	@Override
