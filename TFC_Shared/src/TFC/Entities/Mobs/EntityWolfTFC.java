@@ -376,7 +376,13 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		}
 	}
 
-	@Override
+    @Override
+    protected boolean canDespawn()
+    {
+        return false;
+    }
+
+    @Override
 	public void mate(IAnimal otherAnimal) 
 	{
 		if (sex == 0)
