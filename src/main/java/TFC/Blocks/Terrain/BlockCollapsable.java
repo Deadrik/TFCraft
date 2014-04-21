@@ -63,7 +63,7 @@ public class BlockCollapsable extends BlockTerraContainer
 			return true;
 		if (l == TFCBlocks.TallGrass)
 			return true;
-		if (l == Blocks.torch)
+		if (l == TFCBlocks.Torch)
 			return true;
 		Material material = l.getMaterial();
 		if (material == Material.water || material == Material.lava)

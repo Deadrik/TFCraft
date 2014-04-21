@@ -645,7 +645,7 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Items.wooden_hoe,1));
 			RemoveRecipe(new ItemStack(Items.wooden_sword,1));
 			RemoveRecipe(new ItemStack(Blocks.furnace,1));
-			RemoveRecipe(new ItemStack(Blocks.torch,4));
+			RemoveRecipe(new ItemStack(TFCBlocks.Torch,4));
 			RemoveRecipe(new ItemStack(Items.stick,4));
 			RemoveRecipe(new ItemStack(Blocks.planks,4));
 			RemoveRecipe(new ItemStack(Items.chest_minecart, 1));
