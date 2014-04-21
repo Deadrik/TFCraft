@@ -8,6 +8,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.AchievementList;
+import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 
 public class SlotCraftingWorkbench extends Slot
@@ -84,7 +85,7 @@ public class SlotCraftingWorkbench extends Slot
 		{
 			this.thePlayer.addStat(AchievementList.enchantments, 1);
 		}
-		else if (par1ItemStack.getItem() == Item.getItemFromBlock(Blocks.bookshelf))
+		else if (par1ItemStack.getItem() == Item.getItemFromBlock(TFCBlocks.Bookshelf))
 		{
 			this.thePlayer.addStat(AchievementList.bookcase, 1);
 		}

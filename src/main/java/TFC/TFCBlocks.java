@@ -311,6 +311,8 @@ public class TFCBlocks
 	public static Block SeaGrassFrozen;
 	public static Block SeaGrassFlowing;
 
+	public static Block Bookshelf;
+
 	public static void RegisterBlocks()
 	{
 		GameRegistry.registerBlock(Ore, TFC.Items.ItemOre1.class, "Ore1");
@@ -464,6 +466,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(LilyPad, TFC.Items.ItemBlocks.ItemCustomLilyPad.class, "LilyPad");
 		GameRegistry.registerBlock(Flowers, TFC.Items.ItemBlocks.ItemFlowers.class, "Flowers");
 		GameRegistry.registerBlock(Fungi, TFC.Items.ItemBlocks.ItemFungi.class, "Fungi");
+		GameRegistry.registerBlock(Bookshelf, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Bookshelf");
 	}
 
 	public static void LoadBlocks()
@@ -482,12 +485,11 @@ public class TFCBlocks
 		Blocks.red_flower.setCreativeTab(null);
 		Blocks.brown_mushroom.setCreativeTab(null);
 		Blocks.red_mushroom.setCreativeTab(null);
+		Blocks.bookshelf.setCreativeTab(null);
 
 
+		Bookshelf = new BlockCustomBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("Bookshelf").setBlockTextureName("bookshelf");
 
-
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.bookshelf), "bookshelf",
-				(new BlockCustomBookshelf()).setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("bookshelf").setBlockTextureName("bookshelf"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.torch), "torch",
 				(new BlockTorch()).setHardness(0.0F).setLightLevel(0.9375F).setStepSound(Block.soundTypeWood).setBlockName("torch").setBlockTextureName("torch_on"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.oak_stairs), "oak_stairs",

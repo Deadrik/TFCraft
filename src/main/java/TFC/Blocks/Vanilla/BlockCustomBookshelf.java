@@ -10,8 +10,8 @@ import net.minecraft.util.IIcon;
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockTerra;
 
-public class BlockCustomBookshelf extends BlockTerra {
-
+public class BlockCustomBookshelf extends BlockTerra
+{
 	public BlockCustomBookshelf()
 	{
 		super(Material.wood);
