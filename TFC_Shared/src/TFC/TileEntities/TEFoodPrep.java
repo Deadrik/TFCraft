@@ -28,7 +28,7 @@ import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
+public class TEFoodPrep extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[6];
 	private float[] weights = new float[]{10,4,4,2};
@@ -207,7 +207,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		for(int i = 0; i < 4; i++)
 		{
 			ItemStack is = getStackInSlot(i);
-			if(is != null && ((ItemFoodTFC)is.getItem()).getFoodWeight(is) >= weights[i])
+			if(is != null && ((IFood)is.getItem()).getFoodWeight(is) >= weights[i])
 				w += weights[i];
 		}
 		return w;
