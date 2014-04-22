@@ -301,23 +301,25 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public boolean interact(EntityPlayer player)
 	{
-		if(!worldObj.isRemote){
+		if(!worldObj.isRemote)
+		{
 			//player.addChatMessage(getGender() == GenderEnum.FEMALE ? "Female" : "Male");
 			if(getGender()==GenderEnum.FEMALE && pregnant){
 				player.addChatMessage("Pregnant");
 			}
 			//player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
-		}
-		if(getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks())
-		{
-			ItemStack var2 = player.inventory.getCurrentItem();
-			if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.itemID) 
+
+			if(getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks())
 			{
-				ItemStack is = new ItemStack(TFCItems.WoodenBucketMilk);
-				ItemCustomBucketMilk.createTag(is, 20f);
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
-				hasMilkTime = TFC_Time.getTotalTicks() + TFC_Time.dayLength;//Can be milked once every day
-				return true;
+				ItemStack var2 = player.inventory.getCurrentItem();
+				if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.itemID) 
+				{
+					ItemStack is = new ItemStack(TFCItems.WoodenBucketMilk);
+					ItemCustomBucketMilk.createTag(is, 20f);
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+					hasMilkTime = TFC_Time.getTotalTicks() + TFC_Time.dayLength;//Can be milked once every day
+					return true;
+				}
 			}
 		}
 
