@@ -133,7 +133,7 @@ import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFirepit;
-import TFC.TileEntities.TileEntityFoodPrep;
+import TFC.TileEntities.TEFoodPrep;
 import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TileEntityPottery;
 import TFC.TileEntities.TileEntityToolRack;
@@ -260,7 +260,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TESeaWeed.class, "seaweed", new TESRSeaWeed());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TESRPottery());
-		ClientRegistry.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep", new TESRFoodPrep());
+		ClientRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep", new TESRFoodPrep());
 		ClientRegistry.registerTileEntity(TileEntityBellows.class, "Bellows", new TESRBellows());
 		ClientRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack", new TESRToolrack());
 		ClientRegistry.registerTileEntity(TileEntityAnvil.class, "Anvil", new TESRAnvil());

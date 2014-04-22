@@ -170,9 +170,41 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	{
 		return 6f;
 	}
-	
+
 	@Override
 	public EnumItemReach getReach(ItemStack is){
 		return EnumItemReach.SHORT;
+	}
+
+	@Override
+	public float getFoodWeight(ItemStack is)
+	{
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
+		{
+			NBTTagCompound nbt = is.getTagCompound();
+			return nbt.getFloat("foodWeight");
+		}
+		return 0f;
+	}
+
+	@Override
+	public float getFoodDecay(ItemStack is)
+	{
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodDecay"))
+		{
+			NBTTagCompound nbt = is.getTagCompound();
+			return nbt.getFloat("foodDecay");
+		}
+		return 0f;
+	}
+
+	@Override
+	public boolean isEdible() {
+		return true;
+	}
+
+	@Override
+	public boolean isUsable() {
+		return false;
 	}
 }

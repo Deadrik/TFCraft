@@ -1,11 +1,9 @@
 package TFC.Items.ItemBlocks;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import TFC.Reference;
 import TFC.API.Constant.Global;
-import TFC.API.Enums.EnumSize;
 
 public class ItemPlankBlock2 extends ItemTerraBlock
 {
@@ -24,10 +22,5 @@ public class ItemPlankBlock2 extends ItemTerraBlock
 		{
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+MetaNames[i]+" Plank");
 		}
-	}
-
-	@Override
-	public EnumSize getSize(ItemStack is) {
-		return EnumSize.MEDIUM;
 	}
 }

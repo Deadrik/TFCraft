@@ -43,6 +43,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	public float decayRate = 1.0f;
 
+	public boolean isEdible = true;
+	public boolean canBeUsedRaw = true;
+
 	public ItemFoodTFC(int id, int foodid, EnumFoodGroup fg)
 	{
 		super(id);
@@ -55,6 +58,16 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		this.hasSubtypes = false;
 	}
 
+	public ItemFoodTFC(int id, int foodid, EnumFoodGroup fg, boolean edible)
+	{
+		this(id, foodid, fg);
+		isEdible = edible;
+	}
+	public ItemFoodTFC(int id, int foodid, EnumFoodGroup fg, boolean edible, boolean usable)
+	{
+		this(id, foodid, fg, edible);
+		canBeUsedRaw = usable;
+	}
 
 	public ItemFoodTFC setDecayRate(float f)
 	{
@@ -169,7 +182,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-		if(!world.isRemote)
+		if(!world.isRemote && isEdible)
 		{
 			foodstats.eatFood(is);
 
@@ -225,6 +238,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		return is;
 	}
 
+	@Override
 	public float getFoodWeight(ItemStack is)
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
@@ -235,6 +249,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		return 0f;
 	}
 
+	@Override
 	public float getFoodDecay(ItemStack is)
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodDecay"))
@@ -311,5 +326,15 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) 
 	{
 		return null;
+	}
+
+	@Override
+	public boolean isEdible() {
+		return isEdible;
+	}
+
+	@Override
+	public boolean isUsable() {
+		return canBeUsedRaw;
 	}
 }

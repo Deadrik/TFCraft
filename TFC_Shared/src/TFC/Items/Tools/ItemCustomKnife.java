@@ -14,7 +14,7 @@ import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.Core.TFC_Core;
 import TFC.Core.Util.StringUtil;
-import TFC.TileEntities.TileEntityFoodPrep;
+import TFC.TileEntities.TEFoodPrep;
 
 public class ItemCustomKnife extends ItemWeapon
 {
@@ -58,7 +58,7 @@ public class ItemCustomKnife extends ItemWeapon
 					(mat == Material.wood || mat == Material.rock || mat == Material.iron))
 			{
 				world.setBlock(x, y+1, z, TFCBlocks.FoodPrep.blockID);
-				TileEntityFoodPrep te = (TileEntityFoodPrep) world.getBlockTileEntity(x, y+1, z);
+				TEFoodPrep te = (TEFoodPrep) world.getBlockTileEntity(x, y+1, z);
 				if(te != null)
 				{
 					te.setInventorySlotContents(5, entityplayer.inventory.mainInventory[hasBowl]);

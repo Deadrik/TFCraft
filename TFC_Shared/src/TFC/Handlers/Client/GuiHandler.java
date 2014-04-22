@@ -41,7 +41,7 @@ import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFirepit;
-import TFC.TileEntities.TileEntityFoodPrep;
+import TFC.TileEntities.TEFoodPrep;
 import TFC.TileEntities.TileEntityForge;
 import TFC.TileEntities.TileEntityLogPile;
 import TFC.TileEntities.TileEntityQuern;
@@ -124,7 +124,7 @@ public class GuiHandler extends TFC.Handlers.GuiHandler
 		}
 		case 32:
 		{
-			return new GuiFoodPrep(player.inventory, ((TileEntityFoodPrep) te), world, x, y, z);
+			return new GuiFoodPrep(player.inventory, ((TEFoodPrep) te), world, x, y, z);
 		}
 		case 33:
 		{
