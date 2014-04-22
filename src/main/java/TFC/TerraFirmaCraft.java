@@ -176,8 +176,8 @@ public class TerraFirmaCraft
 		//MinecraftForge.EVENT_BUS.register(new TFC_Achievements());
 
 		// Register Crafting Handler
-		MinecraftForge.EVENT_BUS.register(new CraftingHandler());
-		MinecraftForge.EVENT_BUS.register(new FoodCraftingHandler());
+		FMLCommonHandler.instance().bus().register(new CraftingHandler());
+		FMLCommonHandler.instance().bus().register(new FoodCraftingHandler());
 
 		// Register the Entity Spawn Handler
 		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
