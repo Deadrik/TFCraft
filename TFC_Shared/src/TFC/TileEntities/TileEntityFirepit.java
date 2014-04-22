@@ -632,11 +632,11 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 			{
 				inputItemTemp = TFC_ItemHeat.GetTemp(fireItemStacks[1]);
 
-				if(fireTemp > inputItemTemp)
+				if(fireTemp > 100)
 				{
 					inputItemTemp += TFC_ItemHeat.getTempIncrease(fireItemStacks[1]);
 				}
-				if(fireTemp < inputItemTemp)
+				else if(fireTemp < inputItemTemp)
 				{
 					inputItemTemp -= 1;
 				}

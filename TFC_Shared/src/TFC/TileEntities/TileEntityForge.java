@@ -117,11 +117,11 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			else
 				inputItemTemps[i] = 0;
 
-			if(fireTemp*mod > inputItemTemps[i])
+			if(fireTemp*mod > 100)
 			{
 				inputItemTemps[i] += TFC_ItemHeat.getTempIncrease(fireItemStacks[i]);
 			}
-			else if(fireTemp*mod < inputItemTemps[i])
+			else if(fireTemp*mod < 100)
 			{
 				inputItemTemps[i] -= 1;
 			}
@@ -446,8 +446,6 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			FuelStack[7] = fireItemStacks[12];
 			FuelStack[8] = fireItemStacks[13];
 
-			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
-
 			//Now we cook the input item
 			CookItemsNew(0);
 			CookItemsNew(1);
@@ -483,17 +481,18 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			}
 			else if(fuelTimeLeft <= 0 && fireTemp >= 1 && fireItemStacks[7] != null && 
 					(!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
+			{
 				//here we set the temp and burn time based on the fuel in the bottom slot.
 				if(fireItemStacks[7] != null)
 				{
 					if(fireItemStacks[7].itemID == Item.coal.itemID && fireItemStacks[7].getItemDamage() == 0)
 					{
-						fuelTimeLeft = 1100;
+						fuelTimeLeft = 2200;
 						fuelBurnTemp = 1400;
 					}
 					if(fireItemStacks[7].itemID == Item.coal.itemID && fireItemStacks[7].getItemDamage() == 1)
 					{
-						fuelTimeLeft = 900;
+						fuelTimeLeft = 1800;
 						fuelBurnTemp = 1350;
 					}
 					fireItemStacks[7] = null;
@@ -504,6 +503,11 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 					float desiredTemp = handleTemp();
 					handleTempFlux(desiredTemp);
 				}
+			}
+			else
+			{
+				TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
+			}
 
 			//Here we handle the bellows
 			handleAirReduction();

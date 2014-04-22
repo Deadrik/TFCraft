@@ -595,7 +595,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			inputCompound = fireItemStacks[i].getTagCompound();
 			inputItemTemps[i] = TFC_ItemHeat.GetTemp(fireItemStacks[i]);
 
-			if (fireTemp > inputItemTemps[i])
+			if (fireTemp > 100)
 			{
 				inputItemTemps[i] += TFC_ItemHeat.getTempIncrease(fireItemStacks[i]);
 			} 

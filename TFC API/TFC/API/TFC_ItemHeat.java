@@ -11,127 +11,127 @@ public class TFC_ItemHeat
 	{
 		// \u2605 equals *
 		String phrase = "";
-		if(temp < 100)
+		if(temp < 400)
 		{
 			phrase = StringUtil.localize("gui.ItemHeat.Warming");
-			if(temp>(80 * 0.2))
-				phrase = phrase + "\u2605";
-			if(temp>(80 * 0.4))
-				phrase = phrase + "\u2605";
-			if(temp>(80 * 0.6))
-				phrase = phrase + "\u2605";
-			if(temp>(80 * 0.8))
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 100 && temp < 200)
-		{
-			phrase = StringUtil.localize("gui.ItemHeat.Hot");
-			if(temp>120)
-				phrase = phrase + "\u2605";
-			if(temp>140)
+			if(temp>80)
 				phrase = phrase + "\u2605";
 			if(temp>160)
 				phrase = phrase + "\u2605";
-			if(temp>180)
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 200 &&  temp < 400)
-		{
-			phrase = StringUtil.localize("gui.ItemHeat.VeryHot");
 			if(temp>240)
-				phrase = phrase + "\u2605";
-			if(temp>280)
 				phrase = phrase + "\u2605";
 			if(temp>320)
 				phrase = phrase + "\u2605";
-			if(temp>360)
-				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 400 &&  temp < 500)
+		else if(temp >= 400 && temp < 800)
 		{
-			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.FaintRed");
-			if(temp>420)
-				phrase = phrase + "\u2605";
-			if(temp>440)
-				phrase = phrase + "\u2605";
-			if(temp>460)
-				phrase = phrase + "\u2605";
+			phrase = StringUtil.localize("gui.ItemHeat.Hot");
 			if(temp>480)
 				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 500 &&  temp < 700)
-		{
-			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.DarkRed");
-			if(temp>540)
+			if(temp>560)
 				phrase = phrase + "\u2605";
-			if(temp>580)
+			if(temp>640)
 				phrase = phrase + "\u2605";
-			if(temp>620)
-				phrase = phrase + "\u2605";
-			if(temp>660)
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 700 &&  temp < 800)
-		{
-			phrase = "\247c" + StringUtil.localize("gui.ItemHeat.BrightRed");
 			if(temp>720)
 				phrase = phrase + "\u2605";
-			if(temp>740)
-				phrase = phrase + "\u2605";
-			if(temp>760)
-				phrase = phrase + "\u2605";
-			if(temp>780)
-				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 800 &&  temp < 900)
+		else if(temp >= 800 &&  temp < 1100)
 		{
-			phrase = "\2476" + StringUtil.localize("gui.ItemHeat.Orange");
+			phrase = StringUtil.localize("gui.ItemHeat.VeryHot");
+			if(temp>860)
+				phrase = phrase + "\u2605";
 			if(temp>920)
 				phrase = phrase + "\u2605";
-			if(temp>940)
-				phrase = phrase + "\u2605";
-			if(temp>960)
-				phrase = phrase + "\u2605";
 			if(temp>980)
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 900 &&  temp < 1000)
-		{
-			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.Yellow");
-			if(temp>920)
-				phrase = phrase + "\u2605";
-			if(temp>940)
-				phrase = phrase + "\u2605";
-			if(temp>960)
-				phrase = phrase + "\u2605";
-			if(temp>980)
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 1000 &&  temp < 1100)
-		{
-			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.YellowWhite");
-			if(temp>1020)
-				phrase = phrase + "\u2605";
-			if(temp>1040)
-				phrase = phrase + "\u2605";
-			if(temp>1060)
-				phrase = phrase + "\u2605";
-			if(temp>1080)
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 1100 &&  temp < 1200)
-		{
-			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.White");
-			if(temp>1120)
 				phrase = phrase + "\u2605";
 			if(temp>1140)
 				phrase = phrase + "\u2605";
+		}
+		else if(temp >= 1100 &&  temp < 1400)
+		{
+			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.FaintRed");
 			if(temp>1160)
 				phrase = phrase + "\u2605";
-			if(temp>1180)
+			if(temp>1220)
+				phrase = phrase + "\u2605";
+			if(temp>1280)
+				phrase = phrase + "\u2605";
+			if(temp>1340)
 				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 1200)
+		else if(temp >= 1400 &&  temp < 1700)
+		{
+			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.DarkRed");
+			if(temp>1460)
+				phrase = phrase + "\u2605";
+			if(temp>1520)
+				phrase = phrase + "\u2605";
+			if(temp>1580)
+				phrase = phrase + "\u2605";
+			if(temp>1640)
+				phrase = phrase + "\u2605";
+		}
+		else if(temp >= 1700 &&  temp < 2000)
+		{
+			phrase = "\247c" + StringUtil.localize("gui.ItemHeat.BrightRed");
+			if(temp>1760)
+				phrase = phrase + "\u2605";
+			if(temp>1820)
+				phrase = phrase + "\u2605";
+			if(temp>1880)
+				phrase = phrase + "\u2605";
+			if(temp>1940)
+				phrase = phrase + "\u2605";
+		}
+		else if(temp >= 2000 &&  temp < 2400)
+		{
+			phrase = "\2476" + StringUtil.localize("gui.ItemHeat.Orange");
+			if(temp>2080)
+				phrase = phrase + "\u2605";
+			if(temp>2160)
+				phrase = phrase + "\u2605";
+			if(temp>2240)
+				phrase = phrase + "\u2605";
+			if(temp>2320)
+				phrase = phrase + "\u2605";
+		}
+		else if(temp >= 2400 &&  temp < 2700)
+		{
+			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.Yellow");
+			if(temp>2460)
+				phrase = phrase + "\u2605";
+			if(temp>2520)
+				phrase = phrase + "\u2605";
+			if(temp>2580)
+				phrase = phrase + "\u2605";
+			if(temp>2640)
+				phrase = phrase + "\u2605";
+		}
+		else if(temp >= 2700 &&  temp < 3000)
+		{
+			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.YellowWhite");
+			if(temp>2760)
+				phrase = phrase + "\u2605";
+			if(temp>2820)
+				phrase = phrase + "\u2605";
+			if(temp>2880)
+				phrase = phrase + "\u2605";
+			if(temp>2940)
+				phrase = phrase + "\u2605";
+		}
+		else if(temp >= 3000 &&  temp < 3500)
+		{
+			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.White");
+			if(temp>3100)
+				phrase = phrase + "\u2605";
+			if(temp>3200)
+				phrase = phrase + "\u2605";
+			if(temp>3300)
+				phrase = phrase + "\u2605";
+			if(temp>3400)
+				phrase = phrase + "\u2605";
+		}
+		else if(temp >= 3500)
 			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.BrilliantWhite");
 
 		if(temp > meltTemp)
@@ -143,11 +143,11 @@ public class TFC_ItemHeat
 	public static String getHeatColorFood(int temp, int meltTemp)
 	{
 		if(temp < meltTemp)
-			if(temp < 40)
+			if(temp < 50)
 				return StringUtil.localize("gui.FoodHeat.Cold");
-			else if(temp < 80)
+			else if(temp < 100)
 				return "\2474" + StringUtil.localize("gui.FoodHeat.Warm");
-			else if(temp < 120)
+			else if(temp < 150)
 				return "\2474" + StringUtil.localize("gui.ItemHeat.Hot");
 			else
 				return "\2474" + StringUtil.localize("gui.ItemHeat.VeryHot");

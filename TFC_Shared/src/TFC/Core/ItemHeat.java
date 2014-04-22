@@ -26,27 +26,27 @@ public class ItemHeat
 		 * 1800 ticks = 90 seconds
 		 */
 
-		HeatRaw BismuthRaw = new HeatRaw(600);
-		HeatRaw BismuthBronzeRaw = new HeatRaw(900);
-		HeatRaw BlackBronzeRaw = new HeatRaw(900);
-		HeatRaw BlackSteelRaw = new HeatRaw(1500);
-		HeatRaw BlueSteelRaw = new HeatRaw(1800);
-		HeatRaw BrassRaw = new HeatRaw(900);
-		HeatRaw BronzeRaw = new HeatRaw(900);
-		HeatRaw CopperRaw = new HeatRaw(900);
-		HeatRaw GoldRaw = new HeatRaw(600);
-		HeatRaw IronRaw = new HeatRaw(1500);
-		HeatRaw LeadRaw = new HeatRaw(400);
-		HeatRaw NickelRaw = new HeatRaw(1500);
-		HeatRaw PigIronRaw = new HeatRaw(1500);
-		HeatRaw PlatinumRaw = new HeatRaw(1500);
-		HeatRaw RedSteelRaw = new HeatRaw(1800);
-		HeatRaw RoseGoldRaw = new HeatRaw(900);
-		HeatRaw SilverRaw = new HeatRaw(600);
-		HeatRaw SteelRaw = new HeatRaw(1500);//sh = 0.63F; boil = 3500; melt = 1540;
-		HeatRaw SterlingSilverRaw = new HeatRaw(900);//sh = 0.72F; boil = 2212; melt = 893;
-		HeatRaw TinRaw = new HeatRaw(600);
-		HeatRaw ZincRaw = new HeatRaw(600);//sh = 0.66F; boil = 907; melt = 420;
+		HeatRaw BismuthRaw = new HeatRaw(1200);
+		HeatRaw BismuthBronzeRaw = new HeatRaw(1800);
+		HeatRaw BlackBronzeRaw = new HeatRaw(1800);
+		HeatRaw BlackSteelRaw = new HeatRaw(3000);
+		HeatRaw BlueSteelRaw = new HeatRaw(3600);
+		HeatRaw BrassRaw = new HeatRaw(1800);
+		HeatRaw BronzeRaw = new HeatRaw(1800);
+		HeatRaw CopperRaw = new HeatRaw(1800);
+		HeatRaw GoldRaw = new HeatRaw(1200);
+		HeatRaw IronRaw = new HeatRaw(3000);
+		HeatRaw LeadRaw = new HeatRaw(800);
+		HeatRaw NickelRaw = new HeatRaw(3000);
+		HeatRaw PigIronRaw = new HeatRaw(3000);
+		HeatRaw PlatinumRaw = new HeatRaw(3000);
+		HeatRaw RedSteelRaw = new HeatRaw(3600);
+		HeatRaw RoseGoldRaw = new HeatRaw(1800);
+		HeatRaw SilverRaw = new HeatRaw(1200);
+		HeatRaw SteelRaw = new HeatRaw(3000);//sh = 0.63F; boil = 3500; melt = 1540;
+		HeatRaw SterlingSilverRaw = new HeatRaw(1800);//sh = 0.72F; boil = 2212; melt = 893;
+		HeatRaw TinRaw = new HeatRaw(1200);
+		HeatRaw ZincRaw = new HeatRaw(1200);//sh = 0.66F; boil = 907; melt = 420;
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,0), CopperRaw));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,1), GoldRaw));
