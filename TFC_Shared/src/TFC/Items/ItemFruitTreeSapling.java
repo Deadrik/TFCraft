@@ -17,12 +17,10 @@ import TFC.TileEntities.TileEntityFruitTreeWood;
 
 public class ItemFruitTreeSapling extends ItemTerra
 {
-	int offset;
 	Icon[] icons;
-	public ItemFruitTreeSapling(int id, int off)
+	public ItemFruitTreeSapling(int id)
 	{
 		super(id);
-		offset = off;
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabFood);
@@ -39,7 +37,7 @@ public class ItemFruitTreeSapling extends ItemTerra
 				world.getBlockId(x, y+1, z) == 0 && !world.isRemote)
 		{
 
-			world.setBlock(x, y+1, z, TFCBlocks.fruitTreeWood.blockID, stack.getItemDamage()+offset, 0x2);
+			world.setBlock(x, y+1, z, TFCBlocks.fruitTreeWood.blockID, stack.getItemDamage(), 0x2);
 
 			((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setTrunk(true);
 			((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setHeight(0);
@@ -55,16 +53,9 @@ public class ItemFruitTreeSapling extends ItemTerra
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		if(this.itemID == TFCItems.FruitTreeSapling1.itemID)
+		for(int i = 0; i < MetaNames.length; i++) 
 		{
-			for(int i = 0; i < 8; i++) 
-			{
-				list.add(new ItemStack(this,1,i));
-			}
-		}
-		else
-		{
-			list.add(new ItemStack(this,1,0));
+			list.add(new ItemStack(this,1,i));
 		}
 	}
 

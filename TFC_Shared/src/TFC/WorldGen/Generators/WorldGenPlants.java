@@ -30,8 +30,8 @@ public class WorldGenPlants implements IWorldGenerator
 	static WorldGenCustomFruitTree cherryTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 6);
 	static WorldGenCustomFruitTree peachTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 7);
 
-	static WorldGenCustomFruitTree plumTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves2.blockID, 0);
-	static WorldGenCustomFruitTree cacaoTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves2.blockID, 1);
+	static WorldGenCustomFruitTree plumTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves2.blockID, 8);
+	static WorldGenCustomFruitTree cacaoTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves2.blockID, 9);
 
 	static WorldGenBerryBush wintergreenGen = new WorldGenBerryBush(false, 0, 12, 1, 5);
 	static WorldGenBerryBush blueberryGen = new WorldGenBerryBush(false, 1, 6, 1, 4);

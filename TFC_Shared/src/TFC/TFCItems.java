@@ -675,7 +675,7 @@ public class TFCItems
 	public static Item SeedsSquash;
 	public static Item SeedsJute;
 
-	public static Item FruitTreeSapling1;
+	public static Item FruitTreeSapling;
 	public static Item FruitTreeSapling2;
 
 	public static Item RedApple;

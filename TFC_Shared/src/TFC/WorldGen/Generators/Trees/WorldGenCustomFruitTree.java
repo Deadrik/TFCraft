@@ -125,7 +125,7 @@ public class WorldGenCustomFruitTree extends WorldGenerator
                 for (int z = 1; z >= -1; z--)
                 {
                     if(world.getBlockId(i+x, j+y, k+z) == 0) {
-                        world.setBlock(i+x, j+y, k+z, leavesId, metaId, 0x2);
+                        world.setBlock(i+x, j+y, k+z, leavesId, metaId & 7, 0x2);
                     }
                 }
             }
