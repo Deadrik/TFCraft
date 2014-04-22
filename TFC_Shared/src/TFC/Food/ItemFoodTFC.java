@@ -14,6 +14,7 @@ import TFC.TFCItems;
 import TFC.API.IFood;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Constant.Global;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumFoodGroup;
@@ -21,7 +22,6 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Util.StringUtil;
@@ -93,13 +93,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
-			if(stackTagCompound.hasKey("temperature"))
+			if(TFC_ItemHeat.HasTemp(is))
 			{
-				float temp = stackTagCompound.getFloat("temperature");
-				float meltTemp = TFC_ItemHeat.getMeltingPoint(is);
-
+				int meltTemp = TFC_ItemHeat.IsCookable(is);
 				if(meltTemp != -1)
-					arraylist.add(TFC_ItemHeat.getHeatColorFood(temp, meltTemp));
+					arraylist.add(TFC_ItemHeat.getHeatColorFood(TFC_ItemHeat.GetTemp(is), meltTemp));
 			}
 		}
 	}
@@ -212,7 +210,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	public boolean isHot(ItemStack is)
 	{
-		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) *0.8)
+		if(TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is) *0.8)
 			return true;
 		else
 			return false;

@@ -3,44 +3,50 @@ package TFC.Core;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRaw;
 import TFC.API.HeatRegistry;
-import TFC.API.Metal;
-import TFC.API.TFCOptions;
-import TFC.Core.Util.StringUtil;
 
-public class TFC_ItemHeat 
+public class ItemHeat
 {
 
 	public static void SetupItemHeat()
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
 
-		HeatRaw BismuthRaw = new HeatRaw(0.70F, 271);
-		HeatRaw BismuthBronzeRaw = new HeatRaw(0.65F, 985);
-		HeatRaw BlackBronzeRaw = new HeatRaw(0.7F, 1070);
-		HeatRaw BlackSteelRaw = new HeatRaw(0.66F, 1485);
-		HeatRaw BlueSteelRaw = new HeatRaw(0.63F, 1540);
-		HeatRaw BrassRaw = new HeatRaw(0.68F, 930);
-		HeatRaw BronzeRaw = new HeatRaw(0.68F, 950);
-		HeatRaw CopperRaw = new HeatRaw(0.70F, 1084);
-		HeatRaw GoldRaw = new HeatRaw(0.75F, 1063);
-		HeatRaw IronRaw = new HeatRaw(0.67F, 1536);
-		HeatRaw LeadRaw = new HeatRaw(0.75F, 328);
-		HeatRaw NickelRaw = new HeatRaw(0.68F, 1453);
-		HeatRaw PigIronRaw = new HeatRaw(0.64F, 1500);
-		HeatRaw PlatinumRaw = new HeatRaw(0.82F, 1730);
-		HeatRaw RedSteelRaw = new HeatRaw(0.63F, 1540);
-		HeatRaw RoseGoldRaw = new HeatRaw(0.69F, 960);
-		HeatRaw SilverRaw = new HeatRaw(0.72F, 961);
-		HeatRaw SteelRaw = new HeatRaw(0.66F, 1540);//sh = 0.63F; boil = 3500; melt = 1540;
-		HeatRaw SterlingSilverRaw = new HeatRaw(0.72F, 893);//sh = 0.72F; boil = 2212; melt = 893;
-		HeatRaw TinRaw = new HeatRaw(0.69F, 232);
-		HeatRaw ZincRaw = new HeatRaw(0.66F, 420);//sh = 0.66F; boil = 907; melt = 420;
+		/*HeatRaw now uses ticks to determine cook length since it is soo much more manageable than that confusing melt temp/specific 
+		 * heat that was a vestige of very very olden times when real temps were more important
+		 * 
+		 * Reference Times:
+		 * 20 ticks = 1 Second
+		 * 600 ticks = 30 seconds
+		 * 1200 ticks = 60 seconds
+		 * 1800 ticks = 90 seconds
+		 */
+
+		HeatRaw BismuthRaw = new HeatRaw(600);
+		HeatRaw BismuthBronzeRaw = new HeatRaw(900);
+		HeatRaw BlackBronzeRaw = new HeatRaw(900);
+		HeatRaw BlackSteelRaw = new HeatRaw(1200);
+		HeatRaw BlueSteelRaw = new HeatRaw(1800);
+		HeatRaw BrassRaw = new HeatRaw(900);
+		HeatRaw BronzeRaw = new HeatRaw(900);
+		HeatRaw CopperRaw = new HeatRaw(900);
+		HeatRaw GoldRaw = new HeatRaw(600);
+		HeatRaw IronRaw = new HeatRaw(1200);
+		HeatRaw LeadRaw = new HeatRaw(400);
+		HeatRaw NickelRaw = new HeatRaw(1200);
+		HeatRaw PigIronRaw = new HeatRaw(1200);
+		HeatRaw PlatinumRaw = new HeatRaw(1200);
+		HeatRaw RedSteelRaw = new HeatRaw(1800);
+		HeatRaw RoseGoldRaw = new HeatRaw(900);
+		HeatRaw SilverRaw = new HeatRaw(600);
+		HeatRaw SteelRaw = new HeatRaw(1200);//sh = 0.63F; boil = 3500; melt = 1540;
+		HeatRaw SterlingSilverRaw = new HeatRaw(900);//sh = 0.72F; boil = 2212; melt = 893;
+		HeatRaw TinRaw = new HeatRaw(600);
+		HeatRaw ZincRaw = new HeatRaw(600);//sh = 0.66F; boil = 907; melt = 420;
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(25));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,1)).setMinMax(20, 40));
@@ -293,325 +299,30 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincSheet,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincSheet2x,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,4,0)));
 		//Ceramics
-		HeatRaw ClayRaw = new HeatRaw(1.40F, 515.5F);
-		//manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CeramicMold,1,0), ClayRaw,new ItemStack(TFCItems.CeramicMold, 1)));
-		//manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ClaySpindle,1,1), ClayRaw,new ItemStack(TFCItems.SpindleHead, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand, 1, 32767), 0.95F, 800F, new ItemStack(Block.glass, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand2, 1, 32767), 0.95F, 800F, new ItemStack(Block.glass, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand, 1, 32767), 600, new ItemStack(Block.glass, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand2, 1, 32767), 600, new ItemStack(Block.glass, 1)));
 		//Food
-		manager.addIndex(new HeatIndex(new ItemStack(Item.porkRaw, 1), 0.85F, 130.5F, new ItemStack(Item.porkCooked, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(Item.beefRaw, 1), 0.85F, 135.5F, new ItemStack(Item.beefCooked, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.muttonRaw,1),0.85F,135.5F, new ItemStack(TFCItems.muttonCooked,1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.venisonRaw,1),0.85F,135.5F, new ItemStack(TFCItems.venisonCooked,1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CalamariRaw,1),0.85F,135.5F, new ItemStack(TFCItems.CalamariCooked,1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(Item.chickenRaw, 1), 0.85F, 120.5F, new ItemStack(Item.chickenCooked, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(Item.fishRaw, 1), 0.85F, 120.5F, new ItemStack(Item.fishCooked, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(Item.egg, 1), 0.90F, 110.5F, new ItemStack(TFCItems.EggCooked, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.horseMeatRaw, 1), 0.85F, 130.5F, new ItemStack(TFCItems.horseMeatCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.porkRaw, 1), 200, new ItemStack(Item.porkCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.beefRaw, 1), 200, new ItemStack(Item.beefCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.muttonRaw,1),200, new ItemStack(TFCItems.muttonCooked,1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.venisonRaw,1),200, new ItemStack(TFCItems.venisonCooked,1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CalamariRaw,1),200, new ItemStack(TFCItems.CalamariCooked,1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.chickenRaw, 1), 200, new ItemStack(Item.chickenCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.fishRaw, 1), 200, new ItemStack(Item.fishCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.egg, 1), 140, new ItemStack(TFCItems.EggCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.horseMeatRaw, 1), 200, new ItemStack(TFCItems.horseMeatCooked, 1)).setKeepNBT(true));
 
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WheatDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.WheatBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BarleyDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.BarleyBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RyeDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.RyeBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OatDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.OatBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RiceDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.RiceBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.CornBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WheatDough, 1), 200, new ItemStack(TFCItems.WheatBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BarleyDough, 1), 200, new ItemStack(TFCItems.BarleyBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RyeDough, 1), 200, new ItemStack(TFCItems.RyeBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OatDough, 1), 200, new ItemStack(TFCItems.OatBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RiceDough, 1), 200, new ItemStack(TFCItems.RiceBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 200, new ItemStack(TFCItems.CornBread, 1)));
 
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, 32767), 0.9F, 150.5F, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, 32767), 200, new ItemStack(Item.bowlEmpty, 1)));
 
 		//Other
-		manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, 32767), 13.0F, 210F, new ItemStack(Block.torchWood, 2)));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, 32767), 80, new ItemStack(Block.torchWood, 2)));
 
 	}
-
-	public static String getHeatColor(float temp, float meltTemp)
-	{
-		String phrase = "";
-		if(temp < 80)
-		{
-			phrase = StringUtil.localize("gui.ItemHeat.Warming");
-			if(temp>(80 * 0.2))
-				phrase = phrase + "\u2605";
-			if(temp>(80 * 0.4))
-				phrase = phrase + "\u2605";
-			if(temp>(80 * 0.6))
-				phrase = phrase + "\u2605";
-			if(temp>(80 * 0.8))
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 80 && temp < 210)
-		{
-			phrase = StringUtil.localize("gui.ItemHeat.Hot");
-			if(temp>80+((210-80) * 0.2))
-				phrase = phrase + "\u2605";
-			if(temp>80+((210-80) * 0.4))
-				phrase = phrase + "\u2605";
-			if(temp>80+((210-80) * 0.6))
-				phrase = phrase + "\u2605";
-			if(temp>80+((210-80) * 0.8))
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 210 &&  temp < 480)
-		{
-			phrase = StringUtil.localize("gui.ItemHeat.VeryHot");
-			if(temp>210+((480-210) * 0.2))
-				phrase = phrase + "\u2605";
-			if(temp>210+((480-210) * 0.4))
-				phrase = phrase + "\u2605";
-			if(temp>210+((480-210) * 0.6))
-				phrase = phrase + "\u2605";
-			if(temp>210+((480-210) * 0.8))
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 480 &&  temp < 580)
-		{
-			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.FaintRed");
-			if(temp>480+((580-480) * 0.2))
-				phrase = phrase + "\u2605";
-			if(temp>480+((580-480) * 0.4))
-				phrase = phrase + "\u2605";
-			if(temp>480+((580-480) * 0.6))
-				phrase = phrase + "\u2605";
-			if(temp>480+((580-480) * 0.8))
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 580 &&  temp < 730)
-		{
-			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.DarkRed");
-			if(temp>580+((730-580) * 0.2))
-				phrase = phrase + "\u2605";
-			if(temp>580+((730-580) * 0.4))
-				phrase = phrase + "\u2605";
-			if(temp>580+((730-580) * 0.6))
-				phrase = phrase + "\u2605";
-			if(temp>580+((730-580) * 0.8))
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 730 &&  temp < 930)
-		{
-			phrase = "\247c" + StringUtil.localize("gui.ItemHeat.BrightRed");
-			if(temp>730+((930-730) * 0.2))
-				phrase = phrase + "\u2605";
-			if(temp>730+((930-730) * 0.4))
-				phrase = phrase + "\u2605";
-			if(temp>730+((930-730) * 0.6))
-				phrase = phrase + "\u2605";
-			if(temp>730+((930-730) * 0.8))
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 930 &&  temp < 1100)
-		{
-			phrase = "\2476" + StringUtil.localize("gui.ItemHeat.Orange");
-			if(temp>930+((1100-930) * 0.2))
-				phrase = phrase + "\u2605";
-			if(temp>930+((1100-930) * 0.4))
-				phrase = phrase + "\u2605";
-			if(temp>930+((1100-930) * 0.6))
-				phrase = phrase + "\u2605";
-			if(temp>930+((1100-930) * 0.8))
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 1100 &&  temp < 1300)
-		{
-			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.Yellow");
-			if(temp>1100+((1300-1100) * 0.2))
-				phrase = phrase + "\u2605";
-			if(temp>1100+((1300-1100) * 0.4))
-				phrase = phrase + "\u2605";
-			if(temp>1100+((1300-1100) * 0.6))
-				phrase = phrase + "\u2605";
-			if(temp>1100+((1300-1100) * 0.8))
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 1300 &&  temp < 1400)
-		{
-			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.YellowWhite");
-			if(temp>1300+((1400-1300) * 0.2))
-				phrase = phrase + "\u2605";
-			if(temp>1300+((1400-1300) * 0.4))
-				phrase = phrase + "\u2605";
-			if(temp>1300+((1400-1300) * 0.6))
-				phrase = phrase + "\u2605";
-			if(temp>1300+((1400-1300) * 0.8))
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 1400 &&  temp < 1500)
-		{
-			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.White");
-			if(temp>1400+((1500-1400) * 0.2))
-				phrase = phrase + "\u2605";
-			if(temp>1400+((1500-1400) * 0.4))
-				phrase = phrase + "\u2605";
-			if(temp>1400+((1500-1400) * 0.6))
-				phrase = phrase + "\u2605";
-			if(temp>1400+((1500-1400) * 0.8))
-				phrase = phrase + "\u2605";
-		}
-		else if(temp >= 1500)
-			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.BrilliantWhite");
-
-		if(temp > meltTemp)
-			phrase = phrase + "\247f - " + StringUtil.localize("gui.ItemHeat.Liquid");
-
-		return phrase;
-	}
-
-	public static String getHeatColorFood(float temp, float meltTemp)
-	{
-		if(temp < meltTemp)
-			if(temp < meltTemp*0.1F)
-				return StringUtil.localize("gui.FoodHeat.Cold");
-			else if(temp >= meltTemp*0.1F && temp < meltTemp*0.4F)
-				return "\2474" + StringUtil.localize("gui.FoodHeat.Warm");
-			else if(temp >= meltTemp*0.4F && temp < meltTemp*0.8F)
-				return "\2474" + StringUtil.localize("gui.ItemHeat.Hot");
-			else
-				return "\2474" + StringUtil.localize("gui.ItemHeat.VeryHot");
-
-		return StringUtil.localize("gui.ClearSlot");
-	}
-
-	public static String getHeatColorTorch(float temp, float meltTemp)
-	{
-		if(temp < meltTemp)
-			if(temp > 0 && temp < meltTemp*0.8F)
-				return StringUtil.localize("gui.Torch.CatchingFire");
-			else if(temp >= meltTemp*0.8F)
-				return "\2474" + StringUtil.localize("gui.Torch.Lit");
-
-		return StringUtil.localize("gui.ClearSlot");
-	}
-
-	public static Boolean getIsLiquid(ItemStack is)
-	{       
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(manager != null && is != null)
-		{
-			HeatIndex hi = manager.findMatchingIndex(is);
-			if(hi != null && is.hasTagCompound())
-			{
-				float temp = 0;
-				if(is.getTagCompound().hasKey("temperature"))
-					temp = is.getTagCompound().getFloat("temperature");
-				return temp >= hi.meltTemp;
-			} else
-				return false;
-		} else
-			return false;
-	}
-
-	public static float getMeltingPoint(ItemStack is)
-	{       
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(manager!=null)
-		{
-			HeatIndex hi = manager.findMatchingIndex(is);
-			if(hi != null)
-				return hi.meltTemp;
-			else
-				return -1;
-		} else
-			return -1;
-	}
-
-	public static float getMeltingPoint(Metal m)
-	{       
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(manager!=null)
-		{
-			HeatIndex hi = manager.findMatchingIndex(new ItemStack(Item.itemsList[m.MeltedItemID]));
-			if(hi != null)
-				return hi.meltTemp;
-			else
-				return -1;
-		} else
-			return -1;
-	}
-
-	public static float getSpecificHeat(ItemStack is)
-	{       
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(manager!=null)
-		{
-			HeatIndex hi = manager.findMatchingIndex(is);
-			if(hi != null)
-				return hi.specificHeat;
-			else
-				return 0.7F;
-		} else
-			return 0.7F;
-	}
-
-	public static float getTempDecrease(ItemStack is)
-	{
-		return 0.2F * getSpecificHeat(is);
-	}
-
-	public static float GetTemperature(ItemStack is)
-	{
-		if(is != null)
-		{
-			if(is.hasTagCompound() && is.getTagCompound().hasKey("temperature"))
-				return is.getTagCompound().getFloat("temperature");
-			else
-				return 0F;
-		} else
-			return 0F;
-
-	}
-
-	public static float getTempIncrease(ItemStack is, float fireTemp, float fireMaxTemp)
-	{
-		byte debugBump = 0;
-		if(TFCOptions.enableDebugMode)
-			debugBump = 5;
-		return ((fireTemp / fireMaxTemp)) * getSpecificHeat(is) + debugBump;
-	}
-
-	public static void HandleItemHeat(ItemStack is)
-	{
-		HandleItemHeat(is, 1f);
-	}
-
-	public static void HandleItemHeat(ItemStack is, float tempModifier)
-	{
-		if (is != null)
-		{
-			if(is.hasTagCompound())
-			{
-				NBTTagCompound comp = is.getTagCompound();
-				if(comp.hasKey("temperature"))
-				{
-					float temp = comp.getFloat("temperature");
-					if(temp > 0)
-					{
-						temp -= TFC_ItemHeat.getTempDecrease(is)*tempModifier;
-						comp.setFloat("temperature",temp);
-					}
-					if(temp <= 0)
-						comp.removeTag("temperature");
-					if(comp.getTags().size() == 0)
-						is.stackTagCompound = null;
-				}
-			}
-		}
-	}
-
-	public static Boolean SetTemperature(ItemStack is, float Temp)
-	{
-		if(is != null)
-		{
-			if(is.hasTagCompound())
-				is.getTagCompound().setFloat("temperature", Temp);
-			else 
-			{
-				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setFloat("temperature", Temp);
-				is.setTagCompound(nbt);
-			}
-		} else
-			return false;
-
-		return true;
-	}
-
 }
