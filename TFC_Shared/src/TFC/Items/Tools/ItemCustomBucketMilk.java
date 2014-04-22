@@ -197,4 +197,14 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		}
 		return 0f;
 	}
+
+	@Override
+	public boolean isEdible() {
+		return true;
+	}
+
+	@Override
+	public boolean isUsable() {
+		return false;
+	}
 }

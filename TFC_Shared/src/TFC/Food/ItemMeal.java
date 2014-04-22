@@ -135,6 +135,7 @@ public class ItemMeal extends ItemTerra implements IFood
 			return false;
 	}
 
+	@Override
 	public float getFoodWeight(ItemStack is)
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
@@ -145,6 +146,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		return 0f;
 	}
 
+	@Override
 	public float getFoodDecay(ItemStack is)
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodDecay"))
@@ -232,5 +234,17 @@ public class ItemMeal extends ItemTerra implements IFood
 	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k) 
 	{
 		return null;
+	}
+
+	@Override
+	public boolean isEdible() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isUsable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

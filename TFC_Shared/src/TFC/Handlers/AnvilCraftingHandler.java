@@ -6,10 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
 import TFC.TFCItems;
+import TFC.API.IFood;
 import TFC.API.Events.AnvilCraftEvent;
 import TFC.API.Events.ItemMeltEvent;
-import TFC.Food.ItemFoodTFC;
-import TFC.Food.ItemRawFood;
 
 public class AnvilCraftingHandler
 {
@@ -53,8 +52,7 @@ public class AnvilCraftingHandler
 			{
 				event.result.setItemDamage(100-event.input1.getItemDamage());
 			}
-			else if (event.input1.getItem() instanceof ItemRawFood && 
-					event.result != null && event.result.getItem() instanceof ItemFoodTFC)
+			else if (event.result != null && event.result.getItem() instanceof IFood)
 			{
 				event.result.stackTagCompound = event.input1.stackTagCompound;
 			}

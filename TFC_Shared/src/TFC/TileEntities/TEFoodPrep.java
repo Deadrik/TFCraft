@@ -120,9 +120,16 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	public boolean areComponentsCorrect()
 	{
 		int f0 = -1;
-		int f1 = -1;
-		int f2 = -1;
-		int f3 = -1;
+		int f1 = -2;
+		int f2 = -2;
+		int f3 = -3;
+		Item[] food = new Item[]
+				{
+				(storage[0] != null ? storage[0].getItem() : null),
+				(storage[1] != null ? storage[1].getItem() : null),
+				(storage[2] != null ? storage[2].getItem() : null),
+				(storage[3] != null ? storage[3].getItem() : null)
+				};
 
 		//First we want to test the foodgroups to see if they match
 		if(getStackInSlot(0) != null)
@@ -134,38 +141,46 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		if(getStackInSlot(3) != null)
 			f3 = ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodGroup().ordinal();
 
-		if(f0 == -1 || f0==f1 || f0==f2 || f0==f3)
+		if(f0==f1 || f0==f2 || f0==f3)//food0 can't be the same foodgroup as the other food types. If it is then we return false
 			return false;
-		else if(f1 == -1 || f1==f3)
+		else if(f1==f3)//food1 can be the same as food2 so we dont compare those. It can't be the same as food3 however.
 			return false;
-		else if(f2 != -1 && f2==f3)
+		else if(f2==f3)//food2 can be the same as food1 so we dont compare those. It can't be the same as food3 however.
 			return false;
+
+		f0 = -1;
+		f1 = -1;
+		f2 = -1;
+		f3 = -1;
 
 		//Now we test the food types to make sure that they are different
-		if(getStackInSlot(0) != null)
-			f0 = ((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodID();
-		if(getStackInSlot(1) != null)
-			f1 = ((ItemFoodTFC)getStackInSlot(1).getItem()).getFoodID();
-		if(getStackInSlot(2) != null)
-			f2 = ((ItemFoodTFC)getStackInSlot(2).getItem()).getFoodID();
-		if(getStackInSlot(3) != null)
-			f3 = ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodID();
+		if(getStackInSlot(0) != null && ((IFood)storage[0].getItem()).isUsable())
+			f0 = ((IFood)getStackInSlot(0).getItem()).getFoodID();
+		if(getStackInSlot(1) != null && ((IFood)storage[1].getItem()).isUsable())
+			f1 = ((IFood)getStackInSlot(1).getItem()).getFoodID();
+		if(getStackInSlot(2) != null && ((IFood)storage[2].getItem()).isUsable())
+			f2 = ((IFood)getStackInSlot(2).getItem()).getFoodID();
+		if(getStackInSlot(3) != null && ((IFood)storage[3].getItem()).isUsable())
+			f3 = ((IFood)getStackInSlot(3).getItem()).getFoodID();
 
-		if(f0 == -1 || f0==f1 || f0==f2 || f0==f3)
+		//Now we check the usability of the specific item
+		if(getStackInSlot(0) != null && (f0==f1 || f0==f2 || f0==f3))
 			return false;
-		else if(f1 == -1 || f1==f2 || f1==f3)
+		else if(getStackInSlot(1) != null && (f1==f2 || f1==f3))
 			return false;
-		else if(f2 != -1 && f2==f3)
+		else if(getStackInSlot(2) != null && f2==f3)
+			return false;
+		else if(getStackInSlot(3) != null && f3 == -1)
 			return false;
 
 		//Next we make sure that each slot has enough food material
-		if(getStackInSlot(0) == null || ((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodWeight(getStackInSlot(0)) < 10)
+		if(getStackInSlot(0) != null && ((IFood)getStackInSlot(0).getItem()).getFoodWeight(getStackInSlot(0)) < 10)
 			return false;
-		if(getStackInSlot(1) == null || ((ItemFoodTFC)getStackInSlot(1).getItem()).getFoodWeight(getStackInSlot(1)) < 4)
+		if(getStackInSlot(1) != null && ((IFood)getStackInSlot(1).getItem()).getFoodWeight(getStackInSlot(1)) < 4)
 			return false;
-		if(getStackInSlot(2) != null && ((ItemFoodTFC)getStackInSlot(2).getItem()).getFoodWeight(getStackInSlot(2)) < 4)
+		if(getStackInSlot(2) != null && ((IFood)getStackInSlot(2).getItem()).getFoodWeight(getStackInSlot(2)) < 4)
 			return false;
-		if(getStackInSlot(3) != null && ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodWeight(getStackInSlot(3)) < 2)
+		if(getStackInSlot(3) != null && ((IFood)getStackInSlot(3).getItem()).getFoodWeight(getStackInSlot(3)) < 2)
 			return false;
 
 		if(storage[4] != null || (storage[5] == null || storage[5].getItem().itemID != Item.bowlEmpty.itemID))
@@ -191,7 +206,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	{
 		int seed = 0;
 
-		for(int i = 0; i < 2; i++)
+		for(int i = 0; i < 3; i++)
 		{
 			ItemStack is = getStackInSlot(i);
 			if(is != null)

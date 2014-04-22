@@ -16,4 +16,12 @@ public interface IFood
 	 * Normally returns null.
 	 */
 	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k);
+	/**
+	 * @return Is this food edible as is.
+	 */
+	public boolean isEdible();
+	/**
+	 * @return Is this item usable in meals
+	 */
+	public boolean isUsable();
 }
