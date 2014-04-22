@@ -120,6 +120,10 @@ public class BlockFruitWood extends BlockTerraContainer
 				Random R = new Random();
 				if(R.nextInt(100) > 50 && isAxeorSaw)
 				{
+					if(world.getBlockId(i+1, j, k) == TFCBlocks.fruitTreeLeaves2.blockID || world.getBlockId(i-1, j, k) == TFCBlocks.fruitTreeLeaves2.blockID || 
+							world.getBlockId(i, j, k+1) == TFCBlocks.fruitTreeLeaves2.blockID || world.getBlockId(i, j, k-1) == TFCBlocks.fruitTreeLeaves2.blockID || 
+							world.getBlockId(i, j+1, k) == TFCBlocks.fruitTreeLeaves2.blockID || world.getBlockId(i, j-1, k) == TFCBlocks.fruitTreeLeaves2.blockID)
+						l += 8;
 					dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling, 1, l));
 				}
 			}
