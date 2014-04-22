@@ -15,27 +15,35 @@ public class HeatIndex
 	public boolean keepNBT;
 
 	private ItemStack output;
-	private int outputMin;
-	private int outputMax;
+	private int outputMin = 0;
+	private int outputMax = 0;
 
 	private ItemStack morph;
 	public ItemStack input;
 
-	public HeatIndex(ItemStack in, int ticks, ItemStack out)
+	public HeatIndex(ItemStack in, int ticks)
 	{
 		input = in;
 		ticksToCook = ticks;
-		outputMin = 0;
-		outputMax = 0;
+		output = null;
+	}
+
+	public HeatIndex(ItemStack in, int ticks, ItemStack out)
+	{
+		this(in, ticks);
 		output = out;
+	}
+
+	public HeatIndex(ItemStack in, HeatRaw raw)
+	{
+		input = in;
+		ticksToCook = raw.ticksToCook;
+		output = null;
 	}
 
 	public HeatIndex(ItemStack in, HeatRaw raw, ItemStack out)
 	{
-		input = in;
-		ticksToCook = raw.ticksToCook;
-		outputMin = 0;
-		outputMax = 0;
+		this(in, raw);
 		output = out;
 	}
 
