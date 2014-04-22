@@ -127,14 +127,16 @@ public class PlayerUpdatePacket extends AbstractPacket
 	{
 		if(this.flag == 0)
 		{
-//			System.out.println("-----------------------------Handle PlayerUpdatePacket flag:0");
-//			System.out.println("stomachLevel :"+ this.stomachLevel);
-//			System.out.println("waterLevel :"+ this.waterLevel);
-//			System.out.println("nutrFruit :"+ this.nutrFruit);
-//			System.out.println("nutrVeg :"+ this.nutrVeg);
-//			System.out.println("nutrProtein :"+ this.nutrProtein);
-//			System.out.println("nutrDairy :"+ this.nutrDairy);
-			
+			/*
+			System.out.println("-----------------------------Handle PlayerUpdatePacket flag:0");
+			System.out.println("stomachLevel :"+ this.stomachLevel);
+			System.out.println("waterLevel :"+ this.waterLevel);
+			System.out.println("nutrFruit :"+ this.nutrFruit);
+			System.out.println("nutrVeg :"+ this.nutrVeg);
+			System.out.println("nutrProtein :"+ this.nutrProtein);
+			System.out.println("nutrDairy :"+ this.nutrDairy);
+			*/
+
 			FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
 			fs.stomachLevel = this.stomachLevel;
 			fs.waterLevel = this.waterLevel;
@@ -153,7 +155,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 		}
 		else if(this.flag == 2)
 		{
-			System.out.println("-----------------------------Handle PlayerUpdatePacket flag:2");
+			//System.out.println("-----------------------------Handle PlayerUpdatePacket flag:2");
 			System.out.println("craftingTable : "+this.craftingTable);
 			
 			if(this.craftingTable && !player.getEntityData().hasKey("craftingTable"))

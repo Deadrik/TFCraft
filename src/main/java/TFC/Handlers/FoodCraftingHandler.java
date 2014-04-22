@@ -19,7 +19,7 @@ public class FoodCraftingHandler
 	@SubscribeEvent
 	public void onFoodCrafting(ItemCraftedEvent e)//(EntityPlayer player, ItemStack itemstack, IInventory iinventory)
 	{
-		EntityPlayer player = e.player;
+		//EntityPlayer player = e.player;
 		Item item = e.crafting.getItem();
 		ItemStack craftResult = e.crafting;
 		int isDmg = e.crafting.getItemDamage();
@@ -33,9 +33,9 @@ public class FoodCraftingHandler
 					(craftResult.getItem() == TFCItems.BarleyGrain && gridHasItem(iinventory, TFCItems.BarleyWhole)) || 
 					(craftResult.getItem() == TFCItems.RiceGrain && gridHasItem(iinventory, TFCItems.RiceWhole)))
 			{
-				HandleItem(player, iinventory, Recipes.Knives);
-				if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw, 4)))
-					player.dropItem(TFCItems.Straw, 4);
+				HandleItem(e.player, iinventory, Recipes.Knives);
+				if(!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw, 4)))
+					e.player.dropItem(TFCItems.Straw, 4);
 
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
@@ -76,6 +76,7 @@ public class FoodCraftingHandler
 
 						//we only add the decay if food was actually added to the bundle
 						if(myWeight != myOldWeight)
+						{
 							if(myWeight == 0)
 							{
 								if(finalDecay < 0)
@@ -98,6 +99,7 @@ public class FoodCraftingHandler
 								else
 									finalDecay += d;
 							}
+						}
 
 						if(myWeight > 0)
 						{
@@ -127,14 +129,14 @@ public class FoodCraftingHandler
 					{
 						if(craftResult.getTagCompound().hasKey("foodDecay") && craftResult.getTagCompound().getFloat("foodDecay") > 0)
 						{
-							FoodCraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
+							FoodCraftingHandler.DamageItem(e.player, iinventory, i, iinventory.getStackInSlot(i).getItem());
 							float decay = craftResult.getTagCompound().getFloat("foodDecay");
 							craftResult.getTagCompound().setFloat("foodDecay", 0);
 							craftResult.getTagCompound().setFloat("foodWeight", craftResult.getTagCompound().getFloat("foodWeight")-decay);
 						}
 						else if(craftResult.getTagCompound().hasKey("foodDecay") && craftResult.getTagCompound().getFloat("foodDecay") <= 0)
 						{
-							FoodCraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
+							FoodCraftingHandler.DamageItem(e.player, iinventory, i, iinventory.getStackInSlot(i).getItem());
 							if(finalWeight/2 < 1)
 								craftResult.getTagCompound().setFloat("foodWeight", finalWeight);
 							else
@@ -228,6 +230,7 @@ public class FoodCraftingHandler
 
 					//we only add the decay if food was actually added to the bundle
 					if(myWeight != myOldWeight)
+					{
 						if(myWeight == 0)
 						{
 							if(finalDecay < 0)
@@ -250,6 +253,7 @@ public class FoodCraftingHandler
 							else
 								finalDecay += d;
 						}
+					}
 				}
 			}
 			craftResult = ItemFoodTFC.createTag(craftResult, Helper.roundNumber(finalWeight,10), Helper.roundNumber(finalDecay,100));
