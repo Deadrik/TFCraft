@@ -12,7 +12,7 @@ import TFC.API.Enums.EnumFoodGroup;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
-public class ItemEgg extends ItemRawFood implements IFood
+public class ItemEgg extends ItemFoodTFC implements IFood
 {
 	public ItemEgg(int id)
 	{

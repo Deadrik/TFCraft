@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Textures;
-import TFC.TileEntities.TileEntityFoodPrep;
+import TFC.TileEntities.TEFoodPrep;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -73,7 +73,7 @@ public class BlockFoodPrep extends BlockTerraContainer {
 	@Override
 	public TileEntity createNewTileEntity(World var1) 
 	{
-		return new TileEntityFoodPrep();
+		return new TEFoodPrep();
 	}
 	
 	@Override
@@ -94,7 +94,7 @@ public class BlockFoodPrep extends BlockTerraContainer {
 		{
 			if(!world.isBlockOpaqueCube(i, j-1, k))
 			{
-				((TileEntityFoodPrep)world.getBlockTileEntity(i, j, k)).ejectContents();
+				((TEFoodPrep)world.getBlockTileEntity(i, j, k)).ejectContents();
 				world.setBlock(i, j, k, 0);
 				return;
 			}
@@ -127,9 +127,9 @@ public class BlockFoodPrep extends BlockTerraContainer {
     
     public void Eject(World par1World, int par2, int par3, int par4)
     {
-        if((TileEntityFoodPrep)par1World.getBlockTileEntity(par2, par3, par4)!=null)
+        if((TEFoodPrep)par1World.getBlockTileEntity(par2, par3, par4)!=null)
         {
-        	TileEntityFoodPrep te = (TileEntityFoodPrep)par1World.getBlockTileEntity(par2, par3, par4);
+        	TEFoodPrep te = (TEFoodPrep)par1World.getBlockTileEntity(par2, par3, par4);
             te.ejectContents();
             par1World.removeBlockTileEntity(par2, par3, par4);
         }
