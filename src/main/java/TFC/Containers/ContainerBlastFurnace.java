@@ -82,18 +82,21 @@ public class ContainerBlastFurnace extends ContainerTFC
 		for (int var1 = 0; var1 < this.crafters.size(); ++var1)
 		{
 			ICrafting var2 = (ICrafting)this.crafters.get(var1);
-			if (this.firetemp != this.tileentity.fireTemperature)
-				var2.sendProgressBarUpdate(this, 0, (int)this.tileentity.fireTemperature);
+			if (this.firetemp != this.tileentity.fireTemp)
+			{
+				var2.sendProgressBarUpdate(this, 0, (int)this.tileentity.fireTemp);
+			}
 		}
 
 		if(orecount != this.tileentity.oreCount || coalcount != this.tileentity.charcoalCount || updatecounter == 1000)
 		{
-			//TODO bloomery.broadcastPacketInRange(tileentity.createUpdatePacket());
+			//tileentity.broadcastPacketInRange(tileentity.createUpdatePacket());
+			tileentity.getWorldObj().markBlockForUpdate(tileentity.xCoord, tileentity.yCoord, tileentity.zCoord);
 			updatecounter = 0;
 		}
 		orecount = this.tileentity.oreCount;
 		coalcount = this.tileentity.charcoalCount;
-		firetemp = this.tileentity.fireTemperature;
+		firetemp = this.tileentity.fireTemp;
 		updatecounter += 1;
 	}
 
@@ -101,6 +104,9 @@ public class ContainerBlastFurnace extends ContainerTFC
 	public void updateProgressBar(int par1, int par2)
 	{
 		if (par1 == 0)
-			this.tileentity.fireTemperature = par2;
+		{
+			this.tileentity.fireTemp = par2;
+		}
+
 	}
 }

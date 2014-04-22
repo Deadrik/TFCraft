@@ -12,13 +12,14 @@ import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Textures;
-import TFC.TileEntities.TileEntityFoodPrep;
+import TFC.TileEntities.TEFoodPrep;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockFoodPrep extends BlockTerraContainer {
-
-	public BlockFoodPrep() {
+public class BlockFoodPrep extends BlockTerraContainer
+{
+	public BlockFoodPrep()
+	{
 		super();
 		this.setBlockBounds(0, 0, 0, 1, 0.15f, 1);
 	}
@@ -28,7 +29,6 @@ public class BlockFoodPrep extends BlockTerraContainer {
 	{
 		if(!world.isRemote)
 			entityplayer.openGui(TerraFirmaCraft.instance, 32, world, i, j, k);
-
 		return true;
 	}
 
@@ -71,7 +71,7 @@ public class BlockFoodPrep extends BlockTerraContainer {
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntityFoodPrep();
+		return new TEFoodPrep();
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class BlockFoodPrep extends BlockTerraContainer {
 		{
 			if(!world.getBlock(i, j-1, k).isOpaqueCube())
 			{
-				((TileEntityFoodPrep)world.getTileEntity(i, j, k)).ejectContents();
+				((TEFoodPrep)world.getTileEntity(i, j, k)).ejectContents();
 				world.setBlockToAir(i, j, k);
 				return;
 			}
@@ -107,12 +107,14 @@ public class BlockFoodPrep extends BlockTerraContainer {
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion ex) {
+	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion ex)
+	{
 		Eject(par1World,par2,par3,par4);
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
+	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5)
+	{
 		Eject(par1World,par2,par3,par4);
 	}
 
@@ -126,9 +128,9 @@ public class BlockFoodPrep extends BlockTerraContainer {
 
 	public void Eject(World par1World, int par2, int par3, int par4)
 	{
-		if((TileEntityFoodPrep)par1World.getTileEntity(par2, par3, par4)!=null)
+		if((TEFoodPrep)par1World.getTileEntity(par2, par3, par4) != null)
 		{
-			TileEntityFoodPrep te = (TileEntityFoodPrep)par1World.getTileEntity(par2, par3, par4);
+			TEFoodPrep te = (TEFoodPrep)par1World.getTileEntity(par2, par3, par4);
 			te.ejectContents();
 			par1World.removeTileEntity(par2, par3, par4);
 		}

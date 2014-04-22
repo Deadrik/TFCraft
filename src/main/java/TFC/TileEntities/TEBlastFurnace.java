@@ -24,10 +24,9 @@ import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
+import TFC.API.TFC_ItemHeat;
 import TFC.Blocks.Devices.BlockBlastFurnace;
-import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.MetalRegistry;
 import TFC.GUI.GuiBlastFurnace;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -36,11 +35,11 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 {
 	public boolean isValid;
 
-	public ItemStack input[];
+	public ItemStack storage[];
 	public ItemStack fireItemStacks[];
 	public ItemStack outputItemStacks[];
 
-	public float inputItemTemps[];
+	public short inputItemTemps[];
 
 	private int prevStackSize;
 	private int numAirBlocks;
@@ -64,20 +63,17 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	public TEBlastFurnace()
 	{
 		fuelTimeLeft = 0;
-		MaxFireTemp = 2500;
+		maxFireTemp = 2100;
 		fuelBurnTemp = 0;
 
-		fireTemperature = 0;
-		AddedAir = 0F;
+		fireTemp = 0;
 		isValid = false;
 		fireItemStacks = new ItemStack[20];
 		outputItemStacks = new ItemStack[20];
-		input = new ItemStack[2];
-		inputItemTemps = new float[80];
-		ambientTemp = -1000;
+		storage = new ItemStack[2];
+		inputItemTemps = new short[20];
 		numAirBlocks = 0;
-		airFromBellows = 0F;
-		airFromBellowsTime = 0;
+		airFromBellows = 0;
 		charcoalCount = 0;
 		oreCount = 0;
 //		shouldSendInitData = false;
@@ -94,65 +90,14 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			if (this.charcoalCount < this.oreCount) 
 				return false;
 
-			if (this.charcoalCount >= 8 && this.fireTemperature < 200)
+			if (this.charcoalCount >= 4 && this.fireTemp == 0)
 			{
-				fireTemperature = 250f;
+				fireTemp = 1;
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 0x2);
 				return true;
 			}
 		}
 		return false;
-	}
-
-	public void careForInventorySlot(int i, float startTemp)
-	{
-		NBTTagCompound inputCompound;
-		float mod = 1;
-		if (oreCount > charcoalCount)
-		{
-			float c = (float) charcoalCount / (float) oreCount;
-			mod = (mod * c) * 3;
-			if (mod > 1)
-				mod = 1;
-		}
-
-		if (fireItemStacks[i] != null && fireItemStacks[i].hasTagCompound())
-		{
-			inputCompound = fireItemStacks[i].getTagCompound();
-			inputItemTemps[i] = inputCompound.getFloat("temperature");
-
-			if (fireTemperature * mod > inputItemTemps[i])
-			{
-				float increase = TFC_ItemHeat.getTempIncrease(fireItemStacks[i], fireTemperature * mod, MaxFireTemp);
-				inputItemTemps[i] += increase;
-			}
-			else if (fireTemperature * mod < inputItemTemps[i])
-			{
-				float increase = TFC_ItemHeat.getTempDecrease(fireItemStacks[i]);
-				inputItemTemps[i] -= increase;
-			}
-			inputCompound.setFloat("temperature", inputItemTemps[i]);
-			fireItemStacks[i].setTagCompound(inputCompound);
-
-			if (inputItemTemps[i] <= ambientTemp)
-			{
-				fireItemStacks[i].stackTagCompound = null;
-				inputItemTemps[i] = 0;
-			}
-		}
-		else if (fireItemStacks[i] != null && !fireItemStacks[i].hasTagCompound())
-		{
-			if (TFC_ItemHeat.getMeltingPoint(fireItemStacks[i]) != -1)
-			{
-				inputCompound = new NBTTagCompound();
-				inputCompound.setFloat("temperature", startTemp);
-				fireItemStacks[i].setTagCompound(inputCompound);
-			}
-		}
-		else if (fireItemStacks[i] == null)
-		{
-			inputItemTemps[i] = 0;
-		}
 	}
 
 	private Boolean CheckValidity()
@@ -176,10 +121,10 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 		// Only allow the ore to smelt if there is a valid Tuyere associated
 		// with the furnace
-		if (fireItemStacks[i] != null && te != null && input[1] != null && cookDelay == 0)
+		if (fireItemStacks[i] != null && te != null && storage[1] != null && cookDelay == 0)
 		{
 			HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
-			if (index != null && inputItemTemps[i] >= index.meltTemp)
+			if (index != null && inputItemTemps[i] >= index.ticksToCook)
 			{
 				oreCount--;
 				charcoalCount--;
@@ -199,10 +144,12 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				}
 				cookDelay = 100;
 				fireItemStacks[i] = null;
-				input[1].setItemDamage(input[1].getItemDamage() + 1);
-				if( input[1] != null && input[1].getItemDamage() == input[1].getMaxDamage())
-					setInventorySlotContents(1,null);
-				te.temperature = (int)this.fireTemperature;
+				storage[1].setItemDamage(storage[1].getItemDamage() + 1);
+				if (storage[1] != null && storage[1].getItemDamage() == storage[1].getMaxDamage())
+				{
+					setInventorySlotContents(1, null);
+				}
+				te.temperature = this.fireTemp;
 			}
 		}
 	}
@@ -210,17 +157,19 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	@Override
 	public ItemStack decrStackSize(int i, int j)
 	{
-		if (input[i] != null)
+		if (storage[i] != null)
 		{
-			if (input[i].stackSize <= j)
+			if (storage[i].stackSize <= j)
 			{
-				ItemStack itemstack = input[i];
-				input[i] = null;
+				ItemStack itemstack = storage[i];
+				storage[i] = null;
 				return itemstack;
 			}
-			ItemStack itemstack1 = input[i].splitStack(j);
-			if (input[i].stackSize == 0)
-				input[i] = null;
+			ItemStack itemstack1 = storage[i].splitStack(j);
+			if (storage[i].stackSize == 0)
+			{
+				storage[i] = null;
+			}
 			return itemstack1;
 		}
 		else
@@ -249,7 +198,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				worldObj.spawnEntityInWorld(entityitem);
 			}
 		}
-		
+
 		//charcoal
 		if(this.charcoalCount > 0)
 		{
@@ -259,7 +208,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			entityitem.motionZ = (float) rand.nextGaussian() * f3;
 			worldObj.spawnEntityInWorld(entityitem);
 		}
-		
+
 	}
 
 	@Override
@@ -277,73 +226,64 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	@Override
 	public int getSizeInventory()
 	{
-		return input.length;
+		return storage.length;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		return input[i];
+		return storage[i];
 	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int i)
 	{
-		return input[i];
+		return storage[i];
 	}
 
 	@Override
 	public int getTemperatureScaled(int s)
 	{
-		return (int) ((fireTemperature * s) / MaxFireTemp);
+		return (fireTemp * s) / maxFireTemp;
 	}
 
 	public void HandleTemperature()
 	{
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 
-		if (ambientTemp == -1000)
-			ambientTemp = TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord);
-
 		// Now we increase the temperature
 		// If the fire is still burning and has fuel
 		if (fuelTimeLeft > 0)
 		{
-			float desiredTemp = 0;
+			int desiredTemp = 0;
 
 			fuelTimeLeft--;
-			if (airFromBellowsTime > 0)
-				fuelTimeLeft--;
-			if (yCoord < 128)
-				numAirBlocks = -1 * (256 - (yCoord * 2));
-			float t = 1;
-			if (oreCount > charcoalCount)
+			if (airFromBellows > 0)
 			{
-				t = oreCount - charcoalCount;
-				t *= 0.05F;
-				t = 1 - t;
+				fuelTimeLeft--;
 			}
 
-			if (this.input[1] == null && airFromBellows > 0)
-				airFromBellows = 0;
+			desiredTemp = handleTemp();
 
-			float bAir = airFromBellows * (1 + airFromBellowsTime / 120);
-			AddedAir = (numAirBlocks + bAir) / 25 / 16;
-			desiredTemp = (fuelBurnTemp + fuelBurnTemp * AddedAir) * t;
+			handleTempFlux(desiredTemp);
 
-			if (fireTemperature < desiredTemp)
+
+			if (fireTemp < desiredTemp)
 			{
 				float tm = 1.35F;
-				fireTemperature += tm;
-			}
-			else if (fireTemperature > desiredTemp)
+
+				fireTemp += tm;
+			} else if (fireTemp > desiredTemp)
 			{
-				if (desiredTemp > ambientTemp)
+				if (desiredTemp > 0)
 				{
 					if (airFromBellows == 0)
-						fireTemperature -= 0.225F;
-					else
-						fireTemperature -= 0.18F;
+					{
+						fireTemp -= 0.225F;
+					} else
+					{
+						fireTemp -= 0.18F;
+					}
 				}
 			}
 		}
@@ -352,7 +292,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			charcoalCount--;
 
 			fuelTimeLeft = 1875;
-			fuelBurnTemp = 1350;
+			fuelBurnTemp = 1400;
 			/*
 			 * if(fireTemperature < 210) { fireTemperature = 220; }
 			 * 
@@ -366,18 +306,28 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta & 3, 3);
 
 			fuelBurnTemp = 0;
-			if(fireTemperature > ambientTemp)
-				fireTemperature -= 0.425F;
+
+			fireTemp--;
 		}
 
-		//here we set the various temperatures to range
-		if(fireTemperature > MaxFireTemp)
-			fireTemperature = MaxFireTemp;
-		else if(fireTemperature < ambientTemp)
-			fireTemperature = ambientTemp;
+		// here we set the various temperatures to range
+		if (fireTemp > maxFireTemp)
+		{
+			fireTemp = maxFireTemp;
+		} else if (fireTemp < 0)
+		{
+			fireTemp = 0;
+		}
 
 		// Here we handle the bellows
 		handleAirReduction();
+	}
+
+	@Override
+	public void receiveAirFromBellows()
+	{
+		if(storage[1] != null)
+			super.receiveAirFromBellows();
 	}
 
 	public boolean isStackValid(int i, int j, int k)
@@ -430,7 +380,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
-		input[i] = itemstack;
+		storage[i] = itemstack;
 		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 			itemstack.stackSize = getInventoryStackLimit();
 	}
@@ -485,7 +435,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		 * zCoord-1); } }
 		 */
 	}
-	
+
 	public int getTotalCount()
 	{
 		return charcoalCount+oreCount;
@@ -547,7 +497,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 					 * can melt down into something then add the ore to the list
 					 * of items in the fire.
 					 */
-					else if ((TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && _isOre)
+					else if ((TFC_ItemHeat.IsCookable(entity.getEntityItem()) != -1 && _isOre)
 							|| (!_isOre && entity.getEntityItem().getItem() instanceof ISmeltable))
 					{
 						int c = entity.getEntityItem().stackSize;
@@ -588,10 +538,12 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			for (int i = 0; i < fireItemStacks.length && isValid; i++)
 			{
 				/* Handle temperature for each item in the stack */
-				careForInventorySlot(i, 100);
-				/*Cook each input item */
-				if (worldObj.getBlock(xCoord, yCoord-1, zCoord) == TFCBlocks.Crucible)
+				careForInventorySlot(i);
+				/* Cook each input item */
+				if (worldObj.getBlock(xCoord, yCoord - 1, zCoord) == TFCBlocks.Crucible)
+				{
 					CookItemsNew(i);
+				}
 			}
 
 			// Every 5 seconds we do a validity check and update the molten ore
@@ -603,6 +555,37 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				moltenCount = updateMoltenBlocks();
 			}
 			slowCounter++;
+		}
+	}
+
+	public void careForInventorySlot(int i)
+	{
+		NBTTagCompound inputCompound;
+
+		if (fireItemStacks[i] != null)
+		{
+			inputCompound = fireItemStacks[i].getTagCompound();
+			inputItemTemps[i] = TFC_ItemHeat.GetTemp(fireItemStacks[i]);
+
+			if (fireTemp > 100)
+			{
+				inputItemTemps[i] += TFC_ItemHeat.getTempIncrease(fireItemStacks[i]);
+			} 
+			else if (fireTemp < inputItemTemps[i])
+			{
+				inputItemTemps[i] -= 1;
+			}
+			TFC_ItemHeat.SetTemp(fireItemStacks[i], inputItemTemps[i]);
+
+			if (inputItemTemps[i] <= 0)
+			{
+				fireItemStacks[i].stackTagCompound = null;
+				inputItemTemps[i] = 0;
+			}
+		} 
+		else if (fireItemStacks[i] == null)
+		{
+			inputItemTemps[i] = 0;
 		}
 	}
 
@@ -634,7 +617,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				}*/
 				if (i <= moltenCount && i <= this.maxValidStackSize)
 				{
-					if(this.fireTemperature > 200)
+					if (this.fireTemp > 100)
 					{
 						int m = count > 7 ? 7 : count;
 						worldObj.setBlock(xCoord, yCoord + i, zCoord, TFCBlocks.Molten, m + 8, 2);
@@ -704,16 +687,15 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setFloat("temperature", fireTemperature);
-		nbt.setFloat("fuelTimeLeft", fuelTimeLeft);
-		nbt.setFloat("fuelBurnTemp", fuelBurnTemp);
-		nbt.setFloat("airFromBellowsTime", airFromBellowsTime);
-		nbt.setFloat("airFromBellows", airFromBellows);
+		nbt.setInteger("temp", fireTemp);
+		nbt.setInteger("fuelTime", fuelTimeLeft);
+		nbt.setInteger("fuelTemp", fuelBurnTemp);
+		nbt.setInteger("airBellows", airFromBellows);
 		nbt.setInteger("charcoalCount", charcoalCount);
 		nbt.setInteger("outMetal1Count", outMetal1Count);
 		nbt.setByte("oreCount", (byte) oreCount);
 		nbt.setInteger("maxValidStackSize", maxValidStackSize);
-		
+
 
 		NBTTagList nbttaglist = new NBTTagList();
 		for (int i = 0; i < fireItemStacks.length; i++)
@@ -729,13 +711,13 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		nbt.setTag("Items", nbttaglist);
 
 		NBTTagList nbttaglist2 = new NBTTagList();
-		for (int i = 0; i < input.length; i++)
+		for (int i = 0; i < storage.length; i++)
 		{
-			if (input[i] != null)
+			if (storage[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
-				input[i].writeToNBT(nbttagcompound1);
+				storage[i].writeToNBT(nbttagcompound1);
 				nbttaglist2.appendTag(nbttagcompound1);
 			}
 		}
@@ -759,11 +741,10 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		fireTemperature = nbt.getFloat("temperature");
-		fuelTimeLeft = nbt.getFloat("fuelTimeLeft");
-		fuelBurnTemp = nbt.getFloat("fuelBurnTemp");
-		airFromBellowsTime = nbt.getFloat("airFromBellowsTime");
-		airFromBellows = nbt.getFloat("airFromBellows");
+		fireTemp = nbt.getInteger("temp");
+		fuelTimeLeft = nbt.getInteger("fuelTime");
+		fuelBurnTemp = nbt.getInteger("fuelTemp");
+		airFromBellows = nbt.getInteger("airBellows");
 		charcoalCount = nbt.getInteger("charcoalCount");
 		outMetal1Count = nbt.getInteger("outMetal1Count");
 		oreCount = nbt.getByte("oreCount");
@@ -780,13 +761,15 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		}
 
 		NBTTagList nbttaglist2 = nbt.getTagList("Input", 10);
-		input = new ItemStack[2];
+		storage = new ItemStack[2];
 		for (int i = 0; i < nbttaglist2.tagCount(); i++)
 		{
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist2.getCompoundTagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
-			if(byte0 >= 0 && byte0 < input.length)
-				input[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+			if (byte0 >= 0 && byte0 < storage.length)
+			{
+				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+			}
 		}
 
 		NBTTagList nbttaglist3 = nbt.getTagList("Output", 10);

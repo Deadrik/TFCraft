@@ -33,6 +33,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.IFood;
 import TFC.API.TFCOptions;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Constant.Global;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumWoodMaterial;

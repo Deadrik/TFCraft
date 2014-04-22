@@ -3,7 +3,7 @@ package TFC.Containers.Slots;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import TFC.Core.TFC_ItemHeat;
+import TFC.API.TFC_ItemHeat;
 import TFC.Items.ItemMeltedMetal;
 import TFC.Items.Pottery.ItemPotteryMold;
 

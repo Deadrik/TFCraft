@@ -16,19 +16,16 @@ import TFC.TFCItems;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.TFCOptions;
-import TFC.Core.TFC_Climate;
+import TFC.API.TFC_ItemHeat;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Items.ItemMeltedMetal;
-import TFC.WorldGen.TFCBiome;
 
 public class TileEntityForge extends TileEntityFireEntity implements IInventory
 {
 	public boolean isValid;
 	public ItemStack fireItemStacks[];
-	public float inputItemTemps[];
+	public short inputItemTemps[];
 	private int prevStackSize;
-	private int numAirBlocks;
 	private ItemStack prevWorkItemStack;
 	private int externalFireCheckTimer;
 	public Boolean canCreateFire;
@@ -39,18 +36,15 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	{
 		super();
 		fuelTimeLeft = 900;
-		fuelBurnTemp = 1400;
-		fireTemperature = 400;
-		AddedAir = 0F;
+		fuelBurnTemp =  1400;
+		fireTemp = 400;
 		isValid = false;
 		fireItemStacks = new ItemStack[14];
-		inputItemTemps = new float[5];
-		ambientTemp = -1000;
-		numAirBlocks = 0;
+		inputItemTemps = new short[5];
 		externalFireCheckTimer = 0;
 		externalWoodCount = 0;
 		charcoalCounter = 0;
-		MaxFireTemp = 2500;
+		maxFireTemp = 2500;
 	}
 
 	public void careForInventorySlot(int i, float startTemp)
@@ -109,48 +103,32 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 
 		HeatRegistry manager = HeatRegistry.getInstance();
 
-		if(fireItemStacks[i]!= null && fireItemStacks[i].hasTagCompound())
+		if(fireItemStacks[i] != null)
 		{
 			HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
 
 			inputCompound = fireItemStacks[i].getTagCompound();
 
-			if(inputCompound.hasKey("temperature"))
-				inputItemTemps[i] = inputCompound.getFloat("temperature");
+			if(TFC_ItemHeat.HasTemp(fireItemStacks[i]))
+				inputItemTemps[i] = TFC_ItemHeat.GetTemp(fireItemStacks[i]);
 			else
-				inputItemTemps[i] = ambientTemp;
+				inputItemTemps[i] = 0;
 
-			if(fireTemperature*mod > inputItemTemps[i])
+			if(fireTemp*mod > 100)
 			{
-				float increase = TFC_ItemHeat.getTempIncrease(fireItemStacks[i], fireTemperature * mod, MaxFireTemp);
-				inputItemTemps[i] += increase;
+				inputItemTemps[i] += TFC_ItemHeat.getTempIncrease(fireItemStacks[i]);
 			}
-			else if(fireTemperature*mod < inputItemTemps[i])
+			else if(fireTemp*mod < 100)
 			{
-				float increase = TFC_ItemHeat.getTempDecrease(fireItemStacks[i]);
-				inputItemTemps[i] -= increase;
+				inputItemTemps[i] -= 1;
 			}
-			inputCompound.setFloat("temperature", inputItemTemps[i]);
-			fireItemStacks[i].setTagCompound(inputCompound);
-
-			if(inputItemTemps[i] <= ambientTemp)
-				fireItemStacks[i].getTagCompound().removeTag("temperature");
-		}
-		else if(fireItemStacks[i] != null && !fireItemStacks[i].hasTagCompound())
-		{
-			if(TFC_ItemHeat.getMeltingPoint(fireItemStacks[i]) !=  - 1)
-			{
-				inputCompound = new NBTTagCompound();
-				inputCompound.setFloat("temperature", startTemp);
-				fireItemStacks[i].setTagCompound(inputCompound);
-				inputItemTemps[i] = startTemp;
-			}
+			TFC_ItemHeat.SetTemp(fireItemStacks[i], inputItemTemps[i]);
 		}
 		else if(fireItemStacks[i] == null)
 			inputItemTemps[i] = 0;
 	}
 
-	private Boolean CheckValidity() 
+	private Boolean CheckValidity()
 	{
 		if(worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord))
 			return true;
@@ -198,7 +176,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 		{
 			HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
 			ItemStack inputCopy = fireItemStacks[i].copy();
-			if(index != null && inputItemTemps[i] > index.meltTemp)
+			if(index != null && inputItemTemps[i] > index.ticksToCook)
 			{
 				int dam = fireItemStacks[i].getItemDamage();
 				ItemStack is = fireItemStacks[i].copy();
@@ -212,9 +190,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 					if(index2 != null)
 					{
 						//if the input is a new item, then apply the old temperature to it
-						NBTTagCompound nbt = new NBTTagCompound();
-						nbt.setFloat("temperature", inputItemTemps[i]);
-						fireItemStacks[i].stackTagCompound = nbt;
+						TFC_ItemHeat.SetTemp(fireItemStacks[i], inputItemTemps[i]);
 					}
 				}
 				else if(index.hasOutput())
@@ -280,9 +256,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 					if(index2 != null)
 					{
 						//if the input is a new item, then apply the old temperature to it
-						NBTTagCompound nbt = new NBTTagCompound();
-						nbt.setFloat("temperature", inputItemTemps[i]);
-						fireItemStacks[i].stackTagCompound = nbt;
+						TFC_ItemHeat.SetTemp(fireItemStacks[i], inputItemTemps[i]);
 					}
 
 					if(fireItemStacks[i] != null && fireItemStacks[i].getItem() instanceof ItemMeltedMetal && is.getItem() instanceof ItemMeltedMetal)
@@ -433,22 +407,17 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			itemstack.stackSize = getInventoryStackLimit();
 	}
 
-	public void setNumAirBlocks(int n)
-	{
-		numAirBlocks = n;
-	}
-
 	@Override
 	public void updateEntity()
 	{
 		if(!worldObj.isRemote)
 		{
 			//Here we take care of the items that we are cooking in the fire
-			careForInventorySlot(0,40);
-			careForInventorySlot(1,40);
-			careForInventorySlot(2,40);
-			careForInventorySlot(3,40);
-			careForInventorySlot(4,40);
+			careForInventorySlot(0, 40);
+			careForInventorySlot(1, 40);
+			careForInventorySlot(2, 40);
+			careForInventorySlot(3, 40);
+			careForInventorySlot(4, 40);
 
 			ItemStack[] FuelStack = new ItemStack[9];
 			FuelStack[0] = fireItemStacks[5];
@@ -461,8 +430,6 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			FuelStack[7] = fireItemStacks[12];
 			FuelStack[8] = fireItemStacks[13];
 
-			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
-
 			//Now we cook the input item
 			CookItemsNew(0);
 			CookItemsNew(1);
@@ -473,26 +440,21 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			//push the input fuel down the stack
 			HandleFuelStack();
 
-			if(ambientTemp ==  - 1000)	
-			{
-				TFCBiome biome = (TFCBiome) worldObj.getBiomeGenForCoords(xCoord, zCoord);
-				ambientTemp = TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord);
-			}
 			//here we set the various temperatures to range
 			this.keepTempToRange();
 
 			//Play the fire sound
 			Random R = new Random();
-			if(R.nextInt(10) == 0 && fireTemperature > 210)
+			if(R.nextInt(10) == 0 && fireTemp > 210)
 				worldObj.playSoundEffect(xCoord,yCoord,zCoord, "fire.fire", 0.4F + (R.nextFloat()/2), 0.7F + R.nextFloat());
 
-			if(fireTemperature >= 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=1)
+			if(fireTemp >= 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=1)
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
-			else if(fireTemperature < 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=0)
+			else if(fireTemp < 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=0)
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
 
 			//If the fire is still burning and has fuel
-			if(fuelTimeLeft > 0 && fireTemperature >= 210 && (!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
+			if(fuelTimeLeft > 0 && fireTemp >= 1 && (!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
 			{
 				float desiredTemp = handleTemp();
 
@@ -501,30 +463,34 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 				if(TFCOptions.enableDebugMode)
 					fuelTimeLeft = 9999;
 			}
-			else if(fuelTimeLeft <= 0 && fireTemperature >= 210 && fireItemStacks[7] != null && 
+			else if(fuelTimeLeft <= 0 && fireTemp >= 1 && fireItemStacks[7] != null && 
 					(!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
+			{
 				//here we set the temp and burn time based on the fuel in the bottom slot.
 				if(fireItemStacks[7] != null)
 				{
 					if(fireItemStacks[7].getItem() == Items.coal && fireItemStacks[7].getItemDamage() == 0)
 					{
-						fuelTimeLeft = 1100;
+						fuelTimeLeft = 2200;
 						fuelBurnTemp = 1400;
 					}
 					if(fireItemStacks[7].getItem() == Items.coal && fireItemStacks[7].getItemDamage() == 1)
 					{
-						fuelTimeLeft = 900;
+						fuelTimeLeft = 1800;
 						fuelBurnTemp = 1350;
 					}
 					fireItemStacks[7] = null;
 				}
-			//If there is no more fuel and the fire is still hot, we start to cool it off.
-			if(fuelTimeLeft <= 0 && fireTemperature > ambientTemp || (worldObj.isRaining() && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)))
-			{
-				if(airFromBellows == 0)
-					fireTemperature-=0.125F;
 				else
-					fireTemperature-=0.1F;
+				{
+					//If there is no more fuel and the fire is still hot, we start to cool it off.
+					float desiredTemp = handleTemp();
+					handleTempFlux(desiredTemp);
+				}
+			}
+			else
+			{
+				TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 			}
 
 			//Here we handle the bellows
@@ -561,18 +527,18 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
-		fireTemperature = nbttagcompound.getFloat("temperature");
-		fuelTimeLeft = nbttagcompound.getFloat("fuelTimeLeft");
-		fuelBurnTemp = nbttagcompound.getFloat("fuelBurnTemp");
+		fireTemp = nbttagcompound.getInteger("temp");
+		fuelTimeLeft = nbttagcompound.getInteger("fuelTime");
+		fuelBurnTemp = nbttagcompound.getInteger("fuelTemp");
 		charcoalCounter = nbttagcompound.getInteger("charcoalCounter");
-		airFromBellowsTime = nbttagcompound.getFloat("airFromBellowsTime");
-		airFromBellows = nbttagcompound.getFloat("airFromBellows");
+		airFromBellows = nbttagcompound.getInteger("airBellows");
 		isValid = nbttagcompound.getBoolean("isValid");
+
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
 		fireItemStacks = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < fireItemStacks.length)
 				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
@@ -583,12 +549,11 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setFloat("temperature", fireTemperature);
-		nbttagcompound.setFloat("fuelTimeLeft", fuelTimeLeft);
-		nbttagcompound.setFloat("fuelBurnTemp", fuelBurnTemp);
+		nbttagcompound.setInteger("temp", fireTemp);
+		nbttagcompound.setInteger("fuelTime", fuelTimeLeft);
+		nbttagcompound.setInteger("fuelTemp", fuelBurnTemp);
 		nbttagcompound.setInteger("charcoalCounter", charcoalCounter);
-		nbttagcompound.setFloat("airFromBellowsTime", airFromBellowsTime);
-		nbttagcompound.setFloat("airFromBellows", airFromBellows);
+		nbttagcompound.setInteger("airBellows", airFromBellows);
 		nbttagcompound.setBoolean("isValid", isValid);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < fireItemStacks.length; i++)

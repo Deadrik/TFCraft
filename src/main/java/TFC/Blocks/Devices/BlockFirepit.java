@@ -59,9 +59,9 @@ public class BlockFirepit extends BlockTerraContainer
 			{
 				TileEntityFirepit tileentityfirepit;
 				tileentityfirepit = (TileEntityFirepit)world.getTileEntity(i, j, k);
-				if(tileentityfirepit.fireTemperature < 210 && tileentityfirepit.fireItemStacks[5] != null)
+				if(tileentityfirepit.fireTemp < 210 && tileentityfirepit.fireItemStacks[5] != null)
 				{
-					tileentityfirepit.fireTemperature = 300;
+					tileentityfirepit.fireTemp = 300;
 					int ss = entityplayer.inventory.getCurrentItem().stackSize;
 					int dam = entityplayer.inventory.getCurrentItem().getItemDamage();
 					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
@@ -164,7 +164,7 @@ public class BlockFirepit extends BlockTerraContainer
 			world.spawnParticle("flame", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("smoke", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
-			if (((TileEntityFirepit)world.getTileEntity(i, j, k)).fireTemperature > 550)
+			if (((TileEntityFirepit)world.getTileEntity(i, j, k)).fireTemp > 550)
 			{
 				world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f6 + 0.2F, 0.0D, 0.0D, 0.0D);
 				world.spawnParticle("flame", f+f4 - 0.3F , f1, f2 + f6 + 0.1F, 0.0D, 0.0D, 0.0D);

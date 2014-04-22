@@ -19,10 +19,10 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Constant.Global;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.Alloy;
 import TFC.Core.Metal.AlloyManager;
 import TFC.Core.Metal.AlloyMetal;
@@ -139,8 +139,8 @@ public class TECrucible extends TileEntity implements IInventory
 			/*Heat the crucible based on the Forge beneath it*/
 			if(worldObj.getBlock(xCoord,yCoord-1,zCoord) == TFCBlocks.Forge)
 			{
-				TileEntityForge te = (TileEntityForge) worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
-				if(te.fireTemperature > temperature)
+				TileEntityForge te = (TileEntityForge) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+				if(te.fireTemp > temperature)
 					temperature++;
 			}
 			if(tempTick > 22)
@@ -181,7 +181,7 @@ public class TECrucible extends TileEntity implements IInventory
 				else if(itemToSmelt instanceof ISmeltable && (
 						(ISmeltable)itemToSmelt).isSmeltable(stackToSmelt) &&
 						!TFC_Core.isOreIron(stackToSmelt) &&
-						temperature >= TFC_ItemHeat.getMeltingPoint(stackToSmelt))
+						temperature >= TFC_ItemHeat.IsCookable(stackToSmelt))
 				{
 					Metal mType =((ISmeltable)itemToSmelt).GetMetalType(stackToSmelt);
 					if(addMetal(mType, ((ISmeltable)itemToSmelt).GetMetalReturnAmount(stackToSmelt)))
@@ -198,12 +198,12 @@ public class TECrucible extends TileEntity implements IInventory
 					storage[1] != null &&
 					currentAlloy.outputType != null &&
 					outputTick >= 3 &&
-					temperature >= TFC_ItemHeat.getMeltingPoint(currentAlloy.outputType))
+					temperature >= TFC_ItemHeat.IsCookable(currentAlloy.outputType))
 			{
 				if(storage[1].getItem() == TFCItems.CeramicMold)
 				{
 					storage[1] = new ItemStack(currentAlloy.outputType.MeltedItem, 1, 99);
-					TFC_ItemHeat.SetTemperature(storage[1], temperature);
+					TFC_ItemHeat.SetTemp(storage[1], temperature);
 					//currentAlloy.outputAmount--;
 					drainOutput(1.0f);
 					updateGui((byte) 1); //TODO
@@ -211,9 +211,9 @@ public class TECrucible extends TileEntity implements IInventory
 				else if(storage[1].getItem() == currentAlloy.outputType.MeltedItem && storage[1].getItemDamage() > 0)
 				{
 					storage[1].setItemDamage(storage[1].getItemDamage() - 1);
-					float inTemp =TFC_ItemHeat.GetTemperature(storage[1]);
-					float temp = (temperature - inTemp) / 2;
-					TFC_ItemHeat.SetTemperature(storage[1], inTemp + temp);
+					short inTemp =TFC_ItemHeat.GetTemp(storage[1]);
+					short temp = (short)((temperature - inTemp) / 2);
+					TFC_ItemHeat.SetTemp(storage[1], inTemp + temp);
 					//System.out.println(temperature +", "+inTemp+", "+temp);
 					drainOutput(1.0f);
 					storage[1].stackSize = 1;

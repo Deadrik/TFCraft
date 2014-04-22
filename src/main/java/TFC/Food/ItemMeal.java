@@ -12,12 +12,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.API.IFood;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Items.ItemTerra;
 
@@ -127,12 +127,13 @@ public class ItemMeal extends ItemTerra implements IFood
 
 	public static boolean isWarm(ItemStack is)
 	{
-		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) * 0.1)
+		if(TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is) * 0.1)
 			return true;
 		else
 			return false;
 	}
 
+	@Override
 	public float getFoodWeight(ItemStack is)
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
@@ -143,6 +144,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		return 0f;
 	}
 
+	@Override
 	public float getFoodDecay(ItemStack is)
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodDecay"))
@@ -230,5 +232,17 @@ public class ItemMeal extends ItemTerra implements IFood
 	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k)
 	{
 		return null;
+	}
+
+	@Override
+	public boolean isEdible() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isUsable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

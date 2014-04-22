@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
@@ -13,13 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import TFC.API.HeatIndex;
-import TFC.API.HeatRegistry;
 import TFC.API.ISize;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Items.ItemTerra;
 
 public class ItemTerraBlock extends ItemBlock implements ISize
@@ -64,18 +61,6 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 //		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 //	}
 
-	@Override
-	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected)
-	{
-		/*if (!world.isRemote && is.hasTagCompound())
-		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-
-			if(stackTagCompound.hasKey("temperature"))
-				TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
-		}*/
-	}
-
 	/**
 	 * This is called by inventories in the world to tick things such as temperature and food decay. Override this and 
 	 * return true if you want the item to be handled differently than the standard code. True will stop he standard TFC code from running.
@@ -100,13 +85,10 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
-			if(stackTagCompound.hasKey("temperature"))
+			if(TFC_ItemHeat.HasTemp(is))
 			{
-				float temp = stackTagCompound.getFloat("temperature");
-				float meltTemp = -1;
-				HeatIndex hi = HeatRegistry.getInstance().findMatchingIndex(is);
-				if(hi != null)
-					meltTemp = hi.meltTemp;
+				int temp = TFC_ItemHeat.GetTemp(is);
+				int meltTemp = TFC_ItemHeat.IsCookable(is);
 
 				if(meltTemp != -1)
 				{

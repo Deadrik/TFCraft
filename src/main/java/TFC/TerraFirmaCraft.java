@@ -28,9 +28,9 @@ import TFC.Commands.RemoveAreaCommand;
 import TFC.Commands.RemoveChunkCommand;
 import TFC.Commands.SetPlayerStatsCommand;
 import TFC.Commands.StripChunkCommand;
+import TFC.Core.ItemHeat;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
 import TFC.Food.TFCPotion;
 import TFC.Handlers.AnvilCraftingHandler;
@@ -220,7 +220,7 @@ public class TerraFirmaCraft
 		//Register all of the recipes
 		Recipes.registerRecipes();
 
-		TFC_ItemHeat.SetupItemHeat();
+		ItemHeat.SetupItemHeat();
 
 		TFC_Climate.initCache();
 	}

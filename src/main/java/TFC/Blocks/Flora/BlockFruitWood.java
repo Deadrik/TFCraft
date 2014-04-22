@@ -99,14 +99,7 @@ public class BlockFruitWood extends BlockTerraContainer
 					boolean reachedTop = false;
 					while(!reachedTop)
 					{
-						if(l != 9 && l != 15 && world.isAirBlock(x, j+y+1, z))
-						{
-							reachedTop = true;
-						}
-						else if((l == 9 || l == 15) && world.isAirBlock(x, j+y+1, z)
-								&& world.getBlock(x+1, j+y+1, z) != this && world.getBlock(x-1, j+y+1, z) != this && world.getBlock(x, j+y+1, z+1) != this &&
-								world.getBlock(x, j+y+1, z-1) != this && world.getBlock(x-1, j+y+1, z-1) != this && world.getBlock(x-1, j+y+1, z+1) != this && 
-								world.getBlock(x+1, j+y+1, z+1) != this && world.getBlock(x+1, j+y+1, z-1) != this)
+						if (world.isAirBlock(x, j+y+1, z))
 						{
 							reachedTop = true;
 						}
@@ -120,10 +113,11 @@ public class BlockFruitWood extends BlockTerraContainer
 				Random R = new Random();
 				if(R.nextInt(100) > 50 && isAxeorSaw)
 				{
-					if(world.getBlockMetadata(i, j, k) < 8)
-						dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling1, 1, l));
-					else
-						dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling2, 1, l));
+					if(world.getBlock(i+1, j, k) == TFCBlocks.fruitTreeLeaves2 || world.getBlock(i-1, j, k) == TFCBlocks.fruitTreeLeaves2 || 
+							world.getBlock(i, j, k+1) == TFCBlocks.fruitTreeLeaves2 || world.getBlock(i, j, k-1) == TFCBlocks.fruitTreeLeaves2 || 
+							world.getBlock(i, j+1, k) == TFCBlocks.fruitTreeLeaves2 || world.getBlock(i, j-1, k) == TFCBlocks.fruitTreeLeaves2)
+						l += 8;
+					dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling1, 1, l));
 				}
 			}
 		}

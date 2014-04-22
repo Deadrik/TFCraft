@@ -532,10 +532,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				int arrayIndex = xCoord + zCoord * 16;
 				int arrayIndexDL = zCoord + xCoord * 16;
 				TFCBiome biome = biomesForGeneration[arrayIndexDL];
-				DataLayer rock1 = rockLayer1[arrayIndexDL];
-				DataLayer rock2 = rockLayer2[arrayIndexDL];
-				DataLayer rock3 = rockLayer3[arrayIndexDL];
-				DataLayer evt = evtLayer[arrayIndexDL];
+				DataLayer rock1 = rockLayer1[arrayIndexDL] == null ? DataLayer.Granite : rockLayer1[arrayIndexDL];
+				DataLayer rock2 = rockLayer2[arrayIndexDL] == null ? DataLayer.Granite : rockLayer2[arrayIndexDL];
+				DataLayer rock3 = rockLayer3[arrayIndexDL] == null ? DataLayer.Granite : rockLayer3[arrayIndexDL];
+				DataLayer evt = evtLayer[arrayIndexDL] == null ? DataLayer.EVT_0_125 : evtLayer[arrayIndexDL];
 				float rain = TFC_Climate.getRainfall(chunkX*16 + xCoord, 144, chunkZ*16 + zCoord);
 
 				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 6.0D + rand.nextDouble() * 0.25D);

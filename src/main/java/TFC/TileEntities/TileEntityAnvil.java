@@ -17,13 +17,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Crafting.AnvilManager;
 import TFC.API.Crafting.AnvilRecipe;
 import TFC.API.Crafting.AnvilReq;
 import TFC.API.Enums.RuleEnum;
 import TFC.API.Events.AnvilCraftEvent;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Items.ItemMeltedMetal;
 import TFC.Items.ItemTFCArmor;
 import TFC.Items.Tools.ItemMiscToolHead;
@@ -99,7 +99,6 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 			{
 				itemCraftingValue = getItemCraftingValue();
 				AnvilManager manager = AnvilManager.getInstance();
-				new Random(worldObj.getSeed());
 				Object[] r = getRecipe(manager);
 				AnvilRecipe recipe = r != null && r[0] !=  null ? (AnvilRecipe) r[0] : null;
 				ItemStack result = r != null && r[1] !=  null ? (ItemStack) r[1] : null;
@@ -112,8 +111,12 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 					MinecraftForge.EVENT_BUS.post(eventCraft);
 					if(!eventCraft.isCanceled())
 					{
-						NBTTagCompound Tag = new NBTTagCompound();
-						Tag.setFloat("temperature", TFC_ItemHeat.GetTemperature(anvilItemStacks[INPUT1_SLOT]));
+						NBTTagCompound Tag = null;
+						if(!TFC_ItemHeat.SetTemp(eventCraft.result, TFC_ItemHeat.GetTemp(anvilItemStacks[INPUT1_SLOT])))
+							Tag = new NBTTagCompound();
+						else 
+							Tag = anvilItemStacks[INPUT1_SLOT].getTagCompound();
+
 						this.setInventorySlotContents(INPUT1_SLOT, eventCraft.result);
 						if(anvilItemStacks[INPUT1_SLOT] != null)
 						{
@@ -417,9 +420,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 
 				if(result != null)
 				{
-					NBTTagCompound Tag = new NBTTagCompound();
-					Tag.setFloat("temperature", (TFC_ItemHeat.GetTemperature(anvilItemStacks[2]) + TFC_ItemHeat.GetTemperature(anvilItemStacks[3])) / 2);
-					result.setTagCompound(Tag);
+					TFC_ItemHeat.SetTemp(result, (TFC_ItemHeat.GetTemp(anvilItemStacks[2]) + TFC_ItemHeat.GetTemp(anvilItemStacks[3])) / 2);
 					if(result.stackSize <= 0)
 						result.stackSize = 1;
 					setInventorySlotContents(WELDOUT_SLOT, result);
@@ -431,7 +432,9 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 			}
 		}
 		else
+		{
 			;//TODO TerraFirmaCraft.proxy.sendCustomPacket(createAnvilUsePacket(7));
+		}
 	}
 	@Override
 	public void closeInventory()
@@ -582,13 +585,13 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 	public Boolean isTemperatureWeldable(int i)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
-		if(anvilItemStacks[i] != null && anvilItemStacks[i].hasTagCompound() && anvilItemStacks[i].getTagCompound().hasKey("temperature"))
+		if(TFC_ItemHeat.HasTemp(anvilItemStacks[i]))
 		{
 			HeatIndex index = manager.findMatchingIndex(anvilItemStacks[i]);
 			if(index != null)
 			{
-				float temp = anvilItemStacks[i].getTagCompound().getFloat("temperature");
-				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.20 && 
+				short temp = TFC_ItemHeat.GetTemp(anvilItemStacks[i]);
+				return temp < index.ticksToCook && temp > index.ticksToCook - index.ticksToCook * 0.20 && 
 						(anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
 			}
 		}
@@ -599,13 +602,13 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 	{
 
 		HeatRegistry manager = HeatRegistry.getInstance();
-		if(anvilItemStacks[i] != null && anvilItemStacks[i].hasTagCompound() && anvilItemStacks[i].getTagCompound().hasKey("temperature"))
+		if(TFC_ItemHeat.HasTemp(anvilItemStacks[i]))
 		{
 			HeatIndex index = manager.findMatchingIndex(anvilItemStacks[i]);
 			if(index != null)
 			{
-				float temp = anvilItemStacks[i].getTagCompound().getFloat("temperature");
-				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.40 && 
+				short temp = TFC_ItemHeat.GetTemp(anvilItemStacks[i]);
+				return temp < index.ticksToCook && temp > index.ticksToCook - index.ticksToCook * 0.40 && 
 						(anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
 			}
 		}

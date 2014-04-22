@@ -52,9 +52,9 @@ public class BlockForge extends BlockTerraContainer
 			{
 				TileEntityForge tileentityforge;
 				tileentityforge = (TileEntityForge)world.getTileEntity(i, j, k);
-				if(tileentityforge.fireTemperature < 210 && tileentityforge.fireItemStacks[7] != null && tileentityforge.isValid)
+				if(tileentityforge.fireTemp < 210 && tileentityforge.fireItemStacks[7] != null && tileentityforge.isValid)
 				{
-					tileentityforge.fireTemperature = 300;
+					tileentityforge.fireTemp = 300;
 					int ss = entityplayer.inventory.getCurrentItem().stackSize;
 					int dam = entityplayer.inventory.getCurrentItem().getItemDamage()+1;
 
@@ -164,7 +164,6 @@ public class BlockForge extends BlockTerraContainer
 
 				if(world.getTileEntity(x, y, z) != null)
 				{
-					((TileEntityForge)world.getTileEntity(x, y, z)).setNumAirBlocks(numAirBlocks);
 					((TileEntityForge)world.getTileEntity(x, y, z)).isValid = false;
 				}
 			}
@@ -199,7 +198,7 @@ public class BlockForge extends BlockTerraContainer
 			world.spawnParticle("smoke", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
 
-			if (((TileEntityForge)world.getTileEntity(i, j, k)).fireTemperature > 550)
+			if (((TileEntityForge)world.getTileEntity(i, j, k)).fireTemp > 550)
 			{
 				world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f6 + 0.2F, 0.0D, 0.0D, 0.0D);
 				world.spawnParticle("flame", f+f4 - 0.3F , f1, f2 + f6 + 0.1F, 0.0D, 0.0D, 0.0D);

@@ -12,7 +12,7 @@ import TFC.Containers.Slots.SlotBlocked;
 import TFC.Containers.Slots.SlotFoodBowl;
 import TFC.Containers.Slots.SlotFoodOnly;
 import TFC.Core.Player.PlayerInventory;
-import TFC.TileEntities.TileEntityFoodPrep;
+import TFC.TileEntities.TEFoodPrep;
 
 public class ContainerFoodPrep extends ContainerTFC
 {
@@ -20,10 +20,10 @@ public class ContainerFoodPrep extends ContainerTFC
 	private int posX;
 	private int posY;
 	private int posZ;
-	private TileEntityFoodPrep te;
+	private TEFoodPrep te;
 	private EntityPlayer player;
 
-	public ContainerFoodPrep(InventoryPlayer playerinv, TileEntityFoodPrep pile, World world, int x, int y, int z)
+	public ContainerFoodPrep(InventoryPlayer playerinv, TEFoodPrep pile, World world, int x, int y, int z)
 	{
 		this.player = playerinv.player;
 		this.te = pile;

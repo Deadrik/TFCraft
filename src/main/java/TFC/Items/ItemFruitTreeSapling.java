@@ -13,18 +13,14 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
-import TFC.TFCItems;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 
 public class ItemFruitTreeSapling extends ItemTerra
 {
-	int offset;
 	IIcon[] icons;
-
-	public ItemFruitTreeSapling(int off)
+	public ItemFruitTreeSapling()
 	{
 		super();
-		offset = off;
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabFood);
@@ -41,7 +37,7 @@ public class ItemFruitTreeSapling extends ItemTerra
 				world.isAirBlock(x, y + 1, z) && !world.isRemote)
 		{
 
-			world.setBlock(x, y + 1, z, TFCBlocks.fruitTreeWood, stack.getItemDamage() + offset, 0x2);
+			world.setBlock(x, y + 1, z, TFCBlocks.fruitTreeWood, stack.getItemDamage(), 0x2);
 
 			((TileEntityFruitTreeWood)world.getTileEntity(x, y+1, z)).setTrunk(true);
 			((TileEntityFruitTreeWood)world.getTileEntity(x, y+1, z)).setHeight(0);
@@ -57,16 +53,9 @@ public class ItemFruitTreeSapling extends ItemTerra
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		if(this == TFCItems.FruitTreeSapling1)
+		for(int i = 0; i < MetaNames.length; i++)
 		{
-			for(int i = 0; i < 8; i++) 
-			{
-				list.add(new ItemStack(this, 1, i));
-			}
-		}
-		else
-		{
-			list.add(new ItemStack(this, 1, 0));
+			list.add(new ItemStack(this,1,i));
 		}
 	}
 

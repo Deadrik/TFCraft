@@ -5,7 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.TileEntities.TileEntityFoodPrep;
+import TFC.TileEntities.TEFoodPrep;
 
 public class TESRFoodPrep extends TESRBase
 {
@@ -18,7 +18,7 @@ public class TESRFoodPrep extends TESRBase
 	/**
 	 * Renders the TileEntity for the chest at a position.
 	 */
-	public void renderAt(TileEntityFoodPrep te, double d, double d1, double d2, float f)
+	public void renderAt(TEFoodPrep te, double d, double d1, double d2, float f)
 	{
 		if (te.getWorldObj() == null)
 		{
@@ -86,6 +86,6 @@ public class TESRFoodPrep extends TESRBase
 	@Override
 	public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
 	{
-		this.renderAt((TileEntityFoodPrep)par1TileEntity, par2, par4, par6, par8);
+		this.renderAt((TEFoodPrep)par1TileEntity, par2, par4, par6, par8);
 	}
 }

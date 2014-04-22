@@ -19,7 +19,7 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.IPipeConnectable;
 import TFC.API.TFCOptions;
-import TFC.Core.TFC_ItemHeat;
+import TFC.API.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Food.ItemFoodTFC;
 import TFC.Items.ItemTerra;
@@ -51,18 +51,14 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 	{
 		if(Type ==1 && itemstack!=null&&  itemstack.getItem() instanceof ItemTerra )
 		{
-			if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("temperature"))
+			if(TFC_ItemHeat.HasTemp(itemstack))
 			{
-				NBTTagCompound comp = itemstack.getTagCompound();
-				float temp = comp.getFloat("temperature");
+				short temp = TFC_ItemHeat.GetTemp(itemstack);
 				if(liquidLevel >= 12 && temp >20)
 				{
 					temp-=100;
 					liquidLevel-=1;
-
-					comp.setFloat("temperature",temp);
-					itemstack.setTagCompound(comp);
-
+					TFC_ItemHeat.SetTemp(itemstack, temp);
 					TFC_ItemHeat.HandleItemHeat(itemstack);
 				}
 			}

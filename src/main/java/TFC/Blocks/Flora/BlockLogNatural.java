@@ -28,11 +28,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockLogNatural extends BlockTerra
 {
 	String[] woodNames;
+	int searchDist = 10;
+	static int damage = 0;
+	boolean isStone = false;
 	public static IIcon[] sideIcons;
 	public static IIcon[] innerIcons;
 	public static IIcon[] rotatedSideIcons;
-	static int damage = 0;
-	boolean isStone = false;
 
 	public BlockLogNatural()
 	{
@@ -185,26 +186,8 @@ public class BlockLogNatural extends BlockTerra
 
 	private void ProcessTree(World world, int i, int j, int k, int l, ItemStack stack)
 	{
-		int x = i;
-		int y = 0;
-		int z = k;
-		boolean checkArray[][][] = new boolean[11][50][11];
-
-		boolean reachedTop = false;
-		while(!reachedTop)
-		{
-			if(l != 9 && l != 15 && world.isAirBlock(x, j+y+1, z))
-				reachedTop = true;
-			else if((l == 9 || l == 15) && world.isAirBlock(x, j+y+1, z)
-					&& world.getBlock(x+1, j+y+1, z) != this && world.getBlock(x-1, j+y+1, z) != this && world.getBlock(x, j+y+1, z+1) != this &&
-					world.getBlock(x, j+y+1, z-1) != this && world.getBlock(x-1, j+y+1, z-1) != this && world.getBlock(x-1, j+y+1, z+1) != this && 
-					world.getBlock(x+1, j+y+1, z+1) != this && world.getBlock(x+1, j+y+1, z-1) != this)
-				reachedTop = true;
-
-			y++;
-		}
-		while (y >= 0)
-			scanLogs(world,i,j+y,k,l,checkArray,(byte)6,(byte)y--,(byte)6, stack);
+		boolean[][][] checkArray = new boolean[searchDist * 2 + 1][256][searchDist * 2 + 1];
+		scanLogs(world, i, j, k, l, checkArray, (byte)0, (byte)0, (byte)0, stack);
 	}
 
 	@Override
@@ -236,58 +219,50 @@ public class BlockLogNatural extends BlockTerra
 		}
 	}
 
-	private void scanLogs(World world, int i, int j, int k, int l, boolean[][][] checkArray,byte x, byte y, byte z, ItemStack stack)
+	private void scanLogs(World world, int i, int j, int k, int l, boolean[][][] checkArray, byte x, byte y, byte z, ItemStack stack)
 	{
-		if(y >= 0)
+		if(y >= 0 && j + y < 256)
 		{
-			checkArray[x][y][z] = true;
 			int offsetX = 0;int offsetY = 0;int offsetZ = 0;
+			checkArray[x+searchDist][y][z+searchDist] = true;
 
-			for (offsetX = -2; offsetX <= 2; offsetX++)
-			{
-				for (offsetZ = -2; offsetZ <= 2; offsetZ++)
-				{
-					if(x+offsetX < 11 && x+offsetX >= 0 && z+offsetZ < 11 && z+offsetZ >= 0)
-					{
-						if(checkOut(world, i+offsetX, j, k+offsetZ, l) && !checkArray[x+offsetX][y][z+offsetZ])
-							scanLogs(world,i+offsetX, j, k+offsetZ, l, checkArray,(byte)(x+offsetX),y,(byte)(z+offsetZ), stack);
-					}
-				}
-			}
+			for (offsetX = -3; offsetX <= 3; offsetX++)
+				for (offsetZ = -3; offsetZ <= 3; offsetZ++)
+					for (offsetY = 0; offsetY <= 2; offsetY++) 
+						if(Math.abs(x+offsetX) <= searchDist && j + y + offsetY < 256 && Math.abs(z+offsetZ) <= searchDist)
+							if(checkOut(world, i+x+offsetX, j+y+offsetY, k+z+offsetZ, l) 
+								&& !(offsetX == 0 && offsetY == 0 && offsetZ == 0)
+								&& !checkArray[x+offsetX+searchDist][y+offsetY][z+offsetZ+searchDist])
+								scanLogs(world,i, j, k, l, checkArray, (byte)(x+offsetX),(byte)(y+offsetY),(byte)(z+offsetZ), stack);
 
 			damage++;
 			if(stack != null)
 			{
 				if(damage+stack.getItemDamage() <= stack.getMaxDamage())
 				{
-					world.setBlock(i, j, k, Blocks.air, 0, 0x2);
-					notifyLeaves(world, i, j, k);
+					world.setBlock(i + x, j + y, k + z, Blocks.air, 0, 0x2);
 					if((isStone && world.rand.nextInt(10) != 0) || !isStone)
-						dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Logs, 1, damageDropped(l)));
+						dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(TFCItems.Logs, 1, damageDropped(l)));
+					notifyLeaves(world, i + x, j + y, k + z);
 				}
 			}
 			else
 			{
 				world.setBlockToAir(i, j, k);
 				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Logs, 1, damageDropped(l)));
+				notifyLeaves(world, i + x, j + y, k + z);
 			}
 		}
 	}
 
 	private void notifyLeaves(World world, int i, int j, int k)
 	{
-		if(world.getBlock(i+1, j, k).getMaterial() == Material.leaves)
-			world.notifyBlockOfNeighborChange(i+1, j, k, Blocks.air);
-		if(world.getBlock(i-1, j, k).getMaterial() == Material.leaves)
-			world.notifyBlockOfNeighborChange(i, j, k-1, Blocks.air);
-		if(world.getBlock(i, j, k+1).getMaterial() == Material.leaves)
-			world.notifyBlockOfNeighborChange(i, j, k+1, Blocks.air);
-		if(world.getBlock(i, j, k-1).getMaterial() == Material.leaves)
-			world.notifyBlockOfNeighborChange(i, j, k-1, Blocks.air);
-		if(world.getBlock(i, j+1, k).getMaterial() == Material.leaves)
-			world.notifyBlockOfNeighborChange(i, j+1, k, Blocks.air);
-		if(world.getBlock(i, j-1, k-1).getMaterial() == Material.leaves)
-			world.notifyBlockOfNeighborChange(i, j-1, k, Blocks.air);
+		world.notifyBlockOfNeighborChange(i + 1, j, k, Blocks.air);
+		world.notifyBlockOfNeighborChange(i - 1, j, k, Blocks.air);
+		world.notifyBlockOfNeighborChange(i, j, k + 1, Blocks.air);
+		world.notifyBlockOfNeighborChange(i, j, k - 1, Blocks.air);
+		world.notifyBlockOfNeighborChange(i, j + 1, k, Blocks.air);
+		world.notifyBlockOfNeighborChange(i, j - 1, k, Blocks.air);
 	}
 
 }

@@ -9,14 +9,14 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.Containers.ContainerFoodPrep;
-import TFC.TileEntities.TileEntityFoodPrep;
+import TFC.TileEntities.TEFoodPrep;
 
 public class GuiFoodPrep extends GuiContainerTFC
 {
 	private static final ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_foodprep.png");
-	TileEntityFoodPrep table;
+	TEFoodPrep table;
 
-	public GuiFoodPrep(InventoryPlayer inventoryplayer, TileEntityFoodPrep wb, World world, int i, int j, int k)
+	public GuiFoodPrep(InventoryPlayer inventoryplayer, TEFoodPrep wb, World world, int i, int j, int k)
 	{
 		super(new ContainerFoodPrep(inventoryplayer, wb,world, i, j, k), 103, 85);
 		table = wb;

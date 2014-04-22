@@ -13,10 +13,13 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIRunAroundLikeCrazy;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
@@ -120,10 +123,15 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
 		size_mod =(float)Math.sqrt((((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) * 0.1f) + 1F) * (1.0F - 0.1F * sex));
-		this.setSize(0.9F, 1.3F);
+		this.setSize(1.4F, 1.6F);
 		this.getNavigator().setAvoidsWater(true);
+		this.tasks.taskEntries.clear();this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIRunAroundLikeCrazy(this, 1.2D));
+		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.0D));
+		this.tasks.addTask(6, new EntityAIWander(this, 0.7D));
+		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		this.tasks.addTask(8, new EntityAILookIdle(this));
 		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 1.0F));
-		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain, false));
@@ -132,11 +140,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.BarleyGrain, false));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.OatGrain, false));
 		this.tasks.addTask(6, this.aiEatGrass);
-		for(Object aiTask : this.tasks.taskEntries)
-		{
-			if(aiTask instanceof EntityAIPanic)
-				this.tasks.removeTask((EntityAIBase)aiTask);
-		}
 		this.tasks.addTask(1, new EntityAIPanicTFC(this, 1.2D,true));
 		this.func_110226_cD();
 
@@ -251,6 +254,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 	}
 
+	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
@@ -266,6 +270,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.dataWatcher.addObject(29, new Float(1));
 	}
 
+	@Override
 	public void setHorseType(int par1)
 	{
 		this.dataWatcher.updateObject(19, Byte.valueOf((byte)par1));
@@ -275,17 +280,20 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * returns the horse type
 	 */
+	@Override
 	public int getHorseType()
 	{
 		return this.dataWatcher.getWatchableObjectByte(19);
 	}
 
+	@Override
 	public void setHorseVariant(int par1)
 	{
 		this.dataWatcher.updateObject(20, Integer.valueOf(par1));
 		this.func_110230_cF();
 	}
 
+	@Override
 	public int getHorseVariant()
 	{
 		return this.dataWatcher.getWatchableObjectInt(20);
@@ -294,7 +302,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Gets the username of the entity.
 	 */
-	public String getEntityName()
+	@Override
+	public String getCommandSenderName()
 	{
 		if (this.hasCustomNameTag())
 		{
@@ -336,40 +345,47 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			this.dataWatcher.updateObject(16, Integer.valueOf(j & ~par1));
 	}
 
+	@Override
 	public boolean isAdultHorse()
 	{
 		return !this.isChild();
 	}
 
+	@Override
 	public boolean isTame()
 	{
 		return this.getHorseWatchableBoolean(2);
 	}
 
+	@Override
 	public boolean func_110253_bW()
 	{
 		return this.isAdultHorse();
 	}
 
+	@Override
 	public String getOwnerName()
 	{
 		return this.dataWatcher.getWatchableObjectString(21);
 	}
 
+	@Override
 	public void setOwnerName(String par1Str)
 	{
 		this.dataWatcher.updateObject(21, par1Str);
 	}
 
+	@Override
 	public float getHorseSize()
 	{
 		int i = this.getGrowingAge();
-		return i >= 0 ? 1.0F : 0.5F + (float)(-24000 - i) / -24000.0F * 0.5F;
+		return i >= 0 ? 1.0F : 0.5F + (-24000 - i) / -24000.0F * 0.5F;
 	}
 
 	/**
 	 * "Sets the scale for an ageable entity according to the boolean parameter, which says if it's a child."
 	 */
+	@Override
 	public void setScaleForAge(boolean par1)
 	{
 		if (par1)
@@ -378,37 +394,44 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			this.setScale(1.0F);
 	}
 
+	@Override
 	public boolean isHorseJumping()
 	{
 		return this.horseJumping;
 	}
 
+	@Override
 	public void setHorseTamed(boolean par1)
 	{
 		this.setHorseWatchableBoolean(2, par1);
 	}
 
+	@Override
 	public void setHorseJumping(boolean par1)
 	{
 		this.horseJumping = par1;
 	}
 
+	@Override
 	public boolean allowLeashing()
 	{
 		return !this.func_110256_cu() && super.allowLeashing();
 	}
 
+	@Override
 	protected void func_142017_o(float par1)
 	{
 		if (par1 > 6.0F && this.isEatingHaystack())
 			this.setEatingHaystack(false);
 	}
 
+	@Override
 	public boolean isChested()
 	{
 		return this.getHorseWatchableBoolean(8);
 	}
 
+	@Override
 	public int func_110241_cb()
 	{
 		return this.dataWatcher.getWatchableObjectInt(22);
@@ -417,67 +440,87 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * 0 = iron, 1 = gold, 2 = diamond
 	 */
-	public int getHorseArmorIndex(ItemStack par1ItemStack)
+	private int getHorseArmorIndex(ItemStack par1ItemStack)
 	{
-		return par1ItemStack == null ? 0 : (par1ItemStack.getItem() == Items.iron_horse_armor ? 1 : (par1ItemStack.getItem() == Items.golden_horse_armor ? 2 : (par1ItemStack.getItem() == Items.diamond_horse_armor ? 3 : 0)));
+		if (par1ItemStack == null)
+		{
+			return 0;
+		}
+		else
+		{
+			Item item = par1ItemStack.getItem();
+			return item == Items.iron_horse_armor ? 1 : (item == Items.golden_horse_armor ? 2 : (item == Items.diamond_horse_armor ? 3 : 0));
+		}
 	}
 
+	@Override
 	public boolean isEatingHaystack()
 	{
 		return this.getHorseWatchableBoolean(32);
 	}
 
+	@Override
 	public boolean isRearing()
 	{
 		return this.getHorseWatchableBoolean(64);
 	}
 
+	@Override
 	public boolean func_110205_ce()
 	{
 		return this.getHorseWatchableBoolean(16);
 	}
 
+	@Override
 	public boolean getHasReproduced()
 	{
 		return this.hasReproduced;
 	}
 
-	public void func_110236_r(int par1)
+	@Override
+	public void func_146086_d(ItemStack par1)
 	{
-		this.dataWatcher.updateObject(22, Integer.valueOf(par1));
+		this.dataWatcher.updateObject(22, Integer.valueOf(this.getHorseArmorIndex(par1)));
 		this.func_110230_cF();
 	}
 
+	@Override
 	public void func_110242_l(boolean par1)
 	{
 		this.setHorseWatchableBoolean(16, par1);
 	}
 
+	@Override
 	public void setChested(boolean par1)
 	{
 		this.setHorseWatchableBoolean(8, par1);
 	}
 
+	@Override
 	public void setHasReproduced(boolean par1)
 	{
 		this.hasReproduced = par1;
 	}
 
+	@Override
 	public void setHorseSaddled(boolean par1)
 	{
 		this.setHorseWatchableBoolean(4, par1);
 	}
 
+	@Override
 	public int getTemper()
 	{
 		return this.temper;
 	}
 
+	@Override
 	public void setTemper(int par1)
 	{
 		this.temper = par1;
 	}
 
+	@Override
 	public int increaseTemper(int par1)
 	{
 		int j = MathHelper.clamp_int(this.getTemper() + par1, 0, this.getMaxTemper());
@@ -488,6 +531,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Called when the entity is attacked.
 	 */
+	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		Entity entity = par1DamageSource.getEntity();
@@ -502,6 +546,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
 	 */
+	@Override
 	public int getTotalArmorValue()
 	{
 		return armorValues[this.func_110241_cb()];
@@ -510,11 +555,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Returns true if this entity should push and be pushed by other entities when colliding.
 	 */
+	@Override
 	public boolean canBePushed()
 	{
 		return this.riddenByEntity == null;
 	}
 
+	@Override
 	public boolean prepareChunkForSpawn()
 	{
 		int i = MathHelper.floor_double(this.posX);
@@ -523,6 +570,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return true;
 	}
 
+	@Override
 	public void dropChests()
 	{
 		if (!this.worldObj.isRemote && this.isChested())
@@ -541,6 +589,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Called when the mob is falling. Calculates and applies fall damage.
 	 */
+	@Override
 	protected void fall(float par1)
 	{
 		if (par1 > 1.0F)
@@ -550,15 +599,18 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 		if (i > 0)
 		{
-			this.attackEntityFrom(DamageSource.fall, (float)i);
+			this.attackEntityFrom(DamageSource.fall, i);
 
 			if (this.riddenByEntity != null)
-				this.riddenByEntity.attackEntityFrom(DamageSource.fall, (float)i);
-
-			Block j = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY - 0.2D - (double)this.prevRotationYaw), MathHelper.floor_double(this.posZ));
-			if (j != Blocks.air)
 			{
-				SoundType stepsound = j.stepSound;
+				this.riddenByEntity.attackEntityFrom(DamageSource.fall, i);
+			}
+
+			Block b = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY - 0.2D - this.prevRotationYaw), MathHelper.floor_double(this.posZ));
+
+			if (b != Blocks.air)
+			{
+				SoundType stepsound = b.stepSound;
 				this.worldObj.playSoundAtEntity(this, stepsound.getStepResourcePath(), stepsound.getVolume() * 0.5F, stepsound.getPitch() * 0.75F);
 			}
 		}
@@ -574,7 +626,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	{
 		AnimalChest animalchest = this.horseChest;
 		this.horseChest = new AnimalChest("HorseChest", this.func_110225_cC());
-		this.horseChest.func_110133_a(this.getEntityName());
+		this.horseChest.func_110133_a(this.getCommandSenderName());
 
 		if (animalchest != null)
 		{
@@ -601,13 +653,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		{
 			this.setHorseSaddled(this.horseChest.getStackInSlot(0) != null);
 			if (this.func_110259_cr())
-				this.func_110236_r(this.getHorseArmorIndex(this.horseChest.getStackInSlot(1)));
+				this.func_146086_d(this.horseChest.getStackInSlot(1));
 		}
 	}
 
 	/**
 	 * Called by InventoryBasic.onInventoryChanged() on a array that is never filled.
 	 */
+	@Override
 	public void onInventoryChanged(InventoryBasic par1InventoryBasic)
 	{
 		int i = this.func_110241_cb();
@@ -618,6 +671,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		{
 			if (i == 0 && i != this.func_110241_cb())
 				this.playSound("mob.horse.armor", 0.5F, 1.0F);
+			else if (i != this.func_110241_cb())
+				this.playSound("mob.horse.armor", 0.5F, 1.0F);
 			if (!flag && this.isHorseSaddled())
 				this.playSound("mob.horse.leather", 0.5F, 1.0F);
 		}
@@ -626,12 +681,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Checks if the entity's current position is a valid location to spawn this entity.
 	 */
+	@Override
 	public boolean getCanSpawnHere()
 	{
 		this.prepareChunkForSpawn();
 		return super.getCanSpawnHere();
 	}
 
+	@Override
 	protected EntityHorseTFC getClosestHorse(Entity par1Entity, double par2)
 	{
 		double d1 = Double.MAX_VALUE;
@@ -653,6 +710,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return (EntityHorseTFC)entity1;
 	}
 
+	@Override
 	public double getHorseJumpStrength()
 	{
 		return this.getEntityAttribute(horseJumpStrength).getAttributeValue();
@@ -661,6 +719,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
+	@Override
 	protected String getDeathSound()
 	{
 		this.openHorseMouth();
@@ -668,6 +727,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return i == 3 ? "mob.horse.zombie.death" : (i == 4 ? "mob.horse.skeleton.death" : (i != 1 && i != 2 ? "mob.horse.death" : "mob.horse.donkey.death"));
 	}
 
+	@Override
 	protected Item getDropItem()
 	{
 		boolean flag = this.rand.nextInt(4) == 0;
@@ -678,6 +738,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
+	@Override
 	protected String getHurtSound()
 	{
 		this.openHorseMouth();
@@ -689,6 +750,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return i == 3 ? "mob.horse.zombie.hit" : (i == 4 ? "mob.horse.skeleton.hit" : (i != 1 && i != 2 ? "mob.horse.hit" : "mob.horse.donkey.hit"));
 	}
 
+	@Override
 	public boolean isHorseSaddled()
 	{
 		return this.getHorseWatchableBoolean(4);
@@ -697,6 +759,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
+	@Override
 	protected String getLivingSound()
 	{
 		this.openHorseMouth();
@@ -708,6 +771,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return i == 3 ? "mob.horse.zombie.idle" : (i == 4 ? "mob.horse.skeleton.idle" : (i != 1 && i != 2 ? "mob.horse.idle" : "mob.horse.donkey.idle"));
 	}
 
+	@Override
 	protected String getAngrySoundName()
 	{
 		this.openHorseMouth();
@@ -719,6 +783,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Plays step sound at given x, y, z for the entity
 	 */
+	@Override
 	protected void func_145780_a(int par1, int par2, int par3, Block par4)
 	{
 		SoundType stepsound = par4.stepSound;
@@ -755,6 +820,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -766,11 +832,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Will return how many at most can spawn in a chunk at once.
 	 */
+	@Override
 	public int getMaxSpawnedInChunk()
 	{
 		return 6;
 	}
 
+	@Override
 	public int getMaxTemper()
 	{
 		return 100;
@@ -779,6 +847,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Returns the volume for the sounds this mob makes.
 	 */
+	@Override
 	protected float getSoundVolume()
 	{
 		return 0.8F;
@@ -787,11 +856,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Get number of ticks, at least during which the living entity will be silent.
 	 */
+	@Override
 	public int getTalkInterval()
 	{
 		return 400;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean func_110239_cn()
 	{
@@ -834,6 +905,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.field_110286_bQ = this.field_110286_bQ + field_110273_bx[k];
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public String getHorseTexture()
 	{
@@ -842,6 +914,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return this.field_110286_bQ;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public String[] getVariantTexturePaths()
 	{
@@ -850,11 +923,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return this.field_110280_bR;
 	}
 
+	@Override
 	public void openGUI(EntityPlayer par1EntityPlayer)
 	{
 		if (!this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == par1EntityPlayer) && this.isTame())
 		{
-			this.horseChest.func_110133_a(this.getEntityName());
+			this.horseChest.func_110133_a(this.getCommandSenderName());
 			//par1EntityPlayer.displayGUIHorse(this, this.horseChest);
 			par1EntityPlayer.openGui(TerraFirmaCraft.instance, 42, par1EntityPlayer.worldObj, (int)par1EntityPlayer.posX, (int)par1EntityPlayer.posY, (int)par1EntityPlayer.posZ);
 		}
@@ -868,6 +942,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
+	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
 		ItemStack itemstack = par1EntityPlayer.inventory.getCurrentItem();
@@ -1046,11 +1121,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			par1EntityPlayer.mountEntity(this);
 	}
 
+	@Override
 	public boolean func_110259_cr()
 	{
 		return this.getHorseType() == 0;
 	}
 
+	@Override
 	public boolean func_110229_cs()
 	{
 		int i = this.getHorseType();
@@ -1060,17 +1137,20 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Dead and sleeping entities cannot move
 	 */
+	@Override
 	protected boolean isMovementBlocked()
 	{
 		return this.riddenByEntity != null && this.isHorseSaddled() ? true : this.isEatingHaystack() || this.isRearing();
 	}
 
+	@Override
 	public boolean func_110256_cu()
 	{
 		int i = this.getHorseType();
 		return i == 3 || i == 4;
 	}
 
+	@Override
 	public boolean func_110222_cv()
 	{
 		return this.func_110256_cu() || this.getHorseType() == 2;
@@ -1084,6 +1164,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Called when the mob's health reaches 0.
 	 */
+	@Override
 	public void onDeath(DamageSource par1DamageSource)
 	{
 		super.onDeath(par1DamageSource);
@@ -1107,6 +1188,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
@@ -1154,7 +1236,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				double d0 = this.rand.nextGaussian() * 0.02D;
 				double d1 = this.rand.nextGaussian() * 0.02D;
 				double d2 = this.rand.nextGaussian() * 0.02D;
-				this.worldObj.spawnParticle(s, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+				this.worldObj.spawnParticle(s, this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2);
 			}
 		}
 		else
@@ -1242,16 +1324,19 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return this.riddenByEntity == null && this.ridingEntity == null && this.isTame() && this.isAdultHorse() && !this.func_110222_cv() && this.getHealth() >= this.getMaxHealth();
 	}
 
+	@Override
 	public void setEating(boolean par1)
 	{
 		this.setHorseWatchableBoolean(32, par1);
 	}
 
+	@Override
 	public void setEatingHaystack(boolean par1)
 	{
 		this.setEating(par1);
 	}
 
+	@Override
 	public void setRearing(boolean par1)
 	{
 		if (par1)
@@ -1271,6 +1356,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 	}
 
+	@Override
 	public void makeHorseRearWithSound()
 	{
 		this.makeHorseRear();
@@ -1282,6 +1368,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 	}
 
+	@Override
 	public void dropChestItems()
 	{
 		this.dropItemsInChest(this, this.horseChest);
@@ -1304,6 +1391,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 	}
 
+	@Override
 	public boolean setTamedBy(EntityPlayer par1EntityPlayer)
 	{
 		this.setOwnerName(par1EntityPlayer.getCommandSenderName());
@@ -1314,6 +1402,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Moves the entity based on the specified heading.  Args: strafe, forward
 	 */
+	@Override
 	public void moveEntityWithHeading(float par1, float par2)
 	{
 		if (this.riddenByEntity != null && this.isHorseSaddled())
@@ -1339,11 +1428,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 			if (this.jumpPower > 0.0F && !this.isHorseJumping() && this.onGround)
 			{
-				this.motionY = this.getHorseJumpStrength() * (double)this.jumpPower;
+				this.motionY = this.getHorseJumpStrength() * this.jumpPower;
 
 				if (this.isPotionActive(Potion.jump))
 				{
-					this.motionY += (double)((float)(this.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F);
+					this.motionY += (this.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F;
 				}
 
 				this.setHorseJumping(true);
@@ -1353,8 +1442,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				{
 					float f2 = MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F);
 					float f3 = MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F);
-					this.motionX += (double)(-0.4F * f2 * this.jumpPower);
-					this.motionZ += (double)(0.4F * f3 * this.jumpPower);
+					this.motionX += -0.4F * f2 * this.jumpPower;
+					this.motionZ += 0.4F * f3 * this.jumpPower;
 					this.playSound("mob.horse.jump", 0.4F, 1.0F);
 				}
 
@@ -1400,6 +1489,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
+	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
@@ -1465,6 +1555,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
+	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
@@ -1555,6 +1646,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Returns true if the mob is currently able to mate with the specified mob.
 	 */
+	@Override
 	public boolean canMateWith(EntityAnimal par1EntityAnimal)
 	{
 		if (par1EntityAnimal == this)
@@ -1582,6 +1674,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 	}
 
+	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
 	{
 		Object par1EntityLivingData1 = super.onSpawnWithEgg(par1EntityLivingData);
@@ -1621,7 +1714,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 		if (j != 4 && j != 3)
 		{
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue((double)this.func_110267_cL());
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(this.func_110267_cL());
 
 			if (j == 0)
 			{
@@ -1651,18 +1744,21 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return (IEntityLivingData)par1EntityLivingData1;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float getGrassEatingAmount(float par1)
 	{
 		return this.prevHeadLean + (this.headLean - this.prevHeadLean) * par1;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float getRearingAmount(float par1)
 	{
 		return this.prevRearingAmount + (this.rearingAmount - this.prevRearingAmount) * par1;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float func_110201_q(float par1)
 	{
@@ -1672,11 +1768,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
 	}
 
+	@Override
 	public void setJumpPower(int par1)
 	{
 		if (this.isHorseSaddled())
@@ -1697,11 +1795,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			}
 			else
 			{
-				this.jumpPower = 0.4F + 0.4F * (float)par1 / 90.0F;
+				this.jumpPower = 0.4F + 0.4F * par1 / 90.0F;
 			}
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**
@@ -1716,10 +1815,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			double d0 = this.rand.nextGaussian() * 0.02D;
 			double d1 = this.rand.nextGaussian() * 0.02D;
 			double d2 = this.rand.nextGaussian() * 0.02D;
-			this.worldObj.spawnParticle(s, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+			this.worldObj.spawnParticle(s, this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2);
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void handleHealthUpdate(byte par1)
 	{
@@ -1737,6 +1837,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 	}
 
+	@Override
 	public void updateRiderPosition()
 	{
 		super.updateRiderPosition();
@@ -1747,7 +1848,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			float f1 = MathHelper.cos(this.renderYawOffset * (float)Math.PI / 180.0F);
 			float f2 = 0.7F * this.prevRearingAmount;
 			float f3 = 0.15F * this.prevRearingAmount;
-			this.riddenByEntity.setPosition(this.posX + (double)(f2 * f), this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset() + (double)f3, this.posZ - (double)(f2 * f1));
+			this.riddenByEntity.setPosition(this.posX + f2 * f, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset() + f3, this.posZ - f2 * f1);
 
 			if (this.riddenByEntity instanceof EntityLivingBase)
 			{
@@ -1758,7 +1859,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 	private float func_110267_cL()
 	{
-		return 1000 + (float)this.rand.nextInt(101) + (float)this.rand.nextInt(151);
+		return 1000 + (float)this.rand.nextInt(101) + this.rand.nextInt(151);
 	}
 
 	private double func_110245_cM()
@@ -1779,6 +1880,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	/**
 	 * returns true if this entity is by a ladder, false otherwise
 	 */
+	@Override
 	public boolean isOnLadder()
 	{
 		return false;
@@ -1948,7 +2050,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 
 		entityhorse1.setHorseType(k);
-		double d0 = this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + entityageable.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + (double)this.func_110267_cL();
+		double d0 = this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + entityageable.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + this.func_110267_cL();
 		entityhorse1.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(d0 / 3.0D);
 		double d1 = this.getEntityAttribute(horseJumpStrength).getBaseValue() + entityageable.getEntityAttribute(horseJumpStrength).getBaseValue() + this.func_110245_cM();
 		entityhorse1.getEntityAttribute(horseJumpStrength).setBaseValue(d1 / 3.0D);

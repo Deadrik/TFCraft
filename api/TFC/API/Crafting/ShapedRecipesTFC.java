@@ -6,6 +6,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.API.HeatRegistry;
+import TFC.API.TFC_ItemHeat;
 
 public class ShapedRecipesTFC implements IRecipe
 {
@@ -115,7 +116,7 @@ public class ShapedRecipesTFC implements IRecipe
 
 		if(rnbt != null && rnbt.hasKey("noTemp"))
 		{
-			if(inbt == null || (inbt != null && !inbt.hasKey("temperature")))
+			if(inbt == null || (inbt != null && !TFC_ItemHeat.HasTemp(inputIS)))
 			{
 				return true;//Recipe expects a cold item and either the input has not tag at all or at the least is missing a temperature tag
 			}
@@ -125,9 +126,9 @@ public class ShapedRecipesTFC implements IRecipe
 			}
 		}
 
-		if(rnbt != null && rnbt.hasKey("temperature"))
+		if(rnbt != null && TFC_ItemHeat.HasTemp(recipeIS))
 		{
-			if(inbt != null && inbt.hasKey("temperature"))
+			if(inbt != null && TFC_ItemHeat.HasTemp(inputIS))
 			{
 				return HeatRegistry.getInstance().getIsLiquid(inputIS);//Recipe expects a hot item and the input is liquid
 			}

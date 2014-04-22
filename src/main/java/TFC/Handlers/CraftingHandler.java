@@ -11,9 +11,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.TFC_ItemHeat;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_Achievements;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Handlers.Network.AbstractPacket;
@@ -148,27 +148,27 @@ public class CraftingHandler
 				else if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1)))
 					player.entityDropItem(new ItemStack(TFCItems.CeramicMold, 1, 1), 1);
 
-				float temperature = 0;
+				short temperature = 0;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
 					if(iinventory.getStackInSlot(i) == null)
 						continue;
 					if(iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal)
-						temperature = TFC_ItemHeat.GetTemperature(iinventory.getStackInSlot(i));
+						temperature = TFC_ItemHeat.GetTemp(iinventory.getStackInSlot(i));
 				}
-				TFC_ItemHeat.SetTemperature(e.crafting, temperature);
+				TFC_ItemHeat.SetTemp(e.crafting, temperature);
 			}
 			else if(item instanceof ItemMeltedMetal)
 			{
-				float temperature = 0;
+				short temperature = 0;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
 					if(iinventory.getStackInSlot(i) == null)
 						continue;
 					if(iinventory.getStackInSlot(i).getItem() instanceof ItemIngot )
-						temperature = TFC_ItemHeat.GetTemperature(iinventory.getStackInSlot(i));
+						temperature = TFC_ItemHeat.GetTemp(iinventory.getStackInSlot(i));
 				}
-				TFC_ItemHeat.SetTemperature(e.crafting, temperature);
+				TFC_ItemHeat.SetTemp(e.crafting, temperature);
 			}
 			else if(itemstack.getItem() instanceof ItemMiscToolHead &&
 					((ItemMiscToolHead)(itemstack.getItem())).getMaterial()!= null &&

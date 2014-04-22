@@ -12,11 +12,11 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 
@@ -61,7 +61,7 @@ public class ItemMeltedMetal extends ItemTerra
 			arraylist.add(StatCollector.translateToLocal("gui.MeltedMetal.NotFull"));
 		}
 	}
-	
+
 	@Override
 	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
 	{
@@ -69,31 +69,27 @@ public class ItemMeltedMetal extends ItemTerra
 		if (is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
-			//System.out.println(stackTagCompound.getFloat("temperature"));
-			if(stackTagCompound.hasKey("temperature") && stackTagCompound.getFloat("temperature") >= TFC_ItemHeat.getMeltingPoint(is))
+			if(TFC_ItemHeat.HasTemp(is) && TFC_ItemHeat.GetTemp(is) >= TFC_ItemHeat.IsCookable(is))
 			{
 				if(is.getItemDamage()==0){
-				is.setItemDamage(1);
-				//System.out.println(is.getItemDamage());
+					is.setItemDamage(1);
 				}
 			}
 			else if(is.getItemDamage()==1){
 				is.setItemDamage(0);
-				//System.out.println(is.getItemDamage());
 			}
 
 		}
 		else if(is.getItemDamage()==1){
 			is.setItemDamage(0);
-			//System.out.println(is.getItemDamage());
 		}
 	}
-	
+
 	@Override
 	public boolean isDamaged(ItemStack stack)
-    {
-        return stack.getItemDamage() > 1;
-    }
+	{
+		return stack.getItemDamage() > 1;
+	}
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{	

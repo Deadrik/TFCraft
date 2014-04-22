@@ -146,11 +146,14 @@ public class BodyTempStats
 						//returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )<10?1:0);
 						//Lava averages 700-1200 C = 950 C, assume source is lava.
 						double tempValue = 950;
-						if(te instanceof TileEntityFireEntity)
+						
 						//if there is a firepit, use it's heat instead.
-						tempValue = ((TileEntityFireEntity)te).fireTemperature;
+						if(te instanceof TileEntityFireEntity)
+							tempValue = ((TileEntityFireEntity)te).fireTemp;
+
 						//Just to make sure it's not 0
 						double distanceSq = player.getDistanceSq(i, j, k) + 0.05;
+
 						//radiation isn't perfect, so I don't know what a good numerator is, but it decreases with the square of the distance.
 						//We can assume that the temperature of the actual heat source is when the player is directly touching it, which we have assigned to
 						//a distanceSq of 0.05, therefore, the heat from such a heat source is = to the heat value * 0.05 divided by the distance squared

@@ -73,6 +73,7 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 		setBirth();
 	}
 
+	@Override
 	public void updateEntity()
 	{
 		if(!worldObj.isRemote)
@@ -181,7 +182,7 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void closeInventory() 
+	public void closeInventory()
 	{
 	}
 
@@ -214,6 +215,7 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 	{
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
@@ -223,6 +225,7 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 		height = nbttagcompound.getInteger("height");
 	}
 
+	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);

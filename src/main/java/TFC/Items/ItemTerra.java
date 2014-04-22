@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -17,11 +16,11 @@ import TFC.Reference;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.ISize;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
-import TFC.Core.TFC_ItemHeat;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -135,20 +134,6 @@ public class ItemTerra extends Item implements ISize
 		return true;
 	}
 
-	@Override
-	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
-	{
-		/*if (is.hasTagCompound())
-		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-
-			if(stackTagCompound.hasKey("temperature"))
-				TFC_ItemHeat.HandleItemHeat(is);
-			if(is.stackSize <= 0)
-				is = null;
-		}*/
-	}
-
 	/**
 	 * This is called by inventories in the world to tick things such as temperature and food decay. Override this and 
 	 * return true if you want the item to be handled differently than the standard code. True will stop he standard TFC code from running.
@@ -165,7 +150,7 @@ public class ItemTerra extends Item implements ISize
 					StatCollector.translateToLocal("gui.Size." + ((ISize)object.getItem()).getSize(object).getName().replace(" ", "")) /*+
 					" \u2192" + StringUtil.localize("gui.Reach." + ((ISize)object.getItem()).getReach(object).getName())*/);
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
@@ -194,13 +179,13 @@ public class ItemTerra extends Item implements ISize
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
-			if(stackTagCompound.hasKey("temperature"))
+			if(TFC_ItemHeat.HasTemp(is))
 			{
-				float temp = stackTagCompound.getFloat("temperature");
-				float meltTemp = -1;
+				int temp = TFC_ItemHeat.GetTemp(is);
+				int meltTemp = -1;
 				HeatIndex hi = HeatRegistry.getInstance().findMatchingIndex(is);
 				if(hi != null)
-					meltTemp = hi.meltTemp;
+					meltTemp = hi.ticksToCook;
 
 				if(meltTemp != -1)
 				{

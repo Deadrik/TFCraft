@@ -3,12 +3,11 @@ package TFC.Handlers;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import TFC.TFCItems;
+import TFC.API.IFood;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Events.AnvilCraftEvent;
 import TFC.API.Events.ItemMeltEvent;
-import TFC.Food.ItemFoodTFC;
-import TFC.Food.ItemRawFood;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class AnvilCraftingHandler
@@ -19,13 +18,11 @@ public class AnvilCraftingHandler
 		if(event.input1.getItem() == TFCItems.Bloom && event.input1.getItemDamage() > 100)
 		{
 			int dam = event.input1.getItemDamage();
-			float temp = event.input1.getTagCompound()!=null?event.input1.getTagCompound().getFloat("temperature"):0F;
+			short temp = event.input1.getTagCompound()!=null?TFC_ItemHeat.GetTemp(event.input1):0;
 			ItemStack out1 = new ItemStack(TFCItems.Bloom, dam/100, 100);
 			ItemStack out2 = new ItemStack(TFCItems.Bloom, 1, dam-(dam/100*100));
-			NBTTagCompound Tag = new NBTTagCompound();
-			Tag.setFloat("temperature", temp);
-			out1.setTagCompound(Tag);
-			out2.setTagCompound(Tag);
+			TFC_ItemHeat.SetTemp(out1, temp);
+			TFC_ItemHeat.SetTemp(out2, temp);
 			if(!((EntityPlayer)event.entity).inventory.addItemStackToInventory(out1))
 				event.entity.worldObj.spawnEntityInWorld(new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, out1));
 
@@ -49,8 +46,7 @@ public class AnvilCraftingHandler
 			{
 				event.result.setItemDamage(100-event.input1.getItemDamage());
 			}
-			else if (event.input1.getItem() instanceof ItemRawFood && 
-					event.result != null && event.result.getItem() instanceof ItemFoodTFC)
+			else if (event.result != null && event.result.getItem() instanceof IFood)
 			{
 				event.result.stackTagCompound = event.input1.stackTagCompound;
 			}

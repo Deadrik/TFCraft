@@ -6,6 +6,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import TFC.API.TFC_ItemHeat;
 
 public class ContainerTFC extends Container
 {
@@ -230,10 +231,10 @@ public class ContainerTFC extends Container
 		if (is4Tags == null)
 			return is3Tags.hasNoTags();
 
-		float temp3 = is3Tags.hasKey("temperature") ? is3Tags.getFloat("temperature") : -1000;
-		float temp4 = is4Tags.hasKey("temperature") ? is4Tags.getFloat("temperature") : -1000;
-		is3Tags.removeTag("temperature");
-		is4Tags.removeTag("temperature");
+		float temp3 = TFC_ItemHeat.GetTemp(is1);
+		float temp4 = TFC_ItemHeat.GetTemp(is2);
+		is3Tags.removeTag("temp");
+		is4Tags.removeTag("temp");
 
 		return is3Tags.equals(is4Tags) &&  Math.abs(temp3 - temp4) < 5;
 	}

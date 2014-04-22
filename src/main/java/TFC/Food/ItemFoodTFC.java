@@ -16,6 +16,7 @@ import TFC.TFCItems;
 import TFC.API.IFood;
 import TFC.API.ISize;
 import TFC.API.TFCOptions;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Constant.Global;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumFoodGroup;
@@ -23,7 +24,6 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Items.ItemTerra;
@@ -44,6 +44,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	public float decayRate = 1.0f;
 
+	public boolean isEdible = true;
+	public boolean canBeUsedRaw = true;
+
 	public ItemFoodTFC(int foodid, EnumFoodGroup fg)
 	{
 		super();
@@ -56,6 +59,16 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		this.hasSubtypes = false;
 	}
 
+	public ItemFoodTFC(int foodid, EnumFoodGroup fg, boolean edible)
+	{
+		this(foodid, fg);
+		isEdible = edible;
+	}
+	public ItemFoodTFC(int foodid, EnumFoodGroup fg, boolean edible, boolean usable)
+	{
+		this(foodid, fg, edible);
+		canBeUsedRaw = usable;
+	}
 
 	public ItemFoodTFC setDecayRate(float f)
 	{
@@ -81,13 +94,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
-			if(stackTagCompound.hasKey("temperature"))
+			if(TFC_ItemHeat.HasTemp(is))
 			{
-				float temp = stackTagCompound.getFloat("temperature");
-				float meltTemp = TFC_ItemHeat.getMeltingPoint(is);
-
+				int meltTemp = TFC_ItemHeat.IsCookable(is);
 				if(meltTemp != -1)
-					arraylist.add(TFC_ItemHeat.getHeatColorFood(temp, meltTemp));
+					arraylist.add(TFC_ItemHeat.getHeatColorFood(TFC_ItemHeat.GetTemp(is), meltTemp));
 			}
 		}
 	}
@@ -160,7 +171,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-		if (foodstats.needFood())
+		if (foodstats.needFood() && isEdible)
 			player.setItemInUse(is, 32);
 
 		return is;
@@ -170,7 +181,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-		if(!world.isRemote)
+		if(!world.isRemote && isEdible)
 			foodstats.eatFood(is);
 
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
@@ -198,7 +209,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	public boolean isHot(ItemStack is)
 	{
-		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) *0.8)
+		if(TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is) *0.8)
 			return true;
 		else
 			return false;
@@ -224,6 +235,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		return is;
 	}
 
+	@Override
 	public float getFoodWeight(ItemStack is)
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
@@ -234,6 +246,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		return 0f;
 	}
 
+	@Override
 	public float getFoodDecay(ItemStack is)
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodDecay"))
@@ -312,5 +325,15 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k)
 	{
 		return null;
+	}
+
+	@Override
+	public boolean isEdible() {
+		return isEdible;
+	}
+
+	@Override
+	public boolean isUsable() {
+		return canBeUsedRaw;
 	}
 }

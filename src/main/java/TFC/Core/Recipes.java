@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.TFCOptions;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Constant.Global;
 import TFC.API.Crafting.AnvilManager;
 import TFC.API.Crafting.AnvilRecipe;
@@ -595,7 +596,7 @@ public class Recipes
 
 	private static ItemStack checkMelted(ItemStack is)
 	{
-		if(TFC_ItemHeat.GetTemperature(is)>TFC_ItemHeat.getMeltingPoint(is))
+		if(TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is))
 			return null;
 		return is;
 	}
@@ -1324,7 +1325,7 @@ public class Recipes
 	public static ItemStack getStackTemp(ItemStack is)
 	{
 		NBTTagCompound Temp = new NBTTagCompound();
-		Temp.setBoolean("temperature", true);
+		Temp.setBoolean("temp", true);
 		is.setTagCompound(Temp);
 		return is;
 	}

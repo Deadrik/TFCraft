@@ -46,10 +46,10 @@ public class HeatRegistry
 		if(hi != null && is.hasTagCompound())
 		{
 			float temp = 0;
-			if(is.getTagCompound().hasKey("temperature")) {
-				temp = is.getTagCompound().getFloat("temperature");
+			if(TFC_ItemHeat.HasTemp(is)) {
+				temp = TFC_ItemHeat.GetTemp(is);
 			}
-			return temp >= hi.meltTemp;
+			return temp >= hi.ticksToCook;
 		} else {
 			return false;
 		}
@@ -60,7 +60,7 @@ public class HeatRegistry
 		HeatIndex hi = findMatchingIndex(is);
 		if(hi != null)
 		{
-			return hi.meltTemp;
+			return hi.ticksToCook;
 		} else {
 			return -1;
 		}

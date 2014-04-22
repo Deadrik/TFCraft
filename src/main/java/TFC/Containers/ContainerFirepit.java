@@ -128,13 +128,13 @@ public class ContainerFirepit extends ContainerTFC
 		for (int var1 = 0; var1 < this.crafters.size(); ++var1)
 		{
 			ICrafting var2 = (ICrafting)this.crafters.get(var1);
-			if (this.firetemp != this.firepit.fireTemperature)
-				var2.sendProgressBarUpdate(this, 0, (int)this.firepit.fireTemperature);
+			if (this.firetemp != this.firepit.fireTemp)
+				var2.sendProgressBarUpdate(this, 0, (int)this.firepit.fireTemp);
 			if (this.charcoal != this.firepit.charcoalCounter)
 				var2.sendProgressBarUpdate(this, 1, this.firepit.charcoalCounter);
 		}
 
-		firetemp = this.firepit.fireTemperature;
+		firetemp = this.firepit.fireTemp;
 		charcoal = this.firepit.charcoalCounter;
 	}
 
@@ -142,7 +142,7 @@ public class ContainerFirepit extends ContainerTFC
 	public void updateProgressBar(int par1, int par2)
 	{
 		if (par1 == 0)
-			this.firepit.fireTemperature = par2;
+			this.firepit.fireTemp = par2;
 		if (par1 == 1)
 			this.firepit.charcoalCounter = par2;
 	}

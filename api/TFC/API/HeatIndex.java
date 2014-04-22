@@ -11,34 +11,39 @@ import TFC.API.Events.ItemMeltEvent;
 
 public class HeatIndex
 {
-	public float specificHeat;
-	public float meltTemp;
+	public int ticksToCook;
 	public boolean keepNBT;
 
 	private ItemStack output;
-	private int outputMin;
-	private int outputMax;
+	private int outputMin = 0;
+	private int outputMax = 0;
 
 	private ItemStack morph;
 	public ItemStack input;
 
-	public HeatIndex(ItemStack in, float sh, float melt, ItemStack out)
+	public HeatIndex(ItemStack in, int ticks)
 	{
 		input = in;
-		specificHeat = sh;
-		meltTemp = melt;
-		outputMin = 0;
-		outputMax = 0;
+		ticksToCook = ticks;
+		output = null;
+	}
+
+	public HeatIndex(ItemStack in, int ticks, ItemStack out)
+	{
+		this(in, ticks);
 		output = out;
+	}
+
+	public HeatIndex(ItemStack in, HeatRaw raw)
+	{
+		input = in;
+		ticksToCook = raw.ticksToCook;
+		output = null;
 	}
 
 	public HeatIndex(ItemStack in, HeatRaw raw, ItemStack out)
 	{
-		input = in;
-		specificHeat = raw.specificHeat;
-		meltTemp = raw.meltTemp;
-		outputMin = 0;
-		outputMax = 0;
+		this(in, raw);
 		output = out;
 	}
 
@@ -124,8 +129,9 @@ public class HeatIndex
 			else
 			{
 				is.setTagCompound(in.stackTagCompound);
-				if(is.getTagCompound().hasKey("temperature"))
-					is.getTagCompound().setFloat("temperature", is.getTagCompound().getFloat("temperature")*0.9f);
+				//This if check should be removed in 79. It remains in place to save old worlds.
+				if(TFC_ItemHeat.HasTemp(is))
+					TFC_ItemHeat.SetTemp(is, (short)(TFC_ItemHeat.GetTemp(is)*0.9));
 			}
 		}
 		ItemMeltEvent eventMelt = new ItemMeltEvent(in, is);

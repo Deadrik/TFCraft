@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.world.IBlockAccess;
 import TFC.Core.TFC_Core;
-import TFC.TileEntities.TileEntityFoodPrep;
+import TFC.TileEntities.TEFoodPrep;
 
 public class RenderFoodPrep
 {
@@ -15,7 +15,7 @@ public class RenderFoodPrep
 	public static boolean render(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
-		TileEntityFoodPrep te = (TileEntityFoodPrep)blockAccess.getTileEntity(i, j, k);
+		TEFoodPrep te = (TEFoodPrep)blockAccess.getTileEntity(i, j, k);
 		int dir = blockAccess.getBlockMetadata(i, j, k);
 		if(te != null)
 		{
