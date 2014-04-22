@@ -96,7 +96,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				return false;
 			}
 
-			if (this.charcoalCount >= 8 && this.fireTemperature < 200)
+			if (this.charcoalCount >= 4 && this.fireTemperature < 200)
 			{
 				fireTemperature = 250f;
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 0x2);
