@@ -11,6 +11,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import TFC.Core.TFC_Core;
 import TFC.Core.Vector3f;
@@ -85,6 +88,16 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 
 		return count[0] + count[1] + count[2] + count[3];
 	}
+	
+	public String getType() {
+		String type;
+		type = storage[0] != null ? storage[0].getDisplayName() :
+			   storage[1] != null ? storage[1].getDisplayName() :
+			   storage[2] != null ? storage[2].getDisplayName() :
+			   storage[3] != null ? storage[3].getDisplayName() : "Oak";
+		return type;
+	}
+	
 
 	@Override
 	public ItemStack decrStackSize(int i, int j)
@@ -264,11 +277,21 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 		nbttagcompound.setTag("Items", nbttaglist);
 	}
 
-	public void handlePacketData() 
+	@Override
+	public Packet getDescriptionPacket()
 	{
-		TileEntityLogPile pile = this;
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		writeToNBT(nbtTag);
+		
+		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 1, nbtTag);
 	}
-
+	
+	@Override
+	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) 
+	{
+		readFromNBT(pkt.data);
+	}
+	
 	@Override
 	public boolean isInvNameLocalized() 
 	{
