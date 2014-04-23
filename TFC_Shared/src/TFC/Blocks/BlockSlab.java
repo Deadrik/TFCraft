@@ -215,12 +215,31 @@ public class BlockSlab extends BlockPartial
 	@Override
 	public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side)
 	{
-		int shift[] = { 4, 16, 0, 12, 8, 20 };
-		int opposite[] = { 1, 0, 3, 2, 5, 4 };
-
 		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
-		long opChip = (te.extraData >> shift[opposite[side.ordinal()]]) & 0xf;
-		long consolidatedChip = te.extraData - (opChip << shift[opposite[side.ordinal()]]);
-		return ((consolidatedChip & 0xffffff) == 0);
+		long data = te.extraData;
+
+		switch(side)
+		{
+		case UP:
+			return getTopChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && 
+			getSouthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0;
+		case DOWN:
+			return getBottomChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && 
+			getSouthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0;
+		case NORTH:
+			return getNorthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0 &&
+			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
+		case SOUTH:
+			return getSouthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0 &&
+			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
+		case EAST:
+			return getEastChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && getSouthChiselLevel(data) == 0 &&
+			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
+		case WEST:
+			return getWestChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && getSouthChiselLevel(data) == 0 &&
+			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
+		default: 
+			return false;
+		}
 	}
 }
