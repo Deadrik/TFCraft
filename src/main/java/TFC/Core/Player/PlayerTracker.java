@@ -72,8 +72,9 @@ public class PlayerTracker
 		if( pi.tempSkills != null)
 			TFC_Core.setSkillStats(event.player, pi.tempSkills);
 
-		AbstractPacket pkt = new PlayerUpdatePacket(event.player, 3);// Update Skills
-		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
+		//Send a request to the server for the skills data.
+		AbstractPacket pkt = new PlayerUpdatePacket(event.player, 4);
+		TerraFirmaCraft.packetPipeline.sendToServer(pkt);
 	}
 
 	@SubscribeEvent

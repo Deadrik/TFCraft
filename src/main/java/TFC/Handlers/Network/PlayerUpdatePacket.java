@@ -3,9 +3,11 @@ package TFC.Handlers.Network;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
-import java.io.DataInputStream;
+import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Player.PlayerInventory;
@@ -26,7 +28,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 	private String skillName;
 	private int skillLevel;
 	private boolean craftingTable = false;
-	private DataInputStream dis;
+	private HashMap<String, Integer> skillMap = new HashMap<String, Integer>();
 
 	public PlayerUpdatePacket() {}
 
@@ -50,13 +52,17 @@ public class PlayerUpdatePacket extends AbstractPacket
 		}
 		else if(this.flag == 3)
 		{
-//			this.playerSkills = TFC_Core.getSkillStats(P);
+			this.playerSkills = TFC_Core.getSkillStats(P);
+		}
+		else if(this.flag == 4)
+		{
+			// flag 4 -> Send a request to the server for the skills data.
 		}
 	}
 	
-	public PlayerUpdatePacket(EntityPlayer P, byte f, String name, int lvl)
+	public PlayerUpdatePacket(int f, String name, int lvl)
 	{
-		this.flag = f;
+		this.flag = (byte)f;
 		if(this.flag == 1)
 		{
 			this.skillName = name;
@@ -89,7 +95,11 @@ public class PlayerUpdatePacket extends AbstractPacket
 		}
 		else if(this.flag == 3)
 		{
-//			this.playerSkills.toOutBuffer(buffer);
+			this.playerSkills.toOutBuffer(buffer);
+		}
+		else if(this.flag == 4)
+		{
+			// flag is all we need
 		}
 	}
 
@@ -118,7 +128,20 @@ public class PlayerUpdatePacket extends AbstractPacket
 		}
 		else if(this.flag == 3)
 		{
-//			this.dis = new DataInputStream(new ByteArrayInputStream(buffer.array()));
+			this.skillMap.clear();
+			String name;
+			int lvl;
+			int size = buffer.readInt();
+			for(int l = 0; l < size; l++)
+			{
+				name = ByteBufUtils.readUTF8String(buffer);
+				lvl = buffer.readInt();
+				this.skillMap.put(name, lvl);
+			}
+		}
+		else if(this.flag == 4)
+		{
+			// flag is all we need
 		}
 	}
 
@@ -127,16 +150,6 @@ public class PlayerUpdatePacket extends AbstractPacket
 	{
 		if(this.flag == 0)
 		{
-			/*
-			System.out.println("-----------------------------Handle PlayerUpdatePacket flag:0");
-			System.out.println("stomachLevel :"+ this.stomachLevel);
-			System.out.println("waterLevel :"+ this.waterLevel);
-			System.out.println("nutrFruit :"+ this.nutrFruit);
-			System.out.println("nutrVeg :"+ this.nutrVeg);
-			System.out.println("nutrProtein :"+ this.nutrProtein);
-			System.out.println("nutrDairy :"+ this.nutrDairy);
-			*/
-
 			FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
 			fs.stomachLevel = this.stomachLevel;
 			fs.waterLevel = this.waterLevel;
@@ -148,16 +161,13 @@ public class PlayerUpdatePacket extends AbstractPacket
 		}
 		else if(this.flag == 1)
 		{
-			System.out.println("-----------------------------Handle PlayerUpdatePacket flag:1");
+			System.out.println("-----------------------------Handle PlayerUpdatePacket Client flag:1");
 			System.out.println("Skill : "+this.skillName+" : "+this.skillLevel);
-
+			this.playerSkills = TFC_Core.getSkillStats(player);
 			playerSkills.setSkillSave(skillName, skillLevel);
 		}
 		else if(this.flag == 2)
 		{
-			//System.out.println("-----------------------------Handle PlayerUpdatePacket flag:2");
-			System.out.println("craftingTable : "+this.craftingTable);
-			
 			if(this.craftingTable && !player.getEntityData().hasKey("craftingTable"))
 			{
 				player.getEntityData().setBoolean("craftingTable", this.craftingTable);
@@ -166,24 +176,27 @@ public class PlayerUpdatePacket extends AbstractPacket
 		}
 		else if(this.flag == 3)
 		{
-			System.out.println("-----------------------------Handle PlayerUpdatePacket flag:3");
-			System.out.println("Skill : ");
-			
-//			try
-//			{
-//				while(dis.available() > 0)
-//					playerSkills.setSkillSave(dis.readUTF(), dis.readInt());
-//			}
-//			catch (IOException e)
-//			{
-//				e.printStackTrace();
-//			}
+			this.playerSkills = TFC_Core.getSkillStats(player);
+			for(String skill : skillMap.keySet())
+			{
+				playerSkills.setSkillSave(skill, skillMap.get(skill));
+			}
+			skillMap.clear();
+		}
+		else if(this.flag == 4)
+		{
+			//NOOP on client
 		}
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player)
 	{
+		if(this.flag == 4)
+		{
+			AbstractPacket pkt = new PlayerUpdatePacket(player, 3);
+			TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+		}
 	}
 
 }

@@ -67,12 +67,12 @@ public class EntityLivingHandler
 				FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 				foodstats.onUpdate(player);
 				TFC_Core.setPlayerFoodStats(player, foodstats);
-				//Send update packet
+				//Send update packet from Server to Client
 				AbstractPacket pkt = new PlayerUpdatePacket(player, 0);
 				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
 				
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
-					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,20,1));
+					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20, 1));
 				else if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.5f)
 				{
 					if(player.isSprinting())

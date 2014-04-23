@@ -7,7 +7,6 @@ import java.util.HashMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagInt;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.TerraFirmaCraft;
 import TFC.API.SkillsManager;
@@ -69,9 +68,8 @@ public class SkillStats
 		int i = (Integer) skillsMap.get(skillName);
 		if(player instanceof EntityPlayerMP)
 		{
-			AbstractPacket pkt = new PlayerUpdatePacket(player, (byte) 1, skillName, i);
+			AbstractPacket pkt = new PlayerUpdatePacket(1, skillName, i);
 			TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
-			//TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, getStatusPacket(skillName, i));
 		}
 		writeNBT(player.getEntityData());
 	}
@@ -103,10 +101,10 @@ public class SkillStats
 		if (nbt.hasKey("skillCompound"))
 		{
 			NBTTagCompound skillCompound = nbt.getCompoundTag("skillCompound");
-			for(Object n : skillCompound.func_150296_c().toArray())
+			for(Object n : skillCompound.func_150296_c())
 			{
-				NBTTagInt nbtf = (NBTTagInt)n;
-				setSkill((String)n, nbtf.func_150287_d());
+				String skill = (String) n;
+				setSkill(skill, skillCompound.getInteger(skill));
 			}
 		}
 	}
@@ -139,22 +137,4 @@ public class SkillStats
 			buffer.writeInt(f);
 		}
 	}
-
-//	public static Packet getStatusPacket(String s, int skill)
-//	{
-//		ByteArrayOutputStream bos=new ByteArrayOutputStream(40);
-//		DataOutputStream dos=new DataOutputStream(bos);
-//		try
-//		{
-//			//The packet type sent determines who is expected to process this packet, the client or the server.
-//			dos.writeByte(PacketHandler.Packet_Player_Status);
-//			dos.writeByte(1);
-//			dos.writeUTF(s);
-//			dos.writeInt(skill);
-//		}
-//		catch (IOException e)
-//		{
-//		}
-//		return PacketHandler.getPacket(bos);
-//	}
 }
