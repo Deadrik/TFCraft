@@ -91,8 +91,8 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			HeatIndex index = manager.findMatchingIndex(is);
 			if(index != null)
 			{
-				short temp = TFC_ItemHeat.GetTemp(is);
-				return temp < index.ticksToCook && temp > index.ticksToCook *0.8;
+				float temp = TFC_ItemHeat.GetTemp(is);
+				return temp < index.meltTemp && temp > index.meltTemp *0.8;
 			}
 		}
 		return false;
@@ -106,8 +106,8 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			HeatIndex index = manager.findMatchingIndex(is);
 			if(index != null)
 			{
-				short temp = TFC_ItemHeat.GetTemp(is);
-				return temp < index.ticksToCook && temp > index.ticksToCook * 0.60;
+				float temp = TFC_ItemHeat.GetTemp(is);
+				return temp < index.meltTemp && temp > index.meltTemp * 0.60;
 			}
 		}
 		return false;
@@ -121,8 +121,8 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			HeatIndex index = manager.findMatchingIndex(is);
 			if(index != null)
 			{
-				short temp = TFC_ItemHeat.GetTemp(is);
-				return temp < index.ticksToCook && temp > index.ticksToCook * 0.90;
+				float temp = TFC_ItemHeat.GetTemp(is);
+				return temp < index.meltTemp && temp > index.meltTemp * 0.90;
 			}
 		}
 		return false;

@@ -95,7 +95,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 			if(TFC_ItemHeat.HasTemp(is))
 			{
-				int meltTemp = TFC_ItemHeat.IsCookable(is);
+				float meltTemp = TFC_ItemHeat.IsCookable(is);
 				if(meltTemp != -1)
 					arraylist.add(TFC_ItemHeat.getHeatColorFood(TFC_ItemHeat.GetTemp(is), meltTemp));
 			}

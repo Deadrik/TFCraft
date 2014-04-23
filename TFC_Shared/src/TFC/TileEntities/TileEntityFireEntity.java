@@ -4,24 +4,40 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import TFC.API.TFC_ItemHeat;
+
 public class TileEntityFireEntity extends NetworkTileEntity
 {
-	public int airFromBellows;
-	public int fireTemp;
-	public int maxFireTemp;
-	public int fuelTimeLeft;
-	public int fuelBurnTemp;
+	public int airFromBellows = 0;
+	public float fireTemp = 0;
+	public int maxFireTempScale;
+	public int fuelTimeLeft = 0;
+	public int fuelBurnTemp = 0;
 
 	public static final int AIRTOADD = 200;
 
-
-
 	public TileEntityFireEntity()
 	{
-		airFromBellows = 0;
 	}
 
-
+	public void careForInventorySlot(ItemStack is)
+	{
+		if(is != null)
+		{
+			float temp = TFC_ItemHeat.GetTemp(is);
+			if(fireTemp > temp)
+			{
+				temp += TFC_ItemHeat.getTempIncrease(is);
+			}
+			else
+			{
+				temp -= TFC_ItemHeat.getTempDecrease(is);
+			}
+			TFC_ItemHeat.SetTemp(is, temp);
+		}
+	}
 
 	public void receiveAirFromBellows()
 	{
@@ -35,17 +51,24 @@ public class TileEntityFireEntity extends NetworkTileEntity
 
 	public void keepTempToRange()
 	{
-		if(fireTemp > maxFireTemp) {
-			fireTemp = maxFireTemp;
+		if(fireTemp > getMaxTemp()) {
+			fireTemp = getMaxTemp();
 		} else if(fireTemp < 0) {
 			fireTemp = 0;
 		}
 	}
 
+	public int getMaxTemp()
+	{
+		return fuelBurnTemp + airFromBellows;
+	}
+
 	public int getTemperatureScaled(int s)
 	{
-		return fireTemp * s / maxFireTemp;
-	}int handleTemp()
+		return (int)(fireTemp * s / maxFireTempScale);
+	}
+
+	protected float handleTemp()
 	{
 		if(fuelTimeLeft > 0)
 		{
@@ -76,60 +99,56 @@ public class TileEntityFireEntity extends NetworkTileEntity
 		if(fireTemp < desiredTemp)
 		{
 			if(airFromBellows == 0) 
-			{
 				fireTemp++;
-			} 
 			else 
-			{
 				fireTemp+=2;
-			}
 		}
 		else if(fireTemp > desiredTemp)
 		{
 			if(desiredTemp == 0)
-			{
 				if(airFromBellows == 0) 
-				{
-					fireTemp-=2;
-				} 
-				else 
-				{
 					fireTemp-=1;
-				}
-			}
+				else 
+					fireTemp-=0.5;
 		}
+		this.keepTempToRange();
 	}
-
-
 
 	@Override
 	public void handleDataPacket(DataInputStream inStream) throws IOException {
-		// TODO Auto-generated method stub
-
 	}
-
-
 
 	@Override
 	public void createInitPacket(DataOutputStream outStream) throws IOException {
-		// TODO Auto-generated method stub
-
 	}
-
-
 
 	@Override
 	public void handleInitPacket(DataInputStream inStream) throws IOException {
-		// TODO Auto-generated method stub
-
 	}
-
-
 
 	@Override
 	public void handleDataPacketServer(DataInputStream inStream)
 			throws IOException {
-		// TODO Auto-generated method stub
-
 	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt)
+	{
+		super.writeToNBT(nbt);
+		nbt.setFloat("temperature", fireTemp);
+		nbt.setInteger("fuelTime", fuelTimeLeft);
+		nbt.setInteger("fuelTemp", fuelBurnTemp);
+		nbt.setInteger("bellowsAir", airFromBellows);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+	{
+		super.readFromNBT(nbt);
+		fireTemp = nbt.getFloat("temperature");
+		fuelTimeLeft = nbt.getInteger("fuelTime");
+		fuelBurnTemp = nbt.getInteger("fuelTemp");
+		airFromBellows = nbt.getInteger("airBellows");
+	}
+
 }

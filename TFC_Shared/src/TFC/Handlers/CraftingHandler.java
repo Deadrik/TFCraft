@@ -148,7 +148,7 @@ public class CraftingHandler implements ICraftingHandler
 					player.playSound(TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
 				else if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1)))
 					player.entityDropItem(new ItemStack(TFCItems.CeramicMold, 1, 1), 1);
-				short temperature = 0;
+				float temperature = 0;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 				{       
 					if(iinventory.getStackInSlot(i) == null)
@@ -160,7 +160,7 @@ public class CraftingHandler implements ICraftingHandler
 			}
 			else if(itemstack.getItem() instanceof ItemMeltedMetal)
 			{
-				short temperature = 0;
+				float temperature = 0;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 				{       
 					if(iinventory.getStackInSlot(i) == null)

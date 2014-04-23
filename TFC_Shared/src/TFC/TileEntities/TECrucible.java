@@ -209,8 +209,8 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				else if(storage[1].itemID == currentAlloy.outputType.MeltedItemID && storage[1].getItemDamage() > 0)
 				{
 					storage[1].setItemDamage(storage[1].getItemDamage()-1);
-					short inTemp =TFC_ItemHeat.GetTemp(storage[1]);
-					short temp = (short)((temperature - inTemp) / 2);
+					float inTemp = TFC_ItemHeat.GetTemp(storage[1]);
+					float temp = (temperature - inTemp) / 2;
 					TFC_ItemHeat.SetTemp(storage[1], inTemp+temp);
 					//System.out.println(temperature +", "+inTemp+", "+temp);
 					drainOutput(1.0f);

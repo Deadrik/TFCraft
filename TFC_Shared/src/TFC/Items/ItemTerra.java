@@ -174,11 +174,11 @@ public class ItemTerra extends Item implements ISize
 		{
 			if(TFC_ItemHeat.HasTemp(is))
 			{
-				int temp = TFC_ItemHeat.GetTemp(is);
-				int meltTemp = -1;
+				float temp = TFC_ItemHeat.GetTemp(is);
+				float meltTemp = -1;
 				HeatIndex hi = HeatRegistry.getInstance().findMatchingIndex(is);
 				if(hi != null)
-					meltTemp = hi.ticksToCook;
+					meltTemp = hi.meltTemp;
 
 				if(meltTemp != -1)
 					if(is.itemID == Item.stick.itemID)

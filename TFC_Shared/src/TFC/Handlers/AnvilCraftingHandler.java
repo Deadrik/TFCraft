@@ -18,7 +18,7 @@ public class AnvilCraftingHandler
 		if(event.input1.itemID == TFCItems.Bloom.itemID && event.input1.getItemDamage() > 100)
 		{
 			int dam = event.input1.getItemDamage();
-			short temp = event.input1.getTagCompound()!=null?TFC_ItemHeat.GetTemp(event.input1):0;
+			float temp = event.input1.getTagCompound()!=null?TFC_ItemHeat.GetTemp(event.input1):0;
 			ItemStack out1 = new ItemStack(TFCItems.Bloom, dam/100, 100);
 			ItemStack out2 = new ItemStack(TFCItems.Bloom, 1, dam-(dam/100*100));
 			TFC_ItemHeat.SetTemp(out1, temp);

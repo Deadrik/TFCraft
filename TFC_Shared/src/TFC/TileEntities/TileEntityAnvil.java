@@ -564,9 +564,9 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			HeatIndex index = manager.findMatchingIndex(anvilItemStacks[i]);
 			if(index != null)
 			{
-				short temp = TFC_ItemHeat.GetTemp(anvilItemStacks[i]);
+				float temp = TFC_ItemHeat.GetTemp(anvilItemStacks[i]);
 
-				return temp < index.ticksToCook && temp > index.ticksToCook - index.ticksToCook * 0.20 && 
+				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.20 && 
 						(anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
 
 			}
@@ -583,9 +583,9 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			HeatIndex index = manager.findMatchingIndex(anvilItemStacks[i]);
 			if(index != null)
 			{
-				short temp = TFC_ItemHeat.GetTemp(anvilItemStacks[i]);
+				float temp = TFC_ItemHeat.GetTemp(anvilItemStacks[i]);
 
-				return temp < index.ticksToCook && temp > index.ticksToCook - index.ticksToCook * 0.40 && 
+				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.40 && 
 						(anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
 
 			}
