@@ -506,6 +506,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			}
 			else
 			{
+				handleTempFlux(0);
 				TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 			}
 
