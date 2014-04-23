@@ -124,7 +124,7 @@ public class BlockFruitWood extends BlockTerraContainer
 							world.getBlockId(i, j, k+1) == TFCBlocks.fruitTreeLeaves2.blockID || world.getBlockId(i, j, k-1) == TFCBlocks.fruitTreeLeaves2.blockID || 
 							world.getBlockId(i, j+1, k) == TFCBlocks.fruitTreeLeaves2.blockID || world.getBlockId(i, j-1, k) == TFCBlocks.fruitTreeLeaves2.blockID))
 						l += 8;
-					dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling1, 1, l));
+					dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling, 1, l));
 				}
 			}
 		}
