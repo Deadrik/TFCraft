@@ -7,7 +7,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.Reference;
@@ -173,8 +172,6 @@ public class ItemTerra extends Item implements ISize
 	{
 		if (is.hasTagCompound())
 		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-
 			if(TFC_ItemHeat.HasTemp(is))
 			{
 				int temp = TFC_ItemHeat.GetTemp(is);
