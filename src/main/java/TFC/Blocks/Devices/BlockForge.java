@@ -52,9 +52,11 @@ public class BlockForge extends BlockTerraContainer
 			{
 				TileEntityForge tileentityforge;
 				tileentityforge = (TileEntityForge)world.getTileEntity(i, j, k);
-				if(tileentityforge.fireTemp < 210 && tileentityforge.fireItemStacks[7] != null && tileentityforge.isValid)
+				if(tileentityforge.fireTemp <= 0 && tileentityforge.fireItemStacks[7] != null && tileentityforge.isSmokeStackValid)
 				{
-					tileentityforge.fireTemp = 300;
+					tileentityforge.fireTemp = 10;
+					tileentityforge.fuelBurnTemp = 20;
+					tileentityforge.fuelTimeLeft = 10;
 					int ss = entityplayer.inventory.getCurrentItem().stackSize;
 					int dam = entityplayer.inventory.getCurrentItem().getItemDamage()+1;
 
@@ -76,7 +78,7 @@ public class BlockForge extends BlockTerraContainer
 				tileentityforge = (TileEntityForge)world.getTileEntity(i, j, k);
 				ItemStack is =entityplayer.getCurrentEquippedItem();
 
-				if(tileentityforge.isValid)
+				if(tileentityforge.isSmokeStackValid)
 				{
 					entityplayer.openGui(TerraFirmaCraft.instance, 23, world, i, j, k);
 					//ModLoader.openGUI(entityplayer, new GuiTerraForge(entityplayer.inventory, tileentityforge));
@@ -149,22 +151,9 @@ public class BlockForge extends BlockTerraContainer
 			}
 			else
 			{
-				int numAirBlocks = 0;
-				for (int i = -1; i < 2; i++)
-				{
-					for (int j = 0; j < 2; j++)
-					{
-						for (int k = -1; k < 2; k++)
-						{
-							if(world.isAirBlock(x+i, y+j, z+k))
-								numAirBlocks++;
-						}
-					}
-				}
-
 				if(world.getTileEntity(x, y, z) != null)
 				{
-					((TileEntityForge)world.getTileEntity(x, y, z)).isValid = false;
+					//((TileEntityForge)world.getBlockTileEntity(x, y, z)).isValid = false;
 				}
 			}
 		}

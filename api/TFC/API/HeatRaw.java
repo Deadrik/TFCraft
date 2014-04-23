@@ -2,10 +2,12 @@ package TFC.API;
 
 public class HeatRaw
 {
-	public int ticksToCook;
+	public float specificHeat;
+	public float meltTemp;
 
-	public HeatRaw(int ticks)
+	public HeatRaw(double sh, double melt)
 	{
-		ticksToCook = ticks;
+		specificHeat = (float)sh;
+		meltTemp = (float)melt;
 	}
 }

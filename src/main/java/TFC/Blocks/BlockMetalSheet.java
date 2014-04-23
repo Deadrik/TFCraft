@@ -179,12 +179,12 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 		TEMetalSheet te = (TEMetalSheet)world.getTileEntity(x, y, z);
 		switch(side)
 		{
-		case 0:return te.TopExists();
-		case 1:return te.BottomExists();
-		case 3:return te.NorthExists();
-		case 2:return te.SouthExists();
-		case 6:return te.EastExists();
-		case 4:return te.WestExists();
+		case 0:return te.BottomExists();
+		case 1:return te.TopExists();
+		case 2:return te.NorthExists();
+		case 3:return te.SouthExists();
+		case 4:return te.EastExists();
+		case 5:return te.WestExists();
 		default: return false;
 		}
 	}

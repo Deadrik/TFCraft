@@ -87,8 +87,8 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 
 			if(TFC_ItemHeat.HasTemp(is))
 			{
-				int temp = TFC_ItemHeat.GetTemp(is);
-				int meltTemp = TFC_ItemHeat.IsCookable(is);
+				float temp = TFC_ItemHeat.GetTemp(is);
+				float meltTemp = TFC_ItemHeat.IsCookable(is);
 
 				if(meltTemp != -1)
 				{

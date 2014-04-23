@@ -673,7 +673,7 @@ public class TFCItems
 	public static Item SeedsSquash;
 	public static Item SeedsJute;
 
-	public static Item FruitTreeSapling1;
+	public static Item FruitTreeSapling;
 	public static Item FruitTreeSapling2;
 
 	public static Item RedApple;
@@ -1626,7 +1626,7 @@ public class TFCItems
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.chicken), "chicken", new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("chickenRaw"));
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.cooked_chicken), "cooked_chicken", new ItemFoodTFC(41, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("chickenCooked"));
 
-		FruitTreeSapling1 = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling1");
+		FruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling1");
 		FruitTreeSapling2 = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling2");
 		RedApple = new ItemFoodTFC(2, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Red Apple");
 		Banana = new ItemFoodTFC(3, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Banana");
@@ -2566,7 +2566,7 @@ public class TFCItems
 
 
 		System.out.println(new StringBuilder().append("[TFC] Registering Food").toString());
-		GameRegistry.registerItem(FruitTreeSapling1, FruitTreeSapling1.getUnlocalizedName());
+		GameRegistry.registerItem(FruitTreeSapling, FruitTreeSapling.getUnlocalizedName());
 		GameRegistry.registerItem(FruitTreeSapling2, FruitTreeSapling2.getUnlocalizedName());
 		GameRegistry.registerItem(RedApple, RedApple.getUnlocalizedName());
 		GameRegistry.registerItem(Banana, Banana.getUnlocalizedName());

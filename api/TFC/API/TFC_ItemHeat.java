@@ -6,131 +6,130 @@ import net.minecraft.util.StatCollector;
 
 public class TFC_ItemHeat 
 {
-	public static String getHeatColor(int temp, int meltTemp)
+	public static String getHeatColor(float temp, float meltTemp)
 	{
-		// \u2605 equals *
 		String phrase = "";
-		if(temp < 400)
+		if(temp < 80)
 		{
 			phrase = StatCollector.translateToLocal("gui.ItemHeat.Warming");
-			if(temp>80)
+			if(temp>(80 * 0.2))
 				phrase = phrase + "\u2605";
-			if(temp>160)
+			if(temp>(80 * 0.4))
 				phrase = phrase + "\u2605";
-			if(temp>240)
+			if(temp>(80 * 0.6))
 				phrase = phrase + "\u2605";
-			if(temp>320)
+			if(temp>(80 * 0.8))
 				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 400 && temp < 800)
+		else if(temp >= 80 && temp < 210)
 		{
 			phrase = StatCollector.translateToLocal("gui.ItemHeat.Hot");
-			if(temp>480)
+			if(temp>80+((210-80) * 0.2))
 				phrase = phrase + "\u2605";
-			if(temp>560)
+			if(temp>80+((210-80) * 0.4))
 				phrase = phrase + "\u2605";
-			if(temp>640)
+			if(temp>80+((210-80) * 0.6))
 				phrase = phrase + "\u2605";
-			if(temp>720)
+			if(temp>80+((210-80) * 0.8))
 				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 800 &&  temp < 1100)
+		else if(temp >= 210 &&  temp < 480)
 		{
 			phrase = StatCollector.translateToLocal("gui.ItemHeat.VeryHot");
-			if(temp>860)
+			if(temp>210+((480-210) * 0.2))
 				phrase = phrase + "\u2605";
-			if(temp>920)
+			if(temp>210+((480-210) * 0.4))
 				phrase = phrase + "\u2605";
-			if(temp>980)
+			if(temp>210+((480-210) * 0.6))
 				phrase = phrase + "\u2605";
-			if(temp>1140)
+			if(temp>210+((480-210) * 0.8))
 				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 1100 &&  temp < 1400)
+		else if(temp >= 480 &&  temp < 580)
 		{
 			phrase = "\2474" + StatCollector.translateToLocal("gui.ItemHeat.FaintRed");
-			if(temp>1160)
+			if(temp>480+((580-480) * 0.2))
 				phrase = phrase + "\u2605";
-			if(temp>1220)
+			if(temp>480+((580-480) * 0.4))
 				phrase = phrase + "\u2605";
-			if(temp>1280)
+			if(temp>480+((580-480) * 0.6))
 				phrase = phrase + "\u2605";
-			if(temp>1340)
+			if(temp>480+((580-480) * 0.8))
 				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 1400 &&  temp < 1700)
+		else if(temp >= 580 &&  temp < 730)
 		{
 			phrase = "\2474" + StatCollector.translateToLocal("gui.ItemHeat.DarkRed");
-			if(temp>1460)
+			if(temp>580+((730-580) * 0.2))
 				phrase = phrase + "\u2605";
-			if(temp>1520)
+			if(temp>580+((730-580) * 0.4))
 				phrase = phrase + "\u2605";
-			if(temp>1580)
+			if(temp>580+((730-580) * 0.6))
 				phrase = phrase + "\u2605";
-			if(temp>1640)
+			if(temp>580+((730-580) * 0.8))
 				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 1700 &&  temp < 2000)
+		else if(temp >= 730 &&  temp < 930)
 		{
 			phrase = "\247c" + StatCollector.translateToLocal("gui.ItemHeat.BrightRed");
-			if(temp>1760)
+			if(temp>730+((930-730) * 0.2))
 				phrase = phrase + "\u2605";
-			if(temp>1820)
+			if(temp>730+((930-730) * 0.4))
 				phrase = phrase + "\u2605";
-			if(temp>1880)
+			if(temp>730+((930-730) * 0.6))
 				phrase = phrase + "\u2605";
-			if(temp>1940)
+			if(temp>730+((930-730) * 0.8))
 				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 2000 &&  temp < 2400)
+		else if(temp >= 930 &&  temp < 1100)
 		{
 			phrase = "\2476" + StatCollector.translateToLocal("gui.ItemHeat.Orange");
-			if(temp>2080)
+			if(temp>930+((1100-930) * 0.2))
 				phrase = phrase + "\u2605";
-			if(temp>2160)
+			if(temp>930+((1100-930) * 0.4))
 				phrase = phrase + "\u2605";
-			if(temp>2240)
+			if(temp>930+((1100-930) * 0.6))
 				phrase = phrase + "\u2605";
-			if(temp>2320)
+			if(temp>930+((1100-930) * 0.8))
 				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 2400 &&  temp < 2700)
+		else if(temp >= 1100 &&  temp < 1300)
 		{
 			phrase = "\247e" + StatCollector.translateToLocal("gui.ItemHeat.Yellow");
-			if(temp>2460)
+			if(temp>1100+((1300-1100) * 0.2))
 				phrase = phrase + "\u2605";
-			if(temp>2520)
+			if(temp>1100+((1300-1100) * 0.4))
 				phrase = phrase + "\u2605";
-			if(temp>2580)
+			if(temp>1100+((1300-1100) * 0.6))
 				phrase = phrase + "\u2605";
-			if(temp>2640)
+			if(temp>1100+((1300-1100) * 0.8))
 				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 2700 &&  temp < 3000)
+		else if(temp >= 1300 &&  temp < 1400)
 		{
 			phrase = "\247e" + StatCollector.translateToLocal("gui.ItemHeat.YellowWhite");
-			if(temp>2760)
+			if(temp>1300+((1400-1300) * 0.2))
 				phrase = phrase + "\u2605";
-			if(temp>2820)
+			if(temp>1300+((1400-1300) * 0.4))
 				phrase = phrase + "\u2605";
-			if(temp>2880)
+			if(temp>1300+((1400-1300) * 0.6))
 				phrase = phrase + "\u2605";
-			if(temp>2940)
+			if(temp>1300+((1400-1300) * 0.8))
 				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 3000 &&  temp < 3500)
+		else if(temp >= 1400 &&  temp < 1500)
 		{
 			phrase = "\247f" + StatCollector.translateToLocal("gui.ItemHeat.White");
-			if(temp>3100)
+			if(temp>1400+((1500-1400) * 0.2))
 				phrase = phrase + "\u2605";
-			if(temp>3200)
+			if(temp>1400+((1500-1400) * 0.4))
 				phrase = phrase + "\u2605";
-			if(temp>3300)
+			if(temp>1400+((1500-1400) * 0.6))
 				phrase = phrase + "\u2605";
-			if(temp>3400)
+			if(temp>1400+((1500-1400) * 0.8))
 				phrase = phrase + "\u2605";
 		}
-		else if(temp >= 3500)
+		else if(temp >= 1500)
 			phrase = "\247f" + StatCollector.translateToLocal("gui.ItemHeat.BrilliantWhite");
 
 		if(temp > meltTemp)
@@ -139,82 +138,90 @@ public class TFC_ItemHeat
 		return phrase;
 	}
 
-	public static String getHeatColorFood(int temp, int meltTemp)
+	public static String getHeatColorFood(float temp, float meltTemp)
 	{
 		if(temp < meltTemp)
-			if(temp < 50)
+		{
+			if(temp < meltTemp*0.1F)
 				return StatCollector.translateToLocal("gui.FoodHeat.Cold");
-			else if(temp < 100)
+			else if(temp >= meltTemp*0.1F && temp < meltTemp*0.4F)
 				return "\2474" + StatCollector.translateToLocal("gui.FoodHeat.Warm");
-			else if(temp < 150)
+			else if(temp >= meltTemp*0.4F && temp < meltTemp*0.8F)
 				return "\2474" + StatCollector.translateToLocal("gui.ItemHeat.Hot");
 			else
 				return "\2474" + StatCollector.translateToLocal("gui.ItemHeat.VeryHot");
-
+		}
 		return StatCollector.translateToLocal("gui.ClearSlot");
 	}
 
 	public static String getHeatColorTorch(float temp, float meltTemp)
 	{
 		if(temp < meltTemp)
-			if(temp < 80)
+		{
+			if(temp > 0 && temp < meltTemp*0.8F)
 				return StatCollector.translateToLocal("gui.Torch.CatchingFire");
-
+			else if(temp >= meltTemp*0.8F)
+				return "\2474" + StatCollector.translateToLocal("gui.Torch.Lit");
+		}
 		return StatCollector.translateToLocal("gui.ClearSlot");
 	}
 
 	public static Boolean getIsLiquid(ItemStack is)
 	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(manager != null && is != null)
-		{
-			HeatIndex hi = manager.findMatchingIndex(is);
-			if(hi != null && is.hasTagCompound())
-			{
-				short temp = 0;
-				if(is.getTagCompound().hasKey("temp"))
-					temp = is.getTagCompound().getShort("temp");
-				return temp >= hi.ticksToCook;
-			} else
-				return false;
-		} else
-			return false;
+		return GetTemp(is) >= IsCookable(is);
 	}
 
-	public static int IsCookable(ItemStack is)
+	public static float IsCookable(ItemStack is)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
-		if(manager!=null)
+		if(is != null && manager!=null)
 		{
 			HeatIndex hi = manager.findMatchingIndex(is);
 			if(hi != null)
-				return hi.ticksToCook;
+				return hi.meltTemp;
 			else
 				return -1;
-		} else
+		}
+		else
 			return -1;
 	}
 
-	public static int IsCookable(Metal m)
+	public static float GetSpecificHeat(ItemStack is)
+	{
+		HeatRegistry manager = HeatRegistry.getInstance();
+		if(is != null && manager!=null)
+		{
+			HeatIndex hi = manager.findMatchingIndex(is);
+			if(hi != null)
+				return hi.specificHeat;
+			else
+				return 1;
+		}
+		else
+			return 1;
+	}
+
+	public static float IsCookable(Metal m)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
 		if(manager!=null)
 		{
 			HeatIndex hi = manager.findMatchingIndex(new ItemStack(m.MeltedItem));
 			if(hi != null)
-				return hi.ticksToCook;
+				return hi.meltTemp;
 			else
 				return -1;
-		} else
+		}
+		else
 			return -1;
 	}
 
-	public static short GetTemp(ItemStack is)
+	public static float GetTemp(ItemStack is)
 	{
 		if(HasTemp(is))
 		{
-			return is.getTagCompound().getShort("temp");
-		} 
+			return is.getTagCompound().getFloat("temperature");
+		}
 		return 0;
 	}
 
@@ -222,18 +229,25 @@ public class TFC_ItemHeat
 	{
 		if(is != null)
 		{
-			if(is.hasTagCompound() && is.getTagCompound().hasKey("temp"))
+			if(is.hasTagCompound() && is.getTagCompound().hasKey("temperature"))
 				return true;
-		} 
+		}
 		return false;
 	}
 
-	public static short getTempIncrease(ItemStack is)
+	public static float getTempIncrease(ItemStack is)
 	{
 		byte debugBump = 0;
 		if(TFCOptions.enableDebugMode)
 			debugBump = 2;
-		return (short)(1 + debugBump);
+		return (1*GetSpecificHeat(is)) + debugBump;
+	}
+
+	public static float getTempDecrease(ItemStack is)
+	{
+		if(TFCOptions.enableDebugMode)
+			return 0;
+		return (1*GetSpecificHeat(is));
 	}
 
 	public static void HandleItemHeat(ItemStack is)
@@ -243,16 +257,16 @@ public class TFC_ItemHeat
 			if(is.hasTagCompound())
 			{
 				NBTTagCompound comp = is.getTagCompound();
-				if(comp.hasKey("temp"))
+				if(HasTemp(is))
 				{
-					short temp = comp.getShort("temp");
+					float temp = GetTemp(is);
 					if(temp > 0)
 					{
-						temp -= 1;
-						comp.setShort("temp",temp);
+						temp -= getTempDecrease(is);
+						comp.setFloat("temperature",temp);
 					}
 					if(temp <= 0)
-						comp.removeTag("temp");
+						comp.removeTag("temperature");
 					if(comp.hasNoTags())
 						is.stackTagCompound = null;
 				}
@@ -260,22 +274,23 @@ public class TFC_ItemHeat
 		}
 	}
 
-	public static Boolean SetTemp(ItemStack is, int Temp)
+	public static Boolean SetTemp(ItemStack is, float temp)
 	{
 		if(is != null)
 		{
 			if(is.hasTagCompound())
-				is.getTagCompound().setShort("temp", (short)Temp);
+				is.getTagCompound().setFloat("temperature", temp);
 			else if(IsCookable(is) != -1)
 			{
 				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setShort("temp", (short)Temp);
+				nbt.setFloat("temperature", temp);
 				is.setTagCompound(nbt);
 			}
-		} 
-		else return false;
+		}
+		else
+			return false;
 
-		if(Temp <= 0)
+		if(temp <= 0)
 			RemoveTempTag(is);
 
 		return true;
@@ -283,9 +298,11 @@ public class TFC_ItemHeat
 
 	public static void RemoveTempTag(ItemStack is)
 	{
-		if(is.hasTagCompound() && is.getTagCompound().hasKey("temp"))
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("temperature"))
 		{
-			is.getTagCompound().removeTag("temp");
+			is.getTagCompound().removeTag("temperature");
 		}
+		if(is.hasTagCompound() && is.getTagCompound().hasNoTags())
+			is.stackTagCompound = null;
 	}
 }

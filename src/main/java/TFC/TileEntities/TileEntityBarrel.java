@@ -53,8 +53,8 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		{
 			if(TFC_ItemHeat.HasTemp(itemstack))
 			{
-				short temp = TFC_ItemHeat.GetTemp(itemstack);
-				if(liquidLevel >= 12 && temp >20)
+				float temp = TFC_ItemHeat.GetTemp(itemstack);
+				if(liquidLevel >= 1 && temp > 1)
 				{
 					temp-=100;
 					liquidLevel-=1;

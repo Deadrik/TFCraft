@@ -8,7 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -177,15 +176,13 @@ public class ItemTerra extends Item implements ISize
 	{
 		if (is.hasTagCompound())
 		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-
 			if(TFC_ItemHeat.HasTemp(is))
 			{
-				int temp = TFC_ItemHeat.GetTemp(is);
-				int meltTemp = -1;
+				float temp = TFC_ItemHeat.GetTemp(is);
+				float meltTemp = -1;
 				HeatIndex hi = HeatRegistry.getInstance().findMatchingIndex(is);
 				if(hi != null)
-					meltTemp = hi.ticksToCook;
+					meltTemp = hi.meltTemp;
 
 				if(meltTemp != -1)
 				{

@@ -1,20 +1,42 @@
 package TFC.TileEntities;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import TFC.API.TFC_ItemHeat;
 
 public class TileEntityFireEntity extends TileEntity
 {
-	public int airFromBellows;
-	public int fireTemp;
-	public int maxFireTemp;
-	public int fuelTimeLeft;
-	public int fuelBurnTemp;
+	public int airFromBellows = 0;
+	public float fireTemp = 0;
+	public int maxFireTempScale;
+	public int fuelTimeLeft = 0;
+	public int fuelBurnTemp = 0;
 
 	public static final int AIRTOADD = 200;
 
 	public TileEntityFireEntity()
 	{
-		airFromBellows = 0;
+	}
+
+	public void careForInventorySlot(ItemStack is)
+	{
+		if(is != null)
+		{
+			float temp = TFC_ItemHeat.GetTemp(is);
+			if(fireTemp > temp)
+			{
+				temp += TFC_ItemHeat.getTempIncrease(is);
+			}
+			else
+			{
+				temp -= TFC_ItemHeat.getTempDecrease(is);
+			}
+			TFC_ItemHeat.SetTemp(is, temp);
+		}
 	}
 
 	public void receiveAirFromBellows()
@@ -27,18 +49,23 @@ public class TileEntityFireEntity extends TileEntity
 
 	public void keepTempToRange()
 	{
-		if(fireTemp > maxFireTemp)
-			fireTemp = maxFireTemp;
+		if(fireTemp > getMaxTemp())
+			fireTemp = getMaxTemp();
 		else if(fireTemp < 0)
 			fireTemp = 0;
 	}
 
-	public int getTemperatureScaled(int s)
+	public int getMaxTemp()
 	{
-		return fireTemp * s / maxFireTemp;
+		return fuelBurnTemp + airFromBellows;
 	}
 
-	int handleTemp()
+	public int getTemperatureScaled(int s)
+	{
+		return (int)(fireTemp * s / maxFireTempScale);
+	}
+
+	protected float handleTemp()
 	{
 		if(fuelTimeLeft > 0)
 		{
@@ -67,27 +94,55 @@ public class TileEntityFireEntity extends TileEntity
 		if(fireTemp < desiredTemp)
 		{
 			if(airFromBellows == 0)
-			{
 				fireTemp++;
-			}
 			else
-			{
 				fireTemp+=2;
-			}
 		}
 		else if(fireTemp > desiredTemp)
 		{
 			if(desiredTemp == 0)
 			{
-				if(airFromBellows == 0)
-				{
-					fireTemp-=2;
-				}
-				else
-				{
+				if(airFromBellows == 0) 
 					fireTemp-=1;
-				}
+				else 
+					fireTemp-=0.5;
 			}
 		}
+		this.keepTempToRange();
 	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt)
+	{
+		super.writeToNBT(nbt);
+		nbt.setFloat("temperature", fireTemp);
+		nbt.setInteger("fuelTime", fuelTimeLeft);
+		nbt.setInteger("fuelTemp", fuelBurnTemp);
+		nbt.setInteger("bellowsAir", airFromBellows);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+	{
+		super.readFromNBT(nbt);
+		fireTemp = nbt.getFloat("temperature");
+		fuelTimeLeft = nbt.getInteger("fuelTime");
+		fuelBurnTemp = nbt.getInteger("fuelTemp");
+		airFromBellows = nbt.getInteger("airBellows");
+	}
+
+	@Override
+	public Packet getDescriptionPacket()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
+	}
+
 }

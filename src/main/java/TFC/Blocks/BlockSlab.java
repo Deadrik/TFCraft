@@ -211,12 +211,31 @@ public class BlockSlab extends BlockPartial
 	@Override
 	public boolean isBlockSolid(IBlockAccess world, int x, int y, int z, int side)
 	{
-		int shift[] = { 4, 16, 0, 12, 8, 20 };
-		int opposite[] = { 1, 0, 3, 2, 5, 4 };
-
 		TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x, y, z);
-		long opChip = (te.extraData >> shift[opposite[side]]) & 0xf;
-		long consolidatedChip = te.extraData - (opChip << shift[opposite[side]]);
-		return ((consolidatedChip & 0xffffff) == 0);
+		long data = te.extraData;
+
+		switch(side)
+		{
+		case 0/*DOWN*/:
+			return getBottomChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && 
+			getSouthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0;
+		case 1/*UP*/:
+			return getTopChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && 
+			getSouthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0;
+		case 2/*NORTH*/:
+			return getNorthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0 &&
+			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
+		case 3/*SOUTH*/:
+			return getSouthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0 &&
+			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
+		case 4/*EAST*/:
+			return getEastChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && getSouthChiselLevel(data) == 0 &&
+			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
+		case 5/*WEST*/:
+			return getWestChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && getSouthChiselLevel(data) == 0 &&
+			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
+		default: 
+			return false;
+		}
 	}
 }

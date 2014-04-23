@@ -1,6 +1,7 @@
 package TFC.Items;
 
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,14 +9,19 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.HeatIndex;
+import TFC.API.HeatRegistry;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
@@ -51,6 +57,78 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		metal = m;
 		metalAmount = (short) amt;
 		return this;
+	}
+
+	@Override
+	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{
+		if(TFC_ItemHeat.HasTemp(is))
+		{
+			String s = "";
+			if(isTemperatureDanger(is))
+			{
+				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.danger") + " | ";
+			}
+
+			if(isTemperatureWeldable(is))
+			{
+				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.weldable") + " | ";
+			}
+
+			if(isTemperatureWorkable(is))
+			{
+				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.workable");
+			}
+
+			if(!s.equals(""))
+				arraylist.add(s);
+
+		}
+	}
+
+	public Boolean isTemperatureWeldable(ItemStack is)
+	{
+		HeatRegistry manager = HeatRegistry.getInstance();
+		if(TFC_ItemHeat.HasTemp(is))
+		{
+			HeatIndex index = manager.findMatchingIndex(is);
+			if(index != null)
+			{
+				float temp = TFC_ItemHeat.GetTemp(is);
+				return temp < index.meltTemp && temp > index.meltTemp *0.8;
+			}
+		}
+		return false;
+	}
+
+	public Boolean isTemperatureWorkable(ItemStack is)
+	{
+		HeatRegistry manager = HeatRegistry.getInstance();
+		if(TFC_ItemHeat.HasTemp(is))
+		{
+			HeatIndex index = manager.findMatchingIndex(is);
+			if(index != null)
+			{
+				float temp = TFC_ItemHeat.GetTemp(is);
+				return temp < index.meltTemp && temp > index.meltTemp * 0.60;
+			}
+		}
+		return false;
+	}
+
+	public Boolean isTemperatureDanger(ItemStack is)
+	{
+		HeatRegistry manager = HeatRegistry.getInstance();
+		if(TFC_ItemHeat.HasTemp(is))
+		{
+			HeatIndex index = manager.findMatchingIndex(is);
+			if(index != null)
+			{
+				float temp = TFC_ItemHeat.GetTemp(is);
+				return temp < index.meltTemp && temp > index.meltTemp * 0.90;
+			}
+		}
+		return false;
 	}
 
 	@Override

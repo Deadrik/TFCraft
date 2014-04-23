@@ -210,10 +210,10 @@ public class TECrucible extends TileEntity implements IInventory
 				}
 				else if(storage[1].getItem() == currentAlloy.outputType.MeltedItem && storage[1].getItemDamage() > 0)
 				{
-					storage[1].setItemDamage(storage[1].getItemDamage() - 1);
-					short inTemp =TFC_ItemHeat.GetTemp(storage[1]);
-					short temp = (short)((temperature - inTemp) / 2);
-					TFC_ItemHeat.SetTemp(storage[1], inTemp + temp);
+					storage[1].setItemDamage(storage[1].getItemDamage()-1);
+					float inTemp = TFC_ItemHeat.GetTemp(storage[1]);
+					float temp = (temperature - inTemp) / 2;
+					TFC_ItemHeat.SetTemp(storage[1], inTemp+temp);
 					//System.out.println(temperature +", "+inTemp+", "+temp);
 					drainOutput(1.0f);
 					storage[1].stackSize = 1;

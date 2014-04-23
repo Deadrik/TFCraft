@@ -160,7 +160,7 @@ public class CraftingHandler
 				else if(!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1)))
 					e.player.entityDropItem(new ItemStack(TFCItems.CeramicMold, 1, 1), 1);
 
-				short temperature = 0;
+				float temperature = 0;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
 					if(iinventory.getStackInSlot(i) == null)
@@ -172,7 +172,7 @@ public class CraftingHandler
 			}
 			else if(item instanceof ItemMeltedMetal)
 			{
-				short temperature = 0;
+				float temperature = 0;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
 					if(iinventory.getStackInSlot(i) == null)

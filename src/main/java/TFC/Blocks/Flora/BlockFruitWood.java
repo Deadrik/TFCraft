@@ -108,16 +108,25 @@ public class BlockFruitWood extends BlockTerraContainer
 					}
 				}
 			}
-			else if(world.getBlock(i+1, j, k) == this || world.getBlock(i-1, j, k) == this || world.getBlock(i, j, k+1) == this || world.getBlock(i, j, k-1) == this)
+			else if(world.getBlock(i + 1, j, k) == this ||
+					world.getBlock(i - 1, j, k) == this ||
+					world.getBlock(i, j, k + 1) == this ||
+					world.getBlock(i, j, k - 1) == this)
 			{
 				Random R = new Random();
 				if(R.nextInt(100) > 50 && isAxeorSaw)
 				{
-					if(world.getBlock(i+1, j, k) == TFCBlocks.fruitTreeLeaves2 || world.getBlock(i-1, j, k) == TFCBlocks.fruitTreeLeaves2 || 
-							world.getBlock(i, j, k+1) == TFCBlocks.fruitTreeLeaves2 || world.getBlock(i, j, k-1) == TFCBlocks.fruitTreeLeaves2 || 
-							world.getBlock(i, j+1, k) == TFCBlocks.fruitTreeLeaves2 || world.getBlock(i, j-1, k) == TFCBlocks.fruitTreeLeaves2)
+					if(l < 8 && (
+							world.getBlock(i + 1, j, k) == TFCBlocks.fruitTreeLeaves2 ||
+							world.getBlock(i - 1, j, k) == TFCBlocks.fruitTreeLeaves2 ||
+							world.getBlock(i, j, k + 1) == TFCBlocks.fruitTreeLeaves2 ||
+							world.getBlock(i, j, k - 1) == TFCBlocks.fruitTreeLeaves2 ||
+							world.getBlock(i, j + 1, k) == TFCBlocks.fruitTreeLeaves2 ||
+							world.getBlock(i, j - 1, k) == TFCBlocks.fruitTreeLeaves2))
+					{
 						l += 8;
-					dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling1, 1, l));
+					}
+					dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.FruitTreeSapling, 1, l));
 				}
 			}
 		}
