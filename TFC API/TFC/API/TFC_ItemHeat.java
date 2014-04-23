@@ -279,6 +279,7 @@ public class TFC_ItemHeat
 		if(Temp <= 0)
 			RemoveTempTag(is);
 
+
 		return true;
 	}
 
@@ -288,5 +289,7 @@ public class TFC_ItemHeat
 		{
 			is.getTagCompound().removeTag("temp");
 		}
+		if(is.hasTagCompound() && is.getTagCompound().hasNoTags())
+			is.stackTagCompound = null;
 	}
 }
