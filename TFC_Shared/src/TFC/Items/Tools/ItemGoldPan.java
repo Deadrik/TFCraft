@@ -161,12 +161,7 @@ public class ItemGoldPan extends ItemTerra
 						int uses = (is.getItemDamage() >> 4);
 						if(uses > 0)
 						{
-							int type = -1;
-
-							if (type == -1 && world.rand.nextInt(60) == 0) type = 0;  // Copper
-							if (type == -1 && world.rand.nextInt(120) == 0) type = 4; // Silver
-							if (type == -1 && world.rand.nextInt(150) == 0) type = 1; // Gold
-							if (type == -1 && world.rand.nextInt(500) == 0) type = 2; // Platinum
+							int type = getMetalToDrop(world, x, y+1, z);
 
 							if(type != -1)
 							{
@@ -185,6 +180,17 @@ public class ItemGoldPan extends ItemTerra
 			}
 		}
 		return is;
+	}
+	
+	private int getMetalToDrop(World world, int x, int y, int z) {
+		int type = -1;
+		
+		if (type == -1 && world.rand.nextInt(60) == 0) type = 0;  // Copper
+		if (type == -1 && world.rand.nextInt(120) == 0) type = 4; // Silver
+		if (type == -1 && world.rand.nextInt(150) == 0) type = 1; // Gold
+		if (type == -1 && world.rand.nextInt(500) == 0) type = 2; // Platinum
+
+		return type;
 	}
 	
     private void dropItem(World world, double x, double y, double z, ItemStack stack)
