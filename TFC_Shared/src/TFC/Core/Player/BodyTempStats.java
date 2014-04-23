@@ -129,7 +129,7 @@ public class BodyTempStats
 						double tempValue = 950;
 						if(te instanceof TileEntityFireEntity)
 							//if there is a firepit, use it's heat instead.
-							tempValue = ((TileEntityFireEntity)te).fireTemperature;
+							tempValue = ((TileEntityFireEntity)te).fireTemp;
 						//Just to make sure it's not 0
 						double distanceSq = player.getDistanceSq(i, j, k) + 0.05;
 						//radiation isn't perfect, so I don't know what a good numerator is, but it decreases with the square of the distance.

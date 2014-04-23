@@ -11,10 +11,10 @@ import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.HeatRegistry;
 import TFC.API.Metal;
+import TFC.API.TFC_ItemHeat;
 import TFC.Containers.Slots.SlotForShowOnly;
 import TFC.Containers.Slots.SlotLiquidVessel;
 import TFC.Core.TFC_Achievements;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.MetalRegistry;
 import TFC.Items.ItemMeltedMetal;
 import TFC.Items.Pottery.ItemPotteryMold;
@@ -104,7 +104,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 				{
 					int amt = 99;
 					ItemStack is = new ItemStack(m.MeltedItemID, 1, amt);
-					TFC_ItemHeat.SetTemperature(is, HeatRegistry.getInstance().getMeltingPoint(is)*1.5f);
+					TFC_ItemHeat.SetTemp(is, (short)(HeatRegistry.getInstance().getMeltingPoint(is)*1.5f));
 					containerInv.setInventorySlotContents(0, is);
 					if(metalAmount-1 <= 0)
 					{
@@ -122,7 +122,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 				else if(input != null && input.getItem().itemID == m.MeltedItemID && input.getItemDamage() > 0)
 				{
 					input.setItemDamage(input.getItemDamage() - 1);
-					TFC_ItemHeat.SetTemperature(input, HeatRegistry.getInstance().getMeltingPoint(input)*1.5f);
+					TFC_ItemHeat.SetTemp(input, (short)(HeatRegistry.getInstance().getMeltingPoint(input)*1.5f));
 					if(metalAmount-1 <= 0)
 					{
 						nbt.removeTag("MetalType");
@@ -150,7 +150,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 						amt = 401;
 					}
 					ItemStack is = new ItemStack(input.getItem().itemID, 1, amt);
-					TFC_ItemHeat.SetTemperature(is, HeatRegistry.getInstance().getMeltingPoint(is)*1.5f);
+					TFC_ItemHeat.SetTemp(is, (short)(HeatRegistry.getInstance().getMeltingPoint(is)*1.5f));
 					containerInv.setInventorySlotContents(0, is);
 					if(metalAmount-1 <= 0)
 					{
@@ -183,7 +183,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 					if(correctMetalFlag){
 						if(input.getItemDamage() > 5){
 							input.setItemDamage(input.getItemDamage() - 4);
-							TFC_ItemHeat.SetTemperature(input, HeatRegistry.getInstance().getMeltingPoint(input)*1.5f);
+							TFC_ItemHeat.SetTemp(input, (short)(HeatRegistry.getInstance().getMeltingPoint(input)*1.5f));
 							if(metalAmount-1 <= 0)
 							{
 								nbt.removeTag("MetalType");

@@ -121,11 +121,10 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	{
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, entity, true);
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(entity);
-		Boolean canDrink = fs.getMaxWater(entity) - 500 > fs.waterLevel;
 
 		if(mop == null)
 		{
-			if(is.getItemDamage() > 1 && canDrink) {
+			if(is.getItemDamage() > 1 && fs.needDrink()) {
 				entity.setItemInUse(is, this.getMaxItemUseDuration(is));
 			}
 		}
@@ -144,7 +143,6 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 				}
 			}
 		}
-		entity.setItemInUse(is, this.getMaxItemUseDuration(is));
 		return is;
 	}
 

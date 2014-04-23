@@ -11,12 +11,12 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.API.IFood;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Enums.EnumFoodGroup;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
@@ -129,7 +129,7 @@ public class ItemMeal extends ItemTerra implements IFood
 
 	public static boolean isWarm(ItemStack is)
 	{
-		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) * 0.1)
+		if(TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is) * 0.1)
 			return true;
 		else
 			return false;

@@ -6,91 +6,95 @@ import java.io.IOException;
 
 public class TileEntityFireEntity extends NetworkTileEntity
 {
-	public float airFromBellows;
-	public float airFromBellowsTime;
-	public float fireTemperature;
-	public float ambientTemp;
-	public float MaxFireTemp;
-	public float fuelTimeLeft;
-	public float fuelBurnTemp;
-	public float AddedAir;
+	public int airFromBellows;
+	public int fireTemp;
+	public int maxFireTemp;
+	public int fuelTimeLeft;
+	public int fuelBurnTemp;
 
-	public static final float AIRTOADD = 240;
+	public static final int AIRTOADD = 200;
 
 
 
 	public TileEntityFireEntity()
 	{
-		airFromBellows = 0F;
-		airFromBellowsTime = 0;
+		airFromBellows = 0;
 	}
 
 
 
 	public void receiveAirFromBellows()
 	{
-		if(airFromBellowsTime < AIRTOADD*3) {
-			airFromBellowsTime += AIRTOADD;
+		if(airFromBellows < AIRTOADD*3) {
+			airFromBellows += AIRTOADD;
 		}
-		if(airFromBellowsTime > AIRTOADD*3) {
-			airFromBellowsTime = AIRTOADD*3;
+		if(airFromBellows > AIRTOADD*3) {
+			airFromBellows = AIRTOADD*3;
 		}
 	}
 
 	public void keepTempToRange()
 	{
-		if(fireTemperature > MaxFireTemp) {
-			fireTemperature = MaxFireTemp;
-		} else if(fireTemperature < ambientTemp) {
-			fireTemperature = ambientTemp;
+		if(fireTemp > maxFireTemp) {
+			fireTemp = maxFireTemp;
+		} else if(fireTemp < 0) {
+			fireTemp = 0;
 		}
 	}
 
 	public int getTemperatureScaled(int s)
 	{
-		return (int) ((int)(fireTemperature * s) / MaxFireTemp);
-	}
-
-	public float handleTemp()
+		return fireTemp * s / maxFireTemp;
+	}int handleTemp()
 	{
-		fuelTimeLeft--;
-		if(airFromBellowsTime > 0)
+		if(fuelTimeLeft > 0)
 		{
 			fuelTimeLeft--;
+			if(airFromBellows == 0)
+			{
+				fuelTimeLeft--;
+			}
 		}
-
-		float bAir = airFromBellows*(1+airFromBellowsTime/AIRTOADD);
-
-		AddedAir = (26+bAir)/25/16;//1038.225 Max //0.3625
-
-		AddedAir += 0.1045F;//Added to make up for removing the height from the equation.
-
-		return fuelBurnTemp + (fuelBurnTemp * AddedAir);
+		else if(fuelTimeLeft < 0)
+			fuelTimeLeft = 0;
+		if(fuelTimeLeft > 0)
+			return fuelBurnTemp + airFromBellows;
+		else
+			return 0;
 	}
 
 	public void handleAirReduction()
 	{
-		if(airFromBellowsTime > 0)
+		if(airFromBellows > 0)
 		{
-			airFromBellowsTime--;
-			airFromBellows = airFromBellowsTime/AIRTOADD*10;
+			airFromBellows--;
 		}
 	}
 
 	public void handleTempFlux(float desiredTemp)
 	{
-		if(fireTemperature < desiredTemp)
+		if(fireTemp < desiredTemp)
 		{
-			fireTemperature+=1.35F;
-		}
-		else if(fireTemperature > desiredTemp)
-		{
-			if(desiredTemp != ambientTemp)
+			if(airFromBellows == 0) 
 			{
-				if(airFromBellows == 0) {
-					fireTemperature-=0.125F;
-				} else {
-					fireTemperature-=0.08F;
+				fireTemp++;
+			} 
+			else 
+			{
+				fireTemp+=2;
+			}
+		}
+		else if(fireTemp > desiredTemp)
+		{
+			if(desiredTemp == 0)
+			{
+				if(airFromBellows == 0) 
+				{
+					fireTemp-=2;
+				} 
+				else 
+				{
+					fireTemp-=1;
 				}
 			}
 		}

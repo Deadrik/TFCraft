@@ -66,7 +66,7 @@ public class GuiBlastFurnace extends GuiContainer
 		this.fontRenderer.drawString(StringUtil.localize("gui.Bloomery.Output"),40, 53, 0x000000);
 		if(TFCOptions.enableDebugMode)
 		{
-			this.fontRenderer.drawString("Temp : " + bloomery.fireTemperature ,40, 71, 0x000000);
+			this.fontRenderer.drawString("Temp : " + bloomery.fireTemp ,40, 71, 0x000000);
 		}
 	}
 

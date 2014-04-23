@@ -33,10 +33,9 @@ import TFC.Commands.RemoveAreaCommand;
 import TFC.Commands.RemoveChunkCommand;
 import TFC.Commands.SetPlayerStatsCommand;
 import TFC.Commands.StripChunkCommand;
+import TFC.Core.ItemHeat;
 import TFC.Core.Recipes;
-import TFC.Core.TFC_Achievements;
 import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
 import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
@@ -257,7 +256,7 @@ public class TerraFirmaCraft
 		//Setup custom potion effects
 		TFCPotion.Setup();
 
-		TFC_ItemHeat.SetupItemHeat();
+		ItemHeat.SetupItemHeat();
 
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(
 				LiquidDictionary.getLiquid("Lava", LiquidContainerRegistry.BUCKET_VOLUME), 

@@ -199,6 +199,11 @@ public class FoodStatsTFC
 		return this.stomachLevel < getMaxStomach(this.player);
 	}
 
+	public boolean needDrink()
+	{
+		return this.waterLevel < getMaxWater(this.player);
+	}
+
 	/**
 	 * Reads food stats from an NBT object.
 	 */

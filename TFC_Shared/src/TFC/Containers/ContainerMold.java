@@ -10,11 +10,11 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Crafting.CraftingManagerTFC;
 import TFC.Containers.Slots.SlotBlocked;
 import TFC.Containers.Slots.SlotMoldTool;
 import TFC.Containers.Slots.SlotMoldTool2;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -39,7 +39,7 @@ public class ContainerMold extends ContainerTFC {
 		layoutContainer(playerinv, 0, 0);
 
 		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 55, false, true);
-		
+
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(playerinv.player);
 		containerInv.setInventorySlotContents(0, pi.specialCraftingType);
 	}
@@ -182,7 +182,7 @@ public class ContainerMold extends ContainerTFC {
 		Slot slot1 = (Slot)inventorySlots.get(0);
 		Slot slot2 = (Slot)inventorySlots.get(1);
 		Slot slot3 = (Slot)inventorySlots.get(2);
-		
+
 		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
@@ -217,7 +217,7 @@ public class ContainerMold extends ContainerTFC {
 					stack.stackSize = 1;       
 					slot2.putStack(stack);                          
 					itemstack1.stackSize--;
-					
+
 				}
 			}
 			if(itemstack1.stackSize == 0)
