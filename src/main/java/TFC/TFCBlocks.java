@@ -317,6 +317,7 @@ public class TFCBlocks
 	public static Block Workbench;
 	public static Block Cactus;
 	public static Block Reeds;
+	public static Block Pumpkin;
 
 	public static void RegisterBlocks()
 	{
@@ -477,6 +478,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Workbench, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Workbench");
 		GameRegistry.registerBlock(Cactus, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Cactus");
 		GameRegistry.registerBlock(Reeds, "Reeds");
+		GameRegistry.registerBlock(Pumpkin, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Pumpkin");
 	}
 
 	public static void LoadBlocks()
@@ -502,7 +504,7 @@ public class TFCBlocks
 		Blocks.crafting_table.setCreativeTab(null);
 		Blocks.cactus.setCreativeTab(null);
 		Blocks.reeds.setCreativeTab(null);
-
+		Blocks.pumpkin.setCreativeTab(null);
 
 		Bookshelf = new BlockCustomBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("Bookshelf").setBlockTextureName("bookshelf");
 		Torch = new BlockTorch().setHardness(0.0F).setLightLevel(0.9375F).setStepSound(Block.soundTypeWood).setBlockName("Torch").setBlockTextureName("torch_on");
@@ -510,6 +512,7 @@ public class TFCBlocks
 		Workbench = new BlockWorkbench().setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("Workbench").setBlockTextureName("crafting_table");
 		Cactus = new BlockCustomCactus().setHardness(0.4F).setStepSound(Block.soundTypeCloth).setBlockName("Cactus").setBlockTextureName("cactus");
 		Reeds = new BlockCustomReed().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Reeds").setBlockTextureName("reeds");
+		Pumpkin = new BlockCustomPumpkin(false).setHardness(1.0F).setStepSound(Block.soundTypeWood).setBlockName("Pumpkin").setBlockTextureName("pumpkin");
 
 		// This is not used anywhere
 		//Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.oak_stairs), "oak_stairs", (new BlockStair(Material.wood)).setBlockName("stairsWood"));
@@ -518,11 +521,9 @@ public class TFCBlocks
 				(new BlockCustomSnow()).setHardness(0.1F).setStepSound(Block.soundTypeSnow).setBlockName("snow").setLightOpacity(1).setBlockTextureName("snow"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.ice), "ice",
 				(new BlockCustomIce()).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("ice").setBlockTextureName("ice"));
-
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.pumpkin), "pumpkin",
-				(new BlockCustomPumpkin(false)).setHardness(1.0F).setStepSound(Block.soundTypeWood).setBlockName("pumpkin").setBlockTextureName("pumpkin"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.vine), "vine",
 				(new BlockCustomVine()).setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("vine").setBlockTextureName("vine"));
+
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.fence_gate), "FenceGateTFC",
 				(new BlockCustomFenceGate()).setBlockName("FenceGateTFC").setHardness(2));
 		

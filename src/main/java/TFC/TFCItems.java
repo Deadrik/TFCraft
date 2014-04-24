@@ -652,8 +652,6 @@ public class TFCItems
 
 	/**Food Related Items and Blocks*/
 	public static Item SeedsWheat;
-	public static Item SeedsMelon;
-	public static Item SeedsPumpkin;
 	public static Item SeedsMaize;
 	public static Item SeedsTomato;
 	public static Item SeedsBarley;
