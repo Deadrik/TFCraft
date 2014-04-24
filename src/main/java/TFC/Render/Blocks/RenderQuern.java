@@ -3,7 +3,6 @@ package TFC.Render.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
 import TFC.TileEntities.TileEntityQuern;
@@ -24,7 +23,7 @@ public class RenderQuern implements ISimpleBlockRenderingHandler
 				{
 					renderblocks.setRenderBounds(0.0F, 0F, 0.0F, 1F, 0.825F, 1F);
 					renderblocks.renderStandardBlock(block, i, j, k);
-					renderblocks.overrideBlockTexture = Blocks.planks.getIcon(0, 0);
+					renderblocks.overrideBlockTexture = TFCBlocks.Planks.getIcon(0, 0);
 					float pos = te.rotatetimer * 0.035F;
 
 					if(te.rotation == 0) {

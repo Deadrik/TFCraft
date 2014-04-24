@@ -139,12 +139,12 @@ public class Recipes
 				for(int j = 0; j < Saws.length; j++)
 				{
 					GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 8, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(Saws[j], 1, 32767)});
-					GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 4, i), new Object[] {new ItemStack(Blocks.planks, 1, i), new ItemStack(Saws[j], 1, 32767)});
+					GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 4, i), new Object[] {new ItemStack(TFCBlocks.Planks, 1, i), new ItemStack(Saws[j], 1, 32767)});
 					GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportV, 8, i), new Object[] { "A2"," 2", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
 					GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportH, 8, i), new Object[] { "A ","22", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
 				}
-				GameRegistry.addRecipe(new ItemStack(Blocks.planks, 1, i), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
-				GameRegistry.addRecipe(new ItemStack(TFCItems.SinglePlank, 3, i), new Object[] {"1", Character.valueOf('1'), new ItemStack(Blocks.planks, 1, i)});
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Planks, 1, i), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
+				GameRegistry.addRecipe(new ItemStack(TFCItems.SinglePlank, 3, i), new Object[] {"1", Character.valueOf('1'), new ItemStack(TFCBlocks.Planks, 1, i)});
 			}
 			else if(i/16 == 1)
 			{
@@ -579,14 +579,12 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCItems.FireBrick,2,0), 
 				new Object[] {"PP", "PP", Character.valueOf('P'), new ItemStack(Items.clay_ball, 1, 1)});
 
-		GameRegistry.addRecipe(new ItemStack(Blocks.crafting_table, 1),
-				new Object[]{"PP","PP", Character.valueOf('P'), new ItemStack(TFCBlocks.Planks2, 1, 32767)});
+		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Workbench, 1), new Object[]{"PP","PP", Character.valueOf('P'), new ItemStack(TFCBlocks.Planks, 1, 32767)});
+		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Workbench, 1), new Object[]{"PP","PP", Character.valueOf('P'), new ItemStack(TFCBlocks.Planks2, 1, 32767)});
+
 		GameRegistry.addRecipe(new ItemStack(Items.boat, 1),
 				new Object[]{"P P","PPP", Character.valueOf('P'), new ItemStack(TFCBlocks.Planks2, 1, 32767)});
 
-		GameRegistry.addRecipe(new ItemStack(Blocks.crafting_table,1),
-				new Object[]{"PP","PP", Character.valueOf('P'),new ItemStack(TFCBlocks.Planks2, 1, 32767)});
-		
 		RegisterToolRecipes();
 		registerFoodRecipes();
 		VanillaRecipes();
@@ -656,6 +654,7 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Blocks.fence,2));
 			RemoveRecipe(new ItemStack(Blocks.fence_gate,1));
 			RemoveRecipe(new ItemStack(Blocks.wool));
+			RemoveRecipe(new ItemStack(Blocks.crafting_table));
 
 			RemoveRecipe(new ItemStack(Items.leather_helmet));
 			RemoveRecipe(new ItemStack(Items.leather_chestplate));

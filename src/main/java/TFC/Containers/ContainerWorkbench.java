@@ -2,7 +2,6 @@ package TFC.Containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
@@ -11,6 +10,7 @@ import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.TileEntities.TileEntityWorkbench;
 
 public class ContainerWorkbench extends ContainerTFC
@@ -85,7 +85,7 @@ public class ContainerWorkbench extends ContainerTFC
 	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
 	{
-		return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != Blocks.crafting_table ? false : par1EntityPlayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D) <= 64.0D;
+		return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != TFCBlocks.Workbench ? false : par1EntityPlayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D) <= 64.0D;
 	}
 
 	@Override

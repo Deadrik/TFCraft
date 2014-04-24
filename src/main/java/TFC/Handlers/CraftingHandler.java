@@ -2,7 +2,6 @@ package TFC.Handlers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -43,9 +42,9 @@ public class CraftingHandler
 		{
 			if(item == TFCItems.StoneBrick)
 				HandleItem(e.player, e.craftMatrix, Recipes.Chisels);
-			else if(item == Item.getItemFromBlock(Blocks.crafting_table))
+			else if(item == Item.getItemFromBlock(TFCBlocks.Workbench))
 			{
-				e.player.inventory.clearInventory(Item.getItemFromBlock(Blocks.crafting_table), -1);
+				e.player.inventory.clearInventory(Item.getItemFromBlock(TFCBlocks.Workbench), -1);
 				if(!e.player.worldObj.isRemote)
 				{
 					if(!e.player.getEntityData().hasKey("craftingTable"))

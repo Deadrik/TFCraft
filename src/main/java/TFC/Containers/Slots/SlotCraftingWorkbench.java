@@ -49,7 +49,7 @@ public class SlotCraftingWorkbench extends Slot
 		par1ItemStack.onCrafting(this.thePlayer.worldObj, this.thePlayer, this.field_48436_g);
 		this.field_48436_g = 0;
 
-		if (par1ItemStack.getItem() == Item.getItemFromBlock(Blocks.crafting_table))
+		if (par1ItemStack.getItem() == Item.getItemFromBlock(TFCBlocks.Workbench))
 		{
 			this.thePlayer.addStat(AchievementList.buildWorkBench, 1);
 		}

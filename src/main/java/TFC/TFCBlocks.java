@@ -314,6 +314,7 @@ public class TFCBlocks
 	public static Block Bookshelf;
 	public static Block Torch;
 	public static Block Chest;
+	public static Block Workbench;
 
 	public static void RegisterBlocks()
 	{
@@ -471,6 +472,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Bookshelf, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Bookshelf");
 		GameRegistry.registerBlock(Torch, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Torch");
 		GameRegistry.registerBlock(Chest, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Chest");
+		GameRegistry.registerBlock(Workbench, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Workbench");
 	}
 
 	public static void LoadBlocks()
@@ -492,17 +494,17 @@ public class TFCBlocks
 		Blocks.bookshelf.setCreativeTab(null);
 		Blocks.torch.setCreativeTab(null);
 		Blocks.chest.setCreativeTab(null);
+		Blocks.planks.setCreativeTab(null);
+		Blocks.crafting_table.setCreativeTab(null);
 
 
 		Bookshelf = new BlockCustomBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("Bookshelf").setBlockTextureName("bookshelf");
 		Torch = new BlockTorch().setHardness(0.0F).setLightLevel(0.9375F).setStepSound(Block.soundTypeWood).setBlockName("Torch").setBlockTextureName("torch_on");
 		Chest = new BlockChestTFC(0).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("Chest");
+		Workbench = new BlockWorkbench().setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("Workbench").setBlockTextureName("crafting_table");
 
 		// This is not used anywhere
 		//Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.oak_stairs), "oak_stairs", (new BlockStair(Material.wood)).setBlockName("stairsWood"));
-
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.crafting_table), "crafting_table",
-				(new BlockWorkbench()).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("workbench").setBlockTextureName("crafting_table"));
 
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.snow_layer), "snow_layer",
 				(new BlockCustomSnow()).setHardness(0.1F).setStepSound(Block.soundTypeSnow).setBlockName("snow").setLightOpacity(1).setBlockTextureName("snow"));
@@ -601,8 +603,8 @@ public class TFCBlocks
 
 		Detailed = new BlockDetailed().setBlockName("StoneDetailed").setHardness(10).setResistance(15F);
 
-		Planks = (new BlockPlanks(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood").setBlockTextureName("planks");
-		Planks2 = (new TFC.Blocks.BlockPlanks2(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood2").setBlockTextureName("planks");
+		Planks = (new BlockPlanks(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood");
+		Planks2 = (new TFC.Blocks.BlockPlanks2(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood2");
 		Leaves = (new BlockCustomLeaves()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves");
 		Leaves2 = (new BlockCustomLeaves2()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves2");
 		Sapling = (new BlockCustomSapling()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling");
