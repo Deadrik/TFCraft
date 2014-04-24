@@ -13,13 +13,13 @@ import org.objectweb.asm.tree.LdcInsnNode;
 
 import TFC.ASM.ClassTransformer;
 
-public class TF_EntityFallingSand extends ClassTransformer
+public class TF_EntityFallingBlock extends ClassTransformer
 {
 
-	public TF_EntityFallingSand()
+	public TF_EntityFallingBlock()
 	{
-		mcpClassName = "net.minecraft.entity.item.EntityFallingSand";
-		obfClassName = "sq";
+		mcpClassName = "net.minecraft.entity.item.EntityFallingBlock";
+		obfClassName = "vv";
 
 		List nodes = new ArrayList<InstrSet>();
 		nodes.add(new InstrSet(new IntInsnNode(Opcodes.SIPUSH, 2000), 13, OperationType.Replace));

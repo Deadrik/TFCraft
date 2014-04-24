@@ -23,7 +23,7 @@ public class TF_RenderBlock extends ClassTransformer
 	public TF_RenderBlock()
 	{
 		mcpClassName = "net.minecraft.client.renderer.RenderBlocks";
-		obfClassName = "bfo";
+		obfClassName = "ble";
 
 		/**
 		 * renderFaceZNeg
@@ -63,8 +63,8 @@ public class TF_RenderBlock extends ClassTransformer
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 20), 7283, 5, OperationType.Replace));
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 24), 7283, 6, OperationType.Replace));
 
-		this.mcpMethodNodes.put("renderFaceZNeg | (Lnet/minecraft/block/Block;DDDLnet/minecraft/util/Icon;)V", nodes);
-		this.obfMethodNodes.put("c | (Laqw;DDDLmr;)V", nodes);
+		this.mcpMethodNodes.put("renderFaceZNeg | (Lnet/minecraft/block/Block;DDDLnet/minecraft/util/IIcon;)V", nodes);
+		this.obfMethodNodes.put("c | (Lahu;DDDLps;)V", nodes);
 
 		/**
 		 * renderFaceXPos
@@ -103,8 +103,8 @@ public class TF_RenderBlock extends ClassTransformer
 
 		nodes.add(new InstrSet(new VarInsnNode(Opcodes.DLOAD, 32), 7613, 4, OperationType.Replace));
 
-		this.mcpMethodNodes.put("renderFaceXPos | (Lnet/minecraft/block/Block;DDDLnet/minecraft/util/Icon;)V", nodes);
-		this.obfMethodNodes.put("f | (Laqw;DDDLmr;)V", nodes);
+		this.mcpMethodNodes.put("renderFaceXPos | (Lnet/minecraft/block/Block;DDDLnet/minecraft/util/IIcon;)V", nodes);
+		this.obfMethodNodes.put("f | (Lahu;DDDLps;)V", nodes);
 
 	}
 }

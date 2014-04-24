@@ -14,7 +14,7 @@ public class TFCAccessTransformer extends AccessTransformer
 	private static List mapFiles = new LinkedList();
 	public TFCAccessTransformer() throws IOException 
 	{
-		super();
+		super("tfc_at.cfg");
 		instance = this;
 		// add your access transformers here!
 		mapFiles.add("tfc_at.cfg");
@@ -25,7 +25,8 @@ public class TFCAccessTransformer extends AccessTransformer
 		}
 	}
 
-	public static void addTransformerMap(String mapFileName) {
+	public static void addTransformerMap(String mapFileName)
+	{
 		if (instance == null) {
 			mapFiles.add(mapFileName);
 		}
@@ -33,7 +34,8 @@ public class TFCAccessTransformer extends AccessTransformer
 			instance.readMapFile(mapFileName);
 		}
 	}
-	private void readMapFile(String name) {
+	private void readMapFile(String name)
+	{
 		System.out.println("Adding transformer map: " + name);
 		try {
 			// get a method from AccessTransformer
