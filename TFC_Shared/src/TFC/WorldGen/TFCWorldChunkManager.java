@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -200,11 +201,13 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	/**
 	 * Return an adjusted version of a given temperature based on the y height
 	 */
-	public float getTemperatureAtHeight(float par1, int par2)
+	public float getTemperatureAtHeight(float t, int y)
 	{
-		float temp = par1;
-		if(par2 > 180)
-			temp -= temp * (par2-180)/90;
+		int x = (int)Math.floor(Minecraft.getMinecraft().thePlayer.posX);
+		int z = (int)Math.floor(Minecraft.getMinecraft().thePlayer.posZ);
+		float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
+		/*if(y > 180)
+			temp -= temp * (y-180)/90;*/
 		return temp;
 	}
 
