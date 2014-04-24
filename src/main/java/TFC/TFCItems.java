@@ -61,6 +61,7 @@ import TFC.Items.ItemTFCArmor;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemTuyere;
 import TFC.Items.ItemUnfinishedArmor;
+import TFC.Items.ItemBlocks.ItemSugercane;
 import TFC.Items.ItemBlocks.ItemWoodDoor;
 import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.Items.Pottery.ItemPotteryJug;
@@ -675,6 +676,7 @@ public class TFCItems
 
 	public static Item FruitTreeSapling;
 	public static Item FruitTreeSapling2;
+	public static Item Sugercane;
 
 	public static Item RedApple;
 	public static Item GreenApple;
@@ -1628,6 +1630,8 @@ public class TFCItems
 
 		FruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling");
 		FruitTreeSapling2 = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling2");
+		Items.reeds.setCreativeTab(null);
+		Sugercane = new ItemSugercane().setUnlocalizedName("Sugercane").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("reeds");
 		RedApple = new ItemFoodTFC(2, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Red Apple");
 		Banana = new ItemFoodTFC(3, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Banana");
 		Orange = new ItemFoodTFC(4, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Orange");
@@ -2568,6 +2572,7 @@ public class TFCItems
 		System.out.println(new StringBuilder().append("[TFC] Registering Food").toString());
 		GameRegistry.registerItem(FruitTreeSapling, FruitTreeSapling.getUnlocalizedName());
 		GameRegistry.registerItem(FruitTreeSapling2, FruitTreeSapling2.getUnlocalizedName());
+		GameRegistry.registerItem(Sugercane, Sugercane.getUnlocalizedName());
 		GameRegistry.registerItem(RedApple, RedApple.getUnlocalizedName());
 		GameRegistry.registerItem(Banana, Banana.getUnlocalizedName());
 		GameRegistry.registerItem(Orange, Orange.getUnlocalizedName());

@@ -353,7 +353,7 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 			return true;
 		}
 
-		if (plant == Blocks.reeds && this == Blocks.reeds)
+		if (plant == TFCBlocks.Reeds && this == TFCBlocks.Reeds)
 		{
 			return true;
 		}

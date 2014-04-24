@@ -94,7 +94,7 @@ public class BlockCustomIce extends BlockIce
 		if (plant == TFCBlocks.Cactus && this == TFCBlocks.Cactus)
 			return true;
 
-		if (plant == Blocks.reeds && this == Blocks.reeds)
+		if (plant == TFCBlocks.Reeds && this == TFCBlocks.Reeds)
 			return true;
 
 		if (plantable instanceof BlockCustomLilyPad && ((BlockCustomLilyPad)plant).canThisPlantGrowOnThisBlock(this, meta))

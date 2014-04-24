@@ -290,7 +290,7 @@ public class BlockCustomFlowing extends BlockCustomLiquid
 	private boolean blockBlocksFlow(World par1World, int par2, int par3, int par4)
 	{
 		Block var5 = par1World.getBlock(par2, par3, par4);
-		if (var5 != Blocks.wooden_door && var5 != Blocks.iron_door && var5 != Blocks.wall_sign && var5 != Blocks.ladder && var5 != Blocks.reeds)
+		if (var5 != Blocks.wooden_door && var5 != Blocks.iron_door && var5 != Blocks.wall_sign && var5 != Blocks.ladder && var5 != TFCBlocks.Reeds)
 		{
 			if (var5 == Blocks.air)
 			{

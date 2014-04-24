@@ -1,10 +1,14 @@
 package TFC.Blocks.Vanilla;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockReed;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
+import TFC.TFCItems;
 import TFC.Core.TFC_Core;
 
 public class BlockCustomReed extends BlockReed implements IPlantable
@@ -25,4 +29,15 @@ public class BlockCustomReed extends BlockReed implements IPlantable
 		return var5 == this ? true : !correctSoil ? false : par1World.getBlock(par2 - 1, par3 - 1, par4).getMaterial() == Material.water ? true : par1World.getBlock(par2 + 1, par3 - 1, par4).getMaterial() == Material.water ? true : par1World.getBlock(par2, par3 - 1, par4 - 1).getMaterial() == Material.water ? true : par1World.getBlock(par2, par3 - 1, par4 + 1).getMaterial() == Material.water;
 	}
 
+	@Override
+	public Item getItemDropped(int par1, Random par2, int par3)
+	{
+		return TFCItems.Sugercane;
+	}
+
+	@Override
+	public Item getItem(World world, int x, int y, int z)
+	{
+		return TFCItems.Sugercane;
+	}
 }
