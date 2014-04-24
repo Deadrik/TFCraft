@@ -31,11 +31,13 @@ public class DebugModeCommand extends CommandBase{
 			{
 				player.getEntityData().removeTag("inDebugMode");
 				sender.addChatMessage(new ChatComponentText("Debug Mode is OFF"));
+				TFCOptions.enableDebugMode = false;
 			}
 			else
 			{
 				player.getEntityData().setBoolean("inDebugMode", true);
 				sender.addChatMessage(new ChatComponentText("Debug Mode is ON"));
+				TFCOptions.enableDebugMode = true;
 			}
 		}
 	}

@@ -1626,8 +1626,8 @@ public class TFCItems
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.chicken), "chicken", new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("chickenRaw"));
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.cooked_chicken), "cooked_chicken", new ItemFoodTFC(41, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("chickenCooked"));
 
-		FruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling1");
-		FruitTreeSapling2 = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling2");
+		FruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling");
+		FruitTreeSapling2 = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling");
 		RedApple = new ItemFoodTFC(2, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Red Apple");
 		Banana = new ItemFoodTFC(3, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Banana");
 		Orange = new ItemFoodTFC(4, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Orange");

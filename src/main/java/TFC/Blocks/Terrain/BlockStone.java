@@ -57,6 +57,8 @@ public class BlockStone extends BlockCollapsable
 	@Override
 	public IIcon getIcon(int i, int j)
 	{
+		if((j&7)>=icons.length)
+			return icons[0];
 		return icons[j & 7];
 	}
 

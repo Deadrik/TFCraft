@@ -32,7 +32,7 @@ public enum EnumWoodMaterial
 	private EnumWoodMaterial(String s, int i, int j)
 	{
 		burnTempMax = i;
-		burnTimeMax = j*50;
+		burnTimeMax = j;
 	}
 
 }
