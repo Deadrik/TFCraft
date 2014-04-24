@@ -138,8 +138,8 @@ public class FoodStatsTFC
 				soberTime--;
 			player.getEntityData().setLong("soberTime", soberTime);
 			long time = TFC_Time.getTotalTicks();
-			Block block = player.worldObj.getBlock((int)player.posX,(int)player.posY,(int)player.posZ);
-			Block block2 = player.worldObj.getBlock((int)player.posX,(int)player.posY-1,(int)player.posZ);
+			Block block = player.worldObj.getBlock((int)Math.floor(player.posX),(int)Math.floor(player.posY),(int)Math.floor(player.posZ));
+			Block block2 = player.worldObj.getBlock((int)Math.floor(player.posX),(int)Math.floor(player.posY - 1),(int)Math.floor(player.posZ));
 			if(player.capabilities.isCreativeMode)
 			{
 				long oldWaterTimer = waterTimer;

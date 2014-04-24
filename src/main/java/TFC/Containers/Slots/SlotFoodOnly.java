@@ -7,6 +7,7 @@ import TFC.API.IFood;
 import TFC.API.IItemFoodBlock;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
+import TFC.Food.ItemMeal;
 
 public class SlotFoodOnly extends Slot
 {
@@ -19,8 +20,10 @@ public class SlotFoodOnly extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize &&
-				(itemstack.getItem() instanceof IFood)||itemstack.getItem() instanceof IItemFoodBlock)
+		if (itemstack.getItem() instanceof ISize && ((ISize) itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize &&
+				!(itemstack.getItem() instanceof ItemMeal) &&
+				(itemstack.getItem() instanceof IFood) ||
+				itemstack.getItem() instanceof IItemFoodBlock)
 			return true;
 		return false;
 	}

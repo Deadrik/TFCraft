@@ -14,6 +14,8 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TileEntities.TileEntityFruitTreeWood;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemFruitTreeSapling extends ItemTerra
 {
@@ -70,6 +72,20 @@ public class ItemFruitTreeSapling extends ItemTerra
 	public IIcon getIconFromDamage(int meta)
 	{
 		return icons[meta];
+	}
+
+	// Check for and correct invalid saplings from prior plum sapling bug
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIconIndex(ItemStack par1ItemStack)
+	{
+		int damage = par1ItemStack.getItemDamage();
+		if (damage >= MetaNames.length)
+		{
+			damage -= 8;
+			par1ItemStack.setItemDamage(damage);
+		}
+		return this.getIconFromDamage(damage);
 	}
 
 	@Override
