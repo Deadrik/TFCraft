@@ -38,7 +38,7 @@ public class BlockCustomSnow extends BlockTerra
 			flag =  true;
 		if (world.getBlock(i, j - 1, k).isOpaqueCube())
 			flag =  true;
-		if (b == Blocks.leaves)
+		if (b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2)
 			flag =  true;
 		return flag;
 	}
@@ -82,7 +82,8 @@ public class BlockCustomSnow extends BlockTerra
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3) {
+	public Item getItemDropped(int par1, Random par2Random, int par3)
+	{
 		return Items.snowball;
 	}
 	
@@ -98,8 +99,7 @@ public class BlockCustomSnow extends BlockTerra
 		int var5 = par1World.getBlockMetadata(par2, par3, par4);
 		if(var5 > 0)
 		{
-			double speed = 0.58D + 0.4D * (15/var5/15);
-
+			double speed = 0.58D + 0.4D * (15 / var5 / 15);
 			par5Entity.motionX *= speed;
 			par5Entity.motionZ *= speed;
 		}
@@ -155,7 +155,7 @@ public class BlockCustomSnow extends BlockTerra
 		}
 		if(par1World.isRaining() && TFC_Climate.getHeightAdjustedTemp(par2, par3, par4) <= 0)//Raining and Below Freezing
 		{
-			if(meta < 3 && par1World.getBlock(par2, par3-1, par4).getMaterial() != Material.leaves) 
+			if(meta < 3 && par1World.getBlock(par2, par3 - 1, par4).getMaterial() != Material.leaves) 
 			{
 				if (canAddSnow(par1World, par2, par3, par4, meta)) {
 					par1World.setBlockMetadataWithNotify(par2, par3, par4, meta + 1, 2);
@@ -226,7 +226,7 @@ public class BlockCustomSnow extends BlockTerra
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		this.blockIcon = registerer.registerIcon(Reference.ModID + ":"+"snow");
+		this.blockIcon = registerer.registerIcon(Reference.ModID + ":snow");
 	}
 
 	private boolean canAddSnowCheckNeighbors(World world, int x, int y, int z, int meta)
@@ -243,13 +243,13 @@ public class BlockCustomSnow extends BlockTerra
 
 	private boolean canAddSnow(World world, int x, int y, int z, int meta)
 	{
-		if (!canAddSnowCheckNeighbors(world, x+1, y, z, meta))
+		if (!canAddSnowCheckNeighbors(world, x + 1, y, z, meta))
 			return false;
-		if (!canAddSnowCheckNeighbors(world, x-1, y, z, meta))
+		if (!canAddSnowCheckNeighbors(world, x - 1, y, z, meta))
 			return false;
-		if (!canAddSnowCheckNeighbors(world, x, y, z+1, meta))
+		if (!canAddSnowCheckNeighbors(world, x, y, z + 1, meta))
 			return false;
-		if (!canAddSnowCheckNeighbors(world, x, y, z-1, meta))
+		if (!canAddSnowCheckNeighbors(world, x, y, z - 1, meta))
 			return false;
 
 		return true;

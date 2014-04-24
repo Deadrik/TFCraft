@@ -348,7 +348,7 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 		EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
 		int meta = world.getBlockMetadata(x,y,z);
 
-		if (plant == Blocks.cactus && this == Blocks.cactus)
+		if (plant == TFCBlocks.Cactus && this == TFCBlocks.Cactus)
 		{
 			return true;
 		}

@@ -28,7 +28,6 @@ public class PlayerTracker
 				event.player.getUniqueID(),
 				FMLClientHandler.instance().getClientToServerNetworkManager()));
 		
-		System.out.println("-----------------------------Sending InitClientWorldPacket");
 		AbstractPacket pkt = new InitClientWorldPacket(event.player);
 		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
 		
@@ -40,7 +39,6 @@ public class PlayerTracker
 	@SubscribeEvent
 	public void onClientConnect(ClientConnectedToServerEvent event)
 	{
-		System.out.println("-----------------------------CLIENT CONNECT EVENT------------------");
 //		System.out.println("-----"+FMLClientHandler.instance().getClientPlayerEntity().getDisplayName()+" : "+
 //				FMLClientHandler.instance().getClientPlayerEntity().getUniqueID().toString()+"-------");
 //
