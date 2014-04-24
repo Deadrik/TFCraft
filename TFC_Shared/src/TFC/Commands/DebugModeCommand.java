@@ -27,9 +27,15 @@ public class DebugModeCommand extends CommandBase{
 		{
 			NBTTagCompound nbt = player.getEntityData();
 			if(nbt != null && nbt.hasKey("inDebugMode"))
+			{
 				player.getEntityData().removeTag("inDebugMode");
+				TFCOptions.enableDebugMode = false;
+			}
 			else
+			{
 				player.getEntityData().setBoolean("inDebugMode", true);
+				TFCOptions.enableDebugMode = true;
+			}
 		}
 	}
 
