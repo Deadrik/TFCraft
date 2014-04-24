@@ -43,7 +43,9 @@ public class KeyBindingHandler
 					TerraFirmaCraft.packetPipeline.sendToServer(pkt);
 				}
 				else if(player.getCurrentEquippedItem().getItem() instanceof ItemCustomHoe)
+				{
 					pi.switchHoeMode();
+				}
 			}
 			else if(Key_LockTool.isPressed())
 			{

@@ -10,7 +10,7 @@ import TFC.Core.Player.PlayerManagerTFC;
 public class KeyPressPacket extends AbstractPacket
 {
 	private int type;
-	private static long keyTimer = 0;
+	private static long keyTimer = 0; // not sure what this is for??
 
 	public KeyPressPacket(){}
 

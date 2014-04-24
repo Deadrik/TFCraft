@@ -548,7 +548,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerKeyBindingHandler()
 	{
-		MinecraftForge.EVENT_BUS.register(new KeyBindingHandler());
+		FMLCommonHandler.instance().bus().register(new KeyBindingHandler());
 	}
 
 	@Override
