@@ -616,6 +616,8 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 		{
 			//Here we take care of the item that we are cooking in the fire
 			careForInventorySlot(fireItemStacks[1]);
+			careForInventorySlot(fireItemStacks[7]);
+			careForInventorySlot(fireItemStacks[8]);
 
 			hasCookingPot = (fireItemStacks[1]!= null && fireItemStacks[1].getItem() == TFCItems.PotteryPot);
 			updateGui();
@@ -685,8 +687,6 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 
 			if(fuelTimeLeft <= 0)
 				TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
-			else
-				TFC_Core.handleItemTicking(new ItemStack[]{fireItemStacks[7], fireItemStacks[8]}, worldObj, xCoord, yCoord, zCoord);
 		}
 
 	}
