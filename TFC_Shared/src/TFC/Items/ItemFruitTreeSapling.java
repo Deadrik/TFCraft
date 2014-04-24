@@ -2,6 +2,9 @@ package TFC.Items;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -73,7 +76,20 @@ public class ItemFruitTreeSapling extends ItemTerra
 		return icons[meta];
 	}
 
+	// Check for and correct invalid saplings from prior plum sapling bug
 	@Override
+	@SideOnly(Side.CLIENT)
+    public Icon getIconIndex(ItemStack par1ItemStack)
+    {
+		int damage = par1ItemStack.getItemDamage();
+		if (damage >= MetaNames.length) {
+			damage -= 8;
+			par1ItemStack.setItemDamage(damage);
+		}
+        return this.getIconFromDamage(damage);
+    }
+
+   @Override
 	public int getMetadata(int i)
 	{
 		return i;
