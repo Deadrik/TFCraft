@@ -144,8 +144,8 @@ public class FoodStatsTFC
 
 
 			long time = TFC_Time.getTotalTicks();
-			int blockId = player.worldObj.getBlockId((int)player.posX,(int)player.posY,(int)player.posZ);
-			int blockId2 = player.worldObj.getBlockId((int)player.posX,(int)player.posY-1,(int)player.posZ);
+			int blockId = player.worldObj.getBlockId((int)Math.floor(player.posX),(int)Math.floor(player.posY),(int)Math.floor(player.posZ));
+			int blockId2 = player.worldObj.getBlockId((int)Math.floor(player.posX),(int)Math.floor(player.posY-1),(int)Math.floor(player.posZ));
 			if(player.capabilities.isCreativeMode)
 			{
 				long oldWaterTimer = waterTimer;
