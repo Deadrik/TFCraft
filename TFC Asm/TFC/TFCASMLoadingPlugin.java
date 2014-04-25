@@ -1,8 +1,10 @@
 package TFC;
 
+import java.io.File;
 import java.util.Map;
 
 import TFC.ASM.Transform.TF_EntityFallingSand;
+import TFC.ASM.Transform.TF_EntityRenderer;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
@@ -10,6 +12,7 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 public class TFCASMLoadingPlugin implements IFMLLoadingPlugin
 {
 	public static boolean runtimeDeobf;
+	public static File location;
 
 	@Override
 	public String[] getLibraryRequestClass() {
@@ -18,7 +21,7 @@ public class TFCASMLoadingPlugin implements IFMLLoadingPlugin
 
 	@Override
 	public String[] getASMTransformerClass() {
-		return new String[]{/*TF_RenderBlock.class.getName(),*/TF_EntityFallingSand.class.getName()};
+		return new String[]{/*TF_RenderBlock.class.getName(),*/TF_EntityFallingSand.class.getName(), TF_EntityRenderer.class.getName()};
 	}
 
 	@Override
@@ -33,8 +36,8 @@ public class TFCASMLoadingPlugin implements IFMLLoadingPlugin
 
 	@Override
 	public void injectData(Map<String, Object> data) {
-		// TODO Auto-generated method stub
 		runtimeDeobf = (Boolean) data.get("runtimeDeobfuscationEnabled");
+		location = (File) data.get("coremodLocation");
 	}
 
 }

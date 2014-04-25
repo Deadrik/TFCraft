@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
@@ -210,21 +211,21 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 		biome.decorate(this.worldObj, this.rand, xCoord, zCoord);
 		SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, biome, xCoord + 8, zCoord + 8, 16, 16, this.rand);
-		xCoord += 8;
-		zCoord += 8;
-
-		for (x = 0; x < 16; ++x)
-			for (y = 0; y < 16; ++y)
+		//xCoord += 8;
+		//zCoord += 8;
+		int count = 0;
+		for (x = 0; x < 16; x++)
+			for (z = 0; z < 16; z++)
 			{
-				z = this.worldObj.getPrecipitationHeight(xCoord + x, zCoord + y);
+				y = this.worldObj.getPrecipitationHeight(xCoord + x, zCoord + z);
 
-				if (this.worldObj.isBlockFreezable(x + xCoord, z - 1, y + zCoord))
-					if(biome.biomeID != BiomeGenBase.ocean.biomeID&& biome.biomeID != BiomeGenBase.beach.biomeID)
-						this.worldObj.setBlock(x + xCoord, z - 1, y + zCoord, Block.ice.blockID, 1, 0x2);
-					else
-						this.worldObj.setBlock(x + xCoord, z - 1, y + zCoord, Block.ice.blockID, 0, 0x2);
-				if (canSnowAt(worldObj, x + xCoord, z, y + zCoord))
-					this.worldObj.setBlock(x + xCoord, z, y + zCoord, Block.snow.blockID, 0, 0x2);
+				if(worldObj.getBlockMaterial(x+xCoord, y-1, z+zCoord) == Material.water && !worldObj.isBlockFreezable(x + xCoord, y - 1, z + zCoord))
+				{
+					count++;
+				}
+
+				if (canSnowAt(worldObj, x + xCoord, y, z + zCoord))
+					this.worldObj.setBlock(x + xCoord, y, z + zCoord, Block.snow.blockID, 0, 0x2);
 			}
 	}
 

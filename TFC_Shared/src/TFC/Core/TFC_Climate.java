@@ -484,13 +484,13 @@ public class TFC_Climate
 		float rainfall = getRainfall(x,y,z);
 		if(rainfall > 100)
 		{
-		float temp = (getTemp(x, z)+35)/(getMaxTemperature()+35);
-		//float evt = (1 - (((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z).floatdata1 / 16))*0.5f;
-		float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);
+			float temp = (getTemp(x, z)+35)/(getMaxTemperature()+35);
+			//float evt = (1 - (((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z).floatdata1 / 16))*0.5f;
+			float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);
 
-		double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
-		double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
-		return ColorizerFoliageTFC.getFoliageColor(var1, var3);
+			double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
+			double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
+			return ColorizerFoliageTFC.getFoliageColor(var1, var3);
 		}
 		else
 			return ColorizerFoliageTFC.getFoliageDead();

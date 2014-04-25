@@ -168,18 +168,18 @@ public class TFCProvider extends WorldProvider
 
 				if(id == TFCBlocks.FreshWaterStill.blockID && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
 				{
-					worldObj.setBlock(x, y, z, Block.ice.blockID,1,3);
+					worldObj.setBlock(x, y, z, Block.ice.blockID,1,2);
 				}
 				else if(id == Block.waterStill.blockID && meta == 0/* || id == Block.waterMoving.blockID*/)
 				{
-					worldObj.setBlock(x, y, z, Block.ice.blockID,0,3);
+					worldObj.setBlock(x, y, z, Block.ice.blockID,0,2);
 				}
 				else if(id == TFCBlocks.SeaGrassStill.blockID || id == TFCBlocks.SeaGrassFlowing.blockID){
 					int type = -1;
 					if(te !=null){
 						type = ((TESeaWeed)te).getType();
 					}
-					worldObj.setBlock(x, y, z, TFCBlocks.SeaGrassFrozen.blockID,type,3);
+					worldObj.setBlock(x, y, z, TFCBlocks.SeaGrassFrozen.blockID,type,2);
 					te = ((worldObj.getBlockTileEntity(x,y,z)));
 					if(te!=null){
 						((TESeaWeed)te).setType(type);
@@ -192,21 +192,33 @@ public class TFCProvider extends WorldProvider
 		{
 			if(id == Block.ice.blockID)
 			{
-				if((meta & 1) == 0)
+				if (worldObj.getBlockId(x, y+1, z) == Block.snow.blockID)
 				{
-					worldObj.setBlock(x, y, z, Block.waterStill.blockID,0,3);
-				}
-				else if((meta & 1) == 1)
-				{
-					worldObj.setBlock(x, y, z, TFCBlocks.FreshWaterStill.blockID,0,3);
-				}
-				else if(id == TFCBlocks.SeaGrassFrozen.blockID)
-				{
-					worldObj.setBlock(x, y, z, id,meta,3);
-					te = (worldObj.getBlockTileEntity(x, y, z));
-					if(te!=null){
-						((TESeaWeed)te).setType(meta);
+					int m = worldObj.getBlockMetadata(x, y+1, z);
+					if (m > 0) {
+						worldObj.setBlockMetadataWithNotify(x, y+1, z, m-1, 2);
+					} else {
+						worldObj.setBlockToAir(x, y+1, z);
 					}
+				} 
+				else 
+				{
+					if((meta & 1) == 0)
+					{
+						worldObj.setBlock(x, y, z, Block.waterStill.blockID,0,3);
+					}
+					else if((meta & 1) == 1)
+					{
+						worldObj.setBlock(x, y, z, TFCBlocks.FreshWaterStill.blockID,0,3);
+					}
+				}				
+			}
+			else if(id == TFCBlocks.SeaGrassFrozen.blockID)
+			{
+				worldObj.setBlock(x, y, z, id,meta,3);
+				te = (worldObj.getBlockTileEntity(x, y, z));
+				if(te!=null){
+					((TESeaWeed)te).setType(meta);
 				}
 			}
 		}
