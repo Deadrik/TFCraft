@@ -67,6 +67,12 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		sex = rand.nextInt(2);
 
 		this.tasks.taskEntries.clear();
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIPanic(this, 1.4D));
+		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
+		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
+		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		this.tasks.addTask(7, new EntityAILookIdle(this));
 		addAI();
 
 		size_mod = (((rand.nextInt ((degreeOfDiversion+1)*10)*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex);
@@ -116,19 +122,11 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 
 	public void addAI()
 	{
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, 1.4D));
 		if(sex==0){
 			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		}        
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
-		this.tasks.addTask(3, new EntityAIFindNest(this,1.2F));
-
-
-		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
-		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(7, new EntityAILookIdle(this));
+		this.tasks.addTask(3, new EntityAIFindNest(this,1.2F));		
 	}
 
 	@Override
