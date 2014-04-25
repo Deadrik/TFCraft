@@ -27,6 +27,7 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemQuiver;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemCustomHoe;
+import TFC.WorldGen.DataLayer;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class RenderOverlayHandler
@@ -176,12 +177,13 @@ public class RenderOverlayHandler
 			int xCoord = (int)player.posX;
 			int yCoord = (int)player.posY;
 			int zCoord = (int)player.posZ;
+			DataLayer evt = TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord);
 			event.left.add(String.format("rain: %.0f, temp: %.2f, average bio temp: %.2f, apparent temp: %.2f, evt: %.3f", new Object[] {
 					TFC_Climate.getRainfall(xCoord, yCoord, zCoord), 
 					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord),
 					TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord),
 					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord)+BodyTempStats.applyTemperatureFromHeatSources(player),
-					TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1}));
+					evt.floatdata1}));
 
 			event.left.add("Health: " + player.getHealth());
 			event.left.add("Stability: " + TFC_Climate.manager.getStabilityLayerAt(xCoord, zCoord).data1);
