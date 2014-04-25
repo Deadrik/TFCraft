@@ -16,6 +16,7 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 import TFC.Reference;
 import TFC.TFCBlocks;
+import TFC.Core.TFC_Core;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCProvider;
 import cpw.mods.fml.relauncher.Side;
@@ -41,7 +42,7 @@ public class BlockCustomIce extends BlockIce
 		Material var7 = par1World.getBlock(par3, par4 - 1, par5).getMaterial();
 
 		if (var7.blocksMovement() || var7.isLiquid())
-			par1World.setBlock(par3, par4, par5, getBlockMelt(par1World,par3,par4,par5,true), 0, 2);
+			par1World.setBlock(par3, par4, par5, getBlockMelt(par1World, par3, par4, par5, true), 0, 2);
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class BlockCustomIce extends BlockIce
 				world.setBlock(i,j,k,Block.waterMoving.blockID);
 			}
 		}*/
-		super.breakBlock(world,i,j,k,id,l);
+		super.breakBlock(world, i, j, k, id, l);
 	}
 
 	@Override
@@ -102,14 +103,14 @@ public class BlockCustomIce extends BlockIce
 
 		switch (plantType)
 		{
-		case Desert: return this == Blocks.sand;
+		case Desert: return TFC_Core.isSand(this);
 		case Nether: return this == Blocks.soul_sand;
-		case Crop:   return this == Blocks.farmland;
+		case Crop:   return TFC_Core.isFarmland(this);
 		case Cave:   return isSideSolid(world, x, y, z, direction.UP);
-		case Plains: return /*this == Blocks.grass ||*/ this == Blocks.dirt;
+		case Plains: return this == TFCBlocks.Grass || this == TFCBlocks.Grass2 || this == TFCBlocks.Dirt || this == TFCBlocks.Dirt2;
 		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlockMetadata(x, y, z) == 0;
 		case Beach:
-			boolean isBeach = (/*this == Blocks.grass ||*/ this == Blocks.dirt || this == Blocks.sand);
+			boolean isBeach = TFC_Core.isDirt(this) || TFC_Core.isSand(this);
 			boolean hasWater = (
 					world.getBlock(x - 1, y, z    ).getMaterial() == Material.water ||
 					world.getBlock(x + 1, y, z    ).getMaterial() == Material.water ||
@@ -148,7 +149,7 @@ public class BlockCustomIce extends BlockIce
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		seaIce = registerer.registerIcon(Reference.ModID + ":" + "seaIce");
+		seaIce = registerer.registerIcon(Reference.ModID + ":seaIce");
 		super.registerBlockIcons(registerer);
 	}
 
@@ -170,9 +171,16 @@ public class BlockCustomIce extends BlockIce
 	{
 		if((world.provider) instanceof TFCProvider && !world.isRemote && world.getBlock(i, j, k) == this)
 		{
-			if (!((TFCProvider)(world.provider)).canBlockFreezeTFC(i, j, k, false))
+			if(world.getBlockMetadata(i, j, k) == 1)
 			{
-				if (world.getBlock(i, j+1, k) == Blocks.snow)
+				if(j== 144 && scanForOcean(world, i, j, k))
+				{
+					world.setBlockMetadataWithNotify(i, j, k, 0, 3);
+				}
+			}
+			if (!((TFCProvider)(world.provider)).canBlockFreeze(i, j, k, false))
+			{
+				/*if (world.getBlock(i, j+1, k) == Blocks.snow)
 				{
 					int meta = world.getBlockMetadata(i, j+1, k);
 					if (meta > 0)
@@ -190,31 +198,24 @@ public class BlockCustomIce extends BlockIce
 					world.setBlock(i, j, k, getBlockMelt(world,i,j,k,true), 0, 2);
 				else
 					world.setBlock(i, j, k, getBlockMelt(world,i,j,k,false), 0, 2);
-			}
-			
-			if(world.getBlockMetadata(i, j, k) == 1)
-			{
-				if(j== 144 && scanForOcean(world,i,j,k))
-				{
-					world.setBlockMetadataWithNotify(i, j, k, 0, 3);
-				}
+				*/
 			}
 		}
 	}
-	
+
 	private boolean scanForOcean(World world, int i, int j, int k)
 	{
 		if(world.getBiomeGenForCoords(i + 5, k).biomeID == TFCBiome.ocean.biomeID ||
-				world.getBiomeGenForCoords(i + 10, k).biomeID == TFCBiome.ocean.biomeID || 
-				world.getBiomeGenForCoords(i + 20, k).biomeID == TFCBiome.ocean.biomeID || 
+				world.getBiomeGenForCoords(i + 10, k).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i + 20, k).biomeID == TFCBiome.ocean.biomeID ||
 				world.getBiomeGenForCoords(i - 5, k).biomeID == TFCBiome.ocean.biomeID ||
-				world.getBiomeGenForCoords(i - 10, k).biomeID == TFCBiome.ocean.biomeID || 
-				world.getBiomeGenForCoords(i - 20, k).biomeID == TFCBiome.ocean.biomeID || 
+				world.getBiomeGenForCoords(i - 10, k).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i - 20, k).biomeID == TFCBiome.ocean.biomeID ||
 				world.getBiomeGenForCoords(i, k + 5).biomeID == TFCBiome.ocean.biomeID ||
-				world.getBiomeGenForCoords(i, k + 10).biomeID == TFCBiome.ocean.biomeID || 
-				world.getBiomeGenForCoords(i, k + 20).biomeID == TFCBiome.ocean.biomeID|| 
+				world.getBiomeGenForCoords(i, k + 10).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i, k + 20).biomeID == TFCBiome.ocean.biomeID||
 				world.getBiomeGenForCoords(i, k - 5).biomeID == TFCBiome.ocean.biomeID ||
-				world.getBiomeGenForCoords(i, k - 10).biomeID == TFCBiome.ocean.biomeID || 
+				world.getBiomeGenForCoords(i, k - 10).biomeID == TFCBiome.ocean.biomeID ||
 				world.getBiomeGenForCoords(i, k - 20).biomeID == TFCBiome.ocean.biomeID)
 		{
 			return true;

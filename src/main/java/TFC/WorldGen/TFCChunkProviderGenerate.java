@@ -200,33 +200,22 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			fissureGen.generate(this.worldObj, this.rand, x, y, z);
 		}
 
-		/*if (!var11 && this.rand.nextInt(4) == 0 && TFC_Climate.getStability(xCoord, zCoord) == 1)
-		{
-			var12 = xCoord + this.rand.nextInt(16) + 8;
-			var13 = this.rand.nextInt(this.rand.nextInt(120) + 8);
-			var14 = zCoord + this.rand.nextInt(16) + 8;
-			new WorldGenFissure(Block.lavaStill).generate(this.worldObj, this.rand, var12, var13, var14);
-		}*/
-
 		biome.decorate(this.worldObj, this.rand, xCoord, zCoord);
 		SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, biome, xCoord + 8, zCoord + 8, 16, 16, this.rand);
-		xCoord += 8;
-		zCoord += 8;
 
-		for (x = 0; x < 16; ++x)
+		for (x = 0; x < 16; x++)
 		{
-			for (y = 0; y < 16; ++y)
+			for (z = 0; z < 16; z++)
 			{
-				z = this.worldObj.getPrecipitationHeight(xCoord + x, zCoord + y);
-				if (this.worldObj.isBlockFreezable(x + xCoord, z - 1, y + zCoord))
+				y = this.worldObj.getPrecipitationHeight(xCoord + x, zCoord + z);
+
+				if(!worldObj.isBlockFreezable(x + xCoord, y - 1, z + zCoord))
 				{
-					if(biome.biomeID != TFCBiome.ocean.biomeID && biome.biomeID != TFCBiome.beach.biomeID)
-						this.worldObj.setBlock(x + xCoord, z - 1, y + zCoord, Blocks.ice, 1, 0x2);
-					else
-						this.worldObj.setBlock(x + xCoord, z - 1, y + zCoord, Blocks.ice, 0, 0x2);
+
 				}
-				if (canSnowAt(worldObj, x + xCoord, z, y + zCoord))
-					this.worldObj.setBlock(x + xCoord, z, y + zCoord, Blocks.snow, 0, 0x2);
+
+				if (canSnowAt(worldObj, x + xCoord, y, z + zCoord))
+					this.worldObj.setBlock(x + xCoord, y, z + zCoord, Blocks.snow, 0, 0x2);
 			}
 		}
 	}

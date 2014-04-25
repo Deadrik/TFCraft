@@ -12,7 +12,6 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
@@ -171,11 +170,11 @@ public class TFCProvider extends WorldProvider
 			{
 				if(id == TFCBlocks.FreshWaterStill && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
 				{
-					worldObj.setBlock(x, y, z, Blocks.ice, 1, 3);
+					worldObj.setBlock(x, y, z, Blocks.ice, 1, 2);
 				}
 				else if(id == TFCBlocks.SaltWaterStill && meta == 0/* || id == Block.waterMoving.blockID*/)
 				{
-					worldObj.setBlock(x, y, z, Blocks.ice, 0, 3);
+					worldObj.setBlock(x, y, z, Blocks.ice, 0, 2);
 				}
 				else if(id == TFCBlocks.SeaGrassStill || id == TFCBlocks.SeaGrassFlowing)
 				{
@@ -184,8 +183,8 @@ public class TFCProvider extends WorldProvider
 					{
 						type = ((TESeaWeed)te).getType();
 					}
-					worldObj.setBlock(x, y, z, TFCBlocks.SeaGrassFrozen, type, 3);
-					te = ((worldObj.getTileEntity(x,y,z)));
+					worldObj.setBlock(x, y, z, TFCBlocks.SeaGrassFrozen, type, 2);
+					te = worldObj.getTileEntity(x, y, z);
 					if(te!=null)
 					{
 						((TESeaWeed)te).setType(type);
@@ -198,22 +197,34 @@ public class TFCProvider extends WorldProvider
 		{
 			if(id == Blocks.ice)
 			{
-				if((meta & 1) == 0)
+				if (worldObj.getBlock(x, y + 1, z) == Blocks.snow)
 				{
-					worldObj.setBlock(x, y, z, TFCBlocks.SaltWaterStill, 0, 3);
-				}
-				else if((meta & 1) == 1)
-				{
-					worldObj.setBlock(x, y, z, TFCBlocks.FreshWaterStill, 0, 3);
-				}
-				else if(id == TFCBlocks.SeaGrassFrozen)
-				{
-					worldObj.setBlock(x, y, z, id,meta,3);
-					te = (worldObj.getTileEntity(x, y, z));
-					if(te!=null)
-					{
-						((TESeaWeed)te).setType(meta);
+					int m = worldObj.getBlockMetadata(x, y + 1, z);
+					if (m > 0) {
+						worldObj.setBlockMetadataWithNotify(x, y + 1, z, m - 1, 2);
+					} else {
+						worldObj.setBlockToAir(x, y + 1, z);
 					}
+				}
+				else
+				{
+					if((meta & 1) == 0)
+					{
+						worldObj.setBlock(x, y, z, TFCBlocks.SaltWaterStill, 0, 3);
+					}
+					else if((meta & 1) == 1)
+					{
+						worldObj.setBlock(x, y, z, TFCBlocks.FreshWaterStill, 0, 3);
+					}
+				}
+			}
+			else if(id == TFCBlocks.SeaGrassFrozen)
+			{
+				worldObj.setBlock(x, y, z, id, meta, 3);
+				te = worldObj.getTileEntity(x, y, z);
+				if(te!=null)
+				{
+					((TESeaWeed)te).setType(meta);
 				}
 			}
 		}

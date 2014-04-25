@@ -6,10 +6,14 @@ import java.util.List;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldInsnNode;
 import org.objectweb.asm.tree.InsnList;
+import org.objectweb.asm.tree.InsnNode;
+import org.objectweb.asm.tree.JumpInsnNode;
+import org.objectweb.asm.tree.LabelNode;
 import org.objectweb.asm.tree.LineNumberNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
@@ -20,8 +24,8 @@ import cpw.mods.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 
 public class ClassTransformer implements net.minecraft.launchwrapper.IClassTransformer
 {
-	protected HashMap<String, List<InstrSet>> mcpMethodNodes = new HashMap<String, List<InstrSet>>();
-	protected HashMap<String, List<InstrSet>> obfMethodNodes = new HashMap<String, List<InstrSet>>();
+	protected HashMap<String, Patch> mcpMethodNodes = new HashMap<String, Patch>();
+	protected HashMap<String, Patch> obfMethodNodes = new HashMap<String, Patch>();
 	protected String mcpClassName;
 	protected String obfClassName;
 
@@ -57,48 +61,94 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 			if (getMethodNodeList().containsKey(m.name + " | " + m.desc))
 			{
 				numInsertions = 0;
-				List<InstrSet> instructions = (List<InstrSet>) getMethodNodeList().get(m.name + " | " + m.desc);
+				Patch mPatch = getMethodNodeList().get(m.name + " | " + m.desc);
+				List<InstrSet> instructions = mPatch.instructions;
 				InstrSet target = null;
 				if(instructions.size() > 0) {
 					target = instructions.get(0);
 				} else {
 					System.out.println("Error in: {"+m.name + " | " + m.desc+"} No Instructions");
 				}
-
-				for (int index = 0; index < m.instructions.size() && instructions.size() > 0; index++)
+				//Run this is we plan to just modify the method
+				if(mPatch.opType == PatchOpType.Modify)
 				{
-					numInsertions = 0;
-					while(target != null)
+					for (int index = 0; index < m.instructions.size() && instructions.size() > 0; index++)
 					{
-						if(target.startLine == -1) {
-							performDirectOperation(m.instructions, target);
-							instructions.remove(0);
-						} else if(this.isLineNumber(m.instructions.get(index), target.startLine)) {
-							performAnchorOperation(m.instructions, target, index);
-							instructions.remove(0);
-						}
-						else
+						numInsertions = 0;
+						while(target != null)
 						{
-							break;
-						}
+							if(target.startLine == -1) {
+								performDirectOperation(m.instructions, target);
+								instructions.remove(0);
+							} else if(this.isLineNumber(m.instructions.get(index), target.startLine)) {
+								performAnchorOperation(m.instructions, target, index);
+								instructions.remove(0);
+							}
+							else
+							{
+								break;
+							}
 
 
-						if(instructions.size() > 0) 
-						{
-							target = instructions.get(0);
-						} 
-						else 
-						{
-							target = null;
+							if(instructions.size() > 0) 
+							{
+								target = instructions.get(0);
+							} 
+							else 
+							{
+								target = null;
+							}
 						}
 					}
 				}
-				m.visitMaxs(m.maxStack+numInsertions, m.maxLocals);
+				else if(mPatch.opType == PatchOpType.Replace)
+				{
+					InsnList old = new InsnList();
+					if(target.offset != -1)
+					{
+						for (int index = 0; index < m.instructions.size();)
+						{
+							if(index > target.offset)
+								m.instructions.remove(m.instructions.get(index));
+							else index++;
+						}
+
+					}
+					for (int index = 0; index < m.instructions.size() && instructions.size() > 0; index++)
+					{
+						numInsertions = 0;
+						while(target != null)
+						{
+							if(target.startLine == -1) {
+								performDirectOperation(m.instructions, target);
+								instructions.remove(0);
+							} else if(this.isLineNumber(m.instructions.get(index), target.startLine)) {
+								performAnchorOperation(m.instructions, target, index);
+								instructions.remove(0);
+							}
+							else
+							{
+								break;
+							}
+
+
+							if(instructions.size() > 0) 
+							{
+								target = instructions.get(0);
+							} 
+							else 
+							{
+								target = null;
+							}
+						}
+						m.instructions.add(new InsnNode(Opcodes.RETURN));
+					}
+				}
 				System.out.println("Inserted: "+ classNode.name +" : {"+m.name + " | " + m.desc+"}");
 			}
 		}
 		System.out.println("Attempting to Transform: "+ classNode.name + " Complete");
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 		return writer.toByteArray();
 	}
@@ -115,10 +165,34 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		return -1;
 	}
 
+	private int findLabel(InsnList methodList, int line)
+	{
+		for (int index = 0; index < methodList.size(); index++)
+		{
+			if(this.isLineNumber(methodList.get(index), line))
+			{
+				return index;
+			}
+		}
+		return -1;
+	}
+
+	private boolean isLabel(AbstractInsnNode current, int line)
+	{
+		if(current instanceof LineNumberNode)
+		{
+			int l = ((LineNumberNode)current).line;
+			if(l == line)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private void performDirectOperation(InsnList methodInsn, InstrSet input)
 	{
 		AbstractInsnNode _current = methodInsn.get(input.offset+numInsertions);
-
 		switch(input.opType)
 		{
 		case InsertAfter:
@@ -145,6 +219,10 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 	private void performAnchorOperation(InsnList methodInsn, InstrSet input, int anchor)
 	{
 		AbstractInsnNode _current = methodInsn.get(anchor + input.offset + numInsertions);
+		if(input.iList.get(0) instanceof JumpInsnNode)
+		{
+			input.iList.set(input.iList.get(0), new JumpInsnNode(input.iList.get(0).getOpcode(), (LabelNode)_current.getPrevious()));
+		}
 		switch(input.opType)
 		{
 		case InsertAfter:
@@ -181,7 +259,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		}
 	}
 
-	private HashMap getMethodNodeList()
+	protected HashMap<String, Patch> getMethodNodeList()
 	{
 		if(TFCASMLoadingPlugin.runtimeDeobf)
 		{
@@ -283,33 +361,33 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		/**
 		 * The type of operation that should be performed at the given offset
 		 */
-		OperationType opType;
+		InstrOpType opType;
 
 
 		int offsetSwitch = -1;
 		int offsetLine = -1;
 
-		public InstrSet(InsnList list, int off, OperationType op)
+		public InstrSet(InsnList list, int off, InstrOpType op)
 		{
 			iList = list;
 			offset = off;
 			opType = op;
 		}
-		public InstrSet(AbstractInsnNode node, int off, OperationType op)
+		public InstrSet(AbstractInsnNode node, int off, InstrOpType op)
 		{
 			iList = new InsnList();
 			iList.add(node);
 			offset = off;
 			opType = op;
 		}
-		public InstrSet(InsnList list, int startLineNum, int off, OperationType op)
+		public InstrSet(InsnList list, int startLineNum, int off, InstrOpType op)
 		{
 			iList = list;
 			startLine = startLineNum;
 			offset = off;
 			opType = op;
 		}
-		public InstrSet(AbstractInsnNode node, int startLineNum, int off, OperationType op)
+		public InstrSet(AbstractInsnNode node, int startLineNum, int off, InstrOpType op)
 		{
 			iList = new InsnList();
 			iList.add(node);
@@ -321,40 +399,59 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 		{
 			startLine = startLineNum;
 			offset = off;
-			opType = OperationType.Switch;
+			opType = InstrOpType.Switch;
 			offsetSwitch = swOffset;
 			offsetLine = swLineNum;
 		}
 	}
 
-	public class MethodPatch
+	public class Patch
 	{
-		/**
-		 * Name of the Method
-		 */
-		public String name;
-		/**
-		 * Method Signature
-		 */
-		public String desc;
 		/**
 		 * InstrSet Instance that should be used to modify the given method
 		 */
-		public InstrSet instructions;
+		public List<InstrSet> instructions;
+		public PatchOpType opType = PatchOpType.Modify;
 
-		public MethodPatch(String methodName, InstrSet instr)
+		public Patch(List<InstrSet> set)
 		{
-			name = methodName;
-			instructions = instr;
+			instructions = set;
+		}
+
+		public Patch(List<InstrSet> set, PatchOpType op)
+		{
+			instructions = set;
+			opType = op;
 		}
 	}
 
-	public enum OperationType
+	public enum PatchOpType
+	{
+		Modify,
+		Replace,
+	}
+
+	public enum InstrOpType
 	{
 		InsertAfter,
 		InsertBefore,
 		Switch,
 		Replace,
 		Remove;
+	}
+
+	public class JumpNode extends JumpInsnNode
+	{
+		int line = 0;
+		public JumpNode(int opcode, LabelNode label) {
+			super(opcode, label);
+		}
+
+		public JumpNode(int opcode, int labelLine) 
+		{
+			super(opcode, null);
+			line = labelLine;
+		}
+
 	}
 }
