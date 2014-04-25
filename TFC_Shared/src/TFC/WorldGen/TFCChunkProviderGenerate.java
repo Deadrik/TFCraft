@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
@@ -201,27 +200,17 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			fissureGen.generate(this.worldObj, this.rand, x, y, z);
 		}
 
-		/*if (!var11 && this.rand.nextInt(4) == 0 && TFC_Climate.getStability(xCoord, zCoord) == 1)
-		{
-			var12 = xCoord + this.rand.nextInt(16) + 8;
-			var13 = this.rand.nextInt(this.rand.nextInt(120) + 8);
-			var14 = zCoord + this.rand.nextInt(16) + 8;
-			new WorldGenFissure(Block.lavaStill).generate(this.worldObj, this.rand, var12, var13, var14);
-		}*/
-
 		biome.decorate(this.worldObj, this.rand, xCoord, zCoord);
 		SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, biome, xCoord + 8, zCoord + 8, 16, 16, this.rand);
-		//xCoord += 8;
-		//zCoord += 8;
-		int count = 0;
+
 		for (x = 0; x < 16; x++)
 			for (z = 0; z < 16; z++)
 			{
 				y = this.worldObj.getPrecipitationHeight(xCoord + x, zCoord + z);
 
-				if(worldObj.getBlockMaterial(x+xCoord, y-1, z+zCoord) == Material.water && !worldObj.isBlockFreezable(x + xCoord, y - 1, z + zCoord))
+				if(!worldObj.isBlockFreezable(x + xCoord, y - 1, z + zCoord))
 				{
-					count++;
+
 				}
 
 				if (canSnowAt(worldObj, x + xCoord, y, z + zCoord))
