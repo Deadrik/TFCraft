@@ -347,21 +347,17 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 			return;
 		}
 
-		Item[] aitem = (Item[]) Item.itemRegistry.getKeys().toArray();
-		int i = aitem.length;
-		int j;
-
-		for (j = 0; j < i; ++j)
+		Iterator iItems = Item.itemRegistry.iterator();
+		while(iItems.hasNext())
 		{
-			Item item = aitem[j];
+			Item item = (Item)iItems.next();
 			if (item != null && item.getCreativeTab() != null)
 				item.getSubItems(item, (CreativeTabs)null, containercreative.itemList);
 		}
-
+		
 		Enchantment[] aenchantment = Enchantment.enchantmentsList;
-		i = aenchantment.length;
-
-		for (j = 0; j < i; ++j)
+		int i = aenchantment.length;
+		for (int j = 0; j < i; ++j)
 		{
 			Enchantment enchantment = aenchantment[j];
 			if (enchantment != null && enchantment.type != null)
