@@ -1,12 +1,12 @@
 package TFC.Render.Blocks;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
-import TFC.TFCBlocks;
+
+import org.lwjgl.opengl.GL11;
+
 import TFC.API.IMultipleBlock;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -23,7 +23,7 @@ public class RenderBarrel  implements ISimpleBlockRenderingHandler
 	{
 		Block blockToRender;
 		blockToRender = ((IMultipleBlock)block).getBlockTypeForRender();
-
+		renderer.renderAllFaces = true;
 		IBlockAccess blockAccess = renderer.blockAccess;
 		renderer.setRenderBounds(0.15F, 0.1F, 0.15F, 0.85F, 0.9F, 0.85F);
 		renderer.renderStandardBlock(blockToRender, i, j, k);
@@ -51,7 +51,7 @@ public class RenderBarrel  implements ISimpleBlockRenderingHandler
 		renderer.renderStandardBlock(blockToRender, i, j, k);
 		rotate(renderer, 0);
 		renderer.renderStandardBlock(block, i, j, k);
-
+		renderer.renderAllFaces = false;
 		return true;
 	}
 

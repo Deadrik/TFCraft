@@ -1,12 +1,12 @@
 package TFC.Render.Blocks;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
+
+import org.lwjgl.opengl.GL11;
+
 import TFC.TFCBlocks;
 import TFC.API.IMultipleBlock;
 import TFC.TileEntities.TEStand;
@@ -18,55 +18,56 @@ public class RenderStand  implements ISimpleBlockRenderingHandler
 	static float pixel5 = 5f/16f;
 	static float pixel12 = 12f/16f;
 	static float pixel14 = 14f/16f;
-	
+
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int i, int j, int k,
 			Block block, int modelId, RenderBlocks renderer) 
 	{
-			IBlockAccess blockAccess = renderer.blockAccess;
-			
-			Block blockToRender = TFCBlocks.Planks;
-			if(block instanceof IMultipleBlock){
-				blockToRender = ((IMultipleBlock)block).getBlockTypeForRender();
-			}
-			
-			TEStand te = (TEStand)(world.getBlockTileEntity(i, j, k));
-			if((world.getBlockTileEntity(i, j-1, k)!=null && world.getBlockTileEntity(i, j-1, k) instanceof TEStand) || te.isTop)return false;
-			int l = (int)(((te.yaw%360) / 90)%2);
-			//Arms of the Stand
-			if(l == 0){
-				renderer.setRenderBounds(0.1F,1.35F,0.44F,0.9F,1.45F,0.56F);
-				renderer.renderStandardBlock(blockToRender, i, j, k);
-				
-				//Main posts of the stand
-				renderer.setRenderBounds(0.35F, 0.101F, 0.45F, 0.45F, 1.35F, 0.55F);
-				renderer.renderStandardBlock(blockToRender, i, j, k);
-				
-				renderer.setRenderBounds(0.55F, 0.101F, 0.45F, 0.65F, 1.35F, 0.55F);
-				renderer.renderStandardBlock(blockToRender, i, j, k);
-			}
-			else{
-				renderer.setRenderBounds(0.44F,1.35F,0.1F,0.56F,1.45F,0.9F);
-				renderer.renderStandardBlock(blockToRender, i, j, k);
-				
-				//Main posts of the stand
-				renderer.setRenderBounds(0.45F, 0.101F, 0.35F, 0.55F, 1.35F, 0.45F);
-				renderer.renderStandardBlock(blockToRender, i, j, k);
-				
-				renderer.setRenderBounds(0.45F, 0.101F, 0.55F, 0.55F, 1.35F, 0.65F);
-				renderer.renderStandardBlock(blockToRender, i, j, k);
-			}
-			
-			
-			//Base of the stand
-			renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 0.1F, 0.9F);
+		IBlockAccess blockAccess = renderer.blockAccess;
+		renderer.renderAllFaces = true;
+		Block blockToRender = TFCBlocks.Planks;
+		if(block instanceof IMultipleBlock){
+			blockToRender = ((IMultipleBlock)block).getBlockTypeForRender();
+		}
+
+		TEStand te = (TEStand)(world.getBlockTileEntity(i, j, k));
+		if((world.getBlockTileEntity(i, j-1, k)!=null && world.getBlockTileEntity(i, j-1, k) instanceof TEStand) || te.isTop)return false;
+		int l = (int)(((te.yaw%360) / 90)%2);
+		//Arms of the Stand
+		if(l == 0){
+			renderer.setRenderBounds(0.1F,1.35F,0.44F,0.9F,1.45F,0.56F);
 			renderer.renderStandardBlock(blockToRender, i, j, k);
-			
-			renderer.setRenderBounds(0.45F, 1.45F, 0.45F,0.55F,1.9F,0.55F);
+
+			//Main posts of the stand
+			renderer.setRenderBounds(0.35F, 0.101F, 0.45F, 0.45F, 1.35F, 0.55F);
 			renderer.renderStandardBlock(blockToRender, i, j, k);
-			return true;
+
+			renderer.setRenderBounds(0.55F, 0.101F, 0.45F, 0.65F, 1.35F, 0.55F);
+			renderer.renderStandardBlock(blockToRender, i, j, k);
+		}
+		else{
+			renderer.setRenderBounds(0.44F,1.35F,0.1F,0.56F,1.45F,0.9F);
+			renderer.renderStandardBlock(blockToRender, i, j, k);
+
+			//Main posts of the stand
+			renderer.setRenderBounds(0.45F, 0.101F, 0.35F, 0.55F, 1.35F, 0.45F);
+			renderer.renderStandardBlock(blockToRender, i, j, k);
+
+			renderer.setRenderBounds(0.45F, 0.101F, 0.55F, 0.55F, 1.35F, 0.65F);
+			renderer.renderStandardBlock(blockToRender, i, j, k);
+		}
+
+
+		//Base of the stand
+		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 0.1F, 0.9F);
+		renderer.renderStandardBlock(blockToRender, i, j, k);
+
+		renderer.setRenderBounds(0.45F, 1.45F, 0.45F,0.55F,1.9F,0.55F);
+		renderer.renderStandardBlock(blockToRender, i, j, k);
+		renderer.renderAllFaces = false;
+		return true;
 	}
-	
+
 	public void rotate(RenderBlocks renderer, int i)
 	{
 		renderer.uvRotateEast = i;
@@ -86,13 +87,13 @@ public class RenderStand  implements ISimpleBlockRenderingHandler
 		//Arms of the Stand
 		renderer.setRenderBounds(0.44F,1.45F * 0.70F,0.2F,0.56F,1.55F * 0.70F,0.8F);
 		renderInvBlock(blockToRender, metadata, renderer);
-		
+
 		renderer.setRenderBounds(0.45F, 0.201F * 0.70F, 0.35F, 0.55F, 1.45F * 0.70F, 0.45F);
 		renderInvBlock(blockToRender, metadata, renderer);
-		
+
 		renderer.setRenderBounds(0.45F, 0.201F * 0.70F, 0.55F, 0.55F, 1.45F * 0.70F, 0.65F);
 		renderInvBlock(blockToRender, metadata, renderer);
-		
+
 		//Base of the stand
 		renderer.setRenderBounds(0.2F, 0F, 0.2F, 0.8F, 0.2F * 0.70F, 0.8F);
 		renderInvBlock(blockToRender, metadata, renderer);
@@ -111,7 +112,7 @@ public class RenderStand  implements ISimpleBlockRenderingHandler
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	public static void renderInvBlock(Block block, int m, RenderBlocks renderer)
 	{
 		Tessellator var14 = Tessellator.instance;
