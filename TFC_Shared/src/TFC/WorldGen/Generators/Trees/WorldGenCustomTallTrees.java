@@ -20,30 +20,30 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
-		int l = random.nextInt(5) + 6;
+		int height = random.nextInt(5) + 6;
 		boolean flag = true;
-		if (yCoord < 1 || yCoord + l + 1 > world.getHeight())
+		if (yCoord < 1 || yCoord + height + 1 > world.getHeight())
 		{
 			return false;
 		}
-		for (int i1 = yCoord; i1 <= yCoord + 1 + l; i1++)
+		for (int y = yCoord; y <= yCoord + 1 + height; y++)
 		{
 			byte byte0 = 1;
-			if (i1 == yCoord)
+			if (y == yCoord)
 			{
 				byte0 = 0;
 			}
-			if (i1 >= yCoord + 1 + l - 2)
+			if (y >= yCoord + 1 + height - 2)
 			{
 				byte0 = 2;
 			}
-			for (int i2 = xCoord - byte0; i2 <= xCoord + byte0 && flag; i2++)
+			for (int x = xCoord - byte0; x <= xCoord + byte0 && flag; x++)
 			{
-				for (int l2 = zCoord - byte0; l2 <= zCoord + byte0 && flag; l2++)
+				for (int z = zCoord - byte0; z <= zCoord + byte0 && flag; z++)
 				{
-					if (i1 >= 0 && i1 < world.getHeight())
+					if (y >= 0 && y+height < world.getHeight())
 					{
-						int j3 = world.getBlockId(i2, i1, l2);
+						int j3 = world.getBlockId(x, y, z);
 						if (j3 != 0 && j3 != TFCBlocks.Leaves.blockID)
 						{
 							flag = false;
@@ -66,32 +66,32 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 			int x = 0;
 		}
 		int var8 = world.getBlockId(xCoord, yCoord - 1, zCoord);
-		if (!(TFC_Core.isSoil(var8)) || yCoord >= world.getHeight() - l - 1)
+		if (!(TFC_Core.isSoil(var8)) || yCoord >= world.getHeight() - height - 1)
 		{
 			return false;
 		}
 		//DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 		//set the block below the tree to dirt.
 		//world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
-		for (int k1 = yCoord - 3 + l; k1 <= yCoord + l; k1++)
+		for (int y = yCoord - 3 + height; y <= yCoord + height; y++)
 		{
-			int j2 = k1 - (yCoord + l);
+			int j2 = y - (yCoord + height);
 			int i3 = 1 - j2 / 2;
-			for (int k3 = xCoord - i3; k3 <= xCoord + i3; k3++)
+			for (int x = xCoord - i3; x <= xCoord + i3; x++)
 			{
-				int l3 = k3 - xCoord;
-				for (int i4 = zCoord - i3; i4 <= zCoord + i3; i4++)
+				int l3 = x - xCoord;
+				for (int z = zCoord - i3; z <= zCoord + i3; z++)
 				{
-					int j4 = i4 - zCoord;
-					if ((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0) && world.getBlockId(k3, k1, i4) == 0)
+					int j4 = z - zCoord;
+					if ((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0) && world.getBlockId(x, y, z) == 0)
 					{
-						setBlockAndMetadata(world, k3, k1, i4, TFCBlocks.Leaves.blockID, treeId);
+						setBlockAndMetadata(world, x, y, z, TFCBlocks.Leaves.blockID, treeId);
 					}
 				}
 			}
 		}
 
-		for (int l1 = 0; l1 < l; l1++)
+		for (int l1 = 0; l1 < height; l1++)
 		{
 			int k2 = world.getBlockId(xCoord, yCoord + l1, zCoord);
 			if (k2 == 0 || k2 == TFCBlocks.Leaves.blockID || Block.blocksList[k2].canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
