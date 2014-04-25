@@ -185,9 +185,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			setGrowingAge(-1);
 		}
 
-		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE && isAdult()){
-			this.playSound(TFC_Sounds.ROOSTERCROW, 10, rand.nextFloat()+0.5F);
-		}
+		roosterCrow();
 
 		if (--this.timeUntilNextEgg < 0)
 		{
@@ -211,6 +209,13 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
 		{
 			this.heal(1);
+		}
+	}
+
+	public void roosterCrow()
+	{
+		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE && isAdult()){
+			this.playSound(TFC_Sounds.ROOSTERCROW, 10, rand.nextFloat()+0.5F);
 		}
 	}
 
