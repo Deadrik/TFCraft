@@ -51,6 +51,12 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+		return true;
+	}
+
+	@Override
 	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
 	{
 		TEMetalSheet te = (TEMetalSheet)world.getBlockTileEntity(i, j, k);

@@ -15,6 +15,8 @@ import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TENestBox;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockNestBox extends BlockTerraContainer
 {
@@ -49,6 +51,12 @@ public class BlockNestBox extends BlockTerraContainer
 	public void registerIcons(IconRegister iconRegisterer)
 	{
 		this.blockIcon = TFC_Textures.InvisibleTexture;//iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/Thatch");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+		return true;
 	}
 
 	@Override
