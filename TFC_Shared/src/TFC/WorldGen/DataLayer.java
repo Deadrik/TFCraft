@@ -50,11 +50,11 @@ public class DataLayer
 	public static DataLayer EVT_0_125 = new DataLayer(80,"0.125", 0.125f);
 	public static DataLayer EVT_0_25 = new DataLayer(81,"0.25", 0.25f);
 	public static DataLayer EVT_0_5 = new DataLayer(82,"0.5", 0.5f);
-	public static DataLayer EVT_1 = new DataLayer(83,"1", 1);
-	public static DataLayer EVT_2 = new DataLayer(84,"2", 2);
-	public static DataLayer EVT_4 = new DataLayer(85,"4", 4);
-	public static DataLayer EVT_8 = new DataLayer(86,"8", 8);
-	public static DataLayer EVT_16 = new DataLayer(87,"16", 16);
+	public static DataLayer EVT_1 = new DataLayer(83,"1", 1f);
+	public static DataLayer EVT_2 = new DataLayer(84,"2", 2f);
+	public static DataLayer EVT_4 = new DataLayer(85,"4", 4f);
+	public static DataLayer EVT_8 = new DataLayer(86,"8", 8f);
+	public static DataLayer EVT_16 = new DataLayer(87,"16", 16f);
 
 	public static DataLayer Rain_62_5 = new DataLayer(100,"62.5", 62.5f);
 	public static DataLayer Rain_125 = new DataLayer(101,"125", 125f);
