@@ -2,14 +2,13 @@ package TFC.API.Util;
 
 import java.lang.reflect.Field;
 
-import TFC.API.ISize;
-import TFC.API.Enums.EnumItemReach;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import TFC.API.ISize;
+import TFC.API.Enums.EnumItemReach;
 
 
 public class Helper {
@@ -25,7 +24,7 @@ public class Helper {
 		if(entity.getHeldItem()!=null && (entity.getHeldItem().getItem()) instanceof ISize){
 			var21 *= ((ISize)(entity.getHeldItem().getItem())).getReach(null).multiplier;
 		}
-		
+
 		else{
 			var21 *= EnumItemReach.SHORT.multiplier;
 		}
@@ -50,7 +49,7 @@ public class Helper {
 		if(entity.getHeldItem()!=null && (entity.getHeldItem().getItem()) instanceof ISize){
 			var21 *= ((ISize)(entity.getHeldItem().getItem())).getReach(null).multiplier;
 		}
-		
+
 		else{
 			var21 *= EnumItemReach.SHORT.multiplier;
 		}
@@ -120,5 +119,74 @@ public class Helper {
 	{
 		int o = (int)(input * rounding);
 		return o / rounding;
+	}
+
+	public static int getInteger(Object obj, String obfName, String deobfName, boolean useDeobf)
+	{
+		Field f = null;
+		try 
+		{
+			if(!useDeobf)
+				f = obj.getClass().getDeclaredField(deobfName);
+			else
+				f = obj.getClass().getDeclaredField(obfName);
+			f.setAccessible(true);
+			return (Integer) f.get(obj);
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return 0; 		
+	}
+
+	public static boolean getBoolean(Object obj, String obfName, String deobfName, boolean useDeobf)
+	{
+		Field f = null;
+		try 
+		{
+			if(!useDeobf)
+				f = obj.getClass().getDeclaredField(deobfName);
+			else
+				f = obj.getClass().getDeclaredField(obfName);
+			f.setAccessible(true);
+			return (Boolean) f.get(obj);
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return false; 		
+	}
+
+	public static Object getObject(Object obj, String obfName, String deobfName, boolean useDeobf)
+	{
+		Field f = null;
+		try 
+		{
+			if(!useDeobf)
+				f = obj.getClass().getDeclaredField(deobfName);
+			else
+				f = obj.getClass().getDeclaredField(obfName);
+			f.setAccessible(true);
+			return f.get(obj);
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return null; 		
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import TFC.ASM.Transform.TF_EntityFallingSand;
 import TFC.ASM.Transform.TF_EntityRenderer;
+import TFC.ASM.Transform.TF_RenderGlobal;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
@@ -21,7 +22,10 @@ public class TFCASMLoadingPlugin implements IFMLLoadingPlugin
 
 	@Override
 	public String[] getASMTransformerClass() {
-		return new String[]{/*TF_RenderBlock.class.getName(),*/TF_EntityFallingSand.class.getName(), TF_EntityRenderer.class.getName()};
+		return new String[]{
+				TF_EntityFallingSand.class.getName(), 
+				TF_EntityRenderer.class.getName(),
+				TF_RenderGlobal.class.getName()};
 	}
 
 	@Override
