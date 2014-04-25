@@ -11,14 +11,15 @@ import TFC.Core.TFC_Core;
 public class MapGenRiverRavine extends MapGenBaseTFC
 {
 	private float[] field_35627_a = new float[1024];
-
 	private byte[] metaArray;
 
 	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, short[] idsBig, byte[] metaBig)
 	{
 		metaArray = metaBig;
 		this.range = 12;
-		super.generate(par1IChunkProvider, par2World, par3, par4, idsBig);
+		//super.generate(par1IChunkProvider, par2World, par3, par4, idsBig);
+		this.recursiveGenerate(par2World, par3, par4, par3, par4, idsBig);
+
 	}
 
 	protected void generateRavine(long seed, int chunkX, int chunkZ, short[] blockArray, double par6, double startY, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double waterHeight)
@@ -163,12 +164,6 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 														blockArray[var47] = 0;
 														metaArray[var47] = 0;
 													}
-
-													DataLayer rockLayer1 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(x + chunkX * 16, z + chunkZ * 16, 0);
-
-													if (var48 && TFC_Core.isDirt(blockArray[var47 - 1]))
-														blockArray[var47 - 1] = (short) TFC_Core.getTypeForGrass(rockLayer1.data2);
-
 												}
 										}
 
@@ -189,24 +184,20 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
 	@Override
-	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, short[] par6ArrayOfByte)
+	protected void recursiveGenerate(World world, int chunkX, int chunkZ, int par4, int par5, short[] par6ArrayOfByte)
 	{
-		if (this.rand.nextInt(882) == 0)
+		if (this.rand.nextInt(400) == 0)
 		{
 			range = 32;
-			double var7 = par2 * 16 + this.rand.nextInt(16);
+			double x = chunkX * 16 + this.rand.nextInt(16);
 			Random r = new Random(world.getSeed());
-			double var9 = 80 + r.nextInt(20);
-			double var11 = par3 * 16 + this.rand.nextInt(16);
-			int var13 = 1;
+			double y = 80;
+			double z = chunkZ * 16 + this.rand.nextInt(16);
 
-			for (int var14 = 0; var14 < var13; ++var14)
-			{
-				float var15 = this.rand.nextFloat() * (float)Math.PI * 2.0F;
-				float var16 = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
-				float var17 = (this.rand.nextFloat() * 2.0F + this.rand.nextFloat()) * 2.0F;
-				this.generateRavine(this.rand.nextLong(), par4, par5, par6ArrayOfByte, var7, var9, var11, var17, var15, var16, 0, 0, 0.8D, var9);
-			}
+			float var15 = this.rand.nextFloat() * (float)Math.PI * 2.0F;
+			float var16 = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
+			float var17 = (this.rand.nextFloat() * 2.0F + this.rand.nextFloat()) * 2.0F;
+			this.generateRavine(this.rand.nextLong(), chunkX, chunkZ, par6ArrayOfByte, x, y, z, var17, var15, var16, 0, 0, 0.8D, y);
 		}
 	}
 }
