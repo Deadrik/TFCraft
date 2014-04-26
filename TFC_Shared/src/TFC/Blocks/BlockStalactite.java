@@ -145,27 +145,57 @@ public class BlockStalactite extends BlockTerra
 	}
 
 	@Override
+	public void onNeighborBlockChange(World world, int i, int j, int k, int id)
+	{
+		if(!world.isRemote)
+		{
+			if(!canBlockStay(world, i, j, k))
+			{
+				world.setBlock(i, j, k, 0);
+				return;
+			}
+		}
+	}
+
+	@Override
 	public boolean canBlockStay(World world, int i, int j, int k)
 	{
 		boolean isStalac = isStalactite(world.getBlockMetadata(i, j, k));
 		boolean isStalag = isStalagmite(world.getBlockMetadata(i, j, k));
+		int h = 0;
 		if(isStalac)
 		{
-			if(TFC_Core.isRawStone(world.getBlockId(i, j+1, k)) || TFC_Core.isRawStone(world.getBlockId(i, j+2, k)) ||
-					TFC_Core.isRawStone(world.getBlockId(i, j+3, k)))
+			if(TFC_Core.isRawStone(world.getBlockId(i, j+1, k)))
+				h = 1;
+			else if(TFC_Core.isRawStone(world.getBlockId(i, j+2, k)))
+				h = 2;
+			else if(TFC_Core.isRawStone(world.getBlockId(i, j+3, k)))
+				h = 3;
+			for(int y = h; y > 0; y--)
 			{
-				return true;
+				if(world.getBlockId(i, j+y, k) == 0)
+				{
+					return false;
+				}
 			}
 		}
 		else if(isStalag)
 		{
-			if(TFC_Core.isRawStone(world.getBlockId(i, j-1, k)) || TFC_Core.isRawStone(world.getBlockId(i, j-2, k)) ||
-					TFC_Core.isRawStone(world.getBlockId(i, j-3, k)))
+			if(TFC_Core.isRawStone(world.getBlockId(i, j-1, k)))
+				h = 1;
+			else if(TFC_Core.isRawStone(world.getBlockId(i, j-2, k)))
+				h = 2;
+			else if(TFC_Core.isRawStone(world.getBlockId(i, j-3, k)))
+				h = 3;
+			for(int y = h; y > 0; y--)
 			{
-				return true;
+				if(world.getBlockId(i, j-y, k) == 0)
+				{
+					return false;
+				}
 			}
 		}
-		return false;
+		return true;
 	}
 
 	@Override
