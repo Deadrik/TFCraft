@@ -1,2 +1,8 @@
 *.pyc
 TFC Build/
+bin/
+.gradle/
+build/
+.settings/
+.project
+.classpath
