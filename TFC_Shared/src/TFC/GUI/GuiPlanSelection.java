@@ -103,23 +103,11 @@ public class GuiPlanSelection extends GuiContainerTFC
 			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT], AnvilEntity.anvilItemStacks[AnvilEntity.INPUT2_SLOT], 
 					(String)p,AnvilReq.getReqFromInt(AnvilEntity.AnvilTier), null));
 
-			ar = handleMatchingRecipe(ar);
 			if(ar != null) 
 				planList.add(new Object[]{(String)p, ar});
 		}
 		return planList;
 
-	}
-
-	AnvilRecipe handleMatchingRecipe(AnvilRecipe ar)
-	{
-		if (ar != null)
-		if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT] != null && AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItem() == TFCItems.RawBloom && ar.getCraftingResult().getItem() == TFCItems.RawBloom)
-		{
-			if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItemDamage() <= 100)
-				return null;
-		}
-		return ar;
 	}
 
 	public void drawTooltip(int mx, int my, String text) {
