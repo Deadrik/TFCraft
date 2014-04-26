@@ -362,7 +362,11 @@ public class Recipes
 
 		//remove wool and book and quill recipes
 		//RemoveRecipe(new ItemStack(Item.writableBook));
+
 		RemoveRecipe(new ItemStack(Blocks.wooden_button));
+		for(int l = 0; l < 16; l++)
+			GameRegistry.addRecipe(new ItemStack(TFCBlocks.ButtonWood, 1), new Object[] {"#", "#", Character.valueOf('#'), new ItemStack(TFCBlocks.Planks, 1, l)});
+		GameRegistry.addRecipe(new ItemStack(TFCBlocks.ButtonWood, 1), new Object[] {"#", "#", Character.valueOf('#'), new ItemStack(TFCBlocks.Planks2, 1)});
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.writabeBookTFC, 1), new Object[]{new ItemStack(Items.book, 1)});
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Spindle,1), new Object[] { "P","#",Character.valueOf('P'),
