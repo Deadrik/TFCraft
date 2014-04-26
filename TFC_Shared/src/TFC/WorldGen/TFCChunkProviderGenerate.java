@@ -227,28 +227,37 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		boolean isMountainous = biome == TFCBiome.Mountains || biome == TFCBiome.HighHills;
 		//To adjust animal spawning at higher altitudes
 		int mountainousAreaModifier = isMountainous?-1:0;
-		if(isMountainous){
-			//Mountains, but not too hot or too dry
-			if(temp<25 && rain >250 && evt < 0.75 && temp > -10){
-				spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 2, 1, 3));
-				spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
+		if(isMountainous)
+		{
+			if(temp<25 && temp > -10)
+			{
 				spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 2, 2, 4));
-			}
-		} else //run of the mill plains, but not too cold
-			if(temp > 0 && rain > 100 && rain <= 500)
-				if(temp < 30)
+				if(rain >250 && evt < 0.75)
 				{
-					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 2, 2, 4));
-					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,2,2,3));
+					spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 2, 1, 3));
+					spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
+
+				}
+			}
+		} 
+		else //run of the mill plains, but not too cold
+			if(temp > 0 && rain > 100 && rain <= 500)
+			{
+				if(temp > 20)
+				{
+					//Pigs spawn on the warmer end of the spectrum
 					spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
 				}
-				else
+				if(temp < 30)
 				{
-					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 1, 1, 2));
-					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,1,2,3));
+
+					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 2, 2, 4));
+					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class,2,2,3));
 				}
+			}
 		//regular temperate forest
-		if(temp > 0 &&temp < 21 && rain > 250){
+		if(temp > 0 &&temp < 21 && rain > 250)
+		{
 			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 2+mountainousAreaModifier, 2+mountainousAreaModifier, 3+mountainousAreaModifier));
 			spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 1, 1, 2+mountainousAreaModifier));
 			spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
@@ -265,6 +274,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 2+mountainousAreaModifier, 1, 1));
 				spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1+mountainousAreaModifier, 2, 3));
 				spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1+mountainousAreaModifier, 1, 2));
+				spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 2, 2, 4));
 			}
 		//closer to tundra or taiga
 			else if(rain >100){
