@@ -138,7 +138,7 @@ public class BlockWoodSupport extends BlockTerra
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		return getCollisionBoundingBoxFromPoolIBlockAccess((IBlockAccess) world, x, y, z);
+		return getCollisionBoundingBoxFromPoolIBlockAccess((IBlockAccess) world, x, y, z).getOffsetBoundingBox(x, y, z);
 	}
 	
 	private AxisAlignedBB getCollisionBoundingBoxFromPoolIBlockAccess(IBlockAccess blockAccess, int x, int y, int z)
@@ -179,7 +179,7 @@ public class BlockWoodSupport extends BlockTerra
 				minZ = 0;
 		}
 
-		return AxisAlignedBB.getBoundingBox(x + minX, y + minY, z + minZ, x + maxX, y + maxY, z + maxZ);
+		return AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 	
 	@Override
@@ -187,7 +187,7 @@ public class BlockWoodSupport extends BlockTerra
     {
 		AxisAlignedBB aabb = getCollisionBoundingBoxFromPoolIBlockAccess(blockAccess, x, y, z);
 		
-		this.setBlockBounds((float)aabb.minX - x, (float)aabb.minY - y, (float)aabb.minZ - z, (float)aabb.maxX - x, (float)aabb.maxY - y, (float)aabb.maxZ - z);
+		this.setBlockBounds((float)aabb.minX, (float)aabb.minY, (float)aabb.minZ, (float)aabb.maxX, (float)aabb.maxY, (float)aabb.maxZ);
     }
 
 	@Override
