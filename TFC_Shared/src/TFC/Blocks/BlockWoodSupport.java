@@ -138,8 +138,13 @@ public class BlockWoodSupport extends BlockTerra
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		Boolean isHorizontal = TFCBlocks.isIdHSupport(world.getBlockId(x, y, z));
-		Boolean isVertical = TFCBlocks.isIdVSupport(world.getBlockId(x, y, z));
+		return getCollisionBoundingBoxFromPoolIBlockAccess((IBlockAccess) world, x, y, z);
+	}
+	
+	private AxisAlignedBB getCollisionBoundingBoxFromPoolIBlockAccess(IBlockAccess blockAccess, int x, int y, int z)
+	{
+		Boolean isHorizontal = TFCBlocks.isIdHSupport(blockAccess.getBlockId(x, y, z));
+		Boolean isVertical = TFCBlocks.isIdVSupport(blockAccess.getBlockId(x, y, z));
 
 		double minX = 0.25; double minY = 0.0; double minZ = 0.25;
 		double maxX = 0.75; double maxY = 0.75; double maxZ = 0.75;
@@ -149,33 +154,41 @@ public class BlockWoodSupport extends BlockTerra
 		{
 			minY = 0.5;
 			maxY = 1;
-			if(TFCBlocks.isIdVSupport(world.getBlockId(x+1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x+1, y, z)))
+			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x+1, y, z)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x+1, y, z)))
 				maxX = 1;
-			if(TFCBlocks.isIdVSupport(world.getBlockId(x-1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x-1, y, z)))
+			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x-1, y, z)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x-1, y, z)))
 				minX = 0;
-			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z+1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z+1)))
+			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x, y, z+1)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x, y, z+1)))
 				maxZ = 1;
-			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z-1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z-1)))
+			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x, y, z-1)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x, y, z-1)))
 				minZ = 0;
-			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y-1, z)))
+			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x, y-1, z)))
 				minY = 0;
 		}
 		else
 		{
 			minY = 0;
 			maxY = 1;
-			if(TFCBlocks.isIdVSupport(world.getBlockId(x+1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x+1, y, z)))
+			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x+1, y, z)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x+1, y, z)))
 				maxX = 1;
-			if(TFCBlocks.isIdVSupport(world.getBlockId(x-1, y, z)) || TFCBlocks.isIdHSupport(world.getBlockId(x-1, y, z)))
+			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x-1, y, z)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x-1, y, z)))
 				minX = 0;
-			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z+1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z+1)))
+			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x, y, z+1)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x, y, z+1)))
 				maxZ = 1;
-			if(TFCBlocks.isIdVSupport(world.getBlockId(x, y, z-1)) || TFCBlocks.isIdHSupport(world.getBlockId(x, y, z-1)))
+			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x, y, z-1)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x, y, z-1)))
 				minZ = 0;
 		}
 
 		return AxisAlignedBB.getBoundingBox(x + minX, y + minY, z + minZ, x + maxX, y + maxY, z + maxZ);
 	}
+	
+	@Override
+    public void setBlockBoundsBasedOnState(IBlockAccess blockAccess, int x, int y, int z)
+    {
+		AxisAlignedBB aabb = getCollisionBoundingBoxFromPoolIBlockAccess(blockAccess, x, y, z);
+		
+		this.setBlockBounds((float)aabb.minX - x, (float)aabb.minY - y, (float)aabb.minZ - z, (float)aabb.maxX - x, (float)aabb.maxY - y, (float)aabb.maxZ - z);
+    }
 
 	@Override
 	public int getRenderType()
