@@ -121,13 +121,26 @@ public class Helper {
 		return o / rounding;
 	}
 
-	public static int getInteger(Object obj, String obfName, String deobfName, boolean useDeobf)
+	private static boolean usesSRG(Object obj, String srgName)
+	{
+		Field[] fields = obj.getClass().getFields();
+		for(Field f : fields)
+		{
+			if(f.getName().equals(srgName))
+				return true;
+		}
+		return false;
+	}
+
+	public static int getInteger(Object obj, String srgName, String obfName, String deobfName, boolean useDeobf)
 	{
 		Field f = null;
 		try 
 		{
 			if(!useDeobf)
 				f = obj.getClass().getDeclaredField(deobfName);
+			else if(usesSRG(obj, srgName))
+				f = obj.getClass().getDeclaredField(srgName);
 			else
 				f = obj.getClass().getDeclaredField(obfName);
 			f.setAccessible(true);
@@ -144,13 +157,15 @@ public class Helper {
 		return 0; 		
 	}
 
-	public static boolean getBoolean(Object obj, String obfName, String deobfName, boolean useDeobf)
+	public static boolean getBoolean(Object obj, String srgName, String obfName, String deobfName, boolean useDeobf)
 	{
 		Field f = null;
 		try 
 		{
 			if(!useDeobf)
 				f = obj.getClass().getDeclaredField(deobfName);
+			else if(usesSRG(obj, srgName))
+				f = obj.getClass().getDeclaredField(srgName);
 			else
 				f = obj.getClass().getDeclaredField(obfName);
 			f.setAccessible(true);
@@ -167,13 +182,15 @@ public class Helper {
 		return false; 		
 	}
 
-	public static Object getObject(Object obj, String obfName, String deobfName, boolean useDeobf)
+	public static Object getObject(Object obj, String srgName, String obfName, String deobfName, boolean useDeobf)
 	{
 		Field f = null;
 		try 
 		{
 			if(!useDeobf)
 				f = obj.getClass().getDeclaredField(deobfName);
+			else if(usesSRG(obj, srgName))
+				f = obj.getClass().getDeclaredField(srgName);
 			else
 				f = obj.getClass().getDeclaredField(obfName);
 			f.setAccessible(true);
