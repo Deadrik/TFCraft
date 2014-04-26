@@ -184,6 +184,13 @@ public class BlockLogNatural extends BlockTerra
 		ProcessTree(world, i, j, k, world.getBlockMetadata(i, j, k), null);
 	}
 
+	private void ProcessTree(World world, int i, int j, int k, ItemStack stack)
+	{
+		//TODO Rewrite the treecap algorithm using a list of coords instead of the ugly array. Shoudl also use a maxmium list size to prevent 
+		//any memory issues and should take shortcuts to find the top of the tree and search down
+	}
+
+	@Deprecated
 	private void ProcessTree(World world, int i, int j, int k, int l, ItemStack stack)
 	{
 		boolean[][][] checkArray = new boolean[searchDist * 2 + 1][256][searchDist * 2 + 1];
@@ -219,6 +226,7 @@ public class BlockLogNatural extends BlockTerra
 		}
 	}
 
+
 	private void scanLogs(World world, int i, int j, int k, int l, boolean[][][] checkArray, byte x, byte y, byte z, ItemStack stack)
 	{
 		if(y >= 0 && j + y < 256)
@@ -231,8 +239,8 @@ public class BlockLogNatural extends BlockTerra
 					for (offsetY = 0; offsetY <= 2; offsetY++) 
 						if(Math.abs(x+offsetX) <= searchDist && j + y + offsetY < 256 && Math.abs(z+offsetZ) <= searchDist)
 							if(checkOut(world, i+x+offsetX, j+y+offsetY, k+z+offsetZ, l) 
-								&& !(offsetX == 0 && offsetY == 0 && offsetZ == 0)
-								&& !checkArray[x+offsetX+searchDist][y+offsetY][z+offsetZ+searchDist])
+									&& !(offsetX == 0 && offsetY == 0 && offsetZ == 0)
+									&& !checkArray[x+offsetX+searchDist][y+offsetY][z+offsetZ+searchDist])
 								scanLogs(world,i, j, k, l, checkArray, (byte)(x+offsetX),(byte)(y+offsetY),(byte)(z+offsetZ), stack);
 
 			damage++;

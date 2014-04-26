@@ -8,8 +8,14 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -56,12 +62,19 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		super(par1World);
 		this.setSize(0.3F, 0.7F);
 		this.timeUntilNextEgg = this.rand.nextInt(6000) + 24000;
-		//this.tasks.addTask(6, this.aiEatGrass);
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		mateSizeMod = 1f;
 		sex = rand.nextInt(2);
+
+		this.tasks.taskEntries.clear();
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIPanic(this, 1.4D));
+		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
+		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
+		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		this.tasks.addTask(7, new EntityAILookIdle(this));
 		addAI();
 
 		size_mod = (((rand.nextInt ((degreeOfDiversion+1)*10)*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex);
@@ -111,12 +124,12 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 
 	public void addAI()
 	{
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain, false));
-		this.tasks.addTask(3, new EntityAIFindNest(this,1.2F));
 		if(sex==0)
 		{
 			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		}
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain, false));
+		this.tasks.addTask(3, new EntityAIFindNest(this,1.2F));
 	}
 
 	@Override
@@ -158,7 +171,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50);//MaxHealth
 	}
 
 	/**
@@ -188,10 +201,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			setGrowingAge(-1);
 		}
 
-		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE && isAdult())
-		{
-			this.playSound(TFC_Sounds.ROOSTERCROW, 10, rand.nextFloat()+0.5F);
-		}
+		roosterCrow();
 
 		if (--this.timeUntilNextEgg < 0)
 		{
@@ -217,6 +227,13 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		if (hunger > 144000 && rand.nextInt (100) == 0 && getHealth() < TFC_Core.getEntityMaxHealth(this) && !isDead)
 		{
 			this.heal(1);
+		}
+	}
+
+	public void roosterCrow()
+	{
+		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE && isAdult()){
+			this.playSound(TFC_Sounds.ROOSTERCROW, 10, rand.nextFloat()+0.5F);
 		}
 	}
 

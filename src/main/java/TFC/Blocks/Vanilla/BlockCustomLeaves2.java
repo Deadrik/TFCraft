@@ -223,7 +223,7 @@ public class BlockCustomLeaves2 extends BlockLeaves
 							entityplayer.addExhaustion(0.045F);
 							if(new Random().nextInt(100) < 11)
 								dropBlockAsItem(world, i+x, j+y, k+z, new ItemStack(Items.stick, 1));
-							else if(new Random().nextInt(100) < 4 && l != 9 && l != 15)
+							else if(new Random().nextInt(100) < 4 && l != 0)
 								dropBlockAsItem(world, i+x, j+y, k+z, new ItemStack(saplingBlock, 1, l));
 							removeLeaves(world, i+x, j+y, k+z);
 							super.harvestBlock(world, entityplayer, i+x, j+y, k+z, l);
@@ -246,7 +246,7 @@ public class BlockCustomLeaves2 extends BlockLeaves
 			entityplayer.addExhaustion(0.025F);
 			if(new Random().nextInt(100) < 28)
 				dropBlockAsItem(world, i, j, k, new ItemStack(Items.stick, 1));
-			else if(new Random().nextInt(100) < 6 && l != 9 && l != 15)
+			else if(new Random().nextInt(100) < 6 && l != 0)
 				dropBlockAsItem(world, i, j, k, new ItemStack(saplingBlock, 1, l));
 
 			super.harvestBlock(world, entityplayer, i, j, k, l);

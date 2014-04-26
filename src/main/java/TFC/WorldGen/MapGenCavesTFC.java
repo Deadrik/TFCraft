@@ -38,7 +38,6 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 		float var23 = 0.0F;
 		float var24 = 0.0F;
 		Random var25 = new Random(seed);
-		Block block;
 
 		if (par16 <= 0)
 		{
@@ -131,10 +130,10 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 							for (int y = yCoord + 1; !var58 && y >= var57 - 1; --y)
 							{
 								int index = (xCoord * 16 + zCoord) * 256 + y;
-								block = idArray[index];
 								if (y >= 0 && y < 256)
 								{
-									if (block == TFCBlocks.SaltWaterFlowing || block == TFCBlocks.SaltWaterStill)
+									if (idArray[index] == TFCBlocks.SaltWaterFlowing || idArray[index] == TFCBlocks.SaltWaterStill || 
+											idArray[index] == TFCBlocks.FreshWaterFlowing || idArray[index] == TFCBlocks.FreshWaterStill)
 										var58 = true;
 									if (y != var57 - 1 && xCoord != var55 && xCoord != var36 - 1 && zCoord != var56 && zCoord != var40 - 1)
 										y = var57;
@@ -161,13 +160,12 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 										double var51 = (var50 + 0.5D - j) / var31;
 										if (var51 > -0.7D && var59 * var59 + var51 * var51 + var46 * var46 < 1.0D)
 										{
-											block = idArray[index];
-											if (TFC_Core.isGrass(block))
+											if (TFC_Core.isGrass(idArray[index]))
 											{
-												grassBlock = block;
+												grassBlock = idArray[index];
 												isGrass = true;
 											}
-											if (TFC_Core.isSoil(block) || TFC_Core.isRawStone(block))
+											if (TFC_Core.isSoil(idArray[index]) || TFC_Core.isRawStone(idArray[index]))
 											{
 												if (var50 < 10 && TFC_Climate.getStability((int)worldX, (int)worldZ) == 1)
 												{

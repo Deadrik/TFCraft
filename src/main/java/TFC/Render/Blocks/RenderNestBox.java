@@ -16,41 +16,42 @@ public class RenderNestBox  implements ISimpleBlockRenderingHandler
 	static float pixel5 = 5f/16f;
 	static float pixel12 = 12f/16f;
 	static float pixel14 = 14f/16f;
-	
+
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int i, int j, int k, Block block, int modelId, RenderBlocks renderer)
 	{
-			IBlockAccess blockAccess = renderer.blockAccess;
-			renderer.setRenderBounds(0.15F, 0.1F, 0.15F, 0.85F, 0.1F, 0.85F);
-			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
-			
-			renderer.setRenderBounds(0.1F, 0F, 0.15F, 0.15F, 0.4F, 0.85F);
-			rotate(renderer, 1);
-			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
-			rotate(renderer, 0);
-			renderer.renderStandardBlock(block, i, j, k);
-			
-			renderer.setRenderBounds(0.85F, 0F, 0.15F, 0.9F, 0.4F, 0.85F);
-			rotate(renderer, 1);
-			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
-			rotate(renderer, 0);
-			renderer.renderStandardBlock(block, i, j, k);
-			
-			renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 0.4F, 0.15F);
-			rotate(renderer, 1);
-			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
-			rotate(renderer, 0);
-			renderer.renderStandardBlock(block, i, j, k);
-			
-			renderer.setRenderBounds(0.1F, 0F, 0.85F, 0.9F, 0.4F, 0.9F);
-			rotate(renderer, 1);
-			renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
-			rotate(renderer, 0);
-			renderer.renderStandardBlock(block, i, j, k);
+		IBlockAccess blockAccess = renderer.blockAccess;
+		renderer.renderAllFaces = true;
+		renderer.setRenderBounds(0.15F, 0.1F, 0.15F, 0.85F, 0.1F, 0.85F);
+		renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
 
-			return true;
+		renderer.setRenderBounds(0.1F, 0F, 0.15F, 0.15F, 0.4F, 0.85F);
+		rotate(renderer, 1);
+		renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+		rotate(renderer, 0);
+		renderer.renderStandardBlock(block, i, j, k);
+
+		renderer.setRenderBounds(0.85F, 0F, 0.15F, 0.9F, 0.4F, 0.85F);
+		rotate(renderer, 1);
+		renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+		rotate(renderer, 0);
+		renderer.renderStandardBlock(block, i, j, k);
+
+		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 0.4F, 0.15F);
+		rotate(renderer, 1);
+		renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+		rotate(renderer, 0);
+		renderer.renderStandardBlock(block, i, j, k);
+
+		renderer.setRenderBounds(0.1F, 0F, 0.85F, 0.9F, 0.4F, 0.9F);
+		rotate(renderer, 1);
+		renderer.renderStandardBlock(TFCBlocks.Planks, i, j, k);
+		rotate(renderer, 0);
+		renderer.renderStandardBlock(block, i, j, k);
+		renderer.renderAllFaces = false;
+		return true;
 	}
-	
+
 	public void rotate(RenderBlocks renderer, int i)
 	{
 		renderer.uvRotateEast = i;
@@ -65,25 +66,25 @@ public class RenderNestBox  implements ISimpleBlockRenderingHandler
 		renderer.setRenderBounds(0.15F, 0.2F, 0.15F, 0.85F, 0.1F, 0.85F);
 		rotate(renderer, 1);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
-		
+
 		renderer.setRenderBounds(0.1F, 0F, 0.15F, 0.15F, 0.4F, 0.85F);
 		rotate(renderer, 1);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
-		
+
 		renderer.setRenderBounds(0.85F, 0F, 0.15F, 0.9F, 0.4F, 0.85F);
 		rotate(renderer, 1);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
-		
+
 		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 0.4F, 0.15F);
 		rotate(renderer, 1);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
-		
+
 		renderer.setRenderBounds(0.1F, 0F, 0.85F, 0.9F, 0.4F, 0.9F);
 		rotate(renderer, 1);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
@@ -102,7 +103,7 @@ public class RenderNestBox  implements ISimpleBlockRenderingHandler
 	{
 		return 0;
 	}
-	
+
 	public static void renderInvBlock(Block block, int m, RenderBlocks renderer)
 	{
 		Tessellator var14 = Tessellator.instance;

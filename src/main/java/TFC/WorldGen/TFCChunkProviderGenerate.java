@@ -24,6 +24,7 @@ import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntityBear;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.Entities.Mobs.EntityCowTFC;
+import TFC.Entities.Mobs.EntityDeer;
 import TFC.Entities.Mobs.EntityHorseTFC;
 import TFC.Entities.Mobs.EntityPheasantTFC;
 import TFC.Entities.Mobs.EntityPigTFC;
@@ -229,34 +230,33 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		float evt = TFC_Climate.manager.getEVTLayerAt(x, z).floatdata1;
 		boolean isMountainous = biome == TFCBiome.Mountains || biome == TFCBiome.HighHills;
 		//To adjust animal spawning at higher altitudes
-		int mountainousAreaModifier = isMountainous? -1 : 0;
+		int mountainousAreaModifier = isMountainous? - 1 : 0;
 		if(isMountainous)
 		{
-			//Mountains, but not too hot or too dry
-			if(temp<25 && rain >250 && evt < 0.75 && temp > -10)
+			if(temp<25 && temp > -10)
 			{
-				spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 2, 1, 3));
-				spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
 				spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 2, 2, 4));
+				if(rain >250 && evt < 0.75)
+				{
+					spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 2, 1, 3));
+					spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
+				}
 			}
 		}
 		else //run of the mill plains, but not too cold
-		{
 			if(temp > 0 && rain > 100 && rain <= 500)
 			{
+				if(temp > 20)
+				{
+					//Pigs spawn on the warmer end of the spectrum
+					spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
+				}
 				if(temp < 30)
 				{
 					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 2, 2, 4));
 					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class, 2, 2, 3));
-					spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
-				}
-				else
-				{
-					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 1, 1, 2));
-					spawnableCreatureList.add(new SpawnListEntry(EntityHorseTFC.class, 1, 2, 3));
 				}
 			}
-		}
 		//regular temperate forest
 		if(temp > 0 &&temp < 21 && rain > 250)
 		{
@@ -264,7 +264,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 1, 1, 2 + mountainousAreaModifier));
 			spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
 			//spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 2 + mountainousAreaModifier, 1, 3 + mountainousAreaModifier));
-			spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 3+mountainousAreaModifier, 1, 3));
+			spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 3 + mountainousAreaModifier, 1, 3));
 
 		}
 		//colder climate
@@ -276,8 +276,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1 + mountainousAreaModifier, 1, 2));
 				spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 2 + mountainousAreaModifier, 1, 2 + mountainousAreaModifier));
 				spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 2 + mountainousAreaModifier, 1, 1));
-				//spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1 + mountainousAreaModifier, 2, 3));
+				spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1 + mountainousAreaModifier, 2, 3));
 				spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1 + mountainousAreaModifier, 1, 2));
+				spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 2, 2, 4));
 			}
 			//closer to tundra or taiga
 			else if(rain >100)
@@ -295,7 +296,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		//Swamp
 		if(TFC_Climate.isSwamp(x,150,z))
 			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
-		spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1+mountainousAreaModifier, 1, 1));
+		spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1 + mountainousAreaModifier, 1, 1));
 		return spawnableCreatureList;
 	}
 

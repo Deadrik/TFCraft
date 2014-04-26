@@ -48,6 +48,12 @@ public class EntityPheasantTFC extends EntityChickenTFC
 		super.onLivingUpdate();
 	}
 
+	@Override
+	public void roosterCrow()
+	{
+		//Nulled so that pheasant dont crow since they extend chickens
+	}
+
 	/**
 	 * Drop 0-2 items of this living's type
 	 */

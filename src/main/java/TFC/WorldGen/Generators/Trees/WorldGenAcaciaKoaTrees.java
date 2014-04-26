@@ -118,8 +118,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 		this.basePos[1] = par4;
 		this.basePos[2] = par5;
 
-		if (this.heightLimit == 0)
-			this.heightLimit = 5 + this.rand.nextInt(this.heightLimitLimit/2) + this.heightLimitLimit/2;
+		this.heightLimit = 5 + this.rand.nextInt(this.heightLimitLimit/2) + this.heightLimitLimit/2;
 
 		if (!this.validTreeLocation())
 		{

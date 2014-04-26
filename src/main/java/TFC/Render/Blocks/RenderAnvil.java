@@ -19,7 +19,6 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler
 		int meta = blockAccess.getBlockMetadata(i, j, k);
 		int direction = ((BlockAnvil)block).getDirectionFromMetadata(meta);
 		renderblocks.renderAllFaces = true;
-
 		boolean breaking = false;
 		if(renderblocks.overrideBlockTexture != null)
 			breaking = true;
@@ -71,45 +70,14 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler
 			{
 				if(!breaking)
 				{
-					//ForgeHooksClient.bindTexture(TFC_Textures.RockSheet, ModLoader.getMinecraftInstance().renderEngine.getTexture(TFC_Textures.RockSheet));
 					renderblocks.overrideBlockTexture = b.getIcon(0, te.stonePair[1]);
 				}
 				renderblocks.setRenderBounds(0.0F, 0.0F, 0.00F, 1.0F, 0.9F, 1.0F);
 				renderblocks.renderStandardBlock(block, i, j, k);
-				/*if(te.anvilItemStacks[0] != null && !breaking)
-				{
-					//					block.setBlockBounds(0.0F, 0.9F, 0.0F, 1F, 0.901F, 1F);
-					//					renderblocks.renderStandardBlock(block, i, j, k);
-					Tessellator tessellator = Tessellator.instance;
-					int state = tessellator.drawMode;
-					tessellator.draw();
-					tessellator.startDrawingQuads();
-					TFC_Core.bindTexture(TextureMap.locationItemsTexture);
-					renderblocks.overrideBlockTexture = te.anvilItemStacks[0].getIconIndex();
-					tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
-					tessellator.setColorRGBA_F(1, 1, 1, 1);
-
-					double minX = renderblocks.overrideBlockTexture.getMinU();
-					double maxX = renderblocks.overrideBlockTexture.getMaxU();
-					double minZ = renderblocks.overrideBlockTexture.getMinV();
-					double maxZ = renderblocks.overrideBlockTexture.getMaxV();
-
-					tessellator.addTranslation(0.5f, 0f, 0.5f);
-
-					tessellator.addVertexWithUV(i, j + 0.901, k + 0.4, minX, maxZ);
-					tessellator.addVertexWithUV(i + 0.4, j + 0.901, k + 0.4, maxX, maxZ);
-					tessellator.addVertexWithUV(i + 0.4, j + 0.901, k, maxX, minZ);
-					tessellator.addVertexWithUV(i, j + 0.901, k, minX, minZ);
-
-					tessellator.addTranslation(-0.5f, 0f, -0.5f);
-					tessellator.draw();				
-					tessellator.startDrawing(state);
-
-				}
-				TFC_Core.bindTexture(TextureMap.locationBlocksTexture);*/
 				renderblocks.clearOverrideBlockTexture();
 			}
 		}
+		renderblocks.renderAllFaces = false;
 		return true;
 	}
 

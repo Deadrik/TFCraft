@@ -19,7 +19,9 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 	{
 		metaArray = metaBig;
 		this.range = 12;
-		super.generate(par1IChunkProvider, par2World, par3, par4, idsBig);
+		//super.generate(par1IChunkProvider, par2World, par3, par4, idsBig);
+		this.recursiveGenerate(par2World, par3, par4, par3, par4, idsBig);
+
 	}
 
 	protected void generateRavine(long seed, int chunkX, int chunkZ, Block[] blockArray, double par6, double startY, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double waterHeight)
@@ -166,10 +168,6 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 														blockArray[var47] = Blocks.air;
 														metaArray[var47] = 0;
 													}
-													DataLayer rockLayer1 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(x + chunkX * 16, z + chunkZ * 16, 0);
-													block = blockArray[var47 - 1];
-													if (var48 && TFC_Core.isDirt(block))
-														blockArray[var47 - 1] = TFC_Core.getTypeForGrass(rockLayer1.data2);
 												}
 											}
 										}
@@ -190,23 +188,20 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
 	@Override
-	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, Block[] par6)
+	protected void recursiveGenerate(World world, int chunkX, int chunkZ, int par4, int par5, Block[] blocks)
 	{
-		if (this.rand.nextInt(882) == 0)
+		if (this.rand.nextInt(400) == 0)
 		{
 			range = 32;
-			double var7 = par2 * 16 + this.rand.nextInt(16);
+			double x = chunkX * 16 + this.rand.nextInt(16);
 			Random r = new Random(world.getSeed());
-			double var9 = 80 + r.nextInt(20);
-			double var11 = par3 * 16 + this.rand.nextInt(16);
-			int var13 = 1;
-			for (int var14 = 0; var14 < var13; ++var14)
-			{
-				float var15 = this.rand.nextFloat() * (float)Math.PI * 2.0F;
-				float var16 = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
-				float var17 = (this.rand.nextFloat() * 2.0F + this.rand.nextFloat()) * 2.0F;
-				this.generateRavine(this.rand.nextLong(), par4, par5, par6, var7, var9, var11, var17, var15, var16, 0, 0, 0.8D, var9);
-			}
+			double y = 80;
+			double z = chunkZ * 16 + this.rand.nextInt(16);
+
+			float var15 = this.rand.nextFloat() * (float)Math.PI * 2.0F;
+			float var16 = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
+			float var17 = (this.rand.nextFloat() * 2.0F + this.rand.nextFloat()) * 2.0F;
+			this.generateRavine(this.rand.nextLong(), chunkX, chunkZ, blocks, x, y, z, var17, var15, var16, 0, 0, 0.8D, y);
 		}
 	}
 }

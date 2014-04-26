@@ -182,6 +182,12 @@ public class BlockAnvil extends BlockTerraContainer
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+		return true;
+	}
+
+	@Override
 	public int getRenderType()
 	{
 		return TFCBlocks.AnvilRenderId;

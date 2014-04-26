@@ -22,7 +22,7 @@ public class RenderBarrel  implements ISimpleBlockRenderingHandler
 	{
 		Block blockToRender;
 		blockToRender = ((IMultipleBlock)block).getBlockTypeForRender();
-
+		renderer.renderAllFaces = true;
 		IBlockAccess blockAccess = renderer.blockAccess;
 		renderer.setRenderBounds(0.15F, 0.1F, 0.15F, 0.85F, 0.9F, 0.85F);
 		renderer.renderStandardBlock(blockToRender, i, j, k);
@@ -50,7 +50,7 @@ public class RenderBarrel  implements ISimpleBlockRenderingHandler
 		renderer.renderStandardBlock(blockToRender, i, j, k);
 		rotate(renderer, 0);
 		renderer.renderStandardBlock(block, i, j, k);
-
+		renderer.renderAllFaces = false;
 		return true;
 	}
 
