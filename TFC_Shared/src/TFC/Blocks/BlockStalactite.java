@@ -3,6 +3,7 @@ package TFC.Blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -67,6 +68,41 @@ public class BlockStalactite extends BlockTerra
 			else height = 1;
 			setBlockBounds(width, 0.0F, width, 1f-width, height, 1F-width);
 		}
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
+	{
+		boolean isStalac = isStalactite(world.getBlockMetadata(i, j, k));
+		boolean isStalag = isStalagmite(world.getBlockMetadata(i, j, k));
+		int style = world.getBlockMetadata(i, j, k) & 7;
+		float f = 0.125F;
+		R = new Random(i+(i*k));
+		if(isStalac)
+		{
+			float height = TFC_Core.isRawStone(world.getBlockId(i, j+1, k)) ? 1 : TFC_Core.isRawStone(world.getBlockId(i, j+2, k)) ? 2 : 3;
+			f = 0.1f + R.nextFloat()*0.025f;
+			float width = height * f;
+			if(height == 3)
+				height = 0.5f+R.nextFloat()*0.5f;
+			else height = 1;
+			setBlockBounds(width, 1-height, width, 1f-width, 1, 1F-width);
+
+			return AxisAlignedBB.getAABBPool().getAABB(i + width, j - height, k + width, i + 1-width, j+1, k + 1 - width);
+		}
+		else if(isStalag)
+		{
+			float height = TFC_Core.isRawStone(world.getBlockId(i, j-1, k)) ? 1 : TFC_Core.isRawStone(world.getBlockId(i, j-2, k)) ? 2 : 3;
+			f = 0.1f + R.nextFloat()*0.025f;
+			float width = height * f;
+			if(height == 3)
+				height = 0.5f+R.nextFloat()*0.5f;
+			else height = 1;
+			setBlockBounds(width, 0.0F, width, 1f-width, height, 1F-width);
+			return AxisAlignedBB.getAABBPool().getAABB(i+ width, j, k + width, i + 1-width, j+height, k + 1 - width);
+		}
+
+		return AxisAlignedBB.getAABBPool().getAABB(i + this.minX, j + this.minY, k + this.minZ, i + this.maxX, j+this.maxY, k + this.maxZ);
 	}
 
 	@Override
