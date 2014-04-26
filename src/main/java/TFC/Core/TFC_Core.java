@@ -733,7 +733,7 @@ public class TFC_Core
 
 	public static boolean showExtraInformation()
 	{
-		if ((FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) && (Keyboard.isKeyDown(42)))
+		if ((FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) && (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)))
 			return true;
 		return false;
 	}

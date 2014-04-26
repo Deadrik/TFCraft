@@ -1,4 +1,4 @@
-#en_US
+﻿#en_US
 #This is the Main language configuration file for references ending in ".name"
 #
 #If you want to color code the text then I recommend you visit http://www.minecraftwiki.net/wiki/Formatting_codes#Color_codes
@@ -408,18 +408,18 @@ gui.Sluice=Sluice
 gui.Workbench.Crafting=Crafting
 
 #== Tooltips ==
-gui.ShowHelp=?8Help: (Hold ?fShift?8)
-gui.Help=?8Help:
-gui.Clay.Inst0=?bRight Click ?7with 5 in a stack to shape.
-gui.Knife.Inst0=?bRight Click ?7the top of a block with a 
+gui.ShowHelp=§8Help: (Hold §fShift§8)
+gui.Help=§8Help:
+gui.Clay.Inst0=§bRight Click §7with 5 in a stack to shape.
+gui.Knife.Inst0=§bRight Click §7the top of a block with a 
 gui.Knife.Inst1=bowl in your inventory to create a
 gui.Knife.Inst2=meal preparation area.
-gui.Leather.Inst0=?bRight Click ?7with a knife in your inventory to cut.
-gui.LooseRock.Inst0=?bRight Click ?7with 2 in a stack to knap.
-gui.MeltedMetal.Inst0=?bRight Click ?7to pour into a tool mold.
+gui.Leather.Inst0=§bRight Click §7with a knife in your inventory to cut.
+gui.LooseRock.Inst0=§bRight Click §7with 2 in a stack to knap.
+gui.MeltedMetal.Inst0=§bRight Click §7to pour into a tool mold.
 gui.MeltedMetal.NotFull=Not Full
-gui.PotteryBase.Inst0=Sneak and ?bRight Click ?7to place object.
-gui.PotteryVesselSmall.Inst0=Or ?bRight Click ?7to open inventory.
+gui.PotteryBase.Inst0=Sneak and §bRight Click §7to place object.
+gui.PotteryVesselSmall.Inst0=Or §bRight Click §7to open inventory.
 
 gui.Size.Tiny=Tiny
 gui.Size.VerySmall=Very Small

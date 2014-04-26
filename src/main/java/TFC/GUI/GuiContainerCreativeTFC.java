@@ -701,7 +701,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 			for (int i1 = 0; i1 < list.size(); ++i1)
 			{
 				if (i1 == 0)
-					list.set(i1, "\u00a7" + par1ItemStack.getRarity().rarityColor + (String)list.get(i1));
+					list.set(i1, par1ItemStack.getRarity().rarityColor + (String)list.get(i1));
 				else
 					list.set(i1, EnumChatFormatting.GRAY + (String)list.get(i1));
 			}
