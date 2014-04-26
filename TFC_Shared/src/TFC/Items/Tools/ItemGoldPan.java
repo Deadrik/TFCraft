@@ -191,10 +191,10 @@ public class ItemGoldPan extends ItemTerra
 		Random rand = new Random(world.getSeed() + ((chunk_X >> 3) - (chunk_Z >> 3)) * (chunk_Z >> 3));
 		int randType = rand.nextInt(100);
 
-		if (randType > 25 && type == -1 && world.rand.nextInt(60) == 0) type = 0;  // Copper
-		if (randType > 50 && type == -1 && world.rand.nextInt(120) == 0) type = 4; // Silver
-		if (randType > 60 && type == -1 && world.rand.nextInt(150) == 0) type = 1; // Gold
-		if (type == -1 && world.rand.nextInt(500) == 0) type = 2; // Platinum
+		if (randType > 25 && world.rand.nextInt(60) == 0) type = 0;  // Copper
+		if (randType > 50 && world.rand.nextInt(120) == 0) type = 4; // Silver
+		if (randType > 75 && world.rand.nextInt(150) == 0) type = 1; // Gold
+		if (world.rand.nextInt(500) == 0) type = 2; // Platinum
 
 		return type;
 	}
