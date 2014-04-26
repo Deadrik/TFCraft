@@ -233,7 +233,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	protected boolean canDespawn ()
 	{
-		return true;
+		return false;
 	}
 
 
