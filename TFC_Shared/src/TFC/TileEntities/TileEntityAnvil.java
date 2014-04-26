@@ -139,6 +139,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 							if(anvilItemStacks[INPUT1_SLOT].getItem().getMaxDamage() > 0 && !anvilItemStacks[INPUT1_SLOT].getItem().getHasSubtypes())
 								anvilItemStacks[INPUT1_SLOT].setItemDamage((int)(pct));*/
 						}
+						removeRules(INPUT1_SLOT);
 						anvilItemStacks[INPUT2_SLOT] = null;
 
 					}
@@ -218,6 +219,24 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			Tag.setByte("itemCraftingRule2", (byte) itemCraftingRules[1]);
 			Tag.setByte("itemCraftingRule3", (byte) itemCraftingRules[2]);
 
+			anvilItemStacks[slot].setTagCompound(Tag);
+		}
+	}
+	
+	public void removeRules(int slot)
+	{
+		if(anvilItemStacks[slot].hasTagCompound())
+		{
+			NBTTagCompound Tag = anvilItemStacks[slot].getTagCompound();
+			if(Tag.hasKey("itemCraftingRule1"))
+				Tag.removeTag("itemCraftingRule1");
+			if(Tag.hasKey("itemCraftingRule2"))
+				Tag.removeTag("itemCraftingRule2");
+			if(Tag.hasKey("itemCraftingRule3"))
+				Tag.removeTag("itemCraftingRule3");
+			if(Tag.hasKey("itemCraftingValue"))
+				Tag.removeTag("itemCraftingValue");
+			
 			anvilItemStacks[slot].setTagCompound(Tag);
 		}
 	}
