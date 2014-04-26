@@ -1,5 +1,7 @@
 package TFC.Items.Tools;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -181,35 +183,39 @@ public class ItemGoldPan extends ItemTerra
 		}
 		return is;
 	}
-	
+
 	private int getMetalToDrop(World world, int x, int y, int z) {
 		int type = -1;
-		
-		if (type == -1 && world.rand.nextInt(60) == 0) type = 0;  // Copper
-		if (type == -1 && world.rand.nextInt(120) == 0) type = 4; // Silver
-		if (type == -1 && world.rand.nextInt(150) == 0) type = 1; // Gold
+		int chunk_X = (x >> 4) << 4;
+		int chunk_Z = (z >> 4) << 4;
+		Random rand = new Random(world.getSeed() + ((chunk_X >> 3) - (chunk_Z >> 3)) * (chunk_Z >> 3));
+		int randType = rand.nextInt(100);
+
+		if (randType > 25 && type == -1 && world.rand.nextInt(60) == 0) type = 0;  // Copper
+		if (randType > 50 && type == -1 && world.rand.nextInt(120) == 0) type = 4; // Silver
+		if (randType > 60 && type == -1 && world.rand.nextInt(150) == 0) type = 1; // Gold
 		if (type == -1 && world.rand.nextInt(500) == 0) type = 2; // Platinum
 
 		return type;
 	}
-	
-    private void dropItem(World world, double x, double y, double z, ItemStack stack)
-    {
-        if (!world.isRemote)
-        {
-            float d = 0.175F;
-            double  v = 0.10d;
-            double dx = (double)((world.rand.nextFloat() - 0.5) * d);
-            double dy = (double)((world.rand.nextFloat() - 0.5) * d) + 1.0d;
-            double dz = (double)((world.rand.nextFloat() - 0.5) * d);
-            EntityItem drop = new EntityItem(world, x + dx, y + dy, z + dz, stack);
-            drop.setVelocity(0, 0, 0);
-            drop.delayBeforeCanPickup = 10;
-            world.spawnEntityInWorld(drop);
-        }
-    }
-    
-    @Override
+
+	private void dropItem(World world, double x, double y, double z, ItemStack stack)
+	{
+		if (!world.isRemote)
+		{
+			float d = 0.175F;
+			double  v = 0.10d;
+			double dx = (world.rand.nextFloat() - 0.5) * d;
+			double dy = (world.rand.nextFloat() - 0.5) * d + 1.0d;
+			double dz = (world.rand.nextFloat() - 0.5) * d;
+			EntityItem drop = new EntityItem(world, x + dx, y + dy, z + dz, stack);
+			drop.setVelocity(0, 0, 0);
+			drop.delayBeforeCanPickup = 10;
+			world.spawnEntityInWorld(drop);
+		}
+	}
+
+	@Override
 	public EnumItemReach getReach(ItemStack is){
 		return EnumItemReach.SHORT;
 	}
