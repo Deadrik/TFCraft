@@ -138,9 +138,9 @@ public class BlockWoodSupport extends BlockTerra
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		return getCollisionBoundingBoxFromPoolIBlockAccess((IBlockAccess) world, x, y, z).getOffsetBoundingBox(x, y, z);
+		return getCollisionBoundingBoxFromPoolIBlockAccess(world, x, y, z).getOffsetBoundingBox(x, y, z);
 	}
-	
+
 	private AxisAlignedBB getCollisionBoundingBoxFromPoolIBlockAccess(IBlockAccess blockAccess, int x, int y, int z)
 	{
 		Boolean isHorizontal = TFCBlocks.isIdHSupport(blockAccess.getBlockId(x, y, z));
@@ -162,31 +162,31 @@ public class BlockWoodSupport extends BlockTerra
 				maxZ = 1;
 			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x, y, z-1)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x, y, z-1)))
 				minZ = 0;
-			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x, y-1, z)))
-				minY = 0;
+			/*if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x, y-1, z)))
+				minY = 0;*/
 		}
 		else
 		{
 			minY = 0;
 			maxY = 1;
-			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x+1, y, z)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x+1, y, z)))
+			/*if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x+1, y, z)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x+1, y, z)))
 				maxX = 1;
 			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x-1, y, z)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x-1, y, z)))
 				minX = 0;
 			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x, y, z+1)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x, y, z+1)))
 				maxZ = 1;
 			if(TFCBlocks.isIdVSupport(blockAccess.getBlockId(x, y, z-1)) || TFCBlocks.isIdHSupport(blockAccess.getBlockId(x, y, z-1)))
-				minZ = 0;
+				minZ = 0;*/
 		}
 
 		return AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
 	}
-	
+
 	@Override
-    public void setBlockBoundsBasedOnState(IBlockAccess blockAccess, int x, int y, int z)
-    {
+	public void setBlockBoundsBasedOnState(IBlockAccess blockAccess, int x, int y, int z)
+	{
 		AxisAlignedBB aabb = getCollisionBoundingBoxFromPoolIBlockAccess(blockAccess, x, y, z);
-		
+
 		this.setBlockBounds((float)aabb.minX, (float)aabb.minY, (float)aabb.minZ, (float)aabb.maxX, (float)aabb.maxY, (float)aabb.maxZ);
     }
 
