@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import TFC.TFCItems;
 import net.minecraft.item.ItemStack;
 
 public class AnvilManager
@@ -59,7 +60,15 @@ public class AnvilManager
 		{
 			AnvilRecipe irecipe = (AnvilRecipe)recipes.get(k);
 			if (irecipe.matches(recipe))
+			{
+				if (recipe.input1 != null && recipe.input1.getItem() == TFCItems.Bloom && irecipe.plan == "splitbloom") //.getCraftingResult().getItem() == TFCItems.Bloom)
+				{
+					if (recipe.input1.getItemDamage() <= 100)
+						return null;
+				}
+
 				return irecipe;
+			}
 		}
 
 		return null;
