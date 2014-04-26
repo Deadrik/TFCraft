@@ -148,7 +148,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 			}
 		}
 		System.out.println("Attempting to Transform: "+ classNode.name + " Complete");
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 		return writer.toByteArray();
 	}
