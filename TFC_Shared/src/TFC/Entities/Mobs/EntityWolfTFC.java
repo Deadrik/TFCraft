@@ -496,11 +496,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
 		
-		boolean wasTamed = false;
+		boolean wasTamedBefore = this.isTamed();
 		boolean interactSuper = super.interact(par1EntityPlayer);
-		wasTamed = this.isTamed();
 		
-		if (!worldObj.isRemote && wasTamed)
+		if (!worldObj.isRemote && wasTamedBefore == false && this.isTamed())
 		{
 			this.setHealth(TFC_MobData.WolfHealth);
 		}
