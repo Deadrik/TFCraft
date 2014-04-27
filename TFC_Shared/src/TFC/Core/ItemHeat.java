@@ -20,27 +20,27 @@ public class ItemHeat
 		 * This means that a metlTemp of 100C will be reached in 5 seconds with a Specific Heat of 1.0 and 10 seconds at 2.0
 		 */
 
-		HeatRaw BismuthRaw = new HeatRaw(0.2, 270);
-		HeatRaw BismuthBronzeRaw = new HeatRaw(0.5, 985);
-		HeatRaw BlackBronzeRaw = new HeatRaw(0.5, 1070);
-		HeatRaw BlackSteelRaw = new HeatRaw(0.5, 1485);
-		HeatRaw BlueSteelRaw = new HeatRaw(0.5, 1540);
-		HeatRaw BrassRaw = new HeatRaw(0.5, 930);
-		HeatRaw BronzeRaw = new HeatRaw(0.5, 950);
-		HeatRaw CopperRaw = new HeatRaw(0.5, 1080);
-		HeatRaw GoldRaw = new HeatRaw(1.0, 1060);
-		HeatRaw IronRaw = new HeatRaw(0.5, 1535);
-		HeatRaw LeadRaw = new HeatRaw(0.4, 328);
-		HeatRaw NickelRaw = new HeatRaw(0.6, 1453);
-		HeatRaw PigIronRaw = new HeatRaw(0.5, 1500);
-		HeatRaw PlatinumRaw = new HeatRaw(0.5, 1730);
-		HeatRaw RedSteelRaw = new HeatRaw(0.5, 1540);
-		HeatRaw RoseGoldRaw = new HeatRaw(0.5, 960);
-		HeatRaw SilverRaw = new HeatRaw(0.6, 961);
-		HeatRaw SteelRaw = new HeatRaw(0.5, 1540);//sh = 0.63F; boil = 3500; melt = 1540;
-		HeatRaw SterlingSilverRaw = new HeatRaw(0.5, 900);//sh = 0.72F; boil = 2212; melt = 893;
-		HeatRaw TinRaw = new HeatRaw(0.2, 230);
-		HeatRaw ZincRaw = new HeatRaw(0.3, 420);//sh = 0.66F; boil = 907; melt = 420;
+		HeatRaw BismuthRaw = new HeatRaw(0.14, 270);
+		HeatRaw BismuthBronzeRaw = new HeatRaw(0.35, 985);
+		HeatRaw BlackBronzeRaw = new HeatRaw(0.35, 1070);
+		HeatRaw BlackSteelRaw = new HeatRaw(0.35, 1485);
+		HeatRaw BlueSteelRaw = new HeatRaw(0.35, 1540);
+		HeatRaw BrassRaw = new HeatRaw(0.35, 930);
+		HeatRaw BronzeRaw = new HeatRaw(0.35, 950);
+		HeatRaw CopperRaw = new HeatRaw(0.35, 1080);
+		HeatRaw GoldRaw = new HeatRaw(0.6, 1060);
+		HeatRaw IronRaw = new HeatRaw(0.35, 1535);
+		HeatRaw LeadRaw = new HeatRaw(0.22, 328);
+		HeatRaw NickelRaw = new HeatRaw(0.48, 1453);
+		HeatRaw PigIronRaw = new HeatRaw(0.35, 1500);
+		HeatRaw PlatinumRaw = new HeatRaw(0.35, 1730);
+		HeatRaw RedSteelRaw = new HeatRaw(0.35, 1540);
+		HeatRaw RoseGoldRaw = new HeatRaw(0.35, 960);
+		HeatRaw SilverRaw = new HeatRaw(0.48, 961);
+		HeatRaw SteelRaw = new HeatRaw(0.35, 1540);//sh = 0.63F; boil = 3500; melt = 1540;
+		HeatRaw SterlingSilverRaw = new HeatRaw(0.35, 900);//sh = 0.72F; boil = 2212; melt = 893;
+		HeatRaw TinRaw = new HeatRaw(0.14, 230);
+		HeatRaw ZincRaw = new HeatRaw(0.21, 420);//sh = 0.66F; boil = 907; melt = 420;
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,1)));
