@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.Containers.ContainerFoodPrep;
+import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TEFoodPrep;
 
@@ -18,7 +19,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 
 	public GuiFoodPrep(InventoryPlayer inventoryplayer, TEFoodPrep wb, World world, int i, int j, int k)
 	{
-		super(new ContainerFoodPrep(inventoryplayer, wb,world, i, j, k), 103, 85);
+		super(new ContainerFoodPrep(inventoryplayer, wb, world, i, j, k), 176, 85);
 		table = wb;
 	}
 
@@ -31,10 +32,10 @@ public class GuiFoodPrep extends GuiContainerTFC
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j)
 	{
-		fontRenderer.drawString("10oz", 7, 12, 0x404040);
-		fontRenderer.drawString("4oz", 13, 30, 0x404040);
-		fontRenderer.drawString("4oz", 13, 48, 0x404040);
-		fontRenderer.drawString("2oz", 13, 66, 0x404040);
+		fontRenderer.drawString("10oz", 43, 12, 0x404040);
+		fontRenderer.drawString("4oz", 49, 30, 0x404040);
+		fontRenderer.drawString("4oz", 49, 48, 0x404040);
+		fontRenderer.drawString("2oz", 49, 66, 0x404040);
 		if(table.getMealWeight() < 14 || !table.areComponentsCorrect())
 			((GuiButton)buttonList.get(0)).enabled = false;
 		else ((GuiButton)buttonList.get(0)).enabled = true;
@@ -44,6 +45,20 @@ public class GuiFoodPrep extends GuiContainerTFC
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
 		drawGui(texture);
+	}
+
+	@Override
+	protected void drawGui(ResourceLocation rl)
+	{
+		if(rl != null)
+		{
+			bindTexture(rl);
+			guiLeft = (width - xSize) / 2;
+			guiTop = (height - ySize) / 2;
+			drawTexturedModalRect(guiLeft + 36, guiTop, 0, 0, xSize, ySize);
+		}
+		if(drawInventory)
+			PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 	}
 
 	@Override
@@ -57,9 +72,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 	{
 		super.initGui();
 		buttonList.clear();
-
-		buttonList.add(new GuiButton(0, guiLeft+56, guiTop + 59, 40, 20, StringUtil.localize("gui.FoodPrep.CreateMeal")));
-
+		buttonList.add(new GuiButton(0, guiLeft + 92, guiTop + 59, 40, 20, StringUtil.localize("gui.FoodPrep.CreateMeal")));
 	}
 
 	@Override
