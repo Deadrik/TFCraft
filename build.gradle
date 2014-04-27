@@ -15,15 +15,25 @@ buildscript {
     }
 }
 
+// define the properties file
+ext.configFile = file "build.prop"
+
+configFile.withReader {
+    // read config.  it shall from now on be referenced as simply config or as project.config
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
+}
+
 allprojects {
     apply plugin: 'java'
     apply plugin: 'forge'
-    group = "com.bioxx.tfc"
-    version = '1.7.2-0.79.0'
-	archivesBaseName = "TFC"
+    group = config.group_name
+    version = config.mod_version
+	archivesBaseName = "[${config.minecraft_version}]${config.mod_id}"
 
     minecraft {
-    version = "1.7.2-10.12.1.1060"
+    version = config.minecraft_version + "-" + config.forge_version
 	if(file('../run').exists()){
 	assetDir = "../run/assets"
 	} else {
@@ -48,9 +58,20 @@ sourceSets {
  }
 
 processResources {
+//First we jsut copy in the mcmod.info file
+from(sourceSets.main.resources.srcDirs) {
+        include '**/*.info'
+        include '**/*.prop'
 
-    // copy everything else, thats we didnt do before
+        // replaces
+        expand ([
+            'mod_version': version,
+            'minecraft_version': project.config.minecraft_version,
+        ])
+    }
+     // copy everything else, thats we didnt do before
     from(sourceSets.main.resources.srcDirs) {
-
+        exclude '**/*.info'
+        exclude '**/*.prop'
     }
 }
