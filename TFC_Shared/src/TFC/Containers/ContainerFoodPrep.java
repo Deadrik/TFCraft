@@ -14,7 +14,8 @@ import TFC.Containers.Slots.SlotFoodOnly;
 import TFC.Core.Player.PlayerInventory;
 import TFC.TileEntities.TEFoodPrep;
 
-public class ContainerFoodPrep extends ContainerTFC {
+public class ContainerFoodPrep extends ContainerTFC
+{
 	private World world;
 	private int posX;
 	private int posY;
@@ -22,7 +23,8 @@ public class ContainerFoodPrep extends ContainerTFC {
 	private TEFoodPrep te;
 	private EntityPlayer player;
 
-	public ContainerFoodPrep(InventoryPlayer playerinv, TEFoodPrep pile, World world, int x, int y, int z) {
+	public ContainerFoodPrep(InventoryPlayer playerinv, TEFoodPrep pile, World world, int x, int y, int z)
+	{
 		this.player = playerinv.player;
 		this.te = pile;
 		this.world = world;
@@ -32,38 +34,43 @@ public class ContainerFoodPrep extends ContainerTFC {
 		pile.openChest();
 		layoutContainer(playerinv, pile, 0, 0);
 
-		PlayerInventory.buildInventoryLayout(this, playerinv, -28, 90, false, true);
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
 	}
 
 	/**
 	 * Callback for when the crafting gui is closed.
 	 */
 	@Override
-	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
+	public void onContainerClosed(EntityPlayer par1EntityPlayer)
+	{
 		super.onContainerClosed(par1EntityPlayer);
 		te.closeChest();
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer var1) {
+	public boolean canInteractWith(EntityPlayer var1)
+	{
 		return true;
 	}
 
-	protected void layoutContainer(IInventory playerInventory, IInventory chestInventory, int xSize, int ySize) {
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 35, 8));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 35, 26));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 35, 44));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 35, 62));
-		this.addSlotToContainer(new SlotBlocked(chestInventory, 4, 79, 35));
-		this.addSlotToContainer(new SlotFoodBowl(chestInventory, 5, 57, 35));
+	protected void layoutContainer(IInventory playerInventory, IInventory chestInventory, int xSize, int ySize)
+	{
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 71, 8));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 71, 26));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 71, 44));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 71, 62));
+		this.addSlotToContainer(new SlotBlocked(chestInventory, 4, 115, 35));
+		this.addSlotToContainer(new SlotFoodBowl(chestInventory, 5, 93, 35));
 	}
 
-	public EntityPlayer getPlayer() {
+	public EntityPlayer getPlayer()
+	{
 		return player;
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex)
+	{
 		ItemStack returnedStack = null;
 		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
 
@@ -79,7 +86,8 @@ public class ContainerFoodPrep extends ContainerTFC {
 				if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), true))
 					return null;
 			}
-			else if (clickedIndex >= 6 && clickedIndex < inventorySlots.size()) {
+			else if (clickedIndex >= 6 && clickedIndex < inventorySlots.size())
+			{
 				if (!this.mergeItemStack(clickedStack, 0, 6, false))
 					return null;
 			}
