@@ -9,8 +9,6 @@ import java.util.List;
 
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.LabelNode;
-import org.objectweb.asm.tree.LineNumberNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 
 import com.bioxx.tfc.ASM.ClassTransformer;
@@ -25,9 +23,9 @@ public class TF_RenderGlobal extends ClassTransformer
 
 		List<InstrSet> nodes = new ArrayList<InstrSet>();
 		InsnList list = new InsnList();
-		list.add(new LineNumberNode(435, new LabelNode()));
+		//list.add(new LineNumberNode(433, new LabelNode()));
 		list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "com/bioxx/tfc/ClientOverrides","loadRenderers","()V"));
-		nodes.add(new InstrSet(list, 453, InstrOpType.InsertBefore));
+		nodes.add(new InstrSet(list, 433, InstrOpType.InsertBefore));
 
 		mcpMethodNodes.put("loadRenderers | ()V", new Patch(nodes, PatchOpType.Modify));
 		obfMethodNodes.put("a | ()V", new Patch(nodes, PatchOpType.Modify));
