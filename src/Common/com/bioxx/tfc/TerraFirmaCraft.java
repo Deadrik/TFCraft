@@ -35,7 +35,6 @@ import com.bioxx.tfc.Handlers.AnvilCraftingHandler;
 import com.bioxx.tfc.Handlers.ChatListenerTFC;
 import com.bioxx.tfc.Handlers.CraftingHandler;
 import com.bioxx.tfc.Handlers.EntityDamageHandler;
-import com.bioxx.tfc.Handlers.EntityLivingHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Handlers.PlayerSkillEventHandler;
@@ -192,7 +191,7 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
 
 		// Register the Entity Living Update Handler
-		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+		//MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 
 		// Register all the render stuff for the client
 		proxy.registerRenderInformation();
