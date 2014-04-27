@@ -101,22 +101,24 @@ public class ClientOverrides
 
 			for (int j1 = 0; j1 < i1; ++j1)
 			{
-				int k1 = i + random.nextInt(b0) - random.nextInt(b0);
-				int l1 = k + random.nextInt(b0) - random.nextInt(b0);
-				int i2 = worldclient.getPrecipitationHeight(k1, l1);
-				int j2 = worldclient.getBlockId(k1, i2 - 1, l1);
-				BiomeGenBase biomegenbase = worldclient.getBiomeGenForCoords(k1, l1);
-				if(!WeatherManager.canSnow(k1, i2, l1))
-					if (i2 <= j + b0 && i2 >= j - b0 && biomegenbase.canSpawnLightningBolt() && biomegenbase.getFloatTemperature() >= 0.2F)
+				int x = i + random.nextInt(b0) - random.nextInt(b0);
+				int z = k + random.nextInt(b0) - random.nextInt(b0);
+				int y = worldclient.getPrecipitationHeight(x, z);
+				int id = worldclient.getBlockId(x, y - 1, z);
+				BiomeGenBase biomegenbase = worldclient.getBiomeGenForCoords(x, z);
+				if(!WeatherManager.canSnow(x, y, z))
+				{
+					System.out.println("canSnow");
+					if (y <= j + b0 && y >= j - b0 && biomegenbase.canSpawnLightningBolt())
 					{
 						float f1 = random.nextFloat();
 						float f2 = random.nextFloat();
 
-						if (j2 > 0)
+						if (id > 0)
 						{
-							if (Block.blocksList[j2].blockMaterial == Material.lava)
+							if (Block.blocksList[id].blockMaterial == Material.lava)
 							{
-								Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySmokeFX(worldclient, k1 + f1, i2 + 0.1F - Block.blocksList[j2].getBlockBoundsMinY(), l1 + f2, 0.0D, 0.0D, 0.0D));
+								Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySmokeFX(worldclient, x + f1, y + 0.1F - Block.blocksList[id].getBlockBoundsMinY(), z + f2, 0.0D, 0.0D, 0.0D));
 							}
 							else
 							{
@@ -124,15 +126,16 @@ public class ClientOverrides
 
 								if (random.nextInt(l) == 0)
 								{
-									d0 = k1 + f1;
-									d1 = i2 + 0.1F - Block.blocksList[j2].getBlockBoundsMinY();
-									d2 = l1 + f2;
+									d0 = x + f1;
+									d1 = y + 0.1F - Block.blocksList[id].getBlockBoundsMinY();
+									d2 = z + f2;
 								}
 
-								Minecraft.getMinecraft().effectRenderer.addEffect(new EntityRainFX(worldclient, k1 + f1, i2 + 0.1F - Block.blocksList[j2].getBlockBoundsMinY(), l1 + f2));
+								Minecraft.getMinecraft().effectRenderer.addEffect(new EntityRainFX(worldclient, x + f1, y + 0.1F - Block.blocksList[id].getBlockBoundsMinY(), z + f2));
 							}
 						}
 					}
+				}
 			}
 
 			if (l > 0 && random.nextInt(3) < rainSoundCounter++)
