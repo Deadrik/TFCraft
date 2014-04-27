@@ -19,6 +19,7 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
+import TFC.TileEntities.TileEntityForge;
 import TFC.TileEntities.TileEntityPottery;
 
 public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
@@ -105,6 +106,9 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 				{
 					itemstack.damageItem(1, entityplayer);
 					world.setBlock(x, y, z, TFCBlocks.Forge.blockID, 1, 0x2);
+					TileEntityForge te = (TileEntityForge)world.getBlockTileEntity(x, y, z);
+					te.fuelBurnTemp = 200;
+					te.fuelTimeLeft = 200;
 					return true;
 				}
 			}
