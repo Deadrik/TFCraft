@@ -461,7 +461,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
 		if(!worldObj.isRemote){
-			if(par1EntityPlayer.getHeldItem()!=null){
+			if(par1EntityPlayer.getHeldItem()!=null)
+			{
 				int i = par1EntityPlayer.getHeldItem().getItem().itemID;
 				Item item = par1EntityPlayer.getHeldItem().getItem();
 				if(i==(TFCItems.muttonRaw.itemID)||
@@ -494,7 +495,16 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
-		return super.interact(par1EntityPlayer);
+		
+		boolean wasTamedBefore = this.isTamed();
+		boolean interactSuper = super.interact(par1EntityPlayer);
+		
+		if (!worldObj.isRemote && wasTamedBefore == false && this.isTamed())
+		{
+			this.setHealth(TFC_MobData.WolfHealth);
+		}
+		
+		return interactSuper;
 	}
 
 	@Override
