@@ -22,6 +22,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
 import TFC.Entities.AI.EntityAIMateTFC;
+import TFC.Food.ItemFoodTFC;
 import TFC.Items.Tools.ItemCustomKnife;
 
 public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
@@ -278,6 +279,11 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
 	{
+		return false;
+	}
+	
+	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
+	{
 		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
 				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);
 	}
@@ -295,21 +301,36 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer)
+	public boolean interact(EntityPlayer player)
 	{
 		if(!worldObj.isRemote){
-			par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+			player.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
 			if(getGender()==GenderEnum.FEMALE && pregnant)
-				par1EntityPlayer.addChatMessage("Pregnant");
+				player.addChatMessage("Pregnant");
 
-			if(par1EntityPlayer.getHeldItem()!=null&&par1EntityPlayer.getHeldItem().getItem() instanceof ItemCustomKnife && !getSheared() && getPercentGrown(this) > 0.95F){
+			if(player.getHeldItem()!=null&&player.getHeldItem().getItem() instanceof ItemCustomKnife && !getSheared() && getPercentGrown(this) > 0.95F){
 				setSheared(true);
 				this.entityDropItem(new ItemStack(TFCItems.Wool,1), 0.0F);
-				if(!par1EntityPlayer.capabilities.isCreativeMode)
-					par1EntityPlayer.getHeldItem().damageItem(1, par1EntityPlayer);
+				if(!player.capabilities.isCreativeMode)
+					player.getHeldItem().damageItem(1, player);
 			}
 		}
-		return super.interact(par1EntityPlayer);
+		ItemStack itemstack = player.inventory.getCurrentItem();
+
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && super.inLove <= 0)
+		{
+			if (!player.capabilities.isCreativeMode)
+			{
+				player.inventory.setInventorySlotContents(player.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
+			}
+
+			this.func_110196_bT();
+			return true;
+		}
+		else
+		{
+			return super.interact(player);
+		}
 	}
 
 	/**

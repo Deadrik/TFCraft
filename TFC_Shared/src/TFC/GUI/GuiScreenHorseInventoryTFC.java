@@ -1,5 +1,6 @@
 package TFC.GUI;
 
+import TFC.Containers.ContainerHorseInventoryTFC;
 import TFC.Core.Util.StringUtil;
 import TFC.GUI.GuiBarrel.GuiButtonMode;
 import cpw.mods.fml.relauncher.Side;
@@ -28,7 +29,7 @@ public class GuiScreenHorseInventoryTFC extends GuiContainer
 
     public GuiScreenHorseInventoryTFC(IInventory par1IInventory, IInventory par2IInventory, EntityHorse par3EntityHorse)
     {
-        super(new ContainerHorseInventory(par1IInventory, par2IInventory, par3EntityHorse));
+        super(new ContainerHorseInventoryTFC(par1IInventory, par2IInventory, par3EntityHorse));
         this.field_110413_u = par1IInventory;
         this.field_110412_v = par2IInventory;
         this.horse = par3EntityHorse;

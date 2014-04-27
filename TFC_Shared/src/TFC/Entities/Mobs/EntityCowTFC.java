@@ -22,6 +22,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
 import TFC.Entities.AI.EntityAIMateTFC;
+import TFC.Food.ItemFoodTFC;
 import TFC.Items.Tools.ItemCustomBucketMilk;
 
 public class EntityCowTFC extends EntityCow implements IAnimal
@@ -322,12 +323,31 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 				}
 			}
 		}
+		ItemStack itemstack = player.inventory.getCurrentItem();
+		
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && super.inLove <= 0)
+        {
+            if (!player.capabilities.isCreativeMode)
+            {
+            	player.inventory.setInventorySlotContents(player.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
+            }
 
-		return super.interact(player);
+            this.func_110196_bT();
+            return true;
+        }
+        else
+        {
+            return super.interact(player);
+        }
 	}
 
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
+	{
+		return false;
+	}
+	
+	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
 	{
 		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
 				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);

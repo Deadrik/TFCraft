@@ -30,6 +30,7 @@ import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
+import TFC.Food.ItemFoodTFC;
 
 public class EntityPigTFC extends EntityPig implements IAnimal
 {
@@ -273,27 +274,42 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer)
+	public boolean interact(EntityPlayer player)
 	{
 		if(!worldObj.isRemote){
-			par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+			player.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
 			if(getGender()==GenderEnum.FEMALE && pregnant){
-				par1EntityPlayer.addChatMessage("Pregnant");
+				player.addChatMessage("Pregnant");
 			}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
-		if (super.interact(par1EntityPlayer))
+		ItemStack itemstack = player.inventory.getCurrentItem();
+
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && super.inLove <= 0)
 		{
-			return true;
-		}
-		else if (this.getSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == par1EntityPlayer))
-		{
-			par1EntityPlayer.mountEntity(this);
+			if (!player.capabilities.isCreativeMode)
+			{
+				player.inventory.setInventorySlotContents(player.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
+			}
+
+			this.func_110196_bT();
 			return true;
 		}
 		else
 		{
-			return false;
+			if (super.interact(player))
+			{
+				return true;
+			}
+			else if (this.getSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player))
+			{
+				player.mountEntity(this);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 
@@ -376,6 +392,11 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
+	{
+		return false;
+	}
+	
+	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
 	{
 		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
 				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);

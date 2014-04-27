@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.GuiOpenEvent;
@@ -164,11 +165,17 @@ public class GuiHandler extends TFC.Handlers.GuiHandler
 		}
 		case 42:
 		{
-			System.out.println("found location");
 			List list = player.worldObj.getEntitiesWithinAABB(EntityHorseTFC.class, player.boundingBox.expand(2, 2, 2));
-			System.out.println((player.worldObj).getClass());
-			EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
-			return new GuiScreenHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
+			if(list.size() > 0){
+				EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
+				NBTTagCompound nbt = new NBTTagCompound();
+				System.out.println(horse.isChested() +", "+horse.getHorseType()+", "+horse.getHorseChest().getSizeInventory());
+				horse.writeEntityToNBT(nbt);
+				horse.readEntityFromNBT(nbt);
+				System.out.println(horse.isChested() +", "+horse.getHorseType()+", "+horse.getHorseChest().getSizeInventory());
+				return new GuiScreenHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
+			}
+			return null;
 		}
 		default:
 		{

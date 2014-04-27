@@ -84,10 +84,20 @@ public class CraftingHandler implements ICraftingHandler
 					|| itemstack.itemID == TFCItems.Wool.itemID||itemstack.itemID == TFCItems.TerraLeather.itemID)
 			{
 				HandleItem(player, iinventory, Recipes.Knives);
-				if (itemstack.itemID == TFCItems.Wool.itemID && !player.worldObj.isRemote)
+				if (itemstack.itemID == TFCItems.Wool.itemID /*&& !player.worldObj.isRemote*/)
 				{
-					if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Hide, 1, 0)))
-						player.entityDropItem(new ItemStack(TFCItems.Hide, 1, 0), 1);
+					int size = 0;
+					for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+					{       
+						if(iinventory.getStackInSlot(i) == null)
+							continue;
+						if(iinventory.getStackInSlot(i).getItem() == TFCItems.SheepSkin)
+							size = iinventory.getStackInSlot(i).getItemDamage();
+					}
+					boolean add =!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Hide, 1, size));
+					System.out.println(add);
+					if(add)
+						player.entityDropItem(new ItemStack(TFCItems.Hide, 1, size), 1);
 				}
 				/*else if(itemstack.itemID == TFCItems.TerraLeather.itemID)
 				{

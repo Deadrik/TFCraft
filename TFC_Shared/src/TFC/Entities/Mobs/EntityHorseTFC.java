@@ -48,6 +48,7 @@ import TFC.Entities.AI.AIEatGrass;
 import TFC.Entities.AI.EntityAIAvoidEntityTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
 import TFC.Entities.AI.EntityAIPanicTFC;
+import TFC.Food.ItemFoodTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -1019,6 +1020,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			this.openGUI(par1EntityPlayer);
 			return true;
 		}
+		else if (this.isTame() && this.isAdultHorse() && par1EntityPlayer.isSneaking() && this.getLeashed())
+		{
+			this.clearLeashed(true, true);
+			return true;
+		}
 		else if (this.func_110253_bW() && this.riddenByEntity != null)
 		{
 			return super.interact(par1EntityPlayer);
@@ -1110,10 +1116,21 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 					return true;
 				}
 			}
-			else
+		}
+
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && super.inLove <= 0)
+		{
+			if (!par1EntityPlayer.capabilities.isCreativeMode)
 			{
-				return super.interact(par1EntityPlayer);
+				par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(par1EntityPlayer.getHeldItem(), worldObj, this)));
 			}
+
+			this.func_110196_bT();
+			return true;
+		}
+		else
+		{
+			return super.interact(par1EntityPlayer);
 		}
 	}
 
@@ -1985,6 +2002,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
+	{
+		return false;
+	}
+	
+	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
 	{
 		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
 				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);
