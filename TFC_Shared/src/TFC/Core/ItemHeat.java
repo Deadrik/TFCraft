@@ -338,7 +338,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RiceDough, 1), 1, 200, new ItemStack(TFCItems.RiceBread, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 1, 200, new ItemStack(TFCItems.CornBread, 1)));
 
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, 32767), 1, 200, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, 32767), 0.2, 200, new ItemStack(Item.bowlEmpty, 1)));
 
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, 32767), 1, 80, new ItemStack(Block.torchWood, 2)));
