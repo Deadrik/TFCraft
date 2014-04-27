@@ -5,14 +5,15 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.HashMap;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.SkillStats;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class PlayerUpdatePacket extends AbstractPacket
@@ -162,10 +163,8 @@ public class PlayerUpdatePacket extends AbstractPacket
 		}
 		else if(this.flag == 1)
 		{
-			System.out.println("-----------------------------Handle PlayerUpdatePacket Client flag:1");
-			System.out.println("Skill : "+this.skillName+" : "+this.skillLevel);
 			this.playerSkills = TFC_Core.getSkillStats(player);
-			playerSkills.setSkillSave(skillName, skillLevel);
+			this.playerSkills.setSkillSave(skillName, skillLevel);
 		}
 		else if(this.flag == 2)
 		{

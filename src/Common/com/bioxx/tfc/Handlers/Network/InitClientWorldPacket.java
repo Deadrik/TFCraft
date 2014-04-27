@@ -4,6 +4,9 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.DataInputStream;
+import java.util.HashMap;
+
+import net.minecraft.entity.player.EntityPlayer;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -12,7 +15,7 @@ import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.api.TFCOptions;
 
-import net.minecraft.entity.player.EntityPlayer;
+import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class InitClientWorldPacket extends AbstractPacket
 {
@@ -28,6 +31,7 @@ public class InitClientWorldPacket extends AbstractPacket
 	private DataInputStream dis;
 	private SkillStats playerSkills;
 	private int daysInYear, HGRate, HGCap;
+	private HashMap<String, Integer> skillMap = new HashMap<String, Integer>();
 
 	public InitClientWorldPacket() {}
 
@@ -49,6 +53,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		this.HGCap = TFCOptions.HealthGainCap;
 		if(P.getEntityData().hasKey("craftingTable"))
 			this.craftingTable = true;
+		this.playerSkills = TFC_Core.getSkillStats(P);
 	}
 	
 	@Override
@@ -66,7 +71,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		buffer.writeInt(this.HGRate);
 		buffer.writeInt(this.HGCap);
 		buffer.writeBoolean(this.craftingTable);
-//		TFC_Core.getSkillStats(player).toOutBuffer(buffer);
+		this.playerSkills.toOutBuffer(buffer);
 	}
 
 	@Override
@@ -84,25 +89,22 @@ public class InitClientWorldPacket extends AbstractPacket
 		this.HGRate = buffer.readInt();
 		this.HGCap = buffer.readInt();
 		this.craftingTable = buffer.readBoolean();
-//		dis = new DataInputStream(new ByteArrayInputStream(buffer.array()));
+
+		this.skillMap.clear();
+		String name;
+		int lvl;
+		int size = buffer.readInt();
+		for(int l = 0; l < size; l++)
+		{
+			name = ByteBufUtils.readUTF8String(buffer);
+			lvl = buffer.readInt();
+			this.skillMap.put(name, lvl);
+		}
 	}
 
 	@Override
 	public void handleClientSide(EntityPlayer player)
 	{
-//		System.out.println("-----------------------------Handle InitClientWorldPacket");
-//		System.out.println("stomachLevel :"+ this.stomachLevel);
-//		System.out.println("waterLevel :"+ this.waterLevel);
-//		System.out.println("nutrFruit :"+ this.nutrFruit);
-//		System.out.println("nutrVeg :"+ this.nutrVeg);
-//		System.out.println("nutrProtein :"+ this.nutrProtein);
-//		System.out.println("nutrDairy :"+ this.nutrDairy);
-//		System.out.println("seed :"+ this.seed);
-//		System.out.println("daysInYear :"+ this.daysInYear);
-//		System.out.println("HealthGainRate :"+ this.HGRate);
-//		System.out.println("HealthGainCap :"+ this.HGCap);
-//		System.out.println("craftingTable :"+ this.craftingTable);
-		
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
 		fs.stomachLevel = this.stomachLevel;
 		fs.waterLevel = this.waterLevel;
@@ -121,15 +123,13 @@ public class InitClientWorldPacket extends AbstractPacket
 			PlayerInventory.upgradePlayerCrafting(player);
 		}
 		TFC_Core.SetupWorld(player.worldObj, this.seed);
-//		try
-//		{
-//			while(dis.available() > 0)
-//				playerSkills.setSkillSave(dis.readUTF(), dis.readInt());
-//		}
-//		catch (IOException e)
-//		{
-//			e.printStackTrace();
-//		}
+
+		this.playerSkills = TFC_Core.getSkillStats(player);
+		for(String skill : skillMap.keySet())
+		{
+			playerSkills.setSkillSave(skill, skillMap.get(skill));
+		}
+		skillMap.clear();
 	}
 
 	@Override
