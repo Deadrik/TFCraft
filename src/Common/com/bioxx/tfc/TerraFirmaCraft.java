@@ -7,6 +7,10 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Set;
 
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+
 import com.bioxx.tfc.Blocks.Terrain.TFC_Fluids;
 import com.bioxx.tfc.Commands.CommandTime;
 import com.bioxx.tfc.Commands.DebugModeCommand;
@@ -29,10 +33,7 @@ import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.AnvilCraftingHandler;
 import com.bioxx.tfc.Handlers.ChatListenerTFC;
-import com.bioxx.tfc.Handlers.ChunkDataEventHandler;
-import com.bioxx.tfc.Handlers.ChunkEventHandler;
 import com.bioxx.tfc.Handlers.CraftingHandler;
-import com.bioxx.tfc.Handlers.EnteringChunkHandler;
 import com.bioxx.tfc.Handlers.EntityDamageHandler;
 import com.bioxx.tfc.Handlers.EntityLivingHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
@@ -43,23 +44,11 @@ import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.WorldGen.TFCProviderHell;
 import com.bioxx.tfc.WorldGen.TFCWorldType;
 import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenCaveDecor;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenFissureCluster;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenForests;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenLargeRock;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenLooseRocks;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenOre;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenPlants;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenSoilPits;
 import com.bioxx.tfc.api.SkillsManager;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
-import net.minecraft.init.Blocks;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -69,7 +58,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies)
 public class TerraFirmaCraft
@@ -79,7 +67,7 @@ public class TerraFirmaCraft
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
 	public static CommonProxy proxy;
-	
+
 	// The packet pipeline
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
@@ -129,7 +117,7 @@ public class TerraFirmaCraft
 
 		if(true)
 		{
-			//Register Generators
+			/*//Register Generators
 			//Underground Lava
 			GameRegistry.registerWorldGenerator(new WorldGenFissure(Blocks.lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
 			//Surface Hotsprings
@@ -140,22 +128,22 @@ public class TerraFirmaCraft
 			GameRegistry.registerWorldGenerator(new WorldGenLooseRocks(), 5);
 			GameRegistry.registerWorldGenerator(new WorldGenSoilPits(), 6);
 			GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
-			GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
-	
+			GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);*/
+
 			TFCWorldType.DEFAULT = new TFCWorldType("TFCDefault");
 			TFCWorldType.FLAT = new TFCWorldType("TFCFlat");
-			
+
 			DimensionManager.unregisterDimension(-1);
 			DimensionManager.unregisterDimension(0);
 			DimensionManager.unregisterDimension(1);
-			
+
 			DimensionManager.unregisterProviderType(-1);
 			DimensionManager.unregisterProviderType(0);
 			DimensionManager.unregisterProviderType(1);
 			DimensionManager.registerProviderType(-1, TFCProviderHell.class, true);
 			DimensionManager.registerProviderType(0, TFCProvider.class, true);
 			DimensionManager.registerProviderType(1, TFCProvider.class, true);
-	
+
 			DimensionManager.registerDimension(-1, -1);
 			DimensionManager.registerDimension(0, 0);
 			DimensionManager.registerDimension(1, 1);
@@ -191,18 +179,18 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new ChatListenerTFC());
 
 		// Register the Chunk Load/Save Handler
-		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
+		//MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
 
 		// Register the Chunk Data Load/Save Handler
-		MinecraftForge.EVENT_BUS.register(new ChunkDataEventHandler());
+		//MinecraftForge.EVENT_BUS.register(new ChunkDataEventHandler());
 		// Register the Chunk Load/Save Handler
-		MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
+		//MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
 
 		// Register Anvil Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
 
 		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
-		
+
 		// Register the Entity Living Update Handler
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 
