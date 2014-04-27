@@ -18,7 +18,7 @@ buildscript {
 allprojects {
     apply plugin: 'java'
     apply plugin: 'forge'
-    group = 'TFCraft'
+    group = "com.bioxx.tfc"
     version = '1.7.2-0.79.0'
 	archivesBaseName = "TFC"
 
@@ -30,4 +30,27 @@ allprojects {
     assetDir = "assets"
 	}
 }
+}
+
+sourceSets {
+   main {
+     java {
+       srcDirs = [ 'src/Common' , 'src/API' , 'src/ASM' ]
+	   exclude '**/Resources/'
+     }
+	 resources {
+       srcDirs = [ 'src/Resources' ]
+	   exclude '**/API'
+	   exclude '**/ASM'
+	   exclude '**/Common'
+     }
+   }
+ }
+
+processResources {
+
+    // copy everything else, thats we didnt do before
+    from(sourceSets.main.resources.srcDirs) {
+
+    }
 }
