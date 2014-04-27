@@ -25,7 +25,7 @@ public class TF_EntityRenderer extends ClassTransformer
 		mcpClassName = "net.minecraft.client.renderer.EntityRenderer";
 		obfClassName = "bll";
 
-		List nodes = new ArrayList<InstrSet>();
+		List<InstrSet> nodes = new ArrayList<InstrSet>();
 		InsnList list = new InsnList();
 		//This version of the method patch replaces the contents of the vanilla method itself
 		/*
@@ -55,7 +55,7 @@ public class TF_EntityRenderer extends ClassTransformer
 		list.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/renderer/EntityRenderer", "random", "Ljava/util/Random;"));
 		list.add(new VarInsnNode(Opcodes.ALOAD, 0));
 		list.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/renderer/EntityRenderer", "rendererUpdateCount", "I"));
-		list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "TFC/ClientOverrides","doRainClient","(Ljava/util/Random;I)V"));
+		list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "com/bioxx/tfc/ClientOverrides","doRainClient","(Ljava/util/Random;I)V"));
 		nodes.add(new InstrSet(list, 200, InstrOpType.Replace));
 		this.mcpMethodNodes.put("updateRenderer | ()V", new Patch(nodes, PatchOpType.Modify));
 
@@ -66,7 +66,7 @@ public class TF_EntityRenderer extends ClassTransformer
 		list.add(new FieldInsnNode(Opcodes.GETFIELD, "bll", "al", "Ljava/util/Random;"));
 		list.add(new VarInsnNode(Opcodes.ALOAD, 0));
 		list.add(new FieldInsnNode(Opcodes.GETFIELD, "bll", "w", "I"));
-		list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "TFC/ClientOverrides","doRainClient","(Ljava/util/Random;I)V"));
+		list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "com/bioxx/tfc/ClientOverrides","doRainClient","(Ljava/util/Random;I)V"));
 		nodes.add(new InstrSet(list, 200, InstrOpType.Replace));
 		this.obfMethodNodes.put("d | ()V", new Patch(nodes, PatchOpType.Modify));
 	}

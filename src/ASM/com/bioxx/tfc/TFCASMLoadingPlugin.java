@@ -10,7 +10,7 @@ import com.bioxx.tfc.ASM.Transform.TF_RenderGlobal;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
-@TransformerExclusions({ "TFC.ASM" })
+@TransformerExclusions({ "com.bioxx.tfc.ASM" })
 public class TFCASMLoadingPlugin implements IFMLLoadingPlugin
 {
 	public static boolean runtimeDeobf;

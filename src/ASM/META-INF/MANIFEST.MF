@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-FMLCorePlugin: TFC.TFCASMLoadingPlugin
+FMLCorePlugin: com.bioxx.tfc.TFCASMLoadingPlugin
 FMLCorePluginContainsFMLMod: true
 Created-By: 1.7.0 (Oracle Corporation)

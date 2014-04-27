@@ -1,5 +1,11 @@
 package com.bioxx.tfc;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+
 import com.bioxx.tfc.Blocks.BlockBloom;
 import com.bioxx.tfc.Blocks.BlockCharcoal;
 import com.bioxx.tfc.Blocks.BlockCrop;
@@ -106,15 +112,11 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockCustomWall;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
 import com.bioxx.tfc.Items.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBarrels2;
+import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack2;
 import com.bioxx.tfc.api.Constant.Global;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFence;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TFCBlocks 
@@ -305,9 +307,9 @@ public class TFCBlocks
 	public static Block FreshWaterFlowing;
 	public static Block HotWaterStill;
 	public static Block HotWaterFlowing;
-	
+
 	public static Block LavaFlowing;
-	
+
 	public static Block SeaGrassStill;
 	public static Block SeaGrassFrozen;
 	public static Block SeaGrassFlowing;
@@ -350,7 +352,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Sand2, com.bioxx.tfc.Items.ItemBlocks.ItemSand.class, "Sand2");
 		GameRegistry.registerBlock(Clay, "Clay");
 		GameRegistry.registerBlock(Clay2, "Clay2");
-		GameRegistry.registerBlock(Grass, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Grass");
+		GameRegistry.registerBlock(Grass, ItemTerraBlock.class, "Grass");
 		GameRegistry.registerBlock(Grass2, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Grass2");
 		GameRegistry.registerBlock(ClayGrass, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "ClayGrass");
 		GameRegistry.registerBlock(ClayGrass2, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "ClayGrass2");
@@ -438,9 +440,9 @@ public class TFCBlocks
 		GameRegistry.registerBlock(FreshWaterFlowing, "FreshWaterFlowing");
 		GameRegistry.registerBlock(HotWaterStill, "HotWaterStill");
 		GameRegistry.registerBlock(HotWaterFlowing, "HotWaterFlowing");
-		
+
 		GameRegistry.registerBlock(LavaFlowing, "LavaFlowing");
-		
+
 		GameRegistry.registerBlock(SeaGrassStill, "SeaGrassStill");
 		GameRegistry.registerBlock(SeaGrassFrozen, "SeaGrassFrozen");
 		GameRegistry.registerBlock(SeaGrassFlowing, "SeaGrassFlowing");
@@ -465,7 +467,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(NestBox, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "NestBox");
 		GameRegistry.registerBlock(Fence, com.bioxx.tfc.Items.ItemBlocks.ItemFence.class, "Fence");
 		GameRegistry.registerBlock(Fence2, com.bioxx.tfc.Items.ItemBlocks.ItemFence2.class, "Fence2");
-//		GameRegistry.registerBlock(Blocks.fence_gate, TFC.Items.ItemBlocks.ItemFenceGate.class, "FenceGate");
+		//		GameRegistry.registerBlock(Blocks.fence_gate, TFC.Items.ItemBlocks.ItemFenceGate.class, "FenceGate");
 		GameRegistry.registerBlock(FenceGate2, com.bioxx.tfc.Items.ItemBlocks.ItemFenceGate2.class, "FenceGate2");
 		GameRegistry.registerBlock(StrawHideBed, "StrawHideBed");
 		GameRegistry.registerBlock(ArmourStand, com.bioxx.tfc.Items.ItemBlocks.ItemArmourStand.class, "ArmourStand");

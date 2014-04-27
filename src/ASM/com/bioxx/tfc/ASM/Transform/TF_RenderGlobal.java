@@ -23,10 +23,10 @@ public class TF_RenderGlobal extends ClassTransformer
 		mcpClassName = "net.minecraft.client.renderer.RenderGlobal";
 		obfClassName = "bls";
 
-		List nodes = new ArrayList<InstrSet>();
+		List<InstrSet> nodes = new ArrayList<InstrSet>();
 		InsnList list = new InsnList();
 		list.add(new LineNumberNode(435, new LabelNode()));
-		list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "TFC/ClientOverrides","loadRenderers","()V"));
+		list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "com/bioxx/tfc/ClientOverrides","loadRenderers","()V"));
 		nodes.add(new InstrSet(list, 453, InstrOpType.InsertBefore));
 
 		mcpMethodNodes.put("loadRenderers | ()V", new Patch(nodes, PatchOpType.Modify));
