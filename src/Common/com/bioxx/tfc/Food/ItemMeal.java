@@ -2,16 +2,6 @@ package com.bioxx.tfc.Food;
 
 import java.util.List;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.IFood;
-import com.bioxx.tfc.api.TFC_ItemHeat;
-import com.bioxx.tfc.api.Enums.EnumFoodGroup;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-import com.bioxx.tfc.api.Util.Helper;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -21,6 +11,16 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.IFood;
+import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemMeal extends ItemTerra implements IFood
 {
@@ -53,35 +53,35 @@ public class ItemMeal extends ItemTerra implements IFood
 			NBTTagCompound nbt = is.getTagCompound();
 
 			if(nbt.hasKey("FG0"))
-				arraylist.add(StatCollector.translateToLocal(nbt.getString("FG0")).split("\\:"));
+				arraylist.add(localize(StatCollector.translateToLocal(nbt.getString("FG0")).split("\\:")));
 			if(nbt.hasKey("FG1"))
-				arraylist.add(StatCollector.translateToLocal(nbt.getString("FG1")).split("\\:"));
+				arraylist.add(localize(StatCollector.translateToLocal(nbt.getString("FG1")).split("\\:")));
 			if(nbt.hasKey("FG2"))
-				arraylist.add(StatCollector.translateToLocal(nbt.getString("FG2")).split("\\:"));
+				arraylist.add(localize(StatCollector.translateToLocal(nbt.getString("FG2")).split("\\:")));
 			if(nbt.hasKey("FG3"))
-				arraylist.add(StatCollector.translateToLocal(nbt.getString("FG3")).split("\\:"));
+				arraylist.add(localize(StatCollector.translateToLocal(nbt.getString("FG3")).split("\\:")));
 
 			if(nbt.hasKey("satisfaction"))
 			{
 				float _sat = Helper.roundNumber(nbt.getFloat("satisfaction"),100);
 				if(!isWarm(is))
-					_sat*=0.25f;
+					_sat *= 0.25f;
 				int satIndex = Math.min(1+(int)(5 *_sat), 5);
-				arraylist.add("Taste: "+ StatCollector.translateToLocal(tasteArray[satIndex]) + EnumChatFormatting.DARK_GRAY + " (" + _sat+"%)");
+				arraylist.add("Taste: " + StatCollector.translateToLocal(tasteArray[satIndex]) + EnumChatFormatting.DARK_GRAY + " (" + _sat + "%)");
 			}
 			else
 			{
-				arraylist.add("Taste: " + StatCollector.translateToLocal(tasteArray[0])+ EnumChatFormatting.DARK_GRAY + " (0.0%)");
+				arraylist.add("Taste: " + StatCollector.translateToLocal(tasteArray[0]) + EnumChatFormatting.DARK_GRAY + " (0.0%)");
 			}
 
 			if(nbt.hasKey("foodWeight"))
 			{
 				float ounces = nbt.getFloat("foodWeight");
 				if(ounces > 0)
-					arraylist.add("Amount " + Helper.roundNumber(ounces,10)+"oz");
+					arraylist.add("Amount " + Helper.roundNumber(ounces, 10) + "oz");
 				float decay = nbt.getFloat("foodDecay");
 				if(decay > 0)
-					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay/ounces*100,10)+"%");
+					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
 			}
 		}
 	}
@@ -91,7 +91,7 @@ public class ItemMeal extends ItemTerra implements IFood
 	{
 		float decay = getFoodDecay(stack);
 		float weight = getFoodWeight(stack);
-		int percent = (int)((decay/weight)*100);
+		int percent = (int)((decay / weight) * 100);
 		percent = percent > 0 ? percent < 100 ? percent : 100 : 0;
 		return percent;
 	}
@@ -236,14 +236,14 @@ public class ItemMeal extends ItemTerra implements IFood
 	}
 
 	@Override
-	public boolean isEdible() {
-		// TODO Auto-generated method stub
+	public boolean isEdible()
+	{
 		return false;
 	}
 
 	@Override
-	public boolean isUsable() {
-		// TODO Auto-generated method stub
+	public boolean isUsable()
+	{
 		return false;
 	}
 }

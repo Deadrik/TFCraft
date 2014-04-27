@@ -1,12 +1,5 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.Containers.Slots.SlotBlocked;
-import com.bioxx.tfc.Containers.Slots.SlotFoodBowl;
-import com.bioxx.tfc.Containers.Slots.SlotFoodOnly;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.TileEntities.TEFoodPrep;
-import com.bioxx.tfc.api.IFood;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -14,6 +7,13 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Containers.Slots.SlotBlocked;
+import com.bioxx.tfc.Containers.Slots.SlotFoodBowl;
+import com.bioxx.tfc.Containers.Slots.SlotFoodOnly;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.TileEntities.TEFoodPrep;
+import com.bioxx.tfc.api.IFood;
 
 public class ContainerFoodPrep extends ContainerTFC
 {
@@ -83,11 +83,15 @@ public class ContainerFoodPrep extends ContainerTFC
 			returnedStack = clickedStack.copy();
 
 			if (clickedIndex < 6)
+			{
 				if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), true))
 					return null;
+			}
 			else if (clickedIndex >= 6 && clickedIndex < inventorySlots.size())
+			{
 				if (!this.mergeItemStack(clickedStack, 0, 6, false))
 					return null;
+			}
 			else if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), false))
 				return null;
 

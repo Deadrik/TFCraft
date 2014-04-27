@@ -37,6 +37,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 		fontRendererObj.drawString("4oz", 49, 30, 0x404040);
 		fontRendererObj.drawString("4oz", 49, 48, 0x404040);
 		fontRendererObj.drawString("2oz", 49, 66, 0x404040);
+
 		if(table.getMealWeight() < 14 || !table.areComponentsCorrect())
 			((GuiButton)buttonList.get(0)).enabled = false;
 		else ((GuiButton)buttonList.get(0)).enabled = true;
@@ -59,7 +60,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 			drawTexturedModalRect(guiLeft + 36, guiTop, 0, 0, xSize, ySize);
 		}
 		if(drawInventory)
-			PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
+			PlayerInventory.drawInventory(this, width, height, ySize - PlayerInventory.invYSize);
 	}
 
 	@Override

@@ -2,15 +2,6 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.api.IFood;
-import com.bioxx.tfc.api.IItemFoodBlock;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Util.Helper;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -23,33 +14,51 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IWorldAccess;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Handlers.Network.AbstractPacket;
+import com.bioxx.tfc.Handlers.Network.CreateMealPacket;
+import com.bioxx.tfc.api.IFood;
+import com.bioxx.tfc.api.IItemFoodBlock;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class TEFoodPrep extends TileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[6];
-	private float[] weights = new float[]{10,4,4,2};
+	private float[] weights = new float[]{10, 4, 4, 2};
+
 	@Override
 	public void updateEntity()
 	{
 		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 	}
 
-	public int getFoodIdFromItemStack(ItemStack is){
+	public int getFoodIdFromItemStack(ItemStack is)
+	{
 		if(is != null)
+		{
 			if(is.getItem() instanceof IFood)
 				return ((IFood)is.getItem()).getFoodID();
 			else if(is.getItem() instanceof IItemFoodBlock)
 				return ((IItemFoodBlock)is.getItem()).getFoodId(is);
+		}
 		return 1;
 	}
 
-	public int getHealAmountFromItemStack(ItemStack is){
+	public int getHealAmountFromItemStack(ItemStack is)
+	{
 		if(is != null)
+		{
 			if(is.getItem() instanceof IFood)
 				return ((IFood)is.getItem()).getFoodID();
 			else if(is.getItem() instanceof IItemFoodBlock)
 				return ((IItemFoodBlock)is.getItem()).getHealAmount(is);
+		}
 		return 1;
 	}
 
@@ -58,6 +67,7 @@ public class TEFoodPrep extends TileEntity implements IInventory
 		if(!worldObj.isRemote)
 		{
 			if(storage[4] == null && storage[5].getItem() == Items.bowl)
+			{
 				if(getMealWeight() >= 14)
 				{
 					NBTTagCompound nbt = new NBTTagCompound();
@@ -66,22 +76,22 @@ public class TEFoodPrep extends TileEntity implements IInventory
 					Random Ri = new Random(getIconSeed());
 
 					int count = -2;
-					if(getStackInSlot(0) != null) 
+					if(getStackInSlot(0) != null)
 					{
 						count++;
 						nbt.setString("FG0", getStackInSlot(0).getItem().getUnlocalizedName(getStackInSlot(0))+":"+((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodGroup().ordinal());
 					}
-					if(getStackInSlot(1) != null) 
+					if(getStackInSlot(1) != null)
 					{
 						count++;
 						nbt.setString("FG1", getStackInSlot(1).getItem().getUnlocalizedName(getStackInSlot(1))+":"+((ItemFoodTFC)getStackInSlot(1).getItem()).getFoodGroup().ordinal());
 					}
-					if(getStackInSlot(2) != null) 
+					if(getStackInSlot(2) != null)
 					{
 						count++;
 						nbt.setString("FG2", getStackInSlot(2).getItem().getUnlocalizedName(getStackInSlot(2))+":"+((ItemFoodTFC)getStackInSlot(2).getItem()).getFoodGroup().ordinal());
 					}
-					if(getStackInSlot(3) != null) 
+					if(getStackInSlot(3) != null)
 					{
 						count++;
 						nbt.setString("FG3", getStackInSlot(3).getItem().getUnlocalizedName(getStackInSlot(3))+":"+((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodGroup().ordinal());
@@ -93,13 +103,13 @@ public class TEFoodPrep extends TileEntity implements IInventory
 					is.setItemDamage(Ri.nextInt(11));
 					if(R.nextFloat() < mult)
 					{
-						float s = R.nextFloat()*0.25f+(TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_COOKING)*0.5f);
+						float s = R.nextFloat() * 0.25f + (TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_COOKING) * 0.5f);
 						nbt.setFloat("satisfaction", s);
 					}
 					nbt.setFloat("foodWeight", Helper.roundNumber(getMealWeight(), 10));
 					nbt.setFloat("foodDecay", -24);
 					nbt.setFloat("decayRate", 2.0f);
-					nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours()+1);
+					nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
 
 					is.setTagCompound(nbt);
 
@@ -110,10 +120,14 @@ public class TEFoodPrep extends TileEntity implements IInventory
 
 					consumeFoodWeight();
 				}
+			}
 		}
 		else
 		{
-			;//TODO TerraFirmaCraft.proxy.sendCustomPacket(createMealPacket());
+			// Send a network packet to call this method on the Server side
+			// and create a meal, also adds 1 to the players cooking skill.
+			AbstractPacket pkt = new CreateMealPacket(0, this);
+			TerraFirmaCraft.packetPipeline.sendToServer(pkt);
 		}
 	}
 
@@ -123,13 +137,12 @@ public class TEFoodPrep extends TileEntity implements IInventory
 		int f1 = -2;
 		int f2 = -2;
 		int f3 = -3;
-		Item[] food = new Item[]
-				{
-				(storage[0] != null ? storage[0].getItem() : null),
-				(storage[1] != null ? storage[1].getItem() : null),
-				(storage[2] != null ? storage[2].getItem() : null),
-				(storage[3] != null ? storage[3].getItem() : null)
-				};
+		Item[] food = new Item[] {
+			(storage[0] != null ? storage[0].getItem() : null),
+			(storage[1] != null ? storage[1].getItem() : null),
+			(storage[2] != null ? storage[2].getItem() : null),
+			(storage[3] != null ? storage[3].getItem() : null)
+			};
 
 		//First we want to test the foodgroups to see if they match
 		if(getStackInSlot(0) != null)
@@ -191,28 +204,24 @@ public class TEFoodPrep extends TileEntity implements IInventory
 	private long getFoodSeed()
 	{
 		int seed = 0;
-
 		for(int i = 0; i < 4; i++)
 		{
 			ItemStack is = getStackInSlot(i);
 			if(is != null)
 				seed += ((ItemFoodTFC)is.getItem()).getFoodID();
 		}
-
 		return seed + worldObj.getSeed();
 	}
 
 	private long getIconSeed()
 	{
 		int seed = 0;
-
 		for(int i = 0; i < 3; i++)
 		{
 			ItemStack is = getStackInSlot(i);
 			if(is != null)
 				seed += ((ItemFoodTFC)is.getItem()).getFoodID();
 		}
-
 		return seed + worldObj.getSeed();
 	}
 
@@ -244,28 +253,10 @@ public class TEFoodPrep extends TileEntity implements IInventory
 		return w;
 	}
 
-//	public Packet createMealPacket()
-//	{
-//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-//		DataOutputStream dos=new DataOutputStream(bos);
-//
-//		try {
-//			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
-//			dos.writeInt(xCoord);
-//			dos.writeInt(yCoord);
-//			dos.writeInt(zCoord);
-//			dos.writeUTF(Minecraft.getMinecraft().thePlayer.username);
-//		} catch (IOException e) {
-//		}
-//
-//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-//	}
-
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
-
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
 		storage = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
@@ -283,6 +274,7 @@ public class TEFoodPrep extends TileEntity implements IInventory
 		super.writeToNBT(nbttagcompound);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
+		{
 			if(storage[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -290,6 +282,7 @@ public class TEFoodPrep extends TileEntity implements IInventory
 				storage[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
+		}
 		nbttagcompound.setTag("Items", nbttaglist);
 	}
 
@@ -306,117 +299,6 @@ public class TEFoodPrep extends TileEntity implements IInventory
 	{
 		readFromNBT(pkt.func_148857_g());
 	}
-
-//	@Override
-//	public void handleDataPacket(DataInputStream inStream) throws IOException 
-//	{
-//		handleInitPacket(inStream);
-//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-//	}
-//
-//	@Override
-//	public void handleDataPacketServer(DataInputStream inStream) throws IOException 
-//	{
-//		String user = inStream.readUTF();
-//		EntityPlayer player = worldObj.getPlayerEntityByName(user);
-//		TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_COOKING, 1);
-//		actionCreate(player);
-//	}
-//
-//	@Override
-//	public void createInitPacket(DataOutputStream outStream) throws IOException 
-//	{
-//		writeItemToStream(outStream, 0);
-//		writeItemToStream(outStream, 1);
-//		writeItemToStream(outStream, 2);
-//		writeItemToStream(outStream, 3);
-//		outStream.writeInt(storage[5] != null ? storage[5].itemID : -1);
-//	}
-//
-//	public void writeItemToStream(DataOutputStream outStream, int index) throws IOException 
-//	{
-//		if(storage[index] != null)
-//		{
-//			outStream.writeInt(storage[index].itemID);
-//			if(storage[index].hasTagCompound())
-//			{
-//				NBTTagCompound nbt = storage[index].getTagCompound();
-//				outStream.writeFloat(nbt.hasKey("foodWeight") ? nbt.getFloat("foodWeight") : -1);
-//				outStream.writeFloat(nbt.hasKey("foodDecay") ? nbt.getFloat("foodDecay") : -1);
-//			}
-//			else
-//			{
-//				outStream.writeFloat(-1);
-//				outStream.writeFloat(-1);
-//			}
-//		}
-//		else
-//		{
-//			outStream.writeInt(-1);
-//			outStream.writeFloat(-1);
-//			outStream.writeFloat(-1);
-//		}
-//	}
-//
-//	public void readItemFromStream(DataInputStream inStream, int index) throws IOException 
-//	{
-//		int id = inStream.readInt();
-//		float weight = inStream.readFloat();
-//		float decay = inStream.readFloat();
-//		if(id != -1 && storage[index] == null || storage[index].getItem().itemID != id)
-//		{
-//			storage[index] = new ItemStack(Item.itemsList[id]);
-//
-//			NBTTagCompound nbt = new NBTTagCompound();
-//			nbt.setFloat("foodWeight", weight);
-//			nbt.setFloat("foodDecay", decay);
-//		}
-//		else if(id != -1 && storage[index] != null && storage[index].getItem().itemID == id)
-//		{
-//			storage[index].getTagCompound().setFloat("foodWeight", weight);
-//			storage[index].getTagCompound().setFloat("foodDecay", decay);
-//		}
-//		else if(id == -1)
-//		{
-//			storage[index] = null;
-//		}
-//	}
-//
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public void handleInitPacket(DataInputStream inStream) throws IOException {
-//		readItemFromStream(inStream, 0);
-//		readItemFromStream(inStream, 1);
-//		readItemFromStream(inStream, 2);
-//		readItemFromStream(inStream, 3);
-//		int s5 = inStream.readInt();
-//		if(storage[5] == null)
-//		{storage[5] = s5 != -1 ? new ItemStack(Item.itemsList[s5]) : null;}
-//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-//
-//	}
-//
-//	public Packet createUpdatePacket()
-//	{
-//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-//		DataOutputStream dos=new DataOutputStream(bos);
-//
-//		try {
-//			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-//			dos.writeInt(xCoord);
-//			dos.writeInt(yCoord);
-//			dos.writeInt(zCoord);
-//
-//			writeItemToStream(dos, 0);
-//			writeItemToStream(dos, 1);
-//			writeItemToStream(dos, 2);
-//			writeItemToStream(dos, 3);
-//			dos.writeInt(storage[5] != null ? storage[5].itemID : -1);
-//		} catch (IOException e) {
-//		}
-//
-//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-//	}
 
 	@Override
 	public ItemStack decrStackSize(int i, int j)
@@ -449,16 +331,17 @@ public class TEFoodPrep extends TileEntity implements IInventory
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
+		{
 			if(storage[i]!= null)
 			{
-				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
-						storage[i]);
+				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, storage[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
 				worldObj.spawnEntityInWorld(entityitem);
 				storage[i] = null;
 			}
+		}
 	}
 
 	public void ejectItem(int index)
@@ -493,12 +376,11 @@ public class TEFoodPrep extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack) 
+	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
 		storage[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 			itemstack.stackSize = getInventoryStackLimit();
-		//TODO TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 	}
 
 	@Override
@@ -529,14 +411,12 @@ public class TEFoodPrep extends TileEntity implements IInventory
 	{
 		if(worldObj.isRemote)
 		{
-			IWorldAccess wa = (IWorldAccess) worldObj;
-			wa.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 		else if(storage[0] == null && storage[1] == null && storage[2] == null && storage[3] == null && storage[5] == null)
 		{
 			if(storage[4] != null)
 				this.ejectItem(4);
-
 			this.worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 		}
 	}
