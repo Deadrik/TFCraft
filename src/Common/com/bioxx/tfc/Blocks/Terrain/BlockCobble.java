@@ -4,13 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Blocks.BlockTerra;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.Items.Tools.ItemHammer;
-import com.bioxx.tfc.api.Tools.IToolChisel;
-import com.bioxx.tfc.api.Util.Helper;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -23,6 +16,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.api.Tools.IToolChisel;
+import com.bioxx.tfc.api.Util.Helper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -151,8 +152,8 @@ public class BlockCobble extends BlockTerra
 			}
 			else if (!world.isRemote)
 			{
-				//EntityFallingStone ent = new EntityFallingStone(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), this, meta);
-				EntityFallingBlock ent = new EntityFallingBlock(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), this, meta);
+				EntityFallingBlock ent = new EntityFallingBlock(world, i + 0.5, j + 0.5, k + 0.5, this, meta);
+				ent.func_145806_a(true);//setHurtsEntities
 				world.spawnEntityInWorld(ent);
 				Random R = new Random(i*j+k);
 				world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (R.nextFloat()/2));

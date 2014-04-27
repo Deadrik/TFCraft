@@ -2,16 +2,6 @@ package com.bioxx.tfc.Handlers;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_MobData;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.Entities.EntityJavelin;
-import com.bioxx.tfc.Items.ItemTFCArmor;
-import com.bioxx.tfc.api.ICausesDamage;
-import com.bioxx.tfc.api.IInnateArmor;
-import com.bioxx.tfc.api.Enums.EnumDamageType;
-import com.bioxx.tfc.api.Events.EntityArmorCalcEvent;
-
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -32,6 +22,17 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_MobData;
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Entities.EntityJavelin;
+import com.bioxx.tfc.Items.ItemTFCArmor;
+import com.bioxx.tfc.api.ICausesDamage;
+import com.bioxx.tfc.api.IInnateArmor;
+import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Events.EntityArmorCalcEvent;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityDamageHandler
@@ -65,6 +66,8 @@ public class EntityDamageHandler
 		else if(event.source == DamageSource.starve)
 			event.ammount *= 10;
 		else if(event.source == DamageSource.inWall)
+			event.ammount = 100;
+		else if(event.source == DamageSource.fallingBlock)
 			event.ammount = 100;
 		else if(event.source.isExplosion())
 			event.ammount *= 30;

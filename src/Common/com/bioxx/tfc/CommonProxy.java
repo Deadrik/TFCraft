@@ -2,9 +2,16 @@ package com.bioxx.tfc;
 
 import java.io.File;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
+
 import com.bioxx.tfc.Entities.EntityCustomMinecart;
-import com.bioxx.tfc.Entities.EntityFallingDirt;
-import com.bioxx.tfc.Entities.EntityFallingStone;
 import com.bioxx.tfc.Entities.EntityJavelin;
 import com.bioxx.tfc.Entities.EntityProjectileTFC;
 import com.bioxx.tfc.Entities.EntityStand;
@@ -67,15 +74,6 @@ import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -87,7 +85,7 @@ public class CommonProxy
 	{
 		// NOOP on server
 	}
-	
+
 	public void registerRenderInformation()
 	{
 		// NOOP on server
@@ -157,7 +155,7 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntityChickenTFC.class, "chickenTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntityPigTFC.class, "pigTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		//EntityRegistry.registerGlobalEntityID(EntityDeer.class, "deerTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
-		
+
 		EntityRegistry.registerGlobalEntityID(EntitySkeletonTFC.class, "skeletonTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityZombieTFC.class, "zombieTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntitySpiderTFC.class, "spiderTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
@@ -170,10 +168,10 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntityPigZombieTFC.class, "pigZombieTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 		//EntityRegistry.registerGlobalEntityID(EntityIronGolemTFC.class, "irongolemTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityCreeperTFC.class, "creeperTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
-		
+
 		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "sheepTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntityPheasantTFC.class, "pheasantTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0xbbbbbb);
-		
+
 		EntityRegistry.registerGlobalEntityID(EntityHorseTFC.class, "horseTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 
 		EntityRegistry.registerGlobalEntityID(EntityCustomMinecart.class, "minecartTFC", EntityRegistry.findGlobalUniqueEntityId());
@@ -182,9 +180,6 @@ public class CommonProxy
 
 		EntityRegistry.registerModEntity(EntityJavelin.class, "javelin", 1, TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntitySquidTFC.class, "squidTFC", 2, TerraFirmaCraft.instance, 160, 5, true);
-		EntityRegistry.registerModEntity(EntityFallingStone.class, "fallingstone", 3, TerraFirmaCraft.instance, 160, 5, true);
-		EntityRegistry.registerModEntity(EntityFallingDirt.class, "fallingdirt", 4, TerraFirmaCraft.instance, 160, 5, true);
-
 		EntityRegistry.registerModEntity(EntityCowTFC.class, "cowTFC", 6, TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityWolfTFC.class, "wolfTFC", 7, TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityBear.class, "bearTFC", 8, TerraFirmaCraft.instance, 160, 5, true);
@@ -334,7 +329,7 @@ public class CommonProxy
 	public void registerKeyBindingHandler()
 	{
 	}
-	
+
 	public void uploadKeyBindingsToGame()
 	{
 	}
@@ -352,7 +347,7 @@ public class CommonProxy
 		FMLCommonHandler.instance().bus().register(new ServerTickHandler());
 		new ServerTickHandler();
 	}
-	
+
 	public void registerGuiHandler()
 	{
 		NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.instance, new GuiHandler());

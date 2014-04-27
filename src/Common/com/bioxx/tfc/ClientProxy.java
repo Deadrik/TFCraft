@@ -2,11 +2,34 @@ package com.bioxx.tfc;
 
 import java.io.File;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelSlime;
+import net.minecraft.client.renderer.entity.RenderArrow;
+import net.minecraft.client.renderer.entity.RenderBlaze;
+import net.minecraft.client.renderer.entity.RenderEnderman;
+import net.minecraft.client.renderer.entity.RenderFish;
+import net.minecraft.client.renderer.entity.RenderGhast;
+import net.minecraft.client.renderer.entity.RenderMinecart;
+import net.minecraft.client.renderer.entity.RenderSilverfish;
+import net.minecraft.client.renderer.entity.RenderSlime;
+import net.minecraft.client.renderer.entity.RenderSpider;
+import net.minecraft.client.renderer.entity.RenderZombie;
+import net.minecraft.client.resources.IReloadableResourceManager;
+import net.minecraft.client.settings.GameSettings;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.client.GuiIngameForge;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.Fluid;
+
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.EntityCustomMinecart;
-import com.bioxx.tfc.Entities.EntityFallingStone;
 import com.bioxx.tfc.Entities.EntityFishHookTFC;
 import com.bioxx.tfc.Entities.EntityJavelin;
 import com.bioxx.tfc.Entities.EntityProjectileTFC;
@@ -108,30 +131,6 @@ import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 import com.bioxx.tfc.api.Enums.EnumTree;
 import com.bioxx.tfc.api.Util.KeyBindings;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelSlime;
-import net.minecraft.client.renderer.entity.RenderArrow;
-import net.minecraft.client.renderer.entity.RenderBlaze;
-import net.minecraft.client.renderer.entity.RenderEnderman;
-import net.minecraft.client.renderer.entity.RenderFallingBlock;
-import net.minecraft.client.renderer.entity.RenderFish;
-import net.minecraft.client.renderer.entity.RenderGhast;
-import net.minecraft.client.renderer.entity.RenderMinecart;
-import net.minecraft.client.renderer.entity.RenderSilverfish;
-import net.minecraft.client.renderer.entity.RenderSlime;
-import net.minecraft.client.renderer.entity.RenderSpider;
-import net.minecraft.client.renderer.entity.RenderZombie;
-import net.minecraft.client.resources.IReloadableResourceManager;
-import net.minecraft.client.settings.GameSettings;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.client.GuiIngameForge;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -181,9 +180,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigZombieTFC.class, new RenderZombie());
 		//RenderingRegistry.registerEntityRenderingHandler(EntityIronGolemTFC.class, new RenderIronGolem());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerTFC());
-
 		RenderingRegistry.registerEntityRenderingHandler(EntityProjectileTFC.class, new RenderArrow());
-		RenderingRegistry.registerEntityRenderingHandler(EntityFallingStone.class, new RenderFallingBlock());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFishHookTFC.class, new RenderFish());
 
 		RenderingRegistry.registerBlockHandler(TFCBlocks.clayGrassRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
@@ -227,7 +224,7 @@ public class ClientProxy extends CommonProxy
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.berryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBerryBush());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.bloomeryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBloomery());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.metalsheetRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderMetalSheet());
-		
+
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 	}
@@ -312,8 +309,8 @@ public class ClientProxy extends CommonProxy
 						lastBiomeGen = biome;
 					}
 					var5 += (waterColorMultiplier & 16711680) >> 16;
-					var6 += (waterColorMultiplier & 65280) >> 8;
-					var7 += waterColorMultiplier & 255;
+			var6 += (waterColorMultiplier & 65280) >> 8;
+			var7 += waterColorMultiplier & 255;
 				}
 			}
 		}
@@ -333,8 +330,8 @@ public class ClientProxy extends CommonProxy
 			{
 				int var10 = TFC_Climate.getGrassColor(getCurrentWorld(), i + x, j, k + z);
 				var5 += (var10 & 16711680) >> 16;
-				var6 += (var10 & 65280) >> 8;
-				var7 += var10 & 255;
+			var6 += (var10 & 65280) >> 8;
+		var7 += var10 & 255;
 			}
 		}
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
@@ -350,15 +347,15 @@ public class ClientProxy extends CommonProxy
 
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
 		if(par1IBlockAccess.getBlock(i, j, k) == TFCBlocks.fruitTreeLeaves)
-//			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December)
-//			{
-//				int var10 = ColorizerFoliageTFC.getFoliageYellow();
-//				rgb = applyColor(var10, rgb);
-//
-//				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-//				return x;
-//			}
-//			else
+			//			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December)
+			//			{
+			//				int var10 = ColorizerFoliageTFC.getFoliageYellow();
+			//				rgb = applyColor(var10, rgb);
+			//
+			//				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+			//				return x;
+			//			}
+			//			else
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 			{
