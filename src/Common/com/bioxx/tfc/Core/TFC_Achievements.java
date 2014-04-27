@@ -69,9 +69,4 @@ public class TFC_Achievements
 		return a;
 	}
 
-	@SubscribeEvent
-	public void chunkEntered(EntityEvent.EnteringChunk event)
-	{
-	}
-
 }

@@ -2,7 +2,6 @@ package com.bioxx.tfc;
 
 import java.io.File;
 
-import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Entities.EntityCustomMinecart;
 import com.bioxx.tfc.Entities.EntityFallingDirt;
 import com.bioxx.tfc.Entities.EntityFallingStone;
@@ -180,9 +179,6 @@ public class CommonProxy
 		EntityRegistry.registerGlobalEntityID(EntityCustomMinecart.class, "minecartTFC", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityProjectileTFC.class, "arrowTFC", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityStand.class, "standTFC", EntityRegistry.findGlobalUniqueEntityId());
-
-		//registering it over in TerraFirmaCraft.java seems to reset it when you load up the game
-		MinecraftForge.EVENT_BUS.register(new TFC_Achievements());
 
 		EntityRegistry.registerModEntity(EntityJavelin.class, "javelin", 1, TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntitySquidTFC.class, "squidTFC", 2, TerraFirmaCraft.instance, 160, 5, true);

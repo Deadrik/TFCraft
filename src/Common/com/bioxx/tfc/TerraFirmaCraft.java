@@ -23,6 +23,7 @@ import com.bioxx.tfc.Commands.SetPlayerStatsCommand;
 import com.bioxx.tfc.Commands.StripChunkCommand;
 import com.bioxx.tfc.Core.ItemHeat;
 import com.bioxx.tfc.Core.Recipes;
+import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
@@ -174,7 +175,7 @@ public class TerraFirmaCraft
 		proxy.registerToolClasses();
 
 		//Register Achievements
-		//MinecraftForge.EVENT_BUS.register(new TFC_Achievements());
+		TFC_Achievements.init();
 
 		// Register Crafting Handler
 		FMLCommonHandler.instance().bus().register(new CraftingHandler());
