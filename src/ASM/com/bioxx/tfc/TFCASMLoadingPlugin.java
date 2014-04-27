@@ -3,10 +3,6 @@ package com.bioxx.tfc;
 import java.io.File;
 import java.util.Map;
 
-import com.bioxx.tfc.ASM.Transform.TF_EntityFallingBlock;
-import com.bioxx.tfc.ASM.Transform.TF_EntityRenderer;
-import com.bioxx.tfc.ASM.Transform.TF_RenderGlobal;
-
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
@@ -24,9 +20,9 @@ public class TFCASMLoadingPlugin implements IFMLLoadingPlugin
 	@Override
 	public String[] getASMTransformerClass() {
 		return new String[]{
-				TF_EntityFallingBlock.class.getName(),
+				/*TF_EntityFallingBlock.class.getName(),
 				TF_EntityRenderer.class.getName(),
-				TF_RenderGlobal.class.getName()};
+				TF_RenderGlobal.class.getName()*/};
 	}
 
 	@Override

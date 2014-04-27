@@ -2,7 +2,6 @@ package com.bioxx.tfc.ASM;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,12 +16,12 @@ public class TFCAccessTransformer extends AccessTransformer
 		super();
 		instance = this;
 		// add your access transformers here!
-		mapFiles.add("tfc_at.cfg");
+		/*mapFiles.add("tfc_at.cfg");
 		Iterator it = mapFiles.iterator();
 		while (it.hasNext()) {
 			String file = (String)it.next();
 			this.readMapFile(file);
-		}
+		}*/
 	}
 
 	public static void addTransformerMap(String mapFileName)
