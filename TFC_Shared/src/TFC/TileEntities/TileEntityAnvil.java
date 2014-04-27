@@ -138,8 +138,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 							/*float pct = (offset*5);
 							if(anvilItemStacks[INPUT1_SLOT].getItem().getMaxDamage() > 0 && !anvilItemStacks[INPUT1_SLOT].getItem().getHasSubtypes())
 								anvilItemStacks[INPUT1_SLOT].setItemDamage((int)(pct));*/
+							removeRules(INPUT1_SLOT);
 						}
-						removeRules(INPUT1_SLOT);
 						anvilItemStacks[INPUT2_SLOT] = null;
 
 					}
