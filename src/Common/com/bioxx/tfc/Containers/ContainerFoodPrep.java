@@ -35,7 +35,7 @@ public class ContainerFoodPrep extends ContainerTFC
 		pile.openInventory();
 		layoutContainer(playerinv, pile, 0, 0);
 		
-		PlayerInventory.buildInventoryLayout(this, playerinv, -28, 90, false, true);
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
 	}
 
 	/**
@@ -56,12 +56,12 @@ public class ContainerFoodPrep extends ContainerTFC
 
 	protected void layoutContainer(IInventory playerInventory, IInventory chestInventory, int xSize, int ySize)
 	{
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 35, 8));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 35, 26));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 35, 44));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 35, 62));
-		this.addSlotToContainer(new SlotBlocked(chestInventory, 4, 79, 35));
-		this.addSlotToContainer(new SlotFoodBowl(chestInventory, 5, 57, 35));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 71, 8));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 71, 26));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 71, 44));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 71, 62));
+		this.addSlotToContainer(new SlotBlocked(chestInventory, 4, 115, 35));
+		this.addSlotToContainer(new SlotFoodBowl(chestInventory, 5, 93, 35));
 	}
 
 	public EntityPlayer getPlayer()
