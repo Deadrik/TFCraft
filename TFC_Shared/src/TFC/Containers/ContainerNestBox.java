@@ -22,12 +22,12 @@ public class ContainerNestBox extends ContainerTFC {
 		this.posY = y;
 		this.posZ = z;
 
-		this.addSlotToContainer(new SlotOutputOnly(te, 0, 71, 8));
-		this.addSlotToContainer(new SlotOutputOnly(te, 1, 89, 8));
-		this.addSlotToContainer(new SlotOutputOnly(te, 2, 71, 26));
-		this.addSlotToContainer(new SlotOutputOnly(te, 3, 89, 26));
+		this.addSlotToContainer(new SlotOutputOnly(te, 0, 71, 25));
+		this.addSlotToContainer(new SlotOutputOnly(te, 1, 89, 25));
+		this.addSlotToContainer(new SlotOutputOnly(te, 2, 71, 43));
+		this.addSlotToContainer(new SlotOutputOnly(te, 3, 89, 43));
 
-		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 54);
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90);
 	}
 
 	@Override

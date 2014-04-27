@@ -10,6 +10,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.TFCOptions;
@@ -578,16 +579,17 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCItems.FireBrick,2,0), 
 				new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(Item.clay,1,1)});
 
-		GameRegistry.addRecipe(new ItemStack(Block.workbench,1),
-				new Object[]{"PP","PP", Character.valueOf('P'),new ItemStack(TFCBlocks.Planks2,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(Item.boat,1),
-				new Object[]{"P P","PPP", Character.valueOf('P'),new ItemStack(TFCBlocks.Planks2,1,32767)});
-
 		RegisterToolRecipes();
 		registerFoodRecipes();
 		VanillaRecipes();
 		registerKilnRecipes();
 		registerToolMolds();
+		registerOreDict();
+	}
+
+	private static void registerOreDict()
+	{
+		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks2));
 	}
 
 	private static ItemStack checkMelted(ItemStack is){
