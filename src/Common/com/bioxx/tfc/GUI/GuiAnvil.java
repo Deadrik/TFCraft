@@ -81,13 +81,13 @@ public class GuiAnvil extends GuiContainer
 	{
 		super.updateScreen();
 
-		if(this.AnvilEntity.craftingPlan != plan || this.AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT] != input ||
-				this.AnvilEntity.anvilItemStacks[AnvilEntity.INPUT2_SLOT] != input2)
+		if(this.AnvilEntity.craftingPlan != plan || this.AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT1_SLOT] != input ||
+				this.AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT2_SLOT] != input2)
 		{
 			plan = this.AnvilEntity.craftingPlan;
 			this.AnvilEntity.updateRecipe();
-			input = this.AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT];
-			input2 = this.AnvilEntity.anvilItemStacks[AnvilEntity.INPUT2_SLOT];
+			input = this.AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT1_SLOT];
+			input2 = this.AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT2_SLOT];
 		}
 	}
 
@@ -112,7 +112,7 @@ public class GuiAnvil extends GuiContainer
 			AnvilEntity.actionShrink();
 		else if (guibutton.id == 8)
 			AnvilEntity.actionWeld();
-		else if(guibutton.id == 12 && this.AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT] != null)
+		else if(guibutton.id == 12 && this.AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT1_SLOT] != null)
 			player.openGui(TerraFirmaCraft.instance, 24, player.worldObj, x, y, z);
 		this.inventorySlots.detectAndSendChanges();
 	}

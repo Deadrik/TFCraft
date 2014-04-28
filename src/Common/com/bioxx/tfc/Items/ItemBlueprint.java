@@ -89,7 +89,7 @@ public class ItemBlueprint extends ItemTerra
 				
 				TileEntityDetailed te = (TileEntityDetailed) world.getTileEntity(x, y, z);
 				byte[] data = stack.stackTagCompound.getByteArray("data");
-				BitSet blueprintData = te.fromByteArray(data, 512);
+				BitSet blueprintData = TileEntityDetailed.fromByteArray(data, 512);
 				for(int c = 0; c < 512; c++)
 				{
 					if(te.data.get(c) && !blueprintData.get(c))

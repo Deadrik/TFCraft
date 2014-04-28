@@ -87,8 +87,8 @@ public class GuiPlanSelection extends GuiContainerTFC
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
 		drawGui(texture);
-		if(AnvilEntity.getStackInSlot(AnvilEntity.INPUT1_SLOT) != null)
-			drawCenteredString(this.fontRendererObj, "Plans: "+ AnvilEntity.getStackInSlot(AnvilEntity.INPUT1_SLOT).getDisplayName(), guiLeft+xSize/2, guiTop+5, 0x000000);
+		if(AnvilEntity.getStackInSlot(TileEntityAnvil.INPUT1_SLOT) != null)
+			drawCenteredString(this.fontRendererObj, "Plans: "+ AnvilEntity.getStackInSlot(TileEntityAnvil.INPUT1_SLOT).getDisplayName(), guiLeft+xSize/2, guiTop+5, 0x000000);
 	}
 
 	private ArrayList<Object[]> getRecipes()
@@ -98,7 +98,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 		ArrayList planList = new ArrayList();
 		for(Object p : plans)
 		{
-			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT], AnvilEntity.anvilItemStacks[AnvilEntity.INPUT2_SLOT], 
+			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT1_SLOT], AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT2_SLOT], 
 					(String)p,AnvilReq.getReqFromInt(AnvilEntity.AnvilTier), null));
 
 			ar = handleMatchingRecipe(ar);
@@ -112,9 +112,9 @@ public class GuiPlanSelection extends GuiContainerTFC
 	AnvilRecipe handleMatchingRecipe(AnvilRecipe ar)
 	{
 		if (ar != null)
-		if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT] != null && AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItem() == TFCItems.RawBloom && ar.getCraftingResult().getItem() == TFCItems.RawBloom)
+		if (AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT1_SLOT] != null && AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT1_SLOT].getItem() == TFCItems.RawBloom && ar.getCraftingResult().getItem() == TFCItems.RawBloom)
 		{
-			if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItemDamage() <= 100)
+			if (AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT1_SLOT].getItemDamage() <= 100)
 				return null;
 		}
 		return ar;

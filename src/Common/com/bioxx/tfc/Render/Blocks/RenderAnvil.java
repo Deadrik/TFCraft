@@ -18,7 +18,7 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler
 		IBlockAccess blockAccess = renderblocks.blockAccess;
 
 		int meta = blockAccess.getBlockMetadata(i, j, k);
-		int direction = ((BlockAnvil)block).getDirectionFromMetadata(meta);
+		int direction = BlockAnvil.getDirectionFromMetadata(meta);
 		renderblocks.renderAllFaces = true;
 		boolean breaking = false;
 		if(renderblocks.overrideBlockTexture != null)

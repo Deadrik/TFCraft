@@ -332,7 +332,7 @@ public class BlockCustomBed extends BlockDirectional
 			{
 				for (int i3 = i2; i3 <= k2; ++i3)
 				{
-					if (par0World.doesBlockHaveSolidTopSurface(par0World, l2, par2 - 1, i3) && !par0World.getBlock(l2, par2, i3).getMaterial().isOpaque() && !par0World.getBlock(l2, par2 + 1, i3).getMaterial().isOpaque())
+					if (World.doesBlockHaveSolidTopSurface(par0World, l2, par2 - 1, i3) && !par0World.getBlock(l2, par2, i3).getMaterial().isOpaque() && !par0World.getBlock(l2, par2 + 1, i3).getMaterial().isOpaque())
 					{
 						if (par4 <= 0)
 							return new ChunkCoordinates(l2, par2, i3);

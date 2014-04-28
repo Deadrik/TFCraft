@@ -205,7 +205,7 @@ public final class SpawnerAnimalsTFC
 					par1World.getBlock(par2, par3 - 1, par4).getMaterial().isLiquid() &&
 					!par1World.getBlock(par2, par3 + 1, par4).isNormalCube();
 		}
-		else if (!par1World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4))
+		else if (!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4))
 		{
 			return false;
 		}

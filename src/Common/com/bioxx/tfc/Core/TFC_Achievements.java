@@ -8,8 +8,6 @@ import com.bioxx.tfc.TFCItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
-import net.minecraftforge.event.entity.EntityEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class TFC_Achievements
 {

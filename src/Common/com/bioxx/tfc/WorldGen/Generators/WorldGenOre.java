@@ -4,14 +4,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenOre implements IWorldGenerator
@@ -129,7 +128,7 @@ public class WorldGenOre implements IWorldGenerator
 						grade = 0;
 
 					new WorldGenMinable(block, j, B, Layers.get(B), rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, false, grade)
-							.generate(world, rand, chunkX, chunkZ, min, max, name);
+					.generate(world, rand, chunkX, chunkZ, min, max, name);
 				}
 			}
 		}
@@ -159,7 +158,7 @@ public class WorldGenOre implements IWorldGenerator
 						grade = 0;
 
 					new WorldGenMinable(block, j, B, Layers.get(B), rarity, veinSize, veinAmount, height, diameter, vDensity, hDensity, true, grade)
-							.generate(world, rand, chunkX, chunkZ, min, max, name);
+					.generate(world, rand, chunkX, chunkZ, min, max, name);
 				}
 			}
 		}

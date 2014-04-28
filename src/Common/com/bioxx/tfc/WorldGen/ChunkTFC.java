@@ -32,7 +32,7 @@ public class ChunkTFC extends Chunk
 						{
 							EBS[chunkY] = new ExtendedBlockStorage(chunkY << 4, !world.provider.hasNoSky);
 						}
-						EBS[chunkY].func_150818_a/*setExtBlock*/(x, y & 15, z, b);
+						EBS[chunkY].func_150818_a(x, y & 15, z, b);//setExtBlock
 						EBS[chunkY].setExtBlockMetadata(x, y & 15, z, metadata[index]);
 					}
 				}

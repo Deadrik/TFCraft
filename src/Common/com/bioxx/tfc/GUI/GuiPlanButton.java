@@ -30,7 +30,7 @@ public class GuiPlanButton extends GuiButton
 		{
 			int k = this.getHoverState(this.field_146123_n)-1;
 
-			TFC_Core.bindTexture(screen.texture);
+			TFC_Core.bindTexture(GuiPlanSelection.texture);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.zLevel = 300f;
 			this.drawTexturedModalRect(this.xPosition, this.yPosition, 176, 0 + k*18, 18, 18);

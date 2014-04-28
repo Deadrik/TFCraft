@@ -357,80 +357,79 @@ public class ModelDeer extends ModelBase
 			}
 			sex = ((EntityAnimalTFC)entity).sex;
 		}*/
-		if (true)
-		{
-			float aa =  2F - (1.0F - age);
-			GL11.glTranslatef (0.0F, -6F * f5 * age/(float)Math.pow(aa,0.4),0);
-			GL11.glPushMatrix ();
-			float ab = (float)Math.sqrt(1.0F / aa);
-			GL11.glScalef(ab, ab, ab);
-			GL11.glTranslatef (0.0F, 22F * f5 * age/(float)Math.pow(aa,0.4),2F*f5*age/ab);
-			if(((IAnimal)entity).getGender() == GenderEnum.MALE){
-				if(aa <=1.75){
-					Antler11.isHidden = false;
-					Antler21.isHidden = false;
-					if(aa <=1.5){
-						Antler12.isHidden = false;
-						Antler22.isHidden = false;
-						if(aa <= 1.3){
-							Antler13.isHidden = false;
-							Antler23.isHidden = false;
-							if(aa <= 1.1){
-								Antler14.isHidden = false;
-								Antler24.isHidden = false;
-							}
+
+		float aa =  2F - (1.0F - age);
+		GL11.glTranslatef (0.0F, -6F * f5 * age/(float)Math.pow(aa,0.4),0);
+		GL11.glPushMatrix ();
+		float ab = (float)Math.sqrt(1.0F / aa);
+		GL11.glScalef(ab, ab, ab);
+		GL11.glTranslatef (0.0F, 22F * f5 * age/(float)Math.pow(aa,0.4),2F*f5*age/ab);
+		if(((IAnimal)entity).getGender() == GenderEnum.MALE){
+			if(aa <=1.75){
+				Antler11.isHidden = false;
+				Antler21.isHidden = false;
+				if(aa <=1.5){
+					Antler12.isHidden = false;
+					Antler22.isHidden = false;
+					if(aa <= 1.3){
+						Antler13.isHidden = false;
+						Antler23.isHidden = false;
+						if(aa <= 1.1){
+							Antler14.isHidden = false;
+							Antler24.isHidden = false;
 						}
 					}
 				}
 			}
-			Antler11.render(f5);
-			Antler21.render(f5);
-			head.render(f5);
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
-			GL11.glScalef(1.0F / aa, ab, 1.0F / aa);
-			GL11.glTranslatef(0.0F, 22F * f5 * age/(float)Math.pow(aa,0.4), 0.0F);
-			Thigh1.render(f5);
-			UpperLeg4.render(f5);
-			UpperLeg3.render(f5);
-			Thigh2.render(f5);
-
-			//snout.render(f5);
-			//Ear2.render(f5);
-			//Ear1.render(f5);
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
-			GL11.glScalef(1.0F / aa, 1.0F / aa, 1.0F / aa);
-			GL11.glTranslatef(0.0F, 22F * f5 * age, 0.0F);
-			//hoof2.render(f5);
-			//Toes3.render(f5);
-			///Thigh1.render(f5);
-			//Calf2.render(f5);
-			Tail.render(f5);
-			Collar.render(f5);
-			///UpperLeg4.render(f5);
-			Neck.render(f5);
-			Rump.render(f5);
-			body.render(f5);
-			//leg1.render(f5);
-			//leg2.render(f5);
-			//leg3.render(f5);
-			//leg4.render(f5);
-			Torso.render(f5);
-			///UpperLeg3.render(f5);
-			//Calf1.render(f5);
-			//lowerleg3.render(f5);
-			//lowerleg4.render(f5);
-			///Thigh2.render(f5);
-			//Toes4.render(f5);
-			//Toes2.render(f5);
-			//Toes1.render(f5);
-			//hoof1.render(f5);
-			//hoof3.render(f5);
-			//hoof4.render(f5);
-			GL11.glPopMatrix();
 		}
-		else
+		Antler11.render(f5);
+		Antler21.render(f5);
+		head.render(f5);
+		GL11.glPopMatrix();
+		GL11.glPushMatrix();
+		GL11.glScalef(1.0F / aa, ab, 1.0F / aa);
+		GL11.glTranslatef(0.0F, 22F * f5 * age/(float)Math.pow(aa,0.4), 0.0F);
+		Thigh1.render(f5);
+		UpperLeg4.render(f5);
+		UpperLeg3.render(f5);
+		Thigh2.render(f5);
+
+		//snout.render(f5);
+		//Ear2.render(f5);
+		//Ear1.render(f5);
+		GL11.glPopMatrix();
+		GL11.glPushMatrix();
+		GL11.glScalef(1.0F / aa, 1.0F / aa, 1.0F / aa);
+		GL11.glTranslatef(0.0F, 22F * f5 * age, 0.0F);
+		//hoof2.render(f5);
+		//Toes3.render(f5);
+		///Thigh1.render(f5);
+		//Calf2.render(f5);
+		Tail.render(f5);
+		Collar.render(f5);
+		///UpperLeg4.render(f5);
+		Neck.render(f5);
+		Rump.render(f5);
+		body.render(f5);
+		//leg1.render(f5);
+		//leg2.render(f5);
+		//leg3.render(f5);
+		//leg4.render(f5);
+		Torso.render(f5);
+		///UpperLeg3.render(f5);
+		//Calf1.render(f5);
+		//lowerleg3.render(f5);
+		//lowerleg4.render(f5);
+		///Thigh2.render(f5);
+		//Toes4.render(f5);
+		//Toes2.render(f5);
+		//Toes1.render(f5);
+		//hoof1.render(f5);
+		//hoof3.render(f5);
+		//hoof4.render(f5);
+		GL11.glPopMatrix();
+
+		/*else
 		{
 			if (sex == 0)
 			{
@@ -473,7 +472,7 @@ public class ModelDeer extends ModelBase
 			//hoof1.render(f5);
 			//hoof3.render(f5);
 			//hoof4.render(f5);
-		}    
+		}    */
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)

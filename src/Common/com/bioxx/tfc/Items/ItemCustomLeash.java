@@ -46,7 +46,7 @@ public class ItemCustomLeash extends ItemLead implements ISize
 			}
 			else
 			{
-				this.func_135066_a(par2EntityPlayer, par3World, par4, par5, par6);
+				ItemCustomLeash.func_135066_a(par2EntityPlayer, par3World, par4, par5, par6);
 				return true;
 			}
 		}

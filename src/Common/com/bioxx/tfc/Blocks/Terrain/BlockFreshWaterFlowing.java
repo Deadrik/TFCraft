@@ -7,7 +7,6 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFlowing;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;

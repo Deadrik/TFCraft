@@ -14,7 +14,7 @@ public class CollisionRayTracePlanks
 {
 	public static List<Object[]> rayTracePlanks(BlockWoodConstruct construct, Vec3 player, Vec3 view, int i, int j, int k, List<Object[]> returns, BitSet data, TileEntityWoodConstruct te) {
 
-		int d = te.PlankDetailLevel;
+		int d = TileEntityWoodConstruct.PlankDetailLevel;
 		int dd = (d * d);
 		float div = 1f / d;
 

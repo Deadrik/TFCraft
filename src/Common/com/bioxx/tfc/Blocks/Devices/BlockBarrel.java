@@ -57,7 +57,7 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
+		BlockBarrel.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 		if(side == 0 || side == 1)
 			return TFC_Textures.InvisibleTexture;
 		else
-			return this.blockIcon;
+			return BlockBarrel.blockIcon;
 	}
 
 	@SideOnly(Side.CLIENT)

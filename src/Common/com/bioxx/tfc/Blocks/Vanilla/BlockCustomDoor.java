@@ -311,7 +311,7 @@ public class BlockCustomDoor extends BlockTerra
 				var7 = true;
 			}
 
-			if (!par1World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4))
+			if (!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4))
 			{
 				par1World.setBlockToAir(par2, par3, par4);
 				var7 = true;
@@ -368,7 +368,7 @@ public class BlockCustomDoor extends BlockTerra
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
-		return par3 >= 255 ? false : par1World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && super.canPlaceBlockAt(par1World, par2, par3, par4) && super.canPlaceBlockAt(par1World, par2, par3 + 1, par4);
+		return par3 >= 255 ? false : World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && super.canPlaceBlockAt(par1World, par2, par3, par4) && super.canPlaceBlockAt(par1World, par2, par3 + 1, par4);
 	}
 
 	/**

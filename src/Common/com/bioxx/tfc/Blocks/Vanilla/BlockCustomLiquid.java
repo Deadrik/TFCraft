@@ -369,7 +369,7 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 		case Desert: return TFC_Core.isSand(this);
 		case Nether: return this == Blocks.soul_sand;
 		case Crop:   return TFC_Core.isFarmland(this);
-		case Cave:   return isSideSolid(world, x, y, z, direction.UP);
+		case Cave:   return isSideSolid(world, x, y, z, ForgeDirection.UP);
 		case Plains: return this == TFCBlocks.Grass || this == TFCBlocks.Grass2 || this == TFCBlocks.Dirt || this == TFCBlocks.Dirt2;
 		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlockMetadata(x, y, z) == 0;
 		case Beach:
@@ -580,7 +580,7 @@ public abstract class BlockCustomLiquid extends BlockLiquid
 				par1World.playSound(par2, par3, par4, "liquid.lava", 0.2F + par5Random.nextFloat() * 0.2F, 0.9F + par5Random.nextFloat() * 0.15F, false);
 		}
 
-		if (par5Random.nextInt(10) == 0 && par1World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && !par1World.getBlock(par2, par3 - 2, par4).getMaterial().blocksMovement())
+		if (par5Random.nextInt(10) == 0 && World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && !par1World.getBlock(par2, par3 - 2, par4).getMaterial().blocksMovement())
 		{
 			d5 = par2 + par5Random.nextFloat();
 			d7 = par3 - 1.05D;

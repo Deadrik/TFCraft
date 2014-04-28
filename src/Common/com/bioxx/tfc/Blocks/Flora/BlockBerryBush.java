@@ -273,7 +273,7 @@ public class BlockBerryBush extends BlockTerraContainer
 
 	public String getType(int meta)
 	{
-		return this.MetaNames[meta];
+		return BlockBerryBush.MetaNames[meta];
 	}
 
 	@Override

@@ -315,7 +315,7 @@ public class FoodStatsTFC
 			//fill the stomach
 			this.stomachLevel += eatAmount;
 			float _sat = item.getSatisfaction(is);
-			if(!item.isWarm(is))
+			if(!ItemMeal.isWarm(is))
 				_sat *= 0.25f;
 			this.satisfaction += eatAmount * _sat;
 			//Now remove the eaten amount from the itemstack.

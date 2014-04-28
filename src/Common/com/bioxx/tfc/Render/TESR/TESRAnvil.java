@@ -30,8 +30,8 @@ public class TESRAnvil extends TESRBase
 			customitem.hoverStart = 0f;
 			float blockScale = 1.0F;
 
-			drawItem(te, d, d1, d2, dir, customitem, blockScale, te.HAMMER_SLOT);
-			drawItem(te, d, d1, d2, dir, customitem, blockScale, te.INPUT1_SLOT);
+			drawItem(te, d, d1, d2, dir, customitem, blockScale, TileEntityAnvil.HAMMER_SLOT);
+			drawItem(te, d, d1, d2, dir, customitem, blockScale, TileEntityAnvil.INPUT1_SLOT);
 			//drawItem(te, d, d1, d2, dir, customitem, blockScale, te.FLUX_SLOT);
 		}
 	}

@@ -3,9 +3,9 @@ package com.bioxx.tfc.api.Util;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+@SuppressWarnings("serial")
 public class CollapseList<E> extends LinkedList<CollapseData>
 {
-
 	public boolean add(ArrayList<ByteCoord> checkedmap, CollapseData e)
 	{
 		if(this.peekFirst() != null)

@@ -152,7 +152,7 @@ public class BlockSluice extends BlockContainer
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) 
 	{
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
-		if(this.isBlockFootOfBed(meta))
+		if(BlockSluice.isBlockFootOfBed(meta))
 			setBlockBounds(0,0,0,1,0.5f,1);
 		else
 			setBlockBounds(0,0,0,1,1,1);
@@ -162,7 +162,7 @@ public class BlockSluice extends BlockContainer
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
 		int meta = world.getBlockMetadata(i, j, k);
-		if(this.isBlockFootOfBed(meta))
+		if(BlockSluice.isBlockFootOfBed(meta))
 			return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.5f, k+1);
 		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 1, k + 1);
 	}

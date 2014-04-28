@@ -27,8 +27,8 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 		TileEntityWoodConstruct te = (TileEntityWoodConstruct) renderer.blockAccess.getTileEntity(i, j, k);
 		int md = renderer.blockAccess.getBlockMetadata(i, j, k);
 
-		int d = te.PlankDetailLevel;
-		int dd = te.PlankDetailLevel * te.PlankDetailLevel;
+		int d = TileEntityWoodConstruct.PlankDetailLevel;
+		int dd = TileEntityWoodConstruct.PlankDetailLevel * TileEntityWoodConstruct.PlankDetailLevel;
 		int dd2 = dd*2;
 
 		float div = 1f / d;

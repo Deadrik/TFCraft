@@ -69,7 +69,7 @@ public enum RuleEnum
 
 	public boolean matches(RuleEnum R, int position)
 	{
-		if((Action == R.Action || Action == this.ANY.Action)) {
+		if((Action == R.Action || Action == RuleEnum.ANY.Action)) {
 			if(position >= Min && position <= Max) {
 				return true;
 			}

@@ -26,7 +26,7 @@ public class GuiAnvilPlanButton extends GuiButton
 		{
 			int k = this.getHoverState(this.field_146123_n)-1;
 
-			TFC_Core.bindTexture(screen.texture);
+			TFC_Core.bindTexture(GuiAnvil.texture);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.zLevel = 300f;
 			this.drawTexturedModalRect(this.xPosition, this.yPosition, 0, 205 + k*18, 18, 18);

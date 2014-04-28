@@ -90,7 +90,7 @@ public class RenderBellows implements ISimpleBlockRenderingHandler
 		{
 			IBlockAccess blockAccess = renderer.blockAccess;
 			int meta = blockAccess.getBlockMetadata(x, y, z);
-			int direction = ((BlockBellows)block).getDirectionFromMetadata(meta);
+			int direction = BlockBellows.getDirectionFromMetadata(meta);
 			TileEntityBellows te = (TileEntityBellows)blockAccess.getTileEntity(x, y, z);
 			float pos = te.blowTimer * 0.1F;
 			if(pos < 0)

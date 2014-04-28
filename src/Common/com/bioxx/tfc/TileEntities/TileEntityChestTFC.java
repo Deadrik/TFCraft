@@ -8,7 +8,6 @@ import com.bioxx.tfc.Containers.ContainerChestTFC;
 import com.bioxx.tfc.Core.TFC_Core;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;

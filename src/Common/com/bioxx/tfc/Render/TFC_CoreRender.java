@@ -358,7 +358,7 @@ public class TFC_CoreRender
 		IBlockAccess blockAccess = renderblocks.blockAccess;
 		Tessellator tessellator = Tessellator.instance;
 		int l = blockAccess.getBlockMetadata(i, j, k);
-		int i1 = ((BlockSluice)block).getDirectionFromMetadata(l);
+		int i1 = BlockSluice.getDirectionFromMetadata(l);
 		float f = 0.5F;
 		float f1 = 1.0F;
 		float f2 = 0.8F;
@@ -386,7 +386,7 @@ public class TFC_CoreRender
 		int waterB = var10 & 255;
 
 		//render ramp
-		if(!((BlockSluice)block).isBlockFootOfBed(l))
+		if(!BlockSluice.isBlockFootOfBed(l))
 		{
 			if(i1 == 0)
 			{

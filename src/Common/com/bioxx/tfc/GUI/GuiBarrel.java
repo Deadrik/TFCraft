@@ -128,7 +128,7 @@ public class GuiBarrel extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j)
 	{
-		drawCenteredString(this.fontRendererObj,barrel.getType(barrel.Type),88,7,0x555555);
+		drawCenteredString(this.fontRendererObj,TileEntityBarrel.getType(barrel.Type),88,7,0x555555);
 	}
 
 	@Override

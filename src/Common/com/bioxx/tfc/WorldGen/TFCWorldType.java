@@ -40,9 +40,9 @@ public class TFCWorldType extends WorldType
 
 	public TFCBiome[] getBiomesForWorldType()
 	{
-		if(this == this.DEFAULT)
+		if(this == TFCWorldType.DEFAULT)
 			return biomesDEFAULT;
-		else if(this == this.FLAT)
+		else if(this == TFCWorldType.FLAT)
 			return biomesFLAT;
 
 		return biomesUNKNOWN;

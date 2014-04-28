@@ -600,6 +600,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public boolean getGraphicsLevel()
 	{
-		return Minecraft.getMinecraft().isFancyGraphicsEnabled();
+		Minecraft.getMinecraft();
+		return Minecraft.isFancyGraphicsEnabled();
 	}
 }

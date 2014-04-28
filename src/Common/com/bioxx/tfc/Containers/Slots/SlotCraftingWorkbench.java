@@ -1,8 +1,5 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TerraFirmaCraft;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -11,6 +8,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.AchievementList;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TerraFirmaCraft;
 
 public class SlotCraftingWorkbench extends Slot
 {
@@ -35,6 +35,7 @@ public class SlotCraftingWorkbench extends Slot
 	 * Decrease the size of the stack in slot (first int arg) by the amount of the second int arg. Returns the new
 	 * stack.
 	 */
+	@Override
 	public ItemStack decrStackSize(int par1)
 	{
 		if (this.getHasStack())
@@ -104,6 +105,7 @@ public class SlotCraftingWorkbench extends Slot
 	/**
 	 * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
 	 */
+	@Override
 	public boolean isItemValid(ItemStack par1ItemStack)
 	{
 		return false;
@@ -124,7 +126,7 @@ public class SlotCraftingWorkbench extends Slot
 			{
 				this.craftMatrix.decrStackSize(var2, 1);
 
-				if (var3.getItem().hasContainerItem())
+				if (var3.getItem().hasContainerItem(var3))
 				{
 					ItemStack var4 = new ItemStack(var3.getItem().getContainerItem());
 

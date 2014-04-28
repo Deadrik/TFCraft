@@ -655,7 +655,7 @@ public class RenderDetailed
 			icon = renderer.getBlockIcon(block, renderer.blockAccess, par2, par3, par4, 3);
 			renderer.renderFaceZPos(block, par2, par3, par4, block.getIcon(3, meta));
 
-			if (renderer.fancyGrass && icon.getIconName().equals("grass_side") && !renderer.hasOverrideBlockTexture())
+			if (RenderBlocks.fancyGrass && icon.getIconName().equals("grass_side") && !renderer.hasOverrideBlockTexture())
 			{
 				renderer.colorRedTopLeft *= par5;
 				renderer.colorRedBottomLeft *= par5;
@@ -797,7 +797,7 @@ public class RenderDetailed
 			icon = renderer.getBlockIcon(block, renderer.blockAccess, par2, par3, par4, 4);
 			renderer.renderFaceXNeg(block, par2, par3, par4, block.getIcon(4, meta));
 
-			if (renderer.fancyGrass && icon.getIconName().equals("grass_side") && !renderer.hasOverrideBlockTexture())
+			if (RenderBlocks.fancyGrass && icon.getIconName().equals("grass_side") && !renderer.hasOverrideBlockTexture())
 			{
 				renderer.colorRedTopLeft *= par5;
 				renderer.colorRedBottomLeft *= par5;

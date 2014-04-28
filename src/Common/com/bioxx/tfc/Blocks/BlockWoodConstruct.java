@@ -121,8 +121,8 @@ public class BlockWoodConstruct extends BlockTerraContainer
 	{
 		TileEntityWoodConstruct te = (TileEntityWoodConstruct) world.getTileEntity(i, j, k);
 
-		int d = te.PlankDetailLevel;
-		int dd = te.PlankDetailLevel * te.PlankDetailLevel;
+		int d = TileEntityWoodConstruct.PlankDetailLevel;
+		int dd = TileEntityWoodConstruct.PlankDetailLevel * TileEntityWoodConstruct.PlankDetailLevel;
 
 		float div = 1f / d;
 
@@ -299,8 +299,8 @@ public class BlockWoodConstruct extends BlockTerraContainer
 			TileEntityWoodConstruct te = (TileEntityWoodConstruct) access.getTileEntity(x, y, z);
 			if(te.data.get(index))
 			{
-				int d = te.PlankDetailLevel;
-				int dd = te.PlankDetailLevel * te.PlankDetailLevel;
+				int d = TileEntityWoodConstruct.PlankDetailLevel;
+				int dd = TileEntityWoodConstruct.PlankDetailLevel * TileEntityWoodConstruct.PlankDetailLevel;
 				int dd2 = dd*2;
 
 				float div = 1 / d;
