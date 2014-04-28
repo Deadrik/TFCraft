@@ -2,16 +2,16 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 
 public class WorldGenCustomWillowTrees extends WorldGenerator
 {
@@ -77,6 +77,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 		}
 	}
 
+	@Override
 	public boolean generate (World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		int height = random.nextInt (2) + 3;
@@ -104,7 +105,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 						Block i4 = world.getBlock(j2, i1, j3);
 						if (i4 == Blocks.air || i4 == TFCBlocks.Leaves || i4 == TFCBlocks.Leaves2)
 							continue;
-						if (i4 == TFCBlocks.SaltWaterStill || i4 == TFCBlocks.SaltWaterFlowing)
+						if (i4 == TFCBlocks.SaltWater)
 						{
 							if (i1 > yCoord)
 								flag = false;
@@ -169,42 +170,42 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 		for (int l1 = 0 ; l1 < height ; l1++)
 		{
 			Block l2 = world.getBlock(xCoord, yCoord + l1, zCoord);
-			if (l2 == Blocks.air || l2 == TFCBlocks.Leaves || l2 == TFCBlocks.Leaves2 || l2 == TFCBlocks.SaltWaterFlowing || l2 == TFCBlocks.SaltWaterStill ||
+			if (l2 == Blocks.air || l2 == TFCBlocks.Leaves || l2 == TFCBlocks.Leaves2 ||
 					l2.canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
 			{
 				world.setBlock(xCoord, yCoord + l1, zCoord, TFCBlocks.LogNatural, treeId, 0x2);
 			}
 		}
 
-//		for (int i2 = yCoord + height ; i2 <= yCoord + height + 5 ; i2++)
-//		{
-//			for (int k4 = xCoord - 6 ; k4 <= xCoord + 6 ; k4++)
-//			{
-//				for (int i5 = zCoord - 6 ; i5 <= zCoord + 6 ; i5++)
-//				{
-//					if (world.getBlockId (k4, i2, i5) != Block.leaves)
-//					{
-//						continue;
-//					}
-//					if (random.nextInt (4) == 0 && world.getBlockId (k4 - 1, i2, i5) == 0)
-//					{
-//						func_35265_a (world, k4 - 1, i2, i5, 8);
-//					}
-//					if (random.nextInt (4) == 0 && world.getBlockId (k4 + 1, i2, i5) == 0)
-//					{
-//						func_35265_a (world, k4 + 1, i2, i5, 2);
-//					}
-//					if (random.nextInt (4) == 0 && world.getBlockId (k4, i2, i5 - 1) == 0)
-//					{
-//						func_35265_a (world, k4, i2, i5 - 1, 1);
-//					}
-//					if (random.nextInt (4) == 0 && world.getBlockId (k4, i2, i5 + 1) == 0)
-//					{
-//						func_35265_a (world, k4, i2, i5 + 1, 4);
-//					}
-//				}
-//			}
-//		}
+		//		for (int i2 = yCoord + height ; i2 <= yCoord + height + 5 ; i2++)
+		//		{
+		//			for (int k4 = xCoord - 6 ; k4 <= xCoord + 6 ; k4++)
+		//			{
+		//				for (int i5 = zCoord - 6 ; i5 <= zCoord + 6 ; i5++)
+		//				{
+		//					if (world.getBlockId (k4, i2, i5) != Block.leaves)
+		//					{
+		//						continue;
+		//					}
+		//					if (random.nextInt (4) == 0 && world.getBlockId (k4 - 1, i2, i5) == 0)
+		//					{
+		//						func_35265_a (world, k4 - 1, i2, i5, 8);
+		//					}
+		//					if (random.nextInt (4) == 0 && world.getBlockId (k4 + 1, i2, i5) == 0)
+		//					{
+		//						func_35265_a (world, k4 + 1, i2, i5, 2);
+		//					}
+		//					if (random.nextInt (4) == 0 && world.getBlockId (k4, i2, i5 - 1) == 0)
+		//					{
+		//						func_35265_a (world, k4, i2, i5 - 1, 1);
+		//					}
+		//					if (random.nextInt (4) == 0 && world.getBlockId (k4, i2, i5 + 1) == 0)
+		//					{
+		//						func_35265_a (world, k4, i2, i5 + 1, 4);
+		//					}
+		//				}
+		//			}
+		//		}
 
 		return true;
 	}

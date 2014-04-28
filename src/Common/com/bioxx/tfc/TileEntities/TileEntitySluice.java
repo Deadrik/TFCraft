@@ -6,12 +6,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.TreeSet;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Blocks.Devices.BlockSluice;
-import com.bioxx.tfc.Blocks.Terrain.BlockOre;
-import com.bioxx.tfc.Core.TFC_Time;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -25,6 +19,12 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Blocks.Devices.BlockSluice;
+import com.bioxx.tfc.Blocks.Terrain.BlockOre;
+import com.bioxx.tfc.Core.TFC_Time;
 
 public class TileEntitySluice extends TileEntity implements IInventory
 {
@@ -127,7 +127,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
 		float f2 = random.nextFloat() * 0.8F + 0.1F;
 		int x = xCoord;
 
-		EntityItem entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, new ItemStack(is.getItem(), is.stackSize, is.getItemDamage()));
+		EntityItem entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(is.getItem(), is.stackSize, is.getItemDamage()));
 		float f3 = 0.05F;
 		entityitem.motionX = (float)random.nextGaussian() * f3;
 		entityitem.motionY = (float)random.nextGaussian() * f3 + 0.2F;
@@ -185,7 +185,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
 	{
 		if(worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
 			return false;
-		return entityplayer.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64D;
+		return entityplayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64D;
 	}
 
 	@Override
@@ -201,6 +201,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
 			itemstack.stackSize = getInventoryStackLimit();
 	}
 
+	@Override
 	public void updateEntity()
 	{
 		int meta = getBlockMetadata();
@@ -414,27 +415,27 @@ public class TileEntitySluice extends TileEntity implements IInventory
 		//Here we make sure that the water flags are checked
 		if((meta & 3 )== 0)
 		{
-			waterInput = worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1) == TFCBlocks.SaltWaterStill;
-			waterOutput = worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == TFCBlocks.SaltWaterStill || 
-					worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == TFCBlocks.SaltWaterFlowing;
+			waterInput = worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1) == TFCBlocks.SaltWater;
+			waterOutput = worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == TFCBlocks.SaltWater || 
+					worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == TFCBlocks.SaltWater;
 		}
 		if((meta & 3 )== 1)
 		{
-			waterInput = worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord) == TFCBlocks.SaltWaterStill;
-			waterOutput = worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == TFCBlocks.SaltWaterStill || 
-					worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == TFCBlocks.SaltWaterFlowing;
+			waterInput = worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord) == TFCBlocks.SaltWater;
+			waterOutput = worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == TFCBlocks.SaltWater || 
+					worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == TFCBlocks.SaltWater;
 		}
 		if((meta & 3 )== 2)
 		{
-			waterInput = worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1) == TFCBlocks.SaltWaterStill;
-			waterOutput = worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2) == TFCBlocks.SaltWaterStill || 
-					worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2) == TFCBlocks.SaltWaterFlowing;
+			waterInput = worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1) == TFCBlocks.SaltWater;
+			waterOutput = worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2) == TFCBlocks.SaltWater || 
+					worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2) == TFCBlocks.SaltWater;
 		}
 		if((meta & 3 )== 3)
 		{
-			waterInput = worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord) == TFCBlocks.SaltWaterStill;
-			waterOutput = worldObj.getBlock(xCoord + 2, yCoord - 1, zCoord) == TFCBlocks.SaltWaterStill ||
-					worldObj.getBlock(xCoord + 2, yCoord - 1, zCoord) == TFCBlocks.SaltWaterFlowing;
+			waterInput = worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord) == TFCBlocks.SaltWater;
+			waterOutput = worldObj.getBlock(xCoord + 2, yCoord - 1, zCoord) == TFCBlocks.SaltWater ||
+					worldObj.getBlock(xCoord + 2, yCoord - 1, zCoord) == TFCBlocks.SaltWater;
 		}
 
 		/////////////////////////////////////////////////////////
@@ -443,10 +444,10 @@ public class TileEntitySluice extends TileEntity implements IInventory
 		boolean isFlowing = (meta & 4) == 4;
 		if((meta & 3) == 0 && !isFoot)
 		{
-			boolean isInputWater = worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1) == TFCBlocks.SaltWaterStill;
+			boolean isInputWater = worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1) == TFCBlocks.SaltWater;
 			boolean isOutputAir = worldObj.isAirBlock(xCoord, yCoord - 1, zCoord + 2);
-			boolean isOutputWater = worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == TFCBlocks.SaltWaterStill || 
-					worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == TFCBlocks.SaltWaterFlowing;
+			boolean isOutputWater = worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == TFCBlocks.SaltWater || 
+					worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == TFCBlocks.SaltWater;
 			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord, yCoord + 1, zCoord - 1) == 7;
 			int meta2 = worldObj.getBlockMetadata(xCoord, yCoord, zCoord + 1);
 			if(isInputWater && isWaterDepth7 && !isFlowing && (isOutputAir || isOutputWater))
@@ -461,7 +462,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
 				}
 
 				//Set output water
-				worldObj.setBlock(xCoord, yCoord - 1, zCoord + 2, TFCBlocks.SaltWaterStill);
+				worldObj.setBlock(xCoord, yCoord - 1, zCoord + 2, TFCBlocks.SaltWater);
 			}
 			if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater) && isFlowing)
 			{
@@ -479,10 +480,10 @@ public class TileEntitySluice extends TileEntity implements IInventory
 		}
 		if((meta & 3) == 1 && !isFoot)
 		{
-			boolean isInputWater = worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord) == TFCBlocks.SaltWaterStill;
+			boolean isInputWater = worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord) == TFCBlocks.SaltWater;
 			boolean isOutputAir = worldObj.isAirBlock(xCoord - 2, yCoord - 1, zCoord);
-			boolean isOutputWater = worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == TFCBlocks.SaltWaterStill || 
-					worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == TFCBlocks.SaltWaterFlowing;
+			boolean isOutputWater = worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == TFCBlocks.SaltWater || 
+					worldObj.getBlock(xCoord - 2, yCoord - 1, zCoord) == TFCBlocks.SaltWater;
 			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord + 1, yCoord + 1, zCoord) == 7;
 			int meta2 = worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord);
 			if(isInputWater && isWaterDepth7 && !isFlowing && (isOutputAir || isOutputWater))
@@ -495,7 +496,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
 					worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord, zCoord, meta2 + 4, 3);
 				}
 				//Set output water
-				worldObj.setBlock(xCoord-2, yCoord - 1, zCoord, TFCBlocks.SaltWaterStill);
+				worldObj.setBlock(xCoord-2, yCoord - 1, zCoord, TFCBlocks.SaltWater);
 			}
 			if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater)&& isFlowing)
 			{
@@ -515,10 +516,10 @@ public class TileEntitySluice extends TileEntity implements IInventory
 		}
 		if((meta & 3) == 2 && !isFoot)
 		{
-			boolean isInputWater = worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1) == TFCBlocks.SaltWaterStill;
+			boolean isInputWater = worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1) == TFCBlocks.SaltWater;
 			boolean isOutputAir = worldObj.isAirBlock(xCoord, yCoord - 1, zCoord - 2);
-			boolean isOutputWater = worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2) == TFCBlocks.SaltWaterStill || 
-					worldObj.getBlock(xCoord, yCoord - 1, zCoord-2) == TFCBlocks.SaltWaterFlowing;
+			boolean isOutputWater = worldObj.getBlock(xCoord, yCoord - 1, zCoord - 2) == TFCBlocks.SaltWater || 
+					worldObj.getBlock(xCoord, yCoord - 1, zCoord-2) == TFCBlocks.SaltWater;
 			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord, yCoord + 1, zCoord + 1) == 7;
 			int meta2 = worldObj.getBlockMetadata(xCoord, yCoord, zCoord - 1);
 
@@ -534,7 +535,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
 				}
 
 				//Set output water
-				worldObj.setBlock(xCoord, yCoord - 1, zCoord - 2, TFCBlocks.SaltWaterStill);
+				worldObj.setBlock(xCoord, yCoord - 1, zCoord - 2, TFCBlocks.SaltWater);
 			}
 			if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater)&& isFlowing)
 			{
@@ -554,10 +555,10 @@ public class TileEntitySluice extends TileEntity implements IInventory
 		}
 		if((meta & 3) == 3 && !isFoot)
 		{
-			boolean isInputWater = worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord) == TFCBlocks.SaltWaterStill;
+			boolean isInputWater = worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord) == TFCBlocks.SaltWater;
 			boolean isOutputAir = worldObj.isAirBlock(xCoord+2, yCoord - 1, zCoord);
-			boolean isOutputWater = worldObj.getBlock(xCoord+2, yCoord - 1, zCoord) == TFCBlocks.SaltWaterStill ||
-					worldObj.getBlock(xCoord+2, yCoord - 1, zCoord) == TFCBlocks.SaltWaterFlowing;
+			boolean isOutputWater = worldObj.getBlock(xCoord+2, yCoord - 1, zCoord) == TFCBlocks.SaltWater ||
+					worldObj.getBlock(xCoord+2, yCoord - 1, zCoord) == TFCBlocks.SaltWater;
 			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord - 1, yCoord + 1, zCoord) == 7;
 			int meta2 = worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord);
 
@@ -571,7 +572,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
 					worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord, zCoord, meta2 + 4, 3);
 				}
 				//Set output water
-				worldObj.setBlock(xCoord + 2, yCoord - 1, zCoord, TFCBlocks.SaltWaterStill);
+				worldObj.setBlock(xCoord + 2, yCoord - 1, zCoord, TFCBlocks.SaltWater);
 			}
 			if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater)&& isFlowing)
 			{

@@ -2,15 +2,15 @@ package com.bioxx.tfc.WorldGen;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class MapGenCavesTFC extends MapGenBaseTFC
 {
@@ -133,8 +133,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 								int index = (xCoord * 16 + zCoord) * 256 + y;
 								if (y >= 0 && y < 256)
 								{
-									if (idArray[index] == TFCBlocks.SaltWaterFlowing || idArray[index] == TFCBlocks.SaltWaterStill || 
-											idArray[index] == TFCBlocks.FreshWaterFlowing || idArray[index] == TFCBlocks.FreshWaterStill)
+									if (idArray[index] == TFCBlocks.SaltWater || idArray[index] == TFCBlocks.FreshWater)
 										var58 = true;
 									if (y != var57 - 1 && xCoord != var55 && xCoord != var36 - 1 && zCoord != var56 && zCoord != var40 - 1)
 										y = var57;
@@ -170,7 +169,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 											{
 												if (var50 < 10 && TFC_Climate.getStability((int)worldX, (int)worldZ) == 1)
 												{
-													idArray[index] = TFCBlocks.LavaFlowing;
+													idArray[index] = TFCBlocks.Lava;
 													metaArray[index] = 0;
 												}
 												else

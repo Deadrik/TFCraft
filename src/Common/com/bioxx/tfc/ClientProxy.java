@@ -126,7 +126,6 @@ import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
 import com.bioxx.tfc.TileEntities.TileEntityPottery;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
-import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 import com.bioxx.tfc.api.Enums.EnumTree;
 import com.bioxx.tfc.api.Util.KeyBindings;
@@ -286,35 +285,10 @@ public class ClientProxy extends CommonProxy
 		return Minecraft.getMinecraft().mcDataDir;
 	}
 
-	private TFCBiome lastBiomeGen;
-	private int waterColorMultiplier;
-
 	@Override
 	public int waterColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
-		int var5 = 0;
-		int var6 = 0;
-		int var7 = 0;
-
-		for (int var8 = -1; var8 <= 1; ++var8)
-		{
-			for (int var9 = -1; var9 <= 1; ++var9)
-			{
-				TFCBiome biome = (TFCBiome) par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
-				if(biome != null)
-				{
-					if (lastBiomeGen != biome)
-					{
-						waterColorMultiplier = biome.getWaterColorMultiplier();
-						lastBiomeGen = biome;
-					}
-					var5 += (waterColorMultiplier & 16711680) >> 16;
-			var6 += (waterColorMultiplier & 65280) >> 8;
-			var7 += waterColorMultiplier & 255;
-				}
-			}
-		}
-		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+		return 0x354d35;
 	}
 
 	@Override
@@ -331,7 +305,7 @@ public class ClientProxy extends CommonProxy
 				int var10 = TFC_Climate.getGrassColor(getCurrentWorld(), i + x, j, k + z);
 				var5 += (var10 & 16711680) >> 16;
 			var6 += (var10 & 65280) >> 8;
-		var7 += var10 & 255;
+			var7 += var10 & 255;
 			}
 		}
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;

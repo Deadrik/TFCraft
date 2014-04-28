@@ -1,14 +1,14 @@
 package com.bioxx.tfc.Commands;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
-import com.bioxx.tfc.api.TFCOptions;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChatComponentText;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class GenCommand extends CommandBase{
 
@@ -34,7 +34,7 @@ public class GenCommand extends CommandBase{
 				WorldGenFissure gen = null;
 				if(params[1].equals("water"))
 				{
-					gen = new WorldGenFissure(TFCBlocks.HotWaterStill);
+					gen = new WorldGenFissure(TFCBlocks.HotWater);
 					sender.addChatMessage(new ChatComponentText("Generating hot water fissure"));
 				}
 				else if(params[1].equals("lava"))

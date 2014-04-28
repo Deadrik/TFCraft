@@ -2,14 +2,14 @@ package com.bioxx.tfc.WorldGen;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class MapGenRavineTFC extends MapGenBaseTFC
 {
@@ -130,8 +130,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 
 								if (var43 >= 0 && var43 < 256)
 								{
-									if (blockArray[index] == TFCBlocks.SaltWaterFlowing || blockArray[index] == TFCBlocks.SaltWaterStill || 
-											blockArray[index] == TFCBlocks.FreshWaterFlowing || blockArray[index] == TFCBlocks.FreshWaterStill)
+									if (blockArray[index] == TFCBlocks.SaltWater ||  blockArray[index] == TFCBlocks.FreshWater)
 										var58 = true;
 									if (var43 != var55 - 1 && var41 != var56 && var41 != var35 - 1 && var42 != var57 && var42 != var39 - 1)
 										var43 = var55;

@@ -141,7 +141,7 @@ public class BodyTempStats
 				{
 					TileEntity te = player.worldObj.getTileEntity(i, j, k);
 					if((player.worldObj.getBlock(i, j, k) == Blocks.lava ||
-							player.worldObj.getBlock(i, j, k) == TFCBlocks.LavaFlowing) ||
+							player.worldObj.getBlock(i, j, k) == TFCBlocks.Lava) ||
 							(te != null && te instanceof TileEntityFireEntity))
 					{
 						//returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )<10?1:0);

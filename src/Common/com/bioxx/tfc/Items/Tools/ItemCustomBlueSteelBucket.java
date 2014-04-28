@@ -1,29 +1,32 @@
 package com.bioxx.tfc.Items.Tools;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.Enums.EnumItemReach;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Util.Helper;
-
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Util.Helper;
+
 import cpw.mods.fml.common.eventhandler.Event;
 
 public class ItemCustomBlueSteelBucket extends ItemTerra
 {
-	private Block bucketContent;
+	private Block bucketContents;
 
 	public ItemCustomBlueSteelBucket(Block par2)
 	{
 		super();
-		this.bucketContent = par2;
+		this.bucketContents = par2;
 		this.setFolder("tools/");
 	}
 
@@ -43,118 +46,156 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World world, EntityPlayer par3EntityPlayer)
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
 		float var4 = 1.0F;
-		double var5 = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * var4;
-		double var7 = par3EntityPlayer.prevPosY + (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) * var4 + 1.62D - par3EntityPlayer.yOffset;
-		double var9 = par3EntityPlayer.prevPosZ + (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) * var4;
-		boolean var11 = this.bucketContent == Blocks.air;
-		MovingObjectPosition var12 = Helper.getMovingObjectPositionFromPlayer(world, par3EntityPlayer, var11);
+		boolean var11 = this.bucketContents == Blocks.air;
+		MovingObjectPosition mop = Helper.getMovingObjectPositionFromPlayer(world, player, var11);
 
-		if (var12 == null)
+		if (mop == null)
 		{
-			return par1ItemStack;
+			return is;
 		}
 		else
 		{
-			if (var12.typeOfHit == MovingObjectType.BLOCK)
+			FillBucketEvent event = new FillBucketEvent(player, is, world, mop);
+			if (MinecraftForge.EVENT_BUS.post(event))
 			{
-				int i = var12.blockX;
-				int j = var12.blockY;
-				int k = var12.blockZ;
+				return is;
+			}
 
-				if (!world.canMineBlock(par3EntityPlayer, i, j, k))
+			if (event.getResult() == Event.Result.ALLOW)
+			{
+				if (player.capabilities.isCreativeMode)
 				{
-					return par1ItemStack;
+					return is;
 				}
 
-				if (this.bucketContent == Blocks.air)
+				if (--is.stackSize <= 0)
 				{
-					if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, par1ItemStack))
-					{
-						return par1ItemStack;
-					}
+					return event.result;
+				}
 
-					FillBucketEvent event = new FillBucketEvent(par3EntityPlayer, par1ItemStack, world, var12);
-					if (event.isCanceled())
-					{
-						return par1ItemStack;
-					}
+				if (!player.inventory.addItemStackToInventory(event.result))
+				{
+					player.dropPlayerItemWithRandomChoice(event.result, false);
+				}
 
-					if (event.getResult() == Event.Result.ALLOW)
+				return is;
+			}
+			if (mop.typeOfHit == MovingObjectType.BLOCK)
+			{
+				int i = mop.blockX;
+				int j = mop.blockY;
+				int k = mop.blockZ;
+
+				if (!world.canMineBlock(player, i, j, k))
+				{
+					return is;
+				}
+
+				if (this.bucketContents == Blocks.air)
+				{
+					if (!player.canPlayerEdit(i, j, k, mop.sideHit, is))
 					{
-						return event.result;
+						return is;
 					}
 
 					if (world.getBlock(i, j, k) == Blocks.lava && world.getBlockMetadata(i, j, k) == 0)
 					{
 						world.setBlockToAir(i, j, k);
 
-						if (par3EntityPlayer.capabilities.isCreativeMode)
+						if (player.capabilities.isCreativeMode)
 						{
-							return par1ItemStack;
+							return is;
 						}
 
-						if (--par1ItemStack.stackSize <= 0)
+						if (--is.stackSize <= 0)
 						{
 							return new ItemStack(TFCItems.BlueSteelBucketLava);
 						}
 
-						if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.BlueSteelBucketLava)))
+						if (!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.BlueSteelBucketLava)))
 						{
-							par3EntityPlayer.entityDropItem(new ItemStack(TFCItems.BlueSteelBucketLava, 1, 0), 0);
+							player.entityDropItem(new ItemStack(TFCItems.BlueSteelBucketLava, 1, 0), 0);
 						}
 
-						return par1ItemStack;
+						return is;
 					}
 				}
 				else
 				{
-					if (this.bucketContent == Blocks.air)
+					if (this.bucketContents == Blocks.air)
 					{
 						return new ItemStack(TFCItems.BlueSteelBucketEmpty);
 					}
 
-					if (var12.sideHit == 0) --j;
-					if (var12.sideHit == 1) ++j;
-					if (var12.sideHit == 2) --k;
-					if (var12.sideHit == 3) ++k;
-					if (var12.sideHit == 4) --i;
-					if (var12.sideHit == 5) ++i;
+					if (mop.sideHit == 0) --j;
+					if (mop.sideHit == 1) ++j;
+					if (mop.sideHit == 2) --k;
+					if (mop.sideHit == 3) ++k;
+					if (mop.sideHit == 4) --i;
+					if (mop.sideHit == 5) ++i;
 
-					if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, par1ItemStack))
+					if (!player.canPlayerEdit(i, j, k, mop.sideHit, is))
 					{
-						return par1ItemStack;
+						return is;
 					}
 
-					if (this.handleLava(world, var5, var7, var9, i, j, k) && !par3EntityPlayer.capabilities.isCreativeMode)
+					if (this.tryPlaceContainedLiquid(world, i, j, k) && !player.capabilities.isCreativeMode)
 					{
 						return new ItemStack(TFCItems.BlueSteelBucketEmpty);
 					}
 				}
 			}
 		}
-		return par1ItemStack;
+		return is;
 	}
 
-	public boolean handleLava(World par1World, double par2, double par4, double par6, int par8, int par9, int par10)
+	/**
+	 * Attempts to place the liquid contained inside the bucket.
+	 */
+	public boolean tryPlaceContainedLiquid(World world, int x, int y, int z)
 	{
-		if (this.bucketContent == Blocks.air)
-		{
-			return false;
-		}
-		else if (!par1World.isAirBlock(par8, par9, par10) && par1World.getBlock(par8, par9, par10).getMaterial().isSolid())
+		if (this.bucketContents == Blocks.air)
 		{
 			return false;
 		}
 		else
 		{
-			par1World.setBlock(par8, par9, par10, this.bucketContent);
-			return true;
+			Material material = world.getBlock(x, y, z).getMaterial();
+			boolean flag = !material.isSolid();
+
+			if (!world.isAirBlock(x, y, z) && !flag)
+			{
+				return false;
+			}
+			else
+			{
+				if (world.provider.isHellWorld && this.bucketContents == Blocks.flowing_water)
+				{
+					world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+
+					for (int l = 0; l < 8; ++l)
+					{
+						world.spawnParticle("largesmoke", x + Math.random(), y + Math.random(), z + Math.random(), 0.0D, 0.0D, 0.0D);
+					}
+				}
+				else
+				{
+					if (!world.isRemote && flag && !material.isLiquid())
+					{
+						world.func_147480_a(x, y, z, true);
+					}
+
+					world.setBlock(x, y, z, this.bucketContents, 0, 3);
+				}
+
+				return true;
+			}
 		}
 	}
-	
+
 	@Override
 	public EnumItemReach getReach(ItemStack is)
 	{

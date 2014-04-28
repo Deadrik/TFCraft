@@ -1,5 +1,16 @@
 package com.bioxx.tfc.Handlers;
 
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Chunkdata.ChunkDataManager;
@@ -22,16 +33,6 @@ import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
 import com.bioxx.tfc.api.TFCOptions;
 
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -71,7 +72,7 @@ public class EntityLivingHandler
 				//Send update packet from Server to Client
 				AbstractPacket pkt = new PlayerUpdatePacket(player, 0);
 				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
-				
+
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
 					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20, 1));
 				else if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.5f)
@@ -91,8 +92,8 @@ public class EntityLivingHandler
 						for(int k = -2; k < 3; k++)
 						{
 							int lastChunkX = (int)player.posX >> 4;
-							int lastChunkZ = (int)player.posZ >> 4;
-							ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFCOptions.protectionGain);
+						int lastChunkZ = (int)player.posZ >> 4;
+				ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFCOptions.protectionGain);
 						}
 					}
 
@@ -101,25 +102,25 @@ public class EntityLivingHandler
 			}
 			else
 			{
-				PlayerInfo playerclient = PlayerManagerTFC.getInstance().getClientPlayer();
-				//Minecraft.getMinecraft().playerController.getBlockReachDistance()
-				if(player.inventory.getCurrentItem() != null)
+				PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
+
+				if(pi != null && player.inventory.getCurrentItem() != null)
 				{
 					if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)
 					{
-						playerclient.guishowFoodRestoreAmount = true;
-						playerclient.guiFoodRestoreAmount = ((ItemMeal)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
+						pi.guishowFoodRestoreAmount = true;
+						pi.guiFoodRestoreAmount = ((ItemMeal)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
 					}
 					else if(player.inventory.getCurrentItem().getItem() instanceof ItemFoodTFC)
 					{
-						playerclient.guishowFoodRestoreAmount = true;
-						playerclient.guiFoodRestoreAmount = ((ItemFoodTFC)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
+						pi.guishowFoodRestoreAmount = true;
+						pi.guiFoodRestoreAmount = ((ItemFoodTFC)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
 					}
 					else
-						playerclient.guishowFoodRestoreAmount = false;
+						pi.guishowFoodRestoreAmount = false;
 				}
-				else
-					playerclient.guishowFoodRestoreAmount = false;
+				else if(pi != null)
+					pi.guishowFoodRestoreAmount = false;
 			}
 		}
 	}

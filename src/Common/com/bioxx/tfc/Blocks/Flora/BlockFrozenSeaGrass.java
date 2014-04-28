@@ -80,7 +80,7 @@ public class BlockFrozenSeaGrass extends BlockCustomIce implements ITileEntityPr
 		Block block = world.getBlock(i, j, k);
 		if((world.provider) instanceof TFCProvider && !world.isRemote && block == this)
 		{
-			if (!((TFCProvider)(world.provider)).canBlockFreezeTFC(i, j, k, false))
+			if (!((TFCProvider)(world.provider)).tryBlockFreeze(i, j, k, false))
 			{
 				TESeaWeed te;
 				int type = -1;

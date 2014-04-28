@@ -404,7 +404,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = TFCBlocks.SaltWaterStill.getIcon(0, 4);
+					texture = TFCBlocks.SaltWater.getIcon(0, 4);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();
@@ -438,7 +438,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = TFCBlocks.SaltWaterStill.getIcon(0, 4);
+					texture = TFCBlocks.SaltWater.getIcon(0, 4);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();
@@ -471,7 +471,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = TFCBlocks.SaltWaterStill.getIcon(0, 4);
+					texture = TFCBlocks.SaltWater.getIcon(0, 4);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();
@@ -506,7 +506,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = TFCBlocks.SaltWaterStill.getBlockTextureFromSide(0);
+					texture = TFCBlocks.SaltWater.getBlockTextureFromSide(0);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();
@@ -543,7 +543,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = TFCBlocks.SaltWaterStill.getIcon(0, 4);
+					texture = TFCBlocks.SaltWater.getIcon(0, 4);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();
@@ -578,7 +578,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = TFCBlocks.SaltWaterStill.getIcon(0, 4);
+					texture = TFCBlocks.SaltWater.getIcon(0, 4);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();
@@ -613,7 +613,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = TFCBlocks.SaltWaterStill.getBlockTextureFromSide(0);
+					texture = TFCBlocks.SaltWater.getBlockTextureFromSide(0);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 
 					//reassign the uv coords
@@ -648,7 +648,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = TFCBlocks.SaltWaterStill.getBlockTextureFromSide(0);
+					texture = TFCBlocks.SaltWater.getBlockTextureFromSide(0);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();

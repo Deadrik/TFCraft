@@ -2,14 +2,14 @@ package com.bioxx.tfc.WorldGen;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class MapGenRiverRavine extends MapGenBaseTFC
 {
@@ -155,13 +155,13 @@ public class MapGenRiverRavine extends MapGenBaseTFC
 											{
 												if (var49 < 10)
 												{
-													blockArray[var47] = TFCBlocks.LavaFlowing;
+													blockArray[var47] = TFCBlocks.Lava;
 												}
 												else
 												{
 													if(var49 < waterHeight)
 													{
-														blockArray[var47] = TFCBlocks.SaltWaterStill;
+														blockArray[var47] = TFCBlocks.FreshWater;
 														metaArray[var47] = 0;
 													}
 													else

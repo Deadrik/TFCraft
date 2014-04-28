@@ -2,6 +2,17 @@ package com.bioxx.tfc;
 
 import java.util.ArrayList;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.common.util.EnumHelper;
+
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.Alloy;
@@ -83,16 +94,6 @@ import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraftforge.common.util.EnumHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TFCItems
@@ -989,7 +990,7 @@ public class TFCItems
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.potionitem), "potionitem", new ItemCustomPotion().setUnlocalizedName("potion").setTextureName("potion"));
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.lead), "lead", new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFCTools));
 
-//		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.vine), "vine", new ItemColored(Blocks.vine, false));
+		//		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.vine), "vine", new ItemColored(Blocks.vine, false));
 
 		minecartCrate = new ItemCustomMinecart(1).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 		GoldPan = new ItemGoldPan().setUnlocalizedName("GoldPan");
@@ -1380,9 +1381,9 @@ public class TFCItems
 		RedSteelScytheHead = new ItemMiscToolHead().setUnlocalizedName("Red Steel Scythe Blade");
 		SteelScytheHead = new ItemMiscToolHead().setUnlocalizedName("Steel Scythe Blade");
 
-		WoodenBucketEmpty = (new ItemCustomBucket(0)).setUnlocalizedName("Wooden Bucket Empty");
-		WoodenBucketWater = (new ItemCustomBucket(1)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);
-		WoodenBucketSaltWater = (new ItemCustomBucket(1)).setUnlocalizedName("Wooden Bucket Salt Water").setContainerItem(WoodenBucketEmpty);
+		WoodenBucketEmpty = (new ItemCustomBucket(Blocks.air)).setUnlocalizedName("Wooden Bucket Empty");
+		WoodenBucketWater = (new ItemCustomBucket(TFCBlocks.FreshWater)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);
+		WoodenBucketSaltWater = (new ItemCustomBucket(TFCBlocks.SaltWater)).setUnlocalizedName("Wooden Bucket Salt Water").setContainerItem(WoodenBucketEmpty);
 		WoodenBucketMilk = (new ItemCustomBucketMilk()).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty).setCreativeTab(CreativeTabs.tabFood);
 
 		BismuthBronzeKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Bismuth Bronze Knife Blade");
@@ -1431,11 +1432,11 @@ public class TFCItems
 		SinglePlank = new ItemPlank().setUnlocalizedName("SinglePlank");
 
 		RedSteelBucketEmpty = (new ItemCustomRedSteelBucket(Blocks.air)).setUnlocalizedName("Red Steel Bucket Empty");
-		RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFCBlocks.FreshWaterFlowing)).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(RedSteelBucketEmpty);
-		RedSteelBucketSaltWater = (new ItemCustomRedSteelBucket(TFCBlocks.SaltWaterFlowing)).setUnlocalizedName("Red Steel Bucket Salt Water").setContainerItem(RedSteelBucketEmpty);
+		RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFCBlocks.FreshWater)).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(RedSteelBucketEmpty);
+		RedSteelBucketSaltWater = (new ItemCustomRedSteelBucket(TFCBlocks.SaltWater)).setUnlocalizedName("Red Steel Bucket Salt Water").setContainerItem(RedSteelBucketEmpty);
 
 		BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(Blocks.air)).setUnlocalizedName("Blue Steel Bucket Empty");
-		BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFCBlocks.LavaFlowing)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);
+		BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFCBlocks.Lava)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);
 
 		Quern = ((ItemTerra) new ItemTerra().setUnlocalizedName("Quern").setMaxDamage(250)).setSize(EnumSize.MEDIUM).setWeight(EnumWeight.HEAVY);
 		FlintSteel = new ItemFlintSteel().setUnlocalizedName("flintAndSteel").setMaxDamage(200).setTextureName("flint_and_steel");
@@ -1476,8 +1477,9 @@ public class TFCItems
 		SpindleHead = new ItemPotteryBase().setMetaNames(new String[]{"Clay Spindle", "Spindle Head"}).setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCUnfinished);
 		StoneBrick = (new ItemStoneBrick().setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
 		Mortar = new ItemTerra().setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
-		Limewater = new ItemCustomBucket(2).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
-		Vinegar = new ItemCustomBucket(12).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.tabFood);
+		//FIXME these buckets need proper forge fluid implementation
+		Limewater = new ItemCustomBucket(Blocks.air).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
+		Vinegar = new ItemCustomBucket(Blocks.air).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.tabFood);
 		Hide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		SoakedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		ScrapedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFCMaterials);
@@ -2034,7 +2036,7 @@ public class TFCItems
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.leather_helmet), "leather_chestplate", new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 1, ArmorMaterial.CLOTH, 100,2).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate"));
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.leather_helmet), "leather_leggings", new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 2, ArmorMaterial.CLOTH, 100,1).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings"));
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.leather_helmet), "leather_boots", new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 3, ArmorMaterial.CLOTH, 100,0).setUnlocalizedName("bootsCloth").setTextureName("leather_boots"));
-		
+
 		Quiver = new ItemQuiver(Armor.LeatherQuiver, proxy.getArmorRenderID("leather"), 4, ArmorMaterial.IRON, 0,-1).setUnlocalizedName("Quiver");
 	}
 

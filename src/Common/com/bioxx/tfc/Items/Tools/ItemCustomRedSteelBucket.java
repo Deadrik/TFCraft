@@ -1,13 +1,5 @@
 package com.bioxx.tfc.Items.Tools;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.Enums.EnumItemReach;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Util.Helper;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,6 +10,15 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Util.Helper;
+
 import cpw.mods.fml.common.eventhandler.Event;
 
 public class ItemCustomRedSteelBucket extends ItemTerra
@@ -101,7 +102,7 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 						return event.result;
 					}
 
-					if (b == TFCBlocks.SaltWaterStill && meta == 0)
+					if (b == TFCBlocks.SaltWater && meta == 0)
 					{
 						world.setBlockToAir(i, j, k);
 
@@ -122,7 +123,7 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 
 						return par1ItemStack;
 					}
-					else if ((b == TFCBlocks.FreshWaterStill || b == TFCBlocks.HotWaterStill) && meta == 0)
+					else if ((b == TFCBlocks.FreshWater || b == TFCBlocks.HotWater) && meta == 0)
 					{
 						world.setBlockToAir(i, j, k);
 
@@ -183,17 +184,17 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 		{
 			Material material = par1World.getBlock(par8, par9, par10).getMaterial();
 			boolean flag = !material.isSolid();
-			
+
 			if (!par1World.isAirBlock(par8, par9, par10) && !flag)
 			{
 				return false;
 			}
 			else
 			{
-				if (par1World.provider.isHellWorld && this.bucketContent == TFCBlocks.SaltWaterFlowing)
+				if (par1World.provider.isHellWorld && this.bucketContent == TFCBlocks.SaltWater)
 				{
 					par1World.playSoundEffect(par2 + 0.5D, par4 + 0.5D, par6 + 0.5D, "random.fizz", 0.5F, 2.6F + (par1World.rand.nextFloat() - par1World.rand.nextFloat()) * 0.8F);
-	
+
 					for (int var11 = 0; var11 < 8; ++var11)
 					{
 						par1World.spawnParticle("largesmoke", par8 + Math.random(), par9 + Math.random(), par10 + Math.random(), 0.0D, 0.0D, 0.0D);
@@ -207,7 +208,7 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 					//}
 					par1World.setBlock(par8, par9, par10, this.bucketContent, 0, 3);
 				}
-	
+
 				return true;
 			}
 		}

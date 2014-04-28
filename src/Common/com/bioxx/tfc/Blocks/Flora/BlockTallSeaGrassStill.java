@@ -3,13 +3,6 @@ package com.bioxx.tfc.Blocks.Flora;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomStationary;
-import com.bioxx.tfc.Core.ColorizerFoliageTFC;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TESeaWeed;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -22,18 +15,25 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.ColorizerFoliageTFC;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TileEntities.TESeaWeed;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockTallSeaGrassStill extends BlockCustomStationary implements ITileEntityProvider
+public class BlockTallSeaGrassStill extends Block implements ITileEntityProvider
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon pondWeed;
 	private IIcon seaWeed;
-	
+
 	public BlockTallSeaGrassStill()
 	{
-		super(Material.water);
+		super( Material.water);
 		float var3 = 0.5F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 1.0F, 0.5F + var3);
 	}
@@ -44,25 +44,14 @@ public class BlockTallSeaGrassStill extends BlockCustomStationary implements ITi
 	{
 		return 16777215;
 	}
-	
-	@Override
-	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
-		Material mat = world.getBlock(i,j,k).getMaterial();
-		TESeaWeed te = (TESeaWeed)(world.getTileEntity(i,j,k));
-		int type = -1;
-		if(te!=null)
-			type = te.getType();
-		if(mat == Material.water)
-			world.setBlock(i,j,k, TFCBlocks.SeaGrassFrozen,type,1);
-	}
 
-//	@Override
-//	public float getBlockBrightness(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-//	{
-//		float var5 = par1IBlockAccess.getBlock(par2, par3, par4).getLightValue();
-//		float var6 = par1IBlockAccess.getBlock(par2, par3+1, par4).getLightValue();
-//		return var5 > var6 ? var5 : var6;
-//	}
+	//	@Override
+	//	public float getBlockBrightness(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	//	{
+	//		float var5 = par1IBlockAccess.getBlock(par2, par3, par4).getLightValue();
+	//		float var6 = par1IBlockAccess.getBlock(par2, par3+1, par4).getLightValue();
+	//		return var5 > var6 ? var5 : var6;
+	//	}
 
 	@Override
 	public int getMixedBrightnessForBlock(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
@@ -142,9 +131,9 @@ public class BlockTallSeaGrassStill extends BlockCustomStationary implements ITi
 		if(world.isAirBlock(i, j, k)){
 			if(te != null){
 				if(type == 1 || type == 2)
-					world.setBlock(i, j, k, TFCBlocks.FreshWaterStill, 0, 1);
+					world.setBlock(i, j, k, TFCBlocks.FreshWater, 0, 1);
 				else if(type==0)
-					world.setBlock(i, j, k, TFCBlocks.SaltWaterStill, 0, 1);
+					world.setBlock(i, j, k, TFCBlocks.SaltWater, 0, 1);
 			}
 		}
 	}
@@ -194,25 +183,6 @@ public class BlockTallSeaGrassStill extends BlockCustomStationary implements ITi
 		return  a &&
 				b &&
 				c;
-	}
-
-	@Override
-	protected void setNotStationary(World world, int i, int j, int k)
-	{
-		int var5 = world.getBlockMetadata(i, j, k);
-		TESeaWeed tes;
-		TileEntity te = world.getTileEntity(i,j,k);
-		if(te != null && te instanceof TESeaWeed)
-		{
-			tes = (TESeaWeed) te;
-			int type = tes.getType();
-			world.setBlock(i, j, k, TFCBlocks.SeaGrassFlowing, var5, 0x2);
-			//world.setBlockToAir(i, j, k);
-			//this.breakBlock(world, i, j, k, var5, this.blockID);
-			tes = (TESeaWeed)world.getTileEntity(i, j, k);
-			tes.setType(type);
-			world.scheduleBlockUpdate(i, j, k, TFCBlocks.SeaGrassFlowing, this.tickRate(world));
-		}
 	}
 
 	@Override
@@ -300,6 +270,7 @@ public class BlockTallSeaGrassStill extends BlockCustomStationary implements ITi
 	 * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
 	 * their own) Args: x, y, z, neighbor blockID
 	 */
+	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5)
 	{
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
@@ -309,6 +280,7 @@ public class BlockTallSeaGrassStill extends BlockCustomStationary implements ITi
 	/**
 	 * Ticks the block if it's been scheduled
 	 */
+	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		this.checkFlowerChange(par1World, par2, par3, par4);
@@ -346,7 +318,7 @@ public class BlockTallSeaGrassStill extends BlockCustomStationary implements ITi
 	@Override
 	public IIcon getIcon(int par1, int par2)
 	{
-		return TFCBlocks.FreshWaterFlowing.getIcon(par1, par2);//Block.waterMoving.getIcon(0,0);
+		return TFCBlocks.FreshWater.getIcon(par1, par2);//Block.waterMoving.getIcon(0,0);
 	}
 
 	@Override

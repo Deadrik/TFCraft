@@ -1,22 +1,22 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import java.util.Random;
-
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFlowing;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
+
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLiquid;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockFreshWaterFlowing extends BlockCustomFlowing
+public class BlockFreshWater extends BlockCustomLiquid
 {
-	public BlockFreshWaterFlowing()
+	public BlockFreshWater(Fluid fluid)
 	{
-		super(Material.water);
+		super(fluid, Material.water);
 	}
 
 	@Override
@@ -38,11 +38,5 @@ public class BlockFreshWaterFlowing extends BlockCustomFlowing
 	{
 		//TODO break a frozen block back into fresh water flowing block
 		super.breakBlock(world, i, j, k, block, l);
-	}
-
-	@Override
-	protected void setFreezeBlock(World world, int i, int j, int k, Random rand)
-	{
-		//TODO turn into a fresh flowing water ice block
 	}
 }

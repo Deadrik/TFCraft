@@ -2,23 +2,24 @@ package com.bioxx.tfc.Blocks.Terrain;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.Effects.GasFX;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Effects.GasFX;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockHotWaterStill extends BlockFreshWaterStill
+public class BlockHotWater extends BlockFreshWater
 {
-	public BlockHotWaterStill()
+	public BlockHotWater(Fluid fluid)
 	{
-		super();
+		super(fluid);
 	}
 
 	@Override
@@ -29,20 +30,12 @@ public class BlockHotWaterStill extends BlockFreshWaterStill
 	}
 
 	@Override
-	protected void setFreezeBlock(World world, int i, int j, int k, Random rand){
-		/*Material mat = world.getBlockMaterial(i,j,k);
-		if(mat == Material.water){
-			world.setBlock(i,j,k, Block.ice.blockID,1,1);
-		}*/
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
 		if(world.isAirBlock(i-1, j, k) || world.isAirBlock(i+1, j, k) || 
-			world.isAirBlock(i, j, k-1) || world.isAirBlock(i, j, k+1) || 
-			world.isAirBlock(i, j+1, k))
+				world.isAirBlock(i, j, k-1) || world.isAirBlock(i, j, k+1) || 
+				world.isAirBlock(i, j+1, k))
 			;
 		else return;
 
@@ -73,11 +66,7 @@ public class BlockHotWaterStill extends BlockFreshWaterStill
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		this.theIcon = new IIcon[] {registerer.registerIcon(Reference.ModID+":water_still"), registerer.registerIcon(Reference.ModID+":water_flow")};
-		TFC_Textures.GasFXIcon = registerer.registerIcon(Reference.ModID + ":" + "Steam");
-		TFC_Textures.GuiInventory = registerer.registerIcon(Reference.ModID + ":" + "button_inv");
-		TFC_Textures.GuiSkills = registerer.registerIcon(Reference.ModID + ":" + "button_skills");
-		TFC_Textures.GuiCalendar = registerer.registerIcon(Reference.ModID + ":" + "button_calendar");
-		TFC_Textures.GuiHealth = registerer.registerIcon(Reference.ModID + ":" + "button_health");
+		icons = new IIcon[]{registerer.registerIcon(Reference.ModID+":water_still"),registerer.registerIcon(Reference.ModID+":water_still"), registerer.registerIcon(Reference.ModID+":water_flow")};
+		this.getFluid().setIcons(registerer.registerIcon(Reference.ModID+":water_still"), registerer.registerIcon(Reference.ModID+":water_flow"));
 	}
 }

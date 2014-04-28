@@ -2,11 +2,12 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+
+import com.bioxx.tfc.TFCBlocks;
+
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenFissureCluster implements IWorldGenerator
@@ -14,7 +15,7 @@ public class WorldGenFissureCluster implements IWorldGenerator
 	Random rand;
 	int waterRarity = 150;
 
-	WorldGenFissure fissureGenWater = new WorldGenFissure(TFCBlocks.FreshWaterStill);
+	WorldGenFissure fissureGenWater = new WorldGenFissure(TFCBlocks.FreshWater);
 	WorldGenFissure fissureGenLava = new WorldGenFissure(Blocks.lava);
 	WorldGenFissure fissureGenAir = new WorldGenFissure(null);
 

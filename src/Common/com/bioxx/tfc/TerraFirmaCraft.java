@@ -97,6 +97,9 @@ public class TerraFirmaCraft
 
 		proxy.registerTickHandler();
 
+		// Register Liquids
+		TFC_Fluids.register();
+
 		TFCBlocks.LoadBlocks();
 		TFCBlocks.RegisterBlocks();
 		loadOre();
@@ -122,8 +125,7 @@ public class TerraFirmaCraft
 		//Load Items
 		TFCItems.Setup();
 
-		// Register Liquids
-		TFC_Fluids.register();
+
 
 		// Register Gui Handler
 		proxy.registerGuiHandler();

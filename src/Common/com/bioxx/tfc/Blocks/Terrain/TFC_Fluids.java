@@ -1,14 +1,15 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.TerraFirmaCraft;
-
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.TerraFirmaCraft;
 
 public class TFC_Fluids
 {
@@ -19,8 +20,8 @@ public class TFC_Fluids
 		{
 			return StatCollector.translateToLocal("tile.Salt Water.name");
 		}
-	}.setBlock(TFCBlocks.SaltWaterStill).setUnlocalizedName(TFCBlocks.SaltWaterStill.getUnlocalizedName());
-	
+	};
+
 	public static final Fluid FRESHWATER = new Fluid("freshwater")
 	{
 		@Override
@@ -28,7 +29,7 @@ public class TFC_Fluids
 		{
 			return StatCollector.translateToLocal("tile.Fresh Water.name");
 		}
-	}.setBlock(TFCBlocks.FreshWaterStill).setUnlocalizedName(TFCBlocks.FreshWaterStill.getUnlocalizedName());
+	};
 
 	public static final Fluid HOTWATER = new Fluid("hotwater")
 	{
@@ -37,10 +38,18 @@ public class TFC_Fluids
 		{
 			return StatCollector.translateToLocal("tile.Hot Water.name");
 		}
-	}.setBlock(TFCBlocks.HotWaterStill).setUnlocalizedName(TFCBlocks.HotWaterStill.getUnlocalizedName()).setTemperature(372/*Kelvin*/);
+	}.setTemperature(372/*Kelvin*/);
+
+	public static final Fluid LAVA = new Fluid("lavatfc") {
+		@Override
+		public String getLocalizedName() {
+			return StatCollector.translateToLocal("tile.lava.name");
+		}
+	}.setLuminosity(15).setDensity(3000).setViscosity(6000).setTemperature(1300).setUnlocalizedName(Blocks.lava.getUnlocalizedName());
 
 	public static void register()
 	{
+		FluidRegistry.registerFluid(LAVA);
 		FluidRegistry.registerFluid(SALTWATER);
 		FluidRegistry.registerFluid(FRESHWATER);
 		FluidRegistry.registerFluid(HOTWATER);
@@ -48,7 +57,7 @@ public class TFC_Fluids
 
 	public static void registerFluidContainers()
 	{
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.LAVA, new ItemStack(TFCItems.BlueSteelBucketLava), new ItemStack(TFCItems.BlueSteelBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(LAVA.getName()), new ItemStack(TFCItems.BlueSteelBucketLava), new ItemStack(TFCItems.BlueSteelBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(FRESHWATER.getName()), new ItemStack(TFCItems.RedSteelBucketWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(SALTWATER.getName()), new ItemStack(TFCItems.RedSteelBucketSaltWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(FRESHWATER.getName()), new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty));
@@ -57,8 +66,9 @@ public class TFC_Fluids
 
 	public static void registerFluidIcons()
 	{
-		TerraFirmaCraft.proxy.registerFluidIcons(SALTWATER, TFCBlocks.SaltWaterStill);
-		TerraFirmaCraft.proxy.registerFluidIcons(FRESHWATER, TFCBlocks.FreshWaterStill);
-		TerraFirmaCraft.proxy.registerFluidIcons(HOTWATER, TFCBlocks.HotWaterStill);
+		TerraFirmaCraft.proxy.registerFluidIcons(LAVA, TFCBlocks.Lava);
+		TerraFirmaCraft.proxy.registerFluidIcons(SALTWATER, TFCBlocks.SaltWater);
+		TerraFirmaCraft.proxy.registerFluidIcons(FRESHWATER, TFCBlocks.FreshWater);
+		TerraFirmaCraft.proxy.registerFluidIcons(HOTWATER, TFCBlocks.HotWater);
 	}
 }

@@ -2,14 +2,14 @@ package com.bioxx.tfc.api.Util;
 
 import java.lang.reflect.Field;
 
-import com.bioxx.tfc.api.ISize;
-import com.bioxx.tfc.api.Enums.EnumItemReach;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.api.ISize;
+import com.bioxx.tfc.api.Enums.EnumItemReach;
 
 
 public class Helper {
@@ -66,54 +66,6 @@ public class Helper {
 	public static float clamp_float(float par0, float par1, float par2)
 	{
 		return par0 < par1 ? par1 : (par0 > par2 ? par2 : par0);
-	}
-
-	private static Field field_modifiers = null;
-	public static void setPrivateValue(Class var0, Object var1, int var2, int var3) throws IllegalArgumentException, SecurityException, NoSuchFieldException
-	{
-		try
-		{
-			Field var4 = var0.getDeclaredFields()[var2];
-			var4.setAccessible(true);
-			var4.set(var1, var3);
-		}
-		catch (IllegalAccessException var6)
-		{
-			System.out.println("setPrivateValue Error:" + var6.getMessage());
-		}
-	}
-
-	public static void setPrivateValue(Class var0, Object var1, int var2, float var3) throws IllegalArgumentException, SecurityException, NoSuchFieldException
-	{
-		try
-		{
-			Field var4 = var0.getDeclaredFields()[var2];
-			var4.setAccessible(true);
-			var4.set(var1, var3);
-		}
-		catch (IllegalAccessException var6)
-		{
-			System.out.println("setPrivateValue Error:" + var6.getMessage());
-		}
-	}
-
-	public static void setPrivateValue(Class var0, Object var1, String var2, Object var3) throws IllegalArgumentException, SecurityException, NoSuchFieldException
-	{
-		try
-		{
-			Field var4 = var0.getDeclaredField(var2);
-			int var5 = field_modifiers.getInt(var4);
-
-			if ((var5 & 16) != 0)
-				field_modifiers.setInt(var4, var5 & -17);
-
-			var4.setAccessible(true);
-			var4.set(var1, var3);
-		}
-		catch (IllegalAccessException var6)
-		{
-			System.out.println("setPrivateValue Error:" + var6.getMessage());
-		}
 	}
 
 	public static float roundNumber(float input, float rounding)

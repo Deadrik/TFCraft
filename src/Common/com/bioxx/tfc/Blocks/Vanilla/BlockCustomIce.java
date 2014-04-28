@@ -2,12 +2,6 @@ package com.bioxx.tfc.Blocks.Vanilla;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.WorldGen.TFCProvider;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockIce;
 import net.minecraft.block.material.Material;
@@ -20,6 +14,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.WorldGen.TFCProvider;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -140,9 +141,9 @@ public class BlockCustomIce extends BlockIce
 			return block;
 
 		switch(meta){
-		case 0: return moving ? TFCBlocks.SaltWaterFlowing : TFCBlocks.SaltWaterStill;
-		case 1: return moving ? TFCBlocks.FreshWaterFlowing : TFCBlocks.FreshWaterStill;
-		default: return TFCBlocks.SaltWaterStill;
+		case 0: return TFCBlocks.SaltWater;
+		case 1: return TFCBlocks.FreshWater;
+		default: return TFCBlocks.SaltWater;
 		}
 	}
 
@@ -199,7 +200,7 @@ public class BlockCustomIce extends BlockIce
 					world.setBlock(i, j, k, getBlockMelt(world,i,j,k,true), 0, 2);
 				else
 					world.setBlock(i, j, k, getBlockMelt(world,i,j,k,false), 0, 2);
-				*/
+				 */
 			}
 		}
 	}

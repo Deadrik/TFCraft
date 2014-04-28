@@ -467,49 +467,35 @@ public class TFC_Core
 
 	public static boolean isSaltWater(Block block)
 	{
-		if(block == TFCBlocks.SaltWaterStill || block == TFCBlocks.SaltWaterFlowing)
+		if(block == TFCBlocks.SaltWater)
 			return true;
 		return false;
 	}
 
 	public static boolean isSaltWaterIncludeIce(Block block, int meta, Material mat)
 	{
-		if(block == TFCBlocks.SaltWaterStill || block == TFCBlocks.SaltWaterFlowing || (mat == Material.ice && meta == 0))
+		if(block == TFCBlocks.SaltWater || (mat == Material.ice && meta == 0))
 			return true;
 		return false;
 	}
 
 	public static boolean isFreshWater(Block block)
 	{
-		if(block == TFCBlocks.FreshWaterFlowing || block == TFCBlocks.FreshWaterStill)
+		if(block == TFCBlocks.FreshWater)
 			return true;
 		return false;
 	}
 
 	public static boolean isFreshWaterIncludeIce(Block block, int meta)
 	{
-		if(block == TFCBlocks.FreshWaterFlowing || block == TFCBlocks.FreshWaterStill || (block == Blocks.ice && meta != 0))
+		if(block == TFCBlocks.FreshWater || (block == Blocks.ice && meta != 0))
 			return true;
 		return false;
 	}
 
 	public static boolean isFreshWaterIncludeIce(Block block, int meta, Material mat)
 	{
-		if(block == TFCBlocks.FreshWaterFlowing || block == TFCBlocks.FreshWaterStill || (mat == Material.ice && meta != 0))
-			return true;
-		return false;
-	}
-
-	public static boolean isWaterStill(Block block)
-	{
-		if(block == TFCBlocks.SaltWaterStill || block == TFCBlocks.FreshWaterStill)
-			return true;
-		return false;
-	}
-
-	public static boolean isWaterMoving(Block block)
-	{
-		if(block == TFCBlocks.FreshWaterFlowing || block == TFCBlocks.SaltWaterFlowing)
+		if(block == TFCBlocks.FreshWater || (mat == Material.ice && meta != 0))
 			return true;
 		return false;
 	}

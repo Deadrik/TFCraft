@@ -56,15 +56,12 @@ import com.bioxx.tfc.Blocks.Flora.BlockLogHoriz;
 import com.bioxx.tfc.Blocks.Flora.BlockLogHoriz2;
 import com.bioxx.tfc.Blocks.Flora.BlockLogVert;
 import com.bioxx.tfc.Blocks.Flora.BlockLogVert2;
-import com.bioxx.tfc.Blocks.Flora.BlockTallSeaGrassFlowing;
 import com.bioxx.tfc.Blocks.Flora.BlockTallSeaGrassStill;
 import com.bioxx.tfc.Blocks.Terrain.BlockDryGrass;
 import com.bioxx.tfc.Blocks.Terrain.BlockFlowers;
-import com.bioxx.tfc.Blocks.Terrain.BlockFreshWaterFlowing;
-import com.bioxx.tfc.Blocks.Terrain.BlockFreshWaterStill;
+import com.bioxx.tfc.Blocks.Terrain.BlockFreshWater;
 import com.bioxx.tfc.Blocks.Terrain.BlockFungi;
-import com.bioxx.tfc.Blocks.Terrain.BlockHotWaterFlowing;
-import com.bioxx.tfc.Blocks.Terrain.BlockHotWaterStill;
+import com.bioxx.tfc.Blocks.Terrain.BlockHotWater;
 import com.bioxx.tfc.Blocks.Terrain.BlockIgEx;
 import com.bioxx.tfc.Blocks.Terrain.BlockIgExBrick;
 import com.bioxx.tfc.Blocks.Terrain.BlockIgExCobble;
@@ -86,6 +83,7 @@ import com.bioxx.tfc.Blocks.Terrain.BlockSed;
 import com.bioxx.tfc.Blocks.Terrain.BlockSedBrick;
 import com.bioxx.tfc.Blocks.Terrain.BlockSedCobble;
 import com.bioxx.tfc.Blocks.Terrain.BlockSedSmooth;
+import com.bioxx.tfc.Blocks.Terrain.TFC_Fluids;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomBed;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomBookshelf;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomButtonWood;
@@ -95,17 +93,16 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFence;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFence2;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFenceGate;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFenceGate2;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFlowing;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomIce;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLeaves;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLeaves2;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLilyPad;
+import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLiquid;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomPumpkin;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomReed;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomSapling;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomSapling2;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomSnow;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomStationary;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomTallGrass;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomVine;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomWall;
@@ -301,18 +298,13 @@ public class TFCBlocks
 	public static Block SteamPipe;
 	public static Block SteamPipeValve;
 
-	public static Block SaltWaterStill;
-	public static Block SaltWaterFlowing;
-	public static Block FreshWaterStill;
-	public static Block FreshWaterFlowing;
-	public static Block HotWaterStill;
-	public static Block HotWaterFlowing;
-
-	public static Block LavaFlowing;
+	public static Block SaltWater;
+	public static Block FreshWater;
+	public static Block HotWater;
+	public static Block Lava;
 
 	public static Block SeaGrassStill;
 	public static Block SeaGrassFrozen;
-	public static Block SeaGrassFlowing;
 
 	public static Block Bookshelf;
 	public static Block Torch;
@@ -434,18 +426,14 @@ public class TFCBlocks
 		GameRegistry.registerBlock(SteamPipe, com.bioxx.tfc.Items.ItemBlocks.ItemPipe.class, "BasicPipe");
 		GameRegistry.registerBlock(SteamPipeValve, com.bioxx.tfc.Items.ItemBlocks.ItemPipeValve.class, "ValvePipe");
 
-		GameRegistry.registerBlock(SaltWaterStill, "SaltWaterStill");
-		GameRegistry.registerBlock(SaltWaterFlowing, "SaltWaterFlowing");
-		GameRegistry.registerBlock(FreshWaterStill, "FreshWaterStill");
-		GameRegistry.registerBlock(FreshWaterFlowing, "FreshWaterFlowing");
-		GameRegistry.registerBlock(HotWaterStill, "HotWaterStill");
-		GameRegistry.registerBlock(HotWaterFlowing, "HotWaterFlowing");
+		GameRegistry.registerBlock(SaltWater, "SaltWater");
+		GameRegistry.registerBlock(FreshWater, "FreshWater");
+		GameRegistry.registerBlock(HotWater, "HotWater");
 
-		GameRegistry.registerBlock(LavaFlowing, "LavaFlowing");
+		GameRegistry.registerBlock(Lava, "Lava");
 
 		GameRegistry.registerBlock(SeaGrassStill, "SeaGrassStill");
 		GameRegistry.registerBlock(SeaGrassFrozen, "SeaGrassFrozen");
-		GameRegistry.registerBlock(SeaGrassFlowing, "SeaGrassFlowing");
 
 		GameRegistry.registerBlock(FireBrick, "FireBrick");
 		GameRegistry.registerBlock(MetalSheet, "MetalSheet");
@@ -687,18 +675,13 @@ public class TFCBlocks
 		Flowers = new BlockFlowers().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers");
 		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");//.setCreativeTab(CreativeTabs.tabFood);
 
-		SaltWaterFlowing = (new BlockCustomFlowing(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterFlowing");
-		SaltWaterStill = (new BlockCustomStationary(Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWaterStill");
-		FreshWaterFlowing = (new BlockFreshWaterFlowing()).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterFlowing");
-		FreshWaterStill = (new BlockFreshWaterStill()).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWaterStill");
-		HotWaterFlowing = (new BlockHotWaterFlowing()).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWaterFlowing");
-		HotWaterStill = (new BlockHotWaterStill()).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWaterStill");
-
-		LavaFlowing = (new BlockCustomFlowing(Material.lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("LavaFlowing");
+		SaltWater = (new BlockCustomLiquid(TFC_Fluids.SALTWATER, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWater");
+		FreshWater = (new BlockFreshWater(TFC_Fluids.FRESHWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWater");
+		HotWater = (new BlockHotWater(TFC_Fluids.HOTWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWater");
+		Lava = (new BlockCustomLiquid(TFC_Fluids.LAVA, Material.lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("Lava");
 
 		SeaGrassStill = new BlockTallSeaGrassStill().setBlockName("SeaGrassStill").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 		SeaGrassFrozen = (new BlockFrozenSeaGrass()).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("SeaGrassIce");
-		SeaGrassFlowing = new BlockTallSeaGrassFlowing().setBlockName("SeaGrassFlowing").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 
 		FireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);
 		MetalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(8).setResistance(20f);

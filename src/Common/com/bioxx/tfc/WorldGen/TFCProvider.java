@@ -3,12 +3,6 @@ package com.bioxx.tfc.WorldGen;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.TileEntities.TESeaWeed;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -22,6 +16,13 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.client.IRenderHandler;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.TileEntities.TESeaWeed;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -71,24 +72,24 @@ public class TFCProvider extends WorldProvider
 		return 256.0F;
 	}
 
-	@Override
+	/*@Override
 	public TFCBiome getBiomeGenForCoords(int x, int z)
 	{
 		TFCBiome biome = TFCBiome.ocean;
 		try
 		{
 			biome = (TFCBiome) worldObj.getBiomeGenForCoordsBody(x, z);
-			/*if(canSnowAtTemp(x, 145, z))
+			if(canSnowAtTemp(x, 145, z))
 				biome.temperature = 0;
 			else
-				biome.temperature = 0.21f;*/
-		}
-		catch(Exception Ex)
-		{
-			Ex.printStackTrace();
-		}
-		return biome;
-	}
+				biome.temperature = 0.21f;
+}
+catch(Exception Ex)
+{
+	Ex.printStackTrace();
+}
+return biome;
+}*/
 
 	@Override
 	public ChunkCoordinates getRandomizedSpawnPoint()
@@ -169,15 +170,15 @@ public class TFCProvider extends WorldProvider
 
 			if((mat == Material.water || mat == Material.ice) && !salty)
 			{
-				if(id == TFCBlocks.FreshWaterStill && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
+				if(id == TFCBlocks.FreshWater && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
 				{
 					worldObj.setBlock(x, y, z, Blocks.ice, 1, 2);
 				}
-				else if(id == TFCBlocks.SaltWaterStill && meta == 0/* || id == Block.waterMoving.blockID*/)
+				else if(id == TFCBlocks.SaltWater && meta == 0/* || id == Block.waterMoving.blockID*/)
 				{
 					worldObj.setBlock(x, y, z, Blocks.ice, 0, 2);
 				}
-				else if(id == TFCBlocks.SeaGrassStill || id == TFCBlocks.SeaGrassFlowing)
+				else if(id == TFCBlocks.SeaGrassStill)
 				{
 					int type = -1;
 					if(te !=null)
@@ -211,11 +212,11 @@ public class TFCProvider extends WorldProvider
 				{
 					if((meta & 1) == 0)
 					{
-						worldObj.setBlock(x, y, z, TFCBlocks.SaltWaterStill, 0, 3);
+						worldObj.setBlock(x, y, z, TFCBlocks.SaltWater, 0, 3);
 					}
 					else if((meta & 1) == 1)
 					{
-						worldObj.setBlock(x, y, z, TFCBlocks.FreshWaterStill, 0, 3);
+						worldObj.setBlock(x, y, z, TFCBlocks.FreshWater, 0, 3);
 					}
 				}
 			}
@@ -233,7 +234,7 @@ public class TFCProvider extends WorldProvider
 	}
 
 	//We use this in place of the vanilla method, for the vanilla, it allows us to stop it from doing things we don't like.
-	public boolean canBlockFreezeTFC(int x, int y, int z, boolean byWater)
+	public boolean tryBlockFreeze(int x, int y, int z, boolean byWater)
 	{
 		if (TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
 		{

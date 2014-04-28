@@ -103,7 +103,7 @@ public class BlockCustomLilyPad extends BlockLilyPad
 
 	public boolean canThisPlantGrowOnThisBlock(Block par1, int meta)
 	{
-		return TFC_Core.isFreshWaterIncludeIce(par1,meta) && !TFC_Core.isWaterMoving(par1);
+		return TFC_Core.isFreshWaterIncludeIce(par1,meta) && !TFC_Core.isWater(par1);
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class BlockCustomLilyPad extends BlockLilyPad
 	{
 		Block id = par1World.getBlock(par2, par3 - 1, par4);
 		int meta = par1World.getBlockMetadata(par2, par3 - 1, par4);
-		return par3 >= 0 && par3 < 256 ? TFC_Core.isFreshWaterIncludeIce(id, meta) && !TFC_Core.isWaterMoving(id) : false;
+		return par3 >= 0 && par3 < 256 ? TFC_Core.isFreshWaterIncludeIce(id, meta) && !TFC_Core.isWater(id) : false;
 	}
 
 }

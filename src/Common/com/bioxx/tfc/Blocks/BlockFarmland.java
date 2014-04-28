@@ -2,11 +2,6 @@ package com.bioxx.tfc.Blocks;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TileEntities.TileEntityFarmland;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -19,6 +14,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TileEntities.TileEntityFarmland;
+import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -94,7 +95,7 @@ public class BlockFarmland extends BlockContainer
 		}
 		return false;
 	}
-	
+
 	/**
 	 * returns true if there's water nearby (x-4 to x+4, y to y+1, k-4 to k+4)
 	 */
@@ -107,7 +108,7 @@ public class BlockFarmland extends BlockContainer
 				for (int z = k - 4; z <= k + 4; ++z)
 				{
 					Block b = world.getBlock(x, y, z);
-					if (b == TFCBlocks.FreshWaterStill || b == TFCBlocks.FreshWaterFlowing)
+					if (b == TFCBlocks.FreshWater)
 						return true;
 				}
 			}
@@ -124,7 +125,7 @@ public class BlockFarmland extends BlockContainer
 				for (int z = k - 4; z <= k + 4; ++z)
 				{
 					Block b = world.getBlock(x, y, z);
-					if (b == TFCBlocks.SaltWaterStill || b == TFCBlocks.SaltWaterFlowing)
+					if (b == TFCBlocks.SaltWater)
 						return true;
 				}
 			}
