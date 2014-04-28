@@ -1,4 +1,4 @@
-package com.bioxx.tfc.Blocks.Terrain;
+package com.bioxx.tfc.Blocks.Liquids;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -7,7 +7,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
 import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLiquid;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

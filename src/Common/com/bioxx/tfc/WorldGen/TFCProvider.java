@@ -5,11 +5,9 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
@@ -57,13 +55,6 @@ public class TFCProvider extends WorldProvider
 	public int getMoonPhase(long par1)
 	{
 		return (int)(par1 / TFC_Time.dayLength) % 8;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks)
-	{
-		return worldObj.getSkyColorBody(cameraEntity, partialTicks);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.bioxx.tfc.Blocks.Terrain;
+package com.bioxx.tfc.Core;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;

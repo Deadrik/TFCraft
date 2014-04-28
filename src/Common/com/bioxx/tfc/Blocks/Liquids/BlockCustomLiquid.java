@@ -1,4 +1,4 @@
-package com.bioxx.tfc.Blocks.Vanilla;
+package com.bioxx.tfc.Blocks.Liquids;
 
 import java.util.Random;
 
@@ -16,6 +16,7 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLilyPad;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCProvider;
@@ -38,6 +39,13 @@ public class BlockCustomLiquid extends BlockFluidClassic
 		this.setTickRandomly(true);
 		fluidType = fluid;
 		if(mat == Material.lava) setTickRate(20); else setTickRate(3);
+		setupDisplacements();
+
+	}
+
+	protected void setupDisplacements()
+	{
+		displacements.put(TFCBlocks.SeaGrassStill, false);
 	}
 
 	/**

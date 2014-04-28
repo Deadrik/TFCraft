@@ -1,4 +1,4 @@
-package com.bioxx.tfc.Blocks.Terrain;
+package com.bioxx.tfc.Blocks.Liquids;
 
 import java.util.Random;
 

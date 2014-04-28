@@ -12,7 +12,6 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
-import com.bioxx.tfc.Blocks.Terrain.TFC_Fluids;
 import com.bioxx.tfc.Commands.CommandTime;
 import com.bioxx.tfc.Commands.DebugModeCommand;
 import com.bioxx.tfc.Commands.GSPVisualCommand;
@@ -30,6 +29,7 @@ import com.bioxx.tfc.Core.ItemHeat;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Fluids;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.AnvilCraftingHandler;
