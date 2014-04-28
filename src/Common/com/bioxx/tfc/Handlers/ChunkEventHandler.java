@@ -48,7 +48,7 @@ public class ChunkEventHandler
 	@SubscribeEvent
 	public void onUnload(ChunkEvent.Unload event)
 	{
-		//ll if (!event.world.isRemote)
-		ChunkDataManager.removeData(event.getChunk().xPosition, event.getChunk().zPosition);
+		if (!event.world.isRemote)
+			ChunkDataManager.removeData(event.getChunk().xPosition, event.getChunk().zPosition);
 	}
 }

@@ -1,10 +1,11 @@
 package com.bioxx.tfc.Handlers;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.event.world.ChunkDataEvent;
+
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.event.world.ChunkDataEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ChunkDataEventHandler 
@@ -36,19 +37,15 @@ public class ChunkDataEventHandler
 	{
 		if(!event.world.isRemote)
 		{
-			NBTTagCompound eventTag = event.getData();
-			NBTTagCompound levelTag = eventTag.getCompoundTag("Level");
-
-			int x = levelTag.getInteger("xPos");
-			int z = levelTag.getInteger("zPos");
-			ChunkData data = ChunkDataManager.getData(x, z);
+			ChunkData data = ChunkDataManager.getData(event.getChunk().xPosition, event.getChunk().zPosition);
 
 			if(data != null)
 			{
 				NBTTagCompound spawnProtectionTag = data.getTag();
-				eventTag.setTag("Spawn Protection", spawnProtectionTag);
-			} else
-				;//System.out.println("Attempting to save Chunkdata that has already been unloaded.");
+				spawnProtectionTag = new NBTTagCompound();
+				event.getData().setTag("Spawn Protection", spawnProtectionTag);
+			} /*else
+				System.out.println("Attempting to save Chunkdata that has already been unloaded.");*/
 		}
 	}
 }

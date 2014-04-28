@@ -1,8 +1,8 @@
 package com.bioxx.tfc.Chunkdata;
 
-import com.bioxx.tfc.Core.TFC_Time;
-
 import net.minecraft.nbt.NBTTagCompound;
+
+import com.bioxx.tfc.Core.TFC_Time;
 
 public class ChunkData 
 {
@@ -46,7 +46,7 @@ public class ChunkData
 	public NBTTagCompound getTag()
 	{
 		NBTTagCompound tag = new NBTTagCompound();
-		tag.setTag("Spawn Protection", tag);
+
 		tag.setInteger("chunkX", chunkX);
 		tag.setInteger("chunkZ", chunkZ);
 		long visit = (TFC_Time.getTotalTicks() - lastVisited) / TFC_Time.hourLength;
