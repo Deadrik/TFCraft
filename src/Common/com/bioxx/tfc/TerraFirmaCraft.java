@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Set;
 
+import net.minecraft.init.Blocks;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -38,6 +39,7 @@ import com.bioxx.tfc.Handlers.ChunkEventHandler;
 import com.bioxx.tfc.Handlers.CraftingHandler;
 import com.bioxx.tfc.Handlers.EnteringChunkHandler;
 import com.bioxx.tfc.Handlers.EntityDamageHandler;
+import com.bioxx.tfc.Handlers.EntityLivingHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Handlers.PlayerSkillEventHandler;
@@ -46,7 +48,15 @@ import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.WorldGen.TFCProviderHell;
 import com.bioxx.tfc.WorldGen.TFCWorldType;
 import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenCaveDecor;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenFissureCluster;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenForests;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenLargeRock;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenLooseRocks;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenOre;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenPlants;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenSoilPits;
 import com.bioxx.tfc.api.SkillsManager;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
@@ -60,6 +70,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies)
 public class TerraFirmaCraft
@@ -119,7 +130,7 @@ public class TerraFirmaCraft
 
 		if(true)
 		{
-			/*//Register Generators
+			//Register Generators
 			//Underground Lava
 			GameRegistry.registerWorldGenerator(new WorldGenFissure(Blocks.lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
 			//Surface Hotsprings
@@ -130,7 +141,7 @@ public class TerraFirmaCraft
 			GameRegistry.registerWorldGenerator(new WorldGenLooseRocks(), 5);
 			GameRegistry.registerWorldGenerator(new WorldGenSoilPits(), 6);
 			GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
-			GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);*/
+			GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
 
 			TFCWorldType.DEFAULT = new TFCWorldType("TFCDefault");
 			TFCWorldType.FLAT = new TFCWorldType("TFCFlat");
@@ -194,7 +205,7 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
 
 		// Register the Entity Living Update Handler
-		//MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 
 		// Register all the render stuff for the client
 		proxy.registerRenderInformation();
