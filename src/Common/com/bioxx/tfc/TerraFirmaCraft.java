@@ -33,7 +33,10 @@ import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.AnvilCraftingHandler;
 import com.bioxx.tfc.Handlers.ChatListenerTFC;
+import com.bioxx.tfc.Handlers.ChunkDataEventHandler;
+import com.bioxx.tfc.Handlers.ChunkEventHandler;
 import com.bioxx.tfc.Handlers.CraftingHandler;
+import com.bioxx.tfc.Handlers.EnteringChunkHandler;
 import com.bioxx.tfc.Handlers.EntityDamageHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
@@ -178,12 +181,12 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new ChatListenerTFC());
 
 		// Register the Chunk Load/Save Handler
-		//MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
+		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
 
 		// Register the Chunk Data Load/Save Handler
-		//MinecraftForge.EVENT_BUS.register(new ChunkDataEventHandler());
+		MinecraftForge.EVENT_BUS.register(new ChunkDataEventHandler());
 		// Register the Chunk Load/Save Handler
-		//MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
+		MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
 
 		// Register Anvil Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());

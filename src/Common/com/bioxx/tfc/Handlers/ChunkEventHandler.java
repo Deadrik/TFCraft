@@ -2,6 +2,8 @@ package com.bioxx.tfc.Handlers;
 
 import java.util.Random;
 
+import net.minecraftforge.event.world.ChunkEvent;
+
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -9,7 +11,6 @@ import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
 
-import net.minecraftforge.event.world.ChunkEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ChunkEventHandler
@@ -20,7 +21,8 @@ public class ChunkEventHandler
 		if (!event.world.isRemote)
 		{
 			ChunkData cd = ChunkDataManager.getData(event.getChunk().xPosition, event.getChunk().zPosition);
-
+			if(cd== null)
+				return;
 			int month = TFC_Time.getSeasonAdjustedMonth(event.getChunk().zPosition << 4);
 			if (TFC_Time.getYear() > cd.lastSpringGen && month > 1 && month < 6)
 			{
@@ -42,11 +44,11 @@ public class ChunkEventHandler
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onUnload(ChunkEvent.Unload event)
 	{
-		if (!event.world.isRemote)
-			ChunkDataManager.removeData(event.getChunk().xPosition, event.getChunk().zPosition);
+		//ll if (!event.world.isRemote)
+		ChunkDataManager.removeData(event.getChunk().xPosition, event.getChunk().zPosition);
 	}
 }
