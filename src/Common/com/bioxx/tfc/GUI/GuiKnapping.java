@@ -2,7 +2,6 @@ package com.bioxx.tfc.GUI;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -21,14 +20,11 @@ import com.bioxx.tfc.Handlers.Network.KnappingUpdatePacket;
 
 public class GuiKnapping extends GuiContainer
 {
-	private EntityPlayer player;
-
-	public GuiKnapping(InventoryPlayer inventoryplayer,ItemStack is, World world, int x, int y, int z)
+	public GuiKnapping(InventoryPlayer inventoryplayer, ItemStack is, World world, int x, int y, int z)
 	{
 		super(new ContainerSpecialCrafting(inventoryplayer, is, world, x, y, z));
-		player = inventoryplayer.player;
 		this.xSize = 176;
-		this.ySize = 103+PlayerInventory.invYSize;
+		this.ySize = 103 + PlayerInventory.invYSize;
 	}
 
 	@Override
@@ -50,9 +46,10 @@ public class GuiKnapping extends GuiContainer
 		{
 			for (int x = 0; x < 5; x++)
 			{
-				buttonList.add(new GuiKnappingButton(x+(y*5), guiLeft+(x*16)+10, guiTop + (y*16)+12, 16, 16));
-				if(PlayerManagerTFC.getInstance().getClientPlayer().knappingInterface[(y*5)+x]) {
-					resetButton((y*5)+x);
+				buttonList.add(new GuiKnappingButton(x + (y * 5), guiLeft + (x * 16) + 10, guiTop + (y * 16) + 12, 16, 16));
+				if(PlayerManagerTFC.getInstance().getClientPlayer().knappingInterface[(y * 5) + x])
+				{
+					resetButton((y * 5) + x);
 				}
 			}
 		}
@@ -63,12 +60,13 @@ public class GuiKnapping extends GuiContainer
 	{
 		resetButton(guibutton.id);
 		AbstractPacket pkt = new KnappingUpdatePacket(guibutton.id);
-		TerraFirmaCraft.packetPipeline.sendToAll(pkt);
+		TerraFirmaCraft.packetPipeline.sendToServer(pkt);
 	}
 
 	public void resetButton(int id)
 	{
-		if(PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingTypeAlternate == null) {
+		if(PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingTypeAlternate == null)
+		{
 			((GuiKnappingButton) this.buttonList.get(id)).visible = false;
 		}
 		PlayerManagerTFC.getInstance().getClientPlayer().knappingInterface[id] = true;
@@ -84,6 +82,6 @@ public class GuiKnapping extends GuiContainer
 		int h = (height - ySize) / 2;
 		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
 
-		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
+		PlayerInventory.drawInventory(this, width, height, ySize - PlayerInventory.invYSize);
 	}
 }

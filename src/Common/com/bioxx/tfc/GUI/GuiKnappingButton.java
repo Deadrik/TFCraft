@@ -18,7 +18,7 @@ public class GuiKnappingButton extends GuiButton
 	}
 
 	@Override
-	public void drawButton(Minecraft par1Minecraft, int par2, int par3)
+	public void drawButton(Minecraft par1Minecraft, int xPos, int yPos)
 	{
 		if (this.visible)
 		{
@@ -27,11 +27,11 @@ public class GuiKnappingButton extends GuiButton
 				icon = PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingTypeAlternate.getIconIndex();
 			TFC_Core.bindTexture(TextureMap.locationItemsTexture);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.field_146123_n = par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;
+			this.field_146123_n = xPos >= this.xPosition && yPos >= this.yPosition && xPos < this.xPosition + this.width && yPos < this.yPosition + this.height;
 			int k = this.getHoverState(this.field_146123_n);
 			this.drawTexturedModelRectFromIcon(this.xPosition, this.yPosition, icon, this.width, this.height);
 			//this.drawTexturedModalRect(this.xPosition + this.width / 2, this.yPosition, 200 - this.width / 2, 46 + k * 20, this.width / 2, this.height);
-			this.mouseDragged(par1Minecraft, par2, par3);
+			this.mouseDragged(par1Minecraft, xPos, yPos);
 			int l = 14737632;
 
 			if (!this.enabled)

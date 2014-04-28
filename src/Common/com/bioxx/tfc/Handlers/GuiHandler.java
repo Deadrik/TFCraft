@@ -2,6 +2,11 @@ package com.bioxx.tfc.Handlers;
 
 import java.util.List;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ContainerPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.Containers.ContainerAnvil;
 import com.bioxx.tfc.Containers.ContainerBarrel;
 import com.bioxx.tfc.Containers.ContainerBlastFurnace;
@@ -39,10 +44,6 @@ import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ContainerPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler
