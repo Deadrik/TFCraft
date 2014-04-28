@@ -2,18 +2,6 @@ package com.bioxx.tfc.Blocks.Flora;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.Recipes;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Food.FloraIndex;
-import com.bioxx.tfc.Food.FloraManager;
-import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -27,10 +15,22 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.Recipes;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Food.FloraIndex;
+import com.bioxx.tfc.Food.FloraManager;
+import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
+import com.bioxx.tfc.api.Constant.Global;
+
 public class BlockFruitWood extends BlockTerraContainer
 {
-	String[] WoodNames = {"Red Apple","Banana","Orange","Green Apple","Lemon","Olive","Cherry","Peach","Plum"};
-	IIcon[] icons = new IIcon[9];
+	private IIcon[] icons = new IIcon[Global.FRUIT_META_NAMES.length];
 
 	public BlockFruitWood()
 	{
@@ -60,7 +60,7 @@ public class BlockFruitWood extends BlockTerraContainer
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < 9; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/"+WoodNames[i]+" Wood");
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + Global.FRUIT_META_NAMES[i] + " Wood");
 	}
 
 	@Override
@@ -345,16 +345,15 @@ public class BlockFruitWood extends BlockTerraContainer
 	{
 		switch(meta)
 		{
-		case 0: return "red apple";
-		case 1: return "banana";
-		case 2: return "orange";
-		case 3: return "green apple";
-		case 4: return "lemon";
-		case 5: return "olive";
-		case 6: return "cherry";
-		case 7: return "peach";
-		case 8: return "plum";
-		case 9: return "cacao";
+		case 0: return Global.FRUIT_META_NAMES[0];
+		case 1: return Global.FRUIT_META_NAMES[1];
+		case 2: return Global.FRUIT_META_NAMES[2];
+		case 3: return Global.FRUIT_META_NAMES[3];
+		case 4: return Global.FRUIT_META_NAMES[4];
+		case 5: return Global.FRUIT_META_NAMES[5];
+		case 6: return Global.FRUIT_META_NAMES[6];
+		case 7: return Global.FRUIT_META_NAMES[7];
+		case 8: return Global.FRUIT_META_NAMES[8];
 		}
 		return "";
 	}

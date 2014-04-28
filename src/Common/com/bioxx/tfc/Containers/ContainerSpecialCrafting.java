@@ -1,9 +1,5 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.Containers.Slots.SlotCraftingMetal;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
@@ -13,14 +9,17 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Containers.Slots.SlotCraftingMetal;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
+
 public class ContainerSpecialCrafting extends ContainerTFC
 {
-	/** The crafting matrix inventory (3x3). */
+	/** The crafting matrix inventory (5x5).
+	 *  Used for knapping and leather working */
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 5, 5);
 
-	private EntityPlayer EP;
 	private SlotCraftingMetal SCM;
-	private boolean firstTime = true;
 
 	/** The crafting result, size 1. */
 	public IInventory craftResult = new InventoryCraftResult();
@@ -36,11 +35,7 @@ public class ContainerSpecialCrafting extends ContainerTFC
 
 		this.worldObj = world;
 
-		int var6;
-		int var7;
-
-		EP = inventoryplayer.player;
-		SCM = new SlotCraftingMetal(this,inventoryplayer.player, craftMatrix, craftResult,0, 128, 44);
+		SCM = new SlotCraftingMetal(this, inventoryplayer.player, craftMatrix, craftResult, 0, 128, 44);
 		addSlotToContainer(SCM);
 
 		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 108, false, true);
@@ -54,9 +49,9 @@ public class ContainerSpecialCrafting extends ContainerTFC
 		super.onContainerClosed(player);
 		if (!this.worldObj.isRemote)
 		{
-			ItemStack itemstack2 = this.craftResult.getStackInSlotOnClosing(0);
-			if (itemstack2 != null)
-				player.dropItem(itemstack2.getItem(), itemstack2.stackSize);
+			ItemStack is = this.craftResult.getStackInSlotOnClosing(0);
+			if (is != null)
+				player.dropItem(is.getItem(), is.stackSize);
 		}
 	}
 
@@ -64,7 +59,7 @@ public class ContainerSpecialCrafting extends ContainerTFC
 	 * Callback for when the crafting matrix is changed.
 	 */
 	@Override
-	public void onCraftMatrixChanged(IInventory par1IInventory)
+	public void onCraftMatrixChanged(IInventory ii)
 	{
 		this.craftResult.setInventorySlotContents(0, CraftingManagerTFC.getInstance().findMatchingRecipe(this.craftMatrix, worldObj));
 	}
@@ -76,46 +71,46 @@ public class ContainerSpecialCrafting extends ContainerTFC
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex)
 	{
-		ItemStack var2 = null;
+		ItemStack isTemp = null;
 		Slot grabbedSlot = (Slot)this.inventorySlots.get(clickedIndex);
 
 		if(grabbedSlot != null && grabbedSlot.getHasStack())
 		{
-			ItemStack var4 = grabbedSlot.getStack();
-			var2 = var4.copy();
+			ItemStack isFromSlot = grabbedSlot.getStack();
+			isTemp = isFromSlot.copy();
 
 			if(clickedIndex < 10)
 			{
-				if (!this.mergeItemStack(var4, 10, 36, true))
+				if (!this.mergeItemStack(isFromSlot, 10, 36, true))
 					return null;
 			}
 			else if(clickedIndex >= 10 && clickedIndex < 37)
 			{
-				if (!this.mergeItemStack(var4, 0, 9, true))
+				if (!this.mergeItemStack(isFromSlot, 0, 9, true))
 					return null;
 			}
 			else if(clickedIndex >= 37 && clickedIndex < 62)
 			{
-				if (!this.mergeItemStack(var4, 0, 36, true))
+				if (!this.mergeItemStack(isFromSlot, 0, 36, true))
 					return null;
 			}
 
-			if (var4.stackSize == 0)
+			if (isFromSlot.stackSize == 0)
 				grabbedSlot.putStack((ItemStack)null);
 			else
 				grabbedSlot.onSlotChanged();
 
-			if (var4.stackSize == var2.stackSize)
+			if (isFromSlot.stackSize == isTemp.stackSize)
 				return null;
 
-			grabbedSlot.onPickupFromSlot(player, var4);
+			grabbedSlot.onPickupFromSlot(player, isFromSlot);
 		}
 		this.onCraftMatrixChanged(this.craftMatrix);
-		return var2;
+		return isTemp;
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer var1)
+	public boolean canInteractWith(EntityPlayer player)
 	{
 		return true;
 	}
