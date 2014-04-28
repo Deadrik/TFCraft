@@ -3,6 +3,11 @@ package com.bioxx.tfc.WorldGen;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenerator;
+
 import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityCreeperTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityEndermanTFC;
@@ -34,20 +39,12 @@ import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenPineShort;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenPineTall;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenRedwoodXL;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenerator;
-
 public class TFCBiome extends BiomeGenBase
 {
-	public static int SwampWater = 0x228855;//0x644c27;
-	public static int FreshWater = 0x80b280;
-	public static int DarkWater = 0x354d35;
 	public static float riverDepthMin = -0.5F;
 	public static float riverDepthMax = -0.3F;
 	public float temperatureTFC;
-	
+
 	public BiomeDecoratorTFC theBiomeDecorator;
 
 	public static TFCBiome[] biomeList = new TFCBiome[256];
@@ -56,7 +53,7 @@ public class TFCBiome extends BiomeGenBase
 	public static final TFCBiome ocean = new BiomeGenOceanTFC(0).setBiomeName("Ocean").setMinMaxHeight(-0.9F, 0.1F);
 	public static final TFCBiome river = new BiomeGenRiverTFC(7).setBiomeName("River").setMinMaxHeight(riverDepthMin, riverDepthMax);
 	public static final TFCBiome hell = (new BiomeGenHellTFC(8)).setColor(16711680).setBiomeName("Hell").setDisableRain().setTemperatureRainfall(2.0F, 0.0F);
-	public static final TFCBiome beach = (new BiomeGenBeachTFC(16)).setColor(0xfade55).SetWaterMult(DarkWater).setBiomeName("Beach").setMinMaxHeight(0.0F, 0.02F);
+	public static final TFCBiome beach = (new BiomeGenBeachTFC(16)).setColor(0xfade55).setBiomeName("Beach").setMinMaxHeight(0.0F, 0.02F);
 	public static final TFCBiome HighHills = (new BiomeGenHillsTFC(3)).setBiomeName("High Hills").setMinMaxHeight(0.8F, 1.6F);
 	public static final TFCBiome plains = (new BiomeGenPlainsTFC(1)).setBiomeName("TFC Plains").setMinMaxHeight(0.1F, 0.16F);
 	public static final TFCBiome swampland = (new BiomeGenSwampTFC(6)).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.1F);
@@ -142,7 +139,6 @@ public class TFCBiome extends BiomeGenBase
 		worldGenWhiteElmShortTrees = new WorldGenCustomShortTrees(false,13);
 		worldGenWillowShortTrees = new WorldGenCustomWillowTrees(false,14);
 
-		this.waterColorMultiplier = DarkWater;
 		//Default spawns. I didn't delete them so they could be referenced in the future. Nerfing animal spawns.
 		this.spawnableCreatureList.clear();
 		/*
@@ -150,7 +146,7 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 10, 2, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 10, 2, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 2, 4));
-		*/
+		 */
 		//This is to balance out the spawning, so that entities with weight 1 spawn less
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 16, 0, 0));
 
@@ -164,7 +160,7 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeperTFC.class, 3, 1, 2));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySlimeTFC.class, 8, 1, 2));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityEndermanTFC.class, 1, 1, 2));
-		
+
 		//getBiomeGenArray()[par1] = this;
 		biomeList[par1] = this;
 		this.theBiomeDecorator = this.createBiomeDecorator();
@@ -230,7 +226,7 @@ public class TFCBiome extends BiomeGenBase
 	@Override
 	public TFCBiome setDisableRain()
 	{
-//		ObfuscationReflectionHelper.setPrivateValue(BiomeGenBase.class, this, false, 39);
+		//		ObfuscationReflectionHelper.setPrivateValue(BiomeGenBase.class, this, false, 39);
 		this.enableRain = false;
 		return this;
 	}
@@ -244,29 +240,29 @@ public class TFCBiome extends BiomeGenBase
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,7) : worldGenAshTallTrees;
-			else
-				return worldGenAshShortTrees;
+				else
+					return worldGenAshShortTrees;
 		}
 		case 1:
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,1) :worldGenAspenTallTrees;
-			else
-				return worldGenAspenShortTrees;
+				else
+					return worldGenAspenShortTrees;
 		}
 		case 2:
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,2) :worldGenBirchTallTrees;
-			else
-				return worldGenBirchShortTrees;
+				else
+					return worldGenBirchShortTrees;
 		}
 		case 3:
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,3) :worldGenChestnutTallTrees;
-			else
-				return worldGenChestnutShortTrees;
+				else
+					return worldGenChestnutShortTrees;
 		}
 		case 4:
 		{
@@ -279,22 +275,22 @@ public class TFCBiome extends BiomeGenBase
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,5) :worldGenHickoryTallTrees;
-			else
-				return worldGenHickoryShortTrees;
+				else
+					return worldGenHickoryShortTrees;
 		}
 		case 6:
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,6) :worldGenMapleTallTrees;
-			else
-				return worldGenMapleShortTrees;
+				else
+					return worldGenMapleShortTrees;
 		}
 		case 0:
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,0) :worldGenOakTallTrees;
-			else
-				return worldGenOakShortTrees;
+				else
+					return worldGenOakShortTrees;
 		}
 		case 8:
 		{
@@ -314,15 +310,15 @@ public class TFCBiome extends BiomeGenBase
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,10) :worldGenSpruceTallTrees;
-			else
-				return worldGenSpruceShortTrees;
+				else
+					return worldGenSpruceShortTrees;
 		}
 		case 11:
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,11) :worldGenSycamoreTallTrees;
-			else
-				return worldGenSycamoreShortTrees;
+				else
+					return worldGenSycamoreShortTrees;
 		}
 		case 12:
 		{
@@ -332,8 +328,8 @@ public class TFCBiome extends BiomeGenBase
 		{
 			if(j)
 				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,13) :worldGenWhiteElmTallTrees;
-			else
-				return worldGenWhiteElmShortTrees;
+				else
+					return worldGenWhiteElmShortTrees;
 		}
 		case 14:
 		{
