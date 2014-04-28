@@ -2,19 +2,6 @@ package com.bioxx.tfc.Blocks.Flora;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Food.FloraIndex;
-import com.bioxx.tfc.Food.FloraManager;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.TileEntities.TEFruitLeaves;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Util.Helper;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -27,10 +14,24 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Food.FloraIndex;
+import com.bioxx.tfc.Food.FloraManager;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.TileEntities.TEFruitLeaves;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Util.Helper;
+
 public class BlockFruitLeaves extends BlockTerraContainer
 {
 	int adjacentTreeBlocks[];
-	String[] WoodNames = {"Red Apple","Banana","Orange","Green Apple","Lemon","Olive","Cherry","Peach","Plum"};
+	String[] WoodNames = Global.FRUIT_META_NAMES;
 	IIcon[] icons = new IIcon[16];
 	IIcon[] iconsDead = new IIcon[16];
 	public static IIcon[] iconsFruit = new IIcon[16];
@@ -140,7 +141,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 								te.hasFruit = true;
 								te.dayFruited = (int) TFC_Time.getTotalDays();
 							}
-							world.setBlockMetadataWithNotify(i, j, k, meta, 0x2); 
+							world.setBlockMetadataWithNotify(i, j, k, meta, 0x2);
 						}
 					}
 					else
@@ -150,7 +151,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 							if(te.hasFruit)
 							{
 								te.hasFruit = false;
-								world.setBlockMetadataWithNotify(i, j, k, meta-8, 0x2); 
+								world.setBlockMetadataWithNotify(i, j, k, meta - 8, 0x2);
 							}
 						}
 					}
@@ -161,24 +162,28 @@ public class BlockFruitLeaves extends BlockTerraContainer
 					if(!fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(k)))
 					{
 						if(world.getBlockMetadata(i, j, k) >= 8)
+						{
 							if(te.hasFruit)
 							{
 								te.hasFruit = false;
 								world.setBlockMetadataWithNotify(i, j, k, meta-8, 0x2); 
 							}
+						}
 					}
+				}
+
 				if(rand.nextInt(100) > 50)
 					world.markBlockForUpdate(i, j, k);
-				}
 			}
 		}
 	}
 
 	public static boolean canStay(World world, int i, int j, int k, Block block)
 	{
-		if((!world.isAirBlock(i, j+1, k) && !world.isAirBlock(i, j+2, k) && world.getBlock(i, j+2, k) == block) ||
-			world.getBlock(i, j+1, k) == TFCBlocks.fruitTreeWood ||
-			world.getBlock(i, j+2, k) == TFCBlocks.fruitTreeWood)
+		if((!world.isAirBlock(i, j + 1, k) && !world.isAirBlock(i, j + 2, k) &&
+				world.getBlock(i, j + 2, k) == block) ||
+				world.getBlock(i, j + 1, k) == TFCBlocks.fruitTreeWood ||
+				world.getBlock(i, j + 2, k) == TFCBlocks.fruitTreeWood)
 		{
 			return false;
 		}
@@ -191,22 +196,21 @@ public class BlockFruitLeaves extends BlockTerraContainer
 		{
 			switch(meta)
 			{
-			case 0: return "red apple";
-			case 1: return "banana";
-			case 2: return "orange";
-			case 3: return "green apple";
-			case 4: return "lemon";
-			case 5: return "olive";
-			case 6: return "cherry";
-			case 7: return "peach";
+			case 0: return Global.FRUIT_META_NAMES[0];
+			case 1: return Global.FRUIT_META_NAMES[1];
+			case 2: return Global.FRUIT_META_NAMES[2];
+			case 3: return Global.FRUIT_META_NAMES[3];
+			case 4: return Global.FRUIT_META_NAMES[4];
+			case 5: return Global.FRUIT_META_NAMES[5];
+			case 6: return Global.FRUIT_META_NAMES[6];
+			case 7: return Global.FRUIT_META_NAMES[7];
 			}
 		}
 		else
 		{
 			switch(meta)
 			{
-			case 0: return "plum";
-			case 1: return "cacao";
+			case 0: return Global.FRUIT_META_NAMES[8];
 			}
 		}
 		return "";
@@ -343,7 +347,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 			FloraManager manager = FloraManager.getInstance();
 			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(this, world.getBlockMetadata(i, j, k) & 7));
 
-			if(fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(k)) || fi.inHarvest(((TFC_Time.getSeasonAdjustedMonth(k)-1)+12)%12) && (meta & 8) == 8))
+			if(fi != null && (fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(k)) || fi.inHarvest(((TFC_Time.getSeasonAdjustedMonth(k) - 1) + 12)%12) && (meta & 8) == 8))
 			{
 				TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(i, j, k);
 				if(te != null && te.hasFruit)
@@ -351,7 +355,7 @@ public class BlockFruitLeaves extends BlockTerraContainer
 					te.hasFruit = false;
 					te.dayHarvested = (int) TFC_Time.getTotalDays();
 					world.setBlockMetadataWithNotify(i, j, k, meta - 8, 3);
-					dropBlockAsItem(world, i, j, k, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(5+(world.rand.nextFloat()*20),10)));
+					dropBlockAsItem(world, i, j, k, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(5 + (world.rand.nextFloat() * 20), 10)));
 					return true;
 				}
 			}

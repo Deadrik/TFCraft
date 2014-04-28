@@ -2,6 +2,17 @@ package com.bioxx.tfc;
 
 import java.util.ArrayList;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.common.util.EnumHelper;
+
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.Alloy;
@@ -83,16 +94,6 @@ import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraftforge.common.util.EnumHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TFCItems
@@ -1628,18 +1629,18 @@ public class TFCItems
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.cooked_chicken), "cooked_chicken", new ItemFoodTFC(41, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("chickenCooked"));
 
 		FruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling");
-		FruitTreeSapling2 = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling2");
+		RedApple = new ItemFoodTFC(2, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
+		Banana = new ItemFoodTFC(3, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);
+		Orange = new ItemFoodTFC(4, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[2]);
+		GreenApple = new ItemFoodTFC(5, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[3]);
+		Lemon = new ItemFoodTFC(6, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[4]);
+		Olive = new ItemFoodTFC(7, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[5]);
+		Cherry = new ItemFoodTFC(8, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[6]);
+		Peach = new ItemFoodTFC(9, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[7]);
+		Plum = new ItemFoodTFC(10, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[8]);
+
 		Items.reeds.setCreativeTab(null);
 		Sugercane = new ItemSugercane().setUnlocalizedName("Sugercane").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("reeds");
-		RedApple = new ItemFoodTFC(2, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Red Apple");
-		Banana = new ItemFoodTFC(3, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Banana");
-		Orange = new ItemFoodTFC(4, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Orange");
-		GreenApple = new ItemFoodTFC(5, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Green Apple");
-		Lemon = new ItemFoodTFC(6, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Lemon");
-		Olive = new ItemFoodTFC(7, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Olive");
-		Cherry = new ItemFoodTFC(8, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Cherry");
-		Peach = new ItemFoodTFC(9, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Peach");
-		Plum = new ItemFoodTFC(10, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName("Plum");
 		EggCooked = new ItemFoodTFC(11, EnumFoodGroup.Protein).setDecayRate(3.0f).setUnlocalizedName("Egg Cooked");
 
 		WheatGrain = new ItemFoodTFC(12, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Grain");
@@ -2570,7 +2571,6 @@ public class TFCItems
 
 		System.out.println(new StringBuilder().append("[TFC] Registering Food").toString());
 		GameRegistry.registerItem(FruitTreeSapling, FruitTreeSapling.getUnlocalizedName());
-		GameRegistry.registerItem(FruitTreeSapling2, FruitTreeSapling2.getUnlocalizedName());
 		GameRegistry.registerItem(Sugercane, Sugercane.getUnlocalizedName());
 		GameRegistry.registerItem(RedApple, RedApple.getUnlocalizedName());
 		GameRegistry.registerItem(Banana, Banana.getUnlocalizedName());

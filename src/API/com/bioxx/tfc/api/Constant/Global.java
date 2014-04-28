@@ -7,6 +7,11 @@ import com.google.common.collect.ObjectArrays;
 
 public class Global
 {
+	/* FruitTree Meta Names, also used for fruit items and FloraManager */
+	public static final String[] FRUIT_META_NAMES = new String[] {
+		"Red Apple", "Banana", "Orange", "Green Apple", "Lemon", "Olive", "Cherry", "Peach", "Plum"
+	};
+
 	/* Flower Meta Names
 	 * The first 10 flowers are from vanilla */
 	public static final String[] FLOWER_META_NAMES = new String[] {
