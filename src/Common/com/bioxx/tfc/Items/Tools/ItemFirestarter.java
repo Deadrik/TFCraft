@@ -4,15 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.TileEntities.TileEntityPottery;
-import com.bioxx.tfc.api.Enums.EnumItemReach;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Util.Helper;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +13,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.TileEntities.TileEntityForge;
+import com.bioxx.tfc.TileEntities.TileEntityPottery;
+import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemFirestarter extends ItemTerra
 {
@@ -120,7 +121,12 @@ public class ItemFirestarter extends ItemTerra
 				{
 					int chance = new Random().nextInt(100);
 					if(chance > 70)
+					{
 						world.setBlock(x, y, z, TFCBlocks.Forge, 1, 2);
+						TileEntityForge te = (TileEntityForge)world.getTileEntity(x, y, z);
+						te.fuelBurnTemp = 200;
+						te.fuelTimeLeft = 200;
+					}
 					itemstack.damageItem(1, entityplayer);
 					return true;
 				}

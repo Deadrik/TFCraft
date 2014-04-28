@@ -2,15 +2,6 @@ package com.bioxx.tfc.Entities.Mobs;
 
 import java.util.ArrayList;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_MobData;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.api.IInnateArmor;
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -27,6 +18,16 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_MobData;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.api.IInnateArmor;
+import com.bioxx.tfc.api.Entities.IAnimal;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -285,6 +286,11 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	@Override
 	public boolean isBreedingItem(ItemStack is)
 	{
+		return false;
+	}
+	
+	public boolean isBreedingItemTFC(ItemStack is)
+	{
 		return !pregnant && is != null &&
 				(is.getItem() == Items.porkchop || is.getItem() == Items.beef || is.getItem() == TFCItems.muttonRaw);
 	}
@@ -449,47 +455,70 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer)
+	public boolean interact(EntityPlayer player)
 	{
 		if(!worldObj.isRemote)
 		{
-			if(par1EntityPlayer.getHeldItem()!=null)
+			if(player.getHeldItem() != null)
 			{
-				Item i = par1EntityPlayer.getHeldItem().getItem();
-				Item item = par1EntityPlayer.getHeldItem().getItem();
-				if(i==(TFCItems.muttonRaw)||
-						i==(TFCItems.muttonCooked)||
-						i==(TFCItems.horseMeatRaw)||
-						i==(TFCItems.horseMeatCooked)||
-						i==(TFCItems.venisonRaw)||
-						i==(TFCItems.venisonCooked)||
-						i==(Items.porkchop)||
-						i==(Items.cooked_porkchop)||
-						i==(Items.beef)||
-						i==(Items.cooked_beef)||
-						i==(Items.chicken)||
-						i==(Items.cooked_chicken)||
-						i==(Items.fish)||
-						i==(Items.cooked_fished)||
-						i==(TFCItems.CalamariRaw)||
-						i==(TFCItems.CalamariCooked))
+				Item item = player.getHeldItem().getItem();
+				if(item == (TFCItems.muttonRaw)||
+						item ==(TFCItems.muttonCooked)||
+						item ==(TFCItems.horseMeatRaw)||
+						item ==(TFCItems.horseMeatCooked)||
+						item ==(TFCItems.venisonRaw)||
+						item ==(TFCItems.venisonCooked)||
+						item ==(Items.porkchop)||
+						item ==(Items.cooked_porkchop)||
+						item ==(Items.beef)||
+						item ==(Items.cooked_beef)||
+						item ==(Items.chicken)||
+						item ==(Items.cooked_chicken)||
+						item ==(Items.fish)||
+						item ==(Items.cooked_fished)||
+						item ==(TFCItems.CalamariRaw)||
+						item ==(TFCItems.CalamariCooked))
 				{
 					if(item instanceof ItemFoodTFC && hunger <= 160000)
 					{
-						par1EntityPlayer.inventory.setItemStack(((ItemFoodTFC)item).onConsumedByEntity(par1EntityPlayer.getHeldItem(), worldObj, this));
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC)item).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
 						this.hunger += 24000;
 						return true;
 					}
 				}
 			}
-			par1EntityPlayer.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
 
+			player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
 			if(getGender() == GenderEnum.FEMALE && pregnant)
-				par1EntityPlayer.addChatMessage(new ChatComponentText("Pregnant"));
+				player.addChatMessage(new ChatComponentText("Pregnant"));
 
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
-		return super.interact(par1EntityPlayer);
+
+		ItemStack itemstack = player.inventory.getCurrentItem();
+
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && !super.isInLove())
+		{
+			if (!player.capabilities.isCreativeMode)
+			{
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
+			}
+
+			this.func_146082_f(player);
+			return true;
+		}
+		else
+		{		
+			boolean wasTamedBefore = this.isTamed();
+			boolean interactSuper = super.interact(player);
+
+			if (!worldObj.isRemote && wasTamedBefore == false && this.isTamed())
+			{
+				this.setHealth(TFC_MobData.WolfHealth);
+			}
+
+			return interactSuper;
+		}
 	}
 
 	@Override

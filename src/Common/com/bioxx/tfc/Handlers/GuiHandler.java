@@ -150,11 +150,12 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 42:
 		{
-			System.out.println("found location");
 			List list = player.worldObj.getEntitiesWithinAABB(EntityHorseTFC.class, player.boundingBox.expand(2, 2, 2));
-			System.out.println((player.worldObj).getClass());
-			EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
-			return new ContainerHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
+			if(list.size() > 0){
+				EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
+				return new ContainerHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
+			}
+			return null;
 		}
 		default:
 		{

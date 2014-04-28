@@ -2,12 +2,6 @@ package com.bioxx.tfc.Entities.Mobs;
 
 import java.util.ArrayList;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -33,6 +27,13 @@ import net.minecraft.stats.AchievementList;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.api.Entities.IAnimal;
 
 public class EntityPigTFC extends EntityPig implements IAnimal
 {
@@ -270,25 +271,43 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer)
+	public boolean interact(EntityPlayer player)
 	{
 		if(!worldObj.isRemote)
 		{
-			par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
-			if(getGender()==GenderEnum.FEMALE && pregnant)
-				par1EntityPlayer.addChatMessage(new ChatComponentText("Pregnant"));
+			player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
+			if(getGender() == GenderEnum.FEMALE && pregnant)
+				player.addChatMessage(new ChatComponentText("Pregnant"));
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
+		ItemStack itemstack = player.inventory.getCurrentItem();
 
-		if (super.interact(par1EntityPlayer))
-			return true;
-		else if (this.getSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == par1EntityPlayer))
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && !super.isInLove())
 		{
-			par1EntityPlayer.mountEntity(this);
+			if (!player.capabilities.isCreativeMode)
+			{
+				player.inventory.setInventorySlotContents(player.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
+			}
+
+			this.func_146082_f(player);
 			return true;
 		}
 		else
-			return false;
+		{
+			if (super.interact(player))
+			{
+				return true;
+			}
+			else if (this.getSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player))
+			{
+				player.mountEntity(this);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 
 	/**
@@ -362,6 +381,11 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
+	{
+		return false;
+	}
+	
+	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
 	{
 		return !pregnant && (
 				par1ItemStack.getItem() == TFCItems.WheatGrain ||

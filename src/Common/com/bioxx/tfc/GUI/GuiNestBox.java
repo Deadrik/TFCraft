@@ -14,7 +14,7 @@ public class GuiNestBox extends GuiContainerTFC
 
 	public GuiNestBox(InventoryPlayer inventoryplayer, TENestBox te, World world, int i, int j, int k)
 	{
-		super(new ContainerNestBox(inventoryplayer, te, world, i, j, k), 176, 49);
+		super(new ContainerNestBox(inventoryplayer, te, world, i, j, k), 176, 85);
 	}
 
 	@Override

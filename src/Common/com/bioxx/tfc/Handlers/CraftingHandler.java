@@ -1,5 +1,13 @@
 package com.bioxx.tfc.Handlers;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -17,13 +25,6 @@ import com.bioxx.tfc.Items.Tools.ItemCustomSaw;
 import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
@@ -86,10 +87,20 @@ public class CraftingHandler
 					|| itemstack.getItem() == TFCItems.Wool||itemstack.getItem() == TFCItems.TerraLeather)
 			{
 				HandleItem(e.player, e.craftMatrix, Recipes.Knives);
-				if (item == TFCItems.Wool && !e.player.worldObj.isRemote)
+				if (item == TFCItems.Wool /*&& !player.worldObj.isRemote*/)
 				{
-					if(!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Hide, 1, 0)))
-						e.player.entityDropItem(new ItemStack(TFCItems.Hide, 1, 0), 1);
+					int size = 0;
+					for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+					{
+						if(iinventory.getStackInSlot(i) == null)
+							continue;
+						if(iinventory.getStackInSlot(i).getItem() == TFCItems.SheepSkin)
+							size = iinventory.getStackInSlot(i).getItemDamage();
+					}
+					boolean add =!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Hide, 1, size));
+					System.out.println(add);
+					if(add)
+						e.player.entityDropItem(new ItemStack(TFCItems.Hide, 1, size), 1);
 				}
 				/*else if(item == TFCItems.TerraLeather)
 				{

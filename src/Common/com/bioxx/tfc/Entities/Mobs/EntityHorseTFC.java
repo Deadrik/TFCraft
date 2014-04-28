@@ -4,17 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.AI.AIEatGrass;
-import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
-import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
-import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.SoundType;
 import net.minecraft.command.IEntitySelector;
@@ -53,6 +42,19 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.AIEatGrass;
+import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
+import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
+import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.api.Entities.IAnimal;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -985,6 +987,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			this.openGUI(par1EntityPlayer);
 			return true;
 		}
+		else if (this.isTame() && this.isAdultHorse() && par1EntityPlayer.isSneaking() && this.getLeashed())
+		{
+			this.clearLeashed(true, true);
+			return true;
+		}
 		else if (this.func_110253_bW() && this.riddenByEntity != null)
 		{
 			return super.interact(par1EntityPlayer);
@@ -1077,10 +1084,21 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 					return true;
 				}
 			}
-			else
+		}
+
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && !super.isInLove())
+		{
+			if (!par1EntityPlayer.capabilities.isCreativeMode)
 			{
-				return super.interact(par1EntityPlayer);
+				par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(par1EntityPlayer.getHeldItem(), worldObj, this)));
 			}
+
+			this.func_146082_f(par1EntityPlayer);
+			return true;
+		}
+		else
+		{
+			return super.interact(par1EntityPlayer);
 		}
 	}
 
@@ -1949,6 +1967,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
+	{
+		return false;
+	}
+	
+	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
 	{
 		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
 				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);

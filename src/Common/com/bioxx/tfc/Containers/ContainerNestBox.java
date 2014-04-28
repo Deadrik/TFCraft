@@ -1,14 +1,14 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.Containers.Slots.SlotOutputOnly;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.TileEntities.TENestBox;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Containers.Slots.SlotOutputOnly;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.TileEntities.TENestBox;
 
 public class ContainerNestBox extends ContainerTFC
 {
@@ -24,11 +24,13 @@ public class ContainerNestBox extends ContainerTFC
 		this.posX = x;
 		this.posY = y;
 		this.posZ = z;
-		this.addSlotToContainer(new SlotOutputOnly(te, 0, 71, 8));
-		this.addSlotToContainer(new SlotOutputOnly(te, 1, 89, 8));
-		this.addSlotToContainer(new SlotOutputOnly(te, 2, 71, 26));
-		this.addSlotToContainer(new SlotOutputOnly(te, 3, 89, 26));
-		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 54);
+
+		this.addSlotToContainer(new SlotOutputOnly(te, 0, 71, 25));
+		this.addSlotToContainer(new SlotOutputOnly(te, 1, 89, 25));
+		this.addSlotToContainer(new SlotOutputOnly(te, 2, 71, 43));
+		this.addSlotToContainer(new SlotOutputOnly(te, 3, 89, 43));
+
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90);
 	}
 
 	@Override

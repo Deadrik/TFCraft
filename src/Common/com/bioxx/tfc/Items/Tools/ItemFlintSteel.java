@@ -3,15 +3,6 @@ package com.bioxx.tfc.Items.Tools;
 import java.util.Iterator;
 import java.util.List;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TileEntityPottery;
-import com.bioxx.tfc.api.ISize;
-import com.bioxx.tfc.api.Enums.EnumItemReach;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +12,16 @@ import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TileEntities.TileEntityForge;
+import com.bioxx.tfc.TileEntities.TileEntityPottery;
+import com.bioxx.tfc.api.ISize;
+import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 {
@@ -92,6 +93,9 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 				{
 					itemstack.damageItem(1, entityplayer);
 					world.setBlock(x, y, z, TFCBlocks.Forge, 1, 0x2);
+					TileEntityForge te = (TileEntityForge)world.getTileEntity(x, y, z);
+					te.fuelBurnTemp = 200;
+					te.fuelTimeLeft = 200;
 					return true;
 				}
 			}

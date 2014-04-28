@@ -4,10 +4,6 @@ import java.nio.IntBuffer;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.Core.WeatherManager;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.api.Util.Helper;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -20,6 +16,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.WeatherManager;
+import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.api.Util.Helper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -105,13 +106,15 @@ public class ClientOverrides
 
 			for (int j1 = 0; j1 < i1; ++j1)
 			{
-				int k1 = i + random.nextInt(b0) - random.nextInt(b0);
-				int l1 = k + random.nextInt(b0) - random.nextInt(b0);
-				int i2 = worldclient.getPrecipitationHeight(k1, l1);
-				Block b = worldclient.getBlock(k1, i2 - 1, l1);
-				TFCBiome biome = (TFCBiome) worldclient.getBiomeGenForCoords(k1, l1);
-				if(!WeatherManager.canSnow(k1, i2, l1))
-					if (i2 <= j + b0 && i2 >= j - b0 && biome.canSpawnLightningBolt() && biome.getFloatTemperature(k1, i2, l1) >= 0.2F)
+				int x = i + random.nextInt(b0) - random.nextInt(b0);
+				int z = k + random.nextInt(b0) - random.nextInt(b0);
+				int y = worldclient.getPrecipitationHeight(x, z);
+				Block b = worldclient.getBlock(x, y - 1, z);
+				TFCBiome biome = (TFCBiome) worldclient.getBiomeGenForCoords(x, z);
+				if(!WeatherManager.canSnow(x, y, z))
+				{
+					System.out.println("canSnow");
+					if (y <= j + b0 && y >= j - b0 && biome.canSpawnLightningBolt())
 					{
 						float f1 = random.nextFloat();
 						float f2 = random.nextFloat();
@@ -120,7 +123,7 @@ public class ClientOverrides
 						{
 							if (b.getMaterial() == Material.lava)
 							{
-								Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySmokeFX(worldclient, k1 + f1, i2 + 0.1F - b.getBlockBoundsMinY(), l1 + f2, 0.0D, 0.0D, 0.0D));
+								Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySmokeFX(worldclient, x + f1, y + 0.1F - b.getBlockBoundsMinY(), z + f2, 0.0D, 0.0D, 0.0D));
 							}
 							else
 							{
@@ -128,15 +131,16 @@ public class ClientOverrides
 
 								if (random.nextInt(l) == 0)
 								{
-									d0 = k1 + f1;
-									d1 = i2 + 0.1F - b.getBlockBoundsMinY();
-									d2 = l1 + f2;
+									d0 = x + f1;
+									d1 = y + 0.1F - b.getBlockBoundsMinY();
+									d2 = z + f2;
 								}
 
-								Minecraft.getMinecraft().effectRenderer.addEffect(new EntityRainFX(worldclient, k1 + f1, i2 + 0.1F - b.getBlockBoundsMinY(), l1 + f2));
+								Minecraft.getMinecraft().effectRenderer.addEffect(new EntityRainFX(worldclient, x + f1, y + 0.1F - b.getBlockBoundsMinY(), z + f2));
 							}
 						}
 					}
+				}
 			}
 
 			if (l > 0 && random.nextInt(3) < rainSoundCounter++)

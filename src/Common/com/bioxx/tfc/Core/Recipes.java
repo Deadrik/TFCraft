@@ -3,6 +3,16 @@ package com.bioxx.tfc.Core;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Food.ItemFoodTFC;
@@ -18,14 +28,6 @@ import com.bioxx.tfc.api.Crafting.KilnRecipe;
 import com.bioxx.tfc.api.Crafting.PlanRecipe;
 import com.bioxx.tfc.api.Enums.RuleEnum;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes 
@@ -587,14 +589,17 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Workbench, 1), new Object[]{"PP","PP", Character.valueOf('P'), new ItemStack(TFCBlocks.Planks, 1, 32767)});
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Workbench, 1), new Object[]{"PP","PP", Character.valueOf('P'), new ItemStack(TFCBlocks.Planks2, 1, 32767)});
 
-		GameRegistry.addRecipe(new ItemStack(Items.boat, 1),
-				new Object[]{"P P","PPP", Character.valueOf('P'), new ItemStack(TFCBlocks.Planks2, 1, 32767)});
-
 		RegisterToolRecipes();
 		registerFoodRecipes();
 		VanillaRecipes();
 		registerKilnRecipes();
 		registerToolMolds();
+		registerOreDict();
+	}
+
+	private static void registerOreDict()
+	{
+		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks2));
 	}
 
 	private static ItemStack checkMelted(ItemStack is)

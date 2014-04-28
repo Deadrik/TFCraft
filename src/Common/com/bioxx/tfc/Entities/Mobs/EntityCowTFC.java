@@ -2,14 +2,6 @@ package com.bioxx.tfc.Entities.Mobs;
 
 import java.util.ArrayList;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.AI.AIEatGrass;
-import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
-import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -26,6 +18,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.AIEatGrass;
+import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
+import com.bioxx.tfc.api.Entities.IAnimal;
 
 public class EntityCowTFC extends EntityCow implements IAnimal
 {
@@ -324,12 +325,31 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 				}
 			}
 		}
+		ItemStack itemstack = player.inventory.getCurrentItem();
+		
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && !super.isInLove())
+        {
+            if (!player.capabilities.isCreativeMode)
+            {
+            	player.inventory.setInventorySlotContents(player.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
+            }
 
-		return super.interact(player);
+            this.func_146082_f(player);
+            return true;
+        }
+        else
+        {
+            return super.interact(player);
+        }
 	}
 
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
+	{
+		return false;
+	}
+	
+	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
 	{
 		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
 				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);

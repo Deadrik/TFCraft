@@ -2,14 +2,6 @@ package com.bioxx.tfc.Entities.Mobs;
 
 import java.util.ArrayList;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.AI.AIEatGrass;
-import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
-import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -27,6 +19,15 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.AIEatGrass;
+import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
+import com.bioxx.tfc.api.Entities.IAnimal;
 
 public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 {
@@ -278,6 +279,11 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
 	{
+		return false;
+	}
+	
+	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
+	{
 		return !pregnant && (
 				par1ItemStack.getItem() == TFCItems.WheatGrain ||
 				par1ItemStack.getItem() == TFCItems.OatGrain ||
@@ -299,23 +305,38 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer)
+	public boolean interact(EntityPlayer player)
 	{
 		if(!worldObj.isRemote)
 		{
-			par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
-			if(getGender()==GenderEnum.FEMALE && pregnant)
-				par1EntityPlayer.addChatMessage(new ChatComponentText("Pregnant"));
+			player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
+			if(getGender() == GenderEnum.FEMALE && pregnant)
+				player.addChatMessage(new ChatComponentText("Pregnant"));
 
-			if(par1EntityPlayer.getHeldItem()!=null&&par1EntityPlayer.getHeldItem().getItem() instanceof ItemCustomKnife && !getSheared() && getPercentGrown(this) > 0.95F)
+			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemCustomKnife && !getSheared() && getPercentGrown(this) > 0.95F)
 			{
 				setSheared(true);
 				this.entityDropItem(new ItemStack(TFCItems.Wool,1), 0.0F);
-				if(!par1EntityPlayer.capabilities.isCreativeMode)
-					par1EntityPlayer.getHeldItem().damageItem(1, par1EntityPlayer);
+				if(!player.capabilities.isCreativeMode)
+					player.getHeldItem().damageItem(1, player);
 			}
 		}
-		return super.interact(par1EntityPlayer);
+		ItemStack itemstack = player.inventory.getCurrentItem();
+
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && !super.isInLove())
+		{
+			if (!player.capabilities.isCreativeMode)
+			{
+				player.inventory.setInventorySlotContents(player.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
+			}
+
+			this.func_146082_f(player);
+			return true;
+		}
+		else
+		{
+			return super.interact(player);
+		}
 	}
 
 	/**
