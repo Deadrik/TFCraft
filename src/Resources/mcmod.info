@@ -13,8 +13,8 @@
     "logoFile": "/assets/textures/gui/TFCLogo.png",
     "screenshots": [  ],
     "parent": "",
-    "requiredMods": [ "" ],
-    "dependencies": [ "" ],
+    "requiredMods": [  ],
+    "dependencies": [  ],
     "dependants": [  ],
     "useDependencyInformation": "true"
   }]
