@@ -63,18 +63,18 @@ public class ItemTerra extends Item implements ISize
 	}
 
 	@Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
+	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
 		if(MetaNames != null)
 		{
 			for(int i = 0; i < MetaNames.length; i++)
 			{
-				list.add(new ItemStack(this,1,i));
+				list.add(new ItemStack(this, 1, i));
 			}
 		}
 		else
 		{
-			list.add(new ItemStack(this,1));
+			list.add(new ItemStack(this, 1));
 		}
 	}
 
@@ -123,7 +123,7 @@ public class ItemTerra extends Item implements ISize
 	public String getUnlocalizedName(ItemStack itemstack)
 	{
 		if(MetaNames != null && itemstack.getItemDamage() < MetaNames.length)
-			return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()] + ".name");
+			return getUnlocalizedName().concat("." + MetaNames[itemstack.getItemDamage()]);
 		return super.getUnlocalizedName(itemstack);
 	}
 
@@ -151,7 +151,7 @@ public class ItemTerra extends Item implements ISize
 	}
 
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		//Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
 		ItemTerra.addSizeInformation(is, arraylist);
@@ -236,7 +236,8 @@ public class ItemTerra extends Item implements ISize
 	}
 
 	@Override
-	public EnumItemReach getReach(ItemStack is) {
+	public EnumItemReach getReach(ItemStack is)
+	{
 		return EnumItemReach.SHORT;
 	}
 }
