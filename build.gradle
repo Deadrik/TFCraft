@@ -75,3 +75,10 @@ from(sourceSets.main.resources.srcDirs) {
         exclude '**/*.prop'
     }
 }
+
+jar {
+    manifest.attributes(
+            'FMLCorePlugin': 'com.bioxx.tfc.TFCASMLoadingPlugin',
+			'FMLCorePluginContainsFMLMod': 'true'
+    )
+	}
