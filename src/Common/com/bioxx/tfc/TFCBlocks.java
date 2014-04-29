@@ -48,6 +48,8 @@ import com.bioxx.tfc.Blocks.Devices.BlockToolRack;
 import com.bioxx.tfc.Blocks.Devices.BlockToolRack2;
 import com.bioxx.tfc.Blocks.Devices.BlockWorkbench;
 import com.bioxx.tfc.Blocks.Flora.BlockBerryBush;
+import com.bioxx.tfc.Blocks.Flora.BlockSapling;
+import com.bioxx.tfc.Blocks.Flora.BlockSapling2;
 import com.bioxx.tfc.Blocks.Flora.BlockFlora;
 import com.bioxx.tfc.Blocks.Flora.BlockFrozenSeaGrass;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
@@ -99,8 +101,6 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLeaves2;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLilyPad;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomPumpkin;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomReed;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomSapling;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomSapling2;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomSnow;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomTallGrass;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomVine;
@@ -604,8 +604,8 @@ public class TFCBlocks
 		Planks2 = (new com.bioxx.tfc.Blocks.BlockPlanks2(Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("wood2");
 		Leaves = (new BlockCustomLeaves()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves");
 		Leaves2 = (new BlockCustomLeaves2()).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leaves2");
-		Sapling = (new BlockCustomSapling()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling");
-		Sapling2 = (new BlockCustomSapling2()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling2");
+		Sapling = (new BlockSapling()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling");
+		Sapling2 = (new BlockSapling2()).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling2");
 
 		LogNatural = new com.bioxx.tfc.Blocks.Flora.BlockLogNatural().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log");
 		LogNatural2 = new com.bioxx.tfc.Blocks.Flora.BlockLogNatural2().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log2");

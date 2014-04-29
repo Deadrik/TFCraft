@@ -1,15 +1,7 @@
-package com.bioxx.tfc.Blocks.Vanilla;
+package com.bioxx.tfc.Blocks.Flora;
 
 import java.util.List;
 import java.util.Random;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.TileEntities.TileEntitySapling;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.api.Constant.Global;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -22,15 +14,22 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.TileEntities.TileEntitySapling;
+import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCustomSapling extends BlockTerraContainer
+public class BlockSapling extends BlockTerraContainer
 {
 	IIcon[] icons = new IIcon[16];
 	String[] woodNames;
-	public BlockCustomSapling()
+	public BlockSapling()
 	{
 		super(Material.plants);
 		float f = 0.4F;
@@ -64,18 +63,18 @@ public class BlockCustomSapling extends BlockTerraContainer
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < woodNames[i].length(); i++)
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/"+woodNames[i]+" Sapling");
 	}
 
 	public void growTree(World world, int i, int j, int k, Random random)
 	{
-		int l = world.getBlockMetadata(i, j, k);
+		/*int l = world.getBlockMetadata(i, j, k);
 		world.setBlockToAir(i, j, k);
 		Object obj = TFCBiome.getTreeGen(l, random.nextBoolean());
 
 		if (obj!= null && !((WorldGenerator) obj).generate(world, random, i, j, k))
-			world.setBlock(i, j, k, this, l, 3);
+			world.setBlock(i, j, k, this, l, 3);*/
 	}
 
 	@Override
