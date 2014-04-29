@@ -94,8 +94,6 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 					itemstack.damageItem(1, entityplayer);
 					world.setBlock(x, y, z, TFCBlocks.Forge, 1, 0x2);
 					TileEntityForge te = (TileEntityForge)world.getTileEntity(x, y, z);
-					te.fuelBurnTemp = 200;
-					te.fuelTimeLeft = 200;
 					return true;
 				}
 			}
