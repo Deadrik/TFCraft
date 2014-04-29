@@ -124,8 +124,6 @@ public class ItemFirestarter extends ItemTerra
 					{
 						world.setBlock(x, y, z, TFCBlocks.Forge, 1, 2);
 						TileEntityForge te = (TileEntityForge)world.getTileEntity(x, y, z);
-						te.fuelBurnTemp = 200;
-						te.fuelTimeLeft = 200;
 					}
 					itemstack.damageItem(1, entityplayer);
 					return true;
