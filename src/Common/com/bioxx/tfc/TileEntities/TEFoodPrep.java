@@ -203,12 +203,13 @@ public class TEFoodPrep extends TileEntity implements IInventory
 
 	private long getFoodSeed()
 	{
-		int seed = 0;
+		int seed = 1;
+
 		for(int i = 0; i < 4; i++)
 		{
 			ItemStack is = getStackInSlot(i);
 			if(is != null)
-				seed += ((ItemFoodTFC)is.getItem()).getFoodID();
+				seed *= ((ItemFoodTFC) is.getItem()).getFoodID();
 		}
 		return seed + worldObj.getSeed();
 	}

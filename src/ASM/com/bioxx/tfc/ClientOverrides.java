@@ -111,7 +111,6 @@ public class ClientOverrides
 				Block b = worldclient.getBlock(x, y - 1, z);
 				if(!WeatherManager.canSnow(x, y, z))
 				{
-					System.out.println("canSnow");
 					if (y <= j + b0 && y >= j - b0)
 					{
 						float f1 = random.nextFloat();
