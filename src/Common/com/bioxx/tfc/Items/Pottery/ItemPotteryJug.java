@@ -2,13 +2,6 @@ package com.bioxx.tfc.Items.Pottery;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -18,11 +11,18 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
+
 public class ItemPotteryJug extends ItemPotteryBase
 {
 	IIcon WaterIcon;
 
-	public ItemPotteryJug() 
+	public ItemPotteryJug()
 	{
 		super();
 		this.MetaNames = new String[]{"Clay Jug", "Ceramic Jug", "Water Jug"};
@@ -37,7 +37,8 @@ public class ItemPotteryJug extends ItemPotteryBase
 	{
 		if (!world.isRemote)
 		{
-			if(is.getItemDamage() == 2) {
+			if(is.getItemDamage() == 2)
+			{
 				TFC_Core.getPlayerFoodStats(player).restoreWater(player, 24000);
 			}
 
@@ -61,7 +62,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 	 * How long it takes to use or consume an item
 	 */
 	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack)
+	public int getMaxItemUseDuration(ItemStack is)
 	{
 		return 32;
 	}
@@ -70,7 +71,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 	 * returns the action that specifies what animation to play when the items is being used
 	 */
 	@Override
-	public EnumAction getItemUseAction(ItemStack par1ItemStack)
+	public EnumAction getItemUseAction(ItemStack is)
 	{
 		return EnumAction.drink;
 	}
@@ -87,7 +88,8 @@ public class ItemPotteryJug extends ItemPotteryBase
 
 		if(mop == null)
 		{
-			if(is.getItemDamage() > 1 && canDrink) {
+			if(is.getItemDamage() > 1 && canDrink)
+			{
 				entity.setItemInUse(is, this.getMaxItemUseDuration(is));
 			}
 		}
@@ -117,7 +119,8 @@ public class ItemPotteryJug extends ItemPotteryBase
 					}
 					else
 					{
-						if(canDrink) {
+						if(canDrink)
+						{
 							entity.setItemInUse(is, this.getMaxItemUseDuration(is));
 						}
 					}
@@ -143,7 +146,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 			return this.CeramicIcon;
 		} else if(damage == 2) {
 			return this.WaterIcon;
-		} 
+		}
 
 		return this.WaterIcon; 
 	}
@@ -156,7 +159,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 	}
 
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		super.addInformation(is, player, arraylist, flag);
 		if(is.hasTagCompound() && is.stackTagCompound.hasKey("LiquidType"))

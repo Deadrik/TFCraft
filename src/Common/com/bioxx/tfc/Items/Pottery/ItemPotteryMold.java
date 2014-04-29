@@ -2,8 +2,6 @@ package com.bioxx.tfc.Items.Pottery;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,16 +9,20 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+
+import com.bioxx.tfc.Reference;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemPotteryMold extends ItemPotteryBase 
+public class ItemPotteryMold extends ItemPotteryBase
 {
 	IIcon CopperIcon;
 	IIcon BronzeIcon;
 	IIcon BismuthBronzeIcon;
 	IIcon BlackBronzeIcon;
-	public ItemPotteryMold() 
+
+	public ItemPotteryMold()
 	{
 		super();
 		this.setMaxDamage(401);
@@ -35,7 +37,8 @@ public class ItemPotteryMold extends ItemPotteryBase
 	@Override
 	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{		
-		if(is.getItemDamage() > 5) {
+		if(is.getItemDamage() > 5)
+		{
 			arraylist.add(StatCollector.translateToLocal("gui.MeltedMetal.NotFull"));
 		}
 	}
@@ -62,9 +65,10 @@ public class ItemPotteryMold extends ItemPotteryBase
 	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack)
 	{
-		if(par1ItemStack !=null && par1ItemStack.getItemDamage() > 5){
-			int damage = ((par1ItemStack.getItemDamage()-2)%4)+2;
-			return super.getUnlocalizedName(par1ItemStack)+"."+MetaNames[damage];
+		if(par1ItemStack !=null && par1ItemStack.getItemDamage() > 5)
+		{
+			int damage = ((par1ItemStack.getItemDamage() - 2)%4) + 2;
+			return super.getUnlocalizedName(par1ItemStack) + "." + MetaNames[damage];
 		}
 		return super.getUnlocalizedName(par1ItemStack);
 	}
@@ -72,24 +76,25 @@ public class ItemPotteryMold extends ItemPotteryBase
 	@Override
 	public IIcon getIconFromDamage(int damage)
 	{
-		if(damage>5){
-			damage = ((damage-2)%4)+2;
+		if(damage > 5)
+		{
+			damage = ((damage - 2)%4) + 2;
 		}
 		if(damage == 0) return this.ClayIcon;
-		else if(damage == 1) return this.CeramicIcon; 
-		else if(damage == 2) return this.CopperIcon; 
-		else if(damage == 3) return this.BronzeIcon; 
-		else if(damage == 4) return this.BismuthBronzeIcon; 
-		else if(damage == 5) return this.BlackBronzeIcon; 
+		else if(damage == 1) return this.CeramicIcon;
+		else if(damage == 2) return this.CopperIcon;
+		else if(damage == 3) return this.BronzeIcon;
+		else if(damage == 4) return this.BismuthBronzeIcon;
+		else if(damage == 5) return this.BlackBronzeIcon;
 
-		return this.ClayIcon; 
+		return this.ClayIcon;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
+	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
-		par3List.add(new ItemStack(par1, 1, 0));
-		par3List.add(new ItemStack(par1, 1, 1));
+		list.add(new ItemStack(item, 1, 0));
+		list.add(new ItemStack(item, 1, 1));
 	}
 }
