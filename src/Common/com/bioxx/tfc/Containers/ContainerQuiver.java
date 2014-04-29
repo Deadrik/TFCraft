@@ -28,15 +28,15 @@ public class ContainerQuiver extends ContainerTFC
 		this.posY = y;
 		this.posZ = z;
 		bagsSlotNum = player.inventory.currentItem;
-		this.addSlotToContainer(new SlotQuiver(containerInv, 0, 53, 8));
-		this.addSlotToContainer(new SlotQuiver(containerInv, 1, 71, 8));
-		this.addSlotToContainer(new SlotQuiver(containerInv, 2, 89, 8));
-		this.addSlotToContainer(new SlotQuiver(containerInv, 3, 107, 8));
-		this.addSlotToContainer(new SlotQuiver(containerInv, 4, 53, 26));
-		this.addSlotToContainer(new SlotQuiver(containerInv, 5, 71, 26));
-		this.addSlotToContainer(new SlotQuiver(containerInv, 6, 89, 26));
-		this.addSlotToContainer(new SlotQuiver(containerInv, 7, 107, 26));
-		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 54, true);
+		this.addSlotToContainer(new SlotQuiver(containerInv, 0, 53, 25));
+		this.addSlotToContainer(new SlotQuiver(containerInv, 1, 71, 25));
+		this.addSlotToContainer(new SlotQuiver(containerInv, 2, 89, 25));
+		this.addSlotToContainer(new SlotQuiver(containerInv, 3, 107, 25));
+		this.addSlotToContainer(new SlotQuiver(containerInv, 4, 53, 43));
+		this.addSlotToContainer(new SlotQuiver(containerInv, 5, 71, 43));
+		this.addSlotToContainer(new SlotQuiver(containerInv, 6, 89, 43));
+		this.addSlotToContainer(new SlotQuiver(containerInv, 7, 107, 43));
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, true);
 
 		if(!world.isRemote)
 			loadBagInventory();
