@@ -27,25 +27,27 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSapling extends BlockTerraContainer
 {
-	IIcon[] icons = new IIcon[16];
-	String[] woodNames;
+	protected IIcon[] icons;
+	protected String[] woodNames;
+
 	public BlockSapling()
 	{
 		super(Material.plants);
 		float f = 0.4F;
-		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
-		woodNames = new String[16];
-		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
+		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
+		this.woodNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, this.woodNames, 0, 16);
 		this.setTickRandomly(true);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.icons = new IIcon[woodNames.length];
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
-		for(int i = 0; i < 16; i++)
-			par3List.add(new ItemStack(par1, 1, i));
+		for(int i = 0; i < woodNames.length; i++)
+			list.add(new ItemStack(item, 1, i));
 	}
 
 	@Override
@@ -63,8 +65,9 @@ public class BlockSapling extends BlockTerraContainer
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		for(int i = 0; i < woodNames[i].length(); i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/"+woodNames[i]+" Sapling");
+		for(int i = 0; i < woodNames.length; i++)
+			this.icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + this.woodNames[i] + " Sapling");
+			
 	}
 
 	public void growTree(World world, int i, int j, int k, Random random)
@@ -84,7 +87,7 @@ public class BlockSapling extends BlockTerraContainer
 		if(!TFC_Core.isGrass(block) && !TFC_Core.isDirt(block) && !this.canBlockStay(world, i, j, k))
 		{
 			int meta = world.getBlockMetadata(i, j, k);
-			this.dropBlockAsItem(world, i, j, k, new ItemStack(this,1,meta));
+			this.dropBlockAsItem(world, i, j, k, new ItemStack(this, 1, meta));
 			world.setBlockToAir(i, j, k);
 		}
 	}
@@ -108,7 +111,7 @@ public class BlockSapling extends BlockTerraContainer
 		TileEntitySapling te = (TileEntitySapling) world.getTileEntity(i, j, k);
 
 		if(te != null && te.growTime == 0)
-			te.growTime = (long) ((TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7) * growSpeed)+(world.rand.nextFloat()*TFC_Time.dayLength));
+			te.growTime = (long) ((TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7) * growSpeed) + (world.rand.nextFloat() * TFC_Time.dayLength));
 
 		if (world.getBlockLightValue(i, j + 1, k) >= 9 && te!= null && TFC_Time.getTotalTicks() > te.growTime)
 			growTree(world, i, j, k, random);
@@ -188,7 +191,8 @@ public class BlockSapling extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
+	public TileEntity createNewTileEntity(World var1, int var2)
+	{
 		return new TileEntitySapling();
 	}
 

@@ -29,9 +29,8 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	public ItemTerraBlock(Block par1)
 	{
 		super(par1);
-		setHasSubtypes(true);
-		this.setCreativeTab(CreativeTabs.tabBlock);
-		folder = "";
+		this.setHasSubtypes(true);
+		this.folder = "";
 	}
 
 	public ItemTerraBlock setFolder(String f)
@@ -78,7 +77,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	}
 
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 

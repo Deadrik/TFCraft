@@ -29,7 +29,7 @@ public class ItemFruitTreeSapling extends ItemTerra
 		super();
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(CreativeTabs.tabFood);
 		this.MetaNames = Global.FRUIT_META_NAMES;
 		this.icons = new IIcon[MetaNames.length];
 	}

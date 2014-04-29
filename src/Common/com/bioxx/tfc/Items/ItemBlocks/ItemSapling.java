@@ -1,37 +1,37 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Enums.EnumWeight;
+
 public class ItemSapling extends ItemTerraBlock
 {
-	public static IIcon[] Icons = new IIcon[Global.WOOD_ALL.length];
-	
 	public ItemSapling(Block par1)
 	{
 		super(par1);
-		setMaxDamage(0);
-		setHasSubtypes(true);
-		MetaNames = Global.WOOD_ALL;
+		this.setMaxDamage(0);
+		this.setHasSubtypes(true);
+		this.MetaNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, this.MetaNames, 0, 16);
+		this.icons = new IIcon[MetaNames.length];
 	}
 
 	@Override
-	public IIcon getIconFromDamage(int par1)
+	public IIcon getIconFromDamage(int index)
 	{
-		return Icons[par1];
+		return icons[index];
 	}
 
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		for(int i = 0; i < Global.WOOD_ALL.length; i++)
-			Icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + Global.WOOD_ALL[i] + " Sapling");
+		for(int i = 0; i < this.MetaNames.length; i++)
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + this.MetaNames[i] + " Sapling");
 	}
 
 	@Override

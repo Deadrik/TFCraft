@@ -1,36 +1,19 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 
-public class ItemSapling2 extends ItemTerraBlock
+import com.bioxx.tfc.api.Constant.Global;
+
+public class ItemSapling2 extends ItemSapling
 {
 	public ItemSapling2(Block par1)
 	{
 		super(par1);
-		setMaxDamage(0);
-		setHasSubtypes(true);
-		MetaNames = Global.WOOD_ALL;
-	}
-	
-	@Override
-	public int getMetadata(int i)
-	{
-		return i;
-	}
-
-	@Override
-	public void registerIcons(IIconRegister registerer)
-	{
-	}
-
-	@Override
-	public EnumWeight getWeight(ItemStack is)
-	{
-		return EnumWeight.MEDIUM;
+		this.setMaxDamage(0);
+		this.setHasSubtypes(true);
+		this.MetaNames = new String[Global.WOOD_ALL.length - 16];
+		System.arraycopy(Global.WOOD_ALL, 16, MetaNames, 0, Global.WOOD_ALL.length - 16);
+		this.icons = new IIcon[MetaNames.length];
 	}
 }
