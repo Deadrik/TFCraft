@@ -52,7 +52,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		for(int i = 0; i < MetaNames.length; i++)
-			list.add(new ItemStack(this,1,i));
+			list.add(new ItemStack(this, 1, i));
 	}
 
 	@Override
@@ -85,27 +85,27 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 			if(side == 1)
 			{
 				int offset = 0;
-				if(world.getBlock(x, y, z) != TFCBlocks.Pottery && world.isAirBlock(x, y+1, z))
+				if(world.getBlock(x, y, z) != TFCBlocks.Pottery && world.isAirBlock(x, y + 1, z))
 				{
 					//We only want the pottery to be placeable if the block is solid on top.
 					if(!world.isSideSolid(x, y, z, ForgeDirection.UP))
 						return false;
-					world.setBlock(x, y+1, z, TFCBlocks.Pottery);
+					world.setBlock(x, y + 1, z, TFCBlocks.Pottery);
 					offset = 1;
 				}
 
 
-				if(world.getTileEntity(x, y+offset, z) != null && world.getTileEntity(x, y+offset, z) instanceof TileEntityPottery) 
+				if(world.getTileEntity(x, y+offset, z) != null && world.getTileEntity(x, y + offset, z) instanceof TileEntityPottery) 
 				{
-					te = (TileEntityPottery) world.getTileEntity(x, y+offset, z);
+					te = (TileEntityPottery) world.getTileEntity(x, y + offset, z);
 					if(hitX < 0.5 && hitZ < 0.5)
 					{
 						if(te.inventory[0] == null)
 						{
-							te.inventory[0] = new ItemStack(this,1,itemstack.getItemDamage());
+							te.inventory[0] = new ItemStack(this, 1, itemstack.getItemDamage());
 							te.inventory[0].stackTagCompound = itemstack.stackTagCompound;
 							itemstack.stackSize--;
-							world.markBlockForUpdate(x, y+offset, z);
+							world.markBlockForUpdate(x, y + offset, z);
 //							try {
 //								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
 //							} catch (IOException e) {}
@@ -118,7 +118,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 							te.inventory[1] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[1].stackTagCompound = itemstack.stackTagCompound;
 							itemstack.stackSize--;
-							world.markBlockForUpdate(x, y+offset, z);
+							world.markBlockForUpdate(x, y + offset, z);
 //							try {
 //								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
 //							} catch (IOException e) {}
@@ -131,7 +131,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 							te.inventory[2] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[2].stackTagCompound = itemstack.stackTagCompound;
 							itemstack.stackSize--;
-							world.markBlockForUpdate(x, y+offset, z);
+							world.markBlockForUpdate(x, y + offset, z);
 //							try {
 //								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
 //							} catch (IOException e) {}
@@ -143,7 +143,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 							te.inventory[3] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[3].stackTagCompound = itemstack.stackTagCompound;
 							itemstack.stackSize--;
-							world.markBlockForUpdate(x, y+offset, z);
+							world.markBlockForUpdate(x, y + offset, z);
 //							try {
 //								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
 //							} catch (IOException e) {}

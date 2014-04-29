@@ -2,8 +2,10 @@ package com.bioxx.tfc.Food;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
@@ -35,6 +37,12 @@ public class ItemMeal extends ItemTerra implements IFood
 		this.MetaNames = new String[]{"Meal0","Meal1","Meal2","Meal3","Meal4","Meal5","Meal6","Meal7","Meal8","Meal9","Meal10",};
 		this.MetaIcons = new IIcon[11];
 		this.setFolder("food/");
+	}
+
+	@Override
+	public void getSubItems(Item item, CreativeTabs tabs, List list)
+	{
+		// Removes meals from creative tab because without NBT data, they are useless
 	}
 
 	@Override

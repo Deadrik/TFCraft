@@ -461,6 +461,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(ArmourStand, com.bioxx.tfc.Items.ItemBlocks.ItemArmourStand.class, "ArmourStand");
 		GameRegistry.registerBlock(ArmourStand2, com.bioxx.tfc.Items.ItemBlocks.ItemArmourStand2.class, "ArmourStand2");
 		GameRegistry.registerBlock(BerryBush, com.bioxx.tfc.Items.ItemBlocks.ItemBerryBush.class, "BerryBush");
+		GameRegistry.registerBlock(Crops, "Crops");
 		GameRegistry.registerBlock(LilyPad, com.bioxx.tfc.Items.ItemBlocks.ItemCustomLilyPad.class, "LilyPad");
 		GameRegistry.registerBlock(Flowers, com.bioxx.tfc.Items.ItemBlocks.ItemFlowers.class, "Flowers");
 		GameRegistry.registerBlock(Fungi, com.bioxx.tfc.Items.ItemBlocks.ItemFungi.class, "Fungi");

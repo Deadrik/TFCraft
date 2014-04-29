@@ -85,7 +85,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 	@Override
 	public String getItemStackDisplayName(ItemStack is)
 	{
-		return StatCollector.translateToLocal(getUnlocalizedName(is).replace(" ", ""));
+		return StatCollector.translateToLocal(getUnlocalizedName(is).replace("item.", ""));
 	}
 	
 	@Override

@@ -3,6 +3,16 @@ package com.bioxx.tfc.Items.Pottery;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -19,16 +29,6 @@ import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Util.Helper;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-
 public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 {
 	public ItemPotterySmallVessel()
@@ -41,7 +41,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	}
 
 	@Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
+	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
 		list.add(new ItemStack(this, 1, 0));
 		list.add(new ItemStack(this, 1, 1));
@@ -184,7 +184,6 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				}
 			}
 		}
-
 	}
 
 	private int mergeMetals(Metal mt0, Metal mt1, int m0, int m1)
@@ -262,12 +261,12 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		if(!entityplayer.isSneaking())
 		{
 			NBTTagCompound nbt = itemstack.getTagCompound();
-			if(itemstack.getItemDamage() == 2) 
+			if(itemstack.getItemDamage() == 2)
 			{
 				if(nbt.hasKey("TempTimer"))
 				{
 					long temp = nbt.getLong("TempTimer");
-					if(TFC_Time.getTotalHours() - temp < 11) 
+					if(TFC_Time.getTotalHours() - temp < 11)
 						entityplayer.openGui(TerraFirmaCraft.instance, 19, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 				}
 			}
@@ -289,14 +288,14 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			{
 				String name = tag.getString("MetalType");
 				name = name.replace(" ", "");
-				arraylist.add(EnumChatFormatting.DARK_GREEN + StatCollector.translateToLocal("gui.metal."+name));
+				arraylist.add(EnumChatFormatting.DARK_GREEN + StatCollector.translateToLocal("gui.metal." + name));
 			}
 
 			if(tag.hasKey("TempTimer"))
 			{
 				long total = TFC_Time.getTotalHours();
 				long temp = tag.getLong("TempTimer");
-				if(total - temp < 11) 
+				if(total - temp < 11)
 					arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ItemHeat.Liquid"));
 			}
 
@@ -317,11 +316,11 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 								float decay = itemstack.getTagCompound().getFloat("foodDecay");
 								float weight = itemstack.getTagCompound().getFloat("foodWeight");
 
-								String ds = " " +EnumChatFormatting.DARK_GRAY + Helper.roundNumber(decay/weight*100, 10)+"%";
+								String ds = " " + EnumChatFormatting.DARK_GRAY + Helper.roundNumber(decay / weight * 100, 10) + "%";
 								if (decay <= 0)
 									ds = "";
 
-								arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.getItem().getItemStackDisplayName(itemstack) + " " + EnumChatFormatting.WHITE+weight+"oz" + ds);
+								arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.getItem().getItemStackDisplayName(itemstack) + " " + EnumChatFormatting.WHITE+weight + "oz" + ds);
 							}
 							else
 								arraylist.add(EnumChatFormatting.GOLD.toString() + itemstack.stackSize + "x " + itemstack.getItem().getItemStackDisplayName(itemstack));
@@ -335,7 +334,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
-		if (TFC_Core.showExtraInformation()) 
+		if (TFC_Core.showExtraInformation())
 		{
 			arraylist.add(StatCollector.translateToLocal("gui.Help"));
 			arraylist.add(StatCollector.translateToLocal("gui.PotteryBase.Inst0"));
