@@ -35,9 +35,9 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	public TileEntityForge()
 	{
 		super();
-		fuelTimeLeft = 900;
-		fuelBurnTemp =  1400;
-		fireTemp = 1;
+		fuelTimeLeft = 200;
+		fuelBurnTemp =  200;
+		fireTemp = 20;
 		isSmokeStackValid = false;
 		fireItemStacks = new ItemStack[14];
 		externalFireCheckTimer = 0;
