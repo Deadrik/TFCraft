@@ -108,7 +108,6 @@ public class ClientOverrides
 				BiomeGenBase biomegenbase = worldclient.getBiomeGenForCoords(x, z);
 				if(!WeatherManager.canSnow(x, y, z))
 				{
-					System.out.println("canSnow");
 					if (y <= j + b0 && y >= j - b0 && biomegenbase.canSpawnLightningBolt())
 					{
 						float f1 = random.nextFloat();
