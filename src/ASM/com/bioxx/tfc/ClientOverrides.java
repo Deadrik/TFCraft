@@ -18,7 +18,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.WeatherManager;
-import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -110,11 +109,10 @@ public class ClientOverrides
 				int z = k + random.nextInt(b0) - random.nextInt(b0);
 				int y = worldclient.getPrecipitationHeight(x, z);
 				Block b = worldclient.getBlock(x, y - 1, z);
-				TFCBiome biome = (TFCBiome) worldclient.getBiomeGenForCoords(x, z);
 				if(!WeatherManager.canSnow(x, y, z))
 				{
 					System.out.println("canSnow");
-					if (y <= j + b0 && y >= j - b0 && biome.canSpawnLightningBolt())
+					if (y <= j + b0 && y >= j - b0)
 					{
 						float f1 = random.nextFloat();
 						float f2 = random.nextFloat();

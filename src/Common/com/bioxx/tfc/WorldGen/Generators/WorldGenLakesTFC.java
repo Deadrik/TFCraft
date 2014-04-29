@@ -2,18 +2,18 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 
 public class WorldGenLakesTFC extends WorldGenerator
 {
@@ -24,6 +24,7 @@ public class WorldGenLakesTFC extends WorldGenerator
 		this.liquidBlock = par1;
 	}
 
+	@Override
 	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		xCoord -= 8;
@@ -58,9 +59,9 @@ public class WorldGenLakesTFC extends WorldGenerator
 					{
 						for (int var23 = 1; var23 < 7; ++var23)
 						{
-							double var24 = ((double)var21 - var15) / (var9 / 2.0D);
-							double var26 = ((double)var23 - var17) / (var11 / 2.0D);
-							double var28 = ((double)var22 - var19) / (var13 / 2.0D);
+							double var24 = (var21 - var15) / (var9 / 2.0D);
+							double var26 = (var23 - var17) / (var11 / 2.0D);
+							double var28 = (var22 - var19) / (var13 / 2.0D);
 							double var30 = var24 * var24 + var26 * var26 + var28 * var28;
 							if (var30 < 1.0D)
 								var6[(var21 * 16 + var22) * 8 + var23] = true;
@@ -129,7 +130,7 @@ public class WorldGenLakesTFC extends WorldGenerator
 								b == TFCBlocks.Peat || b == TFCBlocks.PeatGrass) && 
 								world.getSavedLightValue(EnumSkyBlock.Sky, xCoord + i2, yCoord + k4, zCoord + j3) > 0)
 						{
-							TFCBiome var35 = (TFCBiome) world.getBiomeGenForCoords(xCoord + i2, zCoord + j3);
+							BiomeGenBase var35 = world.getBiomeGenForCoords(xCoord + i2, zCoord + j3);
 							if (var35.topBlock == Blocks.mycelium)
 							{
 								world.setBlock(xCoord + i2, yCoord + k4 - 1, zCoord + j3, Blocks.mycelium);

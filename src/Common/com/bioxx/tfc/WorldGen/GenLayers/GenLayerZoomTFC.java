@@ -102,11 +102,11 @@ public class GenLayerZoomTFC extends GenLayerTFC
 		}
 	}
 
-	public static GenLayerTFC func_75915_a(long par0, GenLayerTFC par2GenLayer, int par3)
+	public static GenLayerTFC magnify(long seed, GenLayerTFC layer, int par3)
 	{
-		Object var4 = par2GenLayer;
-		for (int var5 = 0; var5 < par3; ++var5)
-			var4 = new GenLayerZoomTFC(par0 + (long)var5, (GenLayerTFC) var4);
-		return (GenLayerTFC) var4;
+		Object obj = layer;
+		for (int c = 0; c < par3; ++c)
+			obj = new GenLayerZoomTFC(seed + (long)c, (GenLayerTFC) obj);
+		return (GenLayerTFC) obj;
 	}
 }

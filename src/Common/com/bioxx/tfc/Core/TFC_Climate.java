@@ -2,13 +2,13 @@ package com.bioxx.tfc.Core;
 
 import java.util.ArrayList;
 
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+
 import com.bioxx.tfc.Core.Util.BlockMeta;
-import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 import com.bioxx.tfc.api.Util.Helper;
 
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -497,10 +497,10 @@ public class TFC_Climate
 	public static float getTerrainAdjustedRainfall(int x, int y, int z)
 	{
 		float rain = getRainfall(x, y, z);
-		ArrayList biomes = new ArrayList<TFCBiome>();
-		biomes.add(TFCBiome.river);
-		biomes.add(TFCBiome.ocean);
-		biomes.add(TFCBiome.swampland);
+		ArrayList biomes = new ArrayList<BiomeGenBase>();
+		biomes.add(BiomeGenBase.river);
+		biomes.add(BiomeGenBase.ocean);
+		biomes.add(BiomeGenBase.swampland);
 
 		float rainModWest = 1;
 		float rainModNorth = 1;
@@ -508,32 +508,32 @@ public class TFC_Climate
 		float rainModEast = 1;
 
 		BiomeGenBase biome = null;
-		for(int i = 0; i < 8; i++)
+		/*for(int i = 0; i < 8; i++)
 		{
 			biome = worldObj.getBiomeGenForCoords(( x- 512) + (64 * i), z);
-			if(biome.biomeID == TFCBiome.Mountains.biomeID)
+			if(biome.biomeID == BiomeGenBase.Mountains.biomeID)
 				rainModWest = 1 - (i * 0.0625f);
-			else if(biome.biomeID == TFCBiome.ocean.biomeID)
+			else if(biome.biomeID == BiomeGenBase.ocean.biomeID)
 				rainModWest = 1 + (i * 0.125f);
 		}
 		for(int i = 0; i < 8; i++)
 		{
 			biome =  worldObj.getBiomeGenForCoords(x, (z + 512) - (64 * i));
-			if(biome.biomeID == TFCBiome.Mountains.biomeID)
+			if(biome.biomeID == BiomeGenBase.Mountains.biomeID)
 				rainModSouth = 1 - (i * 0.0625f);
-			else if(biome.biomeID == TFCBiome.ocean.biomeID)
+			else if(biome.biomeID == BiomeGenBase.ocean.biomeID)
 				rainModSouth = 1 + (i * 0.125f);
-		}
+		}*/
 		for(int i = 0; i < 2; i++)
 		{
 			biome = worldObj.getBiomeGenForCoords(x, (z - 128) + (64 * i));
-			if(biome.biomeID == TFCBiome.ocean.biomeID)
+			if(biome.biomeID == BiomeGenBase.ocean.biomeID)
 				rainModNorth +=  0.35f;
 		}
 		for(int i = 0; i < 2; i++)
 		{
 			biome = worldObj.getBiomeGenForCoords((x + 128) - (64 * i), z);
-			if(biome.biomeID == TFCBiome.ocean.biomeID)
+			if(biome.biomeID == BiomeGenBase.ocean.biomeID)
 				rainModEast += 0.35f;
 		}
 
@@ -543,7 +543,7 @@ public class TFC_Climate
 			for(int k = -2; k <= 2 && addMoisture == 1; k++)
 			{
 				biome = worldObj.getBiomeGenForCoords(x + (i * 8), z + (k * 8));
-				if(biome.biomeID == TFCBiome.ocean.biomeID || biome.biomeID == TFCBiome.river.biomeID || biome.biomeID == TFCBiome.swampland.biomeID)
+				if(biome.biomeID == BiomeGenBase.ocean.biomeID || biome.biomeID == BiomeGenBase.river.biomeID || biome.biomeID == BiomeGenBase.swampland.biomeID)
 					addMoisture = 2f;
 			}
 		}

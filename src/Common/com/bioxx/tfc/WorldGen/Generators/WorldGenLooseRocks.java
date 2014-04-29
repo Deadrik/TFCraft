@@ -3,6 +3,15 @@ package com.bioxx.tfc.WorldGen.Generators;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.IChunkProvider;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.Terrain.BlockOre;
@@ -10,15 +19,7 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Util.BlockMeta;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
-import com.bioxx.tfc.WorldGen.TFCBiome;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenLooseRocks implements IWorldGenerator
@@ -88,8 +89,8 @@ public class WorldGenLooseRocks implements IWorldGenerator
 	{
 		chunkX *= 16;
 		chunkZ *= 16;
-		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
-		if(biome == TFCBiome.ocean)
+		BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
+		if(biome == BiomeGenBase.ocean)
 			return;
 
 		//rocks/ore
@@ -114,8 +115,8 @@ public class WorldGenLooseRocks implements IWorldGenerator
 		if ((world.isAirBlock(i, j + 1, k) || world.getBlock(i, j + 1, k) == Blocks.snow || world.getBlock(i, j + 1, k) == TFCBlocks.TallGrass) && 
 				(world.getBlock(i, j, k).getMaterial() == Material.grass || world.getBlock(i, j, k).getMaterial() == Material.rock) && world.getBlock(i, j, k).isOpaqueCube())
 		{
-			TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(i, k);
-			if((biome == TFCBiome.beach || biome == TFCBiome.ocean || biome == TFCBiome.river || isNearTree(world, i, j, k)) && 
+			BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
+			if((biome == BiomeGenBase.beach || biome == BiomeGenBase.ocean || biome == BiomeGenBase.river || isNearTree(world, i, j, k)) && 
 					world.setBlock(i, j + 1, k, TFCBlocks.worldItem, 0, 2))
 			{
 				TEWorldItem te =(TEWorldItem) world.getTileEntity(i, j + 1, k);

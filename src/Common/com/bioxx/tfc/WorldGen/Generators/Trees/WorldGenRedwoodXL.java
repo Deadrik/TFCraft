@@ -5,14 +5,14 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class WorldGenRedwoodXL extends WorldGenerator
 {
@@ -72,9 +72,9 @@ public class WorldGenRedwoodXL extends WorldGenerator
 			}
 		}
 
-		int meta = TFCBiome.getSurfaceRockLayer(world, x, z);
+		int meta =  TFC_Climate.getRockLayer(x, y, z, 0).meta;
 		Block dirt = TFC_Core.getTypeForDirt(meta);
-//		int dirtMeta =  TFC_Core.getSoilMetaFromStone(dirtID, meta);
+		//		int dirtMeta =  TFC_Core.getSoilMetaFromStone(dirtID, meta);
 		if(world.getBlock(x, y - 1, z).getMaterial().isReplaceable())
 			world.setBlock(x, y - 1, z, dirt, meta, 2);
 		if(world.getBlock(x-1, y - 1, z).getMaterial().isReplaceable())

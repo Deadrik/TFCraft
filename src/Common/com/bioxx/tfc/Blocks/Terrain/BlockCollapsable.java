@@ -3,17 +3,6 @@ package com.bioxx.tfc.Blocks.Terrain;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.TileEntities.TileEntityPartial;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Enums.TFCDirection;
-import com.bioxx.tfc.api.Util.ByteCoord;
-import com.bioxx.tfc.api.Util.CollapseData;
-import com.bioxx.tfc.api.Util.CollapseList;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,6 +14,16 @@ import net.minecraft.stats.StatList;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.TileEntities.TileEntityPartial;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Enums.TFCDirection;
+import com.bioxx.tfc.api.Util.ByteCoord;
+import com.bioxx.tfc.api.Util.CollapseData;
+import com.bioxx.tfc.api.Util.CollapseList;
 
 public class BlockCollapsable extends BlockTerraContainer
 {
@@ -171,7 +170,7 @@ public class BlockCollapsable extends BlockTerraContainer
 				if(fallingBlock != null)
 				{
 					//EntityFallingStone ent = new EntityFallingStone(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), fallingBlock, fallingBlockMeta+8);
-					EntityFallingBlock ent = new EntityFallingBlock(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), fallingBlock, fallingBlockMeta+8);
+					EntityFallingBlock ent = new EntityFallingBlock(world, i + 0.5F, j + 0.5F, k + 0.5F, fallingBlock, fallingBlockMeta+8);
 					ent.field_145812_b/*fallTime*/ = -5000;
 					world.spawnEntityInWorld(ent);
 					Random R = new Random(i*j+k);
@@ -207,7 +206,6 @@ public class BlockCollapsable extends BlockTerraContainer
 	{
 		float seismicModifier = 0.2f;
 		float softModifier = 0.1f;
-		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(i, k);
 		int finalCollapseRatio = TFCOptions.initialCollapseRatio;
 
 		//Make sure that the player gets exhausted from harvesting this block since we override the vanilla method
@@ -221,8 +219,8 @@ public class BlockCollapsable extends BlockTerraContainer
 		if(this == TFCBlocks.StoneSed)
 			finalCollapseRatio -= finalCollapseRatio * softModifier;
 		//If we are in what is considered to be a seismically active zone, then we increase the chance by 20%
-		if(biome.biomeName.contains("Seismic"))
-			finalCollapseRatio -= finalCollapseRatio * seismicModifier;
+		/*if(biome.biomeName.contains("Seismic"))
+			finalCollapseRatio -= finalCollapseRatio * seismicModifier;*/
 
 		//First we check the rng to see if a collapse is going to occur
 		if(world.rand.nextInt(finalCollapseRatio) == 0)
@@ -232,7 +230,7 @@ public class BlockCollapsable extends BlockTerraContainer
 			for(int x1 = -1; x1 < 2 && !found; x1++)
 				for(int z1 = -1; z1 < 2 && !found; z1++)
 					if(world.getBlock(i+x1, j, k+z1) instanceof BlockCollapsable && 
-						((BlockCollapsable)world.getBlock(i+x1, j, k+z1)).tryToFall(world, i+x1, j, k+z1, 0))
+							((BlockCollapsable)world.getBlock(i+x1, j, k+z1)).tryToFall(world, i+x1, j, k+z1, 0))
 					{
 						found = true;
 						triggerCollapse(world, entityplayer, i, j, k, meta);

@@ -1,21 +1,26 @@
 package com.bioxx.tfc.WorldGen.GenLayers;
 
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.WorldGen.TFCWorldType;
-
-import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.IntCache;
+
+import com.bioxx.tfc.WorldGen.TFCWorldType;
 
 public class GenLayerBiomeTFC extends GenLayerTFC
 {
-	/** this sets all the biomes that are allowed to appear in the overworld */
-	private TFCBiome[] allowedBiomes;
+	private BiomeGenBase[] hotBiomes;
+	private BiomeGenBase[] wetWarmBiomes;
+	private BiomeGenBase[] wetCoolBiomes;
+	private BiomeGenBase[] coldBiomes;
+	private static final String __OBFID = "CL_00000555";
 
-	public GenLayerBiomeTFC(long par1, GenLayer par3GenLayer, TFCWorldType par4)
+	public GenLayerBiomeTFC(long par1, GenLayerTFC parent, TFCWorldType worldType)
 	{
 		super(par1);
-		this.allowedBiomes = par4.getBiomesForWorldType();
-		this.parent = (GenLayerTFC) par3GenLayer;
+		this.hotBiomes = new BiomeGenBase[] {BiomeGenBase.desert, BiomeGenBase.desert, BiomeGenBase.desert, BiomeGenBase.savanna, BiomeGenBase.savanna, BiomeGenBase.plains};
+		this.wetWarmBiomes = new BiomeGenBase[] {BiomeGenBase.forest, BiomeGenBase.roofedForest, BiomeGenBase.extremeHills, BiomeGenBase.plains, BiomeGenBase.birchForest, BiomeGenBase.swampland};
+		this.wetCoolBiomes = new BiomeGenBase[] {BiomeGenBase.forest, BiomeGenBase.extremeHills, BiomeGenBase.taiga, BiomeGenBase.plains};
+		this.coldBiomes = new BiomeGenBase[] {BiomeGenBase.icePlains, BiomeGenBase.icePlains, BiomeGenBase.icePlains, BiomeGenBase.coldTaiga};
+		this.parent = parent;
 	}
 
 	/**
@@ -23,23 +28,79 @@ public class GenLayerBiomeTFC extends GenLayerTFC
 	 * amounts, or biomeList[] indices based on the particular GenLayer subclass.
 	 */
 	@Override
-	public int[] getInts(int par1, int par2, int par3, int par4)
+	public int[] getInts(int x, int z, int xMax, int zMax)
 	{
-		int[] var5 = this.parent.getInts(par1, par2, par3, par4);
-		int[] var6 = IntCache.getIntCache(par3 * par4);
+		int[] parentNoise = this.parent.getInts(x, z, xMax, zMax);
+		int[] cache = IntCache.getIntCache(xMax * zMax);
 
-		for (int var7 = 0; var7 < par4; ++var7)
+		for (int i = 0; i < zMax; ++i)
 		{
-			for (int var8 = 0; var8 < par3; ++var8)
+			for (int k = 0; k < xMax; ++k)
 			{
-				this.initChunkSeed(var8 + par1, var7 + par2);
-				int var9 = var5[var8 + var7 * par3];
-				if (var9 == 0)
-					var6[var8 + var7 * par3] = 0;
+				this.initChunkSeed(k + x, i + z);
+				int biomeID = parentNoise[k + i * xMax];
+				int l1 = (biomeID & 3840) >> 8;
+			biomeID &= -3841;
+
+			if (isBiomeOceanic(biomeID))
+			{
+				cache[k + i * xMax] = biomeID;
+			}
+			else if (biomeID == BiomeGenBase.mushroomIsland.biomeID)
+			{
+				cache[k + i * xMax] = biomeID;
+			}
+			else if (biomeID == 1)
+			{
+				if (l1 > 0)
+				{
+					if (this.nextInt(3) == 0)
+					{
+						cache[k + i * xMax] = BiomeGenBase.mesaPlateau.biomeID;
+					}
+					else
+					{
+						cache[k + i * xMax] = BiomeGenBase.mesaPlateau_F.biomeID;
+					}
+				}
 				else
-					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].biomeID;
+				{
+					cache[k + i * xMax] = this.hotBiomes[this.nextInt(this.hotBiomes.length)].biomeID;
+				}
+			}
+			else if (biomeID == 2)
+			{
+				if (l1 > 0)
+				{
+					cache[k + i * xMax] = BiomeGenBase.jungle.biomeID;
+				}
+				else
+				{
+					cache[k + i * xMax] = this.wetWarmBiomes[this.nextInt(this.wetWarmBiomes.length)].biomeID;
+				}
+			}
+			else if (biomeID == 3)
+			{
+				if (l1 > 0)
+				{
+					cache[k + i * xMax] = BiomeGenBase.megaTaiga.biomeID;
+				}
+				else
+				{
+					cache[k + i * xMax] = this.wetCoolBiomes[this.nextInt(this.wetCoolBiomes.length)].biomeID;
+				}
+			}
+			else if (biomeID == 4)
+			{
+				cache[k + i * xMax] = this.coldBiomes[this.nextInt(this.coldBiomes.length)].biomeID;
+			}
+			else
+			{
+				cache[k + i * xMax] = BiomeGenBase.mushroomIsland.biomeID;
+			}
 			}
 		}
-		return var6;
+
+		return cache;
 	}
 }

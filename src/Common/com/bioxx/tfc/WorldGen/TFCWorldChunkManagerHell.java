@@ -5,25 +5,25 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.biome.BiomeGenBase;
+
 import com.bioxx.tfc.WorldGen.GenLayers.GenEVTLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenRainLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenRockLayer2TFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenTreeLayerTFC;
 
-import net.minecraft.world.ChunkPosition;
-import net.minecraft.world.biome.BiomeGenBase;
-
 public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 {
 	/** The biome generator object. */
-	private TFCBiome biomeGenerator;
+	private BiomeGenBase biomeGenerator;
 	private float hellTemperature;
 
 	/** The rainfall in the world */
 	private float rainfall;
 
-	public TFCWorldChunkManagerHell(TFCBiome par1, float par2, float par3)
+	public TFCWorldChunkManagerHell(BiomeGenBase par1, float par2, float par3)
 	{
 		this.biomeGenerator = par1;
 		this.hellTemperature = par2;
@@ -41,9 +41,9 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 		treeCache[2] = new DataCache(this,2);
 
 		//Setup Rocks
-		GenLayerTFC[] var5 = GenRockLayer2TFC.initializeAllBiomeGenerators(seed+1, TFCWorldType.DEFAULT);
-		GenLayerTFC[] var6 = GenRockLayer2TFC.initializeAllBiomeGenerators(seed+2, TFCWorldType.DEFAULT);
-		GenLayerTFC[] var7 = GenRockLayer2TFC.initializeAllBiomeGenerators(seed+3, TFCWorldType.DEFAULT);
+		GenLayerTFC[] var5 = GenRockLayer2TFC.initializeAllBiomeGeneratorsOld(seed+1, TFCWorldType.DEFAULT);
+		GenLayerTFC[] var6 = GenRockLayer2TFC.initializeAllBiomeGeneratorsOld(seed+2, TFCWorldType.DEFAULT);
+		GenLayerTFC[] var7 = GenRockLayer2TFC.initializeAllBiomeGeneratorsOld(seed+3, TFCWorldType.DEFAULT);
 		genRocks = new GenLayerTFC[3];
 		rocksIndexLayer = new GenLayerTFC[3];
 		this.genRocks[0] = var5[0];
@@ -59,30 +59,30 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 		genTrees = new GenLayerTFC[3];
 		treesIndexLayer = new GenLayerTFC[3];
 
-		GenLayerTFC[] var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(seed+4, TFCWorldType.DEFAULT);
+		GenLayerTFC[] var8 = GenTreeLayerTFC.initializeAllBiomeGeneratorsOld(seed+4, TFCWorldType.DEFAULT);
 		genTrees[0] = var8[0];
 		treesIndexLayer[0] = var8[1];
 
-		var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(seed+5, TFCWorldType.DEFAULT);
+		var8 = GenTreeLayerTFC.initializeAllBiomeGeneratorsOld(seed+5, TFCWorldType.DEFAULT);
 		genTrees[1] = var8[0];
 		treesIndexLayer[1] = var8[1];
 
-		var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(seed+6, TFCWorldType.DEFAULT);
+		var8 = GenTreeLayerTFC.initializeAllBiomeGeneratorsOld(seed+6, TFCWorldType.DEFAULT);
 		genTrees[2] = var8[0];
 		treesIndexLayer[2] = var8[1];
 
 		//Setup Evapotranspiration
-		var8 = GenEVTLayerTFC.initializeAllBiomeGenerators(seed+7, TFCWorldType.DEFAULT);
+		var8 = GenEVTLayerTFC.initializeAllBiomeGeneratorsOld(seed+7, TFCWorldType.DEFAULT);
 		genEVT = var8[0];
 		evtIndexLayer = var8[1];
 
 		//Setup Rainfall
-		var8 = GenRainLayerTFC.initializeAllBiomeGenerators(seed+8, TFCWorldType.DEFAULT);
+		var8 = GenRainLayerTFC.initializeAllBiomeGeneratorsOld(seed+8, TFCWorldType.DEFAULT);
 		genRainfall = var8[0];
 		rainfallIndexLayer = var8[1];
-		
+
 		this.biomesToSpawnIn = new ArrayList();
-		this.biomesToSpawnIn.add(TFCBiome.hell);
+		this.biomesToSpawnIn.add(BiomeGenBase.hell);
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 	 * Returns the BiomeGenBase related to the x, z position on the world.
 	 */
 	@Override
-	public TFCBiome getBiomeGenAt(int par1, int par2)
+	public BiomeGenBase getBiomeGenAt(int par1, int par2)
 	{
 		return this.biomeGenerator;
 	}
@@ -107,12 +107,12 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 	 * Returns an array of biomes for the location input.
 	 */
 	@Override
-	public TFCBiome[] getBiomesForGeneration(BiomeGenBase[] par1, int par2, int par3, int par4, int par5)
+	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] par1, int par2, int par3, int par4, int par5)
 	{
 		if (par1 == null || par1.length < par4 * par5)
-			par1 = new TFCBiome[par4 * par5];
+			par1 = new BiomeGenBase[par4 * par5];
 		Arrays.fill(par1, 0, par4 * par5, this.biomeGenerator);
-		return (TFCBiome[]) par1;
+		return par1;
 	}
 
 	/**
@@ -144,12 +144,12 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 	 * WorldChunkManager Args: oldBiomeList, x, z, width, depth
 	 */
 	@Override
-	public TFCBiome[] loadBlockGeneratorData(BiomeGenBase[] par1, int par2, int par3, int par4, int par5)
+	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase[] par1, int par2, int par3, int par4, int par5)
 	{
 		if (par1 == null || par1.length < par4 * par5)
-			par1 = new TFCBiome[par4 * par5];
+			par1 = new BiomeGenBase[par4 * par5];
 		Arrays.fill(par1, 0, par4 * par5, this.biomeGenerator);
-		return (TFCBiome[]) par1;
+		return par1;
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 	 * don't check biomeCache to avoid infinite loop in BiomeCacheBlock)
 	 */
 	@Override
-	public TFCBiome[] getBiomeGenAt(BiomeGenBase[] par1, int par2, int par3, int par4, int par5, boolean par6)
+	public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] par1, int par2, int par3, int par4, int par5, boolean par6)
 	{
 		return this.loadBlockGeneratorData(par1, par2, par3, par4, par5);
 	}

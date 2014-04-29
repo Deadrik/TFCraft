@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
@@ -27,6 +22,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -73,7 +74,7 @@ public class BlockCustomBed extends BlockDirectional
 				i1 = par1World.getBlockMetadata(par2, par3, par4);
 			}
 
-			if (par1World.provider.canRespawnHere() && par1World.getBiomeGenForCoords(par2, par4) != TFCBiome.hell)
+			if (par1World.provider.canRespawnHere() && par1World.getBiomeGenForCoords(par2, par4) != BiomeGenBase.hell)
 			{
 				if (isBedOccupied(i1))
 				{
@@ -149,9 +150,9 @@ public class BlockCustomBed extends BlockDirectional
 	@Override
 	public boolean isBed(IBlockAccess world, int x, int y, int z, EntityLivingBase player)
 	{
-//		World w = player.worldObj;
-//		if(!w.isRemote && player!=null)
-//			((EntityPlayer)player).sleepTimer = 50;
+		//		World w = player.worldObj;
+		//		if(!w.isRemote && player!=null)
+		//			((EntityPlayer)player).sleepTimer = 50;
 
 		return this == Blocks.bed;
 	}
@@ -360,7 +361,7 @@ public class BlockCustomBed extends BlockDirectional
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		
+
 		ret.add(new ItemStack(TFCItems.Hide,1,2));
 		ret.add(new ItemStack(TFCBlocks.Thatch,2,0));
 		return ret;
