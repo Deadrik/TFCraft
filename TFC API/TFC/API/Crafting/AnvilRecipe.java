@@ -20,15 +20,22 @@ public class AnvilRecipe
 	boolean inheritsDamage;
 	public int craftingXP = 1;
 	ArrayList<String> skillsList = new ArrayList<String>();
+	private static int craftingBoundDefault = 50;
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, AnvilReq req, ItemStack result)
 	{
-		this(in, in2, p.toLowerCase(), 70 + new Random((in != null ? in.itemID : 0) + (result != null ? result.itemID : 0)).nextInt(60), flux, req.Tier, result);
+		this(in, in2, p.toLowerCase(), 70 + new Random((in != null ? in.itemID : 0) + (result != null ? result.itemID : 0)).nextInt(craftingBoundDefault), flux, req.Tier, result);
 	}
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, AnvilReq req, ItemStack result)
 	{
-		this(in, in2, p.toLowerCase(), 70 + new Random((in != null ? in.itemID : 0) + (result != null ? result.itemID : 0)).nextInt(60), false, req.Tier, result);
+		this(in, in2, p.toLowerCase(), 70 + new Random((in != null ? in.itemID : 0) + (result != null ? result.itemID : 0)).nextInt(craftingBoundDefault), false, req.Tier, result);
+	}
+
+	public AnvilRecipe SetCraftingBound(int max)
+	{
+		craftingValue = 70 + new Random((input1 != null ? input1.itemID : 0) + (result != null ? result.itemID : 0)).nextInt(max);
+		return this;
 	}
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, int cv, boolean flux, int req, ItemStack result)
