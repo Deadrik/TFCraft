@@ -193,7 +193,7 @@ public class TFC_ItemHeat
 		{
 			HeatIndex hi = manager.findMatchingIndex(is);
 			if(hi != null)
-				return (1f / hi.specificHeat)/4f;
+				return hi.specificHeat;
 			else
 				return 1;
 		}
