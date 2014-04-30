@@ -32,6 +32,7 @@ public class StripChunkCommand extends CommandBase{
 
 		if(params.length == 0)
 		{
+			player.addChatMessage("Stripping Chunk");
 			Chunk chunk = world.getChunkFromBlockCoords((int)player.posX, (int)player.posZ);
 			for(int x = 0; x < 16; x++)
 			{
@@ -51,6 +52,7 @@ public class StripChunkCommand extends CommandBase{
 		}
 		else if(params.length == 1)
 		{
+			player.addChatMessage("Stripping Chunks Within a Radius of " + Integer.parseInt(params[0]));
 			int radius = Integer.parseInt(params[0]);
 			for(int i = -radius; i <= radius;i++)
 			{
