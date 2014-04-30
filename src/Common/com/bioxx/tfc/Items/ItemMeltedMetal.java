@@ -2,8 +2,15 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -12,14 +19,6 @@ import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
-
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 
 public class ItemMeltedMetal extends ItemTerra
 {
@@ -94,18 +93,14 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{	
-		if(TFC_ItemHeat.getIsLiquid(is) && (is.getItem() == TFCItems.BronzeUnshaped || is.getItem() == TFCItems.BismuthBronzeUnshaped ||
-				is.getItem() == TFCItems.BlackBronzeUnshaped || is.getItem() == TFCItems.CopperUnshaped))
+		if (TFC_Core.showExtraInformation())
 		{
-			if (TFC_Core.showExtraInformation()) 
-			{
-				arraylist.add(StatCollector.translateToLocal("gui.Help"));
-				arraylist.add(StatCollector.translateToLocal("gui.MeltedMetal.Inst0"));
-			}
-			else
-			{
-				arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
-			}
+			arraylist.add(StatCollector.translateToLocal("gui.Help"));
+			arraylist.add(StatCollector.translateToLocal("gui.MeltedMetal.Inst0"));
+		}
+		else
+		{
+			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
 		}
 	}
 
@@ -116,15 +111,12 @@ public class ItemMeltedMetal extends ItemTerra
 			itemstack.stackSize = 1;
 		}
 
-		if(TFC_ItemHeat.getIsLiquid(itemstack) && (itemstack.getItem() == TFCItems.BronzeUnshaped  || itemstack.getItem() == TFCItems.BismuthBronzeUnshaped  ||
-				itemstack.getItem() == TFCItems.BlackBronzeUnshaped  || itemstack.getItem() == TFCItems.CopperUnshaped))
-		{
-			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
-			pi.specialCraftingType = itemstack.copy();
+		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
+		pi.specialCraftingType = itemstack.copy();
 
-			entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
-			entityplayer.openGui(TerraFirmaCraft.instance, 38, world, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
-		}
+		entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
+		entityplayer.openGui(TerraFirmaCraft.instance, 38, world, (int) entityplayer.posX, (int) entityplayer.posY, (int) entityplayer.posZ);
+
 		return itemstack;
 	}
 }

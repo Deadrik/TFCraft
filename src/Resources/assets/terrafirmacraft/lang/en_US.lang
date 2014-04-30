@@ -1805,6 +1805,7 @@ item.Fertilizer.name=Fertilizer
 item.Wooden Bucket Empty.name=Wooden Bucket (Empty)
 item.Wooden Bucket Water.name=Wooden Bucket (Fresh Water)
 item.Wooden Bucket Salt Water.name=Wooden Bucket (Salt Water)
+item.Wooden Bucket Salt.name=Wooden Bucket (Salt)
 item.Wooden Bucket Milk.name=Wooden Bucket (Milk)
 item.Lime Water.name=Limewater
 
@@ -2124,7 +2125,7 @@ gui.Knife.Inst1=bowl in your inventory to create a
 gui.Knife.Inst2=meal preparation area.
 gui.Leather.Inst0=§bRight Click §7with a knife in your inventory to cut.
 gui.LooseRock.Inst0=§bRight Click §7with 2 in a stack to knap.
-gui.MeltedMetal.Inst0=§bRight Click §7to pour into a tool mold.
+gui.MeltedMetal.Inst0=§bRight Click §7to pour or combine.
 gui.MeltedMetal.NotFull=Not Full
 gui.PotteryBase.Inst0=Sneak and §bRight Click §7to place object.
 gui.PotteryVesselSmall.Inst0=Or §bRight Click §7to open inventory.

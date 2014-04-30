@@ -1,5 +1,15 @@
 package com.bioxx.tfc.Containers;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotBlocked;
 import com.bioxx.tfc.Containers.Slots.SlotMoldTool;
@@ -11,16 +21,6 @@ import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Crafting.CraftingManagerTFC;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCraftResult;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class ContainerMold extends ContainerTFC
 {
@@ -75,7 +75,7 @@ public class ContainerMold extends ContainerTFC
 	protected void layoutContainer(IInventory playerInventory, int xSize, int ySize)
 	{
 		this.addSlotToContainer(new SlotMoldTool(containerInv, 0, 41, 34));
-		this.addSlotToContainer(new SlotMoldTool2(containerInv, 1, 62, 34));
+		this.addSlotToContainer(new SlotMoldTool2(containerInv, 1, 94, 34));
 		this.addSlotToContainer(new SlotBlocked(craftResult, 0, 116, 34));
 	}
 
@@ -119,8 +119,11 @@ public class ContainerMold extends ContainerTFC
 				}
 			}
 
-			if(containerInv.getStackInSlot(1) != null && pi.moldTransferTimer < 100)
+			if(containerInv.getStackInSlot(1) != null && pi.moldTransferTimer < 100 && 
+					CraftingManagerTFC.getInstance().findMatchingRecipe(this.containerInv, world) != null)
+			{
 				pi.moldTransferTimer++;
+			}
 
 			if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null && pi.moldTransferTimer == 1000)
 				pi.moldTransferTimer = 0;
@@ -184,21 +187,28 @@ public class ContainerMold extends ContainerTFC
 			{
 				if(itemstack1.getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(itemstack1))
 				{
-					if(slot1.getHasStack())
-						return null;
 					ItemStack stack = itemstack1.copy();
 					stack.stackSize = 1;
-					slot1.putStack(stack);
-					itemstack1.stackSize--;
+					if (!slot1.getHasStack())
+					{
+						slot1.putStack(stack);
+						itemstack1.stackSize--;
+					}
+					else if (!slot2.getHasStack())
+					{
+						slot2.putStack(stack);
+						itemstack1.stackSize--;
+					}
 				}
-				else if(itemstack1.getItem() instanceof ItemPotteryMold && itemstack1.getItemDamage() == 1)
+				else if ((itemstack1.getItem() instanceof ItemPotteryMold || itemstack1.getItem() == TFCItems.CeramicMold) && itemstack1.getItemDamage() == 1)
 				{
-					if(slot2.getHasStack())
-						return null;
-					ItemStack stack = itemstack1.copy();
-					stack.stackSize = 1;
-					slot2.putStack(stack);
-					itemstack1.stackSize--;
+					if (!slot2.getHasStack())
+					{
+						ItemStack stack = itemstack1.copy();
+						stack.stackSize = 1;
+						slot2.putStack(stack);
+						itemstack1.stackSize--;
+					}
 				}
 			}
 

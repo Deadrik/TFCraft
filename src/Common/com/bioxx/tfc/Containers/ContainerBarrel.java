@@ -1,8 +1,5 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.TileEntities.TileEntityBarrel;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
@@ -10,13 +7,15 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.TileEntities.TEBarrel;
+
 public class ContainerBarrel extends ContainerTFC
 {
-	private TileEntityBarrel barrel;
+	private TEBarrel barrel;
 	private float liquidLevel;
 
-
-	public ContainerBarrel(InventoryPlayer inventoryplayer, TileEntityBarrel tileentitybarrel, World world, int x, int y, int z)
+	public ContainerBarrel(InventoryPlayer inventoryplayer, TEBarrel tileentitybarrel, World world, int x, int y, int z)
 	{
 		barrel = tileentitybarrel;
 		liquidLevel = 0;

@@ -5,6 +5,17 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -19,17 +30,6 @@ import com.bioxx.tfc.api.ISmeltable;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
 public class TECrucible extends TileEntity implements IInventory
 {
@@ -138,9 +138,9 @@ public class TECrucible extends TileEntity implements IInventory
 			outputTick++;
 			tempTick++;
 			/*Heat the crucible based on the Forge beneath it*/
-			if(worldObj.getBlock(xCoord,yCoord-1,zCoord) == TFCBlocks.Forge)
+			if(worldObj.getBlock(xCoord, yCoord - 1, zCoord) == TFCBlocks.Forge)
 			{
-				TileEntityForge te = (TileEntityForge) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+				TEForge te = (TEForge) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
 				if(te.fireTemp > temperature)
 					temperature++;
 			}

@@ -18,7 +18,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.TileEntities.TileEntityForge;
+import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TileEntityPottery;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -64,16 +64,21 @@ public class ItemFirestarter extends ItemTerra
 			int z = objectMouseOver.blockZ;
 			int side = objectMouseOver.sideHit;
 
-			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, i, j, k - 1) && TFC_Core.isSouthFaceSolid(world, i, j, k + 1) && 
-					TFC_Core.isEastFaceSolid(world, i - 1, j, k) && TFC_Core.isWestFaceSolid(world, i + 1, j, k);
+			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, i, j, k - 1) &&
+					TFC_Core.isSouthFaceSolid(world, i, j, k + 1) &&
+					TFC_Core.isEastFaceSolid(world, i - 1, j, k) &&
+					TFC_Core.isWestFaceSolid(world, i + 1, j, k);
 
-			if(side == 1 && world.getBlock(x, y, z).isNormalCube() && world.getBlock(x, y, z).isOpaqueCube() && 
-					world.getBlock(x, y, z).getMaterial() != Material.wood && world.getBlock(x, y, z).getMaterial() != Material.cloth &&
-					world.isAirBlock(x, y+1, z) && world.getBlock(x, y, z) != TFCBlocks.Charcoal &&
+			if(side == 1 && world.getBlock(x, y, z).isNormalCube() &&
+					world.getBlock(x, y, z).isOpaqueCube() &&
+					world.getBlock(x, y, z).getMaterial() != Material.wood &&
+					world.getBlock(x, y, z).getMaterial() != Material.cloth &&
+					world.isAirBlock(x, y + 1, z) &&
+					world.getBlock(x, y, z) != TFCBlocks.Charcoal &&
 					world.getBlock(x, y, z) != Blocks.coal_block)
 			{
 
-				List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y+1, z, x+1, y+2, z+1));
+				List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y + 1, z, x + 1, y + 2, z + 1));
 				int numsticks = 0;
 				int hasPaper = 0;
 
@@ -95,7 +100,7 @@ public class ItemFirestarter extends ItemTerra
 					itemstack.stackSize = 0;
 
 				int chance = new Random().nextInt(100);
-				if(chance > 70-hasPaper)
+				if(chance > 70 - hasPaper)
 				{
 					if(numsticks >= 3)
 					{
@@ -107,23 +112,25 @@ public class ItemFirestarter extends ItemTerra
 							if(entity.getEntityItem().getItem() == Items.paper)
 								entity.setDead();
 						}
-						world.setBlock(x, y+1, z, TFCBlocks.Firepit, 1, 2);
+						world.setBlock(x, y + 1, z, TFCBlocks.Firepit, 1, 2);
 					}
 					return true;
 				}
 			}
 			else if((world.getBlock(x, y, z) == TFCBlocks.Charcoal && world.getBlockMetadata(x, y, z) > 6) || world.getBlock(x, y, z) == Blocks.coal_block)
 			{
-				if(world.getBlock(x, y-1, z).getMaterial() == Material.rock && 
-						world.getBlock(x+1, y, z).getMaterial() == Material.rock && world.getBlock(x-1, y, z).getMaterial() == Material.rock && 
-						world.getBlock(x, y, z+1).getMaterial() == Material.rock && world.getBlock(x, y, z-1).getMaterial() == Material.rock &&
-						world.getBlock(x, y-1, z).isNormalCube() && surroundSolids)
+				if(world.getBlock(x, y - 1, z).getMaterial() == Material.rock &&
+						world.getBlock(x + 1, y, z).getMaterial() == Material.rock &&
+						world.getBlock(x - 1, y, z).getMaterial() == Material.rock &&
+						world.getBlock(x, y, z + 1).getMaterial() == Material.rock &&
+						world.getBlock(x, y, z - 1).getMaterial() == Material.rock &&
+						world.getBlock(x, y - 1, z).isNormalCube() && surroundSolids)
 				{
 					int chance = new Random().nextInt(100);
 					if(chance > 70)
 					{
 						world.setBlock(x, y, z, TFCBlocks.Forge, 1, 2);
-						TileEntityForge te = (TileEntityForge)world.getTileEntity(x, y, z);
+						TEForge te = (TEForge)world.getTileEntity(x, y, z);
 					}
 					itemstack.damageItem(1, entityplayer);
 					return true;
@@ -144,9 +151,10 @@ public class ItemFirestarter extends ItemTerra
 		}
 		return false;
 	}
-	
+
 	@Override
-	public EnumItemReach getReach(ItemStack is){
+	public EnumItemReach getReach(ItemStack is)
+	{
 		return EnumItemReach.SHORT;
 	}
 }

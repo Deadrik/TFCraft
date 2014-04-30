@@ -30,15 +30,15 @@ import com.bioxx.tfc.Containers.ContainerWorkbench;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
+import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
 import com.bioxx.tfc.TileEntities.TECrucible;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
+import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TileEntityAnvil;
-import com.bioxx.tfc.TileEntities.TileEntityBarrel;
 import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
-import com.bioxx.tfc.TileEntities.TileEntityForge;
 import com.bioxx.tfc.TileEntities.TileEntityLogPile;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
@@ -82,7 +82,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 23:
 		{
-			return new ContainerForge(player.inventory, (TileEntityForge) te, world, x, y, z);
+			return new ContainerForge(player.inventory, (TEForge) te, world, x, y, z);
 		}
 		case 24:
 		{
@@ -123,7 +123,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 35:
 		{
-			return new ContainerBarrel(player.inventory,((TileEntityBarrel)te),world,x,y,z);
+			return new ContainerBarrel(player.inventory, ((TEBarrel) te), world, x, y, z);
 		}
 		case 36:
 		{
@@ -131,7 +131,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 37:
 		{
-			return new ContainerCrucible(player.inventory,((TECrucible)te),world,x,y,z);
+			return new ContainerCrucible(player.inventory, ((TECrucible) te), world, x, y, z);
 		}
 		case 38:
 		{
@@ -147,12 +147,13 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 41:
 		{
-			return new ContainerNestBox(player.inventory,((TENestBox)te),world,x,y,z);
+			return new ContainerNestBox(player.inventory, ((TENestBox) te), world, x, y, z);
 		}
 		case 42:
 		{
 			List list = player.worldObj.getEntitiesWithinAABB(EntityHorseTFC.class, player.boundingBox.expand(2, 2, 2));
-			if(list.size() > 0){
+			if(list.size() > 0)
+			{
 				EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
 				return new ContainerHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
 			}
@@ -166,7 +167,7 @@ public class GuiHandler implements IGuiHandler
 	}
 
 	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		return null;
 	}

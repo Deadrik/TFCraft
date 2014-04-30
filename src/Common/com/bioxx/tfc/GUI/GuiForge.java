@@ -12,20 +12,19 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerForge;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.TileEntities.TileEntityForge;
-
+import com.bioxx.tfc.TileEntities.TEForge;
 
 public class GuiForge extends GuiContainer
 {
-	private TileEntityForge ForgeEntity;
+	private TEForge ForgeEntity;
 
 
-	public GuiForge(InventoryPlayer inventoryplayer, TileEntityForge tileentityforge, World world, int x, int y, int z)
+	public GuiForge(InventoryPlayer inventoryplayer, TEForge tileentityforge, World world, int x, int y, int z)
 	{
 		super(new ContainerForge(inventoryplayer,tileentityforge, world, x, y, z) );
 		ForgeEntity = tileentityforge;
 		xSize = 176;
-		ySize = 85+PlayerInventory.invYSize;
+		ySize = 85 + PlayerInventory.invYSize;
 
 	}
 

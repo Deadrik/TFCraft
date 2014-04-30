@@ -2,14 +2,6 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.api.HeatIndex;
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.TFC_ItemHeat;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -21,7 +13,15 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 
-public class TileEntityForge extends TileEntityFireEntity implements IInventory
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.ItemMeltedMetal;
+import com.bioxx.tfc.api.HeatIndex;
+import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.TFC_ItemHeat;
+
+public class TEForge extends TileEntityFireEntity implements IInventory
 {
 	public boolean isSmokeStackValid;
 	public ItemStack fireItemStacks[];
@@ -32,11 +32,11 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	private int externalWoodCount;
 	private int charcoalCounter;
 
-	public TileEntityForge()
+	public TEForge()
 	{
 		super();
 		fuelTimeLeft = 200;
-		fuelBurnTemp =  200;
+		fuelBurnTemp = 200;
 		fireTemp = 20;
 		isSmokeStackValid = false;
 		fireItemStacks = new ItemStack[14];
@@ -44,10 +44,9 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 		externalWoodCount = 0;
 		charcoalCounter = 0;
 		maxFireTempScale = 2500;
-
 	}
 
-	private Boolean CheckSmokeStackValidity() 
+	private Boolean CheckSmokeStackValidity()
 	{
 		if(worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) && !worldObj.isRaining())
 			return true;
@@ -59,16 +58,16 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			return true;
 		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord - 1))
 			return true;
-		else if(!worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord).isOpaqueCube() && !worldObj.getBlock(xCoord+2, yCoord + 1, zCoord).isOpaqueCube() && 
+		else if(!worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord).isOpaqueCube() && !worldObj.getBlock(xCoord+2, yCoord + 1, zCoord).isOpaqueCube() &&
 				worldObj.canBlockSeeTheSky(xCoord+2, yCoord + 1, zCoord))
 			return true;
-		else if(!worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord).isOpaqueCube() && !worldObj.getBlock(xCoord-2, yCoord + 1, zCoord).isOpaqueCube() && 
+		else if(!worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord).isOpaqueCube() && !worldObj.getBlock(xCoord-2, yCoord + 1, zCoord).isOpaqueCube() &&
 				worldObj.canBlockSeeTheSky(xCoord-2, yCoord + 1, zCoord))
 			return true;
-		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1).isOpaqueCube() && !worldObj.getBlock(xCoord, yCoord + 1, zCoord+2).isOpaqueCube() && 
+		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1).isOpaqueCube() && !worldObj.getBlock(xCoord, yCoord + 1, zCoord+2).isOpaqueCube() &&
 				worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord+2))
 			return true;
-		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1).isOpaqueCube() && !worldObj.getBlock(xCoord, yCoord + 1, zCoord-2).isOpaqueCube() && 
+		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1).isOpaqueCube() && !worldObj.getBlock(xCoord, yCoord + 1, zCoord-2).isOpaqueCube() &&
 				worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord-2))
 			return true;
 		else
@@ -82,8 +81,8 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 
 	public void combineMetals(ItemStack InputItem, ItemStack DestItem)
 	{
-		int D1 = 100-InputItem.getItemDamage();
-		int D2 = 100-DestItem.getItemDamage();
+		int D1 = 100 - InputItem.getItemDamage();
+		int D2 = 100 - DestItem.getItemDamage();
 		DestItem.setItemDamage(100 - (D1 + D2));
 	}
 
@@ -193,14 +192,15 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 		{
 			if(fireItemStacks[i].stackSize <= j)
 			{
-				ItemStack itemstack = fireItemStacks[i];
+				ItemStack is = fireItemStacks[i];
 				fireItemStacks[i] = null;
-				return itemstack;
+				return is;
 			}
-			ItemStack itemstack1 = fireItemStacks[i].splitStack(j);
+
+			ItemStack isSplit = fireItemStacks[i].splitStack(j);
 			if(fireItemStacks[i].stackSize == 0)
 				fireItemStacks[i] = null;
-			return itemstack1;
+			return isSplit;
 		}
 		else
 			return null;
@@ -330,10 +330,10 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 		fireItemStacks = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
-			byte byte0 = nbttagcompound1.getByte("Slot");
+			NBTTagCompound nbt1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			byte byte0 = nbt1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < fireItemStacks.length)
-				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbt1);
 		}
 	}
 
@@ -384,11 +384,11 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 			//Play the fire sound
 			Random R = new Random();
 			if(R.nextInt(10) == 0 && fireTemp > 20)
-				worldObj.playSoundEffect(xCoord,yCoord,zCoord, "fire.fire", 0.4F + (R.nextFloat()/2), 0.7F + R.nextFloat());
+				worldObj.playSoundEffect(xCoord, yCoord, zCoord, "fire.fire", 0.4F + (R.nextFloat() / 2), 0.7F + R.nextFloat());
 
-			if(fireTemp >= 20 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=1)
+			if(fireTemp >= 20 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 1)
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
-			else if(fireTemp < 20 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=0)
+			else if(fireTemp < 20 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 0)
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
 
 			//If the fire is still burning and has fuel
@@ -398,7 +398,10 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 				handleTempFlux(desiredTemp);
 
 				if(TFCOptions.enableDebugMode)
+				{
+					fireTemp = 2000;
 					fuelTimeLeft = 9999;
+				}
 
 				TFC_Core.handleItemTicking(FuelStack, worldObj, xCoord, yCoord, zCoord);
 			}
@@ -462,10 +465,10 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 		{
 			if(fireItemStacks[i] != null)
 			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				fireItemStacks[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
+				NBTTagCompound nbt1 = new NBTTagCompound();
+				nbt1.setByte("Slot", (byte)i);
+				fireItemStacks[i].writeToNBT(nbt1);
+				nbttaglist.appendTag(nbt1);
 			}
 		}
 		nbt.setTag("Items", nbttaglist);
@@ -484,5 +487,5 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	{
 		readFromNBT(pkt.func_148857_g());
 	}
-	
+
 }

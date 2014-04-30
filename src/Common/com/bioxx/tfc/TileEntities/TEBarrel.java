@@ -2,16 +2,6 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
-import com.bioxx.tfc.api.IPipeConnectable;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.TFC_ItemHeat;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -26,7 +16,17 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 
-public class TileEntityBarrel extends TileEntity implements IInventory
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
+import com.bioxx.tfc.api.IPipeConnectable;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.TFC_ItemHeat;
+
+public class TEBarrel extends TileEntity implements IInventory
 {
 	public int liquidLevel;
 	public int Type;
@@ -37,28 +37,28 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 	private boolean sealed;
 	private int sealtimecounter;
 	public Item[] alcohols;
-	public final int SEALTIME = TFCOptions.enableDebugMode?0:(int)((TFC_Time.hourLength*12)/100);//default 80
+	public final int SEALTIME = TFCOptions.enableDebugMode ? 0 : (int)((TFC_Time.hourLength * 12) / 100);//default 80
 
-	public TileEntityBarrel()
+	public TEBarrel()
 	{
 		liquidLevel = 0;
 		sealed = false;
 		//itemstack = new ItemStack(1,0,0);
 		sealtimecounter = 0;
-		alcohols = new Item[]{TFCItems.Beer,TFCItems.Cider,TFCItems.Vodka,TFCItems.Whiskey,TFCItems.RyeWhiskey,TFCItems.Sake,TFCItems.Rum};
+		alcohols = new Item[]{TFCItems.Beer, TFCItems.Cider, TFCItems.Vodka, TFCItems.Whiskey, TFCItems.RyeWhiskey, TFCItems.Sake, TFCItems.Rum};
 	}
 
 	public void careForInventorySlot()
 	{
-		if(Type ==1 && itemstack!=null&&  itemstack.getItem() instanceof ItemTerra )
+		if(Type == 1 && itemstack != null && itemstack.getItem() instanceof ItemTerra)
 		{
 			if(TFC_ItemHeat.HasTemp(itemstack))
 			{
 				float temp = TFC_ItemHeat.GetTemp(itemstack);
 				if(liquidLevel >= 1 && temp > 1)
 				{
-					temp-=100;
-					liquidLevel-=1;
+					temp -= 100;
+					liquidLevel -= 1;
 					TFC_ItemHeat.SetTemp(itemstack, temp);
 					TFC_ItemHeat.HandleItemHeat(itemstack);
 				}
@@ -80,9 +80,9 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			{
 				int damage = itemstack.getItemDamage();
 				itemstack2 = new ItemStack(TFCItems.PrepHide, 0, damage);
-				while(liquidLevel >= (16 + (damage * 10)) && itemstack.stackSize >0)
+				while(liquidLevel >= (16 + (damage * 10)) && itemstack.stackSize > 0)
 				{
-					liquidLevel-=(16 + (damage * 10));
+					liquidLevel -= (16 + (damage * 10));
 					itemstack2.stackSize++;
 					itemstack.stackSize--;
 				}
@@ -91,10 +91,10 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			}
 			else if (itemstack.getItem() == TFCItems.Jute)
 			{
-				itemstack2 = new ItemStack(TFCItems.JuteFibre,0,0);
-				while(liquidLevel >= 18 && itemstack.stackSize >0)
+				itemstack2 = new ItemStack(TFCItems.JuteFibre, 0, 0);
+				while(liquidLevel >= 18 && itemstack.stackSize > 0)
 				{
-					liquidLevel-=18;
+					liquidLevel -= 18;
 					itemstack2.stackSize++;
 					itemstack.stackSize--;
 				}
@@ -104,56 +104,57 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			else if(itemstack.getItem() == TFCItems.Logs)
 			{
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0)
+				if(itemstack.stackSize == 0)
 					itemstack=null;
 				Type = 3;
 			}
-//			else if(itemstack.getItem() == TFCItems.BarleyGrain)
-//			{
-//				itemstack.stackSize--;
-//				if(itemstack.stackSize ==0)
-//					itemstack=null;
-//				Type = 5;
-//			}
-//			else if((itemstack.getItem() == TFCItems.RedApple||itemstack.getItem()==TFCItems.GreenApple))
-//			{
-//				itemstack.stackSize--;
-//				if(itemstack.stackSize ==0)
-//					itemstack=null;
-//				Type = 6;
-//			}
-//			else if(itemstack.getItem() == TFCItems.Potato)
-//			{
-//				itemstack.stackSize--;
-//				if(itemstack.stackSize ==0)
-//					itemstack=null;
-//				Type = 7;
-//			}
-//			else if(itemstack.getItem() == TFCItems.WheatGrain)
-//			{
-//				itemstack.stackSize--;
-//				if(itemstack.stackSize ==0)
-//					itemstack=null;
-//				Type = 8;
-//			}
-//			else if(itemstack.getItem() == TFCItems.RyeGrain)
-//			{
-//				itemstack.stackSize--;
-//				if(itemstack.stackSize ==0)
-//					itemstack=null;
-//				Type = 9;
-//			}
-//			else if(itemstack.getItem() == TFCItems.RiceGrain)
-//			{
-//				itemstack.stackSize--;
-//				if(itemstack.stackSize ==0)
-//					itemstack=null;
-//				Type = 10;
-//			}
+/*			else if(itemstack.getItem() == TFCItems.BarleyGrain)
+			{
+				itemstack.stackSize--;
+				if(itemstack.stackSize == 0)
+					itemstack=null;
+				Type = 5;
+			}
+			else if((itemstack.getItem() == TFCItems.RedApple || itemstack.getItem() == TFCItems.GreenApple))
+			{
+				itemstack.stackSize--;
+				if(itemstack.stackSize == 0)
+					itemstack=null;
+				Type = 6;
+			}
+			else if(itemstack.getItem() == TFCItems.Potato)
+			{
+				itemstack.stackSize--;
+				if(itemstack.stackSize == 0)
+					itemstack=null;
+				Type = 7;
+			}
+			else if(itemstack.getItem() == TFCItems.WheatGrain)
+			{
+				itemstack.stackSize--;
+				if(itemstack.stackSize == 0)
+					itemstack=null;
+				Type = 8;
+			}
+			else if(itemstack.getItem() == TFCItems.RyeGrain)
+			{
+				itemstack.stackSize--;
+				if(itemstack.stackSize == 0)
+					itemstack=null;
+				Type = 9;
+			}
+			else if(itemstack.getItem() == TFCItems.RiceGrain)
+			{
+				itemstack.stackSize--;
+				if(itemstack.stackSize == 0)
+					itemstack=null;
+				Type = 10;
+			}
+*/
 			else if(itemstack.getItem() == Items.sugar)
 			{
 				itemstack.stackSize--;
-				if(itemstack.stackSize ==0)
+				if(itemstack.stackSize == 0)
 					itemstack=null;
 				Type = 11;
 			}
@@ -163,10 +164,10 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			if(itemstack.getItem() == TFCItems.Hide)
 			{
 				int damage = itemstack.getItemDamage();
-				itemstack2 = new ItemStack(TFCItems.SoakedHide,0,damage);
-				while(liquidLevel >= (16 + (damage * 10)) && itemstack.stackSize >0)
+				itemstack2 = new ItemStack(TFCItems.SoakedHide, 0, damage);
+				while(liquidLevel >= (16 + (damage * 10)) && itemstack.stackSize > 0)
 				{
-					liquidLevel-=(16 + (damage * 10));
+					liquidLevel -= (16 + (damage * 10));
 					itemstack2.stackSize++;
 					itemstack.stackSize--;
 				}
@@ -180,11 +181,11 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			{
 				Random rand = new Random();
 				int damage = itemstack.getItemDamage();
-				itemstack2 = new ItemStack(TFCItems.TerraLeather,0,0);
-				while(liquidLevel >= (16 + (damage * 10)) && itemstack.stackSize >0)
+				itemstack2 = new ItemStack(TFCItems.TerraLeather, 0, 0);
+				while(liquidLevel >= (16 + (damage * 10)) && itemstack.stackSize > 0)
 				{
-					liquidLevel-=(16 + (damage * 10));
-					itemstack2.stackSize+=(1 + (rand.nextBoolean()?damage:(damage>0?damage-1:0)));
+					liquidLevel -= (16 + (damage * 10));
+					itemstack2.stackSize += (1 + (rand.nextBoolean() ? damage : (damage > 0 ? damage -1 : 0)));
 					itemstack.stackSize--;
 				}
 				if(itemstack2.stackSize > 0)
@@ -199,7 +200,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			float cheeseWeight = 0.00f;
 			while(liquidLevel >= 32)
 			{
-				liquidLevel-=32;
+				liquidLevel -= 32;
 				cheeseWeight += 20;
 			}
 			ItemFoodTFC.createTag(itemstack2, cheeseWeight, -24.0f);
@@ -207,7 +208,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		}
 		if (liquidLevel == 0)
 			Type = 0;
-		if (itemstack!=null && itemstack.stackSize==0)
+		if (itemstack != null && itemstack.stackSize == 0)
 			itemstack = null;
 
 	}
@@ -227,40 +228,23 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 	{
 		switch (type)
 		{
-		case 0:
-			return StatCollector.translateToLocal("gui.Barrel.Empty");
-		case 1:
-			return StatCollector.translateToLocal("gui.Barrel.Water");
-		case 2:
-			return StatCollector.translateToLocal("gui.Barrel.Limewater");
-		case 3:
-			return StatCollector.translateToLocal("gui.Barrel.Tannin");
-		case 4:
-			return StatCollector.translateToLocal("gui.Barrel.Gunpowder");
-		case 5:
-			return StatCollector.translateToLocal("gui.Barrel.Beer");
-		case 6:
-			return StatCollector.translateToLocal("gui.Barrel.Cider");
-		case 7:
-			return StatCollector.translateToLocal("gui.Barrel.Vodka");
-		case 8:
-			return StatCollector.translateToLocal("gui.Barrel.Whiskey");
-		case 9:
-			return StatCollector.translateToLocal("gui.Barrel.RyeWhiskey");
-		case 10:
-			return StatCollector.translateToLocal("gui.Barrel.Sake");
-		case 11:
-			return StatCollector.translateToLocal("gui.Barrel.Rum");
-		case 12:
-			return StatCollector.translateToLocal("gui.Barrel.Vinegar");
-		case 13:
-			return StatCollector.translateToLocal("gui.Barrel.Milk");
-		case 14:
-			return StatCollector.translateToLocal("gui.Barrel.CurdledMilk");
-		case 15:
-			return StatCollector.translateToLocal("gui.Barrel.SaltWater");
-		default:
-			return "";
+		case 0: return StatCollector.translateToLocal("gui.Barrel.Empty");
+		case 1: return StatCollector.translateToLocal("gui.Barrel.Water");
+		case 2: return StatCollector.translateToLocal("gui.Barrel.Limewater");
+		case 3: return StatCollector.translateToLocal("gui.Barrel.Tannin");
+		case 4: return StatCollector.translateToLocal("gui.Barrel.Gunpowder");
+		case 5: return StatCollector.translateToLocal("gui.Barrel.Beer");
+		case 6: return StatCollector.translateToLocal("gui.Barrel.Cider");
+		case 7: return StatCollector.translateToLocal("gui.Barrel.Vodka");
+		case 8: return StatCollector.translateToLocal("gui.Barrel.Whiskey");
+		case 9: return StatCollector.translateToLocal("gui.Barrel.RyeWhiskey");
+		case 10: return StatCollector.translateToLocal("gui.Barrel.Sake");
+		case 11: return StatCollector.translateToLocal("gui.Barrel.Rum");
+		case 12: return StatCollector.translateToLocal("gui.Barrel.Vinegar");
+		case 13: return StatCollector.translateToLocal("gui.Barrel.Milk");
+		case 14: return StatCollector.translateToLocal("gui.Barrel.CurdledMilk");
+		case 15: return StatCollector.translateToLocal("gui.Barrel.SaltWater");
+		default: return "";
 		}
 	}
 
@@ -276,14 +260,14 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		{
 			if(itemstack.stackSize <= j)
 			{
-				ItemStack itemstack2 = itemstack;
+				ItemStack is = itemstack;
 				itemstack = null;
-				return itemstack2;
+				return is;
 			}
-			ItemStack itemstack1 = itemstack.splitStack(j);
+			ItemStack isSplit = itemstack.splitStack(j);
 			if(itemstack.stackSize == 0)
 				itemstack = null;
-			return itemstack1;
+			return isSplit;
 		}
 		else
 		{
@@ -334,7 +318,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		return i==0?itemstack:output;
+		return i == 0 ? itemstack : output;
 	}
 
 	@Override
@@ -352,10 +336,10 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte byte0 = nbttagcompound1.getByte("Slot");
+			NBTTagCompound nbt1 = nbttaglist.getCompoundTagAt(i);
+			byte byte0 = nbt1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < 2)
-				setInventorySlotContents(byte0,ItemStack.loadItemStackFromNBT(nbttagcompound1));
+				setInventorySlotContents(byte0,ItemStack.loadItemStackFromNBT(nbt1));
 		}
 	}
 
@@ -371,29 +355,31 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack)
+	public void setInventorySlotContents(int i, ItemStack is)
 	{
 		if(i == 0)
 		{
-			this.itemstack = itemstack;
+			this.itemstack = is;
 			if(this.itemstack != null && this.itemstack.stackSize > getInventoryStackLimit())
 				this.itemstack.stackSize = getInventoryStackLimit();
 		}
 		else
 		{
-			this.output = itemstack;
+			this.output = is;
 			if(this.output != null && output.stackSize > getInventoryStackLimit())
 				output.stackSize = getInventoryStackLimit();
 		}
 	}
 
-	public boolean checkValidAddition(int i){
+	//FIXME This needs to use blocks and not ids from now on
+	public boolean checkValidAddition(int i)
+	{
 		if((i == Type || Type == 0 || (Type == 13 && i == 12)) && !sealed && liquidLevel < 256)
 		{
-			liquidLevel = Math.min(liquidLevel+32, 256);
+			liquidLevel = Math.min(liquidLevel + 32, 256);
 			if(Type == 0 || Type == 13)
 			{
-				Type = i==12 && Type == 13?14:i;
+				Type = (i == 12 && Type == 13) ? 14 : i;
 			}
 			updateGui();
 			return true;
@@ -411,7 +397,8 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			if(sealed)
 			{
 				//entityplayer.closeScreen();
-				//This is where we handle the counter for producing charcoal. Once it reaches 24hours, we add charcoal to the fire and remove the wood.
+				/*This is where we handle the counter for producing charcoal.
+				 *Once it reaches 24hours, we add charcoal to the fire and remove the wood.*/
 				if(sealtimecounter == 0)
 					sealtimecounter = (int) TFC_Time.getTotalTicks();
 
@@ -424,9 +411,9 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 			}
 
 			if(mode == 1 && liquidLevel > 0 && TFC_Time.getTotalTicks() % 2 == 0 &&
-					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj, 0, xCoord, yCoord, zCoord, true))
+					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj, 0, xCoord, yCoord, zCoord, true, true))
 			{
-				liquidLevel-=4;
+				liquidLevel -= 4;
 				updateGui();
 			}
 			if(liquidLevel == 0)
@@ -445,21 +432,21 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 
 				if (itemstack != null)
 				{
-					if ((Type ==0||Type == 2) && itemstack.getItem() == TFCItems.Limewater && liquidLevel < 256)
+					if ((Type ==0 || Type == 2) && itemstack.getItem() == TFCItems.Limewater && liquidLevel < 256)
 					{
 						liquidLevel = Math.min(liquidLevel + 32, 256);
 						Type = 2;
 						itemstack = new ItemStack(TFCItems.WoodenBucketEmpty);
 						updateGui();
 					}
-					else if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.WoodenBucketWater) && liquidLevel < 256)
+					else if ((Type == 0 || Type == 1) && (itemstack.getItem() == TFCItems.WoodenBucketWater) && liquidLevel < 256)
 					{
 						liquidLevel = Math.min(liquidLevel + 32, 256);
 						Type = 1;
 						itemstack = new ItemStack(TFCItems.WoodenBucketEmpty);
 						updateGui();
 					}
-					else if ((Type == 0||Type == 15) && (itemstack.getItem() == TFCItems.WoodenBucketSaltWater) && liquidLevel < 256)
+					else if ((Type == 0 || Type == 15) && (itemstack.getItem() == TFCItems.WoodenBucketSaltWater) && liquidLevel < 256)
 					{
 						liquidLevel = Math.min(liquidLevel + 32, 256);
 						Type = 15;
@@ -473,16 +460,16 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 						itemstack = new ItemStack(TFCItems.RedSteelBucketEmpty);
 						updateGui();
 					}
-					else if ((Type == 0||Type == 4) && itemstack.getItem() == Items.gunpowder && liquidLevel < 256)
+					else if ((Type == 0 || Type == 4) && itemstack.getItem() == Items.gunpowder && liquidLevel < 256)
 					{
 						liquidLevel = Math.min(liquidLevel + 1, 256);
 						Type = 4;
-						itemstack.stackSize-=1;
-						if(itemstack.stackSize==0)
+						itemstack.stackSize -= 1;
+						if(itemstack.stackSize == 0)
 							itemstack=null;
 						updateGui();
 					}
-					else if((Type == 0||Type == 13 || Type == 14) && itemstack.getItem() == TFCItems.WoodenBucketMilk && liquidLevel < 256)
+					else if((Type == 0 || Type == 13 || Type == 14) && itemstack.getItem() == TFCItems.WoodenBucketMilk && liquidLevel < 256)
 					{
 						liquidLevel = Math.min(liquidLevel + 32, 256);
 						Type = Math.max(13, Type);
@@ -506,50 +493,57 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 					itemstack = new ItemStack(alcohols[Type-5]);
 					updateGui();
 				}
-			}
-			else
-			{
-				if (itemstack != null)
+				/*Fill pottery jug*/
+				else if (Type == 1 && (itemstack.getItem() == TFCItems.PotteryJug && itemstack.getItemDamage() == 1) && liquidLevel >= 16)
 				{
-					if((Type >= 5 && Type <= 11) && itemstack.getItem() == Items.glass_bottle && liquidLevel > 9 * itemstack.stackSize)
-					{
-						liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
-						itemstack = new ItemStack(alcohols[Type-5]);
-						updateGui();
-					}
-					/*Fill pottery jug*/
-					else if (Type == 1 && (itemstack.getItem() == TFCItems.PotteryJug && itemstack.getItemDamage() == 1) && liquidLevel >= 16)
-					{
-						liquidLevel = Math.max(liquidLevel - 16, 0);
-						Type = 1;
-						itemstack.setItemDamage(2);
-						updateGui();
-					}
-					/*Fill water bottle*/
-					else if(Type == 1 && itemstack.getItem() == Items.glass_bottle && liquidLevel >9*itemstack.stackSize)
-					{
-						liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
-						itemstack = new ItemStack(Items.potionitem);
-						updateGui();
-					}
-					else if(Type == 12 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
-						liquidLevel = Math.max(liquidLevel - 32, 0);
-						Type = liquidLevel>0?Type:0;
-						itemstack = new ItemStack(TFCItems.Vinegar);
-						updateGui();
-					}
-					else if(Type == 1 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
-						liquidLevel = Math.max(liquidLevel - 32, 0);
-						Type = liquidLevel>0?Type:0;
-						itemstack = new ItemStack(TFCItems.WoodenBucketWater);
-						updateGui();
-					}
-					else if(Type == 2 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
-						liquidLevel = Math.max(liquidLevel - 32, 0);
-						Type = liquidLevel>0?Type:0;
-						itemstack = new ItemStack(TFCItems.Limewater);
-						updateGui();
-					}
+					liquidLevel = Math.max(liquidLevel - 16, 0);
+					Type = 1;
+					itemstack.setItemDamage(2);
+					updateGui();
+				}
+				/*Fill water bottle*/
+				else if(Type == 1 && itemstack.getItem() == Items.glass_bottle && liquidLevel > 9 * itemstack.stackSize)
+				{
+					liquidLevel = Math.max(0, liquidLevel - 9 * itemstack.stackSize);
+					itemstack = new ItemStack(Items.potionitem);
+					updateGui();
+				}
+				else if(Type == 12 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >= 32)
+				{
+					liquidLevel = Math.max(liquidLevel - 32, 0);
+					Type = liquidLevel > 0 ? Type : 0;
+					itemstack = new ItemStack(TFCItems.Vinegar);
+					updateGui();
+				}
+				else if(Type == 1 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >= 32)
+				{
+					liquidLevel = Math.max(liquidLevel - 32, 0);
+					Type = liquidLevel > 0 ? Type : 0;
+					itemstack = new ItemStack(TFCItems.WoodenBucketWater);
+					updateGui();
+				}
+				else if(Type == 2 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >= 32)
+				{
+					liquidLevel = Math.max(liquidLevel - 32, 0);
+					Type = liquidLevel > 0 ? Type : 0;
+					itemstack = new ItemStack(TFCItems.Limewater);
+					updateGui();
+				}
+				else if(Type == 15 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >= 32)
+				{
+					liquidLevel = Math.max(liquidLevel - 32, 0);
+					Type = liquidLevel > 0 ? Type : 0;
+					itemstack = new ItemStack(TFCItems.WoodenBucketSaltWater);
+					updateGui();
+				}
+				//Fill milk bucket
+				else if(Type == 13 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >= 32)
+				{
+					liquidLevel = Math.max(liquidLevel - 32, 0);
+					Type = liquidLevel > 0 ? Type : 0;
+					itemstack = new ItemStack(TFCItems.WoodenBucketMilk, 1, 0);
+					ItemCustomBucketMilk.createTag(itemstack, 20f);
+					updateGui();
 				}
 			}
 		}
@@ -575,7 +569,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 	{
 		if(mode == 0)
 		{
-			if(itemstack == null && ((Type >=5&& Type <=11)||Type == 14))
+			if(itemstack == null && ((Type >= 5 && Type <= 11) || Type == 14))
 				return true;
 			else if(itemstack == null)
 				return false;
@@ -590,29 +584,19 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 						return true;
 					if(id == TFCItems.Logs)
 						return true;
-					if(id == TFCItems.WheatGrain||id == TFCItems.BarleyGrain||id == TFCItems.RyeGrain||id == TFCItems.RiceGrain||
-							id == TFCItems.Potato||id == TFCItems.RedApple||id == TFCItems.GreenApple||id == Items.sugar)
+					if(id == TFCItems.WheatGrain ||
+							id == TFCItems.BarleyGrain ||
+							id == TFCItems.RyeGrain ||
+							id == TFCItems.RiceGrain ||
+							id == TFCItems.Potato ||
+							id == TFCItems.RedApple ||
+							id == TFCItems.GreenApple ||
+							id == Items.sugar)
 						return true;
 					if(id == TFCItems.Hide && Type == 2)
 						return true;
 					if(id == TFCItems.PrepHide && Type == 3)
 						return true;
-				}
-				else if(Type == 15 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32)
-				{
-					liquidLevel = Math.max(liquidLevel - 32, 0);
-					Type = liquidLevel>0?Type:0;
-					itemstack = new ItemStack(TFCItems.WoodenBucketSaltWater);
-					updateGui();
-				}
-				//Fill milk bucket
-				else if(Type == 13 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >= 32)
-				{
-					liquidLevel = Math.max(liquidLevel - 32, 0);
-					Type = liquidLevel > 0 ? Type : 0;
-					itemstack = new ItemStack(TFCItems.WoodenBucketMilk, 1, 0);
-					ItemCustomBucketMilk.createTag(itemstack, 20f);
-					updateGui();
 				}
 			}
 		}
@@ -628,7 +612,7 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 
 	public void actionMode()
 	{
-		mode = (mode-1)*-1;
+		mode = (mode - 1) * -1;
 		updateGui();
 	}
 
@@ -645,36 +629,39 @@ public class TileEntityBarrel extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setInteger("liqLev", liquidLevel);
-		nbttagcompound.setInteger("Type", Type);
-		nbttagcompound.setBoolean("Sealed", sealed);
-		nbttagcompound.setInteger("SealTime", sealtimecounter);
-		nbttagcompound.setInteger("mode", mode);
-		NBTTagList nbttaglist = new NBTTagList();
-		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-		nbttagcompound1.setByte("Slot", (byte)1);
+		super.writeToNBT(nbt);
+		nbt.setInteger("liqLev", liquidLevel);
+		nbt.setInteger("Type", Type);
+		nbt.setBoolean("Sealed", sealed);
+		nbt.setInteger("SealTime", sealtimecounter);
+		nbt.setInteger("mode", mode);
+
+		NBTTagCompound nbt1 = new NBTTagCompound();
+		nbt1.setByte("Slot", (byte)1);
 		if(itemstack != null)
-			itemstack.writeToNBT(nbttagcompound1);
-		nbttaglist.appendTag(nbttagcompound1);
-		nbttagcompound.setTag("Items", nbttaglist);
+			itemstack.writeToNBT(nbt1);
+
+		NBTTagList nbtlist = new NBTTagList();
+		nbtlist.appendTag(nbt1);
+		nbt.setTag("Items", nbtlist);
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbttagcompound);
-		liquidLevel = nbttagcompound.getInteger("liqLev");
-		Type = nbttagcompound.getInteger("Type");
-		sealed = nbttagcompound.getBoolean("Sealed");
-		sealtimecounter = nbttagcompound.getInteger("SealTime");
-		mode = nbttagcompound.getInteger("mode");
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
-		NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(0);
-		byte byte0 = nbttagcompound1.getByte("Slot");
-		itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		super.readFromNBT(nbt);
+		liquidLevel = nbt.getInteger("liqLev");
+		Type = nbt.getInteger("Type");
+		sealed = nbt.getBoolean("Sealed");
+		sealtimecounter = nbt.getInteger("SealTime");
+		mode = nbt.getInteger("mode");
+
+		NBTTagList nbtlist = nbt.getTagList("Items", 10);
+		NBTTagCompound nbt1 = nbtlist.getCompoundTagAt(0);
+		byte byte0 = nbt1.getByte("Slot");
+		itemstack = ItemStack.loadItemStackFromNBT(nbt1);
 	}
 
 	@Override

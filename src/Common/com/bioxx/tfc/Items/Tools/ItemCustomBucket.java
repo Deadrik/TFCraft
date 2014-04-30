@@ -14,7 +14,7 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.TileEntities.TileEntityBarrel;
+import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -80,7 +80,7 @@ public class ItemCustomBucket extends ItemTerra
 					if (event.getResult() == Event.Result.ALLOW)
 						return event.result;
 
-					if (TFC_Core.isFreshWater(world.getBlock(i, j, k)) && world.getBlockMetadata(i, j, k) <=2)
+					if (TFC_Core.isFreshWater(world.getBlock(i, j, k)) && world.getBlockMetadata(i, j, k) <= 2)
 					{
 						world.setBlockToAir(i, j, k);
 						if (player.capabilities.isCreativeMode)
@@ -88,7 +88,7 @@ public class ItemCustomBucket extends ItemTerra
 
 						return new ItemStack(TFCItems.WoodenBucketWater);
 					}
-					else if (TFC_Core.isSaltWater(world.getBlock(i, j, k)) && world.getBlockMetadata(i, j, k) <=2)
+					else if (TFC_Core.isSaltWater(world.getBlock(i, j, k)) && world.getBlockMetadata(i, j, k) <= 2)
 					{
 						world.setBlockToAir(i, j, k);
 						if (player.capabilities.isCreativeMode)
@@ -101,9 +101,9 @@ public class ItemCustomBucket extends ItemTerra
 					if (this.bucketContents != Blocks.air)
 						return new ItemStack(TFCItems.WoodenBucketEmpty);
 
-					if(world.getBlock(i,j,k)==TFCBlocks.Barrel)
+					if(world.getBlock(i, j, k)==TFCBlocks.Barrel)
 					{
-						TileEntityBarrel te = (TileEntityBarrel)world.getTileEntity(i, j, k);
+						TEBarrel te = (TEBarrel)world.getTileEntity(i, j, k);
 
 						//FIXME Removed this because the barrel code needs to use blocks and not ids from now on
 						/*if(te.checkValidAddition(this.bucketContents))
@@ -121,7 +121,8 @@ public class ItemCustomBucket extends ItemTerra
 	}
 
 	@Override
-	public EnumItemReach getReach(ItemStack is){
+	public EnumItemReach getReach(ItemStack is)
+	{
 		return EnumItemReach.SHORT;
 	}
 }

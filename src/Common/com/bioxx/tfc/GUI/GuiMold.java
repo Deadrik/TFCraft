@@ -23,7 +23,7 @@ public class GuiMold extends GuiContainer
 	{
 		super(new ContainerMold(inventoryplayer, world, i, j, k));
 		this.xSize = 176;
-		this.ySize = 85+PlayerInventory.invYSize;
+		this.ySize = 85 + PlayerInventory.invYSize;
 		player = inventoryplayer.player;
 	}
 
@@ -42,7 +42,7 @@ public class GuiMold extends GuiContainer
 		int h = (height - ySize) / 2;
 		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
 
-		drawTexturedModalRect(w+85, h+17, 176, 0, drawArrowScaled(22)+1, 15);
+		drawTexturedModalRect(w + 64, h + 34, 176, 0, drawArrowScaled(22) + 1, 15);
 
 		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 	}

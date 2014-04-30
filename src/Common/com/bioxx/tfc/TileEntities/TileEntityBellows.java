@@ -74,7 +74,7 @@ public class TileEntityBellows extends TileEntity
 
 		if (te != null && te instanceof TileEntityFireEntity)
 			tileentityfirepit = (TileEntityFireEntity) te;
-		else if (te2 != null && te2 instanceof TileEntityForge)
+		else if (te2 != null && te2 instanceof TEForge)
 			tileentityfirepit = (TileEntityFireEntity) te2;
 
 		if (tileentityfirepit != null)

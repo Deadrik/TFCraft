@@ -2,12 +2,6 @@ package com.bioxx.tfc.Blocks.Vanilla;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
-import com.bioxx.tfc.api.IMultipleBlock;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.ITileEntityProvider;
@@ -23,6 +17,13 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
+import com.bioxx.tfc.api.IMultipleBlock;
+import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -127,6 +128,27 @@ public class BlockCustomFenceGate extends BlockFenceGate implements ITileEntityP
 
 		par1World.playAuxSFXAtEntity(par5EntityPlayer, 1003, par2, par3, par4, 0);
 		return true;
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+	{
+		/*TileEntityFenceGate te = (TileEntityFenceGate) world.getTileEntity(x, y, z);
+		boolean flag = world.isBlockIndirectlyGettingPowered(x, y, z);
+
+		if (flag || block != Blocks.air && block.canProvidePower())
+		{
+			if (flag && !te.getOpen())
+			{
+				te.setOpen(true);
+			}
+			else if (!flag && te.getOpen())
+			{
+				te.setOpen(false);
+			}
+
+			world.playAuxSFXAtEntity((EntityPlayer) null, 1003, x, y, z, 0);
+		}*/
 	}
 
 	@Override

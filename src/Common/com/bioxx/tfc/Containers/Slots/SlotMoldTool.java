@@ -1,12 +1,11 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
-import com.bioxx.tfc.api.TFC_ItemHeat;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Items.ItemMeltedMetal;
+import com.bioxx.tfc.api.TFC_ItemHeat;
 
 public class SlotMoldTool extends Slot
 {
@@ -18,7 +17,7 @@ public class SlotMoldTool extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.getItem() instanceof ItemPotteryMold || (itemstack.getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(itemstack)))
+		if(itemstack.getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(itemstack))
 			return true;
 		return false;
 	}

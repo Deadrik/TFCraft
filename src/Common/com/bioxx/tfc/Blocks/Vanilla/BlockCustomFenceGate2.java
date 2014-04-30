@@ -2,12 +2,6 @@ package com.bioxx.tfc.Blocks.Vanilla;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
-import com.bioxx.tfc.api.IMultipleBlock;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.ITileEntityProvider;
@@ -23,6 +17,13 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
+import com.bioxx.tfc.api.IMultipleBlock;
+import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -31,7 +32,8 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
 	String[] woodNames;
 	IIcon[] icons;
 
-	public BlockCustomFenceGate2() {
+	public BlockCustomFenceGate2()
+	{
 		super();
 		woodNames = new String[Global.WOOD_ALL.length - 16];
 		System.arraycopy(Global.WOOD_ALL, 16, woodNames, 0, Global.WOOD_ALL.length - 16);
@@ -91,6 +93,7 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
 		return ((TileEntityFenceGate)(par1IBlockAccess.getTileEntity(par2, par3, par4))).getOpen();
 	}
 
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
 		int l = ((TileEntityFenceGate)par1IBlockAccess.getTileEntity(par2, par3, par4)).getDirection();
@@ -128,6 +131,27 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
 	public Block getBlockTypeForRender()
 	{
 		return TFCBlocks.FenceGate2;
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+	{
+		/*TileEntityFenceGate te = (TileEntityFenceGate) world.getTileEntity(x, y, z);
+		boolean flag = world.isBlockIndirectlyGettingPowered(x, y, z);
+
+		if (flag || block != Blocks.air && block.canProvidePower())
+		{
+			if (flag && !te.getOpen())
+			{
+				te.setOpen(true);
+			}
+			else if (!flag && te.getOpen())
+			{
+				te.setOpen(false);
+			}
+
+			world.playAuxSFXAtEntity((EntityPlayer) null, 1003, x, y, z, 0);
+		}*/
 	}
 
 	@Override

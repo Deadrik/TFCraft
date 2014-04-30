@@ -3,15 +3,6 @@ package com.bioxx.tfc.Blocks.Devices;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Items.Tools.ItemFirestarter;
-import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
-import com.bioxx.tfc.TileEntities.TileEntityForge;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -22,6 +13,15 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.Tools.ItemFirestarter;
+import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
+import com.bioxx.tfc.TileEntities.TEForge;
 
 public class BlockForge extends BlockTerraContainer
 {
@@ -49,15 +49,14 @@ public class BlockForge extends BlockTerraContainer
 		}
 		else if(equippedItem != null && (equippedItem.getItem() instanceof ItemFirestarter || equippedItem.getItem() instanceof ItemFlintSteel))
 		{
-			if((TileEntityForge)world.getTileEntity(i, j, k) != null)
+			if((TEForge)world.getTileEntity(i, j, k) != null)
 			{
-				TileEntityForge tileentityforge;
-				tileentityforge = (TileEntityForge)world.getTileEntity(i, j, k);
-				if(tileentityforge.fireTemp <= 0 && tileentityforge.fireItemStacks[7] != null && tileentityforge.isSmokeStackValid)
+				TEForge tef = (TEForge)world.getTileEntity(i, j, k);
+				if(tef.fireTemp <= 0 && tef.fireItemStacks[7] != null && tef.isSmokeStackValid)
 				{
-					tileentityforge.fireTemp = 10;
-					tileentityforge.fuelBurnTemp = 20;
-					tileentityforge.fuelTimeLeft = 10;
+					tef.fireTemp = 10;
+					tef.fuelBurnTemp = 20;
+					tef.fuelTimeLeft = 10;
 					int ss = entityplayer.inventory.getCurrentItem().stackSize;
 					int dam = entityplayer.inventory.getCurrentItem().getItemDamage()+1;
 
@@ -73,16 +72,13 @@ public class BlockForge extends BlockTerraContainer
 		}
 		else
 		{
-			if((TileEntityForge)world.getTileEntity(i, j, k)!=null)
+			if((TEForge)world.getTileEntity(i, j, k)!=null)
 			{
-				TileEntityForge tileentityforge;
-				tileentityforge = (TileEntityForge)world.getTileEntity(i, j, k);
-				ItemStack is =entityplayer.getCurrentEquippedItem();
-
-				if(tileentityforge.isSmokeStackValid)
+				TEForge tef = (TEForge)world.getTileEntity(i, j, k);
+				if(tef.isSmokeStackValid)
 				{
 					entityplayer.openGui(TerraFirmaCraft.instance, 23, world, i, j, k);
-					//ModLoader.openGUI(entityplayer, new GuiTerraForge(entityplayer.inventory, tileentityforge));
+					//ModLoader.openGUI(entityplayer, new GuiTerraForge(entityplayer.inventory, TEForge));
 				}
 			}
 			return true;
@@ -147,14 +143,14 @@ public class BlockForge extends BlockTerraContainer
 
 			if (!(rockXP && rockXN && rockZP && rockZN && rockYN) || !validSlabs)
 			{
-				((TileEntityForge)world.getTileEntity(x, y, z)).ejectContents();
+				((TEForge)world.getTileEntity(x, y, z)).ejectContents();
 				world.setBlockToAir(x, y, z);
 			}
 			else
 			{
 				if(world.getTileEntity(x, y, z) != null)
 				{
-					//((TileEntityForge)world.getBlockTileEntity(x, y, z)).isValid = false;
+					//((TEForge)world.getBlockTileEntity(x, y, z)).isValid = false;
 				}
 			}
 		}
@@ -188,7 +184,7 @@ public class BlockForge extends BlockTerraContainer
 			world.spawnParticle("smoke", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
 
-			if (((TileEntityForge)world.getTileEntity(i, j, k)).fireTemp > 550)
+			if (((TEForge)world.getTileEntity(i, j, k)).fireTemp > 550)
 			{
 				world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f6 + 0.2F, 0.0D, 0.0D, 0.0D);
 				world.spawnParticle("flame", f+f4 - 0.3F , f1, f2 + f6 + 0.1F, 0.0D, 0.0D, 0.0D);
@@ -203,7 +199,7 @@ public class BlockForge extends BlockTerraContainer
 	}
 
 	@Override
-	public int getLightValue(IBlockAccess world, int x, int y, int z) 
+	public int getLightValue(IBlockAccess world, int x, int y, int z)
 	{
 		int meta = world.getBlockMetadata(x, y, z);
 		if(meta == 0)
@@ -236,6 +232,6 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntityForge();
+		return new TEForge();
 	}
 }

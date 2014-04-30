@@ -2,18 +2,6 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.List;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.TileEntities.TileEntityBarrel;
-import com.bioxx.tfc.api.IFood;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Enums.EnumFoodGroup;
-import com.bioxx.tfc.api.Enums.EnumItemReach;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -23,6 +11,18 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.api.IFood;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.Enums.EnumItemReach;
 
 public class ItemCustomBucketMilk extends ItemTerra implements IFood
 {
@@ -41,7 +41,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	}
 
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("foodWeight"))
 		{
@@ -72,7 +72,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 			nbt = new NBTTagCompound();
 		nbt.setFloat("foodWeight", weight);
 		nbt.setFloat("foodDecay", 0);
-		nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours()+1);
+		nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
 
 		is.setTagCompound(nbt);
 		return is;
@@ -132,11 +132,12 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 				int i = mop.blockX;
 				int j = mop.blockY;
 				int k = mop.blockZ;
-				if(world.getTileEntity(i, j, k) != null && world.getTileEntity(i, j, k) instanceof TileEntityBarrel)
+				if(world.getTileEntity(i, j, k) != null && world.getTileEntity(i, j, k) instanceof TEBarrel)
 				{
-					TileEntityBarrel TE = (TileEntityBarrel) world.getTileEntity(i, j, k);
-					if(TE.checkValidAddition(13))
-						return new ItemStack(TFCItems.WoodenBucketEmpty);
+					TEBarrel TE = (TEBarrel) world.getTileEntity(i, j, k);
+					//FIXME Removed this because the barrel code needs to use blocks and not ids from now on
+					/*if(TE.checkValidAddition(13))
+						return new ItemStack(TFCItems.WoodenBucketEmpty);*/
 				}
 			}
 		}
@@ -196,12 +197,14 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	}
 
 	@Override
-	public boolean isEdible() {
+	public boolean isEdible()
+	{
 		return true;
 	}
 
 	@Override
-	public boolean isUsable() {
+	public boolean isUsable()
+	{
 		return false;
 	}
 }

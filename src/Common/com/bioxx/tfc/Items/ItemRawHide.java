@@ -2,14 +2,6 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -17,8 +9,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemRawHide extends ItemLooseRock
 {
@@ -62,7 +60,7 @@ public class ItemRawHide extends ItemLooseRock
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
-		if (TFC_Core.showExtraInformation() && is.getItem() == TFCItems.Hide) 
+		/*if (TFC_Core.showExtraInformation() && is.getItem() == TFCItems.Hide) 
 		{
 			arraylist.add(StatCollector.translateToLocal("gui.Help"));
 			arraylist.add(StatCollector.translateToLocal("gui.RawHide.Inst0"));
@@ -70,22 +68,20 @@ public class ItemRawHide extends ItemLooseRock
 		else
 		{
 			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
-		}
+		}*/
 	}
 
 
 	@Override
-	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) 
+	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5)
 	{
-
 	}
 
 	@Override
 	public IIcon getIconFromDamage(int meta)
-	{        
+	{
 		return this.itemIcon;
 	}
-
 
 	@Override
 	public void registerIcons(IIconRegister registerer)
@@ -94,10 +90,10 @@ public class ItemRawHide extends ItemLooseRock
 	}
 
 	@Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
+	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
-		list.add(new ItemStack(this,1,0));
-		list.add(new ItemStack(this,1,1));
-		list.add(new ItemStack(this,1,2));
+		list.add(new ItemStack(this, 1, 0));
+		list.add(new ItemStack(this, 1, 1));
+		list.add(new ItemStack(this, 1, 2));
 	}
 }

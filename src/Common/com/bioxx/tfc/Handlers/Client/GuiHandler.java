@@ -2,6 +2,14 @@ package com.bioxx.tfc.Handlers.Client;
 
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.client.event.GuiOpenEvent;
+
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 import com.bioxx.tfc.GUI.GuiAnvil;
@@ -27,27 +35,20 @@ import com.bioxx.tfc.GUI.GuiSluice;
 import com.bioxx.tfc.GUI.GuiVessel;
 import com.bioxx.tfc.GUI.GuiVesselLiquid;
 import com.bioxx.tfc.GUI.GuiWorkbench;
+import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
 import com.bioxx.tfc.TileEntities.TECrucible;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
+import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TileEntityAnvil;
-import com.bioxx.tfc.TileEntities.TileEntityBarrel;
 import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
-import com.bioxx.tfc.TileEntities.TileEntityForge;
 import com.bioxx.tfc.TileEntities.TileEntityLogPile;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.client.event.GuiOpenEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
@@ -80,7 +81,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 22:
 			return null;//was scribing table
 		case 23:
-			return new GuiForge(player.inventory, (TileEntityForge) te, world, x, y, z);
+			return new GuiForge(player.inventory, (TEForge) te, world, x, y, z);
 		case 24:
 			return new GuiPlanSelection(player, (TileEntityAnvil) te, world, x, y, z);//was metallurgy table
 		case 25:
@@ -102,7 +103,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 34:
 			return new GuiBlueprint(player, world, x, y, z);
 		case 35:
-			return new GuiBarrel(player.inventory,((TileEntityBarrel)te),world,x,y,z);
+			return new GuiBarrel(player.inventory,((TEBarrel)te),world,x,y,z);
 		case 36:
 			return null;
 		case 37:
@@ -118,13 +119,14 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 42:
 		{
 			List list = player.worldObj.getEntitiesWithinAABB(EntityHorseTFC.class, player.boundingBox.expand(2, 2, 2));
-			if(list.size() > 0){
+			if(list.size() > 0)
+			{
 				EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
 				NBTTagCompound nbt = new NBTTagCompound();
-				System.out.println(horse.isChested() +", "+horse.getHorseType()+", "+horse.getHorseChest().getSizeInventory());
+				System.out.println(horse.isChested() + ", " + horse.getHorseType() + ", " + horse.getHorseChest().getSizeInventory());
 				horse.writeEntityToNBT(nbt);
 				horse.readEntityFromNBT(nbt);
-				System.out.println(horse.isChested() +", "+horse.getHorseType()+", "+horse.getHorseChest().getSizeInventory());
+				System.out.println(horse.isChested() + ", " + horse.getHorseType() + ", " + horse.getHorseChest().getSizeInventory());
 				return new GuiScreenHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
 			}
 			return null;

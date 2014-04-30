@@ -3,18 +3,6 @@ package com.bioxx.tfc.Blocks.Devices;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.Items.ItemBarrels2;
-import com.bioxx.tfc.TileEntities.TileEntityBarrel;
-import com.bioxx.tfc.api.IMultipleBlock;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -35,10 +23,24 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.Items.ItemBarrels2;
+import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.api.IMultipleBlock;
+import com.bioxx.tfc.api.IPipeConnectable;
+import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock
+public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock, IPipeConnectable
 {
 	private final Random random = new Random();
 	String[] woodNames;
@@ -69,7 +71,7 @@ public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) 
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
 		for(int i = 0; i < woodNames.length; i++)
 			par3List.add(new ItemStack(this, 1, i));
@@ -114,11 +116,11 @@ public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase player, ItemStack is)
 	{
 		super.onBlockPlacedBy(world, i, j, k, player, is);
-		TileEntityBarrel teb = null;
+		TEBarrel teb = null;
 		TileEntity te = world.getTileEntity(i, j, k);
-		if (te != null && is.hasTagCompound() && te instanceof TileEntityBarrel)
+		if (te != null && is.hasTagCompound() && te instanceof TEBarrel)
 		{
-			teb = (TileEntityBarrel) te;
+			teb = (TEBarrel) te;
 			teb.readFromItemNBT(is.getTagCompound());
 			world.markBlockForUpdate(i, j, k);
 			//TerraFirmaCraft.proxy.sendCustomPacket(te.createUpdatePacket());
@@ -216,20 +218,20 @@ public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock
 	}
 
 	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block block)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
-		if (par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+		if (world.isBlockIndirectlyGettingPowered(x, y, z))
 		{
-			TileEntityBarrel TE = (TileEntityBarrel)par1World.getTileEntity(par2,par3,par4);
+			TEBarrel TE = (TEBarrel)world.getTileEntity(x, y, z);
 			if(TE.liquidLevel == 256 && TE.Type == 4 && !TE.getSealed())
 			{
 				TE.setSealed();
-				BarrelEntity BE = new BarrelEntity(par1World,par2,par3,par4);
-				par1World.spawnEntityInWorld(BE);
-				par1World.playSoundAtEntity(BE, "random.fuse", 1.0F, 1.0F);
+				BarrelEntity BE = new BarrelEntity(world,x, y, z);
+				world.spawnEntityInWorld(BE);
+				world.playSoundAtEntity(BE, "random.fuse", 1.0F, 1.0F);
 				//float f = 16.0F;
 				//EI.worldObj.createExplosion(EI, EI.posX, EI.posY, EI.posZ, f, true);
-				//par1World.setBlockToAir(par2, par3, par4);
+				//world.setBlockToAir(x, y, z);
 			}
 		}
 	}
@@ -238,30 +240,30 @@ public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock
 	 * Called whenever the block is removed.
 	 */
 	@Override
-	public void breakBlock(World world, int i, int j, int k, Block block, int par6)
+	public void breakBlock(World world, int i, int j, int k, Block block, int metadata)
 	{
-		TileEntityBarrel te = (TileEntityBarrel)world.getTileEntity(i, j, k);
+		TEBarrel te = (TEBarrel)world.getTileEntity(i, j, k);
 
 		if (te != null)
 		{
-			ItemStack is = new ItemStack(Item.getItemFromBlock(block), 1,par6);
+			ItemStack is = new ItemStack(Item.getItemFromBlock(block), 1, metadata);
 			NBTTagCompound nbt = writeBarrelToNBT(te);
 			is.setTagCompound(nbt);
-			EntityItem ei = new EntityItem(world,i,j,k,is);
+			EntityItem ei = new EntityItem(world, i, j, k, is);
 			world.spawnEntityInWorld(ei);
 
 			for(int s = 0; s < te.getSizeInventory(); ++s)
 				te.setInventorySlotContents(s, null);
 		}
-		super.breakBlock(world, i, j, k, block, par6);
+		super.breakBlock(world, i, j, k, block, metadata);
 	}
 
 	@Override
-	protected void dropBlockAsItem(World par1World, int par2, int par3, int par4, ItemStack par5ItemStack)
+	protected void dropBlockAsItem(World world, int x, int y, int z, ItemStack is)
 	{
 	}
 
-	public NBTTagCompound writeBarrelToNBT(TileEntityBarrel te)
+	public NBTTagCompound writeBarrelToNBT(TEBarrel te)
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 
@@ -306,7 +308,7 @@ public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock
 
 			if(world.getTileEntity(x, y, z) != null)
 			{
-				TileEntityBarrel TeBarrel = (TileEntityBarrel)(world.getTileEntity(x, y, z));
+				TEBarrel TeBarrel = (TEBarrel)(world.getTileEntity(x, y, z));
 				if(TeBarrel.liquidLevel == 256 && TeBarrel.Type == 4 && TeBarrel.getSealed())
 				{
 					List<Entity> list = world.getEntitiesWithinAABB(BarrelEntity.class, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1));
@@ -338,7 +340,7 @@ public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntityBarrel();
+		return new TEBarrel();
 	}
 
 	@Override
@@ -359,5 +361,49 @@ public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock
 	public Block getBlockTypeForRender()
 	{
 		return TFCBlocks.Planks2;
+	}
+	
+	@Override
+	public boolean canConnectTo(IBlockAccess world, int desiredFace, int x, int y, int z)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean feed(IBlockAccess world, int fedFace, int x, int y, int z,boolean isLiquid, boolean needsPipe)
+	{
+		TEBarrel te = ((TEBarrel)(world.getTileEntity(x, y, z)));
+		if(te != null && te.liquidLevel < 256)
+		{
+			te.liquidLevel += 4;
+			te.Type = 1;
+			te.updateGui();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hasToBeOnlyOption()
+	{
+		return 0;
+	}
+
+	@Override
+	public int getSide(IBlockAccess world, int x, int y, int z)
+	{
+		return -1;
+	}
+
+	@Override
+	public int getFinalBit(IBlockAccess world, int x, int y, int z)
+	{
+		return 0;
+	}
+
+	@Override
+	public boolean isPipe()
+	{
+		return false;
 	}
 }

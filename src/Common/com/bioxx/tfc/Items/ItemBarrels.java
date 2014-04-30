@@ -2,12 +2,6 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
-import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
-import com.bioxx.tfc.TileEntities.TileEntityBarrel;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +9,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+
+import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
+import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemBarrels extends ItemTerraBlock
 {
@@ -46,7 +46,7 @@ public class ItemBarrels extends ItemTerraBlock
 		if(nbt != null && nbt.hasKey("type"))
 		{
 			type = nbt.getInteger("type");
-			arraylist.add(EnumChatFormatting.YELLOW + TileEntityBarrel.getType(type));
+			arraylist.add(EnumChatFormatting.YELLOW + TEBarrel.getType(type));
 		}
 	}
 

@@ -1,12 +1,5 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.Containers.Slots.SlotForge;
-import com.bioxx.tfc.Containers.Slots.SlotForgeFuel;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.Items.ItemOre;
-import com.bioxx.tfc.TileEntities.TileEntityForge;
-import com.bioxx.tfc.api.HeatRegistry;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -15,16 +8,22 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Containers.Slots.SlotForge;
+import com.bioxx.tfc.Containers.Slots.SlotForgeFuel;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Items.ItemOre;
+import com.bioxx.tfc.TileEntities.TEForge;
+import com.bioxx.tfc.api.HeatRegistry;
+
 public class ContainerForge extends ContainerTFC
 {
-	private TileEntityForge forge;
+	private TEForge forge;
 	private int coolTime;
 	private int freezeTime;
 	private int itemFreezeTime;
 	private float firetemp;
 
-
-	public ContainerForge(InventoryPlayer inventoryplayer, TileEntityForge tileentityforge, World world, int x, int y, int z)
+	public ContainerForge(InventoryPlayer inventoryplayer, TEForge tileentityforge, World world, int x, int y, int z)
 	{
 		forge = tileentityforge;
 		coolTime = 0;
