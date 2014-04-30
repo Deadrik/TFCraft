@@ -5,7 +5,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import TFC.API.TFC_ItemHeat;
 import TFC.Items.ItemMeltedMetal;
-import TFC.Items.Pottery.ItemPotteryMold;
 
 public class SlotMoldTool extends Slot
 
@@ -19,7 +18,7 @@ public class SlotMoldTool extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
-		if(itemstack.getItem() instanceof ItemPotteryMold || (itemstack.getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(itemstack)))
+		if (itemstack.getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(itemstack))
 		{
 			return true;
 		}

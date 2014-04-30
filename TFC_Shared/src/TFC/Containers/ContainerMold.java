@@ -38,7 +38,7 @@ public class ContainerMold extends ContainerTFC {
 		this.posZ = z;
 		layoutContainer(playerinv, 0, 0);
 
-		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 55, false, true);
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
 
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(playerinv.player);
 		containerInv.setInventorySlotContents(0, pi.specialCraftingType);
@@ -77,9 +77,9 @@ public class ContainerMold extends ContainerTFC {
 
 	protected void layoutContainer(IInventory playerInventory, int xSize, int ySize) 
 	{
-		this.addSlotToContainer(new SlotMoldTool(containerInv, 0, 41, 17));
-		this.addSlotToContainer(new SlotMoldTool2(containerInv, 1, 62, 17));
-		this.addSlotToContainer(new SlotBlocked(craftResult, 0, 116, 17));
+		this.addSlotToContainer(new SlotMoldTool(containerInv, 0, 41, 34));
+		this.addSlotToContainer(new SlotMoldTool2(containerInv, 1, 94, 34));
+		this.addSlotToContainer(new SlotBlocked(craftResult, 0, 116, 34));
 	}
 
 
@@ -124,7 +124,9 @@ public class ContainerMold extends ContainerTFC {
 				}
 			}
 
-			if(containerInv.getStackInSlot(1) != null && pi.moldTransferTimer < 100) {
+			if(containerInv.getStackInSlot(1) != null && pi.moldTransferTimer < 100 && 
+					CraftingManagerTFC.getInstance().findMatchingRecipe(this.containerInv, world) != null) 
+			{
 				pi.moldTransferTimer++;
 			}
 
@@ -171,8 +173,6 @@ public class ContainerMold extends ContainerTFC {
 				}
 			}
 		}
-
-
 	}
 
 	@Override
@@ -198,25 +198,28 @@ public class ContainerMold extends ContainerTFC {
 			{
 				if(itemstack1.getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(itemstack1))
 				{
-					if(slot1.getHasStack())
-					{
-						return null;
-					}                     
 					ItemStack stack = itemstack1.copy();
-					stack.stackSize = 1;                            
-					slot1.putStack(stack);                          
-					itemstack1.stackSize--;
+					stack.stackSize = 1;
+					if (!slot1.getHasStack())
+					{
+						slot1.putStack(stack);
+						itemstack1.stackSize--;
+					}
+					else if (!slot2.getHasStack())
+					{
+						slot2.putStack(stack);
+						itemstack1.stackSize--;
+					}
 				}
-				else if(itemstack1.getItem() instanceof ItemPotteryMold && itemstack1.getItemDamage() == 1)
+				else if ((itemstack1.getItem() instanceof ItemPotteryMold || itemstack1.getItem().itemID == TFCItems.CeramicMold.itemID) && itemstack1.getItemDamage() == 1)
 				{
-					if(slot2.getHasStack())
+					if (!slot2.getHasStack())
 					{
-						return null;
-					}                     
-					ItemStack stack = itemstack1.copy();
-					stack.stackSize = 1;       
-					slot2.putStack(stack);                          
-					itemstack1.stackSize--;
+						ItemStack stack = itemstack1.copy();
+						stack.stackSize = 1;
+						slot2.putStack(stack);
+						itemstack1.stackSize--;
+					}
 
 				}
 			}

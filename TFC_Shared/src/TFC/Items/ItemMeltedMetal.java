@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.Reference;
-import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFC_ItemHeat;
 import TFC.API.Enums.EnumSize;
@@ -93,18 +92,14 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{	
-		if(TFC_ItemHeat.getIsLiquid(is) && (is.getItem() == TFCItems.BronzeUnshaped || is.getItem() == TFCItems.BismuthBronzeUnshaped ||
-				is.getItem() == TFCItems.BlackBronzeUnshaped || is.getItem() == TFCItems.CopperUnshaped))
+		if (TFC_Core.showExtraInformation())
 		{
-			if (TFC_Core.showExtraInformation()) 
-			{
-				arraylist.add(StringUtil.localize("gui.Help"));
-				arraylist.add(StringUtil.localize("gui.MeltedMetal.Inst0"));
-			}
-			else
-			{
-				arraylist.add(StringUtil.localize("gui.ShowHelp"));
-			}
+			arraylist.add(StringUtil.localize("gui.Help"));
+			arraylist.add(StringUtil.localize("gui.MeltedMetal.Inst0"));
+		}
+		else
+		{
+			arraylist.add(StringUtil.localize("gui.ShowHelp"));
 		}
 	}
 
@@ -115,15 +110,12 @@ public class ItemMeltedMetal extends ItemTerra
 			itemstack.stackSize = 1;
 		}
 
-		if(TFC_ItemHeat.getIsLiquid(itemstack) && (itemstack.getItem() == TFCItems.BronzeUnshaped  || itemstack.getItem() == TFCItems.BismuthBronzeUnshaped  ||
-				itemstack.getItem() == TFCItems.BlackBronzeUnshaped  || itemstack.getItem() == TFCItems.CopperUnshaped))
-		{
-			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
-			pi.specialCraftingType = itemstack.copy();
+		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
+		pi.specialCraftingType = itemstack.copy();
 
-			entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
-			entityplayer.openGui(TerraFirmaCraft.instance, 38, world, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
-		}
+		entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
+		entityplayer.openGui(TerraFirmaCraft.instance, 38, world, (int) entityplayer.posX, (int) entityplayer.posY, (int) entityplayer.posZ);
+
 		return itemstack;
 	}
 }
