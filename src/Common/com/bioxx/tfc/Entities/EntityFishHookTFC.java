@@ -3,7 +3,7 @@ package com.bioxx.tfc.Entities;
 import java.util.List;
 
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.Tools.ItemFishingRod;
+import com.bioxx.tfc.Items.Tools.ItemCustomFishingRod;
 import com.bioxx.tfc.api.Util.Helper;
 
 import net.minecraft.block.Block;
@@ -199,7 +199,7 @@ public class EntityFishHookTFC extends EntityFishHook
 			{
 				ItemStack itemstack = this.field_146042_b.getCurrentEquippedItem();
 
-				if (this.field_146042_b.isDead || !this.field_146042_b.isEntityAlive() || itemstack == null || !(itemstack.getItem() instanceof ItemFishingRod) || this.getDistanceSqToEntity(this.field_146042_b) > 1024.0D)
+				if (this.field_146042_b.isDead || !this.field_146042_b.isEntityAlive() || itemstack == null || !(itemstack.getItem() instanceof ItemCustomFishingRod) || this.getDistanceSqToEntity(this.field_146042_b) > 1024.0D)
 				{
 					this.setDead();
 					this.field_146042_b.fishEntity = null;

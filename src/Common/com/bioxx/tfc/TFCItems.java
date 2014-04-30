@@ -68,6 +68,7 @@ import com.bioxx.tfc.Items.Tools.ItemCustomBlueSteelBucket;
 import com.bioxx.tfc.Items.Tools.ItemCustomBow;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucket;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
+import com.bioxx.tfc.Items.Tools.ItemCustomFishingRod;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
 import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
 import com.bioxx.tfc.Items.Tools.ItemCustomPickaxe;
@@ -982,7 +983,7 @@ public class TFCItems
 		System.out.println(new StringBuilder().append("[TFC] Loading Items").toString());
 
 		//Replace any vanilla Items here
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.fishing_rod), "fishingRod", (new com.bioxx.tfc.Items.Tools.ItemFishingRod()).setUnlocalizedName("fishingRod").setTextureName("fishing_rod"));
+		Item.itemRegistry.addObject(Item.getIdFromItem(Items.fishing_rod), "fishingRod", (new ItemCustomFishingRod()).setUnlocalizedName("fishingRod").setTextureName("fishing_rod"));
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.coal), "coal", new com.bioxx.tfc.Items.ItemCoal().setUnlocalizedName("coal"));
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.stick), "stick", new ItemStick().setFull3D().setUnlocalizedName("stick"));
 		Item.itemRegistry.addObject(Item.getIdFromItem(Items.bow), "bow", new ItemCustomBow().setUnlocalizedName("bow").setTextureName("bow"));
