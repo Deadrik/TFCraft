@@ -779,6 +779,7 @@ public class TFCItemID {
 	public static int horseMeatRaw				= 19144;
 	public static int horseMeatCooked			= 19145;
 	public static int WoodenBucketSaltWater		= 19146;
+	public static int WoodenBucketSalt			= 19147;
 
 
 	public static void Setup(Configuration config)

@@ -9,10 +9,14 @@ public interface IPipeConnectable {
 	//executes code based for having power / steam added
 	/**
 	 *@param world the world
-	 *@param fedFace For metadata: 0 = top origin, 5 = bottom origin, 1 = left, 4 = right, 2 = front, 3 = back, for MATH REASONS. 
+	 *@param fedFace For metadata: 0 = top origin, 5 = bottom origin, 1 = left, 4 = right, 2 = front, 3 = back,
+	 *@param needsPipe means it needs to travel through a pipe immediately.
 	 * 
 	*/
-	public boolean feed(IBlockAccess world, int fedFace, int x, int y, int z, boolean isLiquid);
+	
+	public boolean isPipe();
+	
+	public boolean feed(IBlockAccess world, int fedFace, int x, int y, int z, boolean isLiquid, boolean needsPipe);
 	//Certain blocks won't take input / connect to pipes if there are other attachments to said pipe. 0 means doesn't care, 1 means otherwise
 	public int hasToBeOnlyOption();
 	

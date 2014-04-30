@@ -366,7 +366,7 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	}
 
 	@Override
-	public boolean feed(IBlockAccess world, int fedFace, int x, int y, int z,boolean isLiquid) {
+	public boolean feed(IBlockAccess world, int fedFace, int x, int y, int z,boolean isLiquid, boolean needsPipe) {
 		TileEntityBarrel te = ((TileEntityBarrel)(world.getBlockTileEntity(x, y, z)));
 		if(te != null && te.liquidLevel < 256){
 		te.liquidLevel+=4;
@@ -392,5 +392,10 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	@Override
 	public int getFinalBit(IBlockAccess world, int x, int y, int z) {
 		return 0;
+	}
+
+	@Override
+	public boolean isPipe() {
+		return false;
 	}
 }

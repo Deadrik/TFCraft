@@ -650,7 +650,7 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Item.dyePowder,3, 15));
 			RemoveRecipe(new ItemStack(Item.dyePowder,2, 1));
 			RemoveRecipe(new ItemStack(Item.dyePowder,2, 11));
-			RemoveRecipe(new ItemStack(Block.fence,2));
+			//RemoveRecipe(new ItemStack(Block.fence,2));
 			RemoveRecipe(new ItemStack(Block.fenceGate,1));
 			RemoveRecipe(new ItemStack(Block.cloth));
 
@@ -1788,6 +1788,8 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.RiceDough, 1), new Object[] {TFCItems.RiceGround,TFCItems.RedSteelBucketWater});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CornmealDough, 1), new Object[] {TFCItems.CornmealGround, TFCItems.RedSteelBucketWater});
 
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 2,9), new Object[] {TFCItems.WoodenBucketSalt});
+		
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.venisonRaw, 1), 0), new Object[] {new ItemStack(TFCItems.venisonRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(Item.beefRaw, 1), 0), new Object[] {new ItemStack(Item.beefRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(Item.chickenRaw, 1), 0), new Object[] {new ItemStack(Item.chickenRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});

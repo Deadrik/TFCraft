@@ -414,7 +414,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			}
 
 			if(mode == 1 && liquidLevel > 0 && TFC_Time.getTotalTicks() % 2 == 0 &&
-					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj,0,xCoord,yCoord,zCoord,true)){
+					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj,0,xCoord,yCoord,zCoord,true,true)){
 				liquidLevel-=4;
 				updateGui();
 			}

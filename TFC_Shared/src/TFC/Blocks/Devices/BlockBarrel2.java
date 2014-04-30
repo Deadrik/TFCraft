@@ -27,6 +27,7 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.IMultipleBlock;
+import TFC.API.IPipeConnectable;
 import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFCTabs;
@@ -37,7 +38,7 @@ import TFC.TileEntities.TileEntityBarrel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock
+public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock, IPipeConnectable
 {
 	private final Random random = new Random();
 	String[] woodNames;
@@ -355,5 +356,46 @@ public class BlockBarrel2 extends BlockTerraContainer implements IMultipleBlock
 	@Override
 	public Block getBlockTypeForRender() {
 		return TFCBlocks.Planks2;
+	}
+	
+	@Override
+	public boolean canConnectTo(IBlockAccess world, int desiredFace, int x,
+			int y, int z) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean feed(IBlockAccess world, int fedFace, int x, int y, int z,boolean isLiquid, boolean needsPipe) {
+		TileEntityBarrel te = ((TileEntityBarrel)(world.getBlockTileEntity(x, y, z)));
+		if(te != null && te.liquidLevel < 256){
+		te.liquidLevel+=4;
+		te.Type = 1;
+		te.updateGui();
+		return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hasToBeOnlyOption() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getSide(IBlockAccess world, int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return -1;
+	}
+
+	@Override
+	public int getFinalBit(IBlockAccess world, int x, int y, int z) {
+		return 0;
+	}
+
+	@Override
+	public boolean isPipe() {
+		return false;
 	}
 }

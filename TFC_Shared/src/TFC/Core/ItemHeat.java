@@ -342,6 +342,8 @@ public class ItemHeat
 
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, 32767), 1, 80, new ItemStack(Block.torchWood, 2)));
+		
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WoodenBucketSaltWater, 1, 32767), 4.18, 100, new ItemStack(TFCItems.WoodenBucketSalt, 1)));
 
 	}
 }

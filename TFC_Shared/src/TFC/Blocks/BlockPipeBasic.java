@@ -53,29 +53,29 @@ public class BlockPipeBasic extends BlockTerra implements IPipeConnectable
 		world.setBlockMetadataWithNotify(i, j, k, n, 0);
 		return n;
 	}
-	
-	
+
+
 
 	@Override
 	public boolean canBeReplacedByLeaves(World w, int x, int y, int z)
 	{
 		return false;
 	}
-	
+
 	@Override
 	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 	{
 		int l = getSide(par1IBlockAccess,par2, par3, par4);
 		return icon[2];
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
+	{
 		icon[0] = iconRegisterer.registerIcon(Reference.ModID + ":" + "metal/Pipe joint face");
 		icon[1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "metal/Pipe joint side");
 		icon[2] = iconRegisterer.registerIcon(Reference.ModID + ":" + "metal/pipe copy");
-    }
+	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)  
@@ -87,7 +87,7 @@ public class BlockPipeBasic extends BlockTerra implements IPipeConnectable
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube()
 	{
@@ -112,9 +112,9 @@ public class BlockPipeBasic extends BlockTerra implements IPipeConnectable
 		return (getSide(world,x, y, z)) == desiredFace;
 	}
 
-	
+
 	@Override
-	public boolean feed(IBlockAccess world, int fedFace, int x, int y, int z, boolean isLiquid) {
+	public boolean feed(IBlockAccess world, int fedFace, int x, int y, int z, boolean isLiquid, boolean needsPipe) {
 		//Simulates decay over distance and helps prevent pipe tracks that are too long.
 		if((rand.nextInt(32)!=0 || isLiquid)&& getFinalBit(world,x,y,z)==0){
 			//Check surrounding blocks for receiversBlock block
@@ -122,54 +122,87 @@ public class BlockPipeBasic extends BlockTerra implements IPipeConnectable
 			//block is the block being checked, feedFace is the direction the block would feed from.
 			Block block;
 			int feedFace;
-			
+
 			block = Block.blocksList[world.getBlockId(x, y+1, z)];
 			feedFace = 5;
-
-			if(block != null && Math.abs(feedFace - 5)!=fedFace && block instanceof IPipeConnectable &&
-					((IPipeConnectable)block).canConnectTo(world, feedFace, x, y+1, z)){
-				list.add(new int[]{x,y+1,z,((IPipeConnectable)block).hasToBeOnlyOption(),feedFace});
+			if(block != null && block instanceof IPipeConnectable && needsPipe && !((IPipeConnectable)block).isPipe())
+			{
 			}
-			
+			else
+			{
+				if(block != null && Math.abs(feedFace - 5)!=fedFace && block instanceof IPipeConnectable &&
+						((IPipeConnectable)block).canConnectTo(world, feedFace, x, y+1, z)){
+					list.add(new int[]{x,y+1,z,((IPipeConnectable)block).hasToBeOnlyOption(),feedFace});
+				}
+			}
 			block = Block.blocksList[world.getBlockId(x-1, y, z)];
 			feedFace = 4;
-
-			if(block != null && Math.abs(feedFace - 5)!=fedFace && block instanceof IPipeConnectable &&
-					((IPipeConnectable)block).canConnectTo(world, feedFace, x-1, y, z)){
-				list.add(new int[]{x-1,y,z,((IPipeConnectable)block).hasToBeOnlyOption(),feedFace});
+			if(block != null && block instanceof IPipeConnectable && needsPipe && !((IPipeConnectable)block).isPipe())
+			{
 			}
-			
+			else
+			{
+
+				if(block != null && Math.abs(feedFace - 5)!=fedFace && block instanceof IPipeConnectable &&
+						((IPipeConnectable)block).canConnectTo(world, feedFace, x-1, y, z)){
+					list.add(new int[]{x-1,y,z,((IPipeConnectable)block).hasToBeOnlyOption(),feedFace});
+				}
+			}
 			block = Block.blocksList[world.getBlockId(x, y, z-1)];
 			feedFace = 3;
-			
-			if(block != null && Math.abs(feedFace - 5)!=fedFace && block instanceof IPipeConnectable &&
-					((IPipeConnectable)block).canConnectTo(world, feedFace, x, y, z-1)){
-				list.add(new int[]{x,y,z-1,((IPipeConnectable)block).hasToBeOnlyOption(),feedFace});
+			if(block != null && block instanceof IPipeConnectable && needsPipe && !((IPipeConnectable)block).isPipe())
+			{
 			}
-			
+			else
+			{
+
+				if(block != null && Math.abs(feedFace - 5)!=fedFace && block instanceof IPipeConnectable &&
+						((IPipeConnectable)block).canConnectTo(world, feedFace, x, y, z-1)){
+					list.add(new int[]{x,y,z-1,((IPipeConnectable)block).hasToBeOnlyOption(),feedFace});
+				}
+
+			}
 			block = Block.blocksList[world.getBlockId(x, y, z+1)];
 			feedFace = 2;
-			if(block != null && Math.abs(feedFace - 5)!=fedFace && block instanceof IPipeConnectable &&
-					((IPipeConnectable)block).canConnectTo(world, feedFace, x, y, z+1)){
-				list.add(new int[]{x,y,z+1,((IPipeConnectable)block).hasToBeOnlyOption(),feedFace});
+			if(block != null && block instanceof IPipeConnectable && needsPipe && !((IPipeConnectable)block).isPipe())
+			{
 			}
-			
+			else
+			{
+
+				if(block != null && Math.abs(feedFace - 5)!=fedFace && block instanceof IPipeConnectable &&
+						((IPipeConnectable)block).canConnectTo(world, feedFace, x, y, z+1)){
+					list.add(new int[]{x,y,z+1,((IPipeConnectable)block).hasToBeOnlyOption(),feedFace});
+				}
+			}
+
 			block = Block.blocksList[world.getBlockId(x+1, y, z)];
 			feedFace = 1;
-
-			if(block != null && Math.abs(feedFace - 5)!=fedFace && block instanceof IPipeConnectable &&
-					((IPipeConnectable)block).canConnectTo(world, feedFace, x+1, y, z)){
-				list.add(new int[]{x+1,y,z,((IPipeConnectable)block).hasToBeOnlyOption(),feedFace});
+			if(block != null && block instanceof IPipeConnectable && needsPipe && !((IPipeConnectable)block).isPipe())
+			{
 			}
-			
+			else
+			{
+
+				if(block != null && Math.abs(feedFace - 5)!=fedFace && block instanceof IPipeConnectable &&
+						((IPipeConnectable)block).canConnectTo(world, feedFace, x+1, y, z)){
+					list.add(new int[]{x+1,y,z,((IPipeConnectable)block).hasToBeOnlyOption(),feedFace});
+				}
+			}
 			block = Block.blocksList[world.getBlockId(x, y-1, z)];
 			feedFace = 0;
-
-			if(block != null && Math.abs(feedFace - 5)!=fedFace && block instanceof IPipeConnectable &&
-					((IPipeConnectable)block).canConnectTo(world, feedFace, x, y-1, z)){
-				list.add(new int[]{x,y-1,z,((IPipeConnectable)block).hasToBeOnlyOption(),feedFace});
+			if(block != null && block instanceof IPipeConnectable && needsPipe && !((IPipeConnectable)block).isPipe())
+			{
 			}
-			
+			else
+			{
+
+				if(block != null && Math.abs(feedFace - 5)!=fedFace && block instanceof IPipeConnectable &&
+						((IPipeConnectable)block).canConnectTo(world, feedFace, x, y-1, z)){
+					list.add(new int[]{x,y-1,z,((IPipeConnectable)block).hasToBeOnlyOption(),feedFace});
+				}
+			}
+
 			//point represents the 5 variable int[] stored in list. the first 3 represent coords, 4th is whether it needs to be singular
 			//fifth is the face direction of target block from this block.
 			int[] point = new int[]{-1,-1,-1,-1,-1};
@@ -188,13 +221,13 @@ public class BlockPipeBasic extends BlockTerra implements IPipeConnectable
 			//indicates there is a valid position stored here
 			if(point[0]!=-1){
 				return ((IPipeConnectable)(Block.blocksList[world.getBlockId(point[0], point[1], point[2])])).feed(world, 
-						getSide(world,point[0], point[1], point[2]), point[0], point[1], point[2],isLiquid);
+						getSide(world,point[0], point[1], point[2]), point[0], point[1], point[2],isLiquid,false);
 			}
-			
+
 		}
 		return false;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
@@ -216,5 +249,10 @@ public class BlockPipeBasic extends BlockTerra implements IPipeConnectable
 	public int getFinalBit(IBlockAccess world, int x, int y, int z) {
 		int l = world.getBlockMetadata(x, y, z);
 		return l >> 3;
+	}
+
+	@Override
+	public boolean isPipe() {
+		return true;
 	}
 }

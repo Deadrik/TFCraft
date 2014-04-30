@@ -649,6 +649,7 @@ public class TFCItems
 	public static Item WoodenBucketEmpty;
 	public static Item WoodenBucketWater;
 	public static Item WoodenBucketSaltWater;
+	public static Item WoodenBucketSalt;
 	public static Item WoodenBucketMilk;
 
 	/**Food Related Items and Blocks*/
@@ -1393,6 +1394,7 @@ public class TFCItems
 		WoodenBucketEmpty = (new ItemCustomBucket(TFCItemID.WoodenBucketEmpty, 0)).setUnlocalizedName("Wooden Bucket Empty");
 		WoodenBucketWater = (new ItemCustomBucket(TFCItemID.WoodenBucketWater, 1)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);
 		WoodenBucketSaltWater = (new ItemCustomBucket(TFCItemID.WoodenBucketSaltWater, 1)).setUnlocalizedName("Wooden Bucket Salt Water").setContainerItem(WoodenBucketEmpty);
+		WoodenBucketSalt = (new ItemCustomBucket(TFCItemID.WoodenBucketSalt, 2)).setUnlocalizedName("Wooden Bucket Salt").setContainerItem(WoodenBucketEmpty);
 		WoodenBucketMilk = (new ItemCustomBucketMilk(TFCItemID.WoodenBucketMilk)).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty).setCreativeTab(CreativeTabs.tabFood);
 
 		BismuthBronzeKnifeHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeKnifeHead).setUnlocalizedName("Bismuth Bronze Knife Blade");

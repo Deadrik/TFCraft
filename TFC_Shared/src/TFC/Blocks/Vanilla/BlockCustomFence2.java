@@ -204,7 +204,7 @@ public class BlockCustomFence2 extends BlockFence implements IMultipleBlock
 
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        return false;
+        return true;
     }
 
     /**
