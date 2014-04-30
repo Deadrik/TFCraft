@@ -104,7 +104,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 
 		if (hasAmmo || hasAmmoInQuiver)
 		{
-			float forceMult = inUseCount / getUseSpeed(player);
+			float forceMult = j / getUseSpeed(player);
 			//f = (f * f + f * 2.0F) / 3.0F;
 
 			if (forceMult < 0.25D)
