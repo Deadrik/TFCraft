@@ -57,7 +57,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 			bindTexture(rl);
 			guiLeft = (width - xSize) / 2;
 			guiTop = (height - ySize) / 2;
-			drawTexturedModalRect(guiLeft + 36, guiTop, 0, 0, xSize, ySize);
+			drawTexturedModalRect(guiLeft + 0, guiTop, 0, 0, xSize, ySize);
 		}
 		if(drawInventory)
 			PlayerInventory.drawInventory(this, width, height, ySize - PlayerInventory.invYSize);
