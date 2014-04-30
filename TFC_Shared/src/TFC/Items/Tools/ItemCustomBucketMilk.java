@@ -21,7 +21,7 @@ import TFC.Core.TFC_Time;
 import TFC.Core.Player.FoodStatsTFC;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
-import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TEBarrel;
 
 public class ItemCustomBucketMilk extends ItemTerra implements IFood
 {
@@ -135,8 +135,8 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 				int i = mop.blockX;
 				int j = mop.blockY;
 				int k = mop.blockZ;
-				if(world.getBlockTileEntity(i,j,k) != null && world.getBlockTileEntity(i,j,k) instanceof TileEntityBarrel){
-					TileEntityBarrel TE = (TileEntityBarrel) world.getBlockTileEntity(i,j,k);
+				if(world.getBlockTileEntity(i,j,k) != null && world.getBlockTileEntity(i,j,k) instanceof TEBarrel){
+					TEBarrel TE = (TEBarrel) world.getBlockTileEntity(i,j,k);
 					if(TE.checkValidAddition(13)){
 						return new ItemStack(TFCItems.WoodenBucketEmpty);
 					}

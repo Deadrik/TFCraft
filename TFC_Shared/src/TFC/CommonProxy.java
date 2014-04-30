@@ -55,7 +55,7 @@ import TFC.TileEntities.TESeaWeed;
 import TFC.TileEntities.TEStand;
 import TFC.TileEntities.TEWorldItem;
 import TFC.TileEntities.TileEntityAnvil;
-import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TEBarrel;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityBloom;
 import TFC.TileEntities.TileEntityChestTFC;
@@ -130,7 +130,7 @@ public class CommonProxy
 
 		GameRegistry.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");
 
-		GameRegistry.registerTileEntity(TileEntityBarrel.class, "Barrel");
+		GameRegistry.registerTileEntity(TEBarrel.class, "Barrel");
 		GameRegistry.registerTileEntity(TileEntityFenceGate.class, "FenceGate");
 
 		GameRegistry.registerTileEntity(TileEntityBloom.class, "IronBloom");

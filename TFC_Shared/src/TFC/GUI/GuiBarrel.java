@@ -16,14 +16,14 @@ import TFC.Containers.ContainerBarrel;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Util.StringUtil;
-import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TEBarrel;
 
 public class GuiBarrel extends GuiContainer
 {
-	private TileEntityBarrel barrel;
+	private TEBarrel barrel;
 	private EntityPlayer player;
 
-	public GuiBarrel(InventoryPlayer inventoryplayer, TileEntityBarrel tileentitybarrel, World world, int x, int y, int z)
+	public GuiBarrel(InventoryPlayer inventoryplayer, TEBarrel tileentitybarrel, World world, int x, int y, int z)
 	{
 		super(new ContainerBarrel(inventoryplayer,tileentitybarrel, world, x, y, z) );
 		barrel = tileentitybarrel;

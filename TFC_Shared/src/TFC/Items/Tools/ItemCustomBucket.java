@@ -17,7 +17,7 @@ import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Items.ItemTerra;
-import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TEBarrel;
 
 public class ItemCustomBucket extends ItemTerra
 {
@@ -118,7 +118,7 @@ public class ItemCustomBucket extends ItemTerra
 
 					if(world.getBlockId(i,j,k)==TFCBlocks.Barrel.blockID)
 					{
-						TileEntityBarrel te = (TileEntityBarrel)world.getBlockTileEntity(i, j, k);
+						TEBarrel te = (TEBarrel)world.getBlockTileEntity(i, j, k);
 						if(te.checkValidAddition(this.isFull))
 						{
 							return new ItemStack(TFCItems.WoodenBucketEmpty);

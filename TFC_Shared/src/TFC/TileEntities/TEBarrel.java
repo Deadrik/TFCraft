@@ -14,10 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
-import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.API.IPipeConnectable;
 import TFC.API.TFCOptions;
 import TFC.API.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
@@ -27,7 +25,7 @@ import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
 import TFC.Items.Tools.ItemCustomBucketMilk;
 
-public class TileEntityBarrel extends NetworkTileEntity implements IInventory
+public class TEBarrel extends NetworkTileEntity implements IInventory
 {
 
 	public int liquidLevel;
@@ -41,7 +39,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	public int[] alcohols;
 	public final int SEALTIME = TFCOptions.enableDebugMode?0:(int)((TFC_Time.hourLength*12)/100);//default 80
 
-	public TileEntityBarrel()
+	public TEBarrel()
 	{
 		liquidLevel = 0;
 		shouldSendInitData = true;
@@ -413,11 +411,12 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				}
 			}
 
-			if(mode == 1 && liquidLevel > 0 && TFC_Time.getTotalTicks() % 2 == 0 &&
-					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj,0,xCoord,yCoord,zCoord,true)){
+			/*if(mode == 1 && liquidLevel > 0 && TFC_Time.getTotalTicks() % 2 == 0 &&
+					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj,0,xCoord,yCoord,zCoord,true))
+			{
 				liquidLevel-=4;
 				updateGui();
-			}
+			}*/
 			if(liquidLevel == 0)
 				Type = 0;
 			if(mode == 0){

@@ -3,7 +3,7 @@ package TFC.Blocks;
 import TFC.TFCBlocks;
 import TFC.API.IPipeConnectable;
 import TFC.Blocks.Devices.BlockBarrel.BarrelEntity;
-import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TEBarrel;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Icon;

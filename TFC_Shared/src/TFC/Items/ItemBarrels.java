@@ -16,7 +16,7 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.Metal.MetalRegistry;
 import TFC.Items.ItemBlocks.ItemTerraBlock;
-import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TEBarrel;
 
 public class ItemBarrels extends ItemTerraBlock
 {
@@ -45,7 +45,7 @@ public class ItemBarrels extends ItemTerraBlock
 	{
 		if(nbt != null && nbt.hasKey("type")){
 			type = nbt.getInteger("type");
-			arraylist.add(EnumChatFormatting.YELLOW + TileEntityBarrel.getType(type));
+			arraylist.add(EnumChatFormatting.YELLOW + TEBarrel.getType(type));
 		}
 	}
 

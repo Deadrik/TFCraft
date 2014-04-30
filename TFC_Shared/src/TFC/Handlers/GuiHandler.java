@@ -33,7 +33,7 @@ import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TENestBox;
 import TFC.TileEntities.TileEntityAnvil;
-import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TEBarrel;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TEFoodPrep;
@@ -120,7 +120,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 35:
 		{
-			return new ContainerBarrel(player.inventory,((TileEntityBarrel)te),world,x,y,z);
+			return new ContainerBarrel(player.inventory,((TEBarrel)te),world,x,y,z);
 		}
 		case 36:
 		{
