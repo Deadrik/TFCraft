@@ -2,7 +2,6 @@ package TFC.Items;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -13,16 +12,9 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
-import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
-import TFC.Core.TFC_Core;
-import TFC.Core.Player.PlayerInfo;
-import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Core.Util.StringUtil;
-import TFC.Items.Tools.ItemCustomKnife;
 
 public class ItemRawHide extends ItemLooseRock
 {
@@ -67,7 +59,7 @@ public class ItemRawHide extends ItemLooseRock
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
-		if (TFC_Core.showExtraInformation() && is.getItem() == TFCItems.Hide) 
+		/*if (TFC_Core.showExtraInformation() && is.getItem() == TFCItems.Hide) 
 		{
 			arraylist.add(StringUtil.localize("gui.Help"));
 			arraylist.add(StringUtil.localize("gui.RawHide.Inst0"));
@@ -75,7 +67,7 @@ public class ItemRawHide extends ItemLooseRock
 		else
 		{
 			arraylist.add(StringUtil.localize("gui.ShowHelp"));
-		}
+		}*/
 	}
 
 
