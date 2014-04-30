@@ -23,7 +23,7 @@ public class GuiMold extends GuiContainer
 	{
 		super(new ContainerMold(inventoryplayer, world, i, j, k));
 		this.xSize = 176;
-		this.ySize = 50+PlayerInventory.invYSize;
+		this.ySize = 85+PlayerInventory.invYSize;
 		player = inventoryplayer.player;
 	}
 

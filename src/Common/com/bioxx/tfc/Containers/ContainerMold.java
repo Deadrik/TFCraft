@@ -40,7 +40,7 @@ public class ContainerMold extends ContainerTFC
 		this.posY = y;
 		this.posZ = z;
 		layoutContainer(playerinv, 0, 0);
-		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 55, false, true);
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(playerinv.player);
 		containerInv.setInventorySlotContents(0, pi.specialCraftingType);
 	}
@@ -74,9 +74,9 @@ public class ContainerMold extends ContainerTFC
 
 	protected void layoutContainer(IInventory playerInventory, int xSize, int ySize)
 	{
-		this.addSlotToContainer(new SlotMoldTool(containerInv, 0, 41, 17));
-		this.addSlotToContainer(new SlotMoldTool2(containerInv, 1, 62, 17));
-		this.addSlotToContainer(new SlotBlocked(craftResult, 0, 116, 17));
+		this.addSlotToContainer(new SlotMoldTool(containerInv, 0, 41, 34));
+		this.addSlotToContainer(new SlotMoldTool2(containerInv, 1, 62, 34));
+		this.addSlotToContainer(new SlotBlocked(craftResult, 0, 116, 34));
 	}
 
 	@Override
