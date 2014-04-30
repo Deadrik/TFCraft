@@ -40,7 +40,7 @@ public class ContainerMold extends ContainerTFC
 		this.posY = y;
 		this.posZ = z;
 		layoutContainer(playerinv, 0, 0);
-		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 55, false, true);
+		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(playerinv.player);
 		containerInv.setInventorySlotContents(0, pi.specialCraftingType);
 	}
