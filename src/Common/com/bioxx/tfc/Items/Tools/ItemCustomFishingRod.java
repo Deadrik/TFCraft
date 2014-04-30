@@ -98,20 +98,20 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 	}
 
 	@Override
+	public EnumSize getSize(ItemStack is)
+	{
+		return EnumSize.TINY;
+	}
+
+	@Override
+	public EnumWeight getWeight(ItemStack is)
+	{
+		return EnumWeight.LIGHT;
+	}
+	
+	@Override
 	public EnumItemReach getReach(ItemStack is){
 		return EnumItemReach.FAR;
-	}
-
-	@Override
-	public EnumSize getSize(ItemStack is) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public EnumWeight getWeight(ItemStack is) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
