@@ -95,8 +95,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 
 		if (hasAmmo || hasAmmoInQuiver)
 		{
-			float forceMult = inUseCount / getUseSpeed(player);
-			//f = (f * f + f * 2.0F) / 3.0F;
+			float forceMult = j / getUseSpeed(player);
 
 			if (forceMult < 0.25D)
 				return;
@@ -198,7 +197,27 @@ public class ItemCustomBow extends ItemBow implements ISize
 	@Override
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{
-		return getIcon(stack, renderPass);
+        if (usingItem != null && usingItem.getItem() == this)
+        {
+            int j = usingItem.getMaxItemUseDuration() - useRemaining;
+            float force = j / getUseSpeed(player);
+
+            if (force >= 1.25)
+            {
+                return getItemIconForUseDuration(2);
+            }
+
+            if (force > 0.625)
+            {
+                return getItemIconForUseDuration(1);
+            }
+
+            if (force > 0)
+            {
+                return getItemIconForUseDuration(0);
+            }
+        }
+        return getIcon(stack, renderPass);
 	}
 
 	@Override
