@@ -135,7 +135,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			/*Heat the crucible based on the Forge beneath it*/
 			if(worldObj.getBlockId(xCoord,yCoord-1,zCoord) == TFCBlocks.Forge.blockID)
 			{
-				TileEntityForge te = (TileEntityForge) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
+				TEForge te = (TEForge) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
 				if(te.fireTemp > temperature) {
 					temperature++;
 				}

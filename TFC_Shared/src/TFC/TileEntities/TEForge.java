@@ -17,7 +17,7 @@ import TFC.API.TFC_ItemHeat;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemMeltedMetal;
 
-public class TileEntityForge extends TileEntityFireEntity implements IInventory
+public class TEForge extends TileEntityFireEntity implements IInventory
 {
 	public boolean isSmokeStackValid;
 
@@ -31,12 +31,12 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 	private int externalWoodCount;
 	private int charcoalCounter;
 
-	public TileEntityForge()
+	public TEForge()
 	{
 		super();
-		fuelTimeLeft = 900;
-		fuelBurnTemp =  1400;
-		fireTemp = 0;
+		fuelTimeLeft = 200;
+		fuelBurnTemp = 200;
+		fireTemp = 20;
 		isSmokeStackValid = false;
 
 		fireItemStacks = new ItemStack[14];
@@ -390,7 +390,10 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 				handleTempFlux(desiredTemp);
 
 				if(TFCOptions.enableDebugMode)
+				{
+					fireTemp = 2000;
 					fuelTimeLeft = 9999;
+				}
 
 				TFC_Core.handleItemTicking(FuelStack, worldObj, xCoord, yCoord, zCoord);
 			}

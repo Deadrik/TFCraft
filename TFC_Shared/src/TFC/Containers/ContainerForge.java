@@ -12,18 +12,18 @@ import TFC.Containers.Slots.SlotForge;
 import TFC.Containers.Slots.SlotForgeFuel;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Items.ItemOre;
-import TFC.TileEntities.TileEntityForge;
+import TFC.TileEntities.TEForge;
 
 public class ContainerForge extends ContainerTFC
 {
-	private TileEntityForge forge;
+	private TEForge forge;
 	private int coolTime;
 	private int freezeTime;
 	private int itemFreezeTime;
 	private float firetemp;
 
 
-	public ContainerForge(InventoryPlayer inventoryplayer, TileEntityForge tileentityforge, World world, int x, int y, int z)
+	public ContainerForge(InventoryPlayer inventoryplayer, TEForge tileentityforge, World world, int x, int y, int z)
 	{
 		forge = tileentityforge;
 
