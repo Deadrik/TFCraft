@@ -31,12 +31,14 @@ public class RemoveChunkCommand extends CommandBase{
 
 		if(params.length == 0)
 		{
+			player.addChatMessage("Removing Chunk");
 			Chunk chunk = world.getChunkFromBlockCoords((int)player.posX, (int)player.posZ);
 			chunk.setStorageArrays(new ExtendedBlockStorage[16]);
 			chunk.setChunkModified();
 		}
 		else if(params.length == 1)
 		{
+			player.addChatMessage("Removing Chunks Within a Radius of " + Integer.parseInt(params[0]));
 			int radius = Integer.parseInt(params[0]);
 			for(int i = -radius; i <= radius;i++)
 			{

@@ -12,15 +12,15 @@ import TFC.Reference;
 import TFC.Containers.ContainerForge;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
-import TFC.TileEntities.TileEntityForge;
+import TFC.TileEntities.TEForge;
 
 
 public class GuiForge extends GuiContainer
 {
-	private TileEntityForge ForgeEntity;
+	private TEForge ForgeEntity;
 
 
-	public GuiForge(InventoryPlayer inventoryplayer, TileEntityForge tileentityforge, World world, int x, int y, int z)
+	public GuiForge(InventoryPlayer inventoryplayer, TEForge tileentityforge, World world, int x, int y, int z)
 	{
 		super(new ContainerForge(inventoryplayer,tileentityforge, world, x, y, z) );
 		ForgeEntity = tileentityforge;

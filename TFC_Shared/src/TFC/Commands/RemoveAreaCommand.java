@@ -30,6 +30,7 @@ public class RemoveAreaCommand extends CommandBase{
 
 		if(params.length == 0)
 		{
+			player.addChatMessage("Removing 16 blocks up and +/- x, z");
 			for(int x = -15; x < 16; x++)
 			{
 				for(int z = -15; z < 16; z++)
@@ -47,6 +48,7 @@ public class RemoveAreaCommand extends CommandBase{
 		}
 		else if(params.length == 3)
 		{
+			player.addChatMessage("Removing Area");
 			int radius = Integer.parseInt(params[0]);
 			for(int x = -Integer.parseInt(params[0]); x <= Integer.parseInt(params[0]); x++)
 			{

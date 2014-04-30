@@ -923,7 +923,7 @@ public class TFC_Core
 
 	public static boolean isPlayerInDebugMode(EntityPlayer player)
 	{
-		if (player.getEntityData() != null && player.getEntityData().hasKey("inDebugMode"))
+		if (TFCOptions.enableDebugMode)
 			return true;
 		return false;
 	}

@@ -19,7 +19,7 @@ import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Core;
 import TFC.Items.Tools.ItemFirestarter;
 import TFC.Items.Tools.ItemFlintSteel;
-import TFC.TileEntities.TileEntityForge;
+import TFC.TileEntities.TEForge;
 
 public class BlockForge extends BlockTerraContainer
 {
@@ -54,10 +54,10 @@ public class BlockForge extends BlockTerraContainer
 		} 
 		else if(equippedItem != null && (equippedItem.getItem() instanceof ItemFirestarter || equippedItem.getItem() instanceof ItemFlintSteel))
 		{
-			if((TileEntityForge)world.getBlockTileEntity(i, j, k) != null)
+			if((TEForge)world.getBlockTileEntity(i, j, k) != null)
 			{
-				TileEntityForge tileentityforge;
-				tileentityforge = (TileEntityForge)world.getBlockTileEntity(i, j, k);
+				TEForge tileentityforge;
+				tileentityforge = (TEForge)world.getBlockTileEntity(i, j, k);
 				if(tileentityforge.fireTemp <= 0 && tileentityforge.fireItemStacks[7] != null && tileentityforge.isSmokeStackValid)
 				{
 					tileentityforge.fireTemp = 10;
@@ -83,10 +83,10 @@ public class BlockForge extends BlockTerraContainer
 		}
 		else
 		{
-			if((TileEntityForge)world.getBlockTileEntity(i, j, k)!=null)
+			if((TEForge)world.getBlockTileEntity(i, j, k)!=null)
 			{
-				TileEntityForge tileentityforge;
-				tileentityforge = (TileEntityForge)world.getBlockTileEntity(i, j, k);
+				TEForge tileentityforge;
+				tileentityforge = (TEForge)world.getBlockTileEntity(i, j, k);
 				ItemStack is =entityplayer.getCurrentEquippedItem();
 
 				if(tileentityforge.isSmokeStackValid)
@@ -161,7 +161,7 @@ public class BlockForge extends BlockTerraContainer
 			if (!(rockXP && rockXN && rockZP && rockZN && rockYN)
 					|| !validSlabs)
 			{
-				((TileEntityForge)world.getBlockTileEntity(x, y, z)).ejectContents();
+				((TEForge)world.getBlockTileEntity(x, y, z)).ejectContents();
 				world.setBlock(x, y, z, 0);
 			}
 			else
@@ -201,7 +201,7 @@ public class BlockForge extends BlockTerraContainer
 			world.spawnParticle("flame", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("smoke", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
-			if (((TileEntityForge)world.getBlockTileEntity(i, j, k)).fireTemp > 550)
+			if (((TEForge)world.getBlockTileEntity(i, j, k)).fireTemp > 550)
 			{
 				world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f6 + 0.2F, 0.0D, 0.0D, 0.0D);
 				world.spawnParticle("flame", f+f4 - 0.3F , f1, f2 + f6 + 0.1F, 0.0D, 0.0D, 0.0D);
@@ -249,7 +249,7 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityForge();
+		return new TEForge();
 	}
 
 

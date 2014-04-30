@@ -48,7 +48,7 @@ public class SetPlayerStatsCommand extends CommandBase{
 			try{
 				player = getPlayer(sender, params[0]);
 			}catch(PlayerNotFoundException e){
-				throw new PlayerNotFoundException("Unkown Player");
+				throw new PlayerNotFoundException("Unknown Player");
 			}
 		}
 		if(player == null) {

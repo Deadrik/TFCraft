@@ -55,7 +55,7 @@ import TFC.TileEntities.TESeaWeed;
 import TFC.TileEntities.TEStand;
 import TFC.TileEntities.TEWorldItem;
 import TFC.TileEntities.TileEntityAnvil;
-import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TEBarrel;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityBloom;
 import TFC.TileEntities.TileEntityChestTFC;
@@ -64,7 +64,7 @@ import TFC.TileEntities.TileEntityEarlyBloomery;
 import TFC.TileEntities.TileEntityFarmland;
 import TFC.TileEntities.TileEntityFenceGate;
 import TFC.TileEntities.TileEntityFirepit;
-import TFC.TileEntities.TileEntityForge;
+import TFC.TileEntities.TEForge;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TileEntityLogPile;
@@ -111,7 +111,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
 		GameRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit");
 
-		GameRegistry.registerTileEntity(TileEntityForge.class, "TerraForge");
+		GameRegistry.registerTileEntity(TEForge.class, "TerraForge");
 		GameRegistry.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");
 		GameRegistry.registerTileEntity(TileEntityEarlyBloomery.class, "TerraEarlyBloomery");
 		GameRegistry.registerTileEntity(TileEntitySluice.class, "TerraSluice");
@@ -130,7 +130,7 @@ public class CommonProxy
 
 		GameRegistry.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");
 
-		GameRegistry.registerTileEntity(TileEntityBarrel.class, "Barrel");
+		GameRegistry.registerTileEntity(TEBarrel.class, "Barrel");
 		GameRegistry.registerTileEntity(TileEntityFenceGate.class, "FenceGate");
 
 		GameRegistry.registerTileEntity(TileEntityBloom.class, "IronBloom");

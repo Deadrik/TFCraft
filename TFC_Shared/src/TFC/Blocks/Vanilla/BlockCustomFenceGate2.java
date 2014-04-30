@@ -2,16 +2,7 @@ package TFC.Blocks.Vanilla;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import TFC.Reference;
-import TFC.TFCBlocks;
-import TFC.API.IMultipleBlock;
-import TFC.API.Constant.Global;
-import TFC.TileEntities.TileEntityBarrel;
-import TFC.TileEntities.TileEntityFenceGate;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -25,6 +16,13 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
+import TFC.TFCBlocks;
+import TFC.API.IMultipleBlock;
+import TFC.API.Constant.Global;
+import TFC.TileEntities.TileEntityFenceGate;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntityProvider, IMultipleBlock{
 
@@ -95,6 +93,7 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
         return ((TileEntityFenceGate)(par1IBlockAccess.getBlockTileEntity(par2, par3, par4))).getOpen();
     }
 	
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         int l = ((TileEntityFenceGate)par1IBlockAccess.getBlockTileEntity(par2, par3, par4)).getDirection();
@@ -136,6 +135,28 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
         return true;
     }
 	
+	@Override
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+	{
+		/*TileEntityFenceGate te = (TileEntityFenceGate) par1World.getBlockTileEntity(par2, par3, par4);
+		boolean flag = par1World.isBlockIndirectlyGettingPowered(par2, par3, par4);
+
+		if (flag || par5 > 0 && Block.blocksList[par5].canProvidePower())
+		{
+			if (flag && !te.getOpen())
+			{
+				te.setOpen(true);
+			}
+			else if (!flag && te.getOpen())
+			{
+				te.setOpen(false);
+			}
+
+			par1World.playAuxSFXAtEntity((EntityPlayer) null, 1003, par2, par3, par4, 0);
+		}*/
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
 		return new TileEntityFenceGate();

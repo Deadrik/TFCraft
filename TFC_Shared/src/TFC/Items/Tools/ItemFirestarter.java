@@ -20,7 +20,7 @@ import TFC.API.Util.Helper;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemTerra;
-import TFC.TileEntities.TileEntityForge;
+import TFC.TileEntities.TEForge;
 import TFC.TileEntities.TileEntityPottery;
 
 public class ItemFirestarter extends ItemTerra
@@ -134,9 +134,7 @@ public class ItemFirestarter extends ItemTerra
 					if(chance > 70)
 					{
 						world.setBlock(x, y, z, TFCBlocks.Forge.blockID, 1, 2);
-						TileEntityForge te = (TileEntityForge)world.getBlockTileEntity(x, y, z);
-						te.fuelBurnTemp = 200;
-						te.fuelTimeLeft = 200;
+						TEForge te = (TEForge)world.getBlockTileEntity(x, y, z);
 					}
 					itemstack.damageItem(1, entityplayer);
 					return true;
