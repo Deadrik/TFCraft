@@ -27,7 +27,7 @@ import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
 import TFC.Items.Tools.ItemCustomBucketMilk;
 
-public class TileEntityBarrel extends NetworkTileEntity implements IInventory
+public class TEBarrel extends NetworkTileEntity implements IInventory
 {
 
 	public int liquidLevel;
@@ -41,7 +41,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	public int[] alcohols;
 	public final int SEALTIME = TFCOptions.enableDebugMode?0:(int)((TFC_Time.hourLength*12)/100);//default 80
 
-	public TileEntityBarrel()
+	public TEBarrel()
 	{
 		liquidLevel = 0;
 		shouldSendInitData = true;
