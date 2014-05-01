@@ -263,6 +263,7 @@ public class TFCItems
 	public static Item RedSteelSaw;
 	public static Item SteelSaw;
 
+	public static Item Coal;
 	public static Item OreChunk;
 	public static Item Logs;
 	public static Item Barrel;
@@ -318,6 +319,8 @@ public class TFCItems
 	public static Item SteelKnife;
 
 	public static Item FireStarter;
+	public static Item FishingRod;
+	public static Item Bow;
 
 	public static Item StoneHammer;
 	public static Item BismuthBronzeHammer;
@@ -505,6 +508,7 @@ public class TFCItems
 
 	public static Item Coke;
 	public static Item Powder;
+	public static Item Dye;
 
 	//Formerly TFC_Mining
 	public static Item GoldPan;
@@ -608,6 +612,7 @@ public class TFCItems
 	public static Item RedSteelUnfinishedHelmet;
 	public static Item SteelUnfinishedHelmet;
 
+	public static Item LeatherChestplate;
 	public static Item BismuthBronzeChestplate;
 	public static Item BlackBronzeChestplate;
 	public static Item BlackSteelChestplate;
@@ -618,6 +623,7 @@ public class TFCItems
 	public static Item RedSteelChestplate;
 	public static Item SteelChestplate;
 
+	public static Item LeatherLeggings;
 	public static Item BismuthBronzeGreaves;
 	public static Item BlackBronzeGreaves;
 	public static Item BlackSteelGreaves;
@@ -628,6 +634,7 @@ public class TFCItems
 	public static Item RedSteelGreaves;
 	public static Item SteelGreaves;
 
+	public static Item LeatherBoots;
 	public static Item BismuthBronzeBoots;
 	public static Item BlackBronzeBoots;
 	public static Item BlackSteelBoots;
@@ -638,6 +645,7 @@ public class TFCItems
 	public static Item RedSteelBoots;
 	public static Item SteelBoots;
 
+	public static Item LeatherHelmet;
 	public static Item BismuthBronzeHelmet;
 	public static Item BlackBronzeHelmet;
 	public static Item BlackSteelHelmet;
@@ -745,6 +753,14 @@ public class TFCItems
 	public static Item venisonCooked;
 	public static Item horseMeatRaw;
 	public static Item horseMeatCooked;
+	public static Item porkchopRaw;
+	public static Item porkchopCooked;
+	public static Item fishRaw;
+	public static Item fishCooked;
+	public static Item beefRaw;
+	public static Item beefCooked;
+	public static Item chickenRaw;
+	public static Item chickenCooked;
 
 	public static Item LooseRock;
 	public static Item FlatRock;
@@ -824,6 +840,7 @@ public class TFCItems
 	public static Item CalamariRaw;
 	public static Item CalamariCooked;
 	public static Item FlatLeather;
+
 	public static Item Beer;
 	public static Item Cider;
 	public static Item Rum;
@@ -831,7 +848,10 @@ public class TFCItems
 	public static Item Sake;
 	public static Item Vodka;
 	public static Item Whiskey;
+	
+	public static Item Potion;
 
+	public static Item ClayBall;
 	public static Item PotteryJug;
 	public static Item PotteryPot;
 	public static Item PotterySmallVessel;
@@ -840,6 +860,9 @@ public class TFCItems
 	public static Item Straw;
 	public static Item FlatClay;
 	public static Item FireBrick;
+	public static Item Stick;
+	public static Item Arrow;
+	public static Item Leash;
 
 	public static Item ClayMoldAxe;
 	public static Item ClayMoldChisel;
