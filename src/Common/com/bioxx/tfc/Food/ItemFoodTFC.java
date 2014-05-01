@@ -3,6 +3,7 @@ package com.bioxx.tfc.Food;
 import java.util.List;
 
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
@@ -51,7 +52,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public ItemFoodTFC(int foodid, EnumFoodGroup fg)
 	{
 		super();
-		this.setCreativeTab(CreativeTabs.tabFood);
+		this.setCreativeTab(TFCTabs.TFCFoods);
 		this.setFolder("food/");
 		foodID = foodid;
 		foodgroup = fg;

@@ -2203,6 +2203,7 @@ itemGroup.TFCTools=(TFC) Tools
 itemGroup.TFCUnfinished=(TFC) Unfinished Items
 itemGroup.TFCWeapons=(TFC) Weapons
 itemGroup.TFCDevices=(TFC) Devices
+itemGroup.TFCFoods=(TFC) Foods
 
 #== Skill GUI ==
 skill.armorsmith=Armor Smithing
