@@ -455,7 +455,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(NestBox, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "NestBox");
 		GameRegistry.registerBlock(Fence, com.bioxx.tfc.Items.ItemBlocks.ItemFence.class, "Fence");
 		GameRegistry.registerBlock(Fence2, com.bioxx.tfc.Items.ItemBlocks.ItemFence2.class, "Fence2");
-		//		GameRegistry.registerBlock(Blocks.fence_gate, TFC.Items.ItemBlocks.ItemFenceGate.class, "FenceGate");
+		GameRegistry.registerBlock(FenceGate, com.bioxx.tfc.Items.ItemBlocks.ItemFenceGate.class, "FenceGate");
 		GameRegistry.registerBlock(FenceGate2, com.bioxx.tfc.Items.ItemBlocks.ItemFenceGate2.class, "FenceGate2");
 		GameRegistry.registerBlock(StrawHideBed, "StrawHideBed");
 		GameRegistry.registerBlock(ArmourStand, com.bioxx.tfc.Items.ItemBlocks.ItemArmourStand.class, "ArmourStand");
@@ -501,7 +501,6 @@ public class TFCBlocks
 		Blocks.pumpkin.setCreativeTab(null);
 		Blocks.wooden_button.setCreativeTab(null);
 
-
 		Bookshelf = new BlockCustomBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("Bookshelf").setBlockTextureName("bookshelf");
 		Torch = new BlockTorch().setHardness(0.0F).setLightLevel(0.9375F).setStepSound(Block.soundTypeWood).setBlockName("Torch").setBlockTextureName("torch_on");
 		Chest = new BlockChestTFC(0).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("Chest");
@@ -520,8 +519,6 @@ public class TFCBlocks
 				(new BlockCustomIce()).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("ice").setBlockTextureName("ice"));
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.vine), "vine",
 				(new BlockCustomVine()).setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("vine").setBlockTextureName("vine"));
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.fence_gate), "FenceGateTFC",
-				(new BlockCustomFenceGate()).setBlockName("FenceGateTFC").setHardness(2));
 
 
 		StoneIgInCobble = new BlockIgInCobble(Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgInRockCobble");
@@ -659,9 +656,9 @@ public class TFCBlocks
 
 		NestBox = new BlockNestBox().setBlockName("NestBox").setHardness(1);
 
-		Fence = new BlockCustomFence("Fence",Material.wood).setBlockName("FenceTFC").setHardness(2);
-		FenceGate = Blocks.fence_gate;//new BlockCustomFenceGate().setBlockName("FenceGateTFC").setHardness(2);
-		Fence2 = new BlockCustomFence2("Fence2",Material.wood).setBlockName("FenceTFC").setHardness(2);
+		Fence = new BlockCustomFence("Fence", Material.wood).setBlockName("FenceTFC").setHardness(2);
+		FenceGate = new BlockCustomFenceGate().setBlockName("FenceGateTFC").setHardness(2);
+		Fence2 = new BlockCustomFence2("Fence2", Material.wood).setBlockName("FenceTFC").setHardness(2);
 		FenceGate2 = new BlockCustomFenceGate2().setBlockName("FenceGateTFC").setHardness(2);
 		StrawHideBed = new BlockCustomBed().setBlockName("StrawHideBed").setHardness(1);
 		ArmourStand = new BlockStand().setBlockName("ArmourStand").setHardness(2);
