@@ -3,7 +3,6 @@ package com.bioxx.tfc;
 import java.util.ArrayList;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -1408,7 +1407,7 @@ public class TFCItems
 		WoodenBucketWater = (new ItemCustomBucket(TFCBlocks.FreshWater)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);
 		WoodenBucketSaltWater = (new ItemCustomBucket(TFCBlocks.SaltWater)).setUnlocalizedName("Wooden Bucket Salt Water").setContainerItem(WoodenBucketEmpty);
 		WoodenBucketSalt = (new ItemCustomBucket(Blocks.air/*FIXME needs salt block*/)).setUnlocalizedName("Wooden Bucket Salt").setContainerItem(WoodenBucketEmpty);
-		WoodenBucketMilk = (new ItemCustomBucketMilk()).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty).setCreativeTab(CreativeTabs.tabFood);
+		WoodenBucketMilk = (new ItemCustomBucketMilk()).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCFoods);
 
 		BismuthBronzeKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Bismuth Bronze Knife Blade");
 		BlackBronzeKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Black Bronze Knife Blade");
@@ -1483,13 +1482,13 @@ public class TFCItems
 		DoorKapok = new ItemWoodDoor(15).setUnlocalizedName("Kapok Door");
 		DoorAcacia = new ItemWoodDoor(16).setUnlocalizedName("Acacia Door");
 
-		Beer = new ItemAlcohol().setUnlocalizedName("Beer").setCreativeTab(CreativeTabs.tabFood);
-		Cider = new ItemAlcohol().setUnlocalizedName("Cider").setCreativeTab(CreativeTabs.tabFood);
-		Rum = new ItemAlcohol().setUnlocalizedName("Rum").setCreativeTab(CreativeTabs.tabFood);
-		RyeWhiskey = new ItemAlcohol().setUnlocalizedName("RyeWhiskey").setCreativeTab(CreativeTabs.tabFood);
-		Sake = new ItemAlcohol().setUnlocalizedName("Sake").setCreativeTab(CreativeTabs.tabFood);
-		Vodka = new ItemAlcohol().setUnlocalizedName("Vodka").setCreativeTab(CreativeTabs.tabFood);
-		Whiskey = new ItemAlcohol().setUnlocalizedName("Whiskey").setCreativeTab(CreativeTabs.tabFood);
+		Beer = new ItemAlcohol().setUnlocalizedName("Beer").setCreativeTab(TFCTabs.TFCFoods);
+		Cider = new ItemAlcohol().setUnlocalizedName("Cider").setCreativeTab(TFCTabs.TFCFoods);
+		Rum = new ItemAlcohol().setUnlocalizedName("Rum").setCreativeTab(TFCTabs.TFCFoods);
+		RyeWhiskey = new ItemAlcohol().setUnlocalizedName("RyeWhiskey").setCreativeTab(TFCTabs.TFCFoods);
+		Sake = new ItemAlcohol().setUnlocalizedName("Sake").setCreativeTab(TFCTabs.TFCFoods);
+		Vodka = new ItemAlcohol().setUnlocalizedName("Vodka").setCreativeTab(TFCTabs.TFCFoods);
+		Whiskey = new ItemAlcohol().setUnlocalizedName("Whiskey").setCreativeTab(TFCTabs.TFCFoods);
 
 		Blueprint = new ItemBlueprint();
 		writabeBookTFC = new ItemWritableBookTFC("Fix Me I'm Broken").setUnlocalizedName("book");
@@ -1503,7 +1502,7 @@ public class TFCItems
 		Mortar = new ItemTerra().setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
 		//FIXME these buckets need proper forge fluid implementation
 		Limewater = new ItemCustomBucket(Blocks.air).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
-		Vinegar = new ItemCustomBucket(Blocks.air).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.tabFood);
+		Vinegar = new ItemCustomBucket(Blocks.air).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCFoods);
 		Hide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		SoakedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		ScrapedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFCMaterials);
@@ -1675,7 +1674,7 @@ public class TFCItems
 		Plum = new ItemFoodTFC(10, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[8]);
 
 		Items.reeds.setCreativeTab(null);
-		Sugercane = new ItemSugercane().setUnlocalizedName("Sugercane").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("reeds");
+		Sugercane = new ItemSugercane().setUnlocalizedName("Sugercane").setCreativeTab(TFCTabs.TFCMaterials).setTextureName("reeds");
 
 		WheatGrain = new ItemFoodTFC(12, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Grain");
 		BarleyGrain = new ItemFoodTFC(14, EnumFoodGroup.Grain).setUnlocalizedName("Barley Grain");

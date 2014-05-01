@@ -3,15 +3,6 @@ package com.bioxx.tfc.Blocks.Flora;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Food.FloraIndex;
-import com.bioxx.tfc.Food.FloraManager;
-import com.bioxx.tfc.TileEntities.TEBerryBush;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -27,6 +18,17 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Food.FloraIndex;
+import com.bioxx.tfc.Food.FloraManager;
+import com.bioxx.tfc.TileEntities.TEBerryBush;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -55,7 +57,7 @@ public class BlockBerryBush extends BlockTerraContainer
 		icons = new IIcon[MetaNames.length];
 		iconsBerries = new IIcon[MetaNames.length];
 		this.setTickRandomly(true);
-		this.setCreativeTab(CreativeTabs.tabFood);
+		this.setCreativeTab(TFCTabs.TFCFoods);
 	}
 
 	@SideOnly(Side.CLIENT)

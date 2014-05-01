@@ -1,17 +1,17 @@
 package com.bioxx.tfc.Items;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.TileEntities.TECrop;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
-
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class ItemCustomSeeds extends ItemTerra
 {
@@ -24,7 +24,7 @@ public class ItemCustomSeeds extends ItemTerra
 	{
 		super();
 		this.cropId = cropId;
-		this.setCreativeTab(CreativeTabs.tabFood);
+		this.setCreativeTab(TFCTabs.TFCFoods);
 		this.setFolder("food/");
 		this.setWeight(EnumWeight.LIGHT);
 		this.setSize(EnumSize.TINY);

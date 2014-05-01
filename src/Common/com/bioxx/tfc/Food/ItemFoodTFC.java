@@ -2,6 +2,17 @@ package com.bioxx.tfc.Food;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -18,17 +29,6 @@ import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Util.Helper;
-
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 
 public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 {

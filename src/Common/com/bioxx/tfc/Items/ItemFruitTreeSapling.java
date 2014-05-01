@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -29,7 +30,7 @@ public class ItemFruitTreeSapling extends ItemTerra
 		super();
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setCreativeTab(CreativeTabs.tabFood);
+		this.setCreativeTab(TFCTabs.TFCFoods);
 		this.MetaNames = Global.FRUIT_META_NAMES;
 		this.icons = new IIcon[MetaNames.length];
 	}
