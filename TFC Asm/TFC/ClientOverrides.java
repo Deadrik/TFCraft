@@ -33,6 +33,9 @@ public class ClientOverrides
 		int glRenderListBase = Helper.getInteger(renderG, "s","field_72778_p", "glRenderListBase", TFCASMLoadingPlugin.runtimeDeobf);
 		WorldRenderer[] worldRenderers = (WorldRenderer[])(Helper.getObject(renderG,"o", "field_72765_l", "worldRenderers", TFCASMLoadingPlugin.runtimeDeobf));
 		WorldRenderer[] sortedWorldRenderers = (WorldRenderer[])(Helper.getObject(renderG, "n","field_72768_k", "sortedWorldRenderers", TFCASMLoadingPlugin.runtimeDeobf));
+		Object obj = Helper.getObject(renderG, "m", "field_72767_j", "worldRenderersToUpdate", TFCASMLoadingPlugin.runtimeDeobf);
+		if(!(obj instanceof List))
+			return;
 		List worldRenderersToUpdate = (List)(Helper.getObject(renderG, "m", "field_72767_j", "worldRenderersToUpdate", TFCASMLoadingPlugin.runtimeDeobf));
 
 		worldRenderersToUpdate.clear();
