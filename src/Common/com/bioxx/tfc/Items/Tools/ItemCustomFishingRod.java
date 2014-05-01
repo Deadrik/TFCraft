@@ -1,5 +1,14 @@
 package com.bioxx.tfc.Items.Tools;
 
+import java.util.List;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemFishingRod;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Entities.EntityFishHookTFC;
 import com.bioxx.tfc.Items.ItemTerra;
@@ -8,14 +17,6 @@ import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemFishingRod;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -96,22 +97,28 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 		}
 		return itemIcon;
 	}
+	
+	@Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
+	{
+		ItemTerra.addSizeInformation(is, arraylist);
+	}
 
+	@Override
+	public EnumSize getSize(ItemStack is)
+	{
+		return EnumSize.TINY;
+	}
+
+	@Override
+	public EnumWeight getWeight(ItemStack is)
+	{
+		return EnumWeight.LIGHT;
+	}
+	
 	@Override
 	public EnumItemReach getReach(ItemStack is){
 		return EnumItemReach.FAR;
-	}
-
-	@Override
-	public EnumSize getSize(ItemStack is) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public EnumWeight getWeight(ItemStack is) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
