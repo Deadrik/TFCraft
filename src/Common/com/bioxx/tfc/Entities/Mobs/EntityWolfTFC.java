@@ -60,7 +60,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityPheasantTFC.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityCowTFC.class, 200, false));
-		//this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDeer.class, 200, false));
+		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDeer.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false));
 
 		hunger = 168000;

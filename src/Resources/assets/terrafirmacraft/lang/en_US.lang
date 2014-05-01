@@ -37,6 +37,7 @@ entity.creeperTFC.name=Creeper
 entity.sheepTFC.name=Sheep
 entity.pheasantTFC.name=Pheasant
 entity.horseTFC.name=Horse
+entity.irongolemTFC.name=Iron Golem
 
 #================
 #= Achievements =

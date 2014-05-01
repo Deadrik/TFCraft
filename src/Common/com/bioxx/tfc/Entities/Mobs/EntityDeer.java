@@ -361,7 +361,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected String getLivingSound()
 	{
-		return "mob.sheep";
+		return "mob.sheep.say";
 	}
 
 	/**
@@ -370,7 +370,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected String getHurtSound()
 	{
-		return "mob.sheep";
+		return "mob.sheep.say";
 	}
 
 	/**
@@ -379,7 +379,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected String getDeathSound()
 	{
-		return "mob.sheep";
+		return "mob.sheep.say";
 	}
 
 	@Override

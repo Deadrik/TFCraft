@@ -15,7 +15,7 @@ public class SoundHandler
 	@SubscribeEvent
 	public void onSound17(PlaySoundEvent17 event)
 	{
-		if(event.sound != null && event.category.getCategoryName().equalsIgnoreCase("music"))
+		if(event.sound != null && event.category != null && event.category.getCategoryName().equalsIgnoreCase("music"))
 		{
 			if(event.manager.isSoundPlaying(iSound))
 				event.result = null;
