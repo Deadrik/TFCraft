@@ -1086,12 +1086,11 @@ public class TFC_Core
 			} else if (decay == 0)
 			{
 				decay = (nbt.getFloat("foodWeight") * (world.rand.nextFloat() * 0.005f))*TFCOptions.decayMultiplier;
+				decay = 1.6f;
 				nbt.setFloat("foodDecay", decay);
 			} else
 			{
-				//current decay level * global decay rate / 24 * this item decay rate * environmentla decay rate * protection multiplier * global decay multiplier
-				float d = (((decay * Global.FOOD_DECAY_RATE) / 24) * thisDecayRate * environmentalDecay * protMult)*TFCOptions.decayMultiplier;
-				decay += d;
+				decay = ((decay * Global.FOOD_DECAY_RATE) * thisDecayRate * environmentalDecay * protMult)*TFCOptions.decayMultiplier;
 			}
 			nbt.setInteger("decayTimer", nbt.getInteger("decayTimer") + 1);
 			nbt.setFloat("foodDecay", decay);
