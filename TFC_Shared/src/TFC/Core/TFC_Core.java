@@ -1086,7 +1086,6 @@ public class TFC_Core
 			} else if (decay == 0)
 			{
 				decay = (nbt.getFloat("foodWeight") * (world.rand.nextFloat() * 0.005f))*TFCOptions.decayMultiplier;
-				decay = 1.6f;
 				nbt.setFloat("foodDecay", decay);
 			} else
 			{
