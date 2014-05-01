@@ -12,6 +12,8 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
@@ -52,47 +54,49 @@ public class Recipes
 				TFCItems.RoseGoldIngot,TFCItems.SilverIngot,TFCItems.SteelIngot,TFCItems.SterlingSilverIngot,
 				TFCItems.TinIngot,TFCItems.ZincIngot};
 
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Arrow, 8), new Object[] { 
-			new ItemStack(TFCItems.LooseRock, 1, 32767), new ItemStack(TFCItems.Stick,1,32767),
-			new ItemStack(Items.feather,1,32767)});
-
+		// Remove Vanilla recipes before adding TFC recipes for oredict compatibility
+		VanillaRecipes();
+		
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Arrow, 8), new ItemStack(TFCItems.LooseRock, 1, 32767), "stickWood",
+				new ItemStack(Items.feather,1,32767)));
+		
 		//stone javelins
-		GameRegistry.addRecipe(new ItemStack(TFCItems.IgInStoneJavelin, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.IgInStoneJavelinHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SedStoneJavelin, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.SedStoneJavelinHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.IgExStoneJavelin, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.IgExStoneJavelinHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.MMStoneJavelin, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.MMStoneJavelinHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.IgInStoneJavelin, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.IgInStoneJavelinHead,Character.valueOf('2'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SedStoneJavelin, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.SedStoneJavelinHead,Character.valueOf('2'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.IgExStoneJavelin, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.IgExStoneJavelinHead,Character.valueOf('2'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.MMStoneJavelin, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.MMStoneJavelinHead,Character.valueOf('2'), "stickWood"}));
 
 		//stone shovels
-		GameRegistry.addRecipe(new ItemStack(TFCItems.IgInShovel, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.IgInStoneShovelHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SedShovel, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.SedStoneShovelHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.IgExShovel, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.IgExStoneShovelHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.MMShovel, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.MMStoneShovelHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.IgInShovel, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.IgInStoneShovelHead,Character.valueOf('2'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SedShovel, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.SedStoneShovelHead,Character.valueOf('2'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.IgExShovel, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.IgExStoneShovelHead,Character.valueOf('2'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.MMShovel, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.MMStoneShovelHead,Character.valueOf('2'), "stickWood"}));
 		//stone axes
-		GameRegistry.addRecipe(new ItemStack(TFCItems.IgInAxe, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.IgInStoneAxeHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SedAxe, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.SedStoneAxeHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.IgExAxe, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.IgExStoneAxeHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.MMAxe, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.MMStoneAxeHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.IgInAxe, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.IgInStoneAxeHead,Character.valueOf('2'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SedAxe, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.SedStoneAxeHead,Character.valueOf('2'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.IgExAxe, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.IgExStoneAxeHead,Character.valueOf('2'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.MMAxe, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.MMStoneAxeHead,Character.valueOf('2'), "stickWood"}));
 		//stone hoes
-		GameRegistry.addRecipe(new ItemStack(TFCItems.IgInHoe, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.IgInStoneHoeHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SedHoe, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.SedStoneHoeHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.IgExHoe, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.IgExStoneHoeHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.MMHoe, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.MMStoneHoeHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.IgInHoe, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.IgInStoneHoeHead,Character.valueOf('2'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SedHoe, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.SedStoneHoeHead,Character.valueOf('2'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.IgExHoe, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.IgExStoneHoeHead,Character.valueOf('2'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.MMHoe, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.MMStoneHoeHead,Character.valueOf('2'), "stickWood"}));
 
 		//bone shovels
 		GameRegistry.addRecipe(new ItemStack(TFCItems.IgInShovel, 1, 0), new Object[] { 
@@ -122,11 +126,11 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCItems.MMHoe, 1, 0), new Object[] { 
 			"1","2", Character.valueOf('1'), TFCItems.MMStoneHoeHead,Character.valueOf('2'), new ItemStack(Items.bone,1,32767)});
 
-		GameRegistry.addRecipe(new ItemStack(TFCItems.StoneHammer, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.StoneHammerHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.StoneHammer, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.StoneHammerHead,Character.valueOf('2'), "stickWood"}));
 
-		GameRegistry.addRecipe(new ItemStack(TFCItems.StoneKnife, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.StoneKnifeHead,Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.StoneKnife, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.StoneKnifeHead,Character.valueOf('2'), "stickWood"}));
 
 
 
@@ -181,8 +185,8 @@ public class Recipes
 			//	"2","1", Character.valueOf('1'), new ItemStack(TFCItems.TerraLeather,1),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
 		}
 
-		GameRegistry.addRecipe(new ItemStack(Items.item_frame,1),new Object[]{"###","#$#","###",Character.valueOf('#'),new ItemStack(TFCItems.Stick,1),Character.valueOf('$'),new ItemStack(TFCItems.TerraLeather,1)});
-		GameRegistry.addRecipe(new ItemStack(Items.painting,1),new Object[]{"###","#$#","###",Character.valueOf('#'),new ItemStack(TFCItems.Stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.item_frame,1),new Object[]{"###","#$#","###",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.TerraLeather,1)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.painting,1),new Object[]{"###","#$#","###",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)}));
 
 		GameRegistry.addRecipe(new ItemStack(Blocks.carpet,2,0),new Object[]{"$$",Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
 		for(int i = 0; i < 16;i++)
@@ -248,8 +252,8 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCItems.GoldPan, 1, 0), new Object[] { 
 			"1", Character.valueOf('1'),Items.bowl});
 		//Sluice
-		/*GameRegistry.addRecipe(new ItemStack(TFCItems.SluiceItem, 1), new Object[] { 
-			"  1"," 12","122", Character.valueOf('1'),new ItemStack(TFCItems.Stick,1,32767), Character.valueOf('2'),new ItemStack(TFCItems.SinglePlank,1,32767)});*/
+		/*GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SluiceItem, 1), new Object[] { 
+			"  1"," 12","122", Character.valueOf('1'),"stickWood", Character.valueOf('2'),new ItemStack(TFCItems.SinglePlank,1,32767)}));*/
 
 		for(int j = 0; j < Recipes.Hammers.length; j++)
 		{
@@ -258,10 +262,10 @@ public class Recipes
 			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 6, 0), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(Recipes.Hammers[j], 1, 32767)});
 		}
 
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Bow,1), new Object[] {" #$","# $"," #$",Character.valueOf('#'),new ItemStack(TFCItems.Stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Bow,1), new Object[] {"$# ","$ #","$# ",Character.valueOf('#'),new ItemStack(TFCItems.Stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Bow,1), new Object[] {" #$","# $"," #$",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Bow,1), new Object[] {"$# ","$ #","$# ",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)}));
 
-		GameRegistry.addRecipe(new ItemStack(TFCItems.FishingRod,1), new Object[] {"  #"," #$","# $",Character.valueOf('#'),new ItemStack(TFCItems.Stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.FishingRod,1), new Object[] {"  #"," #$","# $",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)}));
 
 		//Tool Rack & Barrel & Armour Stands
 		for(int j = 0; j < Global.WOOD_ALL.length; j++)
@@ -288,7 +292,7 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 4, 0), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Ink, 16, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(TFCItems.Dye,1,0)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.FireStarter, 1, 0), new Object[] { "2 "," 2", Character.valueOf('2'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.FireStarter, 1, 0), new Object[] { "2 "," 2", Character.valueOf('2'), "stickWood"}));
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Bellows, 1, 0), new Object[] { "###","???","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767), Character.valueOf('?'), TFCItems.TerraLeather});
 		//GameRegistry.addRecipe(new ItemStack(TFCItems.terraStoneAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), mod_TFC_Core.terraStoneIgIn});
 		//GameRegistry.addRecipe(new ItemStack(TFCItems.terraStoneAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), mod_TFC_Core.terraStoneIgEx});
@@ -329,14 +333,14 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Leash,1),new Object[]{"RR ","RR ","  R",Character.valueOf('R'),new ItemStack(TFCItems.JuteFibre,1)});
 
-		GameRegistry.addRecipe(new ItemStack(Blocks.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), TFCItems.WroughtIronIngot, Character.valueOf('s'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(Blocks.golden_rail, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), TFCItems.GoldIngot, Character.valueOf('s'), new ItemStack(TFCItems.Stick,1,32767), Character.valueOf('r'), Items.redstone});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), TFCItems.WroughtIronIngot, Character.valueOf('s'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.golden_rail, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), TFCItems.GoldIngot, Character.valueOf('s'), "stickWood", Character.valueOf('r'), Items.redstone}));
 		GameRegistry.addRecipe(new ItemStack(Items.minecart, 1), new Object[] { "P P","PPP", Character.valueOf('P'), TFCItems.WroughtIronSheet});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.minecartCrate, 1), new Object[] { new ItemStack(TFCBlocks.Chest), new ItemStack(Items.minecart)});
 		GameRegistry.addRecipe(new ItemStack(Items.shears, 1), new Object[] { "P "," P", Character.valueOf('P'), TFCItems.WroughtIronIngot});
-		GameRegistry.addRecipe(new ItemStack(Blocks.lever, 1), new Object[] { "P","H", Character.valueOf('P'), new ItemStack(TFCItems.Stick,1,32767), Character.valueOf('H'), new ItemStack(TFCItems.LooseRock,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.lever, 1), new Object[] { "P","H", Character.valueOf('P'), "stickWood", Character.valueOf('H'), new ItemStack(TFCItems.LooseRock,1,32767)}));
 		GameRegistry.addRecipe(new ItemStack(Blocks.trapdoor, 1, 0), new Object[] { "###","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(Items.sign, 1, 0), new Object[] { "###","###"," 1 ", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767),Character.valueOf('1'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.sign, 1, 0), new Object[] { "###","###"," 1 ", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767),Character.valueOf('1'), "stickWood"}));
 
 		for(int j = 0; j < Gems.length; j++)
 		{
@@ -367,28 +371,26 @@ public class Recipes
 		//RemoveRecipe(new ItemStack(Item.writableBook));
 
 		RemoveRecipe(new ItemStack(Blocks.wooden_button));
-		for(int l = 0; l < 16; l++)
-			GameRegistry.addRecipe(new ItemStack(TFCBlocks.ButtonWood, 1), new Object[] {"#", "#", Character.valueOf('#'), new ItemStack(TFCBlocks.Planks, 1, l)});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.ButtonWood, 1), new Object[] {"#", "#", Character.valueOf('#'), new ItemStack(TFCBlocks.Planks2, 1)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.ButtonWood, 1), new Object[] {"#", "#", Character.valueOf('#'), "plankWood"}));
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.writabeBookTFC, 1), new Object[]{new ItemStack(Items.book, 1)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Spindle,1), new Object[] { "P","#",Character.valueOf('P'),
-			new ItemStack(TFCItems.SpindleHead,1, 1),Character.valueOf('#'),new ItemStack(TFCItems.Stick,1)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SpindleHead,1,0), new Object[] { "P","#",Character.valueOf('P'),
-			new ItemStack(TFCItems.ClayBall,32767),Character.valueOf('#'),new ItemStack(TFCItems.Stick,1)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Spindle,1), new Object[] { "P","#",Character.valueOf('P'),
+			new ItemStack(TFCItems.SpindleHead,1, 1),Character.valueOf('#'),"stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SpindleHead,1,0), new Object[] { "P","#",Character.valueOf('P'),
+			new ItemStack(TFCItems.ClayBall,32767),Character.valueOf('#'),"stickWood"}));
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.WoolYarn,8),new Object[]{new ItemStack(TFCItems.Wool,1,32767),new ItemStack(TFCItems.Spindle,1,32767)});
 		GameRegistry.addRecipe(new ItemStack(TFCItems.WoolCloth,1), new Object[]{"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.WoolYarn,1)});
 		GameRegistry.addRecipe(new ItemStack(Items.bed,1),new Object[]{"PPP","QQQ",Character.valueOf('P'),new ItemStack(TFCItems.WoolCloth,1),Character.valueOf('Q'),
 			new ItemStack(TFCItems.SinglePlank,1,32767)});
 
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP",
-			Character.valueOf('P'), TFCBlocks.StoneIgEx, Character.valueOf('W'), TFCItems.Stick});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP", 
-			Character.valueOf('P'), TFCBlocks.StoneIgIn, Character.valueOf('W'), TFCItems.Stick});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP", 
-			Character.valueOf('P'), TFCBlocks.StoneSed, Character.valueOf('W'), TFCItems.Stick});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP", 
-			Character.valueOf('P'), TFCBlocks.StoneMM, Character.valueOf('W'), TFCItems.Stick});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP",
+			Character.valueOf('P'), TFCBlocks.StoneIgEx, Character.valueOf('W'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP", 
+			Character.valueOf('P'), TFCBlocks.StoneIgIn, Character.valueOf('W'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP", 
+			Character.valueOf('P'), TFCBlocks.StoneSed, Character.valueOf('W'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP", 
+			Character.valueOf('P'), TFCBlocks.StoneMM, Character.valueOf('W'), "stickWood"}));
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[] { "W ", " P", 
 			Character.valueOf('P'), Items.flint, Character.valueOf('W'), TFCItems.WroughtIronIngot});
@@ -577,8 +579,8 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.UnknownIngot, 1, 0), 
 				new Object[] {getStackNoTemp(new ItemStack(TFCItems.UnknownUnshaped, 1))});
 
-		GameRegistry.addRecipe(new ItemStack(TFCItems.ClayBall,1,1), 
-				new Object[] {"PXP","XCX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.Powder,1,1),Character.valueOf('X'),new ItemStack(TFCItems.Powder,1,2),Character.valueOf('C'),new ItemStack(TFCItems.ClayBall,1,0)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.ClayBall,1,1), 
+				new Object[] {"PXP","XCX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.Powder,1,1),Character.valueOf('X'),new ItemStack(TFCItems.Powder,1,2),Character.valueOf('C'), "lumpClay"}));
 
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Thatch,1), 
 				new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.Straw, 1)});
@@ -586,12 +588,12 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCItems.FireBrick,2,0), 
 				new Object[] {"PP", "PP", Character.valueOf('P'), new ItemStack(TFCItems.ClayBall, 1, 1)});
 
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Workbench, 1), new Object[]{"PP","PP", Character.valueOf('P'), new ItemStack(TFCBlocks.Planks, 1, 32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Workbench, 1), new Object[]{"PP","PP", Character.valueOf('P'), new ItemStack(TFCBlocks.Planks2, 1, 32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Workbench, 1), new Object[]{"PP","PP", Character.valueOf('P'), "plankWood"}));
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.coal_block, 1), new Object[]{"###","###","###", Character.valueOf('#'), "fuelCoal"}));
 
 		RegisterToolRecipes();
 		registerFoodRecipes();
-		VanillaRecipes();
 		registerKilnRecipes();
 		registerToolMolds();
 		registerOreDict();
@@ -599,7 +601,25 @@ public class Recipes
 
 	private static void registerOreDict()
 	{
+		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks));
 		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks2));
+		OreDictionary.registerOre("fuelCoal", new ItemStack(Items.coal, 1, 0));
+		OreDictionary.registerOre("fuelCoal", new ItemStack(TFCItems.Coal, 1, 0));
+		OreDictionary.registerOre("fuelCharcoal", new ItemStack(Items.coal, 1, 1));
+		OreDictionary.registerOre("fuelCharcoal", new ItemStack(TFCItems.Coal, 1, 1));
+		OreDictionary.registerOre("stickWood", new ItemStack(TFCItems.Stick));
+		OreDictionary.registerOre("lumpClay", new ItemStack(Items.clay_ball));
+		OreDictionary.registerOre("lumpClay", new ItemStack(TFCItems.ClayBall, 1, 0));
+		OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneIgEx));
+		OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneIgIn));
+		OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneMM));
+		OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneSed));
+		OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneIgEx));
+		OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneIgIn));
+		OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneMM));
+		OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneSed));
+		OreDictionary.registerOre("craftingTableWood", new ItemStack(TFCBlocks.Workbench));
+		OreDictionary.registerOre("craftingTableWood", new ItemStack(Blocks.crafting_table));
 	}
 
 	private static ItemStack checkMelted(ItemStack is)
@@ -611,6 +631,13 @@ public class Recipes
 
 	private static void VanillaRecipes()
 	{
+		// With oredict in place, we MUST remove the vanilla crafting table.
+		// Otherwise TFC can not use the 4 planks recipe to create its own crafting upgrade.
+		RemoveRecipe(new ItemStack(Blocks.crafting_table));
+		// Also the Bow and Fishing Rod
+		RemoveRecipe(new ItemStack(Items.bow));
+		RemoveRecipe(new ItemStack(Items.fishing_rod));
+		
 		if(TFCOptions.enableVanillaDiamondRecipe == true)
 		{
 			GameRegistry.addRecipe(new ItemStack(Items.diamond, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GemDiamond,1,2)});
@@ -624,13 +651,16 @@ public class Recipes
 		if(TFCOptions.enableVanillaRecipes == true)
 		{
 			GameRegistry.addRecipe(new ItemStack(Items.apple,1),new Object[]{"1",Character.valueOf('1'),new ItemStack(TFCItems.RedApple,1)});
-
+					
 			//Terrastone to Cobblestone
-			GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneSedCobble});
-			GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneIgInCobble});
-			GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneIgExCobble});
-			GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneMMCobble});
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather,1),new Object[]{new ItemStack(TFCItems.TerraLeather,1)});
+			//now handled by oredict
+			//GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneSedCobble});
+			//GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneIgInCobble});
+			//GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneIgExCobble});
+			//GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneMMCobble});
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather,1),new Object[]{new ItemStack(TFCItems.TerraLeather, 1)});
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.bow,1),new Object[]{new ItemStack(TFCItems.Bow, 1, 0)});
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.fishing_rod,1),new Object[]{new ItemStack(TFCItems.FishingRod, 1, 0)});
 
 			//Conversion to vanilla tools for recipes in other mods
 			GameRegistry.addRecipe(new ItemStack(Items.stone_shovel, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgInShovel});
@@ -641,10 +671,10 @@ public class Recipes
 			GameRegistry.addRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgExHoe});
 			GameRegistry.addRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.SedHoe});
 			GameRegistry.addRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.MMHoe});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgInAxe});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgExAxe});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.SedAxe});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.MMAxe});
+			GameRegistry.addRecipe(new ItemStack(Items.stone_axe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgInAxe});
+			GameRegistry.addRecipe(new ItemStack(Items.stone_axe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgExAxe});
+			GameRegistry.addRecipe(new ItemStack(Items.stone_axe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.SedAxe});
+			GameRegistry.addRecipe(new ItemStack(Items.stone_axe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.MMAxe});
 		}
 		else
 		{
@@ -664,7 +694,7 @@ public class Recipes
 			//RemoveRecipe(new ItemStack(Blocks.fence,2));
 			RemoveRecipe(new ItemStack(Blocks.fence_gate,1));
 			RemoveRecipe(new ItemStack(Blocks.wool));
-			RemoveRecipe(new ItemStack(Blocks.crafting_table));
+			
 
 			RemoveRecipe(new ItemStack(Items.leather_helmet));
 			RemoveRecipe(new ItemStack(Items.leather_chestplate));
@@ -688,262 +718,262 @@ public class Recipes
 	private static void RegisterToolRecipes()
 	{
 		//pickaxes
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzePick, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzePickaxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzePick, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzePickaxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelPick, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelPickaxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelPick, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelPickaxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BronzePick, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzePickaxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CopperPick, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperPickaxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronPick, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronPickaxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelPick, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelPickaxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SteelPick, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelPickaxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzePick, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzePickaxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackBronzePick, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzePickaxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackSteelPick, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelPickaxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlueSteelPick, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelPickaxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BronzePick, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzePickaxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.CopperPick, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperPickaxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WroughtIronPick, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronPickaxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.RedSteelPick, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelPickaxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SteelPick, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelPickaxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 
 		//Shovels
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzeShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzeShovelHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzeShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzeShovelHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelShovelHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelShovelHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BronzeShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzeShovelHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CopperShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperShovelHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronShovelHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelShovelHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SteelShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelShovelHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzeShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzeShovelHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackBronzeShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzeShovelHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackSteelShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelShovelHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlueSteelShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelShovelHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BronzeShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzeShovelHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.CopperShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperShovelHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WroughtIronShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronShovelHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.RedSteelShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelShovelHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SteelShovel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelShovelHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 
 		//Hoes
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzeHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzeHoeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzeHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzeHoeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelHoeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelHoeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BronzeHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzeHoeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CopperHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperHoeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronHoeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelHoeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SteelHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelHoeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzeHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzeHoeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackBronzeHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzeHoeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackSteelHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelHoeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlueSteelHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelHoeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BronzeHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzeHoeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.CopperHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperHoeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WroughtIronHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronHoeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.RedSteelHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelHoeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SteelHoe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelHoeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 
 		//Axes
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzeAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzeAxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzeAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzeAxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelAxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelAxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BronzeAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzeAxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CopperAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperAxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronAxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelAxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SteelAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelAxeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzeAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzeAxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackBronzeAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzeAxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackSteelAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelAxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlueSteelAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelAxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BronzeAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzeAxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.CopperAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperAxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WroughtIronAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronAxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.RedSteelAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelAxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SteelAxe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelAxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 
 		//Swords
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzeSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzeSwordHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzeSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzeSwordHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelSwordHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelSwordHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BronzeSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzeSwordHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CopperSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperSwordHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronSwordHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelSwordHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SteelSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelSwordHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzeSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzeSwordHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackBronzeSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzeSwordHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackSteelSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelSwordHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlueSteelSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelSwordHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BronzeSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzeSwordHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.CopperSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperSwordHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WroughtIronSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronSwordHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.RedSteelSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelSwordHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SteelSword, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelSwordHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 
 		//Maces
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzeMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzeMaceHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzeMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzeMaceHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelMaceHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelMaceHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BronzeMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzeMaceHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CopperMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperMaceHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronMaceHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelMaceHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SteelMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelMaceHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzeMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzeMaceHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackBronzeMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzeMaceHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackSteelMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelMaceHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlueSteelMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelMaceHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BronzeMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzeMaceHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.CopperMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperMaceHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WroughtIronMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronMaceHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.RedSteelMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelMaceHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SteelMace, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelMaceHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 
 		//Hammers
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzeHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzeHammerHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzeHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzeHammerHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelHammerHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelHammerHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BronzeHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzeHammerHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CopperHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperHammerHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronHammerHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelHammerHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SteelHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelHammerHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzeHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzeHammerHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackBronzeHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzeHammerHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackSteelHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelHammerHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlueSteelHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelHammerHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BronzeHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzeHammerHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.CopperHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperHammerHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WroughtIronHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronHammerHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.RedSteelHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelHammerHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SteelHammer, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelHammerHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 
 		//Saws
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzeSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzeSawHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzeSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzeSawHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelSawHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelSawHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BronzeSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzeSawHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CopperSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperSawHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronSawHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelSawHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SteelSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelSawHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzeSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzeSawHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackBronzeSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzeSawHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackSteelSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelSawHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlueSteelSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelSawHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BronzeSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzeSawHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.CopperSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperSawHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WroughtIronSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronSawHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.RedSteelSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelSawHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SteelSaw, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelSawHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 
 		//Chisels
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzeChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzeChiselHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzeChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzeChiselHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelChiselHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelChiselHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BronzeChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzeChiselHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CopperChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperChiselHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronChiselHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelChiselHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SteelChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelChiselHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzeChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzeChiselHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackBronzeChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzeChiselHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackSteelChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelChiselHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlueSteelChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelChiselHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BronzeChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzeChiselHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.CopperChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperChiselHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WroughtIronChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronChiselHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.RedSteelChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelChiselHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SteelChisel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelChiselHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 
 		//propicks
-		GameRegistry.addRecipe(new ItemStack(TFCItems.ProPickBismuthBronze, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzeProPickHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.ProPickBlackBronze, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzeProPickHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.ProPickBlackSteel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelProPickHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.ProPickBlueSteel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelProPickHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.ProPickBronze, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzeProPickHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.ProPickCopper, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperProPickHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.ProPickIron, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronProPickHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.ProPickRedSteel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelProPickHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.ProPickSteel, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelProPickHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.ProPickBismuthBronze, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzeProPickHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.ProPickBlackBronze, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzeProPickHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.ProPickBlackSteel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelProPickHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.ProPickBlueSteel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelProPickHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.ProPickBronze, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzeProPickHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.ProPickCopper, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperProPickHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.ProPickIron, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronProPickHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.ProPickRedSteel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelProPickHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.ProPickSteel, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelProPickHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 		//Scythes
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzeScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzeScytheHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzeScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzeScytheHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelScytheHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelScytheHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BronzeScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzeScytheHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CopperScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperScytheHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronScytheHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelScytheHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SteelScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelScytheHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzeScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzeScytheHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackBronzeScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzeScytheHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackSteelScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelScytheHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlueSteelScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelScytheHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BronzeScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzeScytheHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.CopperScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperScytheHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WroughtIronScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronScytheHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.RedSteelScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelScytheHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SteelScythe, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelScytheHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 		//Knifes
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzeKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzeKnifeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzeKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzeKnifeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelKnifeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelKnifeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BronzeKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzeKnifeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CopperKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperKnifeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronKnifeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelKnifeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SteelKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelKnifeHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzeKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzeKnifeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackBronzeKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzeKnifeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackSteelKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelKnifeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlueSteelKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelKnifeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BronzeKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzeKnifeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.CopperKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperKnifeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WroughtIronKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronKnifeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.RedSteelKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelKnifeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SteelKnife, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelKnifeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 
 		//javelins
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzeJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BismuthBronzeJavelinHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzeJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackBronzeJavelinHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlackSteelJavelinHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BlueSteelJavelinHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.BronzeJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.BronzeJavelinHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CopperJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.CopperJavelinHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.WroughtIronJavelinHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.RedSteelJavelinHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.SteelJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
-			new ItemStack(TFCItems.SteelJavelinHead, 1, 0), Character.valueOf('I'), new ItemStack(TFCItems.Stick,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzeJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BismuthBronzeJavelinHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackBronzeJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackBronzeJavelinHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlackSteelJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlackSteelJavelinHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BlueSteelJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BlueSteelJavelinHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BronzeJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.BronzeJavelinHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.CopperJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.CopperJavelinHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WroughtIronJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.WroughtIronJavelinHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.RedSteelJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.RedSteelJavelinHead, 1, 0), Character.valueOf('I'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SteelJavelin, 1), new Object[] { "#","I", Character.valueOf('#'), 
+			new ItemStack(TFCItems.SteelJavelinHead, 1, 0), Character.valueOf('I'), "stickWood"}));
 
 		//clay molds
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldPick, 1), new Object[] { "     "," ### ","#   #", "     ",Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
