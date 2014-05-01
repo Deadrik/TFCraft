@@ -3,19 +3,10 @@ package com.bioxx.tfc.TileEntities;
 import java.util.Iterator;
 import java.util.List;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Items.ItemOre;
-import com.bioxx.tfc.api.ISmeltable;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -23,6 +14,14 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Items.ItemOre;
+import com.bioxx.tfc.api.ISmeltable;
+import com.bioxx.tfc.api.Constant.Global;
 
 public class TileEntityEarlyBloomery extends TileEntity
 {
@@ -259,7 +258,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
 				{
 					EntityItem entity = (EntityItem)iterator.next();
-					if(entity.getEntityItem().getItem() == Items.coal && entity.getEntityItem().getItemDamage() == 1 || entity.getEntityItem().getItem() == TFCItems.Coke)
+					if(entity.getEntityItem().getItem() == TFCItems.Coal && entity.getEntityItem().getItemDamage() == 1 || entity.getEntityItem().getItem() == TFCItems.Coke)
 					{
 						for(int c = 0; c < entity.getEntityItem().stackSize; c++)
 						{

@@ -2,6 +2,7 @@ package com.bioxx.tfc.Entities.Mobs;
 
 import java.util.ArrayList;
 
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Entities.IAnimal;
 
@@ -67,7 +68,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 		if(isAdult())
 		{
 			float foodWeight = ageMod * (this.size_mod * 40);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
-			TFC_Core.animalDropMeat(this, Items.chicken, foodWeight);
+			TFC_Core.animalDropMeat(this, TFCItems.chickenRaw, foodWeight);
 			this.dropItem(Items.bone, rand.nextInt(2) + 1);
 		}
 	}

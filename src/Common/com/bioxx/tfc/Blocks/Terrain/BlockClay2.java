@@ -1,10 +1,8 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -34,18 +32,6 @@ public class BlockClay2 extends BlockClay
 	public IIcon getIcon(int par1, int par2)
 	{
 		return DirtTexture[16+par2];
-	}
-
-	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
-	{
-		return Items.clay_ball;
-	}
-
-	@Override
-	public int quantityDropped(Random par1Random)
-	{
-		return par1Random.nextInt(4);
 	}
 
 	//	public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)

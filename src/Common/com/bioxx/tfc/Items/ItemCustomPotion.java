@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -77,6 +78,5 @@ public class ItemCustomPotion extends ItemPotion
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
 		super.registerIcons(par1IconRegister);
-		Items.potionitem.registerIcons(par1IconRegister);
 	}
 }

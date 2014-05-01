@@ -2,23 +2,22 @@ package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
 
 public class ItemTerraBlock extends ItemBlock implements ISize
 {
@@ -92,7 +91,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 
 				if(meltTemp != -1)
 				{
-					if(is.getItem() == Items.stick)
+					if(is.getItem() == TFCItems.Stick)
 						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
 					else
 						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));

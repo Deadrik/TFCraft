@@ -3,7 +3,6 @@ package com.bioxx.tfc;
 import java.util.ArrayList;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -26,6 +25,7 @@ import com.bioxx.tfc.Items.ItemArrow;
 import com.bioxx.tfc.Items.ItemBloom;
 import com.bioxx.tfc.Items.ItemBlueprint;
 import com.bioxx.tfc.Items.ItemClay;
+import com.bioxx.tfc.Items.ItemCoal;
 import com.bioxx.tfc.Items.ItemCustomLeash;
 import com.bioxx.tfc.Items.ItemCustomMinecart;
 import com.bioxx.tfc.Items.ItemCustomPotion;
@@ -263,6 +263,7 @@ public class TFCItems
 	public static Item RedSteelSaw;
 	public static Item SteelSaw;
 
+	public static Item Coal;
 	public static Item OreChunk;
 	public static Item Logs;
 	public static Item Barrel;
@@ -318,6 +319,8 @@ public class TFCItems
 	public static Item SteelKnife;
 
 	public static Item FireStarter;
+	public static Item FishingRod;
+	public static Item Bow;
 
 	public static Item StoneHammer;
 	public static Item BismuthBronzeHammer;
@@ -505,6 +508,7 @@ public class TFCItems
 
 	public static Item Coke;
 	public static Item Powder;
+	public static Item Dye;
 
 	//Formerly TFC_Mining
 	public static Item GoldPan;
@@ -608,6 +612,7 @@ public class TFCItems
 	public static Item RedSteelUnfinishedHelmet;
 	public static Item SteelUnfinishedHelmet;
 
+	public static Item LeatherChestplate;
 	public static Item BismuthBronzeChestplate;
 	public static Item BlackBronzeChestplate;
 	public static Item BlackSteelChestplate;
@@ -618,6 +623,7 @@ public class TFCItems
 	public static Item RedSteelChestplate;
 	public static Item SteelChestplate;
 
+	public static Item LeatherLeggings;
 	public static Item BismuthBronzeGreaves;
 	public static Item BlackBronzeGreaves;
 	public static Item BlackSteelGreaves;
@@ -628,6 +634,7 @@ public class TFCItems
 	public static Item RedSteelGreaves;
 	public static Item SteelGreaves;
 
+	public static Item LeatherBoots;
 	public static Item BismuthBronzeBoots;
 	public static Item BlackBronzeBoots;
 	public static Item BlackSteelBoots;
@@ -638,6 +645,7 @@ public class TFCItems
 	public static Item RedSteelBoots;
 	public static Item SteelBoots;
 
+	public static Item LeatherHelmet;
 	public static Item BismuthBronzeHelmet;
 	public static Item BlackBronzeHelmet;
 	public static Item BlackSteelHelmet;
@@ -741,10 +749,22 @@ public class TFCItems
 	public static Item RyeWhole;
 	public static Item RiceWhole;
 
+	public static Item muttonRaw;
+	public static Item muttonCooked;
+	public static Item CalamariRaw;
+	public static Item CalamariCooked;
 	public static Item venisonRaw;
 	public static Item venisonCooked;
 	public static Item horseMeatRaw;
 	public static Item horseMeatCooked;
+	public static Item porkchopRaw;
+	public static Item porkchopCooked;
+	public static Item fishRaw;
+	public static Item fishCooked;
+	public static Item beefRaw;
+	public static Item beefCooked;
+	public static Item chickenRaw;
+	public static Item chickenCooked;
 
 	public static Item LooseRock;
 	public static Item FlatRock;
@@ -819,11 +839,8 @@ public class TFCItems
 	public static Item PrepHide;
 	public static Item SheepSkin;
 	public static Item TerraLeather;
-	public static Item muttonRaw;
-	public static Item muttonCooked;
-	public static Item CalamariRaw;
-	public static Item CalamariCooked;
 	public static Item FlatLeather;
+
 	public static Item Beer;
 	public static Item Cider;
 	public static Item Rum;
@@ -831,7 +848,10 @@ public class TFCItems
 	public static Item Sake;
 	public static Item Vodka;
 	public static Item Whiskey;
+	
+	public static Item Potion;
 
+	public static Item ClayBall;
 	public static Item PotteryJug;
 	public static Item PotteryPot;
 	public static Item PotterySmallVessel;
@@ -840,6 +860,9 @@ public class TFCItems
 	public static Item Straw;
 	public static Item FlatClay;
 	public static Item FireBrick;
+	public static Item Stick;
+	public static Item Arrow;
+	public static Item Leash;
 
 	public static Item ClayMoldAxe;
 	public static Item ClayMoldChisel;
@@ -982,18 +1005,15 @@ public class TFCItems
 
 		System.out.println(new StringBuilder().append("[TFC] Loading Items").toString());
 
-		//Replace any vanilla Items here
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.fishing_rod), "fishingRod", (new ItemCustomFishingRod()).setUnlocalizedName("fishingRod").setTextureName("fishing_rod"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.coal), "coal", new com.bioxx.tfc.Items.ItemCoal().setUnlocalizedName("coal"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.stick), "stick", new ItemStick().setFull3D().setUnlocalizedName("stick"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.bow), "bow", new ItemCustomBow().setUnlocalizedName("bow").setTextureName("bow"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.arrow), "arrow", new ItemArrow().setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFCWeapons));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.dye), "dye", new ItemDyeCustom().setUnlocalizedName("dyePowder").setTextureName("dye_powder"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.potionitem), "potionitem", new ItemCustomPotion().setUnlocalizedName("potion").setTextureName("potion"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.lead), "lead", new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFCTools));
-
-		//		Item.itemRegistry.addObject(Block.getIdFromBlock(Blocks.vine), "vine", new ItemColored(Blocks.vine, false));
-
+		FishingRod = new ItemCustomFishingRod().setUnlocalizedName("fishingRod").setTextureName("fishing_rod");
+		Coal = new ItemCoal().setUnlocalizedName("coal");
+		Stick = new ItemStick().setFull3D().setUnlocalizedName("stick");
+		Bow = new ItemCustomBow().setUnlocalizedName("bow").setTextureName("bow");
+		Arrow = new ItemArrow().setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFCWeapons);
+		Dye = new ItemDyeCustom().setUnlocalizedName("dyePowder").setTextureName("dye_powder").setCreativeTab(TFCTabs.TFCMaterials);
+		Potion = new ItemCustomPotion().setUnlocalizedName("potion").setTextureName("potion");
+		Leash = new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFCTools);
+		
 		minecartCrate = new ItemCustomMinecart(1).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 		GoldPan = new ItemGoldPan().setUnlocalizedName("GoldPan");
 		SluiceItem = new ItemSluice().setFolder("devices/").setUnlocalizedName("SluiceItem").setCreativeTab(TFCTabs.TFCDevices);
@@ -1387,7 +1407,7 @@ public class TFCItems
 		WoodenBucketWater = (new ItemCustomBucket(TFCBlocks.FreshWater)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);
 		WoodenBucketSaltWater = (new ItemCustomBucket(TFCBlocks.SaltWater)).setUnlocalizedName("Wooden Bucket Salt Water").setContainerItem(WoodenBucketEmpty);
 		WoodenBucketSalt = (new ItemCustomBucket(Blocks.air/*FIXME needs salt block*/)).setUnlocalizedName("Wooden Bucket Salt").setContainerItem(WoodenBucketEmpty);
-		WoodenBucketMilk = (new ItemCustomBucketMilk()).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty).setCreativeTab(CreativeTabs.tabFood);
+		WoodenBucketMilk = (new ItemCustomBucketMilk()).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCFoods);
 
 		BismuthBronzeKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Bismuth Bronze Knife Blade");
 		BlackBronzeKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Black Bronze Knife Blade");
@@ -1462,13 +1482,13 @@ public class TFCItems
 		DoorKapok = new ItemWoodDoor(15).setUnlocalizedName("Kapok Door");
 		DoorAcacia = new ItemWoodDoor(16).setUnlocalizedName("Acacia Door");
 
-		Beer = new ItemAlcohol().setUnlocalizedName("Beer").setCreativeTab(CreativeTabs.tabFood);
-		Cider = new ItemAlcohol().setUnlocalizedName("Cider").setCreativeTab(CreativeTabs.tabFood);
-		Rum = new ItemAlcohol().setUnlocalizedName("Rum").setCreativeTab(CreativeTabs.tabFood);
-		RyeWhiskey = new ItemAlcohol().setUnlocalizedName("RyeWhiskey").setCreativeTab(CreativeTabs.tabFood);
-		Sake = new ItemAlcohol().setUnlocalizedName("Sake").setCreativeTab(CreativeTabs.tabFood);
-		Vodka = new ItemAlcohol().setUnlocalizedName("Vodka").setCreativeTab(CreativeTabs.tabFood);
-		Whiskey = new ItemAlcohol().setUnlocalizedName("Whiskey").setCreativeTab(CreativeTabs.tabFood);
+		Beer = new ItemAlcohol().setUnlocalizedName("Beer").setCreativeTab(TFCTabs.TFCFoods);
+		Cider = new ItemAlcohol().setUnlocalizedName("Cider").setCreativeTab(TFCTabs.TFCFoods);
+		Rum = new ItemAlcohol().setUnlocalizedName("Rum").setCreativeTab(TFCTabs.TFCFoods);
+		RyeWhiskey = new ItemAlcohol().setUnlocalizedName("RyeWhiskey").setCreativeTab(TFCTabs.TFCFoods);
+		Sake = new ItemAlcohol().setUnlocalizedName("Sake").setCreativeTab(TFCTabs.TFCFoods);
+		Vodka = new ItemAlcohol().setUnlocalizedName("Vodka").setCreativeTab(TFCTabs.TFCFoods);
+		Whiskey = new ItemAlcohol().setUnlocalizedName("Whiskey").setCreativeTab(TFCTabs.TFCFoods);
 
 		Blueprint = new ItemBlueprint();
 		writabeBookTFC = new ItemWritableBookTFC("Fix Me I'm Broken").setUnlocalizedName("book");
@@ -1482,7 +1502,7 @@ public class TFCItems
 		Mortar = new ItemTerra().setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
 		//FIXME these buckets need proper forge fluid implementation
 		Limewater = new ItemCustomBucket(Blocks.air).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
-		Vinegar = new ItemCustomBucket(Blocks.air).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.tabFood);
+		Vinegar = new ItemCustomBucket(Blocks.air).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCFoods);
 		Hide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		SoakedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		ScrapedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFCMaterials);
@@ -1500,7 +1520,7 @@ public class TFCItems
 		PotteryLargeVessel = new ItemPotteryLargeVessel().setUnlocalizedName("Large Vessel");
 		PotteryPot = new ItemPotteryPot().setUnlocalizedName("Pot");
 		CeramicMold = new ItemPotteryBase().setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.clay_ball), "clay", new ItemClay().setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1)).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("Clay"));
+		ClayBall = new ItemClay().setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1)).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("Clay");
 		FireBrick = new ItemPotteryBase().setMetaNames(new String[]{"Clay Fire Brick","Fire Brick"}).setUnlocalizedName("Fire Brick");
 
 		ClayMoldAxe = new ItemPotteryMold().setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
@@ -1607,6 +1627,8 @@ public class TFCItems
 		((TFCTabs)TFCTabs.TFCPottery).setTabIconItemStack(new ItemStack(PotteryJug, 1, 1));
 		((TFCTabs)TFCTabs.TFCWeapons).setTabIconItemStack(new ItemStack(SteelSword, 1));
 		((TFCTabs)TFCTabs.TFCDevices).setTabIconItemStack(new ItemStack(SluiceItem, 1));
+		((TFCTabs)TFCTabs.TFCFoods).setTabIconItem(Items.cooked_porkchop);
+
 
 		registerMetals();
 
@@ -1621,17 +1643,25 @@ public class TFCItems
 	{
 		FoodList = new ArrayList<Item>();
 
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.egg), "egg", new ItemEgg().setSize(EnumSize.SMALL).setUnlocalizedName("egg").setTextureName("egg").setCreativeTab(CreativeTabs.tabFood));
-		Egg = Items.egg;
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.porkchop), "porkchop", new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("porkchopRaw"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.cooked_porkchop), "cooked_porkchop", new ItemFoodTFC(38, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("porkchopCooked"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.fish), "fish", new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, true).setDecayRate(3.0f).setUnlocalizedName("fishRaw"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.cooked_fished), "cooked_fished", new ItemFoodTFC(39, EnumFoodGroup.Protein).setDecayRate(2.0f).setUnlocalizedName("fishCooked"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.beef), "beef", new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("beefRaw"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.cooked_beef), "cooked_beef", new ItemFoodTFC(40, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("beefCooked"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.chicken), "chicken", new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("chickenRaw"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.cooked_chicken), "cooked_chicken", new ItemFoodTFC(41, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("chickenCooked"));
-
+		Egg = new ItemEgg().setSize(EnumSize.SMALL).setUnlocalizedName("egg").setTextureName("egg").setCreativeTab(TFCTabs.TFCFoods);
+		EggCooked = new ItemFoodTFC(11, EnumFoodGroup.Protein).setDecayRate(3.0f).setUnlocalizedName("Egg Cooked");
+		porkchopRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("porkchopRaw");
+		porkchopCooked = new ItemFoodTFC(38, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("porkchopCooked");
+		fishRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, true).setDecayRate(3.0f).setUnlocalizedName("fishRaw");
+		fishCooked = new ItemFoodTFC(39, EnumFoodGroup.Protein).setDecayRate(2.0f).setUnlocalizedName("fishCooked");
+		beefRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("beefRaw");
+		beefCooked = new ItemFoodTFC(40, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("beefCooked");
+		chickenRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("chickenRaw");
+		chickenCooked = new ItemFoodTFC(41, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("chickenCooked");
+		muttonRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("Mutton Raw");
+		muttonCooked = new ItemFoodTFC(48, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("Mutton Cooked");
+		venisonRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("Venison");
+		venisonCooked = new ItemFoodTFC(49, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("VenisonCooked");
+		horseMeatRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("HorseMeat");
+		horseMeatCooked = new ItemFoodTFC(50, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("HorseMeatCooked");
+		CalamariRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(4.0f).setUnlocalizedName("Calamari Raw");
+		CalamariCooked = new ItemFoodTFC(49, EnumFoodGroup.Protein).setDecayRate(2.0f).setUnlocalizedName("Calamari Cooked");
+		
 		FruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling");
 		RedApple = new ItemFoodTFC(2, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
 		Banana = new ItemFoodTFC(3, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);
@@ -1644,8 +1674,7 @@ public class TFCItems
 		Plum = new ItemFoodTFC(10, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[8]);
 
 		Items.reeds.setCreativeTab(null);
-		Sugercane = new ItemSugercane().setUnlocalizedName("Sugercane").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("reeds");
-		EggCooked = new ItemFoodTFC(11, EnumFoodGroup.Protein).setDecayRate(3.0f).setUnlocalizedName("Egg Cooked");
+		Sugercane = new ItemSugercane().setUnlocalizedName("Sugercane").setCreativeTab(TFCTabs.TFCMaterials).setTextureName("reeds");
 
 		WheatGrain = new ItemFoodTFC(12, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Grain");
 		BarleyGrain = new ItemFoodTFC(14, EnumFoodGroup.Grain).setUnlocalizedName("Barley Grain");
@@ -1688,13 +1717,13 @@ public class TFCItems
 		Squash = new ItemFoodTFC(37, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Squash");
 		Cheese = new ItemFoodTFC(26, EnumFoodGroup.Dairy).setDecayRate(0.5f).setUnlocalizedName("Cheese");
 
-		WheatWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Wheat Whole").setCreativeTab(CreativeTabs.tabFood);
-		BarleyWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Barley Whole").setCreativeTab(CreativeTabs.tabFood);
-		OatWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Oat Whole").setCreativeTab(CreativeTabs.tabFood);
-		RyeWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rye Whole").setCreativeTab(CreativeTabs.tabFood);
-		RiceWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rice Whole").setCreativeTab(CreativeTabs.tabFood);
+		WheatWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Wheat Whole");
+		BarleyWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Barley Whole");
+		OatWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Oat Whole");
+		RyeWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rye Whole");
+		RiceWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rice Whole");
 
-		MealGeneric = new ItemMeal().setUnlocalizedName("MealGeneric").setCreativeTab(CreativeTabs.tabFood);
+		MealGeneric = new ItemMeal().setUnlocalizedName("MealGeneric").setCreativeTab(TFCTabs.TFCFoods);
 
 		WheatGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Wheat Ground");
 		BarleyGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Barley Ground");
@@ -1717,9 +1746,6 @@ public class TFCItems
 		RiceBread = new ItemFoodTFC(46, EnumFoodGroup.Grain).setUnlocalizedName("Rice Bread");
 		CornBread = new ItemFoodTFC(47, EnumFoodGroup.Grain).setUnlocalizedName("Corn Bread");
 
-		CalamariRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(4.0f).setUnlocalizedName("Calamari Raw");
-		CalamariCooked = new ItemFoodTFC(49, EnumFoodGroup.Protein).setDecayRate(2.0f).setUnlocalizedName("Calamari Cooked");
-
 		SeedsWheat = new ItemCustomSeeds(0).setUnlocalizedName("Seeds Wheat");
 		SeedsBarley = new ItemCustomSeeds(5).setUnlocalizedName("Seeds Barley");
 		SeedsRye = new ItemCustomSeeds(7).setUnlocalizedName("Seeds Rye");
@@ -1740,13 +1766,6 @@ public class TFCItems
 		SeedsGreenbean = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Greenbean");
 		SeedsSquash = new ItemCustomSeeds(23).setUnlocalizedName("Seeds Squash");
 		SeedsJute = new ItemCustomSeeds(24).setUnlocalizedName("Seeds Jute");
-
-		muttonRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("Mutton Raw");
-		muttonCooked = new ItemFoodTFC(48, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("Mutton Cooked");
-		venisonRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("Venison");
-		venisonCooked = new ItemFoodTFC(49, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("VenisonCooked");
-		horseMeatRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("HorseMeat");
-		horseMeatCooked = new ItemFoodTFC(50, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("HorseMeatCooked");
 
 		WintergreenBerry = new ItemFoodTFC(50, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Wintergreen Berry");
 		Blueberry = new ItemFoodTFC(51, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Blueberry");
@@ -2035,11 +2054,11 @@ public class TFCItems
 		RedSteelHelmet = 		(new ItemTFCArmor(Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet")); i++;
 		SteelHelmet = 			(new ItemTFCArmor(Armor.SteelPlate, proxy.getArmorRenderID("steel"), 0, 50,3).setUnlocalizedName(Names[i]+" Helmet"));
 
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.leather_helmet), "leather_helmet", new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 0, ArmorMaterial.CLOTH, 100,3).setUnlocalizedName("helmetCloth").setTextureName("leather_helmet"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.leather_helmet), "leather_chestplate", new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 1, ArmorMaterial.CLOTH, 100,2).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.leather_helmet), "leather_leggings", new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 2, ArmorMaterial.CLOTH, 100,1).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings"));
-		Item.itemRegistry.addObject(Item.getIdFromItem(Items.leather_helmet), "leather_boots", new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 3, ArmorMaterial.CLOTH, 100,0).setUnlocalizedName("bootsCloth").setTextureName("leather_boots"));
-
+		LeatherHelmet = new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 0, ArmorMaterial.CLOTH, 100,3).setUnlocalizedName("helmetCloth").setTextureName("leather_helmet");
+		LeatherChestplate = new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 1, ArmorMaterial.CLOTH, 100,2).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate");
+		LeatherLeggings = new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 2, ArmorMaterial.CLOTH, 100,1).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings");
+		LeatherBoots = new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 3, ArmorMaterial.CLOTH, 100,0).setUnlocalizedName("bootsCloth").setTextureName("leather_boots");
+		
 		Quiver = new ItemQuiver(Armor.LeatherQuiver, proxy.getArmorRenderID("leather"), 4, ArmorMaterial.IRON, 0,-1).setUnlocalizedName("Quiver");
 	}
 
@@ -2572,6 +2591,16 @@ public class TFCItems
 
 		GameRegistry.registerItem(Jute , Jute.getUnlocalizedName());
 		GameRegistry.registerItem(JuteFibre , JuteFibre.getUnlocalizedName());
+		
+		GameRegistry.registerItem(FishingRod, FishingRod.getUnlocalizedName());
+		GameRegistry.registerItem(Coal, Coal.getUnlocalizedName());
+		GameRegistry.registerItem(Stick, Stick.getUnlocalizedName());
+		GameRegistry.registerItem(Bow, Bow.getUnlocalizedName());
+		GameRegistry.registerItem(Arrow, Arrow.getUnlocalizedName());
+		GameRegistry.registerItem(Dye, Dye.getUnlocalizedName());
+		GameRegistry.registerItem(Leash, Leash.getUnlocalizedName());
+		GameRegistry.registerItem(ClayBall, ClayBall.getUnlocalizedName());
+
 
 
 		System.out.println(new StringBuilder().append("[TFC] Registering Food").toString());
@@ -2586,6 +2615,7 @@ public class TFCItems
 		GameRegistry.registerItem(Cherry, Cherry.getUnlocalizedName());
 		GameRegistry.registerItem(Peach, Peach.getUnlocalizedName());
 		GameRegistry.registerItem(Plum, Plum.getUnlocalizedName());
+		GameRegistry.registerItem(Egg, Egg.getUnlocalizedName());
 		GameRegistry.registerItem(EggCooked, EggCooked.getUnlocalizedName());
 		GameRegistry.registerItem(WheatGrain, WheatGrain.getUnlocalizedName());
 		GameRegistry.registerItem(BarleyGrain, BarleyGrain.getUnlocalizedName());
@@ -2660,6 +2690,15 @@ public class TFCItems
 		GameRegistry.registerItem(venisonCooked, venisonCooked.getUnlocalizedName());
 		GameRegistry.registerItem(horseMeatRaw, horseMeatRaw.getUnlocalizedName());
 		GameRegistry.registerItem(horseMeatCooked, horseMeatCooked.getUnlocalizedName());
+		GameRegistry.registerItem(porkchopRaw, porkchopRaw.getUnlocalizedName());
+		GameRegistry.registerItem(porkchopCooked, porkchopCooked.getUnlocalizedName());
+		GameRegistry.registerItem(fishRaw, fishRaw.getUnlocalizedName());
+		GameRegistry.registerItem(fishCooked, fishCooked.getUnlocalizedName());
+		GameRegistry.registerItem(beefRaw, beefRaw.getUnlocalizedName());
+		GameRegistry.registerItem(beefCooked, beefCooked.getUnlocalizedName());
+		GameRegistry.registerItem(chickenRaw, chickenRaw.getUnlocalizedName());
+		GameRegistry.registerItem(chickenCooked, chickenCooked.getUnlocalizedName());
+		
 		GameRegistry.registerItem(WintergreenBerry, WintergreenBerry.getUnlocalizedName());
 		GameRegistry.registerItem(Blueberry, Blueberry.getUnlocalizedName());
 		GameRegistry.registerItem(Raspberry, Raspberry.getUnlocalizedName());
@@ -2798,6 +2837,11 @@ public class TFCItems
 		GameRegistry.registerItem(WroughtIronHelmet, WroughtIronHelmet.getUnlocalizedName());
 		GameRegistry.registerItem(RedSteelHelmet, RedSteelHelmet.getUnlocalizedName());
 		GameRegistry.registerItem(SteelHelmet, SteelHelmet.getUnlocalizedName());
+		
+		GameRegistry.registerItem(LeatherHelmet, LeatherHelmet.getUnlocalizedName());
+		GameRegistry.registerItem(LeatherChestplate, LeatherChestplate.getUnlocalizedName());
+		GameRegistry.registerItem(LeatherLeggings, LeatherLeggings.getUnlocalizedName());
+		GameRegistry.registerItem(LeatherBoots, LeatherBoots.getUnlocalizedName());
 
 		GameRegistry.registerItem(Quiver, Quiver.getUnlocalizedName());
 

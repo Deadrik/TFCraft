@@ -1,21 +1,17 @@
 package com.bioxx.tfc.Blocks.Devices;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.BlockTerra;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockWorkbench extends BlockTerraContainer
+public class BlockWorkbench extends BlockTerra
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon field_94385_a;
@@ -26,13 +22,6 @@ public class BlockWorkbench extends BlockTerraContainer
 	{
 		super(Material.wood);
 		this.setCreativeTab(CreativeTabs.tabRedstone);
-	}
-	@Override
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
-	{
-		if (!world.isRemote)
-			entityplayer.openGui(TerraFirmaCraft.instance, 1, world, i, j, k);
-		return true;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -51,8 +40,4 @@ public class BlockWorkbench extends BlockTerraContainer
 		this.field_94384_b = par1IconRegister.registerIcon("crafting_table_front");
 	}
 
-	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntityWorkbench();
-	}
 }

@@ -1,18 +1,18 @@
 package com.bioxx.tfc.Entities;
 
-import com.bioxx.tfc.api.ICausesDamage;
-import com.bioxx.tfc.api.Enums.EnumDamageType;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.api.ICausesDamage;
+import com.bioxx.tfc.api.Enums.EnumDamageType;
 
 public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 {
@@ -56,7 +56,7 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 			{
 				boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
 
-				EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Items.arrow, 1, this.damageTaken));
+				EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(TFCItems.Arrow, 1, this.damageTaken));
 				EntityItemPickupEvent event = new EntityItemPickupEvent(player, ei);
 
 				if (MinecraftForge.EVENT_BUS.post(event))

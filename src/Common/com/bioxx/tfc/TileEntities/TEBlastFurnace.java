@@ -4,6 +4,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.util.AxisAlignedBB;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.Devices.BlockBlastFurnace;
@@ -16,20 +30,6 @@ import com.bioxx.tfc.api.ISmeltable;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
@@ -200,7 +200,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		//charcoal
 		if(this.charcoalCount > 0)
 		{
-			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(Items.coal, charcoalCount, 1));
+			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, new ItemStack(TFCItems.Coal, charcoalCount, 1));
 			entityitem.motionX = (float) rand.nextGaussian() * f3;
 			entityitem.motionY = (float) rand.nextGaussian() * f3 + 0.2F;
 			entityitem.motionZ = (float) rand.nextGaussian() * f3;
@@ -424,7 +424,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 					EntityItem entity = (EntityItem) iterator.next();
 					boolean _isOre = TFC_Core.isOreIron(entity.getEntityItem());
 
-					if (entity.getEntityItem().getItem() == Items.coal &&
+					if (entity.getEntityItem().getItem() == TFCItems.Coal &&
 							entity.getEntityItem().getItemDamage() == 1 ||
 							entity.getEntityItem().getItem() == TFCItems.Coke)
 					{

@@ -292,7 +292,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	public boolean isBreedingItemTFC(ItemStack is)
 	{
 		return !pregnant && is != null &&
-				(is.getItem() == Items.porkchop || is.getItem() == Items.beef || is.getItem() == TFCItems.muttonRaw);
+				(is.getItem() == TFCItems.porkchopRaw || is.getItem() == TFCItems.beefRaw || is.getItem() == TFCItems.muttonRaw);
 	}
 
 	@Override
@@ -468,14 +468,14 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 						item ==(TFCItems.horseMeatCooked)||
 						item ==(TFCItems.venisonRaw)||
 						item ==(TFCItems.venisonCooked)||
-						item ==(Items.porkchop)||
-						item ==(Items.cooked_porkchop)||
-						item ==(Items.beef)||
-						item ==(Items.cooked_beef)||
-						item ==(Items.chicken)||
-						item ==(Items.cooked_chicken)||
-						item ==(Items.fish)||
-						item ==(Items.cooked_fished)||
+						item ==(TFCItems.porkchopRaw)||
+						item ==(TFCItems.porkchopCooked)||
+						item ==(TFCItems.beefRaw)||
+						item ==(TFCItems.beefCooked)||
+						item ==(TFCItems.chickenRaw)||
+						item ==(TFCItems.chickenCooked)||
+						item ==(TFCItems.fishRaw)||
+						item ==(TFCItems.fishCooked)||
 						item ==(TFCItems.CalamariRaw)||
 						item ==(TFCItems.CalamariCooked))
 				{

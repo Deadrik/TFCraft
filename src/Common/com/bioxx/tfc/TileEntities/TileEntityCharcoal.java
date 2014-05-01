@@ -1,12 +1,13 @@
 package com.bioxx.tfc.TileEntities;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+
+import com.bioxx.tfc.TFCItems;
 
 public class TileEntityCharcoal extends TileEntity
 {
@@ -15,7 +16,7 @@ public class TileEntityCharcoal extends TileEntity
 
 	public TileEntityCharcoal()
 	{
-		charcoal = new ItemStack(Items.coal, 1, 1);
+		charcoal = new ItemStack(TFCItems.Coal, 1, 1);
 		count = 0;
 	}
 

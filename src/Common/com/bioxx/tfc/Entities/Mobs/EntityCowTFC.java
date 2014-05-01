@@ -294,7 +294,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 
 		float foodWeight = ageMod * (this.size_mod * 4000);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
-		TFC_Core.animalDropMeat(this, Items.beef, foodWeight);
+		TFC_Core.animalDropMeat(this, TFCItems.beefRaw, foodWeight);
 	}
 
 	/**

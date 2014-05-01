@@ -46,7 +46,9 @@ public class CraftingHandler
 				HandleItem(e.player, e.craftMatrix, Recipes.Chisels);
 			else if(item == Item.getItemFromBlock(TFCBlocks.Workbench))
 			{
-				e.player.inventory.clearInventory(Item.getItemFromBlock(TFCBlocks.Workbench), -1);
+				if (!e.player.getEntityData().hasKey("craftingTable"))
+					e.player.inventory.clearInventory(Item.getItemFromBlock(TFCBlocks.Workbench), -1);
+				
 				if(!e.player.worldObj.isRemote)
 				{
 					if(!e.player.getEntityData().hasKey("craftingTable"))

@@ -72,7 +72,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		this.tasks.removeTask(this.aiArrowAttack);
 		ItemStack itemstack = this.getHeldItem();
 
-		if (itemstack != null && (itemstack.getItem() == Items.bow || (itemstack.getItem() instanceof ItemJavelin)))
+		if (itemstack != null && (itemstack.getItem() == TFCItems.Bow || (itemstack.getItem() instanceof ItemJavelin)))
 		{
 			this.tasks.addTask(4, this.aiArrowAttack);
 		}
@@ -282,7 +282,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 			if(this.getHeldItem().getItem() instanceof ItemCustomBow)
 			{
 				amnt = this.rand.nextInt(3 + par2);
-				this.dropItem(Items.arrow, amnt);
+				this.dropItem(TFCItems.Arrow, amnt);
 			}
 		}
 
@@ -301,7 +301,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		superAddRandomArmor();
 		if(this.getSkeletonType() == 0)
 		{
-			this.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+			this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.Bow));
 		}
 		else if(this.getSkeletonType() == 1)
 		{
@@ -337,7 +337,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		{
 		case 4:
 			if (par1 == 0)
-				return Items.leather_helmet;
+				return TFCItems.LeatherHelmet;
 			else if (par1 == 1)
 				return TFCItems.CopperHelmet;
 			else if (par1 == 2)
@@ -348,7 +348,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 				return TFCItems.SteelHelmet;
 		case 3:
 			if (par1 == 0)
-				return Items.leather_chestplate;
+				return TFCItems.LeatherChestplate;
 			else if (par1 == 1)
 				return TFCItems.CopperChestplate;
 			else if (par1 == 2)
@@ -359,7 +359,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 				return TFCItems.SteelChestplate;
 		case 2:
 			if (par1 == 0)
-				return Items.leather_leggings;
+				return TFCItems.LeatherLeggings;
 			else if (par1 == 1)
 				return TFCItems.CopperGreaves;
 			else if (par1 == 2)
@@ -370,7 +370,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 				return TFCItems.SteelGreaves;
 		case 1:
 			if (par1 == 0)
-				return Items.leather_boots;
+				return TFCItems.LeatherBoots;
 			else if (par1 == 1)
 				return TFCItems.CopperBoots;
 			else if (par1 == 2)

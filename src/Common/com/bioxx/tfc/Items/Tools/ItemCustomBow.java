@@ -2,6 +2,19 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.ArrowLooseEvent;
+import net.minecraftforge.event.entity.player.ArrowNockEvent;
+
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Entities.EntityProjectileTFC;
 import com.bioxx.tfc.Items.ItemQuiver;
@@ -12,18 +25,6 @@ import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ArrowLooseEvent;
-import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -67,7 +68,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 		if (event.isCanceled())
 			return event.result;
 
-		if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.arrow) || consumeArrowInQuiver(player, false))
+		if (player.capabilities.isCreativeMode || player.inventory.hasItem(TFCItems.Arrow) || consumeArrowInQuiver(player, false))
 			player.setItemInUse(is, this.getMaxItemUseDuration(is));
 
 		return is;
@@ -87,7 +88,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 		boolean flag = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, is) > 0;
 
 		//First we run the normal ammo check to see if the arrow is in the players inventory
-		boolean hasAmmo = flag || player.inventory.hasItem(Items.arrow);
+		boolean hasAmmo = flag || player.inventory.hasItem(TFCItems.Arrow);
 		boolean hasAmmoInQuiver = false;
 		//If there was no ammo in the inventory then we need to check if there is a quiver and if there is ammo inside of it.
 		if(!hasAmmo)
@@ -127,7 +128,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 			if (flag)
 				entityarrow.canBePickedUp = 2;
 			else if(hasAmmo)
-				player.inventory.consumeInventoryItem(Items.arrow);
+				player.inventory.consumeInventoryItem(TFCItems.Arrow);
 
 			if (!world.isRemote)
 				world.spawnEntityInWorld(entityarrow);
@@ -184,7 +185,6 @@ public class ItemCustomBow extends ItemBow implements ISize
 		for (int i = 0; i < iconArray.length; ++i)
 			iconArray[i] = par1IconRegister.registerIcon(this.getIconString() + "_" + bowPullIconNameArray[i]);
 
-		Items.bow.registerIcons(par1IconRegister);
 	}
 
 	@Override
