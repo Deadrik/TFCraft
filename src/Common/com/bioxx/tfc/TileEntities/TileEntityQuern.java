@@ -67,7 +67,7 @@ public class TileEntityQuern extends TileEntity implements IInventory
 							;
 						else if(processItem(TFCItems.OreChunk, 28, Items.redstone, 0, 8))//Cryolite to Redstone
 							;
-						else if(processItem(Items.bone, 0, Items.dye, 15, 2))//Bone Meal
+						else if(processItem(Items.bone, 0, TFCItems.Dye, 15, 2))//Bone Meal
 							;
 						else if(processItem(TFCItems.OreChunk, 34, TFCItems.Powder, 6, 4))//Lapis Powder
 							;

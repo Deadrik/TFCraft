@@ -348,7 +348,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		if(isAdult())
 		{
 			float foodWeight = ageMod*(this.size_mod * 40);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
-			TFC_Core.animalDropMeat(this, Items.chicken, foodWeight);
+			TFC_Core.animalDropMeat(this, TFCItems.chickenRaw, foodWeight);
 			this.dropItem(Items.bone, rand.nextInt(2)+1);
 		}
 	}

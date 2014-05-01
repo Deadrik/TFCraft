@@ -322,14 +322,14 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand, 1, 32767), 1, 600, new ItemStack(Blocks.glass, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand2, 1, 32767), 1, 600, new ItemStack(Blocks.glass, 1)));
 		//Food
-		manager.addIndex(new HeatIndex(new ItemStack(Items.porkchop, 1), 1, 200, new ItemStack(Items.cooked_porkchop, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(Items.beef, 1), 1, 200, new ItemStack(Items.cooked_beef, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.porkchopRaw, 1), 1, 200, new ItemStack(TFCItems.porkchopCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.beefRaw, 1), 1, 200, new ItemStack(TFCItems.beefCooked, 1)).setKeepNBT(true));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.muttonRaw,1),1, 200, new ItemStack(TFCItems.muttonCooked,1)).setKeepNBT(true));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.venisonRaw,1),1, 200, new ItemStack(TFCItems.venisonCooked,1)).setKeepNBT(true));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CalamariRaw,1),1, 200, new ItemStack(TFCItems.CalamariCooked,1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(Items.chicken, 1), 1, 200, new ItemStack(Items.cooked_chicken, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(Items.fish, 1), 1, 200, new ItemStack(Items.cooked_fished, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(Items.egg, 1), 1, 140, new ItemStack(TFCItems.EggCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.chickenRaw, 1), 1, 200, new ItemStack(TFCItems.chickenCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.fishRaw, 1), 1, 200, new ItemStack(TFCItems.fishCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Egg, 1), 1, 140, new ItemStack(TFCItems.EggCooked, 1)).setKeepNBT(true));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.horseMeatRaw, 1), 1, 200, new ItemStack(TFCItems.horseMeatCooked, 1)).setKeepNBT(true));
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WheatDough, 1), 1, 200, new ItemStack(TFCItems.WheatBread, 1)));
@@ -342,7 +342,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, 32767), 0.2, 200, new ItemStack(Items.bowl, 1)));
 
 		//Other
-		manager.addIndex(new HeatIndex(new ItemStack(Items.stick, 1, 32767), 1, 80, new ItemStack(TFCBlocks.Torch, 2)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Stick, 1, 32767), 1, 80, new ItemStack(TFCBlocks.Torch, 2)));
 		//manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WoodenBucketSaltWater, 1, 32767), 4.18, 100, new ItemStack(TFCItems.WoodenBucketSalt, 1)));
 	}
 }

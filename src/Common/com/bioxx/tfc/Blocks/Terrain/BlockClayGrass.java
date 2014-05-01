@@ -2,13 +2,13 @@ package com.bioxx.tfc.Blocks.Terrain;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.block.Block;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class BlockClayGrass extends BlockGrass
 {
@@ -30,7 +30,7 @@ public class BlockClayGrass extends BlockGrass
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return Items.clay_ball;
+		return TFCItems.ClayBall;
 	}
 
 	@Override

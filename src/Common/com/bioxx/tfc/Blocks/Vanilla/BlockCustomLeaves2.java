@@ -2,20 +2,12 @@ package com.bioxx.tfc.Blocks.Vanilla;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -23,6 +15,14 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockCustomLeaves2 extends BlockLeaves
 {
@@ -182,7 +182,7 @@ public class BlockCustomLeaves2 extends BlockLeaves
 	{
 		dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
 		if(new Random().nextInt(100) < 30)
-			dropBlockAsItem(world, i, j, k, new ItemStack(Items.stick, 1));
+			dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Stick, 1));
 		world.setBlockToAir(i, j, k);
 	}
 
@@ -223,7 +223,7 @@ public class BlockCustomLeaves2 extends BlockLeaves
 							entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
 							entityplayer.addExhaustion(0.045F);
 							if(new Random().nextInt(100) < 11)
-								dropBlockAsItem(world, i+x, j+y, k+z, new ItemStack(Items.stick, 1));
+								dropBlockAsItem(world, i+x, j+y, k+z, new ItemStack(TFCItems.Stick, 1));
 							else if(new Random().nextInt(100) < 4 && l != 0)
 								dropBlockAsItem(world, i+x, j+y, k+z, new ItemStack(saplingBlock, 1, l));
 							removeLeaves(world, i+x, j+y, k+z);
@@ -246,7 +246,7 @@ public class BlockCustomLeaves2 extends BlockLeaves
 			entityplayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
 			entityplayer.addExhaustion(0.025F);
 			if(new Random().nextInt(100) < 28)
-				dropBlockAsItem(world, i, j, k, new ItemStack(Items.stick, 1));
+				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Stick, 1));
 			else if(new Random().nextInt(100) < 6 && l != 0)
 				dropBlockAsItem(world, i, j, k, new ItemStack(saplingBlock, 1, l));
 

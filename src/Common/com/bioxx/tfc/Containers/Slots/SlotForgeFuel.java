@@ -1,10 +1,11 @@
 package com.bioxx.tfc.Containers.Slots;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.TFCItems;
 
 public class SlotForgeFuel extends Slot
 {
@@ -15,7 +16,7 @@ public class SlotForgeFuel extends Slot
 
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.getItem() == Items.coal)
+		if(itemstack.getItem() == TFCItems.Coal)
 			return true;
 		return false;
 	}

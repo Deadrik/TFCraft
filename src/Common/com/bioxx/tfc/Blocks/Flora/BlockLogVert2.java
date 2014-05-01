@@ -3,22 +3,22 @@ package com.bioxx.tfc.Blocks.Flora;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.api.Constant.Global;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -61,7 +61,7 @@ public class BlockLogVert2 extends BlockTerra
 		}
 		else if(isHammer)
 		{
-			EntityItem item = new EntityItem(world, i+0.5, j+0.5, k+0.5, new ItemStack(Items.stick, 1+world.rand.nextInt(3)));
+			EntityItem item = new EntityItem(world, i+0.5, j+0.5, k+0.5, new ItemStack(TFCItems.Stick, 1+world.rand.nextInt(3)));
 			world.spawnEntityInWorld(item);
 		}
 		else

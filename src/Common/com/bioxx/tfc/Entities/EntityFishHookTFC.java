@@ -2,10 +2,6 @@ package com.bioxx.tfc.Entities;
 
 import java.util.List;
 
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.Tools.ItemCustomFishingRod;
-import com.bioxx.tfc.api.Util.Helper;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -13,7 +9,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFishHook;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
@@ -23,6 +18,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.Tools.ItemCustomFishingRod;
+import com.bioxx.tfc.api.Util.Helper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -446,7 +447,7 @@ public class EntityFishHookTFC extends EntityFishHook
 			}
 			else if (this.ticksCatchable > 0)
 			{
-				EntityItem entityitem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, ItemFoodTFC.createTag(new ItemStack(Items.fish), Helper.roundNumber(10+rand.nextFloat()*30, 10)));
+				EntityItem entityitem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, ItemFoodTFC.createTag(new ItemStack(TFCItems.fishRaw), Helper.roundNumber(10+rand.nextFloat()*30, 10)));
 				double d5 = this.field_146042_b.posX - this.posX;
 				double d6 = this.field_146042_b.posY - this.posY;
 				double d7 = this.field_146042_b.posZ - this.posZ;

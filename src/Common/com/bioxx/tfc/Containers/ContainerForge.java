@@ -2,12 +2,12 @@ package com.bioxx.tfc.Containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotForge;
 import com.bioxx.tfc.Containers.Slots.SlotForgeFuel;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
@@ -79,7 +79,7 @@ public class ContainerForge extends ContainerTFC
 			}
 			else //Otherwise the shift clicked an item in their inventory and are trying to put it in the forge.
 			{
-				if(slotStack.getItem() == Items.coal)
+				if(slotStack.getItem() == TFCItems.Coal)
 				{
 					int j = 0;
 					while(j < 5)

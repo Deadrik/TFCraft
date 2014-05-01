@@ -505,7 +505,7 @@ public class TEBarrel extends TileEntity implements IInventory
 				else if(Type == 1 && itemstack.getItem() == Items.glass_bottle && liquidLevel > 9 * itemstack.stackSize)
 				{
 					liquidLevel = Math.max(0, liquidLevel - 9 * itemstack.stackSize);
-					itemstack = new ItemStack(Items.potionitem);
+					itemstack = new ItemStack(TFCItems.Potion);
 					updateGui();
 				}
 				else if(Type == 12 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >= 32)

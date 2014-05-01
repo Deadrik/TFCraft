@@ -3,6 +3,20 @@ package com.bioxx.tfc.Blocks.Terrain;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
@@ -12,21 +26,6 @@ import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
 
 public class BlockOre extends BlockCollapsable
 {
@@ -116,7 +115,7 @@ public class BlockOre extends BlockCollapsable
 			Random random = new Random();
 			ItemStack itemstack;
 			if(meta == 14 || meta == 15)
-				itemstack  = new ItemStack(Items.coal,1+random.nextInt(2));
+				itemstack  = new ItemStack(TFCItems.Coal,1+random.nextInt(2));
 			else
 				itemstack  = new ItemStack(TFCItems.OreChunk, 1, damageDropped(ore));
 
@@ -140,7 +139,7 @@ public class BlockOre extends BlockCollapsable
 	public static Item getDroppedItem(int meta)
 	{
 		if(meta == 14 || meta == 15)
-			return Items.coal;
+			return TFCItems.Coal;
 		else
 			return TFCItems.SmallOreChunk;
 	}
@@ -169,7 +168,7 @@ public class BlockOre extends BlockCollapsable
 			int ore = getOreGrade(te, meta);
 
 			if(meta == 14 || meta == 15)
-				itemstack = new ItemStack(Items.coal, 1 + random.nextInt(2));
+				itemstack = new ItemStack(TFCItems.Coal, 1 + random.nextInt(2));
 			else
 				itemstack = new ItemStack(TFCItems.OreChunk, 1, ore);
 			if (itemstack != null)

@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -408,12 +407,12 @@ public class TEForge extends TileEntityFireEntity implements IInventory
 			else if(fuelTimeLeft <= 0 && fireTemp >= 1 && fireItemStacks[7] != null && isSmokeStackValid)
 			{
 				//here we set the temp and burn time based on the fuel in the bottom slot.
-				if(fireItemStacks[7].getItem() == Items.coal && fireItemStacks[7].getItemDamage() == 0)
+				if(fireItemStacks[7].getItem() == TFCItems.Coal && fireItemStacks[7].getItemDamage() == 0)
 				{
 					fuelTimeLeft = 2200;
 					fuelBurnTemp = 1400;
 				}
-				if(fireItemStacks[7].getItem() == Items.coal && fireItemStacks[7].getItemDamage() == 1)
+				if(fireItemStacks[7].getItem() == TFCItems.Coal && fireItemStacks[7].getItemDamage() == 1)
 				{
 					fuelTimeLeft = 1800;
 					fuelBurnTemp = 1350;

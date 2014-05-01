@@ -5,7 +5,6 @@ import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -121,7 +120,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 			{
 				TEWorldItem te =(TEWorldItem) world.getTileEntity(i, j + 1, k);
 				//BlockMeta rockLayer = TFC_Climate.getRockLayer(i, j, k, 0);
-				te.storage[0] = new ItemStack(Items.stick, 1);
+				te.storage[0] = new ItemStack(TFCItems.Stick, 1);
 			}
 		}
 		return true;

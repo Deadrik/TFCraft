@@ -14,6 +14,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEForge;
@@ -61,7 +62,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 						EntityItem entity = (EntityItem)iterator.next();
 						if(entity.getEntityItem().getItem() == Items.paper)
 							hasPaper = 20;
-						else if(entity.getEntityItem().getItem() == Items.stick)
+						else if(entity.getEntityItem().getItem() == TFCItems.Stick)
 							numsticks+=entity.getEntityItem().stackSize;
 					}
 				}
@@ -75,7 +76,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 					for (Iterator iterator = list.iterator(); iterator.hasNext();)
 					{
 						EntityItem entity = (EntityItem)iterator.next();
-						if(entity.getEntityItem().getItem() == Items.stick)
+						if(entity.getEntityItem().getItem() == TFCItems.Stick)
 							entity.setDead();
 						if(entity.getEntityItem().getItem() == Items.paper)
 							entity.setDead();

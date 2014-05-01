@@ -2,20 +2,20 @@ package com.bioxx.tfc.Blocks;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Items.Tools.ItemCustomShovel;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Items.Tools.ItemCustomShovel;
 
 public class BlockCharcoal extends BlockTerra
 {
@@ -72,7 +72,7 @@ public class BlockCharcoal extends BlockTerra
 				while(world.getBlock(i, j+top+1, k) == this)
 					++top;
 
-				dropBlockAsItem(world, i, j, k, new ItemStack(Items.coal,1,1));
+				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Coal,1,1));
 				if(l-1 > 0)
 				{
 					if(world.getBlock(i, j+1, k) == this)
@@ -227,7 +227,7 @@ public class BlockCharcoal extends BlockTerra
 				Random rand = new Random();
 				// Between 50% and 100% of the amount
 				amount = rand.nextInt(amount + 1) + (amount/2);
-				dropBlockAsItem(world, x, y, z, new ItemStack(Items.coal,amount,1));
+				dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Coal,amount,1));
 			}
 		}
 
