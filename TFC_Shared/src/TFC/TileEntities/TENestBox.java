@@ -18,6 +18,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.util.AxisAlignedBB;
 import TFC.TerraFirmaCraft;
 import TFC.API.Entities.IAnimal.GenderEnum;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Time;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.Food.ItemFoodTFC;
@@ -53,7 +54,8 @@ public class TENestBox extends NetworkTileEntity implements IInventory
 		if(list.size()!=0){
 			for(Object e : list)
 			{
-				if(((EntityChickenTFC)e).getGender() == GenderEnum.FEMALE && ((EntityChickenTFC)e).isAdult())
+				if(((EntityChickenTFC)e).getGender() == GenderEnum.FEMALE && ((EntityChickenTFC)e).isAdult() 
+						&& ((EntityChickenTFC)e).getAnimalTypeID() == Helper.stringToInt("chicken"))
 				{
 					return (EntityChickenTFC)e;
 				}
