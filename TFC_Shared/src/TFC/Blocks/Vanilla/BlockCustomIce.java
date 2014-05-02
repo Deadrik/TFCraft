@@ -35,34 +35,12 @@ public class BlockCustomIce extends BlockIce
 	@Override
 	public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
 	{
-		super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
-		Material var7 = par1World.getBlockMaterial(par3, par4 - 1, par5);
-
-		if (var7.blocksMovement() || var7.isLiquid())
-		{
-			par1World.setBlock(par3, par4, par5, getBlockMeltId(par1World,par3,par4,par5,true), 0, 2);
-		}
 	}
 
 	@Override
-	public void breakBlock(World world, int i, int j, int k, int id, int l)
+	public boolean removeBlockByPlayer(World world, EntityPlayer player, int i, int j, int k)
 	{
-		/*
-		if(id == this.blockID){
-			if(world.getBlockId(i,j,k)==Block.waterStill.blockID && l != 0){
-				world.setBlock(i,j,k,TFCBlocks.FreshWaterStill.blockID);
-			}
-			else if( world.getBlockId(i,j,k)==Block.waterMoving.blockID && l != 0){
-				world.setBlock(i,j,k,TFCBlocks.FreshWaterFlowing.blockID);
-			}
-			else if(world.getBlockId(i,j,k)==TFCBlocks.FreshWaterStill.blockID && l != 1){
-				world.setBlock(i,j,k,Block.waterStill.blockID);
-			}
-			else if( world.getBlockId(i,j,k)==TFCBlocks.FreshWaterFlowing.blockID && l != 1){
-				world.setBlock(i,j,k,Block.waterMoving.blockID);
-			}
-		}*/
-		super.breakBlock(world,i,j,k,id,l);
+		return world.setBlock(i, j, k, getBlockMeltId(world, i, j, k, true), 0, 2);
 	}
 
 	@Override
