@@ -84,7 +84,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		{
 			ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
 			if (itemstack != null)
-				par1EntityPlayer.dropItem(itemstack.getItem(), itemstack.stackSize);
+				par1EntityPlayer.dropPlayerItemWithRandomChoice(itemstack, false);
 		}
 
 		this.craftResult.setInventorySlotContents(0, (ItemStack)null);
