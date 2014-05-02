@@ -484,7 +484,10 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		storage[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 			itemstack.stackSize = getInventoryStackLimit();
-		TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
+		if (!worldObj.isRemote)
+		{
+			TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
+		}
 	}
 
 	@Override
