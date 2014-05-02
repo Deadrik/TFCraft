@@ -62,11 +62,11 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 			TFC_Core.bindTexture(InventoryUpperTex2x2);
 		int k = this.guiLeft;
 		int l = this.guiTop;
-		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, 86);
 		//Draw the player avatar
 		func_110423_a(k + 51, l + 75, 30, k + 51 - this.xSize_lo, l + 75 - 50 - this.ySize_lo, this.mc.thePlayer);
 
-		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
+		PlayerInventory.drawInventory(this, width, height, ySize - PlayerInventory.invYSize);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
