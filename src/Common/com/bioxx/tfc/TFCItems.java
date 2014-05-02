@@ -3,6 +3,7 @@ package com.bioxx.tfc;
 import java.util.ArrayList;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -47,6 +48,7 @@ import com.bioxx.tfc.Items.ItemOreSmall;
 import com.bioxx.tfc.Items.ItemPlank;
 import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.ItemRawHide;
+import com.bioxx.tfc.Items.ItemReeds;
 import com.bioxx.tfc.Items.ItemSluice;
 import com.bioxx.tfc.Items.ItemStick;
 import com.bioxx.tfc.Items.ItemStoneBrick;
@@ -54,7 +56,6 @@ import com.bioxx.tfc.Items.ItemTFCArmor;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.Items.ItemTuyere;
 import com.bioxx.tfc.Items.ItemUnfinishedArmor;
-import com.bioxx.tfc.Items.ItemBlocks.ItemSugercane;
 import com.bioxx.tfc.Items.ItemBlocks.ItemWoodDoor;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryJug;
@@ -685,8 +686,6 @@ public class TFCItems
 	public static Item SeedsJute;
 
 	public static Item FruitTreeSapling;
-	public static Item FruitTreeSapling2;
-	public static Item Sugercane;
 
 	public static Item RedApple;
 	public static Item GreenApple;
@@ -897,6 +896,7 @@ public class TFCItems
 
 	public static Item Jute;
 	public static Item JuteFibre;
+	public static Item Reeds;
 
 	public static Item WintergreenBerry;
 	public static Item Blueberry;
@@ -1570,7 +1570,7 @@ public class TFCItems
 		JuteFibre = new ItemTerra().setFolder("plants/").setUnlocalizedName("Jute Fibre").setCreativeTab(TFCTabs.TFCMaterials);
 
 		Items.reeds.setCreativeTab(null);
-		Sugercane = new ItemSugercane().setUnlocalizedName("Sugercane").setCreativeTab(TFCTabs.TFCMaterials).setTextureName("reeds");
+		Reeds = new ItemReeds().setUnlocalizedName("Reeds").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("reeds");
 
 		// Food related items
 		SetupFood();
@@ -2600,6 +2600,7 @@ public class TFCItems
 
 		GameRegistry.registerItem(Jute , Jute.getUnlocalizedName());
 		GameRegistry.registerItem(JuteFibre , JuteFibre.getUnlocalizedName());
+		GameRegistry.registerItem(Reeds , Reeds.getUnlocalizedName());
 		
 		GameRegistry.registerItem(FishingRod, FishingRod.getUnlocalizedName());
 		GameRegistry.registerItem(Coal, Coal.getUnlocalizedName());
@@ -2614,7 +2615,6 @@ public class TFCItems
 
 		System.out.println(new StringBuilder().append("[TFC] Registering Food").toString());
 		GameRegistry.registerItem(FruitTreeSapling, FruitTreeSapling.getUnlocalizedName());
-		GameRegistry.registerItem(Sugercane, Sugercane.getUnlocalizedName());
 		GameRegistry.registerItem(RedApple, RedApple.getUnlocalizedName());
 		GameRegistry.registerItem(Banana, Banana.getUnlocalizedName());
 		GameRegistry.registerItem(Orange, Orange.getUnlocalizedName());

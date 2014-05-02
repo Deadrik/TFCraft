@@ -2,15 +2,15 @@ package com.bioxx.tfc.Blocks.Vanilla;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockReed;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class BlockCustomReed extends BlockReed implements IPlantable
 {
@@ -33,12 +33,12 @@ public class BlockCustomReed extends BlockReed implements IPlantable
 	@Override
 	public Item getItemDropped(int par1, Random par2, int par3)
 	{
-		return TFCItems.Sugercane;
+		return TFCItems.Reeds;
 	}
 
 	@Override
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return TFCItems.Sugercane;
+		return TFCItems.Reeds;
 	}
 }

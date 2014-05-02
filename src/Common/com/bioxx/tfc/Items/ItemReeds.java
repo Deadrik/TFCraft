@@ -1,6 +1,4 @@
-package com.bioxx.tfc.Items.ItemBlocks;
-
-import com.bioxx.tfc.TFCBlocks;
+package com.bioxx.tfc.Items;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -10,11 +8,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemSugercane extends Item
+import com.bioxx.tfc.TFCBlocks;
+
+public class ItemReeds extends Item
 {
 	private Block reeds = TFCBlocks.Reeds;
 
-	public ItemSugercane()
+	public ItemReeds()
 	{
 	}
 
