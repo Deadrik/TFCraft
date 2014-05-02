@@ -24,8 +24,8 @@ public class SlotFoodOnly extends Slot
 	{    	
 		if (itemstack.getItem() instanceof ISize && ((ISize) itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize &&
 		    !(itemstack.getItem() instanceof ItemMeal) &&
-		    (itemstack.getItem() instanceof IFood) ||
-		    itemstack.getItem() instanceof IItemFoodBlock)
+		    (itemstack.getItem() instanceof IFood || itemstack.getItem() instanceof IItemFoodBlock) &&
+			(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("foodWeight") && itemstack.getTagCompound().hasKey("foodDecay")))
 			return true;
 
 		return false;

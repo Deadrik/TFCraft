@@ -8,6 +8,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import TFC.API.IBag;
+import TFC.API.IFood;
+import TFC.API.IItemFoodBlock;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
 import TFC.Items.ItemMeltedMetal;
@@ -34,6 +36,11 @@ public class SlotSizeSmallVessel extends Slot
 				itemstack.getItem() instanceof ItemPotteryBase) {
 			return false;
 		}
+
+		if (itemstack.getItem() instanceof ISize && ((ISize) itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize &&
+			    (itemstack.getItem() instanceof IFood || itemstack.getItem() instanceof IItemFoodBlock) &&
+				!(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("foodWeight") && itemstack.getTagCompound().hasKey("foodDecay")))
+				return false;
 
 		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize && !except)
 		{
