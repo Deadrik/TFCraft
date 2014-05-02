@@ -8,6 +8,7 @@ import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 
 public class EntityPheasantTFC extends EntityChickenTFC
@@ -83,11 +84,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityPheasantTFC) {
-			return true;
-		} else {
-			return false;
-		}
+		return false;
 	}
 
 	@Override
@@ -95,5 +92,11 @@ public class EntityPheasantTFC extends EntityChickenTFC
 		ArrayList<Float> data = new ArrayList<Float>();
 		data.add(entityageable.getEntityData().getFloat("MateSize"));
 		return new EntityPheasantTFC(worldObj, this, data);
+	}
+
+	@Override
+	public int getAnimalTypeID()
+	{
+		return Helper.stringToInt("pheasant");
 	}
 }
