@@ -31,6 +31,7 @@ import TFC.API.ICausesDamage;
 import TFC.API.IInnateArmor;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumDamageType;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
 import TFC.Core.TFC_Time;
@@ -539,15 +540,9 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	}
 
 	@Override
-	public long getAnimalID() 
+	public int getAnimalTypeID()
 	{
-		return animalID;
-	}
-
-	@Override
-	public void setAnimalID(long id) 
-	{
-		animalID = id;
+		return Helper.stringToInt("bear");
 	}
 
 	@Override

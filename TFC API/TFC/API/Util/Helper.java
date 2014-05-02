@@ -30,6 +30,20 @@ public class Helper {
 		}
 		return var21;
 	}
+
+	/**
+	 * @return Returns an integer equal to the byte value of all chars in the passed string added together.
+	 */
+	public static int stringToInt(String s)
+	{
+		int result = 0;
+		for(char c : s.toCharArray())
+		{
+			result += (byte)c;
+		}
+		return result;
+	}
+
 	public static MovingObjectPosition getMovingObjectPositionFromPlayer(World par1World, EntityLivingBase entity, boolean par3)
 	{
 		float var4 = 1.0F;

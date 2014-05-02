@@ -17,9 +17,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.TFCItems;
-import TFC.API.IFood;
 import TFC.API.IInnateArmor;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
 import TFC.Core.TFC_Time;
@@ -297,7 +297,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	{
 		return false;
 	}
-	
+
 	public boolean isBreedingItemTFC(ItemStack is)
 	{
 		return !pregnant && is != null &&
@@ -416,15 +416,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	}
 
 	@Override
-	public long getAnimalID() 
+	public int getAnimalTypeID()
 	{
-		return animalID;
-	}
-
-	@Override
-	public void setAnimalID(long id) 
-	{
-		animalID = id;
+		return Helper.stringToInt("wolf");
 	}
 
 	@Override

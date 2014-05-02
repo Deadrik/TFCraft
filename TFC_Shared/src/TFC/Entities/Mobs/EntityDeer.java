@@ -21,6 +21,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIAvoidEntityTFC;
@@ -480,17 +481,10 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	}
 
 	@Override
-	public long getAnimalID() 
+	public int getAnimalTypeID()
 	{
-		return animalID;
+		return Helper.stringToInt("deer");
 	}
-
-	@Override
-	public void setAnimalID(long id) 
-	{
-		animalID = id;
-	}
-
 
 	@Override
 	public void eatGrassBonus()

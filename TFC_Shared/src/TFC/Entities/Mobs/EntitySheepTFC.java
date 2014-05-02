@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
@@ -281,7 +282,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		return false;
 	}
-	
+
 	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
 	{
 		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
@@ -497,15 +498,9 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	}
 
 	@Override
-	public long getAnimalID() 
+	public int getAnimalTypeID()
 	{
-		return animalID;
-	}
-
-	@Override
-	public void setAnimalID(long id) 
-	{
-		animalID = id;
+		return Helper.stringToInt("sheep");
 	}
 
 	@Override
