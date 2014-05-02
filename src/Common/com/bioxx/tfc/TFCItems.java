@@ -1569,6 +1569,9 @@ public class TFCItems
 		Jute = new ItemTerra().setFolder("plants/").setUnlocalizedName("Jute").setCreativeTab(TFCTabs.TFCMaterials);
 		JuteFibre = new ItemTerra().setFolder("plants/").setUnlocalizedName("Jute Fibre").setCreativeTab(TFCTabs.TFCMaterials);
 
+		Items.reeds.setCreativeTab(null);
+		Sugercane = new ItemSugercane().setUnlocalizedName("Sugercane").setCreativeTab(TFCTabs.TFCMaterials).setTextureName("reeds");
+
 		// Food related items
 		SetupFood();
 
@@ -1644,48 +1647,69 @@ public class TFCItems
 		FoodList = new ArrayList<Item>();
 
 		Egg = new ItemEgg().setSize(EnumSize.SMALL).setUnlocalizedName("egg").setTextureName("egg").setCreativeTab(TFCTabs.TFCFoods);
-		EggCooked = new ItemFoodTFC(11, EnumFoodGroup.Protein).setDecayRate(3.0f).setUnlocalizedName("Egg Cooked");
+
+		//Proteins are in the foodID range of 10,000
 		porkchopRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("porkchopRaw");
-		porkchopCooked = new ItemFoodTFC(38, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("porkchopCooked");
-		fishRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, true).setDecayRate(3.0f).setUnlocalizedName("fishRaw");
-		fishCooked = new ItemFoodTFC(39, EnumFoodGroup.Protein).setDecayRate(2.0f).setUnlocalizedName("fishCooked");
+		porkchopCooked = new ItemFoodTFC(10001, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("porkchopCooked");
+		fishRaw = new ItemFoodTFC(10002, EnumFoodGroup.Protein, false, true).setDecayRate(3.0f).setUnlocalizedName("fishRaw");
+		fishCooked = new ItemFoodTFC(10003, EnumFoodGroup.Protein).setDecayRate(2.0f).setUnlocalizedName("fishCooked");
 		beefRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("beefRaw");
-		beefCooked = new ItemFoodTFC(40, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("beefCooked");
+		beefCooked = new ItemFoodTFC(10004, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("beefCooked");
 		chickenRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("chickenRaw");
-		chickenCooked = new ItemFoodTFC(41, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("chickenCooked");
-		muttonRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("Mutton Raw");
-		muttonCooked = new ItemFoodTFC(48, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("Mutton Cooked");
-		venisonRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("Venison");
-		venisonCooked = new ItemFoodTFC(49, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("VenisonCooked");
-		horseMeatRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("HorseMeat");
-		horseMeatCooked = new ItemFoodTFC(50, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("HorseMeatCooked");
+		chickenCooked = new ItemFoodTFC(10005, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("chickenCooked");
+		Soybean = new ItemFoodTFC(10006, EnumFoodGroup.Protein, true).setUnlocalizedName("Soybeans");
+		EggCooked = new ItemFoodTFC(10007, EnumFoodGroup.Protein).setDecayRate(3.0f).setUnlocalizedName("Egg Cooked");
 		CalamariRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(4.0f).setUnlocalizedName("Calamari Raw");
-		CalamariCooked = new ItemFoodTFC(49, EnumFoodGroup.Protein).setDecayRate(2.0f).setUnlocalizedName("Calamari Cooked");
-		
-		FruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling");
-		RedApple = new ItemFoodTFC(2, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
-		Banana = new ItemFoodTFC(3, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);
-		Orange = new ItemFoodTFC(4, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[2]);
-		GreenApple = new ItemFoodTFC(5, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[3]);
-		Lemon = new ItemFoodTFC(6, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[4]);
-		Olive = new ItemFoodTFC(7, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[5]);
-		Cherry = new ItemFoodTFC(8, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[6]);
-		Peach = new ItemFoodTFC(9, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[7]);
-		Plum = new ItemFoodTFC(10, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[8]);
+		CalamariCooked = new ItemFoodTFC(10008, EnumFoodGroup.Protein).setDecayRate(2.0f).setUnlocalizedName("Calamari Cooked");
+		muttonRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("Mutton Raw");
+		muttonCooked = new ItemFoodTFC(10009, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("Mutton Cooked");
+		venisonRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("Venison");
+		venisonCooked = new ItemFoodTFC(10010, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("VenisonCooked");
+		horseMeatRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("HorseMeat");
+		horseMeatCooked = new ItemFoodTFC(10011, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("HorseMeatCooked");
 
-		Items.reeds.setCreativeTab(null);
-		Sugercane = new ItemSugercane().setUnlocalizedName("Sugercane").setCreativeTab(TFCTabs.TFCMaterials).setTextureName("reeds");
+		//Dairy is in the foodID range of 20,000
+		Cheese = new ItemFoodTFC(20000, EnumFoodGroup.Dairy).setDecayRate(0.5f).setUnlocalizedName("Cheese");
 
-		WheatGrain = new ItemFoodTFC(12, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Grain");
-		BarleyGrain = new ItemFoodTFC(14, EnumFoodGroup.Grain).setUnlocalizedName("Barley Grain");
-		OatGrain = new ItemFoodTFC(16, EnumFoodGroup.Grain).setUnlocalizedName("Oat Grain");
-		RyeGrain = new ItemFoodTFC(18, EnumFoodGroup.Grain).setUnlocalizedName("Rye Grain");
-		RiceGrain = new ItemFoodTFC(20, EnumFoodGroup.Grain).setUnlocalizedName("Rice Grain");
-		MaizeEar = new ItemFoodTFC(22, EnumFoodGroup.Grain, true).setUnlocalizedName("Maize Ear");
+		//Grains are in the foodID range of 30,000
+		WheatGrain = new ItemFoodTFC(30001, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Grain");
+		BarleyGrain = new ItemFoodTFC(30002, EnumFoodGroup.Grain).setUnlocalizedName("Barley Grain");
+		OatGrain = new ItemFoodTFC(30003, EnumFoodGroup.Grain).setUnlocalizedName("Oat Grain");
+		RyeGrain = new ItemFoodTFC(30004, EnumFoodGroup.Grain).setUnlocalizedName("Rye Grain");
+		RiceGrain = new ItemFoodTFC(30005, EnumFoodGroup.Grain).setUnlocalizedName("Rice Grain");
+		MaizeEar = new ItemFoodTFC(30006, EnumFoodGroup.Grain, true).setUnlocalizedName("Maize Ear");
 
-		Tomato = new ItemFoodTFC(24, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Tomato");
-		Potato = new ItemFoodTFC(25, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Potato");
-		Onion = new ItemFoodTFC(27, EnumFoodGroup.Vegetable, true){
+		WheatWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Wheat Whole");
+		BarleyWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Barley Whole");
+		OatWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Oat Whole");
+		RyeWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rye Whole");
+		RiceWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rice Whole");
+
+		WheatGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Wheat Ground");
+		BarleyGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Barley Ground");
+		OatGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Oat Ground");
+		RyeGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rye Ground");
+		RiceGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rice Ground");
+		CornmealGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Cornmeal Ground");
+
+		WheatDough = new ItemFoodTFC(30007, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Wheat Dough");
+		BarleyDough = new ItemFoodTFC(30008, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Barley Dough");
+		OatDough = new ItemFoodTFC(30009, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Oat Dough");
+		RyeDough = new ItemFoodTFC(30010, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Rye Dough");
+		RiceDough = new ItemFoodTFC(30011, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Rice Dough");
+		CornmealDough = new ItemFoodTFC(30012, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Cornmeal Dough");
+
+		WheatBread = new ItemFoodTFC(30013, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Bread");
+		BarleyBread = new ItemFoodTFC(30014, EnumFoodGroup.Grain).setUnlocalizedName("Barley Bread");
+		OatBread = new ItemFoodTFC(30015, EnumFoodGroup.Grain).setUnlocalizedName("Oat Bread");
+		RyeBread = new ItemFoodTFC(30016, EnumFoodGroup.Grain).setUnlocalizedName("Rye Bread");
+		RiceBread = new ItemFoodTFC(30017, EnumFoodGroup.Grain).setUnlocalizedName("Rice Bread");
+		CornBread = new ItemFoodTFC(30018, EnumFoodGroup.Grain).setUnlocalizedName("Corn Bread");
+
+		//Vegetables are in the foodID range of 40,000
+		Tomato = new ItemFoodTFC(40001, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Tomato");
+		Potato = new ItemFoodTFC(40002, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Potato");
+		Onion = new ItemFoodTFC(40003, EnumFoodGroup.Vegetable, true){
 			@Override
 			public void registerIcons(IIconRegister registerer)
 			{
@@ -1703,48 +1727,43 @@ public class TFCItems
 					return this.MetaIcons[1];
 				return super.getIconFromDamage(i);
 			}
-		}.setUnlocalizedName(TFCOptions.iDontLikeOnions?"Rutabaga":"Onion");
-		Cabbage = new ItemFoodTFC(28, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Cabbage");
-		Garlic = new ItemFoodTFC(29, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Garlic");
-		Carrot = new ItemFoodTFC(30, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Carrot");
-		Sugarcane = new ItemTerra().setFolder("plants/").setUnlocalizedName("Sugarcane");
-		Hemp = new ItemTerra().setFolder("plants/").setUnlocalizedName("Hemp");
-		Soybean = new ItemFoodTFC(31, EnumFoodGroup.Protein, true).setUnlocalizedName("Soybeans");
-		Greenbeans = new ItemFoodTFC(32, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Greenbeans");
-		GreenBellPepper = new ItemFoodTFC(34, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Green Bell Pepper");
-		YellowBellPepper = new ItemFoodTFC(35, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Yellow Bell Pepper");
-		RedBellPepper = new ItemFoodTFC(36, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Red Bell Pepper");
-		Squash = new ItemFoodTFC(37, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Squash");
-		Cheese = new ItemFoodTFC(26, EnumFoodGroup.Dairy).setDecayRate(0.5f).setUnlocalizedName("Cheese");
+		}.setUnlocalizedName(TFCOptions.iDontLikeOnions ? "Rutabaga" : "Onion");
+		Cabbage = new ItemFoodTFC(40004, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Cabbage");
+		Garlic = new ItemFoodTFC(40005, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Garlic");
+		Carrot = new ItemFoodTFC(40006, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Carrot");
+		Greenbeans = new ItemFoodTFC(40007, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Greenbeans");
+		GreenBellPepper = new ItemFoodTFC(40008, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Green Bell Pepper");
+		YellowBellPepper = new ItemFoodTFC(40009, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Yellow Bell Pepper");
+		RedBellPepper = new ItemFoodTFC(40010, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Red Bell Pepper");
+		Squash = new ItemFoodTFC(40011, EnumFoodGroup.Vegetable, true).setUnlocalizedName("Squash");
 
-		WheatWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Wheat Whole");
-		BarleyWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Barley Whole");
-		OatWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Oat Whole");
-		RyeWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rye Whole");
-		RiceWhole = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rice Whole");
+		//Fruit are in the foodID range of 50,000
+		RedApple = new ItemFoodTFC(50001, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
+		Banana = new ItemFoodTFC(50002, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);
+		Orange = new ItemFoodTFC(50003, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[2]);
+		GreenApple = new ItemFoodTFC(50004, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[3]);
+		Lemon = new ItemFoodTFC(50005, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[4]);
+		Olive = new ItemFoodTFC(50006, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[5]);
+		Cherry = new ItemFoodTFC(50007, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[6]);
+		Peach = new ItemFoodTFC(50008, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[7]);
+		Plum = new ItemFoodTFC(50009, EnumFoodGroup.Fruit, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[8]);
+
+		WintergreenBerry = new ItemFoodTFC(50010, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Wintergreen Berry");
+		Blueberry = new ItemFoodTFC(50011, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Blueberry");
+		Raspberry = new ItemFoodTFC(50012, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Raspberry");
+		Strawberry = new ItemFoodTFC(50013, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Strawberry");
+		Blackberry = new ItemFoodTFC(50014, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Blackberry");
+		Bunchberry = new ItemFoodTFC(50015, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Bunchberry");
+		Cranberry = new ItemFoodTFC(50016, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Cranberry");
+		Snowberry = new ItemFoodTFC(50017, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Snowberry");
+		Elderberry = new ItemFoodTFC(50018, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Elderberry");
+		Gooseberry = new ItemFoodTFC(50019, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Gooseberry");
+		Cloudberry = new ItemFoodTFC(50020, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Cloudberry");
 
 		MealGeneric = new ItemMeal().setUnlocalizedName("MealGeneric").setCreativeTab(TFCTabs.TFCFoods);
 
-		WheatGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Wheat Ground");
-		BarleyGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Barley Ground");
-		OatGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Oat Ground");
-		RyeGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rye Ground");
-		RiceGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Rice Ground");
-		CornmealGround = new ItemFoodTFC(-1, EnumFoodGroup.Grain, false, false).setFolder("food/").setUnlocalizedName("Cornmeal Ground");
-
-		WheatDough = new ItemFoodTFC(61, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Wheat Dough");
-		BarleyDough = new ItemFoodTFC(62, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Barley Dough");
-		OatDough = new ItemFoodTFC(63, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Oat Dough");
-		RyeDough = new ItemFoodTFC(64, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Rye Dough");
-		RiceDough = new ItemFoodTFC(65, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Rice Dough");
-		CornmealDough = new ItemFoodTFC(66, EnumFoodGroup.Grain, false, false).setUnlocalizedName("Cornmeal Dough");
-
-		WheatBread = new ItemFoodTFC(42, EnumFoodGroup.Grain).setUnlocalizedName("Wheat Bread");
-		BarleyBread = new ItemFoodTFC(43, EnumFoodGroup.Grain).setUnlocalizedName("Barley Bread");
-		OatBread = new ItemFoodTFC(44, EnumFoodGroup.Grain).setUnlocalizedName("Oat Bread");
-		RyeBread = new ItemFoodTFC(45, EnumFoodGroup.Grain).setUnlocalizedName("Rye Bread");
-		RiceBread = new ItemFoodTFC(46, EnumFoodGroup.Grain).setUnlocalizedName("Rice Bread");
-		CornBread = new ItemFoodTFC(47, EnumFoodGroup.Grain).setUnlocalizedName("Corn Bread");
+		Sugarcane = new ItemTerra().setFolder("plants/").setUnlocalizedName("Sugarcane");
+		Hemp = new ItemTerra().setFolder("plants/").setUnlocalizedName("Hemp");
 
 		SeedsWheat = new ItemCustomSeeds(0).setUnlocalizedName("Seeds Wheat");
 		SeedsBarley = new ItemCustomSeeds(5).setUnlocalizedName("Seeds Barley");
@@ -1766,18 +1785,8 @@ public class TFCItems
 		SeedsGreenbean = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Greenbean");
 		SeedsSquash = new ItemCustomSeeds(23).setUnlocalizedName("Seeds Squash");
 		SeedsJute = new ItemCustomSeeds(24).setUnlocalizedName("Seeds Jute");
-
-		WintergreenBerry = new ItemFoodTFC(50, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Wintergreen Berry");
-		Blueberry = new ItemFoodTFC(51, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Blueberry");
-		Raspberry = new ItemFoodTFC(52, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Raspberry");
-		Strawberry = new ItemFoodTFC(53, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Strawberry");
-		Blackberry = new ItemFoodTFC(54, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Blackberry");
-		Bunchberry = new ItemFoodTFC(55, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Bunchberry");
-		Cranberry = new ItemFoodTFC(56, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Cranberry");
-		Snowberry = new ItemFoodTFC(57, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Snowberry");
-		Elderberry = new ItemFoodTFC(58, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Elderberry");
-		Gooseberry = new ItemFoodTFC(59, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Gooseberry");
-		Cloudberry = new ItemFoodTFC(60, EnumFoodGroup.Fruit).setDecayRate(2.0f).setUnlocalizedName("Cloudberry");
+		
+		FruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling");
 
 		//mushroom is a food now, with foodID 61
 		//pumpkin is a food now, id = 61

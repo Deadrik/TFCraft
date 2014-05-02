@@ -116,6 +116,6 @@ public class Global
 	 * environmental factors, food will decay at 50% per 24 hours.
 	 * Easy calculator here: http://www.basic-mathematics.com/nth-root-calculator.html
 	 */
-	public static float FOOD_DECAY_RATE = 1.0170378966055869517978300569768f;
+	public static double FOOD_DECAY_RATE = 1.0170378966055869517978300569768f;
 	public static float FOOD_MAX_WEIGHT = 160;
 }

@@ -40,11 +40,17 @@ public class BlockCustomIce extends BlockIce
 	@Override
 	public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
 	{
-		super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
+		/*super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
 		Material var7 = par1World.getBlock(par3, par4 - 1, par5).getMaterial();
 
 		if (var7.blocksMovement() || var7.isLiquid())
-			par1World.setBlock(par3, par4, par5, getBlockMelt(par1World, par3, par4, par5, true), 0, 2);
+			par1World.setBlock(par3, par4, par5, getBlockMelt(par1World, par3, par4, par5, true), 0, 2);*/
+	}
+
+	@Override
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
+	{
+		return world.setBlock(x, y, z, getBlockMelt(world, x, y, z, true), 0, 2);
 	}
 
 	@Override

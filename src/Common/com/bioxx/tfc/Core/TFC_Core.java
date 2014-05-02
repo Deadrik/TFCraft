@@ -1072,8 +1072,8 @@ public class TFC_Core
 			 * this before everything else so that its only done once per
 			 * inventory
 			 */
-			float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")),
-					TFC_Time.getHourOfDayFromTotalHours(nbt.getInteger("decayTimer")), x, y, z);
+			int day = TFC_Time.getDayOfYearFromDays(TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")));
+			float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(day,nbt.getInteger("decayTimer"), x, y, z);
 			float environmentalDecay = getEnvironmentalDecay(temp) * environmentalDecayFactor;
 
 			if (decay < 0)
@@ -1086,14 +1086,13 @@ public class TFC_Core
 			}
 			else if (decay == 0)
 			{
-				decay = nbt.getFloat("foodWeight") * (world.rand.nextFloat() * 0.005f);
-				nbt.setFloat("foodDecay", decay);
+				decay = (nbt.getFloat("foodWeight") * (world.rand.nextFloat() * 0.005f))*TFCOptions.decayMultiplier;
 			}
 			else
 			{
-				//current decay level * global decay rate / 24 * this item decay rate * environmentla decay rate * protection multiplier * global decay multiplier
-				float d = (((decay * Global.FOOD_DECAY_RATE) / 24) * thisDecayRate * environmentalDecay * protMult)*TFCOptions.decayMultiplier;
-				decay += d;
+				double fdr = Global.FOOD_DECAY_RATE - 1;
+				fdr *= thisDecayRate * environmentalDecay * protMult * TFCOptions.decayMultiplier;
+				decay *= 1 + fdr;
 			}
 			nbt.setInteger("decayTimer", nbt.getInteger("decayTimer") + 1);
 			nbt.setFloat("foodDecay", decay);

@@ -30,13 +30,16 @@ public class ClientOverrides
 	{
 		RenderGlobal renderG = Minecraft.getMinecraft().renderGlobal;
 		int k = 0, j = 0;
-		int renderChunksWide = Helper.getInteger(renderG, "p","field_72766_m", "renderChunksWide", TFCASMLoadingPlugin.runtimeDeobf);
-		int renderChunksTall = Helper.getInteger(renderG, "q","field_72763_n", "renderChunksTall", TFCASMLoadingPlugin.runtimeDeobf);
-		int renderChunksDeep = Helper.getInteger(renderG, "r","field_72764_o", "renderChunksDeep", TFCASMLoadingPlugin.runtimeDeobf);
-		int glRenderListBase = Helper.getInteger(renderG, "s","field_72778_p", "glRenderListBase", TFCASMLoadingPlugin.runtimeDeobf);
-		WorldRenderer[] worldRenderers = (WorldRenderer[])(Helper.getObject(renderG,"o", "field_72765_l", "worldRenderers", TFCASMLoadingPlugin.runtimeDeobf));
-		WorldRenderer[] sortedWorldRenderers = (WorldRenderer[])(Helper.getObject(renderG, "n","field_72768_k", "sortedWorldRenderers", TFCASMLoadingPlugin.runtimeDeobf));
-		List worldRenderersToUpdate = (List)(Helper.getObject(renderG, "m", "field_72767_j", "worldRenderersToUpdate", TFCASMLoadingPlugin.runtimeDeobf));
+		int renderChunksWide = Helper.getInteger(renderG, "w","field_72766_m", "renderChunksWide", TFCASMLoadingPlugin.runtimeDeobf);
+		int renderChunksTall = Helper.getInteger(renderG, "x","field_72763_n", "renderChunksTall", TFCASMLoadingPlugin.runtimeDeobf);
+		int renderChunksDeep = Helper.getInteger(renderG, "y","field_72764_o", "renderChunksDeep", TFCASMLoadingPlugin.runtimeDeobf);
+		int glRenderListBase = Helper.getInteger(renderG, "z","field_72778_p", "glRenderListBase", TFCASMLoadingPlugin.runtimeDeobf);
+		WorldRenderer[] worldRenderers = (WorldRenderer[])(Helper.getObject(renderG,"v", "field_72765_l", "worldRenderers", TFCASMLoadingPlugin.runtimeDeobf));
+		WorldRenderer[] sortedWorldRenderers = (WorldRenderer[])(Helper.getObject(renderG, "u","field_72768_k", "sortedWorldRenderers", TFCASMLoadingPlugin.runtimeDeobf));
+		Object obj = Helper.getObject(renderG, "t", "field_72767_j", "worldRenderersToUpdate", TFCASMLoadingPlugin.runtimeDeobf);
+		if(!(obj instanceof List))
+			return;
+		List worldRenderersToUpdate = (List)(Helper.getObject(renderG, "t", "field_72767_j", "worldRenderersToUpdate", TFCASMLoadingPlugin.runtimeDeobf));
 		World world = (World)(Helper.getObject(renderG, "r", "field_72769_h", "theWorld", TFCASMLoadingPlugin.runtimeDeobf));
 
 		worldRenderersToUpdate.clear();
@@ -50,9 +53,9 @@ public class ClientOverrides
 				{
 					worldRenderers[(j1 * renderChunksTall + i1) * renderChunksWide + l] = new WorldRenderer(world, renderG.tileEntities, l * 16, i1 * 16, j1 * 16, glRenderListBase + j);
 
-					if (Helper.getBoolean(renderG, "w","field_72774_t", "occlusionEnabled", TFCASMLoadingPlugin.runtimeDeobf))
+					if (Helper.getBoolean(renderG, "D","field_72774_t", "occlusionEnabled", TFCASMLoadingPlugin.runtimeDeobf))
 					{
-						worldRenderers[(j1 * renderChunksTall + i1) * renderChunksWide + l].glOcclusionQuery = ((IntBuffer)(Helper.getObject(renderG, "v", "field_72775_s", "glOcclusionQueryBase", TFCASMLoadingPlugin.runtimeDeobf))).get(k);
+						worldRenderers[(j1 * renderChunksTall + i1) * renderChunksWide + l].glOcclusionQuery = ((IntBuffer)(Helper.getObject(renderG, "C", "field_72775_s", "glOcclusionQueryBase", TFCASMLoadingPlugin.runtimeDeobf))).get(k);
 					}
 
 					worldRenderers[(j1 * renderChunksTall + i1) * renderChunksWide + l].isWaitingOnOcclusionQuery = false;
