@@ -401,6 +401,75 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		}
 		else
 		{
+			if (itemstack != null)
+            {
+                boolean flag = false;
+
+                if (this.func_110259_cr())
+                {
+                    byte b0 = -1;
+
+                    if (itemstack.itemID == Item.horseArmorIron.itemID)
+                    {
+                        b0 = 1;
+                    }
+                    else if (itemstack.itemID == Item.horseArmorGold.itemID)
+                    {
+                        b0 = 2;
+                    }
+                    else if (itemstack.itemID == Item.horseArmorDiamond.itemID)
+                    {
+                        b0 = 3;
+                    }
+
+                    if (b0 >= 0)
+                    {
+                        if (!this.isTame())
+                        {
+                            this.makeHorseRearWithSound();
+                            return true;
+                        }
+
+                        this.openGUI(par1EntityPlayer);
+                        return true;
+                    }
+                }
+
+                if (!this.isTame() && !flag)
+                {
+                    if (itemstack != null && itemstack.func_111282_a(par1EntityPlayer, this))
+                    {
+                        return true;
+                    }
+
+                    this.makeHorseRearWithSound();
+                    return true;
+                }
+
+                if (!flag && this.func_110229_cs() && !this.isChested() && itemstack.itemID == Block.chest.blockID)
+                {
+                    this.setChested(true);
+                    this.playSound("mob.chickenplop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+                    flag = true;
+                    this.func_110226_cD();
+                }
+
+                if (!flag && this.func_110253_bW() && !this.isHorseSaddled() && itemstack.itemID == Item.saddle.itemID)
+                {
+                    this.openGUI(par1EntityPlayer);
+                    return true;
+                }
+
+                if (flag)
+                {
+                    if (!par1EntityPlayer.capabilities.isCreativeMode && --itemstack.stackSize == 0)
+                    {
+                        par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
+                    }
+
+                    return true;
+                }
+            }
 			if (this.func_110253_bW() && this.riddenByEntity == null)
 			{
 				if (itemstack != null && itemstack.func_111282_a(par1EntityPlayer, this))
@@ -516,6 +585,36 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		par1NBTTagCompound.setFloat("MateSize", mateSizeMod);
 		par1NBTTagCompound.setLong("ConceptionTime",conception);
 		par1NBTTagCompound.setInteger("Age", getBirthDay());
+		
+		if (this.isChested())
+        {
+            NBTTagList nbttaglist = new NBTTagList();
+
+            for (int i = 2; i < this.horseChest.getSizeInventory(); ++i)
+            {
+                ItemStack itemstack = this.horseChest.getStackInSlot(i);
+
+                if (itemstack != null)
+                {
+                    NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                    nbttagcompound1.setByte("Slot", (byte)i);
+                    itemstack.writeToNBT(nbttagcompound1);
+                    nbttaglist.appendTag(nbttagcompound1);
+                }
+            }
+
+            par1NBTTagCompound.setTag("Items", nbttaglist);
+        }
+
+        if (this.horseChest.getStackInSlot(1) != null)
+        {
+            par1NBTTagCompound.setTag("ArmorItem", this.horseChest.getStackInSlot(1).writeToNBT(new NBTTagCompound("ArmorItem")));
+        }
+
+        if (this.horseChest.getStackInSlot(0) != null)
+        {
+            par1NBTTagCompound.setTag("SaddleItem", this.horseChest.getStackInSlot(0).writeToNBT(new NBTTagCompound("SaddleItem")));
+        }
 	}
 
 	/**
@@ -542,6 +641,51 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		mateSizeMod = nbt.getFloat("MateSize");
 		conception = nbt.getLong("ConceptionTime");
 		this.setAge(nbt.getInteger ("Age"));
+		
+		if (this.isChested())
+        {
+            NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
+            this.func_110226_cD();
+
+            for (int i = 0; i < nbttaglist.tagCount(); ++i)
+            {
+                NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+                int j = nbttagcompound1.getByte("Slot") & 255;
+
+                if (j >= 2 && j < this.horseChest.getSizeInventory())
+                {
+                    this.horseChest.setInventorySlotContents(j, ItemStack.loadItemStackFromNBT(nbttagcompound1));
+                }
+            }
+        }
+
+        ItemStack itemstack;
+
+        if (par1NBTTagCompound.hasKey("ArmorItem"))
+        {
+            itemstack = ItemStack.loadItemStackFromNBT(par1NBTTagCompound.getCompoundTag("ArmorItem"));
+
+            if (itemstack != null && func_110211_v(itemstack.itemID))
+            {
+                this.horseChest.setInventorySlotContents(1, itemstack);
+            }
+        }
+
+        if (par1NBTTagCompound.hasKey("SaddleItem"))
+        {
+            itemstack = ItemStack.loadItemStackFromNBT(par1NBTTagCompound.getCompoundTag("SaddleItem"));
+
+            if (itemstack != null && itemstack.itemID == Item.saddle.itemID)
+            {
+                this.horseChest.setInventorySlotContents(0, itemstack);
+            }
+        }
+        else if (par1NBTTagCompound.getBoolean("Saddle"))
+        {
+            this.horseChest.setInventorySlotContents(0, new ItemStack(Item.saddle));
+        }
+
+        this.func_110232_cE();
 	}
 
 	/**
