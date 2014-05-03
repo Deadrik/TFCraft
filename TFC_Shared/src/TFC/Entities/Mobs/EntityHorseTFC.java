@@ -443,7 +443,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
                     }
 
                     this.makeHorseRearWithSound();
-                    return true;
                 }
 
                 if (!flag && this.func_110229_cs() && !this.isChested() && itemstack.itemID == Block.chest.blockID)
