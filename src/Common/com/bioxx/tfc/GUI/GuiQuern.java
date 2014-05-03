@@ -21,10 +21,10 @@ public class GuiQuern extends GuiContainer
 
 	public GuiQuern(InventoryPlayer inventoryplayer, TileEntityQuern wb, World world, int i, int j, int k)
 	{
-		super(new ContainerQuern(inventoryplayer, wb,world, i, j, k));
+		super(new ContainerQuern(inventoryplayer, wb, world, i, j, k));
 		table = wb;
 		xSize = 176;
-		ySize = 85+PlayerInventory.invYSize;
+		ySize = 85 + PlayerInventory.invYSize;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class GuiQuern extends GuiContainer
 		int i1 = (height - ySize) / 2;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
 
-		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
+		PlayerInventory.drawInventory(this, width, height, ySize - PlayerInventory.invYSize);
 	}
 
 	@Override

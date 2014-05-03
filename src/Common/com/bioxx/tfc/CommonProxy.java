@@ -148,6 +148,7 @@ public class CommonProxy
 			GameRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack");
 			GameRegistry.registerTileEntity(TileEntityAnvil.class, "TerraAnvil");
 			GameRegistry.registerTileEntity(TEWorldItem.class, "worldItem");
+			GameRegistry.registerTileEntity(TileEntityQuern.class, "quern");
 		}
 
 		EntityRegistry.registerGlobalEntityID(EntitySquidTFC.class, "squidTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0xbbbbbb);

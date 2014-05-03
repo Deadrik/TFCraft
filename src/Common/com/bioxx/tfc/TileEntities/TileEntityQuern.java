@@ -2,12 +2,6 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.api.IFood;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -20,6 +14,12 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.api.IFood;
 
 public class TileEntityQuern extends TileEntity implements IInventory
 {
@@ -35,78 +35,73 @@ public class TileEntityQuern extends TileEntity implements IInventory
 		if(!worldObj.isRemote)
 			TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 
+		hasQuern = storage[2] != null;
+
 		if(shouldRotate)
 		{
 			rotatetimer++;
-			//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);//Disabled this to stop the rendering lag until we have a better solution like the bellows
-			if(rotatetimer == 20)
+			if(rotatetimer == 90) //This needs to be 73 if speed is * 1 in TESRQuern, use 90 for speed * 4
 			{
-				if(rotation == 3)
-				{
-					rotation = 0;
-					shouldRotate = false;
-					if(!worldObj.isRemote)
-					{
-						if(processItem(TFCItems.WheatGrain, 0, TFCItems.WheatGround, 0, 1))//Wheat Flour
-							;
-						else if(processItem(TFCItems.RyeGrain, 0, TFCItems.RyeGround, 0, 1))//Rye Flour
-							;
-						else if(processItem(TFCItems.OatGrain, 0, TFCItems.OatGround, 0, 1))//Oat Flour
-							;
-						else if(processItem(TFCItems.BarleyGrain, 0, TFCItems.BarleyGround, 0, 1))//Barley Flour
-							;
-						else if(processItem(TFCItems.RiceGrain, 0, TFCItems.RiceGround, 0, 1))//Rice Flour
-							;
-						else if(processItem(TFCItems.MaizeEar, 0, TFCItems.CornmealGround, 0, 1))//Cornmeal
-							;
-						else if(processItem(TFCItems.OreChunk, 16, TFCItems.Powder, 1, 4))//Kaolinite Powder
-							;
-						else if(processItem(TFCItems.OreChunk, 20, TFCItems.Powder, 2, 4))//Graphite Powder
-							;
-						else if(processItem(TFCItems.OreChunk, 27, Items.redstone, 0, 8))//Cinnabar to Redstone
-							;
-						else if(processItem(TFCItems.OreChunk, 28, Items.redstone, 0, 8))//Cryolite to Redstone
-							;
-						else if(processItem(Items.bone, 0, TFCItems.Dye, 15, 2))//Bone Meal
-							;
-						else if(processItem(TFCItems.OreChunk, 34, TFCItems.Powder, 6, 4))//Lapis Powder
-							;
-						else if(processItem(TFCItems.SmallOreChunk, 9, TFCItems.Powder, 8, 1))//Small Malachite Powder
-							;
-						else if(processItem(TFCItems.OreChunk, 58, TFCItems.Powder, 8, 2))//Poor Malachite Powder
-							;
-						else if(processItem(TFCItems.OreChunk, 9, TFCItems.Powder, 8, 4))//Malachite Powder
-							;
-						else if(processItem(TFCItems.OreChunk, 44, TFCItems.Powder, 8, 6))//Rich Malachite Powder
-							;
-						else if(processItem(TFCItems.SmallOreChunk, 3, TFCItems.Powder, 5, 1))//Small Hematite Powder
-							;
-						else if(processItem(TFCItems.OreChunk, 52, TFCItems.Powder, 5, 2))//Poor Hematite Powder
-							;
-						else if(processItem(TFCItems.OreChunk, 3, TFCItems.Powder, 5, 4))//Hematite Powder
-							;
-						else if(processItem(TFCItems.OreChunk, 38, TFCItems.Powder, 5, 6))//Rich Hematite Powder
-							;
-						else if(processItem(TFCItems.SmallOreChunk, 11, TFCItems.Powder, 7, 1))//Small Limonite Powder
-							;
-						else if(processItem(TFCItems.OreChunk, 60, TFCItems.Powder, 7, 2))//Poor Limonite Powder
-							;
-						else if(processItem(TFCItems.OreChunk, 11, TFCItems.Powder, 7, 4))//Limonite Powder
-							;
-						else if(processItem(TFCItems.OreChunk, 46, TFCItems.Powder, 7, 6))//Rich Limonite Powder
-							;
-						else if(processItem(TFCItems.OreChunk, 31, TFCItems.Fertilizer, 0, 4))//Sylvite to Fertilizer
-							;
-						else if(processItem(TFCItems.LooseRock, 5, TFCItems.Powder, 9, 4))//Rock Salt to Salt
-							;
-
-						if(storage[2] != null)
-							damageStackInSlot(2);
-					}
-				}
-				else
-					rotation++;
 				rotatetimer = 0;
+				shouldRotate = false;
+				if(!worldObj.isRemote)
+				{
+					if(processItem(TFCItems.WheatGrain, 0, TFCItems.WheatGround, 0, 1))//Wheat Flour
+						;
+					else if(processItem(TFCItems.RyeGrain, 0, TFCItems.RyeGround, 0, 1))//Rye Flour
+						;
+					else if(processItem(TFCItems.OatGrain, 0, TFCItems.OatGround, 0, 1))//Oat Flour
+						;
+					else if(processItem(TFCItems.BarleyGrain, 0, TFCItems.BarleyGround, 0, 1))//Barley Flour
+						;
+					else if(processItem(TFCItems.RiceGrain, 0, TFCItems.RiceGround, 0, 1))//Rice Flour
+						;
+					else if(processItem(TFCItems.MaizeEar, 0, TFCItems.CornmealGround, 0, 1))//Cornmeal
+						;
+					else if(processItem(TFCItems.OreChunk, 16, TFCItems.Powder, 1, 4))//Kaolinite Powder
+						;
+					else if(processItem(TFCItems.OreChunk, 20, TFCItems.Powder, 2, 4))//Graphite Powder
+						;
+					else if(processItem(TFCItems.OreChunk, 27, Items.redstone, 0, 8))//Cinnabar to Redstone
+						;
+					else if(processItem(TFCItems.OreChunk, 28, Items.redstone, 0, 8))//Cryolite to Redstone
+						;
+					else if(processItem(Items.bone, 0, TFCItems.Dye, 15, 2))//Bone Meal
+						;
+					else if(processItem(TFCItems.OreChunk, 34, TFCItems.Powder, 6, 4))//Lapis Powder
+						;
+					else if(processItem(TFCItems.SmallOreChunk, 9, TFCItems.Powder, 8, 1))//Small Malachite Powder
+						;
+					else if(processItem(TFCItems.OreChunk, 58, TFCItems.Powder, 8, 2))//Poor Malachite Powder
+						;
+					else if(processItem(TFCItems.OreChunk, 9, TFCItems.Powder, 8, 4))//Malachite Powder
+						;
+					else if(processItem(TFCItems.OreChunk, 44, TFCItems.Powder, 8, 6))//Rich Malachite Powder
+						;
+					else if(processItem(TFCItems.SmallOreChunk, 3, TFCItems.Powder, 5, 1))//Small Hematite Powder
+						;
+					else if(processItem(TFCItems.OreChunk, 52, TFCItems.Powder, 5, 2))//Poor Hematite Powder
+						;
+					else if(processItem(TFCItems.OreChunk, 3, TFCItems.Powder, 5, 4))//Hematite Powder
+						;
+					else if(processItem(TFCItems.OreChunk, 38, TFCItems.Powder, 5, 6))//Rich Hematite Powder
+						;
+					else if(processItem(TFCItems.SmallOreChunk, 11, TFCItems.Powder, 7, 1))//Small Limonite Powder
+						;
+					else if(processItem(TFCItems.OreChunk, 60, TFCItems.Powder, 7, 2))//Poor Limonite Powder
+						;
+					else if(processItem(TFCItems.OreChunk, 11, TFCItems.Powder, 7, 4))//Limonite Powder
+						;
+					else if(processItem(TFCItems.OreChunk, 46, TFCItems.Powder, 7, 6))//Rich Limonite Powder
+						;
+					else if(processItem(TFCItems.OreChunk, 31, TFCItems.Fertilizer, 0, 4))//Sylvite to Fertilizer
+						;
+					else if(processItem(TFCItems.LooseRock, 5, TFCItems.Powder, 9, 4))//Rock Salt to Salt
+						;
+
+					if(storage[2] != null)
+						damageStackInSlot(2);
+				}
 			}
 		}
 	}
@@ -152,14 +147,13 @@ public class TileEntityQuern extends TileEntity implements IInventory
 
 	public void damageStackInSlot(int i)
 	{
-		if(storage[i] != null) 
+		if(storage[i] != null)
 		{
 			storage[i].damageItem(i, new EntityCowTFC(this.worldObj));
 			if(storage[i].stackSize == 0 || storage[i].getItemDamage() == storage[i].getMaxDamage())
 			{
 				setInventorySlotContents(i, null);
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-				//TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 160);
 			}
 		}
 	}
@@ -243,8 +237,6 @@ public class TileEntityQuern extends TileEntity implements IInventory
 		storage[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 			itemstack.stackSize = getInventoryStackLimit();
-		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		//TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 	}
 
 	@Override
@@ -273,7 +265,6 @@ public class TileEntityQuern extends TileEntity implements IInventory
 	@Override
 	public void closeInventory()
 	{
-		//TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 	}
 
 	@Override
@@ -308,6 +299,7 @@ public class TileEntityQuern extends TileEntity implements IInventory
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
 		hasQuern = nbttagcompound.getBoolean("hasQuern");
+		shouldRotate = nbttagcompound.getBoolean("shouldRotate");
 	}
 
 	@Override
@@ -327,6 +319,7 @@ public class TileEntityQuern extends TileEntity implements IInventory
 		}
 		nbttagcompound.setTag("Items", nbttaglist);
 		nbttagcompound.setBoolean("hasQuern", hasQuern);
+		nbttagcompound.setBoolean("shouldRotate", shouldRotate);
 	}
 
 	@Override
@@ -342,42 +335,4 @@ public class TileEntityQuern extends TileEntity implements IInventory
 	{
 		readFromNBT(pkt.func_148857_g());
 	}
-
-
-
-
-//TODO
-//	@Override
-//	public void createInitPacket(DataOutputStream outStream) throws IOException {
-//		outStream.writeBoolean(storage[2] != null);
-//	}
-//
-//	@Override
-//	public void handleDataPacket(DataInputStream inStream) throws IOException {
-//		this.hasQuern = inStream.readBoolean();
-//		this.shouldRotate = inStream.readBoolean();
-//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-//	}
-//
-//	public Packet createUpdatePacket() {
-//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-//		DataOutputStream dos=new DataOutputStream(bos);
-//		try {
-//			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-//			dos.writeInt(xCoord);
-//			dos.writeInt(yCoord);
-//			dos.writeInt(zCoord);
-//			dos.writeBoolean(storage[2] != null);
-//			dos.writeBoolean(shouldRotate);
-//		} catch (IOException e) {
-//		}
-//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-//	}
-//
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public void handleInitPacket(DataInputStream inStream) throws IOException {
-//		this.hasQuern = inStream.readBoolean();
-//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-//	}
 }

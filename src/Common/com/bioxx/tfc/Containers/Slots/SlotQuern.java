@@ -1,10 +1,10 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.TFCItems;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.TFCItems;
 
 public class SlotQuern extends Slot
 {
@@ -14,9 +14,9 @@ public class SlotQuern extends Slot
 	}
 
 	@Override
-	public boolean isItemValid(ItemStack itemstack)
+	public boolean isItemValid(ItemStack is)
 	{
-		if(itemstack.getItem() == TFCItems.Quern)
+		if(is.getItem() == TFCItems.Quern)
 			return true;
 		return false;
 	}
@@ -28,9 +28,9 @@ public class SlotQuern extends Slot
 	}
 
 	@Override
-	public void putStack(ItemStack par1ItemStack)
+	public void putStack(ItemStack is)
 	{
-		if (par1ItemStack != null) par1ItemStack.stackSize = 1;
-		super.putStack(par1ItemStack);
+		if (is != null) is.stackSize = 1;
+		super.putStack(is);
 	}
 }

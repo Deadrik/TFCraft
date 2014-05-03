@@ -94,7 +94,6 @@ import com.bioxx.tfc.Render.Blocks.RenderNestBox;
 import com.bioxx.tfc.Render.Blocks.RenderOre;
 import com.bioxx.tfc.Render.Blocks.RenderPipeBasic;
 import com.bioxx.tfc.Render.Blocks.RenderPottery;
-import com.bioxx.tfc.Render.Blocks.RenderQuern;
 import com.bioxx.tfc.Render.Blocks.RenderStand;
 import com.bioxx.tfc.Render.Blocks.RenderSupportBeam;
 import com.bioxx.tfc.Render.Blocks.RenderToolRack;
@@ -118,6 +117,7 @@ import com.bioxx.tfc.Render.TESR.TESRFirepit;
 import com.bioxx.tfc.Render.TESR.TESRFoodPrep;
 import com.bioxx.tfc.Render.TESR.TESRIngotPile;
 import com.bioxx.tfc.Render.TESR.TESRPottery;
+import com.bioxx.tfc.Render.TESR.TESRQuern;
 import com.bioxx.tfc.Render.TESR.TESRSeaWeed;
 import com.bioxx.tfc.Render.TESR.TESRToolrack;
 import com.bioxx.tfc.Render.TESR.TESRWorldItem;
@@ -130,6 +130,7 @@ import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
 import com.bioxx.tfc.TileEntities.TileEntityPottery;
+import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 import com.bioxx.tfc.api.Enums.EnumTree;
@@ -213,7 +214,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.FenceGateRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFenceGate());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.toolRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderToolRack());
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.foodPrepRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.quernRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderQuern());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.quernRenderId = RenderingRegistry.getNextAvailableRenderId(), new TESRQuern());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.fluidRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderWoodConstruct());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.barrelRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBarrel());
@@ -265,6 +266,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack", new TESRToolrack());
 		ClientRegistry.registerTileEntity(TileEntityAnvil.class, "Anvil", new TESRAnvil());
 		ClientRegistry.registerTileEntity(TEWorldItem.class, "worlditem", new TESRWorldItem());
+		ClientRegistry.registerTileEntity(TileEntityQuern.class, "quern", new TESRQuern());
 	}
 
 	@Override

@@ -1,5 +1,14 @@
 package com.bioxx.tfc.Blocks.Devices;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -9,22 +18,14 @@ import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockQuern extends BlockTerraContainer
 {
-	IIcon QuernBase;
-	IIcon QuernTop1;
-	IIcon QuernTop2;
+	private IIcon QuernBase;
+	private IIcon QuernTop1;
+	private IIcon QuernTop2;
 
 	public BlockQuern()
 	{
@@ -37,22 +38,24 @@ public class BlockQuern extends BlockTerraContainer
 	{
 		super.onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
 		TileEntityQuern te = (TileEntityQuern) world.getTileEntity(x, y, z);
+		//System.out.println("----X:"+hitX+" Z:"+hitZ+" Y:"+hitY+" Side:"+side); //Nice way to find out where the mouse is pointing at
+		Boolean hit = (side == 1 && hitX >= 0.75 && hitZ >= 0.30 && hitZ <= 0.70) ||
+				(side == 5 && hitZ >= 0.4 && hitZ <= 0.6 && hitY >= 0.85);
 		if(!world.isRemote)
 		{
-			if(!te.shouldRotate && hitX >= 0.65 && hitZ >= 0.65 && te.storage[2] != null)
+			if(!te.shouldRotate && hit && te.storage[2] != null)
 			{
 				te.shouldRotate = true;
 				world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
-				//TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(x, y, z, te.createUpdatePacket(), 160);
 				world.playSoundEffect(x, y, z, TFC_Sounds.STONEDRAG, 1, 1);
 				entityplayer.triggerAchievement(TFC_Achievements.achQuern);
 			}
-			else if((!te.shouldRotate && (hitX < 0.65 || hitZ < 0.65)) || te.storage[2] == null)
+			else if((!te.shouldRotate && !hit) || te.storage[2] == null)
 			{
 				entityplayer.openGui(TerraFirmaCraft.instance, 33, world, x, y, z);
 			}
 		}
-		else if(!te.shouldRotate && hitX >= 0.65 && hitZ >= 0.65 && te.hasQuern)
+		else if(!te.shouldRotate && hit && te.hasQuern)
 		{
 			te.shouldRotate = true;
 		}
@@ -103,25 +106,25 @@ public class BlockQuern extends BlockTerraContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5)
+	public boolean shouldSideBeRendered(IBlockAccess access, int x, int y, int z, int side)
 	{
 		return true;
 	}
 	
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int i, int j, int k)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.825, k+1);
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 0.825, z + 1);
 	}
 	
 	@Override
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int i, int j, int k)
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.825, k+1);
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 0.825, z + 1);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createNewTileEntity(World world, int var2)
 	{
 		return new TileEntityQuern();
 	}
