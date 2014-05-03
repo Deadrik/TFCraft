@@ -441,7 +441,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityCowTFC && this.isAdult()) {
+		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityCowTFC) {
 			return true;
 		} else {
 			return false;

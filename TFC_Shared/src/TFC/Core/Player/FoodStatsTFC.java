@@ -128,7 +128,7 @@ public class FoodStatsTFC
 				if (this.stomachLevel >= this.getMaxStomach(player)/4 && player.shouldHeal())
 					//Player heals 1% per 30 in game minutes
 					player.heal((int) (player.getMaxHealth()*0.01f));
-				else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.85f && !TFC_Core.isPlayerInDebugMode(player))
+				else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.5f && !TFC_Core.isPlayerInDebugMode(player))
 					//Players loses health at a rate of 5% per 30 minutes if they are starving
 					player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth()*0.05f), 10));
 			}

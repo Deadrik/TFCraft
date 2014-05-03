@@ -92,7 +92,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityPlayer.class, 200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false));
 		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-		//targetTasks.addTask(2, new EntityAIPanic(this,moveSpeed*1.5F));
+		targetTasks.addTask(2, new EntityAIPanic(this,moveSpeed*1.5F));
 
 		mateSizeMod = 1f;
 		/*fooditems.add(Item.beefRaw.itemID);
