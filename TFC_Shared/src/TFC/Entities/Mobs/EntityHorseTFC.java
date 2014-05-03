@@ -357,16 +357,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			//player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
 
-		if (itemstack != null && this.isBreedingItem(itemstack) && this.getGrowingAge() == 0 && this.inLove <= 0)
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && super.inLove <= 0)
 		{
 			if (!par1EntityPlayer.capabilities.isCreativeMode)
 			{
-				--itemstack.stackSize;
-
-				if (itemstack.stackSize <= 0)
-				{
-					par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
-				}
+				par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(par1EntityPlayer.getHeldItem(), worldObj, this)));
 			}
 
 			this.func_110196_bT();
