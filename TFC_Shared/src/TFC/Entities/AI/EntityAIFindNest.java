@@ -154,7 +154,6 @@ public class EntityAIFindNest extends EntityAIBase
 			if(this.currentTick - 40 > this.lastCheckedTick){
 				if(this.compoundDistance < 0.5){
 					failureDepressionMap.put((this.sitableBlockX+","+this.sitableBlockY+","+this.sitableBlockZ), TFC_Time.getTotalTicks()+24000);
-					System.out.println("failure at "+this.sitableBlockX+","+this.sitableBlockY+","+this.sitableBlockZ +" for creature "+this.theCreature.entityId);
 					this.end = true;
 				}
 				else{
