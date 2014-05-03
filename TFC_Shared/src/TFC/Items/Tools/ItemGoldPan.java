@@ -209,6 +209,7 @@ public class ItemGoldPan extends ItemTerra
 			double dy = (world.rand.nextFloat() - 0.5) * d + 1.0d;
 			double dz = (world.rand.nextFloat() - 0.5) * d;
 			EntityItem drop = new EntityItem(world, x + dx, y + dy, z + dz, stack);
+			drop.setVelocity(0, 0, 0);
 			drop.delayBeforeCanPickup = 10;
 			world.spawnEntityInWorld(drop);
 		}
