@@ -27,6 +27,7 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.IInnateArmor;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -288,7 +289,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	{
 		return false;
 	}
-	
+
 	public boolean isBreedingItemTFC(ItemStack is)
 	{
 		return !pregnant && is != null &&
@@ -402,15 +403,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	}
 
 	@Override
-	public long getAnimalID()
+	public int getAnimalTypeID()
 	{
-		return animalID;
-	}
-
-	@Override
-	public void setAnimalID(long id)
-	{
-		animalID = id;
+		return Helper.stringToInt("wolf");
 	}
 
 	@Override

@@ -2,11 +2,6 @@ package com.bioxx.tfc.Entities.Mobs;
 
 import java.util.ArrayList;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -23,6 +18,12 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityDeer extends EntityAnimal implements IAnimal
 {
@@ -487,17 +488,10 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	}
 
 	@Override
-	public long getAnimalID()
+	public int getAnimalTypeID()
 	{
-		return animalID;
+		return Helper.stringToInt("deer");
 	}
-
-	@Override
-	public void setAnimalID(long id)
-	{
-		animalID = id;
-	}
-
 
 	@Override
 	public void eatGrassBonus()

@@ -3,16 +3,18 @@ package com.bioxx.tfc.Containers.Slots;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
-import com.bioxx.tfc.api.IBag;
-import com.bioxx.tfc.api.ISize;
-import com.bioxx.tfc.api.Enums.EnumSize;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Items.ItemMeltedMetal;
+import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
+import com.bioxx.tfc.api.IBag;
+import com.bioxx.tfc.api.IFood;
+import com.bioxx.tfc.api.IItemFoodBlock;
+import com.bioxx.tfc.api.ISize;
+import com.bioxx.tfc.api.Enums.EnumSize;
 
 public class SlotSizeSmallVessel extends Slot
 {
@@ -31,11 +33,16 @@ public class SlotSizeSmallVessel extends Slot
 		boolean except = exceptions.contains(itemstack.getItem());
 
 		if(itemstack.getItem() instanceof IBag ||
-				itemstack.getItem() instanceof ItemMeltedMetal || 
+				itemstack.getItem() instanceof ItemMeltedMetal ||
 				itemstack.getItem() instanceof ItemPotteryBase)
 		{
 			return false;
 		}
+
+		if (itemstack.getItem() instanceof ISize && ((ISize) itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize &&
+				(itemstack.getItem() instanceof IFood || itemstack.getItem() instanceof IItemFoodBlock) &&
+				!(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("foodWeight") && itemstack.getTagCompound().hasKey("foodDecay")))
+				return false;
 
 		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize && !except)
 			return true;

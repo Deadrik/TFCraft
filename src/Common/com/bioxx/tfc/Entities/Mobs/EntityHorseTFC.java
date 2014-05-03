@@ -54,6 +54,7 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -1943,15 +1944,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	}
 
 	@Override
-	public long getAnimalID() 
+	public int getAnimalTypeID()
 	{
-		return animalID;
-	}
-
-	@Override
-	public void setAnimalID(long id) 
-	{
-		animalID = id;
+		return Helper.stringToInt("horse");
 	}
 
 	@Override
@@ -1970,7 +1965,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	{
 		return false;
 	}
-	
+
 	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
 	{
 		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||

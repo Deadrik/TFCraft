@@ -2,13 +2,6 @@ package com.bioxx.tfc.Entities.Mobs;
 
 import java.util.ArrayList;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.AI.EntityAIFindNest;
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -34,11 +27,18 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAIFindNest;
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Util.Helper;
+
 public class EntityChickenTFC extends EntityChicken implements IAnimal
 {
 	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 
-	protected long animalID;
 	protected int sex;
 	protected int hunger;
 	protected long hasMilkTime;
@@ -56,16 +56,15 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	int degreeOfDiversion = 2;
 	/** The time until the next egg is spawned. */
 	public long nextEgg;
-	public int EggTime = TFC_Time.dayLength*2;
+	public int EggTime = TFC_Time.dayLength;
 
 	public EntityChickenTFC(World par1World)
 	{
 		super(par1World);
 		this.setSize(0.3F, 0.7F);
-		this.timeUntilNextEgg = this.rand.nextInt(6000) + 24000;
-
+		this.timeUntilNextEgg = 9999;//Here we set the vanilla egg timer to 9999
+		this.nextEgg = TFC_Time.getTotalTicks() + EggTime;
 		hunger = 168000;
-		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		mateSizeMod = 1f;
 		sex = rand.nextInt(2);
 
@@ -204,22 +203,15 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 
 		roosterCrow();
 
-		if (--this.timeUntilNextEgg < 0)
-		{
-			this.timeUntilNextEgg = 0;
-		}
+		//Make sure that the vanilla egg timer is never after to reach 0 but always setting it back to 9999
+		this.timeUntilNextEgg = 9999;
 		/**
 		 * This Cancels out the changes made to growingAge by EntityAgeable
 		 * */
 		TFC_Core.PreventEntityDataUpdate = true;
 		if(getGender()==GenderEnum.MALE)
 		{
-			timeUntilNextEgg=10000;
-		}
-		else if(timeUntilNextEgg == 0)
-		{
-			//This prevents the vanilla chicken from ever laying an egg.
-			timeUntilNextEgg = 2;
+			nextEgg=10000;
 		}
 
 		super.onLivingUpdate();
@@ -277,7 +269,6 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	{
 		super.writeEntityToNBT(nbt);
 		nbt.setInteger ("Sex", sex);
-		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
 
 		nbt.setFloat ("Strength Modifier", strength_mod);
@@ -300,7 +291,6 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
 		super.readEntityFromNBT(nbt);
-		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
 
@@ -414,10 +404,9 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal)
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityChickenTFC)
+		if(animal.getGender() != this.getGender() && animal.isAdult() && animal.getAnimalTypeID() == this.getAnimalTypeID()) 
 			return true;
-		else
-			return false;
+		return false;
 	}
 
 	@Override
@@ -438,15 +427,9 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 
 	@Override
-	public long getAnimalID()
+	public int getAnimalTypeID()
 	{
-		return animalID;
-	}
-
-	@Override
-	public void setAnimalID(long id)
-	{
-		animalID = id;
+		return Helper.stringToInt("chicken");
 	}
 
 	@Override

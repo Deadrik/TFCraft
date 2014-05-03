@@ -28,6 +28,7 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 {
@@ -281,7 +282,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		return false;
 	}
-	
+
 	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
 	{
 		return !pregnant && (
@@ -498,15 +499,9 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	}
 
 	@Override
-	public long getAnimalID()
+	public int getAnimalTypeID()
 	{
-		return animalID;
-	}
-
-	@Override
-	public void setAnimalID(long id)
-	{
-		animalID = id;
+		return Helper.stringToInt("sheep");
 	}
 
 	@Override

@@ -34,6 +34,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityPigTFC extends EntityPig implements IAnimal
 {
@@ -384,7 +385,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	{
 		return false;
 	}
-	
+
 	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
 	{
 		return !pregnant && (
@@ -520,15 +521,9 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	}
 
 	@Override
-	public long getAnimalID()
+	public int getAnimalTypeID()
 	{
-		return animalID;
-	}
-
-	@Override
-	public void setAnimalID(long id)
-	{
-		animalID = id;
+		return Helper.stringToInt("pig");
 	}
 
 	@Override

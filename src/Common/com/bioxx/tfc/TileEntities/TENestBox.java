@@ -3,12 +3,6 @@ package com.bioxx.tfc.TileEntities;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.GUI.GuiNestBox;
-import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
-
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -22,6 +16,14 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.GUI.GuiNestBox;
+import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
+import com.bioxx.tfc.api.Util.Helper;
+
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class TENestBox extends TileEntity implements IInventory
@@ -57,8 +59,11 @@ public class TENestBox extends TileEntity implements IInventory
 		{
 			for(Object e : list)
 			{
-				if(((EntityChickenTFC)e).getGender() == GenderEnum.FEMALE && ((EntityChickenTFC)e).isAdult())
+				if(((EntityChickenTFC)e).getGender() == GenderEnum.FEMALE && ((EntityChickenTFC)e).isAdult()
+						&& ((EntityChickenTFC)e).getAnimalTypeID() == Helper.stringToInt("chicken"))
+				{
 					return (EntityChickenTFC)e;
+				}
 			}
 		}
 

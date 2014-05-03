@@ -2,15 +2,16 @@ package com.bioxx.tfc.Entities.Mobs;
 
 import java.util.ArrayList;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.Entities.IAnimal;
-
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.init.Items;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityPheasantTFC extends EntityChickenTFC
 {
@@ -84,10 +85,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityPheasantTFC)
-			return true;
-		else
-			return false;
+		return false;
 	}
 
 	@Override
@@ -96,5 +94,11 @@ public class EntityPheasantTFC extends EntityChickenTFC
 		ArrayList<Float> data = new ArrayList<Float>();
 		data.add(entityageable.getEntityData().getFloat("MateSize"));
 		return new EntityPheasantTFC(worldObj, this, data);
+	}
+
+	@Override
+	public int getAnimalTypeID()
+	{
+		return Helper.stringToInt("pheasant");
 	}
 }

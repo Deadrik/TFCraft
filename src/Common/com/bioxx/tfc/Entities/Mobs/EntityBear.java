@@ -3,15 +3,6 @@ package com.bioxx.tfc.Entities.Mobs;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_MobData;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.api.ICausesDamage;
-import com.bioxx.tfc.api.IInnateArmor;
-import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Enums.EnumDamageType;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -37,6 +28,16 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_MobData;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.api.ICausesDamage;
+import com.bioxx.tfc.api.IInnateArmor;
+import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal, IInnateArmor
 {
@@ -528,15 +529,9 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	}
 
 	@Override
-	public long getAnimalID() 
+	public int getAnimalTypeID()
 	{
-		return animalID;
-	}
-
-	@Override
-	public void setAnimalID(long id) 
-	{
-		animalID = id;
+		return Helper.stringToInt("bear");
 	}
 
 	@Override

@@ -27,6 +27,7 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityCowTFC extends EntityCow implements IAnimal
 {
@@ -325,22 +326,22 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 				}
 			}
 		}
-		ItemStack itemstack = player.inventory.getCurrentItem();
-		
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && !super.isInLove())
-        {
-            if (!player.capabilities.isCreativeMode)
-            {
-            	player.inventory.setInventorySlotContents(player.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
-            }
 
-            this.func_146082_f(player);
-            return true;
-        }
-        else
-        {
-            return super.interact(player);
-        }
+		ItemStack itemstack = player.inventory.getCurrentItem();
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && !super.isInLove())
+		{
+			if (!player.capabilities.isCreativeMode)
+			{
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
+			}
+
+			this.func_146082_f(player);
+			return true;
+		}
+		else
+		{
+			return super.interact(player);
+		}
 	}
 
 	@Override
@@ -348,7 +349,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	{
 		return false;
 	}
-	
+
 	public boolean isBreedingItemTFC(ItemStack par1ItemStack)
 	{
 		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
@@ -483,15 +484,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	}
 
 	@Override
-	public long getAnimalID() 
+	public int getAnimalTypeID()
 	{
-		return animalID;
-	}
-
-	@Override
-	public void setAnimalID(long id) 
-	{
-		animalID = id;
+		return Helper.stringToInt("cow");
 	}
 
 	@Override

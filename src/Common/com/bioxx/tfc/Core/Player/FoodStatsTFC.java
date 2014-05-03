@@ -1,5 +1,11 @@
 package com.bioxx.tfc.Core.Player;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
+
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -10,11 +16,6 @@ import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Util.Helper;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -124,7 +125,7 @@ public class FoodStatsTFC
 					//Player heals 1% per 30 in game minutes
 					player.heal((int) (player.getMaxHealth() * 0.01f));
 				}
-				else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.5f && !TFC_Core.isPlayerInDebugMode(player))
+				else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.85f && !TFC_Core.isPlayerInDebugMode(player))
 				{
 					//Players loses health at a rate of 5% per 30 minutes if they are starving
 					player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth() * 0.05f), 10));
