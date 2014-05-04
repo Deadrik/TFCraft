@@ -28,7 +28,7 @@ public class TESRQuern extends TileEntitySpecialRenderer implements ISimpleBlock
 	public void renderTileEntityAt(TileEntity te, double xDis, double yDis, double zDis, float f)
 	{
 		TileEntityQuern teq = (TileEntityQuern) te;
-		
+
 		Tessellator tess = Tessellator.instance;
 		GL11.glPushMatrix();
 		{
@@ -36,22 +36,29 @@ public class TESRQuern extends TileEntitySpecialRenderer implements ISimpleBlock
 			this.renderBase(tess);
 			if(teq.hasQuern)
 			{
-				this.renderTop(tess, teq.rotatetimer, teq.getWorldObj().rand);
+				// Both can be used if you want the square block top + the round stone animation
+				// Last parameter is for rendering the round stone sides, no need to render if you can't see them :)
+				this.renderRoundTop(tess, teq.rotatetimer, teq.getWorldObj().rand, false); // Renders a round Quern top stone
+				this.renderSquareTop(tess, teq.rotatetimer, teq.getWorldObj().rand); // Renders a square Quern top stone
+				renderWoodHandle(tess, teq.rotatetimer, teq.getWorldObj().rand); // Renders the wooden handle
 			}
 		}
 		GL11.glPopMatrix();
 	}
 
-	private void renderTop(Tessellator t, int pos, Random rand)
+	private void renderRoundTop(Tessellator t, int pos, Random rand, Boolean renderSides)
 	{
 		int sides = 15; // how many sides should the quern stone have
-		double speed = pos * 4; // * 4 will make 2 turns, * 1 will make 1 turn
+		double speed = pos * 4; // * 4 will make 2 turns, * 1 will make 1 turn, also look at TileEntityQuern
 		double i = 0.625; // where should top rendering start
 		double j = i + 0.2; // thickness of the quern stone
+		if(!renderSides) j = i + 0.201; // fixes the double render glitch when rendering the square top
 		double k = j + 0.175; // height of the wooden handle
 		double C = 0.5; // center
-		if(pos > 0) C = 0.5 + (-0.003 + (-0.003 - 0.003) * rand.nextDouble()); // this can be commented out if it becomes a performance issue
 		double rad = 0.5; // radius of the quern stone
+
+		// This gives a vibrating animation effect, it can be commented out if it becomes a performance issue
+		if(pos > 0) C = 0.494 + ((rand.nextDouble() * (0.003 - (-0.003))) + 0.003);
 
 		for(int l = 0; l < sides; l++)
 		{
@@ -70,13 +77,16 @@ public class TESRQuern extends TileEntitySpecialRenderer implements ISimpleBlock
 			double xx2 = Math.cos(b) * rad + C;
 			double yy2 = Math.sin(b) * rad + C;
 
-			bindTexture(TOP1_TEXTURE);
-			t.startDrawingQuads();
-			t.addVertexWithUV(x1, i, y1, xx1, yy1);
-			t.addVertexWithUV(x1, j, y1, xx1, yy2);
-			t.addVertexWithUV(x2, j, y2, xx2, yy2);
-			t.addVertexWithUV(x2, i, y2, xx2, yy1);
-			t.draw();
+			if(renderSides)
+			{
+				bindTexture(TOP1_TEXTURE);
+				t.startDrawingQuads();
+				t.addVertexWithUV(x1, i, y1, xx1, yy1);
+				t.addVertexWithUV(x1, j, y1, xx1, yy2);
+				t.addVertexWithUV(x2, j, y2, xx2, yy2);
+				t.addVertexWithUV(x2, i, y2, xx2, yy1);
+				t.draw();
+			}
 
 			bindTexture(TOP2_TEXTURE);
 			t.startDrawing(GL11.GL_TRIANGLES);
@@ -85,6 +95,52 @@ public class TESRQuern extends TileEntitySpecialRenderer implements ISimpleBlock
 			t.addVertexWithUV(x2, j, y2, xx2, yy2);
 			t.draw();
 		}
+	}
+
+	private void renderSquareTop(Tessellator t, int pos, Random rand)
+	{
+		double i = 0.625; // bottom square point
+		double j = 0.825; // top square point
+		bindTexture(BASE_TEXTURE);
+		t.startDrawingQuads();
+		//SOUTH
+		t.addVertexWithUV(0, i, 0, 1, 1 - i);
+		t.addVertexWithUV(0, j, 0, 1, 0);
+		t.addVertexWithUV(1, j, 0, 0, 0);
+		t.addVertexWithUV(1, i, 0, 0, 1 - i);
+		//WEST
+		t.addVertexWithUV(1, i, 0, 1, 1 - i);
+		t.addVertexWithUV(1, j, 0, 1, 0);
+		t.addVertexWithUV(1, j, 1, 0, 0);
+		t.addVertexWithUV(1, i, 1, 0, 1 - i);
+		//NORTH
+		t.addVertexWithUV(1, i, 1, 1, 1 - i);
+		t.addVertexWithUV(1, j, 1, 1, 0);
+		t.addVertexWithUV(0, j, 1, 0, 0);
+		t.addVertexWithUV(0, i, 1, 0, 1 - i);
+		//EAST
+		t.addVertexWithUV(0, i, 1, 1, 1 - i);
+		t.addVertexWithUV(0, j, 1, 1, 0);
+		t.addVertexWithUV(0, j, 0, 0, 0);
+		t.addVertexWithUV(0, i, 0, 0, 1 - i);
+		t.draw();
+		//TOP
+		bindTexture(TOP2_TEXTURE);
+		t.startDrawingQuads();
+		t.addVertexWithUV(0, j, 0, 0, 0);
+		t.addVertexWithUV(0, j, 1, 0, 1);
+		t.addVertexWithUV(1, j, 1, 1, 1);
+		t.addVertexWithUV(1, j, 0, 1, 0);
+		t.draw();
+	}
+
+	private void renderWoodHandle(Tessellator t, int pos, Random rand)
+	{
+		double speed = pos * 4; // * 4 will make 2 turns, * 1 will make 1 turn, also look at TileEntityQuern
+		double j = 0.825; // where should wood handle rendering start
+		double k = j + 0.175; // height of the wooden handle
+		double C = 0.5; // center
+		double rad = 0.5; // radius of the quern stone
 
 		//Draw wooden handle
 		double a = (((pos * 4) - 5 + speed) * Math.PI) / 180;
