@@ -266,6 +266,7 @@ public class TFCItems
 
 	public static Item Coal;
 	public static Item OreChunk;
+	public static Item SmallOreChunk;
 	public static Item Logs;
 	public static Item Barrel;
 
@@ -784,7 +785,6 @@ public class TFCItems
 	public static Item StoneKnife;
 	public static Item StoneKnifeHead;
 	public static Item StoneHammerHead;
-	public static Item SmallOreChunk;
 	public static Item SinglePlank;
 
 	public static Item minecartEmpty;
@@ -1198,6 +1198,8 @@ public class TFCItems
 		HCSteelIngot = new ItemIngot(false).setUnlocalizedName("HC Steel Ingot");
 
 		OreChunk = new ItemOre().setFolder("ore/").setUnlocalizedName("Ore");
+		SmallOreChunk = new ItemOreSmall().setUnlocalizedName("Small Ore");
+		Powder = new ItemTerra().setMetaNames(Global.POWDER).setUnlocalizedName("Powder").setCreativeTab(TFCTabs.TFCMaterials);
 		Logs = new ItemLogs().setUnlocalizedName("Log");
 
 		//javelins
@@ -1378,8 +1380,6 @@ public class TFCItems
 		RedSteelProPickHead = new ItemMiscToolHead().setUnlocalizedName("Red Steel ProPick Head");
 		SteelProPickHead = new ItemMiscToolHead().setUnlocalizedName("Steel ProPick Head");
 
-		Powder = new ItemTerra().setMetaNames(Global.POWDER).setUnlocalizedName("Powder").setCreativeTab(TFCTabs.TFCMaterials);
-
 		/**
 		 * Scythe
 		 * */
@@ -1451,7 +1451,6 @@ public class TFCItems
 		StoneHammerHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("Stone Hammer Head");
 
 		StoneKnife = new ItemCustomKnife(IgExToolMaterial, 40).setUnlocalizedName("Stone Knife").setMaxDamage(IgExStoneUses);
-		SmallOreChunk = new ItemOreSmall().setUnlocalizedName("Small Ore");
 		SinglePlank = new ItemPlank().setUnlocalizedName("SinglePlank");
 
 		RedSteelBucketEmpty = (new ItemCustomRedSteelBucket(Blocks.air)).setUnlocalizedName("Red Steel Bucket Empty");
@@ -2255,6 +2254,7 @@ public class TFCItems
 		GameRegistry.registerItem(HCSteelIngot, HCSteelIngot.getUnlocalizedName());
 
 		GameRegistry.registerItem(OreChunk, OreChunk.getUnlocalizedName());
+		GameRegistry.registerItem(SmallOreChunk, SmallOreChunk.getUnlocalizedName());
 		GameRegistry.registerItem(Logs, Logs.getUnlocalizedName());
 
 		GameRegistry.registerItem(IgInStoneJavelin, IgInStoneJavelin.getUnlocalizedName());
@@ -2499,7 +2499,6 @@ public class TFCItems
 		GameRegistry.registerItem(StoneHammerHead, StoneHammerHead.getUnlocalizedName());
 		GameRegistry.registerItem(StoneKnife, StoneKnife.getUnlocalizedName());
 
-		GameRegistry.registerItem(SmallOreChunk, SmallOreChunk.getUnlocalizedName());
 		GameRegistry.registerItem(SinglePlank, SinglePlank.getUnlocalizedName());
 
 		GameRegistry.registerItem(RedSteelBucketEmpty, RedSteelBucketEmpty.getUnlocalizedName());
@@ -2610,7 +2609,8 @@ public class TFCItems
 		GameRegistry.registerItem(Dye, Dye.getUnlocalizedName());
 		GameRegistry.registerItem(Leash, Leash.getUnlocalizedName());
 		GameRegistry.registerItem(ClayBall, ClayBall.getUnlocalizedName());
-
+		GameRegistry.registerItem(Powder, Powder.getUnlocalizedName());
+		GameRegistry.registerItem(Fertilizer, Fertilizer.getUnlocalizedName());
 
 
 		System.out.println(new StringBuilder().append("[TFC] Registering Food").toString());

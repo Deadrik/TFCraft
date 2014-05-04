@@ -2024,7 +2024,6 @@ public class Recipes
 		manager.addRecipe(new QuernRecipe(Items.bone, 0, TFCItems.Dye, 15, 2));//Bone Meal
 		manager.addRecipe(new QuernRecipe(TFCItems.OreChunk, 34, TFCItems.Powder, 6, 4));//Lapis Powder
 		manager.addRecipe(new QuernRecipe(TFCItems.SmallOreChunk, 9, TFCItems.Powder, 8, 1));//Small Malachite Powder
-		manager.addRecipe(new QuernRecipe(TFCItems.SmallOreChunk, 9, TFCItems.Powder, 8, 1));//Small Malachite Powder
 		manager.addRecipe(new QuernRecipe(TFCItems.OreChunk, 58, TFCItems.Powder, 8, 2));//Poor Malachite Powder
 		manager.addRecipe(new QuernRecipe(TFCItems.OreChunk, 9, TFCItems.Powder, 8, 4));//Malachite Powder
 		manager.addRecipe(new QuernRecipe(TFCItems.OreChunk, 44, TFCItems.Powder, 8, 6));//Rich Malachite Powder

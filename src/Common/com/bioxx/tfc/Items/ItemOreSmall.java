@@ -2,15 +2,15 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemOreSmall extends ItemOre
 {
@@ -22,23 +22,24 @@ public class ItemOreSmall extends ItemOre
 	}
 
 	@Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
+	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
 		for(int i = 0; i < 14; i++)
-			list.add(new ItemStack(this,1,i));
+			list.add(new ItemStack(this, 1, i));
 	}
 
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		icons = new IIcon[14];
-		for(int i = 0; i < 14; i++) {
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + textureFolder+MetaNames[i]+" Small Ore");
+		MetaIcons = new IIcon[14];
+		for(int i = 0; i < 14; i++)
+		{
+			MetaIcons[i] = registerer.registerIcon(Reference.ModID + ":" + textureFolder+MetaNames[i] + " Small Ore");
 		}
 	}
 
 	@Override
-	public short GetMetalReturnAmount(ItemStack is) 
+	public short GetMetalReturnAmount(ItemStack is)
 	{
 		int dam = is.getItemDamage();
 		switch(dam)

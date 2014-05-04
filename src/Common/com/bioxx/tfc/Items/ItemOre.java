@@ -2,6 +2,12 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -11,18 +17,8 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
-
 public class ItemOre extends ItemTerra implements ISmeltable
-{	
-	public IIcon[] icons;
-
+{
 	public ItemOre()
 	{
 		super();
@@ -56,38 +52,13 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
-	{
-		for(int i = 0; i < MetaNames.length; i++)
-		{
-			list.add(new ItemStack(this,1,i));
-		}
-	}
-
-	@Override
-	public IIcon getIconFromDamage(int meta)
-	{
-		return icons[meta];
-	}
-
-	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		icons = new IIcon[MetaNames.length];
+		MetaIcons = new IIcon[MetaNames.length];
 		for(int i = 0; i < MetaNames.length; i++)
 		{
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + textureFolder+MetaNames[i] + " Ore");
+			MetaIcons[i] = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[i] + " Ore");
 		}
-	}
-
-	@Override
-	public String getUnlocalizedName(ItemStack itemstack)
-	{
-		if(MetaNames != null)
-		{
-			return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
-		}
-		return super.getUnlocalizedName(itemstack);
 	}
 
 	@Override
@@ -95,7 +66,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	{
 		if(GetMetalType(is) != null)
 		{
-			if (TFC_Core.showExtraInformation()) 
+			if (TFC_Core.showExtraInformation())
 			{
 				arraylist.add(StatCollector.translateToLocal("gui.units") + ": " + GetMetalReturnAmount(is));
 			}

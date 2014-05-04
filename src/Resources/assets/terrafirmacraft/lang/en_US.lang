@@ -463,19 +463,16 @@ item.dyePowder.white.name=Bone Meal
 item.dyePowder.yellow.name=Yellow Dye
 
 item.Coke.name=Coke
-item.Flux.name=Flux
 item.Powder.Flux.name=Flux
-item.Powder.GraphitePowder.name=Graphite Powder
-item.Powder.HematitePowder.name=Hematite Powder
-item.Powder.KaolinitePowder.name=Kaolinite Powder
-item.Powder.LapisLazuliPowder.name=Lapis Lazuli Powder
-item.Powder.LimonitePowder.name=Limonite Powder
-item.Powder.MalachitePowder.name=Malachite Powder
+item.Powder.Graphite Powder.name=Graphite Powder
+item.Powder.Hematite Powder.name=Hematite Powder
+item.Powder.Kaolinite Powder.name=Kaolinite Powder
+item.Powder.Lapis Lazuli Powder.name=Lapis Lazuli Powder
+item.Powder.Limonite Powder.name=Limonite Powder
+item.Powder.Malachite Powder.name=Malachite Powder
 item.Powder.Salt.name=Salt
 item.Powder.Saltpeter Powder.name=Saltpeter Powder
-item.Saltpeter Powder.name=Saltpeter
 item.Powder.Sulfur Powder.name=Sulfur Powder
-item.Sulfur Powder.name=Sulfur Powder
 
 #=========
 #= Stone =
@@ -737,7 +734,7 @@ item.Ore.Gypsum.name=Gypsum
 item.Ore.Jet.name=Jet
 item.Ore.Kaolinite.name=Kaolinite
 item.Ore.Kimberlite.name=Kimberlite
-item.Ore.LapisLazuli.name=Lapis Lazuli
+item.Ore.Lapis Lazuli.name=Lapis Lazuli
 item.Ore.Lignite.name=Lignite
 item.Ore.Microcline.name=Microcline
 item.Ore.Olivine.name=Olivine
