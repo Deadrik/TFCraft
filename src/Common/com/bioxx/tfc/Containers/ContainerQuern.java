@@ -2,7 +2,6 @@ package com.bioxx.tfc.Containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -14,6 +13,7 @@ import com.bioxx.tfc.Containers.Slots.SlotQuern;
 import com.bioxx.tfc.Containers.Slots.SlotQuernGrain;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
+import com.bioxx.tfc.api.Crafting.QuernManager;
 
 public class ContainerQuern extends ContainerTFC
 {
@@ -81,37 +81,12 @@ public class ContainerQuern extends ContainerTFC
 
 			if (clickedIndex < 3)
 			{
-				if (!this.mergeItemStack(clickedStack, 3, inventorySlots.size(), true)) 
+				if (!this.mergeItemStack(clickedStack, 3, inventorySlots.size(), true))
 					return null;
 			}
 			else if (clickedIndex >= 3
 					&& clickedIndex < inventorySlots.size()
-					&& clickedStack.getItem() == TFCItems.WheatGrain
-					|| clickedStack.getItem() == TFCItems.BarleyGrain
-					|| clickedStack.getItem() == TFCItems.RyeGrain
-					|| clickedStack.getItem() == TFCItems.OatGrain
-					|| clickedStack.getItem() == TFCItems.RiceGrain
-					|| clickedStack.getItem() == TFCItems.MaizeEar
-					|| clickedStack.getItem() == Items.bone
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 16)//Kaolinite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 20)//Graphite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 27)//Cinnabar
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 28)//Cryolite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 34)//Lapis Lazuli
-					|| (clickedStack.getItem() == TFCItems.SmallOreChunk && clickedStack.getItemDamage() == 11)//Small Limonite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 11)//Limonite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 46)//Rich Limonite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 60)//Poor Limonite
-					|| (clickedStack.getItem() == TFCItems.SmallOreChunk && clickedStack.getItemDamage() == 9)//Small Malachite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 9)//Malachite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 44)//Rich Malachite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 58)//Poor Malachite
-					|| (clickedStack.getItem() == TFCItems.SmallOreChunk && clickedStack.getItemDamage() == 3)//Small Hematite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 3)//Hematite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 38)//Rich Hematite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 52)//Poor Hematite
-					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 31)//Sylvite
-					|| (clickedStack.getItem() == TFCItems.LooseRock && clickedStack.getItemDamage() == 5))//Rock Salt
+					&& QuernManager.getInstance().isValidItem(clickedStack.getItem()))
 			{
 				if (!this.mergeItemStack(clickedStack, 0, 1, false))
 					return null;

@@ -4,9 +4,7 @@ import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -15,11 +13,12 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.IFood;
+import com.bioxx.tfc.api.Crafting.QuernManager;
+import com.bioxx.tfc.api.Crafting.QuernRecipe;
 
 public class TileEntityQuern extends TileEntity implements IInventory
 {
@@ -46,100 +45,75 @@ public class TileEntityQuern extends TileEntity implements IInventory
 				shouldRotate = false;
 				if(!worldObj.isRemote)
 				{
-					if(processItem(TFCItems.WheatGrain, 0, TFCItems.WheatGround, 0, 1))//Wheat Flour
-						;
-					else if(processItem(TFCItems.RyeGrain, 0, TFCItems.RyeGround, 0, 1))//Rye Flour
-						;
-					else if(processItem(TFCItems.OatGrain, 0, TFCItems.OatGround, 0, 1))//Oat Flour
-						;
-					else if(processItem(TFCItems.BarleyGrain, 0, TFCItems.BarleyGround, 0, 1))//Barley Flour
-						;
-					else if(processItem(TFCItems.RiceGrain, 0, TFCItems.RiceGround, 0, 1))//Rice Flour
-						;
-					else if(processItem(TFCItems.MaizeEar, 0, TFCItems.CornmealGround, 0, 1))//Cornmeal
-						;
-					else if(processItem(TFCItems.OreChunk, 16, TFCItems.Powder, 1, 4))//Kaolinite Powder
-						;
-					else if(processItem(TFCItems.OreChunk, 20, TFCItems.Powder, 2, 4))//Graphite Powder
-						;
-					else if(processItem(TFCItems.OreChunk, 27, Items.redstone, 0, 8))//Cinnabar to Redstone
-						;
-					else if(processItem(TFCItems.OreChunk, 28, Items.redstone, 0, 8))//Cryolite to Redstone
-						;
-					else if(processItem(Items.bone, 0, TFCItems.Dye, 15, 2))//Bone Meal
-						;
-					else if(processItem(TFCItems.OreChunk, 34, TFCItems.Powder, 6, 4))//Lapis Powder
-						;
-					else if(processItem(TFCItems.SmallOreChunk, 9, TFCItems.Powder, 8, 1))//Small Malachite Powder
-						;
-					else if(processItem(TFCItems.OreChunk, 58, TFCItems.Powder, 8, 2))//Poor Malachite Powder
-						;
-					else if(processItem(TFCItems.OreChunk, 9, TFCItems.Powder, 8, 4))//Malachite Powder
-						;
-					else if(processItem(TFCItems.OreChunk, 44, TFCItems.Powder, 8, 6))//Rich Malachite Powder
-						;
-					else if(processItem(TFCItems.SmallOreChunk, 3, TFCItems.Powder, 5, 1))//Small Hematite Powder
-						;
-					else if(processItem(TFCItems.OreChunk, 52, TFCItems.Powder, 5, 2))//Poor Hematite Powder
-						;
-					else if(processItem(TFCItems.OreChunk, 3, TFCItems.Powder, 5, 4))//Hematite Powder
-						;
-					else if(processItem(TFCItems.OreChunk, 38, TFCItems.Powder, 5, 6))//Rich Hematite Powder
-						;
-					else if(processItem(TFCItems.SmallOreChunk, 11, TFCItems.Powder, 7, 1))//Small Limonite Powder
-						;
-					else if(processItem(TFCItems.OreChunk, 60, TFCItems.Powder, 7, 2))//Poor Limonite Powder
-						;
-					else if(processItem(TFCItems.OreChunk, 11, TFCItems.Powder, 7, 4))//Limonite Powder
-						;
-					else if(processItem(TFCItems.OreChunk, 46, TFCItems.Powder, 7, 6))//Rich Limonite Powder
-						;
-					else if(processItem(TFCItems.OreChunk, 31, TFCItems.Fertilizer, 0, 4))//Sylvite to Fertilizer
-						;
-					else if(processItem(TFCItems.LooseRock, 5, TFCItems.Powder, 9, 4))//Rock Salt to Salt
-						;
-
-					if(storage[2] != null)
+					if(processItem() && storage[2] != null)
 						damageStackInSlot(2);
 				}
 			}
 		}
 	}
 
-	public boolean processItem(Item inputItem, int damageIn, Item outputItem, int damageOut, int amountOut)
+	public boolean processItem()
 	{
-		if(storage[0] != null && storage[0].getItem() == inputItem && storage[0].getItemDamage() == damageIn && 
-				(storage[1] == null || (storage[1].getItem() == outputItem && storage[1].getItemDamage() == damageOut)))
+		if(storage[0] != null)
 		{
-			if (inputItem instanceof IFood)
+			QuernRecipe qr = QuernManager.getInstance().findMatchingRecipe(storage[0].getItem(), storage[0].getItemDamage());
+			if(qr == null)
 			{
-				if(storage[0].hasTagCompound() && storage[0].getTagCompound().hasKey("foodWeight")
-						&& storage[0].getTagCompound().hasKey("foodDecay") && storage[1] == null)
+				System.out.println("QUERN RECIPE NOT FOUND! This is a BUG! -- " + storage[0].getItem().getUnlocalizedName());
+				return false; // If this happens, it's a bug!
+			}
+
+			// If the output item can not be combined or is different from what is being made, eject and make room for the new output
+			if(storage[1] != null && !(storage[1].getItem() == qr.getOutItem() && storage[1].getItemDamage() == qr.getOutItemDmg()))
+			{
+				ejectItem(new ItemStack(storage[1].getItem(), storage[1].stackSize, storage[1].getItemDamage()));
+				storage[1] = null;
+			}
+
+			if(storage[1] == null || (storage[1].getItem() == qr.getOutItem() && storage[1].getItemDamage() == qr.getOutItemDmg()))
+			{
+				if (qr.getInItem() instanceof IFood)
 				{
-					storage [1] = new ItemStack(outputItem, amountOut, damageOut);
-					NBTTagCompound grainNBT = storage[0].getTagCompound();
-					float flourWeight = grainNBT.getFloat("foodWeight");
-					float flourDecay = grainNBT.getFloat("foodDecay");
-					ItemFoodTFC.createTag(storage[1], flourWeight, flourDecay);
-					storage[0] = null;
+					if(storage[0].hasTagCompound() && storage[0].getTagCompound().hasKey("foodWeight") &&
+							storage[0].getTagCompound().hasKey("foodDecay") && storage[1] == null)
+					{
+						storage [1] = new ItemStack(qr.getOutItem(), qr.getOutStackSize(), qr.getOutItemDmg());
+						NBTTagCompound grainNBT = storage[0].getTagCompound();
+						float flourWeight = grainNBT.getFloat("foodWeight");
+						float flourDecay = grainNBT.getFloat("foodDecay");
+						ItemFoodTFC.createTag(storage[1], flourWeight, flourDecay);
+						storage[0] = null;
+						return true;
+					}
+				}
+				else
+				{
+					if(storage[0].stackSize == 1)
+						storage[0] = null;
+					else
+						storage[0].stackSize--;
+	
+					if(storage[1] == null)
+						storage[1] = new ItemStack(qr.getOutItem(), qr.getOutStackSize(), qr.getOutItemDmg());
+					else if(storage[1].stackSize < storage[1].getMaxStackSize())
+					{
+						if((qr.getOutStackSize() + storage[1].stackSize) > storage[1].getMaxStackSize())
+						{
+							int sizeleft = storage[1].getMaxStackSize() - storage[1].stackSize;
+							ejectItem(new ItemStack(qr.getOutItem(), storage[1].getMaxStackSize(), qr.getOutItemDmg()));
+							storage[1] = new ItemStack(qr.getOutItem(), sizeleft, qr.getOutItemDmg());
+						}
+						else
+							storage[1].stackSize += qr.getOutStackSize();
+					}
+					else
+					{
+						ejectItem(new ItemStack(qr.getOutItem(), storage[1].stackSize, qr.getOutItemDmg()));
+						storage[1] = new ItemStack(qr.getOutItem(), qr.getOutStackSize(), qr.getOutItemDmg());
+					}
+	
 					return true;
 				}
-			}
-			else
-			{
-				if(storage[0].stackSize == 1)
-					storage[0] = null;
-				else
-					storage[0].stackSize--;
-
-				if(storage[1] == null)
-					storage[1] = new ItemStack(outputItem,amountOut,damageOut);
-				else if(storage[1].stackSize < storage[1].getMaxStackSize())
-					storage[1].stackSize += amountOut;
-				else
-					ejectItem(new ItemStack(outputItem, amountOut, damageOut));
-
-				return true;
 			}
 		}
 		return false;
