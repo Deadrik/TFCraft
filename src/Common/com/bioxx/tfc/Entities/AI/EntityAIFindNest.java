@@ -1,16 +1,19 @@
 package com.bioxx.tfc.Entities.AI;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
-import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
-import com.bioxx.tfc.TileEntities.TENestBox;
-import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
+import java.util.HashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
+import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
+import com.bioxx.tfc.TileEntities.TENestBox;
+import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 
 public class EntityAIFindNest extends EntityAIBase
 {
@@ -25,6 +28,13 @@ public class EntityAIFindNest extends EntityAIBase
 	private final double field_75404_b;
 	private int maxSittingTicks;
 
+	//To prevent chickens from trying to sit in unreachable nests. See below in updateTask, if the chicken doesnt move >0.5 m in 40 ticks, it 
+	//gives up, and waits 1 day before trying to sit in a nest box located at the specified coordinates
+	private HashMap<String,Long> failureDepressionMap;
+	private double compoundDistance;
+	private int lastCheckedTick;
+	private boolean end;
+
 	/** X Coordinate of a nearby sitable block */
 	private int sitableBlockX = -1;
 
@@ -34,12 +44,13 @@ public class EntityAIFindNest extends EntityAIBase
 	/** Z Coordinate of a nearby sitable block */
 	private int sitableBlockZ =-1;
 
-	public EntityAIFindNest(EntityAnimal par1EntityAnimal, double par2)
+	public EntityAIFindNest(EntityAnimal eAnimal, double par2)
 	{
-		this.theCreature = par1EntityAnimal;
+		this.theCreature = eAnimal;
 		this.movementSpeed = par2;
 		this.field_75404_b = par2;
-		this.theWorld = par1EntityAnimal.worldObj;
+		this.theWorld = eAnimal.worldObj;
+		this.failureDepressionMap = new HashMap<String,Long>();
 		this.setMutexBits(5);
 	}
 
@@ -52,9 +63,9 @@ public class EntityAIFindNest extends EntityAIBase
 		{
 			if(((EntityChickenTFC)theCreature).isAdult() &&
 					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY,(int)theCreature.posZ) != TFCBlocks.NestBox &&
-					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY-1,(int)theCreature.posZ) != TFCBlocks.NestBox &&
+					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY - 1,(int)theCreature.posZ) != TFCBlocks.NestBox &&
 					this.getNearbySitableBlockDistance() &&
-					((EntityChickenTFC)theCreature).getGender()==GenderEnum.FEMALE)
+					((EntityChickenTFC)theCreature).getGender() == GenderEnum.FEMALE)
 				return true;
 			else
 				return false;
@@ -63,7 +74,7 @@ public class EntityAIFindNest extends EntityAIBase
 		{
 			if(((EntityPheasantTFC)theCreature).isAdult() &&
 					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY,(int)theCreature.posZ) != TFCBlocks.NestBox &&
-					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY-1,(int)theCreature.posZ) != TFCBlocks.NestBox &&
+					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY - 1,(int)theCreature.posZ) != TFCBlocks.NestBox &&
 					this.getNearbySitableBlockDistance() &&
 					((EntityPheasantTFC)theCreature).getGender()==GenderEnum.FEMALE)
 				return true;
@@ -75,8 +86,14 @@ public class EntityAIFindNest extends EntityAIBase
 
 	public boolean continueExecuting()
 	{
-		if(this.theCreature.getDistanceSq((double)sitableBlockX+0.5, (double)sitableBlockY, (double)sitableBlockZ+0.5)<0.2)
+		if(this.theCreature.getDistanceSq((double)sitableBlockX + 0.5, (double)sitableBlockY, (double)sitableBlockZ + 0.5) < 0.2)
 			this.theCreature.getNavigator().clearPathEntity();
+
+		if(this.end)
+		{
+			this.end = false;
+			return end;
+		}
 		return this.currentTick <= this.maxSittingTicks && this.field_75402_d <= 60 && this.isSittableBlock(this.theCreature.worldObj, this.sitableBlockX, this.sitableBlockY, this.sitableBlockZ);
 	}
 
@@ -89,22 +106,25 @@ public class EntityAIFindNest extends EntityAIBase
 		{
 			for (int k = (int)this.theCreature.posZ - 16; (double)k < this.theCreature.posZ + 16.0D; ++k)
 			{
-				if (this.isSittableBlock(this.theCreature.worldObj, j, i, k) && this.theCreature.worldObj.isAirBlock(j, i + 1, k))
+				for(int l = i; l < i+4; l++)
 				{
-					double d1 = this.theCreature.getDistanceSq((double)j, (double)i, (double)k);
-					if (d1 < d0)
+					if (this.isSittableBlock(this.theCreature.worldObj, j, l, k) && this.theCreature.worldObj.isAirBlock(j, l + 1, k))
 					{
-						this.sitableBlockX = j;
-						this.sitableBlockY = i;
-						this.sitableBlockZ = k;
-						d0 = d1;
+						double d1 = this.theCreature.getDistanceSq((double)j, (double)l, (double)k);
+
+						if (d1 < d0)
+						{
+							this.sitableBlockX = j;
+							this.sitableBlockY = l;
+							this.sitableBlockZ = k;
+							d0 = d1;
+						}
 					}
 				}
 			}
 		}
 		return d0 < 2.147483647E9D;
 	}
-
 	/**
 	 * Execute a one shot task or start executing a continuous task
 	 */
@@ -113,6 +133,9 @@ public class EntityAIFindNest extends EntityAIBase
 		this.theCreature.getNavigator().tryMoveToXYZ((double)((float)this.sitableBlockX) + 0.5D, (double)(this.sitableBlockY + 1), (double)((float)this.sitableBlockZ) + 0.5D, this.field_75404_b);
 		this.currentTick = 0;
 		this.field_75402_d = 0;
+		this.compoundDistance = 0;
+		this.lastCheckedTick = 0;
+		this.end = false;
 		this.maxSittingTicks = this.theCreature.getRNG().nextInt(this.theCreature.getRNG().nextInt(1200) + 1200) + 1200;
 	}
 
@@ -120,11 +143,23 @@ public class EntityAIFindNest extends EntityAIBase
 	{
 		++this.currentTick;
 
-
 		if (this.theCreature.getDistanceSq((double)this.sitableBlockX, (double)(this.sitableBlockY + 1), (double)this.sitableBlockZ) > 1.0D)
 		{
 			this.theCreature.getNavigator().tryMoveToXYZ((double)((float)this.sitableBlockX) + 0.5D, (double)(this.sitableBlockY + 1), (double)((float)this.sitableBlockZ) + 0.5D, this.field_75404_b);
 			++this.field_75402_d;
+			this.compoundDistance += this.theCreature.getDistance(this.theCreature.lastTickPosX, this.theCreature.lastTickPosY, this.theCreature.lastTickPosZ);
+			if(this.currentTick - 40 > this.lastCheckedTick)
+			{
+				if(this.compoundDistance < 0.5)
+				{
+					failureDepressionMap.put((this.sitableBlockX + "," + this.sitableBlockY + "," + this.sitableBlockZ), TFC_Time.getTotalTicks() + 24000);
+					this.end = true;
+				}
+				else
+				{
+					this.lastCheckedTick = this.currentTick;
+				}
+			}
 		}
 		else
 		{
@@ -135,15 +170,24 @@ public class EntityAIFindNest extends EntityAIBase
 	/**
 	 * Determines whether the creature wants to sit on the block at given coordinate
 	 */
-	protected boolean isSittableBlock(World par1World, int par2, int par3, int par4)
+	protected boolean isSittableBlock(World world, int x, int y, int z)
 	{
-		Block block = par1World.getBlock(par2, par3, par4);
-		//int meta = par1World.getBlockMetadata(par2, par3, par4);
+		Block block = world.getBlock(x, y, z);
+		int i1 = world.getBlockMetadata(x, y, z);
 
+		if(failureDepressionMap.containsKey((x + "," + y + "," + z)))
+		{
+			long time = failureDepressionMap.get((x + "," + y + "," + z));
+			if(time > TFC_Time.getTotalTicks())
+				return false;
+			else
+				failureDepressionMap.remove(new int[]{x, y, z});
+		}
 		if (block == TFCBlocks.NestBox)
 		{
-			TENestBox tileentitynest = (TENestBox)par1World.getTileEntity(par2, par3, par4);
-			if (!tileentitynest.hasBird()||tileentitynest.getBird() == theCreature)
+			TENestBox tileentitynest = (TENestBox) world.getTileEntity(x, y, z);
+
+			if (!tileentitynest.hasBird() || tileentitynest.getBird() == theCreature)
 				return true;
 		}
 
