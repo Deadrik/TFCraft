@@ -99,9 +99,9 @@ public class TileEntityQuern extends TileEntity implements IInventory
 					{
 						if((qr.getOutStackSize() + storage[1].stackSize) > storage[1].getMaxStackSize())
 						{
-							int sizeleft = storage[1].getMaxStackSize() - storage[1].stackSize;
+							int amountleft = qr.getOutStackSize() - (storage[1].getMaxStackSize() - storage[1].stackSize);
 							ejectItem(new ItemStack(qr.getOutItem(), storage[1].getMaxStackSize(), qr.getOutItemDmg()));
-							storage[1] = new ItemStack(qr.getOutItem(), sizeleft, qr.getOutItemDmg());
+							storage[1] = new ItemStack(qr.getOutItem(), amountleft, qr.getOutItemDmg());
 						}
 						else
 							storage[1].stackSize += qr.getOutStackSize();
