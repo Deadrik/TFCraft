@@ -17,7 +17,6 @@ public class QuernRecipe
 		this.outItem = outputItem;
 		this.outItemDmg = outputItemDamage;
 		this.outStackSize = outpuStackSize;
-		QuernManager.getInstance().addValidItem(inputItem);
 	}
 
 	public Boolean isInItem(Item item)

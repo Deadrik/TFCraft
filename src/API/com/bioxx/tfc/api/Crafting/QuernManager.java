@@ -25,11 +25,7 @@ public class QuernManager
 	public void addRecipe(QuernRecipe recipe)
 	{
 		recipes.add(recipe);
-	}
-
-	public void addValidItem(Item item)
-	{
-		validItems.add(item);
+		validItems.add(recipe.getInItem());
 	}
 
 	public Boolean isValidItem(Item item)
