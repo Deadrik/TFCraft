@@ -110,45 +110,44 @@ public class CommonProxy
 
 	public void registerTileEntities(boolean b)
 	{
-		GameRegistry.registerTileEntity(TileEntityLogPile.class, "TerraLogPile");
-		GameRegistry.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
-		GameRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit");
-		GameRegistry.registerTileEntity(TEForge.class, "TerraForge");
-		GameRegistry.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");
-		GameRegistry.registerTileEntity(TileEntityEarlyBloomery.class, "TerraEarlyBloomery");
-		GameRegistry.registerTileEntity(TileEntitySluice.class, "TerraSluice");
-		GameRegistry.registerTileEntity(TileEntityFarmland.class, "TileEntityFarmland");
-		GameRegistry.registerTileEntity(TECrop.class, "TileEntityCrop");
-		GameRegistry.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
-		GameRegistry.registerTileEntity(TileEntityPartial.class, "Partial");
-		GameRegistry.registerTileEntity(TileEntityDetailed.class, "Detailed");
-		GameRegistry.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
-		GameRegistry.registerTileEntity(TileEntityQuern.class, "Quern");
-		GameRegistry.registerTileEntity(TileEntitySapling.class, "Sapling");
-		GameRegistry.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");
-		GameRegistry.registerTileEntity(TEBarrel.class, "Barrel");
-		GameRegistry.registerTileEntity(TileEntityFenceGate.class, "FenceGate");
-		GameRegistry.registerTileEntity(TileEntityBloom.class, "IronBloom");
-		GameRegistry.registerTileEntity(TECrucible.class, "Crucible");
-		GameRegistry.registerTileEntity(TENestBox.class, "Nest Box");
-		GameRegistry.registerTileEntity(TEStand.class, "Armour Stand");
-		GameRegistry.registerTileEntity(TEBerryBush.class, "Berry Bush");
-		GameRegistry.registerTileEntity(TESeaWeed.class, "Sea Weed");
-		GameRegistry.registerTileEntity(TEFruitLeaves.class, "Fruit Leaves");
-		GameRegistry.registerTileEntity(TEMetalSheet.class, "Metal Sheet");
-		GameRegistry.registerTileEntity(TEOre.class, "ore");
+		GameRegistry.registerTileEntity(TileEntityLogPile.class, TileEntityName.LogPile);
+		GameRegistry.registerTileEntity(TileEntityWorkbench.class, TileEntityName.Workbench);
+		GameRegistry.registerTileEntity(TEForge.class, TileEntityName.Forge);
+		GameRegistry.registerTileEntity(TEBlastFurnace.class, TileEntityName.BlastFurnace);
+		GameRegistry.registerTileEntity(TileEntityEarlyBloomery.class, TileEntityName.Bloomery);
+		GameRegistry.registerTileEntity(TileEntitySluice.class, TileEntityName.Sluice);
+		GameRegistry.registerTileEntity(TileEntityFarmland.class, TileEntityName.Farmland);
+		GameRegistry.registerTileEntity(TECrop.class, TileEntityName.Crop);
+		GameRegistry.registerTileEntity(TileEntityFruitTreeWood.class, TileEntityName.FruitTreeWood);
+		GameRegistry.registerTileEntity(TileEntityPartial.class, TileEntityName.Partial);
+		GameRegistry.registerTileEntity(TileEntityDetailed.class, TileEntityName.Detailed);
+		GameRegistry.registerTileEntity(TileEntitySpawnMeter.class, TileEntityName.SpawnMeter);
+		GameRegistry.registerTileEntity(TileEntitySapling.class, TileEntityName.Sapling);
+		GameRegistry.registerTileEntity(TileEntityWoodConstruct.class, TileEntityName.WoodConstruct);
+		GameRegistry.registerTileEntity(TEBarrel.class, TileEntityName.Barrel);
+		GameRegistry.registerTileEntity(TileEntityFenceGate.class, TileEntityName.FenceGate);
+		GameRegistry.registerTileEntity(TileEntityBloom.class, TileEntityName.Bloom);
+		GameRegistry.registerTileEntity(TECrucible.class, TileEntityName.Crucible);
+		GameRegistry.registerTileEntity(TENestBox.class, TileEntityName.NestBox);
+		GameRegistry.registerTileEntity(TEStand.class, TileEntityName.Stand);
+		GameRegistry.registerTileEntity(TEBerryBush.class, TileEntityName.BerryBush);
+		GameRegistry.registerTileEntity(TEFruitLeaves.class, TileEntityName.FruitLeaves);
+		GameRegistry.registerTileEntity(TEMetalSheet.class, TileEntityName.MetalSheet);
+		GameRegistry.registerTileEntity(TEOre.class, TileEntityName.Ore);
 
 		if(b)
 		{
-			GameRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
-			GameRegistry.registerTileEntity(TileEntityPottery.class, "Pottery");
-			GameRegistry.registerTileEntity(TileEntityChestTFC.class, "chest");
-			GameRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep");
-			GameRegistry.registerTileEntity(TileEntityBellows.class, "Bellows");
-			GameRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack");
-			GameRegistry.registerTileEntity(TileEntityAnvil.class, "TerraAnvil");
-			GameRegistry.registerTileEntity(TEWorldItem.class, "worldItem");
-			GameRegistry.registerTileEntity(TileEntityQuern.class, "quern");
+			GameRegistry.registerTileEntity(TileEntityFirepit.class, TileEntityName.Firepit);
+			GameRegistry.registerTileEntity(TESeaWeed.class, TileEntityName.SeaWeed);
+			GameRegistry.registerTileEntity(TileEntityIngotPile.class, TileEntityName.IngotPile);
+			GameRegistry.registerTileEntity(TileEntityPottery.class, TileEntityName.Pottery);
+			GameRegistry.registerTileEntity(TileEntityChestTFC.class, TileEntityName.Chest);
+			GameRegistry.registerTileEntity(TEFoodPrep.class, TileEntityName.FoodPrep);
+			GameRegistry.registerTileEntity(TileEntityBellows.class, TileEntityName.Bellows);
+			GameRegistry.registerTileEntity(TileEntityToolRack.class, TileEntityName.ToolRack);
+			GameRegistry.registerTileEntity(TileEntityAnvil.class, TileEntityName.Anvil);
+			GameRegistry.registerTileEntity(TEWorldItem.class, TileEntityName.WorldItem);
+			GameRegistry.registerTileEntity(TileEntityQuern.class, TileEntityName.Quern);
 		}
 
 		EntityRegistry.registerGlobalEntityID(EntitySquidTFC.class, "squidTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0xbbbbbb);

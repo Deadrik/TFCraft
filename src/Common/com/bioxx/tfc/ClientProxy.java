@@ -255,18 +255,18 @@ public class ClientProxy extends CommonProxy
 	public void registerTileEntities(boolean b)
 	{
 		super.registerTileEntities(false);
-		ClientRegistry.registerTileEntity(TileEntityChestTFC.class, "chest", new TESRChest());
-		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile2", new TESRIngotPile());
-		ClientRegistry.registerTileEntity(TileEntityFirepit.class, "firepit", new TESRFirepit());
-		ClientRegistry.registerTileEntity(TESeaWeed.class, "seaweed", new TESRSeaWeed());
+		ClientRegistry.registerTileEntity(TileEntityChestTFC.class, TileEntityName.Chest, new TESRChest());
+		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, TileEntityName.IngotPile, new TESRIngotPile());
+		ClientRegistry.registerTileEntity(TileEntityFirepit.class, TileEntityName.Firepit, new TESRFirepit());
+		ClientRegistry.registerTileEntity(TESeaWeed.class, TileEntityName.SeaWeed, new TESRSeaWeed());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
-		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TESRPottery());
-		ClientRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep", new TESRFoodPrep());
-		ClientRegistry.registerTileEntity(TileEntityBellows.class, "Bellows", new TESRBellows());
-		ClientRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack", new TESRToolrack());
-		ClientRegistry.registerTileEntity(TileEntityAnvil.class, "Anvil", new TESRAnvil());
-		ClientRegistry.registerTileEntity(TEWorldItem.class, "worlditem", new TESRWorldItem());
-		ClientRegistry.registerTileEntity(TileEntityQuern.class, "quern", new TESRQuern());
+		ClientRegistry.registerTileEntity(TileEntityPottery.class, TileEntityName.Pottery, new TESRPottery());
+		ClientRegistry.registerTileEntity(TEFoodPrep.class, TileEntityName.FoodPrep, new TESRFoodPrep());
+		ClientRegistry.registerTileEntity(TileEntityBellows.class, TileEntityName.Bellows, new TESRBellows());
+		ClientRegistry.registerTileEntity(TileEntityToolRack.class, TileEntityName.ToolRack, new TESRToolrack());
+		ClientRegistry.registerTileEntity(TileEntityAnvil.class, TileEntityName.Anvil, new TESRAnvil());
+		ClientRegistry.registerTileEntity(TEWorldItem.class, TileEntityName.WorldItem, new TESRWorldItem());
+		ClientRegistry.registerTileEntity(TileEntityQuern.class, TileEntityName.Quern, new TESRQuern());
 	}
 
 	@Override
