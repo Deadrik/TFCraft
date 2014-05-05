@@ -256,17 +256,17 @@ public class ClientProxy extends CommonProxy
 	{
 		super.registerTileEntities(false);
 		ClientRegistry.registerTileEntity(TileEntityChestTFC.class, "chest", new TESRChest());
-		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile2", new TESRIngotPile());
-		ClientRegistry.registerTileEntity(TileEntityFirepit.class, "firepit", new TESRFirepit());
-		ClientRegistry.registerTileEntity(TESeaWeed.class, "seaweed", new TESRSeaWeed());
+		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile", new TESRIngotPile());
+		ClientRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit", new TESRFirepit());
+		ClientRegistry.registerTileEntity(TESeaWeed.class, "Sea Weed", new TESRSeaWeed());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TESRPottery());
 		ClientRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep", new TESRFoodPrep());
 		ClientRegistry.registerTileEntity(TileEntityBellows.class, "Bellows", new TESRBellows());
 		ClientRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack", new TESRToolrack());
-		ClientRegistry.registerTileEntity(TileEntityAnvil.class, "Anvil", new TESRAnvil());
-		ClientRegistry.registerTileEntity(TEWorldItem.class, "worlditem", new TESRWorldItem());
-		ClientRegistry.registerTileEntity(TileEntityQuern.class, "quern", new TESRQuern());
+		ClientRegistry.registerTileEntity(TileEntityAnvil.class, "TerraAnvil", new TESRAnvil());
+		ClientRegistry.registerTileEntity(TEWorldItem.class, "worldItem", new TESRWorldItem());
+		ClientRegistry.registerTileEntity(TileEntityQuern.class, "Quern", new TESRQuern());
 	}
 
 	@Override

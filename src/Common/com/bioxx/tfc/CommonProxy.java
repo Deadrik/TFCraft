@@ -112,7 +112,6 @@ public class CommonProxy
 	{
 		GameRegistry.registerTileEntity(TileEntityLogPile.class, "TerraLogPile");
 		GameRegistry.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
-		GameRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit");
 		GameRegistry.registerTileEntity(TEForge.class, "TerraForge");
 		GameRegistry.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");
 		GameRegistry.registerTileEntity(TileEntityEarlyBloomery.class, "TerraEarlyBloomery");
@@ -123,9 +122,8 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TileEntityPartial.class, "Partial");
 		GameRegistry.registerTileEntity(TileEntityDetailed.class, "Detailed");
 		GameRegistry.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
-		GameRegistry.registerTileEntity(TileEntityQuern.class, "Quern");
 		GameRegistry.registerTileEntity(TileEntitySapling.class, "Sapling");
-		GameRegistry.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");
+		GameRegistry.registerTileEntity(TileEntityWoodConstruct.class, "WoodConstruct");
 		GameRegistry.registerTileEntity(TEBarrel.class, "Barrel");
 		GameRegistry.registerTileEntity(TileEntityFenceGate.class, "FenceGate");
 		GameRegistry.registerTileEntity(TileEntityBloom.class, "IronBloom");
@@ -133,13 +131,14 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TENestBox.class, "Nest Box");
 		GameRegistry.registerTileEntity(TEStand.class, "Armour Stand");
 		GameRegistry.registerTileEntity(TEBerryBush.class, "Berry Bush");
-		GameRegistry.registerTileEntity(TESeaWeed.class, "Sea Weed");
 		GameRegistry.registerTileEntity(TEFruitLeaves.class, "Fruit Leaves");
 		GameRegistry.registerTileEntity(TEMetalSheet.class, "Metal Sheet");
 		GameRegistry.registerTileEntity(TEOre.class, "ore");
 
 		if(b)
 		{
+			GameRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit");
+			GameRegistry.registerTileEntity(TESeaWeed.class, "Sea Weed");
 			GameRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
 			GameRegistry.registerTileEntity(TileEntityPottery.class, "Pottery");
 			GameRegistry.registerTileEntity(TileEntityChestTFC.class, "chest");
@@ -148,7 +147,7 @@ public class CommonProxy
 			GameRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack");
 			GameRegistry.registerTileEntity(TileEntityAnvil.class, "TerraAnvil");
 			GameRegistry.registerTileEntity(TEWorldItem.class, "worldItem");
-			GameRegistry.registerTileEntity(TileEntityQuern.class, "quern");
+			GameRegistry.registerTileEntity(TileEntityQuern.class, "Quern");
 		}
 
 		EntityRegistry.registerGlobalEntityID(EntitySquidTFC.class, "squidTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0xbbbbbb);
