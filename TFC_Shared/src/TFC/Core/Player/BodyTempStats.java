@@ -148,13 +148,13 @@ public class BodyTempStats
 		itemLegs = player.inventory.armorItemInSlot(1);
 		itemFeet = player.inventory.armorItemInSlot(0);
 		int returnAmount = 0;
-		if(itemHead !=null)
+		if(itemHead != null && itemHead.getItem() instanceof IClothing)
 			returnAmount += ((IClothing)itemHead.getItem()).getThermal();
-		if(itemChest !=null)
+		if(itemChest != null && itemChest.getItem() instanceof IClothing)
 			returnAmount += ((IClothing)itemChest.getItem()).getThermal();
-		if(itemLegs !=null)
+		if(itemLegs != null && itemLegs.getItem() instanceof IClothing)
 			returnAmount += ((IClothing)itemLegs.getItem()).getThermal();
-		if(itemFeet !=null)
+		if(itemFeet != null && itemFeet.getItem() instanceof IClothing)
 			returnAmount += ((IClothing)itemFeet.getItem()).getThermal();
 		return returnAmount;
 	}
