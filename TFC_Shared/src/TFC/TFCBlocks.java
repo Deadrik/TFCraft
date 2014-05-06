@@ -135,7 +135,7 @@ public class TFCBlocks
 	public static int AnvilRenderId;
 	public static int barrelRenderId;
 	public static int standRenderId;
-	public static int FenceRenderId;
+	public static int FenceRenderId = Block.fence.getRenderType();
 	public static int FenceGateRenderId;
 	public static int NestBoxRenderId;
 	public static int BellowsRenderId;
