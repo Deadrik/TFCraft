@@ -444,7 +444,19 @@ public class TFC_Core
 
 	public static boolean isWater(int id)
 	{
-		return isSaltWater(id) || isFreshWater(id);
+		return isSaltWater(id) || isFreshWater(id) || isHotWater(id);
+	}
+
+	public static boolean isNotWater(int id)
+	{
+		return !isSaltWater(id) || !isFreshWater(id) || !isHotWater(id);
+	}
+
+	public static boolean isHotWater(int id)
+	{
+		if (id == TFCBlocks.HotWaterFlowing.blockID || id == TFCBlocks.HotWaterStill.blockID)
+			return true;
+		return false;
 	}
 
 	public static boolean isSaltWater(int id)
