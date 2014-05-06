@@ -1,12 +1,19 @@
 package TFC.Items;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.HeatIndex;
+import TFC.API.HeatRegistry;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TEMetalSheet;
 
 public class ItemMetalSheet extends ItemTerra
@@ -135,4 +142,77 @@ public class ItemMetalSheet extends ItemTerra
 
 		return false;
 	}
+	
+	@Override
+	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{
+		if(TFC_ItemHeat.HasTemp(is))
+		{
+			String s = "";
+			if(isTemperatureDanger(is))
+			{
+				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.danger") + " | ";
+			}
+
+			if(isTemperatureWeldable(is))
+			{
+				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.weldable") + " | ";
+			}
+
+			if(isTemperatureWorkable(is))
+			{
+				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.workable");
+			}
+
+			if(!s.equals(""))
+				arraylist.add(s);
+
+		}
+	}
+
+	public Boolean isTemperatureWeldable(ItemStack is)
+	{
+		HeatRegistry manager = HeatRegistry.getInstance();
+		if(TFC_ItemHeat.HasTemp(is))
+		{
+			HeatIndex index = manager.findMatchingIndex(is);
+			if(index != null)
+			{
+				float temp = TFC_ItemHeat.GetTemp(is);
+				return temp < index.meltTemp && temp > index.meltTemp *0.8;
+			}
+		}
+		return false;
+	}
+
+	public Boolean isTemperatureWorkable(ItemStack is)
+	{
+		HeatRegistry manager = HeatRegistry.getInstance();
+		if(TFC_ItemHeat.HasTemp(is))
+		{
+			HeatIndex index = manager.findMatchingIndex(is);
+			if(index != null)
+			{
+				float temp = TFC_ItemHeat.GetTemp(is);
+				return temp < index.meltTemp && temp > index.meltTemp * 0.60;
+			}
+		}
+		return false;
+	}
+
+	public Boolean isTemperatureDanger(ItemStack is)
+	{
+		HeatRegistry manager = HeatRegistry.getInstance();
+		if(TFC_ItemHeat.HasTemp(is))
+		{
+			HeatIndex index = manager.findMatchingIndex(is);
+			if(index != null)
+			{
+				float temp = TFC_ItemHeat.GetTemp(is);
+				return temp < index.meltTemp && temp > index.meltTemp * 0.90;
+			}
+		}
+		return false;
+	}
+
 }
