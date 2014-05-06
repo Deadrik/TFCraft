@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumMovingObjectType;
@@ -168,7 +167,11 @@ public class ItemGoldPan extends ItemTerra
 							if(type != -1)
 							{
 								ItemStack out = new ItemStack(TFCItems.SmallOreChunk, 1, type);
-								dropItem(world,(int) Math.floor(player.posX),(int) Math.floor(player.posY),(int) Math.floor(player.posZ),out);
+								world.playSoundAtEntity(player, "random.pop", 0.7F, world.rand.nextFloat() + 1);
+								if(!player.inventory.addItemStackToInventory(out))
+								{
+									player.dropPlayerItem(out);
+								}
 							}
 							uses--;
 							if(uses > 0)
@@ -197,21 +200,6 @@ public class ItemGoldPan extends ItemTerra
 		if (world.rand.nextInt(500) == 0) type = 2; // Platinum
 
 		return type;
-	}
-
-	private void dropItem(World world, double x, double y, double z, ItemStack stack)
-	{
-		if (!world.isRemote)
-		{
-			float d = 0.175F;
-			double  v = 0.10d;
-			double dx = (world.rand.nextFloat() - 0.5) * d;
-			double dy = (world.rand.nextFloat() - 0.5) * d + 1.0d;
-			double dz = (world.rand.nextFloat() - 0.5) * d;
-			EntityItem drop = new EntityItem(world, x + dx, y + dy, z + dz, stack);
-			drop.delayBeforeCanPickup = 10;
-			world.spawnEntityInWorld(drop);
-		}
 	}
 
 	@Override
