@@ -3,6 +3,7 @@ package com.bioxx.tfc;
 import java.io.File;
 import java.util.Map;
 
+import com.bioxx.tfc.ASM.TFCAccessTransformer;
 import com.bioxx.tfc.ASM.Transform.TF_EntityRenderer;
 import com.bioxx.tfc.ASM.Transform.TF_RenderGlobal;
 
@@ -17,7 +18,7 @@ public class TFCASMLoadingPlugin implements IFMLLoadingPlugin
 
 	@Override
 	public String getAccessTransformerClass() {
-		return null;
+		return TFCAccessTransformer.class.getName();
 	}
 
 	@Override
