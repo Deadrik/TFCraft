@@ -192,7 +192,7 @@ public class WorldGenFissure implements IWorldGenerator
 				}
 			}
 
-			world.setBlock(xCoord, yCoord, zCoord, fillBlock != null ? fillBlock : Blocks.air);
+			world.setBlock(xCoord, yCoord, zCoord, fillBlock != null ? fillBlock : Blocks.air, 0, 0x2);
 
 			if(fillBlock != null && world.getBlock(xCoord+1, yCoord, zCoord).getMaterial() != fillBlock.getMaterial())
 				world.setBlock(xCoord+1, yCoord, zCoord, rockLayer.block, rockLayer.meta, 2);
