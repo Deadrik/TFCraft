@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
@@ -15,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import net.minecraftforge.common.MinecraftForge;
+import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
@@ -180,11 +183,53 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 
 	public void updateRecipe()
 	{
-		AnvilRecipe recipe = AnvilManager.getInstance().findMatchingRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT],this.craftingPlan, 
-				anvilItemStacks[FLUX_SLOT] != null ? true : false, this.AnvilTier));
-		if(recipe != null)
-			workRecipe = recipe;
-		else workRecipe = null;
+		AnvilManager manager = AnvilManager.getInstance();
+		Object[] plans = manager.getPlans().keySet().toArray();
+		Map<String, AnvilRecipe> planList = new HashMap();
+
+		for(Object p : plans)
+		{
+			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT], anvilItemStacks[INPUT2_SLOT], 
+					(String)p, anvilItemStacks[FLUX_SLOT] != null, AnvilTier));
+
+			if(ar != null) 
+				planList.put((String)p, ar);
+		}
+
+		if (planList.size() == 0)
+		{
+			workRecipe = null;
+			return;
+		}
+
+		if (planList.size() == 1)
+		{
+			workRecipe = (AnvilRecipe)(planList.values().toArray())[0];
+			craftingPlan = (String)planList.keySet().toArray()[0];
+			return;
+		}
+
+		if (planList.containsKey(craftingPlan))
+			workRecipe = planList.get(craftingPlan);
+		else
+		{
+			workRecipe = null;
+			return;
+		}
+
+		if (anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getItem() == TFCItems.Bloom && workRecipe.getCraftingResult().getItem() == TFCItems.Bloom)
+		{
+			if (anvilItemStacks[INPUT1_SLOT].getItemDamage() < 100)
+			{
+				craftingPlan = null;
+				workRecipe = null;
+			}
+			else if (anvilItemStacks[INPUT1_SLOT].getItemDamage() == 100)
+			{
+				craftingPlan = "refinebloom";
+				workRecipe = planList.get(craftingPlan);
+			}
+		}
 	}
 
 	public int getCraftingValue()
