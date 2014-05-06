@@ -2,6 +2,8 @@ package TFC.Blocks.Devices;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -82,6 +84,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			}
 			else
 			{
+				world.playAuxSFXAtEntity(entityplayer, 1003, i, j, k, 0);
 				if (isOpen(world.getBlockMetadata(i, j, k)))
 					world.setBlockMetadataWithNotify(i, j, k, world.getBlockMetadata(i, j, k) - 8, 3);
 				else
@@ -587,4 +590,11 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	{
 		return CollisionRayTraceStandard.collisionRayTrace(this, world, x, y, z, player, view);
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+		return true;
+	}
+ 
 }
