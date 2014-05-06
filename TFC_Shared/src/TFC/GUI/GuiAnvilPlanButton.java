@@ -4,9 +4,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.TFCItems;
 import TFC.Core.TFC_Core;
 
 public class GuiAnvilPlanButton extends GuiButton 
@@ -34,11 +36,13 @@ public class GuiAnvilPlanButton extends GuiButton
 			this.field_82253_i = x >= this.xPosition && y >= this.yPosition && x < this.xPosition + this.width && y < this.yPosition + this.height;
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			TFC_Core.bindTexture(TextureMap.locationItemsTexture);
+
 			if(!screen.AnvilEntity.craftingPlan.equals("") && screen.AnvilEntity.workRecipe != null) 
-			{
-				TFC_Core.bindTexture(TextureMap.locationItemsTexture);
 				this.drawTexturedModelRectFromIcon(this.xPosition+1, this.yPosition+1, screen.AnvilEntity.workRecipe.getCraftingResult().getIconIndex(), this.width-2, this.height-2);
-			}
+			else
+				this.drawTexturedModelRectFromIcon(this.xPosition+1, this.yPosition+1, TFCItems.Blueprint.getIconIndex(new ItemStack(TFCItems.Blueprint)), this.width-2, this.height-2);
+
 			this.zLevel = 0;
 			this.mouseDragged(mc, x, y);
 
