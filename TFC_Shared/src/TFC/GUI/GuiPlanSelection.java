@@ -114,11 +114,11 @@ public class GuiPlanSelection extends GuiContainerTFC
 	AnvilRecipe handleMatchingRecipe(AnvilRecipe ar)
 	{
 		if (ar != null)
-		if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT] != null && AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItem() == TFCItems.RawBloom && ar.getCraftingResult().getItem() == TFCItems.RawBloom)
-		{
-			if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItemDamage() <= 100)
-				return null;
-		}
+			if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT] != null && AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItem() == TFCItems.Bloom && ar.getCraftingResult().getItem() == TFCItems.Bloom)
+			{
+				if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItemDamage() <= 100)
+					return null;
+			}
 		return ar;
 	}
 
