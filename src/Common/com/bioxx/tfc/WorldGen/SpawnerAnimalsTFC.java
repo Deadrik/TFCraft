@@ -21,7 +21,6 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -129,57 +128,57 @@ public final class SpawnerAnimalsTFC
 											{
 												label103:
 												{
-												l2 += par1WorldServer.rand.nextInt(b1) - par1WorldServer.rand.nextInt(b1);
-												i3 += par1WorldServer.rand.nextInt(1) - par1WorldServer.rand.nextInt(1);
-												j3 += par1WorldServer.rand.nextInt(b1) - par1WorldServer.rand.nextInt(b1);
-												if (canCreatureTypeSpawnAtLocation(enumcreaturetype, par1WorldServer, l2, i3, j3))
-												{
-													float f = l2 + 0.5F;
-													float f1 = i3;
-													float f2 = j3 + 0.5F;
-													if (par1WorldServer.getClosestPlayer(f, f1, f2, 24.0D) == null)
+													l2 += par1WorldServer.rand.nextInt(b1) - par1WorldServer.rand.nextInt(b1);
+													i3 += par1WorldServer.rand.nextInt(1) - par1WorldServer.rand.nextInt(1);
+													j3 += par1WorldServer.rand.nextInt(b1) - par1WorldServer.rand.nextInt(b1);
+													if (canCreatureTypeSpawnAtLocation(enumcreaturetype, par1WorldServer, l2, i3, j3))
 													{
-														float f3 = f - chunkcoordinates.posX;
-														float f4 = f1 - chunkcoordinates.posY;
-														float f5 = f2 - chunkcoordinates.posZ;
-														float f6 = f3 * f3 + f4 * f4 + f5 * f5;
-														if (f6 >= 576.0F)
+														float f = l2 + 0.5F;
+														float f1 = i3;
+														float f2 = j3 + 0.5F;
+														if (par1WorldServer.getClosestPlayer(f, f1, f2, 24.0D) == null)
 														{
-															if (spawnlistentry == null)
+															float f3 = f - chunkcoordinates.posX;
+															float f4 = f1 - chunkcoordinates.posY;
+															float f5 = f2 - chunkcoordinates.posZ;
+															float f6 = f3 * f3 + f4 * f4 + f5 * f5;
+															if (f6 >= 576.0F)
 															{
-																spawnlistentry = par1WorldServer.spawnRandomCreature(enumcreaturetype, l2, i3, j3);
 																if (spawnlistentry == null)
-																	break label103;
-															}
+																{
+																	spawnlistentry = par1WorldServer.spawnRandomCreature(enumcreaturetype, l2, i3, j3);
+																	if (spawnlistentry == null)
+																		break label103;
+																}
 
-															EntityLiving entityliving;
-															try
-															{
-																entityliving = (EntityLiving)spawnlistentry.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par1WorldServer});
+																EntityLiving entityliving;
+																try
+																{
+																	entityliving = (EntityLiving)spawnlistentry.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par1WorldServer});
+																}
+																catch (Exception exception)
+																{
+																	exception.printStackTrace();
+																	return i;
+																}
+	
+																entityliving.setLocationAndAngles(f, f1, f2, par1WorldServer.rand.nextFloat() * 360.0F, 0.0F);
+																Result canSpawn = ForgeEventFactory.canEntitySpawn(entityliving, par1WorldServer, f, f1, f2);
+																if (canSpawn == Result.ALLOW || (canSpawn == Result.DEFAULT && entityliving.getCanSpawnHere()))
+																{
+																	++j2;
+																	par1WorldServer.spawnEntityInWorld(entityliving);
+																	if (!ForgeEventFactory.doSpecialSpawn(entityliving, par1WorldServer, f, f1, f2))
+																		entitylivingdata = entityliving.onSpawnWithEgg(entitylivingdata);
+																	if (j2 >= ForgeEventFactory.getMaxSpawnPackSize(entityliving))
+																		continue label110;
+																}
+																i += j2;
 															}
-															catch (Exception exception)
-															{
-																exception.printStackTrace();
-																return i;
-															}
-
-															entityliving.setLocationAndAngles(f, f1, f2, par1WorldServer.rand.nextFloat() * 360.0F, 0.0F);
-															Result canSpawn = ForgeEventFactory.canEntitySpawn(entityliving, par1WorldServer, f, f1, f2);
-															if (canSpawn == Result.ALLOW || (canSpawn == Result.DEFAULT && entityliving.getCanSpawnHere()))
-															{
-																++j2;
-																par1WorldServer.spawnEntityInWorld(entityliving);
-																if (!ForgeEventFactory.doSpecialSpawn(entityliving, par1WorldServer, f, f1, f2))
-																	entitylivingdata = entityliving.onSpawnWithEgg(entitylivingdata);
-																if (j2 >= ForgeEventFactory.getMaxSpawnPackSize(entityliving))
-																	continue label110;
-															}
-															i += j2;
 														}
 													}
-												}
-												++k3;
-												continue;
+													++k3;
+													continue;
 												}
 											}
 											++k2;
@@ -224,7 +223,7 @@ public final class SpawnerAnimalsTFC
 	/**
 	 * Called during chunk generation to spawn initial creatures.
 	 */
-	public static void performWorldGenSpawning(World par0World, BiomeGenBase par1TFCBiome, int par2, int par3, int par4, int par5, Random par6Random)
+	public static void performWorldGenSpawning(World par0World, TFCBiome par1TFCBiome, int par2, int par3, int par4, int par5, Random par6Random)
 	{
 		List list = TFCChunkProviderGenerate.getCreatureSpawnsByChunk(par0World, par1TFCBiome, par2, par3);//par1BiomeGenBase.getSpawnableList(EnumCreatureType.creature);
 		if (!list.isEmpty())

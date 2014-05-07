@@ -2,14 +2,14 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.WorldGen.TFCBiome;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
 
 public class WorldGenPineTall extends WorldGenerator
 {
@@ -23,7 +23,6 @@ public class WorldGenPineTall extends WorldGenerator
 		blockWood = TFCBlocks.LogNatural;
 	}
 
-	@Override
 	public boolean generate(World world, Random par2Random, int i, int j, int k)
 	{
 		int var6 = par2Random.nextInt(5) + 7;
@@ -75,7 +74,7 @@ public class WorldGenPineTall extends WorldGenerator
 			else
 			{
 				block = world.getBlock(i, j - 1, k);
-				int meta = TFC_Climate.getRockLayer(i, j, k, 0).meta;
+				int meta = TFCBiome.getSurfaceRockLayer(world, i, k);
 				Block dirt = TFC_Core.getTypeForDirt(meta);
 				int dirtMeta = TFC_Core.getSoilMetaFromStone(dirt, meta);
 

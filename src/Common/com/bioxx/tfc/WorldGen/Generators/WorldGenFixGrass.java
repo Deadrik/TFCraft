@@ -2,14 +2,13 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.chunk.IChunkProvider;
-
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenFixGrass implements IWorldGenerator
@@ -82,13 +81,13 @@ public class WorldGenFixGrass implements IWorldGenerator
 
 	public boolean getNearWater(World world, int x, int y, int z)
 	{
-		BiomeGenBase biome;
+		TFCBiome biome;
 		for(int i = -2; i <= 2; i++)
 		{
 			for(int k = -2; k <= 2; k++)
 			{
-				biome = (BiomeGenBase) world.getBiomeGenForCoords(x + (i * 8), z + (k * 8));
-				if(biome == BiomeGenBase.ocean || biome == BiomeGenBase.river || biome == BiomeGenBase.swampland)
+				biome = (TFCBiome) world.getBiomeGenForCoords(x + (i * 8), z + (k * 8));
+				if(biome == TFCBiome.ocean || biome == TFCBiome.river || biome == TFCBiome.swampland)
 					return true;
 			}
 		}

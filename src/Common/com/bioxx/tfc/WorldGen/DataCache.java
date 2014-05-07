@@ -3,11 +3,10 @@ package com.bioxx.tfc.WorldGen;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
+
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.LongHashMap;
-import net.minecraft.world.biome.BiomeGenBase;
-
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class DataCache
 {
@@ -25,7 +24,7 @@ public class DataCache
 	{
 		this.chunkManager = par1;
 	}
-
+	
 	public DataCache(TFCWorldChunkManager par1, int ind)
 	{
 		this.chunkManager = par1;
@@ -39,7 +38,7 @@ public class DataCache
 	{
 		x >>= 4;
 		y >>= 4;
-		long var3 = x & 4294967295L | (y & 4294967295L) << 32;
+		long var3 = (long)x & 4294967295L | ((long)y & 4294967295L) << 32;
 		DataCacheBlockTFC var5 = (DataCacheBlockTFC)this.cacheMap.getValueByKey(var3);
 		if (var5 == null)
 		{
@@ -55,7 +54,7 @@ public class DataCache
 	{
 		x >>= 4;
 		y >>= 4;
-		long var3 = x & 4294967295L | (y & 4294967295L) << 32;
+		long var3 = (long)x & 4294967295L | ((long)y & 4294967295L) << 32;
 		DataCacheBlockTFC var5 = (DataCacheBlockTFC)this.cacheMap.getValueByKey(var3);
 		if (var5 == null)
 		{
@@ -70,7 +69,7 @@ public class DataCache
 	/**
 	 * Returns the BiomeGenBase related to the x, z position from the cache.
 	 */
-	public BiomeGenBase getBiomeGenAt(int par1, int par2)
+	public TFCBiome getBiomeGenAt(int par1, int par2)
 	{
 		return this.getBiomeCacheBlock(par1, par2).getBiomeGenAt(par1, par2);
 	}
@@ -94,7 +93,7 @@ public class DataCache
 				if (var7 > 30000L || var7 < 0L)
 				{
 					this.cache.remove(var5--);
-					long var9 = var6.xPosition & 4294967295L | (var6.zPosition & 4294967295L) << 32;
+					long var9 = (long)var6.xPosition & 4294967295L | ((long)var6.zPosition & 4294967295L) << 32;
 					this.cacheMap.remove(var9);
 				}
 			}
@@ -106,11 +105,11 @@ public class DataCache
 	 * @param indexLayers 
 	 * @param cache2 
 	 */
-	public BiomeGenBase[] getCachedBiomes(int par1, int par2)
+	public TFCBiome[] getCachedBiomes(int par1, int par2)
 	{
 		return this.getBiomeCacheBlock(par1, par2).biomes;
 	}
-
+	
 	public DataLayer[] getCachedData(GenLayerTFC indexLayers, int par1, int par2)
 	{
 		return this.getDataCacheBlock(indexLayers, par1, par2).data;

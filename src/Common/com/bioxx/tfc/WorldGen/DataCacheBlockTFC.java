@@ -1,12 +1,10 @@
 package com.bioxx.tfc.WorldGen;
 
-import net.minecraft.world.biome.BiomeGenBase;
-
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class DataCacheBlockTFC
 {
-	public BiomeGenBase[] biomes = new BiomeGenBase[256];
+	public TFCBiome[] biomes = new TFCBiome[256];
 	/** An array of chunk rainfall values saved by this cache. */
 	public float[] rainfallValues = new float[256];
 	/** The array of data types stored in this DataCacheBlockTFC. */
@@ -21,7 +19,7 @@ public class DataCacheBlockTFC
 	final DataCache theDataCache;
 
 	private int index;
-
+	
 	public DataCacheBlockTFC(DataCache datacache, GenLayerTFC indexLayers, int par2, int par3, int ind)
 	{
 		this.theDataCache = datacache;
@@ -45,7 +43,7 @@ public class DataCacheBlockTFC
 	/**
 	 * Returns the BiomeGenBase related to the x, z position from the cache block.
 	 */
-	public BiomeGenBase getBiomeGenAt(int par1, int par2)
+	public TFCBiome getBiomeGenAt(int par1, int par2)
 	{
 		return this.biomes[par1 & 15 | (par2 & 15) << 4];
 	}

@@ -10,7 +10,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -66,7 +65,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	private double[] stoneNoise = new double[256];
 
 	/** The biomes that are used to generate the chunk */
-	private BiomeGenBase[] biomesForGeneration;
+	private TFCBiome[] biomesForGeneration;
 
 	private DataLayer[] rockLayer1;
 	private DataLayer[] rockLayer2;
@@ -175,7 +174,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	{
 		int xCoord = chunkX * 16;
 		int zCoord = chunkZ * 16;
-		BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
+		TFCBiome biome = (TFCBiome) this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
 		this.rand.setSeed(this.worldObj.getSeed());
 		long var7 = this.rand.nextLong() / 2L * 2L + 1L;
 		long var9 = this.rand.nextLong() / 2L * 2L + 1L;
@@ -223,14 +222,14 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 	}
 
-	public static List getCreatureSpawnsByChunk(World world, BiomeGenBase biome, int x, int z)
+	public static List getCreatureSpawnsByChunk(World world, TFCBiome biome, int x, int z)
 	{
 		List spawnableCreatureList = new ArrayList();
 		spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 24, 0, 0));
 		float temp = TFC_Climate.getBioTemperatureHeight(x, world.getTopSolidOrLiquidBlock(x, z), z);
 		float rain = TFC_Climate.getRainfall(x, 150, z);
 		float evt = TFC_Climate.manager.getEVTLayerAt(x, z).floatdata1;
-		boolean isMountainous = biome == BiomeGenBase.extremeHills;
+		boolean isMountainous = biome == TFCBiome.Mountains || biome == TFCBiome.HighHills;
 		//To adjust animal spawning at higher altitudes
 		int mountainousAreaModifier = isMountainous? - 1 : 0;
 		if(isMountainous)
@@ -430,13 +429,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				float var17 = 0.0F;
 				float var18 = 0.0F;
 				byte var19 = 2;
-				BiomeGenBase baseBiome = this.biomesForGeneration[var14 + 2 + (var15 + 2) * (par5 + 5)];
+				TFCBiome baseBiome = this.biomesForGeneration[var14 + 2 + (var15 + 2) * (par5 + 5)];
 
 				for (int var21 = -var19; var21 <= var19; ++var21)
 				{
 					for (int var22 = -var19; var22 <= var19; ++var22)
 					{
-						BiomeGenBase blendBiome = this.biomesForGeneration[var14 + var21 + 2 + (var15 + var22 + 2) * (par5 + 5)];
+						TFCBiome blendBiome = this.biomesForGeneration[var14 + var21 + 2 + (var15 + var22 + 2) * (par5 + 5)];
 						float blendedHeight = this.parabolicField[var21 + 2 + (var22 + 2) * 5] / (/*blendBiome.minHeight*/ + 2.0F);//<---blendBiome.minHeight was commented out
 						if (blendBiome.rootHeight > baseBiome.rootHeight)
 							blendedHeight *= 0.3F;
@@ -523,7 +522,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			{
 				int arrayIndex = xCoord + zCoord * 16;
 				int arrayIndexDL = zCoord + xCoord * 16;
-				BiomeGenBase biome = biomesForGeneration[arrayIndexDL];
+				TFCBiome biome = biomesForGeneration[arrayIndexDL];
 				DataLayer rock1 = rockLayer1[arrayIndexDL] == null ? DataLayer.Granite : rockLayer1[arrayIndexDL];
 				DataLayer rock2 = rockLayer2[arrayIndexDL] == null ? DataLayer.Granite : rockLayer2[arrayIndexDL];
 				DataLayer rock3 = rockLayer3[arrayIndexDL] == null ? DataLayer.Granite : rockLayer3[arrayIndexDL];
@@ -650,7 +649,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							metaBig[indexBig] = soilMeta;
 						}
 
-						if(biome == BiomeGenBase.ocean)
+						if(biome == TFCBiome.ocean)
 						{
 							if(((height > var5 - 2 && height <= var5 + 1) || (height < var5 && idsTop[index + 2] == TFCBlocks.SaltWater)))//If its an ocean give it a sandy bottom
 							{
@@ -658,7 +657,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 								metaBig[indexBig] = soilMeta;
 							}
 						}
-						else if(!(biome == BiomeGenBase.swampland))
+						else if(!(biome == TFCBiome.swampland))
 						{
 							if(((height > var5 - 2 && height < var5 && idsTop[index + 1] == TFCBlocks.SaltWater)) || (height < var5 && idsTop[index + 1] == TFCBlocks.SaltWater))
 							{
@@ -670,7 +669,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							}
 						}
 					}
-					else if(idsTop[index] == TFCBlocks.SaltWater && biome != BiomeGenBase.ocean && biome != BiomeGenBase.beach)
+					else if(idsTop[index] == TFCBlocks.SaltWater && biome != TFCBiome.ocean && biome != TFCBiome.beach)
 					{
 						idsBig[indexBig] = TFCBlocks.FreshWater;
 					}

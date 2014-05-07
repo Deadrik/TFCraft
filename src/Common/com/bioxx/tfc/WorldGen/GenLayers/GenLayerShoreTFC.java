@@ -1,6 +1,7 @@
 package com.bioxx.tfc.WorldGen.GenLayers;
 
-import net.minecraft.world.biome.BiomeGenBase;
+import com.bioxx.tfc.WorldGen.TFCBiome;
+
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
@@ -33,42 +34,42 @@ public class GenLayerShoreTFC extends GenLayerTFC
 				int var12;
 				int var13;
 
-				if (var9 != BiomeGenBase.ocean.biomeID && var9 != BiomeGenBase.river.biomeID && var9 != BiomeGenBase.swampland.biomeID)
+				if (var9 != TFCBiome.ocean.biomeID && var9 != TFCBiome.river.biomeID && var9 != TFCBiome.swampland.biomeID && var9 != TFCBiome.HighHills.biomeID)
 				{
 					var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
 					var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
 					var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
 					var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
 
-					if (var10 != BiomeGenBase.ocean.biomeID && var11 != BiomeGenBase.ocean.biomeID && var12 != BiomeGenBase.ocean.biomeID && var13 != BiomeGenBase.ocean.biomeID)
+					if (var10 != TFCBiome.ocean.biomeID && var11 != TFCBiome.ocean.biomeID && var12 != TFCBiome.ocean.biomeID && var13 != TFCBiome.ocean.biomeID)
 						var6[var8 + var7 * par3] = var9;
 					else
-						var6[var8 + var7 * par3] = BiomeGenBase.beach.biomeID;
+						var6[var8 + var7 * par3] = TFCBiome.beach.biomeID;
 				}
-				/*else if (var9 == BiomeGenBase.HighHills.biomeID)
+				else if (var9 == TFCBiome.HighHills.biomeID)
 				{
 					var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
 					var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
 					var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
 					var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
 
-					if (var10 == BiomeGenBase.HighHills.biomeID && var11 == BiomeGenBase.HighHills.biomeID && var12 == BiomeGenBase.HighHills.biomeID && var13 == BiomeGenBase.HighHills.biomeID)
+					if (var10 == TFCBiome.HighHills.biomeID && var11 == TFCBiome.HighHills.biomeID && var12 == TFCBiome.HighHills.biomeID && var13 == TFCBiome.HighHills.biomeID)
 						var6[var8 + var7 * par3] = var9;
 					else
-						var6[var8 + var7 * par3] = BiomeGenBase.HighHillsEdge.biomeID;
+						var6[var8 + var7 * par3] = TFCBiome.HighHillsEdge.biomeID;
 				}
-				else if (var9 == BiomeGenBase.Mountains.biomeID)
+				else if (var9 == TFCBiome.Mountains.biomeID)
 				{
 					var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
 					var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
 					var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
 					var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
 
-					if (var10 == BiomeGenBase.Mountains.biomeID && var11 == BiomeGenBase.Mountains.biomeID && var12 == BiomeGenBase.Mountains.biomeID && var13 == BiomeGenBase.Mountains.biomeID)
+					if (var10 == TFCBiome.Mountains.biomeID && var11 == TFCBiome.Mountains.biomeID && var12 == TFCBiome.Mountains.biomeID && var13 == TFCBiome.Mountains.biomeID)
 						var6[var8 + var7 * par3] = var9;
 					else
-						var6[var8 + var7 * par3] = BiomeGenBase.MountainsEdge.biomeID;
-				}*/
+						var6[var8 + var7 * par3] = TFCBiome.MountainsEdge.biomeID;
+				}
 				else
 				{
 					var6[var8 + var7 * par3] = var9;

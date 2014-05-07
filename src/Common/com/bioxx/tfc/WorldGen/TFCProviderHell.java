@@ -2,7 +2,6 @@ package com.bioxx.tfc.WorldGen;
 
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderHell;
 import net.minecraft.world.storage.WorldInfo;
@@ -14,7 +13,7 @@ public class TFCProviderHell extends TFCProvider
 	@Override
 	protected void registerWorldChunkManager()
 	{
-		worldChunkMgr = new TFCWorldChunkManagerHell(BiomeGenBase.hell, 1F, 1F);
+		worldChunkMgr = new TFCWorldChunkManagerHell(TFCBiome.hell, 1F, 1F);
 	}
 
 	@Override
@@ -23,7 +22,7 @@ public class TFCProviderHell extends TFCProvider
 		float var1 = 0.1F;
 		for (int var2 = 0; var2 <= 15; ++var2)
 		{
-			float var3 = 1.0F - var2 / 15.0F;
+			float var3 = 1.0F - (float)var2 / 15.0F;
 			this.lightBrightnessTable[var2] = (1.0F - var3) / (var3 * 3.0F + 1.0F) * (1.0F - var1) + var1;
 		}
 	}

@@ -3,20 +3,19 @@ package com.bioxx.tfc.WorldGen.Generators;
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.feature.WorldGenerator;
-
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenAcaciaKoaTrees;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenKapokTrees;
 import com.bioxx.tfc.api.Enums.EnumTree;
 
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenForests implements IWorldGenerator
@@ -39,8 +38,8 @@ public class WorldGenForests implements IWorldGenerator
 		chunkX *= 16;
 		chunkZ *= 16;
 
-		BiomeGenBase biome = (BiomeGenBase) world.getBiomeGenForCoords(chunkX, chunkZ);
-		if(biome == BiomeGenBase.ocean)
+		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
+		if(biome == TFCBiome.ocean)
 			return;
 
 		if(!generateJungle(random, chunkX, chunkZ, world))
@@ -91,9 +90,9 @@ public class WorldGenForests implements IWorldGenerator
 			}
 
 			float evt = TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1;
-			/*gen0 = BiomeGenBase.getTreeGen(TreeType0, random.nextBoolean());
-			gen1 = BiomeGenBase.getTreeGen(TreeType1, random.nextBoolean());
-			gen2 = BiomeGenBase.getTreeGen(TreeType2, random.nextBoolean());*/
+			gen0 = TFCBiome.getTreeGen(TreeType0, random.nextBoolean());
+			gen1 = TFCBiome.getTreeGen(TreeType1, random.nextBoolean());
+			gen2 = TFCBiome.getTreeGen(TreeType2, random.nextBoolean());
 			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
 
 			if(getNearWater(world, xCoord, yCoord, zCoord))
@@ -103,8 +102,8 @@ public class WorldGenForests implements IWorldGenerator
 			}
 			try
 			{
-				/*if(zCoord > 14500 || zCoord < -14500)
-					gen2 = BiomeGenBase.getTreeGen(8, random.nextBoolean());*/
+				if(zCoord > 14500 || zCoord < -14500)
+					gen2 = TFCBiome.getTreeGen(8, random.nextBoolean());
 				int randomNumber = random.nextInt(100);
 
 				float tree0EVTMin = EnumTree.values()[TreeType0].minEVT;

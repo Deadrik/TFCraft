@@ -2,12 +2,6 @@ package com.bioxx.tfc.WorldGen;
 
 import java.util.Random;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenerator;
-
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Food.CropIndex;
@@ -21,6 +15,12 @@ import com.bioxx.tfc.WorldGen.Generators.WorldGenLilyPad;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenLiquidsTFC;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenSeaGrass;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeDecorator;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenerator;
+
 public class BiomeDecoratorTFC extends BiomeDecorator
 {
 	/**
@@ -33,7 +33,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	/** The amount of tall grass to generate per chunk. */
 	public int grassPerChunk;
 
-	public BiomeGenBase biome;
+	public TFCBiome biome;
 
 	/**
 	 * The number of extra mushroom patches per chunk. It generates 1/4 this
@@ -65,7 +65,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 
 
 	/**Added By TFC**/
-	public BiomeDecoratorTFC(BiomeGenBase par1)
+	public BiomeDecoratorTFC(TFCBiome par1)
 	{
 		super();
 		this.flowersPerChunk = 2;

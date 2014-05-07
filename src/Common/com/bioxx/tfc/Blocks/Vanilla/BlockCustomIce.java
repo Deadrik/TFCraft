@@ -11,7 +11,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -19,6 +18,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 
 import cpw.mods.fml.relauncher.Side;
@@ -213,18 +213,18 @@ public class BlockCustomIce extends BlockIce
 
 	private boolean scanForOcean(World world, int i, int j, int k)
 	{
-		if(world.getBiomeGenForCoords(i + 5, k).biomeID == BiomeGenBase.ocean.biomeID ||
-				world.getBiomeGenForCoords(i + 10, k).biomeID == BiomeGenBase.ocean.biomeID ||
-				world.getBiomeGenForCoords(i + 20, k).biomeID == BiomeGenBase.ocean.biomeID ||
-				world.getBiomeGenForCoords(i - 5, k).biomeID == BiomeGenBase.ocean.biomeID ||
-				world.getBiomeGenForCoords(i - 10, k).biomeID == BiomeGenBase.ocean.biomeID ||
-				world.getBiomeGenForCoords(i - 20, k).biomeID == BiomeGenBase.ocean.biomeID ||
-				world.getBiomeGenForCoords(i, k + 5).biomeID == BiomeGenBase.ocean.biomeID ||
-				world.getBiomeGenForCoords(i, k + 10).biomeID == BiomeGenBase.ocean.biomeID ||
-				world.getBiomeGenForCoords(i, k + 20).biomeID == BiomeGenBase.ocean.biomeID||
-				world.getBiomeGenForCoords(i, k - 5).biomeID == BiomeGenBase.ocean.biomeID ||
-				world.getBiomeGenForCoords(i, k - 10).biomeID == BiomeGenBase.ocean.biomeID ||
-				world.getBiomeGenForCoords(i, k - 20).biomeID == BiomeGenBase.ocean.biomeID)
+		if(world.getBiomeGenForCoords(i + 5, k).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i + 10, k).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i + 20, k).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i - 5, k).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i - 10, k).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i - 20, k).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i, k + 5).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i, k + 10).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i, k + 20).biomeID == TFCBiome.ocean.biomeID||
+				world.getBiomeGenForCoords(i, k - 5).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i, k - 10).biomeID == TFCBiome.ocean.biomeID ||
+				world.getBiomeGenForCoords(i, k - 20).biomeID == TFCBiome.ocean.biomeID)
 		{
 			return true;
 		}
