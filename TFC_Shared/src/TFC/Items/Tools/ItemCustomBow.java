@@ -99,7 +99,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 		//If there was no ammo in the inventory then we need to check if there is a quiver and if there is ammo inside of it.
 		if(!hasAmmo) 
 		{
-			hasAmmoInQuiver = consumeArrowInQuiver(player, true);
+			hasAmmoInQuiver = consumeArrowInQuiver(player, false);
 		}
 
 		if (hasAmmo || hasAmmoInQuiver)
@@ -153,6 +153,10 @@ public class ItemCustomBow extends ItemBow implements ISize
 			else if(hasAmmo)
 			{
 				player.inventory.consumeInventoryItem(Item.arrow.itemID);
+			}
+			else if(hasAmmoInQuiver)
+			{
+				consumeArrowInQuiver(player, true);
 			}
 
 			if (!world.isRemote)
