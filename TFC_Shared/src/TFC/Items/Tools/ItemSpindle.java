@@ -15,7 +15,8 @@ public class ItemSpindle extends ItemTerra
 		super(i);
 		this.setMaxDamage(40);
 		this.setFolder("tools/");
-
+		this.setNoRepair();
+		this.stackable = false;
 		this.setSize(EnumSize.VERYSMALL);
 	}
 
