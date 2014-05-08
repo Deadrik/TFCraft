@@ -152,7 +152,7 @@ public class TECrop extends NetworkTileEntity
 		return ((float)crop.numGrowthStages/(growthTimer-plantedTime/TFC_Time.dayLength))*1.5f;
 	}
 
-	public void onHarvest(World world, EntityPlayer player)
+	public void onHarvest(World world, EntityPlayer player, boolean isBreaking)
 	{
 		if(!world.isRemote)
 		{
@@ -171,7 +171,7 @@ public class TECrop extends NetworkTileEntity
 				ItemStack seedStack = crop.getSeed();
 				int skill = 20-(int)(20*TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_AGRICULTURE));
 				seedStack.stackSize = 1 + (world.rand.nextInt(1 + skill) == 0 ? 1 : 0);
-				if(seedStack != null)
+				if(seedStack != null && isBreaking)
 					world.spawnEntityInWorld(new EntityItem(world, xCoord+0.5, yCoord+0.5, zCoord+0.5, seedStack));
 
 				TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_AGRICULTURE, 1);

@@ -198,21 +198,21 @@ public class BlockCrop extends BlockContainer
 		if(crop != null && !world.isRemote)
 			if(crop.cropId == 4 && te.growth >= 7)
 			{
-				te.onHarvest(world, entityplayer);
+				te.onHarvest(world, entityplayer, false);
 				te.growth = 4;
 				te.broadcastPacketInRange(te.createCropUpdatePacket());
 				return true;
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 5 && te.growth < 6)
 			{
-				te.onHarvest(world, entityplayer);
+				te.onHarvest(world, entityplayer, false);
 				te.growth = 3;
 				te.broadcastPacketInRange(te.createCropUpdatePacket());
 				return true;
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 6)
 			{
-				te.onHarvest(world, entityplayer);
+				te.onHarvest(world, entityplayer, false);
 				te.growth = 3;
 				te.broadcastPacketInRange(te.createCropUpdatePacket());
 				return true;
@@ -243,7 +243,7 @@ public class BlockCrop extends BlockContainer
 					{
 						player.addStat(StatList.mineBlockStatArray[this.blockID], 1);
 						TECrop teX = (TECrop) world.getBlockTileEntity(i+x, j, k+z);
-						teX.onHarvest(world, player);
+						teX.onHarvest(world, player, true);
 						//breakBlock(world, i+x, j, k+z, l, 0);
 						world.setBlockToAir(i+x, j, k+z);
 
@@ -260,7 +260,7 @@ public class BlockCrop extends BlockContainer
 		}
 		else
 			//Handle Loot Drop
-			te.onHarvest(world, player);
+			te.onHarvest(world, player, true);
 	}
 
 	/**

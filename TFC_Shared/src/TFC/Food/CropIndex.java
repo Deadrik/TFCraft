@@ -32,6 +32,7 @@ public class CropIndex
 	public boolean needsSunlight = true;
 	public float waterUsageMult = 1;
 	public Item seedItem;
+	public boolean isMultiUseCrop = false;
 
 	public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, Item seed)
 	{
@@ -57,6 +58,12 @@ public class CropIndex
 		this(ID,name,type,growth,stages,minGTemp,minATemp,seed);
 		nutrientExtraRestore = nutriRestore;
 		nutrientUsageMult = nutrientUsageMultiplier;
+	}
+
+	public CropIndex setMultiUse()
+	{
+		this.isMultiUseCrop = true;
+		return this;
 	}
 
 	public CropIndex setOutput1(Item o, float oAvg)
