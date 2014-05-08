@@ -23,7 +23,6 @@ import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.EntityHorseGroupData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.AnimalChest;
 import net.minecraft.inventory.IInvBasic;
@@ -983,72 +982,10 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	}
 
 	@Override
-	public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData)
+	public EntityLivingData onSpawnWithEgg(EntityLivingData livingData)
 	{
-		Object par1EntityLivingData1 = super.onSpawnWithEgg(par1EntityLivingData);
-		boolean flag = false;
-		int i = 0;
-		int j;
-
-		if (par1EntityLivingData1 instanceof EntityHorseGroupData)
-		{
-			j = ((EntityHorseGroupData)par1EntityLivingData1).field_111107_a;
-			i = ((EntityHorseGroupData)par1EntityLivingData1).field_111106_b & 255 | this.rand.nextInt(5) << 8;
-		}
-		else
-		{
-			if (this.rand.nextInt(10) == 0)
-			{
-				j = 1;
-			}
-			else
-			{
-				int k = this.rand.nextInt(7);
-				int l = this.rand.nextInt(5);
-				j = 0;
-				i = k | l << 8;
-			}
-
-			par1EntityLivingData1 = new EntityHorseGroupData(j, i);
-		}
-
-		this.setHorseType(j);
-		this.setHorseVariant(i);
-
-		if (this.rand.nextInt(5) == 0)
-		{
-			this.setGrowingAge(-24000);
-		}
-
-		if (j != 4 && j != 3)
-		{
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(this.func_110267_cL());
-
-			if (j == 0)
-			{
-				this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.func_110203_cN());
-			}
-			else
-			{
-				this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.17499999701976776D);
-			}
-		}
-		else
-		{
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1250);
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.20000000298023224D);
-		}
-
-		if (j != 2 && j != 1)
-		{
-			this.getEntityAttribute(horseJumpStrength).setAttribute(this.func_110245_cM());
-		}
-		else
-		{
-			this.getEntityAttribute(horseJumpStrength).setAttribute(0.5D);
-		}
-
-		this.setHealth(this.getMaxHealth());
-		return (EntityLivingData)par1EntityLivingData1;
+		EntityLivingData data = super.onSpawnWithEgg(livingData);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1250);
+		return data;
 	}
 }
