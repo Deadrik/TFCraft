@@ -1142,4 +1142,10 @@ public class TFC_Core
 	{
 		return Vec3.createVectorHelper(e.posX, e.posY, e.posZ);
 	}
+
+	public static void giveItemToPlayer(ItemStack is, EntityPlayer player)
+	{
+		if(!player.inventory.addItemStackToInventory(is))
+			player.entityDropItem(is, 1);
+	}
 }

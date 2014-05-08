@@ -11,6 +11,7 @@ import TFC.API.IFood;
 import TFC.Containers.Slots.SlotArmorTFC;
 import TFC.Containers.Slots.SlotCraftingTFC;
 import TFC.Core.Player.PlayerInventory;
+import TFC.Handlers.CraftingHandler;
 import TFC.Handlers.FoodCraftingHandler;
 import TFC.Items.ItemTFCArmor;
 
@@ -100,6 +101,8 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			if (par2 == 0)
 			{
 				FoodCraftingHandler.preCraft(player, slotStack, craftMatrix);
+				CraftingHandler.preCraft(player, slotStack, craftMatrix);
+
 				if (!this.mergeItemStack(slotStack, 9, 45, true))
 					return null;
 

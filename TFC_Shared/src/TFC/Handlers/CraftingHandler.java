@@ -15,6 +15,7 @@ import TFC.TFCItems;
 import TFC.API.TFC_ItemHeat;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_Achievements;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerInventory;
@@ -154,17 +155,22 @@ public class CraftingHandler implements ICraftingHandler
 			}
 			else if(itemstack.getItem() instanceof ItemIngot)
 			{
-				if(player.worldObj.rand.nextInt(20) == 0)
-					player.playSound(TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
-				else if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1)))
-					player.entityDropItem(new ItemStack(TFCItems.CeramicMold, 1, 1), 1);
 				float temperature = 0;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 				{       
 					if(iinventory.getStackInSlot(i) == null)
 						continue;
 					if(iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal)
+					{
 						temperature = TFC_ItemHeat.GetTemp(iinventory.getStackInSlot(i));
+						if(player.worldObj.rand.nextInt(20) == 0)
+							player.playSound(TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+						else 
+						{
+							TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.CeramicMold,1,1), player);
+						}
+						iinventory.setInventorySlotContents(i, null);
+					}
 				}
 				TFC_ItemHeat.SetTemp(itemstack, temperature);				
 			}
@@ -213,6 +219,43 @@ public class CraftingHandler implements ICraftingHandler
 				}
 
 			}
+		}
+	}
+
+	public static void preCraft(EntityPlayer player, ItemStack craftResult, IInventory iinventory)
+	{
+		if(craftResult.getItem() instanceof ItemIngot)
+		{
+			float temperature = 0;
+			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+			{       
+				if(iinventory.getStackInSlot(i) == null)
+					continue;
+				if(iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal)
+				{
+					temperature = TFC_ItemHeat.GetTemp(iinventory.getStackInSlot(i));
+					if(player.worldObj.rand.nextInt(20) == 0)
+						player.playSound(TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+					else 
+					{
+						TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.CeramicMold,1,1), player);
+					}
+					iinventory.setInventorySlotContents(i, null);
+				}
+			}
+			TFC_ItemHeat.SetTemp(craftResult, temperature);				
+		}
+		else if(craftResult.getItem() instanceof ItemMeltedMetal)
+		{
+			float temperature = 0;
+			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+			{       
+				if(iinventory.getStackInSlot(i) == null)
+					continue;
+				if(iinventory.getStackInSlot(i).getItem() instanceof ItemIngot )
+					temperature = TFC_ItemHeat.GetTemp(iinventory.getStackInSlot(i));
+			}
+			TFC_ItemHeat.SetTemp(craftResult, temperature);
 		}
 	}
 
