@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Map;
 
 import TFC.ASM.Transform.TF_EntityFallingSand;
+import TFC.ASM.Transform.TF_EntityLeashKnot;
 import TFC.ASM.Transform.TF_EntityRenderer;
 import TFC.ASM.Transform.TF_RenderGlobal;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
@@ -25,7 +26,8 @@ public class TFCASMLoadingPlugin implements IFMLLoadingPlugin
 		return new String[]{
 				TF_EntityFallingSand.class.getName(), 
 				TF_EntityRenderer.class.getName(),
-				TF_RenderGlobal.class.getName()};
+				TF_RenderGlobal.class.getName(),
+				TF_EntityLeashKnot.class.getName()};
 	}
 
 	@Override

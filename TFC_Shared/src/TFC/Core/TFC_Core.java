@@ -1148,4 +1148,10 @@ public class TFC_Core
 		if(!player.inventory.addItemStackToInventory(is))
 			player.entityDropItem(is, 1);
 	}
+
+	public static boolean isFence(int id)
+	{
+		return (id == TFCBlocks.Fence.blockID || id == TFCBlocks.Fence2.blockID);
+
+	}
 }
