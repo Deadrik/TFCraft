@@ -107,7 +107,7 @@ public class ItemGoldPan extends ItemTerra
 				{
 					ChunkData cd = ChunkDataManager.getData(x >> 4, z >> 4);
 
-					if(cd.sluicedAmount < 100)
+					if(cd.sluicedAmount < 50)
 					{
 						if(world.getBlockId(x, y, z) == Block.gravel.blockID)
 						{
@@ -129,7 +129,7 @@ public class ItemGoldPan extends ItemTerra
 						}
 						else if(world.getBlockMaterial(x, y, z) == Material.water)
 						{
-							if(world.getBlockId(x, y-1, z) == Block.gravel.blockID)
+							/*if(world.getBlockId(x, y-1, z) == Block.gravel.blockID)
 							{
 								is.setItemDamage((5 << 4) + 2);
 								if(world.rand.nextInt(10) == 0) {
@@ -146,7 +146,7 @@ public class ItemGoldPan extends ItemTerra
 								}
 								TFC_Core.addPlayerExhaustion(player, 0.0005f);
 								cd.sluicedAmount++;
-							}
+							}*/
 						}
 					}
 					else
@@ -195,7 +195,7 @@ public class ItemGoldPan extends ItemTerra
 		int randType = rand.nextInt(100);
 
 		if (randType > 25 && world.rand.nextInt(60) == 0) type = 0;  // Copper
-		if (randType > 50 && world.rand.nextInt(120) == 0) type = 4; // Silver
+		//if (randType > 50 && world.rand.nextInt(120) == 0) type = 4; // Silver
 		if (randType > 75 && world.rand.nextInt(150) == 0) type = 1; // Gold
 		if (world.rand.nextInt(500) == 0) type = 2; // Platinum
 
