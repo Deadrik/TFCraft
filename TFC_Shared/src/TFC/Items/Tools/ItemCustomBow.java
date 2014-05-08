@@ -119,7 +119,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 
 			EntityProjectileTFC entityarrow = new EntityProjectileTFC(world, player, forceMult * 2.0F, Item.arrow.itemID);
 			entityarrow.setDamage(forceMult * 150.0);
-			if (forceMult == 1.0F)
+			if (forceMult == 1.25F)
 			{
 				entityarrow.setIsCritical(true);
 			}
