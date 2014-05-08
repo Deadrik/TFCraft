@@ -108,10 +108,18 @@ public class ContainerAnvil extends ContainerTFC
 						break;
 					}
 			}
-			if(slotStack.stackSize == 0)
+			if(slotStack.stackSize <= 0)
+			{
 				slot.putStack(null);
-			/*else
-				slot.onSlotChanged();*/
+			} else
+			{
+				slot.onSlotChanged();
+			}
+
+			if (slotStack.stackSize == origStack.stackSize)
+				return null;
+
+			slot.onPickupFromSlot(player, slotStack);
 		}
 		return origStack;
 	}
