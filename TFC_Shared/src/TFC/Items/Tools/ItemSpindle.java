@@ -30,4 +30,10 @@ public class ItemSpindle extends ItemTerra
 	public EnumItemReach getReach(ItemStack is){
 		return EnumItemReach.SHORT;
 	}
+
+	@Override
+	public int getItemStackLimit()
+	{
+		return 1;
+	}
 }
