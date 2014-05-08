@@ -17,7 +17,7 @@ import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
-import TFC.TileEntities.TileEntityLogPile;
+import TFC.TileEntities.TELogPile;
 
 public class ItemLogs extends ItemTerra
 {
@@ -42,36 +42,36 @@ public class ItemLogs extends ItemTerra
 
 	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y,
 			int z, int side, int l) {
-		TileEntityLogPile te = null;
+		TELogPile te = null;
 		if(side == 0 && world.getBlockId(x, y-1, z) == 0 && isValid(world, x, y-1, z))
 		{
 			world.setBlock( x, y-1, z, TFCBlocks.LogPile.blockID, l, 3);
-			te = (TileEntityLogPile)world.getBlockTileEntity(x, y-1, z);
+			te = (TELogPile)world.getBlockTileEntity(x, y-1, z);
 		}
 		else if(side == 1 && world.getBlockId(x, y+1, z) == 0 && isValid(world, x, y+1, z))
 		{
 			world.setBlock( x, y+1, z, TFCBlocks.LogPile.blockID, l, 3);
-			te = (TileEntityLogPile)world.getBlockTileEntity(x, y+1, z);
+			te = (TELogPile)world.getBlockTileEntity(x, y+1, z);
 		}
 		else if(side == 2 && world.getBlockId(x, y, z-1) == 0 && isValid(world, x, y, z-1))
 		{
 			world.setBlock( x, y, z-1, TFCBlocks.LogPile.blockID, l, 3);
-			te = (TileEntityLogPile)world.getBlockTileEntity(x, y, z-1);
+			te = (TELogPile)world.getBlockTileEntity(x, y, z-1);
 		}
 		else if(side == 3 && world.getBlockId(x, y, z+1) == 0 && isValid(world, x, y, z+1))
 		{
 			world.setBlock( x, y, z+1, TFCBlocks.LogPile.blockID, l, 3);
-			te = (TileEntityLogPile)world.getBlockTileEntity(x, y, z+1);
+			te = (TELogPile)world.getBlockTileEntity(x, y, z+1);
 		}
 		else if(side == 4 && world.getBlockId(x-1, y, z) == 0 && isValid(world, x-1, y, z))
 		{
 			world.setBlock( x-1, y, z, TFCBlocks.LogPile.blockID, l, 3);
-			te = (TileEntityLogPile)world.getBlockTileEntity(x-1, y, z);
+			te = (TELogPile)world.getBlockTileEntity(x-1, y, z);
 		}
 		else if(side == 5 && world.getBlockId(x+1, y, z) == 0 && isValid(world, x+1, y, z))
 		{
 			world.setBlock( x+1, y, z, TFCBlocks.LogPile.blockID, l, 3);
-			te = (TileEntityLogPile)world.getBlockTileEntity(x+1, y, z);
+			te = (TELogPile)world.getBlockTileEntity(x+1, y, z);
 		}
 		else
 		{
@@ -102,9 +102,9 @@ public class ItemLogs extends ItemTerra
 		{
 			TileEntity te = world.getBlockTileEntity(i, j-1, k);
 
-			if (te instanceof TileEntityLogPile)
+			if (te instanceof TELogPile)
 			{
-				TileEntityLogPile lp = (TileEntityLogPile)te;
+				TELogPile lp = (TELogPile)te;
 
 				if(lp != null)
 				{
@@ -159,7 +159,7 @@ public class ItemLogs extends ItemTerra
 			}
 			else if(world.getBlockId(x, y, z) == TFCBlocks.LogPile.blockID)
 			{
-				TileEntityLogPile te = (TileEntityLogPile)world.getBlockTileEntity(x, y, z);
+				TELogPile te = (TELogPile)world.getBlockTileEntity(x, y, z);
 				if(te != null)
 				{
 					if(te.storage[0] != null && te.contentsMatch(0,itemstack)) {

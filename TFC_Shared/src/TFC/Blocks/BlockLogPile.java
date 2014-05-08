@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.TileEntities.TileEntityLogPile;
+import TFC.TileEntities.TELogPile;
 
 public class BlockLogPile extends BlockTerraContainer
 {
@@ -39,10 +39,10 @@ public class BlockLogPile extends BlockTerraContainer
 		}
 		else
 		{
-			if((TileEntityLogPile)world.getBlockTileEntity(i, j, k)!=null)
+			if((TELogPile)world.getBlockTileEntity(i, j, k)!=null)
 			{
-				TileEntityLogPile te;
-				te = (TileEntityLogPile)world.getBlockTileEntity(i, j, k);
+				TELogPile te;
+				te = (TELogPile)world.getBlockTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
 				if(is != null && is.getItem().itemID == TFCItems.Logs.itemID)
@@ -112,10 +112,10 @@ public class BlockLogPile extends BlockTerraContainer
 
 	public void Eject(World par1World, int par2, int par3, int par4)
 	{
-		if(!par1World.isRemote && (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4)!=null)
+		if(!par1World.isRemote && (TELogPile)par1World.getBlockTileEntity(par2, par3, par4)!=null)
 		{
-			TileEntityLogPile tileentitylogpile;
-			tileentitylogpile = (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4);
+			TELogPile tileentitylogpile;
+			tileentitylogpile = (TELogPile)par1World.getBlockTileEntity(par2, par3, par4);
 			tileentitylogpile.ejectContents();
 			par1World.removeBlockTileEntity(par2, par3, par4);
 		}
@@ -150,7 +150,7 @@ public class BlockLogPile extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityLogPile();
+		return new TELogPile();
 	}
 
 	@Override
@@ -158,7 +158,7 @@ public class BlockLogPile extends BlockTerraContainer
 	{	
 		if(!par1World.isRemote)
 		{
-			TileEntityLogPile teLogPile = (TileEntityLogPile)par1World.getBlockTileEntity(x, y, z);
+			TELogPile teLogPile = (TELogPile)par1World.getBlockTileEntity(x, y, z);
 			if(teLogPile != null)
 				teLogPile.neighborChanged();
 		}

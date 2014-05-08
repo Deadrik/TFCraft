@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import TFC.Containers.Slots.SlotLogPile;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Items.ItemLogs;
-import TFC.TileEntities.TileEntityLogPile;
+import TFC.TileEntities.TELogPile;
 
 public class ContainerLogPile extends ContainerTFC
 {
@@ -17,10 +17,10 @@ public class ContainerLogPile extends ContainerTFC
 	private int posX;
 	private int posY;
 	private int posZ;
-	private TileEntityLogPile logpile;
+	private TELogPile logpile;
 	private EntityPlayer player;
 
-	public ContainerLogPile(InventoryPlayer playerinv, TileEntityLogPile pile, World world, int x, int y, int z)
+	public ContainerLogPile(InventoryPlayer playerinv, TELogPile pile, World world, int x, int y, int z)
 	{
 		this.player = playerinv.player;
 		this.logpile = pile;

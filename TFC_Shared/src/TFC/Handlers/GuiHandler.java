@@ -38,7 +38,7 @@ import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TEFoodPrep;
 import TFC.TileEntities.TEForge;
-import TFC.TileEntities.TileEntityLogPile;
+import TFC.TileEntities.TELogPile;
 import TFC.TileEntities.TileEntityQuern;
 import TFC.TileEntities.TileEntitySluice;
 import TFC.TileEntities.TileEntityWorkbench;
@@ -55,7 +55,7 @@ public class GuiHandler implements IGuiHandler
 		{
 		case 0:
 		{
-			return new ContainerLogPile(player.inventory, (TileEntityLogPile) te, world, x, y, z);
+			return new ContainerLogPile(player.inventory, (TELogPile) te, world, x, y, z);
 		}
 		case 1:
 		{

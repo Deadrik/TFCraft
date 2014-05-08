@@ -67,7 +67,7 @@ import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TEForge;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityIngotPile;
-import TFC.TileEntities.TileEntityLogPile;
+import TFC.TileEntities.TELogPile;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityPottery;
 import TFC.TileEntities.TileEntityQuern;
@@ -106,7 +106,7 @@ public class CommonProxy
 
 	public void registerTileEntities(boolean b)
 	{
-		GameRegistry.registerTileEntity(TileEntityLogPile.class, "TerraLogPile");
+		GameRegistry.registerTileEntity(TELogPile.class, "TerraLogPile");
 
 		GameRegistry.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
 		GameRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit");

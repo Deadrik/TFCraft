@@ -15,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import TFC.Core.TFC_Core;
 import TFC.Core.Vector3f;
 
-public class TileEntityLogPile extends TileEntity implements IInventory
+public class TELogPile extends TileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	private int logPileOpeners;
@@ -25,7 +25,7 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 	private int fireTimer;
 	public Queue<Vector3f> blocksToBeSetOnFire;
 
-	public TileEntityLogPile()
+	public TELogPile()
 	{
 		storage = new ItemStack[4];
 		logPileOpeners = 0;
@@ -42,6 +42,19 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 					charcoalFirepit.logPileUpdate(is.stackSize);
 				else 
 					setCharcoalFirepit(null);
+		}
+	}
+
+	public ItemStack takeLog(int slot)
+	{
+		if(storage[slot] == null)
+			return null;
+		else 
+		{
+			ItemStack is = storage[slot].copy();
+			is.stackSize = 1;
+			storage[slot].stackSize--;
+			return is;
 		}
 	}
 
@@ -266,7 +279,7 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 
 	public void handlePacketData() 
 	{
-		TileEntityLogPile pile = this;
+		TELogPile pile = this;
 	}
 
 	@Override

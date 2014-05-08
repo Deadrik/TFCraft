@@ -13,11 +13,11 @@ import TFC.Containers.ContainerLogPile;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Util.StringUtil;
-import TFC.TileEntities.TileEntityLogPile;
+import TFC.TileEntities.TELogPile;
 
 public class GuiLogPile extends GuiContainer
 {
-	public GuiLogPile(InventoryPlayer inventoryplayer, TileEntityLogPile wb, World world, int i, int j, int k)
+	public GuiLogPile(InventoryPlayer inventoryplayer, TELogPile wb, World world, int i, int j, int k)
 	{
 		super(new ContainerLogPile(inventoryplayer, wb,world, i, j, k));
 		xSize = 176;

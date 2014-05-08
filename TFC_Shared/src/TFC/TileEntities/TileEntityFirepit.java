@@ -70,55 +70,6 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 		topScan = true;
 	}
 
-	public Boolean addByproduct(ItemStack is)
-	{
-		if(fireItemStacks[2] == null)
-		{
-			fireItemStacks[2] = is;
-			return true;
-		}
-		else if (fireItemStacks[2].itemID == is.itemID && fireItemStacks[2].getItemDamage() == is.getItemDamage() && fireItemStacks[2].stackSize < fireItemStacks[2].getMaxStackSize())
-		{
-			fireItemStacks[2].stackSize++;
-			return true;
-		}
-
-		if(fireItemStacks[6] == null)
-		{
-			fireItemStacks[6] = is;
-			return true;
-		}
-		else if (fireItemStacks[6].itemID == is.itemID  && fireItemStacks[6].getItemDamage() == is.getItemDamage() && fireItemStacks[6].stackSize < fireItemStacks[6].getMaxStackSize())
-		{
-			fireItemStacks[6].stackSize++;
-			return true;
-		}
-
-		if(fireItemStacks[9] == null)
-		{
-			fireItemStacks[9] = is;
-			return true;
-		}
-		else if (fireItemStacks[9].itemID == is.itemID && fireItemStacks[9].getItemDamage() == is.getItemDamage()  && fireItemStacks[9].stackSize < fireItemStacks[9].getMaxStackSize())
-		{
-			fireItemStacks[9].stackSize++;
-			return true;
-		}
-
-		if(fireItemStacks[10] == null)
-		{
-			fireItemStacks[10] = is;
-			return true;
-		}
-		else if (fireItemStacks[10].itemID == is.itemID && fireItemStacks[10].getItemDamage() == is.getItemDamage()  && fireItemStacks[10].stackSize < fireItemStacks[10].getMaxStackSize())
-		{
-			fireItemStacks[10].stackSize++;
-			return true;
-		}
-
-		return false;
-	}
-
 	@Override
 	public void closeChest() {
 
@@ -382,7 +333,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 	{       
 		if(worldObj.getBlockId(i, j, k) == TFCBlocks.LogPile.blockID)
 		{
-			TileEntityLogPile te = (TileEntityLogPile)worldObj.getBlockTileEntity(i, j, k);
+			TELogPile te = (TELogPile)worldObj.getBlockTileEntity(i, j, k);
 
 			int count = 0;
 			if(te != null)
@@ -544,6 +495,22 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 			fireItemStacks[5] = fireItemStacks[4];
 			fireItemStacks[4] = null;
 		}
+		else if(fireItemStacks[5] == null && fireItemStacks[4] == null)
+		{
+			if(worldObj.getBlockId(xCoord, yCoord+1, zCoord) == TFCBlocks.LogPile.blockID)
+			{
+				TELogPile te = (TELogPile)worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
+				if(te.getStackInSlot(0) != null)
+					fireItemStacks[5] = te.takeLog(0);
+				else if(te.getStackInSlot(1) != null)
+					fireItemStacks[5] = te.takeLog(1);
+				else if(te.getStackInSlot(2) != null)
+					fireItemStacks[5] = te.takeLog(2);
+				else if(te.getStackInSlot(3) != null)
+					fireItemStacks[5] = te.takeLog(3);
+			}
+		}
+
 	}
 
 	@Override
