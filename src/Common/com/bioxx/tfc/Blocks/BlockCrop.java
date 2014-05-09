@@ -2,15 +2,6 @@ package com.bioxx.tfc.Blocks;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Food.CropIndex;
-import com.bioxx.tfc.Food.CropManager;
-import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
-import com.bioxx.tfc.TileEntities.TECrop;
-import com.bioxx.tfc.api.TFCOptions;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -26,6 +17,16 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Food.CropIndex;
+import com.bioxx.tfc.Food.CropManager;
+import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
+import com.bioxx.tfc.TileEntities.TECrop;
+import com.bioxx.tfc.api.TFCOptions;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -173,7 +174,7 @@ public class BlockCrop extends BlockContainer
 		{
 			if(crop.cropId == 4 && te.growth >= 7)
 			{
-				te.onHarvest(world, entityplayer);
+				te.onHarvest(world, entityplayer, false);
 				te.growth = 4;
 				world.markBlockForUpdate(i, j, k);
 				//te.broadcastPacketInRange(te.createCropUpdatePacket());
@@ -181,7 +182,7 @@ public class BlockCrop extends BlockContainer
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 5 && te.growth < 6)
 			{
-				te.onHarvest(world, entityplayer);
+				te.onHarvest(world, entityplayer, false);
 				te.growth = 3;
 				world.markBlockForUpdate(i, j, k);
 				//te.broadcastPacketInRange(te.createCropUpdatePacket());
@@ -189,7 +190,7 @@ public class BlockCrop extends BlockContainer
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 6)
 			{
-				te.onHarvest(world, entityplayer);
+				te.onHarvest(world, entityplayer, false);
 				te.growth = 3;
 				world.markBlockForUpdate(i, j, k);
 				//te.broadcastPacketInRange(te.createCropUpdatePacket());
@@ -224,7 +225,7 @@ public class BlockCrop extends BlockContainer
 					{
 						player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
 						TECrop teX = (TECrop) world.getTileEntity(i + x, j, k + z);
-						teX.onHarvest(world, player);
+						teX.onHarvest(world, player, true);
 
 						//breakBlock(world, i + x, j, k + z, l, 0);
 						world.setBlockToAir(i + x, j, k + z);
@@ -242,7 +243,7 @@ public class BlockCrop extends BlockContainer
 		}
 		else
 			//Handle Loot Drop
-			te.onHarvest(world, player);
+			te.onHarvest(world, player, true);
 	}
 
 	/**

@@ -13,13 +13,13 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerLogPile;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.TileEntities.TileEntityLogPile;
+import com.bioxx.tfc.TileEntities.TELogPile;
 
 public class GuiLogPile extends GuiContainer
 {
-	public GuiLogPile(InventoryPlayer inventoryplayer, TileEntityLogPile wb, World world, int i, int j, int k)
+	public GuiLogPile(InventoryPlayer inventoryplayer, TELogPile wb, World world, int i, int j, int k)
 	{
-		super(new ContainerLogPile(inventoryplayer, wb,world, i, j, k));
+		super(new ContainerLogPile(inventoryplayer, wb, world, i, j, k));
 		xSize = 176;
 		ySize = 85+PlayerInventory.invYSize;
 	}

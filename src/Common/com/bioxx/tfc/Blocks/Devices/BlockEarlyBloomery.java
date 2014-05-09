@@ -2,16 +2,6 @@ package com.bioxx.tfc.Blocks.Devices;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.CollisionRayTraceStandard;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TileEntityEarlyBloomery;
-import com.bioxx.tfc.api.ICustomCollision;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -27,6 +17,19 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.CollisionRayTraceStandard;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TileEntities.TileEntityEarlyBloomery;
+import com.bioxx.tfc.api.ICustomCollision;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCollision
 {
@@ -77,6 +80,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			}
 			else
 			{
+				world.playAuxSFXAtEntity(entityplayer, 1003, i, j, k, 0);
 				if (isOpen(world.getBlockMetadata(i, j, k)))
 					world.setBlockMetadataWithNotify(i, j, k, world.getBlockMetadata(i, j, k) - 8, 3);
 				else
@@ -553,4 +557,11 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	{
 		return CollisionRayTraceStandard.collisionRayTrace(this, world, x, y, z, player, view);
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+		return true;
+	}
+ 
 }

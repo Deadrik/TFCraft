@@ -35,16 +35,16 @@ import com.bioxx.tfc.GUI.GuiSluice;
 import com.bioxx.tfc.GUI.GuiVessel;
 import com.bioxx.tfc.GUI.GuiVesselLiquid;
 import com.bioxx.tfc.GUI.GuiWorkbench;
+import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
 import com.bioxx.tfc.TileEntities.TECrucible;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
+import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
-import com.bioxx.tfc.TileEntities.TileEntityAnvil;
 import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
-import com.bioxx.tfc.TileEntities.TileEntityLogPile;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
@@ -69,7 +69,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		switch(ID)
 		{
 		case 0:
-			return new GuiLogPile(player.inventory, (TileEntityLogPile) te, world, x, y, z);
+			return new GuiLogPile(player.inventory, (TELogPile) te, world, x, y, z);
 		case 1:
 			return new GuiWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
 		case 19:
@@ -77,13 +77,13 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 20:
 			return new GuiFirepit(player.inventory, (TileEntityFirepit) te, world, x, y, z);
 		case 21:
-			return new GuiAnvil(player.inventory, (TileEntityAnvil) te, world, x, y, z);
+			return new GuiAnvil(player.inventory, (TEAnvil) te, world, x, y, z);
 		case 22:
 			return null;//was scribing table
 		case 23:
 			return new GuiForge(player.inventory, (TEForge) te, world, x, y, z);
 		case 24:
-			return new GuiPlanSelection(player, (TileEntityAnvil) te, world, x, y, z);//was metallurgy table
+			return new GuiPlanSelection(player, (TEAnvil) te, world, x, y, z);//was metallurgy table
 		case 25:
 			return new GuiSluice(player.inventory, (TileEntitySluice) te, world, x, y, z);
 		case 26:

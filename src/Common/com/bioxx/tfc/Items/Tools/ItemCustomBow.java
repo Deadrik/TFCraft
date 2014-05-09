@@ -92,7 +92,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 		boolean hasAmmoInQuiver = false;
 		//If there was no ammo in the inventory then we need to check if there is a quiver and if there is ammo inside of it.
 		if(!hasAmmo)
-			hasAmmoInQuiver = consumeArrowInQuiver(player, true);
+			hasAmmoInQuiver = consumeArrowInQuiver(player, false);
 
 		if (hasAmmo || hasAmmoInQuiver)
 		{
@@ -107,7 +107,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 
 			EntityProjectileTFC entityarrow = new EntityProjectileTFC(world, player, forceMult * 2.0F);
 			entityarrow.setDamage(forceMult * 150.0);
-			if (forceMult == 1.0F)
+			if (forceMult == 1.25F)
 				entityarrow.setIsCritical(true);
 
 			int k = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, is);
@@ -130,6 +130,8 @@ public class ItemCustomBow extends ItemBow implements ISize
 				entityarrow.canBePickedUp = 2;
 			else if(hasAmmo)
 				player.inventory.consumeInventoryItem(TFCItems.Arrow);
+			else if(hasAmmoInQuiver)
+				consumeArrowInQuiver(player, true);
 
 			if (!world.isRemote)
 				world.spawnEntityInWorld(entityarrow);

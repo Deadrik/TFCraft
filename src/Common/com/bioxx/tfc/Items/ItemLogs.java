@@ -2,14 +2,6 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.TileEntities.TileEntityLogPile;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,9 +14,17 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.TileEntities.TELogPile;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
+
 public class ItemLogs extends ItemTerra
 {
-	public ItemLogs() 
+	public ItemLogs()
 	{
 		super();
 		setMaxDamage(0);
@@ -43,38 +43,38 @@ public class ItemLogs extends ItemTerra
 		}
 	}
 
-	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y,
-			int z, int side, int l) {
-		TileEntityLogPile te = null;
-		if(side == 0 && world.isAirBlock(x, y-1, z) && isValid(world, x, y-1, z))
+	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)
+	{
+		TELogPile te = null;
+		if(side == 0 && world.isAirBlock(x, y - 1, z) && isValid(world, x, y - 1, z))
 		{
-			world.setBlock( x, y-1, z, TFCBlocks.LogPile, l, 3);
-			te = (TileEntityLogPile)world.getTileEntity(x, y-1, z);
+			world.setBlock(x, y - 1, z, TFCBlocks.LogPile, l, 3);
+			te = (TELogPile)world.getTileEntity(x, y - 1, z);
 		}
-		else if(side == 1 && world.isAirBlock(x, y+1, z) && isValid(world, x, y+1, z))
+		else if(side == 1 && world.isAirBlock(x, y + 1, z) && isValid(world, x, y + 1, z))
 		{
-			world.setBlock( x, y+1, z, TFCBlocks.LogPile, l, 3);
-			te = (TileEntityLogPile)world.getTileEntity(x, y+1, z);
+			world.setBlock(x, y + 1, z, TFCBlocks.LogPile, l, 3);
+			te = (TELogPile)world.getTileEntity(x, y + 1, z);
 		}
-		else if(side == 2 && world.isAirBlock(x, y, z-1) && isValid(world, x, y, z-1))
+		else if(side == 2 && world.isAirBlock(x, y, z - 1) && isValid(world, x, y, z - 1))
 		{
-			world.setBlock( x, y, z-1, TFCBlocks.LogPile, l, 3);
-			te = (TileEntityLogPile)world.getTileEntity(x, y, z-1);
+			world.setBlock(x, y, z-1, TFCBlocks.LogPile, l, 3);
+			te = (TELogPile)world.getTileEntity(x, y, z - 1);
 		}
-		else if(side == 3 && world.isAirBlock(x, y, z+1) && isValid(world, x, y, z+1))
+		else if(side == 3 && world.isAirBlock(x, y, z + 1) && isValid(world, x, y, z + 1))
 		{
-			world.setBlock( x, y, z+1, TFCBlocks.LogPile, l, 3);
-			te = (TileEntityLogPile)world.getTileEntity(x, y, z+1);
+			world.setBlock(x, y, z + 1, TFCBlocks.LogPile, l, 3);
+			te = (TELogPile)world.getTileEntity(x, y, z + 1);
 		}
-		else if(side == 4 && world.isAirBlock(x-1, y, z) && isValid(world, x-1, y, z))
+		else if(side == 4 && world.isAirBlock(x - 1, y, z) && isValid(world, x - 1, y, z))
 		{
-			world.setBlock( x-1, y, z, TFCBlocks.LogPile, l, 3);
-			te = (TileEntityLogPile)world.getTileEntity(x-1, y, z);
+			world.setBlock(x - 1, y, z, TFCBlocks.LogPile, l, 3);
+			te = (TELogPile)world.getTileEntity(x - 1, y, z);
 		}
-		else if(side == 5 && world.isAirBlock(x+1, y, z) && isValid(world, x+1, y, z))
+		else if(side == 5 && world.isAirBlock(x + 1, y, z) && isValid(world, x + 1, y, z))
 		{
-			world.setBlock( x+1, y, z, TFCBlocks.LogPile, l, 3);
-			te = (TileEntityLogPile)world.getTileEntity(x+1, y, z);
+			world.setBlock(x + 1, y, z, TFCBlocks.LogPile, l, 3);
+			te = (TELogPile)world.getTileEntity(x + 1, y, z);
 		}
 		else
 		{
@@ -105,9 +105,9 @@ public class ItemLogs extends ItemTerra
 		{
 			TileEntity te = world.getTileEntity(i, j-1, k);
 
-			if (te instanceof TileEntityLogPile)
+			if (te instanceof TELogPile)
 			{
-				TileEntityLogPile lp = (TileEntityLogPile)te;
+				TELogPile lp = (TELogPile)te;
 
 				if(lp != null)
 				{
@@ -162,7 +162,7 @@ public class ItemLogs extends ItemTerra
 			}
 			else if(world.getBlock(x, y, z) == TFCBlocks.LogPile)
 			{
-				TileEntityLogPile te = (TileEntityLogPile)world.getTileEntity(x, y, z);
+				TELogPile te = (TELogPile)world.getTileEntity(x, y, z);
 				if(te != null)
 				{
 					if(te.storage[0] != null && te.contentsMatch(0,itemstack)) {

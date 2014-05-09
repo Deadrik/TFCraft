@@ -40,6 +40,16 @@ public class FloraIndex
 		output = o;
 	}
 
+	public FloraIndex(String n, int h1, int h2, ItemStack o)
+	{
+		type = n;
+		bloomStart = 0;
+		bloomFinish = 0;
+		harvestStart = h1;
+		harvestFinish = h2;
+		output = o;
+	}
+
 	public FloraIndex setHangTime(int time)
 	{
 		fruitHangTime = time;

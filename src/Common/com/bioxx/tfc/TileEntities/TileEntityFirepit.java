@@ -6,6 +6,17 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -17,16 +28,6 @@ import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumWoodMaterial;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -58,55 +59,6 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 		charcoalCounter = 0;
 		hasCookingPot = false;
 		topScan = true;
-	}
-
-	public Boolean addByproduct(ItemStack is)
-	{
-		if(fireItemStacks[2] == null)
-		{
-			fireItemStacks[2] = is;
-			return true;
-		}
-		else if (fireItemStacks[2] == is && fireItemStacks[2].getItemDamage() == is.getItemDamage() && fireItemStacks[2].stackSize < fireItemStacks[2].getMaxStackSize())
-		{
-			fireItemStacks[2].stackSize++;
-			return true;
-		}
-
-		if(fireItemStacks[6] == null)
-		{
-			fireItemStacks[6] = is;
-			return true;
-		}
-		else if (fireItemStacks[6] == is  && fireItemStacks[6].getItemDamage() == is.getItemDamage() && fireItemStacks[6].stackSize < fireItemStacks[6].getMaxStackSize())
-		{
-			fireItemStacks[6].stackSize++;
-			return true;
-		}
-
-		if(fireItemStacks[9] == null)
-		{
-			fireItemStacks[9] = is;
-			return true;
-		}
-		else if (fireItemStacks[9] == is && fireItemStacks[9].getItemDamage() == is.getItemDamage()  && fireItemStacks[9].stackSize < fireItemStacks[9].getMaxStackSize())
-		{
-			fireItemStacks[9].stackSize++;
-			return true;
-		}
-
-		if(fireItemStacks[10] == null)
-		{
-			fireItemStacks[10] = is;
-			return true;
-		}
-		else if (fireItemStacks[10] == is && fireItemStacks[10].getItemDamage() == is.getItemDamage()  && fireItemStacks[10].stackSize < fireItemStacks[10].getMaxStackSize())
-		{
-			fireItemStacks[10].stackSize++;
-			return true;
-		}
-
-		return false;
 	}
 
 	@Override
@@ -383,7 +335,8 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 	{
 		if(worldObj.getBlock(i, j, k) == TFCBlocks.LogPile)
 		{
-			TileEntityLogPile te = (TileEntityLogPile)worldObj.getTileEntity(i, j, k);
+			TELogPile te = (TELogPile)worldObj.getTileEntity(i, j, k);
+
 			int count = 0;
 			if(te != null)
 			{
@@ -555,6 +508,21 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 		{
 			fireItemStacks[5] = fireItemStacks[4];
 			fireItemStacks[4] = null;
+		}
+		else if(fireItemStacks[5] == null && fireItemStacks[4] == null)
+		{
+			if(worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.LogPile)
+			{
+				TELogPile te = (TELogPile)worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
+				if(te.getStackInSlot(0) != null)
+					fireItemStacks[5] = te.takeLog(0);
+				else if(te.getStackInSlot(1) != null)
+					fireItemStacks[5] = te.takeLog(1);
+				else if(te.getStackInSlot(2) != null)
+					fireItemStacks[5] = te.takeLog(2);
+				else if(te.getStackInSlot(3) != null)
+					fireItemStacks[5] = te.takeLog(3);
+			}
 		}
 	}
 

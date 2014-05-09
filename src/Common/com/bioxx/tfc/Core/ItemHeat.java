@@ -193,6 +193,8 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BrassIngot,1), BrassRaw,new ItemStack(TFCItems.BrassUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BrassIngot2x,1), BrassRaw,new ItemStack(TFCItems.BrassUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BrassUnshaped,1), BrassRaw,new ItemStack(TFCItems.BrassUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BrassSheet,1), BrassRaw,new ItemStack(TFCItems.BrassUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BrassSheet2x,1), BrassRaw,new ItemStack(TFCItems.BrassUnshaped,4,0)));
 		//Bronze
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeIngot,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeIngot2x,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2,0)));
@@ -227,6 +229,8 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.GoldIngot,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.GoldIngot2x,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.GoldUnshaped,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.GoldSheet,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.GoldSheet2x,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,4,0)));
 		//Wrought Iron
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronIngot,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,1)));
 
@@ -250,18 +254,26 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.LeadIngot,1), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.LeadIngot2x,1), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.LeadUnshaped,1), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.LeadSheet,1), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.LeadSheet2x,1), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,4,0)));
 		//Nickel
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.NickelIngot,1), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.NickelIngot2x,1), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.NickelUnshaped,1), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.NickelSheet,1), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.NickelSheet2x,1), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,4,0)));
 		//Pig Iron
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PigIronIngot,1), PigIronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PigIronIngot2x,1), PigIronRaw,new ItemStack(TFCItems.PigIronUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PigIronUnshaped,1), PigIronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PigIronSheet,1), PigIronRaw,new ItemStack(TFCItems.PigIronUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PigIronSheet2x,1), PigIronRaw,new ItemStack(TFCItems.PigIronUnshaped,4,0)));
 		//Platinum
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PlatinumIngot,1), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PlatinumIngot2x,1), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PlatinumUnshaped,1), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PlatinumSheet,1), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PlatinumSheet2x,1), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,4,0)));
 		//Red Steel
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelIngot,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelIngot2x,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2,0)));
@@ -287,6 +299,8 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SilverIngot,1), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SilverIngot2x,1), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SilverUnshaped,1), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SilverSheet,1), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SilverSheet2x,1), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,4,0)));
 		//Steel
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelIngot,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelIngot2x,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2,0)));
@@ -306,6 +320,8 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SterlingSilverIngot,1), SterlingSilverRaw,new ItemStack(TFCItems.SterlingSilverUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SterlingSilverIngot2x,1), SterlingSilverRaw,new ItemStack(TFCItems.SterlingSilverUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SterlingSilverUnshaped,1), SterlingSilverRaw,new ItemStack(TFCItems.SterlingSilverUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SterlingSilverSheet,1), SterlingSilverRaw,new ItemStack(TFCItems.SterlingSilverUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SterlingSilverSheet2x,1), SterlingSilverRaw,new ItemStack(TFCItems.SterlingSilverUnshaped,4,0)));
 		//Tin
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinIngot,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinIngot2x,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,2,0)));

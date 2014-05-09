@@ -1,10 +1,5 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.Containers.Slots.SlotLogPile;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.Items.ItemLogs;
-import com.bioxx.tfc.TileEntities.TileEntityLogPile;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
@@ -12,16 +7,21 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Containers.Slots.SlotLogPile;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Items.ItemLogs;
+import com.bioxx.tfc.TileEntities.TELogPile;
+
 public class ContainerLogPile extends ContainerTFC
 {
 	private World world;
 	private int posX;
 	private int posY;
 	private int posZ;
-	private TileEntityLogPile logpile;
+	private TELogPile logpile;
 	private EntityPlayer player;
 
-	public ContainerLogPile(InventoryPlayer playerinv, TileEntityLogPile pile, World world, int x, int y, int z)
+	public ContainerLogPile(InventoryPlayer playerinv, TELogPile pile, World world, int x, int y, int z)
 	{
 		this.player = playerinv.player;
 		this.logpile = pile;

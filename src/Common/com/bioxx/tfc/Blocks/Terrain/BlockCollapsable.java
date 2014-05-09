@@ -3,17 +3,6 @@ package com.bioxx.tfc.Blocks.Terrain;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.TileEntities.TileEntityPartial;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Enums.TFCDirection;
-import com.bioxx.tfc.api.Util.ByteCoord;
-import com.bioxx.tfc.api.Util.CollapseData;
-import com.bioxx.tfc.api.Util.CollapseList;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,6 +14,18 @@ import net.minecraft.stats.StatList;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.TileEntities.TileEntityPartial;
+import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Enums.TFCDirection;
+import com.bioxx.tfc.api.Util.ByteCoord;
+import com.bioxx.tfc.api.Util.CollapseData;
+import com.bioxx.tfc.api.Util.CollapseList;
 
 public class BlockCollapsable extends BlockTerraContainer
 {
@@ -138,7 +139,7 @@ public class BlockCollapsable extends BlockTerraContainer
 		for(int y = -1; y < 1; y++)
 			for(int x = -range; x < range+1; x++)
 				for(int z = -range; z < range+1; z++)
-					if(world.getBlock(i+x, j+y, k+z) == TFCBlocks.WoodSupportH)
+					if(TFC_Core.isHorizSupport(world.getBlock(i + x, j + y, k + z)))
 						if(world.rand.nextFloat() < collapseChance/100f/2f)
 							world.setBlockToAir(i+x, j+y, k+z);
 						else return true;

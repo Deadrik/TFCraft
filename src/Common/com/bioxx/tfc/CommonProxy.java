@@ -39,6 +39,7 @@ import com.bioxx.tfc.Entities.Mobs.EntityWolfTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityZombieTFC;
 import com.bioxx.tfc.Handlers.GuiHandler;
 import com.bioxx.tfc.Handlers.ServerTickHandler;
+import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBerryBush;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
@@ -47,13 +48,13 @@ import com.bioxx.tfc.TileEntities.TECrucible;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEFruitLeaves;
+import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.TileEntities.TESeaWeed;
 import com.bioxx.tfc.TileEntities.TEStand;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
-import com.bioxx.tfc.TileEntities.TileEntityAnvil;
 import com.bioxx.tfc.TileEntities.TileEntityBellows;
 import com.bioxx.tfc.TileEntities.TileEntityBloom;
 import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
@@ -64,7 +65,6 @@ import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
 import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
-import com.bioxx.tfc.TileEntities.TileEntityLogPile;
 import com.bioxx.tfc.TileEntities.TileEntityPartial;
 import com.bioxx.tfc.TileEntities.TileEntityPottery;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
@@ -110,7 +110,7 @@ public class CommonProxy
 
 	public void registerTileEntities(boolean b)
 	{
-		GameRegistry.registerTileEntity(TileEntityLogPile.class, "TerraLogPile");
+		GameRegistry.registerTileEntity(TELogPile.class, "TerraLogPile");
 		GameRegistry.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
 		GameRegistry.registerTileEntity(TEForge.class, "TerraForge");
 		GameRegistry.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");
@@ -145,7 +145,7 @@ public class CommonProxy
 			GameRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep");
 			GameRegistry.registerTileEntity(TileEntityBellows.class, "Bellows");
 			GameRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack");
-			GameRegistry.registerTileEntity(TileEntityAnvil.class, "TerraAnvil");
+			GameRegistry.registerTileEntity(TEAnvil.class, "TerraAnvil");
 			GameRegistry.registerTileEntity(TEWorldItem.class, "worldItem");
 			GameRegistry.registerTileEntity(TileEntityQuern.class, "Quern");
 		}

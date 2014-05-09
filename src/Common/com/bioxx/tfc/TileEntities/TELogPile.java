@@ -4,9 +4,6 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Random;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Vector3f;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -19,7 +16,10 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityLogPile extends TileEntity implements IInventory
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.Vector3f;
+
+public class TELogPile extends TileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	private int logPileOpeners;
@@ -28,7 +28,7 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 	private int fireTimer;
 	public Queue<Vector3f> blocksToBeSetOnFire;
 
-	public TileEntityLogPile()
+	public TELogPile()
 	{
 		storage = new ItemStack[4];
 		logPileOpeners = 0;
@@ -47,6 +47,19 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 				else
 					setCharcoalFirepit(null);
 			}
+		}
+	}
+
+	public ItemStack takeLog(int slot)
+	{
+		if(storage[slot] == null)
+			return null;
+		else
+		{
+			ItemStack is = storage[slot].copy();
+			is.stackSize = 1;
+			storage[slot].stackSize--;
+			return is;
 		}
 	}
 

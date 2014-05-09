@@ -30,16 +30,16 @@ import com.bioxx.tfc.Containers.ContainerWorkbench;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
+import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
 import com.bioxx.tfc.TileEntities.TECrucible;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
+import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
-import com.bioxx.tfc.TileEntities.TileEntityAnvil;
 import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
-import com.bioxx.tfc.TileEntities.TileEntityLogPile;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
@@ -58,7 +58,7 @@ public class GuiHandler implements IGuiHandler
 		{
 		case 0:
 		{
-			return new ContainerLogPile(player.inventory, (TileEntityLogPile) te, world, x, y, z);
+			return new ContainerLogPile(player.inventory, (TELogPile) te, world, x, y, z);
 		}
 		case 1:
 		{
@@ -74,7 +74,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 21:
 		{
-			return new ContainerAnvil(player.inventory, (TileEntityAnvil) te, world, x, y, z);
+			return new ContainerAnvil(player.inventory, (TEAnvil) te, world, x, y, z);
 		}
 		case 22:
 		{
@@ -86,7 +86,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 24:
 		{
-			return new ContainerPlanSelection(player, (TileEntityAnvil) te, world, x, y, z);//was metallurgy table
+			return new ContainerPlanSelection(player, (TEAnvil) te, world, x, y, z);//was metallurgy table
 		}
 		case 25:
 		{

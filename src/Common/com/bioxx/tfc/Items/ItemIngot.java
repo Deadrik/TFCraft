@@ -3,20 +3,6 @@ package com.bioxx.tfc.Items;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.Metal.MetalRegistry;
-import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
-import com.bioxx.tfc.api.HeatIndex;
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.ISmeltable;
-import com.bioxx.tfc.api.Metal;
-import com.bioxx.tfc.api.TFC_ItemHeat;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -28,6 +14,20 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
+import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.ISmeltable;
+import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -66,70 +66,24 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		if(TFC_ItemHeat.HasTemp(is))
 		{
 			String s = "";
-			if(isTemperatureDanger(is))
+			if(HeatRegistry.getInstance().isTemperatureDanger(is))
 			{
 				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.danger") + " | ";
 			}
 
-			if(isTemperatureWeldable(is))
+			if(HeatRegistry.getInstance().isTemperatureWeldable(is))
 			{
 				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.weldable") + " | ";
 			}
 
-			if(isTemperatureWorkable(is))
+			if(HeatRegistry.getInstance().isTemperatureWorkable(is))
 			{
 				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.workable");
 			}
 
 			if(!s.equals(""))
 				arraylist.add(s);
-
 		}
-	}
-
-	public Boolean isTemperatureWeldable(ItemStack is)
-	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			HeatIndex index = manager.findMatchingIndex(is);
-			if(index != null)
-			{
-				float temp = TFC_ItemHeat.GetTemp(is);
-				return temp < index.meltTemp && temp > index.meltTemp *0.8;
-			}
-		}
-		return false;
-	}
-
-	public Boolean isTemperatureWorkable(ItemStack is)
-	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			HeatIndex index = manager.findMatchingIndex(is);
-			if(index != null)
-			{
-				float temp = TFC_ItemHeat.GetTemp(is);
-				return temp < index.meltTemp && temp > index.meltTemp * 0.60;
-			}
-		}
-		return false;
-	}
-
-	public Boolean isTemperatureDanger(ItemStack is)
-	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			HeatIndex index = manager.findMatchingIndex(is);
-			if(index != null)
-			{
-				float temp = TFC_ItemHeat.GetTemp(is);
-				return temp < index.meltTemp && temp > index.meltTemp * 0.90;
-			}
-		}
-		return false;
 	}
 
 	@Override

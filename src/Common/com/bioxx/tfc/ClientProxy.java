@@ -121,10 +121,10 @@ import com.bioxx.tfc.Render.TESR.TESRQuern;
 import com.bioxx.tfc.Render.TESR.TESRSeaWeed;
 import com.bioxx.tfc.Render.TESR.TESRToolrack;
 import com.bioxx.tfc.Render.TESR.TESRWorldItem;
+import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TESeaWeed;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
-import com.bioxx.tfc.TileEntities.TileEntityAnvil;
 import com.bioxx.tfc.TileEntities.TileEntityBellows;
 import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
@@ -264,7 +264,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep", new TESRFoodPrep());
 		ClientRegistry.registerTileEntity(TileEntityBellows.class, "Bellows", new TESRBellows());
 		ClientRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack", new TESRToolrack());
-		ClientRegistry.registerTileEntity(TileEntityAnvil.class, "TerraAnvil", new TESRAnvil());
+		ClientRegistry.registerTileEntity(TEAnvil.class, "TerraAnvil", new TESRAnvil());
 		ClientRegistry.registerTileEntity(TEWorldItem.class, "worldItem", new TESRWorldItem());
 		ClientRegistry.registerTileEntity(TileEntityQuern.class, "Quern", new TESRQuern());
 	}

@@ -4,8 +4,10 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -42,9 +44,35 @@ public class GenCommand extends CommandBase
 				}
 				gen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int)player.posX, (int)player.posY - 1, (int)player.posZ);
 			}
+			else if (params[0].equalsIgnoreCase("tree"))
+			{
+				int i = getTree(params[1]);
+
+				if (i != -1)
+				{
+					player.addChatMessage(new ChatComponentText("Generating Small " + params[1] + " Tree"));
+					WorldGenerator treeGen = TFCBiome.getTreeGen(i, false);
+					if (!treeGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX, (int) player.posY, (int) player.posZ))
+						player.addChatMessage(new ChatComponentText("Generation Failed"));
+				}
+				else
+					player.addChatMessage(new ChatComponentText("Invalid Tree"));
+			}
 		}
-		else
-			player.addChatMessage(new ChatComponentText("Command must be /gen fissure water or /gen fissure empty"));
+		else if (params.length == 3 && (params[0].equalsIgnoreCase("tree") && params[2].equalsIgnoreCase("big")))
+		{
+			int i = getTree(params[1]);
+
+			if (i != -1)
+			{
+				player.addChatMessage(new ChatComponentText("Generating Big " + params[1] + " Tree"));
+				WorldGenerator treeGen = TFCBiome.getTreeGen(i, false);
+				if (!treeGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX, (int) player.posY, (int) player.posZ))
+					player.addChatMessage(new ChatComponentText("Generation Failed"));
+			}
+			else
+				player.addChatMessage(new ChatComponentText("Invalid Tree"));
+		}
 	}
 
 	@Override
@@ -53,4 +81,43 @@ public class GenCommand extends CommandBase
 		return null;
 	}
 
+	public int getTree(String tree)
+	{
+		if (tree.equalsIgnoreCase("oak"))
+			return 0;
+		else if (tree.equalsIgnoreCase("aspen"))
+			return 1;
+		else if (tree.equalsIgnoreCase("birch"))
+			return 2;
+		else if (tree.equalsIgnoreCase("chestnut"))
+			return 3;
+		else if (tree.equalsIgnoreCase("douglasfir"))
+			return 4;
+		else if (tree.equalsIgnoreCase("hickory"))
+			return 5;
+		else if (tree.equalsIgnoreCase("maple"))
+			return 6;
+		else if (tree.equalsIgnoreCase("ash"))
+			return 7;
+		else if (tree.equalsIgnoreCase("pine"))
+			return 8;
+		else if (tree.equalsIgnoreCase("sequoia"))
+			return 9;
+		else if (tree.equalsIgnoreCase("spruce"))
+			return 10;
+		else if (tree.equalsIgnoreCase("sycamore"))
+			return 11;
+		else if (tree.equalsIgnoreCase("whitecedar"))
+			return 12;
+		else if (tree.equalsIgnoreCase("whiteelm"))
+			return 13;
+		else if (tree.equalsIgnoreCase("willow"))
+			return 14;
+		else if (tree.equalsIgnoreCase("kapok"))
+			return 15;
+		else if (tree.equalsIgnoreCase("acacia"))
+			return 16;
+		else
+			return -1;
+	}
 }

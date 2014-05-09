@@ -1,19 +1,8 @@
 package com.bioxx.tfc.TileEntities;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
-
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.Items.ItemTFCArmor;
-import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
-import com.bioxx.tfc.api.HeatIndex;
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.TFC_ItemHeat;
-import com.bioxx.tfc.api.Crafting.AnvilManager;
-import com.bioxx.tfc.api.Crafting.AnvilRecipe;
-import com.bioxx.tfc.api.Crafting.AnvilReq;
-import com.bioxx.tfc.api.Enums.RuleEnum;
-import com.bioxx.tfc.api.Events.AnvilCraftEvent;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -29,7 +18,21 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 
-public class TileEntityAnvil extends TileEntity implements IInventory
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.ItemMeltedMetal;
+import com.bioxx.tfc.Items.ItemTFCArmor;
+import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
+import com.bioxx.tfc.api.HeatIndex;
+import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
+import com.bioxx.tfc.api.Crafting.AnvilRecipe;
+import com.bioxx.tfc.api.Crafting.AnvilReq;
+import com.bioxx.tfc.api.Enums.RuleEnum;
+import com.bioxx.tfc.api.Events.AnvilCraftEvent;
+
+public class TEAnvil extends TileEntity implements IInventory
 {
 	public ItemStack anvilItemStacks[];
 
@@ -61,7 +64,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 	public static final int FLUX_SLOT = 6;
 	public static final int HAMMER_SLOT = 0;
 
-	public TileEntityAnvil()
+	public TEAnvil()
 	{
 		anvilItemStacks = new ItemStack[19];
 		itemCraftingValue = 0;
@@ -178,13 +181,59 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 
 	public void updateRecipe()
 	{
-		AnvilRecipe recipe = AnvilManager.getInstance().findMatchingRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT],anvilItemStacks[INPUT2_SLOT],this.craftingPlan, 
-				anvilItemStacks[FLUX_SLOT] != null ? true : false, this.AnvilTier));
+		AnvilManager manager = AnvilManager.getInstance();
+		Object[] plans = manager.getPlans().keySet().toArray();
+		Map<String, AnvilRecipe> planList = new HashMap();
 
-		if(recipe != null)
-			workRecipe = recipe;
-		else
+		for(Object p : plans)
+		{
+			AnvilRecipe ar = manager.findMatchingRecipe(new AnvilRecipe(anvilItemStacks[INPUT1_SLOT], anvilItemStacks[INPUT2_SLOT], 
+					(String)p, anvilItemStacks[FLUX_SLOT] != null, AnvilTier));
+
+			if(ar != null) 
+				planList.put((String)p, ar);
+		}
+
+		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getItem() == TFCItems.Bloom)
+		{
+			if(anvilItemStacks[INPUT1_SLOT].getItemDamage() <= 100 && planList.containsKey("splitbloom"))
+				planList.remove("splitbloom");
+		}
+
+		if (planList.size() == 0)
+		{
 			workRecipe = null;
+			return;
+		}
+
+		if (planList.size() == 1)
+		{
+			workRecipe = (AnvilRecipe)(planList.values().toArray())[0];
+			craftingPlan = (String)planList.keySet().toArray()[0];
+			return;
+		}
+
+		if (planList.containsKey(craftingPlan))
+			workRecipe = planList.get(craftingPlan);
+		else
+		{
+			workRecipe = null;
+			return;
+		}
+
+		if (anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getItem() == TFCItems.Bloom && workRecipe.getCraftingResult().getItem() == TFCItems.Bloom)
+		{
+			if (anvilItemStacks[INPUT1_SLOT].getItemDamage() < 100)
+			{
+				craftingPlan = null;
+				workRecipe = null;
+			}
+			else if (anvilItemStacks[INPUT1_SLOT].getItemDamage() == 100)
+			{
+				craftingPlan = "refinebloom";
+				workRecipe = planList.get(craftingPlan);
+			}
+		}
 	}
 
 	public int getCraftingValue()
@@ -193,6 +242,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 			return workRecipe != null ? workRecipe.getCraftingValue() : 0;
 			else
 				return craftingValue;*/
+
 		return workRecipe != null ? workRecipe.getCraftingValue() : 0;
 	}
 
@@ -221,7 +271,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 			anvilItemStacks[slot].setTagCompound(Tag);
 		}
 	}
-	
+
 	public void removeRules(int slot)
 	{
 		if(anvilItemStacks[slot].hasTagCompound())
@@ -235,7 +285,7 @@ public class TileEntityAnvil extends TileEntity implements IInventory
 				Tag.removeTag("itemCraftingRule3");
 			if(Tag.hasKey("itemCraftingValue"))
 				Tag.removeTag("itemCraftingValue");
-			
+
 			anvilItemStacks[slot].setTagCompound(Tag);
 		}
 	}

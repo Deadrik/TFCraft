@@ -3,15 +3,6 @@ package com.bioxx.tfc.Blocks.Devices;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.TileEntities.TileEntityAnvil;
-import com.bioxx.tfc.api.Crafting.AnvilReq;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -29,6 +20,16 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.TileEntities.TEAnvil;
+import com.bioxx.tfc.api.Crafting.AnvilReq;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -78,10 +79,10 @@ public class BlockAnvil extends BlockTerraContainer
 		}
 		else
 		{
-			if((TileEntityAnvil)world.getTileEntity(i, j, k)!=null)
+			if((TEAnvil)world.getTileEntity(i, j, k)!=null)
 			{
-				TileEntityAnvil tileentityanvil;
-				tileentityanvil = (TileEntityAnvil)world.getTileEntity(i, j, k);
+				TEAnvil TEAnvil;
+				TEAnvil = (TEAnvil)world.getTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 				entityplayer.openGui(TerraFirmaCraft.instance, 21, world, i, j, k);
 			}
@@ -96,9 +97,9 @@ public class BlockAnvil extends BlockTerraContainer
 		int direction = getDirectionFromMetadata(meta);
 		TileEntity te = par1World.getTileEntity(par2, par3, par4);
 
-		if (te != null && te instanceof TileEntityAnvil)
+		if (te != null && te instanceof TEAnvil)
 		{
-			TileEntityAnvil teAnvil = (TileEntityAnvil) te;
+			TEAnvil teAnvil = (TEAnvil) te;
 			if (teAnvil.AnvilTier != AnvilReq.STONE.Tier || this == TFCBlocks.Anvil2)
 			{
 				if(direction == 0) 
@@ -115,29 +116,29 @@ public class BlockAnvil extends BlockTerraContainer
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		int meta = par1World.getBlockMetadata(par2, par3, par4);
+		int meta = world.getBlockMetadata(x, y, z);
 		int direction = getDirectionFromMetadata(meta);
-		TileEntityAnvil te = (TileEntityAnvil)par1World.getTileEntity(par2, par3, par4);
+		TEAnvil te = (TEAnvil)world.getTileEntity(x, y, z);
 
 		if(te.AnvilTier != AnvilReq.STONE.Tier)
 		{
 			if(direction == 0)
 			{
 				this.setBlockBounds(0.2f, 0, 0, 0.8f, 0.6f, 1);
-				return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
+				return AxisAlignedBB.getBoundingBox(x + 0.2, (double)y + 0, (double)z + 0, x + 0.8, y + 0.6, (double)z + 1);
 			}
 			else
 			{
 				this.setBlockBounds(0, 0, 0.2f, 1, 0.6f, 0.8f);
-				return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, par4 + 0.2, (double)par2 + 1, par3 + 0.6, par4 + 0.8);
+				return AxisAlignedBB.getBoundingBox((double)x + 0, (double)y + 0, z + 0.2, (double)x + 1, y + 0.6, z + 0.8);
 			}
 		}
 		else
 		{
 			this.setBlockBounds(0, 0, 0, 1, 0.9F, 1);
-			return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 0.9F, (double)par4 + 1);
+			return AxisAlignedBB.getBoundingBox((double)x + 0, (double)y + 0, (double)z + 0, (double)x + 1, (double)y + 0.9F, (double)z + 1);
 		}
 	}
 
@@ -145,11 +146,11 @@ public class BlockAnvil extends BlockTerraContainer
 	 * Updates the blocks bounds based on its current state. Args: world, x, y, z
 	 */
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
 	{
-		int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+		int meta = bAccess.getBlockMetadata(x, y, z);
 		int direction = getDirectionFromMetadata(meta);
-		TileEntityAnvil te = (TileEntityAnvil)par1IBlockAccess.getTileEntity(par2, par3, par4);
+		TEAnvil te = (TEAnvil)bAccess.getTileEntity(x, y, z);
 
 		if(te.AnvilTier != AnvilReq.STONE.Tier)
 		{
@@ -254,7 +255,7 @@ public class BlockAnvil extends BlockTerraContainer
 
 		world.setBlockMetadataWithNotify(i, j, k, byte0, 3);
 
-		TileEntityAnvil te = (TileEntityAnvil)world.getTileEntity(i, j, k);
+		TEAnvil te = (TEAnvil)world.getTileEntity(i, j, k);
 		if(this == TFCBlocks.Anvil)
 			te.AnvilTier = AnvilReq.getReqFromInt(meta).Tier;
 		else if(this == TFCBlocks.Anvil2)
@@ -262,9 +263,9 @@ public class BlockAnvil extends BlockTerraContainer
 	}
 
 	@Override
-	public void breakBlock(World par1World, int par2, int par3, int par4, Block block, int par6)
+	public void breakBlock(World world, int x, int y, int z, Block block, int metadata)
 	{
-		TileEntityAnvil var5 = (TileEntityAnvil)par1World.getTileEntity(par2, par3, par4);
+		TEAnvil var5 = (TEAnvil)world.getTileEntity(x, y, z);
 
 		if (var5 != null)
 		{
@@ -278,14 +279,14 @@ public class BlockAnvil extends BlockTerraContainer
 					float var9 = this.random.nextFloat() * 0.8F + 0.1F;
 					EntityItem var12;
 
-					for (float var10 = this.random.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; par1World.spawnEntityInWorld(var12))
+					for (float var10 = this.random.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; world.spawnEntityInWorld(var12))
 					{
 						int var11 = this.random.nextInt(21) + 10;
 
 						if (var11 > var7.stackSize)
 							var11 = var7.stackSize;
 						var7.stackSize -= var11;
-						var12 = new EntityItem(par1World, par2 + var8, par3 + var9, par4 + var10, new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
+						var12 = new EntityItem(world, x + var8, y + var9, z + var10, new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
 						float var13 = 0.05F;
 						var12.motionX = (float)this.random.nextGaussian() * var13;
 						var12.motionY = (float)this.random.nextGaussian() * var13 + 0.2F;
@@ -296,7 +297,7 @@ public class BlockAnvil extends BlockTerraContainer
 				}
 			}
 		}
-		super.breakBlock(par1World, par2, par3, par4, block, par6);
+		super.breakBlock(world, x, y, z, block, metadata);
 	}
 
 	@Override
@@ -324,7 +325,7 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntityAnvil();
+		return new TEAnvil();
 	}
 
 	@Override

@@ -1,14 +1,5 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Containers.Slots.SlotAnvilFlux;
-import com.bioxx.tfc.Containers.Slots.SlotAnvilHammer;
-import com.bioxx.tfc.Containers.Slots.SlotAnvilIn;
-import com.bioxx.tfc.Containers.Slots.SlotAnvilWeldOut;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.Items.Tools.ItemHammer;
-import com.bioxx.tfc.TileEntities.TileEntityAnvil;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
@@ -16,14 +7,23 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Containers.Slots.SlotAnvilFlux;
+import com.bioxx.tfc.Containers.Slots.SlotAnvilHammer;
+import com.bioxx.tfc.Containers.Slots.SlotAnvilIn;
+import com.bioxx.tfc.Containers.Slots.SlotAnvilWeldOut;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.TileEntities.TEAnvil;
+
 public class ContainerAnvil extends ContainerTFC
 {
-	private TileEntityAnvil anvil;
+	private TEAnvil anvil;
 	private int greenIndicator;
 	private int redIndicator;
 	private int tier = -1;
 
-	public ContainerAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil anvil, World world, int x, int y, int z)
+	public ContainerAnvil(InventoryPlayer inventoryplayer, TEAnvil anvil, World world, int x, int y, int z)
 	{
 		this.anvil = anvil;
 
@@ -111,10 +111,18 @@ public class ContainerAnvil extends ContainerTFC
 					}
 				}
 			}
-			if(slotStack.stackSize == 0)
+			if(slotStack.stackSize <= 0)
+			{
 				slot.putStack(null);
-			/*else
-				slot.onSlotChanged();*/
+			} else
+			{
+				slot.onSlotChanged();
+			}
+
+			if (slotStack.stackSize == origStack.stackSize)
+				return null;
+
+			slot.onPickupFromSlot(player, slotStack);
 		}
 		return origStack;
 	}

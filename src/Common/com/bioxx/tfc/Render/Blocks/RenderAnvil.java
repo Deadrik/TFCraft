@@ -1,14 +1,15 @@
 package com.bioxx.tfc.Render.Blocks;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Blocks.Devices.BlockAnvil;
-import com.bioxx.tfc.TileEntities.TileEntityAnvil;
-import com.bioxx.tfc.api.Crafting.AnvilReq;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.Devices.BlockAnvil;
+import com.bioxx.tfc.TileEntities.TEAnvil;
+import com.bioxx.tfc.api.Crafting.AnvilReq;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderAnvil implements ISimpleBlockRenderingHandler
@@ -24,7 +25,7 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler
 		if(renderblocks.overrideBlockTexture != null)
 			breaking = true;
 
-		TileEntityAnvil te = (TileEntityAnvil)blockAccess.getTileEntity(i, j, k);
+		TEAnvil te = (TEAnvil)blockAccess.getTileEntity(i, j, k);
 		if(te.AnvilTier != AnvilReq.STONE.Tier)
 		{
 			if(direction == 0)//x

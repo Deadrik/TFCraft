@@ -448,61 +448,67 @@ public class TFC_Core
 
 	public static boolean isSand(Block block)
 	{
-		if(block == TFCBlocks.Sand || block == TFCBlocks.Sand2)
-			return true;
-		return false;
+		return block == TFCBlocks.Sand
+				|| block == TFCBlocks.Sand2;
 	}
 
 	public static boolean isPeat(Block block)
 	{
-		if(block == TFCBlocks.Peat)
-			return true;
-		return false;
+		return block == TFCBlocks.Peat;
+	}
+
+	public static boolean isNotWater(Block block)
+	{
+		return !isSaltWater(block)
+				|| !isFreshWater(block)
+				|| !isHotWater(block);
+	}
+
+	public static boolean isHotWater(Block block)
+	{
+		return block == TFCBlocks.HotWater;
 	}
 
 	public static boolean isWater(Block block)
 	{
-		return isSaltWater(block) || isFreshWater(block);
+		return isSaltWater(block)
+				|| isFreshWater(block);
 	}
 
 	public static boolean isSaltWater(Block block)
 	{
-		if(block == TFCBlocks.SaltWater)
-			return true;
-		return false;
+		return block == TFCBlocks.SaltWater;
 	}
 
 	public static boolean isSaltWaterIncludeIce(Block block, int meta, Material mat)
 	{
-		if(block == TFCBlocks.SaltWater || (mat == Material.ice && meta == 0))
-			return true;
-		return false;
+		return block == TFCBlocks.SaltWater
+				|| (mat == Material.ice && meta == 0);
 	}
 
 	public static boolean isFreshWater(Block block)
 	{
-		if(block == TFCBlocks.FreshWater)
-			return true;
-		return false;
+		return block == TFCBlocks.FreshWater;
 	}
 
 	public static boolean isFreshWaterIncludeIce(Block block, int meta)
 	{
-		if(block == TFCBlocks.FreshWater || (block == Blocks.ice && meta != 0))
-			return true;
-		return false;
+		return block == TFCBlocks.FreshWater
+				|| (block == Blocks.ice && meta != 0);
 	}
 
 	public static boolean isFreshWaterIncludeIce(Block block, int meta, Material mat)
 	{
-		if(block == TFCBlocks.FreshWater || (mat == Material.ice && meta != 0))
-			return true;
-		return false;
+		return block == TFCBlocks.FreshWater
+				|| (mat == Material.ice && meta != 0);
 	}
 
 	public static boolean isSoil(Block block)
 	{
-		return isGrass(block) || isDirt(block) || isClay(block) || isPeat(block);
+		return isGrass(block)
+				|| isDirt(block)
+				|| isClay(block)
+				|| isPeat(block);
 	}
 
 	public static boolean isGravel(Block block)
@@ -512,7 +518,9 @@ public class TFC_Core
 
 	public static boolean isGround(Block block)
 	{
-		return isSoil(block)|| isRawStone(block) || isSand(block);
+		return isSoil(block)
+				|| isRawStone(block)
+				|| isSand(block);
 	}
 
 	public static int getSoilMetaFromStone(Block inBlock, int inMeta)
@@ -1126,5 +1134,26 @@ public class TFC_Core
 	public static Vec3 getEntityPos(Entity e)
 	{
 		return Vec3.createVectorHelper(e.posX, e.posY, e.posZ);
+	}
+
+	public static void giveItemToPlayer(ItemStack is, EntityPlayer player)
+	{
+		if(!player.inventory.addItemStackToInventory(is))
+			player.entityDropItem(is, 1);
+	}
+
+	public static boolean isFence(Block b)
+	{
+		return (b == TFCBlocks.Fence || b == TFCBlocks.Fence2);
+	}
+
+	public static boolean isVertSupport(Block b)
+	{
+		return (b == TFCBlocks.WoodSupportV || b == TFCBlocks.WoodSupportV2);
+	}
+
+	public static boolean isHorizSupport(Block b)
+	{
+		return (b == TFCBlocks.WoodSupportH || b == TFCBlocks.WoodSupportH2);
 	}
 }

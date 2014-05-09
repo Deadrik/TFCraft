@@ -48,7 +48,7 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 	}
 
 	static int numInsertions = 0;
-	private byte[] transform(byte[] bytes)
+	protected byte[] transform(byte[] bytes)
 	{
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader(bytes);
@@ -209,6 +209,10 @@ public class ClassTransformer implements net.minecraft.launchwrapper.IClassTrans
 			methodInsn.remove(_current);
 			break;
 		case Replace:
+			if(_current instanceof JumpInsnNode && input.iList.get(0) instanceof JumpInsnNode)
+			{
+				((JumpInsnNode)input.iList.get(0)).label = ((JumpInsnNode)_current).label;
+			}
 			methodInsn.insert(_current, input.iList);
 			methodInsn.remove(_current);
 			break;

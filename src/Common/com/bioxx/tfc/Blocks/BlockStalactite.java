@@ -2,18 +2,20 @@ package com.bioxx.tfc.Blocks;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Textures;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Textures;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -24,22 +26,20 @@ public class BlockStalactite extends BlockTerra
 	public BlockStalactite()
 	{
 		super();
+		this.setStepSound(soundTypeStone);
 	}
 
 	@Override
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
-		if ((world.getBlock(i, j + 1, k).isNormalCube() || world.getBlock(i, j + 2, k).isNormalCube()) && random.nextInt(80) == 0)
+		if (isStalactite(world.getBlockMetadata(i, j, k)) && random.nextInt(80) == 0)
 		{
-			float f = i + 0.5F;
-			float f1 = j-0.08f;
-			float f2 = k + 0.5F;
-			float f3 = 0.52F;
+			AxisAlignedBB aabb = getCollisionBoundingBoxFromPool(world, i, j, k);
 
-			float f4 = random.nextFloat() * 0.6F;
-			float f5 = random.nextFloat() * -0.6F;
-			float f6 = random.nextFloat() * -0.6F;
-			world.spawnParticle("dripWater", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
+			double xRand = (random.nextFloat() * (aabb.maxX - aabb.minX)) + aabb.minX;
+			double zRand = (random.nextFloat() * (aabb.maxZ - aabb.minZ)) + aabb.minZ;
+
+			world.spawnParticle("dripWater", xRand + 0.2, aabb.minY + 0.9,  zRand + 0.2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -50,16 +50,16 @@ public class BlockStalactite extends BlockTerra
 		boolean isStalag = isStalagmite(access.getBlockMetadata(i, j, k));
 		int style = access.getBlockMetadata(i, j, k) & 7;
 		float f = 0.125F;
-		R = new Random(i+(i*k));
+		R = new Random(i + (i * k));
 		if(isStalac)
 		{
 			float height = TFC_Core.isRawStone(access.getBlock(i, j + 1, k)) ? 1 : TFC_Core.isRawStone(access.getBlock(i, j + 2, k)) ? 2 : 3;
 			f = 0.1f + R.nextFloat()*0.025f;
 			float width = height * f;
 			if(height == 3)
-				height = 0.5f+R.nextFloat()*0.5f;
+				height = 0.5f + R.nextFloat() * 0.5f;
 			else height = 1;
-			setBlockBounds(width, 1-height, width, 1f-width, 1, 1F-width);
+			setBlockBounds(width, 1 - height, width, 1f - width, 1, 1F - width);
 		}
 		else if(isStalag)
 		{
@@ -67,9 +67,9 @@ public class BlockStalactite extends BlockTerra
 			f = 0.1f + R.nextFloat()*0.025f;
 			float width = height * f;
 			if(height == 3)
-				height = 0.5f+R.nextFloat()*0.5f;
+				height = 0.5f + R.nextFloat() * 0.5f;
 			else height = 1;
-			setBlockBounds(width, 0.0F, width, 1f-width, height, 1F-width);
+			setBlockBounds(width, 0.0F, width, 1f-width, height, 1F - width);
 		}
 	}
 
@@ -80,28 +80,26 @@ public class BlockStalactite extends BlockTerra
 		boolean isStalag = isStalagmite(world.getBlockMetadata(i, j, k));
 		int style = world.getBlockMetadata(i, j, k) & 7;
 		float f = 0.125F;
-		R = new Random(i+(i*k));
+		R = new Random(i + (i * k));
 		if(isStalac)
 		{
 			float height = TFC_Core.isRawStone(world.getBlock(i, j + 1, k)) ? 1 : TFC_Core.isRawStone(world.getBlock(i, j + 2, k)) ? 2 : 3;
 			f = 0.1f + R.nextFloat()*0.025f;
 			float width = height * f;
 			if(height == 3)
-				height = 0.5f+R.nextFloat()*0.5f;
+				height = 0.5f + R.nextFloat() * 0.5f;
 			else height = 1;
-			setBlockBounds(width, 1-height, width, 1f-width, 1, 1F-width);
 
-			return AxisAlignedBB.getAABBPool().getAABB(i + width, j - height, k + width, i + 1-width, j+1, k + 1 - width);
+			return AxisAlignedBB.getAABBPool().getAABB(i + width, j - height, k + width, i + 1 - width, j + 1, k + 1 - width);
 		}
 		else if(isStalag)
 		{
 			float height = TFC_Core.isRawStone(world.getBlock(i, j - 1, k)) ? 1 : TFC_Core.isRawStone(world.getBlock(i, j - 2, k)) ? 2 : 3;
-			f = 0.1f + R.nextFloat()*0.025f;
+			f = 0.1f + R.nextFloat() * 0.025f;
 			float width = height * f;
 			if(height == 3)
-				height = 0.5f+R.nextFloat()*0.5f;
+				height = 0.5f + R.nextFloat() * 0.5f;
 			else height = 1;
-			setBlockBounds(width, 0.0F, width, 1f-width, height, 1F-width);
 			return AxisAlignedBB.getAABBPool().getAABB(i+ width, j, k + width, i + 1-width, j+height, k + 1 - width);
 		}
 
@@ -132,6 +130,13 @@ public class BlockStalactite extends BlockTerra
 			else if(TFC_Core.isRawStone(access.getBlock(i, j-3, k)))
 				return access.getBlock(i, j - 3, k).getIcon(0,access.getBlockMetadata(i, j - 3, k));
 		}
+		return TFC_Textures.InvisibleTexture;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int par1, int par2)
+	{
 		return TFC_Textures.InvisibleTexture;
 	}
 
@@ -187,6 +192,18 @@ public class BlockStalactite extends BlockTerra
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public boolean canReplace(World world, int x, int y, int z, int i, ItemStack is)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isAir(IBlockAccess world, int x, int y, int z)
+	{
+		return false;
 	}
 
 	@Override

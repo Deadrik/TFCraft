@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -629,12 +630,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 			for (int i = 0; i < nbttaglist.tagCount(); ++i)
 			{
-				NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-				int j = nbttagcompound1.getByte("Slot") & 255;
+				NBTTagCompound nbt1 = nbttaglist.getCompoundTagAt(i);
+				int j = nbt1.getByte("Slot") & 255;
 
 				if (j >= 2 && j < this.horseChest.getSizeInventory())
 				{
-					this.horseChest.setInventorySlotContents(j, ItemStack.loadItemStackFromNBT(nbttagcompound1));
+					this.horseChest.setInventorySlotContents(j, ItemStack.loadItemStackFromNBT(nbt1));
 				}
 			}
 		}
@@ -991,5 +992,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public void setFearSource(Entity fearSource)
 	{
 		this.fearSource = fearSource;
+	}
+
+	@Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData livingData)
+	{
+		IEntityLivingData data = super.onSpawnWithEgg(livingData);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250);
+		return data;
 	}
 }

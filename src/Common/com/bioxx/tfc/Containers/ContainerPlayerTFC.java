@@ -1,11 +1,5 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.Containers.Slots.SlotArmorTFC;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.Handlers.FoodCraftingHandler;
-import com.bioxx.tfc.Items.ItemTFCArmor;
-import com.bioxx.tfc.api.IFood;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerPlayer;
@@ -14,6 +8,13 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.Containers.Slots.SlotArmorTFC;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Handlers.CraftingHandler;
+import com.bioxx.tfc.Handlers.FoodCraftingHandler;
+import com.bioxx.tfc.Items.ItemTFCArmor;
+import com.bioxx.tfc.api.IFood;
 
 public class ContainerPlayerTFC extends ContainerPlayer
 {
@@ -104,6 +105,8 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			if (par2 == 0)
 			{
 				FoodCraftingHandler.preCraft(player, slotStack, craftMatrix);
+				CraftingHandler.preCraft(player, slotStack, craftMatrix);
+
 				if (!this.mergeItemStack(slotStack, 9, 45, true))
 					return null;
 

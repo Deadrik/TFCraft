@@ -2,15 +2,6 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Core.TFC_Achievements;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Food.CropIndex;
-import com.bioxx.tfc.Food.CropManager;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,6 +11,15 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.TFC_Achievements;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Food.CropIndex;
+import com.bioxx.tfc.Food.CropManager;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Constant.Global;
 
 public class TECrop extends TileEntity
 {
@@ -152,7 +152,7 @@ public class TECrop extends TileEntity
 		return ((float)crop.numGrowthStages / (growthTimer - plantedTime / TFC_Time.dayLength)) * 1.5f;
 	}
 
-	public void onHarvest(World world, EntityPlayer player)
+	public void onHarvest(World world, EntityPlayer player, boolean isBreaking)
 	{
 		if(!world.isRemote)
 		{
@@ -171,7 +171,7 @@ public class TECrop extends TileEntity
 				ItemStack seedStack = crop.getSeed();
 				int skill = 20 - (int)(20 * TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_AGRICULTURE));
 				seedStack.stackSize = 1 + (world.rand.nextInt(1 + skill) == 0 ? 1 : 0);
-				if(seedStack != null)
+				if(seedStack != null && isBreaking)
 					world.spawnEntityInWorld(new EntityItem(world, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, seedStack));
 
 				TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_AGRICULTURE, 1);

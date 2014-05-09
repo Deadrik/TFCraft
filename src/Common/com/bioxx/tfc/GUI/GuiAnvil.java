@@ -26,16 +26,15 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.SkillStats;
-import com.bioxx.tfc.TileEntities.TileEntityAnvil;
+import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Crafting.PlanRecipe;
 import com.bioxx.tfc.api.Enums.RuleEnum;
 
-
 public class GuiAnvil extends GuiContainer
 {
-	TileEntityAnvil AnvilEntity;
+	TEAnvil AnvilEntity;
 	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_anvil.png");
 	EntityPlayer player;
 	int x, y, z;
@@ -43,7 +42,7 @@ public class GuiAnvil extends GuiContainer
 	ItemStack input = null;
 	ItemStack input2 = null;
 
-	public GuiAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil te, World world, int x, int y, int z)
+	public GuiAnvil(InventoryPlayer inventoryplayer, TEAnvil te, World world, int x, int y, int z)
 	{
 		super(new ContainerAnvil(inventoryplayer,te, world, x, y, z) );
 		AnvilEntity = te;
@@ -81,13 +80,13 @@ public class GuiAnvil extends GuiContainer
 	{
 		super.updateScreen();
 
-		if(this.AnvilEntity.craftingPlan != plan || this.AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT1_SLOT] != input ||
-				this.AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT2_SLOT] != input2)
+		if(this.AnvilEntity.craftingPlan != plan || this.AnvilEntity.anvilItemStacks[TEAnvil.INPUT1_SLOT] != input ||
+				this.AnvilEntity.anvilItemStacks[TEAnvil.INPUT2_SLOT] != input2)
 		{
 			plan = this.AnvilEntity.craftingPlan;
 			this.AnvilEntity.updateRecipe();
-			input = this.AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT1_SLOT];
-			input2 = this.AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT2_SLOT];
+			input = this.AnvilEntity.anvilItemStacks[TEAnvil.INPUT1_SLOT];
+			input2 = this.AnvilEntity.anvilItemStacks[TEAnvil.INPUT2_SLOT];
 		}
 	}
 
@@ -112,7 +111,7 @@ public class GuiAnvil extends GuiContainer
 			AnvilEntity.actionShrink();
 		else if (guibutton.id == 8)
 			AnvilEntity.actionWeld();
-		else if(guibutton.id == 12 && this.AnvilEntity.anvilItemStacks[TileEntityAnvil.INPUT1_SLOT] != null)
+		else if(guibutton.id == 12 && this.AnvilEntity.anvilItemStacks[TEAnvil.INPUT1_SLOT] != null)
 			player.openGui(TerraFirmaCraft.instance, 24, player.worldObj, x, y, z);
 		this.inventorySlots.detectAndSendChanges();
 	}

@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -103,7 +102,8 @@ public class ItemGoldPan extends ItemTerra
 				if(is.getItemDamage() == 0)
 				{
 					ChunkData cd = ChunkDataManager.getData(x >> 4, z >> 4);
-					if(cd.sluicedAmount < 100)
+
+					if(cd.sluicedAmount < 50)
 					{
 						if(world.getBlock(x, y, z) == Blocks.gravel)
 						{
@@ -123,7 +123,7 @@ public class ItemGoldPan extends ItemTerra
 						}
 						else if(world.getBlock(x, y, z).getMaterial() == Material.water)
 						{
-							if(world.getBlock(x, y-1, z) == Blocks.gravel)
+							/*if(world.getBlock(x, y-1, z) == Blocks.gravel)
 							{
 								is.setItemDamage((5 << 4) + 2);
 								if(world.rand.nextInt(10) == 0)
@@ -138,7 +138,7 @@ public class ItemGoldPan extends ItemTerra
 									world.setBlockToAir(x, y-1, z);
 								TFC_Core.addPlayerExhaustion(player, 0.0005f);
 								cd.sluicedAmount++;
-							}
+							}*/
 						}
 					}
 					else
@@ -148,18 +148,22 @@ public class ItemGoldPan extends ItemTerra
 				}
 				else
 				{
-					int bMeta = world.getBlockMetadata(x, y+1, z);
+					int bMeta = world.getBlockMetadata(x, y + 1, z);
 					if(world.getBlock(x, y + 1, z).getMaterial() == Material.water && bMeta > 0)
 					{
 						int uses = (is.getItemDamage() >> 4);
 						if(uses > 0)
 						{
-							int type = getMetalToDrop(world, x, y+1, z);
+							int type = getMetalToDrop(world, x, y + 1, z);
 
 							if(type != -1)
 							{
 								ItemStack out = new ItemStack(TFCItems.SmallOreChunk, 1, type);
-								dropItem(world,(int) Math.floor(player.posX),(int) Math.floor(player.posY),(int) Math.floor(player.posZ),out);
+								world.playSoundAtEntity(player, "random.pop", 0.7F, world.rand.nextFloat() + 1);
+								if(!player.inventory.addItemStackToInventory(out))
+								{
+									player.dropPlayerItemWithRandomChoice(out, false);
+								}
 							}
 							uses--;
 							if(uses > 0)
@@ -174,7 +178,8 @@ public class ItemGoldPan extends ItemTerra
 		return is;
 	}
 
-	private int getMetalToDrop(World world, int x, int y, int z) {
+	private int getMetalToDrop(World world, int x, int y, int z)
+	{
 		int type = -1;
 		int chunk_X = (x >> 4) << 4;
 		int chunk_Z = (z >> 4) << 4;
@@ -182,26 +187,11 @@ public class ItemGoldPan extends ItemTerra
 		int randType = rand.nextInt(100);
 
 		if (randType > 25 && world.rand.nextInt(60) == 0) type = 0;  // Copper
-		if (randType > 50 && world.rand.nextInt(120) == 0) type = 4; // Silver
+		//if (randType > 50 && world.rand.nextInt(120) == 0) type = 4; // Silver
 		if (randType > 75 && world.rand.nextInt(150) == 0) type = 1; // Gold
 		if (world.rand.nextInt(500) == 0) type = 2; // Platinum
 
 		return type;
-	}
-
-	private void dropItem(World world, double x, double y, double z, ItemStack stack)
-	{
-		if (!world.isRemote)
-		{
-			float d = 0.175F;
-			double  v = 0.10d;
-			double dx = (world.rand.nextFloat() - 0.5) * d;
-			double dy = (world.rand.nextFloat() - 0.5) * d + 1.0d;
-			double dz = (world.rand.nextFloat() - 0.5) * d;
-			EntityItem drop = new EntityItem(world, x + dx, y + dy, z + dz, stack);
-			drop.delayBeforeCanPickup = 10;
-			world.spawnEntityInWorld(drop);
-		}
 	}
 
 	@Override
