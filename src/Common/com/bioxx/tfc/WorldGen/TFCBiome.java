@@ -352,7 +352,7 @@ public class TFCBiome extends BiomeGenBase
 	 */
 	public static TFCBiome getBiome(int id)
 	{
-		if (id >= 0 && id <= biomeList.length)
+		if (id >= 0 && id <= biomeList.length && biomeList[id] != null)
 		{
 			return biomeList[id];
 		}

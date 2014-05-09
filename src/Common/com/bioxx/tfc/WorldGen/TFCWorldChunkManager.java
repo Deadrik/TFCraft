@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.WorldChunkManager;
+import net.minecraft.world.gen.layer.IntCache;
+
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.WorldGen.GenLayers.GenEVTLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
@@ -14,13 +22,6 @@ import com.bioxx.tfc.WorldGen.GenLayers.GenRockLayer3TFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenStabilityLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.GenTreeLayerTFC;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.ChunkPosition;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.WorldChunkManager;
-import net.minecraft.world.gen.layer.IntCache;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -61,7 +62,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	protected DataCache stabilityCache;
 
 	public long seed = 0;
-	
+
 	public TFCWorldChunkManager()
 	{
 		super();
@@ -86,12 +87,12 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		this.biomesToSpawnIn.add(TFCBiome.Mountains);
 		this.biomesToSpawnIn.add(TFCBiome.HighPlains);
 	}
-	
+
 	public TFCWorldChunkManager(World world)
 	{
 		this(world.getSeed(), world.getWorldInfo().getTerrainType());
 	}
-	
+
 	public TFCWorldChunkManager(long Seed, WorldType worldtype)
 	{
 		this();
@@ -103,7 +104,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 			var4 = GenLayerTFC.initializeAllBiomeGenerators(Seed, TFCWorldType.FLAT);
 		else
 			var4 = GenLayerTFC.initializeAllBiomeGenerators(Seed, TFCWorldType.DEFAULT);
-		
+
 		this.genBiomes = var4[0];
 		this.biomeIndexLayer = var4[1];
 
@@ -273,7 +274,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	public TFCBiome[] getBiomeGenAt(BiomeGenBase[] par1, int par2, int par3, int par4, int par5, boolean par6)
 	{
 		IntCache.resetIntCache();
-		
+
 		TFCBiome[] biome = (TFCBiome[]) par1;
 		if (biome == null || biome.length < par4 * par5)
 			biome = new TFCBiome[par4 * par5];
@@ -294,7 +295,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 					System.out.println("var7[var8] is " + var7[var8]);
 				if(var8 == -1)
 					System.out.println("var8 is " + var8);
-				biome[var8] = TFCBiome.getBiomeGenArray()[id];
+				biome[var8] = TFCBiome.getBiome(id);
 			}
 			return biome;
 		}
@@ -308,7 +309,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	{
 		IntCache.resetIntCache();
 		int var5 = par1 - par3 >> 2;
-		int var6 = par2 - par3 >> 2;
+			int var6 = par2 - par3 >> 2;
 		int var7 = par1 + par3 >> 2;
 		int var8 = par2 + par3 >> 2;
 		int var9 = var7 - var5 + 1;
