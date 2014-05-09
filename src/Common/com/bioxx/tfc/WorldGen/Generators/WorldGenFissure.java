@@ -155,7 +155,7 @@ public class WorldGenFissure implements IWorldGenerator
 
 	private void fill(World world, int x, int y, int z, Block block, int meta, Block fill)
 	{
-		world.setBlock(x, y, z, fill);
+		world.setBlock(x, y, z, fill, 0, 2);
 		if(world.getBlock(x - 1, y, z).getMaterial() == Material.air)
 			world.setBlock(x - 1, y, z, block, meta, 2);
 		if(world.getBlock(x + 1, y, z).getMaterial() == Material.air)
