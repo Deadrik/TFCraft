@@ -83,7 +83,15 @@ return biome;
 }*/
 
 	@Override
-	public ChunkCoordinates getRandomizedSpawnPoint()
+	public ChunkCoordinates getSpawnPoint()
+	{
+		WorldInfo info = worldObj.getWorldInfo();
+		if(info.getSpawnZ() > -2999)
+			return createSpawn();
+		return super.getSpawnPoint();
+	}
+
+	private ChunkCoordinates createSpawn()
 	{
 		TFCWorldChunkManager chunkManager = (TFCWorldChunkManager) worldChunkMgr;
 		List var3 = chunkManager.getBiomesToSpawnIn();
@@ -125,16 +133,6 @@ return biome;
 		WorldInfo info = worldObj.getWorldInfo();
 		info.setSpawnPosition(xCoord, worldObj.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
 		return new ChunkCoordinates(xCoord, worldObj.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
-	}
-
-	@Override
-	public ChunkCoordinates getSpawnPoint()
-	{
-		WorldInfo info = worldObj.getWorldInfo();
-		if(info.getSpawnZ() > -2999)
-			return getRandomizedSpawnPoint();
-		return super.getSpawnPoint();
-		//return new ChunkCoordinates(info.getSpawnX(), info.getSpawnY(), info.getSpawnZ());
 	}
 
 	@Override
