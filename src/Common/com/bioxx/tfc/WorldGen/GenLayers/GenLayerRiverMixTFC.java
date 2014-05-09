@@ -33,7 +33,7 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 			int b = layerBiomes[var8];
 			int r = layerRivers[var8];
 
-			if (layerBiomes[var8] == TFCBiome.ocean.biomeID || layerBiomes[var8] == TFCBiome.beach.biomeID || layerBiomes[var8] == -1)
+			if (isOceanic(b) || b == TFCBiome.beach.biomeID)
 				layerOut[var8] = b;
 			else if (layerRivers[var8] > 0)
 				layerOut[var8] = r;
@@ -41,6 +41,13 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 				layerOut[var8] = b;
 		}
 		return layerOut;
+	}
+
+	boolean isOceanic(int id)
+	{
+		if(id == TFCBiome.ocean.biomeID || id == TFCBiome.DeepOcean.biomeID)
+			return true;
+		return false;
 	}
 
 	/**

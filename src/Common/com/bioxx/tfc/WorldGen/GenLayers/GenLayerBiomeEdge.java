@@ -34,13 +34,13 @@ public class GenLayerBiomeEdge extends GenLayerTFC
 				int var12;
 				int var13;
 
+				var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
+				var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
+				var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
+				var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
+
 				if (var9 == TFCBiome.HighHills.biomeID)
 				{
-					var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
-					var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
-					var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
-					var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
-
 					if (var10 == TFCBiome.HighHills.biomeID && var11 == TFCBiome.HighHills.biomeID && var12 == TFCBiome.HighHills.biomeID && var13 == TFCBiome.HighHills.biomeID)
 						var6[var8 + var7 * par3] = var9;
 					else
@@ -48,15 +48,17 @@ public class GenLayerBiomeEdge extends GenLayerTFC
 				}
 				else if (var9 == TFCBiome.Mountains.biomeID)
 				{
-					var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
-					var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
-					var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
-					var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
-
 					if (var10 == TFCBiome.Mountains.biomeID && var11 == TFCBiome.Mountains.biomeID && var12 == TFCBiome.Mountains.biomeID && var13 == TFCBiome.Mountains.biomeID)
 						var6[var8 + var7 * par3] = var9;
 					else
 						var6[var8 + var7 * par3] = TFCBiome.MountainsEdge.biomeID;
+				}
+				else if (var9 == TFCBiome.swampland.biomeID)
+				{
+					if (var10 == TFCBiome.swampland.biomeID && var11 == TFCBiome.swampland.biomeID && var12 == TFCBiome.swampland.biomeID && var13 == TFCBiome.swampland.biomeID)
+						var6[var8 + var7 * par3] = var9;
+					else
+						var6[var8 + var7 * par3] = TFCBiome.plains.biomeID;
 				}
 				else
 				{

@@ -40,17 +40,17 @@ public class GenLayerZoomTFC extends GenLayerTFC
 				var10[var14] = var15;
 				var10[var14++ + var11] = this.choose(var15, var16);
 				var10[var14] = this.choose(var15, var18);
-				var10[var14++ + var11] = this.func_75916_b(var15, var18, var16, var19);
+				var10[var14++ + var11] = this.choose4(var15, var18, var16, var19);
 				var15 = var18;
 				var16 = var19;
 			}
 		}
 
-		int[] var20 = IntCache.getIntCache(par3 * par4);
+		int[] cache = IntCache.getIntCache(par3 * par4);
 		for (var13 = 0; var13 < par4; ++var13)
-			System.arraycopy(var10, (var13 + (par2 & 1)) * (var7 << 1) + (par1 & 1), var20, var13 * par3, par3);
+			System.arraycopy(var10, (var13 + (par2 & 1)) * (var7 << 1) + (par1 & 1), cache, var13 * par3, par3);
 
-		return var20;
+		return cache;
 	}
 
 	/**
@@ -61,44 +61,44 @@ public class GenLayerZoomTFC extends GenLayerTFC
 		return this.nextInt(2) == 0 ? par1 : par2;
 	}
 
-	protected int func_75916_b(int par1, int par2, int par3, int par4)
+	protected int choose4(int id0, int id1, int id2, int id3)
 	{
-		if (par2 == par3 && par3 == par4)
-			return par2;
-		else if (par1 == par2 && par1 == par3)
-			return par1;
-		else if (par1 == par2 && par1 == par4)
-			return par1;
-		else if (par1 == par3 && par1 == par4)
-			return par1;
-		else if (par1 == par2 && par3 != par4)
-			return par1;
-		else if (par1 == par3 && par2 != par4)
-			return par1;
-		else if (par1 == par4 && par2 != par3)
-			return par1;
-		else if (par2 == par1 && par3 != par4)
-			return par2;
-		else if (par2 == par3 && par1 != par4)
-			return par2;
-		else if (par2 == par4 && par1 != par3)
-			return par2;
-		else if (par3 == par1 && par2 != par4)
-			return par3;
-		else if (par3 == par2 && par1 != par4)
-			return par3;
-		else if (par3 == par4 && par1 != par2)
-			return par3;
-		else if (par4 == par1 && par2 != par3)
-			return par3;
-		else if (par4 == par2 && par1 != par3)
-			return par3;
-		else if (par4 == par3 && par1 != par2)
-			return par3;
+		if (id1 == id2 && id2 == id3)
+			return id1;
+		else if (id0 == id1 && id0 == id2)
+			return id0;
+		else if (id0 == id1 && id0 == id3)
+			return id0;
+		else if (id0 == id2 && id0 == id3)
+			return id0;
+		else if (id0 == id1 && id2 != id3)
+			return id0;
+		else if (id0 == id2 && id1 != id3)
+			return id0;
+		else if (id0 == id3 && id1 != id2)
+			return id0;
+		else if (id1 == id0 && id2 != id3)
+			return id1;
+		else if (id1 == id2 && id0 != id3)
+			return id1;
+		else if (id1 == id3 && id0 != id2)
+			return id1;
+		else if (id2 == id0 && id1 != id3)
+			return id2;
+		else if (id2 == id1 && id0 != id3)
+			return id2;
+		else if (id2 == id3 && id0 != id1)
+			return id2;
+		else if (id3 == id0 && id1 != id2)
+			return id2;
+		else if (id3 == id1 && id0 != id2)
+			return id2;
+		else if (id3 == id2 && id0 != id1)
+			return id2;
 		else
 		{
-			int var5 = this.nextInt(4);
-			return var5 == 0 ? par1 : (var5 == 1 ? par2 : (var5 == 2 ? par3 : par4));
+			int rand = this.nextInt(4);
+			return rand == 0 ? id0 : (rand == 1 ? id1 : (rand == 2 ? id2 : id3));
 		}
 	}
 

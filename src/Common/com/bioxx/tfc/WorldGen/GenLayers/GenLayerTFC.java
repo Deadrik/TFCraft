@@ -63,7 +63,7 @@ public abstract class GenLayerTFC extends GenLayer
 		drawImage(512, continentCopy, "9 ContinentsZoom");
 		GenLayerRiverInitTFC riverInit = new GenLayerRiverInitTFC(100L, continentCopy);
 		drawImage(512, riverInit, "10 RiverInit");
-		continentCopy = GenLayerZoomTFC.magnify(1000L, riverInit, var4 + 2);
+		continentCopy = GenLayerZoomTFC.magnify(1000L, riverInit, var4+2);
 		drawImage(512, continentCopy, "11 RiverInitZoom");
 		GenLayerRiverTFC riverGen = new GenLayerRiverTFC(1L, continentCopy);
 		drawImage(512, riverGen, "12 River");
@@ -126,7 +126,7 @@ public abstract class GenLayerTFC extends GenLayer
 			{
 				for(int z = 0; z < size; z++)
 				{
-					if(ints[x*size+z] != -1)
+					if(ints[x*size+z] != -1 && TFCBiome.getBiomeGenArray()[ints[x*size+z]] != null)
 					{
 						graphics.setColor(Color.getColor("", TFCBiome.getBiome(ints[x*size+z]).getBiomeColor()));	
 						graphics.drawRect(x, z, 1, 1);
