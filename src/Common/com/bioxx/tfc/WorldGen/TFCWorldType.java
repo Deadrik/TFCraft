@@ -10,9 +10,9 @@ public class TFCWorldType extends WorldType
 	public static TFCWorldType DEFAULT;
 	public static TFCWorldType FLAT;
 
-//	private static final  BiomeGenBase[] tfcBiomes = new BiomeGenBase[] {
-//		TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains,
-//		TFCBiome.plains, TFCBiome.rollingHills, TFCBiome.Mountains };
+	//	private static final  BiomeGenBase[] tfcBiomes = new BiomeGenBase[] {
+	//		TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains,
+	//		TFCBiome.plains, TFCBiome.rollingHills, TFCBiome.Mountains };
 	private static final TFCBiome[] biomesUNKNOWN = new TFCBiome[] {
 		TFCBiome.ocean
 	};
@@ -21,16 +21,12 @@ public class TFCWorldType extends WorldType
 	};
 	private static final TFCBiome[] biomesDEFAULT = new TFCBiome[] {
 		TFCBiome.ocean,
-		TFCBiome.river,
-		TFCBiome.beach,
 		TFCBiome.HighHills,
 		TFCBiome.plains,
 		TFCBiome.HighPlains,
 		TFCBiome.swampland,
-		TFCBiome.HighHillsEdge,
 		TFCBiome.rollingHills,
 		TFCBiome.Mountains,
-		TFCBiome.MountainsEdge,
 	};
 
 	public TFCWorldType(String par2Str)
@@ -54,8 +50,8 @@ public class TFCWorldType extends WorldType
 	{
 		if (this == FLAT)
 		{
-//			FlatGeneratorInfo var1 = FlatGeneratorInfo.createFlatGeneratorFromString(world.getWorldInfo().getGeneratorOptions());
-//			return new TFCWorldChunkManagerHell(BiomeGenBase.getBiome(var1.getBiome()), 0.5F, 0.5F);
+			//			FlatGeneratorInfo var1 = FlatGeneratorInfo.createFlatGeneratorFromString(world.getWorldInfo().getGeneratorOptions());
+			//			return new TFCWorldChunkManagerHell(BiomeGenBase.getBiome(var1.getBiome()), 0.5F, 0.5F);
 			return new TFCWorldChunkManagerHell(TFCBiome.hell, 0.5F, 0.5F);
 		}
 		else

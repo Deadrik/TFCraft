@@ -37,13 +37,13 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 		var10 = new GenLayerAddIslandTFC(4L, var11);
 		byte var4 = 4;
 
-		GenLayerTFC var5 = (GenLayerTFC)GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
+		GenLayerTFC var5 = (GenLayerTFC)GenLayerZoomTFC.magnify(1000L, var10, 0);
 		GenLayerRiverInitTFC var13 = new GenLayerRiverInitTFC(100L, var5);
-		var5 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var13, var4);
+		var5 = (GenLayerTFC) GenLayerZoomTFC.magnify(1000L, var13, var4);
 		GenLayerSmoothTFC var15 = new GenLayerSmoothTFC(1000L, var5);
-		GenLayerTFC var6 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
+		GenLayerTFC var6 = (GenLayerTFC) GenLayerZoomTFC.magnify(1000L, var10, 0);
 		GenLayerRainAmount var17 = new GenLayerRainAmount(200L, var6, par2WorldType);
-		var6 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var17, 2);
+		var6 = (GenLayerTFC) GenLayerZoomTFC.magnify(1000L, var17, 2);
 
 		Object var18 = new GenLayerSmoothTFC(1000L, var6);
 		for (int var7 = 0; var7 < var4; ++var7)

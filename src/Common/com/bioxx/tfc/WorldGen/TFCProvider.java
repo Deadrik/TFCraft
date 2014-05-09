@@ -98,27 +98,29 @@ return biome;
 		long seed = worldObj.getWorldInfo().getSeed();
 		Random rand = new Random(seed);
 
-		ChunkPosition chunkcoordinates = null;
+		ChunkPosition chunkCoord = null;
 		int xOffset = 0;
 		int xCoord = 0;
 		int yCoord = 145;
 		int zCoord = 10000;
 		int startingZ = 3000 + rand.nextInt(12000);
 
-		while(chunkcoordinates == null)
+		while(chunkCoord == null)
 		{
-			chunkcoordinates = chunkManager.findBiomePosition(xOffset, -startingZ, 64, var3, rand);
-			if (chunkcoordinates != null)
+			chunkCoord = chunkManager.findBiomePosition(xOffset, -startingZ, 64, var3, rand);
+			if (chunkCoord != null)
 			{
-				xCoord = chunkcoordinates.chunkPosX;
-				zCoord = chunkcoordinates.chunkPosZ;
+				xCoord = chunkCoord.chunkPosX;
+				zCoord = chunkCoord.chunkPosZ;
 			}
 			else
 			{
-				xOffset += 512;
+				xOffset += 128;
 				//System.out.println("Unable to find spawn biome");
 			}
 		}
+		if(chunkManager.getBiomeGenAt(chunkCoord.chunkPosX, chunkCoord.chunkPosZ) == TFCBiome.ocean)
+			System.out.println("Spawning in ocean");
 
 		int var9 = 0;
 		while (!canCoordinateBeSpawn(xCoord, zCoord))

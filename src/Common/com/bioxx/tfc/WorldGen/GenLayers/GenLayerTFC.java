@@ -1,8 +1,16 @@
 package com.bioxx.tfc.WorldGen.GenLayers;
 
-import com.bioxx.tfc.WorldGen.TFCWorldType;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
 
 import net.minecraft.world.gen.layer.GenLayer;
+
+import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.WorldGen.TFCWorldType;
 
 public abstract class GenLayerTFC extends GenLayer
 {
@@ -27,47 +35,112 @@ public abstract class GenLayerTFC extends GenLayer
 	 */
 	public static GenLayerTFC[] initializeAllBiomeGenerators(long par0, TFCWorldType par2)
 	{
-		GenLayerIslandTFC var3 = new GenLayerIslandTFC(1L);
-		GenLayerFuzzyZoomTFC var9 = new GenLayerFuzzyZoomTFC(2000L, var3);
-		GenLayerAddIslandTFC var10 = new GenLayerAddIslandTFC(1L, var9);
+		GenLayerIslandTFC continentStart = new GenLayerIslandTFC(1L);
+		drawImage(512, continentStart, "0 ContinentsStart");
+		GenLayerFuzzyZoomTFC continentFuzzyZoom = new GenLayerFuzzyZoomTFC(2000L, continentStart);
+		drawImage(512, continentFuzzyZoom, "1 ContinentsFuzzyZoom");
+		GenLayerAddIslandTFC var10 = new GenLayerAddIslandTFC(1L, continentFuzzyZoom);
+		drawImage(512, var10, "2 ContinentsAddIsland");
 		GenLayerZoomTFC var11 = new GenLayerZoomTFC(2001L, var10);
+		drawImage(512, var11, "3 ContinentsAddIslandZoom");
 		var10 = new GenLayerAddIslandTFC(2L, var11);
-		GenLayerAddSnowTFC var12 = new GenLayerAddSnowTFC(2L, var10);
-		var11 = new GenLayerZoomTFC(2002L, var12);
+		drawImage(512, var10, "4 ContinentsAddIsland2");
+		//GenLayerAddSnowTFC var12 = new GenLayerAddSnowTFC(2L, var10);
+		var11 = new GenLayerZoomTFC(2002L, var10);
+		drawImage(512, var11, "5 ContinentsAddIslandZoom2");
 		var10 = new GenLayerAddIslandTFC(3L, var11);
+		drawImage(512, var10, "6 ContinentsAddIsland3");
 		var11 = new GenLayerZoomTFC(2003L, var10);
-		var10 = new GenLayerAddIslandTFC(4L, var11);
+		drawImage(512, var11, "7 ContinentsAddIslandZoom3");
+		GenLayerTFC continent = new GenLayerAddIslandTFC(4L, var11);
+		drawImage(512, continent, "8 ContinentsDone");
+		continent = new GenLayerDeepOcean(4L, var11);
+		drawImage(512, continent, "8b ContinentsDone DeepOcean");
 		byte var4 = 4;
 
-		GenLayerTFC var5 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
-		GenLayerRiverInitTFC var13 = new GenLayerRiverInitTFC(100L, var5);
-		var5 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var13, var4 + 2);
-		GenLayerRiverTFC var14 = new GenLayerRiverTFC(1L, var5);
-		GenLayerSmoothTFC var15 = new GenLayerSmoothTFC(1000L, var14);
-		GenLayerTFC var6 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
-		GenLayerBiomeTFC var17 = new GenLayerBiomeTFC(200L, var6, par2);
-		var6 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var17, 2);
-		Object var18 = new GenLayerHillsTFC(1000L, var6);
+		//Create Rivers
+		GenLayerTFC continentCopy = GenLayerZoomTFC.magnify(1000L, continent, 0);
+		drawImage(512, continentCopy, "9 ContinentsZoom");
+		GenLayerRiverInitTFC riverInit = new GenLayerRiverInitTFC(100L, continentCopy);
+		drawImage(512, riverInit, "10 RiverInit");
+		continentCopy = GenLayerZoomTFC.magnify(1000L, riverInit, var4 + 2);
+		drawImage(512, continentCopy, "11 RiverInitZoom");
+		GenLayerRiverTFC riverGen = new GenLayerRiverTFC(1L, continentCopy);
+		drawImage(512, riverGen, "12 River");
+		GenLayerSmoothTFC smoothRiver = new GenLayerSmoothTFC(1000L, riverGen);
+		drawImage(512, smoothRiver, "13 SmoothRiver");
 
+		//Create Biomes
+		GenLayerTFC continentCopy2 = GenLayerZoomTFC.magnify(1000L, continent, 0);
+		drawImage(512, continentCopy2, "14 ContinentsZoom");
+		GenLayerBiomeTFC var17 = new GenLayerBiomeTFC(200L, continentCopy2, par2);
+		drawImage(512, var17, "15 Biome");
+		continentCopy2 = GenLayerZoomTFC.magnify(1000L, var17, 2);
+		drawImage(512, continentCopy2, "16 ZoomBiome");
+		Object var18 = new GenLayerHillsTFC(1000L, continentCopy2);
+		drawImage(512, (GenLayerHillsTFC)var18, "17 Hills");
 		for (int var7 = 0; var7 < var4; ++var7)
 		{
+			if (var7 == 0)
+			{
+				var18 = new GenLayerBiomeEdge(1000L, (GenLayerTFC)var18);
+				drawImage(512, (GenLayerTFC)var18, "18y BiomeEdge");
+			}
 			var18 = new GenLayerZoomTFC((long)(1000 + var7), (GenLayerTFC)var18);
+			drawImage(512, (GenLayerTFC)var18, "18-"+var7+" Zoom");
 			if (var7 == 0)
 				var18 = new GenLayerAddIslandTFC(3L, (GenLayerTFC)var18);
 			if (var7 == 1)
+			{
 				var18 = new GenLayerShoreTFC(1000L, (GenLayerTFC)var18);
-			if (var7 == 1)
-				var18 = new GenLayerSwampRiversTFC(1000L, (GenLayerTFC)var18);
+				drawImage(512, (GenLayerTFC)var18, "18z Shore");
+			}
 		}
 
 		GenLayerSmoothTFC var19 = new GenLayerSmoothTFC(1000L, (GenLayerTFC)var18);
-		GenLayerRiverMixTFC var20 = new GenLayerRiverMixTFC(100L, var19, var15);
+		drawImage(512, var19, "19 SmoothBiome");
+		GenLayerRiverMixTFC var20 = new GenLayerRiverMixTFC(100L, var19, smoothRiver);
+		drawImage(512, var20, "20 BiomeRiverMix");
 		GenLayerVoronoiZoomTFC var8 = new GenLayerVoronoiZoomTFC(10L, var20);
+		drawImage(512, var8, "21 BiomeVoronoiZoom");
 		var20.initWorldGenSeed(par0);
 		var8.initWorldGenSeed(par0);
 		return new GenLayerTFC[] {var20, var8, var20};
 	}
-
+	static boolean shouldDraw = false;
+	public static void drawImage(int size, GenLayerTFC genlayer, String name)
+	{
+		if(!shouldDraw)
+			return;
+		try 
+		{
+			File outFile = new File(name+".bmp");
+			if(outFile.exists())
+				return;
+			int[] ints = genlayer.getInts(0, 0, size, size);
+			BufferedImage outBitmap = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
+			Graphics2D graphics = (Graphics2D) outBitmap.getGraphics();
+			graphics.clearRect(0, 0, size, size);
+			System.out.println(name+".bmp");
+			for(int x = 0; x < size; x++)
+			{
+				for(int z = 0; z < size; z++)
+				{
+					if(ints[x*size+z] != -1)
+					{
+						graphics.setColor(Color.getColor("", TFCBiome.getBiome(ints[x*size+z]).getBiomeColor()));	
+						graphics.drawRect(x, z, 1, 1);
+					}
+				}
+			}
+			System.out.println(name+".bmp");
+			ImageIO.write(outBitmap, "BMP", outFile);
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+	}
 	public GenLayerTFC(long par1)
 	{
 		super(par1);

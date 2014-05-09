@@ -330,34 +330,33 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	 * Strongly favors positive y positions.
 	 */
 	@Override
-	public ChunkPosition findBiomePosition(int par1, int par2, int par3, List par4List, Random par5Random)
+	public ChunkPosition findBiomePosition(int xCoord, int zCoord, int radius, List biomeList, Random rand)
 	{
 		IntCache.resetIntCache();
-		int var6 = par1 - par3 >> 2;
-		int var7 = par2 - par3 >> 2;
-		int var8 = par1 + par3 >> 2;
-		int var9 = par2 + par3 >> 2;
-		int var10 = var8 - var6 + 1;
-		int var11 = var9 - var7 + 1;
-		int[] var12 = this.genBiomes.getInts(var6, var7, var10, var11);
-		ChunkPosition var13 = null;
-		int var14 = 0;
+		int l = xCoord - radius >> 2;
+		int i1 = zCoord - radius >> 2;
+		int j1 = xCoord + radius >> 2;
+		int k1 = zCoord + radius >> 2;
+		int l1 = j1 - l + 1;
+		int i2 = k1 - i1 + 1;
+		int[] aint = this.genBiomes.getInts(l, i1, l1, i2);
+		ChunkPosition chunkposition = null;
+		int j2 = 0;
 
-		for (int var15 = 0; var15 < var12.length; ++var15)
+		for (int k2 = 0; k2 < l1 * i2; ++k2)
 		{
-			int var16 = var6 + var15 % var10 << 2;
-			int var17 = var7 + var15 / var10 << 2;
-			if(var15 != -1 && var12[var15] != -1)
+			int l2 = l + k2 % l1 << 2;
+			int i3 = i1 + k2 / l1 << 2;
+			TFCBiome biomegenbase = TFCBiome.getBiome(aint[k2]);
+
+			if (biomeList.contains(biomegenbase) && (chunkposition == null || rand.nextInt(j2 + 1) == 0))
 			{
-				TFCBiome var18 = TFCBiome.getBiomeGenArray()[var12[var15]];
-				if (par4List.contains(var18) && (var13 == null || par5Random.nextInt(var14 + 1) == 0))
-				{
-					var13 = new ChunkPosition(var16, 0, var17);
-					++var14;
-				}
+				chunkposition = new ChunkPosition(l2, 0, i3);
+				++j2;
 			}
 		}
-		return var13;
+
+		return chunkposition;
 	}
 
 	/**

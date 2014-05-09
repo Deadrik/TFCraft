@@ -17,8 +17,8 @@ public class ChunkDataManager
 		{
 			if(chunkmap.containsKey(x + "," + z))
 				chunkmap.remove(x + "," + z);
-			else
-				System.out.println("Tried to unload chunkdata from the chunkmap that didnt exist at " + x + "," + z);
+			/*else
+				System.out.println("Tried to unload chunkdata from the chunkmap that didnt exist at " + x + "," + z);*/
 		}
 		/*if(TFCOptions.enableDebugMode)
 			System.out.println("ChunkDataManager chunkmap size: "+chunkmap.size());*/
