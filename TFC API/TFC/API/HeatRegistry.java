@@ -66,4 +66,46 @@ public class HeatRegistry
 		}
 
 	}
+
+	public Boolean isTemperatureWeldable(ItemStack is)
+	{
+		if(TFC_ItemHeat.HasTemp(is))
+		{
+			HeatIndex index = instance.findMatchingIndex(is);
+			if(index != null)
+			{
+				float temp = TFC_ItemHeat.GetTemp(is);
+				return temp < index.meltTemp && temp > index.meltTemp *0.8;
+			}
+		}
+		return false;
+	}
+
+	public Boolean isTemperatureWorkable(ItemStack is)
+	{
+		if(TFC_ItemHeat.HasTemp(is))
+		{
+			HeatIndex index = instance.findMatchingIndex(is);
+			if(index != null)
+			{
+				float temp = TFC_ItemHeat.GetTemp(is);
+				return temp < index.meltTemp && temp > index.meltTemp * 0.60;
+			}
+		}
+		return false;
+	}
+
+	public Boolean isTemperatureDanger(ItemStack is)
+	{
+		if(TFC_ItemHeat.HasTemp(is))
+		{
+			HeatIndex index = instance.findMatchingIndex(is);
+			if(index != null)
+			{
+				float temp = TFC_ItemHeat.GetTemp(is);
+				return temp < index.meltTemp && temp > index.meltTemp * 0.90;
+			}
+		}
+		return false;
+	}
 }

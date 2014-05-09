@@ -5,13 +5,17 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import TFC.TFCItems;
+import TFC.API.HeatRegistry;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
+import TFC.API.TFC_ItemHeat;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
+import TFC.Core.Util.StringUtil;
 
 public class ItemBloom extends ItemTerra implements ISmeltable
 {
@@ -28,6 +32,32 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
 		arraylist.add(is.getItemDamage()+"%");
+	}
+
+	@Override
+	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{
+		if(TFC_ItemHeat.HasTemp(is))
+		{
+			String s = "";
+			if(HeatRegistry.getInstance().isTemperatureDanger(is))
+			{
+				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.danger") + " | ";
+			}
+
+			if(HeatRegistry.getInstance().isTemperatureWeldable(is))
+			{
+				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.weldable") + " | ";
+			}
+
+			if(HeatRegistry.getInstance().isTemperatureWorkable(is))
+			{
+				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.workable");
+			}
+
+			if(!s.equals(""))
+				arraylist.add(s);
+		}
 	}
 
 	@Override

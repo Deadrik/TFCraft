@@ -15,7 +15,6 @@ import net.minecraftforge.common.ForgeDirection;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
@@ -62,70 +61,24 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		if(TFC_ItemHeat.HasTemp(is))
 		{
 			String s = "";
-			if(isTemperatureDanger(is))
+			if(HeatRegistry.getInstance().isTemperatureDanger(is))
 			{
 				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.danger") + " | ";
 			}
 
-			if(isTemperatureWeldable(is))
+			if(HeatRegistry.getInstance().isTemperatureWeldable(is))
 			{
 				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.weldable") + " | ";
 			}
 
-			if(isTemperatureWorkable(is))
+			if(HeatRegistry.getInstance().isTemperatureWorkable(is))
 			{
 				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.workable");
 			}
 
 			if(!s.equals(""))
 				arraylist.add(s);
-
 		}
-	}
-
-	public Boolean isTemperatureWeldable(ItemStack is)
-	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			HeatIndex index = manager.findMatchingIndex(is);
-			if(index != null)
-			{
-				float temp = TFC_ItemHeat.GetTemp(is);
-				return temp < index.meltTemp && temp > index.meltTemp *0.8;
-			}
-		}
-		return false;
-	}
-
-	public Boolean isTemperatureWorkable(ItemStack is)
-	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			HeatIndex index = manager.findMatchingIndex(is);
-			if(index != null)
-			{
-				float temp = TFC_ItemHeat.GetTemp(is);
-				return temp < index.meltTemp && temp > index.meltTemp * 0.60;
-			}
-		}
-		return false;
-	}
-
-	public Boolean isTemperatureDanger(ItemStack is)
-	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			HeatIndex index = manager.findMatchingIndex(is);
-			if(index != null)
-			{
-				float temp = TFC_ItemHeat.GetTemp(is);
-				return temp < index.meltTemp && temp > index.meltTemp * 0.90;
-			}
-		}
-		return false;
 	}
 
 	@Override
