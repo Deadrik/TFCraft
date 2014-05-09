@@ -25,7 +25,7 @@ import TFC.API.Crafting.AnvilReq;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Textures;
-import TFC.TileEntities.TileEntityAnvil;
+import TFC.TileEntities.TEAnvil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -81,10 +81,10 @@ public class BlockAnvil extends BlockTerraContainer
 		}
 		else
 		{
-			if((TileEntityAnvil)world.getBlockTileEntity(i, j, k)!=null)
+			if((TEAnvil)world.getBlockTileEntity(i, j, k)!=null)
 			{
-				TileEntityAnvil tileentityanvil;
-				tileentityanvil = (TileEntityAnvil)world.getBlockTileEntity(i, j, k);
+				TEAnvil tileentityanvil;
+				tileentityanvil = (TEAnvil)world.getBlockTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
 				entityplayer.openGui(TerraFirmaCraft.instance, 21, world, i, j, k);
@@ -100,9 +100,9 @@ public class BlockAnvil extends BlockTerraContainer
 		int direction = getDirectionFromMetadata(meta);
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
 
-		if (te != null && te instanceof TileEntityAnvil)
+		if (te != null && te instanceof TEAnvil)
 		{
-			TileEntityAnvil teAnvil = (TileEntityAnvil) te;
+			TEAnvil teAnvil = (TEAnvil) te;
 			if (teAnvil.AnvilTier != AnvilReq.STONE.Tier
 					|| this.blockID == TFCBlocks.Anvil2.blockID)
 			{
@@ -125,7 +125,7 @@ public class BlockAnvil extends BlockTerraContainer
 	{
 		int meta = par1World.getBlockMetadata(par2, par3, par4);
 		int direction = getDirectionFromMetadata(meta);
-		TileEntityAnvil te = (TileEntityAnvil)par1World.getBlockTileEntity(par2, par3, par4);
+		TEAnvil te = (TEAnvil)par1World.getBlockTileEntity(par2, par3, par4);
 
 		if(te.AnvilTier != AnvilReq.STONE.Tier)
 		{
@@ -153,7 +153,7 @@ public class BlockAnvil extends BlockTerraContainer
 	{
 		int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 		int direction = getDirectionFromMetadata(meta);
-		TileEntityAnvil te = (TileEntityAnvil)par1IBlockAccess.getBlockTileEntity(par2, par3, par4);
+		TEAnvil te = (TEAnvil)par1IBlockAccess.getBlockTileEntity(par2, par3, par4);
 
 		if(te.AnvilTier != AnvilReq.STONE.Tier)
 		{
@@ -278,7 +278,7 @@ public class BlockAnvil extends BlockTerraContainer
 
 		world.setBlockMetadataWithNotify(i, j, k, byte0, 3);
 
-		TileEntityAnvil te = (TileEntityAnvil)world.getBlockTileEntity(i, j, k);
+		TEAnvil te = (TEAnvil)world.getBlockTileEntity(i, j, k);
 		if(blockID == TFCBlocks.Anvil.blockID) {
 			te.AnvilTier = AnvilReq.getReqFromInt(meta).Tier;
 		} else if(blockID == TFCBlocks.Anvil2.blockID) {
@@ -290,7 +290,7 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
 	{
-		TileEntityAnvil var5 = (TileEntityAnvil)par1World.getBlockTileEntity(par2, par3, par4);
+		TEAnvil var5 = (TEAnvil)par1World.getBlockTileEntity(par2, par3, par4);
 
 		if (var5 != null)
 		{
@@ -360,7 +360,7 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityAnvil();
+		return new TEAnvil();
 	}
 
 	Icon[] textureMapTop;

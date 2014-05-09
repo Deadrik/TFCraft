@@ -35,7 +35,7 @@ import TFC.Items.ItemMeltedMetal;
 import TFC.Items.ItemTFCArmor;
 import TFC.Items.Tools.ItemMiscToolHead;
 
-public class TileEntityAnvil extends NetworkTileEntity implements IInventory
+public class TEAnvil extends NetworkTileEntity implements IInventory
 {
 	public ItemStack anvilItemStacks[];
 
@@ -67,7 +67,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	public static final int FLUX_SLOT = 6;
 	public static final int HAMMER_SLOT = 0;
 
-	public TileEntityAnvil()
+	public TEAnvil()
 	{
 		anvilItemStacks = new ItemStack[19];
 		itemCraftingValue = 0;
@@ -196,6 +196,12 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				planList.put((String)p, ar);
 		}
 
+		if(anvilItemStacks[INPUT1_SLOT] != null && anvilItemStacks[INPUT1_SLOT].getItem() == TFCItems.Bloom)
+		{
+			if(anvilItemStacks[INPUT1_SLOT].getItemDamage() <= 100 && planList.containsKey("splitbloom"))
+				planList.remove("splitbloom");
+		}
+
 		if (planList.size() == 0)
 		{
 			workRecipe = null;
@@ -267,7 +273,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			anvilItemStacks[slot].setTagCompound(Tag);
 		}
 	}
-	
+
 	public void removeRules(int slot)
 	{
 		if(anvilItemStacks[slot].hasTagCompound())
@@ -281,7 +287,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				Tag.removeTag("itemCraftingRule3");
 			if(Tag.hasKey("itemCraftingValue"))
 				Tag.removeTag("itemCraftingValue");
-			
+
 			anvilItemStacks[slot].setTagCompound(Tag);
 		}
 	}

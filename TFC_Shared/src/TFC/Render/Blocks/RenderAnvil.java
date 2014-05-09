@@ -7,7 +7,7 @@ import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
 import TFC.API.Crafting.AnvilReq;
 import TFC.Blocks.Devices.BlockAnvil;
-import TFC.TileEntities.TileEntityAnvil;
+import TFC.TileEntities.TEAnvil;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderAnvil implements ISimpleBlockRenderingHandler{
@@ -25,7 +25,7 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 			breaking = true;
 		}
 
-		TileEntityAnvil te = (TileEntityAnvil)blockAccess.getBlockTileEntity(i, j, k);
+		TEAnvil te = (TEAnvil)blockAccess.getBlockTileEntity(i, j, k);
 
 		if(te.AnvilTier != AnvilReq.STONE.Tier)
 		{

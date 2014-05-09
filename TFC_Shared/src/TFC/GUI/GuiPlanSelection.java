@@ -19,18 +19,18 @@ import TFC.API.Crafting.AnvilRecipe;
 import TFC.API.Crafting.AnvilReq;
 import TFC.Containers.ContainerPlanSelection;
 import TFC.Core.Util.StringUtil;
-import TFC.TileEntities.TileEntityAnvil;
+import TFC.TileEntities.TEAnvil;
 
 public class GuiPlanSelection extends GuiContainerTFC
 {
-	TileEntityAnvil AnvilEntity;
+	TEAnvil AnvilEntity;
 	EntityPlayer player;
 	World world;
 	ArrayList<Object[]> plans;
 	int x, y, z;
 	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_plan.png");
 
-	public GuiPlanSelection(EntityPlayer p, TileEntityAnvil te, World w, int x, int y, int z)
+	public GuiPlanSelection(EntityPlayer p, TEAnvil te, World w, int x, int y, int z)
 	{
 		super(new ContainerPlanSelection(p, te, w, x, y, z), 175, 130);
 		AnvilEntity = te;

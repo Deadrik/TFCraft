@@ -30,12 +30,12 @@ import TFC.Core.TFC_Textures;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Core.Player.SkillStats;
 import TFC.Core.Util.StringUtil;
-import TFC.TileEntities.TileEntityAnvil;
+import TFC.TileEntities.TEAnvil;
 
 
 public class GuiAnvil extends GuiContainer
 {
-	TileEntityAnvil AnvilEntity;
+	TEAnvil AnvilEntity;
 	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_anvil.png");
 	EntityPlayer player;
 	int x, y, z;
@@ -43,7 +43,7 @@ public class GuiAnvil extends GuiContainer
 	ItemStack input = null;
 	ItemStack input2 = null;
 
-	public GuiAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil te, World world, int x, int y, int z)
+	public GuiAnvil(InventoryPlayer inventoryplayer, TEAnvil te, World world, int x, int y, int z)
 	{
 		super(new ContainerAnvil(inventoryplayer,te, world, x, y, z) );
 		AnvilEntity = te;

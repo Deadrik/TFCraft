@@ -14,7 +14,7 @@ import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
 import TFC.Core.TFC_Achievements;
-import TFC.TileEntities.TileEntityAnvil;
+import TFC.TileEntities.TEAnvil;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -39,10 +39,10 @@ public class ItemHammer extends ItemTerraTool implements ICausesDamage
 			{
 				world.setBlock(x, y, z, TFCBlocks.Anvil.blockID);
 				player.triggerAchievement(TFC_Achievements.achAnvil);
-				TileEntityAnvil te = (TileEntityAnvil) world.getBlockTileEntity(x, y, z);
+				TEAnvil te = (TEAnvil) world.getBlockTileEntity(x, y, z);
 				if(te == null)
 				{
-					world.setBlockTileEntity(x, y, z, new TileEntityAnvil());
+					world.setBlockTileEntity(x, y, z, new TEAnvil());
 				}
 				if(te != null)
 				{

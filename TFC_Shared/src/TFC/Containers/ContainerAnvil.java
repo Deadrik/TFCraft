@@ -13,16 +13,16 @@ import TFC.Containers.Slots.SlotAnvilIn;
 import TFC.Containers.Slots.SlotAnvilWeldOut;
 import TFC.Core.Player.PlayerInventory;
 import TFC.Items.Tools.ItemHammer;
-import TFC.TileEntities.TileEntityAnvil;
+import TFC.TileEntities.TEAnvil;
 
 public class ContainerAnvil extends ContainerTFC
 {
-	private TileEntityAnvil anvil;
+	private TEAnvil anvil;
 	private int greenIndicator;
 	private int redIndicator;
 	private int tier = -1;
 
-	public ContainerAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil anvil, World world, int x, int y, int z)
+	public ContainerAnvil(InventoryPlayer inventoryplayer, TEAnvil anvil, World world, int x, int y, int z)
 	{
 		this.anvil = anvil;
 

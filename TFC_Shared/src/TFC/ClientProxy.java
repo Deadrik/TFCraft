@@ -129,7 +129,7 @@ import TFC.Render.TESR.TESRToolrack;
 import TFC.Render.TESR.TESRWorldItem;
 import TFC.TileEntities.TESeaWeed;
 import TFC.TileEntities.TEWorldItem;
-import TFC.TileEntities.TileEntityAnvil;
+import TFC.TileEntities.TEAnvil;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFirepit;
@@ -263,7 +263,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep", new TESRFoodPrep());
 		ClientRegistry.registerTileEntity(TileEntityBellows.class, "Bellows", new TESRBellows());
 		ClientRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack", new TESRToolrack());
-		ClientRegistry.registerTileEntity(TileEntityAnvil.class, "Anvil", new TESRAnvil());
+		ClientRegistry.registerTileEntity(TEAnvil.class, "Anvil", new TESRAnvil());
 		ClientRegistry.registerTileEntity(TEWorldItem.class, "worlditem", new TESRWorldItem());
 	}
 

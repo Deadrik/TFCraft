@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Blocks.Devices.BlockAnvil;
-import TFC.TileEntities.TileEntityAnvil;
+import TFC.TileEntities.TEAnvil;
 
 public class TESRAnvil extends TESRBase
 {
@@ -21,7 +21,7 @@ public class TESRAnvil extends TESRBase
 	/**
 	 * Renders the TileEntity for the chest at a position.
 	 */
-	public void renderAt(TileEntityAnvil te, double d, double d1, double d2, float f)
+	public void renderAt(TEAnvil te, double d, double d1, double d2, float f)
 	{
 		if (te.worldObj != null)
 		{
@@ -37,7 +37,7 @@ public class TESRAnvil extends TESRBase
 		}
 	}
 
-	private void drawItem(TileEntityAnvil te, double d, double d1, double d2,
+	private void drawItem(TEAnvil te, double d, double d1, double d2,
 			int dir, EntityItem customitem, float blockScale, int i)
 	{
 		if (te.getStackInSlot(i) != null)
@@ -73,13 +73,13 @@ public class TESRAnvil extends TESRBase
 			out[4] = 1f;
 			out[5] = 0f;
 			out[6] = 0f;
-			if(slot == TileEntityAnvil.HAMMER_SLOT)
+			if(slot == TEAnvil.HAMMER_SLOT)
 			{
 				out[0] = 0.55f; 
 				out[1] = 0.61f; 
 				out[2] = 0.45f;
 			}
-			else if(slot == TileEntityAnvil.INPUT1_SLOT)
+			else if(slot == TEAnvil.INPUT1_SLOT)
 			{
 				out[0] = 0.55f; 
 				out[1] = 0.61f; 
@@ -96,13 +96,13 @@ public class TESRAnvil extends TESRBase
 			out[4] = 1f;
 			out[5] = 0f;
 			out[6] = 0f;
-			if(slot == TileEntityAnvil.HAMMER_SLOT)
+			if(slot == TEAnvil.HAMMER_SLOT)
 			{
 				out[0] = 0.25f; 
 				out[1] = 0.61f; 
 				out[2] = 0.25f;
 			}
-			else if(slot == TileEntityAnvil.INPUT1_SLOT)
+			else if(slot == TEAnvil.INPUT1_SLOT)
 			{
 				out[0] = 0.75f; 
 				out[1] = 0.61f; 
@@ -119,6 +119,6 @@ public class TESRAnvil extends TESRBase
 	@Override
 	public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
 	{
-		this.renderAt((TileEntityAnvil)par1TileEntity, par2, par4, par6, par8);
+		this.renderAt((TEAnvil)par1TileEntity, par2, par4, par6, par8);
 	}
 }

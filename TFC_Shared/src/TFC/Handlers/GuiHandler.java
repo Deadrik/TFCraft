@@ -32,7 +32,7 @@ import TFC.Entities.Mobs.EntityHorseTFC;
 import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TENestBox;
-import TFC.TileEntities.TileEntityAnvil;
+import TFC.TileEntities.TEAnvil;
 import TFC.TileEntities.TEBarrel;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFirepit;
@@ -71,7 +71,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 21:
 		{
-			return new ContainerAnvil(player.inventory, (TileEntityAnvil) te, world, x, y, z);
+			return new ContainerAnvil(player.inventory, (TEAnvil) te, world, x, y, z);
 		}
 		case 22:
 		{
@@ -83,7 +83,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 24:
 		{
-			return new ContainerPlanSelection(player, (TileEntityAnvil) te, world, x, y, z);//was metallurgy table
+			return new ContainerPlanSelection(player, (TEAnvil) te, world, x, y, z);//was metallurgy table
 		}
 		case 25:
 		{
