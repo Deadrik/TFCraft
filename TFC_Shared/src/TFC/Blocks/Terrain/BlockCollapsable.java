@@ -19,6 +19,7 @@ import TFC.API.Util.ByteCoord;
 import TFC.API.Util.CollapseData;
 import TFC.API.Util.CollapseList;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Sounds;
 import TFC.Entities.EntityFallingStone;
 import TFC.TileEntities.TileEntityPartial;
@@ -136,7 +137,7 @@ public class BlockCollapsable extends BlockTerraContainer
 		for(int y = -1; y < 1; y++)
 			for(int x = -range; x < range+1; x++)
 				for(int z = -range; z < range+1; z++)
-					if(world.getBlockId(i+x, j+y, k+z) == TFCBlocks.WoodSupportH.blockID)
+					if(TFC_Core.isHorizSupport(world.getBlockId(i+x, j+y, k+z)))
 						if(world.rand.nextFloat() < collapseChance/100f/2f)
 							world.setBlock(i+x, j+y, k+z, 0);
 						else return true;

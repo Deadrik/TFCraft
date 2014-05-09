@@ -1152,6 +1152,15 @@ public class TFC_Core
 	public static boolean isFence(int id)
 	{
 		return (id == TFCBlocks.Fence.blockID || id == TFCBlocks.Fence2.blockID);
+	}
 
+	public static boolean isVertSupport(int id)
+	{
+		return (id == TFCBlocks.WoodSupportV.blockID || id == TFCBlocks.WoodSupportV2.blockID);
+	}
+
+	public static boolean isHorizSupport(int id)
+	{
+		return (id == TFCBlocks.WoodSupportH.blockID || id == TFCBlocks.WoodSupportH2.blockID);
 	}
 }
