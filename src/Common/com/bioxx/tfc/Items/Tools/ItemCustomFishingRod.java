@@ -10,6 +10,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.EntityFishHookTFC;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.ISize;
@@ -63,11 +64,22 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
+		if(par1ItemStack.stackTagCompound.hasKey("tickReeledIn")){
+			long tickReeledIn = par1ItemStack.stackTagCompound.getLong("tickReeledIn");
+			if(TFC_Time.getTotalTicks() <= tickReeledIn +20){
+				return par1ItemStack;
+			}
+		}
 		if (par3EntityPlayer.fishEntity != null)
 		{
-			int i = par3EntityPlayer.fishEntity.func_146034_e();
-			par1ItemStack.damageItem(i, par3EntityPlayer);
-			par3EntityPlayer.swingItem();
+			//int i = par3EntityPlayer.fishEntity.func_146034_e();
+			//par1ItemStack.damageItem(i, par3EntityPlayer);
+			if(par3EntityPlayer.fishEntity instanceof EntityFishHookTFC){
+				((EntityFishHookTFC)(par3EntityPlayer.fishEntity)).reelInBobber(par3EntityPlayer, par1ItemStack);
+			}
+			else{
+				par3EntityPlayer.swingItem();
+			}
 		}
 		else
 		{
@@ -86,7 +98,7 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 		this.itemIcon = par1IconRegister.registerIcon(this.getIconString() + "_uncast");
 		this.theIcon = par1IconRegister.registerIcon(this.getIconString() + "_cast");
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
@@ -97,7 +109,7 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 		}
 		return itemIcon;
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
@@ -115,7 +127,7 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 	{
 		return EnumWeight.LIGHT;
 	}
-	
+
 	@Override
 	public EnumItemReach getReach(ItemStack is){
 		return EnumItemReach.FAR;

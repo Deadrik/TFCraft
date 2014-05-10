@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,6 +21,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemCustomFishingRod;
 import com.bioxx.tfc.api.Util.Helper;
@@ -58,6 +60,8 @@ public class EntityFishHookTFC extends EntityFishHook
 	private double velocityY;
 	@SideOnly(Side.CLIENT)
 	private double velocityZ;
+
+	public double pullX,pullY,pullZ;
 
 	public EntityFishHookTFC(World par1World)
 	{
@@ -182,6 +186,17 @@ public class EntityFishHookTFC extends EntityFishHook
 	{
 		this.onEntityUpdate();
 
+		if(this.getDistanceToEntity(this.field_146042_b)<1){
+			this.setDead();
+			if(this.field_146042_b.getHeldItem() != null){
+				ItemStack itemstack = this.field_146042_b.getHeldItem();
+				if(itemstack.stackTagCompound == null){
+					itemstack.stackTagCompound = new NBTTagCompound();
+				}
+				itemstack.stackTagCompound.setLong("tickReeledIn", TFC_Time.getTotalTicks());
+			}
+		}
+
 		if (this.fishPosRotationIncrements > 0)
 		{
 			double d0 = this.posX + (this.fishX - this.posX) / this.fishPosRotationIncrements;
@@ -207,22 +222,22 @@ public class EntityFishHookTFC extends EntityFishHook
 					return;
 				}
 
-				if (this.field_146043_c/*bobber*/ != null)
+				if (this.field_146043_c != null)
 				{
-					if (!this.field_146043_c/*bobber*/.isDead)
+					if (!this.field_146043_c.isDead)
 					{
-						this.posX = this.field_146043_c/*bobber*/.posX;
-						this.posY = this.field_146043_c/*bobber*/.boundingBox.minY + this.field_146043_c/*bobber*/.height * 0.8D;
-						this.posZ = this.field_146043_c/*bobber*/.posZ;
+						this.posX = this.field_146043_c.posX;
+						this.posY = this.field_146043_c.boundingBox.minY + this.field_146043_c.height * 0.8D;
+						this.posZ = this.field_146043_c.posZ;
 						return;
 					}
-					this.field_146043_c/*bobber*/ = null;
+					this.field_146043_c = null;
 				}
 			}
 
-			if (this.field_146044_a/*shake*/ > 0)
+			if (this.field_146044_a > 0)
 			{
-				--this.field_146044_a/*shake*/;
+				--this.field_146044_a;
 			}
 
 			if (this.inGround)
@@ -289,7 +304,7 @@ public class EntityFishHookTFC extends EntityFishHook
 				if (movingobjectposition.entityHit != null)
 				{
 					if (movingobjectposition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.field_146042_b), 0.0F))
-						this.field_146043_c/*bobber*/ = movingobjectposition.entityHit;
+						this.field_146043_c = movingobjectposition.entityHit;
 				}
 				else
 				{
@@ -333,45 +348,6 @@ public class EntityFishHookTFC extends EntityFishHook
 
 					if (this.worldObj.isAABBInMaterial(axisalignedbb1, Material.water))
 						d6 += 1.0D / b0;
-				}
-
-				if (d6 > 0.0D)
-				{
-					if (this.ticksCatchable > 0)
-					{
-						--this.ticksCatchable;
-					}
-					else
-					{
-						short short1 = 500;
-						if (this.worldObj.canLightningStrikeAt(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY) + 1, MathHelper.floor_double(this.posZ)))
-							short1 = 300;
-
-						if (this.rand.nextInt(short1) == 0)
-						{
-							this.ticksCatchable = this.rand.nextInt(30) + 10;
-							this.motionY -= 0.20000000298023224D;
-							this.playSound("random.splash", 0.25F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.4F);
-							float f3 = MathHelper.floor_double(this.boundingBox.minY);
-							int l;
-							float f4;
-							float f5;
-
-							for (l = 0; l < 1.0F + this.width * 20.0F; ++l)
-							{
-								f5 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width;
-								f4 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width;
-								this.worldObj.spawnParticle("bubble", this.posX + f5, f3 + 1.0F, this.posZ + f4, this.motionX, this.motionY - this.rand.nextFloat() * 0.2F, this.motionZ);
-							}
-
-							for (l = 0; l < 1.0F + this.width * 20.0F; ++l)
-							{
-								f5 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width;
-								f4 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width;
-								this.worldObj.spawnParticle("splash", this.posX + f5, f3 + 1.0F, this.posZ + f4, this.motionX, this.motionY, this.motionZ);
-							}
-						}
-					}
 				}
 
 				if (this.ticksCatchable > 0)
@@ -420,6 +396,29 @@ public class EntityFishHookTFC extends EntityFishHook
 		this.inTile = Block.getBlockById(par1NBTTagCompound.getByte("inTile") & 255);
 		this.field_146044_a/*shake*/ = par1NBTTagCompound.getByte("shake") & 255;
 		this.inGround = par1NBTTagCompound.getByte("inGround") == 1;
+	}
+
+	public void reelInBobber(Entity entity, ItemStack itemstack){
+		double distance = this.getDistanceToEntity(entity);
+		if(distance > 1){
+
+			this.pullX = 0.2*(entity.posX - posX)/distance;
+			this.pullY = 0.2*(entity.posY - posY)/distance;
+			this.pullZ = 0.2*(entity.posZ - posZ)/distance;
+
+			if(this.ridingEntity==null){
+				this.motionX += pullX;
+				this.motionY += pullY;
+				this.motionZ += pullZ;
+			}
+		}
+		else{
+			this.setDead();
+			if(itemstack.stackTagCompound == null){
+				itemstack.stackTagCompound = new NBTTagCompound();
+			}
+			itemstack.stackTagCompound.setLong("tickReeledIn", TFC_Time.getTotalTicks());
+		}
 	}
 
 	@Override
@@ -477,6 +476,10 @@ public class EntityFishHookTFC extends EntityFishHook
 	@Override
 	public void setDead()
 	{
+		if(this.ridingEntity!=null && this.ridingEntity instanceof EntityLiving){
+			((EntityLiving)(this.ridingEntity)).setHealth(1);
+			((EntityLiving)(this.ridingEntity)).attackEntityFrom(DamageSource.drown, 1);
+		}
 		super.setDead();
 		if (this.field_146042_b != null)
 			this.field_146042_b.fishEntity = null;
