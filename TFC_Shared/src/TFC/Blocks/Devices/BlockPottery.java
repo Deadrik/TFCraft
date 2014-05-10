@@ -83,12 +83,12 @@ public class BlockPottery extends BlockTerraContainer
 
 			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == TFCItems.Straw && !player.isSneaking())
 			{
-				te.addStraw(player.inventory.getCurrentItem());
+				te.addStraw(player.inventory.getCurrentItem(), player);
 				return true;
 			}
 			else if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemLogs && !player.isSneaking() && te.straw == 8)
 			{
-				te.addLog(player.inventory.getCurrentItem());
+				te.addLog(player.inventory.getCurrentItem(), player);
 				return true;
 			}
 			else if(((player.inventory.getCurrentItem() == null || !(player.inventory.getCurrentItem().getItem() instanceof ItemPotteryBase))))

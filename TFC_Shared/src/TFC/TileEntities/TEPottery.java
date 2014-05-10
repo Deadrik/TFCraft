@@ -120,33 +120,58 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 		}
 	}
 
-	public void addLog(ItemStack is)
+	public void addLog(ItemStack is, EntityPlayer player)
 	{
 		if(wood < 8)
 		{
-			for(int i = 4; i < 12; i++)
+			if (!player.capabilities.isCreativeMode)
 			{
-				if(this.inventory[i] == null)
+				for (int i = 4; i < 12; i++)
 				{
-					wood++;
-					ItemStack _is = is.copy();
-					is.stackSize--;
-					_is.stackSize = 1;
-					this.setInventorySlotContents(i, _is);
-					broadcastPacketInRange(createUpdatePacket());
-					break;
+					if (this.inventory[i] == null)
+					{
+						wood++;
+						ItemStack _is = is.copy();
+						is.stackSize--;
+						_is.stackSize = 1;
+						this.setInventorySlotContents(i, _is);
+						broadcastPacketInRange(createUpdatePacket());
+						break;
+					}
 				}
+			}
+			else
+			{
+				for (int i = 4; i < 12; i++)
+				{
+					if (this.inventory[i] == null)
+					{
+						wood++;
+						ItemStack _is = is.copy();
+						_is.stackSize = 1;
+						this.setInventorySlotContents(i, _is);
+					}
+				}
+				broadcastPacketInRange(createUpdatePacket());
 			}
 		}
 	}
 
-	public void addStraw(ItemStack is)
+	public void addStraw(ItemStack is, EntityPlayer player)
 	{
 		if(straw < 8)
 		{
-			straw++;
-			is.stackSize--;
-			broadcastPacketInRange(createUpdatePacket());
+			if (!player.capabilities.isCreativeMode)
+			{
+				straw++;
+				is.stackSize--;
+				broadcastPacketInRange(createUpdatePacket());
+			}
+			else
+			{
+				straw = 8;
+				broadcastPacketInRange(createUpdatePacket());
+			}
 		}
 	}
 
