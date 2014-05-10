@@ -67,13 +67,13 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 
 	private void func_35265_a (World world, int i, int j, int k, int l)
 	{
-		if(world.isAirBlock(i, j, k) && Blocks.vine.canBlockStay(world, i, j, k))
-			world.setBlock(i, j, k, Blocks.vine, l, 0x2);
+		if(world.isAirBlock(i, j, k) && TFCBlocks.Vine.canBlockStay(world, i, j, k))
+			world.setBlock(i, j, k, TFCBlocks.Vine, l, 0x2);
 
 		for (int i1 = 4 ; world.isAirBlock(i, --j, k) && i1 > 0 ; i1--)
 		{
-			if(world.isAirBlock(i, j, k) && Blocks.vine.canBlockStay(world, i, j, k))
-				world.setBlock (i, j, k, Blocks.vine, l, 0x2);
+			if(world.isAirBlock(i, j, k) && TFCBlocks.Vine.canBlockStay(world, i, j, k))
+				world.setBlock (i, j, k, TFCBlocks.Vine, l, 0x2);
 		}
 	}
 

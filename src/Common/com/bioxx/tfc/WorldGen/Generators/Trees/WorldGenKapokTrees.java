@@ -2,14 +2,14 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class WorldGenKapokTrees extends WorldGenerator
 {
@@ -101,7 +101,7 @@ public class WorldGenKapokTrees extends WorldGenerator
 				var13[var6] = MathHelper.floor_double(par1ArrayOfInteger[var6] + var14 * var9);
 				var13[var7] = MathHelper.floor_double(par1ArrayOfInteger[var7] + var14 * var11);
 				Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
-				if (var16 != Blocks.air && (var16 != TFCBlocks.Leaves || var16 != TFCBlocks.Leaves2) && var16!= Blocks.vine)
+				if (var16 != Blocks.air && (var16 != TFCBlocks.Leaves || var16 != TFCBlocks.Leaves2) && var16!= TFCBlocks.Vine)
 					break;
 			}
 			return var14 == var15 ? -1 : Math.abs(var14);

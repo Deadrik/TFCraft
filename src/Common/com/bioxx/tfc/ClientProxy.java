@@ -20,7 +20,6 @@ import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.GuiIngameForge;
@@ -353,7 +352,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if(par1IBlockAccess.getBlock(i, j, k) == Blocks.vine)
+		else if(par1IBlockAccess.getBlock(i, j, k) == TFCBlocks.Vine)
 		{
 			if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9
 					&& !(((TFCWorldChunkManager) getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8)

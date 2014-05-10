@@ -315,6 +315,7 @@ public class TFCBlocks
 	public static Block Reeds;
 	public static Block Pumpkin;
 	public static Block ButtonWood;
+	public static Block Vine;
 
 	public static void RegisterBlocks()
 	{
@@ -475,6 +476,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Reeds, "Reeds");
 		GameRegistry.registerBlock(Pumpkin, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Pumpkin");
 		GameRegistry.registerBlock(ButtonWood, "ButtonWood");
+		GameRegistry.registerBlock(Vine, com.bioxx.tfc.Items.ItemBlocks.ItemVine.class, "Vine");
 	}
 
 	public static void LoadBlocks()
@@ -503,6 +505,7 @@ public class TFCBlocks
 		Blocks.pumpkin.setCreativeTab(null);
 		Blocks.wooden_button.setCreativeTab(null);
 		Blocks.ice.setCreativeTab(null);
+		Blocks.vine.setCreativeTab(null);
 
 		Bookshelf = new BlockCustomBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("Bookshelf").setBlockTextureName("bookshelf");
 		Torch = new BlockTorch().setHardness(0.0F).setLightLevel(0.9375F).setStepSound(Block.soundTypeWood).setBlockName("Torch").setBlockTextureName("torch_on");
@@ -512,14 +515,13 @@ public class TFCBlocks
 		Reeds = new BlockCustomReed().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Reeds").setBlockTextureName("reeds");
 		Pumpkin = new BlockCustomPumpkin(false).setHardness(1.0F).setStepSound(Block.soundTypeWood).setBlockName("Pumpkin").setBlockTextureName("pumpkin");
 		ButtonWood = new BlockCustomButtonWood().setHardness(0.5F).setStepSound(Block.soundTypeWood).setBlockName("ButtonWood");
+		Vine = new BlockCustomVine().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("Vine").setBlockTextureName("vine");
 
 		// This is not used anywhere
 		//Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.oak_stairs), "oak_stairs", (new BlockStair(Material.wood)).setBlockName("stairsWood"));
 
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.snow_layer), "snow_layer",
 				(new BlockCustomSnow()).setHardness(0.1F).setStepSound(Block.soundTypeSnow).setBlockName("snow").setLightOpacity(1).setBlockTextureName("snow"));
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.vine), "vine",
-				(new BlockCustomVine()).setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("vine").setBlockTextureName("vine"));
 
 		StoneIgInCobble = new BlockIgInCobble(Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgInRockCobble");
 		StoneIgIn = new BlockIgIn(Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgInRock");

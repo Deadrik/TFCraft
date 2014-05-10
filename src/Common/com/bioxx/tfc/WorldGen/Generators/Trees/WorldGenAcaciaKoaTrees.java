@@ -101,7 +101,7 @@ public class WorldGenAcaciaKoaTrees extends WorldGenerator
 				var13[var6] = MathHelper.floor_double(par1ArrayOfInteger[var6] + var14 * var9);
 				var13[var7] = MathHelper.floor_double(par1ArrayOfInteger[var7] + var14 * var11);
 				Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
-				if (var16 != Blocks.air && (var16 != Blocks.leaves || var16 != Blocks.leaves2) && var16!= Blocks.vine && var16 != TFCBlocks.Leaves2)
+				if (var16 != Blocks.air && (var16 != Blocks.leaves || var16 != Blocks.leaves2) && var16!= TFCBlocks.Vine && var16 != TFCBlocks.Leaves2)
 					break;
 			}
 

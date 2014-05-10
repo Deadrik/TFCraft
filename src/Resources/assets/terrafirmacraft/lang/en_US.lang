@@ -38,6 +38,7 @@ entity.sheepTFC.name=Sheep
 entity.pheasantTFC.name=Pheasant
 entity.horseTFC.name=Horse
 entity.irongolemTFC.name=Iron Golem
+entity.fishTFC.name=Bass
 
 #================
 #= Achievements =
@@ -1761,7 +1762,7 @@ tile.Spawn Meter.name=Protection Meter
 tile.Quern.name=Quern Base
 tile.Early Bloomery.name=Bloomery
 tile.Crucible.name=Crucible
-tile.Nest Box.name=Nest Box
+tile.NestBox.name=Nest Box
 item.SluiceItem.name=Sluice
 
 #== Anvils ==
@@ -1861,6 +1862,8 @@ tile.Straw Hide Bed.name=Straw & Hide Bed
 tile.customBed.sleep.name=This bed is too uncomfortable to fall asleep
 tile.Basic Pipe.name=Pipe
 tile.Valve Pipe.name=Valve Pipe
+tile.Torch.name=Torch
+tile.Chest.name=Chest
 
 #= Misc. Plants =
 item.Sugarcane.name=Sugarcane
@@ -1869,9 +1872,10 @@ item.Straw.name=Straw
 item.Jute.name=Jute
 item.Jute Fibre.name=Jute Fiber
 
-tile.mushroom.name=Mushroom
-tile.pumpkin.name=Pumpkin
-tile.melon.name=Melon
+tile.Fungi.mushroom_brown.name=Brown Mushroom
+tile.Fungi.mushroom_red.name=Red Mushroom
+tile.Cactus.name=Cactus
+tile.Pumpkin.name=Pumpkin
 tile.Moss.name=Moss
 tile.Thatch.name=Thatch
 tile.Flora.Golden Rod.name=Goldenrod
@@ -1881,7 +1885,24 @@ item.Seeds Sugarcane.name=Sugarcane Seeds
 item.Seeds Hemp.name=Hemp Seeds
 item.Seeds Jute.name=Jute Seeds
 
+tile.TallGrass.tallgrass.name=Tall Grass
+tile.TallGrass.fern.name=Fern
+tile.TallGrass.shortgrass.name=Short Grass
+tile.LilyPad.name=Lilypad
+tile.Vine.name=Vine
+tile.SeaGrassStill.name=Seagrass
+tile.SeaGrassIce.name=Frozen Seagrass
 
+tile.Flowers.flower_dandelion.name=Dandelion
+tile.Flowers.flower_rose.name=Red Rose
+tile.Flowers.flower_blue_orchid.name=Blue Orchid
+tile.Flowers.flower_allium.name=Allium
+tile.Flowers.flower_houstonia.name=Houstonia
+tile.Flowers.flower_tulip_red.name=Red Tulip
+tile.Flowers.flower_tulip_orange.name=Orange Tulip
+tile.Flowers.flower_tulip_white.name=White Tupil
+tile.Flowers.flower_tulip_pink.name=Pink Tulip
+tile.Flowers.flower_oxeye_daisy.name=Daisy
 
 #=======
 #= GUI =

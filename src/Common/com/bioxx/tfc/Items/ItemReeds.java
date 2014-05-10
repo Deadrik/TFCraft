@@ -30,7 +30,7 @@ public class ItemReeds extends Item
 		{
 			side = 1;
 		}
-		else if (block != Blocks.vine && block != TFCBlocks.TallGrass && block != Blocks.deadbush)
+		else if (block != TFCBlocks.Vine && block != TFCBlocks.TallGrass && block != Blocks.deadbush)
 		{
 			if (side == 0) --y;
 			if (side == 1) ++y;
