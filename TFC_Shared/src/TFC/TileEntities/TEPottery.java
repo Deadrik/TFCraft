@@ -25,7 +25,7 @@ import TFC.Core.Metal.Alloy;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.Pottery.ItemPotteryBase;
 
-public class TileEntityPottery extends NetworkTileEntity implements IInventory
+public class TEPottery extends NetworkTileEntity implements IInventory
 {
 	public ItemStack inventory[];
 	public boolean hasRack;
@@ -33,7 +33,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 	public int straw = 0;
 	public int wood = 0;
 
-	public TileEntityPottery()
+	public TEPottery()
 	{
 		inventory = new ItemStack[12];
 		hasRack = false;
@@ -156,6 +156,14 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				TFC_Core.isEastFaceSolid(worldObj, xCoord-1, yCoord, zCoord) && TFC_Core.isWestFaceSolid(worldObj, xCoord+1, yCoord, zCoord);
 
 		return surroundSolids && worldObj.isBlockSolidOnSide(xCoord, yCoord-1, zCoord, ForgeDirection.UP);
+	}
+
+	public boolean isLit()
+	{
+		if (TFC_Time.getTotalTicks() > burnStart && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFCOptions.pitKilnBurnTime)
+			return true;
+		else
+			return false;
 	}
 
 	@Override

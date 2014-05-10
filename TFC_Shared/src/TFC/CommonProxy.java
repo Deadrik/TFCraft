@@ -69,7 +69,7 @@ import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TELogPile;
 import TFC.TileEntities.TileEntityPartial;
-import TFC.TileEntities.TileEntityPottery;
+import TFC.TileEntities.TEPottery;
 import TFC.TileEntities.TileEntityQuern;
 import TFC.TileEntities.TileEntitySapling;
 import TFC.TileEntities.TileEntitySluice;
@@ -146,7 +146,7 @@ public class CommonProxy
 		if(b)
 		{
 			GameRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
-			GameRegistry.registerTileEntity(TileEntityPottery.class, "Pottery");
+			GameRegistry.registerTileEntity(TEPottery.class, "Pottery");
 			GameRegistry.registerTileEntity(TileEntityChestTFC.class, "chest");
 			GameRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep");
 			GameRegistry.registerTileEntity(TileEntityBellows.class, "Bellows");

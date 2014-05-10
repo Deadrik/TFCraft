@@ -135,7 +135,7 @@ import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TEFoodPrep;
 import TFC.TileEntities.TileEntityIngotPile;
-import TFC.TileEntities.TileEntityPottery;
+import TFC.TileEntities.TEPottery;
 import TFC.TileEntities.TileEntityToolRack;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -259,7 +259,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TileEntityFirepit.class, "firepit", new TESRFirepit());
 		ClientRegistry.registerTileEntity(TESeaWeed.class, "seaweed", new TESRSeaWeed());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
-		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TESRPottery());
+		ClientRegistry.registerTileEntity(TEPottery.class, "Pottery", new TESRPottery());
 		ClientRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep", new TESRFoodPrep());
 		ClientRegistry.registerTileEntity(TileEntityBellows.class, "Bellows", new TESRBellows());
 		ClientRegistry.registerTileEntity(TileEntityToolRack.class, "ToolRack", new TESRToolrack());

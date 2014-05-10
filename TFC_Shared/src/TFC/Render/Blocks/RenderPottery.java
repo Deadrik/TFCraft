@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
-import TFC.TileEntities.TileEntityPottery;
+import TFC.TileEntities.TEPottery;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderPottery implements ISimpleBlockRenderingHandler
@@ -20,7 +20,7 @@ public class RenderPottery implements ISimpleBlockRenderingHandler
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) 
 	{
-		TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y, z);
+		TEPottery te = (TEPottery) world.getBlockTileEntity(x, y, z);
 		if(te.straw > 0)
 		{
 			renderer.overrideBlockTexture = TFCBlocks.Thatch.getBlockTexture(world, x, y, z, 0);
