@@ -252,9 +252,9 @@ public class EntityFishTFC extends EntitySquid
 				destZ = (int)desiredLure.posZ;
 
 				if(this.getDistanceToEntity(desiredLure)<1){
-					destX += (desiredLure.posX-posX)*2;
-					destY += (desiredLure.posY-posY)*2;
-					destZ += (desiredLure.posY-posY)*2;
+					destX += (desiredLure.posX-posX)*1.1;
+					destY += (desiredLure.posY-posY)*1.1;
+					destZ += (desiredLure.posY-posY)*1.1;
 				}
 				if(this.getDistanceToEntity(desiredLure)<0.45){
 					desiredLure.mountEntity(this);
