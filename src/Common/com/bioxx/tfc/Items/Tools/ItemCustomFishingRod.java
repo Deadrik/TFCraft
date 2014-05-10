@@ -62,33 +62,32 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
-		if(par1ItemStack.stackTagCompound.hasKey("tickReeledIn")){
-			long tickReeledIn = par1ItemStack.stackTagCompound.getLong("tickReeledIn");
-			if(TFC_Time.getTotalTicks() <= tickReeledIn +20){
-				return par1ItemStack;
-			}
+		if(is.stackTagCompound != null && is.stackTagCompound.hasKey("tickReeledIn"))
+		{
+			long tickReeledIn = is.stackTagCompound.getLong("tickReeledIn");
+			if(TFC_Time.getTotalTicks() <= tickReeledIn + 20)
+				return is;
 		}
-		if (par3EntityPlayer.fishEntity != null)
+
+		if (player.fishEntity != null)
 		{
 			//int i = par3EntityPlayer.fishEntity.func_146034_e();
 			//par1ItemStack.damageItem(i, par3EntityPlayer);
-			if(par3EntityPlayer.fishEntity instanceof EntityFishHookTFC){
-				((EntityFishHookTFC)(par3EntityPlayer.fishEntity)).reelInBobber(par3EntityPlayer, par1ItemStack);
-			}
-			else{
-				par3EntityPlayer.swingItem();
-			}
+			if(player.fishEntity instanceof EntityFishHookTFC)
+				((EntityFishHookTFC)(player.fishEntity)).reelInBobber(player, is);
+			else
+				player.swingItem();
 		}
 		else
 		{
-			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-			if (!par2World.isRemote)
-				par2World.spawnEntityInWorld(new EntityFishHookTFC(par2World, par3EntityPlayer));
-			par3EntityPlayer.swingItem();
+			world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+			if (!world.isRemote)
+				world.spawnEntityInWorld(new EntityFishHookTFC(world, player));
+			player.swingItem();
 		}
-		return par1ItemStack;
+		return is;
 	}
 
 	@Override
@@ -104,9 +103,7 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{
 		if (player.fishEntity != null)
-		{
 			return theIcon;
-		}
 		return itemIcon;
 	}
 
@@ -129,12 +126,14 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 	}
 
 	@Override
-	public EnumItemReach getReach(ItemStack is){
+	public EnumItemReach getReach(ItemStack is)
+	{
 		return EnumItemReach.FAR;
 	}
 
 	@Override
-	public boolean canStack() {
+	public boolean canStack()
+	{
 		return true;
 	}
 }

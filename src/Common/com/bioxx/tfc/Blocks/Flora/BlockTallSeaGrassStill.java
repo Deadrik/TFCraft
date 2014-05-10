@@ -8,7 +8,6 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -54,10 +53,10 @@ public class BlockTallSeaGrassStill extends Block implements ITileEntityProvider
 	//	}
 
 	@Override
-	public int getMixedBrightnessForBlock(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public int getMixedBrightnessForBlock(IBlockAccess bAccess, int x, int y, int z)
 	{
-		int var5 = par1IBlockAccess.getLightBrightnessForSkyBlocks(par2, par3, par4, 0);
-		int var6 = par1IBlockAccess.getLightBrightnessForSkyBlocks(par2, par3+1, par4, 0);
+		int var5 = bAccess.getLightBrightnessForSkyBlocks(x, y, z, 0);
+		int var6 = bAccess.getLightBrightnessForSkyBlocks(x, y + 1, z, 0);
 		int var7 = var5 & 255;
 		int var8 = var6 & 255;
 		int var9 = var5 >> 16 & 255;
@@ -77,16 +76,16 @@ public class BlockTallSeaGrassStill extends Block implements ITileEntityProvider
 	 * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
 	 * when first determining what to render.
 	 */
-	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public int colorMultiplier(IBlockAccess bAccess, int x, int y, int z)
 	{
 		if (this.blockMaterial != Material.water)
 			return 16777215;
 		else
-			return TerraFirmaCraft.proxy.waterColorMultiplier(par1IBlockAccess, par2, par3, par4);
+			return TerraFirmaCraft.proxy.waterColorMultiplier(bAccess, x, y, z);
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(int par1, Random R, int par3)
 	{
 		return null;
 	}
@@ -98,17 +97,17 @@ public class BlockTallSeaGrassStill extends Block implements ITileEntityProvider
 	}
 
 	@Override
-	public int quantityDroppedWithBonus(int par1, Random par2Random)
+	public int quantityDroppedWithBonus(int i, Random R)
 	{
-		return 1 + par2Random.nextInt(par1 * 2 + 1);
+		return 1 + R.nextInt(i * 2 + 1);
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
-		Block var5 = par1World.getBlock(par2, par3 - 1, par4);
-		boolean correctSoil = TFC_Core.isSoil(var5) || TFC_Core.isSand(var5) || TFC_Core.isGravel(var5);
-		return !correctSoil ? false : canThisPlantGrowUnderThisBlock(par1World.getBlock(par2, par3 + 1, par4)) && par1World.getBlock(par2, par3, par4).getMaterial() == Material.water;
+		Block b = world.getBlock(x, y - 1, z);
+		boolean correctSoil = TFC_Core.isSoil(b) || TFC_Core.isSand(b) || TFC_Core.isGravel(b);
+		return !correctSoil ? false : canThisPlantGrowUnderThisBlock(world.getBlock(x, y + 1, z)) && world.getBlock(x, y, z).getMaterial() == Material.water;
 	}
 
 	@Override
@@ -119,17 +118,20 @@ public class BlockTallSeaGrassStill extends Block implements ITileEntityProvider
 		if(te != null)
 			type = te.getType();
 
-		if(block == Blocks.ice)
+		if(block == TFCBlocks.Ice)
 			world.setBlock(i, j, k, TFCBlocks.SeaGrassFrozen);
 
 		super.breakBlock(world, i, j, k, block, l);
-		if(block == Blocks.ice){
+		if(block == TFCBlocks.Ice)
+		{
 			world.setBlockMetadataWithNotify(i, j, k, type, 1);
 			te = (TESeaWeed)(world.getTileEntity(i, j, k));
 			te.setType(type);
 		}
-		if(world.isAirBlock(i, j, k)){
-			if(te != null){
+		if(world.isAirBlock(i, j, k))
+		{
+			if(te != null)
+			{
 				if(type == 1 || type == 2)
 					world.setBlock(i, j, k, TFCBlocks.FreshWater, 0, 1);
 				else if(type==0)
@@ -174,31 +176,35 @@ public class BlockTallSeaGrassStill extends Block implements ITileEntityProvider
 	 * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
 	 */
 	@Override
-	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		boolean a,b,c;
-		a = (par1World.getFullBlockLightValue(par2, par3, par4) >= 0);
-		b = this.canThisPlantGrowUnderThisBlock(par1World.getBlock(par2, par3 + 1, par4));
-		c = this.canThisPlantGrowOnThisBlock(par1World.getBlock(par2, par3 - 1, par4));
+		boolean a, b, c;
+		a = (world.getFullBlockLightValue(x, y, z) >= 0);
+		b = this.canThisPlantGrowUnderThisBlock(world.getBlock(x, y + 1, z));
+		c = this.canThisPlantGrowOnThisBlock(world.getBlock(x, y - 1, z));
 		return  a &&
 				b &&
 				c;
 	}
 
 	@Override
-	public void onBlockAdded(World world,int i,int j,int k){
+	public void onBlockAdded(World world, int i, int j, int k)
+	{
 		int type = -1;
-		if(!world.isAirBlock(i, j+1, k)){
-			type = TFC_Core.isFreshWater(world.getBlock(i, j+1, k))?1:0;
+		if(!world.isAirBlock(i, j + 1, k))
+		{
+			type = TFC_Core.isFreshWater(world.getBlock(i, j + 1, k)) ? 1 : 0;
 		}
-		else if(TFC_Core.isFreshWater(world.getBlock(i+1, j, k))||
-				TFC_Core.isFreshWater(world.getBlock(i, j, k+1))||
-				TFC_Core.isFreshWater(world.getBlock(i-1, j, k))||
-				TFC_Core.isFreshWater(world.getBlock(i, j, k-1))){
+		else if(TFC_Core.isFreshWater(world.getBlock(i + 1, j, k))||
+				TFC_Core.isFreshWater(world.getBlock(i, j, k + 1))||
+				TFC_Core.isFreshWater(world.getBlock(i - 1, j, k))||
+				TFC_Core.isFreshWater(world.getBlock(i, j, k - 1)))
+		{
 			type = 2;
 		}
-		TESeaWeed te = (TESeaWeed)(world.getTileEntity(i,j,k));
-		if(te != null){
+		TESeaWeed te = (TESeaWeed)(world.getTileEntity(i, j, k));
+		if(te != null)
+		{
 			te.setType(type);
 		}
 		super.onBlockAdded(world, i, j, k);
@@ -261,9 +267,9 @@ public class BlockTallSeaGrassStill extends Block implements ITileEntityProvider
 	 * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
 	 * blockID passed in. Args: blockID
 	 */
-	protected boolean canThisPlantGrowOnThisBlock(Block par1)
+	protected boolean canThisPlantGrowOnThisBlock(Block b)
 	{
-		return TFC_Core.isSoil(par1) || TFC_Core.isSand(par1) || TFC_Core.isGravel(par1);
+		return TFC_Core.isSoil(b) || TFC_Core.isSand(b) || TFC_Core.isGravel(b);
 	}
 
 	/**
@@ -271,28 +277,28 @@ public class BlockTallSeaGrassStill extends Block implements ITileEntityProvider
 	 * their own) Args: x, y, z, neighbor blockID
 	 */
 	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
-		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-		this.checkFlowerChange(par1World, par2, par3, par4);
+		super.onNeighborBlockChange(world, x, y, z, b);
+		this.checkFlowerChange(world, x, y, z);
 	}
 
 	/**
 	 * Ticks the block if it's been scheduled
 	 */
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void updateTick(World world, int x, int y, int z, Random R)
 	{
-		this.checkFlowerChange(par1World, par2, par3, par4);
-		super.updateTick(par1World, par2, par3, par4, par5Random);
+		this.checkFlowerChange(world, x, y, z);
+		super.updateTick(world, x, y, z, R);
 	}
 
-	protected final void checkFlowerChange(World par1World, int par2, int par3, int par4)
+	protected final void checkFlowerChange(World world, int x, int y, int z)
 	{
-		if (!this.canBlockStay(par1World, par2, par3, par4))
+		if (!this.canBlockStay(world, x, y, z))
 		{
-			this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-			par1World.setBlockToAir(par2, par3, par4);
+			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+			world.setBlockToAir(x, y, z);
 		}
 	}
 

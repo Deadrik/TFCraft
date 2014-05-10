@@ -57,7 +57,7 @@ public class BlockFrozenSeaGrass extends BlockCustomIce implements ITileEntityPr
 	@Override
 	public IIcon getIcon(int par1, int par2)
 	{
-		return Blocks.ice.getIcon(par1,par2);
+		return TFCBlocks.Ice.getIcon(par1, par2);
 	}
 
 	@Override
