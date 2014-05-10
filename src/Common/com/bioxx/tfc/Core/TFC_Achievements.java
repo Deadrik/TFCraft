@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
@@ -25,6 +26,7 @@ public class TFC_Achievements
 	public static Achievement achIronAge;
 	public static Achievement achLimonite;
 	public static Achievement achSaw;
+	public static Achievement achPokeCreeper;
 
 	private static ArrayList<Achievement> achlist;
 	public static AchievementPage pageBiome;
@@ -53,7 +55,8 @@ public class TFC_Achievements
 		achLimonite = createAchievement("achievement.achLimonite", "achLimonite", 3, -2, new ItemStack(TFCItems.OreChunk, 1, 11),achPickaxe);
 		achBronzeAge = createAchievement("achievement.achBronzeAge", "achBronzeAge", 4, 1, new ItemStack(TFCBlocks.Anvil, 1, 2),achCopperAge);
 		achIronAge = createAchievement("achievement.achIronAge", "achIronAge", 6, 2, new ItemStack(TFCItems.Bloom, 1, 0),achBronzeAge);
-
+		achPokeCreeper = createAchievement("achievement.achPokeCreeper", "achPokeCreeper",-3,0, new ItemStack(Items.skull,1,4),null);
+		
 		achievementsTFC = new Achievement[achlist.size()];
 		achievementsTFC = achlist.toArray(achievementsTFC);
 		pageBiome = new AchievementPage("TerraFirmaCraft", achievementsTFC);
