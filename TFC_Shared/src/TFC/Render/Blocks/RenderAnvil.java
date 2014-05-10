@@ -18,7 +18,6 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 
 		int meta = blockAccess.getBlockMetadata(i, j, k);
 		int direction = ((BlockAnvil)block).getDirectionFromMetadata(meta);
-		renderblocks.renderAllFaces = true;
 		boolean breaking = false;
 		if(renderblocks.overrideBlockTexture != null)
 		{
@@ -80,7 +79,6 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 				renderblocks.clearOverrideBlockTexture();
 			}
 		}
-		renderblocks.renderAllFaces = false;
 		return true;
 	}
 

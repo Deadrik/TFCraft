@@ -406,4 +406,11 @@ public class BlockToolRack2 extends BlockTerraContainer implements IMultipleBloc
 	public Block getBlockTypeForRender() {
 		return TFCBlocks.WoodSupportH2;
 	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+		return true;
+	}
+
 }
