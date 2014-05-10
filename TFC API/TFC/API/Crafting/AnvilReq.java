@@ -67,7 +67,7 @@ public enum AnvilReq
     	case 7:
     		return BLUESTEEL;
     	default:
-    		return COPPER;
+    		return STONE;
     	}
     }
     public static AnvilReq getReqFromInt2(int i)
