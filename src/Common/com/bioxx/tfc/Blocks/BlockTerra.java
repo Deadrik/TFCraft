@@ -36,7 +36,8 @@ public abstract class BlockTerra extends Block
 	}
 
 	@Override
-	public boolean canBeReplacedByLeaves(IBlockAccess world, int x, int y, int z) {
+	public boolean canBeReplacedByLeaves(IBlockAccess world, int x, int y, int z)
+	{
 		return false;
 	}
 
@@ -57,9 +58,9 @@ public abstract class BlockTerra extends Block
 	}
 	
 	@Override
-	public void harvestBlock(World world, EntityPlayer player, int i, int j, int k, int l)
+	public void harvestBlock(World world, EntityPlayer player, int i, int j, int k, int meta)
 	{
-		super.harvestBlock(world, player, i, j, k, l);
+		super.harvestBlock(world, player, i, j, k, meta);
 		TFC_Core.addPlayerExhaustion(player, 0.001f);
 	}
 }

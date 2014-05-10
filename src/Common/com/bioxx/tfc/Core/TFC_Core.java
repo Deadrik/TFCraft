@@ -494,7 +494,7 @@ public class TFC_Core
 	public static boolean isFreshWaterIncludeIce(Block block, int meta)
 	{
 		return block == TFCBlocks.FreshWater
-				|| (block == Blocks.ice && meta != 0);
+				|| (block == TFCBlocks.Ice && meta != 0);
 	}
 
 	public static boolean isFreshWaterIncludeIce(Block block, int meta, Material mat)

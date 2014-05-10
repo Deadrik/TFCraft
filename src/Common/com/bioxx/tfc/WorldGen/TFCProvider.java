@@ -163,11 +163,11 @@ return biome;
 			{
 				if(id == TFCBlocks.FreshWater && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
 				{
-					worldObj.setBlock(x, y, z, Blocks.ice, 1, 2);
+					worldObj.setBlock(x, y, z, TFCBlocks.Ice, 1, 2);
 				}
 				else if(id == TFCBlocks.SaltWater && meta == 0/* || id == Block.waterMoving.blockID*/)
 				{
-					worldObj.setBlock(x, y, z, Blocks.ice, 0, 2);
+					worldObj.setBlock(x, y, z, TFCBlocks.Ice, 0, 2);
 				}
 				else if(id == TFCBlocks.SeaGrassStill)
 				{
@@ -188,7 +188,7 @@ return biome;
 		}
 		else
 		{
-			if(id == Blocks.ice)
+			if(id == TFCBlocks.Ice)
 			{
 				if (worldObj.getBlock(x, y + 1, z) == Blocks.snow)
 				{

@@ -2,18 +2,18 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 
 public class WorldGenLakesTFC extends WorldGenerator
 {
@@ -188,7 +188,7 @@ public class WorldGenLakesTFC extends WorldGenerator
 					{
 						byte var34 = 4;
 						if (world.isBlockFreezable(xCoord + i2, yCoord + var34, zCoord + j3))
-							world.setBlock(xCoord + i2, yCoord + var34, zCoord + j3, Blocks.ice, 0, 0x2);
+							world.setBlock(xCoord + i2, yCoord + var34, zCoord + j3, TFCBlocks.Ice, 0, 0x2);
 					}
 				}
 			}
