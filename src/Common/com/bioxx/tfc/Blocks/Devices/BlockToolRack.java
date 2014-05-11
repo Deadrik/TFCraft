@@ -3,15 +3,6 @@ package com.bioxx.tfc.Blocks.Devices;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Items.Tools.ItemProPick;
-import com.bioxx.tfc.Items.Tools.ItemSpindle;
-import com.bioxx.tfc.Items.Tools.ItemWeapon;
-import com.bioxx.tfc.TileEntities.TileEntityToolRack;
-import com.bioxx.tfc.api.IMultipleBlock;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -32,18 +23,29 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Items.Tools.ItemProPick;
+import com.bioxx.tfc.Items.Tools.ItemSpindle;
+import com.bioxx.tfc.Items.Tools.ItemWeapon;
+import com.bioxx.tfc.TileEntities.TileEntityToolRack;
+import com.bioxx.tfc.api.IMultipleBlock;
+import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 {
-	String[] woodNames;
+	protected String[] woodNames;
+
 	public BlockToolRack()
 	{
 		super(Material.wood);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
-		woodNames = new String[16];
-		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0,16);
+		this.woodNames = new String[16];
+		System.arraycopy(Global.WOOD_ALL, 0, this.woodNames, 0, 16);
 	}
 
 	@Override
@@ -53,13 +55,13 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	}
 
 	@Override
-	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public boolean getBlocksMovement(IBlockAccess bAccess, int x, int y, int z)
 	{
 		return true;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		return null;
 	}
@@ -68,11 +70,6 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	public boolean renderAsNormalBlock()
 	{
 		return false;
-	}
-
-	public IIcon getIcon(int woodType)
-	{
-		return getBlockTypeForRender().getIcon(0, woodType);
 	}
 
 	@Override
@@ -143,14 +140,19 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 		return false;
 	}
 
-	private void handleArea(World world, int i, int j, int k,EntityPlayer entityplayer, TileEntityToolRack te, int slot, int dir) 
+	private void handleArea(World world, int i, int j, int k,EntityPlayer entityplayer, TileEntityToolRack te, int slot, int dir)
 	{
 		boolean hasToolInHand = entityplayer.getCurrentEquippedItem() != null && (
-				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemTool || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemWeapon || 
-				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemHoe || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemProPick || 
-				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemBow || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSword || 
-				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemAxe || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSpade || 
-				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemShears || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSpindle);
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemTool ||
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemWeapon ||
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemHoe ||
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemProPick ||
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemBow ||
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSword ||
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemAxe ||
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSpade ||
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemShears ||
+				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSpindle);
 		if(te.storage[slot] == null && hasToolInHand)
 		{
 			te.storage[slot] = entityplayer.getCurrentEquippedItem().copy();
@@ -201,12 +203,13 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
+	public TileEntity createNewTileEntity(World world, int var2)
+	{
 		return new TileEntityToolRack();
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k) 
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k)
 	{
 		int dir = access.getBlockMetadata(i, j, k);
 		if(dir == 0)
@@ -224,34 +227,42 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	{
 		int dir = world.getBlockMetadata(i, j, k);
 		if(dir == 0)
-			return AxisAlignedBB.getBoundingBox(i+0.0F, j+0F, k+0.85F, i+1F, j+1F, k+1F);
+			return AxisAlignedBB.getBoundingBox(i + 0.0F, j + 0F, k + 0.85F, i + 1F, j + 1F, k + 1F);
 		else if(dir == 1)
-			return AxisAlignedBB.getBoundingBox(i+0.0F, j+0F, k+0.0F, i+0.15F, j+1F, k+1F);
+			return AxisAlignedBB.getBoundingBox(i + 0.0F, j + 0F, k + 0.0F, i + 0.15F, j + 1F, k + 1F);
 		else if(dir == 2)
-			return AxisAlignedBB.getBoundingBox(i+0.0F, j+0F, k+0.00F, i+1F, j+1F, k+0.15F);
+			return AxisAlignedBB.getBoundingBox(i + 0.0F, j + 0F, k + 0.00F, i + 1F, j + 1F, k + 0.15F);
 		else if(dir == 3)
-			return AxisAlignedBB.getBoundingBox(i+0.85F, j+0F, k+0.0F, i+1F, j+1F, k+1F);
+			return AxisAlignedBB.getBoundingBox(i + 0.85F, j + 0F, k + 0.0F, i + 1F, j + 1F, k + 1F);
 
-		return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+1, k+1);
+		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 1, k + 1);
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block block) 
+	public void onNeighborBlockChange(World world, int i, int j, int k, Block block)
 	{
 		int dir = world.getBlockMetadata(i, j, k);
 
 		if(dir == 0)
-			if(!world.getBlock(i, j, k+1).isOpaqueCube())
+		{
+			if(!world.getBlock(i, j, k + 1).isOpaqueCube())
 				removedByPlayer(world, null, i, j, k);
+		}
 		else if(dir == 1)
-			if(!world.getBlock(i-1, j, k).isOpaqueCube())
+		{
+			if(!world.getBlock(i - 1, j, k).isOpaqueCube())
 				removedByPlayer(world, null, i, j, k);
+		}
 		else if(dir == 2)
-			if(!world.getBlock(i, j, k-1).isOpaqueCube())
+		{
+			if(!world.getBlock(i, j, k - 1).isOpaqueCube())
 				removedByPlayer(world, null, i, j, k);
+		}
 		else if(dir == 3)
-			if(!world.getBlock(i+1, j, k).isOpaqueCube())
+		{
+			if(!world.getBlock(i + 1, j, k).isOpaqueCube())
 				removedByPlayer(world, null, i, j, k);
+		}
 	}
 
 	@Override
@@ -268,16 +279,12 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entity, ItemStack is)
 	{
-		if(!world.isRemote)
+		TileEntity te = world.getTileEntity(i, j, k);
+		if(te != null && te instanceof TileEntityToolRack)
 		{
-			TileEntity te = world.getTileEntity(i, j, k);
-			if(te != null && te instanceof TileEntityToolRack)
-			{
-				TileEntityToolRack rack = (TileEntityToolRack) te;
-				rack.woodType = (byte)is.getItemDamage();
-				world.markBlockForUpdate(i, j, k);
-				//rack.broadcastPacketInRange(rack.createUpdatePacket());
-			}
+			TileEntityToolRack rack = (TileEntityToolRack) te;
+			rack.woodType = (byte)is.getItemDamage();
+			world.markBlockForUpdate(i, j, k);
 		}
 	}
 
@@ -286,13 +293,13 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	{
 		if(this.canPlaceBlockAt(world, i, j, k))
 		{
-			if(side == 5 && world.getBlock(i-1, j, k).isNormalCube())
+			if(side == 5 && world.getBlock(i - 1, j, k).isNormalCube())
 				return true;
-			if(side == 4 && world.getBlock(i+1, j, k).isNormalCube())
+			if(side == 4 && world.getBlock(i + 1, j, k).isNormalCube())
 				return true;
-			if(side == 2 && world.getBlock(i, j, k+1).isNormalCube())
+			if(side == 2 && world.getBlock(i, j, k + 1).isNormalCube())
 				return true;
-			if(side == 3 && world.getBlock(i, j, k-1).isNormalCube())
+			if(side == 3 && world.getBlock(i, j, k - 1).isNormalCube())
 				return true;
 		}
 		return false;
@@ -303,16 +310,16 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	/**
 	 * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
 	 */
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
 		for(int i = 0; i < woodNames.length; i++)
-			par3List.add(new ItemStack(par1, 1, i));
+			list.add(new ItemStack(item, 1, i));
 	}
 
 	@Override
-	public IIcon getIcon(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	public IIcon getIcon(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
-		return getBlockTypeForRender().getIcon(par1IBlockAccess, par2, par3, par4, par5);
+		return getBlockTypeForRender().getIcon(bAccess, x, y, z, side);
 	}
 
 	@Override
@@ -322,11 +329,11 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegisterer)
+	public void registerBlockIcons(IIconRegister registerer)
 	{
 		//Empty On Purpose
 	}
-	
+
 	@Override
 	public Block getBlockTypeForRender()
 	{

@@ -1,12 +1,12 @@
 package com.bioxx.tfc.Blocks;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.IIcon;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockWoodSupport2 extends BlockWoodSupport
 {

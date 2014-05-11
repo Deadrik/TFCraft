@@ -2,10 +2,6 @@ package com.bioxx.tfc.Blocks;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,6 +14,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -37,10 +38,10 @@ public class BlockWoodSupport extends BlockTerra
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) 
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
 		for(int i = 0; i < woodNames.length; i++)
-			par3List.add(new ItemStack(this, 1, i));
+			list.add(new ItemStack(this, 1, i));
 	}
 
 	public static int getSupportInRangeHeight(World world, int x, int y, int z, int range)
@@ -118,16 +119,21 @@ public class BlockWoodSupport extends BlockTerra
 	private Boolean isNearVerticalSupport(World world, int i, int j, int k)
 	{
 		for(int y = -1; y < 0; y++)
+		{
 			for(int x = -6; x < 4; x++)
+			{
 				for(int z = -6; z < 4; z++)
+				{
 					if(TFCBlocks.isBlockVSupport(world.getBlock(i+x, j+y, k+z)))
 						return true;
-
+				}
+			}
+		}
 		return false;
 	}
 
 	@Override
-	public int damageDropped(int j) 
+	public int damageDropped(int j)
 	{
 		return j;
 	}
@@ -135,14 +141,17 @@ public class BlockWoodSupport extends BlockTerra
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
-		return icons[meta];
+		if(meta > icons.length - 1)
+			return icons[0];
+		else
+			return icons[meta];
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < woodNames.length; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/WoodSheet/WoodSheet"+i);
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/WoodSheet/WoodSheet" + i);
 	}
 
 	@Override
