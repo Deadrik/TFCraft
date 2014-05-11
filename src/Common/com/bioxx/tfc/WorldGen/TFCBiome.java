@@ -53,7 +53,7 @@ public class TFCBiome extends BiomeGenBase
 	public static final TFCBiome ocean = new BiomeGenOceanTFC(0).setBiomeName("Ocean").setMinMaxHeight(-0.9F, 0.001F).setBiomeColor(0x0000ff);
 	public static final TFCBiome river = new BiomeGenRiverTFC(7).setBiomeName("River").setMinMaxHeight(riverDepthMin, riverDepthMax).setBiomeColor(0xffffff);
 	public static final TFCBiome hell = (new BiomeGenHellTFC(8)).setColor(16711680).setBiomeName("Hell").setDisableRain().setTemperatureRainfall(2.0F, 0.0F);
-	public static final TFCBiome beach = (new BiomeGenBeachTFC(16)).setColor(0xfade55).setBiomeName("Beach").setMinMaxHeight(0.0F, 0.02F).setBiomeColor(0xffb873);
+	public static final TFCBiome beach = (new BiomeGenBeachTFC(16)).setColor(0xfade55).setBiomeName("Beach").setMinMaxHeight(0.01F, 0.02F).setBiomeColor(0xffb873);
 	public static final TFCBiome HighHills = (new BiomeGenHillsTFC(3)).setBiomeName("High Hills").setMinMaxHeight(0.8F, 1.6F).setBiomeColor(0x044f27);
 	public static final TFCBiome plains = (new BiomeGenPlainsTFC(1)).setBiomeName("TFC Plains").setMinMaxHeight(0.1F, 0.16F).setBiomeColor(0x69dfa0);
 	public static final TFCBiome swampland = (new BiomeGenSwampTFC(6)).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.1F).setBiomeColor(0x1f392b);

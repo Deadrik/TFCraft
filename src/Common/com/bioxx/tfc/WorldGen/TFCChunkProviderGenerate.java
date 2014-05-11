@@ -649,9 +649,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							metaBig[indexBig] = soilMeta;
 						}
 
-						if(biome == TFCBiome.ocean)
+						if(biome == TFCBiome.beach || biome == TFCBiome.ocean || biome == TFCBiome.DeepOcean)
 						{
-							if(((height > var5 - 2 && height <= var5 + 1) || (height < var5 && idsTop[index + 2] == TFCBlocks.SaltWater)))//If its an ocean give it a sandy bottom
+							if(((height > var5 - 2 && height <= var5 + 2) || (height < var5 && idsTop[index + 2] == TFCBlocks.SaltWater)))//If its an ocean give it a sandy bottom
 							{
 								idsBig[indexBig] = TFC_Core.getTypeForSand(soilMeta);
 								metaBig[indexBig] = soilMeta;

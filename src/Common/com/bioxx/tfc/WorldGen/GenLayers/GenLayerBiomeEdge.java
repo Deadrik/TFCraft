@@ -60,6 +60,20 @@ public class GenLayerBiomeEdge extends GenLayerTFC
 					else
 						var6[var8 + var7 * par3] = TFCBiome.plains.biomeID;
 				}
+				else if (var9 == TFCBiome.HighPlains.biomeID)
+				{
+					if (var10 == TFCBiome.HighPlains.biomeID && var11 == TFCBiome.HighPlains.biomeID && var12 == TFCBiome.HighPlains.biomeID && var13 == TFCBiome.HighPlains.biomeID)
+						var6[var8 + var7 * par3] = var9;
+					else
+						var6[var8 + var7 * par3] = TFCBiome.plains.biomeID;
+				}
+				else if (var9 != TFCBiome.ocean.biomeID && var9 != TFCBiome.DeepOcean.biomeID)
+				{
+					if (var10 == TFCBiome.ocean.biomeID || var11 == TFCBiome.ocean.biomeID || var12 == TFCBiome.ocean.biomeID || var13 == TFCBiome.ocean.biomeID)
+						var6[var8 + var7 * par3] = TFCBiome.beach.biomeID;
+					else
+						var6[var8 + var7 * par3] = var9;
+				}
 				else
 				{
 					var6[var8 + var7 * par3] = var9;
