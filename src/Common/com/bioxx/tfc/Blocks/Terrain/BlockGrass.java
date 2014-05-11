@@ -92,24 +92,30 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	@Override
 	public IIcon getIcon(IBlockAccess access, int xCoord, int yCoord, int zCoord, int side)
 	{
-		Block blk_ = TFC_Core.getTypeForDirtFromGrass(this);
-
 		if (side == 1)
 			return GrassTopTexture;
 		else if (side == 0)
 			return TFC_Textures.InvisibleTexture;
-		else if (side == 2)//-Z
+		else if (side == 2) //-Z
+		{
 			if(TFCOptions.enableBetterGrass == true && access.getBlock(xCoord, yCoord-1, zCoord-1).getMaterial() == Material.grass)
 				return isSnow(access, xCoord, yCoord-1, zCoord-1) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
-		else if (side == 3)//+Z
+		}
+		else if (side == 3) //+Z
+		{
 			if(TFCOptions.enableBetterGrass == true && access.getBlock(xCoord, yCoord-1, zCoord+1).getMaterial() == Material.grass)
 				return isSnow(access, xCoord, yCoord-1, zCoord+1) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
-		else if (side == 4)//-X
+		}
+		else if (side == 4) //-X
+		{
 			if(TFCOptions.enableBetterGrass == true && access.getBlock(xCoord-1, yCoord-1, zCoord).getMaterial() == Material.grass)
 				return isSnow(access, xCoord-1, yCoord-1, zCoord) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
-		else if (side == 5)
+		}
+		else if (side == 5) //+X
+		{
 			if(TFCOptions.enableBetterGrass == true && access.getBlock(xCoord+1, yCoord-1, zCoord).getMaterial() == Material.grass)
 				return isSnow(access, xCoord+1, yCoord-1, zCoord) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
+		}
 
 		return iconGrassSideOverlay;
 	}
