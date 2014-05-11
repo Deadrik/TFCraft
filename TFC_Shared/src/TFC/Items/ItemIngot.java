@@ -56,32 +56,6 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
-	{
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			String s = "";
-			if(HeatRegistry.getInstance().isTemperatureDanger(is))
-			{
-				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.danger") + " | ";
-			}
-
-			if(HeatRegistry.getInstance().isTemperatureWeldable(is))
-			{
-				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.weldable") + " | ";
-			}
-
-			if(HeatRegistry.getInstance().isTemperatureWorkable(is))
-			{
-				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.workable");
-			}
-
-			if(!s.equals(""))
-				arraylist.add(s);
-		}
-	}
-
-	@Override
 	public void registerIcons(IconRegister registerer)
 	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
