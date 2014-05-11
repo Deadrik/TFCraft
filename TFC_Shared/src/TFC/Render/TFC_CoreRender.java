@@ -97,7 +97,6 @@ public class TFC_CoreRender
         }*/
 
 		int var5 = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
-		renderblocks.renderAllFaces = true;
 		int var6 = var5 & 3;
 		float var7 = 0.0F;
 		float var8 = 0.5F;
@@ -125,6 +124,7 @@ public class TFC_CoreRender
 			//ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
 			renderblocks.overrideBlockTexture = tex;
 		}
+		renderblocks.renderAllFaces = true;
 		renderblocks.setRenderBounds(0.0F, var7, 0.0F, 1.0F, var8, 1.0F);
 		renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
 
@@ -150,6 +150,7 @@ public class TFC_CoreRender
 		}
 		renderblocks.clearOverrideBlockTexture();
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		renderblocks.renderAllFaces = false;
 		return true;
 	}
 
