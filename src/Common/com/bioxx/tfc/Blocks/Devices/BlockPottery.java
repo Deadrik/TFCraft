@@ -2,14 +2,6 @@ package com.bioxx.tfc.Blocks.Devices;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Items.ItemLogs;
-import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
-import com.bioxx.tfc.TileEntities.TileEntityPottery;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -20,6 +12,15 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Items.ItemLogs;
+import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
+import com.bioxx.tfc.TileEntities.TEPottery;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -51,9 +52,9 @@ public class BlockPottery extends BlockTerraContainer
 	}
 
 	@Override
-	public IIcon getIcon(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	public IIcon getIcon(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
-		return this.getIcon(par5, par1IBlockAccess.getBlockMetadata(par2, par3, par4));
+		return this.getIcon(side, bAccess.getBlockMetadata(x, y, z));
 	}
 
 	@Override
@@ -74,15 +75,19 @@ public class BlockPottery extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			TileEntityPottery te = (TileEntityPottery) world.getTileEntity(x, y, z);
+			TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
+
+			if (te.isLit())
+				return false;
+
 			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == TFCItems.Straw && !player.isSneaking())
 			{
-				te.addStraw(player.inventory.getCurrentItem());
+				te.addStraw(player.inventory.getCurrentItem(), player);
 				return true;
 			}
 			else if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemLogs && !player.isSneaking() && te.straw == 8)
 			{
-				te.addLog(player.inventory.getCurrentItem());
+				te.addLog(player.inventory.getCurrentItem(), player);
 				return true;
 			}
 			else if(((player.inventory.getCurrentItem() == null || !(player.inventory.getCurrentItem().getItem() instanceof ItemPotteryBase))))
@@ -115,7 +120,7 @@ public class BlockPottery extends BlockTerraContainer
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
-		TileEntityPottery te = (TileEntityPottery) world.getTileEntity(i, j, k);
+		TEPottery te = (TEPottery) world.getTileEntity(i, j, k);
 		int h = 0;
 		int w = 0;
 		if(te!= null)
@@ -123,13 +128,13 @@ public class BlockPottery extends BlockTerraContainer
 			h = te.straw == 0 ? 1 : te.straw;
 			w = (te.wood > 0 ? 1 : 0) + (te.wood > 4 ? 1 : 0);
 		}
-		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.0625f*h) + (0.25f * w), k + 1);
+		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.0625f * h) + (0.25f * w), k + 1);
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k) 
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k)
 	{
-		TileEntityPottery te = (TileEntityPottery) access.getTileEntity(i, j, k);
+		TEPottery te = (TEPottery) access.getTileEntity(i, j, k);
 		int h = 0;
 		int w = 0;
 		if(te!= null)
@@ -158,40 +163,42 @@ public class BlockPottery extends BlockTerraContainer
 		return false;
 	}
 
-	public void Eject(World world, int par2, int par3, int par4)
+	public void Eject(World world, int x, int y, int z)
 	{
-		if(!world.isRemote && (TileEntityPottery)world.getTileEntity(par2, par3, par4)!=null)
+		if(!world.isRemote && (TEPottery)world.getTileEntity(x, y, z) != null)
 		{
-			TileEntityPottery te;
-			te = (TileEntityPottery)world.getTileEntity(par2, par3, par4);
+			TEPottery te;
+			te = (TEPottery)world.getTileEntity(x, y, z);
 			te.ejectContents();
-			world.removeTileEntity(par2, par3, par4);
+			world.removeTileEntity(x, y, z);
 		}
 	}
 
 	@Override
-	public boolean removedByPlayer(World par1World, EntityPlayer player, int par2, int par3, int par4)
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
-		Eject(par1World,par2,par3,par4);
-		return par1World.setBlockToAir(par2,par3,par4);
+		Eject(world, x, y, z);
+		return world.setBlockToAir(x, y, z);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntityPottery();
+		return new TEPottery();
 	}
 
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, Block block)
 	{
 		if(!world.isRemote)
-			if(!world.getBlock(i, j-1, k).isOpaqueCube())
+		{
+			if(!world.getBlock(i, j - 1, k).isOpaqueCube())
 			{
-				((TileEntityPottery)world.getTileEntity(i, j, k)).ejectContents();
+				((TEPottery)world.getTileEntity(i, j, k)).ejectContents();
 				world.setBlockToAir(i, j, k);
 				return;
 			}
+		}
 	}
 
 	@SideOnly(Side.CLIENT)

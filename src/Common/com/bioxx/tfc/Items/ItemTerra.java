@@ -7,6 +7,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -170,6 +171,33 @@ public class ItemTerra extends Item implements ISize
 
 	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
+		if(	is.getItem() instanceof ItemIngot ||
+			is.getItem() instanceof ItemMetalSheet ||
+			is.getItem() instanceof ItemUnfinishedArmor ||
+			is.getItem() instanceof ItemBloom)
+		{
+			if(TFC_ItemHeat.HasTemp(is))
+			{
+				String s = "";
+				if(HeatRegistry.getInstance().isTemperatureDanger(is))
+				{
+					s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.danger") + " | ";
+				}
+
+				if(HeatRegistry.getInstance().isTemperatureWeldable(is))
+				{
+					s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.weldable") + " | ";
+				}
+
+				if(HeatRegistry.getInstance().isTemperatureWorkable(is))
+				{
+					s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.workable");
+				}
+
+				if(!s.equals(""))
+					arraylist.add(s);
+			}
+		}
 	}
 
 	public static void addHeatInformation(ItemStack is, List arraylist)

@@ -50,7 +50,6 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 			f5 -= 0.1875F;
 		}
 
-		renderer.renderAllFaces = true;
 		float f6;
 		float f7;
 		float f8;
@@ -235,7 +234,6 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 			renderer.renderStandardBlock(par1BlockFenceGate, par2, par3, par4);
 		}
 
-		renderer.renderAllFaces = false;
 		renderer.uvRotateTop = 0;
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 		return flag;
@@ -312,7 +310,6 @@ public class RenderFenceGate  implements ISimpleBlockRenderingHandler
 		renderer.setRenderBounds((double)f6, (double)f2, (double)f7, (double)f8, (double)f3, (double)f9);
 		renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
 
-		renderer.renderAllFaces = false;
 		renderer.uvRotateTop = 0;
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 	}

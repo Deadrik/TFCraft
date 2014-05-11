@@ -159,4 +159,11 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
 	{
 		return new TileEntityFenceGate();
 	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
+	{
+		return true;
+	}
 }

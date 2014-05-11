@@ -67,7 +67,7 @@ import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
 import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
 import com.bioxx.tfc.TileEntities.TileEntityPartial;
-import com.bioxx.tfc.TileEntities.TileEntityPottery;
+import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySapling;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
@@ -141,7 +141,7 @@ public class CommonProxy
 			GameRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit");
 			GameRegistry.registerTileEntity(TESeaWeed.class, "Sea Weed");
 			GameRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
-			GameRegistry.registerTileEntity(TileEntityPottery.class, "Pottery");
+			GameRegistry.registerTileEntity(TEPottery.class, "Pottery");
 			GameRegistry.registerTileEntity(TileEntityChestTFC.class, "chest");
 			GameRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep");
 			GameRegistry.registerTileEntity(TileEntityBellows.class, "Bellows");

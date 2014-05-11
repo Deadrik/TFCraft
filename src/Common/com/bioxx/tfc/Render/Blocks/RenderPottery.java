@@ -1,11 +1,12 @@
 package com.bioxx.tfc.Render.Blocks;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TileEntities.TileEntityPottery;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TileEntities.TEPottery;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderPottery implements ISimpleBlockRenderingHandler
@@ -19,7 +20,7 @@ public class RenderPottery implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		TileEntityPottery te = (TileEntityPottery) world.getTileEntity(x, y, z);
+		TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
 		if(te.straw > 0)
 		{
 			renderer.overrideBlockTexture = TFCBlocks.Thatch.getIcon(world, x, y, z, 0);

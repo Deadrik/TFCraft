@@ -1,12 +1,13 @@
 package com.bioxx.tfc.Render.Blocks;
 
-import com.bioxx.tfc.TileEntities.TileEntityToolRack;
-import com.bioxx.tfc.api.IMultipleBlock;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+
+import com.bioxx.tfc.TileEntities.TileEntityToolRack;
+import com.bioxx.tfc.api.IMultipleBlock;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderToolRack implements ISimpleBlockRenderingHandler
@@ -31,7 +32,6 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
 		TileEntityToolRack te = (TileEntityToolRack)blockAccess.getTileEntity(i, j, k);
-		renderblocks.renderAllFaces = true;
 		int dir = blockAccess.getBlockMetadata(i, j, k);
 		if(te != null)
 		{

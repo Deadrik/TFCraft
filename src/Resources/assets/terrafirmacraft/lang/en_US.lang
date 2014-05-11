@@ -1791,6 +1791,7 @@ tile.ClayGrass.name=Clay Grass
 tile.dirt.name=Dirt
 tile.sand.name=Sand
 tile.Peat.name=Peat
+tile.LooseRock.name=Debris
 
 #=================
 #= Miscellaneous =

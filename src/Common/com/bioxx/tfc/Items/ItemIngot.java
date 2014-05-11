@@ -1,7 +1,6 @@
 package com.bioxx.tfc.Items;
 
 import java.awt.image.BufferedImage;
-import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,9 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -21,10 +18,8 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
-import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.ISmeltable;
 import com.bioxx.tfc.api.Metal;
-import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
@@ -61,32 +56,6 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
-	{
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			String s = "";
-			if(HeatRegistry.getInstance().isTemperatureDanger(is))
-			{
-				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.danger") + " | ";
-			}
-
-			if(HeatRegistry.getInstance().isTemperatureWeldable(is))
-			{
-				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.weldable") + " | ";
-			}
-
-			if(HeatRegistry.getInstance().isTemperatureWorkable(is))
-			{
-				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.workable");
-			}
-
-			if(!s.equals(""))
-				arraylist.add(s);
-		}
-	}
-
-	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
@@ -100,12 +69,13 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public EnumSize getSize(ItemStack is) {
+	public EnumSize getSize(ItemStack is)
+	{
 		return size;
 	}
 
 	@Override
-	public EnumWeight getWeight(ItemStack is) 
+	public EnumWeight getWeight(ItemStack is)
 	{
 		return EnumWeight.MEDIUM;
 	}
@@ -122,8 +92,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		list.add(new ItemStack(this));
 	}
 
-	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y,
-			int z, int side, int l) 
+	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)
 	{
 
 		boolean fullStack = true;
@@ -133,10 +102,10 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		if (world.getTileEntity(x, y, z) instanceof TileEntityIngotPile && world.getBlock(x,y,z) == TFCBlocks.IngotPile)
 		{
 			te = (TileEntityIngotPile)world.getTileEntity(x, y, z);
-			if (te.contentsMatch(0,itemstack) && te.getStackInSlot(0).stackSize < te.getInventoryStackLimit()){
-
+			if (te.contentsMatch(0,itemstack) && te.getStackInSlot(0).stackSize < te.getInventoryStackLimit())
+			{
 				fullStack = false;
-				te.injectContents(0,1);
+				te.injectContents(0, 1);
 			}
 		}
 		else{fullStack = true;}

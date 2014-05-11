@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Render.Models.ModelUrn;
-import com.bioxx.tfc.TileEntities.TileEntityPottery;
+import com.bioxx.tfc.TileEntities.TEPottery;
 
 public class TESRPottery extends TESRBase
 {
@@ -16,17 +16,15 @@ public class TESRPottery extends TESRBase
 
 	public TESRPottery()
 	{
-
 	}
 
 	/**
 	 * Renders the TileEntity for the chest at a position.
 	 */
-	public void renderAt(TileEntityPottery te, double d, double d1, double d2, float f)
+	public void renderAt(TEPottery te, double d, double d1, double d2, float f)
 	{
 		if (te.getWorldObj() == null)
 		{
-
 		}
 		else
 		{
@@ -88,6 +86,6 @@ public class TESRPottery extends TESRBase
 	@Override
 	public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
 	{
-		this.renderAt((TileEntityPottery)par1TileEntity, par2, par4, par6, par8);
+		this.renderAt((TEPottery)par1TileEntity, par2, par4, par6, par8);
 	}
 }

@@ -20,7 +20,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEForge;
-import com.bioxx.tfc.TileEntities.TileEntityPottery;
+import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Util.Helper;
@@ -142,7 +142,7 @@ public class ItemFirestarter extends ItemTerra
 				int chance = new Random().nextInt(100);
 				if(chance > 70)
 				{
-					TileEntityPottery te = (TileEntityPottery) world.getTileEntity(x, y, z);
+					TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
 					te.StartPitFire();
 				}
 				itemstack.damageItem(1, entityplayer);

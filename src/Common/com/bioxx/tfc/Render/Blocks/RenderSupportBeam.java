@@ -14,7 +14,6 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 	public static boolean RenderWoodSupportBeamH(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockAccess = renderblocks.blockAccess;
-		renderblocks.renderAllFaces = true;
 
 		Boolean hasVerticalBeam = false;
 		Boolean hasHorizontalBeamX = false;

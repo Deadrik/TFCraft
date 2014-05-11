@@ -1,21 +1,14 @@
 package com.bioxx.tfc.Items;
 
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
-import com.bioxx.tfc.api.HeatIndex;
-import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
@@ -145,76 +138,4 @@ public class ItemMetalSheet extends ItemTerra
 		}
 		return false;
 	}
-	
-	@Override
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
-	{
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			String s = "";
-			if(isTemperatureDanger(is))
-			{
-				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.danger") + " | ";
-			}
-
-			if(isTemperatureWeldable(is))
-			{
-				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.weldable") + " | ";
-			}
-
-			if(isTemperatureWorkable(is))
-			{
-				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.workable");
-			}
-
-			if(!s.equals(""))
-				arraylist.add(s);
-		}
-	}
-
-	public Boolean isTemperatureWeldable(ItemStack is)
-	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			HeatIndex index = manager.findMatchingIndex(is);
-			if(index != null)
-			{
-				float temp = TFC_ItemHeat.GetTemp(is);
-				return temp < index.meltTemp && temp > index.meltTemp *0.8;
-			}
-		}
-		return false;
-	}
-
-	public Boolean isTemperatureWorkable(ItemStack is)
-	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			HeatIndex index = manager.findMatchingIndex(is);
-			if(index != null)
-			{
-				float temp = TFC_ItemHeat.GetTemp(is);
-				return temp < index.meltTemp && temp > index.meltTemp * 0.60;
-			}
-		}
-		return false;
-	}
-
-	public Boolean isTemperatureDanger(ItemStack is)
-	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			HeatIndex index = manager.findMatchingIndex(is);
-			if(index != null)
-			{
-				float temp = TFC_ItemHeat.GetTemp(is);
-				return temp < index.meltTemp && temp > index.meltTemp * 0.90;
-			}
-		}
-		return false;
-	}
-
 }

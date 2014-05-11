@@ -8,7 +8,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Metal.Alloy;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.TileEntities.TileEntityPottery;
+import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -81,7 +81,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	{
 		if(!world.isRemote && entityplayer.isSneaking())
 		{
-			TileEntityPottery te;
+			TEPottery te;
 			if(side == 1)
 			{
 				int offset = 0;
@@ -95,9 +95,9 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 				}
 
 
-				if(world.getTileEntity(x, y+offset, z) != null && world.getTileEntity(x, y + offset, z) instanceof TileEntityPottery) 
+				if(world.getTileEntity(x, y+offset, z) != null && world.getTileEntity(x, y + offset, z) instanceof TEPottery) 
 				{
-					te = (TileEntityPottery) world.getTileEntity(x, y + offset, z);
+					te = (TEPottery) world.getTileEntity(x, y + offset, z);
 					if(hitX < 0.5 && hitZ < 0.5)
 					{
 						if(te.inventory[0] == null)

@@ -6,22 +6,18 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.ISmeltable;
 import com.bioxx.tfc.api.Metal;
-import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemBloom extends ItemTerra implements ISmeltable
 {
-	public ItemBloom() 
+	public ItemBloom()
 	{
 		super();
 		setHasSubtypes(true);
@@ -33,33 +29,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
-		arraylist.add(is.getItemDamage()+"%");
-	}
-
-	@Override
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
-	{
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			String s = "";
-			if(HeatRegistry.getInstance().isTemperatureDanger(is))
-			{
-				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.danger") + " | ";
-			}
-
-			if(HeatRegistry.getInstance().isTemperatureWeldable(is))
-			{
-				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.weldable") + " | ";
-			}
-
-			if(HeatRegistry.getInstance().isTemperatureWorkable(is))
-			{
-				s += EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ingot.workable");
-			}
-
-			if(!s.equals(""))
-				arraylist.add(s);
-		}
+		arraylist.add(is.getItemDamage() + "%");
 	}
 
 	@Override

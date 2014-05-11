@@ -2,15 +2,6 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Metal.Alloy;
-import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Crafting.KilnCraftingManager;
-import com.bioxx.tfc.api.Crafting.KilnRecipe;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +16,16 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityPottery extends TileEntity implements IInventory
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Core.Metal.Alloy;
+import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
+import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Crafting.KilnCraftingManager;
+import com.bioxx.tfc.api.Crafting.KilnRecipe;
+
+public class TEPottery extends TileEntity implements IInventory
 {
 	public ItemStack inventory[];
 	public boolean hasRack;
@@ -34,7 +34,7 @@ public class TileEntityPottery extends TileEntity implements IInventory
 	public int straw = 0;
 	public int wood = 0;
 
-	public TileEntityPottery()
+	public TEPottery()
 	{
 		inventory = new ItemStack[12];
 		hasRack = false;
@@ -106,38 +106,63 @@ public class TileEntityPottery extends TileEntity implements IInventory
 	{
 		if(straw == 8 && wood == 8)
 		{
-			worldObj.setBlock(xCoord, yCoord+1, zCoord, Blocks.fire);
+			worldObj.setBlock(xCoord, yCoord + 1, zCoord, Blocks.fire);
 			burnStart = TFC_Time.getTotalTicks();
 		}
 	}
 
-	public void addLog(ItemStack is)
+	public void addLog(ItemStack is, EntityPlayer player)
 	{
 		if(wood < 8)
 		{
-			for(int i = 4; i < 12; i++)
+			if (!player.capabilities.isCreativeMode)
 			{
-				if(this.inventory[i] == null)
+				for (int i = 4; i < 12; i++)
 				{
-					wood++;
-					ItemStack _is = is.copy();
-					is.stackSize--;
-					_is.stackSize = 1;
-					this.setInventorySlotContents(i, _is);
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord); //TODO
-					//broadcastPacketInRange(createUpdatePacket());
-					break;
+					if (this.inventory[i] == null)
+					{
+						wood++;
+						ItemStack _is = is.copy();
+						is.stackSize--;
+						_is.stackSize = 1;
+						this.setInventorySlotContents(i, _is);
+						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord); //TODO
+						//broadcastPacketInRange(createUpdatePacket());
+						break;
+					}
 				}
+			}
+			else
+			{
+				for (int i = 4; i < 12; i++)
+				{
+					if (this.inventory[i] == null)
+					{
+						wood++;
+						ItemStack _is = is.copy();
+						_is.stackSize = 1;
+						this.setInventorySlotContents(i, _is);
+					}
+				}
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord); //TODO
+				//broadcastPacketInRange(createUpdatePacket());
 			}
 		}
 	}
 
-	public void addStraw(ItemStack is)
+	public void addStraw(ItemStack is, EntityPlayer player)
 	{
 		if(straw < 8)
 		{
-			straw++;
-			is.stackSize--;
+			if (!player.capabilities.isCreativeMode)
+			{
+				straw++;
+				is.stackSize--;
+			}
+			else
+			{
+				straw = 8;
+			}
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord); //TODO
 			//broadcastPacketInRange(createUpdatePacket());
 		}
@@ -145,11 +170,19 @@ public class TileEntityPottery extends TileEntity implements IInventory
 
 	public boolean isValid()
 	{
-		boolean surroundSolids = TFC_Core.isNorthSolid(worldObj, xCoord, yCoord, zCoord-1) &&
-				TFC_Core.isSouthSolid(worldObj, xCoord, yCoord, zCoord+1) &&
-				TFC_Core.isEastSolid(worldObj, xCoord-1, yCoord, zCoord) &&
-				TFC_Core.isWestSolid(worldObj, xCoord+1, yCoord, zCoord);
+		boolean surroundSolids = TFC_Core.isNorthSolid(worldObj, xCoord, yCoord, zCoord - 1) &&
+				TFC_Core.isSouthSolid(worldObj, xCoord, yCoord, zCoord + 1) &&
+				TFC_Core.isEastSolid(worldObj, xCoord - 1, yCoord, zCoord) &&
+				TFC_Core.isWestSolid(worldObj, xCoord + 1, yCoord, zCoord);
 		return surroundSolids && worldObj.isSideSolid(xCoord, yCoord - 1, zCoord, ForgeDirection.UP);
+	}
+
+	public boolean isLit()
+	{
+		if (TFC_Time.getTotalTicks() > burnStart && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFCOptions.pitKilnBurnTime)
+			return true;
+		else
+			return false;
 	}
 
 	@Override

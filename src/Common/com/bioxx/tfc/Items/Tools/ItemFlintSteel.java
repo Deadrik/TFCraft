@@ -18,7 +18,7 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEForge;
-import com.bioxx.tfc.TileEntities.TileEntityPottery;
+import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -106,7 +106,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 			}
 			else if(world.getBlock(x, y, z) == TFCBlocks.Pottery && surroundSolids)
 			{
-				TileEntityPottery te = (TileEntityPottery) world.getTileEntity(x, y, z);
+				TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
 				te.StartPitFire();
 				itemstack.damageItem(1, entityplayer);
 				return true;
