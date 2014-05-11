@@ -38,21 +38,21 @@ public class TESRQuern extends TileEntitySpecialRenderer implements ISimpleBlock
 			{
 				// Both can be used if you want the square block top + the round stone animation
 				// Last parameter is for rendering the round stone sides, no need to render if you can't see them :)
-				this.renderRoundTop(tess, teq.rotatetimer, teq.getWorldObj().rand, false); // Renders a round Quern top stone
-				this.renderSquareTop(tess, teq.rotatetimer, teq.getWorldObj().rand); // Renders a square Quern top stone
-				renderWoodHandle(tess, teq.rotatetimer, teq.getWorldObj().rand); // Renders the wooden handle
+				this.renderRoundTop(tess, teq.rotatetimer, teq.getWorldObj().rand, true, 0.8); // Renders a round Quern top stone
+				//this.renderSquareTop(tess, teq.rotatetimer, teq.getWorldObj().rand); // Renders the top Quern box
+				renderWoodHandle(tess, teq.rotatetimer, teq.getWorldObj().rand, 0.8); // Renders the wooden handle
 			}
 		}
 		GL11.glPopMatrix();
 	}
 
-	private void renderRoundTop(Tessellator t, int pos, Random rand, Boolean renderSides)
+	private void renderRoundTop(Tessellator t, int pos, Random rand, Boolean renderSides, double angle)
 	{
-		int sides = 15; // how many sides should the quern stone have
+		int sides = 4; // how many sides should the quern stone have
 		double speed = pos * 4; // * 4 will make 2 turns, * 1 will make 1 turn, also look at TileEntityQuern
 		double i = 0.625; // where should top rendering start
 		double j = i + 0.2; // thickness of the quern stone
-		if(!renderSides) j = i + 0.201; // fixes the double render glitch when rendering the square top
+		if(!renderSides) j = i + 0.201; // fixes the double render glitch when rendering the square top box
 		double k = j + 0.175; // height of the wooden handle
 		double C = 0.5; // center
 		double rad = 0.5; // radius of the quern stone
@@ -64,29 +64,18 @@ public class TESRQuern extends TileEntitySpecialRenderer implements ISimpleBlock
 		{
 			double a = ((l * (360 / sides) + speed + (4 * pos)) * Math.PI) / 180;
 			double b = (((1 + l) * (360 / sides) + speed + (4 * pos)) * Math.PI) / 180;
-			double x1 = Math.cos(a) * rad + C;
-			double y1 = Math.sin(a) * rad + C;
-			double x2 = Math.cos(b) * rad + C;
-			double y2 = Math.sin(b) * rad + C;
+			double x1 = Math.cos(a + angle) * rad + C;
+			double y1 = Math.sin(a + angle) * rad + C;
+			double x2 = Math.cos(b + angle) * rad + C;
+			double y2 = Math.sin(b + angle) * rad + C;
 
 			//This is needed for textures to stay static when rotating
 			a = ((l * (360 / sides)) * Math.PI) / 180;
 			b = (((1 + l) * (360 / sides)) * Math.PI) / 180;
-			double xx1 = Math.cos(a) * rad + C;
-			double yy1 = Math.sin(a) * rad + C;
-			double xx2 = Math.cos(b) * rad + C;
-			double yy2 = Math.sin(b) * rad + C;
-
-			if(renderSides)
-			{
-				bindTexture(TOP1_TEXTURE);
-				t.startDrawingQuads();
-				t.addVertexWithUV(x1, i, y1, xx1, yy1);
-				t.addVertexWithUV(x1, j, y1, xx1, yy2);
-				t.addVertexWithUV(x2, j, y2, xx2, yy2);
-				t.addVertexWithUV(x2, i, y2, xx2, yy1);
-				t.draw();
-			}
+			double xx1 = Math.cos(a + angle) * rad + C;
+			double yy1 = Math.sin(a + angle) * rad + C;
+			double xx2 = Math.cos(b + angle) * rad + C;
+			double yy2 = Math.sin(b + angle) * rad + C;
 
 			bindTexture(TOP2_TEXTURE);
 			t.startDrawing(GL11.GL_TRIANGLES);
@@ -94,6 +83,17 @@ public class TESRQuern extends TileEntitySpecialRenderer implements ISimpleBlock
 			t.addVertexWithUV(C, j, C, C, C);
 			t.addVertexWithUV(x2, j, y2, xx2, yy2);
 			t.draw();
+
+			if(renderSides)
+			{
+				bindTexture(BASE_TEXTURE);
+				t.startDrawingQuads();
+				t.addVertexWithUV(x1, i, y1, 1 - 0.27, 1 - j);
+				t.addVertexWithUV(x1, j, y1, 1 - 0.27, 0);
+				t.addVertexWithUV(x2, j, y2, 0, 0);
+				t.addVertexWithUV(x2, i, y2, 0, 1 - j);
+				t.draw();
+			}
 		}
 	}
 
@@ -134,7 +134,7 @@ public class TESRQuern extends TileEntitySpecialRenderer implements ISimpleBlock
 		t.draw();
 	}
 
-	private void renderWoodHandle(Tessellator t, int pos, Random rand)
+	private void renderWoodHandle(Tessellator t, int pos, Random rand, double angle)
 	{
 		double speed = pos * 4; // * 4 will make 2 turns, * 1 will make 1 turn, also look at TileEntityQuern
 		double j = 0.825; // where should wood handle rendering start
@@ -147,14 +147,14 @@ public class TESRQuern extends TileEntitySpecialRenderer implements ISimpleBlock
 		double a1 = (((pos * 4) - 5.7 + speed) * Math.PI) / 180;
 		double b = (((pos * 4) + 5 + speed) * Math.PI) / 180;
 		double b1 = (((pos * 4) + 5.7 + speed) * Math.PI) / 180;
-		double x1 = Math.cos(a) * (rad - 0.05) + C;
-		double y1 = Math.sin(a) * (rad - 0.05) + C;
-		double xx1 = Math.cos(a1) * (rad - 0.125) + C;
-		double yy1 = Math.sin(a1) * (rad - 0.125) + C;
-		double x2 = Math.cos(b) * (rad - 0.05) + C;
-		double y2 = Math.sin(b) * (rad - 0.05) + C;
-		double xx2 = Math.cos(b1) * (rad - 0.125) + C;
-		double yy2 = Math.sin(b1) * (rad - 0.125) + C;
+		double x1 = Math.cos(a + angle) * (rad - 0.05) + C;
+		double y1 = Math.sin(a + angle) * (rad - 0.05) + C;
+		double xx1 = Math.cos(a1 + angle) * (rad - 0.125) + C;
+		double yy1 = Math.sin(a1 + angle) * (rad - 0.125) + C;
+		double x2 = Math.cos(b + angle) * (rad - 0.05) + C;
+		double y2 = Math.sin(b + angle) * (rad - 0.05) + C;
+		double xx2 = Math.cos(b1 + angle) * (rad - 0.125) + C;
+		double yy2 = Math.sin(b1 + angle) * (rad - 0.125) + C;
 
 		bindTexture(WOOD_TEXTURE);
 		//SOUTH

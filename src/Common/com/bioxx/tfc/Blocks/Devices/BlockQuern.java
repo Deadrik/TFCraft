@@ -38,9 +38,11 @@ public class BlockQuern extends BlockTerraContainer
 	{
 		super.onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
 		TileEntityQuern te = (TileEntityQuern) world.getTileEntity(x, y, z);
+
 		//System.out.println("----X:"+hitX+" Z:"+hitZ+" Y:"+hitY+" Side:"+side); //Nice way to find out where the mouse is pointing at
-		Boolean hit = (side == 1 && hitX >= 0.75 && hitZ >= 0.30 && hitZ <= 0.70) ||
-				(side == 5 && hitZ >= 0.4 && hitZ <= 0.6 && hitY >= 0.85);
+		Boolean hit = (side == 1 && hitX >= 0.70 && hitX <= 90 && hitZ >= 0.70 && hitZ <= 0.90) ||
+				(side == 5 && hitZ >= 0.8 && hitZ <= 0.99 && hitY >= 0.85);
+
 		if(!world.isRemote)
 		{
 			if(!te.shouldRotate && hit && te.storage[2] != null)
