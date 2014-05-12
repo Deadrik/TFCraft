@@ -71,17 +71,6 @@ public class GenLayerBiomeEdge extends GenLayerTFC
 				{
 					outCache[var8 + var7 * par3] = var9;
 				}
-
-				/*if (var9 != TFCBiome.ocean.biomeID && var9 != TFCBiome.DeepOcean.biomeID)
-				{
-					if (var10 == TFCBiome.ocean.biomeID || var11 == TFCBiome.ocean.biomeID || var12 == TFCBiome.ocean.biomeID || var13 == TFCBiome.ocean.biomeID)
-					{
-						int beachid = TFCBiome.beach.biomeID;
-						if(TFC_Core.isMountainBiome(var9))
-							beachid = TFCBiome.gravelbeach.biomeID;
-						outCache[var8 + var7 * par3] = beachid;
-					}
-				}*/
 			}
 		}
 		return outCache;
