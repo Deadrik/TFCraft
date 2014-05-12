@@ -117,9 +117,12 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 				itemstack.damageItem(1, entityplayer);
 				return true;
 			}
-			else
+			else if(!(Block.blocksList[(world.getBlockId(x,y,z))]).onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ))
 			{
 				super.onItemUse(itemstack, entityplayer, world, x, y, z, side, hitX, hitY, hitZ);
+			}
+			else{
+				return true;
 			}
 			return false;
 		}
