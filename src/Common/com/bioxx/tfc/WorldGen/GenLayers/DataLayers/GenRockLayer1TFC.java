@@ -1,14 +1,23 @@
-package com.bioxx.tfc.WorldGen.GenLayers;
+package com.bioxx.tfc.WorldGen.GenLayers.DataLayers;
 
 import net.minecraft.world.WorldType;
 
-public abstract class GenRockLayer3TFC extends GenLayerTFC
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerAddIslandTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerFuzzyZoomTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerIslandTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerRiverInitTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerSmoothTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerVoronoiZoomTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerZoomTFC;
+
+public abstract class GenRockLayer1TFC extends GenLayerTFC
 {
 	/** seed from World#getWorldSeed that is used in the LCG prng */
 	private long worldGenSeed;
 
 	/** parent GenLayer that was provided via the constructor */
-	protected GenRockLayer3TFC parent;
+	protected GenRockLayer1TFC parent;
 
 	/**
 	 * final part of the LCG prng that uses the chunk X, Z coords along with the other two seeds to generate
@@ -30,20 +39,19 @@ public abstract class GenRockLayer3TFC extends GenLayerTFC
 		GenLayerAddIslandTFC var10 = new GenLayerAddIslandTFC(1L, var9);
 		GenLayerZoomTFC var11 = new GenLayerZoomTFC(2001L, var10);
 		var10 = new GenLayerAddIslandTFC(2L, var11);
-		GenLayerAddSnowTFC var12 = new GenLayerAddSnowTFC(2L, var10);
-		var11 = new GenLayerZoomTFC(2002L, var12);
+		var11 = new GenLayerZoomTFC(2002L, var10);
 		var10 = new GenLayerAddIslandTFC(3L, var11);
 		var11 = new GenLayerZoomTFC(2003L, var10);
 		var10 = new GenLayerAddIslandTFC(4L, var11);
 		byte var4 = 5;
 
-		GenLayerTFC var5 = (GenLayerTFC)GenLayerZoomTFC.magnify(1000L, var10, 0);
+		GenLayerTFC var5 = GenLayerZoomTFC.magnify(1000L, var10, 0);
 		GenLayerRiverInitTFC var13 = new GenLayerRiverInitTFC(100L, var5);
-		var5 = (GenLayerTFC) GenLayerZoomTFC.magnify(1000L, var13, var4+2);
+		var5 = GenLayerZoomTFC.magnify(1000L, var13, var4+2);
 		GenLayerSmoothTFC var15 = new GenLayerSmoothTFC(1000L, var5);
-		GenLayerTFC var6 = (GenLayerTFC) GenLayerZoomTFC.magnify(1000L, var10, 0);
-		GenLayerRockTypes3 var17 = new GenLayerRockTypes3(200L, var6, par2WorldType, 3);
-		var6 = (GenLayerTFC) GenLayerZoomTFC.magnify(1000L, var17, 2);
+		GenLayerTFC var6 = GenLayerZoomTFC.magnify(1000L, var10, 0);
+		GenLayerRockTypes1 var17 = new GenLayerRockTypes1(200L, var6, par2WorldType,1);
+		var6 = GenLayerZoomTFC.magnify(1000L, var17, 2);
 
 		Object var18 = new GenLayerSmoothTFC(1000L, var6);
 		for (int var7 = 0; var7 < var4; ++var7)
@@ -60,7 +68,7 @@ public abstract class GenRockLayer3TFC extends GenLayerTFC
 		return new GenLayerTFC[] {var19, var8};
 	}
 
-	public GenRockLayer3TFC(long par1)
+	public GenRockLayer1TFC(long par1)
 	{
 		super(par1);
 	}

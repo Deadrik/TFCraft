@@ -1,20 +1,25 @@
-package com.bioxx.tfc.WorldGen.GenLayers;
+package com.bioxx.tfc.WorldGen.GenLayers.DataLayers;
 
 import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-public class GenLayerStability extends GenLayerTFC
+public class GenLayerRockTypes1 extends GenLayerTFC
 {
-	public static DataLayer[] biomeArray = new DataLayer[] {
-		DataLayer.SeismicStable, DataLayer.SeismicStable, DataLayer.SeismicStable,
-		DataLayer.SeismicStable, DataLayer.SeismicStable, DataLayer.SeismicUnStable};
+	public static DataLayer[] biomeArray = new DataLayer[]{
+		DataLayer.Shale, DataLayer.Claystone, DataLayer.RockSalt, DataLayer.Limestone,
+		DataLayer.Conglomerate, DataLayer.Dolomite, DataLayer.Chert, DataLayer.Chalk,
+		DataLayer.Rhyolite, DataLayer.Basalt, DataLayer.Andesite, DataLayer.Dacite,
+		DataLayer.Quartzite, DataLayer.Slate, DataLayer.Phyllite, DataLayer.Schist,
+		DataLayer.Gneiss, DataLayer.Marble, DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro};
 
+	/** this sets all the biomes that are allowed to appear in the overworld */
 	private DataLayer[] allowedBiomes;
 
-	public GenLayerStability(long par1, GenLayer par3GenLayer, WorldType par4WorldType)
+	public GenLayerRockTypes1(long par1, GenLayer par3GenLayer, WorldType par4WorldType, int layer)
 	{
 		super(par1);
 		this.allowedBiomes = biomeArray;
@@ -30,16 +35,20 @@ public class GenLayerStability extends GenLayerTFC
 	{
 		int[] var5 = this.parent.getInts(par1, par2, par3, par4);
 		int[] var6 = IntCache.getIntCache(par3 * par4);
+
 		for (int var7 = 0; var7 < par4; ++var7)
 		{
 			for (int var8 = 0; var8 < par3; ++var8)
 			{
 				this.initChunkSeed(var8 + par1, var7 + par2);
 				int var9 = var5[var8 + var7 * par3];
+
 				if (var9 == 0)
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
-				else
+				else if (var9 == 1)
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
+				else
+					var6[var8 + var7 * par3] = 0;
 			}
 		}
 		return var6;

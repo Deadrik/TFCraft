@@ -44,6 +44,7 @@ import com.bioxx.tfc.Items.ItemTFCArmor;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
 import com.bioxx.tfc.TileEntities.TileEntityPartial;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.IFood;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
@@ -1155,5 +1156,26 @@ public class TFC_Core
 	public static boolean isHorizSupport(Block b)
 	{
 		return (b == TFCBlocks.WoodSupportH || b == TFCBlocks.WoodSupportH2);
+	}
+
+	public static boolean isOceanicBiome(int id)
+	{
+		if(id == TFCBiome.ocean.biomeID || id == TFCBiome.DeepOcean.biomeID)
+			return true;
+		return false;
+	}
+
+	public static boolean isMountainBiome(int id)
+	{
+		if(id == TFCBiome.Mountains.biomeID || id == TFCBiome.MountainsEdge.biomeID)
+			return true;
+		return false;
+	}
+
+	public static boolean isBeachBiome(int id)
+	{
+		if(id == TFCBiome.beach.biomeID || id == TFCBiome.gravelbeach.biomeID)
+			return true;
+		return false;
 	}
 }

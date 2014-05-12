@@ -35,31 +35,12 @@ public abstract class GenLayerTFC extends GenLayer
 	 */
 	public static GenLayerTFC[] initializeAllBiomeGenerators(long par0, TFCWorldType par2)
 	{
-		GenLayerIslandTFC continentStart = new GenLayerIslandTFC(1L);
-		drawImage(512, continentStart, "0 ContinentsStart");
-		GenLayerFuzzyZoomTFC continentFuzzyZoom = new GenLayerFuzzyZoomTFC(2000L, continentStart);
-		drawImage(512, continentFuzzyZoom, "1 ContinentsFuzzyZoom");
-		GenLayerAddIslandTFC var10 = new GenLayerAddIslandTFC(1L, continentFuzzyZoom);
-		drawImage(512, var10, "2 ContinentsAddIsland");
-		GenLayerZoomTFC var11 = new GenLayerZoomTFC(2001L, var10);
-		drawImage(512, var11, "3 ContinentsAddIslandZoom");
-		var10 = new GenLayerAddIslandTFC(2L, var11);
-		drawImage(512, var10, "4 ContinentsAddIsland2");
-		//GenLayerAddSnowTFC var12 = new GenLayerAddSnowTFC(2L, var10);
-		var11 = new GenLayerZoomTFC(2002L, var10);
-		drawImage(512, var11, "5 ContinentsAddIslandZoom2");
-		var10 = new GenLayerAddIslandTFC(3L, var11);
-		drawImage(512, var10, "6 ContinentsAddIsland3");
-		var11 = new GenLayerZoomTFC(2003L, var10);
-		drawImage(512, var11, "7 ContinentsAddIslandZoom3");
-		GenLayerTFC continent = new GenLayerAddIslandTFC(4L, var11);
-		drawImage(512, continent, "8 ContinentsDone");
-		continent = new GenLayerDeepOcean(4L, var11);
-		drawImage(512, continent, "8b ContinentsDone DeepOcean");
+		GenLayerTFC continent = genContinent(0);
+		//GenLayerTFC continent2 = genContinent(1);
 		byte var4 = 4;
 
 		//Create Rivers
-		GenLayerTFC continentCopy = GenLayerZoomTFC.magnify(1000L, continent, 0);
+		GenLayerTFC continentCopy = GenLayerZoomTFC.magnify(1000L, continent, 2);
 		drawImage(512, continentCopy, "9 ContinentsZoom");
 		GenLayerRiverInitTFC riverInit = new GenLayerRiverInitTFC(100L, continentCopy);
 		drawImage(512, riverInit, "10 RiverInit");
@@ -75,17 +56,14 @@ public abstract class GenLayerTFC extends GenLayer
 		drawImage(512, continentCopy2, "14 ContinentsZoom");
 		GenLayerBiomeTFC var17 = new GenLayerBiomeTFC(200L, continentCopy2, par2);
 		drawImage(512, var17, "15 Biome");
-		continentCopy2 = GenLayerZoomTFC.magnify(1000L, var17, 2);
+		GenLayerLakes lakes = new GenLayerLakes(200L, var17);
+		drawImage(512, var17, "15b Lakes");
+		continentCopy2 = GenLayerZoomTFC.magnify(1000L, lakes, 2);
 		drawImage(512, continentCopy2, "16 ZoomBiome");
-		Object var18 = new GenLayerHillsTFC(1000L, continentCopy2);
-		drawImage(512, (GenLayerHillsTFC)var18, "17 Hills");
+		Object var18 = new GenLayerBiomeEdge(1000L, continentCopy2);
+		drawImage(512, (GenLayerTFC)var18, "17 BiomeEdge");
 		for (int var7 = 0; var7 < var4; ++var7)
 		{
-			if (var7 == 0)
-			{
-				var18 = new GenLayerBiomeEdge(1000L, (GenLayerTFC)var18);
-				drawImage(512, (GenLayerTFC)var18, "18y BiomeEdge");
-			}
 			var18 = new GenLayerZoomTFC((long)(1000 + var7), (GenLayerTFC)var18);
 			drawImage(512, (GenLayerTFC)var18, "18-"+var7+" Zoom");
 			if (var7 == 0)
@@ -107,7 +85,36 @@ public abstract class GenLayerTFC extends GenLayer
 		var8.initWorldGenSeed(par0);
 		return new GenLayerTFC[] {var20, var8, var20};
 	}
-	static boolean shouldDraw = false;
+
+	public static GenLayerTFC genContinent(long seed)
+	{
+		GenLayerIslandTFC continentStart = new GenLayerIslandTFC(1L+seed);
+		drawImage(512, continentStart, "0 ContinentsStart");
+		GenLayerFuzzyZoomTFC continentFuzzyZoom = new GenLayerFuzzyZoomTFC(2000L, continentStart);
+		drawImage(512, continentFuzzyZoom, "1 ContinentsFuzzyZoom");
+		GenLayerAddIslandTFC var10 = new GenLayerAddIslandTFC(1L, continentFuzzyZoom);
+		drawImage(512, var10, "2 ContinentsAddIsland");
+		GenLayerZoomTFC var11 = new GenLayerZoomTFC(2001L, var10);
+		drawImage(512, var11, "3 ContinentsAddIslandZoom");
+		var10 = new GenLayerAddIslandTFC(2L, var11);
+		drawImage(512, var10, "4 ContinentsAddIsland2");
+		var11 = new GenLayerZoomTFC(2002L, var10);
+		drawImage(512, var11, "5 ContinentsAddIslandZoom2");
+		var10 = new GenLayerAddIslandTFC(3L, var11);
+		drawImage(512, var10, "6 ContinentsAddIsland3");
+		var11 = new GenLayerZoomTFC(2003L, var10);
+		drawImage(512, var11, "7 ContinentsAddIslandZoom3");
+		GenLayerTFC continent = new GenLayerAddIslandTFC(4L, var11);
+		drawImage(512, continent, "8 ContinentsDone");
+		continent = new GenLayerDeepOcean(4L, var11);
+		drawImage(512, continent, "8b ContinentsDone DeepOcean");
+
+		return continent;
+	}
+
+
+
+	static boolean shouldDraw = true;
 	public static void drawImage(int size, GenLayerTFC genlayer, String name)
 	{
 		if(!shouldDraw)

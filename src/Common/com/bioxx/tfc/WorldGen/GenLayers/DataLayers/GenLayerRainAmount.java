@@ -1,21 +1,24 @@
-package com.bioxx.tfc.WorldGen.GenLayers;
+package com.bioxx.tfc.WorldGen.GenLayers.DataLayers;
 
 import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-public class GenLayerRockTypes3 extends GenLayerTFC
+public class GenLayerRainAmount extends GenLayerTFC
 {
 	public static DataLayer[] biomeArray = new DataLayer[]{
-		DataLayer.Rhyolite, DataLayer.Basalt, DataLayer.Andesite,
-		DataLayer.Dacite, DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro};
+		DataLayer.Rain_62_5, DataLayer.Rain_125, DataLayer.Rain_250,
+		DataLayer.Rain_500, DataLayer.Rain_1000,DataLayer.Rain_2000, DataLayer.Rain_4000, DataLayer.Rain_8000,
+		DataLayer.Rain_500, DataLayer.Rain_1000, DataLayer.Rain_2000, DataLayer.Rain_4000
+		};
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private DataLayer[] allowedBiomes;
 
-	public GenLayerRockTypes3(long par1, GenLayer par3GenLayer, WorldType par4WorldType, int layer)
+	public GenLayerRainAmount(long par1, GenLayer par3GenLayer, WorldType par4WorldType)
 	{
 		super(par1);
 		this.allowedBiomes = biomeArray;
@@ -36,15 +39,13 @@ public class GenLayerRockTypes3 extends GenLayerTFC
 		{
 			for (int var8 = 0; var8 < par3; ++var8)
 			{
-				this.initChunkSeed(var8 + par1, var7 + par2);
+				this.initChunkSeed((var8 + par1), (var7 + par2));
 				int var9 = var5[var8 + var7 * par3];
 
 				if (var9 == 0)
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
-				else if (var9 == 1)
-					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
 				else
-					var6[var8 + var7 * par3] = 0;
+					var6[var8 + var7 * par3] = DataLayer.Rain_1000.ID;
 			}
 		}
 		return var6;

@@ -1,23 +1,24 @@
-package com.bioxx.tfc.WorldGen.GenLayers;
+package com.bioxx.tfc.WorldGen.GenLayers.DataLayers;
 
 import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-public class GenLayerEVTTypes extends GenLayerTFC
+public class GenLayerRockTypes2 extends GenLayerTFC
 {
 	public static DataLayer[] biomeArray = new DataLayer[]{
-		DataLayer.EVT_0_125,DataLayer.EVT_0_25,DataLayer.EVT_1,
-		DataLayer.EVT_0_125,DataLayer.EVT_0_25,DataLayer.EVT_1,
-		DataLayer.EVT_2,DataLayer.EVT_4,DataLayer.EVT_8
-		};
+		DataLayer.Rhyolite, DataLayer.Basalt, DataLayer.Andesite, DataLayer.Dacite,
+		DataLayer.Quartzite, DataLayer.Slate, DataLayer.Phyllite, DataLayer.Schist,
+		DataLayer.Gneiss, DataLayer.Marble, DataLayer.Granite, DataLayer.Diorite,
+		DataLayer.Gabbro};
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private DataLayer[] allowedBiomes;
 
-	public GenLayerEVTTypes(long par1, GenLayer par3GenLayer, WorldType par4WorldType)
+	public GenLayerRockTypes2(long par1, GenLayer par3GenLayer, WorldType par4WorldType, int layer)
 	{
 		super(par1);
 		this.allowedBiomes = biomeArray;
@@ -38,13 +39,15 @@ public class GenLayerEVTTypes extends GenLayerTFC
 		{
 			for (int var8 = 0; var8 < par3; ++var8)
 			{
-				this.initChunkSeed((var8 + par1), (var7 + par2));
+				this.initChunkSeed(var8 + par1, var7 + par2);
 				int var9 = var5[var8 + var7 * par3];
 
 				if (var9 == 0)
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
+				else if (var9 == 1)
+					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
 				else
-					var6[var8 + var7 * par3] = DataLayer.EVT_0_5.ID;
+					var6[var8 + var7 * par3] = 0;
 			}
 		}
 		return var6;

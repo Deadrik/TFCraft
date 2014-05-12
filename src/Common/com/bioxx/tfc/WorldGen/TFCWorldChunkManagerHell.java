@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.WorldGen.GenLayers.GenEVTLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenRainLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenRockLayer2TFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenTreeLayerTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.GenEVTLayerTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.GenRainLayerTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.GenRockLayer2TFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.GenTreeLayerTFC;
 
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.biome.BiomeGenBase;

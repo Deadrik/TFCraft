@@ -3,6 +3,7 @@ package com.bioxx.tfc.WorldGen.GenLayers;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 
 public class GenLayerShoreTFC extends GenLayerTFC
@@ -34,17 +35,22 @@ public class GenLayerShoreTFC extends GenLayerTFC
 				int var12;
 				int var13;
 
-				if ( !isOceanic(var9) && var9 != TFCBiome.river.biomeID && var9 != TFCBiome.swampland.biomeID && var9 != TFCBiome.HighHills.biomeID)
+				if ( !TFC_Core.isOceanicBiome(var9) && var9 != TFCBiome.river.biomeID && var9 != TFCBiome.swampland.biomeID && var9 != TFCBiome.HighHills.biomeID)
 				{
 					var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
 					var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
 					var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
 					var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
 
-					if (!isOceanic(var10) && !isOceanic(var11) && !isOceanic(var12) && !isOceanic(var13))
+					if (!TFC_Core.isOceanicBiome(var10) && !TFC_Core.isOceanicBiome(var11) && !TFC_Core.isOceanicBiome(var12) && !TFC_Core.isOceanicBiome(var13))
 						var6[var8 + var7 * par3] = var9;
 					else
-						var6[var8 + var7 * par3] = TFCBiome.beach.biomeID;
+					{
+						int beachid = TFCBiome.beach.biomeID;
+						if(TFC_Core.isMountainBiome(var9))
+							beachid = TFCBiome.gravelbeach.biomeID;
+						var6[var8 + var7 * par3] = beachid;
+					}
 				}
 				else
 				{
@@ -53,12 +59,5 @@ public class GenLayerShoreTFC extends GenLayerTFC
 			}
 		}
 		return var6;
-	}
-
-	boolean isOceanic(int id)
-	{
-		if(id == TFCBiome.ocean.biomeID || id == TFCBiome.DeepOcean.biomeID)
-			return true;
-		return false;
 	}
 }

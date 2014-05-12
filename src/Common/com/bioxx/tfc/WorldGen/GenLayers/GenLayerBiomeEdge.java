@@ -21,7 +21,7 @@ public class GenLayerBiomeEdge extends GenLayerTFC
 	public int[] getInts(int par1, int par2, int par3, int par4)
 	{
 		int[] var5 = this.parent.getInts(par1 - 1, par2 - 1, par3 + 2, par4 + 2);
-		int[] var6 = IntCache.getIntCache(par3 * par4);
+		int[] outCache = IntCache.getIntCache(par3 * par4);
 
 		for (int var7 = 0; var7 < par4; ++var7)
 		{
@@ -42,44 +42,48 @@ public class GenLayerBiomeEdge extends GenLayerTFC
 				if (var9 == TFCBiome.HighHills.biomeID)
 				{
 					if (var10 == TFCBiome.HighHills.biomeID && var11 == TFCBiome.HighHills.biomeID && var12 == TFCBiome.HighHills.biomeID && var13 == TFCBiome.HighHills.biomeID)
-						var6[var8 + var7 * par3] = var9;
+						outCache[var8 + var7 * par3] = var9;
 					else
-						var6[var8 + var7 * par3] = TFCBiome.HighHillsEdge.biomeID;
+						outCache[var8 + var7 * par3] = TFCBiome.HighHillsEdge.biomeID;
 				}
 				else if (var9 == TFCBiome.Mountains.biomeID)
 				{
 					if (var10 == TFCBiome.Mountains.biomeID && var11 == TFCBiome.Mountains.biomeID && var12 == TFCBiome.Mountains.biomeID && var13 == TFCBiome.Mountains.biomeID)
-						var6[var8 + var7 * par3] = var9;
+						outCache[var8 + var7 * par3] = var9;
 					else
-						var6[var8 + var7 * par3] = TFCBiome.MountainsEdge.biomeID;
+						outCache[var8 + var7 * par3] = TFCBiome.MountainsEdge.biomeID;
 				}
 				else if (var9 == TFCBiome.swampland.biomeID)
 				{
 					if (var10 == TFCBiome.swampland.biomeID && var11 == TFCBiome.swampland.biomeID && var12 == TFCBiome.swampland.biomeID && var13 == TFCBiome.swampland.biomeID)
-						var6[var8 + var7 * par3] = var9;
+						outCache[var8 + var7 * par3] = var9;
 					else
-						var6[var8 + var7 * par3] = TFCBiome.plains.biomeID;
+						outCache[var8 + var7 * par3] = TFCBiome.plains.biomeID;
 				}
 				else if (var9 == TFCBiome.HighPlains.biomeID)
 				{
 					if (var10 == TFCBiome.HighPlains.biomeID && var11 == TFCBiome.HighPlains.biomeID && var12 == TFCBiome.HighPlains.biomeID && var13 == TFCBiome.HighPlains.biomeID)
-						var6[var8 + var7 * par3] = var9;
+						outCache[var8 + var7 * par3] = var9;
 					else
-						var6[var8 + var7 * par3] = TFCBiome.plains.biomeID;
-				}
-				else if (var9 != TFCBiome.ocean.biomeID && var9 != TFCBiome.DeepOcean.biomeID)
-				{
-					if (var10 == TFCBiome.ocean.biomeID || var11 == TFCBiome.ocean.biomeID || var12 == TFCBiome.ocean.biomeID || var13 == TFCBiome.ocean.biomeID)
-						var6[var8 + var7 * par3] = TFCBiome.beach.biomeID;
-					else
-						var6[var8 + var7 * par3] = var9;
+						outCache[var8 + var7 * par3] = TFCBiome.plains.biomeID;
 				}
 				else
 				{
-					var6[var8 + var7 * par3] = var9;
+					outCache[var8 + var7 * par3] = var9;
 				}
+
+				/*if (var9 != TFCBiome.ocean.biomeID && var9 != TFCBiome.DeepOcean.biomeID)
+				{
+					if (var10 == TFCBiome.ocean.biomeID || var11 == TFCBiome.ocean.biomeID || var12 == TFCBiome.ocean.biomeID || var13 == TFCBiome.ocean.biomeID)
+					{
+						int beachid = TFCBiome.beach.biomeID;
+						if(TFC_Core.isMountainBiome(var9))
+							beachid = TFCBiome.gravelbeach.biomeID;
+						outCache[var8 + var7 * par3] = beachid;
+					}
+				}*/
 			}
 		}
-		return var6;
+		return outCache;
 	}
 }

@@ -3,6 +3,7 @@ package com.bioxx.tfc.WorldGen.GenLayers;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 
 public class GenLayerRiverMixTFC extends GenLayerTFC
@@ -22,32 +23,81 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 	 * amounts, or biomeList[] indices based on the particular GenLayer subclass.
 	 */
 	@Override
-	public int[] getInts(int par1, int par2, int par3, int par4)
+	public int[] getInts(int x, int z, int xSize, int zSize)
 	{
-		int[] layerBiomes = this.biomePatternGeneratorChain.getInts(par1, par2, par3, par4);
-		int[] layerRivers = this.riverPatternGeneratorChain.getInts(par1, par2, par3, par4);
-		int[] layerOut = IntCache.getIntCache(par3 * par4);
+		int[] layerBiomes = this.biomePatternGeneratorChain.getInts(x, z, xSize, zSize);
+		int[] layerRivers = this.riverPatternGeneratorChain.getInts(x, z, xSize, zSize);
+		int[] layerOut = IntCache.getIntCache(xSize * zSize);
 
-		for (int var8 = 0; var8 < par3 * par4; ++var8)
+		for (int index = 0; index < xSize * zSize; ++index)
 		{
-			int b = layerBiomes[var8];
-			int r = layerRivers[var8];
+			int b = layerBiomes[index];
+			int r = layerRivers[index];
 
-			if (isOceanic(b) || b == TFCBiome.beach.biomeID)
-				layerOut[var8] = b;
-			else if (layerRivers[var8] > 0)
-				layerOut[var8] = r;
+			int xn = index-1;
+			int xp = index+1;
+			int zn = index-zSize;
+			int zp = index+zSize;
+
+			if (TFC_Core.isOceanicBiome(b) || TFC_Core.isMountainBiome(b))
+				layerOut[index] = b;
+			else if (layerRivers[index] > 0)
+			{
+				layerOut[index] = r;
+
+				if (TFC_Core.isBeachBiome(b))
+				{
+					layerOut[index] = TFCBiome.ocean.biomeID;
+					if(xn >= 0 && layerOut[xn] == TFCBiome.river.biomeID)
+					{
+						layerOut[xn] = TFCBiome.ocean.biomeID;
+					}
+					if(zn >= 0 && layerOut[zn] == TFCBiome.river.biomeID)
+					{
+						layerOut[zn] = TFCBiome.ocean.biomeID;
+					}
+					if(zp < layerBiomes.length && TFC_Core.isOceanicBiome(layerBiomes[zp]) && layerRivers[zn] == 0)
+					{
+						layerOut[index] = b;
+					}
+					if(zn >= 0 && TFC_Core.isOceanicBiome(layerBiomes[zn]) && layerRivers[zp] == 0)
+					{
+						layerOut[index] = b;
+					}
+					if(xn >= 0 && TFC_Core.isOceanicBiome(layerBiomes[xn]) && layerRivers[xp] == 0)
+					{
+						layerOut[index] = b;
+					}
+					if(xp < layerBiomes.length && TFC_Core.isOceanicBiome(layerBiomes[xp]) && layerRivers[xn] == 0)
+					{
+						layerOut[index] = b;
+					}
+				}
+			}
 			else
-				layerOut[var8] = b;
+				layerOut[index] = b;
+
+			if(layerOut[index] == TFCBiome.river.biomeID)
+			{
+				if(xn >= 0 && layerBiomes[xn] == TFCBiome.lake.biomeID)
+				{
+					layerOut[index] = TFCBiome.lake.biomeID;
+				}
+				if(zn >= 0 && layerBiomes[zn] == TFCBiome.lake.biomeID)
+				{
+					layerOut[index] = TFCBiome.lake.biomeID;
+				}
+				if(xp < layerBiomes.length && layerBiomes[xp] == TFCBiome.lake.biomeID)
+				{
+					layerOut[index] = TFCBiome.lake.biomeID;
+				}
+				if(zp < layerBiomes.length && layerBiomes[zp] == TFCBiome.lake.biomeID)
+				{
+					layerOut[index] = TFCBiome.lake.biomeID;
+				}
+			}
 		}
 		return layerOut;
-	}
-
-	boolean isOceanic(int id)
-	{
-		if(id == TFCBiome.ocean.biomeID || id == TFCBiome.DeepOcean.biomeID)
-			return true;
-		return false;
 	}
 
 	/**
