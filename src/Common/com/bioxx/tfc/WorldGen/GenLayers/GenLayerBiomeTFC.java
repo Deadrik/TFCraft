@@ -3,6 +3,7 @@ package com.bioxx.tfc.WorldGen.GenLayers;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.TFCWorldType;
 
@@ -34,19 +35,12 @@ public class GenLayerBiomeTFC extends GenLayerTFC
 			{
 				this.initChunkSeed(var8 + par1, var7 + par2);
 				int id = var5[var8 + var7 * par3];
-				if (isOceanic(id))
+				if (TFC_Core.isOceanicBiome(id))
 					var6[var8 + var7 * par3] = id;
 				else
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].biomeID;
 			}
 		}
 		return var6;
-	}
-
-	boolean isOceanic(int id)
-	{
-		if(id == TFCBiome.ocean.biomeID || id == TFCBiome.DeepOcean.biomeID)
-			return true;
-		return false;
 	}
 }

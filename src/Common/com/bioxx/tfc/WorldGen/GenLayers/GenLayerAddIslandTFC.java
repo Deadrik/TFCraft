@@ -69,14 +69,6 @@ public class GenLayerAddIslandTFC extends GenLayerTFC
 				{
 					var10[var12 + var11 * par3] = var17;
 				}
-
-				if(var10[var12 + var11 * par3] < 0)
-					try {
-						throw new Exception();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 			}
 		}
 		return var10;

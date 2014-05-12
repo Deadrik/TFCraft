@@ -96,11 +96,6 @@ public abstract class GenLayerTFC extends GenLayer
 		drawImage(512, continentFuzzyZoom, "1 ContinentsFuzzyZoom");
 		GenLayerTFC var10 = new GenLayerAddIslandTFC(1L, continentFuzzyZoom);
 		drawImage(512, var10, "2 ContinentsAddIsland");
-		if(oceanReduction)
-		{
-			var10 = new GenLayerRemoveOcean(2002L, var10, 12, true);
-			drawImage(512, var10, "2 RemoveOcean");
-		}
 		GenLayerTFC var11 = new GenLayerZoomTFC(2001L, var10);
 		drawImage(512, var11, "3 ContinentsAddIslandZoom");
 		var10 = new GenLayerAddIslandTFC(2L, var11);
@@ -109,11 +104,6 @@ public abstract class GenLayerTFC extends GenLayer
 		drawImage(512, var11, "5 ContinentsAddIslandZoom2");
 		var10 = new GenLayerAddIslandTFC(3L, var11);
 		drawImage(512, var10, "6 ContinentsAddIsland3");
-		if(oceanReduction)
-		{
-			var10 = new GenLayerRemoveOcean(2002L, var10, 1, false);
-			drawImage(512, var10, "6 RemoveOcean");
-		}
 		var11 = new GenLayerZoomTFC(2003L, var10);
 		drawImage(512, var11, "7 ContinentsAddIslandZoom3");
 		GenLayerTFC continent = new GenLayerAddIslandTFC(4L, var11);
