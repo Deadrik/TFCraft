@@ -1,10 +1,10 @@
 package com.bioxx.tfc.Entities;
 
-import com.bioxx.tfc.api.ICausesDamage;
-import com.bioxx.tfc.api.Enums.EnumDamageType;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.api.ICausesDamage;
+import com.bioxx.tfc.api.Enums.EnumDamageType;
 
 public class EntityJavelin extends EntityProjectileTFC implements ICausesDamage
 {
