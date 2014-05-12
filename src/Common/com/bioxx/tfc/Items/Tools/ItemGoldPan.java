@@ -37,7 +37,6 @@ public class ItemGoldPan extends ItemTerra
 		super();
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		setUnlocalizedName("GoldPan");
 		setCreativeTab(TFCTabs.TFCTools);
 	}
 
