@@ -5,7 +5,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.TileEntities.TileEntityBellows;
+import com.bioxx.tfc.TileEntities.TEBellows;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -38,10 +38,11 @@ public class BlockBellows extends BlockTerraContainer
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		super.onBlockActivated(world, i, j, k, entityplayer, par6, par7, par8, par9);
-		TileEntityBellows teb = null;
+		TEBellows teb = null;
 		TileEntity te = world.getTileEntity(i, j, k);
-		if (!world.isRemote && te != null && te instanceof TileEntityBellows)
-			teb = (TileEntityBellows) te;
+		if (!world.isRemote && te != null && te instanceof TEBellows)
+		{
+			teb = (TEBellows) te;
 			if (!teb.shouldBlow)
 			{
 				teb.shouldBlow = true;
@@ -49,6 +50,7 @@ public class BlockBellows extends BlockTerraContainer
 				//TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(i, j, k, te.createUpdatePacket(), 160);
 				world.playSoundEffect(i, j, k, TFC_Sounds.BELLOWS, 0.4F, 1);
 			}
+		}
 		return true;
 	}
 
@@ -155,6 +157,6 @@ public class BlockBellows extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntityBellows();
+		return new TEBellows();
 	}
 }

@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Devices.BlockBellows;
-import com.bioxx.tfc.TileEntities.TileEntityBellows;
+import com.bioxx.tfc.TileEntities.TEBellows;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -91,7 +91,7 @@ public class RenderBellows implements ISimpleBlockRenderingHandler
 			IBlockAccess blockAccess = renderer.blockAccess;
 			int meta = blockAccess.getBlockMetadata(x, y, z);
 			int direction = BlockBellows.getDirectionFromMetadata(meta);
-			TileEntityBellows te = (TileEntityBellows)blockAccess.getTileEntity(x, y, z);
+			TEBellows te = (TEBellows)blockAccess.getTileEntity(x, y, z);
 			float pos = te.blowTimer * 0.1F;
 			if(pos < 0)
 				pos = 0;

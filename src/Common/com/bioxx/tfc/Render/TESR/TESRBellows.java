@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TileEntities.TileEntityBellows;
+import com.bioxx.tfc.TileEntities.TEBellows;
 
 public class TESRBellows extends TESRBase
 {
@@ -21,7 +21,7 @@ public class TESRBellows extends TESRBase
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f)
 	{
-		TileEntityBellows bellows = (TileEntityBellows) tileentity;
+		TEBellows bellows = (TEBellows) tileentity;
 		if (bellows != null)
 		{
 			int meta = bellows.getWorldObj().getBlockMetadata(bellows.xCoord, bellows.yCoord, bellows.zCoord);
