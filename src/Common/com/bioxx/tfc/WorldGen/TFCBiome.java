@@ -202,8 +202,8 @@ public class TFCBiome extends BiomeGenBase
 	//@Override
 	public TFCBiome setMinMaxHeight(float par1, float par2)
 	{
-		this.rootHeight = par1/*-2.7F*/;
-		this.heightVariation = par2/*-2.7F*/;
+		this.rootHeight = par1-2.7F;
+		this.heightVariation = par2-2.7F;
 		return this;
 	}
 
