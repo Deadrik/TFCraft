@@ -94,7 +94,7 @@ public class BlockIngotPile extends BlockTerraContainer
 		
 		int bottomSize = teipBottom.getStackInSlot(0).stackSize;
 		int topSize = teip.getStackInSlot(0).stackSize;
-		
+
 		if(bottomSize < 64)
 		{
 			bottomSize = bottomSize + topSize;
@@ -116,7 +116,10 @@ public class BlockIngotPile extends BlockTerraContainer
 				teip.broadcastPacketInRange(teip.createUpdatePacket());
 			}
 			else
+			{
+				teip.storage[0] = null;
 				world.setBlockToAir(i, j, k);
+			}
 		}
 	}
 
