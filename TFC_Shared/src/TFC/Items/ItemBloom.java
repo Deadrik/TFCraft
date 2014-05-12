@@ -35,32 +35,6 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
-	{
-		if(TFC_ItemHeat.HasTemp(is))
-		{
-			String s = "";
-			if(HeatRegistry.getInstance().isTemperatureDanger(is))
-			{
-				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.danger") + " | ";
-			}
-
-			if(HeatRegistry.getInstance().isTemperatureWeldable(is))
-			{
-				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.weldable") + " | ";
-			}
-
-			if(HeatRegistry.getInstance().isTemperatureWorkable(is))
-			{
-				s += EnumChatFormatting.WHITE + StringUtil.localize("gui.ingot.workable");
-			}
-
-			if(!s.equals(""))
-				arraylist.add(s);
-		}
-	}
-
-	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		list.add(new ItemStack(this, 1, 100));

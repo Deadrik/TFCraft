@@ -166,4 +166,10 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
 	public Block getBlockTypeForRender() {
 		return TFCBlocks.FenceGate2;
 	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+		return true;
+	}
 }

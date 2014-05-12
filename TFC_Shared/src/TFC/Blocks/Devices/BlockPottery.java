@@ -17,7 +17,7 @@ import TFC.TFCItems;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Items.ItemLogs;
 import TFC.Items.Pottery.ItemPotteryBase;
-import TFC.TileEntities.TileEntityPottery;
+import TFC.TileEntities.TEPottery;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -76,15 +76,19 @@ public class BlockPottery extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y, z);
+			TEPottery te = (TEPottery) world.getBlockTileEntity(x, y, z);
+
+			if (te.isLit())
+				return false;
+
 			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == TFCItems.Straw && !player.isSneaking())
 			{
-				te.addStraw(player.inventory.getCurrentItem());
+				te.addStraw(player.inventory.getCurrentItem(), player);
 				return true;
 			}
 			else if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemLogs && !player.isSneaking() && te.straw == 8)
 			{
-				te.addLog(player.inventory.getCurrentItem());
+				te.addLog(player.inventory.getCurrentItem(), player);
 				return true;
 			}
 			else if(((player.inventory.getCurrentItem() == null || !(player.inventory.getCurrentItem().getItem() instanceof ItemPotteryBase))))
@@ -123,7 +127,7 @@ public class BlockPottery extends BlockTerraContainer
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
-		TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(i, j, k);
+		TEPottery te = (TEPottery) world.getBlockTileEntity(i, j, k);
 		int h = 0;
 		int w = 0;
 		if(te!= null)
@@ -137,7 +141,7 @@ public class BlockPottery extends BlockTerraContainer
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k) 
 	{
-		TileEntityPottery te = (TileEntityPottery) access.getBlockTileEntity(i, j, k);
+		TEPottery te = (TEPottery) access.getBlockTileEntity(i, j, k);
 		int h = 0;
 		int w = 0;
 		if(te!= null)
@@ -168,10 +172,10 @@ public class BlockPottery extends BlockTerraContainer
 
 	public void Eject(World world, int par2, int par3, int par4)
 	{
-		if(!world.isRemote && (TileEntityPottery)world.getBlockTileEntity(par2, par3, par4)!=null)
+		if(!world.isRemote && (TEPottery)world.getBlockTileEntity(par2, par3, par4)!=null)
 		{
-			TileEntityPottery te;
-			te = (TileEntityPottery)world.getBlockTileEntity(par2, par3, par4);
+			TEPottery te;
+			te = (TEPottery)world.getBlockTileEntity(par2, par3, par4);
 			te.ejectContents();
 			world.removeBlockTileEntity(par2, par3, par4);
 		}
@@ -187,7 +191,7 @@ public class BlockPottery extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityPottery();
+		return new TEPottery();
 	}
 
 	@Override
@@ -197,7 +201,7 @@ public class BlockPottery extends BlockTerraContainer
 		{
 			if(!world.isBlockOpaqueCube(i, j-1, k))
 			{
-				((TileEntityPottery)world.getBlockTileEntity(i, j, k)).ejectContents();
+				((TEPottery)world.getBlockTileEntity(i, j, k)).ejectContents();
 				world.setBlock(i, j, k, 0);
 				return;
 			}

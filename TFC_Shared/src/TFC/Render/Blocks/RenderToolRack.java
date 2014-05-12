@@ -32,7 +32,6 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 			Block block, int modelId, RenderBlocks renderblocks) {
 		IBlockAccess blockAccess = renderblocks.blockAccess;
 		TileEntityToolRack te = (TileEntityToolRack)blockAccess.getBlockTileEntity(i, j, k);
-		renderblocks.renderAllFaces = true;
 		int dir = blockAccess.getBlockMetadata(i, j, k);
 		if(te != null)
 		{

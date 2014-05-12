@@ -27,7 +27,7 @@ public class TESRWorldItem extends TESRBase
 		{
 			int dir = te.worldObj.getBlockMetadata(te.xCoord, te.yCoord, te.zCoord);
 			Random R = new Random((te.xCoord + te.zCoord)*te.xCoord);
-			EntityItem customitem = new EntityItem(tileEntityRenderer.worldObj);			
+			EntityItem customitem = new EntityItem(tileEntityRenderer.worldObj);
 			customitem.hoverStart = 0f;
 			float blockScale = 1.0F;
 			float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
@@ -35,7 +35,7 @@ public class TESRWorldItem extends TESRBase
 			if (te.storage[0] != null)
 			{
 				GL11.glPushMatrix(); //start
-				GL11.glTranslatef((float)d + 0.5f, (float)d1 + 0.05f, (float)d2 + 0.5f);
+				GL11.glTranslatef((float)d + 0.5f, (float)d1 + 0.021f, (float)d2 + 0.5f);
 				if (RenderManager.instance.options.fancyGraphics)
 				{
 					GL11.glRotatef(90, 1.0f, 0.0F, 0.0F);

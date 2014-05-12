@@ -25,7 +25,7 @@ import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.NetworkTileEntity;
-import TFC.TileEntities.TileEntityPottery;
+import TFC.TileEntities.TEPottery;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -85,7 +85,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	{
 		if(!world.isRemote && entityplayer.isSneaking())
 		{
-			TileEntityPottery te;
+			TEPottery te;
 			if(side == 1)
 			{
 				int offset = 0;
@@ -99,9 +99,9 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 				}
 
 
-				if(world.getBlockTileEntity(x, y+offset, z) != null && world.getBlockTileEntity(x, y+offset, z) instanceof TileEntityPottery) 
+				if(world.getBlockTileEntity(x, y+offset, z) != null && world.getBlockTileEntity(x, y+offset, z) instanceof TEPottery) 
 				{
-					te = (TileEntityPottery) world.getBlockTileEntity(x, y+offset, z);
+					te = (TEPottery) world.getBlockTileEntity(x, y+offset, z);
 					if(hitX < 0.5 && hitZ < 0.5)
 					{
 						if(te.inventory[0] == null)

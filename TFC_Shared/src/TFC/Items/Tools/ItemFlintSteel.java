@@ -20,7 +20,7 @@ import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.TileEntities.TEForge;
-import TFC.TileEntities.TileEntityPottery;
+import TFC.TileEntities.TEPottery;
 
 public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 {
@@ -112,7 +112,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 			}
 			else if(world.getBlockId(x, y, z) == TFCBlocks.Pottery.blockID && surroundSolids)
 			{
-				TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y, z);
+				TEPottery te = (TEPottery) world.getBlockTileEntity(x, y, z);
 				te.StartPitFire();					
 				itemstack.damageItem(1, entityplayer);
 				return true;

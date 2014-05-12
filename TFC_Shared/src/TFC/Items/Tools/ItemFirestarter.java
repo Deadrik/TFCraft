@@ -21,7 +21,7 @@ import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TEForge;
-import TFC.TileEntities.TileEntityPottery;
+import TFC.TileEntities.TEPottery;
 
 public class ItemFirestarter extends ItemTerra
 {
@@ -145,7 +145,7 @@ public class ItemFirestarter extends ItemTerra
 				int chance = new Random().nextInt(100);
 				if(chance > 70)
 				{
-					TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y, z);
+					TEPottery te = (TEPottery) world.getBlockTileEntity(x, y, z);
 					te.StartPitFire();
 				}
 				itemstack.damageItem(1, entityplayer);
