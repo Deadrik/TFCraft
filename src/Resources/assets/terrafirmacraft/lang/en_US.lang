@@ -372,7 +372,7 @@ item.Spindle Head.Spindle Head.name=Spindle Head
 
 item.Fire Brick.Fire Brick.name=Fire Brick
 item.Fire Brick.Clay Fire Brick.name=Clay Fire Brick
-tile.Fire Brick.name=Fire Brick Block
+tile.FireBrick.name=Fire Brick Block
 
 #= Gems =
 item.Agate.Chipped.name=Chipped Agate
@@ -1769,10 +1769,10 @@ item.Zinc Double Sheet.name=Zinc Double Sheet
 #===========
 tile.Bellows.name=Bellows
 tile.Forge.name=Forge
-tile.Blast Furnace.name=Blast Furnace
-tile.Spawn Meter.name=Protection Meter
+tile.BlastFurnace.name=Blast Furnace
+tile.SpawnMeter.name=Protection Meter
 tile.Quern.name=Quern Base
-tile.Early Bloomery.name=Bloomery
+tile.EarlyBloomery.name=Bloomery
 tile.Crucible.name=Crucible
 tile.NestBox.name=Nest Box
 item.SluiceItem.name=Sluice
@@ -1831,7 +1831,7 @@ item.Red Steel Bucket Salt Water.name=Red Steel Bucket (Salt Water)
 item.Blue Steel Bucket Empty.name=Blue Steel Bucket (Empty)
 item.Blue Steel Bucket Lava.name=Blue Steel Bucket (Lava)
 
-item.Gold Pan.name=Gold Pan
+item.GoldPan.name=Gold Pan
 item.Gold Pan.Sand.name=Gold Pan - Sand
 item.Gold Pan.Gravel.name=Gold Pan - Gravel
 item.Gold Pan.Clay.name=Gold Pan - Clay
@@ -1875,8 +1875,8 @@ item.Rope.name=Rope
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Straw & Hide Bed
 tile.customBed.sleep.name=This bed is too uncomfortable to fall asleep
-tile.Basic Pipe.name=Pipe
-tile.Valve Pipe.name=Valve Pipe
+tile.BasicPipe.name=Pipe
+tile.ValvePipe.name=Valve Pipe
 tile.Torch.name=Torch
 tile.Chest.name=Chest
 tile.Bookshelf.name=Bookshelf

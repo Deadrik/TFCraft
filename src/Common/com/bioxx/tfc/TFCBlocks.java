@@ -587,8 +587,8 @@ public class TFCBlocks
 		Anvil2 = new com.bioxx.tfc.Blocks.Devices.BlockAnvil(8).setBlockName("Anvil2").setHardness(3).setResistance(100F);
 
 		Molten = new BlockMolten().setBlockName("Molten").setHardness(20);
-		BlastFurnace = new BlockBlastFurnace().setBlockName("Blast Furnace").setHardness(20).setLightLevel(0F);
-		EarlyBloomery = new BlockEarlyBloomery().setBlockName("Early Bloomery").setHardness(20).setLightLevel(0F);
+		BlastFurnace = new BlockBlastFurnace().setBlockName("BlastFurnace").setHardness(20).setLightLevel(0F);
+		EarlyBloomery = new BlockEarlyBloomery().setBlockName("EarlyBloomery").setHardness(20).setLightLevel(0F);
 		Bloom = new BlockBloom().setBlockName("Bloom").setHardness(20).setLightLevel(0F);
 		Sluice = new BlockSluice().setBlockName("Sluice").setHardness(2F).setResistance(20F);
 
@@ -618,7 +618,7 @@ public class TFCBlocks
 
 		ToolRack = new BlockToolRack().setHardness(3F).setBlockName("Toolrack");
 		ToolRack2 = new BlockToolRack2().setHardness(3F).setBlockName("Toolrack");
-		SpawnMeter = new BlockSpawnMeter().setHardness(3F).setBlockName("Spawn Meter");
+		SpawnMeter = new BlockSpawnMeter().setHardness(3F).setBlockName("SpawnMeter");
 		FoodPrep = new BlockFoodPrep().setHardness(1F).setBlockName("FoodPrep");
 		Quern = new BlockQuern().setHardness(3F).setBlockName("Quern");
 
@@ -666,8 +666,8 @@ public class TFCBlocks
 		ArmourStand = new BlockStand().setBlockName("ArmourStand").setHardness(2);
 		ArmourStand2 = new BlockStand2().setBlockName("ArmourStand").setHardness(2);
 
-		SteamPipe = new BlockPipeBasic(Material.iron).setBlockName("Basic Pipe").setHardness(2);
-		SteamPipeValve = new BlockPipeValve(Material.iron).setBlockName("Valve Pipe").setHardness(2);
+		SteamPipe = new BlockPipeBasic(Material.iron).setBlockName("BasicPipe").setHardness(2);
+		SteamPipeValve = new BlockPipeValve(Material.iron).setBlockName("ValvePipe").setHardness(2);
 
 		BerryBush = new BlockBerryBush().setBlockName("BerryBush").setHardness(0.3f).setStepSound(Block.soundTypeGrass);
 		Crops = new BlockCrop().setBlockName("crops").setHardness(0.3F).setStepSound(Block.soundTypeGrass);
@@ -684,7 +684,7 @@ public class TFCBlocks
 		SeaGrassStill = new BlockTallSeaGrassStill().setBlockName("SeaGrassStill").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
 		SeaGrassFrozen = (new BlockFrozenSeaGrass()).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("SeaGrassIce");
 
-		FireBrick = new BlockFireBrick().setBlockName("Fire Brick").setHardness(8);
+		FireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);
 		MetalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(8).setResistance(20f);
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);

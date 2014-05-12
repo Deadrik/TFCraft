@@ -1015,7 +1015,7 @@ public class TFCItems
 		Leash = new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFCTools);
 		
 		minecartCrate = new ItemCustomMinecart(1).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
-		GoldPan = new ItemGoldPan().setUnlocalizedName("Gold Pan");
+		GoldPan = new ItemGoldPan().setUnlocalizedName("GoldPan");
 		SluiceItem = new ItemSluice().setFolder("devices/").setUnlocalizedName("SluiceItem").setCreativeTab(TFCTabs.TFCDevices);
 
 		ProPickBismuthBronze = new ItemProPick().setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses);
