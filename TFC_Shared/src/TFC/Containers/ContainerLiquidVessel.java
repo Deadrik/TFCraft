@@ -190,11 +190,14 @@ public class ContainerLiquidVessel extends ContainerTFC
 								nbt.removeTag("MetalAmount");
 								nbt.removeTag("TempTimer");
 								player.inventory.getStackInSlot(bagsSlotNum).setItemDamage(1);
-								player.triggerAchievement(TFC_Achievements.achCopperAge);
+								//player.triggerAchievement(TFC_Achievements.achCopperAge);
 							} else 
 							{
 								nbt.setInteger("MetalAmount", metalAmount-1);
 							}
+						}
+						else{
+							player.triggerAchievement(TFC_Achievements.achCopperAge);
 						}
 					}
 				}
