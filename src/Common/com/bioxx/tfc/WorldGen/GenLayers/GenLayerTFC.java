@@ -35,21 +35,9 @@ public abstract class GenLayerTFC extends GenLayer
 	 */
 	public static GenLayerTFC[] initializeAllBiomeGenerators(long par0, TFCWorldType par2)
 	{
-		GenLayerTFC continent = genContinent(0);
-		//GenLayerTFC continent2 = genContinent(1);
+		GenLayerTFC continent = genContinent(0, false);
+		GenLayerTFC continent2 = genContinent(0, false);
 		byte var4 = 4;
-
-		//Create Rivers
-		GenLayerTFC continentCopy = GenLayerZoomTFC.magnify(1000L, continent, 2);
-		drawImage(512, continentCopy, "9 ContinentsZoom");
-		GenLayerRiverInitTFC riverInit = new GenLayerRiverInitTFC(100L, continentCopy);
-		drawImage(512, riverInit, "10 RiverInit");
-		continentCopy = GenLayerZoomTFC.magnify(1000L, riverInit, var4+2);
-		drawImage(512, continentCopy, "11 RiverInitZoom");
-		GenLayerRiverTFC riverGen = new GenLayerRiverTFC(1L, continentCopy);
-		drawImage(512, riverGen, "12 River");
-		GenLayerSmoothTFC smoothRiver = new GenLayerSmoothTFC(1000L, riverGen);
-		drawImage(512, smoothRiver, "13 SmoothRiver");
 
 		//Create Biomes
 		GenLayerTFC continentCopy2 = GenLayerZoomTFC.magnify(1000L, continent, 0);
@@ -75,6 +63,20 @@ public abstract class GenLayerTFC extends GenLayer
 			}
 		}
 
+		//Create Rivers
+		GenLayerTFC continentCopy = GenLayerZoomTFC.magnify(1000L, continent2, 2);
+		drawImage(512, continentCopy, "9 ContinentsZoom");
+		GenLayerRiverInitTFC riverInit = new GenLayerRiverInitTFC(100L, continentCopy);
+		drawImage(512, riverInit, "10 RiverInit");
+		/*GenLayerRemoveOrphanRiver riverorphan = new GenLayerRemoveOrphanRiver(100L, riverInit);
+		drawImage(512, riverorphan, "10b RiverOrphan");*/
+		continentCopy = GenLayerZoomTFC.magnify(1000L, riverInit, var4+2);
+		drawImage(512, continentCopy, "11 RiverInitZoom");
+		GenLayerRiverTFC riverGen = new GenLayerRiverTFC(1L, continentCopy);
+		drawImage(512, riverGen, "12 River");
+		GenLayerSmoothTFC smoothRiver = new GenLayerSmoothTFC(1000L, riverGen);
+		drawImage(512, smoothRiver, "13 SmoothRiver");
+
 		GenLayerSmoothTFC var19 = new GenLayerSmoothTFC(1000L, (GenLayerTFC)var18);
 		drawImage(512, var19, "19 SmoothBiome");
 		GenLayerRiverMixTFC var20 = new GenLayerRiverMixTFC(100L, var19, smoothRiver);
@@ -86,15 +88,20 @@ public abstract class GenLayerTFC extends GenLayer
 		return new GenLayerTFC[] {var20, var8, var20};
 	}
 
-	public static GenLayerTFC genContinent(long seed)
+	public static GenLayerTFC genContinent(long seed, boolean oceanReduction)
 	{
 		GenLayerIslandTFC continentStart = new GenLayerIslandTFC(1L+seed);
 		drawImage(512, continentStart, "0 ContinentsStart");
 		GenLayerFuzzyZoomTFC continentFuzzyZoom = new GenLayerFuzzyZoomTFC(2000L, continentStart);
 		drawImage(512, continentFuzzyZoom, "1 ContinentsFuzzyZoom");
-		GenLayerAddIslandTFC var10 = new GenLayerAddIslandTFC(1L, continentFuzzyZoom);
+		GenLayerTFC var10 = new GenLayerAddIslandTFC(1L, continentFuzzyZoom);
 		drawImage(512, var10, "2 ContinentsAddIsland");
-		GenLayerZoomTFC var11 = new GenLayerZoomTFC(2001L, var10);
+		if(oceanReduction)
+		{
+			var10 = new GenLayerRemoveOcean(2002L, var10, 12, true);
+			drawImage(512, var10, "2 RemoveOcean");
+		}
+		GenLayerTFC var11 = new GenLayerZoomTFC(2001L, var10);
 		drawImage(512, var11, "3 ContinentsAddIslandZoom");
 		var10 = new GenLayerAddIslandTFC(2L, var11);
 		drawImage(512, var10, "4 ContinentsAddIsland2");
@@ -102,6 +109,11 @@ public abstract class GenLayerTFC extends GenLayer
 		drawImage(512, var11, "5 ContinentsAddIslandZoom2");
 		var10 = new GenLayerAddIslandTFC(3L, var11);
 		drawImage(512, var10, "6 ContinentsAddIsland3");
+		if(oceanReduction)
+		{
+			var10 = new GenLayerRemoveOcean(2002L, var10, 1, false);
+			drawImage(512, var10, "6 RemoveOcean");
+		}
 		var11 = new GenLayerZoomTFC(2003L, var10);
 		drawImage(512, var11, "7 ContinentsAddIslandZoom3");
 		GenLayerTFC continent = new GenLayerAddIslandTFC(4L, var11);

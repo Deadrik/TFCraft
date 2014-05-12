@@ -19,18 +19,23 @@ public class GenLayerRiverInitTFC extends GenLayerTFC
 	@Override
 	public int[] getInts(int xCoord, int zCoord, int xSize, int zSize)
 	{
-		int[] var5 = this.parent.getInts(xCoord, zCoord, xSize, zSize);
-		int[] var6 = IntCache.getIntCache(xSize * zSize);
+		int[] parentCache = this.parent.getInts(xCoord, zCoord, xSize, zSize);
+		int[] outCache = IntCache.getIntCache(xSize * zSize);
 
-		for (int var7 = 0; var7 < zSize; ++var7)
+		for (int z = 0; z < zSize; ++z)
 		{
-			for (int var8 = 0; var8 < xSize; ++var8)
+			for (int x = 0; x < xSize; ++x)
 			{
-				this.initChunkSeed(var8 + xCoord, var7 + zCoord);
-				int id = var5[var8 + var7 * xSize];
-				var6[var8 + var7 * xSize] = !TFC_Core.isOceanicBiome(id) && !TFC_Core.isMountainBiome(id) ? 1 : 0;
+				this.initChunkSeed(x + xCoord, z + zCoord);
+				int index = x + z * xSize;
+				int xn = index-1;
+				int xp = index+1;
+				int zn = index-zSize;
+				int zp = index+zSize;
+				int id = parentCache[index];
+				outCache[index] = !TFC_Core.isOceanicBiome(id) && !TFC_Core.isMountainBiome(id) ? 1 : 0;
 			}
 		}
-		return var6;
+		return outCache;
 	}
 }

@@ -10,6 +10,13 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 {
 	private GenLayer biomePatternGeneratorChain;
 	private GenLayer riverPatternGeneratorChain;
+	int[] layerBiomes;
+	int[] layerRivers;
+	int[] layerOut;
+	int xn = 0;
+	int xp = 0;
+	int zn = 0;
+	int zp = 0;
 
 	public GenLayerRiverMixTFC(long par1, GenLayer par3GenLayer, GenLayer par4GenLayer)
 	{
@@ -25,50 +32,51 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 	@Override
 	public int[] getInts(int x, int z, int xSize, int zSize)
 	{
-		int[] layerBiomes = this.biomePatternGeneratorChain.getInts(x, z, xSize, zSize);
-		int[] layerRivers = this.riverPatternGeneratorChain.getInts(x, z, xSize, zSize);
-		int[] layerOut = IntCache.getIntCache(xSize * zSize);
+		layerBiomes = this.biomePatternGeneratorChain.getInts(x, z, xSize, zSize);
+		layerRivers = this.riverPatternGeneratorChain.getInts(x, z, xSize, zSize);
+		layerOut = IntCache.getIntCache(xSize * zSize);
 
 		for (int index = 0; index < xSize * zSize; ++index)
 		{
 			int b = layerBiomes[index];
 			int r = layerRivers[index];
 
-			int xn = index-1;
-			int xp = index+1;
-			int zn = index-zSize;
-			int zp = index+zSize;
+			xn = index-1;
+			xp = index+1;
+			zn = index-zSize;
+			zp = index+zSize;
 
 			if (TFC_Core.isOceanicBiome(b) || TFC_Core.isMountainBiome(b))
 				layerOut[index] = b;
-			else if (layerRivers[index] > 0)
+			else if (r > 0)
 			{
 				layerOut[index] = r;
 
+				//Here we make sure that rivers dont run along ocean/beach splits. We turn the river into oceans.
 				if (TFC_Core.isBeachBiome(b))
 				{
 					layerOut[index] = TFCBiome.ocean.biomeID;
-					if(xn >= 0 && layerOut[xn] == TFCBiome.river.biomeID)
+					if(inBounds(xn, layerOut) && layerOut[xn] == TFCBiome.river.biomeID)
 					{
 						layerOut[xn] = TFCBiome.ocean.biomeID;
 					}
-					if(zn >= 0 && layerOut[zn] == TFCBiome.river.biomeID)
+					if(inBounds(zn, layerOut) && layerOut[zn] == TFCBiome.river.biomeID)
 					{
 						layerOut[zn] = TFCBiome.ocean.biomeID;
 					}
-					if(zp < layerBiomes.length && TFC_Core.isOceanicBiome(layerBiomes[zp]) && layerRivers[zn] == 0)
+					if(inBounds(zp, layerOut) && TFC_Core.isOceanicBiome(layerBiomes[zp]) && layerRivers[zp] == 0)
 					{
 						layerOut[index] = b;
 					}
-					if(zn >= 0 && TFC_Core.isOceanicBiome(layerBiomes[zn]) && layerRivers[zp] == 0)
+					if(inBounds(zn, layerOut) && TFC_Core.isOceanicBiome(layerBiomes[zn]) && layerRivers[zn] == 0)
 					{
 						layerOut[index] = b;
 					}
-					if(xn >= 0 && TFC_Core.isOceanicBiome(layerBiomes[xn]) && layerRivers[xp] == 0)
+					if(inBounds(xn, layerOut) && TFC_Core.isOceanicBiome(layerBiomes[xn]) && layerRivers[xn] == 0)
 					{
 						layerOut[index] = b;
 					}
-					if(xp < layerBiomes.length && TFC_Core.isOceanicBiome(layerBiomes[xp]) && layerRivers[xn] == 0)
+					if(inBounds(xp, layerOut) && TFC_Core.isOceanicBiome(layerBiomes[xp]) && layerRivers[xp] == 0)
 					{
 						layerOut[index] = b;
 					}
@@ -77,27 +85,41 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 			else
 				layerOut[index] = b;
 
-			if(layerOut[index] == TFCBiome.river.biomeID)
-			{
-				if(xn >= 0 && layerBiomes[xn] == TFCBiome.lake.biomeID)
-				{
-					layerOut[index] = TFCBiome.lake.biomeID;
-				}
-				if(zn >= 0 && layerBiomes[zn] == TFCBiome.lake.biomeID)
-				{
-					layerOut[index] = TFCBiome.lake.biomeID;
-				}
-				if(xp < layerBiomes.length && layerBiomes[xp] == TFCBiome.lake.biomeID)
-				{
-					layerOut[index] = TFCBiome.lake.biomeID;
-				}
-				if(zp < layerBiomes.length && layerBiomes[zp] == TFCBiome.lake.biomeID)
-				{
-					layerOut[index] = TFCBiome.lake.biomeID;
-				}
-			}
+			//Similar to above, if we're near a lake, we turn the river into lake.
+			removeRiver(index, TFCBiome.lake.biomeID);
+			removeRiver(index, TFCBiome.MountainsEdge.biomeID);
 		}
 		return layerOut;
+	}
+
+	public void removeRiver(int index, int biomeToReplaceWith)
+	{		
+		if(layerOut[index] == TFCBiome.river.biomeID)
+		{
+			if(xn >= 0 && layerBiomes[xn] == biomeToReplaceWith)
+			{
+				layerOut[index] = biomeToReplaceWith;
+			}
+			if(zn >= 0 && layerBiomes[zn] == biomeToReplaceWith)
+			{
+				layerOut[index] = biomeToReplaceWith;
+			}
+			if(xp < layerBiomes.length && layerBiomes[xp] == biomeToReplaceWith)
+			{
+				layerOut[index] = biomeToReplaceWith;
+			}
+			if(zp < layerBiomes.length && layerBiomes[zp] == biomeToReplaceWith)
+			{
+				layerOut[index] = biomeToReplaceWith;
+			}
+		}
+	}
+
+	public boolean inBounds(int index, int[] array)
+	{
+		if(index < array.length && index >= 0)
+			return true;
+		return false;
 	}
 
 	/**

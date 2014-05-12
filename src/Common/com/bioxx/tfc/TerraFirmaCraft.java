@@ -21,7 +21,7 @@ import com.bioxx.tfc.Commands.GetBodyTemp;
 import com.bioxx.tfc.Commands.GetRocksCommand;
 import com.bioxx.tfc.Commands.GetSpawnProtectionCommand;
 import com.bioxx.tfc.Commands.GetTreesCommand;
-import com.bioxx.tfc.Commands.PrintBiomeMapCommand;
+import com.bioxx.tfc.Commands.PrintImageMapCommand;
 import com.bioxx.tfc.Commands.RemoveAreaCommand;
 import com.bioxx.tfc.Commands.RemoveChunkCommand;
 import com.bioxx.tfc.Commands.SetPlayerStatsCommand;
@@ -258,7 +258,7 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new DebugModeCommand());
 		evt.registerServerCommand(new CommandTime());
 		evt.registerServerCommand(new GenCommand());
-		evt.registerServerCommand(new PrintBiomeMapCommand());
+		evt.registerServerCommand(new PrintImageMapCommand());
 	}	
 
 	public void loadSettings()
