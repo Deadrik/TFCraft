@@ -479,7 +479,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					var48 = var48 * par6 / 16.0D;
 					double var28 = par6 / 2.0D + var48 * 4.0D;
 					double var30 = 0.0D;
-					double var32 = (var46 - var28) * 12.0D * 256.0D / 256.0D / (/*2.70*/ + var26);
+					double var32 = (var46 - var28) * 12.0D * 256.0D / 256.0D / (2.70 + var26);
 
 					if (var32 < 0.0D)
 						var32 *= 4.0D;
