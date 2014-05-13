@@ -83,12 +83,6 @@ public class ItemTerraTool extends ItemTool implements ISize
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack is)
-	{
-		return StatCollector.translateToLocal(getUnlocalizedName(is).replace("item.", ""));
-	}
-	
-	@Override
 	public EnumItemReach getReach(ItemStack is)
 	{
 		return EnumItemReach.SHORT;

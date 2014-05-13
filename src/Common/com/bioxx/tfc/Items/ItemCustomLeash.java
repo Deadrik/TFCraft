@@ -102,12 +102,6 @@ public class ItemCustomLeash extends ItemLead implements ISize
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack itemstack)
-	{
-		return StatCollector.translateToLocal(getUnlocalizedName(itemstack).replace(" ", ""));
-	}
-
-	@Override
 	public EnumSize getSize(ItemStack is)
 	{
 		return EnumSize.MEDIUM;

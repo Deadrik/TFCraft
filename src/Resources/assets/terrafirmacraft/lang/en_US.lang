@@ -372,7 +372,7 @@ item.Spindle Head.Spindle Head.name=Spindle Head
 
 item.Fire Brick.Fire Brick.name=Fire Brick
 item.Fire Brick.Clay Fire Brick.name=Clay Fire Brick
-tile.Fire Brick.name=Fire Brick Block
+tile.FireBrick.name=Fire Brick Block
 
 #= Gems =
 item.Agate.Chipped.name=Chipped Agate
@@ -1147,13 +1147,33 @@ tile.Toolrack.Willow.name=Willow Tool Rack
 #=======================
 
 #== Stone Heads ==
-item.Stone Axe Head.name=Stone Axe Head
-item.Stone Chisel Head.name=Stone Chisel Head
 item.Stone Hammer Head.name=Stone Hammer Head
-item.Stone Hoe Head.name=Stone Hoe Head
-item.Stone Javelin Head.name=Stone Javelin Head
 item.Stone Knife Blade.name=Stone Knife Blade
-item.Stone Shovel Head.name=Stone Shovel Head
+
+item.IgIn Stone Axe Head.name=Stone Axe Head
+item.IgIn Stone Chisel Head.name=Stone Chisel Head
+item.IgIn Stone Hoe Head.name=Stone Hoe Head
+item.IgIn Stone Javelin Head.name=Stone Javelin Head
+item.IgIn Stone Shovel Head.name=Stone Shovel Head
+
+item.Sed Stone Axe Head.name=Stone Axe Head
+item.Sed Stone Chisel Head.name=Stone Chisel Head
+item.Sed Stone Hoe Head.name=Stone Hoe Head
+item.Sed Stone Javelin Head.name=Stone Javelin Head
+item.Sed Stone Shovel Head.name=Stone Shovel Head
+
+item.IgEx Stone Axe Head.name=Stone Axe Head
+item.IgEx Stone Chisel Head.name=Stone Chisel Head
+item.IgEx Stone Hoe Head.name=Stone Hoe Head
+item.IgEx Stone Javelin Head.name=Stone Javelin Head
+item.IgEx Stone Shovel Head.name=Stone Shovel Head
+
+item.MM Stone Axe Head.name=Stone Axe Head
+item.MM Stone Chisel Head.name=Stone Chisel Head
+item.MM Stone Hoe Head.name=Stone Hoe Head
+item.MM Stone Javelin Head.name=Stone Javelin Head
+item.MM Stone Shovel Head.name=Stone Shovel Head
+
 
 #== Stone Tools ==
 item.Stone Axe.name=Stone Axe
@@ -1161,10 +1181,6 @@ item.IgIn Stone Axe.name=Stone Axe
 item.Sed Stone Axe.name=Stone Axe
 item.IgEx Stone Axe.name=Stone Axe
 item.MM Stone Axe.name=Stone Axe
-item.Bone IgIn Stone Axe.name=Stone Axe
-item.Bone Sed Stone Axe.name=Stone Axe
-item.Bone IgEx Stone Axe.name=Stone Axe
-item.Bone MM Stone Axe.name=Stone Axe
 
 item.Stone Chisel.name=Stone Chisel
 
@@ -1175,12 +1191,12 @@ item.IgIn Stone Hoe.name=Stone Hoe
 item.Sed Stone Hoe.name=Stone Hoe
 item.IgEx Stone Hoe.name=Stone Hoe
 item.MM Stone Hoe.name=Stone Hoe
-item.Bone IgIn Stone Hoe.name=Stone Hoe
-item.Bone Sed Stone Hoe.name=Stone Hoe
-item.Bone IgEx Stone Hoe.name=Stone Hoe
-item.Bone MM Stone Hoe.name=Stone Hoe
 
 item.Stone Javelin.name=Stone Javelin
+item.IgIn Stone Javelin.name=Stone Javelin
+item.Sed Stone Javelin.name=Stone Javelin
+item.IgEx Stone Javelin.name=Stone Javelin
+item.MM Stone Javelin.name=Stone Javelin
 
 item.Stone Knife.name=Stone Knife
 
@@ -1189,10 +1205,6 @@ item.IgIn Stone Shovel.name=Stone Shovel
 item.Sed Stone Shovel.name=Stone Shovel
 item.IgEx Stone Shovel.name=Stone Shovel
 item.MM Stone Shovel.name=Stone Shovel
-item.Bone IgIn Stone Shovel.name=Stone Shovel
-item.Bone Sed Stone Shovel.name=Stone Shovel
-item.Bone IgEx Stone Shovel.name=Stone Shovel
-item.Bone MM Stone Shovel.name=Stone Shovel
 
 #== Metal Heads ==
 #=== Axe Head ===
@@ -1291,7 +1303,7 @@ item.Blue Steel ProPick Head.name=Blue Steel Prospector's Pick Head
 item.Bronze ProPick Head.name=Bronze Prospector's Pick Head
 item.Copper ProPick Head.name=Copper Prospector's Pick Head
 item.Red Steel ProPick Head.name=Red Steel Prospector's Pick Head
-item.Stee lProPick Head.name=Steel Prospector's Pick Head
+item.Steel ProPick Head.name=Steel Prospector's Pick Head
 item.Wrought Iron ProPick Head.name=Wrought Iron Prospector's Pick Head
 
 #=== Saw Blade ===
@@ -1513,10 +1525,10 @@ item.Copper Unfinished Helmet2.name=Unfinished Copper Helmet Stage 2
 item.Red Steel Unfinished Helmet2.name=Unfinished Red Steel Helmet Stage 2
 item.Steel Unfinished Helmet2.name=Unfinished Steel Helmet Stage 2
 item.Wrought Iron Unfinished Helmet2.name=Unfinished Wrought Iron Helmet Stage 2
-item.Bismuth BronzeHelmet.name=Bismuth Bronze Helmet
-item.Black BronzeHelmet.name=Black Bronze Helmet
-item.Black SteelHelmet.name=Black Steel Helmet
-item.Blue SteelHelmet.name=Blue Steel Helmet
+item.Bismuth Bronze Helmet.name=Bismuth Bronze Helmet
+item.Black Bronze Helmet.name=Black Bronze Helmet
+item.Black Steel Helmet.name=Black Steel Helmet
+item.Blue Steel Helmet.name=Blue Steel Helmet
 item.Bronze Helmet.name=Bronze Helmet
 item.Copper Helmet.name=Copper Helmet
 item.Red Steel Helmet.name=Red Steel Helmet
@@ -1757,10 +1769,10 @@ item.Zinc Double Sheet.name=Zinc Double Sheet
 #===========
 tile.Bellows.name=Bellows
 tile.Forge.name=Forge
-tile.Blast Furnace.name=Blast Furnace
-tile.Spawn Meter.name=Protection Meter
+tile.BlastFurnace.name=Blast Furnace
+tile.SpawnMeter.name=Protection Meter
 tile.Quern.name=Quern Base
-tile.Early Bloomery.name=Bloomery
+tile.EarlyBloomery.name=Bloomery
 tile.Crucible.name=Crucible
 tile.NestBox.name=Nest Box
 item.SluiceItem.name=Sluice
@@ -1792,6 +1804,7 @@ tile.dirt.name=Dirt
 tile.sand.name=Sand
 tile.Peat.name=Peat
 tile.LooseRock.name=Debris
+tile.Ice.name=Ice
 
 #=================
 #= Miscellaneous =
@@ -1803,6 +1816,7 @@ item.stick.name=Stick
 item.coal.coal.name=Coal
 item.coal.charcoal.name=Charcoal
 item.Fertilizer.name=Fertilizer
+item.Reeds.name=Sugar Canes
 
 item.Wooden Bucket Empty.name=Wooden Bucket (Empty)
 item.Wooden Bucket Water.name=Wooden Bucket (Fresh Water)
@@ -1817,7 +1831,7 @@ item.Red Steel Bucket Salt Water.name=Red Steel Bucket (Salt Water)
 item.Blue Steel Bucket Empty.name=Blue Steel Bucket (Empty)
 item.Blue Steel Bucket Lava.name=Blue Steel Bucket (Lava)
 
-item.Gold Pan.name=Gold Pan
+item.GoldPan.name=Gold Pan
 item.Gold Pan.Sand.name=Gold Pan - Sand
 item.Gold Pan.Gravel.name=Gold Pan - Gravel
 item.Gold Pan.Clay.name=Gold Pan - Clay
@@ -1827,9 +1841,9 @@ item.Firestarter.name=Fire Starter
 
 item.Quern.name=Handstone
 item.Blueprint.name=Blueprint
-item.Wool Yarn.name=Wool Yarn
+item.WoolYarn.name=Wool Yarn
 item.Wool.name=Wool
-item.Wool Cloth.name=Wool Cloth
+item.WoolCloth.name=Wool Cloth
 item.Mortar.name=Mortar
 item.Vinegar.name=Vinegar
 
@@ -1861,10 +1875,13 @@ item.Rope.name=Rope
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Straw & Hide Bed
 tile.customBed.sleep.name=This bed is too uncomfortable to fall asleep
-tile.Basic Pipe.name=Pipe
-tile.Valve Pipe.name=Valve Pipe
+tile.BasicPipe.name=Pipe
+tile.ValvePipe.name=Valve Pipe
 tile.Torch.name=Torch
 tile.Chest.name=Chest
+tile.Bookshelf.name=Bookshelf
+tile.Workbench.name=Workbench
+tile.ButtonWood.name=Wooden Button
 
 #= Misc. Plants =
 item.Sugarcane.name=Sugarcane
