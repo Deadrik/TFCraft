@@ -45,7 +45,26 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 		}
 		for(int index = 0; index < dd; index++)
 		{
-			if(te.data.get(index))
+			if(te.solidCheck[index >> 3])
+			{
+				float minX = 0;
+				float maxX = 1;
+				float minY = div * (index & 7);
+				float maxY = minY + div;
+				float minZ = 0;
+				float maxZ = 1;
+
+				if(!breaking)
+				{
+					renderer.overrideBlockTexture = TFCBlocks.WoodConstruct.getIcon(0, te.woodTypes[index]);
+				}
+				renderer.uvRotateTop = 3;
+				renderer.uvRotateBottom = 3;
+				renderer.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
+				renderer.renderStandardBlockWithColorMultiplier(block, i, j, k, 1, 1, 1);
+				index+=8;
+			}
+			else if(te.data.get(index))
 			{        		
 				float minX = 0;
 				float maxX = 1;
@@ -61,7 +80,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 				renderer.uvRotateTop = 3;
 				renderer.uvRotateBottom = 3;
 				renderer.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
-				renderer.renderStandardBlock(block, i, j, k);
+				renderer.renderStandardBlockWithColorMultiplier(block, i, j, k, 1, 1, 1);
 			}
 		}
 		//Fix the rotations
@@ -69,7 +88,29 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 		renderer.uvRotateBottom = 0;
 		for(int index = 0; index < dd; index++)
 		{
-			if(te.data.get(index + dd))
+			if(te.solidCheck[(dd+index) >> 3])
+			{
+				float minX = div * (index & 7);
+				float maxX = 1;
+				float minY = 0;
+				float maxY = 1;
+				float minZ = div * (index >> 3);
+				float maxZ = minZ + div;
+
+
+				if(!breaking)
+				{
+					renderer.overrideBlockTexture = TFCBlocks.WoodConstruct.getIcon(0, te.woodTypes[index+dd]);
+				}
+				renderer.uvRotateNorth = 1;
+				renderer.uvRotateSouth = 1;
+				renderer.uvRotateEast = 1;
+				renderer.uvRotateWest = 1;
+				renderer.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
+				renderer.renderStandardBlockWithColorMultiplier(block, i, j, k, 1, 1, 1);
+				index+=8;
+			}
+			else if(te.data.get(index + dd))
 			{        		
 				float minX = div * (index & 7);
 				float maxX = minX + div;
@@ -88,7 +129,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 				renderer.uvRotateEast = 1;
 				renderer.uvRotateWest = 1;
 				renderer.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
-				renderer.renderStandardBlock(block, i, j, k);
+				renderer.renderStandardBlockWithColorMultiplier(block, i, j, k, 1, 1, 1);
 			}
 		}
 
@@ -98,20 +139,39 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 		renderer.uvRotateEast = 0;
 		renderer.uvRotateWest = 0;
 
-		for(int z = 0; z < dd; z++)
+		for(int index = 0; index < dd; index++)
 		{
-			if(te.data.get(z+dd2))
-			{        		
-				float minX = div * (z & 7);
+			if(te.solidCheck[(dd2+index) >> 3])
+			{
+				float minX = div * (index & 7);
 				float maxX = minX + div;
-				float minY = div * (z >> 3);
+				float minY = 0;
+				float maxY = 1;
+				float minZ = 0;
+				float maxZ = 1;
+
+				if(!breaking)
+				{
+					renderer.overrideBlockTexture = TFCBlocks.WoodConstruct.getIcon(0, te.woodTypes[index+dd2]);
+				}
+				renderer.uvRotateTop = 1;
+				renderer.uvRotateBottom = 1;
+				renderer.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
+				renderer.renderStandardBlockWithColorMultiplier(block, i, j, k, 1, 1, 1);
+				index+=8;
+			}
+			else if(te.data.get(index+dd2))
+			{        		
+				float minX = div * (index & 7);
+				float maxX = minX + div;
+				float minY = div * (index >> 3);
 				float maxY = minY + div;
 				float minZ = 0;
 				float maxZ = 1;
 
 				if(!breaking)
 				{
-					renderer.overrideBlockTexture = TFCBlocks.WoodConstruct.getIcon(0, te.woodTypes[z+dd2]);
+					renderer.overrideBlockTexture = TFCBlocks.WoodConstruct.getIcon(0, te.woodTypes[index+dd2]);
 				}
 				renderer.uvRotateTop = 1;
 				renderer.uvRotateBottom = 1;
