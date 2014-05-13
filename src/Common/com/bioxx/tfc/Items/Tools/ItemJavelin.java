@@ -132,6 +132,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 
 		world.playSoundAtEntity(player, "random.bow", 1.0F, 0.3F);
 		javelin.setDamageTaken((short) itemstack.getItemDamage());
+		javelin.setPickupItem(itemstack.getItem());
 
 		player.inventory.mainInventory[player.inventory.currentItem] = null;
 

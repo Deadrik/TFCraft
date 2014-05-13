@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -17,6 +18,7 @@ import com.bioxx.tfc.api.Enums.EnumDamageType;
 public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 {
 	public short damageTaken = 0;
+	public Item pickupItem = TFCItems.Arrow;
 
 	public EntityProjectileTFC(World par1World)
 	{
@@ -43,6 +45,11 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 		damageTaken = d;
 	}
 
+	public void setPickupItem(Item item)
+	{
+		pickupItem = item;
+	}
+
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player)
 	{
@@ -56,7 +63,7 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 			{
 				boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
 
-				EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(TFCItems.Arrow, 1, this.damageTaken));
+				EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.pickupItem, 1, this.damageTaken));
 				EntityItemPickupEvent event = new EntityItemPickupEvent(player, ei);
 
 				if (MinecraftForge.EVENT_BUS.post(event))
