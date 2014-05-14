@@ -1,7 +1,5 @@
 package com.bioxx.tfc.Render.TESR;
 
-import java.util.Calendar;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;
@@ -13,109 +11,85 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
-import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
+import com.bioxx.tfc.TileEntities.TEChest;
+import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.common.FMLLog;
 
 public class TESRChest extends TileEntitySpecialRenderer
 {
-	private static final ResourceLocation field_110635_a = new ResourceLocation("textures/entity/chest/trapped_double.png");
-	private static final ResourceLocation field_110634_c = new ResourceLocation("textures/entity/chest/christmas_double.png");
-	private static final ResourceLocation field_110632_d = new ResourceLocation("textures/entity/chest/normal_double.png");
-	private static final ResourceLocation field_110633_e = new ResourceLocation("textures/entity/chest/trapped.png");
-	private static final ResourceLocation field_110630_f = new ResourceLocation("textures/entity/chest/christmas.png");
-	private static final ResourceLocation field_110631_g = new ResourceLocation("textures/entity/chest/normal.png");
-
+	private static ResourceLocation[] texNormal;
+	private static ResourceLocation[] texNormalDouble;
 	/** The normal small chest model. */
 	private ModelChest chestModel = new ModelChest();
 
 	/** The large double chest model. */
 	private ModelChest largeChestModel = new ModelLargeChest();
 
-	/** If true, chests will be rendered with the Christmas present textures. */
-	private boolean isChristmas;
-
 	public TESRChest()
 	{
-		Calendar calendar = Calendar.getInstance();
-
-		if (calendar.get(2) + 1 == 12 && calendar.get(5) >= 24 && calendar.get(5) <= 26)
+		if(texNormal == null)
 		{
-			this.isChristmas = true;
+			texNormal = new ResourceLocation[Global.WOOD_ALL.length];
+			texNormalDouble = new ResourceLocation[Global.WOOD_ALL.length];
+			for(int i = 0; i < Global.WOOD_ALL.length; i++)
+			{
+				texNormal[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/normal_" + Global.WOOD_ALL[i] + ".png");
+				texNormalDouble[i] = new ResourceLocation(Reference.ModID+":textures/models/chest/normal_double_" + Global.WOOD_ALL[i] + ".png");
+			}
 		}
 	}
 
 	/**
 	 * Renders the TileEntity for the chest at a position.
 	 */
-	public void renderTileEntityChestAt(TileEntityChestTFC par1TileEntityChest, double par2, double par4, double par6, float par8)
+	public void renderTileEntityChestAt(TEChest te, double par2, double par4, double par6, float par8)
 	{
 		int i;
 
-		if (!par1TileEntityChest.hasWorldObj())
+		if (!te.hasWorldObj())
 		{
 			i = 0;
 		}
 		else
 		{
-			Block block = par1TileEntityChest.getBlockType();
-			i = par1TileEntityChest.getBlockMetadata();
+			Block block = te.getBlockType();
+			i = te.getBlockMetadata();
 
 			if (block instanceof BlockChestTFC && i == 0)
 			{
 				try
 				{
-					((BlockChest)block).func_149954_e/*unifyAdjacentChests*/(par1TileEntityChest.getWorldObj(), par1TileEntityChest.xCoord, par1TileEntityChest.yCoord, par1TileEntityChest.zCoord);
+					((BlockChest)block).func_149954_e/*unifyAdjacentChests*/(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord);
 				}
 				catch (ClassCastException e)
 				{
 					FMLLog.severe("Attempted to render a chest at %d,  %d, %d that was not a chest",
-							par1TileEntityChest.xCoord, par1TileEntityChest.yCoord, par1TileEntityChest.zCoord);
+							te.xCoord, te.yCoord, te.zCoord);
 				}
-				i = par1TileEntityChest.getBlockMetadata();
+				i = te.getBlockMetadata();
 			}
 
-			par1TileEntityChest.checkForAdjacentChests();
+			te.checkForAdjacentChests();
 		}
 
-		if (par1TileEntityChest.adjacentChestZNeg == null && par1TileEntityChest.adjacentChestXNeg == null)
+		if (te.adjacentChestZNeg == null && te.adjacentChestXNeg == null)
 		{
 			ModelChest modelchest;
 
-			if (par1TileEntityChest.adjacentChestXPos == null && par1TileEntityChest.adjacentChestZPos == null)
+			if (te.adjacentChestXPos == null && te.adjacentChestZPos == null)
 			{
 				modelchest = this.chestModel;
 
-				if (par1TileEntityChest.func_145980_j/*getChestType*/() == 1)
-				{
-					this.bindTexture(field_110633_e);
-				}
-				else if (this.isChristmas)
-				{
-					this.bindTexture(field_110630_f);
-				}
-				else
-				{
-					this.bindTexture(field_110631_g);
-				}
+				this.bindTexture(texNormal[te.type]);
 			}
 			else
 			{
 				modelchest = this.largeChestModel;
 
-				if (par1TileEntityChest.func_145980_j/*getChestType*/() == 1)
-				{
-					this.bindTexture(field_110635_a);
-				}
-				else if (this.isChristmas)
-				{
-					this.bindTexture(field_110634_c);
-				}
-				else
-				{
-					this.bindTexture(field_110632_d);
-				}
+				this.bindTexture(texNormalDouble[te.type]);
 			}
 
 			GL11.glPushMatrix();
@@ -146,24 +120,24 @@ public class TESRChest extends TileEntitySpecialRenderer
 				short1 = -90;
 			}
 
-			if (i == 2 && par1TileEntityChest.adjacentChestXPos != null)
+			if (i == 2 && te.adjacentChestXPos != null)
 			{
 				GL11.glTranslatef(1.0F, 0.0F, 0.0F);
 			}
 
-			if (i == 5 && par1TileEntityChest.adjacentChestZPos != null)
+			if (i == 5 && te.adjacentChestZPos != null)
 			{
 				GL11.glTranslatef(0.0F, 0.0F, -1.0F);
 			}
 
 			GL11.glRotatef(short1, 0.0F, 1.0F, 0.0F);
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-			float f1 = par1TileEntityChest.prevLidAngle + (par1TileEntityChest.lidAngle - par1TileEntityChest.prevLidAngle) * par8;
+			float f1 = te.prevLidAngle + (te.lidAngle - te.prevLidAngle) * par8;
 			float f2;
 
-			if (par1TileEntityChest.adjacentChestZNeg != null)
+			if (te.adjacentChestZNeg != null)
 			{
-				f2 = par1TileEntityChest.adjacentChestZNeg.prevLidAngle + (par1TileEntityChest.adjacentChestZNeg.lidAngle - par1TileEntityChest.adjacentChestZNeg.prevLidAngle) * par8;
+				f2 = te.adjacentChestZNeg.prevLidAngle + (te.adjacentChestZNeg.lidAngle - te.adjacentChestZNeg.prevLidAngle) * par8;
 
 				if (f2 > f1)
 				{
@@ -171,9 +145,9 @@ public class TESRChest extends TileEntitySpecialRenderer
 				}
 			}
 
-			if (par1TileEntityChest.adjacentChestXNeg != null)
+			if (te.adjacentChestXNeg != null)
 			{
-				f2 = par1TileEntityChest.adjacentChestXNeg.prevLidAngle + (par1TileEntityChest.adjacentChestXNeg.lidAngle - par1TileEntityChest.adjacentChestXNeg.prevLidAngle) * par8;
+				f2 = te.adjacentChestXNeg.prevLidAngle + (te.adjacentChestXNeg.lidAngle - te.adjacentChestXNeg.prevLidAngle) * par8;
 
 				if (f2 > f1)
 				{
@@ -194,6 +168,6 @@ public class TESRChest extends TileEntitySpecialRenderer
 	@Override
 	public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
 	{
-		this.renderTileEntityChestAt((TileEntityChestTFC)par1TileEntity, par2, par4, par6, par8);
+		this.renderTileEntityChestAt((TEChest)par1TileEntity, par2, par4, par6, par8);
 	}
 }

@@ -129,7 +129,7 @@ import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.TileEntities.TESeaWeed;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TEBellows;
-import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
+import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
@@ -258,7 +258,7 @@ public class ClientProxy extends CommonProxy
 	public void registerTileEntities(boolean b)
 	{
 		super.registerTileEntities(false);
-		ClientRegistry.registerTileEntity(TileEntityChestTFC.class, "chest", new TESRChest());
+		ClientRegistry.registerTileEntity(TEChest.class, "chest", new TESRChest());
 		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile", new TESRIngotPile());
 		ClientRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit", new TESRFirepit());
 		ClientRegistry.registerTileEntity(TESeaWeed.class, "Sea Weed", new TESRSeaWeed());

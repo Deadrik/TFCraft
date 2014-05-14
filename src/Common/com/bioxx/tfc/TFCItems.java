@@ -847,7 +847,7 @@ public class TFCItems
 	public static Item Sake;
 	public static Item Vodka;
 	public static Item Whiskey;
-	
+
 	public static Item Potion;
 
 	public static Item ClayBall;
@@ -921,7 +921,7 @@ public class TFCItems
 	public static Item GooseberryLeaf;
 	public static Item CloudberryLeaf;
 	public static Item Fertilizer;
-
+	public static Item MetalLock;
 	/**
 	 * Item Uses Setup
 	 * */
@@ -1013,7 +1013,7 @@ public class TFCItems
 		Dye = new ItemDyeCustom().setUnlocalizedName("dyePowder").setTextureName("dye_powder").setCreativeTab(TFCTabs.TFCMaterials);
 		Potion = new ItemCustomPotion().setUnlocalizedName("potion").setTextureName("potion");
 		Leash = new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFCTools);
-		
+
 		minecartCrate = new ItemCustomMinecart(1).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 		GoldPan = new ItemGoldPan().setUnlocalizedName("GoldPan");
 		SluiceItem = new ItemSluice().setFolder("devices/").setUnlocalizedName("SluiceItem").setCreativeTab(TFCTabs.TFCDevices);
@@ -1570,7 +1570,7 @@ public class TFCItems
 
 		Items.reeds.setCreativeTab(null);
 		Reeds = new ItemReeds().setUnlocalizedName("Reeds").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("reeds");
-
+		MetalLock = new ItemTerra().setUnlocalizedName("Metal Lock").setCreativeTab(TFCTabs.TFCMisc);
 		// Food related items
 		SetupFood();
 
@@ -1784,7 +1784,7 @@ public class TFCItems
 		SeedsGreenbean = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Greenbean");
 		SeedsSquash = new ItemCustomSeeds(23).setUnlocalizedName("Seeds Squash");
 		SeedsJute = new ItemCustomSeeds(24).setUnlocalizedName("Seeds Jute");
-		
+
 		FruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling");
 
 		//mushroom is a food now, with foodID 61
@@ -2066,7 +2066,7 @@ public class TFCItems
 		LeatherChestplate = new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 1, ArmorMaterial.CLOTH, 100,2).setUnlocalizedName("chestplateCloth").setTextureName("leather_chestplate");
 		LeatherLeggings = new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 2, ArmorMaterial.CLOTH, 100,1).setUnlocalizedName("leggingsCloth").setTextureName("leather_leggings");
 		LeatherBoots = new ItemTFCArmor(Armor.Leather, proxy.getArmorRenderID("leather"), 3, ArmorMaterial.CLOTH, 100,0).setUnlocalizedName("bootsCloth").setTextureName("leather_boots");
-		
+
 		Quiver = new ItemQuiver(Armor.LeatherQuiver, proxy.getArmorRenderID("leather"), 4, ArmorMaterial.IRON, 0,-1).setUnlocalizedName("Quiver");
 	}
 
@@ -2600,7 +2600,7 @@ public class TFCItems
 		GameRegistry.registerItem(Jute , Jute.getUnlocalizedName());
 		GameRegistry.registerItem(JuteFibre , JuteFibre.getUnlocalizedName());
 		GameRegistry.registerItem(Reeds , Reeds.getUnlocalizedName());
-		
+
 		GameRegistry.registerItem(FishingRod, FishingRod.getUnlocalizedName());
 		GameRegistry.registerItem(Coal, Coal.getUnlocalizedName());
 		GameRegistry.registerItem(Stick, Stick.getUnlocalizedName());
@@ -2707,7 +2707,7 @@ public class TFCItems
 		GameRegistry.registerItem(beefCooked, beefCooked.getUnlocalizedName());
 		GameRegistry.registerItem(chickenRaw, chickenRaw.getUnlocalizedName());
 		GameRegistry.registerItem(chickenCooked, chickenCooked.getUnlocalizedName());
-		
+
 		GameRegistry.registerItem(WintergreenBerry, WintergreenBerry.getUnlocalizedName());
 		GameRegistry.registerItem(Blueberry, Blueberry.getUnlocalizedName());
 		GameRegistry.registerItem(Raspberry, Raspberry.getUnlocalizedName());
@@ -2846,7 +2846,7 @@ public class TFCItems
 		GameRegistry.registerItem(WroughtIronHelmet, WroughtIronHelmet.getUnlocalizedName());
 		GameRegistry.registerItem(RedSteelHelmet, RedSteelHelmet.getUnlocalizedName());
 		GameRegistry.registerItem(SteelHelmet, SteelHelmet.getUnlocalizedName());
-		
+
 		GameRegistry.registerItem(LeatherHelmet, LeatherHelmet.getUnlocalizedName());
 		GameRegistry.registerItem(LeatherChestplate, LeatherChestplate.getUnlocalizedName());
 		GameRegistry.registerItem(LeatherLeggings, LeatherLeggings.getUnlocalizedName());

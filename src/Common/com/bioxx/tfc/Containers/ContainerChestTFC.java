@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotChest;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
+import com.bioxx.tfc.TileEntities.TEChest;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -23,7 +23,7 @@ public class ContainerChestTFC extends ContainerTFC
 
 	public ContainerChestTFC(IInventory playerInv, IInventory chestInv, World world, int x, int y, int z)
 	{
-		TileEntityChestTFC chest = (TileEntityChestTFC)chestInv;
+		TEChest chest = (TEChest)chestInv;
 		this.lowerChestInventory = chestInv;
 
 		if (chest.adjacentChestXNeg != null)

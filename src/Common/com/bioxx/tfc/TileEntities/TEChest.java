@@ -3,10 +3,6 @@ package com.bioxx.tfc.TileEntities;
 import java.util.Iterator;
 import java.util.List;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Containers.ContainerChestTFC;
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
@@ -18,13 +14,18 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Containers.ContainerChestTFC;
+import com.bioxx.tfc.Core.TFC_Core;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityChestTFC extends TileEntityChest implements IInventory
+public class TEChest extends TileEntityChest implements IInventory
 {
 	private ItemStack[] chestContents = new ItemStack[18];
-
+	public int type = 0;
 	/** Server sync counter (once per 20 ticks) */
 	private int ticksSinceSync;
 
@@ -175,16 +176,16 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 			this.adjacentChestZPos = null;
 
 			if (this.worldObj.getBlock(this.xCoord - 1, this.yCoord, this.zCoord) == TFCBlocks.Chest)
-				this.adjacentChestXNeg = (TileEntityChestTFC)this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
+				this.adjacentChestXNeg = (TEChest)this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
 
 			if (this.worldObj.getBlock(this.xCoord + 1, this.yCoord, this.zCoord) == TFCBlocks.Chest)
-				this.adjacentChestXPos = (TileEntityChestTFC)this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+				this.adjacentChestXPos = (TEChest)this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
 
 			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord - 1) == TFCBlocks.Chest)
-				this.adjacentChestZNeg = (TileEntityChestTFC)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+				this.adjacentChestZNeg = (TEChest)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
 
 			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord + 1) == TFCBlocks.Chest)
-				this.adjacentChestZPos = (TileEntityChestTFC)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+				this.adjacentChestZPos = (TEChest)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
 
 			if (this.adjacentChestZNeg != null)
 				this.adjacentChestZNeg.updateContainingBlockInfo();
@@ -212,7 +213,7 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
 		{
 			this.numPlayersUsing = 0;
 			float f = 5.0F;
-			List list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getAABBPool().getAABB((double)((float)this.xCoord - f), (double)((float)this.yCoord - f), (double)((float)this.zCoord - f), (double)((float)(this.xCoord + 1) + f), (double)((float)(this.yCoord + 1) + f), (double)((float)(this.zCoord + 1) + f)));
+			List list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getAABBPool().getAABB(this.xCoord - f, this.yCoord - f, this.zCoord - f, this.xCoord + 1 + f, this.yCoord + 1 + f, this.zCoord + 1 + f));
 			Iterator iterator = list.iterator();
 
 			while (iterator.hasNext())

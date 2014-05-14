@@ -43,7 +43,7 @@ import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
-import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
+import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
@@ -93,7 +93,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 28:
 			return new GuiKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).specialCraftingType , world, x, y, z);
 		case 29:
-			return new GuiChestTFC(player.inventory, ((TileEntityChestTFC) te), world, x, y, z);
+			return new GuiChestTFC(player.inventory, ((TEChest) te), world, x, y, z);
 		case 31:
 			return new GuiInventoryTFC(player);
 		case 32:

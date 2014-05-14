@@ -38,7 +38,7 @@ import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
-import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
+import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
@@ -103,7 +103,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 29:
 		{
-			return new ContainerChestTFC(player.inventory, (TileEntityChestTFC) te, world, x, y, z);
+			return new ContainerChestTFC(player.inventory, (TEChest) te, world, x, y, z);
 		}
 		case 31:
 		{

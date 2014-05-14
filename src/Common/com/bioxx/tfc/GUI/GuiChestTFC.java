@@ -13,7 +13,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerChestTFC;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.TileEntities.TileEntityChestTFC;
+import com.bioxx.tfc.TileEntities.TEChest;
 
 public class GuiChestTFC extends GuiContainer
 {
@@ -29,7 +29,7 @@ public class GuiChestTFC extends GuiContainer
 	{
 		super(new ContainerChestTFC(par1IInventory, chestInv, world, x, y, z));
 
-		TileEntityChestTFC chest = (TileEntityChestTFC)chestInv;
+		TEChest chest = (TEChest)chestInv;
 
 		this.upperChestInventory = par1IInventory;
 		this.lowerChestInventory = chestInv;

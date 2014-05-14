@@ -470,7 +470,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Fungi, com.bioxx.tfc.Items.ItemBlocks.ItemFungi.class, "Fungi");
 		GameRegistry.registerBlock(Bookshelf, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Bookshelf");
 		GameRegistry.registerBlock(Torch, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Torch");
-		GameRegistry.registerBlock(Chest, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Chest");
+		GameRegistry.registerBlock(Chest, com.bioxx.tfc.Items.ItemBlocks.ItemChest.class, "Chest TFC");
 		GameRegistry.registerBlock(Workbench, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Workbench");
 		GameRegistry.registerBlock(Cactus, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Cactus");
 		GameRegistry.registerBlock(Reeds, "Reeds");
@@ -509,7 +509,7 @@ public class TFCBlocks
 
 		Bookshelf = new BlockCustomBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("Bookshelf").setBlockTextureName("bookshelf");
 		Torch = new BlockTorch().setHardness(0.0F).setLightLevel(0.9375F).setStepSound(Block.soundTypeWood).setBlockName("Torch").setBlockTextureName("torch_on");
-		Chest = new BlockChestTFC(0).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("Chest");
+		Chest = new BlockChestTFC().setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("Chest");
 		Workbench = new BlockWorkbench().setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("Workbench").setBlockTextureName("crafting_table");
 		Cactus = new BlockCustomCactus().setHardness(0.4F).setStepSound(Block.soundTypeCloth).setBlockName("Cactus").setBlockTextureName("cactus");
 		Reeds = new BlockCustomReed().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Reeds").setBlockTextureName("reeds");
