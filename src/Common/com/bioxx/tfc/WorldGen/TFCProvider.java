@@ -47,7 +47,7 @@ public class TFCProvider extends WorldProvider
 	{
 		int y = worldObj.getTopSolidOrLiquidBlock(x, z)-1;
 		Block b = worldObj.getBlock(x, y, z);
-		return y > 144 && TFC_Core.isGrass(b);
+		return y > 144 && y < 170 && TFC_Core.isGrass(b);
 	}
 
 	@Override
@@ -94,7 +94,7 @@ return biome;
 	private ChunkCoordinates createSpawn()
 	{
 		TFCWorldChunkManager chunkManager = (TFCWorldChunkManager) worldChunkMgr;
-		List var3 = chunkManager.getBiomesToSpawnIn();
+		List biomeList = chunkManager.getBiomesToSpawnIn();
 		long seed = worldObj.getWorldInfo().getSeed();
 		Random rand = new Random(seed);
 
@@ -107,7 +107,7 @@ return biome;
 
 		while(chunkCoord == null)
 		{
-			chunkCoord = chunkManager.findBiomePosition(xOffset, -startingZ, 64, var3, rand);
+			chunkCoord = chunkManager.findBiomePosition(xOffset, -startingZ, 64, biomeList, rand);
 			if (chunkCoord != null)
 			{
 				xCoord = chunkCoord.chunkPosX;
@@ -119,8 +119,6 @@ return biome;
 				//System.out.println("Unable to find spawn biome");
 			}
 		}
-		if(chunkManager.getBiomeGenAt(chunkCoord.chunkPosX, chunkCoord.chunkPosZ) == TFCBiome.ocean)
-			System.out.println("Spawning in ocean");
 
 		int var9 = 0;
 		while (!canCoordinateBeSpawn(xCoord, zCoord))
