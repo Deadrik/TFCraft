@@ -2,20 +2,16 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityToolRack extends TileEntity implements IInventory
+import com.bioxx.tfc.Core.TFC_Core;
+
+public class TileEntityToolRack extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	public byte woodType;
@@ -86,7 +82,7 @@ public class TileEntityToolRack extends TileEntity implements IInventory
 		{
 			if(storage[i]!= null)
 			{
-				entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, storage[i]);
+				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, storage[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
@@ -107,7 +103,7 @@ public class TileEntityToolRack extends TileEntity implements IInventory
 
 		if(storage[index] != null)
 		{
-			entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, storage[index]);
+			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, storage[index]);
 			entityitem.motionX = (float)rand.nextGaussian() * f3;
 			entityitem.motionY = 0;
 			entityitem.motionZ = (float)rand.nextGaussian() * f3;
@@ -122,6 +118,7 @@ public class TileEntityToolRack extends TileEntity implements IInventory
 		return 1;
 	}
 
+	@Override
 	public int getSizeInventory()
 	{
 		return storage.length;
@@ -210,9 +207,9 @@ public class TileEntityToolRack extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbttagcompound);
+		super.writeToNBT(nbt);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
 		{
@@ -224,11 +221,11 @@ public class TileEntityToolRack extends TileEntity implements IInventory
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
-		nbttagcompound.setTag("Items", nbttaglist);
-		nbttagcompound.setByte("woodType", woodType);
+		nbt.setTag("Items", nbttaglist);
+		nbt.setByte("woodType", woodType);
 	}
 
-	@Override
+	/*@Override
 	public Packet getDescriptionPacket()
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
@@ -240,6 +237,28 @@ public class TileEntityToolRack extends TileEntity implements IInventory
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
 		readFromNBT(pkt.func_148857_g());
+	}*/
+
+	@Override
+	public void handleInitPacket(NBTTagCompound nbt) {
+		readFromNBT(nbt);
+
+	}
+
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt) {
+		readFromNBT(nbt);
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt) {
+		writeToNBT(nbt);
+
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+		writeToNBT(nbt);
 	}
 
 }

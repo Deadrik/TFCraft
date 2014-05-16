@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -121,6 +122,13 @@ public class EntityLivingHandler
 				}
 				else if(pi != null)
 					pi.guishowFoodRestoreAmount = false;
+
+				TileEntity te = player.worldObj.getTileEntity(
+						(int)Math.floor(player.posX), (int)Math.floor(player.posY)-1, (int)Math.floor(player.posZ));
+				if(te!= null)
+				{
+					System.out.println(te.getClass().getName() + " | " + te.xCoord+","+te.yCoord+","+te.zCoord);
+				}
 			}
 		}
 	}

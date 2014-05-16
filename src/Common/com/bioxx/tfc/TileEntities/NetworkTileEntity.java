@@ -28,7 +28,12 @@ public abstract class NetworkTileEntity extends TileEntity
 
 	public DataBlockPacket createDataPacket()
 	{
-		return new DataBlockPacket(this.xCoord, this.yCoord, this.zCoord, createDataNBT());
+		return this.createDataPacket(createDataNBT());
+	}
+
+	public DataBlockPacket createDataPacket(NBTTagCompound nbt)
+	{
+		return new DataBlockPacket(this.xCoord, this.yCoord, this.zCoord, nbt);
 	}
 
 	private NBTTagCompound createDataNBT()
@@ -57,12 +62,14 @@ public abstract class NetworkTileEntity extends TileEntity
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
 		handleInitPacket(pkt.func_148857_g());
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	public void broadcastPacketInRange()
 	{
+		int dim = worldObj.provider.dimensionId;
 		TerraFirmaCraft.proxy.sendCustomPacketNearTarget(this.createDataPacket(), 
-				new TargetPoint(worldObj.provider.dimensionId, xCoord,yCoord,zCoord,256));
+				new TargetPoint(dim, xCoord,yCoord,zCoord,256));
 	}
 
 	public void broadcastPacketInRange(AbstractPacket packet)

@@ -1,12 +1,8 @@
 package com.bioxx.tfc.TileEntities;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TEBerryBush extends TileEntity
+public class TEBerryBush extends NetworkTileEntity
 {
 	public int dayHarvested = -1000;
 	public int dayFruited = -1000;
@@ -41,16 +37,24 @@ public class TEBerryBush extends TileEntity
 	}
 
 	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+	public void handleInitPacket(NBTTagCompound nbt) {
+		this.hasFruit = nbt.getBoolean("hasFruit");
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
+	public void handleDataPacket(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+		nbt.setBoolean("hasFruit", hasFruit);
 	}
 }

@@ -119,8 +119,10 @@ public class TECrop extends NetworkTileEntity
 					growth += growthRate;
 
 				if(oldGrowth < (int) Math.floor(growth))
+				{
+					System.out.println(xCoord+","+yCoord+","+zCoord);
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-				this.broadcastPacketInRange();
+				}
 
 				if((TFCOptions.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages + ((float)crop.numGrowthStages / 2))) || growth < 0)
 				{
@@ -225,23 +227,23 @@ public class TECrop extends NetworkTileEntity
 
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) {
-		readFromNBT(nbt);
-		worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
+		growth = nbt.getFloat("growth");
+		cropId = nbt.getInteger("cropId");
+		worldObj.func_147479_m(xCoord, yCoord, zCoord);
 	}
 
 	@Override
 	public void handleDataPacket(NBTTagCompound nbt) 
 	{
-		if(worldObj.isRemote)
-		{
-			growth = nbt.getFloat("growth");
-			worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
-		}
+		growth = nbt.getFloat("growth");
+		cropId = nbt.getInteger("cropId");
+		worldObj.func_147479_m(xCoord, yCoord, zCoord);
 	}
 
 	@Override
 	public void createDataNBT(NBTTagCompound nbt) {
 		nbt.setFloat("growth", growth);
+		nbt.setInteger("cropId", cropId);
 	}
 
 	@Override
