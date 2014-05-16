@@ -12,8 +12,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.IBlockAccess;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Containers.ContainerChestTFC;
@@ -28,6 +30,17 @@ public class TEChest extends TileEntityChest implements IInventory
 	public int type = 0;
 	/** Server sync counter (once per 20 ticks) */
 	private int ticksSinceSync;
+	public boolean isDoubleChest = false;
+
+	public TEChest()
+	{
+
+	}
+	public TEChest(int i, boolean isDouble)
+	{
+		type = i;
+		isDoubleChest = isDouble;
+	}
 
 	@Override
 	public int getSizeInventory()
@@ -164,6 +177,18 @@ public class TEChest extends TileEntityChest implements IInventory
 		this.adjacentChestChecked = false;
 	}
 
+	public boolean checkType(IBlockAccess access, int x, int y, int z)
+	{
+		TileEntity te =  access.getTileEntity(x, y, z);
+		if(te != null && te instanceof TEChest)
+		{
+			TEChest chest = (TEChest) access.getTileEntity(x, y, z);
+			if(chest.type == this.type)
+				return true;
+		}
+		return false;
+	}
+
 	@Override
 	public void checkForAdjacentChests()
 	{
@@ -175,16 +200,20 @@ public class TEChest extends TileEntityChest implements IInventory
 			this.adjacentChestXNeg = null;
 			this.adjacentChestZPos = null;
 
-			if (this.worldObj.getBlock(this.xCoord - 1, this.yCoord, this.zCoord) == TFCBlocks.Chest)
+			if (this.worldObj.getBlock(this.xCoord - 1, this.yCoord, this.zCoord) == TFCBlocks.Chest && 
+					checkType(worldObj, xCoord - 1, yCoord, zCoord))
 				this.adjacentChestXNeg = (TEChest)this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
 
-			if (this.worldObj.getBlock(this.xCoord + 1, this.yCoord, this.zCoord) == TFCBlocks.Chest)
+			if (this.worldObj.getBlock(this.xCoord + 1, this.yCoord, this.zCoord) == TFCBlocks.Chest && 
+					checkType(worldObj, xCoord + 1, yCoord, zCoord))
 				this.adjacentChestXPos = (TEChest)this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
 
-			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord - 1) == TFCBlocks.Chest)
+			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord - 1) == TFCBlocks.Chest && 
+					checkType(worldObj, xCoord, yCoord, zCoord-1))
 				this.adjacentChestZNeg = (TEChest)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
 
-			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord + 1) == TFCBlocks.Chest)
+			if (this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord + 1) == TFCBlocks.Chest && 
+					checkType(worldObj, xCoord, yCoord, zCoord+1))
 				this.adjacentChestZPos = (TEChest)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
 
 			if (this.adjacentChestZNeg != null)

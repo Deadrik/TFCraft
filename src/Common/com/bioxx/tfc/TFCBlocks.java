@@ -163,6 +163,7 @@ public class TFCBlocks
 	public static int seaWeedRenderId;
 	public static int bloomeryRenderId;
 	public static int metalsheetRenderId;
+	public static int chestRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;

@@ -15,6 +15,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.TileEntities.TEChest;
@@ -119,7 +120,18 @@ public class BlockChestTFC extends BlockTerraContainer
 	@Override
 	public int getRenderType()
 	{
-		return 22;
+		return TFCBlocks.chestRenderId;
+	}
+
+	public int getType(IBlockAccess access, int x, int y, int z)
+	{
+		TileEntity te =  access.getTileEntity(x, y, z);
+		if(te != null && te instanceof TEChest)
+		{
+			TEChest chest = (TEChest) access.getTileEntity(x, y, z);
+			return chest.type;
+		}
+		return -1;
 	}
 
 	@Override
@@ -156,36 +168,37 @@ public class BlockChestTFC extends BlockTerraContainer
 		Block block1 = world.getBlock(x, y, z + 1);
 		Block block2 = world.getBlock(x - 1, y, z);
 		Block block3 = world.getBlock(x + 1, y, z);
+		TEChest chest = (TEChest) world.getTileEntity(x, y, z);
 
-		if (block == this)
+		if (block == this && chest.type == getType(world, x, y, z-1))
 		{
 			this.func_149954_e(world, x, y, z - 1);
 		}
 
-		if (block1 == this)
+		if (block1 == this&& chest.type == getType(world, x, y, z+1))
 		{
 			this.func_149954_e(world, x, y, z + 1);
 		}
 
-		if (block2 == this)
+		if (block2 == this&& chest.type == getType(world, x-1, y, z))
 		{
 			this.func_149954_e(world, x - 1, y, z);
 		}
 
-		if (block3 == this)
+		if (block3 == this&& chest.type == getType(world, x+1, y, z))
 		{
 			this.func_149954_e(world, x + 1, y, z);
 		}
 	}
 
-	public void func_149954_e(World p_149954_1_, int p_149954_2_, int p_149954_3_, int p_149954_4_)
+	public void func_149954_e(World world, int x, int y, int z)
 	{
-		if (!p_149954_1_.isRemote)
+		if (!world.isRemote)
 		{
-			Block block = p_149954_1_.getBlock(p_149954_2_, p_149954_3_, p_149954_4_ - 1);
-			Block block1 = p_149954_1_.getBlock(p_149954_2_, p_149954_3_, p_149954_4_ + 1);
-			Block block2 = p_149954_1_.getBlock(p_149954_2_ - 1, p_149954_3_, p_149954_4_);
-			Block block3 = p_149954_1_.getBlock(p_149954_2_ + 1, p_149954_3_, p_149954_4_);
+			Block block = world.getBlock(x, y, z - 1);
+			Block block1 = world.getBlock(x, y, z + 1);
+			Block block2 = world.getBlock(x - 1, y, z);
+			Block block3 = world.getBlock(x + 1, y, z);
 			boolean flag = true;
 			int l;
 			Block block4;
@@ -223,20 +236,20 @@ public class BlockChestTFC extends BlockTerraContainer
 				}
 				else
 				{
-					l = block2 == this ? p_149954_2_ - 1 : p_149954_2_ + 1;
-					block4 = p_149954_1_.getBlock(l, p_149954_3_, p_149954_4_ - 1);
-					i1 = block2 == this ? p_149954_2_ - 1 : p_149954_2_ + 1;
-					block5 = p_149954_1_.getBlock(i1, p_149954_3_, p_149954_4_ + 1);
+					l = block2 == this ? x - 1 : x + 1;
+					block4 = world.getBlock(l, y, z - 1);
+					i1 = block2 == this ? x - 1 : x + 1;
+					block5 = world.getBlock(i1, y, z + 1);
 					b0 = 3;
 					flag1 = true;
 
 					if (block2 == this)
 					{
-						j1 = p_149954_1_.getBlockMetadata(p_149954_2_ - 1, p_149954_3_, p_149954_4_);
+						j1 = world.getBlockMetadata(x - 1, y, z);
 					}
 					else
 					{
-						j1 = p_149954_1_.getBlockMetadata(p_149954_2_ + 1, p_149954_3_, p_149954_4_);
+						j1 = world.getBlockMetadata(x + 1, y, z);
 					}
 
 					if (j1 == 2)
@@ -257,20 +270,20 @@ public class BlockChestTFC extends BlockTerraContainer
 			}
 			else
 			{
-				l = block == this ? p_149954_4_ - 1 : p_149954_4_ + 1;
-				block4 = p_149954_1_.getBlock(p_149954_2_ - 1, p_149954_3_, l);
-				i1 = block == this ? p_149954_4_ - 1 : p_149954_4_ + 1;
-				block5 = p_149954_1_.getBlock(p_149954_2_ + 1, p_149954_3_, i1);
+				l = block == this ? z - 1 : z + 1;
+				block4 = world.getBlock(x - 1, y, l);
+				i1 = block == this ? z - 1 : z + 1;
+				block5 = world.getBlock(x + 1, y, i1);
 				b0 = 5;
 				flag1 = true;
 
 				if (block == this)
 				{
-					j1 = p_149954_1_.getBlockMetadata(p_149954_2_, p_149954_3_, p_149954_4_ - 1);
+					j1 = world.getBlockMetadata(x, y, z - 1);
 				}
 				else
 				{
-					j1 = p_149954_1_.getBlockMetadata(p_149954_2_, p_149954_3_, p_149954_4_ + 1);
+					j1 = world.getBlockMetadata(x, y, z + 1);
 				}
 
 				if (j1 == 4)
@@ -289,7 +302,7 @@ public class BlockChestTFC extends BlockTerraContainer
 				}
 			}
 
-			p_149954_1_.setBlockMetadataWithNotify(p_149954_2_, p_149954_3_, p_149954_4_, b0, 3);
+			world.setBlockMetadataWithNotify(x, y, z, b0, 3);
 		}
 	}
 
