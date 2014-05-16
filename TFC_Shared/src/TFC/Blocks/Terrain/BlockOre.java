@@ -30,6 +30,7 @@ public class BlockOre extends BlockCollapsable
 
 	public BlockOre(int i, Material material) {
 		super(i, material);
+		this.setTickRandomly(true);
 	}
 
 	@Override
@@ -178,9 +179,10 @@ public class BlockOre extends BlockCollapsable
 	{
 		if(te != null)
 		{
-			if(te.grade == 1)
+			int grade = (te.extraData & 7);
+			if(grade == 1)
 				ore += 35;
-			else if(te.grade == 2)
+			else if(grade == 2)
 				ore += 49;
 		}
 		return ore;
@@ -198,4 +200,38 @@ public class BlockOre extends BlockCollapsable
 		return new TEOre();
 	}
 
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random rand)
+	{
+		if (!world.isRemote)
+		{
+			scanVisible(world,x,y,z);
+		}
+	}
+
+	public void scanVisible(World world, int x, int y, int z)
+	{
+		if (!world.isRemote)
+		{
+			TEOre te = (TEOre)world.getBlockTileEntity(x, y, z);
+			if((te.extraData & 8) == 0)
+			{
+				if(!world.isBlockOpaqueCube(x, y-1, z) || !world.isBlockOpaqueCube(x, y+1, z) ||
+						!world.isBlockOpaqueCube(x-1, y, z) || !world.isBlockOpaqueCube(x+1, y, z) || 
+						!world.isBlockOpaqueCube(x, y, z-1) || !world.isBlockOpaqueCube(x, y, z+1))
+				{
+					te.setVisible();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, int meta)
+	{
+		if(!world.isRemote)
+		{
+			scanVisible(world,x,y,z);
+		}
+	}
 }

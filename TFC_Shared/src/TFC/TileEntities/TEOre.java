@@ -5,16 +5,28 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.nbt.NBTTagCompound;
+import TFC.TerraFirmaCraft;
 
 public class TEOre extends NetworkTileEntity 
 {
 	public int baseBlockID = -1000;
 	public int baseBlockMeta = -1000;
-	public byte grade = 0;
+	public byte extraData = 0;
 
 	public TEOre()
 	{
 		this.shouldSendInitData = true;
+	}
+
+	@Override
+	public void validate()
+	{
+		super.validate();
+
+		if(worldObj.isRemote && this.shouldSendInitData && (extraData & 8) == 1)
+			try {
+				requestInitialization();
+			} catch (IOException e) {}
 	}
 
 	@Override
@@ -23,13 +35,27 @@ public class TEOre extends NetworkTileEntity
 		return false;
 	}
 
+	public void setVisible()
+	{
+		if((extraData & 8) == 0)
+			extraData += 8;
+		try
+		{
+			TerraFirmaCraft.proxy.sendCustomPacket(sendInitPacket());
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) 
 	{
 		super.readFromNBT(nbt);
 		baseBlockID = nbt.getInteger("baseBlockID");
 		baseBlockMeta = nbt.getInteger("baseBlockMeta");
-		grade = nbt.getByte("grade");
+		extraData = nbt.getByte("grade");
 	}
 
 	@Override
@@ -38,7 +64,7 @@ public class TEOre extends NetworkTileEntity
 		super.writeToNBT(nbt);
 		nbt.setInteger("baseBlockID", baseBlockID);
 		nbt.setInteger("baseBlockMeta", baseBlockMeta);
-		nbt.setByte("grade", grade);
+		nbt.setByte("grade", extraData);
 	}
 
 	@Override
