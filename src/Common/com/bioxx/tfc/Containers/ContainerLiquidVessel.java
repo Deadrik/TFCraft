@@ -1,5 +1,14 @@
 package com.bioxx.tfc.Containers;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Containers.Slots.SlotLiquidVessel;
@@ -10,15 +19,6 @@ import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFC_ItemHeat;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 
 public class ContainerLiquidVessel extends ContainerTFC 
 {
@@ -187,12 +187,15 @@ public class ContainerLiquidVessel extends ContainerTFC
 								nbt.removeTag("MetalAmount");
 								nbt.removeTag("TempTimer");
 								player.inventory.getStackInSlot(bagsSlotNum).setItemDamage(1);
-								player.triggerAchievement(TFC_Achievements.achCopperAge);
+								//player.triggerAchievement(TFC_Achievements.achCopperAge);
 							}
 							else
 							{
 								nbt.setInteger("MetalAmount", metalAmount-1);
 							}
+						}
+						else{
+							player.triggerAchievement(TFC_Achievements.achCopperAge);
 						}
 					}
 				}

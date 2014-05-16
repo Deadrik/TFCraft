@@ -2,11 +2,6 @@ package com.bioxx.tfc.Blocks.Vanilla;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.api.IMultipleBlock;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
@@ -14,6 +9,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemLead;
 import net.minecraft.item.ItemStack;
@@ -21,25 +17,28 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCustomFence extends BlockFence implements IMultipleBlock
+public class BlockCustomFence extends BlockFence
 {
-	private final String field_94464_a;
+	protected String[] woodNames;
+	protected IIcon[] iconsPost;
+	protected IIcon[] iconsPostTop;
 
-	String[] woodNames;
-	IIcon[] iconsPost;
-	IIcon[] iconsPostTop;
-
-	public BlockCustomFence(String par2Str, Material par3Material)
+	public BlockCustomFence(String str, Material mat)
 	{
-		super("par2Str", par3Material);
-		this.field_94464_a = par2Str;
+		super(str, mat);
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
 		iconsPost = new IIcon[woodNames.length];
 		iconsPostTop = new IIcon[woodNames.length];
+		Blocks.fire.setFireInfo(this, 5, 20);
 	}
 
 	/**
@@ -47,69 +46,60 @@ public class BlockCustomFence extends BlockFence implements IMultipleBlock
 	 * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
 	 */
 	@Override
-	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
+	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB AABB, List list, Entity entity)
 	{
-		boolean flag = this.canConnectFenceTo(par1World, par2, par3, par4 - 1);
-		boolean flag1 = this.canConnectFenceTo(par1World, par2, par3, par4 + 1);
-		boolean flag2 = this.canConnectFenceTo(par1World, par2 - 1, par3, par4);
-		boolean flag3 = this.canConnectFenceTo(par1World, par2 + 1, par3, par4);
+		boolean flag = this.canConnectFenceTo(world, x, y, z - 1);
+		boolean flag1 = this.canConnectFenceTo(world, x, y, z + 1);
+		boolean flag2 = this.canConnectFenceTo(world, x - 1, y, z);
+		boolean flag3 = this.canConnectFenceTo(world, x + 1, y, z);
 		float f = 0.375F;
 		float f1 = 0.625F;
 		float f2 = 0.375F;
 		float f3 = 0.625F;
 
-		if (flag)
-			f2 = 0.0F;
-
-		if (flag1)
-			f3 = 1.0F;
+		if (flag) f2 = 0.0F;
+		if (flag1) f3 = 1.0F;
 
 		if (flag || flag1)
 		{
 			this.setBlockBounds(f, 0.0F, f2, f1, 1.5F, f3);
-			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+			super.addCollisionBoxesToList(world, x, y, z, AABB, list, entity);
 		}
 
 		f2 = 0.375F;
 		f3 = 0.625F;
 
-		if (flag2)
-			f = 0.0F;
-
-		if (flag3)
-			f1 = 1.0F;
+		if (flag2) f = 0.0F;
+		if (flag3) f1 = 1.0F;
 
 		if (flag2 || flag3 || !flag && !flag1)
 		{
 			this.setBlockBounds(f, 0.0F, f2, f1, 1.5F, f3);
-			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+			super.addCollisionBoxesToList(world, x, y, z, AABB, list, entity);
 		}
 
-		if (flag)
-			f2 = 0.0F;
-
-		if (flag1)
-			f3 = 1.0F;
+		if (flag) f2 = 0.0F;
+		if (flag1) f3 = 1.0F;
 
 		this.setBlockBounds(f, 0.0F, f2, f1, 1.0F, f3);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) 
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
 		for(int i = 0; i < woodNames.length; i++)
-			par3List.add(new ItemStack(this, 1, i));
+			list.add(new ItemStack(this, 1, i));
 	}
 
-	@Override
+	/*@Override
 	public IIcon getIcon(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 	{
 		if(par5 == 1 || par5 == 0)
 			return iconsPostTop[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
 
 		return iconsPost[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
-	}
+	}*/
 
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
@@ -125,28 +115,21 @@ public class BlockCustomFence extends BlockFence implements IMultipleBlock
 	 * Updates the blocks bounds based on its current state. Args: world, x, y, z
 	 */
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
 	{
-		boolean flag = this.canConnectFenceTo(par1IBlockAccess, par2, par3, par4 - 1);
-		boolean flag1 = this.canConnectFenceTo(par1IBlockAccess, par2, par3, par4 + 1);
-		boolean flag2 = this.canConnectFenceTo(par1IBlockAccess, par2 - 1, par3, par4);
-		boolean flag3 = this.canConnectFenceTo(par1IBlockAccess, par2 + 1, par3, par4);
+		boolean flag = this.canConnectFenceTo(bAccess, x, y, z - 1);
+		boolean flag1 = this.canConnectFenceTo(bAccess, x, y, z + 1);
+		boolean flag2 = this.canConnectFenceTo(bAccess, x - 1, y, z);
+		boolean flag3 = this.canConnectFenceTo(bAccess, x + 1, y, z);
 		float f = 0.375F;
 		float f1 = 0.625F;
 		float f2 = 0.375F;
 		float f3 = 0.625F;
 
-		if (flag)
-			f2 = 0.0F;
-
-		if (flag1)
-			f3 = 1.0F;
-
-		if (flag2)
-			f = 0.0F;
-
-		if (flag3)
-			f1 = 1.0F;
+		if (flag) f2 = 0.0F;
+		if (flag1) f3 = 1.0F;
+		if (flag2) f = 0.0F;
+		if (flag3) f1 = 1.0F;
 
 		this.setBlockBounds(f, 0.0F, f2, f1, 1.0F, f3);
 	}
@@ -186,7 +169,7 @@ public class BlockCustomFence extends BlockFence implements IMultipleBlock
 	}
 
 	@Override
-	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public boolean getBlocksMovement(IBlockAccess bAccess, int x, int y, int z)
 	{
 		return true;
 	}
@@ -204,9 +187,9 @@ public class BlockCustomFence extends BlockFence implements IMultipleBlock
 	 * Returns true if the specified block can be connected by a fence
 	 */
 	@Override
-	public boolean canConnectFenceTo(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public boolean canConnectFenceTo(IBlockAccess bAccess, int x, int y, int z)
 	{
-		Block block = par1IBlockAccess.getBlock(par2, par3, par4);
+		Block block = bAccess.getBlock(x, y, z);
 
 		if (TFCBlocks.canFenceConnectTo(block))
 			return true;
@@ -225,21 +208,16 @@ public class BlockCustomFence extends BlockFence implements IMultipleBlock
 	 */
 	@SideOnly(Side.CLIENT)
 	@Override
-	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
 		return true;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
 	{
-		return par1World.isRemote ? true : ItemLead.func_150909_a(par5EntityPlayer, par1World, par2, par3, par4);
-	}
-
-	@Override
-	public Block getBlockTypeForRender() {
-		return TFCBlocks.Fence;
+		return world.isRemote ? true : ItemLead.func_150909_a(player, world, x, y, z);
 	}
 
 	@Override

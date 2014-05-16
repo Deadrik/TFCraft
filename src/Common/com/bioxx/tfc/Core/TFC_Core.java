@@ -43,7 +43,7 @@ import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.ItemTFCArmor;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
-import com.bioxx.tfc.TileEntities.TileEntityPartial;
+import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.IFood;
 import com.bioxx.tfc.api.TFCOptions;
@@ -776,7 +776,7 @@ public class TFC_Core
 			return true;
 		else if(world.getBlock(x, y, z) == TFCBlocks.stoneSlabs)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x, y, z);
+			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 			if(BlockSlab.getTopChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -790,7 +790,7 @@ public class TFC_Core
 			return true;
 		else if(world.getBlock(x, y, z) == TFCBlocks.stoneSlabs)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x, y, z);
+			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 			if(BlockSlab.getBottomChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -800,11 +800,11 @@ public class TFC_Core
 
 	public static boolean isNorthSolid(World world, int x, int y, int z)
 	{
-		if(world.getBlock(x, y, z-1).isNormalCube())
+		if(world.getBlock(x, y, z - 1).isNormalCube())
 			return true;
-		else if(world.getBlock(x, y, z-1) == TFCBlocks.stoneSlabs)
+		else if(world.getBlock(x, y, z - 1) == TFCBlocks.stoneSlabs)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x, y, z-1);
+			TEPartial te = (TEPartial) world.getTileEntity(x, y, z - 1);
 			if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -819,7 +819,7 @@ public class TFC_Core
 			return true;
 		else if(bid == TFCBlocks.stoneSlabs)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x, y, z);
+			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 			if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -829,11 +829,11 @@ public class TFC_Core
 
 	public static boolean isSouthSolid(World world, int x, int y, int z)
 	{
-		if(world.getBlock(x, y, z+1).isNormalCube())
+		if(world.getBlock(x, y, z + 1).isNormalCube())
 			return true;
-		else if(world.getBlock(x, y, z+1) == TFCBlocks.stoneSlabs)
+		else if(world.getBlock(x, y, z + 1) == TFCBlocks.stoneSlabs)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x, y, z+1);
+			TEPartial te = (TEPartial) world.getTileEntity(x, y, z + 1);
 			if(BlockSlab.getSouthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -847,7 +847,7 @@ public class TFC_Core
 			return true;
 		else if(world.getBlock(x, y, z) == TFCBlocks.stoneSlabs)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x, y, z);
+			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 			if(BlockSlab.getSouthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -857,11 +857,11 @@ public class TFC_Core
 
 	public static boolean isEastSolid(World world, int x, int y, int z)
 	{
-		if(world.getBlock(x-1, y, z).isNormalCube())
+		if(world.getBlock(x - 1, y, z).isNormalCube())
 			return true;
-		else if(world.getBlock(x-1, y, z) == TFCBlocks.stoneSlabs)
+		else if(world.getBlock(x - 1, y, z) == TFCBlocks.stoneSlabs)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x-1, y, z);
+			TEPartial te = (TEPartial) world.getTileEntity(x - 1, y, z);
 			if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -875,7 +875,7 @@ public class TFC_Core
 			return true;
 		else if(world.getBlock(x, y, z) == TFCBlocks.stoneSlabs)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x, y, z);
+			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 			if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -889,7 +889,7 @@ public class TFC_Core
 			return true;
 		else if(world.getBlock(x + 1, y, z) == TFCBlocks.stoneSlabs)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x+1, y, z);
+			TEPartial te = (TEPartial) world.getTileEntity(x + 1, y, z);
 			if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -903,7 +903,7 @@ public class TFC_Core
 			return true;
 		else if(world.getBlock(x, y, z) == TFCBlocks.stoneSlabs)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x, y, z);
+			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 			if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
 				return false;
 			return true;

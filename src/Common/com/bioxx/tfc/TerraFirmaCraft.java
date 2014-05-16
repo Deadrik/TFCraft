@@ -330,9 +330,9 @@ public class TerraFirmaCraft
 
 		TFCOptions.enableCropsDie = TFCOptions.getBooleanFor(config, "Crops","enableCropsDie",false);
 
-		TFCOptions.pitKilnBurnTime = TFCOptions.getIntFor(config,"General","pitKilnBurnTime", 8, "This is the number of hours that the pit kiln should burn before being completed. Longer than 8 hours will require players to feed extra logs to the fire beyond the initial 16 in the full log pile. Logs burn for 30 minutes each.");
+		TFCOptions.pitKilnBurnTime = TFCOptions.getIntFor(config,"General","pitKilnBurnTime", 8, "This is the number of hours that the pit kiln should burn before being completed.");
 		TFCOptions.maxProtectionMonths = TFCOptions.getIntFor(config,"Protection","maxProtectionMonths", 10, "The maximum number of months of spawn protection that can accumulate.");
-		TFCOptions.protectionGain = TFCOptions.getIntFor(config,"Protection","protectionGain", 8, "The number of hours of protection gained in the 3x3 chunk area for spending 1 hour in that chunk.");
+		TFCOptions.protectionGain = TFCOptions.getIntFor(config, "Protection", "protectionGain", 8, "The number of hours of protection gained in the 5x5 chunk area for spending 1 hour in that chunk.");
 
 		TFCOptions.HealthGainRate = TFCOptions.getIntFor(config,"Player","HealthGainRate", 20, "The rate of Health Gain per experience level. Set to 0 to turn off.");
 		TFCOptions.HealthGainCap = TFCOptions.getIntFor(config,"Player","HealthGainCap", 3000, "The maximum achievable health pool total.");

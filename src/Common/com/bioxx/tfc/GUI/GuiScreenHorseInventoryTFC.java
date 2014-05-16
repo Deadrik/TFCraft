@@ -3,13 +3,13 @@ package com.bioxx.tfc.GUI;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
+import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,21 +20,22 @@ public class GuiScreenHorseInventoryTFC extends GuiContainer
 	private static final ResourceLocation horseGuiTextures = new ResourceLocation("textures/gui/container/horse.png");
 	private IInventory field_110413_u;
 	private IInventory field_110412_v;
-	private EntityHorse horse;
+	private EntityHorseTFC horse;
 	private float field_110416_x;
 	private float field_110415_y;
 
-	public GuiScreenHorseInventoryTFC(IInventory par1IInventory, IInventory par2IInventory, EntityHorse par3EntityHorse)
+	public GuiScreenHorseInventoryTFC(IInventory playerInv, IInventory horseInv, EntityHorseTFC horse)
 	{
-		super(new ContainerHorseInventoryTFC(par1IInventory, par2IInventory, par3EntityHorse));
-		this.field_110413_u = par1IInventory;
-		this.field_110412_v = par2IInventory;
-		this.horse = par3EntityHorse;
+		super(new ContainerHorseInventoryTFC(playerInv, horseInv, horse));
+		this.field_110413_u = playerInv;
+		this.field_110412_v = horseInv;
+		this.horse = horse;
 		this.allowUserInput = false;
 	}
 	/**
 	 * Draw the foreground layer for the GuiContainer (everything in front of the items)
 	 */
+	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		this.fontRendererObj.drawString(this.field_110412_v.hasCustomInventoryName() ? this.field_110412_v.getInventoryName() : I18n.format(this.field_110412_v.getInventoryName(), new Object[0]), 8, 6, 4210752);
@@ -44,6 +45,7 @@ public class GuiScreenHorseInventoryTFC extends GuiContainer
 	/**
 	 * Draw the background layer for the GuiContainer (everything behind the items)
 	 */
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -68,6 +70,7 @@ public class GuiScreenHorseInventoryTFC extends GuiContainer
 	/**
 	 * Draws the screen and all the components in it.
 	 */
+	@Override
 	public void drawScreen(int par1, int par2, float par3)
 	{
 		this.field_110416_x = (float)par1;

@@ -1,13 +1,13 @@
 package com.bioxx.tfc.Render.Blocks;
 
-import com.bioxx.tfc.Blocks.Terrain.BlockGrass;
-import com.bioxx.tfc.Render.RenderBlocksFixUV;
-import com.bioxx.tfc.TileEntities.TileEntityDetailed;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
+
+import com.bioxx.tfc.Blocks.Terrain.BlockGrass;
+import com.bioxx.tfc.Render.RenderBlocksFixUV;
+import com.bioxx.tfc.TileEntities.TEDetailed;
 
 public class RenderDetailed 
 {
@@ -15,7 +15,7 @@ public class RenderDetailed
 
 	public static boolean renderBlockDetailed(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
-		TileEntityDetailed te = (TileEntityDetailed) renderblocks.blockAccess.getTileEntity(i, j, k);
+		TEDetailed te = (TEDetailed) renderblocks.blockAccess.getTileEntity(i, j, k);
 		int md = renderblocks.blockAccess.getBlockMetadata(i, j, k);
 
 		if(renderer == null)
@@ -70,7 +70,7 @@ public class RenderDetailed
 		return true;
 	}
 
-	private static void renderMiniBlock(Block block, int i, int j, int k, int x, int y, int z, RenderBlocks renderblocks, TileEntityDetailed te, int type, int meta)
+	private static void renderMiniBlock(Block block, int i, int j, int k, int x, int y, int z, RenderBlocks renderblocks, TEDetailed te, int type, int meta)
 	{
 		int l = block.colorMultiplier(renderblocks.blockAccess, i, j, k);
 		float f = (l >> 16 & 255) / 255.0F;
@@ -149,7 +149,7 @@ public class RenderDetailed
 		return true;
 	}
 
-	public static boolean isOpaque(TileEntityDetailed te, int x, int y, int z)
+	public static boolean isOpaque(TEDetailed te, int x, int y, int z)
 	{
 		return te.data.get((x * 8 + z)*8 + y);
 	}

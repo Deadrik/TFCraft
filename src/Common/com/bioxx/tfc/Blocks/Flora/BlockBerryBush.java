@@ -10,6 +10,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -21,7 +22,6 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -57,7 +57,8 @@ public class BlockBerryBush extends BlockTerraContainer
 		icons = new IIcon[MetaNames.length];
 		iconsBerries = new IIcon[MetaNames.length];
 		this.setTickRandomly(true);
-		this.setCreativeTab(TFCTabs.TFCFoods);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
+		Blocks.fire.setFireInfo(this, 20, 20);
 	}
 
 	@SideOnly(Side.CLIENT)

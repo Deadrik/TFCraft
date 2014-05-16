@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -30,6 +31,7 @@ public class BlockLogVert extends BlockTerra
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
 		//this.setCreativeTab(CreativeTabs.tabDecorations);
+		Blocks.fire.setFireInfo(this, 5, 10);
 	}
 
 	@Override
@@ -42,16 +44,22 @@ public class BlockLogVert extends BlockTerra
 		if(equip!=null)
 		{
 			for(int cnt = 0; cnt < Recipes.Axes.length && !isAxeorSaw; cnt++)
+			{
 				if(equip.getItem() == Recipes.Axes[cnt])
 					isAxeorSaw = true;
+			}
 
 			for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
+			{
 				if(equip.getItem() == Recipes.Saws[cnt])
 					isAxeorSaw = true;
+			}
 
 			for(int cnt = 0; cnt < Recipes.Hammers.length && !isAxeorSaw; cnt++)
+			{
 				if(equip.getItem() == Recipes.Hammers[cnt])
 					isHammer = true;
+			}
 		}
 
 		if(isAxeorSaw)
@@ -60,7 +68,7 @@ public class BlockLogVert extends BlockTerra
 		}
 		else if(isHammer)
 		{
-			EntityItem item = new EntityItem(world, i+0.5, j+0.5, k+0.5, new ItemStack(TFCItems.Stick, 1+world.rand.nextInt(3)));
+			EntityItem item = new EntityItem(world, i + 0.5, j + 0.5, k + 0.5, new ItemStack(TFCItems.Stick, 1 + world.rand.nextInt(3)));
 			world.spawnEntityInWorld(item);
 		}
 		else
@@ -76,7 +84,7 @@ public class BlockLogVert extends BlockTerra
 	}	
 
 	@Override
-	public Item getItemDropped(int i, Random random, int j)
+	public Item getItemDropped(int i, Random R, int j)
 	{
 		return TFCItems.Logs;
 	}
@@ -96,10 +104,10 @@ public class BlockLogVert extends BlockTerra
 	/**
 	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
 	 */
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List list)
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
 		for(int i = 0; i < woodNames.length; i++)
-			list.add(new ItemStack(this,1,i));
+			list.add(new ItemStack(this, 1, i));
 	}
 
 	@Override

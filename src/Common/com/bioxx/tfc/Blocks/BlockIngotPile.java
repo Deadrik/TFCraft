@@ -115,7 +115,10 @@ public class BlockIngotPile extends BlockTerraContainer
 				//teip.broadcastPacketInRange(teip.createUpdatePacket());
 			}
 			else
+			{
+				teip.storage[0] = null;
 				world.setBlockToAir(i, j, k);
+			}
 		}
 	}
 

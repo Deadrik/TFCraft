@@ -19,7 +19,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.TileEntities.TileEntityPartial;
+import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.TFCDirection;
@@ -99,37 +99,53 @@ public class BlockCollapsable extends BlockTerraContainer
 			return true;
 
 		if(world.getBlock(i+1, j, k).isOpaqueCube())
+		{
 			if(world.getBlock(i+1, j-1, k).isOpaqueCube() && world.getBlock(i+1, j-2, k).isOpaqueCube())
 				return true;
+		}
 
 		if(world.getBlock(i-1, j, k).isOpaqueCube())
+		{
 			if(world.getBlock(i-1, j-1, k).isOpaqueCube() && world.getBlock(i-1, j-2, k).isOpaqueCube())
 				return true;
+		}
 
 		if(world.getBlock(i, j, k+1).isOpaqueCube())
+		{
 			if(world.getBlock(i, j-1, k+1).isOpaqueCube() && world.getBlock(i, j-2, k+1).isOpaqueCube())
 				return true;
+		}
 
 		if(world.getBlock(i, j, k-1).isOpaqueCube())
+		{
 			if(world.getBlock(i, j-1, k-1).isOpaqueCube() && world.getBlock(i, j-2, k-1).isOpaqueCube())
 				return true;
+		}
 
 		//Diagonals
 		if(world.getBlock(i+1, j, k-1).isOpaqueCube())
+		{
 			if(world.getBlock(i+1, j-1, k-1).isOpaqueCube())
 				return true;
+		}
 
 		if(world.getBlock(i-1, j, k-1).isOpaqueCube())
+		{
 			if(world.getBlock(i-1, j-1, k-1).isOpaqueCube())
 				return true;
+		}
 
 		if(world.getBlock(i+1, j, k+1).isOpaqueCube())
+		{
 			if(world.getBlock(i+1, j-1, k+1).isOpaqueCube())
 				return true;
+		}
 
 		if(world.getBlock(i-1, j, k+1).isOpaqueCube())
+		{
 			if(world.getBlock(i-1, j-1, k+1).isOpaqueCube())
 				return true;
+		}
 
 		return false;
 	}
@@ -137,20 +153,30 @@ public class BlockCollapsable extends BlockTerraContainer
 	public static Boolean isNearSupport(World world, int i, int j, int k, int range, float collapseChance)
 	{
 		for(int y = -1; y < 1; y++)
+		{
 			for(int x = -range; x < range+1; x++)
+			{
 				for(int z = -range; z < range+1; z++)
+				{
 					if(TFC_Core.isHorizSupport(world.getBlock(i + x, j + y, k + z)))
+					{
 						if(world.rand.nextFloat() < collapseChance/100f/2f)
 							world.setBlockToAir(i+x, j+y, k+z);
 						else return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 
 	public Boolean isUnderLoad(World world, int i, int j, int k)
 	{
 		for(int x = 1; x <= TFCOptions.minimumRockLoad; x++)
+		{
 			if(!world.getBlock(i, j+x, k).isOpaqueCube())
 				return false;
+		}
 		return true;
 	}
 
@@ -167,6 +193,7 @@ public class BlockCollapsable extends BlockTerraContainer
 			return false;
 
 		if (canFallBelow(world, xCoord, yCoord - 1, zCoord)  && !isNearSupport(world, i, j, k, 4, collapseChance)  && isUnderLoad(world, i, j, k))
+		{
 			if (!world.isRemote && fallingBlock != Blocks.air)
 			{
 				if(fallingBlock != null)
@@ -182,24 +209,25 @@ public class BlockCollapsable extends BlockTerraContainer
 
 				world.setBlockToAir(i, j, k);
 
-				if(world.getBlock(i, j-1, k) == TFCBlocks.stoneSlabs && ((TileEntityPartial)world.getTileEntity(i, j-1, k)).blockType == this && 
-						((TileEntityPartial)world.getTileEntity(i, j-1, k)).MetaID == fallingBlockMeta)
+				if(world.getBlock(i, j-1, k) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(i, j-1, k)).blockType == this && 
+						((TEPartial)world.getTileEntity(i, j-1, k)).MetaID == fallingBlockMeta)
 				{
 					world.setBlockToAir(i, j-1, k);
 
-					if(world.getBlock(i, j-2, k) == TFCBlocks.stoneSlabs && ((TileEntityPartial)world.getTileEntity(i, j-2, k)).blockType == this && 
-							((TileEntityPartial)world.getTileEntity(i, j-2, k)).MetaID == fallingBlockMeta)
+					if(world.getBlock(i, j-2, k) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(i, j-2, k)).blockType == this && 
+							((TEPartial)world.getTileEntity(i, j-2, k)).MetaID == fallingBlockMeta)
 					{
 						world.setBlockToAir(i, j-2, k);
 
-						if(world.getBlock(i, j-3, k) == TFCBlocks.stoneSlabs && ((TileEntityPartial)world.getTileEntity(i, j-3, k)).blockType == this && 
-								((TileEntityPartial)world.getTileEntity(i, j-3, k)).MetaID == fallingBlockMeta)
+						if(world.getBlock(i, j-3, k) == TFCBlocks.stoneSlabs && ((TEPartial)world.getTileEntity(i, j-3, k)).blockType == this && 
+								((TEPartial)world.getTileEntity(i, j-3, k)).MetaID == fallingBlockMeta)
 							world.setBlockToAir(i, j-3, k);
 					}
 				}
 
 				return true;
 			}
+		}
 		return false;
 	}
 
@@ -231,13 +259,17 @@ public class BlockCollapsable extends BlockTerraContainer
 			boolean found = false;
 			//Now we look for a suitable block nearby to act as the epicenter
 			for(int x1 = -1; x1 < 2 && !found; x1++)
+			{
 				for(int z1 = -1; z1 < 2 && !found; z1++)
+				{
 					if(world.getBlock(i+x1, j, k+z1) instanceof BlockCollapsable && 
 						((BlockCollapsable)world.getBlock(i+x1, j, k+z1)).tryToFall(world, i+x1, j, k+z1, 0))
 					{
 						found = true;
 						triggerCollapse(world, entityplayer, i, j, k, meta);
 					}
+				}
+			}
 		}
 	}
 
@@ -415,9 +447,9 @@ public class BlockCollapsable extends BlockTerraContainer
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion ex)
+	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion ex)
 	{
-		harvestBlock(par1World, null, par2,par3,par4,par1World.getBlockMetadata(par2, par3, par4));
+		harvestBlock(world, null, x, y, z, world.getBlockMetadata(x, y, z));
 	}
 
 	@Override

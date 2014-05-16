@@ -20,18 +20,18 @@ import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
+import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
-import com.bioxx.tfc.TileEntities.TileEntityPartial;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 import com.bioxx.tfc.api.TFCOptions;
 
-public class TFC_CoreRender 
+public class TFC_CoreRender
 {
-	public static boolean renderBlockSlab(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
+	public static boolean renderBlockSlab(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
-		TileEntityPartial te = (TileEntityPartial) renderblocks.blockAccess.getTileEntity(par2, par3, par4);
-		int md = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
+		TEPartial te = (TEPartial) renderblocks.blockAccess.getTileEntity(x, y, z);
+		int md = renderblocks.blockAccess.getBlockMetadata(x, y, z);
 
 		boolean breaking = false;
 		/*if(renderblocks.overrideBlockTexture >= 240)
@@ -44,8 +44,8 @@ public class TFC_CoreRender
 
 		int type = te.TypeID;
 		int meta = te.MetaID;
-		Block block = Block.getBlockById(type);
-		IIcon tex = block.getIcon(0, meta);
+		Block b = Block.getBlockById(type);
+		IIcon tex = b.getIcon(0, meta);
 
 		//if(!breaking)
 		//	ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
@@ -63,24 +63,24 @@ public class TFC_CoreRender
 
 		//This is the old ore code that I experimented with
 		IIcon over = renderblocks.overrideBlockTexture;
-		if(!breaking && (block == TFCBlocks.Ore || block == TFCBlocks.Ore2 || block == TFCBlocks.Ore3))
+		if(!breaking && (b == TFCBlocks.Ore || b == TFCBlocks.Ore2 || b == TFCBlocks.Ore3))
 		{
 			//TFCBiome biome = (TFCBiome) renderblocks.blockAccess.getBiomeGenForCoords(par2, par4);
-			renderblocks.overrideBlockTexture = getRockTexture(Minecraft.getMinecraft().theWorld, par2, par3, par4);
-			renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
+			renderblocks.overrideBlockTexture = getRockTexture(Minecraft.getMinecraft().theWorld, x, y, z);
+			renderblocks.renderStandardBlock(block, x, y, z);
 			renderblocks.overrideBlockTexture = over;
 		}
 
 		if(!breaking)
 			renderblocks.overrideBlockTexture = tex;
 
-		renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
+		renderblocks.renderStandardBlock(block, x, y, z);
 		renderblocks.overrideBlockTexture = over;
 
 		return true;
 	}
 
-	public static boolean renderBlockStairs(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
+	public static boolean renderBlockStairs(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
 		boolean breaking = false;
 		/*if(renderblocks.overrideBlockTexture >= 240)
@@ -88,7 +88,7 @@ public class TFC_CoreRender
         	breaking = true;
         }*/
 
-		int var5 = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
+		int var5 = renderblocks.blockAccess.getBlockMetadata(x, y, z);
 		int var6 = var5 & 3;
 		float var7 = 0.0F;
 		float var8 = 0.5F;
@@ -103,7 +103,7 @@ public class TFC_CoreRender
 			var10 = 0.5F;
 		}
 
-		TileEntityPartial te = (TileEntityPartial) renderblocks.blockAccess.getTileEntity(par2, par3, par4);
+		TEPartial te = (TEPartial) renderblocks.blockAccess.getTileEntity(x, y, z);
 		if(te.TypeID <= 0)
 			return false;
 
@@ -117,27 +117,27 @@ public class TFC_CoreRender
 		}
 		renderblocks.renderAllFaces = true;
 		renderblocks.setRenderBounds(0.0F, var7, 0.0F, 1.0F, var8, 1.0F);
-		renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
+		renderblocks.renderStandardBlock(block, x, y, z);
 
 		if (var6 == 0)
 		{
 			renderblocks.setRenderBounds(0.5F, var9, 0.0F, 1.0F, var10, 1.0F);
-			renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
+			renderblocks.renderStandardBlock(block, x, y, z);
 		}
 		else if (var6 == 1)
 		{
 			renderblocks.setRenderBounds(0.0F, var9, 0.0F, 0.5F, var10, 1.0F);
-			renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
+			renderblocks.renderStandardBlock(block, x, y, z);
 		}
 		else if (var6 == 2)
 		{
 			renderblocks.setRenderBounds(0.0F, var9, 0.5F, 1.0F, var10, 1.0F);
-			renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
+			renderblocks.renderStandardBlock(block, x, y, z);
 		}
 		else if (var6 == 3)
 		{
 			renderblocks.setRenderBounds(0.0F, var9, 0.0F, 1.0F, var10, 0.5F);
-			renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
+			renderblocks.renderStandardBlock(block, x, y, z);
 		}
 		renderblocks.clearOverrideBlockTexture();
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
@@ -246,7 +246,7 @@ public class TFC_CoreRender
 
 	public static Random renderRandom = new Random();
 
-	public static boolean RenderLooseRock(Block block, int i, int j, int k, RenderBlocks renderblocks)	
+	public static boolean RenderLooseRock(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
 		boolean breaking = false;
 		/*if(renderblocks.overrideBlockTexture >= 240)
@@ -305,7 +305,7 @@ public class TFC_CoreRender
 		return true;
 	}
 
-	public static IIcon getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord) 
+	public static IIcon getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord)
 	{
 		IIcon var27;
 		DataLayer rockLayer1 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
@@ -715,7 +715,8 @@ public class TFC_CoreRender
 		return true;
 	}
 
-	public static boolean RenderSeaPlant(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks){
+	public static boolean RenderSeaPlant(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
+	{
 		boolean plantRender,fluidRender;
 		//plantRender = renderblocks.renderCrossedSquares(par1Block, par2, par3, par4);
 
@@ -728,7 +729,8 @@ public class TFC_CoreRender
 		return /*plantRender && */fluidRender;
 	}
 
-	public static boolean RenderSeaPlantFrozen(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks){
+	public static boolean RenderSeaPlantFrozen(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
+	{
 		boolean plantRender,fluidRender;
 		//plantRender = renderblocks.renderCrossedSquares(par1Block, par2, par3, par4);
 		//fluidRender = renderblocks.renderBlockFluids(Block.waterMoving, par2, par3, par4);

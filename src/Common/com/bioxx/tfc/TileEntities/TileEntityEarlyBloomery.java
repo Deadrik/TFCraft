@@ -97,7 +97,7 @@ public class TileEntityEarlyBloomery extends TileEntity
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 			int[] direction = BlockEarlyBloomery.bloomeryToStackMap[getCharcoalDir(meta)];
 
-			if (this.charcoalCount < this.oreCount)
+			if (this.charcoalCount < this.oreCount || oreCount == 0)
 				return false;
 
 			Block bid = worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1]);

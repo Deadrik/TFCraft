@@ -1,39 +1,39 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.Containers.Slots.ContainerHorseInventorySlotArmor;
-import com.bioxx.tfc.Containers.Slots.ContainerHorseInventorySlotSaddle;
-
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import com.bioxx.tfc.Containers.Slots.ContainerHorseInventorySlotArmor;
+import com.bioxx.tfc.Containers.Slots.ContainerHorseInventorySlotSaddle;
+import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
+
 public class ContainerHorseInventoryTFC extends Container
 {
 	private IInventory field_111243_a;
-	private EntityHorse theHorse;
+	private EntityHorseTFC theHorse;
 
-	public ContainerHorseInventoryTFC(IInventory par1IInventory, IInventory par2IInventory, EntityHorse par3EntityHorse)
+	public ContainerHorseInventoryTFC(IInventory playerInv, IInventory horseInv, EntityHorseTFC horse)
 	{
-		this.field_111243_a = par2IInventory;
-		this.theHorse = par3EntityHorse;
+		this.field_111243_a = horseInv;
+		this.theHorse = horse;
 		byte b0 = 3;
-		par2IInventory.openInventory();
+		horseInv.openInventory();
 		int i = (b0 - 4) * 18;
-		this.addSlotToContainer(new ContainerHorseInventorySlotSaddle(this, par2IInventory, 0, 8, 18));
-		this.addSlotToContainer(new ContainerHorseInventorySlotArmor(this, par2IInventory, 1, 8, 36, par3EntityHorse));
+		this.addSlotToContainer(new ContainerHorseInventorySlotSaddle(this, horseInv, 0, 8, 18));
+		this.addSlotToContainer(new ContainerHorseInventorySlotArmor(this, horseInv, 1, 8, 36, horse));
 		int j;
 		int k;
 
-		if (par3EntityHorse.isChested())
+		if (horse.isChested())
 		{
 			for (j = 0; j < b0; ++j)
 			{
 				for (k = 0; k < 5; ++k)
 				{
-					this.addSlotToContainer(new Slot(par2IInventory, 2 + k + j * 5, 80 + k * 18, 18 + j * 18));
+					this.addSlotToContainer(new Slot(horseInv, 2 + k + j * 5, 80 + k * 18, 18 + j * 18));
 				}
 			}
 		}
@@ -42,23 +42,23 @@ public class ContainerHorseInventoryTFC extends Container
 		{
 			for (k = 0; k < 9; ++k)
 			{
-				this.addSlotToContainer(new Slot(par1IInventory, k + j * 9 + 9, 8 + k * 18, 102 + j * 18 + i));
+				this.addSlotToContainer(new Slot(playerInv, k + j * 9 + 9, 8 + k * 18, 102 + j * 18 + i));
 			}
 		}
 
 		for (j = 0; j < 9; ++j)
-			this.addSlotToContainer(new Slot(par1IInventory, j, 8 + j * 18, 160 + i));
+			this.addSlotToContainer(new Slot(playerInv, j, 8 + j * 18, 160 + i));
 	}
 
-	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+	public boolean canInteractWith(EntityPlayer player)
 	{
-		return this.field_111243_a.isUseableByPlayer(par1EntityPlayer) && this.theHorse.isEntityAlive() && this.theHorse.getDistanceToEntity(par1EntityPlayer) < 8.0F;
+		return this.field_111243_a.isUseableByPlayer(player) && this.theHorse.isEntityAlive() && this.theHorse.getDistanceToEntity(player) < 8.0F;
 	}
 
 	/**
 	 * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
 	 */
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlot(EntityPlayer player, int par2)
 	{
 		ItemStack itemstack = null;
 		Slot slot = (Slot)this.inventorySlots.get(par2);
@@ -102,5 +102,6 @@ public class ContainerHorseInventoryTFC extends Container
 	{
 		super.onContainerClosed(par1EntityPlayer);
 		this.field_111243_a.closeInventory();
+		this.theHorse.updateChestSaddle();
 	}
 }

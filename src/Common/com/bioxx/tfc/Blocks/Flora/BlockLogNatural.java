@@ -45,6 +45,7 @@ public class BlockLogNatural extends BlockTerra
 		sideIcons = new IIcon[woodNames.length];
 		innerIcons = new IIcon[woodNames.length];
 		rotatedSideIcons = new IIcon[woodNames.length];
+		Blocks.fire.setFireInfo(this, 5, 10);
 	}
 
 	@Override

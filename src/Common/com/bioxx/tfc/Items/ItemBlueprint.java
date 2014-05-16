@@ -2,20 +2,20 @@ package com.bioxx.tfc.Items;
 
 import java.util.BitSet;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Items.Tools.ItemChisel;
-import com.bioxx.tfc.Items.Tools.ItemHammer;
-import com.bioxx.tfc.TileEntities.TileEntityDetailed;
-import com.bioxx.tfc.api.Util.Helper;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Items.Tools.ItemChisel;
+import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.TileEntities.TEDetailed;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemBlueprint extends ItemTerra
 {
@@ -57,14 +57,14 @@ public class ItemBlueprint extends ItemTerra
 	}
 
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		if(stack.stackTagCompound == null &&
 				(world.getBlock(x, y, z) == TFCBlocks.Detailed))
 		{
-			TileEntityDetailed te = (TileEntityDetailed) world.getTileEntity(x, y, z);
+			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 
-			byte[] data = TileEntityDetailed.toByteArray(te.data);
+			byte[] data = TEDetailed.toByteArray(te.data);
 
 			NBTTagCompound nbt = new NBTTagCompound();
 			nbt.setByteArray("data", data);
@@ -87,9 +87,9 @@ public class ItemBlueprint extends ItemTerra
 			if(hasChisel >= 0 && hasHammer >= 0)
 			{
 				
-				TileEntityDetailed te = (TileEntityDetailed) world.getTileEntity(x, y, z);
+				TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 				byte[] data = stack.stackTagCompound.getByteArray("data");
-				BitSet blueprintData = TileEntityDetailed.fromByteArray(data, 512);
+				BitSet blueprintData = TEDetailed.fromByteArray(data, 512);
 				for(int c = 0; c < 512; c++)
 				{
 					if(te.data.get(c) && !blueprintData.get(c))
@@ -115,10 +115,10 @@ public class ItemBlueprint extends ItemTerra
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack par1ItemStack)
+	public String getItemStackDisplayName(ItemStack is)
 	{
-		if(par1ItemStack.stackTagCompound != null)
-			return par1ItemStack.stackTagCompound.getString("Name");
+		if(is.stackTagCompound != null)
+			return is.stackTagCompound.getString("Name");
 		else return StatCollector.translateToLocal("gui.Blueprint");
 	}
 }

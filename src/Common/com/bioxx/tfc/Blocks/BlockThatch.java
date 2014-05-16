@@ -2,8 +2,6 @@ package com.bioxx.tfc.Blocks;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -11,11 +9,15 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -28,6 +30,7 @@ public class BlockThatch extends BlockTerra
 		super(Material.grass);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setBlockBounds(0f, 0, 0f, 1f, 1, 1f);
+		Blocks.fire.setFireInfo(this, 60, 30);
 	}
 
 	@Override

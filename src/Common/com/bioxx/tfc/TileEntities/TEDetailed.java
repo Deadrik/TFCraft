@@ -6,9 +6,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityDetailed extends TileEntity
+public class TEDetailed extends NetworkTileEntity
 {
 	public short TypeID = -1;
 	public byte MetaID = 0;
@@ -18,7 +17,7 @@ public class TileEntityDetailed extends TileEntity
 	protected byte packetType = -1;
 	private BitSet quads;
 
-	public TileEntityDetailed()
+	public TEDetailed()
 	{
 		data = new BitSet(512);
 		quads = new BitSet(8);
@@ -73,39 +72,17 @@ public class TileEntityDetailed extends TileEntity
 		return !quads.get((x * 2 + z) * 2 + y);
 	}
 	
-	public static BitSet fromByteArray(byte[] bytes, int size)
-	{
-		BitSet bits = new BitSet(size);
-		for (int i = 0; i < bytes.length * 8; i++)
-		{
-			if ((bytes[bytes.length - i / 8 - 1] & (1 << (i % 8))) > 0)
-				bits.set(i);
-		}
-		return bits;
-	}
-
-	public static byte[] toByteArray(BitSet bits)
-	{
-		byte[] bytes = new byte[bits.length()/8+1];
-		for (int i=0; i<bits.length(); i++)
-		{
-			if (bits.get(i))
-				bytes[bytes.length - i / 8-1] |= 1 << (i%8);
-		}
-		return bytes;
-	}
-
 	/**
 	 * Reads a tile entity from NBT.
 	 */
-	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readFromNBT(NBTTagCompound nbttc)
 	{
-		super.readFromNBT(par1NBTTagCompound);
-		MetaID = par1NBTTagCompound.getByte("metaID");
-		TypeID = par1NBTTagCompound.getShort("typeID");
+		super.readFromNBT(nbttc);
+		MetaID = nbttc.getByte("metaID");
+		TypeID = nbttc.getShort("typeID");
 		data = new BitSet(512);
-		data.or(fromByteArray(par1NBTTagCompound.getByteArray("data"), 512));
-		quads.or(fromByteArray(par1NBTTagCompound.getByteArray("quads"), 8));
+		data.or(fromByteArray(nbttc.getByteArray("data"), 512));
+		quads.or(fromByteArray(nbttc.getByteArray("quads"), 8));
 	}
 
 	/**
@@ -132,6 +109,15 @@ public class TileEntityDetailed extends TileEntity
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
 		readFromNBT(pkt.func_148857_g());
+	}
+
+	@Override
+	public void handleInitPacket(NBTTagCompound nbt)
+	{
+		TypeID = nbt.getShort("typeID");
+		MetaID = nbt.getByte("metaID");
+		data = new BitSet(512);
+		data.or(fromByteArray(nbt.getByteArray("data"), 512));
 
 		for(int subX = 0; subX < 8; subX++)
 		{
@@ -144,9 +130,32 @@ public class TileEntityDetailed extends TileEntity
 				}
 			}
 		}
+
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt)
+	{
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void createDataNBT(NBTTagCompound nbt)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt)
+	{
+		nbt.setShort("typeID", (short) TypeID);
+		nbt.setByte("metaID", MetaID);
+		nbt.setByteArray("data", toByteArray(data));
+		nbt.setByteArray("quads", toByteArray(quads));
+	}
 
 
 
@@ -167,48 +176,17 @@ public class TileEntityDetailed extends TileEntity
 //			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 //			
 //			for(int subX = 0; subX < 8; subX++)
+//			{
 //				for(int subZ = 0; subZ < 8; subZ++)
+//				{
 //					for(int subY = 0; subY < 8; subY++)
+//					{
 //						if(!getBlockExists(subX, subY, subZ))
 //							setQuad(subX, subY, subZ);
-//		}
-//	}
-//
-//	@Override
-//	public void createInitPacket(DataOutputStream outStream) throws IOException 
-//	{
-//		outStream.writeShort(TypeID);
-//		outStream.writeByte(MetaID);
-//		byte[] b = toByteArray(data);
-//		outStream.writeInt(b.length);
-//		outStream.write(b);		
-//	}
-//
-//	@Override
-//	public void handleInitPacket(DataInputStream inStream) throws IOException 
-//	{
-//		TypeID = inStream.readShort();
-//		MetaID = inStream.readByte();
-//
-//		int length = inStream.readInt();
-//		byte[] b = new byte[length];
-//		inStream.readFully(b);
-//		BitSet bs = fromByteArray(b, length);
-//		data.or(bs);
-//
-//		for(int subX = 0; subX < 8; subX++)
-//		{
-//			for(int subZ = 0; subZ < 8; subZ++)
-//			{
-//				for(int subY = 0; subY < 8; subY++)
-//				{
-//					if(!getBlockExists(subX, subY, subZ))
-//						setQuad(subX, subY, subZ);
+//					}
 //				}
 //			}
 //		}
-//		
-//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 //	}
 //
 //	@Override
@@ -285,6 +263,25 @@ public class TileEntityDetailed extends TileEntity
 //		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
 //	}
 
+	public static BitSet fromByteArray(byte[] bytes, int size)
+	{
+		BitSet bits = new BitSet(size);
+		for (int i = 0; i < bytes.length * 8; i++)
+		{
+			if ((bytes[bytes.length - i / 8 - 1] & (1 << (i % 8))) > 0)
+				bits.set(i);
+		}
+		return bits;
+	}
 
-
+	public static byte[] toByteArray(BitSet bits)
+	{
+		byte[] bytes = new byte[bits.length() / 8 + 1];
+		for (int i = 0; i < bits.length(); i++)
+		{
+			if (bits.get(i))
+				bytes[bytes.length - i / 8 - 1] |= 1 << (i % 8);
+		}
+		return bytes;
+	}
 }

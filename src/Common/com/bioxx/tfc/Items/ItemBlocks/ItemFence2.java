@@ -1,22 +1,15 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
+import net.minecraft.block.Block;
+
 import com.bioxx.tfc.api.Constant.Global;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
-
-public class ItemFence2 extends ItemTerraBlock
+public class ItemFence2 extends ItemFence
 {
-	public ItemFence2(Block par1) 
+	public ItemFence2(Block b)
 	{
-		super(par1);
+		super(b);
 		MetaNames = new String[Global.WOOD_ALL.length - 16];
 		System.arraycopy(Global.WOOD_ALL, 16, MetaNames, 0, Global.WOOD_ALL.length - 16);
-	}
-	
-	@Override
-	public void registerIcons(IIconRegister registerer)
-	{
-
 	}
 }

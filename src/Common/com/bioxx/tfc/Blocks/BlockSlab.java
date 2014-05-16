@@ -1,13 +1,5 @@
 package com.bioxx.tfc.Blocks;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.Items.Tools.ItemChisel;
-import com.bioxx.tfc.Items.Tools.ItemHammer;
-import com.bioxx.tfc.TileEntities.TileEntityPartial;
-import com.bioxx.tfc.api.Util.Helper;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -17,6 +9,14 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Items.Tools.ItemChisel;
+import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.TileEntities.TEPartial;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class BlockSlab extends BlockPartial
 {
@@ -39,7 +39,7 @@ public class BlockSlab extends BlockPartial
 	@Override
 	public boolean isLadder(IBlockAccess world, int x, int y, int z, EntityLivingBase entity)
 	{
-		TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x, y, z);
+		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 		if(8 - (getTopChiselLevel(te.extraData) + getBottomChiselLevel(te.extraData)) < 3)
 		{
 			if((8 - (getSouthChiselLevel(te.extraData) + getNorthChiselLevel(te.extraData)) < 3) || 
@@ -140,7 +140,7 @@ public class BlockSlab extends BlockPartial
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
-		TileEntityPartial te = (TileEntityPartial) world.getTileEntity(i, j, k);
+		TEPartial te = (TEPartial) world.getTileEntity(i, j, k);
 		int md = world.getBlockMetadata(i, j, k);
 		if(te != null)
 		{
@@ -175,9 +175,9 @@ public class BlockSlab extends BlockPartial
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) 
+	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int i, int j, int k) 
 	{
-		TileEntityPartial te = (TileEntityPartial) par1IBlockAccess.getTileEntity(i, j, k);
+		TEPartial te = (TEPartial) bAccess.getTileEntity(i, j, k);
 
 		long extraX = (te.extraData) & 0xf;
 		long extraY = (te.extraData >> 4) & 0xf;
@@ -212,7 +212,7 @@ public class BlockSlab extends BlockPartial
 	@Override
 	public boolean isBlockSolid(IBlockAccess world, int x, int y, int z, int side)
 	{
-		TileEntityPartial te = (TileEntityPartial) world.getTileEntity(x, y, z);
+		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 		long data = te.extraData;
 
 		switch(side)

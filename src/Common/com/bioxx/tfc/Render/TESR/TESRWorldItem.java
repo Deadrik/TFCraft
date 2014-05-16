@@ -33,7 +33,7 @@ public class TESRWorldItem extends TESRBase
 			if (te.storage[0] != null)
 			{
 				GL11.glPushMatrix(); //start
-				GL11.glTranslatef((float)d + 0.5f, (float)d1 + 0.05f, (float)d2 + 0.5f);
+				GL11.glTranslatef((float)d + 0.5f, (float)d1 + 0.021f, (float)d2 + 0.5f);
 				if (RenderManager.instance.options.fancyGraphics)
 				{
 					GL11.glRotatef(90, 1.0f, 0.0F, 0.0F);

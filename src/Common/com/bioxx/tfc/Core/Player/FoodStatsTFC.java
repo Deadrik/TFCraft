@@ -86,15 +86,19 @@ public class FoodStatsTFC
 			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength && !player.capabilities.isCreativeMode)
 			{
 				this.foodTimer += TFC_Time.hourLength;
-
+				float drainMult = 1.0f;
+				if(player.getSleepTimer() > 0)
+				{
+					drainMult = 0.50f;
+				}
 				//Water
 				if(player.isSprinting())
 					waterLevel -= 5+(tempWaterMod);
 				if(!player.capabilities.isCreativeMode)
-					waterLevel -= bodyTemp.getExtraWater();
+					waterLevel -= bodyTemp.getExtraWater()*drainMult;
 
 				//Food
-				float hunger = (1 + foodExhaustionLevel) + bodyTemp.getExtraFood();
+				float hunger = ((1 + foodExhaustionLevel) + bodyTemp.getExtraFood())*drainMult;
 				if(this.satisfaction >= hunger)
 				{
 					satisfaction -= hunger; 
@@ -125,7 +129,7 @@ public class FoodStatsTFC
 					//Player heals 1% per 30 in game minutes
 					player.heal((int) (player.getMaxHealth() * 0.01f));
 				}
-				else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.85f && !TFC_Core.isPlayerInDebugMode(player))
+				else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.85f && !TFC_Core.isPlayerInDebugMode(player) && player.getSleepTimer() == 0)
 				{
 					//Players loses health at a rate of 5% per 30 minutes if they are starving
 					player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth() * 0.05f), 10));

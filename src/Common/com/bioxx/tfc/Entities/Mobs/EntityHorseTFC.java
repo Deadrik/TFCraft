@@ -109,7 +109,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.OatGrain, false));
 		this.tasks.addTask(6, this.aiEatGrass);
 		this.tasks.addTask(1, new EntityAIPanicTFC(this, 1.2D,true));
-		this.func_110226_cD();
+		this.updateChestSaddle();
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event. We want spawned
@@ -244,7 +244,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return this.isChested() && (i == 1 || i == 2) ? 17 : 2;
 	}
 
-	private void func_110226_cD()
+	public void updateChestSaddle()
 	{
 		AnimalChest animalchest = this.horseChest;
 		this.horseChest = new AnimalChest("HorseChest", this.func_110225_cC());
@@ -429,7 +429,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 					this.setChested(true);
 					this.playSound("mob.chickenplop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 					flag = true;
-					this.func_110226_cD();
+					this.updateChestSaddle();
 				}
 
 				if (!flag && this.func_110253_bW() && !this.isHorseSaddled() && itemstack.getItem() == Items.saddle)
@@ -626,7 +626,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		if (this.isChested())
 		{
 			NBTTagList nbttaglist = nbttc.getTagList("Items", 10);
-			this.func_110226_cD();
+			this.updateChestSaddle();
 
 			for (int i = 0; i < nbttaglist.tagCount(); ++i)
 			{

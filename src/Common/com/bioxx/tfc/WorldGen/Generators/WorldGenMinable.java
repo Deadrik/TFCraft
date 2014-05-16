@@ -283,7 +283,7 @@ public class WorldGenMinable extends WorldGenerator
 							{
 								te.baseBlockID = Block.getIdFromBlock(b);
 								te.baseBlockMeta = m;
-								te.grade = (byte)grade;
+								te.extraData = (byte)grade;
 							}
 						}
 						blocksMade++;
@@ -311,7 +311,7 @@ public class WorldGenMinable extends WorldGenerator
 					{
 						te.baseBlockID = Block.getIdFromBlock(b);
 						te.baseBlockMeta = m;
-						te.grade = (byte)grade;
+						te.extraData = (byte)grade;
 					}
 				}
 				blocksMade++;
@@ -391,7 +391,7 @@ public class WorldGenMinable extends WorldGenerator
 										{
 											te.baseBlockID = Block.getIdFromBlock(b);
 											te.baseBlockMeta = m;
-											te.grade = (byte)grade;
+											te.extraData = (byte)grade;
 										}
 									}
 								}

@@ -1,14 +1,13 @@
 package com.bioxx.tfc.Render.Blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFence;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.api.IMultipleBlock;
+import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFence;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -20,28 +19,28 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 	static float pixel14 = 14f/16f;
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int par2, int par3, int par4, Block block, int modelId, RenderBlocks renderblocks) 
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderblocks)
 	{
-		BlockFence par1BlockFence = (BlockFence)(((IMultipleBlock)block).getBlockTypeForRender());
+		BlockCustomFence par1BlockFence = (BlockCustomFence)block;
 		boolean flag = false;
 		float f = 0.375F;
 		float f1 = 0.625F;
-		renderblocks.setRenderBounds((double)f, 0.0D, (double)f, (double)f1, 1.0D, (double)f1);
-		renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
+		renderblocks.setRenderBounds(f, 0.0D, f, f1, 1.0D, f1);
+		renderblocks.renderStandardBlock(par1BlockFence, x, y, z);
 		flag = true;
 		boolean flag1 = false;
 		boolean flag2 = false;
 
-		if (par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, par2 - 1, par3, par4) || par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, par2 + 1, par3, par4))
+		if (par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, x - 1, y, z) || par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, x + 1, y, z))
 			flag1 = true;
 
-		if (par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, par2, par3, par4 - 1) || par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, par2, par3, par4 + 1))
+		if (par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, x, y, z - 1) || par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, x, y, z + 1))
 			flag2 = true;
 
-		boolean flag3 = par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, par2 - 1, par3, par4);
-		boolean flag4 = par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, par2 + 1, par3, par4);
-		boolean flag5 = par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, par2, par3, par4 - 1);
-		boolean flag6 = par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, par2, par3, par4 + 1);
+		boolean flag3 = par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, x - 1, y, z);
+		boolean flag4 = par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, x + 1, y, z);
+		boolean flag5 = par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, x, y, z - 1);
+		boolean flag6 = par1BlockFence.canConnectFenceTo(renderblocks.blockAccess, x, y, z + 1);
 
 		if (!flag1 && !flag2)
 			flag1 = true;
@@ -57,22 +56,22 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 
 		if (flag1)
 		{
-			renderblocks.setRenderBounds((double)f4, (double)f2+0.001, (double)f+0.001, (double)f5, (double)f3+0.001, (double)f1+0.001);
-			renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
+			renderblocks.setRenderBounds(f4, f2+0.001, f+0.001, f5, f3+0.001, f1+0.001);
+			renderblocks.renderStandardBlock(par1BlockFence, x, y, z);
 
-			renderblocks.setRenderBounds((double)f5, (double)f2, (double)f1-0.001, (double)f4, (double)f3, (double)f-0.001);
-			renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
+			renderblocks.setRenderBounds(f5, f2, f1-0.001, f4, f3, f-0.001);
+			renderblocks.renderStandardBlock(par1BlockFence, x, y, z);
 
 			flag = true;
 		}
 
 		if (flag2)
 		{
-			renderblocks.setRenderBounds((double)f-0.001, (double)f2+0.001, (double)f6, (double)f1-0.001, (double)f3+0.001, (double)f7);
-			renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
+			renderblocks.setRenderBounds(f-0.001, f2+0.001, f6, f1-0.001, f3+0.001, f7);
+			renderblocks.renderStandardBlock(par1BlockFence, x, y, z);
 
-			renderblocks.setRenderBounds((double)f1+0.001, (double)f2, (double)f7, (double)f+0.001, (double)f3, (double)f6);
-			renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
+			renderblocks.setRenderBounds(f1+0.001, f2, f7, f+0.001, f3, f6);
+			renderblocks.renderStandardBlock(par1BlockFence, x, y, z);
 			flag = true;
 		}
 
@@ -81,26 +80,26 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 
 		if (flag1)
 		{
-			renderblocks.setRenderBounds((double)f4, (double)f2+0.001, (double)f+0.001, (double)f5, (double)f3+0.001, (double)f1+0.001);
-			renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
+			renderblocks.setRenderBounds(f4, f2+0.001, f+0.001, f5, f3+0.001, f1+0.001);
+			renderblocks.renderStandardBlock(par1BlockFence, x, y, z);
 
-			renderblocks.setRenderBounds((double)f5, (double)f2, (double)f1-0.001, (double)f4, (double)f3, (double)f-0.001);
-			renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
+			renderblocks.setRenderBounds(f5, f2, f1-0.001, f4, f3, f-0.001);
+			renderblocks.renderStandardBlock(par1BlockFence, x, y, z);
 
 			flag = true;
 		}
 
 		if (flag2)
 		{
-			renderblocks.setRenderBounds((double)f-0.001, (double)f2+0.001, (double)f6, (double)f1-0.001, (double)f3+0.001, (double)f7);
-			renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
+			renderblocks.setRenderBounds(f-0.001, f2+0.001, f6, f1-0.001, f3+0.001, f7);
+			renderblocks.renderStandardBlock(par1BlockFence, x, y, z);
 
-			renderblocks.setRenderBounds((double)f1+0.001, (double)f2, (double)f7, (double)f+0.001, (double)f3, (double)f6);
-			renderblocks.renderStandardBlock(par1BlockFence, par2, par3, par4);
+			renderblocks.setRenderBounds(f1+0.001, f2, f7, f+0.001, f3, f6);
+			renderblocks.renderStandardBlock(par1BlockFence, x, y, z);
 			flag = true;
 		}
 
-		par1BlockFence.setBlockBoundsBasedOnState(renderblocks.blockAccess, par2, par3, par4);
+		par1BlockFence.setBlockBoundsBasedOnState(renderblocks.blockAccess, x, y, z);
 		return flag;
 	}
 
@@ -109,13 +108,13 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 	{
 		float f = 0.375F;
 		float f1 = 0.625F;
-		renderer.setRenderBounds((double)f, 0.0D, (double)f, (double)f1, 1.0D, (double)f1);
+		renderer.setRenderBounds(f, 0.0D, f, f1, 1.0D, f1);
 		//rotate(renderer, 1);
-		renderInvBlock(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
+		renderInvBlock(block, metadata, renderer);
 
-		renderer.setRenderBounds((double)f, 0.0D, (double)f, (double)f1, 1.0D, (double)f1);
+		renderer.setRenderBounds(f, 0.0D, f, f1, 1.0D, f1);
 		//rotate(renderer, 1);
-		renderInvBlock2(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
+		renderInvBlock2(block, metadata, renderer);
 
 		f = 0.4375F;
 		f1 = 0.5625F;
@@ -126,20 +125,20 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 		float f6 =  0.0F;
 		float f7 = 1.0F;
 
-		renderer.setRenderBounds((double)f-0.001, (double)f2, (double)f6, (double)f1-0.001, (double)f3, (double)f7/2);
-		renderInvBlock(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
+		renderer.setRenderBounds(f-0.001, f2, f6, f1-0.001, f3, (double)f7/2);
+		renderInvBlock(block, metadata, renderer);
 
-		renderer.setRenderBounds((double)f1+0.001, (double)f2, (double)f7/2, (double)f+0.001, (double)f3, (double)f6);
-		renderInvBlock(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
+		renderer.setRenderBounds(f1+0.001, f2, (double)f7/2, f+0.001, f3, f6);
+		renderInvBlock(block, metadata, renderer);
 
 		f2 = 0.375F;
 		f3 = 0.5625F;
 
-		renderer.setRenderBounds((double)f-0.001, (double)f2, (double)f6, (double)f1-0.001, (double)f3, (double)f7/2);
-		renderInvBlock(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
+		renderer.setRenderBounds(f-0.001, f2, f6, f1-0.001, f3, (double)f7/2);
+		renderInvBlock(block, metadata, renderer);
 
-		renderer.setRenderBounds((double)f1+0.001, (double)f2, (double)f7/2, (double)f+0.001, (double)f3, (double)f6);
-		renderInvBlock(((IMultipleBlock)block).getBlockTypeForRender(), metadata, renderer);
+		renderer.setRenderBounds(f1+0.001, f2, (double)f7/2, f+0.001, f3, f6);
+		renderInvBlock(block, metadata, renderer);
 	}
 	@Override
 	public boolean shouldRender3DInInventory(int modelId)

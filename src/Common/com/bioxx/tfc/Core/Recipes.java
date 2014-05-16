@@ -243,11 +243,11 @@ public class Recipes
 
 		}
 
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand,1,32767),Character.valueOf('X'),new ItemStack(TFCItems.Limewater,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand2,1,32767),Character.valueOf('X'),new ItemStack(TFCItems.Limewater,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Limewater,1), new Object[]{"P","X",Character.valueOf('P'),new ItemStack(TFCItems.Powder, 1, 0),Character.valueOf('X'),new ItemStack(TFCItems.WoodenBucketWater.setContainerItem(null))});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X","Y",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand,1,32767),Character.valueOf('X'),new ItemStack(TFCItems.Powder, 1, 0),Character.valueOf('Y'),new ItemStack(TFCItems.WoodenBucketWater,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X","Y",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand2,1,32767),Character.valueOf('X'),new ItemStack(TFCItems.Powder, 1, 0),Character.valueOf('Y'),new ItemStack(TFCItems.WoodenBucketWater,1,32767)});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{new ItemStack(TFCBlocks.Sand,1,32767),new ItemStack(TFCItems.Limewater,1,32767)});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{new ItemStack(TFCBlocks.Sand2,1,32767),new ItemStack(TFCItems.Limewater,1,32767)});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Limewater,1), new Object[]{new ItemStack(TFCItems.Powder, 1, 0),new ItemStack(TFCItems.WoodenBucketWater.setContainerItem(null))});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{new ItemStack(TFCBlocks.Sand,1,32767),new ItemStack(TFCItems.Powder, 1, 0),new ItemStack(TFCItems.WoodenBucketWater,1,32767)});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{new ItemStack(TFCBlocks.Sand2,1,32767),new ItemStack(TFCItems.Powder, 1, 0),new ItemStack(TFCItems.WoodenBucketWater,1,32767)});
 
 
 		//Gold Pan
@@ -1840,7 +1840,7 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CornmealDough, 1), new Object[] {TFCItems.CornmealGround, TFCItems.RedSteelBucketWater});
 
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 2,9), new Object[] {TFCItems.WoodenBucketSalt});
-		
+
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.venisonRaw, 1), 0), new Object[] {new ItemStack(TFCItems.venisonRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.beefRaw, 1), 0), new Object[] {new ItemStack(TFCItems.beefRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.chickenRaw, 1), 0), new Object[] {new ItemStack(TFCItems.chickenRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});

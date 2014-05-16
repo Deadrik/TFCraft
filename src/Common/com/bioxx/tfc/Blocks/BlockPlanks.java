@@ -2,13 +2,6 @@ package com.bioxx.tfc.Blocks;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Items.Tools.ItemHammer;
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Tools.IToolChisel;
-import com.bioxx.tfc.api.Util.Helper;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -20,6 +13,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Tools.IToolChisel;
+import com.bioxx.tfc.api.Util.Helper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -35,6 +36,7 @@ public class BlockPlanks extends BlockTerra
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
 		icons = new IIcon[woodNames.length];
+		Blocks.fire.setFireInfo(this, 5, 20);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -44,7 +46,7 @@ public class BlockPlanks extends BlockTerra
 	 */
 	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < woodNames.length; i++)
 			list.add(new ItemStack(this,1,i));
 	}
 

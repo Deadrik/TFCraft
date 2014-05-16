@@ -3,15 +3,15 @@ package com.bioxx.tfc.Core;
 import java.util.BitSet;
 import java.util.List;
 
-import com.bioxx.tfc.Blocks.BlockDetailed;
-import com.bioxx.tfc.TileEntities.TileEntityDetailed;
-
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 
+import com.bioxx.tfc.Blocks.BlockDetailed;
+import com.bioxx.tfc.TileEntities.TEDetailed;
+
 public class CollisionRayTraceDetailed
 {
-	public static List<Object[]> rayTraceSubBlocks(BlockDetailed construct, Vec3 player, Vec3 view, int i, int j, int k, List<Object[]> returns, BitSet data, TileEntityDetailed te)
+	public static List<Object[]> rayTraceSubBlocks(BlockDetailed construct, Vec3 player, Vec3 view, int i, int j, int k, List<Object[]> returns, BitSet data, TEDetailed te)
 	{
 		int d = 8;
 		int dd = (d * d);

@@ -91,6 +91,14 @@ public class ItemMeal extends ItemTerra implements IFood
 				if(decay > 0)
 					arraylist.add(EnumChatFormatting.DARK_GRAY + "Decay " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
 			}
+			else
+			{
+				arraylist.add(StatCollector.translateToLocal("gui.badnbt"));
+			}
+		}
+		else
+		{
+			arraylist.add(StatCollector.translateToLocal("gui.badnbt"));
 		}
 	}
 

@@ -2,8 +2,6 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.BitSet;
 
-import com.bioxx.tfc.TFCItems;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,11 +10,16 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
+import com.bioxx.tfc.TFCItems;
+
 public class TileEntityWoodConstruct extends TileEntity
 {
 	public byte[] woodTypes = new byte[192];
 	public BitSet data;
 	public static int PlankDetailLevel = 8;
+
+	//This should not be stored and are calculated at runtime on the client only for faster subsequent rendering operations
+	public boolean[] solidCheck = new boolean[24];
 
 	public TileEntityWoodConstruct()
 	{
@@ -57,11 +60,11 @@ public class TileEntityWoodConstruct extends TileEntity
 
 	public static byte[] toByteArray(BitSet bits)
 	{
-		byte[] bytes = new byte[bits.length()/8+1];
-		for (int i=0; i<bits.length(); i++)
+		byte[] bytes = new byte[bits.length() / 8 + 1];
+		for (int i=0; i < bits.length(); i++)
 		{
 			if (bits.get(i))
-				bytes[bytes.length-i/8-1] |= 1<<(i%8);
+				bytes[bytes.length - i / 8 - 1] |= 1 << (i % 8);
 		}
 		return bytes;
 	}
@@ -70,12 +73,12 @@ public class TileEntityWoodConstruct extends TileEntity
 	 * Reads a tile entity from NBT.
 	 */
 	@Override
-	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readFromNBT(NBTTagCompound nbttc)
 	{
-		super.readFromNBT(par1NBTTagCompound);
-		woodTypes = par1NBTTagCompound.getByteArray("woodTypes");
+		super.readFromNBT(nbttc);
+		woodTypes = nbttc.getByteArray("woodTypes");
 		data = new BitSet(192);
-		data.or(fromByteArray(par1NBTTagCompound.getByteArray("data")));
+		data.or(fromByteArray(nbttc.getByteArray("data")));
 		//prefabID = par1NBTTagCompound.getInteger("prefabID");
 	}
 
@@ -83,11 +86,11 @@ public class TileEntityWoodConstruct extends TileEntity
 	 * Writes a tile entity to NBT.
 	 */
 	@Override
-	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+	public void writeToNBT(NBTTagCompound nbttc)
 	{
-		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setByteArray("woodTypes", woodTypes);
-		par1NBTTagCompound.setByteArray("data", toByteArray(data));
+		super.writeToNBT(nbttc);
+		nbttc.setByteArray("woodTypes", woodTypes);
+		nbttc.setByteArray("data", toByteArray(data));
 		//par1NBTTagCompound.setInteger("prefabID", prefabID);
 	}
 
@@ -103,14 +106,33 @@ public class TileEntityWoodConstruct extends TileEntity
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
 		readFromNBT(pkt.func_148857_g());
+		updateClient();
+	}
+
+	private void updateClient()
+	{
+		int dd = PlankDetailLevel * PlankDetailLevel;
+
+		for(int layer = 0; layer < 24;layer++)
+		{
+			this.solidCheck[layer] = true;
+			int type = -1;
+			for(int index = 0; index < 8 && solidCheck[layer] == true;index++)
+			{
+				if(!data.get((layer * 8) + index) || (type != -1 && woodTypes[(layer * 8) + index] != type))
+					solidCheck[layer] = false;
+				type = woodTypes[(layer * 8) + index];
+			}
+		}
 	}
 
 
 
 
-
-
 //TODO
+
+//
+//
 //	@Override
 //	public void handleDataPacket(DataInputStream inStream) throws IOException 
 //	{
@@ -119,8 +141,8 @@ public class TileEntityWoodConstruct extends TileEntity
 //
 //		this.data.flip(index);
 //		woodTypes[index] = meta;
-//
-//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//		updateClient();
+//		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 //	}
 //
 //	@Override
@@ -141,8 +163,15 @@ public class TileEntityWoodConstruct extends TileEntity
 //		byte[] b = new byte[length];
 //		inStream.readFully(b);
 //		data.or(fromByteArray(b));
-//
+//		updateClient();
 //		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//	}
+//
+//	@Override
+//	public void handleDataPacketServer(DataInputStream inStream)
+//			throws IOException {
+//
+//
 //	}
 //
 //	public Packet createUpdatePacket(int index, byte meta)

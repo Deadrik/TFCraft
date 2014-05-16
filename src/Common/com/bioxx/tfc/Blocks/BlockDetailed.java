@@ -3,20 +3,13 @@ package com.bioxx.tfc.Blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.CollisionRayTraceDetailed;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.Items.Tools.ItemChisel;
-import com.bioxx.tfc.Items.Tools.ItemHammer;
-import com.bioxx.tfc.TileEntities.TileEntityDetailed;
-import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
-
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -24,6 +17,17 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.CollisionRayTraceDetailed;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Items.Tools.ItemChisel;
+import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.TileEntities.TEDetailed;
+import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -59,7 +63,7 @@ public class BlockDetailed extends BlockPartial
 	}
 
 	@Override
-	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
+	public boolean getBlocksMovement(IBlockAccess bAccess, int i, int j, int k)
 	{
 		return true;
 	}
@@ -70,15 +74,16 @@ public class BlockDetailed extends BlockPartial
 	}
 
 	@Override
-	public IIcon getIcon(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	public IIcon getIcon(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
-		TileEntityDetailed te = ((TileEntityDetailed)par1IBlockAccess.getTileEntity(par2, par3, par4));
-		return te.blockType.getIcon(par5, te.MetaID);
+		TEDetailed te = ((TEDetailed)bAccess.getTileEntity(x, y, z));
+		return te.blockType.getIcon(side, te.MetaID);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntityDetailed();
+	public TileEntity createNewTileEntity(World var1, int var2)
+	{
+		return new TEDetailed();
 	}
 
 	@Override
@@ -95,7 +100,7 @@ public class BlockDetailed extends BlockPartial
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
 		return true;
 	}
@@ -113,7 +118,7 @@ public class BlockDetailed extends BlockPartial
 
 		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && world.isRemote && pi.lockMatches(x, y, z))
 		{
-			TileEntityDetailed te = (TileEntityDetailed) world.getTileEntity(x, y, z);
+			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 			lockX = x; lockY = y; lockZ = z;
 			world.markBlockForUpdate(xSelected, ySelected, zSelected);
 			//TerraFirmaCraft.proxy.sendCustomPacket(te.createActivatePacket(xSelected, ySelected, zSelected));
@@ -142,8 +147,8 @@ public class BlockDetailed extends BlockPartial
 		if(mode == 3 && xSelected != -10)
 		{
 			//ItemChisel.CreateDetailed(world, x, y, z, id, meta, side, hitX, hitY, hitZ);
-			TileEntityDetailed te = (TileEntityDetailed) world.getTileEntity(x, y, z);
-			int index = (xSelected * 8 + zSelected)*8 + ySelected;
+			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
+			int index = (xSelected * 8 + zSelected) * 8 + ySelected;
 
 			if(index >= 0)
 			{
@@ -167,7 +172,7 @@ public class BlockDetailed extends BlockPartial
 	@Override
 	public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB aabb, List list, Entity entity)
 	{
-		TileEntityDetailed te = (TileEntityDetailed) world.getTileEntity(i, j, k);
+		TEDetailed te = (TEDetailed) world.getTileEntity(i, j, k);
 		float div = 1f / 8;
 
 		for(int subX = 0; subX < 8; subX++)
@@ -198,9 +203,9 @@ public class BlockDetailed extends BlockPartial
 	public int xSelected = -10, ySelected = -10, zSelected = -10, side = -1;
 
 	@Override
-	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 player, Vec3 view) {
-
-		TileEntityDetailed te = (TileEntityDetailed) world.getTileEntity(x, y, z);
+	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 player, Vec3 view)
+	{
+		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 
 		player = player.addVector(-x, -y, -z);
 		view = view.addVector(-x, -y, -z);
@@ -285,8 +290,8 @@ public class BlockDetailed extends BlockPartial
 		}
 		else
 		{
-			TileEntityDetailed te = (TileEntityDetailed) access.getTileEntity(x, y, z);
-			int index = (xSelected * 8 + zSelected)*8 + ySelected;
+			TEDetailed te = (TEDetailed) access.getTileEntity(x, y, z);
+			int index = (xSelected * 8 + zSelected) * 8 + ySelected;
 
 			if(index >= 0 && te.data.get(index))
 			{
@@ -387,5 +392,23 @@ public class BlockDetailed extends BlockPartial
 			return false;
 		else
 			return Vec3.xCoord >= bound.minX && Vec3.xCoord <= bound.maxX && Vec3.yCoord >= bound.minY && Vec3.yCoord <= bound.maxY;
+	}
+
+	@Override
+	public int getFlammability(IBlockAccess world, int x, int y, int z, ForgeDirection face)
+	{
+		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
+		if(te.TypeID >= 0)
+			return Blocks.fire.getFlammability(Block.getBlockById(te.TypeID));
+		else return 0;
+	}
+
+	@Override
+	public int getFireSpreadSpeed(IBlockAccess world, int x, int y, int z, ForgeDirection face)
+	{
+		TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
+		if(te.TypeID >= 0)
+			return Blocks.fire.getEncouragement(Block.getBlockById(te.TypeID));
+		else return 0;
 	}
 }

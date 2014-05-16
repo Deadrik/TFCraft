@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -55,6 +56,7 @@ public class BlockCrop extends BlockContainer
 	{
 		super(Material.plants);
 		this.setBlockBounds(0, 0, 0, 1, 0.2f, 1);
+		Blocks.fire.setFireInfo(this, 20, 20);
 	}
 
 	@Override

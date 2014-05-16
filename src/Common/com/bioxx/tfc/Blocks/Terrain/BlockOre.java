@@ -34,6 +34,7 @@ public class BlockOre extends BlockCollapsable
 	public BlockOre(Material material)
 	{
 		super(material);
+		this.setTickRandomly(true);
 	}
 
 	@Override
@@ -54,7 +55,7 @@ public class BlockOre extends BlockCollapsable
 	public int[] getDropBlock(World world, int i, int j, int k)
 	{
 		int[] data = new int[2];
-		DataLayer dl =((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(i, k, TFC_Core.getRockLayerFromHeight(world,i,j,k));
+		DataLayer dl =((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(i, k, TFC_Core.getRockLayerFromHeight(world, i, j, k));
 		if(dl != null)
 		{
 			data[0] = Block.getIdFromBlock(this.dropBlock);
@@ -66,10 +67,10 @@ public class BlockOre extends BlockCollapsable
 	}
 
 	@Override
-	public void getSubBlocks(Item item, CreativeTabs tab, List list)
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
 		for(int i = 0; i < blockNames.length; i++)
-			list.add(new ItemStack(this,1,i));
+			list.add(new ItemStack(this, 1, i));
 	}
 
 	@Override
@@ -112,10 +113,10 @@ public class BlockOre extends BlockCollapsable
 				TFC_Core.addPlayerExhaustion(player, 0.001f);
 				player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
 			}
-			Random random = new Random();
+
 			ItemStack itemstack;
 			if(meta == 14 || meta == 15)
-				itemstack  = new ItemStack(TFCItems.Coal,1+random.nextInt(2));
+				itemstack  = new ItemStack(TFCItems.Coal, 1 + world.rand.nextInt(2));
 			else
 				itemstack  = new ItemStack(TFCItems.OreChunk, 1, damageDropped(ore));
 
@@ -181,9 +182,10 @@ public class BlockOre extends BlockCollapsable
 	{
 		if(te != null)
 		{
-			if(te.grade == 1)
+			int grade = (te.extraData & 7);
+			if(grade == 1)
 				ore += 35;
-			else if(te.grade == 2)
+			else if(grade == 2)
 				ore += 49;
 		}
 		return ore;
@@ -201,4 +203,36 @@ public class BlockOre extends BlockCollapsable
 		return new TEOre();
 	}
 
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random rand)
+	{
+		if (!world.isRemote)
+			scanVisible(world, x, y, z);
+	}
+
+	public void scanVisible(World world, int x, int y, int z)
+	{
+		if (!world.isRemote)
+		{
+			TEOre te = (TEOre)world.getTileEntity(x, y, z);
+			if((te.extraData & 8) == 0)
+			{
+				if(!world.getBlock(x, y - 1, z).isOpaqueCube() || !world.getBlock(x, y + 1, z).isOpaqueCube() ||
+						!world.getBlock(x - 1, y, z).isOpaqueCube() || !world.getBlock(x + 1, y, z).isOpaqueCube() || 
+						!world.getBlock(x, y, z - 1).isOpaqueCube() || !world.getBlock(x, y, z + 1).isOpaqueCube())
+				{
+					te.setVisible();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
+	{
+		if(!world.isRemote)
+		{
+			scanVisible(world, x, y, z);
+		}
+	}
 }

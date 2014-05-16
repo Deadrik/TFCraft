@@ -5,16 +5,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityPartial extends TileEntity
+public class TEPartial extends NetworkTileEntity
 {
 	public short TypeID = -1;
 	public byte MetaID = 0;
 	public byte material = 0;
 	public long extraData = 0;
 
-	public TileEntityPartial()
+	public TEPartial()
 	{
 	}
 
@@ -162,6 +161,37 @@ public class TileEntityPartial extends TileEntity
 	{
 		readFromNBT(pkt.func_148857_g());
 		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
+	}
+
+	@Override
+	public void handleInitPacket(NBTTagCompound nbt)
+	{
+		MetaID = nbt.getByte("metaID");
+		TypeID = nbt.getShort("typeID");
+		material = nbt.getByte("material");
+		extraData = nbt.getLong("extraData");
+	}
+
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt)
+	{
+		extraData = nbt.getLong("extraData");
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt)
+	{
+		nbt.setLong("extraData", extraData);
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt)
+	{
+		nbt.setShort("typeID", TypeID);
+		nbt.setByte("metaID", MetaID);
+		nbt.setByte("material", material);
+		nbt.setLong("extraData", extraData);
 	}
 
 }

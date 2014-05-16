@@ -117,6 +117,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		{
 			addFoodInformation(is, player, arraylist);
 		}
+		else
+		{
+			arraylist.add(StatCollector.translateToLocal("gui.badnbt"));
+		}
 	}
 
 	public static void addFoodInformation(ItemStack is, EntityPlayer player, List arraylist)
