@@ -66,6 +66,7 @@ import com.bioxx.tfc.Handlers.Client.KeyBindingHandler;
 import com.bioxx.tfc.Handlers.Client.PlankHighlightHandler;
 import com.bioxx.tfc.Handlers.Client.RenderOverlayHandler;
 import com.bioxx.tfc.Handlers.Client.SoundHandler;
+import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Render.FoliageColorReloadListener;
 import com.bioxx.tfc.Render.GrassColorReloadListener;
 import com.bioxx.tfc.Render.RenderBear;
@@ -588,5 +589,11 @@ public class ClientProxy extends CommonProxy
 	{
 		Minecraft.getMinecraft();
 		return Minecraft.isFancyGraphicsEnabled();
+	}
+
+	@Override
+	public void sendCustomPacket(AbstractPacket message) 
+	{
+		TerraFirmaCraft.packetPipeline.sendToServer(message);
 	}
 }

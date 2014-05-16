@@ -6,9 +6,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -21,7 +18,7 @@ import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
-public class TECrop extends TileEntity
+public class TECrop extends NetworkTileEntity
 {
 	public float growth;
 	public int cropId;
@@ -123,7 +120,7 @@ public class TECrop extends TileEntity
 
 				if(oldGrowth < (int) Math.floor(growth))
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-					//this.broadcastPacketInRange(createCropUpdatePacket());
+				this.broadcastPacketInRange();
 
 				if((TFCOptions.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages + ((float)crop.numGrowthStages / 2))) || growth < 0)
 				{
@@ -204,13 +201,13 @@ public class TECrop extends TileEntity
 	 * Reads a tile entity from NBT.
 	 */
 	@Override
-	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(par1NBTTagCompound);
-		growth = par1NBTTagCompound.getFloat("growth");
-		cropId = par1NBTTagCompound.getInteger("cropId");
-		growthTimer = par1NBTTagCompound.getLong("growthTimer");
-		plantedTime = par1NBTTagCompound.getLong("plantedTime");
+		super.readFromNBT(nbt);
+		growth = nbt.getFloat("growth");
+		cropId = nbt.getInteger("cropId");
+		growthTimer = nbt.getLong("growthTimer");
+		plantedTime = nbt.getLong("plantedTime");
 	}
 
 	/**
@@ -227,17 +224,30 @@ public class TECrop extends TileEntity
 	}
 
 	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+	public void handleInitPacket(NBTTagCompound nbt) {
+		readFromNBT(nbt);
+		worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	public void handleDataPacket(NBTTagCompound nbt) 
 	{
-		readFromNBT(pkt.func_148857_g());
+		if(worldObj.isRemote)
+		{
+			growth = nbt.getFloat("growth");
+			worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
+		}
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt) {
+		nbt.setFloat("growth", growth);
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+		nbt.setFloat("growth", growth);
+		nbt.setInteger("cropId", cropId);
 	}
 
 }

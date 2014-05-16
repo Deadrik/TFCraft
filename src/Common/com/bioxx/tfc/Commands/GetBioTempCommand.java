@@ -1,12 +1,12 @@
 package com.bioxx.tfc.Commands;
 
-import com.bioxx.tfc.Core.TFC_Climate;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+
+import com.bioxx.tfc.Core.TFC_Climate;
 
 public class GetBioTempCommand extends CommandBase{
 
@@ -33,7 +33,7 @@ public class GetBioTempCommand extends CommandBase{
 	@Override
 	public String getCommandUsage(ICommandSender icommandsender) 
 	{
-		return null;
+		return "";
 	}
 
 }

@@ -109,12 +109,12 @@ public class TEChest extends TileEntityChest implements IInventory
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(par1NBTTagCompound);
-		NBTTagList var2 = par1NBTTagCompound.getTagList("Items", 10);
+		super.readFromNBT(nbt);
+		NBTTagList var2 = nbt.getTagList("Items", 10);
 		this.chestContents = new ItemStack[this.getSizeInventory()];
-
+		this.type = nbt.getInteger("woodtype");
 		for (int var3 = 0; var3 < var2.tagCount(); ++var3)
 		{
 			NBTTagCompound var4 = var2.getCompoundTagAt(var3);
@@ -125,9 +125,9 @@ public class TEChest extends TileEntityChest implements IInventory
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(par1NBTTagCompound);
+		super.writeToNBT(nbt);
 		NBTTagList var2 = new NBTTagList();
 
 		for (int var3 = 0; var3 < this.chestContents.length; ++var3)
@@ -141,7 +141,8 @@ public class TEChest extends TileEntityChest implements IInventory
 			}
 		}
 
-		par1NBTTagCompound.setTag("Items", var2);
+		nbt.setTag("Items", var2);
+		nbt.setInteger("woodtype", type);
 	}
 
 	@Override

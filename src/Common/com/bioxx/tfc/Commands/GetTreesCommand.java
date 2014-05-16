@@ -1,13 +1,13 @@
 package com.bioxx.tfc.Commands;
 
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.api.Enums.EnumTree;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.api.Enums.EnumTree;
 
 public class GetTreesCommand extends CommandBase{
 
@@ -39,8 +39,7 @@ public class GetTreesCommand extends CommandBase{
 
 	@Override
 	public String getCommandUsage(ICommandSender icommandsender) {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 }

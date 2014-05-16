@@ -177,7 +177,7 @@ public class BlockCrop extends BlockContainer
 				te.onHarvest(world, entityplayer, false);
 				te.growth = 4;
 				world.markBlockForUpdate(i, j, k);
-				//te.broadcastPacketInRange(te.createCropUpdatePacket());
+				te.broadcastPacketInRange();
 				return true;
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 5 && te.growth < 6)
@@ -185,7 +185,7 @@ public class BlockCrop extends BlockContainer
 				te.onHarvest(world, entityplayer, false);
 				te.growth = 3;
 				world.markBlockForUpdate(i, j, k);
-				//te.broadcastPacketInRange(te.createCropUpdatePacket());
+				te.broadcastPacketInRange();
 				return true;
 			}
 			else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 6)
@@ -193,9 +193,11 @@ public class BlockCrop extends BlockContainer
 				te.onHarvest(world, entityplayer, false);
 				te.growth = 3;
 				world.markBlockForUpdate(i, j, k);
-				//te.broadcastPacketInRange(te.createCropUpdatePacket());
+				te.broadcastPacketInRange();
 				return true;
 			}
+
+			te.broadcastPacketInRange();
 		}
 
 		if(TFCOptions.enableDebugMode)

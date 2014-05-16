@@ -78,7 +78,7 @@ public class GenCommand extends CommandBase
 	@Override
 	public String getCommandUsage(ICommandSender icommandsender)
 	{
-		return null;
+		return "";
 	}
 
 	public int getTree(String tree)

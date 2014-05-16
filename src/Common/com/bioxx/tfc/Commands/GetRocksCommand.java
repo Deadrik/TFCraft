@@ -1,17 +1,17 @@
 package com.bioxx.tfc.Commands;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.Util.BlockMeta;
-import com.bioxx.tfc.Items.ItemLooseRock;
-
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.Util.BlockMeta;
+import com.bioxx.tfc.Items.ItemLooseRock;
 
 public class GetRocksCommand extends CommandBase
 {
@@ -58,6 +58,6 @@ public class GetRocksCommand extends CommandBase
 	@Override
 	public String getCommandUsage(ICommandSender icommandsender)
 	{
-		return null;
+		return "";
 	}
 }

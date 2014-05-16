@@ -68,7 +68,7 @@ public class RemoveAreaCommand extends CommandBase
 	@Override
 	public String getCommandUsage(ICommandSender icommandsender) 
 	{
-		return null;
+		return "";
 	}
 
 }

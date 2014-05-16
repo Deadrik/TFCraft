@@ -2,14 +2,14 @@ package com.bioxx.tfc.Commands;
 
 import java.util.List;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 
 public class SetPlayerStatsCommand extends CommandBase{
 
@@ -65,8 +65,7 @@ public class SetPlayerStatsCommand extends CommandBase{
 
 	@Override
 	public String getCommandUsage(ICommandSender icommandsender) {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 }

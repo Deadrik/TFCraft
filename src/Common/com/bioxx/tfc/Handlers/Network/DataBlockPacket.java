@@ -5,18 +5,19 @@ import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
 
-public class InitBlockPacket extends AbstractPacket
+import com.bioxx.tfc.TileEntities.NetworkTileEntity;
+
+public class DataBlockPacket extends AbstractPacket
 {
 	private int x;
 	private int y;
 	private int z;
 	private NBTTagCompound nbtData;
 
-	public InitBlockPacket() {}
+	public DataBlockPacket() {}
 
-	public InitBlockPacket(int x, int y, int z, NBTTagCompound data)
+	public DataBlockPacket(int x, int y, int z, NBTTagCompound data)
 	{
 		this.x = x;
 		this.y = y;
@@ -56,20 +57,29 @@ public class InitBlockPacket extends AbstractPacket
 		{
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
 	public void handleClientSide(EntityPlayer player)
 	{
-		TileEntity te = player.worldObj.getTileEntity(x, y, z);
+		NetworkTileEntity te = (NetworkTileEntity)player.worldObj.getTileEntity(x, y, z);
 		if (te != null)
-			te.readFromNBT(nbtData);
+		{
+			te.entityplayer = player;
+			te.handleDataPacket(nbtData);
+		}
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player)
 	{
+		NetworkTileEntity te = (NetworkTileEntity)player.worldObj.getTileEntity(x, y, z);
+		if (te != null)
+		{
+			te.entityplayer = player;
+			te.handleDataPacket(nbtData);
+		}
 	}
 
 }

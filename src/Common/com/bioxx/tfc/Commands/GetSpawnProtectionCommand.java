@@ -1,13 +1,13 @@
 package com.bioxx.tfc.Commands;
 
-import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 
 public class GetSpawnProtectionCommand extends CommandBase{
 
@@ -41,8 +41,7 @@ public class GetSpawnProtectionCommand extends CommandBase{
 
 	@Override
 	public String getCommandUsage(ICommandSender icommandsender) {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 }

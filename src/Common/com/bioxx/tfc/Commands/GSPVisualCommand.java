@@ -1,9 +1,5 @@
 package com.bioxx.tfc.Commands;
 
-import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
-import com.bioxx.tfc.api.TFCOptions;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -11,6 +7,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
+
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class GSPVisualCommand extends CommandBase{
 
@@ -70,7 +70,7 @@ public class GSPVisualCommand extends CommandBase{
 	@Override
 	public String getCommandUsage(ICommandSender icommandsender) 
 	{
-		return null;
+		return "";
 	}
 
 }
