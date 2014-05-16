@@ -2,8 +2,6 @@ package TFC.Blocks.Devices;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,6 +25,8 @@ import TFC.Core.CollisionRayTraceStandard;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityEarlyBloomery;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCollision
 {
@@ -385,8 +385,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			world.setBlockMetadataWithNotify(i, j, k, dir, 0x2);
 			if (!canBlockStay(world, i, j, k))
 			{
-				world.setBlockToAir(i, j, k);
-				world.spawnEntityInWorld(new EntityItem(world, i, j, k, new ItemStack(this, 1)));
+				dropBlockAsItem_do(world, i, j, k, new ItemStack(this, 1));
 			}
 		}
 	}
@@ -402,6 +401,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	{
 		if (!world.isRemote)
 		{
+			world.setBlockToAir(i, j, k);
 			int meta = world.getBlockMetadata(i, j, k);
 			int[] dir = bloomeryToStackMap[meta & 3];
 			if (world.getBlockId(i + dir[0], j, k + dir[1]) == TFCBlocks.Molten.blockID)
@@ -420,7 +420,6 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			{
 				world.setBlockToAir(i + dir[0], j + 3, k + dir[1]);
 			}
-			world.setBlockToAir(i, j, k);
 		}
 	}
 
@@ -432,18 +431,15 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			if (!tryFlip(world, i, j, k))
 			{
 				world.setBlockToAir(i, j, k);
-				clearStack(world,i,j,k);
-				world.spawnEntityInWorld(new EntityItem(world, i, j, k, new ItemStack(this, 1)));
+				dropBlockAsItem_do(world, i, j, k, new ItemStack(this, 1));
 			}
 			else if (!canBlockStay(world, i, j, k))
 			{
 				world.setBlockToAir(i, j, k);
-				clearStack(world,i,j,k);
-				world.spawnEntityInWorld(new EntityItem(world, i, j, k, new ItemStack(this, 1)));
+				dropBlockAsItem_do(world, i, j, k, new ItemStack(this, 1));
 			}
 		}
 	}
-
 	public static int flipDir(int dir)
 	{
 		int out = 0;
@@ -590,11 +586,25 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	{
 		return CollisionRayTraceStandard.collisionRayTrace(this, world, x, y, z, player, view);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
 		return true;
 	}
- 
+
+	@Override
+	protected void dropBlockAsItem_do(World world, int x, int y, int z, ItemStack is)
+	{
+		if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops"))
+		{
+			clearStack(world, x, y, z);
+			EntityItem ei = new EntityItem(world, x+0.5, y+0.5, z+0.5, is);
+			ei.motionX = 0;
+			ei.motionY = 0;
+			ei.motionZ = 0;
+			ei.delayBeforeCanPickup = 10;
+			world.spawnEntityInWorld(ei);
+		}
+	}
 }
