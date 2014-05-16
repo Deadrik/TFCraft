@@ -57,6 +57,7 @@ public class BlockBerryBush extends BlockTerraContainer
 		iconsBerries = new Icon[MetaNames.length];
 		this.setTickRandomly(true);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setBurnProperties(par1, 20, 20);
 	}
 
 	@SideOnly(Side.CLIENT)

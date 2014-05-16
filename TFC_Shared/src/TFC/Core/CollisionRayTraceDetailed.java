@@ -6,13 +6,13 @@ import java.util.List;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import TFC.Blocks.BlockDetailed;
-import TFC.TileEntities.TileEntityDetailed;
+import TFC.TileEntities.TEDetailed;
 
 public class CollisionRayTraceDetailed 
 {
 
 	public static List<Object[]> rayTraceSubBlocks(BlockDetailed construct, Vec3 player, Vec3 view, int i, int j, int k, 
-			List<Object[]> returns, BitSet data, TileEntityDetailed te) {
+			List<Object[]> returns, BitSet data, TEDetailed te) {
 
 		int d = 8;
 		int dd = (d * d);

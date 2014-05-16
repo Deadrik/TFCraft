@@ -10,14 +10,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import TFC.Handlers.PacketHandler;
 
-public class TileEntityPartial extends NetworkTileEntity
+public class TEPartial extends NetworkTileEntity
 {
 	public short TypeID = -1;
 	public byte MetaID = 0;
 	public byte material = 0;
 	public long extraData = 0;
 
-	public TileEntityPartial()
+	public TEPartial()
 	{
 
 	}

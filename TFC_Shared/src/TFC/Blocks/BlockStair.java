@@ -12,7 +12,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import TFC.TFCBlocks;
-import TFC.TileEntities.TileEntityPartial;
+import TFC.TileEntities.TEPartial;
 
 public class BlockStair extends BlockPartial
 {

@@ -24,7 +24,7 @@ import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
 import TFC.TileEntities.TileEntityFruitTreeWood;
-import TFC.TileEntities.TileEntityPartial;
+import TFC.TileEntities.TEPartial;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
 
@@ -32,7 +32,7 @@ public class TFC_CoreRender
 {
 	public static boolean renderBlockSlab(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
 	{
-		TileEntityPartial te = (TileEntityPartial) renderblocks.blockAccess.getBlockTileEntity(par2, par3, par4);
+		TEPartial te = (TEPartial) renderblocks.blockAccess.getBlockTileEntity(par2, par3, par4);
 		int md = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
 
 		boolean breaking = false;
@@ -110,7 +110,7 @@ public class TFC_CoreRender
 			var9 = 0.0F;
 			var10 = 0.5F;
 		}
-		TileEntityPartial te = (TileEntityPartial) renderblocks.blockAccess.getBlockTileEntity(par2, par3, par4);
+		TEPartial te = (TEPartial) renderblocks.blockAccess.getBlockTileEntity(par2, par3, par4);
 		if(te.TypeID <= 0)
 		{
 			return false;

@@ -26,7 +26,7 @@ public class BlockThatch extends BlockTerra
 		super(par1, Material.grass);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setBlockBounds(0f, 0, 0f, 1f, 1, 1f);
-
+		this.setBurnProperties(par1, 60, 30);
 	}
 
 	@Override

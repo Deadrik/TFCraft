@@ -29,6 +29,7 @@ public class BlockWoodSupport extends BlockTerra
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
 		icons = new Icon[woodNames.length];
+		this.setBurnProperties(i, 5, 20);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -188,7 +189,7 @@ public class BlockWoodSupport extends BlockTerra
 		AxisAlignedBB aabb = getCollisionBoundingBoxFromPoolIBlockAccess(blockAccess, x, y, z);
 
 		this.setBlockBounds((float)aabb.minX, (float)aabb.minY, (float)aabb.minZ, (float)aabb.maxX, (float)aabb.maxY, (float)aabb.maxZ);
-    }
+	}
 
 	@Override
 	public int getRenderType()

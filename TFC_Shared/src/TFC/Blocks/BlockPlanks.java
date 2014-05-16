@@ -32,6 +32,7 @@ public class BlockPlanks extends BlockTerra
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
 		icons = new Icon[woodNames.length];
+		this.setBurnProperties(i, 5, 20);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -41,7 +42,7 @@ public class BlockPlanks extends BlockTerra
 	 */
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < woodNames.length; i++)
 			list.add(new ItemStack(this,1,i));
 	}
 

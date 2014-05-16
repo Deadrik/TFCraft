@@ -52,6 +52,7 @@ public class BlockCrop extends BlockContainer
 	{
 		super(par1, Material.plants);
 		this.setBlockBounds(0, 0, 0, 1, 0.2f, 1);
+		this.setBurnProperties(par1, 20, 20);
 	}
 	@Override
 	public int getRenderType()

@@ -49,7 +49,7 @@ import TFC.Items.ItemQuiver;
 import TFC.Items.ItemTFCArmor;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemBlocks.ItemTerraBlock;
-import TFC.TileEntities.TileEntityPartial;
+import TFC.TileEntities.TEPartial;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -773,7 +773,7 @@ public class TFC_Core
 			return true;
 		else if (world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+			TEPartial te = (TEPartial) world.getBlockTileEntity(x, y, z);
 			if (BlockSlab.getTopChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -787,7 +787,7 @@ public class TFC_Core
 			return true;
 		else if (world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+			TEPartial te = (TEPartial) world.getBlockTileEntity(x, y, z);
 			if (BlockSlab.getBottomChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -801,7 +801,7 @@ public class TFC_Core
 			return true;
 		else if (world.getBlockId(x, y, z - 1) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z - 1);
+			TEPartial te = (TEPartial) world.getBlockTileEntity(x, y, z - 1);
 			if (BlockSlab.getNorthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -816,7 +816,7 @@ public class TFC_Core
 			return true;
 		else if (bid == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+			TEPartial te = (TEPartial) world.getBlockTileEntity(x, y, z);
 			if (BlockSlab.getNorthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -830,7 +830,7 @@ public class TFC_Core
 			return true;
 		else if (world.getBlockId(x, y, z + 1) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z + 1);
+			TEPartial te = (TEPartial) world.getBlockTileEntity(x, y, z + 1);
 			if (BlockSlab.getSouthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -844,7 +844,7 @@ public class TFC_Core
 			return true;
 		else if (world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+			TEPartial te = (TEPartial) world.getBlockTileEntity(x, y, z);
 			if (BlockSlab.getSouthChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -858,7 +858,7 @@ public class TFC_Core
 			return true;
 		else if (world.getBlockId(x - 1, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x - 1, y, z);
+			TEPartial te = (TEPartial) world.getBlockTileEntity(x - 1, y, z);
 			if (BlockSlab.getEastChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -872,7 +872,7 @@ public class TFC_Core
 			return true;
 		else if (world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+			TEPartial te = (TEPartial) world.getBlockTileEntity(x, y, z);
 			if (BlockSlab.getEastChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -886,7 +886,7 @@ public class TFC_Core
 			return true;
 		else if (world.getBlockId(x + 1, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x + 1, y, z);
+			TEPartial te = (TEPartial) world.getBlockTileEntity(x + 1, y, z);
 			if (BlockSlab.getWestChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
@@ -900,7 +900,7 @@ public class TFC_Core
 			return true;
 		else if (world.getBlockId(x, y, z) == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+			TEPartial te = (TEPartial) world.getBlockTileEntity(x, y, z);
 			if (BlockSlab.getWestChiselLevel(te.extraData) != 0)
 				return false;
 			return true;

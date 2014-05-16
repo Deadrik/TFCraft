@@ -20,6 +20,7 @@ public class BlockCharcoal extends BlockTerra {
 	public BlockCharcoal(int par1) 
 	{
 		super(par1, Material.ground);
+		this.setBurnProperties(par1, 100, 20);
 	}
 
 	@Override
@@ -29,9 +30,9 @@ public class BlockCharcoal extends BlockTerra {
 	}
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
+	{
 		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Charcoal");
-    }
+	}
 
 	@Override
 	public boolean canBeReplacedByLeaves(World w, int x, int y, int z)
@@ -68,7 +69,7 @@ public class BlockCharcoal extends BlockTerra {
 				int top = 0;
 				while(world.getBlockId(i, j+top+1, k) == blockID)
 					++top;
-				
+
 				dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.coal,1,1));
 				if(l-1 > 0)
 				{
@@ -104,7 +105,7 @@ public class BlockCharcoal extends BlockTerra {
 				world.setBlockToAir(i, j, k);
 		}
 	}
-	
+
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) 
 	{
@@ -118,7 +119,7 @@ public class BlockCharcoal extends BlockTerra {
 	{
 		int meta = world.getBlockMetadata(i, j, k);
 		int bottomMeta = world.getBlockMetadata(i, j-1, k);
-		
+
 		if(bottomMeta < 8)
 		{
 			bottomMeta = bottomMeta + meta;
@@ -128,7 +129,7 @@ public class BlockCharcoal extends BlockTerra {
 				m2 = bottomMeta - 8;
 				bottomMeta = 8;
 			}
-			
+
 			world.setBlock(i, j-1, k, blockID, bottomMeta, 0x2);
 
 			if(m2 > 0)
@@ -155,7 +156,7 @@ public class BlockCharcoal extends BlockTerra {
 				m2 = bottomMeta - 8;
 				bottomMeta = 8;
 			}
-			
+
 			world.setBlock(i, j, k, blockID, bottomMeta, 0x2);
 
 			if(m2 > 0)
@@ -167,7 +168,7 @@ public class BlockCharcoal extends BlockTerra {
 				world.setBlockToAir(i, j+1, k);
 		}
 	}
-	
+
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int id)
 	{
@@ -198,16 +199,16 @@ public class BlockCharcoal extends BlockTerra {
 	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
 	 * cleared to be reused)
 	 */
-	    @Override
-	    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
-	    {
-	        int md = world.getBlockMetadata(i, j, k);
-	
-	        if (md == 8)
-	        	return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 1, k + 1);
-	
-	        return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.125f * md), k + 1);
-	    }
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
+	{
+		int md = world.getBlockMetadata(i, j, k);
+
+		if (md == 8)
+			return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 1, k + 1);
+
+		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.125f * md), k + 1);
+	}
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) 
@@ -215,20 +216,20 @@ public class BlockCharcoal extends BlockTerra {
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, (0.125f * meta), 1.0F);
 	}
-	
+
 	@Override
 	public boolean canDropFromExplosion(Explosion ex)
 	{
 		return false;
 	}
-	
+
 	@Override
 	public void onBlockExploded(World world, int x, int y, int z, Explosion ex)
 	{
 		if(!world.isRemote)
 		{
 			int amount = world.getBlockMetadata(x, y, z);
-			
+
 			if(amount > 0)
 			{
 				Random rand = new Random();
@@ -237,13 +238,13 @@ public class BlockCharcoal extends BlockTerra {
 				dropBlockAsItem_do(world, x, y, z, new ItemStack(Item.coal,amount,1));
 			}
 		}
-		
+
 		super.onBlockExploded(world, x, y, z, ex);
 	}
-	
+
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
 	{
-		
+
 	}
 }

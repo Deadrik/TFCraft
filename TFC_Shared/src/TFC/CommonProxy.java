@@ -59,7 +59,7 @@ import TFC.TileEntities.TEBarrel;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityBloom;
 import TFC.TileEntities.TileEntityChestTFC;
-import TFC.TileEntities.TileEntityDetailed;
+import TFC.TileEntities.TEDetailed;
 import TFC.TileEntities.TileEntityEarlyBloomery;
 import TFC.TileEntities.TileEntityFarmland;
 import TFC.TileEntities.TileEntityFenceGate;
@@ -68,7 +68,7 @@ import TFC.TileEntities.TEForge;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TELogPile;
-import TFC.TileEntities.TileEntityPartial;
+import TFC.TileEntities.TEPartial;
 import TFC.TileEntities.TEPottery;
 import TFC.TileEntities.TileEntityQuern;
 import TFC.TileEntities.TileEntitySapling;
@@ -119,8 +119,8 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TECrop.class, "TileEntityCrop");
 
 		GameRegistry.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
-		GameRegistry.registerTileEntity(TileEntityPartial.class, "Partial");
-		GameRegistry.registerTileEntity(TileEntityDetailed.class, "Detailed");
+		GameRegistry.registerTileEntity(TEPartial.class, "Partial");
+		GameRegistry.registerTileEntity(TEDetailed.class, "Detailed");
 
 
 		GameRegistry.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");

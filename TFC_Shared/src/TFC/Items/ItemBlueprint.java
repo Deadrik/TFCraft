@@ -14,7 +14,7 @@ import TFC.Core.TFCTabs;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemHammer;
-import TFC.TileEntities.TileEntityDetailed;
+import TFC.TileEntities.TEDetailed;
 
 public class ItemBlueprint extends ItemTerra
 {
@@ -64,9 +64,9 @@ public class ItemBlueprint extends ItemTerra
 		if(stack.stackTagCompound == null &&
 				(world.getBlockId(x, y, z) == TFCBlocks.Detailed.blockID))
 		{
-			TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(x, y, z);
+			TEDetailed te = (TEDetailed) world.getBlockTileEntity(x, y, z);
 
-			byte[] data = TileEntityDetailed.toByteArray(te.data);
+			byte[] data = TEDetailed.toByteArray(te.data);
 
 			NBTTagCompound nbt = new NBTTagCompound();
 			nbt.setByteArray("data", data);
@@ -90,7 +90,7 @@ public class ItemBlueprint extends ItemTerra
 			if(hasChisel >= 0 && hasHammer >= 0)
 			{
 				
-				TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(x, y, z);
+				TEDetailed te = (TEDetailed) world.getBlockTileEntity(x, y, z);
 				byte[] data = stack.stackTagCompound.getByteArray("data");
 				BitSet blueprintData = te.fromByteArray(data, 512);
 				for(int c = 0; c < 512; c++)

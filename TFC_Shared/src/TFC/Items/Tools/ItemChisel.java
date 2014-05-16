@@ -18,8 +18,8 @@ import TFC.Blocks.BlockSlab;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.TileEntities.TileEntityDetailed;
-import TFC.TileEntities.TileEntityPartial;
+import TFC.TileEntities.TEDetailed;
+import TFC.TileEntities.TEPartial;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -53,7 +53,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 	public static void CreateStairs(World world, int x, int y, int z, int id, int meta, byte m)
 	{
 		world.setBlock(x, y, z, TFCBlocks.stoneStairs.blockID, m, 0x2);
-		TileEntityPartial te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
+		TEPartial te = (TEPartial)world.getBlockTileEntity(x, y, z);
 		te.TypeID = (short) id;
 		te.MetaID = (byte) meta;
 		te.extraData = 0;
@@ -62,20 +62,20 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 	}
 	public static void CreateSlab(World world, int x, int y, int z, int id, int meta, int side, int SlabID)
 	{
-		TileEntityPartial te;
+		TEPartial te;
 
 		if(world.getBlockId(x, y, z) != SlabID)
 		{
 			world.setBlock(x, y, z, SlabID, side, 0x2);
 
-			te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
+			te = (TEPartial)world.getBlockTileEntity(x, y, z);
 			te.TypeID = (short) id;
 			te.MetaID = (byte) meta;
 			te.setMaterial(world.getBlockMaterial(x, y, z));
 		}
 		else
 		{
-			te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
+			te = (TEPartial)world.getBlockTileEntity(x, y, z);
 			world.notifyBlockChange(x, y, z, SlabID);
 		}
 
@@ -174,7 +174,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 			System.out.println("Extra ="+te.extraData);  
 		}
 
-		te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
+		te = (TEPartial)world.getBlockTileEntity(x, y, z);
 		if(te != null) {
 			te.broadcastPacketInRange(te.createUpdatePacket());
 		}
@@ -187,11 +187,11 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 	}
 	public static void CreateDetailed(World world, int x, int y, int z, int id, int meta, int side, float hitX, float hitY, float hitZ)
 	{
-		TileEntityDetailed te;
+		TEDetailed te;
 
 		if(id == TFCBlocks.stoneSlabs.blockID)
 		{
-			TileEntityPartial tep = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
+			TEPartial tep = (TEPartial)world.getBlockTileEntity(x, y, z);
 			int extraX = (int) ((tep.extraData) & 0xf);
 			int extraY = (int) ((tep.extraData >> 4) & 0xf);
 			int extraZ = (int) ((tep.extraData >> 8) & 0xf);
@@ -199,7 +199,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 			int extraY2 = 8 - (int) ((tep.extraData >> 16) & 0xf);
 			int extraZ2 = 8 - (int) ((tep.extraData >> 20) & 0xf);
 			world.setBlock(x, y, z, TFCBlocks.Detailed.blockID);
-			te = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
+			te = (TEDetailed)world.getBlockTileEntity(x, y, z);
 			te.TypeID = tep.TypeID;
 			te.MetaID = tep.MetaID;
 
@@ -224,7 +224,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 			Material m = world.getBlockMaterial(x, y, z);
 			world.setBlock(x, y, z, TFCBlocks.Detailed.blockID);
 
-			te = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
+			te = (TEDetailed)world.getBlockTileEntity(x, y, z);
 			te.TypeID = (short) id;
 			te.MetaID = (byte) meta;
 

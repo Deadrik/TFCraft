@@ -44,7 +44,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class TileEntityDetailed extends NetworkTileEntity
+public class TEDetailed extends NetworkTileEntity
 {
 	public short TypeID = -1;
 	public byte MetaID = 0;
@@ -57,7 +57,7 @@ public class TileEntityDetailed extends NetworkTileEntity
 	
 	private BitSet quads;
 
-	public TileEntityDetailed()
+	public TEDetailed()
 	{
 		data = new BitSet(512);
 		quads = new BitSet(8);

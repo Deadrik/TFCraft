@@ -15,7 +15,7 @@ import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemHammer;
-import TFC.TileEntities.TileEntityPartial;
+import TFC.TileEntities.TEPartial;
 
 public class BlockSlab extends BlockPartial
 {
@@ -39,7 +39,7 @@ public class BlockSlab extends BlockPartial
 	@Override
 	public boolean isLadder(World world, int x, int y, int z, EntityLivingBase entity)
 	{
-		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+		TEPartial te = (TEPartial) world.getBlockTileEntity(x, y, z);
 		if(8 - (getTopChiselLevel(te.extraData) + getBottomChiselLevel(te.extraData)) < 3)
 		{
 			if((8 - (getSouthChiselLevel(te.extraData) + getNorthChiselLevel(te.extraData)) < 3) || 
@@ -141,7 +141,7 @@ public class BlockSlab extends BlockPartial
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
-		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(i, j, k);
+		TEPartial te = (TEPartial) world.getBlockTileEntity(i, j, k);
 		int md = world.getBlockMetadata(i, j, k);
 		if(te != null)
 		{
@@ -178,7 +178,7 @@ public class BlockSlab extends BlockPartial
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) 
 	{
-		TileEntityPartial te = (TileEntityPartial) par1IBlockAccess.getBlockTileEntity(i, j, k);
+		TEPartial te = (TEPartial) par1IBlockAccess.getBlockTileEntity(i, j, k);
 
 		long extraX = (te.extraData) & 0xf;
 		long extraY = (te.extraData >> 4) & 0xf;
@@ -215,7 +215,7 @@ public class BlockSlab extends BlockPartial
 	@Override
 	public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side)
 	{
-		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+		TEPartial te = (TEPartial) world.getBlockTileEntity(x, y, z);
 		long data = te.extraData;
 
 		switch(side)

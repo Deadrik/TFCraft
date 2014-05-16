@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
 import TFC.Blocks.Terrain.BlockGrass;
 import TFC.Render.RenderBlocksFixUV;
-import TFC.TileEntities.TileEntityDetailed;
+import TFC.TileEntities.TEDetailed;
 
 public class RenderDetailed 
 {
@@ -14,7 +14,7 @@ public class RenderDetailed
 
 	public static boolean renderBlockDetailed(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
-		TileEntityDetailed te = (TileEntityDetailed) renderblocks.blockAccess.getBlockTileEntity(i, j, k);
+		TEDetailed te = (TEDetailed) renderblocks.blockAccess.getBlockTileEntity(i, j, k);
 		int md = renderblocks.blockAccess.getBlockMetadata(i, j, k);
 
 		if(renderer == null)
@@ -80,7 +80,7 @@ public class RenderDetailed
 	}
 
 	private static void renderMiniBlock(Block block, int i, int j, int k, int x, int y, int z,
-			RenderBlocks renderblocks, TileEntityDetailed te, int type, int meta) 
+			RenderBlocks renderblocks, TEDetailed te, int type, int meta) 
 	{
 		int l = block.colorMultiplier(renderblocks.blockAccess, i, j, k);
 		float f = (l >> 16 & 255) / 255.0F;
@@ -159,7 +159,7 @@ public class RenderDetailed
 		return true;
 	}
 
-	public static boolean isOpaque(TileEntityDetailed te, int x, int y, int z)
+	public static boolean isOpaque(TEDetailed te, int x, int y, int z)
 	{
 		return te.data.get((x * 8 + z)*8 + y);
 	}

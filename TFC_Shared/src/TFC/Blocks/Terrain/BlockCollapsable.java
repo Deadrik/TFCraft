@@ -22,7 +22,7 @@ import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Sounds;
 import TFC.Entities.EntityFallingStone;
-import TFC.TileEntities.TileEntityPartial;
+import TFC.TileEntities.TEPartial;
 
 public class BlockCollapsable extends BlockTerraContainer
 {
@@ -180,18 +180,18 @@ public class BlockCollapsable extends BlockTerraContainer
 
 				world.setBlockToAir(i, j, k);
 
-				if(world.getBlockId(i, j-1, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).TypeID == this.blockID && 
-						((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).MetaID == fallingBlockMeta)
+				if(world.getBlockId(i, j-1, k) == TFCBlocks.stoneSlabs.blockID && ((TEPartial)world.getBlockTileEntity(i, j-1, k)).TypeID == this.blockID && 
+						((TEPartial)world.getBlockTileEntity(i, j-1, k)).MetaID == fallingBlockMeta)
 				{
 					world.setBlockToAir(i, j-1, k);
 
-					if(world.getBlockId(i, j-2, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).TypeID == this.blockID && 
-							((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).MetaID == fallingBlockMeta)
+					if(world.getBlockId(i, j-2, k) == TFCBlocks.stoneSlabs.blockID && ((TEPartial)world.getBlockTileEntity(i, j-2, k)).TypeID == this.blockID && 
+							((TEPartial)world.getBlockTileEntity(i, j-2, k)).MetaID == fallingBlockMeta)
 					{
 						world.setBlockToAir(i, j-2, k);
 
-						if(world.getBlockId(i, j-3, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).TypeID == this.blockID && 
-								((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).MetaID == fallingBlockMeta)
+						if(world.getBlockId(i, j-3, k) == TFCBlocks.stoneSlabs.blockID && ((TEPartial)world.getBlockTileEntity(i, j-3, k)).TypeID == this.blockID && 
+								((TEPartial)world.getBlockTileEntity(i, j-3, k)).MetaID == fallingBlockMeta)
 							world.setBlockToAir(i, j-3, k);
 					}
 				}

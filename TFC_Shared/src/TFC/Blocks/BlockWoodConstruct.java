@@ -28,6 +28,7 @@ public class BlockWoodConstruct extends BlockTerraContainer implements ICustomCo
 	{
 		super(par1, Material.wood);
 		setBlockBounds(0.0F, 0.0F, 0.0f, 0.0f, 0.0F, 0.0F);
+		this.setBurnProperties(par1, 5, 20);
 	}
 
 	@Override
