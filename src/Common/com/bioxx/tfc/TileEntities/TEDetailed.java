@@ -3,9 +3,10 @@ package com.bioxx.tfc.TileEntities;
 import java.util.BitSet;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.BlockDetailed;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 
 public class TEDetailed extends NetworkTileEntity
 {
@@ -28,12 +29,12 @@ public class TEDetailed extends NetworkTileEntity
 	{
 		return false;
 	}
-	
+
 	public int getType()
 	{
 		return TypeID;
 	}
-	
+
 	public int getMeta()
 	{
 		return MetaID;
@@ -43,12 +44,12 @@ public class TEDetailed extends NetworkTileEntity
 	{
 		return data.get((x * 8 + z) * 8 + y);
 	}
-	
+
 	public void setBlock(int x, int y, int z)
 	{
 		data.set((x * 8 + z) * 8 + y);
 	}
-	
+
 	public void setQuad(int x, int y, int z)
 	{
 		int x1 = x >= 4 ? 1 : 0;
@@ -57,7 +58,7 @@ public class TEDetailed extends NetworkTileEntity
 		int index = (x1 * 2 + z1) * 2 + y1;
 		quads.set(index);
 	}
-	
+
 	public void clearQuad(int x, int y, int z)
 	{
 		int x1 = x >= 4 ? 1 : 0;
@@ -66,15 +67,16 @@ public class TEDetailed extends NetworkTileEntity
 		int index = (x1 * 2 + z1) * 2 + y1;
 		quads.clear(index);
 	}
-	
+
 	public boolean isQuadSolid(int x, int y, int z)
 	{
 		return !quads.get((x * 2 + z) * 2 + y);
 	}
-	
+
 	/**
 	 * Reads a tile entity from NBT.
 	 */
+	@Override
 	public void readFromNBT(NBTTagCompound nbttc)
 	{
 		super.readFromNBT(nbttc);
@@ -88,27 +90,14 @@ public class TEDetailed extends NetworkTileEntity
 	/**
 	 * Writes a tile entity to NBT.
 	 */
+	@Override
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setShort("typeID", (short) TypeID);
+		par1NBTTagCompound.setShort("typeID", TypeID);
 		par1NBTTagCompound.setByte("metaID", MetaID);
 		par1NBTTagCompound.setByteArray("data", toByteArray(data));
 		par1NBTTagCompound.setByteArray("quads", toByteArray(quads));
-	}
-
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
 	}
 
 	@Override
@@ -137,131 +126,63 @@ public class TEDetailed extends NetworkTileEntity
 	@Override
 	public void handleDataPacket(NBTTagCompound nbt)
 	{
-		// TODO Auto-generated method stub
-		
+		packetType = nbt.getByte("packetType");
+		if(packetType == TEDetailed.Packet_Update)
+		{
+			int index = nbt.getInteger("index");
+			data.flip(index);
+
+			for(int subX = 0; subX < 8; subX++)
+			{
+				for(int subZ = 0; subZ < 8; subZ++)
+				{
+					for(int subY = 0; subY < 8; subY++)
+					{
+						if(!getBlockExists(subX, subY, subZ))
+							setQuad(subX, subY, subZ);
+					}
+				}
+			}
+
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
+		else if(packetType == TEDetailed.Packet_Activate && !worldObj.isRemote)
+		{
+			PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer).ChiselMode = nbt.getByte("chiselMode");
+			((BlockDetailed)TFCBlocks.Detailed).xSelected = nbt.getByte("xSelected");
+			((BlockDetailed)TFCBlocks.Detailed).ySelected = nbt.getByte("ySelected");
+			((BlockDetailed)TFCBlocks.Detailed).zSelected = nbt.getByte("zSelected");
+
+			((BlockDetailed)TFCBlocks.Detailed).onBlockActivatedServer(worldObj, xCoord, yCoord, zCoord, this.entityplayer, 0, 0, 0, 0);
+
+			((BlockDetailed)TFCBlocks.Detailed).xSelected = -10;
+			((BlockDetailed)TFCBlocks.Detailed).ySelected = -10;
+			((BlockDetailed)TFCBlocks.Detailed).zSelected = -10;
+		}
+
 	}
 
 	@Override
 	public void createDataNBT(NBTTagCompound nbt)
 	{
-		// TODO Auto-generated method stub
-		
+		packetType = nbt.getByte("packetType");
+		if(packetType == TEDetailed.Packet_Update)
+		{
+
+		}
+		else if(packetType == TEDetailed.Packet_Activate)
+		{
+			nbt.setByte("chiselMode", PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode);
+		}
 	}
 
 	@Override
 	public void createInitNBT(NBTTagCompound nbt)
 	{
-		nbt.setShort("typeID", (short) TypeID);
+		nbt.setShort("typeID", TypeID);
 		nbt.setByte("metaID", MetaID);
 		nbt.setByteArray("data", toByteArray(data));
-		nbt.setByteArray("quads", toByteArray(quads));
 	}
-
-
-
-
-
-
-
-//TODO
-	
-//	@Override
-//	public void handleDataPacket(DataInputStream inStream) throws IOException 
-//	{
-//		packetType = inStream.readByte();
-//		if(packetType == this.Packet_Update)
-//		{
-//			int index = inStream.readInt();
-//			data.flip(index);
-//			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-//			
-//			for(int subX = 0; subX < 8; subX++)
-//			{
-//				for(int subZ = 0; subZ < 8; subZ++)
-//				{
-//					for(int subY = 0; subY < 8; subY++)
-//					{
-//						if(!getBlockExists(subX, subY, subZ))
-//							setQuad(subX, subY, subZ);
-//					}
-//				}
-//			}
-//		}
-//	}
-//
-//	@Override
-//	public void handleDataPacketServer(DataInputStream inStream) throws IOException 
-//	{
-//		packetType = inStream.readByte();
-//		if(packetType == this.Packet_Activate)
-//		{
-//			PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer).ChiselMode = inStream.readByte();
-//			((BlockDetailed)TFCBlocks.Detailed).xSelected = inStream.readByte();
-//			((BlockDetailed)TFCBlocks.Detailed).ySelected = inStream.readByte();
-//			((BlockDetailed)TFCBlocks.Detailed).zSelected = inStream.readByte();
-//			
-//			((BlockDetailed)TFCBlocks.Detailed).onBlockActivatedServer(worldObj, xCoord, yCoord, zCoord, this.entityplayer, 0, 0, 0, 0);
-//			
-//			((BlockDetailed)TFCBlocks.Detailed).xSelected = -10;
-//			((BlockDetailed)TFCBlocks.Detailed).ySelected = -10;
-//			((BlockDetailed)TFCBlocks.Detailed).zSelected = -10;
-//		}
-//
-//	}
-//	
-//	public Packet createFullPacket()
-//	{
-//		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
-//		DataOutputStream outStream = new DataOutputStream(bos);	
-//		try {
-//			outStream.writeByte(PacketHandler.Packet_Init_Block_Client);
-//			outStream.writeInt(xCoord);
-//			outStream.writeInt(yCoord);
-//			outStream.writeInt(zCoord);
-//			outStream.writeShort(TypeID);
-//			outStream.writeByte(MetaID);
-//			byte[] b = toByteArray(data);
-//			outStream.writeInt(b.length);
-//			outStream.write(b);	
-//		} catch (IOException e) {
-//		}
-//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-//	}
-//
-//	public Packet createUpdatePacket(int index)
-//	{
-//		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
-//		DataOutputStream outStream = new DataOutputStream(bos);	
-//		try {
-//			outStream.writeByte(PacketHandler.Packet_Data_Block_Client);
-//			outStream.writeInt(xCoord);
-//			outStream.writeInt(yCoord);
-//			outStream.writeInt(zCoord);
-//			outStream.writeByte(this.Packet_Update);
-//			outStream.writeInt(index);
-//		} catch (IOException e) {
-//		}
-//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-//	}
-//	
-//	public Packet createActivatePacket(int xSelected, int ySelected, int zSelected)
-//	{
-//		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
-//		DataOutputStream outStream = new DataOutputStream(bos);	
-//		try {
-//			outStream.writeByte(PacketHandler.Packet_Data_Block_Server);
-//			outStream.writeInt(xCoord);
-//			outStream.writeInt(yCoord);
-//			outStream.writeInt(zCoord);
-//			outStream.writeByte(this.Packet_Activate);
-//			outStream.writeByte(PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode);
-//			outStream.writeByte(xSelected);
-//			outStream.writeByte(ySelected);
-//			outStream.writeByte(zSelected);
-//		} catch (IOException e) {
-//		}
-//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-//	}
 
 	public static BitSet fromByteArray(byte[] bytes, int size)
 	{

@@ -31,7 +31,7 @@ import com.bioxx.tfc.api.Enums.EnumWoodMaterial;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityFirepit extends TileEntityFireEntity implements IInventory
+public class TileEntityFirepit extends TEFireEntity implements IInventory
 {
 	public ItemStack fireItemStacks[];
 

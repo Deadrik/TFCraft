@@ -108,7 +108,7 @@ public class TEBarrel extends TileEntity implements IInventory
 					itemstack=null;
 				Type = 3;
 			}
-/*			else if(itemstack.getItem() == TFCItems.BarleyGrain)
+			/*			else if(itemstack.getItem() == TFCItems.BarleyGrain)
 			{
 				itemstack.stackSize--;
 				if(itemstack.stackSize == 0)
@@ -150,7 +150,7 @@ public class TEBarrel extends TileEntity implements IInventory
 					itemstack=null;
 				Type = 10;
 			}
-*/
+			 */
 			else if(itemstack.getItem() == Items.sugar)
 			{
 				itemstack.stackSize--;

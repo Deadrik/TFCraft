@@ -86,7 +86,7 @@ public class ItemBlueprint extends ItemTerra
 
 			if(hasChisel >= 0 && hasHammer >= 0)
 			{
-				
+
 				TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 				byte[] data = stack.stackTagCompound.getByteArray("data");
 				BitSet blueprintData = TEDetailed.fromByteArray(data, 512);
@@ -103,10 +103,9 @@ public class ItemBlueprint extends ItemTerra
 							player.inventory.mainInventory[hasHammer].damageItem(1, player);
 					}
 				}
-				//te.data.and(blueprintData);
 				if(!world.isRemote)
 				{
-					//TODO TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(x, y, z, te.createFullPacket(), 200);
+					world.markBlockForUpdate(x, y, z);
 					stack.stackSize--;
 				}
 			}

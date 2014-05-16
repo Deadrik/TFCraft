@@ -11,10 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
@@ -31,7 +27,7 @@ import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
 
-public class TECrucible extends TileEntity implements IInventory
+public class TECrucible extends NetworkTileEntity implements IInventory
 {
 	public HashMap metals = new HashMap();
 	public Alloy currentAlloy;
@@ -44,6 +40,7 @@ public class TECrucible extends TileEntity implements IInventory
 	public TECrucible()
 	{
 		storage = new ItemStack[2];
+		this.broadcastRange = 5;
 	}
 
 	@Override
@@ -116,20 +113,6 @@ public class TECrucible extends TileEntity implements IInventory
 	}
 
 	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
-	}
-
-	@Override
 	public void updateEntity()
 	{
 		if(!worldObj.isRemote)
@@ -176,7 +159,7 @@ public class TECrucible extends TileEntity implements IInventory
 								stackToSmelt.setItemDamage(stackToSmelt.getItemDamage() + 1);
 						}
 						inputTick = 0;
-						updateGui((byte) 0); //TODO
+						updateGui((byte) 0);
 					}
 				}
 				else if(itemToSmelt instanceof ISmeltable && (
@@ -190,7 +173,7 @@ public class TECrucible extends TileEntity implements IInventory
 						temperature *= 0.9f;
 						if(stackToSmelt.stackSize <= 1)
 							storage[0] = null;
-						updateGui((byte) 0); //TODO
+						updateGui((byte) 0);
 					}
 				}
 			}
@@ -207,7 +190,7 @@ public class TECrucible extends TileEntity implements IInventory
 					TFC_ItemHeat.SetTemp(storage[1], temperature);
 					//currentAlloy.outputAmount--;
 					drainOutput(1.0f);
-					updateGui((byte) 1); //TODO
+					updateGui((byte) 1);
 				}
 				else if(storage[1].getItem() == currentAlloy.outputType.MeltedItem && storage[1].getItemDamage() > 0)
 				{
@@ -218,7 +201,7 @@ public class TECrucible extends TileEntity implements IInventory
 					//System.out.println(temperature +", "+inTemp+", "+temp);
 					drainOutput(1.0f);
 					storage[1].stackSize = 1;
-					updateGui((byte) 1); //TODO
+					updateGui((byte) 1);
 				}
 				outputTick = 0;
 			}
@@ -227,7 +210,7 @@ public class TECrucible extends TileEntity implements IInventory
 			{
 				metals = new HashMap();
 				updateCurrentAlloy();
-				this.updateGui((byte) 2); //TODO
+				this.updateGui((byte) 2);
 				currentAlloy = null;
 			}
 
@@ -407,52 +390,44 @@ public class TECrucible extends TileEntity implements IInventory
 		return (temperature * s) / 2500;
 	}
 
-	//////////////////////////////////////////////////////////////////////////
-	//TODO Udate packet
-	public void updateGui(byte id)
+	public void updateGui(byte action)
 	{
-//		if(!worldObj.isRemote)
-//			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(id), 5);
+		if(!worldObj.isRemote)
+		{
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setByte("action", action);
+			this.broadcastPacketInRange(this.createDataPacket(nbt));
+		}
 	}
-//	public void handleDataPacket(DataInputStream inStream) throws IOException 
-//	{
-//		byte id = inStream.readByte();
-//		if(id == 0 && inStream.available() > 0)
-//			this.currentAlloy = new Alloy().fromPacket(inStream);
-//		else if(id == 1)
-//			currentAlloy.outputAmount = inStream.readFloat();
-//		else if(id == 2)
-//			currentAlloy = null;
-//	}
-//	public Packet createUpdatePacket(byte id)
-//	{
-//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-//		DataOutputStream dos=new DataOutputStream(bos);	
-//		try
-//		{
-//			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-//			dos.writeInt(xCoord);
-//			dos.writeInt(yCoord);
-//			dos.writeInt(zCoord);
-//			if(id == 0 && currentAlloy != null)
-//			{
-//				dos.writeByte(0);
-//				currentAlloy.toPacket(dos);
-//			}
-//			else if(id == 1 && currentAlloy != null)
-//			{
-//				dos.writeByte(1);
-//				dos.writeFloat(this.getTotalMetal());
-//			}
-//			else if(id == 2)
-//			{
-//				dos.writeByte(2);
-//			}
-//		}
-//		catch (IOException e)
-//		{
-//		}
-//		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
-//	}
+
+	@Override
+	public void handleInitPacket(NBTTagCompound nbt) 
+	{
+
+	}
+
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt) {
+		byte action = nbt.getByte("action");
+		if(action == 0)
+			this.currentAlloy = new Alloy().fromNBT(nbt);
+		else if(action == 1)
+			currentAlloy.outputAmount = nbt.getFloat("outputAmount");
+		else if(action == 2)
+			currentAlloy = null;
+
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt) 
+	{
+
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) 
+	{
+
+	}
 
 }

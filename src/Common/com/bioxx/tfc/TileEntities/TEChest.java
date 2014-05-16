@@ -149,14 +149,14 @@ public class TEChest extends TileEntityChest implements IInventory
 	public Packet getDescriptionPacket()
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
+		nbt.setInteger("woodtype", type);
 		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
-		readFromNBT(pkt.func_148857_g());
+		type = pkt.func_148857_g().getInteger("woodtype");
 	}
 
 	@Override

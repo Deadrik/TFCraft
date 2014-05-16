@@ -17,18 +17,6 @@ public class TEOre extends NetworkTileEntity
 	}
 
 	@Override
-	public void validate()
-	{
-		super.validate();
-
-		if(worldObj.isRemote && this.shouldSendInitData && (extraData & 8) == 1)
-			;//TODO
-			/*try {
-				requestInitialization();
-			} catch (IOException e) {}*/
-	}
-
-	@Override
 	public boolean canUpdate()
 	{
 		return false;
@@ -39,15 +27,7 @@ public class TEOre extends NetworkTileEntity
 		if((extraData & 8) == 0)
 			extraData += 8;
 
-		//TODO
-		/*try
-		{
-			TerraFirmaCraft.proxy.sendCustomPacket(sendInitPacket());
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}*/
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -56,7 +36,7 @@ public class TEOre extends NetworkTileEntity
 		super.readFromNBT(nbt);
 		baseBlockID = nbt.getInteger("baseBlockID");
 		baseBlockMeta = nbt.getInteger("baseBlockMeta");
-		extraData = nbt.getByte("grade");
+		extraData = nbt.getByte("extraData");
 	}
 
 	@Override
@@ -65,21 +45,25 @@ public class TEOre extends NetworkTileEntity
 		super.writeToNBT(nbt);
 		nbt.setInteger("baseBlockID", baseBlockID);
 		nbt.setInteger("baseBlockMeta", baseBlockMeta);
-		nbt.setByte("grade", extraData);
+		nbt.setByte("extraData", extraData);
 	}
 
 	@Override
 	public Packet getDescriptionPacket()
 	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+		if((extraData & 8) == 1)
+		{
+			NBTTagCompound nbt = new NBTTagCompound();
+			createInitNBT(nbt);
+			return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+		}
+		return null;
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
-		readFromNBT(pkt.func_148857_g());
+		handleInitPacket(pkt.func_148857_g());
 	}
 
 	@Override
@@ -87,19 +71,20 @@ public class TEOre extends NetworkTileEntity
 	{
 		baseBlockID = nbt.getInteger("baseBlockID");
 		baseBlockMeta = nbt.getInteger("baseBlockMeta");
+		extraData = nbt.getByte("extraData");
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
 	public void handleDataPacket(NBTTagCompound nbt)
 	{
-		// TODO Auto-generated method stub
+		handleInitPacket(nbt);
 	}
 
 	@Override
 	public void createDataNBT(NBTTagCompound nbt)
 	{
-		// TODO Auto-generated method stub
+		createInitNBT(nbt);
 	}
 
 	@Override
@@ -107,5 +92,6 @@ public class TEOre extends NetworkTileEntity
 	{
 		nbt.setInteger("baseBlockID", baseBlockID);
 		nbt.setInteger("baseBlockMeta", baseBlockMeta);
+		nbt.setByte("extraData", extraData);
 	}
 }

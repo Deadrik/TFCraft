@@ -49,11 +49,10 @@ public class ItemCustomSeeds extends ItemTerra
 					return false;
 
 				world.setBlock(x, y + 1, z, TFCBlocks.Crops);
-				//world.setBlock(x, y + 2, z, Block.crops.blockID, 8, 0x2);
+
 				TECrop te = (TECrop) world.getTileEntity(x, y + 1, z);
 				te.cropId = cropId;
 				world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
-				//te.broadcastPacketInRange(te.createCropUpdatePacket());
 				world.markBlockForUpdate(x, y, z);
 				--stack.stackSize;
 				return true;

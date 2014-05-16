@@ -32,7 +32,7 @@ import com.bioxx.tfc.api.TFC_ItemHeat;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
+public class TEBlastFurnace extends TEFireEntity implements IInventory
 {
 	public boolean isValid;
 

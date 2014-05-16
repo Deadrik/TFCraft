@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -35,7 +34,6 @@ public class BlockWoodSupport extends BlockTerra
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
 		icons = new IIcon[woodNames.length];
-		Blocks.fire.setFireInfo(this, 5, 20);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -346,15 +344,15 @@ public class BlockWoodSupport extends BlockTerra
 				else if(side == 2 && world.isAirBlock(x, y, z-1) /*&& world.getBlock(x, y+1, z-1).isOpaqueCube()*/)
 					if(isNextToSupport(world,x,y,z-1) != 0 && (getSupportInRange(world, x,y,z-1,5) || getSupportInRange(world, x,y-1,z-1,5)) || TFCBlocks.isBlockVSupport(world.getBlock(x, y-1, z-1)))
 						return true;
-				else if(side == 3 && world.isAirBlock(x, y, z+1) /*&& world.getBlock(x, y+1, z+1).isOpaqueCube()*/)
-					if(isNextToSupport(world,x,y,z+1) != 0 && (getSupportInRange(world, x,y,z+1,5) || getSupportInRange(world, x,y-1,z+1,5)) || TFCBlocks.isBlockVSupport(world.getBlock(x, y-1, z+1)))
-						return true;
-				else if(side == 4 && world.isAirBlock(x-1, y, z) /*&& world.getBlock(x-1, y+1, z).isOpaqueCube()*/)
-					if(isNextToSupport(world,x-1,y,z) != 0  && (getSupportInRange(world, x-1,y,z,5) || getSupportInRange(world, x-1,y-1,z,5)) || TFCBlocks.isBlockVSupport(world.getBlock(x-1, y-1, z)))
-						return true;
-				else if(side == 5 && world.isAirBlock(x+1, y, z) /*&& world.getBlock(x+1, y+1, z).isOpaqueCube()*/)
-					if(isNextToSupport(world,x+1,y,z) != 0 && (getSupportInRange(world, x+1,y,z,5) || getSupportInRange(world, x+1,y-1,z,5)) || TFCBlocks.isBlockVSupport(world.getBlock(x+1, y-1, z)))
-						return true;
+					else if(side == 3 && world.isAirBlock(x, y, z+1) /*&& world.getBlock(x, y+1, z+1).isOpaqueCube()*/)
+						if(isNextToSupport(world,x,y,z+1) != 0 && (getSupportInRange(world, x,y,z+1,5) || getSupportInRange(world, x,y-1,z+1,5)) || TFCBlocks.isBlockVSupport(world.getBlock(x, y-1, z+1)))
+							return true;
+						else if(side == 4 && world.isAirBlock(x-1, y, z) /*&& world.getBlock(x-1, y+1, z).isOpaqueCube()*/)
+							if(isNextToSupport(world,x-1,y,z) != 0  && (getSupportInRange(world, x-1,y,z,5) || getSupportInRange(world, x-1,y-1,z,5)) || TFCBlocks.isBlockVSupport(world.getBlock(x-1, y-1, z)))
+								return true;
+							else if(side == 5 && world.isAirBlock(x+1, y, z) /*&& world.getBlock(x+1, y+1, z).isOpaqueCube()*/)
+								if(isNextToSupport(world,x+1,y,z) != 0 && (getSupportInRange(world, x+1,y,z,5) || getSupportInRange(world, x+1,y-1,z,5)) || TFCBlocks.isBlockVSupport(world.getBlock(x+1, y-1, z)))
+									return true;
 			}
 			else if(TFCBlocks.isBlockVSupport(block))
 				//if the block beneath is opaque or is another support

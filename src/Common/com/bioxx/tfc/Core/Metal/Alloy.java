@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+
 import com.bioxx.tfc.api.Metal;
 
 public class Alloy 
@@ -163,6 +166,36 @@ public class Alloy
 		catch (IOException e)
 		{
 			e.printStackTrace();
+		}
+		return this;
+	}
+
+	public void toNBT(NBTTagCompound nbt)
+	{
+		nbt.setString("outputType", outputType.Name);
+		nbt.setFloat("outputAmount", outputAmount);
+		NBTTagList nbtlist = new NBTTagList();
+		for(int i = 0; i < AlloyIngred.size(); i++)
+		{
+			NBTTagCompound nbt1 = new NBTTagCompound();
+			AlloyMetal am = AlloyIngred.get(i);
+			nbt.setString("metalType", am.metalType.Name);
+			nbt.setFloat("metalType", am.metal);
+			nbtlist.appendTag(nbt1);
+		}
+		nbt.setTag("metalList", nbtlist);
+	}
+
+	public Alloy fromNBT(NBTTagCompound nbt)
+	{
+		outputType = MetalRegistry.instance.getMetalFromString(nbt.getString("outputType"));
+		outputAmount = nbt.getFloat("outputAmount");
+		NBTTagList nbtlist = nbt.getTagList("metalList", 10);
+		for(int i = 0; i < nbtlist.tagCount(); i++)
+		{
+			NBTTagCompound nbt1 = nbtlist.getCompoundTagAt(i);
+			AlloyMetal am = new AlloyMetal(MetalRegistry.instance.getMetalFromString(nbt1.getString("metalType")), nbt1.getFloat("amount"));
+			this.AlloyIngred.add(am);
 		}
 		return this;
 	}

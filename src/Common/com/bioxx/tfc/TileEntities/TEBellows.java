@@ -3,12 +3,9 @@ package com.bioxx.tfc.TileEntities;
 import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TEBellows extends TileEntity
+public class TEBellows extends NetworkTileEntity
 {
 	static final int blockMap[][] = { { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 0 } };
 	static final int blockMap2[][] = { { 0, 2 }, { -2, 0 }, { 0, -2 }, { 2, 0 } };
@@ -52,7 +49,7 @@ public class TEBellows extends TileEntity
 		int x = blockMap[meta][0];
 		int z = blockMap[meta][1];
 		Random random = new Random();
-		
+
 		float f = (float) xCoord + x + 0.5F;
 		float f1 = yCoord + 0.1F + random.nextFloat() * 6F / 16F;
 		float f2 = (float) zCoord + z + 0.5F;
@@ -62,7 +59,7 @@ public class TEBellows extends TileEntity
 		float f6 = random.nextFloat() * -0.6F;
 		worldObj.spawnParticle("smoke", f + f4 - 0.3F, f1, f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 	}
-	
+
 	public void GiveAir()
 	{
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
@@ -70,43 +67,51 @@ public class TEBellows extends TileEntity
 		int z = blockMap[meta][1];
 		TileEntity te = worldObj.getTileEntity(xCoord + x, yCoord, zCoord + z);
 		TileEntity te2 = worldObj.getTileEntity(xCoord + x, yCoord - 1, zCoord + z);
-		TileEntityFireEntity tileentityfirepit = null;
+		TEFireEntity tileentityfirepit = null;
 
-		if (te != null && te instanceof TileEntityFireEntity)
-			tileentityfirepit = (TileEntityFireEntity) te;
+		if (te != null && te instanceof TEFireEntity)
+			tileentityfirepit = (TEFireEntity) te;
 		else if (te2 != null && te2 instanceof TEForge)
-			tileentityfirepit = (TileEntityFireEntity) te2;
+			tileentityfirepit = (TEFireEntity) te2;
 
 		if (tileentityfirepit != null)
 			tileentityfirepit.receiveAirFromBellows();
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbttagcompound);
-		shouldBlow = nbttagcompound.getBoolean("shouldBlow");
-	}
-	
-	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
-	{
-		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setBoolean("shouldBlow", shouldBlow);
+		super.readFromNBT(nbt);
+		shouldBlow = nbt.getBoolean("shouldBlow");
 	}
 
 	@Override
-	public Packet getDescriptionPacket()
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+		super.writeToNBT(nbt);
+		nbt.setBoolean("shouldBlow", shouldBlow);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
+	public void handleInitPacket(NBTTagCompound nbt) {
+		shouldBlow = nbt.getBoolean("shouldBlow");
 	}
-	
+
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+		nbt.setBoolean("shouldBlow", shouldBlow);		
+	}
+
 }

@@ -17,6 +17,7 @@ public abstract class NetworkTileEntity extends TileEntity
 {
 	public boolean shouldSendInitData = true;
 	public EntityPlayer entityplayer;
+	protected int broadcastRange = 256;
 	/**
 	 * Create an initialization packet to be sent when the block loads.
 	 * @param nbt
@@ -69,13 +70,13 @@ public abstract class NetworkTileEntity extends TileEntity
 	{
 		int dim = worldObj.provider.dimensionId;
 		TerraFirmaCraft.proxy.sendCustomPacketNearTarget(this.createDataPacket(), 
-				new TargetPoint(dim, xCoord,yCoord,zCoord,256));
+				new TargetPoint(dim, xCoord,yCoord,zCoord,broadcastRange));
 	}
 
 	public void broadcastPacketInRange(AbstractPacket packet)
 	{
 		TerraFirmaCraft.proxy.sendCustomPacketNearTarget(packet, 
-				new TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,256));
+				new TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,broadcastRange));
 	}
 
 }

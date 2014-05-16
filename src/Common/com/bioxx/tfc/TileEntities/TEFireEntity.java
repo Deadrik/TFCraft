@@ -9,7 +9,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityFireEntity extends TileEntity
+public class TEFireEntity extends TileEntity
 {
 	public int airFromBellows = 0;
 	public float fireTemp = 0;
@@ -19,7 +19,7 @@ public class TileEntityFireEntity extends TileEntity
 
 	public static final int AIRTOADD = 200;
 
-	public TileEntityFireEntity()
+	public TEFireEntity()
 	{
 	}
 

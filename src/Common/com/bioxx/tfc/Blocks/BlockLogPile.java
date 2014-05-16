@@ -25,7 +25,6 @@ public class BlockLogPile extends BlockTerraContainer
 	public BlockLogPile()
 	{
 		super(Material.wood);
-//		this.setBurnProperties(blockID, 5, 30);
 	}
 
 	public static int getDirectionFromMetadata(int i)

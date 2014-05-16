@@ -6,7 +6,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.TileEntities.TileEntityFireEntity;
+import com.bioxx.tfc.TileEntities.TEFireEntity;
 import com.bioxx.tfc.api.IClothing;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -142,15 +142,15 @@ public class BodyTempStats
 					TileEntity te = player.worldObj.getTileEntity(i, j, k);
 					if((player.worldObj.getBlock(i, j, k) == Blocks.lava ||
 							player.worldObj.getBlock(i, j, k) == TFCBlocks.Lava) ||
-							(te != null && te instanceof TileEntityFireEntity))
+							(te != null && te instanceof TEFireEntity))
 					{
 						//returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )<10?1:0);
 						//Lava averages 700-1200 C = 950 C, assume source is lava.
 						double tempValue = 950;
 						
 						//if there is a firepit, use it's heat instead.
-						if(te instanceof TileEntityFireEntity)
-							tempValue = ((TileEntityFireEntity)te).fireTemp;
+						if(te instanceof TEFireEntity)
+							tempValue = ((TEFireEntity)te).fireTemp;
 
 						//Just to make sure it's not 0
 						double distanceSq = player.getDistanceSq(i, j, k) + 0.05;

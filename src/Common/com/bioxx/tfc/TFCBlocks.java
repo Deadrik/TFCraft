@@ -736,6 +736,33 @@ public class TFCBlocks
 		WoodVert2.setHarvestLevel("hammer", 1);
 	}
 
+	public static void setupFire()
+	{
+		Blocks.fire.setFireInfo(LogNatural, 5, 20);
+		Blocks.fire.setFireInfo(LogNatural2, 5, 20);
+		Blocks.fire.setFireInfo(WoodSupportV, 5, 20);
+		Blocks.fire.setFireInfo(WoodSupportV2, 5, 20);
+		Blocks.fire.setFireInfo(WoodSupportH, 5, 20);
+		Blocks.fire.setFireInfo(WoodSupportH2, 5, 20);
+		Blocks.fire.setFireInfo(Fence, 5, 20);
+		Blocks.fire.setFireInfo(Fence2, 5, 20);
+		Blocks.fire.setFireInfo(FenceGate, 5, 20);
+		Blocks.fire.setFireInfo(FenceGate2, 5, 20);
+		Blocks.fire.setFireInfo(Chest, 5, 20);
+		Blocks.fire.setFireInfo(StrawHideBed, 5, 20);
+		Blocks.fire.setFireInfo(Thatch, 5, 20);
+		Blocks.fire.setFireInfo(WoodVert, 5, 20);
+		Blocks.fire.setFireInfo(WoodHoriz, 5, 20);
+		Blocks.fire.setFireInfo(Planks, 5, 20);
+		Blocks.fire.setFireInfo(Planks2, 5, 20);
+		Blocks.fire.setFireInfo(WoodConstruct, 5, 20);
+		Blocks.fire.setFireInfo(BerryBush, 5, 20);
+		Blocks.fire.setFireInfo(Barrel, 5, 20);
+		Blocks.fire.setFireInfo(Barrel2, 5, 20);
+		Blocks.fire.setFireInfo(Crops, 20, 20);
+		Blocks.fire.setFireInfo(LogPile, 20, 20);
+	}
+
 	public static boolean isBlockVSupport(Block block)
 	{
 		return block == WoodSupportV || block == WoodSupportV2;

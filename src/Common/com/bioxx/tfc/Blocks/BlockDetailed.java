@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -120,8 +121,13 @@ public class BlockDetailed extends BlockPartial
 		{
 			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 			lockX = x; lockY = y; lockZ = z;
-			world.markBlockForUpdate(xSelected, ySelected, zSelected);
-			//TerraFirmaCraft.proxy.sendCustomPacket(te.createActivatePacket(xSelected, ySelected, zSelected));
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setByte("packetType", TEDetailed.Packet_Activate);
+			nbt.setInteger("xSelected", xSelected);
+			nbt.setInteger("ySelected", ySelected);
+			nbt.setInteger("zSelected", zSelected);
+			te.createDataNBT(nbt);
+			te.broadcastPacketInRange(te.createDataPacket(nbt));
 		}
 		return false;
 	}
@@ -146,13 +152,11 @@ public class BlockDetailed extends BlockPartial
 
 		if(mode == 3 && xSelected != -10)
 		{
-			//ItemChisel.CreateDetailed(world, x, y, z, id, meta, side, hitX, hitY, hitZ);
 			TEDetailed te = (TEDetailed) world.getTileEntity(x, y, z);
 			int index = (xSelected * 8 + zSelected) * 8 + ySelected;
 
 			if(index >= 0)
 			{
-				//System.out.println("xSelected: " +xSelected + " ySelected: " + ySelected + " zSelected: " + zSelected + " index: " + index);
 				te.data.clear(index);
 				te.clearQuad(xSelected, ySelected, zSelected);
 
@@ -162,7 +166,11 @@ public class BlockDetailed extends BlockPartial
 				if(player.inventory.mainInventory[hasHammer] != null)
 					player.inventory.mainInventory[hasHammer].damageItem(1, player);
 
-				//TODO te.broadcastPacketInRange(te.createUpdatePacket(index));
+				NBTTagCompound nbt = new NBTTagCompound();
+				nbt.setByte("packetType", TEDetailed.Packet_Update);
+				nbt.setInteger("index", index);
+				te.createDataNBT(nbt);
+				te.broadcastPacketInRange(te.createDataPacket(nbt));
 			}
 			return true;
 		}

@@ -20,7 +20,7 @@ import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 
-public class TEForge extends TileEntityFireEntity implements IInventory
+public class TEForge extends TEFireEntity implements IInventory
 {
 	public boolean isSmokeStackValid;
 	public ItemStack fireItemStacks[];
