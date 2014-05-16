@@ -744,6 +744,11 @@ public class TFCBlocks
 		Blocks.fire.setFireInfo(WoodSupportV2, 5, 20);
 		Blocks.fire.setFireInfo(WoodSupportH, 5, 20);
 		Blocks.fire.setFireInfo(WoodSupportH2, 5, 20);
+		Blocks.fire.setFireInfo(Leaves, 5, 20);
+		Blocks.fire.setFireInfo(Leaves2, 5, 20);
+		Blocks.fire.setFireInfo(fruitTreeWood, 5, 20);
+		Blocks.fire.setFireInfo(fruitTreeLeaves, 5, 20);
+		Blocks.fire.setFireInfo(fruitTreeLeaves2, 5, 20);
 		Blocks.fire.setFireInfo(Fence, 5, 20);
 		Blocks.fire.setFireInfo(Fence2, 5, 20);
 		Blocks.fire.setFireInfo(FenceGate, 5, 20);
@@ -752,7 +757,11 @@ public class TFCBlocks
 		Blocks.fire.setFireInfo(StrawHideBed, 5, 20);
 		Blocks.fire.setFireInfo(Thatch, 5, 20);
 		Blocks.fire.setFireInfo(WoodVert, 5, 20);
+		Blocks.fire.setFireInfo(WoodVert2, 5, 20);
 		Blocks.fire.setFireInfo(WoodHoriz, 5, 20);
+		Blocks.fire.setFireInfo(WoodHoriz2, 5, 20);
+		Blocks.fire.setFireInfo(WoodHoriz3, 5, 20);
+		Blocks.fire.setFireInfo(WoodHoriz4, 5, 20);
 		Blocks.fire.setFireInfo(Planks, 5, 20);
 		Blocks.fire.setFireInfo(Planks2, 5, 20);
 		Blocks.fire.setFireInfo(WoodConstruct, 5, 20);
@@ -761,6 +770,7 @@ public class TFCBlocks
 		Blocks.fire.setFireInfo(Barrel2, 5, 20);
 		Blocks.fire.setFireInfo(Crops, 20, 20);
 		Blocks.fire.setFireInfo(LogPile, 20, 20);
+		Blocks.fire.setFireInfo(Charcoal, 100, 20);
 	}
 
 	public static boolean isBlockVSupport(Block block)

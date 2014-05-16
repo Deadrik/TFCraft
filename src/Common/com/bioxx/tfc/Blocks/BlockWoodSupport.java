@@ -151,7 +151,7 @@ public class BlockWoodSupport extends BlockTerra
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		for(int i = 0; i < woodNames.length; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/WoodSheet/WoodSheet" + i);
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/WoodSheet/" + woodNames[i]);
 	}
 
 	@Override

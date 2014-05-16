@@ -10,7 +10,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -58,7 +57,6 @@ public class BlockBerryBush extends BlockTerraContainer
 		iconsBerries = new IIcon[MetaNames.length];
 		this.setTickRandomly(true);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
-		Blocks.fire.setFireInfo(this, 20, 20);
 	}
 
 	@SideOnly(Side.CLIENT)

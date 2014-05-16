@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemLead;
 import net.minecraft.item.ItemStack;
@@ -38,7 +37,6 @@ public class BlockCustomFence extends BlockFence
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
 		iconsPost = new IIcon[woodNames.length];
 		iconsPostTop = new IIcon[woodNames.length];
-		Blocks.fire.setFireInfo(this, 5, 20);
 	}
 
 	/**

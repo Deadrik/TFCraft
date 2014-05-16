@@ -103,6 +103,7 @@ public class TerraFirmaCraft
 
 		TFCBlocks.LoadBlocks();
 		TFCBlocks.RegisterBlocks();
+		TFCBlocks.setupFire();
 		loadOre();
 
 		//Register Key Bindings(Client only)
