@@ -243,7 +243,7 @@ public class BlockCustomLeaves extends BlockLeaves
 			entityplayer.addExhaustion(0.025F);
 			if(world.rand.nextInt(100) < 28)
 				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Stick, 1));
-			else if(world.rand.nextInt(10) < 6 && meta != 9 && meta != 15)
+			else if(world.rand.nextInt(100) < 6 && meta != 9 && meta != 15)
 				dropBlockAsItem(world, i, j, k, new ItemStack(this.getItemDropped(0, null, 0), 1, meta));
 
 			super.harvestBlock(world, entityplayer, i, j, k, meta);
