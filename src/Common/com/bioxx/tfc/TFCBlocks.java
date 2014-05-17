@@ -371,8 +371,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Sulfur, "Sulfur");
 		GameRegistry.registerBlock(LogNatural, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood.class, "log");
 		GameRegistry.registerBlock(LogNatural2, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood2.class, "log2");
-		GameRegistry.registerBlock(Leaves, com.bioxx.tfc.Items.ItemBlocks.ItemCustomLeaves.class, "leaves");
-		GameRegistry.registerBlock(Leaves2, com.bioxx.tfc.Items.ItemBlocks.ItemCustomLeaves2.class, "leaves2");
+		GameRegistry.registerBlock(Leaves, "leaves");
+		GameRegistry.registerBlock(Leaves2, "leaves2");
 		GameRegistry.registerBlock(Sapling, com.bioxx.tfc.Items.ItemBlocks.ItemSapling.class, "sapling");
 		GameRegistry.registerBlock(Sapling2, com.bioxx.tfc.Items.ItemBlocks.ItemSapling2.class, "sapling2");
 		GameRegistry.registerBlock(Planks, com.bioxx.tfc.Items.ItemBlocks.ItemPlankBlock.class, "planks");

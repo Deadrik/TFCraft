@@ -11,9 +11,9 @@ import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemSapling extends ItemTerraBlock
 {
-	public ItemSapling(Block par1)
+	public ItemSapling(Block b)
 	{
-		super(par1);
+		super(b);
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 		this.MetaNames = new String[16];

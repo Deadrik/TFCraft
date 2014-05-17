@@ -70,7 +70,7 @@ public class BlockSapling extends BlockTerraContainer
 			
 	}
 
-	public void growTree(World world, int i, int j, int k, Random random)
+	public void growTree(World world, int i, int j, int k, Random rand)
 	{
 		/*int l = world.getBlockMetadata(i, j, k);
 		world.setBlockToAir(i, j, k);
@@ -81,7 +81,7 @@ public class BlockSapling extends BlockTerraContainer
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block par5)
+	public void onNeighborBlockChange(World world, int i, int j, int k, Block b)
 	{
 		Block block = world.getBlock(i, j, k);
 		if(!TFC_Core.isGrass(block) && !TFC_Core.isDirt(block) && !this.canBlockStay(world, i, j, k))
@@ -93,12 +93,12 @@ public class BlockSapling extends BlockTerraContainer
 	}
 
 	@Override
-	public void updateTick(World world, int i, int j, int k, Random random)
+	public void updateTick(World world, int i, int j, int k, Random rand)
 	{
 		if (world.isRemote)
 			return;
 
-		super.updateTick(world, i, j, k, random);
+		super.updateTick(world, i, j, k, rand);
 		int meta = world.getBlockMetadata(i, j, k);
 		float growSpeed = 1;
 		if(meta == 1 || meta == 11)
@@ -114,7 +114,7 @@ public class BlockSapling extends BlockTerraContainer
 			te.growTime = (long) ((TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7) * growSpeed) + (world.rand.nextFloat() * TFC_Time.dayLength));
 
 		if (world.getBlockLightValue(i, j + 1, k) >= 9 && te!= null && TFC_Time.getTotalTicks() > te.growTime)
-			growTree(world, i, j, k, random);
+			growTree(world, i, j, k, rand);
 
 		//this.checkChange(world, i, j, k);
 	}
@@ -123,22 +123,22 @@ public class BlockSapling extends BlockTerraContainer
 	 * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
 	 */
 	@Override
-	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return (par1World.getFullBlockLightValue(par2, par3, par4) >= 8 || par1World.canBlockSeeTheSky(par2, par3, par4)) && this.canThisPlantGrowOnThisBlockID(par1World.getBlock(par2, par3 - 1, par4));
+		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) && this.canThisPlantGrowOnThisBlockID(world.getBlock(x, y - 1, z));
 	}
 
 	/**
 	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
 	 */
 	@Override
-	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
-		return (par1World.isAirBlock(par2, par3, par4) || par1World.getBlock(par2, par3, par4).getMaterial().isReplaceable()) && this.canThisPlantGrowOnThisBlockID(par1World.getBlock(par2, par3 - 1, par4));
+		return (world.isAirBlock(x, y, z) || world.getBlock(x, y, z).getMaterial().isReplaceable()) && this.canThisPlantGrowOnThisBlockID(world.getBlock(x, y - 1, z));
 	}
 
 	@Override
-	public boolean canBeReplacedByLeaves(IBlockAccess world, int x, int y, int z)
+	public boolean canBeReplacedByLeaves(IBlockAccess bAccess, int x, int y, int z)
 	{
 		return true;
 	}
@@ -147,9 +147,9 @@ public class BlockSapling extends BlockTerraContainer
 	 * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
 	 * blockID passed in. Args: blockID
 	 */
-	protected boolean canThisPlantGrowOnThisBlockID(Block block)
+	protected boolean canThisPlantGrowOnThisBlockID(Block b)
 	{
-		return TFC_Core.isSoil(block);
+		return TFC_Core.isSoil(b);
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class BlockSapling extends BlockTerraContainer
 	 * cleared to be reused)
 	 */
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		return null;
 	}
@@ -196,12 +196,12 @@ public class BlockSapling extends BlockTerraContainer
 		return new TileEntitySapling();
 	}
 
-	protected void checkChange(World par1World, int par2, int par3, int par4)
+	protected void checkChange(World world, int x, int y, int z)
 	{
-		if (!this.canBlockStay(par1World, par2, par3, par4))
+		if (!this.canBlockStay(world, x, y, z))
 		{
-			this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-			par1World.setBlockToAir(par2, par3, par4);
+			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+			world.setBlockToAir(x, y, z);
 		}
 	}
 }

@@ -7,9 +7,9 @@ import com.bioxx.tfc.api.Constant.Global;
 
 public class ItemSapling2 extends ItemSapling
 {
-	public ItemSapling2(Block par1)
+	public ItemSapling2(Block b)
 	{
-		super(par1);
+		super(b);
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 		this.MetaNames = new String[Global.WOOD_ALL.length - 16];
