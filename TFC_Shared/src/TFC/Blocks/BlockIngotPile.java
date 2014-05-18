@@ -16,6 +16,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityIngotPile;
 import cpw.mods.fml.relauncher.Side;
@@ -369,7 +370,7 @@ public class BlockIngotPile extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			if(!world.isBlockOpaqueCube(i, j-1, k))
+			if(!world.isBlockSolidOnSide(i, j-1, k, ForgeDirection.UP))
 			{
 				if(world.getBlockId(i, j-1, k) == this.blockID && 
 						((TileEntityIngotPile)world.getBlockTileEntity(i, j, k)).storage[0].itemID == 
