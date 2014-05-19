@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.BitSet;
 
 import net.minecraft.entity.item.EntityItem;
@@ -21,11 +22,41 @@ public class TileEntityWoodConstruct extends NetworkTileEntity
 	public static int PlankDetailLevel = 8;
 
 	//This should not be stored and are calculated at runtime on the client only for faster subsequent rendering operations
-	public boolean[] solidCheck = new boolean[24];
+	public boolean[] solidCheck = new boolean[48];
 
 	public TileEntityWoodConstruct()
 	{
 		data = new BitSet(192);
+	}
+
+	private void updateClient()
+	{
+		int dd = PlankDetailLevel * PlankDetailLevel;
+		Arrays.fill(solidCheck, true);
+
+		for(int layer = 0; layer < 24;layer++)
+		{
+			int type = -1;
+			for(int index = 0; index < 8 && solidCheck[layer] == true;index++)
+			{
+				int in = (layer*8)+index;
+				if(!data.get(in) || (type != -1 && woodTypes[in] != type))
+					solidCheck[layer] = false;
+				type = woodTypes[in];
+			}
+
+		}
+		for(int layer = 0; layer < 24;layer++)
+		{
+			int type = -1;
+			for(int index = 0; index < 8 && solidCheck[layer+24] == true;index++)
+			{
+				int in = (index*8)+layer;
+				if(!data.get(in) || (type != -1 && woodTypes[in] != type))
+					solidCheck[layer+24] = false;
+				type = woodTypes[in];
+			}
+		}
 	}
 
 	@Override
@@ -75,24 +106,6 @@ public class TileEntityWoodConstruct extends NetworkTileEntity
 		//par1NBTTagCompound.setInteger("prefabID", prefabID);
 	}
 
-	private void updateClient()
-	{
-		int dd = PlankDetailLevel * PlankDetailLevel;
-
-		for(int layer = 0; layer < 24;layer++)
-		{
-			this.solidCheck[layer] = true;
-			int type = -1;
-			for(int index = 0; index < 8 && solidCheck[layer] == true;index++)
-			{
-				if(!data.get((layer*8)+index) || (type != -1 && woodTypes[(layer*8)+index] != type))
-					solidCheck[layer] = false;
-				type = woodTypes[(layer*8)+index];
-			}
-		}
-	}
-
-
 	@Override
 	public void handleDataPacket(DataInputStream inStream) throws IOException 
 	{
@@ -101,7 +114,7 @@ public class TileEntityWoodConstruct extends NetworkTileEntity
 
 		this.data.flip(index);
 		woodTypes[index] = meta;
-		updateClient();
+		//updateClient();
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -123,7 +136,7 @@ public class TileEntityWoodConstruct extends NetworkTileEntity
 		byte[] b = new byte[length];
 		inStream.readFully(b);
 		data.or(fromByteArray(b));
-		updateClient();
+		//updateClient();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
