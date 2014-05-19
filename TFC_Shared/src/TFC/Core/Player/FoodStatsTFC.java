@@ -326,7 +326,6 @@ public class FoodStatsTFC
 			if(reduceFood(is, eatAmount))
 			{
 				is.stackSize = 0;
-				//player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
 			}
 		}
 		else if(is.getItem() instanceof IFood)
