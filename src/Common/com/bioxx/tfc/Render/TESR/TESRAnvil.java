@@ -3,6 +3,7 @@ package com.bioxx.tfc.Render.TESR;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
@@ -41,7 +42,7 @@ public class TESRAnvil extends TESRBase
 		if (te.getStackInSlot(i) != null)
 		{
 			float[] pos = getLocation(dir, i, Block.getBlockById(te.stonePair[0]) != null);
-			if(Block.getBlockById(te.stonePair[0]) != null)
+			if(Block.getBlockById(te.stonePair[0]) != Blocks.air)
 				pos[1] += 0.3f;
 			GL11.glPushMatrix(); //start
 			{
