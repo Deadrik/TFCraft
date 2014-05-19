@@ -465,7 +465,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			//	par1EntityPlayer.addChatMessage("Pregnant");
 		}
 		//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
-		if(!worldObj.isRemote && isAdult()&& par1EntityPlayer.isSneaking() && attackEntityFrom(DamageSource.generic, 25) ) {
+		if (!worldObj.isRemote && isAdult() && par1EntityPlayer.isSneaking() && attackEntityFrom(DamageSource.generic, 5))
+		{
 			par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Item.feather, 1));
 
 		}
