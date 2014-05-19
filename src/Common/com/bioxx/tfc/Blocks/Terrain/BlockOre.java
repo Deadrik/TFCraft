@@ -1,12 +1,10 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,10 +29,11 @@ public class BlockOre extends BlockCollapsable
 {
 	public String[] blockNames = Global.ORE_METAL;
 
-	public BlockOre(Material material)
+	public BlockOre(Material mat)
 	{
-		super(material);
+		super(mat);
 		this.setTickRandomly(true);
+		this.setCreativeTab(null);
 	}
 
 	@Override
@@ -64,13 +63,6 @@ public class BlockOre extends BlockCollapsable
 		data[0] = -1;
 		data[1] = -1;
 		return data;
-	}
-
-	@Override
-	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
-	{
-		for(int i = 0; i < blockNames.length; i++)
-			list.add(new ItemStack(this, 1, i));
 	}
 
 	@Override
@@ -146,19 +138,19 @@ public class BlockOre extends BlockCollapsable
 	}
 
 	@Override
-	public boolean canDropFromExplosion(Explosion par1Explosion)
+	public boolean canDropFromExplosion(Explosion exp)
 	{
 		return false;
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion)
+	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion exp)
 	{
-		par1World.setBlockToAir(par2, par3, par4);
+		world.setBlockToAir(x, y, z);
 	}
 
 	@Override
-	public void onBlockExploded(World world, int i, int j, int k, Explosion exp) 
+	public void onBlockExploded(World world, int i, int j, int k, Explosion exp)
 	{
 		if(!world.isRemote)
 		{
@@ -198,7 +190,7 @@ public class BlockOre extends BlockCollapsable
 	}
 
 	@Override
-	public TileEntity createTileEntity(World var1, int var2)
+	public TileEntity createTileEntity(World w, int meta)
 	{
 		return new TEOre();
 	}

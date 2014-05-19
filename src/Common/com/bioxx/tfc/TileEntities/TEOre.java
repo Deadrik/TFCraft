@@ -51,13 +51,13 @@ public class TEOre extends NetworkTileEntity
 	@Override
 	public Packet getDescriptionPacket()
 	{
-		if((extraData & 8) == 1)
+		//if((extraData & 8) == 1) //This makes all ore blocks transparent ??
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
 			createInitNBT(nbt);
 			return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
 		}
-		return null;
+		//return null;
 	}
 
 	@Override

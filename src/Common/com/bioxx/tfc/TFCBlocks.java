@@ -320,9 +320,9 @@ public class TFCBlocks
 
 	public static void RegisterBlocks()
 	{
-		GameRegistry.registerBlock(Ore, com.bioxx.tfc.Items.ItemOre1.class, "Ore1");
-		GameRegistry.registerBlock(Ore2, com.bioxx.tfc.Items.ItemOre2.class, "Ore2");
-		GameRegistry.registerBlock(Ore3, com.bioxx.tfc.Items.ItemOre3.class, "Ore3");
+		GameRegistry.registerBlock(Ore, "Ore1");
+		GameRegistry.registerBlock(Ore2, "Ore2");
+		GameRegistry.registerBlock(Ore3, "Ore3");
 		GameRegistry.registerBlock(StoneIgIn, com.bioxx.tfc.Items.ItemBlocks.ItemIgIn.class, "StoneIgIn");
 		GameRegistry.registerBlock(StoneIgEx, com.bioxx.tfc.Items.ItemBlocks.ItemIgEx.class, "StoneIgEx");
 		GameRegistry.registerBlock(StoneSed, com.bioxx.tfc.Items.ItemBlocks.ItemSed.class, "StoneSed");
