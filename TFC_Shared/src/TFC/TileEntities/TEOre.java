@@ -23,7 +23,7 @@ public class TEOre extends NetworkTileEntity
 	{
 		super.validate();
 
-		if(worldObj.isRemote && this.shouldSendInitData && (extraData & 8) == 1)
+		if(worldObj.isRemote && this.shouldSendInitData && (extraData & 8) != 0)
 			try {
 				requestInitialization();
 			} catch (IOException e) {}
@@ -37,7 +37,7 @@ public class TEOre extends NetworkTileEntity
 
 	public void setVisible()
 	{
-		if((extraData & 8) == 0)
+		if((extraData & 8) == 0 || this.yCoord > 130)
 			extraData += 8;
 		try
 		{
