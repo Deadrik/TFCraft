@@ -41,7 +41,7 @@ public class ItemCustomKnife extends ItemWeapon
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float HitX, float HitY, float HitZ) 
 	{
 		int id = world.getBlockId(x, y, z);
-		if(!world.isRemote && id != TFCBlocks.ToolRack.blockID)
+		if (!world.isRemote && id != TFCBlocks.ToolRack.blockID && id != TFCBlocks.ToolRack2.blockID)
 		{
 			int hasBowl = -1;
 

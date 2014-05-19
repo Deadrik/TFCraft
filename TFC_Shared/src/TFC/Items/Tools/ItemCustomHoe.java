@@ -59,7 +59,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
 	{
-		if (world.isRemote || world.getBlockId(x, y, z) == TFCBlocks.ToolRack.blockID)
+		if (world.isRemote || world.getBlockId(x, y, z) == TFCBlocks.ToolRack.blockID || world.getBlockId(x, y, z) == TFCBlocks.ToolRack2.blockID)
 			return false;
 		else
 		{

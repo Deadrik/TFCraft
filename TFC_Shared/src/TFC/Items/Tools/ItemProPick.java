@@ -55,7 +55,7 @@ public class ItemProPick extends ItemTerra
 		int blockID = world.getBlockId(x, y, z);
 
 		// Negated the old condition and exiting the method here instead.
-		if (blockID == TFCBlocks.ToolRack.blockID)
+		if (blockID == TFCBlocks.ToolRack.blockID || blockID == TFCBlocks.ToolRack2.blockID)
 			return true;
 
 		// Getting the meta data only when we actually need it.
