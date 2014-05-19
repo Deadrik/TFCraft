@@ -11,7 +11,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
@@ -20,7 +19,7 @@ import com.bioxx.tfc.api.IFood;
 import com.bioxx.tfc.api.Crafting.QuernManager;
 import com.bioxx.tfc.api.Crafting.QuernRecipe;
 
-public class TileEntityQuern extends TileEntity implements IInventory
+public class TileEntityQuern extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[3];
 	public int rotation = 0;
@@ -92,7 +91,7 @@ public class TileEntityQuern extends TileEntity implements IInventory
 						storage[0] = null;
 					else
 						storage[0].stackSize--;
-	
+
 					if(storage[1] == null)
 						storage[1] = new ItemStack(qr.getOutItem(), qr.getOutStackSize(), qr.getOutItemDmg());
 					else if(storage[1].stackSize < storage[1].getMaxStackSize())
@@ -111,7 +110,7 @@ public class TileEntityQuern extends TileEntity implements IInventory
 						ejectItem(new ItemStack(qr.getOutItem(), storage[1].stackSize, qr.getOutItemDmg()));
 						storage[1] = new ItemStack(qr.getOutItem(), qr.getOutStackSize(), qr.getOutItemDmg());
 					}
-	
+
 					return true;
 				}
 			}
@@ -308,5 +307,28 @@ public class TileEntityQuern extends TileEntity implements IInventory
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
 		readFromNBT(pkt.func_148857_g());
+	}
+
+	@Override
+	public void handleInitPacket(NBTTagCompound nbt) {
+		this.hasQuern = nbt.getBoolean("hasQuern");
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+		nbt.setBoolean("hasQuern", hasQuern);
 	}
 }

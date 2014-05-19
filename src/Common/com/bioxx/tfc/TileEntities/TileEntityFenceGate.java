@@ -1,12 +1,8 @@
 package com.bioxx.tfc.TileEntities;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityFenceGate extends TileEntity
+public class TileEntityFenceGate extends NetworkTileEntity
 {
 	private boolean open = false;
 	private byte direction = 0;
@@ -14,14 +10,12 @@ public class TileEntityFenceGate extends TileEntity
 	public void setOpen(boolean value)
 	{
 		open = value;
-		//TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	public void setDirection(byte value)
 	{
 		direction = value;
-		//TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -36,33 +30,43 @@ public class TileEntityFenceGate extends TileEntity
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbttagcompound);
-		open = nbttagcompound.getBoolean("open");
-		direction = nbttagcompound.getByte("dir");
+		super.readFromNBT(nbt);
+		open = nbt.getBoolean("open");
+		direction = nbt.getByte("dir");
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setBoolean("open", open);
-		nbttagcompound.setByte("dir", direction);
+		super.writeToNBT(nbt);
+		nbt.setBoolean("open", open);
+		nbt.setByte("dir", direction);
 	}
 
 	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+	public void handleInitPacket(NBTTagCompound nbt) {
+		open = nbt.getBoolean("open");
+		direction = nbt.getByte("dir");
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
+	public void handleDataPacket(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+		nbt.setBoolean("open", open);
+		nbt.setByte("dir", direction);
 	}
 
 }

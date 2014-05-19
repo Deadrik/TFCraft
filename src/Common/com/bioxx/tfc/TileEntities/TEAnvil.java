@@ -12,9 +12,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.TFCItems;
@@ -768,20 +765,6 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		craftingPlan = nbttagcompound.getString("plan");
 	}
 
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
-	}
-
 	public void setPlan(String s)
 	{
 		if(worldObj.isRemote)
@@ -865,12 +848,6 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 		}
 		}	
 		worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 0.1F, 0.1F + (worldObj.rand.nextFloat()/4));
-	}
-
-	@Override
-	public void createDataNBT(NBTTagCompound nbt) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

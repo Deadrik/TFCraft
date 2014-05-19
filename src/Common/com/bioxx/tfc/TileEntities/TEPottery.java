@@ -10,10 +10,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCItems;
@@ -25,7 +21,7 @@ import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Crafting.KilnCraftingManager;
 import com.bioxx.tfc.api.Crafting.KilnRecipe;
 
-public class TEPottery extends TileEntity implements IInventory
+public class TEPottery extends NetworkTileEntity implements IInventory
 {
 	public ItemStack inventory[];
 	public boolean hasRack;
@@ -224,7 +220,7 @@ public class TEPottery extends TileEntity implements IInventory
 			worldObj.spawnEntityInWorld(entityitem);
 		}
 	}
-	
+
 	public void ejectItem(int index)
 	{
 		EntityItem entityitem;
@@ -358,17 +354,27 @@ public class TEPottery extends TileEntity implements IInventory
 	}
 
 	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+	public void handleInitPacket(NBTTagCompound nbt) {
+		this.readFromNBT(nbt);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
+	public void handleDataPacket(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+		/*Normally this would be the wrong approach to sending init data. However for the pottery since we have to sync a few items
+		 *as well as some vars I am making an exception to keep it simple.*/
+		this.writeToNBT(nbt);
 	}
 
 
@@ -377,159 +383,159 @@ public class TEPottery extends TileEntity implements IInventory
 
 
 
-//TODO
-//	@Override
-//	public void createInitPacket(DataOutputStream outStream) throws IOException  
-//	{
-//		if(inventory[0] != null)
-//		{
-//			outStream.writeInt(inventory[0].itemID);
-//			outStream.writeInt(inventory[0].getItemDamage());
-//		}
-//		else
-//		{
-//			outStream.writeInt(0);
-//			outStream.writeInt(0);
-//		}
-//		if(inventory[1] != null)
-//		{
-//			outStream.writeInt(inventory[1].itemID);
-//			outStream.writeInt(inventory[1].getItemDamage());
-//		}
-//		else
-//		{
-//			outStream.writeInt(0);
-//			outStream.writeInt(0);
-//		}
-//		if(inventory[2] != null)
-//		{
-//			outStream.writeInt(inventory[2].itemID);
-//			outStream.writeInt(inventory[2].getItemDamage());
-//		}
-//		else
-//		{
-//			outStream.writeInt(0);
-//			outStream.writeInt(0);
-//		}
-//		if(inventory[3] != null)
-//		{
-//			outStream.writeInt(inventory[3].itemID);
-//			outStream.writeInt(inventory[3].getItemDamage());
-//		}
-//		else
-//		{
-//			outStream.writeInt(0);
-//			outStream.writeInt(0);
-//		}
-//		outStream.writeBoolean(hasRack);
-//		outStream.writeInt(straw);
-//		outStream.writeInt(wood);
-//	}
+	//TODO
+	//	@Override
+	//	public void createInitPacket(DataOutputStream outStream) throws IOException  
+	//	{
+	//		if(inventory[0] != null)
+	//		{
+	//			outStream.writeInt(inventory[0].itemID);
+	//			outStream.writeInt(inventory[0].getItemDamage());
+	//		}
+	//		else
+	//		{
+	//			outStream.writeInt(0);
+	//			outStream.writeInt(0);
+	//		}
+	//		if(inventory[1] != null)
+	//		{
+	//			outStream.writeInt(inventory[1].itemID);
+	//			outStream.writeInt(inventory[1].getItemDamage());
+	//		}
+	//		else
+	//		{
+	//			outStream.writeInt(0);
+	//			outStream.writeInt(0);
+	//		}
+	//		if(inventory[2] != null)
+	//		{
+	//			outStream.writeInt(inventory[2].itemID);
+	//			outStream.writeInt(inventory[2].getItemDamage());
+	//		}
+	//		else
+	//		{
+	//			outStream.writeInt(0);
+	//			outStream.writeInt(0);
+	//		}
+	//		if(inventory[3] != null)
+	//		{
+	//			outStream.writeInt(inventory[3].itemID);
+	//			outStream.writeInt(inventory[3].getItemDamage());
+	//		}
+	//		else
+	//		{
+	//			outStream.writeInt(0);
+	//			outStream.writeInt(0);
+	//		}
+	//		outStream.writeBoolean(hasRack);
+	//		outStream.writeInt(straw);
+	//		outStream.writeInt(wood);
+	//	}
 
-//	@Override
-//	public void handleInitPacket(DataInputStream inStream) throws IOException 
-//	{
-//		int inv0 = inStream.readInt();
-//		int inv0d = inStream.readInt();
-//		int inv1 = inStream.readInt();
-//		int inv1d = inStream.readInt();
-//		int inv2 = inStream.readInt();
-//		int inv2d = inStream.readInt();
-//		int inv3 = inStream.readInt();
-//		int inv3d = inStream.readInt();
-//
-//		hasRack = inStream.readBoolean();
-//
-//		inventory[0] = inv0 != 0 ? new ItemStack(inv0, 1, inv0d) : null;
-//		inventory[1] = inv1 != 0 ? new ItemStack(inv1, 1, inv1d) : null;
-//		inventory[2] = inv2 != 0 ? new ItemStack(inv2, 1, inv2d) : null;
-//		inventory[3] = inv3 != 0 ? new ItemStack(inv3, 1, inv3d) : null;
-//		straw = inStream.readInt();
-//		wood = inStream.readInt();
-//		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-//	}
+	//	@Override
+	//	public void handleInitPacket(DataInputStream inStream) throws IOException 
+	//	{
+	//		int inv0 = inStream.readInt();
+	//		int inv0d = inStream.readInt();
+	//		int inv1 = inStream.readInt();
+	//		int inv1d = inStream.readInt();
+	//		int inv2 = inStream.readInt();
+	//		int inv2d = inStream.readInt();
+	//		int inv3 = inStream.readInt();
+	//		int inv3d = inStream.readInt();
+	//
+	//		hasRack = inStream.readBoolean();
+	//
+	//		inventory[0] = inv0 != 0 ? new ItemStack(inv0, 1, inv0d) : null;
+	//		inventory[1] = inv1 != 0 ? new ItemStack(inv1, 1, inv1d) : null;
+	//		inventory[2] = inv2 != 0 ? new ItemStack(inv2, 1, inv2d) : null;
+	//		inventory[3] = inv3 != 0 ? new ItemStack(inv3, 1, inv3d) : null;
+	//		straw = inStream.readInt();
+	//		wood = inStream.readInt();
+	//		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+	//	}
 
-//	public Packet createUpdatePacket()
-//	{
-//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-//		DataOutputStream dos=new DataOutputStream(bos);
-//
-//		try {
-//			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-//			dos.writeInt(xCoord);
-//			dos.writeInt(yCoord);
-//			dos.writeInt(zCoord);
-//			if(inventory[0] != null)
-//			{
-//				dos.writeInt(inventory[0].itemID);
-//				dos.writeInt(inventory[0].getItemDamage());
-//			}
-//			else
-//			{
-//				dos.writeInt(0);
-//				dos.writeInt(0);
-//			}
-//			if(inventory[1] != null)
-//			{
-//				dos.writeInt(inventory[1].itemID);
-//				dos.writeInt(inventory[1].getItemDamage());
-//			}
-//			else
-//			{
-//				dos.writeInt(0);
-//				dos.writeInt(0);
-//			}
-//			if(inventory[2] != null)
-//			{
-//				dos.writeInt(inventory[2].itemID);
-//				dos.writeInt(inventory[2].getItemDamage());
-//			}
-//			else
-//			{
-//				dos.writeInt(0);
-//				dos.writeInt(0);
-//			}
-//			if(inventory[3] != null)
-//			{
-//				dos.writeInt(inventory[3].itemID);
-//				dos.writeInt(inventory[3].getItemDamage());
-//			}
-//			else
-//			{
-//				dos.writeInt(0);
-//				dos.writeInt(0);
-//			}
-//			dos.writeBoolean(hasRack);
-//			dos.writeInt(straw);
-//			dos.writeInt(wood);
-//		} catch (IOException e) {
-//		}
-//
-//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-//	}
+	//	public Packet createUpdatePacket()
+	//	{
+	//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+	//		DataOutputStream dos=new DataOutputStream(bos);
+	//
+	//		try {
+	//			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
+	//			dos.writeInt(xCoord);
+	//			dos.writeInt(yCoord);
+	//			dos.writeInt(zCoord);
+	//			if(inventory[0] != null)
+	//			{
+	//				dos.writeInt(inventory[0].itemID);
+	//				dos.writeInt(inventory[0].getItemDamage());
+	//			}
+	//			else
+	//			{
+	//				dos.writeInt(0);
+	//				dos.writeInt(0);
+	//			}
+	//			if(inventory[1] != null)
+	//			{
+	//				dos.writeInt(inventory[1].itemID);
+	//				dos.writeInt(inventory[1].getItemDamage());
+	//			}
+	//			else
+	//			{
+	//				dos.writeInt(0);
+	//				dos.writeInt(0);
+	//			}
+	//			if(inventory[2] != null)
+	//			{
+	//				dos.writeInt(inventory[2].itemID);
+	//				dos.writeInt(inventory[2].getItemDamage());
+	//			}
+	//			else
+	//			{
+	//				dos.writeInt(0);
+	//				dos.writeInt(0);
+	//			}
+	//			if(inventory[3] != null)
+	//			{
+	//				dos.writeInt(inventory[3].itemID);
+	//				dos.writeInt(inventory[3].getItemDamage());
+	//			}
+	//			else
+	//			{
+	//				dos.writeInt(0);
+	//				dos.writeInt(0);
+	//			}
+	//			dos.writeBoolean(hasRack);
+	//			dos.writeInt(straw);
+	//			dos.writeInt(wood);
+	//		} catch (IOException e) {
+	//		}
+	//
+	//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	//	}
 
-//	@Override
-//	public void handleDataPacket(DataInputStream inStream) throws IOException 
-//	{
-//		int inv0 = inStream.readInt();
-//		int inv0d = inStream.readInt();
-//		int inv1 = inStream.readInt();
-//		int inv1d = inStream.readInt();
-//		int inv2 = inStream.readInt();
-//		int inv2d = inStream.readInt();
-//		int inv3 = inStream.readInt();
-//		int inv3d = inStream.readInt();
-//
-//		hasRack = inStream.readBoolean();
-//
-//		inventory[0] = inv0 != 0 ? new ItemStack(inv0, 1, inv0d) : null;
-//		inventory[1] = inv1 != 0 ? new ItemStack(inv1, 1, inv1d) : null;
-//		inventory[2] = inv2 != 0 ? new ItemStack(inv2, 1, inv2d) : null;
-//		inventory[3] = inv3 != 0 ? new ItemStack(inv3, 1, inv3d) : null;
-//
-//		straw = inStream.readInt();
-//		wood = inStream.readInt();
-//
-//		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-//	}
+	//	@Override
+	//	public void handleDataPacket(DataInputStream inStream) throws IOException 
+	//	{
+	//		int inv0 = inStream.readInt();
+	//		int inv0d = inStream.readInt();
+	//		int inv1 = inStream.readInt();
+	//		int inv1d = inStream.readInt();
+	//		int inv2 = inStream.readInt();
+	//		int inv2d = inStream.readInt();
+	//		int inv3 = inStream.readInt();
+	//		int inv3d = inStream.readInt();
+	//
+	//		hasRack = inStream.readBoolean();
+	//
+	//		inventory[0] = inv0 != 0 ? new ItemStack(inv0, 1, inv0d) : null;
+	//		inventory[1] = inv1 != 0 ? new ItemStack(inv1, 1, inv1d) : null;
+	//		inventory[2] = inv2 != 0 ? new ItemStack(inv2, 1, inv2d) : null;
+	//		inventory[3] = inv3 != 0 ? new ItemStack(inv3, 1, inv3d) : null;
+	//
+	//		straw = inStream.readInt();
+	//		wood = inStream.readInt();
+	//
+	//		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+	//	}
 }

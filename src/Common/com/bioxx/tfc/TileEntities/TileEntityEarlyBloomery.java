@@ -9,10 +9,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
 import com.bioxx.tfc.TFCBlocks;
@@ -23,7 +19,7 @@ import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.api.ISmeltable;
 import com.bioxx.tfc.api.Constant.Global;
 
-public class TileEntityEarlyBloomery extends TileEntity
+public class TileEntityEarlyBloomery extends NetworkTileEntity
 {
 	public boolean isFlipped;
 	public boolean bloomeryLit;
@@ -54,16 +50,6 @@ public class TileEntityEarlyBloomery extends TileEntity
 		else isFlipped = true;
 		if(!worldObj.isRemote)
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-//		{
-//			try
-//			{
-//				TerraFirmaCraft.proxy.sendCustomPacket(sendInitPacket());
-//			}
-//			catch (IOException e)
-//			{
-//				e.printStackTrace();
-//			}
-//		}
 	}
 
 	public boolean isStackValid(int i, int j, int k)
@@ -360,36 +346,25 @@ public class TileEntityEarlyBloomery extends TileEntity
 	}
 
 	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+	public void handleInitPacket(NBTTagCompound nbt) {
+		isFlipped = nbt.getBoolean("isFlipped");
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
+	public void handleDataPacket(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
 	}
 
+	@Override
+	public void createDataNBT(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
 
+	}
 
-
-
-
-
-
-//	@Override
-//	public void createInitPacket(DataOutputStream outStream) throws IOException
-//	{
-//		outStream.writeBoolean(isFlipped);
-//	}
-//
-//	@Override
-//	public void handleInitPacket(DataInputStream inStream) throws IOException
-//	{
-//		isFlipped = inStream.readBoolean();
-//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-//	}
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+		nbt.setBoolean("isFlipped", this.isFlipped);
+	}
 }

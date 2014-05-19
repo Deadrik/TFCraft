@@ -2,9 +2,6 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -12,17 +9,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityIngotPile extends TileEntity implements IInventory
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+
+public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	public String type;
 	public static Item[] INGOTS;
-	
+
 	public TileEntityIngotPile()
 	{
 		storage = new ItemStack[1];
@@ -38,12 +34,12 @@ public class TileEntityIngotPile extends TileEntity implements IInventory
 	{
 		return INGOTS;
 	}
-	
+
 	public void setType(String i)
 	{
 		type = i;
 	}
-	
+
 	public int getStack()
 	{
 		return storage[0].stackSize;
@@ -249,18 +245,27 @@ public class TileEntityIngotPile extends TileEntity implements IInventory
 	}
 
 	@Override
-	public Packet getDescriptionPacket()
+	public void handleInitPacket(NBTTagCompound nbt) 
 	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+		this.type = nbt.getString("type");
+		storage[0] = ItemStack.loadItemStackFromNBT(nbt);
+		updateNeighbours();
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
-		updateNeighbours();
+	public void handleDataPacket(NBTTagCompound nbt) {
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt) {
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+		nbt.setString("type", this.type);
+		ItemStack is = storage[0].copy();
+		is.stackTagCompound = null;
+		is.writeToNBT(nbt);
 	}
 
 }

@@ -96,7 +96,6 @@ public class BlockPottery extends BlockTerraContainer
 				{
 					te.ejectItem(3+te.wood);
 					te.wood--;
-					//te.broadcastPacketInRange(te.createUpdatePacket());
 					world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
 				}
 				else if(te.wood == 0 && side == 1 && player.isSneaking())
@@ -110,7 +109,6 @@ public class BlockPottery extends BlockTerraContainer
 					else if(hitX > 0.5 && hitZ > 0.5)
 						te.ejectItem(3);
 					world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
-					//te.broadcastPacketInRange(te.createUpdatePacket());
 				}
 			}
 		}

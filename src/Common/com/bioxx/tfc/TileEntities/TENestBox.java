@@ -3,7 +3,6 @@ package com.bioxx.tfc.TileEntities;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,20 +10,14 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.GUI.GuiNestBox;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class TENestBox extends TileEntity implements IInventory
 {
@@ -292,53 +285,4 @@ public class TENestBox extends TileEntity implements IInventory
 				inventory[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
 	}
-
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
-		
-		GuiScreen gui = FMLClientHandler.instance().getClient().currentScreen;
-		if(gui != null && gui instanceof GuiNestBox)
-			((GuiNestBox)gui).updateScreen();
-	}
-
-/////////////////////////////////////////////////////
-	//TODO Update packet
-	public void updateGui()
-	{
-		
-		//if(!worldObj.isRemote)
-		//	TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
-	}
-
-//	public void handleDataPacket(DataInputStream inStream) throws IOException
-//	{
-//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-//	}
-//	public Packet createUpdatePacket()
-//	{
-//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-//		DataOutputStream dos=new DataOutputStream(bos);
-//		try
-//		{
-//			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
-//			dos.writeInt(xCoord);
-//			dos.writeInt(yCoord);
-//			dos.writeInt(zCoord);
-//		}
-//		catch (IOException e)
-//		{
-//		}
-//		return null;// this.setupCustomPacketData(bos.toByteArray(), bos.size());
-//	}
-
 }

@@ -78,13 +78,13 @@ public class TEOre extends NetworkTileEntity
 	@Override
 	public void handleDataPacket(NBTTagCompound nbt)
 	{
-		handleInitPacket(nbt);
+
 	}
 
 	@Override
 	public void createDataNBT(NBTTagCompound nbt)
 	{
-		createInitNBT(nbt);
+
 	}
 
 	@Override

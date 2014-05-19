@@ -419,12 +419,6 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void createDataNBT(NBTTagCompound nbt) 
-	{
-
-	}
-
-	@Override
 	public void createInitNBT(NBTTagCompound nbt) 
 	{
 

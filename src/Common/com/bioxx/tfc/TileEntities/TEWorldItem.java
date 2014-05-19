@@ -5,18 +5,13 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TEWorldItem extends TileEntity implements IInventory
+public class TEWorldItem extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[1];
 
 	public TEWorldItem()
 	{
-//		this.shouldSendInitData = true;
 	}
 
 	@Override
@@ -33,7 +28,7 @@ public class TEWorldItem extends TileEntity implements IInventory
 		storage = new ItemStack[1];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < storage.length)
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
@@ -57,34 +52,6 @@ public class TEWorldItem extends TileEntity implements IInventory
 		}
 		nbt.setTag("Items", nbttaglist);
 	}
-
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
-	}
-
-//	@Override
-//	public void createInitPacket(DataOutputStream outStream) throws IOException 
-//	{
-//		outStream.writeInt(storage[0].itemID);
-//		outStream.writeInt(storage[0].getItemDamage());
-//	}
-//
-//	@Override
-//	public void handleInitPacket(DataInputStream inStream) throws IOException 
-//	{
-//		storage[0] = new ItemStack(inStream.readInt(), 1, inStream.readInt());
-//		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-//	}
 
 	@Override
 	public int getSizeInventory()
@@ -155,5 +122,27 @@ public class TEWorldItem extends TileEntity implements IInventory
 	public boolean isItemValidForSlot(int i, ItemStack itemstack)
 	{
 		return false;
+	}
+
+	@Override
+	public void handleInitPacket(NBTTagCompound nbt) {
+		this.storage[0] = ItemStack.loadItemStackFromNBT(nbt);
+	}
+
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createDataNBT(NBTTagCompound nbt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+		this.storage[0].writeToNBT(nbt);
 	}
 }

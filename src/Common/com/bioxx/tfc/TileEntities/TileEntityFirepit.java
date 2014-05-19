@@ -13,9 +13,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
@@ -397,7 +394,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 				worldObj.setBlock(i, j, k, TFCBlocks.Charcoal, count, 0x2);
 				/* Trick to make the block fall or start the combining "chain" with other blocks.
 				 * We don't notify the bottom block because it may be air so this block won't fall */
-				 worldObj.notifyBlockOfNeighborChange(i, j, k, TFCBlocks.Charcoal);
+				worldObj.notifyBlockOfNeighborChange(i, j, k, TFCBlocks.Charcoal);
 			}
 			return true;
 		}
@@ -548,7 +545,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 		fireItemStacks = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < fireItemStacks.length)
 				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
@@ -578,7 +575,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 					externalFireCheck();
 				externalFireCheckTimer = 100;
 			}
-			
+
 			if(R.nextInt(5) == 0)
 			{
 				if(worldObj.isRemote)
@@ -599,7 +596,6 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 			careForInventorySlot(fireItemStacks[8]);
 
 			hasCookingPot = (fireItemStacks[1]!= null && fireItemStacks[1].getItem() == TFCItems.PotteryPot);
-			updateGui();
 
 			ItemStack[] FuelStack = new ItemStack[4];
 			FuelStack[0] = fireItemStacks[0];
@@ -734,7 +730,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 		Random random = new Random();
 		int sbkey = random.nextInt(topMap.size());
 		int[] sb = topMap.get(sbkey);
-		
+
 		int x = sb[0];
 		int y = sb[1];
 		int z = sb[2];
@@ -751,25 +747,4 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 			if(random.nextInt(10) == 0) worldObj.spawnParticle("largesmoke", f+f4 - 0.2F, f1, f2 + f5 + 0.2F, 0.0D, 0.0D, 0.0D);
 		}
 	}
-
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
-	}
-
-	public void updateGui()
-	{
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		//validate();
-	}
-
 }

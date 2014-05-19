@@ -168,11 +168,13 @@ public class TEDetailed extends NetworkTileEntity
 		packetType = nbt.getByte("packetType");
 		if(packetType == TEDetailed.Packet_Update)
 		{
-
+			/*The data for this is already set in BlockDetailed onBlockActivatedServer()*/
 		}
 		else if(packetType == TEDetailed.Packet_Activate)
 		{
 			nbt.setByte("chiselMode", PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode);
+			/*We've already added the xSelected, ySelected, and zSelected bytes to the nbt in the
+			 * BlockDetailed onBlockActivated().*/
 		}
 	}
 

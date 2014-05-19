@@ -23,8 +23,8 @@ public abstract class NetworkTileEntity extends TileEntity
 	 * @param nbt
 	 */
 	public abstract void handleInitPacket(NBTTagCompound nbt);
-	public abstract void handleDataPacket(NBTTagCompound nbt);
-	public abstract void createDataNBT(NBTTagCompound nbt);
+	public void handleDataPacket(NBTTagCompound nbt){}
+	public void createDataNBT(NBTTagCompound nbt){}
 	public abstract void createInitNBT(NBTTagCompound nbt);
 
 	public DataBlockPacket createDataPacket()

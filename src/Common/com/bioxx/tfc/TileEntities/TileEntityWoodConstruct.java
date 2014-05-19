@@ -5,14 +5,10 @@ import java.util.BitSet;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
 import com.bioxx.tfc.TFCItems;
 
-public class TileEntityWoodConstruct extends TileEntity
+public class TileEntityWoodConstruct extends NetworkTileEntity
 {
 	public byte[] woodTypes = new byte[192];
 	public BitSet data;
@@ -69,44 +65,23 @@ public class TileEntityWoodConstruct extends TileEntity
 		return bytes;
 	}
 
-	/**
-	 * Reads a tile entity from NBT.
-	 */
 	@Override
-	public void readFromNBT(NBTTagCompound nbttc)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbttc);
-		woodTypes = nbttc.getByteArray("woodTypes");
+		super.readFromNBT(nbt);
+		woodTypes = nbt.getByteArray("woodTypes");
 		data = new BitSet(192);
-		data.or(fromByteArray(nbttc.getByteArray("data")));
+		data.or(fromByteArray(nbt.getByteArray("data")));
 		//prefabID = par1NBTTagCompound.getInteger("prefabID");
 	}
 
-	/**
-	 * Writes a tile entity to NBT.
-	 */
 	@Override
-	public void writeToNBT(NBTTagCompound nbttc)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbttc);
-		nbttc.setByteArray("woodTypes", woodTypes);
-		nbttc.setByteArray("data", toByteArray(data));
+		super.writeToNBT(nbt);
+		nbt.setByteArray("woodTypes", woodTypes);
+		nbt.setByteArray("data", toByteArray(data));
 		//par1NBTTagCompound.setInteger("prefabID", prefabID);
-	}
-
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
-		updateClient();
 	}
 
 	private void updateClient()
@@ -126,68 +101,92 @@ public class TileEntityWoodConstruct extends TileEntity
 		}
 	}
 
+	@Override
+	public void handleInitPacket(NBTTagCompound nbt) {
+		woodTypes = nbt.getByteArray("woodTypes");
+		data = new BitSet(192);
+		data.or(fromByteArray(nbt.getByteArray("data")));
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt) {
+		int index = nbt.getInteger("index");
+		byte meta = nbt.getByte("meta");
+		this.data.flip(index);
+		woodTypes[index] = meta;
+		//updateClient();
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+		nbt.setByteArray("woodTypes", woodTypes);
+		nbt.setByteArray("data", toByteArray(data));
+	}
 
 
 
-//TODO
 
-//
-//
-//	@Override
-//	public void handleDataPacket(DataInputStream inStream) throws IOException 
-//	{
-//		int index = inStream.readInt();
-//		byte meta = inStream.readByte();
-//
-//		this.data.flip(index);
-//		woodTypes[index] = meta;
-//		updateClient();
-//		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-//	}
-//
-//	@Override
-//	public void createInitPacket(DataOutputStream outStream) throws IOException 
-//	{
-//		outStream.write(woodTypes);
-//		byte[] b = toByteArray(data);
-//		outStream.writeInt(b.length);
-//		outStream.write(b);		
-//	}
-//
-//	@Override
-//	public void handleInitPacket(DataInputStream inStream) throws IOException 
-//	{
-//		inStream.readFully(woodTypes, 0, 192);
-//
-//		int length = inStream.readInt();
-//		byte[] b = new byte[length];
-//		inStream.readFully(b);
-//		data.or(fromByteArray(b));
-//		updateClient();
-//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-//	}
-//
-//	@Override
-//	public void handleDataPacketServer(DataInputStream inStream)
-//			throws IOException {
-//
-//
-//	}
-//
-//	public Packet createUpdatePacket(int index, byte meta)
-//	{
-//		ByteArrayOutputStream bos = new ByteArrayOutputStream(255);
-//		DataOutputStream outStream = new DataOutputStream(bos);	
-//		try {
-//			outStream.writeByte(PacketHandler.Packet_Data_Block_Client);
-//			outStream.writeInt(xCoord);
-//			outStream.writeInt(yCoord);
-//			outStream.writeInt(zCoord);
-//			outStream.writeInt(index);
-//			outStream.writeByte(meta);
-//		} catch (IOException e) {
-//		}
-//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-//	}
+	//TODO
+
+	//
+	//
+	//	@Override
+	//	public void handleDataPacket(DataInputStream inStream) throws IOException 
+	//	{
+	//		int index = inStream.readInt();
+	//		byte meta = inStream.readByte();
+	//
+	//		this.data.flip(index);
+	//		woodTypes[index] = meta;
+	//		updateClient();
+	//		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+	//	}
+	//
+	//	@Override
+	//	public void createInitPacket(DataOutputStream outStream) throws IOException 
+	//	{
+	//		outStream.write(woodTypes);
+	//		byte[] b = toByteArray(data);
+	//		outStream.writeInt(b.length);
+	//		outStream.write(b);		
+	//	}
+	//
+	//	@Override
+	//	public void handleInitPacket(DataInputStream inStream) throws IOException 
+	//	{
+	//		inStream.readFully(woodTypes, 0, 192);
+	//
+	//		int length = inStream.readInt();
+	//		byte[] b = new byte[length];
+	//		inStream.readFully(b);
+	//		data.or(fromByteArray(b));
+	//		updateClient();
+	//		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	//	}
+	//
+	//	@Override
+	//	public void handleDataPacketServer(DataInputStream inStream)
+	//			throws IOException {
+	//
+	//
+	//	}
+	//
+	//	public Packet createUpdatePacket(int index, byte meta)
+	//	{
+	//		ByteArrayOutputStream bos = new ByteArrayOutputStream(255);
+	//		DataOutputStream outStream = new DataOutputStream(bos);	
+	//		try {
+	//			outStream.writeByte(PacketHandler.Packet_Data_Block_Client);
+	//			outStream.writeInt(xCoord);
+	//			outStream.writeInt(yCoord);
+	//			outStream.writeInt(zCoord);
+	//			outStream.writeInt(index);
+	//			outStream.writeByte(meta);
+	//		} catch (IOException e) {
+	//		}
+	//		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	//	}
 
 }

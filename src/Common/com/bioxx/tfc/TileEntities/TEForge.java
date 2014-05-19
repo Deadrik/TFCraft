@@ -8,9 +8,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -329,7 +326,7 @@ public class TEForge extends TEFireEntity implements IInventory
 		fireItemStacks = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			NBTTagCompound nbt1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			NBTTagCompound nbt1 = nbttaglist.getCompoundTagAt(i);
 			byte byte0 = nbt1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < fireItemStacks.length)
 				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbt1);
@@ -472,19 +469,4 @@ public class TEForge extends TEFireEntity implements IInventory
 		}
 		nbt.setTag("Items", nbttaglist);
 	}
-
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
-	}
-
 }
