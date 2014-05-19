@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
-import com.bioxx.tfc.TileEntities.TEOre;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
@@ -15,6 +11,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.TileEntities.TEOre;
 
 // Referenced classes of package net.minecraft.src:
 //                      WorldGenerator, MathHelper, World, Block
@@ -277,13 +277,16 @@ public class WorldGenMinable extends WorldGenerator
 
 						if(isCorrectRockType && isCorrectMeta)
 						{
-							world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2);
-							TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
-							if(te!= null)
+							if(world.setBlock(posX, posY, posZ, MPBlock, minableBlockMeta, 2))
 							{
-								te.baseBlockID = Block.getIdFromBlock(b);
-								te.baseBlockMeta = m;
-								te.extraData = (byte)grade;
+								TEOre te = (TEOre)world.getTileEntity(posX, posY, posZ);
+								if(te!= null)
+								{
+									te.baseBlockID = Block.getIdFromBlock(b);
+									te.baseBlockMeta = m;
+									te.extraData = (byte)(grade+8);
+								}
+
 							}
 						}
 						blocksMade++;

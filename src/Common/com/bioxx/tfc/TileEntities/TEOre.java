@@ -1,7 +1,6 @@
 package com.bioxx.tfc.TileEntities;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 
@@ -51,28 +50,21 @@ public class TEOre extends NetworkTileEntity
 	@Override
 	public Packet getDescriptionPacket()
 	{
-		//if((extraData & 8) == 1) //This makes all ore blocks transparent ??
+		if((extraData & 8) != 0 || this.yCoord > 130)
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
 			createInitNBT(nbt);
 			return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
 		}
-		//return null;
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		handleInitPacket(pkt.func_148857_g());
+		return null;
 	}
 
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt)
 	{
-		baseBlockID = nbt.getInteger("baseBlockID");
-		baseBlockMeta = nbt.getInteger("baseBlockMeta");
+		baseBlockID = nbt.getInteger("id");
+		baseBlockMeta = nbt.getInteger("meta");
 		extraData = nbt.getByte("extraData");
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -90,8 +82,8 @@ public class TEOre extends NetworkTileEntity
 	@Override
 	public void createInitNBT(NBTTagCompound nbt)
 	{
-		nbt.setInteger("baseBlockID", baseBlockID);
-		nbt.setInteger("baseBlockMeta", baseBlockMeta);
+		nbt.setInteger("id", baseBlockID);
+		nbt.setInteger("meta", baseBlockMeta);
 		nbt.setByte("extraData", extraData);
 	}
 }
