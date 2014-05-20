@@ -7,9 +7,9 @@ import java.util.Random;
 
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.GenEVTLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.GenRainLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.GenRockLayer2TFC;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.GenTreeLayerTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain.GenRainLayerTFC;
 
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.biome.BiomeGenBase;

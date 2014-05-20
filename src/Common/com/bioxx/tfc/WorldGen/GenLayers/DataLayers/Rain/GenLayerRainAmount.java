@@ -1,4 +1,4 @@
-package com.bioxx.tfc.WorldGen.GenLayers.DataLayers;
+package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain;
 
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;

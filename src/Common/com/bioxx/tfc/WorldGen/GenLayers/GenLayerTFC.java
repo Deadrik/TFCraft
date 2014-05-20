@@ -15,7 +15,7 @@ import com.bioxx.tfc.WorldGen.TFCWorldType;
 public abstract class GenLayerTFC extends GenLayer
 {
 	/** seed from World#getWorldSeed that is used in the LCG prng */
-	private long worldGenSeed;
+	protected long worldGenSeed;
 
 	/** parent GenLayer that was provided via the constructor */
 	protected GenLayerTFC parent;
@@ -24,10 +24,10 @@ public abstract class GenLayerTFC extends GenLayer
 	 * final part of the LCG prng that uses the chunk X, Z coords along with the other two seeds to generate
 	 * pseudorandom numbers
 	 */
-	private long chunkSeed;
+	protected long chunkSeed;
 
 	/** base seed to the LCG prng provided via the constructor */
-	private long baseSeed;
+	protected long baseSeed;
 
 	/**
 	 * the first array item is a linked list of the bioms, the second is the zoom function, the third is the same as the
@@ -36,7 +36,9 @@ public abstract class GenLayerTFC extends GenLayer
 	public static GenLayerTFC[] initializeAllBiomeGenerators(long par0, TFCWorldType par2)
 	{
 		GenLayerTFC continent = genContinent(0, false);
-		GenLayerTFC continent2 = genContinent(0, false);
+		continent = new GenLayerDeepOcean(4L, continent);
+		drawImage(512, continent, "8b ContinentsDone DeepOcean");
+		GenLayerTFC continent2 = GenLayerZoomTFC.magnify(1000L, continent, 0);
 		byte var4 = 4;
 
 		//Create Biomes
@@ -108,13 +110,8 @@ public abstract class GenLayerTFC extends GenLayer
 		drawImage(512, var11, "7 ContinentsAddIslandZoom3");
 		GenLayerTFC continent = new GenLayerAddIslandTFC(4L, var11);
 		drawImage(512, continent, "8 ContinentsDone");
-		continent = new GenLayerDeepOcean(4L, var11);
-		drawImage(512, continent, "8b ContinentsDone DeepOcean");
-
 		return continent;
 	}
-
-
 
 	static boolean shouldDraw = true;
 	public static void drawImage(int size, GenLayerTFC genlayer, String name)
@@ -150,6 +147,7 @@ public abstract class GenLayerTFC extends GenLayer
 			e.printStackTrace();
 		}
 	}
+
 	public GenLayerTFC(long par1)
 	{
 		super(par1);
