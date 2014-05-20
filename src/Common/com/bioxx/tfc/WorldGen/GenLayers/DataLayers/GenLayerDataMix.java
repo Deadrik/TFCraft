@@ -1,13 +1,13 @@
-package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain;
+package com.bioxx.tfc.WorldGen.GenLayers.DataLayers;
 
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
-public class GenLayerRainMix extends GenLayerTFC
+public class GenLayerDataMix extends GenLayerTFC
 {
-	public GenLayerRainMix(long par1, GenLayer par3GenLayer)
+	public GenLayerDataMix(long par1, GenLayer par3GenLayer)
 	{
 		super(par1);
 		this.parent = (GenLayerTFC) par3GenLayer;

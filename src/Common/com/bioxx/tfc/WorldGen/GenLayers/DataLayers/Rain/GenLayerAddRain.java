@@ -18,73 +18,73 @@ public class GenLayerAddRain extends GenLayerTFC
 	 * amounts, or biomeList[] indices based on the particular GenLayer subclass.
 	 */
 	@Override
-	public int[] getInts(int par1, int par2, int par3, int par4)
+	public int[] getInts(int xCoord, int zCoord, int xSize, int zSize)
 	{
-		int var5 = par1 - 1;
-		int var6 = par2 - 1;
-		int var7 = par3 + 2;
-		int var8 = par4 + 2;
-		int[] var9 = this.parent.getInts(var5, var6, var7, var8);
-		int[] outCache = IntCache.getIntCache(par3 * par4);
+		int var5 = xCoord - 1;
+		int var6 = zCoord - 1;
+		int var7 = xSize + 2;
+		int var8 = zSize + 2;
+		int[] inCache = this.parent.getInts(var5, var6, var7, var8);
+		int[] outCache = IntCache.getIntCache(xSize * zSize);
 
-		for (int var11 = 0; var11 < par4; ++var11)
+		for (int var11 = 0; var11 < zSize; ++var11)
 		{
-			for (int var12 = 0; var12 < par3; ++var12)
+			for (int var12 = 0; var12 < xSize; ++var12)
 			{
-				int var13 = var9[var12 + 0 + (var11 + 0) * var7];
-				int var14 = var9[var12 + 2 + (var11 + 0) * var7];
-				int var15 = var9[var12 + 0 + (var11 + 2) * var7];
-				int var16 = var9[var12 + 2 + (var11 + 2) * var7];
-				int var17 = var9[var12 + 1 + (var11 + 1) * var7];
-				this.initChunkSeed(var12 + par1, var11 + par2);
+				int id0 = inCache[var12 + 0 + (var11 + 0) * var7];
+				int id1 = inCache[var12 + 2 + (var11 + 0) * var7];
+				int id2 = inCache[var12 + 0 + (var11 + 2) * var7];
+				int id3 = inCache[var12 + 2 + (var11 + 2) * var7];
+				int thisID = inCache[var12 + 1 + (var11 + 1) * var7];
+				this.initChunkSeed(var12 + xCoord, var11 + zCoord);
 
-				if ((var13 > var17 || var14 > var17 || var15 > var17 || var16 > var17))
+				if ((id0 > thisID || id1 > thisID || id2 > thisID || id3 > thisID))
 				{
-					int var18 = 1;
-					int var19 = 1;
+					int count = 1;
+					int outID = 1;
 
-					if (var13 != 0 && this.nextInt(var18++) == 0)
-						var19 = var13+1;
+					if (id0 != 0 && this.nextInt(count++) == 0)
+						outID = id0+1;
 
-					if (var14 != 0 && this.nextInt(var18++) == 0)
-						var19 = var14+1;
+					if (id1 != 0 && this.nextInt(count++) == 0)
+						outID = id1+1;
 
-					if (var15 != 0 && this.nextInt(var18++) == 0)
-						var19 = var15+1;
+					if (id2 != 0 && this.nextInt(count++) == 0)
+						outID = id2+1;
 
-					if (var16 != 0 && this.nextInt(var18++) == 0)
-						var19 = var16+1;
+					if (id3 != 0 && this.nextInt(count++) == 0)
+						outID = id3+1;
 
-					if (this.nextInt(3) == 0 && var19 <= GenRainLayerTFC.WET)
-						outCache[var12 + var11 * par3] = var19;
+					if (this.nextInt(3) == 0 && outID <= GenRainLayerTFC.WET)
+						outCache[var12 + var11 * xSize] = outID;
 					else
-						outCache[var12 + var11 * par3] = var17;
+						outCache[var12 + var11 * xSize] = thisID;
 				}
-				else if ((var13 < var17 || var14 < var17 || var15 < var17 || var16 < var17))
+				else if ((id0 < thisID || id1 < thisID || id2 < thisID || id3 < thisID))
 				{
-					int var18 = 1;
-					int var19 = 1;
+					int count = 1;
+					int outID = 1;
 
-					if (var13 != 0 && this.nextInt(var18++) == 0)
-						var19 = var13-1;
+					if (id0 != 0 && this.nextInt(count++) == 0)
+						outID = id0-1;
 
-					if (var14 != 0 && this.nextInt(var18++) == 0)
-						var19 = var14-1;
+					if (id1 != 0 && this.nextInt(count++) == 0)
+						outID = id1-1;
 
-					if (var15 != 0 && this.nextInt(var18++) == 0)
-						var19 = var15-1;
+					if (id2 != 0 && this.nextInt(count++) == 0)
+						outID = id2-1;
 
-					if (var16 != 0 && this.nextInt(var18++) == 0)
-						var19 = var16-1;
+					if (id3 != 0 && this.nextInt(count++) == 0)
+						outID = id3-1;
 
-					if (this.nextInt(3) == 0 && var19 >= GenRainLayerTFC.DRY)
-						outCache[var12 + var11 * par3] = var19;
+					if (this.nextInt(3) == 0 && outID >= GenRainLayerTFC.DRY)
+						outCache[var12 + var11 * xSize] = outID;
 					else
-						outCache[var12 + var11 * par3] = var17;
+						outCache[var12 + var11 * xSize] = thisID;
 				}
 				else
 				{
-					outCache[var12 + var11 * par3] = var17;
+					outCache[var12 + var11 * xSize] = thisID;
 				}
 			}
 		}

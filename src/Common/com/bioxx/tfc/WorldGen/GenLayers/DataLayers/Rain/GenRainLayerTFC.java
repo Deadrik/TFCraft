@@ -15,10 +15,11 @@ import com.bioxx.tfc.WorldGen.GenLayers.GenLayerSmoothTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerVoronoiZoomTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerZoomTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.GenLayerDataMix;
 
 public abstract class GenRainLayerTFC extends GenLayerTFC
 {
-	public static int WET = DataLayer.Rain_2000.ID;
+	public static int WET = DataLayer.Rain_4000.ID;
 	public static int DRY = DataLayer.Rain_125.ID;
 
 	public static GenLayerTFC[] initializeAllBiomeGenerators(long seed, WorldType worldType)
@@ -32,7 +33,7 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 		{
 			if(zoomLevel == 0)
 			{
-				continent = new GenLayerRainMix(1000 + zoomLevel, continent);
+				continent = new GenLayerDataMix(1000 + zoomLevel, continent);
 				drawImage(512,continent , "Rain 2-" + zoomLevel +" Mix");
 			}
 			continent = new GenLayerZoomTFC(1000 + zoomLevel, continent);
@@ -42,7 +43,7 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 		GenLayerSmoothTFC finalCont = new GenLayerSmoothTFC(1000L, continent);
 		drawImage(512,finalCont, "Rain 3 Smoothed Rain");
 		GenLayerVoronoiZoomTFC voronoiZoom = new GenLayerVoronoiZoomTFC(10L, finalCont);
-		drawImage(512,finalCont, "Rain 4 Voronoi Rain");
+		//drawImage(512,finalCont, "Rain 4 Voronoi Rain");
 		finalCont.initWorldGenSeed(seed);
 		voronoiZoom.initWorldGenSeed(seed);
 		return new GenLayerTFC[] {finalCont, voronoiZoom};
@@ -62,6 +63,8 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 		drawImage(512, continent, "Rain Init 3 Zoom");
 		continent = new GenLayerAddRain(2L, continent);
 		drawImage(512, continent, "Rain Init 4 Add Rain");
+		continent = new GenLayerDataMix(88L, continent);
+		drawImage(512,continent , "Rain Init 4b Mix");
 		continent = new GenLayerZoomTFC(2002L, continent);
 		drawImage(512, continent, "Rain Init 5 Zoom");
 		continent = new GenLayerAddRain(3L, continent);

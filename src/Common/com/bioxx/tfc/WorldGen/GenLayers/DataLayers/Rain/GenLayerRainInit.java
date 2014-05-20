@@ -18,30 +18,27 @@ public class GenLayerRainInit extends GenLayerTFC
 	@Override
 	public int[] getInts(int par1, int par2, int maxX, int maxZ)
 	{
-		int[] var5 = IntCache.getIntCache(maxX * maxZ);
+		int[] outCache = IntCache.getIntCache(maxX * maxZ);
 
 		for (int z = 0; z < maxZ; ++z)
 		{
 			for (int x = 0; x < maxX; ++x)
 			{
 				this.initChunkSeed(par1 + x, par2 + z);
-				int out = this.nextInt(2) == 0 ? GenRainLayerTFC.DRY : GenRainLayerTFC.WET;
+				int out = GenRainLayerTFC.DRY + this.nextInt(6);
 
-				if(out == GenRainLayerTFC.DRY && this.nextInt(8) == 0)
+				if(out == GenRainLayerTFC.DRY && this.nextInt(12) == 0)
 					out--;
-				if(out == GenRainLayerTFC.WET && this.nextInt(8) == 0)
-					if(out == GenRainLayerTFC.WET && this.nextInt(4) == 0)
-						out+=2;
-					else
-						out++;
+				if(out == GenRainLayerTFC.WET && this.nextInt(12) == 0)
+					out++;
 
-				var5[x + z * maxX] = out;
+				outCache[x + z * maxX] = out;
 			}
 		}
 
 		if (par1 > -maxX && par1 <= 0 && par2 > -maxZ && par2 <= 0)
-			var5[-par1 + -par2 * maxX] = 1;
+			outCache[-par1 + -par2 * maxX] = 1;
 
-		return var5;
+		return outCache;
 	}
 }
