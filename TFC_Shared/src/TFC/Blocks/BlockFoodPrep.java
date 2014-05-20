@@ -8,6 +8,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Textures;
@@ -92,7 +93,7 @@ public class BlockFoodPrep extends BlockTerraContainer {
 	{
 		if(!world.isRemote)
 		{
-			if(!world.isBlockOpaqueCube(i, j-1, k))
+			if (!world.isBlockSolidOnSide(i, j - 1, k, ForgeDirection.UP))
 			{
 				((TEFoodPrep)world.getBlockTileEntity(i, j, k)).ejectContents();
 				world.setBlock(i, j, k, 0);

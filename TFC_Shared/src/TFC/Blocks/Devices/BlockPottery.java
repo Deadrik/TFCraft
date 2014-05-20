@@ -199,7 +199,7 @@ public class BlockPottery extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			if(!world.isBlockOpaqueCube(i, j-1, k))
+			if (!world.isBlockSolidOnSide(i, j - 1, k, ForgeDirection.UP))
 			{
 				((TEPottery)world.getBlockTileEntity(i, j, k)).ejectContents();
 				world.setBlock(i, j, k, 0);
