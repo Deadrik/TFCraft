@@ -3,7 +3,6 @@ package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class GenLayerAddRain extends GenLayerTFC
@@ -56,7 +55,7 @@ public class GenLayerAddRain extends GenLayerTFC
 					if (var16 != 0 && this.nextInt(var18++) == 0)
 						var19 = var16+1;
 
-					if (this.nextInt(3) == 0 && var19 < DataLayer.Rain_8000.ID)
+					if (this.nextInt(3) == 0 && var19 <= GenRainLayerTFC.WET)
 						outCache[var12 + var11 * par3] = var19;
 					else
 						outCache[var12 + var11 * par3] = var17;
@@ -78,7 +77,7 @@ public class GenLayerAddRain extends GenLayerTFC
 					if (var16 != 0 && this.nextInt(var18++) == 0)
 						var19 = var16-1;
 
-					if (this.nextInt(3) == 0 && var19 > DataLayer.Rain_62_5.ID)
+					if (this.nextInt(3) == 0 && var19 >= GenRainLayerTFC.DRY)
 						outCache[var12 + var11 * par3] = var19;
 					else
 						outCache[var12 + var11 * par3] = var17;
