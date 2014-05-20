@@ -37,11 +37,6 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 			}
 			continent = new GenLayerZoomTFC(1000 + zoomLevel, continent);
 			drawImage(512,continent , "Rain 2-" + zoomLevel +" Smoothed");
-			/*if(zoomLevel == 0)
-			{
-				continent = new GenLayerRainMix(1000 + zoomLevel, continent);
-				drawImage(512,continent , "Rain 2-" + zoomLevel +" Mix");
-			}*/
 		}
 
 		GenLayerSmoothTFC finalCont = new GenLayerSmoothTFC(1000L, continent);
