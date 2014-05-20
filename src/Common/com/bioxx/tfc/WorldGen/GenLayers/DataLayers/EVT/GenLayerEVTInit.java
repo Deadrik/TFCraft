@@ -1,12 +1,12 @@
-package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain;
+package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT;
 
 import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
-public class GenLayerRainInit extends GenLayerTFC
+public class GenLayerEVTInit extends GenLayerTFC
 {
-	public GenLayerRainInit(long par1)
+	public GenLayerEVTInit(long par1)
 	{
 		super(par1);
 	}
@@ -25,11 +25,17 @@ public class GenLayerRainInit extends GenLayerTFC
 			for (int x = 0; x < maxX; ++x)
 			{
 				this.initChunkSeed(par1 + x, par2 + z);
-				int out = GenRainLayerTFC.DRY + this.nextInt(6);
+				int out = GenEVTLayerTFC.LOW + this.nextInt(4);
+				/*
+				 * We want to make High EVT areas slightly more rare so that there is more vegetation than not
+				 * so we hide it behind another rand
+				 * */
+				if(out == GenEVTLayerTFC.LOW && this.nextInt(4) == 0)
+					out += 1 + this.nextInt(2);
 
-				if(out == GenRainLayerTFC.DRY && this.nextInt(12) == 0)
+				if(out == GenEVTLayerTFC.LOW && this.nextInt(12) == 0)
 					out--;
-				if(out == GenRainLayerTFC.WET && this.nextInt(12) == 0)
+				if(out == GenEVTLayerTFC.HIGH && this.nextInt(12) == 0)
 					out++;
 
 				outCache[x + z * maxX] = out;

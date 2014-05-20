@@ -1,4 +1,4 @@
-package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain;
+package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -16,33 +16,33 @@ import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerVoronoiZoomTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerZoomTFC;
 
-public abstract class GenRainLayerTFC extends GenLayerTFC
+public abstract class GenEVTLayerTFC extends GenLayerTFC
 {
-	public static int WET = DataLayer.Rain_4000.ID;
-	public static int DRY = DataLayer.Rain_125.ID;
+	public static int LOW = DataLayer.EVT_0_25.ID;
+	public static int HIGH = DataLayer.EVT_8.ID;
 
 	public static GenLayerTFC[] initializeAllBiomeGenerators(long seed, WorldType worldType)
 	{
 		GenLayerTFC continent = genContinent(0);
-		drawImage(512,continent, "Rain 0");
+		drawImage(512,continent, "EVT 0");
 		continent = GenLayerZoomTFC.magnify(1000L, continent, 2);
 		continent = new GenLayerSmoothTFC(1000L, continent);
-		drawImage(512,continent, "Rain 1");
+		drawImage(512,continent, "EVT 1");
 		for (int zoomLevel = 0; zoomLevel < 4; ++zoomLevel)
 		{
 			if(zoomLevel == 0)
 			{
-				continent = new GenLayerRainMix(1000 + zoomLevel, continent);
-				drawImage(512,continent , "Rain 2-" + zoomLevel +" Mix");
+				continent = new GenLayerEVTMix(1000 + zoomLevel, continent);
+				drawImage(512,continent , "EVT 2-" + zoomLevel +" Mix");
 			}
 			continent = new GenLayerZoomTFC(1000 + zoomLevel, continent);
-			drawImage(512,continent , "Rain 2-" + zoomLevel +" Smoothed");
+			drawImage(512,continent , "EVT 2-" + zoomLevel +" Smoothed");
 		}
 
 		GenLayerSmoothTFC finalCont = new GenLayerSmoothTFC(1000L, continent);
-		drawImage(512,finalCont, "Rain 3 Smoothed Rain");
+		drawImage(512,finalCont, "EVT 3 Smoothed EVT");
 		GenLayerVoronoiZoomTFC voronoiZoom = new GenLayerVoronoiZoomTFC(10L, finalCont);
-		//drawImage(512,finalCont, "Rain 4 Voronoi Rain");
+		//drawImage(512,finalCont, "EVT 4 Voronoi EVT");
 		finalCont.initWorldGenSeed(seed);
 		voronoiZoom.initWorldGenSeed(seed);
 		return new GenLayerTFC[] {finalCont, voronoiZoom};
@@ -50,26 +50,28 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 
 	public static GenLayerTFC genContinent(long seed)
 	{
-		GenLayerTFC continent = new GenLayerRainInit(1L+seed);
-		drawImage(512, continent, "Rain Init 0");
-		continent = new GenLayerAddRain(1L, continent);
-		drawImage(512, continent, "Rain Init 0b Add Rain");
+		GenLayerTFC continent = new GenLayerEVTInit(1L+seed);
+		drawImage(512, continent, "EVT Init 0");
+		continent = new GenLayerAddEVT(1L, continent);
+		drawImage(512, continent, "EVT Init 0b Add EVT");
 		continent = new GenLayerFuzzyZoomTFC(2000L, continent);
-		drawImage(512, continent, "Rain Init 1");
-		continent = new GenLayerAddRain(1L, continent);
-		drawImage(512, continent, "Rain Init 2 Add Rain");
+		drawImage(512, continent, "EVT Init 1");
+		continent = new GenLayerAddEVT(1L, continent);
+		drawImage(512, continent, "EVT Init 2 Add EVT");
 		continent = new GenLayerZoomTFC(2001L, continent);
-		drawImage(512, continent, "Rain Init 3 Zoom");
-		continent = new GenLayerAddRain(2L, continent);
-		drawImage(512, continent, "Rain Init 4 Add Rain");
-		continent = new GenLayerRainMix(88L, continent);
-		drawImage(512,continent , "Rain Init 4b Mix");
+		drawImage(512, continent, "EVT Init 3 Zoom");
+		continent = new GenLayerAddEVT(2L, continent);
+		drawImage(512, continent, "EVT Init 4 Add EVT");
+		continent = new GenLayerEVTMix(88L, continent);
+		drawImage(512,continent , "EVT Init 4b Mix");
 		continent = new GenLayerZoomTFC(2002L, continent);
-		drawImage(512, continent, "Rain Init 5 Zoom");
-		continent = new GenLayerAddRain(3L, continent);
-		drawImage(512, continent, "Rain Init 6 Add Rain");
+		drawImage(512, continent, "EVT Init 5 Zoom");
+		continent = new GenLayerAddEVT(3L, continent);
+		drawImage(512, continent, "EVT Init 6 Add EVT");
 		continent = new GenLayerZoomTFC(2003L, continent);
-		drawImage(512, continent, "Rain Init 7 Zoom");
+		drawImage(512, continent, "EVT Init 7 Zoom");
+		continent = new GenLayerAddEVT(4L, continent);
+		drawImage(512, continent, "EVT Init 8 Add EVT");
 		return continent;
 	}
 
@@ -93,8 +95,8 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 				for(int z = 0; z < size; z++)
 				{
 					int value = ints[x*size+z];
-					if(value-100 >= 0)
-						graphics.setColor(Color.getColor("", (value-100)*32));	
+					if(value-80 >= 0 && value-80 <= 7)
+						graphics.setColor(Color.getColor("", ((value-80)*32) << 16));	
 					else
 						graphics.setColor(Color.getColor("", 0xffffff));	
 					graphics.drawRect(x, z, 1, 1);
@@ -109,7 +111,7 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 		}
 	}
 
-	public GenRainLayerTFC(long par1)
+	public GenEVTLayerTFC(long par1)
 	{
 		super(par1);
 	}

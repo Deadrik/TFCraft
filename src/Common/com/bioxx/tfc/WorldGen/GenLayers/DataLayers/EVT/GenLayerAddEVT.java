@@ -1,13 +1,13 @@
-package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain;
+package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT;
 
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
-public class GenLayerAddRain extends GenLayerTFC
+public class GenLayerAddEVT extends GenLayerTFC
 {
-	public GenLayerAddRain(long par1, GenLayer par3GenLayer)
+	public GenLayerAddEVT(long par1, GenLayer par3GenLayer)
 	{
 		super(par1);
 		this.parent = (GenLayerTFC) par3GenLayer;
@@ -43,19 +43,19 @@ public class GenLayerAddRain extends GenLayerTFC
 					int count = 1;
 					int outID = thisID;
 
-					if (id0 != 0 && this.nextInt(count++) == 0)
+					if (id0 < GenEVTLayerTFC.HIGH && this.nextInt(count++) == 0)
 						outID = id0+1;
 
-					if (id1 != 0 && this.nextInt(count++) == 0)
+					if (id1 < GenEVTLayerTFC.HIGH && this.nextInt(count++) == 0)
 						outID = id1+1;
 
-					if (id2 != 0 && this.nextInt(count++) == 0)
+					if (id2 < GenEVTLayerTFC.HIGH && this.nextInt(count++) == 0)
 						outID = id2+1;
 
-					if (id3 != 0 && this.nextInt(count++) == 0)
+					if (id3 < GenEVTLayerTFC.HIGH && this.nextInt(count++) == 0)
 						outID = id3+1;
 
-					if (this.nextInt(3) == 0 && outID <= GenRainLayerTFC.WET)
+					if (this.nextInt(3) == 0 && outID <= GenEVTLayerTFC.HIGH)
 						outCache[var12 + var11 * xSize] = outID;
 					else
 						outCache[var12 + var11 * xSize] = thisID;
@@ -65,19 +65,19 @@ public class GenLayerAddRain extends GenLayerTFC
 					int count = 1;
 					int outID = thisID;
 
-					if (id0 != 0 && this.nextInt(count++) == 0)
+					if (id0 > GenEVTLayerTFC.LOW && this.nextInt(count++) == 0)
 						outID = id0-1;
 
-					if (id1 != 0 && this.nextInt(count++) == 0)
+					if (id1 > GenEVTLayerTFC.LOW && this.nextInt(count++) == 0)
 						outID = id1-1;
 
-					if (id2 != 0 && this.nextInt(count++) == 0)
+					if (id2 > GenEVTLayerTFC.LOW && this.nextInt(count++) == 0)
 						outID = id2-1;
 
-					if (id3 != 0 && this.nextInt(count++) == 0)
+					if (id3 > GenEVTLayerTFC.LOW && this.nextInt(count++) == 0)
 						outID = id3-1;
 
-					if (this.nextInt(3) == 0 && outID >= GenRainLayerTFC.DRY)
+					if (this.nextInt(3) == 0 && outID >= GenEVTLayerTFC.LOW)
 						outCache[var12 + var11 * xSize] = outID;
 					else
 						outCache[var12 + var11 * xSize] = thisID;

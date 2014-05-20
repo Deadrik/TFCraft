@@ -1,13 +1,14 @@
-package com.bioxx.tfc.WorldGen.GenLayers.DataLayers;
+package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain;
 
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
+import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
-public class GenLayerDataMix extends GenLayerTFC
+public class GenLayerRainMix extends GenLayerTFC
 {
-	public GenLayerDataMix(long par1, GenLayer par3GenLayer)
+	public GenLayerRainMix(long par1, GenLayer par3GenLayer)
 	{
 		super(par1);
 		this.parent = (GenLayerTFC) par3GenLayer;
@@ -42,9 +43,11 @@ public class GenLayerDataMix extends GenLayerTFC
 				index = var8 + var7 * xSize;
 
 				if (id0 >= thisID+2 || id1 >= thisID+2 || id2 >= thisID+2 || id3 >= thisID+2)
-					thisID++;
+					if(thisID+1 < DataLayer.Rain_8000.ID)
+						thisID++;
 				if (id0 <= thisID-2 || id1 <= thisID-2 || id2 <= thisID-2 || id3 <= thisID-2)
-					thisID--;
+					if(thisID-1 > DataLayer.Rain_62_5.ID)
+						thisID--;
 
 				outCache[index] = thisID;
 			}
