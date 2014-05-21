@@ -22,6 +22,10 @@ public class GenLayerLakes extends GenLayerTFC
 	{
 		int[] var5 = this.parent.getInts(par1 - 1, par2 - 1, par3 + 2, par4 + 2);
 		int[] var6 = IntCache.getIntCache(par3 * par4);
+		int var10;
+		int var11;
+		int var12;
+		int var13;
 
 		for (int var7 = 0; var7 < par4; ++var7)
 		{
@@ -29,10 +33,7 @@ public class GenLayerLakes extends GenLayerTFC
 			{
 				this.initChunkSeed(var8 + par1, var7 + par2);
 				int var9 = var5[var8 + 1 + (var7 + 1) * (par3 + 2)];
-				int var10;
-				int var11;
-				int var12;
-				int var13;
+
 
 				var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
 				var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];

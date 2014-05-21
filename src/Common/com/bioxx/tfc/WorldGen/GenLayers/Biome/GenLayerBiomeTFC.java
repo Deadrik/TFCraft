@@ -11,12 +11,19 @@ import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 public class GenLayerBiomeTFC extends GenLayerTFC
 {
 	/** this sets all the biomes that are allowed to appear in the overworld */
-	private TFCBiome[] allowedBiomes;
+	private TFCBiome[] allowedBiomes = new TFCBiome[] {
+			TFCBiome.ocean,
+			TFCBiome.HighHills,
+			TFCBiome.plains,
+			TFCBiome.HighPlains,
+			TFCBiome.swampland,
+			TFCBiome.rollingHills,
+			TFCBiome.Mountains,
+	};
 
 	public GenLayerBiomeTFC(long par1, GenLayer par3GenLayer, TFCWorldType par4)
 	{
 		super(par1);
-		this.allowedBiomes = par4.getBiomesForWorldType();
 		this.parent = (GenLayerTFC) par3GenLayer;
 	}
 
@@ -40,6 +47,9 @@ public class GenLayerBiomeTFC extends GenLayerTFC
 					var6[var8 + var7 * par3] = id;
 				else
 					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].biomeID;
+
+				if(var6[var8 + var7 * par3] > 100)
+					return null;
 			}
 		}
 		return var6;

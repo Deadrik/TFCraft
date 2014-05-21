@@ -43,19 +43,19 @@ public class GenLayerAddEVT extends GenLayerTFC
 					int count = 1;
 					int outID = thisID;
 
-					if (id0 < GenEVTLayerTFC.HIGH && this.nextInt(count++) == 0)
+					if (id0 < GenEVTLayer.HIGH && this.nextInt(count++) == 0)
 						outID = id0+1;
 
-					if (id1 < GenEVTLayerTFC.HIGH && this.nextInt(count++) == 0)
+					if (id1 < GenEVTLayer.HIGH && this.nextInt(count++) == 0)
 						outID = id1+1;
 
-					if (id2 < GenEVTLayerTFC.HIGH && this.nextInt(count++) == 0)
+					if (id2 < GenEVTLayer.HIGH && this.nextInt(count++) == 0)
 						outID = id2+1;
 
-					if (id3 < GenEVTLayerTFC.HIGH && this.nextInt(count++) == 0)
+					if (id3 < GenEVTLayer.HIGH && this.nextInt(count++) == 0)
 						outID = id3+1;
 
-					if (this.nextInt(3) == 0 && outID <= GenEVTLayerTFC.HIGH)
+					if (this.nextInt(3) == 0 && outID <= GenEVTLayer.HIGH)
 						outCache[var12 + var11 * xSize] = outID;
 					else
 						outCache[var12 + var11 * xSize] = thisID;
@@ -65,19 +65,19 @@ public class GenLayerAddEVT extends GenLayerTFC
 					int count = 1;
 					int outID = thisID;
 
-					if (id0 > GenEVTLayerTFC.LOW && this.nextInt(count++) == 0)
+					if (id0 > GenEVTLayer.LOW && this.nextInt(count++) == 0)
 						outID = id0-1;
 
-					if (id1 > GenEVTLayerTFC.LOW && this.nextInt(count++) == 0)
+					if (id1 > GenEVTLayer.LOW && this.nextInt(count++) == 0)
 						outID = id1-1;
 
-					if (id2 > GenEVTLayerTFC.LOW && this.nextInt(count++) == 0)
+					if (id2 > GenEVTLayer.LOW && this.nextInt(count++) == 0)
 						outID = id2-1;
 
-					if (id3 > GenEVTLayerTFC.LOW && this.nextInt(count++) == 0)
+					if (id3 > GenEVTLayer.LOW && this.nextInt(count++) == 0)
 						outID = id3-1;
 
-					if (this.nextInt(3) == 0 && outID >= GenEVTLayerTFC.LOW)
+					if (this.nextInt(3) == 0 && outID >= GenEVTLayer.LOW)
 						outCache[var12 + var11 * xSize] = outID;
 					else
 						outCache[var12 + var11 * xSize] = thisID;

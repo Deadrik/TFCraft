@@ -14,7 +14,7 @@ import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT.GenEVTLayerTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT.GenEVTLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain.GenRainLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Stability.GenStabilityLayer;
@@ -115,9 +115,9 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		// Making sure that only TFC World Types can be used
 		GenLayerTFC[] var4;
 		if(worldtype == TFCWorldType.FLAT)
-			var4 = GenLayerTFC.initializeAllBiomeGenerators(Seed, TFCWorldType.FLAT);
+			var4 = GenLayerTFC.initialize(Seed, TFCWorldType.FLAT);
 		else
-			var4 = GenLayerTFC.initializeAllBiomeGenerators(Seed, TFCWorldType.DEFAULT);
+			var4 = GenLayerTFC.initialize(Seed, TFCWorldType.DEFAULT);
 
 		this.biomeIndexLayer = var4[1];
 
@@ -136,7 +136,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		treesIndexLayer[2] = GenTreeLayer.initialize(Seed+6, treeArray);
 
 		//Setup Evapotranspiration
-		evtIndexLayer = GenEVTLayerTFC.initialize(Seed+7, worldtype);
+		evtIndexLayer = GenEVTLayer.initialize(Seed+7, worldtype);
 
 		//Setup Rainfall
 		rainfallIndexLayer = GenRainLayerTFC.initialize(Seed+8, worldtype);
@@ -236,11 +236,11 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		if (biome == null || biome.length < par4 * par5)
 			biome = new TFCBiome[par4 * par5];
 
-		int[] var6 = this.genBiomes.getInts(par2, par3, par4, par5);
+		int[] var6 = this.biomeIndexLayer.getInts(par2, par3, par4, par5);
 		for (int var7 = 0; var7 < par4 * par5; ++var7)
 		{
 			int index = Math.max(var6[var7], 0);
-			biome[var7] = TFCBiome.getBiomeGenArray()[index];
+			biome[var7] = TFCBiome.getBiome(index);
 		}
 
 		return biome;

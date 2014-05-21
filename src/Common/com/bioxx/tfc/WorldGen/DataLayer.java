@@ -1,13 +1,13 @@
 package com.bioxx.tfc.WorldGen;
 
-import com.bioxx.tfc.TFCBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
+import com.bioxx.tfc.TFCBlocks;
+
 public class DataLayer
 {
-	public static DataLayer[] layers = new DataLayer[120];
+	public static DataLayer[] layers = new DataLayer[256];
 
 	public static DataLayer Granite = new DataLayer(0, TFCBlocks.StoneIgIn, 0, "Granite");
 	public static DataLayer Diorite = new DataLayer(1, TFCBlocks.StoneIgIn, 1, "Diorite");
@@ -59,14 +59,14 @@ public class DataLayer
 	public static DataLayer EVT_8 = new DataLayer(86,"8", 8f);
 	public static DataLayer EVT_16 = new DataLayer(87,"16", 16f);
 
-	public static DataLayer Rain_62_5 = new DataLayer(100,"62.5", 62.5f);
-	public static DataLayer Rain_125 = new DataLayer(101,"125", 125f);
-	public static DataLayer Rain_250 = new DataLayer(102,"250", 250f);
-	public static DataLayer Rain_500 = new DataLayer(103,"500", 500f);
-	public static DataLayer Rain_1000 = new DataLayer(104,"1000", 1000f);
-	public static DataLayer Rain_2000 = new DataLayer(105,"2000", 2000f);
-	public static DataLayer Rain_4000 = new DataLayer(106,"4000", 4000f);
-	public static DataLayer Rain_8000 = new DataLayer(107,"8000", 8000f);
+	public static DataLayer Rain_62_5 = new DataLayer(200,"62.5", 62.5f);
+	public static DataLayer Rain_125 = new DataLayer(201,"125", 125f);
+	public static DataLayer Rain_250 = new DataLayer(202,"250", 250f);
+	public static DataLayer Rain_500 = new DataLayer(203,"500", 500f);
+	public static DataLayer Rain_1000 = new DataLayer(204,"1000", 1000f);
+	public static DataLayer Rain_2000 = new DataLayer(205,"2000", 2000f);
+	public static DataLayer Rain_4000 = new DataLayer(206,"4000", 4000f);
+	public static DataLayer Rain_8000 = new DataLayer(207,"8000", 8000f);
 
 	public static DataLayer SeismicStable = new DataLayer(110, 0);
 	public static DataLayer SeismicUnStable = new DataLayer(111, 1);

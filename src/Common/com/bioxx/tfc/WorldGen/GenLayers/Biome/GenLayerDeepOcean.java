@@ -24,8 +24,9 @@ public class GenLayerDeepOcean extends GenLayerTFC
 		int j1 = par2 - 1;
 		int k1 = par3 + 2;
 		int l1 = par4 + 2;
+		int thisID;
 		int[] aint = this.parent.getInts(i1, j1, k1, l1);
-		int[] aint1 = IntCache.getIntCache(par3 * par4);
+		int[] outCache = IntCache.getIntCache(par3 * par4);
 
 		for (int i2 = 0; i2 < par4; ++i2)
 		{
@@ -35,7 +36,7 @@ public class GenLayerDeepOcean extends GenLayerTFC
 				int l2 = aint[j2 + 1 + 1 + (i2 + 1) * (par3 + 2)];
 				int i3 = aint[j2 + 1 - 1 + (i2 + 1) * (par3 + 2)];
 				int j3 = aint[j2 + 1 + (i2 + 1 + 1) * (par3 + 2)];
-				int k3 = aint[j2 + 1 + (i2 + 1) * k1];
+				thisID = aint[j2 + 1 + (i2 + 1) * k1];
 				int l3 = 0;
 
 				if (k2 == 0)
@@ -58,17 +59,19 @@ public class GenLayerDeepOcean extends GenLayerTFC
 					++l3;
 				}
 
-				if (k3 == 0 && l3 > 3)
+				if (thisID == 0 && l3 > 3)
 				{
-					aint1[j2 + i2 * par3] = TFCBiome.DeepOcean.biomeID;
+					outCache[j2 + i2 * par3] = TFCBiome.DeepOcean.biomeID;
 				}
 				else
 				{
-					aint1[j2 + i2 * par3] = k3;
+					outCache[j2 + i2 * par3] = thisID;
 				}
 			}
 		}
 
-		return aint1;
+
+
+		return outCache;
 	}
 }

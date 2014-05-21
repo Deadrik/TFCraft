@@ -16,7 +16,7 @@ import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerVoronoiZoomTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerZoomTFC;
 
-public abstract class GenEVTLayerTFC extends GenLayerTFC
+public abstract class GenEVTLayer extends GenLayerTFC
 {
 	public static int LOW = DataLayer.EVT_0_25.ID;
 	public static int HIGH = DataLayer.EVT_8.ID;
@@ -41,7 +41,7 @@ public abstract class GenEVTLayerTFC extends GenLayerTFC
 
 		GenLayerSmoothTFC finalCont = new GenLayerSmoothTFC(1000L, continent);
 		GenLayerTFC voronoiZoom = new GenLayerVoronoiZoomTFC(10L, finalCont);
-		drawImage(512,finalCont, "EVT 4 Voronoi EVT");
+		drawImage(512,voronoiZoom, "EVT 4 Voronoi EVT");
 		voronoiZoom.initWorldGenSeed(seed);
 		return voronoiZoom;
 	}
@@ -109,7 +109,7 @@ public abstract class GenEVTLayerTFC extends GenLayerTFC
 		}
 	}
 
-	public GenEVTLayerTFC(long par1)
+	public GenEVTLayer(long par1)
 	{
 		super(par1);
 	}
