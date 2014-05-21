@@ -94,7 +94,7 @@ public class BlockFoodPrep extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			if(!world.isSideSolid(i, j, k, ForgeDirection.UP))
+			if(!world.isSideSolid(i, j - 1, k, ForgeDirection.UP))
 			{
 				((TEFoodPrep)world.getTileEntity(i, j, k)).ejectContents();
 				world.setBlockToAir(i, j, k);
