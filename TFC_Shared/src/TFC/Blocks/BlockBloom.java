@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.Core.TFC_Achievements;
 import TFC.TileEntities.TileEntityBloom;
 
 public class BlockBloom extends BlockTerraContainer
@@ -67,6 +68,7 @@ public class BlockBloom extends BlockTerraContainer
 		if(!world.isRemote)
 		{
 			Eject(world,i,j,k);
+			player.triggerAchievement(TFC_Achievements.achIronAge);
 		}
 
 		return super.removeBlockByPlayer(world, player, i, j, k);

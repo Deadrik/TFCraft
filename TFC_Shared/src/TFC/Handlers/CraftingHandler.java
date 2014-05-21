@@ -23,6 +23,7 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemIngot;
 import TFC.Items.ItemMeltedMetal;
 import TFC.Items.ItemBlocks.ItemAnvil1;
+import TFC.Items.ItemBlocks.ItemAnvil2;
 import TFC.Items.Tools.ItemCustomPickaxe;
 import TFC.Items.Tools.ItemCustomSaw;
 import TFC.Items.Tools.ItemMiscToolHead;
@@ -150,7 +151,9 @@ public class CraftingHandler implements ICraftingHandler
 					if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
 						iinventory.getStackInSlot(i).itemID = TFCItems.Mortar.itemID;
 				}
-			else if(itemstack.getItem() instanceof ItemAnvil1 && itemstack.getItemDamage() == 2){
+			else if((itemstack.getItem() instanceof ItemAnvil1 && itemstack.getItemDamage() == 2) || 
+					(itemstack.getItem() instanceof ItemAnvil2 && (itemstack.getItemDamage() == 1 || itemstack.getItemDamage() == 2)))
+			{
 				player.triggerAchievement(TFC_Achievements.achBronzeAge);
 			}
 			else if(itemstack.getItem() instanceof ItemIngot)
