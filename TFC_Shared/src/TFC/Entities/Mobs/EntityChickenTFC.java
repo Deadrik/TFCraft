@@ -72,6 +72,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
+		this.tasks.addTask(6, this.aiEatGrass);
 		addAI();
 
 		size_mod = (((rand.nextInt ((degreeOfDiversion+1)*10)*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex);
