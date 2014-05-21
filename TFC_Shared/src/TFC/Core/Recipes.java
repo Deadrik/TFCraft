@@ -578,6 +578,9 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCItems.FireBrick,2,0), 
 				new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(Item.clay,1,1)});
 
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Straw,4), 
+				new Object[] {new ItemStack(TFCBlocks.Thatch, 1)});
+
 		RegisterToolRecipes();
 		registerFoodRecipes();
 		VanillaRecipes();
