@@ -1,15 +1,15 @@
-package com.bioxx.tfc.WorldGen.GenLayers.DataLayers;
+package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock;
 
 import net.minecraft.world.WorldType;
 
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerAddIslandTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerFuzzyZoomTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerIslandTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerRiverInitTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerSmoothTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerVoronoiZoomTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerZoomTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerIslandTFC;
 
 public abstract class GenRockLayer3TFC extends GenLayerTFC
 {

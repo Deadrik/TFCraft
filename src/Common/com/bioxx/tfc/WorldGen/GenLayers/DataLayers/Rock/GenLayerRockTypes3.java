@@ -1,11 +1,11 @@
-package com.bioxx.tfc.WorldGen.GenLayers.DataLayers;
-
-import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
+package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock;
 
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
+
+import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class GenLayerRockTypes3 extends GenLayerTFC
 {

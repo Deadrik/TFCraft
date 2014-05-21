@@ -5,14 +5,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.GenRockLayer2TFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.GenTreeLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT.GenEVTLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain.GenRainLayerTFC;
-
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.biome.BiomeGenBase;
+
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT.GenEVTLayerTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain.GenRainLayerTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer1TFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer2TFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer3TFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Tree.GenTreeLayerTFC;
 
 public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 {
@@ -41,9 +43,9 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 		treeCache[2] = new DataCache(this,2);
 
 		//Setup Rocks
-		GenLayerTFC[] var5 = GenRockLayer2TFC.initializeAllBiomeGenerators(seed+1, TFCWorldType.DEFAULT);
+		GenLayerTFC[] var5 = GenRockLayer1TFC.initializeAllBiomeGenerators(seed+1, TFCWorldType.DEFAULT);
 		GenLayerTFC[] var6 = GenRockLayer2TFC.initializeAllBiomeGenerators(seed+2, TFCWorldType.DEFAULT);
-		GenLayerTFC[] var7 = GenRockLayer2TFC.initializeAllBiomeGenerators(seed+3, TFCWorldType.DEFAULT);
+		GenLayerTFC[] var7 = GenRockLayer3TFC.initializeAllBiomeGenerators(seed+3, TFCWorldType.DEFAULT);
 		genRocks = new GenLayerTFC[3];
 		rocksIndexLayer = new GenLayerTFC[3];
 		this.genRocks[0] = var5[0];
@@ -80,7 +82,7 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 		var8 = GenRainLayerTFC.initializeAllBiomeGenerators(seed+8, TFCWorldType.DEFAULT);
 		genRainfall = var8[0];
 		rainfallIndexLayer = var8[1];
-		
+
 		this.biomesToSpawnIn = new ArrayList();
 		this.biomesToSpawnIn.add(TFCBiome.hell);
 	}

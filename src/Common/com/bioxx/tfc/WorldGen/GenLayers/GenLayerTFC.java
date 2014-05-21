@@ -11,6 +11,9 @@ import net.minecraft.world.gen.layer.GenLayer;
 
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.TFCWorldType;
+import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerBiomeTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerDeepOcean;
+import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerIslandTFC;
 
 public abstract class GenLayerTFC extends GenLayer
 {
@@ -92,7 +95,7 @@ public abstract class GenLayerTFC extends GenLayer
 
 	public static GenLayerTFC genContinent(long seed, boolean oceanReduction)
 	{
-		GenLayerIslandTFC continentStart = new GenLayerIslandTFC(1L+seed);
+		GenLayerTFC continentStart = new GenLayerIslandTFC(1L+seed);
 		drawImage(512, continentStart, "0 ContinentsStart");
 		GenLayerFuzzyZoomTFC continentFuzzyZoom = new GenLayerFuzzyZoomTFC(2000L, continentStart);
 		drawImage(512, continentFuzzyZoom, "1 ContinentsFuzzyZoom");
