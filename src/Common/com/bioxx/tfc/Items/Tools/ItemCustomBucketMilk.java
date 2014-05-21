@@ -2,8 +2,10 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -30,7 +32,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	{
 		super();
 		this.setMaxStackSize(1);
-		setCreativeTab(TFCTabs.TFCTools);
+		setCreativeTab(TFCTabs.TFCFoods);
 		this.setFolder("tools/");
 	}
 	
@@ -38,6 +40,12 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	public boolean canStack()
 	{
 		return false;
+	}
+
+	@Override
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
+	{
+		list.add(createTag(new ItemStack(this, 1), 20));
 	}
 
 	@Override
@@ -78,6 +86,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		return is;
 	}
 
+	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
@@ -86,7 +95,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 
 			foodstats.eatFood(is);
-			foodstats.restoreWater(player, 8000);
+			foodstats.restoreWater(player, 16000);
 
 			TFC_Core.setPlayerFoodStats(player, foodstats);
 
@@ -99,6 +108,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	/**
 	 * How long it takes to use or consume an item
 	 */
+	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack)
 	{
 		return 32;
@@ -107,6 +117,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	/**
 	 * returns the action that specifies what animation to play when the items is being used
 	 */
+	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack)
 	{
 		return EnumAction.drink;
@@ -115,6 +126,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	/**
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
+	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer entity)
 	{
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, entity, true);
@@ -122,7 +134,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 
 		if(mop == null)
 		{
-			if(is.getItemDamage() > 1 && fs.needDrink())
+			if (fs.needDrink() && fs.needFood())
 				entity.setItemInUse(is, this.getMaxItemUseDuration(is));
 		}
 		else

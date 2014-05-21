@@ -204,7 +204,7 @@ public class FoodStatsTFC
 
 	public boolean needDrink()
 	{
-		return this.waterLevel < getMaxWater(this.player);
+		return this.waterLevel < getMaxWater(this.player) - 500;
 	}
 
 	/**
