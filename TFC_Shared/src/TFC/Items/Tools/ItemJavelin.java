@@ -13,6 +13,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.API.ICausesDamage;
 import TFC.API.IProjectile;
 import TFC.API.IQuiverAmmo;
@@ -72,6 +73,16 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	public int getMaxItemUseDuration(ItemStack par1ItemStack)
 	{
 		return 72000;
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
+	{
+		int blockID = world.getBlockId(x, y, z);
+		if (blockID == TFCBlocks.ToolRack.blockID || blockID == TFCBlocks.ToolRack2.blockID)
+			return true;
+
+		return false;
 	}
 
 	/**
@@ -207,7 +218,7 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	{
 		return EnumAmmo.JAVELIN;
 	}
-	
+
 	@Override
 	public EnumItemReach getReach(ItemStack is){
 		return EnumItemReach.FAR;
