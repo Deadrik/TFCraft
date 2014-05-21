@@ -11,12 +11,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.Enums.EnumItemReach;
 import TFC.API.Enums.EnumSize;
-import TFC.API.Util.Helper;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemTerra;
@@ -52,21 +50,12 @@ public class ItemFirestarter extends ItemTerra
 
 
 	@Override
-	public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l, float hitX, float hitY, float hitZ)
+	public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
 		{
-			MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-			if(objectMouseOver == null) {
-				return false;
-			}       
-			int x = objectMouseOver.blockX;
-			int y = objectMouseOver.blockY;
-			int z = objectMouseOver.blockZ;
-			int side = objectMouseOver.sideHit;
-
-			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, i, j, k-1) && TFC_Core.isSouthFaceSolid(world, i, j, k+1) && 
-					TFC_Core.isEastFaceSolid(world, i-1, j, k) && TFC_Core.isWestFaceSolid(world, i+1, j, k);
+			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, x, y, z-1) && TFC_Core.isSouthFaceSolid(world, x, y, z+1) && 
+					TFC_Core.isEastFaceSolid(world, x-1, y, z) && TFC_Core.isWestFaceSolid(world, x+1, y, z);
 
 			if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
 					world.getBlockMaterial(x, y, z) != Material.wood && world.getBlockMaterial(x, y, z) != Material.cloth &&
