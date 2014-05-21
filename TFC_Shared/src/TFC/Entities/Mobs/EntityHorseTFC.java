@@ -90,7 +90,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		size_mod =(float)Math.sqrt((((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) * 0.1f) + 1F) * (1.0F - 0.1F * sex));
 		this.setSize(1.4F, 1.6F);
 		this.getNavigator().setAvoidsWater(true);
-		this.tasks.taskEntries.clear();this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.taskEntries.clear();
+		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIRunAroundLikeCrazy(this, 1.2D));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.0D));
 		this.tasks.addTask(6, new EntityAIWander(this, 0.7D));
@@ -145,11 +146,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		if (hunger > 0)
 		{
 			hunger--;
-		}
-
-		if(super.inLove > 0){
-			super.inLove = 0;
-			setInLove(true);
 		}
 
 		syncData();
@@ -316,6 +312,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.getAttributeMap().func_111150_b(horseJumpStrength);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1250);//MaxHealth
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.22499999403953552D);
+		this.setHealth(this.getMaxHealth());
 	}
 
 	@Override
@@ -348,19 +345,15 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			//player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
 
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && super.inLove <= 0)
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && !this.getInLove())
 		{
 			if (!par1EntityPlayer.capabilities.isCreativeMode)
 			{
 				par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(par1EntityPlayer.getHeldItem(), worldObj, this)));
 			}
 
-			this.func_110196_bT();
+			this.setInLove(true);
 			return true;
-		}
-		else
-		{
-			//return super.interact(par1EntityPlayer);
 		}
 
 		if (itemstack != null && itemstack.itemID == Item.monsterPlacer.itemID)
@@ -473,20 +466,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			}
 		}
 
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && super.inLove <= 0)
-		{
-			if (!par1EntityPlayer.capabilities.isCreativeMode)
-			{
-				par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem,(((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(par1EntityPlayer.getHeldItem(), worldObj, this)));
-			}
-
-			this.func_110196_bT();
-			return true;
-		}
-		else
-		{
-			return super.interact(par1EntityPlayer);
-		}
+		return super.interact(par1EntityPlayer);
 	}
 
 	//We use this to catch the EntityLiving check, so that other interactions can be performed on leashed animals
@@ -754,6 +734,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public void setInLove(boolean b) 
 	{
 		this.isInLove = b;
+		if(b)
+		{
+			this.entityToAttack = null;
+			this.worldObj.setEntityState(this, (byte)18);
+		}
 	}
 
 	@Override
@@ -986,6 +971,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	{
 		EntityLivingData data = super.onSpawnWithEgg(livingData);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1250);
+		this.heal(1250);
 		return data;
 	}
 }
