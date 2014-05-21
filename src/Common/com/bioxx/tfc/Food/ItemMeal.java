@@ -75,7 +75,7 @@ public class ItemMeal extends ItemTerra implements IFood
 				if(!isWarm(is))
 					_sat *= 0.25f;
 				int satIndex = Math.min(1+(int)(5 *_sat), 5);
-				arraylist.add("Taste: " + StatCollector.translateToLocal(tasteArray[satIndex]) + EnumChatFormatting.DARK_GRAY + " (" + _sat + "%)");
+				arraylist.add("Taste: " + StatCollector.translateToLocal(tasteArray[satIndex]) + EnumChatFormatting.DARK_GRAY + " (" + (_sat * 100) + "%)");
 			}
 			else
 			{

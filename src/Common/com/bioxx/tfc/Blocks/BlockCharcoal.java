@@ -6,6 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -55,52 +57,63 @@ public class BlockCharcoal extends BlockTerra
 	}
 
 	@Override
-	public void onBlockHarvested(World world, int i, int j, int k, int l, EntityPlayer entityplayer)
+	public void onBlockHarvested(World world, int x, int y, int z, int side, EntityPlayer entityplayer)
 	{
 		if(!world.isRemote)
 		{
-			//we need to make sure the player has the correct tool out
-			boolean isShovel = false;
-			ItemStack equip = entityplayer.getCurrentEquippedItem();
-			if(equip!=null)
-				if(equip.getItem() instanceof ItemCustomShovel)
-					isShovel = true;
-
-			if(isShovel)
+			if (entityplayer.capabilities.isCreativeMode)
 			{
-				int top = 0;
-				while(world.getBlock(i, j+top+1, k) == this)
-					++top;
-
-				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Coal, 1, 1));
-				if(l-1 > 0)
-				{
-					if(world.getBlock(i, j+1, k) == this)
-					{
-						int m1 = world.getBlockMetadata(i, j+top, k);
-						if(m1-1 > 0)
-							world.setBlockMetadataWithNotify(i, j+top, k, m1-1, 2);
-						else
-							world.setBlockToAir(i, j+top, k);
-
-						world.setBlock(i, j, k, this, 8, 2);
-					}
-					else
-					{
-						world.setBlock(i, j, k, this, l-1, 2);
-					}
-					world.markBlockForUpdate(i, j, k);
-					world.markBlockForUpdate(i, j+top, k);
-				}
-				else
-					world.setBlockToAir(i, j, k);
+				world.setBlockToAir(x, y, z);
 			}
 			else
 			{
-				world.setBlock(i, j, k, this, l, 2);
+				//we need to make sure the player has the correct tool out
+				boolean isShovel = false;
+				ItemStack equip = entityplayer.getCurrentEquippedItem();
+				if (equip != null)
+				{
+					if (equip.getItem() instanceof ItemCustomShovel)
+						isShovel = true;
+				}
+
+				if (isShovel)
+				{
+					int top = 0;
+					while (world.getBlock(x, y + top + 1, z) == this)
+						++top;
+
+					dropBlockAsItem(world, x, y, z, new ItemStack(Items.coal, 1, 1));
+					if (side - 1 > 0)
+					{
+						if (world.getBlock(x, y + 1, z) == this)
+						{
+							int m1 = world.getBlockMetadata(x, y + top, z);
+							if (m1 - 1 > 0)
+								world.setBlockMetadataWithNotify(x, y + top, z, m1 - 1, 2);
+							else
+								world.setBlockToAir(x, y + top, z);
+
+							world.setBlock(x, y, z, this, 8, 2);
+						}
+						else
+						{
+							world.setBlock(x, y, z, this, side - 1, 2);
+						}
+
+						world.markBlockForUpdate(x, y, z);
+						world.markBlockForUpdate(x, y + top, z);
+					}
+					else
+						world.setBlock(x, y, z, Blocks.air, 0, 2);
+				}
+				else
+				{
+					world.setBlock(x, y, z, this, side, 2);
+				}
+
+				if (side == 0)
+					world.setBlockToAir(x, y, z);
 			}
-			if(l == 0)
-				world.setBlockToAir(i, j, k);
 		}
 	}
 

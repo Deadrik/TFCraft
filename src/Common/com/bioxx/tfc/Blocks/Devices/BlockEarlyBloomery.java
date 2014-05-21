@@ -61,16 +61,16 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
-		if (!canBlockStay(world, i, j, k))
+		if (!canBlockStay(world, x, y, z))
 		{
-			world.setBlockToAir(i, j, k);
-			world.spawnEntityInWorld(new EntityItem(world, i, j, k, new ItemStack(this, 1)));
+			world.setBlockToAir(x, y, z);
+			world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(this, 1)));
 		}
-		else if ((TileEntityEarlyBloomery) world.getTileEntity(i, j, k) != null)
+		else if ((TileEntityEarlyBloomery) world.getTileEntity(x, y, z) != null)
 		{
-			TileEntityEarlyBloomery te = (TileEntityEarlyBloomery) world.getTileEntity(i, j, k);
+			TileEntityEarlyBloomery te = (TileEntityEarlyBloomery) world.getTileEntity(x, y, z);
 			ItemStack is = entityplayer.getCurrentEquippedItem();
 
 			if (is != null && (is.getItem() == TFCItems.FireStarter || is.getItem() == TFCItems.FlintSteel))
@@ -80,98 +80,123 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			}
 			else
 			{
-				world.playAuxSFXAtEntity(entityplayer, 1003, i, j, k, 0);
-				if (isOpen(world.getBlockMetadata(i, j, k)))
-					world.setBlockMetadataWithNotify(i, j, k, world.getBlockMetadata(i, j, k) - 8, 3);
+				world.playAuxSFXAtEntity(entityplayer, 1003, x, y, z, 0);
+				if (isOpen(world.getBlockMetadata(x, y, z)))
+					world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) - 8, 3);
 				else
-					world.setBlockMetadataWithNotify(i, j, k, world.getBlockMetadata(i, j, k) + 8, 3);
+					world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) + 8, 3);
 			}
 		}
 		return true;
 	}
 
 	@Override
-	public boolean canBlockStay(World world, int i, int j, int k)
+	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		if(world.isAirBlock(i, j, k))
+		if(world.isAirBlock(x, y, z))
 			return true;
 
 		boolean flipped = false;
 
-		int dir = world.getBlockMetadata(i, j, k) & 3;
-		TileEntityEarlyBloomery te = (TileEntityEarlyBloomery) world.getTileEntity(i, j, k);
+		int dir = world.getBlockMetadata(x, y, z) & 3;
+		TileEntityEarlyBloomery te = (TileEntityEarlyBloomery) world.getTileEntity(x, y, z);
 
 		if(te!= null)
 			flipped = te.isFlipped;
 
-		if(checkStack(world, i, j, k, dir))
+		if(checkStack(world, x, y, z, dir))
 		{
-			if (checkVertical(world, i,j,k, flipped) && checkHorizontal(world, i,j,k, flipped)) 
-				return true; 
-			else if(te != null)
-				te.swapFlipped();
+			if (checkVertical(world, x, y, z, flipped))
+			{
+				if(checkHorizontal(world, x, y, z, flipped))
+					return true;
+			}
+			else if(te != null && !flipped)
+			{
+				this.tryFlip(world, x, y, z);
+				flipped = te.isFlipped;
+				if (checkVertical(world, x, y, z, flipped))
+				{
+					if(checkHorizontal(world, x, y, z, flipped))
+						return true; 
+				}
+			}
 		}
-		if(te != null && te.isFlipped != flipped && checkVertical(world, i,j,k, te.isFlipped) && checkHorizontal(world, i,j,k, te.isFlipped))
-			return true;
 		return false;
 	}
 
-	public boolean checkStack(World world, int i, int j, int k, int dir)
+	public boolean checkStack(World world, int x, int y, int z, int dir)
 	{
 		int[] map = bloomeryToStackMap[dir];
-		int centerX = i + map[0];
-		int centerZ = k + map[1];
-		if (isNorthStackValid(world, centerX, j, centerZ-1) || (centerX == i && centerZ-1 == k))
-			if (isSouthStackValid(world, centerX, j, centerZ+1) || (centerX == i && centerZ+1 == k))
-				if (isEastStackValid(world, centerX+1, j, centerZ) || (centerX+1 == i && centerZ == k))
-					if (isWestStackValid(world, centerX-1, j, centerZ) || (centerX-1 == i && centerZ == k)) 
-						return true; 
+		int centerX = x + map[0];
+		int centerZ = z + map[1];
+		if (isNorthStackValid(world, centerX, y, centerZ - 1) || (centerX == x && centerZ - 1 == z))
+		{
+			if (isSouthStackValid(world, centerX, y, centerZ + 1) || (centerX == x && centerZ + 1 == z))
+			{
+				if (isEastStackValid(world, centerX - 1, y, centerZ) || (centerX - 1 == x && centerZ == z))
+				{
+					if (isWestStackValid(world, centerX + 1, y, centerZ) || (centerX + 1 == x && centerZ == z))
+					{
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 
-	private boolean isNorthStackValid(World world, int i, int j, int k)
+	private boolean isNorthStackValid(World world, int x, int y, int z)
 	{
-		if (((world.getBlock(i, j, k).getMaterial() == Material.rock || world.getBlock(i, j, k).getMaterial() == Material.iron) && world.getBlock(i, j, k).isNormalCube()) || 
-				TFC_Core.isSouthFaceSolid(world, i, j, k))//Since its the North Block, we need to make sure the South side facing the stack is solid
+		if (((world.getBlock(x, y, z).getMaterial() == Material.rock ||
+				world.getBlock(x, y, z).getMaterial() == Material.iron) &&
+				world.getBlock(x, y, z).isNormalCube()) ||
+				TFC_Core.isSouthFaceSolid(world, x, y, z))//Since its the North Block, we need to make sure the South side facing the stack is solid
 		{
 			return true;
 		}
 		return false;
 	}
 
-	private boolean isSouthStackValid(World world, int i, int j, int k)
+	private boolean isSouthStackValid(World world, int x, int y, int z)
 	{
-		if (((world.getBlock(i, j, k).getMaterial() == Material.rock || world.getBlock(i, j, k).getMaterial() == Material.iron) && world.getBlock(i, j, k).isNormalCube()) || 
-				TFC_Core.isNorthFaceSolid(world, i, j, k))//Since its the South Block, we need to make sure the North side facing the stack is solid
+		if (((world.getBlock(x, y, z).getMaterial() == Material.rock ||
+				world.getBlock(x, y, z).getMaterial() == Material.iron) &&
+				world.getBlock(x, y, z).isNormalCube()) ||
+				TFC_Core.isNorthFaceSolid(world, x, y, z))//Since its the South Block, we need to make sure the North side facing the stack is solid
 		{
 			return true;
 		}
 		return false;
 	}
 
-	private boolean isEastStackValid(World world, int i, int j, int k)
+	private boolean isEastStackValid(World world, int x, int y, int z)
 	{
-		if (((world.getBlock(i, j, k).getMaterial() == Material.rock || world.getBlock(i, j, k).getMaterial() == Material.iron) && world.getBlock(i, j, k).isNormalCube()) || 
-				TFC_Core.isWestFaceSolid(world, i, j, k))//Since its the East Block, we need to make sure the West side facing the stack is solid
+		if (((world.getBlock(x, y, z).getMaterial() == Material.rock ||
+				world.getBlock(x, y, z).getMaterial() == Material.iron) &&
+				world.getBlock(x, y, z).isNormalCube()) ||
+				TFC_Core.isWestFaceSolid(world, x, y, z))//Since its the East Block, we need to make sure the West side facing the stack is solid
 		{
 			return true;
 		}
 		return false;
 	}
 
-	private boolean isWestStackValid(World world, int i, int j, int k)
+	private boolean isWestStackValid(World world, int x, int y, int z)
 	{
-		if (((world.getBlock(i, j, k).getMaterial() == Material.rock || world.getBlock(i, j, k).getMaterial() == Material.iron) && world.getBlock(i, j, k).isNormalCube()) || 
-				TFC_Core.isEastFaceSolid(world, i, j, k))//Since its the West Block, we need to make sure the East side facing the stack is solid
+		if (((world.getBlock(x, y, z).getMaterial() == Material.rock ||
+				world.getBlock(x, y, z).getMaterial() == Material.iron) &&
+				world.getBlock(x, y, z).isNormalCube()) ||
+				TFC_Core.isEastFaceSolid(world, x, y, z))//Since its the West Block, we need to make sure the East side facing the stack is solid
 		{
 			return true;
 		}
 		return false;
 	}
 
-	private boolean checkHorizontal(World world, int i, int j, int k, boolean flip)
+	private boolean checkHorizontal(World world, int x, int y, int z, boolean flip)
 	{
-		int dir = world.getBlockMetadata(i, j, k) & 3;
+		int dir = world.getBlockMetadata(x, y, z) & 3;
 
 		if(flip)
 			dir = flipDir(dir);
@@ -180,90 +205,66 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 		boolean l = false;
 		boolean r = false;
-		if((world.getBlock(i-map[0], j, k-map[1]).getMaterial() == Material.rock || world.getBlock(i-map[0], j, k-map[1]).getMaterial() == Material.iron) && world.getBlock(i-map[0], j, k-map[1]).isOpaqueCube())
+		if((world.getBlock(x - map[0], y, z - map[1]).getMaterial() == Material.rock || world.getBlock(x - map[0], y, z - map[1]).getMaterial() == Material.iron) && world.getBlock(x - map[0], y, z - map[1]).isOpaqueCube())
 			l = true;
 
-		if (!l && world.getBlock(i-map[0], j, k-map[1]) == TFCBlocks.Detailed || world.getBlock(i-map[0], j, k-map[1]) == TFCBlocks.stoneSlabs)
+		if (!l && world.getBlock(x - map[0], y, z - map[1]) == TFCBlocks.Detailed || world.getBlock(x - map[0], y, z - map[1]) == TFCBlocks.stoneSlabs)
 		{
 			switch(dir)
 			{
 			case 0:
-				if(TFC_Core.isNorthFaceSolid(world, i-map[0], j, k-map[1]) && TFC_Core.isEastFaceSolid(world, i-map[0], j, k-map[1]))
-				{
-					if((!flip && TFC_Core.isSouthFaceSolid(world, i-map[0], j, k-map[1])) || flip)
-						l=true;
-				}
+				if(TFC_Core.isNorthFaceSolid(world, x - map[0], y, z - map[1]) && TFC_Core.isEastFaceSolid(world, x - map[0], y, z - map[1]))
+					l=true;
 				break;
 			case 1:
-				if(TFC_Core.isEastFaceSolid(world, i-map[0], j, k-map[1]) && TFC_Core.isNorthFaceSolid(world, i-map[0], j, k-map[1]))
-				{
-					if((!flip && TFC_Core.isWestFaceSolid(world, i-map[0], j, k-map[1])) || flip)
-						l=true;
-				}
+				if(TFC_Core.isEastFaceSolid(world, x - map[0], y, z - map[1]) && TFC_Core.isSouthFaceSolid(world, x - map[0], y, z - map[1]))
+					l=true;
 				break;
 			case 2:
-				if(TFC_Core.isSouthFaceSolid(world, i-map[0], j, k-map[1]) && TFC_Core.isEastFaceSolid(world, i-map[0], j, k-map[1]))
-				{
-					if((!flip && TFC_Core.isNorthFaceSolid(world, i-map[0], j, k-map[1])) || flip)
-						l=true;
-				}
+				if(TFC_Core.isSouthFaceSolid(world, x - map[0], y, z - map[1]) && TFC_Core.isEastFaceSolid(world, x - map[0], y, z - map[1]))
+					l=true;
 				break;
 			case 3:
-				if(TFC_Core.isWestFaceSolid(world, i-map[0], j, k-map[1]) && TFC_Core.isNorthFaceSolid(world, i-map[0], j, k-map[1]))
-				{
-					if((!flip && TFC_Core.isEastFaceSolid(world, i-map[0], j, k-map[1])) || flip)
-						l=true;
-				}
+				if(TFC_Core.isWestFaceSolid(world, x - map[0], y, z - map[1]) && TFC_Core.isSouthFaceSolid(world, x - map[0], y, z - map[1]))
+					l=true;
 				break;
 			}
 
-			if(!TFC_Core.isBottomFaceSolid(world, i-map[0], j, k-map[1]))
+			if(!TFC_Core.isBottomFaceSolid(world, x - map[0], y, z - map[1]))
 				l = false;
-			if(!TFC_Core.isTopFaceSolid(world, i-map[0], j, k-map[1]))
+			if(!TFC_Core.isTopFaceSolid(world, x - map[0], y, z - map[1]))
 				l = false;
 		}
 
-		if((world.getBlock(i+map[0], j, k+map[1]).getMaterial() == Material.rock || world.getBlock(i+map[0], j, k+map[1]).getMaterial() == Material.iron) && world.getBlock(i+map[0], j, k+map[1]).isOpaqueCube())
+		if((world.getBlock(x + map[0], y, z + map[1]).getMaterial() == Material.rock || world.getBlock(x + map[0], y, z + map[1]).getMaterial() == Material.iron) && world.getBlock(x + map[0], y, z + map[1]).isOpaqueCube())
 			r = true;
 
-		if (!r && world.getBlock(i+map[0], j, k+map[1]) == TFCBlocks.Detailed || world.getBlock(i+map[0], j, k+map[1]) == TFCBlocks.stoneSlabs)
+		if (!r && world.getBlock(x + map[0], y, z + map[1]) == TFCBlocks.Detailed || world.getBlock(x + map[0], y, z + map[1]) == TFCBlocks.stoneSlabs)
 		{
 			switch(dir)
 			{
 			case 0:
-				if(TFC_Core.isNorthFaceSolid(world, i+map[0], j, k+map[1]) && TFC_Core.isWestFaceSolid(world, i+map[0], j, k+map[1]))
-				{
-					if((!flip && TFC_Core.isSouthFaceSolid(world, i+map[0], j, k+map[1])) || flip)
-						r=true;
-				}
+				if(TFC_Core.isNorthFaceSolid(world, x+map[0], y, z + map[1]) && TFC_Core.isWestFaceSolid(world, x+map[0], y, z + map[1]))
+					r=true;
 				break;
 			case 1:
-				if(TFC_Core.isEastFaceSolid(world, i+map[0], j, k+map[1]) && TFC_Core.isSouthFaceSolid(world, i+map[0], j, k+map[1]))
-				{
-					if((!flip && TFC_Core.isWestFaceSolid(world, i+map[0], j, k+map[1])) || flip)
-						r=true;
-				}
+				if(TFC_Core.isEastFaceSolid(world, x+map[0], y, z + map[1]) && TFC_Core.isNorthFaceSolid(world, x+map[0], y, z + map[1]))
+					r=true;
 				break;
 			case 2:
-				if(TFC_Core.isSouthFaceSolid(world, i+map[0], j, k+map[1]) && TFC_Core.isWestFaceSolid(world, i+map[0], j, k+map[1]))
-				{
-					if((!flip && TFC_Core.isNorthFaceSolid(world, i+map[0], j, k+map[1])) || flip)
-						r=true;
-				}
+				if(TFC_Core.isSouthFaceSolid(world, x+map[0], y, z + map[1]) && TFC_Core.isWestFaceSolid(world, x+map[0], y, z + map[1]))
+					r=true;
 				break;
 			case 3:
-				if(TFC_Core.isWestFaceSolid(world, i+map[0], j, k+map[1]) && TFC_Core.isSouthFaceSolid(world, i+map[0], j, k+map[1]))
-				{
-					if((!flip && TFC_Core.isEastFaceSolid(world, i+map[0], j, k+map[1])) || flip)
-						r=true;
-				}
+				if(TFC_Core.isWestFaceSolid(world, x+map[0], y, z + map[1]) && TFC_Core.isNorthFaceSolid(world, x+map[0], y, z + map[1]))
+					r=true;
 				break;
 			}
 		}
 
-		if(!TFC_Core.isBottomFaceSolid(world, i+map[0], j, k+map[1]))
+		if(!TFC_Core.isBottomFaceSolid(world, x + map[0], y, z + map[1]))
 			r = false;
-		if(!TFC_Core.isTopFaceSolid(world, i+map[0], j, k+map[1]))
+		if(!TFC_Core.isTopFaceSolid(world, x + map[0], y, z + map[1]))
 			r = false;
 
 		if(l && r)
@@ -273,94 +274,70 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 	}
 
-	private boolean checkVertical(World world, int i, int j, int k, boolean flip)
+	private boolean checkVertical(World world, int x, int y, int z, boolean flip)
 	{
-		int dir = world.getBlockMetadata(i, j, k) & 3;
+		int dir = world.getBlockMetadata(x, y, z) & 3;
 
 		if(flip)
 			dir = flipDir(dir);
 
 		boolean b = false;
 		boolean t = false;
-		if((world.getBlock(i, j - 1, k).getMaterial() == Material.rock || world.getBlock(i, j - 1, k).getMaterial() == Material.iron) && world.getBlock(i, j - 1, k).isOpaqueCube())
+		if((world.getBlock(x, y - 1, z).getMaterial() == Material.rock || world.getBlock(x, y - 1, z).getMaterial() == Material.iron) && world.getBlock(x, y - 1, z).isOpaqueCube())
 			b = true;
 
-		if (!b && world.getBlock(i, j - 1, k) == TFCBlocks.Detailed || world.getBlock(i, j - 1, k) == TFCBlocks.stoneSlabs)
+		if (!b && world.getBlock(x, y - 1, z) == TFCBlocks.Detailed || world.getBlock(x, y - 1, z) == TFCBlocks.stoneSlabs)
 		{
 			switch(dir)
 			{
 			case 0:
-				if(TFC_Core.isNorthFaceSolid(world, i, j-1, k) && TFC_Core.isEastFaceSolid(world, i, j-1, k) && TFC_Core.isWestFaceSolid(world, i, j-1, k))
-				{
-					if((!flip && TFC_Core.isSouthFaceSolid(world, i, j-1, k)) || flip)
-						b=true;
-				}
+				if(TFC_Core.isNorthFaceSolid(world, x, y - 1, z) && TFC_Core.isEastFaceSolid(world, x, y - 1, z) && TFC_Core.isWestFaceSolid(world, x, y - 1, z))
+					b=true;
 				break;
 			case 1:
-				if(TFC_Core.isWestFaceSolid(world, i, j-1, k) && TFC_Core.isNorthFaceSolid(world, i, j-1, k) && TFC_Core.isSouthFaceSolid(world, i, j-1, k))
-				{
-					if((!flip && TFC_Core.isEastFaceSolid(world, i, j-1, k)) || flip)
-						b=true;
-				}
+				if(TFC_Core.isEastFaceSolid(world, x, y - 1, z) && TFC_Core.isNorthFaceSolid(world, x, y - 1, z) && TFC_Core.isSouthFaceSolid(world, x, y - 1, z))
+					b=true;
 				break;
 			case 2:
-				if(TFC_Core.isSouthFaceSolid(world, i, j-1, k) && TFC_Core.isEastFaceSolid(world, i, j-1, k) && TFC_Core.isWestFaceSolid(world, i, j-1, k))
-				{
-					if((!flip && TFC_Core.isNorthFaceSolid(world, i, j-1, k)) || flip)
-						b=true;
-				}
+				if(TFC_Core.isSouthFaceSolid(world, x, y - 1, z) && TFC_Core.isEastFaceSolid(world, x, y - 1, z) && TFC_Core.isWestFaceSolid(world, x, y - 1, z))
+					b=true;
 				break;
 			case 3:
-				if(TFC_Core.isEastFaceSolid(world, i, j-1, k) && TFC_Core.isNorthFaceSolid(world, i, j-1, k) && TFC_Core.isSouthFaceSolid(world, i, j-1, k))
-				{
-					if((!flip && TFC_Core.isWestFaceSolid(world, i, j-1, k)) || flip)
-						b=true;
-				}
+				if(TFC_Core.isWestFaceSolid(world, x,  y- 1, z) && TFC_Core.isNorthFaceSolid(world, x, y - 1, z) && TFC_Core.isSouthFaceSolid(world, x, y - 1, z))
+					b=true;
 				break;
 			}
 
-			if(!TFC_Core.isTopFaceSolid(world, i, j-1, k))
+			if(!TFC_Core.isTopFaceSolid(world, x, y - 1, z))
 				b = false;
 		}
 
-		if((world.getBlock(i, j + 1, k).getMaterial() == Material.rock || world.getBlock(i, j + 1, k).getMaterial() == Material.iron) && world.getBlock(i, j + 1, k).isOpaqueCube())
+		if((world.getBlock(x, y + 1, z).getMaterial() == Material.rock || world.getBlock(x, y + 1, z).getMaterial() == Material.iron) && world.getBlock(x, y + 1, z).isOpaqueCube())
 			t = true;
 
-		if (!t && world.getBlock(i, j + 1, k) == TFCBlocks.Detailed || world.getBlock(i, j + 1, k) == TFCBlocks.stoneSlabs)
+		if (!t && world.getBlock(x, y + 1, z) == TFCBlocks.Detailed || world.getBlock(x, y + 1, z) == TFCBlocks.stoneSlabs)
 		{
 			switch(dir)
 			{
 			case 0:
-				if(TFC_Core.isNorthFaceSolid(world, i, j+1, k) && TFC_Core.isEastFaceSolid(world, i, j+1, k) && TFC_Core.isWestFaceSolid(world, i, j+1, k))
-				{
-					if((!flip && TFC_Core.isSouthFaceSolid(world, i, j+1, k)) || flip)
-						t=true;
-				}
+				if(TFC_Core.isNorthFaceSolid(world, x, y + 1, z) && TFC_Core.isEastFaceSolid(world, x, y + 1, z) && TFC_Core.isWestFaceSolid(world, x, y + 1, z))
+					t=true;
 				break;
 			case 1:
-				if(TFC_Core.isWestFaceSolid(world, i, j+1, k) && TFC_Core.isNorthFaceSolid(world, i, j+1, k) && TFC_Core.isSouthFaceSolid(world, i, j+1, k))
-				{
-					if((!flip && TFC_Core.isEastFaceSolid(world, i, j+1, k)) || flip)
-						t=true;
-				}
+				if(TFC_Core.isEastFaceSolid(world, x, y + 1, z) && TFC_Core.isNorthFaceSolid(world, x, y + 1, z) && TFC_Core.isSouthFaceSolid(world, x, y + 1, z))
+					t=true;
 				break;
 			case 2:
-				if(TFC_Core.isSouthFaceSolid(world, i, j+1, k) && TFC_Core.isEastFaceSolid(world, i, j+1, k) && TFC_Core.isWestFaceSolid(world, i, j+1, k))
-				{
-					if((!flip && TFC_Core.isNorthFaceSolid(world, i, j+1, k)) || flip)
-						t=true;
-				}
+				if(TFC_Core.isSouthFaceSolid(world, x, y + 1, z) && TFC_Core.isEastFaceSolid(world, x, y + 1, z) && TFC_Core.isWestFaceSolid(world, x, y + 1, z))
+					t=true;
 				break;
 			case 3:
-				if(TFC_Core.isEastFaceSolid(world, i, j+1, k) && TFC_Core.isNorthFaceSolid(world, i, j+1, k) && TFC_Core.isSouthFaceSolid(world, i, j+1, k))
-				{
-					if((!flip && TFC_Core.isWestFaceSolid(world, i, j+1, k)) || flip)
-						t=true;
-				}
+				if(TFC_Core.isWestFaceSolid(world, x, y + 1, z) && TFC_Core.isNorthFaceSolid(world, x, y + 1, z) && TFC_Core.isSouthFaceSolid(world, x, y + 1, z))
+					t=true;
 				break;
 			}
 
-			if(!TFC_Core.isBottomFaceSolid(world, i, j+1, k))
+			if(!TFC_Core.isBottomFaceSolid(world, x, y + 1, z) || !TFC_Core.isTopFaceSolid(world, x, y + 1, z))
 				t = false;
 		}
 
@@ -371,9 +348,9 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int i, int j, int k)
+	public boolean canPlaceBlockAt(World world, int x, int y, int  z)
 	{
-		return canBlockStay(world,i,j,k);
+		return canBlockStay(world, x, y, z);
 	}
 
 	@Override
@@ -396,59 +373,59 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack par6ItemStack)
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack is)
 	{
 		if (!world.isRemote)
 		{
 			int dir = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
 			//l = flipDir(l);
-			world.setBlockMetadataWithNotify(i, j, k, dir, 0x2);
-			if (!canBlockStay(world, i, j, k))
+			world.setBlockMetadataWithNotify(x, y, z, dir, 0x2);
+			if (!canBlockStay(world, x, y, z))
 			{
-				dropBlockAsItem(world, i, j, k, new ItemStack(this, 1));
+				dropBlockAsItem(world, x, y, z, new ItemStack(this, 1));
 			}
 		}
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int i, int j, int k)
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
-		clearStack(world,i,j,k);
+		clearStack(world, x, y, z);
 		return true;
 	}
 
-	public void clearStack(World world, int i, int j, int k)
+	public void clearStack(World world, int x, int y, int z)
 	{
 		if (!world.isRemote)
 		{
-			world.setBlockToAir(i, j, k);
-			int meta = world.getBlockMetadata(i, j, k);
+			world.setBlockToAir(x, y, z);
+			int meta = world.getBlockMetadata(x, y, z);
 			int[] dir = bloomeryToStackMap[meta & 3];
-			if (world.getBlock(i + dir[0], j, k + dir[1]) == TFCBlocks.Molten)
-				world.setBlockToAir(i + dir[0], j, k + dir[1]);
-			if (world.getBlock(i + dir[0], j + 1, k + dir[1]) == TFCBlocks.Molten)
-				world.setBlockToAir(i + dir[0], j + 1, k + dir[1]);
-			if (world.getBlock(i + dir[0], j + 2, k + dir[1]) == TFCBlocks.Molten)
-				world.setBlockToAir(i + dir[0], j + 2, k + dir[1]);
-			if (world.getBlock(i + dir[0], j + 3, k + dir[1]) == TFCBlocks.Molten)
-				world.setBlockToAir(i + dir[0], j + 3, k + dir[1]);
+			if (world.getBlock(x + dir[0], y, z + dir[1]) == TFCBlocks.Molten)
+				world.setBlockToAir(x + dir[0], y, z + dir[1]);
+			if (world.getBlock(x + dir[0], y + 1, z + dir[1]) == TFCBlocks.Molten)
+				world.setBlockToAir(x + dir[0], y + 1, z + dir[1]);
+			if (world.getBlock(x + dir[0], y + 2, z + dir[1]) == TFCBlocks.Molten)
+				world.setBlockToAir(x + dir[0], y + 2, z + dir[1]);
+			if (world.getBlock(x + dir[0], y + 3, z + dir[1]) == TFCBlocks.Molten)
+				world.setBlockToAir(x + dir[0], y + 3, z + dir[1]);
 		}
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block block)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
-		if (!canBlockStay(world, i, j, k))
+		if (!canBlockStay(world, x, y, z))
 		{
-			if (!tryFlip(world, i, j, k))
+			if (!tryFlip(world, x, y, z))
 			{
-				world.setBlockToAir(i, j, k);
-				dropBlockAsItem(world, i, j, k, new ItemStack(this, 1));
+				world.setBlockToAir(x, y, z);
+				dropBlockAsItem(world, x, y, z, new ItemStack(this, 1));
 			}
-			else if (!canBlockStay(world, i, j, k))
+			else if (!canBlockStay(world, x, y, z))
 			{
-				world.setBlockToAir(i, j, k);
-				dropBlockAsItem(world, i, j, k, new ItemStack(this, 1));
+				world.setBlockToAir(x, y, z);
+				dropBlockAsItem(world, x, y, z, new ItemStack(this, 1));
 			}
 		}
 	}
@@ -462,18 +439,18 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 		return out;
 	}
 
-	private boolean tryFlip(World world, int i, int j, int k)
+	private boolean tryFlip(World world, int x, int y, int z)
 	{
-		TileEntityEarlyBloomery te = (TileEntityEarlyBloomery)world.getTileEntity(i, j, k);
-		te.isFlipped = true;
-		if(!canBlockStay(world,i,j,k))
+		TileEntityEarlyBloomery te = (TileEntityEarlyBloomery)world.getTileEntity(x, y, z);
+		te.swapFlipped();
+		if(!canBlockStay(world, x, y, z))
 			return false;
 
 		return true;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityEarlyBloomery();
 	}
@@ -510,7 +487,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	}*/
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		return null;
 	}
@@ -539,11 +516,11 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	}
 
 	@Override
-	public void addCollisionBoxesToList(World world, int i, int j, int k, List list)
+	public void addCollisionBoxesToList(World world, int x, int y, int z, List list)
 	{
-		int meta = world.getBlockMetadata(i, j, k);
+		int meta = world.getBlockMetadata(x, y, z);
 		int dir = meta & 3;
-		TileEntityEarlyBloomery te = (TileEntityEarlyBloomery)world.getTileEntity(i, j, k);
+		TileEntityEarlyBloomery te = (TileEntityEarlyBloomery)world.getTileEntity(x, y, z);
 		if(te.isFlipped)
 			dir = flipDir(dir);
 		float f = 0.125F;
@@ -592,7 +569,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5)
+	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
 		return true;
 	}

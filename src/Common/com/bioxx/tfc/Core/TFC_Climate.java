@@ -2,13 +2,14 @@ package com.bioxx.tfc.Core;
 
 import java.util.ArrayList;
 
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+
 import com.bioxx.tfc.Core.Util.BlockMeta;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 import com.bioxx.tfc.api.Util.Helper;
 
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -445,10 +446,9 @@ public class TFC_Climate
 	{
 		float temperature = getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYear(), x, y, z);
 		float rainfall = getRainfall(x, y, z);
-		if(temperature > 10 && rainfall > 100)
+		if(temperature > 5 && rainfall > 100)
 		{
-			float temp = (getTemp(x, z)+35)/(getMaxTemperature()+35);
-			//float evt = (1 - (((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z).floatdata1 / 16))*0.5f;
+			float temp = (getTemp(x, z) + 35) / (getMaxTemperature() + 35);
 			float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);
 
 			double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
@@ -472,7 +472,6 @@ public class TFC_Climate
 		if(rainfall > 100)
 		{
 			float temp = (getTemp(x, z)+35)/(getMaxTemperature()+35);
-			//float evt = (1 - (((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z).floatdata1 / 16))*0.5f;
 			float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);
 
 			double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);

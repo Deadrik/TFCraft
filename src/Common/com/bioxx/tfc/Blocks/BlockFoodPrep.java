@@ -1,10 +1,5 @@
 package com.bioxx.tfc.Blocks;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.TileEntities.TEFoodPrep;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +9,13 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.TileEntities.TEFoodPrep;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -92,7 +94,7 @@ public class BlockFoodPrep extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			if(!world.getBlock(i, j-1, k).isOpaqueCube())
+			if(!world.isSideSolid(i, j, k, ForgeDirection.UP))
 			{
 				((TEFoodPrep)world.getTileEntity(i, j, k)).ejectContents();
 				world.setBlockToAir(i, j, k);

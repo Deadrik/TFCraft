@@ -13,12 +13,12 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
-import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.Tools.ItemFirestarter;
 import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
 import com.bioxx.tfc.TileEntities.TEForge;
@@ -138,8 +138,8 @@ public class BlockForge extends BlockTerraContainer
 			boolean rockYN = world.getBlock(x, y-1,  z ) == TFCBlocks.stoneSlabs ||
 					(world.getBlock(x, y-1, z).getMaterial() == Material.rock && world.getBlock(x, y-1,z).isNormalCube());
 
-			boolean validSlabs = TFC_Core.isNorthSolid(world, x, y, z) && TFC_Core.isSouthSolid(world, x, y, z) && 
-					TFC_Core.isEastSolid(world, x, y, z) && TFC_Core.isWestSolid(world, x, y, z);
+			boolean validSlabs = world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH) && world.isSideSolid(x, y, z + 1, ForgeDirection.SOUTH) &&
+					world.isSideSolid(x - 1, y, z, ForgeDirection.EAST) && world.isSideSolid(x + 1, y, z, ForgeDirection.WEST);
 
 			if (!(rockXP && rockXN && rockZP && rockZN && rockYN) || !validSlabs)
 			{

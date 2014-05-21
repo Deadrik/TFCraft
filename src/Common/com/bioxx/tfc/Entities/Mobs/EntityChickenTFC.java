@@ -75,6 +75,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
+		this.tasks.addTask(6, this.aiEatGrass);
 		addAI();
 
 		size_mod = (((rand.nextInt ((degreeOfDiversion+1)*10)*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex);
@@ -474,23 +475,23 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer)
+	public boolean interact(EntityPlayer player)
 	{
 		if(!worldObj.isRemote)
 		{
-			if(!par1EntityPlayer.isSneaking())
+			if(!player.isSneaking())
 			{
-				par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
+				player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
 			}
 			//if(getGender()==GenderEnum.FEMALE && pregnant)
-			//	par1EntityPlayer.addChatMessage("Pregnant");
+			//	player.addChatMessage("Pregnant");
 		}
-		//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
-		if(!worldObj.isRemote && isAdult()&& par1EntityPlayer.isSneaking() && attackEntityFrom(DamageSource.generic, 25) )
+		//player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		if(!worldObj.isRemote && isAdult()&& player.isSneaking() && attackEntityFrom(DamageSource.generic, 5))
 		{
-			par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Items.feather, 1));
+			player.inventory.addItemStackToInventory(new ItemStack(Items.feather, 1));
 		}
-		return super.interact(par1EntityPlayer);
+		return super.interact(player);
 	}
 
 	@Override

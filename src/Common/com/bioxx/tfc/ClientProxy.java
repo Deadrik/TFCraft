@@ -332,6 +332,8 @@ public class ClientProxy extends CommonProxy
 		int var6 = 0;
 		int var7 = 0;
 		int[] rgb = { 0, 0, 0 };
+		float temperature = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYear(),i,j,k);
+		float rainfall = TFC_Climate.getRainfall(i,j,k);
 
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
 		if(par1IBlockAccess.getBlock(i, j, k) == TFCBlocks.fruitTreeLeaves)
@@ -430,7 +432,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
+		else if (temperature <= 10 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
 		{
 			int color = 0;
 			//Get the fade multiplie
@@ -445,7 +447,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && (meta == 6))
+		else if (temperature <= 10 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && (meta == 6))
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 			{
@@ -458,7 +460,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && !(meta == 15))
+		else if (temperature <= 10 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && !(meta == 15))
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 			{
@@ -471,7 +473,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && !(meta == 15))
+		else if (temperature <= 8 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && !(meta == 15))
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 			{

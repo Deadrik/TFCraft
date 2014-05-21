@@ -59,6 +59,15 @@ public class TELogPile extends TileEntity implements IInventory
 			ItemStack is = storage[slot].copy();
 			is.stackSize = 1;
 			storage[slot].stackSize--;
+			if(storage[slot].stackSize == 0)
+			{
+				storage[slot] = null;
+			}
+			if(this.getNumberOfLogs() == 0)
+			{
+				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+			}
+
 			return is;
 		}
 	}

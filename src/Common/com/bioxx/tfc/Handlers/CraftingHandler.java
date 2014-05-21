@@ -21,6 +21,7 @@ import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 import com.bioxx.tfc.Items.ItemIngot;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.Items.ItemBlocks.ItemAnvil1;
+import com.bioxx.tfc.Items.ItemBlocks.ItemAnvil2;
 import com.bioxx.tfc.Items.Tools.ItemCustomPickaxe;
 import com.bioxx.tfc.Items.Tools.ItemCustomSaw;
 import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
@@ -163,7 +164,8 @@ public class CraftingHandler
 						iinventory.setInventorySlotContents(i, new ItemStack(TFCItems.Mortar));
 				}
 			}
-			else if(itemstack.getItem() instanceof ItemAnvil1 && itemstack.getItemDamage() == 2)
+			else if((itemstack.getItem() instanceof ItemAnvil1 && itemstack.getItemDamage() == 2) ||
+					(itemstack.getItem() instanceof ItemAnvil2 && (itemstack.getItemDamage() == 1 || itemstack.getItemDamage() == 2)))
 			{
 				e.player.triggerAchievement(TFC_Achievements.achBronzeAge);
 			}
@@ -178,10 +180,9 @@ public class CraftingHandler
 					{
 						temperature = TFC_ItemHeat.GetTemp(iinventory.getStackInSlot(i));
 						if(e.player.worldObj.rand.nextInt(20) == 0)
-							e.player.playSound(TFC_Sounds.CERAMICBREAK, 0.7f, e.player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+							e.player.worldObj.playSoundAtEntity(e.player, TFC_Sounds.CERAMICBREAK, 0.7f, e.player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
 						else
 							TFC_Core.giveItemToPlayer(new ItemStack(TFCItems.CeramicMold, 1, 1), e.player);
-						iinventory.setInventorySlotContents(i, null);
 					}
 				}
 				TFC_ItemHeat.SetTemp(e.crafting, temperature);

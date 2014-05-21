@@ -115,7 +115,8 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	{
 		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, player.worldObj);
 
-		if(objectMouseOver != null && world.getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ) == TFCBlocks.ToolRack)
+		if(objectMouseOver != null && world.getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ) == TFCBlocks.ToolRack &&
+				world.getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ) == TFCBlocks.ToolRack2)
 			return is;
 
 		player.setItemInUse(is, this.getMaxItemUseDuration(is));

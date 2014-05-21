@@ -58,7 +58,7 @@ public class ItemProPick extends ItemTerra
 		Block block = world.getBlock(x, y, z);
 
 		// Negated the old condition and exiting the method here instead.
-		if (block == TFCBlocks.ToolRack)
+		if (block == TFCBlocks.ToolRack || block == TFCBlocks.ToolRack2)
 			return true;
 
 		// Getting the meta data only when we actually need it.

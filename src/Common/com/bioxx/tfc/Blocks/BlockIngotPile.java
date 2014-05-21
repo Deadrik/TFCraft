@@ -2,8 +2,6 @@ package com.bioxx.tfc.Blocks;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -20,6 +18,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -38,7 +40,7 @@ public class BlockIngotPile extends BlockTerraContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
 		Item item;
@@ -49,35 +51,35 @@ public class BlockIngotPile extends BlockTerraContainer
 
 		if(world.isRemote)
 		{
-			world.getTileEntity(i,j,k).validate();
+			world.getTileEntity(x, y, z).validate();
 			return true;
 		}
 		else
 		{
-			if((TileEntityIngotPile)world.getTileEntity(i, j, k)!=null)
+			if((TileEntityIngotPile)world.getTileEntity(x, y, z) != null)
 			{
 				TileEntityIngotPile tileentityingotpile;
-				tileentityingotpile = (TileEntityIngotPile)world.getTileEntity(i, j, k);
+				tileentityingotpile = (TileEntityIngotPile)world.getTileEntity(x, y, z);
 
 				if (tileentityingotpile.getStackInSlot(0)==null)
 				{
-					world.setBlockToAir(i, j, k);
+					world.setBlockToAir(x, y, z);
 					return false;
 				}
 
-				if (!entityplayer.isSneaking() && tileentityingotpile.getStackInSlot(0)!=null)
+				if (!entityplayer.isSneaking() && tileentityingotpile.getStackInSlot(0) != null)
 				{
 					if (tileentityingotpile.getStackInSlot(0).stackSize > 0)
-						tileentityingotpile.injectContents(0,-1);
+						tileentityingotpile.injectContents(0, -1);
 
 					world.spawnEntityInWorld(new EntityItem(world,tileentityingotpile.xCoord,
-							tileentityingotpile.yCoord+1,tileentityingotpile.zCoord,new ItemStack(tileentityingotpile.getStackInSlot(0).getItem(),1,tileentityingotpile.getStackInSlot(0).getItemDamage())));
-					world.notifyBlockOfNeighborChange(i, j+1, k, this);
+							tileentityingotpile.yCoord + 1, tileentityingotpile.zCoord, new ItemStack(tileentityingotpile.getStackInSlot(0).getItem(), 1, tileentityingotpile.getStackInSlot(0).getItemDamage())));
+					world.notifyBlockOfNeighborChange(x, y + 1, z, this);
 
 					if (tileentityingotpile.getStackInSlot(0).stackSize < 1)
-						world.setBlockToAir(i, j, k);
+						world.setBlockToAir(x, y, z);
 
-					world.markBlockForUpdate(i, j, k);
+					world.markBlockForUpdate(x, y, z);
 					//tileentityingotpile.broadcastPacketInRange(tileentityingotpile.createUpdatePacket());
 				}
 				//damage = tileentityingotpile.getStackInSlot(0).getItem().itemID - 16028 - 256;
@@ -88,10 +90,10 @@ public class BlockIngotPile extends BlockTerraContainer
 		}
 	}
 
-	public void combineIngotsDown(World world, int i, int j, int k)
+	public void combineIngotsDown(World world, int x, int y, int z)
 	{
-		TileEntityIngotPile teip = (TileEntityIngotPile)world.getTileEntity(i, j, k);
-		TileEntityIngotPile teipBottom = (TileEntityIngotPile)world.getTileEntity(i, j-1, k);
+		TileEntityIngotPile teip = (TileEntityIngotPile)world.getTileEntity(x, y, z);
+		TileEntityIngotPile teipBottom = (TileEntityIngotPile)world.getTileEntity(x, y - 1, z);
 
 		int bottomSize = teipBottom.getStackInSlot(0).stackSize;
 		int topSize = teip.getStackInSlot(0).stackSize;
@@ -110,22 +112,22 @@ public class BlockIngotPile extends BlockTerraContainer
 			if(m2 > 0)
 			{
 				teip.injectContents(0, m2-topSize);
-				world.notifyBlockOfNeighborChange(i, j+1, k, this);
+				world.notifyBlockOfNeighborChange(x, y + 1, z, this);
 				world.markBlockForUpdate(teip.xCoord, teip.yCoord, teip.zCoord);
 				//teip.broadcastPacketInRange(teip.createUpdatePacket());
 			}
 			else
 			{
 				teip.storage[0] = null;
-				world.setBlockToAir(i, j, k);
+				world.setBlockToAir(x, y, z);
 			}
 		}
 	}
 
-	public void combineIngotsUp(World world, int i, int j, int k)
+	public void combineIngotsUp(World world, int x, int y, int z)
 	{
-		TileEntityIngotPile teip = (TileEntityIngotPile)world.getTileEntity(i, j+1, k);
-		TileEntityIngotPile teipBottom = (TileEntityIngotPile)world.getTileEntity(i, j, k);
+		TileEntityIngotPile teip = (TileEntityIngotPile)world.getTileEntity(x, y + 1, z);
+		TileEntityIngotPile teipBottom = (TileEntityIngotPile)world.getTileEntity(x, y, z);
 
 		int bottomSize = teipBottom.getStackInSlot(0).stackSize;
 		int topSize = teip.getStackInSlot(0).stackSize;
@@ -143,13 +145,13 @@ public class BlockIngotPile extends BlockTerraContainer
 
 			if(m2 > 0)
 			{
-				teip.injectContents(0, m2-topSize);
-				world.notifyBlockOfNeighborChange(i, j+2, k, this);
+				teip.injectContents(0, m2 - topSize);
+				world.notifyBlockOfNeighborChange(x, y + 2, z, this);
 				world.markBlockForUpdate(teip.xCoord, teip.yCoord, teip.zCoord);
 				//teip.broadcastPacketInRange(teip.createUpdatePacket());
 			}
 			else
-				world.setBlockToAir(i, j+1, k);
+				world.setBlockToAir(x, y + 1, z);
 		}
 	}
 	/**
@@ -157,38 +159,38 @@ public class BlockIngotPile extends BlockTerraContainer
 	 * cleared to be reused)
 	 */
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		int meta = par1World.getBlockMetadata(par2, par3, par4);
+		int meta = world.getBlockMetadata(x, y, z);
 		int direction = getDirectionFromMetadata(meta);
-		TileEntityIngotPile te = (TileEntityIngotPile)par1World.getTileEntity(par2, par3, par4);
+		TileEntityIngotPile te = (TileEntityIngotPile)world.getTileEntity(x, y, z);
 
 		if (te != null && te.getStackInSlot(0) != null)
-			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.125, (double)par4 + 1);
+			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + ((te.getStackInSlot(0).stackSize + 7) / 8) * 0.125, (double)z + 1);
 		//else
 
-		return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + 0.25, (double)par4 + 1);
+		return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + 0.25, (double)z + 1);
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		int meta = par1World.getBlockMetadata(par2, par3, par4);
+		int meta = world.getBlockMetadata(x, y, z);
 		int direction = getDirectionFromMetadata(meta);
-		TileEntityIngotPile te = (TileEntityIngotPile)par1World.getTileEntity(par2, par3, par4);
+		TileEntityIngotPile te = (TileEntityIngotPile)world.getTileEntity(x, y, z);
 
 		if (te.getStackInSlot(0)!=null)
-			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.125, (double)par4 + 1);
+			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + ((te.getStackInSlot(0).stackSize + 7) / 8) * 0.125, (double)z + 1);
 		else
-			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + 0.25, (double)par4 + 1);
+			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + 0.25, (double)z + 1);
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
 	{
-		int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+		int meta = bAccess.getBlockMetadata(x, y, z);
 		int direction = getDirectionFromMetadata(meta);
-		TileEntityIngotPile te = (TileEntityIngotPile)par1IBlockAccess.getTileEntity(par2, par3, par4);
+		TileEntityIngotPile te = (TileEntityIngotPile)bAccess.getTileEntity(x, y, z);
 
 		if (te.getStackInSlot(0)!=null)
 			this.setBlockBounds(0f, 0f, 0f, 1f, (float) (((te.getStackInSlot(0).stackSize + 7)/8)*0.125), 1f);
@@ -238,14 +240,15 @@ public class BlockIngotPile extends BlockTerraContainer
 		return 22;//TFCBlocks.IngotPileRenderId;//ingotpileId;
 	}
 
-	public int getStack(World world,TileEntityIngotPile tt){
+	public int getStack(World world,TileEntityIngotPile tt)
+	{
 		TileEntityIngotPile Te = ((TileEntityIngotPile)world.getTileEntity(tt.xCoord, tt.yCoord, tt.zCoord));
 
 		return Te != null ? Te.getStackInSlot(0) != null ? Te.getStackInSlot(0).stackSize : 0 : 0;
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int side)
 	{
 	}
 
@@ -256,10 +259,10 @@ public class BlockIngotPile extends BlockTerraContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack is)
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack is)
 	{
-		super.onBlockPlacedBy(world,i,j,k,entityliving, is);
-		int meta = world.getBlockMetadata(i, j, k);
+		super.onBlockPlacedBy(world, x, y, z, entityliving, is);
+		int meta = world.getBlockMetadata(x, y, z);
 
 		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
 		byte byte0 = 0;
@@ -273,18 +276,18 @@ public class BlockIngotPile extends BlockTerraContainer
 			byte0 = 0;
 
 		byte0 += meta;
-		world.setBlockMetadataWithNotify(i, j, k, byte0, 0x2);
+		world.setBlockMetadataWithNotify(x, y, z, byte0, 0x2);
 	}
 
 	@Override
-	public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6)
+	public void breakBlock(World world, int x, int y, int z, Block b, int meta)
 	{
-		TileEntityIngotPile var5 = (TileEntityIngotPile)par1World.getTileEntity(par2, par3, par4);
-		if (var5 != null)
+		TileEntityIngotPile te = (TileEntityIngotPile)world.getTileEntity(x, y, z);
+		if (te != null)
 		{
-			for (int var6 = 0; var6 < var5.getSizeInventory(); ++var6)
+			for (int var6 = 0; var6 < te.getSizeInventory(); ++var6)
 			{
-				ItemStack var7 = var5.getStackInSlot(var6);
+				ItemStack var7 = te.getStackInSlot(var6);
 
 				if (var7 != null)
 				{
@@ -292,7 +295,7 @@ public class BlockIngotPile extends BlockTerraContainer
 					float var9 = this.random.nextFloat() * 0.8F + 0.1F;
 					EntityItem var12;
 
-					for (float var10 = this.random.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; par1World.spawnEntityInWorld(var12))
+					for (float var10 = this.random.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; world.spawnEntityInWorld(var12))
 					{
 						int var11 = this.random.nextInt(21) + 10;
 
@@ -300,7 +303,7 @@ public class BlockIngotPile extends BlockTerraContainer
 							var11 = var7.stackSize;
 
 						var7.stackSize -= var11;
-						var12 = new EntityItem(par1World, par2 + var8, par3 + var9, par4 + var10, new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
+						var12 = new EntityItem(world, x + var8, y + var9, z + var10, new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
 						float var13 = 0.05F;
 						var12.motionX = (float)this.random.nextGaussian() * var13;
 						var12.motionY = (float)this.random.nextGaussian() * var13 + 0.2F;
@@ -311,7 +314,7 @@ public class BlockIngotPile extends BlockTerraContainer
 					}
 				}
 			}
-			super.breakBlock(par1World, par2, par3, par4, par5, par6);
+			super.breakBlock(world, x, y, z, b, meta);
 		}
 	}
 
@@ -339,30 +342,30 @@ public class BlockIngotPile extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityIngotPile();
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block block)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
 		if(!world.isRemote)
 		{
-			if(!world.getBlock(i, j-1, k).isOpaqueCube())
+			if(!world.isSideSolid(x, y - 1, z, ForgeDirection.UP))
 			{
-				if(world.getBlock(i, j-1, k) == this && ((TileEntityIngotPile)world.getTileEntity(i, j, k)).storage[0].getItem() == ((TileEntityIngotPile)world.getTileEntity(i, j-1, k)).storage[0].getItem())
+				if(world.getBlock(x, y - 1, z) == this && ((TileEntityIngotPile)world.getTileEntity(x, y, z)).storage[0].getItem() == ((TileEntityIngotPile)world.getTileEntity(x, y - 1, z)).storage[0].getItem())
 				{
-					combineIngotsDown(world, i, j, k);
+					combineIngotsDown(world, x, y, z);
 				}
-				else if(world.getBlock(i, j+1, k) == this && ((TileEntityIngotPile)world.getTileEntity(i, j, k)).storage[0].getItem() == ((TileEntityIngotPile)world.getTileEntity(i, j+1, k)).storage[0].getItem())
+				else if(world.getBlock(x, y + 1, z) == this && ((TileEntityIngotPile)world.getTileEntity(x, y, z)).storage[0].getItem() == ((TileEntityIngotPile)world.getTileEntity(x, y + 1, z)).storage[0].getItem())
 				{
-					combineIngotsUp(world, i, j, k);
+					combineIngotsUp(world, x, y, z);
 				}
 				else
 				{
-					((TileEntityIngotPile)world.getTileEntity(i, j, k)).ejectContents();
-					world.setBlockToAir(i, j, k);
+					((TileEntityIngotPile)world.getTileEntity(x, y, z)).ejectContents();
+					world.setBlockToAir(x, y, z);
 					return;
 				}
 			}

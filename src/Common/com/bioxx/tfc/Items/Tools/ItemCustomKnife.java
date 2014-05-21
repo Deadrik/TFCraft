@@ -2,13 +2,6 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.List;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TEFoodPrep;
-import com.bioxx.tfc.api.Enums.EnumDamageType;
-import com.bioxx.tfc.api.Enums.EnumItemReach;
-import com.bioxx.tfc.api.Enums.EnumSize;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +9,13 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TileEntities.TEFoodPrep;
+import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.Enums.EnumSize;
 
 public class ItemCustomKnife extends ItemWeapon
 {
@@ -39,10 +39,10 @@ public class ItemCustomKnife extends ItemWeapon
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float HitX, float HitY, float HitZ) 
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float HitX, float HitY, float HitZ)
 	{
 		Block id = world.getBlock(x, y, z);
-		if(!world.isRemote && id != TFCBlocks.ToolRack)
+		if(!world.isRemote && id != TFCBlocks.ToolRack && id != TFCBlocks.ToolRack2)
 		{
 			int hasBowl = -1;
 
@@ -54,7 +54,7 @@ public class ItemCustomKnife extends ItemWeapon
 
 			Material mat = world.getBlock(x, y, z).getMaterial();
 
-			if(side == 1 && !TFC_Core.isSoil(id) && !TFC_Core.isWater(id) && world.isAirBlock(x, y+1, z) && hasBowl != -1 &&
+			if(side == 1 && !TFC_Core.isSoil(id) && !TFC_Core.isWater(id) && world.isAirBlock(x, y + 1, z) && hasBowl != -1 &&
 					(mat == Material.wood || mat == Material.rock || mat == Material.iron))
 			{
 				world.setBlock(x, y + 1, z, TFCBlocks.FoodPrep);

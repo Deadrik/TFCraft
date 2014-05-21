@@ -10,6 +10,7 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -1139,8 +1140,10 @@ public class TFC_Core
 
 	public static void giveItemToPlayer(ItemStack is, EntityPlayer player)
 	{
-		if(!player.inventory.addItemStackToInventory(is))
-			player.entityDropItem(is, 1);
+		if(player.worldObj.isRemote)
+			return;
+		EntityItem ei = player.entityDropItem(is, 1);
+		ei.delayBeforeCanPickup = 0;
 	}
 
 	public static boolean isFence(Block b)

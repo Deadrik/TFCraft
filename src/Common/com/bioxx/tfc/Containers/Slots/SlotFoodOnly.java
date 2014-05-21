@@ -5,6 +5,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Food.ItemMeal;
+import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
 import com.bioxx.tfc.api.IFood;
 import com.bioxx.tfc.api.IItemFoodBlock;
 import com.bioxx.tfc.api.ISize;
@@ -23,6 +24,7 @@ public class SlotFoodOnly extends Slot
 	{
 		if (itemstack.getItem() instanceof ISize && ((ISize) itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize &&
 			!(itemstack.getItem() instanceof ItemMeal) &&
+			!(itemstack.getItem() instanceof ItemCustomBucketMilk) &&
 			(itemstack.getItem() instanceof IFood || itemstack.getItem() instanceof IItemFoodBlock) &&
 			(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("foodWeight") && itemstack.getTagCompound().hasKey("foodDecay")))
 			return true;

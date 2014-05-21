@@ -186,14 +186,14 @@ public class BlockPottery extends BlockTerraContainer
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block block)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
 		if(!world.isRemote)
 		{
-			if(!world.getBlock(i, j - 1, k).isOpaqueCube())
+			if(!world.isSideSolid(x, y - 1, z, ForgeDirection.UP))
 			{
-				((TEPottery)world.getTileEntity(i, j, k)).ejectContents();
-				world.setBlockToAir(i, j, k);
+				((TEPottery)world.getTileEntity(x, y, z)).ejectContents();
+				world.setBlockToAir(x, y, z);
 				return;
 			}
 		}

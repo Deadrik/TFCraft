@@ -1,10 +1,5 @@
 package com.bioxx.tfc.Blocks;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.TileEntities.TileEntityBloom;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +7,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Achievements;
+import com.bioxx.tfc.TileEntities.TileEntityBloom;
 
 public class BlockBloom extends BlockTerraContainer
 {
@@ -39,60 +40,63 @@ public class BlockBloom extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createNewTileEntity(World w, int meta)
 	{
 		return new TileEntityBloom();
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int side)
 	{
-		//Eject(world,i,j,k);
+		//Eject(world, x, y, z);
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion)
+	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion exp)
 	{
-		Eject(par1World,par2,par3,par4);
+		Eject(world, x, y, z);
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5)
+	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta)
 	{
-		Eject(par1World,par2,par3,par4);
+		Eject(world, x, y, z);
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int i, int j, int k)
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
 		if(!world.isRemote)
-			Eject(world,i,j,k);
-		return super.removedByPlayer(world, player, i, j, k);
+		{
+			Eject(world, x, y, z);
+			player.triggerAchievement(TFC_Achievements.achIronAge);
+		}
+		return super.removedByPlayer(world, player, x, y, z);
 	}
 
-	public void Eject(World world, int i, int j, int k)
+	public void Eject(World world, int x, int y, int z)
 	{
-		TileEntityBloom te = (TileEntityBloom)world.getTileEntity(i, j, k);
+		TileEntityBloom te = (TileEntityBloom)world.getTileEntity(x, y, z);
 		if(te != null)
 		{
-			int[] b = getBloomery(world, i, j, k);
-			te = (TileEntityBloom)world.getTileEntity(i, j, k);
-			dropBlockAsItem(world, i+b[0], j, k+b[1], new ItemStack(TFCItems.RawBloom, 1, te.size));
-			world.removeTileEntity(i, j, k);
+			int[] b = getBloomery(world, x, y, z);
+			te = (TileEntityBloom)world.getTileEntity(x, y, z);
+			dropBlockAsItem(world, x + b[0], y, z + b[1], new ItemStack(TFCItems.RawBloom, 1, te.size));
+			world.removeTileEntity(x, y, z);
 		}
 	}
 
-	public int[] getBloomery(World world, int i, int j, int k)
+	public int[] getBloomery(World world, int x, int y, int z)
 	{
-		if(world.getBlock(i+1, j, k) == TFCBlocks.EarlyBloomery)
-			return new int[]{1,0};
-		if(world.getBlock(i-1, j, k) == TFCBlocks.EarlyBloomery)
-			return new int[]{-1,0};
-		if(world.getBlock(i, j, k+1) == TFCBlocks.EarlyBloomery)
-			return new int[]{0,1};
-		if(world.getBlock(i, j, k-1) == TFCBlocks.EarlyBloomery)
-			return new int[]{0,-1};
+		if(world.getBlock(x + 1, y, z) == TFCBlocks.EarlyBloomery)
+			return new int[]{1, 0};
+		if(world.getBlock(x - 1, y, z) == TFCBlocks.EarlyBloomery)
+			return new int[]{-1, 0};
+		if(world.getBlock(x, y, z + 1) == TFCBlocks.EarlyBloomery)
+			return new int[]{0, 1};
+		if(world.getBlock(x, y, z - 1) == TFCBlocks.EarlyBloomery)
+			return new int[]{0, -1};
 
-		return new int[]{0,0};
+		return new int[]{0, 0};
 	}
 }

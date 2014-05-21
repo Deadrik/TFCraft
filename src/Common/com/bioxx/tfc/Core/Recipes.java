@@ -153,7 +153,6 @@ public class Recipes
 					GameRegistry.addRecipe(new ItemStack(TFCBlocks.WoodSupportH, 8, i), new Object[] { "A ","22", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Saws[j], 1, 32767)});
 				}
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Planks, 1, i), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
-				GameRegistry.addRecipe(new ItemStack(TFCItems.SinglePlank, 3, i), new Object[] {"1", Character.valueOf('1'), new ItemStack(TFCBlocks.Planks, 1, i)});
 			}
 			else if(i/16 == 1)
 			{
@@ -593,6 +592,9 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Workbench, 1), new Object[]{"PP","PP", Character.valueOf('P'), "plankWood"}));
 		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.coal_block, 1), new Object[]{"###","###","###", Character.valueOf('#'), "fuelCoal"}));
+
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Straw,4), 
+				new Object[] {new ItemStack(TFCBlocks.Thatch, 1)});
 
 		RegisterToolRecipes();
 		registerFoodRecipes();

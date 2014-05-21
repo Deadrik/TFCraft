@@ -47,11 +47,25 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 		boolean render = false;
 		for(int index = 0; index < dd;)
 		{
-			if(te.solidCheck[index >> 3])
+			int in3 = (index >> 3);
+			if(te.solidCheck[in3])
 			{
 				minX = 0;
 				maxX = 1;
-				minY = div * (index & 7);
+				minY = 0;
+				maxY = 1;
+				minZ = div * in3;
+				maxZ = minZ + div;
+				if(!breaking)
+					renderer.overrideBlockTexture = TFCBlocks.WoodConstruct.getIcon(0, te.woodTypes[index]);
+				index++;
+				render = true;
+			}
+			else if(te.solidCheck[in3+24])
+			{
+				minX = 0;
+				maxX = 1;
+				minY = div * ((index & 7)+in3);
 				maxY = minY + div;
 				minZ = 0;
 				maxZ = 1;
@@ -66,7 +80,7 @@ public class RenderWoodConstruct implements ISimpleBlockRenderingHandler
 				maxX = 1;
 				minY = div * (index & 7);
 				maxY = minY + div;
-				minZ = div * (index >> 3);
+				minZ = div * in3;
 				maxZ = minZ + div;
 				if(!breaking)
 					renderer.overrideBlockTexture = TFCBlocks.WoodConstruct.getIcon(0, te.woodTypes[index]);
