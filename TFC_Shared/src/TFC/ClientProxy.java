@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.entity.RenderFallingSand;
 import net.minecraft.client.renderer.entity.RenderFish;
 import net.minecraft.client.renderer.entity.RenderGhast;
 import net.minecraft.client.renderer.entity.RenderIronGolem;
-import net.minecraft.client.renderer.entity.RenderLeashKnot;
 import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.entity.RenderSilverfish;
 import net.minecraft.client.renderer.entity.RenderSlime;
@@ -23,7 +22,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.src.ModLoader;
 import net.minecraft.stats.Achievement;
-import net.minecraft.world.EnumGameType;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -127,15 +125,15 @@ import TFC.Render.TESR.TESRPottery;
 import TFC.Render.TESR.TESRSeaWeed;
 import TFC.Render.TESR.TESRToolrack;
 import TFC.Render.TESR.TESRWorldItem;
+import TFC.TileEntities.TEAnvil;
+import TFC.TileEntities.TEFoodPrep;
+import TFC.TileEntities.TEPottery;
 import TFC.TileEntities.TESeaWeed;
 import TFC.TileEntities.TEWorldItem;
-import TFC.TileEntities.TEAnvil;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFirepit;
-import TFC.TileEntities.TEFoodPrep;
 import TFC.TileEntities.TileEntityIngotPile;
-import TFC.TileEntities.TEPottery;
 import TFC.TileEntities.TileEntityToolRack;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -228,7 +226,7 @@ public class ClientProxy extends CommonProxy
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.berryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBerryBush());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.bloomeryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBloomery());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.metalsheetRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderMetalSheet());
-		
+
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 	}
@@ -347,6 +345,8 @@ public class ClientProxy extends CommonProxy
 		int var7 = 0;
 
 		int[] rgb = { 0, 0, 0 };
+		float temperature = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYear(),i,j,k);
+		float rainfall = TFC_Climate.getRainfall(i,j,k);
 
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
 		if (par1IBlockAccess.getBlockId(i, j, k) == TFCBlocks.fruitTreeLeaves.blockID) //			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December)
@@ -438,7 +438,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
+		else if (temperature <= 10 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
 		{
 			int color = 0;
 			//Get the fade multiplie
@@ -452,7 +452,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && (meta == 6))
+		else if (temperature <= 10 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && (meta == 6))
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 				for (int var9 = -1; var9 <= 1; ++var9)
@@ -464,7 +464,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && !(meta == 15))
+		else if (temperature <= 10 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9 && !(meta == 15))
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 				for (int var9 = -1; var9 <= 1; ++var9)
@@ -476,7 +476,7 @@ public class ClientProxy extends CommonProxy
 			int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 			return x;
 		}
-		else if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && !(meta == 15))
+		else if (temperature <= 8 && TFC_Time.getSeasonAdjustedMonth(k) >= 6 && !(meta == 15))
 		{
 			for (int var8 = -1; var8 <= 1; ++var8)
 				for (int var9 = -1; var9 <= 1; ++var9)
