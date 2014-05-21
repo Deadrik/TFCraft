@@ -54,55 +54,62 @@ public class BlockCharcoal extends BlockTerra {
 	{
 		if(!world.isRemote)
 		{
-			//we need to make sure the player has the correct tool out
-			boolean isShovel = false;
-			ItemStack equip = entityplayer.getCurrentEquippedItem();
-			if(equip!=null)
+			if (entityplayer.capabilities.isCreativeMode)
 			{
-				if(equip.getItem() instanceof ItemCustomShovel)
-				{
-					isShovel = true;
-				}
-			}
-			if(isShovel)
-			{
-				int top = 0;
-				while(world.getBlockId(i, j+top+1, k) == blockID)
-					++top;
-
-				dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.coal,1,1));
-				if(l-1 > 0)
-				{
-					if(world.getBlockId(i, j+1, k) == blockID)
-					{
-						int m1 = world.getBlockMetadata(i, j+top, k);
-						if(m1-1 > 0)
-						{
-							world.setBlockMetadataWithNotify(i, j+top, k, m1-1, 2);
-						}
-						else
-							world.setBlockToAir(i, j+top, k);
-
-						world.setBlock(i, j, k, blockID, 8, 2);
-					}
-					else
-					{
-						world.setBlock(i, j, k, blockID, l-1, 2);
-					}
-
-					world.markBlockForUpdate(i, j, k);
-					world.markBlockForUpdate(i, j+top, k);
-				}
-				else
-					world.setBlock(i, j, k, 0, 0, 2);
+				world.setBlockToAir(i, j, k);
 			}
 			else
 			{
-				world.setBlock(i, j, k, blockID, l, 2);
-			}
+				//we need to make sure the player has the correct tool out
+				boolean isShovel = false;
+				ItemStack equip = entityplayer.getCurrentEquippedItem();
+				if (equip != null)
+				{
+					if (equip.getItem() instanceof ItemCustomShovel)
+					{
+						isShovel = true;
+					}
+				}
+				if (isShovel)
+				{
+					int top = 0;
+					while (world.getBlockId(i, j + top + 1, k) == blockID)
+						++top;
 
-			if(l == 0)
-				world.setBlockToAir(i, j, k);
+					dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.coal, 1, 1));
+					if (l - 1 > 0)
+					{
+						if (world.getBlockId(i, j + 1, k) == blockID)
+						{
+							int m1 = world.getBlockMetadata(i, j + top, k);
+							if (m1 - 1 > 0)
+							{
+								world.setBlockMetadataWithNotify(i, j + top, k, m1 - 1, 2);
+							}
+							else
+								world.setBlockToAir(i, j + top, k);
+
+							world.setBlock(i, j, k, blockID, 8, 2);
+						}
+						else
+						{
+							world.setBlock(i, j, k, blockID, l - 1, 2);
+						}
+
+						world.markBlockForUpdate(i, j, k);
+						world.markBlockForUpdate(i, j + top, k);
+					}
+					else
+						world.setBlock(i, j, k, 0, 0, 2);
+				}
+				else
+				{
+					world.setBlock(i, j, k, blockID, l, 2);
+				}
+
+				if (l == 0)
+					world.setBlockToAir(i, j, k);
+			}
 		}
 	}
 
