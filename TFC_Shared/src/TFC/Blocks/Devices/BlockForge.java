@@ -12,11 +12,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
-import TFC.Core.TFC_Core;
 import TFC.Items.Tools.ItemFirestarter;
 import TFC.Items.Tools.ItemFlintSteel;
 import TFC.TileEntities.TEForge;
@@ -155,8 +155,8 @@ public class BlockForge extends BlockTerraContainer
 					(world.getBlockMaterial(x, y-1, z) == Material.rock && world.isBlockNormalCube(x, y-1,z));
 
 
-			boolean validSlabs = TFC_Core.isNorthSolid(world, x, y, z) && TFC_Core.isSouthSolid(world, x, y, z) && 
-					TFC_Core.isEastSolid(world, x, y, z) && TFC_Core.isWestSolid(world, x, y, z);	
+			boolean validSlabs = world.isBlockSolidOnSide(x, y, z+1, ForgeDirection.NORTH) && world.isBlockSolidOnSide(x, y, z+1, ForgeDirection.SOUTH) && 
+					world.isBlockSolidOnSide(x-1, y, z, ForgeDirection.EAST) && world.isBlockSolidOnSide(x+1, y, z, ForgeDirection.WEST);	
 
 			if (!(rockXP && rockXN && rockZP && rockZN && rockYN)
 					|| !validSlabs)

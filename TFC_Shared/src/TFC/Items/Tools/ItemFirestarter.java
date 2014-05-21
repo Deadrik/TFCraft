@@ -54,7 +54,7 @@ public class ItemFirestarter extends ItemTerra
 	{
 		if(!world.isRemote)
 		{
-			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, x, y, z-1) && TFC_Core.isSouthFaceSolid(world, x, y, z+1) && 
+			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, x, y, z+1) && TFC_Core.isSouthFaceSolid(world, x, y, z-1) && 
 					TFC_Core.isEastFaceSolid(world, x-1, y, z) && TFC_Core.isWestFaceSolid(world, x+1, y, z);
 
 			if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
