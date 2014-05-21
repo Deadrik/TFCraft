@@ -21,7 +21,7 @@ public abstract class GenEVTLayerTFC extends GenLayerTFC
 	public static int LOW = DataLayer.EVT_0_25.ID;
 	public static int HIGH = DataLayer.EVT_8.ID;
 
-	public static GenLayerTFC[] initializeAllBiomeGenerators(long seed, WorldType worldType)
+	public static GenLayerTFC initialize(long seed, WorldType worldType)
 	{
 		GenLayerTFC continent = genContinent(0);
 		drawImage(512,continent, "EVT 0");
@@ -40,12 +40,10 @@ public abstract class GenEVTLayerTFC extends GenLayerTFC
 		}
 
 		GenLayerSmoothTFC finalCont = new GenLayerSmoothTFC(1000L, continent);
-		drawImage(512,finalCont, "EVT 3 Smoothed EVT");
-		GenLayerVoronoiZoomTFC voronoiZoom = new GenLayerVoronoiZoomTFC(10L, finalCont);
-		//drawImage(512,finalCont, "EVT 4 Voronoi EVT");
-		finalCont.initWorldGenSeed(seed);
+		GenLayerTFC voronoiZoom = new GenLayerVoronoiZoomTFC(10L, finalCont);
+		drawImage(512,finalCont, "EVT 4 Voronoi EVT");
 		voronoiZoom.initWorldGenSeed(seed);
-		return new GenLayerTFC[] {finalCont, voronoiZoom};
+		return voronoiZoom;
 	}
 
 	public static GenLayerTFC genContinent(long seed)
@@ -75,7 +73,7 @@ public abstract class GenEVTLayerTFC extends GenLayerTFC
 		return continent;
 	}
 
-	static boolean shouldDraw = true;
+	static boolean shouldDraw = false;
 	public static void drawImage(int size, GenLayerTFC genlayer, String name)
 	{
 		if(!shouldDraw)

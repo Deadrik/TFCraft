@@ -45,7 +45,7 @@ public class DataLayer
 	public static DataLayer Redwood = new DataLayer(39, 9);
 	public static DataLayer Spruce = new DataLayer(40, 10);
 	public static DataLayer Sycamore = new DataLayer(41, 11);
-	public static DataLayer UTAcacia = new DataLayer(46, 0);
+	public static DataLayer SavannahAcacia = new DataLayer(46, 0);
 	public static DataLayer WhiteCedar = new DataLayer(42, 12);
 	public static DataLayer WhiteElm = new DataLayer(43, 13);
 	public static DataLayer Willow = new DataLayer(44, 14);

@@ -21,7 +21,7 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 	public static int WET = DataLayer.Rain_4000.ID;
 	public static int DRY = DataLayer.Rain_125.ID;
 
-	public static GenLayerTFC[] initializeAllBiomeGenerators(long seed, WorldType worldType)
+	public static GenLayerTFC initialize(long seed, WorldType worldType)
 	{
 		GenLayerTFC continent = genContinent(0);
 		drawImage(512,continent, "Rain 0");
@@ -30,7 +30,7 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 		drawImage(512,continent, "Rain 1");
 		for (int zoomLevel = 0; zoomLevel < 4; ++zoomLevel)
 		{
-			if(zoomLevel == 0)
+			if((zoomLevel & 1) == 1)
 			{
 				continent = new GenLayerRainMix(1000 + zoomLevel, continent);
 				drawImage(512,continent , "Rain 2-" + zoomLevel +" Mix");
@@ -40,12 +40,10 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 		}
 
 		GenLayerSmoothTFC finalCont = new GenLayerSmoothTFC(1000L, continent);
-		drawImage(512,finalCont, "Rain 3 Smoothed Rain");
 		GenLayerVoronoiZoomTFC voronoiZoom = new GenLayerVoronoiZoomTFC(10L, finalCont);
-		//drawImage(512,finalCont, "Rain 4 Voronoi Rain");
-		finalCont.initWorldGenSeed(seed);
+		drawImage(512,finalCont, "Rain 4 Voronoi Rain");
 		voronoiZoom.initWorldGenSeed(seed);
-		return new GenLayerTFC[] {finalCont, voronoiZoom};
+		return voronoiZoom;
 	}
 
 	public static GenLayerTFC genContinent(long seed)
@@ -56,24 +54,26 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
 		drawImage(512, continent, "Rain Init 0b Add Rain");
 		continent = new GenLayerFuzzyZoomTFC(2000L, continent);
 		drawImage(512, continent, "Rain Init 1");
-		continent = new GenLayerAddRain(1L, continent);
-		drawImage(512, continent, "Rain Init 2 Add Rain");
+		//continent = new GenLayerAddRain(1L, continent);
+		//drawImage(512, continent, "Rain Init 2 Add Rain");
 		continent = new GenLayerZoomTFC(2001L, continent);
 		drawImage(512, continent, "Rain Init 3 Zoom");
-		continent = new GenLayerAddRain(2L, continent);
-		drawImage(512, continent, "Rain Init 4 Add Rain");
+		//continent = new GenLayerAddRain(2L, continent);
+		//drawImage(512, continent, "Rain Init 4 Add Rain");
 		continent = new GenLayerRainMix(88L, continent);
 		drawImage(512,continent , "Rain Init 4b Mix");
 		continent = new GenLayerZoomTFC(2002L, continent);
 		drawImage(512, continent, "Rain Init 5 Zoom");
-		continent = new GenLayerAddRain(3L, continent);
-		drawImage(512, continent, "Rain Init 6 Add Rain");
+		continent = new GenLayerRainMix(88L, continent);
+		drawImage(512,continent , "Rain Init 5b Mix");
+		//continent = new GenLayerAddRain(3L, continent);
+		//drawImage(512, continent, "Rain Init 6 Add Rain");
 		continent = new GenLayerZoomTFC(2003L, continent);
 		drawImage(512, continent, "Rain Init 7 Zoom");
 		return continent;
 	}
 
-	static boolean shouldDraw = true;
+	static boolean shouldDraw = false;
 	public static void drawImage(int size, GenLayerTFC genlayer, String name)
 	{
 		if(!shouldDraw)

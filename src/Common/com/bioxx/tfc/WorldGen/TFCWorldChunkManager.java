@@ -14,13 +14,11 @@ import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.GenStabilityLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT.GenEVTLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain.GenRainLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer1TFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer2TFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer3TFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Tree.GenTreeLayerTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Stability.GenStabilityLayer;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Tree.GenTreeLayer;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -37,12 +35,10 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	protected List biomesToSpawnIn;
 
 	//Rocks
-	protected GenLayerTFC[] genRocks;
 	protected GenLayerTFC[] rocksIndexLayer;
 	protected DataCache[] rockCache;
 
 	//Trees
-	protected GenLayerTFC[] genTrees;
 	protected GenLayerTFC[] treesIndexLayer;
 	protected DataCache[] treeCache;
 
@@ -62,6 +58,24 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	protected DataCache stabilityCache;
 
 	public long seed = 0;
+
+	public static DataLayer[] RockLayer1 = new DataLayer[]{
+		DataLayer.Shale, DataLayer.Claystone, DataLayer.RockSalt, DataLayer.Limestone,
+		DataLayer.Conglomerate, DataLayer.Dolomite, DataLayer.Chert, DataLayer.Chalk,
+		DataLayer.Rhyolite, DataLayer.Basalt, DataLayer.Andesite, DataLayer.Dacite,
+		DataLayer.Quartzite, DataLayer.Slate, DataLayer.Phyllite, DataLayer.Schist,
+		DataLayer.Gneiss, DataLayer.Marble, DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro};
+	public static DataLayer[] RockLayer2 = new DataLayer[]{
+		DataLayer.Rhyolite, DataLayer.Basalt, DataLayer.Andesite, DataLayer.Dacite,
+		DataLayer.Quartzite, DataLayer.Slate, DataLayer.Phyllite, DataLayer.Schist,
+		DataLayer.Gneiss, DataLayer.Marble, DataLayer.Granite, DataLayer.Diorite,
+		DataLayer.Gabbro};
+	public static DataLayer[] RockLayer3 = new DataLayer[]{
+		DataLayer.Rhyolite, DataLayer.Basalt, DataLayer.Andesite,
+		DataLayer.Dacite, DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro};
+
+	public static DataLayer[] treeArray = new DataLayer[] {DataLayer.Ash, DataLayer.Aspen, DataLayer.Birch, DataLayer.Chestnut, DataLayer.DouglasFir, DataLayer.Hickory,DataLayer.Koa, DataLayer.Maple, DataLayer.Oak, DataLayer.Pine, DataLayer.Redwood, 
+		DataLayer.Pine, DataLayer.Spruce, DataLayer.Sycamore, DataLayer.WhiteCedar, DataLayer.WhiteElm, DataLayer.Willow, DataLayer.NoTree};
 
 	public TFCWorldChunkManager()
 	{
@@ -105,54 +119,30 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		else
 			var4 = GenLayerTFC.initializeAllBiomeGenerators(Seed, TFCWorldType.DEFAULT);
 
-		this.genBiomes = var4[0];
 		this.biomeIndexLayer = var4[1];
 
 		//Setup Rocks
-		GenLayerTFC[] var5 = GenRockLayer1TFC.initializeAllBiomeGenerators(Seed+1, worldtype);
-		GenLayerTFC[] var6 = GenRockLayer2TFC.initializeAllBiomeGenerators(Seed+2, worldtype);
-		GenLayerTFC[] var7 = GenRockLayer3TFC.initializeAllBiomeGenerators(Seed+3, worldtype);
-		genRocks = new GenLayerTFC[3];
 		rocksIndexLayer = new GenLayerTFC[3];
-		this.genRocks[0] = var5[0];
-		this.rocksIndexLayer[0] = var5[1];
+		rocksIndexLayer[0] = GenRockLayer.initialize(Seed+1, RockLayer1);
+		rocksIndexLayer[1] = GenRockLayer.initialize(Seed+2, RockLayer2);
+		rocksIndexLayer[2] = GenRockLayer.initialize(Seed+3, RockLayer3);
 
-		this.genRocks[1] = var6[0];
-		this.rocksIndexLayer[1] = var6[1];
-
-		this.genRocks[2] = var7[0];
-		this.rocksIndexLayer[2] = var7[1];
 
 		//Setup Trees
-		genTrees = new GenLayerTFC[3];
 		treesIndexLayer = new GenLayerTFC[3];
 
-		GenLayerTFC[] var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(Seed+4, worldtype);
-		genTrees[0] = var8[0];
-		treesIndexLayer[0] = var8[1];
-
-		var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(Seed+5, worldtype);
-		genTrees[1] = var8[0];
-		treesIndexLayer[1] = var8[1];
-
-		var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(Seed+6, worldtype);
-		genTrees[2] = var8[0];
-		treesIndexLayer[2] = var8[1];
+		treesIndexLayer[0] = GenTreeLayer.initialize(Seed+4, treeArray);
+		treesIndexLayer[1] = GenTreeLayer.initialize(Seed+5, treeArray);
+		treesIndexLayer[2] = GenTreeLayer.initialize(Seed+6, treeArray);
 
 		//Setup Evapotranspiration
-		var8 = GenEVTLayerTFC.initializeAllBiomeGenerators(Seed+7, worldtype);
-		genEVT = var8[0];
-		evtIndexLayer = var8[1];
+		evtIndexLayer = GenEVTLayerTFC.initialize(Seed+7, worldtype);
 
 		//Setup Rainfall
-		var8 = GenRainLayerTFC.initializeAllBiomeGenerators(Seed+8, worldtype);
-		genRainfall = var8[0];
-		rainfallIndexLayer = var8[1];
+		rainfallIndexLayer = GenRainLayerTFC.initialize(Seed+8, worldtype);
 
 		//Setup Stability
-		var8 = GenStabilityLayer.initializeAllBiomeGenerators(Seed+9, worldtype);
-		genStability = var8[0];
-		stabilityIndexLayer = var8[1];
+		stabilityIndexLayer = GenStabilityLayer.initialize(Seed+9, worldtype);
 	}
 
 	/**
@@ -314,7 +304,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		int var8 = par2 + par3 >> 2;
 		int var9 = var7 - var5 + 1;
 		int var10 = var8 - var6 + 1;
-		int[] var11 = this.genBiomes.getInts(var5, var6, var9, var10);
+		int[] var11 = this.biomeIndexLayer.getInts(var5, var6, var9, var10);
 
 		for (int var12 = 0; var12 < var9 * var10; ++var12)
 		{
@@ -339,7 +329,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		int k1 = zCoord + radius >> 2;
 		int l1 = j1 - l + 1;
 		int i2 = k1 - i1 + 1;
-		int[] aint = this.genBiomes.getInts(l, i1, l1, i2);
+		int[] aint = this.biomeIndexLayer.getInts(l, i1, l1, i2);
 		ChunkPosition chunkposition = null;
 		int j2 = 0;
 

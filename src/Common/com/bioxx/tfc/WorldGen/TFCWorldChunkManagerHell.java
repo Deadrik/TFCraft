@@ -8,14 +8,6 @@ import java.util.Random;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.biome.BiomeGenBase;
 
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT.GenEVTLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain.GenRainLayerTFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer1TFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer2TFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer3TFC;
-import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Tree.GenTreeLayerTFC;
-
 public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 {
 	/** The biome generator object. */
@@ -30,58 +22,6 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 		this.biomeGenerator = par1;
 		this.hellTemperature = par2;
 		this.rainfall = par3;
-
-		rockCache = new DataCache[3];
-		treeCache = new DataCache[3];
-		evtCache = new DataCache(this,0);
-		rainfallCache = new DataCache(this,0);
-		rockCache[0] = new DataCache(this,0);
-		rockCache[1] = new DataCache(this,1);
-		rockCache[2] = new DataCache(this,2);
-		treeCache[0] = new DataCache(this,0);
-		treeCache[1] = new DataCache(this,1);
-		treeCache[2] = new DataCache(this,2);
-
-		//Setup Rocks
-		GenLayerTFC[] var5 = GenRockLayer1TFC.initializeAllBiomeGenerators(seed+1, TFCWorldType.DEFAULT);
-		GenLayerTFC[] var6 = GenRockLayer2TFC.initializeAllBiomeGenerators(seed+2, TFCWorldType.DEFAULT);
-		GenLayerTFC[] var7 = GenRockLayer3TFC.initializeAllBiomeGenerators(seed+3, TFCWorldType.DEFAULT);
-		genRocks = new GenLayerTFC[3];
-		rocksIndexLayer = new GenLayerTFC[3];
-		this.genRocks[0] = var5[0];
-		this.rocksIndexLayer[0] = var5[1];
-
-		this.genRocks[1] = var6[0];
-		this.rocksIndexLayer[1] = var6[1];
-
-		this.genRocks[2] = var7[0];
-		this.rocksIndexLayer[2] = var7[1];
-
-		//Setup Trees
-		genTrees = new GenLayerTFC[3];
-		treesIndexLayer = new GenLayerTFC[3];
-
-		GenLayerTFC[] var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(seed+4, TFCWorldType.DEFAULT);
-		genTrees[0] = var8[0];
-		treesIndexLayer[0] = var8[1];
-
-		var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(seed+5, TFCWorldType.DEFAULT);
-		genTrees[1] = var8[0];
-		treesIndexLayer[1] = var8[1];
-
-		var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(seed+6, TFCWorldType.DEFAULT);
-		genTrees[2] = var8[0];
-		treesIndexLayer[2] = var8[1];
-
-		//Setup Evapotranspiration
-		var8 = GenEVTLayerTFC.initializeAllBiomeGenerators(seed+7, TFCWorldType.DEFAULT);
-		genEVT = var8[0];
-		evtIndexLayer = var8[1];
-
-		//Setup Rainfall
-		var8 = GenRainLayerTFC.initializeAllBiomeGenerators(seed+8, TFCWorldType.DEFAULT);
-		genRainfall = var8[0];
-		rainfallIndexLayer = var8[1];
 
 		this.biomesToSpawnIn = new ArrayList();
 		this.biomesToSpawnIn.add(TFCBiome.hell);
