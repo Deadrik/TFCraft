@@ -715,11 +715,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		if (getGender() == GenderEnum.MALE)
 		{
 			otherAnimal.mate(this);
+			setInLove(false);
+			resetInLove();
 			return;
 		}
 		conception = TFC_Time.getTotalTicks();
 		pregnant = true;
 		resetInLove();
+		setInLove(false);
 		otherAnimal.setInLove(false);
 		mateSizeMod = otherAnimal.getSize();
 	}

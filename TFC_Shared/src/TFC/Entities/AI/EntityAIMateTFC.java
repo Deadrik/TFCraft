@@ -58,7 +58,7 @@ public class EntityAIMateTFC extends EntityAIBase
 	@Override
 	public boolean continueExecuting ()
 	{
-		return targetMate.getEntity().isEntityAlive() && targetMate.getInLove() && matingCounter < 60 && 
+		return targetMate.getEntity().isEntityAlive() && targetMate.getInLove() && matingCounter < 60 && theAnimal.getInLove() && 
 				((targetMate.getGender() == GenderEnum.FEMALE && theAnimal.getGender() == GenderEnum.MALE) || 
 						(targetMate.getGender() == GenderEnum.MALE && theAnimal.getGender() == GenderEnum.FEMALE));
 	}
