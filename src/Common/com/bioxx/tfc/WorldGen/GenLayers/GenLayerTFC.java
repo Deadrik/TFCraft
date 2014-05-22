@@ -11,9 +11,13 @@ import net.minecraft.world.gen.layer.GenLayer;
 
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.TFCWorldType;
+import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerAddIslandTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerBiomeEdge;
 import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerBiomeTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerDeepOcean;
 import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerIslandTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerLakes;
+import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerShoreTFC;
 
 public abstract class GenLayerTFC extends GenLayer
 {
@@ -26,7 +30,6 @@ public abstract class GenLayerTFC extends GenLayer
 	public static GenLayerTFC[] initialize(long par0, TFCWorldType par2)
 	{
 		GenLayerTFC continent = genContinent(0, false);
-		GenLayerTFC continent2 = genContinent(33, false);
 		continent = new GenLayerDeepOcean(4L, continent);
 		drawImage(512, continent, "8b Continents Done Deep Ocean");
 		byte var4 = 4;
@@ -56,7 +59,7 @@ public abstract class GenLayerTFC extends GenLayer
 		}
 
 		//Create Rivers
-		GenLayerTFC riverCont = GenLayerZoomTFC.magnify(1000L, continent2, 2);
+		GenLayerTFC riverCont = GenLayerZoomTFC.magnify(1000L, continent, 2);
 		drawImage(512, riverCont, "9 ContinentsZoom");
 		riverCont = new GenLayerRiverInitTFC(100L, riverCont);
 		drawImage(512, riverCont, "10 RiverInit");
@@ -67,29 +70,16 @@ public abstract class GenLayerTFC extends GenLayer
 		riverCont = new GenLayerSmoothTFC(1000L, riverCont);
 		drawImage(512, riverCont, "13 SmoothRiver");
 
-		//Create Streams
-		GenLayerTFC streamCont = GenLayerZoomTFC.magnify(1000L, continent2, 1);
-		drawImage(512, streamCont, "Stream 0");
-		streamCont = new GenLayerRiverInitTFC(100L, streamCont);
-		drawImage(512, streamCont, "Stream 1");
-		streamCont = GenLayerZoomTFC.magnify(1000L, streamCont, 4);
-		streamCont = new GenLayerRiverTFC(1L, streamCont);
-		drawImage(512, streamCont, "Stream 2");
-		streamCont = new GenLayerSmoothTFC(1000L, streamCont);
-		drawImage(512, streamCont, "Stream 3");
-
 		GenLayerSmoothTFC smoothContinent = new GenLayerSmoothTFC(1000L, var18);
 		drawImage(512, smoothContinent, "Biome 19");
 		GenLayerRiverMixTFC riverMix = new GenLayerRiverMixTFC(100L, smoothContinent, riverCont);
 		drawImage(512, riverMix, "Biome 20");
-		GenLayerTFC finalCont = GenLayerZoomTFC.magnify(10L, riverMix, 2);
+		GenLayerTFC finalCont = new GenLayerVoronoiZoomTFC(1000L, riverMix);
 		finalCont = new GenLayerSmoothTFC(1001L, finalCont);
 		drawImage(512, finalCont, "Biome 21");
-		finalCont = new GenLayerRiverMixTFC(101L, finalCont, streamCont);
-		drawImage(512, finalCont, "Biome 22");
 		riverMix.initWorldGenSeed(par0);
 		finalCont.initWorldGenSeed(par0);
-		return new GenLayerTFC[] {riverMix, finalCont};
+		return new GenLayerTFC[]{riverMix, finalCont};
 	}
 
 	public static GenLayerTFC genContinent(long seed, boolean oceanReduction)

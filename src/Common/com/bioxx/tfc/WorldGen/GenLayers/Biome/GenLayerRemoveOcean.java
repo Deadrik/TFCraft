@@ -1,4 +1,6 @@
-package com.bioxx.tfc.WorldGen.GenLayers;
+package com.bioxx.tfc.WorldGen.GenLayers.Biome;
+
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 import net.minecraft.world.gen.layer.IntCache;
 

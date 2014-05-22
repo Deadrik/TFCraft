@@ -43,17 +43,14 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	protected DataCache[] treeCache;
 
 	//Humidity
-	protected GenLayerTFC genEVT;
 	protected GenLayerTFC evtIndexLayer;
 	protected DataCache evtCache;
 
 	//Rainfall
-	protected GenLayerTFC genRainfall;
 	protected GenLayerTFC rainfallIndexLayer;
 	protected DataCache rainfallCache;
 
 	//Stability
-	protected GenLayerTFC genStability;
 	protected GenLayerTFC stabilityIndexLayer;
 	protected DataCache stabilityCache;
 
@@ -119,6 +116,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		else
 			var4 = GenLayerTFC.initialize(Seed, TFCWorldType.DEFAULT);
 
+		this.genBiomes = var4[0];
 		this.biomeIndexLayer = var4[1];
 
 		//Setup Rocks
@@ -236,7 +234,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		if (biome == null || biome.length < par4 * par5)
 			biome = new TFCBiome[par4 * par5];
 
-		int[] var6 = this.biomeIndexLayer.getInts(par2, par3, par4, par5);
+		int[] var6 = this.genBiomes.getInts(par2, par3, par4, par5);
 		for (int var7 = 0; var7 < par4 * par5; ++var7)
 		{
 			int index = Math.max(var6[var7], 0);
@@ -281,10 +279,6 @@ public class TFCWorldChunkManager extends WorldChunkManager
 			for (int var8 = 0; var8 < par4 * par5; ++var8)
 			{
 				int id = var7[var8] != -1 ? var7[var8] : 0;
-				if(var7[var8] == -1)
-					System.out.println("var7[var8] is " + var7[var8]);
-				if(var8 == -1)
-					System.out.println("var8 is " + var8);
 				biome[var8] = TFCBiome.getBiome(id);
 			}
 			return biome;
@@ -304,7 +298,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		int var8 = par2 + par3 >> 2;
 		int var9 = var7 - var5 + 1;
 		int var10 = var8 - var6 + 1;
-		int[] var11 = this.biomeIndexLayer.getInts(var5, var6, var9, var10);
+		int[] var11 = this.genBiomes.getInts(var5, var6, var9, var10);
 
 		for (int var12 = 0; var12 < var9 * var10; ++var12)
 		{
@@ -329,7 +323,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		int k1 = zCoord + radius >> 2;
 		int l1 = j1 - l + 1;
 		int i2 = k1 - i1 + 1;
-		int[] aint = this.biomeIndexLayer.getInts(l, i1, l1, i2);
+		int[] aint = this.genBiomes.getInts(l, i1, l1, i2);
 		ChunkPosition chunkposition = null;
 		int j2 = 0;
 
@@ -364,6 +358,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		this.treeCache[2].cleanupCache();
 		this.evtCache.cleanupCache();
 		this.rainfallCache.cleanupCache();
+		this.stabilityCache.cleanupCache();
 	}
 
 	public DataLayer getDataLayerAt(DataCache cache, GenLayerTFC indexLayers, int par1, int par2, int index)
