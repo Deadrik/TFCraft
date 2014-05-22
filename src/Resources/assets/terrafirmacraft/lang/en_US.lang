@@ -79,12 +79,12 @@ achievement.achPokeCreeper.desc=Poke it with a stick
 #= Food =
 #========
 item.MealGeneric.name=Meal
-item.meal.terrible.name=Terrible
-item.meal.poor.name=Poor
-item.meal.decent.name=Decent
-item.meal.good.name=Good
-item.meal.great.name=Great
-item.meal.fantastic.name=Fantastic
+item.meal.terrible=Terrible
+item.meal.poor=Poor
+item.meal.decent=Decent
+item.meal.good=Good
+item.meal.great=Great
+item.meal.fantastic=Fantastic
 
 #== Grains ==
 item.Barley Bread.name=Barley Bread

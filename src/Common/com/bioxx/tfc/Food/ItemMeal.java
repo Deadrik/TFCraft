@@ -127,7 +127,7 @@ public class ItemMeal extends ItemTerra implements IFood
 	private String localize(String[] in)
 	{
 		int ordinal = Integer.parseInt(in[1]);
-		return ItemFoodTFC.getFoodGroupColor(EnumFoodGroup.values()[ordinal]) + StatCollector.translateToLocal(in[0]);
+		return ItemFoodTFC.getFoodGroupColor(EnumFoodGroup.values()[ordinal]) + StatCollector.translateToLocal(in[0] + ".name");
 	}
 
 	@Override
