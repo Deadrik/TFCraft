@@ -606,25 +606,50 @@ public class Recipes
 
 	private static void registerOreDict()
 	{
-		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks));
-		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks2));
+		//Planks
+		for (int i = 0; i < Global.WOOD_ALL.length; i++)
+		{
+			int l = i % 16;
+			if (i == l)
+				OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks, 1, i));
+			else if (i / 16 == 1)
+				OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks2, 1, l));
+		}
+		
+		//Fuel
 		OreDictionary.registerOre("fuelCoal", new ItemStack(Items.coal, 1, 0));
 		OreDictionary.registerOre("fuelCoal", new ItemStack(TFCItems.Coal, 1, 0));
 		OreDictionary.registerOre("fuelCharcoal", new ItemStack(Items.coal, 1, 1));
 		OreDictionary.registerOre("fuelCharcoal", new ItemStack(TFCItems.Coal, 1, 1));
+
+		//Stone
+		for (int j = 0; j < Global.STONE_IGEX.length; j++)
+			OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneIgEx, 1, j));
+		for (int j = 0; j < Global.STONE_IGIN.length; j++)
+			OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneIgIn, 1, j));
+		for (int j = 0; j < Global.STONE_MM.length; j++)
+			OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneMM, 1, j));
+		for (int j = 0; j < Global.STONE_SED.length; j++)
+			OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneSed, 1, j));
+
+		//Cobblestone
+		for (int j = 0; j < Global.STONE_IGEX.length; j++)
+			OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneIgExCobble, 1, j));
+		for (int j = 0; j < Global.STONE_IGIN.length; j++)
+			OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneIgInCobble, 1, j));
+		for (int j = 0; j < Global.STONE_MM.length; j++)
+			OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneMMCobble, 1, j));
+		for (int j = 0; j < Global.STONE_SED.length; j++)
+			OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneSedCobble, 1, j));
+
+		//Crafting Table
+		OreDictionary.registerOre("craftingTableWood", new ItemStack(TFCBlocks.Workbench));
+		OreDictionary.registerOre("craftingTableWood", new ItemStack(Blocks.crafting_table));
+
+		//Miscellaneous
 		OreDictionary.registerOre("stickWood", new ItemStack(TFCItems.Stick));
 		OreDictionary.registerOre("lumpClay", new ItemStack(Items.clay_ball));
 		OreDictionary.registerOre("lumpClay", new ItemStack(TFCItems.ClayBall, 1, 0));
-		OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneIgEx));
-		OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneIgIn));
-		OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneMM));
-		OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneSed));
-		OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneIgEx));
-		OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneIgIn));
-		OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneMM));
-		OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneSed));
-		OreDictionary.registerOre("craftingTableWood", new ItemStack(TFCBlocks.Workbench));
-		OreDictionary.registerOre("craftingTableWood", new ItemStack(Blocks.crafting_table));
 	}
 
 	private static ItemStack checkMelted(ItemStack is)
