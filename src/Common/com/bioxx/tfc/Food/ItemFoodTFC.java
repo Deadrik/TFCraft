@@ -40,12 +40,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	 * decayTimer
 	 */
 
-	public int foodID;
-
 	private EnumFoodGroup foodgroup;
 
+	public int foodID;
 	public float decayRate = 1.0f;
-
 	public boolean isEdible = true;
 	public boolean canBeUsedRaw = true;
 
@@ -66,6 +64,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		this(foodid, fg);
 		isEdible = edible;
 	}
+
 	public ItemFoodTFC(int foodid, EnumFoodGroup fg, boolean edible, boolean usable)
 	{
 		this(foodid, fg, edible);
@@ -81,11 +80,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public float getDecayRate()
 	{
-		return decayRate*(TFC_Time.getYearRatio(96));
+		return decayRate * (TFC_Time.getYearRatio(96));
 	}
 
 	@Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
+	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
 		list.add(createTag(new ItemStack(this, 1), Global.FOOD_MAX_WEIGHT));
 	}
@@ -106,21 +105,16 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	}
 
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-
 		arraylist.add(getFoodGroupName(this.getFoodGroup()));
-
 		addHeatInformation(is, arraylist);
+
 		if (is.hasTagCompound())
-		{
 			addFoodInformation(is, player, arraylist);
-		}
 		else
-		{
 			arraylist.add(StatCollector.translateToLocal("gui.badnbt"));
-		}
 	}
 
 	public static void addFoodInformation(ItemStack is, EntityPlayer player, List arraylist)
@@ -215,7 +209,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	public boolean isHot(ItemStack is)
 	{
-		if(TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is) *0.8)
+		if(TFC_ItemHeat.GetTemp(is) > TFC_ItemHeat.IsCookable(is) * 0.8)
 			return true;
 		else
 			return false;
@@ -228,7 +222,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			nbt = new NBTTagCompound();
 		nbt.setFloat("foodWeight", weight);
 		nbt.setFloat("foodDecay", -24);
-		nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours()+1);
+		nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
 
 		is.setTagCompound(nbt);
 		return is;
@@ -264,46 +258,47 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack)
+	public int getMaxItemUseDuration(ItemStack is)
 	{
 		return 32;
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack par1ItemStack)
+	public EnumAction getItemUseAction(ItemStack is)
 	{
 		return EnumAction.eat;
 	}
 
 	@Override
-	public int getDisplayDamage(ItemStack stack)
+	public int getDisplayDamage(ItemStack is)
 	{
-		float decay = getFoodDecay(stack);
-		float weight = getFoodWeight(stack);
-		int percent = (int)((decay/weight)*100);
+		float decay = getFoodDecay(is);
+		float weight = getFoodWeight(is);
+		int percent = (int)((decay / weight) * 100);
 		percent = percent > 0 ? percent < 100 ? percent : 100 : 0;
 		return percent;
 	}
 
 	@Override
-	public boolean isDamaged(ItemStack stack)
+	public boolean isDamaged(ItemStack is)
 	{
 		return true;
 	}
 
 	@Override
-	public int getMaxDamage(ItemStack stack)
+	public int getMaxDamage(ItemStack is)
 	{
 		return 100;
 	}
 
 	@Override
-	public EnumSize getSize(ItemStack is) 
+	public EnumSize getSize(ItemStack is)
 	{
 		return size;
 	}
+
 	@Override
-	public EnumWeight getWeight(ItemStack is) 
+	public EnumWeight getWeight(ItemStack is)
 	{
 		if(is!= null && is.getTagCompound() != null && is.getTagCompound().hasKey("foodWeight"))
 			return EnumWeight.HEAVY;
@@ -328,18 +323,20 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	}
 
 	@Override
-	public ItemStack onDecayed(ItemStack is, World world, int i, int j, int k)
+	public ItemStack onDecayed(ItemStack is, World world, int x, int y, int z)
 	{
 		return null;
 	}
 
 	@Override
-	public boolean isEdible() {
+	public boolean isEdible()
+	{
 		return isEdible;
 	}
 
 	@Override
-	public boolean isUsable() {
+	public boolean isUsable()
+	{
 		return canBeUsedRaw;
 	}
 }

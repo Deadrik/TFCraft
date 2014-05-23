@@ -1925,6 +1925,8 @@ tile.Flowers.flower_oxeye_daisy.name=Daisy
 #=======
 #= GUI =
 #=======
+gui.badnbt=BAD Info
+
 #== Anvil GUI ==
 gui.Anvil.Plans=Plans
 gui.Anvil.Weld=Weld

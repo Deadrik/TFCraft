@@ -26,7 +26,9 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
+import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.TileEntities.TEBerryBush;
+import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -64,22 +66,22 @@ public class BlockBerryBush extends BlockTerraContainer
 	/**
 	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
 	 */
-	public void getSubBlocks(Item item, CreativeTabs par2CreativeTabs, List list)
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
 		for(int i = 0; i < MetaNames.length; i++)
 			list.add(new ItemStack(item, 1, i));
 	}
 
 	@Override
-	public void setBlockBoundsForItemRender() 
+	public void setBlockBoundsForItemRender()
 	{
 		setBlockBounds(0, 0, 0, 1, 1, 1);
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k) 
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z)
 	{
-		int _meta = access.getBlockMetadata(i, j, k);
+		int _meta = access.getBlockMetadata(x, y, z);
 
 		float minX = 0.1f;
 		float minZ = 0.1f;
@@ -87,129 +89,117 @@ public class BlockBerryBush extends BlockTerraContainer
 		float maxZ = 0.9f;
 		float maxY = 1f;
 
-		if(isSamePlant(access, i-1, j, k, _meta)) {
-			minX = 0;
-		}
-		if(isSamePlant(access, i+1, j, k, _meta)) {
-			maxX = 1;
-		}
-		if(isSamePlant(access, i, j, k-1, _meta)) {
-			minZ = 0;
-		}
-		if(isSamePlant(access, i, j, k+1, _meta)) {
-			maxZ = 1;
-		}
-		if(isSamePlant(access, i, j+1, k, _meta)) {
-			maxY = 1;
-		}
+		if(isSamePlant(access, x - 1, y, z, _meta)) minX = 0;
+		if(isSamePlant(access, x + 1, y, z, _meta)) maxX = 1;
+		if(isSamePlant(access, x, y, z - 1, _meta)) minZ = 0;
+		if(isSamePlant(access, x, y, z + 1, _meta)) maxZ = 1;
+		if(isSamePlant(access, x, y + 1, z, _meta)) maxY = 1;
 
 		switch(_meta)
 		{
-		case 0://Wintergreen
-		{
-			maxY = 0.2f;
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		case 1://Blueberries	
-		{
-			maxY = 0.85f;
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		case 2://Raspberries	
-		{
-			maxY = 0.85f;
-			if(isSamePlant(access, i, j+1, k, _meta)) {
-				maxY = 1;
+			case 0://Wintergreen
+			{
+				maxY = 0.2f;
+				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+				return;
 			}
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		case 3://Strawberries
-		{
-			maxY = 0.2f;
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		case 4://Blackberries	
-		{
-			maxY = 0.85f;
-			if(isSamePlant(access, i, j+1, k, _meta)) {
-				maxY = 1;
+			case 1://Blueberries
+			{
+				maxY = 0.85f;
+				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+				return;
 			}
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		case 5://Bunchberries	
-		{
-			maxY = 0.2f;
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		case 6://Cranberries
-		{
-			maxY = 0.6f;
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		case 7://Snowberries	
-		{
-			maxY = 0.2f;
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		case 8://Elderberries	
-		{
-			maxY = 0.85f;
-			if(isSamePlant(access, i, j+1, k, _meta))
-				maxY = 1;
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		case 9://Gooseberries	
-		{
-			maxY = 0.75f;
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		case 10://Cloudberries	
-		{
-			maxY = 0.35f;
-			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-			return;
-		}
-		default:
-			setBlockBounds(minX, 0, minZ, maxX, 1f, maxZ);
-			return;
+			case 2://Raspberries
+			{
+				maxY = 0.85f;
+				if(isSamePlant(access, x, y + 1, z, _meta))
+					maxY = 1;
+				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+				return;
+			}
+			case 3://Strawberries
+			{
+				maxY = 0.2f;
+				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+				return;
+			}
+			case 4://Blackberries
+			{
+				maxY = 0.85f;
+				if(isSamePlant(access, x, y + 1, z, _meta))
+					maxY = 1;
+				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+				return;
+			}
+			case 5://Bunchberries
+			{
+				maxY = 0.2f;
+				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+				return;
+			}
+			case 6://Cranberries
+			{
+				maxY = 0.6f;
+				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+				return;
+			}
+			case 7://Snowberries
+			{
+				maxY = 0.2f;
+				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+				return;
+			}
+			case 8://Elderberries
+			{
+				maxY = 0.85f;
+				if(isSamePlant(access, x, y + 1, z, _meta))
+					maxY = 1;
+				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+				return;
+			}
+			case 9://Gooseberries
+			{
+				maxY = 0.75f;
+				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+				return;
+			}
+			case 10://Cloudberries
+			{
+				maxY = 0.35f;
+				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+				return;
+			}
+			default:
+			{
+				setBlockBounds(minX, 0, minZ, maxX, 1f, maxZ);
+				return;
+			}
 		}
 	}
 
-	private boolean isSamePlant(IBlockAccess access, int i, int j, int k, int meta)
+	private boolean isSamePlant(IBlockAccess bAccess, int x, int y, int z, int meta)
 	{
-		if(access.getBlock(i, j, k) == this && access.getBlockMetadata(i, j, k) == meta)
+		if(bAccess.getBlock(x, y, z) == this && bAccess.getBlockMetadata(x, y, z) == meta)
 			return true;
 		return false;
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(i, j, k);
+			int meta = world.getBlockMetadata(x, y, z);
 			FloraManager manager = FloraManager.getInstance();
-			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(world.getBlockMetadata(i, j, k)));
+			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(world.getBlockMetadata(x, y, z)));
 
-			TEBerryBush te = (TEBerryBush) world.getTileEntity(i, j, k);
+			TEBerryBush te = (TEBerryBush) world.getTileEntity(x, y, z);
 			if(te != null && te.hasFruit)
 			{
 				te.hasFruit = false;
 				te.dayHarvested = (int) TFC_Time.getTotalDays();
-				world.markBlockForUpdate(i, j, k);
-				//te.broadcastPacketInRange(te.createUpdatePacket());
-				dropBlockAsItem(world, i, j, k, fi.getOutput());
-				//dropBlockAsItem_do(world, i, j, k, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(3+world.rand.nextFloat()*5,10)));
+				world.markBlockForUpdate(x, y, z);
+				dropBlockAsItem(world, x, y, z, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(3 + world.rand.nextFloat() * 5, 10)));
 				return true;
 			}
 		}
@@ -217,35 +207,35 @@ public class BlockBerryBush extends BlockTerraContainer
 	}
 
 	@Override
-	public void updateTick(World world, int i, int j, int k, Random rand)
+	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
-		lifeCycle(world, i, j, k);
+		lifeCycle(world, x, y, z);
 	}
 
-	private void lifeCycle(World world, int i, int j, int k) {
+	private void lifeCycle(World world, int x, int y, int z)
+	{
 		if(!world.isRemote)
 		{
-			if(!canBlockStay(world, i, j, k))
+			if(!canBlockStay(world, x, y, z))
 			{
-				this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
-				world.setBlockToAir(i, j, k);
+				this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+				world.setBlockToAir(x, y, z);
 				return;
 			}
 
-			TEBerryBush te = (TEBerryBush) world.getTileEntity(i, j, k);
+			TEBerryBush te = (TEBerryBush) world.getTileEntity(x, y, z);
 			if(te != null)
 			{
-				FloraIndex _fi = FloraManager.getInstance().findMatchingIndex(getType(world.getBlockMetadata(i, j, k)));
-				float _temp = TFC_Climate.getHeightAdjustedTemp(i, j, k);
+				FloraIndex _fi = FloraManager.getInstance().findMatchingIndex(getType(world.getBlockMetadata(x, y, z)));
+				float _temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
 
 				if(_temp >= _fi.minTemp && _temp < _fi.maxTemp)
 				{
-					if(_fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(k)) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > 0)
+					if(_fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > 0)
 					{
 						te.hasFruit = true;
 						te.dayFruited = (int) TFC_Time.getTotalDays();
-						world.markBlockForUpdate(i, j, k);
-						//te.broadcastPacketInRange(te.createUpdatePacket());
+						world.markBlockForUpdate(x, y, z);
 					}
 				}
 				else if(_temp < _fi.minTemp - 5 && _temp > _fi.maxTemp + 5)
@@ -253,22 +243,20 @@ public class BlockBerryBush extends BlockTerraContainer
 					if(te.hasFruit)
 					{
 						te.hasFruit = false;
-						world.markBlockForUpdate(i, j, k);
-						//te.broadcastPacketInRange(te.createUpdatePacket());
+						world.markBlockForUpdate(x, y, z);
 					}
 				}
 
 				if(te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayFruited) > _fi.fruitHangTime)
 				{
 					te.hasFruit = false;
-					world.markBlockForUpdate(i, j, k);
-					//te.broadcastPacketInRange(te.createUpdatePacket());
+					world.markBlockForUpdate(x, y, z);
 				}
 			}
 		}
 		else
 		{
-			world.getTileEntity(i, j, k).validate();
+			world.getTileEntity(x, y, z).validate();
 		}
 	}
 
@@ -278,7 +266,7 @@ public class BlockBerryBush extends BlockTerraContainer
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int i, int j, int k)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		return null;
 	}
@@ -297,22 +285,22 @@ public class BlockBerryBush extends BlockTerraContainer
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void registerBlockIcons(IIconRegister par1IconRegister)
+	public void registerBlockIcons(IIconRegister register)
 	{
 		for (int i = 0; i < icons.length; ++i)
 		{
-			icons[i] = par1IconRegister.registerIcon(Reference.ModID + ":" + "plants/"+MetaNames[i]);
-			iconsBerries[i] = par1IconRegister.registerIcon(Reference.ModID + ":" + "plants/"+MetaNames[i]+" Berry");
+			icons[i] = register.registerIcon(Reference.ModID + ":" + "plants/" + MetaNames[i]);
+			iconsBerries[i] = register.registerIcon(Reference.ModID + ":" + "plants/" + MetaNames[i] + " Berry");
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public IIcon getIcon(IBlockAccess access, int i, int j, int k, int side)
+	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side)
 	{
-		int meta = access.getBlockMetadata(i, j, k);
+		int meta = access.getBlockMetadata(x, y, z);
 
-		TEBerryBush te = (TEBerryBush) access.getTileEntity(i, j, k);
+		TEBerryBush te = (TEBerryBush) access.getTileEntity(x, y, z);
 		if(te != null && te.hasFruit)
 			return iconsBerries[meta];
 
@@ -326,43 +314,43 @@ public class BlockBerryBush extends BlockTerraContainer
 	}
 
 	@Override
-	public boolean canBlockStay(World world, int i, int j, int k)
+	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(i, j, k);
-		return (world.getFullBlockLightValue(i, j, k) >= 8 || world.canBlockSeeTheSky(i, j, k)) && 
-				(this.canThisPlantGrowOnThisBlock(world.getBlock(i, j - 1, k)) || 
-						(isSamePlant(world, i, j-1, k, world.getBlockMetadata(i, j, k)) && (meta == 2 || meta == 4 || meta == 8)));
+		int meta = world.getBlockMetadata(x, y, z);
+		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) && 
+				(this.canThisPlantGrowOnThisBlock(world.getBlock(x, y - 1, z)) || 
+						(isSamePlant(world, x, y - 1, z, world.getBlockMetadata(x, y, z)) && (meta == 2 || meta == 4 || meta == 8)));
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack is) 
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack is)
 	{
-		super.onBlockPlacedBy(world, i, j, k, entityliving, is);
-		if(!canBlockStay(world, i, j, k))
+		super.onBlockPlacedBy(world, x, y, z, entityliving, is);
+		if(!canBlockStay(world, x, y, z))
 		{
-			onNeighborBlockChange(world, i, j, k, world.getBlock(i, j, k));
+			onNeighborBlockChange(world, x, y, z, world.getBlock(x, y, z));
 		}
 		else
 		{
-			TEBerryBush te = (TEBerryBush)world.getTileEntity(i, j, k);
+			TEBerryBush te = (TEBerryBush)world.getTileEntity(x, y, z);
 			te.dayHarvested = (int)TFC_Time.getTotalDays();
 		}
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block par5)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
-		super.onNeighborBlockChange(world, i, j, k, par5);
-		lifeCycle(world, i, j, k);
+		super.onNeighborBlockChange(world, x, y, z, block);
+		lifeCycle(world, x, y, z);
 	}
 
-	protected boolean canThisPlantGrowOnThisBlock(Block id)
+	protected boolean canThisPlantGrowOnThisBlock(Block block)
 	{
-		return TFC_Core.isSoil(id);
+		return TFC_Core.isSoil(block);
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(int i1, Random rand, int i2)
 	{
 		return Item.getItemFromBlock(this);
 	}
@@ -374,28 +362,28 @@ public class BlockBerryBush extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createNewTileEntity(World i, int meta)
 	{
 		return new TEBerryBush();
 	}
 
 	@Override
-	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public boolean getBlocksMovement(IBlockAccess bAccess, int x, int y, int z)
 	{
 		return true;
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
-		int _meta = world.getBlockMetadata(i, j, k);
+		int _meta = world.getBlockMetadata(x, y, z);
 		if(_meta == Blueberry ||_meta == Raspberry || _meta == Blackberry || _meta == Elderberry || _meta == Gooseberry)
 		{
 			entity.motionX *= 0.7D;
 			entity.motionZ *= 0.7D;
 		}
 
-		if(_meta == Raspberry || _meta == Blackberry) 
+		if(_meta == Raspberry || _meta == Blackberry)
 		{
 			if(entity instanceof EntityLivingBase)
 				entity.attackEntityFrom(DamageSource.cactus, 5);
