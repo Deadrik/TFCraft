@@ -58,11 +58,11 @@ public class ContainerMold extends ContainerTFC
 			ItemStack itemstack2 = this.containerInv.getStackInSlotOnClosing(0);
 			ItemStack itemstack3 = this.containerInv.getStackInSlotOnClosing(1);
 			if (itemstack != null)
-				player.dropItem(itemstack.getItem(), itemstack.stackSize);
+				player.entityDropItem(itemstack, 0);
 			if (itemstack2 != null)
-				player.dropItem(itemstack2.getItem(), itemstack2.stackSize);
+				player.entityDropItem(itemstack2, 0);
 			if (itemstack3 != null)
-				player.dropItem(itemstack3.getItem(), itemstack3.stackSize);
+				player.entityDropItem(itemstack3, 0);
 		}
 	}
 

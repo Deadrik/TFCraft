@@ -52,7 +52,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 			ItemStack itemstack2 = this.containerInv.getStackInSlotOnClosing(0);
 
 			if (itemstack2 != null)
-				player.dropItem(itemstack2.getItem(), itemstack2.stackSize);
+				player.entityDropItem(itemstack2, 0);
 		}
 	}
 

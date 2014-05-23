@@ -68,17 +68,17 @@ public class ContainerWorkbench extends ContainerTFC
 	 * Callback for when the crafting gui is closed.
 	 */
 	@Override
-	public void onContainerClosed(EntityPlayer par1EntityPlayer)
+	public void onContainerClosed(EntityPlayer player)
 	{
-		super.onContainerClosed(par1EntityPlayer);
+		super.onContainerClosed(player);
 
 		if (!this.worldObj.isRemote)
 		{
-			for (int var2 = 0; var2 < 9; ++var2)
+			for (int i = 0; i < 9; ++i)
 			{
-				ItemStack var3 = this.craftMatrix.getStackInSlotOnClosing(var2);
-				if (var3 != null)
-					par1EntityPlayer.dropItem(var3.getItem(), var3.stackSize);
+				ItemStack is = this.craftMatrix.getStackInSlotOnClosing(i);
+				if (is != null)
+					player.entityDropItem(is, 0);
 			}
 		}
 	}

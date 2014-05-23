@@ -51,7 +51,7 @@ public class ContainerSpecialCrafting extends ContainerTFC
 		{
 			ItemStack is = this.craftResult.getStackInSlotOnClosing(0);
 			if (is != null)
-				player.dropItem(is.getItem(), is.stackSize);
+				player.entityDropItem(is, 0);
 		}
 	}
 
