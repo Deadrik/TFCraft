@@ -114,32 +114,28 @@ public class SlotCraftingWorkbench extends Slot
 	/**
 	 * Called when the player picks up an item from an inventory slot
 	 */
-	public void onPickupFromSlot(ItemStack par1ItemStack)
+	public void onPickupFromSlot(ItemStack is)
 	{
-		this.func_48434_c(par1ItemStack);
+		this.func_48434_c(is);
 
-		for (int var2 = 0; var2 < this.craftMatrix.getSizeInventory(); ++var2)
+		for (int slot = 0; slot < this.craftMatrix.getSizeInventory(); ++slot)
 		{
-			ItemStack var3 = this.craftMatrix.getStackInSlot(var2);
+			ItemStack isSlot = this.craftMatrix.getStackInSlot(slot);
 
-			if (var3 != null)
+			if (isSlot != null)
 			{
-				this.craftMatrix.decrStackSize(var2, 1);
+				this.craftMatrix.decrStackSize(slot, 1);
 
-				if (var3.getItem().hasContainerItem(var3))
+				if (isSlot.getItem().hasContainerItem(isSlot))
 				{
-					ItemStack var4 = new ItemStack(var3.getItem().getContainerItem());
+					ItemStack isNew = new ItemStack(isSlot.getItem().getContainerItem());
 
-					if (!var3.getItem().doesContainerItemLeaveCraftingGrid(var3) || !this.thePlayer.inventory.addItemStackToInventory(var4))
+					if (!isSlot.getItem().doesContainerItemLeaveCraftingGrid(isSlot) || !this.thePlayer.inventory.addItemStackToInventory(isNew))
 					{
-						if (this.craftMatrix.getStackInSlot(var2) == null)
-						{
-							this.craftMatrix.setInventorySlotContents(var2, var4);
-						}
+						if (this.craftMatrix.getStackInSlot(slot) == null)
+							this.craftMatrix.setInventorySlotContents(slot, isNew);
 						else
-						{
-							this.thePlayer.dropItem(var4.getItem(), var4.stackSize);
-						}
+							this.thePlayer.entityDropItem(isNew, 0);
 					}
 				}
 			}

@@ -3,11 +3,6 @@ package com.bioxx.tfc.Containers.Slots;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Containers.ContainerSpecialCrafting;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.GUI.GuiKnapping;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -15,6 +10,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Containers.ContainerSpecialCrafting;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.GUI.GuiKnapping;
 
 public class SlotCraftingMetal extends Slot
 {
@@ -100,7 +100,7 @@ public class SlotCraftingMetal extends Slot
 						if (craftMatrix.getStackInSlot(i) == null)
 							craftMatrix.setInventorySlotContents(i, itemstack2);
 						else
-							thePlayer.dropItem(itemstack2.getItem(), itemstack2.stackSize);
+							thePlayer.entityDropItem(itemstack2, 0);
 					}
 				}
 			}
