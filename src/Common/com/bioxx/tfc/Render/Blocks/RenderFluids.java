@@ -1,242 +1,332 @@
 package com.bioxx.tfc.Render.Blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fluids.FluidRegistry;
 
-public class RenderFluids
+import com.bioxx.tfc.Blocks.Liquids.BlockCustomLiquid;
+
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
+public class RenderFluids implements ISimpleBlockRenderingHandler
 {
-	public static boolean render(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
-	{
-		Tessellator tessellator = Tessellator.instance;
-		int l = par1Block.colorMultiplier(renderblocks.blockAccess, par2, par3, par4);
-		float f = (l >> 16 & 255) / 255.0F;
-		float f1 = (l >> 8 & 255) / 255.0F;
-		float f2 = (l & 255) / 255.0F;
-		boolean flag = par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3 + 1, par4, 1);
-		boolean flag1 = par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3 - 1, par4, 0);
-		boolean[] aboolean = new boolean[] {
-				par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3, par4 - 1, 2),
-				par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3, par4 + 1, 3),
-				par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2 - 1, par3, par4, 4),
-				par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2 + 1, par3, par4, 5)};
+	static final float LIGHT_Y_NEG = 0.5F;
+	static final float LIGHT_Y_POS = 1.0F;
+	static final float LIGHT_XZ_NEG = 0.8F;
+	static final float LIGHT_XZ_POS = 0.6F;
+	static final double RENDER_OFFSET = 0.0010000000474974513D;
 
-		if (!flag && !flag1 && !aboolean[0] && !aboolean[1] && !aboolean[2] && !aboolean[3])
+	public float getFluidHeightAverage(float[] flow)
+	{
+		float total = 0;
+		int count = 0;
+
+		float end = 0;
+
+		for (int i = 0; i < flow.length; i++)
+		{
+			if (flow[i] >= 0.875F && end != 1F)
+			{
+				end = flow[i];
+			}
+
+			if (flow[i] >= 0)
+			{
+				total += flow[i];
+				count++;
+			}
+		}
+
+		if (end == 0)
+			end = total / count;
+
+		return end;
+	}
+
+	public float getFluidHeightForRender(IBlockAccess world, int x, int y, int z, BlockCustomLiquid block)
+	{
+		if (world.getBlock(x, y, z) == block)
+		{
+			if (world.getBlock(x, y - block.getDensityDir(), z).getMaterial().isLiquid())
+			{
+				return 1;
+			}
+
+			if (world.getBlockMetadata(x, y, z) == block.getMaxRenderHeightMeta())
+			{
+				return 0.875F;
+			}
+		}
+		return !world.getBlock(x, y, z).getMaterial().isSolid() && world.getBlock(x, y - block.getDensityDir(), z) == block ? 1 : block.getQuantaPercentage(world, x, y, z) * 0.875F;
+	}
+
+	@Override
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer){}
+
+	@Override
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
+	{
+		if (!(block instanceof BlockCustomLiquid))
+		{
+			return false;
+		}
+
+		Tessellator tessellator = Tessellator.instance;
+		int color = block.colorMultiplier(world, x, y, z);
+		float red = (color >> 16 & 255) / 255.0F;
+		float green = (color >> 8 & 255) / 255.0F;
+		float blue = (color & 255) / 255.0F;
+
+		BlockCustomLiquid theFluid = (BlockCustomLiquid) block;
+		int bMeta = world.getBlockMetadata(x, y, z);
+
+		boolean renderTop = !(world.getBlock(x, y - theFluid.getDensityDir(), z) instanceof BlockCustomLiquid);
+
+		boolean renderBottom = block.shouldSideBeRendered(world, x, y + theFluid.getDensityDir(), z, 0);
+
+		boolean[] renderSides = new boolean[]
+				{
+				block.shouldSideBeRendered(world, x, y, z-1, 2), 
+				block.shouldSideBeRendered(world, x, y, z+1, 3),
+				block.shouldSideBeRendered(world, x-1, y, z, 4), 
+				block.shouldSideBeRendered(world, x+1, y, z, 5)
+				};
+
+		if (!renderTop && !renderBottom && !renderSides[0] && !renderSides[1] && !renderSides[2] && !renderSides[3])
 		{
 			return false;
 		}
 		else
 		{
-			boolean flag2 = false;
-			float f3 = 0.5F;
-			float f4 = 1.0F;
-			float f5 = 0.8F;
-			float f6 = 0.6F;
-			double d0 = 0.0D;
-			double d1 = 1.0D;
-			Material material = par1Block.getMaterial();
-			int i1 = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
-			double d2 = (double)renderblocks.getLiquidHeight(par2, par3, par4, material);
-			double d3 = (double)renderblocks.getLiquidHeight(par2, par3, par4 + 1, material);
-			double d4 = (double)renderblocks.getLiquidHeight(par2 + 1, par3, par4 + 1, material);
-			double d5 = (double)renderblocks.getLiquidHeight(par2 + 1, par3, par4, material);
-			double d6 = 0.0010000000474974513D;
-			float f7;
+			boolean rendered = false;
+			double heightNW, heightSW, heightSE, heightNE;
+			float flow11 = getFluidHeightForRender(world, x, y, z, theFluid);
 
-			if (renderblocks.renderAllFaces || flag)
+			if (flow11 != 1)
 			{
-				flag2 = true;
-				IIcon icon = renderblocks.getBlockIconFromSideAndMetadata(par1Block, 1, i1);
-				float f8 = (float)BlockLiquid.getFlowDirection(renderblocks.blockAccess, par2, par3, par4, material);
+				float flow00 = getFluidHeightForRender(world, x - 1, y, z - 1, theFluid);
+				float flow01 = getFluidHeightForRender(world, x - 1, y, z,     theFluid);
+				float flow02 = getFluidHeightForRender(world, x - 1, y, z + 1, theFluid);
+				float flow10 = getFluidHeightForRender(world, x,     y, z - 1, theFluid);
+				float flow12 = getFluidHeightForRender(world, x,     y, z + 1, theFluid);
+				float flow20 = getFluidHeightForRender(world, x + 1, y, z - 1, theFluid);
+				float flow21 = getFluidHeightForRender(world, x + 1, y, z,     theFluid);
+				float flow22 = getFluidHeightForRender(world, x + 1, y, z + 1, theFluid);
 
-				if (f8 > -999.0F)
-					icon = renderblocks.getBlockIconFromSideAndMetadata(par1Block, 2, i1);
+				heightNW = getFluidHeightAverage(new float[]{ flow00, flow01, flow10, flow11 });
+				heightSW = getFluidHeightAverage(new float[]{ flow01, flow02, flow12, flow11 });
+				heightSE = getFluidHeightAverage(new float[]{ flow12, flow21, flow22, flow11 });
+				heightNE = getFluidHeightAverage(new float[]{ flow10, flow20, flow21, flow11 });
+			}
+			else
+			{
+				heightNW = flow11;
+				heightSW = flow11;
+				heightSE = flow11;
+				heightNE = flow11;
+			}
 
-				d2 -= d6;
-				d3 -= d6;
-				d4 -= d6;
-				d5 -= d6;
-				double d7;
-				double d8;
-				double d9;
-				double d10;
-				double d11;
-				double d12;
-				double d13;
-				double d14;
+			boolean rises = theFluid.getDensityDir() == 1;
+			if (renderer.renderAllFaces || renderTop)
+			{
+				rendered = true;
+				IIcon iconStill = getIcon(block.getIcon(1, bMeta));
+				float flowDir = (float) BlockFluidBase.getFlowDirection(world, x, y, z);
 
-				if (f8 < -999.0F)
+				if (flowDir > -999.0F)
 				{
-					d8 = icon.getInterpolatedU(0.0D);
-					d12 = icon.getInterpolatedV(0.0D);
-					d7 = d8;
-					d11 = icon.getInterpolatedV(16.0D);
-					d10 = icon.getInterpolatedU(16.0D);
-					d14 = d11;
-					d9 = d10;
-					d13 = d12;
+					iconStill = getIcon(block.getIcon(2, bMeta));
+				}
+
+				heightNW -= RENDER_OFFSET;
+				heightSW -= RENDER_OFFSET;
+				heightSE -= RENDER_OFFSET;
+				heightNE -= RENDER_OFFSET;
+
+				double u1, u2, u3, u4, v1, v2, v3, v4;
+
+				if (flowDir < -999.0F)
+				{
+					u2 = iconStill.getInterpolatedU(0.0D);
+					v2 = iconStill.getInterpolatedV(0.0D);
+					u1 = u2;
+					v1 = iconStill.getInterpolatedV(16.0D);
+					u4 = iconStill.getInterpolatedU(16.0D);
+					v4 = v1;
+					u3 = u4;
+					v3 = v2;
 				}
 				else
 				{
-					f7 = MathHelper.sin(f8) * 0.25F;
-					float f9 = MathHelper.cos(f8) * 0.25F;
-					d8 = icon.getInterpolatedU(8.0F + (-f9 - f7) * 16.0F);
-					d12 = icon.getInterpolatedV(8.0F + (-f9 + f7) * 16.0F);
-					d7 = icon.getInterpolatedU(8.0F + (-f9 + f7) * 16.0F);
-					d11 = icon.getInterpolatedV(8.0F + (f9 + f7) * 16.0F);
-					d10 = icon.getInterpolatedU(8.0F + (f9 + f7) * 16.0F);
-					d14 = icon.getInterpolatedV(8.0F + (f9 - f7) * 16.0F);
-					d9 = icon.getInterpolatedU(8.0F + (f9 - f7) * 16.0F);
-					d13 = icon.getInterpolatedV(8.0F + (-f9 - f7) * 16.0F);
+					float xFlow = MathHelper.sin(flowDir) * 0.25F;
+					float zFlow = MathHelper.cos(flowDir) * 0.25F;
+					u2 = iconStill.getInterpolatedU(8.0F + (-zFlow - xFlow) * 16.0F);
+					v2 = iconStill.getInterpolatedV(8.0F + (-zFlow + xFlow) * 16.0F);
+					u1 = iconStill.getInterpolatedU(8.0F + (-zFlow + xFlow) * 16.0F);
+					v1 = iconStill.getInterpolatedV(8.0F + (zFlow + xFlow) * 16.0F);
+					u4 = iconStill.getInterpolatedU(8.0F + (zFlow + xFlow) * 16.0F);
+					v4 = iconStill.getInterpolatedV(8.0F + (zFlow - xFlow) * 16.0F);
+					u3 = iconStill.getInterpolatedU(8.0F + (zFlow - xFlow) * 16.0F);
+					v3 = iconStill.getInterpolatedV(8.0F + (-zFlow - xFlow) * 16.0F);
 				}
 
-				tessellator.setBrightness(par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4));
-				f7 = 1.0F;
-				tessellator.setColorOpaque_F(f4 * f7 * f, f4 * f7 * f1, f4 * f7 * f2);
-				tessellator.addVertexWithUV(par2 + 0, par3 + d2, par4 + 0, d8, d12);
-				tessellator.addVertexWithUV(par2 + 0, par3 + d3, par4 + 1, d7, d11);
-				tessellator.addVertexWithUV(par2 + 1, par3 + d4, par4 + 1, d10, d14);
-				tessellator.addVertexWithUV(par2 + 1, par3 + d5, par4 + 0, d9, d13);
-			}
+				tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
+				tessellator.setColorOpaque_F(LIGHT_Y_POS * red, LIGHT_Y_POS * green, LIGHT_Y_POS * blue);
 
-			if (renderblocks.renderAllFaces || flag1)
-			{
-				tessellator.setBrightness(par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4));
-				float f10 = 1.0F;
-				tessellator.setColorOpaque_F(f3 * f10, f3 * f10, f3 * f10);
-				renderblocks.renderFaceYNeg(par1Block, par2, par3 + d6, par4, renderblocks.getBlockIconFromSide(par1Block, 0));
-				flag2 = true;
-			}
-
-			for (int j1 = 0; j1 < 4; ++j1)
-			{
-				int k1 = par2;
-				int l1 = par4;
-
-				if (j1 == 0)
-					l1 = par4 - 1;
-				if (j1 == 1)
-					++l1;
-				if (j1 == 2)
-					k1 = par2 - 1;
-				if (j1 == 3)
-					++k1;
-
-				IIcon icon1 = renderblocks.getBlockIconFromSideAndMetadata(par1Block, j1 + 2, i1);
-				if (renderblocks.renderAllFaces || aboolean[j1])
+				if (!rises)
 				{
-					double d15;
-					double d16;
-					double d17;
-					double d18;
-					double d19;
-					double d20;
-
-					if (j1 == 0)
-					{
-						d15 = d2;
-						d17 = d5;
-						d16 = par2;
-						d18 = par2 + 1;
-						d19 = par4 + d6;
-						d20 = par4 + d6;
-					}
-					else if (j1 == 1)
-					{
-						d15 = d4;
-						d17 = d3;
-						d16 = par2 + 1;
-						d18 = par2;
-						d19 = par4 + 1 - d6;
-						d20 = par4 + 1 - d6;
-					}
-					else if (j1 == 2)
-					{
-						d15 = d3;
-						d17 = d2;
-						d16 = par2 + d6;
-						d18 = par2 + d6;
-						d19 = par4 + 1;
-						d20 = par4;
-					}
-					else
-					{
-						d15 = d5;
-						d17 = d4;
-						d16 = par2 + 1 - d6;
-						d18 = par2 + 1 - d6;
-						d19 = par4;
-						d20 = par4 + 1;
-					}
-
-					flag2 = true;
-					float f11 = icon1.getInterpolatedU(0.0D);
-					f7 = icon1.getInterpolatedU(8.0D);
-					float f12 = icon1.getInterpolatedV((1.0D - d15) * 16.0D * 0.5D);
-					float f13 = icon1.getInterpolatedV((1.0D - d17) * 16.0D * 0.5D);
-					float f14 = icon1.getInterpolatedV(8.0D);
-					tessellator.setBrightness(par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, k1, par3, l1));
-					float f15 = 1.0F;
-
-					if (j1 < 2)
-						f15 *= f5;
-					else
-						f15 *= f6;
-
-					tessellator.setColorOpaque_F(f4 * f15 * f, f4 * f15 * f1, f4 * f15 * f2);
-					tessellator.addVertexWithUV(d16, par3 + d15, d19, f11, f12);
-					tessellator.addVertexWithUV(d18, par3 + d17, d20, f7, f13);
-					tessellator.addVertexWithUV(d18, par3 + 0, d20, f7, f14);
-					tessellator.addVertexWithUV(d16, par3 + 0, d19, f11, f14);
+					tessellator.addVertexWithUV(x + 0, y + heightNW, z + 0, u2, v2);
+					tessellator.addVertexWithUV(x + 0, y + heightSW, z + 1, u1, v1);
+					tessellator.addVertexWithUV(x + 1, y + heightSE, z + 1, u4, v4);
+					tessellator.addVertexWithUV(x + 1, y + heightNE, z + 0, u3, v3);
+				}
+				else
+				{
+					tessellator.addVertexWithUV(x + 1, y + 1 - heightNE, z + 0, u3, v3);
+					tessellator.addVertexWithUV(x + 1, y + 1 - heightSE, z + 1, u4, v4);
+					tessellator.addVertexWithUV(x + 0, y + 1 - heightSW, z + 1, u1, v1);
+					tessellator.addVertexWithUV(x + 0, y + 1 - heightNW, z + 0, u2, v2);
 				}
 			}
 
-			renderblocks.renderMinY = d0;
-			renderblocks.renderMaxY = d1;
-			return flag2;
+			if (renderer.renderAllFaces || renderBottom)
+			{
+				rendered = true;
+				tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y - 1, z));
+				if (!rises)
+				{
+					tessellator.setColorOpaque_F(LIGHT_Y_NEG * red, LIGHT_Y_NEG * green, LIGHT_Y_NEG * blue);
+					renderer.renderFaceYNeg(block, x, y + RENDER_OFFSET, z, getIcon(block.getIcon(0, bMeta)));
+				}
+				else
+				{
+					tessellator.setColorOpaque_F(LIGHT_Y_POS * red, LIGHT_Y_POS * green, LIGHT_Y_POS * blue);
+					renderer.renderFaceYPos(block, x, y + RENDER_OFFSET, z, getIcon(block.getIcon(1, bMeta)));
+				}
+			}
+
+			for (int side = 0; side < 4; ++side)
+			{
+				int x2 = x;
+				int z2 = z;
+
+				switch (side)
+				{
+				case 0: --z2; break;
+				case 1: ++z2; break;
+				case 2: --x2; break;
+				case 3: ++x2; break;
+				}
+
+				IIcon iconFlow = getIcon(block.getIcon(side + 2, bMeta));
+				if (renderer.renderAllFaces || renderSides[side])
+				{
+					rendered = true;
+
+					double ty1;
+					double tx1;
+					double ty2;
+					double tx2;
+					double tz1;
+					double tz2;
+
+					if (side == 0)
+					{
+						ty1 = heightNW;
+						ty2 = heightNE;
+						tx1 = x;
+						tx2 = x + 1;
+						tz1 = z + RENDER_OFFSET;
+						tz2 = z + RENDER_OFFSET;
+					}
+					else if (side == 1)
+					{
+						ty1 = heightSE;
+						ty2 = heightSW;
+						tx1 = x + 1;
+						tx2 = x;
+						tz1 = z + 1 - RENDER_OFFSET;
+						tz2 = z + 1 - RENDER_OFFSET;
+					}
+					else if (side == 2)
+					{
+						ty1 = heightSW;
+						ty2 = heightNW;
+						tx1 = x + RENDER_OFFSET;
+						tx2 = x + RENDER_OFFSET;
+						tz1 = z + 1;
+						tz2 = z;
+					}
+					else
+					{
+						ty1 = heightNE;
+						ty2 = heightSE;
+						tx1 = x + 1 - RENDER_OFFSET;
+						tx2 = x + 1 - RENDER_OFFSET;
+						tz1 = z;
+						tz2 = z + 1;
+					}
+
+					float u1Flow = iconFlow.getInterpolatedU(0.0D);
+					float u2Flow = iconFlow.getInterpolatedU(8.0D);
+					float v1Flow = iconFlow.getInterpolatedV((1.0D - ty1) * 16.0D * 0.5D);
+					float v2Flow = iconFlow.getInterpolatedV((1.0D - ty2) * 16.0D * 0.5D);
+					float v3Flow = iconFlow.getInterpolatedV(8.0D);
+					tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x2, y, z2));
+					float sideLighting = 1.0F;
+
+					if (side < 2)
+					{
+						sideLighting = LIGHT_XZ_NEG;
+					}
+					else
+					{
+						sideLighting = LIGHT_XZ_POS;
+					}
+
+					tessellator.setColorOpaque_F(LIGHT_Y_POS * sideLighting * red, LIGHT_Y_POS * sideLighting * green, LIGHT_Y_POS * sideLighting * blue);
+
+					if (!rises)
+					{
+						tessellator.addVertexWithUV(tx1, y + ty1, tz1, u1Flow, v1Flow);
+						tessellator.addVertexWithUV(tx2, y + ty2, tz2, u2Flow, v2Flow);
+						tessellator.addVertexWithUV(tx2, y + 0, tz2, u2Flow, v3Flow);
+						tessellator.addVertexWithUV(tx1, y + 0, tz1, u1Flow, v3Flow);
+					}
+					else
+					{
+						tessellator.addVertexWithUV(tx1, y + 1 - 0, tz1, u1Flow, v3Flow);
+						tessellator.addVertexWithUV(tx2, y + 1 - 0, tz2, u2Flow, v3Flow);
+						tessellator.addVertexWithUV(tx2, y + 1 - ty2, tz2, u2Flow, v2Flow);
+						tessellator.addVertexWithUV(tx1, y + 1 - ty1, tz1, u1Flow, v1Flow);
+					}
+				}
+			}
+			renderer.renderMinY = 0;
+			renderer.renderMaxY = 1;
+			return rendered;
 		}
 	}
 
-	/**
-	 * Get fluid height
-	 */
-	public static float getLiquidHeight(int par1, int par2, int par3, Material par4Material, IBlockAccess blockaccess)
+	@Override
+	public boolean shouldRender3DInInventory(int modelId){ return false; }
+	@Override
+	public int getRenderId()
 	{
-		int var5 = 0;
-		float var6 = 0.0F;
+		return FluidRegistry.renderIdFluid;
+	}
 
-		for (int var7 = 0; var7 < 4; ++var7)
-		{
-			int var8 = par1 - (var7 & 1);
-			int var10 = par3 - (var7 >> 1 & 1);
 
-			if (blockaccess.getBlock(var8, par2 + 1, var10).getMaterial() == par4Material)
-				return 1.0F;
-
-			Material var11 = blockaccess.getBlock(var8, par2, var10).getMaterial();
-			if (var11 == par4Material)
-			{
-				int var12 = blockaccess.getBlockMetadata(var8, par2, var10);
-				if (var12 >= 8 || var12 == 0)
-				{
-					var6 += BlockLiquid.getLiquidHeightPercent(var12) * 10.0F;
-					var5 += 10;
-				}
-
-				var6 += BlockLiquid.getLiquidHeightPercent(var12);
-				++var5;
-			}
-			else if (!var11.isSolid())
-			{
-				++var6;
-				++var5;
-			}
-		}
-		return 1.0F - var6 / var5;
+	private IIcon getIcon(IIcon icon)
+	{
+		if (icon != null) return icon;
+		return ((TextureMap)Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.locationBlocksTexture)).getAtlasSprite("missingno");
 	}
 }

@@ -43,9 +43,31 @@ public class BlockCustomLiquid extends BlockFluidClassic
 
 	}
 
+	public int getDensityDir()
+	{
+		return this.densityDir;
+	}
+
 	protected void setupDisplacements()
 	{
 		displacements.put(TFCBlocks.SeaGrassStill, false);
+	}
+
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	{
+		Block block = world.getBlock(x, y, z);
+		if(block.getMaterial() == this.getMaterial())
+		{
+			if (!(block instanceof BlockCustomLiquid))
+			{
+				return !block.isOpaqueCube();
+			}
+			else if(world.getBlockMetadata(x, y, z) == 0)
+				return false;
+		}
+
+		return super.shouldSideBeRendered(world, x, y, z, side);
 	}
 
 	/**
@@ -244,6 +266,12 @@ public class BlockCustomLiquid extends BlockFluidClassic
 			else
 				par1World.setBlockMetadataWithNotify(par2, par3, par4, 1, 0);
 		}
+	}
+
+	@Override
+	public int getRenderType()
+	{
+		return TFCBlocks.fluidRenderId;
 	}
 
 	@Override
