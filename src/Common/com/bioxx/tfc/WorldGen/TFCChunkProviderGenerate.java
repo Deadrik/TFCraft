@@ -657,6 +657,14 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 								metaBig[indexBig] = soilMeta;
 							}
 						}
+						else if(biome == TFCBiome.gravelbeach)
+						{
+							if(((height > var5 - 2 && height <= var5 + 2) || (height < var5 && idsTop[index + 2] == TFCBlocks.SaltWater)))//If its an ocean give it a sandy bottom
+							{
+								idsBig[indexBig] = Blocks.gravel;
+								metaBig[indexBig] = 0;
+							}
+						}
 						else if(!(biome == TFCBiome.swampland))
 						{
 							if(((height > var5 - 2 && height < var5 && idsTop[index + 1] == TFCBlocks.SaltWater)) || (height < var5 && idsTop[index + 1] == TFCBlocks.SaltWater))
@@ -669,7 +677,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							}
 						}
 					}
-					else if(idsTop[index] == TFCBlocks.SaltWater && biome != TFCBiome.ocean && biome != TFCBiome.beach)
+					else if(idsTop[index] == TFCBlocks.SaltWater && biome != TFCBiome.ocean && biome != TFCBiome.beach && biome != TFCBiome.gravelbeach)
 					{
 						idsBig[indexBig] = TFCBlocks.FreshWater;
 					}

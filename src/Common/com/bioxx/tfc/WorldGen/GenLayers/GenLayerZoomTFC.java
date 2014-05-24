@@ -1,5 +1,7 @@
 package com.bioxx.tfc.WorldGen.GenLayers;
 
+import java.util.Arrays;
+
 import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerZoomTFC extends GenLayerTFC
@@ -25,6 +27,7 @@ public class GenLayerZoomTFC extends GenLayerTFC
 		int i2 = k1 - 1 << 1;
 		int j2 = l1 - 1 << 1;
 		int[] aint1 = IntCache.getIntCache(i2 * j2);
+		Arrays.fill(aint1, 0);
 		int l2;
 
 		for (int k2 = 0; k2 < l1 - 1; ++k2)
