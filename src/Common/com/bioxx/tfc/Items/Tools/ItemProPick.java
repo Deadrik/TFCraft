@@ -3,15 +3,6 @@ package com.bioxx.tfc.Items.Tools;
 import java.util.HashMap;
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.Enums.EnumItemReach;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,13 +13,23 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
+
 public class ItemProPick extends ItemTerra
 {
-	HashMap<String, ProspectResult> results =
-			new HashMap<String, ProspectResult>();
+	HashMap<String, ProspectResult> results = new HashMap<String, ProspectResult>();
 	Random random = null;
 
-	public ItemProPick() 
+	public ItemProPick()
 	{
 		super();
 		maxStackSize = 1;
@@ -40,7 +41,7 @@ public class ItemProPick extends ItemTerra
 	@Override
 	public void registerIcons(IIconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + this.getUnlocalizedName().replace("item.", ""));
 	}
 
 	@Override
@@ -54,7 +55,8 @@ public class ItemProPick extends ItemTerra
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	{
 		Block block = world.getBlock(x, y, z);
 
 		// Negated the old condition and exiting the method here instead.
@@ -70,7 +72,6 @@ public class ItemProPick extends ItemTerra
 			itemStack.damageItem(1, player);
 			if (itemStack.getItemDamage() >= itemStack.getMaxDamage())
 				player.destroyCurrentEquippedItem();
-
 			return true;
 		}
 
@@ -79,7 +80,9 @@ public class ItemProPick extends ItemTerra
 			block == TFCBlocks.Ore2 ||
 			block == TFCBlocks.Ore3)
 		{
-			TellResult(player, new ItemStack(block, 1, meta));
+			if (block == TFCBlocks.Ore2) meta = meta + Global.ORE_METAL.length;
+			if (block == TFCBlocks.Ore3) meta = meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length;
+			TellResult(player, new ItemStack(TFCItems.OreChunk, 1, meta));
 			return true;
 		}
 
@@ -87,7 +90,8 @@ public class ItemProPick extends ItemTerra
 
 		// If random(100) is less than 60, it used to succeed. we don't need to
 		// gather the blocks in a 25x25 area if it doesn't.
-		if (random.nextInt(100) >= 60) {
+		if (random.nextInt(100) >= 60)
+		{
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.ProPick.FoundNothing")));
 			return true;
 		}
@@ -104,14 +108,17 @@ public class ItemProPick extends ItemTerra
 					int blockZ = z + k;
 
 					block = world.getBlock(blockX, blockY, blockZ);
-
-					if (block != TFCBlocks.Ore &&
-						block != TFCBlocks.Ore2 &&
-						block != TFCBlocks.Ore3)
+					meta = world.getBlockMetadata(blockX, blockY, blockZ);
+					ItemStack ore;
+					if (block == TFCBlocks.Ore)
+						ore = new ItemStack(TFCItems.OreChunk, 1, meta);
+					else if (block == TFCBlocks.Ore2)
+						ore = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length);
+					else if (block == TFCBlocks.Ore3)
+						ore = new ItemStack(TFCItems.OreChunk, 1, meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length);
+					else
 						continue;
 
-					meta = world.getBlockMetadata(blockX, blockY, blockZ);
-					ItemStack ore = new ItemStack(block, 1, meta);
 					String oreName = ore.getDisplayName();
 
 					if (results.containsKey(oreName))
