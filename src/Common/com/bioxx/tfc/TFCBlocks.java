@@ -24,7 +24,6 @@ import com.bioxx.tfc.Blocks.BlockStair;
 import com.bioxx.tfc.Blocks.BlockStalactite;
 import com.bioxx.tfc.Blocks.BlockSulfur;
 import com.bioxx.tfc.Blocks.BlockThatch;
-import com.bioxx.tfc.Blocks.BlockTuyere;
 import com.bioxx.tfc.Blocks.BlockWoodSupport;
 import com.bioxx.tfc.Blocks.BlockWoodSupport2;
 import com.bioxx.tfc.Blocks.BlockWorldItem;
@@ -271,7 +270,6 @@ public class TFCBlocks
 	public static Block Flowers;
 	public static Block Fungi;
 	public static Block Flora;
-	public static Block Tuyere;
 	public static Block EarlyBloomery;
 	public static Block Bloom;
 	public static Block Crucible;
@@ -454,7 +452,6 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Flora, com.bioxx.tfc.Items.ItemBlocks.ItemFlora.class,"Flora");
 		GameRegistry.registerBlock(Pottery, "ClayPottery");
 		GameRegistry.registerBlock(Thatch, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Thatch");
-		GameRegistry.registerBlock(Tuyere, "Tuyere");
 		GameRegistry.registerBlock(Crucible, com.bioxx.tfc.Items.ItemBlocks.ItemCrucible.class, "Crucible");
 		GameRegistry.registerBlock(NestBox, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "NestBox");
 		GameRegistry.registerBlock(Fence, com.bioxx.tfc.Items.ItemBlocks.ItemFence.class, "Fence");
@@ -654,7 +651,6 @@ public class TFCBlocks
 		Flora = new BlockFlora().setBlockName("Flora").setHardness(0.1f).setStepSound(Block.soundTypeGrass);
 		Pottery = new BlockPottery().setBlockName("Pottery").setHardness(1.0f);
 
-		Tuyere = new BlockTuyere().setBlockName("Tuyere");
 		Crucible = new BlockCrucible().setBlockName("Crucible").setHardness(4.0f);
 
 		NestBox = new BlockNestBox().setBlockName("NestBox").setHardness(1);

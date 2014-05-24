@@ -2,6 +2,12 @@ package com.bioxx.tfc.WorldGen;
 
 import java.util.Random;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeDecorator;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenerator;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Food.CropIndex;
@@ -14,12 +20,6 @@ import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenLilyPad;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenLiquidsTFC;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenSeaGrass;
-
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorTFC extends BiomeDecorator
 {
@@ -193,13 +193,13 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 
 		if (this.generateLakes)
 		{
-			for (var2 = 0; var2 < 50; ++var2)
+			/*for (var2 = 0; var2 < 50; ++var2)
 			{
 				xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 				zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 				yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 				new WorldGenLiquidsTFC(TFCBlocks.SaltWater).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-			}
+			}*/
 
 			for (var2 = 0; var2 < 20; ++var2)
 			{
