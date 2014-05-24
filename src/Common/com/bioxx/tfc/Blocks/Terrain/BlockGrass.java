@@ -2,6 +2,16 @@ package com.bioxx.tfc.Blocks.Terrain;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -13,15 +23,6 @@ import com.bioxx.tfc.Core.Util.BlockMeta;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowTrees;
 import com.bioxx.tfc.api.TFCOptions;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -61,7 +62,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 
 		iconSnowSide = registerer.registerIcon(Reference.ModID + ":" + "snow");
 		iconGrassSideOverlay = registerer.registerIcon(Reference.ModID + ":" + "GrassSide");
-		
+
 		TFC_Textures.InvisibleTexture = registerer.registerIcon(Reference.ModID + ":" + "Invisible");
 	}
 
@@ -180,7 +181,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 		{
 			if(world.getBlock(i, j+1, k) == Blocks.snow)
 			{
-				world.setBlock(i, j, k, TFC_Core.getTypeForDryGrass(world.getBlockMetadata(i, j, k)), world.getBlockMetadata(i, j, k), 0x2);
+				world.setBlock(i, j, k, TFC_Core.getTypeForDryGrassFromSoil(world.getBlock(i, j, k)), world.getBlockMetadata(i, j, k), 0x2);
 			}
 			else if (world.getBlockLightValue(i, j + 1, k) < 4 && world.getBlock(i, j + 1, k).getLightOpacity() > 2)
 			{
@@ -247,22 +248,22 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 				}
 			}
 
-//            if(!(this.blockID >= 2080 && this.blockID < 2088))
-//            {
-//            	boolean hasBeenSet = false;
-//            	int meta = world.getBlockMetadata(i, j, k);
-//            	for(int x = i-1; x <= i+1 && !hasBeenSet; x++)
-//            	{
-//            		for(int z = k-1; z <= k+1 && !hasBeenSet; z++)
-//                	{
-//            			if(!world.isBlockNormalCube(x, j, z))
-//            			{
-//            				hasBeenSet = true;
-//            				world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForRaisedGrass(meta), meta);
-//            			}
-//                	}
-//            	}
-//            }
+			//            if(!(this.blockID >= 2080 && this.blockID < 2088))
+			//            {
+			//            	boolean hasBeenSet = false;
+			//            	int meta = world.getBlockMetadata(i, j, k);
+			//            	for(int x = i-1; x <= i+1 && !hasBeenSet; x++)
+			//            	{
+			//            		for(int z = k-1; z <= k+1 && !hasBeenSet; z++)
+			//                	{
+			//            			if(!world.isBlockNormalCube(x, j, z))
+			//            			{
+			//            				hasBeenSet = true;
+			//            				world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForRaisedGrass(meta), meta);
+			//            			}
+			//                	}
+			//            	}
+			//            }
 
 			world.markBlockForUpdate(i, j, k);
 		}
