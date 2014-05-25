@@ -2,13 +2,12 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Enums.EnumTree;
-
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
 
 public class WorldGenGrowTrees
 {
@@ -131,17 +130,17 @@ public class WorldGenGrowTrees
 			if(randomNumber < 40)
 			{
 				if(canSpawnTemp0 && canSpawnEVTRain0 > 0)
-					world.setBlock(xCoord, yCoord+1, zCoord, Blocks.sapling, TreeType0, 0x2);
+					world.setBlock(xCoord, yCoord + 1, zCoord, TFCBlocks.Sapling, TreeType0, 0x2);
 			}
 			else if(randomNumber < 70)
 			{
 				if(canSpawnTemp1)
-					world.setBlock(xCoord, yCoord+1, zCoord, Blocks.sapling, TreeType1, 0x2);
+					world.setBlock(xCoord, yCoord + 1, zCoord, TFCBlocks.Sapling, TreeType1, 0x2);
 			}
 			else if(randomNumber < 100)
 			{
 				if(canSpawnTemp2)
-					world.setBlock(xCoord, yCoord+1, zCoord, Blocks.sapling, TreeType2, 0x2);
+					world.setBlock(xCoord, yCoord + 1, zCoord, TFCBlocks.Sapling, TreeType2, 0x2);
 			}
 		}
 	}

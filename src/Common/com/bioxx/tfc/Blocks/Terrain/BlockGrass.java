@@ -217,7 +217,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 				{
 					if(rand.nextInt((int) ((16800-rain)/4)) == 0 && temp > 20)
 						world.setBlock(i, j + 1, k, TFCBlocks.TallGrass, (world.rand.nextInt(30) == 0 ? 1 : 0), 0x2); // 1/30 chance to spawn fern
-					else if(rand.nextInt(15000) == 0 && temp > 20 && world.canBlockSeeTheSky(i, j, k))
+					else if (rand.nextInt(15000) == 0 && temp > 20 && world.canBlockSeeTheSky(i, j + 1, k))
 						new WorldGenGrowTrees().generate(world, rand, i, j, k);
 				}
 
