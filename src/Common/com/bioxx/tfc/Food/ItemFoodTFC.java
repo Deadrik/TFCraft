@@ -119,15 +119,15 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	public static void addFoodInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
-		NBTTagCompound stackTagCompound = is.getTagCompound();
-		if(stackTagCompound.hasKey("isSalted"))
+		NBTTagCompound tag = is.getTagCompound();
+		if(tag.hasKey("isSalted"))
 			arraylist.add("\u2022" + StatCollector.translateToLocal("gui.food.salted"));
-		if(stackTagCompound.hasKey("foodWeight"))
+		if(tag.hasKey("foodWeight") && tag.getFloat("foodWeight") != 999)
 		{
-			float ounces = Helper.roundNumber(stackTagCompound.getFloat("foodWeight"), 100);
+			float ounces = Helper.roundNumber(tag.getFloat("foodWeight"), 100);
 			if(ounces > 0)
 				arraylist.add(StatCollector.translateToLocal("gui.food.amount") + " " + ounces + " oz / " + Global.FOOD_MAX_WEIGHT + " oz");
-			float decay = stackTagCompound.getFloat("foodDecay");
+			float decay = tag.getFloat("foodDecay");
 			if(decay > 0)
 				arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
 			if(TFCOptions.enableDebugMode)
@@ -213,6 +213,19 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			return true;
 		else
 			return false;
+	}
+
+	public static ItemStack createTag(ItemStack is)
+	{
+		NBTTagCompound nbt = is.getTagCompound();
+		if(nbt == null)
+			nbt = new NBTTagCompound();
+		nbt.setFloat("foodWeight", 999);
+		nbt.setFloat("foodDecay", -24);
+		nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
+
+		is.setTagCompound(nbt);
+		return is;
 	}
 
 	public static ItemStack createTag(ItemStack is, float weight)
