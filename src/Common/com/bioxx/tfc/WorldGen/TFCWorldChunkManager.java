@@ -71,8 +71,9 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		DataLayer.Rhyolite, DataLayer.Basalt, DataLayer.Andesite,
 		DataLayer.Dacite, DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro};
 
-	public static DataLayer[] treeArray = new DataLayer[] {DataLayer.Ash, DataLayer.Aspen, DataLayer.Birch, DataLayer.Chestnut, DataLayer.DouglasFir, DataLayer.Hickory,DataLayer.Koa, DataLayer.Maple, DataLayer.Oak, DataLayer.Pine, DataLayer.Redwood, 
-		DataLayer.Pine, DataLayer.Spruce, DataLayer.Sycamore, DataLayer.WhiteCedar, DataLayer.WhiteElm, DataLayer.Willow, DataLayer.NoTree};
+	public static DataLayer[] treeArray = new DataLayer[] {DataLayer.Ash, DataLayer.Aspen, DataLayer.Birch, DataLayer.Chestnut, DataLayer.DouglasFir, 
+		DataLayer.Hickory, DataLayer.Maple, DataLayer.Oak, DataLayer.Pine, DataLayer.Redwood, DataLayer.Pine, DataLayer.Spruce, DataLayer.Sycamore, 
+		DataLayer.WhiteCedar, DataLayer.WhiteElm, DataLayer.Willow, DataLayer.NoTree};
 
 	public TFCWorldChunkManager()
 	{

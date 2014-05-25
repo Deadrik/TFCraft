@@ -3,6 +3,10 @@ package com.bioxx.tfc.WorldGen.Generators;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.feature.WorldGenerator;
+
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
@@ -13,9 +17,6 @@ import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenKapokTrees;
 import com.bioxx.tfc.api.Enums.EnumTree;
 
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenForests implements IWorldGenerator
@@ -26,10 +27,6 @@ public class WorldGenForests implements IWorldGenerator
 	WorldGenerator gen0;
 	WorldGenerator gen1;
 	WorldGenerator gen2;
-
-	public WorldGenForests()
-	{
-	}
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
@@ -76,7 +73,7 @@ public class WorldGenForests implements IWorldGenerator
 			int TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
 
 			//This is error prevention for when the Layer system sometimes returns bad values
-			if(TreeType0 < 0 || TreeType0 > EnumTree.values().length) 
+			/*if(TreeType0 < 0 || TreeType0 > EnumTree.values().length) 
 			{
 				TreeType0 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
 			}
@@ -87,7 +84,7 @@ public class WorldGenForests implements IWorldGenerator
 			if(TreeType2 < 0 || TreeType2 > EnumTree.values().length) 
 			{
 				TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
-			}
+			}*/
 
 			float evt = TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1;
 			gen0 = TFCBiome.getTreeGen(TreeType0, random.nextBoolean());
