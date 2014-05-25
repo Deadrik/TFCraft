@@ -471,8 +471,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 						item ==(TFCItems.chickenCooked)||
 						item ==(TFCItems.fishRaw)||
 						item ==(TFCItems.fishCooked)||
-						item ==(TFCItems.CalamariRaw)||
-						item ==(TFCItems.CalamariCooked))
+						item ==(TFCItems.calamariRaw)||
+						item ==(TFCItems.calamariCooked))
 				{
 					if(item instanceof ItemFoodTFC && hunger <= 160000)
 					{

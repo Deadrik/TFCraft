@@ -342,7 +342,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.beefRaw, 1), 1, 200, new ItemStack(TFCItems.beefCooked, 1)).setKeepNBT(true));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.muttonRaw,1),1, 200, new ItemStack(TFCItems.muttonCooked,1)).setKeepNBT(true));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.venisonRaw,1),1, 200, new ItemStack(TFCItems.venisonCooked,1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CalamariRaw,1),1, 200, new ItemStack(TFCItems.CalamariCooked,1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.calamariRaw,1),1, 200, new ItemStack(TFCItems.calamariCooked,1)).setKeepNBT(true));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.chickenRaw, 1), 1, 200, new ItemStack(TFCItems.chickenCooked, 1)).setKeepNBT(true));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.fishRaw, 1), 1, 200, new ItemStack(TFCItems.fishCooked, 1)).setKeepNBT(true));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Egg, 1), 1, 140, new ItemStack(TFCItems.EggCooked, 1)).setKeepNBT(true));

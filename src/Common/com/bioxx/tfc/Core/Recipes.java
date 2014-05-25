@@ -58,10 +58,10 @@ public class Recipes
 
 		// Remove Vanilla recipes before adding TFC recipes for oredict compatibility
 		VanillaRecipes();
-		
+
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Arrow, 8), new ItemStack(TFCItems.LooseRock, 1, 32767), "stickWood",
 				new ItemStack(Items.feather,1,32767)));
-		
+
 		//stone javelins
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.IgInStoneJavelin, 1, 0), new Object[] { 
 			"1","2", Character.valueOf('1'), TFCItems.IgInStoneJavelinHead,Character.valueOf('2'), "stickWood"}));
@@ -372,7 +372,7 @@ public class Recipes
 
 		RemoveRecipe(new ItemStack(Blocks.wooden_button));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.ButtonWood, 1), new Object[] {"#", "#", Character.valueOf('#'), "plankWood"}));
-		
+
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.writabeBookTFC, 1), new Object[]{new ItemStack(Items.book, 1)});
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Spindle,1), new Object[] { "P","#",Character.valueOf('P'),
 			new ItemStack(TFCItems.SpindleHead,1, 1),Character.valueOf('#'),"stickWood"}));
@@ -589,7 +589,7 @@ public class Recipes
 				new Object[] {"PP", "PP", Character.valueOf('P'), new ItemStack(TFCItems.ClayBall, 1, 1)});
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Workbench, 1), new Object[]{"PP","PP", Character.valueOf('P'), "plankWood"}));
-		
+
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.coal_block, 1), new Object[]{"###","###","###", Character.valueOf('#'), "fuelCoal"}));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Straw,4), 
@@ -614,7 +614,7 @@ public class Recipes
 			else if (i / 16 == 1)
 				OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks2, 1, l));
 		}
-		
+
 		//Fuel
 		OreDictionary.registerOre("fuelCoal", new ItemStack(Items.coal, 1, 0));
 		OreDictionary.registerOre("fuelCoal", new ItemStack(TFCItems.Coal, 1, 0));
@@ -666,7 +666,7 @@ public class Recipes
 		// Also the Bow and Fishing Rod
 		RemoveRecipe(new ItemStack(Items.bow));
 		RemoveRecipe(new ItemStack(Items.fishing_rod));
-		
+
 		if(TFCOptions.enableVanillaDiamondRecipe == true)
 		{
 			GameRegistry.addRecipe(new ItemStack(Items.diamond, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GemDiamond,1,2)});
@@ -680,7 +680,7 @@ public class Recipes
 		if(TFCOptions.enableVanillaRecipes == true)
 		{
 			GameRegistry.addRecipe(new ItemStack(Items.apple,1),new Object[]{"1",Character.valueOf('1'),new ItemStack(TFCItems.RedApple,1)});
-					
+
 			//Terrastone to Cobblestone
 			//now handled by oredict
 			//GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneSedCobble});
@@ -723,7 +723,7 @@ public class Recipes
 			//RemoveRecipe(new ItemStack(Blocks.fence,2));
 			RemoveRecipe(new ItemStack(Blocks.fence_gate,1));
 			RemoveRecipe(new ItemStack(Blocks.wool));
-			
+
 
 			RemoveRecipe(new ItemStack(Items.leather_helmet));
 			RemoveRecipe(new ItemStack(Items.leather_chestplate));
@@ -1872,10 +1872,17 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.chickenRaw, 1), 0), new Object[] {new ItemStack(TFCItems.chickenRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.porkchopRaw, 1), 0), new Object[] {new ItemStack(TFCItems.porkchopRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.fishRaw, 1), 0), new Object[] {new ItemStack(TFCItems.fishRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.CalamariRaw, 1), 0), new Object[] {new ItemStack(TFCItems.CalamariRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.calamariRaw, 1), 0), new Object[] {new ItemStack(TFCItems.calamariRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.muttonRaw, 1), 0), new Object[] {new ItemStack(TFCItems.muttonRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.horseMeatRaw, 1), 0), new Object[] {new ItemStack(TFCItems.horseMeatRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
-
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.venisonCooked, 1), 0), new Object[] {new ItemStack(TFCItems.venisonCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.beefCooked, 1), 0), new Object[] {new ItemStack(TFCItems.beefCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.chickenCooked, 1), 0), new Object[] {new ItemStack(TFCItems.chickenCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.porkchopCooked, 1), 0), new Object[] {new ItemStack(TFCItems.porkchopCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.fishCooked, 1), 0), new Object[] {new ItemStack(TFCItems.fishCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.calamariCooked, 1), 0), new Object[] {new ItemStack(TFCItems.calamariCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.muttonCooked, 1), 0), new Object[] {new ItemStack(TFCItems.muttonCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
+		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.horseMeatCooked, 1), 0), new Object[] {new ItemStack(TFCItems.horseMeatCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		for(Item i : TFCItems.FoodList)
 		{
 			addFoodMergeRecipe(i);

@@ -751,8 +751,8 @@ public class TFCItems
 
 	public static Item muttonRaw;
 	public static Item muttonCooked;
-	public static Item CalamariRaw;
-	public static Item CalamariCooked;
+	public static Item calamariRaw;
+	public static Item calamariCooked;
 	public static Item venisonRaw;
 	public static Item venisonCooked;
 	public static Item horseMeatRaw;
@@ -1658,8 +1658,8 @@ public class TFCItems
 		chickenCooked = new ItemFoodTFC(10005, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("chickenCooked");
 		Soybean = new ItemFoodTFC(10006, EnumFoodGroup.Protein, true).setUnlocalizedName("Soybeans");
 		EggCooked = new ItemFoodTFC(10007, EnumFoodGroup.Protein).setDecayRate(3.0f).setUnlocalizedName("Egg Cooked");
-		CalamariRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(4.0f).setUnlocalizedName("Calamari Raw");
-		CalamariCooked = new ItemFoodTFC(10008, EnumFoodGroup.Protein).setDecayRate(2.0f).setUnlocalizedName("Calamari Cooked");
+		calamariRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(4.0f).setUnlocalizedName("Calamari Raw");
+		calamariCooked = new ItemFoodTFC(10008, EnumFoodGroup.Protein).setDecayRate(2.0f).setUnlocalizedName("Calamari Cooked");
 		muttonRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("Mutton Raw");
 		muttonCooked = new ItemFoodTFC(10009, EnumFoodGroup.Protein).setDecayRate(1.8f).setUnlocalizedName("Mutton Cooked");
 		venisonRaw = new ItemFoodTFC(-1, EnumFoodGroup.Protein, false, false).setDecayRate(3.0f).setUnlocalizedName("Venison");
@@ -2671,8 +2671,8 @@ public class TFCItems
 		GameRegistry.registerItem(RyeBread, RyeBread.getUnlocalizedName());
 		GameRegistry.registerItem(RiceBread, RiceBread.getUnlocalizedName());
 		GameRegistry.registerItem(CornBread, CornBread.getUnlocalizedName());
-		GameRegistry.registerItem(CalamariRaw, CalamariRaw.getUnlocalizedName());
-		GameRegistry.registerItem(CalamariCooked, CalamariCooked.getUnlocalizedName());
+		GameRegistry.registerItem(calamariRaw, calamariRaw.getUnlocalizedName());
+		GameRegistry.registerItem(calamariCooked, calamariCooked.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsWheat, SeedsWheat.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsBarley, SeedsBarley.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsRye, SeedsRye.getUnlocalizedName());
