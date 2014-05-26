@@ -36,6 +36,7 @@ import com.bioxx.tfc.Blocks.Devices.BlockCrucible;
 import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
 import com.bioxx.tfc.Blocks.Devices.BlockFirepit;
 import com.bioxx.tfc.Blocks.Devices.BlockForge;
+import com.bioxx.tfc.Blocks.Devices.BlockLeatherRack;
 import com.bioxx.tfc.Blocks.Devices.BlockNestBox;
 import com.bioxx.tfc.Blocks.Devices.BlockPottery;
 import com.bioxx.tfc.Blocks.Devices.BlockQuern;
@@ -163,6 +164,7 @@ public class TFCBlocks
 	public static int bloomeryRenderId;
 	public static int metalsheetRenderId;
 	public static int chestRenderId;
+	public static int leatherRackRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -315,6 +317,7 @@ public class TFCBlocks
 	public static Block Pumpkin;
 	public static Block ButtonWood;
 	public static Block Vine;
+	public static Block LeatherRack;
 
 	public static void RegisterBlocks()
 	{
@@ -475,6 +478,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Pumpkin, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Pumpkin");
 		GameRegistry.registerBlock(ButtonWood, "ButtonWood");
 		GameRegistry.registerBlock(Vine, com.bioxx.tfc.Items.ItemBlocks.ItemVine.class, "Vine");
+		GameRegistry.registerBlock(LeatherRack, "LeatherRack");
 	}
 
 	public static void LoadBlocks()
@@ -683,6 +687,7 @@ public class TFCBlocks
 
 		FireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);
 		MetalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(8).setResistance(20f);
+		LeatherRack = new BlockLeatherRack().setBlockName("LeatherRack").setHardness(1);
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);
 		StoneIgEx.setHarvestLevel("pickaxe", 0);

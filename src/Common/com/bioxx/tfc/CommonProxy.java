@@ -53,6 +53,7 @@ import com.bioxx.tfc.TileEntities.TEDetailed;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEFruitLeaves;
+import com.bioxx.tfc.TileEntities.TELeatherRack;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.TileEntities.TENestBox;
@@ -137,6 +138,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TEFruitLeaves.class, "Fruit Leaves");
 		GameRegistry.registerTileEntity(TEMetalSheet.class, "Metal Sheet");
 		GameRegistry.registerTileEntity(TEOre.class, "ore");
+		GameRegistry.registerTileEntity(TELeatherRack.class, "leatherRack");
 
 		if(b)
 		{
