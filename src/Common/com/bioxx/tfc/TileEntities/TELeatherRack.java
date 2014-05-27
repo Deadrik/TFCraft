@@ -5,7 +5,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TELeatherRack extends NetworkTileEntity
 {
-	ItemStack leatherItem;
+	public short workedArea;
+	public ItemStack leatherItem;
 
 	public void setLeather(ItemStack is)
 	{
@@ -22,6 +23,7 @@ public class TELeatherRack extends NetworkTileEntity
 			leatherItem.writeToNBT(item);
 			nbt.setTag("leatherItem", item);
 		}
+		nbt.setShort("workedArea", workedArea);
 	}
 
 	@Override
@@ -30,12 +32,14 @@ public class TELeatherRack extends NetworkTileEntity
 		super.readFromNBT(nbt);
 		if(nbt.hasKey("leatherItem"))
 			leatherItem = ItemStack.loadItemStackFromNBT((NBTTagCompound)nbt.getTag("leatherItem"));
+		workedArea = nbt.getShort("workedArea");
 	}
 
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) {
 		if(nbt.hasKey("leatherItem"))
 			leatherItem = ItemStack.loadItemStackFromNBT((NBTTagCompound)nbt.getTag("leatherItem"));
+		workedArea = nbt.getShort("workedArea");
 	}
 
 	@Override
@@ -46,6 +50,12 @@ public class TELeatherRack extends NetworkTileEntity
 			leatherItem.writeToNBT(item);
 			nbt.setTag("leatherItem", item);
 		}
+		nbt.setShort("workedArea", workedArea);
 	}
-
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt)
+	{
+		workedArea = nbt.getShort("workedArea");
+		worldObj.func_147479_m(xCoord, yCoord, zCoord);
+	}
 }

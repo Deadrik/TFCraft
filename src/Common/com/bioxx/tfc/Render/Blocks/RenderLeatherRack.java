@@ -4,6 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+
+import com.bioxx.tfc.Blocks.Devices.BlockLeatherRack;
+import com.bioxx.tfc.TileEntities.TELeatherRack;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderLeatherRack implements ISimpleBlockRenderingHandler
@@ -12,34 +16,37 @@ public class RenderLeatherRack implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		renderer.setRenderBounds(0, 0, 0.475, 1, 0.05, 0.525);
-		renderer.renderStandardBlock(block, x, y, z);
-		renderer.setRenderBounds(0, 0.95, 0.475, 1, 1, 0.525);
-		renderer.renderStandardBlock(block, x, y, z);
-		renderer.setRenderBounds(0, 0.05, 0.475, 0.05, 0.95, 0.525);
-		renderer.renderStandardBlock(block, x, y, z);
-		renderer.setRenderBounds(0.95, 0.05, 0.475, 1, 0.95, 0.525);
-		renderer.renderStandardBlock(block, x, y, z);
+		TELeatherRack te = (TELeatherRack)world.getTileEntity(x, y, z);
+		BlockLeatherRack blk = (BlockLeatherRack)block;
+		float f0 = 0;
+		float f1 = 0.25f;
+		float f2 = 0.5f;
+		float f3 = 0.75f;
+		float f4 = 1f;
+		for(int k = 0; k < 4; k++)
+		{
+			for(int i = 0; i < 4; i++)
+			{
+				if(((te.workedArea >> (k*4+i)) & 1) != 0)
+					renderer.overrideBlockTexture = blk.scrapedTex;
+				renderer.setRenderBounds(0.25*i, 0, 0.25*k, 0.25*i+0.25, 0.001, 0.25*k+0.25);
+				renderer.renderStandardBlock(block, x, y, z);
+				renderer.clearOverrideBlockTexture();
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
-		renderer.setRenderBounds(0, 0, 0.475, 1, 0.05, 0.525);
-		renderInvBlock(block, metadata, renderer);
-		renderer.setRenderBounds(0, 0.95, 0.475, 1, 1, 0.525);
-		renderInvBlock(block, metadata, renderer);
-		renderer.setRenderBounds(0, 0.05, 0.475, 0.05, 0.95, 0.525);
-		renderInvBlock(block, metadata, renderer);
-		renderer.setRenderBounds(0.95, 0.05, 0.475, 1, 0.95, 0.525);
-		renderInvBlock(block, metadata, renderer);
+
 	}
 
 	@Override
 	public boolean shouldRender3DInInventory(int modelId)
 	{
-		return true;
+		return false;
 	}
 
 	@Override

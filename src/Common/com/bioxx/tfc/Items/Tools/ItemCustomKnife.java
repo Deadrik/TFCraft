@@ -16,8 +16,9 @@ import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Tools.IKnife;
 
-public class ItemCustomKnife extends ItemWeapon
+public class ItemCustomKnife extends ItemWeapon implements IKnife
 {
 	public ItemCustomKnife(ToolMaterial e, float damage)
 	{
@@ -85,7 +86,7 @@ public class ItemCustomKnife extends ItemWeapon
 			arraylist.add(StatCollector.translateToLocal("gui.ShowHelp"));
 		}
 	}
-	
+
 	@Override
 	public EnumItemReach getReach(ItemStack is){
 		return EnumItemReach.SHORT;
