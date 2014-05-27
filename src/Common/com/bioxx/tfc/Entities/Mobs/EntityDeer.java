@@ -296,7 +296,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
+			//par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 			{
 				par1EntityPlayer.addChatMessage(new ChatComponentText("Pregnant"));
