@@ -73,13 +73,13 @@ public class ItemPlank extends ItemTerra
 				TileEntity tile = world.getTileEntity(i, j-offset, k);
 				if((tile == null) || (!(tile instanceof TileEntityWoodConstruct)))
 					return false;
-
+				int index = dd+(x+(z*d));
 				TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
-				te.data.set(dd+(x+(z*d)));
-				te.woodTypes[dd+(x+(z*d))] = (byte) is.getItemDamage();
+				te.data.set(index);
+				te.woodTypes[index] = (byte) is.getItemDamage();
 
 				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setInteger("index", dd+(x+(z*d)));
+				nbt.setInteger("index", index);
 				nbt.setByte("meta", (byte) is.getItemDamage());
 				te.broadcastPacketInRange(te.createDataPacket(nbt));
 			}
@@ -93,13 +93,13 @@ public class ItemPlank extends ItemTerra
 				if((tile == null) || (!(tile instanceof TileEntityWoodConstruct))) {
 					return false;
 				}
-
+				int index = dd+(x+(z*d));
 				TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
-				te.data.set(dd+(x+(z*d)));
-				te.woodTypes[dd+(x+(z*d))] = (byte) is.getItemDamage();
+				te.data.set(index);
+				te.woodTypes[index] = (byte) is.getItemDamage();
 
 				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setInteger("index", dd+(x+(z*d)));
+				nbt.setInteger("index", index);
 				nbt.setByte("meta", (byte) is.getItemDamage());
 				te.broadcastPacketInRange(te.createDataPacket(nbt));
 			}
@@ -113,13 +113,13 @@ public class ItemPlank extends ItemTerra
 				if((tile == null) || (!(tile instanceof TileEntityWoodConstruct))) {
 					return false;
 				}
-
+				int index = dd2+(x+(y*d));
 				TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
-				te.data.set(dd2+(x+(y*d)));
-				te.woodTypes[dd2+(x+(y*d))] = (byte) is.getItemDamage();
+				te.data.set(index);
+				te.woodTypes[index] = (byte) is.getItemDamage();
 
 				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setInteger("index", dd2+(x+(z*d)));
+				nbt.setInteger("index", index);
 				nbt.setByte("meta", (byte) is.getItemDamage());
 				te.broadcastPacketInRange(te.createDataPacket(nbt));
 			}
@@ -133,13 +133,13 @@ public class ItemPlank extends ItemTerra
 				if((tile == null) || (!(tile instanceof TileEntityWoodConstruct))) {
 					return false;
 				}
-
+				int index = dd2+(x+(y*d));
 				TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
-				te.data.set(dd2+(x+(y*d)));
-				te.woodTypes[dd2+(x+(y*d))] = (byte) is.getItemDamage();
+				te.data.set(index);
+				te.woodTypes[index] = (byte) is.getItemDamage();
 
 				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setInteger("index", dd2+(x+(z*d)));
+				nbt.setInteger("index", index);
 				nbt.setByte("meta", (byte) is.getItemDamage());
 				te.broadcastPacketInRange(te.createDataPacket(nbt));
 			}
@@ -153,13 +153,13 @@ public class ItemPlank extends ItemTerra
 				if((tile == null) || (!(tile instanceof TileEntityWoodConstruct))) {
 					return false;
 				}
-
+				int index = (y+(z*d));
 				TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
-				te.data.set((y+(z*d)));
-				te.woodTypes[(y+(z*d))] = (byte) is.getItemDamage();
+				te.data.set(index);
+				te.woodTypes[index] = (byte) is.getItemDamage();
 
 				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setInteger("index", (y+(z*d)));
+				nbt.setInteger("index", index);
 				nbt.setByte("meta", (byte) is.getItemDamage());
 				te.broadcastPacketInRange(te.createDataPacket(nbt));
 			}
@@ -173,13 +173,13 @@ public class ItemPlank extends ItemTerra
 				if((tile == null) || (!(tile instanceof TileEntityWoodConstruct))) {
 					return false;
 				}
-
+				int index = (y+(z*d));
 				TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
-				te.data.set((y+(z*d)));
-				te.woodTypes[(y+(z*d))] = (byte) is.getItemDamage();
+				te.data.set(index);
+				te.woodTypes[index] = (byte) is.getItemDamage();
 
 				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setInteger("index", (y+(z*d)));
+				nbt.setInteger("index", index);
 				nbt.setByte("meta", (byte) is.getItemDamage());
 				te.broadcastPacketInRange(te.createDataPacket(nbt));
 			}
