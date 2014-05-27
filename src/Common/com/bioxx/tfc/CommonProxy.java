@@ -40,7 +40,6 @@ import com.bioxx.tfc.Entities.Mobs.EntityWolfTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityZombieTFC;
 import com.bioxx.tfc.Handlers.GuiHandler;
 import com.bioxx.tfc.Handlers.ServerTickHandler;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBellows;
@@ -81,7 +80,6 @@ import com.bioxx.tfc.WorldGen.TFCProvider;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -360,15 +358,5 @@ public class CommonProxy
 	public void registerGuiHandler()
 	{
 		NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.instance, new GuiHandler());
-	}
-
-	public void sendCustomPacketNearTarget(AbstractPacket message, TargetPoint tp) 
-	{
-		TerraFirmaCraft.packetPipeline.sendToAllAround(message, tp);
-	}
-
-	public void sendCustomPacket(AbstractPacket message) 
-	{
-		TerraFirmaCraft.packetPipeline.sendToAll(message);
 	}
 }

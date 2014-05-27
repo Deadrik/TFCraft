@@ -66,7 +66,6 @@ import com.bioxx.tfc.Handlers.Client.KeyBindingHandler;
 import com.bioxx.tfc.Handlers.Client.PlankHighlightHandler;
 import com.bioxx.tfc.Handlers.Client.RenderOverlayHandler;
 import com.bioxx.tfc.Handlers.Client.SoundHandler;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Render.FoliageColorReloadListener;
 import com.bioxx.tfc.Render.GrassColorReloadListener;
 import com.bioxx.tfc.Render.RenderBear;
@@ -146,7 +145,6 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -594,17 +592,5 @@ public class ClientProxy extends CommonProxy
 	{
 		Minecraft.getMinecraft();
 		return Minecraft.isFancyGraphicsEnabled();
-	}
-
-	@Override
-	public void sendCustomPacketNearTarget(AbstractPacket message, TargetPoint tp) 
-	{
-		TerraFirmaCraft.packetPipeline.sendToServer(message);
-	}
-
-	@Override
-	public void sendCustomPacket(AbstractPacket message) 
-	{
-		TerraFirmaCraft.packetPipeline.sendToServer(message);
 	}
 }

@@ -69,13 +69,13 @@ public abstract class NetworkTileEntity extends TileEntity
 	public void broadcastPacketInRange()
 	{
 		int dim = worldObj.provider.dimensionId;
-		TerraFirmaCraft.proxy.sendCustomPacketNearTarget(this.createDataPacket(), 
+		TerraFirmaCraft.packetPipeline.sendToAllAround(this.createDataPacket(), 
 				new TargetPoint(dim, xCoord,yCoord,zCoord,broadcastRange));
 	}
 
 	public void broadcastPacketInRange(AbstractPacket packet)
 	{
-		TerraFirmaCraft.proxy.sendCustomPacketNearTarget(packet, 
+		TerraFirmaCraft.packetPipeline.sendToAllAround(packet, 
 				new TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,broadcastRange));
 	}
 

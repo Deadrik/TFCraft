@@ -37,11 +37,11 @@ public class BlockLeatherRack extends BlockTerraContainer
 		if(!world.isRemote)
 		{
 			TELeatherRack te = (TELeatherRack)world.getTileEntity(x, y, z);
-			if(te.workedArea < Short.MAX_VALUE && entityplayer.getCurrentEquippedItem() != null && 
+			if(te.workedArea != -1 && entityplayer.getCurrentEquippedItem() != null && 
 					entityplayer.getCurrentEquippedItem().getItem() instanceof IKnife)
 			{
 				int coord = (int)Math.floor(hitX/0.25f)+((int)Math.floor(hitZ/0.25f)*4);
-				te.workedArea |= (1 << coord);
+				te.workArea(coord);
 				NBTTagCompound nbt = new NBTTagCompound();
 				nbt.setShort("workedArea", te.workedArea);
 				te.broadcastPacketInRange(te.createDataPacket(nbt));

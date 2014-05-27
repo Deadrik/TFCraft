@@ -14,7 +14,9 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Blocks.Flora.BlockLogHoriz;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.TileEntities.TELeatherRack;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
@@ -35,17 +37,29 @@ public class ItemRawHide extends ItemLooseRock
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		if(!world.isRemote && itemstack.getItem() == TFCItems.Hide && itemstack.getItemDamage() >= 2){
-			int d = (int)((45 + ((entityplayer.rotationYaw % 360)+360f)%360)/90)%4; //direction
-			int x2 = x+(d==1?-1:(d==3?1:0)); // the x-coord of the second block
-			int z2 = z+(d==2?-1:(d==0?1:0));
-			if(world.getBlock(x, y, z)==TFCBlocks.Thatch && side == 1 && world.getBlock(x2,y,z2)==TFCBlocks.Thatch
-					&& world.isAirBlock(x, y+1, z) && world.isAirBlock(x2, y+1, z2)){
-				world.func_147480_a/*destroyBlock*/(x, y, z, false);
-				world.func_147480_a/*destroyBlock*/(x2, y, z2, false);
-				world.setBlock(x, y, z, TFCBlocks.StrawHideBed, d, 2);
-				world.setBlock(x2, y, z2, TFCBlocks.StrawHideBed, d+8, 2);
-				itemstack.stackSize--;
+		if(!world.isRemote)
+		{
+			if(itemstack.getItem() == TFCItems.Hide && itemstack.getItemDamage() >= 2){
+				int d = (int)((45 + ((entityplayer.rotationYaw % 360)+360f)%360)/90)%4; //direction
+				int x2 = x+(d==1?-1:(d==3?1:0)); // the x-coord of the second block
+				int z2 = z+(d==2?-1:(d==0?1:0));
+				if(world.getBlock(x, y, z)==TFCBlocks.Thatch && side == 1 && world.getBlock(x2,y,z2)==TFCBlocks.Thatch
+						&& world.isAirBlock(x, y+1, z) && world.isAirBlock(x2, y+1, z2)){
+					world.func_147480_a/*destroyBlock*/(x, y, z, false);
+					world.func_147480_a/*destroyBlock*/(x2, y, z2, false);
+					world.setBlock(x, y, z, TFCBlocks.StrawHideBed, d, 2);
+					world.setBlock(x2, y, z2, TFCBlocks.StrawHideBed, d+8, 2);
+					itemstack.stackSize--;
+				}
+			}
+			else if(itemstack.getItem() == TFCItems.SoakedHide)
+			{
+				if(world.getBlock(x, y, z) instanceof BlockLogHoriz && world.setBlock(x, y+1, z, TFCBlocks.LeatherRack))
+				{
+					TELeatherRack te = (TELeatherRack)world.getTileEntity(x, y+1, z);
+					te.setLeather(itemstack);
+				}
+
 			}
 		}
 		return true;
