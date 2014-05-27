@@ -313,7 +313,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
+			//player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
 			if(getGender() == GenderEnum.FEMALE && pregnant)
 				player.addChatMessage(new ChatComponentText("Pregnant"));
 

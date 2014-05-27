@@ -22,7 +22,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -479,12 +478,10 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			if(!player.isSneaking())
+			/*if(!player.isSneaking())
 			{
 				player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
-			}
-			//if(getGender()==GenderEnum.FEMALE && pregnant)
-			//	player.addChatMessage("Pregnant");
+			}*/
 		}
 		//player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		if(!worldObj.isRemote && isAdult()&& player.isSneaking() && attackEntityFrom(DamageSource.generic, 5))
