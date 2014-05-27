@@ -297,6 +297,8 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				long temp = tag.getLong("TempTimer");
 				if(total - temp < 11)
 					arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ItemHeat.Liquid"));
+				else
+					arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.ItemHeat.Solidified"));
 			}
 
 			if(tag.hasKey("Items"))
@@ -314,7 +316,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 							if(itemstack.getItem() instanceof ItemFoodTFC)
 							{
 								float decay = itemstack.getTagCompound().getFloat("foodDecay");
-								float weight = itemstack.getTagCompound().getFloat("foodWeight");
+								float weight = Helper.roundNumber(itemstack.getTagCompound().getFloat("foodWeight"), 100);
 
 								String ds = " " + EnumChatFormatting.DARK_GRAY + Helper.roundNumber(decay / weight * 100, 10) + "%";
 								if (decay <= 0)
@@ -338,7 +340,17 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		{
 			arraylist.add(StatCollector.translateToLocal("gui.Help"));
 			arraylist.add(StatCollector.translateToLocal("gui.PotteryBase.Inst0"));
-			arraylist.add(StatCollector.translateToLocal("gui.PotteryVesselSmall.Inst0"));
+
+			NBTTagCompound tag = is.stackTagCompound;
+			if (tag != null && tag.hasKey("TempTimer"))
+			{
+				long total = TFC_Time.getTotalHours();
+				long temp = tag.getLong("TempTimer");
+				if (total - temp < 11)
+					arraylist.add(StatCollector.translateToLocal("gui.PotteryVesselSmall.Inst0"));
+			}
+			else
+				arraylist.add(StatCollector.translateToLocal("gui.PotteryVesselSmall.Inst0"));
 		}
 		else
 		{

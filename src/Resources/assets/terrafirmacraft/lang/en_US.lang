@@ -2204,6 +2204,7 @@ gui.Torch.CatchingFire=Catching Fire
 gui.Torch.Lit=Lit
 
 gui.ItemHeat.Liquid=Liquid
+gui.ItemHeat.Solidified=Solidified
 gui.ItemHeat.Caution=Caution
 gui.ItemHeat.Warming=Warming
 gui.ItemHeat.Hot=Hot
@@ -2216,6 +2217,10 @@ gui.ItemHeat.Yellow=Yellow
 gui.ItemHeat.YellowWhite=Yellow White
 gui.ItemHeat.White=White
 gui.ItemHeat.BrilliantWhite=Brilliant White
+
+gui.ingot.workable=Can Work
+gui.ingot.weldable=Can Weld
+gui.ingot.danger=**Danger**
 
 gui.milk.fresh=Fresh
 gui.milk.old=Old
@@ -2257,6 +2262,3 @@ skill.cooking=Cooking
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
-gui.ingot.workable=Can Work
-gui.ingot.weldable=Can Weld
-gui.ingot.danger=**Danger**
