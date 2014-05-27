@@ -1,5 +1,11 @@
 package com.bioxx.tfc.Handlers;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Food.ItemFoodTFC;
@@ -7,11 +13,6 @@ import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Util.Helper;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
@@ -35,15 +36,24 @@ public class FoodCraftingHandler
 					(craftResult.getItem() == TFCItems.RiceGrain && gridHasItem(iinventory, TFCItems.RiceWhole)))
 			{
 				HandleItem(e.player, iinventory, Recipes.Knives);
-				if(!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw, 4)))
-					e.player.dropItem(TFCItems.Straw, 4);
 
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
 					if(iinventory.getStackInSlot(i) == null)
 						continue;
 					if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
+					{
+						float foodWeight = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight");
+						int strawCount = 0;
+
+						for (int j = 0; j < foodWeight; j += 4)
+							strawCount++;
+
+						if (!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw, strawCount)))
+							e.player.dropItem(TFCItems.Straw, strawCount);
+
 						ItemFoodTFC.createTag(craftResult, iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight"));
+					}
 				}
 			}
 			else if(craftResult.hasTagCompound() && craftResult.getTagCompound().hasKey("foodWeight"))

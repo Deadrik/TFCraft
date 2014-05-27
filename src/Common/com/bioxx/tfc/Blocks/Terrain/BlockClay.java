@@ -71,7 +71,7 @@ public class BlockClay extends BlockTerra
 	@Override
 	public int quantityDropped(Random par1Random)
 	{
-		return par1Random.nextInt(4);
+		return par1Random.nextInt(3) + 1;
 	}
 
 	@Override
