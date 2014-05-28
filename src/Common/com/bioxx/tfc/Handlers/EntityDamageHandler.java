@@ -63,8 +63,6 @@ public class EntityDamageHandler
 			event.ammount = 50;
 		else if(event.source == DamageSource.lava)
 			event.ammount = 100;
-		else if(event.source == DamageSource.starve)
-			event.ammount *= 10;
 		else if(event.source == DamageSource.inWall)
 			event.ammount = 100;
 		else if(event.source == DamageSource.fallingBlock)
