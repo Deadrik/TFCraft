@@ -430,8 +430,9 @@ public class TFCBlocks
 		GameRegistry.registerBlock(MetalSheet, "MetalSheet");
 
 		// Wooden Doors
-		for (int i=0; i < Global.WOOD_ALL.length; i++)
+		for (int i=0; i < Global.WOOD_ALL.length; i++) {
 			GameRegistry.registerBlock(Doors[i], "Door"+Global.WOOD_ALL[i].replaceAll(" ", ""));
+		}
 
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
 		GameRegistry.registerBlock(Barrel, ItemBarrels.class,"Barrel");
@@ -639,8 +640,9 @@ public class TFCBlocks
 		TFCBlocks.WallSmoothMM = new BlockCustomWall(TFCBlockID.WallSmoothMM, StoneMMSmooth, 6).setUnlocalizedName("WallSmooth");
 
 		// Wooden Doors
-		for (int i=0; i < Global.WOOD_ALL.length; i++)
+		for (int i=0; i < Global.WOOD_ALL.length; i++) {
 			TFCBlocks.Doors[i] = new BlockCustomDoor(TFCBlockID.Doors[i], i*2).setUnlocalizedName("Door "+Global.WOOD_ALL[i]);
+		}
 
 		TFCBlocks.IngotPile =  new BlockIngotPile(TFCBlockID.IngotPile).setUnlocalizedName("ingotpile").setHardness(3);
 
@@ -720,24 +722,23 @@ public class TFCBlocks
 
 	}
 
-	public static boolean isIdVSupport(int id){	
+	public static boolean isIdVSupport(int id) {	
 		return id == WoodSupportV.blockID || id == WoodSupportV2.blockID;
 	}
 
-	public static boolean isIdHSupport(int id){	
+	public static boolean isIdHSupport(int id) {	
 		return id == WoodSupportH.blockID || id == WoodSupportH2.blockID;
 	}
 
-	public static boolean isIdAFence(int par0)
-	{
+	public static boolean isIdAFence(int par0) {
 		return par0 == TFCBlocks.Fence.blockID||par0 == TFCBlocks.Fence2.blockID || BlockFence.isIdAFence(par0);
 	}
 
-	public static boolean canFenceConnectTo(int l){
+	public static boolean canFenceConnectTo(int l) {
 		return isIdAFence(l) || l == TFCBlocks.FenceGate.blockID || l == TFCBlocks.FenceGate2.blockID;
 	}
 
-	public static boolean isArmourStand(int l){
+	public static boolean isArmourStand(int l) {
 		return l == TFCBlocks.ArmourStand.blockID || l == TFCBlocks.ArmourStand2.blockID;
 	}
 }
