@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -16,6 +17,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Vector3f;
 
@@ -60,14 +62,9 @@ public class TELogPile extends TileEntity implements IInventory
 			is.stackSize = 1;
 			storage[slot].stackSize--;
 			if(storage[slot].stackSize == 0)
-			{
 				storage[slot] = null;
-			}
 			if(this.getNumberOfLogs() == 0)
-			{
 				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-			}
-
 			return is;
 		}
 	}
@@ -93,8 +90,11 @@ public class TELogPile extends TileEntity implements IInventory
 
 	public boolean contentsMatch(int index, ItemStack is)
 	{
-		if(storage[index] != null && storage[index].getItem() == is.getItem() && storage[index].getItemDamage() == is.getItemDamage() &&
-				storage[index].stackSize < storage[index].getMaxStackSize() && storage[index].stackSize + 1 <= this.getInventoryStackLimit())
+		if(storage[index] != null &&
+				storage[index].getItem() == is.getItem() &&
+				storage[index].getItemDamage() == is.getItemDamage() &&
+				storage[index].stackSize < storage[index].getMaxStackSize() &&
+				storage[index].stackSize + 1 <= this.getInventoryStackLimit())
 			return true;
 		else
 			return false;
@@ -111,35 +111,38 @@ public class TELogPile extends TileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack decrStackSize(int i, int j)
+	public ItemStack decrStackSize(int slot, int amount)
 	{
-		if(storage[i] != null)
+		if(storage[slot] != null)
 		{
-			if(storage[i].stackSize <= j)
+			ItemStack is;
+			if(storage[slot].stackSize <= amount)
 			{
-				ItemStack itemstack = storage[i];
-				storage[i] = null;
+				is = storage[slot];
+				storage[slot] = null;
 				if(charcoalFirepit != null)
 				{
 					if(charcoalFirepit.isInactiveCharcoalFirepit())
-						charcoalFirepit.logPileUpdate(-j);
+						charcoalFirepit.logPileUpdate(-amount);
 					else
 						setCharcoalFirepit(null);
 				}
-				return itemstack;
+				return is;
 			}
-			ItemStack itemstack1 = storage[i].splitStack(j);
-			if(storage[i].stackSize == 0)
-				storage[i] = null;
+
+			if(storage[slot].stackSize == 0)
+				storage[slot] = null;
 
 			if(charcoalFirepit != null)
 			{
 				if(charcoalFirepit.isInactiveCharcoalFirepit())
-					charcoalFirepit.logPileUpdate(-j);
+					charcoalFirepit.logPileUpdate(-amount);
 				else
 					setCharcoalFirepit(null);
 			}
-			return itemstack1;
+
+			is = storage[slot].splitStack(amount);
+			return is;
 		}
 		else
 			return null;
@@ -195,13 +198,13 @@ public class TELogPile extends TileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int i)
+	public ItemStack getStackInSlot(int slot)
 	{
-		return storage[i];
+		return storage[slot];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1)
+	public ItemStack getStackInSlotOnClosing(int slot)
 	{
 		return null;
 	}
@@ -234,11 +237,11 @@ public class TELogPile extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack) 
+	public void setInventorySlotContents(int slot, ItemStack is)
 	{
-		storage[i] = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-			itemstack.stackSize = getInventoryStackLimit();
+		storage[slot] = is;
+		if(is != null && is.stackSize > getInventoryStackLimit())
+			is.stackSize = getInventoryStackLimit();
 	}
 
 	@Override
@@ -306,13 +309,13 @@ public class TELogPile extends TileEntity implements IInventory
 	}
 	
 	@Override
-	public boolean hasCustomInventoryName() 
+	public boolean hasCustomInventoryName()
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
+	public boolean isItemValidForSlot(int slot, ItemStack is)
 	{
 		return false;
 	}
@@ -333,18 +336,31 @@ public class TELogPile extends TileEntity implements IInventory
 		{
 			if(!charcoalFirepit.isInactiveCharcoalFirepit())
 			{
+				Block block;
 				blocksToBeSetOnFire = new ArrayDeque<Vector3f>();
-				if(worldObj.isAirBlock(xCoord + 1, yCoord, zCoord))
+				
+				block = worldObj.getBlock(xCoord + 1, yCoord, zCoord);
+				if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord + 1, yCoord, zCoord));
-				if(worldObj.isAirBlock(xCoord - 1, yCoord, zCoord))
+
+				block = worldObj.getBlock(xCoord - 1, yCoord, zCoord);
+				if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord - 1, yCoord, zCoord));
-				if(worldObj.isAirBlock(xCoord, yCoord, zCoord + 1))
+
+				block = worldObj.getBlock(xCoord, yCoord, zCoord + 1);
+				if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord + 1));
-				if(worldObj.isAirBlock(xCoord, yCoord, zCoord - 1))
+
+				block = worldObj.getBlock(xCoord, yCoord, zCoord - 1);
+				if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord - 1));
-				if(worldObj.isAirBlock(xCoord, yCoord + 1, zCoord))
+
+				block = worldObj.getBlock(xCoord, yCoord + 1, zCoord);
+				if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord + 1, zCoord));
-				if(worldObj.isAirBlock(xCoord, yCoord - 1, zCoord))
+
+				block = worldObj.getBlock(xCoord, yCoord - 1, zCoord);
+				if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord - 1, zCoord));
 			}
 			else

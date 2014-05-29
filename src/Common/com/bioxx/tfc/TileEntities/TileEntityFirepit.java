@@ -6,9 +6,11 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -38,8 +40,8 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 	private boolean logPileChecked;
 	public int charcoalCounter;
 	public boolean hasCookingPot;
-	private Map<Integer, int[]> topMap = new HashMap<Integer, int[]>();
-	private boolean topScan;
+	private Map<Integer, int[]> smokeMap = new HashMap<Integer, int[]>(); // Coords where smoke will be generated
+	private boolean scanSmokeLayer;
 	private int topY;
 	public final int FIREBURNTIME = (int) ((TFC_Time.hourLength * 18) / 100);//default 240
 
@@ -55,7 +57,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 		oldWoodCount = 0;
 		charcoalCounter = 0;
 		hasCookingPot = false;
-		topScan = true;
+		scanSmokeLayer = true;
 	}
 
 	@Override
@@ -65,10 +67,10 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 
 	public void combineMetals(ItemStack InputItem, ItemStack DestItem)
 	{
-		int D1 = 100-InputItem.getItemDamage();
-		int D2 = 100-DestItem.getItemDamage();
+		int D1 = 100 - InputItem.getItemDamage();
+		int D2 = 100 - DestItem.getItemDamage();
 		//This was causing the infinite amounts possibly
-		DestItem.setItemDamage(100-(D1 + D2));
+		DestItem.setItemDamage(100 - (D1 + D2));
 	}
 
 	public void CookItem()
@@ -108,7 +110,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 							return;
 						}
 					}
-					mold = new ItemStack(TFCItems.CeramicMold,1);
+					mold = new ItemStack(TFCItems.CeramicMold, 1);
 					mold.stackSize = 1;
 					mold.setItemDamage(1);
 				}
@@ -128,13 +130,13 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 					int fromSide = 0;
 					if(fireItemStacks[7] != null && output != null && output.getItem() == fireItemStacks[7].getItem() && fireItemStacks[7].getItemDamage() > 0)
 					{
-						int amt1 = 100-damage;//the percentage of the output
-						int amt2 = 100-fireItemStacks[7].getItemDamage();//the percentage currently in the out slot
+						int amt1 = 100 - damage;//the percentage of the output
+						int amt2 = 100 - fireItemStacks[7].getItemDamage();//the percentage currently in the out slot
 						int amt3 = amt1 + amt2;//combined amount
 						leftover = amt3 - 100;//assign the leftover so that we can add to the other slot if applicable
 						if(leftover > 0)
 							addLeftover = true;
-						int amt4 = 100-amt3;//convert the percent back to mc damage
+						int amt4 = 100 - amt3;//convert the percent back to mc damage
 						if(amt4 < 0)
 							amt4 = 0;//stop the infinite glitch
 						fireItemStacks[7] = output.copy();
@@ -147,14 +149,14 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 					}
 					else if(fireItemStacks[8] != null && output != null && output.getItem() == fireItemStacks[8].getItem() && fireItemStacks[8].getItemDamage() > 0)
 					{
-						int amt1 = 100-damage;//the percentage of the output
-						int amt2 = 100-fireItemStacks[8].getItemDamage();//the percentage currently in the out slot
+						int amt1 = 100 - damage;//the percentage of the output
+						int amt2 = 100 - fireItemStacks[8].getItemDamage();//the percentage currently in the out slot
 						int amt3 = amt1 + amt2;//combined amount
 						leftover = amt3 - 100;//assign the leftover so that we can add to the other slot if applicable
 						if(leftover > 0)
 							addLeftover = true;
 						fromSide = 1;
-						int amt4 = 100-amt3;//convert the percent back to mc damage
+						int amt4 = 100 - amt3;//convert the percent back to mc damage
 						if(amt4 < 0)
 							amt4 = 0;//stop the infinite glitch
 						fireItemStacks[8] = output.copy();
@@ -185,10 +187,10 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 						int dest = fromSide == 1 ? 7 : 8;
 						if(fireItemStacks[dest] != null && output.getItem() == fireItemStacks[dest].getItem() && fireItemStacks[dest].getItemDamage() > 0)
 						{
-							int amt1 = 100-leftover;//the percentage of the output
-							int amt2 = 100-fireItemStacks[dest].getItemDamage();//the percentage currently in the out slot
+							int amt1 = 100 - leftover;//the percentage of the output
+							int amt2 = 100 - fireItemStacks[dest].getItemDamage();//the percentage currently in the out slot
 							int amt3 = amt1 + amt2;//combined amount
-							int amt4 = 100-amt3;//convert the percent back to mc damage
+							int amt4 = 100 - amt3;//convert the percent back to mc damage
 							if(amt4 < 0)
 								amt4 = 0;//stop the infinite glitch
 							fireItemStacks[dest] = output.copy();
@@ -199,7 +201,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 						else if(fireItemStacks[dest] != null && fireItemStacks[dest].getItem() == TFCItems.CeramicMold)
 						{
 							fireItemStacks[dest] = output.copy();
-							fireItemStacks[dest].setItemDamage(100-leftover);
+							fireItemStacks[dest].setItemDamage(100 - leftover);
 							TFC_ItemHeat.SetTemp(fireItemStacks[dest], temp);
 						}
 					}
@@ -220,11 +222,11 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 					}
 					else if(fireItemStacks[7] == null)
 					{
-						fireItemStacks[7] = output.copy(); 
+						fireItemStacks[7] = output.copy();
 					}
 					else if(fireItemStacks[8] == null)
 					{
-						fireItemStacks[8] = output.copy(); 
+						fireItemStacks[8] = output.copy();
 					}
 					else if((fireItemStacks[7].stackSize == fireItemStacks[7].getMaxStackSize() && fireItemStacks[8].stackSize == fireItemStacks[8].getMaxStackSize())
 							|| (fireItemStacks[7].getItem() != output.getItem() && fireItemStacks[8].getItem() != output.getItem())
@@ -239,19 +241,19 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack decrStackSize(int i, int j)
+	public ItemStack decrStackSize(int slot, int amount)
 	{
-		if(fireItemStacks[i] != null)
+		if(fireItemStacks[slot] != null)
 		{
-			if(fireItemStacks[i].stackSize <= j)
+			if(fireItemStacks[slot].stackSize <= amount)
 			{
-				ItemStack itemstack = fireItemStacks[i];
-				fireItemStacks[i] = null;
+				ItemStack itemstack = fireItemStacks[slot];
+				fireItemStacks[slot] = null;
 				return itemstack;
 			}
-			ItemStack itemstack1 = fireItemStacks[i].splitStack(j);
-			if(fireItemStacks[i].stackSize == 0)
-				fireItemStacks[i] = null;
+			ItemStack itemstack1 = fireItemStacks[slot].splitStack(amount);
+			if(fireItemStacks[slot].stackSize == 0)
+				fireItemStacks[slot] = null;
 			return itemstack1;
 		}
 		else
@@ -283,7 +285,6 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 
 	public void externalFireCheck()
 	{
-		Random R = new Random();
 		if(externalFireCheckTimer == 0)
 		{
 			if(!logPileChecked)
@@ -291,7 +292,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 				logPileChecked = true;
 				oldWoodCount = externalWoodCount;
 				externalWoodCount = 0;
-				ProcessPile(xCoord,yCoord,zCoord,false);
+				ProcessPile(xCoord, yCoord, zCoord, false);
 				if(oldWoodCount != externalWoodCount)
 					charcoalCounter = 0;
 			}
@@ -300,11 +301,11 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 			if(charcoalCounter == 0)
 				charcoalCounter = (int) TFC_Time.getTotalTicks();
 
-			if(charcoalCounter > 0 && charcoalCounter + (FIREBURNTIME*100) < TFC_Time.getTotalTicks() )
+			if(charcoalCounter > 0 && charcoalCounter + (FIREBURNTIME * 100) < TFC_Time.getTotalTicks())
 			{
 				logPileChecked = false;
 				charcoalCounter = 0;
-				ProcessPile(xCoord,yCoord,zCoord,true);
+				ProcessPile(xCoord, yCoord, zCoord, true);
 				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 			}
 		}
@@ -318,83 +319,110 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 		boolean checkArray[][][] = new boolean[25][13][25];
 		boolean reachedTop = false;
 
-		while(!reachedTop && j+y >= 0 && y < 13)
+		while(!reachedTop && j + y >= 0 && y < 13)
 		{
-			if(worldObj.getBlock(x, j+y+1, z) != TFCBlocks.LogPile)
+			if(worldObj.getBlock(x, j + y + 1, z) != TFCBlocks.LogPile)
 				reachedTop = true;
-			checkOut(i, j+y, k, empty);
-			scanLogs(i,j+y,k,checkArray,(byte)12,(byte)y,(byte)12, empty, false);
+			checkOut(i, j + y, k, empty);
+			scanLogs(i, j + y, k, checkArray, (byte)12, (byte)y, (byte)12, empty, false);
 			y++;
 		}
 	}
 
-	private boolean checkOut(int i, int j, int k, boolean empty)
+	private boolean checkOut(int x, int y, int z, boolean empty)
 	{
-		if(worldObj.getBlock(i, j, k) == TFCBlocks.LogPile)
+		if(worldObj.getBlock(x, y, z) == TFCBlocks.LogPile)
 		{
-			TELogPile te = (TELogPile)worldObj.getTileEntity(i, j, k);
+			TELogPile logPile = (TELogPile)worldObj.getTileEntity(x, y, z);
 
 			int count = 0;
-			if(te != null)
+			if(logPile != null)
 			{
 				if(!empty)
 				{
+					Block block;
 					Queue<Vector3f> blocksOnFire = new ArrayDeque<Vector3f>();
-					if(worldObj.isAirBlock(i+1, j, k))
-						blocksOnFire.add(new Vector3f(i+1, j, k));
-					if(worldObj.isAirBlock(i-1, j, k))
-						blocksOnFire.add(new Vector3f(i-1, j, k));
-					if(worldObj.isAirBlock(i, j, k+1))
-						blocksOnFire.add(new Vector3f(i, j, k+1));
-					if(worldObj.isAirBlock(i, j, k-1))
-						blocksOnFire.add(new Vector3f(i, j, k-1));
-					if(worldObj.isAirBlock(i, j+1, k))
-						blocksOnFire.add(new Vector3f(i, j+1, k));
-					if(worldObj.isAirBlock(i, j-1, k))
-						blocksOnFire.add(new Vector3f(i, j-1, k));
-					te.blocksToBeSetOnFire = blocksOnFire;
-					te.setCharcoalFirepit(this);
+
+					block = worldObj.getBlock(x + 1, y, z);
+					if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+						blocksOnFire.add(new Vector3f(x + 1, y, z));
+
+					block = worldObj.getBlock(x - 1, y, z);
+					if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+						blocksOnFire.add(new Vector3f(x - 1, y, z));
+
+					block = worldObj.getBlock(x, y, z + 1);
+					if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+						blocksOnFire.add(new Vector3f(x, y, z + 1));
+
+					block = worldObj.getBlock(x, y, z - 1);
+					if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+						blocksOnFire.add(new Vector3f(x, y, z - 1));
+
+					block = worldObj.getBlock(x, y + 1, z);
+					if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+						blocksOnFire.add(new Vector3f(x, y + 1, z));
+
+					block = worldObj.getBlock(x, y - 1, z);
+					if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+						blocksOnFire.add(new Vector3f(x, y - 1, z));
+
+					logPile.blocksToBeSetOnFire = blocksOnFire;
+					logPile.setCharcoalFirepit(this);
 				}
 				else
-					te.setCharcoalFirepit(null);
+					logPile.setCharcoalFirepit(null);
 
-				if(te.storage[0] != null)
+				if(logPile.storage[0] != null)
 				{
 					if(!empty)
-						externalWoodCount += te.storage[0].stackSize;
+						externalWoodCount += logPile.storage[0].stackSize;
 					else
-						count += te.storage[0].stackSize; te.storage[0] = null;
+					{
+						count += logPile.storage[0].stackSize;
+						logPile.storage[0] = null;
+					}
 				}
-				if(te.storage[1] != null)
+				if(logPile.storage[1] != null)
 				{
 					if(!empty)
-						externalWoodCount += te.storage[1].stackSize;
+						externalWoodCount += logPile.storage[1].stackSize;
 					else
-						count += te.storage[1].stackSize; te.storage[1] = null;
+					{
+						count += logPile.storage[1].stackSize;
+						logPile.storage[1] = null;
+					}
 				}
-				if(te.storage[2] != null)
+				if(logPile.storage[2] != null)
 				{
 					if(!empty)
-						externalWoodCount += te.storage[2].stackSize;
+						externalWoodCount += logPile.storage[2].stackSize;
 					else
-						count += te.storage[2].stackSize; te.storage[2] = null;
+					{
+						count += logPile.storage[2].stackSize;
+						logPile.storage[2] = null;
+					}
 				}
-				if(te.storage[3] != null)
+				if(logPile.storage[3] != null)
 				{
 					if(!empty)
-						externalWoodCount += te.storage[3].stackSize;
+						externalWoodCount += logPile.storage[3].stackSize;
 					else
-						count += te.storage[3].stackSize; te.storage[3] = null;
+					{
+						count += logPile.storage[3].stackSize;
+						logPile.storage[3] = null;
+					}
 				}
 			}
+
 			if(empty)
 			{
 				float percent = 25 + worldObj.rand.nextInt(25);
-				count = (int) (count * (percent/100));
-				worldObj.setBlock(i, j, k, TFCBlocks.Charcoal, count, 0x2);
+				count = (int) (count * (percent / 100));
+				worldObj.setBlock(x, y, z, TFCBlocks.Charcoal, count, 0x2);
 				/* Trick to make the block fall or start the combining "chain" with other blocks.
 				 * We don't notify the bottom block because it may be air so this block won't fall */
-				worldObj.notifyBlockOfNeighborChange(i, j, k, TFCBlocks.Charcoal);
+				worldObj.notifyBlockOfNeighborChange(x, y, z, TFCBlocks.Charcoal);
 			}
 			return true;
 		}
@@ -411,13 +439,13 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 			{
 				for (offsetZ = -1; offsetZ <= 1; offsetZ++)
 				{
-					if(x+offsetX < 25 && x+offsetX >= 0 && z+offsetZ < 25 && z+offsetZ >= 0 && y < 13 && y >= 0)
+					if(x + offsetX < 25 && x + offsetX >= 0 && z + offsetZ < 25 && z + offsetZ >= 0 && y < 13 && y >= 0)
 					{
-						if(!checkArray[x+offsetX][y][z+offsetZ] && checkOut(i+offsetX, j, k+offsetZ, empty))
+						if(!checkArray[x + offsetX][y][z + offsetZ] && checkOut(i + offsetX, j, k + offsetZ, empty))
 						{
-							scanLogs(i+offsetX, j, k+offsetZ, checkArray,(byte)(x+offsetX),y,(byte)(z+offsetZ), empty, top);
+							scanLogs(i + offsetX, j, k + offsetZ, checkArray, (byte)(x + offsetX), y, (byte)(z + offsetZ), empty, top);
 							if(top)
-								topMap.put(topMap.size(), new int[] {i+offsetX, j+2, k+offsetZ});
+								smokeMap.put(smokeMap.size(), new int[] {i + offsetX, j + 2, k + offsetZ});
 						}
 					}
 				}
@@ -462,13 +490,13 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int i)
+	public ItemStack getStackInSlot(int slot)
 	{
-		return fireItemStacks[i];
+		return fireItemStacks[slot];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1)
+	public ItemStack getStackInSlotOnClosing(int slot)
 	{
 		return null;
 	}
@@ -476,15 +504,15 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 	public int getSurroundedByWood(int x, int y, int z)
 	{
 		int count = 0;
-		if(worldObj.getBlock(x+1, y, z).getMaterial() == Material.wood)
+		if(worldObj.getBlock(x + 1, y, z).getMaterial() == Material.wood)
 			count++;
-		if(worldObj.getBlock(x-1, y, z).getMaterial() == Material.wood)
+		if(worldObj.getBlock(x - 1, y, z).getMaterial() == Material.wood)
 			count++;
-		if(worldObj.getBlock(x, y+1, z).getMaterial() == Material.wood)
+		if(worldObj.getBlock(x, y + 1, z).getMaterial() == Material.wood)
 			count++;
-		if(worldObj.getBlock(x, y, z+1).getMaterial() == Material.wood)
+		if(worldObj.getBlock(x, y, z + 1).getMaterial() == Material.wood)
 			count++;
-		if(worldObj.getBlock(x, y, z-1).getMaterial() == Material.wood)
+		if(worldObj.getBlock(x, y, z - 1).getMaterial() == Material.wood)
 			count++;
 		return count;
 	}
@@ -508,17 +536,17 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 		}
 		else if(fireItemStacks[5] == null && fireItemStacks[4] == null)
 		{
-			if(worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.LogPile)
+			if(charcoalCounter > 0 && fireTemp < 50 && worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.LogPile)
 			{
-				TELogPile te = (TELogPile)worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
-				if(te.getStackInSlot(0) != null)
-					fireItemStacks[5] = te.takeLog(0);
-				else if(te.getStackInSlot(1) != null)
-					fireItemStacks[5] = te.takeLog(1);
-				else if(te.getStackInSlot(2) != null)
-					fireItemStacks[5] = te.takeLog(2);
-				else if(te.getStackInSlot(3) != null)
-					fireItemStacks[5] = te.takeLog(3);
+				TELogPile logPile = (TELogPile)worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
+				if(logPile.getStackInSlot(0) != null)
+					fireItemStacks[5] = logPile.takeLog(0);
+				else if(logPile.getStackInSlot(1) != null)
+					fireItemStacks[5] = logPile.takeLog(1);
+				else if(logPile.getStackInSlot(2) != null)
+					fireItemStacks[5] = logPile.takeLog(2);
+				else if(logPile.getStackInSlot(3) != null)
+					fireItemStacks[5] = logPile.takeLog(3);
 			}
 		}
 	}
@@ -535,29 +563,11 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void setInventorySlotContents(int slot, ItemStack is)
 	{
-		super.readFromNBT(nbttagcompound);
-		charcoalCounter = nbttagcompound.getInteger("charcoalCounter");
-		externalWoodCount = nbttagcompound.getInteger("externalWoodCount");
-
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
-		fireItemStacks = new ItemStack[getSizeInventory()];
-		for(int i = 0; i < nbttaglist.tagCount(); i++)
-		{
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte byte0 = nbttagcompound1.getByte("Slot");
-			if(byte0 >= 0 && byte0 < fireItemStacks.length)
-				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		}
-	}
-
-	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack)
-	{
-		fireItemStacks[i] = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-			itemstack.stackSize = getInventoryStackLimit();
+		fireItemStacks[slot] = is;
+		if(is != null && is.stackSize > getInventoryStackLimit())
+			is.stackSize = getInventoryStackLimit();
 	}
 
 	@Override
@@ -565,22 +575,19 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 	{
 		Random R = new Random();
 
-		int Surrounded = getSurroundedByWood(xCoord,yCoord,zCoord);
-		if(fireTemp > 1 && worldObj.getBlock(xCoord, yCoord+1, zCoord) == TFCBlocks.LogPile)
+		int Surrounded = getSurroundedByWood(xCoord, yCoord, zCoord);
+		if(fireTemp > 1 && worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.LogPile)
 		{
-			externalFireCheckTimer--;
 			if(externalFireCheckTimer <= 0)
 			{
 				if(!worldObj.isRemote)
 					externalFireCheck();
 				externalFireCheckTimer = 100;
 			}
+			externalFireCheckTimer--;
 
-			if(R.nextInt(5) == 0)
-			{
-				if(worldObj.isRemote)
-					GenerateSmoke();
-			}
+			if(R.nextInt(5) == 0 && worldObj.isRemote)
+				GenerateSmoke();
 		}
 		else
 		{
@@ -588,7 +595,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 			logPileChecked = false;
 		}
 
-		if(!worldObj.isRemote)
+		if(!worldObj.isRemote && charcoalCounter == 0)
 		{
 			//Here we take care of the item that we are cooking in the fire
 			careForInventorySlot(fireItemStacks[1]);
@@ -597,11 +604,13 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 
 			hasCookingPot = (fireItemStacks[1]!= null && fireItemStacks[1].getItem() == TFCItems.PotteryPot);
 
+			/*
 			ItemStack[] FuelStack = new ItemStack[4];
 			FuelStack[0] = fireItemStacks[0];
 			FuelStack[1] = fireItemStacks[3];
 			FuelStack[2] = fireItemStacks[4];
 			FuelStack[3] = fireItemStacks[5];
+			*/
 
 			//Now we cook the input item
 			CookItem();
@@ -636,7 +645,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 				{
 					EnumWoodMaterial m = TFC_Core.getWoodMaterial(fireItemStacks[5]);
 					fireItemStacks[5] = null;
-					fuelTimeLeft = m.burnTimeMax; 
+					fuelTimeLeft = m.burnTimeMax;
 					fuelBurnTemp = m.burnTempMax;
 				}
 			}
@@ -672,6 +681,24 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 	}
 
 	@Override
+	public void readFromNBT(NBTTagCompound nbttagcompound)
+	{
+		super.readFromNBT(nbttagcompound);
+		charcoalCounter = nbttagcompound.getInteger("charcoalCounter");
+		externalWoodCount = nbttagcompound.getInteger("externalWoodCount");
+
+		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
+		fireItemStacks = new ItemStack[getSizeInventory()];
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			byte byte0 = nbttagcompound1.getByte("Slot");
+			if(byte0 >= 0 && byte0 < fireItemStacks.length)
+				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		}
+	}
+
+	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
@@ -687,19 +714,17 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 				fireItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-
 		nbttagcompound.setTag("Items", nbttaglist);
-
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() 
+	public boolean hasCustomInventoryName()
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
+	public boolean isItemValidForSlot(int slot, ItemStack is)
 	{
 		return false;
 	}
@@ -712,24 +737,24 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 	@SideOnly(Side.CLIENT)
 	public void GenerateSmoke()
 	{
-		if(topScan)
+		if(scanSmokeLayer)
 		{
-			int y=0;
+			int y = 0;
 			topY = yCoord;
 			boolean checkArray[][][] = new boolean[25][13][25];
-			while(worldObj.getBlock(xCoord, topY+1, zCoord) == TFCBlocks.LogPile)
+			while(worldObj.getBlock(xCoord, topY + 1, zCoord) == TFCBlocks.LogPile)
 			{
 				++topY;
 				++y;
 			}
-			topMap.put(0, new int[] {xCoord, topY+2, zCoord});
-			scanLogs(xCoord,topY,zCoord,checkArray,(byte)12,(byte)y,(byte)12, false, true);
-			topScan = false;
+			smokeMap.put(0, new int[] {xCoord, topY + 2, zCoord});
+			scanLogs(xCoord, topY, zCoord, checkArray, (byte)12, (byte)y, (byte)12, false, true);
+			scanSmokeLayer = false;
 		}
 
-		Random random = new Random();
-		int sbkey = random.nextInt(topMap.size());
-		int[] sb = topMap.get(sbkey);
+		Random rand = new Random();
+		int sbkey = rand.nextInt(smokeMap.size());
+		int[] sb = smokeMap.get(sbkey);
 
 		int x = sb[0];
 		int y = sb[1];
@@ -737,14 +762,14 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 		if(worldObj.isAirBlock(x, y, z))
 		{
 			float f = x + 0.5F;
-			float f1 = y + 0.1F + random.nextFloat() * 6F / 16F;
+			float f1 = y + 0.1F + rand.nextFloat() * 6F / 16F;
 			float f2 = z + 0.5F;
-			float f4 = random.nextFloat() * 0.6F;
-			float f5 = random.nextFloat() * -0.6F;
+			float f4 = rand.nextFloat() * 0.6F;
+			float f5 = rand.nextFloat() * -0.6F;
 			worldObj.spawnParticle("smoke", f+f4 - 0.3F, f1, f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 			worldObj.spawnParticle("smoke", f+f4 - 0.2F, f1, f2 + f5 + 0.4F, 0.0D, 0.0D, 0.0D);
 			worldObj.spawnParticle("smoke", f+f4 - 0.1F, f1, f2 + f5 + 0.1F, 0.0D, 0.0D, 0.0D);
-			if(random.nextInt(10) == 0) worldObj.spawnParticle("largesmoke", f+f4 - 0.2F, f1, f2 + f5 + 0.2F, 0.0D, 0.0D, 0.0D);
+			if(rand.nextInt(10) == 0) worldObj.spawnParticle("largesmoke", f+f4 - 0.2F, f1, f2 + f5 + 0.2F, 0.0D, 0.0D, 0.0D);
 		}
 	}
 }

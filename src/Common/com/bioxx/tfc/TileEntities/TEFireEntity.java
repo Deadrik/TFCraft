@@ -25,23 +25,19 @@ public class TEFireEntity extends NetworkTileEntity
 		{
 			float temp = TFC_ItemHeat.GetTemp(is);
 			if(fireTemp > temp)
-			{
 				temp += TFC_ItemHeat.getTempIncrease(is);
-			}
 			else
-			{
 				temp -= TFC_ItemHeat.getTempDecrease(is);
-			}
 			TFC_ItemHeat.SetTemp(is, temp);
 		}
 	}
 
 	public void receiveAirFromBellows()
 	{
-		if(airFromBellows < AIRTOADD*3)
+		if(airFromBellows < AIRTOADD * 3)
 			airFromBellows += AIRTOADD;
-		if(airFromBellows > AIRTOADD*3)
-			airFromBellows = AIRTOADD*3;
+		if(airFromBellows > AIRTOADD * 3)
+			airFromBellows = AIRTOADD * 3;
 	}
 
 	public void keepTempToRange()
@@ -72,6 +68,7 @@ public class TEFireEntity extends NetworkTileEntity
 		}
 		else if(fuelTimeLeft < 0)
 			fuelTimeLeft = 0;
+
 		if(fuelTimeLeft > 0)
 			return fuelBurnTemp + airFromBellows;
 		else
@@ -81,9 +78,7 @@ public class TEFireEntity extends NetworkTileEntity
 	public void handleAirReduction()
 	{
 		if(airFromBellows > 0)
-		{
 			airFromBellows--;
-		}
 	}
 
 	public void handleTempFlux(float desiredTemp)
@@ -93,16 +88,16 @@ public class TEFireEntity extends NetworkTileEntity
 			if(airFromBellows == 0)
 				fireTemp++;
 			else
-				fireTemp+=2;
+				fireTemp += 2;
 		}
 		else if(fireTemp > desiredTemp)
 		{
 			if(desiredTemp == 0)
 			{
-				if(airFromBellows == 0) 
-					fireTemp-=1;
-				else 
-					fireTemp-=0.5;
+				if(airFromBellows == 0)
+					fireTemp -= 1;
+				else
+					fireTemp -= 0.5;
 			}
 		}
 		this.keepTempToRange();
@@ -129,26 +124,26 @@ public class TEFireEntity extends NetworkTileEntity
 	}
 
 	@Override
-	public void handleInitPacket(NBTTagCompound nbt) {
+	public void handleInitPacket(NBTTagCompound nbt)
+	{
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public void handleDataPacket(NBTTagCompound nbt) {
+	public void handleDataPacket(NBTTagCompound nbt)
+	{
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public void createDataNBT(NBTTagCompound nbt) {
+	public void createDataNBT(NBTTagCompound nbt)
+	{
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public void createInitNBT(NBTTagCompound nbt) {
+	public void createInitNBT(NBTTagCompound nbt)
+	{
 		// TODO Auto-generated method stub
-
 	}
 }
