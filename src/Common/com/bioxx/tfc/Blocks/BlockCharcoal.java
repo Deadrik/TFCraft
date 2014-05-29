@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -27,7 +26,7 @@ public class BlockCharcoal extends BlockTerra
 	}
 
 	@Override
-	public IIcon getIcon(int i, int j)
+	public IIcon getIcon(int side, int meta)
 	{
 		return blockIcon;
 	}
@@ -82,7 +81,7 @@ public class BlockCharcoal extends BlockTerra
 					while (world.getBlock(x, y + top + 1, z) == this)
 						++top;
 
-					dropBlockAsItem(world, x, y, z, new ItemStack(Items.coal, 1, 1));
+					dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Coal, 1, 1));
 					if (side - 1 > 0)
 					{
 						if (world.getBlock(x, y + 1, z) == this)
@@ -125,10 +124,10 @@ public class BlockCharcoal extends BlockTerra
 		return super.removedByPlayer(world, player, x, y, z);
 	}
 
-	public void combineCharcoalDown(World world, int i, int j, int k)
+	public void combineCharcoalDown(World world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(i, j, k);
-		int bottomMeta = world.getBlockMetadata(i, j-1, k);
+		int meta = world.getBlockMetadata(x, y, z);
+		int bottomMeta = world.getBlockMetadata(x, y - 1, z);
 
 		if(bottomMeta < 8)
 		{
@@ -140,22 +139,22 @@ public class BlockCharcoal extends BlockTerra
 				bottomMeta = 8;
 			}
 
-			world.setBlock(i, j-1, k, this, bottomMeta, 0x2);
+			world.setBlock(x, y - 1, z, this, bottomMeta, 0x2);
 
 			if(m2 > 0)
 			{
-				world.setBlock(i, j, k, this, m2, 0x2);
-				world.notifyBlockOfNeighborChange(i, j+1, k, this);
+				world.setBlock(x, y, z, this, m2, 0x2);
+				world.notifyBlockOfNeighborChange(x, y + 1, z, this);
 			}
 			else
-				world.setBlockToAir(i, j, k);
+				world.setBlockToAir(x, y, z);
 		}
 	}
 
-	public void combineCharcoalUp(World world, int i, int j, int k)
+	public void combineCharcoalUp(World world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(i, j+1, k);
-		int bottomMeta = world.getBlockMetadata(i, j, k);
+		int meta = world.getBlockMetadata(x, y + 1, z);
+		int bottomMeta = world.getBlockMetadata(x, y, z);
 
 		if(bottomMeta < 8)
 		{
@@ -167,36 +166,36 @@ public class BlockCharcoal extends BlockTerra
 				bottomMeta = 8;
 			}
 
-			world.setBlock(i, j, k, this, bottomMeta, 0x2);
+			world.setBlock(x, y, z, this, bottomMeta, 0x2);
 
 			if(m2 > 0)
 			{
-				world.setBlock(i, j+1, k, this, m2, 0x2);
-				world.notifyBlockOfNeighborChange(i, j+2, k, this);
+				world.setBlock(x, y+1, z, this, m2, 0x2);
+				world.notifyBlockOfNeighborChange(x, y + 2, z, this);
 			}
 			else
-				world.setBlockToAir(i, j+1, k);
+				world.setBlockToAir(x, y + 1, z);
 		}
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block block)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
 		if(!world.isRemote)
 		{
-			if(world.isAirBlock(i, j-1, k))
+			if(world.isAirBlock(x, y - 1, z))
 			{
-				int meta = world.getBlockMetadata(i, j, k);
-				world.setBlock(i, j-1, k, this, meta, 0x2);
-				world.setBlockToAir(i, j, k);
+				int meta = world.getBlockMetadata(x, y, z);
+				world.setBlock(x, y - 1, z, this, meta, 0x2);
+				world.setBlockToAir(x, y, z);
 			}
 			else
 			{
-				if(world.getBlock(i, j-1, k) == this)
-					combineCharcoalDown(world, i, j, k);
+				if(world.getBlock(x, y - 1, z) == this)
+					combineCharcoalDown(world, x, y, z);
 
-				if(world.getBlock(i, j+1, k) == this)
-					combineCharcoalUp(world, i, j, k);
+				if(world.getBlock(x, y + 1, z) == this)
+					combineCharcoalUp(world, x, y, z);
 			}
 		}
 	}
@@ -206,20 +205,20 @@ public class BlockCharcoal extends BlockTerra
 	 * cleared to be reused)
 	 */
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		int md = world.getBlockMetadata(i, j, k);
+		int md = world.getBlockMetadata(x, y, z);
 
 		if (md == 8)
-			return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 1, k + 1);
+			return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
 
-		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.125f * md), k + 1);
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + (0.125f * md), z + 1);
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k)
+	public void setBlockBoundsBasedOnState(IBlockAccess bAccess, int x, int y, int z)
 	{
-		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
+		int meta = bAccess.getBlockMetadata(x, y, z);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, (0.125f * meta), 1.0F);
 	}
 
@@ -239,8 +238,8 @@ public class BlockCharcoal extends BlockTerra
 			{
 				Random rand = new Random();
 				// Between 50% and 100% of the amount
-				amount = rand.nextInt(amount + 1) + (amount/2);
-				dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Coal,amount,1));
+				amount = rand.nextInt(amount + 1) + (amount / 2);
+				dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Coal, amount, 1));
 			}
 		}
 
@@ -248,7 +247,7 @@ public class BlockCharcoal extends BlockTerra
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex)
+	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion ex)
 	{
 	}
 }
