@@ -170,7 +170,7 @@ public class BlockCrop extends BlockContainer
 		TECrop te = (TECrop) world.getTileEntity(i, j, k);
 		CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
 
-		if(crop != null && !world.isRemote)
+		/*if(crop != null && !world.isRemote)
 		{
 			if(crop.cropId == 4 && te.growth >= 7)
 			{
@@ -198,7 +198,7 @@ public class BlockCrop extends BlockContainer
 			}
 
 			te.broadcastPacketInRange();
-		}
+		}*/
 
 		if(TFCOptions.enableDebugMode)
 		{
