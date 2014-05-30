@@ -26,6 +26,7 @@ public class TECrop extends NetworkTileEntity
 	private long plantedTime;//Tracks the time when the plant was planted
 	private byte sunLevel;
 	public int tendingLevel;
+	private int killLevel = 0;//We use this to make crop killing more and more likely if its cold
 
 	public TECrop()
 	{
@@ -80,14 +81,32 @@ public class TECrop extends NetworkTileEntity
 
 				if(!crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
 				{
-					killCrop(crop);
+					int baseKillChance = 6;
+					if(this.worldObj.rand.nextInt(baseKillChance-this.killLevel) == 0)
+						killCrop(crop);
+					else
+					{
+						if(killLevel < baseKillChance-1)
+							this.killLevel++;
+					}
 				}
 				else if(crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
 				{
 					if(growth > 1)
 					{
-						killCrop(crop);
+						int baseKillChance = 6;
+						if(this.worldObj.rand.nextInt(baseKillChance-this.killLevel) == 0)
+							killCrop(crop);
+						else
+						{
+							if(killLevel < baseKillChance-1)
+								this.killLevel++;
+						}
 					}
+				}
+				else
+				{
+					this.killLevel = 0;
 				}
 
 				int nutriType = crop.cycleType;
@@ -210,6 +229,7 @@ public class TECrop extends NetworkTileEntity
 		cropId = nbt.getInteger("cropId");
 		growthTimer = nbt.getLong("growthTimer");
 		plantedTime = nbt.getLong("plantedTime");
+		killLevel = nbt.getInteger("killLevel");
 	}
 
 	/**
@@ -223,6 +243,7 @@ public class TECrop extends NetworkTileEntity
 		nbt.setInteger("cropId", cropId);
 		nbt.setLong("growthTimer", growthTimer);
 		nbt.setLong("plantedTime", plantedTime);
+		nbt.setInteger("killLevel", killLevel);
 	}
 
 	@Override
