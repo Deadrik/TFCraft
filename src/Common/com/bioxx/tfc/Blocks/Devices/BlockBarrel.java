@@ -44,7 +44,7 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 {
 	private final Random random = new Random();
 	private String[] woodNames;
-	private static IIcon blockIcon;
+	protected static IIcon blockIcon;
 	
 	public BlockBarrel()
 	{
