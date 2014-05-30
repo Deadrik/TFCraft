@@ -10,53 +10,37 @@ public class BlockLogHoriz2 extends BlockLogHoriz
 	{
 		super(off);
 		woodNames = new String[Global.WOOD_ALL.length - 16];
-		if(16+off < Global.WOOD_ALL.length)
-			System.arraycopy(Global.WOOD_ALL, 16 + off, woodNames, 0, Global.WOOD_ALL.length-16>off?off:Global.WOOD_ALL.length-16);
+		if(16 + off < Global.WOOD_ALL.length)
+			System.arraycopy(Global.WOOD_ALL, 16 + off, woodNames, 0, Global.WOOD_ALL.length - 16 > off ? off : Global.WOOD_ALL.length - 16);
 	}
 
 	@Override
-	public IIcon getIcon(int i, int j) 
+	public IIcon getIcon(int side, int meta)
 	{
-		int meta = (j & 7) + offset;
-		int dir = j >> 3;
+		meta = (meta & 7) + offset;
+		int dir = meta >> 3;
 
 		if(dir == 0)
 		{
-			if(i == 0) {
+			if(side == 0 || side == 1)
 				return BlockLogNatural2.sideIcons[meta];
-			} else if(i == 1) {
-				return BlockLogNatural2.sideIcons[meta];
-			} else if(i == 2) {
+			else if(side == 2 || side == 3)
 				return BlockLogNatural2.innerIcons[meta];
-			} else if(i == 3) {
-				return BlockLogNatural2.innerIcons[meta];
-			} else if(i == 4) {
+			else
 				return BlockLogNatural2.rotatedSideIcons[meta];
-			} else {
-				return BlockLogNatural2.rotatedSideIcons[meta];
-			}
 		}
 		else
 		{
-			if(i == 0) {
+			if(side == 0 || side == 1 || side == 2 || side == 3)
 				return BlockLogNatural2.rotatedSideIcons[meta];
-			} else if(i == 1) {
-				return BlockLogNatural2.rotatedSideIcons[meta];
-			} else if(i == 2) {
-				return BlockLogNatural2.rotatedSideIcons[meta];
-			} else if(i == 3) {
-				return BlockLogNatural2.rotatedSideIcons[meta];
-			} else if(i == 4) {
+			else
 				return BlockLogNatural2.innerIcons[meta];
-			} else {
-				return BlockLogNatural2.innerIcons[meta];
-			}
 		}
 	}
 
 	@Override
-	public int damageDropped(int j)
+	public int damageDropped(int dmg)
 	{
-		return (j & 7) + offset + 16;
+		return (dmg & 7) + offset + 16;
 	}
 }

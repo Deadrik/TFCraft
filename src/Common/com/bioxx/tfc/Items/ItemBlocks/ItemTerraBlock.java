@@ -25,9 +25,9 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	public IIcon[] icons;
 	public String folder;
 
-	public ItemTerraBlock(Block par1)
+	public ItemTerraBlock(Block b)
 	{
-		super(par1);
+		super(b);
 		this.setHasSubtypes(true);
 		this.folder = "";
 	}
@@ -39,25 +39,25 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack itemstack)
+	public String getUnlocalizedName(ItemStack is)
 	{
 		try
 		{
 			if(MetaNames != null)
-				return getUnlocalizedName().concat("." + MetaNames[itemstack.getItemDamage()]);
+				return getUnlocalizedName().concat("." + MetaNames[is.getItemDamage()]);
 		}
 		catch(Exception ex)
 		{
 			System.out.println(ex.getLocalizedMessage());
 		}
 
-		return super.getUnlocalizedName(itemstack);
+		return super.getUnlocalizedName(is);
 	}
 
 //	@Override
-//	public String getItemStackDisplayName(ItemStack itemstack)
+//	public String getItemStackDisplayName(ItemStack is)
 //	{
-//		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
+//		return StringUtil.localize(getUnlocalizedName(is).replace(" ", ""));
 //	}
 
 	/**

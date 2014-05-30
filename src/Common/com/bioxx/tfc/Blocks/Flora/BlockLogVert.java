@@ -29,11 +29,10 @@ public class BlockLogVert extends BlockTerra
 		super(Material.wood);
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
-		//this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta)
 	{
 		//we need to make sure teh palyer has the correct tool out
 		boolean isAxeorSaw = false;
@@ -62,23 +61,23 @@ public class BlockLogVert extends BlockTerra
 
 		if(isAxeorSaw)
 		{
-			super.harvestBlock(world, entityplayer, i, j, k, l);
+			super.harvestBlock(world, entityplayer, x, y, z, meta);
 		}
 		else if(isHammer)
 		{
-			EntityItem item = new EntityItem(world, i + 0.5, j + 0.5, k + 0.5, new ItemStack(TFCItems.Stick, 1 + world.rand.nextInt(3)));
+			EntityItem item = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(TFCItems.Stick, 1 + world.rand.nextInt(3)));
 			world.spawnEntityInWorld(item);
 		}
 		else
 		{
-			world.setBlock(i, j, k, this, l, 0x2);
+			world.setBlock(x, y, z, this, meta, 0x2);
 		}
 	}
 
 	@Override
-	public int damageDropped(int j)
+	public int damageDropped(int dmg)
 	{
-		return j;
+		return dmg;
 	}	
 
 	@Override
@@ -88,13 +87,13 @@ public class BlockLogVert extends BlockTerra
 	}
 
 	@Override
-	public IIcon getIcon(int i, int j)
+	public IIcon getIcon(int side, int meta)
 	{
-		if (i == 1)
-			return BlockLogNatural.innerIcons[j];
-		if (i == 0)
-			return BlockLogNatural.innerIcons[j];
-		return BlockLogNatural.sideIcons[j];
+		if (side == 1)
+			return BlockLogNatural.innerIcons[meta];
+		if (side == 0)
+			return BlockLogNatural.innerIcons[meta];
+		return BlockLogNatural.sideIcons[meta];
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -109,7 +108,7 @@ public class BlockLogVert extends BlockTerra
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegisterer)
+	public void registerBlockIcons(IIconRegister reg)
 	{
 	}
 }

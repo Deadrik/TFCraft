@@ -1,11 +1,13 @@
 package com.bioxx.tfc.Blocks.Vanilla;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -39,8 +41,13 @@ public class BlockCustomLeaves extends BlockLeaves
 		System.arraycopy(Global.WOOD_ALL, 0, this.woodNames, 0, 16);
 		this.icons = new IIcon[16];
 		this.iconsOpaque = new IIcon[16];
-		this.setCreativeTab(null);
 		this.setTickRandomly(false);
+	}
+
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
+	{
+		// Leaves are not added to the creative tab
 	}
 
 	@Override
@@ -196,7 +203,7 @@ public class BlockCustomLeaves extends BlockLeaves
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)
+	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float f, int i1)
 	{
 		if (!world.isRemote) {}
 	}
@@ -257,9 +264,9 @@ public class BlockCustomLeaves extends BlockLeaves
 	}
 
 	@Override
-	public int damageDropped(int i)
+	public int damageDropped(int dmg)
 	{
-		return i;
+		return dmg;
 	}
 
 	@Override
@@ -269,14 +276,14 @@ public class BlockCustomLeaves extends BlockLeaves
 	}
 
 	@Override
-	public IIcon getIcon(int i, int j)
+	public IIcon getIcon(int side, int meta)
 	{
-		if(j > woodNames.length - 1)
-			j = 0;
+		if(meta > woodNames.length - 1)
+			meta = 0;
 		if (TerraFirmaCraft.proxy.getGraphicsLevel())
-			return this.icons[j];
+			return this.icons[meta];
 		else
-			return this.iconsOpaque[j];
+			return this.iconsOpaque[meta];
 	}
 
 	@Override

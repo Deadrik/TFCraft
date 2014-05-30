@@ -372,12 +372,12 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Sulfur, "Sulfur");
 		GameRegistry.registerBlock(LogNatural, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood.class, "log");
 		GameRegistry.registerBlock(LogNatural2, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood2.class, "log2");
-		GameRegistry.registerBlock(Leaves, "leaves");
-		GameRegistry.registerBlock(Leaves2, "leaves2");
+		GameRegistry.registerBlock(Leaves, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood.class, "leaves");
+		GameRegistry.registerBlock(Leaves2, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood2.class, "leaves2");
 		GameRegistry.registerBlock(Sapling, com.bioxx.tfc.Items.ItemBlocks.ItemSapling.class, "sapling");
 		GameRegistry.registerBlock(Sapling2, com.bioxx.tfc.Items.ItemBlocks.ItemSapling2.class, "sapling2");
-		GameRegistry.registerBlock(Planks, com.bioxx.tfc.Items.ItemBlocks.ItemPlankBlock.class, "planks");
-		GameRegistry.registerBlock(Planks2, com.bioxx.tfc.Items.ItemBlocks.ItemPlankBlock2.class, "planks2");
+		GameRegistry.registerBlock(Planks, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood.class, "planks");
+		GameRegistry.registerBlock(Planks2, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood2.class, "planks2");
 
 		GameRegistry.registerBlock(Firepit, "Firepit");
 		GameRegistry.registerBlock(Bellows, com.bioxx.tfc.Items.ItemBlocks.ItemBellows.class, "Bellows");
@@ -399,12 +399,12 @@ public class TFCBlocks
 		GameRegistry.registerBlock(stoneStalac, "stoneStalac");
 
 		GameRegistry.registerBlock(WoodConstruct, "WoodConstruct");
-		GameRegistry.registerBlock(WoodVert, "WoodVert");
-		GameRegistry.registerBlock(WoodVert2, "WoodVert2");
-		GameRegistry.registerBlock(WoodHoriz, "WoodHoriz");
-		GameRegistry.registerBlock(WoodHoriz2, "WoodHoriz2");
-		GameRegistry.registerBlock(WoodHoriz3, "WoodHoriz3");
-		GameRegistry.registerBlock(WoodHoriz4, "WoodHoriz4");
+		GameRegistry.registerBlock(WoodVert, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood.class, "WoodVert");
+		GameRegistry.registerBlock(WoodVert2, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood2.class, "WoodVert2");
+		GameRegistry.registerBlock(WoodHoriz, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood.class, "WoodHoriz");
+		GameRegistry.registerBlock(WoodHoriz2, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood.class, "WoodHoriz2");
+		GameRegistry.registerBlock(WoodHoriz3, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood2.class, "WoodHoriz3");
+		GameRegistry.registerBlock(WoodHoriz4, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood2.class, "WoodHoriz4");
 
 		GameRegistry.registerBlock(ToolRack, ItemToolRack.class, "ToolRack");
 		GameRegistry.registerBlock(ToolRack2, ItemToolRack2.class, "ToolRack2");

@@ -1,36 +1,15 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
+import net.minecraft.block.Block;
+
 import com.bioxx.tfc.api.Constant.Global;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemStack;
-
-public class ItemCustomWood2 extends ItemTerraBlock
+public class ItemCustomWood2 extends ItemCustomWood
 {
-	public ItemCustomWood2(Block par1)
+	public ItemCustomWood2(Block b)
 	{
-		super(par1);
-		setMaxDamage(0);
-		setHasSubtypes(true);
-		setFolder("wood/trees");
+		super(b);
+		MetaNames = new String[Global.WOOD_ALL.length - 16];
+		System.arraycopy(Global.WOOD_ALL, 16, MetaNames, 0, Global.WOOD_ALL.length - 16);
 	}
-	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) 
-	{
-		String s = new StringBuilder().append(super.getItemStackDisplayName(itemstack)).append(".").append(Global.WOOD_ALL[itemstack.getItemDamage()]).toString();
-		return s;
-	}
-
-	@Override
-	public int getMetadata(int i)
-	{
-		return i;
-	}
-
-	@Override
-	public void registerIcons(IIconRegister registerer)
-    {
-
-    }
 }

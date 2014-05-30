@@ -28,49 +28,33 @@ public class BlockLogHoriz extends BlockLogVert
 	}
 
 	@Override
-	public IIcon getIcon(int i, int j)
+	public IIcon getIcon(int side, int meta)
 	{
-		int meta = (j & 7) + offset;
-		int dir = j >> 3;
+		meta = (meta & 7) + offset;
+		int dir = meta >> 3;
 
 		if(dir == 0)
 		{
-			if(i == 0) {
+			if(side == 0 || side == 1)
 				return BlockLogNatural.sideIcons[meta];
-			} else if(i == 1) {
-				return BlockLogNatural.sideIcons[meta];
-			} else if(i == 2) {
+			else if(side == 2 || side == 3)
 				return BlockLogNatural.innerIcons[meta];
-			} else if(i == 3) {
-				return BlockLogNatural.innerIcons[meta];
-			} else if(i == 4) {
+			else
 				return BlockLogNatural.rotatedSideIcons[meta];
-			} else {
-				return BlockLogNatural.rotatedSideIcons[meta];
-			}
 		}
 		else
 		{
-			if(i == 0) {
+			if(side == 0 || side == 1 || side == 2 || side == 3)
 				return BlockLogNatural.rotatedSideIcons[meta];
-			} else if(i == 1) {
-				return BlockLogNatural.rotatedSideIcons[meta];
-			} else if(i == 2) {
-				return BlockLogNatural.rotatedSideIcons[meta];
-			} else if(i == 3) {
-				return BlockLogNatural.rotatedSideIcons[meta];
-			} else if(i == 4) {
+			else
 				return BlockLogNatural.innerIcons[meta];
-			} else {
-				return BlockLogNatural.innerIcons[meta];
-			}
 		}
 	}
 
 	@Override
-	public int damageDropped(int j) 
+	public int damageDropped(int dmg)
 	{
-		return (j & 7) + offset;
+		return (dmg & 7) + offset;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -85,14 +69,12 @@ public class BlockLogHoriz extends BlockLogVert
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityliving)
 	{
 		int dir = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
-		int metadata = world.getBlockMetadata(i, j, k);
+		int metadata = world.getBlockMetadata(x, y, z);
 
 		if(dir == 1 || dir == 3)
-			world.setBlockMetadataWithNotify(i, j, k, metadata + 8, 3);
-
-		metadata = world.getBlockMetadata(i, j, k);
+			world.setBlockMetadataWithNotify(x, y, z, metadata + 8, 3);
 	}
 }
