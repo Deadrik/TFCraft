@@ -220,8 +220,8 @@ public class BlockCustomLeaves extends BlockLeaves
 							entityplayer.addExhaustion(0.045F);
 							if(world.rand.nextInt(100) < 11)
 								dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(TFCItems.Stick, 1));
-							else if(world.rand.nextInt(100) < 4 && meta != 9 && meta != 15)
-								dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(this.getItemDropped(0, null, 0), 1, meta));
+							else if (world.rand.nextInt(100) < 4)
+								dropSapling(world, i + x, j + y, k + z, meta);
 							removeLeaves(world, i + x, j + y, k + z);
 							super.harvestBlock(world, entityplayer, i + x, j + y, k + z, meta);
 
@@ -248,6 +248,12 @@ public class BlockCustomLeaves extends BlockLeaves
 
 			super.harvestBlock(world, entityplayer, i, j, k, meta);
 		}
+	}
+
+	protected void dropSapling(World world, int x, int y, int z, int meta)
+	{
+		if (meta != 9 && meta != 15)
+			dropBlockAsItem(world, x, y, z, new ItemStack(this.getItemDropped(0, null, 0), 1, meta));
 	}
 
 	@Override

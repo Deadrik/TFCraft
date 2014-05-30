@@ -4,16 +4,17 @@ import java.util.Set;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.google.common.collect.Sets;
 
 public class ItemCustomScythe extends ItemTerraTool
 {
-	private static final Set blocks = Sets.newHashSet( new Block[] {Blocks.leaves});
+	private static final Set blocks = Sets.newHashSet(new Block[]
+	{ TFCBlocks.Leaves, TFCBlocks.Leaves2 });
 
 	public ItemCustomScythe(ToolMaterial e)
 	{
