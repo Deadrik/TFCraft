@@ -104,4 +104,14 @@ public class ChunkData
 
 		lastVisited = TFC_Time.getTotalTicks();
 	}
+
+	public void infest()
+	{
+		Math.min(cropInfestation++, 10);
+	}
+
+	public void uninfest()
+	{
+		Math.max(cropInfestation--, 0);
+	}
 }

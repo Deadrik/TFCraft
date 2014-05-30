@@ -1,8 +1,12 @@
 package com.bioxx.tfc.TileEntities;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
@@ -20,6 +24,7 @@ public class TEFarmland extends NetworkTileEntity
 
 	public TEFarmland()
 	{
+		this.shouldSendInitData = true;
 	}
 
 	@Override
@@ -77,6 +82,24 @@ public class TEFarmland extends NetworkTileEntity
 
 				nutrientTimer+=24;
 
+				if(isInfested)
+				{
+					float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayFromTotalHours(this.nutrientTimer), xCoord, yCoord, zCoord);
+					if(temp > 10 && worldObj.rand.nextInt(10) == 0)
+					{
+						TileEntity te = worldObj.getTileEntity(xCoord, yCoord, zCoord);
+						if(te instanceof TEFarmland)
+						{
+							((TEFarmland)te).infest();
+						}
+					}
+					else if(temp <= 10)
+					{
+						if(worldObj.rand.nextInt(5) == 0)
+							uninfest();
+					}
+				}
+
 				//                if(BlockFarmland.isWaterNearby(worldObj, xCoord, yCoord, zCoord))
 				//                {
 				//                    waterSaturation += 1;
@@ -96,6 +119,22 @@ public class TEFarmland extends NetworkTileEntity
 				//                }
 			}
 		}
+	}
+
+	public void infest()
+	{
+		isInfested = true;
+		ChunkData cd = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
+		if(cd != null && cd.cropInfestation == 0)
+			cd.infest();
+	}
+
+	public void uninfest()
+	{
+		isInfested = false;
+		ChunkData cd = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
+		if(cd != null && cd.cropInfestation > 0)
+			cd.uninfest();
 	}
 
 	public int getSoilMax()
@@ -146,7 +185,8 @@ public class TEFarmland extends NetworkTileEntity
 
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) {
-		readFromNBT(nbt);		
+		nutrients = nbt.getIntArray("nutrients");
+		isInfested = nbt.getBoolean("isInfested");		
 	}
 
 	@Override
@@ -164,5 +204,6 @@ public class TEFarmland extends NetworkTileEntity
 	@Override
 	public void createInitNBT(NBTTagCompound nbt) {
 		nbt.setIntArray("nutrients", nutrients);
+		nbt.setBoolean("isInfested", isInfested);
 	}
 }

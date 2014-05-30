@@ -1,9 +1,9 @@
 package com.bioxx.tfc.Core;
 
-import com.bioxx.tfc.api.TFCOptions;
-
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.api.TFCOptions;
 
 
 public class TFC_Time
@@ -222,6 +222,11 @@ public class TFC_Time
 	public static int getDayFromTotalHours(int th)
 	{
 		return th/24;
+	}
+
+	public static int getDayFromTotalHours(long th)
+	{
+		return (int)(th/24);
 	}
 
 	public static boolean isSpring(int z)

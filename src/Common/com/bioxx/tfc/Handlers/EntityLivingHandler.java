@@ -91,9 +91,9 @@ public class EntityLivingHandler
 					{
 						for(int k = -2; k < 3; k++)
 						{
-							int lastChunkX = (int)player.posX >> 4;
-						int lastChunkZ = (int)player.posZ >> 4;
-				ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFCOptions.protectionGain);
+							int lastChunkX = (((int)Math.floor(player.posX)) >> 4);
+							int lastChunkZ = (((int)Math.floor(player.posZ)) >> 4);
+							ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFCOptions.protectionGain);
 						}
 					}
 

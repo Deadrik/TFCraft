@@ -16,10 +16,10 @@ import com.bioxx.tfc.TileEntities.TEFarmland;
 
 public class RenderCrop 
 {
-	public static boolean render(Block block, int i, int j, int k, RenderBlocks renderblocks)
+	public static boolean render(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
 		IBlockAccess blockaccess = renderblocks.blockAccess;
-		TECrop te = (TECrop)blockaccess.getTileEntity(i, j, k);
+		TECrop te = (TECrop)blockaccess.getTileEntity(x, y, z);
 
 		if(te != null)
 			CropManager.getInstance().getCropFromId(te.cropId);
@@ -27,129 +27,128 @@ public class RenderCrop
 			return false;
 
 		Tessellator var9 = Tessellator.instance;
-		var9.setBrightness(block.getMixedBrightnessForBlock(blockaccess, i, j, k));
+		var9.setBrightness(block.getMixedBrightnessForBlock(blockaccess, x, y, z));
 		switch(te.cropId)
 		{
 		case 0://Wheat
 		case 1://Wild Wheat
 		{
-			renderBlockCropsImpl(block, i, j, k, renderblocks, 0.5, 1.0);
+			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.5, 1.0);
 			break;
 		}
 		case 2://Corn
 		case 3://Wild Corn
 		{
-			renderBlockCropsImpl(block, i, j, k, renderblocks, 1.0, 2.0);
+			renderBlockCropsImpl(block, x, y, z, renderblocks, 1.0, 2.0);
 			break;
 		}
 		case 4://Tomatoes
 		{
-			drawCrossedSquares(block, i, j, k, renderblocks, 0.9, 2.0);
+			drawCrossedSquares(block, x, y, z, renderblocks, 0.9, 2.0);
 			break;
 		}
 		case 5://Barley
 		case 6://Wild Barley
 		{
-			renderBlockCropsImpl(block, i, j, k, renderblocks, 0.5, 1.0);
+			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.5, 1.0);
 			break;
 		}
 		case 7://Rye
 		case 8://Wild Rye
 		{
-			renderBlockCropsImpl(block, i, j, k, renderblocks, 0.5, 1.0);
+			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.5, 1.0);
 			break;
 		}
 		case 9://Oat
 		case 10://Wild Oat
 		{
-			renderBlockCropsImpl(block, i, j, k, renderblocks, 0.5, 1.0);
+			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.5, 1.0);
 			break;
 		}
 		case 11://Rice
 		case 12://Wild Rice
 		{
-			renderBlockCropsImpl(block, i, j, k, renderblocks, 0.5, 1.0);
+			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.5, 1.0);
 			break;
 		}
 		case 13://Potato
 		case 14://Wild Potato
 		{
-			drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
 		case 15://Onion
 		{
-			drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
 		case 16://Cabbage
 		{
-			drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
 		case 17://Garlic
 		{
-			drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
 		case 18://Carrots
 		{
-			drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
 		case 19://Yellow Bell
 		{
-			drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
 		case 20://Red Bell
 		{
-			drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
 		case 21://Soybean
 		{
-			drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
 		case 22://Greenbean
 		{
-			drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
 		case 23://Squash
 		{
-			drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
 		case 24://Jute
 		{
-			renderBlockCropsImpl(block, i, j, k, renderblocks, 0.8, 2.0);
+			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.8, 2.0);
 			break;
 		}
 		default:
 		{
-			renderblocks.renderBlockCrops(block, i, j, k);
+			renderblocks.renderBlockCrops(block, x, y, z);
 			break;
 		}
 		}
-		TileEntity _te = blockaccess.getTileEntity(i, j-1, k);
+		TileEntity _te = blockaccess.getTileEntity(x, y-1, z);
 		TEFarmland tef = null;
 		if(_te != null)
 			tef = (TEFarmland) _te;
 		if(tef != null && tef.isInfested)
 		{
-			GL11.glPushMatrix(); //start
-			GL11.glTranslated(i, j+0.001, k);
+
 			Tessellator tessellator = Tessellator.instance;
-			tessellator.startDrawingQuads();
-			tessellator.setNormal(0.0F, 1.0F, 0.0F);
-			tessellator.addVertexWithUV(0, 0.001, 1, ((BlockCrop)block).iconInfest.getMinU(), ((BlockCrop)block).iconInfest.getMaxV());
-			tessellator.addVertexWithUV(1, 0.001, 1, ((BlockCrop)block).iconInfest.getMaxU(), ((BlockCrop)block).iconInfest.getMaxV());
-			tessellator.addVertexWithUV(1, 0.001, 0, ((BlockCrop)block).iconInfest.getMaxU(), ((BlockCrop)block).iconInfest.getMinV());
-			tessellator.addVertexWithUV(0, 0.001, 0, ((BlockCrop)block).iconInfest.getMinU(), ((BlockCrop)block).iconInfest.getMinV());
-			tessellator.draw();
-			GL11.glPopMatrix(); //end
+			//tessellator.startDrawingQuads();
+			//tessellator.setNormal(0.0F, 1.0F, 0.0F);
+			tessellator.addVertexWithUV(x+0, y+0.001, z+1, ((BlockCrop)block).iconInfest.getMinU(), ((BlockCrop)block).iconInfest.getMaxV());
+			tessellator.addVertexWithUV(x+1, y+0.001, z+1, ((BlockCrop)block).iconInfest.getMaxU(), ((BlockCrop)block).iconInfest.getMaxV());
+			tessellator.addVertexWithUV(x+1, y+0.001, z+0, ((BlockCrop)block).iconInfest.getMaxU(), ((BlockCrop)block).iconInfest.getMinV());
+			tessellator.addVertexWithUV(x+0, y+0.001, z+0, ((BlockCrop)block).iconInfest.getMinU(), ((BlockCrop)block).iconInfest.getMinV());
+			//tessellator.draw();
+
 		}
 		return true;
 	}

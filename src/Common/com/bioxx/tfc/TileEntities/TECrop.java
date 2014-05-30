@@ -73,20 +73,22 @@ public class TECrop extends NetworkTileEntity
 				//Attempt to start an infestation
 				if(cd != null)
 				{
-					if(worldObj.rand.nextInt(10) == 0)
+
+					if(worldObj.rand.nextInt(2000) == 0)
 					{
-						cd.cropInfestation++;
+						cd.infest();
 					}
 					if(cd.cropInfestation > 0)
 					{
-						if(worldObj.rand.nextInt(10) == 0)
+						if(worldObj.rand.nextInt(40/cd.cropInfestation) == 0)
 						{
 							if(tef != null)
-								tef.isInfested = true;
+								tef.infest();
+							worldObj.markBlockForUpdate(xCoord, yCoord-1, zCoord);
 						}
 					}
 				}
-
+				//End Infestation Code
 
 				if(!crop.dormantInFrost && ambientTemp < crop.minGrowthTemp)
 					tempAdded = -0.03f * (crop.minGrowthTemp - ambientTemp);
