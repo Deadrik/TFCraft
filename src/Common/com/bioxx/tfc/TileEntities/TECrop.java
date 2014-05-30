@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.BlockFarmland;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -114,7 +116,7 @@ public class TECrop extends NetworkTileEntity
 				int fert = tef != null ? tef.nutrients[3] : 0;
 				int soilMax = tef != null ? tef.getSoilMax() : 18000;
 				//waterBoost only helps if you are playing on a longer than default year length.
-				float waterBoost = com.bioxx.tfc.Blocks.BlockFarmland.isFreshWaterNearby(worldObj, xCoord, yCoord, zCoord) ? 0.1f : 0;
+				float waterBoost = BlockFarmland.isFreshWaterNearby(worldObj, xCoord, yCoord, zCoord) ? 0.1f : 0;
 
 				//Allow the fertilizer to make up for lost nutrients
 				nutri = Math.min(nutri + fert, (int)(soilMax * 1.25f));
@@ -213,8 +215,10 @@ public class TECrop extends NetworkTileEntity
 		is.stackSize = 1;
 		if (is != null)
 		{
-			worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, is));
-			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+			worldObj.setBlock(xCoord, yCoord, zCoord, TFCBlocks.worldItem);
+			TEWorldItem te = (TEWorldItem) worldObj.getTileEntity(xCoord, yCoord, zCoord);
+			te.storage[0] = is;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 	}
 
