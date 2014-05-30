@@ -64,7 +64,7 @@ import com.bioxx.tfc.TileEntities.TEStand;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TileEntityBloom;
 import com.bioxx.tfc.TileEntities.TileEntityEarlyBloomery;
-import com.bioxx.tfc.TileEntities.TileEntityFarmland;
+import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
@@ -118,7 +118,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");
 		GameRegistry.registerTileEntity(TileEntityEarlyBloomery.class, "TerraEarlyBloomery");
 		GameRegistry.registerTileEntity(TileEntitySluice.class, "TerraSluice");
-		GameRegistry.registerTileEntity(TileEntityFarmland.class, "TileEntityFarmland");
+		GameRegistry.registerTileEntity(TEFarmland.class, "TileEntityFarmland");
 		GameRegistry.registerTileEntity(TECrop.class, "TileEntityCrop");
 		GameRegistry.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
 		GameRegistry.registerTileEntity(TEPartial.class, "Partial");

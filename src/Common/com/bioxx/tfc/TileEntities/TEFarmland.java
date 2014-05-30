@@ -7,17 +7,18 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 
-public class TileEntityFarmland extends NetworkTileEntity
+public class TEFarmland extends NetworkTileEntity
 {
 	public long nutrientTimer = -1;
 	public int[] nutrients = {6666,6666,6666, 0};
+	public boolean isInfested = false;
 
 	/**
 	 * Client only
 	 * */
 	public long timeSinceUpdate = 0;
 
-	public TileEntityFarmland()
+	public TEFarmland()
 	{
 	}
 
@@ -118,6 +119,7 @@ public class TileEntityFarmland extends NetworkTileEntity
 		super.readFromNBT(nbt);
 		nutrients = nbt.getIntArray("nutrients");
 		nutrientTimer = nbt.getLong("nutrientTimer");
+		isInfested = nbt.getBoolean("isInfested");
 	}
 
 	/**
@@ -129,6 +131,7 @@ public class TileEntityFarmland extends NetworkTileEntity
 		super.writeToNBT(nbt);
 		nbt.setIntArray("nutrients", nutrients);
 		nbt.setLong("nutrientTimer", nutrientTimer); 
+		nbt.setBoolean("isInfested", isInfested);
 	}
 
 	public void requestNutrientData()

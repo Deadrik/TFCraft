@@ -16,7 +16,7 @@ import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
 import com.bioxx.tfc.TileEntities.TECrop;
-import com.bioxx.tfc.TileEntities.TileEntityFarmland;
+import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -56,7 +56,7 @@ public class FarmlandHighlightHandler
 
 			if(b == TFCBlocks.tilledSoil || b == TFCBlocks.tilledSoil2)
 			{
-				TileEntityFarmland te = (TileEntityFarmland) world.getTileEntity(evt.target.blockX, evt.target.blockY - crop, evt.target.blockZ);
+				TEFarmland te = (TEFarmland) world.getTileEntity(evt.target.blockX, evt.target.blockY - crop, evt.target.blockZ);
 				te.requestNutrientData();
 
 				float timeMultiplier = TFC_Time.daysInYear / 360f;

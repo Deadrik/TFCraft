@@ -15,6 +15,7 @@ public class ChunkData
 	public int sluicedAmount = 0;
 
 	public int lastSpringGen;
+	public int cropInfestation = 0;
 
 	public ChunkData()
 	{
@@ -41,6 +42,7 @@ public class ChunkData
 		sluicedAmount = tag.getInteger("sluicedAmount");
 
 		lastSpringGen = tag.getInteger("lastSpringGen");
+		cropInfestation = tag.getInteger("cropInfestation");
 	}
 
 	public NBTTagCompound getTag()
@@ -58,6 +60,7 @@ public class ChunkData
 		tag.setIntArray("heightmap", heightmap);
 		tag.setInteger("lastSpringGen", lastSpringGen);
 		tag.setInteger("sluicedAmount", sluicedAmount);
+		tag.setInteger("cropInfestation", cropInfestation);
 		return tag;
 	}
 

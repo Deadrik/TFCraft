@@ -20,7 +20,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.TileEntities.TileEntityFarmland;
+import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
@@ -106,7 +106,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 
 							if(isDirt)
 							{
-								TileEntityFarmland te = (TileEntityFarmland) world.getTileEntity(x, y, z);
+								TEFarmland te = (TEFarmland) world.getTileEntity(x, y, z);
 								te.nutrients[0] = 100;
 								te.nutrients[1] = 100;
 								te.nutrients[2] = 100;
@@ -128,7 +128,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 
 							if(isDirt)
 							{
-								TileEntityFarmland te = (TileEntityFarmland) world.getTileEntity(x, y, z);
+								TEFarmland te = (TEFarmland) world.getTileEntity(x, y, z);
 								te.nutrients[0] = 100;
 								te.nutrients[1] = 100;
 								te.nutrients[2] = 100;

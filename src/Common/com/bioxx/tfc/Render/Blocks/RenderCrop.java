@@ -3,13 +3,16 @@ package com.bioxx.tfc.Render.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
+import com.bioxx.tfc.Blocks.BlockCrop;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.TileEntities.TECrop;
+import com.bioxx.tfc.TileEntities.TEFarmland;
 
 public class RenderCrop 
 {
@@ -130,37 +133,24 @@ public class RenderCrop
 			break;
 		}
 		}
-
-		/*IBlockAccess blockaccess = renderblocks.blockAccess;
-        TileEntityCrop te = (TileEntityCrop)blockaccess.getTileEntity(i, j, k);
-        CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
-        Minecraft mc = ModLoader.getMinecraftInstance();
-
-        boolean breaking = false;
-        if(renderblocks.overrideBlockTexture >= 240)
-        {
-        	breaking = true;
-        }
-
-        int stage = (int) Math.floor(te.growth);
-        if(stage > crop.numGrowthStages)
-            stage = crop.numGrowthStages;
-
-        int meta = blockaccess.getBlockMetadata(i, j, k);
-
-        float est = te.getEstimatedGrowth(crop);
-        float mult = 0.85f + (0.15f * (te.growth / est));
-        if(mult > 1.15f) {mult = 1.15f;}
-
-        if(renderblocks.overrideBlockTexture >= 0)
-        {
-        	renderblocks.clearOverrideBlockTexture();
-        	mc.renderEngine.bindTexture(mc.renderEngine.getTexture(block.getTextureFile()));
-        }
-
-        Tessellator var9 = Tessellator.instance;
-        var9.setBrightness(block.getMixedBrightnessForBlock(blockaccess, i, j, k));
-		 */
+		TileEntity _te = blockaccess.getTileEntity(i, j-1, k);
+		TEFarmland tef = null;
+		if(_te != null)
+			tef = (TEFarmland) _te;
+		if(tef != null && tef.isInfested)
+		{
+			GL11.glPushMatrix(); //start
+			GL11.glTranslated(i, j+0.001, k);
+			Tessellator tessellator = Tessellator.instance;
+			tessellator.startDrawingQuads();
+			tessellator.setNormal(0.0F, 1.0F, 0.0F);
+			tessellator.addVertexWithUV(0, 0.001, 1, ((BlockCrop)block).iconInfest.getMinU(), ((BlockCrop)block).iconInfest.getMaxV());
+			tessellator.addVertexWithUV(1, 0.001, 1, ((BlockCrop)block).iconInfest.getMaxU(), ((BlockCrop)block).iconInfest.getMaxV());
+			tessellator.addVertexWithUV(1, 0.001, 0, ((BlockCrop)block).iconInfest.getMaxU(), ((BlockCrop)block).iconInfest.getMinV());
+			tessellator.addVertexWithUV(0, 0.001, 0, ((BlockCrop)block).iconInfest.getMinU(), ((BlockCrop)block).iconInfest.getMinV());
+			tessellator.draw();
+			GL11.glPopMatrix(); //end
+		}
 		return true;
 	}
 

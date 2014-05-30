@@ -11,6 +11,8 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockFarmland;
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -48,7 +50,7 @@ public class TECrop extends NetworkTileEntity
 			float timeMultiplier = 360 / TFC_Time.daysInYear;
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 			long time = TFC_Time.getTotalTicks();
-
+			ChunkData cd = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
 			if(growthTimer < time && sunLevel > 0)
 			{
 				sunLevel--;
@@ -59,14 +61,32 @@ public class TECrop extends NetworkTileEntity
 						sunLevel = 30;
 				}
 
-				TileEntityFarmland tef = null;
+				TEFarmland tef = null;
 				TileEntity te = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
-				if(te != null && te instanceof TileEntityFarmland)
-					tef = (TileEntityFarmland) te;
+				if(te != null && te instanceof TEFarmland)
+					tef = (TEFarmland) te;
 
 				float ambientTemp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYearFromTick(growthTimer), xCoord, yCoord, zCoord);
 				float tempAdded = 0;
 				boolean isDormant = false;
+
+				//Attempt to start an infestation
+				if(cd != null)
+				{
+					if(worldObj.rand.nextInt(10) == 0)
+					{
+						cd.cropInfestation++;
+					}
+					if(cd.cropInfestation > 0)
+					{
+						if(worldObj.rand.nextInt(10) == 0)
+						{
+							if(tef != null)
+								tef.isInfested = true;
+						}
+					}
+				}
+
 
 				if(!crop.dormantInFrost && ambientTemp < crop.minGrowthTemp)
 					tempAdded = -0.03f * (crop.minGrowthTemp - ambientTemp);
@@ -133,7 +153,8 @@ public class TECrop extends NetworkTileEntity
 				}
 
 				float growthRate = (((crop.numGrowthStages / (crop.growthTime * TFC_Time.timeRatio96)) + tempAdded) * nutriMult) * timeMultiplier;
-
+				if(tef!= null && tef.isInfested)
+					growthRate /= 2;
 				int oldGrowth = (int) Math.floor(growth);
 
 				if(!isDormant)

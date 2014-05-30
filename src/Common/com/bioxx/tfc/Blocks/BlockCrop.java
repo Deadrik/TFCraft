@@ -51,6 +51,8 @@ public class BlockCrop extends BlockContainer
 	IIcon[] iconsSquash = new IIcon[7];
 	IIcon[] iconsJute = new IIcon[6];
 
+	public IIcon iconInfest;
+
 	public BlockCrop()
 	{
 		super(Material.plants);
@@ -96,6 +98,8 @@ public class BlockCrop extends BlockContainer
 			iconsOat[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Oat (" + i + ")");
 			iconsRice[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Rice (" + i + ")");
 		}
+
+		iconInfest = register.registerIcon(Reference.ModID + ":bugs");
 	}
 
 	@Override

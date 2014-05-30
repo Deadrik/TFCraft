@@ -17,7 +17,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TileEntities.TileEntityFarmland;
+import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
@@ -136,18 +136,12 @@ public class BlockFarmland extends BlockContainer
 	@Override
 	public boolean isOpaqueCube()
 	{
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
 		return true;
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntityFarmland();
+		return new TEFarmland();
 	}
 }

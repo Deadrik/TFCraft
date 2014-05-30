@@ -2,7 +2,7 @@ package com.bioxx.tfc.Items;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TECrop;
-import com.bioxx.tfc.TileEntities.TileEntityFarmland;
+import com.bioxx.tfc.TileEntities.TEFarmland;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,7 @@ public class ItemFertilizer extends ItemTerra
 		{
 			if(TFC_Core.isFarmland(world.getBlock(x, y, z)))
 			{
-				TileEntityFarmland tef = (TileEntityFarmland)world.getTileEntity(x, y, z);
+				TEFarmland tef = (TEFarmland)world.getTileEntity(x, y, z);
 				if (tef.nutrients[3] != tef.getSoilMax())
 				{
 					tef.nutrients[3] = tef.getSoilMax();
@@ -32,7 +32,7 @@ public class ItemFertilizer extends ItemTerra
 			}
 			else if(world.getTileEntity(x, y, z) instanceof TECrop && TFC_Core.isFarmland(world.getBlock(x, y - 1, z)))
 			{
-				TileEntityFarmland tef = (TileEntityFarmland)world.getTileEntity(x, y - 1, z);
+				TEFarmland tef = (TEFarmland)world.getTileEntity(x, y - 1, z);
 				if (tef.nutrients[3] != tef.getSoilMax())
 				{
 					tef.nutrients[3] = tef.getSoilMax();
