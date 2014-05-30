@@ -870,23 +870,23 @@ item.Log.White Cedar.name=White Cedar Log
 item.Log.White Elm.name=White Elm Log
 item.Log.Willow.name=Willow Log
 
-item.SinglePlank.Acacia.name=Acacia Plank
-item.SinglePlank.Ash.name=Ash Plank
-item.SinglePlank.Aspen.name=Aspen Plank
-item.SinglePlank.Birch.name=Birch Plank
-item.SinglePlank.Chestnut.name=Chestnut Plank
-item.SinglePlank.Douglas Fir.name=Douglas Fir Plank
-item.SinglePlank.Hickory.name=Hickory Plank
-item.SinglePlank.Kapok.name=Kapok Plank
-item.SinglePlank.Maple.name=Maple Plank
-item.SinglePlank.Oak.name=Oak Plank
-item.SinglePlank.Pine.name=Pine Plank
-item.SinglePlank.Sequoia.name=Sequoia Plank
-item.SinglePlank.Spruce.name=Spruce Plank
-item.SinglePlank.Sycamore.name=Sycamore Plank
-item.SinglePlank.White Cedar.name=White Cedar Plank
-item.SinglePlank.White Elm.name=White Elm Plank
-item.SinglePlank.Willow.name=Willow Plank
+item.SinglePlank.Acacia.name=Acacia Lumber
+item.SinglePlank.Ash.name=Ash Lumber
+item.SinglePlank.Aspen.name=Aspen Lumber
+item.SinglePlank.Birch.name=Birch Lumber
+item.SinglePlank.Chestnut.name=Chestnut Lumber
+item.SinglePlank.Douglas Fir.name=Douglas Fir Lumber
+item.SinglePlank.Hickory.name=Hickory Lumber
+item.SinglePlank.Kapok.name=Kapok Lumber
+item.SinglePlank.Maple.name=Maple Lumber
+item.SinglePlank.Oak.name=Oak Lumber
+item.SinglePlank.Pine.name=Pine Lumber
+item.SinglePlank.Sequoia.name=Sequoia Lumber
+item.SinglePlank.Spruce.name=Spruce Lumber
+item.SinglePlank.Sycamore.name=Sycamore Lumber
+item.SinglePlank.White Cedar.name=White Cedar Lumber
+item.SinglePlank.White Elm.name=White Elm Lumber
+item.SinglePlank.Willow.name=Willow Lumber
 
 item.Acacia Door.name=Acacia Door
 item.Ash Door.name=Ash Door
@@ -1776,6 +1776,7 @@ tile.EarlyBloomery.name=Bloomery
 tile.Crucible.name=Crucible
 tile.NestBox.name=Nest Box
 item.SluiceItem.name=Sluice
+tile.LeatherRack.name=Leather Rack
 
 #== Anvils ==
 tile.Anvil.Stone.name=Stone Anvil
@@ -2155,7 +2156,6 @@ gui.done=Done
 gui.Sluice.Soil=Soil
 gui.Sluice=Sluice
 gui.Workbench.Crafting=Crafting
-gui.goldpan.overused=This area seems to be overworked. You probably wouldn't find much.
 
 #== Tooltips ==
 gui.ShowHelp=§8Help: (Hold §fShift§8)
@@ -2231,6 +2231,7 @@ gui.units=Units
 #== Chat Messages ==
 gui.GoldPan.UseEmpty=Must use on sand in or near a river. Or gravel from under a water source.
 gui.GoldPan.UseFull=Must use under flowing water.
+gui.goldpan.overused=This area seems to be overworked. You probably wouldn't find much.
 
 gui.ProPick.Found=Found
 gui.ProPick.FoundTraces=Found traces of

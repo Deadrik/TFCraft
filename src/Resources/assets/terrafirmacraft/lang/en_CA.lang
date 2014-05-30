@@ -1,0 +1,67 @@
+#en_CA
+#This is the configuration file for Canadian English, translated by Dunkleosteus and Mayaknife. Sorry's added by Kittychanley
+
+language.parent=en_US
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.gray.name=Grey Dye
+item.dyePowder.silver.name=Light Grey Dye
+
+item.Powder.Sulfur Powder.name=Sulphur Powder
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Sulfur.name=Sulphur
+
+#== Ore Blocks ==
+tile.Ore.Sulfur.name=Sulphur
+
+#========
+#= Wood =
+#========
+#== Wood Blocks ==
+tile.ArmourStand.Acacia.name=Acacia Armour Stand
+tile.ArmourStand.Ash.name=Ash Armour Stand
+tile.ArmourStand.Aspen.name=Aspen Armour Stand
+tile.ArmourStand.Birch.name=Birch Armour Stand
+tile.ArmourStand.Chestnut.name=Chestnut Armour Stand
+tile.ArmourStand.Douglas Fir.name=Douglas Fir Armour Stand
+tile.ArmourStand.Hickory.name=Hickory Armour Stand
+tile.ArmourStand.Kapok.name=Kapok Armour Stand
+tile.ArmourStand.Maple.name=Maple Armour Stand
+tile.ArmourStand.Oak.name=Oak Armour Stand
+tile.ArmourStand.Pine.name=Pine Armour Stand
+tile.ArmourStand.Sequoia.name=Sequoia Armour Stand
+tile.ArmourStand.Spruce.name=Spruce Armour Stand
+tile.ArmourStand.Sycamore.name=Sycamore Armour Stand
+tile.ArmourStand.White Cedar.name=White Cedar Armour Stand
+tile.ArmourStand.White Elm.name=White Elm Armour Stand
+tile.ArmourStand.Willow.name=Willow Armour Stand
+
+tile.customBed.sleep.name=This bed is too uncomfortable to sleep in, eh?
+
+#=================
+#= Miscellaneous =
+#=================
+#= Misc. Plants =
+item.Jute Fibre.name=Jute Fibre
+
+#=======
+#= GUI =
+#=======
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Armour
+
+#== Chat Messages ==
+gui.GoldPan.UseEmpty=Sorry, must use on sand in or near a river. Or gravel from under a water source.
+gui.GoldPan.UseFull=Sorry, must use under flowing water.
+gui.goldpan.overused=Sorry, this area seems to be overworked. You probably wouldn't find much.
+
+gui.ProPick.FoundNothing=Sorry, found nothing of interest.
+
+#== Skill GUI ==
+skill.Armoursmith=Armour Smithing

@@ -1,0 +1,196 @@
+#en_UK
+#This is the configuration file for UK English, translated by Kittychanley.
+
+language.parent=en_US
+
+#===========
+#= Pottery =
+#===========
+item.Mold.Clay Mold.name=Clay Mould
+item.Mold.Ceramic Mold.name=Ceramic Mould
+
+item.Axe Mold.Clay Mold Axe.name=Clay Axe Mould
+item.Axe Mold.Ceramic Mold Axe.name=Axe Mould
+item.Axe Mold.Ceramic Mold Axe Copper.name=Axe Mould (Copper)
+item.Axe Mold.Ceramic Mold Axe Bronze.name=Axe Mould (Bronze)
+item.Axe Mold.Ceramic Mold Axe Black Bronze.name=Axe Mould (Black Bronze)
+item.Axe Mold.Ceramic Mold Axe Bismuth Bronze.name=Axe Mould (Bismuth Bronze)
+
+item.Chisel Mold.Clay Mold Chisel.name=Clay Chisel Mould
+item.Chisel Mold.Ceramic Mold Chisel.name=Chisel Mould
+item.Chisel Mold.Ceramic Mold Chisel Copper.name=Chisel Mould (Copper)
+item.Chisel Mold.Ceramic Mold Chisel Bronze.name=Chisel Mould (Bronze)
+item.Chisel Mold.Ceramic Mold Chisel Black Bronze.name=Chisel Mould (Black Bronze)
+item.Chisel Mold.Ceramic Mold Chisel Bismuth Bronze.name=Chisel Mould (Bismuth Bronze)
+
+item.Hammer Mold.Clay Mold Hammer.name=Clay Hammer Mould
+item.Hammer Mold.Ceramic Mold Hammer.name=Hammer Mould
+item.Hammer Mold.Ceramic Mold Hammer Copper.name=Hammer Mould (Copper)
+item.Hammer Mold.Ceramic Mold Hammer Bronze.name=Hammer Mould (Bronze)
+item.Hammer Mold.Ceramic Mold Hammer Black Bronze.name=Hammer Mould (Black Bronze)
+item.Hammer Mold.Ceramic Mold Hammer Bismuth Bronze.name=Hammer Mould (Bismuth Bronze)
+
+item.Hoe Mold.Clay Mold Hoe.name=Clay Hoe Mould
+item.Hoe Mold.Ceramic Mold Hoe.name=Hoe Mould
+item.Hoe Mold.Ceramic Mold Hoe Copper.name=Hoe Mould (Copper)
+item.Hoe Mold.Ceramic Mold Hoe Bronze.name=Hoe Mould (Bronze)
+item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=Hoe Mould (Black Bronze)
+item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=Hoe Mould (Bismuth Bronze)
+
+item.Knife Mold.Clay Mold Knife.name=Clay Knife Mould
+item.Knife Mold.Ceramic Mold Knife.name=Knife Mould
+item.Knife Mold.Ceramic Mold Knife Copper.name=Knife Mould (Copper)
+item.Knife Mold.Ceramic Mold Knife Bronze.name=Knife Mould (Bronze)
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=Knife Mould (Black Bronze)
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=Knife Mould (Bismuth Bronze)
+
+item.Javelin Mold.Clay Mold Javelin.name=Clay Javelin Head Mould
+item.Javelin Mold.Ceramic Mold Javelin.name=Javelin Head Mould
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=Javelin Head Mould (Copper)
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=Javelin Head Mould (Bronze)
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=Javelin Head Mould (Black Bronze)
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=Javelin Head Mould (Bismuth Bronze)
+
+item.Mace Mold.Clay Mold Mace.name=Clay Mace Mould
+item.Mace Mold.Ceramic Mold Mace.name=Mace Mould
+item.Mace Mold.Ceramic Mold Mace Copper.name=Mace Mould (Copper)
+item.Mace Mold.Ceramic Mold Mace Bronze.name=Mace Mould (Bronze)
+item.Mace Mold.Ceramic Mold Mace Black Bronze.name=Mace Mould (Black Bronze)
+item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=Mace Mould (Bismuth Bronze)
+
+item.Pick Mold.Clay Mold Pick.name=Clay Pick Mould
+item.Pick Mold.Ceramic Mold Pick.name=Pick Mould
+item.Pick Mold.Ceramic Mold Pick Copper.name=Pick Mould (Copper)
+item.Pick Mold.Ceramic Mold Pick Bronze.name=Pick Mould (Bronze)
+item.Pick Mold.Ceramic Mold Pick Black Bronze.name=Pick Mould (Black Bronze)
+item.Pick Mold.Ceramic Mold Pick Bismuth Bronze.name=Pick Mould (Bismuth Bronze)
+
+item.ProPick Mold.Clay Mold ProPick.name=Clay ProPick Mould
+item.ProPick Mold.Ceramic Mold ProPick.name=ProPick Mould
+item.ProPick Mold.Ceramic Mold ProPick Copper.name=ProPick Mould (Copper)
+item.ProPick Mold.Ceramic Mold ProPick Bronze.name=ProPick Mould (Bronze)
+item.ProPick Mold.Ceramic Mold ProPick Black Bronze.name=ProPick Mould (Black Bronze)
+item.ProPick Mold.Ceramic Mold ProPick Bismuth Bronze.name=ProPick Mould (Bismuth Bronze)
+
+item.Saw Mold.Clay Mold Saw.name=Clay Saw Mould
+item.Saw Mold.Ceramic Mold Saw.name=Saw Mould
+item.Saw Mold.Ceramic Mold Saw Copper.name=Saw Mould (Copper)
+item.Saw Mold.Ceramic Mold Saw Bronze.name=Saw Mould (Bronze)
+item.Saw Mold.Ceramic Mold Saw Black Bronze.name=Saw Mould (Black Bronze)
+item.Saw Mold.Ceramic Mold Saw Bismuth Bronze.name=Saw Mould (Bismuth Bronze)
+
+item.Scythe Mold.Clay Mold Scythe.name=Clay Scythe Mould
+item.Scythe Mold.Ceramic Mold Scythe.name=Scythe Mould
+item.Scythe Mold.Ceramic Mold Scythe Copper.name=Scythe Mould (Copper)
+item.Scythe Mold.Ceramic Mold Scythe Bronze.name=Scythe Mould (Bronze)
+item.Scythe Mold.Ceramic Mold Scythe Black Bronze.name=Scythe Mould (Black Bronze)
+item.Scythe Mold.Ceramic Mold Scythe Bismuth Bronze.name=Scythe Mould (Bismuth Bronze)
+
+item.Shovel Mold.Clay Mold Shovel.name=Clay Shovel Mould
+item.Shovel Mold.Ceramic Mold Shovel.name=Shovel Mould
+item.Shovel Mold.Ceramic Mold Shovel Copper.name=Shovel Mould (Copper)
+item.Shovel Mold.Ceramic Mold Shovel Bronze.name=Shovel Mould (Bronze)
+item.Shovel Mold.Ceramic Mold Shovel Black Bronze.name=Shovel Mould (Black Bronze)
+item.Shovel Mold.Ceramic Mold Shovel Bismuth Bronze.name=Shovel Mould (Bismuth Bronze)
+
+item.Sword Mold.Clay Mold Sword.name=Clay Sword Mould
+item.Sword Mold.Ceramic Mold Sword.name=Sword Mould
+item.Sword Mold.Ceramic Mold Sword Copper.name=Sword Mould (Copper)
+item.Sword Mold.Ceramic Mold Sword Bronze.name=Sword Mould (Bronze)
+item.Sword Mold.Ceramic Mold Sword Black Bronze.name=Sword Mould (Black Bronze)
+item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=Sword Mould (Bismuth Bronze)
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.gray.name=Grey Dye
+item.dyePowder.silver.name=Light Grey Dye
+
+item.Powder.Saltpeter Powder.name=Saltpetre Powder
+item.Powder.Sulfur Powder.name=Sulphur Powder
+item.Powder.Hematite Powder.name=Haematite Powder
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Hematite.name=Haematite
+item.Ore.Sulfur.name=Sulphur
+item.Ore.Saltpeter.name=Saltpetre
+item.Ore.Rich Hematite.name=Rich Haematite
+item.Ore.Poor Hematite.name=Poor Haematite
+item.Small Ore.Hematite.name=Small Haematite
+
+#== Ore Blocks ==
+tile.Ore.Saltpeter.name=Saltpetre
+tile.Ore.Sulfur.name=Sulphur
+tile.Ore.Hematite.name=Haematite
+
+#========
+#= Wood =
+#========
+#== Wood Items ==
+item.SinglePlank.Acacia.name=Acacia Timber
+item.SinglePlank.Ash.name=Ash Timber
+item.SinglePlank.Aspen.name=Aspen Timber
+item.SinglePlank.Birch.name=Birch Timber
+item.SinglePlank.Chestnut.name=Chestnut Timber
+item.SinglePlank.Douglas Fir.name=Douglas Fir Timber
+item.SinglePlank.Hickory.name=Hickory Timber
+item.SinglePlank.Kapok.name=Kapok Timber
+item.SinglePlank.Maple.name=Maple Timber
+item.SinglePlank.Oak.name=Oak Timber
+item.SinglePlank.Pine.name=Pine Timber
+item.SinglePlank.Sequoia.name=Sequoia Timber
+item.SinglePlank.Spruce.name=Spruce Timber
+item.SinglePlank.Sycamore.name=Sycamore Timber
+item.SinglePlank.White Cedar.name=White Cedar Timber
+item.SinglePlank.White Elm.name=White Elm Timber
+item.SinglePlank.Willow.name=Willow Timber
+
+#== Wood Blocks ==
+tile.ArmourStand.Acacia.name=Acacia Armour Stand
+tile.ArmourStand.Ash.name=Ash Armour Stand
+tile.ArmourStand.Aspen.name=Aspen Armour Stand
+tile.ArmourStand.Birch.name=Birch Armour Stand
+tile.ArmourStand.Chestnut.name=Chestnut Armour Stand
+tile.ArmourStand.Douglas Fir.name=Douglas Fir Armour Stand
+tile.ArmourStand.Hickory.name=Hickory Armour Stand
+tile.ArmourStand.Kapok.name=Kapok Armour Stand
+tile.ArmourStand.Maple.name=Maple Armour Stand
+tile.ArmourStand.Oak.name=Oak Armour Stand
+tile.ArmourStand.Pine.name=Pine Armour Stand
+tile.ArmourStand.Sequoia.name=Sequoia Armour Stand
+tile.ArmourStand.Spruce.name=Spruce Armour Stand
+tile.ArmourStand.Sycamore.name=Sycamore Armour Stand
+tile.ArmourStand.White Cedar.name=White Cedar Armour Stand
+tile.ArmourStand.White Elm.name=White Elm Armour Stand
+tile.ArmourStand.Willow.name=Willow Armour Stand
+
+#=======================
+#= Tools/Weapons/Armor =
+#=======================
+#== Armor ==
+#=== Greaves ===
+item.leggingsCloth.name=Leather Trousers
+
+#=================
+#= Miscellaneous =
+#=================
+#== Misc Items ==
+item.Fertilizer.name=Fertiliser
+
+#= Misc. Plants =
+item.Jute Fibre.name=Jute Fibre
+
+#=======
+#= GUI =
+#=======
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Armour
+
+#== Misc GUI ==
+gui.fertilized=Fertilised
+
+#== Skill GUI ==
+skill.Armoursmith=Armour Smithing
