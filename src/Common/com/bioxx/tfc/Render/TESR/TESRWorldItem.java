@@ -2,7 +2,9 @@ package com.bioxx.tfc.Render.TESR;
 
 import java.util.Random;
 
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 
@@ -32,17 +34,50 @@ public class TESRWorldItem extends TESRBase
 
 			if (te.storage[0] != null)
 			{
-				GL11.glPushMatrix(); //start
-				GL11.glTranslatef((float)d + 0.5f, (float)d1 + 0.021f, (float)d2 + 0.5f);
-				if (RenderManager.instance.options.fancyGraphics)
+				float minU = te.storage[0].getIconIndex().getMinU();
+				float maxU = te.storage[0].getIconIndex().getMaxU();
+				float minV = te.storage[0].getIconIndex().getMinV();
+				float maxV = te.storage[0].getIconIndex().getMaxV();
+				float f6 = 1.0F;
+				float f7 = 0.5F;
+				float f8 = 0.25F;
+
+				if (te.storage[0].getItemSpriteNumber() == 0)
 				{
+					this.bindTexture(TextureMap.locationBlocksTexture);
+				}
+				else
+				{
+					this.bindTexture(TextureMap.locationItemsTexture);
+				}
+
+				boolean fancy = RenderManager.instance.options.fancyGraphics;
+				//RenderManager.instance.options.fancyGraphics = true;
+				GL11.glPushMatrix(); //start
+
+				if(RenderManager.instance.options.fancyGraphics)
+				{
+					GL11.glTranslatef((float)d + 0.5f, (float)d1 + 0.021f, (float)d2 + 0.5f);
 					GL11.glRotatef(90, 1.0f, 0.0F, 0.0F);
 					GL11.glRotatef(R.nextFloat()*360, 0.0f, 0.0F, 1.0F);
+					GL11.glScalef(blockScale, blockScale, blockScale);
+					customitem.setEntityItemStack(te.storage[0]);
+					itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
 				}
-				GL11.glScalef(blockScale, blockScale, blockScale);
-				customitem.setEntityItemStack(te.storage[0]);
-				itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
+				else
+				{
+					GL11.glTranslated(d, d1+0.001, d2);
+					Tessellator tessellator = Tessellator.instance;
+					tessellator.startDrawingQuads();
+					tessellator.setNormal(0.0F, 1.0F, 0.0F);
+					tessellator.addVertexWithUV(0.2, 0.0F, 0.8D, minU, maxV);
+					tessellator.addVertexWithUV(0.8, 0.0F, 0.8D, maxU, maxV);
+					tessellator.addVertexWithUV(0.8, 0.0F, 0.2D, maxU, minV);
+					tessellator.addVertexWithUV(0.2, 0.0F, 0.2D, minU, minV);
+					tessellator.draw();
+				}
 				GL11.glPopMatrix(); //end
+				RenderManager.instance.options.fancyGraphics = fancy;
 			}
 		}
 	}
