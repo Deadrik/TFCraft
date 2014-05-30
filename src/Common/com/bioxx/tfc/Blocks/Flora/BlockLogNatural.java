@@ -168,6 +168,13 @@ public class BlockLogNatural extends BlockTerra
 	}
 
 	@Override
+	public void onBlockHarvested(World world, int x, int y, int z, int side, EntityPlayer entityplayer)
+	{
+		int l = world.getBlockMetadata(x, y, z);
+		harvestBlock(world, entityplayer, x, y, z, l);
+	}
+
+	@Override
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
 	{
 		return true;
