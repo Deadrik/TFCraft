@@ -187,7 +187,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 			{
 				world.setBlock(i, j, k, TFC_Core.getTypeForDirt(world.getBlockMetadata(i, j, k) + textureOffset), world.getBlockMetadata(i, j, k), 0x2);
 			}
-			else if (world.getBlockLightValue(i, j + 1, k) >= 9)
+			else if (world.getBlockLightValue(i, j + 1, k) >= 4)
 			{
 				for (int var6 = 0; var6 < 4; ++var6)
 				{
@@ -200,11 +200,11 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 					Block id = world.getBlock(x, y, z);
 					int meta = world.getBlockMetadata(x, y, z);
 
-					if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 && world.getBlockLightValue(x, y + 1, z) >= 4 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
+					if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
 						world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
-					else if (TFC_Core.isClay(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
+					else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
 						world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
-					else if (TFC_Core.isPeat(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
+					else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
 						world.setBlock(x, y, z, TFCBlocks.PeatGrass);
 				}
 
@@ -212,8 +212,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 				float temp = TFC_Climate.getHeightAdjustedTemp(i, j+1, k);
 				Block id = world.getBlock(i, j, k);
 
-				if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlockLightValue(i, j + 1, k) >= 4 && 
-						world.getBlock(i, j + 1, k).getMaterial() != Material.water && world.isAirBlock(i, j + 1, k))
+				if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlock(i, j + 1, k).getMaterial() != Material.water && world.isAirBlock(i, j + 1, k))
 				{
 					if(rand.nextInt((int) ((16800-rain)/4)) == 0 && temp > 20)
 						world.setBlock(i, j + 1, k, TFCBlocks.TallGrass, (world.rand.nextInt(30) == 0 ? 1 : 0), 0x2); // 1/30 chance to spawn fern
