@@ -63,7 +63,7 @@ public class BlockClay extends BlockTerra
 	public IIcon getIcon(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
 		int meta = bAccess.getBlockMetadata(x, y, z);
-		if(meta > DirtTexture.length) return DirtTexture[DirtTexture.length];
+		if(meta >= DirtTexture.length) return DirtTexture[DirtTexture.length - 1];
 		return DirtTexture[meta];
 	}
 
@@ -73,7 +73,7 @@ public class BlockClay extends BlockTerra
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
-		if(meta > DirtTexture.length) return DirtTexture[DirtTexture.length];
+		if(meta >= DirtTexture.length) return DirtTexture[DirtTexture.length - 1];
 		return DirtTexture[meta];
 	}
 

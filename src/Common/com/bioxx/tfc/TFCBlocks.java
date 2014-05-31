@@ -673,8 +673,8 @@ public class TFCBlocks
 		BerryBush = new BlockBerryBush().setBlockName("BerryBush").setHardness(0.3f).setStepSound(Block.soundTypeGrass);
 		Crops = new BlockCrop().setBlockName("crops").setHardness(0.3F).setStepSound(Block.soundTypeGrass);
 		LilyPad = new BlockCustomLilyPad().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("LilyPad").setBlockTextureName("waterlily");
-		Flowers = new BlockTFCFlower(1).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers");
-		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");//.setCreativeTab(CreativeTabs.tabFood);
+		Flowers = new BlockTFCFlower().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers");
+		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");
 
 		SaltWater = (new BlockCustomLiquid(TFC_Fluids.SALTWATER, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWater");
 		FreshWater = (new BlockFreshWater(TFC_Fluids.FRESHWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWater");

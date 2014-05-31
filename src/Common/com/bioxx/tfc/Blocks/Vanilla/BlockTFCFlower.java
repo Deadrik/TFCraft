@@ -1,33 +1,52 @@
 package com.bioxx.tfc.Blocks.Vanilla;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTFCFlower extends BlockTerra
 {
-	private static final String[][] flowerNames = new String[][] {{"flower_dandelion"}, {"flower_rose", "flower_blue_orchid", "flower_allium", "flower_houstonia", "flower_tulip_red", "flower_tulip_orange", "flower_tulip_white", "flower_tulip_pink", "flower_oxeye_daisy"}};
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
-	private int flowerType;
-
-	public BlockTFCFlower(int type)
+	public BlockTFCFlower()
 	{
 		this.setTickRandomly(true);
-		flowerType = type;
 		float var4 = 0.2F;
 		this.setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var4 * 3.0F, 0.5F + var4);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	/**
+	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+	 */
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
+	{
+		// Change to false if this block should not be added to the creative tab
+		Boolean addToCreative = true;
+
+		if(addToCreative)
+		{
+			for(int i = 0; i < Global.FLOWER_META_NAMES.length; i++)
+				list.add(new ItemStack(item, 1, i));
+		}
 	}
 
 	@Override
@@ -35,10 +54,7 @@ public class BlockTFCFlower extends BlockTerra
 	public IIcon getIcon(int side, int meta)
 	{
 		if (meta >= this.icons.length)
-		{
 			meta = 0;
-		}
-
 		return this.icons[meta];
 	}
 
@@ -46,12 +62,15 @@ public class BlockTFCFlower extends BlockTerra
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register)
 	{
-		this.icons = new IIcon[flowerNames[this.flowerType].length];
-
+		this.icons = new IIcon[Global.FLOWER_META_NAMES.length];
 		for (int i = 0; i < this.icons.length; ++i)
-		{
-			this.icons[i] = register.registerIcon(flowerNames[this.flowerType][i]);
-		}
+			this.icons[i] = register.registerIcon(Global.FLOWER_META_NAMES[i]);
+	}
+
+	@Override
+	public int damageDropped(int dmg)
+	{
+		return dmg;
 	}
 
 	/**
@@ -76,7 +95,7 @@ public class BlockTFCFlower extends BlockTerra
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		return null;
 	}

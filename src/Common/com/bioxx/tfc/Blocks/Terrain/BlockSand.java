@@ -81,7 +81,7 @@ public class BlockSand extends BlockTerra
 	public IIcon getIcon(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
 		int meta = bAccess.getBlockMetadata(x, y, z);
-		if(meta > icons.length) return icons[icons.length];
+		if(meta >= icons.length) return icons[icons.length - 1];
 		return icons[meta];
 	}
 
@@ -91,7 +91,7 @@ public class BlockSand extends BlockTerra
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
-		if(meta > icons.length) return icons[icons.length];
+		if(meta >= icons.length) return icons[icons.length - 1];
 		return icons[meta];
 	}
 

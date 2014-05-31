@@ -1,8 +1,5 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -10,6 +7,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Enums.EnumWeight;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -22,45 +24,50 @@ public class ItemFlowers extends ItemTerraBlock
 	}
 
 	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int par1)
+	public IIcon getIconFromDamage(int dmg)
 	{
-		return TFCBlocks.Flowers.getIcon(0, par1);
+		return TFCBlocks.Flowers.getIcon(0, dmg);
 	}
 
 	/**
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
-		MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, true);
+		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, true);
 
-		if (movingobjectposition == null)
+		if (mop == null)
 		{
-			return par1ItemStack;
+			return is;
 		}
 		else
 		{
-			if (movingobjectposition.typeOfHit == MovingObjectType.BLOCK)
+			if (mop.typeOfHit == MovingObjectType.BLOCK)
 			{
-				int i = movingobjectposition.blockX;
-				int j = movingobjectposition.blockY;
-				int k = movingobjectposition.blockZ;
+				int x = mop.blockX;
+				int y = mop.blockY;
+				int z = mop.blockZ;
 
-				if (!par2World.canMineBlock(par3EntityPlayer, i, j, k))
-					return par1ItemStack;
+				if (!world.canMineBlock(player, x, y, z))
+					return is;
 
-				if (!par3EntityPlayer.canPlayerEdit(i, j, k, movingobjectposition.sideHit, par1ItemStack))
-					return par1ItemStack;
+				if (!player.canPlayerEdit(x, y, z, mop.sideHit, is))
+					return is;
 
-				if (TFCBlocks.Flowers.canBlockStay(par2World, i, j + 1, k) && par2World.isAirBlock(i, j + 1, k))
+				if (TFCBlocks.Flowers.canBlockStay(world, x, y + 1, z) && world.isAirBlock(x, y + 1, z))
 				{
-					par2World.setBlock(i, j + 1, k, TFCBlocks.Flowers, par1ItemStack.getItemDamage(), 0x3);
-					par2World.playSoundEffect((double)((float)i + 0.5F), (double)((float)j + 0.5F), (double)((float)k + 0.5F), TFCBlocks.Flowers.stepSound.func_150496_b(), (TFCBlocks.Flowers.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.Flowers.stepSound.getPitch() * 0.8F);
-					if (!par3EntityPlayer.capabilities.isCreativeMode) --par1ItemStack.stackSize;
+					world.setBlock(x, y + 1, z, TFCBlocks.Flowers, is.getItemDamage(), 0x3);
+					world.playSoundEffect((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), TFCBlocks.Flowers.stepSound.func_150496_b(), (TFCBlocks.Flowers.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.Flowers.stepSound.getPitch() * 0.8F);
+					if (!player.capabilities.isCreativeMode) --is.stackSize;
 				}
 			}
-			return par1ItemStack;
+			return is;
 		}
 	}
 
+	@Override
+	public EnumWeight getWeight(ItemStack is)
+	{
+		return EnumWeight.MEDIUM;
+	}
 }
