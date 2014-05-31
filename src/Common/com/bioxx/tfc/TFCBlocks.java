@@ -49,6 +49,8 @@ import com.bioxx.tfc.Blocks.Devices.BlockToolRack2;
 import com.bioxx.tfc.Blocks.Devices.BlockWorkbench;
 import com.bioxx.tfc.Blocks.Flora.BlockBerryBush;
 import com.bioxx.tfc.Blocks.Flora.BlockFlora;
+import com.bioxx.tfc.Blocks.Flora.BlockFlower;
+import com.bioxx.tfc.Blocks.Flora.BlockFlower2;
 import com.bioxx.tfc.Blocks.Flora.BlockFrozenSeaGrass;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
 import com.bioxx.tfc.Blocks.Flora.BlockFruitWood;
@@ -80,6 +82,7 @@ import com.bioxx.tfc.Blocks.Terrain.BlockMoss;
 import com.bioxx.tfc.Blocks.Terrain.BlockOre;
 import com.bioxx.tfc.Blocks.Terrain.BlockOre2;
 import com.bioxx.tfc.Blocks.Terrain.BlockOre3;
+import com.bioxx.tfc.Blocks.Terrain.BlockSand;
 import com.bioxx.tfc.Blocks.Terrain.BlockSed;
 import com.bioxx.tfc.Blocks.Terrain.BlockSedBrick;
 import com.bioxx.tfc.Blocks.Terrain.BlockSedCobble;
@@ -103,7 +106,6 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockCustomVine;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomWall;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence2;
-import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFlower;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
 import com.bioxx.tfc.Core.TFC_Fluids;
 import com.bioxx.tfc.Items.ItemBarrels;
@@ -269,6 +271,7 @@ public class TFCBlocks
 	public static Block Crops;
 	public static Block LilyPad;
 	public static Block Flowers;
+	public static Block Flowers2;
 	public static Block Fungi;
 	public static Block Flora;
 	public static Block EarlyBloomery;
@@ -323,11 +326,11 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Ore, "Ore1");
 		GameRegistry.registerBlock(Ore2, "Ore2");
 		GameRegistry.registerBlock(Ore3, "Ore3");
-
 		GameRegistry.registerBlock(StoneIgIn, ItemStone.class, "StoneIgIn");
 		GameRegistry.registerBlock(StoneIgEx, ItemStone.class, "StoneIgEx");
 		GameRegistry.registerBlock(StoneSed, ItemStone.class, "StoneSed");
 		GameRegistry.registerBlock(StoneMM, ItemStone.class, "StoneMM");
+
 		GameRegistry.registerBlock(StoneIgInCobble, ItemStone.class, "StoneIgInCobble");
 		GameRegistry.registerBlock(StoneIgExCobble, ItemStone.class, "StoneIgExCobble");
 		GameRegistry.registerBlock(StoneSedCobble, ItemStone.class, "StoneSedCobble");
@@ -341,35 +344,18 @@ public class TFCBlocks
 		GameRegistry.registerBlock(StoneSedBrick, ItemStone.class, "StoneSedBrick");
 		GameRegistry.registerBlock(StoneMMBrick, ItemStone.class, "StoneMMBrick");
 
-		GameRegistry.registerBlock(WallCobbleIgIn, ItemStone.class, "WallCobbleIgIn");
-		GameRegistry.registerBlock(WallCobbleIgEx, ItemStone.class, "WallCobbleIgEx");
-		GameRegistry.registerBlock(WallCobbleSed, ItemStone.class, "WallCobbleSed");
-		GameRegistry.registerBlock(WallCobbleMM, ItemStone.class, "WallCobbleMM");
-		GameRegistry.registerBlock(WallRawIgIn, ItemStone.class, "WallRawIgIn");
-		GameRegistry.registerBlock(WallRawIgEx, ItemStone.class, "WallRawIgEx");
-		GameRegistry.registerBlock(WallRawSed, ItemStone.class, "WallRawSed");
-		GameRegistry.registerBlock(WallRawMM, ItemStone.class, "WallRawMM");
-		GameRegistry.registerBlock(WallBrickIgIn, ItemStone.class, "WallBrickIgIn");
-		GameRegistry.registerBlock(WallBrickIgEx, ItemStone.class, "WallBrickIgEx");
-		GameRegistry.registerBlock(WallBrickSed, ItemStone.class, "WallBrickSed");
-		GameRegistry.registerBlock(WallBrickMM, ItemStone.class, "WallBrickMM");
-		GameRegistry.registerBlock(WallSmoothIgIn, ItemStone.class, "WallSmoothIgIn");
-		GameRegistry.registerBlock(WallSmoothIgEx, ItemStone.class, "WallSmoothIgEx");
-		GameRegistry.registerBlock(WallSmoothSed, ItemStone.class, "WallSmoothSed");
-		GameRegistry.registerBlock(WallSmoothMM, ItemStone.class, "WallSmoothMM");
-
 		GameRegistry.registerBlock(Dirt, ItemStone.class, "Dirt");
 		GameRegistry.registerBlock(Dirt2, ItemStone.class, "Dirt2");
 		GameRegistry.registerBlock(Sand, ItemStone.class, "Sand");
 		GameRegistry.registerBlock(Sand2, ItemStone.class, "Sand2");
-		GameRegistry.registerBlock(Clay, ItemStone.class, "Clay");
-		GameRegistry.registerBlock(Clay2, ItemStone.class, "Clay2");
+		GameRegistry.registerBlock(Clay, "Clay");
+		GameRegistry.registerBlock(Clay2, "Clay2");
 		GameRegistry.registerBlock(Grass, ItemStone.class, "Grass");
 		GameRegistry.registerBlock(Grass2, ItemStone.class, "Grass2");
 		GameRegistry.registerBlock(ClayGrass, ItemStone.class, "ClayGrass");
 		GameRegistry.registerBlock(ClayGrass2, ItemStone.class, "ClayGrass2");
-		GameRegistry.registerBlock(PeatGrass, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "PeatGrass");
-		GameRegistry.registerBlock(Peat, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Peat");
+		GameRegistry.registerBlock(PeatGrass, ItemStone.class, "PeatGrass");
+		GameRegistry.registerBlock(Peat, ItemStone.class, "Peat");
 		GameRegistry.registerBlock(DryGrass, ItemStone.class, "DryGrass");
 		GameRegistry.registerBlock(DryGrass2, ItemStone.class, "DryGrass2");
 		GameRegistry.registerBlock(TallGrass, com.bioxx.tfc.Items.ItemBlocks.ItemCustomTallGrass.class, "TallGrass");
@@ -427,8 +413,24 @@ public class TFCBlocks
 		GameRegistry.registerBlock(SpawnMeter, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "SpawnMeter");
 		GameRegistry.registerBlock(FoodPrep, "FoodPrep");
 		GameRegistry.registerBlock(Quern, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Quern");
-		GameRegistry.registerBlock(SteamPipe, com.bioxx.tfc.Items.ItemBlocks.ItemPipe.class, "BasicPipe");
-		GameRegistry.registerBlock(SteamPipeValve, com.bioxx.tfc.Items.ItemBlocks.ItemPipeValve.class, "ValvePipe");
+		GameRegistry.registerBlock(WallCobbleIgIn, ItemStone.class, "WallCobbleIgIn");
+		GameRegistry.registerBlock(WallCobbleIgEx, ItemStone.class, "WallCobbleIgEx");
+		GameRegistry.registerBlock(WallCobbleSed, ItemStone.class, "WallCobbleSed");
+		GameRegistry.registerBlock(WallCobbleMM, ItemStone.class, "WallCobbleMM");
+		GameRegistry.registerBlock(WallRawIgIn, ItemStone.class, "WallRawIgIn");
+		GameRegistry.registerBlock(WallRawIgEx, ItemStone.class, "WallRawIgEx");
+		GameRegistry.registerBlock(WallRawSed, ItemStone.class, "WallRawSed");
+		GameRegistry.registerBlock(WallRawMM, ItemStone.class, "WallRawMM");
+		GameRegistry.registerBlock(WallBrickIgIn, ItemStone.class, "WallBrickIgIn");
+		GameRegistry.registerBlock(WallBrickIgEx, ItemStone.class, "WallBrickIgEx");
+		GameRegistry.registerBlock(WallBrickSed, ItemStone.class, "WallBrickSed");
+		GameRegistry.registerBlock(WallBrickMM, ItemStone.class, "WallBrickMM");
+		GameRegistry.registerBlock(WallSmoothIgIn, ItemStone.class, "WallSmoothIgIn");
+		GameRegistry.registerBlock(WallSmoothIgEx, ItemStone.class, "WallSmoothIgEx");
+		GameRegistry.registerBlock(WallSmoothSed, ItemStone.class, "WallSmoothSed");
+		GameRegistry.registerBlock(WallSmoothMM, ItemStone.class, "WallSmoothMM");
+		GameRegistry.registerBlock(SteamPipe, ItemStone.class, "BasicPipe");
+		GameRegistry.registerBlock(SteamPipeValve, ItemStone.class, "ValvePipe");
 
 		GameRegistry.registerBlock(SaltWater, "SaltWater");
 		GameRegistry.registerBlock(FreshWater, "FreshWater");
@@ -468,6 +470,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Crops, "Crops");
 		GameRegistry.registerBlock(LilyPad, com.bioxx.tfc.Items.ItemBlocks.ItemCustomLilyPad.class, "LilyPad");
 		GameRegistry.registerBlock(Flowers, com.bioxx.tfc.Items.ItemBlocks.ItemFlowers.class, "Flowers");
+		GameRegistry.registerBlock(Flowers2, com.bioxx.tfc.Items.ItemBlocks.ItemFlowers.class, "Flowers2");
 		GameRegistry.registerBlock(Fungi, com.bioxx.tfc.Items.ItemBlocks.ItemFungi.class, "Fungi");
 		GameRegistry.registerBlock(Bookshelf, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Bookshelf");
 		GameRegistry.registerBlock(Torch, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Torch");
@@ -558,8 +561,8 @@ public class TFCBlocks
 		DryGrass = new BlockDryGrass(0).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("DryGrass");
 		DryGrass2 =new BlockDryGrass(16).setHardness(3F).setStepSound(Block.soundTypeGrass).setBlockName("DryGrass");
 		TallGrass = new BlockCustomTallGrass().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("TallGrass");
-		Sand = new com.bioxx.tfc.Blocks.Terrain.BlockSand(0).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
-		Sand2 = new com.bioxx.tfc.Blocks.Terrain.BlockSand(16).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
+		Sand = new BlockSand(0).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
+		Sand2 = new BlockSand(16).setHardness(0.5F).setStepSound(Block.soundTypeSand).setBlockName("sand");
 
 		Ore = new BlockOre(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		Ore2 = new BlockOre2(Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
@@ -574,7 +577,7 @@ public class TFCBlocks
 		WoodSupportH2 = new BlockWoodSupport2(Material.wood).setBlockName("WoodSupportH2").setHardness(0.5F).setResistance(1F);
 
 		tilledSoil = new com.bioxx.tfc.Blocks.BlockFarmland(TFCBlocks.Dirt, 0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
-		tilledSoil2 = new com.bioxx.tfc.Blocks.BlockFarmland(TFCBlocks.Dirt2, 16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
+		tilledSoil2 = new com.bioxx.tfc.Blocks.BlockFarmland(TFCBlocks.Dirt2, 16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil2");
 
 		fruitTreeWood = new BlockFruitWood().setBlockName("fruitTreeWood").setHardness(5.5F).setResistance(2F);
 		fruitTreeLeaves = new BlockFruitLeaves(0).setBlockName("fruitTreeLeaves").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundTypeGrass);
@@ -673,8 +676,9 @@ public class TFCBlocks
 		BerryBush = new BlockBerryBush().setBlockName("BerryBush").setHardness(0.3f).setStepSound(Block.soundTypeGrass);
 		Crops = new BlockCrop().setBlockName("crops").setHardness(0.3F).setStepSound(Block.soundTypeGrass);
 		LilyPad = new BlockCustomLilyPad().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("LilyPad").setBlockTextureName("waterlily");
-		Flowers = new BlockTFCFlower().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers");
-		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");
+		Flowers = new BlockFlower().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers");
+		Flowers2 = new BlockFlower2().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers2");
+		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");//.setCreativeTab(CreativeTabs.tabFood);
 
 		SaltWater = (new BlockCustomLiquid(TFC_Fluids.SALTWATER, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWater");
 		FreshWater = (new BlockFreshWater(TFC_Fluids.FRESHWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWater");

@@ -1,4 +1,4 @@
-package com.bioxx.tfc.Blocks.Vanilla;
+package com.bioxx.tfc.Blocks.Flora;
 
 import java.util.List;
 import java.util.Random;
@@ -12,6 +12,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Constant.Global;
@@ -19,17 +20,18 @@ import com.bioxx.tfc.api.Constant.Global;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockTFCFlower extends BlockTerra
+public class BlockFlower extends BlockTerra
 {
+	public String[] flowerNames;
 	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
+	protected IIcon[] icons;
 
-	public BlockTFCFlower()
+	public BlockFlower()
 	{
 		this.setTickRandomly(true);
 		float var4 = 0.2F;
 		this.setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var4 * 3.0F, 0.5F + var4);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		flowerNames = new String[]{"flower_dandelion","flower_nasturtium", "flower_meads_milkweed", "flower_tropical_milkweed", "flower_butterfly_milkweed", "flower_calendula"};
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -62,9 +64,12 @@ public class BlockTFCFlower extends BlockTerra
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register)
 	{
-		this.icons = new IIcon[Global.FLOWER_META_NAMES.length];
+		this.icons = new IIcon[flowerNames.length];
+
 		for (int i = 0; i < this.icons.length; ++i)
-			this.icons[i] = register.registerIcon(Global.FLOWER_META_NAMES[i]);
+		{
+			this.icons[i] = register.registerIcon(Reference.ModID+":"+flowerNames[i]);
+		}
 	}
 
 	@Override

@@ -8,9 +8,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Enums.EnumWeight;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,15 +21,17 @@ public class ItemFlowers extends ItemTerraBlock
 		MetaNames = Global.FLOWER_META_NAMES;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int dmg)
+	public IIcon getIconFromDamage(int par1)
 	{
-		return TFCBlocks.Flowers.getIcon(0, dmg);
+		return this.field_150939_a.getIcon(0, par1);
 	}
 
 	/**
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
+	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, true);
@@ -44,20 +44,20 @@ public class ItemFlowers extends ItemTerraBlock
 		{
 			if (mop.typeOfHit == MovingObjectType.BLOCK)
 			{
-				int x = mop.blockX;
-				int y = mop.blockY;
-				int z = mop.blockZ;
+				int i = mop.blockX;
+				int j = mop.blockY;
+				int k = mop.blockZ;
 
-				if (!world.canMineBlock(player, x, y, z))
+				if (!world.canMineBlock(player, i, j, k))
 					return is;
 
-				if (!player.canPlayerEdit(x, y, z, mop.sideHit, is))
+				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is))
 					return is;
 
-				if (TFCBlocks.Flowers.canBlockStay(world, x, y + 1, z) && world.isAirBlock(x, y + 1, z))
+				if (this.field_150939_a.canBlockStay(world, i, j + 1, k) && world.isAirBlock(i, j + 1, k))
 				{
-					world.setBlock(x, y + 1, z, TFCBlocks.Flowers, is.getItemDamage(), 0x3);
-					world.playSoundEffect((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), TFCBlocks.Flowers.stepSound.func_150496_b(), (TFCBlocks.Flowers.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.Flowers.stepSound.getPitch() * 0.8F);
+					world.setBlock(i, j + 1, k, this.field_150939_a, is.getItemDamage(), 0x3);
+					world.playSoundEffect(i + 0.5F, j + 0.5F, k + 0.5F, this.field_150939_a.stepSound.func_150496_b(), (this.field_150939_a.stepSound.getVolume() + 1.0F) / 2.0F, this.field_150939_a.stepSound.getPitch() * 0.8F);
 					if (!player.capabilities.isCreativeMode) --is.stackSize;
 				}
 			}
@@ -65,9 +65,4 @@ public class ItemFlowers extends ItemTerraBlock
 		}
 	}
 
-	@Override
-	public EnumWeight getWeight(ItemStack is)
-	{
-		return EnumWeight.MEDIUM;
-	}
 }

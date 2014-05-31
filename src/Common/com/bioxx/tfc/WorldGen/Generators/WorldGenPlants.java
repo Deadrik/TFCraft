@@ -2,6 +2,9 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -9,13 +12,12 @@ import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomFruitTree;
 
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenPlants implements IWorldGenerator
 {
-	static WorldGenFlowers plantFlowersGen = new WorldGenFlowers();
+	static WorldGenFlowers plantFlowersGen = new WorldGenFlowers(TFCBlocks.Flowers);
+	static WorldGenFlowers plantFlowersGen2 = new WorldGenFlowers(TFCBlocks.Flowers2);
 	static WorldGenFungi plantFungiGen = new WorldGenFungi();
 
 	static WorldGenCustomFruitTree appleTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves, 0);
@@ -103,7 +105,10 @@ public class WorldGenPlants implements IWorldGenerator
 			bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
 			if(bioTemperature > 1.5)
 			{
-				plantFlowersGen.generate(world, random, xCoord, yCoord, zCoord);
+				if(random.nextInt(100) < 50)
+					plantFlowersGen.generate(world, random, xCoord, yCoord, zCoord);
+				else
+					plantFlowersGen2.generate(world, random, xCoord, yCoord, zCoord);
 			}
 		}
 
@@ -126,8 +131,8 @@ public class WorldGenPlants implements IWorldGenerator
 
 			if(bioTemperature >= 0)
 			{
-//				WorldGenerator var6 = new WorldGenCustomTallGrass(Block.tallGrass, 1);
-//				var6.generate(world, random, xCoord, yCoord, zCoord);
+				//				WorldGenerator var6 = new WorldGenCustomTallGrass(Block.tallGrass, 1);
+				//				var6.generate(world, random, xCoord, yCoord, zCoord);
 				if (world.isAirBlock(xCoord, yCoord, zCoord) && 
 						TFCBlocks.TallGrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
 						TFC_Core.isDryGrass(world.getBlock(xCoord, yCoord - 1, zCoord)))
@@ -218,12 +223,12 @@ public class WorldGenPlants implements IWorldGenerator
 					plumTree.generate(world, random, xCoord, yCoord, zCoord);
 				break;
 			}
-//			case 9:
-//			{
-//				if(world.isAirBlock(var2, var3, var4) && (world.getBlock(var2, var3-1, var4) == mod_TFC_Core.terraGrass || world.getBlock(var2, var3-1, var4) == mod_TFC_Core.terraGrass2))
-//					cacaoTree.generate(world, rand, var2, var3, var4);
-//				break;
-//			}
+			//			case 9:
+			//			{
+			//				if(world.isAirBlock(var2, var3, var4) && (world.getBlock(var2, var3-1, var4) == mod_TFC_Core.terraGrass || world.getBlock(var2, var3-1, var4) == mod_TFC_Core.terraGrass2))
+			//					cacaoTree.generate(world, rand, var2, var3, var4);
+			//				break;
+			//			}
 			}
 		}
 
@@ -259,7 +264,7 @@ public class WorldGenPlants implements IWorldGenerator
 			case 5:
 				bunchberryGen.generate(world, random, xCoord, yCoord, zCoord);
 				break;
-			/*case 6:
+				/*case 6:
 				cranberryGen.generate(world, random, xCoord, yCoord, zCoord);
 				break;*/
 			case 7:

@@ -15,8 +15,9 @@ public class Global
 	/* Flower Meta Names
 	 * The first 10 flowers are from vanilla */
 	public static final String[] FLOWER_META_NAMES = new String[] {
-		"flower_dandelion", "flower_rose", "flower_blue_orchid", "flower_allium", "flower_houstonia",
-		"flower_tulip_red", "flower_tulip_orange", "flower_tulip_white", "flower_tulip_pink", "flower_oxeye_daisy"
+		"flower_rose", "flower_blue_orchid", "flower_allium", "flower_houstonia",
+		"flower_tulip_red", "flower_tulip_orange", "flower_tulip_white", "flower_tulip_pink", "flower_oxeye_daisy",
+		"flower_dandelion","flower_nasturtium", "flower_meads_milkweed", "flower_tropical_milkweed", "flower_butterfly_milkweed", "flower_calendula"
 	};
 
 	/* Fungi Meta Names
@@ -24,7 +25,7 @@ public class Global
 	public static final String[] FUNGI_META_NAMES = new String[] {
 		"mushroom_brown", "mushroom_red"
 	};
-	
+
 	/* Powder */
 	public static final String[] POWDER = {
 		"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder",

@@ -2,25 +2,25 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import com.bioxx.tfc.Blocks.Flora.BlockFlower;
+
 public class WorldGenFlowers extends WorldGenerator
 {
-	private Block plantBlock = TFCBlocks.Flowers;
+	private BlockFlower plantBlock;
 
-	public WorldGenFlowers()
+	public WorldGenFlowers(Block b)
 	{
+		plantBlock = (BlockFlower) b;
 	}
 
 	@Override
 	public boolean generate(World world, Random r, int x, int y, int z)
 	{
-		int all = Global.FLOWER_META_NAMES.length;
+		int all = plantBlock.flowerNames.length;
 
 		for (int var6 = 0; var6 < 2; ++var6)
 		{
@@ -28,9 +28,9 @@ public class WorldGenFlowers extends WorldGenerator
 			int yy = y + r.nextInt(4) - r.nextInt(4);
 			int zz = z + r.nextInt(8) - r.nextInt(8);
 
-			if (world.isAirBlock(xx, yy, zz) && TFCBlocks.Flowers.canBlockStay(world, xx, yy, zz))
+			if (world.isAirBlock(xx, yy, zz) && plantBlock.canBlockStay(world, xx, yy, zz))
 			{
-				world.setBlock(xx, yy, zz, this.plantBlock, r.nextInt(all), 0x2);
+				world.setBlock(xx, yy, zz, plantBlock, r.nextInt(all), 0x2);
 			}
 		}
 		return true;
