@@ -153,7 +153,12 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 	public void increaseSkills(AnvilRecipe recipe)
 	{
 		if(lastWorker!= null)
-			recipe.addSkills(lastWorker);
+		{
+			for(String s : recipe.skillsList)
+			{
+				TFC_Core.getSkillStats(lastWorker).increaseSkill(s, recipe.craftingXP);
+			}
+		}
 	}
 
 	/**

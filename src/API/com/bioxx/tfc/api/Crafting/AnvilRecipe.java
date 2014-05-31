@@ -21,7 +21,7 @@ public class AnvilRecipe
 	int anvilreq;
 	boolean inheritsDamage;
 	public int craftingXP = 1;
-	ArrayList<String> skillsList = new ArrayList<String>();
+	public ArrayList<String> skillsList = new ArrayList<String>();
 	private static int craftingBoundDefault = 50;
 
 	public AnvilRecipe(ItemStack in, ItemStack in2, String p, boolean flux, AnvilReq req, ItemStack result)
@@ -86,12 +86,6 @@ public class AnvilRecipe
 		anvilreq = req.Tier;
 		this.result = res;
 		inheritsDamage = false;
-	}
-
-	public void addSkills(EntityPlayer player)
-	{
-		for(String s : skillsList)
-			TFC_Core.getSkillStats(player).increaseSkill(s, craftingXP);
 	}
 
 	public AnvilRecipe clearRecipeSkills()
