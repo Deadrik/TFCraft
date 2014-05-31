@@ -30,7 +30,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCustomBed extends BlockDirectional
+public class BlockBed extends BlockDirectional
 {
 	/** Maps the foot-of-bed block to the head-of-bed block. */
 	public static final int[][] footBlockToHeadBlockMap = new int[][] {{0, 1}, { -1, 0}, {0, -1}, {1, 0}};
@@ -41,7 +41,7 @@ public class BlockCustomBed extends BlockDirectional
 	@SideOnly(Side.CLIENT)
 	private IIcon[] bedTopIcons;
 
-	public BlockCustomBed()
+	public BlockBed()
 	{
 		super(Material.grass);
 		this.setBounds();

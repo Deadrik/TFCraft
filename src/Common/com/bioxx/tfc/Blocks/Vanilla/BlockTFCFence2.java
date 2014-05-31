@@ -5,9 +5,9 @@ import net.minecraft.util.IIcon;
 
 import com.bioxx.tfc.api.Constant.Global;
 
-public class BlockCustomFence2 extends BlockCustomFence
+public class BlockTFCFence2 extends BlockTFCFence
 {
-	public BlockCustomFence2(String str, Material mat)
+	public BlockTFCFence2(String str, Material mat)
 	{
 		super(str, mat);
 		woodNames = new String[Global.WOOD_ALL.length - 16];

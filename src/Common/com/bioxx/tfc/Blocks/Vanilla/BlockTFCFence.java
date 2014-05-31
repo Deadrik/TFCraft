@@ -24,13 +24,13 @@ import com.bioxx.tfc.api.Constant.Global;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCustomFence extends BlockFence
+public class BlockTFCFence extends BlockFence
 {
 	protected String[] woodNames;
 	protected IIcon[] iconsPost;
 	protected IIcon[] iconsPostTop;
 
-	public BlockCustomFence(String str, Material mat)
+	public BlockTFCFence(String str, Material mat)
 	{
 		super(str, mat);
 		woodNames = new String[16];

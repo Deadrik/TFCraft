@@ -7,7 +7,7 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFence;
+import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -21,7 +21,7 @@ public class RenderFence  implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderblocks)
 	{
-		BlockCustomFence par1BlockFence = (BlockCustomFence)block;
+		BlockTFCFence par1BlockFence = (BlockTFCFence)block;
 		boolean flag = false;
 		float f = 0.375F;
 		float f1 = 0.625F;

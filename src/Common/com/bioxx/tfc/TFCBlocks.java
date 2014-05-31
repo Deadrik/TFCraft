@@ -63,7 +63,6 @@ import com.bioxx.tfc.Blocks.Liquids.BlockCustomLiquid;
 import com.bioxx.tfc.Blocks.Liquids.BlockFreshWater;
 import com.bioxx.tfc.Blocks.Liquids.BlockHotWater;
 import com.bioxx.tfc.Blocks.Terrain.BlockDryGrass;
-import com.bioxx.tfc.Blocks.Terrain.BlockFlowers;
 import com.bioxx.tfc.Blocks.Terrain.BlockFungi;
 import com.bioxx.tfc.Blocks.Terrain.BlockIgEx;
 import com.bioxx.tfc.Blocks.Terrain.BlockIgExBrick;
@@ -86,13 +85,11 @@ import com.bioxx.tfc.Blocks.Terrain.BlockSed;
 import com.bioxx.tfc.Blocks.Terrain.BlockSedBrick;
 import com.bioxx.tfc.Blocks.Terrain.BlockSedCobble;
 import com.bioxx.tfc.Blocks.Terrain.BlockSedSmooth;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomBed;
+import com.bioxx.tfc.Blocks.Vanilla.BlockBed;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomBookshelf;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomButtonWood;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomCactus;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomDoor;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFence;
-import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFence2;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFenceGate;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomFenceGate2;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomIce;
@@ -105,6 +102,9 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockCustomSnow;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomTallGrass;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomVine;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomWall;
+import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence;
+import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence2;
+import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFlower;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
 import com.bioxx.tfc.Core.TFC_Fluids;
 import com.bioxx.tfc.Items.ItemBarrels;
@@ -659,11 +659,11 @@ public class TFCBlocks
 
 		NestBox = new BlockNestBox().setBlockName("NestBox").setHardness(1);
 
-		Fence = new BlockCustomFence("Fence", Material.wood).setBlockName("FenceTFC").setHardness(2);
+		Fence = new BlockTFCFence("Fence", Material.wood).setBlockName("FenceTFC").setHardness(2);
 		FenceGate = new BlockCustomFenceGate().setBlockName("FenceGateTFC").setHardness(2);
-		Fence2 = new BlockCustomFence2("Fence2", Material.wood).setBlockName("FenceTFC").setHardness(2);
+		Fence2 = new BlockTFCFence2("Fence2", Material.wood).setBlockName("FenceTFC").setHardness(2);
 		FenceGate2 = new BlockCustomFenceGate2().setBlockName("FenceGateTFC").setHardness(2);
-		StrawHideBed = new BlockCustomBed().setBlockName("StrawHideBed").setHardness(1);
+		StrawHideBed = new BlockBed().setBlockName("StrawHideBed").setHardness(1);
 		ArmourStand = new BlockStand().setBlockName("ArmourStand").setHardness(2);
 		ArmourStand2 = new BlockStand2().setBlockName("ArmourStand").setHardness(2);
 
@@ -673,7 +673,7 @@ public class TFCBlocks
 		BerryBush = new BlockBerryBush().setBlockName("BerryBush").setHardness(0.3f).setStepSound(Block.soundTypeGrass);
 		Crops = new BlockCrop().setBlockName("crops").setHardness(0.3F).setStepSound(Block.soundTypeGrass);
 		LilyPad = new BlockCustomLilyPad().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("LilyPad").setBlockTextureName("waterlily");
-		Flowers = new BlockFlowers().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers");
+		Flowers = new BlockTFCFlower(1).setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers");
 		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");//.setCreativeTab(CreativeTabs.tabFood);
 
 		SaltWater = (new BlockCustomLiquid(TFC_Fluids.SALTWATER, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWater");
