@@ -19,17 +19,17 @@ public class BlockOre3 extends BlockOre
 	}
 
 	@Override
-	public int damageDropped(int j) 
+	public int damageDropped(int dmg)
 	{
-		return j + Global.ORE_METAL.length+Global.ORE_MINERAL.length;
+		return dmg + Global.ORE_METAL.length+Global.ORE_MINERAL.length;
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int i, int j, int k)
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
 		if(!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(i, j, k);
+			int meta = world.getBlockMetadata(x, y, z);
 			if(player != null)
 			{
 				player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
@@ -38,9 +38,9 @@ public class BlockOre3 extends BlockOre
 
 			ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(meta));
 			if (itemstack != null)
-				dropBlockAsItem(world, i, j, k, itemstack);
+				dropBlockAsItem(world, x, y, z, itemstack);
 		}
-		return world.setBlockToAir(i, j, k);
+		return world.setBlockToAir(x, y, z);
 	}
 
 	/*public boolean removeBlockByPlayer(World world, EntityPlayer player, int i, int j, int k) 

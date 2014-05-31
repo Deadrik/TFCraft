@@ -39,6 +39,12 @@ public class BlockChestTFC extends BlockTerraContainer
 	}
 
 	@Override
+	public int damageDropped(int dmg)
+	{
+		return dmg;
+	}
+
+	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
 	{
 		if (world.isRemote)

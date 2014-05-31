@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
@@ -94,5 +95,11 @@ public class BlockPartial extends BlockTerraContainer
 		if(te.TypeID >= 0)
 			return Blocks.fire.getEncouragement(Block.getBlockById(te.TypeID));
 		else return 0;
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	{
+		return null;
 	}
 }

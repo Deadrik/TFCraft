@@ -4,8 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -25,24 +27,27 @@ public class BlockWorldItem extends BlockTerraContainer
 	}
 
 	@Override
-	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int x, int y, int z)
+	public boolean getBlocksMovement(IBlockAccess bAccess, int x, int y, int z)
 	{
 		return true;
 	}
 
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int l)
-	{		
+	{
+	}
 
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	{
+		return null;
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
-		{
 			return world.setBlockToAir(x, y, z);
-		}
 		return false;
 	}
 
@@ -82,18 +87,18 @@ public class BlockWorldItem extends BlockTerraContainer
 	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		return AxisAlignedBB.getBoundingBox(x, y, z, x+1, y+0.25, z+1);
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 0.25, z + 1);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister)
+	public void registerBlockIcons(IIconRegister reg)
 	{
 		this.blockIcon = TFC_Textures.InvisibleTexture; // This gets registered in BlockGrass
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world, int var2)
+	public TileEntity createTileEntity(World world, int meta)
 	{
 		return new TEWorldItem();
 	}

@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
@@ -155,19 +156,25 @@ public class BlockLogPile extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TELogPile();
 	}
 
 	@Override
-	public void onNeighborBlockChange(World par1World, int x, int y, int z, Block block)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
-		if(!par1World.isRemote)
+		if(!world.isRemote)
 		{
-			TELogPile teLogPile = (TELogPile)par1World.getTileEntity(x, y, z);
+			TELogPile teLogPile = (TELogPile)world.getTileEntity(x, y, z);
 			if(teLogPile != null)
 				teLogPile.neighborChanged();
 		}
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	{
+		return null;
 	}
 }

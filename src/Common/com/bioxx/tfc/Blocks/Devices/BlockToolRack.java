@@ -79,60 +79,60 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
 		{
-			TileEntity te = world.getTileEntity(i, j, k);
+			TileEntity te = world.getTileEntity(x, y, z);
 			if(te != null && te instanceof TileEntityToolRack)
 			{
 				TileEntityToolRack tet = (TileEntityToolRack) te;
-				int dir = world.getBlockMetadata(i, j, k);
+				int dir = world.getBlockMetadata(x, y, z);
 				if(dir == 0)
 				{
 					if(hitX < 0.5 && hitY > 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 0, 0);
+						handleArea(world, x, y, z, entityplayer, tet, 0, 0);
 					else if(hitX > 0.5 && hitY > 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 1, 0);
+						handleArea(world, x, y, z, entityplayer, tet, 1, 0);
 					else if(hitX < 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 2, 0);
+						handleArea(world, x, y, z, entityplayer, tet, 2, 0);
 					else if(hitX > 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 3, 0);
+						handleArea(world, x, y, z, entityplayer, tet, 3, 0);
 				}
 				else if(dir == 1)
 				{
 					if(hitZ < 0.5 && hitY > 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 0, 1);
+						handleArea(world, x, y, z, entityplayer, tet, 0, 1);
 					else if(hitZ > 0.5 && hitY > 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 1, 1);
+						handleArea(world, x, y, z, entityplayer, tet, 1, 1);
 					else if(hitZ < 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 2, 1);
+						handleArea(world, x, y, z, entityplayer, tet, 2, 1);
 					else if(hitZ > 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 3, 1);
+						handleArea(world, x, y, z, entityplayer, tet, 3, 1);
 				}
 				else if(dir == 2)
 				{
 					if(hitX < 0.5 && hitY > 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 0, 2);
+						handleArea(world, x, y, z, entityplayer, tet, 0, 2);
 					else if(hitX > 0.5 && hitY > 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 1, 2);
+						handleArea(world, x, y, z, entityplayer, tet, 1, 2);
 					else if(hitX < 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 2, 2);
+						handleArea(world, x, y, z, entityplayer, tet, 2, 2);
 					else if(hitX > 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 3, 2);
+						handleArea(world, x, y, z, entityplayer, tet, 3, 2);
 				}
 				else if(dir == 3)
 				{
 					if(hitZ < 0.5 && hitY > 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 0, 3);
+						handleArea(world, x, y, z, entityplayer, tet, 0, 3);
 					else if(hitZ > 0.5 && hitY > 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 1, 3);
+						handleArea(world, x, y, z, entityplayer, tet, 1, 3);
 					else if(hitZ < 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 2, 3);
+						handleArea(world, x, y, z, entityplayer, tet, 2, 3);
 					else if(hitZ > 0.5)
-						handleArea(world, i, j, k, entityplayer, tet, 3, 3);
+						handleArea(world, x, y, z, entityplayer, tet, 3, 3);
 				}
-				world.markBlockForUpdate(i, j, k);
+				world.markBlockForUpdate(x, y, z);
 				//tet.broadcastPacketInRange(tet.createUpdatePacket());
 				return true;
 			}
@@ -140,7 +140,7 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 		return false;
 	}
 
-	private void handleArea(World world, int i, int j, int k,EntityPlayer entityplayer, TileEntityToolRack te, int slot, int dir)
+	private void handleArea(World world, int x, int y, int z,EntityPlayer entityplayer, TileEntityToolRack te, int slot, int dir)
 	{
 		boolean hasToolInHand = entityplayer.getCurrentEquippedItem() != null && (
 				entityplayer.getCurrentEquippedItem().getItem() instanceof ItemTool ||
@@ -182,7 +182,7 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int meta)
+	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta)
 	{
 		// don't drop here, we dropped in removedByPlayer instead
 	}
@@ -203,15 +203,15 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int var2)
+	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityToolRack();
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k)
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z)
 	{
-		int dir = access.getBlockMetadata(i, j, k);
+		int dir = access.getBlockMetadata(x, y, z);
 		if(dir == 0)
 			this.setBlockBounds(0.0F, 0F, 0.85F, 1F, 1F, 1F);
 		else if(dir == 1)
@@ -223,50 +223,50 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		int dir = world.getBlockMetadata(i, j, k);
+		int dir = world.getBlockMetadata(x, y, z);
 		if(dir == 0)
-			return AxisAlignedBB.getBoundingBox(i + 0.0F, j + 0F, k + 0.85F, i + 1F, j + 1F, k + 1F);
+			return AxisAlignedBB.getBoundingBox(x + 0.0F, y + 0F, z + 0.85F, x + 1F, y + 1F, z + 1F);
 		else if(dir == 1)
-			return AxisAlignedBB.getBoundingBox(i + 0.0F, j + 0F, k + 0.0F, i + 0.15F, j + 1F, k + 1F);
+			return AxisAlignedBB.getBoundingBox(x + 0.0F, y + 0F, z + 0.0F, x + 0.15F, y + 1F, z + 1F);
 		else if(dir == 2)
-			return AxisAlignedBB.getBoundingBox(i + 0.0F, j + 0F, k + 0.00F, i + 1F, j + 1F, k + 0.15F);
+			return AxisAlignedBB.getBoundingBox(x + 0.0F, y + 0F, z + 0.00F, x + 1F, y + 1F, z + 0.15F);
 		else if(dir == 3)
-			return AxisAlignedBB.getBoundingBox(i + 0.85F, j + 0F, k + 0.0F, i + 1F, j + 1F, k + 1F);
+			return AxisAlignedBB.getBoundingBox(x + 0.85F, y + 0F, z + 0.0F, x + 1F, y + 1F, z + 1F);
 
-		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 1, k + 1);
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block block)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
-		int dir = world.getBlockMetadata(i, j, k);
+		int dir = world.getBlockMetadata(x, y, z);
 
 		if(dir == 0)
 		{
-			if(!world.getBlock(i, j, k + 1).isOpaqueCube())
-				removedByPlayer(world, null, i, j, k);
+			if(!world.getBlock(x, y, z + 1).isOpaqueCube())
+				removedByPlayer(world, null, x, y, z);
 		}
 		else if(dir == 1)
 		{
-			if(!world.getBlock(i - 1, j, k).isOpaqueCube())
-				removedByPlayer(world, null, i, j, k);
+			if(!world.getBlock(x - 1, y, z).isOpaqueCube())
+				removedByPlayer(world, null, x, y, z);
 		}
 		else if(dir == 2)
 		{
-			if(!world.getBlock(i, j, k - 1).isOpaqueCube())
-				removedByPlayer(world, null, i, j, k);
+			if(!world.getBlock(x, y, z - 1).isOpaqueCube())
+				removedByPlayer(world, null, x, y, z);
 		}
 		else if(dir == 3)
 		{
-			if(!world.getBlock(i + 1, j, k).isOpaqueCube())
-				removedByPlayer(world, null, i, j, k);
+			if(!world.getBlock(x + 1, y, z).isOpaqueCube())
+				removedByPlayer(world, null, x, y, z);
 		}
 	}
 
 	@Override
-	public int onBlockPlaced(World world, int i, int j, int k, int side, float hitX, float hitY, float hitZ, int meta)
+	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta)
 	{
 		if(side == 4) return 3;
 		if(side == 5) return 1;
@@ -277,29 +277,29 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entity, ItemStack is)
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is)
 	{
-		TileEntity te = world.getTileEntity(i, j, k);
+		TileEntity te = world.getTileEntity(x, y, z);
 		if(te != null && te instanceof TileEntityToolRack)
 		{
 			TileEntityToolRack rack = (TileEntityToolRack) te;
 			rack.woodType = (byte)is.getItemDamage();
-			world.markBlockForUpdate(i, j, k);
+			world.markBlockForUpdate(x, y, z);
 		}
 	}
 
 	@Override
-	public boolean canPlaceBlockOnSide(World world, int i, int j, int k, int side)
+	public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side)
 	{
-		if(this.canPlaceBlockAt(world, i, j, k))
+		if(this.canPlaceBlockAt(world, x, y, z))
 		{
-			if(side == 5 && world.getBlock(i - 1, j, k).isNormalCube())
+			if(side == 5 && world.getBlock(x - 1, y, z).isNormalCube())
 				return true;
-			if(side == 4 && world.getBlock(i + 1, j, k).isNormalCube())
+			if(side == 4 && world.getBlock(x + 1, y, z).isNormalCube())
 				return true;
-			if(side == 2 && world.getBlock(i, j, k + 1).isNormalCube())
+			if(side == 2 && world.getBlock(x, y, z + 1).isNormalCube())
 				return true;
-			if(side == 3 && world.getBlock(i, j, k - 1).isNormalCube())
+			if(side == 3 && world.getBlock(x, y, z - 1).isNormalCube())
 				return true;
 		}
 		return false;
@@ -323,9 +323,15 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	}
 
 	@Override
-	public IIcon getIcon(int par1, int par2)
+	public IIcon getIcon(int side, int meta)
 	{
-		return getBlockTypeForRender().getIcon(par1, par2);
+		return getBlockTypeForRender().getIcon(side, meta);
+	}
+
+	@Override
+	public int damageDropped(int dmg)
+	{
+		return dmg;
 	}
 
 	@Override

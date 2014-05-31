@@ -1,13 +1,15 @@
 package com.bioxx.tfc.Blocks;
 
-import com.bioxx.tfc.Reference;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
 public class BlockMolten extends BlockTerra
 {
 	IIcon moltenOff;
@@ -66,4 +68,9 @@ public class BlockMolten extends BlockTerra
 		return false;
 	}
 
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	{
+		return null;
+	}
 }

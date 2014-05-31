@@ -79,6 +79,12 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	}
 
 	@Override
+	public int damageDropped(int dmg)
+	{
+		return dmg;
+	}
+
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;

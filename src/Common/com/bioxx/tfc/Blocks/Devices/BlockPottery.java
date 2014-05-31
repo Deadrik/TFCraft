@@ -6,9 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -65,7 +67,7 @@ public class BlockPottery extends BlockTerraContainer
 		return false;
 	}
 
-	public int idDropped(int i, Random random, int j)
+	public int idDropped(int metadata, Random rand, int fortune)
 	{
 		return 0;
 	}
@@ -116,9 +118,9 @@ public class BlockPottery extends BlockTerraContainer
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		TEPottery te = (TEPottery) world.getTileEntity(i, j, k);
+		TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
 		int h = 0;
 		int w = 0;
 		if(te!= null)
@@ -126,13 +128,13 @@ public class BlockPottery extends BlockTerraContainer
 			h = te.straw == 0 ? 1 : te.straw;
 			w = (te.wood > 0 ? 1 : 0) + (te.wood > 4 ? 1 : 0);
 		}
-		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.0625f * h) + (0.25f * w), k + 1);
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + (0.0625f * h) + (0.25f * w), z + 1);
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k)
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z)
 	{
-		TEPottery te = (TEPottery) access.getTileEntity(i, j, k);
+		TEPottery te = (TEPottery) access.getTileEntity(x, y, z);
 		int h = 0;
 		int w = 0;
 		if(te!= null)
@@ -180,7 +182,7 @@ public class BlockPottery extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TEPottery();
 	}
@@ -204,5 +206,11 @@ public class BlockPottery extends BlockTerraContainer
 	public boolean shouldSideBeRendered(IBlockAccess access, int x, int y, int z, int side)
 	{
 		return true;
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	{
+		return null;
 	}
 }

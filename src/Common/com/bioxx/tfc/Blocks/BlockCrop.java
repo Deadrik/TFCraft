@@ -104,9 +104,9 @@ public class BlockCrop extends BlockContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess access, int i, int j, int k, int meta)
+	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int meta)
 	{
-		TECrop te = (TECrop) access.getTileEntity(i, j, k);
+		TECrop te = (TECrop) access.getTileEntity(x, y, z);
 		CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
 
 		int stage = (int) Math.floor(te.growth);
@@ -163,15 +163,15 @@ public class BlockCrop extends BlockContainer
 	}
 
 	@Override
-	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
+	public boolean getBlocksMovement(IBlockAccess bAccess, int x, int y, int z)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		TECrop te = (TECrop) world.getTileEntity(i, j, k);
+		TECrop te = (TECrop) world.getTileEntity(x, y, z);
 		CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
 
 		/*if(crop != null && !world.isRemote)
@@ -257,19 +257,19 @@ public class BlockCrop extends BlockContainer
 	 * cleared to be reused)
 	 */
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		return null;
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 0.3, k + 1);
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 0.3, z + 1);
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
 		return null;
 	}
@@ -281,12 +281,12 @@ public class BlockCrop extends BlockContainer
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block par5)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
-		super.onNeighborBlockChange(world, i, j, k, par5);
+		super.onNeighborBlockChange(world, x, y, z, b);
 
-		if (!canBlockStay(world, i, j, k))
-			world.setBlockToAir(i, j, k);
+		if (!canBlockStay(world, x, y, z))
+			world.setBlockToAir(x, y, z);
 	}
 
 	@Override
@@ -296,15 +296,15 @@ public class BlockCrop extends BlockContainer
 	}
 
 	@Override
-	public boolean canBlockStay(World world, int i, int j, int k)
+	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		if (!(world.getBlock(i, j - 1, k) == TFCBlocks.tilledSoil || world.getBlock(i, j - 1, k) == TFCBlocks.tilledSoil2 || TFC_Core.isSoil(world.getBlock(i, j - 1, k))))
+		if (!(world.getBlock(x, y - 1, z) == TFCBlocks.tilledSoil || world.getBlock(x, y - 1, z) == TFCBlocks.tilledSoil2 || TFC_Core.isSoil(world.getBlock(x, y - 1, z))))
 			return false;
 		return true;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TECrop();
 	}
@@ -321,5 +321,11 @@ public class BlockCrop extends BlockContainer
 	public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
 	{
 		return true;
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	{
+		return null;
 	}
 }

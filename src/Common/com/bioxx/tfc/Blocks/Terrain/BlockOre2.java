@@ -22,17 +22,17 @@ public class BlockOre2 extends BlockOre
 	}
 
 	@Override
-	public int damageDropped(int j)
+	public int damageDropped(int dmg)
 	{
-		return j + Global.ORE_METAL.length;
+		return dmg + Global.ORE_METAL.length;
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int i, int j, int k)
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
 		if(!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(i, j, k);
+			int meta = world.getBlockMetadata(x, y, z);
 			if(player != null)
 			{
 				player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
@@ -55,13 +55,13 @@ public class BlockOre2 extends BlockOre
 					double var7 = world.rand.nextFloat() * var6 + (1.0F - var6) * 0.5D;
 					double var9 = world.rand.nextFloat() * var6 + (1.0F - var6) * 0.5D;
 					double var11 = world.rand.nextFloat() * var6 + (1.0F - var6) * 0.5D;
-					EntityItem var13 = new EntityItem(world, i + var7, j + var9, k + var11, itemstack);
+					EntityItem var13 = new EntityItem(world, x + var7, y + var9, z + var11, itemstack);
 					var13.delayBeforeCanPickup = 10;
 					world.spawnEntityInWorld(var13);
 				}
 			}
 		}
-		return world.setBlockToAir(i, j, k);
+		return world.setBlockToAir(x, y, z);
 	}
 
 	public ItemStack KimberliteGemSpawn()

@@ -51,10 +51,10 @@ public class BlockOre extends BlockCollapsable
 	}
 
 	@Override
-	public int[] getDropBlock(World world, int i, int j, int k)
+	public int[] getDropBlock(World world, int x, int y, int z)
 	{
 		int[] data = new int[2];
-		DataLayer dl =((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(i, k, TFC_Core.getRockLayerFromHeight(world, i, j, k));
+		DataLayer dl =((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(x, z, TFC_Core.getRockLayerFromHeight(world, x, y, z));
 		if(dl != null)
 		{
 			data[0] = Block.getIdFromBlock(this.dropBlock);
@@ -66,15 +66,15 @@ public class BlockOre extends BlockCollapsable
 	}
 
 	@Override
-	public int damageDropped(int j)
+	public int damageDropped(int dmg)
 	{
-		return j;
+		return dmg;
 	}
 
 	@Override
-	public IIcon getIcon(int i, int j)
+	public IIcon getIcon(int side, int meta)
 	{
-		return icons[j];
+		return icons[meta];
 	}
 
 	protected IIcon[] icons = new IIcon[blockNames.length];
@@ -93,12 +93,12 @@ public class BlockOre extends BlockCollapsable
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int i, int j, int k)
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
 		if(!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(i, j, k);
-			TEOre te = (TEOre)world.getTileEntity(i, j, k);
+			int meta = world.getBlockMetadata(x, y, z);
+			TEOre te = (TEOre)world.getTileEntity(x, y, z);
 			int ore = getOreGrade(te, meta);
 			if(player != null)
 			{
@@ -113,18 +113,18 @@ public class BlockOre extends BlockCollapsable
 				itemstack  = new ItemStack(TFCItems.OreChunk, 1, damageDropped(ore));
 
 			if (itemstack != null)
-				dropBlockAsItem(world, i, j, k, itemstack);
+				dropBlockAsItem(world, x, y, z, itemstack);
 		}
-		return world.setBlockToAir(i, j, k);
+		return world.setBlockToAir(x, y, z);
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int meta)
+	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta)
 	{
 	}
 
 	@Override
-	public Item getItemDropped(int i, Random random, int j)
+	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
 		return TFCItems.OreChunk;
 	}
@@ -150,14 +150,14 @@ public class BlockOre extends BlockCollapsable
 	}
 
 	@Override
-	public void onBlockExploded(World world, int i, int j, int k, Explosion exp)
+	public void onBlockExploded(World world, int x, int y, int z, Explosion exp)
 	{
 		if(!world.isRemote)
 		{
-			TEOre te = (TEOre)world.getTileEntity(i, j, k);
+			TEOre te = (TEOre)world.getTileEntity(x, y, z);
 			Random random = new Random();
 			ItemStack itemstack;
-			int meta = world.getBlockMetadata(i, j, k);
+			int meta = world.getBlockMetadata(x, y, z);
 			int ore = getOreGrade(te, meta);
 
 			if(meta == 14 || meta == 15)
@@ -165,8 +165,8 @@ public class BlockOre extends BlockCollapsable
 			else
 				itemstack = new ItemStack(TFCItems.OreChunk, 1, ore);
 			if (itemstack != null)
-				dropBlockAsItem(world, i, j, k, itemstack);
-			onBlockDestroyedByExplosion(world, i, j, k, exp);
+				dropBlockAsItem(world, x, y, z, itemstack);
+			onBlockDestroyedByExplosion(world, x, y, z, exp);
 		}
 	}
 

@@ -371,4 +371,10 @@ public class BlockIngotPile extends BlockTerraContainer
 			}
 		}
 	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	{
+		return null;
+	}
 }
