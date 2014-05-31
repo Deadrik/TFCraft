@@ -378,6 +378,54 @@ public class TFC_Core
 				|| block == TFCBlocks.StoneMM;
 	}
 
+	public static boolean isStoneIgEx(Block block)
+	{
+		return block == TFCBlocks.StoneIgEx
+				|| block == TFCBlocks.StoneIgExCobble
+				|| block == TFCBlocks.StoneIgExSmooth
+				|| block == TFCBlocks.StoneIgExBrick
+				|| block == TFCBlocks.WallRawIgEx
+				|| block == TFCBlocks.WallCobbleIgEx
+				|| block == TFCBlocks.WallBrickIgEx
+				|| block == TFCBlocks.WallSmoothIgEx;
+	}
+
+	public static boolean isStoneIgIn(Block block)
+	{
+		return block == TFCBlocks.StoneIgIn
+				|| block == TFCBlocks.StoneIgInCobble
+				|| block == TFCBlocks.StoneIgInSmooth
+				|| block == TFCBlocks.StoneIgInBrick
+				|| block == TFCBlocks.WallRawIgIn
+				|| block == TFCBlocks.WallCobbleIgIn
+				|| block == TFCBlocks.WallBrickIgIn
+				|| block == TFCBlocks.WallSmoothIgIn;
+	}
+
+	public static boolean isStoneSed(Block block)
+	{
+		return block == TFCBlocks.StoneSed
+				|| block == TFCBlocks.StoneSedCobble
+				|| block == TFCBlocks.StoneSedSmooth
+				|| block == TFCBlocks.StoneSedBrick
+				|| block == TFCBlocks.WallRawSed
+				|| block == TFCBlocks.WallCobbleSed
+				|| block == TFCBlocks.WallBrickSed
+				|| block == TFCBlocks.WallSmoothSed;
+	}
+
+	public static boolean isStoneMM(Block block)
+	{
+		return block == TFCBlocks.StoneMM
+				|| block == TFCBlocks.StoneMMCobble
+				|| block == TFCBlocks.StoneMMSmooth
+				|| block == TFCBlocks.StoneMMBrick
+				|| block == TFCBlocks.WallRawMM
+				|| block == TFCBlocks.WallCobbleMM
+				|| block == TFCBlocks.WallBrickMM
+				|| block == TFCBlocks.WallSmoothMM;
+	}
+
 	public static boolean isDirt(Block block)
 	{
 		return block == TFCBlocks.Dirt

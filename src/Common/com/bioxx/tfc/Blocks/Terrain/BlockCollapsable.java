@@ -45,105 +45,105 @@ public class BlockCollapsable extends BlockTerraContainer
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
-	public int[] getDropBlock(World world, int i, int j, int k)
+	public int[] getDropBlock(World world, int x, int y, int z)
 	{
 		int[] data = new int[2];
 		data[0] = Block.getIdFromBlock(dropBlock);
-		data[1] = world.getBlockMetadata(i, j, k);
+		data[1] = world.getBlockMetadata(x, y, z);
 		return data;
 	}
 
-	public static boolean canFallBelow(World world, int i, int j, int k)
+	public static boolean canFallBelow(World world, int x, int y, int z)
 	{
-		Block l = world.getBlock(i, j, k);
+		Block block = world.getBlock(x, y, z);
 
-		if (world.isAirBlock(i, j, k))
+		if (world.isAirBlock(x, y, z))
 			return true;
-		if (l == Blocks.bedrock)
+		if (block == Blocks.bedrock)
 			return false;
-		if (l == Blocks.fire)
+		if (block == Blocks.fire)
 			return true;
-		if (l == TFCBlocks.TallGrass)
+		if (block == TFCBlocks.TallGrass)
 			return true;
-		if (l == TFCBlocks.Torch)
+		if (block == TFCBlocks.Torch)
 			return true;
-		Material material = l.getMaterial();
+		Material material = block.getMaterial();
 		if (material == Material.water || material == Material.lava)
 			return true;
 		return false;
 	}
 
-	public void DropCarvedStone(World world, int i, int j, int k)
+	public void DropCarvedStone(World world, int x, int y, int z)
 	{
-		if(world.getBlock(i+1, j, k).isOpaqueCube())
+		if(world.getBlock(x + 1, y, z).isOpaqueCube())
 			return;
-		else if(world.getBlock(i-1, j, k).isOpaqueCube())
+		else if(world.getBlock(x - 1, y, z).isOpaqueCube())
 			return;
-		else if(world.getBlock(i, j, k+1).isOpaqueCube())
+		else if(world.getBlock(x, y, z + 1).isOpaqueCube())
 			return;
-		else if(world.getBlock(i, j, k-1).isOpaqueCube())
+		else if(world.getBlock(x, y, z - 1).isOpaqueCube())
 			return;
-		else if(world.getBlock(i, j+1, k).isOpaqueCube())
+		else if(world.getBlock(x, y + 1, z).isOpaqueCube())
 			return;
-		else if(world.getBlock(i, j-1, k).isOpaqueCube())
+		else if(world.getBlock(x, y - 1, z).isOpaqueCube())
 			return;
 
-		dropBlockAsItem(world, i, j, k, new ItemStack(this, 1, world.getBlockMetadata(i, j, k)));
-		world.setBlockToAir(i, j, k);
+		dropBlockAsItem(world, x, y, z, new ItemStack(this, 1, world.getBlockMetadata(x, y, z)));
+		world.setBlockToAir(x, y, z);
 	}
 
-	public Boolean hasNaturalSupport(World world, int i, int j, int k)
+	public Boolean hasNaturalSupport(World world, int x, int y, int z)
 	{
 		//Make sure that the block beneath the one we're checking is not a solid, if it is then return true and don't waste time here.
-		if(!world.isAirBlock(i, j-1, k))
+		if(!world.isAirBlock(x, y - 1, z))
 			return true;
 
-		if(world.getBlock(i+1, j, k).isOpaqueCube())
+		if(world.getBlock(x + 1, y, z).isOpaqueCube())
 		{
-			if(world.getBlock(i+1, j-1, k).isOpaqueCube() && world.getBlock(i+1, j-2, k).isOpaqueCube())
+			if(world.getBlock(x + 1, y - 1, z).isOpaqueCube() && world.getBlock(x + 1, y - 2, z).isOpaqueCube())
 				return true;
 		}
 
-		if(world.getBlock(i-1, j, k).isOpaqueCube())
+		if(world.getBlock(x - 1, y, z).isOpaqueCube())
 		{
-			if(world.getBlock(i-1, j-1, k).isOpaqueCube() && world.getBlock(i-1, j-2, k).isOpaqueCube())
+			if(world.getBlock(x - 1, y - 1, z).isOpaqueCube() && world.getBlock(x - 1, y - 2, z).isOpaqueCube())
 				return true;
 		}
 
-		if(world.getBlock(i, j, k+1).isOpaqueCube())
+		if(world.getBlock(x, y, z + 1).isOpaqueCube())
 		{
-			if(world.getBlock(i, j-1, k+1).isOpaqueCube() && world.getBlock(i, j-2, k+1).isOpaqueCube())
+			if(world.getBlock(x, y - 1, z + 1).isOpaqueCube() && world.getBlock(x, y - 2, z + 1).isOpaqueCube())
 				return true;
 		}
 
-		if(world.getBlock(i, j, k-1).isOpaqueCube())
+		if(world.getBlock(x, y, z - 1).isOpaqueCube())
 		{
-			if(world.getBlock(i, j-1, k-1).isOpaqueCube() && world.getBlock(i, j-2, k-1).isOpaqueCube())
+			if(world.getBlock(x, y - 1, z - 1).isOpaqueCube() && world.getBlock(x, y - 2, z - 1).isOpaqueCube())
 				return true;
 		}
 
 		//Diagonals
-		if(world.getBlock(i+1, j, k-1).isOpaqueCube())
+		if(world.getBlock(x + 1, y, z - 1).isOpaqueCube())
 		{
-			if(world.getBlock(i+1, j-1, k-1).isOpaqueCube())
+			if(world.getBlock(x + 1, y - 1, z - 1).isOpaqueCube())
 				return true;
 		}
 
-		if(world.getBlock(i-1, j, k-1).isOpaqueCube())
+		if(world.getBlock(x - 1, y, z - 1).isOpaqueCube())
 		{
-			if(world.getBlock(i-1, j-1, k-1).isOpaqueCube())
+			if(world.getBlock(x - 1, y - 1, z - 1).isOpaqueCube())
 				return true;
 		}
 
-		if(world.getBlock(i+1, j, k+1).isOpaqueCube())
+		if(world.getBlock(x + 1, y, z + 1).isOpaqueCube())
 		{
-			if(world.getBlock(i+1, j-1, k+1).isOpaqueCube())
+			if(world.getBlock(x + 1, y - 1, z + 1).isOpaqueCube())
 				return true;
 		}
 
-		if(world.getBlock(i-1, j, k+1).isOpaqueCube())
+		if(world.getBlock(x - 1, y, z + 1).isOpaqueCube())
 		{
-			if(world.getBlock(i-1, j-1, k+1).isOpaqueCube())
+			if(world.getBlock(x - 1, y - 1, z + 1).isOpaqueCube())
 				return true;
 		}
 
@@ -154,14 +154,14 @@ public class BlockCollapsable extends BlockTerraContainer
 	{
 		for(int y = -1; y < 1; y++)
 		{
-			for(int x = -range; x < range+1; x++)
+			for(int x = -range; x < range + 1; x++)
 			{
-				for(int z = -range; z < range+1; z++)
+				for(int z = -range; z < range + 1; z++)
 				{
 					if(TFC_Core.isHorizSupport(world.getBlock(i + x, j + y, k + z)))
 					{
-						if(world.rand.nextFloat() < collapseChance/100f/2f)
-							world.setBlockToAir(i+x, j+y, k+z);
+						if(world.rand.nextFloat() < collapseChance / 100f / 2f)
+							world.setBlockToAir(i + x, j + y, k + z);
 						else return true;
 					}
 				}
@@ -174,7 +174,7 @@ public class BlockCollapsable extends BlockTerraContainer
 	{
 		for(int x = 1; x <= TFCOptions.minimumRockLoad; x++)
 		{
-			if(!world.getBlock(i, j+x, k).isOpaqueCube())
+			if(!world.getBlock(i, j + x, k).isOpaqueCube())
 				return false;
 		}
 		return true;
@@ -198,7 +198,6 @@ public class BlockCollapsable extends BlockTerraContainer
 			{
 				if(fallingBlock != null)
 				{
-					//EntityFallingStone ent = new EntityFallingStone(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), fallingBlock, fallingBlockMeta+8);
 					EntityFallingBlock ent = new EntityFallingBlock(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), fallingBlock, fallingBlockMeta+8);
 					ent.field_145812_b/*fallTime*/ = -5000;
 					world.spawnEntityInWorld(ent);

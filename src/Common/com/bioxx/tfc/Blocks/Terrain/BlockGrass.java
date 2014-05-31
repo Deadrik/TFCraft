@@ -1,13 +1,16 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -22,6 +25,7 @@ import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.Util.BlockMeta;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowTrees;
 import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -50,9 +54,26 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	}
 
 	@Override
-	public int damageDropped(int i)
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
-		return i;
+		// Change to false if this block should not be added to the creative tab
+		Boolean addToCreative = true;
+
+		if(addToCreative)
+		{
+			int count;
+			if(textureOffset == 0) count = 16;
+			else count = Global.STONE_ALL.length - 16;
+	
+			for(int i = 0; i < count; i++)
+				list.add(new ItemStack(item, 1, i));
+		}
+	}
+
+	@Override
+	public int damageDropped(int dmg)
+	{
+		return dmg;
 	}
 
 	@Override
@@ -76,14 +97,15 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	}
 
 	@Override
-	public void onBlockAdded(World world, int i, int j, int k)
+	public void onBlockAdded(World world, int x, int y, int z)
 	{
-		if(world.isAirBlock(i,j-1,k)){
-			int meta = world.getBlockMetadata(i,j,k);
-			int y = j-1;
-			while(!world.getBlock(i, y--, k).isOpaqueCube()){}
-			world.setBlock(i, y, k, this, meta, 0x2);
-			world.setBlockToAir(i, j, k);
+		if(world.isAirBlock(x, y - 1, z))
+		{
+			int meta = world.getBlockMetadata(x, y, z);
+			int yNew = y - 1;
+			while(!world.getBlock(x, yNew--, z).isOpaqueCube()){}
+			world.setBlock(x, yNew, z, this, meta, 0x2);
+			world.setBlockToAir(x, y, z);
 		}
 	}
 
@@ -91,7 +113,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	 * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
 	 */
 	@Override
-	public IIcon getIcon(IBlockAccess access, int xCoord, int yCoord, int zCoord, int side)
+	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side)
 	{
 		if (side == 1)
 			return GrassTopTexture;
@@ -99,23 +121,23 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 			return TFC_Textures.InvisibleTexture;
 		else if (side == 2) //-Z
 		{
-			if(TFCOptions.enableBetterGrass == true && access.getBlock(xCoord, yCoord-1, zCoord-1).getMaterial() == Material.grass)
-				return isSnow(access, xCoord, yCoord-1, zCoord-1) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
+			if(TFCOptions.enableBetterGrass == true && access.getBlock(x, y - 1, z - 1).getMaterial() == Material.grass)
+				return isSnow(access, x, y - 1, z - 1) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
 		}
 		else if (side == 3) //+Z
 		{
-			if(TFCOptions.enableBetterGrass == true && access.getBlock(xCoord, yCoord-1, zCoord+1).getMaterial() == Material.grass)
-				return isSnow(access, xCoord, yCoord-1, zCoord+1) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
+			if(TFCOptions.enableBetterGrass == true && access.getBlock(x, y - 1, z + 1).getMaterial() == Material.grass)
+				return isSnow(access, x, y - 1, z + 1) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
 		}
 		else if (side == 4) //-X
 		{
-			if(TFCOptions.enableBetterGrass == true && access.getBlock(xCoord-1, yCoord-1, zCoord).getMaterial() == Material.grass)
-				return isSnow(access, xCoord-1, yCoord-1, zCoord) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
+			if(TFCOptions.enableBetterGrass == true && access.getBlock(x - 1, y - 1, z).getMaterial() == Material.grass)
+				return isSnow(access, x - 1, y - 1, z) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
 		}
 		else if (side == 5) //+X
 		{
-			if(TFCOptions.enableBetterGrass == true && access.getBlock(xCoord+1, yCoord-1, zCoord).getMaterial() == Material.grass)
-				return isSnow(access, xCoord+1, yCoord-1, zCoord) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
+			if(TFCOptions.enableBetterGrass == true && access.getBlock(x + 1, y - 1, z).getMaterial() == Material.grass)
+				return isSnow(access, x + 1, y - 1, z) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
 		}
 
 		return iconGrassSideOverlay;
@@ -131,9 +153,9 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 			return super.shouldSideBeRendered(access, x, y, z, side);
 	}
 
-	private boolean isSnow(IBlockAccess access, int i, int j, int k)
+	private boolean isSnow(IBlockAccess access, int x, int y, int z)
 	{
-		Material material = access.getBlock(i, j, k).getMaterial();
+		Material material = access.getBlock(x, y, z).getMaterial();
 		return material == Material.snow || material == Material.craftedSnow;
 	}
 
@@ -143,9 +165,9 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	 * when first determining what to render.
 	 */
 	@Override
-	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public int colorMultiplier(IBlockAccess bAccess, int x, int y, int z)
 	{
-		return TerraFirmaCraft.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
+		return TerraFirmaCraft.proxy.grassColorMultiplier(bAccess, x, y, z);
 	}
 
 	@Override
@@ -157,9 +179,9 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	@Override
 	public int getBlockColor()
 	{
-		double var1 = 0.5D;
-		double var3 = 1.0D;
-		return ColorizerGrassTFC.getGrassColor(var1, var3);
+		double d0 = 0.5D;
+		double d1 = 1.0D;
+		return ColorizerGrassTFC.getGrassColor(d0, d1);
 	}
 
 	/**
@@ -179,7 +201,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	{
 		if (!world.isRemote)
 		{
-			if(world.getBlock(i, j+1, k) == Blocks.snow)
+			if(world.getBlock(i, j + 1, k) == Blocks.snow)
 			{
 				world.setBlock(i, j, k, TFC_Core.getTypeForDryGrassFromSoil(world.getBlock(i, j, k)), world.getBlockMetadata(i, j, k), 0x2);
 			}
@@ -247,37 +269,20 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 				}
 			}
 
-			//            if(!(this.blockID >= 2080 && this.blockID < 2088))
-			//            {
-			//            	boolean hasBeenSet = false;
-			//            	int meta = world.getBlockMetadata(i, j, k);
-			//            	for(int x = i-1; x <= i+1 && !hasBeenSet; x++)
-			//            	{
-			//            		for(int z = k-1; z <= k+1 && !hasBeenSet; z++)
-			//                	{
-			//            			if(!world.isBlockNormalCube(x, j, z))
-			//            			{
-			//            				hasBeenSet = true;
-			//            				world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForRaisedGrass(meta), meta);
-			//            			}
-			//                	}
-			//            	}
-			//            }
-
 			world.markBlockForUpdate(i, j, k);
 		}
 	}
 
 	@Override
-	public void onEntityWalking(World world, int i, int j, int k, Entity par5Entity) 
+	public void onEntityWalking(World world, int x, int y, int z, Entity entity)
 	{
 		if (!world.isRemote && this != TFCBlocks.ClayGrass2 && this != TFCBlocks.ClayGrass && this != TFCBlocks.PeatGrass)
 		{
 			Random R = new Random();
-			if(!BlockCollapsable.isNearSupport(world, i, j, k, 4, 0) && BlockDirt.canFallBelow(world, i, j - 1, k) && R.nextInt(10) == 0)
+			if(!BlockCollapsable.isNearSupport(world, x, y, z, 4, 0) && BlockDirt.canFallBelow(world, x, y - 1, z) && R.nextInt(10) == 0)
 			{
-				int meta = world.getBlockMetadata(i, j, k);
-				world.setBlock(i, j, k, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);
+				int meta = world.getBlockMetadata(x, y, z);
+				world.setBlock(x, y, z, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);
 			}
 		}
 	}
@@ -286,18 +291,18 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	 * Returns the ID of the items to drop on destruction.
 	 */
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
-		return TFC_Core.getTypeForDirtFromGrass(this).getItemDropped(par1, par2Random, par3);
+		return TFC_Core.getTypeForDirtFromGrass(this).getItemDropped(metadata, rand, fortune);
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block l)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
-		if(!world.blockExists(i, j-1, k))
+		if(!world.blockExists(x, y - 1, z))
 		{
-			int meta = world.getBlockMetadata(i, j, k);
-			world.setBlock(i, j, k, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);
+			int meta = world.getBlockMetadata(x, y, z);
+			world.setBlock(x, y, z, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);
 		}
 	}
 }

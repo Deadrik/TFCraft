@@ -1,9 +1,8 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
+
+import com.bioxx.tfc.Reference;
 
 public class BlockDryGrass extends BlockGrass
 {
@@ -19,29 +18,4 @@ public class BlockDryGrass extends BlockGrass
 		GrassTopTexture = registerer.registerIcon(Reference.ModID + ":" + "GrassSparseOverlay");
 		iconGrassSideOverlay = registerer.registerIcon(Reference.ModID + ":" + "GrassSideSparse");
 	}
-
-	@Override
-	public int getRenderType()
-	{
-		return TFCBlocks.grassRenderId;
-	}
-
-	/*@Override
-    public IIcon getIcon(IBlockAccess access, int xCoord, int yCoord, int zCoord, int par5)
-    {
-    	Block blk = Block.blocksList[TFC_Core.getTypeForDirt(access.getBlockMetadata(xCoord, yCoord, zCoord) + textureOffset)];
-
-        if (par5 == 1)//top
-        {
-            return GrassTopTexture;
-        }
-        if (par5 == 0)//top
-        {
-            return TFC_Textures.InvisibleTexture;
-        }
-        else
-        {
-            return iconGrassSideOverlay;
-        }
-    }*/
 }

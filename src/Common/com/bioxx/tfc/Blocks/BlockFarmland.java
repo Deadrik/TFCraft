@@ -1,12 +1,15 @@
 package com.bioxx.tfc.Blocks;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -26,7 +29,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockFarmland extends BlockContainer
 {
 	private Block dirtBlock;
-	private IIcon[] DirtTexture = new IIcon[Global.STONE_ALL.length];
+	private IIcon[] DirtTexture;
 	private int textureOffset = 0;
 
 	public BlockFarmland(Block block, int tex)
@@ -35,23 +38,47 @@ public class BlockFarmland extends BlockContainer
 		this.setTickRandomly(true);
 		this.dirtBlock = block;
 		this.textureOffset = tex;
+		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		for(int i = textureOffset; i < (textureOffset == 0 ? 16 : Global.STONE_ALL.length); i++)
-			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "farmland/Farmland " + Global.STONE_ALL[i]);
+		int count = (textureOffset == 0 ? 16 : Global.STONE_ALL.length - 16);
+		DirtTexture = new IIcon[count];
+		for(int i = 0; i < count; i++)
+			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "farmland/Farmland " + Global.STONE_ALL[i + textureOffset]);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public IIcon getIcon(IBlockAccess access, int xCoord, int yCoord, int zCoord, int side)
+	/**
+	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+	 */
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
-		int meta = access.getBlockMetadata(xCoord, yCoord, zCoord);
+		// Change to false if this block should not be added to the creative tab
+		Boolean addToCreative = true;
+
+		if(addToCreative)
+		{
+			int count;
+			if(textureOffset == 0) count = 16;
+			else count = Global.STONE_ALL.length - 16;
+	
+			for(int i = 0; i < count; i++)
+				list.add(new ItemStack(item, 1, i));
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side)
+	{
+		int meta = access.getBlockMetadata(x, y, z);
 		if (side == 1)//top
-			return DirtTexture[meta + textureOffset];
+			return DirtTexture[meta];
 		else
 			return this.dirtBlock.getIcon(side, meta);
 	}
@@ -61,19 +88,25 @@ public class BlockFarmland extends BlockContainer
 	public IIcon getIcon(int side, int meta)
 	{
 		if (side == ForgeDirection.UP.ordinal())
-			return DirtTexture[meta + textureOffset];
+			return DirtTexture[meta];
 		else
 			return this.dirtBlock.getIcon(0, meta);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public int damageDropped(int dmg)
 	{
-		return AxisAlignedBB.getBoundingBox(par2 + 0, par3 + 0, par4 + 0, par2 + 1, par3 + 1, par4 + 1);
+		return dmg;
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	{
+		return AxisAlignedBB.getBoundingBox(x + 0, y + 0, z + 0, x + 1, y + 1, z + 1);
+	}
+
+	@Override
+	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
 		return Item.getItemById(0);
 	}
@@ -81,15 +114,15 @@ public class BlockFarmland extends BlockContainer
 	/**
 	 * returns true if there is at least one cropblock nearby (x-1 to x+1, y+1, z-1 to z+1)
 	 */
-	private boolean isCropsNearby(World par1World, int par2, int par3, int par4)
+	private boolean isCropsNearby(World world, int x, int y, int z)
 	{
 		byte var5 = 0;
-		for (int var6 = par2 - var5; var6 <= par2 + var5; ++var6)
+		for (int var6 = x - var5; var6 <= x + var5; ++var6)
 		{
-			for (int var7 = par4 - var5; var7 <= par4 + var5; ++var7)
+			for (int var7 = z - var5; var7 <= z + var5; ++var7)
 			{
-				Block var8 = par1World.getBlock(var6, par3 + 1, var7);
-				if (var8 instanceof IPlantable && canSustainPlant(par1World, par2, par3, par4, ForgeDirection.UP, (IPlantable)var8))
+				Block var8 = world.getBlock(var6, y + 1, var7);
+				if (var8 instanceof IPlantable && canSustainPlant(world, x, y, z, ForgeDirection.UP, (IPlantable)var8))
 					return true;
 			}
 		}
@@ -140,7 +173,7 @@ public class BlockFarmland extends BlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TEFarmland();
 	}

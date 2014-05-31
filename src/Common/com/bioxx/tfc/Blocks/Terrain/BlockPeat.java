@@ -2,15 +2,16 @@ package com.bioxx.tfc.Blocks.Terrain;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Blocks.BlockTerra;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Blocks.BlockTerra;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -27,9 +28,9 @@ public class BlockPeat extends BlockTerra
 	/**
 	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
 	 */
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List list)
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
-		list.add(new ItemStack(this,1,0));
+		list.add(new ItemStack(this, 1, 0));
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class BlockPeat extends BlockTerra
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
 		return false;
 	}

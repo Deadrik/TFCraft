@@ -2,13 +2,6 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Player.PlayerInfo;
-import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,9 +9,15 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+
 public class ItemClay extends ItemLooseRock
 {
-
 	public ItemClay()
 	{
 		super();
@@ -26,9 +25,8 @@ public class ItemClay extends ItemLooseRock
 		this.icons = new IIcon[2];
 	}
 
-
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemstack, World par2World, EntityPlayer entityplayer)
+	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		//System.out.println(itemstack.stackSize+", "+itemstack.getItem().getClass() +": "+Items.clay_ball.getClass());
 		if(itemstack.stackSize >= 5)
@@ -45,7 +43,7 @@ public class ItemClay extends ItemLooseRock
 				pi.specialCraftingTypeAlternate = new ItemStack(specialCraftingType, 1, 3);
 			}
 
-			itemstack.stackSize-=5;
+			itemstack.stackSize -= 5;
 			entityplayer.openGui(TerraFirmaCraft.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 		}
 		return itemstack;
@@ -54,8 +52,8 @@ public class ItemClay extends ItemLooseRock
 
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
-	{		
-		if (TFC_Core.showExtraInformation()) 
+	{
+		if (TFC_Core.showExtraInformation())
 		{
 			arraylist.add(StatCollector.translateToLocal("gui.Help"));
 			arraylist.add(StatCollector.translateToLocal("gui.Clay.Inst0"));
@@ -70,7 +68,7 @@ public class ItemClay extends ItemLooseRock
 	public IIcon getIconFromDamage(int meta)
 	{
 		return icons[meta];
-	}	
+	}
 
 	@Override
 	public void registerIcons(IIconRegister registerer)

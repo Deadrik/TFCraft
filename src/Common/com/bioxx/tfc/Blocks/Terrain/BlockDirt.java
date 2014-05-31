@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Blocks.BlockTerra;
-import com.bioxx.tfc.Core.TFC_Sounds;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -20,15 +15,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.api.Constant.Global;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockDirt extends BlockTerra
 {
-	protected IIcon[] icons = new IIcon[21];
+	protected IIcon[] icons;
 	protected int textureOffset = 0;
 
-	public BlockDirt(int texOff, Block Farm)
+	public BlockDirt(int texOff)
 	{
 		super(Material.ground);
 		this.setCreativeTab(CreativeTabs.tabBlock);
@@ -40,64 +41,73 @@ public class BlockDirt extends BlockTerra
 	/**
 	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
 	 */
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
-		for (int i = 0; i <= 15; i++)
-			par3List.add(new ItemStack(par1, 1, i));
+		// Change to false if this block should not be added to the creative tab
+		Boolean addToCreative = true;
+
+		if(addToCreative)
+		{
+			int count;
+			if(textureOffset == 0) count = 16;
+			else count = Global.STONE_ALL.length - 16;
+	
+			for(int i = 0; i < count; i++)
+				list.add(new ItemStack(item, 1, i));
+		}
 	}
 
 	@Override
-	public int damageDropped(int i)
+	public int damageDropped(int dmg)
 	{
-		return i;
+		return dmg;
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
 		return Item.getItemFromBlock(this);
 	}
 
-	public static boolean canFallBelow(World world, int i, int j, int k)
+	public static boolean canFallBelow(World world, int x, int y, int z)
 	{
-		Block l = world.getBlock(i, j, k);
-		if (l == Blocks.air)
+		Block block = world.getBlock(x, y, z);
+		if (world.isAirBlock(x, y, z))
 			return true;
-		if (l == Blocks.fire)
+		if (block == Blocks.fire)
 			return true;
-		Material material = l.getMaterial();
-		if (material == Material.water)
-			return true;
-		return material == Material.lava;
+		Material material = block.getMaterial();
+		return material == Material.water ? true : material == Material.lava;
 	}
 
 	@Override
-	public IIcon getIcon(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	public IIcon getIcon(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
-		if (par1IBlockAccess.getBlockMetadata(par2, par3, par4) + textureOffset < 21)
-			return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4) + textureOffset];
-		return icons[20];
+		int meta = bAccess.getBlockMetadata(x, y, z);
+		if(meta > icons.length) return icons[icons.length];
+		return icons[meta];
 	}
 
 	@Override
-	public IIcon getIcon(int par1, int par2)
+	public IIcon getIcon(int side, int meta)
 	{
-		if (par2 + textureOffset < 21)
-			return icons[par2 + textureOffset];
-		return icons[20];
+		if(meta > icons.length) return icons[icons.length];
+		return icons[meta];
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		for (int i = 0; i < Global.STONE_ALL.length; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "soil/Dirt " + Global.STONE_ALL[i]);
+		int count = (textureOffset == 0 ? 16 : Global.STONE_ALL.length - 16);
+		icons = new IIcon[count];
+		for (int i = 0; i < count; i++)
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "soil/Dirt " + Global.STONE_ALL[i + textureOffset]);
 	}
 
 	@Override
-	public void onBlockAdded(World world, int i, int j, int k)
+	public void onBlockAdded(World world, int x, int y, int z)
 	{
-		world.scheduleBlockUpdate(i, j, k, this, tickRate(world));
+		world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
 	}
 
 	@Override
@@ -106,28 +116,27 @@ public class BlockDirt extends BlockTerra
 		return 3;
 	}
 
-	private void tryToFall(World world, int i, int j, int k)
+	private void tryToFall(World world, int x, int y, int z)
 	{
 		if (!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(i, j, k);
-			if (!BlockCollapsable.isNearSupport(world, i, j, k, 4, 0) && BlockCollapsable.canFallBelow(world, i, j - 1, k) && j >= 0)
+			int meta = world.getBlockMetadata(x, y, z);
+			if (!BlockCollapsable.isNearSupport(world, x, y, z, 4, 0) && BlockCollapsable.canFallBelow(world, x, y - 1, z) && y >= 0)
 			{
 				byte byte0 = 32;
-				if (!world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))
+				if (!world.checkChunksExist(x - byte0, y - byte0, z - byte0, x + byte0, y + byte0, z + byte0))
 				{
-					world.setBlockToAir(i, j, k);
-					for (; BlockCollapsable.canFallBelow(world, i, j - 1, k) && j > 0; j--)
+					world.setBlockToAir(x, y, z);
+					for (; BlockCollapsable.canFallBelow(world, x, y - 1, z) && y > 0; y--)
 					{}
-					if (j > 0)
-						world.setBlock(i, j, k, this, meta, 0x2);
+					if (y > 0)
+						world.setBlock(x, y, z, this, meta, 0x2);
 				}
 				else
 				{
-					//EntityFallingStone ent = new EntityFallingStone(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), this, meta);
-					EntityFallingBlock ent = new EntityFallingBlock(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), this, meta);
+					EntityFallingBlock ent = new EntityFallingBlock(world, (double)(x + 0.5F), (double)(y + 0.5F), (double)(z + 0.5F), this, meta);
 					world.spawnEntityInWorld(ent);
-					Random R = new Random(i * j + k);
+					Random R = new Random(x * y + z);
 					world.playSoundAtEntity(ent, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (R.nextFloat() / 2));
 				}
 			}
@@ -135,37 +144,37 @@ public class BlockDirt extends BlockTerra
 	}
 
 	@Override
-	public void updateTick(World world, int i, int j, int k, Random random)
+	public void updateTick(World world, int x, int y, int z, Random random)
 	{
 		if (!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(i, j, k);
-			boolean isBelowAir = world.isAirBlock(i, j - 1, k);
+			int meta = world.getBlockMetadata(x, y, z);
+			boolean isBelowAir = world.isAirBlock(x, y - 1, z);
 			byte count = 0;
 			List sides = new ArrayList<Integer>();
 
-			if(world.isAirBlock(i + 1, j, k))
+			if(world.isAirBlock(x + 1, y, z))
 			{
 				count++;
-				if(world.isAirBlock(i + 1, j - 1, k))
+				if(world.isAirBlock(x + 1, y - 1, z))
 					sides.add(0);
 			}
-			if(world.isAirBlock(i, j, k + 1))
+			if(world.isAirBlock(x, y, z + 1))
 			{
 				count++;
-				if(world.isAirBlock(i, j - 1, k + 1))
+				if(world.isAirBlock(x, y - 1, z + 1))
 					sides.add(1);
 			}
-			if(world.isAirBlock(i - 1, j, k))
+			if(world.isAirBlock(x - 1, y, z))
 			{
 				count++;
-				if(world.isAirBlock(i - 1, j - 1, k))
+				if(world.isAirBlock(x - 1, y - 1, z))
 					sides.add(2);
 			}
-			if(world.isAirBlock(i, j, k - 1))
+			if(world.isAirBlock(x, y, z - 1))
 			{
 				count++;
-				if(world.isAirBlock(i, j - 1, k - 1))
+				if(world.isAirBlock(x, y - 1, z - 1))
 					sides.add(3);
 			}
 
@@ -175,49 +184,48 @@ public class BlockDirt extends BlockTerra
 				{
 				case 0:
 				{
-					world.setBlockToAir(i, j, k);
-					world.setBlock(i + 1, j, k, this, meta, 0x2);
-					tryToFall(world, i + 1, j, k);
+					world.setBlockToAir(x, y, z);
+					world.setBlock(x + 1, y, z, this, meta, 0x2);
+					tryToFall(world, x + 1, y, z);
 					break;
 				}
 				case 1:
 				{
-					world.setBlockToAir(i, j, k);
-					world.setBlock(i, j, k + 1, this, meta, 0x2);
-					tryToFall(world, i, j, k + 1);
+					world.setBlockToAir(x, y, z);
+					world.setBlock(x, y, z + 1, this, meta, 0x2);
+					tryToFall(world, x, y, z + 1);
 					break;
 				}
 				case 2:
 				{
-					world.setBlockToAir(i, j, k);
-					world.setBlock(i - 1, j, k, this, meta, 3);
-					tryToFall(world, i - 1, j, k);
+					world.setBlockToAir(x, y, z);
+					world.setBlock(x - 1, y, z, this, meta, 3);
+					tryToFall(world, x - 1, y, z);
 					break;
 				}
 				case 3:
 				{
-					world.setBlockToAir(i, j, k);
-					world.setBlock(i, j, k - 1, this, meta, 3);
-					tryToFall(world, i, j, k - 1);
+					world.setBlockToAir(x, y, z);
+					world.setBlock(x, y, z - 1, this, meta, 3);
+					tryToFall(world, x, y, z - 1);
 					break;
 				}
 				}
 			}
 			else if(isBelowAir)
 			{
-				tryToFall(world, i, j, k);
+				tryToFall(world, x, y, z);
 			}
 		}
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block id)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
 		if (!world.isRemote)
 		{
-			tryToFall(world, i, j, k);
-			world.scheduleBlockUpdate(i, j, k, this, tickRate(world));
+			tryToFall(world, x, y, z);
+			world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
 		}
 	}
-
 }

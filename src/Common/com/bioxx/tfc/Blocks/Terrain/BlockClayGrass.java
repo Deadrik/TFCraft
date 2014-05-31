@@ -1,9 +1,11 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCBlocks;
@@ -22,37 +24,54 @@ public class BlockClayGrass extends BlockGrass
 	{
 		return TFCBlocks.clayGrassRenderId;
 	}
+
 	@Override
-	public int damageDropped(int i) {
-		return 0;
+	public int damageDropped(int dmg)
+	{
+		return dmg;
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
 		return TFCItems.ClayBall;
 	}
 
 	@Override
-	public int quantityDropped(Random par1Random)
+	public int quantityDropped(Random rand)
 	{
-		return par1Random.nextInt(4);
+		return rand.nextInt(4);
+	}
+
+	/**
+	 * The reason for overriding getDrops is because we only want to drop the clay item with meta 0,
+	 * but also need damageDropped to return the correct meta for localization purposes.
+	 */
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		int count = this.quantityDropped(world.rand);
+		Item item = getItemDropped(metadata, world.rand, fortune);
+		for(int i = 0; i < count; i++)
+			ret.add(new ItemStack(item, 1, 0));
+		return ret;
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, Block l)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
-		if(!world.blockExists(i, j-1, k))
+		if(!world.blockExists(x, y - 1, z))
 		{
-			int meta = world.getBlockMetadata(i, j, k);
-			world.setBlock(i, j, k, TFC_Core.getTypeForClay(meta), meta, 0x2);
+			int meta = world.getBlockMetadata(x, y, z);
+			world.setBlock(x, y, z, TFC_Core.getTypeForClay(meta), meta, 0x2);
 		}
 	}
 
 	@Override
-	public void updateTick(World world, int i, int j, int k, Random rand)
+	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
-		if (world.getBlockLightValue(i, j + 1, k) < 4 && world.getBlock(i, j + 1, k).getLightOpacity() > 2)
-			world.setBlock(i, j, k, TFC_Core.getTypeForClay(world.getBlockMetadata(i, j, k) + textureOffset), world.getBlockMetadata(i, j, k), 0x2);
+		if (world.getBlockLightValue(x, y + 1, z) < 4 && world.getBlock(x, y + 1, z).getLightOpacity() > 2)
+			world.setBlock(x, y, z, TFC_Core.getTypeForClay(world.getBlockMetadata(x, y, z) + textureOffset), world.getBlockMetadata(x, y, z), 0x2);
 	}
 }
