@@ -53,7 +53,7 @@ public class BlockClay extends BlockTerra
 		int count = (textureOffset == 0 ? 16 : Global.STONE_ALL.length - 16);
 		DirtTexture = new IIcon[count];
 		for(int i = 0; i < count; i++)
-			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "clay/Clay" + (i + textureOffset));
+			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "clay/Clay " + Global.STONE_ALL[i + textureOffset]);
 	}
 
 	/**
