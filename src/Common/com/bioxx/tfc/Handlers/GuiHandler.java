@@ -33,12 +33,12 @@ import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
+import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.TileEntities.TECrucible;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
-import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
@@ -123,11 +123,11 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 35:
 		{
-			return new ContainerBarrel(player.inventory, ((TEBarrel) te), world, x, y, z);
+			return new ContainerBarrel(player.inventory, ((TEBarrel) te), world, x, y, z, 0);
 		}
 		case 36:
 		{
-			return null;//was leatherworking
+			return new ContainerBarrel(player.inventory, ((TEBarrel) te), world, x, y, z, 1);
 		}
 		case 37:
 		{

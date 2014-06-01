@@ -7,6 +7,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Containers.Slots.SlotChest;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 
@@ -14,17 +15,37 @@ public class ContainerBarrel extends ContainerTFC
 {
 	private TEBarrel barrel;
 	private float liquidLevel;
+	int guiTab = 0;
 
-	public ContainerBarrel(InventoryPlayer inventoryplayer, TEBarrel tileentitybarrel, World world, int x, int y, int z)
+	public ContainerBarrel(InventoryPlayer inventoryplayer, TEBarrel tileentitybarrel, World world, int x, int y, int z, int tab)
 	{
 		barrel = tileentitybarrel;
 		liquidLevel = 0;
-		//Input slot
-		addSlotToContainer(new Slot(tileentitybarrel, 0, 80, 29));
+		guiTab = tab;
+
+		if(guiTab == 0)
+		{
+			//Input slot
+			addSlotToContainer(new Slot(tileentitybarrel, 0, 80, 29));
+		}
+		else if(guiTab == 1)
+		{
+			addSlotToContainer(new SlotChest(tileentitybarrel, 0, 53, 17));
+			addSlotToContainer(new SlotChest(tileentitybarrel, 1, 71, 17));
+			addSlotToContainer(new SlotChest(tileentitybarrel, 2, 89, 17));
+			addSlotToContainer(new SlotChest(tileentitybarrel, 3, 107, 17));
+			addSlotToContainer(new SlotChest(tileentitybarrel, 4, 53, 35));
+			addSlotToContainer(new SlotChest(tileentitybarrel, 5, 71, 35));
+			addSlotToContainer(new SlotChest(tileentitybarrel, 6, 89, 35));
+			addSlotToContainer(new SlotChest(tileentitybarrel, 7, 107, 35));
+			addSlotToContainer(new SlotChest(tileentitybarrel, 8, 53, 53));
+			addSlotToContainer(new SlotChest(tileentitybarrel, 9, 71, 53));
+			addSlotToContainer(new SlotChest(tileentitybarrel, 10, 89, 53));
+			addSlotToContainer(new SlotChest(tileentitybarrel, 11, 107, 53));
+		}
 
 		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 90, false, true);
 
-		//barrel.updateGui();
 	}
 
 	@Override
@@ -33,163 +54,27 @@ public class ContainerBarrel extends ContainerTFC
 		return true;
 	}
 
-	/*@Override
-	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
-	{
-		ItemStack itemstack = null;
-		if (j > 1)
-		{
-			return null;
-		}
-		if (j == 0 || j == 1)
-		{
-			InventoryPlayer inventoryplayer = entityplayer.inventory;
-			if (i == -999)
-			{
-				if (inventoryplayer.getItemStack() != null && i == -999)
-				{
-					if (j == 0)
-					{
-						entityplayer.dropPlayerItem(inventoryplayer.getItemStack());
-						inventoryplayer.setItemStack(null);
-					}
-					if (j == 1)
-					{
-						entityplayer.dropPlayerItem(inventoryplayer.getItemStack().splitStack(1));
-						if (inventoryplayer.getItemStack().stackSize == 0)
-						{
-							inventoryplayer.setItemStack(null);
-						}
-					}
-				}
-			}
-			else if (flag == 1)
-			{
-				ItemStack itemstack1 = transferStackInSlot(entityplayer, i);
-				if (itemstack1 != null)
-				{
-					int k = itemstack1.itemID;
-					itemstack = itemstack1.copy();
-					Slot slot1 = (Slot)inventorySlots.get(i);
-					if (slot1 != null && slot1.getStack() != null && slot1.getStack().itemID == k)
-					{
-						retrySlotClick(i, j, true, entityplayer);
-					}
-				}
-			}
-			else
-			{
-				if (i < 0)
-				{
-					return null;
-				}
-				Slot slot = (Slot)inventorySlots.get(i);
-				if (slot != null)
-				{
-					slot.onSlotChanged();
-					ItemStack itemstack2 = slot.getStack();
-					ItemStack itemstack3 = inventoryplayer.getItemStack();
-					if (itemstack2 != null)
-					{
-						itemstack = itemstack2.copy();
-					}
-					if (itemstack2 == null)
-					{
-						if (itemstack3 != null && slot.isItemValid(itemstack3))
-						{
-							int l = j != 0 ? 1 : itemstack3.stackSize;
-							if (l > slot.getSlotStackLimit())
-							{
-								l = slot.getSlotStackLimit();
-							}
-							slot.putStack(itemstack3.splitStack(l));
-							if (itemstack3.stackSize == 0)
-							{
-								inventoryplayer.setItemStack(null);
-							}
-						}
-					}
-					else if (itemstack3 == null)
-					{
-						int i1 = j != 0 ? (itemstack2.stackSize + 1) / 2 : itemstack2.stackSize;
-						ItemStack itemstack5 = slot.decrStackSize(i1);
-						inventoryplayer.setItemStack(itemstack5);
-						if (itemstack2.stackSize == 0)
-						{
-							slot.putStack(null);
-						}
-						slot.onPickupFromSlot(entityplayer, inventoryplayer.getItemStack());
-					}
-					else if (slot.isItemValid(itemstack3))
-					{
-						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !ItemStack.areItemStacksEqual(itemstack2, itemstack3))
-						{
-							if (itemstack3.stackSize <= slot.getSlotStackLimit())
-							{
-								ItemStack itemstack4 = itemstack2;
-								slot.putStack(itemstack3);
-								inventoryplayer.setItemStack(itemstack4);
-							}
-						}
-						else
-						{
-							int j1 = j != 0 ? 1 : itemstack3.stackSize;
-							if (j1 > slot.getSlotStackLimit() - itemstack2.stackSize)
-							{
-								j1 = slot.getSlotStackLimit() - itemstack2.stackSize;
-							}
-							if (j1 > itemstack3.getMaxStackSize() - itemstack2.stackSize)
-							{
-								j1 = itemstack3.getMaxStackSize() - itemstack2.stackSize;
-							}
-							itemstack3.splitStack(j1);
-							if (itemstack3.stackSize == 0)
-							{
-								inventoryplayer.setItemStack(null);
-							}
-							itemstack2.stackSize += j1;
-						}
-					}
-					else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && ItemStack.areItemStacksEqual(itemstack2, itemstack3))
-					{
-						int k1 = itemstack2.stackSize;
-						if (k1 > 0 && k1 + itemstack3.stackSize <= itemstack3.getMaxStackSize())
-						{
-							itemstack3.stackSize += k1;
-							itemstack2.splitStack(k1);
-							if (itemstack2.stackSize == 0)
-							{
-								slot.putStack(null);
-							}
-							slot.onPickupFromSlot(entityplayer, inventoryplayer.getItemStack());
-						}
-					}
-				}
-			}
-		}
-		return itemstack;
-	}*/
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
-		Slot slot1 = (Slot)inventorySlots.get(0);
 		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
-			if(i == 0)
+			if(i == 0 && guiTab == 0)
 			{
 				if(!this.mergeItemStack(itemstack1, 1, this.inventorySlots.size(), true))
 					return null;
 			}
+			else if(i < 12 && guiTab == 1)
+			{
+				if(!this.mergeItemStack(itemstack1, 12, this.inventorySlots.size(), true))
+					return null;
+			}
 			else
 			{
-				if(slot1.getHasStack())
+				if (!this.mergeItemStack(itemstack1, 0, 12, false))
 					return null;
-				ItemStack stack = itemstack1.copy();
-				stack.stackSize = itemstack1.stackSize;
-				slot1.putStack(stack);
-				itemstack1.stackSize = 0;
 			}
 
 			if(itemstack1.stackSize == 0)
@@ -206,7 +91,7 @@ public class ContainerBarrel extends ContainerTFC
 	{
 		super.detectAndSendChanges();
 
-		for (int var1 = 0; var1 < this.crafters.size(); ++var1)
+		for (int var1 = 0; var1 < this.crafters.size() && guiTab == 0; ++var1)
 		{
 			ICrafting var2 = (ICrafting)this.crafters.get(var1);
 			if (this.liquidLevel != this.barrel.liquidLevel)

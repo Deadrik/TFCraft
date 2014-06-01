@@ -58,4 +58,10 @@ public class TFC_Textures
 	public static IIcon GuiSkills;
 	public static IIcon GuiCalendar;
 	public static IIcon GuiHealth;
+
+	/**
+	 * These are defined in BlockBarrel
+	 */
+	public static IIcon GuiSolidStorage;
+	public static IIcon GuiLiquidStorage;
 }

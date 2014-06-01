@@ -1,11 +1,17 @@
 package com.bioxx.tfc.GUI;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -15,42 +21,92 @@ import org.lwjgl.opengl.GL11;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerBarrel;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 
 public class GuiBarrel extends GuiContainer
 {
+	public static final ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_barrel.png");
 	private TEBarrel barrel;
 	private EntityPlayer player;
+	private int guiTab = 0;
 
-	public GuiBarrel(InventoryPlayer inventoryplayer, TEBarrel tileentitybarrel, World world, int x, int y, int z)
+	public GuiBarrel(InventoryPlayer inventoryplayer, TEBarrel tileentitybarrel, World world, int x, int y, int z, int tab)
 	{
-		super(new ContainerBarrel(inventoryplayer,tileentitybarrel, world, x, y, z) );
+		super(new ContainerBarrel(inventoryplayer,tileentitybarrel, world, x, y, z, tab));
 		barrel = tileentitybarrel;
 		player = inventoryplayer.player;
 		guiLeft = (width - 208) / 2;
 		guiTop = (height - 198) / 2;
 		xSize = 176;
 		ySize = 85+PlayerInventory.invYSize;
+		guiTab = tab;
+	}
 
-		//controlList.clear();
-
-		//controlList.add(new GuiButton(0, guiLeft+86, guiTop + 74, 36, 20, "\2474Seal"));
+	@Override
+	public void updateScreen()
+	{
+		super.updateScreen();
+		if(barrel.getInvCount() > 0)
+		{
+			if(guiTab == 0)
+				((GuiButton)buttonList.get(4)).visible = false;//Turn off Liquid
+			else if(guiTab == 1)
+				((GuiButton)buttonList.get(1)).visible = false;//Turn off Liquid
+		}
+		else
+		{
+			if(guiTab == 0)
+				((GuiButton)buttonList.get(4)).visible = true;//Turn on Liquid
+			else if(guiTab == 1)
+				((GuiButton)buttonList.get(1)).visible = true;//Turn on Liquid
+		}
+		if(barrel.liquidLevel > 0)
+		{
+			if(guiTab == 0)
+				((GuiButton)buttonList.get(3)).visible = false;//Turn off Solid
+			else if(guiTab == 1)
+				((GuiButton)buttonList.get(0)).visible = false;//Turn off Solid
+		}
+		else
+		{
+			if(guiTab == 0)
+				((GuiButton)buttonList.get(3)).visible = true;//Turn on Solid
+			else if(guiTab == 1)
+				((GuiButton)buttonList.get(0)).visible = true;//Turn on Solid
+		}
 	}
 
 	@Override
 	public void initGui()
 	{
 		super.initGui();
-		//guiLeft = (width - 208) / 2;
-		//guiTop = (height - 198) / 2;
 
 		buttonList.clear();
+		if(guiTab == 0)
+		{
+			buttonList.add(new GuiButton(0, guiLeft+38, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Seal")));
+			buttonList.add(new GuiButton(1, guiLeft+88, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Empty")));
+			GuiButton buttonMode = new GuiButtonMode(2, guiLeft+140, guiTop + 5, 30,20, barrel.mode == 0 ? StatCollector.translateToLocal("gui.Barrel.ToggleOn") : StatCollector.translateToLocal("gui.Barrel.ToggleOff"));
+			buttonList.add(buttonMode);
+			buttonList.add(new GuiBarrelTabButton(3, guiLeft+36, guiTop-12, 31, 15, this, TFC_Textures.GuiSolidStorage, StatCollector.translateToLocal("gui.Barrel.Solid")));
+			buttonList.add(new GuiBarrelTabButton(4, guiLeft+5, guiTop-12, 31, 15, this, TFC_Textures.GuiLiquidStorage, StatCollector.translateToLocal("gui.Barrel.Liquid")));
 
-		buttonList.add(new GuiButton(0, guiLeft+38, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Seal")));
-		buttonList.add(new GuiButton(1, guiLeft+88, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Empty")));
-		GuiButton buttonMode = new GuiButtonMode(2, guiLeft+140, guiTop + 5, 30,20, barrel.mode == 0 ? StatCollector.translateToLocal("gui.Barrel.ToggleOn") : StatCollector.translateToLocal("gui.Barrel.ToggleOff"));
-		buttonList.add(buttonMode);
+		}
+		else if(guiTab == 1)
+		{
+			buttonList.add(new GuiBarrelTabButton(0, guiLeft+36, guiTop-12, 31, 15, this, TFC_Textures.GuiSolidStorage, StatCollector.translateToLocal("gui.Barrel.Solid")));
+			buttonList.add(new GuiBarrelTabButton(1, guiLeft+5, guiTop-12, 31, 15, this, TFC_Textures.GuiLiquidStorage, StatCollector.translateToLocal("gui.Barrel.Liquid")));
+		}
+	}
+
+	public void drawTooltip(int mx, int my, String text) {
+		List list = new ArrayList();
+		list.add(text);
+		this.drawHoveringText(list, mx, my+15, this.fontRendererObj);
+		RenderHelper.disableStandardItemLighting();
+		GL11.glDisable(GL11.GL_LIGHTING);
 	}
 
 	public class GuiButtonMode extends GuiButton
@@ -94,35 +150,103 @@ public class GuiBarrel extends GuiContainer
 		}
 	}
 
+	public class GuiBarrelTabButton extends GuiButton 
+	{
+		GuiBarrel screen;
+		IIcon buttonicon;
+
+		public GuiBarrelTabButton(int index, int xPos, int yPos, int width, int height, GuiBarrel gui, IIcon icon, String s)
+		{
+			super(index, xPos, yPos, width, height, s);
+			screen = gui;
+			buttonicon = icon;
+		}
+
+		@Override
+		public void drawButton(Minecraft mc, int x, int y)
+		{
+			if (this.visible)
+			{
+				int k = this.getHoverState(this.field_146123_n)-1;
+
+				TFC_Core.bindTexture(GuiBarrel.texture);
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				this.zLevel = 301f;
+				this.drawTexturedModalRect(this.xPosition, this.yPosition, 0, 172, 31, 15);
+				this.field_146123_n = x >= this.xPosition && y >= this.yPosition && x < this.xPosition + this.width && y < this.yPosition + this.height;
+
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
+
+				this.drawTexturedModelRectFromIcon(this.xPosition+12, this.yPosition+4, buttonicon, 8, 8);
+
+				this.zLevel = 0;
+				this.mouseDragged(mc, x, y);
+
+				if(field_146123_n)
+				{
+					FontRenderer fontrenderer = Minecraft.getMinecraft().fontRenderer;
+					screen.drawTooltip(x, y, this.displayString);
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				}
+			}
+		}
+
+		private boolean isPointInRegion(int mouseX, int mouseY)
+		{
+			int k1 = 0;//screen.getGuiLeft();
+			int l1 = 0;//screen.getGuiTop();
+			mouseX -= k1;
+			mouseY -= l1;
+			return mouseX >= xPosition - 1 && mouseX < xPosition + width + 1 && mouseY >= yPosition - 1 && mouseY < yPosition + height + 1;
+		}
+	}
+
 	@Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
-		if (guibutton.id == 0)
+		if(guiTab == 0)
 		{
-			if(barrel.actionSeal())
-				Minecraft.getMinecraft().displayGuiScreen(null); // player.closeScreen();
+			if (guibutton.id == 0)
+			{
+				if(barrel.actionSeal())
+					Minecraft.getMinecraft().displayGuiScreen(null); // player.closeScreen();
+			}
+			else if (guibutton.id == 1)
+				barrel.actionEmpty();
+			else if (guibutton.id == 2)
+				barrel.actionMode();
+			else if (guibutton.id == 3 && barrel.liquidLevel == 0 && barrel.getInvCount() == 0)
+				barrel.actionSwitchTab(1, player);
 		}
-
-		if (guibutton.id == 1)
-			barrel.actionEmpty();
-		if (guibutton.id == 2)
-			barrel.actionMode();
+		else if(guiTab == 1)
+		{
+			if (guibutton.id == 1 && barrel.getInvCount() == 0)
+				barrel.actionSwitchTab(0, player);
+		}
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		TFC_Core.bindTexture(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_barrel.png"));
+		TFC_Core.bindTexture(texture);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		int w = (width - xSize) / 2;
 		int h = (height - ySize) / 2;
-		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
-
-		int scale = 0;
-		if(barrel!=null)
+		if(guiTab == 0)
 		{
-			scale = barrel.getLiquidScaled(49);
-			drawTexturedModalRect(w + 8, h + 65 - scale, 185, 31, 15, 6);
+			drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
+
+			int scale = 0;
+			if(barrel!=null)
+			{
+				scale = barrel.getLiquidScaled(49);
+				drawTexturedModalRect(w + 8, h + 65 - scale, 185, 31, 15, 6);
+			}
+		}
+		else if(guiTab == 1)
+		{
+			drawTexturedModalRect(w, h, 0, 86, xSize, ySize);
 		}
 
 		PlayerInventory.drawInventory(this, width, height, ySize - PlayerInventory.invYSize);
@@ -131,7 +255,8 @@ public class GuiBarrel extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j)
 	{
-		drawCenteredString(this.fontRendererObj, TEBarrel.getType(barrel.Type), 88, 7, 0x555555);
+		if(guiTab == 0)
+			drawCenteredString(this.fontRendererObj, TEBarrel.getType(barrel.Type), 88, 7, 0x555555);
 	}
 
 	@Override

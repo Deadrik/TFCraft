@@ -4,36 +4,28 @@ import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
 import com.bioxx.tfc.api.IPipeConnectable;
 import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.TFC_ItemHeat;
 
-public class TEBarrel extends TileEntity implements IInventory
+public class TEBarrel extends NetworkTileEntity implements IInventory
 {
 	public int liquidLevel;
 	public int Type;
 	public int barrelType;
 	public int mode;
-	private ItemStack itemstack;
-	private ItemStack output;
+	public ItemStack[] storage;
+	public ItemStack output;
 	private boolean sealed;
 	private int sealtimecounter;
 	public Item[] alcohols;
@@ -46,11 +38,12 @@ public class TEBarrel extends TileEntity implements IInventory
 		//itemstack = new ItemStack(1,0,0);
 		sealtimecounter = 0;
 		alcohols = new Item[]{TFCItems.Beer, TFCItems.Cider, TFCItems.Vodka, TFCItems.Whiskey, TFCItems.RyeWhiskey, TFCItems.Sake, TFCItems.Rum};
+		storage = new ItemStack[12];
 	}
 
 	public void careForInventorySlot()
 	{
-		if(Type == 1 && itemstack != null && itemstack.getItem() instanceof ItemTerra)
+		/*if(Type == 1 && itemstack != null && itemstack.getItem() instanceof ItemTerra)
 		{
 			if(TFC_ItemHeat.HasTemp(itemstack))
 			{
@@ -63,7 +56,7 @@ public class TEBarrel extends TileEntity implements IInventory
 					TFC_ItemHeat.HandleItemHeat(itemstack);
 				}
 			}
-		}
+		}*/
 	}
 
 	public boolean getSealed()
@@ -73,7 +66,7 @@ public class TEBarrel extends TileEntity implements IInventory
 
 	private void ProcessItems()
 	{
-		ItemStack itemstack2;
+		/*ItemStack itemstack2;
 		if(itemstack != null && Type == 1)
 		{
 			if (itemstack.getItem() == TFCItems.ScrapedHide)
@@ -107,8 +100,8 @@ public class TEBarrel extends TileEntity implements IInventory
 				if(itemstack.stackSize == 0)
 					itemstack=null;
 				Type = 3;
-			}
-			/*			else if(itemstack.getItem() == TFCItems.BarleyGrain)
+			}*/
+		/*			else if(itemstack.getItem() == TFCItems.BarleyGrain)
 			{
 				itemstack.stackSize--;
 				if(itemstack.stackSize == 0)
@@ -150,8 +143,8 @@ public class TEBarrel extends TileEntity implements IInventory
 					itemstack=null;
 				Type = 10;
 			}
-			 */
-			else if(itemstack.getItem() == Items.sugar)
+		 */
+		/*else if(itemstack.getItem() == Items.sugar)
 			{
 				itemstack.stackSize--;
 				if(itemstack.stackSize == 0)
@@ -210,7 +203,7 @@ public class TEBarrel extends TileEntity implements IInventory
 			Type = 0;
 		if (itemstack != null && itemstack.stackSize == 0)
 			itemstack = null;
-
+		 */
 	}
 
 	public void setSealed()
@@ -256,17 +249,17 @@ public class TEBarrel extends TileEntity implements IInventory
 	@Override
 	public ItemStack decrStackSize(int i, int j)
 	{
-		if(itemstack != null)
+		if(storage[i] != null)
 		{
-			if(itemstack.stackSize <= j)
+			if(storage[i] .stackSize <= j)
 			{
-				ItemStack is = itemstack;
-				itemstack = null;
+				ItemStack is = storage[i];
+				storage[i] = null;
 				return is;
 			}
-			ItemStack isSplit = itemstack.splitStack(j);
-			if(itemstack.stackSize == 0)
-				itemstack = null;
+			ItemStack isSplit = storage[i].splitStack(j);
+			if(storage[i].stackSize == 0)
+				storage[i] = null;
 			return isSplit;
 		}
 		else
@@ -286,9 +279,9 @@ public class TEBarrel extends TileEntity implements IInventory
 
 		for (int i = 0; i < getSizeInventory(); i++)
 		{
-			if(itemstack != null)
+			if(storage[i] != null)
 			{
-				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, itemstack);
+				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, storage[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
@@ -312,19 +305,32 @@ public class TEBarrel extends TileEntity implements IInventory
 	@Override
 	public int getSizeInventory()
 	{
-		return 1;
+		return 12;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		return i == 0 ? itemstack : output;
+		return storage[i];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1)
+	public ItemStack getStackInSlotOnClosing(int i)
 	{
-		return null;
+		return storage[i];
+	}
+
+	public int getInvCount()
+	{
+		int count = 0;
+		for(ItemStack is : storage)
+		{
+			if(is != null)
+				count++;
+		}
+		if(storage[0] != null && count == 1)
+			return 0;
+		return count;
 	}
 
 	public void readFromItemNBT(NBTTagCompound nbt)
@@ -357,18 +363,7 @@ public class TEBarrel extends TileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack is)
 	{
-		if(i == 0)
-		{
-			this.itemstack = is;
-			if(this.itemstack != null && this.itemstack.stackSize > getInventoryStackLimit())
-				this.itemstack.stackSize = getInventoryStackLimit();
-		}
-		else
-		{
-			this.output = is;
-			if(this.output != null && output.stackSize > getInventoryStackLimit())
-				output.stackSize = getInventoryStackLimit();
-		}
+		storage[i] = is;
 	}
 
 	//FIXME This needs to use blocks and not ids from now on
@@ -419,7 +414,7 @@ public class TEBarrel extends TileEntity implements IInventory
 			if(liquidLevel == 0)
 				Type = 0;
 
-			if(mode == 0)
+			/*if(mode == 0)
 			{
 				if(itemstack == null)
 				{
@@ -493,7 +488,6 @@ public class TEBarrel extends TileEntity implements IInventory
 					itemstack = new ItemStack(alcohols[Type-5]);
 					updateGui();
 				}
-				/*Fill pottery jug*/
 				else if (Type == 1 && (itemstack.getItem() == TFCItems.PotteryJug && itemstack.getItemDamage() == 1) && liquidLevel >= 16)
 				{
 					liquidLevel = Math.max(liquidLevel - 16, 0);
@@ -501,7 +495,6 @@ public class TEBarrel extends TileEntity implements IInventory
 					itemstack.setItemDamage(2);
 					updateGui();
 				}
-				/*Fill water bottle*/
 				else if(Type == 1 && itemstack.getItem() == Items.glass_bottle && liquidLevel > 9 * itemstack.stackSize)
 				{
 					liquidLevel = Math.max(0, liquidLevel - 9 * itemstack.stackSize);
@@ -545,7 +538,7 @@ public class TEBarrel extends TileEntity implements IInventory
 					ItemCustomBucketMilk.createTag(itemstack, 20f);
 					updateGui();
 				}
-			}
+			}*/
 		}
 	}
 
@@ -569,7 +562,7 @@ public class TEBarrel extends TileEntity implements IInventory
 	{
 		if(mode == 0)
 		{
-			if(itemstack == null && ((Type >= 5 && Type <= 11) || Type == 14))
+			/*if(itemstack == null && ((Type >= 5 && Type <= 11) || Type == 14))
 				return true;
 			else if(itemstack == null)
 				return false;
@@ -598,7 +591,7 @@ public class TEBarrel extends TileEntity implements IInventory
 					if(id == TFCItems.PrepHide && Type == 3)
 						return true;
 				}
-			}
+			}*/
 		}
 		return false;
 	}
@@ -614,6 +607,14 @@ public class TEBarrel extends TileEntity implements IInventory
 	{
 		mode = (mode - 1) * -1;
 		updateGui();
+	}
+
+	public void actionSwitchTab(int tab, EntityPlayer player)
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setByte("tab", (byte)tab);
+		nbt.setString("player", player.getDisplayName());
+		this.broadcastPacketInRange(this.createDataPacket(nbt));
 	}
 
 	@Override
@@ -638,14 +639,18 @@ public class TEBarrel extends TileEntity implements IInventory
 		nbt.setInteger("SealTime", sealtimecounter);
 		nbt.setInteger("mode", mode);
 
-		NBTTagCompound nbt1 = new NBTTagCompound();
-		nbt1.setByte("Slot", (byte)1);
-		if(itemstack != null)
-			itemstack.writeToNBT(nbt1);
-
-		NBTTagList nbtlist = new NBTTagList();
-		nbtlist.appendTag(nbt1);
-		nbt.setTag("Items", nbtlist);
+		NBTTagList nbttaglist = new NBTTagList();
+		for(int i = 0; i < storage.length; i++)
+		{
+			if(storage[i] != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				storage[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+		nbt.setTag("Items", nbttaglist);
 	}
 
 	@Override
@@ -658,30 +663,45 @@ public class TEBarrel extends TileEntity implements IInventory
 		sealtimecounter = nbt.getInteger("SealTime");
 		mode = nbt.getInteger("mode");
 
-		NBTTagList nbtlist = nbt.getTagList("Items", 10);
-		NBTTagCompound nbt1 = nbtlist.getCompoundTagAt(0);
-		byte byte0 = nbt1.getByte("Slot");
-		itemstack = ItemStack.loadItemStackFromNBT(nbt1);
-	}
+		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
+		storage = new ItemStack[getSizeInventory()];
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			byte byte0 = nbttagcompound1.getByte("Slot");
+			if(byte0 >= 0 && byte0 < storage.length)
+				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		}
 
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
 	}
 
 	public void updateGui()
 	{
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		//validate();
+	}
+
+	@Override
+	public void handleInitPacket(NBTTagCompound nbt) {
+
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+
+	}
+
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt)
+	{
+		if(!worldObj.isRemote)
+		{
+			int tab = nbt.getByte("tab");
+			if(tab == 0)
+				worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 35, worldObj, xCoord, yCoord, zCoord);
+			else if(tab == 1)
+				worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 36, worldObj, xCoord, yCoord, zCoord);
+		}
 	}
 
 }

@@ -45,7 +45,7 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	private final Random random = new Random();
 	private String[] woodNames;
 	protected static IIcon blockIcon;
-	
+
 	public BlockBarrel()
 	{
 		super(Material.wood);
@@ -59,6 +59,8 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
 		BlockBarrel.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
+		TFC_Textures.GuiSolidStorage = iconRegisterer.registerIcon(Reference.ModID + ":" + "button_barrel_solid");
+		TFC_Textures.GuiLiquidStorage = iconRegisterer.registerIcon(Reference.ModID + ":" + "button_barrel_liquid");
 	}
 
 	@Override
@@ -279,23 +281,16 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 		nbt.setBoolean("sealed", te.getSealed());
 
 		NBTTagList nbttaglist = new NBTTagList();
-		nbttaglist = new NBTTagList();
-		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-		if(te.getStackInSlot(0)!=null)
+		for(int i = 0; i < te.storage.length; i++)
 		{
-			nbttagcompound1.setByte("Slot", (byte)0);
-			te.getStackInSlot(0).writeToNBT(nbttagcompound1);
-			nbttaglist.appendTag(nbttagcompound1);
+			if(te.storage[i] != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				te.storage[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
 		}
-
-		nbttagcompound1 = new NBTTagCompound();
-		if(te.getStackInSlot(1)!=null)
-		{
-			nbttagcompound1.setByte("Slot", (byte)1);
-			te.getStackInSlot(1).writeToNBT(nbttagcompound1);
-			nbttaglist.appendTag(nbttagcompound1);
-		}
-
 		nbt.setTag("Items", nbttaglist);
 
 		return nbt;
@@ -330,7 +325,10 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 				{
 					return false;
 				}
-				entityplayer.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);
+				if(TeBarrel.getInvCount() == 0)
+					entityplayer.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);
+				else
+					entityplayer.openGui(TerraFirmaCraft.instance, 36, world, x, y, z);
 				return true;
 			}
 		}
