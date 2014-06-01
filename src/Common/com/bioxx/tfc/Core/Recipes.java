@@ -2225,32 +2225,32 @@ public class Recipes
 	{
 		QuernManager manager = QuernManager.getInstance();
 
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.WheatGrain, 0, 1), new ItemStack(TFCItems.WheatGround, 0, 1)));//Wheat Flour
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.RyeGrain, 0, 1), new ItemStack(TFCItems.RyeGround, 0, 1)));//Rye Flour
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OatGrain, 0, 1), new ItemStack(TFCItems.OatGround, 0, 1)));//Oat Flour
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.BarleyGrain, 0, 1), new ItemStack(TFCItems.BarleyGround, 0, 1)));//Barley Flour
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.RiceGrain, 0, 1), new ItemStack(TFCItems.RiceGround, 0, 1)));//Rice Flour
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.MaizeEar, 0, 1), new ItemStack(TFCItems.CornmealGround, 0, 1)));//Cornmeal
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 16, 1),new ItemStack( TFCItems.Powder, 1, 4)));//Kaolinite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 20, 1), new ItemStack(TFCItems.Powder, 2, 4)));//Graphite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 27, 1), new ItemStack(Items.redstone, 0, 8)));//Cinnabar to Redstone
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 28, 1), new ItemStack(Items.redstone, 0, 8)));//Cryolite to Redstone
-		manager.addRecipe(new QuernRecipe(new ItemStack(Items.bone, 0, 1), new ItemStack(TFCItems.Dye, 15, 2)));//Bone Meal
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 34, 1), new ItemStack(TFCItems.Powder, 6, 4)));//Lapis Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.SmallOreChunk, 9, 1), new ItemStack(TFCItems.Powder, 8, 1)));//Small Malachite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 58, 1), new ItemStack(TFCItems.Powder, 8, 2)));//Poor Malachite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 9, 1), new ItemStack(TFCItems.Powder, 8, 4)));//Malachite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 44, 1), new ItemStack(TFCItems.Powder, 8, 6)));//Rich Malachite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.SmallOreChunk, 3, 1), new ItemStack(TFCItems.Powder, 5, 1)));//Small Hematite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 52, 1), new ItemStack(TFCItems.Powder, 5, 2)));//Poor Hematite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 3, 1),new ItemStack( TFCItems.Powder, 5, 4)));//Hematite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 38, 1), new ItemStack(TFCItems.Powder, 5, 6)));//Rich Hematite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.SmallOreChunk, 11, 1), new ItemStack(TFCItems.Powder, 7, 1)));//Small Limonite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 60, 1), new ItemStack(TFCItems.Powder, 7, 2)));//Poor Limonite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 11, 1), new ItemStack(TFCItems.Powder, 7, 4)));//Limonite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 46, 1), new ItemStack(TFCItems.Powder, 7, 6)));//Rich Limonite Powder
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 31, 1), new ItemStack(TFCItems.Fertilizer, 0, 4)));//Sylvite to Fertilizer
-		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.LooseRock, 5, 1), new ItemStack(TFCItems.Powder, 9, 4)));//Rock Salt to Salt
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.WheatGrain, 1), new ItemStack(TFCItems.WheatGround, 1)));//Wheat Flour
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.RyeGrain, 1), new ItemStack(TFCItems.RyeGround, 1)));//Rye Flour
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OatGrain, 1), new ItemStack(TFCItems.OatGround, 1)));//Oat Flour
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.BarleyGrain, 1), new ItemStack(TFCItems.BarleyGround, 1)));//Barley Flour
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.RiceGrain, 1), new ItemStack(TFCItems.RiceGround, 1)));//Rice Flour
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.MaizeEar, 1), new ItemStack(TFCItems.CornmealGround, 1)));//Cornmeal
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 16),new ItemStack( TFCItems.Powder, 4, 1)));//Kaolinite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 20), new ItemStack(TFCItems.Powder, 4, 2)));//Graphite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 27), new ItemStack(Items.redstone, 8)));//Cinnabar to Redstone
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 28), new ItemStack(Items.redstone, 8)));//Cryolite to Redstone
+		manager.addRecipe(new QuernRecipe(new ItemStack(Items.bone, 1), new ItemStack(TFCItems.Dye, 2, 15)));//Bone Meal
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 34), new ItemStack(TFCItems.Powder, 4, 6)));//Lapis Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.SmallOreChunk, 1, 9), new ItemStack(TFCItems.Powder, 1, 8)));//Small Malachite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 58), new ItemStack(TFCItems.Powder, 2, 8)));//Poor Malachite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 9), new ItemStack(TFCItems.Powder, 4, 8)));//Malachite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 44), new ItemStack(TFCItems.Powder, 6, 8)));//Rich Malachite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.SmallOreChunk, 1, 3), new ItemStack(TFCItems.Powder, 1, 5)));//Small Hematite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 52), new ItemStack(TFCItems.Powder, 2, 5)));//Poor Hematite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 3),new ItemStack( TFCItems.Powder, 4, 5)));//Hematite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 38), new ItemStack(TFCItems.Powder, 6, 5)));//Rich Hematite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.SmallOreChunk, 1, 11), new ItemStack(TFCItems.Powder, 1, 7)));//Small Limonite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 60), new ItemStack(TFCItems.Powder, 2, 7)));//Poor Limonite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 11), new ItemStack(TFCItems.Powder, 4, 7)));//Limonite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 46), new ItemStack(TFCItems.Powder, 6, 7)));//Rich Limonite Powder
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.OreChunk, 1, 31), new ItemStack(TFCItems.Fertilizer, 4)));//Sylvite to Fertilizer
+		manager.addRecipe(new QuernRecipe(new ItemStack(TFCItems.LooseRock, 1, 5), new ItemStack(TFCItems.Powder, 4, 9)));//Rock Salt to Salt
 	}
 
 	public static int valueOfString(String s)

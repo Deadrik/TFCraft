@@ -348,8 +348,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Dirt2, ItemStone.class, "Dirt2");
 		GameRegistry.registerBlock(Sand, ItemStone.class, "Sand");
 		GameRegistry.registerBlock(Sand2, ItemStone.class, "Sand2");
-		GameRegistry.registerBlock(Clay, "Clay");
-		GameRegistry.registerBlock(Clay2, "Clay2");
+		GameRegistry.registerBlock(Clay, ItemStone.class,"Clay");
+		GameRegistry.registerBlock(Clay2, ItemStone.class,"Clay2");
 		GameRegistry.registerBlock(Grass, ItemStone.class, "Grass");
 		GameRegistry.registerBlock(Grass2, ItemStone.class, "Grass2");
 		GameRegistry.registerBlock(ClayGrass, ItemStone.class, "ClayGrass");
@@ -577,7 +577,7 @@ public class TFCBlocks
 		WoodSupportH2 = new BlockWoodSupport2(Material.wood).setBlockName("WoodSupportH2").setHardness(0.5F).setResistance(1F);
 
 		tilledSoil = new com.bioxx.tfc.Blocks.BlockFarmland(TFCBlocks.Dirt, 0).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
-		tilledSoil2 = new com.bioxx.tfc.Blocks.BlockFarmland(TFCBlocks.Dirt2, 16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil2");
+		tilledSoil2 = new com.bioxx.tfc.Blocks.BlockFarmland(TFCBlocks.Dirt2, 16).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("tilledSoil");
 
 		fruitTreeWood = new BlockFruitWood().setBlockName("fruitTreeWood").setHardness(5.5F).setResistance(2F);
 		fruitTreeLeaves = new BlockFruitLeaves(0).setBlockName("fruitTreeLeaves").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundTypeGrass);
@@ -678,7 +678,7 @@ public class TFCBlocks
 		LilyPad = new BlockCustomLilyPad().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("LilyPad").setBlockTextureName("waterlily");
 		Flowers = new BlockFlower().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers");
 		Flowers2 = new BlockFlower2().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers2");
-		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");//.setCreativeTab(CreativeTabs.tabFood);
+		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");
 
 		SaltWater = (new BlockCustomLiquid(TFC_Fluids.SALTWATER, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWater");
 		FreshWater = (new BlockFreshWater(TFC_Fluids.FRESHWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWater");

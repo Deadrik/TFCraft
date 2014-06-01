@@ -7,15 +7,15 @@ public class QuernRecipe
 	private ItemStack inItemStack;
 	private ItemStack outItemStack;
 
-	public QuernRecipe(ItemStack inputItem, ItemStack outIS)
+	public QuernRecipe(ItemStack inIS, ItemStack outIS)
 	{
-		this.inItemStack = inputItem;
+		this.inItemStack = inIS;
 		this.outItemStack = outIS;
 	}
 
-	public Boolean isInItem(ItemStack item)
+	public Boolean isInItem(ItemStack is)
 	{
-		return ItemStack.areItemStacksEqual(inItemStack, item);
+		return (is.getItem() == inItemStack.getItem() && is.getItemDamage() == inItemStack.getItemDamage());
 	}
 
 	public ItemStack getInItem()

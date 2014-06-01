@@ -86,7 +86,7 @@ public class ContainerQuern extends ContainerTFC
 			}
 			else if (clickedIndex >= 3
 					&& clickedIndex < inventorySlots.size()
-					&& QuernManager.getInstance().isValidItem(clickedStack.getItem()))
+					&& QuernManager.getInstance().isValidItem(clickedStack))
 			{
 				if (!this.mergeItemStack(clickedStack, 0, 1, false))
 					return null;

@@ -3,7 +3,6 @@ package com.bioxx.tfc.api.Crafting;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class QuernManager
@@ -29,17 +28,23 @@ public class QuernManager
 		validItems.add(recipe.getInItem());
 	}
 
-	public Boolean isValidItem(Item item)
+	public Boolean isValidItem(ItemStack is)
 	{
-		return validItems.contains(item);
+		for(Object vi : validItems)
+		{
+			ItemStack vis = (ItemStack) vi;
+			if(vis.getItem() == is.getItem() && vis.getItemDamage() == is.getItemDamage())
+				return true;
+		}
+		return false;
 	}
 
-	public QuernRecipe findMatchingRecipe(ItemStack item)
+	public QuernRecipe findMatchingRecipe(ItemStack is)
 	{
 		for(Object recipe : recipes)
 		{
 			QuernRecipe qr = (QuernRecipe) recipe;
-			if(qr.isInItem(item))
+			if(qr.isInItem(is))
 				return qr;
 		}
 		return null;

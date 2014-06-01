@@ -16,6 +16,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.IFood;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.QuernManager;
 import com.bioxx.tfc.api.Crafting.QuernRecipe;
 
@@ -63,92 +64,118 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 			}
 
 			// If the output item can not be combined or is different from what is being made, eject and make room for the new output
-			if(storage[1] != null && !(storage[1] == qr.getResult() && storage[1].getItemDamage() == qr.getResult().getItemDamage()))
+			if(storage[1] != null && !(storage[1].getItem() == qr.getResult().getItem() && storage[1].getItemDamage() == qr.getResult().getItemDamage()))
 			{
-				ejectItem(new ItemStack(storage[1].getItem(), storage[1].stackSize, storage[1].getItemDamage()));
+				ejectItem(storage[1].copy());
 				storage[1] = null;
 			}
 
-			if(storage[1] == null || (storage[1] == qr.getResult() && storage[1].getItemDamage() == qr.getResult().getItemDamage()))
+			if (qr.getInItem().getItem() instanceof IFood)
 			{
-				if (qr.getInItem().getItem() instanceof IFood)
+				if(storage[1] != null &&
+						storage[1].hasTagCompound() &&
+						storage[1].getTagCompound().hasKey("foodWeight") &&
+						storage[1].getTagCompound().hasKey("foodDecay"))
 				{
-					if(storage[0].hasTagCompound() && storage[0].getTagCompound().hasKey("foodWeight") &&
-							storage[0].getTagCompound().hasKey("foodDecay") && storage[1] == null)
+					NBTTagCompound slot0nbt = storage[0].getTagCompound();
+					NBTTagCompound slot1nbt = storage[1].getTagCompound();
+					float flourDecay = slot0nbt.getFloat("foodDecay");
+					float slot0Weight = slot0nbt.getFloat("foodWeight");
+					float slot1Weight = slot1nbt.getFloat("foodWeight");
+					float newWeight = slot0Weight + slot1Weight;
+
+					if(newWeight > Global.FOOD_MAX_WEIGHT)
 					{
-						storage[1] = qr.getResult();
-						NBTTagCompound grainNBT = storage[0].getTagCompound();
-						float flourWeight = grainNBT.getFloat("foodWeight");
-						float flourDecay = grainNBT.getFloat("foodDecay");
-						ItemFoodTFC.createTag(storage[1], flourWeight, flourDecay);
-						storage[0] = null;
-						return true;
+						storage[1].getTagCompound().setFloat("foodWeight", newWeight - Global.FOOD_MAX_WEIGHT);
+
+						ItemStack tossStack = storage[1].copy();
+						tossStack.getTagCompound().setFloat("foodWeight", Global.FOOD_MAX_WEIGHT);
+						ejectItem(tossStack);
 					}
+					else
+					{
+						storage[1].getTagCompound().setFloat("foodWeight", newWeight);
+					}
+					storage[0] = null;
+					return true;
+				}
+
+				if(storage[1] == null &&
+						storage[0].hasTagCompound() &&
+						storage[0].getTagCompound().hasKey("foodWeight") &&
+						storage[0].getTagCompound().hasKey("foodDecay"))
+				{
+					storage[1] = qr.getResult();
+					NBTTagCompound grainNBT = storage[0].getTagCompound();
+					float flourWeight = grainNBT.getFloat("foodWeight");
+					float flourDecay = grainNBT.getFloat("foodDecay");
+					ItemFoodTFC.createTag(storage[1], flourWeight, flourDecay);
+					storage[0] = null;
+					return true;
+				}
+			}
+			else
+			{
+				if(storage[0].stackSize == 1)
+					storage[0] = null;
+				else
+					storage[0].stackSize--;
+
+				if(storage[1] == null)
+					storage[1] = qr.getResult();
+				else if(storage[1].stackSize < storage[1].getMaxStackSize())
+				{
+					if((qr.getResult().stackSize + storage[1].stackSize) > storage[1].getMaxStackSize())
+					{
+						int amountleft = qr.getResult().stackSize - (storage[1].getMaxStackSize() - storage[1].stackSize);
+						ItemStack tossStack = qr.getResult().copy();
+						tossStack.stackSize = tossStack.getMaxStackSize();
+						ejectItem(tossStack);
+						ItemStack remainStack = qr.getResult().copy();
+						remainStack.stackSize = amountleft;
+						storage[1] = remainStack;
+					}
+					else
+						storage[1].stackSize += qr.getResult().stackSize;
 				}
 				else
 				{
-					if(storage[0].stackSize == 1)
-						storage[0] = null;
-					else
-						storage[0].stackSize--;
-
-					if(storage[1] == null)
-						storage[1] = qr.getResult();
-					else if(storage[1].stackSize < storage[1].getMaxStackSize())
-					{
-						if((qr.getResult().stackSize + storage[1].stackSize) > storage[1].getMaxStackSize())
-						{
-							int amountleft = qr.getResult().stackSize - (storage[1].getMaxStackSize() - storage[1].stackSize);
-							ItemStack tossStack = qr.getResult().copy();
-							tossStack.stackSize = tossStack.getMaxStackSize();
-							ejectItem(tossStack);
-							ItemStack remainStack = qr.getResult().copy();
-							remainStack.stackSize = amountleft;
-							storage[1] = remainStack;
-						}
-						else
-							storage[1].stackSize += qr.getResult().stackSize;
-					}
-					else
-					{
-						ejectItem(storage[1]);
-						storage[1] = qr.getResult();
-					}
-
-					return true;
+					ejectItem(storage[1]);
+					storage[1] = qr.getResult();
 				}
+				return true;
 			}
 		}
 		return false;
 	}
 
-	public void damageStackInSlot(int i)
+	public void damageStackInSlot(int slot)
 	{
-		if(storage[i] != null)
+		if(storage[slot] != null)
 		{
-			storage[i].damageItem(i, new EntityCowTFC(this.worldObj));
-			if(storage[i].stackSize == 0 || storage[i].getItemDamage() == storage[i].getMaxDamage())
+			storage[slot].damageItem(slot, new EntityCowTFC(this.worldObj));
+			if(storage[slot].stackSize == 0 || storage[slot].getItemDamage() == storage[slot].getMaxDamage())
 			{
-				setInventorySlotContents(i, null);
+				setInventorySlotContents(slot, null);
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 		}
 	}
 
 	@Override
-	public ItemStack decrStackSize(int i, int j)
+	public ItemStack decrStackSize(int slot, int amount)
 	{
-		if(storage[i] != null)
+		if(storage[slot] != null)
 		{
-			if(storage[i].stackSize <= j)
+			if(storage[slot].stackSize <= amount)
 			{
-				ItemStack itemstack = storage[i];
-				setInventorySlotContents(i, null);
+				ItemStack itemstack = storage[slot];
+				setInventorySlotContents(slot, null);
 				return itemstack;
 			}
-			ItemStack itemstack1 = storage[i].splitStack(j);
-			if(storage[i].stackSize == 0)
-				setInventorySlotContents(i, null);
+			ItemStack itemstack1 = storage[slot].splitStack(amount);
+			if(storage[slot].stackSize == 0)
+				setInventorySlotContents(slot, null);
 			return itemstack1;
 		}
 		else
@@ -166,7 +193,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 
 		for (int i = 0; i < getSizeInventory(); i++)
 		{
-			if(storage[i]!= null)
+			if(storage[i] != null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, storage[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
@@ -177,7 +204,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 		}
 	}
 
-	public void ejectItem(ItemStack item)
+	public void ejectItem(ItemStack is)
 	{
 		float f3 = 0.05F;
 		EntityItem entityitem;
@@ -186,9 +213,9 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 		float f1 = rand.nextFloat() * 2.0F + 0.4F;
 		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
-		if(storage[1]!= null)
+		if(storage[1] != null)
 		{
-			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, item);
+			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, is);
 			entityitem.motionX = (float)rand.nextGaussian() * f3;
 			entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.05F;
 			entityitem.motionZ = (float)rand.nextGaussian() * f3;
@@ -203,17 +230,17 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int i)
+	public ItemStack getStackInSlot(int slot)
 	{
-		return storage[i];
+		return storage[slot];
 	}
 
 	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack)
+	public void setInventorySlotContents(int slot, ItemStack is)
 	{
-		storage[i] = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-			itemstack.stackSize = getInventoryStackLimit();
+		storage[slot] = is;
+		if(is != null && is.stackSize > getInventoryStackLimit())
+			is.stackSize = getInventoryStackLimit();
 	}
 
 	@Override
@@ -223,13 +250,13 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public int getInventoryStackLimit() 
+	public int getInventoryStackLimit()
 	{
 		return 64;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer var1)
+	public boolean isUseableByPlayer(EntityPlayer player)
 	{
 		return false;
 	}
@@ -245,7 +272,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1)
+	public ItemStack getStackInSlotOnClosing(int slot)
 	{
 		return null;
 	}
@@ -257,7 +284,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack)
+	public boolean isItemValidForSlot(int slot, ItemStack is)
 	{
 		return false;
 	}
@@ -314,25 +341,27 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void handleInitPacket(NBTTagCompound nbt) {
+	public void handleInitPacket(NBTTagCompound nbt)
+	{
 		this.hasQuern = nbt.getBoolean("hasQuern");
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
-	public void handleDataPacket(NBTTagCompound nbt) {
+	public void handleDataPacket(NBTTagCompound nbt)
+	{
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public void createDataNBT(NBTTagCompound nbt) {
+	public void createDataNBT(NBTTagCompound nbt)
+	{
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public void createInitNBT(NBTTagCompound nbt) {
+	public void createInitNBT(NBTTagCompound nbt)
+	{
 		nbt.setBoolean("hasQuern", hasQuern);
 	}
 }

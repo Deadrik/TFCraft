@@ -16,10 +16,8 @@ public class SlotQuernGrain extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(QuernManager.getInstance().isValidItem(itemstack.getItem()))
-		{
+		if(QuernManager.getInstance().isValidItem(itemstack))
 			return true;
-		}
 		return false;
 	}
 }
