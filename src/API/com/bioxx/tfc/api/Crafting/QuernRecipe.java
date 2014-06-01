@@ -1,52 +1,30 @@
 package com.bioxx.tfc.api.Crafting;
 
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class QuernRecipe
 {
-	private Item inItem;
-	private int inItemDmg;
-	private Item outItem;
-	private int outItemDmg;
-	private int outStackSize;
+	private ItemStack inItemStack;
+	private ItemStack outItemStack;
 
-	public QuernRecipe(Item inputItem, int inputItemDamage, Item outputItem, int outputItemDamage, int outpuStackSize)
+	public QuernRecipe(ItemStack inputItem, ItemStack outIS)
 	{
-		this.inItem = inputItem;
-		this.inItemDmg = inputItemDamage;
-		this.outItem = outputItem;
-		this.outItemDmg = outputItemDamage;
-		this.outStackSize = outpuStackSize;
+		this.inItemStack = inputItem;
+		this.outItemStack = outIS;
 	}
 
-	public Boolean isInItem(Item item)
+	public Boolean isInItem(ItemStack item)
 	{
-		return inItem == item;
+		return ItemStack.areItemStacksEqual(inItemStack, item);
 	}
 
-	public Item getInItem()
+	public ItemStack getInItem()
 	{
-		return inItem;
+		return inItemStack;
 	}
 
-	public int getInItemDmg()
+	public ItemStack getResult()
 	{
-		return inItemDmg;
+		return outItemStack;
 	}
-
-	public Item getOutItem()
-	{
-		return outItem;
-	}
-
-	public int getOutItemDmg()
-	{
-		return outItemDmg;
-	}
-
-	public int getOutStackSize()
-	{
-		return outStackSize;
-	}
-
 }

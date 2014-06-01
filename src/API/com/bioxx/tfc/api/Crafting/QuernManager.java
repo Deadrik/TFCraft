@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class QuernManager
 {
@@ -33,12 +34,12 @@ public class QuernManager
 		return validItems.contains(item);
 	}
 
-	public QuernRecipe findMatchingRecipe(Item item, int dmg)
+	public QuernRecipe findMatchingRecipe(ItemStack item)
 	{
 		for(Object recipe : recipes)
 		{
 			QuernRecipe qr = (QuernRecipe) recipe;
-			if(qr.isInItem(item) && qr.getInItemDmg() == dmg)
+			if(qr.isInItem(item))
 				return qr;
 		}
 		return null;

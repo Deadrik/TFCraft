@@ -55,7 +55,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 	{
 		if(storage[0] != null)
 		{
-			QuernRecipe qr = QuernManager.getInstance().findMatchingRecipe(storage[0].getItem(), storage[0].getItemDamage());
+			QuernRecipe qr = QuernManager.getInstance().findMatchingRecipe(storage[0]);
 			if(qr == null)
 			{
 				System.out.println("QUERN RECIPE NOT FOUND! This is a BUG! -- " + storage[0].getItem().getUnlocalizedName());
@@ -63,20 +63,20 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 			}
 
 			// If the output item can not be combined or is different from what is being made, eject and make room for the new output
-			if(storage[1] != null && !(storage[1].getItem() == qr.getOutItem() && storage[1].getItemDamage() == qr.getOutItemDmg()))
+			if(storage[1] != null && !(storage[1] == qr.getResult() && storage[1].getItemDamage() == qr.getResult().getItemDamage()))
 			{
 				ejectItem(new ItemStack(storage[1].getItem(), storage[1].stackSize, storage[1].getItemDamage()));
 				storage[1] = null;
 			}
 
-			if(storage[1] == null || (storage[1].getItem() == qr.getOutItem() && storage[1].getItemDamage() == qr.getOutItemDmg()))
+			if(storage[1] == null || (storage[1] == qr.getResult() && storage[1].getItemDamage() == qr.getResult().getItemDamage()))
 			{
-				if (qr.getInItem() instanceof IFood)
+				if (qr.getInItem().getItem() instanceof IFood)
 				{
 					if(storage[0].hasTagCompound() && storage[0].getTagCompound().hasKey("foodWeight") &&
 							storage[0].getTagCompound().hasKey("foodDecay") && storage[1] == null)
 					{
-						storage [1] = new ItemStack(qr.getOutItem(), qr.getOutStackSize(), qr.getOutItemDmg());
+						storage[1] = qr.getResult();
 						NBTTagCompound grainNBT = storage[0].getTagCompound();
 						float flourWeight = grainNBT.getFloat("foodWeight");
 						float flourDecay = grainNBT.getFloat("foodDecay");
@@ -93,22 +93,26 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 						storage[0].stackSize--;
 
 					if(storage[1] == null)
-						storage[1] = new ItemStack(qr.getOutItem(), qr.getOutStackSize(), qr.getOutItemDmg());
+						storage[1] = qr.getResult();
 					else if(storage[1].stackSize < storage[1].getMaxStackSize())
 					{
-						if((qr.getOutStackSize() + storage[1].stackSize) > storage[1].getMaxStackSize())
+						if((qr.getResult().stackSize + storage[1].stackSize) > storage[1].getMaxStackSize())
 						{
-							int amountleft = qr.getOutStackSize() - (storage[1].getMaxStackSize() - storage[1].stackSize);
-							ejectItem(new ItemStack(qr.getOutItem(), storage[1].getMaxStackSize(), qr.getOutItemDmg()));
-							storage[1] = new ItemStack(qr.getOutItem(), amountleft, qr.getOutItemDmg());
+							int amountleft = qr.getResult().stackSize - (storage[1].getMaxStackSize() - storage[1].stackSize);
+							ItemStack tossStack = qr.getResult().copy();
+							tossStack.stackSize = tossStack.getMaxStackSize();
+							ejectItem(tossStack);
+							ItemStack remainStack = qr.getResult().copy();
+							remainStack.stackSize = amountleft;
+							storage[1] = remainStack;
 						}
 						else
-							storage[1].stackSize += qr.getOutStackSize();
+							storage[1].stackSize += qr.getResult().stackSize;
 					}
 					else
 					{
-						ejectItem(new ItemStack(qr.getOutItem(), storage[1].stackSize, qr.getOutItemDmg()));
-						storage[1] = new ItemStack(qr.getOutItem(), qr.getOutStackSize(), qr.getOutItemDmg());
+						ejectItem(storage[1]);
+						storage[1] = qr.getResult();
 					}
 
 					return true;
