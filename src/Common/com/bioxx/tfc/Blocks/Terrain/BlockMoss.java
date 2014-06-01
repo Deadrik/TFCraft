@@ -2,13 +2,9 @@ package com.bioxx.tfc.Blocks.Terrain;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Blocks.BlockTerra;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -19,13 +15,17 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Core.TFCTabs;
+
 public class BlockMoss extends BlockTerra
 {
 	public BlockMoss()
 	{
 		super(Material.vine);
 		this.setTickRandomly(true);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 	}
 
 	/**

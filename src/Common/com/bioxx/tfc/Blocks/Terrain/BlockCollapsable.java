@@ -5,7 +5,6 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -17,6 +16,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.TileEntities.TEPartial;
@@ -35,14 +35,14 @@ public class BlockCollapsable extends BlockTerraContainer
 	{
 		super(material);
 		this.dropBlock = block;
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
 	protected BlockCollapsable(Material material)
 	{
 		super(material);
 		this.dropBlock = Blocks.air;
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
 	public int[] getDropBlock(World world, int x, int y, int z)

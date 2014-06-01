@@ -2,21 +2,21 @@ package com.bioxx.tfc.Blocks.Vanilla;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Blocks.BlockTerra;
-
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Core.TFCTabs;
 
 public class BlockCustomBookshelf extends BlockTerra
 {
 	public BlockCustomBookshelf()
 	{
 		super(Material.wood);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
 	@Override

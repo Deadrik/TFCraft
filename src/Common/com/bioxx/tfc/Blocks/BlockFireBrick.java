@@ -1,17 +1,17 @@
 package com.bioxx.tfc.Blocks;
 
-import com.bioxx.tfc.Reference;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Core.TFCTabs;
 
 public class BlockFireBrick extends BlockTerra
 {
 	public BlockFireBrick()
 	{
 		super(Material.rock);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
 	@Override

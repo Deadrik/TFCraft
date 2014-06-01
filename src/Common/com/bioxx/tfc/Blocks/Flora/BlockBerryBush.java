@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -58,7 +59,7 @@ public class BlockBerryBush extends BlockTerraContainer
 		icons = new IIcon[MetaNames.length];
 		iconsBerries = new IIcon[MetaNames.length];
 		this.setTickRandomly(true);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 	}
 
 	@SideOnly(Side.CLIENT)

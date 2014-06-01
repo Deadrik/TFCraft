@@ -1,11 +1,11 @@
 package com.bioxx.tfc.Items;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.ItemStack;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.api.Enums.EnumSize;
-
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemStack;
 
 public class ItemUnfinishedArmor extends ItemTerra
 {
@@ -14,7 +14,7 @@ public class ItemUnfinishedArmor extends ItemTerra
 		super();
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		setCreativeTab(TFCTabs.TFCUnfinished);
+		setCreativeTab(TFCTabs.TFCMisc);
 		this.setFolder("armor/");
 		this.setSize(EnumSize.LARGE);
 	}

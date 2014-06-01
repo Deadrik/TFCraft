@@ -2,9 +2,6 @@ package com.bioxx.tfc.Blocks.Vanilla;
 
 import java.util.List;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.api.TFCOptions;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.material.Material;
@@ -17,6 +14,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.api.TFCOptions;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -30,6 +32,7 @@ public class BlockCustomWall extends BlockWall
 		super(blk);
 		this.block = blk;
 		totalsubTypes = t;
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
 	/**

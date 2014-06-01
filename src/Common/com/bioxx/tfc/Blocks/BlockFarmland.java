@@ -20,6 +20,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -38,7 +39,7 @@ public class BlockFarmland extends BlockContainer
 		this.setTickRandomly(true);
 		this.dirtBlock = block;
 		this.textureOffset = tex;
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
 	@SideOnly(Side.CLIENT)

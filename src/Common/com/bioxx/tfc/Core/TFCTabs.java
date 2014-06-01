@@ -9,15 +9,16 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFCTabs extends CreativeTabs
 {
+	public static CreativeTabs TFCBuilding = new TFCTabs("TFCBuilding");
+	public static CreativeTabs TFCDecoration = new TFCTabs("TFCDecoration");
+	public static CreativeTabs TFCDevices = new TFCTabs("TFCDevices");
+	public static CreativeTabs TFCPottery = new TFCTabs("TFCPottery");
 	public static CreativeTabs TFCMisc = new TFCTabs("TFCMisc");
+	public static CreativeTabs TFCFoods = new TFCTabs("TFCFoods");
 	public static CreativeTabs TFCTools = new TFCTabs("TFCTools");
 	public static CreativeTabs TFCWeapons = new TFCTabs("TFCWeapons");
-	public static CreativeTabs TFCUnfinished = new TFCTabs("TFCUnfinished");
-	public static CreativeTabs TFCMaterials = new TFCTabs("TFCMaterials");
 	public static CreativeTabs TFCArmor = new TFCTabs("TFCArmor");
-	public static CreativeTabs TFCPottery = new TFCTabs("TFCPottery");
-	public static CreativeTabs TFCDevices = new TFCTabs("TFCDevices");
-	public static CreativeTabs TFCFoods = new TFCTabs("TFCFoods");
+	public static CreativeTabs TFCMaterials = new TFCTabs("TFCMaterials");
 
 	private int itemIndex;
 	private ItemStack is;

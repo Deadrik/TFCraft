@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
@@ -37,6 +38,7 @@ public class BlockTFCFence extends BlockFence
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0, 16);
 		iconsPost = new IIcon[woodNames.length];
 		iconsPostTop = new IIcon[woodNames.length];
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 	}
 
 	/**

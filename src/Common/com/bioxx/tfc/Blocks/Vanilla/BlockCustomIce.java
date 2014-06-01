@@ -17,6 +17,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.TFCProvider;
@@ -31,6 +32,7 @@ public class BlockCustomIce extends BlockIce
 	public BlockCustomIce()
 	{
 		super();
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
 	/**

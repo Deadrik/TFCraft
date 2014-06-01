@@ -2,19 +2,20 @@ package com.bioxx.tfc.Blocks.Flora;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Blocks.BlockTerra;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Core.TFCTabs;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -29,7 +30,7 @@ public class BlockFlora extends BlockTerra
 		MetaNames = new String[]{"Golden Rod", "Cat Tails"};
 		icons = new IIcon[MetaNames.length];
 		this.setBlockBounds(0.3f, 0.0f, 0.3f, 0.7f, 0.7f, 0.7f);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 	}
 
 	@Override

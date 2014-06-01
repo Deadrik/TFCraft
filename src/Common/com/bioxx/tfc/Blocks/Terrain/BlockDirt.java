@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -32,7 +33,7 @@ public class BlockDirt extends BlockTerra
 	public BlockDirt(int texOff)
 	{
 		super(Material.ground);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 		textureOffset = texOff;
 	}
 

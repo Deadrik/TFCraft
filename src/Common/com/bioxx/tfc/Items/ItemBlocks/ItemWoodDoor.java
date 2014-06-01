@@ -1,16 +1,16 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemWoodDoor extends ItemTerra
 {
@@ -20,7 +20,7 @@ public class ItemWoodDoor extends ItemTerra
 	{
 		super();
 		this.maxStackSize = 1;
-		this.setCreativeTab(CreativeTabs.tabRedstone);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 		woodType = woodID;
 		setFolder("wood/");
 	}

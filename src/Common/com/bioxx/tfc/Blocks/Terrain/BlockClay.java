@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockClay extends BlockTerra
@@ -26,7 +27,7 @@ public class BlockClay extends BlockTerra
 	public BlockClay(int texOff)
 	{
 		super(Material.clay);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 		textureOffset = texOff;
 	}
 

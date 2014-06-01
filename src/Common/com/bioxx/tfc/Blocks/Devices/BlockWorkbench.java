@@ -2,11 +2,11 @@ package com.bioxx.tfc.Blocks.Devices;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.IIcon;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Core.TFCTabs;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,7 +21,7 @@ public class BlockWorkbench extends BlockTerra
 	public BlockWorkbench()
 	{
 		super(Material.wood);
-		this.setCreativeTab(CreativeTabs.tabRedstone);
+		this.setCreativeTab(TFCTabs.TFCDevices);
 	}
 
 	@SideOnly(Side.CLIENT)

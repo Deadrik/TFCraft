@@ -1,12 +1,12 @@
 package com.bioxx.tfc.Items.Tools;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
-
-import net.minecraft.client.renderer.texture.IIconRegister;
 public class ItemMiscToolHead extends ItemTerra
 {
 	private ToolMaterial material = null;
@@ -16,7 +16,7 @@ public class ItemMiscToolHead extends ItemTerra
 		super();
 		this.setMaxDamage(100);
 		this.setMaxStackSize(4);
-		setCreativeTab(TFCTabs.TFCUnfinished);
+		setCreativeTab(TFCTabs.TFCMisc);
 		this.setFolder("toolheads/");
 		this.setWeight(EnumWeight.MEDIUM);
 		this.setSize(EnumSize.SMALL);

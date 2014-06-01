@@ -1,17 +1,17 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.IIcon;
+
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockSedSmooth extends BlockSmooth
 {
 	public BlockSedSmooth()
 	{
 		super(Material.rock);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 		names = Global.STONE_SED;
 		icons = new IIcon[names.length];
 	}

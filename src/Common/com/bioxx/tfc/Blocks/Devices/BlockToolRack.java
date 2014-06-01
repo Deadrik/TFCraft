@@ -26,6 +26,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.Tools.ItemProPick;
 import com.bioxx.tfc.Items.Tools.ItemSpindle;
 import com.bioxx.tfc.Items.Tools.ItemWeapon;
@@ -43,7 +44,7 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	public BlockToolRack()
 	{
 		super(Material.wood);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 		this.woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, this.woodNames, 0, 16);
 	}

@@ -2,12 +2,9 @@ package com.bioxx.tfc.Blocks.Vanilla;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -17,6 +14,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -31,7 +32,7 @@ public class BlockCustomCactus extends Block implements IPlantable
 	{
 		super(Material.cactus);
 		this.setTickRandomly(true);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 	}
 
 	/**
@@ -182,6 +183,7 @@ public class BlockCustomCactus extends Block implements IPlantable
 		par5Entity.attackEntityFrom(DamageSource.cactus, 25);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{

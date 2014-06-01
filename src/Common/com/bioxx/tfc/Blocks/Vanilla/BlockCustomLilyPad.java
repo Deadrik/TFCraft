@@ -2,17 +2,18 @@ package com.bioxx.tfc.Blocks.Vanilla;
 
 import java.util.List;
 
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLilyPad;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -24,12 +25,13 @@ public class BlockCustomLilyPad extends BlockLilyPad
 		float f = 0.5F;
 		float f1 = 0.015625F;
 		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 	}
 
 	/**
 	 * The type of render function that is called for this block
 	 */
+	@Override
 	public int getRenderType()
 	{
 		return 23;
@@ -39,6 +41,7 @@ public class BlockCustomLilyPad extends BlockLilyPad
 	 * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
 	 * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
 	 */
+	@Override
 	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
 	{
 		if (par7Entity == null || !(par7Entity instanceof EntityBoat))
@@ -49,17 +52,20 @@ public class BlockCustomLilyPad extends BlockLilyPad
 	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
 	 * cleared to be reused)
 	 */
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		return AxisAlignedBB.getAABBPool().getAABB((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
 	{
 		return 2129968;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Returns the color this block should be rendered. Used by leaves.
@@ -80,6 +86,7 @@ public class BlockCustomLilyPad extends BlockLilyPad
 		this.blockIcon = par1IconRegister.registerIcon(this.getTextureName());
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
@@ -109,6 +116,7 @@ public class BlockCustomLilyPad extends BlockLilyPad
 	/**
 	 * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
 	 */
+	@Override
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
 	{
 		Block id = par1World.getBlock(par2, par3 - 1, par4);

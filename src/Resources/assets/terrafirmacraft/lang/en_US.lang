@@ -2283,10 +2283,11 @@ itemGroup.TFCMaterials=(TFC) Materials
 itemGroup.TFCMisc=(TFC) Misc
 itemGroup.TFCPottery=(TFC) Pottery
 itemGroup.TFCTools=(TFC) Tools
-itemGroup.TFCUnfinished=(TFC) Unfinished Items
 itemGroup.TFCWeapons=(TFC) Weapons
 itemGroup.TFCDevices=(TFC) Devices
-itemGroup.TFCFoods=(TFC) Foods
+itemGroup.TFCFoods=(TFC) Foodstuffs
+itemGroup.TFCBuilding=(TFC) Building Blocks
+itemGroup.TFCDecoration=(TFC) Decoration Blocks
 
 #== Skill GUI ==
 skill.armorsmith=Armor Smithing

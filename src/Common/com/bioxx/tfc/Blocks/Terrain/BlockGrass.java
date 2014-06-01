@@ -19,6 +19,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.ColorizerGrassTFC;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
@@ -45,12 +46,14 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	{
 		super();
 		this.setTickRandomly(true);
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
 	public BlockGrass(int texOff)
 	{
 		this();
 		textureOffset = texOff;
+		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
 
 	@Override

@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
 import com.bioxx.tfc.api.IMultipleBlock;
 import com.bioxx.tfc.api.Constant.Global;
@@ -38,6 +39,7 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
 		woodNames = new String[Global.WOOD_ALL.length - 16];
 		System.arraycopy(Global.WOOD_ALL, 16, woodNames, 0, Global.WOOD_ALL.length - 16);
 		icons = new IIcon[woodNames.length];
+		this.setCreativeTab(TFCTabs.TFCDevices);
 	}
 
 	@Override

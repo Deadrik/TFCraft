@@ -4,7 +4,6 @@ import static net.minecraftforge.common.util.ForgeDirection.DOWN;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -18,6 +17,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.TileEntities.TEChest;
 
 import cpw.mods.fml.relauncher.Side;
@@ -28,7 +28,7 @@ public class BlockChestTFC extends BlockTerraContainer
 	public BlockChestTFC()
 	{
 		super(Material.wood);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 		this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
 	}
 

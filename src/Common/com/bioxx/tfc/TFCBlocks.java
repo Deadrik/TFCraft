@@ -3,7 +3,6 @@ package com.bioxx.tfc;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 
 import com.bioxx.tfc.Blocks.BlockBloom;
@@ -107,6 +106,7 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockCustomWall;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence2;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Fluids;
 import com.bioxx.tfc.Items.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBarrels2;
@@ -652,7 +652,7 @@ public class TFCBlocks
 
 		Barrel = new BlockBarrel().setBlockName("Barrel").setHardness(2);
 		Barrel2 = new BlockBarrel2().setBlockName("Barrel").setHardness(2);
-		Thatch = new BlockThatch().setBlockName("Thatch").setHardness(1).setStepSound(Block.soundTypeGrass).setCreativeTab(CreativeTabs.tabBlock);
+		Thatch = new BlockThatch().setBlockName("Thatch").setHardness(1).setStepSound(Block.soundTypeGrass).setCreativeTab(TFCTabs.TFCBuilding);
 		Moss = new BlockMoss().setBlockName("Moss").setHardness(1).setStepSound(Block.soundTypeGrass);
 
 		Flora = new BlockFlora().setBlockName("Flora").setHardness(0.1f).setStepSound(Block.soundTypeGrass);
@@ -686,7 +686,7 @@ public class TFCBlocks
 		Lava = (new BlockCustomLiquid(TFC_Fluids.LAVA, Material.lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("Lava");
 		Ice = new BlockCustomIce().setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("Ice").setBlockTextureName("ice");
 
-		SeaGrassStill = new BlockTallSeaGrassStill().setBlockName("SeaGrassStill").setHardness(0.3f).setCreativeTab(CreativeTabs.tabDecorations);
+		SeaGrassStill = new BlockTallSeaGrassStill().setBlockName("SeaGrassStill").setHardness(0.3f).setCreativeTab(TFCTabs.TFCDecoration);
 		SeaGrassFrozen = (new BlockFrozenSeaGrass()).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("SeaGrassIce");
 
 		FireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);

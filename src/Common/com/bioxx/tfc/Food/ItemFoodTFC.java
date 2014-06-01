@@ -287,7 +287,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		float decay = getFoodDecay(is);
 		float weight = getFoodWeight(is);
-		int percent = (int)((decay / weight) * 100);
+		int percent = (int) ((decay / weight) * 100);
 		percent = percent > 0 ? percent < 100 ? percent : 100 : 0;
 		return percent;
 	}
@@ -295,7 +295,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public boolean isDamaged(ItemStack is)
 	{
-		return true;
+		if (is.hasTagCompound())
+			return true;
+		else
+			return false;
 	}
 
 	@Override

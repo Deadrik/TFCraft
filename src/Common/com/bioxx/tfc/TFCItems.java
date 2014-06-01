@@ -1266,7 +1266,7 @@ public class TFCItems
 		RedSteelHammer = new ItemHammer(RedSteelToolMaterial, 240).setUnlocalizedName("Red Steel Hammer").setMaxDamage(RedSteelUses);
 		SteelHammer = new ItemHammer(SteelToolMaterial, 170).setUnlocalizedName("Steel Hammer").setMaxDamage(SteelUses);
 
-		Ink = new ItemTerra().setUnlocalizedName("Ink");
+		Ink = new ItemTerra().setUnlocalizedName("Ink").setCreativeTab(TFCTabs.TFCMaterials);
 		FireStarter = new ItemFirestarter().setFolder("tools/").setUnlocalizedName("Firestarter");
 
 		//Tool heads
@@ -1368,7 +1368,7 @@ public class TFCItems
 		HCRedSteelUnshaped = new ItemMeltedMetal().setUnlocalizedName("HC Red Steel Unshaped");
 		WeakSteelUnshaped = new ItemMeltedMetal().setUnlocalizedName("Weak Steel Unshaped");
 		HCSteelUnshaped = new ItemMeltedMetal().setUnlocalizedName("HC Steel Unshaped");
-		Coke = (new ItemTerra().setUnlocalizedName("Coke"));
+		Coke = (new ItemTerra().setUnlocalizedName("Coke").setCreativeTab(TFCTabs.TFCMaterials));
 
 		BismuthBronzeProPickHead = new ItemMiscToolHead().setUnlocalizedName("Bismuth Bronze ProPick Head");
 		BlackBronzeProPickHead = new ItemMiscToolHead().setUnlocalizedName("Black Bronze ProPick Head");
@@ -1494,9 +1494,10 @@ public class TFCItems
 		WoolYarn = new ItemTerra().setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
 		Wool = new ItemTerra().setUnlocalizedName("Wool").setCreativeTab(TFCTabs.TFCMaterials);
 		WoolCloth = new ItemTerra().setUnlocalizedName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
-		Spindle = new ItemSpindle().setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCMaterials).setCreativeTab(TFCTabs.TFCTools);
+		Spindle = new ItemSpindle().setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCPottery);
 
-		SpindleHead = new ItemPotteryBase().setMetaNames(new String[]{"Clay Spindle", "Spindle Head"}).setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCUnfinished);
+		SpindleHead = new ItemPotteryBase().setMetaNames(new String[]
+		{ "Clay Spindle", "Spindle Head" }).setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCPottery);
 		StoneBrick = (new ItemStoneBrick().setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
 		Mortar = new ItemTerra().setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
 		//FIXME these buckets need proper forge fluid implementation
@@ -1574,7 +1575,7 @@ public class TFCItems
 		// Food related items
 		SetupFood();
 
-		Fertilizer = new ItemFertilizer().setUnlocalizedName("Fertilizer");
+		Fertilizer = new ItemFertilizer().setUnlocalizedName("Fertilizer").setCreativeTab(TFCTabs.TFCMaterials);
 
 		/**Armor Crafting related items*/
 		SetupArmor();
@@ -1621,15 +1622,16 @@ public class TFCItems
 		Recipes.Gems  = new Item[]{GemAgate, GemAmethyst, GemBeryl, GemDiamond, GemEmerald, GemGarnet, 
 				GemJade, GemJasper, GemOpal,GemRuby,GemSapphire,GemTopaz,GemTourmaline};
 
-		((TFCTabs)TFCTabs.TFCTools).setTabIconItem(SteelHammer);
-		((TFCTabs)TFCTabs.TFCMaterials).setTabIconItem(LeadIngot);
-		((TFCTabs)TFCTabs.TFCUnfinished).setTabIconItem(SteelHammerHead);
-		((TFCTabs)TFCTabs.TFCArmor).setTabIconItem(SteelHelmet);
-		((TFCTabs)TFCTabs.TFCMisc).setTabIconItem(BlueSteelBucketLava);
-		((TFCTabs)TFCTabs.TFCPottery).setTabIconItemStack(new ItemStack(PotteryJug, 1, 1));
-		((TFCTabs)TFCTabs.TFCWeapons).setTabIconItemStack(new ItemStack(SteelSword, 1));
-		((TFCTabs)TFCTabs.TFCDevices).setTabIconItemStack(new ItemStack(SluiceItem, 1));
-		((TFCTabs)TFCTabs.TFCFoods).setTabIconItem(Items.cooked_porkchop);
+		((TFCTabs) TFCTabs.TFCBuilding).setTabIconItemStack(new ItemStack(TFCBlocks.StoneSedBrick));
+		((TFCTabs) TFCTabs.TFCDecoration).setTabIconItemStack(new ItemStack(TFCBlocks.Flora));
+		((TFCTabs) TFCTabs.TFCDevices).setTabIconItem(SluiceItem);
+		((TFCTabs) TFCTabs.TFCPottery).setTabIconItemStack(new ItemStack(PotteryJug, 1, 1));
+		((TFCTabs) TFCTabs.TFCMisc).setTabIconItem(BlueSteelBucketLava);
+		((TFCTabs) TFCTabs.TFCFoods).setTabIconItem(RedApple);
+		((TFCTabs) TFCTabs.TFCTools).setTabIconItem(RedSteelAxe);
+		((TFCTabs) TFCTabs.TFCWeapons).setTabIconItem(BismuthBronzeSword);
+		((TFCTabs) TFCTabs.TFCArmor).setTabIconItem(BronzeHelmet);
+		((TFCTabs) TFCTabs.TFCMaterials).setTabIconItem(BlueSteelIngot);
 
 
 		registerMetals();

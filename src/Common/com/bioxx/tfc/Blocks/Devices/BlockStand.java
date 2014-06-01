@@ -26,6 +26,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemBarrels;
 import com.bioxx.tfc.TileEntities.TEStand;
@@ -42,7 +43,7 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock
 	public BlockStand()
 	{
 		super(Material.wood);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 		this.setBlockBounds(0.125f, 0, 0.125f, 0.875f, 1, 0.875f);
 		woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0,16);

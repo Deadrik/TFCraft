@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.TileEntities.TileEntitySapling;
@@ -38,7 +39,7 @@ public class BlockSapling extends BlockTerraContainer
 		this.woodNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, this.woodNames, 0, 16);
 		this.setTickRandomly(true);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 		this.icons = new IIcon[woodNames.length];
 	}
 
