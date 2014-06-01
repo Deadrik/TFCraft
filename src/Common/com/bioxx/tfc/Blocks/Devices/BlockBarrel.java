@@ -33,14 +33,12 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemBarrels;
 import com.bioxx.tfc.TileEntities.TEBarrel;
-import com.bioxx.tfc.api.IMultipleBlock;
-import com.bioxx.tfc.api.IPipeConnectable;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, IPipeConnectable
+public class BlockBarrel extends BlockTerraContainer
 {
 	private final Random random = new Random();
 	private String[] woodNames;
@@ -232,7 +230,7 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 		if (world.isBlockIndirectlyGettingPowered(x, y, z))
 		{
 			TEBarrel TE = (TEBarrel)world.getTileEntity(x, y, z);
-			if(TE.liquidLevel == 256 && TE.Type == 4 && !TE.getSealed())
+			if(TE.getFluidLevel() == 256 && /*TE.Type == 4 &&*/ !TE.getSealed())
 			{
 				TE.setSealed();
 				BarrelEntity BE = new BarrelEntity(world, x, y, z);
@@ -276,8 +274,11 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 
-		nbt.setInteger("liqLev", te.liquidLevel);
-		nbt.setInteger("type", te.Type);
+		NBTTagCompound fluidNBT = new NBTTagCompound();
+		if(te.fluid != null)
+			te.fluid.writeToNBT(fluidNBT);
+		nbt.setTag("fluidNBT", fluidNBT);
+
 		nbt.setBoolean("sealed", te.getSealed());
 
 		NBTTagList nbttaglist = new NBTTagList();
@@ -311,7 +312,7 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 			if(world.getTileEntity(x, y, z) != null)
 			{
 				TEBarrel TeBarrel = (TEBarrel)(world.getTileEntity(x, y, z));
-				if(TeBarrel.liquidLevel == 256 && TeBarrel.Type == 4 && TeBarrel.getSealed())
+				if(TeBarrel.getFluidLevel() == 256 && /*TeBarrel.Type == 4 &&*/ TeBarrel.getSealed())
 				{
 					List<Entity> list = world.getEntitiesWithinAABB(BarrelEntity.class, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1));
 					for(Entity entity : list)
@@ -360,54 +361,5 @@ public class BlockBarrel extends BlockTerraContainer implements IMultipleBlock, 
 	public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
 	{
 		return true;
-	}
-
-	@Override
-	public Block getBlockTypeForRender()
-	{
-		return TFCBlocks.Planks;
-	}
-
-	@Override
-	public boolean canConnectTo(IBlockAccess world, int desiredFace, int x, int y, int z)
-	{
-		return true;
-	}
-
-	@Override
-	public boolean feed(IBlockAccess world, int fedFace, int x, int y, int z, boolean isLiquid, boolean needsPipe)
-	{
-		TEBarrel te = ((TEBarrel)(world.getTileEntity(x, y, z)));
-		if(te != null && te.liquidLevel < 256)
-		{
-			te.liquidLevel += 4;
-			te.Type = 1;
-			te.updateGui();
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public int hasToBeOnlyOption()
-	{
-		return 0;
-	}
-
-	@Override
-	public int getSide(IBlockAccess world, int x, int y, int z)
-	{
-		return -1;
-	}
-
-	@Override
-	public int getFinalBit(IBlockAccess world, int x, int y, int z)
-	{
-		return 0;
-	}
-
-	@Override
-	public boolean isPipe() {
-		return false;
 	}
 }

@@ -7,9 +7,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.TerraFirmaCraft;
 
 public class TFC_Fluids
 {
@@ -47,12 +45,15 @@ public class TFC_Fluids
 		}
 	}.setLuminosity(15).setDensity(3000).setViscosity(6000).setTemperature(1300).setUnlocalizedName(Blocks.lava.getUnlocalizedName());
 
+	public static final Fluid RUM = new Fluid("rum");
+
 	public static void register()
 	{
 		FluidRegistry.registerFluid(LAVA);
 		FluidRegistry.registerFluid(SALTWATER);
 		FluidRegistry.registerFluid(FRESHWATER);
 		FluidRegistry.registerFluid(HOTWATER);
+		FluidRegistry.registerFluid(RUM);
 	}
 
 	public static void registerFluidContainers()
@@ -62,13 +63,5 @@ public class TFC_Fluids
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(SALTWATER.getName()), new ItemStack(TFCItems.RedSteelBucketSaltWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(FRESHWATER.getName()), new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(SALTWATER.getName()), new ItemStack(TFCItems.WoodenBucketSaltWater), new ItemStack(TFCItems.WoodenBucketEmpty));
-	}
-
-	public static void registerFluidIcons()
-	{
-		TerraFirmaCraft.proxy.registerFluidIcons(LAVA, TFCBlocks.Lava);
-		TerraFirmaCraft.proxy.registerFluidIcons(SALTWATER, TFCBlocks.SaltWater);
-		TerraFirmaCraft.proxy.registerFluidIcons(FRESHWATER, TFCBlocks.FreshWater);
-		TerraFirmaCraft.proxy.registerFluidIcons(HOTWATER, TFCBlocks.HotWater);
 	}
 }

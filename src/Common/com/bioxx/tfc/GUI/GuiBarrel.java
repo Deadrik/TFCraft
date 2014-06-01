@@ -62,7 +62,7 @@ public class GuiBarrel extends GuiContainer
 			else if(guiTab == 1)
 				((GuiButton)buttonList.get(1)).visible = true;//Turn on Liquid
 		}
-		if(barrel.liquidLevel > 0)
+		if(barrel.getFluidLevel() > 0)
 		{
 			if(guiTab == 0)
 				((GuiButton)buttonList.get(3)).visible = false;//Turn off Solid
@@ -216,7 +216,7 @@ public class GuiBarrel extends GuiContainer
 				barrel.actionEmpty();
 			else if (guibutton.id == 2)
 				barrel.actionMode();
-			else if (guibutton.id == 3 && barrel.liquidLevel == 0 && barrel.getInvCount() == 0)
+			else if (guibutton.id == 3 && barrel.getFluidLevel() == 0 && barrel.getInvCount() == 0)
 				barrel.actionSwitchTab(1, player);
 		}
 		else if(guiTab == 1)
@@ -255,8 +255,8 @@ public class GuiBarrel extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j)
 	{
-		if(guiTab == 0)
-			drawCenteredString(this.fontRendererObj, TEBarrel.getType(barrel.Type), 88, 7, 0x555555);
+		/*if(guiTab == 0)
+			drawCenteredString(this.fontRendererObj, TEBarrel.getType(barrel.Type), 88, 7, 0x555555);*/
 	}
 
 	@Override

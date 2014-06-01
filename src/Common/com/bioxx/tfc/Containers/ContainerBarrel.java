@@ -94,8 +94,8 @@ public class ContainerBarrel extends ContainerTFC
 		for (int var1 = 0; var1 < this.crafters.size() && guiTab == 0; ++var1)
 		{
 			ICrafting var2 = (ICrafting)this.crafters.get(var1);
-			if (this.liquidLevel != this.barrel.liquidLevel)
-				var2.sendProgressBarUpdate(this, 0, this.barrel.liquidLevel);
+			if (this.liquidLevel != this.barrel.getFluidLevel())
+				var2.sendProgressBarUpdate(this, 0, this.barrel.getFluidLevel());
 		}
 	}
 
@@ -103,6 +103,9 @@ public class ContainerBarrel extends ContainerTFC
 	public void updateProgressBar(int par1, int par2)
 	{
 		if (par1 == 0)
-			this.barrel.liquidLevel = par2;
+		{
+			if(barrel.fluid != null)
+				this.barrel.fluid.amount = par2;
+		}
 	}
 }

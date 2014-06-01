@@ -2,14 +2,12 @@ package com.bioxx.tfc;
 
 import java.io.File;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
 
 import com.bioxx.tfc.Entities.EntityCustomMinecart;
 import com.bioxx.tfc.Entities.EntityJavelin;
@@ -49,6 +47,7 @@ import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.TileEntities.TECrop;
 import com.bioxx.tfc.TileEntities.TECrucible;
 import com.bioxx.tfc.TileEntities.TEDetailed;
+import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEFruitLeaves;
@@ -64,7 +63,6 @@ import com.bioxx.tfc.TileEntities.TEStand;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TileEntityBloom;
 import com.bioxx.tfc.TileEntities.TileEntityEarlyBloomery;
-import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
@@ -85,9 +83,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CommonProxy
 {
-	public void registerFluidIcons(Fluid f, Block b)
+	public void registerFluidIcons()
 	{
-		// NOOP on server
+
 	}
 
 	public void registerRenderInformation()

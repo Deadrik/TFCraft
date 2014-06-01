@@ -219,7 +219,7 @@ public class TerraFirmaCraft
 
 		// Register Liquids
 		TFC_Fluids.registerFluidContainers();
-		TFC_Fluids.registerFluidIcons();
+		proxy.registerFluidIcons();
 
 		//Setup custom potion effects
 		TFCPotion.Setup();

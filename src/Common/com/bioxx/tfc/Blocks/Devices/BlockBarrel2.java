@@ -2,17 +2,13 @@ package com.bioxx.tfc.Blocks.Devices;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Items.ItemBarrels2;
-import com.bioxx.tfc.api.IMultipleBlock;
-import com.bioxx.tfc.api.IPipeConnectable;
 import com.bioxx.tfc.api.Constant.Global;
 
-public class BlockBarrel2 extends BlockBarrel implements IMultipleBlock, IPipeConnectable
+public class BlockBarrel2 extends BlockBarrel
 {
 	private final Random random = new Random();
 	String[] woodNames;
@@ -32,11 +28,5 @@ public class BlockBarrel2 extends BlockBarrel implements IMultipleBlock, IPipeCo
 		for(int i = 0; i < woodNames.length;i++)
 			j = s.substring(s.indexOf("l",s.length()))==((ItemBarrels2)(TFCItems.Barrel)).MetaNames[i]?i:0;
 		return new ItemStack(TFCItems.Barrel, 1, j);
-	}
-	
-	@Override
-	public Block getBlockTypeForRender()
-	{
-		return TFCBlocks.Planks2;
 	}
 }

@@ -7,51 +7,86 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.api.IMultipleBlock;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TileEntities.TEBarrel;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
-public class RenderBarrel  implements ISimpleBlockRenderingHandler
+public class RenderBarrel implements ISimpleBlockRenderingHandler
 {
-	static float pixel3 = 3f/16f;
-	static float pixel5 = 5f/16f;
-	static float pixel12 = 12f/16f;
-	static float pixel14 = 14f/16f;
+	static float min = 0.1F;
+	static float max = 0.9F;
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int i, int j, int k, Block block, int modelId, RenderBlocks renderer)
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		Block blockToRender;
-		blockToRender = ((IMultipleBlock)block).getBlockTypeForRender();
+		TEBarrel te = (TEBarrel) world.getTileEntity(x, y, z);
+		Block planksBlock;
+		Block lidBlock;
+		if(block == TFCBlocks.Barrel)
+		{
+			planksBlock = TFCBlocks.Planks;
+			lidBlock = TFCBlocks.WoodSupportH;
+		}
+		else
+		{
+			planksBlock = TFCBlocks.Planks2;
+			lidBlock = TFCBlocks.WoodSupportH2;
+		}
 		renderer.renderAllFaces = true;
-		IBlockAccess blockAccess = renderer.blockAccess;
-		renderer.setRenderBounds(0.15F, 0.1F, 0.15F, 0.85F, 0.9F, 0.85F);
-		renderer.renderStandardBlock(blockToRender, i, j, k);
 
-		renderer.setRenderBounds(0.1F, 0F, 0.15F, 0.15F, 1F, 0.85F);
-		rotate(renderer, 1);
-		renderer.renderStandardBlock(blockToRender, i, j, k);
-		rotate(renderer, 0);
-		renderer.renderStandardBlock(block, i, j, k);
+		if((te.rotation & -128) == 0)
+		{
+			if(te.getSealed())
+			{
+				renderer.setRenderBounds(min+0.05F, min, min+0.05F, max-0.05F, 0.95F, max-0.05F);
+			}
+			else
+			{
+				renderer.setRenderBounds(min+0.05F, min, min+0.05F, max-0.05F, min+0.05F, max-0.05F);
+			}
+			renderer.renderStandardBlock(lidBlock, x, y, z);
+			renderer.setRenderBounds(min, 0F, min+0.05F, min+0.05F, 1F, max-0.05F);
+			rotate(renderer, 1);
+			renderer.renderStandardBlock(planksBlock, x, y, z);
+			rotate(renderer, 0);
+			renderer.renderStandardBlock(block, x, y, z);
 
-		renderer.setRenderBounds(0.85F, 0F, 0.15F, 0.9F, 1F, 0.85F);
-		rotate(renderer, 1);
-		renderer.renderStandardBlock(blockToRender, i, j, k);
-		rotate(renderer, 0);
-		renderer.renderStandardBlock(block, i, j, k);
+			renderer.setRenderBounds(max-0.05F, 0F, min+0.05F, max, 1F, max-0.05F);
+			rotate(renderer, 1);
+			renderer.renderStandardBlock(planksBlock, x, y, z);
+			rotate(renderer, 0);
+			renderer.renderStandardBlock(block, x, y, z);
 
-		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 1F, 0.15F);
-		rotate(renderer, 1);
-		renderer.renderStandardBlock(blockToRender, i, j, k);
-		rotate(renderer, 0);
-		renderer.renderStandardBlock(block, i, j, k);
+			renderer.setRenderBounds(min, 0F, min, max, 1F, min+0.05F);
+			rotate(renderer, 1);
+			renderer.renderStandardBlock(planksBlock, x, y, z);
+			rotate(renderer, 0);
+			renderer.renderStandardBlock(block, x, y, z);
 
-		renderer.setRenderBounds(0.1F, 0F, 0.85F, 0.9F, 1F, 0.9F);
-		rotate(renderer, 1);
-		renderer.renderStandardBlock(blockToRender, i, j, k);
-		rotate(renderer, 0);
-		renderer.renderStandardBlock(block, i, j, k);
+			renderer.setRenderBounds(min, 0F, max-0.05F, max, 1F, max);
+			rotate(renderer, 1);
+			renderer.renderStandardBlock(planksBlock, x, y, z);
+			rotate(renderer, 0);
+			renderer.renderStandardBlock(block, x, y, z);
+		}
+		else
+		{
+			if((te.rotation & 3) == 0)
+			{
+				renderer.setRenderBounds(min, min, min+0.05F, 0.95F, min+0.05F, max-0.05F);
+				renderer.renderStandardBlock(lidBlock, x, y, z);
+			}
+			if((te.rotation & 3) == 1)
+			{
+				renderer.setRenderBounds(min+0.05F, min, min,max-0.05F, min+0.05F, 0.95F);
+				renderer.renderStandardBlock(lidBlock, x, y, z);
+			}
+		}
+
+
 		renderer.renderAllFaces = false;
+
 		return true;
 	}
 
@@ -66,34 +101,44 @@ public class RenderBarrel  implements ISimpleBlockRenderingHandler
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
-		Block blockToRender;
-		blockToRender = ((IMultipleBlock)block).getBlockTypeForRender();
+		Block planksBlock;
+		Block lidBlock;
+		if(block == TFCBlocks.Barrel)
+		{
+			planksBlock = TFCBlocks.Planks;
+			lidBlock = TFCBlocks.WoodSupportH;
+		}
+		else
+		{
+			planksBlock = TFCBlocks.Planks2;
+			lidBlock = TFCBlocks.WoodSupportH2;
+		}
 
-		renderer.setRenderBounds(0.15F, 0.2F, 0.15F, 0.85F, 0.8F, 0.85F);
+		renderer.setRenderBounds(min+0.05F, min, min+0.05F, max-0.05F, 0.95F, max-0.05F);
 		rotate(renderer, 1);
-		renderInvBlock(blockToRender, metadata, renderer);
+		renderInvBlock(lidBlock, metadata, renderer);
 
-		renderer.setRenderBounds(0.1F, 0F, 0.15F, 0.15F, 1F, 0.85F);
+		renderer.setRenderBounds(min, 0F, min+0.05F, min+0.05F, 1F, max-0.05F);
 		rotate(renderer, 1);
-		renderInvBlock(blockToRender, metadata, renderer);
+		renderInvBlock(planksBlock, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
 
-		renderer.setRenderBounds(0.85F, 0F, 0.15F, 0.9F, 1F, 0.85F);
+		renderer.setRenderBounds(max-0.05F, 0F, min+0.05F, max, 1F, max-0.05F);
 		rotate(renderer, 1);
-		renderInvBlock(blockToRender, metadata, renderer);
+		renderInvBlock(planksBlock, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
 
-		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 1F, 0.15F);
+		renderer.setRenderBounds(min, 0F, min, max, 1F, min+0.05F);
 		rotate(renderer, 1);
-		renderInvBlock(blockToRender, metadata, renderer);
+		renderInvBlock(planksBlock, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
 
-		renderer.setRenderBounds(0.1F, 0F, 0.85F, 0.9F, 1F, 0.9F);
+		renderer.setRenderBounds(min, 0F, max-0.05F, max, 1F, max);
 		rotate(renderer, 1);
-		renderInvBlock(blockToRender, metadata, renderer);
+		renderInvBlock(planksBlock, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
 	}

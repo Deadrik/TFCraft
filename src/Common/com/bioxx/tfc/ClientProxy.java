@@ -2,7 +2,6 @@ package com.bioxx.tfc;
 
 import java.io.File;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.RenderArrow;
@@ -24,10 +23,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
 
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
 import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Fluids;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.EntityCustomMinecart;
 import com.bioxx.tfc.Entities.EntityFishHookTFC;
@@ -150,10 +149,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy
 {
+
 	@Override
-	public void registerFluidIcons(Fluid f, Block b)
+	public void registerFluidIcons()
 	{
-		f.setIcons(b.getIcon(0, 0), b.getIcon(2, 0));
+		TFC_Fluids.LAVA.setIcons(TFCBlocks.Lava.getIcon(0, 0), TFCBlocks.Lava.getIcon(2, 0));
+		TFC_Fluids.SALTWATER.setIcons(TFCBlocks.SaltWater.getIcon(0, 0), TFCBlocks.SaltWater.getIcon(2, 0));
+		TFC_Fluids.FRESHWATER.setIcons(TFCBlocks.FreshWater.getIcon(0, 0), TFCBlocks.FreshWater.getIcon(2, 0));
+		TFC_Fluids.HOTWATER.setIcons(TFCBlocks.HotWater.getIcon(0, 0), TFCBlocks.HotWater.getIcon(2, 0));
 	}
 
 	@Override

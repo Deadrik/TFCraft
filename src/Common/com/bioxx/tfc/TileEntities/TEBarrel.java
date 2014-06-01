@@ -10,18 +10,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.fluids.FluidStack;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.api.IPipeConnectable;
 import com.bioxx.tfc.api.TFCOptions;
 
 public class TEBarrel extends NetworkTileEntity implements IInventory
 {
-	public int liquidLevel;
-	public int Type;
+	public FluidStack fluid = null;
+	public byte rotation = 0;
 	public int barrelType;
 	public int mode;
 	public ItemStack[] storage;
@@ -30,10 +29,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	private int sealtimecounter;
 	public Item[] alcohols;
 	public final int SEALTIME = TFCOptions.enableDebugMode ? 0 : (int)((TFC_Time.hourLength * 12) / 100);//default 80
+	public static final int MODE_IN = 0;
+	public static final int MODE_OUT = 1;
 
 	public TEBarrel()
 	{
-		liquidLevel = 0;
 		sealed = false;
 		//itemstack = new ItemStack(1,0,0);
 		sealtimecounter = 0;
@@ -333,22 +333,6 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return count;
 	}
 
-	public void readFromItemNBT(NBTTagCompound nbt)
-	{
-		liquidLevel = nbt.getInteger("liqLev");
-		Type = nbt.getInteger("type");
-		sealed = nbt.getBoolean("sealed");
-
-		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
-		for(int i = 0; i < nbttaglist.tagCount(); i++)
-		{
-			NBTTagCompound nbt1 = nbttaglist.getCompoundTagAt(i);
-			byte byte0 = nbt1.getByte("Slot");
-			if(byte0 >= 0 && byte0 < 2)
-				setInventorySlotContents(byte0,ItemStack.loadItemStackFromNBT(nbt1));
-		}
-	}
-
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer)
 	{
@@ -369,7 +353,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	//FIXME This needs to use blocks and not ids from now on
 	public boolean checkValidAddition(int i)
 	{
-		if((i == Type || Type == 0 || (Type == 13 && i == 12)) && !sealed && liquidLevel < 256)
+		/*if((i == Type || Type == 0 || (Type == 13 && i == 12)) && !sealed && liquidLevel < 256)
 		{
 			liquidLevel = Math.min(liquidLevel + 32, 256);
 			if(Type == 0 || Type == 13)
@@ -378,9 +362,21 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			}
 			updateGui();
 			return true;
-		}
+		}*/
 		updateGui();
 		return false;
+	}
+
+	public int getFluidLevel()
+	{
+		if(fluid != null)
+			return fluid.amount;
+		return 0;
+	}
+
+	public ItemStack getInputStack()
+	{
+		return storage[0];
 	}
 
 	@Override
@@ -391,9 +387,6 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			careForInventorySlot();
 			if(sealed)
 			{
-				//entityplayer.closeScreen();
-				/*This is where we handle the counter for producing charcoal.
-				 *Once it reaches 24hours, we add charcoal to the fire and remove the wood.*/
 				if(sealtimecounter == 0)
 					sealtimecounter = (int) TFC_Time.getTotalTicks();
 
@@ -405,14 +398,16 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				}
 			}
 
-			if(mode == 1 && liquidLevel > 0 && TFC_Time.getTotalTicks() % 2 == 0 &&
-					((IPipeConnectable)(TFCBlocks.SteamPipe)).feed(worldObj, 0, xCoord, yCoord, zCoord, true, true))
+			if(fluid != null && fluid.amount == 0)
+				fluid = null;
+
+			if(this.getInvCount() == 0 && mode == MODE_IN)
 			{
-				liquidLevel -= 4;
-				updateGui();
+				if(getInputStack() != null)
+				{
+
+				}
 			}
-			if(liquidLevel == 0)
-				Type = 0;
 
 			/*if(mode == 0)
 			{
@@ -544,12 +539,14 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public int getLiquidScaled(int i)
 	{
-		return (int)((liquidLevel / 256f) * i);
+		if(fluid != null)
+			return fluid.amount * i;
+		return 0;
 	}
 
 	public boolean actionSeal()
 	{
-		if(output==null && liquidLevel > 0 && isItemValid())
+		if(output==null && /*liquidLevel > 0 &&*/ isItemValid())
 		{
 			sealed = true;
 			updateGui();
@@ -598,8 +595,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public void actionEmpty()
 	{
-		liquidLevel = 0;
-		Type = 0;
+		fluid = null;
 		updateGui();
 	}
 
@@ -633,12 +629,14 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setInteger("liqLev", liquidLevel);
-		nbt.setInteger("Type", Type);
 		nbt.setBoolean("Sealed", sealed);
 		nbt.setInteger("SealTime", sealtimecounter);
 		nbt.setInteger("mode", mode);
-
+		NBTTagCompound fluidNBT = new NBTTagCompound();
+		if(fluid != null)
+			fluid.writeToNBT(fluidNBT);
+		nbt.setTag("fluidNBT", fluidNBT);
+		nbt.setByte("rotation", rotation);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
 		{
@@ -657,12 +655,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		liquidLevel = nbt.getInteger("liqLev");
-		Type = nbt.getInteger("Type");
+		fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag("fluidNBT"));
 		sealed = nbt.getBoolean("Sealed");
 		sealtimecounter = nbt.getInteger("SealTime");
 		mode = nbt.getInteger("mode");
-
+		rotation = nbt.getByte("rotation");
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		storage = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
@@ -675,6 +672,20 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	}
 
+	public void readFromItemNBT(NBTTagCompound nbt)
+	{
+		fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag("fluidNBT"));
+		sealed = nbt.getBoolean("sealed");
+		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbt1 = nbttaglist.getCompoundTagAt(i);
+			byte byte0 = nbt1.getByte("Slot");
+			if(byte0 >= 0 && byte0 < 2)
+				setInventorySlotContents(byte0,ItemStack.loadItemStackFromNBT(nbt1));
+		}
+	}
+
 	public void updateGui()
 	{
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -682,13 +693,15 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void handleInitPacket(NBTTagCompound nbt) {
-
+	public void handleInitPacket(NBTTagCompound nbt) 
+	{
+		this.rotation = nbt.getByte("rotation");
 	}
 
 	@Override
-	public void createInitNBT(NBTTagCompound nbt) {
-
+	public void createInitNBT(NBTTagCompound nbt) 
+	{
+		nbt.setByte("rotation", rotation);
 	}
 
 	@Override
