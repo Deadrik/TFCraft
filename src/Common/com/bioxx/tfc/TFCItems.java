@@ -661,7 +661,6 @@ public class TFCItems
 	public static Item WoodenBucketEmpty;
 	public static Item WoodenBucketWater;
 	public static Item WoodenBucketSaltWater;
-	public static Item WoodenBucketSalt;
 	public static Item WoodenBucketMilk;
 
 	/**Food Related Items and Blocks*/
@@ -1406,7 +1405,6 @@ public class TFCItems
 		WoodenBucketEmpty = (new ItemCustomBucket(Blocks.air)).setUnlocalizedName("Wooden Bucket Empty");
 		WoodenBucketWater = (new ItemCustomBucket(TFCBlocks.FreshWater)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);
 		WoodenBucketSaltWater = (new ItemCustomBucket(TFCBlocks.SaltWater)).setUnlocalizedName("Wooden Bucket Salt Water").setContainerItem(WoodenBucketEmpty);
-		WoodenBucketSalt = (new ItemCustomBucket(Blocks.air/*FIXME needs salt block*/)).setUnlocalizedName("Wooden Bucket Salt").setContainerItem(WoodenBucketEmpty);
 		WoodenBucketMilk = (new ItemCustomBucketMilk()).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCFoods);
 
 		BismuthBronzeKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Bismuth Bronze Knife Blade");
@@ -2456,7 +2454,6 @@ public class TFCItems
 		GameRegistry.registerItem(WoodenBucketEmpty, WoodenBucketEmpty.getUnlocalizedName());
 		GameRegistry.registerItem(WoodenBucketWater, WoodenBucketWater.getUnlocalizedName());
 		GameRegistry.registerItem(WoodenBucketSaltWater, WoodenBucketSaltWater.getUnlocalizedName());
-		GameRegistry.registerItem(WoodenBucketSalt, WoodenBucketSalt.getUnlocalizedName());
 		GameRegistry.registerItem(WoodenBucketMilk, WoodenBucketMilk.getUnlocalizedName());
 
 		GameRegistry.registerItem(BismuthBronzeKnifeHead, BismuthBronzeKnifeHead.getUnlocalizedName());
