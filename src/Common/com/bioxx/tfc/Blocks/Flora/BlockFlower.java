@@ -68,7 +68,7 @@ public class BlockFlower extends BlockTerra
 
 		for (int i = 0; i < this.icons.length; ++i)
 		{
-			this.icons[i] = register.registerIcon(Reference.ModID+":"+flowerNames[i]);
+			this.icons[i] = register.registerIcon(Reference.ModID+":plants/"+flowerNames[i]);
 		}
 	}
 
