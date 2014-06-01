@@ -5,7 +5,9 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
@@ -17,7 +19,7 @@ import com.bioxx.tfc.TileEntities.TileEntityQuern;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
-public class TESRQuern extends TileEntitySpecialRenderer implements ISimpleBlockRenderingHandler
+public class TESRQuern extends TESRBase implements ISimpleBlockRenderingHandler
 {
 	private static final ResourceLocation BASE_TEXTURE = new ResourceLocation(Reference.ModID + ":textures/blocks/devices/Quern Base.png");
 	private static final ResourceLocation TOP1_TEXTURE = new ResourceLocation(Reference.ModID + ":textures/blocks/devices/Quern Top 1.png");
@@ -36,17 +38,38 @@ public class TESRQuern extends TileEntitySpecialRenderer implements ISimpleBlock
 			this.renderBase(tess);
 			if(teq.hasQuern)
 			{
-				// Both can be used if you want the square block top + the round stone animation
-				// Last parameter is for rendering the round stone sides, no need to render if you can't see them :)
-				this.renderRoundTop(tess, teq.rotatetimer, teq.getWorldObj().rand, true, 0.8); // Renders a round Quern top stone
-				//this.renderSquareTop(tess, teq.rotatetimer, teq.getWorldObj().rand); // Renders the top Quern box
+				/**
+				 * Both renderRoundTop and renderSquareTop can be used if you want the square block top + the round stone animation
+				 * The last parameter is for rendering the round stone sides, no need to render if you can't see them :)
+				 */
+				this.renderRoundTop(tess, teq.rotatetimer, teq.getWorldObj().rand, 0.8, true); // Renders a round Quern top stone
+				//this.renderSquareTop(tess); // Renders the top Quern box
+
 				renderWoodHandle(tess, teq.rotatetimer, teq.getWorldObj().rand, 0.8); // Renders the wooden handle
+				
+				if(teq.storage[0] != null) renderItem(teq.storage[0]); // Renders the input slot item
 			}
 		}
 		GL11.glPopMatrix();
 	}
 
-	private void renderRoundTop(Tessellator t, int pos, Random rand, Boolean renderSides, double angle)
+	private void renderItem(ItemStack is)
+	{
+		EntityItem customitem = new EntityItem(field_147501_a.field_147550_f);
+		float blockScale = 0.7F;
+		float timeD = (float) -(360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+		
+		bindTexture(TextureMap.locationItemsTexture);
+		customitem.setEntityItemStack(is);
+		customitem.hoverStart = 0f;
+		
+		GL11.glTranslatef(0.5f, 0.83f, 0.5f);
+		GL11.glRotatef(timeD, 0.0f, 1.0F, 0.0F);
+		GL11.glScalef(blockScale, blockScale, blockScale);
+		itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
+	}
+
+	private void renderRoundTop(Tessellator t, int pos, Random rand, double angle, Boolean renderSides)
 	{
 		int sides = 4; // how many sides should the quern stone have
 		double speed = pos * 4; // * 4 will make 2 turns, * 1 will make 1 turn, also look at TileEntityQuern
@@ -97,7 +120,7 @@ public class TESRQuern extends TileEntitySpecialRenderer implements ISimpleBlock
 		}
 	}
 
-	private void renderSquareTop(Tessellator t, int pos, Random rand)
+	private void renderSquareTop(Tessellator t)
 	{
 		double i = 0.625; // bottom square point
 		double j = 0.825; // top square point

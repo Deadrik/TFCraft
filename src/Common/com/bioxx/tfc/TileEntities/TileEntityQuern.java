@@ -66,7 +66,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 			// If the output item can not be combined or is different from what is being made, eject and make room for the new output
 			if(storage[1] != null && !(storage[1].getItem() == qr.getResult().getItem() && storage[1].getItemDamage() == qr.getResult().getItemDamage()))
 			{
-				ejectItem(storage[1].copy());
+				ejectItem(storage[1]);
 				storage[1] = null;
 			}
 
@@ -75,13 +75,14 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 				if(storage[1] != null &&
 						storage[1].hasTagCompound() &&
 						storage[1].getTagCompound().hasKey("foodWeight") &&
-						storage[1].getTagCompound().hasKey("foodDecay"))
+						storage[1].getTagCompound().hasKey("foodDecay") &&
+						storage[0].hasTagCompound() &&
+						storage[0].getTagCompound().hasKey("foodWeight") &&
+						storage[0].getTagCompound().hasKey("foodDecay"))
 				{
-					NBTTagCompound slot0nbt = storage[0].getTagCompound();
-					NBTTagCompound slot1nbt = storage[1].getTagCompound();
-					float flourDecay = slot0nbt.getFloat("foodDecay");
-					float slot0Weight = slot0nbt.getFloat("foodWeight");
-					float slot1Weight = slot1nbt.getFloat("foodWeight");
+					float flourDecay = storage[0].getTagCompound().getFloat("foodDecay");
+					float slot0Weight = storage[0].getTagCompound().getFloat("foodWeight");
+					float slot1Weight = storage[1].getTagCompound().getFloat("foodWeight");
 					float newWeight = slot0Weight + slot1Weight;
 
 					if(newWeight > Global.FOOD_MAX_WEIGHT)
@@ -97,6 +98,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 						storage[1].getTagCompound().setFloat("foodWeight", newWeight);
 					}
 					storage[0] = null;
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					return true;
 				}
 
@@ -105,24 +107,27 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 						storage[0].getTagCompound().hasKey("foodWeight") &&
 						storage[0].getTagCompound().hasKey("foodDecay"))
 				{
-					storage[1] = qr.getResult();
-					NBTTagCompound grainNBT = storage[0].getTagCompound();
-					float flourWeight = grainNBT.getFloat("foodWeight");
-					float flourDecay = grainNBT.getFloat("foodDecay");
+					storage[1] = qr.getResult().copy();
+					float flourWeight = storage[0].getTagCompound().getFloat("foodWeight");
+					float flourDecay = storage[0].getTagCompound().getFloat("foodDecay");
 					ItemFoodTFC.createTag(storage[1], flourWeight, flourDecay);
 					storage[0] = null;
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					return true;
 				}
 			}
 			else
 			{
 				if(storage[0].stackSize == 1)
+				{
 					storage[0] = null;
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+				}
 				else
 					storage[0].stackSize--;
 
 				if(storage[1] == null)
-					storage[1] = qr.getResult();
+					storage[1] = qr.getResult().copy();
 				else if(storage[1].stackSize < storage[1].getMaxStackSize())
 				{
 					if((qr.getResult().stackSize + storage[1].stackSize) > storage[1].getMaxStackSize())
@@ -141,7 +146,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 				else
 				{
 					ejectItem(storage[1]);
-					storage[1] = qr.getResult();
+					storage[1] = qr.getResult().copy();
 				}
 				return true;
 			}
