@@ -50,7 +50,7 @@ public class CraftingHandler
 			{
 				if (!e.player.getEntityData().hasKey("craftingTable"))
 					e.player.inventory.clearInventory(Item.getItemFromBlock(TFCBlocks.Workbench), -1);
-				
+
 				if(!e.player.worldObj.isRemote)
 				{
 					if(!e.player.getEntityData().hasKey("craftingTable"))
@@ -144,26 +144,6 @@ public class CraftingHandler
 			{
 				HandleItem(e.player, e.craftMatrix, Recipes.Hammers);
 			}
-			else if(item == TFCItems.Mortar)
-			{
-				for(int i = 0; i < iinventory.getSizeInventory(); i++)
-				{
-					if(iinventory.getStackInSlot(i) == null)
-						continue;
-					if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
-						iinventory.setInventorySlotContents(i, new ItemStack(TFCItems.Limewater));
-				}
-			}
-			else if(item == TFCItems.Limewater)
-			{
-				for(int i = 0; i < iinventory.getSizeInventory(); i++)
-				{
-					if(iinventory.getStackInSlot(i) == null)
-						continue;
-					if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
-						iinventory.setInventorySlotContents(i, new ItemStack(TFCItems.Mortar));
-				}
-			}
 			else if((itemstack.getItem() instanceof ItemAnvil1 && itemstack.getItemDamage() == 2) ||
 					(itemstack.getItem() instanceof ItemAnvil2 && (itemstack.getItemDamage() == 1 || itemstack.getItemDamage() == 2)))
 			{
@@ -218,9 +198,9 @@ public class CraftingHandler
 					if(!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1)))
 						e.player.dropItem(TFCItems.WoodenBucketEmpty, 1);
 				}
-//				else if(iinventory.getStackInSlot(i).getItem() == TFCItems.RedSteelBucketWater)
-//					if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
-//						player.dropItem(TFCItems.RedSteelBucketEmpty, 1);
+				//				else if(iinventory.getStackInSlot(i).getItem() == TFCItems.RedSteelBucketWater)
+				//					if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
+				//						player.dropItem(TFCItems.RedSteelBucketEmpty, 1);
 
 				if(iinventory.getStackInSlot(i).hasTagCompound() && 
 						iinventory.getStackInSlot(i).getTagCompound().hasKey("craftingTag"))

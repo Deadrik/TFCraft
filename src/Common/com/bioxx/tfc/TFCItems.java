@@ -829,7 +829,6 @@ public class TFCItems
 	public static Item SpindleHead;
 	public static Item StoneBrick;
 	public static Item Mortar;
-	public static Item Limewater;
 	public static Item Vinegar;
 	public static Item Hide;
 	public static Item SoakedHide;
@@ -1498,8 +1497,6 @@ public class TFCItems
 				{ "Clay Spindle", "Spindle Head" }).setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCPottery);
 		StoneBrick = (new ItemStoneBrick().setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
 		Mortar = new ItemTerra().setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
-		//FIXME these buckets need proper forge fluid implementation
-		Limewater = new ItemCustomBucket(Blocks.air).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
 		Vinegar = new ItemCustomBucket(Blocks.air).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCFoods);
 		Hide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		SoakedHide = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
@@ -2545,7 +2542,6 @@ public class TFCItems
 		GameRegistry.registerItem(StoneBrick , StoneBrick.getUnlocalizedName());
 
 		GameRegistry.registerItem(Mortar , Mortar.getUnlocalizedName());
-		GameRegistry.registerItem(Limewater , Limewater.getUnlocalizedName());
 		GameRegistry.registerItem(Vinegar , Vinegar.getUnlocalizedName());
 
 		GameRegistry.registerItem(Hide , Hide.getUnlocalizedName());

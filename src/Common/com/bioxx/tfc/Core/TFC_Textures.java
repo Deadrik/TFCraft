@@ -64,4 +64,6 @@ public class TFC_Textures
 	 */
 	public static IIcon GuiSolidStorage;
 	public static IIcon GuiLiquidStorage;
+	public static IIcon GuiButtonIn;
+	public static IIcon GuiButtonOut;
 }

@@ -249,9 +249,6 @@ public class Recipes
 
 		}
 
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{new ItemStack(TFCBlocks.Sand,1,32767),new ItemStack(TFCItems.Limewater,1,32767)});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{new ItemStack(TFCBlocks.Sand2,1,32767),new ItemStack(TFCItems.Limewater,1,32767)});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Limewater,1), new Object[]{new ItemStack(TFCItems.Powder, 1, 0),new ItemStack(TFCItems.WoodenBucketWater)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{new ItemStack(TFCBlocks.Sand,1,32767),new ItemStack(TFCItems.Powder, 1, 0),new ItemStack(TFCItems.WoodenBucketWater,1,32767)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{new ItemStack(TFCBlocks.Sand2,1,32767),new ItemStack(TFCItems.Powder, 1, 0),new ItemStack(TFCItems.WoodenBucketWater,1,32767)});
 

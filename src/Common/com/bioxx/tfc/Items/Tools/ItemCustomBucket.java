@@ -9,11 +9,13 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.TileEntities.IFluidContainer;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
@@ -21,7 +23,7 @@ import com.bioxx.tfc.api.Enums.EnumSize;
 
 import cpw.mods.fml.common.eventhandler.Event;
 
-public class ItemCustomBucket extends ItemTerra
+public class ItemCustomBucket extends ItemTerra implements IFluidContainer
 {
 	/** field for checking if the bucket has been filled. */
 	private Block bucketContents;
@@ -130,5 +132,16 @@ public class ItemCustomBucket extends ItemTerra
 	public EnumItemReach getReach(ItemStack is)
 	{
 		return EnumItemReach.SHORT;
+	}
+
+	@Override
+	public int getMaxFluid() {
+		return 1000;
+	}
+
+	@Override
+	public FluidStack getFluid(ItemStack is) 
+	{
+		return null;
 	}
 }

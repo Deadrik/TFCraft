@@ -95,14 +95,13 @@ public class TFCFluid extends Fluid
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(SALTWATER.getName()), new ItemStack(TFCItems.RedSteelBucketSaltWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(FRESHWATER.getName()), new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(SALTWATER.getName()), new ItemStack(TFCItems.WoodenBucketSaltWater), new ItemStack(TFCItems.WoodenBucketEmpty));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(RUM.getName()), new ItemStack(TFCItems.Rum), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(BEER.getName()), new ItemStack(TFCItems.Beer), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(RUM.getName()), new ItemStack(TFCItems.Rum), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(RYEWHISKEY.getName()), new ItemStack(TFCItems.RyeWhiskey), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(WHISKEY.getName()), new ItemStack(TFCItems.Whiskey), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(SAKE.getName()), new ItemStack(TFCItems.Sake), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(CIDER.getName()), new ItemStack(TFCItems.Cider), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(VODKA.getName()), new ItemStack(TFCItems.Vodka), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(MILK.getName()), new ItemStack(TFCItems.WoodenBucketMilk), new ItemStack(TFCItems.WoodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(RUM, 250), new ItemStack(TFCItems.Rum), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(BEER, 250), new ItemStack(TFCItems.Beer), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(RYEWHISKEY, 250), new ItemStack(TFCItems.RyeWhiskey), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(WHISKEY, 250), new ItemStack(TFCItems.Whiskey), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(SAKE, 250), new ItemStack(TFCItems.Sake), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(CIDER, 250), new ItemStack(TFCItems.Cider), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(VODKA, 250), new ItemStack(TFCItems.Vodka), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(MILK, 1000), new ItemStack(TFCItems.WoodenBucketMilk), new ItemStack(TFCItems.WoodenBucketEmpty));
 	}
 }

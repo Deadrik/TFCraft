@@ -96,7 +96,11 @@ public class GuiBarrel extends GuiContainer
 	public void initGui()
 	{
 		super.initGui();
+		createButtons();
+	}
 
+	public void createButtons()
+	{
 		buttonList.clear();
 		if(guiTab == 0)
 		{
@@ -105,8 +109,10 @@ public class GuiBarrel extends GuiContainer
 			else
 				buttonList.add(new GuiButton(0, guiLeft+38, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Unseal")));
 			buttonList.add(new GuiButton(1, guiLeft+88, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Empty")));
-			GuiButton buttonMode = new GuiButtonMode(2, guiLeft+140, guiTop + 5, 30,20, barrel.mode == 0 ? StatCollector.translateToLocal("gui.Barrel.ToggleOn") : StatCollector.translateToLocal("gui.Barrel.ToggleOff"));
-			buttonList.add(buttonMode);
+			if(barrel.mode == TEBarrel.MODE_IN)
+				buttonList.add(new GuiBarrelTabButton(2, guiLeft+40, guiTop + 29, 16, 16,this, StatCollector.translateToLocal("gui.Barrel.ToggleOn"), 0, 204, 16, 16));
+			else if(barrel.mode == TEBarrel.MODE_OUT)
+				buttonList.add(new GuiBarrelTabButton(2, guiLeft+40, guiTop + 29, 16, 16,this, StatCollector.translateToLocal("gui.Barrel.ToggleOff"), 0, 188, 16, 16));
 			buttonList.add(new GuiBarrelTabButton(3, guiLeft+36, guiTop-12, 31, 15, this, TFC_Textures.GuiSolidStorage, StatCollector.translateToLocal("gui.Barrel.Solid")));
 			buttonList.add(new GuiBarrelTabButton(4, guiLeft+5, guiTop-12, 31, 15, this, TFC_Textures.GuiLiquidStorage, StatCollector.translateToLocal("gui.Barrel.Liquid")));
 
@@ -170,13 +176,28 @@ public class GuiBarrel extends GuiContainer
 	public class GuiBarrelTabButton extends GuiButton 
 	{
 		GuiBarrel screen;
-		IIcon buttonicon;
+		IIcon buttonicon = null;
+
+		int xPos = 0;
+		int yPos = 172;
+		int xSize = 31;
+		int ySize = 15;
 
 		public GuiBarrelTabButton(int index, int xPos, int yPos, int width, int height, GuiBarrel gui, IIcon icon, String s)
 		{
 			super(index, xPos, yPos, width, height, s);
 			screen = gui;
 			buttonicon = icon;
+		}
+
+		public GuiBarrelTabButton(int index, int xPos, int yPos, int width, int height, GuiBarrel gui, String s, int xp, int yp, int xs, int ys)
+		{
+			super(index, xPos, yPos, width, height, s);
+			screen = gui;
+			this.xPos = xp;
+			this.yPos = yp;
+			xSize = xs;
+			ySize = ys;
 		}
 
 		@Override
@@ -189,13 +210,13 @@ public class GuiBarrel extends GuiContainer
 				TFC_Core.bindTexture(GuiBarrel.texture);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				this.zLevel = 301f;
-				this.drawTexturedModalRect(this.xPosition, this.yPosition, 0, 172, 31, 15);
+				this.drawTexturedModalRect(this.xPosition, this.yPosition, xPos, yPos, xSize, ySize);
 				this.field_146123_n = x >= this.xPosition && y >= this.yPosition && x < this.xPosition + this.width && y < this.yPosition + this.height;
 
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
-
-				this.drawTexturedModelRectFromIcon(this.xPosition+12, this.yPosition+4, buttonicon, 8, 8);
+				if(buttonicon != null)
+					this.drawTexturedModelRectFromIcon(this.xPosition+12, this.yPosition+4, buttonicon, 8, 8);
 
 				this.zLevel = 0;
 				this.mouseDragged(mc, x, y);
@@ -234,7 +255,10 @@ public class GuiBarrel extends GuiContainer
 			else if (guibutton.id == 1)
 				barrel.actionEmpty();
 			else if (guibutton.id == 2)
+			{
 				barrel.actionMode();
+				createButtons();
+			}
 			else if (guibutton.id == 3 && barrel.getFluidLevel() == 0 && barrel.getInvCount() == 0)
 				barrel.actionSwitchTab(1, player);
 		}

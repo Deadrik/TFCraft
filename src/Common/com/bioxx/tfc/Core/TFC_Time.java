@@ -98,7 +98,7 @@ public class TFC_Time
 		div = tMonths/12;
 		rem = tMonths-(div*12);
 		String m = TFC_Time.MONTHS[rem];
-		String date = (h*1000) + " " + d + ", " + m + ", " + (1000+div);
+		String date = (h*100) + " " + d + ", " + m + ", " + (1000+div);
 
 		return date;
 	}
