@@ -322,7 +322,7 @@ public class BlockBarrel extends BlockTerraContainer
 					TeBarrel.setUnsealed("killing fuse");
 					return true;
 				}
-				if (TeBarrel.getSealed()||entityplayer.isSneaking())
+				if (entityplayer.isSneaking())
 				{
 					return false;
 				}

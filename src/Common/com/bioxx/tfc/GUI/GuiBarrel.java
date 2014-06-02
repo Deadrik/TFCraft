@@ -22,6 +22,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerBarrel;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 
@@ -76,6 +77,19 @@ public class GuiBarrel extends GuiContainer
 			else if(guiTab == 1)
 				((GuiButton)buttonList.get(0)).visible = true;//Turn on Solid
 		}
+
+		if(barrel.getSealed() && guiTab == 0)
+		{
+			((GuiButton)buttonList.get(0)).displayString = StatCollector.translateToLocal("gui.Barrel.Unseal");
+			((GuiButton)buttonList.get(1)).enabled = false;
+			((GuiButton)buttonList.get(2)).enabled = false;
+		}
+		else if(!barrel.getSealed() && guiTab == 0)
+		{
+			((GuiButton)buttonList.get(0)).displayString = StatCollector.translateToLocal("gui.Barrel.Seal");
+			((GuiButton)buttonList.get(1)).enabled = true;
+			((GuiButton)buttonList.get(2)).enabled = true;
+		}
 	}
 
 	@Override
@@ -86,7 +100,10 @@ public class GuiBarrel extends GuiContainer
 		buttonList.clear();
 		if(guiTab == 0)
 		{
-			buttonList.add(new GuiButton(0, guiLeft+38, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Seal")));
+			if(!barrel.getSealed())
+				buttonList.add(new GuiButton(0, guiLeft+38, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Seal")));
+			else
+				buttonList.add(new GuiButton(0, guiLeft+38, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Unseal")));
 			buttonList.add(new GuiButton(1, guiLeft+88, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Empty")));
 			GuiButton buttonMode = new GuiButtonMode(2, guiLeft+140, guiTop + 5, 30,20, barrel.mode == 0 ? StatCollector.translateToLocal("gui.Barrel.ToggleOn") : StatCollector.translateToLocal("gui.Barrel.ToggleOff"));
 			buttonList.add(buttonMode);
@@ -209,8 +226,10 @@ public class GuiBarrel extends GuiContainer
 		{
 			if (guibutton.id == 0)
 			{
-				if(barrel.actionSeal())
-					Minecraft.getMinecraft().displayGuiScreen(null); // player.closeScreen();
+				if(!barrel.getSealed())
+					barrel.actionSeal(player);
+				else
+					barrel.actionUnSeal(player);
 			}
 			else if (guibutton.id == 1)
 				barrel.actionEmpty();
@@ -238,10 +257,22 @@ public class GuiBarrel extends GuiContainer
 			drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
 
 			int scale = 0;
-			if(barrel!=null)
+			if(barrel!=null && barrel.fluid != null)
 			{
-				scale = barrel.getLiquidScaled(49);
-				drawTexturedModalRect(w + 8, h + 65 - scale, 185, 31, 15, 6);
+				scale = barrel.getLiquidScaled(50);
+				//drawTexturedModalRect(w + 8, h + 65 - scale, 185, 31, 15, 6);
+				IIcon liquidIcon = barrel.fluid.getFluid().getIcon(barrel.fluid);
+				TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
+				int color = barrel.fluid.getFluid().getColor(barrel.fluid);
+				GL11.glColor4ub((byte)((color >> 16)&255), (byte)((color >> 8)&255), (byte)(color & 255), (byte)((0xaa)&255));
+				int div = (int)Math.floor(scale/8);
+				int rem = scale-(div*8);
+				this.drawTexturedModelRectFromIcon(w + 12, h + 68-scale, liquidIcon, 8, div > 0 ? 8 : rem);
+				for(int c = 0; div > 0 && c < div; c++)
+				{
+					this.drawTexturedModelRectFromIcon(w + 12, h + 68-(8+(c*8)), liquidIcon, 8, 8);
+				}
+				GL11.glColor3f(0, 0, 0);
 			}
 		}
 		else if(guiTab == 1)
@@ -255,8 +286,15 @@ public class GuiBarrel extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j)
 	{
-		/*if(guiTab == 0)
-			drawCenteredString(this.fontRendererObj, TEBarrel.getType(barrel.Type), 88, 7, 0x555555);*/
+		if(guiTab == 0)
+		{
+			if(barrel.getFluidStack() != null)
+				drawCenteredString(this.fontRendererObj, barrel.fluid.getFluid().getLocalizedName(), 88, 7, 0x555555);
+			if(barrel.sealtimecounter != 0)
+			{
+				drawCenteredString(this.fontRendererObj, /*StatCollector.translateToLocal("gui.Barrel.SealedOn")+": "+*/TFC_Time.getDateString(barrel.sealtimecounter*1000), 88, 17, 0x555555);
+			}
+		}
 	}
 
 	@Override

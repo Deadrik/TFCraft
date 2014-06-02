@@ -96,9 +96,9 @@ public class GuiCalendar extends GuiScreen
 		drawTexturedModalRect(l, i1+6, 0, 0, xSize, ySize);
 
 		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Calendar"), l+87, i1+16, 0xFFFFFF);
-		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Season") + " : " + TFC_Time.seasons[TFC_Time.getSeasonAdjustedMonth((int)(player.posZ))], l + 87, i1+26, 0x000000);
+		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Season") + " : " + TFC_Time.SEASONS[TFC_Time.getSeasonAdjustedMonth((int)(player.posZ))], l + 87, i1+26, 0x000000);
 
-		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Day") + " : " + TFC_Time.Days[TFC_Time.getDayOfWeek()], l + 87, i1+36, 0x000000);
+		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Day") + " : " + TFC_Time.DAYS[TFC_Time.getDayOfWeek()], l + 87, i1+36, 0x000000);
 		int dom = TFC_Time.getDayOfMonth();
 		int month = TFC_Time.currentMonth;
 
@@ -107,7 +107,7 @@ public class GuiCalendar extends GuiScreen
 		else if(dom == 2 && month == 8)
 			drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.DateDunk") + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
 		else
-			drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Date") + " : " + dom + " " + TFC_Time.months[month] + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
+			drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Date") + " : " + dom + " " + TFC_Time.MONTHS[month] + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
 
 		float temp = Math.round((TFC_Climate.getHeightAdjustedTemp((int) player.posX, (int) player.posY, (int) player.posZ)));
 

@@ -1402,10 +1402,10 @@ public class TFCItems
 		RedSteelScytheHead = new ItemMiscToolHead().setUnlocalizedName("Red Steel Scythe Blade");
 		SteelScytheHead = new ItemMiscToolHead().setUnlocalizedName("Steel Scythe Blade");
 
-		WoodenBucketEmpty = (new ItemCustomBucket(Blocks.air)).setUnlocalizedName("Wooden Bucket Empty");
-		WoodenBucketWater = (new ItemCustomBucket(TFCBlocks.FreshWater)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);
-		WoodenBucketSaltWater = (new ItemCustomBucket(TFCBlocks.SaltWater)).setUnlocalizedName("Wooden Bucket Salt Water").setContainerItem(WoodenBucketEmpty);
-		WoodenBucketMilk = (new ItemCustomBucketMilk()).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCFoods);
+		WoodenBucketEmpty = new ItemCustomBucket(Blocks.air).setUnlocalizedName("Wooden Bucket Empty");
+		WoodenBucketWater = new ItemCustomBucket(TFCBlocks.FreshWater, WoodenBucketEmpty).setUnlocalizedName("Wooden Bucket Water");
+		WoodenBucketSaltWater = new ItemCustomBucket(TFCBlocks.SaltWater, WoodenBucketEmpty).setUnlocalizedName("Wooden Bucket Salt Water");
+		WoodenBucketMilk = new ItemCustomBucketMilk().setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCFoods);
 
 		BismuthBronzeKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Bismuth Bronze Knife Blade");
 		BlackBronzeKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Black Bronze Knife Blade");
@@ -1495,7 +1495,7 @@ public class TFCItems
 		Spindle = new ItemSpindle().setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCPottery);
 
 		SpindleHead = new ItemPotteryBase().setMetaNames(new String[]
-		{ "Clay Spindle", "Spindle Head" }).setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCPottery);
+				{ "Clay Spindle", "Spindle Head" }).setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCPottery);
 		StoneBrick = (new ItemStoneBrick().setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
 		Mortar = new ItemTerra().setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
 		//FIXME these buckets need proper forge fluid implementation

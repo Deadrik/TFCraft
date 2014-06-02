@@ -107,7 +107,7 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence2;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Fluids;
+import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Items.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBarrels2;
 import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
@@ -680,10 +680,10 @@ public class TFCBlocks
 		Flowers2 = new BlockFlower2().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Flowers2");
 		Fungi = new BlockFungi().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("Fungi");
 
-		SaltWater = (new BlockCustomLiquid(TFC_Fluids.SALTWATER, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWater");
-		FreshWater = (new BlockFreshWater(TFC_Fluids.FRESHWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWater");
-		HotWater = (new BlockHotWater(TFC_Fluids.HOTWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWater");
-		Lava = (new BlockCustomLiquid(TFC_Fluids.LAVA, Material.lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("Lava");
+		SaltWater = (new BlockCustomLiquid(TFCFluid.SALTWATER, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("SaltWater");
+		FreshWater = (new BlockFreshWater(TFCFluid.FRESHWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("FreshWater");
+		HotWater = (new BlockHotWater(TFCFluid.HOTWATER)).setHardness(100.0F).setLightOpacity(3).setBlockName("HotWater");
+		Lava = (new BlockCustomLiquid(TFCFluid.LAVA, Material.lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("Lava");
 		Ice = new BlockCustomIce().setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("Ice").setBlockTextureName("ice");
 
 		SeaGrassStill = new BlockTallSeaGrassStill().setBlockName("SeaGrassStill").setHardness(0.3f).setCreativeTab(TFCTabs.TFCDecoration);

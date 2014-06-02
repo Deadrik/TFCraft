@@ -2044,8 +2044,10 @@ gui.DamageType.Slashing=Slashing
 #== Barrel GUI ==
 gui.Barrel.Empty=Empty
 gui.Barrel.Seal=Seal
+gui.Barrel.Unseal=Unseal
 gui.Barrel.ToggleOff=Out
 gui.Barrel.ToggleOn=In
+gui.Barrel.SealedOn=Sealed On
 
 gui.Barrel.Beer=Beer
 gui.Barrel.Cider=Cider
@@ -2299,3 +2301,20 @@ skill.cooking=Cooking
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
 #=====================================================
+fluid.freshwater=Fresh Water
+fluid.saltwater=Salt Water
+fluid.lavatfc=Lava
+fluid.hotwater=Hot Water
+fluid.rum=Rum
+fluid.beer=Beer
+fluid.cider=Cider
+fluid.ryewhiskey=Rye Whiskey
+fluid.sake=Sake
+fluid.vodka=Vodka
+fluid.whiskey=Whiskey
+fluid.milk=Milk
+fluid.milkcurdled=Curdled Milk
+fluid.limewater=Limewater
+fluid.tannin=Tannin
+fluid.vinegar=Vinegar
+fluid.brine=Brine

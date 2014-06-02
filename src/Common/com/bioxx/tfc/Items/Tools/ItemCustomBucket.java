@@ -3,6 +3,7 @@ package com.bioxx.tfc.Items.Tools;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
@@ -31,6 +32,12 @@ public class ItemCustomBucket extends ItemTerra
 		this.bucketContents = contents;
 		this.setFolder("tools/");
 		this.setSize(EnumSize.MEDIUM);
+	}
+
+	public ItemCustomBucket(Block contents, Item container)
+	{
+		this(contents);
+		this.setContainerItem(container);
 	}
 
 	@Override

@@ -5,17 +5,22 @@ import java.util.Random;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Crafting.BarrelAlcoholRecipe;
+import com.bioxx.tfc.api.Crafting.BarrelManager;
+import com.bioxx.tfc.api.Crafting.BarrelRecipe;
 
 public class TEBarrel extends NetworkTileEntity implements IInventory
 {
@@ -26,18 +31,17 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public ItemStack[] storage;
 	public ItemStack output;
 	private boolean sealed;
-	private int sealtimecounter;
-	public Item[] alcohols;
+	public int sealtimecounter;
 	public final int SEALTIME = TFCOptions.enableDebugMode ? 0 : (int)((TFC_Time.hourLength * 12) / 100);//default 80
 	public static final int MODE_IN = 0;
 	public static final int MODE_OUT = 1;
+	private boolean	processUnseal = false;
 
 	public TEBarrel()
 	{
 		sealed = false;
 		//itemstack = new ItemStack(1,0,0);
 		sealtimecounter = 0;
-		alcohols = new Item[]{TFCItems.Beer, TFCItems.Cider, TFCItems.Vodka, TFCItems.Whiskey, TFCItems.RyeWhiskey, TFCItems.Sake, TFCItems.Rum};
 		storage = new ItemStack[12];
 	}
 
@@ -66,144 +70,29 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	private void ProcessItems()
 	{
-		/*ItemStack itemstack2;
-		if(itemstack != null && Type == 1)
+		if(this.getInvCount() == 0)
 		{
-			if (itemstack.getItem() == TFCItems.ScrapedHide)
+			if(getInputStack() != null)
 			{
-				int damage = itemstack.getItemDamage();
-				itemstack2 = new ItemStack(TFCItems.PrepHide, 0, damage);
-				while(liquidLevel >= (16 + (damage * 10)) && itemstack.stackSize > 0)
+				BarrelRecipe recipe = BarrelManager.getInstance().findMatchingRecipe(getInputStack(), getFluidStack());
+				if(recipe != null)
 				{
-					liquidLevel -= (16 + (damage * 10));
-					itemstack2.stackSize++;
-					itemstack.stackSize--;
+					int sealedTime = (int)TFC_Time.getTotalHours() - sealtimecounter;
+					ItemStack origIS = getInputStack().copy();
+					FluidStack origFS = getFluidStack().copy();
+					if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, sealedTime)))
+					{
+						fluid.amount -= recipe.getResultFluid(origIS, origFS, sealedTime).amount;
+					}
+					else
+					{
+						this.fluid = recipe.getResultFluid(origIS, origFS, sealedTime);
+					}
+					storage[0] = recipe.getResult(origIS, origFS, sealedTime);
+
 				}
-				if(itemstack2.stackSize > 0)
-					output = itemstack2;
-			}
-			else if (itemstack.getItem() == TFCItems.Jute)
-			{
-				itemstack2 = new ItemStack(TFCItems.JuteFibre, 0, 0);
-				while(liquidLevel >= 18 && itemstack.stackSize > 0)
-				{
-					liquidLevel -= 18;
-					itemstack2.stackSize++;
-					itemstack.stackSize--;
-				}
-				if(itemstack2.stackSize > 0)
-					output = itemstack2;
-			}
-			else if(itemstack.getItem() == TFCItems.Logs)
-			{
-				itemstack.stackSize--;
-				if(itemstack.stackSize == 0)
-					itemstack=null;
-				Type = 3;
-			}*/
-		/*			else if(itemstack.getItem() == TFCItems.BarleyGrain)
-			{
-				itemstack.stackSize--;
-				if(itemstack.stackSize == 0)
-					itemstack=null;
-				Type = 5;
-			}
-			else if((itemstack.getItem() == TFCItems.RedApple || itemstack.getItem() == TFCItems.GreenApple))
-			{
-				itemstack.stackSize--;
-				if(itemstack.stackSize == 0)
-					itemstack=null;
-				Type = 6;
-			}
-			else if(itemstack.getItem() == TFCItems.Potato)
-			{
-				itemstack.stackSize--;
-				if(itemstack.stackSize == 0)
-					itemstack=null;
-				Type = 7;
-			}
-			else if(itemstack.getItem() == TFCItems.WheatGrain)
-			{
-				itemstack.stackSize--;
-				if(itemstack.stackSize == 0)
-					itemstack=null;
-				Type = 8;
-			}
-			else if(itemstack.getItem() == TFCItems.RyeGrain)
-			{
-				itemstack.stackSize--;
-				if(itemstack.stackSize == 0)
-					itemstack=null;
-				Type = 9;
-			}
-			else if(itemstack.getItem() == TFCItems.RiceGrain)
-			{
-				itemstack.stackSize--;
-				if(itemstack.stackSize == 0)
-					itemstack=null;
-				Type = 10;
-			}
-		 */
-		/*else if(itemstack.getItem() == Items.sugar)
-			{
-				itemstack.stackSize--;
-				if(itemstack.stackSize == 0)
-					itemstack=null;
-				Type = 11;
 			}
 		}
-		else if(itemstack != null && Type == 2)
-		{
-			if(itemstack.getItem() == TFCItems.Hide)
-			{
-				int damage = itemstack.getItemDamage();
-				itemstack2 = new ItemStack(TFCItems.SoakedHide, 0, damage);
-				while(liquidLevel >= (16 + (damage * 10)) && itemstack.stackSize > 0)
-				{
-					liquidLevel -= (16 + (damage * 10));
-					itemstack2.stackSize++;
-					itemstack.stackSize--;
-				}
-				if(itemstack2.stackSize > 0)
-					output = itemstack2;
-			}
-		}
-		else if(itemstack != null && Type == 3)
-		{
-			if(itemstack.getItem() == TFCItems.PrepHide)
-			{
-				Random rand = new Random();
-				int damage = itemstack.getItemDamage();
-				itemstack2 = new ItemStack(TFCItems.TerraLeather, 0, 0);
-				while(liquidLevel >= (16 + (damage * 10)) && itemstack.stackSize > 0)
-				{
-					liquidLevel -= (16 + (damage * 10));
-					itemstack2.stackSize += (1 + (rand.nextBoolean() ? damage : (damage > 0 ? damage -1 : 0)));
-					itemstack.stackSize--;
-				}
-				if(itemstack2.stackSize > 0)
-					output = itemstack2;
-			}
-		}
-		else if(itemstack == null && Type >= 5 && Type <= 11)
-			Type = 12;
-		else if(itemstack == null && Type == 14)
-		{
-			itemstack2 = new ItemStack(TFCItems.Cheese);
-			float cheeseWeight = 0.00f;
-			while(liquidLevel >= 32)
-			{
-				liquidLevel -= 32;
-				cheeseWeight += 20;
-			}
-			ItemFoodTFC.createTag(itemstack2, cheeseWeight, -24.0f);
-			output = itemstack2;
-		}
-		if (liquidLevel == 0)
-			Type = 0;
-		if (itemstack != null && itemstack.stackSize == 0)
-			itemstack = null;
-		 */
 	}
 
 	public void setSealed()
@@ -379,6 +268,20 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return storage[0];
 	}
 
+	public FluidStack getFluidStack()
+	{
+		return this.fluid;
+	}
+
+	public boolean addLiquid(int amount)
+	{
+		if(fluid.amount == 10000)
+			return false;
+
+		fluid.amount = Math.min(fluid.amount+amount, 10000);
+		return true;
+	}
+
 	@Override
 	public void updateEntity()
 	{
@@ -388,221 +291,92 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			if(sealed)
 			{
 				if(sealtimecounter == 0)
-					sealtimecounter = (int) TFC_Time.getTotalTicks();
+					sealtimecounter = (int) TFC_Time.getTotalHours();
+			}
 
-				if(sealtimecounter > 0 && sealtimecounter + (SEALTIME * 100) < TFC_Time.getTotalTicks())
-				{
-					sealtimecounter = 0;
-					sealed = false;
-					ProcessItems();
-				}
+			if(processUnseal)
+			{
+				ProcessItems();
+				this.processUnseal = false;
 			}
 
 			if(fluid != null && fluid.amount == 0)
 				fluid = null;
 
-			if(this.getInvCount() == 0 && mode == MODE_IN)
+			if(mode == MODE_IN)
 			{
-				if(getInputStack() != null)
+				FluidStack inLiquid = FluidContainerRegistry.getFluidForFilledItem(getInputStack());
+				if(inLiquid != null)
 				{
-
-				}
-			}
-
-			/*if(mode == 0)
-			{
-				if(itemstack == null)
-				{
-					if(output != null)
+					if(this.fluid == null)
 					{
-						itemstack = output;
-						output = null;
+						this.fluid = inLiquid.copy();
+						this.setInventorySlotContents(0, getInputStack().getItem().getContainerItem(getInputStack()));
 					}
-				}
-
-				if (itemstack != null)
-				{
-					if ((Type ==0 || Type == 2) && itemstack.getItem() == TFCItems.Limewater && liquidLevel < 256)
+					else if(inLiquid.isFluidEqual(this.fluid))
 					{
-						liquidLevel = Math.min(liquidLevel + 32, 256);
-						Type = 2;
-						itemstack = new ItemStack(TFCItems.WoodenBucketEmpty);
-						updateGui();
-					}
-					else if ((Type == 0 || Type == 1) && (itemstack.getItem() == TFCItems.WoodenBucketWater) && liquidLevel < 256)
-					{
-						liquidLevel = Math.min(liquidLevel + 32, 256);
-						Type = 1;
-						itemstack = new ItemStack(TFCItems.WoodenBucketEmpty);
-						updateGui();
-					}
-					else if ((Type == 0 || Type == 15) && (itemstack.getItem() == TFCItems.WoodenBucketSaltWater) && liquidLevel < 256)
-					{
-						liquidLevel = Math.min(liquidLevel + 32, 256);
-						Type = 15;
-						itemstack = new ItemStack(TFCItems.WoodenBucketEmpty);
-						updateGui();
-					}
-					else if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.RedSteelBucketWater) && liquidLevel < 256)
-					{
-						liquidLevel = Math.min(liquidLevel + 32, 256);
-						Type = 1;
-						itemstack = new ItemStack(TFCItems.RedSteelBucketEmpty);
-						updateGui();
-					}
-					else if ((Type == 0 || Type == 4) && itemstack.getItem() == Items.gunpowder && liquidLevel < 256)
-					{
-						liquidLevel = Math.min(liquidLevel + 1, 256);
-						Type = 4;
-						itemstack.stackSize -= 1;
-						if(itemstack.stackSize == 0)
-							itemstack=null;
-						updateGui();
-					}
-					else if((Type == 0 || Type == 13 || Type == 14) && itemstack.getItem() == TFCItems.WoodenBucketMilk && liquidLevel < 256)
-					{
-						liquidLevel = Math.min(liquidLevel + 32, 256);
-						Type = Math.max(13, Type);
-						itemstack = new ItemStack(TFCItems.WoodenBucketEmpty);
-						updateGui();
-					}
-					else if(Type == 13 && itemstack.getItem() == TFCItems.Vinegar && liquidLevel < 256)
-					{
-						liquidLevel = Math.min(liquidLevel + 32, 256);
-						Type = 14;
-						itemstack = new ItemStack(TFCItems.WoodenBucketEmpty);
-						updateGui();
+						if(addLiquid(inLiquid.amount))
+						{
+							this.setInventorySlotContents(0, getInputStack().getItem().getContainerItem(getInputStack()));
+						}
 					}
 				}
 			}
-			else if (itemstack != null)
+			else if(mode == MODE_OUT)
 			{
-				if((Type >= 5 && Type <= 11) && itemstack.getItem() == Items.glass_bottle && liquidLevel > 9 * itemstack.stackSize)
+				ItemStack out = FluidContainerRegistry.fillFluidContainer(fluid, getInputStack());
+				if(out != null && fluid.amount >= 1000)
 				{
-					liquidLevel = Math.max(0, liquidLevel - 9 * itemstack.stackSize);
-					itemstack = new ItemStack(alcohols[Type-5]);
-					updateGui();
+					this.setInventorySlotContents(0, out);
+					this.fluid.amount-=1000;
 				}
-				else if (Type == 1 && (itemstack.getItem() == TFCItems.PotteryJug && itemstack.getItemDamage() == 1) && liquidLevel >= 16)
-				{
-					liquidLevel = Math.max(liquidLevel - 16, 0);
-					Type = 1;
-					itemstack.setItemDamage(2);
-					updateGui();
-				}
-				else if(Type == 1 && itemstack.getItem() == Items.glass_bottle && liquidLevel > 9 * itemstack.stackSize)
-				{
-					liquidLevel = Math.max(0, liquidLevel - 9 * itemstack.stackSize);
-					itemstack = new ItemStack(TFCItems.Potion);
-					updateGui();
-				}
-				else if(Type == 12 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >= 32)
-				{
-					liquidLevel = Math.max(liquidLevel - 32, 0);
-					Type = liquidLevel > 0 ? Type : 0;
-					itemstack = new ItemStack(TFCItems.Vinegar);
-					updateGui();
-				}
-				else if(Type == 1 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >= 32)
-				{
-					liquidLevel = Math.max(liquidLevel - 32, 0);
-					Type = liquidLevel > 0 ? Type : 0;
-					itemstack = new ItemStack(TFCItems.WoodenBucketWater);
-					updateGui();
-				}
-				else if(Type == 2 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >= 32)
-				{
-					liquidLevel = Math.max(liquidLevel - 32, 0);
-					Type = liquidLevel > 0 ? Type : 0;
-					itemstack = new ItemStack(TFCItems.Limewater);
-					updateGui();
-				}
-				else if(Type == 15 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >= 32)
-				{
-					liquidLevel = Math.max(liquidLevel - 32, 0);
-					Type = liquidLevel > 0 ? Type : 0;
-					itemstack = new ItemStack(TFCItems.WoodenBucketSaltWater);
-					updateGui();
-				}
-				//Fill milk bucket
-				else if(Type == 13 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >= 32)
-				{
-					liquidLevel = Math.max(liquidLevel - 32, 0);
-					Type = liquidLevel > 0 ? Type : 0;
-					itemstack = new ItemStack(TFCItems.WoodenBucketMilk, 1, 0);
-					ItemCustomBucketMilk.createTag(itemstack, 20f);
-					updateGui();
-				}
-			}*/
+			}
 		}
 	}
 
 	public int getLiquidScaled(int i)
 	{
 		if(fluid != null)
-			return fluid.amount * i;
+			return fluid.amount * i/10000;
 		return 0;
 	}
 
-	public boolean actionSeal()
+	public boolean actionSeal(EntityPlayer player)
 	{
-		if(output==null && /*liquidLevel > 0 &&*/ isItemValid())
-		{
-			sealed = true;
-			updateGui();
-			return true;
-		}
-		return false;
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setBoolean("seal", true);
+		nbt.setString("player", player.getDisplayName());
+		this.broadcastPacketInRange(this.createDataPacket(nbt));
+		sealed = true;
+		this.worldObj.func_147479_m(xCoord, yCoord, zCoord);
+		return true;
 	}
 
-	private boolean isItemValid()
+	public boolean actionUnSeal(EntityPlayer player)
 	{
-		if(mode == 0)
-		{
-			/*if(itemstack == null && ((Type >= 5 && Type <= 11) || Type == 14))
-				return true;
-			else if(itemstack == null)
-				return false;
-			else
-			{
-				Item id = itemstack.getItem();
-				if(Type == 1)
-				{
-					if(id == TFCItems.ScrapedHide)
-						return true;
-					if(id == TFCItems.Jute)
-						return true;
-					if(id == TFCItems.Logs)
-						return true;
-					if(id == TFCItems.WheatGrain ||
-							id == TFCItems.BarleyGrain ||
-							id == TFCItems.RyeGrain ||
-							id == TFCItems.RiceGrain ||
-							id == TFCItems.Potato ||
-							id == TFCItems.RedApple ||
-							id == TFCItems.GreenApple ||
-							id == Items.sugar)
-						return true;
-					if(id == TFCItems.Hide && Type == 2)
-						return true;
-					if(id == TFCItems.PrepHide && Type == 3)
-						return true;
-				}
-			}*/
-		}
-		return false;
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setBoolean("seal", false);
+		nbt.setString("player", player.getDisplayName());
+		this.broadcastPacketInRange(this.createDataPacket(nbt));
+		sealed = false;
+		this.worldObj.func_147479_m(xCoord, yCoord, zCoord);
+		return true;
 	}
 
 	public void actionEmpty()
 	{
 		fluid = null;
-		updateGui();
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setByte("fluidID", (byte)-1);
+		this.broadcastPacketInRange(this.createDataPacket(nbt));
 	}
 
 	public void actionMode()
 	{
-		mode = (mode - 1) * -1;
-		updateGui();
+		mode = mode == 0 ? 1 : 0;
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setByte("mode", (byte)mode);
+		this.broadcastPacketInRange(this.createDataPacket(nbt));
 	}
 
 	public void actionSwitchTab(int tab, EntityPlayer player)
@@ -696,12 +470,15 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public void handleInitPacket(NBTTagCompound nbt) 
 	{
 		this.rotation = nbt.getByte("rotation");
+		this.sealed = nbt.getBoolean("sealed");
+		this.worldObj.func_147479_m(xCoord, yCoord, zCoord);
 	}
 
 	@Override
 	public void createInitNBT(NBTTagCompound nbt) 
 	{
 		nbt.setByte("rotation", rotation);
+		nbt.setBoolean("sealed", sealed);
 	}
 
 	@Override
@@ -709,12 +486,46 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
-			int tab = nbt.getByte("tab");
-			if(tab == 0)
+			if(nbt.hasKey("tab"))
+			{
+				int tab = nbt.getByte("tab");
+				if(tab == 0)
+					worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 35, worldObj, xCoord, yCoord, zCoord);
+				else if(tab == 1)
+					worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 36, worldObj, xCoord, yCoord, zCoord);
+			}
+			else if(nbt.hasKey("fluidID"))
+			{
+				if(nbt.getByte("fluidID") == -1)
+					fluid = null;
+			}
+			else if(nbt.hasKey("mode"))
+			{
+				mode = nbt.getByte("mode");
+			}
+			else if(nbt.hasKey("seal"))
+			{
+				sealed = nbt.getBoolean("seal");
+				if(!sealed)
+					processUnseal = true;
+				this.sealtimecounter = 0;
 				worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 35, worldObj, xCoord, yCoord, zCoord);
-			else if(tab == 1)
-				worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 36, worldObj, xCoord, yCoord, zCoord);
+			}
 		}
 	}
 
+	public static void registerRecipes()
+	{
+		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.Potato), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.VODKA, 10000)));
+		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.RedApple), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.CIDER, 10000)));
+		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.GreenApple), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.CIDER, 10000)));
+		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.WheatGround), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.WHISKEY, 10000)));
+		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.RyeGround), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.RYEWHISKEY, 10000)));
+		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.BarleyGround), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.BEER, 10000)));
+		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.RiceGround), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.SAKE, 10000)));
+		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.Sugarcane), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.RUM, 10000)));
+		BarrelManager.getInstance().addRecipe(new BarrelRecipe(null, new FluidStack(TFCFluid.MILK, 10000), null, new FluidStack(TFCFluid.MILKCURDLED, 10000)));
+		BarrelManager.getInstance().addRecipe(new BarrelRecipe(null, new FluidStack(TFCFluid.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese), 160), null));
+		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Logs, 0, 1), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.TANNIN, 10000)));
+	}
 }

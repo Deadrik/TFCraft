@@ -6,27 +6,36 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Containers.Slots.SlotChest;
+import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 
 public class ContainerBarrel extends ContainerTFC
 {
-	private TEBarrel barrel;
-	private float liquidLevel;
+	TEBarrel barrel;
+	float liquidLevel;
+	int liquidID;
+	int sealedTime = 0;
 	int guiTab = 0;
 
 	public ContainerBarrel(InventoryPlayer inventoryplayer, TEBarrel tileentitybarrel, World world, int x, int y, int z, int tab)
 	{
 		barrel = tileentitybarrel;
 		liquidLevel = 0;
+		liquidID = -1;
 		guiTab = tab;
+
 
 		if(guiTab == 0)
 		{
 			//Input slot
-			addSlotToContainer(new Slot(tileentitybarrel, 0, 80, 29));
+			if(!barrel.getSealed())
+				addSlotToContainer(new Slot(tileentitybarrel, 0, 80, 29));
+			else
+				addSlotToContainer(new SlotForShowOnly(tileentitybarrel, 0, 80, 29));
 		}
 		else if(guiTab == 1)
 		{
@@ -61,7 +70,7 @@ public class ContainerBarrel extends ContainerTFC
 		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
-			if(i == 0 && guiTab == 0)
+			if(i == 0 && guiTab == 0 && !barrel.getSealed())
 			{
 				if(!this.mergeItemStack(itemstack1, 1, this.inventorySlots.size(), true))
 					return null;
@@ -73,7 +82,7 @@ public class ContainerBarrel extends ContainerTFC
 			}
 			else
 			{
-				if (!this.mergeItemStack(itemstack1, 0, 12, false))
+				if (!barrel.getSealed() && !this.mergeItemStack(itemstack1, 0, 12, false))
 					return null;
 			}
 
@@ -94,18 +103,62 @@ public class ContainerBarrel extends ContainerTFC
 		for (int var1 = 0; var1 < this.crafters.size() && guiTab == 0; ++var1)
 		{
 			ICrafting var2 = (ICrafting)this.crafters.get(var1);
+
+			if (this.barrel.getFluidStack() != null && this.liquidID != this.barrel.getFluidStack().fluidID)
+			{
+				liquidID = barrel.getFluidStack().fluidID;
+				var2.sendProgressBarUpdate(this, 0, this.barrel.getFluidStack().fluidID);
+			}
 			if (this.liquidLevel != this.barrel.getFluidLevel())
-				var2.sendProgressBarUpdate(this, 0, this.barrel.getFluidLevel());
+			{
+				liquidLevel = barrel.getFluidLevel();
+				var2.sendProgressBarUpdate(this, 1, this.barrel.getFluidLevel());
+			}
+			if(this.barrel.sealtimecounter != this.sealedTime)
+			{
+				sealedTime = barrel.sealtimecounter;
+				var2.sendProgressBarUpdate(this, 2, sealedTime);
+			}
 		}
 	}
 
 	@Override
-	public void updateProgressBar(int par1, int par2)
+	public void updateProgressBar(int id, int val)
 	{
-		if (par1 == 0)
+		if (id == 0)
 		{
 			if(barrel.fluid != null)
-				this.barrel.fluid.amount = par2;
+			{
+				this.barrel.fluid = new FluidStack(val, this.barrel.fluid.amount);
+			}
+			else
+			{
+				this.barrel.fluid = new FluidStack(val, 1000);
+			}
+		}
+		else if (id == 1)
+		{
+			if(barrel.fluid != null)
+				this.barrel.fluid.amount = val;
+		}
+		else if (id == 2)
+		{
+			this.barrel.sealtimecounter = val;
+			if(guiTab == 0)
+			{
+				/*if(val != 0)
+				{
+					this.inventorySlots.remove(0);
+					this.inventorySlots.add(0, new SlotForShowOnly(barrel, 0, 80, 29));
+					((Slot)inventorySlots.get(0)).slotNumber = 0;
+				}
+				else
+				{
+					this.inventorySlots.remove(0);
+					this.inventorySlots.add(0, new Slot(barrel, 0, 80, 29));
+					((Slot)inventorySlots.get(0)).slotNumber = 0;
+				}*/
+			}
 		}
 	}
 }

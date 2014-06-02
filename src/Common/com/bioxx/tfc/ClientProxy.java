@@ -25,8 +25,8 @@ import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
+import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Fluids;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.EntityCustomMinecart;
 import com.bioxx.tfc.Entities.EntityFishHookTFC;
@@ -153,10 +153,10 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerFluidIcons()
 	{
-		TFC_Fluids.LAVA.setIcons(TFCBlocks.Lava.getIcon(0, 0), TFCBlocks.Lava.getIcon(2, 0));
-		TFC_Fluids.SALTWATER.setIcons(TFCBlocks.SaltWater.getIcon(0, 0), TFCBlocks.SaltWater.getIcon(2, 0));
-		TFC_Fluids.FRESHWATER.setIcons(TFCBlocks.FreshWater.getIcon(0, 0), TFCBlocks.FreshWater.getIcon(2, 0));
-		TFC_Fluids.HOTWATER.setIcons(TFCBlocks.HotWater.getIcon(0, 0), TFCBlocks.HotWater.getIcon(2, 0));
+		//Only bother adding fluids here if you don't want to use the default HotWater icons
+		TFCFluid.LAVA.setIcons(TFCBlocks.Lava.getIcon(0, 0), TFCBlocks.Lava.getIcon(2, 0));
+		TFCFluid.SALTWATER.setIcons(TFCBlocks.SaltWater.getIcon(0, 0), TFCBlocks.SaltWater.getIcon(2, 0));
+		TFCFluid.FRESHWATER.setIcons(TFCBlocks.FreshWater.getIcon(0, 0), TFCBlocks.FreshWater.getIcon(2, 0));
 	}
 
 	@Override

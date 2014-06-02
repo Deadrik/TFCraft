@@ -30,7 +30,7 @@ import com.bioxx.tfc.Core.ItemHeat;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Fluids;
+import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.AnvilCraftingHandler;
@@ -99,7 +99,7 @@ public class TerraFirmaCraft
 		proxy.registerTickHandler();
 
 		// Register Liquids
-		TFC_Fluids.register();
+		TFCFluid.register();
 
 		TFCBlocks.LoadBlocks();
 		TFCBlocks.RegisterBlocks();
@@ -218,7 +218,7 @@ public class TerraFirmaCraft
 		proxy.setupGuiIngameForge();
 
 		// Register Liquids
-		TFC_Fluids.registerFluidContainers();
+		TFCFluid.registerFluidContainers();
 		proxy.registerFluidIcons();
 
 		//Setup custom potion effects

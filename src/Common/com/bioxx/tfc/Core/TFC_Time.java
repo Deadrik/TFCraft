@@ -10,21 +10,21 @@ public class TFC_Time
 {
 	private static World worldObj;
 
-	public static String[] seasons = { StatCollector.translateToLocal("gui.Calendar.EarlySpring"),
+	public static String[] SEASONS = { StatCollector.translateToLocal("gui.Calendar.EarlySpring"),
 		StatCollector.translateToLocal("gui.Calendar.Spring"), StatCollector.translateToLocal("gui.Calendar.LateSpring"),
 		StatCollector.translateToLocal("gui.Calendar.EarlySummer"), StatCollector.translateToLocal("gui.Calendar.Summer"),
 		StatCollector.translateToLocal("gui.Calendar.LateSummer"), StatCollector.translateToLocal("gui.Calendar.EarlyAutumn"),
 		StatCollector.translateToLocal("gui.Calendar.Autumn"), StatCollector.translateToLocal("gui.Calendar.LateAutumn"),
 		StatCollector.translateToLocal("gui.Calendar.EarlyWinter"), StatCollector.translateToLocal("gui.Calendar.Winter"),
 		StatCollector.translateToLocal("gui.Calendar.LateWinter")};
-	public static String[] months  = { StatCollector.translateToLocal("gui.Calendar.March"),
+	public static String[] MONTHS  = { StatCollector.translateToLocal("gui.Calendar.March"),
 		StatCollector.translateToLocal("gui.Calendar.April"),StatCollector.translateToLocal("gui.Calendar.May"),
 		StatCollector.translateToLocal("gui.Calendar.June"), StatCollector.translateToLocal("gui.Calendar.July"),
 		StatCollector.translateToLocal("gui.Calendar.August"), StatCollector.translateToLocal("gui.Calendar.September"),
 		StatCollector.translateToLocal("gui.Calendar.October"), StatCollector.translateToLocal("gui.Calendar.November"),
 		StatCollector.translateToLocal("gui.Calendar.December"), StatCollector.translateToLocal("gui.Calendar.January"),
 		StatCollector.translateToLocal("gui.Calendar.February")};
-	public static String[] Days = { StatCollector.translateToLocal("gui.Calendar.Sunday"),
+	public static String[] DAYS = { StatCollector.translateToLocal("gui.Calendar.Sunday"),
 		StatCollector.translateToLocal("gui.Calendar.Monday"), StatCollector.translateToLocal("gui.Calendar.Tuesday"),
 		StatCollector.translateToLocal("gui.Calendar.Wednesday"), StatCollector.translateToLocal("gui.Calendar.Thursday"),
 		StatCollector.translateToLocal("gui.Calendar.Friday"), StatCollector.translateToLocal("gui.Calendar.Saturday")};
@@ -87,6 +87,22 @@ public class TFC_Time
 		currentYear = getYear();
 	}
 
+	public static String getDateString(long ticks)
+	{
+		int h = getHourOfDayFromTotalHours((int)(ticks/hourLength));
+		int tDays = (int) (ticks/dayLength);
+		int div = tDays/daysInMonth;
+		int rem = tDays-(div*daysInMonth);
+		int d = getDayOfMonth((int)(ticks/hourLength));
+		int tMonths = (int) (ticks/ticksInMonth);
+		div = tMonths/12;
+		rem = tMonths-(div*12);
+		String m = TFC_Time.MONTHS[rem];
+		String date = (h*1000) + " " + d + ", " + m + ", " + (1000+div);
+
+		return date;
+	}
+
 	public static int getHoursInMonth()
 	{
 		return 24*daysInMonth;
@@ -94,7 +110,7 @@ public class TFC_Time
 
 	public static String getSeason()
 	{
-		return seasons[getMonth()];
+		return SEASONS[getMonth()];
 	}
 
 	public static long getTotalTicks()
@@ -110,12 +126,27 @@ public class TFC_Time
 		return (int)days2;
 	}
 
+	public static int getDayOfWeek(int tDays)
+	{
+		long day = tDays+1;
+		long days = day / 7;
+		long days2 = day - (days*7);
+		return (int)days2;
+	}
+
 	public static int getDayOfMonth()
 	{
 		long month = getTotalMonths();
 		long days = daysInMonth*month;
 		long days2 = getTotalDays() - days;
 		return 1+(int)days2;
+	}
+
+	public static int getDayOfMonth(int tDays)
+	{
+		int months = tDays/daysInMonth;
+		int rem = tDays/(months*daysInMonth);
+		return 1+rem;
 	}
 
 	public static int getDayOfYear()
