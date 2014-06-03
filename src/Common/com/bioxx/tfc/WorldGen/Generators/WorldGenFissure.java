@@ -28,7 +28,7 @@ public class WorldGenFissure implements IWorldGenerator
 	Block fillBlock;
 	int depth = 20;
 	int minTunnel = 1;
-	boolean checkStability = true;
+	public boolean checkStability = true;
 	boolean underground = false;
 	int seed = 0;
 	int rarity = 10;
