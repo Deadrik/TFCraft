@@ -34,12 +34,20 @@ public class GenCommand extends CommandBase
 				WorldGenFissure gen = null;
 				if(params[1].equals("water"))
 				{
+					gen = new WorldGenFissure(TFCBlocks.FreshWater);
+					gen.checkStability = false;
+					player.addChatMessage(new ChatComponentText("Generating Water"));
+				}
+				else if(params[1].equals("hotwater"))
+				{
 					gen = new WorldGenFissure(TFCBlocks.HotWater);
+					gen.checkStability = false;
 					player.addChatMessage(new ChatComponentText("Generating Hot Springs"));
 				}
 				else
 				{
 					gen = new WorldGenFissure(null);
+					gen.checkStability = false;
 					player.addChatMessage(new ChatComponentText("Generating Fissure"));
 				}
 				gen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int)player.posX, (int)player.posY - 1, (int)player.posZ);
