@@ -18,7 +18,7 @@ public class ContainerBarrel extends ContainerTFC
 	TEBarrel barrel;
 	float liquidLevel;
 	int liquidID;
-	int sealedTime = 0;
+	int sealedTime = -1;
 	int guiTab = 0;
 
 	public ContainerBarrel(InventoryPlayer inventoryplayer, TEBarrel tileentitybarrel, World world, int x, int y, int z, int tab)

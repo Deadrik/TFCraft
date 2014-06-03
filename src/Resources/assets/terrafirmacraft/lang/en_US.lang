@@ -2049,22 +2049,8 @@ gui.Barrel.Unseal=Unseal
 gui.Barrel.ToggleOff=Out
 gui.Barrel.ToggleOn=In
 gui.Barrel.SealedOn=Sealed On
-
-gui.Barrel.Beer=Beer
-gui.Barrel.Cider=Cider
-gui.Barrel.Rum=Rum
-gui.Barrel.RyeWhiskey=Rye Whiskey
-gui.Barrel.Sake=Sake
-gui.Barrel.Vodka=Vodka
-gui.Barrel.Whiskey=Whiskey
-gui.Barrel.Milk=Milk
-gui.Barrel.CurdledMilk=Curdled Milk
-gui.Barrel.SaltWater=Salt Water
-gui.Barrel.Vinegar=Vinegar
-gui.Barrel.Water=Water
-gui.Barrel.Limewater=Limewater
-gui.Barrel.Tannin=Tannin
-gui.Barrel.Gunpowder=Gunpowder
+gui.Barrel.Solid=Solid Storage
+gui.Barrel.Liquid=Liquid Storage
 
 #== Bloomery GUI ==
 gui.Bloomery.Charcoal=Charcoal
