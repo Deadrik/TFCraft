@@ -835,7 +835,7 @@ public class TFCItems
 	public static Item ScrapedHide;
 	public static Item PrepHide;
 	public static Item SheepSkin;
-	public static Item TerraLeather;
+	public static Item Leather;
 	public static Item FlatLeather;
 
 	public static Item Beer;
@@ -1505,7 +1505,7 @@ public class TFCItems
 
 		SheepSkin = new ItemRawHide().setFolder("tools/").setUnlocalizedName("Sheep Skin").setCreativeTab(TFCTabs.TFCMaterials);
 		FlatLeather = (new ItemFlatGeneric().setFolder("tools/").setUnlocalizedName("Flat Leather"));
-		TerraLeather = new ItemLeather().setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather");
+		Leather = new ItemLeather().setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather");
 
 		Straw = new ItemTerra().setFolder("plants/").setUnlocalizedName("Straw").setCreativeTab(TFCTabs.TFCMaterials);
 		FlatClay = (new ItemFlatGeneric().setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName("Flat Clay"));
@@ -2550,7 +2550,7 @@ public class TFCItems
 		GameRegistry.registerItem(PrepHide , PrepHide.getUnlocalizedName());
 		GameRegistry.registerItem(SheepSkin , SheepSkin.getUnlocalizedName());
 		GameRegistry.registerItem(FlatLeather , FlatLeather.getUnlocalizedName());
-		GameRegistry.registerItem(TerraLeather , TerraLeather.getUnlocalizedName());
+		GameRegistry.registerItem(Leather , Leather.getUnlocalizedName());
 		GameRegistry.registerItem(Straw , Straw.getUnlocalizedName());
 		GameRegistry.registerItem(FlatClay , FlatClay.getUnlocalizedName());
 

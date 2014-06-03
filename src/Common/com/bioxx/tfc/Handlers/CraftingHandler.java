@@ -88,7 +88,7 @@ public class CraftingHandler
 			}
 			else if(itemstack.getItem() == Items.bowl || 
 					/*itemstack.getItem() instanceof ItemTerraFood ||*/ itemstack.getItem() == TFCItems.ScrapedHide
-					|| itemstack.getItem() == TFCItems.Wool||itemstack.getItem() == TFCItems.TerraLeather)
+					|| itemstack.getItem() == TFCItems.Wool||itemstack.getItem() == TFCItems.Leather)
 			{
 				HandleItem(e.player, e.craftMatrix, Recipes.Knives);
 				if (item == TFCItems.Wool /*&& !player.worldObj.isRemote*/)

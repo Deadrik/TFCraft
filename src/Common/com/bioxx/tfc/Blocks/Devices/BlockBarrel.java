@@ -23,6 +23,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
@@ -30,6 +31,7 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemBarrels;
 import com.bioxx.tfc.TileEntities.TEBarrel;
@@ -130,18 +132,8 @@ public class BlockBarrel extends BlockTerraContainer
 			teb = (TEBarrel) te;
 			teb.readFromItemNBT(is.getTagCompound());
 			world.markBlockForUpdate(i, j, k);
-			//TerraFirmaCraft.proxy.sendCustomPacket(teb.createUpdatePacket());
 		}
 	}
-
-	/**
-	 * Returns the block texture based on the side being looked at.  Args: side
-	 */
-	/*@Override
-	public Icon getBlockTextureFromSideAndMetadata(int par1)
-	{
-		return par1 == 1 ? this.blockIndexInTexture - 1 : (par1 == 0 ? this.blockIndexInTexture - 1 : (par1 == 3 ? this.blockIndexInTexture + 1 : this.blockIndexInTexture));
-	}*/
 
 	/**
 	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
@@ -230,9 +222,8 @@ public class BlockBarrel extends BlockTerraContainer
 		if (world.isBlockIndirectlyGettingPowered(x, y, z))
 		{
 			TEBarrel TE = (TEBarrel)world.getTileEntity(x, y, z);
-			if(TE.getFluidLevel() == 256 && /*TE.Type == 4 &&*/ !TE.getSealed())
+			if(TE.getGunPowderCount() >= 256 && TE.getSealed())
 			{
-				TE.setSealed();
 				BarrelEntity BE = new BarrelEntity(world, x, y, z);
 				world.spawnEntityInWorld(BE);
 				world.playSoundAtEntity(BE, "random.fuse", 1.0F, 1.0F);
@@ -298,38 +289,43 @@ public class BlockBarrel extends BlockTerraContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
 	{
 		if (world.isRemote)
 		{
-			//((NetworkTileEntity)world.getTileEntity(x,y,z)).validate();
 			world.markBlockForUpdate(x, y, z);
 			return true;
 		}
 		else
 		{
+			if (player.isSneaking())
+			{
+				return false;
+			}
 
 			if(world.getTileEntity(x, y, z) != null)
 			{
-				TEBarrel TeBarrel = (TEBarrel)(world.getTileEntity(x, y, z));
-				if(TeBarrel.getFluidLevel() == 256 && /*TeBarrel.Type == 4 &&*/ TeBarrel.getSealed())
+				TEBarrel te = (TEBarrel)(world.getTileEntity(x, y, z));
+				if(te.getGunPowderCount() >= 256 && te.getSealed())
 				{
 					List<Entity> list = world.getEntitiesWithinAABB(BarrelEntity.class, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1));
 					for(Entity entity : list)
 					{
 						entity.setDead();
 					}
-					TeBarrel.setUnsealed("killing fuse");
 					return true;
 				}
-				if (entityplayer.isSneaking())
+
+				if(FluidContainerRegistry.isFilledContainer(player.getCurrentEquippedItem()))
 				{
-					return false;
+					TFC_Core.giveItemToPlayer(te.addLiquid(player.getCurrentEquippedItem()), player);
+					return true;
 				}
-				if(TeBarrel.getInvCount() == 0)
-					entityplayer.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);
+
+				if(te.getInvCount() == 0)
+					player.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);
 				else
-					entityplayer.openGui(TerraFirmaCraft.instance, 36, world, x, y, z);
+					player.openGui(TerraFirmaCraft.instance, 36, world, x, y, z);
 				return true;
 			}
 		}

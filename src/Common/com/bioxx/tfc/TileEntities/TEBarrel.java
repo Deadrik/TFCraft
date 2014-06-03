@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -31,7 +32,6 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public int barrelType;
 	public int mode;
 	public ItemStack[] storage;
-	public ItemStack output;
 	private boolean sealed;
 	public int sealtimecounter;
 	public final int SEALTIME = TFCOptions.enableDebugMode ? 0 : (int)((TFC_Time.hourLength * 12) / 100);//default 80
@@ -226,6 +226,17 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return count;
 	}
 
+	public int getGunPowderCount()
+	{
+		int count = 0;
+		for(ItemStack is : storage)
+		{
+			if(is != null && is.getItem() == Items.gunpowder)
+				count+=is.stackSize;
+		}
+		return count;
+	}
+
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer)
 	{
@@ -241,23 +252,6 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public void setInventorySlotContents(int i, ItemStack is)
 	{
 		storage[i] = is;
-	}
-
-	//FIXME This needs to use blocks and not ids from now on
-	public boolean checkValidAddition(int i)
-	{
-		/*if((i == Type || Type == 0 || (Type == 13 && i == 12)) && !sealed && liquidLevel < 256)
-		{
-			liquidLevel = Math.min(liquidLevel + 32, 256);
-			if(Type == 0 || Type == 13)
-			{
-				Type = (i == 12 && Type == 13) ? 14 : i;
-			}
-			updateGui();
-			return true;
-		}*/
-		updateGui();
-		return false;
 	}
 
 	public int getFluidLevel()
@@ -298,6 +292,21 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			fluid.amount = Math.min(fluid.amount+f.amount, 10000);
 		}
 		return true;
+	}
+
+	public ItemStack addLiquid(ItemStack is)
+	{
+		if(is == null)
+			return is;
+		if(FluidContainerRegistry.isFilledContainer(is))
+		{
+			FluidStack fs = FluidContainerRegistry.getFluidForFilledItem(is);
+			if(addLiquid(fs))
+			{
+				return is.getItem().getContainerItem(is);
+			}
+		}
+		return is;
 	}
 
 	@Override
@@ -542,17 +551,20 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.BarleyGround), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.BEER, 10000)));
 		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.RiceGround), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.SAKE, 10000)));
 		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.Sugarcane), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.RUM, 10000)));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(null, new FluidStack(TFCFluid.MILK, 10000), null, new FluidStack(TFCFluid.MILKCURDLED, 10000)));
+		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Vinegar), new FluidStack(TFCFluid.MILK, 10000), null, new FluidStack(TFCFluid.MILKCURDLED, 10000)));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(null, new FluidStack(TFCFluid.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese), 160), null));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Logs, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.TANNIN, 10000)));
+		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Logs, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.TANNIN, 10000)));//WIP
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Powder, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 500), null, new FluidStack(TFCFluid.LIMEWATER, 500)).setRemovesLiquid(false));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.Hide, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 350), new ItemStack(TFCItems.PrepHide, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 350)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.Hide, 1, 1), new FluidStack(TFCFluid.FRESHWATER, 350), new ItemStack(TFCItems.PrepHide, 1, 1), new FluidStack(TFCFluid.FRESHWATER, 350)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.Hide, 1, 2), new FluidStack(TFCFluid.FRESHWATER, 350), new ItemStack(TFCItems.PrepHide, 1, 2), new FluidStack(TFCFluid.FRESHWATER, 350)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.PrepHide, 1, 0), new FluidStack(TFCFluid.LIMEWATER, 350), new ItemStack(TFCItems.SoakedHide, 1, 0), new FluidStack(TFCFluid.LIMEWATER, 350)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.PrepHide, 1, 1), new FluidStack(TFCFluid.LIMEWATER, 350), new ItemStack(TFCItems.SoakedHide, 1, 1), new FluidStack(TFCFluid.LIMEWATER, 350)));
-		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.PrepHide, 1, 2), new FluidStack(TFCFluid.LIMEWATER, 350), new ItemStack(TFCItems.SoakedHide, 1, 2), new FluidStack(TFCFluid.LIMEWATER, 350)));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCBlocks.Sand, 2, 32767), new FluidStack(TFCFluid.FRESHWATER, 10000), new ItemStack(TFCItems.Mortar, 64), null));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCBlocks.Sand2, 2, 32767), new FluidStack(TFCFluid.FRESHWATER, 10000), new ItemStack(TFCItems.Mortar, 64), null));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.ScrapedHide, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 300), new ItemStack(TFCItems.PrepHide, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 300)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.ScrapedHide, 1, 1), new FluidStack(TFCFluid.FRESHWATER, 400), new ItemStack(TFCItems.PrepHide, 1, 1), new FluidStack(TFCFluid.FRESHWATER, 400)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.ScrapedHide, 1, 2), new FluidStack(TFCFluid.FRESHWATER, 500), new ItemStack(TFCItems.PrepHide, 1, 2), new FluidStack(TFCFluid.FRESHWATER, 500)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.Hide, 1, 0), new FluidStack(TFCFluid.LIMEWATER, 300), new ItemStack(TFCItems.SoakedHide, 1, 0), new FluidStack(TFCFluid.LIMEWATER, 300)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.Hide, 1, 1), new FluidStack(TFCFluid.LIMEWATER, 400), new ItemStack(TFCItems.SoakedHide, 1, 1), new FluidStack(TFCFluid.LIMEWATER, 400)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.Hide, 1, 2), new FluidStack(TFCFluid.LIMEWATER, 500), new ItemStack(TFCItems.SoakedHide, 1, 2), new FluidStack(TFCFluid.LIMEWATER, 500)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.PrepHide, 1, 0), new FluidStack(TFCFluid.TANNIN, 300), new ItemStack(TFCItems.Leather, 1), new FluidStack(TFCFluid.TANNIN, 300)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.PrepHide, 1, 1), new FluidStack(TFCFluid.TANNIN, 400), new ItemStack(TFCItems.Leather, 2), new FluidStack(TFCFluid.TANNIN, 400)));
+		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.PrepHide, 1, 2), new FluidStack(TFCFluid.TANNIN, 500), new ItemStack(TFCItems.Leather, 3), new FluidStack(TFCFluid.TANNIN, 500)));		
+		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCBlocks.Sand, 1, 32767), new FluidStack(TFCFluid.LIMEWATER, 100), new ItemStack(TFCItems.Mortar, 1), new FluidStack(TFCFluid.LIMEWATER, 100)));
+		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCBlocks.Sand2, 1, 32767), new FluidStack(TFCFluid.LIMEWATER, 100), new ItemStack(TFCItems.Mortar, 1), new FluidStack(TFCFluid.LIMEWATER, 100)));
 	}
 }

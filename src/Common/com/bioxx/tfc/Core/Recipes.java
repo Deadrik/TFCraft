@@ -193,7 +193,7 @@ public class Recipes
 			//	"2","1", Character.valueOf('1'), new ItemStack(TFCItems.TerraLeather,1),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
 		}
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.item_frame,1),new Object[]{"###","#$#","###",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.TerraLeather,1)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.item_frame,1),new Object[]{"###","#$#","###",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.Leather,1)}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.painting,1),new Object[]{"###","#$#","###",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)}));
 
 		GameRegistry.addRecipe(new ItemStack(Blocks.carpet,2,0),new Object[]{"$$",Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
@@ -298,7 +298,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Ink, 16, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(TFCItems.Dye,1,0)});
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.FireStarter, 1, 0), new Object[] { "2 "," 2", Character.valueOf('2'), "stickWood"}));
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Bellows, 1, 0), new Object[] { "###","???","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767), Character.valueOf('?'), TFCItems.TerraLeather});
+		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Bellows, 1, 0), new Object[] { "###","???","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767), Character.valueOf('?'), TFCItems.Leather});
 		//GameRegistry.addRecipe(new ItemStack(TFCItems.terraStoneAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), mod_TFC_Core.terraStoneIgIn});
 		//GameRegistry.addRecipe(new ItemStack(TFCItems.terraStoneAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), mod_TFC_Core.terraStoneIgEx});
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil, 1, 1), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.CopperIngot2x});
@@ -370,7 +370,7 @@ public class Recipes
 			Character.valueOf('P'), TFCBlocks.StoneSedSmooth});
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Quern, 1), new Object[] { "PPP", 
 			Character.valueOf('P'), TFCBlocks.StoneMMSmooth});
-		GameRegistry.addShapelessRecipe(new ItemStack(Items.book,1),new Object[]{new ItemStack(Items.paper,3),new ItemStack(TFCItems.TerraLeather,1)});
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.book,1),new Object[]{new ItemStack(Items.paper,3),new ItemStack(TFCItems.Leather,1)});
 
 		//remove wool and book and quill recipes
 		//RemoveRecipe(new ItemStack(Item.writableBook));
@@ -845,7 +845,7 @@ public class Recipes
 		OreDictionary.registerOre("lumpClay", new ItemStack(TFCItems.ClayBall, 1, 0));
 
 		OreDictionary.registerOre("itemLeather", new ItemStack(Items.leather));
-		OreDictionary.registerOre("itemLeather", new ItemStack(TFCItems.TerraLeather));
+		OreDictionary.registerOre("itemLeather", new ItemStack(TFCItems.Leather));
 
 		OreDictionary.registerOre("itemArrow", new ItemStack(Items.arrow));
 		OreDictionary.registerOre("itemArrow", new ItemStack(TFCItems.Arrow));
@@ -890,7 +890,7 @@ public class Recipes
 			//GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneIgInCobble});
 			//GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneIgExCobble});
 			//GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneMMCobble});
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather,1),new Object[]{new ItemStack(TFCItems.TerraLeather, 1)});
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather,1),new Object[]{new ItemStack(TFCItems.Leather, 1)});
 			GameRegistry.addShapelessRecipe(new ItemStack(Items.bow,1),new Object[]{new ItemStack(TFCItems.Bow, 1, 0)});
 			GameRegistry.addShapelessRecipe(new ItemStack(Items.fishing_rod,1),new Object[]{new ItemStack(TFCItems.FishingRod, 1, 0)});
 
