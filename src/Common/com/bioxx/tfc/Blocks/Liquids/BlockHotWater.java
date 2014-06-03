@@ -4,6 +4,10 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -74,5 +78,14 @@ public class BlockHotWater extends BlockFreshWater
 		TFC_Textures.GuiSkills = registerer.registerIcon(Reference.ModID + ":" + "button_skills");
 		TFC_Textures.GuiCalendar = registerer.registerIcon(Reference.ModID + ":" + "button_calendar");
 		TFC_Textures.GuiHealth = registerer.registerIcon(Reference.ModID + ":" + "button_health");
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+	{
+		if (entity instanceof EntityLivingBase)
+		{
+			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 100));
+		}
 	}
 }
