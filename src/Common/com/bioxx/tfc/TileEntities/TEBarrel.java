@@ -353,9 +353,9 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		if(!worldObj.isRemote)
 		{
 			careForInventorySlot();
-			if(worldObj.isRaining() && this.fluid == null)
+			if(worldObj.isRaining() && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) && this.fluid == null)
 				fluid = new FluidStack(TFCFluid.FRESHWATER, 1);
-			else if(worldObj.isRaining() && this.fluid != null && fluid.getFluid() == TFCFluid.FRESHWATER)
+			else if(worldObj.isRaining() && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) && this.fluid != null && fluid.getFluid() == TFCFluid.FRESHWATER)
 				fluid.amount = Math.min(fluid.amount+1, 10000);
 
 
