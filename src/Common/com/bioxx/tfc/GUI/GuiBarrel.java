@@ -279,10 +279,10 @@ public class GuiBarrel extends GuiContainerTFC
 				GL11.glColor4ub((byte)((color >> 16)&255), (byte)((color >> 8)&255), (byte)(color & 255), (byte)((0xaa)&255));
 				int div = (int)Math.floor(scale/8);
 				int rem = scale-(div*8);
-				this.drawTexturedModelRectFromIcon(w + 12, h + 68-scale, liquidIcon, 8, div > 0 ? 8 : rem);
+				this.drawTexturedModelRectFromIcon(w + 12, h + 65-scale, liquidIcon, 8, div > 0 ? 8 : rem);
 				for(int c = 0; div > 0 && c < div; c++)
 				{
-					this.drawTexturedModelRectFromIcon(w + 12, h + 68-(8+(c*8)), liquidIcon, 8, 8);
+					this.drawTexturedModelRectFromIcon(w + 12, h + 65-(8+(c*8)), liquidIcon, 8, 8);
 				}
 				GL11.glColor3f(0, 0, 0);
 			}
@@ -295,7 +295,7 @@ public class GuiBarrel extends GuiContainerTFC
 			}
 			if(barrel.recipe != null)
 			{
-				drawCenteredString(this.fontRendererObj, barrel.recipe.getRecipeName(), w+88, h+72, 0x555555);
+				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Bloomery.Output")+": "+barrel.recipe.getRecipeName(), w+88, h+72, 0x555555);
 			}
 		}
 		else if(guiTab == 1)
@@ -309,7 +309,7 @@ public class GuiBarrel extends GuiContainerTFC
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		if(this.mouseInRegion(12, 18, 9, 50, mouseX, mouseY))
+		if(this.mouseInRegion(12, 15, 9, 50, mouseX, mouseY))
 		{
 			ArrayList list = new ArrayList();
 			list.add(barrel.getFluidLevel()+"mB");

@@ -69,7 +69,7 @@ public class BarrelRecipe
 	{
 		String s = "";
 		if(this.outItemStack != null)
-			s=outItemStack.getDisplayName();
+			s=/*outItemStack.stackSize+"x " +*/ outItemStack.getDisplayName();
 		if(!this.inFluid.isFluidEqual(outFluid))
 			s=outFluid.getFluid().getLocalizedName();
 		return s;
