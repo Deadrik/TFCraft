@@ -240,6 +240,7 @@ item.Seeds Squash.name=Squash Seeds
 item.Seeds Tomato.name=Tomato Seeds
 
 #== Alcohol ==
+item.Glass Bottle.name=Empty Glass Bottle
 item.Beer.name=Beer
 item.Cider.name=Cider
 item.RyeWhiskey.name=Rye Whiskey

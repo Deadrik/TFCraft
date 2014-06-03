@@ -36,6 +36,7 @@ import com.bioxx.tfc.Items.ItemFertilizer;
 import com.bioxx.tfc.Items.ItemFlatGeneric;
 import com.bioxx.tfc.Items.ItemFruitTreeSapling;
 import com.bioxx.tfc.Items.ItemGem;
+import com.bioxx.tfc.Items.ItemGlassBottle;
 import com.bioxx.tfc.Items.ItemIngot;
 import com.bioxx.tfc.Items.ItemLeather;
 import com.bioxx.tfc.Items.ItemLogs;
@@ -846,6 +847,7 @@ public class TFCItems
 	public static Item Vodka;
 	public static Item Whiskey;
 
+	public static Item GlassBottle;
 	public static Item Potion;
 
 	public static Item ClayBall;
@@ -1009,6 +1011,7 @@ public class TFCItems
 		Bow = new ItemCustomBow().setUnlocalizedName("bow").setTextureName("bow");
 		Arrow = new ItemArrow().setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFCWeapons);
 		Dye = new ItemDyeCustom().setUnlocalizedName("dyePowder").setTextureName("dye_powder").setCreativeTab(TFCTabs.TFCMaterials);
+		GlassBottle = new ItemGlassBottle().setUnlocalizedName("Glass Bottle");
 		Potion = new ItemCustomPotion().setUnlocalizedName("potion").setTextureName("potion");
 		Leash = new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFCTools);
 
@@ -2524,6 +2527,7 @@ public class TFCItems
 		GameRegistry.registerItem(DoorKapok, DoorKapok.getUnlocalizedName());
 		GameRegistry.registerItem(DoorAcacia, DoorAcacia.getUnlocalizedName());
 
+		GameRegistry.registerItem(GlassBottle, GlassBottle.getUnlocalizedName());
 		GameRegistry.registerItem(Beer, Beer.getUnlocalizedName());
 		GameRegistry.registerItem(Cider, Cider.getUnlocalizedName());
 		GameRegistry.registerItem(Rum, Rum.getUnlocalizedName());
