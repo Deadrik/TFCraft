@@ -316,9 +316,20 @@ public class BlockBarrel extends BlockTerraContainer
 					return true;
 				}
 
-				if(FluidContainerRegistry.isFilledContainer(player.getCurrentEquippedItem()))
+				if(FluidContainerRegistry.isFilledContainer(player.getCurrentEquippedItem()) && !te.getSealed())
 				{
-					TFC_Core.giveItemToPlayer(te.addLiquid(player.getCurrentEquippedItem()), player);
+					ItemStack is = te.addLiquid(player.getCurrentEquippedItem());
+					if(!ItemStack.areItemStacksEqual(player.getCurrentEquippedItem(), is))
+						player.getCurrentEquippedItem().stackSize--;
+					TFC_Core.giveItemToPlayer(is, player);
+					return true;
+				}
+				else if(FluidContainerRegistry.isEmptyContainer(player.getCurrentEquippedItem()))
+				{
+					ItemStack is = te.removeLiquid(player.getCurrentEquippedItem());
+					if(!ItemStack.areItemStacksEqual(player.getCurrentEquippedItem(), is))
+						player.getCurrentEquippedItem().stackSize--;
+					TFC_Core.giveItemToPlayer(is, player);
 					return true;
 				}
 

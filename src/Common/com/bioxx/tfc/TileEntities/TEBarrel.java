@@ -321,7 +321,27 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			FluidStack fs = FluidContainerRegistry.getFluidForFilledItem(is);
 			if(addLiquid(fs))
 			{
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				return is.getItem().getContainerItem(is);
+			}
+		}
+		return is;
+	}
+
+	public ItemStack removeLiquid(ItemStack is)
+	{
+		if(is == null)
+			return is;
+		if(FluidContainerRegistry.isEmptyContainer(is))
+		{
+			ItemStack out = FluidContainerRegistry.fillFluidContainer(fluid, is);
+			if(out != null)
+			{
+				FluidStack fs = FluidContainerRegistry.getFluidForFilledItem(out);
+				fluid.amount -= fs.amount;
+				is = null;
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+				return out;
 			}
 		}
 		return is;
@@ -333,6 +353,12 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		if(!worldObj.isRemote)
 		{
 			careForInventorySlot();
+			if(worldObj.isRaining() && this.fluid == null)
+				fluid = new FluidStack(TFCFluid.FRESHWATER, 1);
+			else if(worldObj.isRaining() && this.fluid != null && fluid.getFluid() == TFCFluid.FRESHWATER)
+				fluid.amount = Math.min(fluid.amount+1, 10000);
+
+
 			processTimer++;
 
 			if(processTimer > 100)
@@ -513,6 +539,13 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		this.rotation = nbt.getByte("rotation");
 		this.sealed = nbt.getBoolean("sealed");
+		if(nbt.getInteger("fluid") != -1)
+		{
+			if(fluid != null)
+				fluid.amount = nbt.getInteger("fluidAmount");
+			else
+				fluid = new FluidStack(nbt.getInteger("fluid"), nbt.getInteger("fluidAmount"));
+		}
 		this.worldObj.func_147479_m(xCoord, yCoord, zCoord);
 	}
 
@@ -521,6 +554,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		nbt.setByte("rotation", rotation);
 		nbt.setBoolean("sealed", sealed);
+		nbt.setInteger("fluid", fluid != null ? fluid.fluidID : -1);
+		nbt.setInteger("fluidAmount", fluid != null ? fluid.amount : 0);
 	}
 
 	@Override

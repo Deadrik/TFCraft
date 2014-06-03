@@ -3,6 +3,7 @@ package com.bioxx.tfc.Render.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
@@ -40,12 +41,27 @@ public class RenderBarrel implements ISimpleBlockRenderingHandler
 			if(te.getSealed())
 			{
 				renderer.setRenderBounds(min+0.05F, min, min+0.05F, max-0.05F, 0.95F, max-0.05F);
+				renderer.renderStandardBlock(lidBlock, x, y, z);
 			}
 			else
 			{
 				renderer.setRenderBounds(min+0.05F, min, min+0.05F, max-0.05F, min+0.05F, max-0.05F);
+				renderer.renderStandardBlock(lidBlock, x, y, z);
+
+				if(te.fluid != null)
+				{
+					int color = te.fluid.getFluid().getColor(te.fluid);
+					float f = (color >> 16 & 255) / 255.0F;
+					float f1 = (color >> 8 & 255) / 255.0F;
+					float f2 = (color & 255) / 255.0F;
+					float h = 0.75f*(te.fluid.amount/10000f);
+					renderer.setRenderBounds(min+0.05F, min+0.05, min+0.05F, max-0.05F, min+0.05f+h, max-0.05F);
+					IIcon still = te.fluid.getFluid().getStillIcon();
+					renderer.setOverrideBlockTexture(still);
+					renderer.renderStandardBlockWithColorMultiplier(lidBlock, x, y, z, f, f1, f2);
+					renderer.clearOverrideBlockTexture();
+				}
 			}
-			renderer.renderStandardBlock(lidBlock, x, y, z);
 			renderer.setRenderBounds(min, 0F, min+0.05F, min+0.05F, 1F, max-0.05F);
 			rotate(renderer, 1);
 			renderer.renderStandardBlock(planksBlock, x, y, z);
