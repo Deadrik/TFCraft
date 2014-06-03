@@ -9,8 +9,9 @@ public class BarrelRecipe
 	FluidStack inFluid;
 	ItemStack outItemStack;
 	FluidStack outFluid;
-	int sealTime = 8;
-	boolean removesLiquid = true;
+	public int sealTime = 8;
+	public boolean removesLiquid = true;
+	boolean isSealedRecipe = true;
 
 	public BarrelRecipe(ItemStack inputItem, FluidStack inputFluid, ItemStack outIS, FluidStack outputFluid)
 	{
@@ -22,7 +23,7 @@ public class BarrelRecipe
 
 	public BarrelRecipe(ItemStack inputItem, FluidStack inputFluid, ItemStack outIS, FluidStack outputFluid, int seal)
 	{
-		this(outIS, outputFluid, outIS, outputFluid);
+		this(inputItem, inputFluid, outIS, outputFluid);
 		this.sealTime = seal;
 	}
 
@@ -32,13 +33,21 @@ public class BarrelRecipe
 		return this;
 	}
 
+	public BarrelRecipe setSealedRecipe(boolean b)
+	{
+		this.isSealedRecipe = b;
+		return this;
+	}
+
 	public Boolean matches(ItemStack item, FluidStack fluid)
 	{
-		boolean iStack = removesLiquid ? true : (inItemStack != null && item.stackSize >= (int)Math.ceil(fluid.amount/inFluid.amount));
-		boolean fStack = removesLiquid ? true : (inFluid != null && fluid.amount >= item.stackSize*inFluid.amount);
+		boolean iStack = removesLiquid ? true : (inItemStack != null && item != null && fluid != null && inFluid != null && item.stackSize >= (int)Math.ceil(fluid.amount/inFluid.amount));
+		boolean fStack = !removesLiquid ? true : (inFluid != null && item != null && fluid != null && outFluid != null && fluid.amount >= item.stackSize*outFluid.amount);
 
-		return ((inItemStack != null && inItemStack.isItemEqual(item) && iStack) || inItemStack == null) && 
-				((inFluid != null && inFluid.isFluidEqual(fluid) && fStack) || inFluid == null);
+		boolean anyStack = !removesLiquid && !isSealedRecipe && this.outItemStack == null;
+
+		return ((inItemStack != null && inItemStack.isItemEqual(item) && (iStack || anyStack)) || inItemStack == null) && 
+				((inFluid != null && inFluid.isFluidEqual(fluid) && (fStack || anyStack)) || inFluid == null);
 	}
 
 	public Boolean isInFluid(FluidStack item)
@@ -48,22 +57,43 @@ public class BarrelRecipe
 
 	public ItemStack getInItem()
 	{
-		return inItemStack;
+		return inItemStack.copy();
 	}
 
 	public FluidStack getInFluid()
 	{
-		return inFluid;
+		return inFluid.copy();
+	}
+
+	public String getRecipeName()
+	{
+		String s = "";
+		if(this.outItemStack != null)
+			s=outItemStack.getDisplayName();
+		if(!this.inFluid.isFluidEqual(outFluid))
+			s=outFluid.getFluid().getLocalizedName();
+		return s;
+	}
+
+	public boolean isSealedRecipe()
+	{
+		return this.isSealedRecipe;
 	}
 
 	public ItemStack getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
+		ItemStack is = null;
 		if(outItemStack != null)
 		{
-			ItemStack is = outItemStack.copy();
+			is = outItemStack.copy();
 			return is;
 		}
-		return null;
+		if(!removesLiquid)
+		{
+			is = inIS;
+			is.stackSize -= inFS.amount/this.outFluid.amount;
+		}
+		return is;
 	}
 
 	public FluidStack getResultFluid(ItemStack inIS, FluidStack inFS, int sealedTime)

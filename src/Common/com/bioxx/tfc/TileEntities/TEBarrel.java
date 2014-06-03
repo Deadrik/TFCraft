@@ -33,17 +33,20 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public int mode;
 	public ItemStack[] storage;
 	private boolean sealed;
-	public int sealtimecounter;
+	public int sealtime;
+	public int unsealtime;
+	private int processTimer = 0;
 	public final int SEALTIME = TFCOptions.enableDebugMode ? 0 : (int)((TFC_Time.hourLength * 12) / 100);//default 80
 	public static final int MODE_IN = 0;
 	public static final int MODE_OUT = 1;
-	private boolean	processUnseal = false;
+	public BarrelRecipe recipe;
 
 	public TEBarrel()
 	{
 		sealed = false;
 		//itemstack = new ItemStack(1,0,0);
-		sealtimecounter = 0;
+		sealtime = 0;
+		unsealtime = 0;
 		storage = new ItemStack[12];
 	}
 
@@ -70,33 +73,46 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return sealed;
 	}
 
-	private void ProcessItems()
+	public void ProcessItems()
 	{
 		if(this.getInvCount() == 0)
 		{
-			if(getInputStack() != null)
+			if(getFluidStack() != null)
 			{
-				BarrelRecipe recipe = BarrelManager.getInstance().findMatchingRecipe(getInputStack(), getFluidStack());
-				if(recipe != null)
+				recipe = BarrelManager.getInstance().findMatchingRecipe(getInputStack(), getFluidStack(), this.sealed);
+				if(recipe != null && !worldObj.isRemote)
 				{
-					int sealedTime = (int)TFC_Time.getTotalHours() - sealtimecounter;
+					int time = 0;
+					if(sealtime > 0)
+						time = (int)TFC_Time.getTotalHours() - sealtime;
+					else if(unsealtime > 0)
+						time = (int)TFC_Time.getTotalHours() - unsealtime;
+
+					//Make sure that the recipe meets the time requirements
+					if(time < recipe.sealTime)
+						return;
+
 					ItemStack origIS = getInputStack().copy();
 					FluidStack origFS = getFluidStack().copy();
-					if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, sealedTime)))
+					if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, time)))
 					{
-						fluid.amount -= recipe.getResultFluid(origIS, origFS, sealedTime).amount;
+						fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount;
 					}
 					else
 					{
-						this.fluid = recipe.getResultFluid(origIS, origFS, sealedTime);
+						this.fluid = recipe.getResultFluid(origIS, origFS, time);
 						this.fluid.amount = origFS.amount;
 					}
-					storage[0] = recipe.getResult(origIS, origFS, sealedTime);
-
+					storage[0] = recipe.getResult(origIS, origFS, time);
+					/*if(!recipe.removesLiquid && !recipe.isSealedRecipe() && (storage[0] == null && origIS != null))
+					{
+						int ss = fluid.amount / recipe.getResultFluid(origIS, origFS, time).amount;
+						storage[0] = origIS;
+						storage[0].stackSize-=ss;
+					}*/
 				}
 			}
 		}
-		this.sealtimecounter = 0;
 	}
 
 	public void setSealed()
@@ -252,6 +268,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public void setInventorySlotContents(int i, ItemStack is)
 	{
 		storage[i] = is;
+		if(i == 0)
+			ProcessItems();
 	}
 
 	public int getFluidLevel()
@@ -315,16 +333,12 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		if(!worldObj.isRemote)
 		{
 			careForInventorySlot();
-			if(sealed)
-			{
-				if(sealtimecounter == 0)
-					sealtimecounter = (int) TFC_Time.getTotalHours();
-			}
+			processTimer++;
 
-			if(processUnseal)
+			if(processTimer > 100)
 			{
 				ProcessItems();
-				this.processUnseal = false;
+				processTimer = 0;
 			}
 
 			if(fluid != null && fluid.amount == 0)
@@ -432,7 +446,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		super.writeToNBT(nbt);
 		nbt.setBoolean("Sealed", sealed);
-		nbt.setInteger("SealTime", sealtimecounter);
+		nbt.setInteger("SealTime", sealtime);
 		nbt.setInteger("mode", mode);
 		NBTTagCompound fluidNBT = new NBTTagCompound();
 		if(fluid != null)
@@ -459,7 +473,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		super.readFromNBT(nbt);
 		fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag("fluidNBT"));
 		sealed = nbt.getBoolean("Sealed");
-		sealtimecounter = nbt.getInteger("SealTime");
+		sealtime = nbt.getInteger("SealTime");
 		mode = nbt.getInteger("mode");
 		rotation = nbt.getByte("rotation");
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
@@ -535,7 +549,15 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			{
 				sealed = nbt.getBoolean("seal");
 				if(!sealed)
-					processUnseal = true;
+				{
+					unsealtime = (int) TFC_Time.getTotalHours();
+					sealtime = 0;
+				}
+				else
+				{
+					sealtime = (int) TFC_Time.getTotalHours();
+					unsealtime = 0;
+				}
 				worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 35, worldObj, xCoord, yCoord, zCoord);
 			}
 		}
@@ -554,7 +576,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Vinegar), new FluidStack(TFCFluid.MILK, 10000), null, new FluidStack(TFCFluid.MILKCURDLED, 10000)));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(null, new FluidStack(TFCFluid.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese), 160), null));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Logs, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.TANNIN, 10000)));//WIP
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Powder, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 500), null, new FluidStack(TFCFluid.LIMEWATER, 500)).setRemovesLiquid(false));
+		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Powder, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 500), null, new FluidStack(TFCFluid.LIMEWATER, 500), 0).setSealedRecipe(false).setRemovesLiquid(false));
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.ScrapedHide, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 300), new ItemStack(TFCItems.PrepHide, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 300)));
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.ScrapedHide, 1, 1), new FluidStack(TFCFluid.FRESHWATER, 400), new ItemStack(TFCItems.PrepHide, 1, 1), new FluidStack(TFCFluid.FRESHWATER, 400)));
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.ScrapedHide, 1, 2), new FluidStack(TFCFluid.FRESHWATER, 500), new ItemStack(TFCItems.PrepHide, 1, 2), new FluidStack(TFCFluid.FRESHWATER, 500)));

@@ -6,7 +6,6 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +25,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 
-public class GuiBarrel extends GuiContainer
+public class GuiBarrel extends GuiContainerTFC
 {
 	public static final ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_barrel.png");
 	private TEBarrel barrel;
@@ -35,13 +34,11 @@ public class GuiBarrel extends GuiContainer
 
 	public GuiBarrel(InventoryPlayer inventoryplayer, TEBarrel tileentitybarrel, World world, int x, int y, int z, int tab)
 	{
-		super(new ContainerBarrel(inventoryplayer,tileentitybarrel, world, x, y, z, tab));
+		super(new ContainerBarrel(inventoryplayer,tileentitybarrel, world, x, y, z, tab), 176, 85);
 		barrel = tileentitybarrel;
 		player = inventoryplayer.player;
 		guiLeft = (width - 208) / 2;
 		guiTop = (height - 198) / 2;
-		xSize = 176;
-		ySize = 85+PlayerInventory.invYSize;
 		guiTab = tab;
 	}
 
@@ -229,15 +226,6 @@ public class GuiBarrel extends GuiContainer
 				}
 			}
 		}
-
-		private boolean isPointInRegion(int mouseX, int mouseY)
-		{
-			int k1 = 0;//screen.getGuiLeft();
-			int l1 = 0;//screen.getGuiTop();
-			mouseX -= k1;
-			mouseY -= l1;
-			return mouseX >= xPosition - 1 && mouseX < xPosition + width + 1 && mouseY >= yPosition - 1 && mouseY < yPosition + height + 1;
-		}
 	}
 
 	@Override
@@ -270,7 +258,7 @@ public class GuiBarrel extends GuiContainer
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
+	protected void drawGuiContainerBackgroundLayer(float f, int mouseX, int mouseY)
 	{
 		TFC_Core.bindTexture(texture);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
@@ -298,6 +286,17 @@ public class GuiBarrel extends GuiContainer
 				}
 				GL11.glColor3f(0, 0, 0);
 			}
+
+			if(barrel.getFluidStack() != null)
+				drawCenteredString(this.fontRendererObj, barrel.fluid.getFluid().getLocalizedName(), w+88, h+7, 0x555555);
+			if(barrel.sealtime != 0)
+			{
+				drawCenteredString(this.fontRendererObj, TFC_Time.getDateString(barrel.sealtime*1000), w+88, h+17, 0x555555);
+			}
+			if(barrel.recipe != null)
+			{
+				drawCenteredString(this.fontRendererObj, barrel.recipe.getRecipeName(), w+88, h+72, 0x555555);
+			}
 		}
 		else if(guiTab == 1)
 		{
@@ -308,16 +307,13 @@ public class GuiBarrel extends GuiContainer
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int i, int j)
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		if(guiTab == 0)
+		if(this.mouseInRegion(12, 18, 9, 50, mouseX, mouseY))
 		{
-			if(barrel.getFluidStack() != null)
-				drawCenteredString(this.fontRendererObj, barrel.fluid.getFluid().getLocalizedName(), 88, 7, 0x555555);
-			if(barrel.sealtimecounter != 0)
-			{
-				drawCenteredString(this.fontRendererObj, /*StatCollector.translateToLocal("gui.Barrel.SealedOn")+": "+*/TFC_Time.getDateString(barrel.sealtimecounter*1000), 88, 17, 0x555555);
-			}
+			ArrayList list = new ArrayList();
+			list.add(barrel.getFluidLevel()+"mB");
+			this.drawHoveringText(list, mouseX-guiLeft, mouseY-guiTop+8, this.fontRendererObj);
 		}
 	}
 

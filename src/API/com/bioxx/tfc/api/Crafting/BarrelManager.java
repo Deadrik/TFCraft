@@ -26,13 +26,14 @@ public class BarrelManager
 		recipes.add(recipe);
 	}
 
-	public BarrelRecipe findMatchingRecipe(ItemStack item, FluidStack fluid)
+	public BarrelRecipe findMatchingRecipe(ItemStack item, FluidStack fluid, boolean sealed)
 	{
 		for(Object recipe : recipes)
 		{
-			BarrelRecipe qr = (BarrelRecipe) recipe;
-			if(qr.matches(item, fluid))
-				return qr;
+			BarrelRecipe br = (BarrelRecipe) recipe;
+			if((br.inItemStack != null && item != null) && (br.inFluid != null && fluid != null) && br.matches(item, fluid))
+				if(br.isSealedRecipe == sealed)
+					return br;
 		}
 		return null;
 	}

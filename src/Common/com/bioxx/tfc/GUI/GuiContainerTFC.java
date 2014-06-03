@@ -73,6 +73,13 @@ public class GuiContainerTFC extends GuiContainer
 			PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 	}
 
+	protected boolean mouseInRegion(int x, int y, int width, int height, int mouseX, int mouseY)
+	{
+		mouseX -= guiLeft;
+		mouseY -= guiTop;
+		return mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height;
+	}
+
 	protected void bindTexture(ResourceLocation rl)
 	{
 		TFC_Core.bindTexture(rl);

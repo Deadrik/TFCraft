@@ -114,9 +114,9 @@ public class ContainerBarrel extends ContainerTFC
 				liquidLevel = barrel.getFluidLevel();
 				var2.sendProgressBarUpdate(this, 1, this.barrel.getFluidLevel());
 			}
-			if(this.barrel.sealtimecounter != this.sealedTime)
+			if(this.barrel.sealtime != this.sealedTime)
 			{
-				sealedTime = barrel.sealtimecounter;
+				sealedTime = barrel.sealtime;
 				var2.sendProgressBarUpdate(this, 2, sealedTime);
 			}
 		}
@@ -135,6 +135,7 @@ public class ContainerBarrel extends ContainerTFC
 			{
 				this.barrel.fluid = new FluidStack(val, 1000);
 			}
+			barrel.ProcessItems();
 		}
 		else if (id == 1)
 		{
@@ -143,22 +144,7 @@ public class ContainerBarrel extends ContainerTFC
 		}
 		else if (id == 2)
 		{
-			this.barrel.sealtimecounter = val;
-			if(guiTab == 0)
-			{
-				/*if(val != 0)
-				{
-					this.inventorySlots.remove(0);
-					this.inventorySlots.add(0, new SlotForShowOnly(barrel, 0, 80, 29));
-					((Slot)inventorySlots.get(0)).slotNumber = 0;
-				}
-				else
-				{
-					this.inventorySlots.remove(0);
-					this.inventorySlots.add(0, new Slot(barrel, 0, 80, 29));
-					((Slot)inventorySlots.get(0)).slotNumber = 0;
-				}*/
-			}
+			this.barrel.sealtime = val;
 		}
 	}
 }
