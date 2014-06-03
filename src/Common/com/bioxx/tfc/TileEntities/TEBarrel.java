@@ -269,7 +269,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		storage[i] = is;
 		if(i == 0)
+		{
 			ProcessItems();
+			if(!getSealed())
+				this.unsealtime = (int)TFC_Time.getTotalHours();
+		}
 	}
 
 	public int getFluidLevel()
