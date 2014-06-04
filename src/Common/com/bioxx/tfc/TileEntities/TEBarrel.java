@@ -9,7 +9,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -30,7 +29,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public FluidStack fluid = null;
 	public byte rotation = 0;
 	public int barrelType;
-	public int mode;
+	public int mode = 0;
 	public ItemStack[] storage = new ItemStack[12];
 	private boolean sealed = false;
 	public int sealtime = 0;
@@ -120,30 +119,6 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(reason.equals("killing fuse"))
 			sealed = false;
-	}
-
-	public static String getType(int type)
-	{
-		switch (type)
-		{
-		case 0: return StatCollector.translateToLocal("gui.Barrel.Empty");
-		case 1: return StatCollector.translateToLocal("gui.Barrel.Water");
-		case 2: return StatCollector.translateToLocal("gui.Barrel.Limewater");
-		case 3: return StatCollector.translateToLocal("gui.Barrel.Tannin");
-		case 4: return StatCollector.translateToLocal("gui.Barrel.Gunpowder");
-		case 5: return StatCollector.translateToLocal("gui.Barrel.Beer");
-		case 6: return StatCollector.translateToLocal("gui.Barrel.Cider");
-		case 7: return StatCollector.translateToLocal("gui.Barrel.Vodka");
-		case 8: return StatCollector.translateToLocal("gui.Barrel.Whiskey");
-		case 9: return StatCollector.translateToLocal("gui.Barrel.RyeWhiskey");
-		case 10: return StatCollector.translateToLocal("gui.Barrel.Sake");
-		case 11: return StatCollector.translateToLocal("gui.Barrel.Rum");
-		case 12: return StatCollector.translateToLocal("gui.Barrel.Vinegar");
-		case 13: return StatCollector.translateToLocal("gui.Barrel.Milk");
-		case 14: return StatCollector.translateToLocal("gui.Barrel.CurdledMilk");
-		case 15: return StatCollector.translateToLocal("gui.Barrel.SaltWater");
-		default: return "";
-		}
 	}
 
 	@Override
@@ -340,6 +315,10 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				FluidStack fs = FluidContainerRegistry.getFluidForFilledItem(out);
 				fluid.amount -= fs.amount;
 				is = null;
+				if(fluid.amount == 0)
+				{
+					fluid = null;
+				}
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				return out;
 			}
@@ -393,12 +372,9 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			}
 			else if(mode == MODE_OUT)
 			{
-				ItemStack out = FluidContainerRegistry.fillFluidContainer(fluid, getInputStack());
-				FluidStack outLiquid = FluidContainerRegistry.getFluidForFilledItem(out);
-				if(out != null && fluid.amount >= outLiquid.amount)
+				if(FluidContainerRegistry.isEmptyContainer(getInputStack()))
 				{
-					this.setInventorySlotContents(0, out);
-					this.fluid.amount-=outLiquid.amount;
+					this.setInventorySlotContents(0, this.removeLiquid(getInputStack()));
 				}
 			}
 		}
@@ -411,10 +387,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return 0;
 	}
 
-	public boolean actionSeal(EntityPlayer player)
+	public boolean actionSeal(int tab, EntityPlayer player)
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setBoolean("seal", true);
+		nbt.setByte("tab", (byte)tab);
 		nbt.setString("player", player.getDisplayName());
 		this.broadcastPacketInRange(this.createDataPacket(nbt));
 		sealed = true;
@@ -422,10 +399,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return true;
 	}
 
-	public boolean actionUnSeal(EntityPlayer player)
+	public boolean actionUnSeal(int tab, EntityPlayer player)
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setBoolean("seal", false);
+		nbt.setByte("tab", (byte)tab);
 		nbt.setString("player", player.getDisplayName());
 		this.broadcastPacketInRange(this.createDataPacket(nbt));
 		sealed = false;
@@ -476,7 +454,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		nbt.setBoolean("Sealed", sealed);
 		nbt.setInteger("SealTime", sealtime);
 		nbt.setInteger("barrelType", barrelType);
-		nbt.setInteger("mode", mode);
+		//nbt.setInteger("mode", mode);
 		NBTTagCompound fluidNBT = new NBTTagCompound();
 		if(fluid != null)
 			fluid.writeToNBT(fluidNBT);
@@ -504,7 +482,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		sealed = nbt.getBoolean("Sealed");
 		sealtime = nbt.getInteger("SealTime");
 		barrelType = nbt.getInteger("barrelType");
-		mode = nbt.getInteger("mode");
+		//mode = nbt.getInteger("mode");
 		rotation = nbt.getByte("rotation");
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		storage = new ItemStack[getSizeInventory()];
@@ -551,6 +529,10 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			else
 				fluid = new FluidStack(nbt.getInteger("fluid"), nbt.getInteger("fluidAmount"));
 		}
+		else
+		{
+			fluid = null;
+		}
 		this.worldObj.func_147479_m(xCoord, yCoord, zCoord);
 	}
 
@@ -568,15 +550,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
-			if(nbt.hasKey("tab"))
-			{
-				int tab = nbt.getByte("tab");
-				if(tab == 0)
-					worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 35, worldObj, xCoord, yCoord, zCoord);
-				else if(tab == 1)
-					worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 36, worldObj, xCoord, yCoord, zCoord);
-			}
-			else if(nbt.hasKey("fluidID"))
+			if(nbt.hasKey("fluidID"))
 			{
 				if(nbt.getByte("fluidID") == -1)
 					fluid = null;
@@ -598,7 +572,15 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					sealtime = (int) TFC_Time.getTotalHours();
 					unsealtime = 0;
 				}
-				worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 35, worldObj, xCoord, yCoord, zCoord);
+			}
+
+			if(nbt.hasKey("tab"))
+			{
+				int tab = nbt.getByte("tab");
+				if(tab == 0)
+					worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 35, worldObj, xCoord, yCoord, zCoord);
+				else if(tab == 1)
+					worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 36, worldObj, xCoord, yCoord, zCoord);
 			}
 		}
 	}

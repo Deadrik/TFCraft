@@ -107,9 +107,9 @@ public class GuiBarrel extends GuiContainerTFC
 				buttonList.add(new GuiButton(0, guiLeft+38, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Unseal")));
 			buttonList.add(new GuiButton(1, guiLeft+88, guiTop + 50, 50, 20, StatCollector.translateToLocal("gui.Barrel.Empty")));
 			if(barrel.mode == TEBarrel.MODE_IN)
-				buttonList.add(new GuiBarrelTabButton(2, guiLeft+40, guiTop + 29, 16, 16,this, StatCollector.translateToLocal("gui.Barrel.ToggleOn"), 0, 204, 16, 16));
+				buttonList.add(new GuiBarrelTabButton(2, guiLeft+39, guiTop + 29, 16, 16,this, StatCollector.translateToLocal("gui.Barrel.ToggleOn"), 0, 204, 16, 16));
 			else if(barrel.mode == TEBarrel.MODE_OUT)
-				buttonList.add(new GuiBarrelTabButton(2, guiLeft+40, guiTop + 29, 16, 16,this, StatCollector.translateToLocal("gui.Barrel.ToggleOff"), 0, 188, 16, 16));
+				buttonList.add(new GuiBarrelTabButton(2, guiLeft+39, guiTop + 29, 16, 16,this, StatCollector.translateToLocal("gui.Barrel.ToggleOff"), 0, 188, 16, 16));
 			buttonList.add(new GuiBarrelTabButton(3, guiLeft+36, guiTop-12, 31, 15, this, TFC_Textures.GuiSolidStorage, StatCollector.translateToLocal("gui.Barrel.Solid")));
 			buttonList.add(new GuiBarrelTabButton(4, guiLeft+5, guiTop-12, 31, 15, this, TFC_Textures.GuiLiquidStorage, StatCollector.translateToLocal("gui.Barrel.Liquid")));
 
@@ -118,6 +118,11 @@ public class GuiBarrel extends GuiContainerTFC
 		{
 			buttonList.add(new GuiBarrelTabButton(0, guiLeft+36, guiTop-12, 31, 15, this, TFC_Textures.GuiSolidStorage, StatCollector.translateToLocal("gui.Barrel.Solid")));
 			buttonList.add(new GuiBarrelTabButton(1, guiLeft+5, guiTop-12, 31, 15, this, TFC_Textures.GuiLiquidStorage, StatCollector.translateToLocal("gui.Barrel.Liquid")));
+
+			if(!barrel.getSealed())
+				buttonList.add(new GuiButton(2, guiLeft+6, guiTop + 33, 44, 20, StatCollector.translateToLocal("gui.Barrel.Seal")));
+			else
+				buttonList.add(new GuiButton(2, guiLeft+6, guiTop + 33, 44, 20, StatCollector.translateToLocal("gui.Barrel.Unseal")));
 		}
 	}
 
@@ -236,9 +241,9 @@ public class GuiBarrel extends GuiContainerTFC
 			if (guibutton.id == 0)
 			{
 				if(!barrel.getSealed())
-					barrel.actionSeal(player);
+					barrel.actionSeal(0, player);
 				else
-					barrel.actionUnSeal(player);
+					barrel.actionUnSeal(0, player);
 			}
 			else if (guibutton.id == 1)
 				barrel.actionEmpty();
@@ -254,6 +259,14 @@ public class GuiBarrel extends GuiContainerTFC
 		{
 			if (guibutton.id == 1 && barrel.getInvCount() == 0)
 				barrel.actionSwitchTab(0, player);
+			else if (guibutton.id == 2)
+			{
+				if(!barrel.getSealed())
+					barrel.actionSeal(1, player);
+				else
+					barrel.actionUnSeal(1, player);
+				createButtons();
+			}
 		}
 	}
 
@@ -309,7 +322,7 @@ public class GuiBarrel extends GuiContainerTFC
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		if(this.mouseInRegion(12, 15, 9, 50, mouseX, mouseY))
+		if(guiTab == 0 && this.mouseInRegion(12, 15, 9, 50, mouseX, mouseY))
 		{
 			ArrayList list = new ArrayList();
 			list.add(barrel.getFluidLevel()+"mB");

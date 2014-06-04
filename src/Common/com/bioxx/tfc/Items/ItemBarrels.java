@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
 import com.bioxx.tfc.TileEntities.TEBarrel;
@@ -19,7 +20,6 @@ import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemBarrels extends ItemTerraBlock
 {
-	private int type = 0;
 	public ItemBarrels(Block par1)
 	{
 		super(par1);
@@ -43,10 +43,13 @@ public class ItemBarrels extends ItemTerraBlock
 
 	public void readFromItemNBT(NBTTagCompound nbt, List arraylist)
 	{
-		if(nbt != null && nbt.hasKey("type"))
+		if(nbt != null)
 		{
-			type = nbt.getInteger("type");
-			arraylist.add(EnumChatFormatting.YELLOW + TEBarrel.getType(type));
+			if(nbt.hasKey("fluidNBT"))
+			{
+				FluidStack fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag("fluidNBT"));
+				arraylist.add(EnumChatFormatting.BLUE + fluid.getFluid().getLocalizedName());
+			}
 		}
 	}
 

@@ -33,24 +33,22 @@ public class ContainerBarrel extends ContainerTFC
 		{
 			//Input slot
 			if(!barrel.getSealed())
-				addSlotToContainer(new Slot(tileentitybarrel, 0, 80, 29));
+				addSlotToContainer(new Slot(barrel, 0, 80, 29));
 			else
-				addSlotToContainer(new SlotForShowOnly(tileentitybarrel, 0, 80, 29));
+				addSlotToContainer(new SlotForShowOnly(barrel, 0, 80, 29));
 		}
 		else if(guiTab == 1)
 		{
-			addSlotToContainer(new SlotChest(tileentitybarrel, 0, 53, 17));
-			addSlotToContainer(new SlotChest(tileentitybarrel, 1, 71, 17));
-			addSlotToContainer(new SlotChest(tileentitybarrel, 2, 89, 17));
-			addSlotToContainer(new SlotChest(tileentitybarrel, 3, 107, 17));
-			addSlotToContainer(new SlotChest(tileentitybarrel, 4, 53, 35));
-			addSlotToContainer(new SlotChest(tileentitybarrel, 5, 71, 35));
-			addSlotToContainer(new SlotChest(tileentitybarrel, 6, 89, 35));
-			addSlotToContainer(new SlotChest(tileentitybarrel, 7, 107, 35));
-			addSlotToContainer(new SlotChest(tileentitybarrel, 8, 53, 53));
-			addSlotToContainer(new SlotChest(tileentitybarrel, 9, 71, 53));
-			addSlotToContainer(new SlotChest(tileentitybarrel, 10, 89, 53));
-			addSlotToContainer(new SlotChest(tileentitybarrel, 11, 107, 53));
+			for(int i = 0; i < 4; i++)
+			{
+				for(int k = 0; k < 3; k++)
+				{
+					if(!barrel.getSealed())
+						addSlotToContainer(new SlotChest(barrel, k+(i*3), 53+(i*18), 17+(k*18)));
+					else
+						addSlotToContainer(new SlotForShowOnly(barrel, k+(i*3), 53+(i*18), 17+(k*18)));
+				}
+			}
 		}
 
 		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 90, false, true);
