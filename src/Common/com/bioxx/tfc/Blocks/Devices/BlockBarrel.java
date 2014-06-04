@@ -51,8 +51,7 @@ public class BlockBarrel extends BlockTerraContainer
 		super(Material.wood);
 		this.setCreativeTab(TFCTabs.TFCDevices);
 		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 1, 0.9f);
-		woodNames = new String[16];
-		System.arraycopy(Global.WOOD_ALL, 0, woodNames, 0,16);
+		woodNames = Global.WOOD_ALL;
 	}
 
 	@Override
@@ -65,6 +64,25 @@ public class BlockBarrel extends BlockTerraContainer
 
 	@Override
 	public IIcon getIcon(int side, int meta)
+	{
+		//When doing inventory item render, we increase the side by 10 so that we can draw the hoops instead of planks
+		if(side >= 10)
+		{
+			side-=10;
+			if(side == 0 || side == 1)
+				return TFC_Textures.InvisibleTexture;
+			else
+				return BlockBarrel.blockIcon;
+		}
+		if(meta<16)
+			return TFCBlocks.Planks.getIcon(side, meta);
+		return TFCBlocks.Planks2.getIcon(side, meta-16);
+
+
+	}
+
+	@Override
+	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side)
 	{
 		if(side == 0 || side == 1)
 			return TFC_Textures.InvisibleTexture;
@@ -154,68 +172,6 @@ public class BlockBarrel extends BlockTerraContainer
 		return new ItemStack(TFCItems.Barrel, 1, j);
 	}
 
-	public class BarrelEntity extends Entity
-	{
-		public int fuse;
-		World world;
-		public BarrelEntity(World par1World)
-		{
-			super(par1World);
-			this.fuse = 60;
-			this.preventEntitySpawning = true;
-			this.setSize(0.98F, 0.98F);
-			this.yOffset = this.height / 2.0F;
-		}
-
-		public BarrelEntity(World par1World, double par2, double par4, double par6)
-		{
-			this(par1World);
-			this.setPosition(par2, par4, par6);
-			world = par1World;
-			float f = (float)(Math.random() * Math.PI * 2.0D);
-			this.motionX = -((float)Math.sin(f)) * 0.02F;
-			this.motionY = 0.20000000298023224D;
-			this.motionZ = -((float)Math.cos(f)) * 0.02F;
-			this.prevPosX = par2;
-			this.prevPosY = par4;
-			this.prevPosZ = par6;
-		}
-
-		@Override
-		public void onUpdate()
-		{
-			fuse--;
-			world.playSoundAtEntity(this, "random.fuse", 1.0F, 1.0F);
-			if(fuse == 0)
-				explode();
-			worldObj.spawnParticle("smoke", posX, posY + 0.5D, posZ, new Random().nextFloat(), 1.0D, new Random().nextFloat());
-		}
-
-		private void explode()
-		{
-			float f = 64.0F;
-			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
-			setDead();
-		}
-
-		@Override
-		protected void entityInit()
-		{
-		}
-
-		@Override
-		protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-		{
-			this.fuse = par1NBTTagCompound.getByte("Fuse");
-		}
-
-		@Override
-		protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-		{
-			par1NBTTagCompound.setByte("Fuse", (byte)this.fuse);
-		}
-	}
-
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
@@ -238,22 +194,31 @@ public class BlockBarrel extends BlockTerraContainer
 	 * Called whenever the block is removed.
 	 */
 	@Override
-	public void breakBlock(World world, int i, int j, int k, Block block, int par6)
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
 	{
-		TEBarrel te = (TEBarrel)world.getTileEntity(i, j, k);
+		TEBarrel te = (TEBarrel)world.getTileEntity(x, y, z);
 
 		if (te != null)
 		{
-			ItemStack is = new ItemStack(Item.getItemFromBlock(block), 1,par6);
-			NBTTagCompound nbt = writeBarrelToNBT(te);
-			is.setTagCompound(nbt);
-			EntityItem ei = new EntityItem(world,i,j,k,is);
-			world.spawnEntityInWorld(ei);
+			if(te.getSealed())
+			{
+				ItemStack is = new ItemStack(Item.getItemFromBlock(block), 1, te.barrelType);
+				NBTTagCompound nbt = writeBarrelToNBT(te);
+				is.setTagCompound(nbt);
+				EntityItem ei = new EntityItem(world,x,y,z,is);
+				world.spawnEntityInWorld(ei);
 
-			for(int s = 0; s < te.getSizeInventory(); ++s)
-				te.setInventorySlotContents(s, null);
+				for(int s = 0; s < te.getSizeInventory(); ++s)
+					te.setInventorySlotContents(s, null);
+			}
+			else
+			{
+				ItemStack is = new ItemStack(Item.getItemFromBlock(block), 1, te.barrelType);
+				EntityItem ei = new EntityItem(world,x,y,z,is);
+				world.spawnEntityInWorld(ei);
+			}
 		}
-		super.breakBlock(world, i, j, k, block, par6);
+		super.breakBlock(world, x, y, z, block, meta);
 	}
 
 	@Override
@@ -269,7 +234,7 @@ public class BlockBarrel extends BlockTerraContainer
 		if(te.fluid != null)
 			te.fluid.writeToNBT(fluidNBT);
 		nbt.setTag("fluidNBT", fluidNBT);
-
+		nbt.setInteger("barrelType", te.barrelType);
 		nbt.setBoolean("sealed", te.getSealed());
 
 		NBTTagList nbttaglist = new NBTTagList();
@@ -368,5 +333,67 @@ public class BlockBarrel extends BlockTerraContainer
 	public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
 	{
 		return true;
+	}
+
+	public class BarrelEntity extends Entity
+	{
+		public int fuse;
+		World world;
+		public BarrelEntity(World par1World)
+		{
+			super(par1World);
+			this.fuse = 60;
+			this.preventEntitySpawning = true;
+			this.setSize(0.98F, 0.98F);
+			this.yOffset = this.height / 2.0F;
+		}
+
+		public BarrelEntity(World par1World, double par2, double par4, double par6)
+		{
+			this(par1World);
+			this.setPosition(par2, par4, par6);
+			world = par1World;
+			float f = (float)(Math.random() * Math.PI * 2.0D);
+			this.motionX = -((float)Math.sin(f)) * 0.02F;
+			this.motionY = 0.20000000298023224D;
+			this.motionZ = -((float)Math.cos(f)) * 0.02F;
+			this.prevPosX = par2;
+			this.prevPosY = par4;
+			this.prevPosZ = par6;
+		}
+
+		@Override
+		public void onUpdate()
+		{
+			fuse--;
+			world.playSoundAtEntity(this, "random.fuse", 1.0F, 1.0F);
+			if(fuse == 0)
+				explode();
+			worldObj.spawnParticle("smoke", posX, posY + 0.5D, posZ, new Random().nextFloat(), 1.0D, new Random().nextFloat());
+		}
+
+		private void explode()
+		{
+			float f = 64.0F;
+			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
+			setDead();
+		}
+
+		@Override
+		protected void entityInit()
+		{
+		}
+
+		@Override
+		protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+		{
+			this.fuse = par1NBTTagCompound.getByte("Fuse");
+		}
+
+		@Override
+		protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+		{
+			par1NBTTagCompound.setByte("Fuse", (byte)this.fuse);
+		}
 	}
 }

@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
 
 import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
 import com.bioxx.tfc.TileEntities.TEBarrel;
@@ -25,8 +26,7 @@ public class ItemBarrels extends ItemTerraBlock
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		this.MetaNames = new String[16];
-		System.arraycopy(Global.WOOD_ALL, 0, MetaNames, 0, 16);
+		this.MetaNames = Global.WOOD_ALL;
 	}
 
 	@Override
@@ -58,9 +58,32 @@ public class ItemBarrels extends ItemTerraBlock
 	}
 
 	@Override
+	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
+	{
+
+		if (!world.setBlock(x, y, z, field_150939_a, metadata&15, 3))
+		{
+			return false;
+		}
+
+		if (world.getBlock(x, y, z) == field_150939_a)
+		{
+			field_150939_a.onBlockPlacedBy(world, x, y, z, player, stack);
+			field_150939_a.onPostBlockPlaced(world, x, y, z, 0);
+
+			TEBarrel te = (TEBarrel) world.getTileEntity(x, y, z);
+			te.barrelType = metadata;
+
+		}
+
+		return true;
+	}
+
+	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++)
-			list.add(new ItemStack(this, 1, i));
+		for(int i = 0; i < MetaNames.length; i++) {
+			list.add(new ItemStack(this,1,i));
+		}
 	}
 }

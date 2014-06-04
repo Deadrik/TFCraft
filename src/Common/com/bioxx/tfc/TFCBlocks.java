@@ -27,7 +27,6 @@ import com.bioxx.tfc.Blocks.BlockWoodSupport;
 import com.bioxx.tfc.Blocks.BlockWoodSupport2;
 import com.bioxx.tfc.Blocks.BlockWorldItem;
 import com.bioxx.tfc.Blocks.Devices.BlockBarrel;
-import com.bioxx.tfc.Blocks.Devices.BlockBarrel2;
 import com.bioxx.tfc.Blocks.Devices.BlockBellows;
 import com.bioxx.tfc.Blocks.Devices.BlockBlastFurnace;
 import com.bioxx.tfc.Blocks.Devices.BlockChestTFC;
@@ -106,10 +105,9 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockCustomWall;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence2;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
-import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFCFluid;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.ItemBarrels;
-import com.bioxx.tfc.Items.ItemBarrels2;
 import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack2;
@@ -263,7 +261,6 @@ public class TFCBlocks
 
 	public static Block IngotPile;
 	public static Block Barrel;
-	public static Block Barrel2;
 	public static Block Pottery;
 	public static Block Thatch;
 	public static Block Moss;
@@ -451,7 +448,6 @@ public class TFCBlocks
 
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
 		GameRegistry.registerBlock(Barrel, ItemBarrels.class, "Barrel");
-		GameRegistry.registerBlock(Barrel2, ItemBarrels2.class, "Barrel2");
 		GameRegistry.registerBlock(Moss, "Moss");
 
 		GameRegistry.registerBlock(Flora, com.bioxx.tfc.Items.ItemBlocks.ItemFlora.class,"Flora");
@@ -651,7 +647,6 @@ public class TFCBlocks
 		IngotPile = new BlockIngotPile().setBlockName("ingotpile").setHardness(3);
 
 		Barrel = new BlockBarrel().setBlockName("Barrel").setHardness(2);
-		Barrel2 = new BlockBarrel2().setBlockName("Barrel").setHardness(2);
 		Thatch = new BlockThatch().setBlockName("Thatch").setHardness(1).setStepSound(Block.soundTypeGrass).setCreativeTab(TFCTabs.TFCBuilding);
 		Moss = new BlockMoss().setBlockName("Moss").setHardness(1).setStepSound(Block.soundTypeGrass);
 
@@ -772,7 +767,6 @@ public class TFCBlocks
 		Blocks.fire.setFireInfo(WoodConstruct, 5, 20);
 		Blocks.fire.setFireInfo(BerryBush, 5, 20);
 		Blocks.fire.setFireInfo(Barrel, 5, 20);
-		Blocks.fire.setFireInfo(Barrel2, 5, 20);
 		Blocks.fire.setFireInfo(Crops, 20, 20);
 		Blocks.fire.setFireInfo(LogPile, 20, 20);
 		Blocks.fire.setFireInfo(Charcoal, 100, 20);

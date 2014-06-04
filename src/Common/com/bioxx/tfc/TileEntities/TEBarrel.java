@@ -31,10 +31,10 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public byte rotation = 0;
 	public int barrelType;
 	public int mode;
-	public ItemStack[] storage;
-	private boolean sealed;
-	public int sealtime;
-	public int unsealtime;
+	public ItemStack[] storage = new ItemStack[12];
+	private boolean sealed = false;
+	public int sealtime = 0;
+	public int unsealtime = 0;
 	private int processTimer = 0;
 	public final int SEALTIME = TFCOptions.enableDebugMode ? 0 : (int)((TFC_Time.hourLength * 12) / 100);//default 80
 	public static final int MODE_IN = 0;
@@ -43,11 +43,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public TEBarrel()
 	{
-		sealed = false;
-		//itemstack = new ItemStack(1,0,0);
-		sealtime = 0;
-		unsealtime = 0;
-		storage = new ItemStack[12];
+
 	}
 
 	public void careForInventorySlot()
@@ -182,9 +178,9 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		float f3 = 0.05F;
 		EntityItem entityitem;
 		Random rand = new Random();
-		float f = rand.nextFloat() * 0.8F + 0.1F;
+		float f = rand.nextFloat() * 0.3F + 0.1F;
 		float f1 = rand.nextFloat() * 2.0F + 0.4F;
-		float f2 = rand.nextFloat() * 0.8F + 0.1F;
+		float f2 = rand.nextFloat() * 0.3F + 0.1F;
 
 		for (int i = 0; i < getSizeInventory(); i++)
 		{
@@ -479,6 +475,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		super.writeToNBT(nbt);
 		nbt.setBoolean("Sealed", sealed);
 		nbt.setInteger("SealTime", sealtime);
+		nbt.setInteger("barrelType", barrelType);
 		nbt.setInteger("mode", mode);
 		NBTTagCompound fluidNBT = new NBTTagCompound();
 		if(fluid != null)
@@ -506,6 +503,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag("fluidNBT"));
 		sealed = nbt.getBoolean("Sealed");
 		sealtime = nbt.getInteger("SealTime");
+		barrelType = nbt.getInteger("barrelType");
 		mode = nbt.getInteger("mode");
 		rotation = nbt.getByte("rotation");
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
@@ -522,6 +520,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public void readFromItemNBT(NBTTagCompound nbt)
 	{
+		barrelType = nbt.getInteger("barrelType");
 		fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag("fluidNBT"));
 		sealed = nbt.getBoolean("sealed");
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);

@@ -24,7 +24,7 @@ public class RenderBarrel implements ISimpleBlockRenderingHandler
 		TEBarrel te = (TEBarrel) world.getTileEntity(x, y, z);
 		Block planksBlock;
 		Block lidBlock;
-		if(block == TFCBlocks.Barrel)
+		if(te.barrelType < 16)
 		{
 			planksBlock = TFCBlocks.Planks;
 			lidBlock = TFCBlocks.WoodSupportH;
@@ -115,48 +115,46 @@ public class RenderBarrel implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
+	public void renderInventoryBlock(Block block, int meta, int modelID, RenderBlocks renderer)
 	{
-		Block planksBlock;
 		Block lidBlock;
-		if(block == TFCBlocks.Barrel)
+
+		if(meta < 16)
 		{
-			planksBlock = TFCBlocks.Planks;
 			lidBlock = TFCBlocks.WoodSupportH;
 		}
 		else
 		{
-			planksBlock = TFCBlocks.Planks2;
 			lidBlock = TFCBlocks.WoodSupportH2;
 		}
 
 		renderer.setRenderBounds(min+0.05F, min, min+0.05F, max-0.05F, 0.95F, max-0.05F);
 		rotate(renderer, 1);
-		renderInvBlock(lidBlock, metadata, renderer);
+		renderInvBlock(lidBlock, meta, renderer);
 
 		renderer.setRenderBounds(min, 0F, min+0.05F, min+0.05F, 1F, max-0.05F);
 		rotate(renderer, 1);
-		renderInvBlock(planksBlock, metadata, renderer);
+		renderInvBlock(block, meta, renderer);
 		rotate(renderer, 0);
-		renderInvBlock(block, metadata, renderer);
+		renderInvBlockHoop(block, meta, renderer);
 
 		renderer.setRenderBounds(max-0.05F, 0F, min+0.05F, max, 1F, max-0.05F);
 		rotate(renderer, 1);
-		renderInvBlock(planksBlock, metadata, renderer);
+		renderInvBlock(block, meta, renderer);
 		rotate(renderer, 0);
-		renderInvBlock(block, metadata, renderer);
+		renderInvBlockHoop(block, meta, renderer);
 
 		renderer.setRenderBounds(min, 0F, min, max, 1F, min+0.05F);
 		rotate(renderer, 1);
-		renderInvBlock(planksBlock, metadata, renderer);
+		renderInvBlock(block, meta, renderer);
 		rotate(renderer, 0);
-		renderInvBlock(block, metadata, renderer);
+		renderInvBlockHoop(block, meta, renderer);
 
 		renderer.setRenderBounds(min, 0F, max-0.05F, max, 1F, max);
 		rotate(renderer, 1);
-		renderInvBlock(planksBlock, metadata, renderer);
+		renderInvBlock(block, meta, renderer);
 		rotate(renderer, 0);
-		renderInvBlock(block, metadata, renderer);
+		renderInvBlockHoop(block, meta, renderer);
 	}
 
 	@Override
@@ -198,6 +196,37 @@ public class RenderBarrel implements ISimpleBlockRenderingHandler
 		var14.startDrawingQuads();
 		var14.setNormal(1.0F, 0.0F, 0.0F);
 		renderer.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(5, m));
+		var14.draw();
+		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+	}
+
+	public static void renderInvBlockHoop(Block block, int m, RenderBlocks renderer)
+	{
+		Tessellator var14 = Tessellator.instance;
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		var14.startDrawingQuads();
+		var14.setNormal(0.0F, -1.0F, 0.0F);
+		renderer.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(10, m));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(0.0F, 1.0F, 0.0F);
+		renderer.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(11, m));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(0.0F, 0.0F, -1.0F);
+		renderer.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(12, m));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(0.0F, 0.0F, 1.0F);
+		renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(13, m));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(-1.0F, 0.0F, 0.0F);
+		renderer.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(14, m));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(1.0F, 0.0F, 0.0F);
+		renderer.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(15, m));
 		var14.draw();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
