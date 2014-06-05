@@ -2,10 +2,6 @@ package com.bioxx.tfc.Food;
 
 import java.util.List;
 
-import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.Enums.EnumFoodGroup;
-import com.bioxx.tfc.api.Interfaces.IFood;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -14,11 +10,15 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.Interfaces.IFood;
+
 public class ItemEgg extends ItemFoodTFC implements IFood
 {
 	public ItemEgg()
 	{
-		super(-1, EnumFoodGroup.Protein, false, false);
+		super(-1, EnumFoodGroup.Protein, 0, 0, 0, 0, 0, false, false);
 	}
 
 	@Override

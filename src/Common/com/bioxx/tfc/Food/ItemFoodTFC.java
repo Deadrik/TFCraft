@@ -368,31 +368,36 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	@Override
 	public int getTasteSweet(ItemStack is) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(is != null && is.getTagCompound().hasKey("tasteSweet"))
+			return is.getTagCompound().getInteger("tasteSweet");
+		return tasteSweet;
 	}
 
 	@Override
 	public int getTasteSour(ItemStack is) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(is != null && is.getTagCompound().hasKey("tasteSour"))
+			return is.getTagCompound().getInteger("tasteSour");
+		return tasteSour;
 	}
 
 	@Override
 	public int getTasteSalty(ItemStack is) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(is != null && is.getTagCompound().hasKey("tasteSalty"))
+			return is.getTagCompound().getInteger("tasteSalty");
+		return tasteSalty;
 	}
 
 	@Override
 	public int getTasteBitter(ItemStack is) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(is != null && is.getTagCompound().hasKey("tasteBitter"))
+			return is.getTagCompound().getInteger("tasteBitter");
+		return tasteBitter;
 	}
 
 	@Override
 	public int getTasteUmami(ItemStack is) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(is != null && is.getTagCompound().hasKey("tasteUmami"))
+			return is.getTagCompound().getInteger("tasteUmami");
+		return tasteUmami;
 	}
 }

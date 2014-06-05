@@ -35,7 +35,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		setCreativeTab(TFCTabs.TFCFoods);
 		this.setFolder("tools/");
 	}
-	
+
 	@Override
 	public boolean canStack()
 	{
@@ -218,5 +218,30 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	public boolean isUsable()
 	{
 		return false;
+	}
+
+	@Override
+	public int getTasteSweet(ItemStack is) {
+		return 0;
+	}
+
+	@Override
+	public int getTasteSour(ItemStack is) {
+		return 0;
+	}
+
+	@Override
+	public int getTasteSalty(ItemStack is) {
+		return 0;
+	}
+
+	@Override
+	public int getTasteBitter(ItemStack is) {
+		return 0;
+	}
+
+	@Override
+	public int getTasteUmami(ItemStack is) {
+		return 10;
 	}
 }

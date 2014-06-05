@@ -262,4 +262,39 @@ public class ItemMeal extends ItemTerra implements IFood
 	{
 		return false;
 	}
+
+	@Override
+	public int getTasteSweet(ItemStack is) {
+		if(is != null && is.getTagCompound().hasKey("tasteSweet"))
+			return is.getTagCompound().getInteger("tasteSweet");
+		return 0;
+	}
+
+	@Override
+	public int getTasteSour(ItemStack is) {
+		if(is != null && is.getTagCompound().hasKey("tasteSour"))
+			return is.getTagCompound().getInteger("tasteSour");
+		return 0;
+	}
+
+	@Override
+	public int getTasteSalty(ItemStack is) {
+		if(is != null && is.getTagCompound().hasKey("tasteSalty"))
+			return is.getTagCompound().getInteger("tasteSalty");
+		return 0;
+	}
+
+	@Override
+	public int getTasteBitter(ItemStack is) {
+		if(is != null && is.getTagCompound().hasKey("tasteBitter"))
+			return is.getTagCompound().getInteger("tasteBitter");
+		return 0;
+	}
+
+	@Override
+	public int getTasteUmami(ItemStack is) {
+		if(is != null && is.getTagCompound().hasKey("tasteUmami"))
+			return is.getTagCompound().getInteger("tasteUmami");
+		return 0;
+	}
 }
