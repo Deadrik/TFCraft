@@ -1,12 +1,16 @@
 package com.bioxx.tfc.Blocks.Devices;
 
 import static net.minecraftforge.common.util.ForgeDirection.DOWN;
+
+import java.util.ArrayList;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
@@ -39,10 +43,33 @@ public class BlockChestTFC extends BlockTerraContainer
 	}
 
 	@Override
-	public int damageDropped(int dmg)
+    public int getDamageValue(World world, int x, int y, int z)
+    {
+		try
+		{
+			TEChest chest = (TEChest) world.getTileEntity(x, y, z);
+			return chest.type;
+		}
+		catch( Exception E)
+		{
+			return 0;
+			
+		}
+    }
+	
+	@Override
+    public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player)
 	{
-		return dmg;
+        Item item = getItemDropped(metadata, world.rand, 0);
+        dropBlockAsItem(world, x, y, z, new ItemStack(item, 1, getDamageValue(world, x, y, z)));
+		
 	}
+	@Override
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+    {
+        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        return ret;
+    }
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
