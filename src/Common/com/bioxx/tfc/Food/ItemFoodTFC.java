@@ -46,8 +46,13 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public float decayRate = 1.0f;
 	public boolean isEdible = true;
 	public boolean canBeUsedRaw = true;
+	private int tasteSweet = 0;
+	private int tasteSour = 0;
+	private int tasteSalty = 0;
+	private int tasteBitter = 0;
+	private int tasteUmami = 0;
 
-	public ItemFoodTFC(int foodid, EnumFoodGroup fg)
+	public ItemFoodTFC(int foodid, EnumFoodGroup fg, int sw, int so, int sa, int bi, int um)
 	{
 		super();
 		this.setCreativeTab(TFCTabs.TFCFoods);
@@ -57,17 +62,22 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		TFCItems.FoodList.add(this);
 		this.setMaxDamage(100);
 		this.hasSubtypes = false;
+		tasteSweet = sw;
+		tasteSour = so;
+		tasteSalty = sa;
+		tasteBitter = bi;
+		tasteUmami = um;
 	}
 
-	public ItemFoodTFC(int foodid, EnumFoodGroup fg, boolean edible)
+	public ItemFoodTFC(int foodid, EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible)
 	{
-		this(foodid, fg);
+		this(foodid, fg, sw, so, sa, bi, um);
 		isEdible = edible;
 	}
 
-	public ItemFoodTFC(int foodid, EnumFoodGroup fg, boolean edible, boolean usable)
+	public ItemFoodTFC(int foodid, EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible, boolean usable)
 	{
-		this(foodid, fg, edible);
+		this(foodid, fg, sw, so, sa, bi, um, edible);
 		canBeUsedRaw = usable;
 	}
 
@@ -354,5 +364,35 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public boolean isUsable()
 	{
 		return canBeUsedRaw;
+	}
+
+	@Override
+	public int getTasteSweet(ItemStack is) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTasteSour(ItemStack is) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTasteSalty(ItemStack is) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTasteBitter(ItemStack is) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTasteUmami(ItemStack is) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

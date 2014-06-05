@@ -1,9 +1,9 @@
 package com.bioxx.tfc.api.Interfaces;
 
-import com.bioxx.tfc.api.Enums.EnumFoodGroup;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 
 public interface IFood
 {
@@ -25,4 +25,10 @@ public interface IFood
 	 * @return Is this item usable in meals
 	 */
 	public boolean isUsable();
+
+	public int getTasteSweet(ItemStack is);
+	public int getTasteSour(ItemStack is);
+	public int getTasteSalty(ItemStack is);
+	public int getTasteBitter(ItemStack is);
+	public int getTasteUmami(ItemStack is);
 }
