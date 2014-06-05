@@ -5,10 +5,10 @@ import java.util.List;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.ISize;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;

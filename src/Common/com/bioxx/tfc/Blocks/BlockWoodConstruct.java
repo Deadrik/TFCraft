@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.CollisionRayTraceStandard;
 import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
-import com.bioxx.tfc.api.ICustomCollision;
+import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

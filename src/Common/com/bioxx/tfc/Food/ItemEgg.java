@@ -3,8 +3,8 @@ package com.bioxx.tfc.Food;
 import java.util.List;
 
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.IFood;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.Interfaces.IFood;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

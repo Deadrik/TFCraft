@@ -30,8 +30,8 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemBarrels;
 import com.bioxx.tfc.TileEntities.TEStand;
-import com.bioxx.tfc.api.IMultipleBlock;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

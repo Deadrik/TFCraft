@@ -1,4 +1,4 @@
-package com.bioxx.tfc.api;
+package com.bioxx.tfc.api.Interfaces;
 
 import java.util.List;
 

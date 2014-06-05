@@ -1,10 +1,10 @@
 package com.bioxx.tfc.Handlers;
 
 import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.api.IFood;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Events.AnvilCraftEvent;
 import com.bioxx.tfc.api.Events.ItemMeltEvent;
+import com.bioxx.tfc.api.Interfaces.IFood;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

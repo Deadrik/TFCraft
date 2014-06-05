@@ -11,11 +11,11 @@ import net.minecraft.util.StatCollector;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.ISmeltable;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
 public class ItemOre extends ItemTerra implements ISmeltable
 {

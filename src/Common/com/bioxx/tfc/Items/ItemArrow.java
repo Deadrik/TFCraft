@@ -1,9 +1,9 @@
 package com.bioxx.tfc.Items;
 
-import com.bioxx.tfc.api.IQuiverAmmo;
 import com.bioxx.tfc.api.Enums.EnumAmmo;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.IQuiverAmmo;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 

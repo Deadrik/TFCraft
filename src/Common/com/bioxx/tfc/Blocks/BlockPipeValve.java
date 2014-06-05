@@ -8,7 +8,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.api.IPipeConnectable;
+import com.bioxx.tfc.api.Interfaces.IPipeConnectable;
 
 public class BlockPipeValve extends BlockPipeBasic implements IPipeConnectable
 {

@@ -11,11 +11,11 @@ import com.bioxx.tfc.Core.Metal.AlloyMetal;
 import com.bioxx.tfc.Core.Metal.MetalPair;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.ISize;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

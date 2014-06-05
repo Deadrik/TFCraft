@@ -19,8 +19,6 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.IFood;
-import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
@@ -28,6 +26,8 @@ import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.Interfaces.ISize;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemFoodTFC extends ItemTerra implements ISize, IFood

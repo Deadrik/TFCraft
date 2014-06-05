@@ -6,10 +6,10 @@ import com.bioxx.tfc.Entities.EntityJavelin;
 import com.bioxx.tfc.Entities.EntityProjectileTFC;
 import com.bioxx.tfc.Items.Tools.ItemCustomBow;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
-import com.bioxx.tfc.api.ICausesDamage;
-import com.bioxx.tfc.api.IInnateArmor;
-import com.bioxx.tfc.api.IProjectile;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Interfaces.ICausesDamage;
+import com.bioxx.tfc.api.Interfaces.IInnateArmor;
+import com.bioxx.tfc.api.Interfaces.IProjectile;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;

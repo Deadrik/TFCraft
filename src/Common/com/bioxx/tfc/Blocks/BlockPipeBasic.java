@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.api.IPipeConnectable;
 import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Interfaces.IPipeConnectable;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

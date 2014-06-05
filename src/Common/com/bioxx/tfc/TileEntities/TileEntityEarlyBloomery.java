@@ -16,8 +16,8 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Items.ItemOre;
-import com.bioxx.tfc.api.ISmeltable;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
 public class TileEntityEarlyBloomery extends NetworkTileEntity
 {

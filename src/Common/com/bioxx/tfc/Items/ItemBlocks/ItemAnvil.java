@@ -1,8 +1,8 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
-import com.bioxx.tfc.api.ISmeltable;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;

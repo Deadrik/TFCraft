@@ -22,9 +22,9 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.CreateMealPacket;
-import com.bioxx.tfc.api.IFood;
-import com.bioxx.tfc.api.IItemFoodBlock;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.Interfaces.IItemFoodBlock;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class TEFoodPrep extends TileEntity implements IInventory

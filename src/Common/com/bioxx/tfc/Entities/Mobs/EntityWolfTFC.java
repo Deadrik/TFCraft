@@ -25,8 +25,8 @@ import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.api.IInnateArmor;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;

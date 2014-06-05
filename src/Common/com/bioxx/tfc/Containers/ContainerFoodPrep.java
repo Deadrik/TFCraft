@@ -13,7 +13,7 @@ import com.bioxx.tfc.Containers.Slots.SlotFoodBowl;
 import com.bioxx.tfc.Containers.Slots.SlotFoodOnly;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
-import com.bioxx.tfc.api.IFood;
+import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class ContainerFoodPrep extends ContainerTFC
 {

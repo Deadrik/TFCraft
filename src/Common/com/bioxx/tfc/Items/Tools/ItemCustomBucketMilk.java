@@ -21,10 +21,10 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEBarrel;
-import com.bioxx.tfc.api.IFood;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class ItemCustomBucketMilk extends ItemTerra implements IFood
 {

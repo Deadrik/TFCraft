@@ -14,7 +14,7 @@ import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Handlers.CraftingHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Items.ItemTFCArmor;
-import com.bioxx.tfc.api.IFood;
+import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class ContainerPlayerTFC extends ContainerPlayer
 {

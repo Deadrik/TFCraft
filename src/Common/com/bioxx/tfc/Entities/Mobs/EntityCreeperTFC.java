@@ -1,7 +1,7 @@
 package com.bioxx.tfc.Entities.Mobs;
 
 import com.bioxx.tfc.Core.TFC_Achievements;
-import com.bioxx.tfc.api.IInnateArmor;
+import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;

@@ -22,10 +22,10 @@ import com.bioxx.tfc.Core.Metal.AlloyMetal;
 import com.bioxx.tfc.Core.Metal.MetalPair;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.api.ISmeltable;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
 public class TECrucible extends NetworkTileEntity implements IInventory
 {

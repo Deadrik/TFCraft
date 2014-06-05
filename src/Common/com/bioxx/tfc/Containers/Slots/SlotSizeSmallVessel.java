@@ -10,11 +10,11 @@ import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
-import com.bioxx.tfc.api.IBag;
-import com.bioxx.tfc.api.IFood;
-import com.bioxx.tfc.api.IItemFoodBlock;
-import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Interfaces.IBag;
+import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.Interfaces.IItemFoodBlock;
+import com.bioxx.tfc.api.Interfaces.ISize;
 
 public class SlotSizeSmallVessel extends Slot
 {

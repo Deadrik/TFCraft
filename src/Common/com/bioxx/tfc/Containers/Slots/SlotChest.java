@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.bioxx.tfc.Items.Tools.ItemTerraTool;
 import com.bioxx.tfc.Items.Tools.ItemWeapon;
-import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Interfaces.ISize;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

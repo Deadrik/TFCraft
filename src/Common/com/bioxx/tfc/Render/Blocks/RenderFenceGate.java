@@ -9,7 +9,7 @@ import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
-import com.bioxx.tfc.api.IMultipleBlock;
+import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 

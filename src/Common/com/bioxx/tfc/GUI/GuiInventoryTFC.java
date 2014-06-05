@@ -27,7 +27,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Food.TFCPotion;
-import com.bioxx.tfc.api.IFood;
+import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class GuiInventoryTFC extends InventoryEffectRenderer
 {

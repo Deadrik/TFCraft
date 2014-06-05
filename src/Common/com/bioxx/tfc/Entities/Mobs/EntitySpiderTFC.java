@@ -1,8 +1,8 @@
 package com.bioxx.tfc.Entities.Mobs;
 
 import com.bioxx.tfc.Core.TFC_MobData;
-import com.bioxx.tfc.api.ICausesDamage;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySpider;

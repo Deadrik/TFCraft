@@ -9,9 +9,9 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Metal.Alloy;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEPottery;
-import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.ISize;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;

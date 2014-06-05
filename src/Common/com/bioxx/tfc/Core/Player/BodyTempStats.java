@@ -7,7 +7,7 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.TileEntities.TEFireEntity;
-import com.bioxx.tfc.api.IClothing;
+import com.bioxx.tfc.api.Interfaces.IClothing;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

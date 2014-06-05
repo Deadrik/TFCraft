@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TileEntities.TEStand;
-import com.bioxx.tfc.api.IMultipleBlock;
+import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 

@@ -9,8 +9,8 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
 import com.bioxx.tfc.api.Armor;
-import com.bioxx.tfc.api.IQuiverAmmo;
 import com.bioxx.tfc.api.Enums.EnumAmmo;
+import com.bioxx.tfc.api.Interfaces.IQuiverAmmo;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;

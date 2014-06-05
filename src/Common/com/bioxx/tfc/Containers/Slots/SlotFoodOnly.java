@@ -6,10 +6,10 @@ import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Food.ItemMeal;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
-import com.bioxx.tfc.api.IFood;
-import com.bioxx.tfc.api.IItemFoodBlock;
-import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.Interfaces.IItemFoodBlock;
+import com.bioxx.tfc.api.Interfaces.ISize;
 
 public class SlotFoodOnly extends Slot
 {

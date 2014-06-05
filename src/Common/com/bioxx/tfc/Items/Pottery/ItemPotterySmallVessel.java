@@ -22,11 +22,11 @@ import com.bioxx.tfc.Core.Metal.AlloyMetal;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.Items.ItemOreSmall;
-import com.bioxx.tfc.api.IBag;
-import com.bioxx.tfc.api.ISmeltable;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.IBag;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag

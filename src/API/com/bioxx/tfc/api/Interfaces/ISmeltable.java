@@ -1,4 +1,6 @@
-package com.bioxx.tfc.api;
+package com.bioxx.tfc.api.Interfaces;
+
+import com.bioxx.tfc.api.Metal;
 
 import net.minecraft.item.ItemStack;
 

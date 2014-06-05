@@ -3,8 +3,8 @@ package com.bioxx.tfc.Containers.Slots;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Interfaces.ISize;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

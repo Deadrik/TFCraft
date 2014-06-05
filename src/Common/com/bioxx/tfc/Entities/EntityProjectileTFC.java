@@ -12,8 +12,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
 import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.api.ICausesDamage;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 
 public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 {

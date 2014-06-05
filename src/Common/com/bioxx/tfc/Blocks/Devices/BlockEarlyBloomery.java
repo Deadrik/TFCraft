@@ -26,7 +26,7 @@ import com.bioxx.tfc.Core.CollisionRayTraceStandard;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TileEntityEarlyBloomery;
-import com.bioxx.tfc.api.ICustomCollision;
+import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

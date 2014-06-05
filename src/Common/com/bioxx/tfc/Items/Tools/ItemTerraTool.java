@@ -16,12 +16,12 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.ICausesDamage;
-import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.ICausesDamage;
+import com.bioxx.tfc.api.Interfaces.ISize;
 import com.google.common.collect.Multimap;
 
 public class ItemTerraTool extends ItemTool implements ISize

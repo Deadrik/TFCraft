@@ -9,7 +9,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.CollisionRayTraceStandard;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
-import com.bioxx.tfc.api.ICustomCollision;
+import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;

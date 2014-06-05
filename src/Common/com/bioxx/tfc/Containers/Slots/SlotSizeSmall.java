@@ -1,7 +1,7 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Interfaces.ISize;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

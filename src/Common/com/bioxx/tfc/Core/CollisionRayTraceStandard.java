@@ -3,7 +3,7 @@ package com.bioxx.tfc.Core;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.api.ICustomCollision;
+import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.AxisAlignedBB;

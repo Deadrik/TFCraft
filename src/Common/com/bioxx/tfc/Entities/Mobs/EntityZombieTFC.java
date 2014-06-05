@@ -6,9 +6,9 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.api.ICausesDamage;
-import com.bioxx.tfc.api.IInnateArmor;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Interfaces.ICausesDamage;
+import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

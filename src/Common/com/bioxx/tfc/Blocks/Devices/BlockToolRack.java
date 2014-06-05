@@ -31,8 +31,8 @@ import com.bioxx.tfc.Items.Tools.ItemProPick;
 import com.bioxx.tfc.Items.Tools.ItemSpindle;
 import com.bioxx.tfc.Items.Tools.ItemWeapon;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
-import com.bioxx.tfc.api.IMultipleBlock;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

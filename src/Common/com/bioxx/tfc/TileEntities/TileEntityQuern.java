@@ -15,10 +15,10 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.api.IFood;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.QuernManager;
 import com.bioxx.tfc.api.Crafting.QuernRecipe;
+import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class TileEntityQuern extends NetworkTileEntity implements IInventory
 {

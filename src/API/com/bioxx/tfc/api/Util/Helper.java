@@ -8,8 +8,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.api.ISize;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
+import com.bioxx.tfc.api.Interfaces.ISize;
 
 
 public class Helper {

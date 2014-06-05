@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
-import com.bioxx.tfc.api.IMultipleBlock;
+import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
