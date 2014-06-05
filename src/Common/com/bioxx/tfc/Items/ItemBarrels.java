@@ -8,10 +8,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Constant.Global;
@@ -45,10 +48,46 @@ public class ItemBarrels extends ItemTerraBlock
 	{
 		if(nbt != null)
 		{
+			boolean addFluid = false;
 			if(nbt.hasKey("fluidNBT"))
 			{
 				FluidStack fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag("fluidNBT"));
-				arraylist.add(EnumChatFormatting.BLUE + fluid.getFluid().getLocalizedName());
+				if( fluid != null )
+				{
+					addFluid = true;
+					arraylist.add(EnumChatFormatting.BLUE + fluid.getFluid().getLocalizedName());
+				}
+			}
+
+			if(!addFluid && nbt.hasKey("Items") )
+			{
+				NBTTagList nbttaglist = nbt.getTagList("Items", 10);
+				if( nbttaglist != null )
+				{
+					int numItems = nbttaglist.tagCount();
+					boolean showMoreText = false;
+					if( numItems > 4 && !TFC_Core.showExtraInformation())
+					{
+						numItems = 3;
+						showMoreText = true;
+					}
+					for( int i = 0; i < numItems; i++ )
+					{
+						NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+						if( nbttagcompound1 != null )
+						{
+							ItemStack onlyItem = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+							if( onlyItem != null )
+							{
+								arraylist.add(EnumChatFormatting.GOLD + Integer.toString(onlyItem.stackSize)+"x " + onlyItem.getDisplayName() );
+							}
+						}
+					}
+					if( showMoreText )
+					{
+						arraylist.add(StatCollector.translateToLocal("gui.Barrel.MoreItems"));
+					}
+				}
 			}
 		}
 	}
@@ -90,3 +129,4 @@ public class ItemBarrels extends ItemTerraBlock
 		}
 	}
 }
+

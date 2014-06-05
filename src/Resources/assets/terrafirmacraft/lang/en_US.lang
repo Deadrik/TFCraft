@@ -2195,6 +2195,7 @@ gui.MeltedMetal.NotFull=Not Full
 gui.PotteryBase.Inst0=Sneak and §bRight Click §7to place object.
 gui.PotteryVesselSmall.Inst0=Or §bRight Click §7to open inventory.
 gui.RawHide.Inst0=????
+gui.Barrel.MoreItems=§8More... (Hold §fShift§8)
 
 gui.Size.Tiny=Tiny
 gui.Size.VerySmall=Very Small
