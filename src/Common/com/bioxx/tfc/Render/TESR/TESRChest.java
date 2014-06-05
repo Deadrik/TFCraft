@@ -62,7 +62,7 @@ public class TESRChest extends TileEntitySpecialRenderer
 			{
 				try
 				{
-					((BlockChest)block).func_149954_e/*unifyAdjacentChests*/(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord);
+					((BlockChestTFC)block).unifyAdjacentChests(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord);
 				}
 				catch (ClassCastException e)
 				{
