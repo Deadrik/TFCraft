@@ -4,6 +4,11 @@ import io.netty.buffer.ByteBuf;
 
 import java.util.HashMap;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.MinecraftForge;
+
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
@@ -11,10 +16,6 @@ import com.bioxx.tfc.api.SkillsManager;
 import com.bioxx.tfc.api.Events.GetSkillMultiplierEvent;
 import com.bioxx.tfc.api.Events.PlayerSkillEvent;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class SkillStats
@@ -75,7 +76,7 @@ public class SkillStats
 		writeNBT(player.getEntityData());
 	}
 
-	public int getSkill(String skillName)
+	public int getSkillRaw(String skillName)
 	{
 		if(skillsMap.containsKey(skillName))
 			return (Integer) skillsMap.get(skillName);
@@ -83,9 +84,30 @@ public class SkillStats
 			return 0;
 	}
 
+	public SkillRank getSkillRank(String skillName)
+	{
+		float raw = getSkillMultiplier(skillName);
+		if(raw < 0.25)
+		{
+			return SkillRank.Novice;
+		}
+		else if(raw < 0.5)
+		{
+			return SkillRank.Adept;
+		}
+		else if(raw < 0.75)
+		{
+			return SkillRank.Expert;
+		}
+		else
+		{
+			return SkillRank.Master;
+		}
+	}
+
 	public float getSkillMultiplier(String skillName)
 	{
-		int skill = getSkill(skillName);
+		int skill = getSkillRaw(skillName);
 		float mult = getSkillMult(skill);
 		GetSkillMultiplierEvent event = new GetSkillMultiplierEvent(player, skillName, mult);
 		MinecraftForge.EVENT_BUS.post(event);
@@ -137,5 +159,10 @@ public class SkillStats
 			ByteBufUtils.writeUTF8String(buffer, k);
 			buffer.writeInt(f);
 		}
+	}
+
+	public enum SkillRank
+	{
+		Novice, Adept, Expert, Master;
 	}
 }

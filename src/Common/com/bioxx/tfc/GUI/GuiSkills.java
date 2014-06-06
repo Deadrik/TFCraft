@@ -34,7 +34,7 @@ public class GuiSkills extends GuiContainerTFC
 		int y = 10;
 		for(String o : SkillsManager.instance.getSkillsArray())
 		{
-			fontRendererObj.drawString(StatCollector.translateToLocal(o) + ": " + EnumChatFormatting.DARK_BLUE + ss.getSkill(o), 4, y, 0, false);
+			fontRendererObj.drawString(StatCollector.translateToLocal(o) + ": " + EnumChatFormatting.DARK_BLUE + ss.getSkillRaw(o), 4, y, 0, false);
 			y+=10;
 		}
 	}

@@ -205,7 +205,7 @@ public class AnvilRecipe
 		for (String s : skillsList)
 		{
 			total++;
-			skill+=TFC_Core.getSkillStats(p).getSkill(s);
+			skill+=TFC_Core.getSkillStats(p).getSkillRaw(s);
 		}
 		if(total > 0)
 			return skill/total;

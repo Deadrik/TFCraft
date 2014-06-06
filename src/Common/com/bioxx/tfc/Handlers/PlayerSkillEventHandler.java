@@ -14,11 +14,11 @@ public class PlayerSkillEventHandler
 	{
 		if(event.skillname == Global.SKILL_COOKING)
 		{
-			event.skillResult = 1-(250f/(250f+TFC_Core.getSkillStats((EntityPlayer)event.entity).getSkill(event.skillname)));
+			event.skillResult = 1-(250f/(250f+TFC_Core.getSkillStats((EntityPlayer)event.entity).getSkillRaw(event.skillname)));
 		}
 		else if(event.skillname == Global.SKILL_AGRICULTURE)
 		{
-			event.skillResult = 1-(300f/(300f+TFC_Core.getSkillStats((EntityPlayer)event.entity).getSkill(event.skillname)));
+			event.skillResult = 1-(300f/(300f+TFC_Core.getSkillStats((EntityPlayer)event.entity).getSkillRaw(event.skillname)));
 		}
 	}
 }

@@ -135,7 +135,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		int tasteUmami = 0;
 		for (int i = 0; i < 4; i++)
 		{
-			float weightMult = (weights[i]*2)/100f;
+			float weightMult = ((weights[i]*2)/100f)*5f;
 			if(storage[i] != null)
 			{
 				tasteSweet += ((IFood)storage[i].getItem()).getTasteSweet(storage[i]) * weightMult;
