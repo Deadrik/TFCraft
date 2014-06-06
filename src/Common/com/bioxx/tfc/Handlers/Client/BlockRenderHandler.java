@@ -13,7 +13,6 @@ import com.bioxx.tfc.Render.TFC_CoreRender;
 import com.bioxx.tfc.Render.Blocks.RenderAnvil;
 import com.bioxx.tfc.Render.Blocks.RenderCrop;
 import com.bioxx.tfc.Render.Blocks.RenderDetailed;
-import com.bioxx.tfc.Render.Blocks.RenderFoodPrep;
 import com.bioxx.tfc.Render.Blocks.RenderGrass;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -106,10 +105,6 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 		else if (modelId == TFCBlocks.detailedRenderId)
 		{
 			return RenderDetailed.renderBlockDetailed(block, i, j, k, renderer);
-		}
-		else if (modelId == TFCBlocks.foodPrepRenderId)
-		{
-			return RenderFoodPrep.render(block, i, j, k, renderer);
 		}
 		else if (modelId == TFCBlocks.seaWeedRenderId)
 		{

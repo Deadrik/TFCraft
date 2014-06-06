@@ -12,7 +12,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
@@ -106,7 +105,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 					nbt.setFloat("foodDecay", -24);
 					nbt.setFloat("decayRate", 2.0f);
 					nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
-
+					combineTastes(nbt);
 					is.setTagCompound(nbt);
 
 					this.setInventorySlotContents(4, is);
@@ -123,8 +122,34 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			// Send a network packet to call this method on the Server side
 			// and create a meal, also adds 1 to the players cooking skill.
 			AbstractPacket pkt = new CreateMealPacket(0, this);
-			TerraFirmaCraft.packetPipeline.sendToServer(pkt);
+			broadcastPacketInRange(pkt);
 		}
+	}
+
+	private void combineTastes(NBTTagCompound nbt)
+	{
+		int tasteSweet = 0;
+		int tasteSour = 0;
+		int tasteSalty = 0;
+		int tasteBitter = 0;
+		int tasteUmami = 0;
+		for (int i = 0; i < 4; i++)
+		{
+			float weightMult = (weights[i]*2)/100f;
+			if(storage[i] != null)
+			{
+				tasteSweet += ((IFood)storage[i].getItem()).getTasteSweet(storage[i]) * weightMult;
+				tasteSour += ((IFood)storage[i].getItem()).getTasteSour(storage[i]) * weightMult;
+				tasteSalty += ((IFood)storage[i].getItem()).getTasteSalty(storage[i]) * weightMult;
+				tasteBitter += ((IFood)storage[i].getItem()).getTasteBitter(storage[i]) * weightMult;
+				tasteUmami += ((IFood)storage[i].getItem()).getTasteUmami(storage[i]) * weightMult;
+			}
+		}
+		nbt.setInteger("tasteSweet", tasteSweet);
+		nbt.setInteger("tasteSour", tasteSour);
+		nbt.setInteger("tasteSalty", tasteSalty);
+		nbt.setInteger("tasteBitter", tasteBitter);
+		nbt.setInteger("tasteUmami", tasteUmami);
 	}
 
 	public boolean areComponentsCorrect()
