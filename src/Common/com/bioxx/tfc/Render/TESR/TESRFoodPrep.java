@@ -1,6 +1,9 @@
 package com.bioxx.tfc.Render.TESR;
 
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
@@ -30,56 +33,87 @@ public class TESRFoodPrep extends TESRBase
 			float blockScale = 1.0F;
 			float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
-			if (te.getStackInSlot(0) != null)
+			if(RenderManager.instance.options.fancyGraphics)
 			{
-				GL11.glPushMatrix(); //start
-				GL11.glTranslatef((float)d + 0.25F, (float)d1 + 0.1F, (float)d2 + 0.25F);
-				GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
-				GL11.glScalef(blockScale, blockScale, blockScale);
-				customitem.setEntityItemStack(te.getStackInSlot(0));
-				itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
-				GL11.glPopMatrix(); //end
+				if (te.getStackInSlot(0) != null)
+				{
+					GL11.glPushMatrix(); //start
+					GL11.glTranslatef((float)d + 0.25F, (float)d1 + 0.1F, (float)d2 + 0.25F);
+					GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
+					GL11.glScalef(blockScale, blockScale, blockScale);
+					customitem.setEntityItemStack(te.getStackInSlot(0));
+					itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
+					GL11.glPopMatrix(); //end
+				}
+				if (te.getStackInSlot(1) != null)
+				{
+					GL11.glPushMatrix(); //start
+					GL11.glTranslatef((float)d + 0.75F, (float)d1 + 0.1F, (float)d2 + 0.25F);
+					GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
+					GL11.glScalef(blockScale, blockScale, blockScale);
+					customitem.setEntityItemStack(te.getStackInSlot(1));
+					itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
+					GL11.glPopMatrix(); //end
+				}
+				if (te.getStackInSlot(2) != null)
+				{
+					GL11.glPushMatrix(); //start
+					GL11.glTranslatef((float)d + 0.25F, (float)d1 + 0.1F, (float)d2 + 0.75F);
+					GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
+					GL11.glScalef(blockScale, blockScale, blockScale);
+					customitem.setEntityItemStack(te.getStackInSlot(2));
+					itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
+					GL11.glPopMatrix(); //end
+				}
+				if (te.getStackInSlot(3) != null)
+				{
+					GL11.glPushMatrix(); //start
+					GL11.glTranslatef((float)d + 0.75F, (float)d1 + 0.1F, (float)d2 + 0.75F);
+					GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
+					GL11.glScalef(blockScale, blockScale, blockScale);
+					customitem.setEntityItemStack(te.getStackInSlot(3));
+					itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
+					GL11.glPopMatrix(); //end
+				}
+				if (te.getStackInSlot(5) != null)
+				{
+					GL11.glPushMatrix(); //start
+					GL11.glTranslatef((float)d + 0.50F, (float)d1 + 0.1F, (float)d2 + 0.50F);
+					GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
+					GL11.glScalef(blockScale, blockScale, blockScale);
+					customitem.setEntityItemStack(te.getStackInSlot(5));
+					itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
+					GL11.glPopMatrix(); //end
+				}
 			}
-			if (te.getStackInSlot(1) != null)
+			else
 			{
-				GL11.glPushMatrix(); //start
-				GL11.glTranslatef((float)d + 0.75F, (float)d1 + 0.1F, (float)d2 + 0.25F);
-				GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
-				GL11.glScalef(blockScale, blockScale, blockScale);
-				customitem.setEntityItemStack(te.getStackInSlot(1));
-				itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
-				GL11.glPopMatrix(); //end
+				GL11.glTranslated(d, d1+0.001, d2);
+				drawItem(te, 0, 0, 0.4, 0, 0.4);
+				drawItem(te, 1, 0.6, 1, 0, 0.4);
+				drawItem(te, 2, 0.6, 1, 0.6, 1);
+				drawItem(te, 3, 0, 0.4, 0.6, 1);
+				drawItem(te, 5, 0.3, 0.7, 0.3, 0.7);
 			}
-			if (te.getStackInSlot(2) != null)
-			{
-				GL11.glPushMatrix(); //start
-				GL11.glTranslatef((float)d + 0.25F, (float)d1 + 0.1F, (float)d2 + 0.75F);
-				GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
-				GL11.glScalef(blockScale, blockScale, blockScale);
-				customitem.setEntityItemStack(te.getStackInSlot(2));
-				itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
-				GL11.glPopMatrix(); //end
-			}
-			if (te.getStackInSlot(3) != null)
-			{
-				GL11.glPushMatrix(); //start
-				GL11.glTranslatef((float)d + 0.75F, (float)d1 + 0.1F, (float)d2 + 0.75F);
-				GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
-				GL11.glScalef(blockScale, blockScale, blockScale);
-				customitem.setEntityItemStack(te.getStackInSlot(3));
-				itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
-				GL11.glPopMatrix(); //end
-			}
-			if (te.getStackInSlot(5) != null)
-			{
-				GL11.glPushMatrix(); //start
-				GL11.glTranslatef((float)d + 0.50F, (float)d1 + 0.1F, (float)d2 + 0.50F);
-				GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
-				GL11.glScalef(blockScale, blockScale, blockScale);
-				customitem.setEntityItemStack(te.getStackInSlot(5));
-				itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
-				GL11.glPopMatrix(); //end
-			}
+		}
+	}
+
+	public void drawItem(TEFoodPrep te, int index, double minX, double maxX, double minZ, double maxZ)
+	{
+		if(te.storage[index] != null && te.storage[index].getItem() instanceof Item)
+		{
+			float minU = te.storage[index].getIconIndex().getMinU();
+			float maxU = te.storage[index].getIconIndex().getMaxU();
+			float minV = te.storage[index].getIconIndex().getMinV();
+			float maxV = te.storage[index].getIconIndex().getMaxV();
+			Tessellator tessellator = Tessellator.instance;
+			tessellator.startDrawingQuads();
+			tessellator.setNormal(0.0F, 1.0F, 0.0F);
+			tessellator.addVertexWithUV(minX, 0.0F, maxZ, minU, maxV);
+			tessellator.addVertexWithUV(maxX, 0.0F, maxZ, maxU, maxV);
+			tessellator.addVertexWithUV(maxX, 0.0F, minZ, maxU, minV);
+			tessellator.addVertexWithUV(minX, 0.0F, minZ, minU, minV);
+			tessellator.draw();
 		}
 	}
 

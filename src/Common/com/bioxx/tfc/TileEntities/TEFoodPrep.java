@@ -10,10 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -27,7 +23,7 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.IItemFoodBlock;
 import com.bioxx.tfc.api.Util.Helper;
 
-public class TEFoodPrep extends TileEntity implements IInventory
+public class TEFoodPrep extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[6];
 	private float[] weights = new float[]{10, 4, 4, 2};
@@ -138,11 +134,11 @@ public class TEFoodPrep extends TileEntity implements IInventory
 		int f2 = -2;
 		int f3 = -3;
 		Item[] food = new Item[] {
-			(storage[0] != null ? storage[0].getItem() : null),
-			(storage[1] != null ? storage[1].getItem() : null),
-			(storage[2] != null ? storage[2].getItem() : null),
-			(storage[3] != null ? storage[3].getItem() : null)
-			};
+				(storage[0] != null ? storage[0].getItem() : null),
+				(storage[1] != null ? storage[1].getItem() : null),
+				(storage[2] != null ? storage[2].getItem() : null),
+				(storage[3] != null ? storage[3].getItem() : null)
+		};
 
 		//First we want to test the foodgroups to see if they match
 		if(getStackInSlot(0) != null)
@@ -255,14 +251,14 @@ public class TEFoodPrep extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbttagcompound);
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
+		super.readFromNBT(nbt);
+		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		storage = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte byte0 = nbttagcompound1.getByte("Slot");
 			if(byte0 >= 0 && byte0 < storage.length)
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
@@ -270,9 +266,9 @@ public class TEFoodPrep extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbttagcompound);
+		super.writeToNBT(nbt);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
 		{
@@ -284,21 +280,7 @@ public class TEFoodPrep extends TileEntity implements IInventory
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
-		nbttagcompound.setTag("Items", nbttaglist);
-	}
-
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.func_148857_g());
+		nbt.setTag("Items", nbttaglist);
 	}
 
 	@Override
@@ -380,8 +362,7 @@ public class TEFoodPrep extends TileEntity implements IInventory
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
 		storage[i] = itemstack;
-		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-			itemstack.stackSize = getInventoryStackLimit();
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -438,6 +419,35 @@ public class TEFoodPrep extends TileEntity implements IInventory
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
 	{
 		return false;
+	}
+
+	@Override
+	public void handleInitPacket(NBTTagCompound nbt) {
+		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
+		storage = new ItemStack[getSizeInventory()];
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			byte byte0 = nbttagcompound1.getByte("Slot");
+			if(byte0 >= 0 && byte0 < storage.length)
+				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		}
+	}
+
+	@Override
+	public void createInitNBT(NBTTagCompound nbt) {
+		NBTTagList nbttaglist = new NBTTagList();
+		for(int i = 0; i < storage.length; i++)
+		{
+			if(storage[i] != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				storage[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+		nbt.setTag("Items", nbttaglist);
 	}
 
 }
