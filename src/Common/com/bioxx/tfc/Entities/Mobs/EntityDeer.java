@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
@@ -362,7 +363,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected String getLivingSound()
 	{
-		return "mob.sheep.say";
+		if(getGender() == GenderEnum.MALE && isAdult() && worldObj.rand.nextInt(100) < 5)
+			return TFC_Sounds.DEERCRY;
+		return TFC_Sounds.DEERSAY;
 	}
 
 	/**
@@ -371,7 +374,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected String getHurtSound()
 	{
-		return "mob.sheep.say";
+		return TFC_Sounds.DEERHURT;
 	}
 
 	/**
@@ -380,7 +383,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected String getDeathSound()
 	{
-		return "mob.sheep.say";
+		return TFC_Sounds.DEERDEATH;
 	}
 
 	@Override

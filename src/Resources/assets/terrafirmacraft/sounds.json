@@ -62,6 +62,43 @@
     ]
   },
 
+  "mob.deer.say": {
+    "category": "ambient",
+    "sounds": [
+      "deer1",
+      "deer2",
+      "deer3",
+      "deer4",
+      "deer5",
+      "deer6",
+	  "deer7"
+    ]
+  },
+
+  "mob.deer.cry": {
+    "category": "ambient",
+    "sounds": [
+      "deercry1",
+      "deercry2",
+      "deercry3",
+      "deercry4"
+    ]
+  },
+
+  "mob.deer.hurt": {
+    "category": "ambient",
+    "sounds": [
+      "deerhurt1"
+    ]
+  },
+
+    "mob.deer.death": {
+    "category": "ambient",
+    "sounds": [
+      "deerdeath1"
+    ]
+  },
+
   "music.tfc": {
     "category": "music",
     "sounds": [
