@@ -99,13 +99,20 @@
     ]
   },
 
-    "mob.cricket": {
+  "mob.cricket": {
     "category": "ambient",
     "sounds": [
       "cricket1",
       "cricket2",
       "cricket3",
       "cricket4"
+    ]
+  },
+
+  "mob.frog": {
+    "category": "ambient",
+    "sounds": [
+      "frog1"
     ]
   },
 
