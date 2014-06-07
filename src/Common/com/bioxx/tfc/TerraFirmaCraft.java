@@ -21,6 +21,7 @@ import com.bioxx.tfc.Commands.GetBodyTemp;
 import com.bioxx.tfc.Commands.GetRocksCommand;
 import com.bioxx.tfc.Commands.GetSpawnProtectionCommand;
 import com.bioxx.tfc.Commands.GetTreesCommand;
+import com.bioxx.tfc.Commands.GiveSkillCommand;
 import com.bioxx.tfc.Commands.PrintImageMapCommand;
 import com.bioxx.tfc.Commands.RemoveAreaCommand;
 import com.bioxx.tfc.Commands.RemoveChunkCommand;
@@ -28,9 +29,9 @@ import com.bioxx.tfc.Commands.SetPlayerStatsCommand;
 import com.bioxx.tfc.Commands.StripChunkCommand;
 import com.bioxx.tfc.Core.ItemHeat;
 import com.bioxx.tfc.Core.Recipes;
+import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.AnvilCraftingHandler;
@@ -260,6 +261,7 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new CommandTime());
 		evt.registerServerCommand(new GenCommand());
 		evt.registerServerCommand(new PrintImageMapCommand());
+		evt.registerServerCommand(new GiveSkillCommand());
 	}	
 
 	public void loadSettings()

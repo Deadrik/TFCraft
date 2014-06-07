@@ -2356,3 +2356,8 @@ gui.taste.adept.savory2=Savory
 gui.taste.adept.savory3=Quite Savory
 gui.taste.adept.savory4=Very Savory
 gui.taste.adept.savory5=Extremely Savory
+
+gui.skill.novice=Novice
+gui.skill.adept=Adept
+gui.skill.expert=Expert
+gui.skill.master=Master

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -105,6 +106,27 @@ public class SkillStats
 		}
 	}
 
+	public float getPercToNextRank(String skillName)
+	{
+		float raw = getSkillMultiplier(skillName);
+		if(raw < 0.25)
+		{
+			return raw/0.25f;
+		}
+		else if(raw < 0.5)
+		{
+			return (raw-0.25f)/0.25f;
+		}
+		else if(raw < 0.75)
+		{
+			return (raw-0.5f)/0.25f;
+		}
+		else
+		{
+			return (raw-0.75f)/0.25f;
+		}
+	}
+
 	public float getSkillMultiplier(String skillName)
 	{
 		int skill = getSkillRaw(skillName);
@@ -163,6 +185,22 @@ public class SkillStats
 
 	public enum SkillRank
 	{
-		Novice, Adept, Expert, Master;
+		Novice("gui.skill.novice"), Adept("gui.skill.adept"), Expert("gui.skill.expert"), Master("gui.skill.master");
+
+		String name;
+		private SkillRank(String local)
+		{
+			name = local;
+		}
+
+		public String getUnlocalizedName()
+		{
+			return name;
+		}
+
+		public String getLocalizedName()
+		{
+			return StatCollector.translateToLocal(name);
+		}
 	}
 }
