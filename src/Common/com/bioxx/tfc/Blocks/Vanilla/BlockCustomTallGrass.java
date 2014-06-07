@@ -11,9 +11,11 @@ import com.bioxx.tfc.Core.ColorizerFoliageTFC;
 import com.bioxx.tfc.Core.ColorizerGrassTFC;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTallGrass;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
@@ -64,21 +66,21 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	}
 
 	@Override
-	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public int colorMultiplier(IBlockAccess bAccess, int x, int y, int z)
 	{
-		return TerraFirmaCraft.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
+		return TerraFirmaCraft.proxy.grassColorMultiplier(bAccess, x, y, z);
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
 		return null;
 	}
 
 	@Override
-	public int quantityDroppedWithBonus(int par1, Random par2Random)
+	public int quantityDroppedWithBonus(int i, Random rand)
 	{
-		return 1 + par2Random.nextInt(par1 * 2 + 1);
+		return 1 + rand.nextInt(i * 2 + 1);
 	}
 
 	@Override
@@ -151,27 +153,27 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	}
 
 	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) 
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(new ItemStack(this, 1, world.getBlockMetadata(x, y, z)));
 		return ret;
 	}
 
-	protected boolean canThisPlantGrowOnThisBlock(Block par1)
+	protected boolean canThisPlantGrowOnThisBlock(Block block)
 	{
-		return TFC_Core.isSoil(par1); // || par1 == Block.tilledField.blockID;
+		return TFC_Core.isSoil(block); // || par1 == Block.tilledField.blockID;
 	}
 
 	/**
 	 * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
 	 */
 	@Override
-	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return (par1World.getFullBlockLightValue(par2, par3, par4) >= 8 || 
-				par1World.canBlockSeeTheSky(par2, par3, par4)) && 
-				this.canThisPlantGrowOnThisBlock(par1World.getBlock(par2, par3 - 1, par4));
+		return (world.getFullBlockLightValue(x, y, z) >= 8 || 
+				world.canBlockSeeTheSky(x, y, z)) && 
+				this.canThisPlantGrowOnThisBlock(world.getBlock(x, y - 1, z));
 	}
 
 	public static ItemStack GetSeeds(Random R)
@@ -234,9 +236,24 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public IIcon getIcon(int par1, int par2)
+	public IIcon getIcon(int side, int meta)
 	{
-		if (par2 >= this.icons.length) par2 = 0;
-		return this.icons[par2];
+		if (meta >= this.icons.length) meta = 0;
+		return this.icons[meta];
 	}
+
+	@Override
+	public void updateTick(World w, int x, int y, int z, Random rand)
+	{
+		// Play cricket sound at night
+		if(!w.isRemote && w.getBlockLightValue(x, y, z) < 7)
+		{
+			if(w.rand.nextInt(100) < 50)
+				w.playSoundEffect(x, y, z, TFC_Sounds.CRICKET, 0.5F, w.rand.nextFloat() + 0.7F);
+		}
+
+		super.updateTick(w, x, y, z, rand);
+	}
+
+	
 }

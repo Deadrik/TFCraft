@@ -99,6 +99,16 @@
     ]
   },
 
+    "mob.cricket": {
+    "category": "ambient",
+    "sounds": [
+      "cricket1",
+      "cricket2",
+      "cricket3",
+      "cricket4"
+    ]
+  },
+
   "music.tfc": {
     "category": "music",
     "sounds": [
