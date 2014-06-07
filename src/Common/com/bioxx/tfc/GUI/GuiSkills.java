@@ -34,21 +34,25 @@ public class GuiSkills extends GuiContainerTFC
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) 
 	{
+		fontRendererObj.drawString(StatCollector.translateToLocal("gui.skillpage"), this.xSize/2-fontRendererObj.getStringWidth(StatCollector.translateToLocal("gui.skillpage"))/2, 4, 4210752, false);
 		SkillStats ss = TFC_Core.getSkillStats(player);
-		int y = 5;
+		int y = 10;
 		int count = -1;
 		for(String o : SkillsManager.instance.getSkillsArray())
 		{
 			count++;
-			if(count < (skillsPerPage*skillsPage)+9 && count >= (skillsPerPage*skillsPage))
+			if(count < (skillsPerPage*skillsPage)+skillsPerPage && count >= (skillsPerPage*skillsPage))
 			{
-				fontRendererObj.drawString(StatCollector.translateToLocal(o) + ": " + EnumChatFormatting.DARK_BLUE + ss.getSkillRank(o).getLocalizedName(), 4, y, 0, false);
-				y+=10;
+				bindTexture(GuiTex);
+				drawTexturedModalRect(4, y, 4, 208, 168, 16);
+				y+=12;
 				float perc = ss.getPercToNextRank(o);
 				bindTexture(GuiTex);
 				drawTexturedModalRect(4, y, 4, 168, 168, 4);
 				drawTexturedModalRect(4, y, 4, 172, (int)Math.floor(168*perc), 4);
-				y+=5;
+
+				fontRendererObj.drawString(StatCollector.translateToLocal(o) + ": " + EnumChatFormatting.DARK_BLUE + ss.getSkillRank(o).getLocalizedName(), 6, y-9, 0, false);
+				y+=3;
 			}
 		}
 	}
