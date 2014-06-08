@@ -23,6 +23,7 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
 import com.bioxx.tfc.Core.ColorizerGrassTFC;
 import com.bioxx.tfc.Core.Recipes;
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 
@@ -246,14 +247,18 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	public void updateTick(World w, int x, int y, int z, Random rand)
 	{
 		// Play cricket sound at night
-		if(!w.isRemote && w.getBlockLightValue(x, y, z) < 7)
+		float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
+		if(!w.isRemote && w.getBlockLightValue(x, y, z) < 7 && temp > 10)
 		{
-			if(w.rand.nextInt(100) < 50)
-				w.playSoundEffect(x, y, z, TFC_Sounds.CRICKET, 0.5F, w.rand.nextFloat() + 0.7F);
+			if(w.rand.nextInt(100) < temp) //chirp intensity grows with higher temperature
+			{
+				float f = w.rand.nextFloat();
+				float vol = f < 0.30F ? f : 0.30F; // keep the volume between 0 and 0.3
+				float pitch = ((temp / 100) * 2) + 0.5F + vol; // the chirp frequency will change depending on the climate temperature
+				w.playSoundEffect(x, y, z, TFC_Sounds.CRICKET, vol, pitch);
+			}
 		}
 
 		super.updateTick(w, x, y, z, rand);
 	}
-
-	
 }

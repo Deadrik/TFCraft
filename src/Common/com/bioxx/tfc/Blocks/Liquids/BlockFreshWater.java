@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
 import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Sounds;
 
 import cpw.mods.fml.relauncher.Side;
@@ -46,12 +47,12 @@ public class BlockFreshWater extends BlockCustomLiquid
 	public void updateTick(World w, int x, int y, int z, Random rand)
 	{
 		// Play frog sound at night
-		if(!w.isRemote && w.getBlockLightValue(x, y, z) < 7)
+		if(!w.isRemote && w.getBlockLightValue(x, y, z) < 7 && TFC_Climate.getHeightAdjustedTemp(x, y, z) > 10)
 		{
 			if(w.rand.nextInt(100) < 25)
 			{
 				float mod = w.rand.nextFloat();
-				w.playSoundEffect(x, y, z, TFC_Sounds.FROG, 0.5F, mod < 0.41F ? mod + 0.8F : 0.8F);
+				w.playSoundEffect(x, y, z, TFC_Sounds.FROG, (mod < 0.55F ? mod : 0.55F), (mod < 0.41F ? mod + 0.8F : 0.8F));
 			}
 		}
 		super.updateTick(w, x, y, z, rand);
