@@ -126,8 +126,6 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 
 		default:
 		}
-
-		out.add(pkt);
 	}
 
 	// Method to call from FMLInitializationEvent
