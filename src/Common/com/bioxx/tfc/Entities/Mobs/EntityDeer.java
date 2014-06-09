@@ -7,6 +7,12 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -23,6 +29,9 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
+import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
+import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -30,6 +39,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 {
 	/** The eat grass AI task for this mob. */
 	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
+
 	private boolean running;
 	protected long animalID;
 	protected int sex = 0;
@@ -67,19 +77,18 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
-//		this.tasks.addTask(0, new EntityAISwimming(this));
-//		this.tasks.addTask(1, new EntityAIPanicTFC(this, 0.68F,true));
-//		this.tasks.addTask(2, new EntityAIMateTFC(this,worldObj, 1.0f));
-//		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
-//		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
-//		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
-		//this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat, false));
-		//this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
-//		this.tasks.addTask(5, this.aiEatGrass);
-		//this.tasks.addTask(5, new EntityAIRutt(this, var2));
-//		this.tasks.addTask(1, new EntityAIWander(this, 0.75));
-//		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		//this.tasks.addTask(8, new EntityAILookIdle(this));
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIPanicTFC(this, 0.68F,true));
+		this.tasks.addTask(2, new EntityAIMateTFC(this,worldObj, 1.0f));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
+		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16f, 0.25F, 0.3F));
+		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Items.wheat, false));
+		this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
+		this.tasks.addTask(5, this.aiEatGrass);
+		this.tasks.addTask(1, new EntityAIWander(this, 0.5));
+		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		this.tasks.addTask(8, new EntityAILookIdle(this));
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event. We want spawned
