@@ -34,6 +34,15 @@ public class BlockFlower extends BlockTerra
 		flowerNames = new String[]{"flower_dandelion","flower_nasturtium", "flower_meads_milkweed", "flower_tropical_milkweed", "flower_butterfly_milkweed", "flower_calendula"};
 	}
 
+	public boolean canGrowConditions(World world, int x, int y, int z, int flowerMeta)
+	{
+		if(flowerMeta == 1)
+		{
+
+		}
+		return true;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	/**

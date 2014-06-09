@@ -30,7 +30,9 @@ public class WorldGenFlowers extends WorldGenerator
 
 			if (world.isAirBlock(xx, yy, zz) && plantBlock.canBlockStay(world, xx, yy, zz))
 			{
-				world.setBlock(xx, yy, zz, plantBlock, r.nextInt(all), 0x2);
+				int meta = r.nextInt(all);
+				if(plantBlock.canGrowConditions(world, xx, yy, zz, meta))
+					world.setBlock(xx, yy, zz, plantBlock, meta, 0x2);
 			}
 		}
 		return true;
