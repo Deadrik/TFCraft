@@ -74,7 +74,6 @@ achievement.achIronAge.desc=Mine an iron bloom to enter the Iron Age
 achievement.achPokeCreeper=Steve Irwin
 achievement.achPokeCreeper.desc=Poke it with a stick
 
-
 #========
 #= Food =
 #========
@@ -926,14 +925,17 @@ item.Barrel.White Elm.name=White Elm Barrel
 item.Barrel.Willow.name=Willow Barrel
 
 #== Wood Blocks ==
-tile.log.Oak.name=Oak Log
+tile.log.Acacia.name=Acacia Log
+tile.log2.Acacia.name=Acacia Log
+tile.log.Ash.name=Ash Log
 tile.log.Aspen.name=Aspen Log
 tile.log.Birch.name=Birch Log
 tile.log.Chestnut.name=Chestnut Log
 tile.log.Douglas Fir.name=Douglas Fir Log
 tile.log.Hickory.name=Hickory Log
+tile.log.Kapok.name=Kapok Log
 tile.log.Maple.name=Maple Log
-tile.log.Ash.name=Ash Log
+tile.log.Oak.name=Oak Log
 tile.log.Pine.name=Pine Log
 tile.log.Sequoia.name=Sequoia Log
 tile.log.Spruce.name=Spruce Log
@@ -941,17 +943,17 @@ tile.log.Sycamore.name=Sycamore Log
 tile.log.White Cedar.name=White Cedar Log
 tile.log.White Elm.name=White Elm Log
 tile.log.Willow.name=Willow Log
-tile.log.Kapok.name=Kapok Log
-tile.log2.Acacia.name=Acacia Log
 
-tile.WoodVert.Oak.name=Oak Log
+tile.WoodVert2.Acacia.name=Acacia Log
+tile.WoodVert.Ash.name=Ash Log
 tile.WoodVert.Aspen.name=Aspen Log
 tile.WoodVert.Birch.name=Birch Log
 tile.WoodVert.Chestnut.name=Chestnut Log
 tile.WoodVert.Douglas Fir.name=Douglas Fir Log
 tile.WoodVert.Hickory.name=Hickory Log
+tile.WoodVert.Kapok.name=Kapok Log
 tile.WoodVert.Maple.name=Maple Log
-tile.WoodVert.Ash.name=Ash Log
+tile.WoodVert.Oak.name=Oak Log
 tile.WoodVert.Pine.name=Pine Log
 tile.WoodVert.Sequoia.name=Sequoia Log
 tile.WoodVert.Spruce.name=Spruce Log
@@ -959,17 +961,17 @@ tile.WoodVert.Sycamore.name=Sycamore Log
 tile.WoodVert.White Cedar.name=White Cedar Log
 tile.WoodVert.White Elm.name=White Elm Log
 tile.WoodVert.Willow.name=Willow Log
-tile.WoodVert.Kapok.name=Kapok Log
-tile.WoodVert2.Acacia.name=Acacia Log
 
-tile.WoodHoriz.Oak.name=Oak Log
+tile.WoodHoriz3.Acacia.name=Acacia Log
+tile.WoodHoriz.Ash.name=Ash Log
 tile.WoodHoriz.Aspen.name=Aspen Log
 tile.WoodHoriz.Birch.name=Birch Log
 tile.WoodHoriz.Chestnut.name=Chestnut Log
 tile.WoodHoriz.Douglas Fir.name=Douglas Fir Log
 tile.WoodHoriz.Hickory.name=Hickory Log
+tile.WoodHoriz2.Kapok.name=Kapok Log
 tile.WoodHoriz.Maple.name=Maple Log
-tile.WoodHoriz.Ash.name=Ash Log
+tile.WoodHoriz.Oak.name=Oak Log
 tile.WoodHoriz2.Pine.name=Pine Log
 tile.WoodHoriz2.Sequoia.name=Sequoia Log
 tile.WoodHoriz2.Spruce.name=Spruce Log
@@ -977,8 +979,6 @@ tile.WoodHoriz2.Sycamore.name=Sycamore Log
 tile.WoodHoriz2.White Cedar.name=White Cedar Log
 tile.WoodHoriz2.White Elm.name=White Elm Log
 tile.WoodHoriz2.Willow.name=Willow Log
-tile.WoodHoriz2.Kapok.name=Kapok Log
-tile.WoodHoriz3.Acacia.name=Acacia Log
 
 tile.sapling2.Acacia.name=Acacia Sapling
 tile.sapling.Ash.name=Ash Sapling
@@ -1209,7 +1209,6 @@ item.MM Stone Chisel Head.name=Stone Chisel Head
 item.MM Stone Hoe Head.name=Stone Hoe Head
 item.MM Stone Javelin Head.name=Stone Javelin Head
 item.MM Stone Shovel Head.name=Stone Shovel Head
-
 
 #== Stone Tools ==
 item.Stone Axe.name=Stone Axe
@@ -1955,7 +1954,7 @@ tile.Flowers.flower_allium.name=Allium
 tile.Flowers.flower_houstonia.name=Houstonia
 tile.Flowers.flower_tulip_red.name=Red Tulip
 tile.Flowers.flower_tulip_orange.name=Orange Tulip
-tile.Flowers.flower_tulip_white.name=White Tupil
+tile.Flowers.flower_tulip_white.name=White Tulip
 tile.Flowers.flower_tulip_pink.name=Pink Tulip
 tile.Flowers.flower_oxeye_daisy.name=Daisy
 
@@ -2293,9 +2292,9 @@ fluid.freshwater=Fresh Water
 fluid.saltwater=Salt Water
 fluid.lavatfc=Lava
 fluid.hotwater=Hot Water
-fluid.rum=Rum
 fluid.beer=Beer
 fluid.cider=Cider
+fluid.rum=Rum
 fluid.ryewhiskey=Rye Whiskey
 fluid.sake=Sake
 fluid.vodka=Vodka
