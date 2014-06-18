@@ -17,44 +17,45 @@ public class GenLayerZoomTFC extends GenLayerTFC
 	 * amounts, or biomeList[] indices based on the particular GenLayer subclass.
 	 */
 	@Override
-	public int[] getInts(int par1, int par2, int par3, int par4)
+	public int[] getInts(int x, int z, int xSize, int zSize)
 	{
-		int i1 = par1 >> 1;
-		int j1 = par2 >> 1;
-		int k1 = (par3 >> 1) + 2;
-		int l1 = (par4 >> 1) + 2;
-		int[] aint = this.parent.getInts(i1, j1, k1, l1);
-		int i2 = k1 - 1 << 1;
-		int j2 = l1 - 1 << 1;
-		int[] aint1 = IntCache.getIntCache(i2 * j2);
-		Arrays.fill(aint1, 0);
+		int xCoord = x >> 1;
+		int zCoord = z >> 1;
+		int newXSize = (xSize >> 1) + 2;
+		int newZSize = (zSize >> 1) + 2;
+		int[] parentCache = this.parent.getInts(xCoord, zCoord, newXSize, newZSize);
+		int i2 = newXSize - 1 << 1;
+		int j2 = newZSize - 1 << 1;
+		int[] out = IntCache.getIntCache(i2 * j2);
+		Arrays.fill(out, 0);
 		int l2;
 
-		for (int k2 = 0; k2 < l1 - 1; ++k2)
+		for (int k2 = 0; k2 < newZSize - 1; ++k2)
 		{
 			l2 = (k2 << 1) * i2;
 			int i3 = 0;
-			int j3 = aint[i3 + 0 + (k2 + 0) * k1];
+			int j3 = parentCache[i3 + 0 + (k2 + 0) * newXSize];
 
-			for (int k3 = aint[i3 + 0 + (k2 + 1) * k1]; i3 < k1 - 1; ++i3)
+			for (int k3 = parentCache[i3 + 0 + (k2 + 1) * newXSize]; i3 < newXSize - 1; ++i3)
 			{
-				this.initChunkSeed(i3 + i1 << 1, k2 + j1 << 1);
-				int l3 = aint[i3 + 1 + (k2 + 0) * k1];
-				int i4 = aint[i3 + 1 + (k2 + 1) * k1];
-				aint1[l2] = j3;
-				aint1[l2++ + i2] = this.selectRandom(new int[] {j3, k3});
-				aint1[l2] = this.selectRandom(new int[] {j3, l3});
-				aint1[l2++ + i2] = this.selectModeOrRandom(j3, l3, k3, i4);
+				this.initChunkSeed(i3 + xCoord << 1, k2 + zCoord << 1);
+				int l3 = parentCache[i3 + 1 + (k2 + 0) * newXSize];
+				int i4 = parentCache[i3 + 1 + (k2 + 1) * newXSize];
+				out[l2] = j3;
+				out[l2++ + i2] = this.selectRandom(new int[] {j3, k3});
+				out[l2] = this.selectRandom(new int[] {j3, l3});
+				out[l2++ + i2] = this.selectModeOrRandom(j3, l3, k3, i4);
 				j3 = l3;
 				k3 = i4;
 			}
 		}
 
-		int[] outCache = IntCache.getIntCache(par3 * par4);
+		int[] outCache = IntCache.getIntCache(xSize * zSize);
 
-		for (l2 = 0; l2 < par4; ++l2)
+		for (l2 = 0; l2 < zSize; ++l2)
 		{
-			System.arraycopy(aint1, (l2 + (par2 & 1)) * i2 + (par1 & 1), outCache, l2 * par3, par3);
+			int srcPos = (l2 + (z & 1)) * i2 + (x & 1);
+			System.arraycopy(out, srcPos, outCache, l2 * xSize, xSize);
 		}
 
 		return outCache;

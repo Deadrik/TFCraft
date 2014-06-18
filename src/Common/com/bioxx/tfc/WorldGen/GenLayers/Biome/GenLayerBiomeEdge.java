@@ -22,6 +22,7 @@ public class GenLayerBiomeEdge extends GenLayerTFC
 	public int[] getInts(int par1, int par2, int xSize, int zSize)
 	{
 		int[] inCache = this.parent.getInts(par1 - 1, par2 - 1, xSize + 2, zSize + 2);
+		validateIntArray(inCache, xSize+2, zSize+2);
 		int[] outCache = IntCache.getIntCache(xSize * zSize);
 		int var10;
 		int var11;
@@ -72,8 +73,8 @@ public class GenLayerBiomeEdge extends GenLayerTFC
 				{
 					outCache[x + z * xSize] = thisID;
 				}
-				/*if(outCache[x + z * xSize] > 200)
-					return null;*/
+
+				validateInt(outCache, x + z * xSize);
 			}
 		}
 		return outCache;

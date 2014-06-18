@@ -36,58 +36,64 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 		layerRivers = this.riverPatternGeneratorChain.getInts(x, z, xSize, zSize);
 		layerOut = IntCache.getIntCache(xSize * zSize);
 
-		for (int index = 0; index < xSize * zSize; ++index)
+		for (int zElement = 0; zElement < zSize; ++zElement)
 		{
-			int b = layerBiomes[index];
-			int r = layerRivers[index];
-
-			xn = index-1;
-			xp = index+1;
-			zn = index-zSize;
-			zp = index+zSize;
-
-			if (TFC_Core.isOceanicBiome(b) || TFC_Core.isMountainBiome(b))
-				layerOut[index] = b;
-			else if (r > 0)
+			for (int xElement = 0; xElement < xSize; ++xElement)
 			{
-				layerOut[index] = r;
+				int index = xElement + zElement * xSize;
+				int b = layerBiomes[index];
+				int r = layerRivers[index];
 
-				//Here we make sure that rivers dont run along ocean/beach splits. We turn the river into oceans.
-				if (TFC_Core.isBeachBiome(b))
+				xn = index-1;
+				xp = index+1;
+				zn = index-zSize;
+				zp = index+zSize;
+
+				if (TFC_Core.isOceanicBiome(b) || TFC_Core.isMountainBiome(b))
+					layerOut[index] = b;
+				else if (r > 0)
 				{
-					layerOut[index] = TFCBiome.ocean.biomeID;
-					if(inBounds(xn, layerOut) && layerOut[xn] == TFCBiome.river.biomeID)
+					layerOut[index] = r;
+
+					//Here we make sure that rivers dont run along ocean/beach splits. We turn the river into oceans.
+					if (TFC_Core.isBeachBiome(b))
 					{
-						layerOut[xn] = TFCBiome.ocean.biomeID;
-					}
-					if(inBounds(zn, layerOut) && layerOut[zn] == TFCBiome.river.biomeID)
-					{
-						layerOut[zn] = TFCBiome.ocean.biomeID;
-					}
-					if(inBounds(zp, layerOut) && TFC_Core.isOceanicBiome(layerBiomes[zp]) && layerRivers[zp] == 0)
-					{
-						layerOut[index] = b;
-					}
-					if(inBounds(zn, layerOut) && TFC_Core.isOceanicBiome(layerBiomes[zn]) && layerRivers[zn] == 0)
-					{
-						layerOut[index] = b;
-					}
-					if(inBounds(xn, layerOut) && TFC_Core.isOceanicBiome(layerBiomes[xn]) && layerRivers[xn] == 0)
-					{
-						layerOut[index] = b;
-					}
-					if(inBounds(xp, layerOut) && TFC_Core.isOceanicBiome(layerBiomes[xp]) && layerRivers[xp] == 0)
-					{
-						layerOut[index] = b;
+						layerOut[index] = TFCBiome.ocean.biomeID;
+						if(inBounds(xn, layerOut) && layerOut[xn] == TFCBiome.river.biomeID)
+						{
+							layerOut[xn] = TFCBiome.ocean.biomeID;
+						}
+						if(inBounds(zn, layerOut) && layerOut[zn] == TFCBiome.river.biomeID)
+						{
+							layerOut[zn] = TFCBiome.ocean.biomeID;
+						}
+						if(inBounds(zp, layerOut) && TFC_Core.isOceanicBiome(layerBiomes[zp]) && layerRivers[zp] == 0)
+						{
+							layerOut[index] = b;
+						}
+						if(inBounds(zn, layerOut) && TFC_Core.isOceanicBiome(layerBiomes[zn]) && layerRivers[zn] == 0)
+						{
+							layerOut[index] = b;
+						}
+						if(inBounds(xn, layerOut) && TFC_Core.isOceanicBiome(layerBiomes[xn]) && layerRivers[xn] == 0)
+						{
+							layerOut[index] = b;
+						}
+						if(inBounds(xp, layerOut) && TFC_Core.isOceanicBiome(layerBiomes[xp]) && layerRivers[xp] == 0)
+						{
+							layerOut[index] = b;
+						}
 					}
 				}
-			}
-			else
-				layerOut[index] = b;
+				else
+					layerOut[index] = b;
 
-			//Similar to above, if we're near a lake, we turn the river into lake.
-			removeRiver(index, TFCBiome.lake.biomeID);
-			removeRiver(index, TFCBiome.MountainsEdge.biomeID);
+				//Similar to above, if we're near a lake, we turn the river into lake.
+				removeRiver(index, TFCBiome.lake.biomeID);
+				removeRiver(index, TFCBiome.MountainsEdge.biomeID);
+
+				validateInt(layerOut, index);
+			}
 		}
 		return layerOut;
 	}

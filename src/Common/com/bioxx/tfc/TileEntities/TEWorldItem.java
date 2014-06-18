@@ -126,7 +126,8 @@ public class TEWorldItem extends NetworkTileEntity implements IInventory
 
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) {
-		this.storage[0] = ItemStack.loadItemStackFromNBT(nbt);
+		if(nbt.hasKey("id"))
+			this.storage[0] = ItemStack.loadItemStackFromNBT(nbt);
 	}
 
 	@Override
@@ -143,6 +144,7 @@ public class TEWorldItem extends NetworkTileEntity implements IInventory
 
 	@Override
 	public void createInitNBT(NBTTagCompound nbt) {
-		this.storage[0].writeToNBT(nbt);
+		if(storage[0] != null)
+			this.storage[0].writeToNBT(nbt);
 	}
 }

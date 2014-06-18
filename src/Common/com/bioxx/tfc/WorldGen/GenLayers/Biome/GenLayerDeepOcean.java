@@ -18,59 +18,57 @@ public class GenLayerDeepOcean extends GenLayerTFC
 	 * amounts, or biomeList[] indices based on the particular GenLayer subclass.
 	 */
 	@Override
-	public int[] getInts(int par1, int par2, int par3, int par4)
+	public int[] getInts(int parX, int parZ, int parXSize, int parZSize)
 	{
-		int i1 = par1 - 1;
-		int j1 = par2 - 1;
-		int k1 = par3 + 2;
-		int l1 = par4 + 2;
+		int xSize = parXSize + 2;
+		int zSize = parZSize + 2;
 		int thisID;
-		int[] aint = this.parent.getInts(i1, j1, k1, l1);
-		int[] outCache = IntCache.getIntCache(par3 * par4);
+		int[] parentIDs = this.parent.getInts(parX - 1, parZ - 1, xSize, zSize);
+		validateIntArray(parentIDs, xSize, zSize);
+		int[] outCache = IntCache.getIntCache(parXSize * parZSize);
 
-		for (int i2 = 0; i2 < par4; ++i2)
+		for (int z = 0; z < parZSize; ++z)
 		{
-			for (int j2 = 0; j2 < par3; ++j2)
+			for (int x = 0; x < parXSize; ++x)
 			{
-				int k2 = aint[j2 + 1 + (i2 + 1 - 1) * (par3 + 2)];
-				int l2 = aint[j2 + 1 + 1 + (i2 + 1) * (par3 + 2)];
-				int i3 = aint[j2 + 1 - 1 + (i2 + 1) * (par3 + 2)];
-				int j3 = aint[j2 + 1 + (i2 + 1 + 1) * (par3 + 2)];
-				thisID = aint[j2 + 1 + (i2 + 1) * k1];
-				int l3 = 0;
+				int northID = parentIDs[x + 1 + z * xSize];
+				int rightID = parentIDs[x + 2 + (z + 1) * xSize];
+				int leftID = parentIDs[x + (z + 1) * xSize];
+				int southID = parentIDs[x + 1 + (z + 2) * xSize];
+				thisID = parentIDs[x + 1 + (z + 1) * xSize];
+				int oceanCount = 0;
+				int outIndex = x + z * parXSize;
 
-				if (k2 == 0)
+				if (northID == 0)
 				{
-					++l3;
+					++oceanCount;
 				}
 
-				if (l2 == 0)
+				if (rightID == 0)
 				{
-					++l3;
+					++oceanCount;
 				}
 
-				if (i3 == 0)
+				if (leftID == 0)
 				{
-					++l3;
+					++oceanCount;
 				}
 
-				if (j3 == 0)
+				if (southID == 0)
 				{
-					++l3;
+					++oceanCount;
 				}
 
-				if (thisID == 0 && l3 > 3)
+				if (thisID == 0 && oceanCount > 3)
 				{
-					outCache[j2 + i2 * par3] = TFCBiome.DeepOcean.biomeID;
+					outCache[outIndex] = TFCBiome.DeepOcean.biomeID;
 				}
 				else
 				{
-					outCache[j2 + i2 * par3] = thisID;
+					outCache[outIndex] = thisID;
 				}
 			}
 		}
-
-
 
 		return outCache;
 	}

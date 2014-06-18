@@ -26,12 +26,12 @@ public abstract class GenLayerTFC extends GenLayer
 	protected long chunkSeed;
 	protected long baseSeed;
 
-
 	public static GenLayerTFC[] initialize(long par0, TFCWorldType par2)
 	{
 		GenLayerTFC continent = genContinent(0, false);
 		continent = new GenLayerDeepOcean(4L, continent);
 		drawImage(512, continent, "8b Continents Done Deep Ocean");
+		continent = new GenLayerDebug(4L, continent);
 		byte var4 = 4;
 
 		//Create Biomes
@@ -70,12 +70,13 @@ public abstract class GenLayerTFC extends GenLayer
 		riverCont = new GenLayerSmoothTFC(1000L, riverCont);
 		drawImage(512, riverCont, "13 SmoothRiver");
 
-		GenLayerSmoothTFC smoothContinent = new GenLayerSmoothTFC(1000L, var18);
+		GenLayerSmoothBiomeTFC smoothContinent = new GenLayerSmoothBiomeTFC(1000L, var18);
 		drawImage(512, smoothContinent, "Biome 19");
 		GenLayerRiverMixTFC riverMix = new GenLayerRiverMixTFC(100L, smoothContinent, riverCont);
 		drawImage(512, riverMix, "Biome 20");
-		GenLayerTFC finalCont = new GenLayerVoronoiZoomTFC(1000L, riverMix);
-		finalCont = new GenLayerSmoothTFC(1001L, finalCont);
+		GenLayerTFC finalCont = GenLayerZoomTFC.magnify(1000L, riverMix, 2);
+		drawImage(512, finalCont, "Biome 20-zoom");
+		finalCont = new GenLayerSmoothBiomeTFC(1001L, finalCont);
 		drawImage(512, finalCont, "Biome 21");
 		riverMix.initWorldGenSeed(par0);
 		finalCont.initWorldGenSeed(par0);
@@ -143,6 +144,14 @@ public abstract class GenLayerTFC extends GenLayer
 	public GenLayerTFC(long par1)
 	{
 		super(par1);
+		this.baseSeed = par1;
+		this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
+		this.baseSeed += par1;
+		this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
+		this.baseSeed += par1;
+		this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
+		this.baseSeed += par1;
+
 	}
 
 	/**
@@ -202,4 +211,25 @@ public abstract class GenLayerTFC extends GenLayer
 	@Override
 	public abstract int[] getInts(int var1, int var2, int var3, int var4);
 
+	public static int validateInt(int[] array, int index)
+	{
+		if(TFCBiome.biomeList[array[index]] == null)
+			System.out.println("Error garbage data: "+array[index]);
+		return array[index];
+	}
+
+	public static void validateIntArray(int[] array, int xSize, int zSize)
+	{
+		for(int z = 0; z < zSize; z++)
+		{
+			for(int x = 0; x < xSize; x++)
+			{
+				if(TFCBiome.biomeList[array[x+z*xSize]] == null)
+				{
+					System.out.println("Error Array garbage data: "+array[x+z*xSize]);
+					return;
+				}
+			}
+		}
+	}
 }

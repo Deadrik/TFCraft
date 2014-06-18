@@ -29,7 +29,7 @@ public class GenLayerShoreTFC extends GenLayerTFC
 		{
 			for (int var8 = 0; var8 < par3; ++var8)
 			{
-				this.initChunkSeed(var8 + par1, var7 + par2);
+				this.initChunkSeed((long)(var7 + par1), (long)(var8 + par2));
 				int var9 = var5[var8 + 1 + (var7 + 1) * (par3 + 2)];
 				int var10;
 				int var11;
@@ -57,6 +57,8 @@ public class GenLayerShoreTFC extends GenLayerTFC
 				{
 					var6[var8 + var7 * par3] = var9;
 				}
+
+				validateInt(var6, var8 + var7 * par3);
 			}
 		}
 		return var6;
