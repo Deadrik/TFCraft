@@ -23,6 +23,10 @@ public class TFC_Sounds
 	public static final String BEARCUBCRY = LOCATION + "mob.bear.cub.cry";
 	public static final String BEARHURT = LOCATION + "mob.bear.hurt";
 	public static final String BEARDEATH = LOCATION + "mob.bear.death";
+	public static final String PHAESANTSAY = LOCATION + "mob.pheasant.say";
+	public static final String PHAESANTCHICKSAY = LOCATION + "mob.pheasant.chick.say";
+	public static final String PHAESANTHURT = LOCATION + "mob.pheasant.hurt";
+	public static final String PHAESANTDEATH = LOCATION + "mob.pheasant.death";
 	public static final String CRICKET = LOCATION + "mob.cricket";
 	public static final String FROG = LOCATION + "mob.frog";
 

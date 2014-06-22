@@ -142,6 +142,35 @@
     ]
   },
 
+  "mob.pheasant.say": {
+    "category": "ambient",
+    "sounds": [
+      "pheasant1",
+      "pheasant2"
+    ]
+  },
+
+  "mob.pheasant.chick.say": {
+    "category": "ambient",
+    "sounds": [
+      "pheasantchick1"
+    ]
+  },
+
+  "mob.pheasant.hurt": {
+    "category": "ambient",
+    "sounds": [
+      "pheasanthurt1"
+    ]
+  },
+
+  "mob.pheasant.death": {
+    "category": "ambient",
+    "sounds": [
+      "pheasantdeath1"
+    ]
+  },
+
   "mob.cricket": {
     "category": "ambient",
     "sounds": [

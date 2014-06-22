@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -49,6 +50,33 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	{
 		timeUntilNextEgg = 10000;
 		super.onLivingUpdate();
+	}
+
+	/**
+	 * Returns the sound this mob makes while it's alive.
+	 */
+	@Override
+	protected String getLivingSound ()
+	{
+		return isChild() ? TFC_Sounds.PHAESANTCHICKSAY : TFC_Sounds.PHAESANTSAY;
+	}
+
+	/**
+	 * Returns the sound this mob makes when it is hurt.
+	 */
+	@Override
+	protected String getHurtSound ()
+	{
+		return isChild() ? null : TFC_Sounds.PHAESANTHURT;
+	}
+
+	/**
+	 * Returns the sound this mob makes on death.
+	 */
+	@Override
+	protected String getDeathSound ()
+	{
+		return isChild() ? null : TFC_Sounds.PHAESANTDEATH;
 	}
 
 	@Override
