@@ -18,6 +18,11 @@ public class TFC_Sounds
 	public static final String DEERCRY = LOCATION + "mob.deer.cry";
 	public static final String DEERHURT = LOCATION + "mob.deer.hurt";
 	public static final String DEERDEATH = LOCATION + "mob.deer.death";
+	public static final String BEARSAY = LOCATION + "mob.bear.say";
+	public static final String BEARCRY = LOCATION + "mob.bear.cry";
+	public static final String BEARCUBCRY = LOCATION + "mob.bear.cub.cry";
+	public static final String BEARHURT = LOCATION + "mob.bear.hurt";
+	public static final String BEARDEATH = LOCATION + "mob.bear.death";
 	public static final String CRICKET = LOCATION + "mob.cricket";
 	public static final String FROG = LOCATION + "mob.frog";
 

@@ -12,7 +12,6 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAIWander;
@@ -32,6 +31,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
+import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
@@ -242,7 +242,12 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	protected String getLivingSound ()
 	{
-		return "mob.wolf.growl";
+		if(isAdult() && worldObj.rand.nextInt(100) < 5)
+			return TFC_Sounds.BEARCRY;
+		else if(isChild() && worldObj.rand.nextInt(100) < 5)
+			return TFC_Sounds.BEARCUBCRY;
+
+		return isChild() ? null : TFC_Sounds.BEARSAY;
 	}
 
 	/**
@@ -252,9 +257,9 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	protected String getHurtSound ()
 	{
 		if(!isChild())
-			return "mob.wolf.growl";
+			return TFC_Sounds.BEARHURT;
 		else
-			return "mob.wolf.whine";
+			return TFC_Sounds.BEARCUBCRY;
 	}
 
 	/**
@@ -263,7 +268,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	protected String getDeathSound ()
 	{
-		return "mob.wolf.death";
+		if(!isChild())
+			return TFC_Sounds.BEARDEATH;
+		else
+			return TFC_Sounds.BEARCUBCRY;
 	}
 
 	/**

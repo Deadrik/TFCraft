@@ -92,10 +92,53 @@
     ]
   },
 
-    "mob.deer.death": {
+  "mob.deer.death": {
     "category": "ambient",
     "sounds": [
       "deerdeath1"
+    ]
+  },
+
+  "mob.bear.say": {
+    "category": "ambient",
+    "sounds": [
+      "bear1",
+      "bear2",
+      "bear3",
+      "bear4",
+      "bear5",
+      "bear6"
+    ]
+  },
+
+  "mob.bear.cry": {
+    "category": "ambient",
+    "sounds": [
+      "bearcry1",
+      "bearcry2",
+      "bearcry3",
+      "bearcry4"
+    ]
+  },
+
+  "mob.bear.cub.cry": {
+    "category": "ambient",
+    "sounds": [
+      "bearcubcry1"
+    ]
+  },
+
+  "mob.bear.hurt": {
+    "category": "ambient",
+    "sounds": [
+      "bearhurt1"
+    ]
+  },
+
+    "mob.bear.death": {
+    "category": "ambient",
+    "sounds": [
+      "beardeath1"
     ]
   },
 
