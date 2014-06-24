@@ -60,14 +60,14 @@ public class BlockFarmland extends BlockContainer
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
 		// Change to false if this block should not be added to the creative tab
-		Boolean addToCreative = true;
+		Boolean addToCreative = false;
 
 		if(addToCreative)
 		{
 			int count;
 			if(textureOffset == 0) count = 16;
 			else count = Global.STONE_ALL.length - 16;
-	
+
 			for(int i = 0; i < count; i++)
 				list.add(new ItemStack(item, 1, i));
 		}

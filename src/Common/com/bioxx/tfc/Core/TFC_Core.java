@@ -13,7 +13,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -563,14 +562,15 @@ public class TFC_Core
 
 	public static boolean isGravel(Block block)
 	{
-		return block == Blocks.gravel;
+		return block == TFCBlocks.Gravel || block == TFCBlocks.Gravel2;
 	}
 
 	public static boolean isGround(Block block)
 	{
-		return isSoil(block)
+		return 	   isSoil(block)
 				|| isRawStone(block)
-				|| isSand(block);
+				|| isSand(block) 
+				|| isGravel(block);
 	}
 
 	public static int getSoilMetaFromStone(Block inBlock, int inMeta)

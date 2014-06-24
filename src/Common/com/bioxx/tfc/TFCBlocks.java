@@ -64,6 +64,7 @@ import com.bioxx.tfc.Blocks.Liquids.BlockFreshWater;
 import com.bioxx.tfc.Blocks.Liquids.BlockHotWater;
 import com.bioxx.tfc.Blocks.Terrain.BlockDryGrass;
 import com.bioxx.tfc.Blocks.Terrain.BlockFungi;
+import com.bioxx.tfc.Blocks.Terrain.BlockGravel;
 import com.bioxx.tfc.Blocks.Terrain.BlockIgEx;
 import com.bioxx.tfc.Blocks.Terrain.BlockIgExBrick;
 import com.bioxx.tfc.Blocks.Terrain.BlockIgExCobble;
@@ -108,6 +109,7 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
 import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.ItemBarrels;
+import com.bioxx.tfc.Items.ItemBlocks.ItemSoil;
 import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack2;
@@ -318,6 +320,9 @@ public class TFCBlocks
 	public static Block Vine;
 	public static Block LeatherRack;
 
+	public static Block Gravel;
+	public static Block Gravel2;
+
 	public static void RegisterBlocks()
 	{
 		GameRegistry.registerBlock(Ore, "Ore1");
@@ -341,28 +346,28 @@ public class TFCBlocks
 		GameRegistry.registerBlock(StoneSedBrick, ItemStone.class, "StoneSedBrick");
 		GameRegistry.registerBlock(StoneMMBrick, ItemStone.class, "StoneMMBrick");
 
-		GameRegistry.registerBlock(Dirt, ItemStone.class, "Dirt");
-		GameRegistry.registerBlock(Dirt2, ItemStone.class, "Dirt2");
-		GameRegistry.registerBlock(Sand, ItemStone.class, "Sand");
-		GameRegistry.registerBlock(Sand2, ItemStone.class, "Sand2");
-		GameRegistry.registerBlock(Clay, ItemStone.class,"Clay");
-		GameRegistry.registerBlock(Clay2, ItemStone.class,"Clay2");
-		GameRegistry.registerBlock(Grass, ItemStone.class, "Grass");
-		GameRegistry.registerBlock(Grass2, ItemStone.class, "Grass2");
-		GameRegistry.registerBlock(ClayGrass, ItemStone.class, "ClayGrass");
-		GameRegistry.registerBlock(ClayGrass2, ItemStone.class, "ClayGrass2");
-		GameRegistry.registerBlock(PeatGrass, ItemStone.class, "PeatGrass");
-		GameRegistry.registerBlock(Peat, ItemStone.class, "Peat");
-		GameRegistry.registerBlock(DryGrass, ItemStone.class, "DryGrass");
-		GameRegistry.registerBlock(DryGrass2, ItemStone.class, "DryGrass2");
+		GameRegistry.registerBlock(Dirt, ItemSoil.class, "Dirt");
+		GameRegistry.registerBlock(Dirt2, ItemSoil.class, "Dirt2");
+		GameRegistry.registerBlock(Sand, ItemSoil.class, "Sand");
+		GameRegistry.registerBlock(Sand2, ItemSoil.class, "Sand2");
+		GameRegistry.registerBlock(Clay, ItemSoil.class,"Clay");
+		GameRegistry.registerBlock(Clay2, ItemSoil.class,"Clay2");
+		GameRegistry.registerBlock(Grass, ItemSoil.class, "Grass");
+		GameRegistry.registerBlock(Grass2, ItemSoil.class, "Grass2");
+		GameRegistry.registerBlock(ClayGrass, ItemSoil.class, "ClayGrass");
+		GameRegistry.registerBlock(ClayGrass2, ItemSoil.class, "ClayGrass2");
+		GameRegistry.registerBlock(PeatGrass, ItemSoil.class, "PeatGrass");
+		GameRegistry.registerBlock(Peat, ItemSoil.class, "Peat");
+		GameRegistry.registerBlock(DryGrass, ItemSoil.class, "DryGrass");
+		GameRegistry.registerBlock(DryGrass2, ItemSoil.class, "DryGrass2");
 		GameRegistry.registerBlock(TallGrass, com.bioxx.tfc.Items.ItemBlocks.ItemCustomTallGrass.class, "TallGrass");
 		GameRegistry.registerBlock(worldItem, "LooseRock");
 		GameRegistry.registerBlock(LogPile, "LogPile");
 		GameRegistry.registerBlock(Charcoal, "Charcoal");
 		GameRegistry.registerBlock(Detailed, "Detailed");
 
-		GameRegistry.registerBlock(tilledSoil, ItemStone.class, "tilledSoil");
-		GameRegistry.registerBlock(tilledSoil2, ItemStone.class, "tilledSoil2");
+		GameRegistry.registerBlock(tilledSoil, ItemSoil.class, "tilledSoil");
+		GameRegistry.registerBlock(tilledSoil2, ItemSoil.class, "tilledSoil2");
 
 		GameRegistry.registerBlock(WoodSupportV, com.bioxx.tfc.Items.ItemBlocks.ItemWoodSupport.class,"WoodSupportV");
 		GameRegistry.registerBlock(WoodSupportH, com.bioxx.tfc.Items.ItemBlocks.ItemWoodSupport.class, "WoodSupportH");
@@ -478,6 +483,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(ButtonWood, "ButtonWood");
 		GameRegistry.registerBlock(Vine, com.bioxx.tfc.Items.ItemBlocks.ItemVine.class, "Vine");
 		GameRegistry.registerBlock(LeatherRack, "LeatherRack");
+		GameRegistry.registerBlock(Gravel, ItemSoil.class,"Gravel");
+		GameRegistry.registerBlock(Gravel2, ItemSoil.class,"Gravel2");
 	}
 
 	public static void LoadBlocks()
@@ -687,6 +694,9 @@ public class TFCBlocks
 		FireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);
 		MetalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(8).setResistance(20f);
 		LeatherRack = new BlockLeatherRack().setBlockName("LeatherRack").setHardness(1);
+
+		Gravel = (new BlockGravel(0)).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
+		Gravel2 = (new BlockGravel(16)).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);
 		StoneIgEx.setHarvestLevel("pickaxe", 0);
