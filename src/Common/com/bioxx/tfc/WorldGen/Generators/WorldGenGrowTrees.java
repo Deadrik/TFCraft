@@ -14,11 +14,11 @@ public class WorldGenGrowTrees
 	public void generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		boolean hasSpaceToGrow = true;
-		
-		int TreeType0 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 0);
-		int TreeType1 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
-		int TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
-		
+
+		int TreeType0 = TFC_Climate.getTreeLayer(world, xCoord, yCoord, zCoord, 0);
+		int TreeType1 = TFC_Climate.getTreeLayer(world, xCoord, yCoord, zCoord, 1);
+		int TreeType2 = TFC_Climate.getTreeLayer(world, xCoord, yCoord, zCoord, 2);
+
 		for(int y = -3; y < 6 && hasSpaceToGrow; y++)
 		{
 			for(int x = -7; x < 8 && hasSpaceToGrow; x++)
@@ -33,20 +33,20 @@ public class WorldGenGrowTrees
 				}
 			}
 		}
-		
+
 		if(hasSpaceToGrow)
 		{
-			float rainfall = TFC_Climate.getRainfall(xCoord, yCoord, zCoord);
-			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
-			float evt = TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1;
+			float rainfall = TFC_Climate.getRainfall(world, xCoord, yCoord, zCoord);
+			float temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, yCoord, zCoord);
+			float evt = TFC_Climate.getManager(world).getEVTLayerAt(xCoord, zCoord).floatdata1;
 
 			if(TreeType0 < 0 || TreeType0 > 15)
-				TreeType0 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
+				TreeType0 = TFC_Climate.getTreeLayer(world, xCoord, yCoord, zCoord, 2);
 			if(TreeType1 < 0 || TreeType1 > 15)
-				TreeType1 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 0);
+				TreeType1 = TFC_Climate.getTreeLayer(world, xCoord, yCoord, zCoord, 0);
 			if(TreeType2 < 0 || TreeType2 > 15)
-				TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
-			
+				TreeType2 = TFC_Climate.getTreeLayer(world, xCoord, yCoord, zCoord, 1);
+
 			/**
 			 * If the block is near a water source then we want rainfall to count for twice as much 
 			 * and evt to count for half so as to make tree growth far more likely
@@ -56,13 +56,13 @@ public class WorldGenGrowTrees
 				rainfall *= 2;
 				evt /= 2;
 			}
-			
+
 			/**
 			 * If the location is near the arctic circle then we want pine trees to definitely show up.
 			 * */
 			if(zCoord > 14500 || zCoord < -14500)
 				TreeType2 = 8;
-			
+
 			float tree0EVTMin = EnumTree.values()[TreeType0].minEVT;
 			float tree0EVTMax = EnumTree.values()[TreeType0].maxEVT;
 			float tree0RainMin = EnumTree.values()[TreeType0].minRain;
@@ -83,7 +83,7 @@ public class WorldGenGrowTrees
 			float tree2RainMax = EnumTree.values()[TreeType2].maxRain;
 			float tree2TempMin = EnumTree.values()[TreeType2].minTemp;
 			float tree2TempMax = EnumTree.values()[TreeType2].maxTemp;
-			
+
 			boolean canSpawnTemp0 = (temperature >= tree0TempMin && temperature <= tree0TempMax);
 			int canSpawnEVTRain0 = (evt >= tree0EVTMin && evt <= tree0EVTMax && 
 					rainfall >= tree0RainMin && rainfall <= tree0RainMax) ? 2 : 
@@ -98,9 +98,9 @@ public class WorldGenGrowTrees
 			int canSpawnEVTRain2 = (evt >= tree2EVTMin && evt <= tree2EVTMax && 
 					rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 2 : 
 						(evt >= tree2EVTMin && evt <= tree2EVTMax) || (rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 1 : 0;
-			
+
 			int randomNumber = random.nextInt(100);
-			
+
 			if(!canSpawnTemp2 || canSpawnEVTRain2 == 0)
 				randomNumber -= 20;
 			else if(canSpawnTemp2 && canSpawnEVTRain2 == 1)
@@ -144,7 +144,7 @@ public class WorldGenGrowTrees
 			}
 		}
 	}
-	
+
 	public boolean getNearWater(World world, int x, int y, int z)
 	{
 		for (int x1 = -4; x1 < 5; ++x1)

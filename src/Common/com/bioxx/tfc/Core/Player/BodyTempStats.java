@@ -2,18 +2,18 @@ package com.bioxx.tfc.Core.Player;
 
 import java.util.Random;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.TileEntities.TEFireEntity;
 import com.bioxx.tfc.api.Interfaces.IClothing;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
 public class BodyTempStats
 {
@@ -39,7 +39,7 @@ public class BodyTempStats
 				applyTemperature(player);
 		}
 	}
-	
+
 	private void applyTemperature(EntityPlayer player)
 	{
 		FoodStatsTFC food = TFC_Core.getPlayerFoodStats(player);
@@ -63,7 +63,7 @@ public class BodyTempStats
 
 		if(temperatureLevel != prevTemperatureLevel &&
 				!((prevTemperatureLevel >=-10 && prevTemperatureLevel <=10) &&
-				(temperatureLevel >=-10 && temperatureLevel <=10)))
+						(temperatureLevel >=-10 && temperatureLevel <=10)))
 		{
 			tellPlayerMessage(player);
 		}
@@ -80,7 +80,7 @@ public class BodyTempStats
 		int x = (int)(player.posX);
 		int y = (int)(player.posY);
 		int z = (int)(player.posZ);
-		float temperature = TFC_Climate.getHeightAdjustedTemp(x, y, z);
+		float temperature = TFC_Climate.getHeightAdjustedTemp(player.worldObj, x, y, z);
 		temperature += applyTemperatureFromHeatSources(player);
 
 		//if it's cold
@@ -147,7 +147,7 @@ public class BodyTempStats
 						//returnAmount += (rand.nextInt(2000 - 198*(10-( (int)player.getDistance(i, j, k) )) )<10?1:0);
 						//Lava averages 700-1200 C = 950 C, assume source is lava.
 						double tempValue = 950;
-						
+
 						//if there is a firepit, use it's heat instead.
 						if(te instanceof TEFireEntity)
 							tempValue = ((TEFireEntity)te).fireTemp;
@@ -187,7 +187,7 @@ public class BodyTempStats
 
 	private void tellPlayerMessage(EntityPlayer player)
 	{
-/*		switch(temperatureLevel/10)
+		/*		switch(temperatureLevel/10)
 		{
 		case -1:
 		case 0:
@@ -205,7 +205,7 @@ public class BodyTempStats
 		case 6: player.addChatMessage(new ChatComponentText("You feel extremely hot!"));break;
 		case 7: killPlayer(player);break;
 		}
-*/
+		 */
 	}
 
 	private void killPlayer(EntityPlayer player)

@@ -40,9 +40,9 @@ public class BlockFruitLeaves extends BlockTerraContainer
 	IIcon[] iconsOpaque = new IIcon[16];
 	IIcon[] iconsDeadOpaque = new IIcon[16];
 	public static IIcon[] iconsFlowers = new IIcon[16];
-	
+
 	int Offset = 0;
-	
+
 	public BlockFruitLeaves(int offset)
 	{
 		super(Material.leaves);
@@ -126,8 +126,8 @@ public class BlockFruitLeaves extends BlockTerraContainer
 			FloraManager manager = FloraManager.getInstance();
 			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(this, m));
 			FloraIndex fi2 = FloraManager.getInstance().findMatchingIndex(getType(this, meta));
-			
-			float temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
+
+			float temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
 			TEFruitLeaves te = (TEFruitLeaves) world.getTileEntity(x, y, z);
 			if(te != null)
 			{

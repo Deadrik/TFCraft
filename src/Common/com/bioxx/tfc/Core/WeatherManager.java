@@ -2,6 +2,8 @@ package com.bioxx.tfc.Core;
 
 import java.util.Random;
 
+import net.minecraft.world.World;
+
 public class WeatherManager
 {
 	protected static final WeatherManager instance = new WeatherManager();
@@ -41,9 +43,9 @@ public class WeatherManager
 		return (int)days2;
 	}
 
-	public static boolean canSnow(int x, int y, int z)
+	public static boolean canSnow(World world, int x, int y, int z)
 	{
-		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
+		if(TFC_Climate.getHeightAdjustedTemp(world, x, y, z) <= 0)
 			return true;
 		return false;
 	}

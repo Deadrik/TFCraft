@@ -2,13 +2,14 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
-
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.WorldGen.DataLayer;
+
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenLargeRock implements IWorldGenerator
@@ -52,7 +53,7 @@ public class WorldGenLargeRock implements IWorldGenerator
 
 	public void genFromPoint(World world, Random rand, int i, int j, int k,int yOffset)
 	{
-		DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(i, k, 0);
+		DataLayer rockLayer1 = TFC_Climate.getManager(world).getRockLayerAt(i, k, 0);
 		Vec3 center = Vec3.createVectorHelper(i, j + yOffset, k);
 		xWidth = 3;
 		xWidth2 = 3;

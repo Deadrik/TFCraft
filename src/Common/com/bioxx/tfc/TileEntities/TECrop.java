@@ -66,7 +66,7 @@ public class TECrop extends NetworkTileEntity
 				if(te != null && te instanceof TEFarmland)
 					tef = (TEFarmland) te;
 
-				float ambientTemp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYearFromTick(growthTimer), xCoord, yCoord, zCoord);
+				float ambientTemp = TFC_Climate.getHeightAdjustedTempSpecificDay(worldObj, TFC_Time.getDayOfYearFromTick(growthTimer), xCoord, yCoord, zCoord);
 				float tempAdded = 0;
 				boolean isDormant = false;
 
@@ -180,7 +180,7 @@ public class TECrop extends NetworkTileEntity
 				killCrop(crop);
 			}
 
-			if(worldObj.isRaining() && TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord) < 0)
+			if(worldObj.isRaining() && TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord) < 0)
 			{
 				if(!crop.dormantInFrost || growth > 1)
 				{

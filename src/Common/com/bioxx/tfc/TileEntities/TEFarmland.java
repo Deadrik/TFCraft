@@ -84,7 +84,7 @@ public class TEFarmland extends NetworkTileEntity
 
 				if(isInfested)
 				{
-					float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayFromTotalHours(this.nutrientTimer), xCoord, yCoord, zCoord);
+					float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(worldObj, TFC_Time.getDayFromTotalHours(this.nutrientTimer), xCoord, yCoord, zCoord);
 					if(temp > 10 && worldObj.rand.nextInt(10) == 0)
 					{
 						TileEntity te = worldObj.getTileEntity(xCoord, yCoord, zCoord);

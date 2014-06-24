@@ -8,7 +8,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 
 import com.bioxx.tfc.TFCBlocks;
@@ -20,13 +19,6 @@ import com.bioxx.tfc.Core.Util.BlockMeta;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenLooseRocks implements IWorldGenerator
@@ -50,7 +42,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 				}
 				else
 				{
-					BlockMeta rockLayer = TFC_Climate.getRockLayer(i, j, k, 0);
+					BlockMeta rockLayer = TFC_Climate.getRockLayer(world, i, j, k, 0);
 					te.storage[0] = new ItemStack(TFCItems.LooseRock, 1, TFC_Core.getItemMetaFromStone(rockLayer.block, rockLayer.meta));
 				}
 			}

@@ -1,10 +1,5 @@
 package com.bioxx.tfc.TileEntities;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Time;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +10,11 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.Flora.BlockFruitLeaves;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Time;
 
 public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 {
@@ -82,7 +82,7 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 			if(birthTimeWood + GrowTime < TFC_Time.getTotalDays() && height < 3)
 			{
-				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYearFromDays(birthTimeWood + GrowTime), xCoord, yCoord, zCoord);
+				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(worldObj, TFC_Time.getDayOfYearFromDays(birthTimeWood + GrowTime), xCoord, yCoord, zCoord);
 				int t = 1;
 				if(temp > 8 && temp < 22)
 					t = 2;

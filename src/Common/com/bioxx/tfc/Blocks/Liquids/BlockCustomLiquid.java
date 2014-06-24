@@ -17,10 +17,10 @@ import net.minecraftforge.fluids.Fluid;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLilyPad;
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCProvider;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -228,9 +228,9 @@ public class BlockCustomLiquid extends BlockFluidClassic
 		return false;
 	}
 
-	public void setBlockforLava(World par1World, int par2, int par3, int par4, int typeOfLava)
+	public void setBlockforLava(World world, int par2, int par3, int par4, int typeOfLava)
 	{
-		DataLayer rockLayer3 = ((TFCWorldChunkManager)par1World.getWorldChunkManager()).getRockLayerAt(par2, par3, 2);
+		DataLayer rockLayer3 = TFC_Climate.getManager(world).getRockLayerAt(par2, par3, 2);
 		int blockId = rockLayer3.data1;
 		int meta = rockLayer3.data2;
 		Random rand = new Random();
@@ -245,26 +245,26 @@ public class BlockCustomLiquid extends BlockFluidClassic
 			if(felsicLava)
 			{
 				if(rand.nextInt(10)==0 && typeOfLava == 0)
-					par1World.setBlock(par2, par3, par4, Blocks.obsidian);
+					world.setBlock(par2, par3, par4, Blocks.obsidian);
 				else
 				{
-					par1World.setBlock(par2, par3, par4, TFCBlocks.StoneIgEx);
-					par1World.setBlockMetadataWithNotify(par2, par3, par4, 0, 0);
+					world.setBlock(par2, par3, par4, TFCBlocks.StoneIgEx);
+					world.setBlockMetadataWithNotify(par2, par3, par4, 0, 0);
 				}
 			}
 			else
 			{
-				par1World.setBlock(par2, par3, par4, TFCBlocks.StoneIgEx);
-				par1World.setBlockMetadataWithNotify(par2, par3, par4, 1, 0);
+				world.setBlock(par2, par3, par4, TFCBlocks.StoneIgEx);
+				world.setBlockMetadataWithNotify(par2, par3, par4, 1, 0);
 			}
 		}
 		else if (typeOfLava == 1)
 		{
-			par1World.setBlock(par2, par3, par4, TFCBlocks.StoneIgExCobble);
+			world.setBlock(par2, par3, par4, TFCBlocks.StoneIgExCobble);
 			if(felsicLava)
-				par1World.setBlockMetadataWithNotify(par2, par3, par4, 0, 0);
+				world.setBlockMetadataWithNotify(par2, par3, par4, 0, 0);
 			else
-				par1World.setBlockMetadataWithNotify(par2, par3, par4, 1, 0);
+				world.setBlockMetadataWithNotify(par2, par3, par4, 1, 0);
 		}
 	}
 

@@ -25,7 +25,7 @@ public class GetBioTempCommand extends CommandBase{
 		var4 = getCommandSenderAsPlayer(sender);
 
 
-		float t = TFC_Climate.getBioTemperatureHeight((int)var4.posX, (int)var4.posY, (int)var4.posZ);
+		float t = TFC_Climate.getBioTemperatureHeight(var4.worldObj, (int)var4.posX, (int)var4.posY, (int)var4.posZ);
 		throw new PlayerNotFoundException("BioTemp: "+t);
 
 	}

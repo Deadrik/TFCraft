@@ -46,7 +46,7 @@ public class FoodStatsTFC
 
 	public float waterLevel = TFC_Time.dayLength*2;
 	public long waterTimer = 0;
-	
+
 	public EntityPlayer player;
 
 	public FoodStatsTFC(EntityPlayer player)
@@ -65,7 +65,7 @@ public class FoodStatsTFC
 		if(!player.worldObj.isRemote)
 		{
 			BodyTempStats bodyTemp = TFC_Core.getBodyTempStats(player);
-			float temp = TFC_Climate.getHeightAdjustedTemp((int)player.posX, (int)player.posY, (int)player.posZ);
+			float temp = TFC_Climate.getHeightAdjustedTemp(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 
 			float tempWaterMod = temp;
 			if(tempWaterMod >= 30)

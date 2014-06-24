@@ -32,8 +32,7 @@ public class TFCProvider extends WorldProvider
 	protected void registerWorldChunkManager()
 	{
 		worldChunkMgr = new TFCWorldChunkManager(this.worldObj);
-		TFC_Climate.manager = (TFCWorldChunkManager) worldChunkMgr;
-		TFC_Climate.worldObj = worldObj;
+		TFC_Climate.worldPair.put(worldObj.provider.dimensionId, new WorldLayerManager(worldObj));
 	}
 
 	@Override
@@ -141,7 +140,7 @@ return biome;
 		TileEntity te = (worldObj.getTileEntity(x, y, z));
 		Block id = worldObj.getBlock(x, y, z);
 		int meta = worldObj.getBlockMetadata(x, y, z);
-		if (TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
+		if (TFC_Climate.getHeightAdjustedTemp(worldObj, x, y, z) <= 0)
 		{
 			Material mat = worldObj.getBlock(x, y, z).getMaterial();
 			boolean salty = TFC_Core.isSaltWaterIncludeIce(id, meta, mat);
@@ -152,7 +151,7 @@ return biome;
 				salty = salty || (((TESeaWeed)te).getType() != 1 && ((TESeaWeed)te).getType() != 2);
 			}
 
-			if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= -2)
+			if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= -2)
 			{
 				salty = false;
 			}
@@ -225,7 +224,7 @@ return biome;
 	//We use this in place of the vanilla method, for the vanilla, it allows us to stop it from doing things we don't like.
 	public boolean tryBlockFreeze(int x, int y, int z, boolean byWater)
 	{
-		if (TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
+		if (TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= 0)
 		{
 			Material mat = worldObj.getBlock(x, y, z).getMaterial();
 			Block id = worldObj.getBlock(x, y, z);
@@ -237,7 +236,7 @@ return biome;
 				//in case the block is salty sea grass, we don't want that to freeze when it's too warm
 				salty = salty || (((TESeaWeed)te).getType() != 1 && ((TESeaWeed)te).getType() != 2);
 			}
-			if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= -2)
+			if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= -2)
 				salty = false;
 			return (mat == Material.water || mat == Material.ice) && !salty;
 		}
@@ -253,7 +252,7 @@ return biome;
 	@Override
 	public boolean canSnowAt(int x, int y, int z, boolean checkLight)
 	{
-		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0 &&
+		if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= 0 &&
 				Blocks.snow.canPlaceBlockAt(worldObj, x, y, z) &&
 				worldObj.getBlock(x, y, z).getMaterial().isReplaceable())
 		{
@@ -264,7 +263,7 @@ return biome;
 
 	private boolean canSnowAtTemp(int x, int y, int z)
 	{
-		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
+		if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= 0)
 			return true;
 		return false;
 	}

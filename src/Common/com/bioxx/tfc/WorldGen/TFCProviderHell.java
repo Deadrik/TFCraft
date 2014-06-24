@@ -5,6 +5,9 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderHell;
 import net.minecraft.world.storage.WorldInfo;
+
+import com.bioxx.tfc.Core.TFC_Climate;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -13,7 +16,8 @@ public class TFCProviderHell extends TFCProvider
 	@Override
 	protected void registerWorldChunkManager()
 	{
-		worldChunkMgr = new TFCWorldChunkManagerHell(TFCBiome.hell, 1F, 1F);
+		worldChunkMgr = new TFCWorldChunkManagerHell(TFCBiome.hell, 1F, 1F, this.worldObj);
+		TFC_Climate.worldPair.put(worldObj.provider.dimensionId, new WorldLayerManager(worldObj));
 	}
 
 	@Override

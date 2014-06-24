@@ -1131,7 +1131,7 @@ public class TFC_Core
 			 * inventory
 			 */
 			int day = TFC_Time.getDayOfYearFromDays(TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")));
-			float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(day,nbt.getInteger("decayTimer"), x, y, z);
+			float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,day,nbt.getInteger("decayTimer"), x, y, z);
 			float environmentalDecay = getEnvironmentalDecay(temp) * environmentalDecayFactor;
 
 			if (decay < 0)

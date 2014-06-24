@@ -9,9 +9,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 
 public class WorldGenCustomHugeTrees extends WorldGenerator
 {
@@ -56,6 +56,7 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 		}
 	}
 
+	@Override
 	public boolean generate(World world, Random rand, int xCoord, int yCoord, int zCoord)
 	{
 		int var6 = rand.nextInt(3) + this.field_48195_a;
@@ -109,7 +110,7 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 			{
 				if ((TFC_Core.isSoil(world.getBlock(xCoord, yCoord - 1, zCoord))) && yCoord < 256 - var6 - 1)
 				{
-					DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
+					DataLayer rockLayer1 = TFC_Climate.getManager(world).getRockLayerAt(xCoord, zCoord, 0);
 					world.setBlock(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
 					world.setBlock(xCoord + 1, yCoord - 1, zCoord, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
 					world.setBlock(xCoord, yCoord - 1, zCoord + 1, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);

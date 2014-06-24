@@ -98,83 +98,83 @@ public class BlockBerryBush extends BlockTerraContainer
 
 		switch(_meta)
 		{
-			case 0://Wintergreen
-			{
-				maxY = 0.2f;
-				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-				return;
-			}
-			case 1://Blueberries
-			{
-				maxY = 0.85f;
-				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-				return;
-			}
-			case 2://Raspberries
-			{
-				maxY = 0.85f;
-				if(isSamePlant(access, x, y + 1, z, _meta))
-					maxY = 1;
-				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-				return;
-			}
-			case 3://Strawberries
-			{
-				maxY = 0.2f;
-				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-				return;
-			}
-			case 4://Blackberries
-			{
-				maxY = 0.85f;
-				if(isSamePlant(access, x, y + 1, z, _meta))
-					maxY = 1;
-				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-				return;
-			}
-			case 5://Bunchberries
-			{
-				maxY = 0.2f;
-				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-				return;
-			}
-			case 6://Cranberries
-			{
-				maxY = 0.6f;
-				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-				return;
-			}
-			case 7://Snowberries
-			{
-				maxY = 0.2f;
-				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-				return;
-			}
-			case 8://Elderberries
-			{
-				maxY = 0.85f;
-				if(isSamePlant(access, x, y + 1, z, _meta))
-					maxY = 1;
-				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-				return;
-			}
-			case 9://Gooseberries
-			{
-				maxY = 0.75f;
-				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-				return;
-			}
-			case 10://Cloudberries
-			{
-				maxY = 0.35f;
-				setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
-				return;
-			}
-			default:
-			{
-				setBlockBounds(minX, 0, minZ, maxX, 1f, maxZ);
-				return;
-			}
+		case 0://Wintergreen
+		{
+			maxY = 0.2f;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case 1://Blueberries
+		{
+			maxY = 0.85f;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case 2://Raspberries
+		{
+			maxY = 0.85f;
+			if(isSamePlant(access, x, y + 1, z, _meta))
+				maxY = 1;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case 3://Strawberries
+		{
+			maxY = 0.2f;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case 4://Blackberries
+		{
+			maxY = 0.85f;
+			if(isSamePlant(access, x, y + 1, z, _meta))
+				maxY = 1;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case 5://Bunchberries
+		{
+			maxY = 0.2f;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case 6://Cranberries
+		{
+			maxY = 0.6f;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case 7://Snowberries
+		{
+			maxY = 0.2f;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case 8://Elderberries
+		{
+			maxY = 0.85f;
+			if(isSamePlant(access, x, y + 1, z, _meta))
+				maxY = 1;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case 9://Gooseberries
+		{
+			maxY = 0.75f;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		case 10://Cloudberries
+		{
+			maxY = 0.35f;
+			setBlockBounds(minX, 0, minZ, maxX, maxY, maxZ);
+			return;
+		}
+		default:
+		{
+			setBlockBounds(minX, 0, minZ, maxX, 1f, maxZ);
+			return;
+		}
 		}
 	}
 
@@ -228,7 +228,7 @@ public class BlockBerryBush extends BlockTerraContainer
 			if(te != null)
 			{
 				FloraIndex _fi = FloraManager.getInstance().findMatchingIndex(getType(world.getBlockMetadata(x, y, z)));
-				float _temp = TFC_Climate.getHeightAdjustedTemp(x, y, z);
+				float _temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
 
 				if(_temp >= _fi.minTemp && _temp < _fi.maxTemp)
 				{

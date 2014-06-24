@@ -2,13 +2,14 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenFixGrass implements IWorldGenerator
@@ -31,7 +32,7 @@ public class WorldGenFixGrass implements IWorldGenerator
 		int yCoord = 145;
 		int zCoord = chunkZ;
 
-		float rainfall = TFC_Climate.getRainfall(xCoord, 0, zCoord);
+		float rainfall = TFC_Climate.getRainfall(world, xCoord, 0, zCoord);
 		for (int x = 0; x < 16; ++x)
 		{
 			for (int z = 0; z < 16; ++z)

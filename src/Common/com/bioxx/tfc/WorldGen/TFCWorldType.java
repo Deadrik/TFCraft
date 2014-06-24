@@ -52,7 +52,7 @@ public class TFCWorldType extends WorldType
 		{
 			//			FlatGeneratorInfo var1 = FlatGeneratorInfo.createFlatGeneratorFromString(world.getWorldInfo().getGeneratorOptions());
 			//			return new TFCWorldChunkManagerHell(BiomeGenBase.getBiome(var1.getBiome()), 0.5F, 0.5F);
-			return new TFCWorldChunkManagerHell(TFCBiome.hell, 0.5F, 0.5F);
+			return new TFCWorldChunkManagerHell(TFCBiome.hell, 0.5F, 0.5F, world);
 		}
 		else
 		{

@@ -28,9 +28,9 @@ public class GetRocksCommand extends CommandBase
 		EntityPlayerMP var4;
 		var4 = getCommandSenderAsPlayer(sender);
 
-		BlockMeta t0 = TFC_Climate.getRockLayer((int)var4.posX, (int)var4.posY, (int)var4.posZ, 0);
-		BlockMeta t1 = TFC_Climate.getRockLayer((int)var4.posX, (int)var4.posY, (int)var4.posZ, 1);
-		BlockMeta t2 = TFC_Climate.getRockLayer((int)var4.posX, (int)var4.posY, (int)var4.posZ, 2);
+		BlockMeta t0 = TFC_Climate.getRockLayer(var4.worldObj, (int)var4.posX, (int)var4.posY, (int)var4.posZ, 0);
+		BlockMeta t1 = TFC_Climate.getRockLayer(var4.worldObj, (int)var4.posX, (int)var4.posY, (int)var4.posZ, 1);
+		BlockMeta t2 = TFC_Climate.getRockLayer(var4.worldObj, (int)var4.posX, (int)var4.posY, (int)var4.posZ, 2);
 
 		t0.meta = getSoilMetaFromStone(t0.block, t0.meta);
 		t1.meta = getSoilMetaFromStone(t1.block, t1.meta);

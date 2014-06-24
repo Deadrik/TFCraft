@@ -135,7 +135,6 @@ import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 import com.bioxx.tfc.api.Enums.EnumTree;
 import com.bioxx.tfc.api.Util.KeyBindings;
 
@@ -332,8 +331,8 @@ public class ClientProxy extends CommonProxy
 		int var6 = 0;
 		int var7 = 0;
 		int[] rgb = { 0, 0, 0 };
-		float temperature = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYear(),i,j,k);
-		float rainfall = TFC_Climate.getRainfall(i,j,k);
+		float temperature = TFC_Climate.getHeightAdjustedTempSpecificDay(getCurrentWorld(),TFC_Time.getDayOfYear(),i,j,k);
+		float rainfall = TFC_Climate.getRainfall(getCurrentWorld(),i,j,k);
 
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
 		if(par1IBlockAccess.getBlock(i, j, k) == TFCBlocks.fruitTreeLeaves)
@@ -361,8 +360,8 @@ public class ClientProxy extends CommonProxy
 		else if(par1IBlockAccess.getBlock(i, j, k) == TFCBlocks.Vine)
 		{
 			if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9
-					&& !(((TFCWorldChunkManager) getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8)
-					&& TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
+					&& !(TFC_Climate.getManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 < 0.8)
+					&& TFC_Climate.getHeightAdjustedTemp(getCurrentWorld(), i, j, k) < 30)
 			{
 				int color = 0;
 				for (int var8 = -1; var8 <= 1; ++var8)
@@ -377,8 +376,8 @@ public class ClientProxy extends CommonProxy
 				return x;
 			}
 			else if (TFC_Time.getSeasonAdjustedMonth(k) >= 11 || TFC_Time.getSeasonAdjustedMonth(k) <= 0
-					&& !(((TFCWorldChunkManager) getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8)
-					&& TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
+					&& !(TFC_Climate.getManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 < 0.8)
+					&& TFC_Climate.getHeightAdjustedTemp(getCurrentWorld(), i, j, k) < 30)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{
@@ -391,8 +390,9 @@ public class ClientProxy extends CommonProxy
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
 			}
-			else if (TFC_Time.getSeasonAdjustedMonth(k) >= 9 && !(((TFCWorldChunkManager) getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8)
-					&& TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
+			else if (TFC_Time.getSeasonAdjustedMonth(k) >= 9 
+					&& !(TFC_Climate.getManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 < 0.8)
+					&& TFC_Climate.getHeightAdjustedTemp(getCurrentWorld(), i, j, k) < 30)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{

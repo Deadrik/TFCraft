@@ -235,7 +235,7 @@ public class BlockFruitWood extends BlockTerraContainer
 		FloraManager manager = FloraManager.getInstance();
 		FloraIndex fi = manager.findMatchingIndex(this.getType(world.getBlockMetadata(i, j, k)));
 
-		float temp = TFC_Climate.getHeightAdjustedTemp(i, j, k);
+		float temp = TFC_Climate.getHeightAdjustedTemp(world, i, j, k);
 
 		if(!world.isRemote && world.getTileEntity(i, j, k) != null &&
 				TFC_Time.getSeasonAdjustedMonth(k) < 6 &&

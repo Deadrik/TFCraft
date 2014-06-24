@@ -2,6 +2,11 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Flora.BlockBerryBush;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -10,11 +15,6 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
 import com.bioxx.tfc.TileEntities.TEBerryBush;
-
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenBerryBush extends WorldGenerator
 {
@@ -42,9 +42,9 @@ public class WorldGenBerryBush extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random random, int i, int j, int k)
 	{
-		float temp = TFC_Climate.getBioTemperatureHeight(i, j, k);
-		float rain = TFC_Climate.getRainfall(i, j, k);
-		float evt = TFC_Climate.manager.getEVTLayerAt(i, k).floatdata1;
+		float temp = TFC_Climate.getBioTemperatureHeight(world, i, j, k);
+		float rain = TFC_Climate.getRainfall(world, i, j, k);
+		float evt = TFC_Climate.getManager(world).getEVTLayerAt(i, k).floatdata1;
 
 		FloraIndex _fi = FloraManager.getInstance().findMatchingIndex(((BlockBerryBush)TFCBlocks.BerryBush).getType(meta));
 		if(world.isAirBlock(i, j, k) && j < 250 && temp > _fi.minBioTemp && temp < _fi.maxBioTemp && 

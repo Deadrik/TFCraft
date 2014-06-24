@@ -10,10 +10,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 
 public class WorldGenLakesTFC extends WorldGenerator
 {
@@ -24,6 +24,7 @@ public class WorldGenLakesTFC extends WorldGenerator
 		this.liquidBlock = par1;
 	}
 
+	@Override
 	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		xCoord -= 8;
@@ -136,7 +137,7 @@ public class WorldGenLakesTFC extends WorldGenerator
 							}
 							else
 							{
-								DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord + i2, zCoord + j3, 0);
+								DataLayer rockLayer1 = TFC_Climate.getManager(world).getRockLayerAt(xCoord + i2, zCoord + j3, 0);
 								world.setBlock(xCoord + i2, yCoord + k4 - 1, zCoord + j3, TFC_Core.getTypeForGrass(rockLayer1.data2));
 							}
 						}

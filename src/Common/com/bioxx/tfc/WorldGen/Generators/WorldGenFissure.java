@@ -94,7 +94,7 @@ public class WorldGenFissure implements IWorldGenerator
 				return;
 		}
 
-		int stability = TFC_Climate.getStability(x, z);
+		int stability = TFC_Climate.getStability(world, x, z);
 		Block block = world.getBlock(x,y,z);
 
 		if(block != null && block.getMaterial() == Material.water)
@@ -109,7 +109,7 @@ public class WorldGenFissure implements IWorldGenerator
 			return;
 
 		ArrayList<ByteCoord> map = getCollapseMap(world, x,y-creviceDepth,z);
-		BlockMeta rockLayer = fillBlock != null ? TFC_Climate.getRockLayer(x, y, z, 2) : new BlockMeta(Blocks.air, -1);
+		BlockMeta rockLayer = fillBlock != null ? TFC_Climate.getRockLayer(world, x, y, z, 2) : new BlockMeta(Blocks.air, -1);
 		boolean makeTunnel = map.size() > 10;
 		if(rockLayer.block == null)
 			return;
@@ -216,7 +216,7 @@ public class WorldGenFissure implements IWorldGenerator
 		final float incrementChanceDiag = 2.5f;
 
 		BlockMeta rockLayer = fillBlock != null && fillBlock.getMaterial() == Material.lava ? 
-				TFC_Climate.getRockLayer(i, j, k, 2) : TFC_Climate.getRockLayer(i, j, k, TFC_Core.getRockLayerFromHeight(world, i, j, k));
+				TFC_Climate.getRockLayer(world, i, j, k, 2) : TFC_Climate.getRockLayer(world, i, j, k, TFC_Core.getRockLayerFromHeight(world, i, j, k));
 
 				int worldX;
 				int worldY;

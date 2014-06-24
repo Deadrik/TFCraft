@@ -48,7 +48,7 @@ public class BlockFreshWater extends BlockCustomLiquid
 	public void updateTick(World w, int x, int y, int z, Random rand)
 	{
 		// Play frog sound at night
-		if(!w.isRemote && w.getBlockLightValue(x, y, z) < 7 && TFC_Climate.getHeightAdjustedTemp(x, y, z) > 10 && w.isAirBlock(x, y+1, z))
+		if(!w.isRemote && w.getBlockLightValue(x, y, z) < 7 && TFC_Climate.getHeightAdjustedTemp(w, x, y, z) > 10 && w.isAirBlock(x, y+1, z))
 		{
 			if(w.rand.nextInt(100) < 25)
 			{

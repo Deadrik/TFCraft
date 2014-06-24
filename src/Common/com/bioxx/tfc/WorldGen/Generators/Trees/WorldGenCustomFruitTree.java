@@ -2,13 +2,13 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
-
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
 
 public class WorldGenCustomFruitTree extends WorldGenerator
 {
@@ -22,10 +22,11 @@ public class WorldGenCustomFruitTree extends WorldGenerator
 		metaId = meta;
 	}
 
+	@Override
 	public boolean generate(World world, Random random, int i, int j, int k)
 	{
-		float temp = TFC_Climate.getBioTemperatureHeight(i, j, k);
-		float rain = TFC_Climate.getRainfall(i, j, k);
+		float temp = TFC_Climate.getBioTemperatureHeight(world, i, j, k);
+		float rain = TFC_Climate.getRainfall(world, i, j, k);
 		if(world.isAirBlock(i, j, k) && j < 250 && temp > 10 && temp < 25 && rain >= 500)
 			gen(world, random, i, j, k);
 		return true;

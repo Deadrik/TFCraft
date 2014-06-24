@@ -178,16 +178,16 @@ public class RenderOverlayHandler
 			int xCoord = (int)player.posX;
 			int yCoord = (int)player.posY;
 			int zCoord = (int)player.posZ;
-			DataLayer evt = TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord);
+			DataLayer evt = TFC_Climate.getManager(mc.theWorld).getEVTLayerAt(xCoord, zCoord);
 			event.left.add(String.format("rain: %.0f, temp: %.2f, average bio temp: %.2f, apparent temp: %.2f, evt: %.3f", new Object[] {
-					TFC_Climate.getRainfall(xCoord, yCoord, zCoord), 
-					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord),
-					TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord),
-					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord)+BodyTempStats.applyTemperatureFromHeatSources(player),
+					TFC_Climate.getRainfall(mc.theWorld, xCoord, yCoord, zCoord), 
+					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord),
+					TFC_Climate.getBioTemperatureHeight(mc.theWorld, xCoord, yCoord, zCoord),
+					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord)+BodyTempStats.applyTemperatureFromHeatSources(player),
 					evt.floatdata1}));
 
 			event.left.add("Health: " + player.getHealth());
-			event.left.add("Stability: " + TFC_Climate.manager.getStabilityLayerAt(xCoord, zCoord).data1);
+			event.left.add("Stability: " + TFC_Climate.getStability(mc.theWorld, xCoord, zCoord));
 		}
 	}
 

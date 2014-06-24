@@ -86,7 +86,7 @@ public class BlockCustomSnow extends BlockTerra
 	{
 		return Items.snowball;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube()
 	{
@@ -152,7 +152,7 @@ public class BlockCustomSnow extends BlockTerra
 			else if(meta == 1 && R.nextInt(5) == 0)
 				world.setBlockToAir(i, j, k);
 		}
-		if(world.isRaining() && TFC_Climate.getHeightAdjustedTemp(i, j, k) <= 0)//Raining and Below Freezing
+		if(world.isRaining() && TFC_Climate.getHeightAdjustedTemp(world, i, j, k) <= 0)//Raining and Below Freezing
 		{
 			if(meta < 15 && R.nextInt(20) == 0 && world.getBlock(i, j - 1, k).getMaterial() != Material.leaves)
 			{
@@ -165,7 +165,7 @@ public class BlockCustomSnow extends BlockTerra
 					world.setBlockMetadataWithNotify(i, j, k, meta + 1, 2);
 			}
 		}
-		else if(world.isRaining() && TFC_Climate.getHeightAdjustedTemp(i, j, k) >= 0)//Raining and above freezing
+		else if(world.isRaining() && TFC_Climate.getHeightAdjustedTemp(world, i, j, k) >= 0)//Raining and above freezing
 		{
 			if(meta <= 15 && world.getBlock(i, j - 1, k).getMaterial() != Material.leaves)
 			{
@@ -182,7 +182,7 @@ public class BlockCustomSnow extends BlockTerra
 					world.setBlockToAir(i, j, k);
 			}
 		}
-		else if(TFC_Climate.getHeightAdjustedTemp(i, j, k) >= 0F)//Above fReezing
+		else if(TFC_Climate.getHeightAdjustedTemp(world, i, j, k) >= 0F)//Above fReezing
 		{
 			if(meta > 0 )
 				world.setBlockMetadataWithNotify(i, j, k, meta - 1, 2);

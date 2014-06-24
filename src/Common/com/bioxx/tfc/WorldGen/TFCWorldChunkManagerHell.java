@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
@@ -17,12 +18,12 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 	/** The rainfall in the world */
 	private float rainfall;
 
-	public TFCWorldChunkManagerHell(TFCBiome par1, float par2, float par3)
+	public TFCWorldChunkManagerHell(TFCBiome par1, float par2, float par3, World world)
 	{
 		this.biomeGenerator = par1;
 		this.hellTemperature = par2;
 		this.rainfall = par3;
-
+		this.worldObj = world;
 		this.biomesToSpawnIn = new ArrayList();
 		this.biomesToSpawnIn.add(TFCBiome.hell);
 	}
@@ -55,18 +56,6 @@ public class TFCWorldChunkManagerHell extends TFCWorldChunkManager
 			par1 = new TFCBiome[par4 * par5];
 		Arrays.fill(par1, 0, par4 * par5, this.biomeGenerator);
 		return (TFCBiome[]) par1;
-	}
-
-	/**
-	 * Returns a list of temperatures to use for the specified blocks.  Args: listToReuse, x, y, width, length
-	 */
-	@Override
-	public float[] getTemperatures(float[] par1ArrayOfFloat, int par2, int par3, int par4, int par5)
-	{
-		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5)
-			par1ArrayOfFloat = new float[par4 * par5];
-		Arrays.fill(par1ArrayOfFloat, 0, par4 * par5, this.hellTemperature);
-		return par1ArrayOfFloat;
 	}
 
 	/**

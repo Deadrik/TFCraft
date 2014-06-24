@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 
@@ -112,9 +113,9 @@ public class WorldGenOre implements IWorldGenerator
 		{
 			for(Block B : Layers.keySet())
 			{
-				DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 0);
-				DataLayer rockLayer2 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 1);
-				DataLayer rockLayer3 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 2);
+				DataLayer rockLayer1 = TFC_Climate.getManager(world).getRockLayerAt(chunkX, chunkZ, 0);
+				DataLayer rockLayer2 = TFC_Climate.getManager(world).getRockLayerAt(chunkX, chunkZ, 1);
+				DataLayer rockLayer3 = TFC_Climate.getManager(world).getRockLayerAt(chunkX, chunkZ, 2);
 				if((rockLayer1.block == B && (rockLayer1.data2 == Layers.get(B) || Layers.get(B) == -1)) ||
 						(rockLayer2.block == B && (rockLayer2.data2 == Layers.get(B) || Layers.get(B) == -1)) ||
 						(rockLayer3.block == B && (rockLayer3.data2 == Layers.get(B) || Layers.get(B) == -1)))
@@ -142,9 +143,9 @@ public class WorldGenOre implements IWorldGenerator
 		{
 			for(Block B : Layers.keySet())
 			{
-				DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 0);
-				DataLayer rockLayer2 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 1);
-				DataLayer rockLayer3 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 2);
+				DataLayer rockLayer1 = TFC_Climate.getManager(world).getRockLayerAt(chunkX, chunkZ, 0);
+				DataLayer rockLayer2 = TFC_Climate.getManager(world).getRockLayerAt(chunkX, chunkZ, 1);
+				DataLayer rockLayer3 = TFC_Climate.getManager(world).getRockLayerAt(chunkX, chunkZ, 2);
 				if((rockLayer1.block == B && (rockLayer1.data2 == Layers.get(B) || Layers.get(B) == -1)) ||
 						(rockLayer2.block == B && (rockLayer2.data2 == Layers.get(B) || Layers.get(B) == -1)) ||
 						(rockLayer3.block == B && (rockLayer3.data2 == Layers.get(B) || Layers.get(B) == -1)))

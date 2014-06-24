@@ -2,6 +2,11 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -9,10 +14,6 @@ import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.TileEntities.TECrop;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenGrowCrops implements IWorldGenerator
@@ -40,7 +41,7 @@ public class WorldGenGrowCrops implements IWorldGenerator
 
 			if(crop != null)
 			{
-				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay((int)TFC_Time.getTotalDays(), i, j, k);
+				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world, (int)TFC_Time.getTotalDays(), i, j, k);
 				int month = TFC_Time.getSeasonAdjustedMonth(k);
 
 				if(temp > crop.minAliveTemp && month > 0 && month <= 6)

@@ -2,15 +2,15 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenSoilPits implements IWorldGenerator
@@ -45,13 +45,13 @@ public class WorldGenSoilPits implements IWorldGenerator
 		}
 	}
 
-	public boolean generatePeat(World par1World, Random par2Random, int xCoord, int yCoord, int zCoord)
+	public boolean generatePeat(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
-		int var6 = par2Random.nextInt(16) + 8;
+		int var6 = random.nextInt(16) + 8;
 		byte var7 = 2;
 		boolean flag = false;
 
-		if(par2Random.nextInt(50) == 0 && yCoord <= 145)
+		if(random.nextInt(50) == 0 && yCoord <= 145)
 		{
 			for (int x = xCoord - var6; x <= xCoord + var6; ++x)
 			{
@@ -63,17 +63,17 @@ public class WorldGenSoilPits implements IWorldGenerator
 					{
 						for (int y = yCoord - var7; y <= yCoord + var7; ++y)
 						{
-							Block block = par1World.getBlock(x, y, z);
-							if(TFC_Climate.isSwamp(x, y, z))
+							Block block = world.getBlock(x, y, z);
+							if(TFC_Climate.isSwamp(world, x, y, z))
 							{
 								if (TFC_Core.isDirt(block) || TFC_Core.isClay(block) || TFC_Core.isPeat(block))
 								{
-									par1World.setBlock(x, y, z, TFCBlocks.Peat, 0, 2);
+									world.setBlock(x, y, z, TFCBlocks.Peat, 0, 2);
 									flag = true;
 								}
 								else if(TFC_Core.isGrass(block))
 								{
-									par1World.setBlock(x, y, z, TFCBlocks.PeatGrass, 0, 2);
+									world.setBlock(x, y, z, TFCBlocks.PeatGrass, 0, 2);
 									flag = true;
 								}
 							}
@@ -98,12 +98,12 @@ public class WorldGenSoilPits implements IWorldGenerator
 				{
 					int x = xCoord - i;
 					int z = zCoord - k;
-					if (x * x + z * z <= radius * radius && TFC_Climate.getRainfall(xCoord, 145, zCoord) >= 500)
+					if (x * x + z * z <= radius * radius && TFC_Climate.getRainfall(world, xCoord, 145, zCoord) >= 500)
 					{
 						for (int yCoord = j - depth; yCoord <= j + depth; ++yCoord)
 						{
 							Block block = world.getBlock(xCoord, yCoord, zCoord);
-							DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
+							DataLayer rockLayer1 = TFC_Climate.getManager(world).getRockLayerAt(xCoord, zCoord, 0);
 							if (block == TFCBlocks.Dirt || block == TFCBlocks.Dirt2)
 							{
 								world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClay(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);

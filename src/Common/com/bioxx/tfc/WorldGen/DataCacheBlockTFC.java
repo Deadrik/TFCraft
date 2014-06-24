@@ -4,7 +4,6 @@ import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class DataCacheBlockTFC
 {
-	public TFCBiome[] biomes = new TFCBiome[256];
 	/** An array of chunk rainfall values saved by this cache. */
 	public float[] rainfallValues = new float[256];
 	/** The array of data types stored in this DataCacheBlockTFC. */
@@ -19,7 +18,7 @@ public class DataCacheBlockTFC
 	final DataCache theDataCache;
 
 	private int index;
-	
+
 	public DataCacheBlockTFC(DataCache datacache, GenLayerTFC indexLayers, int par2, int par3, int ind)
 	{
 		this.theDataCache = datacache;
@@ -37,15 +36,6 @@ public class DataCacheBlockTFC
 		this.xPosition = par2;
 		this.zPosition = par3;
 		DataCache.getChunkManager(datacache).getRainfall(this.rainfallValues, par2 << 4, par3 << 4, 16, 16);
-		DataCache.getChunkManager(datacache).getBiomeGenAt(this.biomes, par2 << 4, par3 << 4, 16, 16, false);
-	}
-
-	/**
-	 * Returns the BiomeGenBase related to the x, z position from the cache block.
-	 */
-	public TFCBiome getBiomeGenAt(int par1, int par2)
-	{
-		return this.biomes[par1 & 15 | (par2 & 15) << 4];
 	}
 
 	/**

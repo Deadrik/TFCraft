@@ -213,14 +213,14 @@ public abstract class GenLayerTFC extends GenLayer
 
 	public static int validateInt(int[] array, int index)
 	{
-		if(TFCBiome.biomeList[array[index]] == null)
-			System.out.println("Error garbage data: "+array[index]);
+		/*if(TFCBiome.biomeList[array[index]] == null)
+			System.out.println("Error garbage data: "+array[index]);*/
 		return array[index];
 	}
 
 	public static void validateIntArray(int[] array, int xSize, int zSize)
 	{
-		for(int z = 0; z < zSize; z++)
+		/*for(int z = 0; z < zSize; z++)
 		{
 			for(int x = 0; x < xSize; x++)
 			{
@@ -230,6 +230,6 @@ public abstract class GenLayerTFC extends GenLayer
 					return;
 				}
 			}
-		}
+		}*/
 	}
 }

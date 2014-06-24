@@ -25,9 +25,9 @@ public class GetTreesCommand extends CommandBase{
 
 		var4 = getCommandSenderAsPlayer(sender);
 
-		int t0ID = TFC_Climate.getTreeLayer((int)var4.posX, (int)var4.posY, (int)var4.posZ, 0);
-		int t1ID = TFC_Climate.getTreeLayer((int)var4.posX, (int)var4.posY, (int)var4.posZ, 1);
-		int t2ID = TFC_Climate.getTreeLayer((int)var4.posX, (int)var4.posY, (int)var4.posZ, 2);
+		int t0ID = TFC_Climate.getTreeLayer(var4.worldObj, (int)var4.posX, (int)var4.posY, (int)var4.posZ, 0);
+		int t1ID = TFC_Climate.getTreeLayer(var4.worldObj, (int)var4.posX, (int)var4.posY, (int)var4.posZ, 1);
+		int t2ID = TFC_Climate.getTreeLayer(var4.worldObj, (int)var4.posX, (int)var4.posY, (int)var4.posZ, 2);
 
 		String t0 = EnumTree.values()[t0ID].name();
 		String t1 = EnumTree.values()[t1ID].name();

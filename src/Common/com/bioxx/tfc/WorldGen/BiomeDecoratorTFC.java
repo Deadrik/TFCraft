@@ -145,7 +145,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-			if(TFC_Climate.isSwamp(xCoord, yCoord, zCoord))
+			if(TFC_Climate.isSwamp(currentWorld, xCoord, yCoord, zCoord))
 			{
 				this.lilyPadGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 			}
@@ -158,7 +158,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 				xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 				zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 				yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-				if(TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord) >= 14)
+				if(TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, yCoord, zCoord) >= 14)
 					this.reedGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 			}
 		}
@@ -176,8 +176,8 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, this.currentWorld.getHeightValue(xCoord, zCoord), zCoord);
-			float rainfall = TFC_Climate.getRainfall(xCoord, yCoord, zCoord);
+			float temperature = TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, this.currentWorld.getHeightValue(xCoord, zCoord), zCoord);
+			float rainfall = TFC_Climate.getRainfall(currentWorld, xCoord, yCoord, zCoord);
 			if (temperature > 12 && rainfall < 125)
 				new WorldGenCustomCactus().generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
@@ -187,8 +187,8 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-			if (TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord) >= 7)
-				new WorldGenSeaGrass(TFCBlocks.SeaGrassStill,TFC_Climate.isSwamp(xCoord, yCoord, zCoord)).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+			if (TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, yCoord, zCoord) >= 7)
+				new WorldGenSeaGrass(TFCBlocks.SeaGrassStill,TFC_Climate.isSwamp(currentWorld, xCoord, yCoord, zCoord)).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 
 		if (this.generateLakes)

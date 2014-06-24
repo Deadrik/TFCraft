@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityCreeperTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityEndermanTFC;
@@ -390,7 +391,7 @@ public class TFCBiome extends BiomeGenBase
 
 	public static int getSurfaceRockLayer(World world, int i, int k)
 	{
-		return ((TFCWorldChunkManager)world.provider.worldChunkMgr).getRockLayerAt(i, k, 0).data2;
+		return TFC_Climate.getManager(world).getRockLayerAt(i, k, 0).data2;
 	}
 
 	public static TFCBiome[] getBiomeGenArray()

@@ -9,7 +9,6 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomFruitTree;
 
 import cpw.mods.fml.common.IWorldGenerator;
@@ -63,8 +62,8 @@ public class WorldGenPlants implements IWorldGenerator
 		int flowersPerChunk = 0;
 		int mushroomsPerChunk = 0;
 
-		DataLayer evt = ((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(chunkX, chunkZ);
-		float rain = TFC_Climate.getRainfall(chunkX, 144, chunkZ);
+		DataLayer evt = TFC_Climate.getManager(world).getEVTLayerAt(chunkX, chunkZ);
+		float rain = TFC_Climate.getRainfall(world, chunkX, 144, chunkZ);
 		float bioTemperature;
 
 		if(rain >= 62.5f)
@@ -102,7 +101,7 @@ public class WorldGenPlants implements IWorldGenerator
 			xCoord = chunkX + random.nextInt(16) + 8;
 			zCoord = chunkZ + random.nextInt(16) + 8;
 			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
-			bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
+			bioTemperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, yCoord, zCoord);
 			if(bioTemperature > 1.5)
 			{
 				if(random.nextInt(100) < 50)
@@ -118,7 +117,7 @@ public class WorldGenPlants implements IWorldGenerator
 			xCoord = chunkX + random.nextInt(16) + 8;
 			zCoord = chunkZ + random.nextInt(16) + 8;
 			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
-			bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
+			bioTemperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, yCoord, zCoord);
 			if(bioTemperature >= 5)
 			{
 				if (world.isAirBlock(xCoord, yCoord, zCoord) && 
@@ -166,7 +165,7 @@ public class WorldGenPlants implements IWorldGenerator
 			xCoord = chunkX + random.nextInt(16) + 8;
 			zCoord = chunkZ + random.nextInt(16) + 8;
 			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
-			bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
+			bioTemperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, yCoord, zCoord);
 			switch(random.nextInt(9))
 			{
 			default:

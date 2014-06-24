@@ -3,15 +3,15 @@ package com.bioxx.tfc.WorldGen;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
-
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.LongHashMap;
+
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class DataCache
 {
 	/** Reference to the WorldChunkManager */
-	private final TFCWorldChunkManager chunkManager;
+	private final WorldLayerManager chunkManager;
 	/** The last time this BiomeCache was cleaned, in milliseconds.*/
 	private long lastCleanupTime = 0L;
 	/** The map of keys to BiomeCacheBlocks. Keys are based on the chunk x, z coordinates as (x | z << 32). */
@@ -20,34 +20,15 @@ public class DataCache
 	private List cache = new ArrayList();
 	private int index;
 
-	public DataCache(TFCWorldChunkManager par1)
+	public DataCache(WorldLayerManager worldLayerManager)
 	{
-		this.chunkManager = par1;
+		this.chunkManager = worldLayerManager;
 	}
-	
-	public DataCache(TFCWorldChunkManager par1, int ind)
+
+	public DataCache(WorldLayerManager par1, int ind)
 	{
 		this.chunkManager = par1;
 		index = ind;
-	}
-
-	/**
-	 * Returns a biome cache block at location specified.
-	 */
-	public DataCacheBlockTFC getBiomeCacheBlock(int x, int y)
-	{
-		x >>= 4;
-		y >>= 4;
-		long var3 = (long)x & 4294967295L | ((long)y & 4294967295L) << 32;
-		DataCacheBlockTFC var5 = (DataCacheBlockTFC)this.cacheMap.getValueByKey(var3);
-		if (var5 == null)
-		{
-			var5 = new DataCacheBlockTFC(this, x, y);
-			this.cacheMap.add(var3, var5);
-			this.cache.add(var5);
-		}
-		var5.lastAccessTime = MinecraftServer.getSystemTimeMillis();
-		return var5;
 	}
 
 	public DataCacheBlockTFC getDataCacheBlock(GenLayerTFC indexLayers, int x, int y)
@@ -64,14 +45,6 @@ public class DataCache
 		}
 		var5.lastAccessTime = MinecraftServer.getSystemTimeMillis();
 		return var5;
-	}
-
-	/**
-	 * Returns the BiomeGenBase related to the x, z position from the cache.
-	 */
-	public TFCBiome getBiomeGenAt(int par1, int par2)
-	{
-		return this.getBiomeCacheBlock(par1, par2).getBiomeGenAt(par1, par2);
 	}
 
 	public DataLayer getDataLayerAt(GenLayerTFC indexLayers, int par1, int par2)
@@ -100,16 +73,6 @@ public class DataCache
 		}
 	}
 
-	/**
-	 * Returns the array of cached biome types in the BiomeCacheBlock at the given location.
-	 * @param indexLayers 
-	 * @param cache2 
-	 */
-	public TFCBiome[] getCachedBiomes(int par1, int par2)
-	{
-		return this.getBiomeCacheBlock(par1, par2).biomes;
-	}
-	
 	public DataLayer[] getCachedData(GenLayerTFC indexLayers, int par1, int par2)
 	{
 		return this.getDataCacheBlock(indexLayers, par1, par2).data;
@@ -118,7 +81,7 @@ public class DataCache
 	/**
 	 * Get the world chunk manager object for a biome list.
 	 */
-	static TFCWorldChunkManager getChunkManager(DataCache cache)
+	static WorldLayerManager getChunkManager(DataCache cache)
 	{
 		return cache.chunkManager;
 	}

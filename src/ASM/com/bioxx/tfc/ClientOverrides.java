@@ -112,7 +112,7 @@ public class ClientOverrides
 				int z = k + random.nextInt(b0) - random.nextInt(b0);
 				int y = worldclient.getPrecipitationHeight(x, z);
 				Block b = worldclient.getBlock(x, y - 1, z);
-				if(!WeatherManager.canSnow(x, y, z))
+				if(!WeatherManager.canSnow(Minecraft.getMinecraft().theWorld, x, y, z))
 				{
 					if (y <= j + b0 && y >= j - b0)
 					{

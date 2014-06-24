@@ -1,13 +1,14 @@
 package com.bioxx.tfc.Core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import com.bioxx.tfc.Core.Util.BlockMeta;
 import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
+import com.bioxx.tfc.WorldGen.WorldLayerManager;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -15,8 +16,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFC_Climate
 {
-	public static World worldObj;
-	public static TFCWorldChunkManager manager;
+	public static HashMap<Integer, WorldLayerManager> worldPair = new HashMap<Integer, WorldLayerManager>();
+
 	private static final float[] zFactorCache = new float[30001];
 	private static final float[][] monthTempCache = new float[12][30001];
 	private static final float[][] monthTempFactorCache = new float[12][30001];
@@ -167,20 +168,20 @@ public class TFC_Climate
 		return zFactorCache[zCoord];
 	}
 
-	protected static float getTemp(int x, int z)
+	protected static float getTemp(World world,int x, int z)
 	{
-		return getTemp(TFC_Time.currentDay,TFC_Time.getHour(), x, z);
+		return getTemp(world, TFC_Time.currentDay,TFC_Time.getHour(), x, z);
 	}
 
-	protected static float getTemp(int day, int th, int x, int z)
+	protected static float getTemp(World world, int day, int th, int x, int z)
 	{
-		if(manager!= null)
+		if(TFC_Climate.getManager(world) != null)
 		{
 
 			float zMod = getZFactor(z);
 			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
 
-			float rainMod = (1-((getRainfall(x, 144, z))/4000))*zMod;
+			float rainMod = (1-((getRainfall(world, x, 144, z))/4000))*zMod;
 
 			int _month = TFC_Time.getSeasonFromDayOfYear(day,z);
 			int _lastmonth = TFC_Time.getSeasonFromDayOfYear(day-TFC_Time.daysInMonth,z);
@@ -239,14 +240,14 @@ public class TFC_Climate
 		return -10;
 	}
 
-	protected static float getBioTemp(int day, int x, int z)
+	protected static float getBioTemp(World world,int day, int x, int z)
 	{
-		if(manager!= null)
+		if(TFC_Climate.getManager(world) != null)
 		{
 			float zMod = getZFactor(z);
 			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
 
-			float rain = getRainfall(x, 144, z);
+			float rain = getRainfall(world, x, 144, z);
 			float rainMod = (1-(rain/4000))*zMod;
 
 			int _season = TFC_Time.getSeasonFromDayOfYear(day,z);
@@ -311,33 +312,33 @@ public class TFC_Climate
 		return monthTempFactorCache[season][z];
 	}
 
-	protected static float getTempSpecificDay(int day, int x, int z)
+	protected static float getTempSpecificDay(World world,int day, int x, int z)
 	{
-		return getTemp(day,12, x, z);
+		return getTemp(world, day,12, x, z);
 	}
 
-	public static float getHeightAdjustedTemp(int x, int y, int z)
+	public static float getHeightAdjustedTemp(World world, int x, int y, int z)
 	{
-		float temp = getTemp(x, z);
-		temp += getTemp(x+1, z);
-		temp += getTemp(x-1, z);
-		temp += getTemp(x, z+1);
-		temp += getTemp(x, z-1);
+		float temp = getTemp(world, x, z);
+		temp += getTemp(world, x+1, z);
+		temp += getTemp(world, x-1, z);
+		temp += getTemp(world, x, z+1);
+		temp += getTemp(world, x, z-1);
 		temp /= 5;
 		temp = adjustHeightToTemp(y,temp);
 		float light = 1;
 
-		if(worldObj.getChunkProvider() != null /*&& worldObj.blockExists(x, y, z)*/)
+		if(world.getChunkProvider() != null /*&& worldObj.blockExists(x, y, z)*/)
 		{
 			//If this block can see the sky then we jsut want it to be ambient temp. 
 			//Shadows should only matter for darkness, not night time.
-			if(worldObj.canBlockSeeTheSky(x, y, z))
+			if(world.canBlockSeeTheSky(x, y, z))
 			{
 				light = 0;
 			}
 			else
 			{
-				float bl = worldObj.getBlockLightValue(x, y, z);
+				float bl = world.getBlockLightValue(x, y, z);
 				light = 0.25f*(1-(bl/15f));
 			}
 		}
@@ -370,23 +371,23 @@ public class TFC_Climate
 		return temp;
 	}
 
-	public static float getHeightAdjustedTempSpecificDay(int day, int x, int y, int z)
+	public static float getHeightAdjustedTempSpecificDay(World world,int day, int x, int y, int z)
 	{
-		float temp = getTempSpecificDay(day, x, z);
+		float temp = getTempSpecificDay(world, day, x, z);
 		temp = adjustHeightToTemp(y,temp);
 		return temp;
 	}
 
-	public static float getHeightAdjustedTempSpecificDay(int day, int hour, int x, int y, int z)
+	public static float getHeightAdjustedTempSpecificDay(World world,int day, int hour, int x, int y, int z)
 	{
-		float temp = getTemp(day, hour, x, z);
+		float temp = getTemp(world, day, hour, x, z);
 		temp = adjustHeightToTemp(y,temp);
 		return temp;
 	}
 
-	public static float getHeightAdjustedBioTemp(int day, int x, int y, int z)
+	public static float getHeightAdjustedBioTemp(World world,int day, int x, int y, int z)
 	{
-		float temp = getBioTemp(day, x, z);
+		float temp = getBioTemp(world, day, x, z);
 		temp = adjustHeightToTemp(y,temp);
 		return temp;
 	}
@@ -396,12 +397,12 @@ public class TFC_Climate
 		return 52;
 	}
 
-	public static float getBioTemperatureHeight(int x, int y, int z)
+	public static float getBioTemperatureHeight(World world,int x, int y, int z)
 	{
 		float temp = 0;
 		for(int i = 0; i < 12; i++)
 		{
-			float t = getHeightAdjustedBioTemp(i*TFC_Time.daysInMonth, x, y, z);
+			float t = getHeightAdjustedBioTemp(world, i*TFC_Time.daysInMonth, x, y, z);
 			//if(t < 0)
 			//	t = 0;
 			temp += t;
@@ -409,12 +410,12 @@ public class TFC_Climate
 		return temp / 12;
 	}
 
-	public static float getBioTemperature(int x, int z)
+	public static float getBioTemperature(World world,int x, int z)
 	{
 		float temp = 0;
 		for(int i = 0; i < 24; i++)
 		{
-			float t = getBioTemp(i*TFC_Time.daysInMonth/2, x, z);
+			float t = getBioTemp(world, i*TFC_Time.daysInMonth/2, x, z);
 			//if(t < 0)
 			//	t = 0;
 			temp += t;
@@ -428,9 +429,9 @@ public class TFC_Climate
 	 */
 	public static int getGrassColor(World world, int x, int y, int z)
 	{
-		float temp = ((getTemp(x, z) + getMaxTemperature()) / (getMaxTemperature() * 2));
+		float temp = ((getTemp(world, x, z) + getMaxTemperature()) / (getMaxTemperature() * 2));
 
-		float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);
+		float rain = (getRainfall(world, x, y, z) / 8000);
 
 		double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
 		double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
@@ -444,12 +445,12 @@ public class TFC_Climate
 	 */
 	public static int getFoliageColor(World world, int x, int y, int z)
 	{
-		float temperature = getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYear(), x, y, z);
-		float rainfall = getRainfall(x, y, z);
+		float temperature = getHeightAdjustedTempSpecificDay(world, TFC_Time.getDayOfYear(), x, y, z);
+		float rainfall = getRainfall(world, x, y, z);
 		if(temperature > 5 && rainfall > 100)
 		{
-			float temp = (getTemp(x, z) + 35) / (getMaxTemperature() + 35);
-			float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);
+			float temp = (getTemp(world, x, z) + 35) / (getMaxTemperature() + 35);
+			float rain = (getRainfall(world, x, y, z) / 8000);
 
 			double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
 			double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
@@ -468,11 +469,11 @@ public class TFC_Climate
 	public static int getFoliageColorEvergreen(World world, int x, int y, int z)
 	{
 		int month = TFC_Time.getSeasonAdjustedMonth(z);
-		float rainfall = getRainfall(x, y, z);
+		float rainfall = getRainfall(world, x, y, z);
 		if(rainfall > 100)
 		{
-			float temp = (getTemp(x, z)+35)/(getMaxTemperature()+35);
-			float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);
+			float temp = (getTemp(world, x, z)+35)/(getMaxTemperature()+35);
+			float rain = (TFC_Climate.getRainfall(world, x, y, z) / 8000);
 
 			double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
 			double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
@@ -488,14 +489,14 @@ public class TFC_Climate
 	 * All Rainfall related code
 	 */
 
-	public static float getRainfall(int x, int y, int z)
+	public static float getRainfall(World world, int x, int y, int z)
 	{
-		return manager.getRainfallLayerAt(x, z).floatdata1;
+		return getManager(world).getRainfallLayerAt(x, z).floatdata1;
 	}
 
-	public static float getTerrainAdjustedRainfall(int x, int y, int z)
+	public static float getTerrainAdjustedRainfall(World world, int x, int y, int z)
 	{
-		float rain = getRainfall(x, y, z);
+		float rain = getRainfall(world, x, y, z);
 		ArrayList biomes = new ArrayList<TFCBiome>();
 		biomes.add(TFCBiome.river);
 		biomes.add(TFCBiome.ocean);
@@ -509,7 +510,7 @@ public class TFC_Climate
 		BiomeGenBase biome = null;
 		for(int i = 0; i < 8; i++)
 		{
-			biome = worldObj.getBiomeGenForCoords(( x- 512) + (64 * i), z);
+			biome = world.getBiomeGenForCoords(( x- 512) + (64 * i), z);
 			if(biome.biomeID == TFCBiome.Mountains.biomeID)
 				rainModWest = 1 - (i * 0.0625f);
 			else if(biome.biomeID == TFCBiome.ocean.biomeID)
@@ -517,7 +518,7 @@ public class TFC_Climate
 		}
 		for(int i = 0; i < 8; i++)
 		{
-			biome =  worldObj.getBiomeGenForCoords(x, (z + 512) - (64 * i));
+			biome =  world.getBiomeGenForCoords(x, (z + 512) - (64 * i));
 			if(biome.biomeID == TFCBiome.Mountains.biomeID)
 				rainModSouth = 1 - (i * 0.0625f);
 			else if(biome.biomeID == TFCBiome.ocean.biomeID)
@@ -525,13 +526,13 @@ public class TFC_Climate
 		}
 		for(int i = 0; i < 2; i++)
 		{
-			biome = worldObj.getBiomeGenForCoords(x, (z - 128) + (64 * i));
+			biome = world.getBiomeGenForCoords(x, (z - 128) + (64 * i));
 			if(biome.biomeID == TFCBiome.ocean.biomeID)
 				rainModNorth +=  0.35f;
 		}
 		for(int i = 0; i < 2; i++)
 		{
-			biome = worldObj.getBiomeGenForCoords((x + 128) - (64 * i), z);
+			biome = world.getBiomeGenForCoords((x + 128) - (64 * i), z);
 			if(biome.biomeID == TFCBiome.ocean.biomeID)
 				rainModEast += 0.35f;
 		}
@@ -541,7 +542,7 @@ public class TFC_Climate
 		{
 			for(int k = -2; k <= 2 && addMoisture == 1; k++)
 			{
-				biome = worldObj.getBiomeGenForCoords(x + (i * 8), z + (k * 8));
+				biome = world.getBiomeGenForCoords(x + (i * 8), z + (k * 8));
 				if(biome.biomeID == TFCBiome.ocean.biomeID || biome.biomeID == TFCBiome.river.biomeID || biome.biomeID == TFCBiome.swampland.biomeID)
 					addMoisture = 2f;
 			}
@@ -549,14 +550,14 @@ public class TFC_Climate
 		return rain * ((rainModEast + rainModWest + rainModNorth + rainModSouth + addMoisture) / 5);
 	}
 
-	public static int getTreeLayer(int x, int y, int z, int index)
+	public static int getTreeLayer(World world,int x, int y, int z, int index)
 	{
-		return manager.getTreeLayerAt(x, z, index).data1;
+		return getManager(world).getTreeLayerAt(x, z, index).data1;
 	}
 
-	public static BlockMeta getRockLayer(int x, int y, int z, int index)
+	public static BlockMeta getRockLayer(World world,int x, int y, int z, int index)
 	{
-		return new BlockMeta(manager.getRockLayerAt(x, z, index).block, manager.getRockLayerAt(x, z, index).data2);
+		return new BlockMeta(getManager(world).getRockLayerAt(x, z, index).block, getManager(world).getRockLayerAt(x, z, index).data2);
 	}
 
 	public static int getMaxZPos()
@@ -564,17 +565,22 @@ public class TFC_Climate
 		return 30000;
 	}
 
-	public static boolean isSwamp(int x, int y, int z)
+	public static boolean isSwamp(World world, int x, int y, int z)
 	{
-		float rain = getRainfall(x, y, z);
-		float evt = manager.getEVTLayerAt(x, z).floatdata1;
-		if(rain >= 1000 && evt < 0.25 && manager.getBiomeGenAt(x, z).heightVariation < 0.15)
+		float rain = getRainfall(world, x, y, z);
+		float evt = getManager(world).getEVTLayerAt(x, z).floatdata1;
+		if(rain >= 1000 && evt < 0.25 && world.getBiomeGenForCoords(x, z).heightVariation < 0.15)
 			return true;
 		return false;
 	}
 
-	public static int getStability(int x, int z)
+	public static int getStability(World world, int x, int z)
 	{
-		return manager.getStabilityLayerAt(x, z).data1;
+		return getManager(world).getStabilityLayerAt(x, z).data1;
+	}
+
+	public static WorldLayerManager getManager(World world)
+	{
+		return worldPair.get(world.provider.dimensionId);
 	}
 }

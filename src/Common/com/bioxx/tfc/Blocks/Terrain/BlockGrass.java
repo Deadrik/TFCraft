@@ -67,7 +67,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 			int count;
 			if(textureOffset == 0) count = 16;
 			else count = Global.STONE_ALL.length - 16;
-	
+
 			for(int i = 0; i < count; i++)
 				list.add(new ItemStack(item, 1, i));
 		}
@@ -220,7 +220,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 					int y = j + rand.nextInt(5) - 3;
 					int z = k + rand.nextInt(3) - 1;
 
-					float rain = TFC_Climate.getRainfall(x, y + 1, z);
+					float rain = TFC_Climate.getRainfall(world, x, y + 1, z);
 
 					Block id = world.getBlock(x, y, z);
 					int meta = world.getBlockMetadata(x, y, z);
@@ -233,8 +233,8 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 						world.setBlock(x, y, z, TFCBlocks.PeatGrass);
 				}
 
-				float rain = TFC_Climate.getRainfall(i, j + 1, k);
-				float temp = TFC_Climate.getHeightAdjustedTemp(i, j+1, k);
+				float rain = TFC_Climate.getRainfall(world, i, j + 1, k);
+				float temp = TFC_Climate.getHeightAdjustedTemp(world, i, j+1, k);
 				Block id = world.getBlock(i, j, k);
 
 				if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlock(i, j + 1, k).getMaterial() != Material.water && world.isAirBlock(i, j + 1, k))
@@ -259,7 +259,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 					}
 				}
 
-				BlockMeta rock1 = TFC_Climate.getRockLayer(i, j, k, 0);
+				BlockMeta rock1 = TFC_Climate.getRockLayer(world, i, j, k, 0);
 				if(TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && !nearWater && rain < 500)
 				{
 					int meta = TFC_Core.getSoilMetaFromStone(rock1.block, rock1.meta);
