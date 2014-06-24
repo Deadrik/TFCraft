@@ -15,8 +15,6 @@ import com.bioxx.tfc.Blocks.BlockIngotPile;
 import com.bioxx.tfc.Blocks.BlockLogPile;
 import com.bioxx.tfc.Blocks.BlockMetalSheet;
 import com.bioxx.tfc.Blocks.BlockMolten;
-import com.bioxx.tfc.Blocks.BlockPipeBasic;
-import com.bioxx.tfc.Blocks.BlockPipeValve;
 import com.bioxx.tfc.Blocks.BlockPlanks;
 import com.bioxx.tfc.Blocks.BlockSlab;
 import com.bioxx.tfc.Blocks.BlockStair;
@@ -297,9 +295,6 @@ public class TFCBlocks
 	public static Block WoodHoriz4;
 	public static Block WoodVert2;
 
-	public static Block SteamPipe;
-	public static Block SteamPipeValve;
-
 	public static Block SaltWater;
 	public static Block FreshWater;
 	public static Block HotWater;
@@ -431,8 +426,6 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WallSmoothIgEx, ItemStone.class, "WallSmoothIgEx");
 		GameRegistry.registerBlock(WallSmoothSed, ItemStone.class, "WallSmoothSed");
 		GameRegistry.registerBlock(WallSmoothMM, ItemStone.class, "WallSmoothMM");
-		GameRegistry.registerBlock(SteamPipe, ItemStone.class, "BasicPipe");
-		GameRegistry.registerBlock(SteamPipeValve, ItemStone.class, "ValvePipe");
 
 		GameRegistry.registerBlock(SaltWater, "SaltWater");
 		GameRegistry.registerBlock(FreshWater, "FreshWater");
@@ -671,9 +664,6 @@ public class TFCBlocks
 		StrawHideBed = new BlockBed().setBlockName("StrawHideBed").setHardness(1);
 		ArmourStand = new BlockStand().setBlockName("ArmourStand").setHardness(2);
 		ArmourStand2 = new BlockStand2().setBlockName("ArmourStand").setHardness(2);
-
-		SteamPipe = new BlockPipeBasic(Material.iron).setBlockName("BasicPipe").setHardness(2);
-		SteamPipeValve = new BlockPipeValve(Material.iron).setBlockName("ValvePipe").setHardness(2);
 
 		BerryBush = new BlockBerryBush().setBlockName("BerryBush").setHardness(0.3f).setStepSound(Block.soundTypeGrass);
 		Crops = new BlockCrop().setBlockName("crops").setHardness(0.3F).setStepSound(Block.soundTypeGrass);
