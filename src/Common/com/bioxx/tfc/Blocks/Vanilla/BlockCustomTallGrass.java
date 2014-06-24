@@ -248,12 +248,12 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 	{
 		// Play cricket sound at night
 		float temp = TFC_Climate.getHeightAdjustedTemp(w, x, y, z);
-		if(!w.isRemote && /*w.getBlockLightValue(x, y, z) < 7 &&*/ temp > /*10*/15)
+		/*Crickets typically don't mate below 55F and are nocturnal. We're being oddly accurate about this lol -B*/
+		if(!w.isRemote && w.getBlockLightValue(x, y, z) < 7 && temp > 12.77)
 		{
 			if(w.rand.nextInt(Math.max(((int)((160)/(temp-4))),1)) < 2) //chirp intensity grows with higher temperature
 			{
-				float f = w.rand.nextFloat();
-				float vol = f < 0.30F ? f : 0.30F; // keep the volume between 0 and 0.3
+				float vol = 0.1f + (w.rand.nextFloat() * 0.20F); // keep the volume between 0 and 0.3
 				float pitch = ((temp / 100) * 2) + 0.5F + vol; // the chirp frequency will change depending on the climate temperature
 				w.playSoundEffect(x, y, z, TFC_Sounds.CRICKET, vol, pitch);
 			}

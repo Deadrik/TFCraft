@@ -327,27 +327,28 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		byte var4 = 4;
 		byte var5 = 16;
 		int seaLevel = 16;
-		int var7 = var4 + 1;
-		byte var8 = 17;
-		int var9 = var4 + 1;
-		this.biomesForGeneration = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getBiomesForGeneration(this.biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, var7 + 5, var9 + 5);
-		this.noiseArray = this.initializeNoiseFieldHigh(this.noiseArray, par1 * var4, 0, par2 * var4, var7, var8, var9);
+		int xSize = var4 + 1;
+		byte ySize = 17;
+		int zSize = var4 + 1;
+		short arrayYHeight = 128;
+		this.biomesForGeneration = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getBiomesForGeneration(this.biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, xSize + 5, zSize + 5);
+		this.noiseArray = this.initializeNoiseFieldHigh(this.noiseArray, par1 * var4, 0, par2 * var4, xSize, ySize, zSize);
 
-		for (int var10 = 0; var10 < var4; ++var10)
+		for (int x = 0; x < var4; ++x)
 		{
-			for (int var11 = 0; var11 < var4; ++var11)
+			for (int z = 0; z < var4; ++z)
 			{
-				for (int var12 = 0; var12 < var5; ++var12)
+				for (int y = 0; y < var5; ++y)
 				{
 					double yLerp = 0.125D;
-					double var15 = this.noiseArray[((var10 + 0) * var9 + var11 + 0) * var8 + var12 + 0];
-					double var17 = this.noiseArray[((var10 + 0) * var9 + var11 + 1) * var8 + var12 + 0];
-					double var19 = this.noiseArray[((var10 + 1) * var9 + var11 + 0) * var8 + var12 + 0];
-					double var21 = this.noiseArray[((var10 + 1) * var9 + var11 + 1) * var8 + var12 + 0];
-					double var23 = (this.noiseArray[((var10 + 0) * var9 + var11 + 0) * var8 + var12 + 1] - var15) * yLerp;
-					double var25 = (this.noiseArray[((var10 + 0) * var9 + var11 + 1) * var8 + var12 + 1] - var17) * yLerp;
-					double var27 = (this.noiseArray[((var10 + 1) * var9 + var11 + 0) * var8 + var12 + 1] - var19) * yLerp;
-					double var29 = (this.noiseArray[((var10 + 1) * var9 + var11 + 1) * var8 + var12 + 1] - var21) * yLerp;
+					double var15 = this.noiseArray[((x + 0) * zSize + z + 0) * ySize + y + 0];
+					double var17 = this.noiseArray[((x + 0) * zSize + z + 1) * ySize + y + 0];
+					double var19 = this.noiseArray[((x + 1) * zSize + z + 0) * ySize + y + 0];
+					double var21 = this.noiseArray[((x + 1) * zSize + z + 1) * ySize + y + 0];
+					double var23 = (this.noiseArray[((x + 0) * zSize + z + 0) * ySize + y + 1] - var15) * yLerp;
+					double var25 = (this.noiseArray[((x + 0) * zSize + z + 1) * ySize + y + 1] - var17) * yLerp;
+					double var27 = (this.noiseArray[((x + 1) * zSize + z + 0) * ySize + y + 1] - var19) * yLerp;
+					double var29 = (this.noiseArray[((x + 1) * zSize + z + 1) * ySize + y + 1] - var21) * yLerp;
 
 					for (int var31 = 0; var31 < 8; ++var31)
 					{
@@ -359,9 +360,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 						for (int var42 = 0; var42 < 4; ++var42)
 						{
-							int var43 = var42 + var10 * 4 << 11 | 0 + var11 * 4 << 7 | var12 * 8 + var31;
-							short var44 = 128;
-							var43 -= var44;
+							int index = var42 + x * 4 << 11 | 0 + z * 4 << 7 | y * 8 + var31;
+
+							index -= arrayYHeight;
 							double zLerp = 0.25D;
 							double var49 = (var36 - var34) * zLerp;
 							double var47 = var34 - var49;
@@ -369,11 +370,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							for (int var51 = 0; var51 < 4; ++var51)
 							{
 								if ((var47 += var49) > 0.0D)
-									idsTop[var43 += var44] = Blocks.stone;
-								else if (var12 * 8 + var31 < seaLevel)
-									idsTop[var43 += var44] = TFCBlocks.SaltWater;
+									idsTop[index += arrayYHeight] = Blocks.stone;
+								else if (y * 8 + var31 < seaLevel)
+									idsTop[index += arrayYHeight] = TFCBlocks.SaltWater;
 								else
-									idsTop[var43 += var44] = Blocks.air;
+									idsTop[index += arrayYHeight] = Blocks.air;
 							}
 							var34 += var38;
 							var36 += var40;
@@ -392,10 +393,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	 * generates a subset of the level's terrain data. Takes 7 arguments: the [empty] noise array, the position, and the
 	 * size.
 	 */
-	private double[] initializeNoiseFieldHigh(double[] par1ArrayOfDouble, int par2, int par3, int par4, int par5, int par6, int par7)
+	private double[] initializeNoiseFieldHigh(double[] outArray, int xPos, int yPos, int zPos, int xSize, int ySize, int zSize)
 	{
-		if (par1ArrayOfDouble == null)
-			par1ArrayOfDouble = new double[par5 * par6 * par7];
+		if (outArray == null)
+			outArray = new double[xSize * ySize * zSize];
 
 		if (this.parabolicField == null)
 		{
@@ -412,34 +413,35 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 		double var44 = 684.412D;
 		double var45 = 684.412D;
-		this.noise5 = this.noiseGen5.generateNoiseOctaves(this.noise5, par2, par4, par5, par7, 1.121D, 1.121D, 0.5D);
-		this.noise6 = this.noiseGen6.generateNoiseOctaves(this.noise6, par2, par4, par5, par7, 200.0D, 200.0D, 0.5D);
-		this.noise3 = this.noiseGen3.generateNoiseOctaves(this.noise3, par2, par3, par4, par5, par6, par7, var44 / 80.0D, var45 / 160.0D, var44 / 80.0D);
-		this.noise1 = this.noiseGen1.generateNoiseOctaves(this.noise1, par2, par3, par4, par5, par6, par7, var44, var45, var44);
-		this.noise2 = this.noiseGen2.generateNoiseOctaves(this.noise2, par2, par3, par4, par5, par6, par7, var44, var45, var44);
+		this.noise5 = this.noiseGen5.generateNoiseOctaves(this.noise5, xPos, zPos, xSize, zSize, 1.121D, 1.121D, 0.5D);
+		this.noise6 = this.noiseGen6.generateNoiseOctaves(this.noise6, xPos, zPos, xSize, zSize, 200.0D, 200.0D, 0.5D);
+		this.noise3 = this.noiseGen3.generateNoiseOctaves(this.noise3, xPos, yPos, zPos, xSize, ySize, zSize, var44 / 80.0D, var45 / 160.0D, var44 / 80.0D);
+		this.noise1 = this.noiseGen1.generateNoiseOctaves(this.noise1, xPos, yPos, zPos, xSize, ySize, zSize, var44, var45, var44);
+		this.noise2 = this.noiseGen2.generateNoiseOctaves(this.noise2, xPos, yPos, zPos, xSize, ySize, zSize, var44, var45, var44);
 		boolean var43 = false;
 		boolean var42 = false;
 		int var12 = 0;
 		int var13 = 0;
 
-		for (int var14 = 0; var14 < par5; ++var14)
+		for (int x = 0; x < xSize; ++x)
 		{
-			for (int var15 = 0; var15 < par7; ++var15)
+			for (int z = 0; z < zSize; ++z)
 			{
 				float var16 = 0.0F;
 				float var17 = 0.0F;
 				float var18 = 0.0F;
-				byte var19 = 2;
-				TFCBiome baseBiome = (TFCBiome)this.biomesForGeneration[var14 + 2 + (var15 + 2) * (par5 + 5)];
+				byte radius = 2;
+				TFCBiome baseBiome = (TFCBiome)this.biomesForGeneration[x + 2 + (z + 2) * (xSize + 5)];
 
-				for (int var21 = -var19; var21 <= var19; ++var21)
+				for (int xR = -radius; xR <= radius; ++xR)
 				{
-					for (int var22 = -var19; var22 <= var19; ++var22)
+					for (int zR = -radius; zR <= radius; ++zR)
 					{
-						TFCBiome blendBiome = (TFCBiome)this.biomesForGeneration[var14 + var21 + 2 + (var15 + var22 + 2) * (par5 + 5)];
-						float blendedHeight = this.parabolicField[var21 + 2 + (var22 + 2) * 5] / (/*blendBiome.minHeight*/ + 2.0F);//<---blendBiome.minHeight was commented out
+						TFCBiome blendBiome = (TFCBiome)this.biomesForGeneration[x + xR + 2 + (z + zR + 2) * (xSize + 5)];
+						float blendedHeight = this.parabolicField[xR + 2 + (zR + 2) * 5] / 2.0F;
 						if (blendBiome.rootHeight > baseBiome.rootHeight)
-							blendedHeight *= 0.3F;
+							blendedHeight *= 0.5F;
+
 						var16 += blendBiome.heightVariation * blendedHeight;
 						var17 += blendBiome.rootHeight * blendedHeight;
 						var18 += blendedHeight;
@@ -472,13 +474,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				}
 
 				++var13;
-				for (int var46 = 0; var46 < par6; ++var46)
+				for (int var46 = 0; var46 < ySize; ++var46)
 				{
 					double var48 = var17;
 					double var26 = var16;
 					var48 += var47 * 0.2D;
-					var48 = var48 * par6 / 16.0D;
-					double var28 = par6 / 2.0D + var48 * 4.0D;
+					var48 = var48 * ySize / 16.0D;
+					double var28 = ySize / 2.0D + var48 * 4.0D;
 					double var30 = 0.0D;
 					double var32 = (var46 - var28) * 12.0D * 256.0D / 256.0D / (2.70 + var26);
 
@@ -497,18 +499,18 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						var30 = var34 + (var36 - var34) * var38;
 
 					var30 -= var32;
-					if (var46 > par6 - 4)
+					if (var46 > ySize - 4)
 					{
-						double var40 = (var46 - (par6 - 4)) / 3.0F;
+						double var40 = (var46 - (ySize - 4)) / 3.0F;
 						var30 = var30 * (1.0D - var40) + -10.0D * var40;
 					}
 
-					par1ArrayOfDouble[var12] = var30;
+					outArray[var12] = var30;
 					++var12;
 				}
 			}
 		}
-		return par1ArrayOfDouble;
+		return outArray;
 	}
 
 	private void replaceBlocksForBiomeHigh(int chunkX, int chunkZ, Block[] idsTop, Random rand, Block[] idsBig, byte[] metaBig)
@@ -537,15 +539,21 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				Block subSurfaceBlock = TFC_Core.getTypeForDirtFromGrass(surfaceBlock);
 				byte soilMeta = (byte) TFC_Core.getSoilMetaFromStone(rock1.block, rock1.data2);
 				float _temp = TFC_Climate.getBioTemperature(worldObj, chunkX * 16 + xCoord, chunkZ * 16 + zCoord);
-
+				int h = 0;
 				for (int height = 127; height >= 0; --height)
 				{
 					int indexBig = ((arrayIndex) * 256 + height + 128);
 					int index = ((arrayIndex) * 128 + height);
 					metaBig[indexBig] = 0;
 					float temp = TFC_Climate.adjustHeightToTemp(height, _temp);
-
+					if(TFC_Core.isBeachBiome(biome.biomeID) && height > var5+h && idsTop[index] == Blocks.stone)
+					{
+						idsTop[index] = Blocks.air;
+						if(h == 0)
+							h = (height-16)/4;
+					}
 					idsBig[indexBig] = idsTop[index];
+
 					if (idsTop[index] == Blocks.stone)
 					{
 						if(heightMap[arrayIndex] == 0 && height-16 >= 0)
@@ -660,10 +668,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						}
 						else if(biome == TFCBiome.gravelbeach)
 						{
-							if(((height > var5 - 2 && height <= var5 + 2) || (height < var5 && idsTop[index + 2] == TFCBlocks.SaltWater)))//If its an ocean give it a sandy bottom
+							if(((height > var5 - 2 && height <= var5 + 2) || (height < var5 && idsTop[index + 2] == TFCBlocks.SaltWater)))
 							{
-								idsBig[indexBig] = Blocks.gravel;
-								metaBig[indexBig] = 0;
+								idsBig[indexBig] = TFC_Core.getTypeForGravel(soilMeta);
+								metaBig[indexBig] = soilMeta;
 							}
 						}
 						else if(!(biome == TFCBiome.swampland))
@@ -672,8 +680,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							{
 								if(idsBig[indexBig] != TFC_Core.getTypeForSand(soilMeta) && rand.nextInt(5) != 0)
 								{
-									idsBig[indexBig] = Blocks.gravel;
-									metaBig[indexBig] = 0;
+									idsBig[indexBig] = TFC_Core.getTypeForGravel(soilMeta);
+									metaBig[indexBig] = soilMeta;
 								}
 							}
 						}

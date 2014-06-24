@@ -693,6 +693,13 @@ public class TFC_Core
 		return TFCBlocks.Sand2;
 	}
 
+	public static Block getTypeForGravel(int inMeta)
+	{
+		if(inMeta < 16)
+			return TFCBlocks.Gravel;
+		return TFCBlocks.Gravel2;
+	}
+
 	public static int getRockLayerFromHeight(World world, int x, int y, int z)
 	{
 		ChunkData cd = ChunkDataManager.getData(x >> 4, z >> 4);
