@@ -76,85 +76,77 @@ public class FoodStatsTFC
 			/*
 			 * Standard filling reduction based upon time.
 			 */
-			if(this.foodTimer < TFC_Time.startTime)
+			if(this.foodTimer < TFC_Time.startTime )
 			{
 				this.foodTimer = TFC_Time.startTime;
 				this.foodHealTimer = TFC_Time.startTime;
 				this.waterTimer = TFC_Time.startTime;
 			}
 
-			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength && !player.capabilities.isCreativeMode)
-			{
-				this.foodTimer += TFC_Time.hourLength;
-				float drainMult = 1.0f;
-				if(player.getSleepTimer() > 0)
-				{
-					drainMult = 0.50f;
-				}
-				//Water
-				if(player.isSprinting())
-					waterLevel -= 5+(tempWaterMod);
-				if(!player.capabilities.isCreativeMode)
-					waterLevel -= bodyTemp.getExtraWater()*drainMult;
-
-				//Food
-				float hunger = ((1 + foodExhaustionLevel) + bodyTemp.getExtraFood())*drainMult;
-				if(this.satisfaction >= hunger)
-				{
-					satisfaction -= hunger; 
-					hunger = 0;
-					foodExhaustionLevel = 0;
-				}
-				else
-				{
-					hunger -= satisfaction; 
-					satisfaction = 0;
-					foodExhaustionLevel = 0;
-				}
-				this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
-				nutrFruit = Math.max(this.nutrFruit - (1 + foodExhaustionLevel)/10, 0);
-				nutrVeg = Math.max(this.nutrVeg - (1 + foodExhaustionLevel)/10, 0);
-				nutrGrain = Math.max(this.nutrGrain - (1 + foodExhaustionLevel)/10, 0);
-				nutrProtein = Math.max(this.nutrProtein - (1 + foodExhaustionLevel)/10, 0);
-				nutrDairy = Math.max(this.nutrDairy - (1 + foodExhaustionLevel)/10, 0);
-			}
-
-			//Heal or hurt the player based on hunger.
-			if (TFC_Time.getTotalTicks() - this.foodHealTimer >= TFC_Time.hourLength/2)
-			{
-				this.foodHealTimer += TFC_Time.hourLength/2;
-
-				if (this.stomachLevel >= this.getMaxStomach(player)/4 && player.shouldHeal())
-				{
-					//Player heals 1% per 30 in game minutes
-					player.heal((int) (player.getMaxHealth() * 0.01f));
-				}
-				else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.85f && !TFC_Core.isPlayerInDebugMode(player) && player.getSleepTimer() == 0)
-				{
-					//Players loses health at a rate of 5% per 30 minutes if they are starving
-					player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth() * 0.05f), 10));
-				}
-			}
-
-			/****************************************
-			 * Handle Alcohol
-			 ****************************************/
-			soberTime = player.getEntityData().hasKey("soberTime") ? player.getEntityData().getLong("soberTime") : 0;
-			if(soberTime > 0)
-				soberTime--;
-			player.getEntityData().setLong("soberTime", soberTime);
 			long time = TFC_Time.getTotalTicks();
-			Block block = player.worldObj.getBlock((int)Math.floor(player.posX),(int)Math.floor(player.posY),(int)Math.floor(player.posZ));
-			Block block2 = player.worldObj.getBlock((int)Math.floor(player.posX),(int)Math.floor(player.posY - 1),(int)Math.floor(player.posZ));
-			if(player.capabilities.isCreativeMode)
+
+			if( player.capabilities.isCreativeMode )
 			{
-				long oldWaterTimer = waterTimer;
-				waterTimer = time;
-				if(player.isInWater() && (TFC_Core.isFreshWater(block) || TFC_Core.isFreshWater(block2)))
-					this.restoreWater(player, 20*(int)(time - oldWaterTimer));
+				this.foodTimer = time;
+				this.foodHealTimer = time;
+				this.waterTimer = time;
 			}
 			else
 			{
+				if ( time - this.foodTimer >= TFC_Time.hourLength )
+				{
+					this.foodTimer += TFC_Time.hourLength;
+					float drainMult = 1.0f;
+					if(player.getSleepTimer() > 0)
+					{
+						drainMult = 0.50f;
+					}
+					//Water
+					if(player.isSprinting())
+						waterLevel -= 5+(tempWaterMod);
+					waterLevel -= bodyTemp.getExtraWater()*drainMult;
+	
+					//Food
+					float hunger = ((1 + foodExhaustionLevel) + bodyTemp.getExtraFood())*drainMult;
+					if(this.satisfaction >= hunger)
+					{
+						satisfaction -= hunger; 
+						hunger = 0;
+						foodExhaustionLevel = 0;
+					}
+					else
+					{
+						hunger -= satisfaction; 
+						satisfaction = 0;
+						foodExhaustionLevel = 0;
+					}
+					this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
+					nutrFruit = Math.max(this.nutrFruit - (1 + foodExhaustionLevel)/10, 0);
+					nutrVeg = Math.max(this.nutrVeg - (1 + foodExhaustionLevel)/10, 0);
+					nutrGrain = Math.max(this.nutrGrain - (1 + foodExhaustionLevel)/10, 0);
+					nutrProtein = Math.max(this.nutrProtein - (1 + foodExhaustionLevel)/10, 0);
+					nutrDairy = Math.max(this.nutrDairy - (1 + foodExhaustionLevel)/10, 0);
+				}
+	
+				//Heal or hurt the player based on hunger.
+				if (time - this.foodHealTimer >= TFC_Time.hourLength/2)
+				{
+					this.foodHealTimer += TFC_Time.hourLength/2;
+	
+					if (this.stomachLevel >= this.getMaxStomach(player)/4 && player.shouldHeal())
+					{
+						//Player heals 1% per 30 in game minutes
+						player.heal((int) (player.getMaxHealth() * 0.01f));
+					}
+					else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.85f && !TFC_Core.isPlayerInDebugMode(player) && player.getSleepTimer() == 0)
+					{
+						//Players loses health at a rate of 5% per 30 minutes if they are starving
+						player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth() * 0.05f), 10));
+					}
+				}
+	
+				Block block = player.worldObj.getBlock((int)Math.floor(player.posX),(int)Math.floor(player.posY),(int)Math.floor(player.posZ));
+				Block block2 = player.worldObj.getBlock((int)Math.floor(player.posX),(int)Math.floor(player.posY - 1),(int)Math.floor(player.posZ));
 				for(;waterTimer < time;  waterTimer++)
 				{
 					/**Reduce the player's water for normal living*/
@@ -167,6 +159,13 @@ public class FoodStatsTFC
 						player.attackEntityFrom(DamageSource.generic, 2);
 				}
 			}
+			/****************************************
+			 * Handle Alcohol
+			 ****************************************/
+			soberTime = player.getEntityData().hasKey("soberTime") ? player.getEntityData().getLong("soberTime") : 0;
+			if(soberTime > 0)
+				soberTime--;
+			player.getEntityData().setLong("soberTime", soberTime);
 		}
 	}
 
