@@ -63,7 +63,7 @@ public class TEFireEntity extends NetworkTileEntity
 		if(fuelTimeLeft > 0)
 		{
 			fuelTimeLeft--;
-			if(airFromBellows == 0)
+			if(airFromBellows > 0)
 				fuelTimeLeft--;
 		}
 		else if(fuelTimeLeft < 0)
