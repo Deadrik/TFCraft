@@ -31,7 +31,11 @@ import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
 import com.bioxx.tfc.Entities.Mobs.EntitySheepTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityWolfTFC;
+import com.bioxx.tfc.WorldGen.Data.ChunkTFC;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
+import com.bioxx.tfc.WorldGen.MapGen.MapGenCavesTFC;
+import com.bioxx.tfc.WorldGen.MapGen.MapGenRavineTFC;
+import com.bioxx.tfc.WorldGen.MapGen.MapGenRiverRavine;
 import com.bioxx.tfc.api.TFCOptions;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate

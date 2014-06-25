@@ -1,5 +1,6 @@
-package com.bioxx.tfc.WorldGen;
+package com.bioxx.tfc.WorldGen.Data;
 
+import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class DataCacheBlockTFC

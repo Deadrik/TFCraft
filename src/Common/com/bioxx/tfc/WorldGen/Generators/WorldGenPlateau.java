@@ -1,4 +1,4 @@
-package com.bioxx.tfc.WorldGen;
+package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 

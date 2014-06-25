@@ -1,4 +1,4 @@
-package com.bioxx.tfc.WorldGen;
+package com.bioxx.tfc.WorldGen.Data;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

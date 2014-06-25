@@ -1,4 +1,4 @@
-package com.bioxx.tfc.WorldGen;
+package com.bioxx.tfc.WorldGen.Data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.List;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.LongHashMap;
 
+import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.WorldLayerManager;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class DataCache

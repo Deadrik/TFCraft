@@ -1,4 +1,4 @@
-package com.bioxx.tfc.WorldGen;
+package com.bioxx.tfc.WorldGen.MapGen;
 
 import java.util.Random;
 
@@ -11,6 +11,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.WorldGen.DataLayer;
 
 public class MapGenCavesTFC extends MapGenBaseTFC
 {

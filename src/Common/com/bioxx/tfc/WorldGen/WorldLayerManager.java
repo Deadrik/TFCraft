@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.IntCache;
 
+import com.bioxx.tfc.WorldGen.Data.DataCache;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT.GenEVTLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain.GenRainLayerTFC;
