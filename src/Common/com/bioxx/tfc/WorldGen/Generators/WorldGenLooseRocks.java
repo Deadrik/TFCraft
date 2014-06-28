@@ -14,9 +14,9 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.Terrain.BlockOre;
 import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Util.BlockMeta;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
+import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 
 import cpw.mods.fml.common.IWorldGenerator;
@@ -42,8 +42,9 @@ public class WorldGenLooseRocks implements IWorldGenerator
 				}
 				else
 				{
-					BlockMeta rockLayer = TFC_Climate.getRockLayer(world, i, j, k, 0);
-					te.storage[0] = new ItemStack(TFCItems.LooseRock, 1, TFC_Core.getItemMetaFromStone(rockLayer.block, rockLayer.meta));
+					DataLayer dl = TFC_Climate.getRockLayer(world, i, j, k, 0);
+					BlockMeta rockLayer = new BlockMeta(dl.block, dl.data2);
+					te.storage[0] = new ItemStack(TFCItems.LooseRock, 1, dl.data1);
 				}
 			}
 		}

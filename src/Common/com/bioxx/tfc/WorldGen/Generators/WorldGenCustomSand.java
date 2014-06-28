@@ -9,6 +9,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.WorldGen.DataLayer;
 
 public class WorldGenCustomSand extends WorldGenerator
 {
@@ -33,8 +34,8 @@ public class WorldGenCustomSand extends WorldGenerator
 		}
 		else
 		{
-			int meta = TFC_Climate.getRockLayer(world, x, y, z, 0).meta;
-			sandBlock = TFC_Core.getTypeForSand(meta);
+			DataLayer dl = TFC_Climate.getRockLayer(world, x, y, z, 0);
+			sandBlock = TFC_Core.getTypeForSand(dl.data1);
 			int var6 = par2Random.nextInt(this.radius - 2) + 2;
 			byte var7 = 2;
 
@@ -51,7 +52,7 @@ public class WorldGenCustomSand extends WorldGenerator
 							Block var13 = world.getBlock(var8, var12, var9);
 							boolean notCorrectSoil = !TFC_Core.isSoil(var13) && !TFC_Core.isSand(var13) ;
 							if (!notCorrectSoil)
-								world.setBlock(var8, var12, var9, sandBlock, meta, 0x2);
+								world.setBlock(var8, var12, var9, sandBlock, dl.data2, 0x2);
 						}
 					}
 				}

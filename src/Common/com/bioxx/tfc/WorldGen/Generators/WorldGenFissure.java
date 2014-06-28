@@ -13,6 +13,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Util.BlockMeta;
+import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.api.Enums.TFCDirection;
 import com.bioxx.tfc.api.Util.ByteCoord;
 import com.bioxx.tfc.api.Util.CollapseData;
@@ -109,7 +110,8 @@ public class WorldGenFissure implements IWorldGenerator
 			return;
 
 		ArrayList<ByteCoord> map = getCollapseMap(world, x,y-creviceDepth,z);
-		BlockMeta rockLayer = fillBlock != null ? TFC_Climate.getRockLayer(world, x, y, z, 2) : new BlockMeta(Blocks.air, -1);
+		DataLayer dl = TFC_Climate.getRockLayer(world, x, y, z, 2);
+		BlockMeta rockLayer = fillBlock != null ? new BlockMeta(dl.block, dl.data2) : new BlockMeta(Blocks.air, -1);
 		boolean makeTunnel = map.size() > 10;
 		if(rockLayer.block == null)
 			return;
@@ -142,7 +144,7 @@ public class WorldGenFissure implements IWorldGenerator
 	private void carve(World world, int x, int y, int z, Block block, int meta)
 	{
 		if(world.getBlock(x, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x, y, z)))
-			world.setBlockToAir(x, y, z);
+			world.setBlock(x, y, z, Blocks.air, 0, 2);
 		if(world.getBlock(x - 1, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x - 1, y, z)) && !TFC_Core.isGrass(world.getBlock(x - 1, y, z)))
 			world.setBlock(x - 1, y, z, block, meta, 2);
 		if(world.getBlock(x + 1, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x + 1, y, z)) && !TFC_Core.isGrass(world.getBlock(x + 1, y, z)))
@@ -215,8 +217,10 @@ public class WorldGenFissure implements IWorldGenerator
 		final float incrementChance = 5f;
 		final float incrementChanceDiag = 2.5f;
 
-		BlockMeta rockLayer = fillBlock != null && fillBlock.getMaterial() == Material.lava ? 
-				TFC_Climate.getRockLayer(world, i, j, k, 2) : TFC_Climate.getRockLayer(world, i, j, k, TFC_Core.getRockLayerFromHeight(world, i, j, k));
+		DataLayer dl = TFC_Climate.getRockLayer(world, i, j, k, TFC_Core.getRockLayerFromHeight(world, i, j, k));
+		DataLayer dl2 = TFC_Climate.getRockLayer(world, i, j, k, 2);
+		BlockMeta rockLayer = (fillBlock != null && fillBlock.getMaterial() == Material.lava) ? 
+				new BlockMeta(dl2.block, dl2.data2) : new BlockMeta(dl.block, dl.data2);
 
 				int worldX;
 				int worldY;

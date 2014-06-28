@@ -61,11 +61,7 @@ public class BlockClayGrass extends BlockGrass
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
-		if(!world.blockExists(x, y - 1, z))
-		{
-			int meta = world.getBlockMetadata(x, y, z);
-			world.setBlock(x, y, z, TFC_Core.getTypeForClay(meta), meta, 0x2);
-		}
+
 	}
 
 	@Override

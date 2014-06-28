@@ -5,8 +5,6 @@ import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class DataCacheBlockTFC
 {
-	/** An array of chunk rainfall values saved by this cache. */
-	public float[] rainfallValues = new float[256];
 	/** The array of data types stored in this DataCacheBlockTFC. */
 	public DataLayer[] data;
 	/** The x coordinate of the DataCacheBlockTFC. */
@@ -27,7 +25,6 @@ public class DataCacheBlockTFC
 		this.xPosition = par2;
 		this.zPosition = par3;
 		index = ind;
-		DataCache.getChunkManager(datacache).getRainfall(rainfallValues, par2 << 4, par3 << 4, 16, 16);
 		DataCache.getChunkManager(datacache).getDataLayerAt(datacache, data, indexLayers, par2 << 4, par3 << 4, 16, 16, false, index);
 	}
 
@@ -36,7 +33,6 @@ public class DataCacheBlockTFC
 		this.theDataCache = null;
 		this.xPosition = par2;
 		this.zPosition = par3;
-		DataCache.getChunkManager(datacache).getRainfall(this.rainfallValues, par2 << 4, par3 << 4, 16, 16);
 	}
 
 	/**

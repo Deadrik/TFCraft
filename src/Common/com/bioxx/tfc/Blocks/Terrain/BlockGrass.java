@@ -23,7 +23,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.Core.Util.BlockMeta;
+import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowTrees;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
@@ -259,16 +259,16 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 					}
 				}
 
-				BlockMeta rock1 = TFC_Climate.getRockLayer(world, i, j, k, 0);
+				DataLayer rock1 = TFC_Climate.getRockLayer(world, i, j, k, 0);
 				if(TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && !nearWater && rain < 500)
 				{
-					int meta = TFC_Core.getSoilMetaFromStone(rock1.block, rock1.meta);
-					world.setBlock(i, j, k, TFC_Core.getTypeForDryGrass(meta), meta, 2);
+					int meta = TFC_Core.getSoilMetaFromStone(rock1.block, rock1.data2);
+					world.setBlock(i, j, k, TFC_Core.getTypeForDryGrass(rock1.data1), meta, 2);
 				}
 				else if(TFC_Core.isGrass(id) && TFC_Core.isDryGrass(id) && (nearWater || rain>=500) && world.getBlock(i, j+1, k) != Blocks.snow)
 				{
-					int meta = TFC_Core.getSoilMetaFromStone(rock1.block, rock1.meta);
-					world.setBlock(i, j, k, TFC_Core.getTypeForGrass(meta), meta, 2);
+					int meta = TFC_Core.getSoilMetaFromStone(rock1.block, rock1.data2);
+					world.setBlock(i, j, k, TFC_Core.getTypeForGrass(rock1.data1), meta, 2);
 				}
 			}
 

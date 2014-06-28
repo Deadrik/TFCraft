@@ -220,7 +220,7 @@ public abstract class GenLayerTFC extends GenLayer
 
 	public static void validateIntArray(int[] array, int xSize, int zSize)
 	{
-		/*for(int z = 0; z < zSize; z++)
+		for(int z = 0; z < zSize; z++)
 		{
 			for(int x = 0; x < xSize; x++)
 			{
@@ -230,6 +230,6 @@ public abstract class GenLayerTFC extends GenLayer
 					return;
 				}
 			}
-		}*/
+		}
 	}
 }

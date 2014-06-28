@@ -6,7 +6,7 @@ import java.util.HashMap;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
-import com.bioxx.tfc.Core.Util.BlockMeta;
+import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.WorldLayerManager;
 import com.bioxx.tfc.api.Util.Helper;
@@ -491,7 +491,8 @@ public class TFC_Climate
 
 	public static float getRainfall(World world, int x, int y, int z)
 	{
-		return getManager(world).getRainfallLayerAt(x, z).floatdata1;
+		DataLayer dl = getManager(world).getRainfallLayerAt(x, z);
+		return dl != null ? dl.floatdata1 : DataLayer.Rain_500.floatdata1;
 	}
 
 	public static float getTerrainAdjustedRainfall(World world, int x, int y, int z)
@@ -555,9 +556,9 @@ public class TFC_Climate
 		return getManager(world).getTreeLayerAt(x, z, index).data1;
 	}
 
-	public static BlockMeta getRockLayer(World world,int x, int y, int z, int index)
+	public static DataLayer getRockLayer(World world,int x, int y, int z, int index)
 	{
-		return new BlockMeta(getManager(world).getRockLayerAt(x, z, index).block, getManager(world).getRockLayerAt(x, z, index).data2);
+		return getManager(world).getRockLayerAt(x, z, index);
 	}
 
 	public static int getMaxZPos()

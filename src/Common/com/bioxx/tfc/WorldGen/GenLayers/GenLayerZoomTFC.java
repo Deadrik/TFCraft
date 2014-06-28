@@ -1,7 +1,5 @@
 package com.bioxx.tfc.WorldGen.GenLayers;
 
-import java.util.Arrays;
-
 import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerZoomTFC extends GenLayerTFC
@@ -17,45 +15,44 @@ public class GenLayerZoomTFC extends GenLayerTFC
 	 * amounts, or biomeList[] indices based on the particular GenLayer subclass.
 	 */
 	@Override
-	public int[] getInts(int x, int z, int xSize, int zSize)
+	public int[] getInts(int xPos, int zPos, int xSize, int zSize)
 	{
-		int xCoord = x >> 1;
-		int zCoord = z >> 1;
+		int xCoord = xPos >> 1;
+		int zCoord = zPos >> 1;
 		int newXSize = (xSize >> 1) + 2;
 		int newZSize = (zSize >> 1) + 2;
 		int[] parentCache = this.parent.getInts(xCoord, zCoord, newXSize, newZSize);
 		int i2 = newXSize - 1 << 1;
 		int j2 = newZSize - 1 << 1;
 		int[] out = IntCache.getIntCache(i2 * j2);
-		Arrays.fill(out, 0);
 		int l2;
 
-		for (int k2 = 0; k2 < newZSize - 1; ++k2)
+		for (int z = 0; z < newZSize - 1; ++z)
 		{
-			l2 = (k2 << 1) * i2;
+			l2 = (z << 1) * i2;
 			int i3 = 0;
-			int j3 = parentCache[i3 + 0 + (k2 + 0) * newXSize];
+			int thisID = parentCache[i3 + 0 + (z + 0) * newXSize];
 
-			for (int k3 = parentCache[i3 + 0 + (k2 + 1) * newXSize]; i3 < newXSize - 1; ++i3)
+			for (int x = parentCache[i3 + 0 + (z + 1) * newXSize]; i3 < newXSize - 1; ++i3)
 			{
-				this.initChunkSeed(i3 + xCoord << 1, k2 + zCoord << 1);
-				int l3 = parentCache[i3 + 1 + (k2 + 0) * newXSize];
-				int i4 = parentCache[i3 + 1 + (k2 + 1) * newXSize];
-				out[l2] = j3;
-				out[l2++ + i2] = this.selectRandom(new int[] {j3, k3});
-				out[l2] = this.selectRandom(new int[] {j3, l3});
-				out[l2++ + i2] = this.selectModeOrRandom(j3, l3, k3, i4);
-				j3 = l3;
-				k3 = i4;
+				this.initChunkSeed(i3 + xCoord << 1, z + zCoord << 1);
+				int rightID = parentCache[i3 + 1 + (z + 0) * newXSize];
+				int upRightID = parentCache[i3 + 1 + (z + 1) * newXSize];
+				out[l2] = thisID;
+				out[l2++ + i2] = this.selectRandom(new int[] {thisID, x});
+				out[l2] = this.selectRandom(new int[] {thisID, rightID});
+				out[l2++ + i2] = this.selectModeOrRandom(thisID, rightID, x, upRightID);
+				thisID = rightID;
+				x = upRightID;
 			}
 		}
 
 		int[] outCache = IntCache.getIntCache(xSize * zSize);
 
-		for (l2 = 0; l2 < zSize; ++l2)
+		for (int zoom = 0; zoom < zSize; ++zoom)
 		{
-			int srcPos = (l2 + (z & 1)) * i2 + (x & 1);
-			System.arraycopy(out, srcPos, outCache, l2 * xSize, xSize);
+			int srcPos = (zoom + (zPos & 1)) * i2 + (xPos & 1);
+			System.arraycopy(out, srcPos, outCache, zoom * xSize, xSize);
 		}
 
 		return outCache;

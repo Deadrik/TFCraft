@@ -1,15 +1,14 @@
 package com.bioxx.tfc.WorldGen;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.WorldGen.Data.DataCache;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Drainage.GenDrainageLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT.GenEVTLayer;
+import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.PH.GenPHLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain.GenRainLayerTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Stability.GenStabilityLayer;
@@ -17,9 +16,6 @@ import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Tree.GenTreeLayer;
 
 public class WorldLayerManager 
 {	
-	/** A list of biomes that the player can spawn in. */
-	protected List biomesToSpawnIn;
-
 	//Rocks
 	protected GenLayerTFC[] rocksIndexLayer;
 	protected DataCache[] rockCache;
@@ -39,6 +35,14 @@ public class WorldLayerManager
 	//Stability
 	protected GenLayerTFC stabilityIndexLayer;
 	protected DataCache stabilityCache;
+
+	//Stability
+	protected GenLayerTFC phIndexLayer;
+	protected DataCache phCache;
+
+	//Stability
+	protected GenLayerTFC drainageIndexLayer;
+	protected DataCache drainageCache;
 
 	public long seed = 0;
 
@@ -74,14 +78,8 @@ public class WorldLayerManager
 		treeCache[1] = new DataCache(this, 1);
 		treeCache[2] = new DataCache(this, 2);
 		stabilityCache = new DataCache(this, 0);
-
-		this.biomesToSpawnIn = new ArrayList();
-		this.biomesToSpawnIn.add(TFCBiome.HighHills);
-		this.biomesToSpawnIn.add(TFCBiome.plains);
-		this.biomesToSpawnIn.add(TFCBiome.rollingHills);
-		this.biomesToSpawnIn.add(TFCBiome.swampland);
-		this.biomesToSpawnIn.add(TFCBiome.Mountains);
-		this.biomesToSpawnIn.add(TFCBiome.HighPlains);
+		phCache = new DataCache(this, 0);
+		drainageCache = new DataCache(this, 0);
 	}
 
 	public WorldLayerManager(World world)
@@ -116,6 +114,12 @@ public class WorldLayerManager
 
 		//Setup Stability
 		stabilityIndexLayer = GenStabilityLayer.initialize(Seed+9, worldtype);
+
+		//Setup Soil PH
+		phIndexLayer = GenPHLayer.initialize(Seed+10, worldtype);
+
+		//Setup Soil Drainage
+		drainageIndexLayer = GenDrainageLayer.initialize(Seed+11, worldtype);
 	}
 
 	public float[] getRainfall(float[] par1ArrayOfFloat, int par2, int par3, int par4, int par5)
@@ -150,6 +154,8 @@ public class WorldLayerManager
 		this.evtCache.cleanupCache();
 		this.rainfallCache.cleanupCache();
 		this.stabilityCache.cleanupCache();
+		this.phCache.cleanupCache();
+		this.drainageCache.cleanupCache();
 	}
 
 	public DataLayer getDataLayerAt(DataCache cache, GenLayerTFC indexLayers, int par1, int par2, int index)
@@ -222,9 +228,9 @@ public class WorldLayerManager
 		return this.getDataLayerAt(rockCache, layers, rocksIndexLayer, x, y, width, height, true, layer);
 	}
 
-	public DataLayer getTreeLayerAt(int par1, int par2, int index)
+	public DataLayer getTreeLayerAt(int x, int z, int index)
 	{
-		return this.treeCache[index].getDataLayerAt(treesIndexLayer[index], par1, par2);
+		return this.treeCache[index].getDataLayerAt(treesIndexLayer[index], x, z);
 	}
 
 	/**
@@ -236,9 +242,9 @@ public class WorldLayerManager
 		return this.getDataLayerAt(treeCache, layers, treesIndexLayer, x, y, width, height, true, 0);
 	}
 
-	public DataLayer getEVTLayerAt(int par1, int par2)
+	public DataLayer getEVTLayerAt(int x, int z)
 	{
-		return this.evtCache.getDataLayerAt(evtIndexLayer, par1, par2);
+		return this.evtCache.getDataLayerAt(evtIndexLayer, x, z);
 	}
 
 	/**
@@ -250,9 +256,9 @@ public class WorldLayerManager
 		return this.getDataLayerAt(evtCache, layers, evtIndexLayer, x, y, width, height, true, 0);
 	}
 
-	public DataLayer getRainfallLayerAt(int par1, int par2)
+	public DataLayer getRainfallLayerAt(int x, int z)
 	{
-		return this.rainfallCache.getDataLayerAt(rainfallIndexLayer, par1, par2);
+		return this.rainfallCache.getDataLayerAt(rainfallIndexLayer, x, z);
 	}
 
 	/**
@@ -263,13 +269,34 @@ public class WorldLayerManager
 		return this.getDataLayerAt(rainfallCache, layers, rainfallIndexLayer, x, y, width, height, true, 0);
 	}
 
-	public DataLayer getStabilityLayerAt(int par1, int par2)
+	public DataLayer getStabilityLayerAt(int x, int z)
 	{
-		return this.stabilityCache.getDataLayerAt(stabilityIndexLayer, par1, par2);
+		return this.stabilityCache.getDataLayerAt(stabilityIndexLayer, x, z);
 	}
 
 	public DataLayer[] loadStabilityLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height)
 	{
 		return this.getDataLayerAt(stabilityCache, layers, stabilityIndexLayer, x, y, width, height, true, 0);
+	}
+
+	public DataLayer getPHLayerAt(int x, int z)
+	{
+		DataLayer dl = this.phCache.getDataLayerAt(phIndexLayer, x, z);
+		return dl != null ? dl : DataLayer.PH_Neutral;
+	}
+
+	public DataLayer[] loadPHLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height)
+	{
+		return this.getDataLayerAt(phCache, layers, phIndexLayer, x, y, width, height, true, 0);
+	}
+
+	public DataLayer getDrainageLayerAt(int x, int z)
+	{
+		return this.drainageCache.getDataLayerAt(drainageIndexLayer, x, z);
+	}
+
+	public DataLayer[] loadDrainageLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height)
+	{
+		return this.getDataLayerAt(drainageCache, layers, drainageIndexLayer, x, y, width, height, true, 0);
 	}
 }

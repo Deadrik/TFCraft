@@ -78,6 +78,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	private DataLayer[] evtLayer;
 	private DataLayer[] rainfallLayer;
 	private DataLayer[] stabilityLayer;
+	private DataLayer[] drainageLayer;
+
 
 	private Block[] idsTop;
 	private Block[] idsBig;
@@ -152,7 +154,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		evtLayer = TFC_Climate.getManager(worldObj).loadEVTLayerGeneratorData(evtLayer, chunkX * 16, chunkZ * 16, 16, 16);
 		rainfallLayer = TFC_Climate.getManager(worldObj).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
 		stabilityLayer = TFC_Climate.getManager(worldObj).loadStabilityLayerGeneratorData(stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
-
+		drainageLayer = TFC_Climate.getManager(worldObj).loadDrainageLayerGeneratorData(stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
 		heightMap = new int[256];
 
 		replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
@@ -521,7 +523,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	{
 		int var5 = 16;
 		double var6 = 0.03125D;
-		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
+		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, var6 * 4.0D, var6 * 1.0D, var6 * 4.0D);
 
 		for (int xCoord = 0; xCoord < 16; ++xCoord)
 		{
@@ -535,13 +537,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				DataLayer rock3 = rockLayer3[arrayIndexDL] == null ? DataLayer.Granite : rockLayer3[arrayIndexDL];
 				DataLayer evt = evtLayer[arrayIndexDL] == null ? DataLayer.EVT_0_125 : evtLayer[arrayIndexDL];
 				float rain = rainfallLayer[arrayIndexDL] == null ? DataLayer.Rain_125.floatdata1 : rainfallLayer[arrayIndexDL].floatdata1;
-
-				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 6.0D + rand.nextDouble() * 0.25D);
+				DataLayer drainage = drainageLayer[arrayIndexDL] == null ? DataLayer.DrainageNormal : drainageLayer[arrayIndexDL];
+				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 6.0D);
 				int var13 = -1;
 
-				Block surfaceBlock = TFC_Core.getTypeForGrassWithRain(TFC_Core.getItemMetaFromStone(rock1.block, rock1.data2), rain);
+				Block surfaceBlock = TFC_Core.getTypeForGrassWithRain(rock1.data1, rain);
 				Block subSurfaceBlock = TFC_Core.getTypeForDirtFromGrass(surfaceBlock);
-				byte soilMeta = (byte) TFC_Core.getSoilMetaFromStone(rock1.block, rock1.data2);
+				byte soilMeta = (byte) rock1.data2;
 				float _temp = TFC_Climate.getBioTemperature(worldObj, chunkX * 16 + xCoord, chunkZ * 16 + zCoord);
 				int h = 0;
 				for (int height = 127; height >= 0; --height)
@@ -568,20 +570,21 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						//First we check to see if its a cold desert
 						if(rain < 125 && temp < 1.5f)
 						{
-							surfaceBlock = TFC_Core.getTypeForSand(soilMeta);
-							subSurfaceBlock = TFC_Core.getTypeForSand(soilMeta);
+							surfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
+							subSurfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
 						}
 						//Next we check for all other warm deserts
 						else if(rain < 125 && biome.heightVariation < 0.5f && temp > 20f)
 						{
-							surfaceBlock = TFC_Core.getTypeForSand(soilMeta);
-							subSurfaceBlock = TFC_Core.getTypeForSand(soilMeta);
+							surfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
+							subSurfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
 						}
 
 						if (var13 == -1)
 						{
 							//The following makes dirt behave nicer and more smoothly, instead of forming sharp cliffs.
-							int arrayIndexx = xCoord > 0? (xCoord - 1) + (zCoord * 16):-1;
+							//Removed because I don't think that this was even working properly anymore, unless it was... O.O -B
+							/*int arrayIndexx = xCoord > 0? (xCoord - 1) + (zCoord * 16):-1;
 							int arrayIndexX = xCoord < 15? (xCoord + 1) + (zCoord * 16):-1;
 							int arrayIndexz = zCoord > 0? xCoord + ((zCoord-1) * 16):-1;
 							int arrayIndexZ = zCoord < 15? xCoord + ((zCoord+1) * 16):-1;
@@ -620,9 +623,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 									indexBig = ((arrayIndex) * 256 + height + 128);
 									index = ((arrayIndex) * 128 + height);
 								}
-							}
-							var13 = (int)(var12 * (1d-Math.max(Math.min(((height - 20) / 80d), 1), 0)));
-							for(int c = 1; c < 4; c++)
+							}*/
+							var13 = (int)(var12 * (1d-Math.max(Math.min(((height - 16) / 80d), 1), 0)));
+
+							//Set soil below water
+							for(int c = 1; c < 3; c++)
 							{
 								if(indexBig + c < idsBig.length && (
 										(idsBig[indexBig + c] != surfaceBlock) &&
@@ -641,32 +646,46 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 								}
 							}
 
+							//Determine the soil depth based on world height
+							int dirtH = Math.max(8-((height + 96 - 145) / 16), 0);
+
 							if(var13 > 0)
 							{
-								if (height >= var5 - 1 && index+1 < idsTop.length && idsTop[index + 1] != TFCBlocks.SaltWater)
+								if (height >= var5 - 1 && index+1 < idsTop.length && idsTop[index + 1] != TFCBlocks.SaltWater && dirtH > 0)
 								{
 									idsBig[indexBig] = surfaceBlock;
 									metaBig[indexBig] = soilMeta;
-								}
-								else
-								{
-									idsBig[indexBig] = subSurfaceBlock;
-									metaBig[indexBig] = soilMeta;
+
+									for(int c = 1; c < dirtH && !TFC_Core.isMountainBiome(biome.biomeID); c++)
+									{
+										height--;
+										indexBig = ((arrayIndex) * 256 + height + 128);
+										index = ((arrayIndex) * 128 + height);
+
+										idsBig[indexBig] = subSurfaceBlock;
+										metaBig[indexBig] = soilMeta;
+
+										if(c > 1+(5-drainage.data1))
+										{
+											idsBig[indexBig] = TFC_Core.getTypeForGravel(rock1.data1);
+											metaBig[indexBig] = soilMeta;
+										}
+									}
 								}
 							}
 						}
-						else if (var13 > 1)
+						/*else if (var13 > 1)
 						{
 							--var13;
 							idsBig[indexBig] = subSurfaceBlock;
 							metaBig[indexBig] = soilMeta;
-						}
+						}*/
 
 						if(biome == TFCBiome.beach || biome == TFCBiome.ocean || biome == TFCBiome.DeepOcean)
 						{
 							if(((height > var5 - 2 && height <= var5 + 2) || (height < var5 && idsTop[index + 2] == TFCBlocks.SaltWater)))//If its an ocean give it a sandy bottom
 							{
-								idsBig[indexBig] = TFC_Core.getTypeForSand(soilMeta);
+								idsBig[indexBig] = TFC_Core.getTypeForSand(rock1.data1);
 								metaBig[indexBig] = soilMeta;
 							}
 						}
@@ -674,7 +693,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						{
 							if(((height > var5 - 2 && height <= var5 + 2) || (height < var5 && idsTop[index + 2] == TFCBlocks.SaltWater)))
 							{
-								idsBig[indexBig] = TFC_Core.getTypeForGravel(soilMeta);
+								idsBig[indexBig] = TFC_Core.getTypeForGravel(rock1.data1);
 								metaBig[indexBig] = soilMeta;
 							}
 						}
@@ -682,9 +701,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						{
 							if(((height > var5 - 2 && height < var5 && idsTop[index + 1] == TFCBlocks.SaltWater)) || (height < var5 && idsTop[index + 1] == TFCBlocks.SaltWater))
 							{
-								if(idsBig[indexBig] != TFC_Core.getTypeForSand(soilMeta) && rand.nextInt(5) != 0)
+								if(idsBig[indexBig] != TFC_Core.getTypeForSand(rock1.data1) && rand.nextInt(5) != 0)
 								{
-									idsBig[indexBig] = TFC_Core.getTypeForGravel(soilMeta);
+									idsBig[indexBig] = TFC_Core.getTypeForGravel(rock1.data1);
 									metaBig[indexBig] = soilMeta;
 								}
 							}
@@ -731,7 +750,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					{
 						idsBig[indexBig] = Blocks.bedrock;
 					}
-					else
+					else if(idsBig[indexBig] == null)
 					{
 						convertStone(height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);
 						if (var13 == -1)

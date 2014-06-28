@@ -187,7 +187,12 @@ public class RenderOverlayHandler
 					evt.floatdata1}));
 
 			event.left.add("Health: " + player.getHealth());
-			event.left.add("Stability: " + TFC_Climate.getStability(mc.theWorld, xCoord, zCoord));
+			event.left.add("Stability: " + TFC_Climate.getStability(mc.theWorld, xCoord, zCoord) + 
+					", Drainage: " +TFC_Climate.getManager(mc.theWorld).getDrainageLayerAt(xCoord, zCoord).name +
+					", pH: " +TFC_Climate.getManager(mc.theWorld).getPHLayerAt(xCoord, zCoord).name);
+			event.left.add("Rock Layers: " + TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 0).name+", "+
+					TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 1).name+", "+
+					TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 2).name);
 		}
 	}
 
