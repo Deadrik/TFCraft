@@ -185,7 +185,7 @@ public class AnvilRecipe
 	 */
 	public ItemStack getCraftingResult(ItemStack input)
 	{
-		ItemStack is = result;
+		ItemStack is = result.copy();
 		if(this.inheritsDamage)
 			is.setItemDamage(input.getItemDamage());
 		return is;
