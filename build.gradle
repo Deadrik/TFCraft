@@ -56,9 +56,19 @@ sourceSets {
      }
    }
  }
+ //Creates a compiled de-obfuscated jar
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    appendix = 'deobf'
+}
+ //creates a jar containing only the src
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    appendix = 'src'
+}
 
 processResources {
-//First we jsut copy in the mcmod.info file
+//First we just copy in the mcmod.info file
 from(sourceSets.main.resources.srcDirs) {
         include '**/*.info'
         include '**/*.prop'
