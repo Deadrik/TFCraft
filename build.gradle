@@ -67,6 +67,8 @@ task sourceJar(type: Jar) {
     appendix = 'src'
 }
 
+tasks.build.dependsOn('sourceJar', 'deobfJar')
+
 processResources {
 //First we just copy in the mcmod.info file
 from(sourceSets.main.resources.srcDirs) {
