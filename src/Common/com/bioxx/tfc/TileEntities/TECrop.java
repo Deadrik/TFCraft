@@ -73,8 +73,8 @@ public class TECrop extends NetworkTileEntity
 				//Attempt to start an infestation
 				if(cd != null)
 				{
-
-					if(worldObj.rand.nextInt(2000) == 0)
+					//Works but removed until this feature can be more clearly defined
+					/*if(worldObj.rand.nextInt(2000) == 0)
 					{
 						cd.infest();
 					}
@@ -86,7 +86,7 @@ public class TECrop extends NetworkTileEntity
 								tef.infest();
 							worldObj.markBlockForUpdate(xCoord, yCoord-1, zCoord);
 						}
-					}
+					}*/
 				}
 				//End Infestation Code
 
