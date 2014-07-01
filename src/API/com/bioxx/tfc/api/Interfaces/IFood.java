@@ -30,5 +30,5 @@ public interface IFood
 	public int getTasteSour(ItemStack is);
 	public int getTasteSalty(ItemStack is);
 	public int getTasteBitter(ItemStack is);
-	public int getTasteUmami(ItemStack is);
+	public int getTasteSavory(ItemStack is);
 }

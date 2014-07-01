@@ -2,11 +2,15 @@ package com.bioxx.tfc.Food;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TileEntities.TECrop;
-import com.bioxx.tfc.api.Util.Helper;
-
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TileEntities.TECrop;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class CropIndex
 {
@@ -93,7 +97,7 @@ public class CropIndex
 		chanceForOutput2 = chance;
 		return this;
 	}  
-	public ItemStack getOutput1( TECrop crop)
+	public ItemStack getOutput1(TECrop crop)
 	{
 		if(Output1 != null)
 		{
@@ -102,6 +106,7 @@ public class CropIndex
 			if(R.nextInt(100) < chanceForOutput1)
 			{
 				ItemFoodTFC.createTag(is, getWeight(Output1Avg, R));
+				addFlavorProfile(crop, is);
 				return is;
 			}
 		}
@@ -116,10 +121,43 @@ public class CropIndex
 			if(R.nextInt(100) < chanceForOutput2)
 			{
 				ItemFoodTFC.createTag(is, getWeight(Output2Avg, R));
+				addFlavorProfile(crop, is);
 				return is;
 			}
 		}
 		return null;
+	}
+
+	private void addFlavorProfile(TECrop te, ItemStack outFood)
+	{
+		Block farmBlock = te.getWorldObj().getBlock(te.xCoord, te.yCoord-1, te.zCoord);
+		Block underFarmBlock = te.getWorldObj().getBlock(te.xCoord, te.yCoord-2, te.zCoord);
+		if(!TFC_Core.isSoil(farmBlock))
+		{
+			int soilType1 = (farmBlock == TFCBlocks.tilledSoil ? te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-1, te.zCoord) : 
+				te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-1, te.zCoord)+16);
+			int soilType2 = (farmBlock == TFCBlocks.Dirt ? te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-2, te.zCoord)*2 : 
+				farmBlock == TFCBlocks.Dirt2 ? (te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-2, te.zCoord)+16)*2 : 0);
+
+			int ph = TFC_Climate.getManager(te.getWorldObj()).getPHLayerAt(te.xCoord, te.zCoord).data1*100;
+			int drainage = 0;
+
+			for(int y = 2; y < 8; y++)
+			{
+				if(TFC_Core.isGravel(te.getWorldObj().getBlock(te.xCoord, te.yCoord-y, te.zCoord)))
+				{
+					drainage++;
+				}
+			}
+			drainage *= 1000;
+
+			Random R = new Random(soilType1+soilType2+ph+drainage);
+			outFood.getTagCompound().setInteger("tasteSweetMod", R.nextInt(16)-8);
+			outFood.getTagCompound().setInteger("tasteSourMod", R.nextInt(16)-8);
+			outFood.getTagCompound().setInteger("tasteSaltyMod", R.nextInt(16)-8);
+			outFood.getTagCompound().setInteger("tasteBitterMod", R.nextInt(16)-8);
+			outFood.getTagCompound().setInteger("tasteUmamiMod", R.nextInt(16)-8);
+		}
 	}
 
 	public static float getWeight(float average, Random R)

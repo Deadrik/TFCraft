@@ -142,7 +142,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 				tasteSour += ((IFood)storage[i].getItem()).getTasteSour(storage[i]) * weightMult;
 				tasteSalty += ((IFood)storage[i].getItem()).getTasteSalty(storage[i]) * weightMult;
 				tasteBitter += ((IFood)storage[i].getItem()).getTasteBitter(storage[i]) * weightMult;
-				tasteUmami += ((IFood)storage[i].getItem()).getTasteUmami(storage[i]) * weightMult;
+				tasteUmami += ((IFood)storage[i].getItem()).getTasteSavory(storage[i]) * weightMult;
 			}
 		}
 		nbt.setInteger("tasteSweet", tasteSweet);

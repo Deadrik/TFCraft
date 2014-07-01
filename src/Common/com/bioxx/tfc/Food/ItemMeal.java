@@ -118,7 +118,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		int sour = getTasteSour(is);
 		int salty = getTasteSalty(is);
 		int bitter = getTasteBitter(is);
-		int savory = getTasteUmami(is);
+		int savory = getTasteSavory(is);
 		SkillStats ss = TFC_Core.getSkillStats(player);
 		SkillRank cookSkill = ss.getSkillRank(Global.SKILL_COOKING);
 		String sSweet = StatCollector.translateToLocal("gui.taste.sweet")+": ";
@@ -419,7 +419,7 @@ public class ItemMeal extends ItemTerra implements IFood
 	}
 
 	@Override
-	public int getTasteUmami(ItemStack is) {
+	public int getTasteSavory(ItemStack is) {
 		if(is != null && is.getTagCompound().hasKey("tasteUmami"))
 			return is.getTagCompound().getInteger("tasteUmami");
 		return 0;

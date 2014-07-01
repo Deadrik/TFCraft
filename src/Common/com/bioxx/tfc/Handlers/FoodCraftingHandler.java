@@ -26,7 +26,7 @@ public class FoodCraftingHandler
 		ItemStack craftResult = e.crafting;
 		int isDmg = e.crafting.getItemDamage();
 		IInventory iinventory = e.craftMatrix;
-		
+
 		if(iinventory != null)
 		{
 			if((craftResult.getItem() == TFCItems.WheatGrain && gridHasItem(iinventory, TFCItems.WheatWhole)) ||
@@ -60,6 +60,11 @@ public class FoodCraftingHandler
 			{
 				float finalWeight = 0;
 				float finalDecay = 0;
+				int sweetMod = -1;
+				int sourMod = -1;
+				int saltyMod = -1;
+				int bitterMod = -1;
+				int umamiMod = -1;
 				boolean salted = true;
 				int foodSlot = 0; //This is used when cutting food to track where the food originally was since the merge code may remove the stack
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
@@ -69,6 +74,32 @@ public class FoodCraftingHandler
 					if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
 					{
 						foodSlot = i;
+
+						if(sweetMod == -1)
+							sweetMod = ((ItemFoodTFC)iinventory.getStackInSlot(i).getItem()).getTasteSweetMod(iinventory.getStackInSlot(i));
+						else if(sweetMod != ((ItemFoodTFC)iinventory.getStackInSlot(i).getItem()).getTasteSweetMod(iinventory.getStackInSlot(i)))
+							sweetMod = 0;
+
+						if(sourMod == -1)
+							sourMod = ((ItemFoodTFC)iinventory.getStackInSlot(i).getItem()).getTasteSourMod(iinventory.getStackInSlot(i));
+						else if(sourMod != ((ItemFoodTFC)iinventory.getStackInSlot(i).getItem()).getTasteSourMod(iinventory.getStackInSlot(i)))
+							sourMod = 0;
+
+						if(saltyMod == -1)
+							saltyMod = ((ItemFoodTFC)iinventory.getStackInSlot(i).getItem()).getTasteSaltyMod(iinventory.getStackInSlot(i));
+						else if(saltyMod != ((ItemFoodTFC)iinventory.getStackInSlot(i).getItem()).getTasteSaltyMod(iinventory.getStackInSlot(i)))
+							saltyMod = 0;
+
+						if(bitterMod == -1)
+							bitterMod = ((ItemFoodTFC)iinventory.getStackInSlot(i).getItem()).getTasteBitterMod(iinventory.getStackInSlot(i));
+						else if(bitterMod != ((ItemFoodTFC)iinventory.getStackInSlot(i).getItem()).getTasteBitterMod(iinventory.getStackInSlot(i)))
+							bitterMod = 0;
+
+						if(umamiMod == -1)
+							umamiMod = ((ItemFoodTFC)iinventory.getStackInSlot(i).getItem()).getTasteSavoryMod(iinventory.getStackInSlot(i));
+						else if(umamiMod != ((ItemFoodTFC)iinventory.getStackInSlot(i).getItem()).getTasteSavoryMod(iinventory.getStackInSlot(i)))
+							umamiMod = 0;
+
 						float myWeight = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight");
 						final float myOldWeight = myWeight;
 						float myDecayPercent = iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay") / myOldWeight;
@@ -123,6 +154,12 @@ public class FoodCraftingHandler
 					}
 				}
 				craftResult = ItemFoodTFC.createTag(craftResult, Helper.roundNumber(finalWeight,10), Helper.roundNumber(finalDecay,100));
+				if(sweetMod > 0) craftResult.getTagCompound().setInteger("tasteSweetMod", sweetMod);
+				if(sourMod > 0) craftResult.getTagCompound().setInteger("tasteSourMod", sourMod);
+				if(saltyMod > 0) craftResult.getTagCompound().setInteger("tasteSAltyMod", saltyMod);
+				if(bitterMod > 0) craftResult.getTagCompound().setInteger("tasteBitterMod", bitterMod);
+				if(umamiMod > 0) craftResult.getTagCompound().setInteger("tasteUmamiMod", umamiMod);				
+
 				if(craftResult.stackSize == 0)
 					craftResult.stackSize = 1;
 				if(salted)

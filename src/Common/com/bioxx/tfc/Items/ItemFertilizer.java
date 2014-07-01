@@ -1,12 +1,12 @@
 package com.bioxx.tfc.Items;
 
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TECrop;
-import com.bioxx.tfc.TileEntities.TEFarmland;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TileEntities.TECrop;
+import com.bioxx.tfc.TileEntities.TEFarmland;
 
 public class ItemFertilizer extends ItemTerra
 {
@@ -25,9 +25,7 @@ public class ItemFertilizer extends ItemTerra
 				TEFarmland tef = (TEFarmland)world.getTileEntity(x, y, z);
 				if (tef.nutrients[3] != tef.getSoilMax())
 				{
-					tef.nutrients[3] = tef.getSoilMax();
-					--itemstack.stackSize;
-					return true;
+					return tef.fertilize(itemstack, false);
 				}
 			}
 			else if(world.getTileEntity(x, y, z) instanceof TECrop && TFC_Core.isFarmland(world.getBlock(x, y - 1, z)))
@@ -35,9 +33,7 @@ public class ItemFertilizer extends ItemTerra
 				TEFarmland tef = (TEFarmland)world.getTileEntity(x, y - 1, z);
 				if (tef.nutrients[3] != tef.getSoilMax())
 				{
-					tef.nutrients[3] = tef.getSoilMax();
-					--itemstack.stackSize;
-					return true;
+					return tef.fertilize(itemstack, false);
 				}
 			}
 		}

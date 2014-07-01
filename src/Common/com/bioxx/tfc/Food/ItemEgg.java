@@ -39,7 +39,7 @@ public class ItemEgg extends ItemFoodTFC implements IFood
 			if(is.getTagCompound().hasKey("Fertilized"))
 				arraylist.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("gui.fertilized"));
 			else
-				ItemFoodTFC.addFoodInformation(is, player, arraylist);
+				addFoodInformation(is, player, arraylist);
 		}
 	}
 

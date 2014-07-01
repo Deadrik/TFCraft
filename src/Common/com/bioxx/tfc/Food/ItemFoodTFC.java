@@ -127,7 +127,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			arraylist.add(StatCollector.translateToLocal("gui.badnbt"));
 	}
 
-	public static void addFoodInformation(ItemStack is, EntityPlayer player, List arraylist)
+	public void addFoodInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
 		NBTTagCompound tag = is.getTagCompound();
 		if(tag.hasKey("isSalted"))
@@ -142,6 +142,12 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 				arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.food.decay") + " " + Helper.roundNumber(decay / ounces * 100, 10) + "%");
 			if(TFCOptions.enableDebugMode)
 				arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.food.decay") + ": " + decay);
+
+			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.taste.sweet") + ": " + getTasteSweet(is));
+			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.taste.sour") + ": " + getTasteSour(is));
+			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.taste.salty") + ": " + getTasteSalty(is));
+			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.taste.bitter") + ": " + getTasteBitter(is));
+			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.taste.savory") + ": " + getTasteSavory(is));
 		}
 	}
 
@@ -368,36 +374,91 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	@Override
 	public int getTasteSweet(ItemStack is) {
+		int base = tasteSweet;
+		int mod = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteSweet"))
-			return is.getTagCompound().getInteger("tasteSweet");
-		return tasteSweet;
+			base = is.getTagCompound().getInteger("tasteSweet");
+		if(is != null && is.getTagCompound().hasKey("tasteSweetMod"))
+			mod = is.getTagCompound().getInteger("tasteSweetMod");
+		return base + mod;
+	}
+
+	public int getTasteSweetMod(ItemStack is) {
+		int mod = 0;
+		if(is != null && is.getTagCompound().hasKey("tasteSweetMod"))
+			mod = is.getTagCompound().getInteger("tasteSweetMod");
+		return mod;
 	}
 
 	@Override
 	public int getTasteSour(ItemStack is) {
+		int base = tasteSour;
+		int mod = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteSour"))
-			return is.getTagCompound().getInteger("tasteSour");
-		return tasteSour;
+			base = is.getTagCompound().getInteger("tasteSour");
+		if(is != null && is.getTagCompound().hasKey("tasteSourMod"))
+			mod = is.getTagCompound().getInteger("tasteSourMod");
+		return base + mod;
+	}
+
+	public int getTasteSourMod(ItemStack is) {
+		int mod = 0;
+		if(is != null && is.getTagCompound().hasKey("tasteSourMod"))
+			mod = is.getTagCompound().getInteger("tasteSourMod");
+		return mod;
 	}
 
 	@Override
 	public int getTasteSalty(ItemStack is) {
+		int base = tasteSalty;
+		int mod = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteSalty"))
-			return is.getTagCompound().getInteger("tasteSalty");
-		return tasteSalty;
+			base = is.getTagCompound().getInteger("tasteSalty");
+		if(is != null && is.getTagCompound().hasKey("tasteSaltyMod"))
+			mod = is.getTagCompound().getInteger("tasteSaltyMod");
+		return base + mod;
+	}
+
+	public int getTasteSaltyMod(ItemStack is) {
+		int mod = 0;
+		if(is != null && is.getTagCompound().hasKey("tasteSaltyMod"))
+			mod = is.getTagCompound().getInteger("tasteSaltyMod");
+		return mod;
 	}
 
 	@Override
 	public int getTasteBitter(ItemStack is) {
+		int base = tasteBitter;
+		int mod = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteBitter"))
-			return is.getTagCompound().getInteger("tasteBitter");
-		return tasteBitter;
+			base = is.getTagCompound().getInteger("tasteBitter");
+		if(is != null && is.getTagCompound().hasKey("tasteBitterMod"))
+			mod = is.getTagCompound().getInteger("tasteBitterMod");
+		return base + mod;
+	}
+
+	public int getTasteBitterMod(ItemStack is) {
+		int mod = 0;
+		if(is != null && is.getTagCompound().hasKey("tasteBitterMod"))
+			mod = is.getTagCompound().getInteger("tasteBitterMod");
+		return mod;
 	}
 
 	@Override
-	public int getTasteUmami(ItemStack is) {
+	public int getTasteSavory(ItemStack is) {
+		int base = tasteUmami;
+		int mod = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteUmami"))
-			return is.getTagCompound().getInteger("tasteUmami");
-		return tasteUmami;
+			base = is.getTagCompound().getInteger("tasteUmami");
+		if(is != null && is.getTagCompound().hasKey("tasteUmamiMod"))
+			mod = is.getTagCompound().getInteger("tasteUmamiMod");
+		return base + mod;
+	}
+
+	public int getTasteSavoryMod(ItemStack is) {
+		int mod = 0;
+		if(is != null && is.getTagCompound().hasKey("tasteUmamiMod"))
+			mod = is.getTagCompound().getInteger("tasteUmamiMod");
+		return mod;
 	}
 }

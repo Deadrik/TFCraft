@@ -241,7 +241,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	}
 
 	@Override
-	public int getTasteUmami(ItemStack is) {
+	public int getTasteSavory(ItemStack is) {
 		return 10;
 	}
 }

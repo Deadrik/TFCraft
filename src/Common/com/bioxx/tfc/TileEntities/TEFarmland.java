@@ -1,5 +1,6 @@
 package com.bioxx.tfc.TileEntities;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -147,6 +148,13 @@ public class TEFarmland extends NetworkTileEntity
 	{
 		float timeMultiplier = 360f / TFC_Time.daysInYear;
 		nutrients[type] -= (100 * multiplier) * timeMultiplier;
+	}
+
+	public boolean fertilize(ItemStack is, boolean isOrganic)
+	{
+		nutrients[3] = getSoilMax();
+		--is.stackSize;
+		return true;
 	}
 
 	/**
