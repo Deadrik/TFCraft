@@ -18,6 +18,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
@@ -143,12 +144,71 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 			if(TFCOptions.enableDebugMode)
 				arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.food.decay") + ": " + decay);
 
-			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.taste.sweet") + ": " + getTasteSweet(is));
-			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.taste.sour") + ": " + getTasteSour(is));
-			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.taste.salty") + ": " + getTasteSalty(is));
-			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.taste.bitter") + ": " + getTasteBitter(is));
-			arraylist.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("gui.taste.savory") + ": " + getTasteSavory(is));
+			int sweet = getTasteSweet(is);
+			int sour = getTasteSour(is);
+			int salty = getTasteSalty(is);
+			int bitter = getTasteBitter(is);
+			int savory = getTasteSavory(is);
+
+			if(TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_COOKING) == SkillRank.Novice)
+			{
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.sweet") + ": " + (sweet > 50 ? translate("gui.taste.novice.sweet1") : translate("gui.taste.novice.sweet0")));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.sour") + ": " + (sour > 50 ? translate("gui.taste.novice.sour1") : translate("gui.taste.novice.sour0")));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.salty") + ": " + (salty > 50 ? translate("gui.taste.novice.salty1") : translate("gui.taste.novice.salty0")));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.bitter") + ": " + (bitter > 50 ? translate("gui.taste.novice.bitter1") : translate("gui.taste.novice.bitter0")));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.savory") + ": " + (savory > 50 ? translate("gui.taste.novice.savory1") : translate("gui.taste.novice.savory0")));
+			}
+			else if(TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_COOKING) == SkillRank.Adept)
+			{
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.sweet") + ": "+createAdeptString(sweet, "sweet"));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.sour") + ": "+createAdeptString(sour, "sour"));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.salty") + ": "+createAdeptString(salty, "salty"));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.bitter") + ": "+createAdeptString(bitter, "bitter"));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.savory") + ": "+createAdeptString(savory, "savory"));
+			}
+			else if(TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_COOKING) == SkillRank.Expert)
+			{
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.sweet") + ": "+createExpertString(sweet));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.sour") + ": "+createExpertString(sour));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.salty") + ": "+createExpertString(salty));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.bitter") + ": "+createExpertString(bitter));
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.savory") + ": "+createExpertString(savory));
+			}
+			else if(TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_COOKING) == SkillRank.Master)
+			{
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.sweet") + ": " + sweet);
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.sour") + ": " + sour);
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.salty") + ": " + salty);
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.bitter") + ": " + bitter);
+				arraylist.add(EnumChatFormatting.DARK_GRAY + translate("gui.taste.savory") + ": " + savory);
+			}
 		}
+	}
+
+	private String createExpertString(int val)
+	{
+		if(val < 20) return "0-20";
+		else if(val < 40) return "21-40";
+		else if(val < 60) return "41-60";
+		else if(val < 80) return "61-80";
+		else if(val < 100) return "81-100";
+		else return "100+";
+	}
+
+	private String createAdeptString(int val, String name)
+	{
+		if(val < 20) return translate("gui.taste.adept."+name+"0");
+		else if(val < 40) return translate("gui.taste.adept."+name+"1");
+		else if(val < 60) return translate("gui.taste.adept."+name+"2");
+		else if(val < 80) return translate("gui.taste.adept."+name+"3");
+		else if(val < 100) return translate("gui.taste.adept."+name+"4");
+		else return translate("gui.taste.adept."+name+"5");
+	}
+
+	//For ease of use
+	private static String translate(String s)
+	{
+		return StatCollector.translateToLocal(s);
 	}
 
 	public static String getFoodGroupName(EnumFoodGroup fg)
