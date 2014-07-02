@@ -5,11 +5,6 @@ import net.minecraftforge.common.config.Property;
 
 public class TFCOptions
 {
-	public static boolean enableVanillaDiamondRecipe;
-	public static boolean enableVanillaIronRecipe;
-	public static boolean enableVanillaGoldRecipe;
-	public static boolean enableVanillaFurnaceRecipes;
-	public static boolean enableVanillaRecipes;
 	public static boolean enableBetterGrass;
 	public static boolean enableInnerGrassFix;
 	public static boolean enableDebugMode;

@@ -19,7 +19,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.TileEntities.TEBarrel;
-import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
@@ -69,6 +69,8 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Arrow, 8), "itemRock", "stickWood",
 				new ItemStack(Items.feather,1,32767)));
+
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Coal, 9), new Object[] { new ItemStack(Blocks.coal_block) });
 
 		//stone javelins
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.IgInStoneJavelin, 1, 0), new Object[] { 
@@ -983,71 +985,379 @@ public class Recipes
 		RemoveRecipe(new ItemStack(Items.fishing_rod));
 		RemoveRecipe(new ItemStack(Blocks.wooden_button));
 		RemoveRecipe(new ItemStack(Items.flint_and_steel));
+		RemoveRecipe(new ItemStack(Items.coal, 9));
 
-		if(TFCOptions.enableVanillaDiamondRecipe == true)
+		//Recipe Configuration
+		if (TFCCrafting.anvilRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.anvil));
+
+		if (TFCCrafting.arrowsRecipe == false)
+			RemoveRecipe(new ItemStack(Items.arrow, 4));
+
+		if (TFCCrafting.bedRecipe == false)
+			RemoveRecipe(new ItemStack(Items.bed));
+
+		if (TFCCrafting.bonemealRecipe == false)
+			RemoveRecipe(new ItemStack(Items.dye, 3, 15));
+
+		if (TFCCrafting.bowlRecipe == false)
+			RemoveRecipe(new ItemStack(Items.bowl, 4));
+
+		if (TFCCrafting.brewingRecipe == false)
+			RemoveRecipe(new ItemStack(Items.brewing_stand));
+
+		if (TFCCrafting.bucketRecipe == false)
+			RemoveRecipe(new ItemStack(Items.bucket));
+
+		if (TFCCrafting.cauldronRecipe == false)
+			RemoveRecipe(new ItemStack(Items.cauldron));
+
+		if (TFCCrafting.chestRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.chest));
+
+		if (TFCCrafting.clockRecipe == false)
+			RemoveRecipe(new ItemStack(Items.clock));
+
+		if (TFCCrafting.compassRecipe == false)
+			RemoveRecipe(new ItemStack(Items.compass));
+
+		if (TFCCrafting.dandelionYellowRecipe == false)
 		{
-			GameRegistry.addRecipe(new ItemStack(Items.diamond, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GemDiamond,1,2)});
-			GameRegistry.addRecipe(new ItemStack(Items.diamond, 2), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GemDiamond,1,3)});
-			GameRegistry.addRecipe(new ItemStack(Items.diamond, 3), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GemDiamond,1,4)});
+			RemoveRecipe(new ItemStack(Items.dye, 1, 11));
+			RemoveRecipe(new ItemStack(Items.dye, 2, 11));
 		}
 
-		if(TFCOptions.enableVanillaRecipes == true)
+		if (TFCCrafting.diamondArmorRecipe == false)
 		{
-			GameRegistry.addRecipe(new ItemStack(Items.apple,1),new Object[]{"1",Character.valueOf('1'),new ItemStack(TFCItems.RedApple,1)});
-
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.bow,1),new Object[]{new ItemStack(TFCItems.Bow, 1, 0)});
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.fishing_rod,1),new Object[]{new ItemStack(TFCItems.FishingRod, 1, 0)});
-
-			//Conversion to vanilla tools for recipes in other mods
-			GameRegistry.addRecipe(new ItemStack(Items.stone_shovel, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgInShovel});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_shovel, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgExShovel});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_shovel, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.SedShovel});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_shovel, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.MMShovel});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgInHoe});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgExHoe});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.SedHoe});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.MMHoe});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_axe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgInAxe});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_axe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgExAxe});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_axe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.SedAxe});
-			GameRegistry.addRecipe(new ItemStack(Items.stone_axe, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.MMAxe});
+			RemoveRecipe(new ItemStack(Items.diamond_helmet));
+			RemoveRecipe(new ItemStack(Items.diamond_chestplate));
+			RemoveRecipe(new ItemStack(Items.diamond_leggings));
+			RemoveRecipe(new ItemStack(Items.diamond_boots));
 		}
-		else
+
+		if (TFCCrafting.diamondBlockRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.diamond_block));
+
+		if (TFCCrafting.diamondToolsRecipe == false)
 		{
-			RemoveRecipe(new ItemStack(Items.wooden_pickaxe,1));
-			RemoveRecipe(new ItemStack(Items.wooden_axe,1));
-			RemoveRecipe(new ItemStack(Items.wooden_shovel,1));
-			RemoveRecipe(new ItemStack(Items.wooden_hoe,1));
-			RemoveRecipe(new ItemStack(Items.wooden_sword,1));
-			RemoveRecipe(new ItemStack(Blocks.furnace,1));
-			RemoveRecipe(new ItemStack(Blocks.torch,4));
-			RemoveRecipe(new ItemStack(Items.stick,4));
-			RemoveRecipe(new ItemStack(Blocks.planks,4));
-			RemoveRecipe(new ItemStack(Items.chest_minecart, 1));
-			RemoveRecipe(new ItemStack(Items.dye,3, 15));
-			RemoveRecipe(new ItemStack(Items.dye,2, 1));
-			RemoveRecipe(new ItemStack(Items.dye,2, 11));
-			//RemoveRecipe(new ItemStack(Blocks.fence,2));
-			RemoveRecipe(new ItemStack(Blocks.fence_gate,1));
-			RemoveRecipe(new ItemStack(Blocks.wool));
+			RemoveRecipe(new ItemStack(Items.diamond_pickaxe));
+			RemoveRecipe(new ItemStack(Items.diamond_axe));
+			RemoveRecipe(new ItemStack(Items.diamond_shovel));
+			RemoveRecipe(new ItemStack(Items.diamond_hoe));
+			RemoveRecipe(new ItemStack(Items.diamond_sword));
+		}
+		
+		if (TFCCrafting.dispenserRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.dispenser));
+		
+		if (TFCCrafting.dropperRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.dropper));
+		
+		if (TFCCrafting.enchantTableRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.enchanting_table));
 
+		if (TFCCrafting.fenceGateRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.fence_gate));
 
+		if (TFCCrafting.fenceRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.fence, 2));
+
+		if (TFCCrafting.furnaceRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.furnace));
+
+		if (TFCCrafting.goldAppleRecipe == false)
+			RemoveRecipe(new ItemStack(Items.golden_apple));
+
+		if (TFCCrafting.goldArmorRecipe == false)
+		{
+			RemoveRecipe(new ItemStack(Items.golden_helmet));
+			RemoveRecipe(new ItemStack(Items.golden_chestplate));
+			RemoveRecipe(new ItemStack(Items.golden_leggings));
+			RemoveRecipe(new ItemStack(Items.golden_boots));
+		}
+
+		if (TFCCrafting.goldBlockRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.gold_block));
+		
+		if (TFCCrafting.goldNuggetRecipe == false)
+			RemoveRecipe(new ItemStack(Items.gold_nugget, 9));
+		
+		if (TFCCrafting.goldPlateRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.light_weighted_pressure_plate));
+
+		if (TFCCrafting.goldToolsRecipe == false)
+		{
+			RemoveRecipe(new ItemStack(Items.golden_pickaxe));
+			RemoveRecipe(new ItemStack(Items.golden_axe));
+			RemoveRecipe(new ItemStack(Items.golden_shovel));
+			RemoveRecipe(new ItemStack(Items.golden_hoe));
+			RemoveRecipe(new ItemStack(Items.golden_sword));
+		}
+		
+		if (TFCCrafting.hopperRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.hopper));
+
+		if (TFCCrafting.ironArmorRecipe == false)
+		{
+			RemoveRecipe(new ItemStack(Items.iron_helmet));
+			RemoveRecipe(new ItemStack(Items.iron_chestplate));
+			RemoveRecipe(new ItemStack(Items.iron_leggings));
+			RemoveRecipe(new ItemStack(Items.iron_boots));
+		}
+		
+		if (TFCCrafting.ironBarsRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.iron_bars, 16));
+
+		if (TFCCrafting.ironBlockRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.iron_block));
+		
+		if (TFCCrafting.ironDoorRecipe == false)
+			RemoveRecipe(new ItemStack(Items.iron_door));
+
+		if (TFCCrafting.ironPlateRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.heavy_weighted_pressure_plate));
+
+		if (TFCCrafting.ironToolsRecipe == false)
+		{
+			RemoveRecipe(new ItemStack(Items.iron_pickaxe));
+			RemoveRecipe(new ItemStack(Items.iron_axe));
+			RemoveRecipe(new ItemStack(Items.iron_shovel));
+			RemoveRecipe(new ItemStack(Items.iron_hoe));
+			RemoveRecipe(new ItemStack(Items.iron_sword));
+		}
+
+		if (TFCCrafting.jukeboxRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.jukebox));
+
+		if (TFCCrafting.leatherArmorRecipe == false)
+		{
 			RemoveRecipe(new ItemStack(Items.leather_helmet));
 			RemoveRecipe(new ItemStack(Items.leather_chestplate));
 			RemoveRecipe(new ItemStack(Items.leather_leggings));
 			RemoveRecipe(new ItemStack(Items.leather_boots));
+		}
 
-			//Remove the vanilla stairs
-			RemoveRecipe(new ItemStack(Blocks.birch_stairs, 4));
-			RemoveRecipe(new ItemStack(Blocks.jungle_stairs, 4));
-			RemoveRecipe(new ItemStack(Blocks.oak_stairs, 4));
-			RemoveRecipe(new ItemStack(Blocks.spruce_stairs, 4));
+		if (TFCCrafting.leverRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.lever));
 
-			//Remove the vanilla slabs
+		if (TFCCrafting.minecartChestRecipe == false)
+			RemoveRecipe(new ItemStack(Items.chest_minecart));
+
+		if (TFCCrafting.minecartRecipe == false)
+			RemoveRecipe(new ItemStack(Items.minecart));
+
+		if (TFCCrafting.pistonRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.piston));
+
+		if (TFCCrafting.plankBlockRecipe == false)
+		{
+			RemoveRecipe(new ItemStack(Blocks.planks, 4, 0));
+			RemoveRecipe(new ItemStack(Blocks.planks, 4, 1));
+			RemoveRecipe(new ItemStack(Blocks.planks, 4, 2));
+			RemoveRecipe(new ItemStack(Blocks.planks, 4, 3));
+			RemoveRecipe(new ItemStack(Blocks.planks, 4, 4));
+			RemoveRecipe(new ItemStack(Blocks.planks, 4, 5));
+		}
+
+		if (TFCCrafting.poweredRailsRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.golden_rail, 6));
+
+		if (TFCCrafting.railsRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.rail, 16));
+
+		if (TFCCrafting.repeaterRecipe == false)
+			RemoveRecipe(new ItemStack(Items.repeater));
+
+		if (TFCCrafting.roseRedRecipe == false)
+		{
+			RemoveRecipe(new ItemStack(Items.dye, 1, 1));
+			RemoveRecipe(new ItemStack(Items.dye, 2, 1));
+		}
+
+		if (TFCCrafting.signRecipe == false)
+			RemoveRecipe(new ItemStack(Items.sign, 3));
+
+		if (TFCCrafting.stickRecipe == false)
+			RemoveRecipe(new ItemStack(Items.stick, 4));
+
+		if (TFCCrafting.stoneSlabsRecipe == false)
+		{
+			RemoveRecipe(new ItemStack(Blocks.stone_slab, 6));
+			RemoveRecipe(new ItemStack(Blocks.stone_slab, 6, 3));
+		}
+
+		if (TFCCrafting.stoneStairsRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.stone_stairs, 4));
+
+		if (TFCCrafting.stoneToolsRecipe == false)
+		{
+			RemoveRecipe(new ItemStack(Items.stone_pickaxe));
+			RemoveRecipe(new ItemStack(Items.stone_axe));
+			RemoveRecipe(new ItemStack(Items.stone_shovel));
+			RemoveRecipe(new ItemStack(Items.stone_hoe));
+			RemoveRecipe(new ItemStack(Items.stone_sword));
+		}
+
+		if (TFCCrafting.torchRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.torch, 4));
+
+		if (TFCCrafting.trapDoorRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.trapdoor, 2));
+
+		if (TFCCrafting.tripwireRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.tripwire_hook, 2));
+
+		if (TFCCrafting.woodDoorRecipe == false)
+			RemoveRecipe(new ItemStack(Items.wooden_door));
+
+		if (TFCCrafting.woodSlabsRecipe == false)
+		{
 			RemoveRecipe(new ItemStack(Blocks.wooden_slab, 6, 0));
 			RemoveRecipe(new ItemStack(Blocks.wooden_slab, 6, 1));
 			RemoveRecipe(new ItemStack(Blocks.wooden_slab, 6, 2));
 			RemoveRecipe(new ItemStack(Blocks.wooden_slab, 6, 3));
+			RemoveRecipe(new ItemStack(Blocks.wooden_slab, 6, 4));
+			RemoveRecipe(new ItemStack(Blocks.wooden_slab, 6, 5));
+		}
+
+		if (TFCCrafting.woodStairsRecipe == false)
+		{
+			RemoveRecipe(new ItemStack(Blocks.birch_stairs, 4));
+			RemoveRecipe(new ItemStack(Blocks.jungle_stairs, 4));
+			RemoveRecipe(new ItemStack(Blocks.oak_stairs, 4));
+			RemoveRecipe(new ItemStack(Blocks.spruce_stairs, 4));
+			RemoveRecipe(new ItemStack(Blocks.acacia_stairs, 4));
+			RemoveRecipe(new ItemStack(Blocks.dark_oak_stairs, 4));
+		}
+
+		if (TFCCrafting.woodToolsRecipe == false)
+		{
+			RemoveRecipe(new ItemStack(Items.wooden_pickaxe));
+			RemoveRecipe(new ItemStack(Items.wooden_axe));
+			RemoveRecipe(new ItemStack(Items.wooden_shovel));
+			RemoveRecipe(new ItemStack(Items.wooden_hoe));
+			RemoveRecipe(new ItemStack(Items.wooden_sword));
+		}
+
+		if (TFCCrafting.woolRecipe == false)
+			RemoveRecipe(new ItemStack(Blocks.wool));
+
+		//Conversion Configuration
+		if (TFCCrafting.appleConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.apple, 1), new Object[] { new ItemStack(TFCItems.RedApple, 1) });
+		}
+
+		if (TFCCrafting.arrowConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.arrow, 1), new Object[] { new ItemStack(TFCItems.Arrow, 1) });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Arrow, 1), new Object[] { new ItemStack(Items.arrow, 1) });
+		}
+
+		if (TFCCrafting.bowConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.bow, 1), new Object[] { new ItemStack(TFCItems.Bow, 1, 0) });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Bow, 1, 0), new Object[] { new ItemStack(Items.bow, 1) });
+		}
+
+		if (TFCCrafting.coalConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.coal, 1), new Object[] { new ItemStack(TFCItems.Coal, 1) });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Coal, 1), new Object[] { new ItemStack(Items.coal, 1) });
+		}
+
+		if (TFCCrafting.diamondConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.diamond, 1), new Object[] {new ItemStack(TFCItems.GemDiamond,1,2)});
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.diamond, 2), new Object[] {new ItemStack(TFCItems.GemDiamond,1,3)});
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.diamond, 3), new Object[] {new ItemStack(TFCItems.GemDiamond,1,4)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemDiamond,1,2), new Object[] {new ItemStack(Items.diamond)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemDiamond,1,3), new Object[] {new ItemStack(Items.diamond), new ItemStack(Items.diamond)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemDiamond,1,4), new Object[] {new ItemStack(Items.diamond), new ItemStack(Items.diamond), new ItemStack(Items.diamond)});
+		}
+		
+		if (TFCCrafting.emeraldConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.emerald, 1), new Object[] {new ItemStack(TFCItems.GemEmerald,1,2)});
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.emerald, 2), new Object[] {new ItemStack(TFCItems.GemEmerald,1,3)});
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.emerald, 3), new Object[] {new ItemStack(TFCItems.GemEmerald,1,4)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemEmerald,1,2), new Object[] {new ItemStack(Items.emerald)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemEmerald,1,3), new Object[] {new ItemStack(Items.emerald), new ItemStack(Items.emerald)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemEmerald,1,4), new Object[] {new ItemStack(Items.emerald), new ItemStack(Items.emerald), new ItemStack(Items.emerald)});
+		}
+
+		if (TFCCrafting.fishConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.fish, 1), new Object[] { new ItemStack(TFCItems.fishRaw, 1) });
+		}
+		
+		if (TFCCrafting.fishingRodConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.fishing_rod, 1), new Object[] { new ItemStack(TFCItems.FishingRod, 1, 0) });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.FishingRod, 1, 0), new Object[] { new ItemStack(Items.fishing_rod, 1) });
+		}
+
+		if (TFCCrafting.flintSteelConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.flint_and_steel, 1, 0), new Object[] { new ItemStack(TFCItems.FlintSteel, 1, 0) });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.FlintSteel, 1, 0), new Object[] { new ItemStack(Items.flint_and_steel, 1, 0) });
+		}
+
+		if (TFCCrafting.leatherArmorConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather_helmet, 1, 0), new Object[] { new ItemStack(TFCItems.LeatherHelmet, 1, 0) });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.LeatherHelmet, 1, 0), new Object[] { new ItemStack(Items.leather_helmet, 1, 0) });
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather_chestplate, 1, 0), new Object[] { new ItemStack(TFCItems.LeatherChestplate, 1, 0) });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.LeatherChestplate, 1, 0), new Object[] { new ItemStack(Items.leather_chestplate, 1, 0) });
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather_leggings, 1, 0), new Object[] { new ItemStack(TFCItems.LeatherLeggings, 1, 0) });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.LeatherLeggings, 1, 0), new Object[] { new ItemStack(Items.leather_leggings, 1, 0) });
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather_boots, 1, 0), new Object[] { new ItemStack(TFCItems.LeatherBoots, 1, 0) });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.LeatherBoots, 1, 0), new Object[] { new ItemStack(Items.leather_boots, 1, 0) });
+		}
+
+		if (TFCCrafting.leatherConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather, 1), new Object[] { new ItemStack(TFCItems.Leather, 1) });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Leather, 1), new Object[] { new ItemStack(Items.leather, 1) });
+		}
+
+		if (TFCCrafting.stoneAxeConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_axe, 1, 0), new Object[] { TFCItems.IgInAxe });
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_axe, 1, 0), new Object[] { TFCItems.IgExAxe });
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_axe, 1, 0), new Object[] { TFCItems.SedAxe });
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_axe, 1, 0), new Object[] { TFCItems.MMAxe });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.IgExAxe, 1, 0), new Object[] { Items.stone_axe });
+		}
+
+		if (TFCCrafting.stoneHoeConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { TFCItems.IgInHoe });
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { TFCItems.IgExHoe });
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { TFCItems.SedHoe });
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_hoe, 1, 0), new Object[] { TFCItems.MMHoe });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.IgExHoe, 1, 0), new Object[] { Items.stone_hoe });
+		}
+
+		if (TFCCrafting.stoneShovelConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_shovel, 1, 0), new Object[] { TFCItems.IgInShovel });
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_shovel, 1, 0), new Object[] { TFCItems.IgExShovel });
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_shovel, 1, 0), new Object[] { TFCItems.SedShovel });
+			GameRegistry.addShapelessRecipe(new ItemStack(Items.stone_shovel, 1, 0), new Object[] { TFCItems.MMShovel });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.IgExShovel, 1, 0), new Object[] { Items.stone_shovel });
+		}
+
+		if (TFCCrafting.woodButtonConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.wooden_button, 1), new Object[] { new ItemStack(TFCBlocks.ButtonWood, 1) });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCBlocks.ButtonWood, 1), new Object[] { new ItemStack(Blocks.wooden_button, 1) });
+		}
+
+		if (TFCCrafting.workbenchConversion == true)
+		{
+			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.crafting_table, 1), new Object[] { new ItemStack(TFCBlocks.Workbench, 1) });
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCBlocks.Workbench, 1), new Object[] { new ItemStack(Blocks.crafting_table, 1) });
 		}
 	}
 

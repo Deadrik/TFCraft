@@ -60,6 +60,7 @@ import com.bioxx.tfc.WorldGen.Generators.WorldGenOre;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenPlants;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenSoilPits;
 import com.bioxx.tfc.api.SkillsManager;
+import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -96,6 +97,7 @@ public class TerraFirmaCraft
 		instance = this;
 		//Load our settings from the TFCOptions file
 		loadSettings();
+		loadCraftingSettings();
 
 		proxy.registerTickHandler();
 
@@ -279,11 +281,6 @@ public class TerraFirmaCraft
 		/**Start setup here*/
 
 		//General
-		TFCOptions.enableVanillaDiamondRecipe = TFCOptions.getBooleanFor(config, "General","enableVanillaDiamondRecipe",false);
-		TFCOptions.enableVanillaIronRecipe = TFCOptions.getBooleanFor(config,"General","enableVanillaIronRecipe",false);
-		TFCOptions.enableVanillaGoldRecipe = TFCOptions.getBooleanFor(config,"General","enableVanillaGoldRecipe",false);
-		TFCOptions.enableVanillaFurnaceRecipes = TFCOptions.getBooleanFor(config,"General","enableVanillaFurnaceRecipes",false);
-		TFCOptions.enableVanillaRecipes = TFCOptions.getBooleanFor(config,"General","enableVanillaRecipes",false, "Set this to true if you need recipes enabled for conversion from TFC to vanilla items.");
 		TFCOptions.enableBetterGrass = TFCOptions.getBooleanFor(config, "General", "enableBetterGrass", true);
 		TFCOptions.enableInnerGrassFix = TFCOptions.getBooleanFor(config, "General", "enableInnerGrassFix", true, "Set this to false if your computer has to run in fast mode and you get lag. This setting forces the sides of grass to render when viewing from the inside.");
 		TFCOptions.enableDebugMode = TFCOptions.getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
@@ -359,6 +356,104 @@ public class TerraFirmaCraft
 		TFCOptions.poorOreUnits = TFCOptions.getIntFor(config, "Materials", "poorOreUnits", 15, "The metal units provided by a single piece of poor ore.");
 		TFCOptions.normalOreUnits = TFCOptions.getIntFor(config, "Materials", "normalOreUnits", 25, "The metal units provided by a single piece of normal ore.");
 		TFCOptions.richOreUnits = TFCOptions.getIntFor(config, "Materials", "richOreUnits", 35, "The metal units provided by a single piece of rich ore");
+
+		/**Always end with this*/
+		if (config != null)
+			config.save();
+	}
+
+	public void loadCraftingSettings()
+	{
+		Configuration config;
+		try
+		{
+			config = new Configuration(new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFCCrafting.cfg"));
+			config.load();
+		} catch (Exception e)
+		{
+			System.out.println(new StringBuilder().append("[TFC] Error while trying to access crafting settings configuration!").toString());
+			config = null;
+		}
+		System.out.println(new StringBuilder().append("[TFC] Loading Crafting Settings").toString());
+		/**Start setup here*/
+
+		//Conversions
+		TFCCrafting.appleConversion = TFCCrafting.getBooleanFor(config, "Conversion", "appleConversion", false, "Conversions for food are irreversible.");
+		TFCCrafting.arrowConversion = TFCCrafting.getBooleanFor(config, "Conversion", "arrowConversion", false);
+		TFCCrafting.bowConversion = TFCCrafting.getBooleanFor(config, "Conversion", "bowConversion", false);
+		TFCCrafting.coalConversion = TFCCrafting.getBooleanFor(config, "Conversion", "coalConversion", false);
+		TFCCrafting.diamondConversion = TFCCrafting.getBooleanFor(config, "Conversion", "diamondConversion", false);
+		TFCCrafting.emeraldConversion = TFCCrafting.getBooleanFor(config, "Conversion", "emeraldConversion", false);
+		TFCCrafting.fishConversion = TFCCrafting.getBooleanFor(config, "Conversion", "fishConversion", false);
+		TFCCrafting.fishingRodConversion = TFCCrafting.getBooleanFor(config, "Conversion", "fishingRodConversion", false);
+		TFCCrafting.flintSteelConversion = TFCCrafting.getBooleanFor(config, "Conversion", "flintSteelConversion", false);
+		TFCCrafting.leatherArmorConversion = TFCCrafting.getBooleanFor(config, "Conversion", "leatherArmorConversion", false);
+		TFCCrafting.leatherConversion = TFCCrafting.getBooleanFor(config, "Conversion", "leatherConversion", false);
+		TFCCrafting.stoneAxeConversion = TFCCrafting.getBooleanFor(config, "Conversion", "stoneAxeConversion", false);
+		TFCCrafting.stoneHoeConversion = TFCCrafting.getBooleanFor(config, "Conversion", "stoneHoeConversion", false);
+		TFCCrafting.stoneShovelConversion = TFCCrafting.getBooleanFor(config, "Conversion", "stoneShovelConversion", false);
+		TFCCrafting.woodButtonConversion = TFCCrafting.getBooleanFor(config, "Conversion", "woodButtonConversion", false);
+		TFCCrafting.workbenchConversion = TFCCrafting.getBooleanFor(config, "Conversion", "workbenchConversion", false);
+
+		//Vanilla Recipes
+		TFCCrafting.anvilRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "anvilRecipe", false);
+		TFCCrafting.arrowsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "arrowsRecipe", false);
+		TFCCrafting.bedRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "bedRecipe", false);
+		TFCCrafting.bonemealRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "bonemealRecipe", false);
+		TFCCrafting.bowlRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "bowlRecipe", false);
+		TFCCrafting.brewingRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "brewingRecipe", false);
+		TFCCrafting.bucketRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "bucketRecipe", false);
+		TFCCrafting.cauldronRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "cauldronRecipe", true);
+		TFCCrafting.chestRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "chestRecipe", false);
+		TFCCrafting.clockRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "clockRecipe", true);
+		TFCCrafting.compassRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "compassRecipe", true);
+		TFCCrafting.dandelionYellowRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "dandelionYellowRecipe", false);
+		TFCCrafting.diamondArmorRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "diamondArmorRecipe", false);
+		TFCCrafting.diamondBlockRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "diamondBlockRecipe", false);
+		TFCCrafting.diamondToolsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "diamondToolsRecipe", false);
+		TFCCrafting.dispenserRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "dispenserRecipe", true);
+		TFCCrafting.dropperRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "dropperRecipe", true);
+		TFCCrafting.enchantTableRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "enchantTableRecipe", false);
+		TFCCrafting.fenceGateRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "fenceGateRecipe", false);
+		TFCCrafting.fenceRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "fenceRecipe", true);
+		TFCCrafting.furnaceRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "furnaceRecipe", false);
+		TFCCrafting.goldAppleRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "goldAppleRecipe", false);
+		TFCCrafting.goldArmorRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "goldArmorRecipe", false);
+		TFCCrafting.goldBlockRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "goldBlockRecipe", false);
+		TFCCrafting.goldNuggetRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "goldNuggetRecipe", false);
+		TFCCrafting.goldPlateRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "goldPlateRecipe", true);
+		TFCCrafting.goldToolsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "goldToolsRecipe", false);
+		TFCCrafting.hopperRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "hopperRecipe", false);
+		TFCCrafting.ironArmorRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "ironArmorRecipe", false);
+		TFCCrafting.ironBarsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "ironBarsRecipe", true);
+		TFCCrafting.ironBlockRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "ironBlockRecipe", false);
+		TFCCrafting.ironDoorRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "ironDoorRecipe", true);
+		TFCCrafting.ironPlateRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "ironPlateRecipe", true);
+		TFCCrafting.ironToolsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "ironToolsRecipe", false);
+		TFCCrafting.jukeboxRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "jukeboxRecipe", false);
+		TFCCrafting.leatherArmorRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "leatherArmorRecipe", false);
+		TFCCrafting.leverRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "leverRecipe", false);
+		TFCCrafting.minecartChestRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "minecartChestRecipe", false);
+		TFCCrafting.minecartRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "minecartRecipe", false);
+		TFCCrafting.pistonRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "pistonRecipe", true);
+		TFCCrafting.plankBlockRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "plankBlockRecipe", false);
+		TFCCrafting.poweredRailsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "poweredRailsRecipe", false);
+		TFCCrafting.railsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "railsRecipe", false);
+		TFCCrafting.repeaterRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "repeaterRecipe", true);
+		TFCCrafting.roseRedRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "roseRedRecipe", false);
+		TFCCrafting.signRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "signRecipe", false);
+		TFCCrafting.stickRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "stickRecipe", false);
+		TFCCrafting.stoneSlabsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "stoneSlabsRecipe", false);
+		TFCCrafting.stoneStairsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "stoneStairsRecipe", false);
+		TFCCrafting.stoneToolsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "stoneToolsRecipe", false);
+		TFCCrafting.torchRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "torchRecipe", false);
+		TFCCrafting.trapDoorRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "trapDoorRecipe", false);
+		TFCCrafting.tripwireRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "tripwireRecipe", true);
+		TFCCrafting.woodDoorRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "woodDoorRecipe", true);
+		TFCCrafting.woodSlabsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "woodSlabsRecipe", false);
+		TFCCrafting.woodStairsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "woodStairsRecipe", false);
+		TFCCrafting.woodToolsRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "woodToolsRecipe", false);
+		TFCCrafting.woolRecipe = TFCCrafting.getBooleanFor(config, "Enable Vanilla Recipes", "woolRecipe", false);
 
 		/**Always end with this*/
 		if (config != null)
