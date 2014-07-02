@@ -193,14 +193,14 @@ public class CraftingHandler
 			{
 				if(iinventory.getStackInSlot(i) == null)
 					continue;
-				if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
+				/*if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
 				{
 					if(!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1)))
 						e.player.dropItem(TFCItems.WoodenBucketEmpty, 1);
 				}
-				//				else if(iinventory.getStackInSlot(i).getItem() == TFCItems.RedSteelBucketWater)
-				//					if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
-				//						player.dropItem(TFCItems.RedSteelBucketEmpty, 1);
+								else if(iinventory.getStackInSlot(i).getItem() == TFCItems.RedSteelBucketWater)
+									if(!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
+										player.dropItem(TFCItems.RedSteelBucketEmpty, 1);*/
 
 				if(iinventory.getStackInSlot(i).hasTagCompound() && 
 						iinventory.getStackInSlot(i).getTagCompound().hasKey("craftingTag"))
