@@ -22,6 +22,7 @@ import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.Mobs.EntityBear;
 import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
@@ -317,7 +318,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 		else
 		{
-			if (par2 >= 0 && par2 < 256 && world.getSavedLightValue(EnumSkyBlock.Block, par1, par2, par3) < 10)
+			if (par2 >= 0 && par2 < 256 && world.getSavedLightValue(EnumSkyBlock.Block, par1, par2, par3) < 10 && TFC_Time.getTotalMonths() > 1)
 			{
 				Block var6 = world.getBlock(par1, par2 - 1, par3);
 				Block var7 = world.getBlock(par1, par2, par3);
