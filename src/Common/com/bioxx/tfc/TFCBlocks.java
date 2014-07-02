@@ -388,6 +388,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(BlastFurnace, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Bloomery");
 		GameRegistry.registerBlock(EarlyBloomery, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "EarlyBloomery");
 		GameRegistry.registerBlock(Sluice, "Sluice");
+		GameRegistry.registerBlock(Bloom, "Bloom");
 
 		GameRegistry.registerBlock(fruitTreeWood, "fruitTreeWood");
 		GameRegistry.registerBlock(fruitTreeLeaves, "fruitTreeLeaves");

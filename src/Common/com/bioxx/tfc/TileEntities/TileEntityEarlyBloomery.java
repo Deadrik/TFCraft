@@ -125,14 +125,17 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 			{
 				if((worldObj.getBlock(xCoord + direction[0], yCoord, zCoord + direction[1])==TFCBlocks.Molten))
 				{
-					bloomeryLit = false;
-					worldObj.setBlock(xCoord + direction[0], yCoord, zCoord + direction[1], TFCBlocks.Bloom);
-					worldObj.setBlockToAir(xCoord + direction[0], yCoord + (moltenCount < 2 ? 2 : moltenCount) - 1, zCoord + direction[1]);
+					if(worldObj.setBlock(xCoord + direction[0], yCoord, zCoord + direction[1], TFCBlocks.Bloom))
+					{
+						bloomeryLit = false;
 
-					oreCount = 0;
-					charcoalCount = 0;
-					((TileEntityBloom)(worldObj.getTileEntity(xCoord + direction[0], yCoord, zCoord + direction[1]))).setSize(outCount);
-					outCount = 0;
+						worldObj.setBlockToAir(xCoord + direction[0], yCoord + (moltenCount < 2 ? 2 : moltenCount) - 1, zCoord + direction[1]);
+
+						oreCount = 0;
+						charcoalCount = 0;
+						((TileEntityBloom)(worldObj.getTileEntity(xCoord + direction[0], yCoord, zCoord + direction[1]))).setSize(outCount);
+						outCount = 0;
+					}
 				}
 
 				if((meta & 4) != 0) 
