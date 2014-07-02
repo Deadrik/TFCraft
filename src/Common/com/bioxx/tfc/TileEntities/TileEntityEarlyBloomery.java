@@ -16,6 +16,7 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Items.ItemOre;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
@@ -91,7 +92,7 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 					worldObj.getBlockMetadata(xCoord + direction[0], yCoord, zCoord + direction[1]) >= 7 && !bloomeryLit)
 			{
 				bloomeryLit = true;
-				this.fuelTimeLeft = TFC_Time.getTotalTicks() + 14400;
+				this.fuelTimeLeft = (long) (TFC_Time.getTotalTicks() + (TFC_Time.hourLength * TFCOptions.bloomeryBurnTime));
 				if((meta & 4) == 0) 
 					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 3);
 				return true;

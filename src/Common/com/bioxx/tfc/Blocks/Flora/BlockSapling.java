@@ -21,6 +21,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.TileEntities.TileEntitySapling;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
@@ -112,7 +113,7 @@ public class BlockSapling extends BlockTerraContainer
 		TileEntitySapling te = (TileEntitySapling) world.getTileEntity(i, j, k);
 
 		if(te != null && te.growTime == 0)
-			te.growTime = (long) ((TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7) * growSpeed) + (world.rand.nextFloat() * TFC_Time.dayLength));
+			te.growTime = (long) (((TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7) * growSpeed) + (world.rand.nextFloat() * TFC_Time.dayLength)) * TFCOptions.saplingTimerMultiplier);
 
 		if (world.getBlockLightValue(i, j + 1, k) >= 9 && te!= null && TFC_Time.getTotalTicks() > te.growTime)
 			growTree(world, i, j, k, rand);

@@ -277,69 +277,93 @@ public class TerraFirmaCraft
 		}
 		System.out.println(new StringBuilder().append("[TFC] Loading Settings").toString());
 		/**Start setup here*/
+
 		//General
 		TFCOptions.enableVanillaDiamondRecipe = TFCOptions.getBooleanFor(config, "General","enableVanillaDiamondRecipe",false);
 		TFCOptions.enableVanillaIronRecipe = TFCOptions.getBooleanFor(config,"General","enableVanillaIronRecipe",false);
 		TFCOptions.enableVanillaGoldRecipe = TFCOptions.getBooleanFor(config,"General","enableVanillaGoldRecipe",false);
-		TFCOptions.enableBetterGrass = TFCOptions.getBooleanFor(config,"General","enableBetterGrass", true);
 		TFCOptions.enableVanillaFurnaceRecipes = TFCOptions.getBooleanFor(config,"General","enableVanillaFurnaceRecipes",false);
 		TFCOptions.enableVanillaRecipes = TFCOptions.getBooleanFor(config,"General","enableVanillaRecipes",false, "Set this to true if you need recipes enabled for conversion from TFC to vanilla items.");
-		TFCOptions.enableInnerGrassFix = TFCOptions.getBooleanFor(config,"General","enableInnerGrassFix",true, "Set this to false if your computer has to run in fast mode and you get lag. This setting forces the sides of grass to render when viewing from the inside.");
+		TFCOptions.enableBetterGrass = TFCOptions.getBooleanFor(config, "General", "enableBetterGrass", true);
+		TFCOptions.enableInnerGrassFix = TFCOptions.getBooleanFor(config, "General", "enableInnerGrassFix", true, "Set this to false if your computer has to run in fast mode and you get lag. This setting forces the sides of grass to render when viewing from the inside.");
 		TFCOptions.enableDebugMode = TFCOptions.getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
-		TFCOptions.yearLength = TFCOptions.getIntFor(config,"General","yearLength",96, "This is how many days are in a year. Keep this to multiples of 12.");
 		TFCOptions.iDontLikeOnions = TFCOptions.getBooleanFor(config, "General", "enableNotOnions", false,"Set this to true if you don't like onions.");
 		TFCOptions.enableOreTest = TFCOptions.getBooleanFor(config, "General","enableOreTest", false, "This will generate only ore in your world with nothing else. *Caution Unsupported*");
 
+		//Time
+		TFCOptions.yearLength = TFCOptions.getIntFor(config, "Time", "yearLength", 96, "This is how many days are in a year. Keep this to multiples of 12.");
+		TFCOptions.pitKilnBurnTime = (float) TFCOptions.getDoubleFor(config, "Time", "pitKilnBurnTime", 8.0, "This is the number of hours that the pit kiln should burn before being completed.");
+		TFCOptions.bloomeryBurnTime = (float) TFCOptions.getDoubleFor(config, "Time", "bloomeryBurnTime", 14.4, "This is the number of hours that the bloomery should burn before being completed.");
+		TFCOptions.charcoalPitBurnTime = (float) TFCOptions.getDoubleFor(config, "Time", "charcoalPitBurnTime", 18.0, "This is the number of hours that the charcoal pit should burn before being completed.");
+		TFCOptions.saplingTimerMultiplier = (float) TFCOptions.getDoubleFor(config, "Time", "saplingTimerMultiplier", 1.0, "This is a global multiplier for the number of days required before a sapling can grow into a tree. Decrease for faster sapling growth.");
+		TFCOptions.tempIncreaseMultiplier = (float) TFCOptions.getDoubleFor(config, "Time", "tempIncreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items heat up. Increase to make items heat up faster.");
+		TFCOptions.tempDecreaseMultiplier = (float) TFCOptions.getDoubleFor(config, "Time", "tempDecreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items cool down. Increase to make items cool down faster.");
+
+		//Food Decay
 		Global.FOOD_DECAY_RATE = (float)TFCOptions.getDoubleFor(config,"Food Decay","FoodDecayRate", 1.0170378966055869517978300569768, "This number causes base decay to equal 50% gain per day. If you wish to change, I recommend you look up a y-root calculator 1.0170378966055869517978300569768^24 = 1.5");
 		TFCOptions.useDecayProtection = TFCOptions.getBooleanFor(config, "Food Decay", "useDecayProtection", true,"Set this to false if you want food to auto decay when a chunk is loaded instead of limiting decay when a chunk has been unloaded for a long period.");
 		TFCOptions.decayProtectionDays = TFCOptions.getIntFor(config,"Food Decay","decayProtectionDays",24, "If a food item has not been ticked for >= this number of days than when it is ticked for the first time, only a small amount of decay will occur.");
 		TFCOptions.decayMultiplier = (float)TFCOptions.getDoubleFor(config,"Food Decay","FoodDecayMultiplier", 1.0, "This is a global multiplier for food decay. Unlike FoodDecayRate which only modifies the base decay and not the environmental effect upon decay, this multiplier will multiply against the entire amount. Set to 0 to turn decay off.");
-		//Caveins
+
+		//Cavein Options
 		TFCOptions.minimumRockLoad = TFCOptions.getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
 		TFCOptions.initialCollapseRatio = TFCOptions.getIntFor(config,"Cavein Options","initialCollapseRatio",20, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
 		TFCOptions.propogateCollapseChance = TFCOptions.getIntFor(config,"Cavein Options","propogateCollapseChance",55, "This number is the likelihood for each block to propagate the collapse farther.");
 
-		TFCOptions.cropNutrientAColor[0] = (byte)TFCOptions.getIntFor(config,"ColorNutrientA","Red", 237);
-		TFCOptions.cropNutrientAColor[1] = (byte)TFCOptions.getIntFor(config,"ColorNutrientA","Green", 28);
-		TFCOptions.cropNutrientAColor[2] = (byte)TFCOptions.getIntFor(config,"ColorNutrientA","Blue", 36);
-		TFCOptions.cropNutrientAColor[3] = (byte)TFCOptions.getIntFor(config,"ColorNutrientA","Alpha", 200);
+		TFCOptions.cropNutrientAColor[0] = (byte) TFCOptions.getIntFor(config, "ColorNutrientA", "Red", 237);
+		TFCOptions.cropNutrientAColor[1] = (byte) TFCOptions.getIntFor(config, "ColorNutrientA", "Green", 28);
+		TFCOptions.cropNutrientAColor[2] = (byte) TFCOptions.getIntFor(config, "ColorNutrientA", "Blue", 36);
+		TFCOptions.cropNutrientAColor[3] = (byte) TFCOptions.getIntFor(config, "ColorNutrientA", "Alpha", 200);
 
-		TFCOptions.cropNutrientBColor[0] = (byte)TFCOptions.getIntFor(config,"ColorNutrientB","Red", 242);
-		TFCOptions.cropNutrientBColor[1] = (byte)TFCOptions.getIntFor(config,"ColorNutrientB","Green", 101);
-		TFCOptions.cropNutrientBColor[2] = (byte)TFCOptions.getIntFor(config,"ColorNutrientB","Blue", 34);
-		TFCOptions.cropNutrientBColor[3] = (byte)TFCOptions.getIntFor(config,"ColorNutrientB","Alpha", 200);
+		TFCOptions.cropNutrientBColor[0] = (byte) TFCOptions.getIntFor(config, "ColorNutrientB", "Red", 242);
+		TFCOptions.cropNutrientBColor[1] = (byte) TFCOptions.getIntFor(config, "ColorNutrientB", "Green", 101);
+		TFCOptions.cropNutrientBColor[2] = (byte) TFCOptions.getIntFor(config, "ColorNutrientB", "Blue", 34);
+		TFCOptions.cropNutrientBColor[3] = (byte) TFCOptions.getIntFor(config, "ColorNutrientB", "Alpha", 200);
 
-		TFCOptions.cropNutrientCColor[0] = (byte)TFCOptions.getIntFor(config,"ColorNutrientC","Red", 247);
-		TFCOptions.cropNutrientCColor[1] = (byte)TFCOptions.getIntFor(config,"ColorNutrientC","Green", 148);
-		TFCOptions.cropNutrientCColor[2] = (byte)TFCOptions.getIntFor(config,"ColorNutrientC","Blue", 49);
-		TFCOptions.cropNutrientCColor[3] = (byte)TFCOptions.getIntFor(config,"ColorNutrientC","Alpha", 200);
+		TFCOptions.cropNutrientCColor[0] = (byte) TFCOptions.getIntFor(config, "ColorNutrientC", "Red", 247);
+		TFCOptions.cropNutrientCColor[1] = (byte) TFCOptions.getIntFor(config, "ColorNutrientC", "Green", 148);
+		TFCOptions.cropNutrientCColor[2] = (byte) TFCOptions.getIntFor(config, "ColorNutrientC", "Blue", 49);
+		TFCOptions.cropNutrientCColor[3] = (byte) TFCOptions.getIntFor(config, "ColorNutrientC", "Alpha", 200);
 
-		TFCOptions.cropFertilizerColor[0] = (byte)TFCOptions.getIntFor(config,"cropFertilizerColor","Red", 255);
-		TFCOptions.cropFertilizerColor[1] = (byte)TFCOptions.getIntFor(config,"cropFertilizerColor","Green", 255);
-		TFCOptions.cropFertilizerColor[2] = (byte)TFCOptions.getIntFor(config,"cropFertilizerColor","Blue", 0);
-		TFCOptions.cropFertilizerColor[3] = (byte)TFCOptions.getIntFor(config,"cropFertilizerColor","Alpha", 200);
+		TFCOptions.cropFertilizerColor[0] = (byte) TFCOptions.getIntFor(config, "cropFertilizerColor", "Red", 255);
+		TFCOptions.cropFertilizerColor[1] = (byte) TFCOptions.getIntFor(config, "cropFertilizerColor", "Green", 255);
+		TFCOptions.cropFertilizerColor[2] = (byte) TFCOptions.getIntFor(config, "cropFertilizerColor", "Blue", 0);
+		TFCOptions.cropFertilizerColor[3] = (byte) TFCOptions.getIntFor(config, "cropFertilizerColor", "Alpha", 200);
 
-		TFCOptions.anvilRuleColor0[0] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor0","Red", 237);
-		TFCOptions.anvilRuleColor0[1] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor0","Green", 28);
-		TFCOptions.anvilRuleColor0[2] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor0","Blue", 36);
+		TFCOptions.anvilRuleColor0[0] = (byte) TFCOptions.getIntFor(config, "anvilRuleColor0", "Red", 237);
+		TFCOptions.anvilRuleColor0[1] = (byte) TFCOptions.getIntFor(config, "anvilRuleColor0", "Green", 28);
+		TFCOptions.anvilRuleColor0[2] = (byte) TFCOptions.getIntFor(config, "anvilRuleColor0", "Blue", 36);
 
-		TFCOptions.anvilRuleColor1[0] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor1","Red", 242);
-		TFCOptions.anvilRuleColor1[1] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor1","Green", 101);
-		TFCOptions.anvilRuleColor1[2] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor1","Blue", 34);
+		TFCOptions.anvilRuleColor1[0] = (byte) TFCOptions.getIntFor(config, "anvilRuleColor1", "Red", 242);
+		TFCOptions.anvilRuleColor1[1] = (byte) TFCOptions.getIntFor(config, "anvilRuleColor1", "Green", 101);
+		TFCOptions.anvilRuleColor1[2] = (byte) TFCOptions.getIntFor(config, "anvilRuleColor1", "Blue", 34);
 
-		TFCOptions.anvilRuleColor2[0] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor2","Red", 247);
-		TFCOptions.anvilRuleColor2[1] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor2","Green", 148);
-		TFCOptions.anvilRuleColor2[2] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor2","Blue", 49);
+		TFCOptions.anvilRuleColor2[0] = (byte) TFCOptions.getIntFor(config, "anvilRuleColor2", "Red", 247);
+		TFCOptions.anvilRuleColor2[1] = (byte) TFCOptions.getIntFor(config, "anvilRuleColor2", "Green", 148);
+		TFCOptions.anvilRuleColor2[2] = (byte) TFCOptions.getIntFor(config, "anvilRuleColor2", "Blue", 49);
 
-		TFCOptions.enableCropsDie = TFCOptions.getBooleanFor(config, "Crops","enableCropsDie",false);
+		//Crops
+		TFCOptions.enableCropsDie = TFCOptions.getBooleanFor(config, "Crops", "enableCropsDie", false, "Whether or not crops will die of old age.");
+		TFCOptions.cropGrowthMultiplier = (float) TFCOptions.getDoubleFor(config, "Crops", "cropGrowthModifier", 1.0, "This is a global multiplier for the rate at which crops will grow. Increase to make crops grow faster.");
 
-		TFCOptions.pitKilnBurnTime = TFCOptions.getIntFor(config,"General","pitKilnBurnTime", 8, "This is the number of hours that the pit kiln should burn before being completed.");
+		//Protection
 		TFCOptions.maxProtectionMonths = TFCOptions.getIntFor(config,"Protection","maxProtectionMonths", 10, "The maximum number of months of spawn protection that can accumulate.");
 		TFCOptions.protectionGain = TFCOptions.getIntFor(config, "Protection", "protectionGain", 8, "The number of hours of protection gained in the 5x5 chunk area for spending 1 hour in that chunk.");
 
+		//Player
 		TFCOptions.HealthGainRate = TFCOptions.getIntFor(config,"Player","HealthGainRate", 20, "The rate of Health Gain per experience level. Set to 0 to turn off.");
 		TFCOptions.HealthGainCap = TFCOptions.getIntFor(config,"Player","HealthGainCap", 3000, "The maximum achievable health pool total.");
 
+		//Materials
+		TFCOptions.smallOreUnits = TFCOptions.getIntFor(config, "Materials", "smallOreUnits", 10, "The metal units provided by a single piece of small ore or nugget.");
+		TFCOptions.poorOreUnits = TFCOptions.getIntFor(config, "Materials", "poorOreUnits", 15, "The metal units provided by a single piece of poor ore.");
+		TFCOptions.normalOreUnits = TFCOptions.getIntFor(config, "Materials", "normalOreUnits", 25, "The metal units provided by a single piece of normal ore.");
+		TFCOptions.richOreUnits = TFCOptions.getIntFor(config, "Materials", "richOreUnits", 35, "The metal units provided by a single piece of rich ore");
+
+		/**Always end with this*/
+		if (config != null)
+			config.save();
+	}
 		/**Always end with this*/
 		if (config != null)
 			config.save();

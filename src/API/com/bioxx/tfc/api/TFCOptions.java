@@ -23,6 +23,13 @@ public class TFCOptions
 	public static int propogateCollapseChance;
 
 	public static int yearLength;
+	public static float pitKilnBurnTime = 8.0f;
+	public static float bloomeryBurnTime = 14.4f;
+	public static float charcoalPitBurnTime = 18.0f;
+	public static float cropGrowthMultiplier = 1.0f;
+	public static float saplingTimerMultiplier = 1.0f;
+	public static float tempIncreaseMultiplier = 1.0f;
+	public static float tempDecreaseMultiplier = 1.0f;
 
 	public static int maxProtectionMonths;
 	public static int protectionGain;
@@ -41,11 +48,14 @@ public class TFCOptions
 	public static byte[] anvilRuleColor0 = {(byte) 237, (byte) 28, (byte) 36, (byte) 255};
 	public static byte[] anvilRuleColor1 = {(byte) 242, (byte) 101, (byte) 34, (byte) 255};
 	public static byte[] anvilRuleColor2 = {(byte) 247, (byte) 148, (byte) 49, (byte) 255};
-
-	public static int pitKilnBurnTime = 8;
 	public static boolean useDecayProtection = true;
 	public static int decayProtectionDays = 18;
 	public static float decayMultiplier = 1.0f;
+
+	public static int smallOreUnits = 10;
+	public static int poorOreUnits = 15;
+	public static int normalOreUnits = 25;
+	public static int richOreUnits = 35;
 
 	public static boolean getBooleanFor(Configuration config,String heading, String item, boolean value)
 	{

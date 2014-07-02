@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
@@ -57,7 +58,7 @@ public class ItemOreSmall extends ItemOre
 		case 10:
 		case 11:
 		case 12:
-		case 13: return 10;
+		case 13: return (short) TFCOptions.smallOreUnits;
 		case 35: 
 		case 36:
 		case 37:

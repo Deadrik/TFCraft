@@ -12,6 +12,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -150,7 +151,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 		case 10:
 		case 11:
 		case 12:
-		case 13: return 25;
+		case 13: return (short) TFCOptions.normalOreUnits;
 		case 35:
 		case 36:
 		case 37:
@@ -164,7 +165,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 		case 45:
 		case 46:
 		case 47:
-		case 48: return 35;
+		case 48: return (short) TFCOptions.richOreUnits;
 		case 49:
 		case 50:
 		case 51:
@@ -178,7 +179,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 		case 59:
 		case 60:
 		case 61:
-		case 62: return 15;
+		case 62: return (short) TFCOptions.poorOreUnits;
 		}
 		return 0;
 	}

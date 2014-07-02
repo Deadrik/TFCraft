@@ -24,6 +24,7 @@ import com.bioxx.tfc.Core.Vector3f;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumWoodMaterial;
 
@@ -43,7 +44,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 	private Map<Integer, int[]> smokeMap = new HashMap<Integer, int[]>(); // Coords where smoke will be generated
 	private boolean scanSmokeLayer;
 	private int topY;
-	public final int FIREBURNTIME = (int) ((TFC_Time.hourLength * 18) / 100);//default 240
+	public final int FIREBURNTIME = (int) ((TFC_Time.hourLength * TFCOptions.charcoalPitBurnTime) / 100);//default 18 hours
 
 	public TileEntityFirepit()
 	{
@@ -297,7 +298,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 					charcoalCounter = 0;
 			}
 
-			//This is where we handle the counter for producing charcoal. Once it reaches 24hours, we add charcoal to the fire and remove the wood.
+			//This is where we handle the counter for producing charcoal.
 			if(charcoalCounter == 0)
 				charcoalCounter = (int) TFC_Time.getTotalTicks();
 

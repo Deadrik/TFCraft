@@ -154,7 +154,7 @@ public class TECrop extends NetworkTileEntity
 						tef.DrainNutrients(3, crop.nutrientUsageMult);
 				}
 
-				float growthRate = (((crop.numGrowthStages / (crop.growthTime * TFC_Time.timeRatio96)) + tempAdded) * nutriMult) * timeMultiplier;
+				float growthRate = ((((crop.numGrowthStages / (crop.growthTime * TFC_Time.timeRatio96)) + tempAdded) * nutriMult) * timeMultiplier) * TFCOptions.cropGrowthMultiplier;
 				if(tef!= null && tef.isInfested)
 					growthRate /= 2;
 				int oldGrowth = (int) Math.floor(growth);
