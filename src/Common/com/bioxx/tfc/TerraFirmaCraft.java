@@ -364,10 +364,6 @@ public class TerraFirmaCraft
 		if (config != null)
 			config.save();
 	}
-		/**Always end with this*/
-		if (config != null)
-			config.save();
-	}
 
 	public void loadOre()
 	{
