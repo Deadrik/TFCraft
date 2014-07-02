@@ -178,14 +178,11 @@ public class Recipes
 
 		for(int j = 0; j < Knives.length; j++)
 		{
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.bowl, 4, 0), new Object[]
-			{ "2", "1", Character.valueOf('1'), "logWood", Character.valueOf('2'), new ItemStack(Knives[j], 1, 32767) }));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.bowl, 4, 0), new Object[] { "logWood", new ItemStack(Knives[j], 1, 32767) }));
 			for(int k = 0; k < 3; k ++)
 			{
-				GameRegistry.addRecipe(new ItemStack(TFCItems.ScrapedHide,1,k), new Object[] {
-					"2","1", Character.valueOf('1'), new ItemStack(TFCItems.SoakedHide,1,k),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
-				GameRegistry.addRecipe(new ItemStack(TFCItems.Wool,1+k,0), new Object[] {
-					"2","1", Character.valueOf('1'), new ItemStack(TFCItems.SheepSkin,1,k),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
+				GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.ScrapedHide, 1, k), new Object[] { new ItemStack(TFCItems.SoakedHide, 1, k), new ItemStack(Knives[j], 1, 32767) });
+				GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Wool, 1 + k, 0), new Object[] { new ItemStack(TFCItems.SheepSkin, 1, k), new ItemStack(Knives[j], 1, 32767) });
 			}
 		}
 
@@ -937,9 +934,6 @@ public class Recipes
 		//Miscellaneous Items
 		OreDictionary.registerOre("lumpClay", new ItemStack(Items.clay_ball));
 		OreDictionary.registerOre("lumpClay", new ItemStack(TFCItems.ClayBall, 1, 0));
-
-		OreDictionary.registerOre("itemLeather", new ItemStack(Items.leather));
-		OreDictionary.registerOre("itemLeather", new ItemStack(TFCItems.Leather));
 
 		OreDictionary.registerOre("itemArrow", new ItemStack(Items.arrow));
 		OreDictionary.registerOre("itemArrow", new ItemStack(TFCItems.Arrow));
