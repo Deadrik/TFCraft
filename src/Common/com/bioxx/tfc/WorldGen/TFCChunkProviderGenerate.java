@@ -304,8 +304,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 		//Swamp
 		if(TFC_Climate.isSwamp(world, x,150,z))
+		{
 			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
-		spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1 + mountainousAreaModifier, 1, 1));
+			spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 1 + mountainousAreaModifier, 1, 1));
+		}
 		return spawnableCreatureList;
 	}
 
