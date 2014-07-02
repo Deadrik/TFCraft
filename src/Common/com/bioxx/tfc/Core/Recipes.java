@@ -67,7 +67,7 @@ public class Recipes
 		// Remove Vanilla recipes before adding TFC recipes for oredict compatibility
 		VanillaRecipes();
 
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Arrow, 8), new ItemStack(TFCItems.LooseRock, 1, 32767), "stickWood",
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Arrow, 8), "itemRock", "stickWood",
 				new ItemStack(Items.feather,1,32767)));
 
 		//stone javelins
@@ -142,11 +142,9 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.StoneKnife, 1, 0), new Object[] { 
 			"1","2", Character.valueOf('1'), TFCItems.StoneKnifeHead,Character.valueOf('2'), "stickWood"}));
 
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WoodenBucketEmpty, 1), new Object[] { "w w","w w"," w ", Character.valueOf('w'), "woodLumber" }));
 
-
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WoodenBucketEmpty, 1), new Object[] { "w w","w w"," w ", Character.valueOf('w'), new ItemStack(TFCItems.SinglePlank, 1, 32767) });
-
-		GameRegistry.addShapelessRecipe(new ItemStack(Items.gunpowder,2,0),new Object[] {new ItemStack(TFCItems.Coal,1,1),new ItemStack(TFCItems.Powder, 1, 4),new ItemStack(TFCItems.Powder, 1, 3)});
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.gunpowder,2,0),new Object[] {"fuelCoal" ,new ItemStack(TFCItems.Powder, 1, 4),new ItemStack(TFCItems.Powder, 1, 3)}));
 
 		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
@@ -180,8 +178,8 @@ public class Recipes
 
 		for(int j = 0; j < Knives.length; j++)
 		{
-			GameRegistry.addRecipe(new ItemStack(Items.bowl, 4, 0), new Object[] {
-				"2","1", Character.valueOf('1'),new ItemStack(TFCItems.Logs,1,32767), Character.valueOf('2'),new ItemStack(Knives[j], 1, 32767)});
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.bowl, 4, 0), new Object[]
+			{ "2", "1", Character.valueOf('1'), "logWood", Character.valueOf('2'), new ItemStack(Knives[j], 1, 32767) }));
 			for(int k = 0; k < 3; k ++)
 			{
 				GameRegistry.addRecipe(new ItemStack(TFCItems.ScrapedHide,1,k), new Object[] {
@@ -189,14 +187,13 @@ public class Recipes
 				GameRegistry.addRecipe(new ItemStack(TFCItems.Wool,1+k,0), new Object[] {
 					"2","1", Character.valueOf('1'), new ItemStack(TFCItems.SheepSkin,1,k),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
 			}
-			//GameRegistry.addRecipe(new ItemStack(TFCItems.TerraLeather,0,0), new Object[] {
-			//	"2","1", Character.valueOf('1'), new ItemStack(TFCItems.TerraLeather,1),Character.valueOf('2'),new ItemStack(Knives[j],1,32767)});
 		}
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.item_frame,1),new Object[]{"###","#$#","###",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.Leather,1)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.painting,1),new Object[]{"###","#$#","###",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.item_frame,1),new Object[]{"###","#$#","###",Character.valueOf('#'),"stickWood",Character.valueOf('$'), "materialLeather"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.painting,1),new Object[]{"###","#$#","###",Character.valueOf('#'),"stickWood",Character.valueOf('$'), "materialCloth"}));
 
-		GameRegistry.addRecipe(new ItemStack(Blocks.carpet,2,0),new Object[]{"$$",Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.carpet,2,0),new Object[]{"$$",Character.valueOf('$'), "materialCloth"}));
+		
 		for(int i = 0; i < 16;i++)
 			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.carpet,1,i),new Object[] {new ItemStack(TFCItems.Dye,1,15-i),new ItemStack(Blocks.carpet,1,32767)});
 
@@ -204,11 +201,10 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,2),new Object[]{new ItemStack(TFCItems.Powder,1,8)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,1),new Object[]{new ItemStack(TFCItems.Powder,1,5)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,11),new Object[]{new ItemStack(TFCItems.Powder,1,7)});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,12),new Object[]{new ItemStack(TFCItems.Powder,1,8),new ItemStack(TFCItems.Powder,1,0),new ItemStack(TFCBlocks.Sand,1,32767)});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Dye,1,12),new Object[]{new ItemStack(TFCItems.Powder,1,8),new ItemStack(TFCItems.Powder,1,0),new ItemStack(TFCBlocks.Sand2,1,32767)});
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Dye,1,12),new Object[]{new ItemStack(TFCItems.Powder,1,8),new ItemStack(TFCItems.Powder,1,0), "blockSand"}));
 
 		//Chest
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Chest, 1), new Object[] { "###","# #","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, 32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Chest, 1), new Object[] { "###","# #","###", Character.valueOf('#'), "woodLumber"}));
 
 		// Stone Bricks
 		for(int i = 0; i < Chisels.length; i++)
@@ -249,13 +245,12 @@ public class Recipes
 
 		}
 
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{new ItemStack(TFCBlocks.Sand,1,32767),new ItemStack(TFCItems.Powder, 1, 0),new ItemStack(TFCItems.WoodenBucketWater,1,32767)});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{new ItemStack(TFCBlocks.Sand2,1,32767),new ItemStack(TFCItems.Powder, 1, 0),new ItemStack(TFCItems.WoodenBucketWater,1,32767)});
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"blockSand", new ItemStack(TFCItems.Powder, 1, 0), "itemBucketWater"}));
 
 
 		//Gold Pan
-		GameRegistry.addRecipe(new ItemStack(TFCItems.GoldPan, 1, 0), new Object[] { 
-			"1", Character.valueOf('1'),Items.bowl});
+		GameRegistry.addRecipe(new ItemStack(TFCItems.GoldPan, 1, 0), new Object[] {"1", Character.valueOf('1'),Items.bowl});
+		
 		//Sluice
 		/*GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SluiceItem, 1), new Object[] { 
 			"  1"," 12","122", Character.valueOf('1'),"stickWood", Character.valueOf('2'),new ItemStack(TFCItems.SinglePlank,1,32767)}));*/
@@ -267,10 +262,10 @@ public class Recipes
 			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 6, 0), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(Recipes.Hammers[j], 1, 32767)});
 		}
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Bow,1), new Object[] {" #$","# $"," #$",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Bow,1), new Object[] {"$# ","$ #","$# ",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Bow,1), new Object[] {" #$","# $"," #$",Character.valueOf('#'),"stickWood",Character.valueOf('$'), "materialString"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Bow,1), new Object[] {"$# ","$ #","$# ",Character.valueOf('#'),"stickWood",Character.valueOf('$'), "materialString"}));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.FishingRod,1), new Object[] {"  #"," #$","# $",Character.valueOf('#'),"stickWood",Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.FishingRod,1), new Object[] {"  #"," #$","# $",Character.valueOf('#'),"stickWood",Character.valueOf('$'), "materialString"}));
 
 		//Tool Rack & Barrel & Armour Stands
 		for(int j = 0; j < Global.WOOD_ALL.length; j++)
@@ -291,34 +286,27 @@ public class Recipes
 			}
 		}
 
-		for (int i=0; i < Global.STONE_FLUXINDEX.length; i++)
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 1, 0), new Object[] {new ItemStack(TFCItems.LooseRock, 1, Global.STONE_FLUXINDEX[i]), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 4, 0), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
-
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Ink, 16, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(TFCItems.Dye,1,0)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Ink, 16, 0), new Object[] { "2", Character.valueOf('2'), "dyeBlack"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.FireStarter, 1, 0), new Object[] { "2 "," 2", Character.valueOf('2'), "stickWood"}));
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Bellows, 1, 0), new Object[] { "###","???","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767), Character.valueOf('?'), TFCItems.Leather});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Bellows, 1, 0), new Object[] { "###","???","###", Character.valueOf('#'), "woodLumber", Character.valueOf('?'), "materialLeather"}));
 		//GameRegistry.addRecipe(new ItemStack(TFCItems.terraStoneAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), mod_TFC_Core.terraStoneIgIn});
 		//GameRegistry.addRecipe(new ItemStack(TFCItems.terraStoneAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), mod_TFC_Core.terraStoneIgEx});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil, 1, 1), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.CopperIngot2x});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil, 1, 2), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.BronzeIngot2x});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil, 1, 3), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.WroughtIronIngot2x});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil, 1, 4), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.SteelIngot2x});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil, 1, 5), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.BlackSteelIngot2x});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil, 1, 6), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.BlueSteelIngot2x});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil, 1, 7), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.RedSteelIngot2x});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil2, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.RoseGoldIngot2x});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil2, 1, 1), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.BismuthBronzeIngot2x});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Anvil2, 1, 2), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.BlackBronzeIngot2x});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil, 1, 1), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleCopper"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil, 1, 2), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleBronze"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil, 1, 3), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleWroughtIron"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil, 1, 4), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleSteel"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil, 1, 5), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleBlackSteel"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil, 1, 6), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleBlueSteel"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil, 1, 7), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleRedSteel"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil2, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleRoseGold"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil2, 1, 1), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleBismuthBronze"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil2, 1, 2), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleBlackBronze"}));
 
-		//GameRegistry.addRecipe(new ItemStack(TFCItems.CeramicMold, 4, 0), new Object[] { "# #","###", Character.valueOf('#'), new ItemStack(Item.clay,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.EarlyBloomery, 1), new Object[] { "PPP","P P","PPP", Character.valueOf('P'), "sheetDoubleAnyBronze"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.BlastFurnace, 1), new Object[]
+		{ "PPP", "PCP", "PPP", Character.valueOf('P'), "sheetDoubleWroughtIron", Character.valueOf('C'), new ItemStack(TFCBlocks.Crucible, 1) }));
 
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.EarlyBloomery, 1), new Object[] { "PPP","P P","PPP", Character.valueOf('P'), new ItemStack(TFCItems.BronzeSheet2x, 1)});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.EarlyBloomery, 1), new Object[] { "PPP","P P","PPP", Character.valueOf('P'), new ItemStack(TFCItems.BismuthBronzeSheet2x, 1)});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.EarlyBloomery, 1), new Object[] { "PPP","P P","PPP", Character.valueOf('P'), new ItemStack(TFCItems.BlackBronzeSheet2x, 1)});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.BlastFurnace, 1), new Object[] { "PPP","PCP","PPP", Character.valueOf('P'), new ItemStack(TFCItems.WroughtIronSheet2x, 1),Character.valueOf('C'), new ItemStack(TFCBlocks.Crucible, 1)});
-
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.NestBox,1), new Object[] {"S S","PSP","PPP",Character.valueOf('S'), new ItemStack(TFCItems.Straw,1),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,32767)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.NestBox,1), new Object[] {"S S","PSP","PPP",Character.valueOf('S'), new ItemStack(TFCItems.Straw,1),Character.valueOf('P'), "woodLumber"}));
 
 		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
@@ -337,69 +325,48 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Leash,1),new Object[]{"RR ","RR ","  R",Character.valueOf('R'),new ItemStack(TFCItems.JuteFibre,1)});
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), TFCItems.WroughtIronIngot, Character.valueOf('s'), "stickWood"}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.golden_rail, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), TFCItems.GoldIngot, Character.valueOf('s'), "stickWood", Character.valueOf('r'), Items.redstone}));
-		GameRegistry.addRecipe(new ItemStack(Items.minecart, 1), new Object[] { "P P","PPP", Character.valueOf('P'), TFCItems.WroughtIronSheet});
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.minecartCrate, 1), new Object[] { new ItemStack(TFCBlocks.Chest), new ItemStack(Items.minecart)});
-		GameRegistry.addRecipe(new ItemStack(Items.shears, 1), new Object[] { "P "," P", Character.valueOf('P'), TFCItems.WroughtIronIngot});
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.lever, 1), new Object[] { "P","H", Character.valueOf('P'), "stickWood", Character.valueOf('H'), new ItemStack(TFCItems.LooseRock,1,32767)}));
-		GameRegistry.addRecipe(new ItemStack(Blocks.trapdoor, 1, 0), new Object[] { "###","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767)});
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.sign, 1, 0), new Object[] { "###","###"," 1 ", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767),Character.valueOf('1'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), "ingotIron", Character.valueOf('s'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.golden_rail, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), "ingotGold", Character.valueOf('s'), "stickWood", Character.valueOf('r'), Items.redstone}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.minecart, 1), new Object[] { "P P","PPP", Character.valueOf('P'), "sheetWroughtIron"}));
+		//GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.minecartCrate, 1), new Object[] { new ItemStack(TFCBlocks.Chest), new ItemStack(Items.minecart)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.shears, 1), new Object[] { "P "," P", Character.valueOf('P'), "ingotIron"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.lever, 1), new Object[] { "P","H", Character.valueOf('P'), "stickWood", Character.valueOf('H'), "itemRock"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.trapdoor, 1, 0), new Object[] { "###","###", Character.valueOf('#'), "woodLumber"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.sign, 1, 0), new Object[] { "###","###"," 1 ", Character.valueOf('#'), "woodLumber", Character.valueOf('1'), "stickWood"}));
 
-		for(int j = 0; j < Gems.length; j++)
-		{
-			for(int k = 0; k < 3; k++)
-			{
-				GameRegistry.addRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP","GKG","PPP", 
-					Character.valueOf('P'), TFCBlocks.StoneIgExSmooth, Character.valueOf('K'), new ItemStack(Gems[j],1,0), Character.valueOf('G'), new ItemStack(Blocks.glass,1)});
-				GameRegistry.addRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP","GKG","PPP", 
-					Character.valueOf('P'), TFCBlocks.StoneIgInSmooth, Character.valueOf('K'), new ItemStack(Gems[j],1,0), Character.valueOf('G'), new ItemStack(Blocks.glass,1)});
-				GameRegistry.addRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP","GKG","PPP", 
-					Character.valueOf('P'), TFCBlocks.StoneSedSmooth, Character.valueOf('K'), new ItemStack(Gems[j],1,0), Character.valueOf('G'), new ItemStack(Blocks.glass,1)});
-				GameRegistry.addRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP","GKG","PPP", 
-					Character.valueOf('P'), TFCBlocks.StoneMMSmooth, Character.valueOf('K'), new ItemStack(Gems[j],1,0), Character.valueOf('G'), new ItemStack(Blocks.glass,1)});
-			}
-		}
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[]
+		{ "PPP", "GKG", "PPP", Character.valueOf('P'), "stoneSmooth", Character.valueOf('K'), "gemChipped", Character.valueOf('G'), new ItemStack(Blocks.glass, 1) }));
 
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Quern, 1), new Object[] { "PPP", 
-			Character.valueOf('P'), TFCBlocks.StoneIgExSmooth});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Quern, 1), new Object[] { "PPP", 
-			Character.valueOf('P'), TFCBlocks.StoneIgInSmooth});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Quern, 1), new Object[] { "PPP", 
-			Character.valueOf('P'), TFCBlocks.StoneSedSmooth});
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Quern, 1), new Object[] { "PPP", 
-			Character.valueOf('P'), TFCBlocks.StoneMMSmooth});
-		GameRegistry.addShapelessRecipe(new ItemStack(Items.book,1),new Object[]{new ItemStack(Items.paper,3),new ItemStack(TFCItems.Leather,1)});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Quern, 1), new Object[]
+		{ "PPP", Character.valueOf('P'), "stoneSmooth" }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Quern, 1), new Object[]
+		{ "  W", "PPP", Character.valueOf('P'), "stone", Character.valueOf('W'), "stickWood" }));
 
-		//remove wool and book and quill recipes
-		//RemoveRecipe(new ItemStack(Item.writableBook));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.book, 1), new Object[]
+		{ new ItemStack(Items.paper), new ItemStack(Items.paper), new ItemStack(Items.paper), "materialLeather" }));
 
-		RemoveRecipe(new ItemStack(Blocks.wooden_button));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.ButtonWood, 1), new Object[] {"#", "#", Character.valueOf('#'), "plankWood"}));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.writabeBookTFC, 1), new Object[]{new ItemStack(Items.book, 1)});
+
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Spindle,1), new Object[] { "P","#",Character.valueOf('P'),
 			new ItemStack(TFCItems.SpindleHead,1, 1),Character.valueOf('#'),"stickWood"}));
+
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SpindleHead,1,0), new Object[] { "P","#",Character.valueOf('P'),
-			new ItemStack(TFCItems.ClayBall,32767),Character.valueOf('#'),"stickWood"}));
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.WoolYarn,8),new Object[]{new ItemStack(TFCItems.Wool,1,32767),new ItemStack(TFCItems.Spindle,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.WoolCloth,1), new Object[]{"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.WoolYarn,1)});
-		GameRegistry.addRecipe(new ItemStack(Items.bed,1),new Object[]{"PPP","QQQ",Character.valueOf('P'),new ItemStack(TFCItems.WoolCloth,1),Character.valueOf('Q'),
-			new ItemStack(TFCItems.SinglePlank,1,32767)});
+			"lumpClay", Character.valueOf('#'), "stickWood" }));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP",
-			Character.valueOf('P'), TFCBlocks.StoneIgEx, Character.valueOf('W'), "stickWood"}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP", 
-			Character.valueOf('P'), TFCBlocks.StoneIgIn, Character.valueOf('W'), "stickWood"}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP", 
-			Character.valueOf('P'), TFCBlocks.StoneSed, Character.valueOf('W'), "stickWood"}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP", 
-			Character.valueOf('P'), TFCBlocks.StoneMM, Character.valueOf('W'), "stickWood"}));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.WoolYarn, 8), new Object[]
+		{ "materialWool", new ItemStack(TFCItems.Spindle, 1, 32767) }));
 
-		GameRegistry.addRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[] { "W ", " P", 
-			Character.valueOf('P'), Items.flint, Character.valueOf('W'), TFCItems.WroughtIronIngot});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[] { "W ", " P", 
-			Character.valueOf('P'), Items.flint, Character.valueOf('W'), TFCItems.SteelIngot});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WoolCloth, 1), new Object[]
+		{ "PP", "PP", Character.valueOf('P'), "materialString" }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.bed, 1), new Object[]
+		{ "PPP", "QQQ", Character.valueOf('P'), "materialCloth", Character.valueOf('Q'), "woodLumber" }));
+
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[]
+		{ Items.flint, "ingotIron" }));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[]
+		{ Items.flint, "ingotSteel" }));
 
 		// Walls & cobble blocks
 		for(int j = 0; j < Global.STONE_IGIN.length; j++)
@@ -614,6 +581,8 @@ public class Recipes
 
 		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks, 1, WILDCARD));
 		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks2, 1, WILDCARD));
+		
+		OreDictionary.registerOre("woodLumber", new ItemStack(TFCItems.SinglePlank, 1, WILDCARD));
 
 		OreDictionary.registerOre("stickWood", new ItemStack(TFCItems.Stick));
 
@@ -731,6 +700,7 @@ public class Recipes
 		OreDictionary.registerOre("ingotSterlingSilver", new ItemStack(TFCItems.SterlingSilverIngot));
 		OreDictionary.registerOre("ingotPlatinum", new ItemStack(TFCItems.PlatinumIngot));
 		OreDictionary.registerOre("ingotWroughtIron", new ItemStack(TFCItems.WroughtIronIngot));
+		OreDictionary.registerOre("ingotIron", new ItemStack(TFCItems.WroughtIronIngot));
 		OreDictionary.registerOre("ingotNickel", new ItemStack(TFCItems.NickelIngot));
 		OreDictionary.registerOre("ingotPigIron", new ItemStack(TFCItems.PigIronIngot));
 		OreDictionary.registerOre("ingotSteel", new ItemStack(TFCItems.SteelIngot));
@@ -738,6 +708,79 @@ public class Recipes
 		OreDictionary.registerOre("ingotRedSteel", new ItemStack(TFCItems.RedSteelIngot));
 		OreDictionary.registerOre("ingotBlueSteel", new ItemStack(TFCItems.BlueSteelIngot));
 		OreDictionary.registerOre("ingotUnknown", new ItemStack(TFCItems.UnknownIngot));
+
+		//Double Ingots
+		OreDictionary.registerOre("ingotDoubleBismuth", new ItemStack(TFCItems.BismuthIngot2x));
+		OreDictionary.registerOre("ingotDoubleTin", new ItemStack(TFCItems.TinIngot2x));
+		OreDictionary.registerOre("ingotDoubleZinc", new ItemStack(TFCItems.ZincIngot2x));
+		OreDictionary.registerOre("ingotDoubleCopper", new ItemStack(TFCItems.CopperIngot2x));
+		OreDictionary.registerOre("ingotDoubleBronze", new ItemStack(TFCItems.BronzeIngot2x));
+		OreDictionary.registerOre("ingotDoubleBismuthBronze", new ItemStack(TFCItems.BismuthBronzeIngot2x));
+		OreDictionary.registerOre("ingotDoubleBlackBronze", new ItemStack(TFCItems.BlackBronzeIngot2x));
+		OreDictionary.registerOre("ingotDoubleBrass", new ItemStack(TFCItems.BrassIngot2x));
+		OreDictionary.registerOre("ingotDoubleLead", new ItemStack(TFCItems.LeadIngot2x));
+		OreDictionary.registerOre("ingotDoubleGold", new ItemStack(TFCItems.GoldIngot2x));
+		OreDictionary.registerOre("ingotDoubleRoseGold", new ItemStack(TFCItems.RoseGoldIngot2x));
+		OreDictionary.registerOre("ingotDoubleSilver", new ItemStack(TFCItems.SilverIngot2x));
+		OreDictionary.registerOre("ingotDoubleSterlingSilver", new ItemStack(TFCItems.SterlingSilverIngot2x));
+		OreDictionary.registerOre("ingotDoublePlatinum", new ItemStack(TFCItems.PlatinumIngot2x));
+		OreDictionary.registerOre("ingotDoubleWroughtIron", new ItemStack(TFCItems.WroughtIronIngot2x));
+		OreDictionary.registerOre("ingotDoubleNickel", new ItemStack(TFCItems.NickelIngot2x));
+		OreDictionary.registerOre("ingotDoublePigIron", new ItemStack(TFCItems.PigIronIngot2x));
+		OreDictionary.registerOre("ingotDoubleSteel", new ItemStack(TFCItems.SteelIngot2x));
+		OreDictionary.registerOre("ingotDoubleBlackSteel", new ItemStack(TFCItems.BlackSteelIngot2x));
+		OreDictionary.registerOre("ingotDoubleRedSteel", new ItemStack(TFCItems.RedSteelIngot2x));
+		OreDictionary.registerOre("ingotDoubleBlueSteel", new ItemStack(TFCItems.BlueSteelIngot2x));
+
+		//Sheets
+		OreDictionary.registerOre("sheetBismuth", new ItemStack(TFCItems.BismuthSheet));
+		OreDictionary.registerOre("sheetTin", new ItemStack(TFCItems.TinSheet));
+		OreDictionary.registerOre("sheetZinc", new ItemStack(TFCItems.ZincSheet));
+		OreDictionary.registerOre("sheetCopper", new ItemStack(TFCItems.CopperSheet));
+		OreDictionary.registerOre("sheetBronze", new ItemStack(TFCItems.BronzeSheet));
+		OreDictionary.registerOre("sheetBismuthBronze", new ItemStack(TFCItems.BismuthBronzeSheet));
+		OreDictionary.registerOre("sheetBlackBronze", new ItemStack(TFCItems.BlackBronzeSheet));
+		OreDictionary.registerOre("sheetBrass", new ItemStack(TFCItems.BrassSheet));
+		OreDictionary.registerOre("sheetLead", new ItemStack(TFCItems.LeadSheet));
+		OreDictionary.registerOre("sheetGold", new ItemStack(TFCItems.GoldSheet));
+		OreDictionary.registerOre("sheetRoseGold", new ItemStack(TFCItems.RoseGoldSheet));
+		OreDictionary.registerOre("sheetSilver", new ItemStack(TFCItems.SilverSheet));
+		OreDictionary.registerOre("sheetSterlingSilver", new ItemStack(TFCItems.SterlingSilverSheet));
+		OreDictionary.registerOre("sheetPlatinum", new ItemStack(TFCItems.PlatinumSheet));
+		OreDictionary.registerOre("sheetWroughtIron", new ItemStack(TFCItems.WroughtIronSheet));
+		OreDictionary.registerOre("sheetNickel", new ItemStack(TFCItems.NickelSheet));
+		OreDictionary.registerOre("sheetPigIron", new ItemStack(TFCItems.PigIronSheet));
+		OreDictionary.registerOre("sheetSteel", new ItemStack(TFCItems.SteelSheet));
+		OreDictionary.registerOre("sheetBlackSteel", new ItemStack(TFCItems.BlackSteelSheet));
+		OreDictionary.registerOre("sheetRedSteel", new ItemStack(TFCItems.RedSteelSheet));
+		OreDictionary.registerOre("sheetBlueSteel", new ItemStack(TFCItems.BlueSteelSheet));
+
+		//Double Sheets
+		OreDictionary.registerOre("sheetDoubleBismuth", new ItemStack(TFCItems.BismuthSheet2x));
+		OreDictionary.registerOre("sheetDoubleTin", new ItemStack(TFCItems.TinSheet2x));
+		OreDictionary.registerOre("sheetDoubleZinc", new ItemStack(TFCItems.ZincSheet2x));
+		OreDictionary.registerOre("sheetDoubleCopper", new ItemStack(TFCItems.CopperSheet2x));
+		OreDictionary.registerOre("sheetDoubleBronze", new ItemStack(TFCItems.BronzeSheet2x));
+		OreDictionary.registerOre("sheetDoubleBismuthBronze", new ItemStack(TFCItems.BismuthBronzeSheet2x));
+		OreDictionary.registerOre("sheetDoubleBlackBronze", new ItemStack(TFCItems.BlackBronzeSheet2x));
+		OreDictionary.registerOre("sheetDoubleBrass", new ItemStack(TFCItems.BrassSheet2x));
+		OreDictionary.registerOre("sheetDoubleLead", new ItemStack(TFCItems.LeadSheet2x));
+		OreDictionary.registerOre("sheetDoubleGold", new ItemStack(TFCItems.GoldSheet2x));
+		OreDictionary.registerOre("sheetDoubleRoseGold", new ItemStack(TFCItems.RoseGoldSheet2x));
+		OreDictionary.registerOre("sheetDoubleSilver", new ItemStack(TFCItems.SilverSheet2x));
+		OreDictionary.registerOre("sheetDoubleSterlingSilver", new ItemStack(TFCItems.SterlingSilverSheet2x));
+		OreDictionary.registerOre("sheetDoublePlatinum", new ItemStack(TFCItems.PlatinumSheet2x));
+		OreDictionary.registerOre("sheetDoubleWroughtIron", new ItemStack(TFCItems.WroughtIronSheet2x));
+		OreDictionary.registerOre("sheetDoubleNickel", new ItemStack(TFCItems.NickelSheet2x));
+		OreDictionary.registerOre("sheetDoublePigIron", new ItemStack(TFCItems.PigIronSheet2x));
+		OreDictionary.registerOre("sheetDoubleSteel", new ItemStack(TFCItems.SteelSheet2x));
+		OreDictionary.registerOre("sheetDoubleBlackSteel", new ItemStack(TFCItems.BlackSteelSheet2x));
+		OreDictionary.registerOre("sheetDoubleRedSteel", new ItemStack(TFCItems.RedSteelSheet2x));
+		OreDictionary.registerOre("sheetDoubleBlueSteel", new ItemStack(TFCItems.BlueSteelSheet2x));
+		
+		OreDictionary.registerOre("sheetDoubleAnyBronze", new ItemStack(TFCItems.BronzeSheet2x));
+		OreDictionary.registerOre("sheetDoubleAnyBronze", new ItemStack(TFCItems.BismuthBronzeSheet2x));
+		OreDictionary.registerOre("sheetDoubleAnyBronze", new ItemStack(TFCItems.BlackBronzeSheet2x));
 
 		//Gems
 		OreDictionary.registerOre("gemChippedAgate", new ItemStack(TFCItems.GemAgate));
@@ -753,6 +796,20 @@ public class Recipes
 		OreDictionary.registerOre("gemChippedSapphire", new ItemStack(TFCItems.GemSapphire));
 		OreDictionary.registerOre("gemChippedTopaz", new ItemStack(TFCItems.GemTopaz));
 		OreDictionary.registerOre("gemChippedTourmaline", new ItemStack(TFCItems.GemTourmaline));
+
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemAgate));
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemAmethyst));
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemBeryl));
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemDiamond));
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemEmerald));
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemGarnet));
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemJade));
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemJasper));
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemOpal));
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemRuby));
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemSapphire));
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemTopaz));
+		OreDictionary.registerOre("gemChipped", new ItemStack(TFCItems.GemTourmaline));
 
 		OreDictionary.registerOre("gemFlawedAgate", new ItemStack(TFCItems.GemAgate, 1, 1));
 		OreDictionary.registerOre("gemFlawedAmethyst", new ItemStack(TFCItems.GemAmethyst, 1, 1));
@@ -835,11 +892,49 @@ public class Recipes
 		OreDictionary.registerOre("stoneBrick", new ItemStack(TFCBlocks.StoneMMBrick, 1, WILDCARD));
 		OreDictionary.registerOre("stoneBrick", new ItemStack(TFCBlocks.StoneSedBrick, 1, WILDCARD));
 
+		//Smooth Stone
+		OreDictionary.registerOre("stoneSmooth", new ItemStack(TFCBlocks.StoneIgExSmooth, 1, WILDCARD));
+		OreDictionary.registerOre("stoneSmooth", new ItemStack(TFCBlocks.StoneIgInSmooth, 1, WILDCARD));
+		OreDictionary.registerOre("stoneSmooth", new ItemStack(TFCBlocks.StoneMMSmooth, 1, WILDCARD));
+		OreDictionary.registerOre("stoneSmooth", new ItemStack(TFCBlocks.StoneSedSmooth, 1, WILDCARD));
+
 		//Crafting Table
 		OreDictionary.registerOre("craftingTableWood", new ItemStack(TFCBlocks.Workbench));
 		OreDictionary.registerOre("craftingTableWood", new ItemStack(Blocks.crafting_table));
+		
+		//Dyes
+		OreDictionary.registerOre("dyeBlack", new ItemStack(TFCItems.Dye, 1, 0));
+		OreDictionary.registerOre("dyeRed", new ItemStack(TFCItems.Powder, 1, 5));
+		OreDictionary.registerOre("dyeRed", new ItemStack(TFCItems.Dye, 1, 1));
+		OreDictionary.registerOre("dyeGreen", new ItemStack(TFCItems.Powder, 1, 8));
+		OreDictionary.registerOre("dyeGreen", new ItemStack(TFCItems.Dye, 1, 2));
+		OreDictionary.registerOre("dyeBrown", new ItemStack(TFCItems.Dye, 1, 3));
+		OreDictionary.registerOre("dyeBlue", new ItemStack(TFCItems.Powder, 1, 6));
+		OreDictionary.registerOre("dyeBlue", new ItemStack(TFCItems.Dye, 1, 4));
+		OreDictionary.registerOre("dyePurple", new ItemStack(TFCItems.Dye, 1, 5));
+		OreDictionary.registerOre("dyeCyan", new ItemStack(TFCItems.Dye, 1, 6));
+		OreDictionary.registerOre("dyeLightGray", new ItemStack(TFCItems.Dye, 1, 7));
+		OreDictionary.registerOre("dyeGray", new ItemStack(TFCItems.Dye, 1, 8));
+		OreDictionary.registerOre("dyePink", new ItemStack(TFCItems.Dye, 1, 9));
+		OreDictionary.registerOre("dyeLime", new ItemStack(TFCItems.Dye, 1, 10));
+		OreDictionary.registerOre("dyeYellow", new ItemStack(TFCItems.Powder, 1, 7));
+		OreDictionary.registerOre("dyeYellow", new ItemStack(TFCItems.Dye, 1, 11));
+		OreDictionary.registerOre("dyeLightBlue", new ItemStack(TFCItems.Dye, 1, 12));
+		OreDictionary.registerOre("dyeMagenta", new ItemStack(TFCItems.Dye, 1, 13));
+		OreDictionary.registerOre("dyeOrange", new ItemStack(TFCItems.Dye, 1, 14));
+		OreDictionary.registerOre("dyeWhite", new ItemStack(TFCItems.Dye, 1, 15));
+		
+		//Materials
+		OreDictionary.registerOre("materialLeather", new ItemStack(Items.leather));
+		OreDictionary.registerOre("materialLeather", new ItemStack(TFCItems.Leather));
+		
+		OreDictionary.registerOre("materialString", new ItemStack(Items.string));
+		OreDictionary.registerOre("materialString", new ItemStack(TFCItems.WoolYarn));
+		
+		OreDictionary.registerOre("materialCloth", new ItemStack(TFCItems.WoolCloth));
+		OreDictionary.registerOre("materialWool", new ItemStack(TFCItems.Wool));
 
-		//Miscellaneous
+		//Miscellaneous Items
 		OreDictionary.registerOre("lumpClay", new ItemStack(Items.clay_ball));
 		OreDictionary.registerOre("lumpClay", new ItemStack(TFCItems.ClayBall, 1, 0));
 
@@ -851,6 +946,30 @@ public class Recipes
 
 		OreDictionary.registerOre("itemReed", new ItemStack(Items.reeds));
 		OreDictionary.registerOre("itemReed", new ItemStack(TFCItems.Reeds));
+		
+		OreDictionary.registerOre("itemRock", new ItemStack(TFCItems.LooseRock, 1, WILDCARD));
+		
+		OreDictionary.registerOre("itemBucketWater", new ItemStack(Items.water_bucket));
+		OreDictionary.registerOre("itemBucketWater", new ItemStack(TFCItems.WoodenBucketWater, 1, WILDCARD));
+		OreDictionary.registerOre("itemBucketWater", new ItemStack(TFCItems.RedSteelBucketWater, 1, WILDCARD));
+		OreDictionary.registerOre("itemBucketWater", new ItemStack(TFCItems.WoodenBucketSaltWater, 1, WILDCARD));
+		OreDictionary.registerOre("itemBucketWater", new ItemStack(TFCItems.RedSteelBucketSaltWater, 1, WILDCARD));
+
+		OreDictionary.registerOre("itemBucketFreshWater", new ItemStack(TFCItems.WoodenBucketWater, 1, WILDCARD));
+		OreDictionary.registerOre("itemBucketFreshWater", new ItemStack(TFCItems.RedSteelBucketWater, 1, WILDCARD));
+
+		OreDictionary.registerOre("itemBucketSaltWater", new ItemStack(TFCItems.WoodenBucketSaltWater, 1, WILDCARD));
+		OreDictionary.registerOre("itemBucketSaltWater", new ItemStack(TFCItems.RedSteelBucketSaltWater, 1, WILDCARD));
+		
+		
+		//Miscellaneous Blocks
+		OreDictionary.registerOre("blockSand", new ItemStack(Blocks.sand));
+		OreDictionary.registerOre("blockSand", new ItemStack(TFCBlocks.Sand, 1, WILDCARD));
+		OreDictionary.registerOre("blockSand", new ItemStack(TFCBlocks.Sand2, 1, WILDCARD));
+		
+		OreDictionary.registerOre("blockDirt", new ItemStack(Blocks.dirt));
+		OreDictionary.registerOre("blockDirt", new ItemStack(TFCBlocks.Dirt, 1, WILDCARD));
+		OreDictionary.registerOre("blockDirt", new ItemStack(TFCBlocks.Dirt2, 1, WILDCARD));
 	}
 
 	private static ItemStack checkMelted(ItemStack is)
@@ -865,9 +984,11 @@ public class Recipes
 		// With oredict in place, we MUST remove the vanilla crafting table.
 		// Otherwise TFC can not use the 4 planks recipe to create its own crafting upgrade.
 		RemoveRecipe(new ItemStack(Blocks.crafting_table));
-		// Also the Bow and Fishing Rod
+		// Other Conflicting Recipes
 		RemoveRecipe(new ItemStack(Items.bow));
 		RemoveRecipe(new ItemStack(Items.fishing_rod));
+		RemoveRecipe(new ItemStack(Blocks.wooden_button));
+		RemoveRecipe(new ItemStack(Items.flint_and_steel));
 
 		if(TFCOptions.enableVanillaDiamondRecipe == true)
 		{
@@ -875,21 +996,11 @@ public class Recipes
 			GameRegistry.addRecipe(new ItemStack(Items.diamond, 2), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GemDiamond,1,3)});
 			GameRegistry.addRecipe(new ItemStack(Items.diamond, 3), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GemDiamond,1,4)});
 		}
-		if(TFCOptions.enableVanillaIronRecipe== true)
-			GameRegistry.addRecipe(new ItemStack(Items.iron_ingot, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.WroughtIronIngot,1)});
-		if(TFCOptions.enableVanillaGoldRecipe == true)
-			GameRegistry.addRecipe(new ItemStack(Items.gold_ingot, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GoldIngot,1)});
+
 		if(TFCOptions.enableVanillaRecipes == true)
 		{
 			GameRegistry.addRecipe(new ItemStack(Items.apple,1),new Object[]{"1",Character.valueOf('1'),new ItemStack(TFCItems.RedApple,1)});
 
-			//Terrastone to Cobblestone
-			//now handled by oredict
-			//GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneSedCobble});
-			//GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneIgInCobble});
-			//GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneIgExCobble});
-			//GameRegistry.addRecipe(new ItemStack(Blocks.cobblestone, 1), new Object[] {"11", "11", Character.valueOf('1'),TFCBlocks.StoneMMCobble});
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.leather,1),new Object[]{new ItemStack(TFCItems.Leather, 1)});
 			GameRegistry.addShapelessRecipe(new ItemStack(Items.bow,1),new Object[]{new ItemStack(TFCItems.Bow, 1, 0)});
 			GameRegistry.addShapelessRecipe(new ItemStack(Items.fishing_rod,1),new Object[]{new ItemStack(TFCItems.FishingRod, 1, 0)});
 
