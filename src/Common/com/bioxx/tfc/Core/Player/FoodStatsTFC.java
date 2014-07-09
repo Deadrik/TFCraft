@@ -354,7 +354,7 @@ public class FoodStatsTFC
 			//add the nutrition contents
 			addNutrition(item.getFoodGroup(), eatAmount*tasteFactor);
 			//fill the stomach
-			this.stomachLevel += eatAmount;
+			this.stomachLevel += eatAmount*tasteFactor;
 			//Now remove the eaten amount from the itemstack.
 			if(reduceFood(is, eatAmount))
 				is.stackSize = 0;
@@ -383,7 +383,7 @@ public class FoodStatsTFC
 			float _sat = item.getSatisfaction(is);
 			if(!ItemMeal.isWarm(is))
 				_sat *= 0.25f;
-			this.satisfaction += eatAmount * _sat;
+			this.satisfaction += eatAmount * _sat * tasteFactor;
 			//Now remove the eaten amount from the itemstack.
 			if(reduceFood(is, eatAmount))
 			{
@@ -400,7 +400,7 @@ public class FoodStatsTFC
 				float eatAmount = Math.min(weight - decay, 5f);
 				float tasteFactor = getTasteFactor(is);
 				addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount*tasteFactor);
-				this.stomachLevel += eatAmount;
+				this.stomachLevel += eatAmount*tasteFactor;
 				if(reduceFood(is, eatAmount))
 					is.stackSize = 0;
 			}
