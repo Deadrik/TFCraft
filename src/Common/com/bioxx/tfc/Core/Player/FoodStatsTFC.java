@@ -1,5 +1,7 @@
 package com.bioxx.tfc.Core.Player;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -26,11 +28,11 @@ public class FoodStatsTFC
 	private float stomachMax = 24.0f;
 	private float prevFoodLevel = 24;
 
-	public float nutrFruit = 20;
-	public float nutrVeg = 20;
-	public float nutrGrain = 20;
-	public float nutrDairy = 20;
-	public float nutrProtein = 20;
+	public float nutrFruit = 1.0f;
+	public float nutrVeg = 1.0f;
+	public float nutrGrain = 1.0f;
+	public float nutrDairy = 1.0f;
+	public float nutrProtein = 1.0f;
 	public long soberTime = 0;
 
 	/**This is how full the player is from the food that they've eaten. 
@@ -48,6 +50,7 @@ public class FoodStatsTFC
 	public long waterTimer = 0;
 
 	public EntityPlayer player;
+	private long nameSeed = Long.MIN_VALUE;
 
 	public FoodStatsTFC(EntityPlayer player)
 	{
@@ -112,11 +115,7 @@ public class FoodStatsTFC
 					foodExhaustionLevel = 0;
 				}
 				this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
-				nutrFruit = Math.max(this.nutrFruit - (1 + foodExhaustionLevel)/10, 0);
-				nutrVeg = Math.max(this.nutrVeg - (1 + foodExhaustionLevel)/10, 0);
-				nutrGrain = Math.max(this.nutrGrain - (1 + foodExhaustionLevel)/10, 0);
-				nutrProtein = Math.max(this.nutrProtein - (1 + foodExhaustionLevel)/10, 0);
-				nutrDairy = Math.max(this.nutrDairy - (1 + foodExhaustionLevel)/10, 0);
+				reduceNutrition();
 			}
 
 			//Heal or hurt the player based on hunger.
@@ -168,6 +167,15 @@ public class FoodStatsTFC
 				}
 			}
 		}
+	}
+
+	protected void reduceNutrition() 
+	{
+		nutrFruit = Math.max(this.nutrFruit - (0.005f + foodExhaustionLevel), 0);
+		nutrVeg = Math.max(this.nutrVeg - (0.005f + foodExhaustionLevel), 0);
+		nutrGrain = Math.max(this.nutrGrain - (0.005f + foodExhaustionLevel), 0);
+		nutrProtein = Math.max(this.nutrProtein - (0.005f + foodExhaustionLevel), 0);
+		nutrDairy = Math.max(this.nutrDairy - (0.005f + foodExhaustionLevel), 0);
 	}
 
 	public int getMaxWater(EntityPlayer player)
@@ -276,11 +284,62 @@ public class FoodStatsTFC
 		this.satisfaction = par1;
 	}
 
+	public long getPlayerFoodSeed()
+	{
+		if(nameSeed == Long.MIN_VALUE)
+		{
+			long seed = 0;
+			byte[] nameBytes = player.getCommandSenderName().getBytes();
+			for(byte b : nameBytes)
+				seed+=b;
+			nameSeed = seed + player.worldObj.getSeed();
+		}
+		return nameSeed;
+	}
+
+	/***
+	 * @return Returns an array containing taste preferences in the following order: Sweetness, Sourness, Saltiness, Bitterness, Savoriness
+	 */
+	public int[] getPrefTaste()
+	{
+		Random R = new Random(getPlayerFoodSeed());
+		return new int[]{10+R.nextInt(80),10+R.nextInt(80),10+R.nextInt(80),10+R.nextInt(80),10+R.nextInt(80)};
+	}
+
+	float getTasteFactor(ItemStack food)
+	{
+		Random R = new Random(getPlayerFoodSeed());
+		float tasteFactor = 0.8f;
+		int[] tastePref = getPrefTaste();
+
+		tasteFactor += getTasteDistanceFactor(tastePref[0], ((IFood)food.getItem()).getTasteSweet(food));
+		tasteFactor += getTasteDistanceFactor(tastePref[1], ((IFood)food.getItem()).getTasteSour(food));
+		tasteFactor += getTasteDistanceFactor(tastePref[2], ((IFood)food.getItem()).getTasteSalty(food));
+		tasteFactor += getTasteDistanceFactor(tastePref[3], ((IFood)food.getItem()).getTasteBitter(food));
+		tasteFactor += getTasteDistanceFactor(tastePref[4], ((IFood)food.getItem()).getTasteSavory(food));
+
+		return tasteFactor;
+	}
+
+	float getTasteDistanceFactor(int pref, int val)
+	{
+		int abs = pref-val;
+		if(abs < 0)
+			abs*= -1;
+
+		if(abs < 11)
+		{
+			return (11-abs)*0.01f;
+		}
+		else return 0;
+	}
+
 	/**
 	 * Eat some food.
 	 */
 	public void eatFood(ItemStack is)
 	{
+
 		if(is.getItem() instanceof ItemFoodTFC)
 		{
 			ItemFoodTFC item = (ItemFoodTFC) is.getItem();
@@ -290,8 +349,10 @@ public class FoodStatsTFC
 			float stomachDiff = this.stomachLevel+eatAmount-getMaxStomach(this.player);
 			if(stomachDiff > 0)
 				eatAmount-=stomachDiff;
+
+			float tasteFactor = getTasteFactor(is);
 			//add the nutrition contents
-			addNutrition(item.getFoodGroup(), eatAmount);
+			addNutrition(item.getFoodGroup(), eatAmount*tasteFactor);
 			//fill the stomach
 			this.stomachLevel += eatAmount;
 			//Now remove the eaten amount from the itemstack.
@@ -307,14 +368,14 @@ public class FoodStatsTFC
 			float stomachDiff = this.stomachLevel+eatAmount-getMaxStomach(this.player);
 			if(stomachDiff > 0)
 				eatAmount-=stomachDiff;
-
+			float tasteFactor = getTasteFactor(is);
 			//add the nutrition contents
 			int[] fg = new int[]{getfg(is, 0), getfg(is, 1), getfg(is, 2), getfg(is, 3)};
 			float[] weights = new float[]{0.5f,0.2f,0.2f,0.1f};
 			for(int i = 0; i < 4; i++)
 			{
 				if(fg[i] != -1)
-					addNutrition(EnumFoodGroup.values()[fg[i]], eatAmount*weights[i]);
+					addNutrition(EnumFoodGroup.values()[fg[i]], eatAmount*weights[i]*tasteFactor);
 			}
 
 			//fill the stomach
@@ -337,14 +398,15 @@ public class FoodStatsTFC
 				float weight = nbt.hasKey("foodWeight") ? nbt.getFloat("foodWeight") : 0;
 				float decay = Math.max(nbt.hasKey("foodDecay") ? nbt.getFloat("foodDecay") : 0, 0);
 				float eatAmount = Math.min(weight - decay, 5f);
-				addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount);
+				float tasteFactor = getTasteFactor(is);
+				addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount*tasteFactor);
 				this.stomachLevel += eatAmount;
 				if(reduceFood(is, eatAmount))
 					is.stackSize = 0;
 			}
 			else
 			{
-				addNutrition(((IFood)(is.getItem())).getFoodGroup(), 10f);
+				addNutrition(((IFood)(is.getItem())).getFoodGroup(), 1f);
 			}
 		}
 	}
@@ -359,11 +421,11 @@ public class FoodStatsTFC
 	public float getNutritionHealthModifier()
 	{
 		float nMod = 0.00f;
-		nMod += 0.2f * (nutrFruit/24f);
-		nMod += 0.2f * (nutrVeg/24f);
-		nMod += 0.2f * (nutrGrain/24f);
-		nMod += 0.2f * (nutrProtein/24f);
-		nMod += 0.2f * (nutrDairy/24f);
+		nMod += 0.2f * nutrFruit;
+		nMod += 0.2f * nutrVeg;
+		nMod += 0.2f * nutrGrain;
+		nMod += 0.2f * nutrProtein;
+		nMod += 0.2f * nutrDairy;
 		return Math.max(nMod, 0.05f);
 	}
 
@@ -396,24 +458,25 @@ public class FoodStatsTFC
 		return false;
 	}
 
-	private void addNutrition(EnumFoodGroup fg, float amount)
+	private void addNutrition(EnumFoodGroup fg, float foodAmt)
 	{
+		float amount = foodAmt/5f/50f;//converts it to 2% if it is 5oz of food
 		switch(fg)
 		{
 		case Dairy:
-			this.nutrDairy = Math.min(nutrDairy + amount, 24);
+			this.nutrDairy = Math.min(nutrDairy + amount, 1.0f);
 			break;
 		case Fruit:
-			this.nutrFruit = Math.min(nutrFruit + amount, 24);
+			this.nutrFruit = Math.min(nutrFruit + amount, 1.0f);
 			break;
 		case Grain:
-			this.nutrGrain = Math.min(nutrGrain + amount, 24);
+			this.nutrGrain = Math.min(nutrGrain + amount, 1.0f);
 			break;
 		case Protein:
-			this.nutrProtein = Math.min(nutrProtein + amount, 24);
+			this.nutrProtein = Math.min(nutrProtein + amount, 1.0f);
 			break;
 		case Vegetable:
-			this.nutrVeg = Math.min(nutrVeg + amount, 24);
+			this.nutrVeg = Math.min(nutrVeg + amount, 1.0f);
 			break;
 		default:
 			break;

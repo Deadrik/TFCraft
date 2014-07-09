@@ -1,17 +1,17 @@
 package com.bioxx.tfc.GUI;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerSkills;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 public class GuiHealth extends GuiContainerTFC
 {
@@ -42,11 +42,11 @@ public class GuiHealth extends GuiContainerTFC
 		int h = (height - this.ySize) / 2;
 		FoodStatsTFC food = TFC_Core.getPlayerFoodStats(player);
 		int fr = (int)food.nutrFruit;
-		drawTexturedModalRect(w+55, h-20, 0, 106, (int)food.nutrFruit, 6);
-		drawTexturedModalRect(w+55, h-10, 0, 106, (int)food.nutrVeg, 6);
-		drawTexturedModalRect(w+55, h, 0, 106, (int)food.nutrGrain, 6);
-		drawTexturedModalRect(w+55, h+10, 0, 106, (int)food.nutrProtein, 6);
-		drawTexturedModalRect(w+55, h+20, 0, 106, (int)food.nutrDairy, 6);	
+		drawTexturedModalRect(w+55, h-20, 0, 106, (int)(food.nutrFruit*24), 6);
+		drawTexturedModalRect(w+55, h-10, 0, 106, (int)(food.nutrVeg*24), 6);
+		drawTexturedModalRect(w+55, h, 0, 106, (int)(food.nutrGrain*24), 6);
+		drawTexturedModalRect(w+55, h+10, 0, 106, (int)(food.nutrProtein*24), 6);
+		drawTexturedModalRect(w+55, h+20, 0, 106, (int)(food.nutrDairy*24), 6);	
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class GuiHealth extends GuiContainerTFC
 		buttonList.add(new GuiInventoryButton(3, guiLeft+176, guiTop + 26, 25, 20, 
 				0, 86, 25, 20, StatCollector.translateToLocal("gui.Inventory.Health"), TFC_Textures.GuiHealth));
 	}
-	
+
 	@Override
 	protected void drawGui(ResourceLocation rl)
 	{
