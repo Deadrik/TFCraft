@@ -61,7 +61,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 			// flag 4 -> Send a request to the server for the skills data.
 		}
 	}
-	
+
 	public PlayerUpdatePacket(int f, String name, int lvl)
 	{
 		this.flag = (byte)f;
@@ -157,6 +157,7 @@ public class PlayerUpdatePacket extends AbstractPacket
 			fs.waterLevel = this.waterLevel;
 			fs.nutrFruit = this.nutrFruit;
 			fs.nutrVeg = this.nutrVeg;
+			fs.nutrGrain = this.nutrGrain;
 			fs.nutrProtein = this.nutrProtein;
 			fs.nutrDairy = this.nutrDairy;
 			TFC_Core.setPlayerFoodStats(player, fs);
