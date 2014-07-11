@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,7 +21,7 @@ import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
-public class TileEntityEarlyBloomery extends NetworkTileEntity
+public class TEBloomery extends NetworkTileEntity
 {
 	public boolean isFlipped;
 	public boolean bloomeryLit;
@@ -35,7 +36,7 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 	public int oreCount;
 	public int outCount;
 
-	public TileEntityEarlyBloomery()
+	public TEBloomery()
 	{
 		isFlipped = false;
 		bloomeryLit = false;
@@ -240,9 +241,14 @@ public class TileEntityEarlyBloomery extends NetworkTileEntity
 			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
 					xCoord + direction[0], yCoord, zCoord + direction[1], 
 					xCoord + direction[0] + 1, yCoord+(maxCount/8) + 1.1, zCoord + direction[1] + 1));
+			
+			/*Create a list of any players that are inside the chimney*/
+			List playerList = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(
+					xCoord + direction[0], yCoord, zCoord + direction[1], 
+					xCoord + direction[0] + 1, yCoord+(maxCount/8) + 1.1, zCoord + direction[1] + 1));
 
-			/*Make sure the list isn't null or empty and that the stack is valid 1 layer above the Molten Ore*/
-			if (list != null && !list.isEmpty() && !bloomeryLit)
+			/*Make sure the list isn't null or empty, that the stack is valid 1 layer above the Molten Ore, and there are no players inside*/
+			if (list != null && !list.isEmpty() && !bloomeryLit && (playerList == null || playerList.isEmpty()))
 			{
 				/*Iterate through the list and check for charcoal, coke, and ore*/
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)

@@ -2,7 +2,7 @@ package com.bioxx.tfc.Render.Blocks;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
-import com.bioxx.tfc.TileEntities.TileEntityEarlyBloomery;
+import com.bioxx.tfc.TileEntities.TEBloomery;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -19,7 +19,7 @@ public class RenderBloomery implements ISimpleBlockRenderingHandler
 
 		int meta = blockAccess.getBlockMetadata(i, j, k);
 		int dir = meta & 3;
-		TileEntityEarlyBloomery te = (TileEntityEarlyBloomery)blockAccess.getTileEntity(i, j, k);
+		TEBloomery te = (TEBloomery)blockAccess.getTileEntity(i, j, k);
 		if(te != null)
 			if(te.isFlipped)
 				dir = BlockEarlyBloomery.flipDir(dir);

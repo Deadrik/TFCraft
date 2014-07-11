@@ -25,7 +25,7 @@ import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.CollisionRayTraceStandard;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TileEntityEarlyBloomery;
+import com.bioxx.tfc.TileEntities.TEBloomery;
 import com.bioxx.tfc.api.Interfaces.ICustomCollision;
 
 import cpw.mods.fml.relauncher.Side;
@@ -68,9 +68,9 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 			world.setBlockToAir(x, y, z);
 			world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(this, 1)));
 		}
-		else if ((TileEntityEarlyBloomery) world.getTileEntity(x, y, z) != null)
+		else if ((TEBloomery) world.getTileEntity(x, y, z) != null)
 		{
-			TileEntityEarlyBloomery te = (TileEntityEarlyBloomery) world.getTileEntity(x, y, z);
+			TEBloomery te = (TEBloomery) world.getTileEntity(x, y, z);
 			ItemStack is = entityplayer.getCurrentEquippedItem();
 
 			if (is != null && (is.getItem() == TFCItems.FireStarter || is.getItem() == TFCItems.FlintSteel))
@@ -99,7 +99,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 		boolean flipped = false;
 
 		int dir = world.getBlockMetadata(x, y, z) & 3;
-		TileEntityEarlyBloomery te = (TileEntityEarlyBloomery) world.getTileEntity(x, y, z);
+		TEBloomery te = (TEBloomery) world.getTileEntity(x, y, z);
 
 		if(te!= null)
 			flipped = te.isFlipped;
@@ -441,7 +441,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 
 	private boolean tryFlip(World world, int x, int y, int z)
 	{
-		TileEntityEarlyBloomery te = (TileEntityEarlyBloomery)world.getTileEntity(x, y, z);
+		TEBloomery te = (TEBloomery)world.getTileEntity(x, y, z);
 		te.swapFlipped();
 		if(!canBlockStay(world, x, y, z))
 			return false;
@@ -452,7 +452,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityEarlyBloomery();
+		return new TEBloomery();
 	}
 
 	/*@Override
@@ -520,7 +520,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer implements ICustomCo
 	{
 		int meta = world.getBlockMetadata(x, y, z);
 		int dir = meta & 3;
-		TileEntityEarlyBloomery te = (TileEntityEarlyBloomery)world.getTileEntity(x, y, z);
+		TEBloomery te = (TEBloomery)world.getTileEntity(x, y, z);
 		if(te.isFlipped)
 			dir = flipDir(dir);
 		float f = 0.125F;
