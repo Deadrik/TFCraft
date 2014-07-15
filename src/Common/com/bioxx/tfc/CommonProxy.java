@@ -43,6 +43,7 @@ import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBellows;
 import com.bioxx.tfc.TileEntities.TEBerryBush;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
+import com.bioxx.tfc.TileEntities.TEBloomery;
 import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.TileEntities.TECrop;
 import com.bioxx.tfc.TileEntities.TECrucible;
@@ -51,6 +52,7 @@ import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEFruitLeaves;
+import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
@@ -62,7 +64,6 @@ import com.bioxx.tfc.TileEntities.TESeaWeed;
 import com.bioxx.tfc.TileEntities.TEStand;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TileEntityBloom;
-import com.bioxx.tfc.TileEntities.TEBloomery;
 import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
 import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
@@ -135,6 +136,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TEMetalSheet.class, "Metal Sheet");
 		GameRegistry.registerTileEntity(TEOre.class, "ore");
 		GameRegistry.registerTileEntity(TELeatherRack.class, "leatherRack");
+		GameRegistry.registerTileEntity(TEGrill.class, "grill");
 
 		if(b)
 		{

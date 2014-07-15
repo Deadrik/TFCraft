@@ -32,6 +32,7 @@ import com.bioxx.tfc.Blocks.Devices.BlockCrucible;
 import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
 import com.bioxx.tfc.Blocks.Devices.BlockFirepit;
 import com.bioxx.tfc.Blocks.Devices.BlockForge;
+import com.bioxx.tfc.Blocks.Devices.BlockGrill;
 import com.bioxx.tfc.Blocks.Devices.BlockLeatherRack;
 import com.bioxx.tfc.Blocks.Devices.BlockNestBox;
 import com.bioxx.tfc.Blocks.Devices.BlockPottery;
@@ -164,6 +165,7 @@ public class TFCBlocks
 	public static int metalsheetRenderId;
 	public static int chestRenderId;
 	public static int leatherRackRenderId;
+	public static int grillRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -318,8 +320,11 @@ public class TFCBlocks
 	public static Block Gravel;
 	public static Block Gravel2;
 
+	public static Block Grill;
+
 	public static void RegisterBlocks()
 	{
+		GameRegistry.registerBlock(Grill, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Grill");
 		GameRegistry.registerBlock(Ore, "Ore1");
 		GameRegistry.registerBlock(Ore2, "Ore2");
 		GameRegistry.registerBlock(Ore3, "Ore3");
@@ -688,6 +693,8 @@ public class TFCBlocks
 
 		Gravel = (new BlockGravel(0)).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
 		Gravel2 = (new BlockGravel(16)).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
+
+		Grill = new BlockGrill().setHardness(2F).setBlockName("Grill");
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);
 		StoneIgEx.setHarvestLevel("pickaxe", 0);
