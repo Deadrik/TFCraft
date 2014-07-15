@@ -16,6 +16,8 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Chunkdata.ChunkData;
@@ -189,6 +191,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		this.rand.setSeed(chunkX * var7 + chunkZ * var9 ^ this.worldObj.getSeed());
 		boolean var11 = false;
 
+		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(par1IChunkProvider, worldObj, rand, chunkX, chunkZ, var11));
+
 		int x;
 		int y;
 		int z;
@@ -228,6 +232,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					this.worldObj.setBlock(x + xCoord, y, z + zCoord, Blocks.snow, 0, 0x2);
 			}
 		}
+
+		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(par1IChunkProvider, worldObj, rand, chunkX, chunkZ, var11));
 	}
 
 	public static List getCreatureSpawnsByChunk(World world, TFCBiome biome, int x, int z)
