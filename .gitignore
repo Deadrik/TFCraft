@@ -1,8 +1,18 @@
+.DS_Store
 *.pyc
+*~
+*swp
 TFC Build/
 bin/
 .gradle/
 build/
 .settings/
+logs/
+assets/
+crash-reports/
+config/
+saves/
+screenshots/
 .project
 .classpath
+options.txt
