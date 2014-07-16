@@ -81,9 +81,7 @@ public class FoodStatsTFC
 			 */
 			if(this.foodTimer < TFC_Time.startTime)
 			{
-				this.foodTimer = TFC_Time.startTime;
-				this.foodHealTimer = TFC_Time.startTime;
-				this.waterTimer = TFC_Time.startTime;
+				resetTimers();
 			}
 
 			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength && !player.capabilities.isCreativeMode)
@@ -491,9 +489,7 @@ public class FoodStatsTFC
 
 	public void resetTimers()
 	{
-		waterTimer = TFC_Time.getTotalTicks();
-		foodTimer = TFC_Time.getTotalTicks();
-		foodHealTimer = TFC_Time.getTotalTicks();
+		waterTimer = foodTimer = foodHealTimer = TFC_Time.getTotalTicks();
 	}
 
 }
