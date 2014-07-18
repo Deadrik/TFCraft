@@ -79,7 +79,7 @@ public class FoodStatsTFC
 			/*
 			 * Standard filling reduction based upon time.
 			 */
-			if(this.foodTimer < TFC_Time.startTime)
+			if(this.foodTimer <= TFC_Time.startTime)
 			{
 				resetTimers();
 			}
