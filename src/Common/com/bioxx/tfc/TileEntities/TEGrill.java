@@ -23,6 +23,11 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 	public void updateEntity()
 	{
 		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
+		for (int i = 0; i < 6; i++)
+		{
+			careForInventorySlot(storage[i]);
+			cookItem(i);
+		}
 	}
 
 	public void careForInventorySlot(ItemStack is)
@@ -38,7 +43,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 		}
 	}
 
-	public void CookItem(int i)
+	public void cookItem(int i)
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
 		Random R = new Random();
@@ -51,7 +56,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 				ItemStack output = index.getOutput(storage[i], R);
 
 				//Morph the input
-				storage[i] = index.getMorph();
+				storage[i] = index.getOutput(storage[i], R);
 				if(storage[i] != null && manager.findMatchingIndex(storage[i]) != null)
 				{
 					//if the input is a new item, then apply the old temperature to it
