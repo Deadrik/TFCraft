@@ -16,6 +16,7 @@ import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class TEForge extends TEFireEntity implements IInventory
 {

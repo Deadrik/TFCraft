@@ -119,6 +119,7 @@ import com.bioxx.tfc.Render.TESR.TESRBellows;
 import com.bioxx.tfc.Render.TESR.TESRChest;
 import com.bioxx.tfc.Render.TESR.TESRFirepit;
 import com.bioxx.tfc.Render.TESR.TESRFoodPrep;
+import com.bioxx.tfc.Render.TESR.TESRGrill;
 import com.bioxx.tfc.Render.TESR.TESRIngotPile;
 import com.bioxx.tfc.Render.TESR.TESRPottery;
 import com.bioxx.tfc.Render.TESR.TESRQuern;
@@ -128,11 +129,12 @@ import com.bioxx.tfc.Render.TESR.TESRWorldItem;
 import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.TileEntities.TEBellows;
 import com.bioxx.tfc.TileEntities.TEChest;
+import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
+import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.TileEntities.TESeaWeed;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
-import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
@@ -265,7 +267,7 @@ public class ClientProxy extends CommonProxy
 		super.registerTileEntities(false);
 		ClientRegistry.registerTileEntity(TEChest.class, "chest", new TESRChest());
 		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile", new TESRIngotPile());
-		ClientRegistry.registerTileEntity(TileEntityFirepit.class, "TerraFirepit", new TESRFirepit());
+		ClientRegistry.registerTileEntity(TEFirepit.class, "TerraFirepit", new TESRFirepit());
 		ClientRegistry.registerTileEntity(TESeaWeed.class, "Sea Weed", new TESRSeaWeed());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 		ClientRegistry.registerTileEntity(TEPottery.class, "Pottery", new TESRPottery());
@@ -275,6 +277,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TEAnvil.class, "TerraAnvil", new TESRAnvil());
 		ClientRegistry.registerTileEntity(TEWorldItem.class, "worldItem", new TESRWorldItem());
 		ClientRegistry.registerTileEntity(TileEntityQuern.class, "Quern", new TESRQuern());
+		ClientRegistry.registerTileEntity(TEGrill.class, "GrillTESR", new TESRGrill());
 	}
 
 	@Override

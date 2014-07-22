@@ -1,15 +1,20 @@
 package com.bioxx.tfc.Blocks.Devices;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEGrill;
+import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,6 +28,14 @@ public class BlockGrill extends BlockTerraContainer
 		this.setCreativeTab(TFCTabs.TFCDevices);
 	}
 
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
+	{
+		super.onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
+		TEGrill teb = (TEGrill)world.getTileEntity(x, y, z);
+		entityplayer.openGui(TerraFirmaCraft.instance, 43, world, x, y, z);
+		return true;
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
@@ -36,15 +49,19 @@ public class BlockGrill extends BlockTerraContainer
 		return false;
 	}
 
-
-
 	/***********************************************************************************
 	 * 
 	 * Client Only Code Below This Point
 	 * 
 	 ***********************************************************************************/
-
 	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister iconRegisterer)
+	{
+		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Grill Wrought Iron");
+	}
+
+	/*@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess access, int i, int j, int k, int meta)
 	{
@@ -53,13 +70,21 @@ public class BlockGrill extends BlockTerraContainer
 			return TFC_Textures.SheetWroughtIron;//Change me later to use a metal type defined in the TE
 		else
 			return TFC_Textures.SheetWroughtIron;
-	}
+	}*/
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int i, int j)
+	public IIcon getIcon(int side, int meta)
 	{
-		return TFC_Textures.SheetWroughtIron;
+		if(meta == 0)
+		{
+			if(TFCOptions.use2DGrill && (side == 0 || side == 1))
+			{
+				return blockIcon;
+			}
+			return TFC_Textures.SheetWroughtIron;
+		}
+		return blockIcon;
 	}
 
 	@Override

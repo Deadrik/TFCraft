@@ -282,6 +282,7 @@ public class TerraFirmaCraft
 
 		//General
 		TFCOptions.enableBetterGrass = TFCOptions.getBooleanFor(config, "General", "enableBetterGrass", true);
+		TFCOptions.use2DGrill = TFCOptions.getBooleanFor(config, "General", "use2DGrill", true);
 		TFCOptions.enableInnerGrassFix = TFCOptions.getBooleanFor(config, "General", "enableInnerGrassFix", true, "Set this to false if your computer has to run in fast mode and you get lag. This setting forces the sides of grass to render when viewing from the inside.");
 		TFCOptions.enableDebugMode = TFCOptions.getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
 		TFCOptions.iDontLikeOnions = TFCOptions.getBooleanFor(config, "General", "enableNotOnions", false,"Set this to true if you don't like onions.");
@@ -297,7 +298,7 @@ public class TerraFirmaCraft
 		TFCOptions.tempDecreaseMultiplier = (float) TFCOptions.getDoubleFor(config, "Time", "tempDecreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items cool down. Increase to make items cool down faster.");
 
 		//Food Decay
-		Global.FOOD_DECAY_RATE = (float)TFCOptions.getDoubleFor(config,"Food Decay","FoodDecayRate", 1.0170378966055869517978300569768, "This number causes base decay to equal 50% gain per day. If you wish to change, I recommend you look up a y-root calculator 1.0170378966055869517978300569768^24 = 1.5");
+		Global.FOOD_DECAY_RATE = TFCOptions.getDoubleFor(config,"Food Decay","FoodDecayRate", 1.0170378966055869517978300569768, "This number causes base decay to equal 50% gain per day. If you wish to change, I recommend you look up a y-root calculator 1.0170378966055869517978300569768^24 = 1.5");
 		TFCOptions.useDecayProtection = TFCOptions.getBooleanFor(config, "Food Decay", "useDecayProtection", true,"Set this to false if you want food to auto decay when a chunk is loaded instead of limiting decay when a chunk has been unloaded for a long period.");
 		TFCOptions.decayProtectionDays = TFCOptions.getIntFor(config,"Food Decay","decayProtectionDays",24, "If a food item has not been ticked for >= this number of days than when it is ticked for the first time, only a small amount of decay will occur.");
 		TFCOptions.decayMultiplier = (float)TFCOptions.getDoubleFor(config,"Food Decay","FoodDecayMultiplier", 1.0, "This is a global multiplier for food decay. Unlike FoodDecayRate which only modifies the base decay and not the environmental effect upon decay, this multiplier will multiply against the entire amount. Set to 0 to turn decay off.");

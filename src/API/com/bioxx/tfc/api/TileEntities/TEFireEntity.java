@@ -1,8 +1,9 @@
-package com.bioxx.tfc.TileEntities;
+package com.bioxx.tfc.api.TileEntities;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import com.bioxx.tfc.TileEntities.NetworkTileEntity;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 
 public class TEFireEntity extends NetworkTileEntity

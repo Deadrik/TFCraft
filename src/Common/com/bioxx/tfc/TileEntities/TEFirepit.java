@@ -27,11 +27,12 @@ import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumWoodMaterial;
+import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityFirepit extends TEFireEntity implements IInventory
+public class TEFirepit extends TEFireEntity implements IInventory
 {
 	public ItemStack fireItemStacks[];
 
@@ -46,7 +47,7 @@ public class TileEntityFirepit extends TEFireEntity implements IInventory
 	private int topY;
 	public final int FIREBURNTIME = (int) ((TFC_Time.hourLength * TFCOptions.charcoalPitBurnTime) / 100);//default 18 hours
 
-	public TileEntityFirepit()
+	public TEFirepit()
 	{
 		fuelTimeLeft = 375;
 		fuelBurnTemp =  613;

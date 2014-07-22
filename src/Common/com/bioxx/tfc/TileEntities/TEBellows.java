@@ -2,6 +2,8 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
+import com.bioxx.tfc.api.TileEntities.TEFireEntity;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 

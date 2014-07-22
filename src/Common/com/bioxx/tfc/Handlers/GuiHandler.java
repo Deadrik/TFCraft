@@ -15,6 +15,7 @@ import com.bioxx.tfc.Containers.ContainerCrucible;
 import com.bioxx.tfc.Containers.ContainerFirepit;
 import com.bioxx.tfc.Containers.ContainerFoodPrep;
 import com.bioxx.tfc.Containers.ContainerForge;
+import com.bioxx.tfc.Containers.ContainerGrill;
 import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
 import com.bioxx.tfc.Containers.ContainerLiquidVessel;
 import com.bioxx.tfc.Containers.ContainerLogPile;
@@ -35,11 +36,12 @@ import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
 import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.TileEntities.TECrucible;
+import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
+import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
-import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
@@ -70,7 +72,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 20:
 		{
-			return new ContainerFirepit(player.inventory, (TileEntityFirepit) te, world, x, y, z);
+			return new ContainerFirepit(player.inventory, (TEFirepit) te, world, x, y, z);
 		}
 		case 21:
 		{
@@ -158,6 +160,10 @@ public class GuiHandler implements IGuiHandler
 				return new ContainerHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
 			}
 			return null;
+		}
+		case 43:
+		{
+			return new ContainerGrill(player.inventory, ((TEGrill) te), world, x, y, z);
 		}
 		default:
 		{

@@ -108,6 +108,7 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
 import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.ItemBarrels;
+import com.bioxx.tfc.Items.ItemBlocks.ItemGrill;
 import com.bioxx.tfc.Items.ItemBlocks.ItemSoil;
 import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack;
@@ -324,7 +325,7 @@ public class TFCBlocks
 
 	public static void RegisterBlocks()
 	{
-		GameRegistry.registerBlock(Grill, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Grill");
+		GameRegistry.registerBlock(Grill, ItemGrill.class, "Grill");
 		GameRegistry.registerBlock(Ore, "Ore1");
 		GameRegistry.registerBlock(Ore2, "Ore2");
 		GameRegistry.registerBlock(Ore3, "Ore3");

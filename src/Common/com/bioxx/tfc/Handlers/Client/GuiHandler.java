@@ -22,6 +22,7 @@ import com.bioxx.tfc.GUI.GuiCrucible;
 import com.bioxx.tfc.GUI.GuiFirepit;
 import com.bioxx.tfc.GUI.GuiFoodPrep;
 import com.bioxx.tfc.GUI.GuiForge;
+import com.bioxx.tfc.GUI.GuiGrill;
 import com.bioxx.tfc.GUI.GuiInventoryTFC;
 import com.bioxx.tfc.GUI.GuiKnapping;
 import com.bioxx.tfc.GUI.GuiLogPile;
@@ -40,11 +41,12 @@ import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEBlastFurnace;
 import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.TileEntities.TECrucible;
+import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
+import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
-import com.bioxx.tfc.TileEntities.TileEntityFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
@@ -75,7 +77,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 19:
 			return new GuiVesselLiquid(player.inventory, world, x, y, z);
 		case 20:
-			return new GuiFirepit(player.inventory, (TileEntityFirepit) te, world, x, y, z);
+			return new GuiFirepit(player.inventory, (TEFirepit) te, world, x, y, z);
 		case 21:
 			return new GuiAnvil(player.inventory, (TEAnvil) te, world, x, y, z);
 		case 22:
@@ -131,6 +133,8 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 			}
 			return null;
 		}
+		case 43:
+			return new GuiGrill(player.inventory, ((TEGrill)te), world, x, y, z);
 		default:
 			return null;
 		}

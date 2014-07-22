@@ -10,15 +10,55 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.HeatIndex;
+import com.bioxx.tfc.api.HeatRegistry;
+import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class TEGrill extends NetworkTileEntity implements IInventory
 {
-	public ItemStack[] storage = new ItemStack[4];
+	public ItemStack[] storage = new ItemStack[6];
 
 	@Override
 	public void updateEntity()
 	{
 		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
+	}
+
+	public void careForInventorySlot(ItemStack is)
+	{
+		if(is != null && worldObj.getTileEntity(xCoord, yCoord-1, zCoord) != null)
+		{
+			float temp = TFC_ItemHeat.GetTemp(is);
+			if(((TEFireEntity)worldObj.getTileEntity(xCoord, yCoord-1, zCoord)).fireTemp > temp)
+				temp += TFC_ItemHeat.getTempIncrease(is);
+			else
+				temp -= TFC_ItemHeat.getTempDecrease(is);
+			TFC_ItemHeat.SetTemp(is, temp);
+		}
+	}
+
+	public void CookItem(int i)
+	{
+		HeatRegistry manager = HeatRegistry.getInstance();
+		Random R = new Random();
+		if(storage[i] != null)
+		{
+			HeatIndex index = manager.findMatchingIndex(storage[i]);
+			if(index != null && TFC_ItemHeat.GetTemp(storage[i]) > index.meltTemp)
+			{
+				float temp = TFC_ItemHeat.GetTemp(storage[i]);
+				ItemStack output = index.getOutput(storage[i], R);
+
+				//Morph the input
+				storage[i] = index.getMorph();
+				if(storage[i] != null && manager.findMatchingIndex(storage[i]) != null)
+				{
+					//if the input is a new item, then apply the old temperature to it
+					TFC_ItemHeat.SetTemp(storage[i], temp);
+				}
+			}
+		}
 	}
 
 	@Override

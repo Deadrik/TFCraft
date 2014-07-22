@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Render.Models.ModelCookingPot;
-import com.bioxx.tfc.TileEntities.TileEntityFirepit;
+import com.bioxx.tfc.TileEntities.TEFirepit;
 
 public class TESRFirepit extends TESRBase
 {
@@ -18,7 +18,7 @@ public class TESRFirepit extends TESRBase
 	/**
 	 * Renders the TileEntity for the chest at a position.
 	 */
-	public void renderTileEntityFirepitAt(TileEntityFirepit par1TileEntityPit, double d, double d1, double d2, float f)
+	public void renderTileEntityFirepitAt(TEFirepit par1TileEntityPit, double d, double d1, double d2, float f)
 	{
 		int var9;
 
@@ -45,6 +45,6 @@ public class TESRFirepit extends TESRBase
 	@Override
 	public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
 	{
-		this.renderTileEntityFirepitAt((TileEntityFirepit)par1TileEntity, par2, par4, par6, par8);
+		this.renderTileEntityFirepitAt((TEFirepit)par1TileEntity, par2, par4, par6, par8);
 	}
 }

@@ -9,7 +9,7 @@ import com.bioxx.tfc.Containers.Slots.SlotFirepitOut;
 import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Items.ItemOre;
-import com.bioxx.tfc.TileEntities.TileEntityFirepit;
+import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.api.HeatRegistry;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,11 +22,11 @@ import net.minecraft.world.World;
 
 public class ContainerFirepit extends ContainerTFC
 {
-	private TileEntityFirepit firepit;
+	private TEFirepit firepit;
 	private float firetemp;
 	private int charcoal;
 
-	public ContainerFirepit(InventoryPlayer inventoryplayer, TileEntityFirepit tileentityfirepit, World world, int x, int y, int z)
+	public ContainerFirepit(InventoryPlayer inventoryplayer, TEFirepit tileentityfirepit, World world, int x, int y, int z)
 	{
 		firepit = tileentityfirepit;
 		firetemp = -1111;

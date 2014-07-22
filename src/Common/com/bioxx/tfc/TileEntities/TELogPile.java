@@ -25,7 +25,7 @@ public class TELogPile extends TileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	private int logPileOpeners;
-	private TileEntityFirepit charcoalFirepit;
+	private TEFirepit charcoalFirepit;
 	private boolean isOnFire;
 	private int fireTimer;
 	public Queue<Vector3f> blocksToBeSetOnFire;
@@ -320,12 +320,12 @@ public class TELogPile extends TileEntity implements IInventory
 		return false;
 	}
 
-	public TileEntityFirepit getCharcoalFirepit()
+	public TEFirepit getCharcoalFirepit()
 	{
 		return charcoalFirepit;
 	}
 
-	public void setCharcoalFirepit(TileEntityFirepit firepit)
+	public void setCharcoalFirepit(TEFirepit firepit)
 	{
 		charcoalFirepit = firepit;
 	}

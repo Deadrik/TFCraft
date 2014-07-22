@@ -29,6 +29,7 @@ import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
+import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
