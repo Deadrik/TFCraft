@@ -44,7 +44,6 @@ public class TEFirepit extends TEFireEntity implements IInventory
 	public boolean hasCookingPot;
 	private Map<Integer, int[]> smokeMap = new HashMap<Integer, int[]>(); // Coords where smoke will be generated
 	private boolean scanSmokeLayer;
-	private int topY;
 	public final int FIREBURNTIME = (int) ((TFC_Time.hourLength * TFCOptions.charcoalPitBurnTime) / 100);//default 18 hours
 
 	public TEFirepit()
@@ -346,27 +345,27 @@ public class TEFirepit extends TEFireEntity implements IInventory
 					Queue<Vector3f> blocksOnFire = new ArrayDeque<Vector3f>();
 
 					block = worldObj.getBlock(x + 1, y, z);
-					if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+					if(!TFC_Core.isValidCharcoalPitCover(block))
 						blocksOnFire.add(new Vector3f(x + 1, y, z));
 
 					block = worldObj.getBlock(x - 1, y, z);
-					if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+					if(!TFC_Core.isValidCharcoalPitCover(block))
 						blocksOnFire.add(new Vector3f(x - 1, y, z));
 
 					block = worldObj.getBlock(x, y, z + 1);
-					if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+					if(!TFC_Core.isValidCharcoalPitCover(block))
 						blocksOnFire.add(new Vector3f(x, y, z + 1));
 
 					block = worldObj.getBlock(x, y, z - 1);
-					if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+					if(!TFC_Core.isValidCharcoalPitCover(block))
 						blocksOnFire.add(new Vector3f(x, y, z - 1));
 
 					block = worldObj.getBlock(x, y + 1, z);
-					if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+					if(!TFC_Core.isValidCharcoalPitCover(block))
 						blocksOnFire.add(new Vector3f(x, y + 1, z));
 
 					block = worldObj.getBlock(x, y - 1, z);
-					if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+					if(!TFC_Core.isValidCharcoalPitCover(block))
 						blocksOnFire.add(new Vector3f(x, y - 1, z));
 
 					logPile.blocksToBeSetOnFire = blocksOnFire;
@@ -431,7 +430,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		return false;
 	}
 
-	private void scanLogs(int i, int j, int k, boolean[][][] checkArray, byte x, byte y, byte z, boolean empty, boolean top)
+	private void scanLogs(int i, int j, int k, boolean[][][] checkArray, byte x, byte y, byte z, boolean empty, boolean addSmoke)
 	{
 		if(y >= 0)
 		{
@@ -445,9 +444,12 @@ public class TEFirepit extends TEFireEntity implements IInventory
 					{
 						if(!checkArray[x + offsetX][y][z + offsetZ] && checkOut(i + offsetX, j, k + offsetZ, empty))
 						{
-							scanLogs(i + offsetX, j, k + offsetZ, checkArray, (byte)(x + offsetX), y, (byte)(z + offsetZ), empty, top);
-							if(top)
-								smokeMap.put(smokeMap.size(), new int[] {i + offsetX, j + 2, k + offsetZ});
+							scanLogs(i + offsetX, j, k + offsetZ, checkArray, (byte)(x + offsetX), y, (byte)(z + offsetZ), empty, addSmoke);
+							if(addSmoke)
+							{
+								if(worldObj.getBlock(i + offsetX, j, k + offsetZ) == TFCBlocks.LogPile && worldObj.getBlock(i + offsetX, j + 2, k + offsetZ) == Blocks.air)
+									smokeMap.put(smokeMap.size(), new int[] {i + offsetX, j + 2, k + offsetZ});
+							}
 						}
 					}
 				}
@@ -575,9 +577,6 @@ public class TEFirepit extends TEFireEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		Random R = new Random();
-
-		int Surrounded = getSurroundedByWood(xCoord, yCoord, zCoord);
 		if(fireTemp > 1 && worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.LogPile)
 		{
 			if(externalFireCheckTimer <= 0)
@@ -588,7 +587,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			}
 			externalFireCheckTimer--;
 
-			if(R.nextInt(5) == 0 && worldObj.isRemote)
+			if(worldObj.rand.nextInt(5) == 0 && worldObj.isRemote)
 				GenerateSmoke();
 		}
 		else
@@ -631,6 +630,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 
+			int Surrounded = getSurroundedByWood(xCoord, yCoord, zCoord);
 			//If the fire is still burning and has fuel
 			if(fuelTimeLeft > 0 && fireTemp >= 1 && Surrounded != 5)
 			{
@@ -709,6 +709,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < fireItemStacks.length; i++)
+		{
 			if(fireItemStacks[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -716,6 +717,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				fireItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
+		}
 		nbttagcompound.setTag("Items", nbttaglist);
 	}
 
@@ -742,36 +744,31 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		if(scanSmokeLayer)
 		{
 			int y = 0;
-			topY = yCoord;
+			int topY = yCoord;
 			boolean checkArray[][][] = new boolean[25][13][25];
 			while(worldObj.getBlock(xCoord, topY + 1, zCoord) == TFCBlocks.LogPile)
 			{
+				scanLogs(xCoord, topY, zCoord, checkArray, (byte)12, (byte)y, (byte)12, false, true);
 				++topY;
 				++y;
 			}
-			smokeMap.put(0, new int[] {xCoord, topY + 2, zCoord});
 			scanLogs(xCoord, topY, zCoord, checkArray, (byte)12, (byte)y, (byte)12, false, true);
+			smokeMap.put(smokeMap.size(), new int[] {xCoord, topY + 2, zCoord});
 			scanSmokeLayer = false;
 		}
 
-		Random rand = new Random();
-		int sbkey = rand.nextInt(smokeMap.size());
-		int[] sb = smokeMap.get(sbkey);
-
-		int x = sb[0];
-		int y = sb[1];
-		int z = sb[2];
-		if(worldObj.isAirBlock(x, y, z))
+		if(smokeMap.size() > 0)
 		{
-			float f = x + 0.5F;
-			float f1 = y + 0.1F + rand.nextFloat() * 6F / 16F;
-			float f2 = z + 0.5F;
-			float f4 = rand.nextFloat() * 0.6F;
-			float f5 = rand.nextFloat() * -0.6F;
+			int[] sb = smokeMap.get(worldObj.rand.nextInt(smokeMap.size()));
+			float f = sb[0] + 0.5F;
+			float f1 = sb[1] + 0.1F + worldObj.rand.nextFloat() * 6F / 16F;
+			float f2 = sb[2] + 0.5F;
+			float f4 = worldObj.rand.nextFloat() * 0.6F;
+			float f5 = worldObj.rand.nextFloat() * -0.6F;
 			worldObj.spawnParticle("smoke", f+f4 - 0.3F, f1, f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 			worldObj.spawnParticle("smoke", f+f4 - 0.2F, f1, f2 + f5 + 0.4F, 0.0D, 0.0D, 0.0D);
 			worldObj.spawnParticle("smoke", f+f4 - 0.1F, f1, f2 + f5 + 0.1F, 0.0D, 0.0D, 0.0D);
-			if(rand.nextInt(10) == 0) worldObj.spawnParticle("largesmoke", f+f4 - 0.2F, f1, f2 + f5 + 0.2F, 0.0D, 0.0D, 0.0D);
+			if(worldObj.rand.nextInt(10) == 0) worldObj.spawnParticle("largesmoke", f+f4 - 0.2F, f1, f2 + f5 + 0.2F, 0.0D, 0.0D, 0.0D);
 		}
 	}
 }

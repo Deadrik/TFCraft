@@ -13,6 +13,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -375,6 +376,14 @@ public class TFC_Core
 				|| block == TFCBlocks.StoneIgIn
 				|| block == TFCBlocks.StoneSed
 				|| block == TFCBlocks.StoneMM;
+	}
+
+	public static boolean isCobbleStone(Block block)
+	{
+		return block == TFCBlocks.StoneIgExCobble
+				|| block == TFCBlocks.StoneIgInCobble
+				|| block == TFCBlocks.StoneSedCobble
+				|| block == TFCBlocks.StoneMMCobble;
 	}
 
 	public static boolean isStoneIgEx(Block block)
@@ -1235,5 +1244,23 @@ public class TFC_Core
 		if(id == TFCBiome.beach.biomeID || id == TFCBiome.gravelbeach.biomeID)
 			return true;
 		return false;
+	}
+
+	public static boolean isValidCharcoalPitCover(Block block)
+	{
+		if(Blocks.fire.getFlammability(block) > 0 && block != TFCBlocks.LogPile) return false;
+
+		return block == TFCBlocks.Firepit
+			|| block == TFCBlocks.LogPile
+			|| isRawStone(block)
+			|| isCobbleStone(block)
+			|| isBrickStone(block)
+			|| isSmoothStone(block)
+			|| isDirt(block)
+			|| isSand(block)
+			|| isGrassType1(block)
+			|| isGrassType2(block)
+			|| isGravel(block)
+			|| block == Blocks.glass;
 	}
 }

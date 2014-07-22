@@ -17,7 +17,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Vector3f;
 
@@ -340,27 +339,27 @@ public class TELogPile extends TileEntity implements IInventory
 				blocksToBeSetOnFire = new ArrayDeque<Vector3f>();
 				
 				block = worldObj.getBlock(xCoord + 1, yCoord, zCoord);
-				if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+				if(!TFC_Core.isValidCharcoalPitCover(block))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord + 1, yCoord, zCoord));
 
 				block = worldObj.getBlock(xCoord - 1, yCoord, zCoord);
-				if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+				if(!TFC_Core.isValidCharcoalPitCover(block))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord - 1, yCoord, zCoord));
 
 				block = worldObj.getBlock(xCoord, yCoord, zCoord + 1);
-				if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+				if(!TFC_Core.isValidCharcoalPitCover(block))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord + 1));
 
 				block = worldObj.getBlock(xCoord, yCoord, zCoord - 1);
-				if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+				if(!TFC_Core.isValidCharcoalPitCover(block))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord - 1));
 
 				block = worldObj.getBlock(xCoord, yCoord + 1, zCoord);
-				if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+				if(!TFC_Core.isValidCharcoalPitCover(block))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord + 1, zCoord));
 
 				block = worldObj.getBlock(xCoord, yCoord - 1, zCoord);
-				if(block == Blocks.air || (block != TFCBlocks.LogPile && Blocks.fire.getFlammability(block) > 0))
+				if(!TFC_Core.isValidCharcoalPitCover(block))
 					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord - 1, zCoord));
 			}
 			else
