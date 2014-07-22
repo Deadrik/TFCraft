@@ -42,11 +42,11 @@ public class ItemGrill extends ItemTerraBlock
 	public boolean checkSides(World world, int x, int y, int z)
 	{
 		int count = 0;
-		if(world.getBlock(x-1, y, z).isSideSolid(world, x-1, y, z, ForgeDirection.EAST))//Check the West Block if the East Side is solid
+		if(world.getBlock(x-1, y, z).isSideSolid(world, x-1, y, z, ForgeDirection.WEST))//Check the East Block if the West Side is solid
 		{
 			count++;
 		}
-		if(world.getBlock(x+1, y, z).isSideSolid(world, x+1, y, z, ForgeDirection.WEST))//Check the East Block if the West Side is solid
+		if(world.getBlock(x+1, y, z).isSideSolid(world, x+1, y, z, ForgeDirection.EAST))//Check the West Block if the East Side is solid
 		{
 			count++;
 		}

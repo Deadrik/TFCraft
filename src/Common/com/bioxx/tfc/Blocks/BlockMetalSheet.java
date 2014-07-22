@@ -4,13 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.CollisionRayTraceStandard;
-import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.TileEntities.TEMetalSheet;
-import com.bioxx.tfc.api.Interfaces.ICustomCollision;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -24,6 +17,15 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.CollisionRayTraceStandard;
+import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.TileEntities.TEMetalSheet;
+import com.bioxx.tfc.api.Interfaces.ICustomCollision;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 public class BlockMetalSheet extends BlockTerraContainer implements ICustomCollision
@@ -192,6 +194,22 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 		case 3:return te.SouthExists();
 		case 4:return te.EastExists();
 		case 5:return te.WestExists();
+		default: return false;
+		}
+	}
+
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+	{
+		TEMetalSheet te = (TEMetalSheet)world.getTileEntity(x, y, z);
+		switch(side)
+		{
+		case DOWN:return te.BottomExists();
+		case UP:return te.TopExists();
+		case NORTH:return te.NorthExists();
+		case SOUTH:return te.SouthExists();
+		case EAST:return te.EastExists();
+		case WEST:return te.WestExists();
 		default: return false;
 		}
 	}
