@@ -38,6 +38,8 @@ public class InitClientWorldPacket extends AbstractPacket
 	public InitClientWorldPacket(EntityPlayer P)
 	{
 		this.seed = P.worldObj.getSeed();
+        // Make sure to update time before loading food stats!
+        TFC_Time.UpdateTime(P.worldObj);
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(P);
 		fs.resetTimers();
 		fs.writeNBT(P.getEntityData());
