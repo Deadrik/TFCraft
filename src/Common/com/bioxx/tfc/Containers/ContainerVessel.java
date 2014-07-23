@@ -201,12 +201,14 @@ public class ContainerVessel extends ContainerTFC
 			ItemStack clickedStack = clickedSlot.getStack();
 			returnedStack = clickedStack.copy();
 
-			if (clickedIndex < 4)
+			if (clickedIndex < 4) {
 				if (!this.mergeItemStack(clickedStack, 4, inventorySlots.size(), true))
 					return null;
-			else if (clickedIndex >= 4 && clickedIndex < inventorySlots.size())
+			}
+			else if (clickedIndex >= 4 && clickedIndex < inventorySlots.size()) {
 				if (!this.mergeItemStack(clickedStack, 0, 4, false))
 					return null;
+			}
 
 			if (clickedStack.stackSize == 0)
 				clickedSlot.putStack((ItemStack)null);
