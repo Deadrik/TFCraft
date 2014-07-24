@@ -16,6 +16,9 @@ import net.minecraft.world.gen.layer.IntCache;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class TFCWorldChunkManager extends WorldChunkManager
 {
 	protected World worldObj;
@@ -206,6 +209,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public float getTemperatureAtHeight(float t, int y)
 	{
 		int x = (int)Math.floor(Minecraft.getMinecraft().thePlayer.posX);

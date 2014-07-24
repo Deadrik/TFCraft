@@ -150,7 +150,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 		this.generateTerrainHigh(chunkX, chunkZ, idsTop);
 
-		biomesForGeneration = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadBlockGeneratorData(biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
+		biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
 		rockLayer1 = TFC_Climate.getManager(worldObj).loadRockLayerGeneratorData(rockLayer1, chunkX * 16, chunkZ * 16, 16, 16, 0);
 		rockLayer2 = TFC_Climate.getManager(worldObj).loadRockLayerGeneratorData(rockLayer2, chunkX * 16, chunkZ * 16, 16, 16, 1);
 		rockLayer3 = TFC_Climate.getManager(worldObj).loadRockLayerGeneratorData(rockLayer3, chunkX * 16, chunkZ * 16, 16, 16, 2);
@@ -346,7 +346,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		byte ySize = 17;
 		int zSize = var4 + 1;
 		short arrayYHeight = 128;
-		this.biomesForGeneration = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getBiomesForGeneration(this.biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, xSize + 5, zSize + 5);
+		this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, xSize + 5, zSize + 5);
 		this.noiseArray = this.initializeNoiseFieldHigh(this.noiseArray, par1 * var4, 0, par2 * var4, xSize, ySize, zSize);
 
 		for (int x = 0; x < var4; ++x)

@@ -1,15 +1,15 @@
 package com.bioxx.tfc.Core.Player;
 
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
+
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.InitClientWorldPacket;
 import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraftforge.event.entity.item.ItemTossEvent;
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -22,31 +22,31 @@ public class PlayerTracker
 	@SubscribeEvent
 	public void onPlayerLoggedIn(PlayerLoggedInEvent event)
 	{
-//		System.out.println("-----------------------------PLAYER LOGGIN EVENT-------------------");
-//		System.out.println("------"+event.player.getDisplayName()+" : "+ event.player.getUniqueID().toString()+"--------");
+		//		System.out.println("-----------------------------PLAYER LOGGIN EVENT-------------------");
+		//		System.out.println("------"+event.player.getDisplayName()+" : "+ event.player.getUniqueID().toString()+"--------");
+
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
 				event.player.getDisplayName(),
-				event.player.getUniqueID(),
-				FMLClientHandler.instance().getClientToServerNetworkManager()));
-		
+				event.player.getUniqueID()));
 		AbstractPacket pkt = new InitClientWorldPacket(event.player);
 		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
-		
-//		System.out.println("-----------------------------Sending TestPacket");
-//		AbstractPacket pkt2 = new TestPacket("Sent to Player: "+event.player.getDisplayName());
-//		TerraFirmaCraft.packetPipeline.sendTo(pkt2, (EntityPlayerMP) event.player);
+
+		//		System.out.println("-----------------------------Sending TestPacket");
+		//		AbstractPacket pkt2 = new TestPacket("Sent to Player: "+event.player.getDisplayName());
+		//		TerraFirmaCraft.packetPipeline.sendTo(pkt2, (EntityPlayerMP) event.player);
 	}
 
 	@SubscribeEvent
 	public void onClientConnect(ClientConnectedToServerEvent event)
 	{
-//		System.out.println("-----"+FMLClientHandler.instance().getClientPlayerEntity().getDisplayName()+" : "+
-//				FMLClientHandler.instance().getClientPlayerEntity().getUniqueID().toString()+"-------");
-//
-//		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
-//				Minecraft.getMinecraft().thePlayer.getDisplayName(),
-//				Minecraft.getMinecraft().thePlayer.getUniqueID(),
-//				event.manager));
+
+		//		System.out.println("-----"+FMLClientHandler.instance().getClientPlayerEntity().getDisplayName()+" : "+
+		//				FMLClientHandler.instance().getClientPlayerEntity().getUniqueID().toString()+"-------");
+		//
+		//		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
+		//				Minecraft.getMinecraft().thePlayer.getDisplayName(),
+		//				Minecraft.getMinecraft().thePlayer.getUniqueID(),
+		//				event.manager));
 	}
 
 	@SubscribeEvent

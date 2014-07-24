@@ -13,7 +13,6 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
-import net.minecraftforge.client.IRenderHandler;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -26,12 +25,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFCProvider extends WorldProvider
 {
-	public IRenderHandler skyprovider;
-
 	@Override
 	protected void registerWorldChunkManager()
 	{
-		worldChunkMgr = new TFCWorldChunkManager(this.worldObj);
+		super.registerWorldChunkManager();
 		TFC_Climate.worldPair.put(worldObj.provider.dimensionId, new WorldLayerManager(worldObj));
 	}
 
@@ -92,8 +89,7 @@ return biome;
 
 	private ChunkCoordinates createSpawn()
 	{
-		TFCWorldChunkManager chunkManager = (TFCWorldChunkManager) worldChunkMgr;
-		List biomeList = chunkManager.getBiomesToSpawnIn();
+		List biomeList = worldChunkMgr.getBiomesToSpawnIn();
 		long seed = worldObj.getWorldInfo().getSeed();
 		Random rand = new Random(seed);
 
@@ -106,7 +102,7 @@ return biome;
 
 		while(chunkCoord == null)
 		{
-			chunkCoord = chunkManager.findBiomePosition(xOffset, -startingZ, 64, biomeList, rand);
+			chunkCoord = worldChunkMgr.findBiomePosition(xOffset, -startingZ, 64, biomeList, rand);
 			if (chunkCoord != null)
 			{
 				xCoord = chunkCoord.chunkPosX;

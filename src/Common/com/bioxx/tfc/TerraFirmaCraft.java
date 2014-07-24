@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.world.WorldType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -150,8 +151,8 @@ public class TerraFirmaCraft
 			GameRegistry.registerWorldGenerator(new WorldGenLargeRock(), 7);
 			GameRegistry.registerWorldGenerator(new WorldGenPlants(), 8);
 
-			TFCWorldType.DEFAULT = new TFCWorldType("TFCDefault");
-			TFCWorldType.FLAT = new TFCWorldType("TFCFlat");
+			WorldType.DEFAULT = new TFCWorldType(0, "TFCDefault");
+			WorldType.FLAT = new TFCWorldType(1, "TFCFlat");
 
 			DimensionManager.unregisterDimension(-1);
 			DimensionManager.unregisterDimension(0);

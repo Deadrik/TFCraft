@@ -29,6 +29,11 @@ public class TFCWorldType extends WorldType
 		TFCBiome.Mountains,
 	};
 
+	public TFCWorldType(int i, String par2Str)
+	{
+		super(i, par2Str);
+	}
+
 	public TFCWorldType(String par2Str)
 	{
 		super(par2Str);

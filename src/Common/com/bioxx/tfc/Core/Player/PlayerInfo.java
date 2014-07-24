@@ -2,10 +2,9 @@ package com.bioxx.tfc.Core.Player;
 
 import java.util.UUID;
 
-import com.bioxx.tfc.Core.TFC_Time;
-
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.NetworkManager;
+
+import com.bioxx.tfc.Core.TFC_Time;
 
 public class PlayerInfo
 {
@@ -20,8 +19,6 @@ public class PlayerInfo
 
 	public ItemStack specialCraftingType;
 	public ItemStack specialCraftingTypeAlternate;
-
-	public NetworkManager networkManager;
 	private long lastChange;
 
 	public short moldTransferTimer = 1000;
@@ -33,14 +30,13 @@ public class PlayerInfo
 
 	public SkillStats tempSkills;
 
-	public PlayerInfo(String name, UUID uuid, NetworkManager nm)
+	public PlayerInfo(String name, UUID uuid)
 	{
 		Name = name;
 		PlayerUUID = uuid;
 		ChiselMode = 0;
 		specialCraftingType = null;
 		specialCraftingTypeAlternate = null;
-		networkManager = nm;
 		lastChange = 0;
 		hoeMode = 0;
 		knappingInterface = new boolean[25];
