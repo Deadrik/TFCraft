@@ -102,9 +102,16 @@ public class ItemGoldPan extends ItemTerra
 				{
 					ChunkData cd = ChunkDataManager.getData(x >> 4, z >> 4);
 
+                    // Make sure our chunk data isn't null.
+                    if(cd == null)
+                    {
+                        player.addChatMessage(new ChatComponentText("The ChunkData returned null, please report this to the developer."));
+                        return is;
+                    }
+
 					if(cd.sluicedAmount < 50)
 					{
-						if(world.getBlock(x, y, z) == Blocks.gravel)
+						if(world.getBlock(x, y, z) == TFCBlocks.Gravel || world.getBlock(x, y, z) == TFCBlocks.Gravel2)
 						{
 							is.setItemDamage((5 << 4) + 2);
 							if(world.rand.nextInt(10) == 0)
