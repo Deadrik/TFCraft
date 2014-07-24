@@ -16,3 +16,7 @@ screenshots/
 .project
 .classpath
 options.txt
+
+*.iml
+*.iws
+*.ipr
