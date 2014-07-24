@@ -3,6 +3,7 @@ package com.bioxx.tfc.Blocks.Flora;
 import java.util.List;
 import java.util.Random;
 
+import com.bioxx.tfc.WorldGen.TFCBiome;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -26,6 +27,7 @@ import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BlockSapling extends BlockTerraContainer
 {
@@ -72,14 +74,14 @@ public class BlockSapling extends BlockTerraContainer
 			
 	}
 
-	public void growTree(World world, int i, int j, int k, Random rand)
+	public void growTree(World world, int x, int y, int z, Random rand)
 	{
-		/*int l = world.getBlockMetadata(i, j, k);
-		world.setBlockToAir(i, j, k);
-		Object obj = TFCBiome.getTreeGen(l, random.nextBoolean());
+		int meta = world.getBlockMetadata(x, y, z);
+		world.setBlockToAir(x, y, z);
+		Object obj = TFCBiome.getTreeGen(meta, rand.nextBoolean());
 
-		if (obj!= null && !((WorldGenerator) obj).generate(world, random, i, j, k))
-			world.setBlock(i, j, k, this, l, 3);*/
+		if (obj!= null && !((WorldGenerator) obj).generate(world, rand, x, y, z))
+			world.setBlock(x, y, z, this, meta, 3);
 	}
 
 	@Override
@@ -95,13 +97,13 @@ public class BlockSapling extends BlockTerraContainer
 	}
 
 	@Override
-	public void updateTick(World world, int i, int j, int k, Random rand)
+	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
 		if (world.isRemote)
 			return;
 
-		super.updateTick(world, i, j, k, rand);
-		int meta = world.getBlockMetadata(i, j, k);
+		super.updateTick(world, x, y, z, rand);
+		int meta = world.getBlockMetadata(x, y, z);
 		float growSpeed = 1;
 		if(meta == 1 || meta == 11)
 			growSpeed = 1.2f;
@@ -110,13 +112,14 @@ public class BlockSapling extends BlockTerraContainer
 		else if(meta == 9 || meta == 14|| meta == 15)
 			growSpeed = 1.6f;
 
-		TileEntitySapling te = (TileEntitySapling) world.getTileEntity(i, j, k);
+		TileEntitySapling te = (TileEntitySapling) world.getTileEntity(x, y, z);
 
 		if(te != null && te.growTime == 0)
-			te.growTime = (long) (((TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7) * growSpeed) + (world.rand.nextFloat() * TFC_Time.dayLength)) * TFCOptions.saplingTimerMultiplier);
+			te.growTime = (long) (((TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7) * growSpeed) +
+                          (world.rand.nextFloat() * TFC_Time.dayLength)) * TFCOptions.saplingTimerMultiplier);
 
-		if (world.getBlockLightValue(i, j + 1, k) >= 9 && te!= null && TFC_Time.getTotalTicks() > te.growTime)
-			growTree(world, i, j, k, rand);
+		if (world.getBlockLightValue(x, y + 1, z) >= 9 && te!= null && TFC_Time.getTotalTicks() > te.growTime)
+			growTree(world, x, y, z, rand);
 
 		//this.checkChange(world, i, j, k);
 	}
