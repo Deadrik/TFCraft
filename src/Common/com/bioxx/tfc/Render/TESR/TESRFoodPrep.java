@@ -88,12 +88,14 @@ public class TESRFoodPrep extends TESRBase
 			}
 			else
 			{
+				GL11.glPushMatrix(); //start
 				GL11.glTranslated(d, d1+0.001, d2);
 				drawItem(te, 0, 0, 0.4, 0, 0.4);
 				drawItem(te, 1, 0.6, 1, 0, 0.4);
 				drawItem(te, 2, 0.6, 1, 0.6, 1);
 				drawItem(te, 3, 0, 0.4, 0.6, 1);
 				drawItem(te, 5, 0.3, 0.7, 0.3, 0.7);
+				GL11.glPopMatrix(); //end
 			}
 		}
 	}

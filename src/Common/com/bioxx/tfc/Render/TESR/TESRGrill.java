@@ -99,6 +99,7 @@ public class TESRGrill extends TESRBase
 			}
 			else
 			{
+				GL11.glPushMatrix(); //start
 				GL11.glTranslated(d, d1+0.001, d2);
 				drawItem(te, 0, 0.05, 0.35, 0.05, 0.35);
 				drawItem(te, 1, 0.65, 0.95, 0.05, 0.35);
@@ -106,6 +107,7 @@ public class TESRGrill extends TESRBase
 				drawItem(te, 3, 0.65, 0.95, 0.35, 0.65);
 				drawItem(te, 4, 0.05, 0.35, 0.65, 0.95);
 				drawItem(te, 5, 0.65, 0.95, 0.65, 0.95);
+				GL11.glPopMatrix(); //end
 			}
 		}
 	}
