@@ -110,7 +110,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				//This is where the crafting is completed and the result is added to the anvil
 				if(result != null && entityplayer != null)
 				{
-					AnvilCraftEvent eventCraft = new AnvilCraftEvent(entityplayer, this, anvilItemStacks[INPUT1_SLOT], result);
+					AnvilCraftEvent eventCraft = new AnvilCraftEvent(entityplayer, this, anvilItemStacks[INPUT1_SLOT], anvilItemStacks[INPUT2_SLOT], result);
 					MinecraftForge.EVENT_BUS.post(eventCraft);
 					if(!eventCraft.isCanceled())
 					{
