@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,6 +20,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 
 import cpw.mods.fml.relauncher.Side;
@@ -272,6 +274,13 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 		return true;
 	}
 
+	@Override
+	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
+	{
+		TEMetalTrapDoor te = (TEMetalTrapDoor)world.getTileEntity(i, j, k);
+		EntityItem ei = new EntityItem(world, i, j, k, te.sheetStack);
+		world.spawnEntityInWorld(ei);
+	}
 
 	/**
 	 * Ray traces through the blocks collision from start vector to end vector
@@ -306,7 +315,7 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 		if(te!= null && te.sheetStack != null)
 			return icons[te.sheetStack.getItemDamage() & 31];
 		else
-			return ((BlockMetalSheet)TFCBlocks.MetalSheet).icons[meta];
+			return TFC_Textures.InvisibleTexture;
 	}
 
 	@Override
