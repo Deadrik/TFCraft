@@ -2,7 +2,11 @@ package com.bioxx.tfc.Blocks.Flora;
 
 import net.minecraft.util.IIcon;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLogVert2 extends BlockLogVert
 {
@@ -20,12 +24,9 @@ public class BlockLogVert2 extends BlockLogVert
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		if (side == 1)
-			return BlockLogNatural2.innerIcons[meta];
-		if (side == 0)
-			return BlockLogNatural2.innerIcons[meta];
-		return BlockLogNatural2.sideIcons[meta];
+		return TFCBlocks.LogNatural2.getIcon(side, meta);
 	}
 }

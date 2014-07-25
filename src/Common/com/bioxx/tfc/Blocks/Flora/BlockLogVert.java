@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.Recipes;
@@ -87,13 +88,10 @@ public class BlockLogVert extends BlockTerra
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		if (side == 1)
-			return BlockLogNatural.innerIcons[meta];
-		if (side == 0)
-			return BlockLogNatural.innerIcons[meta];
-		return BlockLogNatural.sideIcons[meta];
+		return TFCBlocks.LogNatural.getIcon(side, meta);
 	}
 
 	@SideOnly(Side.CLIENT)

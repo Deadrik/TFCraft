@@ -10,6 +10,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
@@ -28,26 +29,27 @@ public class BlockLogHoriz extends BlockLogVert
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		meta = (meta & 7) + offset;
 		int dir = meta >> 3;
+		meta = (meta & 7) + offset;
 
 		if(dir == 0)
 		{
 			if(side == 0 || side == 1)
-				return BlockLogNatural.sideIcons[meta];
+				return ((BlockLogNatural)TFCBlocks.LogNatural).sideIcons[meta];
 			else if(side == 2 || side == 3)
-				return BlockLogNatural.innerIcons[meta];
+				return ((BlockLogNatural)TFCBlocks.LogNatural).innerIcons[meta];
 			else
-				return BlockLogNatural.rotatedSideIcons[meta];
+				return ((BlockLogNatural)TFCBlocks.LogNatural).rotatedSideIcons[meta];
 		}
 		else
 		{
 			if(side == 0 || side == 1 || side == 2 || side == 3)
-				return BlockLogNatural.rotatedSideIcons[meta];
+				return ((BlockLogNatural)TFCBlocks.LogNatural).rotatedSideIcons[meta];
 			else
-				return BlockLogNatural.innerIcons[meta];
+				return ((BlockLogNatural)TFCBlocks.LogNatural).innerIcons[meta];
 		}
 	}
 
