@@ -58,7 +58,7 @@ public class GuiPlanSelection extends GuiContainerTFC
 		{
 			String p = (String) o[0];
 			AnvilRecipe a = (AnvilRecipe) o[1];
-			buttonList.add(0,new GuiPlanButton(plans.size()-1-index, guiLeft + xOffset, guiTop + yOffset, 16, 16, a.getCraftingResult().getIconIndex(), this, StatCollector.translateToLocal("gui.plans."+p)));
+			buttonList.add(0,new GuiPlanButton(plans.size()-1-index, guiLeft + xOffset, guiTop + yOffset, 16, 16, a.getCraftingResult(), this, StatCollector.translateToLocal("gui.plans."+p)));
 			index--;
 			if(xOffset+36 < xSize)
 				xOffset+=18;
@@ -112,11 +112,11 @@ public class GuiPlanSelection extends GuiContainerTFC
 	AnvilRecipe handleMatchingRecipe(AnvilRecipe ar)
 	{
 		if (ar != null)
-		if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT] != null && AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItem() == TFCItems.Bloom && ar.getCraftingResult().getItem() == TFCItems.Bloom)
-		{
-			if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItemDamage() <= 100)
-				return null;
-		}
+			if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT] != null && AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItem() == TFCItems.Bloom && ar.getCraftingResult().getItem() == TFCItems.Bloom)
+			{
+				if (AnvilEntity.anvilItemStacks[AnvilEntity.INPUT1_SLOT].getItemDamage() <= 100)
+					return null;
+			}
 		return ar;
 	}
 

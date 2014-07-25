@@ -157,6 +157,7 @@ public class GuiAnvil extends GuiContainer
 		this.drawHoveringText(list, mx, my+15, this.fontRendererObj);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
 	}
 
 	public void drawItemRulesImages(int w, int h)

@@ -3,6 +3,7 @@ package com.bioxx.tfc.GUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.ItemStack;
 
@@ -14,6 +15,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 public class GuiAnvilPlanButton extends GuiButton 
 {
 	GuiAnvil screen;
+	protected static final RenderItem itemRenderer = new RenderItem();
 
 	public GuiAnvilPlanButton(int index, int xPos, int yPos, int width, int height, GuiAnvil gui, String s)
 	{
@@ -35,15 +37,18 @@ public class GuiAnvilPlanButton extends GuiButton
 			this.field_146123_n = x >= this.xPosition && y >= this.yPosition && x < this.xPosition + this.width && y < this.yPosition + this.height;
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GL11.glPushMatrix(); //start
 			TFC_Core.bindTexture(TextureMap.locationItemsTexture);
 
 			if(!screen.AnvilEntity.craftingPlan.equals("") && screen.AnvilEntity.workRecipe != null) 
-				this.drawTexturedModelRectFromIcon(this.xPosition+1, this.yPosition+1, screen.AnvilEntity.workRecipe.getCraftingResult().getIconIndex(), this.width-2, this.height-2);
+				renderInventorySlot(screen.AnvilEntity.workRecipe.getCraftingResult(),this.xPosition+1, this.yPosition+1);
+			//this.drawTexturedModelRectFromIcon(this.xPosition+1, this.yPosition+1, screen.AnvilEntity.workRecipe.getCraftingResult().getIconIndex(), this.width-2, this.height-2);
 			else
 				this.drawTexturedModelRectFromIcon(this.xPosition+1, this.yPosition+1, TFCItems.Blueprint.getIconIndex(new ItemStack(TFCItems.Blueprint)), this.width-2, this.height-2);
 
 			this.zLevel = 0;
 			this.mouseDragged(mc, x, y);
+			GL11.glPopMatrix(); //end
 
 			if(field_146123_n)
 			{
@@ -51,6 +56,14 @@ public class GuiAnvilPlanButton extends GuiButton
 				screen.drawTooltip(x, y, this.displayString);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
+		}
+	}
+
+	protected void renderInventorySlot(ItemStack par1, int par2, int par3)
+	{
+		if (par1 != null)
+		{
+			itemRenderer.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), par1, par2, par3);
 		}
 	}
 

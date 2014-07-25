@@ -3,8 +3,8 @@ package com.bioxx.tfc.GUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.util.IIcon;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
@@ -12,13 +12,14 @@ import com.bioxx.tfc.Core.TFC_Core;
 
 public class GuiPlanButton extends GuiButton 
 {
-	public IIcon icon;
+	public ItemStack item;
 	GuiPlanSelection screen;
+	protected static final RenderItem itemRenderer = new RenderItem();
 
-	public GuiPlanButton(int index, int xPos, int yPos, int width, int height, IIcon ico, GuiPlanSelection gui, String s)
+	public GuiPlanButton(int index, int xPos, int yPos, int width, int height, ItemStack ico, GuiPlanSelection gui, String s)
 	{
 		super(index, xPos, yPos, width, height, s);
-		icon = ico;
+		item = ico;
 		screen = gui;
 	}
 
@@ -37,10 +38,9 @@ public class GuiPlanButton extends GuiButton
 			this.field_146123_n = x >= this.xPosition && y >= this.yPosition && x < this.xPosition + this.width && y < this.yPosition + this.height;
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			if(icon != null) 
+			if(item != null) 
 			{
-				TFC_Core.bindTexture(TextureMap.locationItemsTexture);
-				this.drawTexturedModelRectFromIcon(this.xPosition+1, this.yPosition+1, icon, this.width, this.height);
+				renderInventorySlot(item, this.xPosition+1, this.yPosition+1);
 			}
 			this.zLevel = 0;
 			this.mouseDragged(mc, x, y);
@@ -51,6 +51,14 @@ public class GuiPlanButton extends GuiButton
 				screen.drawTooltip(x, y, this.displayString);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
+		}
+	}
+
+	protected void renderInventorySlot(ItemStack par1, int par2, int par3)
+	{
+		if (par1 != null)
+		{
+			itemRenderer.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), par1, par2, par3);
 		}
 	}
 
