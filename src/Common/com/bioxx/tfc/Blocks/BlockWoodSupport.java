@@ -41,8 +41,9 @@ public class BlockWoodSupport extends BlockTerra
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
-		for(int i = 0; i < woodNames.length; i++)
-			list.add(new ItemStack(this, 1, i));
+		if(TFCBlocks.isBlockVSupport(this))
+			for(int i = 0; i < woodNames.length; i++)
+				list.add(new ItemStack(this, 1, i));
 	}
 
 	public static int getSupportInRangeHeight(World world, int x, int y, int z, int range)
@@ -262,7 +263,12 @@ public class BlockWoodSupport extends BlockTerra
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
-		dropBlockAsItem(world, i, j, k, new ItemStack(this, 1, l));
+		if(this == TFCBlocks.WoodSupportH)
+			dropBlockAsItem(world, i, j, k, new ItemStack(TFCBlocks.WoodSupportV, 1, l));
+		else if(this == TFCBlocks.WoodSupportH2)
+			dropBlockAsItem(world, i, j, k, new ItemStack(TFCBlocks.WoodSupportV2, 1, l));
+		else
+			dropBlockAsItem(world, i, j, k, new ItemStack(this, 1, l));
 	}
 
 	@Override
@@ -319,6 +325,13 @@ public class BlockWoodSupport extends BlockTerra
 			{
 				harvestBlock(world, null, i, j, k,  meta);
 				world.setBlockToAir(i, j, k);
+			}
+			else if(TFCBlocks.isBlockVSupport(world.getBlock(i, j-1, k)))
+			{
+				if(this == TFCBlocks.WoodSupportH)
+					world.setBlock(i, j, k, TFCBlocks.WoodSupportV, meta, 0x2);
+				else if(this == TFCBlocks.WoodSupportH2)
+					world.setBlock(i, j, k, TFCBlocks.WoodSupportV2, meta, 0x2);
 			}
 		}
 	}

@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items.ItemBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -120,14 +121,16 @@ public class ItemMetalTrapDoor extends ItemTerraBlock
 				break;
 			}
 			}
-			world.setBlock(x, y, z, TFCBlocks.MetalTrapDoor);
-			TEMetalTrapDoor te = (TEMetalTrapDoor) world.getTileEntity(x, y, z);
-			te.sheetStack = itemstack;
-			te.sheetStack.stackSize = 1;
-			te.sides = (byte) out;
-			itemstack.stackSize--;
-			System.out.println("Side: " + side + " Hinge: " + hinge);
-			return true;
+			if(world.getBlock(x, y, z) == Blocks.air)
+			{
+				world.setBlock(x, y, z, TFCBlocks.MetalTrapDoor);
+				TEMetalTrapDoor te = (TEMetalTrapDoor) world.getTileEntity(x, y, z);
+				te.sheetStack = itemstack;
+				te.sheetStack.stackSize = 1;
+				te.sides = (byte) out;
+				itemstack.stackSize--;
+				return true;
+			}
 		}
 		return false;
 	}
