@@ -1834,7 +1834,7 @@ public class TFCItems
 		Global.HCREDSTEEL = new Metal("HC Red Steel", HCRedSteelUnshaped, HCRedSteelIngot);
 		Global.WEAKBLUESTEEL = new Metal("Weak Blue Steel", WeakBlueSteelUnshaped, WeakBlueSteelIngot);
 		Global.HCBLUESTEEL = new Metal("HC Blue Steel", HCBlueSteelUnshaped, HCBlueSteelIngot);
-		Global.UNKNOWN = new Metal("Unknown", UnknownUnshaped, UnknownIngot);
+		Global.UNKNOWN = new Metal("Unknown", UnknownUnshaped, UnknownIngot, false);
 
 		MetalRegistry.instance.addMetal(Global.BISMUTH, Alloy.EnumTier.TierI);
 		MetalRegistry.instance.addMetal(Global.BISMUTHBRONZE, Alloy.EnumTier.TierI);

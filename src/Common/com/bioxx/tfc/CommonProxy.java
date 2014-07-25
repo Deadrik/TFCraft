@@ -49,6 +49,7 @@ import com.bioxx.tfc.TileEntities.TECrop;
 import com.bioxx.tfc.TileEntities.TECrucible;
 import com.bioxx.tfc.TileEntities.TEDetailed;
 import com.bioxx.tfc.TileEntities.TEFarmland;
+import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEFruitLeaves;
@@ -56,6 +57,7 @@ import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
+import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.TileEntities.TEPartial;
@@ -65,7 +67,6 @@ import com.bioxx.tfc.TileEntities.TEStand;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TileEntityBloom;
 import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
-import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
 import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
@@ -136,7 +137,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TEMetalSheet.class, "Metal Sheet");
 		GameRegistry.registerTileEntity(TEOre.class, "ore");
 		GameRegistry.registerTileEntity(TELeatherRack.class, "leatherRack");
-		GameRegistry.registerTileEntity(TEGrill.class, "grill");
+		GameRegistry.registerTileEntity(TEMetalTrapDoor.class, "MetalTrapDoor");
 
 		if(b)
 		{
@@ -151,6 +152,7 @@ public class CommonProxy
 			GameRegistry.registerTileEntity(TEAnvil.class, "TerraAnvil");
 			GameRegistry.registerTileEntity(TEWorldItem.class, "worldItem");
 			GameRegistry.registerTileEntity(TileEntityQuern.class, "Quern");
+			GameRegistry.registerTileEntity(TEGrill.class, "grill");
 		}
 
 		EntityRegistry.registerGlobalEntityID(EntitySquidTFC.class, "squidTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0xbbbbbb);

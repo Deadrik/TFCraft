@@ -1,35 +1,67 @@
 package com.bioxx.tfc.Blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockStairs;
+import java.util.List;
+
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockMetalTrapDoor extends BlockTerra
+public class BlockMetalTrapDoor extends BlockTerraContainer
 {
-	/** Set this to allow trapdoors to remain free-floating */
-	public static boolean disableValidation = false;
+	public IIcon[] icons;
+	public String[] metalNames = {"Bismuth","Bismuth Bronze","Black Bronze","Black Steel","Blue Steel","Brass","Bronze",
+			"Copper","Gold","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver","Steel",
+			"Sterling Silver","Tin","Wrought Iron","Zinc", "Unknown"};
 
 	public BlockMetalTrapDoor()
 	{
 		super(Material.iron);
 		float f = 0.5F;
 		float f1 = 1.0F;
-		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
+		this.setBlockBounds(0, 0, 0, 0.001f, 0.001f, 0.001f);
 		this.setCreativeTab(TFCTabs.TFCDevices);
+	}
+
+	@Override
+	public int getRenderType()
+	{
+		return TFCBlocks.metalTrapDoorRenderId;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	/**
+	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+	 */
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List list)
+	{
+		for(int j = 0; j < metalNames.length; j++)
+			for(int i = 0; i < metalNames.length; i++)
+				list.add(new ItemStack(this,1,i+(j<<5)));
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1, int var2)
+	{
+		return new TEMetalTrapDoor();
 	}
 
 	/**
@@ -64,10 +96,10 @@ public class BlockMetalTrapDoor extends BlockTerra
 	/**
 	 * Returns the bounding box of the wired rectangular prism to render.
 	 */
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
-		return super.getSelectedBoundingBoxFromPool(par1World, par2, par3, par4);
+		this.setBlockBoundsBasedOnState(world, x, y, z);
+		return super.getSelectedBoundingBoxFromPool(world, x, y, z);
 	}
 
 	/**
@@ -75,10 +107,10 @@ public class BlockMetalTrapDoor extends BlockTerra
 	 * box can change after the pool has been cleared to be reused)
 	 */
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
-		return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
+		this.setBlockBoundsBasedOnState(world, x, y, z);
+		return super.getCollisionBoundingBoxFromPool(world, x, y, z);
 	}
 
 	/**
@@ -86,9 +118,10 @@ public class BlockMetalTrapDoor extends BlockTerra
 	 * z
 	 */
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z)
 	{
-		this.setBlockBoundsForBlockRender(par1IBlockAccess.getBlockMetadata(par2, par3, par4));
+		if(access.getTileEntity(x, y, z) != null)
+			this.setBlockBoundsForBlockRender(access.getBlockMetadata(x, y, z), ((TEMetalTrapDoor)access.getTileEntity(x, y, z)).sides);
 	}
 
 	/**
@@ -97,33 +130,124 @@ public class BlockMetalTrapDoor extends BlockTerra
 	@Override
 	public void setBlockBoundsForItemRender()
 	{
-		float f = 0.1875F;
+		float f = 0.125F;
 		this.setBlockBounds(0.0F, 0.5F - f / 2.0F, 0.0F, 1.0F, 0.5F + f / 2.0F, 1.0F);
 	}
 
-	public void setBlockBoundsForBlockRender(int par1)
+	public void setBlockBoundsForBlockRender(int meta, int data)
 	{
-		float f = 0.1875F;
+		float f = 0.125F;
+		int side = data & 7;
+		int hinge = data >> 4;
+				float fx = 0;
+				float fy = 0;
+				float fz = 0;
+				float fx2 = 1;
+				float fy2 = 1;
+				float fz2 = 1;
 
-		if ((par1 & 8) != 0)
-			this.setBlockBounds(0.0F, 1.0F - f, 0.0F, 1.0F, 1.0F, 1.0F);
-		else
-			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f, 1.0F);
+				if (isTrapdoorOpen(meta))
+				{
+					if(hinge == 0)
+					{
+						switch(side)
+						{
+						case 0:
+						case 1:
+						case 2:
+						case 3:
+						{
+							fx2 = f;
+							break;
+						}
+						case 4:
+						case 5:
+						{
+							fy2 = f;
+							break;
+						}
+						default:
+							fx2 = f;
+						}
+					}
+					else if(hinge == 1)
+					{
+						switch(side)
+						{
+						case 2:
+						case 3:
+						{
+							fy2 = f;
+							break;
+						}
+						default:
+							fz2 = f;
+						}
+					}
+					else if(hinge == 2)
+					{
+						switch(side)
+						{
+						case 4:
+						case 5:
+						{
+							fy = 1-f;
+							break;
+						}
+						default:
+							fx = 1-f;
+						}
+					}
+					else if(hinge == 3)
+					{
+						switch(side)
+						{
+						case 2:
+						case 3:
+						{
+							fy = 1-f;
+							break;
+						}
+						case 4:
+						case 5:
+						{
+							fz = 1-f;
+							break;
+						}
+						default:
+							fz = 1-f;
+						}
+					}
+				}
+				else
+				{
+					if(side == 0)
+					{
+						fy = 1-f;
+					}
+					else if(side == 1)
+					{
+						fy2 = f;
+					}
+					else if(side == 2)
+					{
+						fz = 1-f;
+					}
+					else if(side == 3)
+					{
+						fz2 = f;
+					}
+					else if(side == 4)
+					{
+						fx = 1-f;
+					}
+					else if(side == 5)
+					{
+						fx2 = f;
+					}
+				}
 
-		if (isTrapdoorOpen(par1))
-		{
-			if ((par1 & 3) == 0)
-				this.setBlockBounds(0.0F, 0.0F, 1.0F - f, 1.0F, 1.0F, 1.0F);
-
-			if ((par1 & 3) == 1)
-				this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
-
-			if ((par1 & 3) == 2)
-				this.setBlockBounds(1.0F - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-
-			if ((par1 & 3) == 3)
-				this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
-		}
+				this.setBlockBounds(fx, fy, fz, fx2, fy2, fz2);
 	}
 
 	/**
@@ -142,66 +266,12 @@ public class BlockMetalTrapDoor extends BlockTerra
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9)
 	{
-		if (this.blockMaterial == Material.iron)
-		{
-			return true;
-		}
-		else
-		{
-			int i1 = par1World.getBlockMetadata(par2, par3, par4);
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, i1 ^ 4, 2);
-			par1World.playAuxSFXAtEntity(par5EntityPlayer, 1003, par2, par3, par4, 0);
-			return true;
-		}
+		int i1 = par1World.getBlockMetadata(par2, par3, par4);
+		par1World.setBlockMetadataWithNotify(par2, par3, par4, i1 ^ 4, 2);
+		par1World.playAuxSFXAtEntity(par5EntityPlayer, 1003, par2, par3, par4, 0);
+		return true;
 	}
 
-	public void onPoweredBlockChange(World par1World, int par2, int par3, int par4, boolean par5)
-	{
-		int l = par1World.getBlockMetadata(par2, par3, par4);
-		boolean flag1 = (l & 4) > 0;
-
-		if (flag1 != par5)
-		{
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, l ^ 4, 2);
-			par1World.playAuxSFXAtEntity((EntityPlayer) null, 1003, par2, par3, par4, 0);
-		}
-	}
-
-	/**
-	 * Lets the block know when one of its neighbor changes. Doesn't know which
-	 * neighbor changed (coordinates passed are their own) Args: x, y, z,
-	 * neighbor blockID
-	 */
-	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5)
-	{
-		if (!par1World.isRemote)
-		{
-			int i1 = par1World.getBlockMetadata(par2, par3, par4);
-			int j1 = par2;
-			int k1 = par4;
-
-			if ((i1 & 3) == 0)
-				k1 = par4 + 1;
-			if ((i1 & 3) == 1)
-				--k1;
-			if ((i1 & 3) == 2)
-				j1 = par2 + 1;
-			if ((i1 & 3) == 3)
-				--j1;
-
-			if (!(isValidSupportBlock(par1World.getBlock(j1, par3, k1)) ||
-					par1World.isSideSolid(j1, par3, k1, ForgeDirection.getOrientation((i1 & 3) + 2))))
-			{
-				par1World.setBlockToAir(par2, par3, par4);
-				this.dropBlockAsItem(par1World, par2, par3, par4, i1, 0);
-			}
-
-			boolean flag = par1World.isBlockIndirectlyGettingPowered(par2, par3, par4);
-			if (flag || par5 != Blocks.air && par5.canProvidePower())
-				this.onPoweredBlockChange(par1World, par2, par3, par4, flag);
-		}
-	}
 
 	/**
 	 * Ray traces through the blocks collision from start vector to end vector
@@ -215,79 +285,34 @@ public class BlockMetalTrapDoor extends BlockTerra
 		return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
 	}
 
-	/**
-	 * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z,
-	 * side, hitX, hitY, hitZ, block metadata
-	 */
-	@Override
-	public int onBlockPlaced(World par1World, int par2, int par3, int par4,
-			int par5, float par6, float par7, float par8, int par9)
-	{
-		int j1 = 0;
-		if (par5 == 2)
-			j1 = 0;
-		if (par5 == 3)
-			j1 = 1;
-		if (par5 == 4)
-			j1 = 2;
-		if (par5 == 5)
-			j1 = 3;
-		if (par5 != 1 && par5 != 0 && par7 > 0.5F)
-			j1 |= 8;
-		return j1;
-	}
-
-	/**
-	 * checks to see if you can place this block can be placed on that side of a
-	 * block: BlockLever overrides
-	 */
-	@Override
-	public boolean canPlaceBlockOnSide(World par1World, int par2, int par3,
-			int par4, int par5)
-	{
-		if (disableValidation) { return true; }
-		if (par5 == 0)
-			return false;
-		else if (par5 == 1)
-			return false;
-		else
-		{
-			if (par5 == 2)
-				++par4;
-			if (par5 == 3)
-				--par4;
-			if (par5 == 4)
-				++par2;
-			if (par5 == 5)
-				--par2;
-			return isValidSupportBlock(par1World.getBlock(par2, par3, par4))
-					|| par1World.isSideSolid(par2, par3, par4, ForgeDirection.UP);
-		}
-	}
-
 	public static boolean isTrapdoorOpen(int par0)
 	{
 		return (par0 & 4) != 0;
 	}
 
-	/**
-	 * Checks if the block ID is a valid support block for the trap door to
-	 * connect with. If it is not the trapdoor is dropped into the world.
-	 */
-	private static boolean isValidSupportBlock(Block par0)
+	@Override
+	public void registerBlockIcons(IIconRegister registerer)
 	{
-		if (disableValidation) { return true; }
-		if (par0 != Blocks.air)
-		{
-			return false;
-		}
+		icons = new IIcon[metalNames.length];
+		for(int i = 0; i < icons.length; i++)
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "metal/"+metalNames[i]+" Trap Door");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(IBlockAccess access, int i, int j, int k, int meta)
+	{
+		TEMetalTrapDoor te = (TEMetalTrapDoor) access.getTileEntity(i, j, k);
+		if(te!= null && te.sheetStack != null)
+			return icons[te.sheetStack.getItemDamage() & 31];
 		else
-		{
-			return par0 != null && par0.getMaterial().isOpaque()
-					&& par0.renderAsNormalBlock()
-					|| par0 == Blocks.glowstone
-					|| par0 instanceof BlockSlab
-					|| par0 instanceof BlockStairs;
-		}
+			return ((BlockMetalSheet)TFCBlocks.MetalSheet).icons[meta];
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
+	{
+		return icons[meta&31];
 	}
 }

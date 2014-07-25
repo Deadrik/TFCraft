@@ -192,7 +192,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.painting,1),new Object[]{"###","#$#","###",Character.valueOf('#'),"stickWood",Character.valueOf('$'), "materialCloth"}));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.carpet,2,0),new Object[]{"$$",Character.valueOf('$'), "materialCloth"}));
-		
+
 		for(int i = 0; i < 16;i++)
 			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.carpet,1,i),new Object[] {new ItemStack(TFCItems.Dye,1,15-i),new ItemStack(Blocks.carpet,1,32767)});
 
@@ -249,7 +249,7 @@ public class Recipes
 
 		//Gold Pan
 		GameRegistry.addRecipe(new ItemStack(TFCItems.GoldPan, 1, 0), new Object[] {"1", Character.valueOf('1'),Items.bowl});
-		
+
 		//Sluice
 		/*GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SluiceItem, 1), new Object[] { 
 			"  1"," 12","122", Character.valueOf('1'),"stickWood", Character.valueOf('2'),new ItemStack(TFCItems.SinglePlank,1,32767)}));*/
@@ -303,7 +303,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.EarlyBloomery, 1), new Object[] { "PPP","P P","PPP", Character.valueOf('P'), "sheetDoubleAnyBronze"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.BlastFurnace, 1), new Object[]
-		{ "PPP", "PCP", "PPP", Character.valueOf('P'), "sheetDoubleWroughtIron", Character.valueOf('C'), new ItemStack(TFCBlocks.Crucible, 1) }));
+				{ "PPP", "PCP", "PPP", Character.valueOf('P'), "sheetDoubleWroughtIron", Character.valueOf('C'), new ItemStack(TFCBlocks.Crucible, 1) }));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.NestBox,1), new Object[] {"S S","PSP","PPP",Character.valueOf('S'), new ItemStack(TFCItems.Straw,1),Character.valueOf('P'), "woodLumber"}));
 
@@ -334,15 +334,15 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.sign, 1, 0), new Object[] { "###","###"," 1 ", Character.valueOf('#'), "woodLumber", Character.valueOf('1'), "stickWood"}));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[]
-		{ "PPP", "GKG", "PPP", Character.valueOf('P'), "stoneSmooth", Character.valueOf('K'), "gemChipped", Character.valueOf('G'), new ItemStack(Blocks.glass, 1) }));
+				{ "PPP", "GKG", "PPP", Character.valueOf('P'), "stoneSmooth", Character.valueOf('K'), "gemChipped", Character.valueOf('G'), new ItemStack(Blocks.glass, 1) }));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Quern, 1), new Object[]
-		{ "PPP", Character.valueOf('P'), "stoneSmooth" }));
+				{ "PPP", Character.valueOf('P'), "stoneSmooth" }));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Quern, 1), new Object[]
-		{ "  W", "PPP", Character.valueOf('P'), "stone", Character.valueOf('W'), "stickWood" }));
+				{ "  W", "PPP", Character.valueOf('P'), "stone", Character.valueOf('W'), "stickWood" }));
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.book, 1), new Object[]
-		{ new ItemStack(Items.paper), new ItemStack(Items.paper), new ItemStack(Items.paper), "materialLeather" }));
+				{ new ItemStack(Items.paper), new ItemStack(Items.paper), new ItemStack(Items.paper), "materialLeather" }));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.ButtonWood, 1), new Object[] {"#", "#", Character.valueOf('#'), "plankWood"}));
 
@@ -355,17 +355,17 @@ public class Recipes
 			"lumpClay", Character.valueOf('#'), "stickWood" }));
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.WoolYarn, 8), new Object[]
-		{ "materialWool", new ItemStack(TFCItems.Spindle, 1, 32767) }));
+				{ "materialWool", new ItemStack(TFCItems.Spindle, 1, 32767) }));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WoolCloth, 1), new Object[]
-		{ "PP", "PP", Character.valueOf('P'), "materialString" }));
+				{ "PP", "PP", Character.valueOf('P'), "materialString" }));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.bed, 1), new Object[]
-		{ "PPP", "QQQ", Character.valueOf('P'), "materialCloth", Character.valueOf('Q'), "woodLumber" }));
+				{ "PPP", "QQQ", Character.valueOf('P'), "materialCloth", Character.valueOf('Q'), "woodLumber" }));
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[]
-		{ Items.flint, "ingotIron" }));
+				{ Items.flint, "ingotIron" }));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[]
-		{ Items.flint, "ingotSteel" }));
+				{ Items.flint, "ingotSteel" }));
 
 		// Walls & cobble blocks
 		for(int j = 0; j < Global.STONE_IGIN.length; j++)
@@ -580,7 +580,7 @@ public class Recipes
 
 		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks, 1, WILDCARD));
 		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks2, 1, WILDCARD));
-		
+
 		OreDictionary.registerOre("woodLumber", new ItemStack(TFCItems.SinglePlank, 1, WILDCARD));
 
 		OreDictionary.registerOre("stickWood", new ItemStack(TFCItems.Stick));
@@ -776,7 +776,7 @@ public class Recipes
 		OreDictionary.registerOre("sheetDoubleBlackSteel", new ItemStack(TFCItems.BlackSteelSheet2x));
 		OreDictionary.registerOre("sheetDoubleRedSteel", new ItemStack(TFCItems.RedSteelSheet2x));
 		OreDictionary.registerOre("sheetDoubleBlueSteel", new ItemStack(TFCItems.BlueSteelSheet2x));
-		
+
 		OreDictionary.registerOre("sheetDoubleAnyBronze", new ItemStack(TFCItems.BronzeSheet2x));
 		OreDictionary.registerOre("sheetDoubleAnyBronze", new ItemStack(TFCItems.BismuthBronzeSheet2x));
 		OreDictionary.registerOre("sheetDoubleAnyBronze", new ItemStack(TFCItems.BlackBronzeSheet2x));
@@ -900,7 +900,7 @@ public class Recipes
 		//Crafting Table
 		OreDictionary.registerOre("craftingTableWood", new ItemStack(TFCBlocks.Workbench));
 		OreDictionary.registerOre("craftingTableWood", new ItemStack(Blocks.crafting_table));
-		
+
 		//Dyes
 		OreDictionary.registerOre("dyeBlack", new ItemStack(TFCItems.Dye, 1, 0));
 		OreDictionary.registerOre("dyeRed", new ItemStack(TFCItems.Powder, 1, 5));
@@ -922,14 +922,14 @@ public class Recipes
 		OreDictionary.registerOre("dyeMagenta", new ItemStack(TFCItems.Dye, 1, 13));
 		OreDictionary.registerOre("dyeOrange", new ItemStack(TFCItems.Dye, 1, 14));
 		OreDictionary.registerOre("dyeWhite", new ItemStack(TFCItems.Dye, 1, 15));
-		
+
 		//Materials
 		OreDictionary.registerOre("materialLeather", new ItemStack(Items.leather));
 		OreDictionary.registerOre("materialLeather", new ItemStack(TFCItems.Leather));
-		
+
 		OreDictionary.registerOre("materialString", new ItemStack(Items.string));
 		OreDictionary.registerOre("materialString", new ItemStack(TFCItems.WoolYarn));
-		
+
 		OreDictionary.registerOre("materialCloth", new ItemStack(TFCItems.WoolCloth));
 		OreDictionary.registerOre("materialWool", new ItemStack(TFCItems.Wool));
 
@@ -942,9 +942,9 @@ public class Recipes
 
 		OreDictionary.registerOre("itemReed", new ItemStack(Items.reeds));
 		OreDictionary.registerOre("itemReed", new ItemStack(TFCItems.Reeds));
-		
+
 		OreDictionary.registerOre("itemRock", new ItemStack(TFCItems.LooseRock, 1, WILDCARD));
-		
+
 		OreDictionary.registerOre("itemBucketWater", new ItemStack(Items.water_bucket));
 		OreDictionary.registerOre("itemBucketWater", new ItemStack(TFCItems.WoodenBucketWater, 1, WILDCARD));
 		OreDictionary.registerOre("itemBucketWater", new ItemStack(TFCItems.RedSteelBucketWater, 1, WILDCARD));
@@ -956,13 +956,13 @@ public class Recipes
 
 		OreDictionary.registerOre("itemBucketSaltWater", new ItemStack(TFCItems.WoodenBucketSaltWater, 1, WILDCARD));
 		OreDictionary.registerOre("itemBucketSaltWater", new ItemStack(TFCItems.RedSteelBucketSaltWater, 1, WILDCARD));
-		
-		
+
+
 		//Miscellaneous Blocks
 		OreDictionary.registerOre("blockSand", new ItemStack(Blocks.sand));
 		OreDictionary.registerOre("blockSand", new ItemStack(TFCBlocks.Sand, 1, WILDCARD));
 		OreDictionary.registerOre("blockSand", new ItemStack(TFCBlocks.Sand2, 1, WILDCARD));
-		
+
 		OreDictionary.registerOre("blockDirt", new ItemStack(Blocks.dirt));
 		OreDictionary.registerOre("blockDirt", new ItemStack(TFCBlocks.Dirt, 1, WILDCARD));
 		OreDictionary.registerOre("blockDirt", new ItemStack(TFCBlocks.Dirt2, 1, WILDCARD));
@@ -1046,13 +1046,13 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Items.diamond_hoe));
 			RemoveRecipe(new ItemStack(Items.diamond_sword));
 		}
-		
+
 		if (TFCCrafting.dispenserRecipe == false)
 			RemoveRecipe(new ItemStack(Blocks.dispenser));
-		
+
 		if (TFCCrafting.dropperRecipe == false)
 			RemoveRecipe(new ItemStack(Blocks.dropper));
-		
+
 		if (TFCCrafting.enchantTableRecipe == false)
 			RemoveRecipe(new ItemStack(Blocks.enchanting_table));
 
@@ -1078,10 +1078,10 @@ public class Recipes
 
 		if (TFCCrafting.goldBlockRecipe == false)
 			RemoveRecipe(new ItemStack(Blocks.gold_block));
-		
+
 		if (TFCCrafting.goldNuggetRecipe == false)
 			RemoveRecipe(new ItemStack(Items.gold_nugget, 9));
-		
+
 		if (TFCCrafting.goldPlateRecipe == false)
 			RemoveRecipe(new ItemStack(Blocks.light_weighted_pressure_plate));
 
@@ -1093,7 +1093,7 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Items.golden_hoe));
 			RemoveRecipe(new ItemStack(Items.golden_sword));
 		}
-		
+
 		if (TFCCrafting.hopperRecipe == false)
 			RemoveRecipe(new ItemStack(Blocks.hopper));
 
@@ -1104,13 +1104,13 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Items.iron_leggings));
 			RemoveRecipe(new ItemStack(Items.iron_boots));
 		}
-		
+
 		if (TFCCrafting.ironBarsRecipe == false)
 			RemoveRecipe(new ItemStack(Blocks.iron_bars, 16));
 
 		if (TFCCrafting.ironBlockRecipe == false)
 			RemoveRecipe(new ItemStack(Blocks.iron_block));
-		
+
 		if (TFCCrafting.ironDoorRecipe == false)
 			RemoveRecipe(new ItemStack(Items.iron_door));
 
@@ -1275,7 +1275,7 @@ public class Recipes
 			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemDiamond,1,3), new Object[] {new ItemStack(Items.diamond), new ItemStack(Items.diamond)});
 			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.GemDiamond,1,4), new Object[] {new ItemStack(Items.diamond), new ItemStack(Items.diamond), new ItemStack(Items.diamond)});
 		}
-		
+
 		if (TFCCrafting.emeraldConversion == true)
 		{
 			GameRegistry.addShapelessRecipe(new ItemStack(Items.emerald, 1), new Object[] {new ItemStack(TFCItems.GemEmerald,1,2)});
@@ -1290,7 +1290,7 @@ public class Recipes
 		{
 			GameRegistry.addShapelessRecipe(new ItemStack(Items.fish, 1), new Object[] { new ItemStack(TFCItems.fishRaw, 1) });
 		}
-		
+
 		if (TFCCrafting.fishingRodConversion == true)
 		{
 			GameRegistry.addShapelessRecipe(new ItemStack(Items.fishing_rod, 1), new Object[] { new ItemStack(TFCItems.FishingRod, 1, 0) });
@@ -2054,6 +2054,7 @@ public class Recipes
 		manager.addPlan("refinebloom", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));
 		manager.addPlan("splitbloom", new PlanRecipe(new RuleEnum[]{RuleEnum.PUNCHLAST, RuleEnum.ANY, RuleEnum.ANY}));
 		manager.addPlan("tuyere", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.ANY}));
+		manager.addPlan("trapdoor", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.SHRINKNOTLAST, RuleEnum.UPSETNOTLAST}));
 
 		addWeldRecipes(manager);
 
@@ -2335,6 +2336,39 @@ public class Recipes
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelSheet2x), null,"tuyere", AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.TuyereBlackSteel, 1)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelSheet2x), null,"tuyere", AnvilReq.BLUESTEEL, new ItemStack(TFCItems.TuyereBlueSteel, 1)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelSheet2x), null,"tuyere", AnvilReq.REDSTEEL, new ItemStack(TFCItems.TuyereRedSteel, 1)));
+
+		addTrapDoor(TFCItems.BismuthSheet, 0);addTrapDoor(TFCItems.BismuthBronzeSheet, 1);addTrapDoor(TFCItems.BlackBronzeSheet, 2);addTrapDoor(TFCItems.BlackSteelSheet, 3);
+		addTrapDoor(TFCItems.BlueSteelSheet, 4);addTrapDoor(TFCItems.BrassSheet, 5);addTrapDoor(TFCItems.BronzeSheet, 6);addTrapDoor(TFCItems.CopperSheet, 7);
+		addTrapDoor(TFCItems.GoldSheet, 8);addTrapDoor(TFCItems.WroughtIronSheet, 9);addTrapDoor(TFCItems.LeadSheet, 10);addTrapDoor(TFCItems.NickelSheet, 11);
+		addTrapDoor(TFCItems.NickelSheet, 12);addTrapDoor(TFCItems.PlatinumSheet, 13);addTrapDoor(TFCItems.RedSteelSheet, 14);addTrapDoor(TFCItems.RoseGoldSheet, 15);
+		addTrapDoor(TFCItems.SilverSheet, 16);addTrapDoor(TFCItems.SteelSheet, 17);addTrapDoor(TFCItems.SterlingSilverSheet, 18);addTrapDoor(TFCItems.TinSheet, 19);
+		addTrapDoor(TFCItems.ZincSheet, 20);
+
+	}
+
+	private static void addTrapDoor(Item sheet, int index)
+	{
+		AnvilManager manager = AnvilManager.getInstance();
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.BismuthIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.BismuthBronzeIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (1 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.BlackBronzeIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (2 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.BlackSteelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (3 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.BlueSteelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (4 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.BrassIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (5 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.BronzeIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (6 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.CopperIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (7 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.GoldIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (8 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.WroughtIronIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (9 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.LeadIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (10 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.NickelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (11 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.PlatinumIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (13 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.RedSteelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (14 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.RoseGoldIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (15 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.SilverIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (16 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.SteelIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (17 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.SterlingSilverIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (18 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.TinIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (19 << 5))));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(sheet), new ItemStack(TFCItems.ZincIngot), "trapdoor", AnvilReq.COPPER, new ItemStack(TFCBlocks.MetalTrapDoor, 1, index + (20 << 5))));
 	}
 
 	/**

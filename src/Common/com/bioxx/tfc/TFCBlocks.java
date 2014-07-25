@@ -14,6 +14,7 @@ import com.bioxx.tfc.Blocks.BlockFoodPrep;
 import com.bioxx.tfc.Blocks.BlockIngotPile;
 import com.bioxx.tfc.Blocks.BlockLogPile;
 import com.bioxx.tfc.Blocks.BlockMetalSheet;
+import com.bioxx.tfc.Blocks.BlockMetalTrapDoor;
 import com.bioxx.tfc.Blocks.BlockMolten;
 import com.bioxx.tfc.Blocks.BlockPlanks;
 import com.bioxx.tfc.Blocks.BlockSlab;
@@ -109,6 +110,7 @@ import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBlocks.ItemGrill;
+import com.bioxx.tfc.Items.ItemBlocks.ItemMetalTrapDoor;
 import com.bioxx.tfc.Items.ItemBlocks.ItemSoil;
 import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack;
@@ -167,6 +169,7 @@ public class TFCBlocks
 	public static int chestRenderId;
 	public static int leatherRackRenderId;
 	public static int grillRenderId;
+	public static int metalTrapDoorRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -322,10 +325,10 @@ public class TFCBlocks
 	public static Block Gravel2;
 
 	public static Block Grill;
+	public static Block MetalTrapDoor;
 
 	public static void RegisterBlocks()
 	{
-		GameRegistry.registerBlock(Grill, ItemGrill.class, "Grill");
 		GameRegistry.registerBlock(Ore, "Ore1");
 		GameRegistry.registerBlock(Ore2, "Ore2");
 		GameRegistry.registerBlock(Ore3, "Ore3");
@@ -485,6 +488,10 @@ public class TFCBlocks
 		GameRegistry.registerBlock(LeatherRack, "LeatherRack");
 		GameRegistry.registerBlock(Gravel, ItemSoil.class,"Gravel");
 		GameRegistry.registerBlock(Gravel2, ItemSoil.class,"Gravel2");
+
+		GameRegistry.registerBlock(Grill, ItemGrill.class, "Grill");
+		GameRegistry.registerBlock(MetalTrapDoor, ItemMetalTrapDoor.class, "MetalTrapDoor");
+
 	}
 
 	public static void LoadBlocks()
@@ -696,6 +703,7 @@ public class TFCBlocks
 		Gravel2 = (new BlockGravel(16)).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("gravel");
 
 		Grill = new BlockGrill().setHardness(2F).setBlockName("Grill");
+		MetalTrapDoor = new BlockMetalTrapDoor().setHardness(2F).setBlockName("MetalTrapDoor");
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);
 		StoneIgEx.setHarvestLevel("pickaxe", 0);
