@@ -131,7 +131,10 @@ public class TEBloomery extends NetworkTileEntity
 					{
 						bloomeryLit = false;
 
-						worldObj.setBlockToAir(xCoord + direction[0], yCoord + (moltenCount < 2 ? 2 : moltenCount) - 1, zCoord + direction[1]);
+						/* Was causing any blocks above the chimney to be removed in weird places depending on molten count.
+						* Bloomery appears to be working just fine and removing the molten blocks without line. Not sure why it was here.
+						* -Kitty */
+						//worldObj.setBlockToAir(xCoord + direction[0], yCoord + (moltenCount < 2 ? 2 : moltenCount) - 1, zCoord + direction[1]);
 
 						oreCount = 0;
 						charcoalCount = 0;
