@@ -44,6 +44,7 @@ import com.bioxx.tfc.Items.ItemLooseRock;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.Items.ItemMetalSheet;
 import com.bioxx.tfc.Items.ItemMetalSheet2x;
+import com.bioxx.tfc.Items.ItemMudBrick;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.Items.ItemOreSmall;
 import com.bioxx.tfc.Items.ItemPlank;
@@ -922,6 +923,7 @@ public class TFCItems
 	public static Item CloudberryLeaf;
 	public static Item Fertilizer;
 	public static Item MetalLock;
+	public static Item MudBrick;
 	/**
 	 * Item Uses Setup
 	 * */
@@ -1570,6 +1572,8 @@ public class TFCItems
 		Items.reeds.setCreativeTab(null);
 		Reeds = new ItemReeds().setUnlocalizedName("Reeds").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("reeds");
 		MetalLock = new ItemTerra().setUnlocalizedName("Metal Lock").setCreativeTab(TFCTabs.TFCMisc);
+		MudBrick = new ItemMudBrick().setUnlocalizedName("Mud Brick").setCreativeTab(TFCTabs.TFCMaterials).setTextureName("Mud Brick Base");
+
 		// Food related items
 		SetupFood();
 
@@ -2854,6 +2858,7 @@ public class TFCItems
 		GameRegistry.registerItem(LeatherBoots, LeatherBoots.getUnlocalizedName());
 
 		GameRegistry.registerItem(Quiver, Quiver.getUnlocalizedName());
+		GameRegistry.registerItem(MudBrick, MudBrick.getUnlocalizedName());
 
 		System.out.println(new StringBuilder().append("[TFC] All Items Registered").toString());
 	}

@@ -84,8 +84,8 @@ public class ItemTerra extends Item implements ISize
 	{
 		if(canStack())
 			return this.getSize(null).stackSize * getWeight(null).multiplier <= 64 ? this.getSize(null).stackSize * getWeight(null).multiplier : 64;
-		else
-			return 1;
+			else
+				return 1;
 	}
 
 	public ItemTerra setFolder(String s)
@@ -99,7 +99,10 @@ public class ItemTerra extends Item implements ISize
 	{
 		if(this.MetaNames == null)
 		{
-			this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + this.getUnlocalizedName().replace("item.", ""));
+			if(this.iconString != null)
+				this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + this.getIconString());
+			else
+				this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + this.getUnlocalizedName().replace("item.", ""));
 		}
 		else
 		{
@@ -172,9 +175,9 @@ public class ItemTerra extends Item implements ISize
 	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
 		if(	is.getItem() instanceof ItemIngot ||
-			is.getItem() instanceof ItemMetalSheet ||
-			is.getItem() instanceof ItemUnfinishedArmor ||
-			is.getItem() instanceof ItemBloom)
+				is.getItem() instanceof ItemMetalSheet ||
+				is.getItem() instanceof ItemUnfinishedArmor ||
+				is.getItem() instanceof ItemBloom)
 		{
 			if(TFC_ItemHeat.HasTemp(is))
 			{
