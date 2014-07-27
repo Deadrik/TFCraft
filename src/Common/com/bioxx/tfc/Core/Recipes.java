@@ -201,7 +201,8 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Dye,1,12),new Object[]{new ItemStack(TFCItems.Powder,1,8),new ItemStack(TFCItems.Powder,1,0), "blockSand"}));
 
 		//Chest
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Chest, 1), new Object[] { "###","# #","###", Character.valueOf('#'), "woodLumber"}));
+		for(int i = 0; i < Global.WOOD_ALL.length; i++)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Chest, 1, i), new Object[] { "###","# #","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, i)}));
 
 		// Stone Bricks
 		for(int i = 0; i < Chisels.length; i++)
