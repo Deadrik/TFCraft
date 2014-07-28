@@ -396,14 +396,21 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
 			nbt.setByte("action", action);
+			if (currentAlloy != null) {
+				if (action == 0) {
+				  currentAlloy.toNBT(nbt);
+				}
+				else if (action == 1) {
+				  nbt.setFloat("outputAmount", currentAlloy.outputAmount);
+				}
+			}
 			this.broadcastPacketInRange(this.createDataPacket(nbt));
 		}
 	}
 
 	@Override
-	public void handleInitPacket(NBTTagCompound nbt) 
+	public void handleInitPacket(NBTTagCompound nbt)
 	{
-
 	}
 
 	@Override

@@ -1,5 +1,8 @@
 package com.bioxx.tfc.GUI;
 
+import java.util.Arrays;
+import java.util.List;
+
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -47,7 +50,6 @@ public class GuiCrucible extends GuiContainer
 
 		scale = te.getOutCountScaled(100);
 		drawTexturedModalRect(w + 129, h + 106 - scale, 177, 6, 8, scale);
-		
 
 		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 
@@ -85,10 +87,22 @@ public class GuiCrucible extends GuiContainer
 	}
 
 	@Override
+	public void drawScreen(int par1, int par2, float par3) {
+		super.drawScreen(par1, par2, par3);
+		if (te.currentAlloy != null) {
+			int w = (this.width - this.xSize) / 2;
+			int h = (this.height - this.ySize) / 2;
+			if (par1 >= 129 + w && par2 >= 6 + h&& par1 <= 137 + w && par2 <= 106 + h) {
+				String[] text = { String.format("%2.0f", te.currentAlloy.outputAmount) };
+				List temp = Arrays.asList(text);
+				drawHoveringText(temp, par1, par2, fontRendererObj);
+			}
+		}
+	}
+
+	@Override
 	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
 	{
 		fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
 	}
-
-
 }
