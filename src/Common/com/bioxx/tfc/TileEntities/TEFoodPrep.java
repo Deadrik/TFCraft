@@ -113,6 +113,8 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 						setInventorySlotContents(5, null);
 
 					consumeFoodWeight();
+
+					TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_COOKING, 1);
 				}
 			}
 		}
@@ -469,15 +471,16 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 
 	public void sendCookPacket(int i) {
 		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setInteger("action", i);
+		nbt.setByte("action", (byte)i);
 		nbt.setString("playername", PlayerManagerTFC.getInstance().getClientPlayer().Name);
 		this.broadcastPacketInRange(this.createDataPacket(nbt));
 	}
 
+	@Override
 	public void handleDataPacket(NBTTagCompound nbt) {
-		int action = nbt.getInteger("action");
+		byte action = nbt.getByte("action");
 		EntityPlayer player = worldObj.getPlayerEntityByName(nbt.getString("playername"));
-		if (action == 0) {
+		if(action == 0) {
 			actionCreate(player);
 		}
 	}

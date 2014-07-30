@@ -19,7 +19,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 
 	public GuiFoodPrep(InventoryPlayer inventoryplayer, TEFoodPrep wb, World world, int i, int j, int k)
 	{
-		super(new ContainerFoodPrep(inventoryplayer, wb,  world, i, j, k), 176, 85);
+		super(new ContainerFoodPrep(inventoryplayer, wb, world, i, j, k), 176, 85);
 		table = wb;
 	}
 
@@ -80,7 +80,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 	protected void actionPerformed(GuiButton guibutton)
 	{
 		if (guibutton.id == 0) {
-		  table.sendCookPacket(0);
+			table.sendCookPacket(0);
 		}
 	}
 }
