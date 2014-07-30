@@ -24,7 +24,6 @@ import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Food.ItemMeal;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 import com.bioxx.tfc.Items.ItemArrow;
 import com.bioxx.tfc.Items.ItemLooseRock;
@@ -70,8 +69,7 @@ public class EntityLivingHandler
 				foodstats.onUpdate(player);
 				TFC_Core.setPlayerFoodStats(player, foodstats);
 				//Send update packet from Server to Client
-				AbstractPacket pkt = new PlayerUpdatePacket(player, 0);
-				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+				TerraFirmaCraft.packetPipeline.sendTo(new PlayerUpdatePacket(player, 0), (EntityPlayerMP) player);
 
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
 					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20, 1));

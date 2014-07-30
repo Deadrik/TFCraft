@@ -8,10 +8,10 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.DataBlockPacket;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public abstract class NetworkTileEntity extends TileEntity
 {
@@ -76,7 +76,7 @@ public abstract class NetworkTileEntity extends TileEntity
 					new TargetPoint(dim, xCoord,yCoord,zCoord,broadcastRange));
 	}
 
-	public void broadcastPacketInRange(AbstractPacket packet)
+	public void broadcastPacketInRange(IMessage packet)
 	{
 		if(worldObj.isRemote)
 			TerraFirmaCraft.packetPipeline.sendToServer(packet);

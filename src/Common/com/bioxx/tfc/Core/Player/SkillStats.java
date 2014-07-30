@@ -11,7 +11,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 import com.bioxx.tfc.api.SkillsManager;
 import com.bioxx.tfc.api.Events.GetSkillMultiplierEvent;
@@ -71,8 +70,7 @@ public class SkillStats
 		int i = (Integer) skillsMap.get(skillName);
 		if(player instanceof EntityPlayerMP)
 		{
-			AbstractPacket pkt = new PlayerUpdatePacket(1, skillName, i);
-			TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+			TerraFirmaCraft.packetPipeline.sendTo(new PlayerUpdatePacket(1, skillName, i), (EntityPlayerMP) player);
 		}
 		writeNBT(player.getEntityData());
 	}

@@ -46,7 +46,12 @@ import com.bioxx.tfc.Handlers.EntityLivingHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Handlers.PlayerSkillEventHandler;
-import com.bioxx.tfc.Handlers.Network.PacketPipeline;
+import com.bioxx.tfc.Handlers.Network.DataBlockPacket;
+import com.bioxx.tfc.Handlers.Network.InitClientWorldPacket;
+import com.bioxx.tfc.Handlers.Network.ItemRenamePacket;
+import com.bioxx.tfc.Handlers.Network.KeyPressPacket;
+import com.bioxx.tfc.Handlers.Network.KnappingUpdatePacket;
+import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.WorldGen.TFCProviderHell;
 import com.bioxx.tfc.WorldGen.TFCWorldType;
@@ -74,7 +79,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.ModVersion, dependencies = Reference.ModDependencies)
 public class TerraFirmaCraft
@@ -86,7 +94,7 @@ public class TerraFirmaCraft
 	public static CommonProxy proxy;
 
 	// The packet pipeline
-	public static final PacketPipeline packetPipeline = new PacketPipeline();
+	public static SimpleNetworkWrapper packetPipeline;
 
 	public TerraFirmaCraft()
 	{
@@ -96,6 +104,9 @@ public class TerraFirmaCraft
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		instance = this;
+
+		packetPipeline = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ModChannel.toLowerCase());
+
 		//Load our settings from the TFCOptions file
 		loadSettings();
 		loadCraftingSettings();
@@ -174,8 +185,6 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void initialize(FMLInitializationEvent event)
 	{
-		// Register Packet Handler
-		packetPipeline.initalise();
 
 		//Register our player tracker
 		FMLCommonHandler.instance().bus().register(new PlayerTracker());
@@ -239,7 +248,7 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void postInit (FMLPostInitializationEvent evt)
 	{
-		packetPipeline.postInitialise();
+		registerPackets();
 	}
 
 	@EventHandler
@@ -266,6 +275,24 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new PrintImageMapCommand());
 		evt.registerServerCommand(new GiveSkillCommand());
 	}	
+
+	private static void registerPackets() {
+		int pkt = 0;
+		// server targetting packets
+		packetPipeline.registerMessage(KeyPressPacket.ServerHandler.class, KeyPressPacket.class, pkt++, Side.SERVER);
+		packetPipeline.registerMessage(KnappingUpdatePacket.ServerHandler.class, KnappingUpdatePacket.class, pkt++, Side.SERVER);
+
+		// client targetting packets
+		packetPipeline.registerMessage(InitClientWorldPacket.ClientHandler.class, InitClientWorldPacket.class, pkt++, Side.CLIENT);
+		packetPipeline.registerMessage(ItemRenamePacket.ClientHandler.class, ItemRenamePacket.class, pkt++, Side.CLIENT);
+
+		// multi targetting packets
+		packetPipeline.registerMessage(DataBlockPacket.UniversalHandler.class, DataBlockPacket.class, pkt++, Side.SERVER);
+		packetPipeline.registerMessage(DataBlockPacket.UniversalHandler.class, DataBlockPacket.class, pkt++, Side.CLIENT);
+
+		packetPipeline.registerMessage(PlayerUpdatePacket.ServerHandler.class, PlayerUpdatePacket.class, pkt++, Side.SERVER);
+		packetPipeline.registerMessage(PlayerUpdatePacket.ClientHandler.class, PlayerUpdatePacket.class, pkt++, Side.CLIENT);
+	}
 
 	public void loadSettings()
 	{

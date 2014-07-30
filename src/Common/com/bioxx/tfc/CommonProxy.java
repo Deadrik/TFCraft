@@ -80,6 +80,7 @@ import com.bioxx.tfc.WorldGen.TFCProvider;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -360,5 +361,9 @@ public class CommonProxy
 	public void registerGuiHandler()
 	{
 		NetworkRegistry.INSTANCE.registerGuiHandler(TerraFirmaCraft.instance, new GuiHandler());
+	}
+
+	public EntityPlayer getPlayerFromMessageContext(MessageContext ctx) {
+	  return ctx.getServerHandler().playerEntity;
 	}
 }

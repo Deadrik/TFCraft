@@ -1,11 +1,16 @@
 package com.bioxx.tfc.Handlers.Network;
 
+import com.bioxx.tfc.TerraFirmaCraft;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class ItemRenamePacket extends AbstractPacket
+public class ItemRenamePacket implements IMessage
 {
 	private String name;
 
@@ -17,27 +22,24 @@ public class ItemRenamePacket extends AbstractPacket
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void toBytes(ByteBuf buffer)
 	{
 		ByteBufUtils.writeUTF8String(buffer, name);
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void fromBytes(ByteBuf buffer)
 	{
 		name = ByteBufUtils.readUTF8String(buffer);
 	}
 
-	@Override
-	public void handleClientSide(EntityPlayer player)
-	{
-		player.inventory.getCurrentItem().stackTagCompound.setString("Name", name);
-	}
+	public static class ClientHandler implements IMessageHandler<ItemRenamePacket, IMessage> {
 
-	@Override
-	public void handleServerSide(EntityPlayer player)
-	{
-		player.inventory.getCurrentItem().stackTagCompound.setString("Name", name);
+    @Override
+    public IMessage onMessage(ItemRenamePacket message, MessageContext ctx) {
+      EntityPlayer player = TerraFirmaCraft.proxy.getPlayerFromMessageContext(ctx);
+      player.inventory.getCurrentItem().stackTagCompound.setString("Name", message.name);
+      return null;
+    }
 	}
-
 }

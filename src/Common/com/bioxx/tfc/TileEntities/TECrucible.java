@@ -411,8 +411,10 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		byte action = nbt.getByte("action");
 		if(action == 0)
 			this.currentAlloy = new Alloy().fromNBT(nbt);
-		else if(action == 1)
-			currentAlloy.outputAmount = nbt.getFloat("outputAmount");
+		else if(action == 1) {
+		  if (currentAlloy != null)
+		    currentAlloy.outputAmount = nbt.getFloat("outputAmount");
+		}
 		else if(action == 2)
 			currentAlloy = null;
 

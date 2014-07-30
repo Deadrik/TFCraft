@@ -105,7 +105,7 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				Object[] r = getRecipe(manager);
 				AnvilRecipe recipe = r != null && r[0] !=  null ? (AnvilRecipe) r[0] : null;
 				ItemStack result = r != null && r[1] !=  null ? (ItemStack) r[1] : null;
-				EntityPlayer entityplayer = Minecraft.getMinecraft().thePlayer;
+				//EntityPlayer entityplayer = Minecraft.getMinecraft().thePlayer;
 
 				//This is where the crafting is completed and the result is added to the anvil
 				if(result != null && entityplayer != null)
