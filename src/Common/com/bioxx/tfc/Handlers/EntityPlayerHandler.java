@@ -8,7 +8,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
 import com.bioxx.tfc.TFCItems;
@@ -24,7 +23,6 @@ import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Food.ItemMeal;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 import com.bioxx.tfc.Items.ItemArrow;
 import com.bioxx.tfc.Items.ItemLooseRock;
@@ -35,97 +33,101 @@ import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
-public class EntityLivingHandler
+public class EntityPlayerHandler
 {
 	@SubscribeEvent
-	public void onEntityLivingUpdate(LivingUpdateEvent event)
+	// this is players only
+	public void onPlayerUpdate(PlayerTickEvent event)
 	{
-		if (event.entityLiving instanceof EntityPlayer)
+		if (event.phase == Phase.END)
+			return;
+		EntityPlayer player = (EntityPlayer)event.player;
+		//Set Max Health
+		float newMaxHealth = FoodStatsTFC.getMaxHealth(player);
+		float oldMaxHealth = (float)player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
+		if(oldMaxHealth != newMaxHealth)
 		{
-			EntityPlayer player = (EntityPlayer)event.entityLiving;
-			//Set Max Health
-			float newMaxHealth = FoodStatsTFC.getMaxHealth(player);
-			float oldMaxHealth = (float)player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
-			if(oldMaxHealth != newMaxHealth)
+			player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(newMaxHealth);
+			/*if(diff > 0)
+				player.heal(diff);*/
+		}
+
+		if(!player.worldObj.isRemote)
+		{
+			//Tick Decay
+			TFC_Core.handleItemTicking(player.inventory.mainInventory, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+			//Handle Food
+			BodyTempStats tempStats = TFC_Core.getBodyTempStats(player);
+			tempStats.onUpdate(player);
+			TFC_Core.setBodyTempStats(player, tempStats);
+
+			//Nullify the Old Food
+			player.getFoodStats().addStats(20 - player.getFoodStats().getFoodLevel(), 0.0F);
+			//Handle Food
+			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+			foodstats.onUpdate(player);
+			TFC_Core.setPlayerFoodStats(player, foodstats);
+			//Send update packet from Server to Client
+			TerraFirmaCraft.packetPipeline.sendTo(new PlayerUpdatePacket(player, 0), (EntityPlayerMP) player);
+
+			if(foodstats.waterLevel / foodstats.getMaxWater(player) < 0.25f)
 			{
-				player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(newMaxHealth);
-				/*if(diff > 0)
-					player.heal(diff);*/
+				player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20, 1));
+			}
+			else if(foodstats.waterLevel / foodstats.getMaxWater(player) < 0.5f)
+			{
+				if(player.isSprinting())
+					player.setSprinting(false);
 			}
 
-			if(!player.worldObj.isRemote)
+			//Handle Spawn Protection
+			NBTTagCompound nbt = player.getEntityData();
+			long spawnProtectionTimer = nbt.hasKey("spawnProtectionTimer") ? nbt.getLong("spawnProtectionTimer") : TFC_Time.getTotalTicks() + TFC_Time.hourLength;
+			if(spawnProtectionTimer < TFC_Time.getTotalTicks())
 			{
-				//Tick Decay
-				TFC_Core.handleItemTicking(player.inventory.mainInventory, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
-				//Handle Food
-				BodyTempStats tempStats = TFC_Core.getBodyTempStats(player);
-				tempStats.onUpdate(player);
-				TFC_Core.setBodyTempStats(player, tempStats);
-
-				//Nullify the Old Food
-				player.getFoodStats().addStats(20 - player.getFoodStats().getFoodLevel(), 0.0F);
-				//Handle Food
-				FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-				foodstats.onUpdate(player);
-				TFC_Core.setPlayerFoodStats(player, foodstats);
-				//Send update packet from Server to Client
-				AbstractPacket pkt = new PlayerUpdatePacket(player, 0);
-				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
-
-				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
-					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20, 1));
-				else if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.5f)
+				//Add protection time to the chunks
+				for(int i = -2; i < 3; i++)
 				{
-					if(player.isSprinting())
-						player.setSprinting(false);
-				}
-
-				//Handle Spawn Protection
-				NBTTagCompound nbt = player.getEntityData();
-				long spawnProtectionTimer = nbt.hasKey("spawnProtectionTimer") ? nbt.getLong("spawnProtectionTimer") : TFC_Time.getTotalTicks() + TFC_Time.hourLength;
-				if(spawnProtectionTimer < TFC_Time.getTotalTicks())
-				{
-					//Add protection time to the chunks
-					for(int i = -2; i < 3; i++)
+					for(int k = -2; k < 3; k++)
 					{
-						for(int k = -2; k < 3; k++)
-						{
-							int lastChunkX = (((int)Math.floor(player.posX)) >> 4);
-							int lastChunkZ = (((int)Math.floor(player.posZ)) >> 4);
-							ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFCOptions.protectionGain);
-						}
+						int lastChunkX = (((int)Math.floor(player.posX)) >> 4);
+						int lastChunkZ = (((int)Math.floor(player.posZ)) >> 4);
+						ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFCOptions.protectionGain);
 					}
-
-					spawnProtectionTimer += TFC_Time.hourLength;
 				}
+
+				spawnProtectionTimer += TFC_Time.hourLength;
 			}
-			else
-			{
-				PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
+		}
+		else
+		{
+			PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
 
-				if(pi != null && player.inventory.getCurrentItem() != null)
+			if(pi != null && player.inventory.getCurrentItem() != null)
+			{
+				if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)
 				{
-					if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)
-					{
-						pi.guishowFoodRestoreAmount = true;
-						pi.guiFoodRestoreAmount = ((ItemMeal)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
-					}
-					else if(player.inventory.getCurrentItem().getItem() instanceof ItemFoodTFC)
-					{
-						pi.guishowFoodRestoreAmount = true;
-						pi.guiFoodRestoreAmount = ((ItemFoodTFC)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
-					}
-					else
-						pi.guishowFoodRestoreAmount = false;
+					pi.guishowFoodRestoreAmount = true;
+					pi.guiFoodRestoreAmount = ((ItemMeal)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
 				}
-				else if(pi != null)
+				else if(player.inventory.getCurrentItem().getItem() instanceof ItemFoodTFC)
+				{
+					pi.guishowFoodRestoreAmount = true;
+					pi.guiFoodRestoreAmount = ((ItemFoodTFC)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
+				}
+				else
 					pi.guishowFoodRestoreAmount = false;
 			}
+			else if(pi != null)
+				pi.guishowFoodRestoreAmount = false;
 		}
 	}
 
 	@SubscribeEvent
+	// this is players only
 	public void handleItemPickup(EntityItemPickupEvent event)
 	{
 		EntityPlayer player = event.entityPlayer;
@@ -183,6 +185,7 @@ public class EntityLivingHandler
 	}
 
 	@SubscribeEvent
+	// this is any entity, but we filter for players only
 	public void onEntityDeath(LivingDeathEvent event)
 	{
 		if(event.entityLiving instanceof EntityPlayer)
