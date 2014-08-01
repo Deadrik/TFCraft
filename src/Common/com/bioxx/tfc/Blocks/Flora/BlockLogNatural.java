@@ -32,9 +32,9 @@ public class BlockLogNatural extends BlockTerra
 	int searchDist = 10;
 	static int damage = 0;
 	boolean isStone = false;
-	public static IIcon[] sideIcons;
-	public static IIcon[] innerIcons;
-	public static IIcon[] rotatedSideIcons;
+	public IIcon[] sideIcons;
+	public IIcon[] innerIcons;
+	public IIcon[] rotatedSideIcons;
 
 	public BlockLogNatural()
 	{
@@ -98,6 +98,7 @@ public class BlockLogNatural extends BlockTerra
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
 		if (side == 1)
