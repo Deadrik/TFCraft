@@ -297,6 +297,7 @@ public class TerraFirmaCraft
 		TFCOptions.saplingTimerMultiplier = (float) TFCOptions.getDoubleFor(config, "Time", "saplingTimerMultiplier", 1.0, "This is a global multiplier for the number of days required before a sapling can grow into a tree. Decrease for faster sapling growth.");
 		TFCOptions.tempIncreaseMultiplier = (float) TFCOptions.getDoubleFor(config, "Time", "tempIncreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items heat up. Increase to make items heat up faster.");
 		TFCOptions.tempDecreaseMultiplier = (float) TFCOptions.getDoubleFor(config, "Time", "tempDecreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items cool down. Increase to make items cool down faster.");
+		TFCOptions.enableWittyCalendar = TFCOptions.getBooleanFor(config, "Time", "enableWittyCalendar", true, "This will enable witty remarks on important calendar dates (like developers' birthdays).");
 
 		//Food Decay
 		Global.FOOD_DECAY_RATE = TFCOptions.getDoubleFor(config,"Food Decay","FoodDecayRate", 1.0170378966055869517978300569768, "This number causes base decay to equal 50% gain per day. If you wish to change, I recommend you look up a y-root calculator 1.0170378966055869517978300569768^24 = 1.5");
