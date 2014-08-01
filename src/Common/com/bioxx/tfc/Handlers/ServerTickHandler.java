@@ -24,6 +24,7 @@ public class ServerTickHandler
 		}
 	}
 
+	/*
 	@SubscribeEvent
 	public void onServerPlayerTick(PlayerTickEvent event)
 	{
@@ -34,6 +35,7 @@ public class ServerTickHandler
 //			World world = player.worldObj;
 		}
 	}
+	*/
 
 
 
