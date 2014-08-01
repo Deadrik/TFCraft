@@ -198,10 +198,10 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 
 	public boolean isValid()
 	{
-		boolean surroundSolids = TFC_Core.isNorthSolid(worldObj, xCoord, yCoord, zCoord - 1) &&
-				TFC_Core.isSouthSolid(worldObj, xCoord, yCoord, zCoord + 1) &&
-				TFC_Core.isEastSolid(worldObj, xCoord - 1, yCoord, zCoord) &&
-				TFC_Core.isWestSolid(worldObj, xCoord + 1, yCoord, zCoord);
+		boolean surroundSolids = TFC_Core.isNorthFaceSolid(worldObj, xCoord, yCoord, zCoord - 1) &&
+				TFC_Core.isSouthFaceSolid(worldObj, xCoord, yCoord, zCoord + 1) &&
+				TFC_Core.isEastFaceSolid(worldObj, xCoord - 1, yCoord, zCoord) &&
+				TFC_Core.isWestFaceSolid(worldObj, xCoord + 1, yCoord, zCoord);
 		return surroundSolids && worldObj.isSideSolid(xCoord, yCoord - 1, zCoord, ForgeDirection.UP);
 	}
 
