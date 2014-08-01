@@ -16,7 +16,6 @@ import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 import com.bioxx.tfc.Items.ItemIngot;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
@@ -58,8 +57,7 @@ public class CraftingHandler
 						e.player.getEntityData().setBoolean("craftingTable", true);
 						try
 						{
-							AbstractPacket pkt = new PlayerUpdatePacket(e.player, 2);
-							TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) e.player);
+							TerraFirmaCraft.packetPipeline.sendTo(new PlayerUpdatePacket(e.player, 2), (EntityPlayerMP) e.player);
 						}
 						catch (Exception e1)
 						{

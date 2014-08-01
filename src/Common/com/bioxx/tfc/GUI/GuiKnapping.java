@@ -15,7 +15,6 @@ import com.bioxx.tfc.Containers.ContainerSpecialCrafting;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.KnappingUpdatePacket;
 
 public class GuiKnapping extends GuiContainer
@@ -59,8 +58,7 @@ public class GuiKnapping extends GuiContainer
 	protected void actionPerformed(GuiButton guibutton)
 	{
 		resetButton(guibutton.id);
-		AbstractPacket pkt = new KnappingUpdatePacket(guibutton.id);
-		TerraFirmaCraft.packetPipeline.sendToServer(pkt);
+		TerraFirmaCraft.packetPipeline.sendToServer(new KnappingUpdatePacket(guibutton.id));
 	}
 
 	public void resetButton(int id)

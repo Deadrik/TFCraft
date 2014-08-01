@@ -10,7 +10,6 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockDetailed;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.KeyPressPacket;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
@@ -40,8 +39,7 @@ public class KeyBindingHandler
 				if(player.getCurrentEquippedItem().getItem() instanceof ItemChisel)
 				{
 					pi.switchChiselMode();
-					AbstractPacket pkt = new KeyPressPacket(0);
-					TerraFirmaCraft.packetPipeline.sendToServer(pkt);
+					TerraFirmaCraft.packetPipeline.sendToServer(new KeyPressPacket(0));
 				}
 				else if(player.getCurrentEquippedItem().getItem() instanceof ItemCustomHoe)
 				{

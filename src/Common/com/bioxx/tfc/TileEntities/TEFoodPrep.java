@@ -14,9 +14,8 @@ import net.minecraft.nbt.NBTTagList;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
-import com.bioxx.tfc.Handlers.Network.CreateMealPacket;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.IItemFoodBlock;
@@ -114,15 +113,10 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 						setInventorySlotContents(5, null);
 
 					consumeFoodWeight();
+
+					TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_COOKING, 1);
 				}
 			}
-		}
-		else
-		{
-			// Send a network packet to call this method on the Server side
-			// and create a meal, also adds 1 to the players cooking skill.
-			AbstractPacket pkt = new CreateMealPacket(0, this);
-			broadcastPacketInRange(pkt);
 		}
 	}
 
@@ -475,4 +469,19 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		nbt.setTag("Items", nbttaglist);
 	}
 
+	public void sendCookPacket(int i) {
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setByte("action", (byte)i);
+		nbt.setString("playername", PlayerManagerTFC.getInstance().getClientPlayer().Name);
+		this.broadcastPacketInRange(this.createDataPacket(nbt));
+	}
+
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt) {
+		byte action = nbt.getByte("action");
+		EntityPlayer player = worldObj.getPlayerEntityByName(nbt.getString("playername"));
+		if(action == 0) {
+			actionCreate(player);
+		}
+	}
 }

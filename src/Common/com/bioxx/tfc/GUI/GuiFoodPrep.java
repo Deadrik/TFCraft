@@ -1,6 +1,5 @@
 package com.bioxx.tfc.GUI;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -20,7 +19,7 @@ public class GuiFoodPrep extends GuiContainerTFC
 
 	public GuiFoodPrep(InventoryPlayer inventoryplayer, TEFoodPrep wb, World world, int i, int j, int k)
 	{
-		super(new ContainerFoodPrep(inventoryplayer, wb,world, i, j, k), 176, 85);
+		super(new ContainerFoodPrep(inventoryplayer, wb, world, i, j, k), 176, 85);
 		table = wb;
 	}
 
@@ -80,7 +79,8 @@ public class GuiFoodPrep extends GuiContainerTFC
 	@Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
-		if (guibutton.id == 0)
-			table.actionCreate(Minecraft.getMinecraft().thePlayer);
+		if (guibutton.id == 0) {
+			table.sendCookPacket(0);
+		}
 	}
 }

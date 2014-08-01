@@ -6,18 +6,25 @@ import io.netty.channel.ChannelHandlerContext;
 import java.io.DataInputStream;
 import java.util.HashMap;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class InitClientWorldPacket extends AbstractPacket
+public class InitClientWorldPacket implements IMessage
 {
 	private long seed;
 	private float stomachLevel;
@@ -28,7 +35,6 @@ public class InitClientWorldPacket extends AbstractPacket
 	private float nutrProtein;
 	private float nutrDairy;
 	private boolean craftingTable = false;
-	private DataInputStream dis;
 	private SkillStats playerSkills;
 	private int daysInYear, HGRate, HGCap;
 	private HashMap<String, Integer> skillMap = new HashMap<String, Integer>();
@@ -38,8 +44,8 @@ public class InitClientWorldPacket extends AbstractPacket
 	public InitClientWorldPacket(EntityPlayer P)
 	{
 		this.seed = P.worldObj.getSeed();
-        // Make sure to update time before loading food stats!
-        TFC_Time.UpdateTime(P.worldObj);
+		// Make sure to update time before loading food stats!
+		TFC_Time.UpdateTime(P.worldObj);
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(P);
 		fs.resetTimers();
 		fs.writeNBT(P.getEntityData());
@@ -57,9 +63,9 @@ public class InitClientWorldPacket extends AbstractPacket
 			this.craftingTable = true;
 		this.playerSkills = TFC_Core.getSkillStats(P);
 	}
-	
+
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void toBytes(ByteBuf buffer)
 	{
 		buffer.writeLong(this.seed);
 		buffer.writeInt(this.daysInYear);
@@ -77,7 +83,7 @@ public class InitClientWorldPacket extends AbstractPacket
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void fromBytes(ByteBuf buffer)
 	{
 		this.seed = buffer.readLong();
 		this.daysInYear = buffer.readInt();
@@ -104,39 +110,47 @@ public class InitClientWorldPacket extends AbstractPacket
 		}
 	}
 
-	@Override
-	public void handleClientSide(EntityPlayer player)
-	{
-		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
-		fs.stomachLevel = this.stomachLevel;
-		fs.waterLevel = this.waterLevel;
-		fs.nutrFruit = this.nutrFruit;
-		fs.nutrVeg = this.nutrVeg;
-		fs.nutrProtein = this.nutrProtein;
-		fs.nutrDairy = this.nutrDairy;
-		TFC_Core.setPlayerFoodStats(player, fs);
+	public static class ClientHandler implements IMessageHandler<InitClientWorldPacket, IMessage> {
 
-		TFC_Time.daysInYear = this.daysInYear;
-		TFCOptions.HealthGainRate = this.HGRate;
-		TFCOptions.HealthGainCap = this.HGCap;
-		if(this.craftingTable)
-		{
-			player.getEntityData().setBoolean("craftingTable", this.craftingTable);
-			PlayerInventory.upgradePlayerCrafting(player);
+		@Override
+		public IMessage onMessage(InitClientWorldPacket message, MessageContext ctx) {
+			// *** client side only here ***
+			EntityPlayer player = TerraFirmaCraft.proxy.getPlayerFromMessageContext(ctx);
+
+			// a client-side version of the playerinfo
+			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromUUID(player.getUniqueID().toString());
+			if (pi == null) {
+				pi = new PlayerInfo( player.getDisplayName(), player.getUniqueID());
+				PlayerManagerTFC.getInstance().Players.add(pi);
+			}
+
+			FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
+			fs.stomachLevel = message.stomachLevel;
+			fs.waterLevel = message.waterLevel;
+			fs.nutrFruit = message.nutrFruit;
+			fs.nutrVeg = message.nutrVeg;
+			fs.nutrProtein = message.nutrProtein;
+			fs.nutrDairy = message.nutrDairy;
+			TFC_Core.setPlayerFoodStats(player, fs);
+
+			TFC_Time.daysInYear = message.daysInYear;
+			TFCOptions.HealthGainRate = message.HGRate;
+			TFCOptions.HealthGainCap = message.HGCap;
+			if(message.craftingTable)
+			{
+				player.getEntityData().setBoolean("craftingTable", message.craftingTable);
+				PlayerInventory.upgradePlayerCrafting(player);
+			}
+			TFC_Core.SetupWorld(player.worldObj, message.seed);
+
+			SkillStats playerSkills = TFC_Core.getSkillStats(player);
+			for(String skill : message.skillMap.keySet())
+			{
+				playerSkills.setSkillSave(skill, message.skillMap.get(skill));
+			}
+			TFC_Core.setSkillStats(player, playerSkills);
+			return null;
 		}
-		TFC_Core.SetupWorld(player.worldObj, this.seed);
-
-		this.playerSkills = TFC_Core.getSkillStats(player);
-		for(String skill : skillMap.keySet())
-		{
-			playerSkills.setSkillSave(skill, skillMap.get(skill));
-		}
-		skillMap.clear();
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player)
-	{
 	}
 
 }

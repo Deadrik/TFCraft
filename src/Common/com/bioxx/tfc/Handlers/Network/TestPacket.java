@@ -1,11 +1,10 @@
 package com.bioxx.tfc.Handlers.Network;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
-import net.minecraft.entity.player.EntityPlayer;
+import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
-public class TestPacket extends AbstractPacket
+public class TestPacket implements IMessage
 {
 	String msg;
 
@@ -17,28 +16,15 @@ public class TestPacket extends AbstractPacket
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void toBytes(ByteBuf buffer)
 	{
 		ByteBufUtils.writeUTF8String(buffer, msg);
 		
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void fromBytes(ByteBuf buffer)
 	{
 		msg = ByteBufUtils.readUTF8String(buffer);
 	}
-
-	@Override
-	public void handleClientSide(EntityPlayer player)
-	{
-		System.out.println("++++++++++++Client: "+msg);
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player)
-	{
-		System.out.println("++++++++++++Server: "+msg);
-	}
-
 }

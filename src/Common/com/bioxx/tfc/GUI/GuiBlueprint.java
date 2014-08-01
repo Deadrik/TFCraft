@@ -18,7 +18,6 @@ import org.lwjgl.opengl.GL11;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.ItemRenamePacket;
 
 public class GuiBlueprint extends GuiScreen
@@ -120,8 +119,7 @@ public class GuiBlueprint extends GuiScreen
 			ItemStack stack = player.inventory.getCurrentItem();
 			stack.stackTagCompound.setString("Name", theGuiTextField.getText());
 
-			AbstractPacket pkt = new ItemRenamePacket(theGuiTextField.getText());
-			TerraFirmaCraft.packetPipeline.sendToAll(pkt);
+			TerraFirmaCraft.packetPipeline.sendToAll(new ItemRenamePacket(theGuiTextField.getText()));
 			
 			Minecraft.getMinecraft().displayGuiScreen(null);//player.closeScreen();
 		}

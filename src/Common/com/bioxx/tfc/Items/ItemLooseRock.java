@@ -68,15 +68,15 @@ public class ItemLooseRock extends ItemTerra
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
-		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
-		pi.specialCraftingType = new ItemStack(specialCraftingType, 1, is.getItemDamage());
-		if(specialCraftingTypeAlternate != null)
-			pi.specialCraftingTypeAlternate = specialCraftingTypeAlternate;
-		else
-			pi.specialCraftingTypeAlternate = null;
-
 		if(is.stackSize > 1)
 		{
+			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+			pi.specialCraftingType = new ItemStack(specialCraftingType, 1, is.getItemDamage());
+			if(specialCraftingTypeAlternate != null)
+				pi.specialCraftingTypeAlternate = specialCraftingTypeAlternate;
+			else
+				pi.specialCraftingTypeAlternate = null;
+
 			is.stackSize--;
 			player.openGui(TerraFirmaCraft.instance, 28, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 		}

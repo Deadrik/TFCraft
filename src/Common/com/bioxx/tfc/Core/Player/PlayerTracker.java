@@ -6,7 +6,6 @@ import net.minecraftforge.event.entity.item.ItemTossEvent;
 
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.InitClientWorldPacket;
 import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 
@@ -28,8 +27,7 @@ public class PlayerTracker
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
 				event.player.getDisplayName(),
 				event.player.getUniqueID()));
-		AbstractPacket pkt = new InitClientWorldPacket(event.player);
-		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
+		TerraFirmaCraft.packetPipeline.sendTo(new InitClientWorldPacket(event.player), (EntityPlayerMP) event.player);
 
 		//		System.out.println("-----------------------------Sending TestPacket");
 		//		AbstractPacket pkt2 = new TestPacket("Sent to Player: "+event.player.getDisplayName());
@@ -72,8 +70,7 @@ public class PlayerTracker
 			TFC_Core.setSkillStats(event.player, pi.tempSkills);
 
 		//Send a request to the server for the skills data.
-		AbstractPacket pkt = new PlayerUpdatePacket(event.player, 4);
-		TerraFirmaCraft.packetPipeline.sendToServer(pkt);
+		TerraFirmaCraft.packetPipeline.sendToServer(new PlayerUpdatePacket(event.player, 4));
 	}
 
 	@SubscribeEvent

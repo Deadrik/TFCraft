@@ -146,6 +146,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -599,5 +600,14 @@ public class ClientProxy extends CommonProxy
 	{
 		Minecraft.getMinecraft();
 		return Minecraft.isFancyGraphicsEnabled();
+	}
+
+	@Override
+	public EntityPlayer getPlayerFromMessageContext(MessageContext ctx) {
+		if (ctx.side == Side.SERVER) {
+			return ctx.getServerHandler().playerEntity;
+		}
+		// default to client player
+		return Minecraft.getMinecraft().thePlayer;
 	}
 }
