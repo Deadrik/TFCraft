@@ -102,9 +102,9 @@ public class GuiCalendar extends GuiScreen
 		int dom = TFC_Time.getDayOfMonth();
 		int month = TFC_Time.currentMonth;
 
-		if(dom == 7 && month == 4)
+		if(dom == 7 && month == 4 && TFCOptions.enableWittyCalendar)
 			drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.DateBioxx") + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
-		else if(dom == 2 && month == 8)
+		else if(dom == 2 && month == 8 && TFCOptions.enableWittyCalendar)
 			drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.DateDunk") + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
 		else
 			drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Date") + " : " + dom + " " + TFC_Time.MONTHS[month] + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
@@ -117,7 +117,7 @@ public class GuiCalendar extends GuiScreen
 
 		long h = TFC_Time.getHour();
 		String hour = "";
-		if(h == 0)
+		if(h == 0 && TFCOptions.enableWittyCalendar)
 			hour = StatCollector.translateToLocal("gui.Calendar.WitchHour");
 		else
 			hour+=h;
