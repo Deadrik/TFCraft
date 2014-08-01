@@ -179,8 +179,8 @@ public class Alloy
 		{
 			NBTTagCompound nbt1 = new NBTTagCompound();
 			AlloyMetal am = AlloyIngred.get(i);
-			nbt.setString("metalType", am.metalType.Name);
-			nbt.setFloat("metalType", am.metal);
+			nbt1.setString("metalType", am.metalType.Name);
+			nbt1.setFloat("amount", am.metal);
 			nbtlist.appendTag(nbt1);
 		}
 		nbt.setTag("metalList", nbtlist);
