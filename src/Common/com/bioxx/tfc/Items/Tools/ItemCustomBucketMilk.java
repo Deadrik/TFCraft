@@ -137,22 +137,6 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 			if (fs.needDrink() && fs.needFood())
 				entity.setItemInUse(is, this.getMaxItemUseDuration(is));
 		}
-		else
-		{
-			if (mop.typeOfHit == MovingObjectType.BLOCK)
-			{
-				int i = mop.blockX;
-				int j = mop.blockY;
-				int k = mop.blockZ;
-				if(world.getTileEntity(i, j, k) != null && world.getTileEntity(i, j, k) instanceof TEBarrel)
-				{
-					TEBarrel TE = (TEBarrel) world.getTileEntity(i, j, k);
-					//FIXME Removed this because the barrel code needs to use blocks and not ids from now on
-					/*if(TE.checkValidAddition(13))
-						return new ItemStack(TFCItems.WoodenBucketEmpty);*/
-				}
-			}
-		}
 		return is;
 	}
 

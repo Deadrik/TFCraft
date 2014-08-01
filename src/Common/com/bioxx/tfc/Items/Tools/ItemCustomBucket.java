@@ -104,17 +104,6 @@ public class ItemCustomBucket extends ItemTerra
 				}
 				else
 				{
-					if (this.bucketContents != Blocks.air)
-						return new ItemStack(TFCItems.WoodenBucketEmpty);
-
-					if (world.getTileEntity(i, j, k) != null && world.getTileEntity(i, j, k) instanceof TEBarrel)
-					{
-						TEBarrel te = (TEBarrel)world.getTileEntity(i, j, k);
-
-						//FIXME Removed this because the barrel code needs to use blocks and not ids from now on
-						/*if(te.checkValidAddition(this.bucketContents))
-							return new ItemStack(TFCItems.WoodenBucketEmpty);*/
-					}
 					return new ItemStack(TFCItems.WoodenBucketEmpty);
 				}
 			}

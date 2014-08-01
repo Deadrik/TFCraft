@@ -281,21 +281,20 @@ public class BlockBarrel extends BlockTerraContainer
 					return true;
 				}
 
-				if(FluidContainerRegistry.isFilledContainer(player.getCurrentEquippedItem()) && !te.getSealed())
-				{
-					ItemStack is = te.addLiquid(player.getCurrentEquippedItem());
-					if(!ItemStack.areItemStacksEqual(player.getCurrentEquippedItem(), is))
-						player.getCurrentEquippedItem().stackSize--;
-					TFC_Core.giveItemToPlayer(is, player);
-					return true;
-				}
-				else if(FluidContainerRegistry.isEmptyContainer(player.getCurrentEquippedItem()))
-				{
-					ItemStack is = te.removeLiquid(player.getCurrentEquippedItem());
-					if(!ItemStack.areItemStacksEqual(player.getCurrentEquippedItem(), is))
-						player.getCurrentEquippedItem().stackSize--;
-					TFC_Core.giveItemToPlayer(is, player);
-					return true;
+				if (!te.getSealed()) {
+					ItemStack equippedItem = player.getCurrentEquippedItem();
+					if(FluidContainerRegistry.isFilledContainer(equippedItem) && !te.getSealed())
+					{
+						ItemStack is = te.addLiquid(player.getCurrentEquippedItem());
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+						return true;
+					}
+					else if(FluidContainerRegistry.isEmptyContainer(equippedItem))
+					{
+						ItemStack is = te.removeLiquid(player.getCurrentEquippedItem());
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+						return true;
+					}
 				}
 
 				if(te.getInvCount() == 0)
