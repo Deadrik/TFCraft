@@ -91,7 +91,7 @@ public class BlockStalactite extends BlockTerra
 				height = 0.5f + R.nextFloat() * 0.5f;
 			else height = 1;
 
-			return AxisAlignedBB.getAABBPool().getAABB(i + width, j - height, k + width, i + 1 - width, j + 1, k + 1 - width);
+			return AxisAlignedBB.getBoundingBox(i + width, j - height, k + width, i + 1 - width, j + 1, k + 1 - width);
 		}
 		else if(isStalag)
 		{
@@ -101,10 +101,10 @@ public class BlockStalactite extends BlockTerra
 			if(height == 3)
 				height = 0.5f + R.nextFloat() * 0.5f;
 			else height = 1;
-			return AxisAlignedBB.getAABBPool().getAABB(i+ width, j, k + width, i + 1-width, j+height, k + 1 - width);
+			return AxisAlignedBB.getBoundingBox(i+ width, j, k + width, i + 1-width, j+height, k + 1 - width);
 		}
 
-		return AxisAlignedBB.getAABBPool().getAABB(i + this.minX, j + this.minY, k + this.minZ, i + this.maxX, j+this.maxY, k + this.maxZ);
+		return AxisAlignedBB.getBoundingBox(i + this.minX, j + this.minY, k + this.minZ, i + this.maxX, j+this.maxY, k + this.maxZ);
 	}
 
 	@Override

@@ -61,7 +61,7 @@ public class ItemCustomLeash extends ItemLead implements ISize
 		EntityLeashKnot entityleashknot = EntityLeashKnot.getKnotForBlock(par1World, par2, par3, par4);
 		boolean flag = false;
 		double d0 = 7.0D;
-		List list = par1World.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getAABBPool().getAABB((double)par2 - d0, (double)par3 - d0, (double)par4 - d0, (double)par2 + d0, (double)par3 + d0, (double)par4 + d0));
+		List list = par1World.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getBoundingBox((double)par2 - d0, (double)par3 - d0, (double)par4 - d0, (double)par2 + d0, (double)par3 + d0, (double)par4 + d0));
 
 		if (list != null)
 		{

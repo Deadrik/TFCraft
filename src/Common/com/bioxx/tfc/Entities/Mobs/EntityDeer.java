@@ -215,7 +215,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		if(attackedVec != null)
 		{
 			//System.out.println(this.entityId+", Vec: "+attackedVec.xCoord+", "+attackedVec.yCoord+", "+attackedVec.zCoord);
-			Vec3 positionVec = Vec3.fakePool.getVecFromPool(this.posX, this.posY, this.posZ);
+			Vec3 positionVec = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
 			if(this.getFearSource() != null && this.getDistanceSqToEntity(this.getFearSource()) > 144)
 			{
 				this.setFearSource(null);
@@ -245,7 +245,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		Entity entity = par1DamageSource.getEntity();
 		if(entity != null)
 		{
-			setAttackedVec(Vec3.fakePool.getVecFromPool(entity.posX, entity.posY, entity.posZ));
+			setAttackedVec(Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ));
 			setFearSource(entity);
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);

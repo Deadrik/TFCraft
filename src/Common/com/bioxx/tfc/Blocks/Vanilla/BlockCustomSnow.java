@@ -66,7 +66,7 @@ public class BlockCustomSnow extends BlockTerra
 	{
 		int l = world.getBlockMetadata(x, y, z) & 7;
 		float f = 0.125F;
-		return AxisAlignedBB.getAABBPool().getAABB(x + this.minX, y + this.minY, z + this.minZ, x + this.maxX, y + f, z + this.maxZ);
+		return AxisAlignedBB.getBoundingBox(x + this.minX, y + this.minY, z + this.minZ, x + this.maxX, y + f, z + this.maxZ);
 	}
 	@Override
 	public int getRenderType()
