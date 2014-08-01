@@ -295,6 +295,11 @@ public class BlockBarrel extends BlockTerraContainer
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
 						return true;
 					}
+					else if ((equippedItem != null && equippedItem.getItem() == TFCItems.PotteryJug && equippedItem.getItemDamage() == 1)) {
+						ItemStack is = te.removeLiquid(equippedItem);
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+						return true;
+					}
 				}
 
 				if(te.getInvCount() == 0)
