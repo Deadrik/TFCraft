@@ -37,9 +37,10 @@ public class ItemPotteryMold extends ItemPotteryBase
 	@Override
 	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{		
-		if(is.getItemDamage() > 5)
+		if (is.getItemDamage() > 5)
 		{
-			arraylist.add(StatCollector.translateToLocal("gui.MeltedMetal.NotFull"));
+			int units = (int) (100 - ((is.getItemDamage() - 2) / 4));
+			arraylist.add(StatCollector.translateToLocal("gui.units") + ": " + units + " / 100");
 		}
 	}
 
