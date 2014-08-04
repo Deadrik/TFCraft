@@ -36,6 +36,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public byte inputTick = 0;
 	public byte outputTick = 0;
 	public byte tempTick = 0;
+	private int cookDelay = 0;
 
 	public TECrucible()
 	{
@@ -120,6 +121,10 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			inputTick++;
 			outputTick++;
 			tempTick++;
+
+			if (cookDelay > 0)
+				cookDelay--;
+
 			/*Heat the crucible based on the Forge beneath it*/
 			if(worldObj.getBlock(xCoord, yCoord - 1, zCoord) == TFCBlocks.Forge)
 			{
@@ -165,14 +170,17 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				else if(itemToSmelt instanceof ISmeltable && (
 						(ISmeltable)itemToSmelt).isSmeltable(stackToSmelt) &&
 						!TFC_Core.isOreIron(stackToSmelt) &&
-						temperature >= TFC_ItemHeat.IsCookable(stackToSmelt))
+						temperature >= TFC_ItemHeat.IsCookable(stackToSmelt) && cookDelay == 0)
 				{
 					Metal mType =((ISmeltable)itemToSmelt).GetMetalType(stackToSmelt);
 					if(addMetal(mType, ((ISmeltable)itemToSmelt).GetMetalReturnAmount(stackToSmelt)))
 					{
 						temperature *= 0.9f;
+						cookDelay = 40;
 						if(stackToSmelt.stackSize <= 1)
 							storage[0] = null;
+						else
+							storage[0].stackSize--;
 						updateGui((byte) 0);
 					}
 				}
@@ -352,7 +360,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit()
 	{
-		return 1;
+		return 64;
 	}
 
 	@Override

@@ -1,16 +1,17 @@
 package com.bioxx.tfc.Containers;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.Items.ItemMeltedMetal;
-import com.bioxx.tfc.TileEntities.TECrucible;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Containers.Slots.SlotLiquidVessel;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Items.ItemMeltedMetal;
+import com.bioxx.tfc.TileEntities.TECrucible;
 
 public class ContainerCrucible extends ContainerTFC
 {
@@ -24,7 +25,7 @@ public class ContainerCrucible extends ContainerTFC
 		//Input slot
 		addSlotToContainer(new Slot(tileentityforge, 0, 152, 7));
 
-		addSlotToContainer(new Slot(tileentityforge, 1, 152, 90));
+		addSlotToContainer(new SlotLiquidVessel(tileentityforge, 1, 152, 90));
 
 		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 118, false, true);
 
