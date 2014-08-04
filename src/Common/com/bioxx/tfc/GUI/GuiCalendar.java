@@ -98,16 +98,20 @@ public class GuiCalendar extends GuiScreen
 		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Calendar"), l+87, i1+16, 0xFFFFFF);
 		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Season") + " : " + TFC_Time.SEASONS[TFC_Time.getSeasonAdjustedMonth((int)(player.posZ))], l + 87, i1+26, 0x000000);
 
-		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Day") + " : " + TFC_Time.DAYS[TFC_Time.getDayOfWeek()], l + 87, i1+36, 0x000000);
 		int dom = TFC_Time.getDayOfMonth();
 		int month = TFC_Time.currentMonth;
+		String day = TFC_Time.DAYS[TFC_Time.getDayOfWeek()];
 
-		if(dom == 7 && month == 4)
-			drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.DateBioxx") + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
-		else if(dom == 2 && month == 8)
-			drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.DateDunk") + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
-		else
-			drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Calendar.Date") + " : " + dom + " " + TFC_Time.MONTHS[month] + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
+		if (month == 3 && dom == 18)
+			day = StatCollector.translateToLocal("gui.Calendar.DateKitty");
+		else if(month == 4 && dom == 7)
+			day = StatCollector.translateToLocal("gui.Calendar.DateBioxx");
+		else if(month == 8 && dom == 2)
+			day = StatCollector.translateToLocal("gui.Calendar.DateDunk");
+
+		drawCenteredString(fontRendererObj, StatCollector.translateToLocal("gui.Calendar.Day") + " : " + day, l + 87, i1 + 36, 0x000000);
+
+		drawCenteredString(fontRendererObj, StatCollector.translateToLocal("gui.Calendar.Date") + " : " + dom + " " + TFC_Time.MONTHS[month] + ", " + (1000 + TFC_Time.getYear()), l + 87, i1 + 46, 0x000000);
 
 		float temp = Math.round((TFC_Climate.getHeightAdjustedTemp(player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ)));
 

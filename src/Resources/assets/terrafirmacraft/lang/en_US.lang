@@ -2058,8 +2058,9 @@ gui.Bloomery.Output=Output
 
 #== Calendar GUI ==
 gui.Calendar.Calendar=Calendar
-gui.Calendar.DateBioxx=Date : Bioxx's Birthday!
-gui.Calendar.DateDunk=Date : Dunk's Birthday!
+gui.Calendar.DateBioxx=Bioxx's Birthday!
+gui.Calendar.DateDunk=Dunk's Birthday!
+gui.Calendar.DateKitty=Kitty's Birthday!
 
 gui.Calendar.Hour=Hour
 gui.Calendar.WitchHour=The Witching Hour
