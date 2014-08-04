@@ -1,12 +1,12 @@
 package com.bioxx.tfc.Items;
 
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemMetalSheet2x extends ItemMetalSheet
 {
@@ -17,6 +17,7 @@ public class ItemMetalSheet2x extends ItemMetalSheet
 		this.setCreativeTab(TFCTabs.TFCMaterials);
 		this.setWeight(EnumWeight.HEAVY);
 		this.setSize(EnumSize.MEDIUM);
+		metalAmount = 400;
 	}
 
 	@Override

@@ -8,14 +8,20 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
+import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
-public class ItemMetalSheet extends ItemTerra
+public class ItemMetalSheet extends ItemTerra implements ISmeltable
 {
 	protected int[][] sidesMap = new int[][]{{0,-1,0},{0,1,0},{0,0,-1},{0,0,+1},{-1,0,0},{1,0,0}};
 	public int metalID;
+	String metal;
+	short metalAmount;
+	boolean smeltable = true;
 
 	public ItemMetalSheet(int mID)
 	{
@@ -26,6 +32,14 @@ public class ItemMetalSheet extends ItemTerra
 		this.setWeight(EnumWeight.MEDIUM);
 		this.setSize(EnumSize.MEDIUM);
 		metalID = mID;
+		metalAmount = 200;
+	}
+
+	public ItemTerra setMetal(String m, int amt)
+	{
+		metal = m;
+		metalAmount = (short) amt;
+		return this;
 	}
 
 	@Override
@@ -137,5 +151,39 @@ public class ItemMetalSheet extends ItemTerra
 				return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Metal GetMetalType(ItemStack is)
+	{
+		if (metal == null)
+		{
+			return MetalRegistry.instance.getMetalFromItem(this);
+		}
+		else
+		{
+			return MetalRegistry.instance.getMetalFromString(metal);
+		}
+	}
+
+	@Override
+	public short GetMetalReturnAmount(ItemStack is)
+	{
+		// TODO Auto-generated method stub
+		return metalAmount;
+	}
+
+	@Override
+	public boolean isSmeltable(ItemStack is)
+	{
+		// TODO Auto-generated method stub
+		return smeltable;
+	}
+
+	@Override
+	public EnumTier GetSmeltTier(ItemStack is)
+	{
+		// TODO Auto-generated method stub
+		return EnumTier.TierI;
 	}
 }
