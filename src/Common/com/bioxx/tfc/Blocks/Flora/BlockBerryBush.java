@@ -185,6 +185,28 @@ public class BlockBerryBush extends BlockTerraContainer
 		return false;
 	}
 
+	/* Left-Click Harvest Berries */
+	@Override
+	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityplayer)
+	{
+		if (!world.isRemote)
+		{
+			int meta = world.getBlockMetadata(x, y, z);
+			FloraManager manager = FloraManager.getInstance();
+			FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(world.getBlockMetadata(x, y, z)));
+
+			TEBerryBush te = (TEBerryBush) world.getTileEntity(x, y, z);
+			if (te != null && te.hasFruit)
+			{
+				te.hasFruit = false;
+				te.dayHarvested = (int) TFC_Time.getTotalDays();
+				world.markBlockForUpdate(x, y, z);
+				dropBlockAsItem(world, x, y, z, ItemFoodTFC.createTag(fi.getOutput(), Helper.roundNumber(3 + world.rand.nextFloat() * 5, 10)));
+			}
+		}
+	}
+
+	/* Right-Click Harvest Berries */
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
