@@ -70,10 +70,13 @@ public class TFC_Time
 
 	public static void UpdateTime(World world)
 	{
-		time = world.getWorldInfo().getWorldTime();
+		time = world.getWorldInfo().getWorldTotalTime();
 
 		if(time < startTime)
+		{
 			world.getWorldInfo().setWorldTime(startTime);
+			world.getWorldInfo().incrementTotalWorldTime(startTime);
+		}
 
 		int m = getMonth();
 		int m1 = m - 1;

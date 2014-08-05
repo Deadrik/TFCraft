@@ -359,6 +359,8 @@ public class TerraFirmaCraft
 		TFCOptions.normalOreUnits = TFCOptions.getIntFor(config, "Materials", "normalOreUnits", 25, "The metal units provided by a single piece of normal ore.");
 		TFCOptions.richOreUnits = TFCOptions.getIntFor(config, "Materials", "richOreUnits", 35, "The metal units provided by a single piece of rich ore");
 
+		TFCOptions.simSpeedNoPlayers = TFCOptions.getIntFor(config, "Server", "simSpeedNoPlayers", 100, "For every X number of ticks provided here, when there are no players online the server will only progress by 1 tick. (Default: 100) Time advances 100 times slower than normal. Setting this to less than 1 will turn this feature off.");
+
 		/**Always end with this*/
 		if (config != null)
 			config.save();

@@ -47,6 +47,7 @@ public class TFCOptions
 	public static boolean useDecayProtection = true;
 	public static int decayProtectionDays = 18;
 	public static float decayMultiplier = 1.0f;
+	public static int simSpeedNoPlayers = 1000;
 
 	public static int smallOreUnits = 10;
 	public static int poorOreUnits = 15;
