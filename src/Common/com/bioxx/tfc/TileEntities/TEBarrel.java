@@ -20,6 +20,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Crafting.BarrelAlcoholRecipe;
+import com.bioxx.tfc.api.Crafting.BarrelLiquidToLiquidRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelManager;
 import com.bioxx.tfc.api.Crafting.BarrelMultiItemRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelRecipe;
@@ -85,7 +86,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						time = (int)TFC_Time.getTotalHours() - unsealtime;
 
 					//Make sure that the recipe meets the time requirements
-					if(time < recipe.sealTime)
+					if(recipe.isSealedRecipe() && time < recipe.sealTime)
 						return;
 
 					ItemStack origIS = getInputStack().copy();
@@ -99,13 +100,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						this.fluid = recipe.getResultFluid(origIS, origFS, time);
 						this.fluid.amount = origFS.amount;
 					}
-					storage[0] = recipe.getResult(origIS, origFS, time);
-					/*if(!recipe.removesLiquid && !recipe.isSealedRecipe() && (storage[0] == null && origIS != null))
-					{
-						int ss = fluid.amount / recipe.getResultFluid(origIS, origFS, time).amount;
-						storage[0] = origIS;
-						storage[0].stackSize-=ss;
-					}*/
+					this.setInventorySlotContents(0, recipe.getResult(origIS, origFS, time));
 				}
 			}
 		}
@@ -596,7 +591,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.BarleyGround), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.BEER, 10000)));
 		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.RiceGround), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.SAKE, 10000)));
 		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.Sugarcane), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.RUM, 10000)));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Vinegar), new FluidStack(TFCFluid.MILK, 10000), null, new FluidStack(TFCFluid.MILKCURDLED, 10000)));
+		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluid.MILK, 9000), new FluidStack(TFCFluid.VINEGAR, 1000), new FluidStack(TFCFluid.MILKCURDLED, 10000)));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(null, new FluidStack(TFCFluid.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese), 160), null));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Logs, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.TANNIN, 10000)));//WIP
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Powder, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 500), null, new FluidStack(TFCFluid.LIMEWATER, 500), 0).setSealedRecipe(false).setRemovesLiquid(false));
@@ -618,6 +613,6 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluid.BEER, 100), new FluidStack(TFCFluid.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluid.SAKE, 100), new FluidStack(TFCFluid.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluid.RUM, 100), new FluidStack(TFCFluid.VINEGAR, 100)));
-
+		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluid.SALTWATER, 9000), new FluidStack(TFCFluid.VINEGAR, 1000), new FluidStack(TFCFluid.BRINE, 10000)).setSealedRecipe(false));
 	}
 }

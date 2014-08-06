@@ -6,7 +6,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class BarrelRecipe
 {
 	ItemStack inItemStack;
-	FluidStack inFluid;
+	FluidStack barrelFluid;
 	ItemStack outItemStack;
 	FluidStack outFluid;
 	public int sealTime = 8;
@@ -16,7 +16,7 @@ public class BarrelRecipe
 	public BarrelRecipe(ItemStack inputItem, FluidStack inputFluid, ItemStack outIS, FluidStack outputFluid)
 	{
 		this.inItemStack = inputItem;
-		inFluid = inputFluid;
+		barrelFluid = inputFluid;
 		this.outItemStack = outIS;
 		outFluid = outputFluid;
 	}
@@ -41,18 +41,18 @@ public class BarrelRecipe
 
 	public Boolean matches(ItemStack item, FluidStack fluid)
 	{
-		boolean iStack = removesLiquid ? true : (inItemStack != null && item != null && fluid != null && inFluid != null && item.stackSize >= (int)Math.ceil(fluid.amount/inFluid.amount));
-		boolean fStack = !removesLiquid ? true : (inFluid != null && item != null && fluid != null && outFluid != null && fluid.amount >= item.stackSize*outFluid.amount);
+		boolean iStack = removesLiquid ? true : (inItemStack != null && item != null && fluid != null && barrelFluid != null && item.stackSize >= (int)Math.ceil(fluid.amount/barrelFluid.amount));
+		boolean fStack = !removesLiquid ? true : (barrelFluid != null && item != null && fluid != null && outFluid != null && fluid.amount >= item.stackSize*outFluid.amount);
 
 		boolean anyStack = !removesLiquid && !isSealedRecipe && this.outItemStack == null;
 
 		return ((inItemStack != null && inItemStack.isItemEqual(item) && (iStack || anyStack)) || inItemStack == null) && 
-				((inFluid != null && inFluid.isFluidEqual(fluid) && (fStack || anyStack)) || inFluid == null);
+				((barrelFluid != null && barrelFluid.isFluidEqual(fluid) && (fStack || anyStack)) || barrelFluid == null);
 	}
 
 	public Boolean isInFluid(FluidStack item)
 	{
-		return inFluid.isFluidEqual(item);
+		return barrelFluid.isFluidEqual(item);
 	}
 
 	public ItemStack getInItem()
@@ -62,7 +62,7 @@ public class BarrelRecipe
 
 	public FluidStack getInFluid()
 	{
-		return inFluid.copy();
+		return barrelFluid.copy();
 	}
 
 	public String getRecipeName()
@@ -70,7 +70,7 @@ public class BarrelRecipe
 		String s = "";
 		if(this.outItemStack != null)
 			s=/*outItemStack.stackSize+"x " +*/ outItemStack.getDisplayName();
-		if(!this.inFluid.isFluidEqual(outFluid))
+		if(!this.barrelFluid.isFluidEqual(outFluid))
 			s=outFluid.getFluid().getLocalizedName();
 		return s;
 	}

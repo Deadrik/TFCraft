@@ -19,7 +19,7 @@ public class BarrelVinegarRecipe extends BarrelRecipe
 	{
 		if(item.getItem() instanceof IFood)
 		{
-			if(fluid.isFluidEqual(inFluid) && ((IFood)item.getItem()).getFoodGroup() == EnumFoodGroup.Fruit && ((IFood)item.getItem()).getFoodWeight(item) > 1f*(fluid.amount/100))
+			if(fluid.isFluidEqual(barrelFluid) && ((IFood)item.getItem()).getFoodGroup() == EnumFoodGroup.Fruit && ((IFood)item.getItem()).getFoodWeight(item) > 1f*(fluid.amount/100))
 			{
 				return true;
 			}

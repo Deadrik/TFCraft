@@ -103,5 +103,6 @@ public class TFCFluid extends Fluid
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(CIDER, 250), new ItemStack(TFCItems.Cider), new ItemStack(Items.glass_bottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(VODKA, 250), new ItemStack(TFCItems.Vodka), new ItemStack(Items.glass_bottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(MILK, 1000), new ItemStack(TFCItems.WoodenBucketMilk), new ItemStack(TFCItems.WoodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(VINEGAR, 1000), new ItemStack(TFCItems.Vinegar), new ItemStack(TFCItems.WoodenBucketEmpty));
 	}
 }

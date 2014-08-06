@@ -31,7 +31,7 @@ public class BarrelManager
 		for(Object recipe : recipes)
 		{
 			BarrelRecipe br = (BarrelRecipe) recipe;
-			if((br.inItemStack != null && item != null) && (br.inFluid != null && fluid != null) && br.matches(item, fluid))
+			if(item != null && fluid != null &&/*(br.inItemStack != null && item != null) && (br.inFluid != null && fluid != null) &&*/ br.matches(item, fluid))
 				if(br.isSealedRecipe == sealed)
 					return br;
 		}
