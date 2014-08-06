@@ -2117,32 +2117,32 @@ gui.FoodPrep.Power=Power
 
 #== Metals ==
 gui.metal.Bismuth=Bismuth
-gui.metal.Bismuth Bronze=Bismuth Bronze
-gui.metal.Black Bronze=Black Bronze
-gui.metal.Black Steel=Black Steel
-gui.metal.Blue Steel=Blue Steel
+gui.metal.BismuthBronze=Bismuth Bronze
+gui.metal.BlackBronze=Black Bronze
+gui.metal.BlackSteel=Black Steel
+gui.metal.BlueSteel=Blue Steel
 gui.metal.Brass=Brass
 gui.metal.Bronze=Bronze
 gui.metal.Copper=Copper
 gui.metal.Gold=Gold
-gui.metal.HCBlack Steel=High Carbon Black Steel
-gui.metal.HCBlue Steel=High Carbon Blue Steel
-gui.metal.HCRed Steel=High Carbon Red Steel
+gui.metal.HCBlackSteel=High Carbon Black Steel
+gui.metal.HCBlueSteel=High Carbon Blue Steel
+gui.metal.HCRedSteel=High Carbon Red Steel
 gui.metal.Lead=Lead
 gui.metal.Nickel=Nickel
 gui.metal.PigIron=Pig Iron
 gui.metal.Platinum=Platinum
-gui.metal.Red Steel=Red Steel
+gui.metal.RedSteel=Red Steel
 gui.metal.RoseGold=Rose Gold
 gui.metal.Silver=Silver
 gui.metal.Steel=Steel
 gui.metal.SterlingSilver=Sterling Silver
 gui.metal.Tin=Tin
 gui.metal.Unknown=Unknown
-gui.metal.WeakBlue Steel=Weak Blue Steel
-gui.metal.WeakRed Steel=Weak Red Steel
+gui.metal.WeakBlueSteel=Weak Blue Steel
+gui.metal.WeakRedSteel=Weak Red Steel
 gui.metal.WeakSteel=Weak Steel
-gui.metal.Wrought Iron=Wrought Iron
+gui.metal.WroughtIron=Wrought Iron
 gui.metal.Zinc=Zinc
 
 #== Plans GUI ==
