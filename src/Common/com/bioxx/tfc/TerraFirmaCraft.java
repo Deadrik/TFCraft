@@ -288,6 +288,7 @@ public class TerraFirmaCraft
 		TFCOptions.enableDebugMode = TFCOptions.getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
 		TFCOptions.iDontLikeOnions = TFCOptions.getBooleanFor(config, "General", "enableNotOnions", false,"Set this to true if you don't like onions.");
 		TFCOptions.enableOreTest = TFCOptions.getBooleanFor(config, "General","enableOreTest", false, "This will generate only ore in your world with nothing else. *Caution Unsupported*");
+		TFCOptions.rainRegensWater = TFCOptions.getBooleanFor(config, "General", "rainRegensWater", false, "This will cause flowing water blocks to slowly convert into source blocks during the rain");
 
 		//Time
 		TFCOptions.yearLength = TFCOptions.getIntFor(config, "Time", "yearLength", 96, "This is how many days are in a year. Keep this to multiples of 12.");
