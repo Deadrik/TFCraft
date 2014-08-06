@@ -42,7 +42,7 @@ import com.bioxx.tfc.Handlers.ChunkEventHandler;
 import com.bioxx.tfc.Handlers.CraftingHandler;
 import com.bioxx.tfc.Handlers.EnteringChunkHandler;
 import com.bioxx.tfc.Handlers.EntityDamageHandler;
-import com.bioxx.tfc.Handlers.EntityLivingHandler;
+import com.bioxx.tfc.Handlers.EntityPlayerHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Handlers.PlayerSkillEventHandler;
@@ -213,7 +213,9 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
 
 		// Register the Entity Living Update Handler
-		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+		EntityPlayerHandler playerHandler = new EntityPlayerHandler();
+		MinecraftForge.EVENT_BUS.register(playerHandler);
+		FMLCommonHandler.instance().bus().register(playerHandler);
 
 		// Register all the render stuff for the client
 		proxy.registerRenderInformation();
