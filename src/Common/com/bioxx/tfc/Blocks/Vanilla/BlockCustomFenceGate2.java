@@ -47,7 +47,7 @@ public class BlockCustomFenceGate2 extends BlockFenceGate implements ITileEntity
 	{
 		int l = (par1World.getTileEntity(par2, par3, par4)!=null)?(((TileEntityFenceGate)(par1World.getTileEntity(par2, par3, par4))).getDirection()):0;
 		boolean open = (par1World.getTileEntity(par2, par3, par4)!=null)?(((TileEntityFenceGate)(par1World.getTileEntity(par2, par3, par4))).getOpen()):false;
-		return open ? null : (l != 2 && l != 0 ? AxisAlignedBB.getAABBPool().getAABB((double)((float)par2 + 0.375F), (double)par3, (double)par4, (double)((float)par2 + 0.625F), (double)((float)par3 + 1.5F), (double)(par4 + 1)) : AxisAlignedBB.getAABBPool().getAABB((double)par2, (double)par3, (double)((float)par4 + 0.375F), (double)(par2 + 1), (double)((float)par3 + 1.5F), (double)((float)par4 + 0.625F)));
+		return open ? null : (l != 2 && l != 0 ? AxisAlignedBB.getBoundingBox((double)((float)par2 + 0.375F), (double)par3, (double)par4, (double)((float)par2 + 0.625F), (double)((float)par3 + 1.5F), (double)(par4 + 1)) : AxisAlignedBB.getBoundingBox((double)par2, (double)par3, (double)((float)par4 + 0.375F), (double)(par2 + 1), (double)((float)par3 + 1.5F), (double)((float)par4 + 0.625F)));
 	}
 
 	@SideOnly(Side.CLIENT)

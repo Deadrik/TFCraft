@@ -132,20 +132,20 @@ public class ArmourStandHighlightHandler
 		unit = player.getLookVec();
 		aabb.minY+=0.1;
 		aabb.maxY+=0.1;
-		Vec3 playerVec = Vec3.fakePool.getVecFromPool(player.posX, player.posY + player.eyeHeight, player.posZ);
-		Vec3 negPlayerVec = Vec3.fakePool.getVecFromPool(-player.lastTickPosX, -(player.lastTickPosY + player.eyeHeight), -player.lastTickPosZ);
-		Vec3 zeroVec = Vec3.fakePool.getVecFromPool(0,0,0);
-		Vec3 distBlockxyz = (playerVec.subtract(Vec3.fakePool.getVecFromPool(aabb.minX,aabb.minY,aabb.minZ))).normalize();
-		Vec3 distBlockXYZ = (playerVec.subtract(Vec3.fakePool.getVecFromPool(aabb.maxX,aabb.maxY,aabb.maxZ))).normalize();
+		Vec3 playerVec = Vec3.createVectorHelper(player.posX, player.posY + player.eyeHeight, player.posZ);
+		Vec3 negPlayerVec = Vec3.createVectorHelper(-player.lastTickPosX, -(player.lastTickPosY + player.eyeHeight), -player.lastTickPosZ);
+		Vec3 zeroVec = Vec3.createVectorHelper(0,0,0);
+		Vec3 distBlockxyz = (playerVec.subtract(Vec3.createVectorHelper(aabb.minX,aabb.minY,aabb.minZ))).normalize();
+		Vec3 distBlockXYZ = (playerVec.subtract(Vec3.createVectorHelper(aabb.maxX,aabb.maxY,aabb.maxZ))).normalize();
 
-		Vec3 distBlockxyZ = (playerVec.subtract(Vec3.fakePool.getVecFromPool(aabb.minX,aabb.minY,aabb.maxZ))).normalize();
-		Vec3 distBlockXYz = (playerVec.subtract(Vec3.fakePool.getVecFromPool(aabb.maxX,aabb.maxY,aabb.minZ))).normalize();
+		Vec3 distBlockxyZ = (playerVec.subtract(Vec3.createVectorHelper(aabb.minX,aabb.minY,aabb.maxZ))).normalize();
+		Vec3 distBlockXYz = (playerVec.subtract(Vec3.createVectorHelper(aabb.maxX,aabb.maxY,aabb.minZ))).normalize();
 
-		Vec3 distBlockxYZ = (playerVec.subtract(Vec3.fakePool.getVecFromPool(aabb.minX,aabb.maxY,aabb.maxZ))).normalize();
-		Vec3 distBlockXyz = (playerVec.subtract(Vec3.fakePool.getVecFromPool(aabb.maxX,aabb.minY,aabb.minZ))).normalize();
+		Vec3 distBlockxYZ = (playerVec.subtract(Vec3.createVectorHelper(aabb.minX,aabb.maxY,aabb.maxZ))).normalize();
+		Vec3 distBlockXyz = (playerVec.subtract(Vec3.createVectorHelper(aabb.maxX,aabb.minY,aabb.minZ))).normalize();
 
-		Vec3 distBlockxYz = (playerVec.subtract(Vec3.fakePool.getVecFromPool(aabb.minX,aabb.maxY,aabb.minZ))).normalize();
-		Vec3 distBlockXyZ = (playerVec.subtract(Vec3.fakePool.getVecFromPool(aabb.maxX,aabb.minY,aabb.maxZ))).normalize();
+		Vec3 distBlockxYz = (playerVec.subtract(Vec3.createVectorHelper(aabb.minX,aabb.maxY,aabb.minZ))).normalize();
+		Vec3 distBlockXyZ = (playerVec.subtract(Vec3.createVectorHelper(aabb.maxX,aabb.minY,aabb.maxZ))).normalize();
 			//To ensure that the unit vector is actually within the space, we project the vectors onto it, and make the total length that length
 			double currentLongestProj = 0;
 			currentLongestProj = Math.max(currentLongestProj, unit.dotProduct(distBlockxyz));

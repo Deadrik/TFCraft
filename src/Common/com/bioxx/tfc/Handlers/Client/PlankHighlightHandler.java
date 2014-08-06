@@ -143,7 +143,7 @@ public class PlankHighlightHandler{
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glDepthMask(false);
 			//Draw the mini Box
-			drawBox(AxisAlignedBB.getAABBPool().getAABB(minX,minY,minZ,maxX,maxY,maxZ).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
+			drawBox(AxisAlignedBB.getBoundingBox(minX,minY,minZ,maxX,maxY,maxZ).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 
 			GL11.glDepthMask(true);
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
