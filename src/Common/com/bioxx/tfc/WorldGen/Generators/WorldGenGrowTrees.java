@@ -63,41 +63,58 @@ public class WorldGenGrowTrees
 			if(zCoord > 14500 || zCoord < -14500)
 				TreeType2 = 8;
 
-			float tree0EVTMin = EnumTree.values()[TreeType0].minEVT;
-			float tree0EVTMax = EnumTree.values()[TreeType0].maxEVT;
-			float tree0RainMin = EnumTree.values()[TreeType0].minRain;
-			float tree0RainMax = EnumTree.values()[TreeType0].maxRain;
-			float tree0TempMin = EnumTree.values()[TreeType0].minTemp;
-			float tree0TempMax = EnumTree.values()[TreeType0].maxTemp;
 
-			float tree1EVTMin = EnumTree.values()[TreeType1].minEVT;
-			float tree1EVTMax = EnumTree.values()[TreeType1].maxEVT;
-			float tree1RainMin = EnumTree.values()[TreeType1].minRain;
-			float tree1RainMax = EnumTree.values()[TreeType1].maxRain;
-			float tree1TempMin = EnumTree.values()[TreeType1].minTemp;
-			float tree1TempMax = EnumTree.values()[TreeType1].maxTemp;
+			boolean canSpawnTemp0 = false,
+			        canSpawnTemp1 = false,
+			        canSpawnTemp2 = false;
+			int canSpawnEVTRain0 = 0,
+			    canSpawnEVTRain1 = 0,
+			    canSpawnEVTRain2 = 0;
 
-			float tree2EVTMin = EnumTree.values()[TreeType2].minEVT;
-			float tree2EVTMax = EnumTree.values()[TreeType2].maxEVT;
-			float tree2RainMin = EnumTree.values()[TreeType2].minRain;
-			float tree2RainMax = EnumTree.values()[TreeType2].maxRain;
-			float tree2TempMin = EnumTree.values()[TreeType2].minTemp;
-			float tree2TempMax = EnumTree.values()[TreeType2].maxTemp;
+			if (TreeType0 != -1)
+			{
+				float tree0EVTMin = EnumTree.values()[TreeType0].minEVT;
+				float tree0EVTMax = EnumTree.values()[TreeType0].maxEVT;
+				float tree0RainMin = EnumTree.values()[TreeType0].minRain;
+				float tree0RainMax = EnumTree.values()[TreeType0].maxRain;
+				float tree0TempMin = EnumTree.values()[TreeType0].minTemp;
+				float tree0TempMax = EnumTree.values()[TreeType0].maxTemp;
 
-			boolean canSpawnTemp0 = (temperature >= tree0TempMin && temperature <= tree0TempMax);
-			int canSpawnEVTRain0 = (evt >= tree0EVTMin && evt <= tree0EVTMax && 
-					rainfall >= tree0RainMin && rainfall <= tree0RainMax) ? 2 : 
-						(evt >= tree0EVTMin && evt <= tree0EVTMax) || (rainfall >= tree0RainMin && rainfall <= tree0RainMax) ? 1 : 0;
+				canSpawnTemp0 = (temperature >= tree0TempMin && temperature <= tree0TempMax);
+				canSpawnEVTRain0 = (evt >= tree0EVTMin && evt <= tree0EVTMax && 
+				    rainfall >= tree0RainMin && rainfall <= tree0RainMax) ? 2 : 
+				      (evt >= tree0EVTMin && evt <= tree0EVTMax) || (rainfall >= tree0RainMin && rainfall <= tree0RainMax) ? 1 : 0;
+			}
 
-			boolean canSpawnTemp1 = (temperature >= tree1TempMin && temperature <= tree1TempMax);
-			int canSpawnEVTRain1 = (evt >= tree1EVTMin && evt <= tree1EVTMax && 
-					rainfall >= tree1RainMin && rainfall <= tree1RainMax) ? 2 : 
-						(evt >= tree1EVTMin && evt <= tree1EVTMax) || (rainfall >= tree1RainMin && rainfall <= tree1RainMax) ? 1 : 0;
+			if (TreeType1 != -1)
+			{
+				float tree1EVTMin = EnumTree.values()[TreeType1].minEVT;
+				float tree1EVTMax = EnumTree.values()[TreeType1].maxEVT;
+				float tree1RainMin = EnumTree.values()[TreeType1].minRain;
+				float tree1RainMax = EnumTree.values()[TreeType1].maxRain;
+				float tree1TempMin = EnumTree.values()[TreeType1].minTemp;
+				float tree1TempMax = EnumTree.values()[TreeType1].maxTemp;
 
-			boolean canSpawnTemp2 = (temperature >= tree2TempMin && temperature <= tree2TempMax);
-			int canSpawnEVTRain2 = (evt >= tree2EVTMin && evt <= tree2EVTMax && 
-					rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 2 : 
-						(evt >= tree2EVTMin && evt <= tree2EVTMax) || (rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 1 : 0;
+				canSpawnTemp1 = (temperature >= tree1TempMin && temperature <= tree1TempMax);
+				canSpawnEVTRain1 = (evt >= tree1EVTMin && evt <= tree1EVTMax &&
+						rainfall >= tree1RainMin && rainfall <= tree1RainMax) ? 2 :
+							(evt >= tree1EVTMin && evt <= tree1EVTMax) || (rainfall >= tree1RainMin && rainfall <= tree1RainMax) ? 1 : 0;
+			}
+
+			if (TreeType2 != -1)
+			{
+				float tree2EVTMin = EnumTree.values()[TreeType2].minEVT;
+				float tree2EVTMax = EnumTree.values()[TreeType2].maxEVT;
+				float tree2RainMin = EnumTree.values()[TreeType2].minRain;
+				float tree2RainMax = EnumTree.values()[TreeType2].maxRain;
+				float tree2TempMin = EnumTree.values()[TreeType2].minTemp;
+				float tree2TempMax = EnumTree.values()[TreeType2].maxTemp;
+
+				canSpawnTemp2 = (temperature >= tree2TempMin && temperature <= tree2TempMax);
+				canSpawnEVTRain2 = (evt >= tree2EVTMin && evt <= tree2EVTMax && 
+				    rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 2 : 
+				      (evt >= tree2EVTMin && evt <= tree2EVTMax) || (rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 1 : 0;
+			}
 
 			int randomNumber = random.nextInt(100);
 
