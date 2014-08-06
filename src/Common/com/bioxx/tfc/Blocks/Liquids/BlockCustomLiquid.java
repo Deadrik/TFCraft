@@ -17,10 +17,12 @@ import net.minecraftforge.fluids.Fluid;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLilyPad;
+import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCProvider;
+import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -82,6 +84,11 @@ public class BlockCustomLiquid extends BlockFluidClassic
 			if (((TFCProvider)(world.provider)).tryBlockFreeze(i, j, k, false))
 			{
 
+			}
+			if ((fluidType == TFCFluid.FRESHWATER || fluidType == TFCFluid.SALTWATER) && world.getBlockMetadata(i, j, k) == 1
+			    && rand.nextFloat() < 0.05f && TFCOptions.rainRegensWater && !world.isRemote && world.isRaining() && world.canBlockSeeTheSky(i, j, k))
+			{
+			  world.setBlockMetadataWithNotify(i, j, k, 0, 0x3);
 			}
 		}
 	}
