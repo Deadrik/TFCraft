@@ -85,8 +85,8 @@ public class BlockCustomLiquid extends BlockFluidClassic
 			{
 
 			}
-			if ((fluidType == TFCFluid.FRESHWATER || fluidType == TFCFluid.SALTWATER)
-			    && TFCOptions.rainRegensWater && !world.isRemote && world.getBlockMetadata(i, j, k) == 1 && world.isRaining() && world.canBlockSeeTheSky(i, j, k) && rand.nextFloat() < 0.05f)
+			if ((fluidType == TFCFluid.FRESHWATER || fluidType == TFCFluid.SALTWATER) && world.getBlockMetadata(i, j, k) == 1
+			    && rand.nextFloat() < 0.05f && TFCOptions.rainRegensWater && !world.isRemote && world.isRaining() && world.canBlockSeeTheSky(i, j, k))
 			{
 			  world.setBlockMetadataWithNotify(i, j, k, 0, 0x3);
 			}
