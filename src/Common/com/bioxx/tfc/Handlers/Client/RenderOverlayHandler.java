@@ -85,11 +85,59 @@ public class RenderOverlayHandler
 		if(getQuiver()!=null && getQuiver().getItem() instanceof ItemQuiver){
 			fontrenderer = mc.fontRenderer;
 
-			this.drawTexturedModalRect(1, sr.getScaledHeight() - 34, 0, 78, 16, 16);
-			this.drawTexturedModalRect(1, sr.getScaledHeight() - 17, 0, 94, 16, 16);
+			int xPos = 1;
+			int yPos = sr.getScaledHeight() - 34;
+			boolean leftSide = true;
 
-			fontrenderer.drawString("" +getQuiverArrows(), 20,  sr.getScaledHeight() - 30, Color.white.getRGB());
-			fontrenderer.drawString("" +getQuiverJavelins(), 20,  sr.getScaledHeight() - 13, Color.white.getRGB());
+			String pos = TFCOptions.quiverHUDPosition;
+
+			if (pos.equalsIgnoreCase("topright"))
+			{
+				xPos = sr.getScaledWidth() - 19;
+				yPos = 1;
+				leftSide = false;
+			}
+			else if (pos.equalsIgnoreCase("right"))
+			{
+				xPos = sr.getScaledWidth() - 19;
+				yPos = (sr.getScaledHeight() - 34) / 2;
+				leftSide = false;
+			}
+			else if (pos.equalsIgnoreCase("bottomright"))
+			{
+				xPos = sr.getScaledWidth() - 19;
+				yPos = sr.getScaledHeight() - 34;
+				leftSide = false;
+			}
+			else if (pos.equalsIgnoreCase("topleft"))
+			{
+				xPos = 1;
+				yPos = 1;
+				leftSide = true;
+			}
+			else if (pos.equalsIgnoreCase("left"))
+			{
+				xPos = 1;
+				yPos = (sr.getScaledHeight() - 34) / 2;
+				leftSide = true;
+			}
+
+			this.drawTexturedModalRect(xPos, yPos, 0, 78, 16, 16);
+			this.drawTexturedModalRect(xPos, yPos + 17, 0, 94, 16, 16);
+
+			if (leftSide)
+			{
+				fontrenderer.drawString("" + getQuiverArrows(), xPos + 19, yPos + 4, Color.white.getRGB());
+				fontrenderer.drawString("" + getQuiverJavelins(), xPos + 19, yPos + 21, Color.white.getRGB());
+			}
+			else
+			{
+				int arrowOffset = fontrenderer.getStringWidth(String.valueOf(getQuiverArrows())) + 1;
+				int javOffset = fontrenderer.getStringWidth(String.valueOf(getQuiverJavelins())) + 1;
+				
+				fontrenderer.drawString("" + getQuiverArrows(), xPos - arrowOffset, yPos + 4, Color.white.getRGB());
+				fontrenderer.drawString("" + getQuiverJavelins(), xPos - javOffset, yPos + 21, Color.white.getRGB());
+			}
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			TFC_Core.bindTexture(tfcicons);
