@@ -17,7 +17,7 @@ import com.bioxx.tfc.api.Entities.IAnimal;
 public class RenderSheepTFC extends RenderSheep
 {
 	private static final ResourceLocation SheepFurTexture = new ResourceLocation("textures/entity/sheep/sheep_fur.png");
-	private static final ResourceLocation SheepTexture = new ResourceLocation(Reference.ModID, "mob/sheep.png");
+	private static final ResourceLocation SheepTexture = new ResourceLocation(Reference.ModID, "textures/mob/sheep.png");
 
 	public RenderSheepTFC(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3)
 	{

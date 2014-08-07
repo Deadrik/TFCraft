@@ -15,8 +15,8 @@ import com.bioxx.tfc.Render.Models.ModelDeer;
 import com.bioxx.tfc.api.Entities.IAnimal;
 public class RenderDeer extends RenderLiving
 {
-	private static final ResourceLocation DeerTexture = new ResourceLocation(Reference.ModID, "mob/deer.png");
-	private static final ResourceLocation FawnTexture = new ResourceLocation(Reference.ModID, "mob/deer_fawn.png");
+	private static final ResourceLocation DeerTexture = new ResourceLocation(Reference.ModID, "textures/mob/deer.png");
+	private static final ResourceLocation FawnTexture = new ResourceLocation(Reference.ModID, "textures/mob/deer_fawn.png");
 	private float scale = 1.0f;
 	private ModelDeer modeldeer;
 

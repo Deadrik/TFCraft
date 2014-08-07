@@ -14,13 +14,14 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
 import com.bioxx.tfc.Render.Models.ModelBass;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderFishTFC extends RenderLiving
 {
-	private static final ResourceLocation Texture = new ResourceLocation(Reference.ModID, "mob/Bass.png");
+	private static final ResourceLocation Texture = new ResourceLocation(Reference.ModID, "textures/mob/Bass.png");
 	private float scale = 1f;
 	private ModelBass modelbass;
 
@@ -49,6 +50,7 @@ public class RenderFishTFC extends RenderLiving
 		}
 	}
 	
+	@Override
 	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
     {
         GL11.glRotatef(180.0F - par3, 0.0F, 1.0F, 0.0F);

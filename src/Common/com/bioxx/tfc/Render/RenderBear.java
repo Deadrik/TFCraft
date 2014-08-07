@@ -15,7 +15,7 @@ import com.bioxx.tfc.Render.Models.ModelBear;
 import com.bioxx.tfc.api.Entities.IAnimal;
 public class RenderBear extends RenderLiving
 {
-	private static final ResourceLocation Texture = new ResourceLocation(Reference.ModID, "mob/Bear.png");
+	private static final ResourceLocation Texture = new ResourceLocation(Reference.ModID, "textures/mob/Bear.png");
 	private float scale = 1.1f;
 	private ModelBear modelbear;
 

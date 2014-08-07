@@ -16,8 +16,8 @@ import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 public class RenderChickenTFC extends RenderChicken
 {
 	private static final ResourceLocation ChickenTexture = new ResourceLocation("textures/entity/chicken.png");
-	private static final ResourceLocation RoosterTexture = new ResourceLocation(Reference.ModID, "mob/rooster.png");
-	private static final ResourceLocation ChickTexture = new ResourceLocation(Reference.ModID, "mob/chick.png");
+	private static final ResourceLocation RoosterTexture = new ResourceLocation(Reference.ModID, "textures/mob/rooster.png");
+	private static final ResourceLocation ChickTexture = new ResourceLocation(Reference.ModID, "textures/mob/chick.png");
 
 	public RenderChickenTFC(ModelBase par1ModelBase, float par2)
 	{

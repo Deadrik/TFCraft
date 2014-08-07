@@ -16,7 +16,7 @@ import com.bioxx.tfc.api.Entities.IAnimal;
 public class RenderPigTFC extends RenderPig
 {
 
-	private static final ResourceLocation pigSkinTFC = new ResourceLocation(Reference.ModID, "mob/pig.png");
+	private static final ResourceLocation pigSkinTFC = new ResourceLocation(Reference.ModID, "textures/mob/pig.png");
 	public RenderPigTFC(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3)
 	{
 		super(par1ModelBase,par2ModelBase, par3);
