@@ -35,6 +35,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -414,7 +415,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 					this.makeHorseRearWithSound();
 				}
 
-				if (!flag && this.func_110229_cs() && !this.isChested() && itemstack.getItem() == Item.getItemFromBlock(Blocks.chest))
+				if (!flag && this.func_110229_cs() && !this.isChested() && itemstack.getItem() == Item.getItemFromBlock(TFCBlocks.Chest))
 				{
 					this.setChested(true);
 					this.playSound("mob.chickenplop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
