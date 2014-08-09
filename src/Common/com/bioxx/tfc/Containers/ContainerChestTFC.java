@@ -44,6 +44,20 @@ public class ContainerChestTFC extends ContainerTFC
 		int var4;
 		int var5;
 
+		
+
+		for (var4 = 0; var4 < this.numRows; ++var4)
+		{
+			for (var5 = 0; var5 < 9; ++var5)
+			{
+				this.addSlotToContainer(new SlotChest(lowerChestInventory, var5 + var4 * 9, 8 + var5 * 18, 18 + var4 * 18).addItemException(getExceptions()));
+			}
+		}
+
+		PlayerInventory.buildInventoryLayout(this, (InventoryPlayer) playerInv, 8, var3 + 109, false, true);
+	}
+	
+	public static ArrayList<Item> getExceptions(){
 		ArrayList exceptions = new ArrayList<Item>();
 		exceptions.add(TFCItems.Logs);
 		exceptions.add(TFCItems.BismuthIngot);
@@ -68,16 +82,8 @@ public class ContainerChestTFC extends ContainerTFC
 		exceptions.add(TFCItems.SterlingSilverIngot);
 		exceptions.add(TFCItems.TinIngot);
 		exceptions.add(TFCItems.ZincIngot);
-
-		for (var4 = 0; var4 < this.numRows; ++var4)
-		{
-			for (var5 = 0; var5 < 9; ++var5)
-			{
-				this.addSlotToContainer(new SlotChest(lowerChestInventory, var5 + var4 * 9, 8 + var5 * 18, 18 + var4 * 18).addItemException(exceptions));
-			}
-		}
-
-		PlayerInventory.buildInventoryLayout(this, (InventoryPlayer) playerInv, 8, var3 + 109, false, true);
+		
+		return exceptions;
 	}
 
 	@Override

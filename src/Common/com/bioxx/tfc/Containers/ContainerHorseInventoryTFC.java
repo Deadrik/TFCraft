@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Containers;
 
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -8,14 +9,15 @@ import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Containers.Slots.ContainerHorseInventorySlotArmor;
 import com.bioxx.tfc.Containers.Slots.ContainerHorseInventorySlotSaddle;
+import com.bioxx.tfc.Containers.Slots.SlotChest;
 import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 
-public class ContainerHorseInventoryTFC extends Container
+public class ContainerHorseInventoryTFC extends ContainerTFC
 {
 	private IInventory field_111243_a;
 	private EntityHorseTFC theHorse;
 
-	public ContainerHorseInventoryTFC(IInventory playerInv, IInventory horseInv, EntityHorseTFC horse)
+	public ContainerHorseInventoryTFC(final IInventory playerInv, final IInventory horseInv,final EntityHorseTFC horse)
 	{
 		this.field_111243_a = horseInv;
 		this.theHorse = horse;
@@ -29,11 +31,12 @@ public class ContainerHorseInventoryTFC extends Container
 
 		if (horse.isChested())
 		{
+
 			for (j = 0; j < b0; ++j)
 			{
 				for (k = 0; k < 5; ++k)
 				{
-					this.addSlotToContainer(new Slot(horseInv, 2 + k + j * 5, 80 + k * 18, 18 + j * 18));
+					this.addSlotToContainer(new SlotChest(horseInv, 2 + k + j * 5, 80 + k * 18, 18 + j * 18).addItemException(ContainerChestTFC.getExceptions()));
 				}
 			}
 		}
