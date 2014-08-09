@@ -55,10 +55,10 @@ public class TESRWaterPlant extends TileEntitySpecialRenderer
 				GL11.glTranslatef((float)d + 0.0F, (float)d1 + 1F, (float)d2 + 0.0F); //size
 
 				
-				if(isSmall)
-					plantModelSmall.renderSquares();
-				else
-					plantModelLarge.renderSquares();
+				//if(isSmall)
+					//plantModelSmall.renderSquares();
+				//else
+					//plantModelLarge.renderSquares();
 
 				GL11.glPopMatrix(); //end
 			}

@@ -12,13 +12,18 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
 
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Blocks.Liquids.BlockCustomLiquid;
 import com.bioxx.tfc.Blocks.Terrain.BlockSand;
 import com.bioxx.tfc.Core.ColorizerFoliageTFC;
+import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
 
@@ -30,6 +35,12 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 	@SideOnly(Side.CLIENT)
 	private IIcon pondWeed;
 	private IIcon seaWeed;
+	private IIcon catTails;
+
+	static String seaweed = Reference.ModID + ":" + "plants/seaweed";
+	static String pondweed = Reference.ModID + ":" + "plants/pondweed";
+	static String cattails = Reference.ModID + ":" + "plants/Cat Tails";
+
 
 	public BlockWaterPlant(int texOff)
 	{
@@ -59,7 +70,6 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 			type = te.getBlockFromType();
 
 		super.breakBlock(world, i, j, k, block, l);
-		
 	}
 
 	@Override
@@ -83,15 +93,21 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 	@Override
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		seaWeed = registerer.registerIcon("tallgrass");//registerer.registerIcon(Reference.ModID + ":" + "plants/Sea Grass");
-		pondWeed = registerer.registerIcon("fern");//registerer.registerIcon(Reference.ModID + ":" + "plants/Pond Grass");
+		seaWeed = registerer.registerIcon(seaweed);//registerer.registerIcon(Reference.ModID + ":" + "plants/Sea Grass");
+		pondWeed = registerer.registerIcon(pondweed);//registerer.registerIcon(Reference.ModID + ":" + "plants/Pond Grass");
+		catTails = registerer.registerIcon(cattails);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int par1, int par2)
 	{
-		return TFCBlocks.Dirt.getIcon(par1, par2);
+		switch(par2){
+		case 0: return seaWeed;
+		case 1: return pondWeed;
+		case 2: return catTails;
+		default: return catTails;
+		}
 	}
 
 	@Override

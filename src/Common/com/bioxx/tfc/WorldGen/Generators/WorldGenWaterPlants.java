@@ -52,10 +52,12 @@ public class WorldGenWaterPlants extends WorldGenerator
 				{
 					int meta = par1World.getBlockMetadata(var7, var8, var9);
 					Block oldBlock = par1World.getBlock(var7, var8, var9);
-					par1World.setBlock(var7, var8, var9, this.plantBlock, meta, 1);
-					TileEntity te = par1World.getTileEntity(var7, var8, var9);
-					if(te instanceof TEWaterPlant){
-						((TEWaterPlant)te).setBlock(oldBlock);
+					if(TFC_Core.isSoil(oldBlock) || TFC_Core.isGravel(oldBlock) || TFC_Core.isSand(oldBlock)){
+						par1World.setBlock(var7, var8, var9, this.plantBlock, meta, 1);
+						TileEntity te = par1World.getTileEntity(var7, var8, var9);
+						if(te instanceof TEWaterPlant){
+							((TEWaterPlant)te).setBlock(oldBlock);
+						}
 					}
 					//Gravelly areas will spawn fewer plants
 					if(TFC_Core.isGravel(oldBlock))

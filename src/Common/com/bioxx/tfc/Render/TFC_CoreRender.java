@@ -22,6 +22,7 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
+import com.bioxx.tfc.Render.Blocks.RenderFlora;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
@@ -721,12 +722,13 @@ public class TFC_CoreRender
 	public static boolean RenderSeaPlant(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
 	{
 		boolean substrateRender = false;
-
+		boolean plantRender = false;
 		TileEntity te = renderblocks.blockAccess.getTileEntity(par2, par3, par4);
 		if(te instanceof TEWaterPlant){
 			TEWaterPlant wp = (TEWaterPlant) te;
 			if(wp.getBlockFromType() != null){
-				substrateRender = renderblocks.renderStandardBlock(wp.getBlockFromType(), par2, par3, par4);
+				substrateRender = renderblocks.renderStandardBlockWithColorMultiplier(wp.getBlockFromType(), par2, par3, par4,1,1,1);
+				plantRender = RenderFlora.render(par1Block, par2, par3, par4, renderblocks);
 			}
 		}
 		return substrateRender;

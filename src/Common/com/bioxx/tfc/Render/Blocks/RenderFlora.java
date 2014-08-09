@@ -1,34 +1,93 @@
 package com.bioxx.tfc.Render.Blocks;
 
+import com.bioxx.tfc.Blocks.Liquids.BlockCustomLiquid;
+import com.bioxx.tfc.Core.TFCFluid;
+import com.bioxx.tfc.Core.TFC_Core;
+
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.fluids.Fluid;
 
 public class RenderFlora
 {
 	public static boolean render(Block block, int x, int y, int z, RenderBlocks renderer)
 	{
-		int meta = renderer.blockAccess.getBlockMetadata(x, y, z);
-		switch(meta)
-		{
-		case 0:
-			renderer.renderCrossedSquares(block, x, y, z);
-			break;
-		case 1:
-			renderCatTails(block,x,y,z,renderer);
-			break;
+		
+		Block blockDirectlyAbove = renderer.blockAccess.getBlock(x, y + 1, z);
+		boolean hasAirTwoAbove = renderer.blockAccess.getBlock(x, y + 2, z).isAir(renderer.blockAccess,x, y + 2, z);
+		if(blockDirectlyAbove instanceof BlockCustomLiquid){
+			Fluid fluidDirectlyAbove = ((BlockCustomLiquid) blockDirectlyAbove).getFluid();
+			if(fluidDirectlyAbove.equals(TFCFluid.FRESHWATER)){
+				if(hasAirTwoAbove){
+					renderCatTails(block,x,y + 1,z,renderer);
+				}
+				else{
+					renderShortWaterPlant(block, x, y+ 1, z,renderer, 1);
+				}
+			}
+			else if(fluidDirectlyAbove.equals(TFCFluid.SALTWATER)){
+				renderShortWaterPlant(block, x, y + 1, z, renderer, 0);
+			}
 		}
-
 		return true;
 	}
 
+	public static boolean renderShortWaterPlant(Block block, int x, int y, int z, RenderBlocks renderer, int plantType)
+	{
+		Tessellator tessellator = Tessellator.instance;
+        tessellator.setBrightness(block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
+        int l = block.colorMultiplier(renderer.blockAccess, x, y, z);
+        float f = (float)(l >> 16 & 255) / 255.0F;
+        float f1 = (float)(l >> 8 & 255) / 255.0F;
+        float f2 = (float)(l & 255) / 255.0F;
+
+        if (EntityRenderer.anaglyphEnable)
+        {
+            float f3 = (f * 30.0F + f1 * 59.0F + f2 * 11.0F) / 100.0F;
+            float f4 = (f * 30.0F + f1 * 70.0F) / 100.0F;
+            float f5 = (f * 30.0F + f2 * 70.0F) / 100.0F;
+            f = f3;
+            f1 = f4;
+            f2 = f5;
+        }
+
+        tessellator.setColorOpaque_F(f, f1, f2);
+        double d1 = (double)x;
+        double d2 = (double)y;
+        double d0 = (double)z;
+        long i1;
+
+        if (block == Blocks.tallgrass)
+        {
+            i1 = (long)(x * 3129871) ^ (long)z * 116129781L ^ (long)y;
+            i1 = i1 * i1 * 42317861L + i1 * 11L;
+            d1 += ((double)((float)(i1 >> 16 & 15L) / 15.0F) - 0.5D) * 0.5D;
+            d2 += ((double)((float)(i1 >> 20 & 15L) / 15.0F) - 1.0D) * 0.2D;
+            d0 += ((double)((float)(i1 >> 24 & 15L) / 15.0F) - 0.5D) * 0.5D;
+        }
+        else if (block == Blocks.red_flower || block == Blocks.yellow_flower)
+        {
+            i1 = (long)(x * 3129871) ^ (long)z * 116129781L ^ (long)y;
+            i1 = i1 * i1 * 42317861L + i1 * 11L;
+            d1 += ((double)((float)(i1 >> 16 & 15L) / 15.0F) - 0.5D) * 0.3D;
+            d0 += ((double)((float)(i1 >> 24 & 15L) / 15.0F) - 0.5D) * 0.3D;
+        }
+
+        IIcon iicon = block.getIcon(0, plantType);
+        renderer.drawCrossedSquares(iicon, d1, d2, d0, 1.0F);
+        return true;
+	}
+	
 	public static void renderCatTails(Block block, int x, int y, int z, RenderBlocks renderer)
 	{
 		Tessellator tessellator = Tessellator.instance;
-		int meta = renderer.blockAccess.getBlockMetadata(x, y, z);
-		IIcon icon = block.getIcon(0, meta);
-
+		IIcon icon = block.getIcon(0, 2);
+		renderer.drawCrossedSquares(icon, x, y, z, 2.0F);
+/*
 		double minU = icon.getMinU();
 		double minV = icon.getMinV();
 		double maxU = icon.getMaxU();
@@ -74,6 +133,6 @@ public class RenderFlora
 		tessellator.addVertexWithUV(minX, y + 1.0D, maxZ, minU, minV);
 		tessellator.addVertexWithUV(minX, y - 1.0D, maxZ, minU, maxV);
 		tessellator.addVertexWithUV(maxX, y - 1.0D, maxZ, maxU, maxV);
-		tessellator.addVertexWithUV(maxX, y + 1.0D, maxZ, maxU, minV);
+		tessellator.addVertexWithUV(maxX, y + 1.0D, maxZ, maxU, minV);*/
 	}
 }
