@@ -19,7 +19,7 @@ import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomSand;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenLilyPad;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenLiquidsTFC;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenSeaGrass;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
 
 public class BiomeDecoratorTFC extends BiomeDecorator
 {
@@ -50,7 +50,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 
 	public int cactiPerChunk;
 
-	public int seaweedPerChunk;
+	public int waterPlantsPerChunk;
 
 	/**
 	 * The number of reeds to generate per chunk. Reeds won't generate if the
@@ -73,7 +73,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		this.mushroomsPerChunk = 0;
 		treesPerChunk = 30;
 		this.cactiPerChunk = 2;
-		this.seaweedPerChunk = 3;
+		this.waterPlantsPerChunk = 3;
 		this.reedGen = new WorldGenCustomReed();
 		this.sandGen = new WorldGenCustomSand(7, Blocks.sand);
 		this.lilyPadGen = new WorldGenLilyPad();
@@ -182,13 +182,13 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 				new WorldGenCustomCactus().generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 
-		for (var2 = 0; var2 < this.seaweedPerChunk; ++var2)
+		for (var2 = 0; var2 < this.waterPlantsPerChunk; ++var2)
 		{
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 			if (TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, yCoord, zCoord) >= 7)
-				new WorldGenSeaGrass(TFCBlocks.SeaGrassStill,TFC_Climate.isSwamp(currentWorld, xCoord, yCoord, zCoord)).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+				new WorldGenWaterPlants(TFCBlocks.WaterPlant,TFC_Climate.isSwamp(currentWorld, xCoord, yCoord, zCoord)).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 
 		if (this.generateLakes)

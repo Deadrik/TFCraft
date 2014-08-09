@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -22,6 +23,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.FloraIndex;
 import com.bioxx.tfc.Food.FloraManager;
 import com.bioxx.tfc.TileEntities.TEPartial;
+import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCWorldChunkManager;
@@ -718,25 +720,16 @@ public class TFC_CoreRender
 
 	public static boolean RenderSeaPlant(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
 	{
-		boolean plantRender,fluidRender;
-		//plantRender = renderblocks.renderCrossedSquares(par1Block, par2, par3, par4);
+		boolean substrateRender = false;
 
-		if(par1Block == TFCBlocks.SeaGrassFrozen)
-			fluidRender = RenderSeaPlantFrozen(par1Block,par2,par3,par4,renderblocks);
-		else
-			fluidRender = renderblocks.renderBlockLiquid(par1Block, par2, par3, par4);
-
-		//fluidRender = renderblocks.renderStandardBlock(Block.blocksList[Block.ice],par2,par3,par4);
-		return /*plantRender && */fluidRender;
-	}
-
-	public static boolean RenderSeaPlantFrozen(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
-	{
-		boolean plantRender,fluidRender;
-		//plantRender = renderblocks.renderCrossedSquares(par1Block, par2, par3, par4);
-		//fluidRender = renderblocks.renderBlockFluids(Block.waterMoving, par2, par3, par4);
-		fluidRender = renderblocks.renderStandardBlock(par1Block,par2,par3,par4);
-		return /*plantRender && */fluidRender;
+		TileEntity te = renderblocks.blockAccess.getTileEntity(par2, par3, par4);
+		if(te instanceof TEWaterPlant){
+			TEWaterPlant wp = (TEWaterPlant) te;
+			if(wp.getBlockFromType() != null){
+				substrateRender = renderblocks.renderStandardBlock(wp.getBlockFromType(), par2, par3, par4);
+			}
+		}
+		return substrateRender;
 	}
 
 	public static IIcon getFruitTreeOverlay(IBlockAccess world, int x, int y, int z)

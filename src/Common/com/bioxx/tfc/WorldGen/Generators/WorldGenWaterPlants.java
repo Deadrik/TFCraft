@@ -2,20 +2,22 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Blocks.Flora.BlockTallSeaGrassStill;
+import com.bioxx.tfc.Blocks.Flora.BlockWaterPlant;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TileEntities.TEWaterPlant;
 
 import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenSeaGrass extends WorldGenerator
+public class WorldGenWaterPlants extends WorldGenerator
 {
 	/** The ID of the plant block used in this plant generator. */
 	private Block plantBlock;
 	private boolean isSwamp;
 
-	public WorldGenSeaGrass(Block par1,boolean isSwamp)
+	public WorldGenWaterPlants(Block par1,boolean isSwamp)
 	{
 		this.plantBlock = par1;
 		this.isSwamp = isSwamp;
@@ -46,12 +48,17 @@ public class WorldGenSeaGrass extends WorldGenerator
 						randomTooDeepFlag = (par2Random.nextInt(12 - depthCounter)==0);
 					}
 				}
-				var8++;
-				if(!randomTooDeepFlag && depthCounter >0 && ((BlockTallSeaGrassStill)this.plantBlock).canBlockStay(par1World, var7, var8, var9))
+				if(!randomTooDeepFlag && depthCounter >0)
 				{
-					par1World.setBlock(var7, var8, var9, this.plantBlock, 0, 1);
+					int meta = par1World.getBlockMetadata(var7, var8, var9);
+					Block oldBlock = par1World.getBlock(var7, var8, var9);
+					par1World.setBlock(var7, var8, var9, this.plantBlock, meta, 1);
+					TileEntity te = par1World.getTileEntity(var7, var8, var9);
+					if(te instanceof TEWaterPlant){
+						((TEWaterPlant)te).setBlock(oldBlock);
+					}
 					//Gravelly areas will spawn fewer plants
-					if(TFC_Core.isGravel(par1World.getBlock(var7, var8-1, var9)))
+					if(TFC_Core.isGravel(oldBlock))
 						n--;
 				}
 			}

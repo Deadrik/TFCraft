@@ -106,7 +106,7 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 		{
 			return RenderDetailed.renderBlockDetailed(block, i, j, k, renderer);
 		}
-		else if (modelId == TFCBlocks.seaWeedRenderId)
+		else if (modelId == TFCBlocks.waterPlantRenderId)
 		{
 			return TFC_CoreRender.RenderSeaPlant(block, i, j, k, renderer);
 		}

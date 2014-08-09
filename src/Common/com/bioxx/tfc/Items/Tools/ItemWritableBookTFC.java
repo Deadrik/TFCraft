@@ -32,8 +32,8 @@ public class ItemWritableBookTFC extends ItemTerra
 	{
 		if(entityplayer.worldObj.isRemote)
 		{
-			System.out.println(par1ItemStack.hasTagCompound());
-			System.out.println(par1ItemStack);
+			//System.out.println(par1ItemStack.hasTagCompound());
+			//System.out.println(par1ItemStack);
 			//Can't do this
 			//Minecraft.getMinecraft().displayGuiScreen(new GuiScreenBookTFC(entityplayer, par1ItemStack, false));
 		}

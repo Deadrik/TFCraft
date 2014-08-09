@@ -62,7 +62,7 @@ import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.TileEntities.TEPottery;
-import com.bioxx.tfc.TileEntities.TESeaWeed;
+import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.TileEntities.TEStand;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TileEntityBloom;
@@ -142,7 +142,7 @@ public class CommonProxy
 		if(b)
 		{
 			GameRegistry.registerTileEntity(TEFirepit.class, "TerraFirepit");
-			GameRegistry.registerTileEntity(TESeaWeed.class, "Sea Weed");
+			GameRegistry.registerTileEntity(TEWaterPlant.class, "Sea Weed");
 			GameRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
 			GameRegistry.registerTileEntity(TEPottery.class, "Pottery");
 			GameRegistry.registerTileEntity(TEChest.class, "chest");

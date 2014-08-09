@@ -1,45 +1,48 @@
 package com.bioxx.tfc.TileEntities;
 
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TESeaWeed extends TileEntity
+public class TEWaterPlant extends TileEntity
 {
-	private int type = -1;
+	private Block blockType = null;
 
-	public TESeaWeed()
+	public TEWaterPlant()
 	{
+		
 	}
 
-	public void setType(int type)
-	{
-		if(this.type < 0 && type >= 0)
-			this.type = type;
+	public void setBlock(Block block)
+	{		
+		if(block.isOpaqueCube()){
+			this.blockType = block;
+		}
 	}
 
-	public int getType()
+	public Block getBlockFromType()
 	{
 		if(!this.worldObj.isRemote)
-			return this.type;
+			return this.blockType;
 		else
-			return this.type;
+			return this.blockType;
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
-		type = nbttagcompound.getInteger("type");
+		blockType = Block.getBlockById(nbttagcompound.getInteger("block"));
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setInteger("type", type);
+		nbttagcompound.setInteger("block", Block.getIdFromBlock(blockType));
 	}
 
 	@Override

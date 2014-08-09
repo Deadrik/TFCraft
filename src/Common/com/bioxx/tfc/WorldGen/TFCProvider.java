@@ -6,7 +6,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.WorldProvider;
@@ -18,7 +17,6 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.TileEntities.TESeaWeed;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -133,19 +131,12 @@ return biome;
 	@Override
 	public boolean canBlockFreeze(int x, int y, int z, boolean byWater)
 	{
-		TileEntity te = (worldObj.getTileEntity(x, y, z));
 		Block id = worldObj.getBlock(x, y, z);
 		int meta = worldObj.getBlockMetadata(x, y, z);
 		if (TFC_Climate.getHeightAdjustedTemp(worldObj, x, y, z) <= 0)
 		{
 			Material mat = worldObj.getBlock(x, y, z).getMaterial();
 			boolean salty = TFC_Core.isSaltWaterIncludeIce(id, meta, mat);
-
-			if(te!=null && te instanceof TESeaWeed)
-			{
-				//in case the block is salty sea grass, we don't want that to freeze when it's too warm
-				salty = salty || (((TESeaWeed)te).getType() != 1 && ((TESeaWeed)te).getType() != 2);
-			}
 
 			if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= -2)
 			{
@@ -161,20 +152,6 @@ return biome;
 				else if(id == TFCBlocks.SaltWater && meta == 0/* || id == Block.waterMoving.blockID*/)
 				{
 					worldObj.setBlock(x, y, z, TFCBlocks.Ice, 0, 2);
-				}
-				else if(id == TFCBlocks.SeaGrassStill)
-				{
-					int type = -1;
-					if(te !=null)
-					{
-						type = ((TESeaWeed)te).getType();
-					}
-					worldObj.setBlock(x, y, z, TFCBlocks.SeaGrassFrozen, type, 2);
-					te = worldObj.getTileEntity(x, y, z);
-					if(te!=null)
-					{
-						((TESeaWeed)te).setType(type);
-					}
 				}
 			}
 			return false;//(mat == Material.water) && !salty;
@@ -204,15 +181,6 @@ return biome;
 					}
 				}
 			}
-			else if(id == TFCBlocks.SeaGrassFrozen)
-			{
-				worldObj.setBlock(x, y, z, id, meta, 3);
-				te = worldObj.getTileEntity(x, y, z);
-				if(te!=null)
-				{
-					((TESeaWeed)te).setType(meta);
-				}
-			}
 		}
 		return false;
 	}
@@ -226,12 +194,6 @@ return biome;
 			Block id = worldObj.getBlock(x, y, z);
 			int meta = worldObj.getBlockMetadata(x, y, z);
 			boolean salty = TFC_Core.isSaltWaterIncludeIce(id, meta, mat);
-			TileEntity te = worldObj.getTileEntity(x, y, z);
-			if(te!=null && te instanceof TESeaWeed)
-			{
-				//in case the block is salty sea grass, we don't want that to freeze when it's too warm
-				salty = salty || (((TESeaWeed)te).getType() != 1 && ((TESeaWeed)te).getType() != 2);
-			}
 			if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= -2)
 				salty = false;
 			return (mat == Material.water || mat == Material.ice) && !salty;

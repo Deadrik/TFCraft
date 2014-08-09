@@ -50,7 +50,7 @@ public class BlockCustomLiquid extends BlockFluidClassic
 
 	protected void setupDisplacements()
 	{
-		displacements.put(TFCBlocks.SeaGrassStill, false);
+		displacements.put(TFCBlocks.WaterPlant, false);
 	}
 
 	@Override
