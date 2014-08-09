@@ -88,6 +88,21 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 	{
 		return true;
 	}
+	
+	@Override
+	protected void doBeforeFall(World world, int x, int y, int z){
+		TileEntity te = world.getTileEntity(x, y, z);
+		if(te instanceof TEWaterPlant){
+			Block block = ((TEWaterPlant)te).getBlockFromType();
+			int meta = world.getBlockMetadata(x,y,z);
+			if(block != null){
+				world.setBlock(x, y, z, block, meta,0);
+			}
+			else{
+				world.setBlockToAir(x,y,z);
+			}
+		}
+	}
 
 	@SideOnly(Side.CLIENT)
 	@Override

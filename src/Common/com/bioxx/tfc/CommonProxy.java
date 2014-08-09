@@ -138,11 +138,11 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TEOre.class, "ore");
 		GameRegistry.registerTileEntity(TELeatherRack.class, "leatherRack");
 		GameRegistry.registerTileEntity(TEMetalTrapDoor.class, "MetalTrapDoor");
+		GameRegistry.registerTileEntity(TEWaterPlant.class, "Sea Weed");
 
 		if(b)
 		{
 			GameRegistry.registerTileEntity(TEFirepit.class, "TerraFirepit");
-			GameRegistry.registerTileEntity(TEWaterPlant.class, "Sea Weed");
 			GameRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
 			GameRegistry.registerTileEntity(TEPottery.class, "Pottery");
 			GameRegistry.registerTileEntity(TEChest.class, "chest");

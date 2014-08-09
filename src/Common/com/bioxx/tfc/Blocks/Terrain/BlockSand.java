@@ -128,6 +128,7 @@ public class BlockSand extends BlockTerra
 				}
 				else
 				{
+					doBeforeFall(world,x,y,z);
 					EntityFallingBlock ent = new EntityFallingBlock(world, (double)(x + 0.5F), (double)(y + 0.5F), (double)(z + 0.5F), this, meta);
 					world.spawnEntityInWorld(ent);
 					Random R = new Random(x * y + z);
@@ -135,6 +136,9 @@ public class BlockSand extends BlockTerra
 				}
 			}
 		}
+	}
+	
+	protected void doBeforeFall(World world, int x, int y, int z){
 	}
 
 	@Override

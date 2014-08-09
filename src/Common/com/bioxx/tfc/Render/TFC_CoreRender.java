@@ -731,7 +731,7 @@ public class TFC_CoreRender
 				plantRender = RenderFlora.render(par1Block, par2, par3, par4, renderblocks);
 			}
 		}
-		return substrateRender;
+		return substrateRender && plantRender;
 	}
 
 	public static IIcon getFruitTreeOverlay(IBlockAccess world, int x, int y, int z)
