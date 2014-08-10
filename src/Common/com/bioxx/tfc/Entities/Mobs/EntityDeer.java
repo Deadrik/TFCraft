@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -33,6 +34,7 @@ import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityDeer extends EntityAnimal implements IAnimal
@@ -306,10 +308,10 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			//par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
+			//par1EntityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(getGender() == GenderEnum.FEMALE ? "entity.animal.female" : "entity.animal.male")));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 			{
-				par1EntityPlayer.addChatMessage(new ChatComponentText("Pregnant"));
+				par1EntityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.animal.pregnant")));
 			}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}

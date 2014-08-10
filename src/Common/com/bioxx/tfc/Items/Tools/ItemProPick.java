@@ -2,6 +2,7 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -146,7 +147,8 @@ public class ItemProPick extends ItemTerra
 	 */
 	private void TellResult(EntityPlayer player, ItemStack ore)
 	{
-		player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.Found"), ore.getItem().getItemStackDisplayName(ore))));
+		String message = StatCollector.translateToLocal("gui.ProPick.Found").replaceAll(Pattern.quote("$ORE"), ore.getItem().getItemStackDisplayName(ore));
+		player.addChatMessage(new ChatComponentText(message));
 	}
 
 	/*
@@ -164,16 +166,23 @@ public class ItemProPick extends ItemTerra
 		ProspectResult result = results.values().toArray(new ProspectResult[0])[index];
 		String oreName = result.ItemStack.getItem().getItemStackDisplayName(result.ItemStack);
 
-		if (result.Count < 10)
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundTraces"), oreName)));
-		else if(result.Count < 20)
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundSmall"), oreName)));
-		else if (result.Count < 40)
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundMedium"), oreName)));
-		else if (result.Count < 80)
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundLarge"), oreName)));
-		else
-			player.addChatMessage(new ChatComponentText(String.format("%s %s", StatCollector.translateToLocal("gui.ProPick.FoundVeryLarge"), oreName)));
+		String message = "";
+		if (result.Count < 10) {
+			message = StatCollector.translateToLocal("gui.ProPick.FoundTraces").replaceAll(Pattern.quote("$ORE"), oreName);
+		}
+		else if(result.Count < 20) {
+			message = StatCollector.translateToLocal("gui.ProPick.FoundSmall").replaceAll(Pattern.quote("$ORE"), oreName);
+		}
+		else if (result.Count < 40) {
+			message = StatCollector.translateToLocal("gui.ProPick.FoundMedium").replaceAll(Pattern.quote("$ORE"), oreName);
+		}
+		else if (result.Count < 80) {
+			message = StatCollector.translateToLocal("gui.ProPick.FoundLarge").replaceAll(Pattern.quote("$ORE"), oreName);
+		}
+		else {
+			message = StatCollector.translateToLocal("gui.ProPick.FoundVeryLarge").replaceAll(Pattern.quote("$ORE"), oreName);
+		}
+		player.addChatMessage(new ChatComponentText(message));
 
 		oreName = null;
 		result = null;

@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Commands;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.TFCOptions;
@@ -10,6 +11,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.WorldServer;
 
 public class CommandTime extends CommandBase
@@ -56,7 +58,8 @@ public class CommandTime extends CommandBase
 					}
 					if(i < currentTime)
 					{
-						par1ICommandSender.addChatMessage(new ChatComponentText("Cannot set time to before current time."));
+						String message = StatCollector.translateToLocal("commands.time.invalid").replaceAll(Pattern.quote("$CURRTIME"), String.valueOf(currentTime));
+						par1ICommandSender.addChatMessage(new ChatComponentText(message));
 					}
 					else
 					{
@@ -71,7 +74,8 @@ public class CommandTime extends CommandBase
 					i = parseIntWithMin(par1ICommandSender, par2ArrayOfStr[1], 0);
 					if(i+ currentTime < currentTime)
 					{
-						par1ICommandSender.addChatMessage(new ChatComponentText("Cannot set time to before current time."));
+						String message = StatCollector.translateToLocal("commands.time.invalid").replaceAll(Pattern.quote("$CURRTIME"), String.valueOf(currentTime));
+						par1ICommandSender.addChatMessage(new ChatComponentText(message));
 					}
 					else
 					{

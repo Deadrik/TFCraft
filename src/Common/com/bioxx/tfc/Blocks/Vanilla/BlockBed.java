@@ -97,7 +97,7 @@ public class BlockBed extends BlockDirectional
 
 					if (entityplayer1 != null)
 					{
-						par5EntityPlayer.addChatMessage(new ChatComponentText("tile.bed.occupied.name"));
+						par5EntityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tile.bed.occupied")));
 						return true;
 					}
 
@@ -115,9 +115,9 @@ public class BlockBed extends BlockDirectional
 				else
 				{
 					if (enumstatus == EnumStatus.NOT_POSSIBLE_NOW)
-						par5EntityPlayer.addChatMessage(new ChatComponentText("tile.bed.noSleep.name"));
+						par5EntityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tile.bed.noSleep")));
 					else if (enumstatus == EnumStatus.NOT_SAFE)
-						par5EntityPlayer.addChatMessage(new ChatComponentText("tile.bed.notSafe.name"));
+						par5EntityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tile.bed.notSafe")));
 
 					return true;
 				}

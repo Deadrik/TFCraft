@@ -1,5 +1,7 @@
 package com.bioxx.tfc.Commands;
 
+import java.util.regex.Pattern;
+
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -7,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 
@@ -34,7 +37,7 @@ public class StripChunkCommand extends CommandBase
 
 		if(params.length == 0)
 		{
-			player.addChatMessage(new ChatComponentText("Stripping Chunk"));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.strippingchunk")));
 			Chunk chunk = world.getChunkFromBlockCoords((int)player.posX, (int)player.posZ);
 			for(int x = 0; x < 16; x++)
 			{
@@ -51,7 +54,8 @@ public class StripChunkCommand extends CommandBase
 		}
 		else if(params.length == 1)
 		{
-			player.addChatMessage(new ChatComponentText("Stripping Chunks Within a Radius of " + Integer.parseInt(params[0])));
+			String message = StatCollector.translateToLocal("commands.strippingchunk.size").replaceAll(Pattern.quote("$RADIUS"), params[0]);
+			player.addChatMessage(new ChatComponentText(message));
 			int radius = Integer.parseInt(params[0]);
 			for(int i = -radius; i <= radius; i++)
 			{

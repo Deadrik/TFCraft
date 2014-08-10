@@ -4,6 +4,7 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -25,12 +26,12 @@ public class DebugModeCommand extends CommandBase
 			if (TFCOptions.enableDebugMode)
 			{
 				TFCOptions.enableDebugMode = false;
-				player.addChatMessage(new ChatComponentText("Debug Mode Disabled"));
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.debugmode.disabled")));
 			}
 			else
 			{
 				TFCOptions.enableDebugMode = true;
-				player.addChatMessage(new ChatComponentText("Debug Mode Enabled"));
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.debugmode.enabled")));
 			}
 		}
 	}

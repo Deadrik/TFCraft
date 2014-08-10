@@ -25,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -34,6 +35,7 @@ import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
@@ -584,10 +586,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
+			par1EntityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(getGender() == GenderEnum.FEMALE ? "entity.animal.female" : "entity.animal.male")));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 			{
-				par1EntityPlayer.addChatMessage(new ChatComponentText("Pregnant"));
+				par1EntityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.animal.pregnant")));
 			}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
