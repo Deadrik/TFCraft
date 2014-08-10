@@ -180,6 +180,9 @@ public class TerraFirmaCraft
 		//Register our player tracker
 		FMLCommonHandler.instance().bus().register(new PlayerTracker());
 
+		// Register the Entity Living Update Handler (for player deaths)
+		MinecraftForge.EVENT_BUS.register(new EntityPlayerHandler());
+
 		//Register the tool classes
 		proxy.registerToolClasses();
 
@@ -211,11 +214,6 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
 
 		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
-
-		// Register the Entity Living Update Handler
-		EntityPlayerHandler playerHandler = new EntityPlayerHandler();
-		MinecraftForge.EVENT_BUS.register(playerHandler);
-		FMLCommonHandler.instance().bus().register(playerHandler);
 
 		// Register all the render stuff for the client
 		proxy.registerRenderInformation();
