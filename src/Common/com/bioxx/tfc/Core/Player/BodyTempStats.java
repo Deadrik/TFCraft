@@ -209,7 +209,9 @@ public class BodyTempStats
 			case 6: status = "status.player.extremelyhot"; break;
 			case 7: killPlayer(player);break;
 		}
-		player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(status)));
+		if (status != "") {
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(status)));
+		}
 		*/
 	}
 
