@@ -624,12 +624,12 @@ public class TFCBlocks
 
 		LogNatural = new com.bioxx.tfc.Blocks.Flora.BlockLogNatural().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log");
 		LogNatural2 = new com.bioxx.tfc.Blocks.Flora.BlockLogNatural2().setHardness(50.0F).setStepSound(Block.soundTypeWood).setBlockName("log2");
-		WoodVert = new BlockLogVert().setBlockName("WoodVert").setHardness(40).setResistance(15F);
-		WoodVert2 = new BlockLogVert2().setBlockName("WoodVert2").setHardness(40).setResistance(15F);
-		WoodHoriz = new BlockLogHoriz(0).setBlockName("WoodHoriz").setHardness(40).setResistance(15F);
-		WoodHoriz2 = new BlockLogHoriz(8).setBlockName("WoodHoriz2").setHardness(40).setResistance(15F);
-		WoodHoriz3 = new BlockLogHoriz2(0).setBlockName("WoodHoriz3").setHardness(40).setResistance(15F);
-		WoodHoriz4 = new BlockLogHoriz2(8).setBlockName("WoodHoriz4").setHardness(40).setResistance(15F);
+		WoodVert = new BlockLogVert().setBlockName("WoodVert").setHardness(40).setResistance(15F).setStepSound(Block.soundTypeWood);
+		WoodVert2 = new BlockLogVert2().setBlockName("WoodVert2").setHardness(40).setResistance(15F).setStepSound(Block.soundTypeWood);
+		WoodHoriz = new BlockLogHoriz(0).setBlockName("WoodHoriz").setHardness(40).setResistance(15F).setStepSound(Block.soundTypeWood);
+		WoodHoriz2 = new BlockLogHoriz(8).setBlockName("WoodHoriz2").setHardness(40).setResistance(15F).setStepSound(Block.soundTypeWood);
+		WoodHoriz3 = new BlockLogHoriz2(0).setBlockName("WoodHoriz3").setHardness(40).setResistance(15F).setStepSound(Block.soundTypeWood);
+		WoodHoriz4 = new BlockLogHoriz2(8).setBlockName("WoodHoriz4").setHardness(40).setResistance(15F).setStepSound(Block.soundTypeWood);
 
 		ToolRack = new BlockToolRack().setHardness(3F).setBlockName("Toolrack");
 		ToolRack2 = new BlockToolRack2().setHardness(3F).setBlockName("Toolrack");
