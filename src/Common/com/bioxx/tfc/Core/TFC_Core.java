@@ -598,6 +598,11 @@ public class TFC_Core
 		}
 	}
 
+	public static int getSoilMeta( int inMeta)
+	{
+		return inMeta & 15;
+	}
+
 	public static int getItemMetaFromStone(Block inBlock, int inMeta)
 	{
 		if(inBlock == TFCBlocks.StoneIgIn)
@@ -1251,16 +1256,16 @@ public class TFC_Core
 		if(Blocks.fire.getFlammability(block) > 0 && block != TFCBlocks.LogPile) return false;
 
 		return block == TFCBlocks.Firepit
-			|| block == TFCBlocks.LogPile
-			|| isRawStone(block)
-			|| isCobbleStone(block)
-			|| isBrickStone(block)
-			|| isSmoothStone(block)
-			|| isDirt(block)
-			|| isSand(block)
-			|| isGrassType1(block)
-			|| isGrassType2(block)
-			|| isGravel(block)
-			|| block == Blocks.glass;
+				|| block == TFCBlocks.LogPile
+				|| isRawStone(block)
+				|| isCobbleStone(block)
+				|| isBrickStone(block)
+				|| isSmoothStone(block)
+				|| isDirt(block)
+				|| isSand(block)
+				|| isGrassType1(block)
+				|| isGrassType2(block)
+				|| isGravel(block)
+				|| block == Blocks.glass;
 	}
 }

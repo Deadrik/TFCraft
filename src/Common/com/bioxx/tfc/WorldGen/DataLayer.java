@@ -88,7 +88,7 @@ public class DataLayer
 	public Block block = Blocks.air;
 	public int data1;
 	public int data2;//used as metadata in rocks
-	public float floatdata1;//used as metadata in rocks
+	public float floatdata1;
 	public String name = "";
 
 	public DataLayer(int index, int i)

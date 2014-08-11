@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 
 import com.bioxx.tfc.TFCBlocks;
@@ -14,6 +15,7 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Util.BlockMeta;
 import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.Enums.TFCDirection;
 import com.bioxx.tfc.api.Util.ByteCoord;
 import com.bioxx.tfc.api.Util.CollapseData;
@@ -72,8 +74,10 @@ public class WorldGenFissure implements IWorldGenerator
 		int startX = chunkX + random.nextInt(16) + 8;
 		int startZ = chunkZ + random.nextInt(16) + 8;
 		int startY = world.getTopSolidOrLiquidBlock(startX, startZ)-1;
+		BiomeGenBase biome = world.getBiomeGenForCoords(startX, startZ);
 
-		if(rand.nextInt(rarity) != 0)
+		if(rand.nextInt(rarity) != 0 || biome == TFCBiome.beach || biome == TFCBiome.ocean || 
+				biome == TFCBiome.gravelbeach || biome == TFCBiome.lake || biome == TFCBiome.river)
 			return;
 
 		if(underground)
