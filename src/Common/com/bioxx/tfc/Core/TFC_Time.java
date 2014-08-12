@@ -70,7 +70,7 @@ public class TFC_Time
 
 	public static void UpdateTime(World world)
 	{
-		time = world.getWorldInfo().getWorldTotalTime();
+		time = world.getWorldInfo().getWorldTime();
 
 		if(time < startTime)
 		{
