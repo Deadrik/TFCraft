@@ -42,7 +42,7 @@ import com.bioxx.tfc.Handlers.ChunkEventHandler;
 import com.bioxx.tfc.Handlers.CraftingHandler;
 import com.bioxx.tfc.Handlers.EnteringChunkHandler;
 import com.bioxx.tfc.Handlers.EntityDamageHandler;
-import com.bioxx.tfc.Handlers.EntityLivingHandler;
+import com.bioxx.tfc.Handlers.EntityPlayerHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Handlers.PlayerSkillEventHandler;
@@ -180,6 +180,9 @@ public class TerraFirmaCraft
 		//Register our player tracker
 		FMLCommonHandler.instance().bus().register(new PlayerTracker());
 
+		// Register the Entity Living Update Handler (for player deaths)
+		MinecraftForge.EVENT_BUS.register(new EntityPlayerHandler());
+
 		//Register the tool classes
 		proxy.registerToolClasses();
 
@@ -211,9 +214,6 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
 
 		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
-
-		// Register the Entity Living Update Handler
-		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 
 		// Register all the render stuff for the client
 		proxy.registerRenderInformation();
