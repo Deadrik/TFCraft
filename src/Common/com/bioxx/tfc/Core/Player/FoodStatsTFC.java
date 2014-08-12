@@ -13,6 +13,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Food.ItemMeal;
+import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
@@ -375,7 +376,7 @@ public class FoodStatsTFC
 			for(int i = 0; i < 4; i++)
 			{
 				if(fg[i] != -1)
-					addNutrition(EnumFoodGroup.values()[fg[i]], eatAmount*weights[i]*tasteFactor);
+					addNutrition(FoodRegistry.getInstance().getFoodGroup(fg[i]), eatAmount*weights[i]*tasteFactor);
 			}
 
 			//fill the stomach
@@ -414,7 +415,7 @@ public class FoodStatsTFC
 	private int getfg(ItemStack is, int i)
 	{
 		if(is.getTagCompound().hasKey("FG" + i))
-			return Integer.parseInt(is.getTagCompound().getString("FG" + i).split("\\:")[1]);
+			return is.getTagCompound().getInteger("FG" + i);
 		return -1;
 	}
 

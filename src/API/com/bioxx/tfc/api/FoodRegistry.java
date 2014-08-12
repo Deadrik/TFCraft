@@ -98,6 +98,6 @@ public class FoodRegistry
 			return EnumFoodGroup.Grain;
 		if(dairyMap.containsKey(id))
 			return EnumFoodGroup.Dairy;
-		return null;
+		return EnumFoodGroup.None;
 	}
 }
