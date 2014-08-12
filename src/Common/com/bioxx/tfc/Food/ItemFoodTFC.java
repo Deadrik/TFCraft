@@ -20,6 +20,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
@@ -58,7 +59,6 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		super();
 		this.setCreativeTab(TFCTabs.TFCFoods);
 		this.setFolder("food/");
-		foodID = foodid;
 		foodgroup = fg;
 		TFCItems.FoodList.add(this);
 		this.setMaxDamage(100);
@@ -68,6 +68,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		tasteSalty = sa;
 		tasteBitter = bi;
 		tasteUmami = um;
+		foodID = FoodRegistry.getInstance().registerFood(fg, this);
 	}
 
 	public ItemFoodTFC(int foodid, EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible)

@@ -44,6 +44,7 @@ import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.ItemTFCArmor;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
+import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.TFCOptions;
@@ -851,6 +852,12 @@ public class TFC_Core
 				return false;
 			return true;
 		}
+		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
+		{
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
+			if(te.TopExists())
+				return true;
+		}
 		return false;
 	}
 
@@ -864,6 +871,12 @@ public class TFC_Core
 			if(BlockSlab.getBottomChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
+		}
+		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
+		{
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
+			if(te.BottomExists())
+				return true;
 		}
 		return false;
 	}
@@ -880,6 +893,12 @@ public class TFC_Core
 				return false;
 			return true;
 		}
+		else if(bid == TFCBlocks.MetalSheet)
+		{
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
+			if(te.NorthExists())
+				return true;
+		}
 		return false;
 	}
 
@@ -894,6 +913,12 @@ public class TFC_Core
 				return false;
 			return true;
 		}
+		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
+		{
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
+			if(te.SouthExists())
+				return true;
+		}
 		return false;
 	}
 
@@ -905,8 +930,13 @@ public class TFC_Core
 		{
 			TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 			if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
-				return false;
-			return true;
+				return true;
+		}
+		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
+		{
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
+			if(te.EastExists())
+				return true;
 		}
 		return false;
 	}
@@ -921,6 +951,12 @@ public class TFC_Core
 			if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
 				return false;
 			return true;
+		}
+		else if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)
+		{
+			TEMetalSheet te = (TEMetalSheet) world.getTileEntity(x, y, z);
+			if(te.WestExists())
+				return true;
 		}
 		return false;
 	}

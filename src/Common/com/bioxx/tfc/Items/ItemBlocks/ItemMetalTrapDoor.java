@@ -58,7 +58,7 @@ public class ItemMetalTrapDoor extends ItemTerraBlock
 				out += hinge<<4;
 				break;
 			}
-			case 2:
+			case 2://North
 			{
 				z--;
 				if(hitX < 0.2)
@@ -74,7 +74,7 @@ public class ItemMetalTrapDoor extends ItemTerraBlock
 				out += hinge<<4;
 				break;
 			}
-			case 3:
+			case 3://South
 			{
 				z++;
 				if(hitX < 0.2)
@@ -90,7 +90,7 @@ public class ItemMetalTrapDoor extends ItemTerraBlock
 				out += hinge<<4;
 				break;
 			}
-			case 4:
+			case 4://East
 				x--;
 				if(hitY < 0.2)
 					hinge = 0;
@@ -104,7 +104,7 @@ public class ItemMetalTrapDoor extends ItemTerraBlock
 
 				out += hinge<<4;
 				break;
-			case 5:
+			case 5://West
 			{
 				x++;
 				if(hitY < 0.2)

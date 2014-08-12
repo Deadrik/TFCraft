@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
@@ -23,11 +24,64 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 	public void updateEntity()
 	{
 		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
+		boolean oven = isOven();
 		for (int i = 0; i < 6; i++)
 		{
 			careForInventorySlot(storage[i]);
 			cookItem(i);
 		}
+	}
+
+	public boolean isOven()
+	{
+		int wallCount = 0;
+		if(TFC_Core.isWestFaceSolid(worldObj, xCoord-1, yCoord, zCoord))//East Block
+			wallCount++;
+		if(TFC_Core.isEastFaceSolid(worldObj, xCoord+1, yCoord, zCoord))//West Block
+			wallCount++;
+		if(TFC_Core.isNorthFaceSolid(worldObj, xCoord, yCoord, zCoord+1))//South Block
+			wallCount++;
+		if(TFC_Core.isSouthFaceSolid(worldObj, xCoord, yCoord, zCoord-1))//North Block
+			wallCount++;
+
+		if(TFC_Core.isBottomFaceSolid(worldObj, xCoord, yCoord+1, zCoord))//Top Block
+			wallCount++;
+
+		if(worldObj.getBlock(xCoord-1, yCoord, zCoord) == TFCBlocks.MetalTrapDoor)
+		{
+			TEMetalTrapDoor te = (TEMetalTrapDoor) worldObj.getTileEntity(xCoord-1, yCoord, zCoord);
+			if(te.getSide() == 4)
+				wallCount++;
+		}
+		else if(worldObj.getBlock(xCoord+1, yCoord, zCoord) == TFCBlocks.MetalTrapDoor)
+		{
+			TEMetalTrapDoor te = (TEMetalTrapDoor) worldObj.getTileEntity(xCoord+1, yCoord, zCoord);
+			if(te.getSide() == 5)
+				wallCount++;
+		}
+		else if(worldObj.getBlock(xCoord, yCoord, zCoord-1) == TFCBlocks.MetalTrapDoor)
+		{
+			TEMetalTrapDoor te = (TEMetalTrapDoor) worldObj.getTileEntity(xCoord, yCoord, zCoord-1);
+			if(te.getSide() == 2)
+				wallCount++;
+		}
+		else if(worldObj.getBlock(xCoord, yCoord, zCoord+1) == TFCBlocks.MetalTrapDoor)
+		{
+			TEMetalTrapDoor te = (TEMetalTrapDoor) worldObj.getTileEntity(xCoord, yCoord, zCoord+1);
+			if(te.getSide() == 3)
+				wallCount++;
+		}
+
+		if(wallCount < 5)
+			return false;
+
+		return true;
+	}
+
+	public boolean isDoor(int x, int y, int z)
+	{
+
+		return false;
 	}
 
 	public void careForInventorySlot(ItemStack is)

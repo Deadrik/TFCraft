@@ -74,22 +74,22 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 					if(getStackInSlot(0) != null)
 					{
 						count++;
-						nbt.setString("FG0", getStackInSlot(0).getItem().getUnlocalizedName(getStackInSlot(0))+":"+((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodGroup().ordinal());
+						nbt.setInteger("FG0", ((IFood)(getStackInSlot(0).getItem())).getFoodID());
 					}
 					if(getStackInSlot(1) != null)
 					{
 						count++;
-						nbt.setString("FG1", getStackInSlot(1).getItem().getUnlocalizedName(getStackInSlot(1))+":"+((ItemFoodTFC)getStackInSlot(1).getItem()).getFoodGroup().ordinal());
+						nbt.setInteger("FG1", ((IFood)(getStackInSlot(1).getItem())).getFoodID());
 					}
 					if(getStackInSlot(2) != null)
 					{
 						count++;
-						nbt.setString("FG2", getStackInSlot(2).getItem().getUnlocalizedName(getStackInSlot(2))+":"+((ItemFoodTFC)getStackInSlot(2).getItem()).getFoodGroup().ordinal());
+						nbt.setInteger("FG2", ((IFood)(getStackInSlot(2).getItem())).getFoodID());
 					}
 					if(getStackInSlot(3) != null)
 					{
 						count++;
-						nbt.setString("FG3", getStackInSlot(3).getItem().getUnlocalizedName(getStackInSlot(3))+":"+((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodGroup().ordinal());
+						nbt.setInteger("FG3", ((IFood)(getStackInSlot(3).getItem())).getFoodID());
 					}
 
 					float mult = 0.15f + 0.12f * count;

@@ -19,6 +19,7 @@ import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
@@ -65,13 +66,13 @@ public class ItemMeal extends ItemTerra implements IFood
 			NBTTagCompound nbt = is.getTagCompound();
 
 			if(nbt.hasKey("FG0"))
-				arraylist.add(localize(StatCollector.translateToLocal(nbt.getString("FG0")).split("\\:")));
+				arraylist.add(localize(nbt.getInteger("FG0")));
 			if(nbt.hasKey("FG1"))
-				arraylist.add(localize(StatCollector.translateToLocal(nbt.getString("FG1")).split("\\:")));
+				arraylist.add(localize(nbt.getInteger("FG1")));
 			if(nbt.hasKey("FG2"))
-				arraylist.add(localize(StatCollector.translateToLocal(nbt.getString("FG2")).split("\\:")));
+				arraylist.add(localize(nbt.getInteger("FG2")));
 			if(nbt.hasKey("FG3"))
-				arraylist.add(localize(StatCollector.translateToLocal(nbt.getString("FG3")).split("\\:")));
+				arraylist.add(localize(nbt.getInteger("FG3")));
 
 			if(nbt.hasKey("satisfaction"))
 			{
@@ -251,10 +252,10 @@ public class ItemMeal extends ItemTerra implements IFood
 		return 100;
 	}
 
-	private String localize(String[] in)
+	private String localize(int id)
 	{
-		int ordinal = Integer.parseInt(in[1]);
-		return ItemFoodTFC.getFoodGroupColor(EnumFoodGroup.values()[ordinal]) + StatCollector.translateToLocal(in[0] + ".name");
+		return ItemFoodTFC.getFoodGroupColor(FoodRegistry.getInstance().getFoodGroup(id)) + 
+				StatCollector.translateToLocal(FoodRegistry.getInstance().getFood(id).getUnlocalizedName() + ".name");
 	}
 
 	@Override
