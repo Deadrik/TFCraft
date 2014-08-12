@@ -293,7 +293,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	public boolean isBreedingItemTFC(ItemStack is)
 	{
 		return !pregnant && is != null &&
-				(is.getItem() == TFCItems.porkchopRaw || is.getItem() == TFCItems.beefRaw || is.getItem() == TFCItems.muttonRaw);
+				(is.getItem() == TFCItems.porkchopRaw || is.getItem() == TFCItems.beefRaw || is.getItem() == TFCItems.muttonRaw || is.getItem() == TFCItems.horseMeatRaw);
 	}
 
 	@Override
