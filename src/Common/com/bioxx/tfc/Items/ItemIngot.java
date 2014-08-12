@@ -17,7 +17,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
-import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
+import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -97,11 +97,11 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 
 		boolean fullStack = true;
 
-		TileEntityIngotPile te = null;
+		TEIngotPile te = null;
 
-		if (world.getTileEntity(x, y, z) instanceof TileEntityIngotPile && world.getBlock(x,y,z) == TFCBlocks.IngotPile)
+		if (world.getTileEntity(x, y, z) instanceof TEIngotPile && world.getBlock(x,y,z) == TFCBlocks.IngotPile)
 		{
-			te = (TileEntityIngotPile)world.getTileEntity(x, y, z);
+			te = (TEIngotPile)world.getTileEntity(x, y, z);
 			if (te.contentsMatch(0,itemstack) && te.getStackInSlot(0).stackSize < te.getInventoryStackLimit())
 			{
 				fullStack = false;
@@ -118,7 +118,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				if(world.isRemote) {
 					world.markBlockForUpdate(x, y-1, z);
 				}
-				te = (TileEntityIngotPile)world.getTileEntity(x, y-1, z);
+				te = (TEIngotPile)world.getTileEntity(x, y-1, z);
 			}
 			else if(side == 1 && world.isAirBlock(x, y+1, z) && isValid(world, x, y+1, z))
 			{
@@ -126,7 +126,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				if(world.isRemote) {
 					world.markBlockForUpdate(x, y+1, z);
 				}
-				te = (TileEntityIngotPile)world.getTileEntity(x, y+1, z);
+				te = (TEIngotPile)world.getTileEntity(x, y+1, z);
 			}
 			else if(side == 2 && world.isAirBlock(x, y, z-1) && isValid(world, x, y, z-1))
 			{
@@ -134,7 +134,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				if(world.isRemote) {
 					world.markBlockForUpdate(x, y, z-1);
 				}
-				te = (TileEntityIngotPile)world.getTileEntity(x, y, z-1);
+				te = (TEIngotPile)world.getTileEntity(x, y, z-1);
 			}
 			else if(side == 3 && world.isAirBlock(x, y, z+1) && isValid(world, x, y, z+1))
 			{
@@ -142,7 +142,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				if(world.isRemote) {
 					world.markBlockForUpdate(x, y, z+1);
 				}
-				te = (TileEntityIngotPile)world.getTileEntity(x, y, z+1);
+				te = (TEIngotPile)world.getTileEntity(x, y, z+1);
 			}
 			else if(side == 4 && world.isAirBlock(x-1, y, z) && isValid(world, x-1, y, z))
 			{
@@ -150,7 +150,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				if(world.isRemote) {
 					world.markBlockForUpdate(x-1, y, z);
 				}
-				te = (TileEntityIngotPile)world.getTileEntity(x-1, y, z);
+				te = (TEIngotPile)world.getTileEntity(x-1, y, z);
 			}
 			else if(side == 5 && world.isAirBlock(x+1, y, z) && isValid(world, x+1, y, z))
 			{
@@ -158,7 +158,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				if(world.isRemote) {
 					world.markBlockForUpdate(x+1, y, z);
 				}
-				te = (TileEntityIngotPile)world.getTileEntity(x+1, y, z);
+				te = (TEIngotPile)world.getTileEntity(x+1, y, z);
 			}
 			else
 			{
@@ -218,7 +218,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			}
 			else if(world.getBlock(x, y, z) == TFCBlocks.IngotPile)
 			{
-				TileEntityIngotPile te = (TileEntityIngotPile)world.getTileEntity(x, y, z);
+				TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
 				//TileEntityIngotPile te2 = (TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getTileEntity(x, y, z);
 				if(te != null)
 				{
@@ -302,7 +302,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				{
 					setSide(world, itemstack, m, dir, x, y, z, 1, 0, 0);
 				}
-				if (world.getTileEntity(x,y,z) != null && world.getTileEntity(x,y,z) instanceof TileEntityIngotPile)
+				if (world.getTileEntity(x,y,z) != null && world.getTileEntity(x,y,z) instanceof TEIngotPile)
 				{
 					//((TileEntityIngotPile)world.getTileEntity(x,y,z)).setType(this.getItem() - 16028 - 256);
 				}
@@ -320,9 +320,9 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		{
 			TileEntity te = world.getTileEntity(i, j-1, k);
 
-			if (te instanceof TileEntityIngotPile)
+			if (te instanceof TEIngotPile)
 			{
-				TileEntityIngotPile ip = (TileEntityIngotPile)te;
+				TEIngotPile ip = (TEIngotPile)te;
 
 				if(ip != null)
 				{

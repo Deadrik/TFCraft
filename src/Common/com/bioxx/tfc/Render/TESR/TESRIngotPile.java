@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Render.Models.ModelIngotPile;
-import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
+import com.bioxx.tfc.TileEntities.TEIngotPile;
 
 public class TESRIngotPile extends TESRBase
 {
@@ -21,7 +21,7 @@ public class TESRIngotPile extends TESRBase
 	/**
 	 * Renders the TileEntity for the chest at a position.
 	 */
-	public void renderTileEntityIngotPileAt(TileEntityIngotPile par1TileEntityPile, double d, double d1, double d2, float f)
+	public void renderTileEntityIngotPileAt(TEIngotPile par1TileEntityPile, double d, double d1, double d2, float f)
 	{
 		int var9;
 
@@ -50,6 +50,6 @@ public class TESRIngotPile extends TESRBase
 	@Override
 	public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
 	{
-		this.renderTileEntityIngotPileAt((TileEntityIngotPile)par1TileEntity, par2, par4, par6, par8);
+		this.renderTileEntityIngotPileAt((TEIngotPile)par1TileEntity, par2, par4, par6, par8);
 	}
 }

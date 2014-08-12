@@ -13,13 +13,13 @@ import net.minecraft.nbt.NBTTagList;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 
-public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
+public class TEIngotPile extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	public String type;
 	public static Item[] INGOTS;
 
-	public TileEntityIngotPile()
+	public TEIngotPile()
 	{
 		storage = new ItemStack[1];
 		type = "Copper";
@@ -250,6 +250,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		this.type = nbt.getString("type");
 		storage[0] = ItemStack.loadItemStackFromNBT(nbt);
 		updateNeighbours();
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override

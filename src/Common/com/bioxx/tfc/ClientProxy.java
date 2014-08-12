@@ -136,7 +136,7 @@ import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
-import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
+import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
 import com.bioxx.tfc.api.Enums.EnumTree;
@@ -268,7 +268,7 @@ public class ClientProxy extends CommonProxy
 	{
 		super.registerTileEntities(false);
 		ClientRegistry.registerTileEntity(TEChest.class, "chest", new TESRChest());
-		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile", new TESRIngotPile());
+		ClientRegistry.registerTileEntity(TEIngotPile.class, "ingotPile", new TESRIngotPile());
 		ClientRegistry.registerTileEntity(TEFirepit.class, "TerraFirepit", new TESRFirepit());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 		ClientRegistry.registerTileEntity(TEPottery.class, "Pottery", new TESRPottery());

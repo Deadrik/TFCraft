@@ -20,7 +20,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.TileEntities.TileEntityIngotPile;
+import com.bioxx.tfc.TileEntities.TEIngotPile;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -56,10 +56,10 @@ public class BlockIngotPile extends BlockTerraContainer
 		}
 		else
 		{
-			if((TileEntityIngotPile)world.getTileEntity(x, y, z) != null)
+			if((TEIngotPile)world.getTileEntity(x, y, z) != null)
 			{
-				TileEntityIngotPile tileentityingotpile;
-				tileentityingotpile = (TileEntityIngotPile)world.getTileEntity(x, y, z);
+				TEIngotPile tileentityingotpile;
+				tileentityingotpile = (TEIngotPile)world.getTileEntity(x, y, z);
 
 				if (tileentityingotpile.getStackInSlot(0)==null)
 				{
@@ -92,8 +92,8 @@ public class BlockIngotPile extends BlockTerraContainer
 
 	public void combineIngotsDown(World world, int x, int y, int z)
 	{
-		TileEntityIngotPile teip = (TileEntityIngotPile)world.getTileEntity(x, y, z);
-		TileEntityIngotPile teipBottom = (TileEntityIngotPile)world.getTileEntity(x, y - 1, z);
+		TEIngotPile teip = (TEIngotPile)world.getTileEntity(x, y, z);
+		TEIngotPile teipBottom = (TEIngotPile)world.getTileEntity(x, y - 1, z);
 
 		int bottomSize = teipBottom.getStackInSlot(0).stackSize;
 		int topSize = teip.getStackInSlot(0).stackSize;
@@ -126,8 +126,8 @@ public class BlockIngotPile extends BlockTerraContainer
 
 	public void combineIngotsUp(World world, int x, int y, int z)
 	{
-		TileEntityIngotPile teip = (TileEntityIngotPile)world.getTileEntity(x, y + 1, z);
-		TileEntityIngotPile teipBottom = (TileEntityIngotPile)world.getTileEntity(x, y, z);
+		TEIngotPile teip = (TEIngotPile)world.getTileEntity(x, y + 1, z);
+		TEIngotPile teipBottom = (TEIngotPile)world.getTileEntity(x, y, z);
 
 		int bottomSize = teipBottom.getStackInSlot(0).stackSize;
 		int topSize = teip.getStackInSlot(0).stackSize;
@@ -163,7 +163,7 @@ public class BlockIngotPile extends BlockTerraContainer
 	{
 		int meta = world.getBlockMetadata(x, y, z);
 		int direction = getDirectionFromMetadata(meta);
-		TileEntityIngotPile te = (TileEntityIngotPile)world.getTileEntity(x, y, z);
+		TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
 
 		if (te != null && te.getStackInSlot(0) != null)
 			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + ((te.getStackInSlot(0).stackSize + 7) / 8) * 0.125, (double)z + 1);
@@ -177,7 +177,7 @@ public class BlockIngotPile extends BlockTerraContainer
 	{
 		int meta = world.getBlockMetadata(x, y, z);
 		int direction = getDirectionFromMetadata(meta);
-		TileEntityIngotPile te = (TileEntityIngotPile)world.getTileEntity(x, y, z);
+		TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
 
 		if (te.getStackInSlot(0)!=null)
 			return AxisAlignedBB.getBoundingBox(x, (double)y + 0, (double)z + 0, (double)x + 1, y + ((te.getStackInSlot(0).stackSize + 7) / 8) * 0.125, (double)z + 1);
@@ -190,7 +190,7 @@ public class BlockIngotPile extends BlockTerraContainer
 	{
 		int meta = bAccess.getBlockMetadata(x, y, z);
 		int direction = getDirectionFromMetadata(meta);
-		TileEntityIngotPile te = (TileEntityIngotPile)bAccess.getTileEntity(x, y, z);
+		TEIngotPile te = (TEIngotPile)bAccess.getTileEntity(x, y, z);
 
 		if (te.getStackInSlot(0)!=null)
 			this.setBlockBounds(0f, 0f, 0f, 1f, (float) (((te.getStackInSlot(0).stackSize + 7)/8)*0.125), 1f);
@@ -240,9 +240,9 @@ public class BlockIngotPile extends BlockTerraContainer
 		return 22;//TFCBlocks.IngotPileRenderId;//ingotpileId;
 	}
 
-	public int getStack(World world,TileEntityIngotPile tt)
+	public int getStack(World world,TEIngotPile tt)
 	{
-		TileEntityIngotPile Te = ((TileEntityIngotPile)world.getTileEntity(tt.xCoord, tt.yCoord, tt.zCoord));
+		TEIngotPile Te = ((TEIngotPile)world.getTileEntity(tt.xCoord, tt.yCoord, tt.zCoord));
 
 		return Te != null ? Te.getStackInSlot(0) != null ? Te.getStackInSlot(0).stackSize : 0 : 0;
 	}
@@ -282,7 +282,7 @@ public class BlockIngotPile extends BlockTerraContainer
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block b, int meta)
 	{
-		TileEntityIngotPile te = (TileEntityIngotPile)world.getTileEntity(x, y, z);
+		TEIngotPile te = (TEIngotPile)world.getTileEntity(x, y, z);
 		if (te != null)
 		{
 			for (int var6 = 0; var6 < te.getSizeInventory(); ++var6)
@@ -344,7 +344,7 @@ public class BlockIngotPile extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityIngotPile();
+		return new TEIngotPile();
 	}
 
 	@Override
@@ -354,17 +354,17 @@ public class BlockIngotPile extends BlockTerraContainer
 		{
 			if(!world.isSideSolid(x, y - 1, z, ForgeDirection.UP))
 			{
-				if(world.getBlock(x, y - 1, z) == this && ((TileEntityIngotPile)world.getTileEntity(x, y, z)).storage[0].getItem() == ((TileEntityIngotPile)world.getTileEntity(x, y - 1, z)).storage[0].getItem())
+				if(world.getBlock(x, y - 1, z) == this && ((TEIngotPile)world.getTileEntity(x, y, z)).storage[0].getItem() == ((TEIngotPile)world.getTileEntity(x, y - 1, z)).storage[0].getItem())
 				{
 					combineIngotsDown(world, x, y, z);
 				}
-				else if(world.getBlock(x, y + 1, z) == this && ((TileEntityIngotPile)world.getTileEntity(x, y, z)).storage[0].getItem() == ((TileEntityIngotPile)world.getTileEntity(x, y + 1, z)).storage[0].getItem())
+				else if(world.getBlock(x, y + 1, z) == this && ((TEIngotPile)world.getTileEntity(x, y, z)).storage[0].getItem() == ((TEIngotPile)world.getTileEntity(x, y + 1, z)).storage[0].getItem())
 				{
 					combineIngotsUp(world, x, y, z);
 				}
 				else
 				{
-					((TileEntityIngotPile)world.getTileEntity(x, y, z)).ejectContents();
+					((TEIngotPile)world.getTileEntity(x, y, z)).ejectContents();
 					world.setBlockToAir(x, y, z);
 					return;
 				}
