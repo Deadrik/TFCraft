@@ -18,7 +18,7 @@ public class ItemEgg extends ItemFoodTFC implements IFood
 {
 	public ItemEgg()
 	{
-		super(-1, EnumFoodGroup.Protein, 0, 0, 0, 0, 0, false, false);
+		super(EnumFoodGroup.Protein, 0, 0, 0, 0, 0, false, false);
 	}
 
 	@Override

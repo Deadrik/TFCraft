@@ -54,7 +54,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	private int tasteBitter = 0;
 	private int tasteUmami = 0;
 
-	public ItemFoodTFC(int foodid, EnumFoodGroup fg, int sw, int so, int sa, int bi, int um)
+	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um)
 	{
 		super();
 		this.setCreativeTab(TFCTabs.TFCFoods);
@@ -71,15 +71,15 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		foodID = FoodRegistry.getInstance().registerFood(fg, this);
 	}
 
-	public ItemFoodTFC(int foodid, EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible)
+	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible)
 	{
-		this(foodid, fg, sw, so, sa, bi, um);
+		this(fg, sw, so, sa, bi, um);
 		isEdible = edible;
 	}
 
-	public ItemFoodTFC(int foodid, EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible, boolean usable)
+	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible, boolean usable)
 	{
-		this(foodid, fg, sw, so, sa, bi, um, edible);
+		this(fg, sw, so, sa, bi, um, edible);
 		canBeUsedRaw = usable;
 	}
 
