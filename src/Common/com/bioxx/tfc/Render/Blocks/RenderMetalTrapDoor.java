@@ -19,8 +19,8 @@ public class RenderMetalTrapDoor implements ISimpleBlockRenderingHandler
 	{
 		IBlockAccess access = renderer.blockAccess;
 		TEMetalTrapDoor te = (TEMetalTrapDoor)access.getTileEntity(i, j, k);
-		int side = te.sides & 7;
-		int hinge = te.sides >> 4;
+		int side = te.data & 7;
+		int hinge = te.data >> 4;
 		float f = 0.0625f;
 		float f3 = f/2;
 		float f2 = 0.125f;

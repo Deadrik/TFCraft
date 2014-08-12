@@ -127,7 +127,7 @@ public class ItemMetalTrapDoor extends ItemTerraBlock
 				TEMetalTrapDoor te = (TEMetalTrapDoor) world.getTileEntity(x, y, z);
 				te.sheetStack = itemstack;
 				te.sheetStack.stackSize = 1;
-				te.sides = (byte) out;
+				te.data = (byte) out;
 				itemstack.stackSize--;
 				return true;
 			}
