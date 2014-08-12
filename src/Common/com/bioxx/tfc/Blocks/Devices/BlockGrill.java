@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Blocks.Devices;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -13,6 +14,7 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.Items.ItemBlocks.ItemMetalTrapDoor;
 import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -23,7 +25,7 @@ public class BlockGrill extends BlockTerraContainer
 {
 	public BlockGrill()
 	{
-		super();
+		super(Material.iron);
 		this.setBlockBounds(0, 0, 0, 1, 0.05f, 1);
 		this.setCreativeTab(TFCTabs.TFCDevices);
 	}
@@ -32,6 +34,8 @@ public class BlockGrill extends BlockTerraContainer
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		super.onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
+		if(entityplayer.inventory.getCurrentItem() != null && entityplayer.inventory.getCurrentItem().getItem() instanceof ItemMetalTrapDoor)
+			return false;
 		TEGrill teb = (TEGrill)world.getTileEntity(x, y, z);
 		entityplayer.openGui(TerraFirmaCraft.instance, 43, world, x, y, z);
 		return true;
@@ -45,6 +49,12 @@ public class BlockGrill extends BlockTerraContainer
 
 	@Override
 	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isReplaceable(IBlockAccess world, int x, int y, int z)
 	{
 		return false;
 	}

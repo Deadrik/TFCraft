@@ -122,7 +122,7 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z)
 	{
-		if(access.getTileEntity(x, y, z) != null)
+		if(access.getTileEntity(x, y, z) != null && access.getTileEntity(x, y, z) instanceof TEMetalTrapDoor)
 			this.setBlockBoundsForBlockRender(access.getBlockMetadata(x, y, z), ((TEMetalTrapDoor)access.getTileEntity(x, y, z)).data);
 	}
 
