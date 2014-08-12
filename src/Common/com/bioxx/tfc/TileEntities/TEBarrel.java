@@ -319,6 +319,17 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				return out;
 			}
 		}
+		else if (fluid != null && fluid.amount >= FluidContainerRegistry.BUCKET_VOLUME / 2
+				&& fluid.getFluid() == TFCFluid.FRESHWATER && is.getItem() == TFCItems.PotteryJug
+				&& is.getItemDamage() == 1) {
+
+			fluid.amount -= FluidContainerRegistry.BUCKET_VOLUME / 2;
+			if (fluid.amount == 0) {
+				fluid = null;
+			}
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			return new ItemStack(TFCItems.PotteryJug, 1, 2);
+		}
 		return is;
 	}
 
@@ -368,9 +379,9 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			}
 			else if(mode == MODE_OUT)
 			{
-				if(FluidContainerRegistry.isEmptyContainer(getInputStack()))
-				{
-					this.setInventorySlotContents(0, this.removeLiquid(getInputStack()));
+				ItemStack inputStack = getInputStack();
+				if (inputStack != null && (FluidContainerRegistry.isEmptyContainer(inputStack) || (inputStack.getItem() == TFCItems.PotteryJug && inputStack.getItemDamage() == 1))) {
+					this.setInventorySlotContents(0, this.removeLiquid(inputStack));
 				}
 			}
 		}
