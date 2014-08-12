@@ -1,10 +1,13 @@
 package com.bioxx.tfc.Commands;
 
+import java.util.regex.Pattern;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
@@ -32,14 +35,15 @@ public class RemoveChunkCommand extends CommandBase
 
 		if(params.length == 0)
 		{
-			player.addChatMessage(new ChatComponentText("Removing Chunk"));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.removingchunk")));
 			Chunk chunk = world.getChunkFromBlockCoords((int)player.posX, (int)player.posZ);
 			chunk.setStorageArrays(new ExtendedBlockStorage[16]);
 			chunk.setChunkModified();
 		}
 		else if(params.length == 1)
 		{
-			player.addChatMessage(new ChatComponentText("Removing Chunks Within a Radius of " + Integer.parseInt(params[0])));
+			String message = StatCollector.translateToLocal("commands.removingchunk.size").replaceAll(Pattern.quote("$RADIUS"), params[0]);
+			player.addChatMessage(new ChatComponentText(message));
 			int radius = Integer.parseInt(params[0]);
 			for(int i = -radius; i <= radius; i++)
 			{

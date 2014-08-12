@@ -2257,12 +2257,12 @@ gui.GoldPan.UseEmpty=Must use on sand in or near a river. Or gravel from under a
 gui.GoldPan.UseFull=Must use under flowing water.
 gui.goldpan.overused=This area seems to be overworked. You probably wouldn't find much.
 
-gui.ProPick.Found=Found
-gui.ProPick.FoundTraces=Found traces of
-gui.ProPick.FoundSmall=Found a small sample of
-gui.ProPick.FoundMedium=Found a medium sample of
-gui.ProPick.FoundLarge=Found a large sample of
-gui.ProPick.FoundVeryLarge=Found a very large sample of
+gui.ProPick.Found=Found $ORE.
+gui.ProPick.FoundTraces=Found traces of $ORE.
+gui.ProPick.FoundSmall=Found a small sample of $ORE.
+gui.ProPick.FoundMedium=Found a medium sample of $ORE.
+gui.ProPick.FoundLarge=Found a large sample of $ORE.
+gui.ProPick.FoundVeryLarge=Found a very large sample of $ORE.
 gui.ProPick.FoundNothing=Found nothing of interest.
 
 #== Creative Tabs ==
@@ -2364,3 +2364,37 @@ gui.skillpage=Skills
 tile.MetalTrapDoor.name=Trap Door
 item.Mud Brick.name=Mud Brick
 item.Wet Mud Brick.name=Wet Mud Brick
+
+entity.animal.male=Male
+entity.animal.female=Female
+entity.animal.pregnant=Pregnant
+
+status.player.comfortable=You feel comfortable.
+status.player.cool=You feel cool.
+status.player.chilled=You feel chilled.
+status.player.cold=You feel cold.
+status.player.numb=You feel numb.
+status.player.freezing=You feel freezing!
+status.player.warm=You feel warm.
+status.player.verywarm=You feel very warm.
+status.player.hot=You feel hot.
+status.player.veryhot=You feel very hot.
+status.player.extremelyhot=You feel extremely hot!
+
+commands.time.invalid=Cannot set time to before current time ($CURRTIME).
+commands.debugmode.enabled=Debug Mode Enabled.
+commands.debugmode.disabled=Debug Mode Disabled.
+commands.genwater=Generating Water
+commands.genhotspring=Generating Hot Springs
+commands.genfissure=Generating Fissure
+commands.gensmalltree=Generating Small $TREETYPE Tree
+commands.genlargetree=Generating Big $TREETYPE Tree
+commands.genfailed=Generation Failed
+commands.invalidtree=Invalid Tree
+commands.removingarea=Removing Area
+commands.removingarea.size=Removing 16 blocks up and +/- x, z.
+commands.removingchunk=Removing Chunk
+commands.removingchunk.size=Removing Chunks Within a Radius of $RADIUS.
+commands.strippingchunk=Stripping Chunk
+commands.strippingchunk.size=Stripping Chunks Within a Radius of $RADIUS.
+commands.chunkdata.error=The ChunkData returned null, please report this to the developer.

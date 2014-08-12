@@ -7,6 +7,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -187,25 +189,30 @@ public class BodyTempStats
 
 	private void tellPlayerMessage(EntityPlayer player)
 	{
-		/*		switch(temperatureLevel/10)
+		/*
+		String status = "";
+		switch(temperatureLevel/10)
 		{
-		case -1:
-		case 0:
-		case 1: player.addChatMessage(new ChatComponentText("You feel comfortable"));break;
-		case -2: player.addChatMessage(new ChatComponentText("You feel cool."));break;
-		case -3: player.addChatMessage(new ChatComponentText("You feel chilled."));break;
-		case -4: player.addChatMessage(new ChatComponentText("You feel cold."));break;
-		case -5: player.addChatMessage(new ChatComponentText("You feel numb."));break;
-		case -6: player.addChatMessage(new ChatComponentText("You feel freezing!"));break;
-		case -7: killPlayer(player);break;
-		case 2: player.addChatMessage(new ChatComponentText("You feel warm."));break;
-		case 3: player.addChatMessage(new ChatComponentText("You feel very warm."));break;
-		case 4: player.addChatMessage(new ChatComponentText("You feel hot."));break;
-		case 5: player.addChatMessage(new ChatComponentText("You feel very hot."));break;
-		case 6: player.addChatMessage(new ChatComponentText("You feel extremely hot!"));break;
-		case 7: killPlayer(player);break;
+			case -7: killPlayer(player); break;
+			case -6: status = "status.player.freezing"; break;
+			case -5: status = "status.player.numb"; break;
+			case -4: status = "status.player.cold"; break;
+			case -3: status = "status.player.chilled"; break;
+			case -2: status = "status.player.cold"; break;
+			case -1:
+			case 0:
+			case 1: status = "status.player.comfortable"; break;
+			case 2: status = "status.player.warm"; break;
+			case 3: status = "status.player.verywarm"; break;
+			case 4: status = "status.player.hot"; break;
+			case 5: status = "status.player.veryhot"; break;
+			case 6: status = "status.player.extremelyhot"; break;
+			case 7: killPlayer(player);break;
 		}
-		 */
+		if (status != "") {
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(status)));
+		}
+		*/
 	}
 
 	private void killPlayer(EntityPlayer player)

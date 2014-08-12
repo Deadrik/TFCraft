@@ -1,9 +1,12 @@
 package com.bioxx.tfc.Commands;
 
+import java.util.regex.Pattern;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.TFCBlocks;
@@ -36,19 +39,19 @@ public class GenCommand extends CommandBase
 				{
 					gen = new WorldGenFissure(TFCBlocks.FreshWater);
 					gen.checkStability = false;
-					player.addChatMessage(new ChatComponentText("Generating Water"));
+					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.genwater")));
 				}
 				else if(params[1].equals("hotwater"))
 				{
 					gen = new WorldGenFissure(TFCBlocks.HotWater);
 					gen.checkStability = false;
-					player.addChatMessage(new ChatComponentText("Generating Hot Springs"));
+					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.genhotspring")));
 				}
 				else
 				{
 					gen = new WorldGenFissure(null);
 					gen.checkStability = false;
-					player.addChatMessage(new ChatComponentText("Generating Fissure"));
+					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.genfissure")));
 				}
 				gen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int)player.posX, (int)player.posY - 1, (int)player.posZ);
 			}
@@ -58,13 +61,14 @@ public class GenCommand extends CommandBase
 
 				if (i != -1)
 				{
-					player.addChatMessage(new ChatComponentText("Generating Small " + params[1] + " Tree"));
+					String message = StatCollector.translateToLocal("commands.gensmalltree").replaceAll(Pattern.quote("$TREETYPE"), params[1]);
+					player.addChatMessage(new ChatComponentText(message));
 					WorldGenerator treeGen = TFCBiome.getTreeGen(i, false);
 					if (!treeGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX, (int) player.posY, (int) player.posZ))
-						player.addChatMessage(new ChatComponentText("Generation Failed"));
+						player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.genfailed")));
 				}
 				else
-					player.addChatMessage(new ChatComponentText("Invalid Tree"));
+					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.invalidtree")));
 			}
 		}
 		else if (params.length == 3 && (params[0].equalsIgnoreCase("tree") && params[2].equalsIgnoreCase("big")))
@@ -73,13 +77,14 @@ public class GenCommand extends CommandBase
 
 			if (i != -1)
 			{
-				player.addChatMessage(new ChatComponentText("Generating Big " + params[1] + " Tree"));
+				String message = StatCollector.translateToLocal("commands.genlargetree").replaceAll(Pattern.quote("$TREETYPE"), params[1]);
+				player.addChatMessage(new ChatComponentText(message));
 				WorldGenerator treeGen = TFCBiome.getTreeGen(i, false);
 				if (!treeGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX, (int) player.posY, (int) player.posZ))
-					player.addChatMessage(new ChatComponentText("Generation Failed"));
+					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.genfailed")));
 			}
 			else
-				player.addChatMessage(new ChatComponentText("Invalid Tree"));
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.invalidtree")));
 		}
 	}
 

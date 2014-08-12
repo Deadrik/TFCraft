@@ -102,12 +102,12 @@ public class ItemGoldPan extends ItemTerra
 				{
 					ChunkData cd = ChunkDataManager.getData(x >> 4, z >> 4);
 
-                    // Make sure our chunk data isn't null.
-                    if(cd == null)
-                    {
-                        player.addChatMessage(new ChatComponentText("The ChunkData returned null, please report this to the developer."));
-                        return is;
-                    }
+					// Make sure our chunk data isn't null.
+					if(cd == null)
+					{
+							player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.chunkdata.error")));
+							return is;
+					}
 
 					if(cd.sluicedAmount < 50)
 					{

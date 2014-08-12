@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.WorldServer;
 
 import com.bioxx.tfc.api.TFCOptions;
@@ -32,7 +33,7 @@ public class RemoveAreaCommand extends CommandBase
 
 		if(params.length == 0)
 		{
-			player.addChatMessage(new ChatComponentText("Removing 16 blocks up and +/- x, z"));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.removingarea.size")));
 			for(int x = -15; x < 16; x++)
 			{
 				for(int z = -15; z < 16; z++)
@@ -48,7 +49,7 @@ public class RemoveAreaCommand extends CommandBase
 		}
 		else if(params.length == 3)
 		{
-			player.addChatMessage(new ChatComponentText("Removing Area"));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("commands.removingarea")));
 			int radius = Integer.parseInt(params[0]);
 			for(int x = -Integer.parseInt(params[0]); x <= Integer.parseInt(params[0]); x++)
 			{

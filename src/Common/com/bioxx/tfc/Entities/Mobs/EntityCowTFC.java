@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -27,6 +28,7 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityCowTFC extends EntityCow implements IAnimal
@@ -306,10 +308,10 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			//player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE ? "Female" : "Male"));
+			//player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(getGender() == GenderEnum.FEMALE ? "entity.animal.female" : "entity.animal.male")));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 			{
-				player.addChatMessage(new ChatComponentText("Pregnant"));
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.animal.pregnant")));
 			}
 			//player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 
