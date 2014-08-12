@@ -7,6 +7,7 @@ import com.bioxx.tfc.ASM.TFCAccessTransformer;
 import com.bioxx.tfc.ASM.Transform.TF_EntityLeashKnot;
 import com.bioxx.tfc.ASM.Transform.TF_EntityRenderer;
 import com.bioxx.tfc.ASM.Transform.TF_RenderGlobal;
+import com.bioxx.tfc.ASM.Transform.TF_RenderItem;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
@@ -27,7 +28,8 @@ public class TFCASMLoadingPlugin implements IFMLLoadingPlugin
 		return new String[]{
 				TF_EntityRenderer.class.getName(),
 				TF_RenderGlobal.class.getName(),
-				TF_EntityLeashKnot.class.getName()};
+				TF_EntityLeashKnot.class.getName(),
+				TF_RenderItem.class.getName()};
 	}
 
 	@Override

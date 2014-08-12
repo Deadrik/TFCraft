@@ -11,13 +11,18 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.particle.EntityRainFX;
 import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.client.renderer.RenderGlobal;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.WeatherManager;
+import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -158,4 +163,44 @@ public class ClientOverrides
 			}
 		}
 	}  
+
+	public static void renderIcon(int x, int y, ItemStack is, int xSize, int ySize)
+	{
+		if(is.getItem() == TFCItems.MealGeneric)
+		{
+			Item i;
+			int offset = 0;
+			if(is.hasTagCompound() && is.getTagCompound().hasKey("FG0"))
+			{
+				i = FoodRegistry.getInstance().getFood(is.getTagCompound().getInteger("FG0"));
+				renderIcon(x+offset, y, i.getIcon(new ItemStack(i), 0), 4, 4); offset+=4;
+			}
+			if(is.hasTagCompound() && is.getTagCompound().hasKey("FG1"))
+			{
+				i = FoodRegistry.getInstance().getFood(is.getTagCompound().getInteger("FG1"));
+				renderIcon(x+offset, y, i.getIcon(new ItemStack(i), 0), 4, 4); offset+=4;
+			}
+			if(is.hasTagCompound() && is.getTagCompound().hasKey("FG2"))
+			{
+				i = FoodRegistry.getInstance().getFood(is.getTagCompound().getInteger("FG2"));
+				renderIcon(x+offset, y, i.getIcon(new ItemStack(i), 0), 4, 4); offset+=4;
+			}
+			if(is.hasTagCompound() && is.getTagCompound().hasKey("FG3"))
+			{
+				i = FoodRegistry.getInstance().getFood(is.getTagCompound().getInteger("FG3"));
+				renderIcon(x+offset, y, i.getIcon(new ItemStack(i), 0), 4, 4);
+			}
+		}
+	}
+
+	public static void renderIcon(int x, int y, IIcon icon, int sizeX, int sizeY)
+	{
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV((double)(x + 0), (double)(y + sizeY), (double)200, (double)icon.getMinU(), (double)icon.getMaxV());
+		tessellator.addVertexWithUV((double)(x + sizeX), (double)(y + sizeY), (double)200, (double)icon.getMaxU(), (double)icon.getMaxV());
+		tessellator.addVertexWithUV((double)(x + sizeX), (double)(y + 0), (double)200, (double)icon.getMaxU(), (double)icon.getMinV());
+		tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)200, (double)icon.getMinU(), (double)icon.getMinV());
+		tessellator.draw();
+	}
 }
