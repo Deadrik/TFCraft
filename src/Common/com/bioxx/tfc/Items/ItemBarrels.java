@@ -66,7 +66,7 @@ public class ItemBarrels extends ItemTerraBlock
 				{
 					int numItems = nbttaglist.tagCount();
 					boolean showMoreText = false;
-					if( numItems > 4 && !TFC_Core.showExtraInformation())
+					if( numItems > 4 && !TFC_Core.showShiftInformation())
 					{
 						numItems = 3;
 						showMoreText = true;

@@ -68,7 +68,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
-		if (TFC_Core.showExtraInformation()) 
+		if (TFC_Core.showShiftInformation()) 
 		{
 			arraylist.add(StatCollector.translateToLocal("gui.Help"));
 			arraylist.add(StatCollector.translateToLocal("gui.PotteryBase.Inst0"));

@@ -101,7 +101,7 @@ public class ItemMeal extends ItemTerra implements IFood
 				arraylist.add(StatCollector.translateToLocal("gui.badnbt"));
 			}
 
-			if (TFC_Core.showExtraInformation()) 
+			if (TFC_Core.showShiftInformation()) 
 				addTasteInformation(is, player, arraylist);
 			else
 				arraylist.add(StatCollector.translateToLocal("gui.showtaste"));

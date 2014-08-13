@@ -146,7 +146,7 @@ public class ItemQuiver extends ItemTFCArmor
 		ItemTerra.addSizeInformation(is, arraylist);
 		ItemTerra.addHeatInformation(is, arraylist);
 
-		if (TFC_Core.showExtraInformation())
+		if (TFC_Core.showShiftInformation())
 		{
 			//arraylist.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("gui.Armor.Advanced") + ":");
 			//arraylist.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("gui.Armor.Pierce") + ": " + EnumChatFormatting.AQUA + ArmorType.getPiercingAR());

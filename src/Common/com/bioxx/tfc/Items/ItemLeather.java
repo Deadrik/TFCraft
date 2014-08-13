@@ -59,7 +59,7 @@ public class ItemLeather extends ItemLooseRock
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
-		if (TFC_Core.showExtraInformation()) 
+		if (TFC_Core.showShiftInformation()) 
 		{
 			arraylist.add(StatCollector.translateToLocal("gui.Help"));
 			arraylist.add(StatCollector.translateToLocal("gui.Leather.Inst0"));

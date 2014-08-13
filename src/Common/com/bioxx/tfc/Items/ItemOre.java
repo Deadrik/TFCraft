@@ -67,7 +67,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	{
 		if(GetMetalType(is) != null)
 		{
-			if (TFC_Core.showExtraInformation())
+			if (TFC_Core.showShiftInformation())
 			{
 				arraylist.add(StatCollector.translateToLocal("gui.units") + ": " + GetMetalReturnAmount(is));
 			}

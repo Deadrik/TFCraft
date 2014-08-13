@@ -710,9 +710,16 @@ public class TFC_Core
 		return EnumWoodMaterial.ASPEN;
 	}
 
-	public static boolean showExtraInformation()
+	public static boolean showShiftInformation()
 	{
 		if ((FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) && (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)))
+			return true;
+		return false;
+	}
+
+	public static boolean showCtrlInformation()
+	{
+		if ((FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) && (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)))
 			return true;
 		return false;
 	}
