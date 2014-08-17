@@ -98,6 +98,7 @@ public class EntityLivingHandler
 					}
 
 					spawnProtectionTimer += TFC_Time.hourLength;
+					nbt.setLong("spawnProtectionTimer", spawnProtectionTimer);
 				}
 			}
 			else

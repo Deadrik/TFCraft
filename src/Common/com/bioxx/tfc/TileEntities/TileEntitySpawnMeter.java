@@ -1,21 +1,20 @@
 package com.bioxx.tfc.TileEntities;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
-import com.bioxx.tfc.Core.TFC_Time;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
+import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.Core.TFC_Time;
+
 public class TileEntitySpawnMeter extends TileEntity
 {
 	private long timer;
 	public TileEntitySpawnMeter()
 	{
-		timer = 0;
+		timer = TFC_Time.getTotalTicks();
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public class TileEntitySpawnMeter extends TileEntity
 					int protection = cd.spawnProtection;
 					int meta = 0;
 					meta = protection > 384 ? 8 : protection / 48;
-					worldObj.setBlock(xCoord, yCoord, zCoord, TFCBlocks.SpawnMeter, meta, 0x2);
+					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta, 0x2);
 				}
 			}
 		}
