@@ -22,6 +22,7 @@ import com.bioxx.tfc.Containers.ContainerLogPile;
 import com.bioxx.tfc.Containers.ContainerMold;
 import com.bioxx.tfc.Containers.ContainerNestBox;
 import com.bioxx.tfc.Containers.ContainerPlanSelection;
+import com.bioxx.tfc.Containers.ContainerPlayerTFC;
 import com.bioxx.tfc.Containers.ContainerQuern;
 import com.bioxx.tfc.Containers.ContainerQuiver;
 import com.bioxx.tfc.Containers.ContainerSluice;
@@ -109,7 +110,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 31:
 		{
-			return new ContainerPlayer(player.inventory, false, player);
+			return new ContainerPlayerTFC(player.inventory, false, player);
 		}
 		case 32:
 		{

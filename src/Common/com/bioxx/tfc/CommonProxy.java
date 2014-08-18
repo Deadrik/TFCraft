@@ -99,6 +99,11 @@ public class CommonProxy
 	{
 		// NOOP on server
 	}
+	
+	public void registerPlayerRenderEventHandler()
+	{
+		// NOOP on server
+	}
 
 	public void setupGuiIngameForge()
 	{

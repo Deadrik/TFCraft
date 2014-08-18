@@ -10,6 +10,7 @@ import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Containers.ContainerPlayerTFC;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -34,7 +35,7 @@ public class EntitySpawnHandler
 	{
 		if (event.entity instanceof EntityPlayer && !event.entity.getEntityData().hasKey("hasSpawned"))
 		{
-			if(((EntityPlayer)event.entity).inventory.armorInventory.length !=5)
+			if(!(((EntityPlayer)event.entity).inventory instanceof InventoryPlayerTFC))
 				((EntityPlayer)event.entity).inventory = TFC_Core.getNewInventory((EntityPlayer)event.entity);
 
 			((EntityPlayer)event.entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000);
@@ -44,7 +45,7 @@ public class EntitySpawnHandler
 
 		if (event.entity instanceof EntityPlayer)
 		{
-			if(((EntityPlayer)event.entity).inventory.armorInventory.length !=5)
+			if(!(((EntityPlayer)event.entity).inventory instanceof InventoryPlayerTFC))
 				((EntityPlayer)event.entity).inventory = TFC_Core.getNewInventory((EntityPlayer)event.entity);
 
 			((EntityPlayer)event.entity).inventoryContainer = new ContainerPlayerTFC(((EntityPlayer)event.entity).inventory, !event.world.isRemote, (EntityPlayer)event.entity);

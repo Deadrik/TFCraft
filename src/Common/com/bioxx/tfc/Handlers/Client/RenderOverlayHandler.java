@@ -21,6 +21,7 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.BodyTempStats;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.ItemQuiver;
@@ -248,7 +249,10 @@ public class RenderOverlayHandler
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayer player = mc.thePlayer;
-		ItemStack quiver = player.inventory.armorItemInSlot(0);
+		ItemStack quiver = null;
+		if(player.inventory instanceof InventoryPlayerTFC){
+			quiver = ((InventoryPlayerTFC)player.inventory).extraEquipInventory[0];
+		}
 		return quiver;
 	}
 

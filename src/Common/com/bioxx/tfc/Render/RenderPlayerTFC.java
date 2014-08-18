@@ -32,7 +32,6 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 	private ModelBiped modelBipedMain;
 	private ModelBiped modelArmorChestplate;
 	private ModelBiped modelArmor;
-	private ModelBiped quiverModel;
 	//Should match RES_ITEM_GLINT in RenderLivingEntity
 	private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
@@ -46,34 +45,13 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 	ModelRenderer HornR2;
 	ModelRenderer HornL2;
 
-	ModelRenderer quiver;
-	ModelRenderer[] arrows = new ModelRenderer[16];
 
 	public RenderPlayerTFC()
 	{
 		super();
 		this.modelBipedMain = (ModelBiped)this.mainModel;
 		this.modelArmorChestplate = new ModelBiped(1.0F);
-		this.quiverModel = new ModelBiped(1.0F);
 		this.modelArmor = new ModelBiped(0.5F);
-
-		//Quiver
-		quiver = new ModelRenderer(quiverModel,38,0);
-		quiver.addBox(-2.5f,-6,-1.5f,5,12,3);
-		quiver.setRotationPoint(0,4,4);
-		quiver.rotateAngleZ = (float)(Math.PI/4) + (float)(Math.PI);
-		quiver.setTextureSize(64, 32);
-
-		for(int i = 0; i < arrows.length; i++)
-		{
-			arrows[i] = new ModelRenderer(quiverModel,59,0);
-			arrows[i].addBox(-1,-8,0,2,14,0);
-			arrows[i].setRotationPoint(0,0,0f);
-			arrows[i].setTextureSize(64,32);
-			arrows[i].rotateAngleZ = (float)(Math.PI) + (float)(Math.PI/36)*(i%3)*(i%2==0?1f:-1f);
-			arrows[i].rotateAngleX = (float)(Math.PI/36)*(i%3)*(i%2==(i%3)?1f:-1f);
-			quiver.addChild(arrows[i]);
-		}
 
 		//Bronze
 		plume = new ModelRenderer(modelArmorChestplate,40,0);
@@ -105,19 +83,10 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 		HornL2.rotateAngleX = (float)Math.PI*(6f/12f);
 		HornL2.rotateAngleZ = (float)Math.PI*(-1f/6f);
 
-		quiverModel.bipedHead.showModel = false;
-		quiverModel.bipedHeadwear.showModel = false;
-		quiverModel.bipedBody.showModel = true;//false;
-		quiverModel.bipedRightArm.showModel = false;
-		quiverModel.bipedLeftArm.showModel = false;
-		quiverModel.bipedRightLeg.showModel = false;
-		quiverModel.bipedLeftLeg.showModel = false;
-
 		modelArmorChestplate.bipedHead.addChild(plume);
 		modelArmorChestplate.bipedHead.addChild(plume2);
 		modelArmorChestplate.bipedHead.addChild(HornR1);
 		modelArmorChestplate.bipedHead.addChild(HornL1);
-		quiverModel.bipedBody.addChild(quiver);
 		HornR1.addChild(HornR2);
 		HornL1.addChild(HornL2);
 	}
@@ -214,152 +183,6 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 		return par1 + par3 * f3;
 	}
 
-	private void backSlot(EntityLivingBase par1EntityLivingBase, double par2, double par4, double par6, float par8, float par9){
-		int j = 4;
-
-		float f2 = this.interpolateRotation(par1EntityLivingBase.prevRenderYawOffset, par1EntityLivingBase.renderYawOffset, par9);
-		float f3 = this.interpolateRotation(par1EntityLivingBase.prevRotationYawHead, par1EntityLivingBase.rotationYawHead, par9);
-		float f4;
-
-		if (par1EntityLivingBase.isRiding() && par1EntityLivingBase.ridingEntity instanceof EntityLivingBase)
-		{
-			EntityLivingBase entitylivingbase1 = (EntityLivingBase)par1EntityLivingBase.ridingEntity;
-			f2 = this.interpolateRotation(entitylivingbase1.prevRenderYawOffset, entitylivingbase1.renderYawOffset, par9);
-			f4 = MathHelper.wrapAngleTo180_float(f3 - f2);
-
-			if (f4 < -85.0F)
-			{
-				f4 = -85.0F;
-			}
-
-			if (f4 >= 85.0F)
-			{
-				f4 = 85.0F;
-			}
-
-			f2 = f3 - f4;
-
-			if (f4 * f4 > 2500.0F)
-			{
-				f2 += f4 * 0.2F;
-			}
-		}
-
-		float f5 = par1EntityLivingBase.prevRotationPitch + (par1EntityLivingBase.rotationPitch - par1EntityLivingBase.prevRotationPitch) * par9;
-		f4 = this.handleRotationFloat(par1EntityLivingBase, par9);
-		float f6 = 0.0625F;
-		float f7 = par1EntityLivingBase.prevLimbSwingAmount + (par1EntityLivingBase.limbSwingAmount - par1EntityLivingBase.prevLimbSwingAmount) * par9;
-		float f8 = par1EntityLivingBase.limbSwing - par1EntityLivingBase.limbSwingAmount * (1.0F - par9);
-
-		if (par1EntityLivingBase.isChild())
-		{
-			f8 *= 3.0F;
-		}
-
-		if (f7 > 1.0F)
-		{
-			f7 = 1.0F;
-		}
-
-		float f9;
-		int i;
-		float f10;
-		float f11;
-
-		i = this.shouldRenderPass(par1EntityLivingBase, j, par9);
-
-		if (i > 0)
-		{
-			this.renderPassModel.setLivingAnimations(par1EntityLivingBase, f8, f7, par9);
-			this.renderPassModel.render(par1EntityLivingBase, f8, f7, f4, f3 - f2, f5, f6);
-
-			if ((i & 240) == 16)
-			{
-				//this.func_82408_c(par1EntityLivingBase, j, par9);
-				//this.renderPassModel.render(par1EntityLivingBase, f8, f7, f4, f3 - f2, f5, f6);
-			}
-
-			if ((i & 15) == 15)
-			{
-				f9 = par1EntityLivingBase.ticksExisted + par9;
-				this.bindTexture(RES_ITEM_GLINT);
-				GL11.glEnable(GL11.GL_BLEND);
-				f10 = 0.5F;
-				GL11.glColor4f(f10, f10, f10, 1.0F);
-				GL11.glDepthFunc(GL11.GL_EQUAL);
-				GL11.glDepthMask(false);
-
-				for (int k = 0; k < 2; ++k)
-				{
-					GL11.glDisable(GL11.GL_LIGHTING);
-					f11 = 0.76F;
-					GL11.glColor4f(0.5F * f11, 0.25F * f11, 0.8F * f11, 1.0F);
-					GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-					GL11.glMatrixMode(GL11.GL_TEXTURE);
-					GL11.glLoadIdentity();
-					float f12 = f9 * (0.001F + k * 0.003F) * 20.0F;
-					float f13 = 0.33333334F;
-					GL11.glScalef(f13, f13, f13);
-					GL11.glRotatef(30.0F - k * 60.0F, 0.0F, 0.0F, 1.0F);
-					GL11.glTranslatef(0.0F, f12, 0.0F);
-					GL11.glMatrixMode(GL11.GL_MODELVIEW);
-					this.renderPassModel.render(par1EntityLivingBase, f8, f7, f4, f3 - f2, f5, f6);
-				}
-
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				GL11.glMatrixMode(GL11.GL_TEXTURE);
-				GL11.glDepthMask(true);
-				GL11.glLoadIdentity();
-				GL11.glMatrixMode(GL11.GL_MODELVIEW);
-				GL11.glEnable(GL11.GL_LIGHTING);
-				GL11.glDisable(GL11.GL_BLEND);
-				GL11.glDepthFunc(GL11.GL_LEQUAL);
-			}
-
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
-		}
-	}
-
-
-	@Override
-	public void doRender(AbstractClientPlayer player, double par2, double par4, double par6, float par8, float partialTick)
-	{
-		if (MinecraftForge.EVENT_BUS.post(new RenderPlayerEvent.Pre(player, this, partialTick))) return;
-		float f2 = 1.0F;
-		GL11.glColor3f(f2, f2, f2);
-		ItemStack itemstack = player.inventory.getCurrentItem();
-		this.quiverModel.heldItemRight = this.modelArmorChestplate.heldItemRight = this.modelArmor.heldItemRight = this.modelBipedMain.heldItemRight = itemstack != null ? 1 : 0;
-
-		if (itemstack != null && player.getItemInUseCount() > 0)
-		{
-			EnumAction enumaction = itemstack.getItemUseAction();
-
-			if (enumaction == EnumAction.block)
-			{
-				this.quiverModel.heldItemRight = this.modelArmorChestplate.heldItemRight = this.modelArmor.heldItemRight = this.modelBipedMain.heldItemRight = 3;
-			}
-			else if (enumaction == EnumAction.bow)
-			{
-				this.quiverModel.aimedBow =this.modelArmorChestplate.aimedBow = this.modelArmor.aimedBow = this.modelBipedMain.aimedBow = true;
-			}
-		}
-
-		this.quiverModel.isSneak = this.modelArmorChestplate.isSneak = this.modelArmor.isSneak = this.modelBipedMain.isSneak = player.isSneaking();
-		double d3 = par4 - player.yOffset;
-
-		if (player.isSneaking() && !(player instanceof EntityPlayerSP))
-		{
-			d3 -= 0.125D;
-		}
-
-		super.doRender(player, par2, par4, par6, par8, partialTick);
-		this.quiverModel.aimedBow = this.modelArmorChestplate.aimedBow = this.modelArmor.aimedBow = this.modelBipedMain.aimedBow = false;
-		this.quiverModel.isSneak = this.modelArmorChestplate.isSneak = this.modelArmor.isSneak = this.modelBipedMain.isSneak = false;
-		this.quiverModel.heldItemRight = this.modelArmorChestplate.heldItemRight = this.modelArmor.heldItemRight = this.modelBipedMain.heldItemRight = 0;
-		MinecraftForge.EVENT_BUS.post(new RenderPlayerEvent.Post(player, this, partialTick));
-	}
-
 	/**
 	 * Set the specified armor model as the player model. Args: player, armorSlot, partialTick
 	 */
@@ -367,17 +190,12 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 	protected int shouldRenderPass/*setArmorModel*/(AbstractClientPlayer par1AbstractClientPlayer, int slotIndex, float partialTick)
 	{
 		ItemStack itemstack;
-		itemstack = par1AbstractClientPlayer.inventory.armorItemInSlot(4 - (slotIndex<4?slotIndex:4));
+		itemstack = par1AbstractClientPlayer.inventory.armorItemInSlot(3 - slotIndex);
 		//RenderPlayerTFC.armorFilenamePrefix = RenderPlayer.armorFilenamePrefix;
 		plume.showModel = false;
 		plume2.showModel = false;
 		HornR1.showModel = false;
 		HornL1.showModel = false;
-		quiver.showModel = false;
-		if(slotIndex == 3)
-		{
-			this.backSlot(par1AbstractClientPlayer, par1AbstractClientPlayer.posX, par1AbstractClientPlayer.posY, par1AbstractClientPlayer.posZ, 0, partialTick);
-		}
 		if (itemstack != null)
 		{
 			Item item = itemstack.getItem();
@@ -392,23 +210,12 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
 				plume2.showModel = false;//(itemstack.getItem() == TFCItems.BronzeHelmet);
 				HornR1.showModel = false;//(itemstack.getItem() == TFCItems.WroughtIronHelmet);
 				HornL1.showModel = false;//(itemstack.getItem() == TFCItems.WroughtIronHelmet);
-				quiver.showModel = (itemstack.getItem() == TFCItems.Quiver);
-				if(quiver.showModel)
-				{
-					int n = ((ItemQuiver)TFCItems.Quiver).getQuiverArrows(itemstack);
-					int arrowRenders = Math.min(n/4, 16);
-					for(int i = 0; i < 16;i++)
-					{
-						arrows[i].showModel = i < arrowRenders;
-					}
-				}
 				modelbiped.bipedHeadwear.showModel = slotIndex == 0 && (itemstack.getItem() != TFCItems.BronzeHelmet&&itemstack.getItem() != TFCItems.WroughtIronHelmet);
 				modelbiped.bipedBody.showModel = slotIndex == 1 || slotIndex == 2;
 				modelbiped.bipedRightArm.showModel = slotIndex == 1;
 				modelbiped.bipedLeftArm.showModel = slotIndex == 1;
 				modelbiped.bipedRightLeg.showModel = slotIndex == 2 || slotIndex == 3;
 				modelbiped.bipedLeftLeg.showModel = slotIndex == 2 || slotIndex == 3;
-				modelbiped = quiver.showModel?quiverModel:modelbiped;
 				this.setRenderPassModel(modelbiped);
 
 				if (modelbiped != null)

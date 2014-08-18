@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Containers.Slots.SlotExtraEquipable;
 import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Core.TFC_Core;
 
@@ -35,6 +36,11 @@ public class PlayerInventory
 
 		if(toolBarAfterMainInv)
 			addToolbarSlots(container, inventory, x, y, freezeSlot);
+	}
+	
+	public static void addExtraEquipables(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot){
+		int index = 37; // Should be the correct index
+		addSlotToContainer(container, new SlotExtraEquipable(inventory, index, 8 + 18, 8 + 18, 4));
 	}
 
 	private static void addToolbarSlots(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot) 

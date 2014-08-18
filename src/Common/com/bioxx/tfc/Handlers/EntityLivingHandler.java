@@ -133,39 +133,42 @@ public class EntityLivingHandler
 		ItemStack quiver = null;
 		ItemStack item = event.item.getEntityItem();
 		boolean foundJav = false;
-		quiver = player.inventory.armorItemInSlot(0);
-		for(int i = 0; i < 9; i++)
-		{
-			if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemJavelin)
-				foundJav = true;
-		}
-
-		if(quiver != null)
-		{
-			if(item.getItem() instanceof ItemArrow)
+		if(player.inventory instanceof InventoryPlayerTFC){
+			
+			quiver = ((InventoryPlayerTFC)player.inventory).extraEquipInventory[0];
+			for(int i = 0; i < 9; i++)
 			{
-				ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, item);
-				if(is != null)
-					event.item.setEntityItemStack(is);
-				else
-				{
-					is = event.item.getEntityItem();
-					is.stackSize = 0;
-					event.item.setEntityItemStack(is);
-					event.setResult(Result.DENY);
-				}
+				if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemJavelin)
+					foundJav = true;
 			}
-			else if(item.getItem() instanceof ItemJavelin)
+
+			if(quiver != null)
 			{
-				if(foundJav)
+				if(item.getItem() instanceof ItemArrow)
 				{
 					ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, item);
-					if(is == null)
+					if(is != null)
+						event.item.setEntityItemStack(is);
+					else
 					{
 						is = event.item.getEntityItem();
 						is.stackSize = 0;
 						event.item.setEntityItemStack(is);
 						event.setResult(Result.DENY);
+					}
+				}
+				else if(item.getItem() instanceof ItemJavelin)
+				{
+					if(foundJav)
+					{
+						ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, item);
+						if(is == null)
+						{
+							is = event.item.getEntityItem();
+							is.stackSize = 0;
+							event.item.setEntityItemStack(is);
+							event.setResult(Result.DENY);
+						}
 					}
 				}
 			}

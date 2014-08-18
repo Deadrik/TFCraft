@@ -10,6 +10,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Containers.Slots.SlotArmorTFC;
+import com.bioxx.tfc.Containers.Slots.SlotExtraEquipable;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Handlers.CraftingHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
@@ -36,23 +37,15 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			for (y = 0; y < 2; ++y)
 				this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
 		}
-
-		int indexForBack = -1;
+		
 		for (x = 0; x < playerInv.armorInventory.length; ++x)
 		{
 			int index = playerInv.getSizeInventory() - 1 - x;
-			if(x == 4)
-			{
-				//this.addSlotToContainer(new SlotArmorTFC(this, playerInv, index, 8, 8 + x * 18, x));
-				indexForBack = index;
-			}
-			else
-			{
-				this.addSlotToContainer(new SlotArmorTFC(this, playerInv, index, 8, 8 + x * 18, x));
-			}
+			this.addSlotToContainer(new SlotArmorTFC(this, playerInv, index, 8, 8 + x * 18, x));
 		}
 		PlayerInventory.buildInventoryLayout(this, playerInv, 8, 90, false, true);
-
+		PlayerInventory.addExtraEquipables(this, playerInv, 8, 90, false);
+		
 		//Manually built the remaining crafting slots because of an order issue. These have to be created after the default slots
 		if(player.getEntityData().hasKey("craftingTable") || !player.worldObj.isRemote)
 		{
@@ -73,7 +66,6 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		}
 
 		this.onCraftMatrixChanged(this.craftMatrix);
-		this.addSlotToContainer(new SlotArmorTFC(this, playerInv, indexForBack, 8 + 18, 8 + 18, 4));
 	}
 
 	@Override

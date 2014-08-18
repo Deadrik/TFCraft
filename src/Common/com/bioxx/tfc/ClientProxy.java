@@ -63,6 +63,7 @@ import com.bioxx.tfc.Handlers.Client.ClientTickHandler;
 import com.bioxx.tfc.Handlers.Client.FarmlandHighlightHandler;
 import com.bioxx.tfc.Handlers.Client.KeyBindingHandler;
 import com.bioxx.tfc.Handlers.Client.PlankHighlightHandler;
+import com.bioxx.tfc.Handlers.Client.PlayerRenderHandler;
 import com.bioxx.tfc.Handlers.Client.RenderOverlayHandler;
 import com.bioxx.tfc.Handlers.Client.SoundHandler;
 import com.bioxx.tfc.Render.FoliageColorReloadListener;
@@ -566,6 +567,14 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new ArmourStandHighlightHandler());
 	}
 
+	@Override
+	public void registerPlayerRenderEventHandler()
+	{
+            PlayerRenderHandler PRHandler = new PlayerRenderHandler();
+            MinecraftForge.EVENT_BUS.register(PRHandler);
+            FMLCommonHandler.instance().bus().register(PRHandler);
+	}
+	
 	@Override
 	public void registerSoundHandler()
 	{

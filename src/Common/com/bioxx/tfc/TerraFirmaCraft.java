@@ -120,6 +120,8 @@ public class TerraFirmaCraft
 		proxy.registerTileEntities(true);
 		//Register Sound Handler (Client only)
 		proxy.registerSoundHandler();
+		//Register Player Render Handler (Client only)
+		proxy.registerPlayerRenderEventHandler();
 
 		SkillsManager.instance.registerSkill(Global.SKILL_GENERAL_SMITHING);
 		SkillsManager.instance.registerSkill(Global.SKILL_TOOLSMITH);
