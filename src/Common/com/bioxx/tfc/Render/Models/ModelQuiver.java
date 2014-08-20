@@ -3,6 +3,7 @@ package com.bioxx.tfc.Render.Models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class ModelQuiver extends ModelBase {
@@ -57,6 +58,16 @@ public class ModelQuiver extends ModelBase {
         this.setRotationRadians(model, (float) Math.toRadians(x), (float) Math.toRadians(y), (float) Math.toRadians(z));
     }
 
+    public void render(EntityLivingBase theEntity, int numArrows) {
+    	for(int i = 0; i < numArrows; i++){
+    		arrows[i].isHidden = false;
+    	}
+    	this.quiver.render(0.0625F);
+    	for(int i = 0; i < arrows.length; i++){
+    		arrows[i].isHidden = true;
+    	}
+    }
+    
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         if (entity instanceof EntityPlayer) this.quiver.render(0.0625F);
     }
