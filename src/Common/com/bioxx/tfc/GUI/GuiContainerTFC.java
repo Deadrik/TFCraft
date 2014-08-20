@@ -1,5 +1,6 @@
 package com.bioxx.tfc.GUI;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -84,6 +85,14 @@ public class GuiContainerTFC extends GuiContainer
 	{
 		TFC_Core.bindTexture(rl);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	}
+
+	public void drawTooltip(int mx, int my, String text) {
+		List list = new ArrayList();
+		list.add(text);
+		this.drawHoveringText(list, mx, my+15, this.fontRendererObj);
+		RenderHelper.disableStandardItemLighting();
+		GL11.glDisable(GL11.GL_LIGHTING);
 	}
 
 	protected void drawHoveringTextZLevel(List par1List, int par2, int par3, FontRenderer font, float z)

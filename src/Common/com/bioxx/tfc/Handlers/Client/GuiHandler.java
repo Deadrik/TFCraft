@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.GuiOpenEvent;
@@ -99,7 +98,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 31:
 			return new GuiInventoryTFC(player);
 		case 32:
-			return new GuiFoodPrep(player.inventory, ((TEFoodPrep) te), world, x, y, z);
+			//return new GuiFoodPrep(player.inventory, ((TEFoodPrep) te), world, x, y, z, 0);
 		case 33:
 			return new GuiQuern(player.inventory, ((TileEntityQuern) te), world, x, y, z);
 		case 34:
@@ -124,17 +123,21 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 			if(list.size() > 0)
 			{
 				EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
-				NBTTagCompound nbt = new NBTTagCompound();
-				System.out.println(horse.isChested() + ", " + horse.getHorseType() + ", " + horse.getHorseChest().getSizeInventory());
-				horse.writeEntityToNBT(nbt);
-				horse.readEntityFromNBT(nbt);
-				System.out.println(horse.isChested() + ", " + horse.getHorseType() + ", " + horse.getHorseChest().getSizeInventory());
+				//NBTTagCompound nbt = new NBTTagCompound();
+				//System.out.println(horse.isChested() + ", " + horse.getHorseType() + ", " + horse.getHorseChest().getSizeInventory());
+				//horse.writeEntityToNBT(nbt);
+				//horse.readEntityFromNBT(nbt);
+				//System.out.println(horse.isChested() + ", " + horse.getHorseType() + ", " + horse.getHorseChest().getSizeInventory());
 				return new GuiScreenHorseInventoryTFC(player.inventory, horse.getHorseChest(), horse);
 			}
 			return null;
 		}
 		case 43:
 			return new GuiGrill(player.inventory, ((TEGrill)te), world, x, y, z);
+		case 44:
+			return new GuiFoodPrep(player.inventory, ((TEFoodPrep) te), world, x, y, z, 0);
+		case 45:
+			return new GuiFoodPrep(player.inventory, ((TEFoodPrep) te), world, x, y, z, 1);
 		default:
 			return null;
 		}

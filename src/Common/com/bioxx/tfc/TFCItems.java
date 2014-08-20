@@ -21,6 +21,7 @@ import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.Food.ItemEgg;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Food.ItemMeal;
+import com.bioxx.tfc.Food.ItemSandwich;
 import com.bioxx.tfc.Items.ItemAlcohol;
 import com.bioxx.tfc.Items.ItemArrow;
 import com.bioxx.tfc.Items.ItemBloom;
@@ -924,6 +925,7 @@ public class TFCItems
 	public static Item Fertilizer;
 	public static Item MetalLock;
 	public static Item MudBrick;
+	public static Item Sandwich;
 	/**
 	 * Item Uses Setup
 	 * */
@@ -1766,7 +1768,8 @@ public class TFCItems
 		Gooseberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 40, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Gooseberry");
 		Cloudberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 40, 0, 30, 0).setDecayRate(2.0f).setUnlocalizedName("Cloudberry");
 
-		MealGeneric = new ItemMeal().setUnlocalizedName("MealGeneric").setCreativeTab(TFCTabs.TFCFoods);
+		MealGeneric = new ItemMeal().setUnlocalizedName("MealGeneric");
+		Sandwich = new ItemSandwich().setUnlocalizedName("Sandwich");
 
 		Sugarcane = new ItemTerra().setFolder("plants/").setUnlocalizedName("Sugarcane");
 		Hemp = new ItemTerra().setFolder("plants/").setUnlocalizedName("Hemp");

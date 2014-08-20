@@ -2306,7 +2306,7 @@ fluid.tannin=Tannin
 fluid.vinegar=Vinegar
 fluid.brine=Brine
 
-gui.showtaste=§8Taste: (Hold §fShift§8)
+gui.showtaste=§8Taste: (Hold §fL-Ctrl§8)
 gui.taste=§8Taste:
 gui.taste.sweet=Sweet
 gui.taste.sour=Sour

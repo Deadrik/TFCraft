@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Containers.Slots.SlotBlocked;
-import com.bioxx.tfc.Containers.Slots.SlotFoodBowl;
 import com.bioxx.tfc.Containers.Slots.SlotFoodOnly;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
@@ -23,8 +22,9 @@ public class ContainerFoodPrep extends ContainerTFC
 	private int posZ;
 	private TEFoodPrep te;
 	private EntityPlayer player;
+	int guiTab = 0;
 
-	public ContainerFoodPrep(InventoryPlayer playerinv, TEFoodPrep pile, World world, int x, int y, int z)
+	public ContainerFoodPrep(InventoryPlayer playerinv, TEFoodPrep pile, World world, int x, int y, int z, int tab)
 	{
 		this.player = playerinv.player;
 		this.te = pile;
@@ -32,9 +32,10 @@ public class ContainerFoodPrep extends ContainerTFC
 		this.posX = x;
 		this.posY = y;
 		this.posZ = z;
+		guiTab = tab;
 		pile.openInventory();
 		layoutContainer(playerinv, pile, 0, 0);
-		
+		pile.lastTab = tab;
 		PlayerInventory.buildInventoryLayout(this, playerinv, 8, 90, false, true);
 	}
 
@@ -56,12 +57,17 @@ public class ContainerFoodPrep extends ContainerTFC
 
 	protected void layoutContainer(IInventory playerInventory, IInventory chestInventory, int xSize, int ySize)
 	{
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 71, 8));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 71, 26));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 71, 44));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 71, 62));
-		this.addSlotToContainer(new SlotBlocked(chestInventory, 4, 115, 35));
-		this.addSlotToContainer(new SlotFoodBowl(chestInventory, 5, 93, 35));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 35, 11));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 53, 11));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 71, 11));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 89, 11));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 107, 11));
+		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 5, 125, 11));
+		this.addSlotToContainer(new SlotBlocked(chestInventory, 6, 80, 35));
+		this.addSlotToContainer(new Slot(chestInventory, 7, 53, 59));
+		this.addSlotToContainer(new Slot(chestInventory, 8, 71, 59));
+		this.addSlotToContainer(new Slot(chestInventory, 9, 89, 59));
+		this.addSlotToContainer(new Slot(chestInventory, 10, 107, 59));
 	}
 
 	public EntityPlayer getPlayer()
@@ -82,17 +88,17 @@ public class ContainerFoodPrep extends ContainerTFC
 			ItemStack clickedStack = clickedSlot.getStack();
 			returnedStack = clickedStack.copy();
 
-			if (clickedIndex < 6)
+			if (clickedIndex < 11)
 			{
-				if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), true))
+				if (!this.mergeItemStack(clickedStack, 11, inventorySlots.size(), true))
 					return null;
 			}
-			else if (clickedIndex >= 6 && clickedIndex < inventorySlots.size())
+			else if (clickedIndex >= 11 && clickedIndex < inventorySlots.size())
 			{
-				if (!this.mergeItemStack(clickedStack, 0, 6, false))
+				if (!this.mergeItemStack(clickedStack, 0, 11, false))
 					return null;
 			}
-			else if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), false))
+			else if (!this.mergeItemStack(clickedStack, 11, inventorySlots.size(), false))
 				return null;
 
 			if (clickedStack.stackSize == 0)

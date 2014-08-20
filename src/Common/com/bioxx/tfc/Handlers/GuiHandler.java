@@ -112,10 +112,6 @@ public class GuiHandler implements IGuiHandler
 		{
 			return new ContainerPlayerTFC(player.inventory, false, player);
 		}
-		case 32:
-		{
-			return new ContainerFoodPrep(player.inventory, (TEFoodPrep) te, world, x, y, z);
-		}
 		case 33:
 		{
 			return new ContainerQuern(player.inventory, (TileEntityQuern) te, world, x, y, z);
@@ -166,6 +162,10 @@ public class GuiHandler implements IGuiHandler
 		{
 			return new ContainerGrill(player.inventory, ((TEGrill) te), world, x, y, z);
 		}
+		case 44:
+			return new ContainerFoodPrep(player.inventory, (TEFoodPrep) te, world, x, y, z, 0);
+		case 45:
+			return new ContainerFoodPrep(player.inventory, (TEFoodPrep) te, world, x, y, z, 1);
 		default:
 		{
 			return null;

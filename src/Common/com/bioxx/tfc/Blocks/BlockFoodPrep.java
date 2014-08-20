@@ -13,7 +13,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 
@@ -29,10 +28,13 @@ public class BlockFoodPrep extends BlockTerraContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
-			entityplayer.openGui(TerraFirmaCraft.instance, 32, world, i, j, k);
+		{
+			TEFoodPrep te = (TEFoodPrep) world.getTileEntity(x, y, z);
+			te.openGui();
+		}
 		return true;
 	}
 

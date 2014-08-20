@@ -16,13 +16,9 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
-import com.bioxx.tfc.Core.Player.SkillStats;
-import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.FoodRegistry;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
-import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -74,7 +70,7 @@ public class ItemMeal extends ItemTerra implements IFood
 			if(nbt.hasKey("FG3"))
 				arraylist.add(localize(nbt.getInteger("FG3")));
 
-			if(nbt.hasKey("satisfaction"))
+			/*if(nbt.hasKey("satisfaction"))
 			{
 				float _sat = Helper.roundNumber(nbt.getFloat("satisfaction"),100);
 				if(!isWarm(is))
@@ -85,7 +81,7 @@ public class ItemMeal extends ItemTerra implements IFood
 			else
 			{
 				arraylist.add("Taste: " + StatCollector.translateToLocal(tasteArray[0]) + EnumChatFormatting.DARK_GRAY + " (0.0%)");
-			}
+			}*/
 
 			if(nbt.hasKey("foodWeight"))
 			{
@@ -101,8 +97,8 @@ public class ItemMeal extends ItemTerra implements IFood
 				arraylist.add(StatCollector.translateToLocal("gui.badnbt"));
 			}
 
-			if (TFC_Core.showShiftInformation()) 
-				addTasteInformation(is, player, arraylist);
+			if (TFC_Core.showCtrlInformation()) 
+				ItemFoodTFC.addTasteInformation(is, player, arraylist);
 			else
 				arraylist.add(StatCollector.translateToLocal("gui.showtaste"));
 		}
@@ -110,114 +106,6 @@ public class ItemMeal extends ItemTerra implements IFood
 		{
 			arraylist.add(StatCollector.translateToLocal("gui.badnbt"));
 		}
-	}
-
-	private void addTasteInformation(ItemStack is, EntityPlayer player, List arraylist)
-	{
-		arraylist.add(StatCollector.translateToLocal("gui.taste"));
-		int sweet = getTasteSweet(is);
-		int sour = getTasteSour(is);
-		int salty = getTasteSalty(is);
-		int bitter = getTasteBitter(is);
-		int savory = getTasteSavory(is);
-		SkillStats ss = TFC_Core.getSkillStats(player);
-		SkillRank cookSkill = ss.getSkillRank(Global.SKILL_COOKING);
-		String sSweet = StatCollector.translateToLocal("gui.taste.sweet")+": ";
-		String sSour = StatCollector.translateToLocal("gui.taste.sour")+": ";
-		String sSalty = StatCollector.translateToLocal("gui.taste.salty")+": ";
-		String sBitter = StatCollector.translateToLocal("gui.taste.bitter")+": ";
-		String sSavory = StatCollector.translateToLocal("gui.taste.savory")+": ";
-
-
-		switch(cookSkill)
-		{
-		case Novice:
-		{
-			if(sweet < 50) sSweet += StatCollector.translateToLocal("gui.taste.novice.sweet0");
-			else sSweet += StatCollector.translateToLocal("gui.taste.novice.sweet1");
-			if(sour < 50) sSour += StatCollector.translateToLocal("gui.taste.novice.sour0");
-			else sSour += StatCollector.translateToLocal("gui.taste.novice.sour1");
-			if(salty < 50) sSalty += StatCollector.translateToLocal("gui.taste.novice.salty0");
-			else sSalty += StatCollector.translateToLocal("gui.taste.novice.salty1");
-			if(bitter < 50) sBitter += StatCollector.translateToLocal("gui.taste.novice.bitter0");
-			else sBitter += StatCollector.translateToLocal("gui.taste.novice.bitter1");
-			if(savory < 50) sSavory += StatCollector.translateToLocal("gui.taste.novice.savory0");
-			else sSavory += StatCollector.translateToLocal("gui.taste.novice.savory1");
-			break;
-		}
-		case Adept:
-		{
-			if(sweet < 20) sSweet += StatCollector.translateToLocal("gui.taste.adept.sweet0");
-			else if(sweet < 40) sSweet += StatCollector.translateToLocal("gui.taste.adept.sweet1");
-			else if(sweet < 60) sSweet += StatCollector.translateToLocal("gui.taste.adept.sweet2");
-			else if(sweet < 80) sSweet += StatCollector.translateToLocal("gui.taste.adept.sweet3");
-			else if(sweet < 100) sSweet += StatCollector.translateToLocal("gui.taste.adept.sweet4");
-			else sSweet += StatCollector.translateToLocal("gui.taste.adept.sweet5");
-
-			if(sour < 20) sSour += StatCollector.translateToLocal("gui.taste.adept.sour0");
-			else if(sour < 40) sSour += StatCollector.translateToLocal("gui.taste.adept.sour1");
-			else if(sour < 60) sSour += StatCollector.translateToLocal("gui.taste.adept.sour2");
-			else if(sour < 80) sSour += StatCollector.translateToLocal("gui.taste.adept.sour3");
-			else if(sour < 100) sSour += StatCollector.translateToLocal("gui.taste.adept.sour4");
-			else sSour += StatCollector.translateToLocal("gui.taste.adept.sour5");
-
-			if(salty < 20) sSalty += StatCollector.translateToLocal("gui.taste.adept.salty0");
-			else if(salty < 40) sSalty += StatCollector.translateToLocal("gui.taste.adept.salty1");
-			else if(salty < 60) sSalty += StatCollector.translateToLocal("gui.taste.adept.salty2");
-			else if(salty < 80) sSalty += StatCollector.translateToLocal("gui.taste.adept.salty3");
-			else if(salty < 100) sSalty += StatCollector.translateToLocal("gui.taste.adept.salty4");
-			else sSalty += StatCollector.translateToLocal("gui.taste.adept.salty5");
-
-			if(bitter < 20) sBitter += StatCollector.translateToLocal("gui.taste.adept.bitter0");
-			else if(bitter < 40) sBitter += StatCollector.translateToLocal("gui.taste.adept.bitter1");
-			else if(bitter < 60) sBitter += StatCollector.translateToLocal("gui.taste.adept.bitter2");
-			else if(bitter < 80) sBitter += StatCollector.translateToLocal("gui.taste.adept.bitter3");
-			else if(bitter < 100) sBitter += StatCollector.translateToLocal("gui.taste.adept.bitter4");
-			else sBitter += StatCollector.translateToLocal("gui.taste.adept.bitter5");
-
-			if(savory < 20) sSavory += StatCollector.translateToLocal("gui.taste.adept.savory0");
-			else if(savory < 40) sSavory += StatCollector.translateToLocal("gui.taste.adept.savory1");
-			else if(savory < 60) sSavory += StatCollector.translateToLocal("gui.taste.adept.savory2");
-			else if(savory < 80) sSavory += StatCollector.translateToLocal("gui.taste.adept.savory3");
-			else if(savory < 100) sSavory += StatCollector.translateToLocal("gui.taste.adept.savory4");
-			else sSavory += StatCollector.translateToLocal("gui.taste.adept.savory5");
-
-			break;
-		}
-		case Expert:
-		{
-			sSweet += getExpertString(sweet);
-			sSour += getExpertString(sour);
-			sSalty += getExpertString(salty);
-			sBitter += getExpertString(bitter);
-			sSavory += getExpertString(savory);
-			break;
-		}
-		case Master:
-		{
-			sSweet += sweet;
-			sSour += sour;
-			sSalty += salty;
-			sBitter += bitter;
-			sSavory += savory;
-			break;
-		}
-		}
-
-		if(TFCOptions.enableDebugMode)
-		{
-			sSweet += " ("+sweet+")";
-			sSour += " ("+sour+")";
-			sSalty += " ("+salty+")";
-			sBitter += " ("+bitter+")";
-			sSavory += " ("+savory+")";
-		}
-
-		arraylist.add(sSweet);
-		arraylist.add(sSour);
-		arraylist.add(sSalty);
-		arraylist.add(sBitter);
-		arraylist.add(sSavory);
 	}
 
 	private String getExpertString(int taste)

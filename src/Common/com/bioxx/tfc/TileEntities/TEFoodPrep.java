@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
@@ -24,7 +25,8 @@ import com.bioxx.tfc.api.Util.Helper;
 
 public class TEFoodPrep extends NetworkTileEntity implements IInventory
 {
-	public ItemStack[] storage = new ItemStack[6];
+	public ItemStack[] storage = new ItemStack[11];
+	public int lastTab = 0;
 	private float[] weights = new float[]{10, 4, 4, 2};
 
 	@Override
@@ -220,6 +222,14 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		if(storage[4] != null || (storage[5] == null || storage[5].getItem() != Items.bowl))
 			return false;
 		return true;
+	}
+
+	public void openGui()
+	{
+		if(lastTab == 0)
+			entityplayer.openGui(TerraFirmaCraft.instance, 44, worldObj, xCoord, yCoord, zCoord);
+		else if (lastTab == 1)
+			entityplayer.openGui(TerraFirmaCraft.instance, 45, worldObj, xCoord, yCoord, zCoord);
 	}
 
 	private long getFoodSeed()
