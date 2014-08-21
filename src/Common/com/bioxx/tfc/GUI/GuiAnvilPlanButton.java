@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
@@ -38,7 +37,7 @@ public class GuiAnvilPlanButton extends GuiButton
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glPushMatrix(); //start
-			TFC_Core.bindTexture(TextureMap.locationItemsTexture);
+			//TFC_Core.bindTexture(TextureMap.locationItemsTexture);
 
 			if(!screen.AnvilEntity.craftingPlan.equals("") && screen.AnvilEntity.workRecipe != null) 
 				renderInventorySlot(screen.AnvilEntity.workRecipe.getCraftingResult(),this.xPosition+1, this.yPosition+1);

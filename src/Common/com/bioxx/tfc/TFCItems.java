@@ -2863,6 +2863,7 @@ public class TFCItems
 
 		GameRegistry.registerItem(Quiver, Quiver.getUnlocalizedName());
 		GameRegistry.registerItem(MudBrick, MudBrick.getUnlocalizedName());
+		GameRegistry.registerItem(Sandwich, Sandwich.getUnlocalizedName());
 
 		System.out.println(new StringBuilder().append("[TFC] All Items Registered").toString());
 	}

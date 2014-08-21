@@ -93,6 +93,7 @@ public class GuiContainerTFC extends GuiContainer
 		this.drawHoveringText(list, mx, my+15, this.fontRendererObj);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
 	}
 
 	protected void drawHoveringTextZLevel(List par1List, int par2, int par3, FontRenderer font, float z)

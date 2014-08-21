@@ -6,7 +6,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -18,6 +17,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.CreateMealPacket;
+import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.IItemFoodBlock;
@@ -27,7 +27,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[11];
 	public int lastTab = 0;
-	private float[] weights = new float[]{10, 4, 4, 2};
+	private float[] sandwichWeights = new float[]{1,3,2,1,1,1};
 
 	@Override
 	public void updateEntity()
@@ -63,9 +63,101 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
+			if(lastTab == 0)
+				createSandwich(player);
+			else if(lastTab == 1)
+				createSalad(player);
+		}
+		else
+		{
+			// Send a network packet to call this method on the Server side
+			// and create a meal, also adds 1 to the players cooking skill.
+			AbstractPacket pkt = new CreateMealPacket(0, this);
+			broadcastPacketInRange(pkt);
+		}
+	}
+
+	private void createSandwich(EntityPlayer player) 
+	{
+		if(storage[0] != null && storage[5] != null)//Bread
+		{
+			NBTTagCompound nbt = new NBTTagCompound();
+			ItemStack is = new ItemStack(TFCItems.Sandwich, 1);
+			Random R = new Random(getFoodSeed());
+			int[] FG = new int[]{-1,-1,-1,-1,-1,-1};
+			if(getStackInSlot(0) != null) FG[0] = ((IFood)(getStackInSlot(0).getItem())).getFoodID();
+			if(getStackInSlot(1) != null) FG[1] = ((IFood)(getStackInSlot(1).getItem())).getFoodID();
+			if(getStackInSlot(2) != null) FG[2] = ((IFood)(getStackInSlot(2).getItem())).getFoodID();
+			if(getStackInSlot(3) != null) FG[3] = ((IFood)(getStackInSlot(3).getItem())).getFoodID();
+			if(getStackInSlot(4) != null) FG[4] = ((IFood)(getStackInSlot(4).getItem())).getFoodID();
+			if(getStackInSlot(5) != null) FG[5] = ((IFood)(getStackInSlot(5).getItem())).getFoodID();
+
+			nbt.setIntArray("FG", FG);
+
+			is.setItemDamage(new Random(getIconSeed()).nextInt(((ItemTerra)TFCItems.Sandwich).MetaIcons.length));
+
+			nbt.setFloat("foodWeight", Helper.roundNumber(getSandwichWeight(sandwichWeights), 10));
+			nbt.setFloat("foodDecay", -24);
+			nbt.setFloat("decayRate", 2.0f);
+			nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
+			combineTastes(nbt, sandwichWeights);
+			is.setTagCompound(nbt);
+
+			this.setInventorySlotContents(6, is);
+
+			consumeFoodWeight(sandwichWeights);
+		}
+	}
+
+	private void createSalad(EntityPlayer player) 
+	{
+
+	}
+
+	public boolean areComponentsCorrect()
+	{
+		if(lastTab == 0)
+		{
+			if(storage[0] == null || storage[5] == null)//Bread
+				return false;
+			int count = 0;
+			if(storage[1] != null) count++;
+			else return false;
+			if(storage[2] != null) count++;
+			if(storage[3] != null) count++;
+			if(storage[4] != null) count++;
+
+			if(count < 2)
+				return false;
+
+			if(!validateSameIngreds(storage[1],storage[2],storage[3],storage[4]))
+				return false;
+
+			if(getSandwichWeight(this.sandwichWeights) == -1)
+				return false;
+		}
+		return true;
+	}
+
+	public boolean validateSameIngreds(ItemStack is1, ItemStack is2, ItemStack is3, ItemStack is4)
+	{
+		if((is1 != null && is2 != null && is1.getItem() == is2.getItem()) || (is1 != null && is3 != null && is1.getItem() == is3.getItem())
+				|| (is1 != null && is4 != null && is1.getItem() == is4.getItem()))
+			return false;
+		if((is2 != null && is3 != null && is2.getItem() == is3.getItem()) || (is2 != null && is4 != null && is2.getItem() == is4.getItem()))
+			return false;
+		if((is3 != null && is4 != null && is3.getItem() == is4.getItem()))
+			return false;
+		return true;
+	}
+
+	public void actionCreateOLD(EntityPlayer player)
+	{
+		if(!worldObj.isRemote)
+		{
 			if(storage[4] == null && storage[5].getItem() == Items.bowl)
 			{
-				if(getMealWeight() >= 14)
+				if(getMealWeight(new float[]{0,0,0,0}) >= 14)
 				{
 					NBTTagCompound nbt = new NBTTagCompound();
 					ItemStack is = new ItemStack(TFCItems.MealGeneric, 1);
@@ -103,11 +195,11 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 						float s = R.nextFloat() * 0.25f + (TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_COOKING) * 0.5f);
 						nbt.setFloat("satisfaction", s);
 					}
-					nbt.setFloat("foodWeight", Helper.roundNumber(getMealWeight(), 10));
+					nbt.setFloat("foodWeight", Helper.roundNumber(getMealWeight(new float[]{0,0,0,0}), 10));
 					nbt.setFloat("foodDecay", -24);
 					nbt.setFloat("decayRate", 2.0f);
 					nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
-					combineTastes(nbt);
+					combineTastes(nbt, new float[]{0,0,0,0});
 					is.setTagCompound(nbt);
 
 					this.setInventorySlotContents(4, is);
@@ -115,7 +207,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 					if(getStackInSlot(5).stackSize == 0)
 						setInventorySlotContents(5, null);
 
-					consumeFoodWeight();
+					consumeFoodWeight(new float[]{0,0,0,0});
 				}
 			}
 		}
@@ -128,14 +220,14 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		}
 	}
 
-	private void combineTastes(NBTTagCompound nbt)
+	private void combineTastes(NBTTagCompound nbt, float[] weights)
 	{
 		int tasteSweet = 0;
 		int tasteSour = 0;
 		int tasteSalty = 0;
 		int tasteBitter = 0;
 		int tasteUmami = 0;
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			float weightMult = ((weights[i]*2)/100f)*5f;
 			if(storage[i] != null)
@@ -152,76 +244,6 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		nbt.setInteger("tasteSalty", tasteSalty);
 		nbt.setInteger("tasteBitter", tasteBitter);
 		nbt.setInteger("tasteUmami", tasteUmami);
-	}
-
-	public boolean areComponentsCorrect()
-	{
-		int f0 = -1;
-		int f1 = -2;
-		int f2 = -2;
-		int f3 = -3;
-		Item[] food = new Item[] {
-				(storage[0] != null ? storage[0].getItem() : null),
-				(storage[1] != null ? storage[1].getItem() : null),
-				(storage[2] != null ? storage[2].getItem() : null),
-				(storage[3] != null ? storage[3].getItem() : null)
-		};
-
-		//First we want to test the foodgroups to see if they match
-		if(getStackInSlot(0) != null)
-			f0 = ((ItemFoodTFC)getStackInSlot(0).getItem()).getFoodGroup().ordinal();
-		if(getStackInSlot(1) != null)
-			f1 = ((ItemFoodTFC)getStackInSlot(1).getItem()).getFoodGroup().ordinal();
-		if(getStackInSlot(2) != null)
-			f2 = ((ItemFoodTFC)getStackInSlot(2).getItem()).getFoodGroup().ordinal();
-		if(getStackInSlot(3) != null)
-			f3 = ((ItemFoodTFC)getStackInSlot(3).getItem()).getFoodGroup().ordinal();
-
-		if(f0==f1 || f0==f2 || f0==f3)//food0 can't be the same foodgroup as the other food types. If it is then we return false
-			return false;
-		else if(f1==f3)//food1 can be the same as food2 so we dont compare those. It can't be the same as food3 however.
-			return false;
-		else if(f2==f3)//food2 can be the same as food1 so we dont compare those. It can't be the same as food3 however.
-			return false;
-
-		f0 = -1;
-		f1 = -1;
-		f2 = -1;
-		f3 = -1;
-
-		//Now we test the food types to make sure that they are different
-		if(getStackInSlot(0) != null && ((IFood)storage[0].getItem()).isUsable())
-			f0 = ((IFood)getStackInSlot(0).getItem()).getFoodID();
-		if(getStackInSlot(1) != null && ((IFood)storage[1].getItem()).isUsable())
-			f1 = ((IFood)getStackInSlot(1).getItem()).getFoodID();
-		if(getStackInSlot(2) != null && ((IFood)storage[2].getItem()).isUsable())
-			f2 = ((IFood)getStackInSlot(2).getItem()).getFoodID();
-		if(getStackInSlot(3) != null && ((IFood)storage[3].getItem()).isUsable())
-			f3 = ((IFood)getStackInSlot(3).getItem()).getFoodID();
-
-		//Now we check the usability of the specific item
-		if(getStackInSlot(0) != null && (f0==f1 || f0==f2 || f0==f3))
-			return false;
-		else if(getStackInSlot(1) != null && (f1==f2 || f1==f3))
-			return false;
-		else if(getStackInSlot(2) != null && f2==f3)
-			return false;
-		else if(getStackInSlot(3) != null && f3 == -1)
-			return false;
-
-		//Next we make sure that each slot has enough food material
-		if(getStackInSlot(0) != null && ((IFood)getStackInSlot(0).getItem()).getFoodWeight(getStackInSlot(0)) < 10)
-			return false;
-		if(getStackInSlot(1) != null && ((IFood)getStackInSlot(1).getItem()).getFoodWeight(getStackInSlot(1)) < 4)
-			return false;
-		if(getStackInSlot(2) != null && ((IFood)getStackInSlot(2).getItem()).getFoodWeight(getStackInSlot(2)) < 4)
-			return false;
-		if(getStackInSlot(3) != null && ((IFood)getStackInSlot(3).getItem()).getFoodWeight(getStackInSlot(3)) < 2)
-			return false;
-
-		if(storage[4] != null || (storage[5] == null || storage[5].getItem() != Items.bowl))
-			return false;
-		return true;
 	}
 
 	public void openGui(EntityPlayer player)
@@ -248,7 +270,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	private long getIconSeed()
 	{
 		int seed = 0;
-		for(int i = 0; i < 3; i++)
+		for(int i = 1; i < 5; i++)
 		{
 			ItemStack is = getStackInSlot(i);
 			if(is != null)
@@ -257,22 +279,36 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		return seed + worldObj.getSeed();
 	}
 
-	public float getMealWeight()
+	public float getMealWeight(float[] weights)
 	{
 		float w = 0;
-		for(int i = 0; i < 4; i++)
+		for(int i = 0; i < 6; i++)
 		{
 			ItemStack is = getStackInSlot(i);
 			if(is != null && ((IFood)is.getItem()).getFoodWeight(is) >= weights[i])
 				w += weights[i];
+			else return -1;
 		}
 		return w;
 	}
 
-	public float consumeFoodWeight()
+	public float getSandwichWeight(float[] weights)
 	{
 		float w = 0;
-		for(int i = 0; i < 4; i++)
+		for(int i = 0; i < 6; i++)
+		{
+			ItemStack is = getStackInSlot(i);
+			if(is != null && ((IFood)is.getItem()).getFoodWeight(is) >= weights[i])
+				w += weights[i];
+			else return -1;
+		}
+		return w;
+	}
+
+	public float consumeFoodWeight(float[] weights)
+	{
+		float w = 0;
+		for(int i = 0; i < 6; i++)
 		{
 			ItemStack is = getStackInSlot(i);
 			if(is != null)
