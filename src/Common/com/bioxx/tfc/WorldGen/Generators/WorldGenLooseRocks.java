@@ -117,7 +117,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 				world.getBlock(i, j, k) .getMaterial() == Material.sand || world.getBlock(i, j, k).getMaterial() == Material.ground) && world.getBlock(i, j, k).isOpaqueCube())
 		{
 			TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(i, k);
-			if((biome == TFCBiome.beach || biome == TFCBiome.ocean || biome == TFCBiome.river || isNearTree(world, i, j, k)) && 
+			if((biome == TFCBiome.beach || biome == TFCBiome.gravelbeach || biome == TFCBiome.ocean || biome == TFCBiome.river || isNearTree(world, i, j, k)) && 
 					world.setBlock(i, j + 1, k, TFCBlocks.worldItem, 0, 2))
 			{
 				TEWorldItem te =(TEWorldItem) world.getTileEntity(i, j + 1, k);
