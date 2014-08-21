@@ -380,10 +380,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public boolean isDamaged(ItemStack is)
 	{
-		if (is.hasTagCompound())
+		/*if (is.hasTagCompound())
 			return true;
-		else
-			return false;
+		else*/
+		return false;
 	}
 
 	@Override
@@ -547,5 +547,22 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		if(is != null && is.getTagCompound().hasKey("tasteUmamiMod"))
 			mod = is.getTagCompound().getInteger("tasteUmamiMod");
 		return mod;
+	}
+
+	@Override
+	public float getFoodMaxWeight(ItemStack is) {
+		return 160;
+	}
+
+	@Override
+	public boolean renderDecay() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean renderWeight() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

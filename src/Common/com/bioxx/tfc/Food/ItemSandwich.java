@@ -37,4 +37,9 @@ public class ItemSandwich extends ItemMeal
 			}
 		}
 	}
+
+	@Override
+	public float getFoodMaxWeight(ItemStack is) {
+		return 9;
+	}
 }

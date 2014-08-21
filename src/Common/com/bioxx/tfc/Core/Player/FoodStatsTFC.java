@@ -11,7 +11,6 @@ import net.minecraft.util.DamageSource;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Food.ItemMeal;
 import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
@@ -340,8 +339,7 @@ public class FoodStatsTFC
 	 */
 	public void eatFood(ItemStack is)
 	{
-
-		if(is.getItem() instanceof ItemFoodTFC)
+		/*if(is.getItem() instanceof ItemFoodTFC)
 		{
 			ItemFoodTFC item = (ItemFoodTFC) is.getItem();
 			float weight = item.getFoodWeight(is);
@@ -360,7 +358,7 @@ public class FoodStatsTFC
 			if(reduceFood(is, eatAmount))
 				is.stackSize = 0;
 		}
-		else if(is.getItem() instanceof ItemMeal)
+		else*/ if(is.getItem() instanceof ItemMeal)
 		{
 			ItemMeal item = (ItemMeal) is.getItem();
 			float weight = item.getFoodWeight(is);

@@ -11,6 +11,7 @@ public interface IFood
 	public int getFoodID();
 	public float getDecayRate();
 	public float getFoodWeight(ItemStack is);
+	public float getFoodMaxWeight(ItemStack is);
 	public float getFoodDecay(ItemStack is);
 	/**
 	 * @return Returns an ItemStack that will replace the current ItemStack when the food has reached maximum decay.
@@ -31,4 +32,6 @@ public interface IFood
 	public int getTasteSalty(ItemStack is);
 	public int getTasteBitter(ItemStack is);
 	public int getTasteSavory(ItemStack is);
+	public boolean renderDecay();
+	public boolean renderWeight();
 }

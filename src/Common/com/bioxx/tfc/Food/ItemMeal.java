@@ -141,7 +141,7 @@ public class ItemMeal extends ItemTerra implements IFood
 	@Override
 	public boolean isDamaged(ItemStack stack)
 	{
-		return true;
+		return false;
 	}
 
 	@Override
@@ -322,5 +322,22 @@ public class ItemMeal extends ItemTerra implements IFood
 		if(is != null && is.getTagCompound().hasKey("tasteUmami"))
 			return is.getTagCompound().getInteger("tasteUmami");
 		return 0;
+	}
+
+	@Override
+	public float getFoodMaxWeight(ItemStack is) {
+		return 20;
+	}
+
+	@Override
+	public boolean renderDecay() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean renderWeight() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

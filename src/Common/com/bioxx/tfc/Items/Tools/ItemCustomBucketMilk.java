@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -20,7 +19,6 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
@@ -227,5 +225,23 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	@Override
 	public int getTasteSavory(ItemStack is) {
 		return 10;
+	}
+
+	@Override
+	public float getFoodMaxWeight(ItemStack is) {
+		// TODO Auto-generated method stub
+		return 160;
+	}
+
+	@Override
+	public boolean renderDecay() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean renderWeight() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

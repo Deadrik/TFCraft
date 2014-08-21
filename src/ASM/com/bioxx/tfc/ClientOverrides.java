@@ -15,14 +15,15 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import org.lwjgl.opengl.GL11;
+
 import com.bioxx.tfc.Core.WeatherManager;
-import com.bioxx.tfc.api.FoodRegistry;
+import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -166,30 +167,64 @@ public class ClientOverrides
 
 	public static void renderIcon(int x, int y, ItemStack is, int xSize, int ySize)
 	{
-		if(is.getItem() == TFCItems.MealGeneric)
+		//Disabled until I can come up with a better way for showing all 6 ingredients
+		/*if(is.getItem() instanceof ItemMeal)
 		{
 			Item i;
 			int offset = 0;
-			if(is.hasTagCompound() && is.getTagCompound().hasKey("FG0"))
+			if(is.hasTagCompound() && is.getTagCompound().hasKey("FG"))
 			{
-				i = FoodRegistry.getInstance().getFood(is.getTagCompound().getInteger("FG0"));
-				renderIcon(x+offset, y, i.getIcon(new ItemStack(i), 0), 4, 4); offset+=4;
+				int[] fg = is.getTagCompound().getIntArray("FG");
+				for(int j = 1; j < fg.length; j++)
+				{
+					i = FoodRegistry.getInstance().getFood(is.getTagCompound().getIntArray("FG")[j]);
+					if(i != null)
+					{
+						renderIcon(x+offset, y, i.getIcon(new ItemStack(i), 0), 4, 4); 
+						offset+=4;
+					}
+				}
+				if(fg[0] != -1)
+				{
+
+				}
 			}
-			if(is.hasTagCompound() && is.getTagCompound().hasKey("FG1"))
+		}*/
+
+		if(is.getItem() instanceof IFood)
+		{
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glDisable(GL11.GL_DEPTH_TEST);
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glDisable(GL11.GL_ALPHA_TEST);
+			GL11.glDisable(GL11.GL_BLEND);
+			float decayPerc = Math.max(((IFood)is.getItem()).getFoodDecay(is) / ((IFood)is.getItem()).getFoodWeight(is), 0);
+
+			renderQuad(x +1, y + 13, 13, 1, 0);
+			float decayTop = decayPerc * 13.0F;
+
+			if(((IFood)is.getItem()).renderDecay())
 			{
-				i = FoodRegistry.getInstance().getFood(is.getTagCompound().getInteger("FG1"));
-				renderIcon(x+offset, y, i.getIcon(new ItemStack(i), 0), 4, 4); offset+=4;
+				if(decayPerc < 0.10)
+				{
+					decayTop = (decayTop*10);
+					renderQuad(x+1, y+13, 13-decayTop, 1, 0x00ff00);
+				}
+				else
+					renderQuad(x+1, y+13, 13-decayTop, 1, 0xff0000);
 			}
-			if(is.hasTagCompound() && is.getTagCompound().hasKey("FG2"))
+			if(((IFood)is.getItem()).renderWeight())
 			{
-				i = FoodRegistry.getInstance().getFood(is.getTagCompound().getInteger("FG2"));
-				renderIcon(x+offset, y, i.getIcon(new ItemStack(i), 0), 4, 4); offset+=4;
+				renderQuad(x + 1, y + 14, 13, 1, 0);
+				float weightPerc = ((IFood)is.getItem()).getFoodWeight(is) / ((IFood)is.getItem()).getFoodMaxWeight(is);
+				float weightTop = weightPerc * 13.0F;
+
+				renderQuad(x+1, y+14, weightTop, 1, 0xffffff);
 			}
-			if(is.hasTagCompound() && is.getTagCompound().hasKey("FG3"))
-			{
-				i = FoodRegistry.getInstance().getFood(is.getTagCompound().getInteger("FG3"));
-				renderIcon(x+offset, y, i.getIcon(new ItemStack(i), 0), 4, 4);
-			}
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glEnable(GL11.GL_LIGHTING);
+			GL11.glEnable(GL11.GL_DEPTH_TEST);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		}
 	}
 
@@ -202,5 +237,17 @@ public class ClientOverrides
 		tessellator.addVertexWithUV((double)(x + sizeX), (double)(y + 0), (double)200, (double)icon.getMaxU(), (double)icon.getMinV());
 		tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)200, (double)icon.getMinU(), (double)icon.getMinV());
 		tessellator.draw();
+	}
+
+	private static void renderQuad(double x, double y, double sizeX, double sizeY, int color)
+	{
+		Tessellator tess = Tessellator.instance;
+		tess.startDrawingQuads();
+		tess.setColorOpaque_I(color);
+		tess.addVertex((double)(x + 0), (double)(y + 0), 0.0D);
+		tess.addVertex((double)(x + 0), (double)(y + sizeY), 0.0D);
+		tess.addVertex((double)(x + sizeX), (double)(y + sizeY), 0.0D);
+		tess.addVertex((double)(x + sizeX), (double)(y + 0), 0.0D);
+		tess.draw();
 	}
 }
