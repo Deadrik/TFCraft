@@ -8,10 +8,14 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotBlocked;
 import com.bioxx.tfc.Containers.Slots.SlotFoodOnly;
+import com.bioxx.tfc.Containers.Slots.SlotSize;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
+import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class ContainerFoodPrep extends ContainerTFC
@@ -57,17 +61,22 @@ public class ContainerFoodPrep extends ContainerTFC
 
 	protected void layoutContainer(IInventory playerInventory, IInventory chestInventory, int xSize, int ySize)
 	{
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 35, 11));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 53, 11));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 71, 11));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 89, 11));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 107, 11));
-		this.addSlotToContainer(new SlotFoodOnly(chestInventory, 5, 125, 11));
+		if(guiTab == 0)
+		{
+			this.addSlotToContainer(new SlotSize(chestInventory, 4, 35, 11).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread, 
+					TFCItems.RyeBread, TFCItems.RiceBread, TFCItems.CornBread));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 53, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 71, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 89, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 107, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk));
+			this.addSlotToContainer(new SlotSize(chestInventory, 5, 125, 11).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread, 
+					TFCItems.RyeBread, TFCItems.RiceBread, TFCItems.CornBread));
+		}
 		this.addSlotToContainer(new SlotBlocked(chestInventory, 6, 80, 35));
-		this.addSlotToContainer(new Slot(chestInventory, 7, 53, 59));
-		this.addSlotToContainer(new Slot(chestInventory, 8, 71, 59));
-		this.addSlotToContainer(new Slot(chestInventory, 9, 89, 59));
-		this.addSlotToContainer(new Slot(chestInventory, 10, 107, 59));
+		this.addSlotToContainer(new SlotSize(chestInventory, 7, 53, 59).setSize(EnumSize.SMALL));
+		this.addSlotToContainer(new SlotSize(chestInventory, 8, 71, 59).setSize(EnumSize.SMALL));
+		this.addSlotToContainer(new SlotSize(chestInventory, 9, 89, 59).setSize(EnumSize.SMALL));
+		this.addSlotToContainer(new SlotSize(chestInventory, 10, 107, 59).setSize(EnumSize.SMALL));
 	}
 
 	public EntityPlayer getPlayer()

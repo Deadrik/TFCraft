@@ -42,7 +42,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 
 		ItemTerra.addSizeInformation(is, arraylist);
 		ItemTerra.addHeatInformation(is, arraylist);
-		
+
 
 		if(is.getItem() instanceof ICausesDamage)
 			arraylist.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal(((ICausesDamage)this).GetDamageType().toString()));
@@ -80,6 +80,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/" + this.getUnlocalizedName().replace("item.", ""));
 		if (TFC_Textures.BrokenItem == null) TFC_Textures.BrokenItem = registerer.registerIcon(Reference.ModID + ":" + "tools/Broken Item");
+		if (TFC_Textures.WIP == null) TFC_Textures.WIP = registerer.registerIcon(Reference.ModID + ":" + "wip");
 	}
 
 	@Override
@@ -109,9 +110,9 @@ public class ItemTerraTool extends ItemTool implements ISize
 	@Override
 	public Multimap getItemAttributeModifiers()
 	{
-//		Multimap multimap = HashMultimap.create();
-//		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
-//		return multimap;
+		//		Multimap multimap = HashMultimap.create();
+		//		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
+		//		return multimap;
 		return super.getItemAttributeModifiers();
 	}
 

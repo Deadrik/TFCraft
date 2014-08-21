@@ -8,6 +8,7 @@ public class TFC_Textures
 	 * Registered in ItemTerraTool
 	 */
 	public static IIcon BrokenItem;
+	public static IIcon WIP;
 	/**
 	 * These are defined in BlockGrass
 	 */

@@ -3,33 +3,33 @@ package com.bioxx.tfc.Containers.Slots;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Interfaces.ISize;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Interfaces.ISize;
+
 public class SlotSize extends Slot
 {
 	EnumSize size = EnumSize.MEDIUM;
-
-	List excpetions;
+	List excpetions = new ArrayList<Item>();
+	List inclusions = new ArrayList<Item>();
 
 	public SlotSize(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
-		excpetions = new ArrayList<Item>();
 	}
 
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		boolean except = excpetions.contains(itemstack.getItem());
-		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize && !except)
+		boolean include = inclusions.contains(itemstack.getItem()) || inclusions.size() == 0;
+		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize && !except && include)
 			return true;
-		else if (!(itemstack.getItem() instanceof ISize) && !except)
+		else if (!(itemstack.getItem() instanceof ISize) && !except && include)
 			return true;
 		return false;
 	}
@@ -40,9 +40,17 @@ public class SlotSize extends Slot
 		return this;
 	}
 
-	public SlotSize addItemException(ArrayList<Item> ex)
+	public SlotSize addItemException(Item... ex)
 	{
-		excpetions = ex;
+		for(int i = 0; i < ex.length; i++)
+			excpetions.add(ex[i]);
+		return this;
+	}
+
+	public SlotSize addItemInclusion(Item... ex)
+	{
+		for(int i = 0; i < ex.length; i++)
+			inclusions.add(ex[i]);
 		return this;
 	}
 }

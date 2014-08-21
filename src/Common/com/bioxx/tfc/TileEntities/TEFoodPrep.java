@@ -224,12 +224,12 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		return true;
 	}
 
-	public void openGui()
+	public void openGui(EntityPlayer player)
 	{
 		if(lastTab == 0)
-			entityplayer.openGui(TerraFirmaCraft.instance, 44, worldObj, xCoord, yCoord, zCoord);
+			player.openGui(TerraFirmaCraft.instance, 44, worldObj, xCoord, yCoord, zCoord);
 		else if (lastTab == 1)
-			entityplayer.openGui(TerraFirmaCraft.instance, 45, worldObj, xCoord, yCoord, zCoord);
+			player.openGui(TerraFirmaCraft.instance, 45, worldObj, xCoord, yCoord, zCoord);
 	}
 
 	private long getFoodSeed()

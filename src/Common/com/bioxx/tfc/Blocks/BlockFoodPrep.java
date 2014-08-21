@@ -33,7 +33,7 @@ public class BlockFoodPrep extends BlockTerraContainer
 		if(!world.isRemote)
 		{
 			TEFoodPrep te = (TEFoodPrep) world.getTileEntity(x, y, z);
-			te.openGui();
+			te.openGui(entityplayer);
 		}
 		return true;
 	}

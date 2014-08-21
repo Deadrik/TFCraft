@@ -395,15 +395,33 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public EnumSize getSize(ItemStack is)
 	{
-		return size;
+		float weight = getFoodWeight(is);
+		if(weight < 32)
+			return EnumSize.TINY;
+		else if(weight < 64)
+			return EnumSize.VERYSMALL;
+		else if(weight < 96)
+			return EnumSize.SMALL;
+		else if(weight < 128)
+			return EnumSize.MEDIUM;
+		else if(weight < 160)
+			return EnumSize.LARGE;
+		else if(weight < 192)
+			return EnumSize.VERYLARGE;
+		else
+			return EnumSize.HUGE;
 	}
 
 	@Override
 	public EnumWeight getWeight(ItemStack is)
 	{
-		if(is!= null && is.getTagCompound() != null && is.getTagCompound().hasKey("foodWeight"))
+		float weight = getFoodWeight(is);
+		if(weight < 80)
+			return EnumWeight.LIGHT;
+		else if(weight < 160)
+			return EnumWeight.MEDIUM;
+		else
 			return EnumWeight.HEAVY;
-		return weight;
 	}
 	@Override
 	public boolean canStack()
