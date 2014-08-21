@@ -61,14 +61,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		{
 			NBTTagCompound nbt = is.getTagCompound();
 
-			if(nbt.hasKey("FG0"))
-				arraylist.add(localize(nbt.getInteger("FG0")));
-			if(nbt.hasKey("FG1"))
-				arraylist.add(localize(nbt.getInteger("FG1")));
-			if(nbt.hasKey("FG2"))
-				arraylist.add(localize(nbt.getInteger("FG2")));
-			if(nbt.hasKey("FG3"))
-				arraylist.add(localize(nbt.getInteger("FG3")));
+			addFGInformation(is, arraylist);
 
 			/*if(nbt.hasKey("satisfaction"))
 			{
@@ -108,6 +101,23 @@ public class ItemMeal extends ItemTerra implements IFood
 		}
 	}
 
+	protected void addFGInformation(ItemStack is, List arraylist)
+	{
+		if (is.hasTagCompound())
+		{
+			NBTTagCompound nbt = is.getTagCompound();
+			if(nbt.hasKey("FG"))
+			{
+				int[] fg = nbt.getIntArray("FG");
+				for(int i = 0; i < fg.length; i++)
+				{
+					if(fg[i] != -1)
+						arraylist.add(localize(fg[i]));
+				}
+			}
+		}
+	}
+
 	private String getExpertString(int taste)
 	{
 		if(taste < 20) return "0-20";
@@ -140,7 +150,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		return 100;
 	}
 
-	private String localize(int id)
+	protected String localize(int id)
 	{
 		return ItemFoodTFC.getFoodGroupColor(FoodRegistry.getInstance().getFoodGroup(id)) + 
 				StatCollector.translateToLocal(FoodRegistry.getInstance().getFood(id).getUnlocalizedName() + ".name");
