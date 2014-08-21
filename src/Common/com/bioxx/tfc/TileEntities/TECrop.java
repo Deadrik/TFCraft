@@ -164,7 +164,7 @@ public class TECrop extends NetworkTileEntity
 
 				if(oldGrowth < (int) Math.floor(growth))
 				{
-					System.out.println(xCoord+","+yCoord+","+zCoord);
+					//System.out.println(xCoord+","+yCoord+","+zCoord);
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 
