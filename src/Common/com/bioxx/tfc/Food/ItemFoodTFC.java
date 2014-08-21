@@ -32,6 +32,9 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.ISize;
 import com.bioxx.tfc.api.Util.Helper;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 {
 	/**
@@ -87,6 +90,16 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		this.decayRate = f;
 		return this;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getColorFromItemStack(ItemStack is, int par2)
+	{
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("cooked"))
+			return 0xA08268;
+
+		return 16777215;
 	}
 
 	@Override
@@ -462,12 +475,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getTasteSweet(ItemStack is) {
 		int base = tasteSweet;
-		int mod = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteSweet"))
 			base = is.getTagCompound().getInteger("tasteSweet");
-		if(is != null && is.getTagCompound().hasKey("tasteSweetMod"))
-			mod = is.getTagCompound().getInteger("tasteSweetMod");
-		return base + mod;
+		return base + getTasteSweetMod(is);
 	}
 
 	public int getTasteSweetMod(ItemStack is) {
@@ -480,12 +490,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getTasteSour(ItemStack is) {
 		int base = tasteSour;
-		int mod = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteSour"))
 			base = is.getTagCompound().getInteger("tasteSour");
-		if(is != null && is.getTagCompound().hasKey("tasteSourMod"))
-			mod = is.getTagCompound().getInteger("tasteSourMod");
-		return base + mod;
+		return base + getTasteSourMod(is);
 	}
 
 	public int getTasteSourMod(ItemStack is) {
@@ -498,12 +505,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getTasteSalty(ItemStack is) {
 		int base = tasteSalty;
-		int mod = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteSalty"))
-			base = is.getTagCompound().getInteger("tasteSalty");
-		if(is != null && is.getTagCompound().hasKey("tasteSaltyMod"))
-			mod = is.getTagCompound().getInteger("tasteSaltyMod");
-		return base + mod;
+			base = is.getTagCompound().getInteger("tasteSalty");;
+			return base + getTasteSaltyMod(is);
 	}
 
 	public int getTasteSaltyMod(ItemStack is) {
@@ -516,12 +520,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getTasteBitter(ItemStack is) {
 		int base = tasteBitter;
-		int mod = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteBitter"))
 			base = is.getTagCompound().getInteger("tasteBitter");
-		if(is != null && is.getTagCompound().hasKey("tasteBitterMod"))
-			mod = is.getTagCompound().getInteger("tasteBitterMod");
-		return base + mod;
+		return base + getTasteBitterMod(is);
 	}
 
 	public int getTasteBitterMod(ItemStack is) {
@@ -534,12 +535,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	@Override
 	public int getTasteSavory(ItemStack is) {
 		int base = tasteUmami;
-		int mod = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteUmami"))
 			base = is.getTagCompound().getInteger("tasteUmami");
-		if(is != null && is.getTagCompound().hasKey("tasteUmamiMod"))
-			mod = is.getTagCompound().getInteger("tasteUmamiMod");
-		return base + mod;
+		return base + getTasteSavoryMod(is);
 	}
 
 	public int getTasteSavoryMod(ItemStack is) {

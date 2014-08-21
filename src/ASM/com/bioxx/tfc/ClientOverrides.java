@@ -191,7 +191,7 @@ public class ClientOverrides
 			}
 		}*/
 
-		if(is.getItem() instanceof IFood)
+		if(is.getItem() instanceof IFood && is.hasTagCompound())
 		{
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glDisable(GL11.GL_DEPTH_TEST);
