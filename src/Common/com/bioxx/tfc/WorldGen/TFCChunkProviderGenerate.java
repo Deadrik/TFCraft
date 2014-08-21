@@ -590,7 +590,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							subSurfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
 						}
 
-						if(TFC_Core.isBeachBiome(biome.biomeID) || biome == TFCBiome.ocean || biome == TFCBiome.DeepOcean)
+						if(biome == TFCBiome.beach || biome == TFCBiome.ocean || biome == TFCBiome.DeepOcean)
 						{
 							subSurfaceBlock = surfaceBlock = TFC_Core.getTypeForSand(rock1.data1);
 						}
@@ -668,18 +668,17 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							//Determine the soil depth based on world height
 							int dirtH = Math.max(8-((height + 96 - 145) / 16), 0);
 
-							if(var13 > 0 && !TFC_Core.isMountainBiome(biome.biomeID))
+							if(var13 > 0)
 							{
 								if (height >= seaLevel - 1 && index+1 < idsTop.length && idsTop[index + 1] != TFCBlocks.SaltWater && dirtH > 0)
 								{
 									idsBig[indexBig] = surfaceBlock;
 									metaBig[indexBig] = (byte)TFC_Core.getSoilMeta(rock1.data1);
 
-									for(int c = 1; c < dirtH; c++)
+									for(int c = 1; c < dirtH && !TFC_Core.isMountainBiome(biome.biomeID); c++)
 									{
 										int _height = height - c;
 										int _indexBig = ((arrayIndex) * 256 + _height + 128);
-
 										idsBig[_indexBig] = subSurfaceBlock;
 										metaBig[_indexBig] = (byte)TFC_Core.getSoilMeta(rock1.data1);
 
