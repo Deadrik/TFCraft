@@ -2,14 +2,9 @@ package com.bioxx.tfc.Food;
 
 import java.util.List;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
-
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 
 public class ItemSandwich extends ItemMeal
 {
@@ -21,18 +16,6 @@ public class ItemSandwich extends ItemMeal
 		this.MetaNames = new String[]{"Sandwich0","Sandwich1","Sandwich2","Sandwich3"};
 		this.MetaIcons = new IIcon[4];
 		this.setFolder("food/");
-	}
-
-	@Override
-	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
-	{
-		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-
-		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-		if(!world.isRemote)
-			foodstats.eatFood(is);
-		TFC_Core.setPlayerFoodStats(player, foodstats);
-		return is;
 	}
 
 	@Override
@@ -53,6 +36,12 @@ public class ItemSandwich extends ItemMeal
 				}
 			}
 		}
+	}
+
+	@Override
+	protected float[] getComponentWeights()
+	{
+		return new float[]{0.05f,0.15f,0.1f,0.05f,0.05f,0.05f};
 	}
 
 	@Override
