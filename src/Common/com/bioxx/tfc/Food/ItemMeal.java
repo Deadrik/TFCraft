@@ -156,6 +156,11 @@ public class ItemMeal extends ItemTerra implements IFood
 				StatCollector.translateToLocal(FoodRegistry.getInstance().getFood(id).getUnlocalizedName() + ".name");
 	}
 
+	protected float[] getComponentWeights()
+	{
+		return new float[]{0.5f,0.2f,0.2f,0.1f};
+	}
+
 	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
@@ -163,7 +168,36 @@ public class ItemMeal extends ItemTerra implements IFood
 
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		if(!world.isRemote)
-			foodstats.eatFood(is);
+		{
+			ItemMeal item = (ItemMeal) is.getItem();
+			float weight = item.getFoodWeight(is);
+			float decay = Math.max(item.getFoodDecay(is), 0);
+			float eatAmount = Math.min(weight - decay, 5f);
+			float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
+			if(stomachDiff > 0)
+				eatAmount-=stomachDiff;
+			float tasteFactor = foodstats.getTasteFactor(is);
+			//add the nutrition contents
+			int[] fg = is.getTagCompound().getIntArray("FG");
+			float[] weights = getComponentWeights();
+			for(int i = 0; i < 4; i++)
+			{
+				if(fg[i] != -1)
+					foodstats.addNutrition(FoodRegistry.getInstance().getFoodGroup(fg[i]), eatAmount*weights[i]*tasteFactor);
+			}
+
+			//fill the stomach
+			foodstats.stomachLevel += eatAmount;
+			float _sat = item.getSatisfaction(is);
+			if(!ItemMeal.isWarm(is))
+				_sat *= 0.25f;
+			foodstats.setSatisfaction(foodstats.getSatisfaction() + eatAmount * _sat * tasteFactor);
+			//Now remove the eaten amount from the itemstack.
+			if(FoodStatsTFC.reduceFood(is, eatAmount))
+			{
+				is.stackSize = 0;
+			}
+		}
 		TFC_Core.setPlayerFoodStats(player, foodstats);
 		return is;
 	}
@@ -291,37 +325,77 @@ public class ItemMeal extends ItemTerra implements IFood
 
 	@Override
 	public int getTasteSweet(ItemStack is) {
+		int base = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteSweet"))
-			return is.getTagCompound().getInteger("tasteSweet");
-		return 0;
+			base = is.getTagCompound().getInteger("tasteSweet");
+		return base + getTasteSweetMod(is);
+	}
+
+	public int getTasteSweetMod(ItemStack is) {
+		int mod = 0;
+		if(is != null && is.getTagCompound().hasKey("tasteSweetMod"))
+			mod = is.getTagCompound().getInteger("tasteSweetMod");
+		return mod;
 	}
 
 	@Override
 	public int getTasteSour(ItemStack is) {
+		int base = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteSour"))
-			return is.getTagCompound().getInteger("tasteSour");
-		return 0;
+			base = is.getTagCompound().getInteger("tasteSour");
+		return base + getTasteSourMod(is);
+	}
+
+	public int getTasteSourMod(ItemStack is) {
+		int mod = 0;
+		if(is != null && is.getTagCompound().hasKey("tasteSourMod"))
+			mod = is.getTagCompound().getInteger("tasteSourMod");
+		return mod;
 	}
 
 	@Override
 	public int getTasteSalty(ItemStack is) {
+		int base = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteSalty"))
-			return is.getTagCompound().getInteger("tasteSalty");
-		return 0;
+			base = is.getTagCompound().getInteger("tasteSalty");;
+			return base + getTasteSaltyMod(is);
+	}
+
+	public int getTasteSaltyMod(ItemStack is) {
+		int mod = 0;
+		if(is != null && is.getTagCompound().hasKey("tasteSaltyMod"))
+			mod = is.getTagCompound().getInteger("tasteSaltyMod");
+		return mod;
 	}
 
 	@Override
 	public int getTasteBitter(ItemStack is) {
+		int base = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteBitter"))
-			return is.getTagCompound().getInteger("tasteBitter");
-		return 0;
+			base = is.getTagCompound().getInteger("tasteBitter");
+		return base + getTasteBitterMod(is);
+	}
+
+	public int getTasteBitterMod(ItemStack is) {
+		int mod = 0;
+		if(is != null && is.getTagCompound().hasKey("tasteBitterMod"))
+			mod = is.getTagCompound().getInteger("tasteBitterMod");
+		return mod;
 	}
 
 	@Override
 	public int getTasteSavory(ItemStack is) {
+		int base = 0;
 		if(is != null && is.getTagCompound().hasKey("tasteUmami"))
-			return is.getTagCompound().getInteger("tasteUmami");
-		return 0;
+			base = is.getTagCompound().getInteger("tasteUmami");
+		return base + getTasteSavoryMod(is);
+	}
+
+	public int getTasteSavoryMod(ItemStack is) {
+		int mod = 0;
+		if(is != null && is.getTagCompound().hasKey("tasteUmamiMod"))
+			mod = is.getTagCompound().getInteger("tasteUmamiMod");
+		return mod;
 	}
 
 	@Override
@@ -331,13 +405,11 @@ public class ItemMeal extends ItemTerra implements IFood
 
 	@Override
 	public boolean renderDecay() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean renderWeight() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }

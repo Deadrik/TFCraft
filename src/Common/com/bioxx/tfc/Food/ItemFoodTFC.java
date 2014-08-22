@@ -280,7 +280,29 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		if(!world.isRemote && isEdible)
-			foodstats.eatFood(is);
+		{
+			if(is.hasTagCompound())
+			{
+				NBTTagCompound nbt = is.getTagCompound();
+				float weight = ((IFood)(is.getItem())).getFoodWeight(is);
+				float decay = Math.max(((IFood)(is.getItem())).getFoodDecay(is), 0);
+
+				float eatAmount = Math.min(weight - decay, 5f);
+				float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
+				if(stomachDiff > 0)
+					eatAmount-=stomachDiff;
+
+				float tasteFactor = foodstats.getTasteFactor(is);
+				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount*tasteFactor);
+				foodstats.stomachLevel += eatAmount*tasteFactor;
+				if(FoodStatsTFC.reduceFood(is, eatAmount))
+					is.stackSize = 0;
+			}
+			else
+			{
+				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), 1f);
+			}
+		}
 
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		TFC_Core.setPlayerFoodStats(player, foodstats);

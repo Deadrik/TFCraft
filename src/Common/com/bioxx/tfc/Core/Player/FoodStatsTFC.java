@@ -11,8 +11,6 @@ import net.minecraft.util.DamageSource;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Food.ItemMeal;
-import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
@@ -306,7 +304,7 @@ public class FoodStatsTFC
 		return new int[]{10+R.nextInt(80),10+R.nextInt(80),10+R.nextInt(80),10+R.nextInt(80),10+R.nextInt(80)};
 	}
 
-	float getTasteFactor(ItemStack food)
+	public float getTasteFactor(ItemStack food)
 	{
 		Random R = new Random(getPlayerFoodSeed());
 		float tasteFactor = 0.8f;
@@ -332,89 +330,6 @@ public class FoodStatsTFC
 			return (11-abs)*0.01f;
 		}
 		else return 0;
-	}
-
-	/**
-	 * Eat some food.
-	 */
-	public void eatFood(ItemStack is)
-	{
-		/*if(is.getItem() instanceof ItemFoodTFC)
-		{
-			ItemFoodTFC item = (ItemFoodTFC) is.getItem();
-			float weight = item.getFoodWeight(is);
-			float decay = Math.max(item.getFoodDecay(is), 0);
-			float eatAmount = Math.min(weight - decay, 5f);
-			float stomachDiff = this.stomachLevel+eatAmount-getMaxStomach(this.player);
-			if(stomachDiff > 0)
-				eatAmount-=stomachDiff;
-
-			float tasteFactor = getTasteFactor(is);
-			//add the nutrition contents
-			addNutrition(item.getFoodGroup(), eatAmount*tasteFactor);
-			//fill the stomach
-			this.stomachLevel += eatAmount*tasteFactor;
-			//Now remove the eaten amount from the itemstack.
-			if(reduceFood(is, eatAmount))
-				is.stackSize = 0;
-		}
-		else*/ if(is.getItem() instanceof ItemMeal)
-		{
-			ItemMeal item = (ItemMeal) is.getItem();
-			float weight = item.getFoodWeight(is);
-			float decay = Math.max(item.getFoodDecay(is), 0);
-			float eatAmount = Math.min(weight - decay, 5f);
-			float stomachDiff = this.stomachLevel+eatAmount-getMaxStomach(this.player);
-			if(stomachDiff > 0)
-				eatAmount-=stomachDiff;
-			float tasteFactor = getTasteFactor(is);
-			//add the nutrition contents
-			int[] fg = new int[]{getfg(is, 0), getfg(is, 1), getfg(is, 2), getfg(is, 3)};
-			float[] weights = new float[]{0.5f,0.2f,0.2f,0.1f};
-			for(int i = 0; i < 4; i++)
-			{
-				if(fg[i] != -1)
-					addNutrition(FoodRegistry.getInstance().getFoodGroup(fg[i]), eatAmount*weights[i]*tasteFactor);
-			}
-
-			//fill the stomach
-			this.stomachLevel += eatAmount;
-			float _sat = item.getSatisfaction(is);
-			if(!ItemMeal.isWarm(is))
-				_sat *= 0.25f;
-			this.satisfaction += eatAmount * _sat * tasteFactor;
-			//Now remove the eaten amount from the itemstack.
-			if(reduceFood(is, eatAmount))
-			{
-				is.stackSize = 0;
-			}
-		}
-		else if(is.getItem() instanceof IFood)
-		{
-			if(is.hasTagCompound())
-			{
-				NBTTagCompound nbt = is.getTagCompound();
-				float weight = nbt.hasKey("foodWeight") ? nbt.getFloat("foodWeight") : 0;
-				float decay = Math.max(nbt.hasKey("foodDecay") ? nbt.getFloat("foodDecay") : 0, 0);
-				float eatAmount = Math.min(weight - decay, 5f);
-				float tasteFactor = getTasteFactor(is);
-				addNutrition(((IFood)(is.getItem())).getFoodGroup(), eatAmount*tasteFactor);
-				this.stomachLevel += eatAmount*tasteFactor;
-				if(reduceFood(is, eatAmount))
-					is.stackSize = 0;
-			}
-			else
-			{
-				addNutrition(((IFood)(is.getItem())).getFoodGroup(), 1f);
-			}
-		}
-	}
-
-	private int getfg(ItemStack is, int i)
-	{
-		if(is.getTagCompound().hasKey("FG" + i))
-			return is.getTagCompound().getInteger("FG" + i);
-		return -1;
 	}
 
 	public float getNutritionHealthModifier()
@@ -457,7 +372,7 @@ public class FoodStatsTFC
 		return false;
 	}
 
-	private void addNutrition(EnumFoodGroup fg, float foodAmt)
+	public void addNutrition(EnumFoodGroup fg, float foodAmt)
 	{
 		float amount = foodAmt/5f/50f;//converts it to 2% if it is 5oz of food
 		switch(fg)
