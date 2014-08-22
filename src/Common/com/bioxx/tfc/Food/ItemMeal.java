@@ -181,7 +181,7 @@ public class ItemMeal extends ItemTerra implements IFood
 			}
 
 			//fill the stomach
-			foodstats.stomachLevel += eatAmount;
+			foodstats.stomachLevel += eatAmount * getFillingBoost();
 			foodstats.setSatisfaction(foodstats.getSatisfaction() + eatAmount * tasteFactor);
 			//Now remove the eaten amount from the itemstack.
 			if(FoodStatsTFC.reduceFood(is, eatAmount))
