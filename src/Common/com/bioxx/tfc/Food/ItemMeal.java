@@ -161,6 +161,11 @@ public class ItemMeal extends ItemTerra implements IFood
 		return new float[]{0.5f,0.2f,0.2f,0.1f};
 	}
 
+	protected float getEatAmount()
+	{
+		return 5f;
+	}
+
 	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
@@ -172,7 +177,7 @@ public class ItemMeal extends ItemTerra implements IFood
 			ItemMeal item = (ItemMeal) is.getItem();
 			float weight = item.getFoodWeight(is);
 			float decay = Math.max(item.getFoodDecay(is), 0);
-			float eatAmount = Math.min(weight - decay, 5f);
+			float eatAmount = Math.min(weight - decay, getEatAmount());
 			float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
 			if(stomachDiff > 0)
 				eatAmount-=stomachDiff;
@@ -180,7 +185,7 @@ public class ItemMeal extends ItemTerra implements IFood
 			//add the nutrition contents
 			int[] fg = is.getTagCompound().getIntArray("FG");
 			float[] weights = getComponentWeights();
-			for(int i = 0; i < 4; i++)
+			for(int i = 0; i < fg.length; i++)
 			{
 				if(fg[i] != -1)
 					foodstats.addNutrition(FoodRegistry.getInstance().getFoodGroup(fg[i]), eatAmount*weights[i]*tasteFactor);
@@ -188,10 +193,7 @@ public class ItemMeal extends ItemTerra implements IFood
 
 			//fill the stomach
 			foodstats.stomachLevel += eatAmount;
-			float _sat = item.getSatisfaction(is);
-			if(!ItemMeal.isWarm(is))
-				_sat *= 0.25f;
-			foodstats.setSatisfaction(foodstats.getSatisfaction() + eatAmount * _sat * tasteFactor);
+			foodstats.setSatisfaction(foodstats.getSatisfaction() + eatAmount * tasteFactor);
 			//Now remove the eaten amount from the itemstack.
 			if(FoodStatsTFC.reduceFood(is, eatAmount))
 			{

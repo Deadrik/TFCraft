@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,7 +17,6 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.CreateMealPacket;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.IItemFoodBlock;
 import com.bioxx.tfc.api.Util.Helper;
@@ -149,75 +147,6 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		if((is3 != null && is4 != null && is3.getItem() == is4.getItem()))
 			return false;
 		return true;
-	}
-
-	public void actionCreateOLD(EntityPlayer player)
-	{
-		if(!worldObj.isRemote)
-		{
-			if(storage[4] == null && storage[5].getItem() == Items.bowl)
-			{
-				if(getMealWeight(new float[]{0,0,0,0}) >= 14)
-				{
-					NBTTagCompound nbt = new NBTTagCompound();
-					ItemStack is = new ItemStack(TFCItems.MealGeneric, 1);
-					Random R = new Random(getFoodSeed());
-					Random Ri = new Random(getIconSeed());
-
-					int count = -2;
-					if(getStackInSlot(0) != null)
-					{
-						count++;
-						nbt.setInteger("FG0", ((IFood)(getStackInSlot(0).getItem())).getFoodID());
-					}
-					if(getStackInSlot(1) != null)
-					{
-						count++;
-						nbt.setInteger("FG1", ((IFood)(getStackInSlot(1).getItem())).getFoodID());
-					}
-					if(getStackInSlot(2) != null)
-					{
-						count++;
-						nbt.setInteger("FG2", ((IFood)(getStackInSlot(2).getItem())).getFoodID());
-					}
-					if(getStackInSlot(3) != null)
-					{
-						count++;
-						nbt.setInteger("FG3", ((IFood)(getStackInSlot(3).getItem())).getFoodID());
-					}
-
-					float mult = 0.15f + 0.12f * count;
-
-					//set the icon for this meal
-					is.setItemDamage(Ri.nextInt(11));
-					if(R.nextFloat() < mult)
-					{
-						float s = R.nextFloat() * 0.25f + (TFC_Core.getSkillStats(player).getSkillMultiplier(Global.SKILL_COOKING) * 0.5f);
-						nbt.setFloat("satisfaction", s);
-					}
-					nbt.setFloat("foodWeight", Helper.roundNumber(getMealWeight(new float[]{0,0,0,0}), 10));
-					nbt.setFloat("foodDecay", -24);
-					nbt.setFloat("decayRate", 2.0f);
-					nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
-					combineTastes(nbt, new float[]{0,0,0,0});
-					is.setTagCompound(nbt);
-
-					this.setInventorySlotContents(4, is);
-					this.getStackInSlot(5).stackSize--;
-					if(getStackInSlot(5).stackSize == 0)
-						setInventorySlotContents(5, null);
-
-					consumeFoodWeight(new float[]{0,0,0,0});
-				}
-			}
-		}
-		else
-		{
-			// Send a network packet to call this method on the Server side
-			// and create a meal, also adds 1 to the players cooking skill.
-			AbstractPacket pkt = new CreateMealPacket(0, this);
-			broadcastPacketInRange(pkt);
-		}
 	}
 
 	private void combineTastes(NBTTagCompound nbt, float[] weights)
