@@ -92,7 +92,16 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		{
 			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 
-			foodstats.eatFood(is);
+			if(is.hasTagCompound())
+			{
+				NBTTagCompound nbt = is.getTagCompound();
+				float weight = ((IFood)(is.getItem())).getFoodWeight(is);
+				float decay = Math.max(((IFood)(is.getItem())).getFoodDecay(is), 0);
+
+				float tasteFactor = foodstats.getTasteFactor(is);
+				foodstats.addNutrition(((IFood)(is.getItem())).getFoodGroup(), 20*tasteFactor);
+			}
+
 			foodstats.restoreWater(player, 16000);
 
 			TFC_Core.setPlayerFoodStats(player, foodstats);
@@ -230,7 +239,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	@Override
 	public float getFoodMaxWeight(ItemStack is) {
 		// TODO Auto-generated method stub
-		return 160;
+		return 80;
 	}
 
 	@Override
