@@ -39,8 +39,15 @@ public class ItemSandwich extends ItemMeal
 	}
 
 	@Override
+	protected float getEatAmount()
+	{
+		return 9f;
+	}
+
+	@Override
 	protected float[] getComponentWeights()
 	{
+		//These numbers are 5% of the oz value for each slot 1/3/2/1/1/1
 		return new float[]{0.05f,0.15f,0.1f,0.05f,0.05f,0.05f};
 	}
 
