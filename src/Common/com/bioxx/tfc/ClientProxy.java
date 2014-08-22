@@ -18,7 +18,6 @@ import net.minecraft.client.renderer.entity.RenderZombie;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.GuiIngameForge;
@@ -77,7 +76,6 @@ import com.bioxx.tfc.Render.RenderFishTFC;
 import com.bioxx.tfc.Render.RenderHorseTFC;
 import com.bioxx.tfc.Render.RenderPheasantTFC;
 import com.bioxx.tfc.Render.RenderPigTFC;
-import com.bioxx.tfc.Render.RenderPlayerTFC;
 import com.bioxx.tfc.Render.RenderSheepTFC;
 import com.bioxx.tfc.Render.RenderSkeletonTFC;
 import com.bioxx.tfc.Render.RenderSquidTFC;
@@ -125,7 +123,6 @@ import com.bioxx.tfc.Render.TESR.TESRGrill;
 import com.bioxx.tfc.Render.TESR.TESRIngotPile;
 import com.bioxx.tfc.Render.TESR.TESRPottery;
 import com.bioxx.tfc.Render.TESR.TESRQuern;
-import com.bioxx.tfc.Render.TESR.TESRWaterPlant;
 import com.bioxx.tfc.Render.TESR.TESRToolrack;
 import com.bioxx.tfc.Render.TESR.TESRWorldItem;
 import com.bioxx.tfc.TileEntities.TEAnvil;
@@ -134,10 +131,9 @@ import com.bioxx.tfc.TileEntities.TEChest;
 import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEGrill;
-import com.bioxx.tfc.TileEntities.TEPottery;
-import com.bioxx.tfc.TileEntities.TEWaterPlant;
-import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
+import com.bioxx.tfc.TileEntities.TEPottery;
+import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
 import com.bioxx.tfc.api.Enums.EnumTree;
@@ -196,7 +192,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityEndermanTFC.class, new RenderEnderman());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigZombieTFC.class, new RenderZombie());
 		RenderingRegistry.registerEntityRenderingHandler(EntityIronGolemTFC.class, new RenderIronGolem());
-		RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerTFC());
+		//RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerTFC());
 		RenderingRegistry.registerEntityRenderingHandler(EntityProjectileTFC.class, new RenderArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFishHookTFC.class, new RenderFish());
 
@@ -570,11 +566,11 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerPlayerRenderEventHandler()
 	{
-            PlayerRenderHandler PRHandler = new PlayerRenderHandler();
-            MinecraftForge.EVENT_BUS.register(PRHandler);
-            FMLCommonHandler.instance().bus().register(PRHandler);
+		PlayerRenderHandler PRHandler = new PlayerRenderHandler();
+		MinecraftForge.EVENT_BUS.register(PRHandler);
+		FMLCommonHandler.instance().bus().register(PRHandler);
 	}
-	
+
 	@Override
 	public void registerSoundHandler()
 	{
