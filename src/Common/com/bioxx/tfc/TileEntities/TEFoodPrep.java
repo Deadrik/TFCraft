@@ -208,19 +208,6 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		return seed + worldObj.getSeed();
 	}
 
-	public float getMealWeight(float[] weights)
-	{
-		float w = 0;
-		for(int i = 0; i < 6; i++)
-		{
-			ItemStack is = getStackInSlot(i);
-			if(is != null && ((IFood)is.getItem()).getFoodWeight(is) >= weights[i])
-				w += weights[i];
-			else return -1;
-		}
-		return w;
-	}
-
 	public float getSandwichWeight(float[] weights)
 	{
 		float w = 0;
@@ -229,7 +216,6 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			ItemStack is = getStackInSlot(i);
 			if(is != null && ((IFood)is.getItem()).getFoodWeight(is) >= weights[i])
 				w += weights[i];
-			else return -1;
 		}
 		return w;
 	}
