@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 
+import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+
 public class ItemSandwich extends ItemMeal
 {
 
@@ -39,9 +41,19 @@ public class ItemSandwich extends ItemMeal
 	}
 
 	@Override
-	protected float getEatAmount()
+	protected float getEatAmount(FoodStatsTFC fs, float amount)
 	{
-		return 9f;
+		float eatAmount = Math.min(amount, 9);
+		float stomachDiff = fs.stomachLevel+eatAmount-fs.getMaxStomach(fs.player);
+		if(stomachDiff > 0)
+			eatAmount-=stomachDiff;
+		return eatAmount;
+	}
+
+	@Override
+	protected float getFillingBoost()
+	{
+		return 1.25f;
 	}
 
 	@Override

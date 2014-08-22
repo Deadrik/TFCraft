@@ -128,28 +128,6 @@ public class ItemMeal extends ItemTerra implements IFood
 		else return "100+";
 	}
 
-	@Override
-	public int getDisplayDamage(ItemStack stack)
-	{
-		float decay = getFoodDecay(stack);
-		float weight = getFoodWeight(stack);
-		int percent = (int)((decay / weight) * 100);
-		percent = percent > 0 ? percent < 100 ? percent : 100 : 0;
-		return percent;
-	}
-
-	@Override
-	public boolean isDamaged(ItemStack stack)
-	{
-		return false;
-	}
-
-	@Override
-	public int getMaxDamage(ItemStack stack)
-	{
-		return 100;
-	}
-
 	protected String localize(int id)
 	{
 		return ItemFoodTFC.getFoodGroupColor(FoodRegistry.getInstance().getFoodGroup(id)) + 
@@ -161,9 +139,23 @@ public class ItemMeal extends ItemTerra implements IFood
 		return new float[]{0.5f,0.2f,0.2f,0.1f};
 	}
 
-	protected float getEatAmount()
+	/**
+	 * @param fs
+	 * @param amount This should be the amount that is actually consumed aka (weight - decay)
+	 * @return The exact amount that should enter the stomach
+	 */
+	protected float getEatAmount(FoodStatsTFC fs, float amount)
 	{
-		return 5f;
+		float eatAmount = Math.min(amount, 5);
+		float stomachDiff = fs.stomachLevel+eatAmount-fs.getMaxStomach(fs.player);
+		if(stomachDiff > 0)
+			eatAmount-=stomachDiff;
+		return eatAmount;
+	}
+
+	protected float getFillingBoost()
+	{
+		return 1.0f;
 	}
 
 	@Override
@@ -177,10 +169,7 @@ public class ItemMeal extends ItemTerra implements IFood
 			ItemMeal item = (ItemMeal) is.getItem();
 			float weight = item.getFoodWeight(is);
 			float decay = Math.max(item.getFoodDecay(is), 0);
-			float eatAmount = Math.min(weight - decay, getEatAmount());
-			float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
-			if(stomachDiff > 0)
-				eatAmount-=stomachDiff;
+			float eatAmount = getEatAmount(foodstats, weight-decay);
 			float tasteFactor = foodstats.getTasteFactor(is);
 			//add the nutrition contents
 			int[] fg = is.getTagCompound().getIntArray("FG");
