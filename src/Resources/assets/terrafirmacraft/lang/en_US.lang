@@ -2253,7 +2253,6 @@ gui.milk.sour=Sour
 gui.units=Units
 
 #== Chat Messages ==
-gui.GoldPan.UseEmpty=Must use on sand in or near a river. Or gravel from under a water source.
 gui.GoldPan.UseFull=Must use under flowing water.
 gui.goldpan.overused=This area seems to be overworked. You probably wouldn't find much.
 
