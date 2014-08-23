@@ -33,6 +33,7 @@ import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TreeRegistry;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.AnvilCraftingHandler;
@@ -133,8 +134,6 @@ public class TerraFirmaCraft
 		//Load Items
 		TFCItems.Setup();
 
-
-
 		// Register Gui Handler
 		proxy.registerGuiHandler();
 
@@ -171,6 +170,8 @@ public class TerraFirmaCraft
 			DimensionManager.registerDimension(0, 0);
 			DimensionManager.registerDimension(1, 1);
 		}
+
+		TreeRegistry.instance.LoadTreeTypes();
 	}
 
 	@EventHandler
@@ -236,6 +237,8 @@ public class TerraFirmaCraft
 		ItemHeat.SetupItemHeat();
 
 		TFC_Climate.initCache();
+
+		TreeRegistry.instance.LoadTrees();
 	}
 
 	@EventHandler
