@@ -90,7 +90,7 @@ public class GenCommand extends CommandBase
 					else
 					{
 						posX = (int) player.posX;
-						posY = (int) player.posY;
+						posY = (int) player.posY - 1;
 						posZ = (int) player.posZ;
 					}
 					player.addChatMessage(new ChatComponentText("Generating Small " + params[1] + " Tree"));
