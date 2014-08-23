@@ -1,9 +1,10 @@
-package com.bioxx.tfc.WorldGen.GenLayers;
+package com.bioxx.tfc.WorldGen.GenLayers.River;
 
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class GenLayerRiverTFC extends GenLayerTFC
 {
