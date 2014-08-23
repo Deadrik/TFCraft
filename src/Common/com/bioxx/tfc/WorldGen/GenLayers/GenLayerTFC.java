@@ -18,6 +18,9 @@ import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerDeepOcean;
 import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerIslandTFC;
 import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerLakes;
 import com.bioxx.tfc.WorldGen.GenLayers.Biome.GenLayerShoreTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.River.GenLayerRiverInitTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.River.GenLayerRiverMixTFC;
+import com.bioxx.tfc.WorldGen.GenLayers.River.GenLayerRiverTFC;
 
 public abstract class GenLayerTFC extends GenLayer
 {
@@ -31,7 +34,6 @@ public abstract class GenLayerTFC extends GenLayer
 		GenLayerTFC continent = genContinent(0, false);
 		continent = new GenLayerDeepOcean(4L, continent);
 		drawImage(512, continent, "8b Continents Done Deep Ocean");
-		continent = new GenLayerDebug(4L, continent);
 		byte var4 = 4;
 
 		//Create Biomes

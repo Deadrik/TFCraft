@@ -1,7 +1,6 @@
 package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.EVT;
 
 import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
@@ -22,7 +21,7 @@ public class GenLayerEVTMix extends GenLayerTFC
 	public int[] getInts(int x, int z, int xSize, int zSize)
 	{
 		int[] var5 = this.parent.getInts(x - 1, z - 1, xSize + 2, zSize + 2);
-		int[] outCache = IntCache.getIntCache(xSize * zSize);
+		int[] outCache = new int[xSize * zSize];
 		int thisID;
 		int id0;
 		int id1;

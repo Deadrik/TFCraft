@@ -1,6 +1,5 @@
 package com.bioxx.tfc.WorldGen.GenLayers;
 
-import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerZoomTFC extends GenLayerTFC
 {
@@ -24,7 +23,7 @@ public class GenLayerZoomTFC extends GenLayerTFC
 		int[] parentCache = this.parent.getInts(xCoord, zCoord, newXSize, newZSize);
 		int i2 = newXSize - 1 << 1;
 		int j2 = newZSize - 1 << 1;
-		int[] out = IntCache.getIntCache(i2 * j2);
+		int[] out = new int[i2 * j2];
 		int l2;
 
 		for (int z = 0; z < newZSize - 1; ++z)
@@ -39,15 +38,15 @@ public class GenLayerZoomTFC extends GenLayerTFC
 				int rightID = parentCache[i3 + 1 + (z + 0) * newXSize];
 				int upRightID = parentCache[i3 + 1 + (z + 1) * newXSize];
 				out[l2] = thisID;
-				out[l2++ + i2] = this.selectRandom(new int[] {thisID, x});
-				out[l2] = this.selectRandom(new int[] {thisID, rightID});
+				out[l2++ + i2] = this.selectRandom(thisID, x);
+				out[l2] = this.selectRandom(thisID, rightID);
 				out[l2++ + i2] = this.selectModeOrRandom(thisID, rightID, x, upRightID);
 				thisID = rightID;
 				x = upRightID;
 			}
 		}
 
-		int[] outCache = IntCache.getIntCache(xSize * zSize);
+		int[] outCache = new int[xSize * zSize];
 
 		for (int zoom = 0; zoom < zSize; ++zoom)
 		{

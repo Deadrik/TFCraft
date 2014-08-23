@@ -1,7 +1,6 @@
 package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock;
 
 import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
@@ -25,7 +24,7 @@ public class GenLayerAddRock extends GenLayerTFC
 		int var7 = xMax + 2;
 		int var8 = zMax + 2;
 		int[] var9 = this.parent.getInts(var5, var6, var7, var8);
-		int[] outCache = IntCache.getIntCache(xMax * zMax);
+		int[] outCache = new int[xMax * zMax];
 
 		for (int z = 0; z < zMax; ++z)
 		{
