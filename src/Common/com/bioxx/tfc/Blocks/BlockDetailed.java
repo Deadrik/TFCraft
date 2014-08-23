@@ -78,7 +78,7 @@ public class BlockDetailed extends BlockPartial
 	public IIcon getIcon(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
 		TEDetailed te = ((TEDetailed)bAccess.getTileEntity(x, y, z));
-		return te.blockType.getIcon(side, te.MetaID);
+		return te.getBlockType().getIcon(side, te.MetaID);
 	}
 
 	@Override
