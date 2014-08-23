@@ -4,11 +4,16 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TreeRegistry;
+import com.bioxx.tfc.Core.TreeSchematic;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenTree;
 import com.bioxx.tfc.api.TFCOptions;
 
 public class GenCommand extends CommandBase
@@ -61,6 +66,36 @@ public class GenCommand extends CommandBase
 					player.addChatMessage(new ChatComponentText("Generating Small " + params[1] + " Tree"));
 					WorldGenerator treeGen = TFCBiome.getTreeGen(i, false);
 					if (!treeGen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, (int) player.posX, (int) player.posY, (int) player.posZ))
+						player.addChatMessage(new ChatComponentText("Generation Failed"));
+				}
+				else
+					player.addChatMessage(new ChatComponentText("Invalid Tree"));
+			}
+			else if (params[0].equalsIgnoreCase("stree"))
+			{
+				int meta = getTree(params[1]);
+				if(meta != -1)
+				{
+					int posX;
+					int posY;
+					int posZ;
+					EntityPlayerMP curPlayer = (EntityPlayerMP) sender;
+					MovingObjectPosition mop = TFC_Core.getTargetBlock(curPlayer);
+					if(mop != null)
+					{
+						posX = mop.blockX;
+						posY = mop.blockY;
+						posZ = mop.blockZ;
+					}
+					else
+					{
+						posX = (int) player.posX;
+						posY = (int) player.posY;
+						posZ = (int) player.posZ;
+					}
+					player.addChatMessage(new ChatComponentText("Generating Small " + params[1] + " Tree"));
+					TreeSchematic ts = TreeRegistry.instance.getTreeSchematic(meta);
+					if(!WorldGenTree.generate(ts, (byte) meta, sender.getEntityWorld(), posX, posY, posZ))
 						player.addChatMessage(new ChatComponentText("Generation Failed"));
 				}
 				else
