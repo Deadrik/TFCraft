@@ -1,7 +1,5 @@
 package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Drainage;
 
-import net.minecraft.world.gen.layer.IntCache;
-
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class GenLayerDrainageInit extends GenLayerTFC
@@ -14,7 +12,7 @@ public class GenLayerDrainageInit extends GenLayerTFC
 	@Override
 	public int[] getInts(int par1, int par2, int maxX, int maxZ)
 	{
-		int[] outCache = IntCache.getIntCache(maxX * maxZ);
+		int[] outCache = new int[maxX * maxZ];
 
 		for (int z = 0; z < maxZ; ++z)
 		{

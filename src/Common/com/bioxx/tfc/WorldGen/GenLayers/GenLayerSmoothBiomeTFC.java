@@ -1,7 +1,6 @@
 package com.bioxx.tfc.WorldGen.GenLayers;
 
 import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerSmoothBiomeTFC extends GenLayerTFC
 {
@@ -24,7 +23,7 @@ public class GenLayerSmoothBiomeTFC extends GenLayerTFC
 		int var8 = par4 + 2;
 		int[] var9 = this.parent.getInts(var5, var6, var7, var8);
 		validateIntArray(var9, var7, var8);
-		int[] var10 = IntCache.getIntCache(par3 * par4);
+		int[] var10 = new int[par3 * par4];
 
 		for (int var11 = 0; var11 < par4; ++var11)
 		{

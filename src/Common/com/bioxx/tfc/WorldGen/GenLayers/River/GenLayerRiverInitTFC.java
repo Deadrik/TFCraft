@@ -1,7 +1,6 @@
 package com.bioxx.tfc.WorldGen.GenLayers.River;
 
 import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
@@ -21,7 +20,7 @@ public class GenLayerRiverInitTFC extends GenLayerTFC
 	public int[] getInts(int xCoord, int zCoord, int xSize, int zSize)
 	{
 		int[] parentCache = this.parent.getInts(xCoord, zCoord, xSize, zSize);
-		int[] outCache = IntCache.getIntCache(xSize * zSize);
+		int[] outCache = new int[xSize * zSize];
 
 		for (int z = 0; z < zSize; ++z)
 		{

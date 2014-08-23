@@ -1,7 +1,6 @@
 package com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rain;
 
 import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
@@ -25,7 +24,7 @@ public class GenLayerAddRain extends GenLayerTFC
 		int var7 = xSize + 2;
 		int var8 = zSize + 2;
 		int[] inCache = this.parent.getInts(var5, var6, var7, var8);
-		int[] outCache = IntCache.getIntCache(xSize * zSize);
+		int[] outCache = new int[xSize * zSize];
 
 		for (int var11 = 0; var11 < zSize; ++var11)
 		{

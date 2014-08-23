@@ -1,7 +1,6 @@
 package com.bioxx.tfc.WorldGen.GenLayers;
 
 import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerVoronoiZoomTFC extends GenLayerTFC
 {
@@ -23,7 +22,7 @@ public class GenLayerVoronoiZoomTFC extends GenLayerTFC
 		int[] aint = this.parent.getInts(i1, j1, k1, l1);
 		int i2 = k1 - 1 << 2;
 		int j2 = l1 - 1 << 2;
-		int[] aint1 = IntCache.getIntCache(i2 * j2);
+		int[] aint1 = new int[i2 * j2];
 		int l2;
 
 		for (int k2 = 0; k2 < l1 - 1; ++k2)
@@ -84,7 +83,7 @@ public class GenLayerVoronoiZoomTFC extends GenLayerTFC
 			}
 		}
 
-		int[] aint2 = IntCache.getIntCache(par3 * par4);
+		int[] aint2 = new int[par3 * par4];
 
 		for (l2 = 0; l2 < par4; ++l2)
 		{

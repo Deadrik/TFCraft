@@ -1,7 +1,6 @@
 package com.bioxx.tfc.WorldGen.GenLayers.River;
 
 import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.TFCBiome;
@@ -35,7 +34,7 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 	{
 		layerBiomes = this.biomePatternGeneratorChain.getInts(x, z, xSize, zSize);
 		layerRivers = this.riverPatternGeneratorChain.getInts(x, z, xSize, zSize);
-		layerOut = IntCache.getIntCache(xSize * zSize);
+		layerOut = new int[xSize * zSize];
 
 		for (int zElement = 0; zElement < zSize; ++zElement)
 		{
