@@ -57,7 +57,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		externalWoodCount = 0;
 		oldWoodCount = 0;
 		charcoalCounter = 0;
-		hasCookingPot = false;
+		hasCookingPot = true;
 		scanSmokeLayer = true;
 	}
 
@@ -603,15 +603,8 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			careForInventorySlot(fireItemStacks[7]);
 			careForInventorySlot(fireItemStacks[8]);
 
-			hasCookingPot = (fireItemStacks[1]!= null && fireItemStacks[1].getItem() == TFCItems.PotteryPot);
-
-			/*
-			ItemStack[] FuelStack = new ItemStack[4];
-			FuelStack[0] = fireItemStacks[0];
-			FuelStack[1] = fireItemStacks[3];
-			FuelStack[2] = fireItemStacks[4];
-			FuelStack[3] = fireItemStacks[5];
-			*/
+			hasCookingPot = (fireItemStacks[1] != null && fireItemStacks[1].getItem() == TFCItems.PotteryPot && 
+					fireItemStacks[1].getItemDamage() == 1);
 
 			//Now we cook the input item
 			CookItem();

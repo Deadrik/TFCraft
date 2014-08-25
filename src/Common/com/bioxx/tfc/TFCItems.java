@@ -926,6 +926,9 @@ public class TFCItems
 	public static Item MetalLock;
 	public static Item MudBrick;
 	public static Item Sandwich;
+	public static Item Soup;
+	public static Item Stew;
+	public static Item Salad;
 	/**
 	 * Item Uses Setup
 	 * */

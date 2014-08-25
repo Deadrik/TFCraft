@@ -406,6 +406,14 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		return false;
 	}
 
+	public void actionSwitchTab(int tab, EntityPlayer player)
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setByte("tab", (byte)tab);
+		nbt.setString("player", player.getDisplayName());
+		this.broadcastPacketInRange(this.createDataPacket(nbt));
+	}
+
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) {
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
@@ -433,6 +441,23 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			}
 		}
 		nbt.setTag("Items", nbttaglist);
+	}
+
+	@Override
+	public void handleDataPacket(NBTTagCompound nbt)
+	{
+		if(!worldObj.isRemote)
+		{
+			if(nbt.hasKey("tab"))
+			{
+				int tab = nbt.getByte("tab");
+				EntityPlayer player = worldObj.getPlayerEntityByName(nbt.getString("player"));
+				if(player != null && tab == 0)
+					player.openGui(TerraFirmaCraft.instance, 44, worldObj, xCoord, yCoord, zCoord);
+				else if(player != null && tab == 1)
+					player.openGui(TerraFirmaCraft.instance, 45, worldObj, xCoord, yCoord, zCoord);
+			}
+		}
 	}
 
 }

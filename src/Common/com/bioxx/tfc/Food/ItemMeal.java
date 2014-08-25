@@ -134,7 +134,7 @@ public class ItemMeal extends ItemTerra implements IFood
 				StatCollector.translateToLocal(FoodRegistry.getInstance().getFood(id).getUnlocalizedName() + ".name");
 	}
 
-	protected float[] getComponentWeights()
+	protected float[] getNutritionalWeights()
 	{
 		return new float[]{0.5f,0.2f,0.2f,0.1f};
 	}
@@ -173,7 +173,7 @@ public class ItemMeal extends ItemTerra implements IFood
 			float tasteFactor = foodstats.getTasteFactor(is);
 			//add the nutrition contents
 			int[] fg = is.getTagCompound().getIntArray("FG");
-			float[] weights = getComponentWeights();
+			float[] weights = getNutritionalWeights();
 			for(int i = 0; i < fg.length; i++)
 			{
 				if(fg[i] != -1)
