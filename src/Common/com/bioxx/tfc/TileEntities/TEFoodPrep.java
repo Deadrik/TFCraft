@@ -107,7 +107,8 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			nbt.setFloat("foodDecay", -24);
 			nbt.setFloat("decayRate", 2.0f);
 			nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
-			combineTastes(nbt, sandwichWeights);
+			combineTastes(nbt, sandwichWeights, getStackInSlot(0), getStackInSlot(1), getStackInSlot(2), 
+					getStackInSlot(3), getStackInSlot(4), getStackInSlot(5));
 			is.setTagCompound(nbt);
 
 			this.setInventorySlotContents(6, is);
@@ -146,7 +147,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			nbt.setFloat("foodDecay", -24);
 			nbt.setFloat("decayRate", 2.0f);
 			nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
-			combineTastes(nbt, sandwichWeights);
+			combineTastes(nbt, saladWeights, getStackInSlot(1), getStackInSlot(2), getStackInSlot(3), getStackInSlot(4));
 			is.setTagCompound(nbt);
 
 			this.setInventorySlotContents(6, is);
@@ -235,23 +236,32 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		return true;
 	}
 
-	private void combineTastes(NBTTagCompound nbt, float[] weights)
+	private void combineTastes(NBTTagCompound nbt, float[] weights, ItemStack... isArray)
 	{
 		int tasteSweet = 0;
 		int tasteSour = 0;
 		int tasteSalty = 0;
 		int tasteBitter = 0;
 		int tasteUmami = 0;
-		for (int i = 0; i < 6; i++)
+
+		float totalW = 0;
+		for(int i = 0; i < weights.length; i++)
 		{
-			float weightMult = ((weights[i]*2)/100f)*5f;
-			if(storage[i] != null)
+			ItemStack f = isArray[i];
+			if(f != null && ((IFood)f.getItem()).getFoodWeight(f) >= weights[i])
+				totalW += weights[i];
+		}
+
+		for (int i = 0; i < weights.length; i++)
+		{
+			float weightMult = weights[i] / totalW * 2;
+			if(isArray[i] != null)
 			{
-				tasteSweet += ((IFood)storage[i].getItem()).getTasteSweet(storage[i]) * weightMult;
-				tasteSour += ((IFood)storage[i].getItem()).getTasteSour(storage[i]) * weightMult;
-				tasteSalty += ((IFood)storage[i].getItem()).getTasteSalty(storage[i]) * weightMult;
-				tasteBitter += ((IFood)storage[i].getItem()).getTasteBitter(storage[i]) * weightMult;
-				tasteUmami += ((IFood)storage[i].getItem()).getTasteSavory(storage[i]) * weightMult;
+				tasteSweet += ((IFood)isArray[i].getItem()).getTasteSweet(isArray[i]) * weightMult;
+				tasteSour += ((IFood)isArray[i].getItem()).getTasteSour(isArray[i]) * weightMult;
+				tasteSalty += ((IFood)isArray[i].getItem()).getTasteSalty(isArray[i]) * weightMult;
+				tasteBitter += ((IFood)isArray[i].getItem()).getTasteBitter(isArray[i]) * weightMult;
+				tasteUmami += ((IFood)isArray[i].getItem()).getTasteSavory(isArray[i]) * weightMult;
 			}
 		}
 		nbt.setInteger("tasteSweet", tasteSweet);
