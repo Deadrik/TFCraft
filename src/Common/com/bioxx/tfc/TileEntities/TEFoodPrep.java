@@ -26,6 +26,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	public ItemStack[] storage = new ItemStack[11];
 	public int lastTab = 0;
 	private float[] sandwichWeights = new float[]{1,3,2,1,1,1};
+	private float[] saladWeights = new float[]{10,4,4,2};
 
 	@Override
 	public void updateEntity()
@@ -77,7 +78,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 
 	private void createSandwich(EntityPlayer player) 
 	{
-		if(storage[0] != null && storage[5] != null)//Bread
+		if(validateSandwich())//Bread
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
 			ItemStack is = new ItemStack(TFCItems.Sandwich, 1);
@@ -94,7 +95,15 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 
 			is.setItemDamage(new Random(getIconSeed()).nextInt(((ItemTerra)TFCItems.Sandwich).MetaIcons.length));
 
-			nbt.setFloat("foodWeight", Helper.roundNumber(getSandwichWeight(sandwichWeights), 10));
+			float w = 0;
+			for(int i = 0; i < 6; i++)
+			{
+				ItemStack f = getStackInSlot(i);
+				if(f != null && ((IFood)f.getItem()).getFoodWeight(f) >= sandwichWeights[i])
+					w += sandwichWeights[i];
+			}
+
+			nbt.setFloat("foodWeight", Helper.roundNumber(w, 10));
 			nbt.setFloat("foodDecay", -24);
 			nbt.setFloat("decayRate", 2.0f);
 			nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
@@ -103,16 +112,50 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 
 			this.setInventorySlotContents(6, is);
 
-			consumeFoodWeight(sandwichWeights);
+			consumeFoodWeight(sandwichWeights, getStackInSlot(0), getStackInSlot(1), getStackInSlot(2), 
+					getStackInSlot(3), getStackInSlot(4), getStackInSlot(5));
 		}
 	}
 
 	private void createSalad(EntityPlayer player) 
 	{
+		if(validateSalad())//Bread
+		{
+			NBTTagCompound nbt = new NBTTagCompound();
+			ItemStack is = new ItemStack(TFCItems.Salad, 1);
+			Random R = new Random(getFoodSeed());
+			int[] FG = new int[]{-1,-1,-1,-1};
+			if(getStackInSlot(1) != null) FG[0] = ((IFood)(getStackInSlot(1).getItem())).getFoodID();
+			if(getStackInSlot(2) != null) FG[1] = ((IFood)(getStackInSlot(2).getItem())).getFoodID();
+			if(getStackInSlot(3) != null) FG[2] = ((IFood)(getStackInSlot(3).getItem())).getFoodID();
+			if(getStackInSlot(4) != null) FG[3] = ((IFood)(getStackInSlot(4).getItem())).getFoodID();
 
+			nbt.setIntArray("FG", FG);
+
+			is.setItemDamage(new Random(getIconSeed()).nextInt(((ItemTerra)TFCItems.Salad).MetaIcons.length));
+
+			float w = 0;
+			for(int i = 0; i < 4; i++)
+			{
+				ItemStack f = getStackInSlot(i+1);
+				if(f != null && ((IFood)f.getItem()).getFoodWeight(f) >= saladWeights[i])
+					w += saladWeights[i];
+			}
+
+			nbt.setFloat("foodWeight", Helper.roundNumber(w, 10));
+			nbt.setFloat("foodDecay", -24);
+			nbt.setFloat("decayRate", 2.0f);
+			nbt.setInteger("decayTimer", (int)TFC_Time.getTotalHours() + 1);
+			combineTastes(nbt, sandwichWeights);
+			is.setTagCompound(nbt);
+
+			this.setInventorySlotContents(6, is);
+
+			consumeFoodWeight(saladWeights, getStackInSlot(1), getStackInSlot(2), getStackInSlot(3), getStackInSlot(4));
+		}
 	}
 
-	public boolean areComponentsCorrect()
+	public boolean validateSandwich()
 	{
 		if(lastTab == 0)
 		{
@@ -120,31 +163,74 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 				return false;
 			int count = 0;
 			if(storage[1] != null) count++;
-			else return false;
 			if(storage[2] != null) count++;
 			if(storage[3] != null) count++;
 			if(storage[4] != null) count++;
 
-			if(count < 2)
+			if(!validateIngreds(storage[1],storage[2],storage[3],storage[4]))
 				return false;
 
-			if(!validateSameIngreds(storage[1],storage[2],storage[3],storage[4]))
-				return false;
+			float weight = 0;
+			for(int i = 0; i < 6; i++)
+			{
+				ItemStack f = getStackInSlot(i);
+				if(f != null && ((IFood)f.getItem()).getFoodWeight(f) >= sandwichWeights[i])
+					weight += sandwichWeights[i];
+			}
 
-			if(getSandwichWeight(this.sandwichWeights) == -1)
+			if(weight < 5)
 				return false;
 		}
 		return true;
 	}
 
-	public boolean validateSameIngreds(ItemStack is1, ItemStack is2, ItemStack is3, ItemStack is4)
+	public boolean validateSalad()
 	{
-		if((is1 != null && is2 != null && is1.getItem() == is2.getItem()) || (is1 != null && is3 != null && is1.getItem() == is3.getItem())
-				|| (is1 != null && is4 != null && is1.getItem() == is4.getItem()))
-			return false;
-		if((is2 != null && is3 != null && is2.getItem() == is3.getItem()) || (is2 != null && is4 != null && is2.getItem() == is4.getItem()))
-			return false;
-		if((is3 != null && is4 != null && is3.getItem() == is4.getItem()))
+		if(lastTab == 1)
+		{
+			int count = 0;
+			if(storage[1] != null) {count++;}
+			if(storage[2] != null) {count++;}
+			if(storage[3] != null) {count++;}
+			if(storage[4] != null) {count++;}
+
+
+			if(!validateIngreds(storage[1],storage[2],storage[3],storage[4]))
+				return false;
+
+			float weight = 0;
+			for(int i = 0; i < 4; i++)
+			{
+				ItemStack f = getStackInSlot(i+1);
+				if(f != null && ((IFood)f.getItem()).getFoodWeight(f) >= saladWeights[i])
+					weight += saladWeights[i];
+			}
+
+			if(weight < 14)
+				return false;
+		}
+		return true;
+	}
+
+	public boolean validateIngreds(ItemStack... is)
+	{
+		for(int i = 0; i < is.length; i++)
+		{
+			if(is[i] != null && !((IFood)is[i].getItem()).isUsable())
+				return false;
+			for(int j = 0; j < is.length; j++)
+			{
+
+				if(j != i && !compareIngred(is[i], is[j]))
+					return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean compareIngred(ItemStack is1, ItemStack is2)
+	{
+		if((is1 != null && is2 != null && is1.getItem() == is2.getItem()))
 			return false;
 		return true;
 	}
@@ -208,24 +294,12 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		return seed + worldObj.getSeed();
 	}
 
-	public float getSandwichWeight(float[] weights)
+	public float consumeFoodWeight(float[] weights, ItemStack... isArray)
 	{
 		float w = 0;
-		for(int i = 0; i < 6; i++)
+		for(int i = 0; i < isArray.length; i++)
 		{
-			ItemStack is = getStackInSlot(i);
-			if(is != null && ((IFood)is.getItem()).getFoodWeight(is) >= weights[i])
-				w += weights[i];
-		}
-		return w;
-	}
-
-	public float consumeFoodWeight(float[] weights)
-	{
-		float w = 0;
-		for(int i = 0; i < 6; i++)
-		{
-			ItemStack is = getStackInSlot(i);
+			ItemStack is = isArray[i];
 			if(is != null)
 			{
 				is.getTagCompound().setFloat("foodWeight", ((ItemFoodTFC)is.getItem()).getFoodWeight(is) - weights[i]);

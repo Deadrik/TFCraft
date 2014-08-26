@@ -20,8 +20,9 @@ import com.bioxx.tfc.Core.Metal.AlloyManager;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.Food.ItemEgg;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Food.ItemMeal;
+import com.bioxx.tfc.Food.ItemSalad;
 import com.bioxx.tfc.Food.ItemSandwich;
+import com.bioxx.tfc.Food.ItemSoup;
 import com.bioxx.tfc.Items.ItemAlcohol;
 import com.bioxx.tfc.Items.ItemArrow;
 import com.bioxx.tfc.Items.ItemBloom;
@@ -798,8 +799,6 @@ public class TFCItems
 
 	public static Item BlueSteelBucketEmpty;
 	public static Item BlueSteelBucketLava;
-
-	public static Item MealGeneric;
 
 	public static Item Quern;
 	public static Item FlintSteel;
@@ -1771,8 +1770,9 @@ public class TFCItems
 		Gooseberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 40, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Gooseberry");
 		Cloudberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 40, 0, 30, 0).setDecayRate(2.0f).setUnlocalizedName("Cloudberry");
 
-		MealGeneric = new ItemMeal().setUnlocalizedName("MealGeneric");
 		Sandwich = new ItemSandwich().setUnlocalizedName("Sandwich");
+		Salad = new ItemSalad().setUnlocalizedName("Salad");
+		Soup = new ItemSoup().setUnlocalizedName("Soup");
 
 		Sugarcane = new ItemTerra().setFolder("plants/").setUnlocalizedName("Sugarcane");
 		Hemp = new ItemTerra().setFolder("plants/").setUnlocalizedName("Hemp");
@@ -2664,7 +2664,6 @@ public class TFCItems
 		GameRegistry.registerItem(OatWhole, OatWhole.getUnlocalizedName());
 		GameRegistry.registerItem(RyeWhole, RyeWhole.getUnlocalizedName());
 		GameRegistry.registerItem(RiceWhole, RiceWhole.getUnlocalizedName());
-		GameRegistry.registerItem(MealGeneric, MealGeneric.getUnlocalizedName());
 		GameRegistry.registerItem(WheatGround, WheatGround.getUnlocalizedName());
 		GameRegistry.registerItem(BarleyGround, BarleyGround.getUnlocalizedName());
 		GameRegistry.registerItem(OatGround, OatGround.getUnlocalizedName());
@@ -2867,6 +2866,8 @@ public class TFCItems
 		GameRegistry.registerItem(Quiver, Quiver.getUnlocalizedName());
 		GameRegistry.registerItem(MudBrick, MudBrick.getUnlocalizedName());
 		GameRegistry.registerItem(Sandwich, Sandwich.getUnlocalizedName());
+		GameRegistry.registerItem(Salad, Salad.getUnlocalizedName());
+		GameRegistry.registerItem(Soup, Soup.getUnlocalizedName());
 
 		System.out.println(new StringBuilder().append("[TFC] All Items Registered").toString());
 	}
