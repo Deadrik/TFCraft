@@ -253,4 +253,9 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public boolean canSmoke() {
+		return false;
+	}
 }

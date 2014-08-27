@@ -403,4 +403,9 @@ public class ItemMeal extends ItemTerra implements IFood
 	public boolean renderWeight() {
 		return true;
 	}
+
+	@Override
+	public boolean canSmoke() {
+		return false;
+	}
 }

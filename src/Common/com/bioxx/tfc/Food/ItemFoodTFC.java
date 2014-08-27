@@ -51,11 +51,12 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public float decayRate = 1.0f;
 	public boolean isEdible = true;
 	public boolean canBeUsedRaw = true;
-	private int tasteSweet = 0;
-	private int tasteSour = 0;
-	private int tasteSalty = 0;
-	private int tasteBitter = 0;
-	private int tasteUmami = 0;
+	protected int tasteSweet = 0;
+	protected int tasteSour = 0;
+	protected int tasteSalty = 0;
+	protected int tasteBitter = 0;
+	protected int tasteUmami = 0;
+	protected boolean canSmoke = false;
 
 	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um)
 	{
@@ -89,6 +90,12 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public ItemFoodTFC setDecayRate(float f)
 	{
 		this.decayRate = f;
+		return this;
+	}
+
+	public ItemFoodTFC setCanSmoke()
+	{
+		this.canSmoke = true;
 		return this;
 	}
 
@@ -588,5 +595,11 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public boolean renderWeight() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public boolean canSmoke() {
+		// TODO Auto-generated method stub
+		return canSmoke;
 	}
 }

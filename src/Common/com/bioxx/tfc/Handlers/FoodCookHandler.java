@@ -13,11 +13,15 @@ public class FoodCookHandler
 	{
 		if(event.result != null && event.result.getItem() instanceof IFood)
 		{
-			TFC_Core.setSweetMod(event.result, event.fuelTasteMod[0]);
-			TFC_Core.setSourMod(event.result, event.fuelTasteMod[1]);
-			TFC_Core.setSaltyMod(event.result, event.fuelTasteMod[2]);
-			TFC_Core.setBitterMod(event.result, event.fuelTasteMod[3]);
-			TFC_Core.setSavoryMod(event.result, event.fuelTasteMod[4]);
+			float mod = 1.0f;
+			if(!((IFood)event.result.getItem()).canSmoke())
+				mod = 0.5f;
+
+			TFC_Core.setSweetMod(event.result, Math.round(event.fuelTasteMod[0] * mod));
+			TFC_Core.setSourMod(event.result, Math.round(event.fuelTasteMod[1] * mod));
+			TFC_Core.setSaltyMod(event.result, Math.round(event.fuelTasteMod[2] * mod));
+			TFC_Core.setBitterMod(event.result, Math.round(event.fuelTasteMod[3] * mod));
+			TFC_Core.setSavoryMod(event.result, Math.round(event.fuelTasteMod[4] * mod));
 		}
 	}
 }
