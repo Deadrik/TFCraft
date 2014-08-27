@@ -499,7 +499,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		int base = tasteSweet;
 		if(is != null && is.getTagCompound().hasKey("tasteSweet"))
 			base = is.getTagCompound().getInteger("tasteSweet");
-		return base + getTasteSweetMod(is);
+		return Math.max(base + getTasteSweetMod(is), 0);
 	}
 
 	public int getTasteSweetMod(ItemStack is) {
@@ -514,7 +514,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		int base = tasteSour;
 		if(is != null && is.getTagCompound().hasKey("tasteSour"))
 			base = is.getTagCompound().getInteger("tasteSour");
-		return base + getTasteSourMod(is);
+		return Math.max(base + getTasteSourMod(is), 0);
 	}
 
 	public int getTasteSourMod(ItemStack is) {
@@ -528,8 +528,12 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public int getTasteSalty(ItemStack is) {
 		int base = tasteSalty;
 		if(is != null && is.getTagCompound().hasKey("tasteSalty"))
-			base = is.getTagCompound().getInteger("tasteSalty");;
-			return base + getTasteSaltyMod(is);
+			base = is.getTagCompound().getInteger("tasteSalty");
+
+		if(is.getTagCompound().hasKey("isSalted"))
+			base += 40;
+
+		return Math.max(base + getTasteSaltyMod(is), 0);
 	}
 
 	public int getTasteSaltyMod(ItemStack is) {
@@ -544,7 +548,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		int base = tasteBitter;
 		if(is != null && is.getTagCompound().hasKey("tasteBitter"))
 			base = is.getTagCompound().getInteger("tasteBitter");
-		return base + getTasteBitterMod(is);
+		return Math.max(base + getTasteBitterMod(is), 0);
 	}
 
 	public int getTasteBitterMod(ItemStack is) {
@@ -559,7 +563,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		int base = tasteUmami;
 		if(is != null && is.getTagCompound().hasKey("tasteUmami"))
 			base = is.getTagCompound().getInteger("tasteUmami");
-		return base + getTasteSavoryMod(is);
+		return Math.max(base + getTasteSavoryMod(is), 0);
 	}
 
 	public int getTasteSavoryMod(ItemStack is) {

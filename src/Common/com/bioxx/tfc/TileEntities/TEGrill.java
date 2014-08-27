@@ -8,12 +8,14 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class TEGrill extends NetworkTileEntity implements IInventory
@@ -108,6 +110,16 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 			{
 				float temp = TFC_ItemHeat.GetTemp(storage[i]);
 				ItemStack output = index.getOutput(storage[i], R);
+				TEFireEntity te = (TEFireEntity) worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
+				int[] fuelTasteProfile = new int[] {0,0,0,0,0};
+				if(te!= null)
+				{
+					fuelTasteProfile = te.fuelTasteProfile;
+				}
+
+				ItemCookEvent.Food eventMelt = new ItemCookEvent.Food(storage[i], output, fuelTasteProfile);
+				MinecraftForge.EVENT_BUS.post(eventMelt);
+				output = eventMelt.result;
 
 				//Morph the input
 				storage[i] = index.getOutput(storage[i], R);

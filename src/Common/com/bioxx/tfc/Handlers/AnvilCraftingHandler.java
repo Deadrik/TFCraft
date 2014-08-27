@@ -8,7 +8,7 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Events.AnvilCraftEvent;
-import com.bioxx.tfc.api.Events.ItemMeltEvent;
+import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
@@ -44,7 +44,7 @@ public class AnvilCraftingHandler
 	}
 
 	@SubscribeEvent
-	public void onItemMelt(ItemMeltEvent event)
+	public void onItemMelt(ItemCookEvent event)
 	{
 		if(event.input1 != null)
 		{

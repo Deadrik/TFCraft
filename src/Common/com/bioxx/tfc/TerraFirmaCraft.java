@@ -44,6 +44,7 @@ import com.bioxx.tfc.Handlers.EnteringChunkHandler;
 import com.bioxx.tfc.Handlers.EntityDamageHandler;
 import com.bioxx.tfc.Handlers.EntityLivingHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
+import com.bioxx.tfc.Handlers.FoodCookHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Handlers.PlayerSkillEventHandler;
 import com.bioxx.tfc.Handlers.Network.PacketPipeline;
@@ -211,7 +212,7 @@ public class TerraFirmaCraft
 
 		// Register Anvil Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
-
+		MinecraftForge.EVENT_BUS.register(new FoodCookHandler());
 		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
 
 		// Register the Entity Living Update Handler

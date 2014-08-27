@@ -2,13 +2,13 @@ package com.bioxx.tfc.api;
 
 import java.util.Random;
 
-import com.bioxx.tfc.api.Events.ItemMeltEvent;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
+
+import com.bioxx.tfc.api.Events.ItemCookEvent;
 
 public class HeatIndex
 {
@@ -132,7 +132,7 @@ public class HeatIndex
 					TFC_ItemHeat.SetTemp(is, TFC_ItemHeat.GetTemp(is)*0.9f);
 			}
 		}
-		ItemMeltEvent eventMelt = new ItemMeltEvent(in, is);
+		ItemCookEvent eventMelt = new ItemCookEvent(in, is);
 		MinecraftForge.EVENT_BUS.post(eventMelt);
 		return eventMelt.result;
 	}

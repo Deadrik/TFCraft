@@ -16,6 +16,7 @@ import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class TEForge extends TEFireEntity implements IInventory
@@ -405,16 +406,10 @@ public class TEForge extends TEFireEntity implements IInventory
 			else if(fuelTimeLeft <= 0 && fireTemp >= 1 && fireItemStacks[7] != null && isSmokeStackValid)
 			{
 				//here we set the temp and burn time based on the fuel in the bottom slot.
-				if(fireItemStacks[7].getItem() == TFCItems.Coal && fireItemStacks[7].getItemDamage() == 0)
-				{
-					fuelTimeLeft = 2200;
-					fuelBurnTemp = 1400;
-				}
-				if(fireItemStacks[7].getItem() == TFCItems.Coal && fireItemStacks[7].getItemDamage() == 1)
-				{
-					fuelTimeLeft = 1800;
-					fuelBurnTemp = 1350;
-				}
+				EnumFuelMaterial m = TFC_Core.getFuelMaterial(fireItemStacks[7]);
+				fuelTimeLeft = m.burnTimeMax;
+				fuelBurnTemp = m.burnTempMax;
+				fuelTasteProfile = m.tasteProfile;
 				fireItemStacks[7] = null;
 			}
 			else

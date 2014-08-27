@@ -1749,8 +1749,8 @@ public class TFCItems
 
 		//Fruit are in the foodID range of 50,000
 		RedApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
-		Banana = new ItemFoodTFC(EnumFoodGroup.Fruit, 50, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);
-		Orange = new ItemFoodTFC(EnumFoodGroup.Fruit, 60, 30, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[2]);
+		Banana = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);
+		Orange = new ItemFoodTFC(EnumFoodGroup.Fruit, 50, 30, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[2]);
 		GreenApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 40, 0, 40, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[3]);
 		Lemon = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 80, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[4]);
 		Olive = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 0, 50, 20, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[5]);
@@ -1761,7 +1761,7 @@ public class TFCItems
 		WintergreenBerry = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 0, 0, 20, 0).setDecayRate(2.0f).setUnlocalizedName("Wintergreen Berry");
 		Blueberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 20, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Blueberry");
 		Raspberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 45, 15, 0, 5, 0).setDecayRate(2.0f).setUnlocalizedName("Raspberry");
-		Strawberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 80, 5, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Strawberry");
+		Strawberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 60, 5, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Strawberry");
 		Blackberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 30, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Blackberry");
 		Bunchberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 5, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Bunchberry");
 		Cranberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 75, 0).setDecayRate(2.0f).setUnlocalizedName("Cranberry");
