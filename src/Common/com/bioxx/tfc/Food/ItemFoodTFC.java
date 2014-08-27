@@ -57,6 +57,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	protected int tasteBitter = 0;
 	protected int tasteUmami = 0;
 	protected boolean canSmoke = false;
+	protected float smokeAbsorb = 0.5f;
 
 	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um)
 	{
@@ -587,19 +588,26 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	@Override
 	public boolean renderDecay() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean renderWeight() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean canSmoke() {
-		// TODO Auto-generated method stub
 		return canSmoke;
+	}
+
+	@Override
+	public float getSmokeAbsorbMultiplier() {
+		return this.smokeAbsorb;
+	}
+
+	public ItemFoodTFC setSmokeAbsorbMultiplier(float s) {
+		smokeAbsorb = s;
+		return this;
 	}
 }

@@ -36,4 +36,5 @@ public interface IFood
 	public boolean renderWeight();
 
 	public boolean canSmoke();
+	public float getSmokeAbsorbMultiplier();
 }

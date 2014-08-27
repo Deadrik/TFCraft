@@ -258,4 +258,10 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	public boolean canSmoke() {
 		return false;
 	}
+
+	@Override
+	public float getSmokeAbsorbMultiplier() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

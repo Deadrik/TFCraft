@@ -408,4 +408,9 @@ public class ItemMeal extends ItemTerra implements IFood
 	public boolean canSmoke() {
 		return false;
 	}
+
+	@Override
+	public float getSmokeAbsorbMultiplier() {
+		return 0;
+	}
 }
