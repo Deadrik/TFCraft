@@ -12,6 +12,7 @@ public class BarrelRecipe
 	public int sealTime = 8;
 	public boolean removesLiquid = true;
 	boolean isSealedRecipe = true;
+	public int minTechLevel = 1;
 
 	public BarrelRecipe(ItemStack inputItem, FluidStack inputFluid, ItemStack outIS, FluidStack outputFluid)
 	{
@@ -30,6 +31,12 @@ public class BarrelRecipe
 	public BarrelRecipe setRemovesLiquid(boolean b)
 	{
 		this.removesLiquid = b;
+		return this;
+	}
+
+	public BarrelRecipe setMinTechLevel(int t)
+	{
+		this.minTechLevel = t;
 		return this;
 	}
 
