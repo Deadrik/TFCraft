@@ -18,24 +18,25 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Containers.ContainerBarrel;
+import com.bioxx.tfc.Containers.ContainerLargeVessel;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.TileEntities.TEVessel;
 
-public class GuiBarrel extends GuiContainerTFC
+public class GuiLargeVessel extends GuiContainerTFC
 {
-	public static final ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_barrel.png");
-	protected TEBarrel barrel;
-	protected EntityPlayer player;
-	protected int guiTab = 0;
+	public static final ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_largevessel.png");
+	private TEVessel barrel;
+	private EntityPlayer player;
+	private int guiTab = 0;
 
-	public GuiBarrel(InventoryPlayer inventoryplayer, TEBarrel tileentitybarrel, World world, int x, int y, int z, int tab)
+	public GuiLargeVessel(InventoryPlayer inventoryplayer, TEVessel te, World world, int x, int y, int z, int tab)
 	{
-		super(new ContainerBarrel(inventoryplayer,tileentitybarrel, world, x, y, z, tab), 176, 85);
-		barrel = tileentitybarrel;
+		super(new ContainerLargeVessel(inventoryplayer,te, world, x, y, z, tab), 176, 85);
+		barrel = te;
 		player = inventoryplayer.player;
 		guiLeft = (width - 208) / 2;
 		guiTop = (height - 198) / 2;
@@ -178,7 +179,7 @@ public class GuiBarrel extends GuiContainerTFC
 
 	public class GuiBarrelTabButton extends GuiButton 
 	{
-		GuiBarrel screen;
+		GuiLargeVessel screen;
 		IIcon buttonicon = null;
 
 		int xPos = 0;
@@ -186,14 +187,14 @@ public class GuiBarrel extends GuiContainerTFC
 		int xSize = 31;
 		int ySize = 15;
 
-		public GuiBarrelTabButton(int index, int xPos, int yPos, int width, int height, GuiBarrel gui, IIcon icon, String s)
+		public GuiBarrelTabButton(int index, int xPos, int yPos, int width, int height, GuiLargeVessel gui, IIcon icon, String s)
 		{
 			super(index, xPos, yPos, width, height, s);
 			screen = gui;
 			buttonicon = icon;
 		}
 
-		public GuiBarrelTabButton(int index, int xPos, int yPos, int width, int height, GuiBarrel gui, String s, int xp, int yp, int xs, int ys)
+		public GuiBarrelTabButton(int index, int xPos, int yPos, int width, int height, GuiLargeVessel gui, String s, int xp, int yp, int xs, int ys)
 		{
 			super(index, xPos, yPos, width, height, s);
 			screen = gui;
@@ -210,7 +211,7 @@ public class GuiBarrel extends GuiContainerTFC
 			{
 				int k = this.getHoverState(this.field_146123_n)-1;
 
-				TFC_Core.bindTexture(GuiBarrel.texture);
+				TFC_Core.bindTexture(GuiLargeVessel.texture);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				this.zLevel = 301f;
 				this.drawTexturedModalRect(this.xPosition, this.yPosition, xPos, yPos, xSize, ySize);
@@ -310,6 +311,10 @@ public class GuiBarrel extends GuiContainerTFC
 			if(barrel.recipe != null)
 			{
 				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Bloomery.Output")+": "+barrel.recipe.getRecipeName(), w+88, h+72, 0x555555);
+			}
+			else
+			{
+				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Bloomery.Output")+": N/A", w+88, h+72, 0x555555);
 			}
 		}
 		else if(guiTab == 1)

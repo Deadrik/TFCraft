@@ -63,7 +63,6 @@ import com.bioxx.tfc.Items.ItemUnfinishedArmor;
 import com.bioxx.tfc.Items.ItemBlocks.ItemWoodDoor;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryJug;
-import com.bioxx.tfc.Items.Pottery.ItemPotteryLargeVessel;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryPot;
 import com.bioxx.tfc.Items.Pottery.ItemPotterySmallVessel;
@@ -855,7 +854,6 @@ public class TFCItems
 	public static Item PotteryJug;
 	public static Item PotteryPot;
 	public static Item PotterySmallVessel;
-	public static Item PotteryLargeVessel;
 	public static Item KilnRack;
 	public static Item Straw;
 	public static Item FlatClay;
@@ -1521,7 +1519,6 @@ public class TFCItems
 
 		PotteryJug = new ItemPotteryJug().setUnlocalizedName("Jug");
 		PotterySmallVessel = new ItemPotterySmallVessel().setUnlocalizedName("Small Vessel");
-		PotteryLargeVessel = new ItemPotteryLargeVessel().setUnlocalizedName("Large Vessel");
 		PotteryPot = new ItemPotteryPot().setUnlocalizedName("Pot");
 		CeramicMold = new ItemPotteryBase().setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
 		ClayBall = new ItemClay().setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1)).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("Clay");
@@ -2573,7 +2570,6 @@ public class TFCItems
 
 		GameRegistry.registerItem(PotteryJug , PotteryJug.getUnlocalizedName());
 		GameRegistry.registerItem(PotterySmallVessel , PotterySmallVessel.getUnlocalizedName());
-		GameRegistry.registerItem(PotteryLargeVessel , PotteryLargeVessel.getUnlocalizedName());
 		GameRegistry.registerItem(PotteryPot , PotteryPot.getUnlocalizedName());
 
 		GameRegistry.registerItem(CeramicMold , CeramicMold.getUnlocalizedName());

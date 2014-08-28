@@ -54,6 +54,7 @@ import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEFruitLeaves;
 import com.bioxx.tfc.TileEntities.TEGrill;
+import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
@@ -62,13 +63,13 @@ import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.TileEntities.TEPottery;
-import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.TileEntities.TEStand;
+import com.bioxx.tfc.TileEntities.TEVessel;
+import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TileEntityBloom;
 import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
-import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySapling;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
@@ -99,7 +100,7 @@ public class CommonProxy
 	{
 		// NOOP on server
 	}
-	
+
 	public void registerPlayerRenderEventHandler()
 	{
 		// NOOP on server
@@ -144,6 +145,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TELeatherRack.class, "leatherRack");
 		GameRegistry.registerTileEntity(TEMetalTrapDoor.class, "MetalTrapDoor");
 		GameRegistry.registerTileEntity(TEWaterPlant.class, "Sea Weed");
+		GameRegistry.registerTileEntity(TEVessel.class, "Vessel");
 
 		if(b)
 		{

@@ -6,7 +6,6 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Render.Models.ModelUrn;
 import com.bioxx.tfc.TileEntities.TEPottery;
 
@@ -53,7 +52,7 @@ public class TESRPottery extends TESRBase
 					offsetZ = 0.75f;
 				}
 
-				if (te.getStackInSlot(i) != null && te.getStackInSlot(i).getItem() != TFCItems.PotteryLargeVessel)
+				if (te.getStackInSlot(i) != null)
 				{
 					GL11.glPushMatrix(); //start
 					GL11.glTranslatef((float)d + offsetX, (float)d1 + offsetY, (float)d2 + offsetZ);
@@ -67,17 +66,6 @@ public class TESRPottery extends TESRBase
 					GL11.glPopMatrix(); //end
 
 				}
-				/**
-				 * Commented out until Large Vessels are implemented
-				 */
-				/*
-				else if (te.getStackInSlot(i) != null && te.getStackInSlot(i) == TFCItems.PotteryLargeVessel)
-				{
-					GL11.glPushMatrix(); //start
-					GL11.glTranslatef((float)d, (float)d1, (float)d2);
-					urnModel.render(Tessellator.instance, 1);
-					GL11.glPopMatrix(); //end
-				}*/
 			}
 
 		}

@@ -32,7 +32,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public byte rotation = 0;
 	public int barrelType;
 	public int mode = 0;
-	public ItemStack[] storage = new ItemStack[12];
+	public ItemStack[] storage;
 	private boolean sealed = false;
 	public int sealtime = 0;
 	public int unsealtime = 0;
@@ -44,7 +44,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 	public TEBarrel()
 	{
-
+		storage = new ItemStack[12];
 	}
 
 	public void careForInventorySlot()
@@ -265,12 +265,17 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return this.fluid;
 	}
 
+	public int getMaxLiquid()
+	{
+		return 10000;
+	}
+
 	public boolean addLiquid(int amount)
 	{
-		if(fluid.amount == 10000)
+		if(fluid.amount == getMaxLiquid())
 			return false;
 
-		fluid.amount = Math.min(fluid.amount+amount, 10000);
+		fluid.amount = Math.min(fluid.amount+amount, getMaxLiquid());
 		return true;
 	}
 
@@ -280,10 +285,10 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			fluid = f;
 		else
 		{
-			if(fluid.amount == 10000 || !fluid.isFluidEqual(f))
+			if(fluid.amount == getMaxLiquid() || !fluid.isFluidEqual(f))
 				return false;
 
-			fluid.amount = Math.min(fluid.amount+f.amount, 10000);
+			fluid.amount = Math.min(fluid.amount+f.amount, getMaxLiquid());
 		}
 		return true;
 	}
@@ -338,7 +343,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				if(this.fluid == null)
 					fluid = new FluidStack(TFCFluid.FRESHWATER, 1);
 				else if(this.fluid != null && fluid.getFluid() == TFCFluid.FRESHWATER)
-					fluid.amount = Math.min(fluid.amount+1, 10000);
+					fluid.amount = Math.min(fluid.amount+1, getMaxLiquid());
 			}
 
 			processTimer++;
@@ -384,7 +389,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	public int getLiquidScaled(int i)
 	{
 		if(fluid != null)
-			return fluid.amount * i/10000;
+			return fluid.amount * i/getMaxLiquid();
 		return 0;
 	}
 
@@ -578,12 +583,18 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			if(nbt.hasKey("tab"))
 			{
 				int tab = nbt.getByte("tab");
-				if(tab == 0)
-					worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 35, worldObj, xCoord, yCoord, zCoord);
-				else if(tab == 1)
-					worldObj.getPlayerEntityByName(nbt.getString("player")).openGui(TerraFirmaCraft.instance, 36, worldObj, xCoord, yCoord, zCoord);
+				switchTab(worldObj.getPlayerEntityByName(nbt.getString("player")), tab);
 			}
 		}
+	}
+
+	protected void switchTab(EntityPlayer player, int tab)
+	{
+		if(player != null)
+			if(tab == 0)
+				player.openGui(TerraFirmaCraft.instance, 35, worldObj, xCoord, yCoord, zCoord);
+			else if(tab == 1)
+				player.openGui(TerraFirmaCraft.instance, 36, worldObj, xCoord, yCoord, zCoord);
 	}
 
 	public static void registerRecipes()

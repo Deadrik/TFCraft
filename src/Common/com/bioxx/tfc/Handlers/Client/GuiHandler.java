@@ -24,6 +24,7 @@ import com.bioxx.tfc.GUI.GuiForge;
 import com.bioxx.tfc.GUI.GuiGrill;
 import com.bioxx.tfc.GUI.GuiInventoryTFC;
 import com.bioxx.tfc.GUI.GuiKnapping;
+import com.bioxx.tfc.GUI.GuiLargeVessel;
 import com.bioxx.tfc.GUI.GuiLogPile;
 import com.bioxx.tfc.GUI.GuiMold;
 import com.bioxx.tfc.GUI.GuiNestBox;
@@ -46,6 +47,7 @@ import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
+import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
@@ -138,6 +140,10 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 			return new GuiFoodPrep(player.inventory, ((TEFoodPrep) te), world, x, y, z, 0);
 		case 45:
 			return new GuiFoodPrep(player.inventory, ((TEFoodPrep) te), world, x, y, z, 1);
+		case 46:
+			return new GuiLargeVessel(player.inventory, ((TEVessel) te), world, x, y, z, 0);
+		case 47:
+			return new GuiLargeVessel(player.inventory, ((TEVessel) te), world, x, y, z, 1);
 		default:
 			return null;
 		}

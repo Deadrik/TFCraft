@@ -31,9 +31,8 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.Items.ItemBarrels;
+import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -44,7 +43,6 @@ public class BlockBarrel extends BlockTerraContainer
 {
 	private final Random random = new Random();
 	private String[] woodNames;
-	protected static IIcon blockIcon;
 
 	public BlockBarrel()
 	{
@@ -57,7 +55,7 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		BlockBarrel.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
+		blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
 		TFC_Textures.GuiSolidStorage = iconRegisterer.registerIcon(Reference.ModID + ":" + "button_barrel_solid");
 		TFC_Textures.GuiLiquidStorage = iconRegisterer.registerIcon(Reference.ModID + ":" + "button_barrel_liquid");
 	}
@@ -72,7 +70,7 @@ public class BlockBarrel extends BlockTerraContainer
 			if(side == 0 || side == 1)
 				return TFC_Textures.InvisibleTexture;
 			else
-				return BlockBarrel.blockIcon;
+				return blockIcon;
 		}
 		if(meta<16)
 			return TFCBlocks.Planks.getIcon(side, meta);
@@ -87,7 +85,7 @@ public class BlockBarrel extends BlockTerraContainer
 		if(side == 0 || side == 1)
 			return TFC_Textures.InvisibleTexture;
 		else
-			return BlockBarrel.blockIcon;
+			return blockIcon;
 	}
 
 	@SideOnly(Side.CLIENT)
