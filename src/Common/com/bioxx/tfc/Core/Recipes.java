@@ -1714,6 +1714,12 @@ public class Recipes
 			" ### ",
 			" ### ",
 			"     ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 3)});
+		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCBlocks.Vessel, 1), new Object[] { 
+			" ### ",
+			" ### ",
+			" ### ",
+			" ### ",
+			"     ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
 	}
 
 	private static void registerAlloys()
@@ -2572,9 +2578,9 @@ public class Recipes
 
 		manager.addRecipe(
 				new KilnRecipe(
-						new ItemStack(TFCItems.PotteryLargeVessel,1,0),
+						new ItemStack(TFCBlocks.Vessel,1,0),
 						0, 
-						new ItemStack(TFCItems.PotteryLargeVessel,1,1)));
+						new ItemStack(TFCBlocks.Vessel,1,1)));
 
 		manager.addRecipe(
 				new KilnRecipe(

@@ -15,6 +15,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
@@ -26,7 +27,9 @@ import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
-import com.bioxx.tfc.api.Enums.EnumWoodMaterial;
+import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
+import com.bioxx.tfc.api.Events.ItemCookEvent;
+import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 import cpw.mods.fml.relauncher.Side;
@@ -57,7 +60,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		externalWoodCount = 0;
 		oldWoodCount = 0;
 		charcoalCounter = 0;
-		hasCookingPot = false;
+		hasCookingPot = true;
 		scanSmokeLayer = true;
 	}
 
@@ -85,6 +88,20 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			{
 				float temp = TFC_ItemHeat.GetTemp(fireItemStacks[1]);
 				ItemStack output = index.getOutput(fireItemStacks[1], R);
+				if(fireItemStacks[1].getItem() instanceof IFood)
+				{
+					ItemCookEvent eventMelt = new ItemCookEvent(fireItemStacks[1], output, this);
+					MinecraftForge.EVENT_BUS.post(eventMelt);
+					output = eventMelt.result;
+				}
+
+				float mod = ((IFood)output.getItem()).getSmokeAbsorbMultiplier();
+				TFC_Core.setSweetMod(output, Math.round(fuelTasteProfile[0] * mod));
+				TFC_Core.setSourMod(output, Math.round(fuelTasteProfile[1] * mod));
+				TFC_Core.setSaltyMod(output, Math.round(fuelTasteProfile[2] * mod));
+				TFC_Core.setBitterMod(output, Math.round(fuelTasteProfile[3] * mod));
+				TFC_Core.setSavoryMod(output, Math.round(fuelTasteProfile[4] * mod));
+
 				int damage = output.getItemDamage();
 				if(output.getItem() == fireItemStacks[1].getItem())
 					damage = fireItemStacks[1].getItemDamage();
@@ -603,15 +620,8 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			careForInventorySlot(fireItemStacks[7]);
 			careForInventorySlot(fireItemStacks[8]);
 
-			hasCookingPot = (fireItemStacks[1]!= null && fireItemStacks[1].getItem() == TFCItems.PotteryPot);
-
-			/*
-			ItemStack[] FuelStack = new ItemStack[4];
-			FuelStack[0] = fireItemStacks[0];
-			FuelStack[1] = fireItemStacks[3];
-			FuelStack[2] = fireItemStacks[4];
-			FuelStack[3] = fireItemStacks[5];
-			*/
+			hasCookingPot = (fireItemStacks[1] != null && fireItemStacks[1].getItem() == TFCItems.PotteryPot && 
+					fireItemStacks[1].getItemDamage() == 1);
 
 			//Now we cook the input item
 			CookItem();
@@ -645,7 +655,8 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			{
 				if(fireItemStacks[5] != null)
 				{
-					EnumWoodMaterial m = TFC_Core.getWoodMaterial(fireItemStacks[5]);
+					EnumFuelMaterial m = TFC_Core.getFuelMaterial(fireItemStacks[5]);
+					fuelTasteProfile = m.tasteProfile;
 					fireItemStacks[5] = null;
 					fuelTimeLeft = m.burnTimeMax;
 					fuelBurnTemp = m.burnTempMax;

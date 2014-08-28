@@ -301,7 +301,7 @@ public class FoodStatsTFC
 	public int[] getPrefTaste()
 	{
 		Random R = new Random(getPlayerFoodSeed());
-		return new int[]{10+R.nextInt(80),10+R.nextInt(80),10+R.nextInt(80),10+R.nextInt(80),10+R.nextInt(80)};
+		return new int[]{20+R.nextInt(60),20+R.nextInt(60),20+R.nextInt(60),20+R.nextInt(60),20+R.nextInt(60)};
 	}
 
 	public float getTasteFactor(ItemStack food)

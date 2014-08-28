@@ -51,11 +51,13 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public float decayRate = 1.0f;
 	public boolean isEdible = true;
 	public boolean canBeUsedRaw = true;
-	private int tasteSweet = 0;
-	private int tasteSour = 0;
-	private int tasteSalty = 0;
-	private int tasteBitter = 0;
-	private int tasteUmami = 0;
+	protected int tasteSweet = 0;
+	protected int tasteSour = 0;
+	protected int tasteSalty = 0;
+	protected int tasteBitter = 0;
+	protected int tasteUmami = 0;
+	protected boolean canSmoke = false;
+	protected float smokeAbsorb = 0.5f;
 
 	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um)
 	{
@@ -89,6 +91,12 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public ItemFoodTFC setDecayRate(float f)
 	{
 		this.decayRate = f;
+		return this;
+	}
+
+	public ItemFoodTFC setCanSmoke()
+	{
+		this.canSmoke = true;
 		return this;
 	}
 
@@ -499,7 +507,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		int base = tasteSweet;
 		if(is != null && is.getTagCompound().hasKey("tasteSweet"))
 			base = is.getTagCompound().getInteger("tasteSweet");
-		return base + getTasteSweetMod(is);
+		return Math.max(base + getTasteSweetMod(is), 0);
 	}
 
 	public int getTasteSweetMod(ItemStack is) {
@@ -514,7 +522,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		int base = tasteSour;
 		if(is != null && is.getTagCompound().hasKey("tasteSour"))
 			base = is.getTagCompound().getInteger("tasteSour");
-		return base + getTasteSourMod(is);
+		return Math.max(base + getTasteSourMod(is), 0);
 	}
 
 	public int getTasteSourMod(ItemStack is) {
@@ -528,8 +536,12 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public int getTasteSalty(ItemStack is) {
 		int base = tasteSalty;
 		if(is != null && is.getTagCompound().hasKey("tasteSalty"))
-			base = is.getTagCompound().getInteger("tasteSalty");;
-			return base + getTasteSaltyMod(is);
+			base = is.getTagCompound().getInteger("tasteSalty");
+
+		if(is.getTagCompound().hasKey("isSalted"))
+			base += 40;
+
+		return Math.max(base + getTasteSaltyMod(is), 0);
 	}
 
 	public int getTasteSaltyMod(ItemStack is) {
@@ -544,7 +556,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		int base = tasteBitter;
 		if(is != null && is.getTagCompound().hasKey("tasteBitter"))
 			base = is.getTagCompound().getInteger("tasteBitter");
-		return base + getTasteBitterMod(is);
+		return Math.max(base + getTasteBitterMod(is), 0);
 	}
 
 	public int getTasteBitterMod(ItemStack is) {
@@ -559,7 +571,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		int base = tasteUmami;
 		if(is != null && is.getTagCompound().hasKey("tasteUmami"))
 			base = is.getTagCompound().getInteger("tasteUmami");
-		return base + getTasteSavoryMod(is);
+		return Math.max(base + getTasteSavoryMod(is), 0);
 	}
 
 	public int getTasteSavoryMod(ItemStack is) {
@@ -576,13 +588,26 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 	@Override
 	public boolean renderDecay() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean renderWeight() {
-		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public boolean canSmoke() {
+		return canSmoke;
+	}
+
+	@Override
+	public float getSmokeAbsorbMultiplier() {
+		return this.smokeAbsorb;
+	}
+
+	public ItemFoodTFC setSmokeAbsorbMultiplier(float s) {
+		smokeAbsorb = s;
+		return this;
 	}
 }

@@ -8,12 +8,15 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.Events.ItemCookEvent;
+import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class TEGrill extends NetworkTileEntity implements IInventory
@@ -108,9 +111,26 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 			{
 				float temp = TFC_ItemHeat.GetTemp(storage[i]);
 				ItemStack output = index.getOutput(storage[i], R);
+				TEFireEntity te = (TEFireEntity) worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
+				int[] fuelTasteProfile = new int[] {0,0,0,0,0};
+				if(te!= null)
+				{
+					fuelTasteProfile = te.fuelTasteProfile;
+				}
+
+				ItemCookEvent eventMelt = new ItemCookEvent(storage[i], output, this);
+				MinecraftForge.EVENT_BUS.post(eventMelt);
+				output = eventMelt.result;
+
+				float mod = ((IFood)output.getItem()).getSmokeAbsorbMultiplier();
+				TFC_Core.setSweetMod(output, Math.round(fuelTasteProfile[0] * mod));
+				TFC_Core.setSourMod(output, Math.round(fuelTasteProfile[1] * mod));
+				TFC_Core.setSaltyMod(output, Math.round(fuelTasteProfile[2] * mod));
+				TFC_Core.setBitterMod(output, Math.round(fuelTasteProfile[3] * mod));
+				TFC_Core.setSavoryMod(output, Math.round(fuelTasteProfile[4] * mod));
 
 				//Morph the input
-				storage[i] = index.getOutput(storage[i], R);
+				storage[i] = output;
 				if(storage[i] != null && manager.findMatchingIndex(storage[i]) != null)
 				{
 					//if the input is a new item, then apply the old temperature to it

@@ -128,7 +128,7 @@ public class CropIndex
 		return null;
 	}
 
-	private void addFlavorProfile(TECrop te, ItemStack outFood)
+	private Random getGrowthRand(TECrop te)
 	{
 		Block farmBlock = te.getWorldObj().getBlock(te.xCoord, te.yCoord-1, te.zCoord);
 		Block underFarmBlock = te.getWorldObj().getBlock(te.xCoord, te.yCoord-2, te.zCoord);
@@ -151,7 +151,16 @@ public class CropIndex
 			}
 			drainage *= 1000;
 
-			Random R = new Random(soilType1+soilType2+ph+drainage);
+			return new Random(soilType1+soilType2+ph+drainage);
+		}
+		return null;
+	}
+
+	private void addFlavorProfile(TECrop te, ItemStack outFood)
+	{
+		Random R = getGrowthRand(te);
+		if(R != null)
+		{
 			outFood.getTagCompound().setInteger("tasteSweetMod", R.nextInt(16)-8);
 			outFood.getTagCompound().setInteger("tasteSourMod", R.nextInt(16)-8);
 			outFood.getTagCompound().setInteger("tasteSaltyMod", R.nextInt(16)-8);

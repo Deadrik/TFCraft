@@ -61,16 +61,17 @@ public class GuiFoodPrep extends GuiContainerTFC
 			bindTexture(rl);
 			guiLeft = (width - xSize) / 2;
 			guiTop = (height - ySize) / 2;
-			drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+			if(guiTab == 0)
+			{
+				drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+			}
+			else if(guiTab == 1)
+			{
+				drawTexturedModalRect(guiLeft, guiTop, 0, 86, xSize, ySize);
+			}
 		}
 		if(drawInventory)
 			PlayerInventory.drawInventory(this, width, height, ySize - PlayerInventory.invYSize);
-	}
-
-	@Override
-	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
-	{
-		fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
 	}
 
 	@Override
@@ -80,14 +81,14 @@ public class GuiFoodPrep extends GuiContainerTFC
 		buttonList.clear();
 		if(guiTab == 0)
 		{
-			buttonList.add(new GuiButton(0, guiLeft + 101, guiTop + 33, 40, 20, StatCollector.translateToLocal("gui.FoodPrep.CreateMeal")));
-			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft+36, guiTop-21, 31, 21, this, new ItemStack(TFCItems.MealGeneric), StatCollector.translateToLocal("gui.FoodPrep.Salad")).setButtonCoord(31, 172));
+			buttonList.add(new GuiButton(0, guiLeft + 101, guiTop + 33, 41, 20, StatCollector.translateToLocal("gui.FoodPrep.CreateMeal")));
+			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft+36, guiTop-21, 31, 21, this, new ItemStack(TFCItems.Salad), StatCollector.translateToLocal("gui.FoodPrep.Salad")).setButtonCoord(31, 172));
 			buttonList.add(new GuiFoodPrepTabButton(1, guiLeft+5, guiTop-21, 31, 21, this, new ItemStack(TFCItems.Sandwich), StatCollector.translateToLocal("gui.FoodPrep.Sandwich")));
 		}
 		else if(guiTab == 1)
 		{
-			buttonList.add(new GuiButton(0, guiLeft + 101, guiTop + 33, 40, 20, StatCollector.translateToLocal("gui.FoodPrep.CreateMeal")));
-			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft+36, guiTop-21, 31, 21, this, new ItemStack(TFCItems.MealGeneric), StatCollector.translateToLocal("gui.FoodPrep.Salad")));
+			buttonList.add(new GuiButton(0, guiLeft + 101, guiTop + 33, 41, 20, StatCollector.translateToLocal("gui.FoodPrep.CreateMeal")));
+			buttonList.add(new GuiFoodPrepTabButton(2, guiLeft+36, guiTop-21, 31, 21, this, new ItemStack(TFCItems.Salad), StatCollector.translateToLocal("gui.FoodPrep.Salad")));
 			buttonList.add(new GuiFoodPrepTabButton(1, guiLeft+5, guiTop-21, 31, 21, this, new ItemStack(TFCItems.Sandwich), StatCollector.translateToLocal("gui.FoodPrep.Sandwich")).setButtonCoord(31, 172));
 		}
 	}
@@ -97,6 +98,22 @@ public class GuiFoodPrep extends GuiContainerTFC
 	{
 		if (guibutton.id == 0)
 			table.actionCreate(Minecraft.getMinecraft().thePlayer);
+		else if (guibutton.id == 1 && guiTab != 0)//Pressed Sandwich Tab
+			table.actionSwitchTab(0, Minecraft.getMinecraft().thePlayer);
+		else if (guibutton.id == 2 && guiTab != 1)//Pressed Salad Tab
+			table.actionSwitchTab(1, Minecraft.getMinecraft().thePlayer);
+	}
+
+	@Override
+	public void updateScreen()
+	{
+		super.updateScreen();
+		if(guiTab == 0 && table.validateSandwich())
+			((GuiButton)buttonList.get(0)).enabled = true;
+		else if(guiTab == 1 && table.validateSalad())
+			((GuiButton)buttonList.get(0)).enabled = true;
+		else ((GuiButton)buttonList.get(0)).enabled = false;
+
 	}
 
 	public class GuiFoodPrepTabButton extends GuiButton 

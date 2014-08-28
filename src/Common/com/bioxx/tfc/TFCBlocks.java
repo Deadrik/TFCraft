@@ -34,6 +34,7 @@ import com.bioxx.tfc.Blocks.Devices.BlockEarlyBloomery;
 import com.bioxx.tfc.Blocks.Devices.BlockFirepit;
 import com.bioxx.tfc.Blocks.Devices.BlockForge;
 import com.bioxx.tfc.Blocks.Devices.BlockGrill;
+import com.bioxx.tfc.Blocks.Devices.BlockLargeVessel;
 import com.bioxx.tfc.Blocks.Devices.BlockLeatherRack;
 import com.bioxx.tfc.Blocks.Devices.BlockNestBox;
 import com.bioxx.tfc.Blocks.Devices.BlockPottery;
@@ -107,8 +108,9 @@ import com.bioxx.tfc.Blocks.Vanilla.BlockTFCFence2;
 import com.bioxx.tfc.Blocks.Vanilla.BlockTorch;
 import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Items.ItemBarrels;
+import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBlocks.ItemGrill;
+import com.bioxx.tfc.Items.ItemBlocks.ItemLargeVessel;
 import com.bioxx.tfc.Items.ItemBlocks.ItemMetalTrapDoor;
 import com.bioxx.tfc.Items.ItemBlocks.ItemSoil;
 import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
@@ -169,6 +171,7 @@ public class TFCBlocks
 	public static int leatherRackRenderId;
 	public static int grillRenderId;
 	public static int metalTrapDoorRenderId;
+	public static int vesselRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -324,6 +327,7 @@ public class TFCBlocks
 
 	public static Block Grill;
 	public static Block MetalTrapDoor;
+	public static Block Vessel;
 
 	public static void RegisterBlocks()
 	{
@@ -488,6 +492,7 @@ public class TFCBlocks
 
 		GameRegistry.registerBlock(Grill, ItemGrill.class, "Grill");
 		GameRegistry.registerBlock(MetalTrapDoor, ItemMetalTrapDoor.class, "MetalTrapDoor");
+		GameRegistry.registerBlock(Vessel, ItemLargeVessel.class, "Vessel");
 
 	}
 
@@ -700,6 +705,7 @@ public class TFCBlocks
 
 		Grill = new BlockGrill().setHardness(2F).setBlockName("Grill");
 		MetalTrapDoor = new BlockMetalTrapDoor().setHardness(2F).setBlockName("MetalTrapDoor");
+		Vessel = new BlockLargeVessel().setHardness(2F).setBlockName("Vessel");
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);
 		StoneIgEx.setHarvestLevel("pickaxe", 0);

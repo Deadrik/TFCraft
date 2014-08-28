@@ -3,7 +3,6 @@ package com.bioxx.tfc.Handlers;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -17,6 +16,7 @@ import com.bioxx.tfc.Containers.ContainerFoodPrep;
 import com.bioxx.tfc.Containers.ContainerForge;
 import com.bioxx.tfc.Containers.ContainerGrill;
 import com.bioxx.tfc.Containers.ContainerHorseInventoryTFC;
+import com.bioxx.tfc.Containers.ContainerLargeVessel;
 import com.bioxx.tfc.Containers.ContainerLiquidVessel;
 import com.bioxx.tfc.Containers.ContainerLogPile;
 import com.bioxx.tfc.Containers.ContainerMold;
@@ -43,6 +43,7 @@ import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
+import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySluice;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
@@ -166,6 +167,10 @@ public class GuiHandler implements IGuiHandler
 			return new ContainerFoodPrep(player.inventory, (TEFoodPrep) te, world, x, y, z, 0);
 		case 45:
 			return new ContainerFoodPrep(player.inventory, (TEFoodPrep) te, world, x, y, z, 1);
+		case 46:
+			return new ContainerLargeVessel(player.inventory, ((TEVessel) te), world, x, y, z, 0);
+		case 47:
+			return new ContainerLargeVessel(player.inventory, ((TEVessel) te), world, x, y, z, 1);
 		default:
 		{
 			return null;

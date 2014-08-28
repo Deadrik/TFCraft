@@ -15,11 +15,11 @@ import com.bioxx.tfc.TileEntities.TEBarrel;
 
 public class ContainerBarrel extends ContainerTFC
 {
-	TEBarrel barrel;
-	float liquidLevel;
-	int liquidID;
-	int sealedTime = -1;
-	int guiTab = 0;
+	public TEBarrel barrel;
+	public float liquidLevel;
+	public int liquidID;
+	public int sealedTime = -1;
+	public int guiTab = 0;
 
 	public ContainerBarrel(InventoryPlayer inventoryplayer, TEBarrel tileentitybarrel, World world, int x, int y, int z, int tab)
 	{
@@ -28,7 +28,14 @@ public class ContainerBarrel extends ContainerTFC
 		liquidID = -1;
 		guiTab = tab;
 
+		buildLayout();
 
+		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 90, false, true);
+
+	}
+
+	protected void buildLayout()
+	{
 		if(guiTab == 0)
 		{
 			//Input slot
@@ -50,9 +57,6 @@ public class ContainerBarrel extends ContainerTFC
 				}
 			}
 		}
-
-		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 90, false, true);
-
 	}
 
 	@Override

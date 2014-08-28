@@ -1,7 +1,6 @@
 package com.bioxx.tfc.Core;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.TFCBlocks;
@@ -355,7 +354,7 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RiceDough, 1), 1, 200, new ItemStack(TFCItems.RiceBread, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 1, 200, new ItemStack(TFCItems.CornBread, 1)));
 
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, 32767), 0.2, 200, new ItemStack(Items.bowl, 1)));
+		//manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, 32767), 0.2, 200, new ItemStack(Items.bowl, 1)));
 
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Stick, 1, 32767), 1, 80, new ItemStack(TFCBlocks.Torch, 2)));

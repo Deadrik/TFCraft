@@ -20,8 +20,9 @@ import com.bioxx.tfc.Core.Metal.AlloyManager;
 import com.bioxx.tfc.Core.Metal.MetalRegistry;
 import com.bioxx.tfc.Food.ItemEgg;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Food.ItemMeal;
+import com.bioxx.tfc.Food.ItemSalad;
 import com.bioxx.tfc.Food.ItemSandwich;
+import com.bioxx.tfc.Food.ItemSoup;
 import com.bioxx.tfc.Items.ItemAlcohol;
 import com.bioxx.tfc.Items.ItemArrow;
 import com.bioxx.tfc.Items.ItemBloom;
@@ -62,7 +63,6 @@ import com.bioxx.tfc.Items.ItemUnfinishedArmor;
 import com.bioxx.tfc.Items.ItemBlocks.ItemWoodDoor;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryJug;
-import com.bioxx.tfc.Items.Pottery.ItemPotteryLargeVessel;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryMold;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryPot;
 import com.bioxx.tfc.Items.Pottery.ItemPotterySmallVessel;
@@ -799,8 +799,6 @@ public class TFCItems
 	public static Item BlueSteelBucketEmpty;
 	public static Item BlueSteelBucketLava;
 
-	public static Item MealGeneric;
-
 	public static Item Quern;
 	public static Item FlintSteel;
 
@@ -856,7 +854,6 @@ public class TFCItems
 	public static Item PotteryJug;
 	public static Item PotteryPot;
 	public static Item PotterySmallVessel;
-	public static Item PotteryLargeVessel;
 	public static Item KilnRack;
 	public static Item Straw;
 	public static Item FlatClay;
@@ -926,6 +923,9 @@ public class TFCItems
 	public static Item MetalLock;
 	public static Item MudBrick;
 	public static Item Sandwich;
+	public static Item Soup;
+	public static Item Stew;
+	public static Item Salad;
 	/**
 	 * Item Uses Setup
 	 * */
@@ -1519,7 +1519,6 @@ public class TFCItems
 
 		PotteryJug = new ItemPotteryJug().setUnlocalizedName("Jug");
 		PotterySmallVessel = new ItemPotterySmallVessel().setUnlocalizedName("Small Vessel");
-		PotteryLargeVessel = new ItemPotteryLargeVessel().setUnlocalizedName("Large Vessel");
 		PotteryPot = new ItemPotteryPot().setUnlocalizedName("Pot");
 		CeramicMold = new ItemPotteryBase().setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
 		ClayBall = new ItemClay().setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1)).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("Clay");
@@ -1656,27 +1655,27 @@ public class TFCItems
 		//Tastes are Sweet, Sour, Salty, Bitter, Umami
 
 		//Proteins
-		porkchopRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setUnlocalizedName("porkchopRaw");
-		porkchopCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 65).setDecayRate(1.8f).setUnlocalizedName("porkchopCooked");
-		fishRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, true).setDecayRate(3.0f).setUnlocalizedName("fishRaw");
-		fishCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 50).setDecayRate(2.0f).setUnlocalizedName("fishCooked");
-		beefRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 50, false, false).setDecayRate(3.0f).setUnlocalizedName("beefRaw");
-		beefCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 75).setDecayRate(1.8f).setUnlocalizedName("beefCooked");
-		chickenRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setUnlocalizedName("chickenRaw");
-		chickenCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 60).setDecayRate(1.8f).setUnlocalizedName("chickenCooked");
+		porkchopRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("porkchopRaw");
+		porkchopCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 65).setDecayRate(1.8f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("porkchopCooked");
+		fishRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, true).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("fishRaw");
+		fishCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 50).setDecayRate(2.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("fishCooked");
+		beefRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 50, false, false).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("beefRaw");
+		beefCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 75).setDecayRate(1.8f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("beefCooked");
+		chickenRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("chickenRaw");
+		chickenCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 60).setDecayRate(1.8f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("chickenCooked");
 		Soybean = new ItemFoodTFC(EnumFoodGroup.Protein, 10, 0, 0, 0, 40, true).setUnlocalizedName("Soybeans");
 		EggCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 25).setDecayRate(3.0f).setUnlocalizedName("Egg Cooked");
-		calamariRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 20, 0, 35, false, false).setDecayRate(4.0f).setUnlocalizedName("Calamari Raw");
-		calamariCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 20, 0, 40).setDecayRate(2.0f).setUnlocalizedName("Calamari Cooked");
-		muttonRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setUnlocalizedName("Mutton Raw");
-		muttonCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 60).setDecayRate(1.8f).setUnlocalizedName("Mutton Cooked");
-		venisonRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 5, 0, 0, 0, 50, false, false).setDecayRate(3.0f).setUnlocalizedName("Venison");
-		venisonCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 5, 0, 0, 0, 70).setDecayRate(1.8f).setUnlocalizedName("VenisonCooked");
-		horseMeatRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setUnlocalizedName("HorseMeat");
-		horseMeatCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 65).setDecayRate(1.8f).setUnlocalizedName("HorseMeatCooked");
+		calamariRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 20, 0, 35, false, false).setCanSmoke().setSmokeAbsorbMultiplier(1F).setDecayRate(4.0f).setUnlocalizedName("Calamari Raw");
+		calamariCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 20, 0, 40).setCanSmoke().setSmokeAbsorbMultiplier(1F).setDecayRate(2.0f).setUnlocalizedName("Calamari Cooked");
+		muttonRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Mutton Raw");
+		muttonCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 60).setDecayRate(1.8f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Mutton Cooked");
+		venisonRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 5, 0, 0, 0, 50, false, false).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Venison");
+		venisonCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 5, 0, 0, 0, 70).setDecayRate(1.8f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("VenisonCooked");
+		horseMeatRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("HorseMeat");
+		horseMeatCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 65).setDecayRate(1.8f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("HorseMeatCooked");
 
 		//Dairy
-		Cheese = new ItemFoodTFC(EnumFoodGroup.Dairy, 0, 10, 20, 0, 35).setDecayRate(0.5f).setUnlocalizedName("Cheese");
+		Cheese = new ItemFoodTFC(EnumFoodGroup.Dairy, 0, 10, 20, 0, 35).setDecayRate(0.5f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Cheese");
 
 		//Grains
 		WheatGrain = new ItemFoodTFC(EnumFoodGroup.Grain, 10, 0, 0, 5, 20).setUnlocalizedName("Wheat Grain");
@@ -1747,8 +1746,8 @@ public class TFCItems
 
 		//Fruit are in the foodID range of 50,000
 		RedApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
-		Banana = new ItemFoodTFC(EnumFoodGroup.Fruit, 50, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);
-		Orange = new ItemFoodTFC(EnumFoodGroup.Fruit, 60, 30, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[2]);
+		Banana = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);
+		Orange = new ItemFoodTFC(EnumFoodGroup.Fruit, 50, 30, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[2]);
 		GreenApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 40, 0, 40, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[3]);
 		Lemon = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 80, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[4]);
 		Olive = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 0, 50, 20, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[5]);
@@ -1759,7 +1758,7 @@ public class TFCItems
 		WintergreenBerry = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 0, 0, 20, 0).setDecayRate(2.0f).setUnlocalizedName("Wintergreen Berry");
 		Blueberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 20, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Blueberry");
 		Raspberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 45, 15, 0, 5, 0).setDecayRate(2.0f).setUnlocalizedName("Raspberry");
-		Strawberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 80, 5, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Strawberry");
+		Strawberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 60, 5, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Strawberry");
 		Blackberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 30, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Blackberry");
 		Bunchberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 5, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Bunchberry");
 		Cranberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 75, 0).setDecayRate(2.0f).setUnlocalizedName("Cranberry");
@@ -1768,8 +1767,9 @@ public class TFCItems
 		Gooseberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 40, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Gooseberry");
 		Cloudberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 40, 0, 30, 0).setDecayRate(2.0f).setUnlocalizedName("Cloudberry");
 
-		MealGeneric = new ItemMeal().setUnlocalizedName("MealGeneric");
 		Sandwich = new ItemSandwich().setUnlocalizedName("Sandwich");
+		Salad = new ItemSalad().setUnlocalizedName("Salad");
+		Soup = new ItemSoup().setUnlocalizedName("Soup");
 
 		Sugarcane = new ItemTerra().setFolder("plants/").setUnlocalizedName("Sugarcane");
 		Hemp = new ItemTerra().setFolder("plants/").setUnlocalizedName("Hemp");
@@ -2570,7 +2570,6 @@ public class TFCItems
 
 		GameRegistry.registerItem(PotteryJug , PotteryJug.getUnlocalizedName());
 		GameRegistry.registerItem(PotterySmallVessel , PotterySmallVessel.getUnlocalizedName());
-		GameRegistry.registerItem(PotteryLargeVessel , PotteryLargeVessel.getUnlocalizedName());
 		GameRegistry.registerItem(PotteryPot , PotteryPot.getUnlocalizedName());
 
 		GameRegistry.registerItem(CeramicMold , CeramicMold.getUnlocalizedName());
@@ -2661,7 +2660,6 @@ public class TFCItems
 		GameRegistry.registerItem(OatWhole, OatWhole.getUnlocalizedName());
 		GameRegistry.registerItem(RyeWhole, RyeWhole.getUnlocalizedName());
 		GameRegistry.registerItem(RiceWhole, RiceWhole.getUnlocalizedName());
-		GameRegistry.registerItem(MealGeneric, MealGeneric.getUnlocalizedName());
 		GameRegistry.registerItem(WheatGround, WheatGround.getUnlocalizedName());
 		GameRegistry.registerItem(BarleyGround, BarleyGround.getUnlocalizedName());
 		GameRegistry.registerItem(OatGround, OatGround.getUnlocalizedName());
@@ -2864,6 +2862,8 @@ public class TFCItems
 		GameRegistry.registerItem(Quiver, Quiver.getUnlocalizedName());
 		GameRegistry.registerItem(MudBrick, MudBrick.getUnlocalizedName());
 		GameRegistry.registerItem(Sandwich, Sandwich.getUnlocalizedName());
+		GameRegistry.registerItem(Salad, Salad.getUnlocalizedName());
+		GameRegistry.registerItem(Soup, Soup.getUnlocalizedName());
 
 		System.out.println(new StringBuilder().append("[TFC] All Items Registered").toString());
 	}

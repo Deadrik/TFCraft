@@ -51,7 +51,7 @@ import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Enums.EnumWoodMaterial;
+import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -666,48 +666,49 @@ public class TFC_Core
 		return false;
 	}
 
-	public static EnumWoodMaterial getWoodMaterial(ItemStack is)
+	public static EnumFuelMaterial getFuelMaterial(ItemStack is)
 	{
 		if(is.getItem() == Item.getItemFromBlock(TFCBlocks.Peat))
-			return EnumWoodMaterial.PEAT;
-		if(is.getItem() == Item.getItemFromBlock(TFCBlocks.LogNatural2))
-		{
-			if(is.getItemDamage() == 0)
-				return EnumWoodMaterial.ACACIA;
-		}
-		else if(is.getItemDamage() == 0)
-			return EnumWoodMaterial.ASH;
+			return EnumFuelMaterial.PEAT;
+		if(is.getItem() == TFCItems.Coal && is.getItemDamage() == 0)
+			return EnumFuelMaterial.COAL;
+		else if(is.getItem() == TFCItems.Coal && is.getItemDamage() == 1)
+			return EnumFuelMaterial.CHARCOAL;
+		if(is.getItemDamage() == 0)
+			return EnumFuelMaterial.ASH;
 		else if (is.getItemDamage() == 1)
-			return EnumWoodMaterial.ASPEN;
+			return EnumFuelMaterial.ASPEN;
 		else if (is.getItemDamage() == 2)
-			return EnumWoodMaterial.BIRCH;
+			return EnumFuelMaterial.BIRCH;
 		else if (is.getItemDamage() == 3)
-			return EnumWoodMaterial.CHESTNUT;
+			return EnumFuelMaterial.CHESTNUT;
 		else if (is.getItemDamage() == 4)
-			return EnumWoodMaterial.DOUGLASFIR;
+			return EnumFuelMaterial.DOUGLASFIR;
 		else if (is.getItemDamage() == 5)
-			return EnumWoodMaterial.HICKORY;
+			return EnumFuelMaterial.HICKORY;
 		else if (is.getItemDamage() == 6)
-			return EnumWoodMaterial.MAPLE;
+			return EnumFuelMaterial.MAPLE;
 		else if (is.getItemDamage() == 7)
-			return EnumWoodMaterial.OAK;
+			return EnumFuelMaterial.OAK;
 		else if (is.getItemDamage() == 8)
-			return EnumWoodMaterial.PINE;
+			return EnumFuelMaterial.PINE;
 		else if (is.getItemDamage() == 9)
-			return EnumWoodMaterial.REDWOOD;
+			return EnumFuelMaterial.REDWOOD;
 		else if (is.getItemDamage() == 10)
-			return EnumWoodMaterial.SPRUCE;
+			return EnumFuelMaterial.SPRUCE;
 		else if (is.getItemDamage() == 11)
-			return EnumWoodMaterial.SYCAMORE;
+			return EnumFuelMaterial.SYCAMORE;
 		else if (is.getItemDamage() == 12)
-			return EnumWoodMaterial.WHITECEDAR;
+			return EnumFuelMaterial.WHITECEDAR;
 		else if (is.getItemDamage() == 13)
-			return EnumWoodMaterial.WHITEELM;
+			return EnumFuelMaterial.WHITEELM;
 		else if (is.getItemDamage() == 14)
-			return EnumWoodMaterial.WILLOW;
+			return EnumFuelMaterial.WILLOW;
 		else if (is.getItemDamage() == 15)
-			return EnumWoodMaterial.KAPOK;
-		return EnumWoodMaterial.ASPEN;
+			return EnumFuelMaterial.KAPOK;
+		else if(is.getItemDamage() == 16)
+			return EnumFuelMaterial.ACACIA;
+		return EnumFuelMaterial.ASPEN;
 	}
 
 	public static boolean showShiftInformation()
@@ -1189,5 +1190,50 @@ public class TFC_Core
 		Vec3 v15 = v5.addVector(v13 * v14, v11 * v14, v12 * v14);
 
 		return P.worldObj.rayTraceBlocks(v5, v15, true);
+	}
+
+	public static void setSweetMod(ItemStack is, int i)
+	{
+		if(is != null)
+		{
+			NBTTagCompound nbt = is.getTagCompound();
+			nbt.setInteger("tasteSweetMod", nbt.getInteger("tasteSweetMod") + i);
+		}
+	}
+
+	public static void setSourMod(ItemStack is, int i)
+	{
+		if(is != null)
+		{
+			NBTTagCompound nbt = is.getTagCompound();
+			nbt.setInteger("tasteSourMod", nbt.getInteger("tasteSourMod") + i);
+		}
+	}
+
+	public static void setSaltyMod(ItemStack is, int i)
+	{
+		if(is != null)
+		{
+			NBTTagCompound nbt = is.getTagCompound();
+			nbt.setInteger("tasteSaltyMod", nbt.getInteger("tasteSaltyMod") + i);
+		}
+	}
+
+	public static void setBitterMod(ItemStack is, int i)
+	{
+		if(is != null)
+		{
+			NBTTagCompound nbt = is.getTagCompound();
+			nbt.setInteger("tasteBitterMod", nbt.getInteger("tasteBitterMod") + i);
+		}
+	}
+
+	public static void setSavoryMod(ItemStack is, int i)
+	{
+		if(is != null)
+		{
+			NBTTagCompound nbt = is.getTagCompound();
+			nbt.setInteger("tasteUmamiMod", nbt.getInteger("tasteUmamiMod") + i);
+		}
 	}
 }

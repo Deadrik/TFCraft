@@ -212,7 +212,6 @@ public class TerraFirmaCraft
 
 		// Register Anvil Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
-
 		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
 
 		// Register the Entity Living Update Handler
