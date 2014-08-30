@@ -480,7 +480,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		{
 			/*if(!player.isSneaking())
 			{
-				player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(getGender() == GenderEnum.FEMALE ? "entity.animal.female" : "entity.animal.male")));
 			}*/
 		}
 		//player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
