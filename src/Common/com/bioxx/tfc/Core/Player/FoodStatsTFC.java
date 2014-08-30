@@ -113,7 +113,15 @@ public class FoodStatsTFC
 					foodExhaustionLevel = 0;
 				}
 				this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
-				reduceNutrition();
+
+				if (this.stomachLevel <= 0)
+				{
+					reduceNutrition(0.015F);//3x penalty for starving
+				}
+				else
+				{
+					reduceNutrition(0.005F);
+				}
 			}
 
 			//Heal or hurt the player based on hunger.
@@ -126,11 +134,12 @@ public class FoodStatsTFC
 					//Player heals 1% per 30 in game minutes
 					player.heal((int) (player.getMaxHealth() * 0.01f));
 				}
-				else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.85f && !TFC_Core.isPlayerInDebugMode(player) && player.getSleepTimer() == 0)
+				/*else if (this.stomachLevel <= 0 && getNutritionHealthModifier() < 0.85f && !TFC_Core.isPlayerInDebugMode(player) && player.getSleepTimer() == 0)
 				{
 					//Players loses health at a rate of 5% per 30 minutes if they are starving
-					player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth() * 0.05f), 10));
-				}
+					//Disabled so that the penalty for not eating is now entirely based upon nutrition.
+					//player.attackEntityFrom(DamageSource.starve, Math.max((int) (player.getMaxHealth() * 0.05f), 10));
+				}*/
 			}
 
 			/****************************************
@@ -167,13 +176,13 @@ public class FoodStatsTFC
 		}
 	}
 
-	protected void reduceNutrition() 
+	protected void reduceNutrition(float amount) 
 	{
-		nutrFruit = Math.max(this.nutrFruit - (0.005f + foodExhaustionLevel), 0);
-		nutrVeg = Math.max(this.nutrVeg - (0.005f + foodExhaustionLevel), 0);
-		nutrGrain = Math.max(this.nutrGrain - (0.005f + foodExhaustionLevel), 0);
-		nutrProtein = Math.max(this.nutrProtein - (0.005f + foodExhaustionLevel), 0);
-		nutrDairy = Math.max(this.nutrDairy - (0.005f + foodExhaustionLevel), 0);
+		nutrFruit = Math.max(this.nutrFruit - (amount + foodExhaustionLevel), 0);
+		nutrVeg = Math.max(this.nutrVeg - (amount + foodExhaustionLevel), 0);
+		nutrGrain = Math.max(this.nutrGrain - (amount + foodExhaustionLevel), 0);
+		nutrProtein = Math.max(this.nutrProtein - (amount + foodExhaustionLevel), 0);
+		nutrDairy = Math.max(this.nutrDairy - (amount + foodExhaustionLevel), 0);
 	}
 
 	public int getMaxWater(EntityPlayer player)
