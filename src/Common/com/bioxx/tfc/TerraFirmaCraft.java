@@ -137,6 +137,10 @@ public class TerraFirmaCraft
 		// Register Gui Handler
 		proxy.registerGuiHandler();
 
+		//Register tree types and load tree schematics
+		TreeRegistry.instance.LoadTreeTypes();
+		TreeRegistry.instance.LoadTrees();
+
 		if(true)
 		{
 			//Register Generators
@@ -170,8 +174,6 @@ public class TerraFirmaCraft
 			DimensionManager.registerDimension(0, 0);
 			DimensionManager.registerDimension(1, 1);
 		}
-
-		TreeRegistry.instance.LoadTreeTypes();
 	}
 
 	@EventHandler
@@ -212,6 +214,7 @@ public class TerraFirmaCraft
 
 		// Register Anvil Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
+
 		MinecraftForge.EVENT_BUS.register(new PlayerSkillEventHandler());
 
 		// Register the Entity Living Update Handler
@@ -236,8 +239,6 @@ public class TerraFirmaCraft
 		ItemHeat.SetupItemHeat();
 
 		TFC_Climate.initCache();
-
-		TreeRegistry.instance.LoadTrees();
 	}
 
 	@EventHandler

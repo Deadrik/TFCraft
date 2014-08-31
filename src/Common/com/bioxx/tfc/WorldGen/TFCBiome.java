@@ -17,20 +17,7 @@ import com.bioxx.tfc.Entities.Mobs.EntitySlimeTFC;
 import com.bioxx.tfc.Entities.Mobs.EntitySpiderTFC;
 import com.bioxx.tfc.Entities.Mobs.EntitySquidTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityZombieTFC;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomShrub;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenAcaciaKoaTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomBigTree;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomCedarTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomHugeTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomMapleShortTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomMapleTallTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomTallTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomWillowTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenDouglasFir;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenPineShort;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenPineTall;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenRedwoodXL;
+import com.bioxx.tfc.WorldGen.Generators.WorldGenTrees;
 
 public class TFCBiome extends BiomeGenBase
 {
@@ -59,6 +46,59 @@ public class TFCBiome extends BiomeGenBase
 	public static final TFCBiome DeepOcean = new TFCBiome(36).setBiomeName("Deep Ocean").setMinMaxHeight(-1.5F, 0.00001F).setBiomeColor(0x0e055a);
 	public static final TFCBiome lake = new TFCBiome(2).setBiomeName("Lake").setMinMaxHeight(-0.5F, 0.001F).setBiomeColor(0x4a8e9e);
 
+	//Oak
+	protected static WorldGenTrees worldGenOakShortTrees;
+	protected static WorldGenTrees worldGenOakTallTrees;
+	//Aspen
+	protected static WorldGenTrees worldGenAspenShortTrees;
+	protected static WorldGenTrees worldGenAspenTallTrees;
+	//Birch
+	protected static WorldGenTrees worldGenBirchShortTrees;
+	protected static WorldGenTrees worldGenBirchTallTrees;
+	//Chestnut
+	protected static WorldGenTrees worldGenChestnutShortTrees;
+	protected static WorldGenTrees worldGenChestnutTallTrees;
+	//Douglas Fir
+	protected static WorldGenTrees worldGenDouglasFirShortTrees;
+	protected static WorldGenTrees worldGenDouglasFirTallTrees;
+	//Hickory
+	protected static WorldGenTrees worldGenHickoryShortTrees;
+	protected static WorldGenTrees worldGenHickoryTallTrees;
+	//Maple
+	protected static WorldGenTrees worldGenMapleShortTrees;
+	protected static WorldGenTrees worldGenMapleTallTrees;
+	//Ash
+	protected static WorldGenTrees worldGenAshShortTrees;
+	protected static WorldGenTrees worldGenAshTallTrees;
+	//Pine
+	protected static WorldGenTrees worldGenPineShortTrees;
+	protected static WorldGenTrees worldGenPineTallTrees;
+	//Sequoia
+	protected static WorldGenTrees worldGenRedwoodShortTrees;
+	protected static WorldGenTrees worldGenRedwoodTallTrees;
+	//Spruce
+	protected static WorldGenTrees worldGenSpruceShortTrees;
+	protected static WorldGenTrees worldGenSpruceTallTrees;
+	//Sycamore
+	protected static WorldGenTrees worldGenSycamoreShortTrees;
+	protected static WorldGenTrees worldGenSycamoreTallTrees;
+	//White Ceder
+	protected static WorldGenTrees worldGenWhiteCedarShortTrees;
+	protected static WorldGenTrees worldGenWhiteCedarTallTrees;
+	//White Elm
+	protected static WorldGenTrees worldGenWhiteElmShortTrees;
+	protected static WorldGenTrees worldGenWhiteElmTallTrees;
+	//Willow
+	protected static WorldGenTrees worldGenWillowShortTrees;
+	protected static WorldGenTrees worldGenWillowTallTrees;
+	//Kapok
+	protected static WorldGenTrees worldGenKapokShortTrees;
+	protected static WorldGenTrees worldGenKapokTallTrees;
+	//Acacia
+	protected static WorldGenTrees worldGenAcaciaKoaShortTrees;
+	protected static WorldGenTrees worldGenAcaciaKoaTallTrees;
+
+	/*
 	protected static WorldGenAcaciaKoaTrees worldGenAcaciaKoaTrees;
 	protected static WorldGenCustomTallTrees worldGenAshTallTrees;
 	protected static WorldGenCustomTallTrees worldGenAspenTallTrees;
@@ -89,7 +129,7 @@ public class TFCBiome extends BiomeGenBase
 	protected static WorldGenCustomShortTrees worldGenSycamoreShortTrees;
 	protected static WorldGenCustomShortTrees worldGenWhiteElmShortTrees;
 	protected static WorldGenCustomWillowTrees worldGenWillowShortTrees;
-
+	 */
 	protected int biomeColor = 0x000000;
 	public TFCBiome(int par1)
 	{
@@ -105,6 +145,60 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableCreatureList = new ArrayList();
 		this.spawnableWaterCreatureList = new ArrayList();
 
+		int i = 0;
+		//Oak
+		worldGenOakShortTrees = new WorldGenTrees(false, i, false);
+		worldGenOakTallTrees = new WorldGenTrees(false, i++, true);
+		//Aspen
+		worldGenAspenShortTrees = new WorldGenTrees(false, i, false);
+		worldGenAspenTallTrees = new WorldGenTrees(false, i++, true);
+		//Birch
+		worldGenBirchShortTrees = new WorldGenTrees(false, i, false);
+		worldGenBirchTallTrees = new WorldGenTrees(false, i++, true);
+		//Chestnut
+		worldGenChestnutShortTrees = new WorldGenTrees(false, i, false);
+		worldGenChestnutTallTrees = new WorldGenTrees(false, i++, true);
+		//Douglas Fir
+		worldGenDouglasFirShortTrees = new WorldGenTrees(false, i, false);
+		worldGenDouglasFirTallTrees = new WorldGenTrees(false, i++, true);
+		//Hickory
+		worldGenHickoryShortTrees = new WorldGenTrees(false, i, false);
+		worldGenHickoryTallTrees = new WorldGenTrees(false, i++, true);
+		//Maple
+		worldGenMapleShortTrees = new WorldGenTrees(false, i, false);
+		worldGenMapleTallTrees = new WorldGenTrees(false, i++, true);
+		//Ash
+		worldGenAshShortTrees = new WorldGenTrees(false, i, false);
+		worldGenAshTallTrees = new WorldGenTrees(false, i++, true);
+		//Pine
+		worldGenPineShortTrees = new WorldGenTrees(false, i, false);
+		worldGenPineTallTrees = new WorldGenTrees(false, i++, true);
+		//Sequoia
+		worldGenRedwoodShortTrees = new WorldGenTrees(false, i, false);
+		worldGenRedwoodTallTrees = new WorldGenTrees(false, i++, true);
+		//Spruce
+		worldGenSpruceShortTrees = new WorldGenTrees(false, i, false);
+		worldGenSpruceTallTrees = new WorldGenTrees(false, i++, true);
+		//Sycamore
+		worldGenSycamoreShortTrees = new WorldGenTrees(false, i, false);
+		worldGenSycamoreTallTrees = new WorldGenTrees(false, i++, true);
+		//White Cedar
+		worldGenWhiteCedarShortTrees = new WorldGenTrees(false, i, false);
+		worldGenWhiteCedarTallTrees = new WorldGenTrees(false, i++, true);
+		//White Elm
+		worldGenWhiteElmShortTrees = new WorldGenTrees(false, i, false);
+		worldGenWhiteElmTallTrees = new WorldGenTrees(false, i++, true);
+		//Willow
+		worldGenWillowShortTrees = new WorldGenTrees(false, i, false);
+		worldGenWillowTallTrees = new WorldGenTrees(false, i++, true);
+		//Kapok
+		worldGenKapokShortTrees = new WorldGenTrees(false, i, false);
+		worldGenKapokTallTrees = new WorldGenTrees(false, i++, true);
+		//Acacia
+		worldGenAcaciaKoaShortTrees = new WorldGenTrees(false, i, false);
+		worldGenAcaciaKoaTallTrees = new WorldGenTrees(false, i++, true);
+
+		/*
 		worldGenAcaciaKoaTrees = new WorldGenAcaciaKoaTrees(false,0);
 		worldGenAshTallTrees = new WorldGenCustomTallTrees(false,7);
 		worldGenAspenTallTrees = new WorldGenCustomTallTrees(false,1);
@@ -135,6 +229,7 @@ public class TFCBiome extends BiomeGenBase
 		worldGenSycamoreShortTrees = new WorldGenCustomShortTrees(false,11);
 		worldGenWhiteElmShortTrees = new WorldGenCustomShortTrees(false,13);
 		worldGenWillowShortTrees = new WorldGenCustomWillowTrees(false,14);
+		 */
 
 		//Default spawns. I didn't delete them so they could be referenced in the future. Nerfing animal spawns.
 		this.spawnableCreatureList.clear();
@@ -234,122 +329,145 @@ public class TFCBiome extends BiomeGenBase
 	@Override
 	public TFCBiome setDisableRain()
 	{
-		//		ObfuscationReflectionHelper.setPrivateValue(BiomeGenBase.class, this, false, 39);
+		//ObfuscationReflectionHelper.setPrivateValue(BiomeGenBase.class, this, false, 39);
 		this.enableRain = false;
 		return this;
 	}
 
-	public static WorldGenerator getTreeGen(int i, Boolean j)
+	public static WorldGenerator getTreeGen(int i, Boolean tall)
 	{
 		Random R = new Random();
 		switch(i)
 		{
-		case 7:
+		case 0:
 		{
-			if(j)
-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,7) : worldGenAshTallTrees;
-				else
-					return worldGenAshShortTrees;
+			if(tall)
+				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,0) :worldGenOakTallTrees;
+				return worldGenOakTallTrees;
+			else
+				return worldGenOakShortTrees;
 		}
 		case 1:
 		{
-			if(j)
-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,1) :worldGenAspenTallTrees;
-				else
-					return worldGenAspenShortTrees;
+			if(tall)
+				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,1) :worldGenAspenTallTrees;
+				return worldGenAspenTallTrees;
+			else
+				return worldGenAspenShortTrees;
 		}
 		case 2:
 		{
-			if(j)
-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,2) :worldGenBirchTallTrees;
-				else
-					return worldGenBirchShortTrees;
+			if(tall)
+				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,2) :worldGenBirchTallTrees;
+				return worldGenBirchTallTrees;
+			else
+				return worldGenBirchShortTrees;
 		}
 		case 3:
 		{
-			if(j)
-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,3) :worldGenChestnutTallTrees;
-				else
-					return worldGenChestnutShortTrees;
+			if(tall)
+				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,3) :worldGenChestnutTallTrees;
+				return worldGenChestnutTallTrees;
+			else
+				return worldGenChestnutShortTrees;
 		}
 		case 4:
 		{
-			if(j)
+			if(tall)
 				return worldGenDouglasFirTallTrees;
 			else
 				return worldGenDouglasFirShortTrees;
 		}
 		case 5:
 		{
-			if(j)
-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,5) :worldGenHickoryTallTrees;
-				else
-					return worldGenHickoryShortTrees;
+			if(tall)
+				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,5) :worldGenHickoryTallTrees;
+				return worldGenHickoryTallTrees;
+			else
+				return worldGenHickoryShortTrees;
 		}
 		case 6:
 		{
-			if(j)
-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,6) :worldGenMapleTallTrees;
-				else
-					return worldGenMapleShortTrees;
+			if(tall)
+				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,6) :worldGenMapleTallTrees;
+				return worldGenMapleTallTrees;
+			else
+				return worldGenMapleShortTrees;
 		}
-		case 0:
+		case 7:
 		{
-			if(j)
-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,0) :worldGenOakTallTrees;
-				else
-					return worldGenOakShortTrees;
+			if(tall)
+				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,7) : worldGenAshTallTrees;
+				return worldGenAshTallTrees;
+			else
+				return worldGenAshShortTrees;
 		}
 		case 8:
 		{
-			if(j)
+			if(tall)
 				return worldGenPineTallTrees;
 			else
 				return worldGenPineShortTrees;
 		}
 		case 9:
 		{
-			if(j)
+			if(tall)
 				return worldGenRedwoodTallTrees;
 			else
 				return worldGenRedwoodShortTrees;
 		}
 		case 10:
 		{
-			if(j)
-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,10) :worldGenSpruceTallTrees;
-				else
-					return worldGenSpruceShortTrees;
+			if(tall)
+				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,10) :worldGenSpruceTallTrees;
+				return worldGenSpruceTallTrees;
+			else
+				return worldGenSpruceShortTrees;
 		}
 		case 11:
 		{
-			if(j)
-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,11) :worldGenSycamoreTallTrees;
-				else
-					return worldGenSycamoreShortTrees;
+			if(tall)
+				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,11) :worldGenSycamoreTallTrees;
+				return worldGenSycamoreTallTrees;
+			else
+				return worldGenSycamoreShortTrees;
 		}
 		case 12:
 		{
-			return worldGenWhiteCedarTallTrees;
+			if(tall)
+				return worldGenWhiteCedarTallTrees;
+			else
+				return worldGenWhiteCedarShortTrees;
 		}
 		case 13:
 		{
-			if(j)
-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,13) :worldGenWhiteElmTallTrees;
-				else
-					return worldGenWhiteElmShortTrees;
+			if(tall)
+				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,13) :worldGenWhiteElmTallTrees;
+				return worldGenWhiteElmTallTrees;
+			else
+				return worldGenWhiteElmShortTrees;
 		}
 		case 14:
 		{
-			return worldGenWillowShortTrees;
+			if(tall)
+				return worldGenWillowTallTrees;
+			else
+				return worldGenWillowShortTrees;
 		}
 		case 15:
 		{
-			return ( (R.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : (R.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + R.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15))));
+			//return ( (R.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : (R.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + R.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15))));
+			if(tall)
+				return worldGenKapokTallTrees;
+			else
+				return worldGenKapokShortTrees;
 		}
 		case 16:
 		{
-			return worldGenAcaciaKoaTrees;
+			if(tall)
+				return worldGenAcaciaKoaTallTrees;
+			else
+				return worldGenAcaciaKoaShortTrees;
 		}
 		}
 		return null;

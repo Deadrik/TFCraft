@@ -38,13 +38,4 @@ public class TreeConfiguration
 		minTemp = minT;
 		maxTemp = maxT;
 	}
-	
-	public TreeConfiguration(String n, float minR, float maxR, float minT, float maxT, float minEVT, float maxEVT, boolean eg)
-	{
-		name = n;
-		minRain = minR;
-		maxRain = maxR;
-		minTemp = minT;
-		maxTemp = maxT;
-	}
 }

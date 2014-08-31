@@ -9,7 +9,6 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomFruitTree;
 
 import cpw.mods.fml.common.IWorldGenerator;
 

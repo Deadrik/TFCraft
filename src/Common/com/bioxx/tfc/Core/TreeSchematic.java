@@ -69,11 +69,11 @@ public class TreeSchematic implements ISchematic
 		}
 		catch (FileNotFoundException e)
 		{
-			System.out.println("TFC2 FileNotFound: " + path); return false;
+			System.out.println("TFC FileNotFound: " + path); return false;
 		}
 		catch (IOException e)
 		{
-			System.out.println("TFC2 IOException: " + path); return false;
+			System.out.println("TFC IOException: " + path); return false;
 		}
 
 		return true;

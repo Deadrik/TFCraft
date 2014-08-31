@@ -11,9 +11,6 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenAcaciaKoaTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenKapokTrees;
 import com.bioxx.tfc.api.Enums.EnumTree;
 
 import cpw.mods.fml.common.IWorldGenerator;
@@ -233,8 +230,10 @@ public class WorldGenForests implements IWorldGenerator
 						temperatureAvg >= EnumTree.KAPOK.minTemp &&
 						temperatureAvg <= EnumTree.KAPOK.maxTemp)
 				{
-					WorldGenerator gen0 = ( (random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : 
-						(random.nextInt(3) == 0 ? (random.nextInt(2) == 0 ?new WorldGenKapokTrees(false,15)/*new WorldGenCustomHugeTrees(false, 10 + random.nextInt(20), 15, 15)*/: new WorldGenAcaciaKoaTrees(false,0) ): new WorldGenCustomShortTrees(false, 15))));
+					//WorldGenerator gen0 = ( (random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) :
+					//	(random.nextInt(3) == 0 ? (random.nextInt(2) == 0 ?new WorldGenKapokTrees(false,15)/*new WorldGenCustomHugeTrees(false, 10 + random.nextInt(20), 15, 15)*/: new WorldGenAcaciaKoaTrees(false,0) ): new WorldGenCustomShortTrees(false, 15))));
+					WorldGenerator gen0 = ( (random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) :
+						(random.nextInt(3) == 0 ? (random.nextInt(2) == 0 ?new WorldGenTrees(false, 15, true) : new WorldGenTrees(false, 16, true) ): new WorldGenTrees(false, 15, false))));
 
 					gen0.setScale(1.0D, 1.0D, 1.0D);
 					gen0.generate(world, random, xCoord, yCoord, zCoord);

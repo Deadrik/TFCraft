@@ -1,19 +1,49 @@
 package com.bioxx.tfc.WorldGen.Generators;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TreeRegistry;
 import com.bioxx.tfc.Core.TreeSchematic;
 
-public class WorldGenTree
+public class WorldGenTrees extends WorldGenerator
 {
-	static boolean createdTrunk = false;
-	static int trunkX = 0;
-	static int trunkY = 0;
-	static int trunkZ = 0;
+	private static boolean createdTrunk = false;
+	private static int trunkX = 0;
+	private static int trunkY = 0;
+	private static int trunkZ = 0;
+	private int meta;
+	private boolean large;
 
-	public static boolean generate(TreeSchematic schem, byte meta, World world, int i, int j, int k)
+	public WorldGenTrees(Boolean flag, int m, boolean l)
+	{
+		super(flag);
+		meta = m;
+		large = l;
+	}
+
+	@Override
+	public boolean generate(World world, Random rand, int x, int y, int z)
+	{
+		//Get a random tree schematic
+		TreeSchematic schem = TreeRegistry.instance.getTreeSchematic(meta, large);
+		
+		Block b = world.getBlock(x, y - 1, z);
+		//System.out.println("---TREE: "+b.getLocalizedName());
+		if(b == TFCBlocks.Grass || b == TFCBlocks.Grass2 || b == TFCBlocks.Dirt || b == TFCBlocks.Dirt2)
+		{
+			//System.out.println("---TREE: x:"+x+"_y:"+y+"_z:"+z+".."+schem.getPath());
+			return genTree(schem, meta, world, x, y, z);
+		}
+
+		return false;
+	}
+
+	private static boolean genTree(TreeSchematic schem, int meta, World world, int i, int j, int k)
 	{
 		if(schem == null)
 			return false;
@@ -31,7 +61,7 @@ public class WorldGenTree
 			{
 				for(int x = 0; x < schem.getSizeX(); x++)
 				{
-					Process(world, i, j, k, meta, schem, y, z, x, rot);
+					Process(world, i, j, k, meta, schem, y, z, x, 0/*rot*/);
 				}
 			}
 		}
@@ -39,11 +69,11 @@ public class WorldGenTree
 		return true;
 	}
 
-	private static void Process(World world, int i, int j, int k, byte meta, TreeSchematic schem, int y, int z, int x, int rot)
+	private static void Process(World world, int i, int j, int k, int meta, TreeSchematic schem, int y, int z, int x, int rot)
 	{
 		int localX = i - schem.getCenterX() - x;
 		int localZ = k - schem.getCenterZ() - z;
-		int localY = j + y + 1;
+		int localY = j + y;
 
 		if(rot == 0)
 		{
