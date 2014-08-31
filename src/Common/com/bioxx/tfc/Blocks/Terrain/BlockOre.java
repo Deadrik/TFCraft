@@ -68,7 +68,17 @@ public class BlockOre extends BlockCollapsable
 	@Override
 	public int damageDropped(int dmg)
 	{
+		if (dmg == 14 || dmg == 15) // coal
+			return 0;
 		return dmg;
+	}
+
+	@Override
+	public int quantityDropped(int meta, int fortune, Random random)
+	{
+		if (meta == 14 || meta == 15) // coal
+			return 1 + random.nextInt(2);
+		return 1;
 	}
 
 	@Override
@@ -126,6 +136,8 @@ public class BlockOre extends BlockCollapsable
 	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
+		if (metadata == 14 || metadata == 15) // coal
+			return TFCItems.Coal;
 		return TFCItems.OreChunk;
 	}
 
