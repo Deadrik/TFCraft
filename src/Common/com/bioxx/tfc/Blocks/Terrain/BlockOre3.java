@@ -1,5 +1,7 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,6 +24,12 @@ public class BlockOre3 extends BlockOre
 	public int damageDropped(int dmg)
 	{
 		return dmg + Global.ORE_METAL.length+Global.ORE_MINERAL.length;
+	}
+
+	@Override
+	public int quantityDropped(int meta, int fortune, Random random)
+	{
+		return 1;
 	}
 
 	@Override
