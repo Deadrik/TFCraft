@@ -22,7 +22,7 @@ public class BlockWorldItem extends BlockTerraContainer
 {
 	public BlockWorldItem()
 	{
-		super(Material.wood);
+		super(Material.circuits);
 		this.setBlockBounds(0F, 0.00F, 0F, 1F, 0.05F, 1F);
 	}
 
