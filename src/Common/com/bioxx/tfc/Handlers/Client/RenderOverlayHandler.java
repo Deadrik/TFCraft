@@ -6,9 +6,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
@@ -28,6 +30,7 @@ import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
 import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.api.TFCAttributes;
 import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -135,7 +138,7 @@ public class RenderOverlayHandler
 			{
 				int arrowOffset = fontrenderer.getStringWidth(String.valueOf(getQuiverArrows())) + 1;
 				int javOffset = fontrenderer.getStringWidth(String.valueOf(getQuiverJavelins())) + 1;
-				
+
 				fontrenderer.drawString("" + getQuiverArrows(), xPos - arrowOffset, yPos + 4, Color.white.getRGB());
 				fontrenderer.drawString("" + getQuiverJavelins(), xPos - javOffset, yPos + 21, Color.white.getRGB());
 			}
@@ -148,11 +151,11 @@ public class RenderOverlayHandler
 		if(playerclient != null && mc.playerController.gameIsSurvivalOrAdventure())
 		{
 			//Draw Health
-
-			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 0, 90, 10);
+			int mid = sr.getScaledWidth() / 2;
+			this.drawTexturedModalRect(mid-91, healthRowHeight, 0, 0, 90, 10);
 			float maxHealth = mc.thePlayer.getMaxHealth();
 			float percentHealth = Math.min(mc.thePlayer.getHealth()/maxHealth, 1.0f);
-			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
+			this.drawTexturedModalRect(mid-91, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
 
 			//Draw Food and Water
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(mc.thePlayer);
@@ -177,6 +180,13 @@ public class RenderOverlayHandler
 
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 28, 90, 5);
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 33, (int) (90*percentWater), 5);
+
+			//Draw Notifications
+			String healthString = (int)mc.thePlayer.getHealth()+"/"+(int)maxHealth;
+			mc.fontRenderer.drawString(healthString, mid-45-(mc.fontRenderer.getStringWidth(healthString)/2), healthRowHeight+1, Color.white.getRGB());
+			if(mc.thePlayer.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getModifier(TFCAttributes.overburdenedUUID) != null)
+				mc.fontRenderer.drawString(StatCollector.translateToLocal("gui.overburdened"), mid-(mc.fontRenderer.getStringWidth(StatCollector.translateToLocal("gui.overburdened"))/2), healthRowHeight-20, Color.red.getRGB());
+
 
 			TFC_Core.bindTexture(new ResourceLocation("minecraft:textures/gui/icons.png"));
 			//Draw experience bar

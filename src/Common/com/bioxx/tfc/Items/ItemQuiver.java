@@ -3,15 +3,6 @@ package com.bioxx.tfc.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Items.Tools.ItemJavelin;
-import com.bioxx.tfc.api.Armor;
-import com.bioxx.tfc.api.Enums.EnumAmmo;
-import com.bioxx.tfc.api.Interfaces.IQuiverAmmo;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,10 +13,21 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.Tools.ItemJavelin;
+import com.bioxx.tfc.api.Armor;
+import com.bioxx.tfc.api.Enums.EnumAmmo;
+import com.bioxx.tfc.api.Interfaces.IEquipable;
+import com.bioxx.tfc.api.Interfaces.IQuiverAmmo;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemQuiver extends ItemTFCArmor
+public class ItemQuiver extends ItemTFCArmor implements IEquipable
 {
 	public ItemQuiver(Armor armor, int renderIndex, int armorSlot, int thermal, int type)
 	{
@@ -54,13 +56,13 @@ public class ItemQuiver extends ItemTFCArmor
 		return this.itemIcon;
 	}
 
-	@Override
+	/*@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
 		String m = ArmorType.metaltype.replace(" ", "").toLowerCase();
 		return Reference.ModID+String.format(":textures/models/armor/%s_%d%s.png",
 				m, (slot == 2 ? 2 : 1), type == null ? "" : String.format("_%s", type));
-	}
+	}*/
 
 	@Override
 	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
@@ -79,20 +81,6 @@ public class ItemQuiver extends ItemTFCArmor
 	public void registerIcons(IIconRegister registerer)
 	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":quiver");
-	}
-
-	@Override
-	/**
-	 * Determines if the specific ItemStack can be placed in the specified armor slot.
-	 *
-	 * @param stack The ItemStack
-	 * @param armorType Armor slot ID: 0: Helmet, 1: Chest, 2: Legs, 3: Boots
-	 * @param entity The entity trying to equip the armor
-	 * @return True if the given ItemStack can be inserted in the slot
-	 */
-	public boolean isValidArmor(ItemStack stack, int armorType, Entity entity)
-	{
-		return armorType == 4;
 	}
 
 	public int getQuiverArrows(ItemStack item){
@@ -266,4 +254,9 @@ public class ItemQuiver extends ItemTFCArmor
 		}
 	}
 
+	@Override
+	public EquipType getEquipType(ItemStack is) 
+	{
+		return EquipType.BACK;
+	}
 }

@@ -2363,3 +2363,6 @@ gui.skillpage=Skills
 tile.MetalTrapDoor.name=Trap Door
 item.Mud Brick.name=Mud Brick
 item.Wet Mud Brick.name=Wet Mud Brick
+gui.overburdened=*Overburdened*
+gui.slot=Slot
+gui.slot.back=Back

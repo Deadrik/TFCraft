@@ -13,6 +13,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.Slots.SlotExtraEquipable;
 import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Interfaces.IEquipable;
 
 public class PlayerInventory
 {
@@ -40,7 +41,7 @@ public class PlayerInventory
 
 	public static void addExtraEquipables(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot){
 		int index = 36; // Should be the correct index
-		addSlotToContainer(container, new SlotExtraEquipable(inventory, index, 8 + 18, 8 + 18, 4));
+		addSlotToContainer(container, new SlotExtraEquipable(inventory, index, 8 + 18, 8 + 18, IEquipable.EquipType.BACK));
 	}
 
 	private static void addToolbarSlots(Container container, InventoryPlayer inventory, int x, int y, boolean freezeSlot) 
