@@ -61,13 +61,6 @@ public class Helper {
 		float var18 = var15 * var16;
 		float var20 = var14 * var16;
 		double var21 = 4; /*ModLoader.getMinecraftInstance().playerController.getBlockReachDistance()*/
-		if(entity.getHeldItem()!=null && (entity.getHeldItem().getItem()) instanceof ISize){
-			var21 *= ((ISize)(entity.getHeldItem().getItem())).getReach(null).multiplier;
-		}
-
-		else{
-			var21 *= EnumItemReach.SHORT.multiplier;
-		}
 		Vec3 var23 = var13.addVector(var18 * var21, var17 * var21, var20 * var21);
 		MovingObjectPosition var24 = par1World.rayTraceBlocks(var13, var23, par3);
 		return var24;
