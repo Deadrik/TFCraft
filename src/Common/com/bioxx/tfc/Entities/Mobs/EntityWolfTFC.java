@@ -219,7 +219,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 					ArrayList<Float> data = new ArrayList<Float>();
 					data.add(mateSizeMod);
 					EntityWolfTFC baby = new EntityWolfTFC(worldObj, this,data);
-					baby.setOwner(this.getOwnerName());
+					baby.func_152115_b(this.func_152113_b());//setOwner
 					baby.setTamed(true);
 					worldObj.spawnEntityInWorld(baby);
 				}

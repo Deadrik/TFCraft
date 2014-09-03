@@ -47,6 +47,7 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 	/**
 	 * Returns whether the EntityAIBase should begin execution.
 	 */
+	@Override
 	public boolean shouldExecute()
 	{
 		if (this.targetEntityClass == EntityPlayer.class)
@@ -60,7 +61,7 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 
 		this.closestLivingEntity = (Entity)list.get(0);
 
-		Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, this.theEntity.worldObj.getWorldVec3Pool().getVecFromPool(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));
+		Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, Vec3.createVectorHelper(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));
 		if (vec3 == null)
 			return false;
 		else if (this.closestLivingEntity.getDistanceSq(vec3.xCoord, vec3.yCoord, vec3.zCoord) < this.closestLivingEntity.getDistanceSqToEntity(this.theEntity))
@@ -75,6 +76,7 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 	/**
 	 * Returns whether an in-progress EntityAIBase should continue executing
 	 */
+	@Override
 	public boolean continueExecuting()
 	{
 		return !this.entityPathNavigate.noPath();
@@ -83,6 +85,7 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 	/**
 	 * Execute a one shot task or start executing a continuous task
 	 */
+	@Override
 	public void startExecuting()
 	{
 		this.entityPathNavigate.setPath(this.entityPathEntity, this.farSpeed);
@@ -91,6 +94,7 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 	/**
 	 * Resets the task
 	 */
+	@Override
 	public void resetTask()
 	{
 		this.closestLivingEntity = null;
@@ -99,6 +103,7 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 	/**
 	 * Updates the task
 	 */
+	@Override
 	public void updateTask()
 	{
 		if (this.theEntity.getDistanceSqToEntity(this.closestLivingEntity) < 49.0D)
