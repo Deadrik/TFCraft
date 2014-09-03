@@ -202,6 +202,9 @@ public class EntityLivingHandler
 		if(player.inventory instanceof InventoryPlayerTFC){
 
 			quiver = ((InventoryPlayerTFC)player.inventory).extraEquipInventory[0];
+			if(quiver != null && !(quiver.getItem() instanceof ItemQuiver)){
+				quiver = null;
+			}
 			for(int i = 0; i < 9; i++)
 			{
 				if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemJavelin)

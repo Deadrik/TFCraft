@@ -103,11 +103,11 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
 		int i = EntityLiving.getArmorPosition(par1ItemStack);
-		ItemStack itemstack1 = par3EntityPlayer.getCurrentArmor(i);
+		ItemStack itemstack1 = par3EntityPlayer.getCurrentArmor((i-1)%4);
 
 		if (itemstack1 == null)
 		{
-			par3EntityPlayer.setCurrentItemOrArmor(i + 1, par1ItemStack.copy()); //Forge: Vanilla bug fix associated with fixed setCurrentItemOrArmor indexs for players.
+			par3EntityPlayer.setCurrentItemOrArmor(i /*+ 1*/, par1ItemStack.copy()); //Forge: Vanilla bug fix associated with fixed setCurrentItemOrArmor indexs for players.
 			par1ItemStack.stackSize = 0;
 		}
 

@@ -3,6 +3,8 @@ package com.bioxx.tfc.Items;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -244,5 +246,9 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 	public EquipType getEquipType(ItemStack is) 
 	{
 		return EquipType.BACK;
+	}
+	@Override
+	public void onEquippedRender() {
+        //GL11.glScalef(0.8F, 0.8F, 0.8F);
 	}
 }

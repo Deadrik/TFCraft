@@ -2,6 +2,8 @@ package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -134,6 +136,11 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 	public EquipType getEquipType(ItemStack is) 
 	{
 		return EquipType.BACK;
+	}
+
+	@Override
+	public void onEquippedRender() {
+		GL11.glRotatef(180, 0F, 0F, 1F);
 	}
 }
 

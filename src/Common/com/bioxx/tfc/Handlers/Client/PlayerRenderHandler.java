@@ -1,13 +1,17 @@
 package com.bioxx.tfc.Handlers.Client;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 import com.bioxx.tfc.Items.ItemQuiver;
+import com.bioxx.tfc.Render.RenderLargeItem;
 import com.bioxx.tfc.Render.RenderQuiver;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -19,7 +23,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class PlayerRenderHandler {
 
 	public static final RenderQuiver renderQuiver = new RenderQuiver();
-
+	public static final RenderLargeItem renderLarge = new RenderLargeItem();
+	
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onPlayerRenderTick(RenderPlayerEvent.Specials.Pre e) {
@@ -29,7 +34,10 @@ public class PlayerRenderHandler {
 				ItemStack[] equipables = ((InventoryPlayerTFC)((EntityPlayer)el).inventory).extraEquipInventory;
 				for(ItemStack i : equipables){
 					if(i != null && i.getItem() instanceof ItemQuiver){
-						renderQuiver.render(e.entityLiving,(((ItemQuiver)i.getItem()).getQuiverArrows(i))/8);
+						renderQuiver.render(e.entityLiving,i);
+					}
+					else if(i != null){
+						renderLarge.render(el, i);
 					}
 				}
 			}
