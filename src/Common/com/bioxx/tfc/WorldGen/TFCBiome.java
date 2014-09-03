@@ -9,9 +9,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.Core.TFC_Climate;
-import com.bioxx.tfc.Entities.Mobs.EntityChickenTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityCreeperTFC;
+import com.bioxx.tfc.Entities.Mobs.EntityDeer;
 import com.bioxx.tfc.Entities.Mobs.EntityEndermanTFC;
+import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
 import com.bioxx.tfc.Entities.Mobs.EntitySkeletonTFC;
 import com.bioxx.tfc.Entities.Mobs.EntitySlimeTFC;
 import com.bioxx.tfc.Entities.Mobs.EntitySpiderTFC;
@@ -145,10 +146,13 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 2, 4));
 		 */
 		//This is to balance out the spawning, so that entities with weight 1 spawn less
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 16, 0, 0));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 16, 0, 0));
+
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityPheasantTFC.class, 2, 1, 4));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1, 1, 4));
 
 		this.spawnableWaterCreatureList.clear();
-		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 12, 2, 4));
+		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 8, 1, 1));
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySpiderTFC.class, 10, 1, 2));
@@ -234,7 +238,6 @@ public class TFCBiome extends BiomeGenBase
 	@Override
 	public TFCBiome setDisableRain()
 	{
-		//		ObfuscationReflectionHelper.setPrivateValue(BiomeGenBase.class, this, false, 39);
 		this.enableRain = false;
 		return this;
 	}
