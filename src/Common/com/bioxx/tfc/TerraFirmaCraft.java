@@ -296,6 +296,7 @@ public class TerraFirmaCraft
 		TFCOptions.pitKilnBurnTime = (float) TFCOptions.getDoubleFor(config, "Time", "pitKilnBurnTime", 8.0, "This is the number of hours that the pit kiln should burn before being completed.");
 		TFCOptions.bloomeryBurnTime = (float) TFCOptions.getDoubleFor(config, "Time", "bloomeryBurnTime", 14.4, "This is the number of hours that the bloomery should burn before being completed.");
 		TFCOptions.charcoalPitBurnTime = (float) TFCOptions.getDoubleFor(config, "Time", "charcoalPitBurnTime", 18.0, "This is the number of hours that the charcoal pit should burn before being completed.");
+		TFCOptions.torchBurnTime = TFCOptions.getIntFor(config, "Time", "torchBurnTime", 48, "This is how many in-game hours torches will last before burning out. Set to 0 for infinitely burning torches.");
 		TFCOptions.saplingTimerMultiplier = (float) TFCOptions.getDoubleFor(config, "Time", "saplingTimerMultiplier", 1.0, "This is a global multiplier for the number of days required before a sapling can grow into a tree. Decrease for faster sapling growth.");
 		TFCOptions.tempIncreaseMultiplier = (float) TFCOptions.getDoubleFor(config, "Time", "tempIncreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items heat up. Increase to make items heat up faster.");
 		TFCOptions.tempDecreaseMultiplier = (float) TFCOptions.getDoubleFor(config, "Time", "tempDecreaseMultiplier", 1.0, "This is a global multiplier for the rate at which items cool down. Increase to make items cool down faster.");

@@ -27,6 +27,7 @@ import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.TileEntities.TELightEmitter;
+import com.bioxx.tfc.api.TFCOptions;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -207,9 +208,9 @@ public class BlockTorch extends BlockTerraContainer
 		if(world.getBlockMetadata(x, y, z) < 8)
 		{
 			TELightEmitter te = (TELightEmitter) world.getTileEntity(x, y, z);
-			if(te != null)
+			if (TFCOptions.torchBurnTime != 0 && te != null)
 			{
-				if(TFC_Time.getTotalHours() > te.hourPlaced + 48)
+				if (TFC_Time.getTotalHours() > te.hourPlaced + TFCOptions.torchBurnTime)
 				{
 					world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 3);
 				}
