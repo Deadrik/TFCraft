@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Entities.Mobs.EntitySkeletonTFC;
+import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Render.Models.ModelSkeletonTFC;
 
 import cpw.mods.fml.relauncher.Side;
@@ -19,6 +20,7 @@ public class RenderSkeletonTFC extends RenderBiped
 {
 	private static final ResourceLocation field_110862_k = new ResourceLocation("textures/entity/skeleton/skeleton.png");
 	private static final ResourceLocation field_110861_l = new ResourceLocation("textures/entity/skeleton/wither_skeleton.png");
+	public static final RenderQuiver renderQuiver = new RenderQuiver();
 
 	public RenderSkeletonTFC()
 	{
@@ -55,6 +57,7 @@ public class RenderSkeletonTFC extends RenderBiped
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
+		renderQuiver.render(par1EntityLivingBase,4);
 		this.func_82438_a((EntitySkeletonTFC)par1EntityLivingBase, par2);
 	}
 

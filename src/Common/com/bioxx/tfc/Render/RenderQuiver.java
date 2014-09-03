@@ -8,6 +8,7 @@ import com.bioxx.tfc.Render.Models.ModelQuiver;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderQuiver {
@@ -24,11 +25,12 @@ public class RenderQuiver {
     }
 	
 	public void doRender(EntityLivingBase entity, int numArrows){
+		float entityTranslateY = entity instanceof EntityPlayer ? 0F : -1.5F;
 		GL11.glPushMatrix();
         Minecraft.getMinecraft().renderEngine.bindTexture(QuiverTexture);
-        if (!entity.isSneaking()){ GL11.glTranslatef(0F, 0.0F/*0.65F*/, 0.1F);
+        if (!entity.isSneaking()){ GL11.glTranslatef(0F,  entityTranslateY + 0.0F/*0.65F*/, 0.1F);
         }
-        else{ GL11.glTranslatef(0F, 0.1F/*0.55F*/, 0.1F);
+        else{ GL11.glTranslatef(0F,  entityTranslateY + 0.1F/*0.55F*/, 0.1F);
         GL11.glRotatef(20F, 1F, 0F, 0F);}
         GL11.glScalef(0.8F, 0.8F, 0.8F);
         this.quiver.render(entity, numArrows);
