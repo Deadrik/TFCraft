@@ -131,7 +131,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.posX = ((EntityLivingBase)mother).posX;
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
-		size_mod = (float)Math.sqrt((((rand.nextInt ((degreeOfDiversion + 1) * 10) * (rand.nextBoolean() ? 1 : -1)) / 100f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size) / 1.95F));
+		size_mod = (float)Math.sqrt((((rand.nextInt ((degreeOfDiversion + 1) * 10) * (rand.nextBoolean() ? 1 : -1)) / 100f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size) / 1.9F));
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
