@@ -2,6 +2,7 @@ package com.bioxx.tfc.api.Crafting;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class BarrelRecipe
 {
@@ -52,8 +53,9 @@ public class BarrelRecipe
 		boolean fStack = !removesLiquid ? true : (barrelFluid != null && item != null && fluid != null && outFluid != null && fluid.amount >= item.stackSize*outFluid.amount);
 
 		boolean anyStack = !removesLiquid && !isSealedRecipe && this.outItemStack == null;
+		boolean itemsEqual = OreDictionary.itemMatches(inItemStack, item, false);
 
-		return ((inItemStack != null && inItemStack.isItemEqual(item) && (iStack || anyStack)) || inItemStack == null) && 
+		return ((inItemStack != null && itemsEqual && (iStack || anyStack)) || inItemStack == null) &&
 				((barrelFluid != null && barrelFluid.isFluidEqual(fluid) && (fStack || anyStack)) || barrelFluid == null);
 	}
 
