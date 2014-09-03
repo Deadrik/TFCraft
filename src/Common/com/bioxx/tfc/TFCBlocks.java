@@ -172,6 +172,7 @@ public class TFCBlocks
 	public static int grillRenderId;
 	public static int metalTrapDoorRenderId;
 	public static int vesselRenderId;
+	public static int torchRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -525,7 +526,7 @@ public class TFCBlocks
 		Blocks.vine.setCreativeTab(null);
 
 		Bookshelf = new BlockCustomBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood).setBlockName("Bookshelf").setBlockTextureName("bookshelf");
-		Torch = new BlockTorch().setHardness(0.0F).setLightLevel(0.9375F).setStepSound(Block.soundTypeWood).setBlockName("Torch").setBlockTextureName("torch_on");
+		Torch = new BlockTorch().setHardness(0.0F).setStepSound(Block.soundTypeWood).setBlockName("Torch").setBlockTextureName("torch_on");
 		Chest = new BlockChestTFC().setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("Chest");
 		Workbench = new BlockWorkbench().setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName("Workbench").setBlockTextureName("crafting_table");
 		Cactus = new BlockCustomCactus().setHardness(0.4F).setStepSound(Block.soundTypeCloth).setBlockName("Cactus").setBlockTextureName("cactus");
