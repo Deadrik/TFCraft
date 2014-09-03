@@ -35,6 +35,12 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	}
 
 	@Override
+	protected boolean canDespawn()
+	{
+		return this.ticksExisted > 3000;
+	}
+
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();

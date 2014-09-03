@@ -121,6 +121,12 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	}
 
 	@Override
+	protected boolean canDespawn()
+	{
+		return this.ticksExisted > 4000;
+	}
+
+	@Override
 	protected void updateAITasks()
 	{
 		super.updateAITasks();

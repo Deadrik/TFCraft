@@ -1,20 +1,15 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.Containers.ContainerPlayerTFC;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import com.bioxx.tfc.api.Interfaces.IEquipable;
 
 public class SlotExtraEquipable extends Slot 
 {
-	public final int armorType;
-	public SlotExtraEquipable(IInventory inv, int index, int x, int y, int armortype) 
+	public final IEquipable.EquipType armorType;
+	public SlotExtraEquipable(IInventory inv, int index, int x, int y, IEquipable.EquipType armortype) 
 	{
 		super(inv, index, x, y);
 		armorType = armortype;
@@ -29,21 +24,24 @@ public class SlotExtraEquipable extends Slot
 	{
 		return 1;
 	}
-	
+
 	@Override
 	public ItemStack getStack(){
 		//System.out.println("getting itemstack " + super.getStack());
 		return super.getStack();
 	}
-	
+
 	/**
 	 * Leave as-is for now. In the future, modify it to allow non-armor items to be in here. Set up a method to register certain item
 	 * requirements for each slot.
 	 */
 	@Override
-	public boolean isItemValid(ItemStack par1ItemStack)
+	public boolean isItemValid(ItemStack is)
 	{
-		Item item = (par1ItemStack == null ? null : par1ItemStack.getItem());
-		return item != null /*&& (item instanceof ItemArmor)?((ItemArmor))*/; //modify to allow non-quiver items in.
+		if(is != null && is.getItem() instanceof IEquipable)
+			if(((IEquipable)is.getItem()).getEquipType(is) == armorType)
+				return true;
+
+		return false;
 	}
 }

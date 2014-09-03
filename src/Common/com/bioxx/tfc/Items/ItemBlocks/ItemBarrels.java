@@ -20,8 +20,9 @@ import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.IEquipable;
 
-public class ItemBarrels extends ItemTerraBlock
+public class ItemBarrels extends ItemTerraBlock implements IEquipable
 {
 	public ItemBarrels(Block par1)
 	{
@@ -127,6 +128,12 @@ public class ItemBarrels extends ItemTerraBlock
 		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
+	}
+
+	@Override
+	public EquipType getEquipType(ItemStack is) 
+	{
+		return EquipType.BACK;
 	}
 }
 

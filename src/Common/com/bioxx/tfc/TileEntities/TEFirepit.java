@@ -1,31 +1,21 @@
 package com.bioxx.tfc.TileEntities;
 
-import java.util.ArrayDeque;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Queue;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Core.Vector3f;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
@@ -38,16 +28,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TEFirepit extends TEFireEntity implements IInventory
 {
 	public ItemStack fireItemStacks[];
-
-	private int externalFireCheckTimer;
-	private int externalWoodCount;
-	private int oldWoodCount;
-	private boolean logPileChecked;
-	public int charcoalCounter;
 	public boolean hasCookingPot;
-	private Map<Integer, int[]> smokeMap = new HashMap<Integer, int[]>(); // Coords where smoke will be generated
-	private boolean scanSmokeLayer;
-	public final int FIREBURNTIME = (int) ((TFC_Time.hourLength * TFCOptions.charcoalPitBurnTime) / 100);//default 18 hours
 
 	public TEFirepit()
 	{
@@ -56,12 +37,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		fireTemp = 350;
 		maxFireTempScale = 2000;
 		fireItemStacks = new ItemStack[11];
-		externalFireCheckTimer = 0;
-		externalWoodCount = 0;
-		oldWoodCount = 0;
-		charcoalCounter = 0;
 		hasCookingPot = true;
-		scanSmokeLayer = true;
 	}
 
 	@Override
@@ -301,187 +277,6 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		}
 	}
 
-	public void externalFireCheck()
-	{
-		if(externalFireCheckTimer == 0)
-		{
-			if(!logPileChecked)
-			{
-				logPileChecked = true;
-				oldWoodCount = externalWoodCount;
-				externalWoodCount = 0;
-				ProcessPile(xCoord, yCoord, zCoord, false);
-				if(oldWoodCount != externalWoodCount)
-					charcoalCounter = 0;
-			}
-
-			//This is where we handle the counter for producing charcoal.
-			if(charcoalCounter == 0)
-				charcoalCounter = (int) TFC_Time.getTotalTicks();
-
-			if(charcoalCounter > 0 && charcoalCounter + (FIREBURNTIME * 100) < TFC_Time.getTotalTicks())
-			{
-				logPileChecked = false;
-				charcoalCounter = 0;
-				ProcessPile(xCoord, yCoord, zCoord, true);
-				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-			}
-		}
-	}
-
-	private void ProcessPile(int i, int j, int k, boolean empty)
-	{
-		int x = i;
-		int y = 0;
-		int z = k;
-		boolean checkArray[][][] = new boolean[25][13][25];
-		boolean reachedTop = false;
-
-		while(!reachedTop && j + y >= 0 && y < 13)
-		{
-			if(worldObj.getBlock(x, j + y + 1, z) != TFCBlocks.LogPile)
-				reachedTop = true;
-			checkOut(i, j + y, k, empty);
-			scanLogs(i, j + y, k, checkArray, (byte)12, (byte)y, (byte)12, empty, false);
-			y++;
-		}
-	}
-
-	private boolean checkOut(int x, int y, int z, boolean empty)
-	{
-		if(worldObj.getBlock(x, y, z) == TFCBlocks.LogPile)
-		{
-			TELogPile logPile = (TELogPile)worldObj.getTileEntity(x, y, z);
-
-			int count = 0;
-			if(logPile != null)
-			{
-				if(!empty)
-				{
-					Block block;
-					Queue<Vector3f> blocksOnFire = new ArrayDeque<Vector3f>();
-
-					block = worldObj.getBlock(x + 1, y, z);
-					if(!TFC_Core.isValidCharcoalPitCover(block))
-						blocksOnFire.add(new Vector3f(x + 1, y, z));
-
-					block = worldObj.getBlock(x - 1, y, z);
-					if(!TFC_Core.isValidCharcoalPitCover(block))
-						blocksOnFire.add(new Vector3f(x - 1, y, z));
-
-					block = worldObj.getBlock(x, y, z + 1);
-					if(!TFC_Core.isValidCharcoalPitCover(block))
-						blocksOnFire.add(new Vector3f(x, y, z + 1));
-
-					block = worldObj.getBlock(x, y, z - 1);
-					if(!TFC_Core.isValidCharcoalPitCover(block))
-						blocksOnFire.add(new Vector3f(x, y, z - 1));
-
-					block = worldObj.getBlock(x, y + 1, z);
-					if(!TFC_Core.isValidCharcoalPitCover(block))
-						blocksOnFire.add(new Vector3f(x, y + 1, z));
-
-					block = worldObj.getBlock(x, y - 1, z);
-					if(!TFC_Core.isValidCharcoalPitCover(block))
-						blocksOnFire.add(new Vector3f(x, y - 1, z));
-
-					logPile.blocksToBeSetOnFire = blocksOnFire;
-					logPile.setCharcoalFirepit(this);
-				}
-				else
-					logPile.setCharcoalFirepit(null);
-
-				if(logPile.storage[0] != null)
-				{
-					if(!empty)
-						externalWoodCount += logPile.storage[0].stackSize;
-					else
-					{
-						count += logPile.storage[0].stackSize;
-						logPile.storage[0] = null;
-					}
-				}
-				if(logPile.storage[1] != null)
-				{
-					if(!empty)
-						externalWoodCount += logPile.storage[1].stackSize;
-					else
-					{
-						count += logPile.storage[1].stackSize;
-						logPile.storage[1] = null;
-					}
-				}
-				if(logPile.storage[2] != null)
-				{
-					if(!empty)
-						externalWoodCount += logPile.storage[2].stackSize;
-					else
-					{
-						count += logPile.storage[2].stackSize;
-						logPile.storage[2] = null;
-					}
-				}
-				if(logPile.storage[3] != null)
-				{
-					if(!empty)
-						externalWoodCount += logPile.storage[3].stackSize;
-					else
-					{
-						count += logPile.storage[3].stackSize;
-						logPile.storage[3] = null;
-					}
-				}
-			}
-
-			if(empty)
-			{
-				float percent = 25 + worldObj.rand.nextInt(25);
-				count = (int) (count * (percent / 100));
-				worldObj.setBlock(x, y, z, TFCBlocks.Charcoal, count, 0x2);
-				/* Trick to make the block fall or start the combining "chain" with other blocks.
-				 * We don't notify the bottom block because it may be air so this block won't fall */
-				worldObj.notifyBlockOfNeighborChange(x, y, z, TFCBlocks.Charcoal);
-			}
-			return true;
-		}
-		return false;
-	}
-
-	private void scanLogs(int i, int j, int k, boolean[][][] checkArray, byte x, byte y, byte z, boolean empty, boolean addSmoke)
-	{
-		if(y >= 0)
-		{
-			checkArray[x][y][z] = true;
-			int offsetX = 0;int offsetZ = 0;
-			for (offsetX = -1; offsetX <= 1; offsetX++)
-			{
-				for (offsetZ = -1; offsetZ <= 1; offsetZ++)
-				{
-					if(x + offsetX < 25 && x + offsetX >= 0 && z + offsetZ < 25 && z + offsetZ >= 0 && y < 13 && y >= 0)
-					{
-						if(!checkArray[x + offsetX][y][z + offsetZ] && checkOut(i + offsetX, j, k + offsetZ, empty))
-						{
-							scanLogs(i + offsetX, j, k + offsetZ, checkArray, (byte)(x + offsetX), y, (byte)(z + offsetZ), empty, addSmoke);
-							if(addSmoke)
-							{
-								if(worldObj.getBlock(i + offsetX, j, k + offsetZ) == TFCBlocks.LogPile && worldObj.getBlock(i + offsetX, j + 2, k + offsetZ) == Blocks.air)
-									smokeMap.put(smokeMap.size(), new int[] {i + offsetX, j + 2, k + offsetZ});
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	public void logPileUpdate(int woodChanges)
-	{
-		oldWoodCount = externalWoodCount;
-		externalWoodCount += woodChanges;
-		if(oldWoodCount != externalWoodCount)
-			charcoalCounter = 0;
-	}
-
 	@Override
 	public int getInventoryStackLimit()
 	{
@@ -555,21 +350,6 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			fireItemStacks[5] = fireItemStacks[4];
 			fireItemStacks[4] = null;
 		}
-		else if(fireItemStacks[5] == null && fireItemStacks[4] == null)
-		{
-			if(charcoalCounter > 0 && fireTemp < 50 && worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.LogPile)
-			{
-				TELogPile logPile = (TELogPile)worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
-				if(logPile.getStackInSlot(0) != null)
-					fireItemStacks[5] = logPile.takeLog(0);
-				else if(logPile.getStackInSlot(1) != null)
-					fireItemStacks[5] = logPile.takeLog(1);
-				else if(logPile.getStackInSlot(2) != null)
-					fireItemStacks[5] = logPile.takeLog(2);
-				else if(logPile.getStackInSlot(3) != null)
-					fireItemStacks[5] = logPile.takeLog(3);
-			}
-		}
 	}
 
 	@Override
@@ -594,26 +374,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
-		if(fireTemp > 1 && worldObj.getBlock(xCoord, yCoord + 1, zCoord) == TFCBlocks.LogPile)
-		{
-			if(externalFireCheckTimer <= 0)
-			{
-				if(!worldObj.isRemote)
-					externalFireCheck();
-				externalFireCheckTimer = 100;
-			}
-			externalFireCheckTimer--;
-
-			if(worldObj.rand.nextInt(5) == 0 && worldObj.isRemote)
-				GenerateSmoke();
-		}
-		else
-		{
-			charcoalCounter = 0;
-			logPileChecked = false;
-		}
-
-		if(!worldObj.isRemote && charcoalCounter == 0)
+		if(!worldObj.isRemote)
 		{
 			//Here we take care of the item that we are cooking in the fire
 			careForInventorySlot(fireItemStacks[1]);
@@ -697,9 +458,6 @@ public class TEFirepit extends TEFireEntity implements IInventory
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
-		charcoalCounter = nbttagcompound.getInteger("charcoalCounter");
-		externalWoodCount = nbttagcompound.getInteger("externalWoodCount");
-
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
 		fireItemStacks = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
@@ -715,9 +473,6 @@ public class TEFirepit extends TEFireEntity implements IInventory
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setInteger("charcoalCounter", charcoalCounter);
-		nbttagcompound.setInteger("externalWoodCount", externalWoodCount);
-
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < fireItemStacks.length; i++)
 		{
@@ -744,26 +499,21 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		return false;
 	}
 
-	public boolean isInactiveCharcoalFirepit()
-	{
-		return logPileChecked == false && charcoalCounter == 0;
-	}
-
 	@SideOnly(Side.CLIENT)
 	public void GenerateSmoke()
 	{
-		if(scanSmokeLayer)
+		/*if(scanSmokeLayer)
 		{
 			int y = 0;
 			int topY = yCoord;
 			boolean checkArray[][][] = new boolean[25][13][25];
 			while(worldObj.getBlock(xCoord, topY + 1, zCoord) == TFCBlocks.LogPile)
 			{
-				scanLogs(xCoord, topY, zCoord, checkArray, (byte)12, (byte)y, (byte)12, false, true);
+				//scanLogs(xCoord, topY, zCoord, checkArray, (byte)12, (byte)y, (byte)12, false, true);
 				++topY;
 				++y;
 			}
-			scanLogs(xCoord, topY, zCoord, checkArray, (byte)12, (byte)y, (byte)12, false, true);
+			//scanLogs(xCoord, topY, zCoord, checkArray, (byte)12, (byte)y, (byte)12, false, true);
 			smokeMap.put(smokeMap.size(), new int[] {xCoord, topY + 2, zCoord});
 			scanSmokeLayer = false;
 		}
@@ -780,6 +530,6 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			worldObj.spawnParticle("smoke", f+f4 - 0.2F, f1, f2 + f5 + 0.4F, 0.0D, 0.0D, 0.0D);
 			worldObj.spawnParticle("smoke", f+f4 - 0.1F, f1, f2 + f5 + 0.1F, 0.0D, 0.0D, 0.0D);
 			if(worldObj.rand.nextInt(10) == 0) worldObj.spawnParticle("largesmoke", f+f4 - 0.2F, f1, f2 + f5 + 0.2F, 0.0D, 0.0D, 0.0D);
-		}
+		}*/
 	}
 }

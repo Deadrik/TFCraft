@@ -114,6 +114,18 @@ public class BlockCustomLiquid extends BlockFluidClassic
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
 		super.onBlockAdded(world, x, y, z);
+		if(getFlowMeta(world, x, y, z) != 0)
+		{
+			int total = 0;
+			if(getFlowMeta(world, x+1, y, z) == 0) total++;
+			if(getFlowMeta(world, x-1, y, z) == 0) total++;
+			if(getFlowMeta(world, x, y, z+1) == 0) total++;
+			if(getFlowMeta(world, x, y, z-1) == 0) total++;
+
+			if(total >= 2)
+				world.setBlockMetadataWithNotify(x, y, z, 0, 0x3);
+		}
+
 		this.checkForHarden(world, x, y, z);
 	}
 
@@ -125,7 +137,23 @@ public class BlockCustomLiquid extends BlockFluidClassic
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
 		super.onNeighborBlockChange(world, x, y, z, block);
+		if(getFlowMeta(world, x, y, z) != 0)
+		{
+			int total = 0;
+			if(getFlowMeta(world, x+1, y, z) == 0) total++;
+			if(getFlowMeta(world, x-1, y, z) == 0) total++;
+			if(getFlowMeta(world, x, y, z+1) == 0) total++;
+			if(getFlowMeta(world, x, y, z-1) == 0) total++;
+
+			if(total >= 2)
+				world.setBlockMetadataWithNotify(x, y, z, 0, 0x3);
+		}
 		this.checkForHarden(world, x, y, z);
+	}
+
+	protected int getFlowMeta(World world, int x, int y, int z)
+	{
+		return world.getBlock(x, y, z).getMaterial() == this.blockMaterial ? world.getBlockMetadata(x, y, z) : -1;
 	}
 	/**
 	 * Forces lava to check to see if it is colliding with water, and then decide what it should harden to.

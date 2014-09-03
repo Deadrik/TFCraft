@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -28,6 +29,7 @@ public class BlockFlower extends BlockTerra
 
 	public BlockFlower()
 	{
+		super(Material.plants);
 		this.setTickRandomly(true);
 		float var4 = 0.2F;
 		this.setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var4 * 3.0F, 0.5F + var4);

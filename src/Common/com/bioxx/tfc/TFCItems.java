@@ -68,7 +68,7 @@ import com.bioxx.tfc.Items.Pottery.ItemPotteryPot;
 import com.bioxx.tfc.Items.Pottery.ItemPotterySmallVessel;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemCustomAxe;
-import com.bioxx.tfc.Items.Tools.ItemCustomBlueSteelBucket;
+import com.bioxx.tfc.Items.Tools.ItemSteelBucketBlue;
 import com.bioxx.tfc.Items.Tools.ItemCustomBow;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucket;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
@@ -76,7 +76,7 @@ import com.bioxx.tfc.Items.Tools.ItemCustomFishingRod;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
 import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
 import com.bioxx.tfc.Items.Tools.ItemCustomPickaxe;
-import com.bioxx.tfc.Items.Tools.ItemCustomRedSteelBucket;
+import com.bioxx.tfc.Items.Tools.ItemSteelBucketRed;
 import com.bioxx.tfc.Items.Tools.ItemCustomSaw;
 import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
 import com.bioxx.tfc.Items.Tools.ItemCustomShovel;
@@ -1457,12 +1457,12 @@ public class TFCItems
 		StoneKnife = new ItemCustomKnife(IgExToolMaterial, 40).setUnlocalizedName("Stone Knife").setMaxDamage(IgExStoneUses);
 		SinglePlank = new ItemPlank().setUnlocalizedName("SinglePlank");
 
-		RedSteelBucketEmpty = (new ItemCustomRedSteelBucket(Blocks.air)).setUnlocalizedName("Red Steel Bucket Empty");
-		RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFCBlocks.FreshWater)).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(RedSteelBucketEmpty);
-		RedSteelBucketSaltWater = (new ItemCustomRedSteelBucket(TFCBlocks.SaltWater)).setUnlocalizedName("Red Steel Bucket Salt Water").setContainerItem(RedSteelBucketEmpty);
+		RedSteelBucketEmpty = (new ItemSteelBucketRed(Blocks.air)).setUnlocalizedName("Red Steel Bucket Empty");
+		RedSteelBucketWater = (new ItemSteelBucketRed(TFCBlocks.FreshWater)).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(RedSteelBucketEmpty);
+		RedSteelBucketSaltWater = (new ItemSteelBucketRed(TFCBlocks.SaltWater)).setUnlocalizedName("Red Steel Bucket Salt Water").setContainerItem(RedSteelBucketEmpty);
 
-		BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(Blocks.air)).setUnlocalizedName("Blue Steel Bucket Empty");
-		BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFCBlocks.Lava)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);
+		BlueSteelBucketEmpty = (new ItemSteelBucketBlue(Blocks.air)).setUnlocalizedName("Blue Steel Bucket Empty");
+		BlueSteelBucketLava = (new ItemSteelBucketBlue(TFCBlocks.Lava)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);
 
 		Quern = ((ItemTerra) new ItemTerra().setUnlocalizedName("Quern").setMaxDamage(250)).setSize(EnumSize.MEDIUM).setWeight(EnumWeight.HEAVY);
 		FlintSteel = new ItemFlintSteel().setUnlocalizedName("flintAndSteel").setMaxDamage(200).setTextureName("flint_and_steel");

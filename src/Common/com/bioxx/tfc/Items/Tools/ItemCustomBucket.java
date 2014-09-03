@@ -14,7 +14,6 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.Mobs.EntityCowTFC;
 import com.bioxx.tfc.Items.ItemTerra;
-import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -52,10 +51,6 @@ public class ItemCustomBucket extends ItemTerra
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
-		float var4 = 1.0F;
-		double x = player.prevPosX + (player.posX - player.prevPosX) * var4;
-		double y = player.prevPosY + (player.posY - player.prevPosY) * var4 + 1.62D - player.yOffset;
-		double z = player.prevPosZ + (player.posZ - player.prevPosZ) * var4;
 		boolean isEmpty = this.bucketContents == Blocks.air;
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, isEmpty);
 
@@ -67,16 +62,16 @@ public class ItemCustomBucket extends ItemTerra
 		{
 			if (mop.typeOfHit == MovingObjectType.BLOCK)
 			{
-				int i = mop.blockX;
-				int j = mop.blockY;
-				int k = mop.blockZ;
+				int x = mop.blockX;
+				int y = mop.blockY;
+				int z = mop.blockZ;
 
-				if (!world.canMineBlock(player, i, j, k))
+				if (!world.canMineBlock(player, x, y, z))
 					return is;
 
-				if (this.bucketContents == Blocks.air)
+				if (isEmpty)
 				{
-					if (!player.canPlayerEdit(i, j, k, mop.sideHit, is))
+					if (!player.canPlayerEdit(x, y, z, mop.sideHit, is))
 						return is;
 
 					FillBucketEvent event = new FillBucketEvent(player, is, world, mop);
@@ -86,17 +81,17 @@ public class ItemCustomBucket extends ItemTerra
 					if (event.getResult() == Event.Result.ALLOW)
 						return event.result;
 
-					if (TFC_Core.isFreshWater(world.getBlock(i, j, k)) && world.getBlockMetadata(i, j, k) <= 2)
+					if (TFC_Core.isFreshWater(world.getBlock(x, y, z)) && world.getBlockMetadata(x, y, z) <= 2)
 					{
-						world.setBlockToAir(i, j, k);
+						world.setBlockToAir(x, y, z);
 						if (player.capabilities.isCreativeMode)
 							return is;
 
 						return new ItemStack(TFCItems.WoodenBucketWater);
 					}
-					else if (TFC_Core.isSaltWater(world.getBlock(i, j, k)) && world.getBlockMetadata(i, j, k) <= 2)
+					else if (TFC_Core.isSaltWater(world.getBlock(x, y, z)) && world.getBlockMetadata(x, y, z) <= 2)
 					{
-						world.setBlockToAir(i, j, k);
+						world.setBlockToAir(x, y, z);
 						if (player.capabilities.isCreativeMode)
 							return is;
 						return new ItemStack(TFCItems.WoodenBucketSaltWater);

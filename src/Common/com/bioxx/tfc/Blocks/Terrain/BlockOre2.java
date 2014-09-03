@@ -28,6 +28,14 @@ public class BlockOre2 extends BlockOre
 	}
 
 	@Override
+	public int quantityDropped(int meta, int fortune, Random random)
+	{
+		if (meta == 13) // saltpeter
+			return 1 + random.nextInt(3);
+		return 1;
+	}
+
+	@Override
 	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
 		if(!world.isRemote)

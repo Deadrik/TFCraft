@@ -1,5 +1,13 @@
 package com.bioxx.tfc.Containers;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotFirepit;
@@ -12,25 +20,15 @@ import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.api.HeatRegistry;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
 public class ContainerFirepit extends ContainerTFC
 {
 	private TEFirepit firepit;
 	private float firetemp;
-	private int charcoal;
 
 	public ContainerFirepit(InventoryPlayer inventoryplayer, TEFirepit tileentityfirepit, World world, int x, int y, int z)
 	{
 		firepit = tileentityfirepit;
 		firetemp = -1111;
-		charcoal = 0;
 
 		//Input slot
 		addSlotToContainer(new SlotFirepitIn(inventoryplayer.player,tileentityfirepit, 1, 80, 20));
@@ -43,7 +41,7 @@ public class ContainerFirepit extends ContainerTFC
 		//item output
 		addSlotToContainer(new SlotFirepitOut(inventoryplayer.player, tileentityfirepit, 7, 71, 48));
 		addSlotToContainer(new SlotFirepitOut(inventoryplayer.player, tileentityfirepit, 8, 89, 48));
-		
+
 		//dummy byproducts out
 		addSlotToContainer(new SlotForShowOnly(tileentityfirepit, 2, -50000, 0));
 		addSlotToContainer(new SlotForShowOnly(tileentityfirepit, 6, -50000, 0));
@@ -52,7 +50,7 @@ public class ContainerFirepit extends ContainerTFC
 
 		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 90, false, true);
 	}
-	
+
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
@@ -67,7 +65,7 @@ public class ContainerFirepit extends ContainerTFC
 		Slot[] slotoutput = {(Slot)inventorySlots.get(7), (Slot)inventorySlots.get(8)};
 		Slot[] slotfuel = {(Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(4), (Slot)inventorySlots.get(5)};
 		HeatRegistry manager = HeatRegistry.getInstance();
-		
+
 		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
@@ -131,12 +129,9 @@ public class ContainerFirepit extends ContainerTFC
 			ICrafting var2 = (ICrafting)this.crafters.get(var1);
 			if (this.firetemp != this.firepit.fireTemp)
 				var2.sendProgressBarUpdate(this, 0, (int)this.firepit.fireTemp);
-			if (this.charcoal != this.firepit.charcoalCounter)
-				var2.sendProgressBarUpdate(this, 1, this.firepit.charcoalCounter);
 		}
 
 		firetemp = this.firepit.fireTemp;
-		charcoal = this.firepit.charcoalCounter;
 	}
 
 	@Override
@@ -144,7 +139,5 @@ public class ContainerFirepit extends ContainerTFC
 	{
 		if (par1 == 0)
 			this.firepit.fireTemp = par2;
-		if (par1 == 1)
-			this.firepit.charcoalCounter = par2;
 	}
 }

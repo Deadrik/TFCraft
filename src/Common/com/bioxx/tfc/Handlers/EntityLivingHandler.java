@@ -1,16 +1,18 @@
 package com.bioxx.tfc.Handlers;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Chunkdata.ChunkDataManager;
@@ -32,7 +34,9 @@ import com.bioxx.tfc.Items.ItemLooseRock;
 import com.bioxx.tfc.Items.ItemOreSmall;
 import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
+import com.bioxx.tfc.api.TFCAttributes;
 import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Interfaces.IEquipable;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -75,12 +79,37 @@ public class EntityLivingHandler
 				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
 
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
-					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20, 1));
+				{
+					setThirsty(player, true);
+				}
 				else if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.5f)
 				{
 					if(player.isSprinting())
 						player.setSprinting(false);
 				}
+				else
+				{
+					setThirsty(player, false);
+				}
+
+				//Scan the players inventory for any items that are too heavy to carry normally
+				boolean isOverburdened = false;
+				for (int i = 0; i < player.inventory.mainInventory.length;i++)
+				{
+					ItemStack is = player.inventory.getStackInSlot(i);
+					if(is != null && is.getItem() instanceof IEquipable)
+					{
+						if(is.getItem() == Item.getItemFromBlock(TFCBlocks.Barrel))
+						{
+							if(is.hasTagCompound())
+							{
+								isOverburdened = true;
+							}
+						}
+					}
+				}
+
+				setOverburdened(player, isOverburdened);
 
 				//Handle Spawn Protection
 				NBTTagCompound nbt = player.getEntityData();
@@ -127,6 +156,42 @@ public class EntityLivingHandler
 		}
 	}
 
+	public void setThirsty(EntityPlayer player, boolean b)
+	{
+		IAttributeInstance iattributeinstance = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+
+		if (iattributeinstance.getModifier(TFCAttributes.thirstyUUID) != null)
+		{
+			iattributeinstance.removeModifier(TFCAttributes.thirsty);
+		}
+
+		if (b)
+		{
+			iattributeinstance.applyModifier(TFCAttributes.thirsty);
+		}
+	}
+
+	public void setOverburdened(EntityPlayer player, boolean b)
+	{
+		IAttributeInstance iattributeinstance = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+
+		if (iattributeinstance.getModifier(TFCAttributes.overburdenedUUID) != null)
+		{
+			iattributeinstance.removeModifier(TFCAttributes.overburdened);
+		}
+
+		if (b)
+		{
+			iattributeinstance.applyModifier(TFCAttributes.overburdened);
+		}
+	}
+
+	@SubscribeEvent
+	public void handleFOV(FOVUpdateEvent event)
+	{
+		event.newfov = 1.0f;
+	}
+
 	@SubscribeEvent
 	public void handleItemPickup(EntityItemPickupEvent event)
 	{
@@ -135,7 +200,7 @@ public class EntityLivingHandler
 		ItemStack item = event.item.getEntityItem();
 		boolean foundJav = false;
 		if(player.inventory instanceof InventoryPlayerTFC){
-			
+
 			quiver = ((InventoryPlayerTFC)player.inventory).extraEquipInventory[0];
 			for(int i = 0; i < 9; i++)
 			{

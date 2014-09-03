@@ -2,11 +2,6 @@ package com.bioxx.tfc.Containers;
 
 import java.util.ArrayList;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Containers.Slots.SlotChest;
-import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.TileEntities.TEChest;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
@@ -15,6 +10,11 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Containers.Slots.SlotChest;
+import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.TileEntities.TEChest;
 
 public class ContainerChestTFC extends ContainerTFC
 {
@@ -44,7 +44,7 @@ public class ContainerChestTFC extends ContainerTFC
 		int var4;
 		int var5;
 
-		
+
 
 		for (var4 = 0; var4 < this.numRows; ++var4)
 		{
@@ -56,7 +56,7 @@ public class ContainerChestTFC extends ContainerTFC
 
 		PlayerInventory.buildInventoryLayout(this, (InventoryPlayer) playerInv, 8, var3 + 109, false, true);
 	}
-	
+
 	public static ArrayList<Item> getExceptions(){
 		ArrayList exceptions = new ArrayList<Item>();
 		exceptions.add(TFCItems.Logs);
@@ -82,7 +82,7 @@ public class ContainerChestTFC extends ContainerTFC
 		exceptions.add(TFCItems.SterlingSilverIngot);
 		exceptions.add(TFCItems.TinIngot);
 		exceptions.add(TFCItems.ZincIngot);
-		
+
 		return exceptions;
 	}
 
@@ -96,28 +96,28 @@ public class ContainerChestTFC extends ContainerTFC
 	 * Called to transfer a stack from one inventory to the other eg. when shift clicking.
 	 */
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int par1)
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotNum)
 	{
 		ItemStack var2 = null;
-		Slot var3 = (Slot)this.inventorySlots.get(par1);
+		Slot slot = (Slot)this.inventorySlots.get(slotNum);
 
-		if (var3 != null && var3.getHasStack())
+		if (slot != null && slot.getHasStack())
 		{
-			ItemStack var4 = var3.getStack();
+			ItemStack var4 = slot.getStack();
 			var2 = var4.copy();
 
-			if (par1 < this.numRows * 9)
+			if (slotNum < this.numRows * 9)//First try to merge into the player's inventory
 			{
 				if (!this.mergeItemStack(var4, this.numRows * 9, this.inventorySlots.size(), true))
 					return null;
 			}
-			else if (!this.mergeItemStack(var4, 0, this.numRows * 9, false))
+			else if (!this.mergeItemStack(var4, 0, this.numRows * 9, false))//Merge into chest if possible
 				return null;
 
 			if (var4.stackSize == 0)
-				var3.putStack((ItemStack)null);
+				slot.putStack((ItemStack)null);
 			else
-				var3.onSlotChanged();
+				slot.onSlotChanged();
 		}
 
 		return var2;
@@ -132,12 +132,12 @@ public class ContainerChestTFC extends ContainerTFC
 		super.onContainerClosed(par1EntityPlayer);
 		this.lowerChestInventory.closeInventory();
 	}
-	
-    /**
-     * Return this chest container's lower chest inventory.
-     */
-    public IInventory getLowerChestInventory()
-    {
-        return this.lowerChestInventory;
-    }	
+
+	/**
+	 * Return this chest container's lower chest inventory.
+	 */
+	public IInventory getLowerChestInventory()
+	{
+		return this.lowerChestInventory;
+	}	
 }

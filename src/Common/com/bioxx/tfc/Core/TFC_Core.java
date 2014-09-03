@@ -70,7 +70,7 @@ public class TFC_Core
 	@SideOnly(Side.CLIENT)
 	public static int getMouseX()
 	{
-		ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth,
+		ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth,
 				Minecraft.getMinecraft().displayHeight);
 		int i = scaledresolution.getScaledWidth();
 		int k = Mouse.getX() * i / Minecraft.getMinecraft().displayWidth;
@@ -81,7 +81,7 @@ public class TFC_Core
 	@SideOnly(Side.CLIENT)
 	public static int getMouseY()
 	{
-		ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth,
+		ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth,
 				Minecraft.getMinecraft().displayHeight);
 		int j = scaledresolution.getScaledHeight();
 		int l = j - Mouse.getY() * j / Minecraft.getMinecraft().displayHeight - 1;
@@ -1153,8 +1153,7 @@ public class TFC_Core
 	{
 		if(Blocks.fire.getFlammability(block) > 0 && block != TFCBlocks.LogPile) return false;
 
-		return block == TFCBlocks.Firepit
-				|| block == TFCBlocks.LogPile
+		return block == TFCBlocks.LogPile
 				|| isRawStone(block)
 				|| isCobbleStone(block)
 				|| isBrickStone(block)

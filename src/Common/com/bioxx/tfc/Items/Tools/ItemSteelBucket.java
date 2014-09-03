@@ -10,8 +10,12 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidBlock;
 
-import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -19,11 +23,11 @@ import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.common.eventhandler.Event;
 
-public class ItemCustomBlueSteelBucket extends ItemTerra
+public class ItemSteelBucket extends ItemTerra
 {
-	private Block bucketContents;
+	protected Block bucketContents;
 
-	public ItemCustomBlueSteelBucket(Block par2)
+	public ItemSteelBucket(Block par2)
 	{
 		super();
 		this.bucketContents = par2;
@@ -89,6 +93,8 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 				int j = mop.blockY;
 				int k = mop.blockZ;
 
+
+
 				if (!world.canMineBlock(player, i, j, k))
 				{
 					return is;
@@ -96,38 +102,37 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 
 				if (this.bucketContents == Blocks.air)
 				{
-					if (!player.canPlayerEdit(i, j, k, mop.sideHit, is))
+					if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock))
 					{
 						return is;
 					}
 
-					if (world.getBlock(i, j, k) == Blocks.lava && world.getBlockMetadata(i, j, k) == 0)
+					Fluid fluid = ((IFluidBlock)world.getBlock(i, j, k)).getFluid();
+
+					world.setBlockToAir(i, j, k);
+
+					if (player.capabilities.isCreativeMode)
 					{
-						world.setBlockToAir(i, j, k);
-
-						if (player.capabilities.isCreativeMode)
-						{
-							return is;
-						}
-
-						if (--is.stackSize <= 0)
-						{
-							return new ItemStack(TFCItems.BlueSteelBucketLava);
-						}
-
-						if (!player.inventory.addItemStackToInventory(new ItemStack(TFCItems.BlueSteelBucketLava)))
-						{
-							player.entityDropItem(new ItemStack(TFCItems.BlueSteelBucketLava, 1, 0), 0);
-						}
-
 						return is;
 					}
+
+					if (--is.stackSize <= 0)
+					{
+						return FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 1000), is);
+					}
+
+					if (!player.inventory.addItemStackToInventory(FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 1000), is)))
+					{
+						player.entityDropItem(FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 1000), is), 0);
+					}
+
+					return is;
 				}
 				else
 				{
 					if (this.bucketContents == Blocks.air)
 					{
-						return new ItemStack(TFCItems.BlueSteelBucketEmpty);
+						return this.getContainerItem(is);
 					}
 
 					if (mop.sideHit == 0) --j;
@@ -144,7 +149,7 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 
 					if (this.tryPlaceContainedLiquid(world, i, j, k) && !player.capabilities.isCreativeMode)
 					{
-						return new ItemStack(TFCItems.BlueSteelBucketEmpty);
+						return this.getContainerItem(is);
 					}
 				}
 			}
@@ -172,7 +177,7 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 			}
 			else
 			{
-				if (world.provider.isHellWorld && this.bucketContents == Blocks.flowing_water)
+				if (world.provider.isHellWorld && (this.bucketContents == TFCBlocks.FreshWater || this.bucketContents == TFCBlocks.SaltWater))
 				{
 					world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 
@@ -201,5 +206,4 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 	{
 		return EnumItemReach.SHORT;
 	}
-
 }

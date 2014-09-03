@@ -56,6 +56,7 @@ import com.bioxx.tfc.TileEntities.TEFruitLeaves;
 import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
+import com.bioxx.tfc.TileEntities.TELightEmitter;
 import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
@@ -146,6 +147,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TEMetalTrapDoor.class, "MetalTrapDoor");
 		GameRegistry.registerTileEntity(TEWaterPlant.class, "Sea Weed");
 		GameRegistry.registerTileEntity(TEVessel.class, "Vessel");
+		GameRegistry.registerTileEntity(TELightEmitter.class, "LightEmitter");
 
 		if(b)
 		{

@@ -21,6 +21,7 @@ import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.IEquipable;
 import com.bioxx.tfc.api.Interfaces.ISize;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -150,8 +151,16 @@ public class ItemTerra extends Item implements ISize
 	{
 		if(((ISize)object.getItem()).getSize(object)!= null && ((ISize)object.getItem()).getWeight(object) != null && ((ISize)object.getItem()).getReach(object)!= null)
 			arraylist.add("\u2696" + StatCollector.translateToLocal("gui.Weight." + ((ISize)object.getItem()).getWeight(object).getName()) + " \u21F2" + 
-					StatCollector.translateToLocal("gui.Size." + ((ISize)object.getItem()).getSize(object).getName().replace(" ", "")) /*+
-					" \u2192" + StringUtil.localize("gui.Reach." + ((ISize)object.getItem()).getReach(object).getName())*/);
+					StatCollector.translateToLocal("gui.Size." + ((ISize)object.getItem()).getSize(object).getName().replace(" ", "")));
+		if(object.getItem() instanceof IEquipable)
+		{
+			if(((IEquipable)object.getItem()).getEquipType(object) == IEquipable.EquipType.BACK)
+			{
+				arraylist.add(EnumChatFormatting.LIGHT_PURPLE.toString()+StatCollector.translateToLocal("gui.slot")+ 
+						EnumChatFormatting.GRAY.toString()+": " + 
+						EnumChatFormatting.WHITE.toString() + StatCollector.translateToLocal("gui.slot.back"));
+			}
+		}
 	}
 
 	@Override
