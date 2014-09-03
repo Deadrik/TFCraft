@@ -159,14 +159,6 @@ public class BlockFirepit extends BlockTerraContainer
 				world.spawnParticle("flame", f + f5 + 0.3F , f1, f2 + f6 + 0.2F, 0.0D, 0.0D, 0.0D);
 				world.spawnParticle("flame", f + f4 - 0.3F , f1, f2 + f6 + 0.1F, 0.0D, 0.0D, 0.0D);
 			}
-			if(world.getTileEntity(x, y, z) != null)
-			{
-				if(((TEFirepit)world.getTileEntity(x, y, z)).charcoalCounter != 0)
-				{
-					world.spawnParticle("smoke", f + f4 - 0.3F, f1 + 2.5,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
-					world.spawnParticle("smoke", f + f4 - 0.1F, f1 + 2.5,  f2 + f5 + 0.1F, 0.0D, 0.0D, 0.0D);
-				}
-			}
 		}
 	}
 

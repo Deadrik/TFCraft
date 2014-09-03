@@ -116,6 +116,7 @@ import com.bioxx.tfc.Items.ItemBlocks.ItemSoil;
 import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack2;
+import com.bioxx.tfc.Items.ItemBlocks.ItemTorch;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -479,7 +480,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Flowers2, com.bioxx.tfc.Items.ItemBlocks.ItemFlowers.class, "Flowers2");
 		GameRegistry.registerBlock(Fungi, com.bioxx.tfc.Items.ItemBlocks.ItemFungi.class, "Fungi");
 		GameRegistry.registerBlock(Bookshelf, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Bookshelf");
-		GameRegistry.registerBlock(Torch, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Torch");
+		GameRegistry.registerBlock(Torch, ItemTorch.class, "Torch");
 		GameRegistry.registerBlock(Chest, com.bioxx.tfc.Items.ItemBlocks.ItemChest.class, "Chest TFC");
 		GameRegistry.registerBlock(Workbench, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Workbench");
 		GameRegistry.registerBlock(Cactus, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Cactus");

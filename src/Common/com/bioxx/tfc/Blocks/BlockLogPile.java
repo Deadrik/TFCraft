@@ -17,7 +17,12 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.TileEntities.TELogPile;
+import com.bioxx.tfc.api.TFCOptions;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLogPile extends BlockTerraContainer
 {
@@ -26,6 +31,7 @@ public class BlockLogPile extends BlockTerraContainer
 	public BlockLogPile()
 	{
 		super(Material.wood);
+		this.setTickRandomly(true);
 	}
 
 	public static int getDirectionFromMetadata(int i)
@@ -176,5 +182,33 @@ public class BlockLogPile extends BlockTerraContainer
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
 	{
 		return null;
+	}
+
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random rand)
+	{
+		TELogPile te = (TELogPile)world.getTileEntity(x, y, z);
+		if(te.isOnFire && te.fireTimer+TFCOptions.charcoalPitBurnTime < TFC_Time.getTotalHours())
+		{
+			te.createCharcoal(x, y, z);
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(World world, int x, int y, int z, Random rand)
+	{
+		if(((TELogPile)world.getTileEntity(x, y, z)).isOnFire)
+		{
+			double centerX = (double)((float)x + 0.5F);
+			double centerY = (double)((float)y + 2F);
+			double centerZ = (double)((float)z + 0.5F);
+			double d3 = 0.2199999988079071D;
+			double d4 = 0.27000001072883606D;
+			world.spawnParticle("smoke", centerX+(rand.nextDouble()-0.5), centerY, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.1D, 0.0D);
+			world.spawnParticle("smoke", centerX+(rand.nextDouble()-0.5), centerY, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.15D, 0.0D);
+			world.spawnParticle("smoke", centerX+(rand.nextDouble()-0.5), centerY-1, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.1D, 0.0D);
+			world.spawnParticle("smoke", centerX+(rand.nextDouble()-0.5), centerY-1, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.15D, 0.0D);
+		}
 	}
 }

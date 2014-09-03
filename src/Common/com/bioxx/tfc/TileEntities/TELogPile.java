@@ -2,7 +2,6 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
@@ -17,17 +16,19 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Vector3f;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class TELogPile extends TileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	private int logPileOpeners;
-	private TEFirepit charcoalFirepit;
-	private boolean isOnFire;
-	private int fireTimer;
-	public Queue<Vector3f> blocksToBeSetOnFire;
+	public boolean isOnFire;
+	public int fireTimer;
+	Queue<Vector3f> blocksToBeSetOnFire;
 
 	public TELogPile()
 	{
@@ -41,13 +42,6 @@ public class TELogPile extends TileEntity implements IInventory
 		if(storage[index] == null)
 		{
 			storage[index] = is;
-			if(charcoalFirepit != null)
-			{
-				if(charcoalFirepit.isInactiveCharcoalFirepit())
-					charcoalFirepit.logPileUpdate(is.stackSize);
-				else
-					setCharcoalFirepit(null);
-			}
 		}
 	}
 
@@ -119,26 +113,11 @@ public class TELogPile extends TileEntity implements IInventory
 			{
 				is = storage[slot];
 				storage[slot] = null;
-				if(charcoalFirepit != null)
-				{
-					if(charcoalFirepit.isInactiveCharcoalFirepit())
-						charcoalFirepit.logPileUpdate(-amount);
-					else
-						setCharcoalFirepit(null);
-				}
 				return is;
 			}
 
 			if(storage[slot].stackSize == 0)
 				storage[slot] = null;
-
-			if(charcoalFirepit != null)
-			{
-				if(charcoalFirepit.isInactiveCharcoalFirepit())
-					charcoalFirepit.logPileUpdate(-amount);
-				else
-					setCharcoalFirepit(null);
-			}
 
 			is = storage[slot].splitStack(amount);
 			return is;
@@ -149,30 +128,11 @@ public class TELogPile extends TileEntity implements IInventory
 
 	public void ejectContents()
 	{
-		float f3 = 0.05F;
-		EntityItem entityitem;
-		Random rand = new Random();
-		float f = rand.nextFloat() * 0.8F + 0.1F;
-		float f1 = rand.nextFloat() * 2.0F + 0.4F;
-		float f2 = rand.nextFloat() * 0.8F + 0.1F;
-
-		if(charcoalFirepit != null)
-		{
-			if(charcoalFirepit.isInactiveCharcoalFirepit())
-				charcoalFirepit.logPileUpdate(-getNumberOfLogs());
-			else
-				setCharcoalFirepit(null);
-		}
-
 		for (int i = 0; i < getSizeInventory(); i++)
 		{
 			if(storage[i]!= null)
 			{
-				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, storage[i]);
-				entityitem.motionX = (float)rand.nextGaussian() * f3;
-				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
-				entityitem.motionZ = (float)rand.nextGaussian() * f3;
-				worldObj.spawnEntityInWorld(entityitem);
+				worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, storage[i]));
 			}
 		}
 		extinguishFire();
@@ -212,13 +172,6 @@ public class TELogPile extends TileEntity implements IInventory
 	{
 		if(storage[index] != null)
 		{
-			if(charcoalFirepit != null)
-			{
-				if(charcoalFirepit.isInactiveCharcoalFirepit())
-					charcoalFirepit.logPileUpdate(count);
-				else
-					setCharcoalFirepit(null);
-			}
 			storage[index] = new ItemStack(storage[index].getItem(), storage[index].stackSize + count, storage[index].getItemDamage());
 		}
 	}
@@ -244,27 +197,19 @@ public class TELogPile extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void updateEntity()
+	public boolean canUpdate()
 	{
-		TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
-		if(charcoalFirepit != null && !charcoalFirepit.isInactiveCharcoalFirepit())
-		{
-			--fireTimer;
-			if(fireTimer == 0)
-			{
-				if(blocksToBeSetOnFire.size() > 0)
-					setOnFire(blocksToBeSetOnFire);
-				fireTimer = 100;
-			}
-		}
+		return false;
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbttagcompound);
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
+		super.readFromNBT(nbt);
+		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		storage = new ItemStack[getSizeInventory()];
+		isOnFire = nbt.getBoolean("isOnFire");
+		fireTimer = nbt.getInteger("fireTimer");
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
@@ -275,9 +220,11 @@ public class TELogPile extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbttagcompound);
+		super.writeToNBT(nbt);
+		nbt.setBoolean("isOnFire", isOnFire);
+		nbt.setInteger("fireTimer", fireTimer);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
 		{
@@ -289,7 +236,7 @@ public class TELogPile extends TileEntity implements IInventory
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
-		nbttagcompound.setTag("Items", nbttaglist);
+		nbt.setTag("Items", nbttaglist);
 	}
 
 	@Override
@@ -306,7 +253,7 @@ public class TELogPile extends TileEntity implements IInventory
 		readFromNBT(pkt.func_148857_g());
 		//TileEntityLogPile pile = this;
 	}
-	
+
 	@Override
 	public boolean hasCustomInventoryName()
 	{
@@ -319,56 +266,38 @@ public class TELogPile extends TileEntity implements IInventory
 		return false;
 	}
 
-	public TEFirepit getCharcoalFirepit()
-	{
-		return charcoalFirepit;
-	}
-
-	public void setCharcoalFirepit(TEFirepit firepit)
-	{
-		charcoalFirepit = firepit;
-	}
-
 	public void neighborChanged()
 	{
-		if(charcoalFirepit != null)
-		{
-			if(!charcoalFirepit.isInactiveCharcoalFirepit())
-			{
-				Block block;
-				blocksToBeSetOnFire = new ArrayDeque<Vector3f>();
-				
-				block = worldObj.getBlock(xCoord + 1, yCoord, zCoord);
-				if(!TFC_Core.isValidCharcoalPitCover(block))
-					blocksToBeSetOnFire.add(new Vector3f(xCoord + 1, yCoord, zCoord));
+		if(!isOnFire)
+			return;
+		Block block;
+		blocksToBeSetOnFire = new ArrayDeque<Vector3f>();
 
-				block = worldObj.getBlock(xCoord - 1, yCoord, zCoord);
-				if(!TFC_Core.isValidCharcoalPitCover(block))
-					blocksToBeSetOnFire.add(new Vector3f(xCoord - 1, yCoord, zCoord));
+		block = worldObj.getBlock(xCoord + 1, yCoord, zCoord);
+		if(!TFC_Core.isValidCharcoalPitCover(block))
+			blocksToBeSetOnFire.add(new Vector3f(xCoord + 1, yCoord, zCoord));
 
-				block = worldObj.getBlock(xCoord, yCoord, zCoord + 1);
-				if(!TFC_Core.isValidCharcoalPitCover(block))
-					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord + 1));
+		block = worldObj.getBlock(xCoord - 1, yCoord, zCoord);
+		if(!TFC_Core.isValidCharcoalPitCover(block))
+			blocksToBeSetOnFire.add(new Vector3f(xCoord - 1, yCoord, zCoord));
 
-				block = worldObj.getBlock(xCoord, yCoord, zCoord - 1);
-				if(!TFC_Core.isValidCharcoalPitCover(block))
-					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord - 1));
+		block = worldObj.getBlock(xCoord, yCoord, zCoord + 1);
+		if(!TFC_Core.isValidCharcoalPitCover(block))
+			blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord + 1));
 
-				block = worldObj.getBlock(xCoord, yCoord + 1, zCoord);
-				if(!TFC_Core.isValidCharcoalPitCover(block))
-					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord + 1, zCoord));
+		block = worldObj.getBlock(xCoord, yCoord, zCoord - 1);
+		if(!TFC_Core.isValidCharcoalPitCover(block))
+			blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord, zCoord - 1));
 
-				block = worldObj.getBlock(xCoord, yCoord - 1, zCoord);
-				if(!TFC_Core.isValidCharcoalPitCover(block))
-					blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord - 1, zCoord));
-			}
-			else
-			{
-				setCharcoalFirepit(null);
-				extinguishFire();
-				blocksToBeSetOnFire = null;
-			}
-		}
+		block = worldObj.getBlock(xCoord, yCoord + 1, zCoord);
+		if(!TFC_Core.isValidCharcoalPitCover(block))
+			blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord + 1, zCoord));
+
+		block = worldObj.getBlock(xCoord, yCoord - 1, zCoord);
+		if(!TFC_Core.isValidCharcoalPitCover(block))
+			blocksToBeSetOnFire.add(new Vector3f(xCoord, yCoord - 1, zCoord));
+
+		setOnFire(blocksToBeSetOnFire);
 	}
 
 	private void setOnFire(Queue<Vector3f> blocksOnFire)
@@ -379,7 +308,6 @@ public class TELogPile extends TileEntity implements IInventory
 			worldObj.setBlock((int)blockOnFire.X, (int)blockOnFire.Y, (int)blockOnFire.Z, Blocks.fire);
 			worldObj.markBlockForUpdate((int)blockOnFire.X, (int)blockOnFire.Y, (int)blockOnFire.Z);
 		}
-		isOnFire = true;
 	}
 
 	public void extinguishFire()
@@ -417,6 +345,50 @@ public class TELogPile extends TileEntity implements IInventory
 				worldObj.markBlockForUpdate(xCoord, yCoord - 1, zCoord);
 			}
 			isOnFire = false;
+		}
+	}
+
+	public void activateCharcoal()
+	{
+		this.fireTimer = (int) TFC_Time.getTotalHours();
+		this.isOnFire = true;
+		//Activate the surrounding log piles
+		spreadFire(xCoord+1, yCoord, zCoord); spreadFire(xCoord-1, yCoord, zCoord);
+		spreadFire(xCoord, yCoord+1, zCoord); spreadFire(xCoord, yCoord-1, zCoord);
+		spreadFire(xCoord, yCoord, zCoord+1); spreadFire(xCoord, yCoord, zCoord-1);
+
+	}	
+
+	private void spreadFire(int x, int y, int z)
+	{
+		if(worldObj.getBlock(x, y, z) == TFCBlocks.LogPile)
+		{
+			TELogPile te = (TELogPile) worldObj.getTileEntity(x, y, z);
+			if(!te.isOnFire)
+			{
+				te.activateCharcoal();
+			}
+		}
+	}
+
+	public void createCharcoal(int x, int y, int z)
+	{
+		if(worldObj.getBlock(x, y, z) == TFCBlocks.LogPile)
+		{
+			TELogPile te = (TELogPile) worldObj.getTileEntity(x, y, z);
+			if(te.isOnFire && te.fireTimer+TFCOptions.charcoalPitBurnTime < TFC_Time.getTotalHours())
+			{
+				int count = te.getNumberOfLogs();
+				te.clearContents();
+				float percent = 25 + worldObj.rand.nextInt(25);
+				count = (int) (count * (percent / 100));
+				worldObj.setBlock(x, y, z, TFCBlocks.Charcoal, count, 0x2);
+				worldObj.notifyBlockOfNeighborChange(x, y, z, TFCBlocks.Charcoal);
+				//Activate the surrounding log piles
+				createCharcoal(x+1, y, z); createCharcoal(x-1, y, z);
+				createCharcoal(x, y+1, z); createCharcoal(x, y-1, z);
+				createCharcoal(x, y, z+1); createCharcoal(x, y, z-1);
+			}
 		}
 	}
 }
