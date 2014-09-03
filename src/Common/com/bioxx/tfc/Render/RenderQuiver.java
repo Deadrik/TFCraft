@@ -19,11 +19,11 @@ public class RenderQuiver {
 		
 	}
 	
-	public void render(EntityLivingBase entity) {
-        this.doRender(entity);
+	public void render(EntityLivingBase entity, int numArrows) {
+        this.doRender(entity, numArrows);
     }
 	
-	public void doRender(EntityLivingBase entity){
+	public void doRender(EntityLivingBase entity, int numArrows){
 		GL11.glPushMatrix();
         Minecraft.getMinecraft().renderEngine.bindTexture(QuiverTexture);
         if (!entity.isSneaking()){ GL11.glTranslatef(0F, 0.0F/*0.65F*/, 0.1F);
@@ -31,7 +31,7 @@ public class RenderQuiver {
         else{ GL11.glTranslatef(0F, 0.1F/*0.55F*/, 0.1F);
         GL11.glRotatef(20F, 1F, 0F, 0F);}
         GL11.glScalef(0.8F, 0.8F, 0.8F);
-        this.quiver.render(entity, 4);
+        this.quiver.render(entity, numArrows);
         GL11.glPopMatrix();
 	}
 	
