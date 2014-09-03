@@ -181,10 +181,15 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	{
 		super.setTamed(par1);
 
+		double healthRatio = this.getHealth() / this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() ;
+		
 		if (par1)
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.WolfHealth);
+			
 		else
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.WolfHealth);
+		
+		this.setHealth((float)(healthRatio * this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()));
 	}
 
 	/**
