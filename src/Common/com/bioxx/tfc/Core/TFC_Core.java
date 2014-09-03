@@ -1153,8 +1153,7 @@ public class TFC_Core
 	{
 		if(Blocks.fire.getFlammability(block) > 0 && block != TFCBlocks.LogPile) return false;
 
-		return block == TFCBlocks.Firepit
-				|| block == TFCBlocks.LogPile
+		return block == TFCBlocks.LogPile
 				|| isRawStone(block)
 				|| isCobbleStone(block)
 				|| isBrickStone(block)
