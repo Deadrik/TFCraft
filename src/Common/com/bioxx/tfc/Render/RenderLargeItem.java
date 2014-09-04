@@ -42,6 +42,7 @@ public class RenderLargeItem {
 		else{ GL11.glTranslatef(0F, 0.2F + entityTranslateY - 0.1F/*0.55F*/, 0.6F);
 		GL11.glRotatef(20F, 1F, 0F, 0F);}
 		GL11.glScalef(0.8F, 0.8F, 0.8F);
+		GL11.glRotatef(180, 0F, 0F, 1F);
 		Block block ;
 		if(item != null){
 			if(item.getItem() instanceof IEquipable){

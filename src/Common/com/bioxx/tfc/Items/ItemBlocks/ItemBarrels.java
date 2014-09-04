@@ -140,7 +140,6 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 
 	@Override
 	public void onEquippedRender() {
-		GL11.glRotatef(180, 0F, 0F, 1F);
 	}
 }
 
