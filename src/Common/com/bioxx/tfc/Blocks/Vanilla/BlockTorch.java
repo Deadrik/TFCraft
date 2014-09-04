@@ -11,6 +11,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -23,8 +24,10 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.TileEntities.TELightEmitter;
 import com.bioxx.tfc.api.TFCOptions;
@@ -69,6 +72,21 @@ public class BlockTorch extends BlockTerraContainer
 	{
 		super.registerBlockIcons(register);
 		this.offIcon = register.registerIcon(Reference.ModID + ":" + "torch_off");
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
+	{
+		if(!world.isRemote)
+		{
+			if(world.getBlockMetadata(x, y, z) < 8 && player.inventory.getCurrentItem() != null && 
+					player.inventory.getCurrentItem().getItem() == TFCItems.Stick)
+			{
+				player.inventory.consumeInventoryItem(TFCItems.Stick);
+				TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.Torch), player);
+			}
+		}
+		return true;
 	}
 
 	@Override

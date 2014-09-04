@@ -357,6 +357,6 @@ public class ItemHeat
 		//manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, 32767), 0.2, 200, new ItemStack(Items.bowl, 1)));
 
 		//Other
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Stick, 1, 32767), 1, 80, new ItemStack(TFCBlocks.Torch, 2)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Stick, 1, 32767), 1, 40, new ItemStack(TFCBlocks.Torch, 2)));
 	}
 }
