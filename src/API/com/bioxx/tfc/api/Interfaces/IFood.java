@@ -34,7 +34,4 @@ public interface IFood
 	public int getTasteSavory(ItemStack is);
 	public boolean renderDecay();
 	public boolean renderWeight();
-
-	public boolean canSmoke();
-	public float getSmokeAbsorbMultiplier();
 }

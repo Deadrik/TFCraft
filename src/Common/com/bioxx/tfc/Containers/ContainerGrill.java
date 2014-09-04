@@ -7,8 +7,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Containers.Slots.SlotFoodOnly;
+import com.bioxx.tfc.Containers.Slots.SlotCookableFoodOnly;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
@@ -31,12 +30,12 @@ public class ContainerGrill extends ContainerTFC
 		}
 
 		//Input slot
-		addSlotToContainer(new SlotFoodOnly(grill, 0, 71, 17).addItemException(TFCItems.WoodenBucketMilk));
-		addSlotToContainer(new SlotFoodOnly(grill, 1, 89, 17).addItemException(TFCItems.WoodenBucketMilk));
-		addSlotToContainer(new SlotFoodOnly(grill, 2, 71, 35).addItemException(TFCItems.WoodenBucketMilk));
-		addSlotToContainer(new SlotFoodOnly(grill, 3, 89, 35).addItemException(TFCItems.WoodenBucketMilk));
-		addSlotToContainer(new SlotFoodOnly(grill, 4, 71, 53).addItemException(TFCItems.WoodenBucketMilk));
-		addSlotToContainer(new SlotFoodOnly(grill, 5, 89, 53).addItemException(TFCItems.WoodenBucketMilk));
+		addSlotToContainer(new SlotCookableFoodOnly(grill, 0, 71, 17));
+		addSlotToContainer(new SlotCookableFoodOnly(grill, 1, 89, 17));
+		addSlotToContainer(new SlotCookableFoodOnly(grill, 2, 71, 35));
+		addSlotToContainer(new SlotCookableFoodOnly(grill, 3, 89, 35));
+		addSlotToContainer(new SlotCookableFoodOnly(grill, 4, 71, 53));
+		addSlotToContainer(new SlotCookableFoodOnly(grill, 5, 89, 53));
 
 		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 90, false, true);
 	}

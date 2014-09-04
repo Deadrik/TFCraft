@@ -31,6 +31,7 @@ import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.ISize;
 import com.bioxx.tfc.api.Util.Helper;
@@ -38,7 +39,7 @@ import com.bioxx.tfc.api.Util.Helper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemFoodTFC extends ItemTerra implements ISize, IFood
+public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood
 {
 	/**
 	 * Food can contain multiple NBT Tags including
