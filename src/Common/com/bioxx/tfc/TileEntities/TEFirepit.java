@@ -69,14 +69,14 @@ public class TEFirepit extends TEFireEntity implements IInventory
 					ItemCookEvent eventMelt = new ItemCookEvent(fireItemStacks[1], output, this);
 					MinecraftForge.EVENT_BUS.post(eventMelt);
 					output = eventMelt.result;
-				}
 
-				float mod = ((IFood)output.getItem()).getSmokeAbsorbMultiplier();
-				TFC_Core.setSweetMod(output, Math.round(fuelTasteProfile[0] * mod));
-				TFC_Core.setSourMod(output, Math.round(fuelTasteProfile[1] * mod));
-				TFC_Core.setSaltyMod(output, Math.round(fuelTasteProfile[2] * mod));
-				TFC_Core.setBitterMod(output, Math.round(fuelTasteProfile[3] * mod));
-				TFC_Core.setSavoryMod(output, Math.round(fuelTasteProfile[4] * mod));
+					float mod = ((IFood)output.getItem()).getSmokeAbsorbMultiplier();
+					TFC_Core.setSweetMod(output, Math.round(fuelTasteProfile[0] * mod));
+					TFC_Core.setSourMod(output, Math.round(fuelTasteProfile[1] * mod));
+					TFC_Core.setSaltyMod(output, Math.round(fuelTasteProfile[2] * mod));
+					TFC_Core.setBitterMod(output, Math.round(fuelTasteProfile[3] * mod));
+					TFC_Core.setSavoryMod(output, Math.round(fuelTasteProfile[4] * mod));
+				}
 
 				int damage = output.getItemDamage();
 				if(output.getItem() == fireItemStacks[1].getItem())
