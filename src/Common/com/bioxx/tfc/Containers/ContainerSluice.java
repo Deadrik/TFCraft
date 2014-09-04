@@ -2,7 +2,7 @@ package com.bioxx.tfc.Containers;
 
 import com.bioxx.tfc.Containers.Slots.SlotSluice;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.TileEntities.TileEntitySluice;
+import com.bioxx.tfc.TileEntities.TESluice;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,12 +13,12 @@ import net.minecraft.world.World;
 
 public class ContainerSluice extends ContainerTFC
 {
-	private TileEntitySluice sluice;
+	private TESluice sluice;
 	private EntityPlayer player;
 	private int soilamt = 0;
 	private int progress = 0;
 
-	public ContainerSluice(InventoryPlayer inventoryplayer, TileEntitySluice tileentitysluice, World world, int x, int y, int z)
+	public ContainerSluice(InventoryPlayer inventoryplayer, TESluice tileentitysluice, World world, int x, int y, int z)
 	{
 		sluice = tileentitysluice;
 		player = inventoryplayer.player;

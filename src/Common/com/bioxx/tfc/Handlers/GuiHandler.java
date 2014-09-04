@@ -45,7 +45,7 @@ import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
-import com.bioxx.tfc.TileEntities.TileEntitySluice;
+import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
 
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -94,7 +94,7 @@ public class GuiHandler implements IGuiHandler
 		}
 		case 25:
 		{
-			return new ContainerSluice(player.inventory, (TileEntitySluice) te, world, x, y, z);
+			return new ContainerSluice(player.inventory, (TESluice) te, world, x, y, z);
 		}
 		case 26:
 		{
