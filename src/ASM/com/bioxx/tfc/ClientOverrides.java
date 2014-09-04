@@ -204,11 +204,11 @@ public class ClientOverrides
 
 			if(is.getItem() instanceof ItemFoodTFC && ((ItemFoodTFC)is.getItem()).cookedIcon != null)
 			{
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, cookPerc);
+				int color = is.getItem().getColorFromItemStack(is, 0);
+				GL11.glColor4f(((color & 0xFF0000)>>16)/255f, ((color & 0x00ff00)>>8)/255f, (color & 0x0000ff)/255f, cookPerc);
 				renderIcon(x, y,((ItemFoodTFC)is.getItem()).cookedIcon, 16, 16);
 			}
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			//renderQuad(x +1, y + 13, 13, 1, 0);
 			float decayTop = decayPerc * 13.0F;
 
 			if(((IFood)is.getItem()).renderDecay())

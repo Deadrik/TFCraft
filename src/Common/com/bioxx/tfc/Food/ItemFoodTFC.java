@@ -128,17 +128,14 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public int getColorFromItemStack(ItemStack is, int par2)
 	{
 		//0xA08268 160 130 104
-		if(cookedIcon == null && is.hasTagCompound() && is.getTagCompound().hasKey("cookedLevel"))
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("cookedLevel"))
 		{
 			float cookedLevel = is.getTagCompound().getFloat("cookedLevel");
-			if(cookedLevel > 600)
-			{
-				int r = 255 - (int)(160 * ((cookedLevel-600) / 600f)); 
-				int b = 255 - (int)(160 * ((cookedLevel-600) / 600f));
-				int g = 255 - (int)(160 * ((cookedLevel-600) / 600f));
-				int rbg = (r << 16) + (b << 8) + g;
-				return rbg;
-			}
+			int r = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f)); 
+			int b = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
+			int g = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
+			int rbg = (r << 16) + (b << 8) + g;
+			return rbg;
 		}
 
 		return 16777215;

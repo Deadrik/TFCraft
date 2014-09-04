@@ -29,8 +29,9 @@ public class TEFireEntity extends NetworkTileEntity
 			float temp = TFC_ItemHeat.GetTemp(is);
 			if(fuelTimeLeft > 0 && is.getItem() instanceof IFood)
 			{
-				temp += TFC_ItemHeat.getTempIncrease(is);
-				is.getTagCompound().setFloat("cookedLevel", is.getTagCompound().getFloat("cookedLevel")+(fireTemp/700));
+				float inc = is.getTagCompound().getFloat("cookedLevel")+(fireTemp/700);
+				is.getTagCompound().setFloat("cookedLevel", inc);
+				temp = inc;
 			}
 			else if(fireTemp > temp)
 			{
