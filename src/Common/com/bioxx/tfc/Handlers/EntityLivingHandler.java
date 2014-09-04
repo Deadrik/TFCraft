@@ -40,6 +40,8 @@ import com.bioxx.tfc.api.Interfaces.IEquipable;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityLivingHandler
 {
@@ -187,6 +189,7 @@ public class EntityLivingHandler
 	}
 
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void handleFOV(FOVUpdateEvent event)
 	{
 		event.newfov = 1.0f;
