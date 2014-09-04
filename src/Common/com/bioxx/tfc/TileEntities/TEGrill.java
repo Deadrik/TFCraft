@@ -17,6 +17,7 @@ import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.Interfaces.ICookableFood;
+import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class TEGrill extends NetworkTileEntity implements IInventory
@@ -91,8 +92,20 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 	{
 		if(is != null && worldObj.getTileEntity(xCoord, yCoord-1, zCoord) != null)
 		{
+			TEFireEntity te = (TEFireEntity)worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
 			float temp = TFC_ItemHeat.GetTemp(is);
-			if(((TEFireEntity)worldObj.getTileEntity(xCoord, yCoord-1, zCoord)).fireTemp > temp)
+			if(te.fuelTimeLeft > 0 && is.getItem() instanceof IFood)
+			{
+				float inc = is.getTagCompound().getFloat("cookedLevel")+(te.fireTemp/700);
+				is.getTagCompound().setFloat("cookedLevel", inc);
+				temp = inc;
+			}
+			else if(te.fireTemp > temp)
+			{
+				temp += TFC_ItemHeat.getTempIncrease(is);
+			}
+
+			if(te.fireTemp > temp)
 				temp += TFC_ItemHeat.getTempIncrease(is);
 			else
 				temp -= TFC_ItemHeat.getTempDecrease(is);
@@ -106,28 +119,44 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 		Random R = new Random();
 		if(storage[i] != null)
 		{
+			TEFireEntity te = (TEFireEntity) worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
 			HeatIndex index = manager.findMatchingIndex(storage[i]);
+			if(index != null && storage[i].hasTagCompound() && storage[i].getTagCompound().hasKey("cookedLevel"))
+			{
+				float cookedLevel = storage[i].getTagCompound().getFloat("cookedLevel");
+				if(cookedLevel > 600)
+				{
+					int[] fuelTasteProfile = new int[] {0,0,0,0,0};
+					int[] cookedTasteProfile = new int[] {0,0,0,0,0};
+					R = new Random(((ICookableFood)storage[i].getItem()).getFoodID()+((int)cookedLevel/100));
+					cookedTasteProfile[0] = R.nextInt(30)-15;
+					cookedTasteProfile[1] = R.nextInt(30)-15;
+					cookedTasteProfile[2] = R.nextInt(30)-15;
+					cookedTasteProfile[3] = R.nextInt(30)-15;
+					cookedTasteProfile[4] = R.nextInt(30)-15;
+					storage[i].getTagCompound().setIntArray("cookedTasteProfile", cookedTasteProfile);
+					if(te != null)
+					{
+						fuelTasteProfile = te.fuelTasteProfile;
+						float mod = ((ICookableFood)storage[i].getItem()).getSmokeAbsorbMultiplier();
+						fuelTasteProfile[0] *= mod;
+						fuelTasteProfile[1] *= mod;
+						fuelTasteProfile[2] *= mod;
+						fuelTasteProfile[3] *= mod;
+						fuelTasteProfile[4] *= mod;
+						storage[i].getTagCompound().setIntArray("fuelTasteProfile", fuelTasteProfile);
+					}
+				}
+			}
+
 			if(index != null && TFC_ItemHeat.GetTemp(storage[i]) > index.meltTemp)
 			{
 				float temp = TFC_ItemHeat.GetTemp(storage[i]);
 				ItemStack output = index.getOutput(storage[i], R);
-				TEFireEntity te = (TEFireEntity) worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
-				int[] fuelTasteProfile = new int[] {0,0,0,0,0};
-				if(te!= null)
-				{
-					fuelTasteProfile = te.fuelTasteProfile;
-				}
 
 				ItemCookEvent eventMelt = new ItemCookEvent(storage[i], output, this);
 				MinecraftForge.EVENT_BUS.post(eventMelt);
-				output = eventMelt.result;
-
-				float mod = ((ICookableFood)output.getItem()).getSmokeAbsorbMultiplier();
-				TFC_Core.setSweetMod(output, Math.round(fuelTasteProfile[0] * mod));
-				TFC_Core.setSourMod(output, Math.round(fuelTasteProfile[1] * mod));
-				TFC_Core.setSaltyMod(output, Math.round(fuelTasteProfile[2] * mod));
-				TFC_Core.setBitterMod(output, Math.round(fuelTasteProfile[3] * mod));
-				TFC_Core.setSavoryMod(output, Math.round(fuelTasteProfile[4] * mod));
+				output = eventMelt.result;		
 
 				//Morph the input
 				storage[i] = output;

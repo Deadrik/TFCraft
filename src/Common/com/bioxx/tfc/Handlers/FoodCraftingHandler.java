@@ -64,6 +64,8 @@ public class FoodCraftingHandler
 							e.player.dropItem(TFCItems.Straw, strawCount);
 
 						ItemFoodTFC.createTag(craftResult, iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight"));
+						float cookedLevel = iinventory.getStackInSlot(i).getTagCompound().getFloat("cookedLevel");
+						if(cookedLevel != 0) iinventory.getStackInSlot(i).getTagCompound().setFloat("cookedLevel", cookedLevel);
 					}
 				}
 			}
@@ -76,7 +78,11 @@ public class FoodCraftingHandler
 				int saltyMod = -1;
 				int bitterMod = -1;
 				int umamiMod = -1;
+				float cookedLevel = 0;
+				int[] fuelTasteProfile = new int[] {0,0,0,0,0};
+				int[] cookedTasteProfile = new int[] {0,0,0,0,0};
 				boolean salted = true;
+				int count = 0;
 				int foodSlot = 0; //This is used when cutting food to track where the food originally was since the merge code may remove the stack
 				for(int i = 0; i < iinventory.getSizeInventory(); i++)
 				{
@@ -85,7 +91,7 @@ public class FoodCraftingHandler
 					if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
 					{
 						foodSlot = i;
-
+						count++;
 						if(sweetMod == -1)
 							sweetMod = ((ItemFoodTFC)iinventory.getStackInSlot(i).getItem()).getTasteSweetMod(iinventory.getStackInSlot(i));
 						else if(sweetMod != ((ItemFoodTFC)iinventory.getStackInSlot(i).getItem()).getTasteSweetMod(iinventory.getStackInSlot(i)))
@@ -152,6 +158,7 @@ public class FoodCraftingHandler
 								else
 									finalDecay += d;
 							}
+							cookedLevel += iinventory.getStackInSlot(i).getTagCompound().getFloat("cookedLevel");
 						}
 
 						if(myWeight > 0)
@@ -170,7 +177,7 @@ public class FoodCraftingHandler
 				if(saltyMod > 0) craftResult.getTagCompound().setInteger("tasteSAltyMod", saltyMod);
 				if(bitterMod > 0) craftResult.getTagCompound().setInteger("tasteBitterMod", bitterMod);
 				if(umamiMod > 0) craftResult.getTagCompound().setInteger("tasteUmamiMod", umamiMod);				
-
+				cookedLevel /= count;
 				if(craftResult.stackSize == 0)
 					craftResult.stackSize = 1;
 				if(salted)
@@ -203,6 +210,8 @@ public class FoodCraftingHandler
 								craftResult.getTagCompound().setFloat("foodWeight", finalWeight/2);
 								iinventory.getStackInSlot(foodSlot).stackSize++;
 								iinventory.getStackInSlot(foodSlot).getTagCompound().setFloat("foodWeight", finalWeight/2);
+								float cl = iinventory.getStackInSlot(i).getTagCompound().getFloat("cookedLevel");
+								if(cl != 0) iinventory.getStackInSlot(i).getTagCompound().setFloat("cookedLevel", cl);
 							}
 						}
 					}

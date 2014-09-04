@@ -555,14 +555,18 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood
 	@Override
 	public int getTasteSweet(ItemStack is) {
 		int base = tasteSweet;
-		if(is != null && is.getTagCompound().hasKey("tasteSweet"))
+		if(is != null)
+		{
 			base = is.getTagCompound().getInteger("tasteSweet");
+			base += is.getTagCompound().hasKey("cookedTasteProfile") ? is.getTagCompound().getIntArray("cookedTasteProfile")[0] : 0;
+			base += is.getTagCompound().hasKey("fuelTasteProfile") ? is.getTagCompound().getIntArray("fuelTasteProfile")[0] : 0;
+		}
 		return Math.max(base + getTasteSweetMod(is), 0);
 	}
 
 	public int getTasteSweetMod(ItemStack is) {
 		int mod = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteSweetMod"))
+		if(is != null)
 			mod = is.getTagCompound().getInteger("tasteSweetMod");
 		return mod;
 	}
@@ -570,8 +574,12 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood
 	@Override
 	public int getTasteSour(ItemStack is) {
 		int base = tasteSour;
-		if(is != null && is.getTagCompound().hasKey("tasteSour"))
+		if(is != null)
+		{
 			base = is.getTagCompound().getInteger("tasteSour");
+			base += is.getTagCompound().hasKey("cookedTasteProfile") ? is.getTagCompound().getIntArray("cookedTasteProfile")[1] : 0;
+			base += is.getTagCompound().hasKey("fuelTasteProfile") ? is.getTagCompound().getIntArray("fuelTasteProfile")[1] : 0;
+		}
 		if(is.getTagCompound().hasKey("Pickled"))
 			base += 30;
 		return Math.max(base + getTasteSourMod(is), 0);
@@ -579,7 +587,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood
 
 	public int getTasteSourMod(ItemStack is) {
 		int mod = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteSourMod"))
+		if(is != null)
 			mod = is.getTagCompound().getInteger("tasteSourMod");
 		return mod;
 	}
@@ -587,9 +595,12 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood
 	@Override
 	public int getTasteSalty(ItemStack is) {
 		int base = tasteSalty;
-		if(is != null && is.getTagCompound().hasKey("tasteSalty"))
+		if(is != null)
+		{
 			base = is.getTagCompound().getInteger("tasteSalty");
-
+			base += is.getTagCompound().hasKey("cookedTasteProfile") ? is.getTagCompound().getIntArray("cookedTasteProfile")[2] : 0;
+			base += is.getTagCompound().hasKey("fuelTasteProfile") ? is.getTagCompound().getIntArray("fuelTasteProfile")[2] : 0;
+		}
 		if(is.getTagCompound().hasKey("isSalted"))
 			base += 40;
 		if(is.getTagCompound().hasKey("Pickled"))
@@ -600,7 +611,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood
 
 	public int getTasteSaltyMod(ItemStack is) {
 		int mod = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteSaltyMod"))
+		if(is != null)
 			mod = is.getTagCompound().getInteger("tasteSaltyMod");
 		return mod;
 	}
@@ -608,14 +619,18 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood
 	@Override
 	public int getTasteBitter(ItemStack is) {
 		int base = tasteBitter;
-		if(is != null && is.getTagCompound().hasKey("tasteBitter"))
+		if(is != null)
+		{
 			base = is.getTagCompound().getInteger("tasteBitter");
+			base += is.getTagCompound().hasKey("cookedTasteProfile") ? is.getTagCompound().getIntArray("cookedTasteProfile")[3] : 0;
+			base += is.getTagCompound().hasKey("fuelTasteProfile") ? is.getTagCompound().getIntArray("fuelTasteProfile")[3] : 0;
+		}
 		return Math.max(base + getTasteBitterMod(is), 0);
 	}
 
 	public int getTasteBitterMod(ItemStack is) {
 		int mod = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteBitterMod"))
+		if(is != null)
 			mod = is.getTagCompound().getInteger("tasteBitterMod");
 		return mod;
 	}
@@ -623,14 +638,18 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood
 	@Override
 	public int getTasteSavory(ItemStack is) {
 		int base = tasteUmami;
-		if(is != null && is.getTagCompound().hasKey("tasteUmami"))
+		if(is != null)
+		{
 			base = is.getTagCompound().getInteger("tasteUmami");
+			base += is.getTagCompound().hasKey("cookedTasteProfile") ? is.getTagCompound().getIntArray("cookedTasteProfile")[4] : 0;
+			base += is.getTagCompound().hasKey("fuelTasteProfile") ? is.getTagCompound().getIntArray("fuelTasteProfile")[4] : 0;
+		}
 		return Math.max(base + getTasteSavoryMod(is), 0);
 	}
 
 	public int getTasteSavoryMod(ItemStack is) {
 		int mod = 0;
-		if(is != null && is.getTagCompound().hasKey("tasteUmamiMod"))
+		if(is != null)
 			mod = is.getTagCompound().getInteger("tasteUmamiMod");
 		return mod;
 	}

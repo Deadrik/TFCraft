@@ -18,6 +18,7 @@ import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
+import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
@@ -66,15 +67,6 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				ItemCookEvent eventMelt = new ItemCookEvent(fireItemStacks[1], output, this);
 				MinecraftForge.EVENT_BUS.post(eventMelt);
 				output = eventMelt.result;
-				if(fireItemStacks[1].getItem() instanceof IFood)
-				{
-					/*float mod = ((IFood)output.getItem()).getSmokeAbsorbMultiplier();
-					TFC_Core.setSweetMod(output, Math.round(fuelTasteProfile[0] * mod));
-					TFC_Core.setSourMod(output, Math.round(fuelTasteProfile[1] * mod));
-					TFC_Core.setSaltyMod(output, Math.round(fuelTasteProfile[2] * mod));
-					TFC_Core.setBitterMod(output, Math.round(fuelTasteProfile[3] * mod));
-					TFC_Core.setSavoryMod(output, Math.round(fuelTasteProfile[4] * mod));*/
-				}
 				int damage = 0;
 				ItemStack mold = null;
 				if(output != null)
@@ -354,6 +346,47 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		fireItemStacks[slot] = is;
 		if(is != null && is.stackSize > getInventoryStackLimit())
 			is.stackSize = getInventoryStackLimit();
+	}
+
+	@Override
+	public void careForInventorySlot(ItemStack is)
+	{
+		if(is != null)
+		{
+			float temp = TFC_ItemHeat.GetTemp(is);
+			if(fuelTimeLeft > 0 && is.getItem() instanceof IFood)
+			{
+				float inc = is.getTagCompound().getFloat("cookedLevel")+(fireTemp/700);
+				is.getTagCompound().setFloat("cookedLevel", inc);
+				temp = inc;
+				if(inc > 600)
+				{
+					int[] cookedTasteProfile = new int[] {0,0,0,0,0};
+					Random R = new Random(((ICookableFood)is.getItem()).getFoodID()+((int)is.getTagCompound().getFloat("cookedLevel")/100));
+					cookedTasteProfile[0] = R.nextInt(30)-15;
+					cookedTasteProfile[1] = R.nextInt(30)-15;
+					cookedTasteProfile[2] = R.nextInt(30)-15;
+					cookedTasteProfile[3] = R.nextInt(30)-15;
+					cookedTasteProfile[4] = R.nextInt(30)-15;
+					is.getTagCompound().setIntArray("cookedTasteProfile", cookedTasteProfile);
+					int[] f = fuelTasteProfile;
+					float mod = ((ICookableFood)is.getItem()).getSmokeAbsorbMultiplier();
+					f[0] *= mod;
+					f[1] *= mod;
+					f[2] *= mod;
+					f[3] *= mod;
+					f[4] *= mod;
+					is.getTagCompound().setIntArray("fuelTasteProfile", f);
+				}
+			}
+			else if(fireTemp > temp)
+			{
+				temp += TFC_ItemHeat.getTempIncrease(is);
+			}
+			else
+				temp -= TFC_ItemHeat.getTempDecrease(is);
+			TFC_ItemHeat.SetTemp(is, temp);
+		}
 	}
 
 	@Override
