@@ -62,8 +62,10 @@ public class ItemEgg extends ItemFoodTFC implements IFood
 	}
 
 	@Override
-	public float getDecayRate()
+	public float getDecayRate(ItemStack is)
 	{
+		if(is.getTagCompound().hasKey("Pickled"))
+			return 0.3f;
 		return 0.5f;
 	}
 }

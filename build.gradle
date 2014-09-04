@@ -91,6 +91,7 @@ from(sourceSets.main.resources.srcDirs) {
 jar {
     manifest.attributes(
             'FMLCorePlugin': 'com.bioxx.tfc.TFCASMLoadingPlugin',
-			'FMLCorePluginContainsFMLMod': 'true'
+			'FMLCorePluginContainsFMLMod': 'true',
+			'FMLAT': 'tfc_at.cfg'
     )
 	}

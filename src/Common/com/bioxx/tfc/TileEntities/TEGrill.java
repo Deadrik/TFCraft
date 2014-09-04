@@ -16,7 +16,7 @@ import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
-import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
 public class TEGrill extends NetworkTileEntity implements IInventory
@@ -122,7 +122,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 				MinecraftForge.EVENT_BUS.post(eventMelt);
 				output = eventMelt.result;
 
-				float mod = ((IFood)output.getItem()).getSmokeAbsorbMultiplier();
+				float mod = ((ICookableFood)output.getItem()).getSmokeAbsorbMultiplier();
 				TFC_Core.setSweetMod(output, Math.round(fuelTasteProfile[0] * mod));
 				TFC_Core.setSourMod(output, Math.round(fuelTasteProfile[1] * mod));
 				TFC_Core.setSaltyMod(output, Math.round(fuelTasteProfile[2] * mod));

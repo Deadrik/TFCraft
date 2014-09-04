@@ -3,6 +3,8 @@ package com.bioxx.tfc.Items;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,27 +29,13 @@ import com.bioxx.tfc.api.Interfaces.IQuiverAmmo;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemQuiver extends ItemTFCArmor implements IEquipable
+public class ItemQuiver extends ItemTerra implements IEquipable
 {
-	public ItemQuiver(Armor armor, int renderIndex, int armorSlot, int thermal, int type)
+	public ItemQuiver()
 	{
-		super(armor,renderIndex,armorSlot,thermal,type);
-		ArmorType = armor;
+		super();
 		this.setCreativeTab(TFCTabs.TFCArmor);
-		//this.setMaxDamage(ArmorType.getDurability(armorSlot));
 	}
-
-	public ItemQuiver(Armor armor, int renderIndex, int armorSlot, ArmorMaterial m, int thermal, int type)
-	{
-		super(armor, renderIndex, armorSlot,m,thermal,type);
-		ArmorType = armor;
-		this.setCreativeTab(TFCTabs.TFCArmor);
-		//this.setMaxDamage(ArmorType.getDurability(armorSlot));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-
 	/**
 	 * Gets an icon index based on an item's damage value and the given render pass
 	 */
@@ -258,5 +246,9 @@ public class ItemQuiver extends ItemTFCArmor implements IEquipable
 	public EquipType getEquipType(ItemStack is) 
 	{
 		return EquipType.BACK;
+	}
+	@Override
+	public void onEquippedRender() {
+        //GL11.glScalef(0.8F, 0.8F, 0.8F);
 	}
 }

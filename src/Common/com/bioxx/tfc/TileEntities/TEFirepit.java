@@ -2,7 +2,6 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -64,49 +63,51 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			{
 				float temp = TFC_ItemHeat.GetTemp(fireItemStacks[1]);
 				ItemStack output = index.getOutput(fireItemStacks[1], R);
+				ItemCookEvent eventMelt = new ItemCookEvent(fireItemStacks[1], output, this);
+				MinecraftForge.EVENT_BUS.post(eventMelt);
+				output = eventMelt.result;
 				if(fireItemStacks[1].getItem() instanceof IFood)
 				{
-					ItemCookEvent eventMelt = new ItemCookEvent(fireItemStacks[1], output, this);
-					MinecraftForge.EVENT_BUS.post(eventMelt);
-					output = eventMelt.result;
+					/*float mod = ((IFood)output.getItem()).getSmokeAbsorbMultiplier();
+					TFC_Core.setSweetMod(output, Math.round(fuelTasteProfile[0] * mod));
+					TFC_Core.setSourMod(output, Math.round(fuelTasteProfile[1] * mod));
+					TFC_Core.setSaltyMod(output, Math.round(fuelTasteProfile[2] * mod));
+					TFC_Core.setBitterMod(output, Math.round(fuelTasteProfile[3] * mod));
+					TFC_Core.setSavoryMod(output, Math.round(fuelTasteProfile[4] * mod));*/
 				}
-
-				float mod = ((IFood)output.getItem()).getSmokeAbsorbMultiplier();
-				TFC_Core.setSweetMod(output, Math.round(fuelTasteProfile[0] * mod));
-				TFC_Core.setSourMod(output, Math.round(fuelTasteProfile[1] * mod));
-				TFC_Core.setSaltyMod(output, Math.round(fuelTasteProfile[2] * mod));
-				TFC_Core.setBitterMod(output, Math.round(fuelTasteProfile[3] * mod));
-				TFC_Core.setSavoryMod(output, Math.round(fuelTasteProfile[4] * mod));
-
-				int damage = output.getItemDamage();
-				if(output.getItem() == fireItemStacks[1].getItem())
-					damage = fireItemStacks[1].getItemDamage();
+				int damage = 0;
 				ItemStack mold = null;
-
-				//If the input is unshaped metal
-				if(fireItemStacks[1].getItem() instanceof ItemMeltedMetal)
+				if(output != null)
 				{
-					//if both output slots are empty then just lower the input item into the first output slot
-					if(fireItemStacks[7] == null && fireItemStacks[8] == null)
+					damage = output.getItemDamage();
+					if(output.getItem() == fireItemStacks[1].getItem())
+						damage = fireItemStacks[1].getItemDamage();
+
+					//If the input is unshaped metal
+					if(fireItemStacks[1].getItem() instanceof ItemMeltedMetal)
 					{
-						fireItemStacks[7] = fireItemStacks[1].copy();
-						fireItemStacks[1] = null;
-						return;
-					}
-					//Otherwise if the first output has an item that doesnt match the input item then put the item in the second output slot
-					else if(fireItemStacks[7] != null && fireItemStacks[7].getItem() != TFCItems.CeramicMold && 
-							(fireItemStacks[7].getItem() != fireItemStacks[1].getItem() || fireItemStacks[7].getItemDamage() == 0))
-					{
-						if(fireItemStacks[8] == null)
+						//if both output slots are empty then just lower the input item into the first output slot
+						if(fireItemStacks[7] == null && fireItemStacks[8] == null)
 						{
-							fireItemStacks[8] = fireItemStacks[1].copy();
+							fireItemStacks[7] = fireItemStacks[1].copy();
 							fireItemStacks[1] = null;
 							return;
 						}
+						//Otherwise if the first output has an item that doesnt match the input item then put the item in the second output slot
+						else if(fireItemStacks[7] != null && fireItemStacks[7].getItem() != TFCItems.CeramicMold && 
+								(fireItemStacks[7].getItem() != fireItemStacks[1].getItem() || fireItemStacks[7].getItemDamage() == 0))
+						{
+							if(fireItemStacks[8] == null)
+							{
+								fireItemStacks[8] = fireItemStacks[1].copy();
+								fireItemStacks[1] = null;
+								return;
+							}
+						}
+						mold = new ItemStack(TFCItems.CeramicMold, 1);
+						mold.stackSize = 1;
+						mold.setItemDamage(1);
 					}
-					mold = new ItemStack(TFCItems.CeramicMold, 1);
-					mold.stackSize = 1;
-					mold.setItemDamage(1);
 				}
 				//Morph the input
 				fireItemStacks[1] = index.getMorph();
@@ -200,7 +201,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 						}
 					}
 				}
-				else
+				else if(output != null)
 				{
 					if(fireItemStacks[7] != null && 
 							fireItemStacks[7].getItem() == output.getItem() && 
@@ -317,22 +318,6 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		return null;
 	}
 
-	public int getSurroundedByWood(int x, int y, int z)
-	{
-		int count = 0;
-		if(worldObj.getBlock(x + 1, y, z).getMaterial() == Material.wood)
-			count++;
-		if(worldObj.getBlock(x - 1, y, z).getMaterial() == Material.wood)
-			count++;
-		if(worldObj.getBlock(x, y + 1, z).getMaterial() == Material.wood)
-			count++;
-		if(worldObj.getBlock(x, y, z + 1).getMaterial() == Material.wood)
-			count++;
-		if(worldObj.getBlock(x, y, z - 1).getMaterial() == Material.wood)
-			count++;
-		return count;
-	}
-
 	public void HandleFuelStack()
 	{
 		if(fireItemStacks[3] == null && fireItemStacks[0] != null)
@@ -401,9 +386,8 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 
-			int Surrounded = getSurroundedByWood(xCoord, yCoord, zCoord);
 			//If the fire is still burning and has fuel
-			if(fuelTimeLeft > 0 && fireTemp >= 1 && Surrounded != 5)
+			if(fuelTimeLeft > 0 && fireTemp >= 1)
 			{
 				if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 2)
 				{
@@ -425,11 +409,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			}
 
 			//Calculate the fire temp
-			float desiredTemp = 0;
-			if(Surrounded != 5)
-				desiredTemp = handleTemp();
-			else
-				desiredTemp = 1000;
+			float desiredTemp = handleTemp();
 
 			handleTempFlux(desiredTemp);
 

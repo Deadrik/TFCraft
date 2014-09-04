@@ -24,9 +24,11 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.Devices.BlockSluice;
 import com.bioxx.tfc.Blocks.Terrain.BlockOre;
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFC_Time;
 
-public class TileEntitySluice extends TileEntity implements IInventory
+public class TESluice extends TileEntity implements IInventory
 {
 	public int soilAmount;
 	public long lastUpdateTicks;
@@ -40,7 +42,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
 	private TreeSet<Integer> coreSampleTypes = new TreeSet<Integer>();
 	private ArrayList<ItemStack> coreSampleStacks = new ArrayList<ItemStack>();
 
-	public TileEntitySluice()
+	public TESluice()
 	{
 		sluiceItemStacks = new ItemStack[9];
 		soilAmount = 0;
@@ -292,13 +294,12 @@ public class TileEntitySluice extends TileEntity implements IInventory
 
 				while(processTimeRemaining > 100 && soilAmount > 0)
 				{
-					//items.add(mod_TFCraft.terraSmallOre);
-					//items.add(mod_TFCraft.terraTinyOre);
-
-					//BiomeGenBase biome1 = worldObj.getBiomeGenForCoords(xCoord + 100, zCoord);
-					//BiomeGenBase biome2 = worldObj.getBiomeGenForCoords(xCoord - 100, zCoord);
-					//BiomeGenBase biome3 = worldObj.getBiomeGenForCoords(xCoord, zCoord + 100);
-					//BiomeGenBase biome4 = worldObj.getBiomeGenForCoords(xCoord, zCoord - 100);
+					ChunkData cd = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
+					if(cd.sluicedAmount > 300)
+					{
+						processTimeRemaining = 0;
+						return;
+					}
 
 					float gemMod = 1;
 					float oreMod = 1;
@@ -402,6 +403,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
 						else if(r < 50)
 							addToInventory(new ItemStack(TFCItems.GemDiamond, 1, 0));
 					}
+					cd.sluicedAmount++;
 					processTimeRemaining -= 100;
 					soilAmount--;
 				}

@@ -196,13 +196,13 @@ public class EntityDamageHandler
 	{
 		int chance = rand.nextInt(100);
 		if(chance < 10)
-			return 4;//Helm
+			return 3;//Helm
 		else if(chance < 20)
-			return 1;//Feet
+			return 0;//Feet
 		else if(chance < 80)
-			return 3;//Chest
+			return 2;//Chest
 		else
-			return 2;//Legs
+			return 1;//Legs
 	}
 
 	private float processArmorDamage(ItemStack armor, float baseDamage)

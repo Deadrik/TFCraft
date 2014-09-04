@@ -5,7 +5,7 @@ import java.util.Random;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.TileEntities.TileEntitySluice;
+import com.bioxx.tfc.TileEntities.TESluice;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -50,10 +50,10 @@ public class BlockSluice extends BlockContainer
 		else
 		{
 			if(!isBlockFootOfBed(meta))
-				if((TileEntitySluice)world.getTileEntity(i, j, k)!=null)
+				if((TESluice)world.getTileEntity(i, j, k)!=null)
 				{
-					TileEntitySluice tileentitysluice;
-					tileentitysluice = (TileEntitySluice)world.getTileEntity(i, j, k);
+					TESluice tileentitysluice;
+					tileentitysluice = (TESluice)world.getTileEntity(i, j, k);
 					ItemStack is =entityplayer.getCurrentEquippedItem();
 					if(is != null && is.getItem() == TFCItems.GoldPan && is.getItemDamage() != 0)
 					{
@@ -294,7 +294,7 @@ public class BlockSluice extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) 
 	{
-		return new TileEntitySluice();
+		return new TESluice();
 	}
 
 	@Override

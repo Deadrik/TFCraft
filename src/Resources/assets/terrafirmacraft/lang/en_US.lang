@@ -186,25 +186,16 @@ item.Strawberry Leaf.name=Strawberry Leaf
 item.Wintergreen Leaf.name=Wintergreen Leaf
 
 #== Protein ==
-item.Raw Beef.name=Raw Beef
-item.Calamari Raw.name=Raw Calamari
-item.egg.name=Raw Egg
-item.fishRaw.name=Raw Fish
-item.Mutton Raw.name=Raw Mutton
-item.porkchop Raw.name=Raw Pork
-item.chicken Raw.name=Raw Poultry
-item.Venison.name=Raw Venison
-item.HorseMeat.name=Raw Horse Meat
-
-item.beefCooked.name=Cooked Beef
-item.Calamari Cooked.name=Cooked Calamari
+item.Beef.name=Beef
+item.Calamari.name=Calamari
+item.egg.name=Egg
+item.Fish.name=Fish
+item.Mutton.name=Mutton
+item.Porkchop.name=Pork
+item.Chicken.name=Poultry
+item.Venison.name=Venison
+item.HorseMeat.name=Horse Meat
 item.Egg Cooked.name=Cooked Egg
-item.fishCooked.name=Cooked Fish
-item.Mutton Cooked.name=Cooked Mutton
-item.porkchopCooked.name=Cooked Pork
-item.chickenCooked.name=Cooked Poultry
-item.VenisonCooked.name=Cooked Venison
-item.HorseMeatCooked.name=Cooked Horse Meat
 
 item.Soybeans.name=Soybeans
 item.Seeds Soybean.name=Soybean Seeds
@@ -2366,3 +2357,6 @@ item.Wet Mud Brick.name=Wet Mud Brick
 gui.overburdened=*Overburdened*
 gui.slot=Slot
 gui.slot.back=Back
+word.pickled=Pickled
+word.cooked=Cooked
+gui.barrel.pickling=Pickling

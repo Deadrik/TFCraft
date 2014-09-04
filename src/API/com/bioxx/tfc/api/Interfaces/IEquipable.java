@@ -10,4 +10,6 @@ public interface IEquipable
 	{
 		BACK, NULL;
 	}
+	
+	public void onEquippedRender();
 }

@@ -49,7 +49,7 @@ import com.bioxx.tfc.TileEntities.TELogPile;
 import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
-import com.bioxx.tfc.TileEntities.TileEntitySluice;
+import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TileEntityWorkbench;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -88,7 +88,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 		case 24:
 			return new GuiPlanSelection(player, (TEAnvil) te, world, x, y, z);//was metallurgy table
 		case 25:
-			return new GuiSluice(player.inventory, (TileEntitySluice) te, world, x, y, z);
+			return new GuiSluice(player.inventory, (TESluice) te, world, x, y, z);
 		case 26:
 			return new GuiBlastFurnace(player.inventory, (TEBlastFurnace) te, world, x, y, z);
 		case 27:

@@ -10,7 +10,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.Containers.Slots.SlotArmorTFC;
-import com.bioxx.tfc.Containers.Slots.SlotExtraEquipable;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Handlers.CraftingHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
@@ -20,7 +19,7 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 public class ContainerPlayerTFC extends ContainerPlayer
 {
 	private final EntityPlayer thePlayer;
-	
+
 	public ContainerPlayerTFC(InventoryPlayer playerInv, boolean par2, EntityPlayer player)
 	{
 		super(playerInv, par2, player);
@@ -37,15 +36,14 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			for (y = 0; y < 2; ++y)
 				this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18, 18 + x * 18));
 		}
-		
+
 		for (x = 0; x < playerInv.armorInventory.length; ++x)
 		{
 			int index = playerInv.getSizeInventory() - 1 - x;
 			this.addSlotToContainer(new SlotArmorTFC(this, playerInv, index, 8, 8 + x * 18, x));
 		}
 		PlayerInventory.buildInventoryLayout(this, playerInv, 8, 90, false, true);
-		PlayerInventory.addExtraEquipables(this, playerInv, 8, 90, false);
-		
+
 		//Manually built the remaining crafting slots because of an order issue. These have to be created after the default slots
 		if(player.getEntityData().hasKey("craftingTable") || !player.worldObj.isRemote)
 		{
@@ -64,7 +62,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			x = 1; y = 2; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18-50000, 18 + x * 18));
 			x = 2; y = 2; this.addSlotToContainer(new Slot(craftMatrix, y + x * 3, 82 + y * 18-50000, 18 + x * 18));
 		}
-
+		PlayerInventory.addExtraEquipables(this, playerInv, 8, 90, false);
 		this.onCraftMatrixChanged(this.craftMatrix);
 	}
 
@@ -118,7 +116,7 @@ public class ContainerPlayerTFC extends ContainerPlayer
 			{
 				if(origStack.getItem() instanceof ItemTFCArmor &&
 						((!((Slot)this.inventorySlots.get(5 + ((ItemTFCArmor)origStack.getItem()).getUnadjustedArmorType())).getHasStack() && ((ItemTFCArmor)origStack.getItem()).getUnadjustedArmorType() != 4)||
-						(!((Slot)this.inventorySlots.get(50)).getHasStack())))
+								(!((Slot)this.inventorySlots.get(50)).getHasStack())))
 				{
 					int j = ((ItemTFCArmor)origStack.getItem()).getUnadjustedArmorType() != 4 ? 5 + ((ItemTFCArmor)origStack.getItem()).getUnadjustedArmorType() : 50;
 					if (!this.mergeItemStack(slotStack, j, j + 1, false))

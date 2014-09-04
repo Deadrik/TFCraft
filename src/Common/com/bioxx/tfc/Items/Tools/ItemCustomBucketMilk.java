@@ -166,7 +166,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	}
 
 	@Override
-	public float getDecayRate()
+	public float getDecayRate(ItemStack is)
 	{
 		return 6f;
 	}
@@ -252,16 +252,5 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	public boolean renderWeight() {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public boolean canSmoke() {
-		return false;
-	}
-
-	@Override
-	public float getSmokeAbsorbMultiplier() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 }

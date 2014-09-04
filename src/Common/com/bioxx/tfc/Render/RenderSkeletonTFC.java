@@ -4,11 +4,14 @@ import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Entities.Mobs.EntitySkeletonTFC;
+import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Render.Models.ModelSkeletonTFC;
 
 import cpw.mods.fml.relauncher.Side;
@@ -19,6 +22,9 @@ public class RenderSkeletonTFC extends RenderBiped
 {
 	private static final ResourceLocation field_110862_k = new ResourceLocation("textures/entity/skeleton/skeleton.png");
 	private static final ResourceLocation field_110861_l = new ResourceLocation("textures/entity/skeleton/wither_skeleton.png");
+	public static final RenderQuiver renderQuiver = new RenderQuiver();
+	public static ItemStack quiver = new ItemStack(TFCItems.Quiver,1,1);
+	public static ItemStack ammo = ((ItemQuiver)TFCItems.Quiver).addItem(quiver, new ItemStack(TFCItems.Arrow,16,0));
 
 	public RenderSkeletonTFC()
 	{
@@ -55,6 +61,8 @@ public class RenderSkeletonTFC extends RenderBiped
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
+
+		renderQuiver.render(par1EntityLivingBase,quiver);
 		this.func_82438_a((EntitySkeletonTFC)par1EntityLivingBase, par2);
 	}
 

@@ -2,6 +2,7 @@ package com.bioxx.tfc.Food;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,9 +11,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -28,6 +31,7 @@ import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.ISize;
 import com.bioxx.tfc.api.Util.Helper;
@@ -35,7 +39,7 @@ import com.bioxx.tfc.api.Util.Helper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemFoodTFC extends ItemTerra implements ISize, IFood
+public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood
 {
 	/**
 	 * Food can contain multiple NBT Tags including
@@ -58,6 +62,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	protected int tasteUmami = 0;
 	protected boolean canSmoke = false;
 	protected float smokeAbsorb = 0.5f;
+
+	public IIcon cookedIcon;
+	protected boolean hasCookedIcon = false;
 
 	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um)
 	{
@@ -100,26 +107,69 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		return this;
 	}
 
+	public ItemFoodTFC setHasCookedIcon()
+	{
+		this.hasCookedIcon = true;
+		return this;
+	}
+
+	@Override
+	public void registerIcons(IIconRegister registerer)
+	{
+		super.registerIcons(registerer);
+		if(hasCookedIcon)
+		{
+			String name = this.getUnlocalizedName();
+			this.cookedIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + name.replace("item.", "")+"Cooked");
+		}
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack is, int par2)
 	{
-		if(is.hasTagCompound() && is.getTagCompound().hasKey("cooked"))
-			return 0xA08268;
+		//0xA08268 160 130 104
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("cookedLevel"))
+		{
+			float cookedLevel = is.getTagCompound().getFloat("cookedLevel");
+			int r = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f)); 
+			int b = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
+			int g = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
+			int rbg = (r << 16) + (b << 8) + g;
+			return rbg;
+		}
 
 		return 16777215;
 	}
 
 	@Override
-	public float getDecayRate()
+	public float getDecayRate(ItemStack is)
 	{
-		return decayRate * (TFC_Time.getYearRatio(96));
+		float mult = 1.0f;
+		if(is.getTagCompound().hasKey("Pickled"))
+			mult *= 0.8f;
+		if(is.getTagCompound().hasKey("isSalted"))
+			mult *= 0.5f;
+		return decayRate * (TFC_Time.getYearRatio(96)) * mult;
 	}
 
 	@Override
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
 		list.add(createTag(new ItemStack(this, 1), Global.FOOD_MAX_WEIGHT));
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack is)
+	{
+		String s = "";
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("Pickled"))
+			s += StatCollector.translateToLocal("word.pickled") + " ";
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("isSalted"))
+			s += StatCollector.translateToLocal("gui.food.salted") + " ";
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("cookedLevel") && is.getTagCompound().getFloat("cookedLevel") >= 600)
+			s += StatCollector.translateToLocal("word.cooked") + " ";
+		return (s + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(is) + ".name")).trim();
 	}
 
 	public static void addHeatInformation(ItemStack is, List arraylist)
@@ -153,8 +203,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 	public void addFoodInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{
 		NBTTagCompound tag = is.getTagCompound();
-		if(tag.hasKey("isSalted"))
-			arraylist.add("\u2022" + StatCollector.translateToLocal("gui.food.salted"));
+		/*if(tag.hasKey("isSalted"))
+			arraylist.add("\u2022" + StatCollector.translateToLocal("gui.food.salted"));*/
 		if(tag.hasKey("foodWeight") && tag.getFloat("foodWeight") != 999)
 		{
 			float ounces = Helper.roundNumber(tag.getFloat("foodWeight"), 100);
@@ -522,6 +572,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 		int base = tasteSour;
 		if(is != null && is.getTagCompound().hasKey("tasteSour"))
 			base = is.getTagCompound().getInteger("tasteSour");
+		if(is.getTagCompound().hasKey("Pickled"))
+			base += 30;
 		return Math.max(base + getTasteSourMod(is), 0);
 	}
 
@@ -540,6 +592,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, IFood
 
 		if(is.getTagCompound().hasKey("isSalted"))
 			base += 40;
+		if(is.getTagCompound().hasKey("Pickled"))
+			base += 10;
 
 		return Math.max(base + getTasteSaltyMod(is), 0);
 	}

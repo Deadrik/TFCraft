@@ -291,7 +291,7 @@ public class ItemMeal extends ItemTerra implements IFood
 	}
 
 	@Override
-	public float getDecayRate()
+	public float getDecayRate(ItemStack is)
 	{
 		return 0;
 	}
@@ -402,15 +402,5 @@ public class ItemMeal extends ItemTerra implements IFood
 	@Override
 	public boolean renderWeight() {
 		return true;
-	}
-
-	@Override
-	public boolean canSmoke() {
-		return false;
-	}
-
-	@Override
-	public float getSmokeAbsorbMultiplier() {
-		return 0;
 	}
 }

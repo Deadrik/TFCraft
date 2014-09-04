@@ -11,6 +11,8 @@ import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Events.ItemCookEvent;
+import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -18,6 +20,15 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
 public class FoodCraftingHandler
 {
+	@SubscribeEvent
+	public void onFoodCook(ItemCookEvent event)
+	{
+		if(event.input1.getItem() instanceof IFood)
+		{
+
+		}
+	}
+
 	@SubscribeEvent
 	public void onFoodCrafting(ItemCraftedEvent e)//(EntityPlayer player, ItemStack itemstack, IInventory iinventory)
 	{

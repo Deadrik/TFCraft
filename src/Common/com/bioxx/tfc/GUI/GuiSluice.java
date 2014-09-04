@@ -12,15 +12,15 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Containers.ContainerSluice;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.TileEntities.TileEntitySluice;
+import com.bioxx.tfc.TileEntities.TESluice;
 
 
 public class GuiSluice extends GuiContainer
 {
-	private TileEntitySluice sluiceInventory;
+	private TESluice sluiceInventory;
 
 
-	public GuiSluice(InventoryPlayer inventoryplayer, TileEntitySluice tileEntitySluice, World world, int x, int y, int z)
+	public GuiSluice(InventoryPlayer inventoryplayer, TESluice tileEntitySluice, World world, int x, int y, int z)
 	{
 		super(new ContainerSluice(inventoryplayer,tileEntitySluice, world, x, y, z) );
 		sluiceInventory = tileEntitySluice;

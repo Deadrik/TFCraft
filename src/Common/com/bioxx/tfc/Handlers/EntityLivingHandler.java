@@ -40,6 +40,8 @@ import com.bioxx.tfc.api.Interfaces.IEquipable;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityLivingHandler
 {
@@ -187,6 +189,7 @@ public class EntityLivingHandler
 	}
 
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void handleFOV(FOVUpdateEvent event)
 	{
 		event.newfov = 1.0f;
@@ -202,6 +205,9 @@ public class EntityLivingHandler
 		if(player.inventory instanceof InventoryPlayerTFC){
 
 			quiver = ((InventoryPlayerTFC)player.inventory).extraEquipInventory[0];
+			if(quiver != null && !(quiver.getItem() instanceof ItemQuiver)){
+				quiver = null;
+			}
 			for(int i = 0; i < 9; i++)
 			{
 				if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemJavelin)

@@ -7,14 +7,14 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
-import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.Interfaces.ISize;
 
-public class SlotFoodOnly extends SlotSize
+public class SlotCookableFoodOnly extends SlotSize
 {
 	List excpetionsFG = new ArrayList<EnumFoodGroup>();
 	List inclusionsFG = new ArrayList<EnumFoodGroup>();
-	public SlotFoodOnly(IInventory iinventory, int i, int j, int k)
+	public SlotCookableFoodOnly(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
 	}
@@ -22,9 +22,9 @@ public class SlotFoodOnly extends SlotSize
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.getItem() instanceof IFood)
+		if(itemstack.getItem() instanceof ICookableFood)
 		{
-			EnumFoodGroup efg = ((IFood)itemstack.getItem()).getFoodGroup();
+			EnumFoodGroup efg = ((ICookableFood)itemstack.getItem()).getFoodGroup();
 			if(efg == null)
 				return false;
 			boolean except = excpetionsFG.contains(efg);
@@ -37,14 +37,14 @@ public class SlotFoodOnly extends SlotSize
 		return false;
 	}
 
-	public SlotFoodOnly addFGException(EnumFoodGroup... ex)
+	public SlotCookableFoodOnly addFGException(EnumFoodGroup... ex)
 	{
 		for(int i = 0; i < ex.length; i++)
 			excpetionsFG.add(ex[i]);
 		return this;
 	}
 
-	public SlotFoodOnly addFGInclusion(EnumFoodGroup... ex)
+	public SlotCookableFoodOnly addFGInclusion(EnumFoodGroup... ex)
 	{
 		for(int i = 0; i < ex.length; i++)
 			inclusionsFG.add(ex[i]);
