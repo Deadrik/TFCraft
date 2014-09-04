@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.WeatherManager;
+import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -199,8 +200,15 @@ public class ClientOverrides
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
 			GL11.glDisable(GL11.GL_BLEND);
 			float decayPerc = Math.max(((IFood)is.getItem()).getFoodDecay(is) / ((IFood)is.getItem()).getFoodWeight(is), 0);
+			float cookPerc = Math.max(Math.min(is.getTagCompound().getFloat("cookedLevel")/600f, 1), 0);
 
-			renderQuad(x +1, y + 13, 13, 1, 0);
+			if(is.getItem() instanceof ItemFoodTFC && ((ItemFoodTFC)is.getItem()).cookedIcon != null)
+			{
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, cookPerc);
+				renderIcon(x, y,((ItemFoodTFC)is.getItem()).cookedIcon, 16, 16);
+			}
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			//renderQuad(x +1, y + 13, 13, 1, 0);
 			float decayTop = decayPerc * 13.0F;
 
 			if(((IFood)is.getItem()).renderDecay())
@@ -223,13 +231,18 @@ public class ClientOverrides
 			}
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glEnable(GL11.GL_LIGHTING);
+			GL11.glEnable(GL11.GL_ALPHA_TEST);
 			GL11.glEnable(GL11.GL_DEPTH_TEST);
+			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		}
 	}
 
 	public static void renderIcon(int x, int y, IIcon icon, int sizeX, int sizeY)
 	{
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glEnable(GL11.GL_BLEND);
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 		tessellator.addVertexWithUV((double)(x + 0), (double)(y + sizeY), (double)200, (double)icon.getMinU(), (double)icon.getMaxV());
@@ -237,6 +250,9 @@ public class ClientOverrides
 		tessellator.addVertexWithUV((double)(x + sizeX), (double)(y + 0), (double)200, (double)icon.getMaxU(), (double)icon.getMinV());
 		tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)200, (double)icon.getMinU(), (double)icon.getMinV());
 		tessellator.draw();
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		GL11.glDisable(GL11.GL_BLEND);
 	}
 
 	private static void renderQuad(double x, double y, double sizeX, double sizeY, int color)

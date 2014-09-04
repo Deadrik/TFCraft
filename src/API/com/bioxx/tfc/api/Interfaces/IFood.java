@@ -9,7 +9,7 @@ public interface IFood
 {
 	public EnumFoodGroup getFoodGroup();
 	public int getFoodID();
-	public float getDecayRate();
+	public float getDecayRate(ItemStack is);
 	public float getFoodWeight(ItemStack is);
 	public float getFoodMaxWeight(ItemStack is);
 	public float getFoodDecay(ItemStack is);

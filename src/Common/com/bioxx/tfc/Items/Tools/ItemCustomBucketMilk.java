@@ -166,7 +166,7 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	}
 
 	@Override
-	public float getDecayRate()
+	public float getDecayRate(ItemStack is)
 	{
 		return 6f;
 	}

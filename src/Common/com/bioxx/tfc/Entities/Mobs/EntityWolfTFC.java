@@ -182,13 +182,13 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		super.setTamed(par1);
 
 		double healthRatio = this.getHealth() / this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() ;
-		
+
 		if (par1)
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.WolfHealth);
-			
+
 		else
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.WolfHealth);
-		
+
 		this.setHealth((float)(healthRatio * this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()));
 	}
 
@@ -463,21 +463,13 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			{
 				Item item = player.getHeldItem().getItem();
 				if(item == (TFCItems.muttonRaw)||
-						item ==(TFCItems.muttonCooked)||
 						item ==(TFCItems.horseMeatRaw)||
-						item ==(TFCItems.horseMeatCooked)||
 						item ==(TFCItems.venisonRaw)||
-						item ==(TFCItems.venisonCooked)||
 						item ==(TFCItems.porkchopRaw)||
-						item ==(TFCItems.porkchopCooked)||
 						item ==(TFCItems.beefRaw)||
-						item ==(TFCItems.beefCooked)||
 						item ==(TFCItems.chickenRaw)||
-						item ==(TFCItems.chickenCooked)||
 						item ==(TFCItems.fishRaw)||
-						item ==(TFCItems.fishCooked)||
-						item ==(TFCItems.calamariRaw)||
-						item ==(TFCItems.calamariCooked))
+						item ==(TFCItems.calamariRaw))
 				{
 					if(item instanceof ItemFoodTFC && hunger <= 160000)
 					{

@@ -68,7 +68,6 @@ import com.bioxx.tfc.Items.Pottery.ItemPotteryPot;
 import com.bioxx.tfc.Items.Pottery.ItemPotterySmallVessel;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemCustomAxe;
-import com.bioxx.tfc.Items.Tools.ItemSteelBucketBlue;
 import com.bioxx.tfc.Items.Tools.ItemCustomBow;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucket;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
@@ -76,7 +75,6 @@ import com.bioxx.tfc.Items.Tools.ItemCustomFishingRod;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
 import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
 import com.bioxx.tfc.Items.Tools.ItemCustomPickaxe;
-import com.bioxx.tfc.Items.Tools.ItemSteelBucketRed;
 import com.bioxx.tfc.Items.Tools.ItemCustomSaw;
 import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
 import com.bioxx.tfc.Items.Tools.ItemCustomShovel;
@@ -89,6 +87,8 @@ import com.bioxx.tfc.Items.Tools.ItemJavelin;
 import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
 import com.bioxx.tfc.Items.Tools.ItemProPick;
 import com.bioxx.tfc.Items.Tools.ItemSpindle;
+import com.bioxx.tfc.Items.Tools.ItemSteelBucketBlue;
+import com.bioxx.tfc.Items.Tools.ItemSteelBucketRed;
 import com.bioxx.tfc.Items.Tools.ItemWritableBookTFC;
 import com.bioxx.tfc.api.Armor;
 import com.bioxx.tfc.api.Metal;
@@ -752,21 +752,13 @@ public class TFCItems
 	public static Item RiceWhole;
 
 	public static Item muttonRaw;
-	public static Item muttonCooked;
 	public static Item calamariRaw;
-	public static Item calamariCooked;
 	public static Item venisonRaw;
-	public static Item venisonCooked;
 	public static Item horseMeatRaw;
-	public static Item horseMeatCooked;
 	public static Item porkchopRaw;
-	public static Item porkchopCooked;
 	public static Item fishRaw;
-	public static Item fishCooked;
 	public static Item beefRaw;
-	public static Item beefCooked;
 	public static Item chickenRaw;
-	public static Item chickenCooked;
 
 	public static Item LooseRock;
 	public static Item FlatRock;
@@ -1655,24 +1647,16 @@ public class TFCItems
 		//Tastes are Sweet, Sour, Salty, Bitter, Umami
 
 		//Proteins
-		porkchopRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("porkchopRaw");
-		porkchopCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 65).setDecayRate(1.8f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("porkchopCooked");
-		fishRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, true).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("fishRaw");
-		fishCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 50).setDecayRate(2.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("fishCooked");
-		beefRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 50, false, false).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("beefRaw");
-		beefCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 75).setDecayRate(1.8f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("beefCooked");
-		chickenRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("chickenRaw");
-		chickenCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 60).setDecayRate(1.8f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("chickenCooked");
+		porkchopRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Porkchop");
+		fishRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, true).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Fish");
+		beefRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 50, false, false).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Beef");
+		chickenRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Chicken");
 		Soybean = new ItemFoodTFC(EnumFoodGroup.Protein, 10, 0, 0, 0, 40, true).setUnlocalizedName("Soybeans");
 		EggCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 25).setDecayRate(3.0f).setUnlocalizedName("Egg Cooked");
-		calamariRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 20, 0, 35, false, false).setCanSmoke().setSmokeAbsorbMultiplier(1F).setDecayRate(4.0f).setUnlocalizedName("Calamari Raw");
-		calamariCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 20, 0, 40).setCanSmoke().setSmokeAbsorbMultiplier(1F).setDecayRate(2.0f).setUnlocalizedName("Calamari Cooked");
-		muttonRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Mutton Raw");
-		muttonCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 60).setDecayRate(1.8f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Mutton Cooked");
-		venisonRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 5, 0, 0, 0, 50, false, false).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Venison");
-		venisonCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 5, 0, 0, 0, 70).setDecayRate(1.8f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("VenisonCooked");
-		horseMeatRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("HorseMeat");
-		horseMeatCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 65).setDecayRate(1.8f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("HorseMeatCooked");
+		calamariRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 20, 0, 35, false, false).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setDecayRate(4.0f).setUnlocalizedName("Calamari");
+		muttonRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Mutton");
+		venisonRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 5, 0, 0, 0, 50, false, false).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Venison");
+		horseMeatRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("HorseMeat");
 
 		//Dairy
 		Cheese = new ItemFoodTFC(EnumFoodGroup.Dairy, 0, 10, 20, 0, 35).setDecayRate(0.5f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Cheese");
@@ -2679,7 +2663,6 @@ public class TFCItems
 		GameRegistry.registerItem(RiceBread, RiceBread.getUnlocalizedName());
 		GameRegistry.registerItem(CornBread, CornBread.getUnlocalizedName());
 		GameRegistry.registerItem(calamariRaw, calamariRaw.getUnlocalizedName());
-		GameRegistry.registerItem(calamariCooked, calamariCooked.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsWheat, SeedsWheat.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsBarley, SeedsBarley.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsRye, SeedsRye.getUnlocalizedName());
@@ -2701,19 +2684,12 @@ public class TFCItems
 		GameRegistry.registerItem(SeedsSquash, SeedsSquash.getUnlocalizedName());
 		GameRegistry.registerItem(SeedsJute, SeedsJute.getUnlocalizedName());
 		GameRegistry.registerItem(muttonRaw, muttonRaw.getUnlocalizedName());
-		GameRegistry.registerItem(muttonCooked, muttonCooked.getUnlocalizedName());
 		GameRegistry.registerItem(venisonRaw, venisonRaw.getUnlocalizedName());
-		GameRegistry.registerItem(venisonCooked, venisonCooked.getUnlocalizedName());
 		GameRegistry.registerItem(horseMeatRaw, horseMeatRaw.getUnlocalizedName());
-		GameRegistry.registerItem(horseMeatCooked, horseMeatCooked.getUnlocalizedName());
 		GameRegistry.registerItem(porkchopRaw, porkchopRaw.getUnlocalizedName());
-		GameRegistry.registerItem(porkchopCooked, porkchopCooked.getUnlocalizedName());
 		GameRegistry.registerItem(fishRaw, fishRaw.getUnlocalizedName());
-		GameRegistry.registerItem(fishCooked, fishCooked.getUnlocalizedName());
 		GameRegistry.registerItem(beefRaw, beefRaw.getUnlocalizedName());
-		GameRegistry.registerItem(beefCooked, beefCooked.getUnlocalizedName());
 		GameRegistry.registerItem(chickenRaw, chickenRaw.getUnlocalizedName());
-		GameRegistry.registerItem(chickenCooked, chickenCooked.getUnlocalizedName());
 
 		GameRegistry.registerItem(WintergreenBerry, WintergreenBerry.getUnlocalizedName());
 		GameRegistry.registerItem(Blueberry, Blueberry.getUnlocalizedName());

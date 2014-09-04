@@ -337,22 +337,23 @@ public class ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand, 1, 32767), 1, 600, new ItemStack(Blocks.glass, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand2, 1, 32767), 1, 600, new ItemStack(Blocks.glass, 1)));
 		//Food
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.porkchopRaw, 1), 1, 200, new ItemStack(TFCItems.porkchopCooked, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.beefRaw, 1), 1, 200, new ItemStack(TFCItems.beefCooked, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.muttonRaw,1),1, 200, new ItemStack(TFCItems.muttonCooked,1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.venisonRaw,1),1, 200, new ItemStack(TFCItems.venisonCooked,1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.calamariRaw,1),1, 200, new ItemStack(TFCItems.calamariCooked,1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.chickenRaw, 1), 1, 200, new ItemStack(TFCItems.chickenCooked, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.fishRaw, 1), 1, 200, new ItemStack(TFCItems.fishCooked, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Egg, 1), 1, 140, new ItemStack(TFCItems.EggCooked, 1)).setKeepNBT(true));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.horseMeatRaw, 1), 1, 200, new ItemStack(TFCItems.horseMeatCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.porkchopRaw, 1), 1, 1200, null));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.beefRaw, 1), 1, 1200, null));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.muttonRaw,1),1, 1200, null));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.venisonRaw,1),1, 1200, null));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.calamariRaw,1),1, 1200, null));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.chickenRaw, 1), 1, 1200, null));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.fishRaw, 1), 1, 1200, null));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Egg, 1), 1, 600, new ItemStack(TFCItems.EggCooked, 1)).setKeepNBT(true));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.EggCooked, 1), 1, 600, null));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.horseMeatRaw, 1), 1, 1200, null));
 
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WheatDough, 1), 1, 200, new ItemStack(TFCItems.WheatBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BarleyDough, 1), 1, 200, new ItemStack(TFCItems.BarleyBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RyeDough, 1), 1, 200, new ItemStack(TFCItems.RyeBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OatDough, 1), 1, 200, new ItemStack(TFCItems.OatBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RiceDough, 1), 1, 200, new ItemStack(TFCItems.RiceBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 1, 200, new ItemStack(TFCItems.CornBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WheatDough, 1), 1, 1200, new ItemStack(TFCItems.WheatBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BarleyDough, 1), 1, 1200, new ItemStack(TFCItems.BarleyBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RyeDough, 1), 1, 1200, new ItemStack(TFCItems.RyeBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OatDough, 1), 1, 1200, new ItemStack(TFCItems.OatBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RiceDough, 1), 1, 1200, new ItemStack(TFCItems.RiceBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 1, 2100, new ItemStack(TFCItems.CornBread, 1)));
 
 		//manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1, 32767), 0.2, 200, new ItemStack(Items.bowl, 1)));
 

@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import com.bioxx.tfc.TileEntities.NetworkTileEntity;
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class TEFireEntity extends NetworkTileEntity
 {
@@ -26,8 +27,16 @@ public class TEFireEntity extends NetworkTileEntity
 		if(is != null)
 		{
 			float temp = TFC_ItemHeat.GetTemp(is);
-			if(fireTemp > temp)
+			if(fuelTimeLeft > 0 && is.getItem() instanceof IFood)
+			{
 				temp += TFC_ItemHeat.getTempIncrease(is);
+				is.getTagCompound().setFloat("cookedLevel", is.getTagCompound().getFloat("cookedLevel")+(fireTemp/700));
+			}
+			else if(fireTemp > temp)
+			{
+				temp += TFC_ItemHeat.getTempIncrease(is);
+
+			}
 			else
 				temp -= TFC_ItemHeat.getTempDecrease(is);
 			TFC_ItemHeat.SetTemp(is, temp);

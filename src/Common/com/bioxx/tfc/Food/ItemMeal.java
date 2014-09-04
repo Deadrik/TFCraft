@@ -291,7 +291,7 @@ public class ItemMeal extends ItemTerra implements IFood
 	}
 
 	@Override
-	public float getDecayRate()
+	public float getDecayRate(ItemStack is)
 	{
 		return 0;
 	}

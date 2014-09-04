@@ -1035,14 +1035,11 @@ public class TFC_Core
 			float thisDecayRate = 1.0f;
 			// Get the base food decay rate
 			if (is.getItem() instanceof IFood)
-				thisDecayRate = ((IFood) is.getItem()).getDecayRate();
+				thisDecayRate = ((IFood) is.getItem()).getDecayRate(is);
 			// check if the food has a specially applied decay rate in its nbt
 			// for some reason
 			if (nbt.hasKey("decayRate"))
 				thisDecayRate = nbt.getFloat("decayRate");
-			// if the food is salted then we cut the decay rate in half
-			if (nbt.hasKey("isSalted"))
-				thisDecayRate *= 0.5f;
 
 			/*
 			 * Here we calculate the decayRate based on the environment. We do

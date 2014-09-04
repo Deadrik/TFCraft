@@ -2508,14 +2508,6 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.calamariRaw, 1), 0), new Object[] {new ItemStack(TFCItems.calamariRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.muttonRaw, 1), 0), new Object[] {new ItemStack(TFCItems.muttonRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.horseMeatRaw, 1), 0), new Object[] {new ItemStack(TFCItems.horseMeatRaw, 1), new ItemStack(TFCItems.Powder, 1, 9)});
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.venisonCooked, 1), 0), new Object[] {new ItemStack(TFCItems.venisonCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.beefCooked, 1), 0), new Object[] {new ItemStack(TFCItems.beefCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.chickenCooked, 1), 0), new Object[] {new ItemStack(TFCItems.chickenCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.porkchopCooked, 1), 0), new Object[] {new ItemStack(TFCItems.porkchopCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.fishCooked, 1), 0), new Object[] {new ItemStack(TFCItems.fishCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.calamariCooked, 1), 0), new Object[] {new ItemStack(TFCItems.calamariCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.muttonCooked, 1), 0), new Object[] {new ItemStack(TFCItems.muttonCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
-		GameRegistry.addShapelessRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.horseMeatCooked, 1), 0), new Object[] {new ItemStack(TFCItems.horseMeatCooked, 1), new ItemStack(TFCItems.Powder, 1, 9)});
 		for(Item i : TFCItems.FoodList)
 		{
 			addFoodMergeRecipe(i);
