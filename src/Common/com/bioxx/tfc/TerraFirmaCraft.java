@@ -306,6 +306,7 @@ public class TerraFirmaCraft
 		TFCOptions.useDecayProtection = TFCOptions.getBooleanFor(config, "Food Decay", "useDecayProtection", true,"Set this to false if you want food to auto decay when a chunk is loaded instead of limiting decay when a chunk has been unloaded for a long period.");
 		TFCOptions.decayProtectionDays = TFCOptions.getIntFor(config,"Food Decay","decayProtectionDays",24, "If a food item has not been ticked for >= this number of days than when it is ticked for the first time, only a small amount of decay will occur.");
 		TFCOptions.decayMultiplier = (float)TFCOptions.getDoubleFor(config,"Food Decay","FoodDecayMultiplier", 1.0, "This is a global multiplier for food decay. Unlike FoodDecayRate which only modifies the base decay and not the environmental effect upon decay, this multiplier will multiply against the entire amount. Set to 0 to turn decay off.");
+		TFCOptions.saltDecayScale = (float)TFCOptions.getDoubleFor(config, "Food Decay", "SaltDecayScaling", 0.5f, "This is a multiplier on food decay rate when salted. Salting food will reduce the food decay to this percent of normal decay (default 0.5 = 50%).");
 
 		//Cavein Options
 		TFCOptions.minimumRockLoad = TFCOptions.getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
