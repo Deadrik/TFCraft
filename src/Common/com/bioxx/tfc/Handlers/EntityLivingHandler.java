@@ -94,24 +94,31 @@ public class EntityLivingHandler
 					setThirsty(player, false);
 				}
 
-				//Scan the players inventory for any items that are too heavy to carry normally
-				boolean isOverburdened = false;
-				for (int i = 0; i < player.inventory.mainInventory.length;i++)
+				if (player.capabilities.isCreativeMode)
 				{
-					ItemStack is = player.inventory.getStackInSlot(i);
-					if(is != null && is.getItem() instanceof IEquipable)
+					setOverburdened(player, false);
+				}
+				else
+				{
+					boolean isOverburdened = false;
+					//Scan the players inventory for any items that are too heavy to carry normally
+					for (int i = 0; i < player.inventory.mainInventory.length;i++)
 					{
-						if(is.getItem() == Item.getItemFromBlock(TFCBlocks.Barrel))
+						ItemStack is = player.inventory.getStackInSlot(i);
+						if(is != null && is.getItem() instanceof IEquipable)
 						{
-							if(is.hasTagCompound())
+							if(is.getItem() == Item.getItemFromBlock(TFCBlocks.Barrel))
 							{
-								isOverburdened = true;
+								if(is.hasTagCompound())
+								{
+									isOverburdened = true;
+									break;
+								}
 							}
 						}
 					}
+					setOverburdened(player, isOverburdened);
 				}
-
-				setOverburdened(player, isOverburdened);
 
 				//Handle Spawn Protection
 				NBTTagCompound nbt = player.getEntityData();
