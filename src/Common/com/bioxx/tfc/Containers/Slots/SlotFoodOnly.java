@@ -29,6 +29,8 @@ public class SlotFoodOnly extends SlotSize
 				return false;
 			boolean except = excpetionsFG.contains(efg);
 			boolean include = inclusionsFG.contains(efg) || inclusionsFG.size() == 0;
+			if (except || !include)
+				return false;
 			if (itemstack.getItem() instanceof ISize && ((ISize) itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize)
 				return super.isItemValid(itemstack);
 		}
