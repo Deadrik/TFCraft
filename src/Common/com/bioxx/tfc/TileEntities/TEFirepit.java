@@ -18,7 +18,6 @@ import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
-import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
@@ -361,22 +360,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				temp = inc;
 				if(inc > 600)
 				{
-					int[] cookedTasteProfile = new int[] {0,0,0,0,0};
-					Random R = new Random(((ICookableFood)is.getItem()).getFoodID()+((int)is.getTagCompound().getFloat("cookedLevel")/100));
-					cookedTasteProfile[0] = R.nextInt(30)-15;
-					cookedTasteProfile[1] = R.nextInt(30)-15;
-					cookedTasteProfile[2] = R.nextInt(30)-15;
-					cookedTasteProfile[3] = R.nextInt(30)-15;
-					cookedTasteProfile[4] = R.nextInt(30)-15;
-					is.getTagCompound().setIntArray("cookedTasteProfile", cookedTasteProfile);
-					int[] f = fuelTasteProfile;
-					float mod = ((ICookableFood)is.getItem()).getSmokeAbsorbMultiplier();
-					f[0] *= mod;
-					f[1] *= mod;
-					f[2] *= mod;
-					f[3] *= mod;
-					f[4] *= mod;
-					is.getTagCompound().setIntArray("fuelTasteProfile", f);
+					is.getTagCompound().setInteger("fuelTasteProfile", this.fuelTasteProfile);
 				}
 			}
 			else if(fireTemp > temp)
@@ -434,7 +418,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				if(fireItemStacks[5] != null)
 				{
 					EnumFuelMaterial m = TFC_Core.getFuelMaterial(fireItemStacks[5]);
-					fuelTasteProfile = m.tasteProfile;
+					fuelTasteProfile = m.ordinal();
 					fireItemStacks[5] = null;
 					fuelTimeLeft = m.burnTimeMax;
 					fuelBurnTemp = m.burnTempMax;

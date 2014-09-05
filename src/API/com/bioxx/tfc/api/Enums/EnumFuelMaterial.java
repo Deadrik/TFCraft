@@ -27,11 +27,6 @@ public enum EnumFuelMaterial
 	public final int burnTempMax;//degrees celcius
 	public final int[] tasteProfile;
 
-
-	private static final EnumFuelMaterial Materials[] = new EnumFuelMaterial[] {
-		ASH,ASPEN,BIRCH,CHESTNUT,DOUGLASFIR,HICKORY,MAPLE,OAK,PINE,REDWOOD,SPRUCE,
-		SYCAMORE,WHITECEDAR,WHITEELM,WILLOW,KAPOK,PEAT,ACACIA};
-
 	private EnumFuelMaterial(String s, int i, int j, int[] taste)
 	{
 		burnTempMax = i;

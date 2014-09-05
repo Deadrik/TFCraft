@@ -409,7 +409,7 @@ public class TEForge extends TEFireEntity implements IInventory
 				EnumFuelMaterial m = TFC_Core.getFuelMaterial(fireItemStacks[7]);
 				fuelTimeLeft = m.burnTimeMax;
 				fuelBurnTemp = m.burnTempMax;
-				fuelTasteProfile = m.tasteProfile;
+				fuelTasteProfile = m.ordinal();
 				fireItemStacks[7] = null;
 			}
 			else

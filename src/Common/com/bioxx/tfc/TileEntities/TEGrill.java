@@ -137,14 +137,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 					storage[i].getTagCompound().setIntArray("cookedTasteProfile", cookedTasteProfile);
 					if(te != null)
 					{
-						fuelTasteProfile = te.fuelTasteProfile;
-						float mod = ((ICookableFood)storage[i].getItem()).getSmokeAbsorbMultiplier();
-						fuelTasteProfile[0] *= mod;
-						fuelTasteProfile[1] *= mod;
-						fuelTasteProfile[2] *= mod;
-						fuelTasteProfile[3] *= mod;
-						fuelTasteProfile[4] *= mod;
-						storage[i].getTagCompound().setIntArray("fuelTasteProfile", fuelTasteProfile);
+						storage[i].getTagCompound().setInteger("fuelTasteProfile", te.fuelTasteProfile);
 					}
 				}
 			}

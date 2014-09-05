@@ -13,7 +13,7 @@ public class TEFireEntity extends NetworkTileEntity
 	public int maxFireTempScale;
 	public int fuelTimeLeft = 0;
 	public int fuelBurnTemp = 0;
-	public int[] fuelTasteProfile = new int[] {0,0,0,0,0};
+	public int fuelTasteProfile = 0;
 
 	public static final int AIRTOADD = 200;
 
@@ -115,7 +115,7 @@ public class TEFireEntity extends NetworkTileEntity
 		nbt.setInteger("fuelTime", fuelTimeLeft);
 		nbt.setInteger("fuelTemp", fuelBurnTemp);
 		nbt.setInteger("bellowsAir", airFromBellows);
-		nbt.setIntArray("fuelTasteProfile", fuelTasteProfile);
+		nbt.setInteger("fuelTasteProfile", fuelTasteProfile);
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public class TEFireEntity extends NetworkTileEntity
 		fuelTimeLeft = nbt.getInteger("fuelTime");
 		fuelBurnTemp = nbt.getInteger("fuelTemp");
 		airFromBellows = nbt.getInteger("airBellows");
-		fuelTasteProfile = nbt.getIntArray("fuelTasteProfile");
+		fuelTasteProfile = nbt.getInteger("fuelTasteProfile");
 	}
 
 	@Override
