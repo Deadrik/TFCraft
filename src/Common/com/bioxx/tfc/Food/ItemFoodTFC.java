@@ -149,7 +149,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	{
 		float mult = 1.0f;
 		if(is.getTagCompound().hasKey("Pickled"))
-			mult *= 0.8f;
+			mult *= 0.5f;
 		if(is.getTagCompound().hasKey("isSalted"))
 			mult *= 0.5f;
 		return decayRate * (TFC_Time.getYearRatio(96)) * mult;
