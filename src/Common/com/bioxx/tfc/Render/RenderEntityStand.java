@@ -14,6 +14,7 @@ import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Entities.EntityStand;
 import com.bioxx.tfc.Render.Models.ModelStand;
 
@@ -37,6 +38,8 @@ public class RenderEntityStand extends RenderBiped
 	ModelRenderer HornL1;
 	ModelRenderer HornR2;
 	ModelRenderer HornL2;
+	
+	RenderLargeItem standBlockRenderer = new RenderLargeItem();
 
 	public RenderEntityStand()
 	{
@@ -102,11 +105,12 @@ public class RenderEntityStand extends RenderBiped
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
 		GL11.glScalef(1f, 0.95f, 1f);
+		standBlockRenderer.render(par1EntityLivingBase, new ItemStack(TFCBlocks.ArmourStand,1,0));
 	}
 
 	protected int setArmorModelTFC(EntityStand stand, int par2, float par3)
 	{
-		ItemStack itemstack = stand.getEquipmentInSlot(4 - par2);
+		ItemStack itemstack = stand.getArmorInSlot(3 - par2);
 
 		if (itemstack != null)
 		{

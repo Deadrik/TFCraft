@@ -3,6 +3,8 @@ package com.bioxx.tfc.Blocks.Devices;
 import java.util.List;
 import java.util.Random;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -31,12 +33,13 @@ import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.TileEntities.TEStand;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Interfaces.IEquipable;
 import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockStand extends BlockTerraContainer implements IMultipleBlock
+public class BlockStand extends BlockTerraContainer implements IMultipleBlock, IEquipable
 {
 	private final Random random = new Random();
 	String[] woodNames;
@@ -309,5 +312,18 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock
 	public Block getBlockTypeForRender()
 	{
 		return TFCBlocks.Planks;
+	}
+
+	@Override
+	public EquipType getEquipType(ItemStack is) {
+		
+		return null;
+	}
+
+	@Override
+	public void onEquippedRender() {
+		GL11.glTranslatef(0F, -0.75F, -0.63F);
+		GL11.glScalef(1.8F, 1.8F, 1.8F);
+		GL11.glRotatef(90, 0F, 1F, 0F);
 	}
 }

@@ -48,6 +48,9 @@ public class RenderLargeItem {
 			if(item.getItem() instanceof IEquipable){
 				((IEquipable)(item.getItem())).onEquippedRender();
 			}
+			else if(Block.getBlockFromItem(item.getItem()) instanceof IEquipable){
+				((IEquipable)(Block.getBlockFromItem(item.getItem()))).onEquippedRender();
+			}
 			block = Block.getBlockFromItem(item.getItem());
 			TFC_Core.bindTexture(TextureMap.locationBlocksTexture);
 			RenderBlocks.getInstance().renderBlockAsItem(block, item.getItemDamage(), 1F);
