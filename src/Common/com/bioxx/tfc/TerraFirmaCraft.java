@@ -290,6 +290,7 @@ public class TerraFirmaCraft
 		TFCOptions.iDontLikeOnions = TFCOptions.getBooleanFor(config, "General", "enableNotOnions", false,"Set this to true if you don't like onions.");
 		TFCOptions.enableOreTest = TFCOptions.getBooleanFor(config, "General","enableOreTest", false, "This will generate only ore in your world with nothing else. *Caution Unsupported*");
 		TFCOptions.quiverHUDPosition = TFCOptions.getStringFor(config, "General", "quiverHUDPosition", "bottomleft", "Valid position strings are: bottomleft, left, topleft, bottomright, right, topright");
+		TFCOptions.generateSmoke = TFCOptions.getBooleanFor(config, "General", "generateSmoke", true, "Should forges generate smoke blocks?");
 
 		//Time
 		TFCOptions.yearLength = TFCOptions.getIntFor(config, "Time", "yearLength", 96, "This is how many days are in a year. Keep this to multiples of 12.");

@@ -97,6 +97,7 @@ import com.bioxx.tfc.Render.Blocks.RenderMetalTrapDoor;
 import com.bioxx.tfc.Render.Blocks.RenderNestBox;
 import com.bioxx.tfc.Render.Blocks.RenderOre;
 import com.bioxx.tfc.Render.Blocks.RenderPottery;
+import com.bioxx.tfc.Render.Blocks.RenderSmoke;
 import com.bioxx.tfc.Render.Blocks.RenderStand;
 import com.bioxx.tfc.Render.Blocks.RenderSupportBeam;
 import com.bioxx.tfc.Render.Blocks.RenderToolRack;
@@ -243,7 +244,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.metalTrapDoorRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderMetalTrapDoor());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.vesselRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderVessel());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.torchRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTorch());
-
+		RenderingRegistry.registerBlockHandler(TFCBlocks.smokeRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderSmoke());
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 	}

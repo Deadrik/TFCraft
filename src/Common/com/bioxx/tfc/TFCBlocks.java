@@ -18,6 +18,7 @@ import com.bioxx.tfc.Blocks.BlockMetalTrapDoor;
 import com.bioxx.tfc.Blocks.BlockMolten;
 import com.bioxx.tfc.Blocks.BlockPlanks;
 import com.bioxx.tfc.Blocks.BlockSlab;
+import com.bioxx.tfc.Blocks.BlockSmoke;
 import com.bioxx.tfc.Blocks.BlockStair;
 import com.bioxx.tfc.Blocks.BlockStalactite;
 import com.bioxx.tfc.Blocks.BlockSulfur;
@@ -174,6 +175,7 @@ public class TFCBlocks
 	public static int metalTrapDoorRenderId;
 	public static int vesselRenderId;
 	public static int torchRenderId;
+	public static int smokeRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -330,6 +332,7 @@ public class TFCBlocks
 	public static Block Grill;
 	public static Block MetalTrapDoor;
 	public static Block Vessel;
+	public static Block Smoke;
 
 	public static void RegisterBlocks()
 	{
@@ -495,6 +498,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Grill, ItemGrill.class, "Grill");
 		GameRegistry.registerBlock(MetalTrapDoor, ItemMetalTrapDoor.class, "MetalTrapDoor");
 		GameRegistry.registerBlock(Vessel, ItemLargeVessel.class, "Vessel");
+		GameRegistry.registerBlock(Smoke, "Smoke");
 
 	}
 
@@ -707,7 +711,8 @@ public class TFCBlocks
 
 		Grill = new BlockGrill().setHardness(2F).setBlockName("Grill");
 		MetalTrapDoor = new BlockMetalTrapDoor().setHardness(2F).setBlockName("MetalTrapDoor");
-		Vessel = new BlockLargeVessel().setHardness(2F).setBlockName("Vessel");
+		Vessel = new BlockLargeVessel().setHardness(1F).setBlockName("Vessel");
+		Smoke = new BlockSmoke().setHardness(0F).setBlockName("Smoke");
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);
 		StoneIgEx.setHarvestLevel("pickaxe", 0);

@@ -12,11 +12,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEForge;
 import com.bioxx.tfc.TileEntities.TEPottery;
@@ -55,10 +55,8 @@ public class ItemFirestarter extends ItemTerra
 	{
 		if(!world.isRemote)
 		{
-			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, x, y, z + 1) &&
-					TFC_Core.isSouthFaceSolid(world, x, y, z - 1) &&
-					TFC_Core.isEastFaceSolid(world, x - 1, y, z) &&
-					TFC_Core.isWestFaceSolid(world, x + 1, y, z);
+			boolean surroundSolids = world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH) && world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH) &&
+					world.isSideSolid(x - 1, y, z, ForgeDirection.EAST) && world.isSideSolid(x + 1, y, z, ForgeDirection.WEST);
 
 			if(side == 1 && world.getBlock(x, y, z).isNormalCube() &&
 					world.getBlock(x, y, z).isOpaqueCube() &&
