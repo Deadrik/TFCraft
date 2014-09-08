@@ -696,7 +696,7 @@ public class TFCBlocks
 		Lava = (new BlockCustomLiquid(TFCFluid.LAVA, Material.lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("Lava");
 		Ice = new BlockCustomIce().setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("Ice").setBlockTextureName("ice");
 
-		WaterPlant = new BlockWaterPlant(0).setBlockName("SeaGrassStill").setHardness(2f).setStepSound(Block.soundTypeGravel).setCreativeTab(TFCTabs.TFCDecoration);
+		WaterPlant = new BlockWaterPlant(0).setBlockName("SeaGrassStill").setHardness(0.5f).setStepSound(Block.soundTypeGravel);
 
 		FireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);
 		MetalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(8).setResistance(20f);
@@ -736,6 +736,7 @@ public class TFCBlocks
 		Charcoal.setHarvestLevel("shovel", 0);
 		Gravel.setHarvestLevel("shovel", 0);
 		Gravel2.setHarvestLevel("shovel", 0);
+		WaterPlant.setHarvestLevel("shovel", 0);
 
 		Detailed.setHarvestLevel("axe", 0);
 		Blocks.oak_stairs.setHarvestLevel("axe", 0);

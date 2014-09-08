@@ -726,6 +726,7 @@ public class TFCItems
 	public static Item YellowBellPepper;
 	public static Item RedBellPepper;
 	public static Item Squash;
+	public static Item SeaWeed;
 
 	public static Item WheatGround;
 	public static Item BarleyGround;
@@ -1732,7 +1733,7 @@ public class TFCItems
 		YellowBellPepper = new ItemFoodTFC(EnumFoodGroup.Vegetable, 15, 0, 0, 0, 20, true).setUnlocalizedName("Yellow Bell Pepper");
 		RedBellPepper = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Red Bell Pepper");
 		Squash = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Squash");
-
+		SeaWeed = new ItemFoodTFC(EnumFoodGroup.Vegetable, 0, 0, 10, 10, 10, true).setUnlocalizedName("Sea Weed");
 		//Fruit are in the foodID range of 50,000
 		RedApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
 		Banana = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);
@@ -2696,6 +2697,7 @@ public class TFCItems
 		GameRegistry.registerItem(fishRaw, fishRaw.getUnlocalizedName());
 		GameRegistry.registerItem(beefRaw, beefRaw.getUnlocalizedName());
 		GameRegistry.registerItem(chickenRaw, chickenRaw.getUnlocalizedName());
+		GameRegistry.registerItem(SeaWeed, SeaWeed.getUnlocalizedName());
 
 		GameRegistry.registerItem(WintergreenBerry, WintergreenBerry.getUnlocalizedName());
 		GameRegistry.registerItem(Blueberry, Blueberry.getUnlocalizedName());
