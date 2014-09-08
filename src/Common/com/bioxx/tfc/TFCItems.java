@@ -273,7 +273,7 @@ public class TFCItems
 	public static Item SmallOreChunk;
 	public static Item Logs;
 	public static Item Barrel;
-	
+
 	public static Item Stands;
 
 	// javelins
@@ -1202,7 +1202,7 @@ public class TFCItems
 		SmallOreChunk = new ItemOreSmall().setUnlocalizedName("Small Ore");
 		Powder = new ItemTerra().setMetaNames(Global.POWDER).setUnlocalizedName("Powder").setCreativeTab(TFCTabs.TFCMaterials);
 		Logs = new ItemLogs().setUnlocalizedName("Log");
-		
+
 		Stands = new ItemArmorStand().setUnlocalizedName("Armor Stand").setCreativeTab(TFCTabs.TFCDecoration);
 
 		//javelins
@@ -1734,6 +1734,7 @@ public class TFCItems
 		RedBellPepper = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Red Bell Pepper");
 		Squash = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Squash");
 		SeaWeed = new ItemFoodTFC(EnumFoodGroup.Vegetable, 0, 0, 10, 10, 10, true).setUnlocalizedName("Sea Weed");
+
 		//Fruit are in the foodID range of 50,000
 		RedApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
 		Banana = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);

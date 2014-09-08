@@ -324,8 +324,9 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
+			boolean shouldStandardTick = false;
 			if(fluid == null)
-				TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
+				shouldStandardTick = true;
 			else
 			{
 				ItemStack itemstack = storage[0]; 
@@ -354,16 +355,19 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						}
 					}
 				}
-				if(fluid.getFluid() == TFCFluid.BRINE && this.getSealed())
+				if(fluid.getFluid() == TFCFluid.VINEGAR && this.getSealed())
 				{
 					if(itemstack != null && itemstack.getItem() instanceof IFood)
 					{
 						float w = ((IFood)itemstack.getItem()).getFoodWeight(itemstack);
 						if(w/fluid.amount <= 0.016)
 							TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord, 0.25f);
+						else
+							shouldStandardTick = true;
 					}
 				}
-				else
+
+				if(shouldStandardTick)
 				{
 					TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
 				}

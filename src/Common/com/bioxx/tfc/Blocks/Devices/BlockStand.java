@@ -3,8 +3,6 @@ package com.bioxx.tfc.Blocks.Devices;
 import java.util.List;
 import java.util.Random;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -23,6 +21,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
@@ -316,7 +316,7 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock, I
 
 	@Override
 	public EquipType getEquipType(ItemStack is) {
-		
+
 		return null;
 	}
 
@@ -325,5 +325,11 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock, I
 		GL11.glTranslatef(0F, -0.75F, -0.63F);
 		GL11.glScalef(1.8F, 1.8F, 1.8F);
 		GL11.glRotatef(90, 0F, 1F, 0F);
+	}
+
+	@Override
+	public boolean getTooHeavyToCarry(ItemStack is)
+	{
+		return false;
 	}
 }

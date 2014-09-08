@@ -2,8 +2,6 @@ package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -140,6 +138,12 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 
 	@Override
 	public void onEquippedRender() {
+	}
+
+	@Override
+	public boolean getTooHeavyToCarry(ItemStack is)
+	{
+		return is.hasTagCompound();
 	}
 }
 

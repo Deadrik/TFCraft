@@ -26,6 +26,12 @@ public class TEVessel extends TEBarrel implements IInventory
 	}
 
 	@Override
+	public int getSizeInventory()
+	{
+		return 9;
+	}
+
+	@Override
 	protected void switchTab(EntityPlayer player, int tab)
 	{
 		if(player != null)

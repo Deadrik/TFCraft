@@ -62,6 +62,9 @@ public class RenderVessel implements ISimpleBlockRenderingHandler
 
 			renderer.setRenderBounds(min, 0F, max-0.05F, max, 0.6F, max);
 			renderer.renderStandardBlock(block, x, y, z);
+
+			renderer.setRenderBounds(min+0.05F, 0.05, min+0.05F, max-0.05F, 0.1f, max-0.05F);
+			renderer.renderStandardBlock(block, x, y, z);
 		}
 		else
 		{
