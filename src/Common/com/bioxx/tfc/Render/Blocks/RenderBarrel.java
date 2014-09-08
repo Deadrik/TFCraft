@@ -65,24 +65,20 @@ public class RenderBarrel implements ISimpleBlockRenderingHandler
 			renderer.setRenderBounds(min, 0F, min+0.05F, min+0.05F, 1F, max-0.05F);
 			rotate(renderer, 1);
 			renderer.renderStandardBlock(planksBlock, x, y, z);
-			rotate(renderer, 0);
-			renderer.renderStandardBlock(block, x, y, z);
 
 			renderer.setRenderBounds(max-0.05F, 0F, min+0.05F, max, 1F, max-0.05F);
 			rotate(renderer, 1);
 			renderer.renderStandardBlock(planksBlock, x, y, z);
-			rotate(renderer, 0);
-			renderer.renderStandardBlock(block, x, y, z);
 
 			renderer.setRenderBounds(min, 0F, min, max, 1F, min+0.05F);
 			rotate(renderer, 1);
 			renderer.renderStandardBlock(planksBlock, x, y, z);
-			rotate(renderer, 0);
-			renderer.renderStandardBlock(block, x, y, z);
 
 			renderer.setRenderBounds(min, 0F, max-0.05F, max, 1F, max);
 			rotate(renderer, 1);
 			renderer.renderStandardBlock(planksBlock, x, y, z);
+
+			renderer.setRenderBounds(min-0.001, 0F, min-0.001, max+0.001, 1F, max+0.001);
 			rotate(renderer, 0);
 			renderer.renderStandardBlock(block, x, y, z);
 		}
