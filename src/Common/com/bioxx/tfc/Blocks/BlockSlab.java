@@ -9,6 +9,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
@@ -210,29 +211,29 @@ public class BlockSlab extends BlockPartial
 	}
 
 	@Override
-	public boolean isBlockSolid(IBlockAccess world, int x, int y, int z, int side)
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 		long data = te.extraData;
 
 		switch(side)
 		{
-		case 0/*DOWN*/:
+		case DOWN/*DOWN*/:
 			return getBottomChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && 
 			getSouthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0;
-		case 1/*UP*/:
+		case UP/*UP*/:
 			return getTopChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && 
 			getSouthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0;
-		case 2/*NORTH*/:
+		case NORTH/*NORTH*/:
 			return getNorthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0 &&
 			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
-		case 3/*SOUTH*/:
+		case SOUTH/*SOUTH*/:
 			return getSouthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0 &&
 			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
-		case 4/*EAST*/:
+		case EAST/*EAST*/:
 			return getEastChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && getSouthChiselLevel(data) == 0 &&
 			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
-		case 5/*WEST*/:
+		case WEST/*WEST*/:
 			return getWestChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && getSouthChiselLevel(data) == 0 &&
 			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
 		default: 
