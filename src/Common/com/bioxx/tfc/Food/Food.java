@@ -113,6 +113,46 @@ public class Food
 	public static boolean isSmoked(ItemStack is)
 	{
 		NBTTagCompound nbt = getProcTag(is);
-		return nbt.hasKey("FuelProfile");
+		return nbt.hasKey("FuelProfile") && !isSameSmoked(getFuelProfile(is), new int[] {0,0,0,0,0});
+	}
+
+	public static boolean isSameSmoked(ItemStack is1, ItemStack is2)
+	{
+		int[] f1 = getFuelProfile(is1);
+		int[] f2 = getFuelProfile(is2);
+		if(f1[0] != f2[0] || f1[1] != f2[1] || f1[2] != f2[2] || f1[3] != f2[3] || f1[4] != f2[4])
+			return false;
+		return true;
+	}
+
+	public static boolean isSameSmoked(int[] f1, int[] f2)
+	{
+		if(f1[0] != f2[0] || f1[1] != f2[1] || f1[2] != f2[2] || f1[3] != f2[3] || f1[4] != f2[4])
+			return false;
+		return true;
+	}
+
+	public static void setDecay(ItemStack is, float value)
+	{
+		NBTTagCompound nbt = is.getTagCompound();
+		nbt.setFloat("foodDecay", value);
+	}
+
+	public static float getDecay(ItemStack is)
+	{
+		NBTTagCompound nbt = is.getTagCompound();
+		return nbt.getFloat("foodDecay");
+	}
+
+	public static void setWeight(ItemStack is, float value)
+	{
+		NBTTagCompound nbt = is.getTagCompound();
+		nbt.setFloat("foodWeight", value);
+	}
+
+	public static float getWeight(ItemStack is)
+	{
+		NBTTagCompound nbt = is.getTagCompound();
+		return nbt.getFloat("foodWeight");
 	}
 }

@@ -98,7 +98,7 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 			float temp = TFC_ItemHeat.GetTemp(is);
 			if(te.fuelTimeLeft > 0 && is.getItem() instanceof IFood)
 			{
-				float inc = Food.getCooked(is)+(temp/700);
+				float inc = Food.getCooked(is)+Math.min((te.fireTemp/700), 2f);
 				Food.setCooked(is, inc);
 				temp = inc;
 			}
@@ -127,13 +127,13 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 			{
 				int[] fuelTasteProfile = new int[] {0,0,0,0,0};
 				int[] cookedTasteProfile = new int[] {0,0,0,0,0};
-				R = new Random(((ICookableFood)storage[i].getItem()).getFoodID()+((int)Food.getCooked(storage[i])/100));
+				R = new Random(((ICookableFood)storage[i].getItem()).getFoodID()+(((int)Food.getCooked(storage[i])-600)/120));
 				cookedTasteProfile[0] = R.nextInt(30)-15;
 				cookedTasteProfile[1] = R.nextInt(30)-15;
 				cookedTasteProfile[2] = R.nextInt(30)-15;
 				cookedTasteProfile[3] = R.nextInt(30)-15;
 				cookedTasteProfile[4] = R.nextInt(30)-15;
-				storage[i].getTagCompound().setIntArray("cookedTasteProfile", cookedTasteProfile);
+				Food.setCookedProfile(storage[i], cookedTasteProfile);
 				if(te != null)
 				{
 					Food.setFuelProfile(storage[i], EnumFuelMaterial.getFuelProfile(te.fuelTasteProfile));
