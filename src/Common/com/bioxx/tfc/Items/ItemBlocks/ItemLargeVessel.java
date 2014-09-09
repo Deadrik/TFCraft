@@ -13,6 +13,8 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import org.lwjgl.opengl.GL11;
+
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEVessel;
@@ -127,8 +129,9 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 	}
 
 	@Override
-	public void onEquippedRender() {
-
+	public void onEquippedRender() 
+	{
+		GL11.glTranslatef(0, 0.0f, -0.2F);
 	}
 
 	@Override
