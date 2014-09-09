@@ -49,11 +49,10 @@ public class BlockTorch extends BlockTerraContainer
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z)
 	{
-		if(world.getBlockMetadata(x, y, z) >= 8)
+		int meta = world.getBlockMetadata(x, y, z);
+		TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
+		if(meta >= 8)
 			return 0;
-		/**
-		 * Gets the light value of the specified block coords. Args: x, y, z
-		 */
 		return getLightValue();
 	}
 
@@ -84,6 +83,13 @@ public class BlockTorch extends BlockTerraContainer
 			{
 				player.inventory.consumeInventoryItem(TFCItems.Stick);
 				TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.Torch), player);
+			}
+			else if(world.getBlockMetadata(x, y, z) >= 8 && player.inventory.getCurrentItem() != null && 
+					player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(TFCBlocks.Torch))
+			{
+				TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
+				te.hourPlaced = (int)TFC_Time.getTotalHours();
+				world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)-8, 3);
 			}
 		}
 		return true;
@@ -232,6 +238,10 @@ public class BlockTorch extends BlockTerraContainer
 				{
 					world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 3);
 				}
+			}
+			else if(world.isRaining() && world.canBlockSeeTheSky(x, y, z))
+			{
+				world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z)+8, 3);
 			}
 		}
 	}
