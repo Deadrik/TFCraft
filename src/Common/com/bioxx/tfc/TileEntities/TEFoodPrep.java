@@ -217,7 +217,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	{
 		for(int i = 0; i < is.length; i++)
 		{
-			if(is[i] != null && !((IFood)is[i].getItem()).isUsable())
+			if(is[i] != null && !((IFood)is[i].getItem()).isUsable(is[i]))
 				return false;
 			for(int j = 0; j < is.length; j++)
 			{

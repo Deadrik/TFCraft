@@ -12,9 +12,11 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Food.Food;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.Interfaces.IFood;
@@ -96,8 +98,8 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 			float temp = TFC_ItemHeat.GetTemp(is);
 			if(te.fuelTimeLeft > 0 && is.getItem() instanceof IFood)
 			{
-				float inc = is.getTagCompound().getFloat("cookedLevel")+(te.fireTemp/700);
-				is.getTagCompound().setFloat("cookedLevel", inc);
+				float inc = Food.getCooked(is)+(temp/700);
+				Food.setCooked(is, inc);
 				temp = inc;
 			}
 			else if(te.fireTemp > temp)
@@ -121,24 +123,20 @@ public class TEGrill extends NetworkTileEntity implements IInventory
 		{
 			TEFireEntity te = (TEFireEntity) worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
 			HeatIndex index = manager.findMatchingIndex(storage[i]);
-			if(index != null && storage[i].hasTagCompound() && storage[i].getTagCompound().hasKey("cookedLevel"))
+			if(index != null && Food.isCooked(storage[i]))
 			{
-				float cookedLevel = storage[i].getTagCompound().getFloat("cookedLevel");
-				if(cookedLevel > 600)
+				int[] fuelTasteProfile = new int[] {0,0,0,0,0};
+				int[] cookedTasteProfile = new int[] {0,0,0,0,0};
+				R = new Random(((ICookableFood)storage[i].getItem()).getFoodID()+((int)Food.getCooked(storage[i])/100));
+				cookedTasteProfile[0] = R.nextInt(30)-15;
+				cookedTasteProfile[1] = R.nextInt(30)-15;
+				cookedTasteProfile[2] = R.nextInt(30)-15;
+				cookedTasteProfile[3] = R.nextInt(30)-15;
+				cookedTasteProfile[4] = R.nextInt(30)-15;
+				storage[i].getTagCompound().setIntArray("cookedTasteProfile", cookedTasteProfile);
+				if(te != null)
 				{
-					int[] fuelTasteProfile = new int[] {0,0,0,0,0};
-					int[] cookedTasteProfile = new int[] {0,0,0,0,0};
-					R = new Random(((ICookableFood)storage[i].getItem()).getFoodID()+((int)cookedLevel/100));
-					cookedTasteProfile[0] = R.nextInt(30)-15;
-					cookedTasteProfile[1] = R.nextInt(30)-15;
-					cookedTasteProfile[2] = R.nextInt(30)-15;
-					cookedTasteProfile[3] = R.nextInt(30)-15;
-					cookedTasteProfile[4] = R.nextInt(30)-15;
-					storage[i].getTagCompound().setIntArray("cookedTasteProfile", cookedTasteProfile);
-					if(te != null)
-					{
-						storage[i].getTagCompound().setInteger("fuelTasteProfile", te.fuelTasteProfile);
-					}
+					Food.setFuelProfile(storage[i], EnumFuelMaterial.getFuelProfile(te.fuelTasteProfile));
 				}
 			}
 

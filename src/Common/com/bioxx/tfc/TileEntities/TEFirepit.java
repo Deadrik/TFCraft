@@ -12,6 +12,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Food.Food;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
@@ -355,12 +356,12 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			float temp = TFC_ItemHeat.GetTemp(is);
 			if(fuelTimeLeft > 0 && is.getItem() instanceof IFood)
 			{
-				float inc = is.getTagCompound().getFloat("cookedLevel")+(fireTemp/700);
-				is.getTagCompound().setFloat("cookedLevel", inc);
+				float inc = Food.getCooked(is)+(fireTemp/700);
+				Food.setCooked(is, inc);;
 				temp = inc;
-				if(inc > 600)
+				if(Food.isCooked(is))
 				{
-					is.getTagCompound().setInteger("fuelTasteProfile", this.fuelTasteProfile);
+					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
 				}
 			}
 			else if(fireTemp > temp)

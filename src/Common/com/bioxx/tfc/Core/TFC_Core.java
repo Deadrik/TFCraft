@@ -966,7 +966,33 @@ public class TFC_Core
 					continue;
 				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
-				is = tickDecay(is, world, x, y, z, environmentalDecayFactor);
+				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1f);
+				if(is != null)
+					TFC_ItemHeat.HandleItemHeat(is);
+			}
+			iinv.setInventorySlotContents(i, is);
+		}
+	}
+
+	/**
+	 * This version of the method assumes that the environmental decay modifier
+	 * has already been calculated.
+	 */
+	public static void handleItemTicking(IInventory iinv, World world, int x, int y, int z, float environmentalDecayFactor, float baseDecayMod)
+	{
+		for (int i = 0; !world.isRemote && i < iinv.getSizeInventory(); i++)
+		{
+			ItemStack is = iinv.getStackInSlot(i);
+			if (is != null && iinv.getStackInSlot(i).stackSize <= 0)
+				iinv.setInventorySlotContents(i, null);
+
+			if (is != null)
+			{
+				if ((is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z)))
+					continue;
+				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
+					continue;
+				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, baseDecayMod);
 				if(is != null)
 					TFC_ItemHeat.HandleItemHeat(is);
 			}
@@ -992,7 +1018,7 @@ public class TFC_Core
 					continue;
 				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
 					continue;
-				is = tickDecay(is, world, x, y, z, environmentalDecayFactor);
+				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1);
 				if(is != null)
 					TFC_ItemHeat.HandleItemHeat(is);
 			}
@@ -1002,9 +1028,10 @@ public class TFC_Core
 
 	/**
 	 * @param is
+	 * @param baseDecayMod 
 	 * @param nbt
 	 */
-	private static ItemStack tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor)
+	private static ItemStack tickDecay(ItemStack is, World world, int x, int y, int z, float environmentalDecayFactor, float baseDecayMod)
 	{
 		NBTTagCompound nbt = is.getTagCompound();
 		if (nbt == null || !nbt.hasKey("foodWeight") || !nbt.hasKey("foodDecay"))
@@ -1049,7 +1076,7 @@ public class TFC_Core
 
 			if (decay < 0)
 			{
-				float d = 1 * (thisDecayRate * environmentalDecay);
+				float d = 1 * (thisDecayRate * baseDecayMod * environmentalDecay);
 				if (decay + d < 0)
 					decay += d;
 				else
@@ -1062,7 +1089,7 @@ public class TFC_Core
 			else
 			{
 				double fdr = Global.FOOD_DECAY_RATE - 1;
-				fdr *= thisDecayRate * environmentalDecay * protMult * TFCOptions.decayMultiplier;
+				fdr *= thisDecayRate * baseDecayMod * environmentalDecay * protMult * TFCOptions.decayMultiplier;
 				decay *= 1 + fdr;
 			}
 			nbt.setInteger("decayTimer", nbt.getInteger("decayTimer") + 1);

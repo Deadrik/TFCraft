@@ -34,4 +34,10 @@ public enum EnumFuelMaterial
 		tasteProfile = taste;
 	}
 
+	public static int[] getFuelProfile(int ordinal)
+	{
+		if(ordinal < 0 || ordinal > values().length)
+			return new int[] {0,0,0,0,0};
+		return values()[ordinal].tasteProfile;
+	}
 }

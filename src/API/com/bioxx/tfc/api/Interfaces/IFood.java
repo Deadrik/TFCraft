@@ -21,11 +21,11 @@ public interface IFood
 	/**
 	 * @return Is this food edible as is.
 	 */
-	public boolean isEdible();
+	public boolean isEdible(ItemStack is);
 	/**
 	 * @return Is this item usable in meals
 	 */
-	public boolean isUsable();
+	public boolean isUsable(ItemStack is);
 
 	public int getTasteSweet(ItemStack is);
 	public int getTasteSour(ItemStack is);

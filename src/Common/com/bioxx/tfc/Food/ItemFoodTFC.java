@@ -29,7 +29,6 @@ import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
-import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ICookableFood;
@@ -130,29 +129,32 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack is, int par2)
 	{
-		//0xA08268 160 130 104
-		if(is.hasTagCompound() && is.getTagCompound().hasKey("cookedLevel"))
-		{
-			float cookedLevel = is.getTagCompound().getFloat("cookedLevel");
-			int r = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f)); 
-			int b = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
-			int g = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
-			int rbg = (r << 16) + (b << 8) + g;
-			return rbg;
-		}
-
-		return 16777215;
+		float cookedLevel = Food.getCooked(is);
+		int r = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f)); 
+		int b = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
+		int g = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
+		int rbg = (r << 16) + (b << 8) + g;
+		return rbg;
 	}
 
 	@Override
 	public float getDecayRate(ItemStack is)
 	{
 		float mult = 1.0f;
-		if(is.getTagCompound().hasKey("Pickled"))
-			mult *= 0.5f;
-		if(is.getTagCompound().hasKey("isSalted"))
-			mult *= 0.5f;
-		return decayRate * (TFC_Time.getYearRatio(96)) * mult;
+		if(Food.isCooked(is))
+		{
+			mult *= 0.75f;
+			if(Food.isPickled(is) || Food.isSalted(is))
+				mult *= 0.75f;
+		}
+		else
+		{
+			if(Food.isPickled(is) || Food.isSalted(is))
+				mult *= 0.5f;
+			if(Food.isSmoked(is))
+				mult *= 0.5f;
+		}
+		return decayRate / (TFC_Time.getYearRatio(96)) * mult;
 	}
 
 	@Override
@@ -165,11 +167,13 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	public String getItemStackDisplayName(ItemStack is)
 	{
 		String s = "";
-		if(is.hasTagCompound() && is.getTagCompound().hasKey("Pickled"))
+		if(Food.isPickled(is))
 			s += StatCollector.translateToLocal("word.pickled") + " ";
-		if(is.hasTagCompound() && is.getTagCompound().hasKey("isSalted"))
+		else if(Food.isBrined(is))
+			s += StatCollector.translateToLocal("word.brined") + " ";
+		if(Food.isSalted(is))
 			s += StatCollector.translateToLocal("gui.food.salted") + " ";
-		if(is.hasTagCompound() && is.getTagCompound().hasKey("cookedLevel") && is.getTagCompound().getFloat("cookedLevel") >= 600)
+		if(Food.isCooked(is))
 			s += StatCollector.translateToLocal("word.cooked") + " ";
 		return (s + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(is) + ".name")).trim();
 	}
@@ -543,15 +547,15 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	}
 
 	@Override
-	public boolean isEdible()
+	public boolean isEdible(ItemStack is)
 	{
-		return isEdible;
+		return isEdible || Food.isCooked(is);
 	}
 
 	@Override
-	public boolean isUsable()
+	public boolean isUsable(ItemStack is)
 	{
-		return canBeUsedRaw;
+		return canBeUsedRaw || Food.isCooked(is);
 	}
 
 	@Override
@@ -560,9 +564,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		if(is != null)
 		{
 			base = is.getTagCompound().getInteger("tasteSweet");
-			base += TFC_Core.getCookedTasteProfile(is)[0];
-			if(is.getTagCompound().hasKey("fuelTasteProfile"))
-				base += EnumFuelMaterial.values()[is.getTagCompound().getInteger("fuelTasteProfile")].tasteProfile[0]*getSmokeAbsorbMultiplier();
+			base += Food.getCookedProfile(is)[0];
+			base += Food.getFuelProfile(is)[0]*getSmokeAbsorbMultiplier();
 		}
 		return Math.max(base + getTasteSweetMod(is), 0);
 	}
@@ -580,11 +583,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		if(is != null)
 		{
 			base = is.getTagCompound().getInteger("tasteSour");
-			base += TFC_Core.getCookedTasteProfile(is)[1];
-			if(is.getTagCompound().hasKey("fuelTasteProfile"))
-				base += EnumFuelMaterial.values()[is.getTagCompound().getInteger("fuelTasteProfile")].tasteProfile[1]*getSmokeAbsorbMultiplier();
+			base += Food.getCookedProfile(is)[1];
+			base += Food.getFuelProfile(is)[1]*getSmokeAbsorbMultiplier();
 		}
-		if(is.getTagCompound().hasKey("Pickled"))
+		if(Food.isPickled(is))
 			base += 30;
 		return Math.max(base + getTasteSourMod(is), 0);
 	}
@@ -602,13 +604,12 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		if(is != null)
 		{
 			base = is.getTagCompound().getInteger("tasteSalty");
-			base += TFC_Core.getCookedTasteProfile(is)[2];
-			if(is.getTagCompound().hasKey("fuelTasteProfile"))
-				base += EnumFuelMaterial.values()[is.getTagCompound().getInteger("fuelTasteProfile")].tasteProfile[2]*getSmokeAbsorbMultiplier();
+			base += Food.getCookedProfile(is)[2];
+			base += Food.getFuelProfile(is)[2]*getSmokeAbsorbMultiplier();
 		}
-		if(is.getTagCompound().hasKey("isSalted"))
+		if(Food.isSalted(is))
 			base += 40;
-		if(is.getTagCompound().hasKey("Pickled"))
+		if(Food.isPickled(is))
 			base += 10;
 
 		return Math.max(base + getTasteSaltyMod(is), 0);
@@ -627,9 +628,8 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		if(is != null)
 		{
 			base = is.getTagCompound().getInteger("tasteBitter");
-			base += TFC_Core.getCookedTasteProfile(is)[3];
-			if(is.getTagCompound().hasKey("fuelTasteProfile"))
-				base += EnumFuelMaterial.values()[is.getTagCompound().getInteger("fuelTasteProfile")].tasteProfile[3]*getSmokeAbsorbMultiplier();
+			base += Food.getCookedProfile(is)[3];
+			base += Food.getFuelProfile(is)[3]*getSmokeAbsorbMultiplier();
 		}
 		return Math.max(base + getTasteBitterMod(is), 0);
 	}
@@ -648,8 +648,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		{
 			base = is.getTagCompound().getInteger("tasteUmami");
 			base += TFC_Core.getCookedTasteProfile(is)[4];
-			if(is.getTagCompound().hasKey("fuelTasteProfile"))
-				base += EnumFuelMaterial.values()[is.getTagCompound().getInteger("fuelTasteProfile")].tasteProfile[4]*getSmokeAbsorbMultiplier();
+			base += Food.getFuelProfile(is)[4]*getSmokeAbsorbMultiplier();
 		}
 		return Math.max(base + getTasteSavoryMod(is), 0);
 	}

@@ -1653,16 +1653,16 @@ public class TFCItems
 		//Tastes are Sweet, Sour, Salty, Bitter, Umami
 
 		//Proteins
-		porkchopRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Porkchop");
-		fishRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, true).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Fish");
-		beefRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 50, false, false).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Beef");
-		chickenRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Chicken");
+		porkchopRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Porkchop");
+		fishRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, true).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Fish");
+		beefRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 50, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Beef");
+		chickenRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Chicken");
 		Soybean = new ItemFoodTFC(EnumFoodGroup.Protein, 10, 0, 0, 0, 40, true).setUnlocalizedName("Soybeans");
-		EggCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 25).setDecayRate(3.0f).setUnlocalizedName("Egg Cooked");
+		EggCooked = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 25).setDecayRate(2.5f).setUnlocalizedName("Egg Cooked");
 		calamariRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 20, 0, 35, false, false).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setDecayRate(4.0f).setUnlocalizedName("Calamari");
-		muttonRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Mutton");
-		venisonRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 5, 0, 0, 0, 50, false, false).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Venison");
-		horseMeatRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(3.0f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("HorseMeat");
+		muttonRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Mutton");
+		venisonRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 5, 0, 0, 0, 50, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Venison");
+		horseMeatRaw = new ItemFoodTFC(EnumFoodGroup.Protein, 0, 0, 0, 0, 40, false, false).setDecayRate(2.5f).setCanSmoke().setHasCookedIcon().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("HorseMeat");
 
 		//Dairy
 		Cheese = new ItemFoodTFC(EnumFoodGroup.Dairy, 0, 10, 20, 0, 35).setDecayRate(0.5f).setCanSmoke().setSmokeAbsorbMultiplier(1F).setUnlocalizedName("Cheese");

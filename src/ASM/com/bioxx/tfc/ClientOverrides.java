@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.WeatherManager;
+import com.bioxx.tfc.Food.Food;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
@@ -200,7 +201,7 @@ public class ClientOverrides
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
 			GL11.glDisable(GL11.GL_BLEND);
 			float decayPerc = Math.max(((IFood)is.getItem()).getFoodDecay(is) / ((IFood)is.getItem()).getFoodWeight(is), 0);
-			float cookPerc = Math.max(Math.min(is.getTagCompound().getFloat("cookedLevel")/600f, 1), 0);
+			float cookPerc = Math.max(Math.min(Food.getCooked(is)/600f, 1), 0);
 
 			if(is.getItem() instanceof ItemFoodTFC && ((ItemFoodTFC)is.getItem()).cookedIcon != null)
 			{
