@@ -50,9 +50,7 @@ import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
-import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.Interfaces.IFood;
-import com.bioxx.tfc.api.Interfaces.IMergeableFood;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -1187,62 +1185,42 @@ public class TFC_Core
 				|| block == Blocks.glass;
 	}
 
-	/**
-	 * This does not currently function correctly WIP
-	 * @return Returns null if the stacks are unable to merge for some reason. Otherwise returns a merged stack.
-	 */
-	public static void mergeFoodStacks(ItemStack is1, ItemStack is2)
+	public static void writeInventoryToNBT(NBTTagCompound nbt, ItemStack[] storage)
 	{
-
-		if(is1.getItem() instanceof IFood && is2.getItem() instanceof IFood &&
-				is1.getItem() instanceof IMergeableFood && is2.getItem() instanceof IMergeableFood &&
-				is1.getItem() == is2.getItem())
-		{
-			if((int)is1.getTagCompound().getFloat("cookedLevel")/100 != (int)is2.getTagCompound().getFloat("cookedLevel")/100)
-				return;
-
-			IFood item1 = (IFood) is1.getItem(); IFood item2 = (IFood) is2.getItem();
-			ItemStack output = is1.copy();
-			float finalWeight = item1.getFoodWeight(is1) + item2.getFoodWeight(is2);
-			float finalDecay = item1.getFoodDecay(is1) + item2.getFoodDecay(is2);
-			int sweetMod = is1.getTagCompound().getInteger("tasteSweetMod");
-			int sourMod = is1.getTagCompound().getInteger("tasteSourMod");
-			int saltyMod =  is1.getTagCompound().getInteger("tasteSaltyMod");
-			int bitterMod = is1.getTagCompound().getInteger("tasteBitterMod");
-			int savoryMod = is1.getTagCompound().getInteger("tasteSavoryMod");
-			if(sweetMod != is2.getTagCompound().getInteger("tasteSweetMod")) sweetMod = 0;
-			if(sourMod != is2.getTagCompound().getInteger("tasteSourMod")) sourMod = 0;
-			if(saltyMod != is2.getTagCompound().getInteger("tasteSaltyMod")) saltyMod = 0;
-			if(bitterMod != is2.getTagCompound().getInteger("tasteBitterMod")) bitterMod = 0;
-			if(savoryMod != is2.getTagCompound().getInteger("tasteSavoryMod")) savoryMod = 0;
-			boolean salted = is1.getTagCompound().getBoolean("isSalted");
-			if(is1.getTagCompound().getBoolean("isSalted") != is2.getTagCompound().getBoolean("isSalted"))
-				salted = false;
-
-			int[] ftp1 = is1.getTagCompound().getIntArray("fuelTasteProfile");
-			int[] ftp2 = is2.getTagCompound().getIntArray("fuelTasteProfile");
-			if(ftp1[0] != ftp2[0] || ftp1[1] != ftp2[1] || ftp1[2] != ftp2[2] || ftp1[3] != ftp2[3] || ftp1[4] != ftp2[4])
-				return;
-
-			output.getTagCompound().setInteger("tasteSweetMod", sweetMod);
-			output.getTagCompound().setInteger("tasteSourMod", sourMod);
-			output.getTagCompound().setInteger("tasteSaltyMod", saltyMod);
-			output.getTagCompound().setInteger("tasteBitterMod", bitterMod);
-			output.getTagCompound().setInteger("tasteSavoryMod", savoryMod);
-			output.getTagCompound().setBoolean("isSalted", salted);
-
-		}
-
-		return;
+		writeInventoryToNBT(nbt, storage, "Items");
 	}
 
-	public static int[] getCookedTasteProfile(ItemStack is)
+	public static void writeInventoryToNBT(NBTTagCompound nbt, ItemStack[] storage, String name)
 	{
-		if(is.getTagCompound().getFloat("cookedLevel") > 600)
+		NBTTagList nbttaglist = new NBTTagList();
+		for(int i = 0; i < storage.length; i++)
 		{
-			Random R = new Random(((ICookableFood)is.getItem()).getFoodID()+((int)(is.getTagCompound().getFloat("cookedLevel")-600)/100));
-			return new int[] {R.nextInt(30)-15,R.nextInt(30)-15,R.nextInt(30)-15,R.nextInt(30)-15,R.nextInt(30)-15};
+			if(storage[i] != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				storage[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
 		}
-		else return new int[]{0,0,0,0,0};
+		nbt.setTag(name, nbttaglist);
 	}
+
+	public static void readInventoryFromNBT(NBTTagCompound nbt, ItemStack[] storage)
+	{
+		readInventoryFromNBT(nbt, storage, "Items");
+	}
+
+	public static void readInventoryFromNBT(NBTTagCompound nbt, ItemStack[] storage, String name)
+	{
+		NBTTagList nbttaglist = nbt.getTagList(name, 10);
+		for(int i = 0; i < nbttaglist.tagCount(); i++)
+		{
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			byte byte0 = nbttagcompound1.getByte("Slot");
+			if(byte0 >= 0 && byte0 < storage.length)
+				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		}
+	}
+
 }

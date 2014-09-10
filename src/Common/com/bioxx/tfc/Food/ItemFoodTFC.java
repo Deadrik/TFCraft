@@ -677,7 +677,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		if(is != null)
 		{
 			base = is.getTagCompound().getInteger("tasteUmami");
-			base += TFC_Core.getCookedTasteProfile(is)[4];
+			base += Food.getCookedProfile(is)[4];
 			base += Food.getFuelProfile(is)[4]*getSmokeAbsorbMultiplier();
 		}
 		return Math.max(base + getTasteSavoryMod(is), 0);
