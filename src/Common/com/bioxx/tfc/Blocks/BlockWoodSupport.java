@@ -143,10 +143,9 @@ public class BlockWoodSupport extends BlockTerra
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
-		if(meta > icons.length - 1)
-			return icons[0];
-		else
+		if(meta<icons.length)
 			return icons[meta];
+		return TFCBlocks.WoodSupportH2.getIcon(side, meta-16);
 	}
 
 	@Override

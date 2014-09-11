@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Entities;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
@@ -8,13 +9,19 @@ import com.bioxx.tfc.TileEntities.TEStand;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class EntityStand extends EntityLiving
@@ -24,108 +31,112 @@ public class EntityStand extends EntityLiving
 	private ItemStack[] armor;
 	private ItemStack[] equipable;
 	private float rotation = 0F;
-	
+	public int woodType;
+
 	public EntityStand(World par1World)
 	{
 		super(par1World);
 		setSize(1f,2f);
-		this.setHealth(1);
 		//noClip = false;
 		ignoreFrustumCheck = true;
 		armor = new ItemStack[defaultArmorLength];
 		equipable = new ItemStack[defaultEquipableLength];
-		
+
 		//this.setArmor(0, new ItemStack(TFCItems.SteelBoots,1,0));
 	}
-	
-	public EntityStand(World par1World, float rotation){
+
+	public EntityStand(World par1World, float rotation, int type){
 		this(par1World);
 		this.rotation = rotation;
+		this.woodType = type;
 	}
-	
-	@Override
-	protected void updateAITasks()
-    {
-        ++this.entityAge;
-    }
-	
-	@Override
-	protected void updateEntityActionState()
-    {
-        this.moveStrafing = 0.0F;
-        this.moveForward = 0.0F;
-        this.despawnEntity();
-    }
 
 	@Override
-	public void setHealth(float par1)
+	protected void updateAITasks()
 	{
-		this.dataWatcher.updateObject(6, Float.valueOf(MathHelper.clamp_float(par1, 0.0F, 1)));
+		++this.entityAge;
+	}
+
+	@Override
+	public boolean isEntityInvulnerable(){
+		return false;//true;
+	}
+
+	@Override
+	protected void updateEntityActionState()
+	{
+		this.moveStrafing = 0.0F;
+		this.moveForward = 0.0F;
+		this.despawnEntity();
 	}
 
 	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
-		int start = 45;
-		
+		int start = 20;
+
 		for(int i = 0; i < defaultArmorLength;i++){
 			this.dataWatcher.addObjectByDataType(start+i, 5);
 		}
 		for(int i = 0; i < defaultEquipableLength;i++){
 			this.dataWatcher.addObjectByDataType(start+i+defaultArmorLength,5);
 		}
+		this.dataWatcher.addObject(start + this.defaultEquipableLength + this.defaultArmorLength, new Float(1));
+		this.dataWatcher.addObject(start + this.defaultEquipableLength + this.defaultArmorLength + 1, new Integer(0));
 	}
-	
+
 	@Override
 	public boolean canBePushed(){
 		return true;
 	}
-	
+
 	@Override
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
 		syncData();
 	}
-	
+
 	public void syncData()
 	{
 		if(dataWatcher!= null)
 		{
-			if(!this.worldObj.isRemote)
+			if(this.worldObj.isRemote)
 			{
-				int start = 45;
+				int start = 20;
 				for(int i = 0; i < defaultArmorLength;i++){
 					armor[i] = this.dataWatcher.getWatchableObjectItemStack(start+i);
 				}
 				for(int i = 0; i < defaultEquipableLength;i++){
 					equipable[i] = this.dataWatcher.getWatchableObjectItemStack(start+i+defaultArmorLength);
 				}
+				rotation = this.dataWatcher.getWatchableObjectFloat(start + this.defaultEquipableLength + this.defaultArmorLength);
+				woodType = this.dataWatcher.getWatchableObjectInt(start + this.defaultEquipableLength + this.defaultArmorLength + 1);
 			}
 			else
 			{
-				int start = 45;
-				
+				int start = 20;
+
 				for(int i = 0; i < defaultArmorLength;i++){
 					this.dataWatcher.updateObject(start+i, armor[i]);
 				}
 				for(int i = 0; i < defaultEquipableLength;i++){
 					this.dataWatcher.updateObject(start+i+defaultArmorLength, equipable[i]);
 				}
+
+				this.dataWatcher.updateObject(start + this.defaultEquipableLength + this.defaultArmorLength, rotation);
+				this.dataWatcher.updateObject(start + this.defaultEquipableLength + this.defaultArmorLength + 1, woodType);
 			}
 		}
 	}
-	
+
 	@Override
 	public void onUpdate()
 	{
-		if(this.rotationYaw != 0.0 && this.rotationYaw != 90.0 && this.rotationYaw != 180.0 && this.rotationYaw != 270.0){
-			System.out.println(this.rotationYaw);
-		}
 		if(this.worldObj.getEntitiesWithinAABB(getClass(), this.boundingBox).size() >1){
 			this.setDead();
 		}
-		
+
 		double t_x, t_z; 	//temp x,y,z
 		t_x = this.posX;
 		//t_y = this.posY;
@@ -134,41 +145,99 @@ public class EntityStand extends EntityLiving
 		if(this.worldObj.isRemote)
 			setSize(0.125f,2f);
 		else
-			setSize(0.6F,0);
-		
+			setSize(0.1F,2);
+
 		this.setLocationAndAngles(t_x, this.posY, t_z, this.rotation, 0F);
 		//this.setPositionAndRotation(t_x, this.posY, t_z, this.rotation, 0F);
 		this.setRotation(rotation, 0);
+		this.renderYawOffset = rotation;
+		this.field_70741_aB = rotation;
+		this.field_70764_aw = rotation;
+		this.isCollidedHorizontally = false;
+		this.limbSwing = 0;
+		this.limbSwingAmount = 0;
+		this.newRotationYaw = rotation;
+		this.swingProgress = 0;
+		this.swingProgressInt = 0;
 		//this.rotationYaw = rotation;
 		//this.getLookHelper().setLookPosition(this.posX + lookX, this.posY + (double)this.getEyeHeight(), this.posZ + lookZ, 10.0F, (float)this.getVerticalFaceSpeed());
 		//this.getNavigator().tryMoveToXYZ(this.posX + lookX, this.posY, this.posZ + lookZ, 0.5);
 	}
 
 	@Override
-	public boolean interact(EntityPlayer ep){
-		ItemStack is = ep.getCurrentEquippedItem();
-		if(is!= null){
-			if(is.getItem() instanceof ItemTFCArmor){
-				ItemTFCArmor tempArmor = (ItemTFCArmor)is.getItem();
-				int slot = tempArmor.getBodyPart();
-				this.setArmor(slot,is);
-				is.stackSize--;
-				ep.setCurrentItemOrArmor(0, is);
+	protected void dropFewItems(boolean par1, int par2)
+	{
+		if(!worldObj.isRemote){
+			for(int i = 0; i < armor.length; i++){
+				if(armor[i]!=null){
+					this.entityDropItem(armor[i], 0);
+				}
 			}
+			for(int i = 0; i < equipable.length; i++){
+				if(equipable[i]!=null){
+				this.entityDropItem(equipable[i], 0);
+				}
+			}
+			this.entityDropItem(new ItemStack(TFCBlocks.ArmourStand,1,woodType), 0);
 		}
-		else{
-			System.out.println(this.worldObj.isRemote?"client":"server");
-			for(int i =0;i<defaultArmorLength;i++){
-				System.out.println(armor[i]);
+	}
+
+	@Override
+	public boolean interact(EntityPlayer ep){
+		if(!worldObj.isRemote){
+			ItemStack is = ep.getCurrentEquippedItem();
+			if(is!= null){
+				if(is.getItem() instanceof ItemTFCArmor){
+					ItemTFCArmor tempArmor = (ItemTFCArmor)is.getItem();
+					int slot = tempArmor.getBodyPart();
+					if(this.armor[slot] == null){
+						this.setArmor(slot,is);
+						is.stackSize--;
+					}
+					ep.setCurrentItemOrArmor(0, is);
+				}
+			}
+			else {
+				Vec3 eyeVec = ep.getPosition(1);
+				double dist = Math.sqrt(ep.getDistanceSqToEntity(this));
+				Vec3 hitVec = ep.getLookVec();
+				double angleTan = hitVec.yCoord / Math.sqrt(hitVec.xCoord * hitVec.xCoord + hitVec.zCoord * hitVec.zCoord);
+
+				double xzDist = Math.sqrt(Math.pow(ep.posX - this.posX,2) + Math.pow(ep.posZ - this.posZ, 2));
+				double y_level = (angleTan * xzDist) + ep.eyeHeight + ep.posY;
+				double y = y_level - this.posY;
+
+				int slot = -1;
+				if(y >= 0 && y < 0.3){
+					slot = 0;
+				}
+				else if(y >=0.3 && y < 1){
+					slot = 1;
+				}
+				else if(y >= 1 && y < 1.4){
+					slot = 2;
+				}
+				else if(y >= 1.4 && y < 2){
+					slot = 3;
+				}
+				ep.addChatMessage(new ChatComponentText(slot+""));
+
+				if(slot != -1){
+					ItemStack i = armor[slot];
+					armor[slot] = null;
+					giveItemToPlayer(worldObj,ep,i);
+				}
 			}
 		}
 		return true;
 	}
-	
-	@Override
-	public boolean isEntityInvulnerable()
-	{
-		return true;
+
+	public void giveItemToPlayer(World world, EntityPlayer ep, ItemStack is){
+		if(world != null && ep != null && is != null){
+			is.stackSize = 1;
+			EntityItem ei = new EntityItem(world,ep.posX,ep.posY,ep.posZ,is);
+			world.spawnEntityInWorld(ei);
+		}
 	}
 
 	@Override
@@ -179,29 +248,34 @@ public class EntityStand extends EntityLiving
 		//posY = nbttagcompound.getDouble("Y");
 		//posZ = nbttagcompound.getDouble("Z");
 		rotation = nbttagcompound.getFloat("Rotation");
-		
-		 NBTTagList nbttaglist;
-	        int i;
+		woodType = nbttagcompound.getInteger("Wood");
 
-	        if (nbttagcompound.hasKey("Armor",9))
-	        {
-	            nbttaglist = nbttagcompound.getTagList("Armor",10);
+		NBTTagList nbttaglist;
+		int i;
 
-	            for (i = 0; i < this.defaultArmorLength; ++i)
-	            {
-	                this.armor[i] = ItemStack.loadItemStackFromNBT(nbttaglist.getCompoundTagAt(i));
-	            }
-	        }
+		if (nbttagcompound.hasKey("Armor",9))
+		{
+			nbttaglist = nbttagcompound.getTagList("Armor",10);
 
-	        if (nbttagcompound.hasKey("Equipable",9))
-	        {
-	            nbttaglist = nbttagcompound.getTagList("Equipable",10);
+			for (i = 0; i < this.defaultArmorLength; ++i)
+			{
+				this.armor[i] = ItemStack.loadItemStackFromNBT(nbttaglist.getCompoundTagAt(i));
+			}
+		}
 
-	            for (i = 0; i < defaultEquipableLength; ++i)
-	            {
-	                this.equipable[i] = ItemStack.loadItemStackFromNBT(nbttaglist.getCompoundTagAt(i));
-	            }
-	        }
+		if (nbttagcompound.hasKey("Equipable",9))
+		{
+			nbttaglist = nbttagcompound.getTagList("Equipable",10);
+
+			for (i = 0; i < defaultEquipableLength; ++i)
+			{
+				this.equipable[i] = ItemStack.loadItemStackFromNBT(nbttaglist.getCompoundTagAt(i));
+			}
+		}
+	}
+
+	public float getRotation(){
+		return rotation;
 	}
 
 	@Override
@@ -211,39 +285,41 @@ public class EntityStand extends EntityLiving
 		//nbttagcompound.setDouble("X", posX);
 		//nbttagcompound.setDouble("Y", posY);
 		//nbttagcompound.setDouble("Z", posZ);
-		
-		
+
+		nbttagcompound.setFloat("Rotation", rotation);
+		nbttagcompound.setInteger("Wood",woodType);
+
 		NBTTagList nbttaglist = new NBTTagList();
-        NBTTagCompound nbttagcompound1;
+		NBTTagCompound nbttagcompound1;
 
-        for (int i = 0; i < this.defaultArmorLength; ++i)
-        {
-            nbttagcompound1 = new NBTTagCompound();
+		for (int i = 0; i < this.defaultArmorLength; ++i)
+		{
+			nbttagcompound1 = new NBTTagCompound();
 
-            if (this.armor[i] != null)
-            {
-                this.armor[i].writeToNBT(nbttagcompound1);
-            }
+			if (this.armor[i] != null)
+			{
+				this.armor[i].writeToNBT(nbttagcompound1);
+			}
 
-            nbttaglist.appendTag(nbttagcompound1);
-        }
+			nbttaglist.appendTag(nbttagcompound1);
+		}
 
-        nbttagcompound.setTag("Armor", nbttaglist);
-        
-        nbttaglist = new NBTTagList();
-        for (int i = 0; i < defaultEquipableLength; ++i)
-        {
-            nbttagcompound1 = new NBTTagCompound();
+		nbttagcompound.setTag("Armor", nbttaglist);
 
-            if (this.equipable[i] != null)
-            {
-                this.equipable[i].writeToNBT(nbttagcompound1);
-            }
+		nbttaglist = new NBTTagList();
+		for (int i = 0; i < defaultEquipableLength; ++i)
+		{
+			nbttagcompound1 = new NBTTagCompound();
 
-            nbttaglist.appendTag(nbttagcompound1);
-        }
+			if (this.equipable[i] != null)
+			{
+				this.equipable[i].writeToNBT(nbttagcompound1);
+			}
 
-        nbttagcompound.setTag("Equipable", nbttaglist);
+			nbttaglist.appendTag(nbttagcompound1);
+		}
+
+		nbttagcompound.setTag("Equipable", nbttaglist);
 	}
 
 	@Override
@@ -254,7 +330,7 @@ public class EntityStand extends EntityLiving
 
 	public ItemStack getEquipableInSlot(int i)
 	{
-		
+
 		if(equipable != null && defaultEquipableLength > i){
 			return equipable[i];
 		}
@@ -268,7 +344,7 @@ public class EntityStand extends EntityLiving
 		}
 		return null;
 	}
-	
+
 	public void setArmor(int i, ItemStack itemstack)
 	{
 		if(armor != null && defaultArmorLength > i){

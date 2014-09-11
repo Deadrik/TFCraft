@@ -102,10 +102,22 @@ public class RenderEntityStand extends RenderBiped
 	}
 
 	@Override
+	public void doRender(EntityLivingBase e, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_){
+		float rotation = e instanceof EntityStand? ((EntityStand)e).getRotation() : 0;
+		GL11.glPushMatrix();
+		super.doRender(e, p_76986_2_, p_76986_4_, p_76986_6_, 0, 0);
+		GL11.glPopMatrix();
+	}
+	
+	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
 		GL11.glScalef(1f, 0.95f, 1f);
-		standBlockRenderer.render(par1EntityLivingBase, new ItemStack(TFCBlocks.ArmourStand,1,0));
+		int l = 0;
+		if(par1EntityLivingBase instanceof EntityStand){
+			l=((EntityStand)par1EntityLivingBase).woodType;
+		}
+		standBlockRenderer.render(par1EntityLivingBase, new ItemStack(TFCBlocks.ArmourStand,1,l));
 	}
 
 	protected int setArmorModelTFC(EntityStand stand, int par2, float par3)

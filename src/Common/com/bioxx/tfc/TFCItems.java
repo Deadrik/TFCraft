@@ -25,7 +25,6 @@ import com.bioxx.tfc.Food.ItemSalad;
 import com.bioxx.tfc.Food.ItemSandwich;
 import com.bioxx.tfc.Food.ItemSoup;
 import com.bioxx.tfc.Items.ItemAlcohol;
-import com.bioxx.tfc.Items.ItemArmorStand;
 import com.bioxx.tfc.Items.ItemArrow;
 import com.bioxx.tfc.Items.ItemBloom;
 import com.bioxx.tfc.Items.ItemBlueprint;
@@ -275,8 +274,7 @@ public class TFCItems
 	public static Item SmallOreChunk;
 	public static Item Logs;
 	public static Item Barrel;
-
-	public static Item Stands;
+	public static Item Loom;
 
 	// javelins
 	public static Item IgInStoneJavelin;
@@ -1205,7 +1203,6 @@ public class TFCItems
 		Powder = new ItemTerra().setMetaNames(Global.POWDER).setUnlocalizedName("Powder").setCreativeTab(TFCTabs.TFCMaterials);
 		Logs = new ItemLogs().setUnlocalizedName("Log");
 
-		Stands = new ItemArmorStand().setUnlocalizedName("Armor Stand").setCreativeTab(TFCTabs.TFCDecoration);
 
 		//javelins
 		IgInStoneJavelin = new ItemJavelin(IgInToolMaterial, 60).setUnlocalizedName("IgIn Stone Javelin");
@@ -2259,7 +2256,6 @@ public class TFCItems
 		GameRegistry.registerItem(OreChunk, OreChunk.getUnlocalizedName());
 		GameRegistry.registerItem(SmallOreChunk, SmallOreChunk.getUnlocalizedName());
 		GameRegistry.registerItem(Logs, Logs.getUnlocalizedName());
-		GameRegistry.registerItem(Stands, Stands.getUnlocalizedName());
 
 		GameRegistry.registerItem(IgInStoneJavelin, IgInStoneJavelin.getUnlocalizedName());
 		GameRegistry.registerItem(SedStoneJavelin, SedStoneJavelin.getUnlocalizedName());

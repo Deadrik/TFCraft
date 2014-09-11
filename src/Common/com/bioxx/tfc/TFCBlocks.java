@@ -38,6 +38,7 @@ import com.bioxx.tfc.Blocks.Devices.BlockForge;
 import com.bioxx.tfc.Blocks.Devices.BlockGrill;
 import com.bioxx.tfc.Blocks.Devices.BlockLargeVessel;
 import com.bioxx.tfc.Blocks.Devices.BlockLeatherRack;
+import com.bioxx.tfc.Blocks.Devices.BlockLoom;
 import com.bioxx.tfc.Blocks.Devices.BlockNestBox;
 import com.bioxx.tfc.Blocks.Devices.BlockPottery;
 import com.bioxx.tfc.Blocks.Devices.BlockQuern;
@@ -113,6 +114,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBlocks.ItemGrill;
 import com.bioxx.tfc.Items.ItemBlocks.ItemLargeVessel;
+import com.bioxx.tfc.Items.ItemBlocks.ItemLooms;
 import com.bioxx.tfc.Items.ItemBlocks.ItemMetalTrapDoor;
 import com.bioxx.tfc.Items.ItemBlocks.ItemSoil;
 import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
@@ -142,6 +144,7 @@ public class TFCBlocks
 	public static int FirepitRenderId;
 	public static int AnvilRenderId;
 	public static int barrelRenderId;
+	public static int loomRenderId;
 	public static int standRenderId;
 	public static int FenceRenderId;
 	public static int FenceGateRenderId;
@@ -275,6 +278,7 @@ public class TFCBlocks
 
 	public static Block IngotPile;
 	public static Block Barrel;
+	public static Block Loom;
 	public static Block Pottery;
 	public static Block Thatch;
 	public static Block Moss;
@@ -465,6 +469,7 @@ public class TFCBlocks
 
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
 		GameRegistry.registerBlock(Barrel, ItemBarrels.class, "Barrel");
+		GameRegistry.registerBlock(Loom, ItemLooms.class, "Loom");
 		GameRegistry.registerBlock(Moss, "Moss");
 
 		GameRegistry.registerBlock(Flora, com.bioxx.tfc.Items.ItemBlocks.ItemFlora.class,"Flora");
@@ -672,6 +677,7 @@ public class TFCBlocks
 		IngotPile = new BlockIngotPile().setBlockName("ingotpile").setHardness(3);
 
 		Barrel = new BlockBarrel().setBlockName("Barrel").setHardness(2);
+		Loom = new BlockLoom().setBlockName("Loom").setHardness(2);
 		Thatch = new BlockThatch().setBlockName("Thatch").setHardness(1).setStepSound(Block.soundTypeGrass).setCreativeTab(TFCTabs.TFCBuilding);
 		Moss = new BlockMoss().setBlockName("Moss").setHardness(1).setStepSound(Block.soundTypeGrass);
 

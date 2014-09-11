@@ -1,12 +1,24 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Entities.EntityStand;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 
 public class ItemArmourStand extends ItemTerraBlock
 {
@@ -15,6 +27,48 @@ public class ItemArmourStand extends ItemTerraBlock
 		super(i);
 		MetaNames = new String[16];
 		System.arraycopy(Global.WOOD_ALL, 0, MetaNames, 0, 16);
+	}
+	
+	public boolean isValid(World world, int i, int j, int k)
+	{
+		if(world.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(i, j-0.1, k, i+1, j+2, k+1)).size() == 0){
+			return true;
+		}
+		return false;
+	}
+	
+	protected boolean CreateStand(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)
+	{
+		float rotation = (((int)((((entityplayer.rotationYaw)%360)+360)+45)/90)*90)%360;
+		rotation = (rotation + 360)%360;
+		if(side == 1 && world.isAirBlock(x, y + 1, z) && isValid(world, x, y + 1, z) && world.isBlockNormalCubeDefault(x, y, z, false))
+		{
+			EntityStand es = new EntityStand(world,rotation,itemstack.getItemDamage());
+			es.setLocationAndAngles(x+0.5,y+1,z+0.5,rotation,0);
+			world.spawnEntityInWorld(es);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+	@Override
+	public boolean placeBlockAt(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
+    {
+		if(!world.isRemote)
+		{
+			entityplayer.addChatMessage(new ChatComponentText(y+""));
+				int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
+				if (CreateStand(itemstack, entityplayer, world, x, y-1, z, side, dir)) {
+					itemstack.stackSize = itemstack.stackSize-1;
+					world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.LogNatural.stepSound.func_150496_b(), (TFCBlocks.LogNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.LogNatural.stepSound.getPitch() * 0.8F);
+				}
+				return true;
+		}
+		return false;
 	}
 	
 	@Override
