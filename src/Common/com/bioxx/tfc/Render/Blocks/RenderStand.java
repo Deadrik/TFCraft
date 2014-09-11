@@ -80,27 +80,28 @@ public class RenderStand  implements ISimpleBlockRenderingHandler
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
-		Block blockToRender = TFCBlocks.Planks;
+		Block blockToRender = metadata < 16? TFCBlocks.Planks : TFCBlocks.Planks2;
+		Block woodblock = metadata < 16? TFCBlocks.WoodSupportH : TFCBlocks.WoodSupportH2;
 		if(block instanceof IMultipleBlock)
 			blockToRender = ((IMultipleBlock)block).getBlockTypeForRender();
 
 		//Arms of the Stand
 		renderer.setRenderBounds(0.44F,1.45F * 0.70F,0.2F,0.56F,1.55F * 0.70F,0.8F);
-		renderInvBlock(blockToRender, metadata, renderer);
+		renderInvBlock(woodblock, metadata, renderer);
 
 		renderer.setRenderBounds(0.45F, 0.201F * 0.70F, 0.35F, 0.55F, 1.45F * 0.70F, 0.45F);
-		renderInvBlock(blockToRender, metadata, renderer);
+		renderInvBlock(woodblock, metadata, renderer);
 
 		renderer.setRenderBounds(0.45F, 0.201F * 0.70F, 0.55F, 0.55F, 1.45F * 0.70F, 0.65F);
-		renderInvBlock(blockToRender, metadata, renderer);
+		renderInvBlock(woodblock, metadata, renderer);
 
 		//Base of the stand
-		renderer.setRenderBounds(0.2F, 0F, 0.2F, 0.8F, 0.2F * 0.70F, 0.8F);
+		renderer.setRenderBounds(0.2F, 0F, 0.2F, 0.8F, 0.2F * 0.50F, 0.8F);
 		renderInvBlock(blockToRender, metadata, renderer);
 
 		//Main post of the stand
 		renderer.setRenderBounds(0.45F, 1.45F * 0.70F, 0.45F,0.55F,1.9F * 0.70F,0.55F);
-		renderInvBlock(blockToRender, metadata, renderer);
+		renderInvBlock(woodblock, metadata, renderer);
 	}
 
 	@Override

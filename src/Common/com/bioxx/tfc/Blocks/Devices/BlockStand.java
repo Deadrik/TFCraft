@@ -147,7 +147,7 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock, I
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -171,16 +171,15 @@ public class BlockStand extends BlockTerraContainer implements IMultipleBlock, I
 
 	@Override
 	public EquipType getEquipType(ItemStack is) {
-
 		return null;
 	}
 
 	@Override
 	public void onEquippedRender() {
-		GL11.glTranslatef(-0.0F, -2.5F, -0.63F);
+		GL11.glTranslatef(-0.0F, -0.8F, -0.63F);
 		GL11.glScalef(1.8F, 1.8F, 1.8F);
 		GL11.glRotatef(90, 0F, 1F, 0F);
-		GL11.glRotatef(180, 0, 0, 1);
+		//GL11.glRotatef(180, 0, 0, 1);
 	}
 
 	@Override
