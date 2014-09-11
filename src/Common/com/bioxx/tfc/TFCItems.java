@@ -274,7 +274,8 @@ public class TFCItems
 	public static Item SmallOreChunk;
 	public static Item Logs;
 	public static Item Barrel;
-
+	public static Item Loom;
+	
 	public static Item Stands;
 
 	// javelins
