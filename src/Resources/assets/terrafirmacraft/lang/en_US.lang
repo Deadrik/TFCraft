@@ -2362,6 +2362,7 @@ word.brined=Brined
 word.cooked=Cooked
 word.salted=Salted
 word.smoked=Smoked
+word.dried=Dried
 gui.barrel.pickling=Pickling
 gui.barrel.brining=Brining
 tile.Vessel.name=Large Vessel

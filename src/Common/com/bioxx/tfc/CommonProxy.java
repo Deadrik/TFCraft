@@ -64,6 +64,8 @@ import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.TileEntities.TEPottery;
+import com.bioxx.tfc.TileEntities.TESluice;
+import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.TileEntities.TEStand;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
@@ -73,7 +75,6 @@ import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySapling;
-import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TileEntitySpawnMeter;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
 import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
@@ -148,6 +149,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TEWaterPlant.class, "Sea Weed");
 		GameRegistry.registerTileEntity(TEVessel.class, "Vessel");
 		GameRegistry.registerTileEntity(TELightEmitter.class, "LightEmitter");
+		GameRegistry.registerTileEntity(TESmokeRack.class, "Smoke Rack");
 
 		if(b)
 		{

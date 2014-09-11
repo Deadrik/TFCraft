@@ -154,7 +154,9 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			if(Food.isPickled(is) || Food.isSalted(is))
 				mult *= 0.5f;
 			if(Food.isSmoked(is))
-				mult *= 1f - (0.5f * this.getSmokeAbsorbMultiplier());
+				mult *= 1f - (0.25f * this.getSmokeAbsorbMultiplier());
+			if(Food.isDried(is))
+				mult *= 0.25f;
 		}
 		return decayRate / (TFC_Time.getYearRatio(96)) * mult;
 	}
@@ -171,7 +173,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		String s = "";
 		if(Food.isPickled(is))
 			s += StatCollector.translateToLocal("word.pickled") + " ";
-		else if(Food.isBrined(is))
+		else if(Food.isBrined(is) && !Food.isDried(is))
 			s += StatCollector.translateToLocal("word.brined") + " ";
 
 		if(Food.isSalted(is))
@@ -180,6 +182,10 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			s += StatCollector.translateToLocal("word.cooked") + " ";
 		else if(Food.isSmoked(is))
 			s += StatCollector.translateToLocal("word.smoked") + " ";
+
+		if(Food.isDried(is) && !Food.isCooked(is))
+			s += StatCollector.translateToLocal("word.dried") + " ";
+
 		s += StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(is) + ".name");
 		s += getCookedLevelString(is);
 		return s.trim();

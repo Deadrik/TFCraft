@@ -1223,4 +1223,17 @@ public class TFC_Core
 		}
 	}
 
+	public static ItemStack getItemInInventory(Item item, IInventory iinv)
+	{
+		for(int i = 0; i < iinv.getSizeInventory(); i++)
+		{
+			iinv.getStackInSlot(i);
+			if(iinv.getStackInSlot(i) != null && iinv.getStackInSlot(i).getItem() == item)
+			{
+				return iinv.getStackInSlot(i);
+			}
+		}
+		return null;
+	}
+
 }

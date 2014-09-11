@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.MinecraftForge;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.Food;
@@ -30,6 +31,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 {
 	public ItemStack fireItemStacks[];
 	public boolean hasCookingPot;
+	public int smokeTimer = 0;
 
 	public TEFirepit()
 	{
@@ -393,6 +395,8 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			careForInventorySlot(fireItemStacks[7]);
 			careForInventorySlot(fireItemStacks[8]);
 
+			smokeFoods();
+
 			hasCookingPot = (fireItemStacks[1] != null && fireItemStacks[1].getItem() == TFCItems.PotteryPot && 
 					fireItemStacks[1].getItemDamage() == 1);
 
@@ -458,6 +462,51 @@ public class TEFirepit extends TEFireEntity implements IInventory
 
 			if(fuelTimeLeft <= 0)
 				TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
+		}
+	}
+
+	private void smokeFoods() 
+	{
+		if(this.fuelTimeLeft > 0)
+		{
+			this.smokeTimer++;
+			if(smokeTimer > 1000)
+			{
+				smokeTimer = 0;
+				smokeBlock(xCoord, yCoord+1, zCoord);
+				smokeBlock(xCoord+1, yCoord+1, zCoord);
+				smokeBlock(xCoord-1, yCoord+1, zCoord);
+				smokeBlock(xCoord, yCoord+1, zCoord+1);
+				smokeBlock(xCoord, yCoord+1, zCoord-1);
+				smokeBlock(xCoord, yCoord+2, zCoord);
+				smokeBlock(xCoord+1, yCoord+2, zCoord);
+				smokeBlock(xCoord-1, yCoord+2, zCoord);
+				smokeBlock(xCoord, yCoord+2, zCoord+1);
+				smokeBlock(xCoord, yCoord+2, zCoord-1);
+			}
+		}
+	}
+	private void smokeBlock(int x, int y, int z)
+	{
+		if(worldObj.getBlock(x, y, z) == TFCBlocks.SmokeRack)
+		{
+			TESmokeRack te = (TESmokeRack) worldObj.getTileEntity(x, y, z);
+			if(te.getStackInSlot(0) != null)
+			{
+				ItemStack is = te.getStackInSlot(0);
+				if(Food.getSmokeCounter(is) < 12)
+					Food.setSmokeCounter(is, Food.getSmokeCounter(is)+1);
+				else
+					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
+			}
+			if(te.getStackInSlot(1) != null)
+			{
+				ItemStack is = te.getStackInSlot(1);
+				if(Food.getSmokeCounter(is) < 12)
+					Food.setSmokeCounter(is, Food.getSmokeCounter(is)+1);
+				else
+					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
+			}
 		}
 	}
 

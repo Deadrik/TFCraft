@@ -98,6 +98,7 @@ import com.bioxx.tfc.Render.Blocks.RenderNestBox;
 import com.bioxx.tfc.Render.Blocks.RenderOre;
 import com.bioxx.tfc.Render.Blocks.RenderPottery;
 import com.bioxx.tfc.Render.Blocks.RenderSmoke;
+import com.bioxx.tfc.Render.Blocks.RenderSmokeRack;
 import com.bioxx.tfc.Render.Blocks.RenderStand;
 import com.bioxx.tfc.Render.Blocks.RenderSupportBeam;
 import com.bioxx.tfc.Render.Blocks.RenderToolRack;
@@ -126,6 +127,7 @@ import com.bioxx.tfc.Render.TESR.TESRGrill;
 import com.bioxx.tfc.Render.TESR.TESRIngotPile;
 import com.bioxx.tfc.Render.TESR.TESRPottery;
 import com.bioxx.tfc.Render.TESR.TESRQuern;
+import com.bioxx.tfc.Render.TESR.TESRSmokeRack;
 import com.bioxx.tfc.Render.TESR.TESRToolrack;
 import com.bioxx.tfc.Render.TESR.TESRWorldItem;
 import com.bioxx.tfc.TileEntities.TEAnvil;
@@ -136,6 +138,7 @@ import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.TileEntities.TEPottery;
+import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
@@ -245,6 +248,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.vesselRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderVessel());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.torchRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTorch());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.smokeRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderSmoke());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.smokeRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderSmokeRack());
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 	}
@@ -282,6 +286,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TEWorldItem.class, "worldItem", new TESRWorldItem());
 		ClientRegistry.registerTileEntity(TileEntityQuern.class, "Quern", new TESRQuern());
 		ClientRegistry.registerTileEntity(TEGrill.class, "GrillTESR", new TESRGrill());
+		ClientRegistry.registerTileEntity(TESmokeRack.class, "SmokeRackTESR", new TESRSmokeRack());
 	}
 
 	@Override

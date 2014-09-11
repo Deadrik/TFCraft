@@ -50,7 +50,6 @@ public class BlockTorch extends BlockTerraContainer
 	public int getLightValue(IBlockAccess world, int x, int y, int z)
 	{
 		int meta = world.getBlockMetadata(x, y, z);
-		TELightEmitter te = (TELightEmitter)world.getTileEntity(x, y, z);
 		if(meta >= 8)
 			return 0;
 		return getLightValue();

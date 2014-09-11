@@ -155,4 +155,36 @@ public class Food
 		NBTTagCompound nbt = is.getTagCompound();
 		return nbt.getFloat("foodWeight");
 	}
+
+	public static boolean isDried(ItemStack is)
+	{
+		NBTTagCompound nbt = getProcTag(is);
+		return nbt.getShort("Dried") >= 12;
+	}
+
+	public static short getDried(ItemStack is)
+	{
+		NBTTagCompound nbt = getProcTag(is);
+		return nbt.getShort("Dried");
+	}
+
+	public static void setDried(ItemStack is, int value)
+	{
+		NBTTagCompound nbt = getProcTag(is);
+		nbt.setShort("Dried", (short)value);
+		setProcTag(is, nbt);
+	}
+
+	public static short getSmokeCounter(ItemStack is)
+	{
+		NBTTagCompound nbt = getProcTag(is);
+		return nbt.getShort("SmokeCounter");
+	}
+
+	public static void setSmokeCounter(ItemStack is, int value)
+	{
+		NBTTagCompound nbt = getProcTag(is);
+		nbt.setShort("SmokeCounter", (short)value);
+		setProcTag(is, nbt);
+	}
 }
