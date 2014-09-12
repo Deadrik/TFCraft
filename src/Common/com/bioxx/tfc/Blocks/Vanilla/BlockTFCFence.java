@@ -217,7 +217,13 @@ public class BlockTFCFence extends BlockFence
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
 	{
-		return world.isRemote ? true : ItemLead.func_150909_a(player, world, x, y, z);
+		if(!world.isRemote)
+		{
+			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemLead)
+				return ItemLead.func_150909_a(player, world, x, y, z);
+			else return false;
+		}
+		return true;
 	}
 
 	@Override
