@@ -74,15 +74,33 @@ public class BlockCustomLiquid extends BlockFluidClassic
 	 * Ticks the block if it's been scheduled
 	 */
 	@Override
-	public void updateTick(World world, int i, int j, int k, Random rand)
+	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
-		super.updateTick(world, i, j, k, rand);
-		if((world.provider) instanceof TFCProvider)
+		super.updateTick(world, x, y, z, rand);
+		if(!world.isRemote)
 		{
-			if (((TFCProvider)(world.provider)).tryBlockFreeze(i, j, k, false))
+			if((world.provider) instanceof TFCProvider)
 			{
-
+				((TFCProvider)(world.provider)).tryBlockFreeze(x, y, z, false);
 			}
+
+			if(this.getMaterial() == Material.lava)
+			{
+				if(world.getBlock(x, y+1, z) == Blocks.air)
+				{
+					int i = x+1+rand.nextInt(4);
+					int j = y+1+rand.nextInt(4);
+					int k = z+1+rand.nextInt(4);
+					if(world.getBlock(i, j, k) == Blocks.air && 
+							(world.isSideSolid(i, j+1, k, ForgeDirection.DOWN) || world.isSideSolid(i, j-1, k, ForgeDirection.UP) ||
+									world.isSideSolid(i-1, j, k, ForgeDirection.EAST) || world.isSideSolid(i+1, j, k, ForgeDirection.WEST) ||
+									world.isSideSolid(i, j, k+1, ForgeDirection.NORTH) || world.isSideSolid(i, j, k-1, ForgeDirection.SOUTH)))
+					{
+						world.setBlock(i, j, k, TFCBlocks.Sulfur);
+					}
+				}
+			}
+
 		}
 	}
 
