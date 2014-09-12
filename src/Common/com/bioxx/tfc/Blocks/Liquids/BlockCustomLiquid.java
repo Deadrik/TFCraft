@@ -88,9 +88,9 @@ public class BlockCustomLiquid extends BlockFluidClassic
 			{
 				if(world.getBlock(x, y+1, z) == Blocks.air)
 				{
-					int i = x+1+rand.nextInt(4);
+					int i = x-2+rand.nextInt(5);
 					int j = y+1+rand.nextInt(4);
-					int k = z+1+rand.nextInt(4);
+					int k = z-2+rand.nextInt(5);
 					if(world.getBlock(i, j, k) == Blocks.air && 
 							(world.isSideSolid(i, j+1, k, ForgeDirection.DOWN) || world.isSideSolid(i, j-1, k, ForgeDirection.UP) ||
 									world.isSideSolid(i-1, j, k, ForgeDirection.EAST) || world.isSideSolid(i+1, j, k, ForgeDirection.WEST) ||
