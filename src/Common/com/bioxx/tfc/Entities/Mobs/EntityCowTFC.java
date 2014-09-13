@@ -143,7 +143,6 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			if(ai.getClass() == EntityAIMoveTowardsRestriction.class){
 				if(((EntityAIMoveTowardsRestriction)ai).shouldExecute()){
 					angerTick+=(int)(getAggression() * getObedience());
-					System.out.println("Getting Angrier: "+(int)(getAggression() * getObedience()));
 				}
 			}
 		}

@@ -102,7 +102,6 @@ public class CraftingHandler
 							size = iinventory.getStackInSlot(i).getItemDamage();
 					}
 					boolean add =!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Hide, 1, size));
-					System.out.println(add);
 					if(add)
 						e.player.entityDropItem(new ItemStack(TFCItems.Hide, 1, size), 1);
 				}

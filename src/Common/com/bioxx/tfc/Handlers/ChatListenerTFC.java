@@ -14,10 +14,8 @@ public class ChatListenerTFC// implements IChatListener
 	{
 		String msg = event.message;
 		long soberTime = event.player.getEntityData().hasKey("soberTime") ? event.player.getEntityData().getLong("soberTime") : 0;
-		System.out.println("Don't know if drunk");
 		if(soberTime > 0)
 		{
-			System.out.println("Drunk");
 			String s = "aeiouywrsflzvbnmAEIOUYWRSFLZVBNM";
 			Random rand = new Random();
 			for(int i = 0; i < event.message.length()-1; i++)
@@ -39,7 +37,6 @@ public class ChatListenerTFC// implements IChatListener
 						}
 						if((s2.equals("S") || s2.equals("s")) && !end.substring(0, 1).equals("S") && !end.substring(0, 1).equals("s"))
 						{
-							System.out.println("In the s");
 							msg += (s2.toUpperCase().equals(s2) ? (end.substring(0, 1).toUpperCase().equals(end.substring(0, 1)) ? "H" : "h".toLowerCase()) : "h");
 							m++;
 						}

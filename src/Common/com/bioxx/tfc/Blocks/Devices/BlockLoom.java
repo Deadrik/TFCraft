@@ -161,7 +161,6 @@ public class BlockLoom extends BlockTerraContainer
 			if(l == 3)//+x
 				byte0 = 3;
 			tel.rotation = byte0;
-			System.out.println(byte0);
 		}
 	}
 

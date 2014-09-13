@@ -122,11 +122,6 @@ public class ArmourStandHighlightHandler
 		}
 	}
 
-	void print (Vec3 vec)
-	{
-		System.out.println(vec.xCoord+", "+vec.yCoord+", "+vec.zCoord);
-	}
-
 	boolean isVecInsideBox(AxisAlignedBB aabb, EntityPlayer player, Vec3 unit,double xOffset,double yOffset,double zOffset)
 	{
 		unit = player.getLookVec();
