@@ -65,6 +65,7 @@ import com.bioxx.tfc.Handlers.Client.PlankHighlightHandler;
 import com.bioxx.tfc.Handlers.Client.PlayerRenderHandler;
 import com.bioxx.tfc.Handlers.Client.RenderOverlayHandler;
 import com.bioxx.tfc.Handlers.Client.SoundHandler;
+import com.bioxx.tfc.Render.EntityRendererTFC;
 import com.bioxx.tfc.Render.FoliageColorReloadListener;
 import com.bioxx.tfc.Render.GrassColorReloadListener;
 import com.bioxx.tfc.Render.RenderBear;
@@ -174,6 +175,9 @@ public class ClientProxy extends CommonProxy
 		IReloadableResourceManager IRRM = (IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
 		IRRM.registerReloadListener(new GrassColorReloadListener());
 		IRRM.registerReloadListener(new FoliageColorReloadListener());
+		
+		Minecraft.getMinecraft().entityRenderer = new EntityRendererTFC(Minecraft.getMinecraft(),Minecraft.getMinecraft().getResourceManager());
+		IRRM.registerReloadListener(Minecraft.getMinecraft().entityRenderer);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderTerraJavelin());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySquidTFC.class, new RenderSquidTFC(new ModelSquidTFC(), 0.7F));
