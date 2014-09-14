@@ -21,7 +21,6 @@ public class PlayerUpdatePacket extends AbstractPacket
 	private byte flag;
 	private float stomachLevel;
 	private float waterLevel;
-	private long soberTime;
 	private float nutrFruit;
 	private float nutrVeg;
 	private float nutrGrain;
@@ -43,7 +42,6 @@ public class PlayerUpdatePacket extends AbstractPacket
 			FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(P);
 			this.stomachLevel = fs.stomachLevel;
 			this.waterLevel = fs.waterLevel;
-			this.soberTime = fs.soberTime;
 			this.nutrFruit = fs.nutrFruit;
 			this.nutrVeg = fs.nutrVeg;
 			this.nutrGrain = fs.nutrGrain;
@@ -82,7 +80,6 @@ public class PlayerUpdatePacket extends AbstractPacket
 		{
 			buffer.writeFloat(this.stomachLevel);
 			buffer.writeFloat(this.waterLevel);
-			buffer.writeLong(this.soberTime);
 			buffer.writeFloat(this.nutrFruit);
 			buffer.writeFloat(this.nutrVeg);
 			buffer.writeFloat(this.nutrGrain);
@@ -116,7 +113,6 @@ public class PlayerUpdatePacket extends AbstractPacket
 		{
 			this.stomachLevel = buffer.readFloat();
 			this.waterLevel = buffer.readFloat();
-			this.soberTime = buffer.readLong();
 			this.nutrFruit = buffer.readFloat();
 			this.nutrVeg = buffer.readFloat();
 			this.nutrGrain = buffer.readFloat();
@@ -159,7 +155,6 @@ public class PlayerUpdatePacket extends AbstractPacket
 			FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
 			fs.stomachLevel = this.stomachLevel;
 			fs.waterLevel = this.waterLevel;
-			fs.soberTime = this.soberTime;
 			fs.nutrFruit = this.nutrFruit;
 			fs.nutrVeg = this.nutrVeg;
 			fs.nutrGrain = this.nutrGrain;

@@ -261,13 +261,34 @@ public class EntityFishTFC extends EntitySquid
 				}
 			}
 			else{
-				destX = (int)x + (this.rand.nextInt(10) * (this.rand.nextBoolean()?-1:1));
-				destY = (int)y + (this.rand.nextInt(6) * (this.rand.nextBoolean()?-1:1));
-				destZ = (int)z + (this.rand.nextInt(10) * (this.rand.nextBoolean()?-1:1));
-			}
-			for(EntityPlayer p : nearbyPlayers){
-				if(p.getDistance((double)destX, (double)destY, (double)destZ)<8){
-					tooCloseToPlayer = true;
+				for(EntityPlayer p : nearbyPlayers){
+					if(p.getDistance((double)destX, (double)destY, (double)destZ)<8){
+						tooCloseToPlayer = true;
+					}
+				}
+				int tempX = 0;
+				int tempY = 0;
+				int tempZ = 0;
+				for(EntityPlayer p : nearbyPlayers){
+					if(p.getDistance((double)destX, (double)destY, (double)destZ)<8){
+						tempX+= p.posX;
+						tempY+= p.posY;
+						tempZ+= p.posZ;
+					}
+				}
+				if(nearbyPlayers.size() >0){
+				tempX /= nearbyPlayers.size();
+				tempY /= nearbyPlayers.size();
+				tempZ /= nearbyPlayers.size();
+				
+				destX = (int) (2*x - tempX);
+				destY = (int) (2*y - tempY);
+				destZ = (int) (2*z - tempZ);
+				}
+				else{
+					destX = (int) x + (this.rand.nextInt(10) * (this.rand.nextBoolean()?-1:1));;
+					destY = (int) y + (this.rand.nextInt(3) * (this.rand.nextBoolean()?-1:1));;
+					destZ = (int) z + (this.rand.nextInt(10) * (this.rand.nextBoolean()?-1:1));;
 				}
 			}
 			needsNewLocation = !(TFC_Core.isWater(this.worldObj.getBlock(destX, destY, destZ))) ||

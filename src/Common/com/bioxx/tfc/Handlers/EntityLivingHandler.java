@@ -130,9 +130,7 @@ public class EntityLivingHandler
 			else
 			{
 				PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
-				//onUpdate(player) still has a !worldObj.isRemote check, but this allows us to render drunkenness
-				FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-				foodstats.onUpdate(player);
+
 				if(pi != null && player.inventory.getCurrentItem() != null)
 				{
 					if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)

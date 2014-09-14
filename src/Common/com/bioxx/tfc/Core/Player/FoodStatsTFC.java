@@ -3,18 +3,14 @@ package com.bioxx.tfc.Core.Player;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
-import com.bioxx.tfc.Render.EntityRendererTFC;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
@@ -29,9 +25,6 @@ public class FoodStatsTFC
 	public float stomachLevel = 24;
 	private float stomachMax = 24.0f;
 	private float prevFoodLevel = 24;
-
-	private ResourceLocation drunkBlur = new ResourceLocation("shaders/post/blur.json");
-	private ResourceLocation wastedBlur = new ResourceLocation("shaders/post/blur.json");//new ResourceLocation("shaders/post/blurPhosphor.json");
 
 	public float nutrFruit = 1.0f;
 	public float nutrVeg = 1.0f;
@@ -181,20 +174,6 @@ public class FoodStatsTFC
 				}
 			}
 		}
-		else{
-			if(Minecraft.getMinecraft().entityRenderer instanceof EntityRendererTFC){
-				EntityRendererTFC erTFC = (EntityRendererTFC) Minecraft.getMinecraft().entityRenderer;
-				if((erTFC.getCurrentShaderLocation() == null || !erTFC.getCurrentShaderLocation().equals(wastedBlur)) && soberTime > 8000){
-					erTFC.setManualShader(wastedBlur);
-				}
-				else if((erTFC.getCurrentShaderLocation() == null || !erTFC.getCurrentShaderLocation().equals(drunkBlur)) && soberTime > 4000 && soberTime <=8000){
-					erTFC.setManualShader(drunkBlur);
-				}
-				else if(erTFC.getManualShaderBeingUsed() && soberTime <= 4000){
-					erTFC.deactivateManualShader();
-				}
-			}
-		}
 	}
 
 	protected void reduceNutrition(float amount) 
@@ -256,7 +235,6 @@ public class FoodStatsTFC
 			this.foodTimer = foodCompound.getLong("foodTickTimer");
 			this.foodHealTimer = foodCompound.getLong("foodHealTimer");
 			this.waterTimer = foodCompound.getLong("waterTimer");
-			this.soberTime = foodCompound.getLong("soberTime");
 			this.satisfaction = foodCompound.getFloat("foodSaturationLevel");
 			this.foodExhaustionLevel = foodCompound.getFloat("foodExhaustionLevel");
 			this.nutrFruit = foodCompound.getFloat("nutrFruit");
@@ -278,7 +256,6 @@ public class FoodStatsTFC
 		foodCompound.setLong("foodTickTimer", this.foodTimer);
 		foodCompound.setLong("foodHealTimer", this.foodHealTimer);
 		foodCompound.setLong("waterTimer", this.waterTimer);
-		foodCompound.setLong("soberTime", this.soberTime);
 		foodCompound.setFloat("foodSaturationLevel", this.satisfaction);
 		foodCompound.setFloat("foodExhaustionLevel", this.foodExhaustionLevel);
 		foodCompound.setFloat("nutrFruit", nutrFruit);
