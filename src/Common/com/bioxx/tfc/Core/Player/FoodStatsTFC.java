@@ -95,7 +95,7 @@ public class FoodStatsTFC
 			{
 				this.foodTimer += TFC_Time.hourLength;
 				float drainMult = 1.0f;
-				if(player.getSleepTimer() > 0)
+				if(player.isPlayerSleeping())
 				{
 					drainMult = 0.50f;
 				}
