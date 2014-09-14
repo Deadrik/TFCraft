@@ -53,9 +53,10 @@ public class FoodCraftingHandler
 				{
 					if(iinventory.getStackInSlot(i) == null)
 						continue;
-					if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
+					if (iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight") && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodDecay"))
 					{
 						float foodWeight = Food.getWeight(iinventory.getStackInSlot(i));
+						float foodDecay = Food.getDecay(iinventory.getStackInSlot(i));
 						int strawCount = 0;
 
 						for (int j = 0; j < foodWeight; j += 4)
@@ -64,7 +65,7 @@ public class FoodCraftingHandler
 						if (!e.player.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw, strawCount)))
 							e.player.dropItem(TFCItems.Straw, strawCount);
 
-						ItemFoodTFC.createTag(craftResult, Food.getWeight(iinventory.getStackInSlot(i)));
+						ItemFoodTFC.createTag(craftResult, foodWeight, foodDecay);
 					}
 				}
 			}
@@ -285,8 +286,8 @@ public class FoodCraftingHandler
 			{
 				if(iinventory.getStackInSlot(i) == null)
 					continue;
-				if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
-					ItemFoodTFC.createTag(craftResult, iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight"));
+				if (iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight") && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodDecay"))
+					ItemFoodTFC.createTag(craftResult, iinventory.getStackInSlot(i).getTagCompound().getFloat("foodWeight"), iinventory.getStackInSlot(i).getTagCompound().getFloat("foodDecay"));
 			}
 		}
 		else if(craftResult.hasTagCompound() && craftResult.getTagCompound().hasKey("foodWeight"))
@@ -302,7 +303,7 @@ public class FoodCraftingHandler
 			{
 				if(iinventory.getStackInSlot(i) == null)
 					continue;
-				if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
+				if (iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight") && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodDecay"))
 				{
 					NBTTagCompound grainNBT = iinventory.getStackInSlot(i).getTagCompound();
 					float grainWeight = grainNBT.getFloat("foodWeight");
