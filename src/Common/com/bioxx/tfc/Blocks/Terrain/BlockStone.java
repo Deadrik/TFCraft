@@ -3,12 +3,6 @@ package com.bioxx.tfc.Blocks.Terrain;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Items.Tools.ItemHammer;
-import com.bioxx.tfc.api.Tools.IToolChisel;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -20,6 +14,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.Tools.ItemHammer;
+import com.bioxx.tfc.api.Tools.IToolChisel;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -124,7 +125,7 @@ public class BlockStone extends BlockCollapsable
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 		Random R = new Random();
-		dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.LooseRock, R.nextInt(4), l+looseStart));
+		dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.LooseRock, R.nextInt(2) + 1, l + looseStart));
 
 		super.harvestBlock(world, entityplayer, i, j, k, l);
 	}
