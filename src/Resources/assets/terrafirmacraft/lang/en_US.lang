@@ -74,6 +74,17 @@ achievement.achIronAge.desc=Mine an iron bloom to enter the Iron Age
 achievement.achPokeCreeper=Steve Irwin
 achievement.achPokeCreeper.desc=Poke it with a stick
 
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=No valid animals in range!
+commands.transferTamed.tooMany=Too many animals in range!
+commands.transferTamed.wrongOwner=That doesn't belong to you!
+commands.transferTamed.sameTarget=You can't transfer to yourself!
+commands.transferTamed.display.incoming=An animal has been transferred to you by %s!
+commands.transferTamed.display.outgoing=You've transferred an animal to %s!
+commands.transferTamed.wrongSender=You can't transfer animals!
+
 #========
 #= Food =
 #========

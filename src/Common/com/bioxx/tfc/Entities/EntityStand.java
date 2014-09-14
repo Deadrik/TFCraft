@@ -7,6 +7,7 @@ import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 import com.bioxx.tfc.Items.ItemTFCArmor;
 import com.bioxx.tfc.TileEntities.TEStand;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -178,7 +179,8 @@ public class EntityStand extends EntityLiving
 				this.entityDropItem(equipable[i], 0);
 				}
 			}
-			this.entityDropItem(new ItemStack(TFCBlocks.ArmourStand,1,woodType), 0);
+			Block blockToDrop = woodType < 15? TFCBlocks.ArmourStand : TFCBlocks.ArmourStand2;
+			this.entityDropItem(new ItemStack(blockToDrop,1,woodType%16), 0);
 		}
 	}
 

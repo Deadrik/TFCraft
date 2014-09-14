@@ -14,6 +14,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
 import com.bioxx.tfc.Commands.CommandTime;
+import com.bioxx.tfc.Commands.CommandTransferTamed;
 import com.bioxx.tfc.Commands.DebugModeCommand;
 import com.bioxx.tfc.Commands.GSPVisualCommand;
 import com.bioxx.tfc.Commands.GenCommand;
@@ -266,6 +267,7 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new GenCommand());
 		evt.registerServerCommand(new PrintImageMapCommand());
 		evt.registerServerCommand(new GiveSkillCommand());
+		evt.registerServerCommand(new CommandTransferTamed());
 	}	
 
 	public void loadSettings()
