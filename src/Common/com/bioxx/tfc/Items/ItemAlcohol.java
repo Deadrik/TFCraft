@@ -132,7 +132,7 @@ public class ItemAlcohol extends ItemTerra
 			int levelMod = 250*player.experienceLevel;
 			if(soberTime >3000+levelMod){
 				if(rand.nextInt(4)==0){
-					player.addPotionEffect(new PotionEffect(9,time,4));
+					//player.addPotionEffect(new PotionEffect(9,time,4));
 				}
 				if(soberTime >5000+levelMod){
 					if(rand.nextInt(4)==0){
@@ -147,7 +147,7 @@ public class ItemAlcohol extends ItemTerra
 								player.addPotionEffect(new PotionEffect(20,time,4));
 							}
 						}
-						if(soberTime > 10000+levelMod){
+						if(soberTime > 10000+levelMod && !player.capabilities.isCreativeMode){
 							soberTime = 0;
 							//((EntityPlayerMP)player).mcServer.getConfigurationManager().sendChatMsg(player.username+" died of alcohol poisoning.");
 							player.inventory.dropAllItems();

@@ -20,6 +20,7 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 public class InitClientWorldPacket extends AbstractPacket
 {
 	private long seed;
+	private long soberTime;
 	private float stomachLevel;
 	private float waterLevel;
 	private float nutrFruit;
@@ -45,6 +46,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		fs.writeNBT(P.getEntityData());
 		this.stomachLevel = fs.stomachLevel;
 		this.waterLevel = fs.waterLevel;
+		this.soberTime = fs.soberTime;
 		this.nutrFruit = fs.nutrFruit;
 		this.nutrVeg = fs.nutrVeg;
 		this.nutrGrain = fs.nutrGrain;
@@ -65,6 +67,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		buffer.writeInt(this.daysInYear);
 		buffer.writeFloat(this.stomachLevel);
 		buffer.writeFloat(this.waterLevel);
+		buffer.writeLong(this.soberTime);
 		buffer.writeFloat(this.nutrFruit);
 		buffer.writeFloat(this.nutrVeg);
 		buffer.writeFloat(this.nutrGrain);
@@ -83,6 +86,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		this.daysInYear = buffer.readInt();
 		this.stomachLevel = buffer.readFloat();
 		this.waterLevel = buffer.readFloat();
+		this.soberTime = buffer.readLong();
 		this.nutrFruit = buffer.readFloat();
 		this.nutrVeg = buffer.readFloat();
 		this.nutrGrain = buffer.readFloat();
@@ -110,6 +114,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
 		fs.stomachLevel = this.stomachLevel;
 		fs.waterLevel = this.waterLevel;
+		fs.soberTime = this.soberTime;
 		fs.nutrFruit = this.nutrFruit;
 		fs.nutrVeg = this.nutrVeg;
 		fs.nutrProtein = this.nutrProtein;
