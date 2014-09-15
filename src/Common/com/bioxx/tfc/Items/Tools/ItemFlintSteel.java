@@ -33,12 +33,12 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 	}
 
 	@Override
-	public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
 		{
-			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, x, y, z - 1) &&
-					TFC_Core.isSouthFaceSolid(world, x, y, z + 1) &&
+			boolean surroundSolids = TFC_Core.isNorthFaceSolid(world, x, y, z + 1) &&
+					TFC_Core.isSouthFaceSolid(world, x, y, z - 1) &&
 					TFC_Core.isEastFaceSolid(world, x - 1, y, z) &&
 					TFC_Core.isWestFaceSolid(world, x + 1, y, z);
 
@@ -117,7 +117,6 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 			}
 			else
 				return true;
-			return false;
 		}
 		return false;
 	}
