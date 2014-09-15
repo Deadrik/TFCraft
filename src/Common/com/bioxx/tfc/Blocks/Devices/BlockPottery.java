@@ -79,7 +79,8 @@ public class BlockPottery extends BlockTerraContainer
 		{
 			TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
 
-			if (te.isLit())
+			if (te.isLit() || player.inventory.getCurrentItem() != null && 
+					(player.inventory.getCurrentItem().getItem() == TFCItems.FlintSteel || player.inventory.getCurrentItem().getItem() == TFCItems.FireStarter))
 				return false;
 
 			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == TFCItems.Straw && !player.isSneaking())
