@@ -187,4 +187,14 @@ public class Food
 		nbt.setShort("SmokeCounter", (short)value);
 		setProcTag(is, nbt);
 	}
+
+	public static int getCookedColorMultiplier(ItemStack is)
+	{
+		float cookedLevel = Food.getCooked(is);
+		int r = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f)); 
+		int b = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
+		int g = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
+		int rbg = (r << 16) + (b << 8) + g;
+		return rbg;
+	}
 }

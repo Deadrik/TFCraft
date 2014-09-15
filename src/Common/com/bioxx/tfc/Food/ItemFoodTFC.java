@@ -14,6 +14,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCItems;
@@ -23,6 +24,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.Render.Item.FoodItemRenderer;
 import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
@@ -36,9 +38,6 @@ import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.IMergeableFood;
 import com.bioxx.tfc.api.Interfaces.ISize;
 import com.bioxx.tfc.api.Util.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMergeableFood
 {
@@ -82,6 +81,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		tasteBitter = bi;
 		tasteUmami = um;
 		foodID = FoodRegistry.getInstance().registerFood(fg, this);
+		MinecraftForgeClient.registerItemRenderer(this, new FoodItemRenderer());
 	}
 
 	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible)
@@ -126,6 +126,14 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	}
 
 	@Override
+	public IIcon getIcon(ItemStack stack, int pass)
+	{
+		if(Food.isCooked(stack))
+			return cookedIcon;
+		return this.itemIcon;
+	}
+
+	/*@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack is, int par2)
 	{
@@ -135,7 +143,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		int g = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
 		int rbg = (r << 16) + (b << 8) + g;
 		return rbg;
-	}
+	}*/
 
 	@Override
 	public float getDecayRate(ItemStack is)
