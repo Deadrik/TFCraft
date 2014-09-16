@@ -16,6 +16,7 @@ import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 import com.bioxx.tfc.Entities.EntityProjectileTFC;
 import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.ItemTerra;
@@ -43,7 +44,8 @@ public class ItemCustomBow extends ItemBow implements ISize
 
 	public boolean consumeArrowInQuiver(EntityPlayer player, boolean shouldConsume)
 	{
-		ItemStack quiver = player.inventory.armorItemInSlot(0);
+		ItemStack quiver = 	((InventoryPlayerTFC) player.inventory).extraEquipInventory[0];
+
 /*		for(int i = 0; i < 9; i++)
 		{
 			if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemQuiver)
