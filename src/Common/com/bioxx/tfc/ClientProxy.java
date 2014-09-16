@@ -285,6 +285,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TEChest.class, "chest", new TESRChest());
 		ClientRegistry.registerTileEntity(TEIngotPile.class, "ingotPile", new TESRIngotPile());
 		ClientRegistry.registerTileEntity(TEFirepit.class, "TerraFirepit", new TESRFirepit());
+		ClientRegistry.registerTileEntity(TELoom.class, "Loom", new TESRLoom());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 		ClientRegistry.registerTileEntity(TEPottery.class, "Pottery", new TESRPottery());
 		ClientRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep", new TESRFoodPrep());

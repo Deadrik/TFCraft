@@ -58,6 +58,7 @@ import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
 import com.bioxx.tfc.TileEntities.TELightEmitter;
 import com.bioxx.tfc.TileEntities.TELogPile;
+import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 import com.bioxx.tfc.TileEntities.TENestBox;
@@ -163,6 +164,7 @@ public class CommonProxy
 			GameRegistry.registerTileEntity(TEAnvil.class, "TerraAnvil");
 			GameRegistry.registerTileEntity(TEWorldItem.class, "worldItem");
 			GameRegistry.registerTileEntity(TileEntityQuern.class, "Quern");
+			GameRegistry.registerTileEntity(TELoom.class, "Loom");
 			GameRegistry.registerTileEntity(TEGrill.class, "grill");
 		}
 

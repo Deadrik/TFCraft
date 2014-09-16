@@ -25,7 +25,7 @@ public class ItemWoolYarn extends ItemTerra
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		if(!world.isRemote && side > 1)
+		if(!world.isRemote && side > 1 && !world.getBlock(x, y, z).equals(TFCBlocks.Loom))
 		{
 			int length = 0;
 			int[] map = sidesMap[side];
