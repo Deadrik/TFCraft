@@ -192,6 +192,8 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.carpet, 2, 0), new Object[] { "$$", Character.valueOf('$'), "materialCloth" }));
 
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Blocks.lit_pumpkin, 1), "blockTorch", "blockPumpkin"));
+
 		for (int i = 0; i < 16; i++)
 			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.carpet, 1, i), new Object[] { new ItemStack(TFCItems.Dye, 1, 15 - i), new ItemStack(Blocks.carpet, 1, 32767) });
 
@@ -825,6 +827,12 @@ public class Recipes
 		OreDictionary.registerOre("blockDirt", new ItemStack(Blocks.dirt));
 		OreDictionary.registerOre("blockDirt", new ItemStack(TFCBlocks.Dirt, 1, WILDCARD));
 		OreDictionary.registerOre("blockDirt", new ItemStack(TFCBlocks.Dirt2, 1, WILDCARD));
+
+		OreDictionary.registerOre("blockTorch", new ItemStack(Blocks.torch));
+		OreDictionary.registerOre("blockTorch", new ItemStack(TFCBlocks.Torch));
+
+		OreDictionary.registerOre("blockPumpkin", new ItemStack(Blocks.pumpkin));
+		OreDictionary.registerOre("blockPumpkin", new ItemStack(TFCBlocks.Pumpkin));
 	}
 
 	private static ItemStack checkMelted(ItemStack is)
