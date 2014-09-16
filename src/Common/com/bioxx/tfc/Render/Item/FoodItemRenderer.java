@@ -34,7 +34,7 @@ public class FoodItemRenderer implements IItemRenderer
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glEnable(GL11.GL_BLEND);
-		renderIcon(0, 0, is.getItem().getIcon(is, 0), 16, 16);
+		renderIcon(0, 0, is.getItem().getIconIndex(is), 16, 16);
 		if(is.getItem() instanceof IFood && is.hasTagCompound())
 		{
 			float decayPerc = Math.max(((IFood)is.getItem()).getFoodDecay(is) / ((IFood)is.getItem()).getFoodWeight(is), 0);
