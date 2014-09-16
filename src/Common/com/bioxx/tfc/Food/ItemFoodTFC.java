@@ -121,7 +121,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		if(hasCookedIcon)
 		{
 			String name = this.getUnlocalizedName();
-			this.cookedIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + name.replace("item.", "")+"Cooked");
+			this.cookedIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + name.replace("item.", "")+" Cooked");
 		}
 	}
 
