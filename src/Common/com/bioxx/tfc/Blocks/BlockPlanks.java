@@ -11,7 +11,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
@@ -20,7 +19,6 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Tools.IToolChisel;
-import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -76,7 +74,7 @@ public class BlockPlanks extends BlockTerra
 	 * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
 	 */
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) 
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float par7, float par8, float par9) 
 	{
 		boolean hasHammer = false;
 		for(int i = 0; i < 9;i++)
@@ -86,11 +84,6 @@ public class BlockPlanks extends BlockTerra
 				entityplayer.getCurrentEquippedItem().getItem() instanceof IToolChisel && 
 				hasHammer && ((IToolChisel)entityplayer.getCurrentEquippedItem().getItem()).canChisel(entityplayer, x, y, z))
 		{
-			MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-			if(objectMouseOver == null)
-				return false;
-			int side = objectMouseOver.sideHit;
-
 			Block block = world.getBlock(x, y, z);
 			byte meta = (byte) world.getBlockMetadata(x, y, z);
 
