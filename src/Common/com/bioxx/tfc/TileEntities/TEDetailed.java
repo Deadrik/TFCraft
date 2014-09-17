@@ -73,6 +73,17 @@ public class TEDetailed extends NetworkTileEntity
 		return !quads.get((x * 2 + z) * 2 + y);
 	}
 
+	public boolean isBlockEmpty()
+	{
+		byte[] ba = data.toByteArray();
+		for(byte b : ba)
+		{
+			if(b != -1)
+				return false;
+		}
+		return true;
+	}
+
 	/**
 	 * Reads a tile entity from NBT.
 	 */
