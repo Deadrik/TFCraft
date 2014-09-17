@@ -808,7 +808,7 @@ public class TFCBlocks
 		Blocks.fire.setFireInfo(Barrel, 5, 20);
 		Blocks.fire.setFireInfo(Crops, 20, 20);
 		Blocks.fire.setFireInfo(LogPile, 20, 20);
-		Blocks.fire.setFireInfo(Charcoal, 100, 20);
+		//Blocks.fire.setFireInfo(Charcoal, 100, 20);
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
 			Blocks.fire.setFireInfo(Doors[i], 5, 20);
 	}

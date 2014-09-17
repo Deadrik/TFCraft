@@ -11,7 +11,7 @@ public class BarrelBriningRecipe extends BarrelRecipe
 
 	public BarrelBriningRecipe(FluidStack inputFluid, FluidStack outputFluid)
 	{
-		super(null, inputFluid, null, outputFluid, 24);
+		super(null, inputFluid, null, outputFluid, 4);
 	}
 
 	@Override
