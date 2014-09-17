@@ -5,6 +5,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class Food 
 {
+	public static final int DRYHOURS = 4;
+
 	private static NBTTagCompound getProcTag(ItemStack is)
 	{
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("Processing Tag"))
@@ -159,7 +161,7 @@ public class Food
 	public static boolean isDried(ItemStack is)
 	{
 		NBTTagCompound nbt = getProcTag(is);
-		return nbt.getShort("Dried") >= 12;
+		return nbt.getShort("Dried") >= DRYHOURS;
 	}
 
 	public static short getDried(ItemStack is)

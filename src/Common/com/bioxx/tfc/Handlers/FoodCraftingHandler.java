@@ -117,6 +117,8 @@ public class FoodCraftingHandler
 		boolean salted = true;
 		boolean pickled = true;
 		boolean brined = true;
+		boolean dried = true;
+		int driedAmt = 0;
 		int count = 0;
 		int foodSlot = 0; //This is used when cutting food to track where the food originally was since the merge code may remove the stack
 		for(int i = 0; i < iinventory.getSizeInventory(); i++)
@@ -167,6 +169,7 @@ public class FoodCraftingHandler
 				salted = salted && Food.isSalted(is);
 				pickled = pickled && Food.isPickled(is);
 				brined = brined && Food.isBrined(is);
+				dried = dried && Food.isDried(is);
 
 				//If the smoked or cooked profile is not the same than we cant combine
 				//Check if we can add any more to this bundle of food
@@ -231,6 +234,8 @@ public class FoodCraftingHandler
 		Food.setSalted(craftResult, salted);
 		Food.setPickled(craftResult, pickled);
 		Food.setBrined(craftResult, brined);
+		if(dried)
+			Food.setDried(craftResult, Food.DRYHOURS);
 
 		if(craftResult.stackSize == 0)
 			craftResult.stackSize = 1;
