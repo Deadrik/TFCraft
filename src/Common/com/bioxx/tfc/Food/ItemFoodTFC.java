@@ -377,7 +377,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-		if (foodstats.needFood() && isEdible)
+		if (foodstats.needFood() && this.isEdible(is))
 			player.setItemInUse(is, 32);
 
 		return is;

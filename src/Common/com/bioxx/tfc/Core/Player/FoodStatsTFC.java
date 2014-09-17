@@ -10,7 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
-import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -235,7 +234,7 @@ public class FoodStatsTFC
 	 */
 	public boolean needFood()
 	{
-		return this.stomachLevel < getMaxStomach(this.player);
+		return this.stomachLevel < getMaxStomach(this.player) && (getMaxStomach(this.player) - stomachLevel) > 0.1;
 	}
 
 	public boolean needDrink()
