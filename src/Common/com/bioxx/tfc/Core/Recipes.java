@@ -1322,7 +1322,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.StoneKnife, 1, 0), new Object[] { 
 			"1","2", Character.valueOf('1'), TFCItems.StoneKnifeHead,Character.valueOf('2'), "stickWood"}));
-		
+
 		//pickaxes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.BismuthBronzePick, 1), new Object[] { "#","I", Character.valueOf('#'), 
 			new ItemStack(TFCItems.BismuthBronzePickaxeHead, 1, 0), Character.valueOf('I'), "stickWood"}));
@@ -2021,6 +2021,7 @@ public class Recipes
 		manager.addPlan("splitbloom", new PlanRecipe(new RuleEnum[]{RuleEnum.PUNCHLAST, RuleEnum.ANY, RuleEnum.ANY}));
 		manager.addPlan("tuyere", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.ANY}));
 		manager.addPlan("trapdoor", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.SHRINKNOTLAST, RuleEnum.UPSETNOTLAST}));
+		manager.addPlan("grill", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.DRAWSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
 
 		addWeldRecipes(manager);
 
@@ -2309,6 +2310,8 @@ public class Recipes
 		addTrapDoor(TFCItems.NickelSheet, 12);addTrapDoor(TFCItems.PlatinumSheet, 13);addTrapDoor(TFCItems.RedSteelSheet, 14);addTrapDoor(TFCItems.RoseGoldSheet, 15);
 		addTrapDoor(TFCItems.SilverSheet, 16);addTrapDoor(TFCItems.SteelSheet, 17);addTrapDoor(TFCItems.SterlingSilverSheet, 18);addTrapDoor(TFCItems.TinSheet, 19);
 		addTrapDoor(TFCItems.ZincSheet, 20);
+
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), null,"grill", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.Grill, 1, 0)));
 
 	}
 
