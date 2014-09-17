@@ -128,7 +128,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	@Override
 	public IIcon getIcon(ItemStack stack, int pass)
 	{
-		if(Food.isCooked(stack))
+		if(Food.isCooked(stack) && cookedIcon != null)
 			return cookedIcon;
 		return this.itemIcon;
 	}

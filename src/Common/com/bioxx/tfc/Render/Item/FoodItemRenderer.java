@@ -39,11 +39,14 @@ public class FoodItemRenderer implements IItemRenderer
 		{
 			float decayPerc = Math.max(((IFood)is.getItem()).getFoodDecay(is) / ((IFood)is.getItem()).getFoodWeight(is), 0);
 			float cookPerc = Math.max(Math.min(Food.getCooked(is)/600f, 1), 0);
-			if(is.getItem() instanceof ItemFoodTFC && ((ItemFoodTFC)is.getItem()).cookedIcon != null)
+			if(is.getItem() instanceof ItemFoodTFC)
 			{
 				int color = Food.getCookedColorMultiplier(is);
 				GL11.glColor4f(((color & 0xFF0000)>>16)/255f, ((color & 0x00ff00)>>8)/255f, (color & 0x0000ff)/255f, cookPerc);
-				renderIcon(0, 0,((ItemFoodTFC)is.getItem()).cookedIcon, 16, 16);
+				if(((ItemFoodTFC)is.getItem()).cookedIcon != null)
+					renderIcon(0, 0,((ItemFoodTFC)is.getItem()).cookedIcon, 16, 16);
+				else
+					renderIcon(0, 0, is.getItem().getIconIndex(is), 16, 16);
 			}
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			float decayTop = decayPerc * 13.0F;
