@@ -50,13 +50,13 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 			{
 				for (int z1 = z - 2 + y1 ; z1 < z + 2 - y1 ; z1++)
 				{
-					if (!world.getBlock(x1, y1 + y, z1).canBeReplacedByLeaves(world, x1, y1 + y, z1))
+					if (world.getBlock(x1, y1 + y, z1).canBeReplacedByLeaves(world, x1, y1 + y, z1))
 					{
 						world.setBlock (x1, y1 + y, z1, TFCBlocks.Leaves, treeId, 0x2);
 						for (int a = 0 ; a < random.nextInt (2) + 2 ; a++)
 						{
 							Block b = world.getBlock(x1, y1 - 1 - a + y, z1);
-							if (!b.canBeReplacedByLeaves(world, x1, y1 - 1 - a + y, z1) && b == Blocks.air)
+							if (b.canBeReplacedByLeaves(world, x1, y1 - 1 - a + y, z1) && b == Blocks.air)
 								world.setBlock (x1, y1 - 1 - a + y, z1, TFCBlocks.Leaves, treeId, 0x2);
 						}
 					}

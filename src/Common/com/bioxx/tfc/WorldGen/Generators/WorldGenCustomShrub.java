@@ -45,7 +45,7 @@ public class WorldGenCustomShrub extends WorldGenerator
 					for (int k = z - var10; k <= z + var10; ++k)
 					{
 						int var14 = k - z;
-						if ((Math.abs(var12) != var10 || Math.abs(var14) != var10 || rand.nextInt(2) != 0) && !world.getBlock(i, j, k).isReplaceable(world, i, j, k))
+						if ((Math.abs(var12) != var10 || Math.abs(var14) != var10 || rand.nextInt(2) != 0) && world.getBlock(i, j, k).isReplaceable(world, i, j, k))
 							this.setBlockAndNotifyAdequately(world, i, j, k, Blocks.leaves, this.field_48196_b);
 					}
 				}
