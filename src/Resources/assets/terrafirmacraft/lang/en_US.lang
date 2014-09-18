@@ -926,6 +926,24 @@ item.Barrel.White Cedar.name=White Cedar Barrel
 item.Barrel.White Elm.name=White Elm Barrel
 item.Barrel.Willow.name=Willow Barrel
 
+item.Loom.Acacia.name=Acacia Loom
+item.Loom.Ash.name=Ash Loom
+item.Loom.Aspen.name=Aspen Loom
+item.Loom.Birch.name=Birch Loom
+item.Loom.Chestnut.name=Chestnut Loom
+item.Loom.Douglas Fir.name=Douglas Fir Loom
+item.Loom.Hickory.name=Hickory Loom
+item.Loom.Kapok.name=Kapok Loom
+item.Loom.Maple.name=Maple Loom
+item.Loom.Oak.name=Oak Loom
+item.Loom.Pine.name=Pine Loom
+item.Loom.Sequoia.name=Sequoia Loom
+item.Loom.Spruce.name=Spruce Loom
+item.Loom.Sycamore.name=Sycamore Loom
+item.Loom.White Cedar.name=White Cedar Loom
+item.Loom.White Elm.name=White Elm Loom
+item.Loom.Willow.name=Willow Loom
+
 #== Wood Blocks ==
 tile.log.Acacia.name=Acacia Log
 tile.log2.Acacia.name=Acacia Log
@@ -1071,6 +1089,24 @@ tile.Barrel.Sycamore.name=Sycamore Barrel
 tile.Barrel.White Cedar.name=White Cedar Barrel
 tile.Barrel.White Elm.name=White Elm Barrel
 tile.Barrel.Willow.name=Willow Barrel
+
+tile.Loom.Acacia.name=Acacia Loom
+tile.Loom.Ash.name=Ash Loom
+tile.Loom.Aspen.name=Aspen Loom
+tile.Loom.Birch.name=Birch Loom
+tile.Loom.Chestnut.name=Chestnut Loom
+tile.Loom.Douglas Fir.name=Douglas Fir Loom
+tile.Loom.Hickory.name=Hickory Loom
+tile.Loom.Kapok.name=Kapok Loom
+tile.Loom.Maple.name=Maple Loom
+tile.Loom.Oak.name=Oak Loom
+tile.Loom.Pine.name=Pine Loom
+tile.Loom.Sequoia.name=Sequoia Loom
+tile.Loom.Spruce.name=Spruce Loom
+tile.Loom.Sycamore.name=Sycamore Loom
+tile.Loom.White Cedar.name=White Cedar Loom
+tile.Loom.White Elm.name=White Elm Loom
+tile.Loom.Willow.name=Willow Loom
 
 tile.FenceTFC.Acacia.name=Acacia Fence
 tile.FenceTFC.Ash.name=Ash Fence
@@ -1864,6 +1900,8 @@ item.Blueprint.name=Blueprint
 item.WoolYarn.name=Wool Yarn
 item.Wool.name=Wool
 item.WoolCloth.name=Wool Cloth
+item.SilkCloth.name=Silk Cloth
+item.BurlapCloth.name=Burlap Cloth
 item.Mortar.name=Mortar
 item.Vinegar.name=Vinegar
 

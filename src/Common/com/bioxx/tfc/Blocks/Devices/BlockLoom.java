@@ -18,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -142,26 +143,7 @@ public class BlockLoom extends BlockTerraContainer
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase player, ItemStack is)
 	{
 		super.onBlockPlacedBy(world, i, j, k, player, is);
-		TELoom tel = null;
-		TileEntity te = world.getTileEntity(i, j, k);
-		if (te != null && is.hasTagCompound() && te instanceof TELoom)
-		{
-			tel = (TELoom) te;
-			tel.readFromItemNBT(is.getTagCompound());
-			world.markBlockForUpdate(i, j, k);
-			
-			int l = MathHelper.floor_double(player.rotationYaw * 4F / 360F + 0.5D) & 3;
-			byte byte0 = 0;
-			if(l == 0)//+z
-				byte0 = 0;
-			if(l == 1)//-x
-				byte0 = 1;
-			if(l == 2)//-z
-				byte0 = 2;
-			if(l == 3)//+x
-				byte0 = 3;
-			tel.rotation = byte0;
-		}
+		
 	}
 
 	/**
@@ -216,19 +198,6 @@ public class BlockLoom extends BlockTerraContainer
 
 		nbt.setInteger("loomType", te.loomType);
 
-		NBTTagList nbttaglist = new NBTTagList();
-		for(int i = 0; i < te.storage.length; i++)
-		{
-			if(te.storage[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				te.storage[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
-		nbt.setTag("Items", nbttaglist);
-
 		return nbt;
 	}
 
@@ -245,6 +214,7 @@ public class BlockLoom extends BlockTerraContainer
 			TileEntity te = world.getTileEntity(x, y, z);
 			if(te != null && te instanceof TELoom){
 				TELoom loomTE = (TELoom)te;
+				player.addChatMessage(new ChatComponentText(loomTE.rotation + ""));
 				if(!loomTE.isFinished()){
 					if(!loomTE.canWeave()){
 						loomTE.addString(player.getCurrentEquippedItem());
@@ -266,10 +236,10 @@ public class BlockLoom extends BlockTerraContainer
 			}
 			if (player.isSneaking())
 			{
-				return false;
+				return true;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	@Override

@@ -16,8 +16,12 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderLoom implements ISimpleBlockRenderingHandler
 {
-	static float min = 0F;
-	static float max = 1F;
+	static float minX = 0F;
+	static float maxX = 1F;
+	static float minY = 0F;
+	static float maxY = 1F;
+	static float minZ = 0F;
+	static float maxZ = 1F;
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
@@ -35,52 +39,37 @@ public class RenderLoom implements ISimpleBlockRenderingHandler
 		renderer.renderAllFaces = true;
 		GL11.glPushMatrix();
 
-		if(te.rotation == 0)
-		{
+		
+			
 			//Arms
-			renderer.setRenderBounds(min+0.1F, min, min+0.75F, max-0.8F, max, max-0.15F);
-			GL11.glRotatef(90*te.rotation, 0, 1, 0);
+			this.setRotatedRenderBounds(renderer, te.rotation, minX+0.1F, minY, minZ+0.75F, maxX-0.8F, maxY, maxZ-0.15F);
 			renderer.renderStandardBlock(materialBlock, x, y, z);
 			
-			renderer.setRenderBounds(min+0.8F, min, min+0.75F, max-0.1F, max, max-0.15F);
+			this.setRotatedRenderBounds(renderer, te.rotation, minX+0.8F, minY, minZ+0.75F, maxX-0.1F, maxY, maxZ-0.15F);
 			renderer.renderStandardBlock(materialBlock, x, y, z);
 			
 			//Arm holding sections
 			//L
-			renderer.setRenderBounds(min+0.1F, min+0.25F, min+0.5F, max-0.8F, max-0.7F, max-0.25F);
+			this.setRotatedRenderBounds(renderer, te.rotation, minX+0.1F, minY+0.25F, minZ+0.5F, maxX-0.8F, maxY-0.7F, maxZ-0.25F);
 			renderer.renderStandardBlock(materialBlock, x, y, z);
 			
-			renderer.setRenderBounds(min+0.1F, min+0.05F, min+0.5F, max-0.8F, max-0.9F, max-0.25F);
+			this.setRotatedRenderBounds(renderer, te.rotation, minX+0.1F, minY+0.05F, minZ+0.5F, maxX-0.8F, maxY-0.9F, maxZ-0.25F);
 			renderer.renderStandardBlock(materialBlock, x, y, z);
 			
 			//R
-			renderer.setRenderBounds(min+0.8F, min+0.25F, min+0.5F, max-0.1F, max-0.7F, max-0.25F);
+			this.setRotatedRenderBounds(renderer, te.rotation, minX+0.8F, minY+0.25F, minZ+0.5F, maxX-0.1F, maxY-0.7F, maxZ-0.25F);
 			renderer.renderStandardBlock(materialBlock, x, y, z);
 			
-			renderer.setRenderBounds(min+0.8F, min+0.05F, min+0.5F, max-0.1F, max-0.9F, max-0.25F);
+			this.setRotatedRenderBounds(renderer, te.rotation, minX+0.8F, minY+0.05F, minZ+0.5F, maxX-0.1F, maxY-0.9F, maxZ-0.25F);
 			renderer.renderStandardBlock(materialBlock, x, y, z);
 			
 			//cross
-			renderer.setRenderBounds(max-0.8F, min+0.8F, min+0.75F, min+0.8F, max-0.1F, max-0.15F);
+			this.setRotatedRenderBounds(renderer, te.rotation, maxX-0.8F, minY+0.8F, minZ+0.75F, minX+0.8F, maxY-0.1F, maxZ-0.15F);
 			renderer.renderStandardBlock(materialBlock, x, y, z);
 			
-			renderer.setRenderBounds(max-0.8F, 0F, min+0.75F, min+0.8F, min+0.1F, max-0.15F);
+			this.setRotatedRenderBounds(renderer, te.rotation, maxX-0.8F, 0F, minZ+0.75F, minX+0.8F, minY+0.1F, maxZ-0.15F);
 			renderer.renderStandardBlock(materialBlock, x, y, z);
-		}
-		else
-		{
-			if((te.rotation & 3) == 0)
-			{
-				renderer.setRenderBounds(min, min, min+0.05F, 0.95F, min+0.05F, max-0.05F);
-				renderer.renderStandardBlock(materialBlock, x, y, z);
-			}
-			if((te.rotation & 3) == 1)
-			{
-				renderer.setRenderBounds(min+0.05F, min, min,max-0.05F, min+0.05F, 0.95F);
-				renderer.renderStandardBlock(materialBlock, x, y, z);
-			}
-		}
-
+		
 
 		renderer.renderAllFaces = false;
 		GL11.glPopMatrix();
@@ -93,6 +82,16 @@ public class RenderLoom implements ISimpleBlockRenderingHandler
 		renderer.uvRotateWest = i;
 		renderer.uvRotateNorth = i;
 		renderer.uvRotateSouth = i;
+	}
+	
+	private void setRotatedRenderBounds(RenderBlocks renderer, byte rotation , float x, float y, float z, float X, float Y, float Z){
+		switch(rotation){
+		case 0: renderer.setRenderBounds(x,y,z,X,Y,Z); break;
+		case 1: renderer.setRenderBounds(maxZ-Z,y,x,maxZ-z,Y,X); break;
+		case 2: renderer.setRenderBounds(x,y,maxZ-Z,X,Y,maxZ-z); break;
+		case 3: renderer.setRenderBounds(z,y,x,Z,Y,X); break;
+		default: break;
+		}
 	}
 
 	@Override
@@ -112,39 +111,39 @@ public class RenderLoom implements ISimpleBlockRenderingHandler
 		GL11.glPushMatrix();
 		GL11.glRotatef(180, 0, 1, 0);
 		//Arms
-		renderer.setRenderBounds(min+0.1F, min, min+0.75F, max-0.8F, max, max-0.15F);
+		renderer.setRenderBounds(minX+0.1F, minY, minZ+0.75F, maxX-0.8F, maxY, maxZ-0.15F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 		
-		renderer.setRenderBounds(min+0.8F, min, min+0.75F, max-0.1F, max, max-0.15F);
+		renderer.setRenderBounds(minX+0.8F, minY, minZ+0.75F, maxX-0.1F, maxY, maxZ-0.15F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 		
 		//Arm holding sections
 		//L
-		renderer.setRenderBounds(min+0.1F, min+0.35F, min+0.6F, max-0.8F, max-0.6F, max-0.25F);
+		renderer.setRenderBounds(minX+0.1F, minY+0.35F, minZ+0.6F, maxX-0.8F, maxY-0.6F, maxZ-0.25F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 		
-		renderer.setRenderBounds(min+0.1F, min+0.15F, min+0.6F, max-0.8F, max-0.8F, max-0.25F);
+		renderer.setRenderBounds(minX+0.1F, minY+0.15F, minZ+0.6F, maxX-0.8F, maxY-0.8F, maxZ-0.25F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 		
 		//R
-		renderer.setRenderBounds(min+0.8F, min+0.35F, min+0.6F, max-0.1F, max-0.6F, max-0.25F);
+		renderer.setRenderBounds(minX+0.8F, minY+0.35F, minZ+0.6F, maxX-0.1F, maxY-0.6F, maxZ-0.25F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 		
-		renderer.setRenderBounds(min+0.8F, min+0.15F, min+0.6F, max-0.1F, max-0.8F, max-0.25F);
+		renderer.setRenderBounds(minX+0.8F, minY+0.15F, minZ+0.6F, maxX-0.1F, maxY-0.8F, maxZ-0.25F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 		
 		//cross
-		renderer.setRenderBounds(max-0.8F, min+0.8F, min+0.75F, min+0.8F, max-0.1F, max-0.15F);
+		renderer.setRenderBounds(maxX-0.8F, minY+0.8F, minZ+0.75F, minX+0.8F, maxY-0.1F, maxZ-0.15F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 		
-		renderer.setRenderBounds(max-0.8F, 0F, min+0.75F, min+0.8F, min+0.1F, max-0.15F);
+		renderer.setRenderBounds(maxX-0.8F, 0F, minZ+0.75F, minX+0.8F, minY+0.1F, maxZ-0.15F);
 		rotate(renderer, 1);
 		renderInvBlock(materialBlock, meta, renderer);
 		GL11.glPopMatrix();

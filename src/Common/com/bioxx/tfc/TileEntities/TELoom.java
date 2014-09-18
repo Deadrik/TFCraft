@@ -6,6 +6,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -31,6 +32,8 @@ import com.bioxx.tfc.api.Crafting.BarrelManager;
 import com.bioxx.tfc.api.Crafting.BarrelMultiItemRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelVinegarRecipe;
+import com.bioxx.tfc.api.Crafting.LoomManager;
+import com.bioxx.tfc.api.Crafting.LoomRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
@@ -38,26 +41,28 @@ public class TELoom extends NetworkTileEntity implements IInventory
 {
 	public byte rotation = 0;
 	public int loomType;
-	private int stringType;
 	public ItemStack[] storage;
-	private int stringCount;
 
 	private int numStrings;
 	private boolean weaving;
 	private boolean finished;
 
 	private ModelLoom model = null;
-	
-	private int cloth;
+
+	private int clothCompletionCount;
+
+	public LoomRecipe recipe;
+	private ResourceLocation defaultTexture = new ResourceLocation(Reference.ModID, "textures/blocks/String.png");
 
 	public TELoom()
 	{
-		storage = new ItemStack[12];
+		storage = new ItemStack[2];
 	}
 
 	@Override
 	public void closeInventory()
 	{
+		
 	}
 
 	@Override
@@ -87,34 +92,37 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	}
 
 	public ItemStack addString(ItemStack i){
-		if(!finished && i != null && this.stringCount < 16 && !worldObj.isRemote){
-			int type = -1;
-			boolean update = false;
-			if(i.getItem().equals(TFCItems.WoolYarn) && (this.stringType == 0 || this.stringCount == 0)){
-				type = 0;
-				update = true;
+		if(!isFinished() &&  i != null && !this.worldObj.isRemote){
+			recipe =LoomManager.getInstance().findPotentialRecipes(this.getStackInSlot(0));
+			if(this.getStackInSlot(0) != null){
+				if(LoomManager.getInstance().findPotentialRecipes(i).equals(LoomManager.getInstance().findPotentialRecipes(this.storage[0]))){
+					if(this.getStringCount() < recipe.getReqSize()){
+						i.stackSize--;
+						this.storage[0].stackSize++;
+						updateLoom();
+					}
+				}
 			}
-
-			if(update){
-				this.stringType = type;
-				this.stringCount++;
+			else if(LoomManager.getInstance().hasPotentialRecipes(i)){
 				i.stackSize--;
-				updateLoom();
+				ItemStack is = i.copy();
+				is.stackSize = 1;
+				this.setInventorySlotContents(0, is);
 			}
 		}
 		return i;
 	}
 
 	public ItemStack takeFinishedCloth(){
-		if(finished){
-			this.stringCount = 0;
+		recipe = LoomManager.getInstance().findMatchingRecipe(getStackInSlot(0));
+		if(finished && recipe != null){
+			this.setString(null);
 			this.finished = false;
-			this.cloth = 0;
+			this.clothCompletionCount = 0;
 			updateLoom();
-			switch(stringType){
-			case 0: return new ItemStack(TFCItems.WoolCloth,1,0);
-			default:return new ItemStack(TFCItems.WoolCloth,1,0);
-			}
+			ItemStack is = storage[1].copy();
+			storage[1] = null;
+			return is;
 		}
 		return null;
 	}
@@ -144,7 +152,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit()
 	{
-		return 64;
+		return this.getRequiredStringCount();
 	}
 
 	@Override
@@ -159,18 +167,18 @@ public class TELoom extends NetworkTileEntity implements IInventory
 		}
 		return null;
 	}
-	
+
 	public void setModel(ModelLoom loomModel){
 		if(worldObj.isRemote){
 			model = loomModel;
-			model.cloth = this.cloth;
+			model.cloth = this.clothCompletionCount;
 		}
 	}
-	
+
 	@Override
 	public int getSizeInventory()
 	{
-		return 12;
+		return 2;
 	}
 
 	public ResourceLocation getWoodResource(){
@@ -178,29 +186,28 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	}
 
 	public ResourceLocation getStringResource(){
-		switch(this.stringType){
-		case 0: return new ResourceLocation("textures/blocks/wool_colored_white.png");
-		default: return new ResourceLocation("textures/blocks/wool_colored_white.png");
-		}
+		recipe = LoomManager.getInstance().findPotentialRecipes(getStackInSlot(0));
+		ResourceLocation rl = LoomManager.getInstance().findMatchingTexture(recipe);
+		return (recipe != null && rl != null)?rl:this.defaultTexture;
 	}
 
-	public int getStringType(){
-		return this.stringType;
+	public Item getStringType(){
+		return this.storage[0] != null? this.storage[0].getItem(): null ;
 	}
 
 	public int getStringCount(){
-		return this.stringCount;
+		return this.storage[0] != null? this.storage[0].stackSize: 0;
 	}
 
-	public void setStringType(int type){
-		this.stringType = type;
+	public void setString(ItemStack is){
+		this.storage[0] = is;
 		if(!worldObj.isRemote){
 			this.updateLoom();
 		}
 	}
 
 	public void setStringCount(int count){
-		this.stringCount = count;
+		if(this.storage[0] != null)this.storage[0].stackSize = count;
 		if(!worldObj.isRemote){
 			this.updateLoom();
 		}
@@ -232,11 +239,12 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	}
 
 	public boolean canWeave(){
-		return stringCount == 16 && !finished;
+		recipe = LoomManager.getInstance().findMatchingRecipe(storage[0]);
+		return recipe != null && !finished;
 	}
 
 	public void setIsWeaving(boolean isWeaving){
-		if(!finished && stringCount == 16){
+		if(canWeave()){
 			this.weaving = isWeaving;
 			if(!worldObj.isRemote){
 				this.updateLoom();
@@ -247,6 +255,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	public boolean getIsWeaving(){
 		return this.weaving;
 	}
+
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer)
@@ -282,46 +291,43 @@ public class TELoom extends NetworkTileEntity implements IInventory
 		return false;
 	}
 
+	public int getRequiredStringCount(){
+		if(storage[0] != null){
+			recipe = LoomManager.getInstance().findPotentialRecipes(storage[0]);
+			if(recipe != null){
+				return recipe.getReqSize();
+			}
+		}
+		return 16;
+	}
 
 	public void finishCloth(){
 		if(!this.finished){
 			NBTTagCompound nbt = new NBTTagCompound();
 			this.weaving = false;
 			this.finished = true;
-			nbt.setBoolean("weaving", this.weaving);
-			nbt.setBoolean("finished", this.finished);
+			//nbt.setBoolean("weaving", this.weaving);
+			//nbt.setBoolean("finished", this.finished);
+			recipe = LoomManager.getInstance().findMatchingRecipe(storage[0]);
+			this.storage[1] = recipe.getResult(storage[0]);
+			this.writeToNBT(nbt);
 			this.broadcastPacketInRange(this.createDataPacket(nbt));
 		}
 	}
 
 	public void dropItem(){
 		if(!worldObj.isRemote){
-			ItemStack item = null;
-			if(!finished){
-				if(stringCount > 0){
-					if(stringType == 0){
-						item = new ItemStack(TFCItems.WoolYarn,stringCount,0);
-					}
-				}
-			}
-			else{
-				if(stringType == 0){
-					item = new ItemStack(TFCItems.WoolCloth,1,0);
-				}
-			}
-			if(item != null){
-				EntityItem ei = new EntityItem(worldObj,xCoord,yCoord,zCoord,item);
-				worldObj.spawnEntityInWorld(ei);
-			}
+			this.ejectContents();
 		}
 	}
 
 	public void finishWeaveCycle(){
 		NBTTagCompound nbt = new NBTTagCompound();
 		this.weaving = false;
-		this.cloth++;
-		nbt.setBoolean("weaving", false);
-		nbt.setInteger("cloth", this.cloth);
+		this.clothCompletionCount++;
+		//nbt.setBoolean("weaving", false);
+		//nbt.setInteger("cloth", this.cloth);
+		this.writeToNBT(nbt);
 		this.broadcastPacketInRange(this.createDataPacket(nbt));
 	}
 
@@ -336,7 +342,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 
 
 	public int getCloth(){
-		return cloth;
+		return clothCompletionCount;
 	}
 
 	@Override
@@ -344,12 +350,10 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	{
 		super.writeToNBT(nbt);
 		nbt.setInteger("loomType", loomType);
-		nbt.setInteger("stringType", stringType);
-		nbt.setInteger("stringCount",stringCount);
 		nbt.setByte("rotation", rotation);
 		nbt.setBoolean("weaving", weaving);
 		nbt.setBoolean("finished", finished);
-		nbt.setInteger("cloth", cloth);
+		nbt.setInteger("cloth", clothCompletionCount);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
 		{
@@ -369,12 +373,10 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	{
 		super.readFromNBT(nbt);
 		loomType = nbt.getInteger("loomType");
-		stringType = nbt.getInteger("stringType");
-		stringCount = nbt.getInteger("stringCount");
 		weaving = nbt.getBoolean("weaving");
 		rotation = nbt.getByte("rotation");
 		finished = nbt.getBoolean("finished");
-		cloth = nbt.getInteger("cloth");
+		clothCompletionCount = nbt.getInteger("cloth");
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		storage = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
@@ -390,6 +392,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	public void readFromItemNBT(NBTTagCompound nbt)
 	{
 		loomType = nbt.getInteger("loomType");
+		/*
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
@@ -398,6 +401,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 			if(byte0 >= 0 && byte0 < 2)
 				setInventorySlotContents(byte0,ItemStack.loadItemStackFromNBT(nbt1));
 		}
+		*/
 	}
 
 	public void updateGui()
@@ -409,6 +413,8 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	@Override
 	public void handleInitPacket(NBTTagCompound nbt) 
 	{
+		this.readFromNBT(nbt);
+		/*
 		this.rotation = nbt.getByte("rotation");
 		this.loomType = nbt.getInteger("loomType");
 		this.stringType = nbt.getInteger("stringType");
@@ -416,12 +422,14 @@ public class TELoom extends NetworkTileEntity implements IInventory
 		this.finished = nbt.getBoolean("finished");
 		this.cloth = nbt.getInteger("cloth");
 		this.worldObj.func_147479_m(xCoord, yCoord, zCoord);
+		 */
 	}
 
 
 	@Override
 	public void handleDataPacket(NBTTagCompound nbt)
 	{
+		/*
 		if(worldObj.isRemote){
 			if(nbt.hasKey("weaving")){
 				this.setIsWeaving(nbt.getBoolean("weaving"));
@@ -453,16 +461,28 @@ public class TELoom extends NetworkTileEntity implements IInventory
 				this.cloth = nbt.getInteger("cloth");
 			}
 		}
+		 */
+		this.readFromNBT(nbt);
 	}
 
 	@Override
 	public void createInitNBT(NBTTagCompound nbt) 
 	{
+		/*
 		nbt.setByte("rotation", rotation);
 		nbt.setInteger("loomType", loomType);
 		nbt.setInteger("stringType", stringType);
 		nbt.setInteger("stringCount", stringCount);
 		nbt.setBoolean("finished",finished);
-		nbt.setInteger("cloth", cloth);
+		nbt.setInteger("cloth", cloth);*/
+		this.writeToNBT(nbt);
+	}
+
+
+	public static void registerRecipes()
+	{
+		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(TFCItems.WoolYarn,16), new ItemStack(TFCItems.WoolCloth,1)),new ResourceLocation(Reference.ModID, "textures/blocks/String.png"));
+		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(Items.string,24), new ItemStack(TFCItems.SilkCloth,1)),new ResourceLocation(Reference.ModID, "textures/blocks/Silk.png"));
+		LoomManager.getInstance().addRecipe(new LoomRecipe(new ItemStack(TFCItems.JuteFibre,12), new ItemStack(TFCItems.BurlapCloth,1)),new ResourceLocation(Reference.ModID, "textures/blocks/Rope.png"));
 	}
 }

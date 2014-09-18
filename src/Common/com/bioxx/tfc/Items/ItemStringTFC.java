@@ -10,11 +10,11 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockWoodSupport;
 import com.bioxx.tfc.Core.TFCTabs;
 
-public class ItemWoolYarn extends ItemTerra
+public class ItemStringTFC extends ItemTerra
 {
 	protected final int[][] sidesMap = new int[][]{{0,-1,0},{0,1,0},{0,0,-1},{0,0,1},{-1,0,0},{1,0,0}};
 
-	public ItemWoolYarn()
+	public ItemStringTFC()
 	{
 		super();
 		this.hasSubtypes = false;
