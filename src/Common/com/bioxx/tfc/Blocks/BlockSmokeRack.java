@@ -18,6 +18,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Blocks.Terrain.BlockCollapsable;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.Food;
 import com.bioxx.tfc.Food.ItemFoodMeat;
@@ -44,6 +45,12 @@ public class BlockSmokeRack extends BlockTerraContainer
 		{
 			this.setBlockBounds(0f, 0.45f, 0.45f, 1, 0.55f, 0.55f);
 		}
+	}
+
+	@Override
+	public boolean isReplaceable(IBlockAccess world, int x, int y, int z)
+	{
+		return true;
 	}
 
 	@Override
@@ -147,6 +154,11 @@ public class BlockSmokeRack extends BlockTerraContainer
 				{
 					world.setBlockToAir(x, y, z);
 				}
+			}
+
+			if(world.getBlock(x, y+1, z) instanceof BlockCollapsable)
+			{
+				world.setBlockToAir(x, y, z);
 			}
 		}
 	}

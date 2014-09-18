@@ -290,6 +290,12 @@ public class BlockTorch extends BlockTerraContainer
 		this.checkValidity(world, x, y, z, b);
 	}
 
+	@Override
+	public boolean isReplaceable(IBlockAccess world, int x, int y, int z)
+	{
+		return true;
+	}
+
 	protected boolean checkValidity(World world, int x, int y, int z, Block b)
 	{
 		if (this.func_150109_e(world, x, y, z))
