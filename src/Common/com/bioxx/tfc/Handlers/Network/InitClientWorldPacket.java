@@ -11,7 +11,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -39,8 +41,8 @@ public class InitClientWorldPacket extends AbstractPacket
 	public InitClientWorldPacket(EntityPlayer P)
 	{
 		this.seed = P.worldObj.getSeed();
-        // Make sure to update time before loading food stats!
-        TFC_Time.UpdateTime(P.worldObj);
+		// Make sure to update time before loading food stats!
+		TFC_Time.UpdateTime(P.worldObj);
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(P);
 		fs.resetTimers();
 		fs.writeNBT(P.getEntityData());
@@ -59,7 +61,7 @@ public class InitClientWorldPacket extends AbstractPacket
 			this.craftingTable = true;
 		this.playerSkills = TFC_Core.getSkillStats(P);
 	}
-	
+
 	@Override
 	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
 	{
@@ -137,6 +139,10 @@ public class InitClientWorldPacket extends AbstractPacket
 			playerSkills.setSkillSave(skill, skillMap.get(skill));
 		}
 		skillMap.clear();
+
+		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
+				player.getDisplayName(),
+				player.getUniqueID()));
 	}
 
 	@Override

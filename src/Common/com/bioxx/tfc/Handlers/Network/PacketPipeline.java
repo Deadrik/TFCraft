@@ -57,19 +57,19 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	{
 		if (this.packets.size() > 256)
 		{
-			// You should log here!!
+			System.out.println("Error Registering Packet, Too Big: "+clazz.getName());
 			return false;
 		}
 
 		if (this.packets.contains(clazz))
 		{
-			// You should log here!!
+			System.out.println("Error Registering Packet, Already Exists: "+clazz.getName());
 			return false;
 		}
 
 		if (this.isPostInitialised)
 		{
-			// You should log here!!
+			System.out.println("Error Registering Packet, Initialization Already Completed: "+clazz.getName());
 			return false;
 		}
 

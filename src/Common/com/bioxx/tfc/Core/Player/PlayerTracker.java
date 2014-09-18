@@ -57,23 +57,20 @@ public class PlayerTracker
 	@SubscribeEvent
 	public void onPlayerRespawn(PlayerRespawnEvent event)
 	{
-		if(!event.player.worldObj.isRemote)
-		{
-			float foodLevel = (event.player.worldObj.rand.nextFloat() * 12) + 12;
-			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(event.player);
-			foodstats.setFoodLevel(foodLevel);
-			TFC_Core.setPlayerFoodStats(event.player, foodstats);
-			event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000);
-			event.player.setHealth(1000f * (0.25f + (event.player.worldObj.rand.nextFloat() * 0.25f)));
-		}
+		float foodLevel = (event.player.worldObj.rand.nextFloat() * 12) + 12;
+		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(event.player);
+		foodstats.setFoodLevel(foodLevel);
+		TFC_Core.setPlayerFoodStats(event.player, foodstats);
+		event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000);
+		event.player.setHealth(1000f * (0.25f + (event.player.worldObj.rand.nextFloat() * 0.25f)));
 
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(event.player);
 		if( pi.tempSkills != null)
 			TFC_Core.setSkillStats(event.player, pi.tempSkills);
 
 		//Send a request to the server for the skills data.
-		AbstractPacket pkt = new PlayerUpdatePacket(event.player, 4);
-		TerraFirmaCraft.packetPipeline.sendToServer(pkt);
+		AbstractPacket pkt = new PlayerUpdatePacket(event.player, 3);
+		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
 	}
 
 	@SubscribeEvent
