@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemWoodSupport extends ItemTerraBlock
 {
@@ -22,7 +23,13 @@ public class ItemWoodSupport extends ItemTerraBlock
 
 	@Override
 	public EnumSize getSize(ItemStack is) {
-		return EnumSize.MEDIUM;
+		return EnumSize.SMALL;
+	}
+
+	@Override
+	public EnumWeight getWeight(ItemStack is)
+	{
+		return EnumWeight.MEDIUM;
 	}
 
 	@Override

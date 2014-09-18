@@ -1,12 +1,10 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
-import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Enums.EnumSize;
-
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 
-public class ItemWoodSupport2 extends ItemTerraBlock
+import com.bioxx.tfc.api.Constant.Global;
+
+public class ItemWoodSupport2 extends ItemWoodSupport
 {
 	public ItemWoodSupport2(Block par1) 
 	{
@@ -17,8 +15,5 @@ public class ItemWoodSupport2 extends ItemTerraBlock
 		System.arraycopy(Global.WOOD_ALL, 16, MetaNames, 0,Global.WOOD_ALL.length - 16);
 	}
 
-	@Override
-	public EnumSize getSize(ItemStack is) {
-		return EnumSize.MEDIUM;
-	}
+
 }
