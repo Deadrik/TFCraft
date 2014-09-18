@@ -81,10 +81,10 @@ public class FoodItemRenderer implements IItemRenderer
 	{
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double)(x + 0), (double)(y + sizeY), (double)200, (double)icon.getMinU(), (double)icon.getMaxV());
-		tessellator.addVertexWithUV((double)(x + sizeX), (double)(y + sizeY), (double)200, (double)icon.getMaxU(), (double)icon.getMaxV());
-		tessellator.addVertexWithUV((double)(x + sizeX), (double)(y + 0), (double)200, (double)icon.getMaxU(), (double)icon.getMinV());
-		tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)200, (double)icon.getMinU(), (double)icon.getMinV());
+		tessellator.addVertexWithUV((double)(x + 0), (double)(y + sizeY), (double)0, (double)icon.getMinU(), (double)icon.getMaxV());
+		tessellator.addVertexWithUV((double)(x + sizeX), (double)(y + sizeY), (double)0, (double)icon.getMaxU(), (double)icon.getMaxV());
+		tessellator.addVertexWithUV((double)(x + sizeX), (double)(y + 0), (double)0, (double)icon.getMaxU(), (double)icon.getMinV());
+		tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)0, (double)icon.getMinU(), (double)icon.getMinV());
 		tessellator.draw();
 	}
 
@@ -94,10 +94,10 @@ public class FoodItemRenderer implements IItemRenderer
 		Tessellator tess = Tessellator.instance;
 		tess.startDrawingQuads();
 		tess.setColorOpaque_I(color);
-		tess.addVertex((double)(x + 0), (double)(y + 0), 200.0D);
-		tess.addVertex((double)(x + 0), (double)(y + sizeY), 200.0D);
-		tess.addVertex((double)(x + sizeX), (double)(y + sizeY), 200.0D);
-		tess.addVertex((double)(x + sizeX), (double)(y + 0), 200.0D);
+		tess.addVertex((double)(x + 0), (double)(y + 0), 0.0D);
+		tess.addVertex((double)(x + 0), (double)(y + sizeY), 0.0D);
+		tess.addVertex((double)(x + sizeX), (double)(y + sizeY), 0.0D);
+		tess.addVertex((double)(x + sizeX), (double)(y + 0), 0.0D);
 		tess.draw();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
