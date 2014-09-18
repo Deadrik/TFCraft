@@ -60,14 +60,9 @@ public class BlockSmokeRack extends BlockTerraContainer
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int l)
-	{
-	}
-
-	@Override
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
 	{
-		return null;
+		return new ItemStack(TFCItems.WoolYarn);
 	}
 
 	@Override
@@ -145,20 +140,20 @@ public class BlockSmokeRack extends BlockTerraContainer
 			{
 				if(!isValidNeighbor(world, x, y, z-1, ForgeDirection.NORTH) || !isValidNeighbor(world, x, y, z+1, ForgeDirection.SOUTH))
 				{
-					world.setBlockToAir(x, y, z);
+					TFC_Core.DestroyBlock(world, x, y, z);
 				}
 			}
 			else
 			{
 				if(!isValidNeighbor(world, x-1, y, z, ForgeDirection.WEST) || !isValidNeighbor(world, x+1, y, z, ForgeDirection.EAST))
 				{
-					world.setBlockToAir(x, y, z);
+					TFC_Core.DestroyBlock(world, x, y, z);
 				}
 			}
 
 			if(world.getBlock(x, y+1, z) instanceof BlockCollapsable)
 			{
-				world.setBlockToAir(x, y, z);
+				TFC_Core.DestroyBlock(world, x, y, z);
 			}
 		}
 	}

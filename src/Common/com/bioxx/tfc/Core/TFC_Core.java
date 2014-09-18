@@ -1236,4 +1236,12 @@ public class TFC_Core
 		return null;
 	}
 
+	public static void DestroyBlock(World world, int x, int y, int z)
+	{
+		if(world.getBlock(x, y, z) != Blocks.air)
+		{
+			world.getBlock(x, y, z).dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+			world.setBlockToAir(x, y, z);
+		}
+	}
 }
