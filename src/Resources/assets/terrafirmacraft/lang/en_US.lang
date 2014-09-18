@@ -1931,16 +1931,21 @@ tile.Vine.name=Vine
 tile.SeaGrassStill.name=Seagrass
 tile.SeaGrassIce.name=Frozen Seagrass
 
+tile.Flowers.flower_nasturtium.name=Nasturtium
 tile.Flowers.flower_dandelion.name=Dandelion
-tile.Flowers.flower_rose.name=Red Rose
-tile.Flowers.flower_blue_orchid.name=Blue Orchid
-tile.Flowers.flower_allium.name=Allium
-tile.Flowers.flower_houstonia.name=Houstonia
-tile.Flowers.flower_tulip_red.name=Red Tulip
-tile.Flowers.flower_tulip_orange.name=Orange Tulip
-tile.Flowers.flower_tulip_white.name=White Tulip
-tile.Flowers.flower_tulip_pink.name=Pink Tulip
-tile.Flowers.flower_oxeye_daisy.name=Daisy
+tile.Flowers.flower_meads_milkweed.name=Meads Milkweed
+tile.Flowers.flower_tropical_milkweed.name=Tropical Milkweed
+tile.Flowers.flower_butterfly_milkweed.name=Butterfly Milkweed
+tile.Flowers.flower_calendula.name=Calendula
+tile.Flowers2.flower_rose.name=Red Rose
+tile.Flowers2.flower_blue_orchid.name=Blue Orchid
+tile.Flowers2.flower_allium.name=Allium
+tile.Flowers2.flower_houstonia.name=Houstonia
+tile.Flowers2.flower_tulip_red.name=Red Tulip
+tile.Flowers2.flower_tulip_orange.name=Orange Tulip
+tile.Flowers2.flower_tulip_white.name=White Tulip
+tile.Flowers2.flower_tulip_pink.name=Pink Tulip
+tile.Flowers2.flower_oxeye_daisy.name=Daisy
 
 #=======
 #= GUI =

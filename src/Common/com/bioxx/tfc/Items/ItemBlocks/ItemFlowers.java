@@ -8,7 +8,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Enums.EnumWeight;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,7 +18,7 @@ public class ItemFlowers extends ItemTerraBlock
 	public ItemFlowers(Block b)
 	{
 		super(b);
-		MetaNames = Global.FLOWER_META_NAMES;
+		MetaNames = new String[]{"flower_dandelion","flower_nasturtium", "flower_meads_milkweed", "flower_tropical_milkweed", "flower_butterfly_milkweed", "flower_calendula"};
 	}
 
 	@Override
@@ -26,6 +26,12 @@ public class ItemFlowers extends ItemTerraBlock
 	public IIcon getIconFromDamage(int par1)
 	{
 		return this.field_150939_a.getIcon(0, par1);
+	}
+
+	@Override
+	public EnumWeight getWeight(ItemStack is)
+	{
+		return EnumWeight.LIGHT;
 	}
 
 	/**
