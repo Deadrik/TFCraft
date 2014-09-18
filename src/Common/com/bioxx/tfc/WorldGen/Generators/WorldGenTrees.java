@@ -104,7 +104,7 @@ public class WorldGenTrees extends WorldGenerator
 			meta -= 15;
 		}
 
-		if(world.isAirBlock(localX, localY, localZ) && id != 0)
+		if(world.getBlock(localX, localY, localZ).canBeReplacedByLeaves(world, localX, localY, localZ) && id != 0)
 		{
 			if(Block.getBlockById(id).isWood(world, i, j, k))
 			{
@@ -125,6 +125,7 @@ public class WorldGenTrees extends WorldGenerator
 				else
 				{
 					world.setBlock(localX, localY, localZ, block, meta, 0x2);
+
 					/*TELogNatural te = (TELogNatural)world.getTileEntity(localX, localY, localZ);
 					if(te != null)
 						te.Setup(trunkX, trunkY, trunkZ);*/
@@ -133,6 +134,7 @@ public class WorldGenTrees extends WorldGenerator
 			else
 			{
 				world.setBlock(localX, localY, localZ, leaves, meta, 0x2);
+
 				/*TELeaves te = (TELeaves)world.getTileEntity(localX, localY, localZ);
 				if(te != null)
 					te.Setup(trunkX, trunkY, trunkZ);*/
