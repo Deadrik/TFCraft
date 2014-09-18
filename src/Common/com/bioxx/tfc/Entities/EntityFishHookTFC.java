@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -22,6 +23,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemCustomFishingRod;
 import com.bioxx.tfc.api.Util.Helper;
@@ -61,7 +63,14 @@ public class EntityFishHookTFC extends EntityFishHook
 	@SideOnly(Side.CLIENT)
 	private double velocityZ;
 
+	private double maxDistance = -1;
+
 	public double pullX,pullY,pullZ;
+
+	private int lineTension;
+	private int maxLineTension = 800;
+
+	private int reelCounter = 0;
 
 	public EntityFishHookTFC(World par1World)
 	{
@@ -81,6 +90,10 @@ public class EntityFishHookTFC extends EntityFishHook
 		this.ignoreFrustumCheck = true;
 		this.field_146042_b = par8EntityPlayer;
 		par8EntityPlayer.fishEntity = this;
+	}
+
+	public double getMaxDistance(){
+		return maxDistance;
 	}
 
 	public EntityFishHookTFC(World par1World, EntityPlayer par2EntityPlayer)
@@ -104,6 +117,31 @@ public class EntityFishHookTFC extends EntityFishHook
 		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * f;
 		this.motionY = -MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI) * f;
 		this.func_146035_c(this.motionX, this.motionY, this.motionZ, 1.5F, 1.0F);
+	}
+
+	public EntityFishHookTFC(World par1World, EntityPlayer par2EntityPlayer, int ticks)
+	{
+		super(par1World);
+		this.xTile = -1;
+		this.yTile = -1;
+		this.zTile = -1;
+		this.ignoreFrustumCheck = true;
+		this.field_146042_b = par2EntityPlayer;
+		this.field_146042_b.fishEntity = this;
+		this.setSize(0.25F, 0.25F);
+		this.setLocationAndAngles(par2EntityPlayer.posX, par2EntityPlayer.posY + 1.62D - par2EntityPlayer.yOffset, par2EntityPlayer.posZ, par2EntityPlayer.rotationYaw, par2EntityPlayer.rotationPitch);
+		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F;
+		this.posY -= 0.10000000149011612D;
+		this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F;
+		this.setPosition(this.posX, this.posY, this.posZ);
+		this.yOffset = 0.0F;
+		float f = 0.4F;
+		float tickRatio = Math.min(ticks,60) / 20f;
+		par2EntityPlayer.addChatMessage(new ChatComponentText(ticks +""));
+		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * f;
+		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * f;
+		this.motionY = -MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI) * f;
+		this.func_146035_c(this.motionX, this.motionY, this.motionZ, tickRatio/*1.5F*/, 1.0F);
 	}
 
 	@Override
@@ -215,7 +253,7 @@ public class EntityFishHookTFC extends EntityFishHook
 			{
 				ItemStack itemstack = this.field_146042_b.getCurrentEquippedItem();
 
-				if (this.field_146042_b.isDead || !this.field_146042_b.isEntityAlive() || itemstack == null || !(itemstack.getItem() instanceof ItemCustomFishingRod) || this.getDistanceSqToEntity(this.field_146042_b) > 1024.0D)
+				if (this.field_146042_b.isDead || !this.field_146042_b.isEntityAlive() || itemstack == null || !(itemstack.getItem() instanceof ItemCustomFishingRod) || this.getDistanceSqToEntity(this.field_146042_b) > 2500.0D)
 				{
 					this.setDead();
 					this.field_146042_b.fishEntity = null;
@@ -303,8 +341,8 @@ public class EntityFishHookTFC extends EntityFishHook
 			{
 				if (movingobjectposition.entityHit != null)
 				{
-					if (movingobjectposition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.field_146042_b), 0.0F))
-						this.field_146043_c = movingobjectposition.entityHit;
+					//if (movingobjectposition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.field_146042_b), 0.0F))
+					//this.field_146043_c = movingobjectposition.entityHit;
 				}
 				else
 				{
@@ -358,6 +396,14 @@ public class EntityFishHookTFC extends EntityFishHook
 
 				if (d6 > 0.0D)
 				{
+					if(this.maxDistance == -1){
+						this.maxDistance = this.getDistanceToEntity(field_146042_b);
+						if(!this.worldObj.isRemote){
+							EntityFishTFC fish = new EntityFishTFC(this.worldObj);
+							fish.setLocationAndAngles(posX, posY-0.3, posZ, 0, 0);
+							this.worldObj.spawnEntityInWorld(fish);
+						}
+					}
 					f2 = (float)(f2 * 0.9D);
 					this.motionY *= 0.8D;
 				}
@@ -365,9 +411,26 @@ public class EntityFishHookTFC extends EntityFishHook
 				this.motionX *= f2;
 				this.motionY *= f2;
 				this.motionZ *= f2;
+
+				double distance = this.getDistanceToEntity(this.field_146042_b);
+				if(distance > this.maxDistance && maxDistance != -1){
+					Vec3 distVec = Vec3.createVectorHelper(this.posX - this.field_146042_b.posX,this.posY - this.field_146042_b.posY,this.posZ - this.field_146042_b.posZ);
+					double distRatio = maxDistance / distance;
+					this.posX = this.field_146042_b.posX + (distVec.xCoord * distRatio);
+					this.posY = this.field_146042_b.posY + (distVec.yCoord * distRatio);
+					this.posZ = this.field_146042_b.posZ + (distVec.zCoord * distRatio);
+				}
 				this.setPosition(this.posX, this.posY, this.posZ);
 			}
 		}
+		/*double distance = this.getDistanceToEntity(this.field_146042_b);
+		if(distance > this.maxDistance){
+			Vec3 distVec = Vec3.createVectorHelper(this.posX - this.field_146042_b.posX,this.posY - this.field_146042_b.posY,this.posZ - this.field_146042_b.posZ);
+			double distRatio = maxDistance / distance;
+			this.posX = this.field_146042_b.posX + (distVec.xCoord * distRatio);
+			this.posY = this.field_146042_b.posY + (distVec.yCoord * distRatio);
+			this.posZ = this.field_146042_b.posZ + (distVec.zCoord * distRatio);
+		}*/
 	}
 
 	/**
@@ -398,22 +461,101 @@ public class EntityFishHookTFC extends EntityFishHook
 		this.inGround = par1NBTTagCompound.getByte("inGround") == 1;
 	}
 
+	public Vec3 applyEntityForce(Vec3 entityForce, double x, double y, double z){
+		Vec3 pullVec = Vec3.createVectorHelper(pullX, pullY, pullZ);
+
+		double force = pullVec.distanceTo(entityForce);
+		Vec3 netForceVec = entityForce.addVector(pullX, pullY, pullZ);
+		double forceRatio = ((force*30 ) / (netForceVec.lengthVector()));
+
+		if(TFC_Time.getTotalTicks()%40 == 0){
+			force += 0d;
+		}
+		lineTension += forceRatio -31;
+
+		lineTension = Math.max(lineTension, 0);
+		
+		ItemStack is = this.field_146042_b.getHeldItem();
+		if(is != null && is.getItem() instanceof ItemCustomFishingRod){
+			if(!is.hasTagCompound()){
+				is.setTagCompound(new NBTTagCompound());
+			}
+			if(this.reelCounter > 2){
+				is.stackTagCompound.setInteger("tension", (int) (((forceRatio)-29) + (Math.pow(entityForce.lengthVector() / 0.2,3)*2))*100);
+			}
+			else{
+				this.reelCounter++;
+			}
+		}
+		if(forceRatio != 30){
+			reelCounter = 0;
+		}
+		if(lineTension >= maxLineTension / 2)
+		{
+			this.maxDistance += pullVec.lengthVector() * 0.3;
+		}
+		if(lineTension >= maxLineTension){
+			this.field_146042_b.getCurrentEquippedItem().damageItem(20, field_146042_b);
+			//this.ridingEntity.riddenByEntity = null;
+			((EntityLiving)this.ridingEntity).dismountEntity(this);
+			//this.ridingEntity = null;
+			this.setDead();
+		}
+		this.pullX = 0;
+		this.pullY = 0;
+		this.pullZ = 0;
+
+		//this.motionX = netForceVec.xCoord;
+		//this.motionY = netForceVec.yCoord;
+		//this.motionZ = netForceVec.zCoord;
+
+		//this.posX += netForceVec.xCoord;
+		//this.posY += worldObj.isAirBlock((int)posX, (int)posY +1, (int)posZ)?0:netForceVec.yCoord;
+		//this.posZ += netForceVec.zCoord;
+
+		//netForceVec.addVector(distVec.xCoord * distRatio, distVec.yCoord * distRatio, distVec.zCoord * distRatio);
+		this.field_146042_b.addChatMessage(new ChatComponentText("tension: " + lineTension + ", force ratio: " + forceRatio +", distance: " + this.getDistanceToEntity(field_146042_b) + ", max: "+this.maxDistance));
+		return Vec3.createVectorHelper(netForceVec.xCoord, (worldObj.isAirBlock((int)x, (int)y +1, (int)z) && netForceVec.yCoord > 0?0:netForceVec.yCoord), netForceVec.zCoord);
+	}
+
+	public Vec3 getNormalDirectionOfPlayer(double x, double y, double z){
+		Vec3 dirVec = Vec3.createVectorHelper(this.field_146042_b.posX - x, this.field_146042_b.posY - y, this.field_146042_b.posZ - z);
+		return dirVec.normalize();
+	}
+
+	public Vec3 getTooFarAdjustedVec(Vec3 motionVec, double x, double y, double z){
+		Vec3 playerMotion = Vec3.createVectorHelper(this.field_146042_b.motionX, this.field_146042_b.motionY, this.field_146042_b.motionZ);
+		double subractedRatio = Math.max(1 - (this.maxDistance / this.field_146042_b.getDistance(x + playerMotion.xCoord, y + playerMotion.yCoord, z + playerMotion.zCoord)),0);
+		Vec3 dirVec = Vec3.createVectorHelper((this.field_146042_b.posX + playerMotion.xCoord - (motionVec.xCoord + x))*subractedRatio, (this.field_146042_b.posY + playerMotion.yCoord - (motionVec.yCoord + y))*subractedRatio, (this.field_146042_b.posZ + playerMotion.zCoord - (motionVec.zCoord + z))*subractedRatio);
+		return dirVec;
+	}
+
+	public boolean isTooFarFromPlayer(double x, double y, double z){
+		return this.field_146042_b.getDistance(x,y,z) > this.maxDistance;
+	}
+
 	public void reelInBobber(Entity entity, ItemStack itemstack){
 		double distance = this.getDistanceToEntity(entity);
+		if(distance < maxDistance){
+			this.maxDistance-= 0.2;
+			//this.pullX = 0;
+			//this.pullY = 0;
+			//this.pullZ = 0;
+		}
 		if(distance > 1){
 
-			this.pullX = 0.2*(entity.posX - posX)/distance;
-			this.pullY = 0.2*(entity.posY - posY)/distance;
-			this.pullZ = 0.2*(entity.posZ - posZ)/distance;
+			this.pullX = (entity.posX - posX)/distance;
+			this.pullY = (entity.posY - posY)/distance;
+			this.pullZ = (entity.posZ - posZ)/distance;
 
 			if(this.ridingEntity==null){
-				this.motionX += pullX;
-				this.motionY += pullY;
-				this.motionZ += pullZ;
+				this.motionX += pullX * 0.2;
+				this.motionY += pullY * 0.2;
+				this.motionZ += pullZ * 0.2;
 			}
 		}
 		else{
-			this.setDead();
+			this.setDeadKill();
 			if(itemstack.stackTagCompound == null){
 				itemstack.stackTagCompound = new NBTTagCompound();
 			}
@@ -469,6 +611,15 @@ public class EntityFishHookTFC extends EntityFishHook
 			return b0;
 		}
 	}
+	
+	public void setDeadKill(){
+		if(this.ridingEntity!=null && this.ridingEntity instanceof EntityLiving){
+			((EntityLiving)(this.ridingEntity)).setHealth(1);
+			((EntityLiving)(this.ridingEntity)).attackEntityFrom(DamageSource.drown, 1);
+		}
+		this.ridingEntity = null;
+		this.setDead();
+	}
 
 	/**
 	 * Will get destroyed next tick.
@@ -476,11 +627,12 @@ public class EntityFishHookTFC extends EntityFishHook
 	@Override
 	public void setDead()
 	{
-		if(this.ridingEntity!=null && this.ridingEntity instanceof EntityLiving){
-			((EntityLiving)(this.ridingEntity)).setHealth(1);
-			((EntityLiving)(this.ridingEntity)).attackEntityFrom(DamageSource.drown, 1);
+		if(this.ridingEntity != null){
+			((EntityLiving)this.ridingEntity).dismountEntity(this);
 		}
 		super.setDead();
+		this.lineTension = 0;
+		this.maxDistance = -1;
 		if (this.field_146042_b != null)
 			this.field_146042_b.fishEntity = null;
 	}

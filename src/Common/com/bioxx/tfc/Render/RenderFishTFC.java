@@ -41,11 +41,15 @@ public class RenderFishTFC extends RenderLiving
 	{
 		preRenderScale ((EntityFishTFC) par1EntityLiving, par2);
 		Block blockBelow = par1EntityLiving.worldObj.getBlock((int)par1EntityLiving.posX,(int)par1EntityLiving.posY-1,(int)par1EntityLiving.posZ);
-		if(!par1EntityLiving.isInWater() && (!TFC_Core.isWater(blockBelow)&& !par1EntityLiving.worldObj.isAirBlock((int)par1EntityLiving.posX,(int)par1EntityLiving.posY-1,(int)par1EntityLiving.posZ))){
-			GL11.glRotatef(90, 0.0F, 0.0F, 1.0F);
+		
+		float pitch = ((EntityFishTFC) par1EntityLiving).currentRenderPitch;
+		GL11.glRotatef(pitch, 1, 0, 0);
+		if(!par1EntityLiving.isInWater() && (!TFC_Core.isWater(blockBelow))){
+			GL11.glRotatef(((EntityFishTFC) par1EntityLiving).currentRenderRoll, 0.0F, 0.0F, 1.0F);
 			GL11.glTranslatef(-0.15f, 1.5f, -0.8f);
 		}
 		else{
+			((EntityFishTFC) par1EntityLiving).currentRenderRoll = 0;
 			GL11.glTranslatef(0f, 1.2F, -0.5f);
 		}
 	}
@@ -53,7 +57,8 @@ public class RenderFishTFC extends RenderLiving
 	@Override
 	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
     {
-        GL11.glRotatef(180.0F - par3, 0.0F, 1.0F, 0.0F);
+		float temp = ((EntityFishTFC)par1EntityLivingBase).currentRenderYaw;
+        GL11.glRotatef(temp/*par3*/, 0.0F, 1.0F, 0.0F);
 
         if (par1EntityLivingBase.deathTime > 0)
         {

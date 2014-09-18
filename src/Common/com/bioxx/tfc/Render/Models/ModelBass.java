@@ -163,9 +163,9 @@ public class ModelBass extends ModelBase
    	
     setRotation(Mouth, -0.2617994F + (-0.2617994F *rotateMouth), 0F, 0F);
     
-    if(entity.isInWater()){
-    	setRotation(TailEnd, 0F, -0.2617994F + (0.2617994F * rotateSwim * 2), 0F);
-    	setRotation(TailFin, 0F, -0.2617994F + (0.2617994F * rotateSwim * 2), 0F);
+    if(entity.isInWater() || entity.isAirBorne){
+    	setRotation(TailEnd, 0F, -0.2617994F + (0.2617994F * rotateSwim * (entity.isAirBorne?4:2)), 0F);
+    	setRotation(TailFin, 0F, -0.2617994F + (0.2617994F * rotateSwim * (entity.isAirBorne?4:2)), 0F);
     }
     else{
     	setRotation(TailEnd, 0F, 0F, 0F);

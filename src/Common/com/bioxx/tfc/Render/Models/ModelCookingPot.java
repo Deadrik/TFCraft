@@ -24,7 +24,7 @@ public class ModelCookingPot extends ModelBase
 				new float[]{0.5F + x, y, z + 0.5f,8,14,8,12}
 		};
 		renderer.cubeList.add(
-				new ModelPotteryBase(renderer,renderer.textureOffsetX, renderer.textureOffsetY, 5.5F + x, y, z + 5.5f, baseWidth, baseHeight, baseDepth, 0f,basicVesselData));
+				new ModelPotteryBase(renderer,renderer.textureOffsetX, renderer.textureOffsetY, 5.5F + x, y, z + 5.5f, baseWidth, baseHeight, baseDepth, 0f,basicVesselData,false));
 	}
 	public void renderPot()
 	{

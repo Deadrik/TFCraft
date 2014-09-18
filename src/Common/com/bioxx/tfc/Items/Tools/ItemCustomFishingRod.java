@@ -2,13 +2,19 @@ package com.bioxx.tfc.Items.Tools;
 
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFishingRod;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.EntityFishHookTFC;
@@ -24,7 +30,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 {
 	@SideOnly(Side.CLIENT)
-	private IIcon theIcon;
+	private IIcon[] uncastIconArray;
+	private IIcon[] castIconArray;
 
 	public ItemCustomFishingRod()
 	{
@@ -58,6 +65,16 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 		return true;
 	}
 
+	@Override
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack is)
+    {
+		if(is.stackTagCompound != null && is.stackTagCompound.hasKey("swing") && is.stackTagCompound.getBoolean("swing")){
+			is.stackTagCompound.setBoolean("swing", false);
+			return false;
+		}
+        return true;
+    }
+	
 	/**
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
@@ -76,35 +93,131 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 			//int i = par3EntityPlayer.fishEntity.func_146034_e();
 			//par1ItemStack.damageItem(i, par3EntityPlayer);
 			if(player.fishEntity instanceof EntityFishHookTFC)
+			{
 				((EntityFishHookTFC)(player.fishEntity)).reelInBobber(player, is);
+			}
 			else
-				player.swingItem();
+			{
+				player.setItemInUse(is, 1);
+				//player.swingItem();
+			}
 		}
 		else
 		{
-			world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-			if (!world.isRemote)
-				world.spawnEntityInWorld(new EntityFishHookTFC(world, player));
-			player.swingItem();
+			if(is.stackTagCompound == null){
+				is.setTagCompound(new NBTTagCompound());
+			}
+			player.setItemInUse(is, getMaxItemUseDuration(is));
+			//player.swingItem();
 		}
 		return is;
 	}
+
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
+	{
+		if(player.fishEntity instanceof EntityFishHookTFC)
+		{
+			((EntityFishHookTFC)(player.fishEntity)).reelInBobber(player, is);
+		}
+		else
+		{
+			//player.setItemInUse(is, 1);
+			//player.swingItem();
+		}
+		return false;
+	}
+
+	@Override
+	public void onPlayerStoppedUsing(ItemStack is, World world, EntityPlayer player, int inUseCount)
+	{
+		if(player.fishEntity == null && is.stackTagCompound != null){
+			world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+			if (!world.isRemote){
+				world.spawnEntityInWorld(new EntityFishHookTFC(world, player, is.getMaxItemUseDuration() - inUseCount));
+				
+					is.stackTagCompound.setBoolean("fishing", true);
+				
+			}
+			is.stackTagCompound.setBoolean("swing", true);
+			player.swingItem();
+			is.stackTagCompound.setBoolean("fishing", true);
+			is.stackTagCompound.setInteger("usedUses",0);
+		}
+		else if(is.stackTagCompound != null){
+			is.stackTagCompound.setBoolean("fishing", true);
+		}
+	}
+
+	/**
+	 * How long it takes to use or consume an item
+	 */
+	public int getMaxItemUseDuration(ItemStack p_77626_1_)
+	{
+		return 72000;
+	}
+
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
-		this.itemIcon = par1IconRegister.registerIcon(this.getIconString() + "_uncast");
-		this.theIcon = par1IconRegister.registerIcon(this.getIconString() + "_cast");
+		uncastIconArray = new IIcon[3];
+		castIconArray = new IIcon[8];
+		for (int i = 0; i < castIconArray.length; ++i)
+			castIconArray[i] = par1IconRegister.registerIcon(Reference.ModID+":"+this.getIconString() +"_cast_" + i);
+		for (int i = 0; i < uncastIconArray.length; ++i)
+			uncastIconArray[i] = par1IconRegister.registerIcon(Reference.ModID+":"+this.getIconString() +"_uncast_" + i);
+		this.itemIcon = uncastIconArray[0];
+	}
+
+	@SideOnly(Side.CLIENT)
+	public IIcon getItemIconForUseDuration(int par1, boolean cast)
+	{
+		par1 = Math.min(Math.max(par1, 0),7);
+		if(cast)
+			return castIconArray[par1];
+		return uncastIconArray[par1];
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
+	public IIcon getIcon(ItemStack is, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{
-		if (player.fishEntity != null)
-			return theIcon;
-		return itemIcon;
+		boolean cast = player.fishEntity != null;//is.hasTagCompound() && is.stackTagCompound.hasKey("fishing") && is.stackTagCompound.getBoolean("fishing");
+
+		if(!is.hasTagCompound()){
+			is.setTagCompound(new NBTTagCompound());
+		}
+		is.stackTagCompound.setBoolean("fishing", cast);
+		if(usingItem == null){
+			useRemaining = this.getMaxItemUseDuration(is); 
+		}
+
+		if(!cast){
+			int j = Math.max((Math.min(this.getMaxItemUseDuration(is) - useRemaining + 10,60)/20)-1,0);
+			if(!is.hasTagCompound()){
+				is.setTagCompound(new NBTTagCompound());
+			}
+			is.stackTagCompound.setInteger("usedUses", this.getMaxItemUseDuration(is) - useRemaining);
+			return getItemIconForUseDuration(Math.min(j,uncastIconArray.length -1),cast);
+		}
+		else{
+			int tension = 0;
+			if(is.hasTagCompound() && is.stackTagCompound.hasKey("tension")){
+				tension = is.stackTagCompound.getInteger("tension");
+			}
+			int originalTex = tension / 100;
+			int texShift = ((tension%100)+1)%31;
+			return getItemIconForUseDuration(Math.min(originalTex + (texShift == 10?1:0),castIconArray.length-1),cast);
+		}
+	}
+
+
+	@Override
+	public IIcon getIcon(ItemStack is, int renderPass){
+		if(is.hasTagCompound() && is.stackTagCompound.hasKey("fishing") && is.stackTagCompound.getBoolean("fishing")){
+			return castIconArray[0];
+		}
+		return uncastIconArray[0];
 	}
 
 	@Override
@@ -123,6 +236,18 @@ public class ItemCustomFishingRod extends ItemFishingRod implements ISize
 	public EnumWeight getWeight(ItemStack is)
 	{
 		return EnumWeight.LIGHT;
+	}
+
+	/**
+	 * returns the action that specifies what animation to play when the items is being used
+	 */
+	public EnumAction getItemUseAction(ItemStack is)
+	{
+		if (is.stackTagCompound != null && is.stackTagCompound.hasKey("fishing") && is.stackTagCompound.getBoolean("fishing"))
+		{
+			return EnumAction.bow;
+		}
+		return EnumAction.none;
 	}
 
 	@Override
