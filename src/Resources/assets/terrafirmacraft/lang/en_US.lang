@@ -2171,6 +2171,8 @@ gui.plans.shovel=Shovel
 gui.plans.splitbloom=Split
 gui.plans.sword=Sword
 gui.plans.tuyere=Tuyere
+gui.plans.grill=Grill
+gui.plans.shears=Shears
 
 #== Misc GUI ==
 gui.Blueprint=Blueprint

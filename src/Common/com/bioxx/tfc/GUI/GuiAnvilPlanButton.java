@@ -41,9 +41,8 @@ public class GuiAnvilPlanButton extends GuiButton
 
 			if(!screen.AnvilEntity.craftingPlan.equals("") && screen.AnvilEntity.workRecipe != null) 
 				renderInventorySlot(screen.AnvilEntity.workRecipe.getCraftingResult(),this.xPosition+1, this.yPosition+1);
-			//this.drawTexturedModelRectFromIcon(this.xPosition+1, this.yPosition+1, screen.AnvilEntity.workRecipe.getCraftingResult().getIconIndex(), this.width-2, this.height-2);
 			else
-				this.drawTexturedModelRectFromIcon(this.xPosition+1, this.yPosition+1, TFCItems.Blueprint.getIconIndex(new ItemStack(TFCItems.Blueprint)), this.width-2, this.height-2);
+				renderInventorySlot(new ItemStack(TFCItems.Blueprint),this.xPosition+1, this.yPosition+1);
 
 			this.zLevel = 0;
 			this.mouseDragged(mc, x, y);

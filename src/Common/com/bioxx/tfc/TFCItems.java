@@ -88,6 +88,7 @@ import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
 import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
 import com.bioxx.tfc.Items.Tools.ItemProPick;
+import com.bioxx.tfc.Items.Tools.ItemShears;
 import com.bioxx.tfc.Items.Tools.ItemSpindle;
 import com.bioxx.tfc.Items.Tools.ItemSteelBucketBlue;
 import com.bioxx.tfc.Items.Tools.ItemSteelBucketRed;
@@ -922,6 +923,8 @@ public class TFCItems
 	public static Item Soup;
 	public static Item Stew;
 	public static Item Salad;
+	public static Item Shears;
+
 	/**
 	 * Item Uses Setup
 	 * */
@@ -1018,6 +1021,8 @@ public class TFCItems
 		minecartCrate = new ItemCustomMinecart(1).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 		GoldPan = new ItemGoldPan().setUnlocalizedName("GoldPan");
 		SluiceItem = new ItemSluice().setFolder("devices/").setUnlocalizedName("SluiceItem").setCreativeTab(TFCTabs.TFCDevices);
+
+		Shears = new ItemShears(0, IronToolMaterial).setUnlocalizedName("shears").setTextureName("shears");
 
 		ProPickBismuthBronze = new ItemProPick().setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses);
 		ProPickBlackBronze = new ItemProPick().setUnlocalizedName("Black Bronze ProPick").setMaxDamage(BlackBronzeUses);
@@ -2847,6 +2852,8 @@ public class TFCItems
 		GameRegistry.registerItem(Sandwich, Sandwich.getUnlocalizedName());
 		GameRegistry.registerItem(Salad, Salad.getUnlocalizedName());
 		GameRegistry.registerItem(Soup, Soup.getUnlocalizedName());
+
+		GameRegistry.registerItem(Shears, Shears.getUnlocalizedName());
 
 		System.out.println(new StringBuilder().append("[TFC] All Items Registered").toString());
 	}

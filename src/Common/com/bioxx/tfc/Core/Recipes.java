@@ -1231,7 +1231,7 @@ public class Recipes
 	private static void RegisterToolRecipes()
 	{
 		//Misc Tools
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.shears, 1), new Object[] { "P ", " P", Character.valueOf('P'), "ingotIron" }));
+		//GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.shears, 1), new Object[] { "P ", " P", Character.valueOf('P'), "ingotIron" }));
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[] { Items.flint, "ingotIron" }));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[] { Items.flint, "ingotSteel" }));
@@ -2022,6 +2022,7 @@ public class Recipes
 		manager.addPlan("tuyere", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.BENDSECONDFROMLAST, RuleEnum.ANY}));
 		manager.addPlan("trapdoor", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.SHRINKNOTLAST, RuleEnum.UPSETNOTLAST}));
 		manager.addPlan("grill", new PlanRecipe(new RuleEnum[]{RuleEnum.BENDLAST, RuleEnum.DRAWSECONDFROMLAST, RuleEnum.DRAWTHIRDFROMLAST}));
+		manager.addPlan("shears", new PlanRecipe(new RuleEnum[]{RuleEnum.HITLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.HITTHIRDFROMLAST}));
 
 		addWeldRecipes(manager);
 
@@ -2312,6 +2313,7 @@ public class Recipes
 		addTrapDoor(TFCItems.ZincSheet, 20);
 
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), null,"grill", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.Grill, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronKnifeHead), new ItemStack(TFCItems.WroughtIronKnifeHead),"shears", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.Shears, 1, 0)));
 
 	}
 
