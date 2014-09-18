@@ -200,13 +200,13 @@ public class ItemCustomBucketMilk extends ItemTerra implements IFood
 	}
 
 	@Override
-	public boolean isEdible()
+	public boolean isEdible(ItemStack is)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean isUsable()
+	public boolean isUsable(ItemStack is)
 	{
 		return false;
 	}

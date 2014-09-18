@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -79,7 +80,8 @@ public class BlockPottery extends BlockTerraContainer
 		{
 			TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
 
-			if (te.isLit())
+			if (te.isLit() || player.inventory.getCurrentItem() != null && 
+					(player.inventory.getCurrentItem().getItem() == TFCItems.FlintSteel || player.inventory.getCurrentItem().getItem() == TFCItems.FireStarter))
 				return false;
 
 			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == TFCItems.Straw && !player.isSneaking())
@@ -92,7 +94,8 @@ public class BlockPottery extends BlockTerraContainer
 				te.addLog(player.inventory.getCurrentItem(), player);
 				return true;
 			}
-			else if(((player.inventory.getCurrentItem() == null || !(player.inventory.getCurrentItem().getItem() instanceof ItemPotteryBase))))
+			else if((player.inventory.getCurrentItem() != null && !(player.inventory.getCurrentItem().getItem() instanceof ItemPotteryBase)) || (te.getStackInSlot(0) != null && 
+					te.getStackInSlot(1) != null && te.getStackInSlot(2) != null && te.getStackInSlot(3) != null) || player.inventory.getCurrentItem() == null)
 			{
 				if(te.wood > 0)
 				{
@@ -179,6 +182,12 @@ public class BlockPottery extends BlockTerraContainer
 	{
 		Eject(world, x, y, z);
 		return world.setBlockToAir(x, y, z);
+	}
+
+	@Override
+	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
+	{
+		return null;
 	}
 
 	@Override

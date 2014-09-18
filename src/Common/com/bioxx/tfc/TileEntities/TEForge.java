@@ -8,7 +8,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.ForgeDirection;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
@@ -23,12 +25,7 @@ public class TEForge extends TEFireEntity implements IInventory
 {
 	public boolean isSmokeStackValid;
 	public ItemStack fireItemStacks[];
-	private int prevStackSize;
-	private ItemStack prevWorkItemStack;
-	private int externalFireCheckTimer;
-	public Boolean canCreateFire;
-	private int externalWoodCount;
-	private int charcoalCounter;
+	private int smokeTimer = 0;
 
 	public TEForge()
 	{
@@ -38,13 +35,10 @@ public class TEForge extends TEFireEntity implements IInventory
 		fireTemp = 20;
 		isSmokeStackValid = false;
 		fireItemStacks = new ItemStack[14];
-		externalFireCheckTimer = 0;
-		externalWoodCount = 0;
-		charcoalCounter = 0;
 		maxFireTempScale = 2500;
 	}
 
-	private Boolean CheckSmokeStackValidity()
+	private boolean validateSmokeStack()
 	{
 		if(worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) && !worldObj.isRaining())
 			return true;
@@ -70,6 +64,28 @@ public class TEForge extends TEFireEntity implements IInventory
 			return true;
 		else
 			return false;
+	}
+
+	private void genSmokeRoot(int x, int y, int z)
+	{
+		if(fuelTimeLeft >= 0)
+		{
+			if(worldObj.getBlock(x,y,z) != TFCBlocks.Smoke)
+				worldObj.setBlock(x, y, z, TFCBlocks.Smoke);
+		}
+		else
+		{
+			worldObj.setBlockToAir(x, y, z);
+		}
+	}
+
+	private class CoordDirection
+	{
+		int x; int y; int z; ForgeDirection dir;
+		public CoordDirection(int x, int y, int z, ForgeDirection d)
+		{
+			this.x = x;this.y = y;this.z = z;this.dir = d;
+		}
 	}
 
 	@Override
@@ -321,7 +337,6 @@ public class TEForge extends TEFireEntity implements IInventory
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		charcoalCounter = nbt.getInteger("charcoalCounter");
 		isSmokeStackValid = nbt.getBoolean("isValid");
 
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
@@ -347,7 +362,7 @@ public class TEForge extends TEFireEntity implements IInventory
 	public void updateEntity()
 	{
 		//Here we make sure that the forge is valid
-		isSmokeStackValid = CheckSmokeStackValidity();
+		isSmokeStackValid = validateSmokeStack();
 
 		if(!worldObj.isRemote)
 		{
@@ -394,7 +409,12 @@ public class TEForge extends TEFireEntity implements IInventory
 			{
 				float desiredTemp = handleTemp();
 				handleTempFlux(desiredTemp);
-
+				smokeTimer++;
+				if(smokeTimer > 60)
+				{
+					smokeTimer = 0;
+					createSmoke();
+				}
 				if(TFCOptions.enableDebugMode)
 				{
 					fireTemp = 2000;
@@ -409,11 +429,13 @@ public class TEForge extends TEFireEntity implements IInventory
 				EnumFuelMaterial m = TFC_Core.getFuelMaterial(fireItemStacks[7]);
 				fuelTimeLeft = m.burnTimeMax;
 				fuelBurnTemp = m.burnTempMax;
-				fuelTasteProfile = m.tasteProfile;
+				fuelTasteProfile = m.ordinal();
 				fireItemStacks[7] = null;
 			}
 			else
 			{
+				removeSmoke();
+
 				handleTempFlux(0);
 				TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
 			}
@@ -433,6 +455,55 @@ public class TEForge extends TEFireEntity implements IInventory
 		}
 	}
 
+	private void createSmoke()
+	{
+		if(!TFCOptions.generateSmoke)
+			return;
+		if(worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) && !worldObj.isRaining())
+			genSmokeRoot(xCoord, yCoord+1, zCoord);
+		else if(!worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord + 1, yCoord + 1, zCoord))
+			genSmokeRoot(xCoord+1, yCoord+1, zCoord);
+		else if(!worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord - 1, yCoord + 1, zCoord))
+			genSmokeRoot(xCoord-1, yCoord+1, zCoord);
+		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord + 1))
+			genSmokeRoot(xCoord, yCoord+1, zCoord+1);
+		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1).isOpaqueCube() && worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord - 1))
+			genSmokeRoot(xCoord, yCoord+1, zCoord-1);
+		else if(!worldObj.getBlock(xCoord + 2, yCoord + 1, zCoord).isOpaqueCube() && !worldObj.getBlock(xCoord+2, yCoord + 1, zCoord).isOpaqueCube() &&
+				worldObj.canBlockSeeTheSky(xCoord+2, yCoord + 1, zCoord))
+			genSmokeRoot(xCoord+2, yCoord+1, zCoord);
+		else if(!worldObj.getBlock(xCoord - 2, yCoord + 1, zCoord).isOpaqueCube() && !worldObj.getBlock(xCoord-2, yCoord + 1, zCoord).isOpaqueCube() &&
+				worldObj.canBlockSeeTheSky(xCoord-2, yCoord + 1, zCoord))
+			genSmokeRoot(xCoord-2, yCoord+1, zCoord);
+		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord + 2).isOpaqueCube() && !worldObj.getBlock(xCoord, yCoord + 1, zCoord+2).isOpaqueCube() &&
+				worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord+2))
+			genSmokeRoot(xCoord, yCoord+1, zCoord+2);
+		else if(!worldObj.getBlock(xCoord, yCoord + 1, zCoord - 2).isOpaqueCube() && !worldObj.getBlock(xCoord, yCoord + 1, zCoord-2).isOpaqueCube() &&
+				worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord-2))
+			genSmokeRoot(xCoord, yCoord+1, zCoord-2);
+	}
+
+	public void removeSmoke() {
+		if(worldObj.getBlock(xCoord, yCoord+1, zCoord) == TFCBlocks.Smoke)
+			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);
+		else if(worldObj.getBlock(xCoord+1, yCoord+1, zCoord) == TFCBlocks.Smoke)
+			worldObj.setBlockToAir(xCoord+1, yCoord+1, zCoord);
+		else if(worldObj.getBlock(xCoord-1, yCoord+1, zCoord) == TFCBlocks.Smoke)
+			worldObj.setBlockToAir(xCoord-1, yCoord+1, zCoord);
+		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord+1) == TFCBlocks.Smoke)
+			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord+1);
+		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord-1) == TFCBlocks.Smoke)
+			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord-1);
+		else if(worldObj.getBlock(xCoord+2, yCoord+1, zCoord) == TFCBlocks.Smoke)
+			worldObj.setBlockToAir(xCoord+2, yCoord+1, zCoord);
+		else if(worldObj.getBlock(xCoord-2, yCoord+1, zCoord) == TFCBlocks.Smoke)
+			worldObj.setBlockToAir(xCoord-2, yCoord+1, zCoord);
+		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord+2) == TFCBlocks.Smoke)
+			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord+2);
+		else if(worldObj.getBlock(xCoord, yCoord+1, zCoord-2) == TFCBlocks.Smoke)
+			worldObj.setBlockToAir(xCoord, yCoord+1, zCoord-2);
+	}
+
 	@Override
 	public boolean hasCustomInventoryName()
 	{
@@ -449,7 +520,6 @@ public class TEForge extends TEFireEntity implements IInventory
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setInteger("charcoalCounter", charcoalCounter);
 		nbt.setBoolean("isValid", isSmokeStackValid);
 
 		NBTTagList nbttaglist = new NBTTagList();

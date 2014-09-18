@@ -11,7 +11,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
+import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.api.TFCOptions;
 
@@ -20,6 +22,7 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 public class InitClientWorldPacket extends AbstractPacket
 {
 	private long seed;
+	private long soberTime;
 	private float stomachLevel;
 	private float waterLevel;
 	private float nutrFruit;
@@ -38,13 +41,14 @@ public class InitClientWorldPacket extends AbstractPacket
 	public InitClientWorldPacket(EntityPlayer P)
 	{
 		this.seed = P.worldObj.getSeed();
-        // Make sure to update time before loading food stats!
-        TFC_Time.UpdateTime(P.worldObj);
+		// Make sure to update time before loading food stats!
+		TFC_Time.UpdateTime(P.worldObj);
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(P);
 		fs.resetTimers();
 		fs.writeNBT(P.getEntityData());
 		this.stomachLevel = fs.stomachLevel;
 		this.waterLevel = fs.waterLevel;
+		this.soberTime = fs.soberTime;
 		this.nutrFruit = fs.nutrFruit;
 		this.nutrVeg = fs.nutrVeg;
 		this.nutrGrain = fs.nutrGrain;
@@ -57,7 +61,7 @@ public class InitClientWorldPacket extends AbstractPacket
 			this.craftingTable = true;
 		this.playerSkills = TFC_Core.getSkillStats(P);
 	}
-	
+
 	@Override
 	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
 	{
@@ -65,6 +69,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		buffer.writeInt(this.daysInYear);
 		buffer.writeFloat(this.stomachLevel);
 		buffer.writeFloat(this.waterLevel);
+		buffer.writeLong(this.soberTime);
 		buffer.writeFloat(this.nutrFruit);
 		buffer.writeFloat(this.nutrVeg);
 		buffer.writeFloat(this.nutrGrain);
@@ -83,6 +88,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		this.daysInYear = buffer.readInt();
 		this.stomachLevel = buffer.readFloat();
 		this.waterLevel = buffer.readFloat();
+		this.soberTime = buffer.readLong();
 		this.nutrFruit = buffer.readFloat();
 		this.nutrVeg = buffer.readFloat();
 		this.nutrGrain = buffer.readFloat();
@@ -110,6 +116,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
 		fs.stomachLevel = this.stomachLevel;
 		fs.waterLevel = this.waterLevel;
+		fs.soberTime = this.soberTime;
 		fs.nutrFruit = this.nutrFruit;
 		fs.nutrVeg = this.nutrVeg;
 		fs.nutrProtein = this.nutrProtein;
@@ -132,6 +139,10 @@ public class InitClientWorldPacket extends AbstractPacket
 			playerSkills.setSkillSave(skill, skillMap.get(skill));
 		}
 		skillMap.clear();
+
+		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
+				player.getDisplayName(),
+				player.getUniqueID()));
 	}
 
 	@Override

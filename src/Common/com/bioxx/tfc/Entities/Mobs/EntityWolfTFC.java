@@ -136,6 +136,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
 
+		nbt.setByte("tamed", this.dataWatcher.getWatchableObjectByte(16));
+		
 		nbt.setFloat ("Strength Modifier", getStrength());
 		nbt.setFloat ("Aggression Modifier", getAggression());
 		nbt.setFloat ("Obedience Modifier", obedience_mod);
@@ -168,6 +170,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		colour_mod = nbt.getFloat ("Colour Modifier");
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
+		
+		this.dataWatcher.updateObject(16, nbt.getByte("tamed"));
 
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");

@@ -124,22 +124,22 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 			return TFC_Textures.InvisibleTexture;
 		else if (side == 2) //-Z
 		{
-			if(TFCOptions.enableBetterGrass == true && access.getBlock(x, y - 1, z - 1).getMaterial() == Material.grass)
+			if(TFCOptions.enableBetterGrass == true && TFC_Core.isGrass(access.getBlock(x, y - 1, z - 1)))
 				return isSnow(access, x, y - 1, z - 1) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
 		}
 		else if (side == 3) //+Z
 		{
-			if(TFCOptions.enableBetterGrass == true && access.getBlock(x, y - 1, z + 1).getMaterial() == Material.grass)
+			if(TFCOptions.enableBetterGrass == true && TFC_Core.isGrass(access.getBlock(x, y - 1, z + 1)))
 				return isSnow(access, x, y - 1, z + 1) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
 		}
 		else if (side == 4) //-X
 		{
-			if(TFCOptions.enableBetterGrass == true && access.getBlock(x - 1, y - 1, z).getMaterial() == Material.grass)
+			if(TFCOptions.enableBetterGrass == true && TFC_Core.isGrass(access.getBlock(x - 1, y - 1, z)))
 				return isSnow(access, x - 1, y - 1, z) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
 		}
 		else if (side == 5) //+X
 		{
-			if(TFCOptions.enableBetterGrass == true && access.getBlock(x + 1, y - 1, z).getMaterial() == Material.grass)
+			if(TFCOptions.enableBetterGrass == true && TFC_Core.isGrass(access.getBlock(x + 1, y - 1, z)))
 				return isSnow(access, x + 1, y - 1, z) ? Blocks.snow.getBlockTextureFromSide(0) : GrassTopTexture;
 		}
 
@@ -214,24 +214,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 			}
 			else if (world.getBlockLightValue(i, j + 1, k) >= 4)
 			{
-				for (int var6 = 0; var6 < 4; ++var6)
-				{
-					int x = i + rand.nextInt(3) - 1;
-					int y = j + rand.nextInt(5) - 3;
-					int z = k + rand.nextInt(3) - 1;
-
-					float rain = TFC_Climate.getRainfall(world, x, y + 1, z);
-
-					Block id = world.getBlock(x, y, z);
-					int meta = world.getBlockMetadata(x, y, z);
-
-					if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
-						world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
-					else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
-						world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
-					else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
-						world.setBlock(x, y, z, TFCBlocks.PeatGrass);
-				}
+				spreadGrass(world, i, j, k, rand);
 
 				float rain = TFC_Climate.getRainfall(world, i, j + 1, k);
 				float temp = TFC_Climate.getHeightAdjustedTemp(world, i, j+1, k);
@@ -273,6 +256,29 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 			}
 
 			world.markBlockForUpdate(i, j, k);
+		}
+	}
+
+	public void spreadGrass(World world, int i, int j, int k, Random rand)
+	{
+		for (int var6 = 0; var6 < 4; ++var6)
+		{
+			int x = i + rand.nextInt(3) - 1;
+			int y = j + rand.nextInt(5) - 3;
+			int z = k + rand.nextInt(3) - 1;
+
+			float rain = TFC_Climate.getRainfall(world, x, y + 1, z);
+
+			Block id = world.getBlock(x, y, z);
+			int meta = world.getBlockMetadata(x, y, z);
+
+			//Spread to other blocks
+			if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
+				world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRainByBlock(id, rain), meta, 0x2);
+			else if (TFC_Core.isClay(id) && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
+				world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
+			else if (TFC_Core.isPeat(id) && rand.nextInt(10) == 0 && world.getBlock(x, y + 1, z).getMaterial() != Material.water)
+				world.setBlock(x, y, z, TFCBlocks.PeatGrass);
 		}
 	}
 

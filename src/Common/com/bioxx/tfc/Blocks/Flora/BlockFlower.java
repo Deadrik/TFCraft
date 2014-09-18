@@ -15,8 +15,8 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -33,6 +33,7 @@ public class BlockFlower extends BlockTerra
 		this.setTickRandomly(true);
 		float var4 = 0.2F;
 		this.setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var4 * 3.0F, 0.5F + var4);
+		this.setCreativeTab(TFCTabs.TFCDecoration);
 		flowerNames = new String[]{"flower_dandelion","flower_nasturtium", "flower_meads_milkweed", "flower_tropical_milkweed", "flower_butterfly_milkweed", "flower_calendula"};
 	}
 
@@ -57,7 +58,7 @@ public class BlockFlower extends BlockTerra
 
 		if(addToCreative)
 		{
-			for(int i = 0; i < Global.FLOWER_META_NAMES.length; i++)
+			for(int i = 0; i < flowerNames.length; i++)
 				list.add(new ItemStack(item, 1, i));
 		}
 	}

@@ -125,7 +125,7 @@ public class BlockForge extends BlockTerraContainer
 			boolean surroundSolids = (world.getBlock(x+1, y, z).getMaterial() == Material.rock && world.getBlock(x-1, y, z).getMaterial() == Material.rock && 
 					world.getBlock(x, y, z+1).getMaterial() == Material.rock && world.getBlock(x, y, z-1).getMaterial() == Material.rock &&
 					world.getBlock(x, y-1, z).isNormalCube() && (world.getBlock(x+1, y, z).isNormalCube() && world.getBlock(x-1, y, z).isNormalCube() && 
-					world.getBlock(x, y, z+1).isNormalCube() && world.getBlock(x, y, z-1).isNormalCube()));
+							world.getBlock(x, y, z+1).isNormalCube() && world.getBlock(x, y, z-1).isNormalCube()));
 
 			boolean rockXP = world.getBlock(x+1, y, z) == TFCBlocks.stoneSlabs || 
 					(world.getBlock(x+1, y, z).getMaterial() == Material.rock && world.getBlock(x+1, y, z).isNormalCube());
@@ -138,7 +138,7 @@ public class BlockForge extends BlockTerraContainer
 			boolean rockYN = world.getBlock(x, y-1,  z ) == TFCBlocks.stoneSlabs ||
 					(world.getBlock(x, y-1, z).getMaterial() == Material.rock && world.getBlock(x, y-1,z).isNormalCube());
 
-			boolean validSlabs = world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH) && world.isSideSolid(x, y, z + 1, ForgeDirection.SOUTH) &&
+			boolean validSlabs = world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH) && world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH) &&
 					world.isSideSolid(x - 1, y, z, ForgeDirection.EAST) && world.isSideSolid(x + 1, y, z, ForgeDirection.WEST);
 
 			if (!(rockXP && rockXN && rockZP && rockZN && rockYN) || !validSlabs)
@@ -208,6 +208,20 @@ public class BlockForge extends BlockTerraContainer
 			return 15;
 		else
 			return 10;
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+	{
+		if(!world.isRemote)
+		{
+			TEForge te = (TEForge)world.getTileEntity(x, y, z);
+
+			if (te != null)
+			{
+				te.removeSmoke();
+			}
+		}
 	}
 
 	/**

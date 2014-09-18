@@ -4,7 +4,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.event.FOVUpdateEvent;
@@ -12,7 +11,6 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Chunkdata.ChunkDataManager;
@@ -101,13 +99,9 @@ public class EntityLivingHandler
 					ItemStack is = player.inventory.getStackInSlot(i);
 					if(is != null && is.getItem() instanceof IEquipable)
 					{
-						if(is.getItem() == Item.getItemFromBlock(TFCBlocks.Barrel))
-						{
-							if(is.hasTagCompound())
-							{
-								isOverburdened = true;
-							}
-						}
+						isOverburdened = ((IEquipable)is.getItem()).getTooHeavyToCarry(is);
+						if(isOverburdened)
+							break;
 					}
 				}
 
@@ -136,7 +130,9 @@ public class EntityLivingHandler
 			else
 			{
 				PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
-
+				//onUpdate(player) still has a !worldObj.isRemote check, but this allows us to render drunkenness
+				FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+				foodstats.onUpdate(player);
 				if(pi != null && player.inventory.getCurrentItem() != null)
 				{
 					if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)

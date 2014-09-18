@@ -2,8 +2,6 @@ package com.bioxx.tfc.Items.ItemBlocks;
 
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +13,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+
+import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
@@ -139,7 +139,15 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 	}
 
 	@Override
-	public void onEquippedRender() {
+	public void onEquippedRender() 
+	{
+		GL11.glTranslatef(0, -0.3f, -0F);
+	}
+
+	@Override
+	public boolean getTooHeavyToCarry(ItemStack is)
+	{
+		return is.hasTagCompound();
 	}
 }
 

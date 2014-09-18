@@ -159,7 +159,10 @@ public class BlockDetailed extends BlockPartial
 			{
 				te.data.clear(index);
 				te.clearQuad(xSelected, ySelected, zSelected);
-
+				if(te.isBlockEmpty())
+				{
+					world.setBlockToAir(x, y, z);
+				}
 				if(player.inventory.mainInventory[hasChisel] != null)
 					player.inventory.mainInventory[hasChisel].damageItem(1, player);
 

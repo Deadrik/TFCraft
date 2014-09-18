@@ -158,10 +158,10 @@ public class TEStand extends TileEntity implements IInventory
 		{
 			if(hasWorldObj() && !hasEntity)
 			{
-				entity = new EntityStand(worldObj,this);
+				//entity = new EntityStand(worldObj,this);
 				entity.setLocationAndAngles(xCoord, yCoord, zCoord, yaw, 0);
 				worldObj.spawnEntityInWorld(entity);
-				entity.standTE = this;
+				//entity.standTE = this;
 				hasEntity = true;
 			}
 

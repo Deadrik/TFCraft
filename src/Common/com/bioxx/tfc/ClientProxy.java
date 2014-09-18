@@ -65,6 +65,7 @@ import com.bioxx.tfc.Handlers.Client.PlankHighlightHandler;
 import com.bioxx.tfc.Handlers.Client.PlayerRenderHandler;
 import com.bioxx.tfc.Handlers.Client.RenderOverlayHandler;
 import com.bioxx.tfc.Handlers.Client.SoundHandler;
+import com.bioxx.tfc.Render.EntityRendererTFC;
 import com.bioxx.tfc.Render.FoliageColorReloadListener;
 import com.bioxx.tfc.Render.GrassColorReloadListener;
 import com.bioxx.tfc.Render.RenderBear;
@@ -92,11 +93,14 @@ import com.bioxx.tfc.Render.Blocks.RenderFenceGate;
 import com.bioxx.tfc.Render.Blocks.RenderFluids;
 import com.bioxx.tfc.Render.Blocks.RenderGrill;
 import com.bioxx.tfc.Render.Blocks.RenderLeatherRack;
+import com.bioxx.tfc.Render.Blocks.RenderLoom;
 import com.bioxx.tfc.Render.Blocks.RenderMetalSheet;
 import com.bioxx.tfc.Render.Blocks.RenderMetalTrapDoor;
 import com.bioxx.tfc.Render.Blocks.RenderNestBox;
 import com.bioxx.tfc.Render.Blocks.RenderOre;
 import com.bioxx.tfc.Render.Blocks.RenderPottery;
+import com.bioxx.tfc.Render.Blocks.RenderSmoke;
+import com.bioxx.tfc.Render.Blocks.RenderSmokeRack;
 import com.bioxx.tfc.Render.Blocks.RenderStand;
 import com.bioxx.tfc.Render.Blocks.RenderSupportBeam;
 import com.bioxx.tfc.Render.Blocks.RenderToolRack;
@@ -123,8 +127,10 @@ import com.bioxx.tfc.Render.TESR.TESRFirepit;
 import com.bioxx.tfc.Render.TESR.TESRFoodPrep;
 import com.bioxx.tfc.Render.TESR.TESRGrill;
 import com.bioxx.tfc.Render.TESR.TESRIngotPile;
+import com.bioxx.tfc.Render.TESR.TESRLoom;
 import com.bioxx.tfc.Render.TESR.TESRPottery;
 import com.bioxx.tfc.Render.TESR.TESRQuern;
+import com.bioxx.tfc.Render.TESR.TESRSmokeRack;
 import com.bioxx.tfc.Render.TESR.TESRToolrack;
 import com.bioxx.tfc.Render.TESR.TESRWorldItem;
 import com.bioxx.tfc.TileEntities.TEAnvil;
@@ -134,7 +140,9 @@ import com.bioxx.tfc.TileEntities.TEFirepit;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.TileEntities.TEGrill;
 import com.bioxx.tfc.TileEntities.TEIngotPile;
+import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.TileEntities.TEPottery;
+import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
@@ -167,6 +175,9 @@ public class ClientProxy extends CommonProxy
 		IReloadableResourceManager IRRM = (IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
 		IRRM.registerReloadListener(new GrassColorReloadListener());
 		IRRM.registerReloadListener(new FoliageColorReloadListener());
+		
+		Minecraft.getMinecraft().entityRenderer = new EntityRendererTFC(Minecraft.getMinecraft(),Minecraft.getMinecraft().getResourceManager());
+		IRRM.registerReloadListener(Minecraft.getMinecraft().entityRenderer);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderTerraJavelin());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySquidTFC.class, new RenderSquidTFC(new ModelSquidTFC(), 0.7F));
@@ -229,6 +240,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.fluidRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFluids());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderWoodConstruct());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.barrelRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBarrel());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.loomRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderLoom());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.standRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderStand());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.NestBoxRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderNestBox());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.potteryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPottery());
@@ -243,7 +255,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.metalTrapDoorRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderMetalTrapDoor());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.vesselRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderVessel());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.torchRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTorch());
-
+		RenderingRegistry.registerBlockHandler(TFCBlocks.smokeRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderSmoke());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.smokeRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderSmokeRack());
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 	}
@@ -272,6 +285,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TEChest.class, "chest", new TESRChest());
 		ClientRegistry.registerTileEntity(TEIngotPile.class, "ingotPile", new TESRIngotPile());
 		ClientRegistry.registerTileEntity(TEFirepit.class, "TerraFirepit", new TESRFirepit());
+		ClientRegistry.registerTileEntity(TELoom.class, "Loom", new TESRLoom());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 		ClientRegistry.registerTileEntity(TEPottery.class, "Pottery", new TESRPottery());
 		ClientRegistry.registerTileEntity(TEFoodPrep.class, "FoodPrep", new TESRFoodPrep());
@@ -281,6 +295,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.registerTileEntity(TEWorldItem.class, "worldItem", new TESRWorldItem());
 		ClientRegistry.registerTileEntity(TileEntityQuern.class, "Quern", new TESRQuern());
 		ClientRegistry.registerTileEntity(TEGrill.class, "GrillTESR", new TESRGrill());
+		ClientRegistry.registerTileEntity(TESmokeRack.class, "SmokeRackTESR", new TESRSmokeRack());
 	}
 
 	@Override

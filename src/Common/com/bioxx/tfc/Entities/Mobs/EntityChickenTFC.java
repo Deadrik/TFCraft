@@ -225,8 +225,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 
 	public void roosterCrow()
 	{
-		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE && isAdult()){
-			this.playSound(TFC_Sounds.ROOSTERCROW, 10, rand.nextFloat()+0.5F);
+		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE && isAdult() && this.worldObj.canBlockSeeTheSky((int)this.posX, (int)this.posY,(int)this.posZ)){
+			this.playSound(TFC_Sounds.ROOSTERCROW, 6, (rand.nextFloat()/2F)+0.75F);
 		}
 	}
 

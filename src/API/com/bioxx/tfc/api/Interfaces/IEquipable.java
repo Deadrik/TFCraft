@@ -10,6 +10,8 @@ public interface IEquipable
 	{
 		BACK, NULL;
 	}
-	
+
 	public void onEquippedRender();
+
+	public boolean getTooHeavyToCarry(ItemStack is);
 }

@@ -67,6 +67,10 @@ public class BlockCollapsable extends BlockTerraContainer
 			return true;
 		if (block == TFCBlocks.Torch)
 			return true;
+		if (block == TFCBlocks.SmokeRack)
+			return true;
+		if(!block.isNormalCube())
+			return true;
 		Material material = block.getMaterial();
 		if (material == Material.water || material == Material.lava)
 			return true;
@@ -262,7 +266,7 @@ public class BlockCollapsable extends BlockTerraContainer
 				for(int z1 = -1; z1 < 2 && !found; z1++)
 				{
 					if(world.getBlock(i+x1, j, k+z1) instanceof BlockCollapsable && 
-						((BlockCollapsable)world.getBlock(i+x1, j, k+z1)).tryToFall(world, i+x1, j, k+z1, 0))
+							((BlockCollapsable)world.getBlock(i+x1, j, k+z1)).tryToFall(world, i+x1, j, k+z1, 0))
 					{
 						found = true;
 						triggerCollapse(world, entityplayer, i, j, k, meta);

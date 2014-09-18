@@ -74,6 +74,17 @@ achievement.achIronAge.desc=Mine an iron bloom to enter the Iron Age
 achievement.achPokeCreeper=Steve Irwin
 achievement.achPokeCreeper.desc=Poke it with a stick
 
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=No valid animals in range!
+commands.transferTamed.tooMany=Too many animals in range!
+commands.transferTamed.wrongOwner=That doesn't belong to you!
+commands.transferTamed.sameTarget=You can't transfer to yourself!
+commands.transferTamed.display.incoming=An animal has been transferred to you by %s!
+commands.transferTamed.display.outgoing=You've transferred an animal to %s!
+commands.transferTamed.wrongSender=You can't transfer animals!
+
 #========
 #= Food =
 #========
@@ -1115,41 +1126,23 @@ tile.ArmourStand.White Cedar.name=White Cedar Armor Stand
 tile.ArmourStand.White Elm.name=White Elm Armor Stand
 tile.ArmourStand.Willow.name=Willow Armor Stand
 
-tile.WoodSupportV2.Acacia.name=Vertical Acacia Support Beam
-tile.WoodSupportV.Ash.name=Vertical Ash Support Beam
-tile.WoodSupportV.Aspen.name=Vertical Aspen Support Beam
-tile.WoodSupportV.Birch.name=Vertical Birch Support Beam
-tile.WoodSupportV.Chestnut.name=Vertical Chestnut Support Beam
-tile.WoodSupportV.Douglas Fir.name=Vertical Douglas Fir Support Beam
-tile.WoodSupportV.Hickory.name=Vertical Hickory Support Beam
-tile.WoodSupportV.Kapok.name=Vertical Kapok Support Beam
-tile.WoodSupportV.Maple.name=Vertical Maple Support Beam
-tile.WoodSupportV.Oak.name=Vertical Oak Support Beam
-tile.WoodSupportV.Pine.name=Vertical Pine Support Beam
-tile.WoodSupportV.Sequoia.name=Vertical Sequoia Support Beam
-tile.WoodSupportV.Spruce.name=Vertical Spruce Support Beam
-tile.WoodSupportV.Sycamore.name=Vertical Sycamore Support Beam
-tile.WoodSupportV.White Cedar.name=Vertical White Cedar Support Beam
-tile.WoodSupportV.White Elm.name=Vertical White Elm Support Beam
-tile.WoodSupportV.Willow.name=Vertical Willow Support Beam
-
-tile.WoodSupportH2.Acacia.name=Horizontal Acacia Support Beam
-tile.WoodSupportH.Ash.name=Horizontal Ash Support Beam
-tile.WoodSupportH.Aspen.name=Horizontal Aspen Support Beam
-tile.WoodSupportH.Birch.name=Horizontal Birch Support Beam
-tile.WoodSupportH.Chestnut.name=Horizontal Chestnut Support Beam
-tile.WoodSupportH.Douglas Fir.name=Horizontal Douglas Fir Support Beam
-tile.WoodSupportH.Hickory.name=Horizontal Hickory Support Beam
-tile.WoodSupportH.Kapok.name=Horizontal Kapok Support Beam
-tile.WoodSupportH.Maple.name=Horizontal Maple Support Beam
-tile.WoodSupportH.Oak.name=Horizontal Oak Support Beam
-tile.WoodSupportH.Pine.name=Horizontal Pine Support Beam
-tile.WoodSupportH.Sequoia.name=Horizontal Sequoia Support Beam
-tile.WoodSupportH.Spruce.name=Horizontal Spruce Support Beam
-tile.WoodSupportH.Sycamore.name=Horizontal Sycamore Support Beam
-tile.WoodSupportH.White Cedar.name=Horizontal White Cedar Support Beam
-tile.WoodSupportH.White Elm.name=Horizontal White Elm Support Beam
-tile.WoodSupportH.Willow.name=Horizontal Willow Support Beam
+tile.WoodSupportV2.Acacia.name=Acacia Support Beam
+tile.WoodSupportV.Ash.name=Ash Support Beam
+tile.WoodSupportV.Aspen.name=Aspen Support Beam
+tile.WoodSupportV.Birch.name=Birch Support Beam
+tile.WoodSupportV.Chestnut.name=Chestnut Support Beam
+tile.WoodSupportV.Douglas Fir.name=Douglas Fir Support Beam
+tile.WoodSupportV.Hickory.name=Hickory Support Beam
+tile.WoodSupportV.Kapok.name=Kapok Support Beam
+tile.WoodSupportV.Maple.name=Maple Support Beam
+tile.WoodSupportV.Oak.name=Oak Support Beam
+tile.WoodSupportV.Pine.name=Pine Support Beam
+tile.WoodSupportV.Sequoia.name=Sequoia Support Beam
+tile.WoodSupportV.Spruce.name=Spruce Support Beam
+tile.WoodSupportV.Sycamore.name=Sycamore Support Beam
+tile.WoodSupportV.White Cedar.name=White Cedar Support Beam
+tile.WoodSupportV.White Elm.name=White Elm Support Beam
+tile.WoodSupportV.Willow.name=Willow Support Beam
 
 tile.Toolrack.Acacia.name=Acacia Tool Rack
 tile.Toolrack.Ash.name=Ash Tool Rack
@@ -1938,16 +1931,21 @@ tile.Vine.name=Vine
 tile.SeaGrassStill.name=Seagrass
 tile.SeaGrassIce.name=Frozen Seagrass
 
+tile.Flowers.flower_nasturtium.name=Nasturtium
 tile.Flowers.flower_dandelion.name=Dandelion
-tile.Flowers.flower_rose.name=Red Rose
-tile.Flowers.flower_blue_orchid.name=Blue Orchid
-tile.Flowers.flower_allium.name=Allium
-tile.Flowers.flower_houstonia.name=Houstonia
-tile.Flowers.flower_tulip_red.name=Red Tulip
-tile.Flowers.flower_tulip_orange.name=Orange Tulip
-tile.Flowers.flower_tulip_white.name=White Tulip
-tile.Flowers.flower_tulip_pink.name=Pink Tulip
-tile.Flowers.flower_oxeye_daisy.name=Daisy
+tile.Flowers.flower_meads_milkweed.name=Meads Milkweed
+tile.Flowers.flower_tropical_milkweed.name=Tropical Milkweed
+tile.Flowers.flower_butterfly_milkweed.name=Butterfly Milkweed
+tile.Flowers.flower_calendula.name=Calendula
+tile.Flowers2.flower_rose.name=Red Rose
+tile.Flowers2.flower_blue_orchid.name=Blue Orchid
+tile.Flowers2.flower_allium.name=Allium
+tile.Flowers2.flower_houstonia.name=Houstonia
+tile.Flowers2.flower_tulip_red.name=Red Tulip
+tile.Flowers2.flower_tulip_orange.name=Orange Tulip
+tile.Flowers2.flower_tulip_white.name=White Tulip
+tile.Flowers2.flower_tulip_pink.name=Pink Tulip
+tile.Flowers2.flower_oxeye_daisy.name=Daisy
 
 #=======
 #= GUI =
@@ -2160,6 +2158,8 @@ gui.plans.shovel=Shovel
 gui.plans.splitbloom=Split
 gui.plans.sword=Sword
 gui.plans.tuyere=Tuyere
+gui.plans.grill=Grill
+gui.plans.shears=Shears
 
 #== Misc GUI ==
 gui.Blueprint=Blueprint
@@ -2358,5 +2358,21 @@ gui.overburdened=*Overburdened*
 gui.slot=Slot
 gui.slot.back=Back
 word.pickled=Pickled
+word.brined=Brined
 word.cooked=Cooked
+word.salted=Salted
+word.smoked=Smoked
+word.dried=Dried
 gui.barrel.pickling=Pickling
+gui.barrel.brining=Brining
+tile.Vessel.name=Large Vessel
+food.cooked.rare=Rare
+food.cooked.medrare=Medium Rare
+food.cooked.med=Medium
+food.cooked.medwell=Medium Well
+food.cooked.well=Well Done
+food.cooked.0=Very Light
+food.cooked.1=Light
+food.cooked.2=Medium
+food.cooked.3=Dark
+food.cooked.4=Very Dark

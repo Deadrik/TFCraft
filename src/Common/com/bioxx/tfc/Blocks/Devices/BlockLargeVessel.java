@@ -17,7 +17,6 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TEVessel;
 
 import cpw.mods.fml.relauncher.Side;
@@ -100,7 +99,7 @@ public class BlockLargeVessel extends BlockBarrel
 
 			if(world.getTileEntity(x, y, z) != null)
 			{
-				TEBarrel te = (TEBarrel)(world.getTileEntity(x, y, z));
+				TEVessel te = (TEVessel)(world.getTileEntity(x, y, z));
 
 				if (!te.getSealed()) {
 					ItemStack equippedItem = player.getCurrentEquippedItem();

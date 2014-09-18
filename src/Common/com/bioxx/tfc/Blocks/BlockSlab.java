@@ -6,9 +6,9 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
@@ -16,7 +16,6 @@ import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.TileEntities.TEPartial;
-import com.bioxx.tfc.api.Util.Helper;
 
 public class BlockSlab extends BlockPartial
 {
@@ -85,7 +84,7 @@ public class BlockSlab extends BlockPartial
 	 * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
 	 */
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)  
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float par7, float par8, float par9)  
 	{
 		boolean hasHammer = false;
 		for(int i = 0; i < 9;i++)
@@ -96,12 +95,6 @@ public class BlockSlab extends BlockPartial
 		}
 		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
 		{
-			MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-			if(objectMouseOver == null) {
-				return false;
-			}
-			int side = objectMouseOver.sideHit;
-
 			Block block = world.getBlock(x, y, z);
 			byte meta = (byte) world.getBlockMetadata(x, y, z);
 
@@ -210,29 +203,29 @@ public class BlockSlab extends BlockPartial
 	}
 
 	@Override
-	public boolean isBlockSolid(IBlockAccess world, int x, int y, int z, int side)
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		TEPartial te = (TEPartial) world.getTileEntity(x, y, z);
 		long data = te.extraData;
 
 		switch(side)
 		{
-		case 0/*DOWN*/:
+		case DOWN/*DOWN*/:
 			return getBottomChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && 
 			getSouthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0;
-		case 1/*UP*/:
+		case UP/*UP*/:
 			return getTopChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && 
 			getSouthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0;
-		case 2/*NORTH*/:
+		case NORTH/*NORTH*/:
 			return getNorthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0 &&
 			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
-		case 3/*SOUTH*/:
+		case SOUTH/*SOUTH*/:
 			return getSouthChiselLevel(data) == 0 && getEastChiselLevel(data) == 0 && getWestChiselLevel(data) == 0 &&
 			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
-		case 4/*EAST*/:
+		case EAST/*EAST*/:
 			return getEastChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && getSouthChiselLevel(data) == 0 &&
 			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
-		case 5/*WEST*/:
+		case WEST/*WEST*/:
 			return getWestChiselLevel(data) == 0 && getNorthChiselLevel(data) == 0 && getSouthChiselLevel(data) == 0 &&
 			getTopChiselLevel(data) == 0 && getBottomChiselLevel(data) == 0;
 		default: 

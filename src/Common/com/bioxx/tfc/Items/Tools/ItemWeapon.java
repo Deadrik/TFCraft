@@ -33,7 +33,7 @@ import com.google.common.collect.Multimap;
 
 public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 {
-	private float weaponDamage;
+	private float weaponBaseDamage;
 	private final ToolMaterial toolMat;
 	public EnumDamageType damageType = EnumDamageType.SLASHING;
 
@@ -41,6 +41,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	{
 		super(par2);
 		this.setMaxDamage(par2.getMaxUses());
+		weaponBaseDamage = damage;
 		this.toolMat = par2;
 		setCreativeTab(TFCTabs.TFCWeapons);
 		setNoRepair();
@@ -51,7 +52,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	{
 		return this.toolMat.getDamageVsEntity();
 	}
-	
+
 	@Override
 	public IIcon getIcon(ItemStack stack, int pass)
 	{
@@ -147,11 +148,24 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 		return damageType;
 	}
 
+	public float getWeaponDamage(ItemStack is)
+	{
+		NBTTagCompound nbt = is.getTagCompound();
+		if(nbt != null)
+		{
+			float buff = 0;
+			if(nbt.hasKey("craftingTag"))
+				buff = nbt.getCompoundTag("craftingTag").getFloat("damagebuff");
+			return (int) (weaponBaseDamage + (weaponBaseDamage * (buff / 200f)));
+		}
+		else return weaponBaseDamage;
+	}
+
 	@Override
-	public Multimap getItemAttributeModifiers()
+	public Multimap getAttributeModifiers(ItemStack stack)
 	{
 		Multimap multimap = HashMultimap.create();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", this.weaponDamage, 0));
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", getWeaponDamage(stack), 0));
 		return multimap;
 	}
 
@@ -164,7 +178,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 			float buff = 0;
 			if(nbt.hasKey("craftingTag") && nbt.getCompoundTag("craftingTag").hasKey("durabuff"))
 				buff = nbt.getCompoundTag("craftingTag").getFloat("durabuff");
-			return (int) (getMaxDamage() + (getMaxDamage() * (buff / 100f)));
+			return (int) (getMaxDamage() + (getMaxDamage() * (buff / 300f)));
 		}
 		else return super.getMaxDamage(stack);
 	}

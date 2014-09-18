@@ -18,6 +18,8 @@ import com.bioxx.tfc.Blocks.BlockMetalTrapDoor;
 import com.bioxx.tfc.Blocks.BlockMolten;
 import com.bioxx.tfc.Blocks.BlockPlanks;
 import com.bioxx.tfc.Blocks.BlockSlab;
+import com.bioxx.tfc.Blocks.BlockSmoke;
+import com.bioxx.tfc.Blocks.BlockSmokeRack;
 import com.bioxx.tfc.Blocks.BlockStair;
 import com.bioxx.tfc.Blocks.BlockStalactite;
 import com.bioxx.tfc.Blocks.BlockSulfur;
@@ -36,6 +38,7 @@ import com.bioxx.tfc.Blocks.Devices.BlockForge;
 import com.bioxx.tfc.Blocks.Devices.BlockGrill;
 import com.bioxx.tfc.Blocks.Devices.BlockLargeVessel;
 import com.bioxx.tfc.Blocks.Devices.BlockLeatherRack;
+import com.bioxx.tfc.Blocks.Devices.BlockLoom;
 import com.bioxx.tfc.Blocks.Devices.BlockNestBox;
 import com.bioxx.tfc.Blocks.Devices.BlockPottery;
 import com.bioxx.tfc.Blocks.Devices.BlockQuern;
@@ -111,6 +114,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBlocks.ItemGrill;
 import com.bioxx.tfc.Items.ItemBlocks.ItemLargeVessel;
+import com.bioxx.tfc.Items.ItemBlocks.ItemLooms;
 import com.bioxx.tfc.Items.ItemBlocks.ItemMetalTrapDoor;
 import com.bioxx.tfc.Items.ItemBlocks.ItemSoil;
 import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
@@ -140,6 +144,7 @@ public class TFCBlocks
 	public static int FirepitRenderId;
 	public static int AnvilRenderId;
 	public static int barrelRenderId;
+	public static int loomRenderId;
 	public static int standRenderId;
 	public static int FenceRenderId;
 	public static int FenceGateRenderId;
@@ -174,6 +179,8 @@ public class TFCBlocks
 	public static int metalTrapDoorRenderId;
 	public static int vesselRenderId;
 	public static int torchRenderId;
+	public static int smokeRenderId;
+	public static int smokeRackRenderId;
 
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -271,6 +278,7 @@ public class TFCBlocks
 
 	public static Block IngotPile;
 	public static Block Barrel;
+	public static Block Loom;
 	public static Block Pottery;
 	public static Block Thatch;
 	public static Block Moss;
@@ -330,6 +338,8 @@ public class TFCBlocks
 	public static Block Grill;
 	public static Block MetalTrapDoor;
 	public static Block Vessel;
+	public static Block Smoke;
+	public static Block SmokeRack;
 
 	public static void RegisterBlocks()
 	{
@@ -459,6 +469,7 @@ public class TFCBlocks
 
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
 		GameRegistry.registerBlock(Barrel, ItemBarrels.class, "Barrel");
+		GameRegistry.registerBlock(Loom, ItemLooms.class, "Loom");
 		GameRegistry.registerBlock(Moss, "Moss");
 
 		GameRegistry.registerBlock(Flora, com.bioxx.tfc.Items.ItemBlocks.ItemFlora.class,"Flora");
@@ -477,7 +488,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Crops, "Crops");
 		GameRegistry.registerBlock(LilyPad, com.bioxx.tfc.Items.ItemBlocks.ItemCustomLilyPad.class, "LilyPad");
 		GameRegistry.registerBlock(Flowers, com.bioxx.tfc.Items.ItemBlocks.ItemFlowers.class, "Flowers");
-		GameRegistry.registerBlock(Flowers2, com.bioxx.tfc.Items.ItemBlocks.ItemFlowers.class, "Flowers2");
+		GameRegistry.registerBlock(Flowers2, com.bioxx.tfc.Items.ItemBlocks.ItemFlowers2.class, "Flowers2");
 		GameRegistry.registerBlock(Fungi, com.bioxx.tfc.Items.ItemBlocks.ItemFungi.class, "Fungi");
 		GameRegistry.registerBlock(Bookshelf, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Bookshelf");
 		GameRegistry.registerBlock(Torch, ItemTorch.class, "Torch");
@@ -495,7 +506,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Grill, ItemGrill.class, "Grill");
 		GameRegistry.registerBlock(MetalTrapDoor, ItemMetalTrapDoor.class, "MetalTrapDoor");
 		GameRegistry.registerBlock(Vessel, ItemLargeVessel.class, "Vessel");
-
+		GameRegistry.registerBlock(Smoke, "Smoke");
+		GameRegistry.registerBlock(SmokeRack, "SmokeRack");
 	}
 
 	public static void LoadBlocks()
@@ -665,6 +677,7 @@ public class TFCBlocks
 		IngotPile = new BlockIngotPile().setBlockName("ingotpile").setHardness(3);
 
 		Barrel = new BlockBarrel().setBlockName("Barrel").setHardness(2);
+		Loom = new BlockLoom().setBlockName("Loom").setHardness(2);
 		Thatch = new BlockThatch().setBlockName("Thatch").setHardness(1).setStepSound(Block.soundTypeGrass).setCreativeTab(TFCTabs.TFCBuilding);
 		Moss = new BlockMoss().setBlockName("Moss").setHardness(1).setStepSound(Block.soundTypeGrass);
 
@@ -696,7 +709,7 @@ public class TFCBlocks
 		Lava = (new BlockCustomLiquid(TFCFluid.LAVA, Material.lava)).setHardness(0.0F).setLightLevel(1.0F).setLightOpacity(255).setBlockName("Lava");
 		Ice = new BlockCustomIce().setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("Ice").setBlockTextureName("ice");
 
-		WaterPlant = new BlockWaterPlant(0).setBlockName("SeaGrassStill").setHardness(2f).setStepSound(Block.soundTypeGravel).setCreativeTab(TFCTabs.TFCDecoration);
+		WaterPlant = new BlockWaterPlant(0).setBlockName("SeaGrassStill").setHardness(0.5f).setStepSound(Block.soundTypeGravel);
 
 		FireBrick = new BlockFireBrick().setBlockName("FireBrick").setHardness(8);
 		MetalSheet = new BlockMetalSheet().setBlockName("MetalSheet").setHardness(8).setResistance(20f);
@@ -707,7 +720,9 @@ public class TFCBlocks
 
 		Grill = new BlockGrill().setHardness(2F).setBlockName("Grill");
 		MetalTrapDoor = new BlockMetalTrapDoor().setHardness(2F).setBlockName("MetalTrapDoor");
-		Vessel = new BlockLargeVessel().setHardness(2F).setBlockName("Vessel");
+		Vessel = new BlockLargeVessel().setHardness(1F).setBlockName("Vessel");
+		Smoke = new BlockSmoke().setHardness(0F).setBlockName("Smoke");
+		SmokeRack = new BlockSmokeRack().setHardness(0F).setBlockName("SmokeRack");
 
 		StoneIgIn.setHarvestLevel("pickaxe", 0);
 		StoneIgEx.setHarvestLevel("pickaxe", 0);
@@ -736,6 +751,7 @@ public class TFCBlocks
 		Charcoal.setHarvestLevel("shovel", 0);
 		Gravel.setHarvestLevel("shovel", 0);
 		Gravel2.setHarvestLevel("shovel", 0);
+		WaterPlant.setHarvestLevel("shovel", 0);
 
 		Detailed.setHarvestLevel("axe", 0);
 		Blocks.oak_stairs.setHarvestLevel("axe", 0);
@@ -792,7 +808,7 @@ public class TFCBlocks
 		Blocks.fire.setFireInfo(Barrel, 5, 20);
 		Blocks.fire.setFireInfo(Crops, 20, 20);
 		Blocks.fire.setFireInfo(LogPile, 20, 20);
-		Blocks.fire.setFireInfo(Charcoal, 100, 20);
+		//Blocks.fire.setFireInfo(Charcoal, 100, 20);
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
 			Blocks.fire.setFireInfo(Doors[i], 5, 20);
 	}

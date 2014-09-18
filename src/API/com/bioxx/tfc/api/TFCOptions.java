@@ -11,6 +11,7 @@ public class TFCOptions
 	public static boolean iDontLikeOnions;
 	public static boolean enableOreTest;
 	public static boolean use2DGrill;
+	public static boolean generateSmoke;
 
 	public static boolean enableCropsDie;
 

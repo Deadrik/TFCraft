@@ -48,6 +48,8 @@ public class ItemMetalSheet extends ItemTerra implements ISmeltable
 		boolean isSuccessful = false;
 		if(!world.isRemote)
 		{
+			if(itemstack.hasTagCompound())
+				return false;
 			TEMetalSheet te = null;
 			int[] sides = sidesMap[side];
 			if(world.getBlock(x, y, z) == TFCBlocks.MetalSheet)

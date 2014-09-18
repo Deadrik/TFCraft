@@ -7,6 +7,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
+import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.Interfaces.ISize;
 
@@ -17,6 +18,7 @@ public class SlotCookableFoodOnly extends SlotSize
 	public SlotCookableFoodOnly(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
+		this.setSize(EnumSize.SMALL);
 	}
 
 	@Override

@@ -10,14 +10,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.MinecraftForge;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Food.Food;
 import com.bioxx.tfc.Items.ItemMeltedMetal;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
+import com.bioxx.tfc.api.Interfaces.ICookableFood;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.TileEntities.TEFireEntity;
 
@@ -28,6 +31,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 {
 	public ItemStack fireItemStacks[];
 	public boolean hasCookingPot;
+	public int smokeTimer = 0;
 
 	public TEFirepit()
 	{
@@ -66,15 +70,6 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				ItemCookEvent eventMelt = new ItemCookEvent(fireItemStacks[1], output, this);
 				MinecraftForge.EVENT_BUS.post(eventMelt);
 				output = eventMelt.result;
-				if(fireItemStacks[1].getItem() instanceof IFood)
-				{
-					/*float mod = ((IFood)output.getItem()).getSmokeAbsorbMultiplier();
-					TFC_Core.setSweetMod(output, Math.round(fuelTasteProfile[0] * mod));
-					TFC_Core.setSourMod(output, Math.round(fuelTasteProfile[1] * mod));
-					TFC_Core.setSaltyMod(output, Math.round(fuelTasteProfile[2] * mod));
-					TFC_Core.setBitterMod(output, Math.round(fuelTasteProfile[3] * mod));
-					TFC_Core.setSavoryMod(output, Math.round(fuelTasteProfile[4] * mod));*/
-				}
 				int damage = 0;
 				ItemStack mold = null;
 				if(output != null)
@@ -357,6 +352,40 @@ public class TEFirepit extends TEFireEntity implements IInventory
 	}
 
 	@Override
+	public void careForInventorySlot(ItemStack is)
+	{
+		if(is != null)
+		{
+			float temp = TFC_ItemHeat.GetTemp(is);
+			if(fuelTimeLeft > 0 && is.getItem() instanceof IFood)
+			{
+				float inc = Food.getCooked(is)+Math.min((fireTemp/700), 2f);
+				Food.setCooked(is, inc);
+				temp = inc;
+				if(Food.isCooked(is))
+				{
+					int[] cookedTasteProfile = new int[] {0,0,0,0,0};
+					Random R = new Random(((ICookableFood)is.getItem()).getFoodID()+(((int)Food.getCooked(is)-600)/120));
+					cookedTasteProfile[0] = R.nextInt(30)-15;
+					cookedTasteProfile[1] = R.nextInt(30)-15;
+					cookedTasteProfile[2] = R.nextInt(30)-15;
+					cookedTasteProfile[3] = R.nextInt(30)-15;
+					cookedTasteProfile[4] = R.nextInt(30)-15;
+					Food.setCookedProfile(is, cookedTasteProfile);
+					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
+				}
+			}
+			else if(fireTemp > temp)
+			{
+				temp += TFC_ItemHeat.getTempIncrease(is);
+			}
+			else
+				temp -= TFC_ItemHeat.getTempDecrease(is);
+			TFC_ItemHeat.SetTemp(is, temp);
+		}
+	}
+
+	@Override
 	public void updateEntity()
 	{
 		if(!worldObj.isRemote)
@@ -365,6 +394,8 @@ public class TEFirepit extends TEFireEntity implements IInventory
 			careForInventorySlot(fireItemStacks[1]);
 			careForInventorySlot(fireItemStacks[7]);
 			careForInventorySlot(fireItemStacks[8]);
+
+			smokeFoods();
 
 			hasCookingPot = (fireItemStacks[1] != null && fireItemStacks[1].getItem() == TFCItems.PotteryPot && 
 					fireItemStacks[1].getItemDamage() == 1);
@@ -401,7 +432,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 				if(fireItemStacks[5] != null)
 				{
 					EnumFuelMaterial m = TFC_Core.getFuelMaterial(fireItemStacks[5]);
-					fuelTasteProfile = m.tasteProfile;
+					fuelTasteProfile = m.ordinal();
 					fireItemStacks[5] = null;
 					fuelTimeLeft = m.burnTimeMax;
 					fuelBurnTemp = m.burnTempMax;
@@ -431,6 +462,51 @@ public class TEFirepit extends TEFireEntity implements IInventory
 
 			if(fuelTimeLeft <= 0)
 				TFC_Core.handleItemTicking(this, worldObj, xCoord, yCoord, zCoord);
+		}
+	}
+
+	private void smokeFoods() 
+	{
+		if(this.fuelTimeLeft > 0)
+		{
+			this.smokeTimer++;
+			if(smokeTimer > 1000)
+			{
+				smokeTimer = 0;
+				smokeBlock(xCoord, yCoord+1, zCoord);
+				smokeBlock(xCoord+1, yCoord+1, zCoord);
+				smokeBlock(xCoord-1, yCoord+1, zCoord);
+				smokeBlock(xCoord, yCoord+1, zCoord+1);
+				smokeBlock(xCoord, yCoord+1, zCoord-1);
+				smokeBlock(xCoord, yCoord+2, zCoord);
+				smokeBlock(xCoord+1, yCoord+2, zCoord);
+				smokeBlock(xCoord-1, yCoord+2, zCoord);
+				smokeBlock(xCoord, yCoord+2, zCoord+1);
+				smokeBlock(xCoord, yCoord+2, zCoord-1);
+			}
+		}
+	}
+	private void smokeBlock(int x, int y, int z)
+	{
+		if(worldObj.getBlock(x, y, z) == TFCBlocks.SmokeRack)
+		{
+			TESmokeRack te = (TESmokeRack) worldObj.getTileEntity(x, y, z);
+			if(te.getStackInSlot(0) != null)
+			{
+				ItemStack is = te.getStackInSlot(0);
+				if(Food.getSmokeCounter(is) < 12)
+					Food.setSmokeCounter(is, Food.getSmokeCounter(is)+1);
+				else
+					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
+			}
+			if(te.getStackInSlot(1) != null)
+			{
+				ItemStack is = te.getStackInSlot(1);
+				if(Food.getSmokeCounter(is) < 12)
+					Food.setSmokeCounter(is, Food.getSmokeCounter(is)+1);
+				else
+					Food.setFuelProfile(is, EnumFuelMaterial.getFuelProfile(fuelTasteProfile));
+			}
 		}
 	}
 

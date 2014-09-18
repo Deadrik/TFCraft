@@ -58,12 +58,15 @@ import com.bioxx.tfc.TileEntities.TEIngotPile;
 import com.bioxx.tfc.TileEntities.TELeatherRack;
 import com.bioxx.tfc.TileEntities.TELightEmitter;
 import com.bioxx.tfc.TileEntities.TELogPile;
+import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.TileEntities.TEMetalTrapDoor;
 import com.bioxx.tfc.TileEntities.TENestBox;
 import com.bioxx.tfc.TileEntities.TEOre;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.TileEntities.TEPottery;
+import com.bioxx.tfc.TileEntities.TESluice;
+import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.TileEntities.TEStand;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
@@ -73,7 +76,6 @@ import com.bioxx.tfc.TileEntities.TileEntityFenceGate;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
 import com.bioxx.tfc.TileEntities.TileEntityQuern;
 import com.bioxx.tfc.TileEntities.TileEntitySapling;
-import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TileEntitySpawnMeter;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
 import com.bioxx.tfc.TileEntities.TileEntityWoodConstruct;
@@ -148,6 +150,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TEWaterPlant.class, "Sea Weed");
 		GameRegistry.registerTileEntity(TEVessel.class, "Vessel");
 		GameRegistry.registerTileEntity(TELightEmitter.class, "LightEmitter");
+		GameRegistry.registerTileEntity(TESmokeRack.class, "Smoke Rack");
 
 		if(b)
 		{
@@ -161,6 +164,7 @@ public class CommonProxy
 			GameRegistry.registerTileEntity(TEAnvil.class, "TerraAnvil");
 			GameRegistry.registerTileEntity(TEWorldItem.class, "worldItem");
 			GameRegistry.registerTileEntity(TileEntityQuern.class, "Quern");
+			GameRegistry.registerTileEntity(TELoom.class, "Loom");
 			GameRegistry.registerTileEntity(TEGrill.class, "grill");
 		}
 
@@ -193,7 +197,7 @@ public class CommonProxy
 
 		EntityRegistry.registerGlobalEntityID(EntityCustomMinecart.class, "minecartTFC", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityProjectileTFC.class, "arrowTFC", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerGlobalEntityID(EntityStand.class, "standTFC", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerGlobalEntityID(EntityStand.class, "standTFC", EntityRegistry.findGlobalUniqueEntityId(), 0xffffff, 0x105510);
 
 		EntityRegistry.registerModEntity(EntityJavelin.class, "javelin", 1, TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntitySquidTFC.class, "squidTFC", 2, TerraFirmaCraft.instance, 160, 5, true);

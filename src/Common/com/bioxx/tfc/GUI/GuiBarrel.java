@@ -24,7 +24,9 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.Food.Food;
 import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
@@ -310,16 +312,26 @@ public class GuiBarrel extends GuiContainerTFC
 			{
 				drawCenteredString(this.fontRendererObj, TFC_Time.getDateString(barrel.sealtime*1000), w+88, h+17, 0x555555);
 			}
-			if(barrel.recipe != null)
+			if(barrel.recipe != null && !(barrel.recipe instanceof BarrelBriningRecipe))
 			{
 				drawCenteredString(this.fontRendererObj, StatCollector.translateToLocal("gui.Bloomery.Output")+": "+barrel.recipe.getRecipeName(), w+88, h+72, 0x555555);
 			}
-			else if(barrel.recipe == null && barrel.sealtime != 0 && barrel.getFluidStack() != null && barrel.getFluidStack().getFluid() == TFCFluid.BRINE)
+			else if(barrel.recipe != null && barrel.sealtime != 0 && barrel.getFluidStack() != null && barrel.getFluidStack().getFluid() == TFCFluid.BRINE)
 			{
 				if(barrel.getStackInSlot(0) != null && barrel.getStackInSlot(0).getItem() instanceof IFood && 
 						(((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
 						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
-						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Protein))
+						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Protein) && !Food.isBrined(barrel.getStackInSlot(0)))
+				{
+					drawCenteredString(this.fontRendererObj,StatCollector.translateToLocal("gui.barrel.brining"), w+88, h+72, 0x555555);
+				}
+			}
+			else if(barrel.recipe == null && barrel.sealtime != 0 && barrel.getFluidStack() != null && barrel.getFluidStack().getFluid() == TFCFluid.VINEGAR)
+			{
+				if(barrel.getStackInSlot(0) != null && barrel.getStackInSlot(0).getItem() instanceof IFood && 
+						(((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Fruit ||
+						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Vegetable ||
+						((IFood)barrel.getStackInSlot(0).getItem()).getFoodGroup() == EnumFoodGroup.Protein) && !Food.isPickled(barrel.getStackInSlot(0)))
 				{
 					drawCenteredString(this.fontRendererObj,StatCollector.translateToLocal("gui.barrel.pickling"), w+88, h+72, 0x555555);
 				}

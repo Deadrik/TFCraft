@@ -17,6 +17,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IShearable;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
@@ -26,7 +27,7 @@ import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
 
-public class BlockCustomLeaves extends BlockLeaves
+public class BlockCustomLeaves extends BlockLeaves implements IShearable
 {
 	protected int adjacentTreeBlocks[][][];
 	protected String[] woodNames;
@@ -250,8 +251,8 @@ public class BlockCustomLeaves extends BlockLeaves
 			entityplayer.addExhaustion(0.025F);
 			if(world.rand.nextInt(100) < 28)
 				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Stick, 1));
-			else if(world.rand.nextInt(100) < 6 && meta != 9 && meta != 15)
-				dropBlockAsItem(world, i, j, k, new ItemStack(this.getItemDropped(0, null, 0), 1, meta));
+			else if (world.rand.nextInt(100) < 6)
+				dropSapling(world, i, j, k, meta);;
 
 			super.harvestBlock(world, entityplayer, i, j, k, meta);
 		}
@@ -300,5 +301,11 @@ public class BlockCustomLeaves extends BlockLeaves
 	public String[] func_150125_e()
 	{
 		return this.woodNames;
+	}
+
+	@Override
+	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
+	{
+		return false;
 	}
 }

@@ -11,20 +11,13 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.particle.EntityRainFX;
 import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.client.renderer.RenderGlobal;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import org.lwjgl.opengl.GL11;
-
 import com.bioxx.tfc.Core.WeatherManager;
-import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -165,105 +158,4 @@ public class ClientOverrides
 			}
 		}
 	}  
-
-	public static void renderIcon(int x, int y, ItemStack is, int xSize, int ySize)
-	{
-		//Disabled until I can come up with a better way for showing all 6 ingredients
-		/*if(is.getItem() instanceof ItemMeal)
-		{
-			Item i;
-			int offset = 0;
-			if(is.hasTagCompound() && is.getTagCompound().hasKey("FG"))
-			{
-				int[] fg = is.getTagCompound().getIntArray("FG");
-				for(int j = 1; j < fg.length; j++)
-				{
-					i = FoodRegistry.getInstance().getFood(is.getTagCompound().getIntArray("FG")[j]);
-					if(i != null)
-					{
-						renderIcon(x+offset, y, i.getIcon(new ItemStack(i), 0), 4, 4); 
-						offset+=4;
-					}
-				}
-				if(fg[0] != -1)
-				{
-
-				}
-			}
-		}*/
-
-		if(is.getItem() instanceof IFood && is.hasTagCompound())
-		{
-			GL11.glDisable(GL11.GL_LIGHTING);
-			GL11.glDisable(GL11.GL_DEPTH_TEST);
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			GL11.glDisable(GL11.GL_ALPHA_TEST);
-			GL11.glDisable(GL11.GL_BLEND);
-			float decayPerc = Math.max(((IFood)is.getItem()).getFoodDecay(is) / ((IFood)is.getItem()).getFoodWeight(is), 0);
-			float cookPerc = Math.max(Math.min(is.getTagCompound().getFloat("cookedLevel")/600f, 1), 0);
-
-			if(is.getItem() instanceof ItemFoodTFC && ((ItemFoodTFC)is.getItem()).cookedIcon != null)
-			{
-				int color = is.getItem().getColorFromItemStack(is, 0);
-				GL11.glColor4f(((color & 0xFF0000)>>16)/255f, ((color & 0x00ff00)>>8)/255f, (color & 0x0000ff)/255f, cookPerc);
-				renderIcon(x, y,((ItemFoodTFC)is.getItem()).cookedIcon, 16, 16);
-			}
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			float decayTop = decayPerc * 13.0F;
-
-			if(((IFood)is.getItem()).renderDecay())
-			{
-				if(decayPerc < 0.10)
-				{
-					decayTop = (decayTop*10);
-					renderQuad(x+1, y+13, 13-decayTop, 1, 0x00ff00);
-				}
-				else
-					renderQuad(x+1, y+13, 13-decayTop, 1, 0xff0000);
-			}
-			if(((IFood)is.getItem()).renderWeight())
-			{
-				renderQuad(x + 1, y + 14, 13, 1, 0);
-				float weightPerc = ((IFood)is.getItem()).getFoodWeight(is) / ((IFood)is.getItem()).getFoodMaxWeight(is);
-				float weightTop = weightPerc * 13.0F;
-
-				renderQuad(x+1, y+14, weightTop, 1, 0xffffff);
-			}
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glEnable(GL11.GL_LIGHTING);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
-			GL11.glEnable(GL11.GL_DEPTH_TEST);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		}
-	}
-
-	public static void renderIcon(int x, int y, IIcon icon, int sizeX, int sizeY)
-	{
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
-		GL11.glEnable(GL11.GL_BLEND);
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double)(x + 0), (double)(y + sizeY), (double)200, (double)icon.getMinU(), (double)icon.getMaxV());
-		tessellator.addVertexWithUV((double)(x + sizeX), (double)(y + sizeY), (double)200, (double)icon.getMaxU(), (double)icon.getMaxV());
-		tessellator.addVertexWithUV((double)(x + sizeX), (double)(y + 0), (double)200, (double)icon.getMaxU(), (double)icon.getMinV());
-		tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)200, (double)icon.getMinU(), (double)icon.getMinV());
-		tessellator.draw();
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glDisable(GL11.GL_ALPHA_TEST);
-		GL11.glDisable(GL11.GL_BLEND);
-	}
-
-	private static void renderQuad(double x, double y, double sizeX, double sizeY, int color)
-	{
-		Tessellator tess = Tessellator.instance;
-		tess.startDrawingQuads();
-		tess.setColorOpaque_I(color);
-		tess.addVertex((double)(x + 0), (double)(y + 0), 0.0D);
-		tess.addVertex((double)(x + 0), (double)(y + sizeY), 0.0D);
-		tess.addVertex((double)(x + sizeX), (double)(y + sizeY), 0.0D);
-		tess.addVertex((double)(x + sizeX), (double)(y + 0), 0.0D);
-		tess.draw();
-	}
 }

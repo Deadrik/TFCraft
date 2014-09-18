@@ -3,8 +3,6 @@ package com.bioxx.tfc.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,13 +19,9 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
-import com.bioxx.tfc.api.Armor;
 import com.bioxx.tfc.api.Enums.EnumAmmo;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
 import com.bioxx.tfc.api.Interfaces.IQuiverAmmo;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemQuiver extends ItemTerra implements IEquipable
 {
@@ -39,6 +33,7 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 	/**
 	 * Gets an icon index based on an item's damage value and the given render pass
 	 */
+	@Override
 	public IIcon getIconFromDamageForRenderPass(int par1, int par2)
 	{
 		return this.itemIcon;
@@ -249,6 +244,12 @@ public class ItemQuiver extends ItemTerra implements IEquipable
 	}
 	@Override
 	public void onEquippedRender() {
-        //GL11.glScalef(0.8F, 0.8F, 0.8F);
+		//GL11.glScalef(0.8F, 0.8F, 0.8F);
+	}
+
+	@Override
+	public boolean getTooHeavyToCarry(ItemStack is)
+	{
+		return false;
 	}
 }

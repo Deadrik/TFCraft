@@ -1,13 +1,16 @@
 package com.bioxx.tfc.Items.ItemBlocks;
 
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-import com.bioxx.tfc.api.Interfaces.ISmeltable;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-public abstract class ItemAnvil extends ItemTerraBlock implements ISmeltable
+import org.lwjgl.opengl.GL11;
+
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
+import com.bioxx.tfc.api.Interfaces.IEquipable;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
+
+public abstract class ItemAnvil extends ItemTerraBlock implements ISmeltable, IEquipable
 {
 	public ItemAnvil(Block par1)
 	{
@@ -40,5 +43,24 @@ public abstract class ItemAnvil extends ItemTerraBlock implements ISmeltable
 	public EnumTier GetSmeltTier(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumTier.TierI;
+	}
+
+	@Override
+	public EquipType getEquipType(ItemStack is) {
+		// TODO Auto-generated method stub
+		return EquipType.BACK;
+	}
+
+	@Override
+	public void onEquippedRender() 
+	{
+		GL11.glRotatef(90F, 1F, 0F, 0F);
+		GL11.glTranslatef(-0.5F, -0.5F, -0.3F);
+	}
+
+	@Override
+	public boolean getTooHeavyToCarry(ItemStack is) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

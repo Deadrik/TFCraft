@@ -123,13 +123,18 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 						this.setInventorySlotContents(INPUT1_SLOT, eventCraft.result);
 						if(anvilItemStacks[INPUT1_SLOT] != null)
 						{
-							if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemMiscToolHead || anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemTFCArmor)
+							NBTTagCompound craftingTag = new NBTTagCompound();
+							if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemMiscToolHead)
 							{
-								NBTTagCompound craftingTag = new NBTTagCompound();
 								craftingTag.setFloat("durabuff", recipe.getSkillTotal(lastWorker));
-								Tag.setTag("craftingTag", craftingTag);
-							}
+								craftingTag.setFloat("damagebuff", recipe.getSkillTotal(lastWorker));
 
+							}
+							else if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemTFCArmor)
+							{
+								craftingTag.setFloat("durabuff", recipe.getSkillTotal(lastWorker));
+							}
+							Tag.setTag("craftingTag", craftingTag);
 							anvilItemStacks[INPUT1_SLOT].setTagCompound(Tag);
 							increaseSkills(recipe);
 

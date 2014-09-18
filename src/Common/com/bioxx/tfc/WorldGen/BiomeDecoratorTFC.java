@@ -73,7 +73,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		this.mushroomsPerChunk = 0;
 		treesPerChunk = 30;
 		this.cactiPerChunk = 2;
-		this.waterPlantsPerChunk = 3;
+		this.waterPlantsPerChunk = 6;
 		this.reedGen = new WorldGenCustomReed();
 		this.sandGen = new WorldGenCustomSand(7, Blocks.sand);
 		this.lilyPadGen = new WorldGenLilyPad();

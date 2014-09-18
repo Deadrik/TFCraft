@@ -70,5 +70,11 @@ public class BlockPeatGrass extends BlockGrass
 	{
 		if (world.getBlockLightValue(x, y + 1, z) < 4 && world.getBlock(x, y + 1, z).getLightOpacity() > 2)
 			world.setBlock(x, y, z, TFCBlocks.Peat);
+		else if (world.getBlockLightValue(x, y + 1, z) >= 4)
+		{
+			spreadGrass(world, x, y, z, rand);
+		}
+
+		world.markBlockForUpdate(x, y, z);
 	}
 }

@@ -220,7 +220,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	@Override
 	public int getBodyPart()
 	{
-		return type;
+		return 3-armorType;
 	}
 
 	@Override

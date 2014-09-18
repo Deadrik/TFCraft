@@ -14,6 +14,7 @@ import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Entities.EntityStand;
 import com.bioxx.tfc.Render.Models.ModelStand;
 
@@ -37,6 +38,8 @@ public class RenderEntityStand extends RenderBiped
 	ModelRenderer HornL1;
 	ModelRenderer HornR2;
 	ModelRenderer HornL2;
+	
+	RenderLargeItem standBlockRenderer = new RenderLargeItem();
 
 	public RenderEntityStand()
 	{
@@ -99,14 +102,27 @@ public class RenderEntityStand extends RenderBiped
 	}
 
 	@Override
+	public void doRender(EntityLivingBase e, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_){
+		float rotation = e instanceof EntityStand? ((EntityStand)e).getRotation() : 0;
+		GL11.glPushMatrix();
+		super.doRender(e, p_76986_2_, p_76986_4_, p_76986_6_, 0, 0);
+		GL11.glPopMatrix();
+	}
+	
+	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
 		GL11.glScalef(1f, 0.95f, 1f);
+		int l = 0;
+		if(par1EntityLivingBase instanceof EntityStand){
+			l=((EntityStand)par1EntityLivingBase).woodType;
+		}
+		standBlockRenderer.render(par1EntityLivingBase, new ItemStack(TFCBlocks.ArmourStand,1,l));
 	}
 
 	protected int setArmorModelTFC(EntityStand stand, int par2, float par3)
 	{
-		ItemStack itemstack = stand.getEquipmentInSlot(4 - par2);
+		ItemStack itemstack = stand.getArmorInSlot(3 - par2);
 
 		if (itemstack != null)
 		{
