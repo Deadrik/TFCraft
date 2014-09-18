@@ -79,6 +79,18 @@ public class BlockWorldItem extends BlockTerraContainer
 	}
 
 	@Override
+	public boolean isReplaceable(IBlockAccess world, int x, int y, int z)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean canBeReplacedByLeaves(IBlockAccess world, int x, int y, int z)
+	{
+		return false;
+	}
+
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
 		return null;
