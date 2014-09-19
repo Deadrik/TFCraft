@@ -211,7 +211,7 @@ return biome;
 	public boolean canSnowAt(int x, int y, int z, boolean checkLight)
 	{
 		if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= 0 &&
-				Blocks.snow.canPlaceBlockAt(worldObj, x, y, z) &&
+				((Block)Block.blockRegistry.getObject("snow_layer")).canPlaceBlockAt(worldObj, x, y, z) &&
 				worldObj.getBlock(x, y, z).getMaterial().isReplaceable())
 		{
 			return true;
