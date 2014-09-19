@@ -6,8 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -85,7 +83,21 @@ public class BlockHotWater extends BlockFreshWater
 	{
 		if (entity instanceof EntityLivingBase)
 		{
-			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 100));
+			EntityLivingBase e = ((EntityLivingBase) entity);
+			/*PotionEffect regen = e.getActivePotionEffect(Potion.regeneration);
+			if(regen == null)
+			{
+				e.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 100));
+			}
+			else
+			{
+				regen.combine(new PotionEffect(Potion.regeneration.getId(), 100));
+			}*/
+			if(world.rand.nextInt(25) == 0 && e.getHealth() < e.getMaxHealth())
+			{
+				float diff = e.getMaxHealth() - e.getHealth();
+				e.heal(Math.max(diff * 0.001f, 0.0001f));
+			}
 		}
 	}
 }
