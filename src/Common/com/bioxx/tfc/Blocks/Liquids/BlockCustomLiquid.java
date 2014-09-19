@@ -341,9 +341,10 @@ public class BlockCustomLiquid extends BlockFluidClassic
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		if(side == 0)
-			return icons[0];
-		else return icons[1];
+		if((side & 2) > 0)
+			return icons[1];
+		return icons[0];
+
 	}
 
 }
