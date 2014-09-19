@@ -61,7 +61,7 @@ import com.bioxx.tfc.Items.ItemTFCArmor;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.Items.ItemTuyere;
 import com.bioxx.tfc.Items.ItemUnfinishedArmor;
-import com.bioxx.tfc.Items.ItemStringTFC;
+import com.bioxx.tfc.Items.ItemYarn;
 import com.bioxx.tfc.Items.ItemBlocks.ItemWoodDoor;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryJug;
@@ -1499,7 +1499,7 @@ public class TFCItems
 
 		Blueprint = new ItemBlueprint();
 		writabeBookTFC = new ItemWritableBookTFC("Fix Me I'm Broken").setUnlocalizedName("book");
-		WoolYarn = new ItemStringTFC().setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
+		WoolYarn = new ItemYarn().setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
 		Wool = new ItemTerra().setUnlocalizedName("Wool").setCreativeTab(TFCTabs.TFCMaterials);
 		WoolCloth = new ItemTerra().setUnlocalizedName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
 		SilkCloth = new ItemTerra().setUnlocalizedName("SilkCloth").setCreativeTab(TFCTabs.TFCMaterials);
