@@ -228,8 +228,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 				}
 
-				if (canSnowAt(worldObj, x + xCoord, y, z + zCoord))
-					this.worldObj.setBlock(x + xCoord, y, z + zCoord, Blocks.snow, 0, 0x2);
+				if (worldObj.provider.canSnowAt(x + xCoord, y, z + zCoord, false))
+					this.worldObj.setBlock(x + xCoord, y, z + zCoord,  TFCBlocks.Snow, 0, 0x2);
 			}
 		}
 
@@ -330,7 +330,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			{
 				Block var6 = world.getBlock(par1, par2 - 1, par3);
 				Block var7 = world.getBlock(par1, par2, par3);
-				if (var7 == Blocks.air && Blocks.snow.canPlaceBlockAt(world, par1, par2, par3) && var6 != Blocks.air && var6.getMaterial().blocksMovement())
+				if (var7 == Blocks.air && TFCBlocks.Snow.canPlaceBlockAt(world, par1, par2, par3) && var6 != Blocks.air && var6.getMaterial().blocksMovement())
 					return true;
 			}
 			return false;
@@ -751,6 +751,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				DataLayer rock2 = rockLayer2[arrayIndexDL];
 				DataLayer rock3 = rockLayer3[arrayIndexDL];
 				DataLayer stability = stabilityLayer[arrayIndexDL];
+				TFCBiome biome = (TFCBiome)biomesForGeneration[arrayIndexDL];
 
 				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
@@ -769,10 +770,14 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					else if(idsBig[indexBig] == null)
 					{
 						convertStone(height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);
-						if (var13 == -1)
+						if(biome == TFCBiome.beach || biome == TFCBiome.ocean || biome == TFCBiome.DeepOcean)
 						{
-							if (var12 <= 0)
+							if(idsBig[indexBig+1] == TFCBlocks.SaltWater)
 							{
+								idsBig[indexBig] = TFC_Core.getTypeForSand(rock1.data1);
+								metaBig[indexBig] = (byte)TFC_Core.getSoilMeta(rock1.data1);
+								idsBig[indexBig-1] = TFC_Core.getTypeForSand(rock1.data1);
+								metaBig[indexBig-1] = (byte)TFC_Core.getSoilMeta(rock1.data1);
 							}
 						}
 					}
@@ -794,6 +799,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 	public void convertStone(int height, int indexArray, int indexBig, Block[] idsBig, byte[] metaBig, DataLayer rock1, DataLayer rock2, DataLayer rock3)
 	{
+		if(idsBig[indexBig] != null && idsBig[indexBig] != Blocks.stone)
+			return;
 		if(height <= TFCOptions.RockLayer3Height + heightMap[indexArray])
 		{
 			idsBig[indexBig] = rock3.block;

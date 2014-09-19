@@ -340,6 +340,7 @@ public class TFCBlocks
 	public static Block Vessel;
 	public static Block Smoke;
 	public static Block SmokeRack;
+	public static Block Snow;
 
 	public static void RegisterBlocks()
 	{
@@ -553,6 +554,7 @@ public class TFCBlocks
 
 		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.snow_layer), "snow_layer",
 				(new BlockCustomSnow()).setHardness(0.1F).setStepSound(Block.soundTypeSnow).setBlockName("snow").setLightOpacity(1).setBlockTextureName("snow"));
+		Snow = (Block)Block.blockRegistry.getObject("snow_layer");
 
 		StoneIgInCobble = new BlockIgInCobble(Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgInRockCobble");
 		StoneIgIn = new BlockIgIn(Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgInRock");
