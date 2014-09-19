@@ -91,7 +91,7 @@ public class WorldGenFissure implements IWorldGenerator
 		creviceDepth = 1;
 		if(rand.nextInt(100) < 50)
 			creviceDepth += 2 + rand.nextInt(8);
-		poolDepth = 1+rand.nextInt(creviceDepth-1);
+		poolDepth = 1+rand.nextInt(Math.max(creviceDepth-1, 1));
 
 		for(int d = 1; d <= poolDepth; d++)
 		{
