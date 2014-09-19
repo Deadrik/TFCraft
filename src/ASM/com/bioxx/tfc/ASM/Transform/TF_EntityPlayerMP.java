@@ -28,7 +28,7 @@ public class TF_EntityPlayerMP extends ClassTransformer
 		nodes.add(new InstrSet(new LineNumberNode(0, new LabelNode()), 64, InstrOpType.Remove));
 
 		mcpMethodNodes.put("onUpdateEntity | ()V", new Patch(nodes, PatchOpType.Modify));
-		obfMethodNodes.put("h | ()V", new Patch(nodes, PatchOpType.Modify));
+		obfMethodNodes.put("i | ()V", new Patch(nodes, PatchOpType.Modify));
 	}
 
 }
