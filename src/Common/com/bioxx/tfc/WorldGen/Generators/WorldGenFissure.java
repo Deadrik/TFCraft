@@ -34,7 +34,7 @@ public class WorldGenFissure implements IWorldGenerator
 	public boolean checkStability = true;
 	boolean underground = false;
 	int seed = 0;
-	int rarity = 10;
+	int rarity = 30;
 
 	//Basic constructor
 	public WorldGenFissure(Block b)
@@ -90,8 +90,8 @@ public class WorldGenFissure implements IWorldGenerator
 	{
 		creviceDepth = 1;
 		if(rand.nextInt(100) < 50)
-			creviceDepth += 4 + rand.nextInt(15);
-		poolDepth = 1+rand.nextInt(2);
+			creviceDepth += 2 + rand.nextInt(8);
+		poolDepth = 1+rand.nextInt(creviceDepth-1);
 
 		for(int d = 1; d <= poolDepth; d++)
 		{
@@ -149,13 +149,13 @@ public class WorldGenFissure implements IWorldGenerator
 	{
 		if(world.getBlock(x, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x, y, z)))
 			world.setBlock(x, y, z, Blocks.air, 0, 2);
-		if(world.getBlock(x - 1, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x - 1, y, z)) && !TFC_Core.isGrass(world.getBlock(x - 1, y, z)))
+		if(world.getBlock(x - 1, y, z).getMaterial() != Material.air && TFC_Core.isRawStone(world.getBlock(x - 1, y, z)))
 			world.setBlock(x - 1, y, z, block, meta, 2);
-		if(world.getBlock(x + 1, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x + 1, y, z)) && !TFC_Core.isGrass(world.getBlock(x + 1, y, z)))
+		if(world.getBlock(x + 1, y, z).getMaterial() != Material.air && TFC_Core.isRawStone(world.getBlock(x + 1, y, z)))
 			world.setBlock(x + 1, y, z, block, meta, 2);
-		if(world.getBlock(x, y, z - 1).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x, y, z - 1)) && !TFC_Core.isGrass(world.getBlock(x, y, z - 1)))
+		if(world.getBlock(x, y, z - 1).getMaterial() != Material.air && TFC_Core.isRawStone(world.getBlock(x, y, z - 1)))
 			world.setBlock(x, y, z - 1, block, meta, 2);
-		if(world.getBlock(x, y, z + 1).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x, y, z + 1)) && !TFC_Core.isGrass(world.getBlock(x, y, z + 1)))
+		if(world.getBlock(x, y, z + 1).getMaterial() != Material.air && TFC_Core.isRawStone(world.getBlock(x, y, z + 1)))
 			world.setBlock(x, y, z + 1, block, meta, 2);
 	}
 

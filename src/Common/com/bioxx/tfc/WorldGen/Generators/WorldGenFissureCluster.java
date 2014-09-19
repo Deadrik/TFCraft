@@ -13,7 +13,7 @@ import cpw.mods.fml.common.IWorldGenerator;
 public class WorldGenFissureCluster implements IWorldGenerator
 {
 	Random rand;
-	int waterRarity = 150;
+	int waterRarity = 225;
 
 	WorldGenFissure fissureGenWater = new WorldGenFissure(TFCBlocks.FreshWater);
 	WorldGenFissure fissureGenLava = new WorldGenFissure(Blocks.lava);
@@ -44,7 +44,7 @@ public class WorldGenFissureCluster implements IWorldGenerator
 					fissureGenWater.generate(world, rand, x, y, z);
 			}
 		}
-		else if (rand.nextInt(300) == 0)
+		else if (rand.nextInt(400) == 0)
 		{
 			int num = 3 + rand.nextInt(10);
 			for (int i = 0; i < num; i++)
