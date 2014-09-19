@@ -187,7 +187,7 @@ public class RenderOverlayHandler
 			if(mc.thePlayer.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getModifier(TFCAttributes.overburdenedUUID) != null)
 				mc.fontRenderer.drawString(StatCollector.translateToLocal("gui.overburdened"), mid-(mc.fontRenderer.getStringWidth(StatCollector.translateToLocal("gui.overburdened"))/2), healthRowHeight-20, Color.red.getRGB());
 
-
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			TFC_Core.bindTexture(new ResourceLocation("minecraft:textures/gui/icons.png"));
 			//Draw experience bar
 			int cap = 0;
@@ -245,13 +245,15 @@ public class RenderOverlayHandler
 					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord)+BodyTempStats.applyTemperatureFromHeatSources(player),
 					evt.floatdata1}));
 
-			event.left.add("Health: " + player.getHealth());
-			event.left.add("Stability: " + TFC_Climate.getStability(mc.theWorld, xCoord, zCoord) + 
-					", Drainage: " +TFC_Climate.getManager(mc.theWorld).getDrainageLayerAt(xCoord, zCoord).name +
-					", pH: " +TFC_Climate.getManager(mc.theWorld).getPHLayerAt(xCoord, zCoord).name);
-			event.left.add("Rock Layers: " + TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 0).name+", "+
-					TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 1).name+", "+
-					TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 2).name);
+			if(TFCOptions.enableDebugMode)
+			{
+				event.left.add("Stability: " + TFC_Climate.getStability(mc.theWorld, xCoord, zCoord) + 
+						", Drainage: " +TFC_Climate.getManager(mc.theWorld).getDrainageLayerAt(xCoord, zCoord).name +
+						", pH: " +TFC_Climate.getManager(mc.theWorld).getPHLayerAt(xCoord, zCoord).name);
+				event.left.add("Rock Layers: " + TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 0).name+", "+
+						TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 1).name+", "+
+						TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 2).name);
+			}
 		}
 	}
 
