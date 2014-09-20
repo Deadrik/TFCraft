@@ -350,122 +350,111 @@ public class TFCBiome extends BiomeGenBase
 		{
 		case 0:
 		{
-			if(tall && R.nextInt(20) == 0)
-				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,0) :worldGenOakTallTrees;
+			if(tall && R.nextInt(15) == 0)
 				return worldGenOakTallTrees;
 			else
 				return worldGenOakShortTrees;
 		}
 		case 1:
 		{
-			if(tall && R.nextInt(20) == 0)
-				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,1) :worldGenAspenTallTrees;
+			if(tall && R.nextInt(15) == 0)
 				return worldGenAspenTallTrees;
 			else
 				return worldGenAspenShortTrees;
 		}
 		case 2:
 		{
-			if(tall && R.nextInt(20) == 0)
-				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,2) :worldGenBirchTallTrees;
+			if(tall && R.nextInt(15) == 0)
 				return worldGenBirchTallTrees;
 			else
 				return worldGenBirchShortTrees;
 		}
 		case 3:
 		{
-			if(tall && R.nextInt(20) == 0)
-				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,3) :worldGenChestnutTallTrees;
+			if(tall && R.nextInt(15) == 0)
 				return worldGenChestnutTallTrees;
 			else
 				return worldGenChestnutShortTrees;
 		}
 		case 4:
 		{
-			if(tall && R.nextInt(20) == 0)
+			if(tall && R.nextInt(15) == 0)
 				return worldGenDouglasFirTallTrees;
 			else
 				return worldGenDouglasFirShortTrees;
 		}
 		case 5:
 		{
-			if(tall && R.nextInt(20) == 0)
-				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,5) :worldGenHickoryTallTrees;
+			if(tall && R.nextInt(15) == 0)
 				return worldGenHickoryTallTrees;
 			else
 				return worldGenHickoryShortTrees;
 		}
 		case 6:
 		{
-			if(tall && R.nextInt(20) == 0)
-				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,6) :worldGenMapleTallTrees;
+			if(tall && R.nextInt(15) == 0)
 				return worldGenMapleTallTrees;
 			else
 				return worldGenMapleShortTrees;
 		}
 		case 7:
 		{
-			if(tall && R.nextInt(20) == 0)
-				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,7) : worldGenAshTallTrees;
+			if(tall && R.nextInt(15) == 0)
 				return worldGenAshTallTrees;
 			else
 				return worldGenAshShortTrees;
 		}
 		case 8:
 		{
-			if(tall && R.nextInt(20) == 0)
+			if(tall && R.nextInt(15) == 0)
 				return worldGenPineTallTrees;
 			else
 				return worldGenPineShortTrees;
 		}
 		case 9:
 		{
-			if(tall && R.nextInt(20) == 0)
+			if(tall && R.nextInt(15) == 0)
 				return worldGenRedwoodTallTrees;
 			else
 				return worldGenRedwoodShortTrees;
 		}
 		case 10:
 		{
-			if(tall && R.nextInt(20) == 0)
-				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,10) :worldGenSpruceTallTrees;
+			if(tall && R.nextInt(15) == 0)
 				return worldGenSpruceTallTrees;
 			else
 				return worldGenSpruceShortTrees;
 		}
 		case 11:
 		{
-			if(tall && R.nextInt(20) == 0)
-				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,11) :worldGenSycamoreTallTrees;
+			if(tall && R.nextInt(15) == 0)
 				return worldGenSycamoreTallTrees;
 			else
 				return worldGenSycamoreShortTrees;
 		}
 		case 12:
 		{
-			if(tall && R.nextInt(20) == 0)
+			if(tall && R.nextInt(15) == 0)
 				return worldGenWhiteCedarTallTrees;
 			else
 				return worldGenWhiteCedarShortTrees;
 		}
 		case 13:
 		{
-			if(tall && R.nextInt(20) == 0)
-				//return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,13) :worldGenWhiteElmTallTrees;
+			if(tall && R.nextInt(15) == 0)
 				return worldGenWhiteElmTallTrees;
 			else
 				return worldGenWhiteElmShortTrees;
 		}
 		case 14:
 		{
-			if(tall && R.nextInt(20) == 0)
+			if(tall && R.nextInt(15) == 0)
 				return worldGenWillowTallTrees;
 			else
 				return worldGenWillowShortTrees;
 		}
 		case 15:
 		{
-			//return ( (R.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : (R.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + R.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15))));
 			if(tall && R.nextInt(2) == 0)
 				return worldGenKapokTallTrees;
 			else
@@ -473,7 +462,7 @@ public class TFCBiome extends BiomeGenBase
 		}
 		case 16:
 		{
-			if(tall && R.nextInt(20) == 0)
+			if(tall && R.nextInt(15) == 0)
 				return worldGenAcaciaKoaTallTrees;
 			else
 				return worldGenAcaciaKoaShortTrees;
