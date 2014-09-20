@@ -31,6 +31,7 @@ import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.Tools.IKnife;
 
 public class GuiInventoryTFC extends InventoryEffectRenderer
 {
@@ -246,19 +247,48 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 		if(this.activeSlot != null && this.activeSlot.slotNumber == 0 && this.activeSlot.getHasStack() &&
 				this.activeSlot.getStack().getItem() instanceof IFood)
 			return false;
-		else if(keycode == 31 && activeSlot.canTakeStack(player) && activeSlot.getHasStack() && activeSlot.getStack().getItem() instanceof IFood)
+		//Here is the code for quick stacking food
+		if(keycode == 31 && activeSlot.canTakeStack(player) && activeSlot.getHasStack() && activeSlot.getStack().getItem() instanceof IFood)
 		{
 			Item iType = activeSlot.getStack().getItem();
 			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
 			{
 				ItemStack is = this.inventorySlots.getSlot(i).getStack();
 				if(is != null && is.getItem() == iType && ((IFood)is.getItem()).getFoodWeight(is) < Global.FOOD_MAX_WEIGHT)
-					this.handleMouseClick(this.inventorySlots.getSlot(i), i, getEmptyCraftSlot(), 1);
+					this.handleMouseClick(this.inventorySlots.getSlot(i), i, getEmptyCraftSlot(), 7);
 			}
 
 			if(this.inventorySlots.getSlot(0).getStack() != null)
 			{
 				this.handleMouseClick(this.inventorySlots.getSlot(0), 0, 0, 1);
+			}
+			return true;
+		}
+		else if(keycode == 32)
+		{
+			int knifeSlot = -1;
+			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
+			{
+				ItemStack is = this.inventorySlots.getSlot(i).getStack();
+				if(is != null && is.getItem() instanceof IKnife)
+				{
+					knifeSlot = getEmptyCraftSlot();
+					this.handleMouseClick(this.inventorySlots.getSlot(i), i, knifeSlot, 7);
+					break;
+				}
+			}
+			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
+			{
+				ItemStack is = this.inventorySlots.getSlot(i).getStack();
+				if(is != null && is.getItem() instanceof IFood && ((IFood)is.getItem()).getFoodDecay(is) > 0)
+				{
+					this.handleMouseClick(this.inventorySlots.getSlot(i), i, getEmptyCraftSlot(), 7);
+					this.handleMouseClick(this.inventorySlots.getSlot(0), 0, 0, 1);
+				}
+			}
+			if(knifeSlot != -1)
+			{
+				this.handleMouseClick(this.inventorySlots.getSlot(knifeSlot), knifeSlot, 0, 1);
 			}
 			return true;
 		}
