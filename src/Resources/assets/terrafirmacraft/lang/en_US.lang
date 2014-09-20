@@ -2414,3 +2414,5 @@ food.cooked.1=Light
 food.cooked.2=Medium
 food.cooked.3=Dark
 food.cooked.4=Very Dark
+gui.FoodPrep.Sandwich=Sandwich
+gui.FoodPrep.Salad=Salad

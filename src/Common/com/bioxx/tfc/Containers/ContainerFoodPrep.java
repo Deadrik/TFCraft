@@ -113,8 +113,8 @@ public class ContainerFoodPrep extends ContainerTFC
 			}
 			else if (clickedIndex >= 11 && clickedIndex < inventorySlots.size())
 			{
-				if (!this.mergeItemStack(clickedStack, 0, 11, false))
-					return null;
+				//if (!this.mergeItemStack(clickedStack, 0, 11, false))
+				return null;
 			}
 			else if (!this.mergeItemStack(clickedStack, 11, inventorySlots.size(), false))
 				return null;
