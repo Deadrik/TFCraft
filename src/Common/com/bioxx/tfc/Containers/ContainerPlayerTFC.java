@@ -6,6 +6,7 @@ import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
@@ -172,6 +173,37 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		}
 
 		return origStack;
+	}
+
+	@Override
+	public ItemStack slotClick(int sourceSlotID, int destSlotID, int clickType, EntityPlayer p)
+	{
+		if (clickType == 1 && sourceSlotID >= 9 && sourceSlotID < 45)
+		{
+			if (sourceSlotID < 0)
+			{
+				return null;
+			}
+
+			Slot slot2 = (Slot)this.inventorySlots.get(sourceSlotID);
+
+			if (slot2 != null && slot2.canTakeStack(p))
+			{
+				ItemStack itemstack3 = this.transferStackInSlot(p, sourceSlotID);
+
+				if (itemstack3 != null)
+				{
+					Item item = itemstack3.getItem();
+					ItemStack itemstack = itemstack3.copy();
+
+					if (slot2.getStack() != null && slot2.getStack().getItem() == item)
+					{
+						this.retrySlotClick(sourceSlotID, destSlotID, true, p);
+					}
+				}
+			}
+		}
+		return super.slotClick(sourceSlotID, destSlotID, clickType, p);
 	}
 
 	protected boolean isCraftingGridFull()
