@@ -267,14 +267,17 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 		else if(keycode == 32)
 		{
 			int knifeSlot = -1;
-			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
+			if(!getCraftingHasKnife())
 			{
-				ItemStack is = this.inventorySlots.getSlot(i).getStack();
-				if(is != null && is.getItem() instanceof IKnife)
+				for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
 				{
-					knifeSlot = getEmptyCraftSlot();
-					this.handleMouseClick(this.inventorySlots.getSlot(i), i, knifeSlot, 7);
-					break;
+					ItemStack is = this.inventorySlots.getSlot(i).getStack();
+					if(is != null && is.getItem() instanceof IKnife)
+					{
+						knifeSlot = getEmptyCraftSlot();
+						this.handleMouseClick(this.inventorySlots.getSlot(i), i, knifeSlot, 7);
+						break;
+					}
 				}
 			}
 			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
@@ -320,5 +323,32 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 		}
 
 		return -1;
+	}
+
+	private boolean getCraftingHasKnife()
+	{
+		if(this.inventorySlots.getSlot(4).getStack() != null && this.inventorySlots.getSlot(4).getStack().getItem() instanceof IKnife)
+			return true;
+		if(this.inventorySlots.getSlot(1).getStack() != null && this.inventorySlots.getSlot(1).getStack().getItem() instanceof IKnife)
+			return true;
+		if(this.inventorySlots.getSlot(2).getStack() != null && this.inventorySlots.getSlot(2).getStack().getItem() instanceof IKnife)
+			return true;
+		if(this.inventorySlots.getSlot(3).getStack() != null && this.inventorySlots.getSlot(3).getStack().getItem() instanceof IKnife)
+			return true;
+		if(player.getEntityData().hasKey("craftingTable"))
+		{
+			if(this.inventorySlots.getSlot(45).getStack() != null && this.inventorySlots.getSlot(45).getStack().getItem() instanceof IKnife)
+				return true;
+			if(this.inventorySlots.getSlot(46).getStack() != null && this.inventorySlots.getSlot(46).getStack().getItem() instanceof IKnife)
+				return true;
+			if(this.inventorySlots.getSlot(47).getStack() != null && this.inventorySlots.getSlot(47).getStack().getItem() instanceof IKnife)
+				return true;
+			if(this.inventorySlots.getSlot(48).getStack() != null && this.inventorySlots.getSlot(48).getStack().getItem() instanceof IKnife)
+				return true;
+			if(this.inventorySlots.getSlot(49).getStack() != null && this.inventorySlots.getSlot(49).getStack().getItem() instanceof IKnife)
+				return true;
+		}
+
+		return false;
 	}
 }

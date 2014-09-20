@@ -81,7 +81,7 @@ public class BlockCustomLiquid extends BlockFluidClassic
 		{
 			if((world.provider) instanceof TFCProvider)
 			{
-				((TFCProvider)(world.provider)).tryBlockFreeze(x, y, z, false);
+				((TFCProvider)(world.provider)).canBlockFreeze(x, y, z, false);
 			}
 
 			if(this.getMaterial() == Material.lava)

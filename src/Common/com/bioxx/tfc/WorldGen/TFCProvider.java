@@ -128,37 +128,60 @@ return biome;
 		return new ChunkCoordinates(xCoord, worldObj.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
 	}
 
+	private boolean isNextToShoreOrIce(int x, int y, int z)
+	{
+		if(worldObj.getBlock(x+1, y, z) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x+1, y, z)))
+			return true;
+		if(worldObj.getBlock(x-1, y, z) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x-1, y, z)))
+			return true;
+		if(worldObj.getBlock(x, y, z+1) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x, y, z+1)))
+			return true;
+		if(worldObj.getBlock(x, y, z-1) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x, y, z-1)))
+			return true;
+		return false;
+	}
+
 	@Override
 	public boolean canBlockFreeze(int x, int y, int z, boolean byWater)
 	{
 		Block id = worldObj.getBlock(x, y, z);
 		int meta = worldObj.getBlockMetadata(x, y, z);
-		if (TFC_Climate.getHeightAdjustedTemp(worldObj, x, y, z) <= 0)
+
+
+		if (TFC_Core.isWater(id) && worldObj.isAirBlock(x, y+1, z))
 		{
-			Material mat = worldObj.getBlock(x, y, z).getMaterial();
-			boolean salty = TFC_Core.isSaltWaterIncludeIce(id, meta, mat);
-
-			if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= -2)
+			if(!isNextToShoreOrIce(x,y,z))
+				return false;
+			float temp = TFC_Climate.getHeightAdjustedTemp(worldObj, x, y, z);
+			if(temp <= 0)
 			{
-				salty = false;
-			}
+				Material mat = worldObj.getBlock(x, y, z).getMaterial();
+				boolean salty = TFC_Core.isSaltWaterIncludeIce(id, meta, mat);
 
-			if((mat == Material.water || mat == Material.ice) && !salty)
-			{
-				if(id == TFCBlocks.FreshWater && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
+				if(temp <= -2)
 				{
-					worldObj.setBlock(x, y, z, TFCBlocks.Ice, 1, 2);
+					salty = false;
 				}
-				else if(id == TFCBlocks.SaltWater && meta == 0/* || id == Block.waterMoving.blockID*/)
+
+				if((mat == Material.water || mat == Material.ice) && !salty)
 				{
-					worldObj.setBlock(x, y, z, TFCBlocks.Ice, 0, 2);
+					if(id == TFCBlocks.FreshWater && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
+					{
+						worldObj.setBlock(x, y, z, TFCBlocks.Ice, 1, 2);
+					}
+					else if(id == TFCBlocks.SaltWater && meta == 0/* || id == Block.waterMoving.blockID*/)
+					{
+						worldObj.setBlock(x, y, z, TFCBlocks.Ice, 0, 2);
+					}
 				}
+				return false;//(mat == Material.water) && !salty;
 			}
-			return false;//(mat == Material.water) && !salty;
 		}
-		else
+		else if(id == TFCBlocks.Ice)
 		{
-			if(id == TFCBlocks.Ice)
+			float temp = TFC_Climate.getHeightAdjustedTemp(worldObj, x, y, z);
+			int chance = (int)Math.floor(Math.max(1, 6f-temp));
+			if(id == TFCBlocks.Ice && worldObj.rand.nextInt(chance) == 0)
 			{
 				if (worldObj.getBlock(x, y + 1, z) == Blocks.snow)
 				{
@@ -171,32 +194,21 @@ return biome;
 				}
 				else
 				{
+					int flag = 2;
+					/*BiomeGenBase b = worldObj.getBiomeGenForCoords(x, z);
+					if((b == TFCBiome.ocean || b == TFCBiome.lake || b == TFCBiome.river || b == TFCBiome.river) && y == 143)
+						flag = 2;*/
+
 					if((meta & 1) == 0)
 					{
-						worldObj.setBlock(x, y, z, TFCBlocks.SaltWater, 0, 3);
+						worldObj.setBlock(x, y, z, TFCBlocks.SaltWater, 0, flag);
 					}
 					else if((meta & 1) == 1)
 					{
-						worldObj.setBlock(x, y, z, TFCBlocks.FreshWater, 0, 3);
+						worldObj.setBlock(x, y, z, TFCBlocks.FreshWater, 0, flag);
 					}
 				}
 			}
-		}
-		return false;
-	}
-
-	//We use this in place of the vanilla method, for the vanilla, it allows us to stop it from doing things we don't like.
-	public boolean tryBlockFreeze(int x, int y, int z, boolean byWater)
-	{
-		if (TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= 0)
-		{
-			Material mat = worldObj.getBlock(x, y, z).getMaterial();
-			Block id = worldObj.getBlock(x, y, z);
-			int meta = worldObj.getBlockMetadata(x, y, z);
-			boolean salty = TFC_Core.isSaltWaterIncludeIce(id, meta, mat);
-			if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= -2)
-				salty = false;
-			return (mat == Material.water || mat == Material.ice) && !salty;
 		}
 		return false;
 	}
@@ -211,7 +223,7 @@ return biome;
 	public boolean canSnowAt(int x, int y, int z, boolean checkLight)
 	{
 		if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= 0 &&
-				((Block)Block.blockRegistry.getObject("snow_layer")).canPlaceBlockAt(worldObj, x, y, z) &&
+				TFCBlocks.Snow.canPlaceBlockAt(worldObj, x, y, z) &&
 				worldObj.getBlock(x, y, z).getMaterial().isReplaceable())
 		{
 			return true;

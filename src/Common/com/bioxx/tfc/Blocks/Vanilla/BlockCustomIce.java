@@ -183,33 +183,12 @@ public class BlockCustomIce extends BlockIce
 		{
 			if(world.getBlockMetadata(i, j, k) == 1)
 			{
-				if(j== 144 && scanForOcean(world, i, j, k))
+				/*if(j== 143 && scanForOcean(world, i, j, k))
 				{
-					world.setBlockMetadataWithNotify(i, j, k, 0, 3);
-				}
+					world.setBlockMetadataWithNotify(i, j, k, 0, 2);
+				}*/
 			}
-			if (!((TFCProvider)(world.provider)).canBlockFreeze(i, j, k, false))
-			{
-				/*if (world.getBlock(i, j+1, k) == Blocks.snow)
-				{
-					int meta = world.getBlockMetadata(i, j+1, k);
-					if (meta > 0)
-						world.setBlockMetadataWithNotify(i, j+1, k, meta-1, 2);
-					else
-						world.setBlockToAir(i, j+1, k);
-				}
-				else
-				{
-					this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
-					world.setBlock(i, j, k, getBlockMelt(world,i,j,k,false), 0, 2);
-				}
-				this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
-				if(j > 143)
-					world.setBlock(i, j, k, getBlockMelt(world,i,j,k,true), 0, 2);
-				else
-					world.setBlock(i, j, k, getBlockMelt(world,i,j,k,false), 0, 2);
-				 */
-			}
+			((TFCProvider)(world.provider)).canBlockFreeze(i, j, k, false);
 		}
 	}
 
