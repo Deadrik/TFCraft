@@ -15,8 +15,8 @@ public class ItemSandwich extends ItemMeal
 	{
 		super();
 		this.hasSubtypes = true;
-		this.MetaNames = new String[]{"Sandwich0","Sandwich1","Sandwich2","Sandwich3"};
-		this.MetaIcons = new IIcon[4];
+		this.MetaNames = new String[]{"Sandwich Wheat","Sandwich Oat","Sandwich Barley","Sandwich Rye","Sandwich Corn","Sandwich Rice"};
+		this.MetaIcons = new IIcon[6];
 		this.setFolder("food/");
 	}
 

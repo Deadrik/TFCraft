@@ -92,8 +92,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			if(getStackInSlot(5) != null) FG[5] = ((IFood)(getStackInSlot(5).getItem())).getFoodID();
 
 			nbt.setIntArray("FG", FG);
-
-			is.setItemDamage(new Random(getIconSeed()).nextInt(((ItemTerra)TFCItems.Sandwich).MetaIcons.length));
+			setSandwichIcon(is);
 
 			float w = 0;
 			for(int i = 0; i < 6; i++)
@@ -116,6 +115,22 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			consumeFoodWeight(sandwichWeights, getStackInSlot(0), getStackInSlot(1), getStackInSlot(2), 
 					getStackInSlot(3), getStackInSlot(4), getStackInSlot(5));
 		}
+	}
+
+	private void setSandwichIcon(ItemStack is)
+	{
+		if(getStackInSlot(0).getItem() == TFCItems.WheatBread)
+			is.setItemDamage(0);
+		else if(getStackInSlot(0).getItem() == TFCItems.OatBread)
+			is.setItemDamage(1);
+		else if(getStackInSlot(0).getItem() == TFCItems.BarleyBread)
+			is.setItemDamage(2);
+		else if(getStackInSlot(0).getItem() == TFCItems.RyeBread)
+			is.setItemDamage(3);
+		else if(getStackInSlot(0).getItem() == TFCItems.CornBread)
+			is.setItemDamage(4);
+		else if(getStackInSlot(0).getItem() == TFCItems.RiceBread)
+			is.setItemDamage(5);
 	}
 
 	private void createSalad(EntityPlayer player) 

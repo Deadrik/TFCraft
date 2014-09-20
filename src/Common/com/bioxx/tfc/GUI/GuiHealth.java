@@ -12,6 +12,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
+import com.bioxx.tfc.api.TFCOptions;
 
 public class GuiHealth extends GuiContainerTFC
 {
@@ -32,6 +33,15 @@ public class GuiHealth extends GuiContainerTFC
 		fontRendererObj.drawString(StatCollector.translateToLocal("gui.food.grain"), 5, 33, 0, false);
 		fontRendererObj.drawString(StatCollector.translateToLocal("gui.food.protein"), 5, 43, 0, false);
 		fontRendererObj.drawString(StatCollector.translateToLocal("gui.food.dairy"), 5, 53, 0, false);
+		if(TFCOptions.enableDebugMode)
+		{
+			FoodStatsTFC food = TFC_Core.getPlayerFoodStats(player);
+			fontRendererObj.drawString(""+food.nutrFruit, 85, 13, 0, false);
+			fontRendererObj.drawString(""+food.nutrVeg, 85, 23, 0, false);
+			fontRendererObj.drawString(""+food.nutrGrain, 85, 33, 0, false);
+			fontRendererObj.drawString(""+food.nutrProtein, 85, 43, 0, false);
+			fontRendererObj.drawString(""+food.nutrDairy, 85, 53, 0, false);
+		}
 	}
 
 	@Override

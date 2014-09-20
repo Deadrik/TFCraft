@@ -2,7 +2,26 @@ package com.bioxx.tfc.Entities.Mobs;
 
 import java.util.Random;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.living.ZombieEvent.SummonAidEvent;
+
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.ItemFoodTFC;
@@ -10,18 +29,7 @@ import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityWolf;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.DamageSource;
-import net.minecraft.world.EnumDifficulty;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -124,9 +132,9 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+	public boolean attackEntityFrom(DamageSource ds, float par2)
 	{
-		if (ForgeHooks.onLivingAttack(this, par1DamageSource, par2)) return false;
+		if (ForgeHooks.onLivingAttack(this, ds, par2)) return false;
 		if (this.isEntityInvulnerable())
 		{
 			return false;
@@ -143,13 +151,13 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 			{
 				return false;
 			}
-			else if (par1DamageSource.isFireDamage() && this.isPotionActive(Potion.fireResistance))
+			else if (ds.isFireDamage() && this.isPotionActive(Potion.fireResistance))
 			{
 				return false;
 			}
 			else
 			{
-				if ((par1DamageSource == DamageSource.anvil || par1DamageSource == DamageSource.fallingBlock) && this.getEquipmentInSlot(4) != null)
+				if ((ds == DamageSource.anvil || ds == DamageSource.fallingBlock) && this.getEquipmentInSlot(4) != null)
 				{
 					this.getEquipmentInSlot(4).damageItem((int)(par2 * 4.0F + this.rand.nextFloat() * par2 * 2.0F), this);
 					par2 *= 0.75F;
@@ -162,7 +170,7 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 				{
 					if (par2 <= this.lastDamage)
 						return false;
-					this.damageEntity(par1DamageSource, par2 - this.lastDamage);
+					this.damageEntity(ds, par2 - this.lastDamage);
 					this.lastDamage = par2;
 					flag = false;
 				}
@@ -171,12 +179,12 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 					this.lastDamage = par2;
 					this.prevHealth = this.getHealth();
 					this.hurtResistantTime = this.maxHurtResistantTime;
-					this.damageEntity(par1DamageSource, par2);
+					this.damageEntity(ds, par2);
 					this.hurtTime = this.maxHurtTime = 10;
 				}
 
 				this.attackedAtYaw = 0.0F;
-				Entity entity = par1DamageSource.getEntity();
+				Entity entity = ds.getEntity();
 
 				if (entity != null)
 				{
@@ -204,7 +212,7 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 				{
 					this.worldObj.setEntityState(this, (byte)2);
 
-					if (par1DamageSource != DamageSource.drown)
+					if (ds != DamageSource.drown)
 						this.setBeenAttacked();
 
 					if (entity != null)
@@ -230,13 +238,76 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 				{
 					if (flag)
 						this.playSound(this.getDeathSound(), this.getSoundVolume(), this.getSoundPitch());
-					this.onDeath(par1DamageSource);
+					this.onDeath(ds);
 				}
 				else if (flag)
 				{
 					this.playSound(this.getHurtSound(), this.getSoundVolume(), this.getSoundPitch());
 				}
+
+				summonAid(ds);
+
 				return true;
+			}
+		}
+	}
+
+	private void summonAid(DamageSource ds) 
+	{
+		EntityLivingBase entitylivingbase = this.getAttackTarget();
+
+		if (entitylivingbase == null && this.getEntityToAttack() instanceof EntityLivingBase)
+		{
+			entitylivingbase = (EntityLivingBase)this.getEntityToAttack();
+		}
+
+		if (entitylivingbase == null && ds.getEntity() instanceof EntityLivingBase)
+		{
+			entitylivingbase = (EntityLivingBase)ds.getEntity();
+		}
+
+		int i = MathHelper.floor_double(this.posX);
+		int j = MathHelper.floor_double(this.posY);
+		int k = MathHelper.floor_double(this.posZ);
+
+		SummonAidEvent summonAid = ForgeEventFactory.fireZombieSummonAid(this, worldObj, i, j, k, entitylivingbase, this.getEntityAttribute(field_110186_bp).getAttributeValue());
+
+		if (summonAid.getResult() == Result.DENY)
+		{
+			return;
+		}
+		else if (summonAid.getResult() == Result.ALLOW || entitylivingbase != null && this.worldObj.difficultySetting == EnumDifficulty.HARD && (double)this.rand.nextFloat() < this.getEntityAttribute(field_110186_bp).getAttributeValue())
+		{
+			EntityZombie entityzombie;
+			if (summonAid.customSummonedAid != null && summonAid.getResult() == Result.ALLOW)
+			{
+				entityzombie = summonAid.customSummonedAid;
+			}
+			else
+			{
+				entityzombie = new EntityZombieTFC(this.worldObj);
+			}
+
+			for (int l = 0; l < 50; ++l)
+			{
+				int i1 = i + MathHelper.getRandomIntegerInRange(this.rand, 7, 40) * MathHelper.getRandomIntegerInRange(this.rand, -1, 1);
+				int j1 = j + MathHelper.getRandomIntegerInRange(this.rand, 7, 40) * MathHelper.getRandomIntegerInRange(this.rand, -1, 1);
+				int k1 = k + MathHelper.getRandomIntegerInRange(this.rand, 7, 40) * MathHelper.getRandomIntegerInRange(this.rand, -1, 1);
+
+				if (World.doesBlockHaveSolidTopSurface(this.worldObj, i1, j1 - 1, k1) && this.worldObj.getBlockLightValue(i1, j1, k1) < 10 && ChunkDataManager.getData(i1 >> 4, k1 >> 4).getSpawnProtectionWithUpdate() <= 0)
+				{
+					entityzombie.setPosition((double)i1, (double)j1, (double)k1);
+
+					if (this.worldObj.checkNoEntityCollision(entityzombie.boundingBox) && this.worldObj.getCollidingBoundingBoxes(entityzombie, entityzombie.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(entityzombie.boundingBox))
+					{
+						this.worldObj.spawnEntityInWorld(entityzombie);
+						if (entitylivingbase != null) entityzombie.setAttackTarget(entitylivingbase);
+						entityzombie.onSpawnWithEgg((IEntityLivingData)null);
+						this.getEntityAttribute(field_110186_bp).applyModifier(new AttributeModifier("Zombie reinforcement caller charge", -0.05000000074505806D, 0));
+						entityzombie.getEntityAttribute(field_110186_bp).applyModifier(new AttributeModifier("Zombie reinforcement callee charge", -0.05000000074505806D, 0));
+						break;
+					}
+				}
 			}
 		}
 	}

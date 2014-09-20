@@ -19,6 +19,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.api.TFCCrafting;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
@@ -57,6 +58,7 @@ public class Recipes
 	public static void registerRecipes()
 	{
 		TEBarrel.registerRecipes();
+		TELoom.registerRecipes();
 		Item[] Ingots = {TFCItems.BismuthIngot, TFCItems.BismuthBronzeIngot,TFCItems.BlackBronzeIngot,
 				TFCItems.BlackSteelIngot,TFCItems.BlueSteelIngot,TFCItems.BrassIngot,TFCItems.BronzeIngot,
 				TFCItems.BronzeIngot,TFCItems.CopperIngot,TFCItems.GoldIngot,TFCItems.WroughtIronIngot,TFCItems.LeadIngot,
@@ -210,9 +212,6 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.WoolYarn, 8), new Object[]
 				{ "materialWool", new ItemStack(TFCItems.Spindle, 1, 32767) }));
-
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WoolCloth, 1), new Object[]
-				{ "PP", "PP", Character.valueOf('P'), "materialString" }));
 
 		//Markings & Blueprint
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Ink, 16, 0), new Object[] { "2", Character.valueOf('2'), "dyeBlack" }));
@@ -780,6 +779,7 @@ public class Recipes
 		OreDictionary.registerOre("materialString", new ItemStack(TFCItems.WoolYarn));
 
 		OreDictionary.registerOre("materialCloth", new ItemStack(TFCItems.WoolCloth));
+		OreDictionary.registerOre("materialCloth", new ItemStack(TFCItems.SilkCloth));
 		OreDictionary.registerOre("materialWool", new ItemStack(TFCItems.Wool));
 
 		//Tools

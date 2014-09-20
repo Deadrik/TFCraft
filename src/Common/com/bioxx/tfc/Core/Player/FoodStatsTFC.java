@@ -37,6 +37,8 @@ public class FoodStatsTFC
 	public float nutrGrain = 1.0f;
 	public float nutrDairy = 1.0f;
 	public float nutrProtein = 1.0f;
+
+
 	public long soberTime = 0;
 
 	/**This is how full the player is from the food that they've eaten. 
@@ -122,11 +124,11 @@ public class FoodStatsTFC
 
 				if (this.stomachLevel <= 0)
 				{
-					reduceNutrition(0.015F);//3x penalty for starving
+					reduceNutrition(0.012F);//3x penalty for starving
 				}
 				else
 				{
-					reduceNutrition(0.005F);
+					reduceNutrition(0.002F);
 				}
 			}
 
@@ -338,7 +340,7 @@ public class FoodStatsTFC
 	public float getTasteFactor(ItemStack food)
 	{
 		Random R = new Random(getPlayerFoodSeed());
-		float tasteFactor = 0.8f;
+		float tasteFactor = 0.85f;
 		int[] tastePref = getPrefTaste();
 
 		tasteFactor += getTasteDistanceFactor(tastePref[0], ((IFood)food.getItem()).getTasteSweet(food));

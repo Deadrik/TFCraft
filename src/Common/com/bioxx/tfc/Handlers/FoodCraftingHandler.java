@@ -21,6 +21,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
 public class FoodCraftingHandler
 {
+	public static boolean PreCrafted = false;
 	@SubscribeEvent
 	public void onFoodCook(ItemCookEvent event)
 	{
@@ -38,6 +39,12 @@ public class FoodCraftingHandler
 		ItemStack craftResult = e.crafting;
 		int isDmg = e.crafting.getItemDamage();
 		IInventory iinventory = e.craftMatrix;
+
+		if(FoodCraftingHandler.PreCrafted)
+		{
+			FoodCraftingHandler.PreCrafted = false;
+			return;
+		}
 
 		if(iinventory != null)
 		{
@@ -260,14 +267,17 @@ public class FoodCraftingHandler
 				}
 				else if(Food.getDecay(craftResult) <= 0)
 				{
-					FoodCraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
-					if(finalWeight/2 < 1)
+					if(finalWeight/2f < 1)
+					{
 						Food.setWeight(craftResult, finalWeight);
+						iinventory.getStackInSlot(i).stackSize = 2;
+					}
 					else
 					{
-						Food.setWeight(craftResult, finalWeight/2);
-						iinventory.getStackInSlot(foodSlot).stackSize++;
+						FoodCraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
 						Food.setWeight(iinventory.getStackInSlot(foodSlot),finalWeight/2);
+						Food.setWeight(craftResult,finalWeight/2);
+						iinventory.getStackInSlot(foodSlot).stackSize = 2;
 					}
 				}
 			}
@@ -281,6 +291,7 @@ public class FoodCraftingHandler
 	 */
 	public static void preCraft(EntityPlayer player, ItemStack craftResult, IInventory iinventory)
 	{
+		FoodCraftingHandler.PreCrafted = true;
 		if((craftResult.getItem() == TFCItems.WheatGrain && gridHasItem(iinventory, TFCItems.WheatWhole)) ||
 				(craftResult.getItem() == TFCItems.RyeGrain && gridHasItem(iinventory, TFCItems.RyeWhole)) || 
 				(craftResult.getItem() == TFCItems.OatGrain && gridHasItem(iinventory, TFCItems.OatWhole)) || 

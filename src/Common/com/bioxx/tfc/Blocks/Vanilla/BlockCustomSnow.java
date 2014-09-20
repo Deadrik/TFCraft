@@ -36,7 +36,7 @@ public class BlockCustomSnow extends BlockTerra
 		boolean flag = false;
 		if (b == TFCBlocks.Ice)
 			flag =  true;
-		if (world.getBlock(i, j - 1, k).isOpaqueCube())
+		if (World.doesBlockHaveSolidTopSurface(world, i, j-1, k))
 			flag =  true;
 		if (b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2)
 			flag =  true;
@@ -47,12 +47,7 @@ public class BlockCustomSnow extends BlockTerra
 	{
 		if (!this.canPlaceBlockAt(world, x, y, z))
 		{
-			int meta = world.getBlockMetadata(x, y, z);
-			if(meta <= 1)
-				world.setBlockToAir(x, y, z);
-			else
-				world.setBlockMetadataWithNotify(x, y, z, meta - 1, 1);
-
+			world.setBlockToAir(x, y, z);
 			return false;
 		}
 		else

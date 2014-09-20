@@ -13,6 +13,8 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.AchievementList;
@@ -27,7 +29,9 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Food.TFCPotion;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.Tools.IKnife;
 
 public class GuiInventoryTFC extends InventoryEffectRenderer
 {
@@ -238,11 +242,83 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 	 * number key when hovering a stack.
 	 */
 	@Override
-	protected boolean checkHotbarKeys(int par1)
+	protected boolean checkHotbarKeys(int keycode)
 	{
 		if(this.activeSlot != null && this.activeSlot.slotNumber == 0 && this.activeSlot.getHasStack() &&
 				this.activeSlot.getStack().getItem() instanceof IFood)
 			return false;
-		else return super.checkHotbarKeys(par1);
+		//Here is the code for quick stacking food
+		if(keycode == 31 && activeSlot.canTakeStack(player) && activeSlot.getHasStack() && activeSlot.getStack().getItem() instanceof IFood)
+		{
+			Item iType = activeSlot.getStack().getItem();
+			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
+			{
+				ItemStack is = this.inventorySlots.getSlot(i).getStack();
+				if(is != null && is.getItem() == iType && ((IFood)is.getItem()).getFoodWeight(is) < Global.FOOD_MAX_WEIGHT)
+					this.handleMouseClick(this.inventorySlots.getSlot(i), i, getEmptyCraftSlot(), 7);
+			}
+
+			if(this.inventorySlots.getSlot(0).getStack() != null)
+			{
+				this.handleMouseClick(this.inventorySlots.getSlot(0), 0, 0, 1);
+			}
+			return true;
+		}
+		else if(keycode == 32)
+		{
+			int knifeSlot = -1;
+			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
+			{
+				ItemStack is = this.inventorySlots.getSlot(i).getStack();
+				if(is != null && is.getItem() instanceof IKnife)
+				{
+					knifeSlot = getEmptyCraftSlot();
+					this.handleMouseClick(this.inventorySlots.getSlot(i), i, knifeSlot, 7);
+					break;
+				}
+			}
+			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
+			{
+				ItemStack is = this.inventorySlots.getSlot(i).getStack();
+				if(is != null && is.getItem() instanceof IFood && ((IFood)is.getItem()).getFoodDecay(is) > 0)
+				{
+					this.handleMouseClick(this.inventorySlots.getSlot(i), i, getEmptyCraftSlot(), 7);
+					this.handleMouseClick(this.inventorySlots.getSlot(0), 0, 0, 1);
+				}
+			}
+			if(knifeSlot != -1)
+			{
+				this.handleMouseClick(this.inventorySlots.getSlot(knifeSlot), knifeSlot, 0, 1);
+			}
+			return true;
+		}
+		else return super.checkHotbarKeys(keycode);
+	}
+
+	private int getEmptyCraftSlot()
+	{
+		if(this.inventorySlots.getSlot(4).getStack() == null)
+			return 4;
+		if(this.inventorySlots.getSlot(1).getStack() == null)
+			return 1;
+		if(this.inventorySlots.getSlot(2).getStack() == null)
+			return 2;
+		if(this.inventorySlots.getSlot(3).getStack() == null)
+			return 3;
+		if(player.getEntityData().hasKey("craftingTable"))
+		{
+			if(this.inventorySlots.getSlot(45).getStack() == null)
+				return 45;
+			if(this.inventorySlots.getSlot(46).getStack() == null)
+				return 46;
+			if(this.inventorySlots.getSlot(47).getStack() == null)
+				return 47;
+			if(this.inventorySlots.getSlot(48).getStack() == null)
+				return 48;
+			if(this.inventorySlots.getSlot(49).getStack() == null)
+				return 49;
+		}
+
+		return -1;
 	}
 }

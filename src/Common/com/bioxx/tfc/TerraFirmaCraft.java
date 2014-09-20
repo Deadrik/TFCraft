@@ -10,6 +10,7 @@ import java.util.Set;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
@@ -251,6 +252,7 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt)
 	{
+		ForgeModContainer.zombieBabyChance = 0;
 	}
 
 	@EventHandler

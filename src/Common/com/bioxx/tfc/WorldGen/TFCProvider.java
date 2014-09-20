@@ -41,7 +41,7 @@ public class TFCProvider extends WorldProvider
 	{
 		int y = worldObj.getTopSolidOrLiquidBlock(x, z)-1;
 		Block b = worldObj.getBlock(x, y, z);
-		return y > 144 && y < 170 && TFC_Core.isGrass(b);
+		return y > 144 && y < 170 && (TFC_Core.isSand(b) || TFC_Core.isGrass(b));
 	}
 
 	@Override
@@ -108,7 +108,7 @@ return biome;
 			}
 			else
 			{
-				xOffset += 128;
+				xOffset += 64;
 				//System.out.println("Unable to find spawn biome");
 			}
 		}
@@ -116,8 +116,8 @@ return biome;
 		int var9 = 0;
 		while (!canCoordinateBeSpawn(xCoord, zCoord))
 		{
-			xCoord += rand.nextInt(64) - rand.nextInt(64);
-			zCoord += rand.nextInt(64) - rand.nextInt(64);
+			xCoord += rand.nextInt(16) - rand.nextInt(16);
+			zCoord += rand.nextInt(16) - rand.nextInt(16);
 			++var9;
 			if (var9 == 1000)
 				break;
@@ -211,7 +211,7 @@ return biome;
 	public boolean canSnowAt(int x, int y, int z, boolean checkLight)
 	{
 		if(TFC_Climate.getHeightAdjustedTemp(worldObj,x, y, z) <= 0 &&
-				Blocks.snow.canPlaceBlockAt(worldObj, x, y, z) &&
+				((Block)Block.blockRegistry.getObject("snow_layer")).canPlaceBlockAt(worldObj, x, y, z) &&
 				worldObj.getBlock(x, y, z).getMaterial().isReplaceable())
 		{
 			return true;

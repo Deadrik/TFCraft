@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Map;
 
 import com.bioxx.tfc.ASM.Transform.TF_EntityLeashKnot;
+import com.bioxx.tfc.ASM.Transform.TF_EntityPlayerMP;
 import com.bioxx.tfc.ASM.Transform.TF_EntityRenderer;
 import com.bioxx.tfc.ASM.Transform.TF_RenderGlobal;
 
@@ -26,7 +27,8 @@ public class TFCASMLoadingPlugin implements IFMLLoadingPlugin
 		return new String[]{
 				TF_EntityRenderer.class.getName(),
 				TF_RenderGlobal.class.getName(),
-				TF_EntityLeashKnot.class.getName()};
+				TF_EntityLeashKnot.class.getName(),
+				TF_EntityPlayerMP.class.getName()};
 	}
 
 	@Override

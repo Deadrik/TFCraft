@@ -13,14 +13,6 @@ import com.bioxx.tfc.TileEntities.TELoom;
 
 public class TESRLoom extends TESRBase
 {
-	/** The normal small chest model. */
-	private ModelLoom loomModel;
-	private int tempNum = 0;
-	private long tempTime = 0;
-	private boolean clothIncrease = false;
-	private int mod = 40;
-	private int lastClothIncrease = 0;
-	private boolean stillWeaving = false;
 	/**
 	 * Renders the TileEntity for the chest at a position.
 	 */
@@ -34,32 +26,31 @@ public class TESRLoom extends TESRBase
 			if(te.getModel() ==null){
 				te.setModel(new ModelLoom());
 			}
-			loomModel = te.getModel();
 			TFC_Core.bindTexture(te.getWoodResource()); //texture
 			GL11.glPushMatrix(); //start
 			GL11.glTranslatef((float)d + 0.0F, (float)d1 + 0F, (float)d2 + 0.0F); //size
-			if(te.getStringCount()<16){
-				loomModel.updateCloth(te.getCloth());
+			if(te.getStringCount()< te.getRequiredStringCount()){
+				te.getModel().updateCloth(te.getCloth());
 			}
-			if(te.getIsWeaving() || stillWeaving){
-				if(TFC_Time.getTotalTicks() > tempTime){
-					tempNum = (tempNum+(int)(TFC_Time.getTotalTicks()-tempTime));
-					tempTime = TFC_Time.getTotalTicks();
-					if(tempNum >= (lastClothIncrease + (mod/2))){
-						clothIncrease = true;
-						lastClothIncrease = (lastClothIncrease + (mod/2))%mod;
+			if(te.getIsWeaving() || te.getModel().stillWeaving){
+				if(TFC_Time.getTotalTicks() > te.getModel().tempTime){
+					te.getModel().tempNum = (te.getModel().tempNum+(int)(TFC_Time.getTotalTicks()-te.getModel().tempTime));
+					te.getModel().tempTime = TFC_Time.getTotalTicks();
+					if(te.getModel().tempNum >= (te.getModel().lastClothIncrease + (te.getModel().mod/2))){
+						te.getModel().clothIncrease = true;
+						te.getModel().lastClothIncrease = (te.getModel().lastClothIncrease + (te.getModel().mod/2))%te.getModel().mod;
 						
 						te.finishWeaveCycle();
-						stillWeaving = te.getIsWeaving();
+						te.getModel().stillWeaving = te.getIsWeaving();
 					}
-					tempNum = tempNum%mod;
+					te.getModel().tempNum = te.getModel().tempNum%te.getModel().mod;
 				}
 			}
 			else{
-				tempTime = TFC_Time.getTotalTicks();
+				te.getModel().tempTime = TFC_Time.getTotalTicks();
 			}
-			loomModel.render(te.getStringCount(),16,tempNum,clothIncrease,mod,te.getStringResource(), te.getIsWeaving(), stillWeaving, te);
-			clothIncrease = false;
+			te.getModel().render(te.getStringCount(),te.getRequiredStringCount(),te.getModel().tempNum,te.getModel().clothIncrease,te.getModel().mod,te.getStringResource(), te.getIsWeaving(), te.getModel().stillWeaving, te);
+			te.getModel().clothIncrease = false;
 			GL11.glPopMatrix(); //end
 
 		}

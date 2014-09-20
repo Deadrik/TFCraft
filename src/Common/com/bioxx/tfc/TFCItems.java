@@ -61,7 +61,7 @@ import com.bioxx.tfc.Items.ItemTFCArmor;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.Items.ItemTuyere;
 import com.bioxx.tfc.Items.ItemUnfinishedArmor;
-import com.bioxx.tfc.Items.ItemWoolYarn;
+import com.bioxx.tfc.Items.ItemYarn;
 import com.bioxx.tfc.Items.ItemBlocks.ItemWoodDoor;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryBase;
 import com.bioxx.tfc.Items.Pottery.ItemPotteryJug;
@@ -822,6 +822,8 @@ public class TFCItems
 	public static Item WoolYarn;
 	public static Item Wool;
 	public static Item WoolCloth;
+	public static Item SilkCloth;
+	public static Item BurlapCloth;
 	public static Item Spindle;
 
 	public static Item SpindleHead;
@@ -1008,7 +1010,7 @@ public class TFCItems
 
 		System.out.println(new StringBuilder().append("[TFC] Loading Items").toString());
 
-		FishingRod = new ItemCustomFishingRod().setUnlocalizedName("fishingRod").setTextureName("fishing_rod");
+		FishingRod = new ItemCustomFishingRod().setUnlocalizedName("fishingRod").setTextureName("tools/fishing_rod");
 		Coal = new ItemCoal().setUnlocalizedName("coal");
 		Stick = new ItemStick().setFull3D().setUnlocalizedName("stick");
 		Bow = new ItemCustomBow().setUnlocalizedName("bow").setTextureName("bow");
@@ -1497,9 +1499,11 @@ public class TFCItems
 
 		Blueprint = new ItemBlueprint();
 		writabeBookTFC = new ItemWritableBookTFC("Fix Me I'm Broken").setUnlocalizedName("book");
-		WoolYarn = new ItemWoolYarn().setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
+		WoolYarn = new ItemYarn().setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
 		Wool = new ItemTerra().setUnlocalizedName("Wool").setCreativeTab(TFCTabs.TFCMaterials);
 		WoolCloth = new ItemTerra().setUnlocalizedName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
+		SilkCloth = new ItemTerra().setUnlocalizedName("SilkCloth").setCreativeTab(TFCTabs.TFCMaterials);
+		BurlapCloth = new ItemTerra().setUnlocalizedName("BurlapCloth").setCreativeTab(TFCTabs.TFCMaterials);
 		Spindle = new ItemSpindle().setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCPottery);
 
 		SpindleHead = new ItemPotteryBase().setMetaNames(new String[]
@@ -2546,6 +2550,8 @@ public class TFCItems
 		GameRegistry.registerItem(WoolYarn, WoolYarn.getUnlocalizedName());
 		GameRegistry.registerItem(Wool, Wool.getUnlocalizedName());
 		GameRegistry.registerItem(WoolCloth, WoolCloth.getUnlocalizedName());
+		GameRegistry.registerItem(SilkCloth, SilkCloth.getUnlocalizedName());
+		GameRegistry.registerItem(BurlapCloth, BurlapCloth.getUnlocalizedName());
 		GameRegistry.registerItem(Spindle, Spindle.getUnlocalizedName());
 		GameRegistry.registerItem(SpindleHead, SpindleHead.getUnlocalizedName());
 		GameRegistry.registerItem(StoneBrick , StoneBrick.getUnlocalizedName());

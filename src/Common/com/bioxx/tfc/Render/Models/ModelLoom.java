@@ -23,8 +23,8 @@ public class ModelLoom extends ModelBase {
 	ModelRenderer loomPole2;
 	ModelRenderer loomPoleBase;
 
-	TexturedQuad[] initialString = new TexturedQuad[16];
-	TexturedQuad[] finalString = new TexturedQuad[16];
+	TexturedQuad[] initialString;
+	TexturedQuad[] finalString;
 
 	TexturedQuad clothRender;
 
@@ -41,6 +41,13 @@ public class ModelLoom extends ModelBase {
 
 	int lastIncreaseTick_1;
 	int lastIncreaseTick_2;
+	
+	public int tempNum = 0;
+	public long tempTime = 0;
+	public boolean clothIncrease = false;
+	public int mod = 40;
+	public int lastClothIncrease = 0;
+	public boolean stillWeaving = false;
 
 	public ModelLoom(){
 		super();
@@ -79,9 +86,11 @@ public class ModelLoom extends ModelBase {
 	}
 
 	public void render(int numStrings, int numMaxStrings, int tick, boolean shouldClothIncrease, int tickMod, ResourceLocation stringTex, boolean isWeaving, boolean stillWeaving, TELoom te) {
-		
 		float renderOffsetPole2 = 9f;
 		float renderOffsetPole1 = 9f;
+		
+		initialString = new TexturedQuad[numMaxStrings];
+		finalString = new TexturedQuad[numMaxStrings];
 
 		float string1_z,string2_z;
 
@@ -92,6 +101,11 @@ public class ModelLoom extends ModelBase {
 
 		float pole2_height = 2.15F;
 		float pole1_height = 5.35F;
+		
+		if(cloth == 0){
+			pole1String_y = 14.5F;
+			pole2String_y = 14.5F;
+		}
 		
 		if(shouldClothIncrease){
 			cloth++;
@@ -111,13 +125,22 @@ public class ModelLoom extends ModelBase {
 			renderOffsetPole2 = 7f + (float)(2f * Math.cos(((tick)/(float)(tickMod/4))* Math.PI));
 		}
 		
-		if(cloth > 16 && shouldClothIncrease){
+		if(cloth >= numMaxStrings && shouldClothIncrease){
 			resetCloth(te);
 		}
 
 		loomPole2.setRotationPoint(1F, 1.65F, renderOffsetPole2);
 		loomPole1.setRotationPoint(1F, 4.85F, renderOffsetPole1);
-
+		
+		GL11.glPushMatrix();
+		GL11.glRotatef(te.rotation * -90F, 0, 1, 0);
+		switch(te.rotation){
+		case 0: break;
+		case 1: GL11.glTranslatef(0, 0, -1);break;
+		case 2: GL11.glTranslatef(-1, 0, -1);break;
+		case 3: GL11.glTranslatef(-1, 0, 0);break;
+		default:break;
+		}
 		this.loomPole2.render(0.0625F);
 		this.loomPole1.render(0.0625F);
 
@@ -271,6 +294,7 @@ public class ModelLoom extends ModelBase {
 		clothRender.draw(Tessellator.instance, 0.0625F);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glPopMatrix();
+		GL11.glPopMatrix();
 	}
 
 	public void updateCloth(int newCloth){
@@ -278,8 +302,6 @@ public class ModelLoom extends ModelBase {
 	}
 	
 	public void resetCloth(TELoom te){
-		pole1String_y = 14.5F;
-		pole2String_y = 14.5F;
 		
 		te.finishCloth();
 	}

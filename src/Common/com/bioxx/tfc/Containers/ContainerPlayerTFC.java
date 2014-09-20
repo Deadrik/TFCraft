@@ -174,6 +174,24 @@ public class ContainerPlayerTFC extends ContainerPlayer
 		return origStack;
 	}
 
+	@Override
+	public ItemStack slotClick(int sourceSlotID, int destSlotID, int clickType, EntityPlayer p)
+	{
+		if (clickType == 7 && sourceSlotID >= 9 && sourceSlotID < 45)
+		{
+			Slot sourceSlot = (Slot)this.inventorySlots.get(sourceSlotID);
+
+			if (sourceSlot != null && sourceSlot.canTakeStack(p))
+			{
+				Slot destSlot = (Slot)this.inventorySlots.get(destSlotID);
+				destSlot.putStack(sourceSlot.getStack());
+				sourceSlot.putStack(null);
+				return null;
+			}
+		}
+		return super.slotClick(sourceSlotID, destSlotID, clickType, p);
+	}
+
 	protected boolean isCraftingGridFull()
 	{
 		for(int i = 0; i < this.craftMatrix.getSizeInventory(); i++)
