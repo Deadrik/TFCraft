@@ -146,22 +146,17 @@ return biome;
 	{
 		Block id = worldObj.getBlock(x, y, z);
 		int meta = worldObj.getBlockMetadata(x, y, z);
+		float temp = TFC_Climate.getHeightAdjustedTemp(worldObj, x, y, z);
 
-
-		if (TFC_Core.isWater(id) && worldObj.isAirBlock(x, y+1, z))
+		if (temp <= 0)
 		{
-			if(!isNextToShoreOrIce(x,y,z))
-				return false;
-			float temp = TFC_Climate.getHeightAdjustedTemp(worldObj, x, y, z);
-			if(temp <= 0)
+			if (worldObj.isAirBlock(x, y+1, z) && TFC_Core.isWater(id) && isNextToShoreOrIce(x,y,z))
 			{
 				Material mat = worldObj.getBlock(x, y, z).getMaterial();
 				boolean salty = TFC_Core.isSaltWaterIncludeIce(id, meta, mat);
 
 				if(temp <= -2)
-				{
 					salty = false;
-				}
 
 				if((mat == Material.water || mat == Material.ice) && !salty)
 				{
@@ -177,35 +172,40 @@ return biome;
 				return false;//(mat == Material.water) && !salty;
 			}
 		}
-		else if(id == TFCBlocks.Ice)
+		else
 		{
-			float temp = TFC_Climate.getHeightAdjustedTemp(worldObj, x, y, z);
-			int chance = (int)Math.floor(Math.max(1, 6f-temp));
-			if(id == TFCBlocks.Ice && worldObj.rand.nextInt(chance) == 0)
+			if(id == TFCBlocks.Ice)
 			{
-				if (worldObj.getBlock(x, y + 1, z) == Blocks.snow)
+				int chance = (int)Math.floor(Math.max(1, 6f-temp));
+				if(id == TFCBlocks.Ice && worldObj.rand.nextInt(chance) == 0)
 				{
-					int m = worldObj.getBlockMetadata(x, y + 1, z);
-					if (m > 0) {
-						worldObj.setBlockMetadataWithNotify(x, y + 1, z, m - 1, 2);
-					} else {
-						worldObj.setBlockToAir(x, y + 1, z);
-					}
-				}
-				else
-				{
-					int flag = 2;
-					/*BiomeGenBase b = worldObj.getBiomeGenForCoords(x, z);
-					if((b == TFCBiome.ocean || b == TFCBiome.lake || b == TFCBiome.river || b == TFCBiome.river) && y == 143)
-						flag = 2;*/
-
-					if((meta & 1) == 0)
+					if (worldObj.getBlock(x, y + 1, z) == Blocks.snow)
 					{
-						worldObj.setBlock(x, y, z, TFCBlocks.SaltWater, 0, flag);
+						int m = worldObj.getBlockMetadata(x, y + 1, z);
+						if (m > 0)
+						{
+							worldObj.setBlockMetadataWithNotify(x, y + 1, z, m - 1, 2);
+						}
+						else
+						{
+							worldObj.setBlockToAir(x, y + 1, z);
+						}
 					}
-					else if((meta & 1) == 1)
+					else
 					{
-						worldObj.setBlock(x, y, z, TFCBlocks.FreshWater, 0, flag);
+						int flag = 2;
+						/*BiomeGenBase b = worldObj.getBiomeGenForCoords(x, z);
+						if((b == TFCBiome.ocean || b == TFCBiome.lake || b == TFCBiome.river || b == TFCBiome.river) && y == 143)
+							flag = 2;*/
+	
+						if((meta & 1) == 0)
+						{
+							worldObj.setBlock(x, y, z, TFCBlocks.SaltWater, 0, flag);
+						}
+						else if((meta & 1) == 1)
+						{
+							worldObj.setBlock(x, y, z, TFCBlocks.FreshWater, 0, flag);
+						}
 					}
 				}
 			}
