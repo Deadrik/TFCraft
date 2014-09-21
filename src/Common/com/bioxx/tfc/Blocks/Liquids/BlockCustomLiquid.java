@@ -79,7 +79,7 @@ public class BlockCustomLiquid extends BlockFluidClassic
 		super.updateTick(world, x, y, z, rand);
 		if(!world.isRemote)
 		{
-			if((world.provider) instanceof TFCProvider)
+			if((world.provider) instanceof TFCProvider && world.isAirBlock(x, y+1, z))
 			{
 				((TFCProvider)(world.provider)).canBlockFreeze(x, y, z, false);
 			}
