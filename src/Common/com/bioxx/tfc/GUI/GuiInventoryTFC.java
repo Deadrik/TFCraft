@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.AchievementList;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -66,13 +67,43 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 		int l = this.guiTop;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, 86);
 		//Draw the player avatar
-		func_110423_a(k + 51, l + 75, 30, k + 51 - this.xSize_lo, l + 75 - 50 - this.ySize_lo, this.mc.thePlayer);
+		drawPlayerModel(k + 51, l + 75, 30, k + 51 - this.xSize_lo, l + 75 - 50 - this.ySize_lo, this.mc.thePlayer);
 
 		PlayerInventory.drawInventory(this, width, height, ySize - PlayerInventory.invYSize);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	public static void func_110423_a(int par0, int par1, int par2, float par3, float par4, EntityLivingBase par5EntityLivingBase)
+	@Override
+	protected void func_146977_a(Slot slot)
+	{
+		//super.func_146977_a(p_146977_1_);
+		ItemStack itemstack = slot.getStack();
+		int i = slot.xDisplayPosition;
+		int j = slot.yDisplayPosition;
+		if (itemstack == null)
+		{
+			IIcon iicon = slot.getBackgroundIconIndex();
+
+			if (iicon != null)
+			{
+				//GL11.glDisable(GL11.GL_LIGHTING);
+				this.mc.getTextureManager().bindTexture(TextureMap.locationItemsTexture);
+				this.drawTexturedModelRectFromIcon(i, j, iicon, 16, 16);
+				//GL11.glEnable(GL11.GL_LIGHTING);
+			}
+		}
+		else 
+		{
+			GL11.glEnable(GL11.GL_DEPTH_TEST);
+			itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), itemstack, i, j);
+			String s = ""+itemstack.stackSize;
+			if(itemstack.stackSize <= 1)
+				s = "";
+			itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), itemstack, i, j, s);
+		}
+	}
+
+	public static void drawPlayerModel(int par0, int par1, int par2, float par3, float par4, EntityLivingBase par5EntityLivingBase)
 	{
 		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 		GL11.glPushMatrix();
@@ -112,7 +143,7 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		this.fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 86, 7, 4210752);
+		//this.fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 86, 7, 4210752);
 	}
 
 	@Override

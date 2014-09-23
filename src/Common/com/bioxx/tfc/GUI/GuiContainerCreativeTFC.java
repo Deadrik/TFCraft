@@ -781,7 +781,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 		this.renderCreativeTab(creativetabs);
 
 		if (creativetabs == CreativeTabs.tabInventory)
-			GuiInventoryTFC.func_110423_a(this.guiLeft + 43, this.guiTop + 45, 20, (float)(this.guiLeft + 43 - par2), (float)(this.guiTop + 45 - 30 - par3), this.mc.thePlayer);
+			GuiInventoryTFC.drawPlayerModel(this.guiLeft + 43, this.guiTop + 45, 20, (float)(this.guiLeft + 43 - par2), (float)(this.guiTop + 45 - 30 - par3), this.mc.thePlayer);
 	}
 
 	protected boolean func_74232_a(CreativeTabs par1CreativeTabs, int par2, int par3)

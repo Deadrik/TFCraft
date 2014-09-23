@@ -1,13 +1,14 @@
 package com.bioxx.tfc.Containers.Slots;
 
-import com.bioxx.tfc.Containers.ContainerPlayerTFC;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
+import com.bioxx.tfc.Containers.ContainerPlayerTFC;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -45,13 +46,16 @@ public class SlotArmorTFC extends Slot
 
 	@Override
 	@SideOnly(Side.CLIENT)
-
-	/**
-	 * Returns the icon index on items.png that is used as background image of the slot.
-	 */
 	public IIcon getBackgroundIconIndex()
 	{
 		return ItemArmor.func_94602_b(this.armorType);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean func_111238_b()
+	{
+		return true;
 	}
 
 }
