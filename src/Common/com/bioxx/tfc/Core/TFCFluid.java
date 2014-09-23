@@ -95,6 +95,7 @@ public class TFCFluid extends Fluid
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(SALTWATER.getName()), new ItemStack(TFCItems.RedSteelBucketSaltWater), new ItemStack(TFCItems.RedSteelBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(FRESHWATER.getName()), new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(SALTWATER.getName()), new ItemStack(TFCItems.WoodenBucketSaltWater), new ItemStack(TFCItems.WoodenBucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(FRESHWATER, 1000), new ItemStack(TFCItems.PotteryJug, 1, 2), new ItemStack(TFCItems.PotteryJug,1, 1));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(RUM, 250), new ItemStack(TFCItems.Rum), new ItemStack(Items.glass_bottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(BEER, 250), new ItemStack(TFCItems.Beer), new ItemStack(Items.glass_bottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(RYEWHISKEY, 250), new ItemStack(TFCItems.RyeWhiskey), new ItemStack(Items.glass_bottle));

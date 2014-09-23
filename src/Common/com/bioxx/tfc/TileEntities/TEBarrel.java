@@ -427,7 +427,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					{
 						if(addLiquid(inLiquid.amount))
 						{
-							this.setInventorySlotContents(0, getInputStack().getItem().getContainerItem(getInputStack()));
+							this.setInventorySlotContents(0, FluidContainerRegistry.drainFluidContainer(getInputStack()));
 						}
 					}
 				}
