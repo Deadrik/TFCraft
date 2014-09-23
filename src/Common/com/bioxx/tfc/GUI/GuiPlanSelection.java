@@ -120,11 +120,13 @@ public class GuiPlanSelection extends GuiContainerTFC
 		return ar;
 	}
 
+	@Override
 	public void drawTooltip(int mx, int my, String text) {
 		List list = new ArrayList();
 		list.add(text);
 		this.drawHoveringTextZLevel(list, mx, my+15, this.fontRendererObj, 400);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
 	}
 }

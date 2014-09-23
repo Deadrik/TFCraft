@@ -784,11 +784,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 					if (height <= 6 && stability.data1 == 1 && idsBig[indexBig] == Blocks.air)
 					{
-						idsBig[indexBig] = Blocks.lava;
+						idsBig[indexBig] = TFCBlocks.Lava;
 						metaBig[indexBig] = 0; 
-						if(idsBig[indexBig+1] != Blocks.lava && rand.nextBoolean())
+						if(idsBig[indexBig+1] != TFCBlocks.Lava && rand.nextBoolean())
 						{
-							idsBig[indexBig+1] = Blocks.lava;
+							idsBig[indexBig+1] = TFCBlocks.Lava;
 							metaBig[indexBig+1] = 0; 
 						}
 					}

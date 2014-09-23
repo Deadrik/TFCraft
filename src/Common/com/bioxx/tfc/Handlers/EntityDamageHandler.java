@@ -120,9 +120,8 @@ public class EntityDamageHandler
 				float crushMult = getDamageReduction(crushRating);
 
 				//4. Reduce incoming damage
-				EnumDamageType damageType = EnumDamageType.GENERIC;
 				damage = processDamageSource(source, damage, pierceMult,
-						slashMult, crushMult, damageType);
+						slashMult, crushMult);
 
 				//5. Damage the armor that was hit
 				armor[location].damageItem((int) processArmorDamage(armor[location], damage), entity);
@@ -140,8 +139,7 @@ public class EntityDamageHandler
 				float slashMult = getDamageReduction(slashRating);
 				float crushMult = getDamageReduction(crushRating);
 				//4. Reduce incoming damage
-				EnumDamageType damageType = EnumDamageType.GENERIC;
-				damage = processDamageSource(source, damage, pierceMult, slashMult, crushMult, damageType);
+				damage = processDamageSource(source, damage, pierceMult, slashMult, crushMult);
 
 				//a. If the attack hits an unprotected head, it does 75% more damage
 				//b. If the attack hits unprotected feet, it applies a slow to the player
@@ -160,22 +158,9 @@ public class EntityDamageHandler
 	}
 
 	private float processDamageSource(DamageSource source, float damage,
-			float pierceMult, float slashMult, float crushMult,
-			EnumDamageType damageType)
+			float pierceMult, float slashMult, float crushMult)
 	{
-		//4.1 Determine the source of the damage and get the appropriate Damage Type
-		if(source.getSourceOfDamage() instanceof EntityPlayer)
-		{
-			EntityPlayer player = (EntityPlayer)source.getSourceOfDamage();
-			if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ICausesDamage)
-			{
-				damageType = ((ICausesDamage)player.getCurrentEquippedItem().getItem()).GetDamageType();
-			}
-		}
-		else if(source.getSourceOfDamage() instanceof ICausesDamage)
-		{
-			damageType = ((ICausesDamage)source.getSourceOfDamage()).GetDamageType();
-		}
+		EnumDamageType damageType = getDamageType(source);
 		//4.2 Reduce the damage based upon the incoming Damage Type
 		if(damageType == EnumDamageType.PIERCING)
 		{
@@ -189,7 +174,40 @@ public class EntityDamageHandler
 		{
 			damage *= crushMult;
 		}
-		return damage;
+		else if(damageType == EnumDamageType.GENERIC)
+		{
+			damage *= (((crushMult+slashMult+pierceMult)/3)+0.25);
+		}
+		return Math.max(0, damage);
+	}
+
+	private EnumDamageType getDamageType(DamageSource source) 
+	{
+		//4.1 Determine the source of the damage and get the appropriate Damage Type
+		if(source.getSourceOfDamage() instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer)source.getSourceOfDamage();
+			if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ICausesDamage)
+			{
+				return ((ICausesDamage)player.getCurrentEquippedItem().getItem()).GetDamageType();
+			}
+		}
+
+		if(source.getSourceOfDamage() instanceof EntityLiving)
+		{
+			EntityLiving el = (EntityLiving)source.getSourceOfDamage();
+			if(el.getHeldItem() != null && el.getHeldItem().getItem() instanceof ICausesDamage)
+			{
+				return ((ICausesDamage)el.getHeldItem().getItem()).GetDamageType();
+			}
+		}
+
+		if(source.getSourceOfDamage() instanceof ICausesDamage)
+		{
+			return ((ICausesDamage)source.getSourceOfDamage()).GetDamageType();
+		}
+
+		return EnumDamageType.GENERIC;
 	}
 
 	private int getRandomSlot(Random rand)

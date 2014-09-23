@@ -7,7 +7,6 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Set;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeModContainer;
@@ -147,7 +146,7 @@ public class TerraFirmaCraft
 		{
 			//Register Generators
 			//Underground Lava
-			GameRegistry.registerWorldGenerator(new WorldGenFissure(Blocks.lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
+			GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.Lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
 			//Surface Hotsprings
 			GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
 			GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);

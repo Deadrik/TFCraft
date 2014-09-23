@@ -21,6 +21,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Entities.EntityJavelin;
 import com.bioxx.tfc.Items.ItemQuiver;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumAmmo;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
@@ -219,11 +220,22 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	}
 
 	@Override
-	public Multimap getItemAttributeModifiers()
+	public Multimap getAttributeModifiers(ItemStack stack)
 	{
 		Multimap multimap = HashMultimap.create();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", this.weaponDamage, 0));
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", getWeaponDamage(stack), 0));
 		return multimap;
+	}
+
+	public double getWeaponDamage(ItemStack is)
+	{
+		return Math.floor(weaponDamage + (weaponDamage * (AnvilManager.getDamageBuff(is) / 200f)));
+	}
+
+	@Override
+	public int getMaxDamage(ItemStack is)
+	{
+		return (int) Math.floor(getMaxDamage() + (getMaxDamage() * (AnvilManager.getDurabilityBuff(is) / 300f)));
 	}
 
 	@Override

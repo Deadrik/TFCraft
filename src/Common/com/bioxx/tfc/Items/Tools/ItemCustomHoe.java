@@ -22,12 +22,11 @@ import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISize;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 
@@ -88,7 +87,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 			else
 			{
 				Block var10 = var8 == TFCBlocks.Dirt || var8 == TFCBlocks.Grass || var8 == TFCBlocks.DryGrass ? TFCBlocks.Dirt : 
-						var8 == TFCBlocks.Dirt2 || var8 == TFCBlocks.Grass2 || var8 == TFCBlocks.DryGrass2 ? TFCBlocks.Dirt2 : null;
+					var8 == TFCBlocks.Dirt2 || var8 == TFCBlocks.Grass2 || var8 == TFCBlocks.DryGrass2 ? TFCBlocks.Dirt2 : null;
 				if(var10 != null)
 				{
 					int meta = world.getBlockMetadata(x, y, z);
@@ -146,7 +145,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-		
+
 		if(TFCOptions.enableDebugMode)
 			arraylist.add("Damage: " + is.getItemDamage());
 	}
@@ -178,10 +177,9 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	}
 
 	@Override
-	public Multimap getItemAttributeModifiers()
+	public int getMaxDamage(ItemStack stack)
 	{
-		Multimap multimap = HashMultimap.create();
-		return multimap;
+		return (int) (getMaxDamage()+(getMaxDamage() * (AnvilManager.getDurabilityBuff(stack) / 300f)));
 	}
 
 	@Override

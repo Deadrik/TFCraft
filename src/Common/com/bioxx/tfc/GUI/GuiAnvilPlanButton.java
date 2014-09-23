@@ -36,7 +36,6 @@ public class GuiAnvilPlanButton extends GuiButton
 			this.field_146123_n = x >= this.xPosition && y >= this.yPosition && x < this.xPosition + this.width && y < this.yPosition + this.height;
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glPushMatrix(); //start
 			//TFC_Core.bindTexture(TextureMap.locationItemsTexture);
 
 			if(!screen.AnvilEntity.craftingPlan.equals("") && screen.AnvilEntity.workRecipe != null) 
@@ -46,7 +45,6 @@ public class GuiAnvilPlanButton extends GuiButton
 
 			this.zLevel = 0;
 			this.mouseDragged(mc, x, y);
-			GL11.glPopMatrix(); //end
 
 			if(field_146123_n)
 			{
@@ -57,11 +55,11 @@ public class GuiAnvilPlanButton extends GuiButton
 		}
 	}
 
-	protected void renderInventorySlot(ItemStack par1, int par2, int par3)
+	protected void renderInventorySlot(ItemStack is, int x, int y)
 	{
-		if (par1 != null)
+		if (is != null)
 		{
-			itemRenderer.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), par1, par2, par3);
+			itemRenderer.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), is, x, y);
 		}
 	}
 

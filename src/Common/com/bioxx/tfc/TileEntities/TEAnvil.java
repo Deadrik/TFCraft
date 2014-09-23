@@ -123,27 +123,23 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 						this.setInventorySlotContents(INPUT1_SLOT, eventCraft.result);
 						if(anvilItemStacks[INPUT1_SLOT] != null)
 						{
-							NBTTagCompound craftingTag = new NBTTagCompound();
+							anvilItemStacks[INPUT1_SLOT].setTagCompound(Tag);
 							if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemMiscToolHead)
 							{
-								craftingTag.setFloat("durabuff", recipe.getSkillTotal(lastWorker));
-								craftingTag.setFloat("damagebuff", recipe.getSkillTotal(lastWorker));
+								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillTotal(lastWorker));
+								AnvilManager.setDamageBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillTotal(lastWorker));
 
 							}
 							else if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemTFCArmor)
 							{
-								craftingTag.setFloat("durabuff", recipe.getSkillTotal(lastWorker));
+								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillTotal(lastWorker));
 							}
-							Tag.setTag("craftingTag", craftingTag);
-							anvilItemStacks[INPUT1_SLOT].setTagCompound(Tag);
-							increaseSkills(recipe);
 
-							/*float pct = (offset*5);
-							if(anvilItemStacks[INPUT1_SLOT].getItem().getMaxDamage() > 0 && !anvilItemStacks[INPUT1_SLOT].getItem().getHasSubtypes())
-								anvilItemStacks[INPUT1_SLOT].setItemDamage((int)(pct));*/
+							increaseSkills(recipe);
 							removeRules(INPUT1_SLOT);
 						}
-						anvilItemStacks[INPUT2_SLOT] = null;
+						if(anvilItemStacks[INPUT2_SLOT] != null)
+							anvilItemStacks[INPUT2_SLOT].stackSize--;
 
 					}
 					workRecipe = null;

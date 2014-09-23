@@ -92,6 +92,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 			this.mc.displayGuiScreen(new GuiInventoryTFC(this.mc.thePlayer));
 	}
 
+	@Override
 	protected void handleMouseClick(Slot par1Slot, int par2, int par3, int par4)
 	{
 		this.field_74234_w = true;
@@ -261,6 +262,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 	/**
 	 * Adds the buttons (and other controls) to the screen in question.
 	 */
+	@Override
 	public void initGui()
 	{
 		if (this.mc.playerController.isInCreativeMode())
@@ -295,6 +297,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 	/**
 	 * Called when the screen is unloaded. Used to disable keyboard repeat events
 	 */
+	@Override
 	public void onGuiClosed()
 	{
 		super.onGuiClosed();
@@ -308,6 +311,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 	/**
 	 * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
 	 */
+	@Override
 	protected void keyTyped(char par1, int par2)
 	{
 		if (!CreativeTabs.creativeTabArray[selectedTabIndex].hasSearchBar())
@@ -355,7 +359,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 			if (item != null && item.getCreativeTab() != null)
 				item.getSubItems(item, (CreativeTabs)null, containercreative.itemList);
 		}
-		
+
 		Enchantment[] aenchantment = Enchantment.enchantmentsList;
 		int i = aenchantment.length;
 		for (int j = 0; j < i; ++j)
@@ -402,6 +406,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 	/**
 	 * Draw the foreground layer for the GuiContainer (everything in front of the items)
 	 */
+	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		CreativeTabs creativetabs = CreativeTabs.creativeTabArray[selectedTabIndex];
@@ -412,6 +417,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 	/**
 	 * Called when the mouse is clicked.
 	 */
+	@Override
 	protected void mouseClicked(int par1, int par2, int par3)
 	{
 		if (par3 == 0)
@@ -435,6 +441,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 	 * Called when the mouse is moved or a mouse button is released.  Signature: (mouseX, mouseY, which) which==-1 is
 	 * mouseMove, which==0 or which==1 is mouseUp
 	 */
+	@Override
 	protected void mouseMovedOrUp(int par1, int par2, int par3)
 	{
 		if (par3 == 0)
@@ -563,6 +570,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 	/**
 	 * Handles mouse input.
 	 */
+	@Override
 	public void handleMouseInput()
 	{
 		super.handleMouseInput();
@@ -592,6 +600,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 	/**
 	 * Draws the screen and all the components in it.
 	 */
+	@Override
 	public void drawScreen(int par1, int par2, float par3)
 	{
 		boolean flag = Mouse.isButtonDown(0);
@@ -718,6 +727,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 	/**
 	 * Draw the background layer for the GuiContainer (everything behind the items)
 	 */
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -730,7 +740,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 		int start = tabPage * 10;
 		k = Math.min(acreativetabs.length, ((tabPage + 1) * 10 + 2));
 		if (tabPage != 0) start += 2;
-
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		for (l = start; l < k; ++l)
 		{
 			CreativeTabs creativetabs1 = acreativetabs[l];
@@ -752,7 +762,6 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 				renderCreativeTab(CreativeTabs.tabInventory);
 			}
 		}
-
 		this.mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/creative_inventory/tab_" + creativetabs.getBackgroundImageName()));
 		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 		this.searchField.drawTextBox();
@@ -867,6 +876,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glColor3f(1F, 1F, 1F); //Forge: Reset color in case Items change it.
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		this.drawTexturedModalRect(l, i1, j, k, 28, b0);
 		this.zLevel = 100.0F;
 		itemRender.zLevel = 100.0F;
@@ -885,6 +895,7 @@ public class GuiContainerCreativeTFC extends InventoryEffectRenderer
 	/**
 	 * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
 	 */
+	@Override
 	protected void actionPerformed(GuiButton par1GuiButton)
 	{
 		if (par1GuiButton.id == 0)

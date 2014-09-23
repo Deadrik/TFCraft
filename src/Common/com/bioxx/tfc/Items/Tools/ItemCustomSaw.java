@@ -13,8 +13,6 @@ import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISize;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 
 public class ItemCustomSaw extends ItemCustomAxe implements ISize
 {
@@ -59,13 +57,6 @@ public class ItemCustomSaw extends ItemCustomAxe implements ISize
 		return EnumWeight.MEDIUM;
 	}
 
-	@Override
-	public Multimap getItemAttributeModifiers()
-	{
-		Multimap multimap = HashMultimap.create();
-		return multimap;
-	}
-	
 	@Override
 	public EnumItemReach getReach(ItemStack is){
 		return EnumItemReach.SHORT;

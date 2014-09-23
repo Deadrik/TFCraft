@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.TileEntities.TEAnvil;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -78,13 +79,24 @@ public class ItemHammer extends ItemTerraTool implements ICausesDamage
 	}
 
 	@Override
-	public Multimap getItemAttributeModifiers()
+	public Multimap getAttributeModifiers(ItemStack is)
 	{
 		Multimap multimap = HashMultimap.create();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", getWeaponDamage(is), 0));
 		return multimap;
 	}
-	
+
+	public double getWeaponDamage(ItemStack is)
+	{
+		return Math.floor(damageVsEntity + (damageVsEntity * (AnvilManager.getDamageBuff(is) / 200f)));
+	}
+
+	@Override
+	public int getMaxDamage(ItemStack is)
+	{
+		return (int) Math.floor(getMaxDamage() + (getMaxDamage() * (AnvilManager.getDurabilityBuff(is) / 300f)));
+	}
+
 	@Override
 	public EnumItemReach getReach(ItemStack is)
 	{

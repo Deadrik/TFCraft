@@ -22,6 +22,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Armor;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -180,13 +181,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize, IClothing
 	@Override
 	public int getMaxDamage(ItemStack stack)
 	{
-		if(stack.hasTagCompound())
-		{
-			NBTTagCompound nbt = stack.getTagCompound();
-			if(nbt.hasKey("armorDuraBuff"))
-				return super.getMaxDamage(stack) + nbt.getShort("armorDuraBuff");
-		}
-		return super.getMaxDamage(stack);
+		return (int) (super.getMaxDamage(stack)+(super.getMaxDamage(stack) * (AnvilManager.getDurabilityBuff(stack) / 300f)));
 	}
 
 	@Override

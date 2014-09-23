@@ -17,12 +17,12 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.ISize;
-import com.google.common.collect.Multimap;
 
 public class ItemTerraTool extends ItemTool implements ISize
 {
@@ -108,26 +108,9 @@ public class ItemTerraTool extends ItemTool implements ISize
 	}
 
 	@Override
-	public Multimap getItemAttributeModifiers()
-	{
-		//		Multimap multimap = HashMultimap.create();
-		//		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
-		//		return multimap;
-		return super.getItemAttributeModifiers();
-	}
-
-	@Override
 	public int getMaxDamage(ItemStack stack)
 	{
-		NBTTagCompound nbt = stack.getTagCompound();
-		if(nbt != null)
-		{
-			float buff = 0;
-			if(nbt.hasKey("craftingTag") && nbt.getCompoundTag("craftingTag").hasKey("durabuff"))
-				buff = nbt.getCompoundTag("craftingTag").getFloat("durabuff");
-			return (int) (getMaxDamage()+(getMaxDamage() * (buff / 100f)));
-		}
-		else return super.getMaxDamage(stack);
+		return (int) (getMaxDamage()+(getMaxDamage() * (AnvilManager.getDurabilityBuff(stack) / 300f)));
 	}
 
 	@Override

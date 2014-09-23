@@ -21,6 +21,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -148,17 +149,9 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 		return damageType;
 	}
 
-	public float getWeaponDamage(ItemStack is)
+	public double getWeaponDamage(ItemStack is)
 	{
-		NBTTagCompound nbt = is.getTagCompound();
-		if(nbt != null)
-		{
-			float buff = 0;
-			if(nbt.hasKey("craftingTag"))
-				buff = nbt.getCompoundTag("craftingTag").getFloat("damagebuff");
-			return (int) (weaponBaseDamage + (weaponBaseDamage * (buff / 200f)));
-		}
-		else return weaponBaseDamage;
+		return Math.floor(weaponBaseDamage + (weaponBaseDamage * (AnvilManager.getDamageBuff(is) / 200f)));
 	}
 
 	@Override
@@ -170,17 +163,9 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	}
 
 	@Override
-	public int getMaxDamage(ItemStack stack)
+	public int getMaxDamage(ItemStack is)
 	{
-		NBTTagCompound nbt = stack.getTagCompound();
-		if(nbt != null)
-		{
-			float buff = 0;
-			if(nbt.hasKey("craftingTag") && nbt.getCompoundTag("craftingTag").hasKey("durabuff"))
-				buff = nbt.getCompoundTag("craftingTag").getFloat("durabuff");
-			return (int) (getMaxDamage() + (getMaxDamage() * (buff / 300f)));
-		}
-		else return super.getMaxDamage(stack);
+		return (int) Math.floor(getMaxDamage() + (getMaxDamage() * (AnvilManager.getDurabilityBuff(is) / 300f)));
 	}
 
 	@Override
