@@ -32,11 +32,12 @@ public class FoodItemRenderer implements IItemRenderer
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack is, Object... data) 
 	{
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glEnable(GL11.GL_BLEND);
-		renderIcon(0, 0, is.getItem().getIconIndex(is), 16, 16);
 		if(is.getItem() instanceof IFood && is.hasTagCompound())
 		{
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GL11.glEnable(GL11.GL_BLEND);
+			renderIcon(0, 0, is.getItem().getIconIndex(is), 16, 16);
+
 			float decayPerc = Math.max(((IFood)is.getItem()).getFoodDecay(is) / ((IFood)is.getItem()).getFoodWeight(is), 0);
 			float cookPerc = Math.max(Math.min(Food.getCooked(is)/600f, 1), 0);
 			if(is.getItem() instanceof ItemFoodTFC)
@@ -72,9 +73,10 @@ public class FoodItemRenderer implements IItemRenderer
 					renderQuad(1, 14, weightTop, 1, 0xffffff);
 				}
 			}
+			GL11.glDisable(GL11.GL_BLEND);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		}
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+
 	}
 
 	public static void renderIcon(int x, int y, IIcon icon, int sizeX, int sizeY)

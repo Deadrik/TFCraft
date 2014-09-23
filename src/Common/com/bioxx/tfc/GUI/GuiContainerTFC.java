@@ -93,7 +93,7 @@ public class GuiContainerTFC extends GuiContainer
 		this.drawHoveringText(list, mx, my+15, this.fontRendererObj);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		//GL11.glDisable(GL11.GL_DEPTH_TEST);
 	}
 
 	protected void drawHoveringTextZLevel(List par1List, int par2, int par3, FontRenderer font, float z)
@@ -103,7 +103,7 @@ public class GuiContainerTFC extends GuiContainer
 			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 			RenderHelper.disableStandardItemLighting();
 			GL11.glDisable(GL11.GL_LIGHTING);
-			GL11.glDisable(GL11.GL_DEPTH_TEST);
+			//GL11.glDisable(GL11.GL_DEPTH_TEST);
 			int k = 0;
 			Iterator iterator = par1List.iterator();
 
@@ -156,7 +156,6 @@ public class GuiContainerTFC extends GuiContainer
 			this.zLevel = 0.0F;
 			itemRender.zLevel = 0.0F;
 			GL11.glEnable(GL11.GL_LIGHTING);
-			GL11.glEnable(GL11.GL_DEPTH_TEST);
 			RenderHelper.enableStandardItemLighting();
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		}
