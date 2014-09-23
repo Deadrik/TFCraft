@@ -1,25 +1,32 @@
 package com.bioxx.tfc.Blocks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.api.Constant.Global;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockSulfur extends BlockTerra
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.CollisionRayTraceStandard;
+import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Interfaces.ICustomCollision;
+
+public class BlockSulfur extends BlockTerra implements ICustomCollision
 {
 	int itemMeta = Arrays.asList(Global.POWDER).indexOf("Sulfur Powder");
 	IIcon[] icons = new IIcon[4];
@@ -79,6 +86,12 @@ public class BlockSulfur extends BlockTerra
 	}
 
 	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+
+	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, Block l)
 	{
 		int num = 0;
@@ -107,7 +120,7 @@ public class BlockSulfur extends BlockTerra
 		return 1 + random.nextInt(5);
 	}
 
-	@Override
+	/*@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i, int j, int k)
 	{
 		int num = 0;
@@ -144,6 +157,59 @@ public class BlockSulfur extends BlockTerra
 		if(num > 1)
 		{
 			setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		}
+	}*/
+
+	@Override
+	public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB aabb, List list, Entity entity)
+	{
+		ArrayList<Object[]> alist = new ArrayList<Object[]>();
+		addCollisionBoxesToList(world, i, j, k, alist);
+		for(Object[] obj : alist)
+		{
+			AxisAlignedBB plankAABB = (AxisAlignedBB)obj[0];
+			plankAABB.minX += i; plankAABB.maxX += i;
+			plankAABB.minY += j; plankAABB.maxY += j;
+			plankAABB.minZ += k; plankAABB.maxZ += k;
+			if (plankAABB != null && aabb.intersectsWith(plankAABB))
+			{
+				list.add(plankAABB);
+			}
+		}
+	}
+
+	@Override
+	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 player, Vec3 view)
+	{
+		return CollisionRayTraceStandard.collisionRayTrace(this, world, x, y, z, player, view);
+	}
+
+	@Override
+	public void addCollisionBoxesToList(World world, int x, int y, int z, List list) 
+	{
+		if(world.getBlock(x, y, z+1).isSideSolid(world, x, y, z, ForgeDirection.NORTH))
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.99F, 1.0F, 1.0F, 1.0F)});
+		}
+		if(world.getBlock(x, y, z-1).isSideSolid(world, x, y, z, ForgeDirection.SOUTH))
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.01F)});
+		}
+		if(world.getBlock(x+1, y, z).isSideSolid(world, x, y, z, ForgeDirection.EAST))
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.99F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F)});
+		}
+		if(world.getBlock(x-1, y, z).isSideSolid(world, x, y, z, ForgeDirection.WEST))
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0F, 0.01F, 1.0F, 1.0F)});
+		}
+		if(world.getBlock(x, y+1, z).isSideSolid(world, x, y, z, ForgeDirection.DOWN))
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.99F, 0.0F, 1.0F, 1.0F, 1.0F)});
+		}
+		if(world.getBlock(x, y-1, z).isSideSolid(world, x, y, z, ForgeDirection.UP))
+		{
+			list.add(new Object[]{AxisAlignedBB.getBoundingBox(0.0F, 0.0F, 0.0F, 1.0F, 0.01F, 1.0F)});
 		}
 	}
 }

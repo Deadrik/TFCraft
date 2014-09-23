@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -149,38 +150,38 @@ public class TFC_CoreRender
 		return true;
 	}
 
-	public static boolean RenderSulfur(Block block, int i, int j, int k, RenderBlocks renderblocks)
+	public static boolean RenderSulfur(Block block, int x, int y, int z, RenderBlocks renderblocks)
 	{
-		IBlockAccess blockAccess = renderblocks.blockAccess;
-		if(blockAccess.getBlock(i, j, k+1).isNormalCube() && blockAccess.getBlock(i, j, k+1) != block)
+		IBlockAccess world = renderblocks.blockAccess;
+		if(world.getBlock(x, y, z+1).isSideSolid(world, x, y, z, ForgeDirection.NORTH))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.0F, 0.99F, 1.0F, 1.0F, 1.0F);
-			renderblocks.renderStandardBlock(block, i, j, k);
+			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(blockAccess.getBlock(i, j, k-1).isNormalCube() && blockAccess.getBlock(i, j, k-1) != block)
+		if(world.getBlock(x, y, z-1).isSideSolid(world, x, y, z, ForgeDirection.SOUTH))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.01F);
-			renderblocks.renderStandardBlock(block, i, j, k);
+			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(blockAccess.getBlock(i+1, j, k).isNormalCube() && blockAccess.getBlock(i+1, j, k) != block)
+		if(world.getBlock(x+1, y, z).isSideSolid(world, x, y, z, ForgeDirection.EAST))
 		{
 			renderblocks.setRenderBounds(0.99F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-			renderblocks.renderStandardBlock(block, i, j, k);
+			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(blockAccess.getBlock(i-1, j, k).isNormalCube() && blockAccess.getBlock(i-1, j, k) != block)
+		if(world.getBlock(x-1, y, z).isSideSolid(world, x, y, z, ForgeDirection.WEST))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 0.01F, 1.0F, 1.0F);
-			renderblocks.renderStandardBlock(block, i, j, k);
+			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(blockAccess.getBlock(i, j+1, k).isNormalCube() && blockAccess.getBlock(i, j+1, k) != block)
+		if(world.getBlock(x, y+1, z).isSideSolid(world, x, y, z, ForgeDirection.DOWN))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.99F, 0.0F, 1.0F, 1.0F, 1.0F);
-			renderblocks.renderStandardBlock(block, i, j, k);
+			renderblocks.renderStandardBlock(block, x, y, z);
 		}
-		if(blockAccess.getBlock(i, j-1, k).isNormalCube() && blockAccess.getBlock(i, j-1, k) != block)
+		if(world.getBlock(x, y-1, z).isSideSolid(world, x, y, z, ForgeDirection.UP))
 		{
 			renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.01F, 1.0F);
-			renderblocks.renderStandardBlock(block, i, j, k);
+			renderblocks.renderStandardBlock(block, x, y, z);
 		}
 
 		return true;

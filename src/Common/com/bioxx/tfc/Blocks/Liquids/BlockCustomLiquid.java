@@ -96,7 +96,7 @@ public class BlockCustomLiquid extends BlockFluidClassic
 									world.isSideSolid(i-1, j, k, ForgeDirection.EAST) || world.isSideSolid(i+1, j, k, ForgeDirection.WEST) ||
 									world.isSideSolid(i, j, k+1, ForgeDirection.NORTH) || world.isSideSolid(i, j, k-1, ForgeDirection.SOUTH)))
 					{
-						world.setBlock(i, j, k, TFCBlocks.Sulfur);
+						world.setBlock(i, j, k, TFCBlocks.Sulfur, world.rand.nextInt(4), 3);
 					}
 				}
 			}
