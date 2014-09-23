@@ -33,16 +33,14 @@ public class GuiPlanButton extends GuiButton
 
 			TFC_Core.bindTexture(GuiPlanSelection.texture);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.zLevel = 300f;
-			this.drawTexturedModalRect(this.xPosition, this.yPosition, 176, 0 + k*18, 18, 18);
-			this.field_146123_n = x >= this.xPosition && y >= this.yPosition && x < this.xPosition + this.width && y < this.yPosition + this.height;
+			this.drawTexturedModalRect(this.xPosition, this.yPosition, 176, k*18, 18, 18);
+			this.field_146123_n = isPointInRegion(x, y);//x >= this.xPosition && y >= this.yPosition && x < this.xPosition + this.width && y < this.yPosition + this.height;
 
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			if(item != null) 
 			{
 				renderInventorySlot(item, this.xPosition+1, this.yPosition+1);
 			}
-			this.zLevel = 0;
+
 			this.mouseDragged(mc, x, y);
 
 			if(field_146123_n)
@@ -54,11 +52,13 @@ public class GuiPlanButton extends GuiButton
 		}
 	}
 
-	protected void renderInventorySlot(ItemStack par1, int par2, int par3)
+	protected void renderInventorySlot(ItemStack is, int x, int y)
 	{
-		if (par1 != null)
+		if (is != null)
 		{
-			itemRenderer.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), par1, par2, par3);
+			itemRenderer.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), is, x, y);
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glEnable(GL11.GL_ALPHA_TEST);
 		}
 	}
 
