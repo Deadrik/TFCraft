@@ -246,33 +246,36 @@ public class BlockBerryBush extends BlockTerraContainer
 				return;
 			}
 
-			TEBerryBush te = (TEBerryBush) world.getTileEntity(x, y, z);
-			if(te != null)
+			TileEntity te = world.getTileEntity(x, y, z);
+			TEBerryBush tebb = null;
+			if(te != null && te instanceof TEBerryBush)
+				tebb = (TEBerryBush) world.getTileEntity(x, y, z);
+			if(tebb != null)
 			{
 				FloraIndex _fi = FloraManager.getInstance().findMatchingIndex(getType(world.getBlockMetadata(x, y, z)));
 				float _temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
 
 				if(_temp >= _fi.minTemp && _temp < _fi.maxTemp)
 				{
-					if(_fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) && !te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayHarvested) > 0)
+					if(_fi.inHarvest(TFC_Time.getSeasonAdjustedMonth(z)) && !tebb.hasFruit && TFC_Time.getMonthsSinceDay(tebb.dayHarvested) > 0)
 					{
-						te.hasFruit = true;
-						te.dayFruited = (int) TFC_Time.getTotalDays();
+						tebb.hasFruit = true;
+						tebb.dayFruited = (int) TFC_Time.getTotalDays();
 						world.markBlockForUpdate(x, y, z);
 					}
 				}
 				else if(_temp < _fi.minTemp - 5 && _temp > _fi.maxTemp + 5)
 				{
-					if(te.hasFruit)
+					if(tebb.hasFruit)
 					{
-						te.hasFruit = false;
+						tebb.hasFruit = false;
 						world.markBlockForUpdate(x, y, z);
 					}
 				}
 
-				if(te.hasFruit && TFC_Time.getMonthsSinceDay(te.dayFruited) > _fi.fruitHangTime)
+				if(tebb.hasFruit && TFC_Time.getMonthsSinceDay(tebb.dayFruited) > _fi.fruitHangTime)
 				{
-					te.hasFruit = false;
+					tebb.hasFruit = false;
 					world.markBlockForUpdate(x, y, z);
 				}
 			}
