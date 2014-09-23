@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class AnvilManager
 {
@@ -112,5 +113,48 @@ public class AnvilManager
 	public Map getPlans()
 	{
 		return plans;
+	}
+
+	public static NBTTagCompound getCraftTag(ItemStack is)
+	{
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("craftingTag"))
+		{
+			return (NBTTagCompound) is.getTagCompound().getTag("craftingTag");
+		}
+		else
+			return new NBTTagCompound();
+	}
+
+	public static void setCraftTag(ItemStack is, NBTTagCompound nbt)
+	{
+		if(!is.hasTagCompound())
+			is.setTagCompound(new NBTTagCompound());
+		is.getTagCompound().setTag("craftingTag", nbt);
+	}
+
+	public static float getDurabilityBuff(ItemStack is)
+	{
+		NBTTagCompound nbt = getCraftTag(is);
+		return nbt.getFloat("durabuff");
+	}
+
+	public static void setDurabilityBuff(ItemStack is, float value)
+	{
+		NBTTagCompound nbt = getCraftTag(is);
+		nbt.setFloat("durabuff", value);
+		setCraftTag(is, nbt);
+	}
+
+	public static float getDamageBuff(ItemStack is)
+	{
+		NBTTagCompound nbt = getCraftTag(is);
+		return nbt.getFloat("damagebuff");
+	}
+
+	public static void setDamageBuff(ItemStack is, float value)
+	{
+		NBTTagCompound nbt = getCraftTag(is);
+		nbt.setFloat("damagebuff", value);
+		setCraftTag(is, nbt);
 	}
 }

@@ -20,6 +20,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.Constant.Global;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -77,8 +78,8 @@ public class ItemProPick extends ItemTerra
 
 		// If an ore block is targeted directly, it'll tell you what it is.
 		if (block == TFCBlocks.Ore ||
-			block == TFCBlocks.Ore2 ||
-			block == TFCBlocks.Ore3)
+				block == TFCBlocks.Ore2 ||
+				block == TFCBlocks.Ore3)
 		{
 			if (block == TFCBlocks.Ore2) meta = meta + Global.ORE_METAL.length;
 			if (block == TFCBlocks.Ore3) meta = meta + Global.ORE_METAL.length + Global.ORE_MINERAL.length;
@@ -196,10 +197,16 @@ public class ItemProPick extends ItemTerra
 			Count = count;
 		}
 	}
-	
+
 	@Override
 	public EnumItemReach getReach(ItemStack is)
 	{
 		return EnumItemReach.SHORT;
+	}
+
+	@Override
+	public int getMaxDamage(ItemStack stack)
+	{
+		return (int) (getMaxDamage()+(getMaxDamage() * (AnvilManager.getDurabilityBuff(stack) / 300f)));
 	}
 }

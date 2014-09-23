@@ -18,6 +18,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Crafting.AnvilManager;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
@@ -30,7 +31,7 @@ import com.google.common.collect.Multimap;
 public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 {
 	private float toolDamage;
-	
+
 	public ItemCustomAxe(ToolMaterial e, float damage)
 	{
 		super(e);
@@ -102,11 +103,22 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	}
 
 	@Override
-	public Multimap getItemAttributeModifiers()
+	public Multimap getAttributeModifiers(ItemStack is)
 	{
 		Multimap multimap = HashMultimap.create();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", this.toolDamage, 0));
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", getWeaponDamage(is), 0));
 		return multimap;
+	}
+
+	public double getWeaponDamage(ItemStack is)
+	{
+		return Math.floor(toolDamage + (toolDamage * (AnvilManager.getDamageBuff(is) / 200f)));
+	}
+
+	@Override
+	public int getMaxDamage(ItemStack is)
+	{
+		return (int) Math.floor(getMaxDamage() + (getMaxDamage() * (AnvilManager.getDurabilityBuff(is) / 300f)));
 	}
 
 	@Override
