@@ -399,7 +399,7 @@ public class FoodStatsTFC
 			else
 			{
 				is.getTagCompound().setFloat("foodWeight", Helper.roundNumber(weight - amount, 10));
-				is.getTagCompound().setFloat("foodDecay", Helper.roundNumber(decay - amount, 10));
+				//is.getTagCompound().setFloat("foodDecay", Helper.roundNumber(decay - amount, 10));
 			}
 		}
 		return false;

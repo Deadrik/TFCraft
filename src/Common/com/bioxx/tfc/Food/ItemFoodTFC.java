@@ -81,7 +81,6 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 		tasteBitter = bi;
 		tasteUmami = um;
 		foodID = FoodRegistry.getInstance().registerFood(fg, this);
-		MinecraftForgeClient.registerItemRenderer(this, new FoodItemRenderer());
 	}
 
 	public ItemFoodTFC(EnumFoodGroup fg, int sw, int so, int sa, int bi, int um, boolean edible)
@@ -123,6 +122,7 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 			String name = this.getUnlocalizedName();
 			this.cookedIcon = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + name.replace("item.", "")+" Cooked");
 		}
+		MinecraftForgeClient.registerItemRenderer(this, new FoodItemRenderer());
 	}
 
 	@Override
