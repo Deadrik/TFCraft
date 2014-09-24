@@ -27,7 +27,7 @@ public class TreeRegistry
 	public void RegisterTree(ISchematic treeSchematic, String name, boolean large)
 	{
 		int index = checkValidity(name);
-		
+
 		if(index < 0)
 		{
 			System.out.println("[TFC] Registering Tree Type \"" + name + "\" Failed! There are no trees with that name in TFC.");
@@ -38,20 +38,20 @@ public class TreeRegistry
 			{
 				if(treeListLarge.size() < treeTypeHash.size())
 					treeListLarge.setSize(treeTypeHash.size());
-	
+
 				if(treeListLarge.get(index) == null)
 					treeListLarge.set(index, new Vector<ISchematic>());
-		
+
 				treeListLarge.get(index).add(treeSchematic);
 			}
 			else
 			{
 				if(treeList.size() < treeTypeHash.size())
 					treeList.setSize(treeTypeHash.size());
-	
+
 				if(treeList.get(index) == null)
 					treeList.set(index, new Vector<ISchematic>());
-		
+
 				treeList.get(index).add(treeSchematic);
 			}
 		}
@@ -103,7 +103,7 @@ public class TreeRegistry
 		Vector v;
 		if(large) v = treeListLarge.get(t);
 		else v = treeList.get(t);
-		
+
 		if(v != null) return (TreeSchematic) v.get(new Random().nextInt(v.size()));
 		return null;
 	}
@@ -139,23 +139,23 @@ public class TreeRegistry
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 300F, 1600F, -5F, 18F, 0.25F, 1F, false));i++; //Aspen
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 200F, 500F, -10F, 12F, 0F, 1F, false));i++; //Birch
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 250F, 16000F, 3F, 24F, 0F, 1F, false));i++; //Chestnut
-		
+
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 750F, 16000F, 1F, 14F, 0F, 1F, true));i++; //Douglas Fir
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 250F, 16000F, 4F, 24F, 0F, 1F, false));i++; //Hickory
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 250F, 16000F, 3F, 20F, 0F, 1F, false));i++; //Maple
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 250F, 16000F, 4F, 24F, 0.5F, 2F, false));i++; //Ash
-		
+
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 250F, 16000F, -15F, 24F, 0.5F, 2F, true));i++; //Pine
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 4000F, 16000F, 10F, 16F, 0F, 0.5F, true));i++; //Sequoia (Redwood) | Why 2 names??
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 250F, 16000F, -5F, 24F, 0F, 1F, true));i++; //Spruce
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 400F, 16000F, 6F, 30F, 0F, 1F, false));i++; //Sycamore
-		
+
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 250F, 16000F, -5F, 24F, 0F, 2F, true));i++; //White Ceder
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 400F, 16000F, 4F, 30F, 0F, 1F, false));i++; //White Elm
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 4000F, 16000F, 10F, 30F, 0F, 0.5F, false));i++; //Willow
 		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 4000F, 16000F, 24F, 44F, 0F, 1F, false));i++; //Kapok
-		
-		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 75F, 1000F, 20F, 50F, 0F, 1F, false));i++; //Acacia (Utacacia) | Why 2 names??
+
+		addWoodType(new TreeConfiguration(Global.WOOD_ALL[i], i, 75F, 1000F, 20F, 50F, 0F, 1F, false));i++; //Acacia (Utacacia) | Why 2 names?? | Utacacia are the types you see in savannah, Acacia are large jungle trees
 	}
 
 	public void addWoodType(TreeConfiguration configuration)
