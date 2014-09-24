@@ -67,18 +67,21 @@ public class ContainerPlayerTFC extends ContainerPlayer
 	}
 
 	@Override
-	public void onContainerClosed(EntityPlayer par1EntityPlayer)
+	public void onContainerClosed(EntityPlayer player)
 	{
-		super.onContainerClosed(par1EntityPlayer);
-
-		for (int i = 0; i < 9; ++i)
+		if(!player.worldObj.isRemote)
 		{
-			ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
-			if (itemstack != null)
-				par1EntityPlayer.dropPlayerItemWithRandomChoice(itemstack, false);
-		}
+			super.onContainerClosed(player);
 
-		this.craftResult.setInventorySlotContents(0, (ItemStack)null);
+			for (int i = 0; i < 9; ++i)
+			{
+				ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
+				if (itemstack != null)
+					player.dropPlayerItemWithRandomChoice(itemstack, false);
+			}
+
+			this.craftResult.setInventorySlotContents(0, (ItemStack)null);
+		}
 	}
 
 	@Override
