@@ -54,9 +54,14 @@ public abstract class NetworkTileEntity extends TileEntity
 	@Override
 	public Packet getDescriptionPacket()
 	{
-		if(shouldSendInitData)
+		if(shouldSendInitData())
 			return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, createInitNBT());
 		return null;
+	}
+
+	protected boolean shouldSendInitData()
+	{
+		return shouldSendInitData;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.bioxx.tfc.WorldGen.Generators;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -10,11 +11,15 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TreeRegistry;
 import com.bioxx.tfc.Core.TreeSchematic;
+import com.bioxx.tfc.TileEntities.TETreeLog;
 
 public class WorldGenTrees extends WorldGenerator
 {
 	private int meta;
 	private boolean large;
+	private int baseX = 0;
+	private int baseY = 0;
+	private int baseZ = 0;
 
 	public WorldGenTrees(Boolean flag, int m, boolean l)
 	{
@@ -56,9 +61,11 @@ public class WorldGenTrees extends WorldGenerator
 		return false;
 	}
 
-	private static boolean genTree(TreeSchematic schem, int meta, World world, int i, int j, int k)
+	private boolean genTree(TreeSchematic schem, int meta, World world, int i, int j, int k)
 	{
 		if(schem == null) return false;
+
+		boolean doneBase = false;
 
 		byte rot = (byte)world.rand.nextInt(4);
 		for(int y = 0; y < schem.getSizeY(); y++)
@@ -67,10 +74,13 @@ public class WorldGenTrees extends WorldGenerator
 			{
 				for(int x = 0; x < schem.getSizeX(); x++)
 				{
-					if(y == 0)
-						Process(world, i, j, k, meta, schem, y, z, x, rot, true);
+					if(y == 0 && !doneBase)
+					{
+						if(Process(world, i, j, k, meta, schem, x, y, z, rot, true))
+							doneBase = true;
+					}
 					else
-						Process(world, i, j, k, meta, schem, y, z, x, rot, false);
+						Process(world, i, j, k, meta, schem, x, y, z, rot, false);
 				}
 			}
 		}
@@ -78,29 +88,29 @@ public class WorldGenTrees extends WorldGenerator
 		return true;
 	}
 
-	private static void Process(World world, int i, int j, int k, int meta, TreeSchematic schem, int y, int z, int x, int rot, boolean doTrunk)
+	private boolean Process(World world, int treeX, int treeY, int treeZ, int meta, TreeSchematic schem, int schemX, int schemY, int schemZ, int rot, boolean doBase)
 	{
-		int localX = i - schem.getCenterX() - x + schem.getSizeX();
-		int localZ = k - schem.getCenterZ() - z + schem.getSizeZ();
-		int localY = j + y;
+		int localX = treeX - schem.getCenterX() - schemX + schem.getSizeX();
+		int localZ = treeZ - schem.getCenterZ() - schemZ + schem.getSizeZ();
+		int localY = treeY + schemY;
 
 		if(rot == 0)
 		{
-			localX = i - schem.getCenterX() + x;
-			localZ = k - schem.getCenterZ() + z;
+			localX = treeX - schem.getCenterX() + schemX;
+			localZ = treeZ - schem.getCenterZ() + schemZ;
 		}
 		else if(rot == 1)
 		{
-			localX = i - schem.getCenterX() + x;
-			localZ = k - schem.getCenterZ() - z + schem.getSizeZ();
+			localX = treeX - schem.getCenterX() + schemX;
+			localZ = treeZ - schem.getCenterZ() - schemZ + schem.getSizeZ();
 		}
 		else if(rot == 2)
 		{
-			localX = i - schem.getCenterX() - x + schem.getSizeX();
-			localZ = k - schem.getCenterZ() + z;
+			localX = treeX - schem.getCenterX() - schemX + schem.getSizeX();
+			localZ = treeZ - schem.getCenterZ() + schemZ;
 		}
 
-		int index = x + schem.getSizeX() * (z + schem.getSizeZ() * y);
+		int index = schemX + schem.getSizeX() * (schemZ + schem.getSizeZ() * schemY);
 		int id = schem.getBlockArray()[index];
 
 		Block block = TFCBlocks.LogNatural;
@@ -114,24 +124,39 @@ public class WorldGenTrees extends WorldGenerator
 
 		if(id != 0)
 		{
-			if(doTrunk)
+			if(doBase)
 			{
-				if(Block.getBlockById(id).isWood(world, i, j, k))
+				if(Block.getBlockById(id).getMaterial() == Material.wood)
+				{
 					world.setBlock(localX, localY, localZ, block, meta, 0x2);
+					TETreeLog te = (TETreeLog) world.getTileEntity(localX, localY, localZ);
+					te.schemID = (byte) schem.getIndex();
+					te.treeID = (byte) meta;
+					te.rotation = (byte) rot;
+					this.baseX = localX;
+					this.baseY = localY;
+					this.baseZ = localZ;
+					te.Setup(baseX, baseY, baseZ);
+					return true;
+				}
 			}
 			else
 			{
-				if(Block.getBlockById(id).isWood(world, i, j, k))
+				if(Block.getBlockById(id).getMaterial() == Material.wood)
 				{
 					world.setBlock(localX, localY, localZ, block, meta, 0x2);
+					TETreeLog te = (TETreeLog) world.getTileEntity(localX, localY, localZ);
+					te.Setup(baseX, baseY, baseZ);
 				}
 				else
 				{
 					if(world.getBlock(localX, localY, localZ).canBeReplacedByLeaves(world, localX, localY, localZ))
 						world.setBlock(localX, localY, localZ, leaves, meta, 0x2);
 				}
+				return true;
 			}
 		}
+		return false;
 	}
 
 	private boolean canGrow(Block block)
@@ -146,17 +171,17 @@ public class WorldGenTrees extends WorldGenerator
 		boolean ret = true;
 
 		outerloop:
-		for(int i = -1; i <= 1; i++)
-		{
-			for(int k = -1; k <= 1; k++)
+			for(int i = -1; i <= 1; i++)
 			{
-				if(!canGrow(world.getBlock(x + i, y, z + k)))
+				for(int k = -1; k <= 1; k++)
 				{
-					ret = false;
-					break outerloop;
+					if(!canGrow(world.getBlock(x + i, y, z + k)))
+					{
+						ret = false;
+						break outerloop;
+					}
 				}
 			}
-		}
 
 		return ret;
 	}
@@ -166,17 +191,17 @@ public class WorldGenTrees extends WorldGenerator
 		boolean ret = true;
 
 		outerloop:
-		for(int i = -2; i <= 2; i++)
-		{
-			for(int k = -2; k <= 2; k++)
+			for(int i = -2; i <= 2; i++)
 			{
-				if(!canGrow(world.getBlock(x + i, y, z + k)))
+				for(int k = -2; k <= 2; k++)
 				{
-					ret = false;
-					break outerloop;
+					if(!canGrow(world.getBlock(x + i, y, z + k)))
+					{
+						ret = false;
+						break outerloop;
+					}
 				}
 			}
-		}
 
 		return ret;
 	}

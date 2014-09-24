@@ -12,21 +12,26 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Blocks.BlockTerra;
+import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.Recipes;
+import com.bioxx.tfc.Core.TreeRegistry;
+import com.bioxx.tfc.Core.TreeSchematic;
+import com.bioxx.tfc.TileEntities.TETreeLog;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockLogNatural extends BlockTerra
+public class BlockLogNatural extends BlockTerraContainer
 {
 	String[] woodNames;
 	int searchDist = 10;
@@ -65,6 +70,12 @@ public class BlockLogNatural extends BlockTerra
 					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
 			}
 		}
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1, int var2)
+	{
+		return new TETreeLog();
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -155,7 +166,7 @@ public class BlockLogNatural extends BlockTerra
 			if(isAxeorSaw)
 			{
 				damage = -1;
-				ProcessTree(world, x, y, z, meta, equip);
+				//ProcessTree(world, x, y, z, equip);
 
 				if(damage + equip.getItemDamage() > equip.getMaxDamage())
 				{
@@ -203,8 +214,81 @@ public class BlockLogNatural extends BlockTerra
 
 	private void ProcessTree(World world, int x, int y, int z, ItemStack is)
 	{
-		//TODO Rewrite the treecap algorithm using a list of coords instead of the ugly array. Shoudl also use a maxmium list size to prevent 
-		//any memory issues and should take shortcuts to find the top of the tree and search down
+
+	}
+
+	@Override
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest)
+	{
+		/*if(!willHarvest)
+			return false;*/
+
+		if(!world.isRemote)
+		{
+			TETreeLog te = ((TETreeLog) world.getTileEntity(x, y, z)).getBaseTE();
+			TreeSchematic schem = TreeRegistry.instance.getTreeSchematic(te.treeID, false);
+
+			for(int schemY = 0; schemY < schem.getSizeY(); schemY++)
+			{
+				for(int schemZ = 0; schemZ < schem.getSizeZ(); schemZ++)
+				{
+					for(int schemX = 0; schemX < schem.getSizeX(); schemX++)
+					{						
+						int index = schemX + schem.getSizeX() * (schemZ + schem.getSizeZ() * schemY);
+						int id = schem.getBlockArray()[index];
+
+						if(id != 0)
+						{
+							ProcessRot(world, x, y, z, schemX, schemY, schemZ, schem, id, te);
+						}
+					}
+				}
+			}
+		}
+		world.setBlock(x, y, z, Blocks.air);
+		return true;
+	}
+
+	private static void ProcessRot(World world, int treeX, int treeY, int treeZ, int x, int y, int z, TreeSchematic schem, int id, TETreeLog te) 
+	{
+		//Get the actual world coordinates from the offsets
+		int localX = treeX - schem.getCenterX() - x + schem.getSizeX();
+		int localZ = treeZ - schem.getCenterZ() - z + schem.getSizeZ();
+		int localY = treeY + y;
+
+		if(te.rotation == 0)
+		{
+			localX = treeX - schem.getCenterX() + x;
+			localZ = treeZ - schem.getCenterZ() + z;
+		}
+		else if(te.rotation == 1)
+		{
+			localX = treeX - schem.getCenterX() + x;
+			localZ = treeZ - schem.getCenterZ() - z + schem.getSizeZ();
+		}
+		else if(te.rotation == 2)
+		{
+			localX = treeX - schem.getCenterX() - x + schem.getSizeX();
+			localZ = treeZ - schem.getCenterZ() + z;
+		}
+
+		//Get the block that occupies the local coordinate
+		Block localBlockID = world.getBlock(localX, localY, localZ);
+
+		if(localX == treeX && localY == treeY && localZ == treeZ)
+			System.out.println("Center Reached! localBlockID = " + localBlockID);
+		if(localBlockID == TFCBlocks.LogNatural || localBlockID == TFCBlocks.LogNatural2)
+		{
+			TETreeLog log = (TETreeLog) world.getTileEntity(localX, localY, localZ);
+			if(log != null && ((log.baseX == treeX && log.baseY == treeY && log.baseZ == treeZ)))
+			{
+				world.setBlock(localX, localY, localZ, Blocks.air, 0, 0x2);
+			}
+		}
+		else if(localBlockID == TFCBlocks.Leaves || localBlockID == TFCBlocks.Leaves2)
+		{
+			world.setBlock(localX, localY, localZ, Blocks.air, 0, 0x2);
+		}
 	}
 
 	@Deprecated

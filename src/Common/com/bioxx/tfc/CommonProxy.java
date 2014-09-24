@@ -68,6 +68,7 @@ import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.TileEntities.TESluice;
 import com.bioxx.tfc.TileEntities.TESmokeRack;
 import com.bioxx.tfc.TileEntities.TEStand;
+import com.bioxx.tfc.TileEntities.TETreeLog;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.TileEntities.TEWorldItem;
@@ -151,6 +152,7 @@ public class CommonProxy
 		GameRegistry.registerTileEntity(TEVessel.class, "Vessel");
 		GameRegistry.registerTileEntity(TELightEmitter.class, "LightEmitter");
 		GameRegistry.registerTileEntity(TESmokeRack.class, "Smoke Rack");
+		GameRegistry.registerTileEntity(TETreeLog.class, "TETreeLog");
 
 		if(b)
 		{
