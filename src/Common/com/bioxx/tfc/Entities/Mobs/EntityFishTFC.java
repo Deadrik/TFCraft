@@ -33,7 +33,6 @@ public class EntityFishTFC extends EntitySquid
 	private float prevDirection = 0;
 
 	private List<EntityPlayer> nearbyPlayers;
-	private List<EntityFishHookTFC> nearbyLures;
 
 	private boolean hooked = false;
 	private int energy = 200;
@@ -314,8 +313,8 @@ public class EntityFishTFC extends EntitySquid
 			else{
 				currentRenderPitch = 0;
 			}
-				currentRenderYaw = this.dataWatcher.getWatchableObjectFloat(27);
-				currentRenderRoll = this.dataWatcher.getWatchableObjectFloat(28);
+			currentRenderYaw = this.dataWatcher.getWatchableObjectFloat(27);
+			currentRenderRoll = this.dataWatcher.getWatchableObjectFloat(28);
 
 
 			motionX = this.dataWatcher.getWatchableObjectFloat(21);
@@ -374,61 +373,43 @@ public class EntityFishTFC extends EntitySquid
 		boolean needsNewLocation = (this.rand.nextInt(25)>3) || !(TFC_Core.isWater(this.worldObj.getBlock(destX, destY-1, destZ)));
 		int numAttempts = 0;
 		nearbyPlayers = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, this.boundingBox.expand(16, 8, 16));
-		nearbyLures = this.worldObj.getEntitiesWithinAABB(EntityFishHookTFC.class, this.boundingBox.expand(8, 8, 8));
-		ArrayList<EntityFishHookTFC> unavailableLures = new ArrayList<EntityFishHookTFC>();
-		for(EntityFishHookTFC fh : nearbyLures){
-			if(fh.ridingEntity!=null){
-				unavailableLures.add(fh);
-			}
-		}
-		nearbyLures.removeAll(unavailableLures);
 		boolean tooCloseToPlayer = false;
 		while(needsNewLocation && numAttempts < 255){
 			numAttempts++;
-			if(nearbyLures.size()>0 && !tooCloseToPlayer){
-				EntityFishHookTFC desiredLure = nearbyLures.get(this.rand.nextInt(nearbyLures.size()));
-				destX = (int)desiredLure.posX;
-				destY = (int)desiredLure.posY;
-				destZ = (int)desiredLure.posZ;
 
-				if(this.getDistanceToEntity(desiredLure)<1){
-					desiredLure.mountEntity(this);
+			for(EntityPlayer p : nearbyPlayers){
+				if(p.getDistance((double)destX, (double)destY, (double)destZ)<8){
+					tooCloseToPlayer = true;
 				}
+			}
+			int tempX = 0;
+			int tempY = 0;
+			int tempZ = 0;
+			for(EntityPlayer p : nearbyPlayers){
+				if(p.getDistance((double)destX, (double)destY, (double)destZ)<8){
+					tempX+= p.posX;
+					tempY+= p.posY;
+					tempZ+= p.posZ;
+				}
+			}
+			if(nearbyPlayers.size() >0){
+				tempX /= nearbyPlayers.size();
+				tempY /= nearbyPlayers.size();
+				tempZ /= nearbyPlayers.size();
+
+				destX = (int) (2*x - tempX);
+				destY = (int) (2*y - tempY);
+				destZ = (int) (2*z - tempZ);
 			}
 			else{
-				for(EntityPlayer p : nearbyPlayers){
-					if(p.getDistance((double)destX, (double)destY, (double)destZ)<8){
-						tooCloseToPlayer = true;
-					}
-				}
-				int tempX = 0;
-				int tempY = 0;
-				int tempZ = 0;
-				for(EntityPlayer p : nearbyPlayers){
-					if(p.getDistance((double)destX, (double)destY, (double)destZ)<8){
-						tempX+= p.posX;
-						tempY+= p.posY;
-						tempZ+= p.posZ;
-					}
-				}
-				if(nearbyPlayers.size() >0){
-					tempX /= nearbyPlayers.size();
-					tempY /= nearbyPlayers.size();
-					tempZ /= nearbyPlayers.size();
-
-					destX = (int) (2*x - tempX);
-					destY = (int) (2*y - tempY);
-					destZ = (int) (2*z - tempZ);
-				}
-				else{
-					destX = (int) x + (this.rand.nextInt(10) * (this.rand.nextBoolean()?-1:1));;
-					destY = (int) y + (this.rand.nextInt(3) * (this.rand.nextBoolean()?-1:1));;
-					destZ = (int) z + (this.rand.nextInt(10) * (this.rand.nextBoolean()?-1:1));;
-				}
-				if(!(TFC_Core.isWater(this.worldObj.getBlock(destX, destY-1, destZ))) && TFC_Core.isWater(this.worldObj.getBlock(destX, destY+1, destZ))){
-					destY++;
-				}
+				destX = (int) x + (this.rand.nextInt(10) * (this.rand.nextBoolean()?-1:1));;
+				destY = (int) y + (this.rand.nextInt(3) * (this.rand.nextBoolean()?-1:1));;
+				destZ = (int) z + (this.rand.nextInt(10) * (this.rand.nextBoolean()?-1:1));;
 			}
+			if(!(TFC_Core.isWater(this.worldObj.getBlock(destX, destY-1, destZ))) && TFC_Core.isWater(this.worldObj.getBlock(destX, destY+1, destZ))){
+				destY++;
+			}
+
 			needsNewLocation = !(TFC_Core.isWater(this.worldObj.getBlock(destX, destY, destZ))) ||
 					!(TFC_Core.isWater(this.worldObj.getBlock(destX, destY-1, destZ))) || tooCloseToPlayer;
 		}

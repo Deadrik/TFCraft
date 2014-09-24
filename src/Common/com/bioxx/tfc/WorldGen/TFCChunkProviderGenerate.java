@@ -195,6 +195,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		int y;
 		int z;
 
+		if(biome.equals(TFCBiome.lake)){
+			ChunkDataManager.setFishPop(xCoord, zCoord, ChunkData.fishPopMax);
+		}
+		
 		int waterRand = 4;
 		if(TFC_Climate.getStability(worldObj, xCoord, zCoord) == 1)
 			waterRand = 6;
