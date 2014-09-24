@@ -967,8 +967,9 @@ public class TFC_Core
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1f);
 				if(is != null)
 					TFC_ItemHeat.HandleItemHeat(is);
+				iinv.setInventorySlotContents(i, is);
 			}
-			iinv.setInventorySlotContents(i, is);
+
 		}
 	}
 
@@ -993,8 +994,8 @@ public class TFC_Core
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, baseDecayMod);
 				if(is != null)
 					TFC_ItemHeat.HandleItemHeat(is);
+				iinv.setInventorySlotContents(i, is);
 			}
-			iinv.setInventorySlotContents(i, is);
 		}
 	}
 
@@ -1019,8 +1020,9 @@ public class TFC_Core
 				is = tickDecay(is, world, x, y, z, environmentalDecayFactor, 1);
 				if(is != null)
 					TFC_ItemHeat.HandleItemHeat(is);
+				iinv[i] = is;
 			}
-			iinv[i] = is;
+
 		}
 	}
 
@@ -1243,5 +1245,20 @@ public class TFC_Core
 			world.getBlock(x, y, z).dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
 			world.setBlockToAir(x, y, z);
 		}
+	}
+
+	public static boolean areItemsEqual(ItemStack is1, ItemStack is2)
+	{
+		Item i1 = null; int d1 = 0;
+		Item i2 = null; int d2 = 0;
+		if(is1 != null)
+		{
+			i1 = is1.getItem(); d1 = is1.getItemDamage();
+		}
+		if(is2 != null)
+		{
+			i2 = is2.getItem(); d2 = is2.getItemDamage();
+		}
+		return i1 == i2 && d1 == d2;
 	}
 }

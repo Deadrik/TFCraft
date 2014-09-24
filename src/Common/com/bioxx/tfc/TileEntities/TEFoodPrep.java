@@ -446,8 +446,9 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
+		if(!TFC_Core.areItemsEqual(storage[i], itemstack))
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		storage[i] = itemstack;
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override

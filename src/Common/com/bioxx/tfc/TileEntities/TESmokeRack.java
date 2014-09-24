@@ -85,8 +85,10 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
+
+		if(!TFC_Core.areItemsEqual(storage[i], itemstack))
+			broadcastPacketInRange();
 		storage[i] = itemstack;
-		broadcastPacketInRange();
 		if(itemstack != null && !ItemStack.areItemStacksEqual(itemstack, storage[i]))
 		{
 			if(Food.getDried(itemstack) > 0)
