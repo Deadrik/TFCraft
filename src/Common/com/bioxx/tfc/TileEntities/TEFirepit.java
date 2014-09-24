@@ -357,7 +357,7 @@ public class TEFirepit extends TEFireEntity implements IInventory
 		if(is != null)
 		{
 			float temp = TFC_ItemHeat.GetTemp(is);
-			if(fuelTimeLeft > 0 && is.getItem() instanceof IFood)
+			if(fuelTimeLeft > 0 && is.getItem() instanceof ICookableFood)
 			{
 				float inc = Food.getCooked(is)+Math.min((fireTemp/700), 2f);
 				Food.setCooked(is, inc);
