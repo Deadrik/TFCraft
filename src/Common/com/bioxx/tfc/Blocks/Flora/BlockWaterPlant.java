@@ -18,7 +18,7 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.Terrain.BlockSand;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
+import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.TileEntities.TEWaterPlant;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -77,7 +77,7 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 		{
 			int meta = world.getBlockMetadata(x, y, z);
 			if (TFC_Core.isSaltWater(world.getBlock(x, y+1, z)) && entityplayer.inventory.getCurrentItem() != null && 
-					entityplayer.inventory.getCurrentItem().getItem() instanceof ItemCustomKnife)
+					entityplayer.inventory.getCurrentItem().getItem() instanceof ItemKnife)
 			{
 				dropBlockAsItem(world, x, y, z, getSeaWeed(world.rand));
 				doBeforeFall(world, x, y, z);

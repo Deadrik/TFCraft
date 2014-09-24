@@ -2404,6 +2404,7 @@ word.dried=Dried
 gui.barrel.pickling=Pickling
 gui.barrel.brining=Brining
 tile.Vessel.name=Large Vessel
+tile.Grill.name=Grill
 food.cooked.rare=Rare
 food.cooked.medrare=Medium Rare
 food.cooked.med=Medium

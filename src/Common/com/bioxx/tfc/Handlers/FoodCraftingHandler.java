@@ -10,7 +10,7 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Food.Food;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
+import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.Interfaces.IFood;
@@ -256,7 +256,7 @@ public class FoodCraftingHandler
 			if(iinventory.getStackInSlot(i).getItem() == TFCItems.Powder && iinventory.getStackInSlot(i).getItemDamage() == 9)
 				Food.setSalted(craftResult, true);
 
-			if(iinventory.getStackInSlot(i).getItem() instanceof ItemCustomKnife)
+			if(iinventory.getStackInSlot(i).getItem() instanceof ItemKnife)
 			{
 				if(Food.getDecay(craftResult) > 0)
 				{
