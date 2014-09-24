@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ForgeHooksClient;
 
@@ -16,6 +17,7 @@ import org.lwjgl.opengl.GL11;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Entities.EntityStand;
+import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
 import com.bioxx.tfc.Render.Models.ModelStand;
 
 import cpw.mods.fml.relauncher.Side;
@@ -105,14 +107,22 @@ public class RenderEntityStand extends RenderBiped
 	public void doRender(EntityLivingBase e, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_){
 		float rotation = e instanceof EntityStand? ((EntityStand)e).getRotation() : 0;
 		GL11.glPushMatrix();
-		super.doRender(e, p_76986_2_, p_76986_4_, p_76986_6_, 0, 0);
+		
+		super.doRender(e, p_76986_2_, p_76986_4_, p_76986_6_, rotation, 0);
 		GL11.glPopMatrix();
 	}
+	
+	@Override
+	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
+    {
+		super.rotateCorpse(par1EntityLivingBase, par2, par3, par4);
+    }
 	
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
 		GL11.glScalef(1f, 0.95f, 1f);
+		GL11.glRotatef((par1EntityLivingBase instanceof EntityStand? ((EntityStand)par1EntityLivingBase).getRotation():0), 0, 1, 0);
 		int l = 0;
 		if(par1EntityLivingBase instanceof EntityStand){
 			l=((EntityStand)par1EntityLivingBase).woodType;
