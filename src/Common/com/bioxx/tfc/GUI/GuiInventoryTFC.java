@@ -8,8 +8,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
@@ -74,33 +74,18 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 	}
 
 	@Override
-	protected void func_146977_a(Slot slot)
+	public void drawTexturedModelRectFromIcon(int p_94065_1_, int p_94065_2_, IIcon p_94065_3_, int p_94065_4_, int p_94065_5_)
 	{
-		//super.func_146977_a(p_146977_1_);
-		ItemStack itemstack = slot.getStack();
-		int i = slot.xDisplayPosition;
-		int j = slot.yDisplayPosition;
-		if (itemstack == null)
-		{
-			IIcon iicon = slot.getBackgroundIconIndex();
-
-			if (iicon != null)
-			{
-				//GL11.glDisable(GL11.GL_LIGHTING);
-				this.mc.getTextureManager().bindTexture(TextureMap.locationItemsTexture);
-				this.drawTexturedModelRectFromIcon(i, j, iicon, 16, 16);
-				//GL11.glEnable(GL11.GL_LIGHTING);
-			}
-		}
-		else 
-		{
-			GL11.glEnable(GL11.GL_DEPTH_TEST);
-			itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), itemstack, i, j);
-			String s = ""+itemstack.stackSize;
-			if(itemstack.stackSize <= 1)
-				s = "";
-			itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), itemstack, i, j, s);
-		}
+		Tessellator tessellator = Tessellator.instance;
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV((double)(p_94065_1_ + 0), (double)(p_94065_2_ + p_94065_5_), (double)this.zLevel, (double)p_94065_3_.getMinU(), (double)p_94065_3_.getMaxV());
+		tessellator.addVertexWithUV((double)(p_94065_1_ + p_94065_4_), (double)(p_94065_2_ + p_94065_5_), (double)this.zLevel, (double)p_94065_3_.getMaxU(), (double)p_94065_3_.getMaxV());
+		tessellator.addVertexWithUV((double)(p_94065_1_ + p_94065_4_), (double)(p_94065_2_ + 0), (double)this.zLevel, (double)p_94065_3_.getMaxU(), (double)p_94065_3_.getMinV());
+		tessellator.addVertexWithUV((double)(p_94065_1_ + 0), (double)(p_94065_2_ + 0), (double)this.zLevel, (double)p_94065_3_.getMinU(), (double)p_94065_3_.getMinV());
+		tessellator.draw();
+		GL11.glDisable(GL11.GL_BLEND);
 	}
 
 	public static void drawPlayerModel(int par0, int par1, int par2, float par3, float par4, EntityLivingBase par5EntityLivingBase)
