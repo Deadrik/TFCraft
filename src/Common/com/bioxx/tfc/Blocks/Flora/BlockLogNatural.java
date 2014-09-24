@@ -225,21 +225,28 @@ public class BlockLogNatural extends BlockTerraContainer
 
 		if(!world.isRemote)
 		{
-			TETreeLog te = ((TETreeLog) world.getTileEntity(x, y, z)).getBaseTE();
-			TreeSchematic schem = TreeRegistry.instance.getTreeSchematic(te.treeID, false);
-
-			for(int schemY = 0; schemY < schem.getSizeY(); schemY++)
+			TETreeLog te = ((TETreeLog) world.getTileEntity(x, y, z));
+			if(te != null)
 			{
-				for(int schemZ = 0; schemZ < schem.getSizeZ(); schemZ++)
+				if(!te.isBase)
 				{
-					for(int schemX = 0; schemX < schem.getSizeX(); schemX++)
-					{						
-						int index = schemX + schem.getSizeX() * (schemZ + schem.getSizeZ() * schemY);
-						int id = schem.getBlockArray()[index];
+					return removedByPlayer(world, player, te.baseX, te.baseY, te.baseZ, willHarvest);
+				}
+				TreeSchematic schem = TreeRegistry.instance.getTreeSchematic(te.treeID, false);
 
-						if(id != 0)
-						{
-							ProcessRot(world, x, y, z, schemX, schemY, schemZ, schem, id, te);
+				for(int schemY = 0; schemY < schem.getSizeY(); schemY++)
+				{
+					for(int schemZ = 0; schemZ < schem.getSizeZ(); schemZ++)
+					{
+						for(int schemX = 0; schemX < schem.getSizeX(); schemX++)
+						{						
+							int index = schemX + schem.getSizeX() * (schemZ + schem.getSizeZ() * schemY);
+							int id = schem.getBlockArray()[index];
+
+							if(id != 0)
+							{
+								ProcessRot(world, x, y, z, te.treeID, schem, schemX, schemY, schemZ, te);
+							}
 						}
 					}
 				}
@@ -249,7 +256,61 @@ public class BlockLogNatural extends BlockTerraContainer
 		return true;
 	}
 
-	private static void ProcessRot(World world, int treeX, int treeY, int treeZ, int x, int y, int z, TreeSchematic schem, int id, TETreeLog te) 
+	/*private boolean ProcessRot(World world, int i, int j, int k, int meta, TreeSchematic schem, int y, int z,int x, TETreeLog te) 
+	{
+		int localX = i+x;
+		int localY = j+y;
+		int localZ = k+z;
+
+		if(te.rotation == 1)
+		{
+			localX = i+x;
+			localY = j+y;
+			localZ = k-z;
+		}
+		else if(te.rotation == 2)
+		{
+			localX = i-x;
+			localY = j+y;
+			localZ = k+z;
+		}
+		else if(te.rotation == 3)
+		{
+			localX = i-x;
+			localY = j+y;
+			localZ = k-z;
+		}
+
+		Block block = TFCBlocks.LogNatural;
+		Block leaves = TFCBlocks.Leaves;
+		if(meta > 15)
+		{
+			block = TFCBlocks.LogNatural2;
+			leaves = TFCBlocks.Leaves2;
+			meta -= 15;
+		}
+
+		//Get the block that occupies the local coordinate
+		Block localBlockID = world.getBlock(localX, localY, localZ);
+
+		if(localX == i && localY == j && localZ == k)
+			System.out.println("Center Reached!");
+		if(localBlockID == block)
+		{
+			TETreeLog log = (TETreeLog) world.getTileEntity(localX, localY, localZ);
+			if(log != null && ((log.baseX == i && log.baseY == j && log.baseZ == k)))
+			{
+				world.setBlock(localX, localY, localZ, Blocks.air, 0, 0x2);
+			}
+		}
+		else if(localBlockID == leaves)
+		{
+			world.setBlock(localX, localY, localZ, Blocks.air, 0, 0x2);
+		}
+		return false;
+	}*/
+
+	private static void ProcessRot(World world, int treeX, int treeY, int treeZ, int id, TreeSchematic schem, int x, int y, int z, TETreeLog te) 
 	{
 		//Get the actual world coordinates from the offsets
 		int localX = treeX - schem.getCenterX() - x + schem.getSizeX();

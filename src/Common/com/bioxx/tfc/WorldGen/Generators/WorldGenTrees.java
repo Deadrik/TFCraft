@@ -130,6 +130,7 @@ public class WorldGenTrees extends WorldGenerator
 				{
 					world.setBlock(localX, localY, localZ, block, meta, 0x2);
 					TETreeLog te = (TETreeLog) world.getTileEntity(localX, localY, localZ);
+					te.isBase = true;
 					te.schemID = (byte) schem.getIndex();
 					te.treeID = (byte) meta;
 					te.rotation = (byte) rot;
@@ -154,6 +155,79 @@ public class WorldGenTrees extends WorldGenerator
 						world.setBlock(localX, localY, localZ, leaves, meta, 0x2);
 				}
 				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean ProcessRot(World world, int i, int j, int k, int meta, TreeSchematic schem, int y, int z, int x, int rot, boolean doBase) 
+	{
+		int localX = i-schem.getCenterX()+x;
+		int localY = j+y;
+		int localZ = k-schem.getCenterZ()+z;
+
+		if(rot == 1)
+		{
+			localX = i-schem.getCenterX()+x;
+			localY = j+y;
+			localZ = k+schem.getCenterZ()-z;
+		}
+		else if(rot == 2)
+		{
+			localX = i+schem.getCenterX()-x;
+			localY = j+y;
+			localZ = k-schem.getCenterZ()+z;
+		}
+		else if(rot == 3)
+		{
+			localX = i+schem.getCenterX()-x;
+			localY = j+y;
+			localZ = k+schem.getCenterZ()-z;
+		}
+
+		int index = x + schem.getSizeX() * (z + schem.getSizeZ() * y);
+		int id = schem.getBlockArray()[index];
+
+		Block block = TFCBlocks.LogNatural;
+		Block leaves = TFCBlocks.Leaves;
+		if(meta > 15)
+		{
+			block = TFCBlocks.LogNatural2;
+			leaves = TFCBlocks.Leaves2;
+			meta -= 15;
+		}
+
+		if(world.isAirBlock(localX, localY, localZ) && id != 0)
+		{
+			if(Block.getBlockById(id).getMaterial() == Material.wood)
+			{
+				if(!doBase)
+				{
+					world.setBlock(localX, localY, localZ, block, meta, 0x2);
+					doBase = true;
+					baseX = localX;
+					baseY = localY;
+					baseZ = localZ;
+
+					TETreeLog te = (TETreeLog)world.getTileEntity(localX, localY, localZ);
+					if(te != null)
+					{
+						te.Setup((byte) schem.getIndex(), (byte)rot, localX, localY, localZ, (byte)x, (byte)z);
+						return true;
+					}
+				}
+				else
+				{
+					world.setBlock(localX, localY, localZ, block, meta, 0x2);
+					TETreeLog te = (TETreeLog)world.getTileEntity(localX, localY, localZ);
+					if(te != null)
+						te.Setup(baseX, baseY, baseZ);
+				}
+			}
+			else
+			{
+				if(world.getBlock(localX, localY, localZ).canBeReplacedByLeaves(world, localX, localY, localZ))
+					world.setBlock(localX, localY, localZ, leaves, meta, 0x2);
 			}
 		}
 		return false;

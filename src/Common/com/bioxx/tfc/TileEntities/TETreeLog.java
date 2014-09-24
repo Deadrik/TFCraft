@@ -11,8 +11,8 @@ public class TETreeLog extends NetworkTileEntity
 	public int baseX = 0; 
 	public int baseY = 0;
 	public int baseZ = 0;
-	public int offsetX = 0; 
-	public int offsetZ = 0;
+	public byte xOffset = 0;
+	public byte zOffset = 0;
 	public byte schemID = -1;
 	public byte treeID = 0;
 	public byte rotation = 0;
@@ -46,15 +46,6 @@ public class TETreeLog extends NetworkTileEntity
 		baseZ = z;
 	}
 
-	public void Setup(int x, int y, int z, int xo, int zo)
-	{
-		baseX = x;
-		baseY = y;
-		baseZ = z;
-		offsetX = xo;
-		offsetZ = zo;
-	}
-
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) 
 	{
@@ -64,6 +55,8 @@ public class TETreeLog extends NetworkTileEntity
 		baseX = nbt.getInteger("baseX");
 		baseY = nbt.getInteger("baseY");
 		baseZ = nbt.getInteger("baseZ");
+		xOffset = nbt.getByte("xOffset");
+		zOffset = nbt.getByte("zOffset");
 		if(isBase)
 		{
 			schemID = nbt.getByte("schemID");
@@ -81,7 +74,8 @@ public class TETreeLog extends NetworkTileEntity
 		nbt.setInteger("baseX", baseX);
 		nbt.setInteger("baseY", baseY);
 		nbt.setInteger("baseZ", baseZ);
-
+		nbt.setByte("xOffset", xOffset);
+		nbt.setByte("zOffset", zOffset);
 		if(isBase)
 		{
 			nbt.setByte("schemID", schemID);
@@ -115,5 +109,15 @@ public class TETreeLog extends NetworkTileEntity
 			nbt.setByte("schemID", schemID);
 			nbt.setByte("rotation", rotation);
 		}
+	}
+
+	public void Setup(byte index, byte b, int localX, int localY, int localZ, byte x, byte z) 
+	{
+		this.isBase = true;
+		treeID = index;
+		rotation = b;
+		xOffset = x;
+		zOffset = z;
+		Setup(localX, localY, localZ);
 	}
 }
