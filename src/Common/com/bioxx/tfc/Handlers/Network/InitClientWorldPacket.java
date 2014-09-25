@@ -123,7 +123,7 @@ public class InitClientWorldPacket extends AbstractPacket
 		fs.nutrDairy = this.nutrDairy;
 		TFC_Core.setPlayerFoodStats(player, fs);
 
-		TFC_Time.daysInYear = this.daysInYear;
+		TFC_Time.setYearLength(this.daysInYear);
 		TFCOptions.HealthGainRate = this.HGRate;
 		TFCOptions.HealthGainCap = this.HGCap;
 		if(this.craftingTable)

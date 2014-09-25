@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -105,7 +106,7 @@ public class BlockPottery extends BlockTerraContainer
 				}
 				else if(te.wood == 0 && side == 1 && player.isSneaking())
 				{
-					if(hitX < 0.5 && hitZ < 0.5)
+					if((te.getStackInSlot(0) != null && te.getStackInSlot(0).getItem() instanceof ItemBlock) || (hitX < 0.5 && hitZ < 0.5))
 						te.ejectItem(0);
 					else if(hitX > 0.5 && hitZ < 0.5)
 						te.ejectItem(1);

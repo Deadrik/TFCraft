@@ -6,8 +6,10 @@ import com.bioxx.tfc.Core.TFC_Core;
 
 public class ServerOverrides
 {
-	public static boolean isValidSurface(Block b)
+	public static int isValidSurface(Block b)
 	{
-		return TFC_Core.isFence(b) || (b != null && b.getRenderType() == 11);
+		if(TFC_Core.isFence(b) || (b != null && b.getRenderType() == 11))
+			return 11;
+		return b.getRenderType();
 	}
 }

@@ -9,15 +9,14 @@ import java.util.List;
 
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
-import org.objectweb.asm.tree.VarInsnNode;
 
 import com.bioxx.tfc.ASM.ClassTransformer;
 
 public class TF_EntityLeashKnot extends ClassTransformer
 {
 
+	@SuppressWarnings("deprecation")
 	public TF_EntityLeashKnot()
 	{
 		mcpClassName = "net.minecraft.entity.EntityLeashKnot";
@@ -25,10 +24,18 @@ public class TF_EntityLeashKnot extends ClassTransformer
 
 		List nodes = new ArrayList<InstrSet>();
 		InsnList list = new InsnList();
-		list.add(new VarInsnNode(Opcodes.ILOAD, 1));
-		list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "TFC/ServerOverrides","isValidSurface","(I)Z"));
-		list.add(new InsnNode(Opcodes.IRETURN));
-		nodes.add(new InstrSet(list, 13, InstrOpType.InsertAfter));
+		/*list.add(new VarInsnNode(Opcodes.ALOAD, 0));
+		list.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/entity/EntityLeashKnot", "worldobj", "Lnet/minecraft/world/World;"));
+		list.add(new VarInsnNode(Opcodes.ALOAD, 0));
+		list.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/entity/EntityLeashKnot", "field_146063_b", "I"));
+		list.add(new VarInsnNode(Opcodes.ALOAD, 0));
+		list.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/entity/EntityLeashKnot", "field_146064_c", "I"));
+		list.add(new VarInsnNode(Opcodes.ALOAD, 0));
+		list.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/entity/EntityLeashKnot", "field_146062_d", "I"));
+		list.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "net/minecraft/world/World","getBlock","(III)Z"));*/
+		list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "TFC/ServerOverrides","isValidSurface","(Lnet/minecraft/block/Block;)Z"));
+		//list.add(new InsnNode(Opcodes.IRETURN));
+		nodes.add(new InstrSet(list, 11, InstrOpType.Replace));
 
 		mcpMethodNodes.put("onValidSurface | ()Z", new Patch(nodes, PatchOpType.Modify));
 		obfMethodNodes.put("e | ()Z", new Patch(nodes, PatchOpType.Modify));

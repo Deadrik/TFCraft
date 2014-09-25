@@ -202,11 +202,17 @@ public class TEFarmland extends NetworkTileEntity
 	{
 		if(worldObj.isRemote)
 			nutrients = nbt.getIntArray("nutrients");
+		else
+			broadcastPacketInRange();
 	}
 
 	@Override
-	public void createDataNBT(NBTTagCompound nbt) {
-		nbt.setIntArray("nutrients", nutrients);
+	public void createDataNBT(NBTTagCompound nbt) 
+	{
+		if(!worldObj.isRemote)
+		{
+			nbt.setIntArray("nutrients", nutrients);
+		}
 	}
 
 	@Override

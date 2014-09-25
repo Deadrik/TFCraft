@@ -114,7 +114,7 @@ public class Recipes
 		}
 
 		//Wood Mix & Match
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.bowl, 4, 0), new Object[] { "logWood", "itemKnife" }));
+		//GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.bowl, 4, 0), new Object[] { "logWood", "itemKnife" }));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.SluiceItem, 1), new Object[] { "  1", " 12", "122", Character.valueOf('1'), "stickWood", Character.valueOf('2'), "woodLumber" }));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.NestBox,1), new Object[] {"S S","PSP","PPP",Character.valueOf('S'), new ItemStack(TFCItems.Straw,1),Character.valueOf('P'), "woodLumber"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.WoodenBucketEmpty, 1), new Object[] { "w w", "w w", " w ", Character.valueOf('w'), "woodLumber" }));
@@ -1238,7 +1238,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Leash, 1), new Object[] { "RR ", "RR ", "  R", Character.valueOf('R'), new ItemStack(TFCItems.JuteFibre, 1) });
 
-		GameRegistry.addRecipe(new ItemStack(TFCItems.GoldPan, 1, 0), new Object[] { "1", Character.valueOf('1'), Items.bowl });
+		GameRegistry.addRecipe(new ItemStack(TFCItems.GoldPan, 1, 0), new Object[] { "1", Character.valueOf('1'), new ItemStack(TFCItems.PotteryBowl, 1, 1) });
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.FireStarter, 1, 0), new Object[] { "2 ", " 2", Character.valueOf('2'), "stickWood" }));
 
@@ -1681,6 +1681,12 @@ public class Recipes
 			" ### ",
 			" ### ",
 			"     ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.PotteryBowl, 4), new Object[] { 
+			"#####",
+			"#####",
+			"#####",
+			" ### ",
+			"#   #", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
 	}
 
 	private static void registerAlloys()
@@ -2312,7 +2318,7 @@ public class Recipes
 		addTrapDoor(TFCItems.SilverSheet, 16);addTrapDoor(TFCItems.SteelSheet, 17);addTrapDoor(TFCItems.SterlingSilverSheet, 18);addTrapDoor(TFCItems.TinSheet, 19);
 		addTrapDoor(TFCItems.ZincSheet, 20);
 
-		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), null,"grill", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.Grill, 1, 0)));
+		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot2x), new ItemStack(TFCItems.WroughtIronIngot2x),"grill", AnvilReq.WROUGHTIRON, new ItemStack(TFCBlocks.Grill, 1, 0)));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronKnifeHead), new ItemStack(TFCItems.WroughtIronKnifeHead),"shears", AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.Shears, 1, 0)));
 
 	}
@@ -2629,6 +2635,12 @@ public class Recipes
 						new ItemStack(TFCItems.FireBrick,1,0),
 						0, 
 						new ItemStack(TFCItems.FireBrick,1,1)));
+
+		manager.addRecipe(
+				new KilnRecipe(
+						new ItemStack(TFCItems.PotteryBowl,1,0),
+						0, 
+						new ItemStack(TFCItems.PotteryBowl,1,1)));
 	}
 
 	private static void registerQuernRecipes()

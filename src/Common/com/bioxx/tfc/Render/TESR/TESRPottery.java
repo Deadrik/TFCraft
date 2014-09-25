@@ -2,6 +2,7 @@ package com.bioxx.tfc.Render.TESR;
 
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
@@ -54,6 +55,10 @@ public class TESRPottery extends TESRBase
 
 				if (te.getStackInSlot(i) != null)
 				{
+					if(te.getStackInSlot(i).getItem() instanceof ItemBlock)
+					{
+						blockScale = 2; offsetX = 0.5f; offsetZ = 0.5f;
+					}
 					GL11.glPushMatrix(); //start
 					GL11.glTranslatef((float)d + offsetX, (float)d1 + offsetY, (float)d2 + offsetZ);
 					if (RenderManager.instance.options.fancyGraphics)

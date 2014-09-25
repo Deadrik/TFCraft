@@ -63,22 +63,22 @@ public class ContainerFoodPrep extends ContainerTFC
 	{
 		if(guiTab == 0)
 		{
-			this.addSlotToContainer(new SlotSize(chestInventory, 0, 35, 11).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread, 
-					TFCItems.RyeBread, TFCItems.RiceBread, TFCItems.CornBread).setSize(EnumSize.VERYLARGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 53, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.VERYLARGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 71, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.VERYLARGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 89, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.VERYLARGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 107, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.VERYLARGE));
-			this.addSlotToContainer(new SlotSize(chestInventory, 5, 125, 11).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread, 
-					TFCItems.RyeBread, TFCItems.RiceBread, TFCItems.CornBread).setSize(EnumSize.VERYLARGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 0, 35, 11).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread, 
+					TFCItems.RyeBread, TFCItems.RiceBread, TFCItems.CornBread).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 53, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 71, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 89, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 107, 11).addFGException(EnumFoodGroup.Grain).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 5, 125, 11).addItemInclusion(TFCItems.WheatBread, TFCItems.BarleyBread, TFCItems.OatBread, 
+					TFCItems.RyeBread, TFCItems.RiceBread, TFCItems.CornBread).setSize(EnumSize.HUGE));
 		}
 		else if(guiTab == 1)
 		{
 			this.addSlotToContainer(new SlotBlocked(chestInventory, 0, 16, 26));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 53, 11).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.VERYLARGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 71, 11).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.VERYLARGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 89, 11).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.VERYLARGE));
-			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 107, 11).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.VERYLARGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 1, 53, 11).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 2, 71, 11).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 3, 89, 11).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
+			this.addSlotToContainer(new SlotFoodOnly(chestInventory, 4, 107, 11).addItemException(TFCItems.WoodenBucketMilk).setSize(EnumSize.HUGE));
 			this.addSlotToContainer(new SlotBlocked(chestInventory, 5, 16, 44));
 		}
 		this.addSlotToContainer(new SlotBlocked(chestInventory, 6, 80, 35));

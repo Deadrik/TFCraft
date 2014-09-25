@@ -168,6 +168,8 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			this.setInventorySlotContents(6, is);
 
 			consumeFoodWeight(saladWeights, getStackInSlot(1), getStackInSlot(2), getStackInSlot(3), getStackInSlot(4));
+
+			TFC_Core.getItemInInventory(TFCItems.PotteryBowl, this).stackSize--;
 		}
 	}
 
@@ -175,7 +177,7 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	{
 		if(lastTab == 0)
 		{
-			if(storage[0] == null || storage[5] == null)//Bread
+			if(storage[0] == null || storage[5] == null || storage[6] != null)//Bread
 				return false;
 			int count = 0;
 			if(storage[1] != null) count++;
@@ -204,6 +206,9 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	{
 		if(lastTab == 1)
 		{
+			if(storage[6] != null)//Bread
+				return false;
+
 			int count = 0;
 			if(storage[1] != null) {count++;}
 			if(storage[2] != null) {count++;}
@@ -224,6 +229,12 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 
 			if(weight < 14)
 				return false;
+
+			ItemStack bowlStack = TFC_Core.getItemInInventory(TFCItems.PotteryBowl, this);
+			if(bowlStack == null || bowlStack.getItemDamage() != 1)
+			{
+				return false;
+			}
 		}
 		return true;
 	}
@@ -446,8 +457,9 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
+		if(!TFC_Core.areItemsEqual(storage[i], itemstack))
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		storage[i] = itemstack;
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override

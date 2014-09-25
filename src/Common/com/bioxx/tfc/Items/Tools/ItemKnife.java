@@ -5,12 +5,13 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
@@ -18,9 +19,9 @@ import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Tools.IKnife;
 
-public class ItemCustomKnife extends ItemWeapon implements IKnife
+public class ItemKnife extends ItemWeapon implements IKnife
 {
-	public ItemCustomKnife(ToolMaterial e, float damage)
+	public ItemKnife(ToolMaterial e, float damage)
 	{
 		super(e, damage);
 		this.setMaxDamage(e.getMaxUses());
@@ -49,20 +50,20 @@ public class ItemCustomKnife extends ItemWeapon implements IKnife
 
 			for(int i = 0; i < 36 && hasBowl == -1;i++)
 			{
-				if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() == Items.bowl)
+				if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() == TFCItems.PotteryBowl && entityplayer.inventory.mainInventory[i].getItemDamage() == 1)
 					hasBowl = i;
 			}
 
 			Material mat = world.getBlock(x, y, z).getMaterial();
 
-			if(side == 1 && !TFC_Core.isSoil(id) && !TFC_Core.isWater(id) && world.isAirBlock(x, y + 1, z) && hasBowl != -1 &&
+			if(side == 1 && id.isSideSolid(world, x, y, z, ForgeDirection.UP) &&!TFC_Core.isSoil(id) && !TFC_Core.isWater(id) && world.isAirBlock(x, y + 1, z) && hasBowl != -1 &&
 					(mat == Material.wood || mat == Material.rock || mat == Material.iron))
 			{
 				world.setBlock(x, y + 1, z, TFCBlocks.FoodPrep);
 				TEFoodPrep te = (TEFoodPrep) world.getTileEntity(x, y + 1, z);
 				if(te != null)
 				{
-					te.setInventorySlotContents(5, entityplayer.inventory.mainInventory[hasBowl]);
+					te.setInventorySlotContents(7, entityplayer.inventory.mainInventory[hasBowl]);
 					entityplayer.inventory.mainInventory[hasBowl] = null;
 				}
 				return true;

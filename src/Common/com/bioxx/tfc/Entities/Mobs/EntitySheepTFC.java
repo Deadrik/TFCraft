@@ -27,7 +27,7 @@ import com.bioxx.tfc.Entities.AI.AIEatGrass;
 import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
-import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
+import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -317,7 +317,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			if(getGender() == GenderEnum.FEMALE && pregnant)
 				player.addChatMessage(new ChatComponentText("Pregnant"));
 
-			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemCustomKnife && !getSheared() && getPercentGrown(this) > 0.95F)
+			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKnife && !getSheared() && getPercentGrown(this) > 0.95F)
 			{
 				setSheared(true);
 				this.entityDropItem(new ItemStack(TFCItems.Wool,1), 0.0F);

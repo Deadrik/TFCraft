@@ -11,12 +11,15 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.lwjgl.opengl.GL11;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.TileEntities.TEPottery;
 import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -116,11 +119,40 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 
 				TEVessel te = (TEVessel) world.getTileEntity(x, y, z);
 				te.barrelType = metadata;
-
+				return true;
 			}
-		} else return false;
+		} 
+		else if(metadata == 0 && side == 1 && player.isSneaking())
+		{
+			TEPottery te;
+			Block base = world.getBlock(x, y-1, z);
+			if(base != TFCBlocks.Pottery && world.isAirBlock(x, y, z))
+			{
+				//We only want the pottery to be placeable if the block is solid on top.
+				if(!world.isSideSolid(x, y-1, z, ForgeDirection.UP))
+					return false;
+				world.setBlock(x, y, z, TFCBlocks.Pottery);
+			}
+			else
+			{
+				return false;
+			}
 
-		return true;
+
+			if(world.getTileEntity(x, y, z) != null && world.getTileEntity(x, y, z) instanceof TEPottery) 
+			{
+				te = (TEPottery) world.getTileEntity(x, y, z);
+				if(te.canAddItem(0))
+				{
+					te.inventory[0] = stack.copy();
+					te.inventory[0].stackSize = 1;
+					world.markBlockForUpdate(x, y, z);
+					return true;
+				}				
+			}
+		}
+
+		return false;
 	}
 
 	@Override

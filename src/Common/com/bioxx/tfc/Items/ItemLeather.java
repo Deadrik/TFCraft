@@ -8,7 +8,7 @@ import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
-import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
+import com.bioxx.tfc.Items.Tools.ItemKnife;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -39,7 +39,7 @@ public class ItemLeather extends ItemLooseRock
 		boolean hasKnife = false;
 		for(int i = 0; i < entityplayer.inventory.mainInventory.length; i++)
 		{
-			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemCustomKnife)
+			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemKnife)
 				hasKnife = true;
 		}
 

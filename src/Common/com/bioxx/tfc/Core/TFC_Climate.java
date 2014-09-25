@@ -8,7 +8,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
-import com.bioxx.tfc.WorldGen.WorldLayerManager;
+import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFC_Climate
 {
-	public static HashMap<Integer, WorldLayerManager> worldPair = new HashMap<Integer, WorldLayerManager>();
+	public static HashMap<String, WorldCacheManager> worldPair = new HashMap<String, WorldCacheManager>();
 
 	private static final float[] zFactorCache = new float[30001];
 	private static final float[][] monthTempCache = new float[12][30001];
@@ -177,6 +177,11 @@ public class TFC_Climate
 	{
 		if(TFC_Climate.getManager(world) != null)
 		{
+			float cacheTemp = TFC_Climate.getManager(world).getTemp(x, z, th);
+			if(cacheTemp != Float.MIN_VALUE)
+			{
+				return cacheTemp;
+			}
 
 			float zMod = getZFactor(z);
 			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
@@ -235,6 +240,7 @@ public class TFC_Climate
 				else
 					temp -= (8*rainMod)*zMod;
 			}
+			TFC_Climate.getManager(world).addTemp(x, z, th, temp);
 			return temp;
 		}
 		return -10;
@@ -580,8 +586,11 @@ public class TFC_Climate
 		return getManager(world).getStabilityLayerAt(x, z).data1;
 	}
 
-	public static WorldLayerManager getManager(World world)
+	public static WorldCacheManager getManager(World world)
 	{
-		return worldPair.get(world.provider.dimensionId);
+		if(world.isRemote)
+			return worldPair.get(world.provider.dimensionId+"-Client");
+		else
+			return worldPair.get(world.provider.dimensionId+"-Server");
 	}
 }

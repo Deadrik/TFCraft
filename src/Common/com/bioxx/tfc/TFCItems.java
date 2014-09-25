@@ -75,7 +75,6 @@ import com.bioxx.tfc.Items.Tools.ItemCustomBucket;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
 import com.bioxx.tfc.Items.Tools.ItemCustomFishingRod;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
-import com.bioxx.tfc.Items.Tools.ItemCustomKnife;
 import com.bioxx.tfc.Items.Tools.ItemCustomPickaxe;
 import com.bioxx.tfc.Items.Tools.ItemCustomSaw;
 import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
@@ -86,6 +85,7 @@ import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
 import com.bioxx.tfc.Items.Tools.ItemGoldPan;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
+import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
 import com.bioxx.tfc.Items.Tools.ItemProPick;
 import com.bioxx.tfc.Items.Tools.ItemShears;
@@ -853,6 +853,7 @@ public class TFCItems
 	public static Item PotteryJug;
 	public static Item PotteryPot;
 	public static Item PotterySmallVessel;
+	public static Item PotteryBowl;
 	public static Item KilnRack;
 	public static Item Straw;
 	public static Item FlatClay;
@@ -1427,15 +1428,15 @@ public class TFCItems
 		RedSteelKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Red Steel Knife Blade");
 		SteelKnifeHead = new ItemMiscToolHead().setUnlocalizedName("Steel Knife Blade");
 
-		BismuthBronzeKnife = new ItemCustomKnife(BismuthBronzeToolMaterial, 155).setUnlocalizedName("Bismuth Bronze Knife").setMaxDamage(BismuthBronzeUses);
-		BlackBronzeKnife = new ItemCustomKnife(BlackBronzeToolMaterial, 	165).setUnlocalizedName("Black Bronze Knife").setMaxDamage(BlackBronzeUses);
-		BlackSteelKnife = new ItemCustomKnife(BlackSteelToolMaterial, 		205).setUnlocalizedName("Black Steel Knife").setMaxDamage(BlackSteelUses);
-		BlueSteelKnife = new ItemCustomKnife(BlueSteelToolMaterial, 		250).setUnlocalizedName("Blue Steel Knife").setMaxDamage(BlueSteelUses);
-		BronzeKnife = new ItemCustomKnife(BronzeToolMaterial, 				150).setUnlocalizedName("Bronze Knife").setMaxDamage(BronzeUses);
-		CopperKnife = new ItemCustomKnife(CopperToolMaterial, 				100).setUnlocalizedName("Copper Knife").setMaxDamage(CopperUses);
-		WroughtIronKnife = new ItemCustomKnife(IronToolMaterial, 			175).setUnlocalizedName("Wrought Iron Knife").setMaxDamage(WroughtIronUses);
-		RedSteelKnife = new ItemCustomKnife(RedSteelToolMaterial, 			250).setUnlocalizedName("Red Steel Knife").setMaxDamage(RedSteelUses);
-		SteelKnife = new ItemCustomKnife(SteelToolMaterial,					200).setUnlocalizedName("Steel Knife").setMaxDamage(SteelUses);
+		BismuthBronzeKnife = new ItemKnife(BismuthBronzeToolMaterial, 155).setUnlocalizedName("Bismuth Bronze Knife").setMaxDamage(BismuthBronzeUses);
+		BlackBronzeKnife = new ItemKnife(BlackBronzeToolMaterial, 	165).setUnlocalizedName("Black Bronze Knife").setMaxDamage(BlackBronzeUses);
+		BlackSteelKnife = new ItemKnife(BlackSteelToolMaterial, 		205).setUnlocalizedName("Black Steel Knife").setMaxDamage(BlackSteelUses);
+		BlueSteelKnife = new ItemKnife(BlueSteelToolMaterial, 		250).setUnlocalizedName("Blue Steel Knife").setMaxDamage(BlueSteelUses);
+		BronzeKnife = new ItemKnife(BronzeToolMaterial, 				150).setUnlocalizedName("Bronze Knife").setMaxDamage(BronzeUses);
+		CopperKnife = new ItemKnife(CopperToolMaterial, 				100).setUnlocalizedName("Copper Knife").setMaxDamage(CopperUses);
+		WroughtIronKnife = new ItemKnife(IronToolMaterial, 			175).setUnlocalizedName("Wrought Iron Knife").setMaxDamage(WroughtIronUses);
+		RedSteelKnife = new ItemKnife(RedSteelToolMaterial, 			250).setUnlocalizedName("Red Steel Knife").setMaxDamage(RedSteelUses);
+		SteelKnife = new ItemKnife(SteelToolMaterial,					200).setUnlocalizedName("Steel Knife").setMaxDamage(SteelUses);
 
 		FlatRock = (new ItemFlatGeneric().setFolder("rocks/flatrocks/").setMetaNames(Global.STONE_ALL).setUnlocalizedName("FlatRock"));
 		LooseRock = (new ItemLooseRock().setSpecialCraftingType(FlatRock).setFolder("rocks/").setMetaNames(Global.STONE_ALL).setUnlocalizedName("LooseRock"));
@@ -1458,7 +1459,7 @@ public class TFCItems
 		StoneKnifeHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("Stone Knife Blade");
 		StoneHammerHead = new ItemMiscToolHead(IgInToolMaterial).setUnlocalizedName("Stone Hammer Head");
 
-		StoneKnife = new ItemCustomKnife(IgExToolMaterial, 40).setUnlocalizedName("Stone Knife").setMaxDamage(IgExStoneUses);
+		StoneKnife = new ItemKnife(IgExToolMaterial, 40).setUnlocalizedName("Stone Knife").setMaxDamage(IgExStoneUses);
 		SinglePlank = new ItemPlank().setUnlocalizedName("SinglePlank");
 
 		RedSteelBucketEmpty = (new ItemSteelBucketRed(Blocks.air)).setUnlocalizedName("Red Steel Bucket Empty");
@@ -1527,6 +1528,7 @@ public class TFCItems
 		PotterySmallVessel = new ItemPotterySmallVessel().setUnlocalizedName("Small Vessel");
 		PotteryPot = new ItemPotteryPot().setUnlocalizedName("Pot");
 		CeramicMold = new ItemPotteryBase().setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
+		PotteryBowl = new ItemPotteryBase().setMetaNames(new String[]{"Clay Bowl","Ceramic Bowl"}).setUnlocalizedName("ClayBowl");
 		ClayBall = new ItemClay().setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1)).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("Clay");
 		FireBrick = new ItemPotteryBase().setMetaNames(new String[]{"Clay Fire Brick","Fire Brick"}).setUnlocalizedName("Fire Brick");
 
@@ -2571,6 +2573,7 @@ public class TFCItems
 
 		GameRegistry.registerItem(PotteryJug , PotteryJug.getUnlocalizedName());
 		GameRegistry.registerItem(PotterySmallVessel , PotterySmallVessel.getUnlocalizedName());
+		GameRegistry.registerItem(PotteryBowl, PotteryBowl.getUnlocalizedName());
 		GameRegistry.registerItem(PotteryPot , PotteryPot.getUnlocalizedName());
 
 		GameRegistry.registerItem(CeramicMold , CeramicMold.getUnlocalizedName());

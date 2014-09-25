@@ -7,6 +7,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.model.TexturedQuad;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
@@ -27,7 +28,7 @@ public class ModelPotteryBase extends ModelBox
 
 	public ModelPotteryBase(ModelRenderer renderer, int textureOffsetX, int textureOffsetY,
 			float originX, float originY, float originZ, int width, int height, int depth,
-			float scale, Object[] dataArray) {
+			float scale, Object[] dataArray, boolean connectTop) {
 		super(renderer, textureOffsetX, textureOffsetY, originX, originY, originZ, width, height, depth, scale);
 		/*
         this.vertexPositions = new PositionTextureVertex[8];
@@ -88,26 +89,27 @@ public class ModelPotteryBase extends ModelBox
 
 		polygons = buildSides(rings,renderer, textureOffsetX,  textureOffsetY,
 			 originX,  originY, originZ,  width,  height,  depth,
-			 scale);
+			 scale, connectTop);
 		
 	}
 
 	public PositionTextureVertex [] newRing(float originX,float originY,float originZ,float offsetX,float offsetY,float offsetZ,float width){
 		PositionTextureVertex[] vert = new PositionTextureVertex[8];
-		vert[0] = new PositionTextureVertex(originX+offsetX-(width/4f),originY+offsetY,originZ+offsetZ-(width/2f),0,0);
-		vert[1] = new PositionTextureVertex(originX+offsetX+(width/4f),originY+offsetY,originZ+offsetZ-(width/2f),0,0);
-		vert[2] = new PositionTextureVertex(originX+offsetX+(width/2f),originY+offsetY,originZ+offsetZ-(width/4f),0,0);
-		vert[3] = new PositionTextureVertex(originX+offsetX+(width/2f),originY+offsetY,originZ+offsetZ+(width/4f),0,0);
-		vert[4] = new PositionTextureVertex(originX+offsetX+(width/4f),originY+offsetY,originZ+offsetZ+(width/2f),0,0);
-		vert[5] = new PositionTextureVertex(originX+offsetX-(width/4f),originY+offsetY,originZ+offsetZ+(width/2f),0,0);
-		vert[6] = new PositionTextureVertex(originX+offsetX-(width/2f),originY+offsetY,originZ+offsetZ+(width/4f),0,0);
-		vert[7] = new PositionTextureVertex(originX+offsetX-(width/2f),originY+offsetY,originZ+offsetZ-(width/4f),0,0);
+		float width_x = width / (MathHelper.sqrt_float(2) + 2);
+		vert[0] = new PositionTextureVertex(originX+offsetX-((width/2) -width_x),originY+offsetY,originZ+offsetZ-(width/2f),0,0);
+		vert[1] = new PositionTextureVertex(originX+offsetX+((width/2) -width_x),originY+offsetY,originZ+offsetZ-(width/2f),0,0);
+		vert[2] = new PositionTextureVertex(originX+offsetX+(width/2f),originY+offsetY,originZ+offsetZ-((width/2) -width_x),0,0);
+		vert[3] = new PositionTextureVertex(originX+offsetX+(width/2f),originY+offsetY,originZ+offsetZ+((width/2) -width_x),0,0);
+		vert[4] = new PositionTextureVertex(originX+offsetX+((width/2) -width_x),originY+offsetY,originZ+offsetZ+(width/2f),0,0);
+		vert[5] = new PositionTextureVertex(originX+offsetX-((width/2) -width_x),originY+offsetY,originZ+offsetZ+(width/2f),0,0);
+		vert[6] = new PositionTextureVertex(originX+offsetX-(width/2f),originY+offsetY,originZ+offsetZ+((width/2) -width_x),0,0);
+		vert[7] = new PositionTextureVertex(originX+offsetX-(width/2f),originY+offsetY,originZ+offsetZ-((width/2) -width_x),0,0);
 		return vert;
 	}
 
 	public ArrayList<TexturedQuad> buildSides(Object[] vertices,ModelRenderer renderer, int textureOffsetX, int textureOffsetY,
 			float originX, float originY, float originZ, int width, int height, int depth,
-			float scale){
+			float scale, boolean connectTopFace){
 
 		ArrayList<TexturedQuad> aList = new ArrayList();
 		for(int i = 0; i < vertices.length-1;i++){
@@ -120,6 +122,13 @@ public class ModelPotteryBase extends ModelBox
 		aList.add(new TexturedQuad(new PositionTextureVertex[]{baseRing[1],baseRing[2],baseRing[3],baseRing[0]}));
 		aList.add(new TexturedQuad(new PositionTextureVertex[]{baseRing[0],baseRing[3],baseRing[4],baseRing[7]}));
 		aList.add(new TexturedQuad(new PositionTextureVertex[]{baseRing[5],baseRing[6],baseRing[7],baseRing[4]}));
+		
+		if(connectTopFace){
+			PositionTextureVertex [] topRing = (PositionTextureVertex [])(vertices[vertices.length -1]);
+			aList.add(new TexturedQuad(new PositionTextureVertex[]{topRing[1],topRing[2],topRing[3],topRing[0]}));
+			aList.add(new TexturedQuad(new PositionTextureVertex[]{topRing[0],topRing[3],topRing[4],topRing[7]}));
+			aList.add(new TexturedQuad(new PositionTextureVertex[]{topRing[5],topRing[6],topRing[7],topRing[4]}));
+		}
 		return aList;
 	}
 

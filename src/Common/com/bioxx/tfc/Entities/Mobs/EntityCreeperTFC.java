@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Entities.Mobs;
 
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 
@@ -28,7 +29,7 @@ public class EntityCreeperTFC extends EntityCreeper implements IInnateArmor
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
 		Entity entity = par1DamageSource.getEntity();
-		if(entity instanceof EntityPlayer){
+		if(entity instanceof EntityPlayer && ((EntityPlayer) entity).getHeldItem().getItem().equals(TFCItems.Stick)){
 			((EntityPlayer)entity).triggerAchievement(TFC_Achievements.achPokeCreeper);
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);

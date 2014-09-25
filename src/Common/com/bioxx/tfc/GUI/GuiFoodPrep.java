@@ -100,9 +100,9 @@ public class GuiFoodPrep extends GuiContainerTFC
 	public void updateScreen()
 	{
 		super.updateScreen();
-		if(guiTab == 0 && table.validateSandwich() && !((GuiButton)buttonList.get(0)).enabled)
+		if(guiTab == 0 && table.validateSandwich())
 			((GuiButton)buttonList.get(0)).enabled = true;
-		else if(guiTab == 1 && table.validateSalad() && !((GuiButton)buttonList.get(0)).enabled)
+		else if(guiTab == 1 && table.validateSalad())
 			((GuiButton)buttonList.get(0)).enabled = true;
 		else if(((GuiButton)buttonList.get(0)).enabled)
 			((GuiButton)buttonList.get(0)).enabled = false;

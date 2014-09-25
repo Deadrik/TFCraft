@@ -2,6 +2,16 @@ package com.bioxx.tfc.Items.Pottery;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -13,15 +23,6 @@ import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.ISize;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -100,53 +101,41 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 					te = (TEPottery) world.getTileEntity(x, y + offset, z);
 					if(hitX < 0.5 && hitZ < 0.5)
 					{
-						if(te.inventory[0] == null)
+						if(te.canAddItem(0))
 						{
 							te.inventory[0] = new ItemStack(this, 1, itemstack.getItemDamage());
 							te.inventory[0].stackTagCompound = itemstack.stackTagCompound;
 							itemstack.stackSize--;
 							world.markBlockForUpdate(x, y + offset, z);
-//							try {
-//								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
-//							} catch (IOException e) {}
 						}
 					}
 					else if(hitX > 0.5 && hitZ < 0.5)
 					{
-						if(te.inventory[1] == null)
+						if(te.canAddItem(1))
 						{
 							te.inventory[1] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[1].stackTagCompound = itemstack.stackTagCompound;
 							itemstack.stackSize--;
 							world.markBlockForUpdate(x, y + offset, z);
-//							try {
-//								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
-//							} catch (IOException e) {}
 						}
 					}
 					else if(hitX < 0.5 && hitZ > 0.5)
 					{
-						if(te.inventory[2] == null)
+						if(te.canAddItem(2))
 						{
 							te.inventory[2] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[2].stackTagCompound = itemstack.stackTagCompound;
 							itemstack.stackSize--;
 							world.markBlockForUpdate(x, y + offset, z);
-//							try {
-//								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
-//							} catch (IOException e) {}
 						}
 					}
 					else if(hitX > 0.5 && hitZ > 0.5)
-						if(te.inventory[3] == null)
+						if(te.canAddItem(3))
 						{
 							te.inventory[3] = new ItemStack(this,1,itemstack.getItemDamage());
 							te.inventory[3].stackTagCompound = itemstack.stackTagCompound;
 							itemstack.stackSize--;
 							world.markBlockForUpdate(x, y + offset, z);
-//							try {
-//								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
-//							} catch (IOException e) {}
 						}
 				}
 				return true;
@@ -163,23 +152,23 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	{
 	}
 
-//	private Packet sendInitPacket(NetworkTileEntity te, int x, int y, int z) throws IOException
-//	{
-//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-//		DataOutputStream dos=new DataOutputStream(bos);
-//		try
-//		{
-//			//The packet type sent determines who is expected to process this packet, the client or the server.
-//			dos.writeByte(PacketHandler.Packet_Init_Block_Client);
-//			dos.writeInt(x);
-//			dos.writeInt(y);
-//			dos.writeInt(z);
-//			te.createInitPacket(dos);
-//		} 
-//		catch (IOException e)
-//		{
-//		}
-//		return PacketHandler.getPacket(bos);
-//	}
+	//	private Packet sendInitPacket(NetworkTileEntity te, int x, int y, int z) throws IOException
+	//	{
+	//		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+	//		DataOutputStream dos=new DataOutputStream(bos);
+	//		try
+	//		{
+	//			//The packet type sent determines who is expected to process this packet, the client or the server.
+	//			dos.writeByte(PacketHandler.Packet_Init_Block_Client);
+	//			dos.writeInt(x);
+	//			dos.writeInt(y);
+	//			dos.writeInt(z);
+	//			te.createInitPacket(dos);
+	//		} 
+	//		catch (IOException e)
+	//		{
+	//		}
+	//		return PacketHandler.getPacket(bos);
+	//	}
 
 }
