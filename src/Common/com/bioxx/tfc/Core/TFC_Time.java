@@ -68,6 +68,14 @@ public class TFC_Time
 	public static long ticksInMonth = daysInMonth * dayLength;
 	public static long startTime = ticksInMonth * 3;
 
+	public static void setYearLength(int length)
+	{
+		daysInYear = length;
+		daysInMonth = daysInYear/12;
+		ticksInYear = daysInYear * dayLength;
+		ticksInMonth = daysInMonth * dayLength;
+	}
+
 	public static void UpdateTime(World world)
 	{
 		time = world.getWorldInfo().getWorldTime();
