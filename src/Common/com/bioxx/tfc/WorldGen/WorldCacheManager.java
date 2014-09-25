@@ -1,5 +1,6 @@
 package com.bioxx.tfc.WorldGen;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import net.minecraft.world.World;
@@ -165,9 +166,9 @@ public class WorldCacheManager
 		this.stabilityCache.cleanupCache();
 		this.phCache.cleanupCache();
 		this.drainageCache.cleanupCache();
-		while(worldTempCache.size() > 20000)
+		while(worldTempCache.size() > 21000)
 		{
-			worldTempCache.remove(worldTempCache.keySet().iterator().next());
+			trimTempCache();
 		}
 	}
 
@@ -183,8 +184,17 @@ public class WorldCacheManager
 	{
 		String key = x+","+z+","+totalHours;
 		worldTempCache.put(key, temp);
+		trimTempCache();
+	}
+
+	private void trimTempCache()
+	{
 		if(worldTempCache.size() > 20000)
-			worldTempCache.remove(worldTempCache.keySet().iterator().next());
+		{
+			Iterator iter = worldTempCache.keySet().iterator();
+			if(iter.hasNext())
+				worldTempCache.remove(iter.next());
+		}
 	}
 
 	public DataLayer getDataLayerAt(DataCache cache, GenLayerTFC indexLayers, int par1, int par2, int index)
