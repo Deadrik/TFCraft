@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
@@ -17,7 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayer.EnumStatus;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
@@ -27,6 +21,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.WorldGen.TFCBiome;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -149,11 +149,11 @@ public class BlockBed extends BlockDirectional
 	@Override
 	public boolean isBed(IBlockAccess world, int x, int y, int z, EntityLivingBase player)
 	{
-//		World w = player.worldObj;
-//		if(!w.isRemote && player!=null)
-//			((EntityPlayer)player).sleepTimer = 50;
+		World w = (World)world;
+		if(!w.isRemote && player!=null)
+			((EntityPlayer)player).sleepTimer = 50;
 
-		return this == Blocks.bed;
+		return true;
 	}
 
 
@@ -360,7 +360,7 @@ public class BlockBed extends BlockDirectional
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		
+
 		ret.add(new ItemStack(TFCItems.Hide,1,2));
 		ret.add(new ItemStack(TFCBlocks.Thatch,2,0));
 		return ret;
