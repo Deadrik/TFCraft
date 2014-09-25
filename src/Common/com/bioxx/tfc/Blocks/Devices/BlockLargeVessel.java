@@ -29,7 +29,7 @@ public class BlockLargeVessel extends BlockBarrel
 	{
 		super();
 		this.setCreativeTab(TFCTabs.TFCDevices);
-		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 1, 0.9f);
+		this.setBlockBounds(0.2f, 0, 0.2f, 0.8f, 0.7f, 0.8f);
 
 	}
 
