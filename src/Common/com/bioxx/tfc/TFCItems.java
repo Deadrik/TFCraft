@@ -75,7 +75,6 @@ import com.bioxx.tfc.Items.Tools.ItemCustomBucket;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
 import com.bioxx.tfc.Items.Tools.ItemCustomFishingRod;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
-import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.Items.Tools.ItemCustomPickaxe;
 import com.bioxx.tfc.Items.Tools.ItemCustomSaw;
 import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
@@ -86,6 +85,7 @@ import com.bioxx.tfc.Items.Tools.ItemFlintSteel;
 import com.bioxx.tfc.Items.Tools.ItemGoldPan;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
+import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.Items.Tools.ItemMiscToolHead;
 import com.bioxx.tfc.Items.Tools.ItemProPick;
 import com.bioxx.tfc.Items.Tools.ItemShears;
@@ -853,6 +853,7 @@ public class TFCItems
 	public static Item PotteryJug;
 	public static Item PotteryPot;
 	public static Item PotterySmallVessel;
+	public static Item PotteryBowl;
 	public static Item KilnRack;
 	public static Item Straw;
 	public static Item FlatClay;
@@ -1527,6 +1528,7 @@ public class TFCItems
 		PotterySmallVessel = new ItemPotterySmallVessel().setUnlocalizedName("Small Vessel");
 		PotteryPot = new ItemPotteryPot().setUnlocalizedName("Pot");
 		CeramicMold = new ItemPotteryBase().setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
+		PotteryBowl = new ItemPotteryBase().setMetaNames(new String[]{"Clay Bowl","Ceramic Bowl"}).setUnlocalizedName("ClayBowl");
 		ClayBall = new ItemClay().setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1)).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("Clay");
 		FireBrick = new ItemPotteryBase().setMetaNames(new String[]{"Clay Fire Brick","Fire Brick"}).setUnlocalizedName("Fire Brick");
 
@@ -2571,6 +2573,7 @@ public class TFCItems
 
 		GameRegistry.registerItem(PotteryJug , PotteryJug.getUnlocalizedName());
 		GameRegistry.registerItem(PotterySmallVessel , PotterySmallVessel.getUnlocalizedName());
+		GameRegistry.registerItem(PotteryBowl, PotteryBowl.getUnlocalizedName());
 		GameRegistry.registerItem(PotteryPot , PotteryPot.getUnlocalizedName());
 
 		GameRegistry.registerItem(CeramicMold , CeramicMold.getUnlocalizedName());

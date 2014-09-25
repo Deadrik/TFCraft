@@ -7,6 +7,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -34,6 +35,17 @@ public class TEPottery extends NetworkTileEntity implements IInventory
 	{
 		inventory = new ItemStack[12];
 		hasRack = false;
+	}
+
+	public boolean canAddItem(int slot)
+	{
+		if(inventory[0] != null && inventory[0].getItem() instanceof ItemBlock)
+		{
+			return false;
+		}
+		if(inventory[slot] != null)
+			return false;
+		return true;
 	}
 
 	@Override

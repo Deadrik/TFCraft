@@ -2417,3 +2417,5 @@ food.cooked.3=Dark
 food.cooked.4=Very Dark
 gui.FoodPrep.Sandwich=Sandwich
 gui.FoodPrep.Salad=Salad
+item.Sandwich.name=Sandwich
+item.Salad.name=Salad

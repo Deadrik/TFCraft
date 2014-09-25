@@ -5,13 +5,13 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEFoodPrep;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
@@ -50,7 +50,7 @@ public class ItemKnife extends ItemWeapon implements IKnife
 
 			for(int i = 0; i < 36 && hasBowl == -1;i++)
 			{
-				if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() == Items.bowl)
+				if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() == TFCItems.PotteryBowl && entityplayer.inventory.mainInventory[i].getItemDamage() == 1)
 					hasBowl = i;
 			}
 
