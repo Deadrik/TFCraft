@@ -171,9 +171,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
 		data.heightmap = heightMap;
-
-		if(!this.worldObj.isRemote)
-			ChunkDataManager.addData(data.chunkX, data.chunkZ, data);
+		ChunkDataManager.addData(data.chunkX, data.chunkZ, data);
 
 		chunk.generateSkylightMap();
 		return chunk;

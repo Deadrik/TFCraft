@@ -37,16 +37,19 @@ public class ChunkDataEventHandler
 	{
 		if(!event.world.isRemote)
 		{
-			ChunkData data = ChunkDataManager.getData(event.getChunk().xPosition, event.getChunk().zPosition);
+			NBTTagCompound levelTag = event.getData().getCompoundTag("Level");
+			int x = levelTag.getInteger("xPos");
+			int z = levelTag.getInteger("zPos");
+			ChunkData data = ChunkDataManager.getData(x, z);
 
 			if(data != null)
 			{
 				NBTTagCompound spawnProtectionTag = data.getTag();
-                // Why was this line here in the first place?
+				// Why was this line here in the first place?
 				//spawnProtectionTag = new NBTTagCompound();
 				event.getData().setTag("Spawn Protection", spawnProtectionTag);
-			} /*else
-				System.out.println("Attempting to save Chunkdata that has already been unloaded.");*/
+			} else
+				System.out.println("Attempting to save Chunkdata that has already been unloaded.");
 		}
 	}
 }

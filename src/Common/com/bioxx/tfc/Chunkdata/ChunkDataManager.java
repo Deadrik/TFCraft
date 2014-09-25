@@ -10,18 +10,24 @@ import com.bioxx.tfc.api.TFCOptions;
 public class ChunkDataManager 
 {
 	private static Map chunkmap = Collections.synchronizedMap(new HashMap());
+	private static Map chunkmapunload = Collections.synchronizedMap(new HashMap());
 
-	public static void removeData(int x, int z)
+	public static ChunkData removeData(int x, int z)
 	{
 		synchronized(chunkmap)
 		{
 			if(chunkmap.containsKey(x + "," + z))
+			{
+				chunkmapunload.put(x + "," + z, chunkmap.get(x + "," + z));
 				chunkmap.remove(x + "," + z);
-			/*else
-				System.out.println("Tried to unload chunkdata from the chunkmap that didnt exist at " + x + "," + z);*/
+				return (ChunkData) chunkmapunload.get(x + "," + z);
+			}
+			else if(chunkmapunload.containsKey(x + "," + z))
+			{
+				chunkmapunload.remove(x + "," + z);
+			}
 		}
-		/*if(TFCOptions.enableDebugMode)
-			System.out.println("ChunkDataManager chunkmap size: "+chunkmap.size());*/
+		return null;
 	}
 
 	public static void addData(int x, int z, ChunkData cd)
@@ -40,6 +46,12 @@ public class ChunkDataManager
 		{
 			if(chunkmap.containsKey(x + "," + z))
 				return (ChunkData) chunkmap.get(x + "," + z);
+			else if(chunkmapunload.containsKey(x + "," + z))
+			{
+				ChunkData cd = (ChunkData) chunkmapunload.get(x + "," + z);
+				chunkmapunload.remove(x + "," + z);
+				return cd;
+			}
 			else return null;
 		}
 	}
