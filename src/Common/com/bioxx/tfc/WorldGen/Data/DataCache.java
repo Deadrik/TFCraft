@@ -64,12 +64,15 @@ public class DataCache
 			for (int var5 = 0; var5 < this.cache.size(); ++var5)
 			{
 				DataCacheBlockTFC var6 = (DataCacheBlockTFC)this.cache.get(var5);
-				long var7 = var1 - var6.lastAccessTime;
-				if (var7 > 30000L || var7 < 0L)
+				if(var6 != null)
 				{
-					this.cache.remove(var5--);
-					long var9 = (long)var6.xPosition & 4294967295L | ((long)var6.zPosition & 4294967295L) << 32;
-					this.cacheMap.remove(var9);
+					long var7 = var1 - var6.lastAccessTime;
+					if (var7 > 30000L || var7 < 0L)
+					{
+						this.cache.remove(var5--);
+						long var9 = (long)var6.xPosition & 4294967295L | ((long)var6.zPosition & 4294967295L) << 32;
+						this.cacheMap.remove(var9);
+					}
 				}
 			}
 		}
