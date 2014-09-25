@@ -27,7 +27,10 @@ public class TFCProvider extends WorldProvider
 	protected void registerWorldChunkManager()
 	{
 		super.registerWorldChunkManager();
-		TFC_Climate.worldPair.put(worldObj.provider.dimensionId, new WorldLayerManager(worldObj));
+		if(worldObj.isRemote)
+			TFC_Climate.worldPair.put(worldObj.provider.dimensionId+"-Client", new WorldCacheManager(worldObj));
+		else
+			TFC_Climate.worldPair.put(worldObj.provider.dimensionId+"-Server", new WorldCacheManager(worldObj));
 	}
 
 	@Override
@@ -197,7 +200,7 @@ return biome;
 						/*BiomeGenBase b = worldObj.getBiomeGenForCoords(x, z);
 						if((b == TFCBiome.ocean || b == TFCBiome.lake || b == TFCBiome.river || b == TFCBiome.river) && y == 143)
 							flag = 2;*/
-	
+
 						if((meta & 1) == 0)
 						{
 							worldObj.setBlock(x, y, z, TFCBlocks.SaltWater, 0, flag);

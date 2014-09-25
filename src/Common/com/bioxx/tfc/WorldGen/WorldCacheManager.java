@@ -1,5 +1,7 @@
 package com.bioxx.tfc.WorldGen;
 
+import java.util.LinkedHashMap;
+
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.IntCache;
@@ -14,8 +16,9 @@ import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Rock.GenRockLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Stability.GenStabilityLayer;
 import com.bioxx.tfc.WorldGen.GenLayers.DataLayers.Tree.GenTreeLayer;
 
-public class WorldLayerManager 
+public class WorldCacheManager 
 {	
+	World localWorld;
 	//Rocks
 	protected GenLayerTFC[] rocksIndexLayer;
 	protected DataCache[] rockCache;
@@ -44,6 +47,8 @@ public class WorldLayerManager
 	protected GenLayerTFC drainageIndexLayer;
 	protected DataCache drainageCache;
 
+	protected LinkedHashMap<String, Float> worldTempCache;
+
 	public long seed = 0;
 
 	public static DataLayer[] RockLayer1 = new DataLayer[]{
@@ -65,7 +70,7 @@ public class WorldLayerManager
 		DataLayer.Hickory, DataLayer.Maple, DataLayer.Oak, DataLayer.Pine, DataLayer.Redwood, DataLayer.Pine, DataLayer.Spruce, DataLayer.Sycamore, 
 		DataLayer.WhiteCedar, DataLayer.WhiteElm, DataLayer.Willow, DataLayer.NoTree};
 
-	public WorldLayerManager()
+	private WorldCacheManager()
 	{
 		rockCache = new DataCache[3];
 		treeCache = new DataCache[3];
@@ -80,14 +85,16 @@ public class WorldLayerManager
 		stabilityCache = new DataCache(this, 0);
 		phCache = new DataCache(this, 0);
 		drainageCache = new DataCache(this, 0);
+		worldTempCache = new LinkedHashMap<String, Float>();
 	}
 
-	public WorldLayerManager(World world)
+	public WorldCacheManager(World world)
 	{
 		this(world.getSeed(), world.getWorldInfo().getTerrainType());
+		localWorld = world;
 	}
 
-	public WorldLayerManager(long Seed, WorldType worldtype)
+	private WorldCacheManager(long Seed, WorldType worldtype)
 	{
 		this();
 		seed = Seed;
@@ -120,6 +127,8 @@ public class WorldLayerManager
 
 		//Setup Soil Drainage
 		drainageIndexLayer = GenDrainageLayer.initialize(Seed+11, worldtype);
+
+		worldTempCache = new LinkedHashMap<String, Float>();
 	}
 
 	public float[] getRainfall(float[] par1ArrayOfFloat, int par2, int par3, int par4, int par5)
@@ -156,6 +165,24 @@ public class WorldLayerManager
 		this.stabilityCache.cleanupCache();
 		this.phCache.cleanupCache();
 		this.drainageCache.cleanupCache();
+		while(worldTempCache.size() > 10000)
+		{
+			worldTempCache.remove(worldTempCache.keySet().toArray()[0]);
+		}
+	}
+
+	public float getTemp(int x, int z, int totalHours)
+	{
+		String key = x+","+z+","+totalHours;
+		if(worldTempCache.containsKey(key))
+			return worldTempCache.get(key);
+		return Float.MIN_VALUE;
+	}
+
+	public void addTemp(int x, int z, int totalHours, float temp)
+	{
+		String key = x+","+z+","+totalHours;
+		worldTempCache.put(key, temp);
 	}
 
 	public DataLayer getDataLayerAt(DataCache cache, GenLayerTFC indexLayers, int par1, int par2, int index)

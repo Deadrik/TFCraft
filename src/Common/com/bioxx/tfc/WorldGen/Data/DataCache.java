@@ -7,13 +7,13 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.LongHashMap;
 
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.WorldLayerManager;
+import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.WorldGen.GenLayers.GenLayerTFC;
 
 public class DataCache
 {
 	/** Reference to the WorldChunkManager */
-	private final WorldLayerManager chunkManager;
+	private final WorldCacheManager chunkManager;
 	/** The last time this BiomeCache was cleaned, in milliseconds.*/
 	private long lastCleanupTime = 0L;
 	/** The map of keys to BiomeCacheBlocks. Keys are based on the chunk x, z coordinates as (x | z << 32). */
@@ -22,12 +22,12 @@ public class DataCache
 	private List cache = new ArrayList();
 	private int index;
 
-	public DataCache(WorldLayerManager worldLayerManager)
+	public DataCache(WorldCacheManager worldLayerManager)
 	{
 		this.chunkManager = worldLayerManager;
 	}
 
-	public DataCache(WorldLayerManager par1, int ind)
+	public DataCache(WorldCacheManager par1, int ind)
 	{
 		this.chunkManager = par1;
 		index = ind;
@@ -86,7 +86,7 @@ public class DataCache
 	/**
 	 * Get the world chunk manager object for a biome list.
 	 */
-	static WorldLayerManager getChunkManager(DataCache cache)
+	static WorldCacheManager getChunkManager(DataCache cache)
 	{
 		return cache.chunkManager;
 	}
