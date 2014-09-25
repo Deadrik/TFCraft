@@ -151,13 +151,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		this.generateTerrainHigh(chunkX, chunkZ, idsTop);
 
 		biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
-		rockLayer1 = TFC_Climate.getManager(worldObj).loadRockLayerGeneratorData(rockLayer1, chunkX * 16, chunkZ * 16, 16, 16, 0);
-		rockLayer2 = TFC_Climate.getManager(worldObj).loadRockLayerGeneratorData(rockLayer2, chunkX * 16, chunkZ * 16, 16, 16, 1);
-		rockLayer3 = TFC_Climate.getManager(worldObj).loadRockLayerGeneratorData(rockLayer3, chunkX * 16, chunkZ * 16, 16, 16, 2);
-		evtLayer = TFC_Climate.getManager(worldObj).loadEVTLayerGeneratorData(evtLayer, chunkX * 16, chunkZ * 16, 16, 16);
-		rainfallLayer = TFC_Climate.getManager(worldObj).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
-		stabilityLayer = TFC_Climate.getManager(worldObj).loadStabilityLayerGeneratorData(stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
-		drainageLayer = TFC_Climate.getManager(worldObj).loadDrainageLayerGeneratorData(stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
+		rockLayer1 = TFC_Climate.getCacheManager(worldObj).loadRockLayerGeneratorData(rockLayer1, chunkX * 16, chunkZ * 16, 16, 16, 0);
+		rockLayer2 = TFC_Climate.getCacheManager(worldObj).loadRockLayerGeneratorData(rockLayer2, chunkX * 16, chunkZ * 16, 16, 16, 1);
+		rockLayer3 = TFC_Climate.getCacheManager(worldObj).loadRockLayerGeneratorData(rockLayer3, chunkX * 16, chunkZ * 16, 16, 16, 2);
+		evtLayer = TFC_Climate.getCacheManager(worldObj).loadEVTLayerGeneratorData(evtLayer, chunkX * 16, chunkZ * 16, 16, 16);
+		rainfallLayer = TFC_Climate.getCacheManager(worldObj).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
+		stabilityLayer = TFC_Climate.getCacheManager(worldObj).loadStabilityLayerGeneratorData(stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
+		drainageLayer = TFC_Climate.getCacheManager(worldObj).loadDrainageLayerGeneratorData(stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
 		heightMap = new int[256];
 
 		replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
@@ -244,7 +244,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 24, 0, 0));
 		float temp = TFC_Climate.getBioTemperatureHeight(world, x, world.getTopSolidOrLiquidBlock(x, z), z);
 		float rain = TFC_Climate.getRainfall(world, x, 150, z);
-		float evt = TFC_Climate.getManager(world).getEVTLayerAt( x, z).floatdata1;
+		float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt( x, z).floatdata1;
 		boolean isMountainous = biome == TFCBiome.Mountains || biome == TFCBiome.HighHills;
 		//To adjust animal spawning at higher altitudes
 		int mountainousAreaModifier = isMountainous? - 1 : 0;

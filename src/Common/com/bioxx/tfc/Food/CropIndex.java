@@ -139,7 +139,7 @@ public class CropIndex
 			int soilType2 = (farmBlock == TFCBlocks.Dirt ? te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-2, te.zCoord)*2 : 
 				farmBlock == TFCBlocks.Dirt2 ? (te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord-2, te.zCoord)+16)*2 : 0);
 
-			int ph = TFC_Climate.getManager(te.getWorldObj()).getPHLayerAt(te.xCoord, te.zCoord).data1*100;
+			int ph = TFC_Climate.getCacheManager(te.getWorldObj()).getPHLayerAt(te.xCoord, te.zCoord).data1*100;
 			int drainage = 0;
 
 			for(int y = 2; y < 8; y++)

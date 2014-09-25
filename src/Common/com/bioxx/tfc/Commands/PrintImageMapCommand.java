@@ -84,7 +84,7 @@ public class PrintImageMapCommand extends CommandBase
 				for(int z = -sizeHalf; z < sizeHalf; z++)
 				{
 					count++;
-					int ph = TFC_Climate.getManager(world).getDrainageLayerAt(xCoord+x*skipSize, zCoord+z*skipSize).data1;
+					int ph = TFC_Climate.getCacheManager(world).getDrainageLayerAt(xCoord+x*skipSize, zCoord+z*skipSize).data1;
 					int g = (ph*50);
 					graphics.setColor(Color.getColor("", (g << 8)));	
 					graphics.drawRect(x+sizeHalf, z+sizeHalf, 1, 1);
@@ -120,7 +120,7 @@ public class PrintImageMapCommand extends CommandBase
 				for(int z = -sizeHalf; z < sizeHalf; z++)
 				{
 					count++;
-					DataLayer dl = TFC_Climate.getManager(world).getDrainageLayerAt(xCoord+x*skipSize, zCoord+z*skipSize);
+					DataLayer dl = TFC_Climate.getCacheManager(world).getDrainageLayerAt(xCoord+x*skipSize, zCoord+z*skipSize);
 					int drainage = dl.data1;
 					int r = (drainage*42)/2;
 					int g = (drainage*42)/4;

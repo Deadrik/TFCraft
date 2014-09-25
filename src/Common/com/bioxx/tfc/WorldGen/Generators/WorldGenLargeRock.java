@@ -53,7 +53,7 @@ public class WorldGenLargeRock implements IWorldGenerator
 
 	public void genFromPoint(World world, Random rand, int i, int j, int k,int yOffset)
 	{
-		DataLayer rockLayer1 = TFC_Climate.getManager(world).getRockLayerAt(i, k, 0);
+		DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(i, k, 0);
 		Vec3 center = Vec3.createVectorHelper(i, j + yOffset, k);
 		xWidth = 3;
 		xWidth2 = 3;

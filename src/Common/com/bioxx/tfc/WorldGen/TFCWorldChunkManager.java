@@ -83,7 +83,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	@Override
 	public float[] getRainfall(float[] par1ArrayOfFloat, int par2, int par3, int par4, int par5)
 	{
-		return TFC_Climate.getManager(worldObj).getRainfall(par1ArrayOfFloat, par2, par3, par4, par5);
+		return TFC_Climate.getCacheManager(worldObj).getRainfall(par1ArrayOfFloat, par2, par3, par4, par5);
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	public void cleanupCache()
 	{
 		this.biomeCache.cleanupCache();
-		TFC_Climate.getManager(this.worldObj).cleanupCache();
+		TFC_Climate.getCacheManager(this.worldObj).cleanupCache();
 	}
 
 }

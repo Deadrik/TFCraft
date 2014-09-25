@@ -135,7 +135,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 
 		if(world.isAirBlock(xCoord, yCoord - 1, zCoord))
 		{
-			DataLayer rockLayer1 = TFC_Climate.getManager(world).getRockLayerAt(xCoord, zCoord, 0);
+			DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 0);
 			//set the block below the tree to dirt.
 			world.setBlock(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
 		}

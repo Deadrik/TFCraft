@@ -62,7 +62,7 @@ public class WorldGenPlants implements IWorldGenerator
 		int flowersPerChunk = 0;
 		int mushroomsPerChunk = 0;
 
-		DataLayer evt = TFC_Climate.getManager(world).getEVTLayerAt(chunkX, chunkZ);
+		DataLayer evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(chunkX, chunkZ);
 		float rain = TFC_Climate.getRainfall(world, chunkX, 144, chunkZ);
 		float bioTemperature;
 

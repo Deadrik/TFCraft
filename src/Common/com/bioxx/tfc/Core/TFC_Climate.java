@@ -175,9 +175,9 @@ public class TFC_Climate
 
 	protected static float getTemp(World world, int day, int th, int x, int z)
 	{
-		if(TFC_Climate.getManager(world) != null)
+		if(TFC_Climate.getCacheManager(world) != null)
 		{
-			float cacheTemp = TFC_Climate.getManager(world).getTemp(x, z, th);
+			float cacheTemp = TFC_Climate.getCacheManager(world).getTemp(x, z, th);
 			if(cacheTemp != Float.MIN_VALUE)
 			{
 				return cacheTemp;
@@ -240,7 +240,7 @@ public class TFC_Climate
 				else
 					temp -= (8*rainMod)*zMod;
 			}
-			TFC_Climate.getManager(world).addTemp(x, z, th, temp);
+			TFC_Climate.getCacheManager(world).addTemp(x, z, th, temp);
 			return temp;
 		}
 		return -10;
@@ -248,7 +248,7 @@ public class TFC_Climate
 
 	protected static float getBioTemp(World world,int day, int x, int z)
 	{
-		if(TFC_Climate.getManager(world) != null)
+		if(TFC_Climate.getCacheManager(world) != null)
 		{
 			float zMod = getZFactor(z);
 			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
@@ -497,7 +497,7 @@ public class TFC_Climate
 
 	public static float getRainfall(World world, int x, int y, int z)
 	{
-		DataLayer dl = getManager(world).getRainfallLayerAt(x, z);
+		DataLayer dl = getCacheManager(world).getRainfallLayerAt(x, z);
 		return dl != null ? dl.floatdata1 : DataLayer.Rain_500.floatdata1;
 	}
 
@@ -559,12 +559,12 @@ public class TFC_Climate
 
 	public static int getTreeLayer(World world,int x, int y, int z, int index)
 	{
-		return getManager(world).getTreeLayerAt(x, z, index).data1;
+		return getCacheManager(world).getTreeLayerAt(x, z, index).data1;
 	}
 
 	public static DataLayer getRockLayer(World world,int x, int y, int z, int index)
 	{
-		return getManager(world).getRockLayerAt(x, z, index);
+		return getCacheManager(world).getRockLayerAt(x, z, index);
 	}
 
 	public static int getMaxZPos()
@@ -575,7 +575,7 @@ public class TFC_Climate
 	public static boolean isSwamp(World world, int x, int y, int z)
 	{
 		float rain = getRainfall(world, x, y, z);
-		float evt = getManager(world).getEVTLayerAt(x, z).floatdata1;
+		float evt = getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
 		if(rain >= 1000 && evt < 0.25 && world.getBiomeGenForCoords(x, z).heightVariation < 0.15)
 			return true;
 		return false;
@@ -583,14 +583,28 @@ public class TFC_Climate
 
 	public static int getStability(World world, int x, int z)
 	{
-		return getManager(world).getStabilityLayerAt(x, z).data1;
+		return getCacheManager(world).getStabilityLayerAt(x, z).data1;
 	}
 
-	public static WorldCacheManager getManager(World world)
+	public static WorldCacheManager getCacheManager(World world)
 	{
 		if(world.isRemote)
 			return worldPair.get(world.provider.dimensionId+"-Client");
 		else
 			return worldPair.get(world.provider.dimensionId+"-Server");
+	}
+
+	public static void removeCacheManager(World world)
+	{
+		if(world.isRemote)
+		{
+			if(worldPair.containsKey(world.provider.dimensionId+"-Client"))
+				worldPair.remove(world.provider.dimensionId+"-Client");
+		}
+		else
+		{
+			if(worldPair.containsKey(world.provider.dimensionId+"-Server"))
+				worldPair.remove(world.provider.dimensionId+"-Server");
+		}
 	}
 }

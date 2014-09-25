@@ -208,7 +208,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 		double xCoord = par2 * 16 + this.rand.nextInt(16);
 		double yCoord = this.rand.nextInt(1+this.rand.nextInt(140))+60;
 		double zCoord = par3 * 16 + this.rand.nextInt(16);
-		DataLayer rockLayer1 = TFC_Climate.getManager(world).getRockLayerAt((int)xCoord, (int)zCoord, 0);
+		DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt((int)xCoord, (int)zCoord, 0);
 		float rain = TFC_Climate.getRainfall(world, (int)xCoord, 144, (int)zCoord);
 		double width = 2;
 		int caveChance = 35;

@@ -400,7 +400,7 @@ public class TFCBiome extends BiomeGenBase
 
 	public static int getSurfaceRockLayer(World world, int i, int k)
 	{
-		return TFC_Climate.getManager(world).getRockLayerAt(i, k, 0).data2;
+		return TFC_Climate.getCacheManager(world).getRockLayerAt(i, k, 0).data2;
 	}
 
 	public static TFCBiome[] getBiomeGenArray()

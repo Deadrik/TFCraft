@@ -103,7 +103,7 @@ public class WorldGenSoilPits implements IWorldGenerator
 						for (int yCoord = j - depth; yCoord <= j + depth; ++yCoord)
 						{
 							Block block = world.getBlock(xCoord, yCoord, zCoord);
-							DataLayer rockLayer1 = TFC_Climate.getManager(world).getRockLayerAt(xCoord, zCoord, 0);
+							DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 0);
 							if (block == TFCBlocks.Dirt || block == TFCBlocks.Dirt2)
 							{
 								world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClay(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);

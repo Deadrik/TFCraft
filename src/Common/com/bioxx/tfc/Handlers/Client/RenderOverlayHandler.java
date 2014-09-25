@@ -237,7 +237,7 @@ public class RenderOverlayHandler
 			int xCoord = (int)player.posX;
 			int yCoord = (int)player.posY;
 			int zCoord = (int)player.posZ;
-			DataLayer evt = TFC_Climate.getManager(mc.theWorld).getEVTLayerAt(xCoord, zCoord);
+			DataLayer evt = TFC_Climate.getCacheManager(mc.theWorld).getEVTLayerAt(xCoord, zCoord);
 			event.left.add(String.format("rain: %.0f, temp: %.2f, average bio temp: %.2f, apparent temp: %.2f, evt: %.3f", new Object[] {
 					TFC_Climate.getRainfall(mc.theWorld, xCoord, yCoord, zCoord), 
 					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord),
@@ -248,11 +248,11 @@ public class RenderOverlayHandler
 			if(TFCOptions.enableDebugMode)
 			{
 				event.left.add("Stability: " + TFC_Climate.getStability(mc.theWorld, xCoord, zCoord) + 
-						", Drainage: " +TFC_Climate.getManager(mc.theWorld).getDrainageLayerAt(xCoord, zCoord).name +
-						", pH: " +TFC_Climate.getManager(mc.theWorld).getPHLayerAt(xCoord, zCoord).name);
-				event.left.add("Rock Layers: " + TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 0).name+", "+
-						TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 1).name+", "+
-						TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 2).name);
+						", Drainage: " +TFC_Climate.getCacheManager(mc.theWorld).getDrainageLayerAt(xCoord, zCoord).name +
+						", pH: " +TFC_Climate.getCacheManager(mc.theWorld).getPHLayerAt(xCoord, zCoord).name);
+				event.left.add("Rock Layers: " + TFC_Climate.getCacheManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 0).name+", "+
+						TFC_Climate.getCacheManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 1).name+", "+
+						TFC_Climate.getCacheManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 2).name);
 			}
 		}
 	}
