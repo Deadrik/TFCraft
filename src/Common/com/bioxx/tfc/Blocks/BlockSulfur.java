@@ -95,17 +95,17 @@ public class BlockSulfur extends BlockTerra implements ICustomCollision
 	public void onNeighborBlockChange(World world, int i, int j, int k, Block l)
 	{
 		int num = 0;
-		if(world.getBlock(i, j, k+1).isBlockNormalCube())
+		if(world.getBlock(i, j, k+1).isSideSolid(world, i, j, k, ForgeDirection.NORTH))
 			num++;
-		if(world.getBlock(i, j, k-1).isBlockNormalCube())
+		if(world.getBlock(i, j, k-1).isSideSolid(world, i, j, k, ForgeDirection.SOUTH))
 			num++;
-		if(world.getBlock(i+1, j, k).isBlockNormalCube())
+		if(world.getBlock(i+1, j, k).isSideSolid(world, i, j, k, ForgeDirection.WEST))
 			num++;
-		if(world.getBlock(i-1, j, k).isBlockNormalCube())
+		if(world.getBlock(i-1, j, k).isSideSolid(world, i, j, k, ForgeDirection.EAST))
 			num++;
-		if(world.getBlock(i, j+1, k).isBlockNormalCube())
+		if(world.getBlock(i, j+1, k).isSideSolid(world, i, j, k, ForgeDirection.DOWN))
 			num++;
-		if(world.getBlock(i, j-1, k).isBlockNormalCube())
+		if(world.getBlock(i, j-1, k).isSideSolid(world, i, j, k, ForgeDirection.UP))
 			num++;
 		if(num == 0)
 		{
