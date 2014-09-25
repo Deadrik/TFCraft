@@ -165,10 +165,10 @@ public class WorldCacheManager
 		this.stabilityCache.cleanupCache();
 		this.phCache.cleanupCache();
 		this.drainageCache.cleanupCache();
-		while(worldTempCache.size() > 20000)
+		/*while(worldTempCache.size() > 20000)
 		{
 			worldTempCache.remove(worldTempCache.keySet().toArray()[0]);
-		}
+		}*/
 	}
 
 	public float getTemp(int x, int z, int totalHours)
@@ -182,7 +182,9 @@ public class WorldCacheManager
 	public void addTemp(int x, int z, int totalHours, float temp)
 	{
 		String key = x+","+z+","+totalHours;
-		worldTempCache.put(key, temp);
+		/*worldTempCache.put(key, temp);
+		if(worldTempCache.size() > 20000)
+			worldTempCache.remove(worldTempCache.keySet().toArray()[0]);*/
 	}
 
 	public DataLayer getDataLayerAt(DataCache cache, GenLayerTFC indexLayers, int par1, int par2, int index)
