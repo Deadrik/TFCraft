@@ -166,7 +166,7 @@ public class WorldCacheManager
 		this.stabilityCache.cleanupCache();
 		this.phCache.cleanupCache();
 		this.drainageCache.cleanupCache();
-		while(worldTempCache.size() > 21000)
+		while(worldTempCache.size() > 51000)
 		{
 			trimTempCache();
 		}
@@ -189,7 +189,7 @@ public class WorldCacheManager
 
 	private void trimTempCache()
 	{
-		if(worldTempCache.size() > 20000)
+		if(worldTempCache.size() > 50000)
 		{
 			Iterator iter = worldTempCache.keySet().iterator();
 			if(iter.hasNext())
