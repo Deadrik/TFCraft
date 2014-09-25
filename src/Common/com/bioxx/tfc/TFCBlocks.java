@@ -754,6 +754,8 @@ public class TFCBlocks
 		Gravel.setHarvestLevel("shovel", 0);
 		Gravel2.setHarvestLevel("shovel", 0);
 		WaterPlant.setHarvestLevel("shovel", 0);
+		tilledSoil.setHarvestLevel("shovel", 0);
+		tilledSoil2.setHarvestLevel("shovel", 0);
 
 		Detailed.setHarvestLevel("axe", 0);
 		Blocks.oak_stairs.setHarvestLevel("axe", 0);
