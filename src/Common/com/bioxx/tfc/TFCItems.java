@@ -860,7 +860,7 @@ public class TFCItems
 	public static Item FireBrick;
 	public static Item Stick;
 	public static Item Arrow;
-	public static Item Leash;
+	public static Item Rope;
 
 	public static Item ClayMoldAxe;
 	public static Item ClayMoldChisel;
@@ -1019,7 +1019,8 @@ public class TFCItems
 		Dye = new ItemDyeCustom().setUnlocalizedName("dyePowder").setTextureName("dye_powder").setCreativeTab(TFCTabs.TFCMaterials);
 		GlassBottle = new ItemGlassBottle().setUnlocalizedName("Glass Bottle");
 		Potion = new ItemCustomPotion().setUnlocalizedName("potion").setTextureName("potion");
-		Leash = new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFCTools);
+		Rope = new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFCTools);
+		Items.lead = Rope;
 
 		minecartCrate = new ItemCustomMinecart(1).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 		GoldPan = new ItemGoldPan().setUnlocalizedName("GoldPan");
@@ -2619,7 +2620,7 @@ public class TFCItems
 		GameRegistry.registerItem(Bow, Bow.getUnlocalizedName());
 		GameRegistry.registerItem(Arrow, Arrow.getUnlocalizedName());
 		GameRegistry.registerItem(Dye, Dye.getUnlocalizedName());
-		GameRegistry.registerItem(Leash, Leash.getUnlocalizedName());
+		GameRegistry.registerItem(Rope, Rope.getUnlocalizedName());
 		GameRegistry.registerItem(ClayBall, ClayBall.getUnlocalizedName());
 		GameRegistry.registerItem(Powder, Powder.getUnlocalizedName());
 		GameRegistry.registerItem(Fertilizer, Fertilizer.getUnlocalizedName());
