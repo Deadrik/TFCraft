@@ -131,25 +131,28 @@ public class EntityLivingHandler
 			{
 				PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
 				//onUpdate(player) still has a !worldObj.isRemote check, but this allows us to render drunkenness
-				FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
-				foodstats.onUpdate(player);
-				if(pi != null && player.inventory.getCurrentItem() != null)
+				if(pi.PlayerUUID == player.getUniqueID())
 				{
-					if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)
+					FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+					foodstats.onUpdate(player);
+					if(pi != null && player.inventory.getCurrentItem() != null)
 					{
-						pi.guishowFoodRestoreAmount = true;
-						pi.guiFoodRestoreAmount = ((ItemMeal)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
+						if(player.inventory.getCurrentItem().getItem() instanceof ItemMeal)
+						{
+							pi.guishowFoodRestoreAmount = true;
+							pi.guiFoodRestoreAmount = ((ItemMeal)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
+						}
+						else if(player.inventory.getCurrentItem().getItem() instanceof ItemFoodTFC)
+						{
+							pi.guishowFoodRestoreAmount = true;
+							pi.guiFoodRestoreAmount = ((ItemFoodTFC)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
+						}
+						else
+							pi.guishowFoodRestoreAmount = false;
 					}
-					else if(player.inventory.getCurrentItem().getItem() instanceof ItemFoodTFC)
-					{
-						pi.guishowFoodRestoreAmount = true;
-						pi.guiFoodRestoreAmount = ((ItemFoodTFC)player.inventory.getCurrentItem().getItem()).getFoodWeight(player.inventory.getCurrentItem());
-					}
-					else
+					else if(pi != null)
 						pi.guishowFoodRestoreAmount = false;
 				}
-				else if(pi != null)
-					pi.guishowFoodRestoreAmount = false;
 			}
 		}
 	}
