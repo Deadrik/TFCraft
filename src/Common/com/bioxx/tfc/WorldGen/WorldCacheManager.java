@@ -165,7 +165,7 @@ public class WorldCacheManager
 		this.stabilityCache.cleanupCache();
 		this.phCache.cleanupCache();
 		this.drainageCache.cleanupCache();
-		while(worldTempCache.size() > 10000)
+		while(worldTempCache.size() > 20000)
 		{
 			worldTempCache.remove(worldTempCache.keySet().toArray()[0]);
 		}
