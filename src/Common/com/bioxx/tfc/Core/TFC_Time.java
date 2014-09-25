@@ -74,6 +74,7 @@ public class TFC_Time
 		daysInMonth = daysInYear/12;
 		ticksInYear = daysInYear * dayLength;
 		ticksInMonth = daysInMonth * dayLength;
+		startTime = ticksInMonth * 3;
 	}
 
 	public static void UpdateTime(World world)
