@@ -176,24 +176,35 @@ public class WorldCacheManager
 	{
 		String key = x+","+z+","+totalHours;
 		if(worldTempCache.containsKey(key))
-			return worldTempCache.get(key);
+		{
+			synchronized(worldTempCache)
+			{
+				return worldTempCache.get(key);
+			}
+		}
 		return Float.MIN_VALUE;
 	}
 
 	public void addTemp(int x, int z, int totalHours, float temp)
 	{
 		String key = x+","+z+","+totalHours;
-		worldTempCache.put(key, temp);
+		synchronized(worldTempCache)
+		{
+			worldTempCache.put(key, temp);
+		}
 		trimTempCache();
 	}
 
 	private void trimTempCache()
 	{
-		if(worldTempCache.size() > 50000)
+		synchronized(worldTempCache)
 		{
-			Iterator iter = worldTempCache.keySet().iterator();
-			if(iter.hasNext())
-				worldTempCache.remove(iter.next());
+			if(worldTempCache.size() > 50000)
+			{
+				Iterator iter = worldTempCache.keySet().iterator();
+				if(iter.hasNext())
+					worldTempCache.remove(iter.next());
+			}
 		}
 	}
 

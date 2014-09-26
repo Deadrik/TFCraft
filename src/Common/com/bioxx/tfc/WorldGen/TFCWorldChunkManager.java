@@ -223,7 +223,8 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	public void cleanupCache()
 	{
 		this.biomeCache.cleanupCache();
-		TFC_Climate.getCacheManager(this.worldObj).cleanupCache();
+		WorldCacheManager wcm = TFC_Climate.getCacheManager(this.worldObj);
+		if(wcm != null) wcm.cleanupCache();
 	}
 
 }
