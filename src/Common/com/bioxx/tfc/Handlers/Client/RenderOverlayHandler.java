@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -26,6 +27,7 @@ import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
@@ -224,6 +226,17 @@ public class RenderOverlayHandler
 				// We have to reset the color back to white
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
+			else if(mc.thePlayer.ridingEntity instanceof EntityLivingBase){
+				GuiIngameForge.renderHealthMount = false;
+				TFC_Core.bindTexture(tfcicons);
+				EntityLivingBase mount = ((EntityLivingBase) mc.thePlayer.ridingEntity);
+				this.drawTexturedModalRect(mid+1, armorRowHeight, 90, 0, 90, 10);
+				double mountMaxHealth = mount.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue();
+				double mountCurrentHealth = mount.getHealth();
+				float mountPercentHealth = (float)Math.min(mountCurrentHealth/mountMaxHealth, 1.0f);
+				this.drawTexturedModalRect(mid+1, armorRowHeight, 90, 9, (int) (90*mountPercentHealth), 9);
+			}
+			TFC_Core.bindTexture(new ResourceLocation("minecraft:textures/gui/icons.png"));
 		}
 	}
 

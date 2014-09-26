@@ -604,4 +604,19 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		// TODO Auto-generated method stub
 	}
+	@Override
+	public int getFamiliarityPlayers() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void handleFamiliarityUpdate() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void familiarize(EntityPlayer ep) {
+		// TODO Auto-generated method stub
+		
+	}
 }

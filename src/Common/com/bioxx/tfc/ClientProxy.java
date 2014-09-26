@@ -276,6 +276,7 @@ public class ClientProxy extends CommonProxy
 		GuiIngameForge.renderHealth = false;
 		GuiIngameForge.renderArmor = false;
 		GuiIngameForge.renderExperiance = false;
+		//GuiIngameForge.renderHealthMount = false;		//Forge re-enables it every tick
 	}
 
 	@Override

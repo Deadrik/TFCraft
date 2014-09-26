@@ -51,6 +51,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	public float hard_mod = 1;
 	public boolean inLove;
 	private int degreeofdiversion = 1;
+	private int familiarity = 0;
+	private long lastFamiliarityUpdate = 0;
+	private boolean familiarizedToday = false;
+	public int happyTicks;
 
 	public EntityWolfTFC(World par1World)
 	{
@@ -67,7 +71,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		pregnant = false;
-		pregnancyRequiredTime = (int) (4 * TFC_Time.ticksInMonth);
+		pregnancyRequiredTime = (int) (2.25 * TFC_Time.ticksInMonth);		//accurate to real life
 		timeOfConception = 0;
 		mateSizeMod = 1f;
 		sex = rand.nextInt(2);
@@ -90,7 +94,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		this.posZ = ((EntityLivingBase)mother).posZ;
 		size_mod = (((rand.nextInt (1+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size)/1.9F);
 		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
-
+		this.familiarity = (int) (mother.getFamiliarityPlayers()<90?mother.getFamiliarityPlayers()/2:mother.getFamiliarityPlayers()*0.9f);
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
@@ -115,6 +119,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		this.dataWatcher.addObject(14, new Float(1));
 		this.dataWatcher.addObject(15, Integer.valueOf(0));
 
+		this.dataWatcher.addObject(23, Integer.valueOf(0));
 		this.dataWatcher.addObject(24, Float.valueOf(1.0f));
 		this.dataWatcher.addObject(25, Float.valueOf(1.0f));
 		this.dataWatcher.addObject(26, Float.valueOf(1.0f));
@@ -132,12 +137,16 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	{
 		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("Angry", this.isAngry());
+		nbt.setInteger("Familiarity", familiarity);
+		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
 
 		nbt.setByte("tamed", this.dataWatcher.getWatchableObjectByte(16));
-		
+		nbt.setInteger("happy", happyTicks);
+
+
 		nbt.setFloat ("Strength Modifier", getStrength());
 		nbt.setFloat ("Aggression Modifier", getAggression());
 		nbt.setFloat ("Obedience Modifier", obedience_mod);
@@ -170,8 +179,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		colour_mod = nbt.getFloat ("Colour Modifier");
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
-		
+
 		this.dataWatcher.updateObject(16, nbt.getByte("tamed"));
+		this.happyTicks = nbt.getInteger("happy");
 
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
@@ -183,17 +193,19 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	@Override
 	public void setTamed(boolean par1)
 	{
-		super.setTamed(par1);
+		if(this.familiarity > 80){
+			super.setTamed(par1);
 
-		double healthRatio = this.getHealth() / this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() ;
+			double healthRatio = this.getHealth() / this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() ;
 
-		if (par1)
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.WolfHealth);
+			if (par1)
+				this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.WolfHealth);
 
-		else
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.WolfHealth);
+			else
+				this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(TFC_MobData.WolfHealth);
 
-		this.setHealth((float)(healthRatio * this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()));
+			this.setHealth((float)(healthRatio * this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()));
+		}
 	}
 
 	/**
@@ -217,6 +229,18 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			setGrowingAge(0);
 		else
 			setGrowingAge(-1);
+
+		this.handleFamiliarityUpdate();
+
+		if(!this.worldObj.isRemote){
+			if(happyTicks > 0){
+				happyTicks--;
+				this.dataWatcher.updateObject(23, happyTicks);
+			}
+		}
+		else{
+			this.happyTicks = this.dataWatcher.getWatchableObjectInt(23);
+		}
 
 		if(pregnant)
 		{
@@ -279,6 +303,35 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	}
 
 	@Override
+	public void handleFamiliarityUpdate(){
+		if(lastFamiliarityUpdate < TFC_Time.getTotalDays()){
+			if(familiarizedToday && familiarity < 100){
+				lastFamiliarityUpdate = TFC_Time.getTotalDays();
+				familiarizedToday = false;
+				float familiarityChange = (6 * obedience_mod / aggression_mod);
+				if(this.isAdult() && (familiarity > 30 || familiarity < 80)){
+					//Nothing
+				}
+				else if(this.isAdult() && familiarity >= 5){
+					familiarity += familiarityChange;
+				}
+				else if(!this.isAdult()){
+					float ageMod = 2f/(1f + TFC_Core.getPercentGrown(this));
+					familiarity += ageMod * familiarityChange;
+					if(familiarity > 70){
+						obedience_mod *= 1.01f;
+					}
+				}
+			}
+			else if(familiarity < 30){
+				familiarity -= 2*(TFC_Time.getTotalDays() - lastFamiliarityUpdate);
+			}
+		}
+		if(familiarity > 100)familiarity = 100;
+		if(familiarity < (this.getOwner()!=null?5:0))familiarity = (this.getOwner()!=null?5:0);
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float getTailRotation()
 	{
@@ -333,7 +386,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	@Override
 	public int getNumberOfDaysToAdult()
 	{
-		return TFC_Time.daysInMonth * 3;
+		return TFC_Time.daysInMonth * 9;
 	}
 
 	@Override
@@ -463,6 +516,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	{
 		if(!worldObj.isRemote)
 		{
+			if(player.isSneaking()){
+				this.familiarize(player);
+				return true;
+			}
 			if(player.getHeldItem() != null)
 			{
 				Item item = player.getHeldItem().getItem();
@@ -591,5 +648,21 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	public int GetPierceArmor()
 	{
 		return -335;
+	}
+	@Override
+	public int getFamiliarityPlayers() {
+		return familiarity;
+	}
+	@Override
+	public void familiarize(EntityPlayer ep) {
+		if(happyTicks == 0 && familiarity >= 5){
+			familiarizedToday = true;
+			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
+			this.playLivingSound();
+			this.happyTicks = 40;
+		}
+		if(this.familiarity > 80 && this.getOwner() != null){
+			this.setTamed(true);
+		}
 	}
 }

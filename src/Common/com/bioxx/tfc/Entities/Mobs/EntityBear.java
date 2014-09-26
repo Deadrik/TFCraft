@@ -79,7 +79,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		getNavigator ().setAvoidsWater (true);
 		tasks.addTask (1, new EntityAISwimming (this));
 		tasks.addTask (4, new EntityAIAttackOnCollide (this, moveSpeed * 1.5F, true));
-		size_mod = (((rand.nextInt (4+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
+		size_mod = (((rand.nextInt ((4+1)*10)*(rand.nextBoolean()?1:-1)) *0.01F) + 1F) * (1.0F - 0.1F * sex);
 		sex = rand.nextInt(2);
 		if (getGender() == GenderEnum.MALE)
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
@@ -113,7 +113,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		this(par1World);
 		float father_size = data.get(0);
-		size_mod = (((rand.nextInt (4+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size)/1.9F);
+		size_mod = (((rand.nextInt ((4+1)*10)*(rand.nextBoolean()?1:-1)) * 0.01F) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size)/1.9F);
 		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 
 		//	We hijack the growingAge to hold the day of birth rather
@@ -669,5 +669,26 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	public int GetPierceArmor()
 	{
 		return -335;
+	}
+
+
+	@Override
+	public int getFamiliarityPlayers() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public void handleFamiliarityUpdate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void familiarize(EntityPlayer ep) {
+		// TODO Auto-generated method stub
+		
 	}
 }
