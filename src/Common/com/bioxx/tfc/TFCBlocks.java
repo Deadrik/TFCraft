@@ -509,6 +509,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Vessel, ItemLargeVessel.class, "Vessel");
 		GameRegistry.registerBlock(Smoke, "Smoke");
 		GameRegistry.registerBlock(SmokeRack, "SmokeRack");
+		GameRegistry.registerBlock(Snow, "Snow");
 	}
 
 	public static void LoadBlocks()
@@ -552,10 +553,11 @@ public class TFCBlocks
 		// This is not used anywhere
 		//Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.oak_stairs), "oak_stairs", (new BlockStair(Material.wood)).setBlockName("stairsWood"));
 
-		Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.snow_layer), "snow_layer",
-				(new BlockCustomSnow()).setHardness(0.1F).setStepSound(Block.soundTypeSnow).setBlockName("snow").setLightOpacity(1).setBlockTextureName("snow"));
-		Snow = (Block)Block.blockRegistry.getObject("snow_layer");
-
+		/*Block.blockRegistry.addObject(Block.getIdFromBlock(Blocks.snow_layer), "snow_layer",
+				(new BlockCustomSnow()).setHardness(0.1F).setStepSound(Block.soundTypeSnow).setBlockName("snow").setLightOpacity(1).setBlockTextureName("snow"));*/
+		//Snow = (Block)Block.blockRegistry.getObject("snow_layer");
+		Snow = new BlockCustomSnow().setHardness(0.1F).setStepSound(Block.soundTypeSnow).setBlockName("snow").setLightOpacity(0).setBlockTextureName("snow");
+		Blocks.snow_layer = Snow;
 		StoneIgInCobble = new BlockIgInCobble(Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgInRockCobble");
 		StoneIgIn = new BlockIgIn(Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgInRock");
 		StoneIgInSmooth = new BlockIgInSmooth().setHardness(13F).setResistance(20F).setBlockName("IgInRockSmooth");
@@ -577,6 +579,7 @@ public class TFCBlocks
 		StoneMMBrick = new BlockMMBrick().setHardness(10F).setResistance(15F).setBlockName("MMRockBrick");
 
 		Dirt = (new com.bioxx.tfc.Blocks.Terrain.BlockDirt(0)).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("dirt");
+
 		Dirt2 = (new com.bioxx.tfc.Blocks.Terrain.BlockDirt(16)).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("dirt");
 		Clay = (new com.bioxx.tfc.Blocks.Terrain.BlockClay(0)).setHardness(3F).setStepSound(Block.soundTypeGravel).setBlockName("clay");
 		Clay2 = (new com.bioxx.tfc.Blocks.Terrain.BlockClay(16)).setHardness(3F).setStepSound(Block.soundTypeGravel).setBlockName("clay");
