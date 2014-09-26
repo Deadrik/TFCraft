@@ -238,10 +238,12 @@ public class TECrop extends NetworkTileEntity
 		is.stackSize = 1;
 		if (is != null)
 		{
-			worldObj.setBlock(xCoord, yCoord, zCoord, TFCBlocks.worldItem);
-			TEWorldItem te = (TEWorldItem) worldObj.getTileEntity(xCoord, yCoord, zCoord);
-			te.storage[0] = is;
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			if(worldObj.setBlock(xCoord, yCoord, zCoord, TFCBlocks.worldItem))
+			{
+				TEWorldItem te = (TEWorldItem) worldObj.getTileEntity(xCoord, yCoord, zCoord);
+				te.storage[0] = is;
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			}
 		}
 	}
 
