@@ -177,11 +177,11 @@ public class TFC_Climate
 	{
 		if(TFC_Climate.getCacheManager(world) != null)
 		{
-			float cacheTemp = TFC_Climate.getCacheManager(world).getTemp(x, z, th);
+			/*float cacheTemp = TFC_Climate.getCacheManager(world).getTemp(x, z, th);
 			if(cacheTemp != Float.MIN_VALUE)
 			{
 				return cacheTemp;
-			}
+			}*/
 
 			float zMod = getZFactor(z);
 			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
@@ -240,7 +240,7 @@ public class TFC_Climate
 				else
 					temp -= (8*rainMod)*zMod;
 			}
-			TFC_Climate.getCacheManager(world).addTemp(x, z, th, temp);
+			//TFC_Climate.getCacheManager(world).addTemp(x, z, th, temp);
 			return temp;
 		}
 		return -10;

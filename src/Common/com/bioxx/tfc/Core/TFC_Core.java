@@ -1071,7 +1071,8 @@ public class TFC_Core
 			 * inventory
 			 */
 			int day = TFC_Time.getDayOfYearFromDays(TFC_Time.getDayFromTotalHours(nbt.getInteger("decayTimer")));
-			float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,day,nbt.getInteger("decayTimer"), x, y, z);
+			//float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,day,nbt.getInteger("decayTimer"), x, y, z);
+			float temp = getCachedTemp(world, x, y, z, nbt.getInteger("decayTimer"));
 			float environmentalDecay = getEnvironmentalDecay(temp) * environmentalDecayFactor;
 
 			if (decay < 0)
@@ -1107,6 +1108,23 @@ public class TFC_Core
 			is.setTagCompound(nbt);
 
 		return is;
+	}
+
+	public static float getCachedTemp(World world, int x, int y, int z, int th)
+	{
+		float cacheTemp = TFC_Climate.getCacheManager(world).getTemp(x, z, th);
+		if(cacheTemp != Float.MIN_VALUE)
+		{
+			return cacheTemp;
+		}
+		float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(world,TFC_Time.getDayFromTotalHours(th), th, x, y, z);
+		addCachedTemp(world, x, z, th, temp);
+		return temp;
+	}
+
+	public static void addCachedTemp(World world, int x, int z, int th, float temp)
+	{
+		TFC_Climate.getCacheManager(world).addTemp(x, z, th, temp);
 	}
 
 	public static void animalDropMeat(Entity e, Item i, float foodWeight)

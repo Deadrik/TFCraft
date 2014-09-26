@@ -175,7 +175,7 @@ public class WorldCacheManager
 	public float getTemp(int x, int z, int totalHours)
 	{
 		String key = x+","+z+","+totalHours;
-		if(worldTempCache.containsKey(key))
+		if(worldTempCache != null && worldTempCache.containsKey(key))
 		{
 			synchronized(worldTempCache)
 			{
@@ -190,7 +190,8 @@ public class WorldCacheManager
 		String key = x+","+z+","+totalHours;
 		synchronized(worldTempCache)
 		{
-			worldTempCache.put(key, temp);
+			if(worldTempCache != null)
+				worldTempCache.put(key, temp);
 		}
 		trimTempCache();
 	}
