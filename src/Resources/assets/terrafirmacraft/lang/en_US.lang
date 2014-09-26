@@ -249,6 +249,7 @@ item.Rum.name=Rum
 item.Sake.name=Sake
 item.Vodka.name=Vodka
 item.Whiskey.name=Whiskey
+item.CornWhiskey.name=Corn Whiskey
 
 #===========
 #= Pottery =
@@ -2327,6 +2328,7 @@ fluid.ryewhiskey=Rye Whiskey
 fluid.sake=Sake
 fluid.vodka=Vodka
 fluid.whiskey=Whiskey
+fluid.cornwhiskey=Corn Whiskey
 fluid.milk=Milk
 fluid.milkcurdled=Curdled Milk
 fluid.limewater=Limewater

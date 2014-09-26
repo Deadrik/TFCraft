@@ -846,6 +846,7 @@ public class TFCItems
 	public static Item Sake;
 	public static Item Vodka;
 	public static Item Whiskey;
+	public static Item CornWhiskey;
 
 	public static Item GlassBottle;
 	public static Item Potion;
@@ -1500,6 +1501,7 @@ public class TFCItems
 		Sake = new ItemAlcohol().setUnlocalizedName("Sake").setCreativeTab(TFCTabs.TFCFoods);
 		Vodka = new ItemAlcohol().setUnlocalizedName("Vodka").setCreativeTab(TFCTabs.TFCFoods);
 		Whiskey = new ItemAlcohol().setUnlocalizedName("Whiskey").setCreativeTab(TFCTabs.TFCFoods);
+		CornWhiskey = new ItemAlcohol().setUnlocalizedName("CornWhiskey").setCreativeTab(TFCTabs.TFCFoods);
 
 		Blueprint = new ItemBlueprint();
 		writabeBookTFC = new ItemWritableBookTFC("Fix Me I'm Broken").setUnlocalizedName("book");
@@ -2549,6 +2551,7 @@ public class TFCItems
 		GameRegistry.registerItem(Sake, Sake.getUnlocalizedName());
 		GameRegistry.registerItem(Vodka, Vodka.getUnlocalizedName());
 		GameRegistry.registerItem(Whiskey, Whiskey.getUnlocalizedName());
+		GameRegistry.registerItem(CornWhiskey, CornWhiskey.getUnlocalizedName());
 
 		GameRegistry.registerItem(Blueprint, Blueprint.getUnlocalizedName());
 		GameRegistry.registerItem(writabeBookTFC, writabeBookTFC.getUnlocalizedName());

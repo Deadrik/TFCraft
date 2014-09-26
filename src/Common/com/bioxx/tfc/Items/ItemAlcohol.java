@@ -2,33 +2,29 @@ package com.bioxx.tfc.Items;
 
 import java.util.Random;
 
-import javax.swing.Icon;
-
-import com.bioxx.tfc.Core.TFC_Core;
-
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemAlcohol extends ItemTerra
 {
-
-	@SideOnly(Side.CLIENT)
-	private Icon field_94591_c;
-	@SideOnly(Side.CLIENT)
-	private Icon field_94590_d;
-	@SideOnly(Side.CLIENT)
-	private Icon field_94592_ct;
-
 	public ItemAlcohol()
 	{
 		super();
 		this.setFolder("food/");
+		this.setContainerItem(TFCItems.GlassBottle);
 	}
 
 	@Override
@@ -37,21 +33,11 @@ public class ItemAlcohol extends ItemTerra
 		return EnumAction.drink;
 	}
 
-	/*	
-	@Override
-	public IIcon getIconFromDamage(int par1)
-	{
-		return this.field_94590_d;
-	}
-
-	 */
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
-
 		par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
 		return par1ItemStack;
-
 	}
 
 	@Override
@@ -59,32 +45,27 @@ public class ItemAlcohol extends ItemTerra
 	{
 		return 32;
 	}
-	/*
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister)
-	{
-		this.field_94590_d = par1IconRegister.registerIcon("potion_bottle_drinkable");
-		this.field_94592_ct = par1IconRegister.registerIcon("potion_overlay");
-	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-
-	/**
-	 * Gets an icon index based on an item's damage value and the given render pass
-
-	public IIcon getIconFromDamageForRenderPass(int par1, int par2)
+	public void registerIcons(IIconRegister registerer)
 	{
-		return par2 == 0 ? this.field_94592_ct : super.getIconFromDamageForRenderPass(par1, par2);
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":Glass Bottle Overlay");		
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-	public int getColorFromDamage(int par1)
+	public IIcon getIcon(ItemStack stack, int pass)
 	{
-		return PotionHelper.func_77915_a(14981690, false);
+		return pass == 1 ? this.itemIcon : this.getContainerItem().getIcon(stack, pass);
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getColorFromItemStack(ItemStack is, int pass)
+	{
+		return pass == 1 ? FluidContainerRegistry.getFluidForFilledItem(is).getFluid().getColor() : super.getColorFromItemStack(is, pass);
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -92,7 +73,7 @@ public class ItemAlcohol extends ItemTerra
 	{
 		return true;
 	}
-	 */
+
 
 	@Override
 	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer player)
@@ -164,10 +145,10 @@ public class ItemAlcohol extends ItemTerra
 		{
 			if (par1ItemStack.stackSize <= 0)
 			{
-				return new ItemStack(Items.glass_bottle);
+				return new ItemStack(TFCItems.GlassBottle);
 			}
 
-			player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
+			player.inventory.addItemStackToInventory(new ItemStack(TFCItems.GlassBottle));
 		}
 
 		return par1ItemStack;
