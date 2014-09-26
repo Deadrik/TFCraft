@@ -59,9 +59,9 @@ public class TF_EntityRenderer extends ClassTransformer
 		nodes = new ArrayList<InstrSet>();
 		list = new InsnList();
 		list.add(new VarInsnNode(Opcodes.ALOAD, 0));
-		list.add(new FieldInsnNode(Opcodes.GETFIELD, "bll", "al", "Ljava/util/Random;"));
+		list.add(new FieldInsnNode(Opcodes.GETFIELD, "blt", "al", "Ljava/util/Random;"));
 		list.add(new VarInsnNode(Opcodes.ALOAD, 0));
-		list.add(new FieldInsnNode(Opcodes.GETFIELD, "bll", "w", "I"));
+		list.add(new FieldInsnNode(Opcodes.GETFIELD, "blt", "w", "I"));
 		list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "com/bioxx/tfc/ClientOverrides","doRainClient","(Ljava/util/Random;I)V"));
 		nodes.add(new InstrSet(list, 208, InstrOpType.Replace));
 		this.obfMethodNodes.put("d | ()V", new Patch(nodes, PatchOpType.Modify));
