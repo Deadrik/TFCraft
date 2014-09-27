@@ -2,9 +2,9 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.HashMap;
 
-import com.bioxx.tfc.TFCBlocks;
-
 import net.minecraft.block.Block;
+
+import com.bioxx.tfc.TFCBlocks;
 
 public class OreSpawnData
 {
@@ -147,6 +147,9 @@ public class OreSpawnData
 		{
 			this.base.put(TFCBlocks.StoneMM, -1);
 		}
-		this.base.put(TFCBlocks.StoneIgIn, -1);
+		else
+		{
+			this.base.put(TFCBlocks.StoneIgIn, -1);
+		}
 	}
 }

@@ -10,6 +10,7 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Entities.Mobs.EntityWolfTFC;
 import com.bioxx.tfc.api.Entities.IAnimal;
 
 public class ModelWolfTFC extends ModelWolf
@@ -105,7 +106,7 @@ public class ModelWolfTFC extends ModelWolf
 	@Override
 	public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
 	{
-		EntityWolf entitywolf = (EntityWolf)par1EntityLivingBase;
+		EntityWolfTFC entitywolf = (EntityWolfTFC)par1EntityLivingBase;
 
 		if (entitywolf.isAngry())
 		{
@@ -115,7 +116,6 @@ public class ModelWolfTFC extends ModelWolf
 		{
 			this.wolfTail.rotateAngleY = MathHelper.cos(par2 * 0.6662F) * 1.4F * par3;
 		}
-
 		if (entitywolf.isSitting())
 		{
 			this.wolfMane.setRotationPoint(-1.0F, 16.0F, -3.0F);
@@ -154,6 +154,7 @@ public class ModelWolfTFC extends ModelWolf
 		this.wolfMane.rotateAngleZ = entitywolf.getShakeAngle(par4, -0.08F);
 		this.wolfBody.rotateAngleZ = entitywolf.getShakeAngle(par4, -0.16F);
 		this.wolfTail.rotateAngleZ = entitywolf.getShakeAngle(par4, -0.2F);
+		wolfTail.rotateAngleY =  0.5f*(1 - (1/(entitywolf.happyTicks + 1f)))*MathHelper.sin((float)(Math.PI * entitywolf.happyTicks / 5F));
 	}
 	
 	@Override
@@ -162,6 +163,6 @@ public class ModelWolfTFC extends ModelWolf
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
         this.wolfHeadMain.rotateAngleX = par5 / (180F / (float)Math.PI);
         this.wolfHeadMain.rotateAngleY = par4 / (180F / (float)Math.PI);
-        this.wolfTail.rotateAngleX = (float) (Math.PI/4f);
+        this.wolfTail.rotateAngleX = (float) (Math.PI/4f) * ((par7Entity instanceof EntityWolfTFC && ((EntityWolfTFC)par7Entity).happyTicks > 0)?2.5F:1);
     }
 }

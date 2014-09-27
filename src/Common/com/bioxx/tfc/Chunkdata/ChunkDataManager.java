@@ -71,6 +71,47 @@ public class ChunkDataManager
 		return false;
 	}
 
+	public static void setFishPop(int x, int z, float fishPop)
+	{
+		synchronized(chunkmap)
+		{
+			ChunkData d = (ChunkData) chunkmap.get(x + "," + z);
+			if(d != null && fishPop >= 0)
+			{
+				d.fishPop = fishPop;
+			}
+		}
+	}
+	
+	public static int getFishPop(int x, int z)
+	{
+		synchronized(chunkmap)
+		{
+			ChunkData d = (ChunkData) chunkmap.get(x + "," + z);
+			if(d != null)
+			{
+				return (int)d.fishPop;
+			}
+		}
+		return -1;
+	}
+	
+	public static boolean catchFish(int x, int z)
+	{
+		synchronized(chunkmap)
+		{
+			ChunkData d = (ChunkData) chunkmap.get(x + "," + z);
+			if(d != null)
+			{
+				if(d.fishPop > 0){
+					d.fishPop--;
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public static boolean setLastVisted(int x, int z)
 	{
 		synchronized(chunkmap)

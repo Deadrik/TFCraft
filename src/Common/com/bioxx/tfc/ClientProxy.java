@@ -276,6 +276,7 @@ public class ClientProxy extends CommonProxy
 		GuiIngameForge.renderHealth = false;
 		GuiIngameForge.renderArmor = false;
 		GuiIngameForge.renderExperiance = false;
+		//GuiIngameForge.renderHealthMount = false;		//Forge re-enables it every tick
 	}
 
 	@Override
@@ -383,7 +384,7 @@ public class ClientProxy extends CommonProxy
 		else if(par1IBlockAccess.getBlock(i, j, k) == TFCBlocks.Vine)
 		{
 			if (TFC_Time.getSeasonAdjustedMonth(k) >= 6 && TFC_Time.getSeasonAdjustedMonth(k) < 9
-					&& !(TFC_Climate.getManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 < 0.8)
+					&& !(TFC_Climate.getCacheManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 < 0.8)
 					&& TFC_Climate.getHeightAdjustedTemp(getCurrentWorld(), i, j, k) < 30)
 			{
 				int color = 0;
@@ -399,7 +400,7 @@ public class ClientProxy extends CommonProxy
 				return x;
 			}
 			else if (TFC_Time.getSeasonAdjustedMonth(k) >= 11 || TFC_Time.getSeasonAdjustedMonth(k) <= 0
-					&& !(TFC_Climate.getManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 < 0.8)
+					&& !(TFC_Climate.getCacheManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 < 0.8)
 					&& TFC_Climate.getHeightAdjustedTemp(getCurrentWorld(), i, j, k) < 30)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
@@ -414,7 +415,7 @@ public class ClientProxy extends CommonProxy
 				return x;
 			}
 			else if (TFC_Time.getSeasonAdjustedMonth(k) >= 9 
-					&& !(TFC_Climate.getManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 < 0.8)
+					&& !(TFC_Climate.getCacheManager(getCurrentWorld()).getEVTLayerAt(i, k).floatdata1 < 0.8)
 					&& TFC_Climate.getHeightAdjustedTemp(getCurrentWorld(), i, j, k) < 30)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)

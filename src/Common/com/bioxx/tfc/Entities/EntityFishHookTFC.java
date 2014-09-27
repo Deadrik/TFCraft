@@ -22,10 +22,13 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemCustomFishingRod;
+import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -65,12 +68,15 @@ public class EntityFishHookTFC extends EntityFishHook
 
 	private double maxDistance = -1;
 
+	private boolean canCatchFish = false;
+
 	public double pullX,pullY,pullZ;
 
 	private int lineTension;
 	private int maxLineTension = 800;
 
 	private int reelCounter = 0;
+	private int lastCheckTick = 0;
 
 	public EntityFishHookTFC(World par1World)
 	{
@@ -398,11 +404,10 @@ public class EntityFishHookTFC extends EntityFishHook
 				{
 					if(this.maxDistance == -1){
 						this.maxDistance = this.getDistanceToEntity(field_146042_b);
-						if(!this.worldObj.isRemote){
-							EntityFishTFC fish = new EntityFishTFC(this.worldObj);
-							fish.setLocationAndAngles(posX, posY-0.3, posZ, 0, 0);
-							this.worldObj.spawnEntityInWorld(fish);
-						}
+						this.canCatchFish = true;
+					}
+					if(canCatchFish && !this.worldObj.isRemote){
+						this.attemptToCatch();
 					}
 					f2 = (float)(f2 * 0.9D);
 					this.motionY *= 0.8D;
@@ -474,7 +479,7 @@ public class EntityFishHookTFC extends EntityFishHook
 		lineTension += forceRatio -31;
 
 		lineTension = Math.max(lineTension, 0);
-		
+
 		ItemStack is = this.field_146042_b.getHeldItem();
 		if(is != null && is.getItem() instanceof ItemCustomFishingRod){
 			if(!is.hasTagCompound()){
@@ -529,6 +534,25 @@ public class EntityFishHookTFC extends EntityFishHook
 		Vec3 dirVec = Vec3.createVectorHelper((this.field_146042_b.posX + playerMotion.xCoord - (motionVec.xCoord + x))*subractedRatio, (this.field_146042_b.posY + playerMotion.yCoord - (motionVec.yCoord + y))*subractedRatio, (this.field_146042_b.posZ + playerMotion.zCoord - (motionVec.zCoord + z))*subractedRatio);
 		return dirVec;
 	}
+	
+	public void attemptToCatch(){
+		int fishPopulation = this.getAverageFishPopFromChunks();
+		if(this.lastCheckTick == 0){
+			int maxValue = (int)Math.pow(ChunkData.fishPopMax,1.2) + 80;
+			int minValue = 0;
+			int hour = TFC_Time.getHour();
+			if((hour >= 3 && hour <=9)||(hour >= 17 && hour <22)){
+				minValue = 1;
+			}
+			if(this.rand.nextInt(maxValue - (int)Math.pow(fishPopulation, 1.2))<= minValue){
+				this.func_146034_e();
+			}
+			lastCheckTick = 20;
+		}
+		else{
+			this.lastCheckTick--;
+		}
+	}
 
 	public boolean isTooFarFromPlayer(double x, double y, double z){
 		return this.field_146042_b.getDistance(x,y,z) > this.maxDistance;
@@ -563,6 +587,44 @@ public class EntityFishHookTFC extends EntityFishHook
 		}
 	}
 
+	public int getAverageFishPopFromChunks(){
+		if (this.worldObj.isRemote)
+		{
+			return 0;
+		}
+		else
+		{
+			EntityPlayer player = this.field_146042_b;
+			int lastChunkX = (((int)Math.floor(player.posX)) >> 4);
+			int lastChunkZ = (((int)Math.floor(player.posZ)) >> 4);
+			int maxChunksVisitable = 20;
+			
+			int chunksVisited = 0;
+			int totalFish = ChunkDataManager.getFishPop(lastChunkX, lastChunkZ);
+			if(totalFish > 0){
+				chunksVisited++;
+			}
+			else{
+				return 0;
+			}
+			for(int radius = 1; radius < 5 && chunksVisited < maxChunksVisitable; radius++){
+				for(int i = -radius; i <= radius; i++)
+				{
+					for(int k = -radius; k <= radius; k+=(Math.abs(i)==radius?1:radius*2))
+					{
+						int tempFish = ChunkDataManager.getFishPop(lastChunkX + i, lastChunkZ + k);
+						if(tempFish > 0){
+							chunksVisited++;
+							totalFish += tempFish;
+						}
+					}
+				}
+			}
+			int averageFishPop = totalFish / chunksVisited;
+			return averageFishPop;
+		}
+	}
+
 	@Override
 	public int func_146034_e/*catchFish*/()
 	{
@@ -572,50 +634,38 @@ public class EntityFishHookTFC extends EntityFishHook
 		}
 		else
 		{
-			byte b0 = 0;
+			EntityFishTFC fish = new EntityFishTFC(this.worldObj);
+			fish.setLocationAndAngles(posX, posY-0.3, posZ, 0, 0);
+			this.worldObj.spawnEntityInWorld(fish);
 
-			if (this.field_146043_c/*bobber*/ != null)
-			{
-				double d0 = this.field_146042_b.posX - this.posX;
-				double d1 = this.field_146042_b.posY - this.posY;
-				double d2 = this.field_146042_b.posZ - this.posZ;
-				double d3 = MathHelper.sqrt_double(d0 * d0 + d1 * d1 + d2 * d2);
-				double d4 = 0.1D;
-				this.field_146043_c/*bobber*/.motionX += d0 * d4;
-				this.field_146043_c/*bobber*/.motionY += d1 * d4 + MathHelper.sqrt_double(d3) * 0.08D;
-				this.field_146043_c/*bobber*/.motionZ += d2 * d4;
-				b0 = 3;
+			this.canCatchFish = false;
+			
+			EntityPlayer player = this.field_146042_b;
+			int lastChunkX = (((int)Math.floor(player.posX)) >> 4);
+			int lastChunkZ = (((int)Math.floor(player.posZ)) >> 4);
+			int maxChunksVisitable = 20;
+			ChunkDataManager.catchFish(lastChunkX, lastChunkZ);
+			int chunksVisited = 1;
+			for(int radius = 1; radius < 5 && chunksVisited < maxChunksVisitable; radius++){
+				for(int i = -radius; i <= radius; i++)
+				{
+					for(int k = -radius; k <= radius; k+=(Math.abs(i)==radius?1:radius*2))
+					{
+						if(ChunkDataManager.catchFish(lastChunkX + i, lastChunkZ + k)){
+							chunksVisited++;
+						}
+					}
+				}
 			}
-			else if (this.ticksCatchable > 0)
-			{
-				EntityItem entityitem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, ItemFoodTFC.createTag(new ItemStack(TFCItems.fishRaw), Helper.roundNumber(10+rand.nextFloat()*30, 10)));
-				double d5 = this.field_146042_b.posX - this.posX;
-				double d6 = this.field_146042_b.posY - this.posY;
-				double d7 = this.field_146042_b.posZ - this.posZ;
-				double d8 = MathHelper.sqrt_double(d5 * d5 + d6 * d6 + d7 * d7);
-				double d9 = 0.1D;
-				entityitem.motionX = d5 * d9;
-				entityitem.motionY = d6 * d9 + MathHelper.sqrt_double(d8) * 0.08D;
-				entityitem.motionZ = d7 * d9;
-				this.worldObj.spawnEntityInWorld(entityitem);
-				this.field_146042_b.addStat(StatList.fishCaughtStat, 1);
-				this.field_146042_b.worldObj.spawnEntityInWorld(new EntityXPOrb(this.field_146042_b.worldObj, this.field_146042_b.posX, this.field_146042_b.posY + 0.5D, this.field_146042_b.posZ + 0.5D, this.rand.nextInt(6) + 1));
-				b0 = 1;
-			}
-
-			if (this.inGround)
-				b0 = 2;
-
-			this.setDead();
-			this.field_146042_b.fishEntity = null;
-			return b0;
+			return 0;
 		}
 	}
-	
+
 	public void setDeadKill(){
 		if(this.ridingEntity!=null && this.ridingEntity instanceof EntityLiving){
 			((EntityLiving)(this.ridingEntity)).setHealth(1);
 			((EntityLiving)(this.ridingEntity)).attackEntityFrom(DamageSource.drown, 1);
+			this.field_146042_b.addStat(StatList.fishCaughtStat, 1);
 		}
 		this.ridingEntity = null;
 		this.setDead();

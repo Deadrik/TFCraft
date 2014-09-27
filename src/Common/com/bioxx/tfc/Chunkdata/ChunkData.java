@@ -13,6 +13,9 @@ public class ChunkData
 	public int spawnProtection;
 	public int[] heightmap;
 	public int sluicedAmount = 0;
+	
+	public float fishPop = -1;
+	public static final float fishPopMax = 60;
 
 	public int lastSpringGen;
 	public int cropInfestation = 0;
@@ -43,6 +46,8 @@ public class ChunkData
 
 		lastSpringGen = tag.getInteger("lastSpringGen");
 		cropInfestation = tag.getInteger("cropInfestation");
+		
+		fishPop = Math.min(tag.getFloat("fishPopulation"),fishPopMax);
 	}
 
 	public NBTTagCompound getTag()
@@ -61,6 +66,7 @@ public class ChunkData
 		tag.setInteger("lastSpringGen", lastSpringGen);
 		tag.setInteger("sluicedAmount", sluicedAmount);
 		tag.setInteger("cropInfestation", cropInfestation);
+		tag.setFloat("fishPopulation", Math.max(fishPop,-1F));
 		return tag;
 	}
 

@@ -1,7 +1,6 @@
 package com.bioxx.tfc.Core;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
@@ -26,6 +25,7 @@ public class TFCFluid extends Fluid
 	public static final TFCFluid BEER = new TFCFluid("beer").setBaseColor(0xc39e37);
 	public static final TFCFluid RYEWHISKEY = new TFCFluid("ryewhiskey").setBaseColor(0xc77d51);
 	public static final TFCFluid WHISKEY = new TFCFluid("whiskey").setBaseColor(0x583719);
+	public static final TFCFluid CORNWHISKEY = new TFCFluid("cornwhiskey").setBaseColor(0xb7d9bc);
 	public static final TFCFluid SAKE = new TFCFluid("sake").setBaseColor(0xb7d9bc);
 	public static final TFCFluid VODKA = new TFCFluid("vodka").setBaseColor(0xdcdcdc);
 	public static final TFCFluid CIDER = new TFCFluid("cider").setBaseColor(0xb0ae32);
@@ -46,6 +46,12 @@ public class TFCFluid extends Fluid
 
 	@Override
 	public int getColor(FluidStack fs)
+	{
+		return color;
+	}
+
+	@Override
+	public int getColor()
 	{
 		return color;
 	}
@@ -76,6 +82,7 @@ public class TFCFluid extends Fluid
 		FluidRegistry.registerFluid(RUM);
 		FluidRegistry.registerFluid(BEER);
 		FluidRegistry.registerFluid(RYEWHISKEY);
+		FluidRegistry.registerFluid(CORNWHISKEY);
 		FluidRegistry.registerFluid(WHISKEY);
 		FluidRegistry.registerFluid(SAKE);
 		FluidRegistry.registerFluid(VODKA);
@@ -96,13 +103,14 @@ public class TFCFluid extends Fluid
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(FRESHWATER.getName()), new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid(SALTWATER.getName()), new ItemStack(TFCItems.WoodenBucketSaltWater), new ItemStack(TFCItems.WoodenBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(FRESHWATER, 1000), new ItemStack(TFCItems.PotteryJug, 1, 2), new ItemStack(TFCItems.PotteryJug,1, 1));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(RUM, 250), new ItemStack(TFCItems.Rum), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(BEER, 250), new ItemStack(TFCItems.Beer), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(RYEWHISKEY, 250), new ItemStack(TFCItems.RyeWhiskey), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(WHISKEY, 250), new ItemStack(TFCItems.Whiskey), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(SAKE, 250), new ItemStack(TFCItems.Sake), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(CIDER, 250), new ItemStack(TFCItems.Cider), new ItemStack(Items.glass_bottle));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(VODKA, 250), new ItemStack(TFCItems.Vodka), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(RUM, 250), new ItemStack(TFCItems.Rum), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(BEER, 250), new ItemStack(TFCItems.Beer), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(RYEWHISKEY, 250), new ItemStack(TFCItems.RyeWhiskey), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(WHISKEY, 250), new ItemStack(TFCItems.Whiskey), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(CORNWHISKEY, 250), new ItemStack(TFCItems.CornWhiskey), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(SAKE, 250), new ItemStack(TFCItems.Sake), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(CIDER, 250), new ItemStack(TFCItems.Cider), new ItemStack(TFCItems.GlassBottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(VODKA, 250), new ItemStack(TFCItems.Vodka), new ItemStack(TFCItems.GlassBottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(MILK, 1000), new ItemStack(TFCItems.WoodenBucketMilk), new ItemStack(TFCItems.WoodenBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(VINEGAR, 1000), new ItemStack(TFCItems.Vinegar), new ItemStack(TFCItems.WoodenBucketEmpty));
 	}

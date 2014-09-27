@@ -250,7 +250,7 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableWaterCreatureList.clear();
 		switch(par1){
 		case 0: this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 8, 1, 1)); break;
-		case 2: this.spawnableWaterCreatureList.add(new SpawnListEntry(EntityFishTFC.class, 7, 1, 1));
+		case 2: this.spawnableWaterCreatureList.add(new SpawnListEntry(EntityFishTFC.class, 7, 1, 2));
 				this.spawnableWaterCreatureList.add(new SpawnListEntry(EntityFishTFC.class, 12, 0, 0));break;
 				default: break;
 		}
@@ -507,7 +507,7 @@ public class TFCBiome extends BiomeGenBase
 
 	public static int getSurfaceRockLayer(World world, int i, int k)
 	{
-		return TFC_Climate.getManager(world).getRockLayerAt(i, k, 0).data2;
+		return TFC_Climate.getCacheManager(world).getRockLayerAt(i, k, 0).data2;
 	}
 
 	public static TFCBiome[] getBiomeGenArray()

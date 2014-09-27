@@ -44,7 +44,7 @@ public class WorldGenBerryBush extends WorldGenerator
 	{
 		float temp = TFC_Climate.getBioTemperatureHeight(world, i, j, k);
 		float rain = TFC_Climate.getRainfall(world, i, j, k);
-		float evt = TFC_Climate.getManager(world).getEVTLayerAt(i, k).floatdata1;
+		float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(i, k).floatdata1;
 
 		FloraIndex _fi = FloraManager.getInstance().findMatchingIndex(((BlockBerryBush)TFCBlocks.BerryBush).getType(meta));
 		if(world.isAirBlock(i, j, k) && j < 250 && temp > _fi.minBioTemp && temp < _fi.maxBioTemp && 

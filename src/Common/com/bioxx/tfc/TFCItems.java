@@ -9,6 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.EnumHelper;
@@ -845,6 +846,7 @@ public class TFCItems
 	public static Item Sake;
 	public static Item Vodka;
 	public static Item Whiskey;
+	public static Item CornWhiskey;
 
 	public static Item GlassBottle;
 	public static Item Potion;
@@ -860,7 +862,7 @@ public class TFCItems
 	public static Item FireBrick;
 	public static Item Stick;
 	public static Item Arrow;
-	public static Item Leash;
+	public static Item Rope;
 
 	public static Item ClayMoldAxe;
 	public static Item ClayMoldChisel;
@@ -1015,11 +1017,13 @@ public class TFCItems
 		Coal = new ItemCoal().setUnlocalizedName("coal");
 		Stick = new ItemStick().setFull3D().setUnlocalizedName("stick");
 		Bow = new ItemCustomBow().setUnlocalizedName("bow").setTextureName("bow");
+		Items.bow = (ItemBow) Bow;
 		Arrow = new ItemArrow().setUnlocalizedName("arrow").setCreativeTab(TFCTabs.TFCWeapons);
 		Dye = new ItemDyeCustom().setUnlocalizedName("dyePowder").setTextureName("dye_powder").setCreativeTab(TFCTabs.TFCMaterials);
 		GlassBottle = new ItemGlassBottle().setUnlocalizedName("Glass Bottle");
 		Potion = new ItemCustomPotion().setUnlocalizedName("potion").setTextureName("potion");
-		Leash = new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFCTools);
+		Rope = new ItemCustomLeash().setUnlocalizedName("Rope").setCreativeTab(TFCTabs.TFCTools);
+		Items.lead = Rope;
 
 		minecartCrate = new ItemCustomMinecart(1).setUnlocalizedName("minecartChest").setTextureName("minecart_chest");
 		GoldPan = new ItemGoldPan().setUnlocalizedName("GoldPan");
@@ -1497,6 +1501,7 @@ public class TFCItems
 		Sake = new ItemAlcohol().setUnlocalizedName("Sake").setCreativeTab(TFCTabs.TFCFoods);
 		Vodka = new ItemAlcohol().setUnlocalizedName("Vodka").setCreativeTab(TFCTabs.TFCFoods);
 		Whiskey = new ItemAlcohol().setUnlocalizedName("Whiskey").setCreativeTab(TFCTabs.TFCFoods);
+		CornWhiskey = new ItemAlcohol().setUnlocalizedName("CornWhiskey").setCreativeTab(TFCTabs.TFCFoods);
 
 		Blueprint = new ItemBlueprint();
 		writabeBookTFC = new ItemWritableBookTFC("Fix Me I'm Broken").setUnlocalizedName("book");
@@ -2546,6 +2551,7 @@ public class TFCItems
 		GameRegistry.registerItem(Sake, Sake.getUnlocalizedName());
 		GameRegistry.registerItem(Vodka, Vodka.getUnlocalizedName());
 		GameRegistry.registerItem(Whiskey, Whiskey.getUnlocalizedName());
+		GameRegistry.registerItem(CornWhiskey, CornWhiskey.getUnlocalizedName());
 
 		GameRegistry.registerItem(Blueprint, Blueprint.getUnlocalizedName());
 		GameRegistry.registerItem(writabeBookTFC, writabeBookTFC.getUnlocalizedName());
@@ -2619,7 +2625,7 @@ public class TFCItems
 		GameRegistry.registerItem(Bow, Bow.getUnlocalizedName());
 		GameRegistry.registerItem(Arrow, Arrow.getUnlocalizedName());
 		GameRegistry.registerItem(Dye, Dye.getUnlocalizedName());
-		GameRegistry.registerItem(Leash, Leash.getUnlocalizedName());
+		GameRegistry.registerItem(Rope, Rope.getUnlocalizedName());
 		GameRegistry.registerItem(ClayBall, ClayBall.getUnlocalizedName());
 		GameRegistry.registerItem(Powder, Powder.getUnlocalizedName());
 		GameRegistry.registerItem(Fertilizer, Fertilizer.getUnlocalizedName());

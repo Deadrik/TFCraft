@@ -3,6 +3,10 @@ package com.bioxx.tfc.WorldGen;
 import java.util.List;
 import java.util.Random;
 
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
@@ -81,7 +85,11 @@ public final class SpawnerAnimalsTFC
 								exception.printStackTrace();
 								continue;
 							}
-
+							if(entityliving instanceof EntityFishTFC){
+								if(entityliving.getRNG().nextInt((int)ChunkData.fishPopMax) > ChunkDataManager.getFishPop(j1 >> 4, k1 >> 4)){
+									return;
+								}
+							}
 							entityliving.setLocationAndAngles(f, f1, f2, par6Random.nextFloat() * 360.0F, 0.0F);
 							world.spawnEntityInWorld(entityliving);
 							entitylivingdata = entityliving.onSpawnWithEgg(entitylivingdata);

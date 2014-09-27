@@ -3,6 +3,7 @@ package com.bioxx.tfc.api.Entities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Vec3;
 
 public interface IAnimal
@@ -106,4 +107,20 @@ public interface IAnimal
 	public void setHunger(int h);
 
 	public int getAnimalTypeID();
+	
+	/**
+	 * Represents how familiar the animal is with players. This is used for most human interaction.
+	 * @return	familiarity
+	 */
+	public int getFamiliarityPlayers();
+	/**
+	 * Used to calculate whether an animal should become more familiar or less familiar with players
+	 */
+	public void handleFamiliarityUpdate();
+	
+	/**
+	 * Represents interaction with the animal that makes the animal happy, thus increasing it's familiarization
+	 * @param ep
+	 */
+	public void familiarize(EntityPlayer ep);
 }

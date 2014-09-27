@@ -614,4 +614,22 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	{
 		this.fearSource = fearSource;
 	}
+
+	@Override
+	public int getFamiliarityPlayers() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void handleFamiliarityUpdate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void familiarize(EntityPlayer ep) {
+		// TODO Auto-generated method stub
+		
+	}
 }

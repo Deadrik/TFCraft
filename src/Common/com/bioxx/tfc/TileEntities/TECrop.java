@@ -37,7 +37,7 @@ public class TECrop extends NetworkTileEntity
 		growth = 0.1f;
 		plantedTime = TFC_Time.getTotalTicks();
 		growthTimer = TFC_Time.getTotalTicks();
-		sunLevel = 5;
+		sunLevel = 1;
 	}
 
 	private boolean checkedSun = false;
@@ -54,7 +54,7 @@ public class TECrop extends NetworkTileEntity
 			if(growthTimer < time && sunLevel > 0)
 			{
 				sunLevel--;
-				if(crop.needsSunlight && (worldObj.getBlockLightValue(xCoord, yCoord, zCoord) > 11 || worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)))
+				if(crop.needsSunlight && hasSunlight(worldObj, xCoord, yCoord, zCoord))
 				{
 					sunLevel++;
 					if(sunLevel > 30)
@@ -190,6 +190,14 @@ public class TECrop extends NetworkTileEntity
 		}
 	}
 
+	public static boolean hasSunlight(World world, int x, int y, int z)
+	{
+		int light = world.getBlockLightValue(x, y, z); 
+		boolean sky = world.canBlockSeeTheSky(x, y, z);
+		boolean precip = world.isRaining();
+		return sky || light > 13 || (light > 10 && precip);
+	}
+
 	public float getEstimatedGrowth(CropIndex crop)
 	{
 		return ((float)crop.numGrowthStages / (growthTimer - plantedTime / TFC_Time.dayLength)) * 1.5f;
@@ -238,10 +246,12 @@ public class TECrop extends NetworkTileEntity
 		is.stackSize = 1;
 		if (is != null)
 		{
-			worldObj.setBlock(xCoord, yCoord, zCoord, TFCBlocks.worldItem);
-			TEWorldItem te = (TEWorldItem) worldObj.getTileEntity(xCoord, yCoord, zCoord);
-			te.storage[0] = is;
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			if(worldObj.setBlock(xCoord, yCoord, zCoord, TFCBlocks.worldItem))
+			{
+				TEWorldItem te = (TEWorldItem) worldObj.getTileEntity(xCoord, yCoord, zCoord);
+				te.storage[0] = is;
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			}
 		}
 	}
 
@@ -257,6 +267,7 @@ public class TECrop extends NetworkTileEntity
 		growthTimer = nbt.getLong("growthTimer");
 		plantedTime = nbt.getLong("plantedTime");
 		killLevel = nbt.getInteger("killLevel");
+		sunLevel = nbt.getByte("sunLevel");
 	}
 
 	/**
@@ -271,6 +282,7 @@ public class TECrop extends NetworkTileEntity
 		nbt.setLong("growthTimer", growthTimer);
 		nbt.setLong("plantedTime", plantedTime);
 		nbt.setInteger("killLevel", killLevel);
+		nbt.setByte("sunLevel", sunLevel);
 	}
 
 	@Override

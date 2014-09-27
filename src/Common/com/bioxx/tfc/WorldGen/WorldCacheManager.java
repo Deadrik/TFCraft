@@ -166,7 +166,7 @@ public class WorldCacheManager
 		this.stabilityCache.cleanupCache();
 		this.phCache.cleanupCache();
 		this.drainageCache.cleanupCache();
-		while(worldTempCache.size() > 21000)
+		while(worldTempCache.size() > 51000)
 		{
 			trimTempCache();
 		}
@@ -175,25 +175,37 @@ public class WorldCacheManager
 	public float getTemp(int x, int z, int totalHours)
 	{
 		String key = x+","+z+","+totalHours;
-		if(worldTempCache.containsKey(key))
-			return worldTempCache.get(key);
+		if(worldTempCache != null && worldTempCache.containsKey(key))
+		{
+			synchronized(worldTempCache)
+			{
+				return worldTempCache.get(key);
+			}
+		}
 		return Float.MIN_VALUE;
 	}
 
 	public void addTemp(int x, int z, int totalHours, float temp)
 	{
 		String key = x+","+z+","+totalHours;
-		worldTempCache.put(key, temp);
+		synchronized(worldTempCache)
+		{
+			if(worldTempCache != null)
+				worldTempCache.put(key, temp);
+		}
 		trimTempCache();
 	}
 
 	private void trimTempCache()
 	{
-		if(worldTempCache.size() > 20000)
+		synchronized(worldTempCache)
 		{
-			Iterator iter = worldTempCache.keySet().iterator();
-			if(iter.hasNext())
-				worldTempCache.remove(iter.next());
+			if(worldTempCache.size() > 50000)
+			{
+				Iterator iter = worldTempCache.keySet().iterator();
+				if(iter.hasNext())
+					worldTempCache.remove(iter.next());
+			}
 		}
 	}
 

@@ -38,7 +38,7 @@ public class WorldGenGrowTrees
 		{
 			float rainfall = TFC_Climate.getRainfall(world, xCoord, yCoord, zCoord);
 			float temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, yCoord, zCoord);
-			float evt = TFC_Climate.getManager(world).getEVTLayerAt(xCoord, zCoord).floatdata1;
+			float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(xCoord, zCoord).floatdata1;
 
 			if(TreeType0 < 0 || TreeType0 > 15)
 				TreeType0 = TFC_Climate.getTreeLayer(world, xCoord, yCoord, zCoord, 2);

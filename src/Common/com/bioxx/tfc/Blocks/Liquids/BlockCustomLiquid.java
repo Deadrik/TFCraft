@@ -276,7 +276,7 @@ public class BlockCustomLiquid extends BlockFluidClassic
 
 	public void setBlockforLava(World world, int par2, int par3, int par4, int typeOfLava)
 	{
-		DataLayer rockLayer3 = TFC_Climate.getManager(world).getRockLayerAt(par2, par3, 2);
+		DataLayer rockLayer3 = TFC_Climate.getCacheManager(world).getRockLayerAt(par2, par3, 2);
 		int blockId = rockLayer3.data1;
 		int meta = rockLayer3.data2;
 		Random rand = new Random();

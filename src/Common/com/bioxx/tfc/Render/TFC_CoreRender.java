@@ -264,7 +264,7 @@ public class TFC_CoreRender
 		TFCWorldChunkManager wcm = ((TFCWorldChunkManager)w.getWorldChunkManager());
 		renderblocks.renderAllFaces = true;
 
-		DataLayer rockLayer1 = TFC_Climate.getManager(w).getRockLayerAt(i, k, 0);
+		DataLayer rockLayer1 = TFC_Climate.getCacheManager(w).getRockLayerAt(i, k, 0);
 		if(rockLayer1 != null && rockLayer1.block != null && !breaking)
 			renderblocks.overrideBlockTexture = rockLayer1.block.getIcon(0, rockLayer1.data2);
 
@@ -313,9 +313,9 @@ public class TFC_CoreRender
 	public static IIcon getRockTexture(World world, int xCoord, int yCoord, int zCoord)
 	{
 		IIcon var27;
-		DataLayer rockLayer1 = TFC_Climate.getManager(world).getRockLayerAt(xCoord, zCoord, 0);
-		DataLayer rockLayer2 = TFC_Climate.getManager(world).getRockLayerAt(xCoord, zCoord, 1);
-		DataLayer rockLayer3 = TFC_Climate.getManager(world).getRockLayerAt(xCoord, zCoord, 2);
+		DataLayer rockLayer1 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 0);
+		DataLayer rockLayer2 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 1);
+		DataLayer rockLayer3 = TFC_Climate.getCacheManager(world).getRockLayerAt(xCoord, zCoord, 2);
 
 		if(yCoord <= TFCOptions.RockLayer3Height)
 			var27 = rockLayer3.block.getIcon(5, rockLayer3.data2);

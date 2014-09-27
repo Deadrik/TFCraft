@@ -82,7 +82,7 @@ public class WorldGenForests implements IWorldGenerator
 				TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
 			}*/
 
-			float evt = TFC_Climate.getManager(world).getEVTLayerAt(xCoord, zCoord).floatdata1;
+			float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(xCoord, zCoord).floatdata1;
 			gen0 = TFCBiome.getTreeGen(TreeType0, random.nextBoolean());
 			gen1 = TFCBiome.getTreeGen(TreeType1, random.nextBoolean());
 			gen2 = TFCBiome.getTreeGen(TreeType2, random.nextBoolean());
@@ -218,7 +218,7 @@ public class WorldGenForests implements IWorldGenerator
 			zCoord = chunkZ + 8 + random.nextInt(16);
 			yCoord = world.getHeightValue(xCoord, zCoord);
 			float rainfall = TFC_Climate.getRainfall(world, xCoord, 0, zCoord);
-			DataLayer EVT = TFC_Climate.getManager(world).getEVTLayerAt(xCoord, zCoord);
+			DataLayer EVT = TFC_Climate.getCacheManager(world).getEVTLayerAt(xCoord, zCoord);
 			float temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
 			float temperatureAvg = TFC_Climate.getBioTemperature(world, xCoord, zCoord);
 
@@ -261,7 +261,7 @@ public class WorldGenForests implements IWorldGenerator
 
 	public int[] getTreesForClimate(Random random, World world, int xCoord, int yCoord, int zCoord){
 		ArrayList list = new ArrayList<EnumTree>();
-		float evt = TFC_Climate.getManager(world).getEVTLayerAt(xCoord, zCoord).floatdata1;
+		float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(xCoord, zCoord).floatdata1;
 		float rainfall = TFC_Climate.getRainfall(world, xCoord, 0, zCoord);
 		if(getNearWater(world, xCoord, yCoord, zCoord))
 		{

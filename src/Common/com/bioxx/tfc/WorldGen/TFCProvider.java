@@ -230,6 +230,7 @@ return biome;
 				worldObj.getBlock(x, y, z).getMaterial().isReplaceable())
 		{
 			return true;
+			//worldObj.setBlock(x, y, z, TFCBlocks.Snow);
 		}
 		return false;
 	}

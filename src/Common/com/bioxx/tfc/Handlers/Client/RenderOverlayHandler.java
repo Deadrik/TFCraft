@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -26,6 +27,7 @@ import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Entities.Mobs.EntityHorseTFC;
 import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.Tools.ItemChisel;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
@@ -224,6 +226,17 @@ public class RenderOverlayHandler
 				// We have to reset the color back to white
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
+			else if(mc.thePlayer.ridingEntity instanceof EntityLivingBase){
+				GuiIngameForge.renderHealthMount = false;
+				TFC_Core.bindTexture(tfcicons);
+				EntityLivingBase mount = ((EntityLivingBase) mc.thePlayer.ridingEntity);
+				this.drawTexturedModalRect(mid+1, armorRowHeight, 90, 0, 90, 10);
+				double mountMaxHealth = mount.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue();
+				double mountCurrentHealth = mount.getHealth();
+				float mountPercentHealth = (float)Math.min(mountCurrentHealth/mountMaxHealth, 1.0f);
+				this.drawTexturedModalRect(mid+1, armorRowHeight, 90, 9, (int) (90*mountPercentHealth), 9);
+			}
+			TFC_Core.bindTexture(new ResourceLocation("minecraft:textures/gui/icons.png"));
 		}
 	}
 
@@ -237,7 +250,7 @@ public class RenderOverlayHandler
 			int xCoord = (int)player.posX;
 			int yCoord = (int)player.posY;
 			int zCoord = (int)player.posZ;
-			DataLayer evt = TFC_Climate.getManager(mc.theWorld).getEVTLayerAt(xCoord, zCoord);
+			DataLayer evt = TFC_Climate.getCacheManager(mc.theWorld).getEVTLayerAt(xCoord, zCoord);
 			event.left.add(String.format("rain: %.0f, temp: %.2f, average bio temp: %.2f, apparent temp: %.2f, evt: %.3f", new Object[] {
 					TFC_Climate.getRainfall(mc.theWorld, xCoord, yCoord, zCoord), 
 					TFC_Climate.getHeightAdjustedTemp(mc.theWorld, xCoord, yCoord, zCoord),
@@ -248,11 +261,11 @@ public class RenderOverlayHandler
 			if(TFCOptions.enableDebugMode)
 			{
 				event.left.add("Stability: " + TFC_Climate.getStability(mc.theWorld, xCoord, zCoord) + 
-						", Drainage: " +TFC_Climate.getManager(mc.theWorld).getDrainageLayerAt(xCoord, zCoord).name +
-						", pH: " +TFC_Climate.getManager(mc.theWorld).getPHLayerAt(xCoord, zCoord).name);
-				event.left.add("Rock Layers: " + TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 0).name+", "+
-						TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 1).name+", "+
-						TFC_Climate.getManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 2).name);
+						", Drainage: " +TFC_Climate.getCacheManager(mc.theWorld).getDrainageLayerAt(xCoord, zCoord).name +
+						", pH: " +TFC_Climate.getCacheManager(mc.theWorld).getPHLayerAt(xCoord, zCoord).name);
+				event.left.add("Rock Layers: " + TFC_Climate.getCacheManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 0).name+", "+
+						TFC_Climate.getCacheManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 1).name+", "+
+						TFC_Climate.getCacheManager(mc.theWorld).getRockLayerAt(xCoord, zCoord, 2).name);
 			}
 		}
 	}

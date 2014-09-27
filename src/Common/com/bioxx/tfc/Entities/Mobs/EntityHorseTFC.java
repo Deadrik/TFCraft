@@ -32,6 +32,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -64,13 +65,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	protected int pregnancyRequiredTime;
 	protected long conception;
 	protected float mateSizeMod;
-	public float size_mod;
-	public float strength_mod = 1;
-	public float aggression_mod = 1;
-	public float obedience_mod = 1;
-	public float colour_mod = 1;
-	public float climate_mod = 1;
-	public float hard_mod = 1;
+	public float size_mod;			//How large the animal is
+	public float strength_mod;		//how strong the animal is
+	public float aggression_mod = 1;//How aggressive / obstinate the animal is
+	public float obedience_mod = 1;	//How well the animal responds to commands.
+	public float colour_mod = 1;	//what the animal looks like
+	public float climate_mod = 1;	//climate adaptability
+	public float hard_mod = 1;		//hardiness
 	public boolean isInLove;
 	public Vec3 attackedVec = null;
 	public Entity fearSource = null;
@@ -91,7 +92,13 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		conception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
-		size_mod =(float)Math.sqrt((((rand.nextInt (degreeOfDiversion + 1) * (rand.nextBoolean() ? 1 : -1)) * 0.1f) + 1F) * (1.0F - 0.1F * sex));
+		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - 0.1F * sex));
+		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
+		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
+		obedience_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + (1f/aggression_mod)));
+		colour_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion+2)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
+		hard_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
+		climate_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + hard_mod));
 		this.setSize(1.4F, 1.6F);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.taskEntries.clear();
@@ -127,12 +134,36 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public EntityHorseTFC(World par1World, IAnimal mother,  ArrayList<Float> data)
 	{
 		this(par1World);
-		float father_size = data.get(0);
+		float father_size = 1;
+		float father_str = 1;
+		float father_aggro = 1;
+		float father_obed = 1;
+		float father_col = 1;
+		float father_clim = 1;
+		float father_hard = 1;
+		for(int i = 0; i < data.size(); i++){
+			switch(i){
+			case 0:father_size = data.get(i);break;
+			case 1:father_str = data.get(i);break;
+			case 2:father_aggro = data.get(i);break;
+			case 3:father_obed = data.get(i);break;
+			case 4:father_col = data.get(i);break;
+			case 5:father_clim = data.get(i);break;
+			case 6:father_hard = data.get(i);break;
+			default:break;
+			}
+		}
 		this.posX = ((EntityLivingBase)mother).posX;
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
-		size_mod = (float)Math.sqrt((((rand.nextInt ((degreeOfDiversion + 1) * 10) * (rand.nextBoolean() ? 1 : -1)) / 100f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size) / 1.9F));
-
+		size_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1) * 10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size) / 1.9F));
+		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod) * (float)Math.sqrt((mother.getStrength() + father_str) / 1.9F));
+		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1)* (float)Math.sqrt((mother.getAggression() + father_aggro) / 1.9F));
+		obedience_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + (1f/aggression_mod))* (float)Math.sqrt((mother.getObedience() + father_obed) / 1.9F));
+		colour_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion+2)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1)* (float)Math.sqrt((mother.getColour() + father_col) / 1.9F));
+		hard_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1)* (float)Math.sqrt((mother.getHardiness() + father_hard) / 1.9F));
+		climate_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + hard_mod)* (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) / 1.9F));
+		
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
@@ -187,6 +218,21 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		return Math.min(percent, 1f);
 	}
 
+	@Override
+	public int increaseTemper(int p_110198_1_)
+    {
+		p_110198_1_*=5; //This is because we want obedience_mod and aggression_mod to have an effect
+        int j = MathHelper.clamp_int(this.getTemper() + (int)(p_110198_1_ * (1f/obedience_mod) * aggression_mod), 0, this.getMaxTemper());
+        this.setTemper(j);
+        return j;
+    }
+	
+	@Override
+	public int getMaxTemper()
+    {
+        return (int)(500 * aggression_mod);
+    }
+	
 	public void syncData()
 	{
 		if(dataWatcher!= null)
@@ -302,8 +348,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	{
 		super.applyEntityAttributes();
 		this.getAttributeMap().registerAttribute(horseJumpStrength);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250);//MaxHealth
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.22499999403953552D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250 * size_mod * strength_mod * hard_mod);//MaxHealth
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.22499999403953552D * strength_mod * obedience_mod * hard_mod / (size_mod * size_mod));
 		this.setHealth(this.getMaxHealth());
 	}
 
@@ -482,11 +528,11 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		{
 			ItemStack item = ((EntityPlayer)entity).inventory.getCurrentItem();
 			if(entity.isSneaking())
-				super.clearLeashed(par1, par2);
+				super.clearLeashed(par1, true);
 		}
 		else
 		{
-			super.clearLeashed(par1, par2);
+			super.clearLeashed(par1, true);
 		}
 	}
 
@@ -508,7 +554,10 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 		this.entityDropItem(new ItemStack(TFCItems.Hide, 1, Math.max(0, Math.min(2, (int)(ageMod * 3 - 1)))), 0);
 		this.dropItem(Items.bone, (int) ((rand.nextInt(8) + 3) * ageMod));
-
+		if(this.getLeashed()){
+			this.entityDropItem(new ItemStack(Items.lead,1,0),0);
+		}
+		
 		float foodWeight = ageMod*(this.size_mod * 4000);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
 		TFC_Core.animalDropMeat(this, TFCItems.horseMeatRaw, foodWeight);
@@ -987,5 +1036,23 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1250);
 		this.heal(1250);
 		return data;
+	}
+
+	@Override
+	public int getFamiliarityPlayers() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void handleFamiliarityUpdate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void familiarize(EntityPlayer ep) {
+		// TODO Auto-generated method stub
+		
 	}
 }

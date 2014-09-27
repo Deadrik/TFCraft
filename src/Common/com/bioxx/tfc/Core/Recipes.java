@@ -1236,7 +1236,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[] { Items.flint, "ingotIron" }));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[] { Items.flint, "ingotSteel" }));
 
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Leash, 1), new Object[] { "RR ", "RR ", "  R", Character.valueOf('R'), new ItemStack(TFCItems.JuteFibre, 1) });
+		GameRegistry.addRecipe(new ItemStack(TFCItems.Rope, 1), new Object[] { "RR ", "RR ", "  R", Character.valueOf('R'), new ItemStack(TFCItems.JuteFibre, 1) });
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.GoldPan, 1, 0), new Object[] { "1", Character.valueOf('1'), new ItemStack(TFCItems.PotteryBowl, 1, 1) });
 
