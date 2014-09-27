@@ -21,7 +21,7 @@ public class TF_EntityRenderer extends ClassTransformer
 	public TF_EntityRenderer()
 	{
 		mcpClassName = "net.minecraft.client.renderer.EntityRenderer";
-		obfClassName = "bll";
+		obfClassName = "blt";
 
 		List<InstrSet> nodes = new ArrayList<InstrSet>();
 		InsnList list = new InsnList();
@@ -48,7 +48,7 @@ public class TF_EntityRenderer extends ClassTransformer
 		this.obfMethodNodes.put("g | ()V", new Patch(nodes, PatchOpType.Replace));*/
 
 		//This version of the method patch simply overwrites the call to the vanilla method and calls our own method instead.
-		list.add(new VarInsnNode(Opcodes.ALOAD, 0));
+		//list.add(new VarInsnNode(Opcodes.ALOAD, 0));
 		list.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/renderer/EntityRenderer", "random", "Ljava/util/Random;"));
 		list.add(new VarInsnNode(Opcodes.ALOAD, 0));
 		list.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/renderer/EntityRenderer", "rendererUpdateCount", "I"));
@@ -58,7 +58,7 @@ public class TF_EntityRenderer extends ClassTransformer
 
 		nodes = new ArrayList<InstrSet>();
 		list = new InsnList();
-		list.add(new VarInsnNode(Opcodes.ALOAD, 0));
+		//list.add(new VarInsnNode(Opcodes.ALOAD, 0));
 		list.add(new FieldInsnNode(Opcodes.GETFIELD, "blt", "al", "Ljava/util/Random;"));
 		list.add(new VarInsnNode(Opcodes.ALOAD, 0));
 		list.add(new FieldInsnNode(Opcodes.GETFIELD, "blt", "w", "I"));
