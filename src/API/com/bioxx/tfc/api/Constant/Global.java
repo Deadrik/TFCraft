@@ -81,6 +81,7 @@ public class Global
 	public static final String SKILL_ARMORSMITH = "skill.armorsmith";
 	public static final String SKILL_AGRICULTURE = "skill.agriculture";
 	public static final String SKILL_COOKING = "skill.cooking";
+	public static final String SKILL_PROSPECTING = "skill.prospecting";
 
 
 	public static Metal BISMUTH;

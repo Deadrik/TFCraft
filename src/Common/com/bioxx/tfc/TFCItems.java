@@ -1031,15 +1031,15 @@ public class TFCItems
 
 		Shears = new ItemShears(0, IronToolMaterial).setUnlocalizedName("shears").setTextureName("shears");
 
-		ProPickBismuthBronze = new ItemProPick().setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses);
-		ProPickBlackBronze = new ItemProPick().setUnlocalizedName("Black Bronze ProPick").setMaxDamage(BlackBronzeUses);
-		ProPickBlackSteel = new ItemProPick().setUnlocalizedName("Black Steel ProPick").setMaxDamage(BlackSteelUses);
-		ProPickBlueSteel = new ItemProPick().setUnlocalizedName("Blue Steel ProPick").setMaxDamage(BlueSteelUses);
-		ProPickBronze = new ItemProPick().setUnlocalizedName("Bronze ProPick").setMaxDamage(BronzeUses);
-		ProPickCopper = new ItemProPick().setUnlocalizedName("Copper ProPick").setMaxDamage(CopperUses);
-		ProPickIron = new ItemProPick().setUnlocalizedName("Wrought Iron ProPick").setMaxDamage(WroughtIronUses);
-		ProPickRedSteel = new ItemProPick().setUnlocalizedName("Red Steel ProPick").setMaxDamage(RedSteelUses);
-		ProPickSteel = new ItemProPick().setUnlocalizedName("Steel ProPick").setMaxDamage(SteelUses);
+		ProPickBismuthBronze = new ItemProPick().setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses/3);
+		ProPickBlackBronze = new ItemProPick().setUnlocalizedName("Black Bronze ProPick").setMaxDamage(BlackBronzeUses/3);
+		ProPickBlackSteel = new ItemProPick().setUnlocalizedName("Black Steel ProPick").setMaxDamage(BlackSteelUses/3);
+		ProPickBlueSteel = new ItemProPick().setUnlocalizedName("Blue Steel ProPick").setMaxDamage(BlueSteelUses/3);
+		ProPickBronze = new ItemProPick().setUnlocalizedName("Bronze ProPick").setMaxDamage(BronzeUses/3);
+		ProPickCopper = new ItemProPick().setUnlocalizedName("Copper ProPick").setMaxDamage(CopperUses/3);
+		ProPickIron = new ItemProPick().setUnlocalizedName("Wrought Iron ProPick").setMaxDamage(WroughtIronUses/3);
+		ProPickRedSteel = new ItemProPick().setUnlocalizedName("Red Steel ProPick").setMaxDamage(RedSteelUses/3);
+		ProPickSteel = new ItemProPick().setUnlocalizedName("Steel ProPick").setMaxDamage(SteelUses/3);
 
 		BismuthIngot = new ItemIngot().setUnlocalizedName("Bismuth Ingot");
 		BismuthBronzeIngot = new ItemIngot().setUnlocalizedName("Bismuth Bronze Ingot");

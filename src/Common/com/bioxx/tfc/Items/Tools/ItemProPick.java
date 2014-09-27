@@ -17,7 +17,9 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
@@ -89,9 +91,12 @@ public class ItemProPick extends ItemTerra
 
 		random = new Random(x * z + y);
 
+		SkillRank rank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_PROSPECTING);
+		int chance = 60 + ((rank.ordinal()+1)*10);
+
 		// If random(100) is less than 60, it used to succeed. we don't need to
 		// gather the blocks in a 25x25 area if it doesn't.
-		if (random.nextInt(100) >= 60)
+		if (random.nextInt(100) >= chance && rank != SkillRank.Master)
 		{
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.ProPick.FoundNothing")));
 			return true;
@@ -160,7 +165,7 @@ public class ItemProPick extends ItemTerra
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("gui.ProPick.FoundNothing")));
 			return;
 		}
-
+		TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_PROSPECTING, 1);
 		int index = random.nextInt(results.size());
 		ProspectResult result = results.values().toArray(new ProspectResult[0])[index];
 		String oreName = result.ItemStack.getItem().getItemStackDisplayName(result.ItemStack);
