@@ -132,7 +132,7 @@ public class BlockLogNatural extends BlockTerraContainer
 
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta)
-	{		
+	{
 		//we need to make sure the player has the correct tool out
 		boolean isAxeorSaw = false;
 		boolean isHammer = false;
@@ -209,13 +209,13 @@ public class BlockLogNatural extends BlockTerraContainer
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion ex)
 	{
-		ProcessTree(world, x, y, z, world.getBlockMetadata(x, y, z), null);
+		//ProcessTree(world, x, y, z, world.getBlockMetadata(x, y, z), null);
 	}
 
-	private void ProcessTree(World world, int x, int y, int z, ItemStack is)
+	/*private void ProcessTree(World world, int x, int y, int z, ItemStack is)
 	{
 
-	}
+	}*/
 
 	@Override
 	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest)
@@ -225,28 +225,26 @@ public class BlockLogNatural extends BlockTerraContainer
 
 		if(!world.isRemote)
 		{
-			TETreeLog te = ((TETreeLog) world.getTileEntity(x, y, z));
-			if(te != null)
+			TileEntity te = world.getTileEntity(x, y, z);
+			if(te != null && te instanceof TETreeLog)
 			{
-				if(!te.isBase)
-				{
-					return removedByPlayer(world, player, te.baseX, te.baseY, te.baseZ, willHarvest);
-				}
-				TreeSchematic schem = TreeRegistry.instance.getTreeSchematic(te.treeID, false);
+				TETreeLog teLog = (TETreeLog) te;
+				if(!teLog.isBase)
+					return removedByPlayer(world, player, teLog.baseX, teLog.baseY, teLog.baseZ, willHarvest);
 
+				TreeSchematic schem = TreeRegistry.instance.getTreeSchematic(teLog.treeID, teLog.schemIndex);
+				int index;
+				int id;
 				for(int schemY = 0; schemY < schem.getSizeY(); schemY++)
 				{
 					for(int schemZ = 0; schemZ < schem.getSizeZ(); schemZ++)
 					{
 						for(int schemX = 0; schemX < schem.getSizeX(); schemX++)
-						{						
-							int index = schemX + schem.getSizeX() * (schemZ + schem.getSizeZ() * schemY);
-							int id = schem.getBlockArray()[index];
-
+						{
+							index = schemX + schem.getSizeX() * (schemZ + schem.getSizeZ() * schemY);
+							id = schem.getBlockArray()[index];
 							if(id != 0)
-							{
-								ProcessRot(world, x, y, z, te.treeID, schem, schemX, schemY, schemZ, te);
-							}
+								ProcessRot(world, x, y, z, teLog.treeID, schem, schemX+1, schemY, schemZ+1, teLog.rotation);
 						}
 					}
 				}
@@ -256,88 +254,32 @@ public class BlockLogNatural extends BlockTerraContainer
 		return true;
 	}
 
-	/*private boolean ProcessRot(World world, int i, int j, int k, int meta, TreeSchematic schem, int y, int z,int x, TETreeLog te) 
+	private static void ProcessRot(World world, int treeX, int treeY, int treeZ, int meta,
+			TreeSchematic schem, int schemX, int schemY, int schemZ, int rot)
 	{
-		int localX = i+x;
-		int localY = j+y;
-		int localZ = k+z;
+		int localX = treeX + schem.getCenterX() - schemX;
+		int localZ = treeZ + schem.getCenterZ() - schemZ;
+		int localY = treeY + schemY;
 
-		if(te.rotation == 1)
+		if(rot == 0)
 		{
-			localX = i+x;
-			localY = j+y;
-			localZ = k-z;
+			localX = treeX - schem.getCenterX() + schemX;
+			localZ = treeZ - schem.getCenterZ() + schemZ;
 		}
-		else if(te.rotation == 2)
+		else if(rot == 1)
 		{
-			localX = i-x;
-			localY = j+y;
-			localZ = k+z;
+			localX = treeX - schem.getCenterX() + schemX;
+			localZ = treeZ + schem.getCenterZ() - schemZ;
 		}
-		else if(te.rotation == 3)
+		else if(rot == 2)
 		{
-			localX = i-x;
-			localY = j+y;
-			localZ = k-z;
-		}
-
-		Block block = TFCBlocks.LogNatural;
-		Block leaves = TFCBlocks.Leaves;
-		if(meta > 15)
-		{
-			block = TFCBlocks.LogNatural2;
-			leaves = TFCBlocks.Leaves2;
-			meta -= 15;
+			localX = treeX + schem.getCenterX() - schemX;
+			localZ = treeZ - schem.getCenterZ() + schemZ;
 		}
 
 		//Get the block that occupies the local coordinate
 		Block localBlockID = world.getBlock(localX, localY, localZ);
 
-		if(localX == i && localY == j && localZ == k)
-			System.out.println("Center Reached!");
-		if(localBlockID == block)
-		{
-			TETreeLog log = (TETreeLog) world.getTileEntity(localX, localY, localZ);
-			if(log != null && ((log.baseX == i && log.baseY == j && log.baseZ == k)))
-			{
-				world.setBlock(localX, localY, localZ, Blocks.air, 0, 0x2);
-			}
-		}
-		else if(localBlockID == leaves)
-		{
-			world.setBlock(localX, localY, localZ, Blocks.air, 0, 0x2);
-		}
-		return false;
-	}*/
-
-	private static void ProcessRot(World world, int treeX, int treeY, int treeZ, int id, TreeSchematic schem, int x, int y, int z, TETreeLog te) 
-	{
-		//Get the actual world coordinates from the offsets
-		int localX = treeX - schem.getCenterX() - x + schem.getSizeX();
-		int localZ = treeZ - schem.getCenterZ() - z + schem.getSizeZ();
-		int localY = treeY + y;
-
-		if(te.rotation == 0)
-		{
-			localX = treeX - schem.getCenterX() + x;
-			localZ = treeZ - schem.getCenterZ() + z;
-		}
-		else if(te.rotation == 1)
-		{
-			localX = treeX - schem.getCenterX() + x;
-			localZ = treeZ - schem.getCenterZ() - z + schem.getSizeZ();
-		}
-		else if(te.rotation == 2)
-		{
-			localX = treeX - schem.getCenterX() - x + schem.getSizeX();
-			localZ = treeZ - schem.getCenterZ() + z;
-		}
-
-		//Get the block that occupies the local coordinate
-		Block localBlockID = world.getBlock(localX, localY, localZ);
-
-		if(localX == treeX && localY == treeY && localZ == treeZ)
-			System.out.println("Center Reached! localBlockID = " + localBlockID);
 		if(localBlockID == TFCBlocks.LogNatural || localBlockID == TFCBlocks.LogNatural2)
 		{
 			TETreeLog log = (TETreeLog) world.getTileEntity(localX, localY, localZ);
@@ -348,16 +290,19 @@ public class BlockLogNatural extends BlockTerraContainer
 		}
 		else if(localBlockID == TFCBlocks.Leaves || localBlockID == TFCBlocks.Leaves2)
 		{
-			world.setBlock(localX, localY, localZ, Blocks.air, 0, 0x2);
+			if(meta > 15)
+				meta -= 16;
+			if(world.getBlockMetadata(localX, localY, localZ) == meta)
+				world.setBlock(localX, localY, localZ, Blocks.air, 0, 0x2);
 		}
 	}
 
-	@Deprecated
+	/*@Deprecated
 	private void ProcessTree(World world, int x, int y, int z, int meta, ItemStack is)
 	{
 		boolean[][][] checkArray = new boolean[searchDist * 2 + 1][256][searchDist * 2 + 1];
 		scanLogs(world, x, y, z, meta, checkArray, (byte)0, (byte)0, (byte)0, is);
-	}
+	}*/
 
 	@Override
 	public Item getItemDropped(int i, Random random, int j)
@@ -389,7 +334,7 @@ public class BlockLogNatural extends BlockTerraContainer
 	}
 
 
-	private void scanLogs(World world, int i, int j, int k, int l, boolean[][][] checkArray, byte x, byte y, byte z, ItemStack stack)
+	/*private void scanLogs(World world, int i, int j, int k, int l, boolean[][][] checkArray, byte x, byte y, byte z, ItemStack stack)
 	{
 		if(y >= 0 && j + y < 256)
 		{
@@ -441,6 +386,6 @@ public class BlockLogNatural extends BlockTerraContainer
 		world.notifyBlockOfNeighborChange(x, y, z - 1, Blocks.air);
 		world.notifyBlockOfNeighborChange(x, y + 1, z, Blocks.air);
 		world.notifyBlockOfNeighborChange(x, y - 1, z, Blocks.air);
-	}
+	}*/
 
 }

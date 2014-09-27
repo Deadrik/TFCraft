@@ -2,30 +2,29 @@ package com.bioxx.tfc.api.Interfaces;
 
 import net.minecraft.nbt.NBTTagList;
 
-public interface ISchematic 
+public interface ISchematic
 {
-	
 	public boolean Load();
 	/**
 	 * @return Schematic "Height"
 	 */
-	public short getSizeY();
+	public int getSizeY();
 	
-	public void setSizeY(short y);
+	public void setSizeY(int y);
 	
 	/**
 	 * @return Schematic "Width"
 	 */
-	public short getSizeX();
+	public int getSizeX();
 	
-	public void setSizeX(short x);
+	public void setSizeX(int x);
 	
 	/**
 	 * @return Schematic "Length"
 	 */
-	public short getSizeZ();
+	public int getSizeZ();
 	
-	public void setSizeZ(short z);
+	public void setSizeZ(int z);
 	
 	/**
 	 * In normal schematic files, this is a byte array. TFC uses an int array to be able to 
@@ -85,4 +84,9 @@ public interface ISchematic
 	 * @return File Index number
 	 */
 	public int getIndex();
+
+	/**
+	 * Get tree growth stage between 1 and 6
+	 */
+	public int getGrowthStage();
 }

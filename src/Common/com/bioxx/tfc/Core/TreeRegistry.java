@@ -15,16 +15,14 @@ public class TreeRegistry
 	public static TreeRegistry instance = new TreeRegistry();
 	private HashMap treeTypeHash = new HashMap();
 	private Vector<Vector<ISchematic>> treeList;
-	private Vector<Vector<ISchematic>> treeListLarge;
 	private String treePath = "assets/terrafirmacraft/schematics/trees/";
 
 	public TreeRegistry()
 	{
 		treeList = new Vector<Vector<ISchematic>>();
-		treeListLarge = new Vector<Vector<ISchematic>>();
 	}
 
-	public void RegisterTree(ISchematic treeSchematic, String name, boolean large)
+	public void RegisterTree(ISchematic treeSchematic, String name)
 	{
 		int index = checkValidity(name);
 
@@ -34,26 +32,13 @@ public class TreeRegistry
 		}
 		else
 		{
-			if(large)
-			{
-				if(treeListLarge.size() < treeTypeHash.size())
-					treeListLarge.setSize(treeTypeHash.size());
+			if(treeList.size() < treeTypeHash.size())
+				treeList.setSize(treeTypeHash.size());
 
-				if(treeListLarge.get(index) == null)
-					treeListLarge.set(index, new Vector<ISchematic>());
+			if(treeList.get(index) == null)
+				treeList.set(index, new Vector<ISchematic>());
 
-				treeListLarge.get(index).add(treeSchematic);
-			}
-			else
-			{
-				if(treeList.size() < treeTypeHash.size())
-					treeList.setSize(treeTypeHash.size());
-
-				if(treeList.get(index) == null)
-					treeList.set(index, new Vector<ISchematic>());
-
-				treeList.get(index).add(treeSchematic);
-			}
+			treeList.get(index).add(treeSchematic);
 		}
 	}
 
@@ -69,7 +54,7 @@ public class TreeRegistry
 				{
 					TreeSchematic schem = new TreeSchematic(treePath + f.getName());
 					if(schem.Load())
-						RegisterTree(schem, schemType, schem.getIsLarge());
+						RegisterTree(schem, schemType);
 				}
 			}
 		}
@@ -89,7 +74,7 @@ public class TreeRegistry
 			{
 				TreeSchematic schem = new TreeSchematic(treePath + f.getName());
 				if(schem.Load())
-					RegisterTree(schem, schemType, schem.getIsLarge());
+					RegisterTree(schem, schemType);
 			}
 		}
 		catch (URISyntaxException e)
@@ -98,37 +83,49 @@ public class TreeRegistry
 		}
 	}
 
-	public TreeSchematic getRandomTreeSchematic(int t, boolean large)
+	public TreeSchematic getRandomTreeSchematic(int treeID)
 	{
-		Vector v;
-		if(large) v = treeListLarge.get(t);
-		else v = treeList.get(t);
-
-		if(v != null) return (TreeSchematic) v.get(new Random().nextInt(v.size()));
+		Vector v = treeList.get(treeID);
+		if(v != null)
+			return (TreeSchematic) v.get(new Random().nextInt(v.size()));
 		return null;
 	}
 
-	public TreeSchematic getTreeSchematic(int t, boolean large)
+	public TreeSchematic getTreeSchematic(int treeID, int schemIndex)
 	{
-		Vector v;
-		if(large) v = treeListLarge.get(t);
-		else v = treeList.get(t);
-
+		Vector v = treeList.get(treeID);
 		if(v != null)
 		{
-			if(v.size() == 1) return (TreeSchematic) v.get(0);
-			else return (TreeSchematic) v.get(new Random().nextInt(v.size()));
+			TreeSchematic ts;
+			for(int l = 0; l < v.size(); l++)
+			{
+				ts = (TreeSchematic)v.get(l);
+				if(ts.getIndex() == schemIndex)
+					return (TreeSchematic) v.get(schemIndex);
+			}
 		}
 		return null;
 	}
 
-	public TreeSchematic getTreeSchematic(int t, int i, boolean large)
+	public TreeSchematic getRandomTreeSchematicWithGrowthStage(int treeID, int growthStage)
 	{
-		Vector v;
-		if(large) v = treeListLarge.get(t);
-		else v = treeList.get(t);
-
-		if(v != null) return (TreeSchematic) v.get(i);
+		Vector v = treeList.get(treeID);
+		if(v != null)
+		{
+			HashMap<Integer, ISchematic> treeListTmp = new HashMap();
+			TreeSchematic ts;
+			int index = 0;
+			for(int l = 0; l < v.size(); l++)
+			{
+				ts = (TreeSchematic)v.get(l);
+				if(ts.getGrowthStage() == growthStage)
+					treeListTmp.put(index++, ts);
+			}
+			if(treeListTmp.size() == 1)
+				return (TreeSchematic) treeListTmp.get(0);
+			if(treeListTmp.size() > 1)
+				return (TreeSchematic) treeListTmp.get(new Random().nextInt(treeListTmp.size()));
+		}
 		return null;
 	}
 
@@ -211,20 +208,5 @@ public class TreeRegistry
 	{
 		int id = new Random().nextInt(treeTypeHash.values().toArray().length);
 		return treeFromID(id);
-	}
-
-	public TreeSchematic getRandomTreeSchem(int id, boolean large)
-	{
-		Vector<ISchematic> treeVec;
-		if(large) treeVec = treeListLarge.get(id);
-		else treeVec = treeList.get(id);
-
-		if(treeVec.size() == 1) return (TreeSchematic) treeVec.get(0);
-		return (TreeSchematic) treeVec.get(new Random().nextInt(treeVec.size()));
-	}
-
-	public int getTreeCount()
-	{
-		return treeTypeHash.size();
 	}
 }

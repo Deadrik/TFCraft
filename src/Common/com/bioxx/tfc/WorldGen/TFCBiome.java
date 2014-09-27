@@ -149,56 +149,56 @@ public class TFCBiome extends BiomeGenBase
 
 		int i = 0;
 		//Oak
-		worldGenOakShortTrees = new WorldGenTrees(false, i, false);
-		worldGenOakTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenOakShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenOakTallTrees = new WorldGenTrees(false, i++, 6);
 		//Aspen
-		worldGenAspenShortTrees = new WorldGenTrees(false, i, false);
-		worldGenAspenTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenAspenShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenAspenTallTrees = new WorldGenTrees(false, i++, 6);
 		//Birch
-		worldGenBirchShortTrees = new WorldGenTrees(false, i, false);
-		worldGenBirchTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenBirchShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenBirchTallTrees = new WorldGenTrees(false, i++, 6);
 		//Chestnut
-		worldGenChestnutShortTrees = new WorldGenTrees(false, i, false);
-		worldGenChestnutTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenChestnutShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenChestnutTallTrees = new WorldGenTrees(false, i++, 6);
 		//Douglas Fir
-		worldGenDouglasFirShortTrees = new WorldGenTrees(false, i, false);
-		worldGenDouglasFirTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenDouglasFirShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenDouglasFirTallTrees = new WorldGenTrees(false, i++, 6);
 		//Hickory
-		worldGenHickoryShortTrees = new WorldGenTrees(false, i, false);
-		worldGenHickoryTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenHickoryShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenHickoryTallTrees = new WorldGenTrees(false, i++, 6);
 		//Maple
-		worldGenMapleShortTrees = new WorldGenTrees(false, i, false);
-		worldGenMapleTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenMapleShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenMapleTallTrees = new WorldGenTrees(false, i++, 6);
 		//Ash
-		worldGenAshShortTrees = new WorldGenTrees(false, i, false);
-		worldGenAshTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenAshShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenAshTallTrees = new WorldGenTrees(false, i++, 6);
 		//Pine
-		worldGenPineShortTrees = new WorldGenTrees(false, i, false);
-		worldGenPineTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenPineShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenPineTallTrees = new WorldGenTrees(false, i++, 6);
 		//Sequoia
-		worldGenRedwoodShortTrees = new WorldGenTrees(false, i, false);
-		worldGenRedwoodTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenRedwoodShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenRedwoodTallTrees = new WorldGenTrees(false, i++, 6);
 		//Spruce
-		worldGenSpruceShortTrees = new WorldGenTrees(false, i, false);
-		worldGenSpruceTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenSpruceShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenSpruceTallTrees = new WorldGenTrees(false, i++, 6);
 		//Sycamore
-		worldGenSycamoreShortTrees = new WorldGenTrees(false, i, false);
-		worldGenSycamoreTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenSycamoreShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenSycamoreTallTrees = new WorldGenTrees(false, i++, 6);
 		//White Cedar
-		worldGenWhiteCedarShortTrees = new WorldGenTrees(false, i, false);
-		worldGenWhiteCedarTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenWhiteCedarShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenWhiteCedarTallTrees = new WorldGenTrees(false, i++, 6);
 		//White Elm
-		worldGenWhiteElmShortTrees = new WorldGenTrees(false, i, false);
-		worldGenWhiteElmTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenWhiteElmShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenWhiteElmTallTrees = new WorldGenTrees(false, i++, 6);
 		//Willow
-		worldGenWillowShortTrees = new WorldGenTrees(false, i, false);
-		worldGenWillowTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenWillowShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenWillowTallTrees = new WorldGenTrees(false, i++, 6);
 		//Kapok
-		worldGenKapokShortTrees = new WorldGenTrees(false, i, false);
-		worldGenKapokTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenKapokShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenKapokTallTrees = new WorldGenTrees(false, i++, 6);
 		//Acacia
-		worldGenAcaciaKoaShortTrees = new WorldGenTrees(false, i, false);
-		worldGenAcaciaKoaTallTrees = new WorldGenTrees(false, i++, true);
+		worldGenAcaciaKoaShortTrees = new WorldGenTrees(false, i, 5);
+		worldGenAcaciaKoaTallTrees = new WorldGenTrees(false, i++, 6);
 
 		/*
 		worldGenAcaciaKoaTrees = new WorldGenAcaciaKoaTrees(false,0);

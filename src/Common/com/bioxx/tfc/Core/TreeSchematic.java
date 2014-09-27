@@ -13,16 +13,18 @@ import com.bioxx.tfc.api.Interfaces.ISchematic;
 
 public class TreeSchematic implements ISchematic
 {
-	private short height;
-	private short width;
-	private short length;
+	private int height;
+	private int width;
+	private int centerX;
+	private int length;
+	private int centerZ;
 	private int[] blockArray;
 	private byte[] dataArray;
 	private NBTTagList te;
 	private NBTTagList entities;
 	private String path;
-	private boolean isLarge;
 	private int id;
+	private int growthStage;
 
 	public TreeSchematic(String p)
 	{
@@ -39,7 +41,9 @@ public class TreeSchematic implements ISchematic
 			tree = CompressedStreamTools.readCompressed(fis);
 			height = tree.getShort("Height");
 			width = tree.getShort("Width");
+			centerX = getCenter(width);
 			length = tree.getShort("Length");
+			centerZ = getCenter(length);
 
 			if(tree.hasKey("Blocks"))
 			{
@@ -59,13 +63,12 @@ public class TreeSchematic implements ISchematic
 			dataArray = tree.getByteArray("Data");
 			te = tree.getTagList("TileEntities", 10);
 
-			if(path.contains("_Large"))
-				isLarge = true;
-			else
-				isLarge = false;
-
 			int num = path.indexOf('_') + 1;
 			id = Integer.parseInt(path.substring(num, num + 3));
+
+			num += 4;
+			growthStage = Integer.parseInt(path.substring(num, num + 1));
+			
 		}
 		catch (FileNotFoundException e)
 		{
@@ -79,20 +82,27 @@ public class TreeSchematic implements ISchematic
 		return true;
 	}
 
+	private int getCenter(int v)
+	{
+		if(v % 2 == 1)
+			return (v + 1) / 2;
+		return v / 2;
+	}
+
 	@Override
-	public short getSizeY()
+	public int getSizeY()
 	{
 		return height;
 	}
 
 	@Override
-	public short getSizeX()
+	public int getSizeX()
 	{
 		return width;
 	}
 
 	@Override
-	public short getSizeZ()
+	public int getSizeZ()
 	{
 		return length;
 	}
@@ -128,19 +138,19 @@ public class TreeSchematic implements ISchematic
 	}
 
 	@Override
-	public void setSizeY(short y)
+	public void setSizeY(int y)
 	{
 		height = y;
 	}
 
 	@Override
-	public void setSizeX(short x)
+	public void setSizeX(int x)
 	{
 		width = x;
 	}
 
 	@Override
-	public void setSizeZ(short z)
+	public void setSizeZ(int z)
 	{
 		length = z;
 	}
@@ -178,18 +188,13 @@ public class TreeSchematic implements ISchematic
 	@Override
 	public int getCenterX()
 	{
-		return (int) Math.floor((double)width / 2D);
+		return centerX;
 	}
 
 	@Override
 	public int getCenterZ()
 	{
-		return (int) Math.floor((double)length / 2D);
-	}
-
-	public boolean getIsLarge()
-	{
-		return isLarge;
+		return centerZ;
 	}
 
 	@Override
@@ -198,4 +203,9 @@ public class TreeSchematic implements ISchematic
 		return id;
 	}
 
+	@Override
+	public int getGrowthStage()
+	{
+		return growthStage;
+	}
 }

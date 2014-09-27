@@ -8,18 +8,15 @@ public class TETreeLog extends NetworkTileEntity
 {
 	public int dayBorn = -20;
 	public boolean isBase = false;
-	public int baseX = 0; 
+	public int baseX = 0;
 	public int baseY = 0;
 	public int baseZ = 0;
-	public byte xOffset = 0;
-	public byte zOffset = 0;
-	public byte schemID = -1;
+	public byte schemIndex = -1;
 	public byte treeID = 0;
 	public byte rotation = 0;
 
 	public TETreeLog()
 	{
-
 	}
 
 	@Override
@@ -55,11 +52,9 @@ public class TETreeLog extends NetworkTileEntity
 		baseX = nbt.getInteger("baseX");
 		baseY = nbt.getInteger("baseY");
 		baseZ = nbt.getInteger("baseZ");
-		xOffset = nbt.getByte("xOffset");
-		zOffset = nbt.getByte("zOffset");
 		if(isBase)
 		{
-			schemID = nbt.getByte("schemID");
+			schemIndex = nbt.getByte("schemIndex");
 			treeID = nbt.getByte("treeID");
 			rotation = nbt.getByte("rotation");
 		}
@@ -74,11 +69,9 @@ public class TETreeLog extends NetworkTileEntity
 		nbt.setInteger("baseX", baseX);
 		nbt.setInteger("baseY", baseY);
 		nbt.setInteger("baseZ", baseZ);
-		nbt.setByte("xOffset", xOffset);
-		nbt.setByte("zOffset", zOffset);
 		if(isBase)
 		{
-			nbt.setByte("schemID", schemID);
+			nbt.setByte("schemIndex", schemIndex);
 			nbt.setByte("treeID", treeID);
 			nbt.setByte("rotation", rotation);
 		}
@@ -88,10 +81,10 @@ public class TETreeLog extends NetworkTileEntity
 	public void handleInitPacket(NBTTagCompound nbt) 
 	{
 		treeID = nbt.getByte("treeID");
-		schemID = nbt.getByte("schemID");
+		schemIndex = nbt.getByte("schemIndex");
 		rotation = nbt.getByte("rotation");
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		TreeRegistry.instance.getTreeSchematic(treeID, false);//Something needs to change if we want to have growing trees. Large tag doesn't make sense.
+		TreeRegistry.instance.getTreeSchematic(treeID, schemIndex);
 	}
 
 	@Override
@@ -101,23 +94,13 @@ public class TETreeLog extends NetworkTileEntity
 	public void createDataNBT(NBTTagCompound nbt) {}
 
 	@Override
-	public void createInitNBT(NBTTagCompound nbt) 
+	public void createInitNBT(NBTTagCompound nbt)
 	{
 		if(isBase)
 		{
 			nbt.setByte("treeID", treeID);
-			nbt.setByte("schemID", schemID);
+			nbt.setByte("schemID", schemIndex);
 			nbt.setByte("rotation", rotation);
 		}
-	}
-
-	public void Setup(byte index, byte b, int localX, int localY, int localZ, byte x, byte z) 
-	{
-		this.isBase = true;
-		treeID = index;
-		rotation = b;
-		xOffset = x;
-		zOffset = z;
-		Setup(localX, localY, localZ);
 	}
 }
