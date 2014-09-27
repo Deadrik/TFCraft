@@ -10,14 +10,17 @@ import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
+import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.Items.Tools.ItemCustomHoe;
 import com.bioxx.tfc.TileEntities.TECrop;
 import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -42,8 +45,14 @@ public class FarmlandHighlightHandler
 			isMetalHoe = true;
 		}
 
+
+
 		if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && isMetalHoe && PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 1)
 		{
+			SkillRank sr = TFC_Core.getSkillStats(evt.player).getSkillRank(Global.SKILL_AGRICULTURE);
+			if(sr != SkillRank.Expert && sr != SkillRank.Master)
+				return;
+
 			Block b = world.getBlock(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 			int crop = 0;
 			if(b == TFCBlocks.Crops && (
