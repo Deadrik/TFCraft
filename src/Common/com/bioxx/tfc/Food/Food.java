@@ -1,5 +1,7 @@
 package com.bioxx.tfc.Food;
 
+import java.util.Random;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -198,5 +200,66 @@ public class Food
 		int g = 255 - (int)(160 * (Math.max(cookedLevel-600, 0) / 600f));
 		int rbg = (r << 16) + (b << 8) + g;
 		return rbg;
+	}
+
+	public static void setSweetMod(ItemStack is, int val)
+	{
+		if(!is.hasTagCompound())
+			is.setTagCompound(new NBTTagCompound());
+		is.getTagCompound().setInteger("tasteSweetMod", val);
+	}
+
+	public static void setSourMod(ItemStack is, int val)
+	{
+		if(!is.hasTagCompound())
+			is.setTagCompound(new NBTTagCompound());
+		is.getTagCompound().setInteger("tasteSourMod", val);
+	}
+
+	public static void setSaltyMod(ItemStack is, int val)
+	{
+		if(!is.hasTagCompound())
+			is.setTagCompound(new NBTTagCompound());
+		is.getTagCompound().setInteger("tasteSaltyMod", val);
+	}
+
+	public static void setBitterMod(ItemStack is, int val)
+	{
+		if(!is.hasTagCompound())
+			is.setTagCompound(new NBTTagCompound());
+		is.getTagCompound().setInteger("tasteBitterMod", val);
+	}
+
+	public static void setSavoryMod(ItemStack is, int val)
+	{
+		if(!is.hasTagCompound())
+			is.setTagCompound(new NBTTagCompound());
+		is.getTagCompound().setInteger("tasteUmamiMod", val);
+	}
+
+	public static void adjustFlavor(ItemStack is, Random R)
+	{
+		Food.setSweetMod(is, R.nextInt(16)-8);
+		Food.setSourMod(is, R.nextInt(16)-8);
+		Food.setSaltyMod(is, R.nextInt(16)-8);
+		Food.setBitterMod(is, R.nextInt(16)-8);
+		Food.setSavoryMod(is, R.nextInt(16)-8);
+	}
+
+	public static void setMealSkill(ItemStack is, int val)
+	{
+		if(!is.hasTagCompound())
+			is.setTagCompound(new NBTTagCompound());
+		is.getTagCompound().setInteger("mealSkill", val);
+	}
+
+	public static int getMealSkill(ItemStack is)
+	{
+		return is.getTagCompound().getInteger("mealSkill");
+	}
+
+	public static boolean hasMealSkill(ItemStack is)
+	{
+		return is.getTagCompound().hasKey("mealSkill");
 	}
 }

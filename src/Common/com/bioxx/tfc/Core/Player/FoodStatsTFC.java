@@ -334,7 +334,7 @@ public class FoodStatsTFC
 	public int[] getPrefTaste()
 	{
 		Random R = new Random(getPlayerFoodSeed());
-		return new int[]{20+R.nextInt(60),20+R.nextInt(60),20+R.nextInt(60),20+R.nextInt(60),20+R.nextInt(60)};
+		return new int[]{20+R.nextInt(70),20+R.nextInt(70),20+R.nextInt(70),20+R.nextInt(70),20+R.nextInt(70)};
 	}
 
 	public float getTasteFactor(ItemStack food)
@@ -354,15 +354,10 @@ public class FoodStatsTFC
 
 	float getTasteDistanceFactor(int pref, int val)
 	{
-		int abs = pref-val;
-		if(abs < 0)
-			abs*= -1;
-
+		int abs = Math.abs(pref-val);
 		if(abs < 11)
-		{
-			return (11-abs)*0.01f;
-		}
-		else return 0;
+			return (10-abs)*0.01f;
+		return 0;
 	}
 
 	public float getNutritionHealthModifier()

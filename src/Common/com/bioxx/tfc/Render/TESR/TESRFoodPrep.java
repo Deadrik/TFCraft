@@ -85,13 +85,13 @@ public class TESRFoodPrep extends TESRBase
 					itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
 					GL11.glPopMatrix(); //end
 				}
-				if (te.getStackInSlot(5) != null)
+				if (te.getStackInSlot(6) != null)
 				{
 					GL11.glPushMatrix(); //start
 					GL11.glTranslatef((float)d + 0.75F, (float)d1 + 0.0F, (float)d2 + 0.75F);
 					GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
 					GL11.glScalef(blockScale, blockScale, blockScale);
-					customitem.setEntityItemStack(te.getStackInSlot(5));
+					customitem.setEntityItemStack(te.getStackInSlot(6));
 					itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
 					GL11.glPopMatrix(); //end
 				}
@@ -105,7 +105,7 @@ public class TESRFoodPrep extends TESRBase
 				drawItem(te, 2, 0.05, 0.35, 0.35, 0.65);
 				drawItem(te, 3, 0.65, 0.95, 0.35, 0.65);
 				drawItem(te, 4, 0.05, 0.35, 0.65, 0.95);
-				drawItem(te, 5, 0.65, 0.95, 0.65, 0.95);
+				drawItem(te, 6, 0.65, 0.95, 0.65, 0.95);
 				GL11.glPopMatrix(); //end
 			}
 		}
