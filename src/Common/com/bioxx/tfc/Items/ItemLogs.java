@@ -46,32 +46,32 @@ public class ItemLogs extends ItemTerra
 	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)
 	{
 		TELogPile te = null;
-		if(side == 0 && world.isAirBlock(x, y - 1, z) && isValid(world, x, y - 1, z))
+		if(side == 0 && world.isAirBlock(x, y - 1, z) && isValid(world, x, y - 1, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y-1, z, false, side, null, itemstack))
 		{
 			world.setBlock(x, y - 1, z, TFCBlocks.LogPile, l, 3);
 			te = (TELogPile)world.getTileEntity(x, y - 1, z);
 		}
-		else if(side == 1 && world.isAirBlock(x, y + 1, z) && isValid(world, x, y + 1, z))
+		else if(side == 1 && world.isAirBlock(x, y + 1, z) && isValid(world, x, y + 1, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y+1, z, false, side, null, itemstack))
 		{
 			world.setBlock(x, y + 1, z, TFCBlocks.LogPile, l, 3);
 			te = (TELogPile)world.getTileEntity(x, y + 1, z);
 		}
-		else if(side == 2 && world.isAirBlock(x, y, z - 1) && isValid(world, x, y, z - 1))
+		else if(side == 2 && world.isAirBlock(x, y, z - 1) && isValid(world, x, y, z - 1) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y, z-1, false, side, null, itemstack))
 		{
 			world.setBlock(x, y, z-1, TFCBlocks.LogPile, l, 3);
 			te = (TELogPile)world.getTileEntity(x, y, z - 1);
 		}
-		else if(side == 3 && world.isAirBlock(x, y, z + 1) && isValid(world, x, y, z + 1))
+		else if(side == 3 && world.isAirBlock(x, y, z + 1) && isValid(world, x, y, z + 1) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y, z+1, false, side, null, itemstack))
 		{
 			world.setBlock(x, y, z + 1, TFCBlocks.LogPile, l, 3);
 			te = (TELogPile)world.getTileEntity(x, y, z + 1);
 		}
-		else if(side == 4 && world.isAirBlock(x - 1, y, z) && isValid(world, x - 1, y, z))
+		else if(side == 4 && world.isAirBlock(x - 1, y, z) && isValid(world, x - 1, y, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x-1, y, z, false, side, null, itemstack))
 		{
 			world.setBlock(x - 1, y, z, TFCBlocks.LogPile, l, 3);
 			te = (TELogPile)world.getTileEntity(x - 1, y, z);
 		}
-		else if(side == 5 && world.isAirBlock(x + 1, y, z) && isValid(world, x + 1, y, z))
+		else if(side == 5 && world.isAirBlock(x + 1, y, z) && isValid(world, x + 1, y, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x+1, y, z, false, side, null, itemstack))
 		{
 			world.setBlock(x + 1, y, z, TFCBlocks.LogPile, l, 3);
 			te = (TELogPile)world.getTileEntity(x + 1, y, z);
@@ -155,10 +155,12 @@ public class ItemLogs extends ItemTerra
 			if(entityplayer.isSneaking() && (world.getBlock(x, y, z) != TFCBlocks.LogPile || (side != 1 && side != 0)))
 			{
 				int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
-				if (CreatePile(itemstack, entityplayer, world, x, y, z, side, dir)) {
-					itemstack.stackSize = itemstack.stackSize-1;
-					world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.LogNatural.stepSound.func_150496_b(), (TFCBlocks.LogNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.LogNatural.stepSound.getPitch() * 0.8F);
-				}
+				if(world.canPlaceEntityOnSide(TFCBlocks.LogNatural, x, y, z, false, side, entityplayer, itemstack))
+					if (CreatePile(itemstack, entityplayer, world, x, y, z, side, dir)) 
+					{
+						itemstack.stackSize = itemstack.stackSize-1;
+						world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, TFCBlocks.LogNatural.stepSound.func_150496_b(), (TFCBlocks.LogNatural.stepSound.getVolume() + 1.0F) / 2.0F, TFCBlocks.LogNatural.stepSound.getPitch() * 0.8F);
+					}
 				return true;
 			}
 			else if(world.getBlock(x, y, z) == TFCBlocks.LogPile)
@@ -201,29 +203,29 @@ public class ItemLogs extends ItemTerra
 				int m = itemstack.getItemDamage();
 				Block block = m>15?TFCBlocks.WoodVert2:TFCBlocks.WoodVert;
 
-				if(side == 0 && block.canPlaceBlockAt(world, x, y-1, z))
+				if(side == 0 && block.canPlaceBlockAt(world, x, y-1, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y-1, z, false, side, null, itemstack))
 				{
 					world.setBlock(x, y-1, z, block, m,0x2);
 					itemstack.stackSize = itemstack.stackSize-1;
 				}
-				else if(side == 1 && block.canPlaceBlockAt(world, x, y+1, z))
+				else if(side == 1 && block.canPlaceBlockAt(world, x, y+1, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y+1, z, false, side, null, itemstack))
 				{
 					world.setBlock(x, y+1, z, block, m,0x2);
 					itemstack.stackSize = itemstack.stackSize-1;
 				}
-				else if(side == 2 && block.canPlaceBlockAt(world, x, y, z-1))
+				else if(side == 2 && block.canPlaceBlockAt(world, x, y, z-1) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y, z-1, false, side, null, itemstack))
 				{
 					setSide(world, itemstack, m, side, x, y, z-1);
 				}
-				else if(side == 3 && block.canPlaceBlockAt(world, x, y, z+1))
+				else if(side == 3 && block.canPlaceBlockAt(world, x, y, z+1) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y, z+1, false, side, null, itemstack))
 				{
 					setSide(world, itemstack, m, side, x, y, z+1);
 				}
-				else if(side == 4 && block.canPlaceBlockAt(world, x-1, y, z))
+				else if(side == 4 && block.canPlaceBlockAt(world, x-1, y, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x-1, y, z, false, side, null, itemstack))
 				{
 					setSide(world, itemstack, m, side, x-1, y, z);
 				}
-				else if(side == 5 && block.canPlaceBlockAt(world, x+1, y, z))
+				else if(side == 5 && block.canPlaceBlockAt(world, x+1, y, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x+1, y, z, false, side, null, itemstack))
 				{
 					setSide(world, itemstack, m, side, x+1, y, z);
 				}
@@ -241,18 +243,18 @@ public class ItemLogs extends ItemTerra
 		int meta = m % 8;
 		Block log = TFCBlocks.WoodHoriz;
 		switch (m/8) {
-			case 0:
-				log = TFCBlocks.WoodHoriz;
-				break;
-			case 1:
-				log = TFCBlocks.WoodHoriz2;
-				break;
-			case 2:
-				log = TFCBlocks.WoodHoriz3;
-				break;
-			case 3:
-				log = TFCBlocks.WoodHoriz4;
-				break;
+		case 0:
+			log = TFCBlocks.WoodHoriz;
+			break;
+		case 1:
+			log = TFCBlocks.WoodHoriz2;
+			break;
+		case 2:
+			log = TFCBlocks.WoodHoriz3;
+			break;
+		case 3:
+			log = TFCBlocks.WoodHoriz4;
+			break;
 		}
 
 		if (side == 2 || side == 3) {
