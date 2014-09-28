@@ -35,9 +35,9 @@ allprojects {
     minecraft {
     version = config.minecraft_version + "-" + config.forge_version
 	if(file('../run').exists()){
-	assetDir = "../run/assets"
+	runDir = "../run"
 	} else {
-    assetDir = "assets"
+    runDir = ""
 	}
 }
 }
