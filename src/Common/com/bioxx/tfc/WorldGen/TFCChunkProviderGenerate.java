@@ -20,6 +20,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.Terrain.BlockCollapsable;
 import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -180,6 +181,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	@Override
 	public void populate(IChunkProvider par1IChunkProvider, int chunkX, int chunkZ)
 	{
+		BlockCollapsable.fallInstantly = true;
 		int xCoord = chunkX * 16;
 		int zCoord = chunkZ * 16;
 		TFCBiome biome = (TFCBiome) this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
@@ -195,10 +197,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		int y;
 		int z;
 
-		if(biome.equals(TFCBiome.lake)){
+		if(biome.equals(TFCBiome.lake) || biome.equals(TFCBiome.river)){
 			ChunkDataManager.setFishPop(xCoord, zCoord, ChunkData.fishPopMax);
 		}
-		
+
 		int waterRand = 4;
 		if(TFC_Climate.getStability(worldObj, xCoord, zCoord) == 1)
 			waterRand = 6;
@@ -236,6 +238,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(par1IChunkProvider, worldObj, rand, chunkX, chunkZ, var11));
+		BlockCollapsable.fallInstantly = false;
 	}
 
 	public static List getCreatureSpawnsByChunk(World world, TFCBiome biome, int x, int z)

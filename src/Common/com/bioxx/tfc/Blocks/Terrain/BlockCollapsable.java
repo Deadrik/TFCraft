@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -30,6 +31,7 @@ import com.bioxx.tfc.api.Util.CollapseList;
 public class BlockCollapsable extends BlockTerraContainer
 {
 	public Block dropBlock;
+	public static boolean fallInstantly = false;
 
 	protected BlockCollapsable(Material material, Block block)
 	{
@@ -56,7 +58,9 @@ public class BlockCollapsable extends BlockTerraContainer
 	public static boolean canFallBelow(World world, int x, int y, int z)
 	{
 		Block block = world.getBlock(x, y, z);
-
+		ArrayList l = (ArrayList) world.getEntitiesWithinAABB(EntityFallingBlock.class, AxisAlignedBB.getBoundingBox(x, y, z, x+1, y+1, z+1));
+		if(l.size() != 0)
+			return false;
 		if (world.isAirBlock(x, y, z))
 			return true;
 		if (block == Blocks.bedrock)
