@@ -161,11 +161,7 @@ public class CropIndex
 		Random R = getGrowthRand(te);
 		if(R != null)
 		{
-			outFood.getTagCompound().setInteger("tasteSweetMod", R.nextInt(16)-8);
-			outFood.getTagCompound().setInteger("tasteSourMod", R.nextInt(16)-8);
-			outFood.getTagCompound().setInteger("tasteSaltyMod", R.nextInt(16)-8);
-			outFood.getTagCompound().setInteger("tasteBitterMod", R.nextInt(16)-8);
-			outFood.getTagCompound().setInteger("tasteUmamiMod", R.nextInt(16)-8);
+			Food.adjustFlavor(outFood, R);
 		}
 	}
 

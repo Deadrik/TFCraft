@@ -38,6 +38,7 @@ import com.bioxx.tfc.Core.Player.BodyTempStats;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 import com.bioxx.tfc.Core.Player.SkillStats;
+import com.bioxx.tfc.Food.Food;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.Items.ItemTerra;
@@ -1129,13 +1130,17 @@ public class TFC_Core
 
 	public static void animalDropMeat(Entity e, Item i, float foodWeight)
 	{
+		Random r;
 		while (foodWeight > 0)
 		{
 			float fw = Helper.roundNumber(Math.min(Global.FOOD_MAX_WEIGHT, foodWeight), 10);
 			if (fw < Global.FOOD_MAX_WEIGHT)
 				foodWeight = 0;
 			foodWeight -= fw;
-			e.entityDropItem(ItemFoodTFC.createTag(new ItemStack(i, 1), fw), 0);
+			ItemStack is = ItemFoodTFC.createTag(new ItemStack(i, 1), fw);
+			r = new Random(e.getUniqueID().getLeastSignificantBits() + e.getUniqueID().getMostSignificantBits());
+			Food.adjustFlavor(is, r);
+			e.entityDropItem(is, 0);
 		}
 	}
 

@@ -36,7 +36,6 @@ public class BlockCobble extends BlockTerra
 
 	protected String[] names;
 	protected IIcon[] icons;
-	protected boolean fallInstantly = true;
 
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -131,26 +130,36 @@ public class BlockCobble extends BlockTerra
 		return false;
 	}
 
-	private void tryToFall(World world, int i, int j, int k)
+	private void tryToFall(World world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(i, j, k);
-		if (!BlockCollapsable.isNearSupport(world, i, j, k, 4, 0) && BlockCollapsable.canFallBelow(world, i, j - 1, k) && j >= 0)
+		int meta = world.getBlockMetadata(x, y, z);
+		if (!BlockCollapsable.isNearSupport(world, x, y, z, 4, 0) && BlockCollapsable.canFallBelow(world, x, y - 1, z) && y >= 0)
 		{
 			byte byte0 = 32;
-			if (fallInstantly || !world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))
+			if (!BlockCollapsable.fallInstantly && world.checkChunksExist(x - byte0, y - byte0, z - byte0, x + byte0, y + byte0, z + byte0))
 			{
-				world.setBlockToAir(i, j, k);
-				for (; canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
-				if (j > 0)
-					world.setBlock(i, j, k, this);
+				if (!world.isRemote)
+				{
+					//world.setBlockToAir(x, y, z);
+					EntityFallingBlock entityfallingblock = new EntityFallingBlock(world, (double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), this, meta);
+					//this.func_149829_a(entityfallingblock);
+					world.spawnEntityInWorld(entityfallingblock);
+					world.playSoundAtEntity(entityfallingblock, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (world.rand.nextFloat()/2));
+				}
 			}
-			else if (!world.isRemote)
+			else
 			{
-				EntityFallingBlock ent = new EntityFallingBlock(world, i + 0.5, j + 0.5, k + 0.5, this, meta);
-				ent.func_145806_a(true);//setHurtsEntities
-				world.spawnEntityInWorld(ent);
-				Random R = new Random(i*j+k);
-				world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
+				world.setBlockToAir(x, y, z);
+
+				while (BlockCollapsable.canFallBelow(world, x, y - 1, z) && y > 0)
+				{
+					--y;
+				}
+
+				if (y > 0)
+				{
+					world.setBlock(x, y, z, this, meta, 0x2);
+				}
 			}
 		}
 	}
@@ -212,14 +221,14 @@ public class BlockCobble extends BlockTerra
 				case 2:
 				{
 					world.setBlockToAir(i, j, k);
-					world.setBlock(i-1, j, k, this, meta, 3);
+					world.setBlock(i-1, j, k, this, meta, 0x2);
 					tryToFall(world, i-1, j, k);
 					break;
 				}
 				case 3:
 				{
 					world.setBlockToAir(i, j, k);
-					world.setBlock(i, j, k-1, this, meta, 3);
+					world.setBlock(i, j, k-1, this, meta, 0x2);
 					tryToFall(world, i, j, k-1);
 					break;
 				}

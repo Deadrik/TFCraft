@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
@@ -22,7 +21,9 @@ import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 
@@ -102,12 +103,12 @@ public class ItemGoldPan extends ItemTerra
 				{
 					ChunkData cd = ChunkDataManager.getData(x >> 4, z >> 4);
 
-                    // Make sure our chunk data isn't null.
-                    if(cd == null)
-                    {
-                        player.addChatMessage(new ChatComponentText("The ChunkData returned null, please report this to the developer."));
-                        return is;
-                    }
+					// Make sure our chunk data isn't null.
+					if(cd == null)
+					{
+						player.addChatMessage(new ChatComponentText("The ChunkData returned null, please report this to the developer."));
+						return is;
+					}
 
 					if(cd.sluicedAmount < 50)
 					{
@@ -160,7 +161,7 @@ public class ItemGoldPan extends ItemTerra
 						int uses = (is.getItemDamage() >> 4);
 						if(uses > 0)
 						{
-							int type = getMetalToDrop(world, x, y + 1, z);
+							int type = getMetalToDrop(world, player, x, y + 1, z);
 
 							if(type != -1)
 							{
@@ -170,6 +171,7 @@ public class ItemGoldPan extends ItemTerra
 								{
 									player.dropPlayerItemWithRandomChoice(out, false);
 								}
+								TFC_Core.getSkillStats(player).increaseSkill(Global.SKILL_PROSPECTING, 1);
 							}
 							uses--;
 							if(uses > 0)
@@ -184,18 +186,20 @@ public class ItemGoldPan extends ItemTerra
 		return is;
 	}
 
-	private int getMetalToDrop(World world, int x, int y, int z)
+	private int getMetalToDrop(World world, EntityPlayer player, int x, int y, int z)
 	{
 		int type = -1;
 		int chunk_X = (x >> 4) << 4;
 		int chunk_Z = (z >> 4) << 4;
 		Random rand = new Random(world.getSeed() + ((chunk_X >> 3) - (chunk_Z >> 3)) * (chunk_Z >> 3));
 		int randType = rand.nextInt(100);
+		SkillRank rank = TFC_Core.getSkillStats(player).getSkillRank(Global.SKILL_PROSPECTING);
+		float skillMod = 1-rank.ordinal()*0.111f;
 
-		if (randType > 25 && world.rand.nextInt(60) == 0) type = 0;  // Copper
-		//if (randType > 50 && world.rand.nextInt(120) == 0) type = 4; // Silver
-		if (randType > 75 && world.rand.nextInt(150) == 0) type = 1; // Gold
-		if (world.rand.nextInt(500) == 0) type = 2; // Platinum
+		if (randType > 25 && world.rand.nextInt((int)Math.floor(60*skillMod)) == 0) type = 0;  // Copper
+		if (rank.ordinal() > 0 && randType > 50 && world.rand.nextInt((int)Math.floor(120*skillMod)) == 0) type = 4; // Silver
+		if (rank.ordinal() > 1 && randType > 75 && world.rand.nextInt((int)Math.floor(150*skillMod)) == 0) type = 1; // Gold
+		if (world.rand.nextInt((int)Math.floor(500*skillMod)) == 0) type = 2; // Platinum
 
 		return type;
 	}

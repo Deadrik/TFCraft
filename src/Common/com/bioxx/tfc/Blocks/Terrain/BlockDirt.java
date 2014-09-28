@@ -52,7 +52,7 @@ public class BlockDirt extends BlockTerra
 			int count;
 			if(textureOffset == 0) count = 16;
 			else count = Global.STONE_ALL.length - 16;
-	
+
 			for(int i = 0; i < count; i++)
 				list.add(new ItemStack(item, 1, i));
 		}
@@ -119,26 +119,49 @@ public class BlockDirt extends BlockTerra
 
 	private void tryToFall(World world, int x, int y, int z)
 	{
-		if (!world.isRemote)
+		int meta = world.getBlockMetadata(x, y, z);
+		if (!BlockCollapsable.isNearSupport(world, x, y, z, 4, 0) && BlockCollapsable.canFallBelow(world, x, y - 1, z) && y >= 0)
 		{
-			int meta = world.getBlockMetadata(x, y, z);
-			if (!BlockCollapsable.isNearSupport(world, x, y, z, 4, 0) && BlockCollapsable.canFallBelow(world, x, y - 1, z) && y >= 0)
+			byte byte0 = 32;
+			/*if (BlockCollapsable.fallInstantly || !world.checkChunksExist(x - byte0, y - byte0, z - byte0, x + byte0, y + byte0, z + byte0))
 			{
-				byte byte0 = 32;
-				if (!world.checkChunksExist(x - byte0, y - byte0, z - byte0, x + byte0, y + byte0, z + byte0))
+				world.setBlockToAir(x, y, z);
+				for (; canFallBelow(world, x, y - 1, z) && y > 0; y--) { }
+				if (y > 0)
+					world.setBlock(x, y, z, this, meta, 0x2);
+			}
+			else if (!world.isRemote)
+			{
+				EntityFallingBlock ent = new EntityFallingBlock(world, x + 0.5, y + 0.5, z + 0.5, this, meta);
+				ent.func_145806_a(true);//setHurtsEntities
+				world.spawnEntityInWorld(ent);
+				Random R = new Random(x*y+z);
+				world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
+			}*/
+
+			if (!BlockCollapsable.fallInstantly && world.checkChunksExist(x - byte0, y - byte0, z - byte0, x + byte0, y + byte0, z + byte0))
+			{
+				if (!world.isRemote)
 				{
-					world.setBlockToAir(x, y, z);
-					for (; BlockCollapsable.canFallBelow(world, x, y - 1, z) && y > 0; y--)
-					{}
-					if (y > 0)
-						world.setBlock(x, y, z, this, meta, 0x2);
+					//world.setBlockToAir(x, y, z);
+					EntityFallingBlock entityfallingblock = new EntityFallingBlock(world, (double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), this, meta);
+					//this.func_149829_a(entityfallingblock);
+					world.spawnEntityInWorld(entityfallingblock);
+					world.playSoundAtEntity(entityfallingblock, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (world.rand.nextFloat()/2));
 				}
-				else
+			}
+			else
+			{
+				world.setBlockToAir(x, y, z);
+
+				while (BlockCollapsable.canFallBelow(world, x, y - 1, z) && y > 0)
 				{
-					EntityFallingBlock ent = new EntityFallingBlock(world, (double)(x + 0.5F), (double)(y + 0.5F), (double)(z + 0.5F), this, meta);
-					world.spawnEntityInWorld(ent);
-					Random R = new Random(x * y + z);
-					world.playSoundAtEntity(ent, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (R.nextFloat() / 2));
+					--y;
+				}
+
+				if (y > 0)
+				{
+					world.setBlock(x, y, z, this, meta, 0x2);
 				}
 			}
 		}
@@ -150,6 +173,7 @@ public class BlockDirt extends BlockTerra
 		if (!world.isRemote)
 		{
 			int meta = world.getBlockMetadata(x, y, z);
+
 			boolean isBelowAir = world.isAirBlock(x, y - 1, z);
 			byte count = 0;
 			List sides = new ArrayList<Integer>();
@@ -200,14 +224,14 @@ public class BlockDirt extends BlockTerra
 				case 2:
 				{
 					world.setBlockToAir(x, y, z);
-					world.setBlock(x - 1, y, z, this, meta, 3);
+					world.setBlock(x - 1, y, z, this, meta, 2);
 					tryToFall(world, x - 1, y, z);
 					break;
 				}
 				case 3:
 				{
 					world.setBlockToAir(x, y, z);
-					world.setBlock(x, y, z - 1, this, meta, 3);
+					world.setBlock(x, y, z - 1, this, meta, 2);
 					tryToFall(world, x, y, z - 1);
 					break;
 				}

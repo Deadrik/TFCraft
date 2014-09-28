@@ -131,6 +131,7 @@ public class TerraFirmaCraft
 		SkillsManager.instance.registerSkill(Global.SKILL_WEAPONSMITH);
 		SkillsManager.instance.registerSkill(Global.SKILL_AGRICULTURE);
 		SkillsManager.instance.registerSkill(Global.SKILL_COOKING);
+		SkillsManager.instance.registerSkill(Global.SKILL_PROSPECTING);
 
 		//Load Items
 		TFCItems.Setup();

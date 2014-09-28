@@ -59,6 +59,7 @@ import com.bioxx.tfc.Handlers.Client.ArmourStandHighlightHandler;
 import com.bioxx.tfc.Handlers.Client.BlockRenderHandler;
 import com.bioxx.tfc.Handlers.Client.ChiselHighlightHandler;
 import com.bioxx.tfc.Handlers.Client.ClientTickHandler;
+import com.bioxx.tfc.Handlers.Client.FMLClientEventHandler;
 import com.bioxx.tfc.Handlers.Client.FarmlandHighlightHandler;
 import com.bioxx.tfc.Handlers.Client.KeyBindingHandler;
 import com.bioxx.tfc.Handlers.Client.PlankHighlightHandler;
@@ -175,7 +176,7 @@ public class ClientProxy extends CommonProxy
 		IReloadableResourceManager IRRM = (IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
 		IRRM.registerReloadListener(new GrassColorReloadListener());
 		IRRM.registerReloadListener(new FoliageColorReloadListener());
-		
+
 		Minecraft.getMinecraft().entityRenderer = new EntityRendererTFC(Minecraft.getMinecraft(),Minecraft.getMinecraft().getResourceManager());
 		IRRM.registerReloadListener(Minecraft.getMinecraft().entityRenderer);
 
@@ -602,7 +603,7 @@ public class ClientProxy extends CommonProxy
 	public void registerTickHandler()
 	{
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
-		new ClientTickHandler();
+		FMLCommonHandler.instance().bus().register(new FMLClientEventHandler());
 	}
 
 	@Override

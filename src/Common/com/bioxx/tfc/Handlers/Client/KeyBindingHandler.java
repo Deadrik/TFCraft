@@ -45,7 +45,7 @@ public class KeyBindingHandler
 				}
 				else if(player.getCurrentEquippedItem().getItem() instanceof ItemCustomHoe)
 				{
-					pi.switchHoeMode();
+					pi.switchHoeMode(player);
 				}
 			}
 			else if(Key_LockTool.isPressed())

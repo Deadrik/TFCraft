@@ -1,13 +1,13 @@
 package com.bioxx.tfc.Blocks.Terrain;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.api.Constant.Global;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.api.Constant.Global;
 
 public class BlockSedCobble extends BlockCobble
 {
@@ -15,7 +15,6 @@ public class BlockSedCobble extends BlockCobble
 		super(material);
 		names = Global.STONE_SED;
 		icons = new IIcon[names.length];
-		fallInstantly = false;
 	}
 
 	@Override

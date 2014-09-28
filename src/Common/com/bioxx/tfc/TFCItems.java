@@ -1031,15 +1031,15 @@ public class TFCItems
 
 		Shears = new ItemShears(0, IronToolMaterial).setUnlocalizedName("shears").setTextureName("shears");
 
-		ProPickBismuthBronze = new ItemProPick().setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses);
-		ProPickBlackBronze = new ItemProPick().setUnlocalizedName("Black Bronze ProPick").setMaxDamage(BlackBronzeUses);
-		ProPickBlackSteel = new ItemProPick().setUnlocalizedName("Black Steel ProPick").setMaxDamage(BlackSteelUses);
-		ProPickBlueSteel = new ItemProPick().setUnlocalizedName("Blue Steel ProPick").setMaxDamage(BlueSteelUses);
-		ProPickBronze = new ItemProPick().setUnlocalizedName("Bronze ProPick").setMaxDamage(BronzeUses);
-		ProPickCopper = new ItemProPick().setUnlocalizedName("Copper ProPick").setMaxDamage(CopperUses);
-		ProPickIron = new ItemProPick().setUnlocalizedName("Wrought Iron ProPick").setMaxDamage(WroughtIronUses);
-		ProPickRedSteel = new ItemProPick().setUnlocalizedName("Red Steel ProPick").setMaxDamage(RedSteelUses);
-		ProPickSteel = new ItemProPick().setUnlocalizedName("Steel ProPick").setMaxDamage(SteelUses);
+		ProPickBismuthBronze = new ItemProPick().setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses/3);
+		ProPickBlackBronze = new ItemProPick().setUnlocalizedName("Black Bronze ProPick").setMaxDamage(BlackBronzeUses/3);
+		ProPickBlackSteel = new ItemProPick().setUnlocalizedName("Black Steel ProPick").setMaxDamage(BlackSteelUses/3);
+		ProPickBlueSteel = new ItemProPick().setUnlocalizedName("Blue Steel ProPick").setMaxDamage(BlueSteelUses/3);
+		ProPickBronze = new ItemProPick().setUnlocalizedName("Bronze ProPick").setMaxDamage(BronzeUses/3);
+		ProPickCopper = new ItemProPick().setUnlocalizedName("Copper ProPick").setMaxDamage(CopperUses/3);
+		ProPickIron = new ItemProPick().setUnlocalizedName("Wrought Iron ProPick").setMaxDamage(WroughtIronUses/3);
+		ProPickRedSteel = new ItemProPick().setUnlocalizedName("Red Steel ProPick").setMaxDamage(RedSteelUses/3);
+		ProPickSteel = new ItemProPick().setUnlocalizedName("Steel ProPick").setMaxDamage(SteelUses/3);
 
 		BismuthIngot = new ItemIngot().setUnlocalizedName("Bismuth Ingot");
 		BismuthBronzeIngot = new ItemIngot().setUnlocalizedName("Bismuth Bronze Ingot");
@@ -1740,7 +1740,7 @@ public class TFCItems
 				return super.getIconFromDamage(i);
 			}
 		}.setUnlocalizedName(TFCOptions.iDontLikeOnions ? "Rutabaga" : "Onion");
-		Cabbage = new ItemFoodTFC(EnumFoodGroup.Vegetable, 10, 0, 0, 0, 50, true).setUnlocalizedName("Cabbage");
+		Cabbage = new ItemFoodTFC(EnumFoodGroup.Vegetable, 10, 0, 0, 0, 30, true).setUnlocalizedName("Cabbage");
 		Garlic = new ItemFoodTFC(EnumFoodGroup.Vegetable, 0, 0, 0, 10, 20, true).setUnlocalizedName("Garlic");
 		Carrot = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Carrot");
 		Greenbeans = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Greenbeans");
@@ -1751,23 +1751,23 @@ public class TFCItems
 		SeaWeed = new ItemFoodTFC(EnumFoodGroup.Vegetable, 0, 0, 10, 10, 10, true).setUnlocalizedName("Sea Weed");
 
 		//Fruit are in the foodID range of 50,000
-		RedApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
+		RedApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 25, 5, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
 		Banana = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[1]);
 		Orange = new ItemFoodTFC(EnumFoodGroup.Fruit, 50, 30, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[2]);
-		GreenApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 40, 0, 40, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[3]);
-		Lemon = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 80, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[4]);
-		Olive = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 0, 50, 20, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[5]);
-		Cherry = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[6]);
-		Peach = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 10, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[7]);
-		Plum = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 15, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[8]);
+		GreenApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 15, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[3]);
+		Lemon = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 50, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[4]);
+		Olive = new ItemFoodTFC(EnumFoodGroup.Fruit, 10, 0, 3, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[5]);
+		Cherry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[6]);
+		Peach = new ItemFoodTFC(EnumFoodGroup.Fruit, 25, 10, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[7]);
+		Plum = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 15, 0, 0, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[8]);
 
-		WintergreenBerry = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 0, 0, 20, 0).setDecayRate(2.0f).setUnlocalizedName("Wintergreen Berry");
-		Blueberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 40, 20, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Blueberry");
-		Raspberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 45, 15, 0, 5, 0).setDecayRate(2.0f).setUnlocalizedName("Raspberry");
-		Strawberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 60, 5, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Strawberry");
+		WintergreenBerry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 0, 0, 20, 0).setDecayRate(2.0f).setUnlocalizedName("Wintergreen Berry");
+		Blueberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 20, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Blueberry");
+		Raspberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 35, 15, 0, 5, 0).setDecayRate(2.0f).setUnlocalizedName("Raspberry");
+		Strawberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 5, 0).setDecayRate(2.0f).setUnlocalizedName("Strawberry");
 		Blackberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 30, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Blackberry");
 		Bunchberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 5, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Bunchberry");
-		Cranberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 75, 0).setDecayRate(2.0f).setUnlocalizedName("Cranberry");
+		Cranberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 30, 5, 0, 45, 0).setDecayRate(2.0f).setUnlocalizedName("Cranberry");
 		Snowberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 10, 0, 0, 90, 0).setDecayRate(2.0f).setUnlocalizedName("Snowberry");
 		Elderberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 40, 0, 10, 0).setDecayRate(2.0f).setUnlocalizedName("Elderberry");
 		Gooseberry = new ItemFoodTFC(EnumFoodGroup.Fruit, 20, 40, 0, 0, 0).setDecayRate(2.0f).setUnlocalizedName("Gooseberry");

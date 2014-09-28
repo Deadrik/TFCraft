@@ -2,6 +2,7 @@ package com.bioxx.tfc.Food;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -13,10 +14,12 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.Render.Item.FoodItemRenderer;
 import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
@@ -41,6 +44,13 @@ public class ItemMeal extends ItemTerra implements IFood
 	}
 
 	@Override
+	public void registerIcons(IIconRegister registerer)
+	{
+		super.registerIcons(registerer);
+		MinecraftForgeClient.registerItemRenderer(this, new FoodItemRenderer());
+	}
+
+	@Override
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
 		// Removes meals from creative tab because without NBT data, they are useless
@@ -55,14 +65,22 @@ public class ItemMeal extends ItemTerra implements IFood
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
+		ItemTerra.addSizeInformation(is, arraylist);
+		if(!TFC_Core.showShiftInformation())
+		{
+			arraylist.add("");
+			//arraylist.add("");
+		}
 		ItemFoodTFC.addHeatInformation(is, arraylist);
 
 		if (is.hasTagCompound())
 		{
 			NBTTagCompound nbt = is.getTagCompound();
 
-			addFGInformation(is, arraylist);
-
+			if(TFC_Core.showShiftInformation())
+			{
+				addFGInformation(is, arraylist);
+			}
 			/*if(nbt.hasKey("satisfaction"))
 			{
 				float _sat = Helper.roundNumber(nbt.getFloat("satisfaction"),100);
@@ -116,16 +134,6 @@ public class ItemMeal extends ItemTerra implements IFood
 				}
 			}
 		}
-	}
-
-	private String getExpertString(int taste)
-	{
-		if(taste < 20) return "0-20";
-		else if(taste < 40) return "20-40";
-		else if(taste < 60) return "40-60";
-		else if(taste < 80) return "60-80";
-		else if(taste < 100) return "80-100";
-		else return "100+";
 	}
 
 	protected String localize(int id)
