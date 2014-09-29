@@ -30,9 +30,7 @@ public class RenderEntityStand extends RenderBiped
 	private ModelBiped modelArmor;
 	//private static final ResourceLocation Texture = new ResourceLocation("textures/entity/zombie/zombie.png");
 	private static final ResourceLocation Texture = new ResourceLocation(Reference.ModID, "textures/mob/stand.png");
-	public static String[] armorFilenamePrefix = new String[] {"cloth", "chain", "iron", "diamond", "gold"};
-	public static float NAME_TAG_RANGE = 64.0f;
-	public static float NAME_TAG_RANGE_SNEAK = 32.0f;
+
 	ModelRenderer plume;
 	ModelRenderer plume2;
 	ModelRenderer HornR1;
