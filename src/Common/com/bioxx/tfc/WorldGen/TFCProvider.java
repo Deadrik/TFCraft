@@ -248,4 +248,84 @@ return biome;
 		return "DEFAULT";
 	}
 
+	/*@Override
+	public void updateWeather()
+	{
+		if (!worldObj.isRemote)
+		{
+			int thunderTime = worldObj.getWorldInfo().getThunderTime();
+
+			if (thunderTime <= 0)
+			{
+				if (worldObj.getWorldInfo().isThundering())
+				{
+					worldObj.getWorldInfo().setThunderTime(worldObj.rand.nextInt(12000) + 3600);
+				}
+				else
+				{
+					worldObj.getWorldInfo().setThunderTime(worldObj.rand.nextInt(168000) + 12000);
+				}
+			}
+			else
+			{
+				--thunderTime;
+				worldObj.getWorldInfo().setThunderTime(thunderTime);
+
+				if (thunderTime <= 0)
+				{
+					worldObj.getWorldInfo().setThundering(!worldObj.getWorldInfo().isThundering());
+				}
+			}
+
+			worldObj.prevThunderingStrength = worldObj.thunderingStrength;
+
+			if (worldObj.getWorldInfo().isThundering())
+			{
+				worldObj.thunderingStrength = (float)((double)worldObj.thunderingStrength + 0.01D);
+			}
+			else
+			{
+				worldObj.thunderingStrength = (float)((double)worldObj.thunderingStrength - 0.01D);
+			}
+
+			worldObj.thunderingStrength = MathHelper.clamp_float(worldObj.thunderingStrength, 0.0F, 1.0F);
+			int rainTime = worldObj.getWorldInfo().getRainTime();
+
+			if (rainTime <= 0)
+			{
+				if (worldObj.getWorldInfo().isRaining())
+				{
+					worldObj.getWorldInfo().setRainTime(worldObj.rand.nextInt(12000) + 12000);
+				}
+				else
+				{
+					worldObj.getWorldInfo().setRainTime(worldObj.rand.nextInt(168000) + 12000);
+				}
+			}
+			else
+			{
+				--rainTime;
+				worldObj.getWorldInfo().setRainTime(rainTime);
+
+				if (rainTime <= 0)
+				{
+					worldObj.getWorldInfo().setRaining(!worldObj.getWorldInfo().isRaining());
+				}
+			}
+
+			worldObj.prevRainingStrength = worldObj.rainingStrength;
+
+			if (worldObj.getWorldInfo().isRaining())
+			{
+				worldObj.rainingStrength = (float)((double)worldObj.rainingStrength + 0.01D);
+			}
+			else
+			{
+				worldObj.rainingStrength = (float)((double)worldObj.rainingStrength - 0.01D);
+			}
+
+			worldObj.rainingStrength = MathHelper.clamp_float(worldObj.rainingStrength, 0.0F, 1.0F);
+		}
+	}*/
+
 }

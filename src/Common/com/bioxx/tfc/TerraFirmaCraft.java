@@ -47,6 +47,7 @@ import com.bioxx.tfc.Handlers.EntityLivingHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
 import com.bioxx.tfc.Handlers.PlayerSkillEventHandler;
+import com.bioxx.tfc.Handlers.Client.FogHandler;
 import com.bioxx.tfc.Handlers.Network.PacketPipeline;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.WorldGen.TFCProviderHell;
@@ -217,6 +218,8 @@ public class TerraFirmaCraft
 
 		// Register the Entity Living Update Handler
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+
+		MinecraftForge.EVENT_BUS.register(new FogHandler());
 
 		// Register all the render stuff for the client
 		proxy.registerRenderInformation();

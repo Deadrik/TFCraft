@@ -212,9 +212,9 @@ public class TFC_Time
 		return (int)totalmonths2;
 	}
 
-	public static long getTotalDays()
+	public static int getTotalDays()
 	{
-		return (time/dayLength);
+		return (int)Math.floor(((float)time/(float)dayLength));
 	}
 
 	public static long getTotalHours()
@@ -234,8 +234,8 @@ public class TFC_Time
 
 	public static int getHour()
 	{
-		int h = (int)((time - ((time / dayLength)*dayLength))/hourLength);
-		h -= 6;
+		int h = (int)Math.floor((time % dayLength)/hourLength);
+		h -= 5;
 		if(h < 0)
 			h = 23 + h;
 		h -= 12;
@@ -251,8 +251,8 @@ public class TFC_Time
 
 	public static int getHourOfDayFromTotalHours(int th)
 	{
-		int h = (th-(th/24)*24);//gives us the remainder
-		h -= 6;
+		int h = th % 24;//gives us the remainder
+		h -= 5;
 		if(h < 0)
 			h = 23 + h;
 		h -= 12;
