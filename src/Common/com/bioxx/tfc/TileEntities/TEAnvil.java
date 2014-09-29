@@ -114,16 +114,12 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 					MinecraftForge.EVENT_BUS.post(eventCraft);
 					if(!eventCraft.isCanceled())
 					{
-						NBTTagCompound Tag = null;
-						if(!TFC_ItemHeat.SetTemp(eventCraft.result, TFC_ItemHeat.GetTemp(anvilItemStacks[INPUT1_SLOT])))
-							Tag = new NBTTagCompound();
-						else 
-							Tag = anvilItemStacks[INPUT1_SLOT].getTagCompound();
+						//Set the item temp if possible
+						TFC_ItemHeat.SetTemp(eventCraft.result, TFC_ItemHeat.GetTemp(anvilItemStacks[INPUT1_SLOT]));
 
 						this.setInventorySlotContents(INPUT1_SLOT, eventCraft.result);
 						if(anvilItemStacks[INPUT1_SLOT] != null)
 						{
-							anvilItemStacks[INPUT1_SLOT].setTagCompound(Tag);
 							if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemMiscToolHead)
 							{
 								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillTotal(lastWorker));
