@@ -526,7 +526,7 @@ public class TerraFirmaCraft
 		//Surface Ore
 		WorldGenOre.OreList.put("Native Copper Surface", getOreData(config, "Native Copper Surface", "veins", "small", Reference.ModID + ":Ore1", 0, 35, new String[]{"igneous extrusive"}, 128, 240, 40, 40));
 		WorldGenOre.OreList.put("Cassiterite Surface", getOreData(config, "Cassiterite Surface", "veins", "small", Reference.ModID + ":Ore1", 5, 35, new String[]{"granite"}, 128, 240, 40, 40));
-		WorldGenOre.OreList.put("Bismuthinite Surface", getOreData(config, "Bismuthinite Surface", "veins", "small", Reference.ModID + ":Ore1", 7, 35, new String[]{"igneous intrusive", "sedimentary"}, 128, 240, 40, 40));
+		WorldGenOre.OreList.put("Bismuthinite Surface", getOreData(config, "Bismuthinite Surface", "veins", "small", Reference.ModID + ":Ore1", 7, 35, new String[]{"igneous extrusive", "sedimentary"}, 128, 240, 40, 40));
 		WorldGenOre.OreList.put("Sphalerite Surface", getOreData(config, "Sphalerite Surface", "veins", "small", Reference.ModID + ":Ore1", 12, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
 		WorldGenOre.OreList.put("Tetrahedrite Surface", getOreData(config, "Tetrahedrite Surface", "veins", "small", Reference.ModID + ":Ore1", 13, 35, new String[]{"metamorphic"}, 128, 240, 40, 40));
 
