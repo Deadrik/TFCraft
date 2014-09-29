@@ -246,12 +246,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		{
 			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
-				int i = rand.nextInt(5) + 3;
+				int i = rand.nextInt(1) + 1;
 				for (int x = 0; x<i;x++)
 				{
 					ArrayList<Float> data = new ArrayList<Float>();
 					data.add(mateSizeMod);
-					EntityWolfTFC baby = new EntityWolfTFC(worldObj, this,data);
+					EntityWolfTFC baby = (EntityWolfTFC) this.createChildTFC(this);
 					baby.func_152115_b(this.func_152113_b());//setOwner
 					baby.setTamed(true);
 					worldObj.spawnEntityInWorld(baby);
@@ -335,7 +335,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	@SideOnly(Side.CLIENT)
 	public float getTailRotation()
 	{
-		return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (1000.0F - this.dataWatcher.getWatchableObjectFloat(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
+		return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (this.getMaxHealth() - this.dataWatcher.getWatchableObjectFloat(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
 	}
 
 	@Override
@@ -545,6 +545,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			if(getGender() == GenderEnum.FEMALE && pregnant)
 				player.addChatMessage(new ChatComponentText("Pregnant"));
 
+			//player.addChatMessage(new ChatComponentText("Health" + this.getHealth() + "/" + this.getMaxHealth()));
+
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
 
@@ -635,13 +637,13 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	@Override
 	public int GetCrushArmor()
 	{
-		return 0;
+		return 250;
 	}
 
 	@Override
 	public int GetSlashArmor()
 	{
-		return 0;
+		return 250;
 	}
 
 	@Override
