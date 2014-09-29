@@ -102,18 +102,18 @@ public class FogHandler
 				startLerp(600); 
 				rainLast = true; 
 				snowLast = true;
-				snowStrength = Math.max(0.0f, Math.min(WeatherManager.getInstance().getSnowStrength(), 1));
+				snowStrength = WeatherManager.getInstance().getSnowStrength();
 				fogStartFinish = event.farPlaneDistance*0.1f;
-				fogEndFinish = event.farPlaneDistance*(0.8f - (0.5f*snowStrength));
-				fogDensityFinish = 0.2f-(0.08f*snowStrength);
+				fogEndFinish = event.farPlaneDistance*(0.2f+(0.1f*snowStrength));
+				fogDensityFinish = 0.3f;
 			}
 			else if(snowLast && WeatherManager.getInstance().getSnowStrength() != snowStrength)  
 			{
 				startLerp(300); 
-				snowStrength = Math.max(0.0f, Math.min(WeatherManager.getInstance().getSnowStrength(), 1));
+				snowStrength = WeatherManager.getInstance().getSnowStrength();
 				fogStartFinish = event.farPlaneDistance*0.1f;
-				fogEndFinish = event.farPlaneDistance*(0.8f - (0.5f*snowStrength));
-				fogDensityFinish = 0.2f-(0.08f*snowStrength);
+				fogEndFinish = event.farPlaneDistance*(0.2f+(0.1f*snowStrength));
+				fogDensityFinish = 0.3f;
 			}
 		}
 		else if(localFog > 0 && localFog != localWorldFog)
