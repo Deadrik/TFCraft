@@ -8,8 +8,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.AxisAlignedBB;
 
 import com.bioxx.tfc.Core.TFC_Core;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityToolRack extends NetworkTileEntity implements IInventory
 {
@@ -34,6 +38,14 @@ public class TileEntityToolRack extends NetworkTileEntity implements IInventory
 		storage[1] = null;
 		storage[2] = null;
 		storage[3] = null;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
+		return bb;
 	}
 
 	public boolean contentsMatch(int index, ItemStack is)

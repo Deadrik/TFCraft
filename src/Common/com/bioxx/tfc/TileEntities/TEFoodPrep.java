@@ -8,6 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.AxisAlignedBB;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
@@ -22,6 +23,9 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IFood;
 import com.bioxx.tfc.api.Interfaces.IItemFoodBlock;
 import com.bioxx.tfc.api.Util.Helper;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEFoodPrep extends NetworkTileEntity implements IInventory
 {
@@ -46,6 +50,14 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 				return ((IItemFoodBlock)is.getItem()).getFoodId(is);
 		}
 		return 1;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
+		return bb;
 	}
 
 	public int getHealAmountFromItemStack(ItemStack is)

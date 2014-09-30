@@ -3,8 +3,12 @@ package com.bioxx.tfc.TileEntities;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 
 import com.bioxx.tfc.TerraFirmaCraft;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEVessel extends TEBarrel implements IInventory
 {
@@ -29,6 +33,14 @@ public class TEVessel extends TEBarrel implements IInventory
 	public int getSizeInventory()
 	{
 		return 9;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
+		return bb;
 	}
 
 	@Override

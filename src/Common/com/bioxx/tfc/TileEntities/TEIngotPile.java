@@ -9,9 +9,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.AxisAlignedBB;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEIngotPile extends NetworkTileEntity implements IInventory
 {
@@ -38,6 +42,14 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	public void setType(String i)
 	{
 		type = i;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
+		return bb;
 	}
 
 	public int getStack()

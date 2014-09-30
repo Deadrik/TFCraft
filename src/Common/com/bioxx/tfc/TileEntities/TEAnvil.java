@@ -12,6 +12,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.TFCItems;
@@ -30,6 +31,9 @@ import com.bioxx.tfc.api.Crafting.AnvilRecipe;
 import com.bioxx.tfc.api.Crafting.AnvilReq;
 import com.bioxx.tfc.api.Enums.RuleEnum;
 import com.bioxx.tfc.api.Events.AnvilCraftEvent;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEAnvil extends NetworkTileEntity implements IInventory
 {
@@ -235,6 +239,14 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 				workRecipe = planList.get(craftingPlan);
 			}
 		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
+		return bb;
 	}
 
 	public int getCraftingValue()

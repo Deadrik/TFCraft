@@ -14,6 +14,8 @@ import com.bioxx.tfc.TileEntities.TEWorldItem;
 
 public class TESRWorldItem extends TESRBase
 {
+	public static Random rand = new Random();
+	static EntityItem customitem;
 	public TESRWorldItem()
 	{
 	}
@@ -25,12 +27,10 @@ public class TESRWorldItem extends TESRBase
 	{
 		if (te.getWorldObj() != null)
 		{
-			int dir = te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord, te.zCoord);
-			Random R = new Random((te.xCoord + te.zCoord)*te.xCoord);
-			EntityItem customitem = new EntityItem(field_147501_a.field_147550_f); //tileEntityRenderer.worldObj
+			rand.setSeed((te.xCoord + te.zCoord)*te.xCoord);
+			customitem = new EntityItem(field_147501_a.field_147550_f); //tileEntityRenderer.worldObj
 			customitem.hoverStart = 0f;
 			float blockScale = 1.0F;
-			float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
 			if (te.storage[0] != null)
 			{
@@ -59,7 +59,7 @@ public class TESRWorldItem extends TESRBase
 				{
 					GL11.glTranslatef((float)d + 0.5f, (float)d1 + 0.021f, (float)d2 + 0.5f);
 					GL11.glRotatef(90, 1.0f, 0.0F, 0.0F);
-					GL11.glRotatef(R.nextFloat()*360, 0.0f, 0.0F, 1.0F);
+					GL11.glRotatef(rand.nextFloat()*360, 0.0f, 0.0F, 1.0F);
 					GL11.glScalef(blockScale, blockScale, blockScale);
 					customitem.setEntityItemStack(te.storage[0]);
 					itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);

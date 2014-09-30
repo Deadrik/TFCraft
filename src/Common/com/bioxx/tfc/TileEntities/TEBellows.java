@@ -2,10 +2,14 @@ package com.bioxx.tfc.TileEntities;
 
 import java.util.Random;
 
-import com.bioxx.tfc.api.TileEntities.TEFireEntity;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+
+import com.bioxx.tfc.api.TileEntities.TEFireEntity;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEBellows extends NetworkTileEntity
 {
@@ -43,6 +47,14 @@ public class TEBellows extends NetworkTileEntity
 				}
 			}
 		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 1, zCoord + 1);
+		return bb;
 	}
 
 	public void GenerateSmoke()
