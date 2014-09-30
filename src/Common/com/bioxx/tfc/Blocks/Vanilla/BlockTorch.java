@@ -79,7 +79,7 @@ public class BlockTorch extends BlockTerraContainer
 		{
 			if(world.getBlockMetadata(x, y, z) < 8 && player.inventory.getCurrentItem() != null && 
 					player.inventory.getCurrentItem().getItem() == TFCItems.Stick)
-			{
+			{	
 				player.inventory.consumeInventoryItem(TFCItems.Stick);
 				TFC_Core.giveItemToPlayer(new ItemStack(TFCBlocks.Torch), player);
 			}
