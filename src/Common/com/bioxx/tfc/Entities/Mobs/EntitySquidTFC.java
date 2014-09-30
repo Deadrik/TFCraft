@@ -1,13 +1,13 @@
 package com.bioxx.tfc.Entities.Mobs;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntitySquid;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.api.Constant.Global;
 
 public class EntitySquidTFC extends EntitySquid
 {
@@ -23,7 +23,7 @@ public class EntitySquidTFC extends EntitySquid
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		return this.posY > 128.0D && this.posY < 145.0D && this.worldObj.checkNoEntityCollision(this.boundingBox);
+		return this.posY > Global.SEALEVEL-16 && this.posY <= Global.SEALEVEL && this.worldObj.checkNoEntityCollision(this.boundingBox);
 	}
 
 	@Override

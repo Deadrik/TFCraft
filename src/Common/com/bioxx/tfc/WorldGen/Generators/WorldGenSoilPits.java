@@ -10,6 +10,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
+import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
@@ -51,7 +52,7 @@ public class WorldGenSoilPits implements IWorldGenerator
 		byte var7 = 2;
 		boolean flag = false;
 
-		if(random.nextInt(50) == 0 && yCoord <= 145)
+		if(random.nextInt(50) == 0 && yCoord <= Global.SEALEVEL)
 		{
 			for (int x = xCoord - var6; x <= xCoord + var6; ++x)
 			{
@@ -98,7 +99,7 @@ public class WorldGenSoilPits implements IWorldGenerator
 				{
 					int x = xCoord - i;
 					int z = zCoord - k;
-					if (x * x + z * z <= radius * radius && TFC_Climate.getRainfall(world, xCoord, 145, zCoord) >= 500)
+					if (x * x + z * z <= radius * radius && TFC_Climate.getRainfall(world, xCoord, Global.SEALEVEL, zCoord) >= 500)
 					{
 						for (int yCoord = j - depth; yCoord <= j + depth; ++yCoord)
 						{

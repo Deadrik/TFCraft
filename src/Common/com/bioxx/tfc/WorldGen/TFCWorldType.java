@@ -5,6 +5,8 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.chunk.IChunkProvider;
 
+import com.bioxx.tfc.api.Constant.Global;
+
 public class TFCWorldType extends WorldType
 {
 	public static TFCWorldType DEFAULT;
@@ -74,13 +76,13 @@ public class TFCWorldType extends WorldType
 	@Override
 	public int getMinimumSpawnHeight(World world)
 	{
-		return 145;
+		return Global.SEALEVEL+1;
 	}
 
 	@Override
 	public double getHorizon(World world)
 	{
-		return 144.0D;
+		return Global.SEALEVEL;
 	}
 
 }

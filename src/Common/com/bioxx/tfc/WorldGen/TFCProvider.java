@@ -18,6 +18,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -45,7 +46,7 @@ public class TFCProvider extends WorldProvider
 	{
 		int y = worldObj.getTopSolidOrLiquidBlock(x, z)-1;
 		Block b = worldObj.getBlock(x, y, z);
-		return y > 144 && y < 170 && (TFC_Core.isSand(b) || TFC_Core.isGrass(b));
+		return y > Global.SEALEVEL && y < 170 && (TFC_Core.isSand(b) || TFC_Core.isGrass(b));
 	}
 
 	@Override
@@ -60,25 +61,6 @@ public class TFCProvider extends WorldProvider
 	{
 		return 256.0F;
 	}
-
-	/*@Override
-	public TFCBiome getBiomeGenForCoords(int x, int z)
-	{
-		TFCBiome biome = TFCBiome.ocean;
-		try
-		{
-			biome = (TFCBiome) worldObj.getBiomeGenForCoordsBody(x, z);
-			if(canSnowAtTemp(x, 145, z))
-				biome.temperature = 0;
-			else
-				biome.temperature = 0.21f;
-}
-catch(Exception Ex)
-{
-	Ex.printStackTrace();
-}
-return biome;
-}*/
 
 	@Override
 	public ChunkCoordinates getSpawnPoint()
@@ -98,7 +80,7 @@ return biome;
 		ChunkPosition chunkCoord = null;
 		int xOffset = 0;
 		int xCoord = 0;
-		int yCoord = 145;
+		int yCoord = Global.SEALEVEL+1;
 		int zCoord = 10000;
 		int startingZ = 3000 + rand.nextInt(12000);
 

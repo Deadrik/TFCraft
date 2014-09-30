@@ -9,6 +9,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.WorldCacheManager;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -186,7 +187,7 @@ public class TFC_Climate
 			float zMod = getZFactor(z);
 			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
 
-			float rainMod = (1-((getRainfall(world, x, 144, z))/4000))*zMod;
+			float rainMod = (1-((getRainfall(world, x, Global.SEALEVEL, z))/4000))*zMod;
 
 			int _month = TFC_Time.getSeasonFromDayOfYear(day,z);
 			int _lastmonth = TFC_Time.getSeasonFromDayOfYear(day-TFC_Time.daysInMonth,z);
@@ -253,7 +254,7 @@ public class TFC_Climate
 			float zMod = getZFactor(z);
 			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
 
-			float rain = getRainfall(world, x, 144, z);
+			float rain = getRainfall(world, x, Global.SEALEVEL, z);
 			float rainMod = (1-(rain/4000))*zMod;
 
 			int _season = TFC_Time.getSeasonFromDayOfYear(day,z);
@@ -366,9 +367,9 @@ public class TFC_Climate
 		//The equation looks rather complicated, but you can see it here:
 		// http://www.wolframalpha.com/input/?i=%28%28%28x%5E2+%2F+677.966%29+*+%280.5%29*%28%28%28110+-+x%29+%2B+%7C110+-+x%7C%29%2F%28110+-
 		// +x%29%29%29+%2B+%28%280.5%29*%28%28%28x+-+110%29+%2B+%7Cx+-+110%7C%29%2F%28x+-+110%29%29+*+x+*+0.16225%29%29+0+to+440
-		if(y > 144)
+		if(y > Global.SEALEVEL)
 		{
-			y-=144;
+			y-=Global.SEALEVEL;
 			y = Math.min(y, 440);
 			float ySq = y * y;
 			temp = temp - (ySq / 677.966f) * (((110 - y) + Math.abs(110 - y)) / (2 * (110.01f - y)));

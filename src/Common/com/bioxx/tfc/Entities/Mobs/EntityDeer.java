@@ -32,6 +32,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -222,7 +223,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		{
 			//System.out.println(this.entityId+", Vec: "+attackedVec.xCoord+", "+attackedVec.yCoord+", "+attackedVec.zCoord);
 			Vec3 positionVec = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-			if(this.getFearSource() != null && this.getDistanceSqToEntity(this.getFearSource()) > 144)
+			if(this.getFearSource() != null && this.getDistanceSqToEntity(this.getFearSource()) > Global.SEALEVEL)
 			{
 				this.setFearSource(null);
 			}
@@ -624,12 +625,12 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public void handleFamiliarityUpdate() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

@@ -41,6 +41,7 @@ import com.bioxx.tfc.WorldGen.MapGen.MapGenCavesTFC;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenRavineTFC;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenRiverRavine;
 import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Constant.Global;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 {
@@ -214,7 +215,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		{
 			x = xCoord + this.rand.nextInt(16) + 8;
 			z = zCoord + this.rand.nextInt(16) + 8;
-			y = 145 - rand.nextInt(45);
+			y = Global.SEALEVEL - rand.nextInt(45);
 			fissureGen.generate(this.worldObj, this.rand, x, y, z);
 		}
 
@@ -535,6 +536,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	private void replaceBlocksForBiomeHigh(int chunkX, int chunkZ, Block[] idsTop, Random rand, Block[] idsBig, byte[] metaBig)
 	{
 		int seaLevel = 16;
+		int worldHeight = 256;
+		int indexOffset = 128;
 		double var6 = 0.03125D;
 		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, var6 * 4.0D, var6 * 1.0D, var6 * 4.0D);
 		boolean[] cliffMap = new boolean[256];
@@ -568,7 +571,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				}
 				for (int height = 127; height >= 0; --height)
 				{
-					int indexBig = ((arrayIndex) * 256 + height + 128);
+					int indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
 					int index = ((arrayIndex) * 128 + height);
 					//metaBig[indexBig] = 0;
 					float temp = TFC_Climate.adjustHeightToTemp(height, _temp);
@@ -586,7 +589,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						if(heightMap[arrayIndex] == 0 && height-16 >= 0)
 							heightMap[arrayIndex] = height-16;
 
-						convertStone(128+height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);
+						convertStone(indexOffset+height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);
 
 						//First we check to see if its a cold desert
 						if(rain < 125 && temp < 1.5f)
@@ -625,7 +628,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 									heightMap[arrayIndex]--;
 									var12--;
 									height--;
-									indexBig = ((arrayIndex) * 256 + height + 128);
+									indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
 									index = ((arrayIndex) * 128 + height);
 								}
 								else if(arrayIndexX >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexX])
@@ -633,7 +636,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 									heightMap[arrayIndex]--;
 									var12--;
 									height--;
-									indexBig = ((arrayIndex) * 256 + height + 128);
+									indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
 									index = ((arrayIndex) * 128 + height);
 								}
 								else if(arrayIndexz >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexz])
@@ -641,7 +644,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 									heightMap[arrayIndex]--;
 									var12--;
 									height--;
-									indexBig = ((arrayIndex) * 256 + height + 128);
+									indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
 									index = ((arrayIndex) * 128 + height);
 								}
 								else if(arrayIndexZ >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexZ])
@@ -649,7 +652,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 									heightMap[arrayIndex]--;
 									var12--;
 									height--;
-									indexBig = ((arrayIndex) * 256 + height + 128);
+									indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
 									index = ((arrayIndex) * 128 + height);
 								}
 							}
@@ -676,7 +679,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							}
 
 							//Determine the soil depth based on world height
-							int dirtH = Math.max(8-((height + 96 - 145) / 16), 0);
+							int dirtH = Math.max(8-((height + 96 - Global.SEALEVEL) / 16), 0);
 
 							if(var13 > 0)
 							{
@@ -690,7 +693,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 											biome != TFCBiome.HighHills && biome != TFCBiome.HighHillsEdge && !cliffMap[arrayIndex]; c++)
 									{
 										int _height = height - c;
-										int _indexBig = ((arrayIndex) * 256 + _height + 128);
+										int _indexBig = ((arrayIndex) * worldHeight + _height + indexOffset);
 										idsBig[_indexBig] = subSurfaceBlock;
 										metaBig[_indexBig] = (byte)TFC_Core.getSoilMeta(rock1.data1);
 

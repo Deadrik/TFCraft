@@ -120,4 +120,6 @@ public class Global
 	 */
 	public static double FOOD_DECAY_RATE = 1.0170378966055869517978300569768f;
 	public static float FOOD_MAX_WEIGHT = 160;
+
+	public static int SEALEVEL = 144;
 }
