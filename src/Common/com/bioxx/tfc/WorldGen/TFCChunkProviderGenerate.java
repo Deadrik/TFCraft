@@ -35,7 +35,6 @@ import com.bioxx.tfc.Entities.Mobs.EntityPheasantTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityPigTFC;
 import com.bioxx.tfc.Entities.Mobs.EntitySheepTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityWolfTFC;
-import com.bioxx.tfc.WorldGen.Data.ChunkTFC;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenCavesTFC;
 import com.bioxx.tfc.WorldGen.MapGen.MapGenRavineTFC;
@@ -170,7 +169,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		ravineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);//deep
 		riverRavineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 
-		ChunkTFC chunk = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
+		Chunk chunk = new Chunk(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
 		data.heightmap = heightMap;
 		ChunkDataManager.addData(data.chunkX, data.chunkZ, data);
