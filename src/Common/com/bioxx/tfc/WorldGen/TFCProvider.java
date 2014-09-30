@@ -133,14 +133,18 @@ return biome;
 
 	private boolean isNextToShoreOrIce(int x, int y, int z)
 	{
-		if(worldObj.getBlock(x+1, y, z) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x+1, y, z)))
-			return true;
-		if(worldObj.getBlock(x-1, y, z) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x-1, y, z)))
-			return true;
-		if(worldObj.getBlock(x, y, z+1) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x, y, z+1)))
-			return true;
-		if(worldObj.getBlock(x, y, z-1) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x, y, z-1)))
-			return true;
+		if(worldObj.checkChunksExist(x+1, y, z, x+1, y, z))
+			if(worldObj.getBlock(x+1, y, z) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x+1, y, z)))
+				return true;
+		if(worldObj.checkChunksExist(x-1, y, z, x-1, y, z))
+			if(worldObj.getBlock(x-1, y, z) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x-1, y, z)))
+				return true;
+		if(worldObj.checkChunksExist(x, y, z+1, x, y, z+1))
+			if(worldObj.getBlock(x, y, z+1) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x, y, z+1)))
+				return true;
+		if(worldObj.checkChunksExist(x, y, z-1, x, y, z-1))
+			if(worldObj.getBlock(x, y, z-1) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x, y, z-1)))
+				return true;
 		return false;
 	}
 
