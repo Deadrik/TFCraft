@@ -356,7 +356,7 @@ public class CommonProxy
 	{
 	}
 
-	public void registerHighlightHandler()
+	public void registerHandlers()
 	{
 	}
 
