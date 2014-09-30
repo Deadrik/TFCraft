@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -24,8 +25,10 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomLeaves extends BlockLeaves implements IShearable
 {
@@ -77,9 +80,11 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_)
 	{
-		return TFCOptions.enableInnerGrassFix;
+		Block block = p_149646_1_.getBlock(p_149646_2_, p_149646_3_, p_149646_4_);
+		return !Minecraft.isFancyGraphicsEnabled() && block == this ? false : super.shouldSideBeRendered(p_149646_1_, p_149646_2_, p_149646_3_, p_149646_4_, p_149646_5_);
 	}
 
 	@Override
@@ -254,7 +259,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 			else if (world.rand.nextInt(100) < 6)
 				dropSapling(world, i, j, k, meta);;
 
-			super.harvestBlock(world, entityplayer, i, j, k, meta);
+				super.harvestBlock(world, entityplayer, i, j, k, meta);
 		}
 	}
 

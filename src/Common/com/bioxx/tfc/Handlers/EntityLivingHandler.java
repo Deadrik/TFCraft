@@ -55,8 +55,6 @@ public class EntityLivingHandler
 			if(oldMaxHealth != newMaxHealth)
 			{
 				player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(newMaxHealth);
-				/*if(diff > 0)
-					player.heal(diff);*/
 			}
 
 			if(!player.worldObj.isRemote)
