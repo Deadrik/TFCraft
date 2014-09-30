@@ -9,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
@@ -154,10 +155,11 @@ return biome;
 		Block id = worldObj.getBlock(x, y, z);
 		int meta = worldObj.getBlockMetadata(x, y, z);
 		float temp = TFC_Climate.getHeightAdjustedTemp(worldObj, x, y, z);
+		BiomeGenBase biome = worldObj.getBiomeGenForCoords(x, z);
 
-		if (temp <= 0)
+		if (temp <= 0 && biome != TFCBiome.DeepOcean)
 		{
-			if (worldObj.isAirBlock(x, y+1, z) && TFC_Core.isWater(id) && isNextToShoreOrIce(x,y,z))
+			if (worldObj.isAirBlock(x, y+1, z) && TFC_Core.isWater(id) && worldObj.rand.nextInt(4) == 0 && isNextToShoreOrIce(x,y,z))
 			{
 				Material mat = worldObj.getBlock(x, y, z).getMaterial();
 				boolean salty = TFC_Core.isSaltWaterIncludeIce(id, meta, mat);

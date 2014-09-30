@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.stats.StatList;
@@ -35,25 +36,12 @@ public class BlockCustomSnow extends BlockTerra
 		Block b = world.getBlock(i, j - 1, k);
 		boolean flag = false;
 		if (b == TFCBlocks.Ice)
-			flag =  true;
+			return false;
 		if (World.doesBlockHaveSolidTopSurface(world, i, j-1, k))
 			flag =  true;
 		if (b == TFCBlocks.Leaves || b == TFCBlocks.Leaves2)
 			flag =  true;
 		return flag;
-	}
-
-	private boolean canSnowStay(World world, int x, int y, int z)
-	{
-		if (!this.canPlaceBlockAt(world, x, y, z))
-		{
-			world.setBlockToAir(x, y, z);
-			return false;
-		}
-		else
-		{
-			return true;
-		}
 	}
 
 	@Override
@@ -103,7 +91,10 @@ public class BlockCustomSnow extends BlockTerra
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
-		this.canSnowStay(world, x, y, z);
+		if(!canPlaceBlockAt(world, x, y, z))
+		{
+			world.setBlock(x, y, z, Blocks.air, 0, 2);
+		}
 	}
 
 	@Override
@@ -133,56 +124,58 @@ public class BlockCustomSnow extends BlockTerra
 	}
 
 	@Override
-	public void updateTick(World world, int i, int j, int k, Random R)
+	public void updateTick(World world, int x, int y, int z, Random R)
 	{
-		if (!this.canSnowStay(world, i, j, k))
+		if(!canPlaceBlockAt(world, x, y, z))
 		{
+			world.setBlock(x, y, z, Blocks.air, 0, 2);
 			return;
 		}
-		int meta = world.getBlockMetadata(i, j, k);
-		if (world.getSavedLightValue(EnumSkyBlock.Block, i, j, k) > 11)
+		int meta = world.getBlockMetadata(x, y, z);
+		if (world.getSavedLightValue(EnumSkyBlock.Block, x, y, z) > 11)
 		{
 			if(meta > 1 && R.nextInt(5) == 0)
-				world.setBlockMetadataWithNotify(i, j, k, meta - 1, 2);
+				world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
 			else if(meta == 1 && R.nextInt(5) == 0)
-				world.setBlockToAir(i, j, k);
+				world.setBlock(x, y, z, Blocks.air, 0, 0x2);
 		}
-		if(world.isRaining() && TFC_Climate.getHeightAdjustedTemp(world, i, j, k) <= 0)//Raining and Below Freezing
+		float temp = TFC_Climate.getHeightAdjustedTemp(world, x, y, z);
+		if(world.isRaining() && temp <= 0)//Raining and Below Freezing
 		{
-			if(meta < 15 && R.nextInt(20) == 0 && world.getBlock(i, j - 1, k).getMaterial() != Material.leaves)
+			if(meta < 15 && R.nextInt(20) == 0 && world.getBlock(x, y - 1, z).getMaterial() != Material.leaves)
 			{
-				if (canAddSnow(world, i, j, k, meta))
-					world.setBlockMetadataWithNotify(i, j, k, meta + 1, 2);
+				if (canAddSnow(world, x, y, z, meta))
+					world.setBlockMetadataWithNotify(x, y, z, meta + 1, 2);
 			}
-			else if(meta < 3 && R.nextInt(20) == 0 && world.getBlock(i, j - 1, k).getMaterial() == Material.leaves)
+			else if(meta < 3 && R.nextInt(20) == 0 && world.getBlock(x, y - 1, z).getMaterial() == Material.leaves)
 			{
-				if (canAddSnow(world, i, j, k, meta))
-					world.setBlockMetadataWithNotify(i, j, k, meta + 1, 2);
+				if (canAddSnow(world, x, y, z, meta))
+					world.setBlockMetadataWithNotify(x, y, z, meta + 1, 2);
 			}
 		}
-		else if(world.isRaining() && TFC_Climate.getHeightAdjustedTemp(world, i, j, k) >= 0)//Raining and above freezing
+		else if(world.isRaining() && temp > 0)//Raining and above freezing
 		{
-			if(meta <= 15 && world.getBlock(i, j - 1, k).getMaterial() != Material.leaves)
+			if(meta <= 15 && world.getBlock(x, y - 1, z).getMaterial() != Material.leaves)
 			{
 				if(meta > 1)
-					world.setBlockMetadataWithNotify(i, j, k, meta - 1, 2);
+					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
 				else
-					world.setBlockToAir(i, j, k);
+					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
 			}
-			else if(meta <= 15 && world.getBlock(i, j-1, k).getMaterial() == Material.leaves)
+			else if(meta <= 15 && world.getBlock(x, y-1, z).getMaterial() == Material.leaves)
 			{
 				if(meta > 1)
-					world.setBlockMetadataWithNotify(i, j, k, meta - 1, 2);
+					world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
 				else
-					world.setBlockToAir(i, j, k);
+					world.setBlock(x, y, z, Blocks.air, 0, 0x2);
 			}
 		}
-		else if(TFC_Climate.getHeightAdjustedTemp(world, i, j, k) >= 0F)//Above fReezing
+		else if(TFC_Climate.getHeightAdjustedTemp(world, x, y, z) >= 0F)//Above fReezing
 		{
 			if(meta > 0 )
-				world.setBlockMetadataWithNotify(i, j, k, meta - 1, 2);
+				world.setBlockMetadataWithNotify(x, y, z, meta - 1, 2);
 			else
-				world.setBlockToAir(i, j, k);
+				world.setBlock(x, y, z, Blocks.air, 0, 0x2);
 		}
 		//else//Below Freezing
 		//{

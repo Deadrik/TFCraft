@@ -715,7 +715,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							}
 						}
 					}
-					else if(idsTop[index] == TFCBlocks.SaltWater && biome != TFCBiome.ocean && biome != TFCBiome.beach && biome != TFCBiome.gravelbeach)
+					else if(idsTop[index] == TFCBlocks.SaltWater && biome != TFCBiome.ocean && biome != TFCBiome.DeepOcean && biome != TFCBiome.beach && biome != TFCBiome.gravelbeach)
 					{
 						idsBig[indexBig] = TFCBlocks.FreshWater;
 					}
