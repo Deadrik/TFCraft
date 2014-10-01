@@ -6,7 +6,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -81,10 +80,13 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_)
+	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
-		Block block = p_149646_1_.getBlock(p_149646_2_, p_149646_3_, p_149646_4_);
-		return !Minecraft.isFancyGraphicsEnabled() && block == this ? false : super.shouldSideBeRendered(p_149646_1_, p_149646_2_, p_149646_3_, p_149646_4_, p_149646_5_);
+		Block block = world.getBlock(x, y, z);
+		/*if(!Minecraft.isFancyGraphicsEnabled() && block == this) 
+			return false;*/
+
+		return side == 0 && this.minY > 0.0D ? true : (side == 1 && this.maxY < 1.0D ? true : (side == 2 && this.minZ > 0.0D ? true : (side == 3 && this.maxZ < 1.0D ? true : (side == 4 && this.minX > 0.0D ? true : (side == 5 && this.maxX < 1.0D ? true : !world.getBlock(x, y, z).isOpaqueCube())))));
 	}
 
 	@Override
