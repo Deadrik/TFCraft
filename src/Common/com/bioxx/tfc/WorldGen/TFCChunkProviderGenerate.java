@@ -22,7 +22,6 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Terrain.BlockCollapsable;
 import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -172,7 +171,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		Chunk chunk = new Chunk(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
 		data.heightmap = heightMap;
-		ChunkDataManager.addData(data.chunkX, data.chunkZ, data);
+		TFC_Core.getCDM(worldObj).addData(chunk, data);
 
 		chunk.generateSkylightMap();
 		return chunk;
@@ -203,7 +202,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		int z;
 
 		if(biome.equals(TFCBiome.lake) || biome.equals(TFCBiome.river)){
-			ChunkDataManager.setFishPop(xCoord, zCoord, ChunkData.fishPopMax);
+			TFC_Core.getCDM(worldObj).setFishPop(xCoord, zCoord, ChunkData.fishPopMax);
 		}
 
 		int waterRand = 4;

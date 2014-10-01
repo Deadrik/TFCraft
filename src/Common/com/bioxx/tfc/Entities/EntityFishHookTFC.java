@@ -6,8 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.item.ItemStack;
@@ -21,15 +19,11 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
-import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemCustomFishingRod;
-import com.bioxx.tfc.api.TFCOptions;
-import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -534,7 +528,7 @@ public class EntityFishHookTFC extends EntityFishHook
 		Vec3 dirVec = Vec3.createVectorHelper((this.field_146042_b.posX + playerMotion.xCoord - (motionVec.xCoord + x))*subractedRatio, (this.field_146042_b.posY + playerMotion.yCoord - (motionVec.yCoord + y))*subractedRatio, (this.field_146042_b.posZ + playerMotion.zCoord - (motionVec.zCoord + z))*subractedRatio);
 		return dirVec;
 	}
-	
+
 	public void attemptToCatch(){
 		int fishPopulation = this.getAverageFishPopFromChunks();
 		if(this.lastCheckTick == 0){
@@ -598,9 +592,9 @@ public class EntityFishHookTFC extends EntityFishHook
 			int lastChunkX = (((int)Math.floor(player.posX)) >> 4);
 			int lastChunkZ = (((int)Math.floor(player.posZ)) >> 4);
 			int maxChunksVisitable = 20;
-			
+
 			int chunksVisited = 0;
-			int totalFish = ChunkDataManager.getFishPop(lastChunkX, lastChunkZ);
+			int totalFish = TFC_Core.getCDM(worldObj).getFishPop(lastChunkX, lastChunkZ);
 			if(totalFish > 0){
 				chunksVisited++;
 			}
@@ -612,7 +606,7 @@ public class EntityFishHookTFC extends EntityFishHook
 				{
 					for(int k = -radius; k <= radius; k+=(Math.abs(i)==radius?1:radius*2))
 					{
-						int tempFish = ChunkDataManager.getFishPop(lastChunkX + i, lastChunkZ + k);
+						int tempFish = TFC_Core.getCDM(worldObj).getFishPop(lastChunkX + i, lastChunkZ + k);
 						if(tempFish > 0){
 							chunksVisited++;
 							totalFish += tempFish;
@@ -639,19 +633,19 @@ public class EntityFishHookTFC extends EntityFishHook
 			this.worldObj.spawnEntityInWorld(fish);
 
 			this.canCatchFish = false;
-			
+
 			EntityPlayer player = this.field_146042_b;
 			int lastChunkX = (((int)Math.floor(player.posX)) >> 4);
 			int lastChunkZ = (((int)Math.floor(player.posZ)) >> 4);
 			int maxChunksVisitable = 20;
-			ChunkDataManager.catchFish(lastChunkX, lastChunkZ);
+			TFC_Core.getCDM(worldObj).catchFish(lastChunkX, lastChunkZ);
 			int chunksVisited = 1;
 			for(int radius = 1; radius < 5 && chunksVisited < maxChunksVisitable; radius++){
 				for(int i = -radius; i <= radius; i++)
 				{
 					for(int k = -radius; k <= radius; k+=(Math.abs(i)==radius?1:radius*2))
 					{
-						if(ChunkDataManager.catchFish(lastChunkX + i, lastChunkZ + k)){
+						if(TFC_Core.getCDM(worldObj).catchFish(lastChunkX + i, lastChunkZ + k)){
 							chunksVisited++;
 						}
 					}

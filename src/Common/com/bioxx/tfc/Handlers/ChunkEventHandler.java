@@ -6,8 +6,8 @@ import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
 import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
@@ -22,7 +22,7 @@ public class ChunkEventHandler
 	{
 		if (!event.world.isRemote)
 		{
-			ChunkData cd = ChunkDataManager.getData(event.getChunk().xPosition, event.getChunk().zPosition);
+			ChunkData cd = TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition);
 			if(cd== null)
 				return;
 			int month = TFC_Time.getSeasonAdjustedMonth(event.getChunk().zPosition << 4);
@@ -62,13 +62,13 @@ public class ChunkEventHandler
 	@SubscribeEvent
 	public void onUnload(ChunkEvent.Unload event)
 	{
-		if (!event.world.isRemote)
-			ChunkDataManager.removeData(event.getChunk().xPosition, event.getChunk().zPosition);
+		TFC_Core.getCDM(event.world).removeData(event.getChunk().xPosition, event.getChunk().zPosition);
 	}
 
 	@SubscribeEvent
 	public void onUnloadWorld(WorldEvent.Unload event)
 	{
 		TFC_Climate.removeCacheManager(event.world);
+		TFC_Core.removeCDM(event.world);
 	}
 }

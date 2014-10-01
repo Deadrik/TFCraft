@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 
@@ -15,7 +14,6 @@ import com.bioxx.tfc.TileEntities.TEWorldItem;
 public class TESRWorldItem extends TESRBase
 {
 	public static Random rand = new Random();
-	static EntityItem customitem;
 	public TESRWorldItem()
 	{
 	}
@@ -27,10 +25,16 @@ public class TESRWorldItem extends TESRBase
 	{
 		if (te.getWorldObj() != null)
 		{
-			rand.setSeed((te.xCoord + te.zCoord)*te.xCoord);
-			customitem = new EntityItem(field_147501_a.field_147550_f); //tileEntityRenderer.worldObj
-			customitem.hoverStart = 0f;
-			float blockScale = 1.0F;
+
+			if(te.renderItem == null)
+			{
+				rand.setSeed((te.xCoord + te.zCoord)*te.xCoord);
+				te.renderItem = new EntityItem(field_147501_a.field_147550_f); //tileEntityRenderer.worldObj
+				//te.renderItem.rotationPitch = 90;
+				te.renderItem.setAngles(90, 90);
+				te.renderItem.hoverStart = 0f;
+				te.renderItem.setEntityItemStack(te.storage[0]);
+			}
 
 			if (te.storage[0] != null)
 			{
@@ -44,11 +48,11 @@ public class TESRWorldItem extends TESRBase
 
 				if (te.storage[0].getItemSpriteNumber() == 0)
 				{
-					this.bindTexture(TextureMap.locationBlocksTexture);
+					//this.bindTexture(TextureMap.locationBlocksTexture);
 				}
 				else
 				{
-					this.bindTexture(TextureMap.locationItemsTexture);
+					//this.bindTexture(TextureMap.locationItemsTexture);
 				}
 
 				boolean fancy = RenderManager.instance.options.fancyGraphics;
@@ -59,10 +63,9 @@ public class TESRWorldItem extends TESRBase
 				{
 					GL11.glTranslatef((float)d + 0.5f, (float)d1 + 0.021f, (float)d2 + 0.5f);
 					GL11.glRotatef(90, 1.0f, 0.0F, 0.0F);
-					GL11.glRotatef(rand.nextFloat()*360, 0.0f, 0.0F, 1.0F);
-					GL11.glScalef(blockScale, blockScale, blockScale);
-					customitem.setEntityItemStack(te.storage[0]);
-					itemRenderer.doRender(customitem, 0, 0, 0, 0, 0);
+					//GL11.glRotatef(rand.nextFloat()*360, 0.0f, 0.0F, 1.0F);
+
+					itemRenderer.doRender(te.renderItem, 0, 0, 0, 0, 0);
 				}
 				else
 				{

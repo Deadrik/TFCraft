@@ -1,13 +1,10 @@
 package com.bioxx.tfc.Core;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Util.Helper;
@@ -500,62 +497,6 @@ public class TFC_Climate
 	{
 		DataLayer dl = getCacheManager(world).getRainfallLayerAt(x, z);
 		return dl != null ? dl.floatdata1 : DataLayer.Rain_500.floatdata1;
-	}
-
-	public static float getTerrainAdjustedRainfall(World world, int x, int y, int z)
-	{
-		float rain = getRainfall(world, x, y, z);
-		ArrayList biomes = new ArrayList<TFCBiome>();
-		biomes.add(TFCBiome.river);
-		biomes.add(TFCBiome.ocean);
-		biomes.add(TFCBiome.swampland);
-
-		float rainModWest = 1;
-		float rainModNorth = 1;
-		float rainModSouth = 1;
-		float rainModEast = 1;
-
-		BiomeGenBase biome = null;
-		for(int i = 0; i < 8; i++)
-		{
-			biome = world.getBiomeGenForCoords(( x- 512) + (64 * i), z);
-			if(biome.biomeID == TFCBiome.Mountains.biomeID)
-				rainModWest = 1 - (i * 0.0625f);
-			else if(biome.biomeID == TFCBiome.ocean.biomeID)
-				rainModWest = 1 + (i * 0.125f);
-		}
-		for(int i = 0; i < 8; i++)
-		{
-			biome =  world.getBiomeGenForCoords(x, (z + 512) - (64 * i));
-			if(biome.biomeID == TFCBiome.Mountains.biomeID)
-				rainModSouth = 1 - (i * 0.0625f);
-			else if(biome.biomeID == TFCBiome.ocean.biomeID)
-				rainModSouth = 1 + (i * 0.125f);
-		}
-		for(int i = 0; i < 2; i++)
-		{
-			biome = world.getBiomeGenForCoords(x, (z - 128) + (64 * i));
-			if(biome.biomeID == TFCBiome.ocean.biomeID)
-				rainModNorth +=  0.35f;
-		}
-		for(int i = 0; i < 2; i++)
-		{
-			biome = world.getBiomeGenForCoords((x + 128) - (64 * i), z);
-			if(biome.biomeID == TFCBiome.ocean.biomeID)
-				rainModEast += 0.35f;
-		}
-
-		float addMoisture = 1;
-		for(int i = -2; i <= 2 && addMoisture == 1; i++)
-		{
-			for(int k = -2; k <= 2 && addMoisture == 1; k++)
-			{
-				biome = world.getBiomeGenForCoords(x + (i * 8), z + (k * 8));
-				if(biome.biomeID == TFCBiome.ocean.biomeID || biome.biomeID == TFCBiome.river.biomeID || biome.biomeID == TFCBiome.swampland.biomeID)
-					addMoisture = 2f;
-			}
-		}
-		return rain * ((rainModEast + rainModWest + rainModNorth + rainModSouth + addMoisture) / 5);
 	}
 
 	public static int getTreeLayer(World world,int x, int y, int z, int index)

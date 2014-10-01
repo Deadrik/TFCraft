@@ -1,11 +1,12 @@
 package com.bioxx.tfc.Handlers;
 
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
-import com.bioxx.tfc.Core.TFC_Time;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityEvent.EnteringChunk;
+
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EnteringChunkHandler
@@ -20,11 +21,11 @@ public class EnteringChunkHandler
 			{
 				NBTTagCompound nbt = player.getEntityData();
 				long spawnProtectionTimer = nbt.hasKey("spawnProtectionTimer") ? nbt.getLong("spawnProtectionTimer") : TFC_Time.getTotalTicks() + TFC_Time.hourLength;
-						
-				
+
+
 				if(event.newChunkX != event.oldChunkX || event.newChunkZ != event.oldChunkZ )
 				{
-					ChunkDataManager.setLastVisted(event.oldChunkX, event.oldChunkZ);
+					TFC_Core.getCDM(event.entity.worldObj).setLastVisted(event.oldChunkX, event.oldChunkZ);
 					//Reset the timer since we've entered a new chunk
 					spawnProtectionTimer = TFC_Time.getTotalTicks() + TFC_Time.hourLength;
 					writeProtectionToNBT(nbt, spawnProtectionTimer);
@@ -32,7 +33,7 @@ public class EnteringChunkHandler
 			}
 		}
 	}
-	
+
 	public void writeProtectionToNBT(NBTTagCompound nbt, long spawnProtectionTimer)
 	{
 		nbt.setLong("spawnProtectionTimer", spawnProtectionTimer);

@@ -21,7 +21,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.ZombieEvent.SummonAidEvent;
 
 import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.ItemFoodTFC;
@@ -294,7 +294,7 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage, IInn
 				int j1 = j + MathHelper.getRandomIntegerInRange(this.rand, 7, 40) * MathHelper.getRandomIntegerInRange(this.rand, -1, 1);
 				int k1 = k + MathHelper.getRandomIntegerInRange(this.rand, 7, 40) * MathHelper.getRandomIntegerInRange(this.rand, -1, 1);
 
-				if (World.doesBlockHaveSolidTopSurface(this.worldObj, i1, j1 - 1, k1) && this.worldObj.getBlockLightValue(i1, j1, k1) < 10 && ChunkDataManager.getData(i1 >> 4, k1 >> 4).getSpawnProtectionWithUpdate() <= 0)
+				if (World.doesBlockHaveSolidTopSurface(this.worldObj, i1, j1 - 1, k1) && this.worldObj.getBlockLightValue(i1, j1, k1) < 10 && TFC_Core.getCDM(worldObj).getData(i1 >> 4, k1 >> 4).getSpawnProtectionWithUpdate() <= 0)
 				{
 					entityzombie.setPosition((double)i1, (double)j1, (double)k1);
 

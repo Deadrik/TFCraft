@@ -9,7 +9,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 
 import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCOptions;
 
 public class GSPVisualCommand extends CommandBase{
@@ -33,7 +33,7 @@ public class GSPVisualCommand extends CommandBase{
 		int px = (int)player.posX >> 4;
 		int pz = (int)player.posZ >> 4;
 
-		ChunkData d = ChunkDataManager.getData(px, pz);
+		ChunkData d = TFC_Core.getCDM(world).getData(px, pz);
 
 		if(params.length == 0)
 		{

@@ -6,8 +6,8 @@ import net.minecraft.tileentity.TileEntity;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
@@ -125,7 +125,7 @@ public class TEFarmland extends NetworkTileEntity
 	public void infest()
 	{
 		isInfested = true;
-		ChunkData cd = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
+		ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
 		if(cd != null && cd.cropInfestation == 0)
 			cd.infest();
 	}
@@ -133,7 +133,7 @@ public class TEFarmland extends NetworkTileEntity
 	public void uninfest()
 	{
 		isInfested = false;
-		ChunkData cd = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
+		ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
 		if(cd != null && cd.cropInfestation > 0)
 			cd.uninfest();
 	}

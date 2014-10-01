@@ -18,7 +18,6 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
@@ -101,7 +100,7 @@ public class ItemGoldPan extends ItemTerra
 			{
 				if(is.getItemDamage() == 0)
 				{
-					ChunkData cd = ChunkDataManager.getData(x >> 4, z >> 4);
+					ChunkData cd = TFC_Core.getCDM(world).getData(x >> 4, z >> 4);
 
 					// Make sure our chunk data isn't null.
 					if(cd == null)

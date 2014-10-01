@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -61,7 +62,23 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFC_Core
 {
+	private static HashMap<World, ChunkDataManager> cdmMap = new HashMap<World, ChunkDataManager>();
 	public static boolean PreventEntityDataUpdate = false;
+
+	public static ChunkDataManager getCDM(World world)
+	{
+		return cdmMap.get(world);
+	}
+
+	public static ChunkDataManager addCDM(World world)
+	{
+		return cdmMap.put(world, new ChunkDataManager(world));
+	}
+
+	public static ChunkDataManager removeCDM(World world)
+	{
+		return cdmMap.remove(world);
+	}
 
 	@SideOnly(Side.CLIENT)
 	public static int getMouseX()
@@ -623,7 +640,7 @@ public class TFC_Core
 
 	public static int getRockLayerFromHeight(World world, int x, int y, int z)
 	{
-		ChunkData cd = ChunkDataManager.getData(x >> 4, z >> 4);
+		ChunkData cd = TFC_Core.getCDM(world).getData(x >> 4, z >> 4);
 		if (cd != null)
 		{
 			int[] hm = cd.heightmap;
