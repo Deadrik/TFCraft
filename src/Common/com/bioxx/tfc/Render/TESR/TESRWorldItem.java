@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 
@@ -30,8 +31,7 @@ public class TESRWorldItem extends TESRBase
 			{
 				rand.setSeed((te.xCoord + te.zCoord)*te.xCoord);
 				te.renderItem = new EntityItem(field_147501_a.field_147550_f); //tileEntityRenderer.worldObj
-				//te.renderItem.rotationPitch = 90;
-				te.renderItem.setAngles(90, 90);
+				te.renderItem.setAngles(rand.nextFloat()*360, 90);
 				te.renderItem.hoverStart = 0f;
 				te.renderItem.setEntityItemStack(te.storage[0]);
 			}
@@ -48,11 +48,11 @@ public class TESRWorldItem extends TESRBase
 
 				if (te.storage[0].getItemSpriteNumber() == 0)
 				{
-					//this.bindTexture(TextureMap.locationBlocksTexture);
+					this.bindTexture(TextureMap.locationBlocksTexture);
 				}
 				else
 				{
-					//this.bindTexture(TextureMap.locationItemsTexture);
+					this.bindTexture(TextureMap.locationItemsTexture);
 				}
 
 				boolean fancy = RenderManager.instance.options.fancyGraphics;
