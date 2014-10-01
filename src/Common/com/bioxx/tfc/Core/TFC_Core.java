@@ -442,29 +442,29 @@ public class TFC_Core
 
 	public static boolean isSaltWater(Block block)
 	{
-		return block == TFCBlocks.SaltWater;
+		return block == TFCBlocks.SaltWater || block == TFCBlocks.SaltWaterStationary;
 	}
 
 	public static boolean isSaltWaterIncludeIce(Block block, int meta, Material mat)
 	{
-		return block == TFCBlocks.SaltWater
+		return block == TFCBlocks.SaltWater || block == TFCBlocks.SaltWaterStationary
 				|| (mat == Material.ice && meta == 0);
 	}
 
 	public static boolean isFreshWater(Block block)
 	{
-		return block == TFCBlocks.FreshWater;
+		return block == TFCBlocks.FreshWater || block == TFCBlocks.FreshWaterStationary;
 	}
 
 	public static boolean isFreshWaterIncludeIce(Block block, int meta)
 	{
-		return block == TFCBlocks.FreshWater
+		return block == TFCBlocks.FreshWater || block == TFCBlocks.FreshWaterStationary
 				|| (block == TFCBlocks.Ice && meta != 0);
 	}
 
 	public static boolean isFreshWaterIncludeIce(Block block, int meta, Material mat)
 	{
-		return block == TFCBlocks.FreshWater
+		return block == TFCBlocks.FreshWater || block == TFCBlocks.FreshWaterStationary
 				|| (mat == Material.ice && meta != 0);
 	}
 

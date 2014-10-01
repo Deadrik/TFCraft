@@ -134,7 +134,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 								int index = (xCoord * 16 + zCoord) * 256 + y;
 								if (y >= 0 && y < 256)
 								{
-									if (idArray[index] == TFCBlocks.SaltWater || idArray[index] == TFCBlocks.FreshWater)
+									if (idArray[index] == TFCBlocks.SaltWaterStationary || idArray[index] == TFCBlocks.FreshWaterStationary)
 										var58 = true;
 									if (y != var57 - 1 && xCoord != var55 && xCoord != var36 - 1 && zCoord != var56 && zCoord != var40 - 1)
 										y = var57;

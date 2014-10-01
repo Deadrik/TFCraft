@@ -105,7 +105,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 						Block i4 = world.getBlock(j2, i1, j3);
 						if (i4 == Blocks.air || i4 == TFCBlocks.Leaves || i4 == TFCBlocks.Leaves2)
 							continue;
-						if (i4 == TFCBlocks.SaltWater)
+						if (i4 == TFCBlocks.FreshWaterStationary)
 						{
 							if (i1 > yCoord)
 								flag = false;

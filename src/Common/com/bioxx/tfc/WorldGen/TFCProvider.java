@@ -151,11 +151,11 @@ public class TFCProvider extends WorldProvider
 
 				if((mat == Material.water || mat == Material.ice) && !salty)
 				{
-					if(id == TFCBlocks.FreshWater && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
+					if(id == TFCBlocks.FreshWaterStationary && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
 					{
 						worldObj.setBlock(x, y, z, TFCBlocks.Ice, 1, 2);
 					}
-					else if(id == TFCBlocks.SaltWater && meta == 0/* || id == Block.waterMoving.blockID*/)
+					else if(id == TFCBlocks.SaltWaterStationary && meta == 0/* || id == Block.waterMoving.blockID*/)
 					{
 						worldObj.setBlock(x, y, z, TFCBlocks.Ice, 0, 2);
 					}
@@ -191,11 +191,11 @@ public class TFCProvider extends WorldProvider
 
 						if((meta & 1) == 0)
 						{
-							worldObj.setBlock(x, y, z, TFCBlocks.SaltWater, 0, flag);
+							worldObj.setBlock(x, y, z, TFCBlocks.SaltWaterStationary, 0, flag);
 						}
 						else if((meta & 1) == 1)
 						{
-							worldObj.setBlock(x, y, z, TFCBlocks.FreshWater, 0, flag);
+							worldObj.setBlock(x, y, z, TFCBlocks.FreshWaterStationary, 0, flag);
 						}
 					}
 				}

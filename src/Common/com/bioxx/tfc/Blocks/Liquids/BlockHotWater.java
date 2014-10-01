@@ -2,6 +2,8 @@ package com.bioxx.tfc.Blocks.Liquids;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -18,11 +20,11 @@ import com.bioxx.tfc.Effects.GasFX;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockHotWater extends BlockFreshWater
+public class BlockHotWater extends BlockCustomLiquid
 {
 	public BlockHotWater(Fluid fluid)
 	{
-		super(fluid);
+		super(fluid, Material.water);
 	}
 
 	@Override
@@ -30,6 +32,12 @@ public class BlockHotWater extends BlockFreshWater
 	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
 		return 0x1f5099;
+	}
+
+	@Override
+	protected Block getInverseBlock() 
+	{
+		return this;
 	}
 
 	@Override
@@ -84,15 +92,6 @@ public class BlockHotWater extends BlockFreshWater
 		if (entity instanceof EntityLivingBase)
 		{
 			EntityLivingBase e = ((EntityLivingBase) entity);
-			/*PotionEffect regen = e.getActivePotionEffect(Potion.regeneration);
-			if(regen == null)
-			{
-				e.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 100));
-			}
-			else
-			{
-				regen.combine(new PotionEffect(Potion.regeneration.getId(), 100));
-			}*/
 			if(world.rand.nextInt(25) == 0 && e.getHealth() < e.getMaxHealth())
 			{
 				float diff = e.getMaxHealth() - e.getHealth();
