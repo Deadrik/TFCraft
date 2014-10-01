@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.BlockFarmland;
 import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -50,7 +49,7 @@ public class TECrop extends NetworkTileEntity
 			float timeMultiplier = 360 / TFC_Time.daysInYear;
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 			long time = TFC_Time.getTotalTicks();
-			ChunkData cd = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
+			ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
 			if(growthTimer < time && sunLevel > 0)
 			{
 				sunLevel--;

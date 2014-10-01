@@ -3,12 +3,12 @@ package com.bioxx.tfc.Render;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ForgeHooksClient;
 
@@ -17,7 +17,6 @@ import org.lwjgl.opengl.GL11;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Entities.EntityStand;
-import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
 import com.bioxx.tfc.Render.Models.ModelStand;
 
 import cpw.mods.fml.relauncher.Side;
@@ -31,16 +30,14 @@ public class RenderEntityStand extends RenderBiped
 	private ModelBiped modelArmor;
 	//private static final ResourceLocation Texture = new ResourceLocation("textures/entity/zombie/zombie.png");
 	private static final ResourceLocation Texture = new ResourceLocation(Reference.ModID, "textures/mob/stand.png");
-	public static String[] armorFilenamePrefix = new String[] {"cloth", "chain", "iron", "diamond", "gold"};
-	public static float NAME_TAG_RANGE = 64.0f;
-	public static float NAME_TAG_RANGE_SNEAK = 32.0f;
+
 	ModelRenderer plume;
 	ModelRenderer plume2;
 	ModelRenderer HornR1;
 	ModelRenderer HornL1;
 	ModelRenderer HornR2;
 	ModelRenderer HornL2;
-	
+
 	RenderLargeItem standBlockRenderer = new RenderLargeItem();
 
 	public RenderEntityStand()
@@ -92,42 +89,42 @@ public class RenderEntityStand extends RenderBiped
 	}
 
 	@Override
-	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
+	protected int shouldRenderPass(EntityLivingBase entity, int pass, float delta)
 	{
-		return this.setArmorModelTFC((EntityStand)par1EntityLivingBase, par2, par3);
+		return this.setArmorModelTFC((EntityStand)entity, pass, delta);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityLiving par1EntityLiving)
+	protected ResourceLocation getEntityTexture(EntityLiving entity)
 	{
 		return Texture;
 	}
 
 	@Override
-	public void doRender(EntityLivingBase e, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_){
+	public void doRender(Entity e, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_){
 		float rotation = e instanceof EntityStand? ((EntityStand)e).getRotation() : 0;
 		GL11.glPushMatrix();
-		
+
 		super.doRender(e, p_76986_2_, p_76986_4_, p_76986_6_, rotation, 0);
 		GL11.glPopMatrix();
 	}
-	
+
 	@Override
 	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
-    {
+	{
 		super.rotateCorpse(par1EntityLivingBase, par2, par3, par4);
-    }
-	
+	}
+
 	@Override
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+	protected void preRenderCallback(EntityLivingBase entity, float par2)
 	{
 		GL11.glScalef(1f, 0.95f, 1f);
-		GL11.glRotatef((par1EntityLivingBase instanceof EntityStand? ((EntityStand)par1EntityLivingBase).getRotation():0), 0, 1, 0);
+		//GL11.glRotatef(entity.rotationYaw, 0, 1, 0);
 		int l = 0;
-		if(par1EntityLivingBase instanceof EntityStand){
-			l=((EntityStand)par1EntityLivingBase).woodType;
+		if(entity instanceof EntityStand){
+			l=((EntityStand)entity).woodType;
 		}
-		standBlockRenderer.render(par1EntityLivingBase, new ItemStack(TFCBlocks.ArmourStand,1,l));
+		standBlockRenderer.render(entity, new ItemStack(TFCBlocks.ArmourStand,1,l));
 	}
 
 	protected int setArmorModelTFC(EntityStand stand, int par2, float par3)
@@ -188,89 +185,5 @@ public class RenderEntityStand extends RenderBiped
 		return -1;
 	}
 
-
-	/*@Override
-	protected void func_98191_a(EntityPlayer par1EntityPlayer)
-    {
-        this.loadDownloadableImageTexture(par1EntityPlayer.skinUrl, par1EntityPlayer.getTexture());
-    }*
-
-    /**
-	 * Set the specified armor model as the player model. Args: player, armorSlot, partialTick
-	 */
-	/* @Override
-	protected int setArmorModel(EntityPlayer par1EntityPlayer, int par2, float par3)
-    {
-        ItemStack itemstack = par1EntityPlayer.inventory.armorItemInSlot(3 - par2);
-        RenderPlayerTFC.armorFilenamePrefix = RenderPlayer.armorFilenamePrefix;
-
-        if (itemstack != null)
-        {
-            Item item = itemstack.getItem();
-
-            if (item instanceof ItemArmor)
-            {
-                ItemArmor itemarmor = (ItemArmor)item;
-                this.loadTexture(ForgeHooksClient.getArmorTexture(par1EntityPlayer, itemstack, "/armor/" + armorFilenamePrefix[itemarmor.renderIndex] + "_" + (par2 == 2 ? 2 : 1) + ".png"));
-                ModelBiped modelbiped = par2 == 2 ? this.modelArmor : this.modelArmorChestplate;
-                modelbiped.bipedHead.showModel = par2 == 0;
-                plume.showModel = false;//(itemstack.getItem() == TFCItems.BronzeHelmet);
-                plume2.showModel = false;//(itemstack.getItem() == TFCItems.BronzeHelmet);
-                HornR1.showModel = false;//(itemstack.getItem() == TFCItems.WroughtIronHelmet);
-                HornL1.showModel = false;//(itemstack.getItem() == TFCItems.WroughtIronHelmet);
-                modelbiped.bipedHeadwear.showModel = par2 == 0 && (itemstack.getItem() != TFCItems.BronzeHelmet&&itemstack.getItem() != TFCItems.WroughtIronHelmet);
-                modelbiped.bipedBody.showModel = par2 == 1 || par2 == 2;
-                modelbiped.bipedRightArm.showModel = par2 == 1;
-                modelbiped.bipedLeftArm.showModel = par2 == 1;
-                modelbiped.bipedRightLeg.showModel = par2 == 2 || par2 == 3;
-                modelbiped.bipedLeftLeg.showModel = par2 == 2 || par2 == 3;
-                this.setRenderPassModel(modelbiped);
-
-                if (modelbiped != null)
-                {
-                    modelbiped.onGround = this.mainModel.onGround;
-                }
-
-                if (modelbiped != null)
-                {
-                    modelbiped.isRiding = this.mainModel.isRiding;
-                }
-
-                if (modelbiped != null)
-                {
-                    modelbiped.isChild = this.mainModel.isChild;
-                }
-
-                float f1 = 1.0F;
-
-                if (itemarmor.getArmorMaterial() == EnumArmorMaterial.CLOTH)
-                {
-                    int j = itemarmor.getColor(itemstack);
-                    float f2 = (j >> 16 & 255) / 255.0F;
-                    float f3 = (j >> 8 & 255) / 255.0F;
-                    float f4 = (j & 255) / 255.0F;
-                    GL11.glColor3f(f1 * f2, f1 * f3, f1 * f4);
-
-                    if (itemstack.isItemEnchanted())
-                    {
-                        return 31;
-                    }
-
-                    return 16;
-                }
-
-                GL11.glColor3f(f1, f1, f1);
-
-                if (itemstack.isItemEnchanted())
-                {
-                    return 15;
-                }
-
-                return 1;
-            }
-        }
-
-        return -1;
-    }*/
 
 }

@@ -3,10 +3,6 @@ package com.bioxx.tfc.WorldGen;
 import java.util.List;
 import java.util.Random;
 
-import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
-import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
@@ -16,6 +12,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
+
+import com.bioxx.tfc.Chunkdata.ChunkData;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Entities.Mobs.EntityFishTFC;
 
 public final class SpawnerAnimalsTFC
 {
@@ -86,7 +86,7 @@ public final class SpawnerAnimalsTFC
 								continue;
 							}
 							if(entityliving instanceof EntityFishTFC){
-								if(entityliving.getRNG().nextInt((int)ChunkData.fishPopMax) > ChunkDataManager.getFishPop(j1 >> 4, k1 >> 4)){
+								if(entityliving.getRNG().nextInt((int)ChunkData.fishPopMax) > TFC_Core.getCDM(world).getFishPop(j1 >> 4, k1 >> 4)){
 									return;
 								}
 							}

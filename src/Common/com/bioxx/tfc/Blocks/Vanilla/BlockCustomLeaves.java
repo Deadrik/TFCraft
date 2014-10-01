@@ -24,8 +24,10 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Items.Tools.ItemCustomScythe;
-import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Constant.Global;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCustomLeaves extends BlockLeaves implements IShearable
 {
@@ -77,9 +79,14 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	public boolean shouldSideBeRendered(IBlockAccess bAccess, int x, int y, int z, int side)
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
-		return TFCOptions.enableInnerGrassFix;
+		Block block = world.getBlock(x, y, z);
+		/*if(!Minecraft.isFancyGraphicsEnabled() && block == this) 
+			return false;*/
+
+		return side == 0 && this.minY > 0.0D ? true : (side == 1 && this.maxY < 1.0D ? true : (side == 2 && this.minZ > 0.0D ? true : (side == 3 && this.maxZ < 1.0D ? true : (side == 4 && this.minX > 0.0D ? true : (side == 5 && this.maxX < 1.0D ? true : !world.getBlock(x, y, z).isOpaqueCube())))));
 	}
 
 	@Override
@@ -254,7 +261,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 			else if (world.rand.nextInt(100) < 6)
 				dropSapling(world, i, j, k, meta);;
 
-			super.harvestBlock(world, entityplayer, i, j, k, meta);
+				super.harvestBlock(world, entityplayer, i, j, k, meta);
 		}
 	}
 

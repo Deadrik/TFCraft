@@ -51,34 +51,34 @@ public class BlockBed extends BlockDirectional
 	 * Called upon block activation (right click on the block.)
 	 */
 	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
 	{
-		if (par1World.isRemote)
+		if (world.isRemote)
 		{
 			return true;
 		}
 		else
 		{
-			int i1 = par1World.getBlockMetadata(par2, par3, par4);
+			int i1 = world.getBlockMetadata(x, y, z);
 
 			if (!isBlockHeadOfBed(i1))
 			{
 				int j1 = getDirection(i1);
-				par2 += footBlockToHeadBlockMap[j1][0];
-				par4 += footBlockToHeadBlockMap[j1][1];
+				x += footBlockToHeadBlockMap[j1][0];
+				z += footBlockToHeadBlockMap[j1][1];
 
-				if (par1World.getBlock(par2, par3, par4) != this)
+				if (world.getBlock(x, y, z) != this)
 					return true;
 
-				i1 = par1World.getBlockMetadata(par2, par3, par4);
+				i1 = world.getBlockMetadata(x, y, z);
 			}
 
-			if (par1World.provider.canRespawnHere() && par1World.getBiomeGenForCoords(par2, par4) != TFCBiome.hell)
+			if (world.provider.canRespawnHere() && world.getBiomeGenForCoords(x, z) != TFCBiome.hell)
 			{
 				if (isBedOccupied(i1))
 				{
 					EntityPlayer entityplayer1 = null;
-					Iterator iterator = par1World.playerEntities.iterator();
+					Iterator iterator = world.playerEntities.iterator();
 
 					while (iterator.hasNext())
 					{
@@ -88,7 +88,7 @@ public class BlockBed extends BlockDirectional
 						{
 							ChunkCoordinates chunkcoordinates = entityplayer2.playerLocation;
 
-							if (chunkcoordinates.posX == par2 && chunkcoordinates.posY == par3 && chunkcoordinates.posZ == par4)
+							if (chunkcoordinates.posX == x && chunkcoordinates.posY == y && chunkcoordinates.posZ == z)
 							{
 								entityplayer1 = entityplayer2;
 							}
@@ -97,50 +97,50 @@ public class BlockBed extends BlockDirectional
 
 					if (entityplayer1 != null)
 					{
-						par5EntityPlayer.addChatMessage(new ChatComponentText("tile.bed.occupied.name"));
+						player.addChatMessage(new ChatComponentText("tile.bed.occupied"));
 						return true;
 					}
 
-					setBedOccupied(par1World, par2, par3, par4, false);
+					setBedOccupied(world, x, y, z, false);
 				}
 
-				EnumStatus enumstatus = par5EntityPlayer.sleepInBedAt(par2, par3, par4);
+				EnumStatus enumstatus = player.sleepInBedAt(x, y, z);
 
 				if (enumstatus == EnumStatus.OK)
 				{
-					par5EntityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tile.customBed.sleep.name")));
-					setBedOccupied(par1World, par2, par3, par4, true);
+					player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tile.customBed.sleep")));
+					setBedOccupied(world, x, y, z, true);
 					return true;
 				}
 				else
 				{
 					if (enumstatus == EnumStatus.NOT_POSSIBLE_NOW)
-						par5EntityPlayer.addChatMessage(new ChatComponentText("tile.bed.noSleep.name"));
+						player.addChatMessage(new ChatComponentText("tile.bed.noSleep"));
 					else if (enumstatus == EnumStatus.NOT_SAFE)
-						par5EntityPlayer.addChatMessage(new ChatComponentText("tile.bed.notSafe.name"));
+						player.addChatMessage(new ChatComponentText("tile.bed.notSafe"));
 
 					return true;
 				}
 			}
 			else
 			{
-				double d0 = par2 + 0.5D;
-				double d1 = par3 + 0.5D;
-				double d2 = par4 + 0.5D;
-				par1World.setBlockToAir(par2, par3, par4);
+				double d0 = x + 0.5D;
+				double d1 = y + 0.5D;
+				double d2 = z + 0.5D;
+				world.setBlockToAir(x, y, z);
 				int k1 = getDirection(i1);
-				par2 += footBlockToHeadBlockMap[k1][0];
-				par4 += footBlockToHeadBlockMap[k1][1];
+				x += footBlockToHeadBlockMap[k1][0];
+				z += footBlockToHeadBlockMap[k1][1];
 
-				if (par1World.getBlock(par2, par3, par4) == this)
+				if (world.getBlock(x, y, z) == this)
 				{
-					par1World.setBlockToAir(par2, par3, par4);
-					d0 = (d0 + par2 + 0.5D) / 2.0D;
-					d1 = (d1 + par3 + 0.5D) / 2.0D;
-					d2 = (d2 + par4 + 0.5D) / 2.0D;
+					world.setBlockToAir(x, y, z);
+					d0 = (d0 + x + 0.5D) / 2.0D;
+					d1 = (d1 + y + 0.5D) / 2.0D;
+					d2 = (d2 + z + 0.5D) / 2.0D;
 				}
 
-				par1World.newExplosion((Entity)null, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, 5.0F, true, true);
+				world.newExplosion((Entity)null, x + 0.5F, y + 0.5F, z + 0.5F, 5.0F, true, true);
 				return true;
 			}
 		}

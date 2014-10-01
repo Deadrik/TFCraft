@@ -7,7 +7,6 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 
 import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Containers.ContainerPlayerTFC;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
@@ -25,7 +24,7 @@ public class EntitySpawnHandler
 		int x = (int)entity.posX >> 4;
 		int z = (int)entity.posZ >> 4;
 
-		ChunkData data = ChunkDataManager.getData(x, z);
+		ChunkData data = TFC_Core.getCDM(event.world).getData(x, z);
 		if(!(data == null || data.getSpawnProtectionWithUpdate() <= 0))
 			event.setResult(Result.DENY);
 	}

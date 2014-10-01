@@ -1,14 +1,12 @@
 package com.bioxx.tfc.Core;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 import com.bioxx.tfc.WorldGen.DataLayer;
-import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.WorldGen.WorldCacheManager;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -16,7 +14,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFC_Climate
 {
-	public static HashMap<String, WorldCacheManager> worldPair = new HashMap<String, WorldCacheManager>();
+	public static HashMap<World, WorldCacheManager> worldPair = new HashMap<World, WorldCacheManager>();
 
 	private static final float[] zFactorCache = new float[30001];
 	private static final float[][] monthTempCache = new float[12][30001];
@@ -186,7 +184,7 @@ public class TFC_Climate
 			float zMod = getZFactor(z);
 			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
 
-			float rainMod = (1-((getRainfall(world, x, 144, z))/4000))*zMod;
+			float rainMod = (1-((getRainfall(world, x, Global.SEALEVEL, z))/4000))*zMod;
 
 			int _month = TFC_Time.getSeasonFromDayOfYear(day,z);
 			int _lastmonth = TFC_Time.getSeasonFromDayOfYear(day-TFC_Time.daysInMonth,z);
@@ -253,7 +251,7 @@ public class TFC_Climate
 			float zMod = getZFactor(z);
 			float zTemp = (zMod * getMaxTemperature())-20 + ((zMod - 0.5f)*10);
 
-			float rain = getRainfall(world, x, 144, z);
+			float rain = getRainfall(world, x, Global.SEALEVEL, z);
 			float rainMod = (1-(rain/4000))*zMod;
 
 			int _season = TFC_Time.getSeasonFromDayOfYear(day,z);
@@ -366,9 +364,9 @@ public class TFC_Climate
 		//The equation looks rather complicated, but you can see it here:
 		// http://www.wolframalpha.com/input/?i=%28%28%28x%5E2+%2F+677.966%29+*+%280.5%29*%28%28%28110+-+x%29+%2B+%7C110+-+x%7C%29%2F%28110+-
 		// +x%29%29%29+%2B+%28%280.5%29*%28%28%28x+-+110%29+%2B+%7Cx+-+110%7C%29%2F%28x+-+110%29%29+*+x+*+0.16225%29%29+0+to+440
-		if(y > 144)
+		if(y > Global.SEALEVEL)
 		{
-			y-=144;
+			y-=Global.SEALEVEL;
 			y = Math.min(y, 440);
 			float ySq = y * y;
 			temp = temp - (ySq / 677.966f) * (((110 - y) + Math.abs(110 - y)) / (2 * (110.01f - y)));
@@ -501,62 +499,6 @@ public class TFC_Climate
 		return dl != null ? dl.floatdata1 : DataLayer.Rain_500.floatdata1;
 	}
 
-	public static float getTerrainAdjustedRainfall(World world, int x, int y, int z)
-	{
-		float rain = getRainfall(world, x, y, z);
-		ArrayList biomes = new ArrayList<TFCBiome>();
-		biomes.add(TFCBiome.river);
-		biomes.add(TFCBiome.ocean);
-		biomes.add(TFCBiome.swampland);
-
-		float rainModWest = 1;
-		float rainModNorth = 1;
-		float rainModSouth = 1;
-		float rainModEast = 1;
-
-		BiomeGenBase biome = null;
-		for(int i = 0; i < 8; i++)
-		{
-			biome = world.getBiomeGenForCoords(( x- 512) + (64 * i), z);
-			if(biome.biomeID == TFCBiome.Mountains.biomeID)
-				rainModWest = 1 - (i * 0.0625f);
-			else if(biome.biomeID == TFCBiome.ocean.biomeID)
-				rainModWest = 1 + (i * 0.125f);
-		}
-		for(int i = 0; i < 8; i++)
-		{
-			biome =  world.getBiomeGenForCoords(x, (z + 512) - (64 * i));
-			if(biome.biomeID == TFCBiome.Mountains.biomeID)
-				rainModSouth = 1 - (i * 0.0625f);
-			else if(biome.biomeID == TFCBiome.ocean.biomeID)
-				rainModSouth = 1 + (i * 0.125f);
-		}
-		for(int i = 0; i < 2; i++)
-		{
-			biome = world.getBiomeGenForCoords(x, (z - 128) + (64 * i));
-			if(biome.biomeID == TFCBiome.ocean.biomeID)
-				rainModNorth +=  0.35f;
-		}
-		for(int i = 0; i < 2; i++)
-		{
-			biome = world.getBiomeGenForCoords((x + 128) - (64 * i), z);
-			if(biome.biomeID == TFCBiome.ocean.biomeID)
-				rainModEast += 0.35f;
-		}
-
-		float addMoisture = 1;
-		for(int i = -2; i <= 2 && addMoisture == 1; i++)
-		{
-			for(int k = -2; k <= 2 && addMoisture == 1; k++)
-			{
-				biome = world.getBiomeGenForCoords(x + (i * 8), z + (k * 8));
-				if(biome.biomeID == TFCBiome.ocean.biomeID || biome.biomeID == TFCBiome.river.biomeID || biome.biomeID == TFCBiome.swampland.biomeID)
-					addMoisture = 2f;
-			}
-		}
-		return rain * ((rainModEast + rainModWest + rainModNorth + rainModSouth + addMoisture) / 5);
-	}
-
 	public static int getTreeLayer(World world,int x, int y, int z, int index)
 	{
 		return getCacheManager(world).getTreeLayerAt(x, z, index).data1;
@@ -588,23 +530,12 @@ public class TFC_Climate
 
 	public static WorldCacheManager getCacheManager(World world)
 	{
-		if(world.isRemote)
-			return worldPair.get(world.provider.dimensionId+"-Client");
-		else
-			return worldPair.get(world.provider.dimensionId+"-Server");
+		return worldPair.get(world);
 	}
 
 	public static void removeCacheManager(World world)
 	{
-		if(world.isRemote)
-		{
-			if(worldPair.containsKey(world.provider.dimensionId+"-Client"))
-				worldPair.remove(world.provider.dimensionId+"-Client");
-		}
-		else
-		{
-			if(worldPair.containsKey(world.provider.dimensionId+"-Server"))
-				worldPair.remove(world.provider.dimensionId+"-Server");
-		}
+		if(worldPair.containsKey(world))
+			worldPair.remove(world);
 	}
 }

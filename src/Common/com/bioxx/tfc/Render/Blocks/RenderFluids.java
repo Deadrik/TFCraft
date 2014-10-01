@@ -64,7 +64,13 @@ public class RenderFluids implements ISimpleBlockRenderingHandler
 				return 0.875F;
 			}
 		}
-		return !world.getBlock(x, y, z).getMaterial().isSolid() && world.getBlock(x, y - block.getDensityDir(), z) == block ? 1 : block.getQuantaPercentage(world, x, y, z) * 0.875F;
+		return !world.getBlock(x, y, z).getMaterial().isSolid() && world.getBlock(x, y - block.getDensityDir(), z) == block ? 1 : getQuantaPercentage(world, x, y, z, block)-0.0010000000474974513F;
+	}
+
+	public float getQuantaPercentage(IBlockAccess world, int x, int y, int z, BlockCustomLiquid block)
+	{
+		int quantaRemaining = block.getQuantaValue(world, x, y, z);
+		return quantaRemaining / 8.0f;
 	}
 
 	@Override

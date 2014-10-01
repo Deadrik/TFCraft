@@ -13,7 +13,6 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
@@ -55,8 +54,6 @@ public class EntityLivingHandler
 			if(oldMaxHealth != newMaxHealth)
 			{
 				player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(newMaxHealth);
-				/*if(diff > 0)
-					player.heal(diff);*/
 			}
 
 			if(!player.worldObj.isRemote)
@@ -119,7 +116,7 @@ public class EntityLivingHandler
 						{
 							int lastChunkX = (((int)Math.floor(player.posX)) >> 4);
 							int lastChunkZ = (((int)Math.floor(player.posZ)) >> 4);
-							ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFCOptions.protectionGain);
+							TFC_Core.getCDM(player.worldObj).addProtection(lastChunkX + i, lastChunkZ + k, TFCOptions.protectionGain);
 						}
 					}
 

@@ -9,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
@@ -17,6 +18,7 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,10 +29,8 @@ public class TFCProvider extends WorldProvider
 	protected void registerWorldChunkManager()
 	{
 		super.registerWorldChunkManager();
-		if(worldObj.isRemote)
-			TFC_Climate.worldPair.put(worldObj.provider.dimensionId+"-Client", new WorldCacheManager(worldObj));
-		else
-			TFC_Climate.worldPair.put(worldObj.provider.dimensionId+"-Server", new WorldCacheManager(worldObj));
+		TFC_Climate.worldPair.put(worldObj, new WorldCacheManager(worldObj));
+		TFC_Core.addCDM(worldObj);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class TFCProvider extends WorldProvider
 	{
 		int y = worldObj.getTopSolidOrLiquidBlock(x, z)-1;
 		Block b = worldObj.getBlock(x, y, z);
-		return y > 144 && y < 170 && (TFC_Core.isSand(b) || TFC_Core.isGrass(b));
+		return y > Global.SEALEVEL && y < 170 && (TFC_Core.isSand(b) || TFC_Core.isGrass(b));
 	}
 
 	@Override
@@ -59,25 +59,6 @@ public class TFCProvider extends WorldProvider
 	{
 		return 256.0F;
 	}
-
-	/*@Override
-	public TFCBiome getBiomeGenForCoords(int x, int z)
-	{
-		TFCBiome biome = TFCBiome.ocean;
-		try
-		{
-			biome = (TFCBiome) worldObj.getBiomeGenForCoordsBody(x, z);
-			if(canSnowAtTemp(x, 145, z))
-				biome.temperature = 0;
-			else
-				biome.temperature = 0.21f;
-}
-catch(Exception Ex)
-{
-	Ex.printStackTrace();
-}
-return biome;
-}*/
 
 	@Override
 	public ChunkCoordinates getSpawnPoint()
@@ -97,7 +78,7 @@ return biome;
 		ChunkPosition chunkCoord = null;
 		int xOffset = 0;
 		int xCoord = 0;
-		int yCoord = 145;
+		int yCoord = Global.SEALEVEL+1;
 		int zCoord = 10000;
 		int startingZ = 3000 + rand.nextInt(12000);
 
@@ -133,14 +114,18 @@ return biome;
 
 	private boolean isNextToShoreOrIce(int x, int y, int z)
 	{
-		if(worldObj.getBlock(x+1, y, z) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x+1, y, z)))
-			return true;
-		if(worldObj.getBlock(x-1, y, z) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x-1, y, z)))
-			return true;
-		if(worldObj.getBlock(x, y, z+1) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x, y, z+1)))
-			return true;
-		if(worldObj.getBlock(x, y, z-1) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x, y, z-1)))
-			return true;
+		if(worldObj.checkChunksExist(x+1, y, z, x+1, y, z))
+			if(worldObj.getBlock(x+1, y, z) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x+1, y, z)))
+				return true;
+		if(worldObj.checkChunksExist(x-1, y, z, x-1, y, z))
+			if(worldObj.getBlock(x-1, y, z) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x-1, y, z)))
+				return true;
+		if(worldObj.checkChunksExist(x, y, z+1, x, y, z+1))
+			if(worldObj.getBlock(x, y, z+1) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x, y, z+1)))
+				return true;
+		if(worldObj.checkChunksExist(x, y, z-1, x, y, z-1))
+			if(worldObj.getBlock(x, y, z-1) == TFCBlocks.Ice || TFC_Core.isGround(worldObj.getBlock(x, y, z-1)))
+				return true;
 		return false;
 	}
 
@@ -150,10 +135,11 @@ return biome;
 		Block id = worldObj.getBlock(x, y, z);
 		int meta = worldObj.getBlockMetadata(x, y, z);
 		float temp = TFC_Climate.getHeightAdjustedTemp(worldObj, x, y, z);
+		BiomeGenBase biome = worldObj.getBiomeGenForCoords(x, z);
 
-		if (temp <= 0)
+		if (temp <= 0 && biome != TFCBiome.DeepOcean)
 		{
-			if (worldObj.isAirBlock(x, y+1, z) && TFC_Core.isWater(id) && isNextToShoreOrIce(x,y,z))
+			if (worldObj.isAirBlock(x, y+1, z) && TFC_Core.isWater(id) && worldObj.rand.nextInt(4) == 0 && isNextToShoreOrIce(x,y,z))
 			{
 				Material mat = worldObj.getBlock(x, y, z).getMaterial();
 				boolean salty = TFC_Core.isSaltWaterIncludeIce(id, meta, mat);
@@ -163,11 +149,11 @@ return biome;
 
 				if((mat == Material.water || mat == Material.ice) && !salty)
 				{
-					if(id == TFCBlocks.FreshWater && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
+					if(id == TFCBlocks.FreshWaterStationary && meta == 0/* || id == TFCBlocks.FreshWaterFlowing.blockID*/)
 					{
 						worldObj.setBlock(x, y, z, TFCBlocks.Ice, 1, 2);
 					}
-					else if(id == TFCBlocks.SaltWater && meta == 0/* || id == Block.waterMoving.blockID*/)
+					else if(id == TFCBlocks.SaltWaterStationary && meta == 0/* || id == Block.waterMoving.blockID*/)
 					{
 						worldObj.setBlock(x, y, z, TFCBlocks.Ice, 0, 2);
 					}
@@ -203,11 +189,11 @@ return biome;
 
 						if((meta & 1) == 0)
 						{
-							worldObj.setBlock(x, y, z, TFCBlocks.SaltWater, 0, flag);
+							worldObj.setBlock(x, y, z, TFCBlocks.SaltWaterStationary, 0, flag);
 						}
 						else if((meta & 1) == 1)
 						{
-							worldObj.setBlock(x, y, z, TFCBlocks.FreshWater, 0, flag);
+							worldObj.setBlock(x, y, z, TFCBlocks.FreshWaterStationary, 0, flag);
 						}
 					}
 				}
@@ -247,5 +233,85 @@ return biome;
 	{
 		return "DEFAULT";
 	}
+
+	/*@Override
+	public void updateWeather()
+	{
+		if (!worldObj.isRemote)
+		{
+			int thunderTime = worldObj.getWorldInfo().getThunderTime();
+
+			if (thunderTime <= 0)
+			{
+				if (worldObj.getWorldInfo().isThundering())
+				{
+					worldObj.getWorldInfo().setThunderTime(worldObj.rand.nextInt(12000) + 3600);
+				}
+				else
+				{
+					worldObj.getWorldInfo().setThunderTime(worldObj.rand.nextInt(168000) + 12000);
+				}
+			}
+			else
+			{
+				--thunderTime;
+				worldObj.getWorldInfo().setThunderTime(thunderTime);
+
+				if (thunderTime <= 0)
+				{
+					worldObj.getWorldInfo().setThundering(!worldObj.getWorldInfo().isThundering());
+				}
+			}
+
+			worldObj.prevThunderingStrength = worldObj.thunderingStrength;
+
+			if (worldObj.getWorldInfo().isThundering())
+			{
+				worldObj.thunderingStrength = (float)((double)worldObj.thunderingStrength + 0.01D);
+			}
+			else
+			{
+				worldObj.thunderingStrength = (float)((double)worldObj.thunderingStrength - 0.01D);
+			}
+
+			worldObj.thunderingStrength = MathHelper.clamp_float(worldObj.thunderingStrength, 0.0F, 1.0F);
+			int rainTime = worldObj.getWorldInfo().getRainTime();
+
+			if (rainTime <= 0)
+			{
+				if (worldObj.getWorldInfo().isRaining())
+				{
+					worldObj.getWorldInfo().setRainTime(worldObj.rand.nextInt(12000) + 12000);
+				}
+				else
+				{
+					worldObj.getWorldInfo().setRainTime(worldObj.rand.nextInt(168000) + 12000);
+				}
+			}
+			else
+			{
+				--rainTime;
+				worldObj.getWorldInfo().setRainTime(rainTime);
+
+				if (rainTime <= 0)
+				{
+					worldObj.getWorldInfo().setRaining(!worldObj.getWorldInfo().isRaining());
+				}
+			}
+
+			worldObj.prevRainingStrength = worldObj.rainingStrength;
+
+			if (worldObj.getWorldInfo().isRaining())
+			{
+				worldObj.rainingStrength = (float)((double)worldObj.rainingStrength + 0.01D);
+			}
+			else
+			{
+				worldObj.rainingStrength = (float)((double)worldObj.rainingStrength - 0.01D);
+			}
+
+			worldObj.rainingStrength = MathHelper.clamp_float(worldObj.rainingStrength, 0.0F, 1.0F);
+		}
+	}*/
 
 }

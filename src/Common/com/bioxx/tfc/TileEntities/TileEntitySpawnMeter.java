@@ -6,7 +6,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 
 public class TileEntitySpawnMeter extends TileEntity
@@ -25,7 +25,7 @@ public class TileEntitySpawnMeter extends TileEntity
 			if(timer < TFC_Time.getTotalTicks())
 			{
 				timer += TFC_Time.hourLength;
-				com.bioxx.tfc.Chunkdata.ChunkData cd = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
+				com.bioxx.tfc.Chunkdata.ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
 				if(cd != null)
 				{
 					int protection = cd.spawnProtection;

@@ -1,14 +1,20 @@
 package com.bioxx.tfc.TileEntities;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.AxisAlignedBB;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TEWorldItem extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[1];
+
+	public EntityItem renderItem;
 
 	public TEWorldItem()
 	{
@@ -33,6 +39,21 @@ public class TEWorldItem extends NetworkTileEntity implements IInventory
 			if(byte0 >= 0 && byte0 < storage.length)
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public double getMaxRenderDistanceSquared()
+	{
+		return 1024.0D;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord +1, yCoord + 0.1, zCoord + 1);
+		return bb;
 	}
 
 	@Override

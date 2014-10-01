@@ -130,7 +130,7 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 
 								if (var43 >= 0 && var43 < 256)
 								{
-									if (blockArray[index] == TFCBlocks.SaltWater ||  blockArray[index] == TFCBlocks.FreshWater)
+									if (blockArray[index] == TFCBlocks.SaltWaterStationary ||  blockArray[index] == TFCBlocks.FreshWaterStationary)
 										var58 = true;
 									if (var43 != var55 - 1 && var41 != var56 && var41 != var35 - 1 && var42 != var57 && var42 != var39 - 1)
 										var43 = var55;

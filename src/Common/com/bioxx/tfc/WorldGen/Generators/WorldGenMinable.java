@@ -13,7 +13,7 @@ import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEOre;
 
 // Referenced classes of package net.minecraft.src:
@@ -266,7 +266,7 @@ public class WorldGenMinable extends WorldGenerator
 						int localX = posX & 15;
 						int localZ = posZ & 15;
 
-						ChunkData data = ChunkDataManager.getData(posX >> 4, posZ >> 4);
+						ChunkData data = TFC_Core.getCDM(world).getData(posX >> 4, posZ >> 4);
 						int hm = data != null ? data.heightmap[localX + localZ * 16] : 0;
 						posY = Math.min(255, posY + hm);
 
@@ -297,7 +297,7 @@ public class WorldGenMinable extends WorldGenerator
 
 				int localX = posX & 15;
 				int localZ = posZ & 15;
-				ChunkData data = ChunkDataManager.getData(posX >> 4, posZ >> 4);
+				ChunkData data = TFC_Core.getCDM(world).getData(posX >> 4, posZ >> 4);
 				int hm = data != null ? data.heightmap[localX + localZ * 16] : 0;
 				posY = Math.min(255, posY + hm);
 
@@ -375,7 +375,7 @@ public class WorldGenMinable extends WorldGenerator
 								double var45 = (posZ + 0.5D - var24) / (var28 / 2.0D);
 								int localX = posX & 15;
 								int localZ = posZ & 15;
-								ChunkData data = ChunkDataManager.getData(posX >> 4, posZ >> 4);
+								ChunkData data = TFC_Core.getCDM(world).getData(posX >> 4, posZ >> 4);
 								int hm = data != null ? data.heightmap[localX + localZ * 16] : 0;
 								posY = Math.min(255, posY + hm);
 

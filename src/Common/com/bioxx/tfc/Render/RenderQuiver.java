@@ -1,18 +1,18 @@
 package com.bioxx.tfc.Render;
 
-import org.lwjgl.opengl.GL11;
-
-import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Items.ItemQuiver;
-import com.bioxx.tfc.Render.Models.ModelQuiver;
-import com.bioxx.tfc.api.Interfaces.IEquipable;
-
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Entities.Mobs.EntitySkeletonTFC;
+import com.bioxx.tfc.Items.ItemQuiver;
+import com.bioxx.tfc.Render.Models.ModelQuiver;
+import com.bioxx.tfc.api.Interfaces.IEquipable;
 
 public class RenderQuiver {
 
@@ -39,8 +39,10 @@ public class RenderQuiver {
 			if(item.getItem() instanceof IEquipable){
 				((IEquipable)(item.getItem())).onEquippedRender();
 			}
-
-			this.quiver.render(entity,(((ItemQuiver)item.getItem()).getQuiverArrows(item))/8);
+			if(entity instanceof EntitySkeletonTFC)
+				this.quiver.render(entity,16);
+			else
+				this.quiver.render(entity,(((ItemQuiver)item.getItem()).getQuiverArrows(item))/8);
 		}
 		GL11.glPopMatrix();
 	}

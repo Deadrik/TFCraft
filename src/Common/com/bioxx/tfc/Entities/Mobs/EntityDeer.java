@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -32,6 +33,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -49,18 +51,26 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	protected int pregnancyRequiredTime;
 	protected long timeOfConception;
 	protected float mateSizeMod;
-	public float size_mod = 1f;
-	public float strength_mod = 1;
-	public float aggression_mod = 1;
-	public float obedience_mod = 1;
-	public float colour_mod = 1;
-	public float climate_mod = 1;
-	public float hard_mod = 1;
+	public float size_mod;			//How large the animal is
+	public float strength_mod;		//how strong the animal is
+	public float aggression_mod = 1;//How aggressive / obstinate the animal is
+	public float obedience_mod = 1;	//How well the animal responds to commands.
+	public float colour_mod = 1;	//what the animal looks like
+	public float climate_mod = 1;	//climate adaptability
+	public float hard_mod = 1;		//hardiness
 	public boolean inLove;
 	public Vec3 attackedVec = null;
 	public Entity fearSource = null;
 
 	int degreeOfDiversion = 1;
+	
+	private int familiarity = 0;
+	private long lastFamiliarityUpdate = 0;
+	private boolean familiarizedToday = false;
+	
+	protected float avgAdultWeight = 95;			//The average weight of adult males in kg
+	protected float dimorphism = 0.1728f;		//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
+											//the square root of the ratio of female mass : male mass
 
 	public EntityDeer(World par1World)
 	{
@@ -68,11 +78,17 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
 		hunger = 168000;
 		pregnant = false;
-		pregnancyRequiredTime = 4 * TFC_Time.daysInMonth;
+		pregnancyRequiredTime = 7 * TFC_Time.daysInMonth;
 		timeOfConception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
-		size_mod = (((rand.nextInt (degreeOfDiversion + 1) * (rand.nextBoolean() ? 1 : -1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
+		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
+		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
+		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
+		obedience_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + (1f/aggression_mod)));
+		colour_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion+2)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
+		hard_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
+		climate_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + hard_mod));
 		running = false;
 
 		this.setSize(0.9F, 1.3F);
@@ -101,10 +117,39 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	public EntityDeer(World par1World, IAnimal mother,  ArrayList<Float> data)
 	{
 		this(par1World);
-		float father_size = data.get(0);
-		size_mod = (((rand.nextInt(4 + 1) * (rand.nextBoolean() ? 1 : - 1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size) / 1.9F);
-		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
+		float father_size = 1;
+		float father_str = 1;
+		float father_aggro = 1;
+		float father_obed = 1;
+		float father_col = 1;
+		float father_clim = 1;
+		float father_hard = 1;
+		for(int i = 0; i < data.size(); i++){
+			switch(i){
+			case 0:father_size = data.get(i);break;
+			case 1:father_str = data.get(i);break;
+			case 2:father_aggro = data.get(i);break;
+			case 3:father_obed = data.get(i);break;
+			case 4:father_col = data.get(i);break;
+			case 5:father_clim = data.get(i);break;
+			case 6:father_hard = data.get(i);break;
+			default:break;
+			}
+		}
+		this.posX = ((EntityLivingBase)mother).posX;
+		this.posY = ((EntityLivingBase)mother).posY;
+		this.posZ = ((EntityLivingBase)mother).posZ;
+		float invSizeRatio = 1f / (2 - dimorphism);
+		size_mod = (float)Math.sqrt(size_mod * size_mod * (float)Math.sqrt((mother.getSize() + father_size) * invSizeRatio));
+		strength_mod = (float)Math.sqrt(strength_mod * strength_mod * (float)Math.sqrt((mother.getStrength() + father_str) * 0.5F));
+		aggression_mod = (float)Math.sqrt(aggression_mod * aggression_mod * (float)Math.sqrt((mother.getAggression() + father_aggro) * 0.5F));
+		obedience_mod = (float)Math.sqrt(obedience_mod * obedience_mod * (float)Math.sqrt((mother.getObedience() + father_obed) * 0.5F));
+		colour_mod = (float)Math.sqrt(colour_mod * colour_mod * (float)Math.sqrt((mother.getColour() + father_col) * 0.5F));
+		hard_mod = (float)Math.sqrt(hard_mod * hard_mod * (float)Math.sqrt((mother.getHardiness() + father_hard) * 0.5F));
+		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
 
+		this.familiarity = (int) (mother.getFamiliarityPlayers()<90?mother.getFamiliarityPlayers()/2:mother.getFamiliarityPlayers()*0.9f);
+		
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
@@ -222,7 +267,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		{
 			//System.out.println(this.entityId+", Vec: "+attackedVec.xCoord+", "+attackedVec.yCoord+", "+attackedVec.zCoord);
 			Vec3 positionVec = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-			if(this.getFearSource() != null && this.getDistanceSqToEntity(this.getFearSource()) > 144)
+			if(this.getFearSource() != null && this.getDistanceSqToEntity(this.getFearSource()) > Global.SEALEVEL)
 			{
 				this.setFearSource(null);
 			}
@@ -441,7 +486,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public int getNumberOfDaysToAdult()
 	{
-		return TFC_Time.daysInMonth * 3;
+		return TFC_Time.daysInMonth * 24;
 	}
 
 	@Override
@@ -624,12 +669,12 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public void handleFamiliarityUpdate() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

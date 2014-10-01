@@ -1,21 +1,19 @@
 package com.bioxx.tfc.Entities.Mobs;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Entities.EntityFishHookTFC;
+import com.bioxx.tfc.api.Constant.Global;
 
 public class EntityFishTFC extends EntitySquid
 {
@@ -65,7 +63,7 @@ public class EntityFishTFC extends EntitySquid
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		return this.posY > 128.0D && this.posY < 145.0D && this.worldObj.checkNoEntityCollision(this.boundingBox);
+		return this.posY > Global.SEALEVEL-16 && this.posY <= Global.SEALEVEL && this.worldObj.checkNoEntityCollision(this.boundingBox);
 	}
 
 	@Override
@@ -90,6 +88,7 @@ public class EntityFishTFC extends EntitySquid
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
 	 * use this to react to sunlight and start to burn.
 	 */
+	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
@@ -327,11 +326,13 @@ public class EntityFishTFC extends EntitySquid
 	/**
 	 * Moves the entity based on the specified heading.  Args: strafe, forward
 	 */
+	@Override
 	public void moveEntityWithHeading(float par1, float par2)
 	{
 		this.moveEntity(this.motionX, this.motionY, this.motionZ);
 	}
 
+	@Override
 	protected void updateEntityActionState()
 	{
 		++this.entityAge;

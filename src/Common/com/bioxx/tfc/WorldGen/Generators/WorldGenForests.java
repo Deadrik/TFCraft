@@ -11,6 +11,7 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumTree;
 
 import cpw.mods.fml.common.IWorldGenerator;
@@ -42,7 +43,7 @@ public class WorldGenForests implements IWorldGenerator
 	private void generateForest(Random random, int chunkX, int chunkZ, World world)
 	{
 		int xCoord = chunkX;
-		int yCoord = 145;
+		int yCoord = Global.SEALEVEL+1;
 		int zCoord = chunkZ;
 
 		int numTreesBase = 8;
@@ -204,7 +205,7 @@ public class WorldGenForests implements IWorldGenerator
 	{
 		boolean completed = false;
 		int xCoord = chunkX;
-		int yCoord = 145;
+		int yCoord = Global.SEALEVEL+1;
 		int zCoord = chunkZ;
 		int numTreesBase = 5;
 
@@ -251,7 +252,7 @@ public class WorldGenForests implements IWorldGenerator
 			for (int var6 = 0; var6 < 50; ++var6)
 			{
 				int var7 = chunkX + random.nextInt(16);
-				int var8 = 145;
+				int var8 = Global.SEALEVEL+1;
 				int var9 = chunkZ + random.nextInt(16);
 				var5.generate(world, random, var7, var8, var9);
 			}

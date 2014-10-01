@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
 import com.bioxx.tfc.Chunkdata.ChunkData;
-import com.bioxx.tfc.Chunkdata.ChunkDataManager;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class GetSpawnProtectionCommand extends CommandBase{
 
@@ -29,7 +29,7 @@ public class GetSpawnProtectionCommand extends CommandBase{
 			int x = (int)var4.posX >> 4;
 			int z = (int)var4.posZ >> 4;
 
-			ChunkData d = ChunkDataManager.getData(x, z);
+			ChunkData d = TFC_Core.getCDM(var4.worldObj).getData(x, z);
 
 			if(d != null)
 				throw new PlayerNotFoundException("SP: " + d.getSpawnProtectionWithUpdate());

@@ -7,7 +7,8 @@ import net.minecraft.world.World;
 public class WeatherManager
 {
 	protected static final WeatherManager instance = new WeatherManager();
-	private static Random rand = new Random();
+	private Random rand = new Random();
+	private Random clientRand = new Random();
 	public static final WeatherManager getInstance()
 	{
 		return instance;
@@ -16,6 +17,13 @@ public class WeatherManager
 
 	public WeatherManager()
 	{
+	}
+
+	private Random getRandom(World world)
+	{
+		if(world.isRemote)
+			return clientRand;
+		return rand;
 	}
 
 	public float getDailyTemp()
@@ -48,5 +56,34 @@ public class WeatherManager
 		if(TFC_Climate.getHeightAdjustedTemp(world, x, y, z) <= 0)
 			return true;
 		return false;
+	}
+
+	public float getLocalFog(World world, int x, int y, int z)
+	{
+		if(world.isRemote)
+		{
+			int hour = TFC_Time.getHour();
+			if(hour >= 4 && hour < 9)
+			{
+				clientRand.setSeed(TFC_Time.getTotalDays());
+				float rain = TFC_Climate.getRainfall(world, x, y, z);
+				float strength = clientRand.nextFloat();
+				if(rain >= 500)
+				{
+					float mult = 1f;
+					if(9-hour < 2)
+						mult = 0.5f;
+					return strength*mult;//Makes the fog weaker as time goes on.
+				}
+			}
+		}
+		return 0;
+	}
+
+	public float getSnowStrength()
+	{
+		int hour = TFC_Time.getHour();
+		clientRand.setSeed(TFC_Time.getTotalDays()+hour);
+		return clientRand.nextFloat();
 	}
 }
