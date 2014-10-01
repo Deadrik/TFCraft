@@ -1,8 +1,10 @@
 package com.bioxx.tfc.Chunkdata;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.WorldGen.DataLayer;
 
 public class ChunkData 
 {
@@ -12,8 +14,13 @@ public class ChunkData
 	public long previousVisit;
 	public int spawnProtection;
 	public int[] heightmap;
+	public DataLayer[] rainfallMap;
+	public DataLayer[] rockMap1;
+	public DataLayer[] rockMap2;
+	public DataLayer[] rockMap3;
+
 	public int sluicedAmount = 0;
-	
+
 	public float fishPop = -1;
 	public static final float fishPopMax = 60;
 
@@ -23,6 +30,10 @@ public class ChunkData
 	public ChunkData()
 	{
 		heightmap = new int[256];
+		rainfallMap = new DataLayer[256];
+		rockMap1 = new DataLayer[256];
+		rockMap2 = new DataLayer[256];
+		rockMap3 = new DataLayer[256];
 	}
 
 	public ChunkData(NBTTagCompound tag)
@@ -46,7 +57,7 @@ public class ChunkData
 
 		lastSpringGen = tag.getInteger("lastSpringGen");
 		cropInfestation = tag.getInteger("cropInfestation");
-		
+
 		fishPop = Math.min(tag.getFloat("fishPopulation"),fishPopMax);
 	}
 
@@ -70,7 +81,7 @@ public class ChunkData
 		return tag;
 	}
 
-	public ChunkData CreateNew(int x, int z)
+	public ChunkData CreateNew(World world, int x, int z)
 	{
 		chunkX = x;
 		chunkZ = z;
@@ -119,5 +130,15 @@ public class ChunkData
 	public void uninfest()
 	{
 		Math.max(cropInfestation--, 0);
+	}
+
+	/**
+	 * Returns a cached rainfall value for this chunk. The cache is created client side when the chunk loads on the client.
+	 * @param x Chunk X
+	 * @param z Chunk Z
+	 */
+	public float getRainfall(int x, int z)
+	{
+		return rainfallMap[x*z].floatdata1;
 	}
 }

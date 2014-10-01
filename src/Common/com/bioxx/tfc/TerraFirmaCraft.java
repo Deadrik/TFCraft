@@ -53,8 +53,6 @@ import com.bioxx.tfc.WorldGen.TFCProviderHell;
 import com.bioxx.tfc.WorldGen.TFCWorldType;
 import com.bioxx.tfc.WorldGen.Generators.OreSpawnData;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenCaveDecor;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenFissure;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenFissureCluster;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenForests;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenLargeRock;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenLooseRocks;
@@ -144,9 +142,9 @@ public class TerraFirmaCraft
 		{
 			//Register Generators
 			//Underground Lava
-			GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.Lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
+			//GameRegistry.registerWorldGenerator(new WorldGenFissure(TFCBlocks.Lava, 2, true, 25).setUnderground(true, 20).setSeed(1), 0);
 			//Surface Hotsprings
-			GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
+			//GameRegistry.registerWorldGenerator(new WorldGenFissureCluster(), 1);
 			GameRegistry.registerWorldGenerator(new WorldGenOre(), 2);
 			GameRegistry.registerWorldGenerator(new WorldGenCaveDecor(), 3);
 			GameRegistry.registerWorldGenerator(new WorldGenForests(), 4);

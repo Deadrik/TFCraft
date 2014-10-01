@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.Chunkdata.ChunkData;
 import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.WorldCacheManager;
 import com.bioxx.tfc.api.Constant.Global;
@@ -453,8 +454,8 @@ public class TFC_Climate
 		float rainfall = getRainfall(world, x, y, z);
 		if(temperature > 5 && rainfall > 100)
 		{
-			float temp = (getTemp(world, x, z) + 35) / (getMaxTemperature() + 35);
-			float rain = (getRainfall(world, x, y, z) / 8000);
+			float temp = (temperature + 35) / (getMaxTemperature() + 35);
+			float rain = (rainfall / 8000);
 
 			double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
 			double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
@@ -477,7 +478,7 @@ public class TFC_Climate
 		if(rainfall > 100)
 		{
 			float temp = (getTemp(world, x, z)+35)/(getMaxTemperature()+35);
-			float rain = (TFC_Climate.getRainfall(world, x, y, z) / 8000);
+			float rain = (rainfall / 8000);
 
 			double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
 			double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
@@ -495,6 +496,13 @@ public class TFC_Climate
 
 	public static float getRainfall(World world, int x, int y, int z)
 	{
+		if(world.isRemote)
+		{
+			ChunkData cd = TFC_Core.getCDM(world).getData(x >> 4, z >> 4);
+			if(cd!= null)
+				return cd.getRainfall(x & 15, z & 15);
+		}
+
 		DataLayer dl = getCacheManager(world).getRainfallLayerAt(x, z);
 		return dl != null ? dl.floatdata1 : DataLayer.Rain_500.floatdata1;
 	}

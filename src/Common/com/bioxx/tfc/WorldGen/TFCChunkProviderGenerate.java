@@ -169,10 +169,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		riverRavineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 
 		Chunk chunk = new Chunk(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
-		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
+		ChunkData data = new ChunkData().CreateNew(worldObj, chunkX, chunkZ);
 		data.heightmap = heightMap;
+		data.rainfallMap = this.rainfallLayer;
+		data.rockMap1 = rockLayer1;
+		data.rockMap2 = rockLayer2;
+		data.rockMap3 = rockLayer3;
 		TFC_Core.getCDM(worldObj).addData(chunk, data);
-
 		chunk.generateSkylightMap();
 		return chunk;
 	}
@@ -810,47 +813,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		{
 			idsBig[indexBig] = rock3.block;
 			metaBig[indexBig] = (byte) rock3.data2;
-			if(height == TFCOptions.RockLayer3Height + heightMap[indexArray])
-			{
-				if(rand.nextBoolean())
-				{
-					idsBig[indexBig + 1] = rock3.block;
-					metaBig[indexBig + 1] = (byte) rock3.data2;
-					if(rand.nextBoolean())
-					{
-						idsBig[indexBig + 2] = rock3.block;
-						metaBig[indexBig + 2] = (byte) rock3.data2;
-						if(rand.nextBoolean())
-						{
-							idsBig[indexBig + 3] = rock3.block;
-							metaBig[indexBig + 3] = (byte) rock3.data2;
-						}
-					}
-				}
-			}
 		}
 		else if(height <= TFCOptions.RockLayer2Height + heightMap[indexArray] && height > 55+heightMap[indexArray] && rock2!=null)
 		{
 			idsBig[indexBig] = rock2.block; 
 			metaBig[indexBig] = (byte) rock2.data2;
-			if(height == TFCOptions.RockLayer2Height + heightMap[indexArray])
-			{
-				if(rand.nextBoolean())
-				{
-					idsBig[indexBig + 1] = rock2.block;
-					metaBig[indexBig + 1] = (byte) rock2.data2;
-					if(rand.nextBoolean())
-					{
-						idsBig[indexBig + 2] = rock2.block; 
-						metaBig[indexBig + 2] = (byte) rock2.data2;
-						if(rand.nextBoolean())
-						{
-							idsBig[indexBig + 3] = rock2.block; 
-							metaBig[indexBig + 3] = (byte) rock2.data2;
-						}
-					}
-				}
-			}
 		}
 		else
 		{

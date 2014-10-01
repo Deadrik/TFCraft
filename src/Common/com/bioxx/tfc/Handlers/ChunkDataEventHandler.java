@@ -25,16 +25,12 @@ public class ChunkDataEventHandler
 			}
 			else
 			{
+				if(TFC_Core.getCDM(event.world).hasData(event.getChunk()))
+					return;
 				NBTTagCompound levelTag = eventTag.getCompoundTag("Level");
-				ChunkData data = new ChunkData().CreateNew(levelTag.getInteger("xPos"), levelTag.getInteger("zPos"));
+				ChunkData data = new ChunkData().CreateNew(event.world, levelTag.getInteger("xPos"), levelTag.getInteger("zPos"));
 				TFC_Core.getCDM(event.world).addData(event.getChunk(), data);
 			}
-		}
-		else
-		{
-			NBTTagCompound levelTag = event.getData().getCompoundTag("Level");
-			ChunkData data = new ChunkData().CreateNew(levelTag.getInteger("xPos"), levelTag.getInteger("zPos"));
-			TFC_Core.getCDM(event.world).addData(event.getChunk(), data);
 		}
 	}
 
