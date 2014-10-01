@@ -30,9 +30,9 @@ public class TFCProvider extends WorldProvider
 	{
 		super.registerWorldChunkManager();
 		if(worldObj.isRemote)
-			TFC_Climate.worldPair.put(worldObj.provider.dimensionId+"-Client", new WorldCacheManager(worldObj));
+			TFC_Climate.worldPair.put(worldObj, new WorldCacheManager(worldObj));
 		else
-			TFC_Climate.worldPair.put(worldObj.provider.dimensionId+"-Server", new WorldCacheManager(worldObj));
+			TFC_Climate.worldPair.put(worldObj, new WorldCacheManager(worldObj));
 	}
 
 	@Override

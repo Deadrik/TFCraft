@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFC_Climate
 {
-	public static HashMap<String, WorldCacheManager> worldPair = new HashMap<String, WorldCacheManager>();
+	public static HashMap<World, WorldCacheManager> worldPair = new HashMap<World, WorldCacheManager>();
 
 	private static final float[] zFactorCache = new float[30001];
 	private static final float[][] monthTempCache = new float[12][30001];
@@ -589,23 +589,12 @@ public class TFC_Climate
 
 	public static WorldCacheManager getCacheManager(World world)
 	{
-		if(world.isRemote)
-			return worldPair.get(world.provider.dimensionId+"-Client");
-		else
-			return worldPair.get(world.provider.dimensionId+"-Server");
+		return worldPair.get(world);
 	}
 
 	public static void removeCacheManager(World world)
 	{
-		if(world.isRemote)
-		{
-			if(worldPair.containsKey(world.provider.dimensionId+"-Client"))
-				worldPair.remove(world.provider.dimensionId+"-Client");
-		}
-		else
-		{
-			if(worldPair.containsKey(world.provider.dimensionId+"-Server"))
-				worldPair.remove(world.provider.dimensionId+"-Server");
-		}
+		if(worldPair.containsKey(world))
+			worldPair.remove(world);
 	}
 }
