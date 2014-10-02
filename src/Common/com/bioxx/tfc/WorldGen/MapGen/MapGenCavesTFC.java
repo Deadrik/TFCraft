@@ -168,6 +168,12 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 											}
 											if (TFC_Core.isSoil(idArray[index]) || TFC_Core.isRawStone(idArray[index]))
 											{
+												if(TFC_Core.isSoilOrGravel(idArray[index+1]))
+												{
+													for(int upCount = 1; TFC_Core.isSoilOrGravel(idArray[index+upCount]); upCount++)
+													{idArray[index+upCount] = Blocks.air;}
+												}
+
 												if (var50 < 10 && TFC_Climate.getStability(this.worldObj, (int)worldX, (int)worldZ) == 1)
 												{
 													idArray[index] = TFCBlocks.Lava;

@@ -5,12 +5,10 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -20,6 +18,7 @@ import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Entities.EntityFallingBlockTFC;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.TFCOptions;
@@ -58,9 +57,6 @@ public class BlockCollapsable extends BlockTerraContainer
 	public static boolean canFallBelow(World world, int x, int y, int z)
 	{
 		Block block = world.getBlock(x, y, z);
-		ArrayList l = (ArrayList) world.getEntitiesWithinAABB(EntityFallingBlock.class, AxisAlignedBB.getBoundingBox(x, y, z, x+1, y+1, z+1));
-		if(l.size() != 0)
-			return false;
 		if (world.isAirBlock(x, y, z))
 			return true;
 		if (block == Blocks.bedrock)
@@ -206,8 +202,8 @@ public class BlockCollapsable extends BlockTerraContainer
 			{
 				if(fallingBlock != null)
 				{
-					EntityFallingBlock ent = new EntityFallingBlock(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), fallingBlock, fallingBlockMeta+8);
-					ent.field_145812_b/*fallTime*/ = -5000;
+					EntityFallingBlockTFC ent = new EntityFallingBlockTFC(world, (double)(i + 0.5F), (double)(j + 0.5F), (double)(k + 0.5F), fallingBlock, fallingBlockMeta+8);
+					ent.aliveTimer/*fallTime*/ = -5000;
 					world.spawnEntityInWorld(ent);
 					Random R = new Random(i*j+k);
 					if(R.nextInt(100) > 90)

@@ -8,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -20,6 +19,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Entities.EntityFallingBlockTFC;
 import com.bioxx.tfc.Items.Tools.ItemHammer;
 import com.bioxx.tfc.api.Tools.IToolChisel;
 
@@ -141,7 +141,7 @@ public class BlockCobble extends BlockTerra
 				if (!world.isRemote)
 				{
 					//world.setBlockToAir(x, y, z);
-					EntityFallingBlock entityfallingblock = new EntityFallingBlock(world, (double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), this, meta);
+					EntityFallingBlockTFC entityfallingblock = new EntityFallingBlockTFC(world, (double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), this, meta);
 					//this.func_149829_a(entityfallingblock);
 					world.spawnEntityInWorld(entityfallingblock);
 					world.playSoundAtEntity(entityfallingblock, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (world.rand.nextFloat()/2));

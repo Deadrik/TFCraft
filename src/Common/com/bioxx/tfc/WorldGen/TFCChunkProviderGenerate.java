@@ -108,7 +108,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	 */
 	float[] parabolicField;
 
-	int[] heightMap = new int[256];
+	int[] seaLevelOffsetMap = new int[256];
+	int[] chunkHeightMap = new int[256];
 
 	WorldGenFissure fissureGen = new WorldGenFissure(TFCBlocks.FreshWater, 1, false, 10);
 	MapGenCavesTFC caveGen = new MapGenCavesTFC();
@@ -157,8 +158,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		evtLayer = TFC_Climate.getCacheManager(worldObj).loadEVTLayerGeneratorData(evtLayer, chunkX * 16, chunkZ * 16, 16, 16);
 		rainfallLayer = TFC_Climate.getCacheManager(worldObj).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
 		stabilityLayer = TFC_Climate.getCacheManager(worldObj).loadStabilityLayerGeneratorData(stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
-		drainageLayer = TFC_Climate.getCacheManager(worldObj).loadDrainageLayerGeneratorData(stabilityLayer, chunkX * 16, chunkZ * 16, 16, 16);
-		heightMap = new int[256];
+		drainageLayer = TFC_Climate.getCacheManager(worldObj).loadDrainageLayerGeneratorData(drainageLayer, chunkX * 16, chunkZ * 16, 16, 16);
+		seaLevelOffsetMap = new int[256];
 
 		replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
 		replaceBlocksForBiomeLow(chunkX, chunkZ, rand, idsBig, metaBig);
@@ -169,13 +170,24 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		riverRavineGen.generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 
 		Chunk chunk = new Chunk(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
+		byte[] abyte1 = chunk.getBiomeArray();
+
+		for (int x = 0; x < 16; ++x)
+		{
+			for (int z = 0; z < 16; ++z)
+			{
+				abyte1[x*z] = (byte)getBiome(x, z).biomeID;
+			}
+		}
+
 		ChunkData data = new ChunkData().CreateNew(worldObj, chunkX, chunkZ);
-		data.heightmap = heightMap;
+		data.heightmap = seaLevelOffsetMap;
 		data.rainfallMap = this.rainfallLayer;
 		data.rockMap1 = rockLayer1;
 		data.rockMap2 = rockLayer2;
 		data.rockMap3 = rockLayer3;
 		TFC_Core.getCDM(worldObj).addData(chunk, data);
+		//chunk.heightMap = chunkHeightMap;
 		chunk.generateSkylightMap();
 		return chunk;
 	}
@@ -217,7 +229,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			x = xCoord + this.rand.nextInt(16) + 8;
 			z = zCoord + this.rand.nextInt(16) + 8;
 			y = Global.SEALEVEL - rand.nextInt(45);
-			fissureGen.generate(this.worldObj, this.rand, x, y, z);
+			//fissureGen.generate(this.worldObj, this.rand, x, y, z);
 		}
 
 		biome.decorate(this.worldObj, this.rand, xCoord, zCoord);
@@ -583,12 +595,22 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							h = (height-16)/4;
 					}
 					if(idsBig[indexBig] == null)
+					{
 						idsBig[indexBig] = idsTop[index];
+						if(indexBig+1 < idsBig.length && TFC_Core.isSoilOrGravel(idsBig[indexBig+1]) && idsBig[indexBig] == Blocks.air)
+						{
+							for(int upCount = 1; TFC_Core.isSoilOrGravel(idsBig[indexBig+upCount]); upCount++)
+							{idsBig[indexBig+upCount] = Blocks.air;}
+						}
+					}
 
 					if (idsBig[indexBig] == Blocks.stone)
 					{
-						if(heightMap[arrayIndex] == 0 && height-16 >= 0)
-							heightMap[arrayIndex] = height-16;
+						if(seaLevelOffsetMap[arrayIndex] == 0 && height-16 >= 0)
+							seaLevelOffsetMap[arrayIndex] = height-16;
+
+						if(chunkHeightMap[arrayIndex] == 0)
+							chunkHeightMap[arrayIndex] = height+indexOffset;
 
 						convertStone(indexOffset+height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);
 
@@ -624,33 +646,33 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							int var12Temp = var12;
 							for(int counter = 1; counter < var12Temp / 3; counter++)
 							{
-								if(arrayIndexx >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexx])
+								if(arrayIndexx >= 0 && seaLevelOffsetMap[arrayIndex]-(3*counter) > seaLevelOffsetMap[arrayIndexx])
 								{
-									heightMap[arrayIndex]--;
+									seaLevelOffsetMap[arrayIndex]--;
 									var12--;
 									height--;
 									indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
 									index = ((arrayIndex) * 128 + height);
 								}
-								else if(arrayIndexX >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexX])
+								else if(arrayIndexX >= 0 && seaLevelOffsetMap[arrayIndex]-(3*counter) > seaLevelOffsetMap[arrayIndexX])
 								{
-									heightMap[arrayIndex]--;
+									seaLevelOffsetMap[arrayIndex]--;
 									var12--;
 									height--;
 									indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
 									index = ((arrayIndex) * 128 + height);
 								}
-								else if(arrayIndexz >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexz])
+								else if(arrayIndexz >= 0 && seaLevelOffsetMap[arrayIndex]-(3*counter) > seaLevelOffsetMap[arrayIndexz])
 								{
-									heightMap[arrayIndex]--;
+									seaLevelOffsetMap[arrayIndex]--;
 									var12--;
 									height--;
 									indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
 									index = ((arrayIndex) * 128 + height);
 								}
-								else if(arrayIndexZ >= 0 && heightMap[arrayIndex]-(3*counter) > heightMap[arrayIndexZ])
+								else if(arrayIndexZ >= 0 && seaLevelOffsetMap[arrayIndex]-(3*counter) > seaLevelOffsetMap[arrayIndexZ])
 								{
-									heightMap[arrayIndex]--;
+									seaLevelOffsetMap[arrayIndex]--;
 									var12--;
 									height--;
 									indexBig = ((arrayIndex) * worldHeight + height + indexOffset);
@@ -745,10 +767,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 	private void replaceBlocksForBiomeLow(int par1, int par2, Random rand, Block[] idsBig, byte[] metaBig)
 	{
-		int var5 = 63;
-		double var6 = 0.03125D;
-		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, par1 * 16, par2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
-
 		for (int xCoord = 0; xCoord < 16; ++xCoord)
 		{
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
@@ -761,24 +779,20 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				DataLayer stability = stabilityLayer[arrayIndexDL];
 				TFCBiome biome = (TFCBiome) getBiome(xCoord, zCoord);
 
-				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
-				int var13 = -1;
-				int top = 0;
-
 				for (int height = 127; height >= 0; --height)
 				{
 					int index = ((arrayIndex) * 128 + height);
 					int indexBig = ((arrayIndex) * 256 + height);
 					metaBig[indexBig] = 0;
 
-					if (height <= 1 + (heightMap[arrayIndex] / 3) + this.rand.nextInt(3))
+					if (height <= 1 + (seaLevelOffsetMap[arrayIndex] / 3) + this.rand.nextInt(3))
 					{
 						idsBig[indexBig] = Blocks.bedrock;
 					}
 					else if(idsBig[indexBig] == null)
 					{
 						convertStone(height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);
-						if(biome == TFCBiome.beach || biome == TFCBiome.ocean || biome == TFCBiome.DeepOcean)
+						if(TFC_Core.isBeachBiome(biome.biomeID) || TFC_Core.isOceanicBiome(biome.biomeID))
 						{
 							if(idsBig[indexBig+1] == TFCBlocks.SaltWaterStationary)
 							{
@@ -809,12 +823,12 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	{
 		if(idsBig[indexBig] != null && idsBig[indexBig] != Blocks.stone)
 			return;
-		if(height <= TFCOptions.RockLayer3Height + heightMap[indexArray])
+		if(height <= TFCOptions.RockLayer3Height + seaLevelOffsetMap[indexArray])
 		{
 			idsBig[indexBig] = rock3.block;
 			metaBig[indexBig] = (byte) rock3.data2;
 		}
-		else if(height <= TFCOptions.RockLayer2Height + heightMap[indexArray] && height > 55+heightMap[indexArray] && rock2!=null)
+		else if(height <= TFCOptions.RockLayer2Height + seaLevelOffsetMap[indexArray] && height > 55+seaLevelOffsetMap[indexArray] && rock2!=null)
 		{
 			idsBig[indexBig] = rock2.block; 
 			metaBig[indexBig] = (byte) rock2.data2;

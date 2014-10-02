@@ -493,6 +493,15 @@ public class TFC_Core
 				|| isPeat(block);
 	}
 
+	public static boolean isSoilOrGravel(Block block)
+	{
+		return isGrass(block)
+				|| isDirt(block)
+				|| isClay(block)
+				|| isPeat(block)
+				|| isGravel(block);
+	}
+
 	public static boolean isGravel(Block block)
 	{
 		return block == TFCBlocks.Gravel || block == TFCBlocks.Gravel2;
