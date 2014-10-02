@@ -1,14 +1,14 @@
 package com.bioxx.tfc.Items;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Blocks.Devices.BlockSluice;
-import com.bioxx.tfc.api.Enums.EnumSize;
-import com.bioxx.tfc.api.Enums.EnumWeight;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.Devices.BlockSluice;
+import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Enums.EnumWeight;
 
 public class ItemSluice extends ItemTerra
 {
@@ -43,15 +43,15 @@ public class ItemSluice extends ItemTerra
 			{
 				byte1 = 1;
 			}
-			if(r == 1)//-x
+			else if(r == 1)//-x
 			{
 				byte0 = -1;
 			}
-			if(r == 2)//-z
+			else if(r == 2)//-z
 			{
 				byte1 = -1;
 			}
-			if(r == 3)//+x
+			else if(r == 3)//+x
 			{
 				byte0 = 1;
 			}

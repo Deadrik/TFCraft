@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.TreeSet;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,6 +19,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
@@ -208,6 +209,8 @@ public class TESluice extends TileEntity implements IInventory
 	{
 		int meta = getBlockMetadata();
 		boolean isFoot = BlockSluice.isBlockFootOfBed(meta);
+		if(isFoot)
+			return;
 
 		/*********************************************************
 		 ********************* Server Only Begin
@@ -240,33 +243,30 @@ public class TESluice extends TileEntity implements IInventory
 				initialized = true;
 			}
 
-			// don't eat blocks on top of foot block, only the head block
-			if(!isFoot)
-			{
-				int[] dir = BlockSluice.headBlockToFootBlockMap[BlockSluice.getDirectionFromMetadata(meta)];
-				List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
-						xCoord, yCoord, zCoord,
-						xCoord + 1, yCoord + 1.1f, zCoord + 1));
+			int[] dir = BlockSluice.headBlockToFootBlockMap[BlockSluice.getDirectionFromMetadata(meta)];
+			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
+					xCoord, yCoord, zCoord,
+					xCoord + 1, yCoord + 1.1f, zCoord + 1));
 
-				for (Iterator iterator = list.iterator(); iterator.hasNext();)
+			for (Iterator iterator = list.iterator(); iterator.hasNext();)
+			{
+				EntityItem entity = (EntityItem)iterator.next();
+				Item item = entity.getEntityItem().getItem();
+				if(item == Item.getItemFromBlock(TFCBlocks.Gravel)|| item == Item.getItemFromBlock(TFCBlocks.Gravel2) || 
+						item == Item.getItemFromBlock(TFCBlocks.Sand) || item == Item.getItemFromBlock(TFCBlocks.Sand2))
 				{
-					EntityItem entity = (EntityItem)iterator.next();
-					Item item = entity.getEntityItem().getItem();
-					if(item == Item.getItemFromBlock(Blocks.gravel) || item == Item.getItemFromBlock(TFCBlocks.Sand) || item == Item.getItemFromBlock(TFCBlocks.Sand2))
+					int stackSize = entity.getEntityItem().stackSize;
+					int accept = (50 + 19 - soilAmount) / 20;
+					if (stackSize <= accept)
 					{
-						int stackSize = entity.getEntityItem().stackSize;
-						int accept = (50 + 19 - soilAmount) / 20;
-						if (stackSize <= accept)
-						{
-							soilAmount += 20 * stackSize;
-							entity.setDead();
-							if(soilAmount > 50)
-								soilAmount = 50;
-							if(item == Item.getItemFromBlock(Blocks.gravel))
-								soilType = 2;
-							else
-								soilType = 1;
-						}
+						soilAmount += 20 * stackSize;
+						entity.setDead();
+						if(soilAmount > 50)
+							soilAmount = 50;
+						if(item == Item.getItemFromBlock(TFCBlocks.Gravel)|| item == Item.getItemFromBlock(TFCBlocks.Gravel2))
+							soilType = 2;
+						else
+							soilType = 1;
 					}
 				}
 			}
@@ -444,43 +444,41 @@ public class TESluice extends TileEntity implements IInventory
 		///////////This is where we handle the water flow
 		////////////////////////////////////////////////////////
 		boolean isFlowing = (meta & 4) == 4;
-		if((meta & 3) == 0 && !isFoot)
+		ForgeDirection dir = getDir(meta & 3);
+		Block water = worldObj.getBlock(xCoord + dir.offsetX, yCoord + 1, zCoord + dir.offsetZ);
+		boolean isInputWater = TFC_Core.isWater(water);
+		boolean isOutputAir = worldObj.isAirBlock(xCoord + dir.getOpposite().offsetX * 2, yCoord - 1, zCoord + dir.getOpposite().offsetZ * 2);
+		boolean isOutputWater = TFC_Core.isWater(worldObj.getBlock(xCoord + dir.getOpposite().offsetX * 2, yCoord - 1, zCoord + dir.getOpposite().offsetZ * 2));
+		boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord + dir.offsetX, yCoord + 1, zCoord + dir.offsetZ) == 7;
+		int meta2 = worldObj.getBlockMetadata(xCoord + dir.getOpposite().offsetX, yCoord, zCoord + dir.getOpposite().offsetZ);
+		if(isInputWater && isWaterDepth7 && !isFlowing && (isOutputAir || isOutputWater))
 		{
-			boolean isInputWater = worldObj.getBlock(xCoord, yCoord + 1, zCoord - 1) == TFCBlocks.SaltWater;
-			boolean isOutputAir = worldObj.isAirBlock(xCoord, yCoord - 1, zCoord + 2);
-			boolean isOutputWater = worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == TFCBlocks.SaltWater || 
-					worldObj.getBlock(xCoord, yCoord - 1, zCoord + 2) == TFCBlocks.SaltWater;
-			boolean isWaterDepth7 = worldObj.getBlockMetadata(xCoord, yCoord + 1, zCoord - 1) == 7;
-			int meta2 = worldObj.getBlockMetadata(xCoord, yCoord, zCoord + 1);
-			if(isInputWater && isWaterDepth7 && !isFlowing && (isOutputAir || isOutputWater))
-			{
-				//set main block to water on
-				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 3);
+			//set main block to water on
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 3);
 
-				if((meta2 & 4) == 0)
-				{
-					//set second block to water on
-					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord + 1, meta2 + 4, 3);
-				}
-
-				//Set output water
-				worldObj.setBlock(xCoord, yCoord - 1, zCoord + 2, TFCBlocks.SaltWater);
-			}
-			if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater) && isFlowing)
+			if((worldObj.getBlockMetadata(xCoord + dir.getOpposite().offsetX, yCoord, zCoord + dir.getOpposite().offsetZ) & 4) == 0)
 			{
-				//set main block to water off
-				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4, 3);
-				if((meta2 & 4) != 0)
-				{
-					//set second block to water off
-					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord + 1, meta2 - 4, 3);
-				}
-				//Set output water
-				if(!isOutputAir && isOutputWater)
-					worldObj.setBlockToAir(xCoord, yCoord - 1, zCoord + 2);
+				//set second block to water on
+				worldObj.setBlockMetadataWithNotify(xCoord + dir.getOpposite().offsetX, yCoord, zCoord + dir.getOpposite().offsetZ, meta2 + 4, 3);
 			}
+
+			//Set output water
+			worldObj.setBlock(xCoord + dir.getOpposite().offsetX * 2, yCoord - 1, zCoord + dir.getOpposite().offsetZ * 2, water);
 		}
-		if((meta & 3) == 1 && !isFoot)
+		if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater) && isFlowing)
+		{
+			//set main block to water off
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4, 3);
+			if((meta2 & 4) != 0)
+			{
+				//set second block to water off
+				worldObj.setBlockMetadataWithNotify(xCoord + dir.getOpposite().offsetX, yCoord, zCoord + dir.getOpposite().offsetZ, meta2 - 4, 3);
+			}
+			//Set output water
+			if(!isOutputAir && isOutputWater)
+				worldObj.setBlockToAir(xCoord, yCoord - 1, zCoord + 2);
+		}
+		/*if((meta & 3) == 1)
 		{
 			boolean isInputWater = worldObj.getBlock(xCoord + 1, yCoord + 1, zCoord) == TFCBlocks.SaltWater;
 			boolean isOutputAir = worldObj.isAirBlock(xCoord - 2, yCoord - 1, zCoord);
@@ -516,7 +514,7 @@ public class TESluice extends TileEntity implements IInventory
 				}
 			}
 		}
-		if((meta & 3) == 2 && !isFoot)
+		if((meta & 3) == 2)
 		{
 			boolean isInputWater = worldObj.getBlock(xCoord, yCoord + 1, zCoord + 1) == TFCBlocks.SaltWater;
 			boolean isOutputAir = worldObj.isAirBlock(xCoord, yCoord - 1, zCoord - 2);
@@ -555,7 +553,7 @@ public class TESluice extends TileEntity implements IInventory
 				}
 			}
 		}
-		if((meta & 3) == 3 && !isFoot)
+		if((meta & 3) == 3)
 		{
 			boolean isInputWater = worldObj.getBlock(xCoord - 1, yCoord + 1, zCoord) == TFCBlocks.SaltWater;
 			boolean isOutputAir = worldObj.isAirBlock(xCoord+2, yCoord - 1, zCoord);
@@ -591,7 +589,29 @@ public class TESluice extends TileEntity implements IInventory
 					worldObj.setBlockToAir(xCoord + 2, yCoord - 1, zCoord);
 				}
 			}
+		}*/
+	}
+
+	private ForgeDirection getDir(int r)
+	{
+		if(r == 0)//+z
+		{
+			return ForgeDirection.NORTH;
 		}
+		else if(r == 1)//-x
+		{
+			return ForgeDirection.EAST;
+		}
+		else if(r == 2)//-z
+		{
+			return ForgeDirection.SOUTH;
+		}
+		else if(r == 3)//+x
+		{
+			return ForgeDirection.WEST;
+		}
+
+		return ForgeDirection.UNKNOWN;
 	}
 
 	@Override
