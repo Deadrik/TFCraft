@@ -1898,6 +1898,7 @@ item.Firestarter.name=Fire Starter
 
 item.Quern.name=Handstone
 item.Blueprint.name=Blueprint
+item.Nametag.name=Name Tag
 item.WoolYarn.name=Wool Yarn
 item.Wool.name=Wool
 item.WoolCloth.name=Wool Cloth
@@ -2202,6 +2203,7 @@ gui.plans.shears=Shears
 
 #== Misc GUI ==
 gui.Blueprint=Blueprint
+gui.Nametag=Nametag
 gui.fertilized=Fertilized
 gui.Inventory=Inventory
 gui.ClearSlot=Clear an output slot.

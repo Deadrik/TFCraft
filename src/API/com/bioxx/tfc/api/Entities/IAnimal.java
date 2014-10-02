@@ -108,6 +108,8 @@ public interface IAnimal
 
 	public int getAnimalTypeID();
 	
+	public boolean trySetName(String name);
+	
 	/**
 	 * Represents how familiar the animal is with players. This is used for most human interaction.
 	 * @return	familiarity

@@ -33,6 +33,7 @@ import com.bioxx.tfc.Items.ItemClay;
 import com.bioxx.tfc.Items.ItemCoal;
 import com.bioxx.tfc.Items.ItemCustomLeash;
 import com.bioxx.tfc.Items.ItemCustomMinecart;
+import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.Items.ItemCustomPotion;
 import com.bioxx.tfc.Items.ItemCustomSeeds;
 import com.bioxx.tfc.Items.ItemDyeCustom;
@@ -819,6 +820,7 @@ public class TFCItems
 	public static Item DoorAcacia;
 
 	public static Item Blueprint;
+	public static Item Nametag;
 	public static Item writabeBookTFC;
 	public static Item WoolYarn;
 	public static Item Wool;
@@ -1504,6 +1506,7 @@ public class TFCItems
 		CornWhiskey = new ItemAlcohol().setUnlocalizedName("CornWhiskey").setCreativeTab(TFCTabs.TFCFoods);
 
 		Blueprint = new ItemBlueprint();
+		Nametag = new ItemCustomNameTag();
 		writabeBookTFC = new ItemWritableBookTFC("Fix Me I'm Broken").setUnlocalizedName("book");
 		WoolYarn = new ItemYarn().setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
 		Wool = new ItemTerra().setUnlocalizedName("Wool").setCreativeTab(TFCTabs.TFCMaterials);
@@ -2554,6 +2557,7 @@ public class TFCItems
 		GameRegistry.registerItem(CornWhiskey, CornWhiskey.getUnlocalizedName());
 
 		GameRegistry.registerItem(Blueprint, Blueprint.getUnlocalizedName());
+		GameRegistry.registerItem(Nametag, Nametag.getUnlocalizedName());
 		GameRegistry.registerItem(writabeBookTFC, writabeBookTFC.getUnlocalizedName());
 		GameRegistry.registerItem(WoolYarn, WoolYarn.getUnlocalizedName());
 		GameRegistry.registerItem(Wool, Wool.getUnlocalizedName());

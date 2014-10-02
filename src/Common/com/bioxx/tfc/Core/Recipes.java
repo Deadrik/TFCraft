@@ -216,6 +216,7 @@ public class Recipes
 		//Markings & Blueprint
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCItems.Ink, 16, 0), new Object[] { "2", Character.valueOf('2'), "dyeBlack" }));
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Blueprint, 1), new Object[] { new ItemStack(TFCItems.Ink, 3, 32767), new ItemStack(Items.paper, 1) });
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Nametag, 1), new Object[] { new ItemStack(TFCItems.Ink, 3, 32767), new ItemStack(Items.paper, 1), "materialString" }));
 
 		//Stone Stuff
 		for (int j = 0; j < Global.STONE_IGIN.length; j++)

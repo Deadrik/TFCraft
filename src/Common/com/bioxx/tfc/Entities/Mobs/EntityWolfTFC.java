@@ -25,6 +25,7 @@ import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 import com.bioxx.tfc.api.Util.Helper;
@@ -597,6 +598,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			this.func_146082_f(player);
 			return true;
 		}
+		else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"))){
+				itemstack.stackSize--;
+			}
+			return true;
+		}
 		else
 		{		
 			boolean wasTamedBefore = this.isTamed();
@@ -701,5 +708,15 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		if(this.familiarity > 80 && this.getOwner() != null){
 			this.setTamed(true);
 		}
+	}
+	
+	@Override
+	public boolean trySetName(String name) {
+		if(this.familiarity > 40 && !this.hasCustomNameTag()){
+			this.setCustomNameTag(name);
+			return true;
+		}
+		this.playSound("mob.wolf.growl",  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
+		return false;
 	}
 }

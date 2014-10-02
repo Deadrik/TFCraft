@@ -31,6 +31,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAIFindNest;
+import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -57,7 +58,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	public long nextEgg;
 	public int EggTime = TFC_Time.dayLength;
 	
-	private int familiarity = 0;
+	protected int familiarity = 0;
 	private long lastFamiliarityUpdate = 0;
 	private boolean familiarizedToday = false;
 	
@@ -525,6 +526,13 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		{
 			player.inventory.addItemStackToInventory(new ItemStack(Items.feather, 1));
 		}
+		ItemStack itemstack = player.getHeldItem();
+		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"))){
+				itemstack.stackSize--;
+			}
+			return true;
+		}
 		return super.interact(player);
 	}
 
@@ -602,5 +610,15 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	public void familiarize(EntityPlayer ep) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public boolean trySetName(String name) {
+		if(this.familiarity > 40 && !this.hasCustomNameTag()){
+			this.setCustomNameTag(name);
+			return true;
+		}
+		this.playSound(this.getHurtSound(),  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
+		return false;
 	}
 }

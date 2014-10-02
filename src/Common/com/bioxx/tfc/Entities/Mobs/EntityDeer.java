@@ -33,6 +33,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAIAvoidEntityTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
+import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
@@ -353,18 +354,25 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer)
+	public boolean interact(EntityPlayer player)
 	{
 		if(!worldObj.isRemote)
 		{
 			//par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 			{
-				par1EntityPlayer.addChatMessage(new ChatComponentText("Pregnant"));
+				player.addChatMessage(new ChatComponentText("Pregnant"));
 			}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
-		return super.interact(par1EntityPlayer);
+		ItemStack itemstack = player.getHeldItem();
+		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"))){
+				itemstack.stackSize--;
+			}
+			return true;
+		}
+		return super.interact(player);
 	}
 
 	/**
@@ -676,5 +684,15 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	public void familiarize(EntityPlayer ep) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public boolean trySetName(String name) {
+		if(this.familiarity > 60 && !this.hasCustomNameTag()){
+			this.setCustomNameTag(name);
+			return true;
+		}
+		this.playSound(TFC_Sounds.DEERCRY,  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
+		return false;
 	}
 }

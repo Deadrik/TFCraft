@@ -34,6 +34,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
@@ -625,16 +626,23 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	}
 
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer)
+	public boolean interact(EntityPlayer player)
 	{
 		if(!worldObj.isRemote)
 		{
-			par1EntityPlayer.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
+			player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 			{
-				par1EntityPlayer.addChatMessage(new ChatComponentText("Pregnant"));
+				player.addChatMessage(new ChatComponentText("Pregnant"));
 			}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		}
+		ItemStack itemstack = player.getHeldItem();
+		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"))){
+				itemstack.stackSize--;
+			}
+			return true;
 		}
 		return true;
 	}
@@ -735,5 +743,15 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	public void familiarize(EntityPlayer ep) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean trySetName(String name) {
+		if(this.familiarity > 70 && !this.hasCustomNameTag()){
+			this.setCustomNameTag(name);
+			return true;
+		}
+		this.playSound((isChild()?TFC_Sounds.BEARCUBCRY:TFC_Sounds.BEARCRY),  6, (rand.nextFloat()/2F)+0.75F);
+		return false;
 	}
 }
