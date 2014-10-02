@@ -3,11 +3,12 @@ package com.bioxx.tfc.Blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -75,35 +76,27 @@ public class BlockWoodConstruct extends BlockTerraContainer implements ICustomCo
 		return false;
 	}
 
-	public void Eject(World world, int x, int y, int z)
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+
 		if(!world.isRemote && (TileEntityWoodConstruct)world.getTileEntity(x, y, z)!=null)
 		{
 			TileEntityWoodConstruct te = (TileEntityWoodConstruct)world.getTileEntity(x, y, z);
-			te.ejectContents();
-			world.setBlockToAir(x, y, z);
+			ret = te.getDrops();
 		}
-	}
-	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-	{
+		return ret;
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion ex)
+	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) 
 	{
-	}
-
-	@Override
-	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int par5)
-	{
-	}
-
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int metadata)
-	{
-		Eject(world,x,y,z);
-		super.breakBlock(world, x, y, z, block, metadata);
+		ArrayList<ItemStack> out = this.getDrops(world, x, y, z, meta, 0);
+		for(ItemStack is : out)
+		{
+			world.spawnEntityInWorld(new EntityItem(world, x+0.5, y+0.5, z+0.5, is));
+		}
 	}
 
 	@Override

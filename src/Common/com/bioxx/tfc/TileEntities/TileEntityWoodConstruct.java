@@ -1,5 +1,6 @@
 package com.bioxx.tfc.TileEntities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
 
@@ -73,6 +74,20 @@ public class TileEntityWoodConstruct extends NetworkTileEntity
 		}
 	}
 
+	public ArrayList<ItemStack> getDrops()
+	{
+		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+		for(int i = 0; i < 192; i++)
+		{
+			if(data.get(i))
+			{
+				ItemStack stack = new ItemStack(TFCItems.SinglePlank, 1, woodTypes[i]);
+				list.add(stack);
+			}
+		}
+		return list;
+	}
+
 	public static BitSet fromByteArray(byte[] bytes)
 	{
 		BitSet bits = new BitSet(192);
@@ -144,8 +159,8 @@ public class TileEntityWoodConstruct extends NetworkTileEntity
 
 
 
-//TODO
-/*
+	//TODO
+	/*
 	@Override
 	public void handleDataPacket(DataInputStream inStream) throws IOException 
 	{
@@ -202,5 +217,5 @@ public class TileEntityWoodConstruct extends NetworkTileEntity
 		}
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
-*/
+	 */
 }

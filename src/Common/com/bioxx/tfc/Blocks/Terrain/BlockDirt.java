@@ -157,6 +157,8 @@ public class BlockDirt extends BlockTerra
 		if (!world.isRemote)
 		{
 			int meta = world.getBlockMetadata(x, y, z);
+			if(BlockCollapsable.isNearSupport(world, x, y, z, 4, 0))
+				return;
 
 			boolean isBelowAir = world.isAirBlock(x, y - 1, z);
 			byte count = 0;

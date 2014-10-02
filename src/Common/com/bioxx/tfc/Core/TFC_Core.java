@@ -1310,4 +1310,25 @@ public class TFC_Core
 		}
 		return i1 == i2 && d1 == d2;
 	}
+
+	public static boolean setBlockWithDrops(World world, int x, int y, int z, Block b, int meta)
+	{
+		Block block = world.getBlock(x, y, z);
+
+		if (block.getMaterial() != Material.air)
+		{
+			int l = world.getBlockMetadata(x, y, z);
+			world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) + (l << 12));
+			block.dropBlockAsItem(world, x, y, z, l, 0);
+		}
+		return world.setBlock(x, y, z, b, meta, 3);
+	}
+
+	/**
+	 * This is a wrapper method for the vanilla world method with no MCP mapping
+	 */
+	public static boolean setBlockToAirWithDrops(World world, int x, int y, int z)
+	{
+		return world.func_147480_a(x, y, z, true);
+	}
 }

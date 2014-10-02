@@ -16,9 +16,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import com.bioxx.tfc.Core.TFC_Core;
+
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -51,7 +56,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 	public EntityFallingBlockTFC(World world, double x, double y, double z, Block b, int meta)
 	{
 		this(world);
-		this.shouldDropItem = true;
+		this.shouldDropItem = false;
 		this.maxDamage = 40;
 		this.damage = 2.0F;
 		this.block = b;
@@ -127,6 +132,15 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 
 				if (this.onGround)
 				{
+					if(!worldObj.isSideSolid(i, j-1, k, ForgeDirection.UP))
+					{
+						TFC_Core.setBlockToAirWithDrops(worldObj, i, j-1, k);
+						this.onGround = false;
+					}
+				}
+
+				if (this.onGround)
+				{
 					this.motionX *= 0.699999988079071D;
 					this.motionZ *= 0.699999988079071D;
 					this.motionY *= -0.5D;
@@ -136,12 +150,8 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 						this.setDead();
 
 
-						if (!this.field_145808_f && this.worldObj.canPlaceEntityOnSide(this.block, i, j, k, true, 1, (Entity)null, (ItemStack)null) && !BlockFalling.func_149831_e(this.worldObj, i, j - 1, k) && this.worldObj.setBlock(i, j, k, this.block, this.blockMeta, 3))
+						if (!this.field_145808_f && canPlaceEntityOnSide(worldObj, this.block, i, j, k, true, 1, (Entity)null, (ItemStack)null) && !BlockFalling.func_149831_e(this.worldObj, i, j - 1, k))
 						{
-							if (this.block instanceof BlockFalling)
-							{
-								((BlockFalling)this.block).func_149828_a(this.worldObj, i, j, k, this.blockMeta);
-							}
 
 							if (this.tileEntityData != null && this.block instanceof ITileEntityProvider)
 							{
@@ -186,6 +196,28 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 				}
 			}
 		}
+	}
+
+	public boolean canPlaceEntityOnSide(World world, Block fallingBlock, int x, int y, int z, boolean skipEntityCheck, int side, Entity thisEntity, ItemStack is)
+	{
+		Block block1 = world.getBlock(x, y, z);
+		AxisAlignedBB axisalignedbb = null;
+		if(!skipEntityCheck)
+		{
+			axisalignedbb = fallingBlock.getCollisionBoundingBoxFromPool(world, x, y, z);
+			if(!world.checkNoEntityCollision(axisalignedbb, thisEntity))//If we found an entity that blocks us
+				return false;
+		}
+
+		return (block1.getMaterial() == Material.circuits ? true : canReplace(world, x, y, z));
+	}
+
+	public boolean canReplace(World world, int x, int y, int z)
+	{
+		Block b = world.getBlock(x, y, z);
+		if(b == Blocks.air || !b.isOpaqueCube())
+			return TFC_Core.setBlockWithDrops(worldObj, x, y, z, getBlock(), blockMeta);
+		return false;
 	}
 
 	/**
