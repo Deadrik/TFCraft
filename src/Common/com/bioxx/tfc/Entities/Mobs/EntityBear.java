@@ -34,6 +34,8 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_MobData;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.Core.TFC_Time;
+import com.bioxx.tfc.Food.ItemFoodMeat;
+import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
@@ -161,7 +163,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		hard_mod = (float)Math.sqrt(hard_mod * hard_mod * (float)Math.sqrt((mother.getHardiness() + father_hard) * 0.5F));
 		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
 		
-		this.familiarity = (int) (mother.getFamiliarityPlayers()<90?mother.getFamiliarityPlayers()/2:mother.getFamiliarityPlayers()*0.9f);
+		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
@@ -381,7 +383,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			}
 		}
 
-
+		this.handleFamiliarityUpdate();
 
 		/*if (TFC_Time.getTotalTicks() == birthTime + 60 && this instanceof EntityBear && this.sex == 1&& rand.nextInt(10) == 0 && getGrowingAge() >= 0){
 			int i = rand.nextInt(3);
@@ -630,6 +632,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
+			if(player.isSneaking()){
+				this.familiarize(player);
+				return true;
+			}
 			player.addChatMessage(new ChatComponentText(getGender()==GenderEnum.FEMALE?"Female":"Male"));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
 			{
@@ -726,23 +732,53 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 
 
 	@Override
-	public int getFamiliarityPlayers() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getFamiliarity() {
+		return familiarity;
 	}
 
 
 	@Override
 	public void handleFamiliarityUpdate() {
-		// TODO Auto-generated method stub
-		
+		if(lastFamiliarityUpdate < TFC_Time.getTotalDays()){
+			if(familiarizedToday && familiarity < 100){
+				lastFamiliarityUpdate = TFC_Time.getTotalDays();
+				familiarizedToday = false;
+				float familiarityChange = (6 * obedience_mod / aggression_mod);
+				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
+					//Nothing
+				}
+				else if(this.isAdult()){
+					familiarity += familiarityChange;
+				}
+				else if(!this.isAdult()){
+					float ageMod = 2f/(1f + TFC_Core.getPercentGrown(this));
+					familiarity += ageMod * familiarityChange;
+					if(familiarity > 70){
+						obedience_mod *= 1.01f;
+					}
+				}
+			}
+			else if(familiarity < 30){
+				familiarity -= 2*(TFC_Time.getTotalDays() - lastFamiliarityUpdate);
+			}
+		}
+		if(familiarity > 100)familiarity = 100;
+		if(familiarity < 0)familiarity = 0;
 	}
 
 
 	@Override
 	public void familiarize(EntityPlayer ep) {
-		// TODO Auto-generated method stub
-		
+		ItemStack stack = ep.getHeldItem();
+		if(stack != null && stack.getItem().equals(TFCItems.fishRaw)){
+			if (!ep.capabilities.isCreativeMode)
+			{
+				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
+			}
+			familiarizedToday = true;
+			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
+			this.playLivingSound();
+		}
 	}
 
 	@Override

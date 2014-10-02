@@ -130,7 +130,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		hard_mod = (float)Math.sqrt(hard_mod * hard_mod * (float)Math.sqrt((mother.getHardiness() + father_hard) * 0.5F));
 		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
 		
-		this.familiarity = (int) (mother.getFamiliarityPlayers()<90?mother.getFamiliarityPlayers()/2:mother.getFamiliarityPlayers()*0.9f);
+		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
@@ -345,7 +345,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 				lastFamiliarityUpdate = TFC_Time.getTotalDays();
 				familiarizedToday = false;
 				float familiarityChange = (6 * obedience_mod / aggression_mod);
-				if(this.isAdult() && (familiarity > 30 || familiarity < 80)){
+				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
 					//Nothing
 				}
 				else if(this.isAdult() && familiarity >= 5){
@@ -694,7 +694,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		return -335;
 	}
 	@Override
-	public int getFamiliarityPlayers() {
+	public int getFamiliarity() {
 		return familiarity;
 	}
 	@Override
