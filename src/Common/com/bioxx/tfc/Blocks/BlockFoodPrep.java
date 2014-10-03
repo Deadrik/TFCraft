@@ -1,5 +1,7 @@
 package com.bioxx.tfc.Blocks;
 
+import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,6 +74,13 @@ public class BlockFoodPrep extends BlockTerraContainer
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
 		return new TEFoodPrep();
+	}
+
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		return ret;
 	}
 
 	@Override

@@ -497,11 +497,11 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 		{
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
-		else if(storage[0] == null && storage[1] == null && storage[2] == null && storage[3] == null && storage[4] == null && storage[5] == null 
+		/*else if(storage[0] == null && storage[1] == null && storage[2] == null && storage[3] == null && storage[4] == null && storage[5] == null 
 				&& storage[6] == null && storage[7] == null && storage[8] == null && storage[9] == null && storage[10] == null)
 		{
 			this.worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-		}
+		}*/
 	}
 
 	@Override
