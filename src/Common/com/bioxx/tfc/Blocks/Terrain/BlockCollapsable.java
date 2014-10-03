@@ -254,29 +254,38 @@ public class BlockCollapsable extends BlockTerraContainer
 		//If we are in a soft sedimentary rock layer then we increase the chance of a collapse by 10%
 		if(this == TFCBlocks.StoneSed)
 			finalCollapseRatio -= finalCollapseRatio * softModifier;
-		//If we are in what is considered to be a seismically active zone, then we increase the chance by 20%
-		if(biome.biomeName.contains("Seismic"))
-			finalCollapseRatio -= finalCollapseRatio * seismicModifier;
+
+		//We do a scan for supports. if we find one close by then we dont collapse.
+		/*for(int scanY = -2; scanY < 2; scanY++)
+		{
+			for(int scanX = -5; scanX < 6; scanX++)
+			{
+				for(int scanZ = -5; scanZ < 6; scanZ++)
+				{
+					Block b = world.getBlock(x+scanX, y+scanY, z+scanZ);
+					if(b == TFCBlocks.WoodSupportH || b == TFCBlocks.WoodSupportH2)
+						return;
+				}
+			}
+		}*/
 
 		//First we check the rng to see if a collapse is going to occur
 		if(world.rand.nextInt(finalCollapseRatio) == 0)
 		{
-			boolean found = false;
 			//Now we look for a suitable block nearby to act as the epicenter
-			for(int scanY = 2; scanY > -2 && !found; scanY--)
+			int counter = 0;
+			while(counter < 100)
 			{
-				for(int scanX = -1; scanX < 2 && !found; scanX++)
+				int scanX = -4 + world.rand.nextInt(8);
+				int scanY = -2 + world.rand.nextInt(4);
+				int scanZ = -4 + world.rand.nextInt(8);
+				if(world.getBlock(x+scanX, y+scanY, z+scanZ) instanceof BlockCollapsable && 
+						((BlockCollapsable)world.getBlock(x+scanX, y+scanY, z+scanZ)).tryToFall(world, x+scanX, y+scanY, z+scanZ, 0))
 				{
-					for(int scanZ = -1; scanZ < 2 && !found; scanZ++)
-					{
-						if(world.getBlock(x+scanX, y+scanY, z+scanZ) instanceof BlockCollapsable && 
-								((BlockCollapsable)world.getBlock(x+scanX, y+scanY, z+scanZ)).tryToFall(world, x+scanX, y+scanY, z+scanZ, 0))
-						{
-							found = true;
-							triggerCollapse(world, entityplayer, x+scanX, y+scanY, z+scanZ, meta);
-						}
-					}
+					triggerCollapse(world, entityplayer, x+scanX, y+scanY, z+scanZ, meta);
+					return;
 				}
+				counter++;
 			}
 		}
 	}

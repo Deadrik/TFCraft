@@ -48,6 +48,13 @@ public class BlockMetalSheet extends BlockTerraContainer implements ICustomColli
 	}
 
 	@Override
+	public float getBlockHardness(World world, int x, int y, int z)
+	{
+		//TODO: Make the block hardness depend on the panels in this block.
+		return this.blockHardness;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
 		return true;
