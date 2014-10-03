@@ -137,7 +137,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 			float temperature = TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, this.currentWorld.getHeightValue(xCoord, zCoord), zCoord);
 			float rainfall = TFC_Climate.getRainfall(currentWorld, xCoord, yCoord, zCoord);
-			if (temperature > 12 && rainfall < 125)
+			if (temperature > 20 && rainfall < 125)
 				new WorldGenCustomCactus().generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 
@@ -145,9 +145,9 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		{
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
+			yCoord = this.currentWorld.getPrecipitationHeight(xCoord, zCoord)-1;
 			if (TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, yCoord, zCoord) >= 7)
-				new WorldGenWaterPlants(TFCBlocks.WaterPlant,TFC_Climate.isSwamp(currentWorld, xCoord, yCoord, zCoord)).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+				new WorldGenWaterPlants(TFCBlocks.WaterPlant).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 	}
 
