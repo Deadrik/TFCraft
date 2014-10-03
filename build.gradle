@@ -60,6 +60,12 @@ sourceSets {
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     appendix = 'deobf'
+	
+	manifest.attributes(
+            'FMLCorePlugin': 'com.bioxx.tfc.TFCASMLoadingPlugin',
+			'FMLCorePluginContainsFMLMod': 'true',
+			'FMLAT': 'tfc_at.cfg'
+    )
 }
  //creates a jar containing only the src
 task sourceJar(type: Jar) {
@@ -94,4 +100,4 @@ jar {
 			'FMLCorePluginContainsFMLMod': 'true',
 			'FMLAT': 'tfc_at.cfg'
     )
-	}
+}
