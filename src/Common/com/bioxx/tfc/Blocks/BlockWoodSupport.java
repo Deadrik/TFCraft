@@ -60,16 +60,29 @@ public class BlockWoodSupport extends BlockTerra
 	public static ForgeDirection getSupportDirection(World world, int x, int y, int z)
 	{
 		int[] r = getSupportsInRangeDir(world, x, y, z, 5, false);
-		if(r[0] > r[1])
-			return ForgeDirection.NORTH;
-		if(r[1] > r[0])
-			return ForgeDirection.SOUTH;
-		if(r[3] > r[2])
-			return ForgeDirection.EAST;
 		if(r[2] > r[3])
+			return ForgeDirection.NORTH;
+		if(r[3] > r[2])
+			return ForgeDirection.SOUTH;
+		if(r[5] > r[4])
+			return ForgeDirection.EAST;
+		if(r[4] > r[5])
 			return ForgeDirection.WEST;
 
 		return ForgeDirection.UNKNOWN;
+	}
+
+	public static int getDistanceFromDirection(ForgeDirection dir, int[] dist)
+	{
+		switch(dir)
+		{
+		case NORTH: return dist[2];
+		case SOUTH: return dist[3];
+		case WEST: return dist[4];
+		case EAST: return dist[5];
+		default: return Integer.MAX_VALUE;
+		}
+
 	}
 
 	public static int[] getSupportsInRangeDir(World world, int x, int y, int z, int range, boolean checkConnection)
@@ -124,9 +137,9 @@ public class BlockWoodSupport extends BlockTerra
 			}
 		}
 		if(foundE && foundW)
-			return new int[]{0, 0, w, e};
+			return new int[]{0, 0, 0, 0, w, e};
 		if(foundS && foundN)
-			return new int[]{n, s, 0, 0};
+			return new int[]{0, 0, n, s, 0, 0};
 		return null;
 	}
 

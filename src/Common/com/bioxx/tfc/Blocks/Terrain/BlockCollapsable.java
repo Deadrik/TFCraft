@@ -237,11 +237,11 @@ public class BlockCollapsable extends BlockTerraContainer
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int meta)
+	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta)
 	{
 		float seismicModifier = 0.2f;
 		float softModifier = 0.1f;
-		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(i, k);
+		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(x, z);
 		int finalCollapseRatio = TFCOptions.initialCollapseRatio;
 
 		//Make sure that the player gets exhausted from harvesting this block since we override the vanilla method
@@ -263,15 +263,18 @@ public class BlockCollapsable extends BlockTerraContainer
 		{
 			boolean found = false;
 			//Now we look for a suitable block nearby to act as the epicenter
-			for(int x1 = -1; x1 < 2 && !found; x1++)
+			for(int scanY = 2; scanY > -2 && !found; scanY--)
 			{
-				for(int z1 = -1; z1 < 2 && !found; z1++)
+				for(int scanX = -1; scanX < 2 && !found; scanX++)
 				{
-					if(world.getBlock(i+x1, j, k+z1) instanceof BlockCollapsable && 
-							((BlockCollapsable)world.getBlock(i+x1, j, k+z1)).tryToFall(world, i+x1, j, k+z1, 0))
+					for(int scanZ = -1; scanZ < 2 && !found; scanZ++)
 					{
-						found = true;
-						triggerCollapse(world, entityplayer, i, j, k, meta);
+						if(world.getBlock(x+scanX, y+scanY, z+scanZ) instanceof BlockCollapsable && 
+								((BlockCollapsable)world.getBlock(x+scanX, y+scanY, z+scanZ)).tryToFall(world, x+scanX, y+scanY, z+scanZ, 0))
+						{
+							found = true;
+							triggerCollapse(world, entityplayer, x+scanX, y+scanY, z+scanZ, meta);
+						}
 					}
 				}
 			}
@@ -290,7 +293,7 @@ public class BlockCollapsable extends BlockTerraContainer
 	public void triggerCollapse(World world, EntityPlayer entityplayer, int i, int j, int k, int meta)
 	{
 		ArrayList<ByteCoord> collapseMap = getCollapseMap(world, i, j, k);
-		/*int height = 4;
+		int height = 4;
 		int range = 5 + world.rand.nextInt(30);
 		for(int y = -4; y <= 1; y++)
 		{
@@ -298,19 +301,19 @@ public class BlockCollapsable extends BlockTerraContainer
 			{
 				for(int z = -range; z <= range; z++)
 				{
-					//double distance = Math.sqrt(Math.pow(i-(i+x),2) + Math.pow(j-(j+y),2) + Math.pow(k-(k+z),2));
+					double distSqrd = Math.pow(i-(i+x),2) + Math.pow(j-(j+y),2) + Math.pow(k-(k+z),2);
 
-					if(world.rand.nextInt(100) < TFCOptions.propogateCollapseChance && distance < 35)
+					if(world.rand.nextInt(100) < TFCOptions.propogateCollapseChance && distSqrd < 1225)
 					{
-						if(Block.blocksList[world.getBlockId(i+x, j+y, k+z)] instanceof BlockCollapsable && 
-								((BlockCollapsable)Block.blocksList[world.getBlockId(i+x, j+y, k+z)]).tryToFall(world, i+x, j+y, k+z, world.getBlockMetadata( i+x, j+y, k+z)))
+						if(world.getBlock(i+x, j+y, k+z) instanceof BlockCollapsable && 
+								((BlockCollapsable)world.getBlock(i+x, j+y, k+z)).tryToFall(world, i+x, j+y, k+z, world.getBlockMetadata( i+x, j+y, k+z)))
 						{
 							int done = 0;
 							while(done < height)
 							{
 								done++;
-								if(Block.blocksList[world.getBlockId(i+x, j+y+done, k+z)] instanceof BlockCollapsable && world.rand.nextInt(100) < TFCOptions.propogateCollapseChance) {
-									((BlockCollapsable)Block.blocksList[world.getBlockId(i+x, j+y+done, k+z)]).tryToFall(world, i+x, j+y+done, k+z,world.getBlockMetadata( i+x, j+y+done, k+z));
+								if(world.getBlock(i+x, j+y, k+z) instanceof BlockCollapsable && world.rand.nextInt(100) < TFCOptions.propogateCollapseChance) {
+									((BlockCollapsable)world.getBlock(i+x, j+y, k+z)).tryToFall(world, i+x, j+y+done, k+z,world.getBlockMetadata( i+x, j+y+done, k+z));
 								} else {
 									done = height;
 								}
@@ -319,7 +322,7 @@ public class BlockCollapsable extends BlockTerraContainer
 					}
 				}
 			}
-		}*/
+		}
 	}
 
 	/**
