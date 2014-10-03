@@ -13,6 +13,12 @@ public interface IAnimal
 		MALE,FEMALE;
 		public static final GenderEnum[] genders = {MALE, FEMALE};
 	}
+	
+	public enum InteractionEnum
+	{
+		MOUNT,SHEAR,MILK,BREED, NAME;
+		public static final InteractionEnum[] interactions = {MOUNT,SHEAR,MILK,BREED, NAME};
+	}
 
 	public GenderEnum getGender();
 
@@ -108,7 +114,7 @@ public interface IAnimal
 
 	public int getAnimalTypeID();
 	
-	public boolean trySetName(String name);
+	public boolean trySetName(String name, EntityPlayer player);
 	
 	/**
 	 * Represents how familiar the animal is with players. This is used for most human interaction.
@@ -125,4 +131,6 @@ public interface IAnimal
 	 * @param ep
 	 */
 	public void familiarize(EntityPlayer ep);
+	
+	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player);
 }

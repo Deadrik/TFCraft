@@ -37,6 +37,7 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityDeer extends EntityAnimal implements IAnimal
@@ -63,6 +64,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	public boolean inLove;
 	public Vec3 attackedVec = null;
 	public Entity fearSource = null;
+	
+	private boolean wasRoped = false;
 
 	int degreeOfDiversion = 1;
 	
@@ -170,7 +173,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected boolean canDespawn()
 	{
-		return this.ticksExisted > 4000;
+		return this.ticksExisted > 10000 && !wasRoped;
 	}
 
 	@Override
@@ -241,6 +244,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 			setInLove(true);
 		}
 
+		if(this.getLeashed()&&!wasRoped)wasRoped = true;
+		
 		syncData();
 		if(isAdult())
 		{
@@ -374,7 +379,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		}
 		ItemStack itemstack = player.getHeldItem();
 		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"))){
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"), player)){
 				itemstack.stackSize--;
 			}
 			return true;
@@ -399,6 +404,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		nbt.setFloat ("Colour Modifier", colour_mod);
 		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
 		nbt.setFloat ("Hardiness Modifier", hard_mod);
+		
+		nbt.setBoolean("wasRoped", wasRoped);
 
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setBoolean("Pregnant", pregnant);
@@ -425,6 +432,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
 
+		wasRoped = nbt.getBoolean("wasRoped");
+		
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
@@ -678,7 +687,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public int getFamiliarity() {
 		// TODO Auto-generated method stub
-		return 0;
+		return familiarity;
 	}
 
 	@Override
@@ -719,6 +728,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 				stack.stackSize--;
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,stack);
 			}
+			worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
@@ -727,12 +738,29 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	}
 	
 	@Override
-	public boolean trySetName(String name) {
-		if(this.familiarity > 60 && !this.hasCustomNameTag()){
+	public boolean trySetName(String name, EntityPlayer player) {
+		if(this.checkFamiliarity(InteractionEnum.NAME, player) && !this.hasCustomNameTag()){
 			this.setCustomNameTag(name);
 			return true;
 		}
 		this.playSound(TFC_Sounds.DEERCRY,  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
 		return false;
+	}
+	
+	@Override
+	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
+		boolean flag = false;
+		switch(interaction){
+		case MOUNT: flag = familiarity > 15;break;
+		case BREED: flag = familiarity > 20;break;
+		case SHEAR: flag = familiarity > 10;break;
+		case MILK: flag = familiarity > 10;break;
+		case NAME: flag = familiarity > 60;break;
+		default: break;
+		}
+		if(!flag && !player.worldObj.isRemote){
+			player.addChatMessage(new ChatComponentText("The animal won't let you do that."));
+		}
+		return flag;
 	}
 }

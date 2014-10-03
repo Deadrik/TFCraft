@@ -219,9 +219,7 @@ public class BlockTFCFence extends BlockFence
 	{
 		if(!world.isRemote)
 		{
-			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemLead)
 				return ItemLead.func_150909_a(player, world, x, y, z);
-			else return false;
 		}
 		return true;
 	}
