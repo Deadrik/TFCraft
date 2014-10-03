@@ -50,6 +50,7 @@ public class BlockCrop extends BlockContainer
 	IIcon[] iconsSoybean = new IIcon[7];
 	IIcon[] iconsSquash = new IIcon[7];
 	IIcon[] iconsJute = new IIcon[6];
+	IIcon[] iconsSugarcane = new IIcon[8];
 
 	public IIcon iconInfest;
 
@@ -97,6 +98,7 @@ public class BlockCrop extends BlockContainer
 			iconsBarley[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Barley (" + i + ")");
 			iconsOat[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Oat (" + i + ")");
 			iconsRice[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Rice (" + i + ")");
+			iconsSugarcane[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Sugarcane (" + i + ")");
 		}
 
 		iconInfest = register.registerIcon(Reference.ModID + ":bugs");
@@ -158,6 +160,8 @@ public class BlockCrop extends BlockContainer
 			return iconsSquash[stage];
 		case 24://Jute
 			return iconsJute[stage];
+		case 25://Sugarcane
+			return iconsSugarcane[stage];
 		}
 		return iconsCorn[6];
 	}

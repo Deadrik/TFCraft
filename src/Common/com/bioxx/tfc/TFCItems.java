@@ -730,6 +730,7 @@ public class TFCItems
 	public static Item RedBellPepper;
 	public static Item Squash;
 	public static Item SeaWeed;
+	public static Item Sugar;
 
 	public static Item WheatGround;
 	public static Item BarleyGround;
@@ -1752,6 +1753,7 @@ public class TFCItems
 		RedBellPepper = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Red Bell Pepper");
 		Squash = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Squash");
 		SeaWeed = new ItemFoodTFC(EnumFoodGroup.Vegetable, 0, 0, 10, 10, 10, true).setUnlocalizedName("Sea Weed");
+		Sugar = new ItemFoodTFC(EnumFoodGroup.None, 30, 0, 0, 0, 0, true).setDecayRate(0.01f).setUnlocalizedName("Sugar");
 
 		//Fruit are in the foodID range of 50,000
 		RedApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 25, 5, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
@@ -1780,7 +1782,7 @@ public class TFCItems
 		Salad = new ItemSalad().setUnlocalizedName("Salad");
 		Soup = new ItemSoup().setUnlocalizedName("Soup");
 
-		Sugarcane = new ItemTerra().setFolder("plants/").setUnlocalizedName("Sugarcane");
+		Sugarcane = new ItemFoodTFC(EnumFoodGroup.None, 30, 0, 0, 0, 0, false, false).setDecayRate(0.75f).setFolder("plants/").setUnlocalizedName("Sugarcane");
 		Hemp = new ItemTerra().setFolder("plants/").setUnlocalizedName("Hemp");
 
 		SeedsWheat = new ItemCustomSeeds(0).setUnlocalizedName("Seeds Wheat");
@@ -1794,7 +1796,7 @@ public class TFCItems
 		SeedsCabbage = new ItemCustomSeeds(16).setUnlocalizedName("Seeds Cabbage");
 		SeedsGarlic = new ItemCustomSeeds(17).setUnlocalizedName("Seeds Garlic");
 		SeedsCarrot = new ItemCustomSeeds(18).setUnlocalizedName("Seeds Carrot");
-		SeedsSugarcane = new ItemCustomSeeds(21).setUnlocalizedName("Seeds Sugarcane");
+		SeedsSugarcane = new ItemCustomSeeds(25).setUnlocalizedName("Seeds Sugarcane");
 		SeedsHemp = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Hemp");
 		SeedsTomato = new ItemCustomSeeds(4).setUnlocalizedName("Seeds Tomato");
 		SeedsYellowBellPepper = new ItemCustomSeeds(19).setUnlocalizedName("Seeds Yellow Bell Pepper");
@@ -2871,6 +2873,8 @@ public class TFCItems
 		GameRegistry.registerItem(Sandwich, Sandwich.getUnlocalizedName());
 		GameRegistry.registerItem(Salad, Salad.getUnlocalizedName());
 		GameRegistry.registerItem(Soup, Soup.getUnlocalizedName());
+
+		GameRegistry.registerItem(Sugar, Sugar.getUnlocalizedName());
 
 		GameRegistry.registerItem(Shears, Shears.getUnlocalizedName());
 

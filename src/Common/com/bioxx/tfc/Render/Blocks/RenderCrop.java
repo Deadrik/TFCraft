@@ -127,6 +127,11 @@ public class RenderCrop
 			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.8, 2.0);
 			break;
 		}
+		case 25://Sugarcane
+		{
+			renderBlockCropsImpl(block, x, y, z, renderblocks, 1.0, 2.0);
+			break;
+		}
 		default:
 		{
 			renderblocks.renderBlockCrops(block, x, y, z);

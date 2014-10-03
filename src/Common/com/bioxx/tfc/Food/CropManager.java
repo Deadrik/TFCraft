@@ -78,5 +78,7 @@ public class CropManager
 		instance.addIndex(new CropIndex(/*ID*/23, /*Name*/"squash", /*type*/2, /*time*/33, /*stages*/6, /*minGTemp*/8, /*minATemp*/0, /*nutrientUsage*/0.9f, TFCItems.SeedsSquash).setOutput1(TFCItems.Squash, 16));
 
 		instance.addIndex(new CropIndexJute(/*ID*/24, /*Name*/"jute", /*type*/1, /*time*/28, /*stages*/5, /*minGTemp*/10, /*minATemp*/5, /*nutrientUsage*/1.0f, TFCItems.SeedsJute).setOutput1(TFCItems.Jute, 2));
+
+		instance.addIndex(new CropIndex(/*ID*/25, /*Name*/"sugarcane", /*type*/1, /*time*/96, /*stages*/7, /*minGTemp*/18, /*minATemp*/12, /*nutrientUsage*/0.25f, TFCItems.SeedsSugarcane).setOutput1(TFCItems.Sugarcane, 8));
 	}
 }
