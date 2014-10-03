@@ -608,6 +608,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerTickHandler()
 	{
+		super.registerTickHandler();
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 		FMLCommonHandler.instance().bus().register(new FMLClientEventHandler());
 	}
