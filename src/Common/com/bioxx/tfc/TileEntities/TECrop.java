@@ -50,7 +50,7 @@ public class TECrop extends NetworkTileEntity
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 			long time = TFC_Time.getTotalTicks();
 			ChunkData cd = TFC_Core.getCDM(worldObj).getData(xCoord >> 4, zCoord >> 4);
-			if(growthTimer < time && sunLevel > 0)
+			if(crop != null && growthTimer < time && sunLevel > 0)
 			{
 				sunLevel--;
 				if(crop.needsSunlight && hasSunlight(worldObj, xCoord, yCoord, zCoord))
@@ -174,14 +174,14 @@ public class TECrop extends NetworkTileEntity
 
 				growthTimer += (R.nextInt(2) + 23) * TFC_Time.hourLength;
 			}
-			else if(crop.needsSunlight && sunLevel <= 0)
+			else if(crop != null && crop.needsSunlight && sunLevel <= 0)
 			{
 				killCrop(crop);
 			}
 
 			if(worldObj.isRaining() && TFC_Climate.getHeightAdjustedTemp(worldObj, xCoord, yCoord, zCoord) < 0)
 			{
-				if(!crop.dormantInFrost || growth > 1)
+				if(crop != null && !crop.dormantInFrost || growth > 1)
 				{
 					killCrop(crop);
 				}

@@ -1786,25 +1786,27 @@ public class TFCItems
 		Hemp = new ItemTerra().setFolder("plants/").setUnlocalizedName("Hemp");
 
 		SeedsWheat = new ItemCustomSeeds(0).setUnlocalizedName("Seeds Wheat");
-		SeedsBarley = new ItemCustomSeeds(5).setUnlocalizedName("Seeds Barley");
-		SeedsRye = new ItemCustomSeeds(7).setUnlocalizedName("Seeds Rye");
-		SeedsOat = new ItemCustomSeeds(9).setUnlocalizedName("Seeds Oat");
-		SeedsRice = new ItemCustomSeeds(11).setUnlocalizedName("Seeds Rice");
-		SeedsMaize = new ItemCustomSeeds(2).setUnlocalizedName("Seeds Maize");
-		SeedsPotato = new ItemCustomSeeds(13).setUnlocalizedName("Seeds Potato");
-		SeedsOnion = new ItemCustomSeeds(15).setUnlocalizedName(TFCOptions.iDontLikeOnions?"Seeds Rutabaga":"Seeds Onion");
-		SeedsCabbage = new ItemCustomSeeds(16).setUnlocalizedName("Seeds Cabbage");
-		SeedsGarlic = new ItemCustomSeeds(17).setUnlocalizedName("Seeds Garlic");
-		SeedsCarrot = new ItemCustomSeeds(18).setUnlocalizedName("Seeds Carrot");
-		SeedsSugarcane = new ItemCustomSeeds(25).setUnlocalizedName("Seeds Sugarcane");
+		SeedsMaize = new ItemCustomSeeds(1).setUnlocalizedName("Seeds Maize");
+		SeedsTomato = new ItemCustomSeeds(2).setUnlocalizedName("Seeds Tomato");
+		SeedsBarley = new ItemCustomSeeds(3).setUnlocalizedName("Seeds Barley");
+		SeedsRye = new ItemCustomSeeds(4).setUnlocalizedName("Seeds Rye");
+		SeedsOat = new ItemCustomSeeds(5).setUnlocalizedName("Seeds Oat");
+		SeedsRice = new ItemCustomSeeds(6).setUnlocalizedName("Seeds Rice");
+		SeedsPotato = new ItemCustomSeeds(7).setUnlocalizedName("Seeds Potato");
+		SeedsOnion = new ItemCustomSeeds(8).setUnlocalizedName(TFCOptions.iDontLikeOnions?"Seeds Rutabaga":"Seeds Onion");
+		SeedsCabbage = new ItemCustomSeeds(9).setUnlocalizedName("Seeds Cabbage");
+		SeedsGarlic = new ItemCustomSeeds(10).setUnlocalizedName("Seeds Garlic");
+		SeedsCarrot = new ItemCustomSeeds(11).setUnlocalizedName("Seeds Carrot");
+		SeedsYellowBellPepper = new ItemCustomSeeds(12).setUnlocalizedName("Seeds Yellow Bell Pepper");
+		SeedsRedBellPepper = new ItemCustomSeeds(13).setUnlocalizedName("Seeds Red Bell Pepper");
+		SeedsSoybean = new ItemCustomSeeds(14).setUnlocalizedName("Seeds Soybean");
+		SeedsGreenbean = new ItemCustomSeeds(15).setUnlocalizedName("Seeds Greenbean");
+		SeedsSquash = new ItemCustomSeeds(16).setUnlocalizedName("Seeds Squash");
+		SeedsJute = new ItemCustomSeeds(17).setUnlocalizedName("Seeds Jute");
+		SeedsSugarcane = new ItemCustomSeeds(18).setUnlocalizedName("Seeds Sugarcane");
 		SeedsHemp = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Hemp");
-		SeedsTomato = new ItemCustomSeeds(4).setUnlocalizedName("Seeds Tomato");
-		SeedsYellowBellPepper = new ItemCustomSeeds(19).setUnlocalizedName("Seeds Yellow Bell Pepper");
-		SeedsRedBellPepper = new ItemCustomSeeds(20).setUnlocalizedName("Seeds Red Bell Pepper");
-		SeedsSoybean = new ItemCustomSeeds(21).setUnlocalizedName("Seeds Soybean");
-		SeedsGreenbean = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Greenbean");
-		SeedsSquash = new ItemCustomSeeds(23).setUnlocalizedName("Seeds Squash");
-		SeedsJute = new ItemCustomSeeds(24).setUnlocalizedName("Seeds Jute");
+
+
 
 		FruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling");
 

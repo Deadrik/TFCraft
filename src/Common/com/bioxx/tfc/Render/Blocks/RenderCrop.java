@@ -31,103 +31,96 @@ public class RenderCrop
 		switch(te.cropId)
 		{
 		case 0://Wheat
-		case 1://Wild Wheat
 		{
 			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.5, 1.0);
 			break;
 		}
-		case 2://Corn
-		case 3://Wild Corn
+		case 1://Corn
 		{
 			renderBlockCropsImpl(block, x, y, z, renderblocks, 1.0, 2.0);
 			break;
 		}
-		case 4://Tomatoes
+		case 2://Tomatoes
 		{
 			drawCrossedSquares(block, x, y, z, renderblocks, 0.9, 2.0);
 			break;
 		}
-		case 5://Barley
-		case 6://Wild Barley
+		case 3://Barley
 		{
 			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.5, 1.0);
 			break;
 		}
-		case 7://Rye
-		case 8://Wild Rye
+		case 4://Rye
 		{
 			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.5, 1.0);
 			break;
 		}
-		case 9://Oat
-		case 10://Wild Oat
+		case 5://Oat
 		{
 			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.5, 1.0);
 			break;
 		}
-		case 11://Rice
-		case 12://Wild Rice
+		case 6://Rice
 		{
 			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.5, 1.0);
 			break;
 		}
-		case 13://Potato
-		case 14://Wild Potato
+		case 7://Potato
 		{
 			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
-		case 15://Onion
+		case 8://Onion
 		{
 			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
-		case 16://Cabbage
+		case 9://Cabbage
 		{
 			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
-		case 17://Garlic
+		case 10://Garlic
 		{
 			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
-		case 18://Carrots
+		case 11://Carrots
 		{
 			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
-		case 19://Yellow Bell
+		case 12://Yellow Bell
 		{
 			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
-		case 20://Red Bell
+		case 13://Red Bell
 		{
 			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
-		case 21://Soybean
+		case 14://Soybean
 		{
 			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
-		case 22://Greenbean
+		case 15://Greenbean
 		{
 			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
-		case 23://Squash
+		case 16://Squash
 		{
 			drawCrossedSquares(block, x, y, z, renderblocks, 0.45, 1.0);
 			break;
 		}
-		case 24://Jute
+		case 17://Jute
 		{
 			renderBlockCropsImpl(block, x, y, z, renderblocks, 0.8, 2.0);
 			break;
 		}
-		case 25://Sugarcane
+		case 18://Sugarcane
 		{
 			renderBlockCropsImpl(block, x, y, z, renderblocks, 1.0, 2.0);
 			break;

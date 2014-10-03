@@ -85,7 +85,7 @@ public class BlockCustomLilyPad extends BlockLilyPad
 	{
 		this.blockIcon = par1IconRegister.registerIcon(this.getTextureName());
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	/**
@@ -117,11 +117,11 @@ public class BlockCustomLilyPad extends BlockLilyPad
 	 * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
 	 */
 	@Override
-	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		Block id = par1World.getBlock(par2, par3 - 1, par4);
-		int meta = par1World.getBlockMetadata(par2, par3 - 1, par4);
-		return par3 >= 0 && par3 < 256 ? TFC_Core.isFreshWaterIncludeIce(id, meta) && !TFC_Core.isWater(id) : false;
+		Block id = world.getBlock(x, y - 1, z);
+		int meta = world.getBlockMetadata(x, y - 1, z);
+		return y > 0 && y < 256 ? TFC_Core.isFreshWaterIncludeIce(id, meta) : false;
 	}
 
 }

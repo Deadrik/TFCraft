@@ -6,7 +6,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -17,8 +16,6 @@ import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomPumpkin;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomReed;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomSand;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenLilyPad;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenLiquidsTFC;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
 
 public class BiomeDecoratorTFC extends BiomeDecorator
@@ -58,8 +55,6 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	 */
 	public int reedsPerChunk;
 
-	/** The water lily generation! */
-	public WorldGenLilyPad lilyPadGen;
 	/** Amount of waterlilys per chunk. */
 	public int lilyPadPerChunk;
 
@@ -73,10 +68,9 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		this.mushroomsPerChunk = 0;
 		treesPerChunk = 30;
 		this.cactiPerChunk = 2;
-		this.waterPlantsPerChunk = 6;
+		this.waterPlantsPerChunk = 30;
 		this.reedGen = new WorldGenCustomReed();
 		this.sandGen = new WorldGenCustomSand(7, Blocks.sand);
-		this.lilyPadGen = new WorldGenLilyPad();
 		biome = par1;
 	}
 
@@ -108,47 +102,12 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 				cropGen.generate(currentWorld, randomGenerator, xCoord, zCoord, 1);
 			}
 		}
-
-		/*
-		 * for (var2 = 0; var2 < this.deadBushPerChunk; ++var2) { xCoord =
-		 * this.chunk_X + this.randomGenerator.nextInt(16) + 8; zCoord =
-		 * this.chunk_Z + this.randomGenerator.nextInt(16) + 8; yCoord =
-		 * this.currentWorld.getHeightValue(xCoord, zCoord);
-		 * 
-		 * float rain = TFC_Climate.getRainfall(xCoord, yCoord, zCoord);
-		 * 
-		 * float temperature = TFC_Climate.getBioTemperatureHeight(xCoord,
-		 * this.currentWorld.getHeightValue(xCoord, zCoord), zCoord);
-		 * if(temperature < 18 && rain < 250) { new
-		 * WorldGenDeadBush(Block.deadBush.blockID).generate(this.currentWorld,
-		 * this.randomGenerator, xCoord, yCoord, zCoord); } }
-		 */
-
-		/*
-		 * int catTailsNum = 10; for (var2 = 0; var2 < catTailsNum; ++var2) {
-		 * xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8; zCoord
-		 * = this.chunk_Z + this.randomGenerator.nextInt(16) + 8; yCoord =
-		 * this.currentWorld.getHeightValue(xCoord, zCoord);
-		 * 
-		 * if(TFC_Climate.isSwamp(xCoord, yCoord, zCoord)) catTailsNum = 20;
-		 * 
-		 * if(currentWorld.getBlockId(xCoord, yCoord, zCoord) ==
-		 * Block.waterStill.blockID && currentWorld.isBlockOpaqueCube(xCoord,
-		 * yCoord-1, zCoord)) { currentWorld.setBlock(xCoord, yCoord+1, zCoord,
-		 * TFCBlocks.Flora.blockID, 1, 0x2); }
-		 * 
-		 * }
-		 */
-
 		for (var2 = 0; var2 < this.lilyPadPerChunk; ++var2)
 		{
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-			if(TFC_Climate.isSwamp(currentWorld, xCoord, yCoord, zCoord))
-			{
-				this.lilyPadGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-			}
+			generateLilyPads(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 
 		for (var2 = 0; var2 < 10; ++var2)
@@ -158,7 +117,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 				xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 				zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 				yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-				if(TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, yCoord, zCoord) >= 14)
+				if(TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, yCoord, zCoord) >= 25)
 					this.reedGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 			}
 		}
@@ -190,25 +149,23 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			if (TFC_Climate.getBioTemperatureHeight(currentWorld, xCoord, yCoord, zCoord) >= 7)
 				new WorldGenWaterPlants(TFCBlocks.WaterPlant,TFC_Climate.isSwamp(currentWorld, xCoord, yCoord, zCoord)).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
+	}
 
-		if (this.generateLakes)
+	public boolean generateLilyPads(World world, Random random, int x, int y, int z)
+	{
+		for (int l = 0; l < 10; ++l)
 		{
-			/*for (var2 = 0; var2 < 50; ++var2)
-			{
-				xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-				zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-				yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-				new WorldGenLiquidsTFC(TFCBlocks.SaltWater).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-			}*/
+			int i1 = x + random.nextInt(8) - random.nextInt(8);
+			int j1 = y + random.nextInt(4) - random.nextInt(4);
+			int k1 = z + random.nextInt(8) - random.nextInt(8);
 
-			for (var2 = 0; var2 < 20; ++var2)
+			if (world.isAirBlock(i1, j1, k1) && TFCBlocks.LilyPad.canPlaceBlockAt(world, i1, j1, k1))
 			{
-				xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-				zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-				yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-				new WorldGenLiquidsTFC(TFCBlocks.Lava).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+				world.setBlock(i1, j1, k1, TFCBlocks.LilyPad, 0, 2);
 			}
 		}
+
+		return true;
 	}
 
 	/**
@@ -231,44 +188,6 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			this.genDecorations(bgb);
 			this.currentWorld = null;
 			this.randomGenerator = null;
-		}
-	}
-
-	/**
-	 * Generates ores in the current chunk
-	 */
-	@Override
-	protected void generateOres()
-	{
-	}
-
-	/**
-	 * Standard ore generation helper. Generates most ores.
-	 */
-	@Override
-	protected void genStandardOre1(int par1, WorldGenerator par2WorldGenerator, int par3, int par4)
-	{
-		for (int var5 = 0; var5 < par1; ++var5)
-		{
-			int var6 = this.chunk_X + this.randomGenerator.nextInt(16);
-			int var7 = this.randomGenerator.nextInt(par4 - par3) + par3;
-			int var8 = this.chunk_Z + this.randomGenerator.nextInt(16);
-			par2WorldGenerator.generate(this.currentWorld, this.randomGenerator, var6, var7, var8);
-		}
-	}
-
-	/**
-	 * Standard ore generation helper. Generates Lapis Lazuli.
-	 */
-	@Override
-	protected void genStandardOre2(int par1, WorldGenerator par2WorldGenerator, int par3, int par4)
-	{
-		for (int var5 = 0; var5 < par1; ++var5)
-		{
-			int var6 = this.chunk_X + this.randomGenerator.nextInt(16);
-			int var7 = this.randomGenerator.nextInt(par4) + this.randomGenerator.nextInt(par4) + par3 - par4;
-			int var8 = this.chunk_Z + this.randomGenerator.nextInt(16);
-			par2WorldGenerator.generate(this.currentWorld, this.randomGenerator, var6, var7, var8);
 		}
 	}
 }
