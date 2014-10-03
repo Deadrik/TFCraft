@@ -33,6 +33,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -267,7 +268,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				this.dataWatcher.updateObject(28, Float.valueOf(climate_mod));
 				this.dataWatcher.updateObject(29, Float.valueOf(hard_mod));
 			}
-			else
+			else if(this.dataWatcher.hasChanges())
 			{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
@@ -314,14 +315,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		{
 			animalchest.func_110132_b(this);
 			int i = Math.min(animalchest.getSizeInventory(), this.horseChest.getSizeInventory());
-
 			for (int j = 0; j < i; ++j)
 			{
 				ItemStack itemstack = animalchest.getStackInSlot(j);
 				if (itemstack != null)
 					this.horseChest.setInventorySlotContents(j, itemstack.copy());
 			}
-
 			animalchest = null;
 		}
 
@@ -396,8 +395,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		ItemStack itemstack = player.inventory.getCurrentItem();
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking()){
+			if(player.isSneaking() && !familiarizedToday && itemstack != null){
 				this.familiarize(player);
+				return true;
 			}
 			player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
@@ -696,7 +696,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 		ItemStack itemstack;
 
-		if (nbttc.hasKey("ArmorItem"))
+		if (nbttc.hasKey("ArmorItem", 10))
 		{
 			itemstack = ItemStack.loadItemStackFromNBT(nbttc.getCompoundTag("ArmorItem"));
 
@@ -706,10 +706,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			}
 		}
 
-		if (nbttc.hasKey("SaddleItem"))
+		if (nbttc.hasKey("SaddleItem", 10))
 		{
 			itemstack = ItemStack.loadItemStackFromNBT(nbttc.getCompoundTag("SaddleItem"));
-
 			if (itemstack != null && itemstack.getItem() == Items.saddle)
 			{
 				this.horseChest.setInventorySlotContents(0, itemstack);
@@ -1145,7 +1144,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		default: break;
 		}
 		if(!flag && !player.worldObj.isRemote){
-			player.addChatMessage(new ChatComponentText("The animal won't let you do that."));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;
 	}

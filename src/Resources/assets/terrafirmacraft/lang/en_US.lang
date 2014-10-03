@@ -40,6 +40,12 @@ entity.horseTFC.name=Horse
 entity.irongolemTFC.name=Iron Golem
 entity.fishTFC.name=Bass
 
+
+#==========
+#= Entity =
+#==========
+entity.notFamiliar=The animal won't let you do that.
+
 #================
 #= Achievements =
 #================

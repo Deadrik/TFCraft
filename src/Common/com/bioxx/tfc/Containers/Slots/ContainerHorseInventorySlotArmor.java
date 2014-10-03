@@ -27,7 +27,7 @@ public class ContainerHorseInventorySlotArmor extends Slot
      */
     public boolean isItemValid(ItemStack par1ItemStack)
     {
-        return super.isItemValid(par1ItemStack) && this.theHorse.func_110259_cr(); // && EntityHorse.func_110211_v(par1ItemStack);
+        return false;// && this.theHorse.func_110259_cr(); // && EntityHorse.func_110211_v(par1ItemStack);
     }
 
     @SideOnly(Side.CLIENT)

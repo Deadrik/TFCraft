@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -69,6 +70,8 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	public float hard_mod = 1;		//hardiness
 	public boolean inLove;
 	public boolean isCorpse = false;
+	
+	protected EntityPlayer shearer = null;
 	
 	private int familiarity = 0;
 	private long lastFamiliarityUpdate = 0;
@@ -369,6 +372,8 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			if(getGender() == GenderEnum.FEMALE && pregnant)
 				player.addChatMessage(new ChatComponentText("Pregnant"));
 
+			shearer = player;
+			
 			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKnife && !getSheared() && getPercentGrown(this) > 0.95F)
 			{
 				setSheared(true);
@@ -455,7 +460,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, int X, int Y, int Z)
 	{
-		return !getSheared() && isAdult();
+		return !getSheared() && isAdult() && shearer != null && checkFamiliarity(InteractionEnum.SHEAR,shearer);
 	}
 
 	@Override
@@ -740,7 +745,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		default: break;
 		}
 		if(!flag && !player.worldObj.isRemote){
-			player.addChatMessage(new ChatComponentText("The animal won't let you do that."));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;
 	}

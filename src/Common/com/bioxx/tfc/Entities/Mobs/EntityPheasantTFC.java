@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCItems;
@@ -178,7 +179,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 		default: break;
 		}
 		if(!flag && !player.worldObj.isRemote){
-			player.addChatMessage(new ChatComponentText("The animal won't let you do that."));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;
 	}

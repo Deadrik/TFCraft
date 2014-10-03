@@ -25,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -727,7 +728,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		default: break;
 		}
 		if(!flag && !player.worldObj.isRemote){
-			player.addChatMessage(new ChatComponentText("The animal won't let you do that."));
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;
 	}
