@@ -73,7 +73,7 @@ public class ChunkEventHandler
 	@SubscribeEvent
 	public void onUnload(ChunkEvent.Unload event)
 	{
-		TFC_Core.getCDM(event.world).removeData(event.getChunk().xPosition, event.getChunk().zPosition);
+		TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition).isUnloaded = true;
 	}
 
 	@SubscribeEvent
@@ -123,6 +123,8 @@ public class ChunkEventHandler
 				// Why was this line here in the first place?
 				//spawnProtectionTag = new NBTTagCompound();
 				event.getData().setTag("ChunkData", spawnProtectionTag);
+				if(data.isUnloaded)
+					TFC_Core.getCDM(event.world).removeData(x, z);
 			}
 		}
 	}

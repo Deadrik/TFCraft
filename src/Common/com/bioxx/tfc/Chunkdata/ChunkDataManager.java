@@ -13,27 +13,19 @@ public class ChunkDataManager
 	private World world;
 
 	private LongHashMap chunkmap = new LongHashMap();
-	private LongHashMap chunkmapunload = new LongHashMap();
 
 	public ChunkDataManager(World world)
 	{
 		this.world = world;
 	}
 
-	public ChunkData removeData(int x, int z)
+	public void removeData(int x, int z)
 	{
 		long key = ChunkCoordIntPair.chunkXZ2Int(x, z);
 		if(chunkmap.containsItem(key))
 		{
-			chunkmapunload.add(key, chunkmap.getValueByKey(key));
 			chunkmap.remove(key);
-			return (ChunkData) chunkmapunload.getValueByKey(key);
 		}
-		else if(chunkmapunload.containsItem(key))
-		{
-			chunkmapunload.remove(key);
-		}
-		return null;
 	}
 
 	public void addData(long key, ChunkData cd)
@@ -56,12 +48,6 @@ public class ChunkDataManager
 		long key = ChunkCoordIntPair.chunkXZ2Int(x, z);
 		if(chunkmap.containsItem(key))
 			return (ChunkData) chunkmap.getValueByKey(key);
-		else if(chunkmapunload.containsItem(key))
-		{
-			ChunkData cd = (ChunkData) chunkmapunload.getValueByKey(key);
-			chunkmapunload.remove(key);
-			return cd;
-		}
 		else return null;
 	}
 
@@ -69,12 +55,6 @@ public class ChunkDataManager
 	{
 		if(chunkmap.containsItem(key))
 			return (ChunkData) chunkmap.getValueByKey(key);
-		else if(chunkmapunload.containsItem(key))
-		{
-			ChunkData cd = (ChunkData) chunkmapunload.getValueByKey(key);
-			chunkmapunload.remove(key);
-			return cd;
-		}
 		else return null;
 	}
 

@@ -23,6 +23,7 @@ public class ChunkData
 
 	public int lastSpringGen;
 	public int cropInfestation = 0;
+	public boolean isUnloaded = false;
 
 	public ChunkData()
 	{

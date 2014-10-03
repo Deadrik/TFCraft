@@ -74,7 +74,9 @@ public class TFC_Core
 	public static ChunkDataManager addCDM(World world)
 	{
 		int key = world.isRemote ? (128 | world.provider.dimensionId) : world.provider.dimensionId;
-		return cdmMap.put(key, new ChunkDataManager(world));
+		if(!cdmMap.containsKey(key))
+			return cdmMap.put(key, new ChunkDataManager(world));
+		else return cdmMap.get(key);
 	}
 
 	public static ChunkDataManager removeCDM(World world)
