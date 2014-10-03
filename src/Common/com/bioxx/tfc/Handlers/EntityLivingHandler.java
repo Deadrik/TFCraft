@@ -65,6 +65,8 @@ public class EntityLivingHandler
 				tempStats.onUpdate(player);
 				TFC_Core.setBodyTempStats(player, tempStats);
 
+
+
 				//Nullify the Old Food
 				player.getFoodStats().addStats(20 - player.getFoodStats().getFoodLevel(), 0.0F);
 				//Handle Food
@@ -72,9 +74,11 @@ public class EntityLivingHandler
 				foodstats.onUpdate(player);
 				TFC_Core.setPlayerFoodStats(player, foodstats);
 				//Send update packet from Server to Client
-				AbstractPacket pkt = new PlayerUpdatePacket(player, 0);
-				TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
-
+				if(foodstats.shouldSendUpdate())
+				{
+					AbstractPacket pkt = new PlayerUpdatePacket(player, 0);
+					TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) player);
+				}
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
 				{
 					setThirsty(player, true);

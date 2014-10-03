@@ -37,7 +37,7 @@ public class FoodStatsTFC
 	public float nutrGrain = 1.0f;
 	public float nutrDairy = 1.0f;
 	public float nutrProtein = 1.0f;
-
+	private boolean shouldSendUpdate = false;
 
 	public long soberTime = 0;
 
@@ -130,6 +130,7 @@ public class FoodStatsTFC
 				{
 					reduceNutrition(0.002F);
 				}
+				shouldSendUpdate = true;
 			}
 
 			//Heal or hurt the player based on hunger.
@@ -155,7 +156,10 @@ public class FoodStatsTFC
 			 ****************************************/
 			soberTime = player.getEntityData().hasKey("soberTime") ? player.getEntityData().getLong("soberTime") : 0;
 			if(soberTime > 0)
+			{
 				soberTime--;
+				shouldSendUpdate = true;
+			}
 			player.getEntityData().setLong("soberTime", soberTime);
 			long time = TFC_Time.getTotalTicks();
 			Block block = player.worldObj.getBlock((int)Math.floor(player.posX),(int)Math.floor(player.posY),(int)Math.floor(player.posZ));
@@ -205,6 +209,8 @@ public class FoodStatsTFC
 		nutrGrain = Math.max(this.nutrGrain - (amount + foodExhaustionLevel), 0);
 		nutrProtein = Math.max(this.nutrProtein - (amount + foodExhaustionLevel), 0);
 		nutrDairy = Math.max(this.nutrDairy - (amount + foodExhaustionLevel), 0);
+
+		shouldSendUpdate = true;
 	}
 
 	public int getMaxWater(EntityPlayer player)
@@ -307,7 +313,10 @@ public class FoodStatsTFC
 
 	public void setFoodLevel(float par1)
 	{
+		if(par1 != this.stomachLevel)
+			shouldSendUpdate = true;
 		this.stomachLevel = par1;
+
 	}
 
 	public void setSatisfaction(float par1)
@@ -425,9 +434,15 @@ public class FoodStatsTFC
 		}
 	}
 
+	public boolean shouldSendUpdate()
+	{
+		return shouldSendUpdate;
+	}
+
 	public void restoreWater(EntityPlayer player, int w)
 	{
 		this.waterLevel = Math.min(this.waterLevel + w, this.getMaxWater(player));
+		shouldSendUpdate = true;
 		this.writeNBT(player.getEntityData());
 	}
 
