@@ -55,6 +55,26 @@ public class ChunkDataManager
 		else return null;
 	}
 
+	public ChunkData getData(Chunk c)
+	{
+		if(chunkmap.containsKey(c))
+			return (ChunkData) chunkmap.get(c);
+		else if(chunkmapunload.containsKey(c))
+		{
+			ChunkData cd = (ChunkData) chunkmapunload.get(c);
+			chunkmapunload.remove(c);
+			return cd;
+		}
+		else return null;
+	}
+
+	public boolean hasData(Chunk c)
+	{
+		if(chunkmap.containsKey(c))
+			return true;
+		return false;
+	}
+
 	public boolean addProtection(int x, int z, int amount)
 	{
 		ChunkData d = getData(x,z);

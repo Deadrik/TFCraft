@@ -33,6 +33,7 @@ import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -144,7 +145,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		hard_mod = (float)Math.sqrt(hard_mod * hard_mod * (float)Math.sqrt((mother.getHardiness() + father_hard) * 0.5F));
 		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
 		
-		this.familiarity = (int) (mother.getFamiliarityPlayers()<90?mother.getFamiliarityPlayers()/2:mother.getFamiliarityPlayers()*0.9f);
+		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
@@ -198,6 +199,8 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			super.resetInLove();;
 			setInLove(true);
 		}
+		
+		this.handleFamiliarityUpdate();
 
 		syncData();
 		if(isAdult())
@@ -316,6 +319,10 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
+			if(player.isSneaking()){
+				this.familiarize(player);
+				return true;
+			}
 			//player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
 			if(getGender() == GenderEnum.FEMALE && pregnant)
 				player.addChatMessage(new ChatComponentText("Pregnant"));
@@ -331,6 +338,12 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			}
 
 			this.func_146082_f(player);
+			return true;
+		}
+		else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"))){
+				itemstack.stackSize--;
+			}
 			return true;
 		}
 		else
@@ -639,20 +652,61 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	}
 
 	@Override
-	public int getFamiliarityPlayers() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getFamiliarity() {
+		return familiarity;
 	}
 
 	@Override
 	public void handleFamiliarityUpdate() {
-		// TODO Auto-generated method stub
-		
+		if(lastFamiliarityUpdate < TFC_Time.getTotalDays()){
+			if(familiarizedToday && familiarity < 100){
+				lastFamiliarityUpdate = TFC_Time.getTotalDays();
+				familiarizedToday = false;
+				float familiarityChange = (6 * obedience_mod / aggression_mod);
+				if(this.isAdult() && (familiarity > 30 && familiarity < 80)){
+					//Nothing
+				}
+				else if(this.isAdult()){
+					familiarity += familiarityChange;
+				}
+				else if(!this.isAdult()){
+					float ageMod = 2f/(1f + TFC_Core.getPercentGrown(this));
+					familiarity += ageMod * familiarityChange;
+					if(familiarity > 70){
+						obedience_mod *= 1.01f;
+					}
+				}
+			}
+			else if(familiarity < 30){
+				familiarity -= 2*(TFC_Time.getTotalDays() - lastFamiliarityUpdate);
+			}
+		}
+		if(familiarity > 100)familiarity = 100;
+		if(familiarity < 0)familiarity = 0;
 	}
 
 	@Override
-	public void familiarize(EntityPlayer ep) {
-		// TODO Auto-generated method stub
-		
+	public void familiarize(EntityPlayer ep) 
+	{
+		ItemStack stack = ep.getHeldItem();
+		if(stack != null && this.isBreedingItem(stack)){
+			if (!ep.capabilities.isCreativeMode)
+			{
+				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
+			}
+			familiarizedToday = true;
+			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
+			this.playLivingSound();
+		}
+	}
+	
+	@Override
+	public boolean trySetName(String name) {
+		if(this.familiarity > 40 && !this.hasCustomNameTag()){
+			this.setCustomNameTag(name);
+			return true;
+		}
+		this.playSound(this.getHurtSound(),  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
+		return false;
 	}
 }

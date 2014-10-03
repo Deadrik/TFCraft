@@ -39,7 +39,7 @@ public class ItemBlueprint extends ItemTerra
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
 		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, world);
-		if(objectMouseOver == null) 
+		if(objectMouseOver == null)
 			return stack;
 
 		int side = objectMouseOver.sideHit;
@@ -47,7 +47,7 @@ public class ItemBlueprint extends ItemTerra
 		int y = objectMouseOver.blockY;
 		int z = objectMouseOver.blockZ;
 
-		if(stack.stackTagCompound != null && !stack.stackTagCompound.hasKey("Name") &&
+		if(stack.stackTagCompound != null && !stack.stackTagCompound.hasKey("ItemName") &&
 				(world.getBlock(x, y, z) == TFCBlocks.Detailed))
 		{
 			player.openGui(TerraFirmaCraft.instance, 34, player.worldObj, x, y, z);
@@ -71,7 +71,7 @@ public class ItemBlueprint extends ItemTerra
 
 			stack.setTagCompound(nbt);
 		}
-		else if(stack.stackTagCompound != null && (world.getBlock(x, y, z) == TFCBlocks.Detailed))
+		else if(stack.stackTagCompound != null && stack.stackTagCompound.hasKey("ItemName") && (world.getBlock(x, y, z) == TFCBlocks.Detailed))
 		{
 			int hasChisel = -1;
 			int hasHammer = -1;
@@ -116,8 +116,8 @@ public class ItemBlueprint extends ItemTerra
 	@Override
 	public String getItemStackDisplayName(ItemStack is)
 	{
-		if(is.stackTagCompound != null)
-			return is.stackTagCompound.getString("Name");
+		if(is.hasTagCompound() && is.stackTagCompound.hasKey("ItemName"))
+			return is.stackTagCompound.getString("ItemName");
 		else return StatCollector.translateToLocal("gui.Blueprint");
 	}
 }

@@ -46,35 +46,10 @@ public class ItemLogs extends ItemTerra
 	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, int l)
 	{
 		TELogPile te = null;
-		if(side == 0 && world.isAirBlock(x, y - 1, z) && isValid(world, x, y - 1, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y-1, z, false, side, null, itemstack))
+		if(world.isAirBlock(x, y, z) && isValid(world, x, y, z))
 		{
-			world.setBlock(x, y - 1, z, TFCBlocks.LogPile, l, 3);
-			te = (TELogPile)world.getTileEntity(x, y - 1, z);
-		}
-		else if(side == 1 && world.isAirBlock(x, y + 1, z) && isValid(world, x, y + 1, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y+1, z, false, side, null, itemstack))
-		{
-			world.setBlock(x, y + 1, z, TFCBlocks.LogPile, l, 3);
-			te = (TELogPile)world.getTileEntity(x, y + 1, z);
-		}
-		else if(side == 2 && world.isAirBlock(x, y, z - 1) && isValid(world, x, y, z - 1) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y, z-1, false, side, null, itemstack))
-		{
-			world.setBlock(x, y, z-1, TFCBlocks.LogPile, l, 3);
-			te = (TELogPile)world.getTileEntity(x, y, z - 1);
-		}
-		else if(side == 3 && world.isAirBlock(x, y, z + 1) && isValid(world, x, y, z + 1) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x, y, z+1, false, side, null, itemstack))
-		{
-			world.setBlock(x, y, z + 1, TFCBlocks.LogPile, l, 3);
-			te = (TELogPile)world.getTileEntity(x, y, z + 1);
-		}
-		else if(side == 4 && world.isAirBlock(x - 1, y, z) && isValid(world, x - 1, y, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x-1, y, z, false, side, null, itemstack))
-		{
-			world.setBlock(x - 1, y, z, TFCBlocks.LogPile, l, 3);
-			te = (TELogPile)world.getTileEntity(x - 1, y, z);
-		}
-		else if(side == 5 && world.isAirBlock(x + 1, y, z) && isValid(world, x + 1, y, z) && world.canPlaceEntityOnSide(TFCBlocks.WoodVert, x+1, y, z, false, side, null, itemstack))
-		{
-			world.setBlock(x + 1, y, z, TFCBlocks.LogPile, l, 3);
-			te = (TELogPile)world.getTileEntity(x + 1, y, z);
+			world.setBlock(x, y, z, TFCBlocks.LogPile, l, 3);
+			te = (TELogPile)world.getTileEntity(x, y, z);
 		}
 		else
 		{
@@ -98,10 +73,7 @@ public class ItemLogs extends ItemTerra
 
 	public boolean isValid(World world, int i, int j, int k)
 	{
-		if(world.getBlock(i, j-1, k)==TFCBlocks.Firepit ||world.getBlock(i, j-1, k) == TFCBlocks.Pottery){
-			return true;
-		}
-		else if(world.isSideSolid(i, j-1, k, ForgeDirection.UP))
+		if(world.isSideSolid(i, j-1, k, ForgeDirection.UP))
 		{
 			TileEntity te = world.getTileEntity(i, j-1, k);
 
@@ -151,11 +123,22 @@ public class ItemLogs extends ItemTerra
 	{
 		if(!world.isRemote)
 		{
-
 			if(entityplayer.isSneaking() && (world.getBlock(x, y, z) != TFCBlocks.LogPile || (side != 1 && side != 0)))
 			{
 				int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
-				if(world.canPlaceEntityOnSide(TFCBlocks.LogNatural, x, y, z, false, side, entityplayer, itemstack))
+				if (side == 0)
+					--y;
+				else if (side == 1)
+					++y;
+				else if (side == 2)
+					--z;
+				else if (side == 3)
+					++z;
+				else if (side == 4)
+					--x;
+				else if (side == 5)
+					++x;
+				if(world.canPlaceEntityOnSide(TFCBlocks.LogPile, x, y, z, false, side, entityplayer, itemstack))
 					if (CreatePile(itemstack, entityplayer, world, x, y, z, side, dir)) 
 					{
 						itemstack.stackSize = itemstack.stackSize-1;

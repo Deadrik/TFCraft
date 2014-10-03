@@ -20,6 +20,7 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.ItemRenamePacket;
+import com.bioxx.tfc.Items.ItemCustomNameTag;
 
 public class GuiBlueprint extends GuiScreen
 {
@@ -121,7 +122,8 @@ public class GuiBlueprint extends GuiScreen
 			stack.stackTagCompound.setString("Name", theGuiTextField.getText());
 
 			AbstractPacket pkt = new ItemRenamePacket(theGuiTextField.getText());
-			TerraFirmaCraft.packetPipeline.sendToAll(pkt);
+			//TerraFirmaCraft.packetPipeline.sendToAll(pkt);
+			TerraFirmaCraft.packetPipeline.sendToServer(pkt);
 			
 			Minecraft.getMinecraft().displayGuiScreen(null);//player.closeScreen();
 		}
@@ -144,11 +146,11 @@ public class GuiBlueprint extends GuiScreen
 		int i1 = (height - ySize) / 2;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
 
-		drawCenteredString(fontRendererObj,StatCollector.translateToLocal("gui.Blueprint"), this.width / 2, i1+8, 0x000000);
+		String title = (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemCustomNameTag ? "gui.Nametag" : "gui.Blueprint");
+		drawCenteredString(fontRendererObj,StatCollector.translateToLocal(title), this.width / 2, i1+8, 0x000000);
 		this.theGuiTextField.drawTextBox();
 
 		super.drawScreen(par1, par2, par3);
-
 	}
 
 }

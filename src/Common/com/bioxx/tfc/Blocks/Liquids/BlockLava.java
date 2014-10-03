@@ -16,6 +16,6 @@ public class BlockLava extends BlockCustomLiquid
 	@Override
 	protected Block getInverseBlock() 
 	{
-		return TFCBlocks.Lava;
+		return TFCBlocks.LavaStationary;
 	}
 }

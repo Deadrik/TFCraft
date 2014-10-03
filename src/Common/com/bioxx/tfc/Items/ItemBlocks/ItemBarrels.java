@@ -10,9 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidBlock;
 
 import org.lwjgl.opengl.GL11;
 
@@ -23,6 +28,7 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemBarrels extends ItemTerraBlock implements IEquipable
 {
@@ -103,6 +109,48 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 	}
 
 	@Override
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	{
+		MovingObjectPosition mop = Helper.getMovingObjectPositionFromPlayer(world, player, true);
+
+		if (mop == null)
+		{
+			return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
+		}
+		else
+		{
+			if (mop.typeOfHit == MovingObjectType.BLOCK)
+			{
+				int i = mop.blockX;
+				int j = mop.blockY;
+				int k = mop.blockZ;
+
+				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock))
+				{
+					return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
+				}
+
+				Fluid fluid = ((IFluidBlock)world.getBlock(i, j, k)).getFluid();
+
+				world.setBlockToAir(i, j, k);
+
+				if (--is.stackSize <= 0)
+				{
+					FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 10000), is);
+				}
+
+				if (!player.inventory.addItemStackToInventory(FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 10000), is)))
+				{
+					player.entityDropItem(FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 10000), is), 0);
+				}
+				return true;
+			}
+		}
+
+		return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
+	}
+
+	@Override
 	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
 	{
 
@@ -118,7 +166,6 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 
 			TEBarrel te = (TEBarrel) world.getTileEntity(x, y, z);
 			te.barrelType = metadata;
-
 		}
 
 		return true;

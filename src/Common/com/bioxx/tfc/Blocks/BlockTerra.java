@@ -1,13 +1,18 @@
 package com.bioxx.tfc.Blocks;
 
+import static net.minecraftforge.common.util.ForgeDirection.UP;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.TFCOptions;
@@ -56,11 +61,43 @@ public abstract class BlockTerra extends Block
 	{
 		onBlockPlacedBy(world, x, y, z, entityliving, null);
 	}
-	
+
 	@Override
 	public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta)
 	{
 		super.harvestBlock(world, player, x, y, z, meta);
 		TFC_Core.addPlayerExhaustion(player, 0.001f);
+	}
+
+	@Override
+	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
+	{
+		Block plant = plantable.getPlant(world, x, y + 1, z);
+		EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
+
+		if (plant == Blocks.cactus && this == Blocks.cactus)
+		{
+			return true;
+		}
+
+		if (plant == Blocks.reeds && this == Blocks.reeds)
+		{
+			return true;
+		}
+
+		switch (plantType)
+		{
+		case Cave:   return isSideSolid(world, x, y, z, UP);
+		case Plains: return TFC_Core.isSoil(this);
+		case Water:  return world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlockMetadata(x, y, z) == 0;
+		case Beach:
+			boolean isBeach = TFC_Core.isSand(this) || TFC_Core.isGravel(this);
+			boolean hasWater = (world.getBlock(x - 1, y, z    ).getMaterial() == Material.water ||
+					world.getBlock(x + 1, y, z    ).getMaterial() == Material.water ||
+					world.getBlock(x,     y, z - 1).getMaterial() == Material.water ||
+					world.getBlock(x,     y, z + 1).getMaterial() == Material.water);
+			return isBeach && hasWater;
+		default: return false;
+		}
 	}
 }

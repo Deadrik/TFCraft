@@ -39,7 +39,6 @@ import com.bioxx.tfc.Core.Player.BodyTempStats;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 import com.bioxx.tfc.Core.Player.SkillStats;
-import com.bioxx.tfc.Food.Food;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.Items.ItemTerra;
@@ -47,6 +46,7 @@ import com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock;
 import com.bioxx.tfc.TileEntities.TEMetalSheet;
 import com.bioxx.tfc.TileEntities.TEPartial;
 import com.bioxx.tfc.WorldGen.TFCBiome;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Constant.Global;
@@ -491,6 +491,15 @@ public class TFC_Core
 				|| isDirt(block)
 				|| isClay(block)
 				|| isPeat(block);
+	}
+
+	public static boolean isSoilOrGravel(Block block)
+	{
+		return isGrass(block)
+				|| isDirt(block)
+				|| isClay(block)
+				|| isPeat(block)
+				|| isGravel(block);
 	}
 
 	public static boolean isGravel(Block block)
@@ -1300,5 +1309,26 @@ public class TFC_Core
 			i2 = is2.getItem(); d2 = is2.getItemDamage();
 		}
 		return i1 == i2 && d1 == d2;
+	}
+
+	public static boolean setBlockWithDrops(World world, int x, int y, int z, Block b, int meta)
+	{
+		Block block = world.getBlock(x, y, z);
+
+		if (block.getMaterial() != Material.air)
+		{
+			int l = world.getBlockMetadata(x, y, z);
+			world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(block) + (l << 12));
+			block.dropBlockAsItem(world, x, y, z, l, 0);
+		}
+		return world.setBlock(x, y, z, b, meta, 3);
+	}
+
+	/**
+	 * This is a wrapper method for the vanilla world method with no MCP mapping
+	 */
+	public static boolean setBlockToAirWithDrops(World world, int x, int y, int z)
+	{
+		return world.func_147480_a(x, y, z, true);
 	}
 }

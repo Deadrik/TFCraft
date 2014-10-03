@@ -8,9 +8,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.Recipes;
-import com.bioxx.tfc.Food.Food;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.Tools.ItemKnife;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Events.ItemCookEvent;
 import com.bioxx.tfc.api.Interfaces.IFood;

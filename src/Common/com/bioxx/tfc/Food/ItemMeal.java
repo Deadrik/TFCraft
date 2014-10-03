@@ -41,6 +41,7 @@ public class ItemMeal extends ItemTerra implements IFood
 		this.MetaNames = new String[]{"Meal0","Meal1","Meal2","Meal3","Meal4","Meal5","Meal6","Meal7","Meal8","Meal9","Meal10",};
 		this.MetaIcons = new IIcon[11];
 		this.setFolder("food/");
+		this.stackable = false;
 	}
 
 	@Override

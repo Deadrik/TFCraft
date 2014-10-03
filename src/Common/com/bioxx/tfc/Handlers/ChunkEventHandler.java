@@ -57,6 +57,15 @@ public class ChunkEventHandler
 				cd.lastSpringGen = TFC_Time.getYear();
 			}
 		}
+		else
+		{
+			ChunkData data = new ChunkData().CreateNew(event.world, event.getChunk().xPosition, event.getChunk().zPosition);
+			data.rainfallMap = TFC_Climate.getCacheManager(event.world).loadRainfallLayerGeneratorData(data.rainfallMap, event.getChunk().xPosition * 16, event.getChunk().zPosition * 16, 16, 16);
+			//data.rockMap1 =  TFC_Climate.getCacheManager(event.world).loadRockLayerGeneratorData(data.rockMap1, event.getChunk().xPosition * 16, event.getChunk().zPosition * 16, 16, 16, 0);
+			//data.rockMap2 =  TFC_Climate.getCacheManager(event.world).loadRockLayerGeneratorData(data.rockMap2, event.getChunk().xPosition * 16, event.getChunk().zPosition * 16, 16, 16, 1);
+			//data.rockMap3 =  TFC_Climate.getCacheManager(event.world).loadRockLayerGeneratorData(data.rockMap3, event.getChunk().xPosition * 16, event.getChunk().zPosition * 16, 16, 16, 2);
+			TFC_Core.getCDM(event.world).addData(event.getChunk(), data);
+		}
 	}
 
 	@SubscribeEvent

@@ -10,6 +10,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.api.Constant.Global;
 
 public class TFCFluid extends Fluid
 {
@@ -113,5 +115,14 @@ public class TFCFluid extends Fluid
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(VODKA, 250), new ItemStack(TFCItems.Vodka), new ItemStack(TFCItems.GlassBottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(MILK, 1000), new ItemStack(TFCItems.WoodenBucketMilk), new ItemStack(TFCItems.WoodenBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(VINEGAR, 1000), new ItemStack(TFCItems.Vinegar), new ItemStack(TFCItems.WoodenBucketEmpty));
+
+		for(int i = 0; i < Global.WOOD_ALL.length; i++)
+		{
+			FluidContainerRegistry.registerFluidContainer(new FluidStack(FRESHWATER, 10000), TEBarrel.createFullBarrel(new FluidStack(FRESHWATER, 10000), new ItemStack(TFCBlocks.Barrel, 1, i)), new ItemStack(TFCBlocks.Barrel, 1, i));
+			FluidContainerRegistry.registerFluidContainer(new FluidStack(SALTWATER, 10000), TEBarrel.createFullBarrel(new FluidStack(SALTWATER, 10000), new ItemStack(TFCBlocks.Barrel, 1, i)), new ItemStack(TFCBlocks.Barrel, 1, i));
+		}
+
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(FRESHWATER, 5000), TEBarrel.createFullBarrel(new FluidStack(FRESHWATER, 5000), new ItemStack(TFCBlocks.Vessel, 1, 1)), new ItemStack(TFCBlocks.Vessel, 1, 1));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(SALTWATER, 5000), TEBarrel.createFullBarrel(new FluidStack(SALTWATER, 5000), new ItemStack(TFCBlocks.Vessel, 1, 1)), new ItemStack(TFCBlocks.Vessel, 1, 1));
 	}
 }

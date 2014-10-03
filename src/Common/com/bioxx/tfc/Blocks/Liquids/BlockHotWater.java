@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Effects.GasFX;
 
@@ -37,7 +38,7 @@ public class BlockHotWater extends BlockCustomLiquid
 	@Override
 	protected Block getInverseBlock() 
 	{
-		return this;
+		return TFCBlocks.HotWaterStationary;
 	}
 
 	@Override

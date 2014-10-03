@@ -28,6 +28,7 @@ import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Entities.EntityCustomMinecart;
+import com.bioxx.tfc.Entities.EntityFallingBlockTFC;
 import com.bioxx.tfc.Entities.EntityFishHookTFC;
 import com.bioxx.tfc.Entities.EntityJavelin;
 import com.bioxx.tfc.Entities.EntityProjectileTFC;
@@ -75,6 +76,7 @@ import com.bioxx.tfc.Render.RenderChickenTFC;
 import com.bioxx.tfc.Render.RenderCowTFC;
 import com.bioxx.tfc.Render.RenderDeer;
 import com.bioxx.tfc.Render.RenderEntityStand;
+import com.bioxx.tfc.Render.RenderFallingBlock;
 import com.bioxx.tfc.Render.RenderFishTFC;
 import com.bioxx.tfc.Render.RenderHorseTFC;
 import com.bioxx.tfc.Render.RenderPheasantTFC;
@@ -195,7 +197,6 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityCustomMinecart.class, new RenderMinecart());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStand.class, new RenderEntityStand());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFishTFC.class, new RenderFishTFC(new ModelBass(), 0.7F));
-
 		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonTFC.class, new RenderSkeletonTFC());
 		RenderingRegistry.registerEntityRenderingHandler(EntityZombieTFC.class, new RenderZombie());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpiderTFC.class, new RenderSpider());
@@ -210,6 +211,8 @@ public class ClientProxy extends CommonProxy
 		//RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerTFC());
 		RenderingRegistry.registerEntityRenderingHandler(EntityProjectileTFC.class, new RenderArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFishHookTFC.class, new RenderFish());
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockTFC.class, new RenderFallingBlock());
 
 		RenderingRegistry.registerBlockHandler(TFCBlocks.chestRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderChest());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.clayGrassRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
@@ -605,6 +608,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerTickHandler()
 	{
+		super.registerTickHandler();
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 		FMLCommonHandler.instance().bus().register(new FMLClientEventHandler());
 	}

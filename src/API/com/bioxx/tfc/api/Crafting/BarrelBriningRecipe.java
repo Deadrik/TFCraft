@@ -3,7 +3,7 @@ package com.bioxx.tfc.api.Crafting;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.bioxx.tfc.Food.Food;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class BarrelBriningRecipe extends BarrelRecipe

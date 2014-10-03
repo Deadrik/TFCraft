@@ -15,4 +15,10 @@ screenshots/
 .project
 .classpath
 options.txt
+out
+*.iws
+*.ipr
+*.iml
+mods
+asm
 

@@ -8,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,6 +19,7 @@ import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Sounds;
+import com.bioxx.tfc.Entities.EntityFallingBlockTFC;
 import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.relauncher.Side;
@@ -52,7 +52,7 @@ public class BlockSand extends BlockTerra
 			int count;
 			if(textureOffset == 0) count = 16;
 			else count = Global.STONE_ALL.length - 16;
-	
+
 			for(int i = 0; i < count; i++)
 				list.add(new ItemStack(item, 1, i));
 		}
@@ -129,7 +129,7 @@ public class BlockSand extends BlockTerra
 				else
 				{
 					doBeforeFall(world,x,y,z);
-					EntityFallingBlock ent = new EntityFallingBlock(world, (double)(x + 0.5F), (double)(y + 0.5F), (double)(z + 0.5F), this, meta);
+					EntityFallingBlockTFC ent = new EntityFallingBlockTFC(world, (double)(x + 0.5F), (double)(y + 0.5F), (double)(z + 0.5F), this, meta);
 					world.spawnEntityInWorld(ent);
 					Random R = new Random(x * y + z);
 					world.playSoundAtEntity(ent, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (R.nextFloat() / 2));
@@ -137,7 +137,7 @@ public class BlockSand extends BlockTerra
 			}
 		}
 	}
-	
+
 	protected void doBeforeFall(World world, int x, int y, int z){
 	}
 

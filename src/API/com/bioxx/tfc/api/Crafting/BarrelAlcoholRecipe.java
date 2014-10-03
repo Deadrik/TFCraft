@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.api.Food;
 
 public class BarrelAlcoholRecipe extends BarrelRecipe
 {
@@ -28,8 +29,8 @@ public class BarrelAlcoholRecipe extends BarrelRecipe
 		FluidStack out = outFluid.copy();
 		if(out.tag == null)
 			out.tag = new NBTTagCompound();
-		float weight = inIS.getTagCompound().getFloat("foodWeight");
-		out.tag.setFloat("potency", (weight/this.inItemStack.getTagCompound().getFloat("foodWeight"))/amt);
+		float weight = Food.getWeight(inIS);
+		out.tag.setFloat("potency", (weight/Food.getWeight(inItemStack))/amt);
 		return outFluid;
 	}
 

@@ -33,6 +33,7 @@ import com.bioxx.tfc.Items.ItemClay;
 import com.bioxx.tfc.Items.ItemCoal;
 import com.bioxx.tfc.Items.ItemCustomLeash;
 import com.bioxx.tfc.Items.ItemCustomMinecart;
+import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.Items.ItemCustomPotion;
 import com.bioxx.tfc.Items.ItemCustomSeeds;
 import com.bioxx.tfc.Items.ItemDyeCustom;
@@ -729,6 +730,7 @@ public class TFCItems
 	public static Item RedBellPepper;
 	public static Item Squash;
 	public static Item SeaWeed;
+	public static Item Sugar;
 
 	public static Item WheatGround;
 	public static Item BarleyGround;
@@ -819,6 +821,7 @@ public class TFCItems
 	public static Item DoorAcacia;
 
 	public static Item Blueprint;
+	public static Item Nametag;
 	public static Item writabeBookTFC;
 	public static Item WoolYarn;
 	public static Item Wool;
@@ -1504,6 +1507,7 @@ public class TFCItems
 		CornWhiskey = new ItemAlcohol().setUnlocalizedName("CornWhiskey").setCreativeTab(TFCTabs.TFCFoods);
 
 		Blueprint = new ItemBlueprint();
+		Nametag = new ItemCustomNameTag();
 		writabeBookTFC = new ItemWritableBookTFC("Fix Me I'm Broken").setUnlocalizedName("book");
 		WoolYarn = new ItemYarn().setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
 		Wool = new ItemTerra().setUnlocalizedName("Wool").setCreativeTab(TFCTabs.TFCMaterials);
@@ -1749,6 +1753,7 @@ public class TFCItems
 		RedBellPepper = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Red Bell Pepper");
 		Squash = new ItemFoodTFC(EnumFoodGroup.Vegetable, 20, 0, 0, 0, 20, true).setUnlocalizedName("Squash");
 		SeaWeed = new ItemFoodTFC(EnumFoodGroup.Vegetable, 0, 0, 10, 10, 10, true).setUnlocalizedName("Sea Weed");
+		Sugar = new ItemFoodTFC(EnumFoodGroup.None, 30, 0, 0, 0, 0, true).setDecayRate(0.01f).setUnlocalizedName("Sugar");
 
 		//Fruit are in the foodID range of 50,000
 		RedApple = new ItemFoodTFC(EnumFoodGroup.Fruit, 25, 5, 0, 10, 0, true).setDecayRate(2.0f).setUnlocalizedName(Global.FRUIT_META_NAMES[0]);
@@ -1777,29 +1782,31 @@ public class TFCItems
 		Salad = new ItemSalad().setUnlocalizedName("Salad");
 		Soup = new ItemSoup().setUnlocalizedName("Soup");
 
-		Sugarcane = new ItemTerra().setFolder("plants/").setUnlocalizedName("Sugarcane");
+		Sugarcane = new ItemFoodTFC(EnumFoodGroup.None, 30, 0, 0, 0, 0, false, false).setDecayRate(0.75f).setFolder("plants/").setUnlocalizedName("Sugarcane");
 		Hemp = new ItemTerra().setFolder("plants/").setUnlocalizedName("Hemp");
 
 		SeedsWheat = new ItemCustomSeeds(0).setUnlocalizedName("Seeds Wheat");
-		SeedsBarley = new ItemCustomSeeds(5).setUnlocalizedName("Seeds Barley");
-		SeedsRye = new ItemCustomSeeds(7).setUnlocalizedName("Seeds Rye");
-		SeedsOat = new ItemCustomSeeds(9).setUnlocalizedName("Seeds Oat");
-		SeedsRice = new ItemCustomSeeds(11).setUnlocalizedName("Seeds Rice");
-		SeedsMaize = new ItemCustomSeeds(2).setUnlocalizedName("Seeds Maize");
-		SeedsPotato = new ItemCustomSeeds(13).setUnlocalizedName("Seeds Potato");
-		SeedsOnion = new ItemCustomSeeds(15).setUnlocalizedName(TFCOptions.iDontLikeOnions?"Seeds Rutabaga":"Seeds Onion");
-		SeedsCabbage = new ItemCustomSeeds(16).setUnlocalizedName("Seeds Cabbage");
-		SeedsGarlic = new ItemCustomSeeds(17).setUnlocalizedName("Seeds Garlic");
-		SeedsCarrot = new ItemCustomSeeds(18).setUnlocalizedName("Seeds Carrot");
-		SeedsSugarcane = new ItemCustomSeeds(21).setUnlocalizedName("Seeds Sugarcane");
+		SeedsMaize = new ItemCustomSeeds(1).setUnlocalizedName("Seeds Maize");
+		SeedsTomato = new ItemCustomSeeds(2).setUnlocalizedName("Seeds Tomato");
+		SeedsBarley = new ItemCustomSeeds(3).setUnlocalizedName("Seeds Barley");
+		SeedsRye = new ItemCustomSeeds(4).setUnlocalizedName("Seeds Rye");
+		SeedsOat = new ItemCustomSeeds(5).setUnlocalizedName("Seeds Oat");
+		SeedsRice = new ItemCustomSeeds(6).setUnlocalizedName("Seeds Rice");
+		SeedsPotato = new ItemCustomSeeds(7).setUnlocalizedName("Seeds Potato");
+		SeedsOnion = new ItemCustomSeeds(8).setUnlocalizedName(TFCOptions.iDontLikeOnions?"Seeds Rutabaga":"Seeds Onion");
+		SeedsCabbage = new ItemCustomSeeds(9).setUnlocalizedName("Seeds Cabbage");
+		SeedsGarlic = new ItemCustomSeeds(10).setUnlocalizedName("Seeds Garlic");
+		SeedsCarrot = new ItemCustomSeeds(11).setUnlocalizedName("Seeds Carrot");
+		SeedsYellowBellPepper = new ItemCustomSeeds(12).setUnlocalizedName("Seeds Yellow Bell Pepper");
+		SeedsRedBellPepper = new ItemCustomSeeds(13).setUnlocalizedName("Seeds Red Bell Pepper");
+		SeedsSoybean = new ItemCustomSeeds(14).setUnlocalizedName("Seeds Soybean");
+		SeedsGreenbean = new ItemCustomSeeds(15).setUnlocalizedName("Seeds Greenbean");
+		SeedsSquash = new ItemCustomSeeds(16).setUnlocalizedName("Seeds Squash");
+		SeedsJute = new ItemCustomSeeds(17).setUnlocalizedName("Seeds Jute");
+		SeedsSugarcane = new ItemCustomSeeds(18).setUnlocalizedName("Seeds Sugarcane");
 		SeedsHemp = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Hemp");
-		SeedsTomato = new ItemCustomSeeds(4).setUnlocalizedName("Seeds Tomato");
-		SeedsYellowBellPepper = new ItemCustomSeeds(19).setUnlocalizedName("Seeds Yellow Bell Pepper");
-		SeedsRedBellPepper = new ItemCustomSeeds(20).setUnlocalizedName("Seeds Red Bell Pepper");
-		SeedsSoybean = new ItemCustomSeeds(21).setUnlocalizedName("Seeds Soybean");
-		SeedsGreenbean = new ItemCustomSeeds(22).setUnlocalizedName("Seeds Greenbean");
-		SeedsSquash = new ItemCustomSeeds(23).setUnlocalizedName("Seeds Squash");
-		SeedsJute = new ItemCustomSeeds(24).setUnlocalizedName("Seeds Jute");
+
+
 
 		FruitTreeSapling = new ItemFruitTreeSapling().setUnlocalizedName("FruitSapling");
 
@@ -2554,6 +2561,7 @@ public class TFCItems
 		GameRegistry.registerItem(CornWhiskey, CornWhiskey.getUnlocalizedName());
 
 		GameRegistry.registerItem(Blueprint, Blueprint.getUnlocalizedName());
+		GameRegistry.registerItem(Nametag, Nametag.getUnlocalizedName());
 		GameRegistry.registerItem(writabeBookTFC, writabeBookTFC.getUnlocalizedName());
 		GameRegistry.registerItem(WoolYarn, WoolYarn.getUnlocalizedName());
 		GameRegistry.registerItem(Wool, Wool.getUnlocalizedName());
@@ -2867,6 +2875,8 @@ public class TFCItems
 		GameRegistry.registerItem(Sandwich, Sandwich.getUnlocalizedName());
 		GameRegistry.registerItem(Salad, Salad.getUnlocalizedName());
 		GameRegistry.registerItem(Soup, Soup.getUnlocalizedName());
+
+		GameRegistry.registerItem(Sugar, Sugar.getUnlocalizedName());
 
 		GameRegistry.registerItem(Shears, Shears.getUnlocalizedName());
 

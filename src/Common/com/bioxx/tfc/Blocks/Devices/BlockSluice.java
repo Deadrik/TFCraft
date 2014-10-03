@@ -2,11 +2,6 @@ package com.bioxx.tfc.Blocks.Devices;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.TerraFirmaCraft;
-import com.bioxx.tfc.TileEntities.TESluice;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -23,6 +18,15 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Core.TFCFluid;
+import com.bioxx.tfc.TileEntities.TESluice;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockSluice extends BlockContainer
 {
 	public static final int headBlockToFootBlockMap[][] = { {0, 1}, {-1, 0}, {0, -1}, {1, 0} };
@@ -33,6 +37,19 @@ public class BlockSluice extends BlockContainer
 		needsRandomTick = true;
 		//		entity = new TileEntityTerraSluice();
 		//		entity.canUpdate();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
 	}
 
 	@Override
@@ -76,12 +93,26 @@ public class BlockSluice extends BlockContainer
 	}
 
 	@Override
-	public IIcon getIcon(int i, int j)
+	public IIcon getIcon(int side, int meta)
 	{
-		if(j == 4)
-			return TFCBlocks.SaltWater.getIcon(i, 0);
+		if((meta & 4) != 0 && side == 1)
+			return TFCFluid.SALTWATER.getFlowingIcon();
 		else
-			return TFCBlocks.Planks.getIcon(i, 0);
+			return TFCBlocks.WoodSupportH.getIcon(side, 8);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	/**
+	 * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
+	 * when first determining what to render.
+	 */
+	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
+	{
+		if ((world.getBlockMetadata(x, y, z) & 4) == 0)
+			return 16777215;
+		else
+			return 0x354d35;
 	}
 
 	public static int getDirectionFromMetadata(int i)
@@ -118,12 +149,6 @@ public class BlockSluice extends BlockContainer
 			return TFCItems.SluiceItem;
 		else
 			return null;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
 	}
 
 	@Override
@@ -200,59 +225,59 @@ public class BlockSluice extends BlockContainer
 		int l = dir;
 		if(l == 0)
 			if(!foot && 
-			(!world.getBlock(i+1, j, k).isNormalCube() || 
-			!world.getBlock(i-1, j, k).isNormalCube() || 
-			!world.getBlock(i, j, k-1).isNormalCube() || 
-			!world.getBlock(i, j-1, k) .isNormalCube() || 
-			world.getBlock(i, j+2, k).isNormalCube()))
+					(!world.getBlock(i+1, j, k).isNormalCube() || 
+							!world.getBlock(i-1, j, k).isNormalCube() || 
+							!world.getBlock(i, j, k-1).isNormalCube() || 
+							!world.getBlock(i, j-1, k) .isNormalCube() || 
+							world.getBlock(i, j+2, k).isNormalCube()))
 				return false;
 			else if(foot && 
-			(!world.getBlock(i+1, j, k).isNormalCube() || 
-			!world.getBlock(i-1, j, k).isNormalCube() || 
-			!world.getBlock(i, j-1, k) .isNormalCube() || 
-			world.getBlock(i, j+2, k).isNormalCube()))
+					(!world.getBlock(i+1, j, k).isNormalCube() || 
+							!world.getBlock(i-1, j, k).isNormalCube() || 
+							!world.getBlock(i, j-1, k) .isNormalCube() || 
+							world.getBlock(i, j+2, k).isNormalCube()))
 				return false;
 		if(l == 1)
 			if(!foot && 
-			(!world.getBlock(i, j, k+1).isNormalCube() || 
-			!world.getBlock(i, j, k-1).isNormalCube() || 
-			!world.getBlock(i+1, j, k).isNormalCube() ||
-			!world.getBlock(i, j-1, k).isNormalCube() || 
-			world.getBlock(i, j+2, k).isNormalCube()))
+					(!world.getBlock(i, j, k+1).isNormalCube() || 
+							!world.getBlock(i, j, k-1).isNormalCube() || 
+							!world.getBlock(i+1, j, k).isNormalCube() ||
+							!world.getBlock(i, j-1, k).isNormalCube() || 
+							world.getBlock(i, j+2, k).isNormalCube()))
 				return false;
 			else if(foot && 
-			(!world.getBlock(i, j, k+1).isNormalCube() || 
-			!world.getBlock(i, j, k-1).isNormalCube() || 
-			!world.getBlock(i, j-1, k) .isNormalCube() || 
-			world.getBlock(i, j+2, k).isNormalCube()))
+					(!world.getBlock(i, j, k+1).isNormalCube() || 
+							!world.getBlock(i, j, k-1).isNormalCube() || 
+							!world.getBlock(i, j-1, k) .isNormalCube() || 
+							world.getBlock(i, j+2, k).isNormalCube()))
 				return false;
 		if(l == 2)
 			if(!foot && 
-			(!world.getBlock(i+1, j, k).isNormalCube() || 
-			!world.getBlock(i-1, j, k).isNormalCube() || 
-			!world.getBlock(i, j, k+1).isNormalCube() || 
-			!world.getBlock(i, j-1, k) .isNormalCube() || 
-			world.getBlock(i, j+2, k).isNormalCube()))
+					(!world.getBlock(i+1, j, k).isNormalCube() || 
+							!world.getBlock(i-1, j, k).isNormalCube() || 
+							!world.getBlock(i, j, k+1).isNormalCube() || 
+							!world.getBlock(i, j-1, k) .isNormalCube() || 
+							world.getBlock(i, j+2, k).isNormalCube()))
 				return false;
 			else if(foot && 
-			(!world.getBlock(i+1, j, k).isNormalCube() || 
-			!world.getBlock(i-1, j, k).isNormalCube() || 
-			!world.getBlock(i, j-1, k) .isNormalCube() || 
-			world.getBlock(i, j+2, k).isNormalCube()))
+					(!world.getBlock(i+1, j, k).isNormalCube() || 
+							!world.getBlock(i-1, j, k).isNormalCube() || 
+							!world.getBlock(i, j-1, k) .isNormalCube() || 
+							world.getBlock(i, j+2, k).isNormalCube()))
 				return false;
 		if(l == 3)
 			if(!foot && 
-			(!world.getBlock(i, j, k+1).isNormalCube() || 
-			!world.getBlock(i, j, k-1).isNormalCube() || 
-			!world.getBlock(i-1, j, k).isNormalCube() ||
-			!world.getBlock(i, j-1, k) .isNormalCube() || 
-			world.getBlock(i, j+2, k).isNormalCube()))
+					(!world.getBlock(i, j, k+1).isNormalCube() || 
+							!world.getBlock(i, j, k-1).isNormalCube() || 
+							!world.getBlock(i-1, j, k).isNormalCube() ||
+							!world.getBlock(i, j-1, k) .isNormalCube() || 
+							world.getBlock(i, j+2, k).isNormalCube()))
 				return false;
 			else if(foot && 
-			(!world.getBlock(i, j, k+1).isNormalCube() || 
-			!world.getBlock(i, j, k-1).isNormalCube() || 
-			!world.getBlock(i, j-1, k) .isNormalCube() || 
-			world.getBlock(i, j+2, k).isNormalCube()))
+					(!world.getBlock(i, j, k+1).isNormalCube() || 
+							!world.getBlock(i, j, k-1).isNormalCube() || 
+							!world.getBlock(i, j-1, k) .isNormalCube() || 
+							world.getBlock(i, j+2, k).isNormalCube()))
 				return false;
 		return true;
 	}

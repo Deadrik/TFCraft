@@ -2,66 +2,56 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
-import com.bioxx.tfc.Blocks.Flora.BlockWaterPlant;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.TileEntities.TEWaterPlant;
-
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.TileEntities.TEWaterPlant;
+
 public class WorldGenWaterPlants extends WorldGenerator
 {
 	/** The ID of the plant block used in this plant generator. */
 	private Block plantBlock;
-	private boolean isSwamp;
 
-	public WorldGenWaterPlants(Block par1,boolean isSwamp)
+	public WorldGenWaterPlants(Block par1)
 	{
 		this.plantBlock = par1;
-		this.isSwamp = isSwamp;
 	}
 
-	public boolean generate(World par1World, Random par2Random, int x, int y, int z)
+	@Override
+	public boolean generate(World world, Random rand, int x, int y, int z)
 	{
-		int n = isSwamp?25:10;
-		for (int var6 = 0; var6 < n; ++var6)
+		if (TFC_Core.isWater(world.getBlock(x, y, z)) && world.isAirBlock(x, y+1, z))
 		{
-			int var7 = x + (par2Random.nextInt(8) + par2Random.nextInt(4)) - (par2Random.nextInt(3) + par2Random.nextInt(2));
-			int var8 = y + par2Random.nextInt(4) - par2Random.nextInt(4);
-			int var9 = z + (par2Random.nextInt(8) + par2Random.nextInt(4)) - (par2Random.nextInt(3) + par2Random.nextInt(2));
+			//How far underwater are we going
+			int depthCounter = 0;
+			//Effectively makes sea grass grow less frequently as depth increases beyond 6 m.
+			boolean isTooDeep = false;
+			boolean isFreshWater = TFC_Core.isFreshWater(world.getBlock(x, y, z));
+			int maxDepth = !isFreshWater ? 10 : 1;
 
-			if (par1World.isAirBlock(var7, var8, var9))
+			//travel down until a solid surface is reached
+			while(y > 0 && TFC_Core.isWater(world.getBlock(x, --y, z)) && !isTooDeep)
 			{
-				//How far underwater are we going
-				int depthCounter = 0;
-				//Effectively makes sea grass grow less frequently as depth increases beyond 6 m.
-				boolean randomTooDeepFlag = false;
-				//travel down until a solid surface is reached
-				while(var8 > 0 && TFC_Core.isWater(par1World.getBlock(var7, --var8, var9)) && !randomTooDeepFlag)
+				depthCounter++;
+				if(depthCounter > maxDepth)
 				{
-					depthCounter++;
-					if(depthCounter >= 6)
-					{
-						//If depthCounter reaches 11, automatically prevents plants from growing
-						randomTooDeepFlag = (par2Random.nextInt(12 - depthCounter)==0);
-					}
+					//If depthCounter reaches 11, automatically prevents plants from growing
+					isTooDeep = true;
 				}
-				if(!randomTooDeepFlag && depthCounter >0)
-				{
-					int meta = par1World.getBlockMetadata(var7, var8, var9);
-					Block oldBlock = par1World.getBlock(var7, var8, var9);
-					if(TFC_Core.isSoil(oldBlock) || TFC_Core.isGravel(oldBlock) || TFC_Core.isSand(oldBlock)){
-						par1World.setBlock(var7, var8, var9, this.plantBlock, meta, 1);
-						TileEntity te = par1World.getTileEntity(var7, var8, var9);
-						if(te instanceof TEWaterPlant){
-							((TEWaterPlant)te).setBlock(oldBlock);
-						}
+			}
+			if(!isTooDeep && depthCounter > 0)
+			{
+				int meta = world.getBlockMetadata(x, y, z);
+				Block oldBlock = world.getBlock(x, y, z);
+				if(TFC_Core.isSoil(oldBlock) || TFC_Core.isGravel(oldBlock) || TFC_Core.isSand(oldBlock)){
+					world.setBlock(x, y, z, this.plantBlock, meta, 2);
+					TileEntity te = world.getTileEntity(x, y, z);
+					if(te instanceof TEWaterPlant){
+						((TEWaterPlant)te).setBlock(oldBlock);
 					}
-					//Gravelly areas will spawn fewer plants
-					if(TFC_Core.isGravel(oldBlock))
-						n--;
 				}
 			}
 		}

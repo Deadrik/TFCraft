@@ -50,6 +50,7 @@ public class BlockCrop extends BlockContainer
 	IIcon[] iconsSoybean = new IIcon[7];
 	IIcon[] iconsSquash = new IIcon[7];
 	IIcon[] iconsJute = new IIcon[6];
+	IIcon[] iconsSugarcane = new IIcon[8];
 
 	public IIcon iconInfest;
 
@@ -97,6 +98,7 @@ public class BlockCrop extends BlockContainer
 			iconsBarley[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Barley (" + i + ")");
 			iconsOat[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Oat (" + i + ")");
 			iconsRice[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Rice (" + i + ")");
+			iconsSugarcane[i - 1] = register.registerIcon(Reference.ModID + ":" + "plants/crops/Sugarcane (" + i + ")");
 		}
 
 		iconInfest = register.registerIcon(Reference.ModID + ":bugs");
@@ -116,48 +118,43 @@ public class BlockCrop extends BlockContainer
 		switch(te.cropId)
 		{
 		case 0:
-		case 1:
 			return iconsWheat[stage];
-		case 2:
-		case 3:
+		case 1:
 			return iconsCorn[stage];
-		case 4:
+		case 2:
 			return iconsTomato[stage];
-		case 5://Barley
-		case 6://Wild Barley
+		case 3://Barley
 			return iconsBarley[stage];
-		case 7://Rye
-		case 8://Wild Rye
+		case 4://Rye
 			return iconsRye[stage];
-		case 9://Oat
-		case 10://Wild Oat
+		case 5://Oat
 			return iconsOat[stage];
-		case 11://Rice
-		case 12://Wild Rice
+		case 6://Rice
 			return iconsRice[stage];
-		case 13://Potato
-		case 14://Wild Potato
+		case 7://Potato
 			return iconsPotato[stage];
-		case 15://Onion
+		case 8://Onion
 			return iconsOnion[stage];
-		case 16://Cabbage
+		case 9://Cabbage
 			return iconsCabbage[stage];
-		case 17://Garlic
+		case 10://Garlic
 			return iconsGarlic[stage];
-		case 18://Carrots
+		case 11://Carrots
 			return iconsCarrots[stage];
-		case 19://Yellow Bell
+		case 12://Yellow Bell
 			return iconsPepperYellow[stage];
-		case 20://Red Bell
+		case 13://Red Bell
 			return iconsPepperRed[stage];
-		case 21://Soybean
+		case 14://Soybean
 			return iconsSoybean[stage];
-		case 22://Greenbean
+		case 15://Greenbean
 			return iconsGreenbean[stage];
-		case 23://Squash
+		case 16://Squash
 			return iconsSquash[stage];
-		case 24://Jute
+		case 17://Jute
 			return iconsJute[stage];
+		case 18://Sugarcane
+			return iconsSugarcane[stage];
 		}
 		return iconsCorn[6];
 	}

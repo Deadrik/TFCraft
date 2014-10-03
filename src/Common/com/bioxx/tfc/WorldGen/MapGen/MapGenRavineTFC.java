@@ -91,77 +91,85 @@ public class MapGenRavineTFC extends MapGenBaseTFC
 
 				if (xCoord >= chunkMidX - 16.0D - var53 * 2.0D && zCoord >= chunkMidZ - 16.0D - var53 * 2.0D && xCoord <= chunkMidX + 16.0D + var53 * 2.0D && zCoord <= chunkMidZ + 16.0D + var53 * 2.0D)
 				{
-					int var56 = MathHelper.floor_double(xCoord - var53) - chunkX * 16 - 1;
-					int var35 = MathHelper.floor_double(xCoord + var53) - chunkX * 16 + 1;
-					int var55 = MathHelper.floor_double(yCoord - var30) - 1;
-					int var37 = MathHelper.floor_double(yCoord + var30) + 1;
-					int var57 = MathHelper.floor_double(zCoord - var53) - chunkZ * 16 - 1;
-					int var39 = MathHelper.floor_double(zCoord + var53) - chunkZ * 16 + 1;
+					int xMin = MathHelper.floor_double(xCoord - var53) - chunkX * 16 - 1;
+					int xMax = MathHelper.floor_double(xCoord + var53) - chunkX * 16 + 1;
+					int minY = MathHelper.floor_double(yCoord - var30) - 1;
+					int maxY = MathHelper.floor_double(yCoord + var30) + 1;
+					int zMin = MathHelper.floor_double(zCoord - var53) - chunkZ * 16 - 1;
+					int zMax = MathHelper.floor_double(zCoord + var53) - chunkZ * 16 + 1;
 
-					if (var56 < 0)
-						var56 = 0;
+					if (xMin < 0)
+						xMin = 0;
 
-					if (var35 > 16)
-						var35 = 16;
+					if (xMax > 16)
+						xMax = 16;
 
-					if (var55 < 1)
-						var55 = 1;
+					if (minY < 1)
+						minY = 1;
 
-					if (var37 > 250)
-						var37 = 250;
+					if (maxY > 250)
+						maxY = 250;
 
-					if (var57 < 0)
-						var57 = 0;
+					if (zMin < 0)
+						zMin = 0;
 
-					if (var39 > 16)
-						var39 = 16;
+					if (zMax > 16)
+						zMax = 16;
 
-					boolean var58 = false;
-					int var41;
+					boolean isBlocked = false;
+					int x;
 					int index;
 
-					for (var41 = var56; !var58 && var41 < var35; ++var41)
+					for (x = xMin; !isBlocked && x < xMax; ++x)
 					{
-						for (int var42 = var57; !var58 && var42 < var39; ++var42)
+						for (int z = zMin; !isBlocked && z < zMax; ++z)
 						{
-							for (int var43 = var37 + 1; !var58 && var43 >= var55 - 1; --var43)
+							for (int y = maxY + 1; !isBlocked && y >= minY - 1; --y)
 							{
-								index = (var41 * 16 + var42) * 256 + var43;
+								index = (x * 16 + z) * 256 + y;
 
-								if (var43 >= 0 && var43 < 256)
+								if (y >= 0 && y < 256)
 								{
 									if (blockArray[index] == TFCBlocks.SaltWaterStationary ||  blockArray[index] == TFCBlocks.FreshWaterStationary)
-										var58 = true;
-									if (var43 != var55 - 1 && var41 != var56 && var41 != var35 - 1 && var42 != var57 && var42 != var39 - 1)
-										var43 = var55;
+										isBlocked = true;
+									if (y != minY - 1 && x != xMin && x != xMax - 1 && z != zMin && z != zMax - 1)
+										y = minY;
 								}
 							}
 						}
 					}
 
-					if (!var58)
+					if (!isBlocked)
 					{
-						for (var41 = var56; var41 < var35; ++var41)
+						for (x = xMin; x < xMax; ++x)
 						{
-							double var59 = (var41 + chunkX * 16 + 0.5D - xCoord) / var53;
+							double var59 = (x + chunkX * 16 + 0.5D - xCoord) / var53;
 
-							for (index = var57; index < var39; ++index)
+							for (index = zMin; index < zMax; ++index)
 							{
 								double var45 = (index + chunkZ * 16 + 0.5D - zCoord) / var53;
-								int index2 = (var41 * 16 + index) * 256 + var37;
+								int index2 = (x * 16 + index) * 256 + maxY;
 
 								if (var59 * var59 + var45 * var45 < 1.0D)
 								{
-									for (int var49 = var37 - 1; var49 >= var55; --var49)
+									for (int var49 = maxY - 1; var49 >= minY; --var49)
 									{
 										double var50 = (var49 + 0.5D - yCoord) / var30;
 										if ((var59 * var59 + var45 * var45) * this.field_35627_a[var49] + var50 * var50 / 6.0D < 1.0D)
 										{
 											if (TFC_Core.isGround(blockArray[index2]))
+											{
+												if(TFC_Core.isSoilOrGravel(blockArray[index2+1]))
+												{
+													for(int upCount = 1; TFC_Core.isSoilOrGravel(blockArray[index2+upCount]); upCount++)
+													{blockArray[index2+upCount] = Blocks.air;}
+												}
+
 												if (var49 < 10)
 													blockArray[index2] = Blocks.lava;
 												else
 													blockArray[index2] = Blocks.air;
+											}
 										}
 
 										--index2;

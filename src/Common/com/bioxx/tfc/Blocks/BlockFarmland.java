@@ -19,8 +19,8 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TEFarmland;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -142,7 +142,7 @@ public class BlockFarmland extends BlockContainer
 				for (int z = k - 4; z <= k + 4; ++z)
 				{
 					Block b = world.getBlock(x, y, z);
-					if (b == TFCBlocks.FreshWater)
+					if (TFC_Core.isFreshWater(b))
 						return true;
 				}
 			}
@@ -159,7 +159,7 @@ public class BlockFarmland extends BlockContainer
 				for (int z = k - 4; z <= k + 4; ++z)
 				{
 					Block b = world.getBlock(x, y, z);
-					if (b == TFCBlocks.SaltWater)
+					if (TFC_Core.isSaltWater(b))
 						return true;
 				}
 			}

@@ -135,4 +135,14 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	{
 		return Helper.stringToInt("pheasant");
 	}
+	
+	@Override
+	public boolean trySetName(String name) {
+		if(this.familiarity > 60 && !this.hasCustomNameTag()){
+			this.setCustomNameTag(name);
+			return true;
+		}
+		this.playSound(TFC_Sounds.PHAESANTSAY,  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
+		return false;
+	}
 }

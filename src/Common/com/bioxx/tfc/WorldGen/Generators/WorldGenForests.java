@@ -1,6 +1,5 @@
 package com.bioxx.tfc.WorldGen.Generators;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.world.World;
@@ -9,7 +8,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.DataLayer;
 import com.bioxx.tfc.WorldGen.TFCBiome;
 import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumTree;
@@ -24,6 +22,11 @@ public class WorldGenForests implements IWorldGenerator
 	WorldGenerator gen0;
 	WorldGenerator gen1;
 	WorldGenerator gen2;
+	int TreeType0;
+	int TreeType1;
+	int TreeType2;
+	float evt;
+	float rainfall;
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
@@ -35,6 +38,19 @@ public class WorldGenForests implements IWorldGenerator
 		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
 		if(biome == TFCBiome.ocean)
 			return;
+
+		rainfall = TFC_Climate.getRainfall(world, chunkX, 0, chunkZ);
+		evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(chunkX+8, chunkZ+8).floatdata1;
+		TreeType0 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 0);
+		TreeType1 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 1);
+		TreeType2 = TFC_Climate.getTreeLayer(world, chunkX, Global.SEALEVEL, chunkZ, 2);
+
+		gen0 = TFCBiome.getTreeGen(TreeType0, random.nextBoolean());
+		gen1 = TFCBiome.getTreeGen(TreeType1, random.nextBoolean());
+		gen2 = TFCBiome.getTreeGen(TreeType2, random.nextBoolean());
+		//gen0 = new WorldGenTrees(false, 4, 1, 1, false);
+		//gen1 = new WorldGenTrees(false, 4, 1, 1, false);
+		//gen2 = new WorldGenTrees(false, 4, 1, 1, false);
 
 		if(!generateJungle(random, chunkX, chunkZ, world))
 			generateForest(random, chunkX, chunkZ, world);
@@ -59,34 +75,10 @@ public class WorldGenForests implements IWorldGenerator
 			zCoord = chunkZ + random.nextInt(16);
 			yCoord = world.getHeightValue(xCoord, zCoord);
 
-			float rainfall = TFC_Climate.getRainfall(world, xCoord, 0, zCoord);
 			numTrees = (int) (numTreesBase + ((rainfall / 1000) * 2));
 			if(numTrees > 30)
 				numTrees = 30;
 
-			//int[] trees = getTreesForClimate(random,world,xCoord,yCoord,zCoord);
-			int TreeType0 = TFC_Climate.getTreeLayer(world, xCoord, yCoord, zCoord, 0);
-			int TreeType1 = TFC_Climate.getTreeLayer(world, xCoord, yCoord, zCoord, 1);
-			int TreeType2 = TFC_Climate.getTreeLayer(world, xCoord, yCoord, zCoord, 2);
-
-			//This is error prevention for when the Layer system sometimes returns bad values
-			/*if(TreeType0 < 0 || TreeType0 > EnumTree.values().length) 
-			{
-				TreeType0 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
-			}
-			if(TreeType1 < 0 || TreeType1 > EnumTree.values().length) 
-			{
-				TreeType1 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 0);
-			}
-			if(TreeType2 < 0 || TreeType2 > EnumTree.values().length) 
-			{
-				TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
-			}*/
-
-			float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(xCoord, zCoord).floatdata1;
-			gen0 = TFCBiome.getTreeGen(TreeType0, random.nextBoolean());
-			gen1 = TFCBiome.getTreeGen(TreeType1, random.nextBoolean());
-			gen2 = TFCBiome.getTreeGen(TreeType2, random.nextBoolean());
 			float temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
 
 			if(getNearWater(world, xCoord, yCoord, zCoord))
@@ -218,14 +210,13 @@ public class WorldGenForests implements IWorldGenerator
 			xCoord = chunkX + 8 + random.nextInt(16);
 			zCoord = chunkZ + 8 + random.nextInt(16);
 			yCoord = world.getHeightValue(xCoord, zCoord);
-			float rainfall = TFC_Climate.getRainfall(world, xCoord, 0, zCoord);
-			DataLayer EVT = TFC_Climate.getCacheManager(world).getEVTLayerAt(xCoord, zCoord);
+
 			float temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
 			float temperatureAvg = TFC_Climate.getBioTemperature(world, xCoord, zCoord);
 
 			try
 			{
-				if(EVT.floatdata1 <= EnumTree.KAPOK.maxEVT &&
+				if(evt <= EnumTree.KAPOK.maxEVT &&
 						rainfall >= EnumTree.KAPOK.minRain &&
 						rainfall <= EnumTree.KAPOK.maxRain && 
 						temperatureAvg >= EnumTree.KAPOK.minTemp &&
@@ -258,40 +249,6 @@ public class WorldGenForests implements IWorldGenerator
 			}
 		}
 		return completed;
-	}
-
-	public int[] getTreesForClimate(Random random, World world, int xCoord, int yCoord, int zCoord){
-		ArrayList list = new ArrayList<EnumTree>();
-		float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(xCoord, zCoord).floatdata1;
-		float rainfall = TFC_Climate.getRainfall(world, xCoord, 0, zCoord);
-		if(getNearWater(world, xCoord, yCoord, zCoord))
-		{
-			rainfall*=2;
-			evt /= 2;
-		}
-
-		float temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
-		float temperatureAvg = TFC_Climate.getBioTemperature(world, xCoord, zCoord);
-		for(int i = 0; i < EnumTree.values().length;i++)
-		{
-			if(EnumTree.values()[i].maxRain > rainfall && EnumTree.values()[i].minRain < rainfall)
-			{
-				if(EnumTree.values()[i].maxEVT > evt && EnumTree.values()[i].minEVT < evt)
-				{
-					if(EnumTree.values()[i].maxTemp > temperatureAvg && EnumTree.values()[i].minTemp < temperatureAvg)
-						list.add(EnumTree.values()[i]);
-				}
-			}
-		}
-
-		int[] treeTypes = new int[]{0,0,0};
-		for(int i = 0; i < 3 && list.size() > 0; i++)
-		{
-			int n = random.nextInt(list.size());
-			treeTypes[i] = n;
-			list.remove(n);
-		}
-		return treeTypes;
 	}
 
 	public boolean getNearWater(World world, int x, int y, int z)

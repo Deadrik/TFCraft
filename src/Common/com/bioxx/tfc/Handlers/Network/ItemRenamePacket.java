@@ -31,13 +31,13 @@ public class ItemRenamePacket extends AbstractPacket
 	@Override
 	public void handleClientSide(EntityPlayer player)
 	{
-		player.inventory.getCurrentItem().stackTagCompound.setString("Name", name);
+		player.inventory.getCurrentItem().stackTagCompound.setString("ItemName", name);
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player)
 	{
-		player.inventory.getCurrentItem().stackTagCompound.setString("Name", name);
+		player.inventory.getCurrentItem().stackTagCompound.setString("ItemName", name);
 	}
 
 }

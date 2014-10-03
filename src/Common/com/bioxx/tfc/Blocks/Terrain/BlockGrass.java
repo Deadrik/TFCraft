@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TerraFirmaCraft;
+import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.ColorizerGrassTFC;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -31,7 +32,7 @@ import com.bioxx.tfc.api.Constant.Global;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockGrass extends net.minecraft.block.BlockGrass
+public class BlockGrass extends BlockTerra
 {
 	protected int textureOffset = 0;
 
@@ -71,6 +72,11 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 			for(int i = 0; i < count; i++)
 				list.add(new ItemStack(item, 1, i));
 		}
+	}
+
+	public static IIcon getIconSideOverlay()
+	{
+		return ((BlockGrass)TFCBlocks.Grass).iconGrassSideOverlay;
 	}
 
 	@Override
@@ -308,10 +314,11 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block b)
 	{
-		if(!world.blockExists(x, y - 1, z))
+		if(world.isAirBlock(x, y - 1, z))
 		{
 			int meta = world.getBlockMetadata(x, y, z);
 			world.setBlock(x, y, z, TFC_Core.getTypeForDirtFromGrass(this), meta, 0x2);
+			world.scheduleBlockUpdate(x, y, z, TFC_Core.getTypeForDirtFromGrass(this), 5);
 		}
 	}
 }
