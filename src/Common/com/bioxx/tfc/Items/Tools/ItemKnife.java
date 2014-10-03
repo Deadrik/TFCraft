@@ -56,12 +56,12 @@ public class ItemKnife extends ItemWeapon implements IKnife
 
 			Material mat = world.getBlock(x, y, z).getMaterial();
 
-			if(side == 1 && id.isSideSolid(world, x, y, z, ForgeDirection.UP) &&!TFC_Core.isSoil(id) && !TFC_Core.isWater(id) && world.isAirBlock(x, y + 1, z) && hasBowl != -1 &&
+			if(side == 1 && id.isSideSolid(world, x, y, z, ForgeDirection.UP) &&!TFC_Core.isSoil(id) && !TFC_Core.isWater(id) && world.isAirBlock(x, y + 1, z) &&
 					(mat == Material.wood || mat == Material.rock || mat == Material.iron))
 			{
 				world.setBlock(x, y + 1, z, TFCBlocks.FoodPrep);
 				TEFoodPrep te = (TEFoodPrep) world.getTileEntity(x, y + 1, z);
-				if(te != null)
+				if(hasBowl != -1 && te != null)
 				{
 					te.setInventorySlotContents(7, entityplayer.inventory.mainInventory[hasBowl]);
 					entityplayer.inventory.mainInventory[hasBowl] = null;
@@ -80,7 +80,7 @@ public class ItemKnife extends ItemWeapon implements IKnife
 			arraylist.add(StatCollector.translateToLocal("gui.Help"));
 			arraylist.add(StatCollector.translateToLocal("gui.Knife.Inst0"));
 			arraylist.add(StatCollector.translateToLocal("gui.Knife.Inst1"));
-			arraylist.add(StatCollector.translateToLocal("gui.Knife.Inst2"));
+			//arraylist.add(StatCollector.translateToLocal("gui.Knife.Inst2"));
 		}
 		else
 		{
