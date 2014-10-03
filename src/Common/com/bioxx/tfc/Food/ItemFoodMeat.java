@@ -3,6 +3,7 @@ package com.bioxx.tfc.Food;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 
 public class ItemFoodMeat extends ItemFoodTFC {

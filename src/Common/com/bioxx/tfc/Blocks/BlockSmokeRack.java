@@ -20,9 +20,9 @@ import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Blocks.Terrain.BlockCollapsable;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Food.Food;
 import com.bioxx.tfc.Food.ItemFoodMeat;
 import com.bioxx.tfc.TileEntities.TESmokeRack;
+import com.bioxx.tfc.api.Food;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

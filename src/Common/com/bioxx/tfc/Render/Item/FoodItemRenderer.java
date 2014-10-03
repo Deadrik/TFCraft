@@ -7,8 +7,8 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.bioxx.tfc.Food.Food;
 import com.bioxx.tfc.Food.ItemFoodTFC;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.Interfaces.IFood;
 
 public class FoodItemRenderer implements IItemRenderer

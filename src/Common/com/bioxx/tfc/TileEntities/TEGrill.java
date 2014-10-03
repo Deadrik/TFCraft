@@ -13,7 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Food.Food;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.HeatIndex;
 import com.bioxx.tfc.api.HeatRegistry;
 import com.bioxx.tfc.api.TFC_ItemHeat;

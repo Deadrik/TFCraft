@@ -25,6 +25,7 @@ import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 import com.bioxx.tfc.Core.Player.SkillStats.SkillRank;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.Render.Item.FoodItemRenderer;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.TFC_ItemHeat;
