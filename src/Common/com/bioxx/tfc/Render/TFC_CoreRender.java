@@ -354,322 +354,128 @@ public class TFC_CoreRender
 
 	public static boolean RenderSluice(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
-
-		double blockMinX = block.getBlockBoundsMinX();
-		double blockMaxX = block.getBlockBoundsMaxX();
-		double blockMinY = block.getBlockBoundsMinY();
-		double blockMaxY = block.getBlockBoundsMaxY();
-		double blockMinZ = block.getBlockBoundsMinZ();
-		double blockMaxZ = block.getBlockBoundsMaxZ();
 		IBlockAccess blockAccess = renderblocks.blockAccess;
 		Tessellator tessellator = Tessellator.instance;
-		int l = blockAccess.getBlockMetadata(i, j, k);
-		int i1 = BlockSluice.getDirectionFromMetadata(l);
-		float f = 0.5F;
-		float f1 = 1.0F;
-		float f2 = 0.8F;
-		float f3 = 0.6F;
-		int j1 = block.getMixedBrightnessForBlock(blockAccess, i, j, k);
-		tessellator.setBrightness(j1);
-		tessellator.setColorOpaque_F(f, f, f);
-
-		IIcon texture = block.getIcon(blockAccess, i, j, k, 0);
-		double texMinX = texture.getMinU();
-		double texMaxX = texture.getMaxU();
-		double texMinY = texture.getMinV();
-		double texMaxY = texture.getMaxV();
-
-		double minX = i + blockMinX;
-		double maxX = i + blockMaxX;
-		double minY = j + blockMinY;
-		double minZ = k + blockMinZ;
-		double maxZ = k + blockMaxZ;
-		double maxY = j + blockMaxY;
-
-		int var10 = blockAccess.getBiomeGenForCoords(i, k).waterColorMultiplier;
-		int waterR = (var10 & 16711680) >> 16;
-		int waterG = (var10 & 65280) >> 8;
-		int waterB = var10 & 255;
+		int meta = blockAccess.getBlockMetadata(i, j, k);
+		int dir = BlockSluice.getDirectionFromMetadata(meta);
 
 		//render ramp
-		if(!BlockSluice.isBlockFootOfBed(l))
+		if(!BlockSluice.isBlockFootOfBed(meta))
 		{
-			if(i1 == 0)
+			if(dir == 0)
 			{
-				//ribs
-				renderblocks.setRenderBounds(0.0F, 0.0F, 0.75F, 1F, 0.75F, 0.8F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.0F, 0.0F, 0.45F, 1F, 0.9F, 0.5F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-
-				tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-				tessellator.addVertexWithUV(minX, maxY, minZ, texMaxX, texMinY);//d,d3
-				tessellator.addVertexWithUV(minX, minY+0.5F, maxZ, texMaxX, texMaxY);//d,d2
-				tessellator.addVertexWithUV(maxX, minY+0.5f, maxZ, texMinX, texMaxY);//d1,d2
-				tessellator.addVertexWithUV(maxX, maxY, minZ, texMinX, texMinY);//d1,d3
-				if(((BlockSluice)block).getIsRecievingWater(l))
+				for(int count = 0; count < 4; count++)
 				{
-					//get water texture
-					texture = TFCBlocks.SaltWater.getIcon(0, 4);
-					l = block.colorMultiplier(blockAccess, i, j, k);
-					//reassign the uv coords
-					texMinX = texture.getMinU();
-					texMaxX = texture.getMaxU();
-					texMinY = texture.getMinV();
-					texMaxY = texture.getMaxV();
-
-					//draw water plane
-					//tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
-					tessellator.setColorOpaque(waterR, waterG, waterB);
-					tessellator.addVertexWithUV(minX, maxY, minZ, texMaxX, texMinY);//d,d3
-					tessellator.addVertexWithUV(minX, minY+0.6F, maxZ, texMaxX, texMaxY);//d,d2
-					tessellator.addVertexWithUV(maxX, minY+0.6f, maxZ, texMinX, texMaxY);//d1,d2
-					tessellator.addVertexWithUV(maxX, maxY, minZ, texMinX, texMinY);//d1,d3
+					//ribs
+					renderblocks.setRenderBounds(0, 0.0F, 0.0F+(0.25*count), 1, 1.0F-(0.125*count), 0.05F+(0.25*count));
+					renderblocks.renderStandardBlock(block, i, j, k);
+					//body
+					renderblocks.setRenderBounds(0, 0.0F, 0.05F+(0.25*count), 1, 0.8125-(0.125*count), 0.25F+(0.25*count));
+					renderblocks.renderStandardBlock(block, i, j, k);
 				}
 			}
-			else if(i1 == 1)
+			else if(dir == 1)
 			{
-				//ribs
-				renderblocks.setRenderBounds(0.2F, 0.0F, 0.0F, 0.25F, 0.75F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.5F, 0.0F, 0.0F, 0.55F, 0.9F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-
-				tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-				tessellator.addVertexWithUV(minX, minY+0.5F, maxZ, texMinX, texMaxY);
-				tessellator.addVertexWithUV(maxX, maxY, maxZ, texMinX, texMinY);
-				tessellator.addVertexWithUV(maxX, maxY, minZ, texMaxX, texMinY);
-				tessellator.addVertexWithUV(minX, minY+0.5F, minZ, texMaxX, texMaxY);
-
-				if(((BlockSluice)block).getIsRecievingWater(l))
+				if((meta & 4) != 0)
+					renderblocks.uvRotateTop = 1;
+				for(int count = 0; count < 4; count++)
 				{
-					//get water texture
-					texture = TFCBlocks.SaltWater.getIcon(0, 4);
-					l = block.colorMultiplier(blockAccess, i, j, k);
-					//reassign the uv coords
-					texMinX = texture.getMinU();
-					texMaxX = texture.getMaxU();
-					texMinY = texture.getMinV();
-					texMaxY = texture.getMaxV();
-
-					//draw water plane
-					tessellator.setColorOpaque(waterR, waterG, waterB);
-					tessellator.addVertexWithUV(minX, minY+0.6F, maxZ, texMinX, texMaxY);
-					tessellator.addVertexWithUV(maxX, maxY, maxZ, texMinX, texMinY);
-					tessellator.addVertexWithUV(maxX, maxY, minZ, texMaxX, texMinY);
-					tessellator.addVertexWithUV(minX, minY+0.6F, minZ, texMaxX, texMaxY);
+					//ribs
+					renderblocks.setRenderBounds(0.95F-(0.25*count), 0.0F, 0, 1.0F-(0.25*count), 1.0F-(0.125*count), 1);
+					renderblocks.renderStandardBlock(block, i, j, k);
+					//body
+					renderblocks.setRenderBounds(0.75F-(0.25*count), 0.0F, 0, 0.95F-(0.25*count), 0.8125-(0.125*count), 1);
+					renderblocks.renderStandardBlock(block, i, j, k);
 				}
 			}
-			else if(i1 == 2)
+			else if(dir == 2)
 			{
-				//ribs
-				renderblocks.setRenderBounds(0.0F, 0.0F, 0.2F, 1F, 0.75F, 0.25F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.0F, 0.0F, 0.5F, 1F, 0.9F, 0.55F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-
-				tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-				tessellator.addVertexWithUV(minX, minY+0.5F, minZ, texMinX, texMaxY);
-				tessellator.addVertexWithUV(minX, maxY, maxZ, texMinX, texMinY);
-				tessellator.addVertexWithUV(maxX, maxY, maxZ, texMaxX, texMinY);
-				tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, texMaxX, texMaxY);
-
-				if(((BlockSluice)block).getIsRecievingWater(l))
+				if((meta & 4) != 0)
+					renderblocks.uvRotateTop = 3;
+				for(int count = 0; count < 4; count++)
 				{
-					//get water texture
-					texture = TFCBlocks.SaltWater.getIcon(0, 4);
-					l = block.colorMultiplier(blockAccess, i, j, k);
-					//reassign the uv coords
-					texMinX = texture.getMinU();
-					texMaxX = texture.getMaxU();
-					texMinY = texture.getMinV();
-					texMaxY = texture.getMaxV();
-
-					//draw water plane
-					tessellator.setColorOpaque(waterR, waterG, waterB);
-					tessellator.addVertexWithUV(minX, minY+0.6F, minZ, texMinX, texMaxY);
-					tessellator.addVertexWithUV(minX, maxY, maxZ, texMinX, texMinY);
-					tessellator.addVertexWithUV(maxX, maxY, maxZ, texMaxX, texMinY);
-					tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, texMaxX, texMaxY);
+					//ribs
+					renderblocks.setRenderBounds(0.0F, 0.0F, 0.95F-(0.25*count), 1F, 1.0F-(0.125*count), 1.0F-(0.25*count));
+					renderblocks.renderStandardBlock(block, i, j, k);
+					//body
+					renderblocks.setRenderBounds(0.0F, 0.0F, 0.75F-(0.25*count), 1F, 0.8125F-(0.125*count), 0.95F-(0.25*count));
+					renderblocks.renderStandardBlock(block, i, j, k);
 				}
-
-
 			}
-			else if(i1 == 3)
+			else if(dir == 3)
 			{
-				//ribs
-				renderblocks.setRenderBounds(0.75F, 0.0F, 0.0F, 0.8F, 0.75F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.45F, 0.0F, 0.0F, 0.5F, 0.9F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-
-				tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-				tessellator.addVertexWithUV(maxX, minY+0.5f, minZ, texMinX, texMaxY);
-				tessellator.addVertexWithUV(minX, maxY, minZ, texMinX, texMinY);
-				tessellator.addVertexWithUV(minX, maxY, maxZ, texMaxX, texMinY);
-				tessellator.addVertexWithUV(maxX, minY+0.5F, maxZ, texMaxX, texMaxY);
-
-				if(((BlockSluice)block).getIsRecievingWater(l))
+				if((meta & 4) != 0)
+					renderblocks.uvRotateTop = 2;
+				for(int count = 0; count < 4; count++)
 				{
-					//get water texture
-					texture = TFCBlocks.SaltWater.getBlockTextureFromSide(0);
-					l = block.colorMultiplier(blockAccess, i, j, k);
-					//reassign the uv coords
-					texMinX = texture.getMinU();
-					texMaxX = texture.getMaxU();
-					texMinY = texture.getMinV();
-					texMaxY = texture.getMaxV();
-
-					tessellator.setColorOpaque(waterR, waterG, waterB);
-					tessellator.addVertexWithUV(maxX, minY+0.6f, minZ, texMinX, texMaxY);
-					tessellator.addVertexWithUV(minX, maxY, minZ, texMinX, texMinY);
-					tessellator.addVertexWithUV(minX, maxY, maxZ, texMaxX, texMinY);
-					tessellator.addVertexWithUV(maxX, minY+0.6F, maxZ, texMaxX, texMaxY);
+					//ribs
+					renderblocks.setRenderBounds(0.0F+(0.25*count), 0.0F, 0, 0.05F+(0.25*count), 1.0F-(0.125*count), 1);
+					renderblocks.renderStandardBlock(block, i, j, k);
+					//body
+					renderblocks.setRenderBounds(0.05F+(0.25*count), 0.0F, 0, 0.25F+(0.25*count), 0.8125-(0.125*count), 1);
+					renderblocks.renderStandardBlock(block, i, j, k);
 				}
 			}
 		}
 		else
 		{
-			if(i1 == 0)
+			if(dir == 0)
 			{
-				//ribs
-				renderblocks.setRenderBounds(0.0F, 0.0F, 0.70F, 1F, 0.3F, 0.75F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.0F, 0.0F, 0.4F, 1F, 0.45F, 0.45F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.0F, 0.0F, 0.1F, 1F, 0.6F, 0.15F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-
-				tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-				tessellator.addVertexWithUV(minX, minY+0.5F, minZ, texMaxX, texMinY);//d,d3
-				tessellator.addVertexWithUV(minX, minY, maxZ, texMaxX, texMaxY);//d,d2
-				tessellator.addVertexWithUV(maxX, minY, maxZ, texMinX, texMaxY);//d1,d2
-				tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, texMinX, texMinY);//d1,d3
-
-				if(((BlockSluice)block).getIsRecievingWater(l))
+				for(int count = 0; count < 4; count++)
 				{
-					//get water texture
-					texture = TFCBlocks.SaltWater.getIcon(0, 4);
-					l = block.colorMultiplier(blockAccess, i, j, k);
-					//reassign the uv coords
-					texMinX = texture.getMinU();
-					texMaxX = texture.getMaxU();
-					texMinY = texture.getMinV();
-					texMaxY = texture.getMaxV();
-
-					//draw water plane
-					tessellator.setColorOpaque(waterR, waterG, waterB);
-					tessellator.addVertexWithUV(minX, minY+0.6F, minZ, texMaxX, texMinY);//d,d3
-					tessellator.addVertexWithUV(minX, minY, maxZ, texMaxX, texMaxY);//d,d2
-					tessellator.addVertexWithUV(maxX, minY, maxZ, texMinX, texMaxY);//d1,d2
-					tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, texMinX, texMinY);//d1,d3
+					//ribs
+					renderblocks.setRenderBounds(0, 0.0F, 0.0F+(0.25*count), 1, 0.5F-(0.125*count), 0.05F+(0.25*count));
+					renderblocks.renderStandardBlock(block, i, j, k);
+					//body
+					renderblocks.setRenderBounds(0, 0.0F, 0.05F+(0.25*count), 1, Math.max(0.3125-(0.125*count), 0.01), 0.25F+(0.25*count));
+					renderblocks.renderStandardBlock(block, i, j, k);
 				}
 			}
-			if(i1 == 1)
+			if(dir == 1)
 			{
-				//ribs
-				renderblocks.setRenderBounds(0.9F, 0.0F, 0.0F, 0.95F, 0.6F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.6F, 0.0F, 0.0F, 0.65F, 0.45F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.3F, 0.0F, 0.0F, 0.35F, 0.3F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-
-				tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-				tessellator.addVertexWithUV(minX, minY, maxZ, texMinX, texMaxY);
-				tessellator.addVertexWithUV(maxX, minY+0.5F, maxZ, texMinX, texMinY);
-				tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, texMaxX, texMinY);
-				tessellator.addVertexWithUV(minX, minY, minZ, texMaxX, texMaxY);
-
-				if(((BlockSluice)block).getIsRecievingWater(l))
+				if((meta & 4) != 0)
+					renderblocks.uvRotateTop = 1;
+				for(int count = 0; count < 4; count++)
 				{
-					//get water texture
-					texture = TFCBlocks.SaltWater.getIcon(0, 4);
-					l = block.colorMultiplier(blockAccess, i, j, k);
-					//reassign the uv coords
-					texMinX = texture.getMinU();
-					texMaxX = texture.getMaxU();
-					texMinY = texture.getMinV();
-					texMaxY = texture.getMaxV();
-
-					//draw water plane
-					tessellator.setColorOpaque(waterR, waterG, waterB);
-					tessellator.addVertexWithUV(minX, minY, maxZ, texMinX, texMaxY);
-					tessellator.addVertexWithUV(maxX, minY+0.6F, maxZ, texMinX, texMinY);
-					tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, texMaxX, texMinY);
-					tessellator.addVertexWithUV(minX, minY, minZ, texMaxX, texMaxY);
+					//ribs
+					renderblocks.setRenderBounds(0.95F-(0.25*count), 0.0F, 0, 1.0F-(0.25*count), 0.5F-(0.125*count), 1);
+					renderblocks.renderStandardBlock(block, i, j, k);
+					//body
+					renderblocks.setRenderBounds(0.75F-(0.25*count), 0.0F, 0, 0.95F-(0.25*count), Math.max(0.3125-(0.125*count), 0.01), 1);
+					renderblocks.renderStandardBlock(block, i, j, k);
 				}
 			}
-			if(i1 == 2)
+			if(dir == 2)
 			{
-				//ribs
-				renderblocks.setRenderBounds(0.0F, 0.0F, 0.3F, 1F, 0.3F, 0.35F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.0F, 0.0F, 0.6F, 1F, 0.45F, 0.65F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.0F, 0.0F, 0.9F, 1F, 0.6F, 0.95F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-
-				tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-				tessellator.addVertexWithUV(minX, minY, minZ, texMinX, texMaxY);
-				tessellator.addVertexWithUV(minX, minY+0.5f, maxZ, texMinX, texMinY);
-				tessellator.addVertexWithUV(maxX, minY+0.5f, maxZ, texMaxX, texMinY);
-				tessellator.addVertexWithUV(maxX, minY, minZ, texMaxX, texMaxY);
-
-				if(((BlockSluice)block).getIsRecievingWater(l))
+				if((meta & 4) != 0)
+					renderblocks.uvRotateTop = 3;
+				for(int count = 0; count < 4; count++)
 				{
-					//get water texture
-					texture = TFCBlocks.SaltWater.getBlockTextureFromSide(0);
-					l = block.colorMultiplier(blockAccess, i, j, k);
-
-					//reassign the uv coords
-					texMinX = texture.getMinU();
-					texMaxX = texture.getMaxU();
-					texMinY = texture.getMinV();
-					texMaxY = texture.getMaxV();
-
-					tessellator.setColorOpaque(waterR, waterG, waterB);
-					tessellator.addVertexWithUV(minX, minY, minZ, texMinX, texMaxY);
-					tessellator.addVertexWithUV(minX, minY+0.6f, maxZ, texMinX, texMinY);
-					tessellator.addVertexWithUV(maxX, minY+0.6f, maxZ, texMaxX, texMinY);
-					tessellator.addVertexWithUV(maxX, minY, minZ, texMaxX, texMaxY);
+					//ribs
+					renderblocks.setRenderBounds(0.0F, 0.0F, 0.95F-(0.25*count), 1F, 0.5F-(0.125*count), 1.0F-(0.25*count));
+					renderblocks.renderStandardBlock(block, i, j, k);
+					//body
+					renderblocks.setRenderBounds(0.0F, 0.0F, 0.75F-(0.25*count), 1F,  Math.max(0.3125-(0.125*count), 0.01), 0.95F-(0.25*count));
+					renderblocks.renderStandardBlock(block, i, j, k);
 				}
+
 			}
-			if(i1 == 3)
+			if(dir == 3)
 			{
-				//ribs
-				renderblocks.setRenderBounds(0.7F, 0.0F, 0.0F, 0.75F, 0.3F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.4F, 0.0F, 0.0F, 0.45F, 0.45F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderBounds(0.1F, 0.0F, 0.0F, 0.15F, 0.6F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-
-				tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-				tessellator.addVertexWithUV(maxX, minY, minZ, texMinX, texMaxY);
-				tessellator.addVertexWithUV(minX, minY+0.5f, minZ, texMinX, texMinY);
-				tessellator.addVertexWithUV(minX, minY+0.5f, maxZ, texMaxX, texMinY);
-				tessellator.addVertexWithUV(maxX, minY, maxZ, texMaxX, texMaxY);
-
-				if(((BlockSluice)block).getIsRecievingWater(l))
+				if((meta & 4) != 0)
+					renderblocks.uvRotateTop = 2;
+				for(int count = 0; count < 4; count++)
 				{
-					//get water texture
-					texture = TFCBlocks.SaltWater.getBlockTextureFromSide(0);
-					l = block.colorMultiplier(blockAccess, i, j, k);
-					//reassign the uv coords
-					texMinX = texture.getMinU();
-					texMaxX = texture.getMaxU();
-					texMinY = texture.getMinV();
-					texMaxY = texture.getMaxV();
-					tessellator.setColorOpaque(waterR, waterG, waterB);
-					tessellator.addVertexWithUV(maxX, minY, minZ, texMinX, texMaxY);
-					tessellator.addVertexWithUV(minX, minY+0.6f, minZ, texMinX, texMinY);
-					tessellator.addVertexWithUV(minX, minY+0.6f, maxZ, texMaxX, texMinY);
-					tessellator.addVertexWithUV(maxX, minY, maxZ, texMaxX, texMaxY);
+					//ribs
+					renderblocks.setRenderBounds(0.0F+(0.25*count), 0.0F, 0, 0.05F+(0.25*count), 0.5F-(0.125*count), 1);
+					renderblocks.renderStandardBlock(block, i, j, k);
+					//body
+					renderblocks.setRenderBounds(0.05F+(0.25*count), 0.0F, 0, 0.25F+(0.25*count), Math.max(0.3125-(0.125*count), 0.01), 1);
+					renderblocks.renderStandardBlock(block, i, j, k);
 				}
 			}
 		}
-
+		renderblocks.uvRotateTop = 0;
 		//set the block collision box
 		renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 
