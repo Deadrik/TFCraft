@@ -43,8 +43,12 @@ public class ChunkDataManager
 
 	public void addData(Chunk chunk, ChunkData cd)
 	{
-		long key = ChunkCoordIntPair.chunkXZ2Int(chunk.xPosition, chunk.zPosition);
-		chunkmap.add(key, cd);
+		chunkmap.add(ChunkCoordIntPair.chunkXZ2Int(chunk.xPosition, chunk.zPosition), cd);
+	}
+
+	public void addData(int x, int z, ChunkData cd)
+	{
+		chunkmap.add(ChunkCoordIntPair.chunkXZ2Int(x, z), cd);
 	}
 
 	public ChunkData getData(int x, int z)

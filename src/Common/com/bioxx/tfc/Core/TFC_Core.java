@@ -62,22 +62,25 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFC_Core
 {
-	private static HashMap<World, ChunkDataManager> cdmMap = new HashMap<World, ChunkDataManager>();
+	private static HashMap<Integer, ChunkDataManager> cdmMap = new HashMap<Integer, ChunkDataManager>();
 	public static boolean PreventEntityDataUpdate = false;
 
 	public static ChunkDataManager getCDM(World world)
 	{
-		return cdmMap.get(world);
+		int key = world.isRemote ? (128 | world.provider.dimensionId) : world.provider.dimensionId;
+		return cdmMap.get(key);
 	}
 
 	public static ChunkDataManager addCDM(World world)
 	{
-		return cdmMap.put(world, new ChunkDataManager(world));
+		int key = world.isRemote ? (128 | world.provider.dimensionId) : world.provider.dimensionId;
+		return cdmMap.put(key, new ChunkDataManager(world));
 	}
 
 	public static ChunkDataManager removeCDM(World world)
 	{
-		return cdmMap.remove(world);
+		int key = world.isRemote ? (128 | world.provider.dimensionId) : world.provider.dimensionId;
+		return cdmMap.remove(key);
 	}
 
 	@SideOnly(Side.CLIENT)

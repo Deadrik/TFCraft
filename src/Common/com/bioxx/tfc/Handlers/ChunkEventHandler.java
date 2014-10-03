@@ -90,9 +90,9 @@ public class ChunkEventHandler
 		{
 			NBTTagCompound eventTag = event.getData();
 
-			if(eventTag.hasKey("Spawn Protection"))
+			if(eventTag.hasKey("ChunkData"))
 			{
-				NBTTagCompound spawnProtectionTag = eventTag.getCompoundTag("Spawn Protection");
+				NBTTagCompound spawnProtectionTag = eventTag.getCompoundTag("ChunkData");
 				ChunkData data = new ChunkData(spawnProtectionTag);
 				TFC_Core.getCDM(event.world).addData(event.getChunk(), data);
 			}
@@ -122,7 +122,7 @@ public class ChunkEventHandler
 				NBTTagCompound spawnProtectionTag = data.getTag();
 				// Why was this line here in the first place?
 				//spawnProtectionTag = new NBTTagCompound();
-				event.getData().setTag("Spawn Protection", spawnProtectionTag);
+				event.getData().setTag("ChunkData", spawnProtectionTag);
 			}
 		}
 	}
