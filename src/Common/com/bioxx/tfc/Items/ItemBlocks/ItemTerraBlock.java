@@ -54,11 +54,11 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 		return super.getUnlocalizedName(is);
 	}
 
-//	@Override
-//	public String getItemStackDisplayName(ItemStack is)
-//	{
-//		return StringUtil.localize(getUnlocalizedName(is).replace(" ", ""));
-//	}
+	//	@Override
+	//	public String getItemStackDisplayName(ItemStack is)
+	//	{
+	//		return StringUtil.localize(getUnlocalizedName(is).replace(" ", ""));
+	//	}
 
 	/**
 	 * This is called by inventories in the world to tick things such as temperature and food decay. Override this and 
@@ -107,7 +107,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	}
 
 	@Override
-	public int getItemStackLimit()
+	public int getItemStackLimit(ItemStack is)
 	{
 		if(canStack())
 			return this.getSize(null).stackSize * getWeight(null).multiplier;

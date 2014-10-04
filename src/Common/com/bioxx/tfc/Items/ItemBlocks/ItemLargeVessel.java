@@ -9,14 +9,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidBlock;
 
 import org.lwjgl.opengl.GL11;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEPottery;
@@ -24,6 +29,7 @@ import com.bioxx.tfc.TileEntities.TEVessel;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
+import com.bioxx.tfc.api.Util.Helper;
 
 public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 {
@@ -47,7 +53,7 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 		return EnumWeight.HEAVY;
 	}
 
-	public void readFromItemNBT(NBTTagCompound nbt, List arraylist)
+	public void createTooltip(NBTTagCompound nbt, List arraylist)
 	{
 		if(nbt != null)
 		{
@@ -58,7 +64,7 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 				if( fluid != null )
 				{
 					addFluid = true;
-					arraylist.add(EnumChatFormatting.BLUE + fluid.getFluid().getLocalizedName());
+					arraylist.add(EnumChatFormatting.BLUE + fluid.getFluid().getLocalizedName(fluid));
 				}
 			}
 
@@ -99,7 +105,55 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag)
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
-		readFromItemNBT(is.getTagCompound(), arraylist);
+		createTooltip(is.getTagCompound(), arraylist);
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	{
+		MovingObjectPosition mop = Helper.getMovingObjectPositionFromPlayer(world, player, true);
+
+		if (mop == null)
+		{
+			return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
+		}
+		else
+		{
+			if (mop.typeOfHit == MovingObjectType.BLOCK)
+			{
+				int i = mop.blockX;
+				int j = mop.blockY;
+				int k = mop.blockZ;
+
+				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock) || is.hasTagCompound())
+				{
+					return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
+				}
+
+				Fluid fluid = ((IFluidBlock)world.getBlock(i, j, k)).getFluid();
+
+				world.setBlockToAir(i, j, k);
+
+				if (is.stackSize == 1)
+				{
+					TFCFluid.fillItemBarrel(is, new FluidStack(fluid, 5000), 5000);
+				}	
+				else
+				{
+					is.stackSize--;
+					ItemStack outIS = is.copy();
+					outIS.stackSize = 1;
+					TFCFluid.fillItemBarrel(outIS, new FluidStack(fluid, 5000), 5000);
+					if (!player.inventory.addItemStackToInventory(outIS))
+					{
+						player.entityDropItem(outIS, 0);
+					}
+				}
+				return true;
+			}
+		}
+
+		return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 	}
 
 	@Override

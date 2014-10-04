@@ -24,6 +24,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
@@ -33,6 +34,7 @@ import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
+import com.bioxx.tfc.Items.ItemBlocks.ItemLargeVessel;
 import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -246,7 +248,8 @@ public class BlockBarrel extends BlockTerraContainer
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
-		nbt.setTag("Items", nbttaglist);
+		if(nbttaglist.tagCount() > 0)
+			nbt.setTag("Items", nbttaglist);
 
 		return nbt;
 	}
@@ -279,27 +282,59 @@ public class BlockBarrel extends BlockTerraContainer
 					return true;
 				}
 
-				if (!te.getSealed()) {
-					ItemStack equippedItem = player.getCurrentEquippedItem();
-					if(FluidContainerRegistry.isFilledContainer(equippedItem) && !te.getSealed())
+				if(!handleInteraction(player, te))
+				{
+					if(te.getInvCount() == 0)
+						player.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);
+					else
+						player.openGui(TerraFirmaCraft.instance, 36, world, x, y, z);
+					return true;
+				}
+				else return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean handleInteraction(EntityPlayer player, TEBarrel te) 
+	{
+		if (!te.getSealed()) 
+		{
+			ItemStack equippedItem = player.getCurrentEquippedItem();
+			if(FluidContainerRegistry.isFilledContainer(equippedItem) && !te.getSealed())
+			{
+				ItemStack is = te.addLiquid(player.getCurrentEquippedItem());
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+				return true;
+			}
+			else if(FluidContainerRegistry.isEmptyContainer(equippedItem))
+			{
+				ItemStack is = te.removeLiquid(player.getCurrentEquippedItem());
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+				return true;
+			}
+			else if(equippedItem != null && (equippedItem.getItem() instanceof ItemBarrels || equippedItem.getItem() instanceof ItemLargeVessel))
+			{
+				if(equippedItem.hasTagCompound())
+				{
+					if(equippedItem.getTagCompound().hasKey("fluidNBT") && !equippedItem.getTagCompound().hasKey("Items") && te.getFluidLevel() < te.getMaxLiquid())
 					{
-						ItemStack is = te.addLiquid(player.getCurrentEquippedItem());
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
-						return true;
-					}
-					else if(FluidContainerRegistry.isEmptyContainer(equippedItem))
-					{
-						ItemStack is = te.removeLiquid(player.getCurrentEquippedItem());
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+						FluidStack fs = FluidStack.loadFluidStackFromNBT(equippedItem.getTagCompound().getCompoundTag("fluidNBT"));
+						te.addLiquid(fs);
+						if(fs.amount == 0)
+						{
+							equippedItem.getTagCompound().removeTag("isSealed");
+							equippedItem.getTagCompound().removeTag("fluidNBT");
+							if(equippedItem.getTagCompound().hasNoTags())
+								equippedItem.setTagCompound(null);
+						}
+						else
+						{
+							fs.writeToNBT(equippedItem.getTagCompound().getCompoundTag("fluidNBT"));
+						}
 						return true;
 					}
 				}
-
-				if(te.getInvCount() == 0)
-					player.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);
-				else
-					player.openGui(TerraFirmaCraft.instance, 36, world, x, y, z);
-				return true;
 			}
 		}
 		return false;

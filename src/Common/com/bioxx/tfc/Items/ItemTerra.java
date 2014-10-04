@@ -81,7 +81,7 @@ public class ItemTerra extends Item implements ISize
 	}
 
 	@Override
-	public int getItemStackLimit()
+	public int getItemStackLimit(ItemStack is)
 	{
 		if(canStack())
 			return this.getSize(null).stackSize * getWeight(null).multiplier <= 64 ? this.getSize(null).stackSize * getWeight(null).multiplier : 64;

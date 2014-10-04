@@ -11,7 +11,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
@@ -134,27 +133,15 @@ public class BlockLargeVessel extends BlockBarrel
 			{
 				TEVessel te = (TEVessel)(world.getTileEntity(x, y, z));
 
-				if (!te.getSealed()) {
-					ItemStack equippedItem = player.getCurrentEquippedItem();
-					if(FluidContainerRegistry.isFilledContainer(equippedItem) && !te.getSealed())
-					{
-						ItemStack is = te.addLiquid(player.getCurrentEquippedItem());
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
-						return true;
-					}
-					else if(FluidContainerRegistry.isEmptyContainer(equippedItem))
-					{
-						ItemStack is = te.removeLiquid(player.getCurrentEquippedItem());
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
-						return true;
-					}
+				if(!handleInteraction(player, te))
+				{
+					if(te.getInvCount() == 0)
+						player.openGui(TerraFirmaCraft.instance, 46, world, x, y, z);
+					else
+						player.openGui(TerraFirmaCraft.instance, 47, world, x, y, z);
+					return true;
 				}
-
-				if(te.getInvCount() == 0)
-					player.openGui(TerraFirmaCraft.instance, 46, world, x, y, z);
-				else
-					player.openGui(TerraFirmaCraft.instance, 47, world, x, y, z);
-				return true;
+				else return true;
 			}
 		}
 		return false;
