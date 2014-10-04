@@ -43,7 +43,7 @@ public class ChunkEventHandler
 				cd.lastSpringGen = TFC_Time.getYear();
 
 				Random rand = new Random(event.world.getSeed() + ((chunk_X >> 3) - (chunk_Z >> 3)) * (chunk_Z >> 3));
-				int cropid = rand.nextInt(24);
+				int cropid = rand.nextInt(CropManager.getInstance().getTotalCrops());
 				CropIndex crop = CropManager.getInstance().getCropFromId(cropid);
 				if (event.world.rand.nextInt(25) == 0 && crop != null)
 				{

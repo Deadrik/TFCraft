@@ -26,6 +26,11 @@ public class CropManager
 		Crops.add(index);
 	}
 
+	public int getTotalCrops()
+	{
+		return Crops.size();
+	}
+
 	public CropIndex getCropFromName(String n)
 	{
 		for(CropIndex pi : Crops)
