@@ -20,7 +20,7 @@ public class TFCFluid extends Fluid
 
 	public static final TFCFluid SALTWATER = new TFCFluid("saltwater").setBaseColor(0x354d35);
 	public static final TFCFluid FRESHWATER = new TFCFluid("freshwater").setBaseColor(0x354d35);
-	public static final TFCFluid HOTWATER = (TFCFluid) new TFCFluid("hotwater").setTemperature(372/*Kelvin*/);
+	public static final TFCFluid HOTWATER = (TFCFluid) new TFCFluid("hotwater").setBaseColor(0x1f5099).setTemperature(372/*Kelvin*/);
 	public static final TFCFluid LAVA = (TFCFluid) new TFCFluid("lavatfc").setLuminosity(15).setDensity(3000).setViscosity(6000).setTemperature(1300).setUnlocalizedName(Blocks.lava.getUnlocalizedName());
 	public static final TFCFluid RUM = new TFCFluid("rum").setBaseColor(0x6e0123);
 	public static final TFCFluid BEER = new TFCFluid("beer").setBaseColor(0xc39e37);
