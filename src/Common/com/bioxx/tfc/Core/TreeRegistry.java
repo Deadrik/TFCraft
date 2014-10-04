@@ -13,7 +13,7 @@ import com.bioxx.tfc.api.Interfaces.ISchematic;
 public class TreeRegistry
 {
 	public static TreeRegistry instance = new TreeRegistry();
-	private HashMap treeTypeHash = new HashMap();
+	private HashMap<String, TreeConfiguration> treeTypeHash = new HashMap<String, TreeConfiguration>();
 	private Vector<Vector<ISchematic>> treeList;
 	private String treePath = "assets/terrafirmacraft/schematics/trees/";
 
@@ -46,15 +46,18 @@ public class TreeRegistry
 	{
 		try
 		{
-			File root = new File(TerraFirmaCraft.instance.getClass().getClassLoader().getResource(treePath).toURI());
-			for( File f : root.listFiles())
+			for(String tName : Global.WOOD_ALL)
 			{
-				String schemType = f.getName().substring(0, f.getName().indexOf('_'));
-				if(f.isFile())
+				File root = new File(TerraFirmaCraft.instance.getClass().getClassLoader().getResource(treePath + tName + "/").toURI());
+				for( File f : root.listFiles())
 				{
-					TreeSchematic schem = new TreeSchematic(treePath + f.getName());
-					if(schem.Load())
-						RegisterTree(schem, schemType);
+					String schemType = f.getName().substring(0, f.getName().indexOf('_'));
+					if(f.isFile())
+					{
+						TreeSchematic schem = new TreeSchematic(treePath + tName + "/" + f.getName());
+						if(schem.Load())
+							RegisterTree(schem, schemType);
+					}
 				}
 			}
 		}
@@ -66,9 +69,8 @@ public class TreeRegistry
 
 	public void LoadTree(File f)
 	{
-		try
+		if(f != null)
 		{
-			File root = new File(TerraFirmaCraft.instance.getClass().getClassLoader().getResource(treePath).toURI());
 			String schemType = f.getName().substring(0, f.getName().indexOf('_'));
 			if(f.isFile())
 			{
@@ -77,15 +79,11 @@ public class TreeRegistry
 					RegisterTree(schem, schemType);
 			}
 		}
-		catch (URISyntaxException e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	public TreeSchematic getRandomTreeSchematic(int treeID)
 	{
-		Vector v = treeList.get(treeID);
+		Vector<ISchematic> v = treeList.get(treeID);
 		if(v != null)
 			return (TreeSchematic) v.get(new Random().nextInt(v.size()));
 		return null;
@@ -93,7 +91,7 @@ public class TreeRegistry
 
 	public TreeSchematic getTreeSchematic(int treeID, int schemIndex)
 	{
-		Vector v = treeList.get(treeID);
+		Vector<ISchematic> v = treeList.get(treeID);
 		if(v != null)
 		{
 			TreeSchematic ts;
@@ -109,10 +107,10 @@ public class TreeRegistry
 
 	public TreeSchematic getRandomTreeSchematicWithGrowthStage(int treeID, int growthStage)
 	{
-		Vector v = treeList.get(treeID);
+		Vector<ISchematic> v = treeList.get(treeID);
 		if(v != null)
 		{
-			HashMap<Integer, ISchematic> treeListTmp = new HashMap();
+			HashMap<Integer, ISchematic> treeListTmp = new HashMap<Integer, ISchematic>();
 			TreeSchematic ts;
 			int index = 0;
 			for(int l = 0; l < v.size(); l++)
