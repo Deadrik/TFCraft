@@ -2,40 +2,40 @@ package com.bioxx.tfc.WorldGen.Generators;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Flora.BlockFlower;
 
-public class WorldGenFlowers extends WorldGenerator
+public class WorldGenFlowers
 {
-	private BlockFlower plantBlock;
-
-	public WorldGenFlowers(Block b)
+	public static void generate(World world, Random random, int chunkX, int chunkZ, int flowersPerChunk)
 	{
-		plantBlock = (BlockFlower) b;
-	}
-
-	@Override
-	public boolean generate(World world, Random r, int x, int y, int z)
-	{
-		int all = plantBlock.flowerNames.length;
-
-		for (int var6 = 0; var6 < 2; ++var6)
+		int flowerType = new Random(world.getSeed() + ((chunkX >> 7) - (chunkZ >> 7)) * (chunkZ >> 7)).nextInt(15);
+		BlockFlower plantBlock = (BlockFlower) TFCBlocks.Flowers;
+		if(flowerType > 5)
 		{
-			int xx = x + r.nextInt(8) - r.nextInt(8);
-			int yy = y + r.nextInt(4) - r.nextInt(4);
-			int zz = z + r.nextInt(8) - r.nextInt(8);
+			plantBlock = (BlockFlower) TFCBlocks.Flowers2;
+			flowerType -= 5;
+		}
+		if(random.nextInt(flowersPerChunk) != 0)
+			return;
+
+		int xCoord = chunkX + random.nextInt(16);
+		int zCoord = chunkZ + random.nextInt(16);
+		int yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
+		for (int i = 0; i < flowersPerChunk; ++i)
+		{
+			int xx = xCoord-4 + random.nextInt(8);
+			int zz = zCoord-4 + random.nextInt(8);
+			int yy = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
 
 			if (world.isAirBlock(xx, yy, zz) && plantBlock.canBlockStay(world, xx, yy, zz))
 			{
-				int meta = r.nextInt(all);
-				if(plantBlock.canGrowConditions(world, xx, yy, zz, meta))
-					world.setBlock(xx, yy, zz, plantBlock, meta, 0x2);
+				if(plantBlock.canGrowConditions(world, xx, yy, zz, flowerType))
+					world.setBlock(xx, yy, zz, plantBlock, flowerType, 0x2);
 			}
 		}
-		return true;
 	}
 
 }

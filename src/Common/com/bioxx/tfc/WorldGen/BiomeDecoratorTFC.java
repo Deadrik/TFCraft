@@ -20,13 +20,6 @@ import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
 
 public class BiomeDecoratorTFC extends BiomeDecorator
 {
-	/**
-	 * The number of yellow flower patches to generate per chunk. The game
-	 * generates much less than this number, since it attempts to generate them
-	 * at a random altitude.
-	 */
-	public int flowersPerChunk;
-
 	/** The amount of tall grass to generate per chunk. */
 	public int grassPerChunk;
 
@@ -63,7 +56,6 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	public BiomeDecoratorTFC(TFCBiome par1)
 	{
 		super();
-		this.flowersPerChunk = 2;
 		this.grassPerChunk = 1;
 		this.mushroomsPerChunk = 0;
 		treesPerChunk = 30;
