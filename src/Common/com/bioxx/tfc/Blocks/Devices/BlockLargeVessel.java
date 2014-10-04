@@ -64,17 +64,15 @@ public class BlockLargeVessel extends BlockBarrel
 				return ceramicIcons[0];
 			else if(side == 0)
 				return ceramicIcons[2];
-			else if(side == 2)
+			else
 				return ceramicIcons[1];
 		}
 		if(side == 1)
 			return clayIcons[0];
 		else if(side == 0)
 			return clayIcons[2];
-		else if(side == 2)
+		else
 			return clayIcons[1];
-
-		return clayIcons[0];
 	}
 
 	@Override
@@ -87,17 +85,16 @@ public class BlockLargeVessel extends BlockBarrel
 				return ceramicIcons[0];
 			else if(side == 0)
 				return ceramicIcons[2];
-			else if(side == 2)
+			else
 				return ceramicIcons[1];
 		}
 		if(side == 1)
 			return clayIcons[0];
 		else if(side == 0)
 			return clayIcons[2];
-		else if(side == 2)
+		else
 			return clayIcons[1];
 
-		return clayIcons[0];
 	}
 
 	@Override
