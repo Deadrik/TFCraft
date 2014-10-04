@@ -225,12 +225,30 @@ public class WorldGenForests implements IWorldGenerator
 						temperatureAvg >= EnumTree.KAPOK.minTemp &&
 						temperatureAvg <= EnumTree.KAPOK.maxTemp)
 				{
-					WorldGenerator gen0 = ( (random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : 
-						(random.nextInt(3) == 0 ? (random.nextInt(2) == 0 ?new WorldGenKapokTrees(false,15)/*new WorldGenCustomHugeTrees(false, 10 + random.nextInt(20), 15, 15)*/: new WorldGenAcaciaKoaTrees(false,0) ): new WorldGenCustomShortTrees(false, 15))));
+					WorldGenerator gen0;
+					if(random.nextInt(5) == 0)
+						gen0 = new WorldGenKapokTrees(false,15);
+					else if(random.nextInt(2) == 0)
+						gen0 = new WorldGenCustomShortTrees(false, 15);
+					else 
+						gen0 = new WorldGenJungleShrub(15);
 
+					//gen0 = random.nextInt(2) == 0 ? new WorldGenJungleShrub(15) : random.nextInt(3) == 0 ? new WorldGenKapokTrees(false,15):  new WorldGenCustomShortTrees(false, 15);
 					gen0.setScale(1.0D, 1.0D, 1.0D);
 					gen0.generate(world, random, xCoord, yCoord, zCoord);
 					completed = true;
+				}
+
+				if(evt <= EnumTree.KOA.maxEVT &&
+						rainfall >= EnumTree.KOA.minRain &&
+						rainfall <= EnumTree.KOA.maxRain && 
+						temperatureAvg >= EnumTree.KOA.minTemp &&
+						temperatureAvg <= EnumTree.KOA.maxTemp)
+				{
+					WorldGenerator gen0 = new WorldGenAcaciaKoaTrees(false, 0);
+
+					gen0.setScale(1.0D, 1.0D, 1.0D);
+					gen0.generate(world, random, xCoord, yCoord, zCoord);
 				}
 			}
 			catch(IndexOutOfBoundsException e)

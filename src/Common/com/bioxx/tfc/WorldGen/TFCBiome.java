@@ -19,11 +19,9 @@ import com.bioxx.tfc.Entities.Mobs.EntitySlimeTFC;
 import com.bioxx.tfc.Entities.Mobs.EntitySpiderTFC;
 import com.bioxx.tfc.Entities.Mobs.EntitySquidTFC;
 import com.bioxx.tfc.Entities.Mobs.EntityZombieTFC;
-import com.bioxx.tfc.WorldGen.Generators.WorldGenCustomShrub;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenAcaciaKoaTrees;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomBigTree;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomCedarTrees;
-import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomHugeTrees;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomMapleShortTrees;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomMapleTallTrees;
 import com.bioxx.tfc.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
@@ -156,8 +154,8 @@ public class TFCBiome extends BiomeGenBase
 		switch(par1){
 		case 0: this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 8, 1, 1)); break;
 		case 2: this.spawnableWaterCreatureList.add(new SpawnListEntry(EntityFishTFC.class, 7, 1, 2));
-				this.spawnableWaterCreatureList.add(new SpawnListEntry(EntityFishTFC.class, 12, 0, 0));break;
-				default: break;
+		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntityFishTFC.class, 12, 0, 0));break;
+		default: break;
 		}
 
 		this.spawnableMonsterList.clear();
@@ -354,7 +352,7 @@ public class TFCBiome extends BiomeGenBase
 		}
 		case 15:
 		{
-			return ( (R.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : (R.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + R.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15))));
+			return new WorldGenCustomShortTrees(false, 15);
 		}
 		case 16:
 		{

@@ -36,7 +36,7 @@ public enum EnumTree
 
 	KAPOK("KAPOK", /*minRain*/2000f, /*maxRain*/16000f, /*minTemp*/24, /*maxTemp*/50, /*minEVT*/0f, /*maxEVT*/1f, false),
 
-	KOA("KOA", /*minRain*/500f, /*maxRain*/16000f, /*minTemp*/28, /*maxTemp*/50, /*minEVT*/1, /*maxEVT*/2, false),
+	KOA("KOA", /*minRain*/500f, /*maxRain*/16000f, /*minTemp*/20, /*maxTemp*/50, /*minEVT*/0, /*maxEVT*/2, false),
 
 	UTACACIA("UTACACIA", /*minRain*/75f, /*maxRain*/1000f, /*minTemp*/20, /*maxTemp*/50, /*minEVT*/0, /*maxEVT*/1, false);
 
