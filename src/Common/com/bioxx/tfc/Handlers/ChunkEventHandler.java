@@ -30,8 +30,6 @@ public class ChunkEventHandler
 	{
 		if (!event.world.isRemote)
 		{
-			if(event.world.getTotalWorldTime() < 100)
-				createSpawn(event.world);
 			ChunkData cd = TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition);
 			if(cd== null)
 				return;
@@ -89,6 +87,13 @@ public class ChunkEventHandler
 	{
 		TFC_Climate.removeCacheManager(event.world);
 		TFC_Core.removeCDM(event.world);
+	}
+
+	@SubscribeEvent
+	public void onLoadWorld(WorldEvent.Load event)
+	{
+		if(event.world.provider.dimensionId == 0 && event.world.getTotalWorldTime() < 100)
+			createSpawn(event.world);
 	}
 
 	@SubscribeEvent
