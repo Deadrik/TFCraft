@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -31,6 +32,7 @@ import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.Items.Tools.ItemShears;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
@@ -68,6 +70,8 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	public float hard_mod = 1;		//hardiness
 	public boolean inLove;
 	public boolean isCorpse = false;
+	
+	protected EntityPlayer shearer = null;
 	
 	private int familiarity = 0;
 	private long lastFamiliarityUpdate = 0;
@@ -358,13 +362,18 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking()){
+			if(player.isSneaking() && !familiarizedToday){
 				this.familiarize(player);
+				if(player.getHeldItem() != null && isBreedingItemTFC(player.getHeldItem())){
+					return true;
+				}
 			}
 			//player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
 			if(getGender() == GenderEnum.FEMALE && pregnant)
 				player.addChatMessage(new ChatComponentText("Pregnant"));
 
+			shearer = player;
+			
 			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKnife && !getSheared() && getPercentGrown(this) > 0.95F)
 			{
 				setSheared(true);
@@ -375,7 +384,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		}
 		ItemStack itemstack = player.inventory.getCurrentItem();
 
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && !super.isInLove())
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED,player) &&this.familiarizedToday && this.getGrowingAge() == 0 && !super.isInLove())
 		{
 			if (!player.capabilities.isCreativeMode)
 			{
@@ -386,7 +395,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			return true;
 		}
 		else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"))){
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player)){
 				itemstack.stackSize--;
 			}
 			return true;
@@ -451,7 +460,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, int X, int Y, int Z)
 	{
-		return !getSheared() && isAdult();
+		return !getSheared() && isAdult() && shearer != null && checkFamiliarity(InteractionEnum.SHEAR,shearer);
 	}
 
 	@Override
@@ -661,7 +670,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public int getFamiliarity() {
 		// TODO Auto-generated method stub
-		return 0;
+		return familiarity;
 	}
 	@Override
 	public void handleFamiliarityUpdate() {
@@ -694,10 +703,14 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(!this.riddenByEntity.equals(ep) && stack != null && this.isBreedingItem(stack) && (isAdult() && familiarity < 50) || !isAdult()){
+		if(stack != null && this.isBreedingItemTFC(stack) && (isAdult() && familiarity < 50) || !isAdult()){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
+			}
+			else
+			{
+				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
@@ -711,12 +724,29 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	}
 	
 	@Override
-	public boolean trySetName(String name) {
-		if(this.familiarity > 40 && !this.hasCustomNameTag()){
+	public boolean trySetName(String name, EntityPlayer player) {
+		if(this.checkFamiliarity(InteractionEnum.NAME, player) && !this.hasCustomNameTag()){
 			this.setCustomNameTag(name);
 			return true;
 		}
 		this.playSound(this.getHurtSound(),  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
 		return false;
+	}
+	
+	@Override
+	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
+		boolean flag = false;
+		switch(interaction){
+		case MOUNT: flag = familiarity > 15;break;
+		case BREED: flag = familiarity > 20;break;
+		case SHEAR: flag = familiarity > 10;break;
+		case MILK: flag = familiarity > 10;break;
+		case NAME: flag = familiarity > 40;break;
+		default: break;
+		}
+		if(!flag && !player.worldObj.isRemote){
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
+		}
+		return flag;
 	}
 }

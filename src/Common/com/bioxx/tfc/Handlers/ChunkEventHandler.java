@@ -2,6 +2,8 @@ package com.bioxx.tfc.Handlers;
 
 import java.util.Random;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
@@ -71,7 +73,7 @@ public class ChunkEventHandler
 	@SubscribeEvent
 	public void onUnload(ChunkEvent.Unload event)
 	{
-		TFC_Core.getCDM(event.world).removeData(event.getChunk().xPosition, event.getChunk().zPosition);
+		TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition).isUnloaded = true;
 	}
 
 	@SubscribeEvent
@@ -79,5 +81,51 @@ public class ChunkEventHandler
 	{
 		TFC_Climate.removeCacheManager(event.world);
 		TFC_Core.removeCDM(event.world);
+	}
+
+	@SubscribeEvent
+	public void onDataLoad(ChunkDataEvent.Load event)
+	{
+		if(!event.world.isRemote)
+		{
+			NBTTagCompound eventTag = event.getData();
+
+			if(eventTag.hasKey("ChunkData"))
+			{
+				NBTTagCompound spawnProtectionTag = eventTag.getCompoundTag("ChunkData");
+				ChunkData data = new ChunkData(spawnProtectionTag);
+				TFC_Core.getCDM(event.world).addData(event.getChunk(), data);
+			}
+			else
+			{
+				/*if(TFC_Core.getCDM(event.world).hasData(event.getChunk()))
+					return;*/
+				NBTTagCompound levelTag = eventTag.getCompoundTag("Level");
+				ChunkData data = new ChunkData().CreateNew(event.world, levelTag.getInteger("xPos"), levelTag.getInteger("zPos"));
+				TFC_Core.getCDM(event.world).addData(event.getChunk(), data);
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public void onDataSave(ChunkDataEvent.Save event)
+	{
+		if(!event.world.isRemote)
+		{
+			NBTTagCompound levelTag = event.getData().getCompoundTag("Level");
+			int x = levelTag.getInteger("xPos");
+			int z = levelTag.getInteger("zPos");
+			ChunkData data = TFC_Core.getCDM(event.world).getData(x, z);
+
+			if(data != null)
+			{
+				NBTTagCompound spawnProtectionTag = data.getTag();
+				// Why was this line here in the first place?
+				//spawnProtectionTag = new NBTTagCompound();
+				event.getData().setTag("ChunkData", spawnProtectionTag);
+				if(data.isUnloaded)
+					TFC_Core.getCDM(event.world).removeData(x, z);
+			}
+		}
 	}
 }

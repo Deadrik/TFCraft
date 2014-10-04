@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Entities.AI;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.minecraft.block.Block;
@@ -61,7 +62,7 @@ public class EntityAIFindNest extends EntityAIBase
 	{
 		if(theCreature instanceof EntityChickenTFC)
 		{
-			if(((EntityChickenTFC)theCreature).isAdult() &&
+			if(((EntityChickenTFC)theCreature).isAdult() && ((EntityChickenTFC)theCreature).getFamiliarity() >= 15 &&
 					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY,(int)theCreature.posZ) != TFCBlocks.NestBox &&
 					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY - 1,(int)theCreature.posZ) != TFCBlocks.NestBox &&
 					this.getNearbySitableBlockDistance() &&
@@ -72,7 +73,7 @@ public class EntityAIFindNest extends EntityAIBase
 		}
 		else if(theCreature instanceof EntityPheasantTFC)
 		{
-			if(((EntityPheasantTFC)theCreature).isAdult() &&
+			if(((EntityPheasantTFC)theCreature).isAdult() && ((EntityPheasantTFC)theCreature).getFamiliarity() >= 15 &&
 					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY,(int)theCreature.posZ) != TFCBlocks.NestBox &&
 					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY - 1,(int)theCreature.posZ) != TFCBlocks.NestBox &&
 					this.getNearbySitableBlockDistance() &&
@@ -142,7 +143,7 @@ public class EntityAIFindNest extends EntityAIBase
 	public void updateTask()
 	{
 		++this.currentTick;
-
+		
 		if (this.theCreature.getDistanceSq((double)this.sitableBlockX, (double)(this.sitableBlockY + 1), (double)this.sitableBlockZ) > 1.0D)
 		{
 			this.theCreature.getNavigator().tryMoveToXYZ((double)((float)this.sitableBlockX) + 0.5D, (double)(this.sitableBlockY + 1), (double)((float)this.sitableBlockZ) + 0.5D, this.field_75404_b);
@@ -150,7 +151,16 @@ public class EntityAIFindNest extends EntityAIBase
 			this.compoundDistance += this.theCreature.getDistance(this.theCreature.lastTickPosX, this.theCreature.lastTickPosY, this.theCreature.lastTickPosZ);
 			if(this.currentTick - 40 > this.lastCheckedTick)
 			{
-				if(this.compoundDistance < 0.5)
+				ArrayList<EntityChickenTFC> crowd = (ArrayList<EntityChickenTFC>) theCreature.worldObj.getEntitiesWithinAABB(EntityChickenTFC.class, theCreature.boundingBox.expand(24, 2, 24));
+				ArrayList<EntityChickenTFC> invalid = new ArrayList<EntityChickenTFC>();
+				for(EntityChickenTFC chicken : crowd){
+					if(chicken.getGender().equals(GenderEnum.MALE) || chicken.isChild()){
+						invalid.add(chicken);
+					}
+				}
+				crowd.removeAll(invalid);
+				crowd.remove(theCreature);
+				if(this.compoundDistance < 0.5 || crowd.size() >= 10)
 				{
 					failureDepressionMap.put((this.sitableBlockX + "," + this.sitableBlockY + "," + this.sitableBlockZ), TFC_Time.getTotalTicks() + 24000);
 					this.end = true;

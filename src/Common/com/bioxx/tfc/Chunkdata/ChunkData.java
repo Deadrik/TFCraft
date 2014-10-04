@@ -15,9 +15,6 @@ public class ChunkData
 	public int spawnProtection;
 	public int[] heightmap;
 	public DataLayer[] rainfallMap;
-	public DataLayer[] rockMap1;
-	public DataLayer[] rockMap2;
-	public DataLayer[] rockMap3;
 
 	public int sluicedAmount = 0;
 
@@ -26,14 +23,12 @@ public class ChunkData
 
 	public int lastSpringGen;
 	public int cropInfestation = 0;
+	public boolean isUnloaded = false;
 
 	public ChunkData()
 	{
 		heightmap = new int[256];
 		rainfallMap = new DataLayer[256];
-		rockMap1 = new DataLayer[256];
-		rockMap2 = new DataLayer[256];
-		rockMap3 = new DataLayer[256];
 	}
 
 	public ChunkData(NBTTagCompound tag)

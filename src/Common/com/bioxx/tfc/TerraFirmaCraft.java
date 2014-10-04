@@ -39,7 +39,6 @@ import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.AnvilCraftingHandler;
 import com.bioxx.tfc.Handlers.ChatListenerTFC;
-import com.bioxx.tfc.Handlers.ChunkDataEventHandler;
 import com.bioxx.tfc.Handlers.ChunkEventHandler;
 import com.bioxx.tfc.Handlers.CraftingHandler;
 import com.bioxx.tfc.Handlers.EnteringChunkHandler;
@@ -210,8 +209,6 @@ public class TerraFirmaCraft
 		// Register the Chunk Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
 
-		// Register the Chunk Data Load/Save Handler
-		MinecraftForge.EVENT_BUS.register(new ChunkDataEventHandler());
 		// Register the Chunk Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
 
@@ -319,7 +316,7 @@ public class TerraFirmaCraft
 
 		//Cavein Options
 		TFCOptions.minimumRockLoad = TFCOptions.getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
-		TFCOptions.initialCollapseRatio = TFCOptions.getIntFor(config,"Cavein Options","initialCollapseRatio",20, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
+		TFCOptions.initialCollapseRatio = TFCOptions.getIntFor(config,"Cavein Options","initialCollapseRatio",10, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
 		TFCOptions.propogateCollapseChance = TFCOptions.getIntFor(config,"Cavein Options","propogateCollapseChance",55, "This number is the likelihood for each block to propagate the collapse farther.");
 
 		TFCOptions.cropNutrientAColor[0] = (byte) TFCOptions.getIntFor(config, "ColorNutrientA", "Red", 237);

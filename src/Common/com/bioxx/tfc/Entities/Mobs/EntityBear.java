@@ -26,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -39,6 +40,7 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Entities.IAnimal.GenderEnum;
+import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Enums.EnumDamageType;
 import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
@@ -75,6 +77,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	public float hard_mod = 1;		//hardiness
 	public boolean inLove;
 	private int degreeOfDiversion = 4;
+	
+	private boolean wasRoped = false;
 	
 	private int familiarity = 0;
 	private long lastFamiliarityUpdate = 0;
@@ -241,6 +245,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		nbt.setFloat ("Colour Modifier", colour_mod);
 		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
 		nbt.setFloat ("Hardiness Modifier", hard_mod);
+		
+		nbt.setBoolean("wasRoped", wasRoped);
 
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setBoolean("Pregnant", pregnant);
@@ -268,6 +274,8 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
 
+		wasRoped = nbt.getBoolean("wasRoped");
+		
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
@@ -282,7 +290,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	protected boolean canDespawn ()
 	{
-		return false;
+		return !wasRoped && this.ticksExisted > 30000;
 	}
 
 	/**
@@ -367,6 +375,9 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			field_25052_g = true;
 			worldObj.setEntityState (this, (byte) 8);
 		}
+		
+		if(this.getLeashed()&&!wasRoped)wasRoped=true;
+		
 		if(this.isPregnant())
 		{
 			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
@@ -645,7 +656,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		}
 		ItemStack itemstack = player.getHeldItem();
 		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"))){
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player)){
 				itemstack.stackSize--;
 			}
 			return true;
@@ -775,6 +786,10 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
 			}
+			else
+			{
+				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			}
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
@@ -782,12 +797,29 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	}
 
 	@Override
-	public boolean trySetName(String name) {
-		if(this.familiarity > 70 && !this.hasCustomNameTag()){
+	public boolean trySetName(String name, EntityPlayer player) {
+		if(this.checkFamiliarity(InteractionEnum.NAME,player) && !this.hasCustomNameTag()){
 			this.setCustomNameTag(name);
 			return true;
 		}
 		this.playSound((isChild()?TFC_Sounds.BEARCUBCRY:TFC_Sounds.BEARCRY),  6, (rand.nextFloat()/2F)+0.75F);
 		return false;
+	}
+	
+	@Override
+	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
+		boolean flag = false;
+		switch(interaction){
+		case MOUNT: flag = familiarity > 15;break;
+		case BREED: flag = familiarity > 20;break;
+		case SHEAR: flag = familiarity > 10;break;
+		case MILK: flag = familiarity > 10;break;
+		case NAME: flag = familiarity > 70;break;
+		default: break;
+		}
+		if(!flag && !player.worldObj.isRemote){
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
+		}
+		return flag;
 	}
 }

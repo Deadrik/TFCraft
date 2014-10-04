@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -27,6 +28,7 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -56,6 +58,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	private long lastFamiliarityUpdate = 0;
 	private boolean familiarizedToday = false;
 	public int happyTicks;
+	private boolean wasRoped = false;
 	
 	protected float avgAdultWeight = 44f;	//The average weight of adult males in kg
 	protected float dimorphism = 0.0786f;	//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
@@ -182,6 +185,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		nbt.setByte("tamed", this.dataWatcher.getWatchableObjectByte(16));
 		nbt.setInteger("happy", happyTicks);
 
+		nbt.setBoolean("wasRoped",wasRoped);
 
 		nbt.setFloat ("Strength Modifier", getStrength());
 		nbt.setFloat ("Aggression Modifier", getAggression());
@@ -218,6 +222,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 
 		this.dataWatcher.updateObject(16, nbt.getByte("tamed"));
 		this.happyTicks = nbt.getInteger("happy");
+		
+		wasRoped = nbt.getBoolean("wasRoped");
 
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
@@ -257,6 +263,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		if (hunger > 0)
 			hunger--;
 
+		if(this.getLeashed()&&!wasRoped)wasRoped = true;
+		
 		if(super.isInLove())
 			setInLove(true);
 
@@ -469,7 +477,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	@Override
 	protected boolean canDespawn()
 	{
-		return false;
+		return ticksExisted > 20000 && !wasRoped && this.getOwner() == null;
 	}
 
 	@Override
@@ -588,7 +596,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 
 		ItemStack itemstack = player.inventory.getCurrentItem();
 
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && !super.isInLove())
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED,player) && this.getGrowingAge() == 0 && !super.isInLove())
 		{
 			if (!player.capabilities.isCreativeMode)
 			{
@@ -599,7 +607,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			return true;
 		}
 		else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"))){
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player)){
 				itemstack.stackSize--;
 			}
 			return true;
@@ -711,12 +719,29 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	}
 	
 	@Override
-	public boolean trySetName(String name) {
-		if(this.familiarity > 40 && !this.hasCustomNameTag()){
+	public boolean trySetName(String name, EntityPlayer player) {
+		if(this.checkFamiliarity(InteractionEnum.NAME, player) && !this.hasCustomNameTag()){
 			this.setCustomNameTag(name);
 			return true;
 		}
 		this.playSound("mob.wolf.growl",  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
 		return false;
+	}
+	
+	@Override
+	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
+		boolean flag = false;
+		switch(interaction){
+		case MOUNT: flag = familiarity > 15;break;
+		case BREED: flag = familiarity > 20;break;
+		case SHEAR: flag = familiarity > 10;break;
+		case MILK: flag = familiarity > 10;break;
+		case NAME: flag = familiarity > 40;break;
+		default: break;
+		}
+		if(!flag && !player.worldObj.isRemote){
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
+		}
+		return flag;
 	}
 }

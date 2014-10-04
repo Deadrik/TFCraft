@@ -22,7 +22,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -34,6 +36,7 @@ import com.bioxx.tfc.Entities.AI.EntityAIFindNest;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Util.Helper;
 
@@ -521,6 +524,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		{
 			if(player.isSneaking()){
 				this.familiarize(player);
+				return true;
 			}
 			/*if(!player.isSneaking())
 			{
@@ -534,7 +538,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		}
 		ItemStack itemstack = player.getHeldItem();
 		if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"))){
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"), player)){
 				itemstack.stackSize--;
 			}
 			return true;
@@ -603,7 +607,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public int getFamiliarity() {
 		// TODO Auto-generated method stub
-		return 0;
+		return familiarity;
 	}
 
 	@Override
@@ -643,6 +647,10 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
 			}
+			else
+			{
+				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			}
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
@@ -650,12 +658,29 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 	
 	@Override
-	public boolean trySetName(String name) {
-		if(this.familiarity > 40 && !this.hasCustomNameTag()){
+	public boolean trySetName(String name, EntityPlayer player) {
+		if(this.checkFamiliarity(InteractionEnum.NAME, player) && !this.hasCustomNameTag()){
 			this.setCustomNameTag(name);
 			return true;
 		}
 		this.playSound(this.getHurtSound(),  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
 		return false;
+	}
+	
+	@Override
+	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
+		boolean flag = false;
+		switch(interaction){
+		case MOUNT: flag = familiarity > 15;break;
+		case BREED: flag = familiarity > 20;break;
+		case SHEAR: flag = familiarity > 10;break;
+		case MILK: flag = familiarity > 10;break;
+		case NAME: flag = familiarity > 20;break;
+		default: break;
+		}
+		if(!flag && !player.worldObj.isRemote){
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
+		}
+		return flag;
 	}
 }

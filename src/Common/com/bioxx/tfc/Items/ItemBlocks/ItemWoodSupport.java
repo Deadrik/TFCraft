@@ -111,7 +111,12 @@ public class ItemWoodSupport extends ItemTerraBlock
 					ForgeDirection dir = BlockWoodSupport.getSupportDirection(world, x, y, z);
 
 					int[] dist = BlockWoodSupport.getSupportsInRangeDir(world, x, y, z, 5, false);
-					int total = dist[dir.ordinal()-2];
+					int total = BlockWoodSupport.getDistanceFromDirection(dir, dist);
+					if(total == Integer.MAX_VALUE)
+					{
+						total = 1;
+						dir = ForgeDirection.getOrientation(side);
+					}
 					if(itemstack.stackSize < total)
 						return false;
 					int i1 = this.getMetadata(itemstack.getItemDamage());

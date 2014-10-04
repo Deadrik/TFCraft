@@ -33,6 +33,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -48,6 +49,7 @@ import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
@@ -266,7 +268,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 				this.dataWatcher.updateObject(28, Float.valueOf(climate_mod));
 				this.dataWatcher.updateObject(29, Float.valueOf(hard_mod));
 			}
-			else
+			else if(this.dataWatcher.hasChanges())
 			{
 				sex = this.dataWatcher.getWatchableObjectInt(13);
 				size_mod = this.dataWatcher.getWatchableObjectFloat(14);
@@ -313,14 +315,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		{
 			animalchest.func_110132_b(this);
 			int i = Math.min(animalchest.getSizeInventory(), this.horseChest.getSizeInventory());
-
 			for (int j = 0; j < i; ++j)
 			{
 				ItemStack itemstack = animalchest.getStackInSlot(j);
 				if (itemstack != null)
 					this.horseChest.setInventorySlotContents(j, itemstack.copy());
 			}
-
 			animalchest = null;
 		}
 
@@ -395,8 +395,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		ItemStack itemstack = player.inventory.getCurrentItem();
 		if(!worldObj.isRemote)
 		{
-			if(player.isSneaking()){
+			if(player.isSneaking() && !familiarizedToday && itemstack != null){
 				this.familiarize(player);
+				return true;
 			}
 			player.addChatMessage(new ChatComponentText(getGender() == GenderEnum.FEMALE ? "Female" : "Male"));
 			if(getGender()==GenderEnum.FEMALE && pregnant)
@@ -404,7 +405,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			//player.addChatMessage("12: " + dataWatcher.getWatchableObjectInt(12) + ", 15: " + dataWatcher.getWatchableObjectInt(15));
 		}
 
-		if (itemstack != null && this.isBreedingItemTFC(itemstack) && this.getGrowingAge() == 0 && !super.isInLove())
+		if (itemstack != null && this.isBreedingItemTFC(itemstack) && checkFamiliarity(InteractionEnum.BREED,player) &&this.familiarizedToday && this.getGrowingAge() == 0 && !super.isInLove())
 		{
 			if (!player.capabilities.isCreativeMode)
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, (((ItemFoodTFC)itemstack.getItem()).onConsumedByEntity(player.getHeldItem(), worldObj, this)));
@@ -413,7 +414,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			return true;
 		}
 		else if(itemstack != null && itemstack.getItem() instanceof ItemCustomNameTag && itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("ItemName")){
-			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"))){
+			if(this.trySetName(itemstack.stackTagCompound.getString("ItemName"),player)){
 				itemstack.stackSize--;
 			}
 			return true;
@@ -569,7 +570,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		this.setEatingHaystack(false);
 		this.setRearing(false);
 
-		if (!this.worldObj.isRemote)
+		if (!this.worldObj.isRemote && checkFamiliarity(InteractionEnum.MOUNT, player))
 			player.mountEntity(this);
 	}
 
@@ -695,7 +696,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 		ItemStack itemstack;
 
-		if (nbttc.hasKey("ArmorItem"))
+		if (nbttc.hasKey("ArmorItem", 10))
 		{
 			itemstack = ItemStack.loadItemStackFromNBT(nbttc.getCompoundTag("ArmorItem"));
 
@@ -705,10 +706,9 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			}
 		}
 
-		if (nbttc.hasKey("SaddleItem"))
+		if (nbttc.hasKey("SaddleItem", 10))
 		{
 			itemstack = ItemStack.loadItemStackFromNBT(nbttc.getCompoundTag("SaddleItem"));
-
 			if (itemstack != null && itemstack.getItem() == Items.saddle)
 			{
 				this.horseChest.setInventorySlotContents(0, itemstack);
@@ -1102,16 +1102,20 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(!this.riddenByEntity.equals(ep) && stack != null && this.isBreedingItem(stack) && (isAdult() && familiarity < 50) || !isAdult()){
+		if((this.riddenByEntity == null || !this.riddenByEntity.equals(ep)) && stack != null && this.isBreedingItemTFC(stack) && (isAdult() && familiarity < 50) || !isAdult()){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
+			}
+			else
+			{
+				worldObj.playSoundAtEntity(this, "random.burp", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
 		}
-		else if(this.riddenByEntity.equals(ep) && isAdult()){
+		else if(this.riddenByEntity != null && this.riddenByEntity.equals(ep) && isAdult()){
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
@@ -1119,12 +1123,29 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	}
 	
 	@Override
-	public boolean trySetName(String name) {
-		if(this.familiarity > 20 && !this.hasCustomNameTag()){
+	public boolean trySetName(String name, EntityPlayer player) {
+		if(checkFamiliarity(InteractionEnum.NAME, player)&& !this.hasCustomNameTag()){
 			this.setCustomNameTag(name);
 			return true;
 		}
 		this.playSound(this.getHurtSound(),  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
 		return false;
+	}
+
+	@Override
+	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
+		boolean flag = false;
+		switch(interaction){
+		case MOUNT: flag = familiarity > 15;break;
+		case BREED: flag = familiarity > 20;break;
+		case SHEAR: flag = familiarity > 10;break;
+		case MILK: flag = familiarity > 10;break;
+		case NAME: flag = familiarity > 20;break;
+		default: break;
+		}
+		if(!flag && !player.worldObj.isRemote){
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
+		}
+		return flag;
 	}
 }

@@ -5,18 +5,24 @@ import java.util.ArrayList;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
 import com.bioxx.tfc.api.Entities.IAnimal;
+import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityPheasantTFC extends EntityChickenTFC
 {
 	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
+	private boolean wasRoped = false;
 
 	public EntityPheasantTFC(World par1World)
 	{
@@ -37,7 +43,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	@Override
 	protected boolean canDespawn()
 	{
-		return this.ticksExisted > 3000;
+		return this.ticksExisted > 3000 && !wasRoped;
 	}
 
 	@Override
@@ -55,6 +61,7 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	public void onLivingUpdate()
 	{
 		timeUntilNextEgg = 10000;
+		if(this.getLeashed()&&!wasRoped)wasRoped = true;
 		super.onLivingUpdate();
 	}
 
@@ -131,18 +138,49 @@ public class EntityPheasantTFC extends EntityChickenTFC
 	}
 
 	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt)
+	{
+		super.readEntityFromNBT(nbt);
+		wasRoped = nbt.getBoolean("wasRoped");
+	}
+	
+	@Override
+	public void writeEntityToNBT (NBTTagCompound nbt)
+	{
+		super.writeEntityToNBT(nbt);
+		nbt.setBoolean("wasRoped", wasRoped);
+	}
+	
+	@Override
 	public int getAnimalTypeID()
 	{
 		return Helper.stringToInt("pheasant");
 	}
 	
 	@Override
-	public boolean trySetName(String name) {
-		if(this.familiarity > 60 && !this.hasCustomNameTag()){
+	public boolean trySetName(String name, EntityPlayer player) {
+		if(this.checkFamiliarity(InteractionEnum.NAME, player) && !this.hasCustomNameTag()){
 			this.setCustomNameTag(name);
 			return true;
 		}
 		this.playSound(TFC_Sounds.PHAESANTSAY,  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
 		return false;
+	}
+	
+	@Override
+	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
+		boolean flag = false;
+		switch(interaction){
+		case MOUNT: flag = familiarity > 15;break;
+		case BREED: flag = familiarity > 20;break;
+		case SHEAR: flag = familiarity > 10;break;
+		case MILK: flag = familiarity > 10;break;
+		case NAME: flag = familiarity > 60;break;
+		default: break;
+		}
+		if(!flag && !player.worldObj.isRemote){
+			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
+		}
+		return flag;
 	}
 }

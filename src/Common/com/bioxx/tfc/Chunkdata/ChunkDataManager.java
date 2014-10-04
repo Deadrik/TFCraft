@@ -1,7 +1,7 @@
 package com.bioxx.tfc.Chunkdata;
 
-import java.util.HashMap;
-
+import net.minecraft.util.LongHashMap;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
@@ -12,65 +12,55 @@ public class ChunkDataManager
 {
 	private World world;
 
-	private HashMap<Chunk,ChunkData> chunkmap = new HashMap<Chunk,ChunkData>();
-	private HashMap<Chunk,ChunkData> chunkmapunload = new HashMap<Chunk,ChunkData>();
+	private LongHashMap chunkmap = new LongHashMap();
 
 	public ChunkDataManager(World world)
 	{
 		this.world = world;
 	}
 
-	public ChunkData removeData(int x, int z)
+	public void removeData(int x, int z)
 	{
-		Chunk c = world.getChunkFromChunkCoords(x, z);
-		if(chunkmap.containsKey(c))
+		long key = ChunkCoordIntPair.chunkXZ2Int(x, z);
+		if(chunkmap.containsItem(key))
 		{
-			chunkmapunload.put(c, chunkmap.get(c));
-			chunkmap.remove(c);
-			return (ChunkData) chunkmapunload.get(c);
+			chunkmap.remove(key);
 		}
-		else if(chunkmapunload.containsKey(c))
-		{
-			chunkmapunload.remove(c);
-		}
-		return null;
 	}
 
-	public void addData(Chunk c, ChunkData cd)
+	public void addData(long key, ChunkData cd)
 	{
-		chunkmap.put(c, cd);
+		chunkmap.add(key, cd);
+	}
+
+	public void addData(Chunk chunk, ChunkData cd)
+	{
+		chunkmap.add(ChunkCoordIntPair.chunkXZ2Int(chunk.xPosition, chunk.zPosition), cd);
+	}
+
+	public void addData(int x, int z, ChunkData cd)
+	{
+		chunkmap.add(ChunkCoordIntPair.chunkXZ2Int(x, z), cd);
 	}
 
 	public ChunkData getData(int x, int z)
 	{
-		Chunk c = world.getChunkFromChunkCoords(x, z);
-		if(chunkmap.containsKey(c))
-			return (ChunkData) chunkmap.get(c);
-		else if(chunkmapunload.containsKey(c))
-		{
-			ChunkData cd = (ChunkData) chunkmapunload.get(c);
-			chunkmapunload.remove(c);
-			return cd;
-		}
+		long key = ChunkCoordIntPair.chunkXZ2Int(x, z);
+		if(chunkmap.containsItem(key))
+			return (ChunkData) chunkmap.getValueByKey(key);
 		else return null;
 	}
 
-	public ChunkData getData(Chunk c)
+	public ChunkData getData(long key)
 	{
-		if(chunkmap.containsKey(c))
-			return (ChunkData) chunkmap.get(c);
-		else if(chunkmapunload.containsKey(c))
-		{
-			ChunkData cd = (ChunkData) chunkmapunload.get(c);
-			chunkmapunload.remove(c);
-			return cd;
-		}
+		if(chunkmap.containsItem(key))
+			return (ChunkData) chunkmap.getValueByKey(key);
 		else return null;
 	}
 
-	public boolean hasData(Chunk c)
+	public boolean hasData(long key)
 	{
-		if(chunkmap.containsKey(c))
+		if(chunkmap.containsItem(key))
 			return true;
 		return false;
 	}
