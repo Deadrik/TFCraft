@@ -35,12 +35,6 @@ public class TFCProvider extends WorldProvider
 	}
 
 	@Override
-	public boolean canRespawnHere()
-	{
-		return false;
-	}
-
-	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
 		int y = worldObj.getTopSolidOrLiquidBlock(x, z)-1;
