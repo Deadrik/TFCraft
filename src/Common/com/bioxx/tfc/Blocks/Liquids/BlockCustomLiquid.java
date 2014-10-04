@@ -271,7 +271,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	}
 	@Override
 	public float getFilledPercentage(World world, int x, int y, int z) {
-		return 0;
+		return 1;
 	}
 
 }
