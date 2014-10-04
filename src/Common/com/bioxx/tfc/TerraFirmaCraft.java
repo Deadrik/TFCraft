@@ -165,9 +165,9 @@ public class TerraFirmaCraft
 			DimensionManager.unregisterProviderType(-1);
 			DimensionManager.unregisterProviderType(0);
 			DimensionManager.unregisterProviderType(1);
-			DimensionManager.registerProviderType(-1, TFCProviderHell.class, true);
-			DimensionManager.registerProviderType(0, TFCProvider.class, true);
-			DimensionManager.registerProviderType(1, TFCProvider.class, true);
+			DimensionManager.registerProviderType(-1, TFCProviderHell.class, false);
+			DimensionManager.registerProviderType(0, TFCProvider.class, false);
+			DimensionManager.registerProviderType(1, TFCProvider.class, false);
 
 			DimensionManager.registerDimension(-1, -1);
 			DimensionManager.registerDimension(0, 0);

@@ -1,18 +1,13 @@
 package com.bioxx.tfc.WorldGen;
 
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.storage.WorldInfo;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -40,11 +35,18 @@ public class TFCProvider extends WorldProvider
 	}
 
 	@Override
+	public boolean canRespawnHere()
+	{
+		return false;
+	}
+
+	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
 		int y = worldObj.getTopSolidOrLiquidBlock(x, z)-1;
+		if(y < Global.SEALEVEL || y > Global.SEALEVEL + 25) return false;
 		Block b = worldObj.getBlock(x, y, z);
-		return y > Global.SEALEVEL && y < 170 && (TFC_Core.isSand(b) || TFC_Core.isGrass(b));
+		return (TFC_Core.isSand(b) || TFC_Core.isGrass(b));
 	}
 
 	@Override
@@ -63,53 +65,7 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public ChunkCoordinates getSpawnPoint()
 	{
-		WorldInfo info = worldObj.getWorldInfo();
-		if(info.getSpawnZ() > -2999)
-			return createSpawn();
 		return super.getSpawnPoint();
-	}
-
-	private ChunkCoordinates createSpawn()
-	{
-		List biomeList = worldChunkMgr.getBiomesToSpawnIn();
-		long seed = worldObj.getWorldInfo().getSeed();
-		Random rand = new Random(seed);
-
-		ChunkPosition chunkCoord = null;
-		int xOffset = 0;
-		int xCoord = 0;
-		int yCoord = Global.SEALEVEL+1;
-		int zCoord = 10000;
-		int startingZ = 3000 + rand.nextInt(12000);
-
-		while(chunkCoord == null)
-		{
-			chunkCoord = worldChunkMgr.findBiomePosition(xOffset, -startingZ, 64, biomeList, rand);
-			if (chunkCoord != null)
-			{
-				xCoord = chunkCoord.chunkPosX;
-				zCoord = chunkCoord.chunkPosZ;
-			}
-			else
-			{
-				xOffset += 64;
-				//System.out.println("Unable to find spawn biome");
-			}
-		}
-
-		int var9 = 0;
-		while (!canCoordinateBeSpawn(xCoord, zCoord))
-		{
-			xCoord += rand.nextInt(16) - rand.nextInt(16);
-			zCoord += rand.nextInt(16) - rand.nextInt(16);
-			++var9;
-			if (var9 == 1000)
-				break;
-		}
-
-		WorldInfo info = worldObj.getWorldInfo();
-		info.setSpawnPosition(xCoord, worldObj.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
-		return new ChunkCoordinates(xCoord, worldObj.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
 	}
 
 	private boolean isNextToShoreOrIce(int x, int y, int z)
