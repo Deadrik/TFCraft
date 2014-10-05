@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -25,6 +27,7 @@ public class TreeSchematic implements ISchematic
 	private String path;
 	private int id;
 	private int growthStage;
+	private int logCount;
 
 	public TreeSchematic(String p)
 	{
@@ -79,14 +82,8 @@ public class TreeSchematic implements ISchematic
 			System.out.println("TFC IOException: " + path); return false;
 		}
 
+		countLogs();
 		return true;
-	}
-
-	private int getCenter(int v)
-	{
-		if(v % 2 == 1)
-			return (v + 1) / 2;
-		return v / 2;
 	}
 
 	@Override
@@ -207,5 +204,41 @@ public class TreeSchematic implements ISchematic
 	public int getGrowthStage()
 	{
 		return growthStage;
+	}
+
+	@Override
+	public int getLogCount()
+	{
+		return logCount;
+	}
+
+
+	//*****************
+	// Private methods
+	//*****************
+	private int getCenter(int v)
+	{
+		if(v % 2 == 1)
+			return (v + 1) / 2;
+		return v / 2;
+	}
+
+	private void countLogs()
+	{
+		int index;
+		int id;
+		for(int y = 0; y < height; y++)
+		{
+			for(int z = 0; z < length; z++)
+			{
+				for(int x = 0; x < width; x++)
+				{
+					index = x + width * (z + length * y);
+					id = blockArray[index];
+					if(Block.getBlockById(id).getMaterial() == Material.wood)
+						logCount++;
+				}
+			}
+		}
 	}
 }

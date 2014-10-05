@@ -1873,6 +1873,9 @@ tile.Ice.name=Ice
 #=================
 #= Miscellaneous =
 #=================
+#==Misc Messages==
+msg.noTreeChop=This tool can not chop that tree!
+
 #== Misc Items ==
 item.arrow.name=Arrow
 item.book.name=Book

@@ -7,13 +7,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -95,13 +96,6 @@ public class BlockLogNatural extends BlockTerraContainer
 		return this.blockHardness;
 	}
 
-	private boolean checkOut(World world, int x, int y, int z, int meta)
-	{
-		if(world.getBlock(x, y, z) == this && world.getBlockMetadata(x, y, z) == meta)
-			return true;
-		return false;
-	}
-
 	@Override
 	public int damageDropped(int dmg)
 	{
@@ -133,65 +127,13 @@ public class BlockLogNatural extends BlockTerraContainer
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int meta)
 	{
-		//we need to make sure the player has the correct tool out
-		boolean isAxeorSaw = false;
-		boolean isHammer = false;
-		ItemStack equip = entityplayer.getCurrentEquippedItem();
-		if(!world.isRemote)
-		{
-			if(equip!=null)
-			{
-				for(int cnt = 0; cnt < Recipes.Axes.length && !isAxeorSaw; cnt++)
-				{
-					if(equip.getItem() == Recipes.Axes[cnt])
-					{
-						isAxeorSaw = true;
-						if(cnt < 4)
-							isStone = true;
-					}
-				}
-				/*for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
-				{
-					if(equip.getItem() == Recipes.Saws[cnt])
-					{
-						isAxeorSaw = true;
-					}
-				}*/
-				for(int cnt = 0; cnt < Recipes.Hammers.length && !isAxeorSaw; cnt++)
-				{
-					if(equip.getItem() == Recipes.Hammers[cnt])
-						isHammer = true;
-				}
-			}
-			if(isAxeorSaw)
-			{
-				damage = -1;
-				//ProcessTree(world, x, y, z, equip);
-
-				if(damage + equip.getItemDamage() > equip.getMaxDamage())
-				{
-					int ind = entityplayer.inventory.currentItem;
-					entityplayer.inventory.setInventorySlotContents(ind, null);
-					world.setBlock(x, y, z, this, meta, 0x2);
-				}
-				else
-					equip.damageItem(damage, entityplayer);
-			}
-			else if(isHammer)
-			{
-				EntityItem item = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, new ItemStack(TFCItems.Stick, 1 + world.rand.nextInt(3)));
-				world.spawnEntityInWorld(item);
-			}
-			else
-				world.setBlock(x, y, z, this, meta, 0x2);
-		}
+		
 	}
 
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int side, EntityPlayer entityplayer)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
-		harvestBlock(world, entityplayer, x, y, z, meta);
+		
 	}
 
 	@Override
@@ -209,20 +151,61 @@ public class BlockLogNatural extends BlockTerraContainer
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion ex)
 	{
-		//ProcessTree(world, x, y, z, world.getBlockMetadata(x, y, z), null);
+		//TODO This part needs more attention. The barrel explosion destroys to many blocks too fast.
+		isStone = true;
+		ProcessTree(world, null, x, y, z, true);
 	}
-
-	/*private void ProcessTree(World world, int x, int y, int z, ItemStack is)
-	{
-
-	}*/
 
 	@Override
 	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest)
 	{
-		/*if(!willHarvest)
-			return false;*/
+		if(!world.isRemote)
+		{
+			ItemStack equip = player.getCurrentEquippedItem();
+			if(equip != null)
+			{
+				isStone = false;
+				for(int cnt = 0; cnt < TFCItems.StoneTools.length && !isStone; cnt++)
+				{
+					if(equip.getItem() == TFCItems.StoneTools[cnt])
+						isStone = true;
+				}
+			}
 
+			boolean ret = ProcessTree(world, player, x, y, z, !player.capabilities.isCreativeMode);
+
+			if(ret)
+				dmgTool(world, player);
+			else if(equip != null && isValidTool(equip.getItem()))
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("msg.noTreeChop")));
+
+			return ret;
+		}
+		return false;
+	}
+	
+	@Override
+	public void onBlockPreDestroy(World world, int x, int y, int z, int oldMeta)
+	{
+		//This gets called a lot, not sure if this is the right place
+
+		//System.out.println("------PRE DESTROY CALLED!-------");
+		/*isStone = true;
+		ProcessTree(world, null, x, y, z, true);*/
+	}
+
+	@Override
+	public Item getItemDropped(int i, Random random, int j)
+	{
+		return TFCItems.Logs;
+	}
+
+
+	//*****************
+	// Private methods
+	//*****************
+	private boolean ProcessTree(World world, EntityPlayer player, int x, int y, int z, boolean dropItem)
+	{
 		if(!world.isRemote)
 		{
 			TileEntity te = world.getTileEntity(x, y, z);
@@ -230,11 +213,25 @@ public class BlockLogNatural extends BlockTerraContainer
 			{
 				TETreeLog teLog = (TETreeLog) te;
 				if(!teLog.isBase)
-					return removedByPlayer(world, player, teLog.baseX, teLog.baseY, teLog.baseZ, willHarvest);
+					return ProcessTree(world, player, teLog.baseX, teLog.baseY, teLog.baseZ, dropItem);
 
 				TreeSchematic schem = TreeRegistry.instance.getTreeSchematic(teLog.treeID, teLog.schemIndex);
+
+				if(player != null && !player.capabilities.isCreativeMode)
+				{
+					//Check if a valid tool is being used and is not too damaged to chop this tree down
+					ItemStack equip = player.getCurrentEquippedItem();
+					if(equip == null) return false; //Bare hands not allowed
+					if(equip != null)
+					{
+						if(!isValidTool(equip.getItem())) return false;
+						if(isValidTool(equip.getItem()) && (equip.getMaxDamage() - equip.getItemDamage()) < schem.getLogCount()) return false;
+					}
+				}
+
 				int index;
 				int id;
+				damage = 0;
 				for(int schemY = 0; schemY < schem.getSizeY(); schemY++)
 				{
 					for(int schemZ = 0; schemZ < schem.getSizeZ(); schemZ++)
@@ -244,18 +241,19 @@ public class BlockLogNatural extends BlockTerraContainer
 							index = schemX + schem.getSizeX() * (schemZ + schem.getSizeZ() * schemY);
 							id = schem.getBlockArray()[index];
 							if(id != 0)
-								ProcessRot(world, x, y, z, teLog.treeID, schem, schemX+1, schemY, schemZ+1, teLog.rotation);
+								ProcessRot(world, x, y, z, teLog.treeID, schem, schemX+1, schemY, schemZ+1, teLog.rotation, dropItem);
 						}
 					}
 				}
+				world.setBlock(x, y, z, Blocks.air);
+				return true;
 			}
 		}
-		world.setBlock(x, y, z, Blocks.air);
-		return true;
+		return false;
 	}
 
-	private static void ProcessRot(World world, int treeX, int treeY, int treeZ, int meta,
-			TreeSchematic schem, int schemX, int schemY, int schemZ, int rot)
+	private void ProcessRot(World world, int treeX, int treeY, int treeZ, int meta,
+			TreeSchematic schem, int schemX, int schemY, int schemZ, int rot, boolean dropItem)
 	{
 		int localX = treeX + schem.getCenterX() - schemX;
 		int localZ = treeZ + schem.getCenterZ() - schemZ;
@@ -285,7 +283,18 @@ public class BlockLogNatural extends BlockTerraContainer
 			TETreeLog log = (TETreeLog) world.getTileEntity(localX, localY, localZ);
 			if(log != null && ((log.baseX == treeX && log.baseY == treeY && log.baseZ == treeZ)))
 			{
+				damage++;
 				world.setBlock(localX, localY, localZ, Blocks.air, 0, 0x2);
+				if(dropItem)
+				{
+					if(isStone)
+					{
+						if(world.rand.nextInt(10) != 0)
+							dropBlockAsItem(world, localX, localY, localZ, new ItemStack(TFCItems.Logs, 1, meta));
+					}
+					else
+						dropBlockAsItem(world, localX, localY, localZ, new ItemStack(TFCItems.Logs, 1, meta));
+				}
 			}
 		}
 		else if(localBlockID == TFCBlocks.Leaves || localBlockID == TFCBlocks.Leaves2)
@@ -297,95 +306,125 @@ public class BlockLogNatural extends BlockTerraContainer
 		}
 	}
 
-	/*@Deprecated
-	private void ProcessTree(World world, int x, int y, int z, int meta, ItemStack is)
+	private void dmgTool(World world, EntityPlayer entityplayer)
 	{
-		boolean[][][] checkArray = new boolean[searchDist * 2 + 1][256][searchDist * 2 + 1];
-		scanLogs(world, x, y, z, meta, checkArray, (byte)0, (byte)0, (byte)0, is);
-	}*/
-
-	@Override
-	public Item getItemDropped(int i, Random random, int j)
-	{
-		return TFCItems.Logs;
-	}
-
-	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
-		boolean check = false;
-		for(int h = -2; h <= 2; h++)
+		//Tools that will get damaged when used to chop a tree down.
+		if(!world.isRemote)
 		{
-			for(int g = -2; g <= 2; g++)
+			ItemStack equip = entityplayer.getCurrentEquippedItem();
+			if(equip!=null && isValidTool(equip.getItem()))
 			{
-				for(int f = -2; f <= 2; f++)
+				if(damage + equip.getItemDamage() > equip.getMaxDamage())
 				{
-					if(world.getBlock(x + h, y + g, z + f) == this && world.getBlockMetadata(x + h, y + g, z + f) == meta)
-						check = true;
+					ItemStack stack = entityplayer.inventory.getCurrentItem();
+					entityplayer.renderBrokenItemStack(stack);
+					entityplayer.worldObj.playSoundAtEntity(entityplayer, "random.break", 0.8F, 0.8F + entityplayer.worldObj.rand.nextFloat() * 0.4F);
+					entityplayer.destroyCurrentEquippedItem();
 				}
+				else
+					equip.damageItem(damage, entityplayer);
 			}
-		}
-		if(!check)
-		{
-			world.setBlockToAir(x, y, z);
-			dropBlockAsItem(world, x, y, z, new ItemStack(TFCItems.Logs, 1, meta));
+			
+			//If this method gets called more then ones by mistake,
+			//make sure the second call will not make any damage.
+			damage = 0;
 		}
 	}
 
-
-	/*private void scanLogs(World world, int i, int j, int k, int l, boolean[][][] checkArray, byte x, byte y, byte z, ItemStack stack)
+	private boolean isValidTool(Item tool)
 	{
-		if(y >= 0 && j + y < 256)
+		boolean isValid = false;
+		if(tool != null)
 		{
-			int offsetX = 0;int offsetY = 0;int offsetZ = 0;
-			checkArray[x + searchDist][y][z + searchDist] = true;
-
-			for (offsetX = -3; offsetX <= 3; offsetX++)
+			for(int cnt = 0; cnt < Recipes.Axes.length && !isValid; cnt++)
 			{
-				for (offsetZ = -3; offsetZ <= 3; offsetZ++)
+				if(tool == Recipes.Axes[cnt]) isValid = true;
+			}
+			if(!isValid)
+			{
+				for(int cnt = 0; cnt < Recipes.Saws.length && !isValid; cnt++)
 				{
-					for (offsetY = 0; offsetY <= 2; offsetY++)
-					{
-						if(Math.abs(x + offsetX) <= searchDist && j + y + offsetY < 256 && Math.abs(z + offsetZ) <= searchDist)
-						{
-							if(checkOut(world, i + x + offsetX, j + y + offsetY, k + z + offsetZ, l)
-									&& !(offsetX == 0 && offsetY == 0 && offsetZ == 0)
-									&& !checkArray[x + offsetX + searchDist][y + offsetY][z + offsetZ + searchDist])
-								scanLogs(world,i, j, k, l, checkArray, (byte)(x + offsetX),(byte)(y + offsetY),(byte)(z + offsetZ), stack);
-						}
-					}
+					if(tool == Recipes.Saws[cnt]) isValid = true;
 				}
 			}
-
-			damage++;
-			if(stack != null)
+			if(!isValid)
 			{
-				if(damage+stack.getItemDamage() <= stack.getMaxDamage())
+				for(int cnt = 0; cnt < Recipes.Hammers.length && !isValid; cnt++)
 				{
-					world.setBlock(i + x, j + y, k + z, Blocks.air, 0, 0x2);
-					if((isStone && world.rand.nextInt(10) != 0) || !isStone)
-						dropBlockAsItem(world, i + x, j + y, k + z, new ItemStack(TFCItems.Logs, 1, damageDropped(l)));
-					notifyLeaves(world, i + x, j + y, k + z);
+					if(tool == Recipes.Hammers[cnt]) isValid = true;
 				}
 			}
-			else
+			if(!isValid)
 			{
-				world.setBlockToAir(i, j, k);
-				dropBlockAsItem(world, i, j, k, new ItemStack(TFCItems.Logs, 1, damageDropped(l)));
-				notifyLeaves(world, i + x, j + y, k + z);
+				for(int cnt = 0; cnt < Recipes.Knives.length && !isValid; cnt++)
+				{
+					if(tool == Recipes.Knives[cnt]) isValid = true;
+				}
+			}
+			if(!isValid)
+			{
+				for(int cnt = 0; cnt < Recipes.Chisels.length && !isValid; cnt++)
+				{
+					if(tool == Recipes.Chisels[cnt]) isValid = true;
+				}
+			}
+			if(!isValid)
+			{
+				for(int cnt = 0; cnt < Recipes.Scythes.length && !isValid; cnt++)
+				{
+					if(tool == Recipes.Scythes[cnt]) isValid = true;
+				}
+			}
+			if(!isValid)
+			{
+				for(int cnt = 0; cnt < TFCItems.Swards.length && !isValid; cnt++)
+				{
+					if(tool == TFCItems.Swards[cnt]) isValid = true;
+				}
+			}
+			if(!isValid)
+			{
+				for(int cnt = 0; cnt < TFCItems.Maces.length && !isValid; cnt++)
+				{
+					if(tool == TFCItems.Maces[cnt]) isValid = true;
+				}
+			}
+			if(!isValid)
+			{
+				for(int cnt = 0; cnt < TFCItems.Javelins.length && !isValid; cnt++)
+				{
+					if(tool == TFCItems.Javelins[cnt]) isValid = true;
+				}
+			}
+			if(!isValid)
+			{
+				for(int cnt = 0; cnt < TFCItems.ProPicks.length && !isValid; cnt++)
+				{
+					if(tool == TFCItems.ProPicks[cnt]) isValid = true;
+				}
+			}
+			if(!isValid)
+			{
+				for(int cnt = 0; cnt < TFCItems.Picks.length && !isValid; cnt++)
+				{
+					if(tool == TFCItems.Picks[cnt]) isValid = true;
+				}
+			}
+			if(!isValid)
+			{
+				for(int cnt = 0; cnt < TFCItems.Shovels.length && !isValid; cnt++)
+				{
+					if(tool == TFCItems.Shovels[cnt]) isValid = true;
+				}
+			}
+			if(!isValid)
+			{
+				for(int cnt = 0; cnt < TFCItems.Hoes.length && !isValid; cnt++)
+				{
+					if(tool == TFCItems.Hoes[cnt]) isValid = true;
+				}
 			}
 		}
+		return isValid;
 	}
-
-	private void notifyLeaves(World world, int x, int y, int z)
-	{
-		world.notifyBlockOfNeighborChange(x + 1, y, z, Blocks.air);
-		world.notifyBlockOfNeighborChange(x - 1, y, z, Blocks.air);
-		world.notifyBlockOfNeighborChange(x, y, z + 1, Blocks.air);
-		world.notifyBlockOfNeighborChange(x, y, z - 1, Blocks.air);
-		world.notifyBlockOfNeighborChange(x, y + 1, z, Blocks.air);
-		world.notifyBlockOfNeighborChange(x, y - 1, z, Blocks.air);
-	}*/
-
 }

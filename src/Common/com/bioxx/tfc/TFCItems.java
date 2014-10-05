@@ -108,6 +108,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TFCItems
 {
+	public static Item[] Swards;
+	public static Item[] Maces;
+	public static Item[] Javelins;
+	public static Item[] StoneTools;
+	public static Item[] ProPicks;
+	public static Item[] Picks;
+	public static Item[] Shovels;
+	public static Item[] Hoes;
+
 	public static Item GemRuby;
 	public static Item GemSapphire;
 	public static Item GemEmerald;
@@ -1642,6 +1651,32 @@ public class TFCItems
 		Recipes.Gems  = new Item[]{GemAgate, GemAmethyst, GemBeryl, GemDiamond, GemEmerald, GemGarnet, 
 				GemJade, GemJasper, GemOpal,GemRuby,GemSapphire,GemTopaz,GemTourmaline};
 
+		Swards = new Item[]{BismuthBronzeSword, BlackBronzeSword, BlackSteelSword, BlueSteelSword,
+				BronzeSword, CopperSword, WroughtIronSword, RedSteelSword, SteelSword};
+
+		Maces = new Item[]{BismuthBronzeMace, BismuthBronzeMace, BlackBronzeMace, BlackSteelMace,
+				BlueSteelMace, BronzeMace, CopperMace, WroughtIronMace, RedSteelMace, SteelMace};
+
+		Javelins = new Item[]{IgInStoneJavelin, IgInStoneJavelin, SedStoneJavelin, IgExStoneJavelin,
+				MMStoneJavelin, CopperJavelin, BismuthBronzeJavelin, BronzeJavelin, BlackBronzeJavelin,
+				WroughtIronJavelin, SteelJavelin, BlackSteelJavelin, BlueSteelJavelin, RedSteelJavelin};
+
+		StoneTools = new Item[]{IgInShovel, IgInAxe, IgInHoe, SedShovel, SedAxe,
+				SedHoe, IgExShovel, IgExAxe, IgExHoe, MMShovel, MMAxe, MMHoe};
+
+		ProPicks = new Item[]{ProPickBismuthBronze, ProPickBlackBronze, ProPickBlackSteel, ProPickBlueSteel,
+				ProPickBronze, ProPickCopper, ProPickIron, ProPickRedSteel, ProPickSteel};
+
+		Picks = new Item[]{BismuthBronzePick, BlackBronzePick, BlackSteelPick, BlueSteelPick, BronzePick,
+				CopperPick, WroughtIronPick, RedSteelPick, SteelPick};
+
+		Shovels = new Item[]{IgInShovel, IgExShovel, SedShovel, MMShovel, BismuthBronzeShovel, BlackBronzeShovel,
+				BlackSteelShovel, BlueSteelShovel, BronzeShovel, CopperShovel, WroughtIronShovel, RedSteelShovel,
+				SteelShovel};
+
+		Hoes = new Item[]{IgInHoe, IgExHoe, SedHoe, MMHoe, BismuthBronzeHoe, BlackBronzeHoe, BlackSteelHoe,
+				BlueSteelHoe, BronzeHoe, CopperHoe, WroughtIronHoe, RedSteelHoe, SteelHoe};
+
 		((TFCTabs) TFCTabs.TFCBuilding).setTabIconItemStack(new ItemStack(TFCBlocks.StoneSedBrick));
 		((TFCTabs) TFCTabs.TFCDecoration).setTabIconItemStack(new ItemStack(TFCBlocks.Flora));
 		((TFCTabs) TFCTabs.TFCDevices).setTabIconItem(SluiceItem);
@@ -1652,7 +1687,6 @@ public class TFCItems
 		((TFCTabs) TFCTabs.TFCWeapons).setTabIconItem(BismuthBronzeSword);
 		((TFCTabs) TFCTabs.TFCArmor).setTabIconItem(BronzeHelmet);
 		((TFCTabs) TFCTabs.TFCMaterials).setTabIconItem(BlueSteelIngot);
-
 
 		registerMetals();
 

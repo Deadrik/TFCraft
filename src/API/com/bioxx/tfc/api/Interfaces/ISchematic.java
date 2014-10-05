@@ -89,4 +89,9 @@ public interface ISchematic
 	 * Get tree growth stage between 1 and 6
 	 */
 	public int getGrowthStage();
+	
+	/**
+	 * Returns the log count
+	 */
+	public int getLogCount();
 }
