@@ -372,7 +372,7 @@ public class BlockBerryBush extends BlockTerraContainer
 
 	protected boolean canThisPlantGrowOnThisBlock(Block block)
 	{
-		return TFC_Core.isSoil(block);
+		return TFC_Core.isGrass(block);
 	}
 
 	@Override

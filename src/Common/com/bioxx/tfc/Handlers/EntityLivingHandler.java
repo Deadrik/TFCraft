@@ -1,13 +1,17 @@
 package com.bioxx.tfc.Handlers;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
@@ -31,9 +35,13 @@ import com.bioxx.tfc.Items.ItemLooseRock;
 import com.bioxx.tfc.Items.ItemOreSmall;
 import com.bioxx.tfc.Items.ItemQuiver;
 import com.bioxx.tfc.Items.Tools.ItemJavelin;
+import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFCAttributes;
 import com.bioxx.tfc.api.TFCOptions;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Interfaces.IEquipable;
+import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -266,6 +274,50 @@ public class EntityLivingHandler
 			SkillStats skills = TFC_Core.getSkillStats((EntityPlayer) event.entityLiving);
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer((EntityPlayer) event.entityLiving);
 			pi.tempSkills = skills;
+		}
+	}
+
+	@SubscribeEvent
+	public void onLivingDrop(LivingDropsEvent event)
+	{
+		if(!event.entity.worldObj.isRemote && event.recentlyHit)
+		{
+			if(event.source.getSourceOfDamage() instanceof EntityPlayer)
+			{
+				EntityPlayer p = (EntityPlayer)event.source.getSourceOfDamage();
+				boolean foundFood = false;
+
+				ArrayList<EntityItem> drop = new ArrayList<EntityItem>();
+				for(EntityItem ei : event.drops)
+				{
+					if(ei.getEntityItem().getItem() instanceof IFood)
+					{
+						foundFood = true;
+						float oldWeight = Food.getWeight(ei.getEntityItem());
+						Food.setWeight(ei.getEntityItem(), 0);
+						float newWeight = oldWeight * (TFC_Core.getSkillStats(p).getSkillMultiplier(Global.SKILL_BUTCHERING)+0.01f);
+						while (newWeight > 0)
+						{
+							float fw = Helper.roundNumber(Math.min(Global.FOOD_MAX_WEIGHT, newWeight), 10);
+							if (fw < Global.FOOD_MAX_WEIGHT)
+								newWeight = 0;
+							newWeight -= fw;
+							ItemStack is = ItemFoodTFC.createTag(new ItemStack(ei.getEntityItem().getItem(), 1), fw);
+							drop.add(new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, is));
+						}
+					}
+					else
+					{
+						drop.add(ei);
+					}
+				}
+				event.drops.clear();
+				event.drops.addAll(drop);
+				if(foundFood)
+				{
+					TFC_Core.getSkillStats(p).increaseSkill(Global.SKILL_BUTCHERING, 1);
+				}
+			}
 		}
 	}
 }

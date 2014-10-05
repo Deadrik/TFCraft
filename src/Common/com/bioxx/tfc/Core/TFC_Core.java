@@ -53,7 +53,6 @@ import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Entities.IAnimal;
 import com.bioxx.tfc.api.Enums.EnumFuelMaterial;
 import com.bioxx.tfc.api.Interfaces.IFood;
-import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -1162,7 +1161,11 @@ public class TFC_Core
 	public static void animalDropMeat(Entity e, Item i, float foodWeight)
 	{
 		Random r;
-		while (foodWeight > 0)
+		ItemStack is = ItemFoodTFC.createTag(new ItemStack(i, 1), foodWeight);
+		r = new Random(e.getUniqueID().getLeastSignificantBits() + e.getUniqueID().getMostSignificantBits());
+		Food.adjustFlavor(is, r);
+		e.capturedDrops.add(new EntityItem(e.worldObj, e.posX, e.posY, e.posZ, is));
+		/*while (foodWeight > 0)
 		{
 			float fw = Helper.roundNumber(Math.min(Global.FOOD_MAX_WEIGHT, foodWeight), 10);
 			if (fw < Global.FOOD_MAX_WEIGHT)
@@ -1171,8 +1174,8 @@ public class TFC_Core
 			ItemStack is = ItemFoodTFC.createTag(new ItemStack(i, 1), fw);
 			r = new Random(e.getUniqueID().getLeastSignificantBits() + e.getUniqueID().getMostSignificantBits());
 			Food.adjustFlavor(is, r);
-			e.entityDropItem(is, 0);
-		}
+			e.capturedDrops.add(new EntityItem(e.worldObj, e.posX, e.posY, e.posZ, is));
+		}*/
 	}
 
 	public static Vec3 getEntityPos(Entity e)

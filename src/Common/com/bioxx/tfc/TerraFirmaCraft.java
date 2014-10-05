@@ -130,6 +130,7 @@ public class TerraFirmaCraft
 		SkillsManager.instance.registerSkill(Global.SKILL_AGRICULTURE);
 		SkillsManager.instance.registerSkill(Global.SKILL_COOKING);
 		SkillsManager.instance.registerSkill(Global.SKILL_PROSPECTING);
+		SkillsManager.instance.registerSkill(Global.SKILL_BUTCHERING);
 
 		//Load Items
 		TFCItems.Setup();
