@@ -16,6 +16,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -71,6 +72,8 @@ public class EntityFishHookTFC extends EntityFishHook
 
 	private int reelCounter = 0;
 	private int lastCheckTick = 0;
+	
+	private boolean lineTensionSnap = false;
 
 	public EntityFishHookTFC(World par1World)
 	{
@@ -137,7 +140,6 @@ public class EntityFishHookTFC extends EntityFishHook
 		this.yOffset = 0.0F;
 		float f = 0.4F;
 		float tickRatio = Math.min(ticks,60) / 20f;
-		par2EntityPlayer.addChatMessage(new ChatComponentText(ticks +""));
 		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * f;
 		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * f;
 		this.motionY = -MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI) * f;
@@ -493,11 +495,19 @@ public class EntityFishHookTFC extends EntityFishHook
 		{
 			this.maxDistance += pullVec.lengthVector() * 0.3;
 		}
+		if(lineTension > maxLineTension * 0.8 && !lineTensionSnap){
+			lineTensionSnap = true;
+			this.field_146042_b.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("fishingRod.lineTension")));
+		}
+		else if(lineTension < maxLineTension * 0.8){
+			lineTensionSnap = false;
+		}
 		if(lineTension >= maxLineTension){
 			this.field_146042_b.getCurrentEquippedItem().damageItem(20, field_146042_b);
-			//this.ridingEntity.riddenByEntity = null;
-			((EntityLiving)this.ridingEntity).dismountEntity(this);
-			//this.ridingEntity = null;
+			this.ridingEntity.riddenByEntity = null;
+			this.ridingEntity = null;
+			//((EntityLiving)this.ridingEntity).dismountEntity(this);
+			this.field_146042_b.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("fishingRod.lineSnap")));
 			this.setDead();
 		}
 		this.pullX = 0;
@@ -631,6 +641,7 @@ public class EntityFishHookTFC extends EntityFishHook
 			EntityFishTFC fish = new EntityFishTFC(this.worldObj);
 			fish.setPosition(posX, posY-0.3, posZ);
 			this.worldObj.spawnEntityInWorld(fish);
+			this.field_146042_b.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("fishingRod.bite")));
 			this.mountEntity(fish);
 
 			this.canCatchFish = false;
@@ -673,7 +684,8 @@ public class EntityFishHookTFC extends EntityFishHook
 	public void setDead()
 	{
 		if(this.ridingEntity != null){
-			((EntityLiving)this.ridingEntity).dismountEntity(this);
+			EntityLiving e = ((EntityLiving)this.ridingEntity);
+			e.setDead();
 		}
 		super.setDead();
 		this.lineTension = 0;

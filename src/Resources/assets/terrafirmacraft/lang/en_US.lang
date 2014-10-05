@@ -45,6 +45,10 @@ entity.fishTFC.name=Bass
 #= Entity =
 #==========
 entity.notFamiliar=The animal won't let you do that.
+fishingRod.lineTension=The line is going to snap!
+fishingRod.lineSnap=The line snapped!
+fishingRod.bite=Oh! A bite!
+fishingRod.gotAway=It got away....
 
 #================
 #= Achievements =
