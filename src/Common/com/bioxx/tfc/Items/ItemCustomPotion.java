@@ -6,16 +6,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class ItemCustomPotion extends ItemPotion
 {
@@ -67,7 +66,7 @@ public class ItemCustomPotion extends ItemPotion
 
 			if (!broken && is.stackSize <= 0)
 			{
-				return new ItemStack(Items.glass_bottle);
+				return new ItemStack(TFCItems.GlassBottle);
 			}
 		}
 

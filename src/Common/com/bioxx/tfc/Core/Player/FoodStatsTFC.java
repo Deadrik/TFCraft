@@ -37,7 +37,7 @@ public class FoodStatsTFC
 	public float nutrGrain = 1.0f;
 	public float nutrDairy = 1.0f;
 	public float nutrProtein = 1.0f;
-	private boolean shouldSendUpdate = false;
+	private boolean shouldSendUpdate = true;
 
 	public long soberTime = 0;
 
@@ -271,6 +271,7 @@ public class FoodStatsTFC
 			this.nutrGrain = foodCompound.getFloat("nutrGrain");
 			this.nutrProtein = foodCompound.getFloat("nutrProtein");
 			this.nutrDairy = foodCompound.getFloat("nutrDairy");
+			this.shouldSendUpdate = foodCompound.getBoolean("shouldSendUpdate");
 		}
 	}
 
@@ -293,6 +294,7 @@ public class FoodStatsTFC
 		foodCompound.setFloat("nutrGrain", nutrGrain);
 		foodCompound.setFloat("nutrProtein", nutrProtein);
 		foodCompound.setFloat("nutrDairy", nutrDairy);
+		foodCompound.setBoolean("shouldSendUpdate", shouldSendUpdate);
 		par1NBTTagCompound.setTag("foodCompound", foodCompound);
 	}
 
