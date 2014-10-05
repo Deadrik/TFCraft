@@ -148,15 +148,15 @@ public class WorldGenFissure implements IWorldGenerator
 	private void carve(World world, int x, int y, int z, Block block, int meta)
 	{
 		if(world.getBlock(x, y, z).getMaterial() != Material.air && TFC_Core.isGround(world.getBlock(x, y, z)))
-			world.setBlock(x, y, z, Blocks.air, 0, 2);
+			world.setBlock(x, y, z, Blocks.air, 0, 3);
 		if(world.getBlock(x - 1, y, z).getMaterial() != Material.air && TFC_Core.isRawStone(world.getBlock(x - 1, y, z)))
-			world.setBlock(x - 1, y, z, block, meta, 2);
+			world.setBlock(x - 1, y, z, block, meta, 3);
 		if(world.getBlock(x + 1, y, z).getMaterial() != Material.air && TFC_Core.isRawStone(world.getBlock(x + 1, y, z)))
-			world.setBlock(x + 1, y, z, block, meta, 2);
+			world.setBlock(x + 1, y, z, block, meta, 3);
 		if(world.getBlock(x, y, z - 1).getMaterial() != Material.air && TFC_Core.isRawStone(world.getBlock(x, y, z - 1)))
-			world.setBlock(x, y, z - 1, block, meta, 2);
+			world.setBlock(x, y, z - 1, block, meta, 3);
 		if(world.getBlock(x, y, z + 1).getMaterial() != Material.air && TFC_Core.isRawStone(world.getBlock(x, y, z + 1)))
-			world.setBlock(x, y, z + 1, block, meta, 2);
+			world.setBlock(x, y, z + 1, block, meta, 3);
 	}
 
 	private void fill(World world, int x, int y, int z, Block block, int meta, Block fill)
