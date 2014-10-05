@@ -374,7 +374,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 
 			shearer = player;
 			
-			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKnife && !getSheared() && getPercentGrown(this) > 0.95F)
+			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKnife && !getSheared() && this.checkFamiliarity(InteractionEnum.SHEAR, player) && getPercentGrown(this) > 0.95F)
 			{
 				setSheared(true);
 				this.entityDropItem(new ItemStack(TFCItems.Wool,1), 0.0F);
