@@ -89,7 +89,10 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister registerer)
 	{
-		icons = new IIcon[]{registerer.registerIcon("water_still"), registerer.registerIcon("water_flow")};
+		if(this.getMaterial() == Material.lava)
+			icons = new IIcon[]{registerer.registerIcon("lava_still"), registerer.registerIcon("lava_flow")};
+		else
+			icons = new IIcon[]{registerer.registerIcon("water_still"), registerer.registerIcon("water_flow")};
 		this.getFluid().setIcons(icons[0], icons[1]);
 	}
 
