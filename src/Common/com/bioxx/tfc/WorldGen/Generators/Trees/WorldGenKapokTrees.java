@@ -120,7 +120,7 @@ public class WorldGenKapokTrees extends WorldGenerator
 
 		if (this.heightLimit == 0)
 			this.heightLimit = 15 + this.rand.nextInt(this.heightLimitLimit/2);
-		
+
 		trunkSize = heightLimit > 25?2:1;
 
 		if (!this.validTreeLocation())
@@ -159,19 +159,19 @@ public class WorldGenKapokTrees extends WorldGenerator
 		double x,z,y;
 		for(int j1 = basePos[1]+height-branchRange; j1 < basePos[1]+height;j1++)
 		{			
-				branchSlope = 0.5;
-				x = rand.nextFloat();
-				z = 1 - x;
-				x*=rand.nextBoolean()? 1 : -1;
-				z*=rand.nextBoolean()? 1 : -1;
-				branchLength = (int) (((1.5D - branchSlope) * 5) + rand.nextInt(4)) + 3;
-				if(trunkSize == 1)branchLength *= 0.66;
-				x*=branchLength;
-				z*=branchLength;
-				y = branchLength * branchSlope;
-				int[] branchDestination = {(int)(basePos[0] + x), (int)(j1 + y), (int)(basePos[2] + z)};
-				int[] branchOrigin =  {basePos[0], j1, basePos[2]};
-				placeBlockLineCurved(branchOrigin, branchDestination, TFCBlocks.LogNatural);
+			branchSlope = 0.5;
+			x = rand.nextFloat();
+			z = 1 - x;
+			x*=rand.nextBoolean()? 1 : -1;
+			z*=rand.nextBoolean()? 1 : -1;
+			branchLength = (int) (((1.5D - branchSlope) * 5) + rand.nextInt(4)) + 3;
+			if(trunkSize == 1)branchLength *= 0.66;
+			x*=branchLength;
+			z*=branchLength;
+			y = branchLength * branchSlope;
+			int[] branchDestination = {(int)(basePos[0] + x), (int)(j1 + y), (int)(basePos[2] + z)};
+			int[] branchOrigin =  {basePos[0], j1, basePos[2]};
+			placeBlockLineCurved(branchOrigin, branchDestination, TFCBlocks.LogNatural);
 		}
 	}
 
@@ -322,7 +322,7 @@ public class WorldGenKapokTrees extends WorldGenerator
 		}
 	}
 
-	void genTreeLayer(int par1, int par2, int par3, float par4, byte par5, Block par6)
+	void genTreeLayer(int par1, int par2, int par3, float par4, byte par5, Block b)
 	{
 		int var7 = (int)(par4 + 0.618D);
 		byte var8 = otherCoordPairs[par5];
@@ -350,13 +350,33 @@ public class WorldGenKapokTrees extends WorldGenerator
 					var11[var9] = var10[var9] + var13;
 					Block var14 = this.worldObj.getBlock(var11[0], var11[1], var11[2]);
 
-					if (var14 != Blocks.air && (var14 != TFCBlocks.Leaves || var14 != TFCBlocks.Leaves2))
+					if (var14 != Blocks.air && (var14 != TFCBlocks.Leaves || var14 != TFCBlocks.Leaves2) && var14 != TFCBlocks.Vine)
 					{
 						++var13;
 					}
 					else
 					{
-						this.setBlockAndNotifyAdequately(this.worldObj, var11[0], var11[1], var11[2], par6, treeId);
+						this.setBlockAndNotifyAdequately(worldObj, var11[0], var11[1], var11[2], b, treeId);
+						if(rand.nextInt(8) > 0)
+						{
+							int side = rand.nextInt(4);
+							if (side == 0 && worldObj.isAirBlock(var11[0]-1, var11[1], var11[2]))
+							{
+								this.setBlockAndNotifyAdequately(worldObj, var11[0]-1, var11[1], var11[2], TFCBlocks.Vine, 8);
+							}
+							else if (side == 1 && worldObj.isAirBlock(var11[0], var11[1], var11[2]-1))
+							{
+								this.setBlockAndNotifyAdequately(worldObj, var11[0], var11[1], var11[2]-1, TFCBlocks.Vine, 1);
+							}
+							else if (side == 2 && worldObj.isAirBlock(var11[0]+1, var11[1], var11[2]))
+							{
+								this.setBlockAndNotifyAdequately(worldObj, var11[0]+1, var11[1], var11[2], TFCBlocks.Vine, 2);
+							}
+							else if (side == 3 && worldObj.isAirBlock(var11[0], var11[1], var11[2]+1))
+							{
+								this.setBlockAndNotifyAdequately(worldObj, var11[0], var11[1], var11[2]+1, TFCBlocks.Vine, 4);
+							}
+						}
 						++var13;
 					}
 				}
@@ -464,7 +484,7 @@ public class WorldGenKapokTrees extends WorldGenerator
 			}
 		}
 	}
-	
+
 	void placeBlockLinePrimary(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger, Block par3)
 	{
 		int[] var4 = new int[] {0, 0, 0};

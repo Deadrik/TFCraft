@@ -258,13 +258,21 @@ public class WorldGenForests implements IWorldGenerator
 		}
 		if(completed)
 		{
-			WorldGenCustomVines var5 = new WorldGenCustomVines();
-			for (int var6 = 0; var6 < 50; ++var6)
+			WorldGenCustomVines vineGen = new WorldGenCustomVines();
+			/*for (int var6 = 0; var6 < 20; ++var6)
 			{
-				int var7 = chunkX + random.nextInt(16);
-				int var8 = Global.SEALEVEL+1;
-				int var9 = chunkZ + random.nextInt(16);
-				var5.generate(world, random, var7, var8, var9);
+				int x = chunkX + random.nextInt(16);
+				int z = chunkZ + random.nextInt(16);
+				int y = 255;
+				vineGen.generate(world, random, x, y, z);
+			}*/
+
+			for (int l = 0; l < 50; ++l)
+			{
+				int i1 = chunkX + random.nextInt(16) + 8;
+				short short1 = 256;
+				int j1 = chunkZ + random.nextInt(16) + 8;
+				vineGen.generate2(world, random, i1, short1, j1);
 			}
 		}
 		return completed;
