@@ -668,7 +668,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		size_mod = nbt.getFloat ("Size Modifier");
 		
 		familiarity = nbt.getInteger("Familiarity");
-		lastFamiliarityUpdate = nbt.getLong("lastFamiliarityUpdate");
+		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
 
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
@@ -1121,7 +1121,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();
 		}
-		else if(this.riddenByEntity != null && this.riddenByEntity.equals(ep) && isAdult()){
+		if(this.riddenByEntity != null && this.riddenByEntity.equals(ep) && isAdult()){
 			familiarizedToday = true;
 			this.getLookHelper().setLookPositionWithEntity(ep, 0, 0);
 			this.playLivingSound();

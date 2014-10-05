@@ -213,9 +213,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
-		
+
 		familiarity = nbt.getInteger("Familiarity");
-		lastFamiliarityUpdate = nbt.getLong("lastFamiliarityUpdate");
+		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
 
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
@@ -299,7 +299,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			this.happyTicks = this.dataWatcher.getWatchableObjectInt(23);
 		}
 
-		if(isPregnant())
+		if(isPregnant() && !worldObj.isRemote)
 		{
 			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
@@ -318,6 +318,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 					worldObj.spawnEntityInWorld(baby);
 				}
 				pregnant = false;
+				timeOfConception = TFC_Time.getTotalTicks() + (TFC_Time.ticksInMonth);
 			}
 		}
 
@@ -505,12 +506,14 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			otherAnimal.mate(this);
 			return;
 		}
-		timeOfConception = TFC_Time.getTotalTicks();
-		pregnant = true;
-		//targetMate.setGrowingAge (TFC_Settings.dayLength);
-		resetInLove();
-		otherAnimal.setInLove(false);
-		mateSizeMod = otherAnimal.getSize();
+		if(timeOfConception < TFC_Time.getTotalTicks()){
+			timeOfConception = TFC_Time.getTotalTicks();
+			pregnant = true;
+			//targetMate.setGrowingAge (TFC_Settings.dayLength);
+			resetInLove();
+			otherAnimal.setInLove(false);
+			mateSizeMod = otherAnimal.getSize();
+		}
 	}
 
 	@Override

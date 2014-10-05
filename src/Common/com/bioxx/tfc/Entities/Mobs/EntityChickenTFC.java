@@ -342,7 +342,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		size_mod = nbt.getFloat ("Size Modifier");
 
 		familiarity = nbt.getInteger("Familiarity");
-		lastFamiliarityUpdate = nbt.getLong("lastFamiliarityUpdate");
+		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
 		
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
