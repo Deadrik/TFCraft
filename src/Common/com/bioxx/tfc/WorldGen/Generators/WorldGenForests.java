@@ -199,10 +199,10 @@ public class WorldGenForests implements IWorldGenerator
 		int xCoord = chunkX;
 		int yCoord = Global.SEALEVEL+1;
 		int zCoord = chunkZ;
-		int numTreesBase = 5;
 
+		/*int numTreesBase = 5;
 		if (random.nextInt(10) == 0)
-			numTreesBase -= 4;
+			numTreesBase -= 4;*/
 
 		int numTrees = 50;
 		for (int var2 = 0; var2 < numTrees; ++var2)
@@ -211,7 +211,7 @@ public class WorldGenForests implements IWorldGenerator
 			zCoord = chunkZ + 8 + random.nextInt(16);
 			yCoord = world.getHeightValue(xCoord, zCoord);
 
-			float temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
+			//float temperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
 			float temperatureAvg = TFC_Climate.getBioTemperature(world, xCoord, zCoord);
 
 			try
@@ -228,8 +228,8 @@ public class WorldGenForests implements IWorldGenerator
 						gen0 = new WorldGenTrees(false, 15, 6);
 					else if(random.nextInt(2) == 0)
 						gen0 = new WorldGenTrees(false, 15, 5);
-					else 
-						gen0 = new WorldGenJungleShrub(15);
+					else
+						gen0 = new WorldGenTrees(false, 15, 1);
 
 					//gen0 = random.nextInt(2) == 0 ? new WorldGenJungleShrub(15) : random.nextInt(3) == 0 ? new WorldGenKapokTrees(false,15):  new WorldGenCustomShortTrees(false, 15);
 					gen0.setScale(1.0D, 1.0D, 1.0D);
