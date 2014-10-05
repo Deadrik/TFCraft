@@ -12,6 +12,7 @@ public class BarrelVinegarRecipe extends BarrelRecipe
 	public BarrelVinegarRecipe(FluidStack inputFluid, FluidStack outputFluid)
 	{
 		super(null, inputFluid, null, outputFluid);
+		this.setMinTechLevel(0);
 	}
 
 	@Override
