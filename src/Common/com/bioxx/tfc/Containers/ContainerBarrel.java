@@ -12,6 +12,7 @@ import com.bioxx.tfc.Containers.Slots.SlotChest;
 import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.TileEntities.TEBarrel;
+import com.bioxx.tfc.api.Enums.EnumSize;
 
 public class ContainerBarrel extends ContainerTFC
 {
@@ -40,7 +41,7 @@ public class ContainerBarrel extends ContainerTFC
 		{
 			//Input slot
 			if(!barrel.getSealed())
-				addSlotToContainer(new Slot(barrel, 0, 80, 29));
+				addSlotToContainer(new SlotChest(barrel, 0, 80, 29).setSize(EnumSize.MEDIUM));
 			else
 				addSlotToContainer(new SlotForShowOnly(barrel, 0, 80, 29));
 		}
@@ -51,7 +52,7 @@ public class ContainerBarrel extends ContainerTFC
 				for(int k = 0; k < 3; k++)
 				{
 					if(!barrel.getSealed())
-						addSlotToContainer(new SlotChest(barrel, k+(i*3), 53+(i*18), 17+(k*18)));
+						addSlotToContainer(new SlotChest(barrel, k+(i*3), 53+(i*18), 17+(k*18)).setSize(EnumSize.MEDIUM));
 					else
 						addSlotToContainer(new SlotForShowOnly(barrel, k+(i*3), 53+(i*18), 17+(k*18)));
 				}

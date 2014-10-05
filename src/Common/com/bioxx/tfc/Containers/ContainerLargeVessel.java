@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Containers.Slots.SlotChest;
 import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.TileEntities.TEVessel;
+import com.bioxx.tfc.api.Enums.EnumSize;
 
 public class ContainerLargeVessel extends ContainerBarrel
 {
@@ -25,7 +26,7 @@ public class ContainerLargeVessel extends ContainerBarrel
 		{
 			//Input slot
 			if(!barrel.getSealed())
-				addSlotToContainer(new Slot(barrel, 0, 80, 29));
+				addSlotToContainer(new SlotChest(barrel, 0, 80, 29).setSize(EnumSize.MEDIUM));
 			else
 				addSlotToContainer(new SlotForShowOnly(barrel, 0, 80, 29));
 		}
@@ -36,7 +37,7 @@ public class ContainerLargeVessel extends ContainerBarrel
 				for(int k = 0; k < 3; k++)
 				{
 					if(!barrel.getSealed())
-						addSlotToContainer(new SlotChest(barrel, k+(i*3), 71+(i*18), 17+(k*18)));
+						addSlotToContainer(new SlotChest(barrel, k+(i*3), 71+(i*18), 17+(k*18)).setSize(EnumSize.MEDIUM));
 					else
 						addSlotToContainer(new SlotForShowOnly(barrel, k+(i*3), 71+(i*18), 17+(k*18)));
 				}
