@@ -418,7 +418,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		nbt.setFloat ("Size Modifier", size_mod);
 		
 		nbt.setInteger("Familiarity", familiarity);
-		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);s
+		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
 
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
