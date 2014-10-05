@@ -2,12 +2,10 @@ package com.bioxx.tfc.Blocks.Liquids;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
-import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Sounds;
@@ -42,11 +40,5 @@ public class BlockFreshWater extends BlockCustomLiquid
 			}
 		}
 		super.updateTick(w, x, y, z, rand);
-	}
-
-	@Override
-	protected Block getInverseBlock() 
-	{
-		return TFCBlocks.FreshWaterStationary;
 	}
 }

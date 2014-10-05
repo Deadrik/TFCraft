@@ -295,17 +295,30 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return true;
 	}
 
-	public boolean addLiquid(FluidStack f)
+	public boolean addLiquid(FluidStack inFS)
 	{
 		if(fluid == null)
-			fluid = f;
+		{
+			fluid = inFS.copy();
+			if(fluid.amount > this.getMaxLiquid())
+			{
+				fluid.amount = getMaxLiquid();
+				inFS.amount = inFS.amount - this.getMaxLiquid();
+
+			}
+			else inFS.amount = 0;
+		}
 		else
 		{
-			if(fluid.amount == getMaxLiquid() || !fluid.isFluidEqual(f))
+			if(fluid.amount == getMaxLiquid() || !fluid.isFluidEqual(inFS))
 				return false;
 
-			fluid.amount = Math.min(fluid.amount+f.amount, getMaxLiquid());
+			int a = (fluid.amount+inFS.amount) - getMaxLiquid();
+			fluid.amount = Math.min(fluid.amount+inFS.amount, getMaxLiquid());
+			if(a > 0) inFS.amount = a;
+			else inFS.amount = 0;
 		}
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		return true;
 	}
 
@@ -319,7 +332,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			if(addLiquid(fs))
 			{
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-				return is.getItem().getContainerItem(is);
+				return FluidContainerRegistry.drainFluidContainer(is);
 			}
 		}
 		return is;

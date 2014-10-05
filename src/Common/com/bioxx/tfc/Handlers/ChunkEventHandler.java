@@ -1,8 +1,13 @@
 package com.bioxx.tfc.Handlers;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.World;
+import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -14,6 +19,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.WorldGen.Generators.WorldGenGrowCrops;
+import com.bioxx.tfc.api.Constant.Global;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -37,7 +43,7 @@ public class ChunkEventHandler
 				cd.lastSpringGen = TFC_Time.getYear();
 
 				Random rand = new Random(event.world.getSeed() + ((chunk_X >> 3) - (chunk_Z >> 3)) * (chunk_Z >> 3));
-				int cropid = rand.nextInt(24);
+				int cropid = rand.nextInt(CropManager.getInstance().getTotalCrops());
 				CropIndex crop = CropManager.getInstance().getCropFromId(cropid);
 				if (event.world.rand.nextInt(25) == 0 && crop != null)
 				{
@@ -84,6 +90,13 @@ public class ChunkEventHandler
 	}
 
 	@SubscribeEvent
+	public void onLoadWorld(WorldEvent.Load event)
+	{
+		if(event.world.provider.dimensionId == 0 && event.world.getTotalWorldTime() < 100)
+			createSpawn(event.world);
+	}
+
+	@SubscribeEvent
 	public void onDataLoad(ChunkDataEvent.Load event)
 	{
 		if(!event.world.isRemote)
@@ -127,5 +140,48 @@ public class ChunkEventHandler
 					TFC_Core.getCDM(event.world).removeData(x, z);
 			}
 		}
+	}
+
+	private ChunkCoordinates createSpawn(World world)
+	{
+		List biomeList = world.getWorldChunkManager().getBiomesToSpawnIn();
+		long seed = world.getWorldInfo().getSeed();
+		Random rand = new Random(seed);
+
+		ChunkPosition chunkCoord = null;
+		int xOffset = 0;
+		int xCoord = 0;
+		int yCoord = Global.SEALEVEL+1;
+		int zCoord = 10000;
+		int startingZ = 5000 + rand.nextInt(10000);
+
+		while(chunkCoord == null)
+		{
+			chunkCoord = world.getWorldChunkManager().findBiomePosition(xOffset, -startingZ, 64, biomeList, rand);
+			if (chunkCoord != null)
+			{
+				xCoord = chunkCoord.chunkPosX;
+				zCoord = chunkCoord.chunkPosZ;
+			}
+			else
+			{
+				xOffset += 64;
+				//System.out.println("Unable to find spawn biome");
+			}
+		}
+
+		int var9 = 0;
+		while (!world.provider.canCoordinateBeSpawn(xCoord, zCoord))
+		{
+			xCoord += rand.nextInt(16) - rand.nextInt(16);
+			zCoord += rand.nextInt(16) - rand.nextInt(16);
+			++var9;
+			if (var9 == 1000)
+				break;
+		}
+
+		WorldInfo info = world.getWorldInfo();
+		info.setSpawnPosition(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
+		return new ChunkCoordinates(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
 	}
 }

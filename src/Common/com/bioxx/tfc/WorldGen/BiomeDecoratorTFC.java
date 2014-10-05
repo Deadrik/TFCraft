@@ -20,13 +20,6 @@ import com.bioxx.tfc.WorldGen.Generators.WorldGenWaterPlants;
 
 public class BiomeDecoratorTFC extends BiomeDecorator
 {
-	/**
-	 * The number of yellow flower patches to generate per chunk. The game
-	 * generates much less than this number, since it attempts to generate them
-	 * at a random altitude.
-	 */
-	public int flowersPerChunk;
-
 	/** The amount of tall grass to generate per chunk. */
 	public int grassPerChunk;
 
@@ -63,7 +56,6 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	public BiomeDecoratorTFC(TFCBiome par1)
 	{
 		super();
-		this.flowersPerChunk = 2;
 		this.grassPerChunk = 1;
 		this.mushroomsPerChunk = 0;
 		treesPerChunk = 30;
@@ -87,11 +79,11 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		int zCoord;
 
 		Random rand = new Random(this.currentWorld.getSeed() + ((chunk_X >> 7) - (chunk_Z >> 7)) * (chunk_Z >> 7));
-		int cropid = rand.nextInt(25);
+		int cropid = rand.nextInt(CropManager.getInstance().getTotalCrops());
 		CropIndex crop = CropManager.getInstance().getCropFromId(cropid);
 		WorldGenGrowCrops cropGen = new WorldGenGrowCrops(cropid);
 
-		if (randomGenerator.nextInt(20) == 0 && crop != null)
+		if(randomGenerator.nextInt(20) == 0 && crop != null)
 		{
 			int num = 2 + randomGenerator.nextInt(8);
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;

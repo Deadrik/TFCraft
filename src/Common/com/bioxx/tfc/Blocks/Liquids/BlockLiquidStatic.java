@@ -3,6 +3,8 @@ package com.bioxx.tfc.Blocks.Liquids;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
@@ -15,6 +17,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 {
 	Block flowing;
 	Fluid fluidType;
+	IIcon[] icons;
 	public BlockLiquidStatic(Fluid fluid, Material material, Block f) 
 	{
 		super(material);
@@ -44,14 +47,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 	@Override
 	public float getFilledPercentage(World world, int x, int y, int z) 
 	{
-		return 0;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getBlockColor()
-	{
-		return 16777215;
+		return 1;
 	}
 
 	@Override
@@ -89,4 +85,18 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 		world.scheduleBlockUpdate(x, y, z, flowing, this.tickRate(world));
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister registerer)
+	{
+		icons = new IIcon[]{registerer.registerIcon("water_still"), registerer.registerIcon("water_flow")};
+		this.getFluid().setIcons(icons[0], icons[1]);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
+	{
+		return side != 0 && side != 1 ? this.icons[1] : this.icons[0];
+	}
 }

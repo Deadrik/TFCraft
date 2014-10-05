@@ -2,6 +2,7 @@ package com.bioxx.tfc.Blocks.Liquids;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,17 +14,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
 import com.bioxx.tfc.Reference;
-import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Effects.GasFX;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockHotWater extends BlockCustomLiquid
+public class BlockHotWaterStatic extends BlockLiquidStatic
 {
-	public BlockHotWater(Fluid fluid)
+	public BlockHotWaterStatic(Fluid fluid, Material m, Block f)
 	{
-		super(fluid, Material.water);
+		super(fluid, m, f);
 	}
 
 	@Override
@@ -70,11 +70,7 @@ public class BlockHotWater extends BlockCustomLiquid
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		icons = new IIcon[]{registerer.registerIcon(Reference.ModID + ":" +"water_still"), registerer.registerIcon(Reference.ModID + ":" +"water_flow")};
-		TFC_Textures.GasFXIcon = registerer.registerIcon(Reference.ModID + ":" + "Steam");
-		TFC_Textures.GuiInventory = registerer.registerIcon(Reference.ModID + ":" + "button_inv");
-		TFC_Textures.GuiSkills = registerer.registerIcon(Reference.ModID + ":" + "button_skills");
-		TFC_Textures.GuiCalendar = registerer.registerIcon(Reference.ModID + ":" + "button_calendar");
-		TFC_Textures.GuiHealth = registerer.registerIcon(Reference.ModID + ":" + "button_health");
+		this.getFluid().setIcons(icons[0], icons[1]);
 	}
 
 	@Override

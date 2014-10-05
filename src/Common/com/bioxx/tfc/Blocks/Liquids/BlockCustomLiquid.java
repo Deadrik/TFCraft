@@ -3,6 +3,7 @@ package com.bioxx.tfc.Blocks.Liquids;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
@@ -12,8 +13,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidBlock;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLilyPad;
@@ -24,26 +26,21 @@ import com.bioxx.tfc.WorldGen.DataLayer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class BlockCustomLiquid extends BlockFluidClassic
+public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IFluidBlock
 {
 	protected Fluid fluidType;
 	protected IIcon[] icons;
 
 	public BlockCustomLiquid(Fluid fluid, Material mat)
 	{
-		super(fluid, mat);
+		super(mat);
 		float f = 0.0F;
 		float f1 = 0.0F;
 		this.setBlockBounds(0.0F + f1, 0.0F + f, 0.0F + f1, 1.0F + f1, 1.0F + f, 1.0F + f1);
 		this.setTickRandomly(true);
 		fluidType = fluid;
-		if(mat == Material.lava) setTickRate(20); else setTickRate(3);
 	}
 
-	public int getDensityDir()
-	{
-		return this.densityDir;
-	}
 
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
@@ -55,242 +52,6 @@ public abstract class BlockCustomLiquid extends BlockFluidClassic
 		}
 
 		return super.shouldSideBeRendered(world, x, y, z, side);
-	}
-
-	@Override
-	public int getQuantaValue(IBlockAccess world, int x, int y, int z)
-	{
-		if (world.getBlock(x, y, z) == Blocks.air)
-		{
-			return 0;
-		}
-
-		if (world.getBlock(x, y, z) != this && world.getBlock(x, y, z) != this.getInverseBlock())
-		{
-			return -1;
-		}
-
-		int quantaRemaining = quantaPerBlock - world.getBlockMetadata(x, y, z);
-		return quantaRemaining;
-	}
-
-	/**
-	 * Ticks the block if it's been scheduled
-	 */
-	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand)
-	{
-		int quantaRemaining = quantaPerBlock - world.getBlockMetadata(x, y, z);
-		int expQuanta = -101;
-
-		// check adjacent block levels if non-source
-		if (quantaRemaining < quantaPerBlock)
-		{
-			int y2 = y - densityDir;
-
-			if (	world.getBlock(x,     y2, z    ) == this ||
-					world.getBlock(x - 1, y2, z    ) == this ||
-					world.getBlock(x + 1, y2, z    ) == this ||
-					world.getBlock(x,     y2, z - 1) == this ||
-					world.getBlock(x,     y2, z + 1) == this)
-			{
-				expQuanta = quantaPerBlock - 1;
-			}
-			else
-			{
-				int maxQuanta = -100;
-				maxQuanta = getLargerQuanta(world, x - 1, y, z,     maxQuanta);
-				maxQuanta = getLargerQuanta(world, x + 1, y, z,     maxQuanta);
-				maxQuanta = getLargerQuanta(world, x,     y, z - 1, maxQuanta);
-				maxQuanta = getLargerQuanta(world, x,     y, z + 1, maxQuanta);
-
-				expQuanta = maxQuanta - 1;
-			}
-
-			// decay calculation
-			if (expQuanta != quantaRemaining)
-			{
-				quantaRemaining = expQuanta;
-
-				if (expQuanta <= 0)
-				{
-					world.setBlock(x, y, z, Blocks.air);
-				}
-				else
-				{
-					world.setBlockMetadataWithNotify(x, y, z, quantaPerBlock - expQuanta, 3);
-					world.scheduleBlockUpdate(x, y, z, this, tickRate);
-					world.notifyBlocksOfNeighborChange(x, y, z, this);
-				}
-			}
-		}
-		// This is a "source" block, set meta to zero, and send a server only update
-		else if (quantaRemaining >= quantaPerBlock)
-		{
-			world.setBlock(x, y, z, getInverseBlock(), 0, 2);
-		}
-
-		// Flow vertically if possible
-		if (canDisplace(world, x, y + densityDir, z))
-		{
-			flowIntoBlock(world, x, y + densityDir, z, 1);
-			return;
-		}
-
-		// Flow outward if possible
-		int flowMeta = quantaPerBlock - quantaRemaining + 1;
-		if (flowMeta >= quantaPerBlock)
-		{
-			return;
-		}
-
-		if (isSourceBlock(world, x, y, z) || !isFlowingVertically(world, x, y, z))
-		{
-			if (world.getBlock(x, y - densityDir, z) == this)
-			{
-				flowMeta = 1;
-			}
-			boolean flowTo[] = getOptimalFlowDirections(world, x, y, z);
-
-			if (flowTo[0]) flowIntoBlock(world, x - 1, y, z,     flowMeta);
-			if (flowTo[1]) flowIntoBlock(world, x + 1, y, z,     flowMeta);
-			if (flowTo[2]) flowIntoBlock(world, x,     y, z - 1, flowMeta);
-			if (flowTo[3]) flowIntoBlock(world, x,     y, z + 1, flowMeta);
-		}
-
-		if(!world.isRemote)
-		{
-			if(this.getMaterial() == Material.lava)
-			{
-				if(world.getBlock(x, y+1, z) == Blocks.air)
-				{
-					int i = x-2+rand.nextInt(5);
-					int j = y+1+rand.nextInt(4);
-					int k = z-2+rand.nextInt(5);
-					if(world.getBlock(i, j, k) == Blocks.air && 
-							(world.isSideSolid(i, j+1, k, ForgeDirection.DOWN) || world.isSideSolid(i, j-1, k, ForgeDirection.UP) ||
-									world.isSideSolid(i-1, j, k, ForgeDirection.EAST) || world.isSideSolid(i+1, j, k, ForgeDirection.WEST) ||
-									world.isSideSolid(i, j, k+1, ForgeDirection.NORTH) || world.isSideSolid(i, j, k-1, ForgeDirection.SOUTH)))
-					{
-						world.setBlock(i, j, k, TFCBlocks.Sulfur, world.rand.nextInt(4), 3);
-					}
-				}
-			}
-
-		}
-	}
-
-	@Override
-	public boolean isSourceBlock(IBlockAccess world, int x, int y, int z)
-	{
-		return (world.getBlock(x, y, z) == this && world.getBlockMetadata(x, y, z) == 0) || world.getBlock(x, y, z) == this.getInverseBlock();
-	}
-
-	@Override
-	protected void flowIntoBlock(World world, int x, int y, int z, int meta)
-	{
-		if (meta < 0) return;
-		if (displaceIfPossible(world, x, y, z))
-		{
-			world.setBlock(x, y, z, this, meta, 3);
-		}
-	}
-
-	@Override
-	public boolean displaceIfPossible(World world, int x, int y, int z)
-	{
-		if (world.getBlock(x, y, z).isAir(world, x, y, z))
-		{
-			return true;
-		}
-
-		Block block = world.getBlock(x, y, z);
-		if (block == this || block == this.getInverseBlock() || block.getMaterial() == this.getMaterial())
-		{
-			return false;
-		}
-
-		if (displacements.containsKey(block))
-		{
-			if (displacements.get(block))
-			{
-				block.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-				return true;
-			}
-			return false;
-		}
-
-		Material material = block.getMaterial();
-		if (material.blocksMovement() || material == Material.portal)
-		{
-			return false;
-		}
-
-		int density = getDensity(world, x, y, z);
-		if (density == Integer.MAX_VALUE) 
-		{
-			block.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			return true;
-		}
-
-		if (this.density > density)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	@Override
-	protected boolean canFlowInto(IBlockAccess world, int x, int y, int z)
-	{
-		if (world.getBlock(x, y, z).isAir(world, x, y, z)) return true;
-
-		Block block = world.getBlock(x, y, z);
-		if (block == this || block == this.getInverseBlock())
-		{
-			return true;
-		}
-
-		if (displacements.containsKey(block))
-		{
-			return displacements.get(block);
-		}
-
-		Material material = block.getMaterial();
-		if (material.blocksMovement()  ||
-				material == Material.water ||
-				material == Material.lava  ||
-				material == Material.portal)
-		{
-			return false;
-		}
-
-		int density = getDensity(world, x, y, z);
-		if (density == Integer.MAX_VALUE) 
-		{
-			return true;
-		}
-
-		if (this.density > density)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	protected abstract Block getInverseBlock();
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getBlockColor()
-	{
-		return 16777215;
 	}
 
 	@Override
@@ -314,18 +75,6 @@ public abstract class BlockCustomLiquid extends BlockFluidClassic
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
 		super.onBlockAdded(world, x, y, z);
-		if(getFlowMeta(world, x, y, z) != 0)
-		{
-			int total = 0;
-			if(getFlowMeta(world, x+1, y, z) == 0) total++;
-			if(getFlowMeta(world, x-1, y, z) == 0) total++;
-			if(getFlowMeta(world, x, y, z+1) == 0) total++;
-			if(getFlowMeta(world, x, y, z-1) == 0) total++;
-
-			if(total >= 2)
-				world.setBlock(x, y, z, getInverseBlock(), 0, 0x3);
-		}
-
 		this.checkForHarden(world, x, y, z);
 	}
 
@@ -337,24 +86,9 @@ public abstract class BlockCustomLiquid extends BlockFluidClassic
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
 		super.onNeighborBlockChange(world, x, y, z, block);
-		if(getFlowMeta(world, x, y, z) != 0)
-		{
-			int total = 0;
-			if(getFlowMeta(world, x+1, y, z) == 0) total++;
-			if(getFlowMeta(world, x-1, y, z) == 0) total++;
-			if(getFlowMeta(world, x, y, z+1) == 0) total++;
-			if(getFlowMeta(world, x, y, z-1) == 0) total++;
-
-			if(total >= 2)
-				world.setBlock(x, y, z, getInverseBlock(), 0, 0x3);
-		}
 		this.checkForHarden(world, x, y, z);
 	}
 
-	protected int getFlowMeta(World world, int x, int y, int z)
-	{
-		return world.getBlock(x, y, z).getMaterial() == this.blockMaterial ? world.getBlockMetadata(x, y, z) : -1;
-	}
 	/**
 	 * Forces lava to check to see if it is colliding with water, and then decide what it should harden to.
 	 */
@@ -497,9 +231,11 @@ public abstract class BlockCustomLiquid extends BlockFluidClassic
 	}
 
 	@Override
-	public int getRenderType()
+	public int tickRate(World world)
 	{
-		return 4; //return TFCBlocks.fluidRenderId;
+		if(this.getMaterial() == Material.lava)
+			return 10;
+		return 3;
 	}
 
 	@Override
@@ -508,25 +244,34 @@ public abstract class BlockCustomLiquid extends BlockFluidClassic
 		if (this.blockMaterial == Material.lava)
 		{
 			this.getFluid().setIcons(register.registerIcon("lava_still"), register.registerIcon("lava_flow"));
-			icons = new IIcon[]{register.registerIcon("lava_still"), register.registerIcon("lava_flow")};
 		}
 		else
 		{
 			this.getFluid().setIcons(register.registerIcon("water_still"), register.registerIcon("water_flow"));
-			icons = new IIcon[]{register.registerIcon("water_still"), register.registerIcon("water_flow")};
 		}
+		icons = new IIcon[]{getFluid().getStillIcon(), getFluid().getFlowingIcon()};
 	}
-
-	@Override public Fluid getFluid(){ return fluidType; }
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		if((side & 2) > 0)
-			return icons[1];
-		return icons[0];
+		return side != 0 && side != 1 ? this.icons[1] : this.icons[0];
+	}
 
+	@Override public Fluid getFluid(){ return fluidType; }
+
+	@Override
+	public FluidStack drain(World world, int x, int y, int z, boolean doDrain) {
+		return null;
+	}
+	@Override
+	public boolean canDrain(World world, int x, int y, int z) {
+		return false;
+	}
+	@Override
+	public float getFilledPercentage(World world, int x, int y, int z) {
+		return 1;
 	}
 
 }

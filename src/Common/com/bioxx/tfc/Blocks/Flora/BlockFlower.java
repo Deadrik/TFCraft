@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.BlockTerra;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 
 import cpw.mods.fml.relauncher.Side;
@@ -39,11 +40,16 @@ public class BlockFlower extends BlockTerra
 
 	public boolean canGrowConditions(World world, int x, int y, int z, int flowerMeta)
 	{
-		if(flowerMeta == 1)
+		float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(x, z).floatdata1;
+		float rain = TFC_Climate.getRainfall(world, x, 144, z);
+		float bioTemperature =TFC_Climate.getBioTemperatureHeight(world, x, y, z) ;
+		if(flowerMeta == 3 && bioTemperature > 20 && rain > 500 && evt < 2)
 		{
-
+			return true;
 		}
-		return true;
+		else if(bioTemperature > 5 && rain > 250)
+			return true;
+		return false;
 	}
 
 	@SideOnly(Side.CLIENT)

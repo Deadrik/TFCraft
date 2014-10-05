@@ -11,7 +11,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
@@ -24,7 +23,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLargeVessel extends BlockBarrel
 {
-	IIcon clayIcon;
+	IIcon[] clayIcons;
+	IIcon[] ceramicIcons;
 	public BlockLargeVessel()
 	{
 		super();
@@ -44,24 +44,56 @@ public class BlockLargeVessel extends BlockBarrel
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "clay/Ceramic");
-		clayIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "clay/Clay");
+		ceramicIcons = new IIcon[3];
+		clayIcons = new IIcon[3];
+		ceramicIcons[0] = iconRegisterer.registerIcon(Reference.ModID + ":" + "clay/Ceramic Vessel Top");
+		ceramicIcons[1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "clay/Ceramic Vessel Side");
+		ceramicIcons[2] = iconRegisterer.registerIcon(Reference.ModID + ":" + "clay/Ceramic Vessel Bottom");
+		clayIcons[0] = iconRegisterer.registerIcon(Reference.ModID + ":" + "clay/Clay Vessel Top");
+		clayIcons[1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "clay/Clay Vessel Side");
+		clayIcons[2] = iconRegisterer.registerIcon(Reference.ModID + ":" + "clay/Clay Vessel Bottom");
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
 		if(meta == 1)
-			return blockIcon;
-		return clayIcon;
+		{
+			if(side == 1)
+				return ceramicIcons[0];
+			else if(side == 0)
+				return ceramicIcons[2];
+			else
+				return ceramicIcons[1];
+		}
+		if(side == 1)
+			return clayIcons[0];
+		else if(side == 0)
+			return clayIcons[2];
+		else
+			return clayIcons[1];
 	}
 
 	@Override
 	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side)
 	{
-		if(access.getBlockMetadata(x, y, z) == 1)
-			return blockIcon;
-		return clayIcon;
+		int meta= access.getBlockMetadata(x, y, z);
+		if(meta == 1)
+		{
+			if(side == 1)
+				return ceramicIcons[0];
+			else if(side == 0)
+				return ceramicIcons[2];
+			else
+				return ceramicIcons[1];
+		}
+		if(side == 1)
+			return clayIcons[0];
+		else if(side == 0)
+			return clayIcons[2];
+		else
+			return clayIcons[1];
+
 	}
 
 	@Override
@@ -101,27 +133,15 @@ public class BlockLargeVessel extends BlockBarrel
 			{
 				TEVessel te = (TEVessel)(world.getTileEntity(x, y, z));
 
-				if (!te.getSealed()) {
-					ItemStack equippedItem = player.getCurrentEquippedItem();
-					if(FluidContainerRegistry.isFilledContainer(equippedItem) && !te.getSealed())
-					{
-						ItemStack is = te.addLiquid(player.getCurrentEquippedItem());
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
-						return true;
-					}
-					else if(FluidContainerRegistry.isEmptyContainer(equippedItem))
-					{
-						ItemStack is = te.removeLiquid(player.getCurrentEquippedItem());
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
-						return true;
-					}
+				if(!handleInteraction(player, te))
+				{
+					if(te.getInvCount() == 0)
+						player.openGui(TerraFirmaCraft.instance, 46, world, x, y, z);
+					else
+						player.openGui(TerraFirmaCraft.instance, 47, world, x, y, z);
+					return true;
 				}
-
-				if(te.getInvCount() == 0)
-					player.openGui(TerraFirmaCraft.instance, 46, world, x, y, z);
-				else
-					player.openGui(TerraFirmaCraft.instance, 47, world, x, y, z);
-				return true;
+				else return true;
 			}
 		}
 		return false;

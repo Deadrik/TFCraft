@@ -70,7 +70,7 @@ public class FloraManager
 		instance.addIndex(new FloraIndex("Bunchberry", TFC_Time.July, TFC_Time.September,
 				new ItemStack(TFCItems.Bunchberry,1)).setHangTime(2).setTemp(0, 18).setBioTemp(0, 20).setRain(125, 2000));
 		instance.addIndex(new FloraIndex("Cranberry", TFC_Time.September, TFC_Time.November,
-				new ItemStack(TFCItems.Cranberry,1)).setHangTime(3).setTemp(2, 18).setBioTemp(0, 25).setRain(1000, 4000));
+				new ItemStack(TFCItems.Cranberry,1)).setHangTime(3).setTemp(2, 18).setBioTemp(0, 25).setRain(1000, 8000));
 		instance.addIndex(new FloraIndex("Snowberry", TFC_Time.August, TFC_Time.September,
 				new ItemStack(TFCItems.Snowberry,1)).setHangTime(3).setTemp(0, 18).setBioTemp(0, 20).setRain(250, 4000).setEVT(0.125f, 4));
 		instance.addIndex(new FloraIndex("Elderberry", TFC_Time.August, TFC_Time.September,
@@ -78,7 +78,7 @@ public class FloraManager
 		instance.addIndex(new FloraIndex("Gooseberry", TFC_Time.May, TFC_Time.July,
 				new ItemStack(TFCItems.Gooseberry,1)).setHangTime(2).setTemp(0, 28).setBioTemp(5, 25).setRain(250, 2000));
 		instance.addIndex(new FloraIndex("Cloudberry", TFC_Time.July, TFC_Time.August,
-				new ItemStack(TFCItems.Cloudberry,1)).setHangTime(2).setTemp(0, 18).setBioTemp(0, 20).setRain(250, 1000).setEVT(0.125f, 4));
+				new ItemStack(TFCItems.Cloudberry,1)).setHangTime(2).setTemp(0, 18).setBioTemp(0, 20).setRain(1000, 8000).setEVT(0.125f, 4));
 	}
 
 }

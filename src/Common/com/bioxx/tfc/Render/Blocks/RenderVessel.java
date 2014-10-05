@@ -29,7 +29,9 @@ public class RenderVessel implements ISimpleBlockRenderingHandler
 			{
 				renderer.setRenderBounds(min-0.025F, 0.55f, min-0.025F, max+0.025F, 0.65F, max+0.025F);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(0.45f, 0.65f, 0.45f, 0.55F, 0.7F, 0.55F);
+				renderer.setRenderBounds(0.4375f, 0.65f, 0.4375f, 0.5625F, 0.7F, 0.5625F);
+				renderer.renderStandardBlock(block, x, y, z);
+				renderer.setRenderBounds(min+0.05F, 0, min+0.05F, max-0.05F, 0.05F, max-0.05F);
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 			else
@@ -99,20 +101,11 @@ public class RenderVessel implements ISimpleBlockRenderingHandler
 	{
 		renderer.setRenderBounds(min-0.025F, 0.55f, min-0.025F, max+0.025F, 0.65F, max+0.025F);
 		renderInvBlock(block, meta, renderer);
-		renderer.setRenderBounds(0.45f, 0.65f, 0.45f, 0.55F, 0.7F, 0.55F);
+		renderer.setRenderBounds(0.4375f, 0.65f, 0.4375f, 0.5625F, 0.7F, 0.5625F);
+		renderInvBlock(block, meta, renderer);
+		renderer.setRenderBounds(min, 0F, min, max, 0.6F, max);
 		renderInvBlock(block, meta, renderer);
 
-		renderer.setRenderBounds(min, 0F, min+0.05F, min+0.05F, 0.6F, max-0.05F);
-		renderInvBlock(block, meta, renderer);
-
-		renderer.setRenderBounds(max-0.05F, 0F, min+0.05F, max, 0.6F, max-0.05F);
-		renderInvBlock(block, meta, renderer);
-
-		renderer.setRenderBounds(min, 0F, min, max, 0.6F, min+0.05F);
-		renderInvBlock(block, meta, renderer);
-
-		renderer.setRenderBounds(min, 0F, max-0.05F, max, 0.6F, max);
-		renderInvBlock(block, meta, renderer);
 	}
 
 	@Override

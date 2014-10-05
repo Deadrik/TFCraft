@@ -8,14 +8,11 @@ import net.minecraft.world.chunk.IChunkProvider;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.DataLayer;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenPlants implements IWorldGenerator
 {
-	static WorldGenFlowers plantFlowersGen = new WorldGenFlowers(TFCBlocks.Flowers);
-	static WorldGenFlowers plantFlowersGen2 = new WorldGenFlowers(TFCBlocks.Flowers2);
 	static WorldGenFungi plantFungiGen = new WorldGenFungi();
 
 	static WorldGenCustomFruitTree appleTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves, 0);
@@ -36,7 +33,7 @@ public class WorldGenPlants implements IWorldGenerator
 	static WorldGenBerryBush strawberryGen = new WorldGenBerryBush(false, 3, 8, 1, 4);
 	static WorldGenBerryBush blackberryGen = new WorldGenBerryBush(false, 4, 5, 2, 4);
 	static WorldGenBerryBush bunchberryGen = new WorldGenBerryBush(false, 5, 8, 1, 4);
-	//static WorldGenBerryBush cranberryGen = new WorldGenBerryBush(false, 6, 15, 1, 6, TFCBlocks.Peat);
+	static WorldGenBerryBush cranberryGen = new WorldGenBerryBush(false, 6, 15, 1, 6);
 	static WorldGenBerryBush snowberryGen = new WorldGenBerryBush(false, 7, 6, 1, 4);
 	static WorldGenBerryBush elderberryGen = new WorldGenBerryBush(false, 8, 5, 2, 4);
 	static WorldGenBerryBush gooseberryGen = new WorldGenBerryBush(false, 9, 8, 1, 4);
@@ -58,10 +55,10 @@ public class WorldGenPlants implements IWorldGenerator
 		int zCoord;
 
 		int grassPerChunk = 0;
-		int flowersPerChunk = 0;
+		int flowerChunkRarity = 30;
 		int mushroomsPerChunk = 0;
 
-		DataLayer evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(chunkX, chunkZ);
+		float evt = TFC_Climate.getCacheManager(world).getEVTLayerAt(chunkX, chunkZ).floatdata1;
 		float rain = TFC_Climate.getRainfall(world, chunkX, 144, chunkZ);
 		float bioTemperature;
 
@@ -71,44 +68,32 @@ public class WorldGenPlants implements IWorldGenerator
 		if(rain >= 125)
 		{
 			grassPerChunk+=12;
-			flowersPerChunk += 1;
 			mushroomsPerChunk += 1;
 		}
 		if(rain >= 250)
 		{
 			grassPerChunk+=18;
-			flowersPerChunk += 1;
+			flowerChunkRarity -= 2;
 			mushroomsPerChunk += 1;
 		}
 		if(rain >= 500)
 		{
 			grassPerChunk+=24;
-			flowersPerChunk += 1;
+			flowerChunkRarity -= 3;
 			mushroomsPerChunk += 1;
 		}
 		if(rain >= 1000)
 		{
+			flowerChunkRarity -= 5;
 			mushroomsPerChunk += 1;
 		}
 		if(rain >= 2000)
 		{
+			flowerChunkRarity -= 5;
 			mushroomsPerChunk += 1;
 		}
 
-		for (int i = 0; i < flowersPerChunk; ++i)
-		{
-			xCoord = chunkX + random.nextInt(16) + 8;
-			zCoord = chunkZ + random.nextInt(16) + 8;
-			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
-			bioTemperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, yCoord, zCoord);
-			if(bioTemperature > 1.5)
-			{
-				if(random.nextInt(100) < 50)
-					plantFlowersGen.generate(world, random, xCoord, yCoord, zCoord);
-				else
-					plantFlowersGen2.generate(world, random, xCoord, yCoord, zCoord);
-			}
-		}
+		WorldGenFlowers.generate(world, random, chunkX, chunkZ, flowerChunkRarity);
 
 		genBushes(random, chunkX, chunkZ, world);
 		for (int i  = 0; i < grassPerChunk; ++i)
@@ -129,8 +114,6 @@ public class WorldGenPlants implements IWorldGenerator
 
 			if(bioTemperature >= 0)
 			{
-				//				WorldGenerator var6 = new WorldGenCustomTallGrass(Block.tallGrass, 1);
-				//				var6.generate(world, random, xCoord, yCoord, zCoord);
 				if (world.isAirBlock(xCoord, yCoord, zCoord) && 
 						TFCBlocks.TallGrass.canBlockStay(world, xCoord, yCoord, zCoord) &&
 						TFC_Core.isDryGrass(world.getBlock(xCoord, yCoord - 1, zCoord)))
@@ -165,7 +148,7 @@ public class WorldGenPlants implements IWorldGenerator
 			zCoord = chunkZ + random.nextInt(16) + 8;
 			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
 			bioTemperature = TFC_Climate.getBioTemperatureHeight(world, xCoord, yCoord, zCoord);
-			switch(random.nextInt(9))
+			switch(new Random(world.getSeed() + ((chunkX >> 4) - (chunkZ >> 4)) * (chunkZ >> 4)).nextInt(9))
 			{
 			default:
 			{
@@ -262,9 +245,9 @@ public class WorldGenPlants implements IWorldGenerator
 			case 5:
 				bunchberryGen.generate(world, random, xCoord, yCoord, zCoord);
 				break;
-				/*case 6:
+			case 6:
 				cranberryGen.generate(world, random, xCoord, yCoord, zCoord);
-				break;*/
+				break;
 			case 7:
 				snowberryGen.generate(world, random, xCoord, yCoord, zCoord);
 				break;

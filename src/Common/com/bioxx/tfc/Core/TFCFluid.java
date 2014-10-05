@@ -2,6 +2,7 @@ package com.bioxx.tfc.Core;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -10,8 +11,6 @@ import net.minecraftforge.fluids.FluidStack;
 
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.TileEntities.TEBarrel;
-import com.bioxx.tfc.api.Constant.Global;
 
 public class TFCFluid extends Fluid
 {
@@ -21,7 +20,7 @@ public class TFCFluid extends Fluid
 
 	public static final TFCFluid SALTWATER = new TFCFluid("saltwater").setBaseColor(0x354d35);
 	public static final TFCFluid FRESHWATER = new TFCFluid("freshwater").setBaseColor(0x354d35);
-	public static final TFCFluid HOTWATER = (TFCFluid) new TFCFluid("hotwater").setTemperature(372/*Kelvin*/);
+	public static final TFCFluid HOTWATER = (TFCFluid) new TFCFluid("hotwater").setBaseColor(0x1f5099).setTemperature(372/*Kelvin*/);
 	public static final TFCFluid LAVA = (TFCFluid) new TFCFluid("lavatfc").setLuminosity(15).setDensity(3000).setViscosity(6000).setTemperature(1300).setUnlocalizedName(Blocks.lava.getUnlocalizedName());
 	public static final TFCFluid RUM = new TFCFluid("rum").setBaseColor(0x6e0123);
 	public static final TFCFluid BEER = new TFCFluid("beer").setBaseColor(0xc39e37);
@@ -116,13 +115,48 @@ public class TFCFluid extends Fluid
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(MILK, 1000), new ItemStack(TFCItems.WoodenBucketMilk), new ItemStack(TFCItems.WoodenBucketEmpty));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(VINEGAR, 1000), new ItemStack(TFCItems.Vinegar), new ItemStack(TFCItems.WoodenBucketEmpty));
 
-		for(int i = 0; i < Global.WOOD_ALL.length; i++)
+		/*for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
 			FluidContainerRegistry.registerFluidContainer(new FluidStack(FRESHWATER, 10000), TEBarrel.createFullBarrel(new FluidStack(FRESHWATER, 10000), new ItemStack(TFCBlocks.Barrel, 1, i)), new ItemStack(TFCBlocks.Barrel, 1, i));
 			FluidContainerRegistry.registerFluidContainer(new FluidStack(SALTWATER, 10000), TEBarrel.createFullBarrel(new FluidStack(SALTWATER, 10000), new ItemStack(TFCBlocks.Barrel, 1, i)), new ItemStack(TFCBlocks.Barrel, 1, i));
 		}
 
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(FRESHWATER, 5000), TEBarrel.createFullBarrel(new FluidStack(FRESHWATER, 5000), new ItemStack(TFCBlocks.Vessel, 1, 1)), new ItemStack(TFCBlocks.Vessel, 1, 1));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(SALTWATER, 5000), TEBarrel.createFullBarrel(new FluidStack(SALTWATER, 5000), new ItemStack(TFCBlocks.Vessel, 1, 1)), new ItemStack(TFCBlocks.Vessel, 1, 1));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(SALTWATER, 5000), TEBarrel.createFullBarrel(new FluidStack(SALTWATER, 5000), new ItemStack(TFCBlocks.Vessel, 1, 1)), new ItemStack(TFCBlocks.Vessel, 1, 1));*/
+	}
+
+	public static ItemStack fillItemBarrel(ItemStack is, FluidStack fs, int maxFluid)
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		if(is.hasTagCompound())
+		{
+			nbt = is.getTagCompound();
+		}
+
+		if(nbt.hasKey("isSealed"))
+			return is;
+
+		//Attempt to merge fluidstacks first
+		if(nbt.hasKey("fluidNBT"))
+		{
+			FluidStack ifs = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag("fluidNBT"));
+			if(ifs.isFluidEqual(fs) && ifs.amount < maxFluid)
+			{
+				ifs.amount += fs.amount;
+				fs.amount = ifs.amount % maxFluid;
+				ifs.amount = Math.min(ifs.amount, maxFluid);
+				nbt.setTag("fluidNBT", ifs.writeToNBT(new NBTTagCompound()));
+				nbt.setBoolean("isSealed", true);
+			}
+			else return is;
+		}
+		else 
+		{
+			nbt.setTag("fluidNBT", fs.writeToNBT(new NBTTagCompound()));
+			nbt.setBoolean("isSealed", true);
+		}
+
+		is.setTagCompound(nbt);
+		return is;
 	}
 }

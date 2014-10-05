@@ -94,7 +94,6 @@ import com.bioxx.tfc.Render.Blocks.RenderChest;
 import com.bioxx.tfc.Render.Blocks.RenderCrucible;
 import com.bioxx.tfc.Render.Blocks.RenderFence;
 import com.bioxx.tfc.Render.Blocks.RenderFenceGate;
-import com.bioxx.tfc.Render.Blocks.RenderFluids;
 import com.bioxx.tfc.Render.Blocks.RenderGrill;
 import com.bioxx.tfc.Render.Blocks.RenderLeatherRack;
 import com.bioxx.tfc.Render.Blocks.RenderLoom;
@@ -242,7 +241,6 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.toolRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderToolRack());
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.foodPrepRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.quernRenderId = RenderingRegistry.getNextAvailableRenderId(), new TESRQuern());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.fluidRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderFluids());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderWoodConstruct());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.barrelRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBarrel());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.loomRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderLoom());

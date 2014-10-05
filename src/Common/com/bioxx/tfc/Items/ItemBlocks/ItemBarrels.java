@@ -15,12 +15,12 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 
 import org.lwjgl.opengl.GL11;
 
+import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Items.ItemTerra;
 import com.bioxx.tfc.TileEntities.TEBarrel;
@@ -53,6 +53,14 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 		return EnumWeight.HEAVY;
 	}
 
+	@Override
+	public int getItemStackLimit(ItemStack is)
+	{
+		if(is.hasTagCompound())
+			return 1;
+		return super.getItemStackLimit(is);
+	}
+
 	public void readFromItemNBT(NBTTagCompound nbt, List arraylist)
 	{
 		if(nbt != null)
@@ -64,7 +72,7 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 				if( fluid != null )
 				{
 					addFluid = true;
-					arraylist.add(EnumChatFormatting.BLUE + fluid.getFluid().getLocalizedName());
+					arraylist.add(EnumChatFormatting.BLUE + fluid.getFluid().getLocalizedName(fluid));
 				}
 			}
 
@@ -125,7 +133,7 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 				int j = mop.blockY;
 				int k = mop.blockZ;
 
-				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock))
+				if (!player.canPlayerEdit(i, j, k, mop.sideHit, is) || !(world.getBlock(i, j, k) instanceof IFluidBlock) || is.hasTagCompound())
 				{
 					return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 				}
@@ -134,14 +142,20 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 
 				world.setBlockToAir(i, j, k);
 
-				if (--is.stackSize <= 0)
+				if (is.stackSize == 1)
 				{
-					FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 10000), is);
-				}
-
-				if (!player.inventory.addItemStackToInventory(FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 10000), is)))
+					TFCFluid.fillItemBarrel(is, new FluidStack(fluid, 10000), 10000);	
+				}	
+				else
 				{
-					player.entityDropItem(FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 10000), is), 0);
+					is.stackSize--;
+					ItemStack outIS = is.copy();
+					outIS.stackSize = 1;
+					TFCFluid.fillItemBarrel(outIS, new FluidStack(fluid, 10000), 10000);
+					if (!player.inventory.addItemStackToInventory(outIS))
+					{
+						player.entityDropItem(outIS, 0);
+					}
 				}
 				return true;
 			}
@@ -149,6 +163,8 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 
 		return super.onItemUse(is, player, world, x, y, z, side, hitX, hitY, hitZ);
 	}
+
+
 
 	@Override
 	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
@@ -194,7 +210,7 @@ public class ItemBarrels extends ItemTerraBlock implements IEquipable
 	@Override
 	public boolean getTooHeavyToCarry(ItemStack is)
 	{
-		return is.hasTagCompound();
+		return is.hasTagCompound() && is.getTagCompound().hasKey("isSealed");
 	}
 }
 
