@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLeashKnot;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -59,22 +60,22 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 	private boolean familiarizedToday = false;
 	public int happyTicks;
 	private boolean wasRoped = false;
-	
+
 	protected float avgAdultWeight = 44f;	//The average weight of adult males in kg
 	protected float dimorphism = 0.0786f;	//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
-											//the square root of the ratio of female mass : male mass
+	//the square root of the ratio of female mass : male mass
 
 	public EntityWolfTFC(World par1World)
 	{
 		super(par1World);
 		this.tasks.addTask(6, new EntityAIMateTFC(this, worldObj, 1));
 		//this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheepTFC.class, 200, false));
-		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityChickenTFC.class, 200, false));
-		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityPheasantTFC.class, 200, false));
-		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
-		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityCowTFC.class, 200, false));
-		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDeer.class, 200, false));
-		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false));
+		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityChickenTFC.class, 200, false));
+		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityPheasantTFC.class, 200, false));
+		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
+		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityCowTFC.class, 200, false));
+		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityDeer.class, 200, false));
+		this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityHorseTFC.class, 200, false));
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + getEntityId();
@@ -132,7 +133,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		colour_mod = (float)Math.sqrt(colour_mod * colour_mod * (float)Math.sqrt((mother.getColour() + father_col) * 0.5F));
 		hard_mod = (float)Math.sqrt(hard_mod * hard_mod * (float)Math.sqrt((mother.getHardiness() + father_hard) * 0.5F));
 		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
-		
+
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
@@ -212,6 +213,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
+		
+		familiarity = nbt.getInteger("Familiarity");
+		lastFamiliarityUpdate = nbt.getLong("lastFamiliarityUpdate");
 
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
@@ -222,7 +226,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 
 		this.dataWatcher.updateObject(16, nbt.getByte("tamed"));
 		this.happyTicks = nbt.getInteger("happy");
-		
+
 		wasRoped = nbt.getBoolean("wasRoped");
 
 		hunger = nbt.getInteger ("Hunger");
@@ -263,8 +267,17 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		if (hunger > 0)
 			hunger--;
 
+		if(this.getLeashed()){
+			if(this.getLeashedToEntity() instanceof EntityLeashKnot && familiarity >= 5){
+				this.setSitting(true);
+			}
+			else if(this.getLeashedToEntity() instanceof EntityPlayer){
+				this.setSitting(false);
+			}
+		}
+
 		if(this.getLeashed()&&!wasRoped)wasRoped = true;
-		
+
 		if(super.isInLove())
 			setInLove(true);
 
@@ -286,7 +299,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			this.happyTicks = this.dataWatcher.getWatchableObjectInt(23);
 		}
 
-		if(pregnant)
+		if(isPregnant())
 		{
 			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
@@ -721,7 +734,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			this.setTamed(true);
 		}
 	}
-	
+
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
 		if(this.checkFamiliarity(InteractionEnum.NAME, player) && !this.hasCustomNameTag()){
@@ -731,7 +744,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 		this.playSound("mob.wolf.growl",  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
 		return false;
 	}
-	
+
 	@Override
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
 		boolean flag = false;

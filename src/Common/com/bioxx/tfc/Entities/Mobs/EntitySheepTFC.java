@@ -416,6 +416,9 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
+		
+		nbt.setInteger("Familiarity", familiarity);
+		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);s
 
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
@@ -448,6 +451,9 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		colour_mod = nbt.getFloat ("Colour Modifier");
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
+		
+		familiarity = nbt.getInteger("Familiarity");
+		lastFamiliarityUpdate = nbt.getLong("lastFamiliarityUpdate");
 
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");

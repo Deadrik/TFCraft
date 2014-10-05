@@ -218,5 +218,6 @@ public class ContainerHorseInventoryTFC extends ContainerTFC
 		this.theHorse.updateChestSaddle();*/
 		super.onContainerClosed(player);
         this.field_111243_a.closeInventory();
+        theHorse.updateChestSaddle();
 	}
 }

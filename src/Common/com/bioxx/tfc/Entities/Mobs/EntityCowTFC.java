@@ -272,27 +272,30 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
-		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setInteger ("Sex", sex);
-		par1NBTTagCompound.setLong ("Animal ID", animalID);
-		par1NBTTagCompound.setFloat ("Size Modifier", size_mod);
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger ("Sex", sex);
+		nbt.setLong ("Animal ID", animalID);
+		nbt.setFloat ("Size Modifier", size_mod);
+		
+		nbt.setInteger("Familiarity", familiarity);
+		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
 
-		NBTTagCompound nbt = par1NBTTagCompound;
-		nbt.setFloat ("Strength Modifier", strength_mod);
-		nbt.setFloat ("Aggression Modifier", aggression_mod);
-		nbt.setFloat ("Obedience Modifier", obedience_mod);
-		nbt.setFloat ("Colour Modifier", colour_mod);
-		nbt.setFloat ("Climate Adaptation Modifier", climate_mod);
-		nbt.setFloat ("Hardiness Modifier", hard_mod);
+		NBTTagCompound nbt2 = nbt;
+		nbt2.setFloat ("Strength Modifier", strength_mod);
+		nbt2.setFloat ("Aggression Modifier", aggression_mod);
+		nbt2.setFloat ("Obedience Modifier", obedience_mod);
+		nbt2.setFloat ("Colour Modifier", colour_mod);
+		nbt2.setFloat ("Climate Adaptation Modifier", climate_mod);
+		nbt2.setFloat ("Hardiness Modifier", hard_mod);
 
-		par1NBTTagCompound.setInteger ("Hunger", hunger);
-		par1NBTTagCompound.setBoolean("Pregnant", pregnant);
-		par1NBTTagCompound.setFloat("MateSize", mateSizeMod);
-		par1NBTTagCompound.setLong("ConceptionTime",conception);
-		par1NBTTagCompound.setInteger("Age", getBirthDay());
-		par1NBTTagCompound.setLong("HasMilkTime", hasMilkTime);
+		nbt.setInteger ("Hunger", hunger);
+		nbt.setBoolean("Pregnant", pregnant);
+		nbt.setFloat("MateSize", mateSizeMod);
+		nbt.setLong("ConceptionTime",conception);
+		nbt.setInteger("Age", getBirthDay());
+		nbt.setLong("HasMilkTime", hasMilkTime);
 	}
 
 	@Override
@@ -302,6 +305,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
+		
+		familiarity = nbt.getInteger("Familiarity");
+		lastFamiliarityUpdate = nbt.getLong("lastFamiliarityUpdate");
 
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
