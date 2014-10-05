@@ -1166,17 +1166,6 @@ public class TFC_Core
 		r = new Random(e.getUniqueID().getLeastSignificantBits() + e.getUniqueID().getMostSignificantBits());
 		Food.adjustFlavor(is, r);
 		e.capturedDrops.add(new EntityItem(e.worldObj, e.posX, e.posY, e.posZ, is));
-		/*while (foodWeight > 0)
-		{
-			float fw = Helper.roundNumber(Math.min(Global.FOOD_MAX_WEIGHT, foodWeight), 10);
-			if (fw < Global.FOOD_MAX_WEIGHT)
-				foodWeight = 0;
-			foodWeight -= fw;
-			ItemStack is = ItemFoodTFC.createTag(new ItemStack(i, 1), fw);
-			r = new Random(e.getUniqueID().getLeastSignificantBits() + e.getUniqueID().getMostSignificantBits());
-			Food.adjustFlavor(is, r);
-			e.capturedDrops.add(new EntityItem(e.worldObj, e.posX, e.posY, e.posZ, is));
-		}*/
 	}
 
 	public static Vec3 getEntityPos(Entity e)

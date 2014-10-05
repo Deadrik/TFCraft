@@ -13,7 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -513,7 +513,7 @@ public class EntityFishHookTFC extends EntityFishHook
 		//this.posZ += netForceVec.zCoord;
 
 		//netForceVec.addVector(distVec.xCoord * distRatio, distVec.yCoord * distRatio, distVec.zCoord * distRatio);
-		this.field_146042_b.addChatMessage(new ChatComponentText("tension: " + lineTension + ", force ratio: " + forceRatio +", distance: " + this.getDistanceToEntity(field_146042_b) + ", max: "+this.maxDistance));
+		//this.field_146042_b.addChatMessage(new ChatComponentText("tension: " + lineTension + ", force ratio: " + forceRatio +", distance: " + this.getDistanceToEntity(field_146042_b) + ", max: "+this.maxDistance));
 		return Vec3.createVectorHelper(netForceVec.xCoord, (worldObj.isAirBlock((int)x, (int)y +1, (int)z) && netForceVec.yCoord > 0?0:netForceVec.yCoord), netForceVec.zCoord);
 	}
 
@@ -560,7 +560,7 @@ public class EntityFishHookTFC extends EntityFishHook
 			//this.pullY = 0;
 			//this.pullZ = 0;
 		}
-		if(distance > 1){
+		if(distance > 1.5){
 
 			this.pullX = (entity.posX - posX)/distance;
 			this.pullY = (entity.posY - posY)/distance;
@@ -629,9 +629,9 @@ public class EntityFishHookTFC extends EntityFishHook
 		else
 		{
 			EntityFishTFC fish = new EntityFishTFC(this.worldObj);
-			fish.setLocationAndAngles(posX, posY-0.3, posZ, 0, 0);
-			fish.riddenByEntity = this;
+			fish.setPosition(posX, posY-0.3, posZ);
 			this.worldObj.spawnEntityInWorld(fish);
+			this.mountEntity(fish);
 
 			this.canCatchFish = false;
 
@@ -659,7 +659,7 @@ public class EntityFishHookTFC extends EntityFishHook
 	public void setDeadKill(){
 		if(this.ridingEntity!=null && this.ridingEntity instanceof EntityLiving){
 			((EntityLiving)(this.ridingEntity)).setHealth(1);
-			((EntityLiving)(this.ridingEntity)).attackEntityFrom(DamageSource.drown, 1);
+			((EntityLiving)(this.ridingEntity)).attackEntityFrom(new EntityDamageSource("fishing", field_146042_b), 1);
 			this.field_146042_b.addStat(StatList.fishCaughtStat, 1);
 		}
 		this.ridingEntity = null;

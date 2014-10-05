@@ -431,6 +431,6 @@ public class EntityFishTFC extends EntitySquid
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		TFC_Core.animalDropMeat(this, TFCItems.fishRaw,32);
+		TFC_Core.animalDropMeat(this, TFCItems.fishRaw, (0.1f+this.worldObj.rand.nextFloat()) * 32f);
 	}
 }
