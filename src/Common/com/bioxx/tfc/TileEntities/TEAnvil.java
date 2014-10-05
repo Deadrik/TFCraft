@@ -126,13 +126,13 @@ public class TEAnvil extends NetworkTileEntity implements IInventory
 						{
 							if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemMiscToolHead)
 							{
-								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillTotal(lastWorker));
-								AnvilManager.setDamageBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillTotal(lastWorker));
+								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillMult(lastWorker));
+								AnvilManager.setDamageBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillMult(lastWorker));
 
 							}
 							else if(anvilItemStacks[INPUT1_SLOT].getItem() instanceof ItemTFCArmor)
 							{
-								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillTotal(lastWorker));
+								AnvilManager.setDurabilityBuff(anvilItemStacks[INPUT1_SLOT], recipe.getSkillMult(lastWorker));
 							}
 
 							increaseSkills(recipe);

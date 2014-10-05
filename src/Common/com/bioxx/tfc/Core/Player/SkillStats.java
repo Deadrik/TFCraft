@@ -14,6 +14,7 @@ import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
 import com.bioxx.tfc.Handlers.Network.PlayerUpdatePacket;
 import com.bioxx.tfc.api.SkillsManager;
+import com.bioxx.tfc.api.SkillsManager.Skill;
 import com.bioxx.tfc.api.Events.GetSkillMultiplierEvent;
 import com.bioxx.tfc.api.Events.PlayerSkillEvent;
 
@@ -27,10 +28,10 @@ public class SkillStats
 	public SkillStats(EntityPlayer p)
 	{
 		player = p;
-		skillsMap = new HashMap<String, Integer>();
-		for(String s : SkillsManager.instance.getSkillsArray())
+		skillsMap = new HashMap<Skill, Integer>();
+		for(Skill s : SkillsManager.instance.getSkillsArray())
 		{
-			setSkill(s, 0);
+			setSkill(s.skillName, 0);
 		}
 	}
 
@@ -41,34 +42,39 @@ public class SkillStats
 
 	public void setSkill(String skillName, int amount)
 	{
-		skillsMap.put(skillName, amount);
+		Skill sk = SkillsManager.instance.getSkill(skillName);
+		if(sk != null)
+			skillsMap.put(sk, amount);
 	}
 
 	public void setSkillSave(String skillName, int amount)
 	{
-		skillsMap.put(skillName, amount);
+		Skill sk = SkillsManager.instance.getSkill(skillName);
+		if(sk != null)
+			skillsMap.put(sk, amount);
 		writeNBT(player.getEntityData());
 	}
 
 	public void increaseSkill(String skillName, int amount)
 	{
+		Skill sk = SkillsManager.instance.getSkill(skillName);
 		PlayerSkillEvent.Increase event = new PlayerSkillEvent.Increase(this.player, skillName, amount);
 		if(!MinecraftForge.EVENT_BUS.post(event))
 		{
-			if(skillsMap.containsKey(skillName))
+			if(skillsMap.containsKey(sk))
 			{
 				//First get what the skill level currently is
-				int i = (Integer) skillsMap.get(skillName);
+				int i = (Integer) skillsMap.get(sk);
 				//The put method replaces the old identical entry.
-				skillsMap.put(skillName, i+amount);
+				skillsMap.put(sk, i+amount);
 			}
 			else
 			{
-				skillsMap.put(skillName, amount);
+				skillsMap.put(sk, amount);
 			}
 		}
 
-		int i = (Integer) skillsMap.get(skillName);
+		int i = (Integer) skillsMap.get(sk);
 		if(player instanceof EntityPlayerMP)
 		{
 			AbstractPacket pkt = new PlayerUpdatePacket(1, skillName, i);
@@ -79,8 +85,9 @@ public class SkillStats
 
 	public int getSkillRaw(String skillName)
 	{
-		if(skillsMap.containsKey(skillName))
-			return (Integer) skillsMap.get(skillName);
+		Skill sk = SkillsManager.instance.getSkill(skillName);
+		if(skillsMap.containsKey(sk))
+			return (Integer) skillsMap.get(sk);
 		else
 			return 0;
 	}
@@ -130,15 +137,16 @@ public class SkillStats
 	public float getSkillMultiplier(String skillName)
 	{
 		int skill = getSkillRaw(skillName);
-		float mult = getSkillMult(skill);
+		Skill sk = SkillsManager.instance.getSkill(skillName);
+		float mult = getSkillMult(skill, sk.skillRate);
 		GetSkillMultiplierEvent event = new GetSkillMultiplierEvent(player, skillName, mult);
 		MinecraftForge.EVENT_BUS.post(event);
 		return event.skillResult;
 	}
 
-	public static float getSkillMult(int skill)
+	private float getSkillMult(int skill, float rate)
 	{
-		return 1 - (100f / (100f + skill));
+		return 1 - (rate / (rate + skill));
 	}
 
 	public void readNBT(NBTTagCompound nbt)
@@ -203,4 +211,6 @@ public class SkillStats
 			return StatCollector.translateToLocal(name);
 		}
 	}
+
+
 }

@@ -25,7 +25,6 @@ import com.bioxx.tfc.Containers.ContainerAnvil;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
-import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.TileEntities.TEAnvil;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Crafting.AnvilManager;
@@ -136,7 +135,7 @@ public class GuiAnvil extends GuiContainer
 			//Round to 1 decimal place XX.X%
 			if(AnvilEntity.workRecipe != null)
 			{
-				int s0 =(int) (SkillStats.getSkillMult(AnvilEntity.workRecipe.getSkillTotal(player))*1000);
+				int s0 =(int) (AnvilEntity.workRecipe.getSkillMult(player)*1000);
 				float s1 = s0/10f;
 				fontRendererObj.drawString("Skill: "+s1+"%", w+150, h+8, 0xff6000);
 			}

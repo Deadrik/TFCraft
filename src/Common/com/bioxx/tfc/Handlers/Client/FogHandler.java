@@ -66,9 +66,9 @@ public class FogHandler
 
 			if((int)event.entity.posY > 128)
 			{
-				GL11.glFogf(GL11.GL_FOG_DENSITY, fogDensity);
-				GL11.glFogf(GL11.GL_FOG_START, fogStart);
-				GL11.glFogf(GL11.GL_FOG_END, fogEnd);
+				GL11.glFogf(GL11.GL_FOG_DENSITY, Math.min(fogDensity, 0.3f));
+				GL11.glFogf(GL11.GL_FOG_START, Math.max(fogStart, 8f));
+				GL11.glFogf(GL11.GL_FOG_END, Math.max(fogEnd, 16f));
 			}
 		}
 	}

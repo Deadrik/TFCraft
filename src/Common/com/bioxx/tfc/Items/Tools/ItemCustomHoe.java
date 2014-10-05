@@ -179,7 +179,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	@Override
 	public int getMaxDamage(ItemStack stack)
 	{
-		return (int) (getMaxDamage()+(getMaxDamage() * (AnvilManager.getDurabilityBuff(stack) / 300f)));
+		return (int) (getMaxDamage()+(getMaxDamage() * AnvilManager.getDurabilityBuff(stack)));
 	}
 
 	@Override

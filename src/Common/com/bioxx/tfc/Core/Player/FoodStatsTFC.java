@@ -77,8 +77,8 @@ public class FoodStatsTFC
 			float temp = TFC_Climate.getHeightAdjustedTemp(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 
 			float tempWaterMod = temp;
-			if(tempWaterMod >= 30)
-				tempWaterMod = (tempWaterMod-30)*0.1f;
+			if(tempWaterMod >= 25)
+				tempWaterMod = (tempWaterMod-25)*0.2f;
 			else
 				tempWaterMod = 0;
 
@@ -181,7 +181,7 @@ public class FoodStatsTFC
 						this.restoreWater(player, 20);
 					if(waterLevel < 0)
 						waterLevel = 0;
-					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 30)
+					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35)
 						player.attackEntityFrom(DamageSource.generic, 2);
 				}
 			}
