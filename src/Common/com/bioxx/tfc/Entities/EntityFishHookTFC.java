@@ -532,13 +532,13 @@ public class EntityFishHookTFC extends EntityFishHook
 	public void attemptToCatch(){
 		int fishPopulation = this.getAverageFishPopFromChunks();
 		if(this.lastCheckTick == 0){
-			int maxValue = (int)Math.pow(ChunkData.fishPopMax,1.2) + 80;
+			int maxValue = (int)(ChunkData.fishPopMax * 1.2f);
 			int minValue = 0;
 			int hour = TFC_Time.getHour();
 			if((hour >= 3 && hour <=9)||(hour >= 17 && hour <22)){
 				minValue = 1;
 			}
-			if(this.rand.nextInt(maxValue - (int)Math.pow(fishPopulation, 1.2))<= minValue){
+			if(this.rand.nextInt(maxValue - fishPopulation) <= minValue){
 				this.func_146034_e();
 			}
 			lastCheckTick = 20;
@@ -630,6 +630,7 @@ public class EntityFishHookTFC extends EntityFishHook
 		{
 			EntityFishTFC fish = new EntityFishTFC(this.worldObj);
 			fish.setLocationAndAngles(posX, posY-0.3, posZ, 0, 0);
+			fish.riddenByEntity = this;
 			this.worldObj.spawnEntityInWorld(fish);
 
 			this.canCatchFish = false;

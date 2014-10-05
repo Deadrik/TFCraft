@@ -213,9 +213,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		int y;
 		int z;
 
-		if(biome.equals(TFCBiome.lake) || biome.equals(TFCBiome.river)){
-			TFC_Core.getCDM(worldObj).setFishPop(xCoord, zCoord, ChunkData.fishPopMax);
-		}
+		TFC_Core.getCDM(worldObj).setFishPop(chunkX, chunkZ, ChunkData.fishPopMax);
 
 		int waterRand = 4;
 		if(TFC_Climate.getStability(worldObj, xCoord, zCoord) == 1)

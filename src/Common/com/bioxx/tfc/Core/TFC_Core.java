@@ -24,6 +24,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.storage.WorldInfo;
 
 import org.lwjgl.input.Keyboard;
@@ -1338,5 +1339,10 @@ public class TFC_Core
 	public static boolean setBlockToAirWithDrops(World world, int x, int y, int z)
 	{
 		return world.func_147480_a(x, y, z, true);
+	}
+
+	public static boolean isWaterBiome(BiomeGenBase b)
+	{
+		return TFC_Core.isBeachBiome(b.biomeID) || TFC_Core.isOceanicBiome(b.biomeID) || b == TFCBiome.lake || b == TFCBiome.river;
 	}
 }
