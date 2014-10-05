@@ -50,7 +50,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	{
 		ItemTerra.addSizeInformation(is, arraylist);
 		if(TFCOptions.enableDebugMode)
-			arraylist.add("Damage: "+is.getItemDamage());
+			arraylist.add("Damage: "+is.getItemDamage() + "/" + is.getMaxDamage());
 	}
 
 	@Override

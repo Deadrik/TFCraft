@@ -171,9 +171,9 @@ public class SkillStats
 		Object[] keys = skillsMap.keySet().toArray();
 		for(Object o : keys)
 		{
-			String k = (String)o;
+			Skill k = (Skill)o;
 			int f = (Integer) skillsMap.get(k);
-			skillCompound.setInteger(k, f);
+			skillCompound.setInteger(k.skillName, f);
 		}
 		nbt.setTag("skillCompound", skillCompound);
 	}
@@ -184,9 +184,9 @@ public class SkillStats
 		buffer.writeInt(keys.length);
 		for(Object o : keys)
 		{
-			String k = (String)o;
-			int f = (Integer) skillsMap.get(k);
-			ByteBufUtils.writeUTF8String(buffer, k);
+			Skill k = (Skill)o;
+			int f = (Integer) skillsMap.get(k.skillName);
+			ByteBufUtils.writeUTF8String(buffer, k.skillName);
 			buffer.writeInt(f);
 		}
 	}

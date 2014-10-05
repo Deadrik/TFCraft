@@ -26,7 +26,7 @@ public class SkillsManager
 	public Skill getSkill(String name)
 	{
 		for(Skill s : skillsArray)
-			if(s.skillName == name)
+			if(s.skillName.equalsIgnoreCase(name))
 				return s;
 		return null;
 	}

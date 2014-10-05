@@ -82,7 +82,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 		{
 			NBTTagCompound nbt = is.getTagCompound();
 			if(nbt != null && nbt.hasKey("craftingTag") && nbt.getCompoundTag("craftingTag").hasKey("durabuff"))
-				arraylist.add("durabuff=" + is.getMaxDamage()+ "/" + is.getItem().getMaxDamage());
+				arraylist.add("durabuff=" + is.getMaxDamage()+ "/" + is.getItem().getMaxDamage(is));
 		}
 	}
 
