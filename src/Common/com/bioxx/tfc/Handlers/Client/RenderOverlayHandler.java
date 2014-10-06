@@ -149,7 +149,7 @@ public class RenderOverlayHandler
 		}
 
 		PlayerInfo playerclient = PlayerManagerTFC.getInstance().getClientPlayer();
-		if(playerclient != null && mc.playerController.gameIsSurvivalOrAdventure())
+		if(mc.playerController.gameIsSurvivalOrAdventure())
 		{
 			//Draw Health
 			int mid = sr.getScaledWidth() / 2;
@@ -170,7 +170,7 @@ public class RenderOverlayHandler
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight, 0, 18, 90, 5);
-			if(playerclient.guishowFoodRestoreAmount)
+			if(playerclient != null && playerclient.guishowFoodRestoreAmount)
 			{
 				float percentFood2 = Math.min(percentFood + playerclient.guiFoodRestoreAmount/foodstats.getMaxStomach(mc.thePlayer), 1);
 				GL11.glColor4f(0.0F, 0.6F, 0.0F, 0.3F);

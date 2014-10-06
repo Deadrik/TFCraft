@@ -32,8 +32,8 @@ public class PlayerTracker
 		TerraFirmaCraft.packetPipeline.sendTo(pkt, (EntityPlayerMP) event.player);
 
 		//		System.out.println("-----------------------------Sending TestPacket");
-		//		AbstractPacket pkt2 = new TestPacket("Sent to Player: "+event.player.getDisplayName());
-		//		TerraFirmaCraft.packetPipeline.sendTo(pkt2, (EntityPlayerMP) event.player);
+		//AbstractPacket pkt2 = new TestPacket("Sent to Player: "+event.player.getDisplayName());
+		//TerraFirmaCraft.packetPipeline.sendTo(pkt2, (EntityPlayerMP) event.player);
 	}
 
 	@SubscribeEvent
@@ -43,10 +43,7 @@ public class PlayerTracker
 		//		System.out.println("-----"+FMLClientHandler.instance().getClientPlayerEntity().getDisplayName()+" : "+
 		//				FMLClientHandler.instance().getClientPlayerEntity().getUniqueID().toString()+"-------");
 		//
-		//		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
-		//				Minecraft.getMinecraft().thePlayer.getDisplayName(),
-		//				Minecraft.getMinecraft().thePlayer.getUniqueID(),
-		//				event.manager));
+		TerraFirmaCraft.proxy.onClientLogin();
 	}
 
 	@SubscribeEvent

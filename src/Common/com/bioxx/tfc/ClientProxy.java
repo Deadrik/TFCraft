@@ -305,6 +305,9 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void onClientLogin()
 	{
+		/*PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
+				Minecraft.getMinecraft().thePlayer.getDisplayName(),
+				Minecraft.getMinecraft().thePlayer.getUniqueID()));*/
 	}
 
 	@Override

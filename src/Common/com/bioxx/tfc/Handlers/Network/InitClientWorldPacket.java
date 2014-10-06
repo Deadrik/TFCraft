@@ -143,11 +143,14 @@ public class InitClientWorldPacket extends AbstractPacket
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(
 				player.getDisplayName(),
 				player.getUniqueID()));
+
+		System.out.println("Recieved client init packet.");
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player)
 	{
+		System.out.println("Recieved server init packet.");
 	}
 
 }

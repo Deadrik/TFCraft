@@ -185,7 +185,7 @@ public class SkillStats
 		for(Object o : keys)
 		{
 			Skill k = (Skill)o;
-			int f = (Integer) skillsMap.get(k.skillName);
+			int f = (Integer) skillsMap.get(k);
 			ByteBufUtils.writeUTF8String(buffer, k.skillName);
 			buffer.writeInt(f);
 		}
