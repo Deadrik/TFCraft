@@ -1,15 +1,22 @@
 package com.bioxx.tfc.Blocks.Liquids;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
+
+import com.bioxx.tfc.TFCBlocks;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -23,7 +30,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 		super(material);
 		flowing = f;
 		fluidType = fluid;
-		this.setTickRandomly(false);
+		this.setTickRandomly(true);
 	}
 
 	@Override
@@ -72,6 +79,37 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 		if (world.getBlock(x, y, z) == this)
 		{
 			this.setNotStationary(world, x, y, z);
+		}
+	}
+
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random rand)
+	{
+		super.updateTick(world, x, y, z, rand);
+		if(!world.isRemote)
+		{
+			if(world.isAirBlock(x, y+1, z))
+			{
+				world.provider.canBlockFreeze(x, y, z, false);
+			}
+
+			if(this.getMaterial() == Material.lava)
+			{
+				if(world.getBlock(x, y+1, z) == Blocks.air)
+				{
+					int i = x-2+rand.nextInt(5);
+					int j = y+1+rand.nextInt(4);
+					int k = z-2+rand.nextInt(5);
+					if(world.getBlock(i, j, k) == Blocks.air && 
+							(world.isSideSolid(i, j+1, k, ForgeDirection.DOWN) || world.isSideSolid(i, j-1, k, ForgeDirection.UP) ||
+									world.isSideSolid(i-1, j, k, ForgeDirection.EAST) || world.isSideSolid(i+1, j, k, ForgeDirection.WEST) ||
+									world.isSideSolid(i, j, k+1, ForgeDirection.NORTH) || world.isSideSolid(i, j, k-1, ForgeDirection.SOUTH)))
+					{
+						world.setBlock(i, j, k, TFCBlocks.Sulfur, world.rand.nextInt(4), 3);
+					}
+				}
+			}
+
 		}
 	}
 
