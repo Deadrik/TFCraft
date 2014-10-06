@@ -113,11 +113,11 @@ public class WorldGenSoilPits implements IWorldGenerator
 							else if(block == TFCBlocks.Grass || block == TFCBlocks.Grass2)
 							{
 								world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClayGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
-								if(rand.nextInt(9) == 0 && world.isAirBlock(xCoord, yCoord+1, zCoord))
-								{
-									world.setBlock(xCoord, yCoord+1, zCoord, TFCBlocks.Flora, 0, 2);
-									flag = true;
-								}
+								flag = true;
+							}
+							if(flag && rand.nextInt(15) == 0)
+							{
+								world.setBlock(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord, TFCBlocks.Flora, 0, 2);
 							}
 						}
 					}
