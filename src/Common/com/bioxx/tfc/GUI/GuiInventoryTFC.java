@@ -264,7 +264,8 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 				this.activeSlot.getStack().getItem() instanceof IFood)
 			return false;
 		//Here is the code for quick stacking food
-		if(keycode == 31 && activeSlot.canTakeStack(player) && activeSlot.getHasStack() && activeSlot.getStack().getItem() instanceof IFood)
+		if(keycode == 31 && activeSlot != null && activeSlot.canTakeStack(player) && activeSlot.getHasStack() && 
+				activeSlot.getStack() != null && activeSlot.getStack().getItem() instanceof IFood)
 		{
 			Item iType = activeSlot.getStack().getItem();
 			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
