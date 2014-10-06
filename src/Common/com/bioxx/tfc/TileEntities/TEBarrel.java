@@ -587,13 +587,13 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		barrelType = nbt.getInteger("barrelType");
 		fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag("fluidNBT"));
-		sealed = nbt.getBoolean("sealed");
+		sealed = nbt.getBoolean("Sealed");
 		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
 			NBTTagCompound nbt1 = nbttaglist.getCompoundTagAt(i);
 			byte byte0 = nbt1.getByte("Slot");
-			if(byte0 >= 0 && byte0 < 2)
+			if(byte0 >= 0 && byte0 < storage.length)
 				setInventorySlotContents(byte0,ItemStack.loadItemStackFromNBT(nbt1));
 		}
 	}

@@ -235,7 +235,7 @@ public class BlockBarrel extends BlockTerraContainer
 			te.fluid.writeToNBT(fluidNBT);
 		nbt.setTag("fluidNBT", fluidNBT);
 		nbt.setInteger("barrelType", te.barrelType);
-		nbt.setBoolean("sealed", te.getSealed());
+		nbt.setBoolean("Sealed", te.getSealed());
 
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < te.storage.length; i++)
