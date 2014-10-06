@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -100,6 +101,20 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 	public boolean canCollideCheck(int par1, boolean par2)
 	{
 		return true;
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+	{
+		if(!world.isRemote)
+		{
+			if(world.getBlock(x, y, z).getMaterial() != Material.water)
+			{
+				this.doBeforeFall(world, x, y, z);
+			}
+		}
+		else super.onNeighborBlockChange(world, x, y, z, block);
+
 	}
 
 	@Override
