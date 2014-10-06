@@ -19,7 +19,8 @@ public class BarrelBriningRecipe extends BarrelRecipe
 	{
 		if(item != null && item.getItem() instanceof IFood && !Food.isBrined(item))
 		{
-			if(fluid.isFluidEqual(barrelFluid) && ((IFood)item.getItem()).getFoodWeight(item) > 1f*(fluid.amount/100))
+			float w = (float)((IFood)item.getItem()).getFoodWeight(item);
+			if(fluid.isFluidEqual(barrelFluid) && (w <= 1f*(fluid.amount/100)))
 			{
 				return true;
 			}
