@@ -101,6 +101,7 @@ public class WorldGenSoilPits implements IWorldGenerator
 					int z = zCoord - k;
 					if (x * x + z * z <= radius * radius && TFC_Climate.getRainfall(world, xCoord, Global.SEALEVEL, zCoord) >= 500)
 					{
+						flag = false;
 						for (int yCoord = j - depth; yCoord <= j + depth; ++yCoord)
 						{
 							Block block = world.getBlock(xCoord, yCoord, zCoord);
@@ -115,12 +116,12 @@ public class WorldGenSoilPits implements IWorldGenerator
 								world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForClayGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.block, rockLayer1.data2), 0x2);
 								flag = true;
 							}
-							if(flag && rand.nextInt(15) == 0)
-							{
-								int y = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
-								if(world.isAirBlock(xCoord, y, zCoord) && TFC_Core.isSoil(world.getBlock(xCoord, y-1, zCoord)))
-									world.setBlock(xCoord, y, zCoord, TFCBlocks.Flora, 0, 2);
-							}
+						}
+						if(flag && rand.nextInt(15) == 0)
+						{
+							int y = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
+							if(world.isAirBlock(xCoord, y, zCoord) && TFC_Core.isSoil(world.getBlock(xCoord, y-1, zCoord)))
+								world.setBlock(xCoord, y, zCoord, TFCBlocks.Flora, 0, 2);
 						}
 					}
 				}
