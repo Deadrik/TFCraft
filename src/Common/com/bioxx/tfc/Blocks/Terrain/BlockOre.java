@@ -221,8 +221,8 @@ public class BlockOre extends BlockCollapsable
 			TEOre te = (TEOre)world.getTileEntity(x, y, z);
 			if((te.extraData & 8) == 0 && y < 255 && y > 0)
 			{
-				if(world.getChunkFromBlockCoords(x-1, z) != null && world.getChunkFromBlockCoords(x+1, z) != null &&
-						world.getChunkFromBlockCoords(x, z-1) != null && world.getChunkFromBlockCoords(x, z+1) != null)
+				if(world.blockExists(x, y-1, z) && world.blockExists(x, y+1, z) && world.blockExists(x-1, y, z) && world.blockExists(x+1, y, z) &&
+						world.blockExists(x, y, z-1) && world.blockExists(x, y, z+1))
 					if(!world.getBlock(x, y - 1, z).isOpaqueCube() || !world.getBlock(x, y + 1, z).isOpaqueCube() ||
 							!world.getBlock(x - 1, y, z).isOpaqueCube() || !world.getBlock(x + 1, y, z).isOpaqueCube() || 
 							!world.getBlock(x, y, z - 1).isOpaqueCube() || !world.getBlock(x, y, z + 1).isOpaqueCube())

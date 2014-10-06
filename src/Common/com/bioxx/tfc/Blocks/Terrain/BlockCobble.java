@@ -167,7 +167,7 @@ public class BlockCobble extends BlockTerra
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random random)
 	{
-		if(!world.isRemote)
+		if(!world.isRemote && world.doChunksNearChunkExist(i, j, k, 1))
 		{
 			int meta = world.getBlockMetadata(i, j, k);
 

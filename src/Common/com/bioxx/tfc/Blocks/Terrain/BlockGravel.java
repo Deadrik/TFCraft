@@ -156,7 +156,7 @@ public class BlockGravel extends BlockTerra
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
-		if (!world.isRemote)
+		if (!world.isRemote && world.doChunksNearChunkExist(x, y, z, 1))
 		{
 			int meta = world.getBlockMetadata(x, y, z);
 			boolean isBelowAir = world.isAirBlock(x, y - 1, z);
