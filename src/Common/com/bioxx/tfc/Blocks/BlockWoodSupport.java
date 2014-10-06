@@ -87,58 +87,64 @@ public class BlockWoodSupport extends BlockTerra
 
 	public static int[] getSupportsInRangeDir(World world, int x, int y, int z, int range, boolean checkConnection)
 	{
-		int n = 0; boolean foundN = false;
-		int s = 0; boolean foundS = false;
-		int e = 0; boolean foundE = false;
-		int w = 0; boolean foundW = false;
-		for(int i = 1; i < range; i++)
+		int n = 0; boolean foundNV = false; boolean foundNH = true;
+		int s = 0; boolean foundSV = false; boolean foundSH = true;
+		int e = 0; boolean foundEV = false; boolean foundEH = true;
+		int w = 0; boolean foundWV = false; boolean foundWH = true;
+		for(int i = 1; i <= range; i++)
 		{
-			if(!foundE)
+			if(!foundEV)
 			{
-				if(!checkConnection || TFCBlocks.isBlockHSupport(world.getBlock(x+i, y, z)))
+				if(!checkConnection)
 					e++;
-				else e -= 50;
-				if(TFCBlocks.isBlockVSupport(world.getBlock(x+i, y, z)) && e >= 0)
+				else if(checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x+i, y, z)) && !TFCBlocks.isBlockVSupport(world.getBlock(x+i, y, z))) 
+					foundEH = false;
+				else e++;
+				if(TFCBlocks.isBlockVSupport(world.getBlock(x+i, y, z)) && (e >= 0 || i == 1))
 					if(scanVert(world, x+i, y, z))
-						foundE = true;
+						foundEV = true;
 					else e -= 50;
 			}
-			if(!foundW)
+			if(!foundWV)
 			{
-				if(!checkConnection || TFCBlocks.isBlockHSupport(world.getBlock(x-i, y, z)))
+				if(!checkConnection)
 					w++;
-				else w -= 50;
-				if(TFCBlocks.isBlockVSupport(world.getBlock(x-i, y, z)) && w >= 0)
+				else if(checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x-i, y, z)) && !TFCBlocks.isBlockVSupport(world.getBlock(x-i, y, z))) 
+					foundWH = false;
+				else w++;
+				if(TFCBlocks.isBlockVSupport(world.getBlock(x-i, y, z)) && (w >= 0 || i == 1))
 					if(scanVert(world, x-i, y, z))
-						foundW = true;
+						foundWV = true;
 					else w -= 50;
 			}
-			if(!foundS)
+			if(!foundSV)
 			{
-				if(!checkConnection || TFCBlocks.isBlockHSupport(world.getBlock(x, y, z+i)))
+				if(!checkConnection)
 					s++;
-				else s -= 50;
+				else if(checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x, y, z+i)) && !TFCBlocks.isBlockVSupport(world.getBlock(x, y, z+i))) 
+					foundSH = false;
+				else s++;
 
-				if(TFCBlocks.isBlockVSupport(world.getBlock(x, y, z+i)) && s >= 0)
+				if(TFCBlocks.isBlockVSupport(world.getBlock(x, y, z+i)) && (s >= 0 || i == 1))
 					if(scanVert(world, x, y, z+i))
-						foundS = true;
-					else s -= 50;
+						foundSV = true;
 			}
-			if(!foundN)
+			if(!foundNV)
 			{
-				if(!checkConnection || TFCBlocks.isBlockHSupport(world.getBlock(x, y, z-i)))
+				if(!checkConnection)
 					n++;
-				else n -= 50;
+				else if(checkConnection && !TFCBlocks.isBlockHSupport(world.getBlock(x, y, z-i)) && !TFCBlocks.isBlockVSupport(world.getBlock(x, y, z-i))) 
+					foundNH = false;
+				else n++;
 
-				if(TFCBlocks.isBlockVSupport(world.getBlock(x, y, z-i)) && n >= 0)
+				if(TFCBlocks.isBlockVSupport(world.getBlock(x, y, z-i)) && (n >= 0 || i == 1))
 					if(scanVert(world, x, y, z-i))
-						foundN = true;
-					else n -= 50;
+						foundNV = true;
 			}
 		}
-		if(foundE && foundW)
+		if(foundEV && foundEH && foundWV && foundWH)
 			return new int[]{0, 0, 0, 0, w, e};
-		if(foundS && foundN)
+		if(foundSV && foundSH && foundNV && foundNH)
 			return new int[]{0, 0, n, s, 0, 0};
 		return null;
 	}
@@ -397,6 +403,7 @@ public class BlockWoodSupport extends BlockTerra
 	public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side)
 	{
 		Block downBlock = world.getBlock(x, y-1, z);
+		Block block = world.getBlock(x, y, z);
 		//bottom
 		if(!TFCBlocks.isBlockVSupport(downBlock))
 		{
