@@ -26,7 +26,7 @@ public class TEOre extends NetworkTileEntity
 		if((extraData & 8) == 0)
 			extraData += 8;
 
-		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
