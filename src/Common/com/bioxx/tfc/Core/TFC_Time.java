@@ -107,7 +107,7 @@ public class TFC_Time
 		int d = getDayOfMonth((int)(ticks/hourLength));
 		int tMonths = (int) (ticks/ticksInMonth);
 		div = tMonths/12;
-		rem = tMonths-(div*12);
+		rem = tMonths%12;
 		String m = TFC_Time.MONTHS[rem];
 		String date = d + " " + m + ", " + (1000+div);
 
