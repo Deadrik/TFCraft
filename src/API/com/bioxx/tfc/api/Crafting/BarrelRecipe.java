@@ -96,12 +96,20 @@ public class BarrelRecipe
 		return this.isSealedRecipe;
 	}
 
+	protected int getnumberOfRuns(ItemStack inIS, FluidStack inFS)
+	{
+		int runs = 0;
+		runs = inIS.stackSize/this.inItemStack.stackSize;
+		return Math.min(runs, inFS.amount/this.getInFluid().amount);
+	}
+
 	public ItemStack getResult(ItemStack inIS, FluidStack inFS, int sealedTime)
 	{
 		ItemStack is = null;
 		if(outItemStack != null)
 		{
 			is = outItemStack.copy();
+			is.stackSize*= this.getnumberOfRuns(inIS, inFS);
 			return is;
 		}
 		if(!removesLiquid)
@@ -120,6 +128,10 @@ public class BarrelRecipe
 			if(!removesLiquid)
 			{
 				fs.amount = inFS.amount;
+			}
+			else
+			{
+				fs.amount*=outItemStack.stackSize;
 			}
 			return fs;
 		}
