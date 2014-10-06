@@ -29,7 +29,8 @@ public class EntityCreeperTFC extends EntityCreeper implements IInnateArmor
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		Entity entity = par1DamageSource.getEntity();
-		if(entity != null && entity instanceof EntityPlayer && ((EntityPlayer) entity).getHeldItem().getItem().equals(TFCItems.Stick)){
+		if(entity != null && entity instanceof EntityPlayer && 
+				((EntityPlayer) entity).getHeldItem() != null && ((EntityPlayer) entity).getHeldItem().getItem().equals(TFCItems.Stick)){
 			((EntityPlayer)entity).triggerAchievement(TFC_Achievements.achPokeCreeper);
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);
