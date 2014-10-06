@@ -280,13 +280,14 @@ public class EntityLivingHandler
 	@SubscribeEvent
 	public void onLivingDrop(LivingDropsEvent event)
 	{
+		boolean processed = false;
 		if(!event.entity.worldObj.isRemote && event.recentlyHit)
 		{
 			if(event.source.getSourceOfDamage() instanceof EntityPlayer)
 			{
 				EntityPlayer p = (EntityPlayer)event.source.getSourceOfDamage();
 				boolean foundFood = false;
-
+				processed = true;
 				ArrayList<EntityItem> drop = new ArrayList<EntityItem>();
 				for(EntityItem ei : event.drops)
 				{
@@ -318,6 +319,24 @@ public class EntityLivingHandler
 					TFC_Core.getSkillStats(p).increaseSkill(Global.SKILL_BUTCHERING, 1);
 				}
 			}
+		}
+
+		if(!processed)
+		{
+			ArrayList<EntityItem> drop = new ArrayList<EntityItem>();
+			for(EntityItem ei : event.drops)
+			{
+				if(ei.getEntityItem().getItem() instanceof IFood)
+				{
+
+				}
+				else
+				{
+					drop.add(ei);
+				}
+			}
+			event.drops.clear();
+			event.drops.addAll(drop);
 		}
 	}
 }
