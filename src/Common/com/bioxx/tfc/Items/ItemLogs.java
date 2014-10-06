@@ -170,6 +170,18 @@ public class ItemLogs extends ItemTerra
 					} else
 					{
 						int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
+						if (side == 0)
+							--y;
+						else if (side == 1)
+							++y;
+						else if (side == 2)
+							--z;
+						else if (side == 3)
+							++z;
+						else if (side == 4)
+							--x;
+						else if (side == 5)
+							++x;
 						if (!CreatePile(itemstack, entityplayer, world, x, y, z, side, dir)) {
 							return true;
 						}
