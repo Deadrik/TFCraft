@@ -1,0 +1,2450 @@
+﻿#nl_NL
+#This is the Dutch language configuration file, translated by joawsome1, Thorin, Killster550, EnTro, ChunkHunter
+
+
+
+
+
+generator.TFCDefault=TFC Standaard
+generator.TFCFlat=TFC Plat
+
+key.ToolMode=Wissel Gereedschap Functie
+key.LockTool=Gereedschap Locatie Vergrendelen
+
+effect.bleed=Bloeden
+
+#==============
+#= Spawn Eggs =
+#==============
+entity.squidTFC.name=Inktvis
+entity.cowTFC.name=Koe
+entity.wolfTFC.name=Wolf
+entity.bearTFC.name=Beer
+entity.deerTFC.name=Hert
+entity.chickenTFC.name=Kip
+entity.pigTFC.name=Varken
+entity.skeletonTFC.name=Skelet
+entity.zombieTFC.name=Zombie
+entity.spiderTFC.name=Spin
+entity.slimeTFC.name=Slijm
+entity.silverfishTFC.name=Zilvervis
+entity.ghastTFC.name=Ghast
+entity.caveSpiderTFC.name=Grotspin
+entity.blazeTFC.name=Blaze
+entity.endermanTFC.name=Enderman
+entity.pigZombieTFC.name=Zombie Varken
+entity.creeperTFC.name=Creeper
+entity.sheepTFC.name=Schaap
+entity.pheasantTFC.name=Fazant
+entity.horseTFC.name=Paard
+entity.irongolemTFC.name=IJzeren Golem
+entity.fishTFC.name=
+
+
+#==========
+#= Entity =
+#==========
+entity.notFamiliar=
+fishingRod.lineTension=
+fishingRod.lineSnap=
+fishingRod.bite=
+fishingRod.gotAway=
+
+#================
+#= Achievements =
+#================
+achievement.achLooseRock=Degelijk een kiezel
+achievement.achLooseRock.desc=Een kiezel oprapen
+achievement.achSmallOre=Geen steen laten liggen
+achievement.achSmallOre.desc=Een ertsklompje vinden
+achievement.achWildVegetable=Verzamelaar
+achievement.achWildVegetable.desc=Een wilde groente vinden
+achievement.achRutabaga=Stomme uien...
+achievement.achRutabaga.desc=Een koolraap vinden
+achievement.achQuern=Nog even doorzwoegen...
+achievement.achQuern.desc=Een handmolen gebruiken
+achievement.achStoneAge=Paleolitisch!
+achievement.achStoneAge.desc=Bewerk een steen tot een gereedschap om het stenen tijdperk te betreden
+achievement.achCopperAge=Chalcoliticum!
+achievement.achCopperAge.desc=Een metalen gereedschap gieten
+achievement.achSaw=Timmerman
+achievement.achSaw.desc=Een zaag maken
+achievement.achAnvil=Tijd voor de hamer
+achievement.achAnvil.desc=Een stenen aambeeld maken
+achievement.achPickaxe=Naar de mijnen (eindelijk!)
+achievement.achPickaxe.desc=Een pikhouweel maken
+achievement.achDiamond=DIAM - oh nee, niet dus
+achievement.achDiamond.desc=Een diamant vinden
+achievement.achLimonite=LI-MO-NIEEET!!!
+achievement.achLimonite.desc=Een stuk limoniet winnen
+achievement.achBronzeAge=Het Bronzen tijdperk
+achievement.achBronzeAge.desc=Een bronzen aambeeld maken om de bronze tijdperk te betreden
+achievement.achIronAge=Het IJzeren tijdperk
+achievement.achIronAge.desc=Verzamel een blok gesinterd ijzer om de ijzertijd te betreden
+achievement.achPokeCreeper=
+achievement.achPokeCreeper.desc=
+
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=
+commands.transferTamed.tooMany=
+commands.transferTamed.wrongOwner=
+commands.transferTamed.sameTarget=
+commands.transferTamed.display.incoming=
+commands.transferTamed.display.outgoing=
+commands.transferTamed.wrongSender=
+
+#========
+#= Food =
+#========
+item.MealGeneric.name=Maaltijd
+item.meal.terrible=Verschrikkelijk
+item.meal.poor=Slecht
+item.meal.decent=Redelijk
+item.meal.good=Goed
+item.meal.great=Geweldig
+item.meal.fantastic=Fantastisch
+
+#== Grains ==
+item.Barley Bread.name=Gerstebrood
+item.Corn Bread.name=Maïsbrood
+item.Oat Bread.name=Haverbrood
+item.Rice Bread.name=Rijstbrood
+item.Rye Bread.name=Roggebrood
+item.Wheat Bread.name=Tarwebrood
+
+item.Barley Whole.name=Gerst
+item.Maize Ear.name=Maïskolf
+item.Oat Whole.name=Haver
+item.Rice Whole.name=Rijst
+item.Rye Whole.name=Rogge
+item.Wheat Whole.name=Tarwe
+
+item.Barley Grain.name=Gerst
+item.Oat Grain.name=Haver
+item.Rice Grain.name=Rijst
+item.Rye Grain.name=Rogge
+item.Wheat Grain.name=Tarwe
+
+item.Barley Ground.name=Gerstemeel
+item.Cornmeal Ground.name=Maïsmeel
+item.Oat Ground.name=Havermeel
+item.Rice Ground.name=Rijstmeel
+item.Rye Ground.name=Roggemeel
+item.Wheat Ground.name=Tarwemeel
+
+item.Barley Dough.name=Gerstedeeg
+item.Cornmeal Dough.name=Maïsdeeg
+item.Oat Dough.name=Haverdeeg
+item.Rice Dough.name=Rijstdeeg
+item.Rye Dough.name=Roggedeeg
+item.Wheat Dough.name=Tarwedeeg
+
+item.Seeds Barley.name=Gerst Zaden
+item.Seeds Maize.name=Maïs Zaden
+item.Seeds Oat.name=Haver Zaden
+item.Seeds Rice.name=Rijst Zaden
+item.Seeds Rye.name=Rogge Zaden
+item.Seeds Wheat.name=Tarwe Zaden
+
+#== Fruit ==
+item.Green Apple.name=Groene Appel
+item.Red Apple.name=Rode Appel
+item.Banana.name=Banaan
+item.Cherry.name=Kers
+item.Lemon.name=Citroen
+item.Olive.name=Olijf
+item.Orange.name=Sinaasappel
+item.Peach.name=Perzik
+item.Plum.name=Pruim
+
+item.FruitSapling.Green Apple.name=Groene Appelboom
+item.FruitSapling.Red Apple.name=Rode Appelboom
+item.FruitSapling.Banana.name=Bananenboom
+item.FruitSapling.Cherry.name=Kersenboom
+item.FruitSapling.Lemon.name=Citroenboom
+item.FruitSapling.Olive.name=Olijfboom
+item.FruitSapling.Orange.name=Sinaasappelboom
+item.FruitSapling.Peach.name=Perzikboom
+item.FruitSapling.Plum.name=Pruimenboom
+
+#=== Berry Bushes ===
+tile.BerryBush.Blackberry.name=Bramenstruik
+tile.BerryBush.Blueberry.name=Bosbessenstruik
+tile.BerryBush.Bunchberry.name=Kornoeljestruik
+tile.BerryBush.Cloudberry.name=Kruipbramenstruik
+tile.BerryBush.Cranberry.name=Veenbessenstruik
+tile.BerryBush.Elderberry.name=Vlierbessenstruik
+tile.BerryBush.Gooseberry.name=Kruisbessenstruik
+tile.BerryBush.Raspberry.name=Frambozenstruik
+tile.BerryBush.Snowberry.name=Sneeuwbessenstruik
+tile.BerryBush.Strawberry.name=Aardbeienstruik
+tile.BerryBush.Wintergreen.name=Bergtheebessenstruik
+
+item.Blackberry.name=Braam
+item.Blueberry.name=Bosbes
+item.Bunchberry.name=Kornoeljebes
+item.Cloudberry.name=Kruipbraam
+item.Cranberry.name=Veenbes
+item.Elderberry.name=Vlierbes
+item.Gooseberry.name=Kruisbes
+item.Raspberry.name=Framboos
+item.Snowberry.name=Sneeuwbes
+item.Strawberry.name=Aardbei
+item.Wintergreen Berry.name=Bergtheebes
+
+item.Blackberry Leaf.name=Braam Blad
+item.Blueberry Leaf.name=Bosbes Blad
+item.Bunchberry Leaf.name=Kornoeljebes Blad
+item.Cloudberry Leaf.name=Kruipbraam Blad
+item.Cranberry Leaf.name=Veenbes Blad
+item.Elderberry Leaf.name=Vlierbes Blad
+item.Gooseberry Leaf.name=Kruisbes Blad
+item.Raspberry Leaf.name=Framboos Blad
+item.Snowberry Leaf.name=Sneeuwbes Blad
+item.Strawberry Leaf.name=Aardbei Blad
+item.Wintergreen Leaf.name=Bergtheebes Blad
+
+#== Protein ==
+item.Beef.name=Rund
+item.Calamari.name=Rauwe Inktvis
+item.egg.name=Ei
+item.Fish.name=Vis
+item.Mutton.name=Schapenvlees
+item.Porkchop.name=Varkensvlees
+item.Chicken.name=Kip
+item.Venison.name=Hertenvlees
+item.HorseMeat.name=Paardenvlees
+item.Egg Cooked.name=Gekookt Ei
+
+item.Soybeans.name=Sojabonen
+item.Seeds Soybean.name=Soja Zaden
+
+#== Dairy ==
+item.Cheese.name=Kaas
+
+#== Vegetables ==
+item.Green Bell Pepper.name=Groene Paprika
+item.Red Bell Pepper.name=Rode Paprika
+item.Yellow Bell Pepper.name=Gele Paprika
+item.Cabbage.name=Kool
+item.Carrot.name=Wortel
+item.Garlic.name=Knoflook
+item.Greenbeans.name=Groene Bonen
+item.Onion.name=Ui
+item.Potato.name=Aardappel
+item.Rutabaga.name=Koolraap
+item.Squash.name=Squash
+item.Tomato.name=Tomaat
+
+item.Seeds Red Bell Pepper.name=Rode Paprika Zaden
+item.Seeds Yellow Bell Pepper.name=Gele Paprika Zaden
+item.Seeds Cabbage.name=Kool Zaden
+item.Seeds Carrot.name=Wortel Zaden
+item.Seeds Garlic.name=Knoflook Zaden
+item.Seeds Greenbean.name=Groene Bonen Zaden
+item.Seeds Onion.name=Uien Zaden
+item.Seeds Potato.name=Aardappel Zaden
+item.Seeds Rutabaga.name=Koolraap Zaden
+item.Seeds Squash.name=Squash Zaden
+item.Seeds Tomato.name=Tomaten Zaden
+
+#== Alcohol ==
+item.Glass Bottle.name=
+item.Beer.name=Bier
+item.Cider.name=Cider
+item.Rum.name=Rum
+item.RyeWhiskey.name=Rogge Whiskey
+item.Sake.name=Sake
+item.Vodka.name=Vodka
+item.Whiskey.name=Whiskey
+item.CornWhiskey.name=
+
+#===========
+#= Pottery =
+#===========
+item.Clay.Clay.name=Klei
+item.Clay.Fire Clay.name=Gebakken Klei
+
+item.clay.clayflatlight.name=Platte Lichte Klei
+item.clay.clayflatdark.name=Platte Donkere Klei
+item.clay.clayflatfire.name=Platte Vuurklei
+item.clay.clayflatdarkfire.name=Platte Donkere Vuurklei
+
+item.Jug.Clay Jug.name=Kleikruik
+item.Jug.Ceramic Jug.name=Keramische Kruik
+item.Jug.Water Jug.name=Waterkruik
+
+item.Pot.Clay Pot.name=Kleipot
+item.Pot.Ceramic Pot.name=Keramische Pot
+
+item.Small Vessel.Clay Vessel.name=Kleivaas
+item.Small Vessel.Ceramic Vessel.name=Keramische Vaas
+
+item.Large Vessel.Clay Vessel [Large].name=Klei Vaas [Groot]
+item.Large Vessel.Ceramic Vessel [Large].name=Ceramische Vaas [Groot]
+
+item.Mold.Clay Mold.name=Klei mal
+item.Mold.Ceramic Mold.name=Keramieken mal
+
+item.Axe Mold.Clay Mold Axe.name=Bijlmal klei
+item.Axe Mold.Ceramic Mold Axe.name=Bijlmal
+item.Axe Mold.Ceramic Mold Axe Copper.name=Bijlmal (Koper)
+item.Axe Mold.Ceramic Mold Axe Bronze.name=Bijlmal (Brons)
+item.Axe Mold.Ceramic Mold Axe Black Bronze.name=Bijlmal (Zwart Brons)
+item.Axe Mold.Ceramic Mold Axe Bismuth Bronze.name=Bijlmal (Bismut Brons)
+
+item.Chisel Mold.Clay Mold Chisel.name=Beitelmal Klei
+item.Chisel Mold.Ceramic Mold Chisel.name=Beitelmal
+item.Chisel Mold.Ceramic Mold Chisel Copper.name=Beitelmal (Koper)
+item.Chisel Mold.Ceramic Mold Chisel Bronze.name=Beitelmal (Brons)
+item.Chisel Mold.Ceramic Mold Chisel Black Bronze.name=Beitelmal (Zwart Brons)
+item.Chisel Mold.Ceramic Mold Chisel Bismuth Bronze.name=Beitelmal (Bismut Brons)
+
+item.Hammer Mold.Clay Mold Hammer.name=Hamermal Klei
+item.Hammer Mold.Ceramic Mold Hammer.name=Hamermal
+item.Hammer Mold.Ceramic Mold Hammer Copper.name=Hamermal (Koper)
+item.Hammer Mold.Ceramic Mold Hammer Bronze.name=Hamermal (Brons)
+item.Hammer Mold.Ceramic Mold Hammer Black Bronze.name=Hamermal (Zwart Brons)
+item.Hammer Mold.Ceramic Mold Hammer Bismuth Bronze.name=Hamermal (Bismut Brons)
+
+item.Hoe Mold.Clay Mold Hoe.name=Schoffelmal Klei
+item.Hoe Mold.Ceramic Mold Hoe.name=Schoffelmal
+item.Hoe Mold.Ceramic Mold Hoe Copper.name=Schoffelmal (Koper)
+item.Hoe Mold.Ceramic Mold Hoe Bronze.name=Schoffelmal (Brons)
+item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=Schoffelmal (Zwart Brons)
+item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=Schoffelmal (Bismut Brons)
+
+item.Knife Mold.Clay Mold Knife.name=Mesmal Klei
+item.Knife Mold.Ceramic Mold Knife.name=Mesmal
+item.Knife Mold.Ceramic Mold Knife Copper.name=Mesmal (Koper)
+item.Knife Mold.Ceramic Mold Knife Bronze.name=Mesmal (Brons)
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=Mesmal (Zwart Brons)
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=Mesmal (Bismut Brons)
+
+item.Javelin Mold.Clay Mold Javelin.name=Kleien Speerpunt Mal
+item.Javelin Mold.Ceramic Mold Javelin.name=Speerpunt Mal
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=Speerpunt Mal (Koper)
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=Speerpunt Mal (Brons)
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=Speerpunt Mal (Zwart Brons)
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=Speerpunt Mal (Bismut Brons)
+
+item.Mace Mold.Clay Mold Mace.name=Kleien Strijdknots Mal
+item.Mace Mold.Ceramic Mold Mace.name=Strijdknots Mal
+item.Mace Mold.Ceramic Mold Mace Copper.name=Strijdknots Mal (Koper)
+item.Mace Mold.Ceramic Mold Mace Bronze.name=Strijdknots Mal (Brons)
+item.Mace Mold.Ceramic Mold Mace Black Bronze.name=Strijdknots Mal (Zwart Brons)
+item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=Strijdknots Mal (Bismut Brons)
+
+item.Pick Mold.Clay Mold Pick.name=Kleien Pikhouweel Mal
+item.Pick Mold.Ceramic Mold Pick.name=Pickhouweel Mal
+item.Pick Mold.Ceramic Mold Pick Copper.name=Pickhouweel Mal (Koper)
+item.Pick Mold.Ceramic Mold Pick Bronze.name=Pickhouweel Mal (Brons)
+item.Pick Mold.Ceramic Mold Pick Black Bronze.name=Pickhouweel Mal (Zwart Brons)
+item.Pick Mold.Ceramic Mold Pick Bismuth Bronze.name=Pickhouweel Mal (Bismut Brons)
+
+item.ProPick Mold.Clay Mold ProPick.name=Kleien Mijnonderzoeker's Houweel Mal
+item.ProPick Mold.Ceramic Mold ProPick.name=Mijnonderzoeker's Houweel Mal
+item.ProPick Mold.Ceramic Mold ProPick Copper.name=Mijnonderzoeker's Houweel Mal (Koper)
+item.ProPick Mold.Ceramic Mold ProPick Bronze.name=Mijnonderzoeker's Houweel Mal (Brons)
+item.ProPick Mold.Ceramic Mold ProPick Black Bronze.name=Mijnonderzoeker's Houweel Mal (Zwart Brons)
+item.ProPick Mold.Ceramic Mold ProPick Bismuth Bronze.name=Mijnonderzoeker's Houweel Mal (Bismut Brons)
+
+item.Saw Mold.Clay Mold Saw.name=Kleien Zaag Mal
+item.Saw Mold.Ceramic Mold Saw.name=Zaag Mal
+item.Saw Mold.Ceramic Mold Saw Copper.name=Zaag Mal (Koper)
+item.Saw Mold.Ceramic Mold Saw Bronze.name=Zaag Mal (Brons)
+item.Saw Mold.Ceramic Mold Saw Black Bronze.name=Zaag Mal (Zwart Brons)
+item.Saw Mold.Ceramic Mold Saw Bismuth Bronze.name=Zaag Mal (Bismut Brons)
+
+item.Scythe Mold.Clay Mold Scythe.name=Kleien Zeis Mal
+item.Scythe Mold.Ceramic Mold Scythe.name=Zeis Mal
+item.Scythe Mold.Ceramic Mold Scythe Copper.name=Zeis Mal (Koper)
+item.Scythe Mold.Ceramic Mold Scythe Bronze.name=Zeis Mal (Brons)
+item.Scythe Mold.Ceramic Mold Scythe Black Bronze.name=Zeis Mal (Zwart Brons)
+item.Scythe Mold.Ceramic Mold Scythe Bismuth Bronze.name=Zeis Mal (Bismut Brons)
+
+item.Shovel Mold.Clay Mold Shovel.name=Kleien Schep Mal
+item.Shovel Mold.Ceramic Mold Shovel.name=Schep Mal
+item.Shovel Mold.Ceramic Mold Shovel Copper.name=Schep Mal (Koper)
+item.Shovel Mold.Ceramic Mold Shovel Bronze.name=Schep Mal (Brons)
+item.Shovel Mold.Ceramic Mold Shovel Black Bronze.name=Schep Mal (Zwart Brons)
+item.Shovel Mold.Ceramic Mold Shovel Bismuth Bronze.name=Schep Mal (Bismut Brons)
+
+item.Sword Mold.Clay Mold Sword.name=Kleien Zwaard Mal
+item.Sword Mold.Ceramic Mold Sword.name=Zwaard Mal
+item.Sword Mold.Ceramic Mold Sword Copper.name=Zwaard Mal (Koper)
+item.Sword Mold.Ceramic Mold Sword Bronze.name=Zwaard Mal (Brons)
+item.Sword Mold.Ceramic Mold Sword Black Bronze.name=Zwaard Mal (Zwart Brons)
+item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=Zwaard Mal (Bismut Brons)
+
+item.Spindle.name=Spil
+item.Spindle Head.Clay Spindle.name=Kleien Spil
+item.Spindle Head.Spindle Head.name=Spil Hoofd
+
+item.Fire Brick.Fire Brick.name=Baksteen
+item.Fire Brick.Clay Fire Brick.name=Baksteen Klei
+tile.FireBrick.name=Baksteen Blok
+
+#= Gems =
+item.Agate.Chipped.name=Afgebroken Agaat
+item.Amethyst.Chipped.name=Afgebroken Amethist
+item.Beryl.Chipped.name=Afgebroken Beril
+item.Diamond.Chipped.name=Agebroken Diamant
+item.Emerald.Chipped.name=Afgebroken Smaragd
+item.Garnet.Chipped.name=Afgebroken Granaat
+item.Jade.Chipped.name=Afgebroken Jade
+item.Jasper.Chipped.name=Afgebroken Jaspis
+item.Opal.Chipped.name=Afgebroken Opaal
+item.Ruby.Chipped.name=Afgebroken Robijn
+item.Sapphire.Chipped.name=Afgebroken Saffier
+item.Topaz.Chipped.name=Afgebroken Topaas
+item.Tourmaline.Chipped.name=Afgebroken Toermalijn
+
+item.Agate.Flawed.name=Ontsierde Agaat
+item.Amethyst.Flawed.name=Ontsierde Amethist
+item.Beryl.Flawed.name=Ontsierde Beril
+item.Diamond.Flawed.name=Ontsierde Diamant
+item.Emerald.Flawed.name=Ontsierde Smaragd
+item.Garnet.Flawed.name=Ontsierde Granaat
+item.Jade.Flawed.name=Ontsierde Jade
+item.Jasper.Flawed.name=Ontsierde Jaspis
+item.Opal.Flawed.name=Ontsierde Opaal
+item.Ruby.Flawed.name=Ontsierde Ruby
+item.Sapphire.Flawed.name=Ontsierde Saffier
+item.Topaz.Flawed.name=Ontsierde Topaas
+item.Tourmaline.Flawed.name=Ontsierde Toermalijn
+
+item.Agate.Normal.name=Agaat
+item.Amethyst.Normal.name=Amethist
+item.Beryl.Normal.name=Beril
+item.Diamond.Normal.name=Diamant
+item.Emerald.Normal.name=Smaragd
+item.Garnet.Normal.name=Granaat
+item.Jade.Normal.name=Jade
+item.Jasper.Normal.name=Jaspis
+item.Opal.Normal.name=Opaal
+item.Ruby.Normal.name=Robijn
+item.Sapphire.Normal.name=Saffier
+item.Topaz.Normal.name=Topaas
+item.Tourmaline.Normal.name=Toermalijn
+
+item.Agate.Flawless.name=Foutloze Agaat
+item.Amethyst.Flawless.name=Foutloze Amethist
+item.Beryl.Flawless.name=Foutloze Beril
+item.Diamond.Flawless.name=Foutloze Diamant
+item.Emerald.Flawless.name=Foutloze Smaragd
+item.Garnet.Flawless.name=Foutloze Granaat
+item.Jade.Flawless.name=Foutloze Jade
+item.Jasper.Flawless.name=Foutloze Jaspis
+item.Opal.Flawless.name=Foutloze Opaal
+item.Ruby.Flawless.name=Foutloze Robijn
+item.Sapphire.Flawless.name=Foutloze Saffier
+item.Topaz.Flawless.name=Foutloze Topaas
+item.Tourmaline.Flawless.name=Foutloze Toermalijn
+
+item.Agate.Exquisite.name=Perfecte Agaat
+item.Amethyst.Exquisite.name=Perfecte Amethist
+item.Beryl.Exquisite.name=Perfecte Beril
+item.Diamond.Exquisite.name=Perfecte Diamant
+item.Emerald.Exquisite.name=Perfecte Smaragd
+item.Garnet.Exquisite.name=Perfecte Granaat
+item.Jade.Exquisite.name=Perfecte Jade
+item.Jasper.Exquisite.name=Perfecte Jaspis
+item.Opal.Exquisite.name=Perfecte Opaal
+item.Ruby.Exquisite.name=Perfecte Robijn
+item.Sapphire.Exquisite.name=Perfecte Saffier
+item.Topaz.Exquisite.name=Perfecte Topaas
+item.Tourmaline.Exquisite.name=Perfecte Toermalijn
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.black.name=Zwarte Kleurstof
+item.dyePowder.blue.name=Blauwe Kleurstof
+item.dyePowder.brown.name=Bruine Kleurstof
+item.dyePowder.cyan.name=Cyaan Kleurstof
+item.dyePowder.gray.name=Grijze Kleurstof
+item.dyePowder.green.name=Donker Groene Kleurstof
+item.dyePowder.lightBlue.name=Licht Blauwe Kleurstof
+item.dyePowder.lime.name=Limoen Groene Kleurstof
+item.dyePowder.magenta.name=Magenta Kleurstof
+item.dyePowder.orange.name=Oranje Kleurstof
+item.dyePowder.pink.name=Roze Kleurstof
+item.dyePowder.purple.name=Paarse Kleurstof
+item.dyePowder.red.name=Rode Kleurstof
+item.dyePowder.silver.name=Zilvere Kleurstof
+item.dyePowder.white.name=Witte Kleurstof
+item.dyePowder.yellow.name=Gele Kleurstof
+
+item.Coke.name=Cokes
+item.Powder.Flux.name=Smeltmiddel
+item.Powder.Graphite Powder.name=Grafiet Poeder
+item.Powder.Hematite Powder.name=Hematiet Poeder
+item.Powder.Kaolinite Powder.name=Kaolinite Poeder
+item.Powder.Lapis Lazuli Powder.name=Lapis Lazuli Poeder
+item.Powder.Limonite Powder.name=Limoniet Poeder
+item.Powder.Malachite Powder.name=Malachiet Poeder
+item.Powder.Salt.name=Zout
+item.Powder.Saltpeter Powder.name=Salpeter Poeder
+item.Powder.Sulfur Powder.name=Zwavel Poeder
+
+#=========
+#= Stone =
+#=========
+#== Stone Items ==
+item.LooseRock.Andesite.name=Andesiet Kiezel
+item.LooseRock.Basalt.name=Bazalt Kiezel
+item.LooseRock.Chalk.name=Krijt Kiezel
+item.LooseRock.Chert.name=Chert Kiezel
+item.LooseRock.Claystone.name=Kleisteen Kiezel
+item.LooseRock.Conglomerate.name=Conglomeraat Kiezel
+item.LooseRock.Dacite.name=Daciet Kiezel
+item.LooseRock.Diorite.name=Dioriet Kiezel
+item.LooseRock.Dolomite.name=Dolomiet Kiezel
+item.LooseRock.Gabbro.name=Gabbro Kiezel
+item.LooseRock.Gneiss.name=Gneis Kiezel
+item.LooseRock.Granite.name=Graniet Kiezel
+item.LooseRock.Limestone.name=Kalksteen Kiezel
+item.LooseRock.Marble.name=Marmer Kiezel
+item.LooseRock.Phyllite.name=Fylliet Kiezel
+item.LooseRock.Quartzite.name=Kwartsiet Kiezel
+item.LooseRock.Rhyolite.name=Rhyoliet Kiezel
+item.LooseRock.Rock Salt.name=Steenzout Kiezel
+item.LooseRock.Schist.name=Schilfersteen Kiezel
+item.LooseRock.Shale.name=Schalie Kiezel
+item.LooseRock.Slate.name=Lei Kiezel
+
+item.ItemStoneBrick.Andesite.name=Andesiet Baksteen
+item.ItemStoneBrick.Basalt.name=Bazalt Baksteen
+item.ItemStoneBrick.Chalk.name=Krijt Baksteen
+item.ItemStoneBrick.Chert.name=Chert Baksteen
+item.ItemStoneBrick.Claystone.name=Kleisteen Baksteen
+item.ItemStoneBrick.Conglomerate.name=Conglomeraat Baksteen
+item.ItemStoneBrick.Dacite.name=Daciet Baksteen
+item.ItemStoneBrick.Diorite.name=Dioriet Baksteen
+item.ItemStoneBrick.Dolomite.name=Dolomiet Baksteen
+item.ItemStoneBrick.Gabbro.name=Gabbro Baksteen
+item.ItemStoneBrick.Gneiss.name=Gneiss Baksteen
+item.ItemStoneBrick.Granite.name=Graniet Baksteen
+item.ItemStoneBrick.Limestone.name=Kalksteen Baksteen
+item.ItemStoneBrick.Marble.name=Marmer Baksteen
+item.ItemStoneBrick.Phyllite.name=Fylliet Baksteen
+item.ItemStoneBrick.Quartzite.name=Kwartsiet Baksteen
+item.ItemStoneBrick.Rhyolite.name=Rhyoliet Baksteen
+item.ItemStoneBrick.Rock Salt.name=Steenzout Baksteen
+item.ItemStoneBrick.Schist.name=Schilfersteen Baksteen
+item.ItemStoneBrick.Shale.name=Schalie Baksteen
+item.ItemStoneBrick.Slate.name=Lei Baksteen
+
+item.FlatRock.Andesite.name=Andesiet Steen
+item.FlatRock.Basalt.name=Bazalt Steen
+item.FlatRock.Chalk.name=Krijt Steen
+item.FlatRock.Chert.name=Chert Steen
+item.FlatRock.Claystone.name=Kleisteen Steen
+item.FlatRock.Conglomerate.name=Conglomeraat Steen
+item.FlatRock.Dacite.name=Daciet Steen
+item.FlatRock.Diorite.name=Dioriet Steen
+item.FlatRock.Dolomite.name=Dolomiet Steen
+item.FlatRock.Gabbro.name=Gabbro Steen
+item.FlatRock.Gneiss.name=Gneiss Steen
+item.FlatRock.Granite.name=Graniet Steen
+item.FlatRock.Limestone.name=Kalksteen Steen
+item.FlatRock.Marble.name=Marmer Steen
+item.FlatRock.Phyllite.name=Fylliet Steen
+item.FlatRock.Quartzite.name=Kwartsiet Steen
+item.FlatRock.Rhyolite.name=Rhyoliet Steen
+item.FlatRock.Rock Salt.name=Steenzout Steen
+item.FlatRock.Schist.name=Schilfersteen Steen
+item.FlatRock.Shale.name=Schalie Steen
+item.FlatRock.Slate=Lei Steen
+
+#== Stone Blocks ==
+tile.WallCobble.Andesite.name=Andesiet Keistenen Muur
+tile.WallCobble.Basalt.name=Bazalt Keistenen Muur
+tile.WallCobble.Chalk.name=Krijt Keistenen Muur
+tile.WallCobble.Chert.name=Chert Keistenen Muur
+tile.WallCobble.Claystone.name=Claystone Keistenen Muur
+tile.WallCobble.Conglomerate.name=Conglomeraat Keistenen Muur
+tile.WallCobble.Dacite.name=Daciet Keistenen Muur
+tile.WallCobble.Diorite.name=Dioriet Keistenen Muur
+tile.WallCobble.Dolomite.name=Dolomiet Keistenen Muur
+tile.WallCobble.Gabbro.name=Gabbro Keistenen Muur
+tile.WallCobble.Gneiss.name=Gneiss Keistenen Muur
+tile.WallCobble.Granite.name=Graniet Keistenen Muur
+tile.WallCobble.Limestone.name=Kalksteen Keistenen Muur
+tile.WallCobble.Marble.name=Marmer Keistenen Muur
+tile.WallCobble.Phyllite.name=Fylliet Keistenen Muur
+tile.WallCobble.Quartzite.name=Kwartsiet Keistenen Muur
+tile.WallCobble.Rhyolite.name=Rhyoliet Keistenen Muur
+tile.WallCobble.Rock Salt.name=Steenzout Keistenen Muur
+tile.WallCobble.Schist.name=Schilfersteen Keistenen Muur
+tile.WallCobble.Shale.name=Schalie Keistenen Muur
+tile.WallCobble.Slate.name=Lei Keistenen Muur
+
+tile.WallRaw.Andesite.name=Andesiet Muur
+tile.WallRaw.Basalt.name=Bazalt Muur
+tile.WallRaw.Chalk.name=Krijt Muur
+tile.WallRaw.Chert.name=Chert Muur
+tile.WallRaw.Claystone.name=Kleisteen Muur
+tile.WallRaw.Conglomerate.name=Conglomeraat Muur
+tile.WallRaw.Dacite.name=Daciet Muur
+tile.WallRaw.Diorite.name=Dioriet Muur
+tile.WallRaw.Dolomite.name=Dolomiet Muur
+tile.WallRaw.Gabbro.name=Gabbro Muur
+tile.WallRaw.Gneiss.name=Gneiss Muur
+tile.WallRaw.Granite.name=Graniet Muur
+tile.WallRaw.Limestone.name=Kalksteen Muur
+tile.WallRaw.Marble.name=Marmeren Muur
+tile.WallRaw.Phyllite.name=Fylliet Muur
+tile.WallRaw.Quartzite.name=Kwartsiet Muur
+tile.WallRaw.Rhyolite.name=Rhyoliet Muur
+tile.WallRaw.Rock Salt.name=Steenzout Muur
+tile.WallRaw.Schist.name=Schilfersteen Muur
+tile.WallRaw.Shale.name=Schalie Muur
+tile.WallRaw.Slate.name=Lei Muur
+
+tile.WallBrick.Andesite.name=Andesiet Bakstenen Muur
+tile.WallBrick.Basalt.name=Bazalt Bakstenen Muur
+tile.WallBrick.Chalk.name=Krijt Bakstenen Muur
+tile.WallBrick.Chert.name=Chert Bakstenen Muur
+tile.WallBrick.Claystone.name=Kleisteen Bakstenen Muur
+tile.WallBrick.Conglomerate.name=Conglomeraat Bakstenen Muur
+tile.WallBrick.Dacite.name=Daciet Bakstenen Muur
+tile.WallBrick.Diorite.name=Dioriet Bakstenen Muur
+tile.WallBrick.Dolomite.name=Dolomiet Bakstenen Muur
+tile.WallBrick.Gabbro.name=Gabbro Bakstenen Muur
+tile.WallBrick.Gneiss.name=Gneiss Bakstenen Muur
+tile.WallBrick.Granite.name=Graniet Bakstenen Muur
+tile.WallBrick.Limestone.name=Kalksteen Bakstenen Muur
+tile.WallBrick.Marble.name=Marmer Bakstenen Muur
+tile.WallBrick.Phyllite.name=Fylliet Bakstenen Muur
+tile.WallBrick.Quartzite.name=Kwartsiet Bakstenen Muur
+tile.WallBrick.Rhyolite.name=Rhyoliet Bakstenen Muur
+tile.WallBrick.Rock Salt.name=Steenzout Bakstenen Muur
+tile.WallBrick.Schist.name=Schilfersteen Bakstenen Muur
+tile.WallBrick.Shale.name=Schalie Bakstenen Muur
+tile.WallBrick.Slate.name=Lei Bakstenen Muur
+
+tile.WallSmooth.Andesite.name=Andesiet Gladde Wand
+tile.WallSmooth.Basalt.name=Bazalt Gladde Wand
+tile.WallSmooth.Chalk.name=Krijt Gladde Wand
+tile.WallSmooth.Chert.name=Chert Gladde Wand
+tile.WallSmooth.Claystone.name=Kleisteen Gladde Wand
+tile.WallSmooth.Conglomerate.name=Conglomeraat Gladde Wand
+tile.WallSmooth.Dacite.name=Daciet Gladde Wand
+tile.WallSmooth.Diorite.name=Dioriet Gladde Wand
+tile.WallSmooth.Dolomite.name=Dolomiet Gladde Wand
+tile.WallSmooth.Gabbro.name=Gabbro Gladde Wand
+tile.WallSmooth.Gneiss.name=Gneiss Gladde Wand
+tile.WallSmooth.Granite.name=Graniet Gladde Wand
+tile.WallSmooth.Limestone.name=Kalksteen Gladde Wand
+tile.WallSmooth.Marble.name=Marmer Gladde Wand
+tile.WallSmooth.Phyllite.name=Fylliet Gladde Wand
+tile.WallSmooth.Quartzite.name=Kwartsiet Gladde Wand
+tile.WallSmooth.Rhyolite.name=Rhyoliet Gladde Wand
+tile.WallSmooth.Rock Salt.name=Steenzout Gladde Wand
+tile.WallSmooth.Schist.name=Schilfersteen Gladde Wand
+tile.WallSmooth.Shale.name=Schalie Gladde Wand
+tile.WallSmooth.Slate.name=Lei Gladde Wand
+
+tile.IgExRock.Andesite.name=Andesiet
+tile.IgExRock.Basalt.name=Bazalt
+tile.SedRock.Chalk.name=Krijt
+tile.SedRock.Chert.name=Chert
+tile.SedRock.Claystone.name=Kleisteen
+tile.SedRock.Conglomerate.name=Conglomeraat
+tile.IgExRock.Dacite.name=Daciet
+tile.IgInRock.Diorite.name=Dioriet
+tile.SedRock.Dolomite.name=Dolomiet
+tile.IgInRock.Gabbro.name=Gabbro
+tile.MMRock.Gneiss.name=Gneiss
+tile.IgInRock.Granite.name=Graniet
+tile.SedRock.Limestone.name=Kalksteen
+tile.MMRock.Marble.name=Marmer
+tile.MMRock.Phyllite.name=Fylliet
+tile.MMRock.Quartzite.name=Kwartsiet
+tile.IgExRock.Rhyolite.name=Rhyoliet
+tile.SedRock.Rock Salt.name=Steenzout
+tile.MMRock.Schist.name=Schilfersteen
+tile.SedRock.Shale.name=Schalie
+tile.MMRock.Slate.name=Lei
+
+tile.IgExRockCobble.Andesite.name=Andesiet Keisteen
+tile.IgExRockCobble.Basalt.name=Bazalt Keisteen
+tile.SedRockCobble.Chalk.name=Krijt Keisteen
+tile.SedRockCobble.Chert.name=Chert Keisteen
+tile.SedRockCobble.Claystone.name=Kleisteen Keisteen
+tile.SedRockCobble.Conglomerate.name=Conglomeraat Keisteen
+tile.IgExRockCobble.Dacite.name=Daciet Keisteen
+tile.IgInRockCobble.Diorite.name=Dioriet Keisteen
+tile.SedRockCobble.Dolomite.name=Dolomiet Keisteen
+tile.IgInRockCobble.Gabbro.name=Gabbro Keisteen
+tile.MMRockCobble.Gneiss.name=Gneiss Keisteen
+tile.IgInRockCobble.Granite.name=Graniet Keisteen
+tile.SedRockCobble.Limestone.name=Kalksteen Keisteen
+tile.MMRockCobble.Marble.name=Marmer Keisteen
+tile.MMRockCobble.Phyllite.name=Fylliet Keisteen
+tile.MMRockCobble.Quartzite.name=Kwartsiet Keisteen
+tile.IgExRockCobble.Rhyolite.name=Rhyoliet Keisteen
+tile.SedRockCobble.Rock Salt.name=Steenzout Keisteen
+tile.MMRockCobble.Schist.name=Schilfersteen Keisteen
+tile.SedRockCobble.Shale.name=Schalie Keisteen
+tile.MMRockCobble.Slate.name=Lei Keisteen
+
+tile.IgExRockSmooth.Andesite.name=Gladde Andesiet
+tile.IgExRockSmooth.Basalt.name=Gladde Bazalt
+tile.SedRockSmooth.Chalk.name=Gladde Krijt
+tile.SedRockSmooth.Chert.name=Gladde Chert
+tile.SedRockSmooth.Claystone.name=Gladde Kleisteen
+tile.SedRockSmooth.Conglomerate.name=Gladde Conglomeraat
+tile.IgExRockSmooth.Dacite.name=Gladde Daciet
+tile.IgInRockSmooth.Diorite.name=Gladde Dioriet
+tile.SedRockSmooth.Dolomite.name=Gladde Dolomiet
+tile.IgInRockSmooth.Gabbro.name=Gladde Gabbro
+tile.MMRockSmooth.Gneiss.name=Gladde Gneiss
+tile.IgInRockSmooth.Granite.name=Gladde Graniet
+tile.SedRockSmooth.Limestone.name=Gladde Kalksteen
+tile.MMRockSmooth.Marble.name=Gladde Marmer
+tile.MMRockSmooth.Phyllite.name=Gladde Fylliet
+tile.MMRockSmooth.Quartzite.name=Gladde Kwartsiet
+tile.IgExRockSmooth.Rhyolite.name=Gladde Rhyoliet
+tile.SedRockSmooth.Rock Salt.name=Gladde Steenzout
+tile.MMRockSmooth.Schist.name=Gladde Schilfersteen
+tile.SedRockSmooth.Shale.name=Gladde Schalie
+tile.MMRockSmooth.Slate.name=Gladde Lei
+
+tile.IgExRockBrick.Andesite.name=Andesiet Baksteen
+tile.IgExRockBrick.Basalt.name=Bazalt Baksteen
+tile.SedRockBrick.Chalk.name=Krijt Baksteen
+tile.SedRockBrick.Chert.name=Chert Baksteen
+tile.SedRockBrick.Claystone.name=Kleisteen Baksteen
+tile.SedRockBrick.Conglomerate.name=Conglomeraat Baksteen
+tile.IgExRockBrick.Dacite.name=Daciet Baksteen
+tile.IgInRockBrick.Diorite.name=Dioriet Baksteen
+tile.SedRockBrick.Dolomite.name=Dolomiet Baksteen
+tile.IgInRockBrick.Gabbro.name=Gabbro Baksteen
+tile.MMRockBrick.Gneiss.name=Gneiss Baksteen
+tile.IgInRockBrick.Granite.name=Graniet Baksteen
+tile.SedRockBrick.Limestone.name=Kalksteen Baksteen
+tile.MMRockBrick.Marble.name=Marmer Baksteen
+tile.MMRockBrick.Phyllite.name=Fylliet Baksteen
+tile.MMRockBrick.Quartzite.name=Kwartsiet Baksteen
+tile.IgExRockBrick.Rhyolite.name=Rhyoliet Baksteen
+tile.SedRockBrick.Rock Salt.name=Steenzout Baksteen
+tile.MMRockBrick.Schist.name=Schilfersteen Baksteen
+tile.SedRockBrick.Shale.name=Schalie Baksteen
+tile.MMRockBrick.Slate.name=Lei Baksteen
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Bituminous Coal.name=Bitumineuze Kolen
+item.Ore.Borax.name=Borax
+item.Ore.Cinnabar.name=Cinnabar
+item.Ore.Cryolite.name=Kryoliet
+item.Ore.Graphite.name=Graphiet
+item.Ore.Gypsum.name=Gips
+item.Ore.Jet.name=Jet
+item.Ore.Kaolinite.name=Kaoliniet
+item.Ore.Kimberlite.name=Kimberliet
+item.Ore.Lapis Lazuli.name=Azuursteen
+item.Ore.Lignite.name=Bruinkool
+item.Ore.Microcline.name=Microcline
+item.Ore.Olivine.name=Olivijn
+item.Ore.Petrified Wood.name=Versteend Hout
+item.Ore.Pitchblende.name=Pekblende
+item.Ore.Saltpeter.name=Salpeter
+item.Ore.Satinspar.name=Satijn spar
+item.Ore.Selenite.name=Seleniet
+item.Ore.Serpentine.name=Serpentijn
+item.Ore.Sulfur.name=Zwavel
+item.Ore.Sylvite.name=Sylviet
+
+item.Ore.Bismuthinite.name=Bismuthiniet
+item.Ore.Cassiterite.name=Cassiteriet
+item.Ore.Galena.name=Galena
+item.Ore.Garnierite.name=Garnieriet
+item.Ore.Hematite.name=Hematiet
+item.Ore.Limonite.name=Limoniet
+item.Ore.Magnetite.name=Magnetiet
+item.Ore.Malachite.name=Malachiet
+item.Ore.Native Copper.name=Inheemse Koper
+item.Ore.Native Gold.name=Inheemse Goud
+item.Ore.Native Platinum.name=Inheemse Platinum
+item.Ore.Native Silver.name=Inheemse Zilver
+item.Ore.Sphalerite.name=Sfaleriet
+item.Ore.Tetrahedrite.name=Tetrahedriet
+
+item.Ore.Rich Bismuthinite.name=Rijk Bishuthiniet
+item.Ore.Rich Cassiterite.name=Rijk Cassiteriet
+item.Ore.Rich Galena.name=Rijk Galena
+item.Ore.Rich Garnierite.name=Rijk Garnieriet
+item.Ore.Rich Hematite.name=Rijk Hematiet
+item.Ore.Rich Limonite.name=Rijk Limoniet
+item.Ore.Rich Magnetite.name=Rijk Magnetiet
+item.Ore.Rich Malachite.name=Rijk Malachiet
+item.Ore.Rich Native Copper.name=Rijk Inheemse Koper
+item.Ore.Rich Native Gold.name=Rijk Inheemse Goud
+item.Ore.Rich Native Platinum.name=Rijk Inheemse Platina
+item.Ore.Rich Native Silver.name=Rijk Inheemse Zilver
+item.Ore.Rich Sphalerite.name=Rijk Sfaleriet
+item.Ore.Rich Tetrahedrite.name=Rijk Tetrahedriet
+
+item.Ore.Poor Bismuthinite.name=Arm Bishuthiniet
+item.Ore.Poor Cassiterite.name=Arm Cassiteriet
+item.Ore.Poor Galena.name=Arm Galena
+item.Ore.Poor Garnierite.name=Arm Garnieriet
+item.Ore.Poor Hematite.name=Arm Hematiet
+item.Ore.Poor Limonite.name=Arm Limoniet
+item.Ore.Poor Magnetite.name=Arm Magnetiet
+item.Ore.Poor Malachite.name=Arm Malachiet
+item.Ore.Poor Native Copper.name=Arm Inheemse Koper
+item.Ore.Poor Native Gold.name=Arm Inheemse Goud
+item.Ore.Poor Native Platinum.name=Arm Inheemse Platina
+item.Ore.Poor Native Silver.name=Arm Inheemse Zilver
+item.Ore.Poor Sphalerite.name=Arm Sfaleriet
+item.Ore.Poor Tetrahedrite.name=Arm Tetrahedriet
+
+item.Small Ore.Bismuthinite.name=Bismuthiniet Klompje
+item.Small Ore.Cassiterite.name=Cassiteriet Klompje
+item.Small Ore.Galena.name=Galena Klompje
+item.Small Ore.Garnierite.name=Garnieriet Klompje
+item.Small Ore.Hematite.name=Hematiet Klompje
+item.Small Ore.Limonite.name=Limoniet Klompje
+item.Small Ore.Magnetite.name=Magnetiet Klompje
+item.Small Ore.Malachite.name=Malachiet Klompje
+item.Small Ore.Native Copper.name=Inheemse Koper Klompje
+item.Small Ore.Native Gold.name=Inheemse Goud Klompje
+item.Small Ore.Native Platinum.name=Inheemse Platina Klompje
+item.Small Ore.Native Silver.name=Inheemse Zilver Klompje
+item.Small Ore.Sphalerite.name=Sfaleriet Klompje
+item.Small Ore.Tetrahedrite.name=Tetrahedriet Klompje
+
+#== Ore Blocks ==
+tile.Ore.Bituminous Coal.name=Bitumineuze Kolen
+tile.Ore.Borax.name=Borax
+tile.Ore.Cinnabar.name=Cinnabar
+tile.Ore.Cryolite.name=Kryoliet
+tile.Ore.Graphite.name=Graphiet
+tile.Ore.Gypsum.name=Gips
+tile.Ore.Jet.name=Jet
+tile.Ore.Kaolinite.name=Kaoliniet
+tile.Ore.Kimberlite.name=Kimberliet
+tile.Ore.Lapis Lazuli.name=Azuursteen
+tile.Ore.Lignite.name=Bruinkool
+tile.Ore.Microcline.name=Microcline
+tile.Ore.Olivine.name=Olivijn
+tile.Ore.Petrified Wood.name=Versteend Hout
+tile.Ore.Pitchblende.name=Pekblende
+tile.Ore.Saltpeter.name=Salpeter
+tile.Ore.Satinspar.name=Satijn spar
+tile.Ore.Selenite.name=Seleniet
+tile.Ore.Serpentine.name=Serpentijn
+tile.Ore.Sulfur.name=Zwavel
+tile.Ore.Sylvite.name=Sylviet
+
+tile.Ore.Bismuthinite.name=Bismuthiniet
+tile.Ore.Cassiterite.name=Cassiteriet
+tile.Ore.Galena.name=Galena
+tile.Ore.Garnierite.name=Garnieriet
+tile.Ore.Hematite.name=Hematiet
+tile.Ore.Limonite.name=Limoniet
+tile.Ore.Magnetite.name=Magnetiet
+tile.Ore.Malachite.name=Malachiet
+tile.Ore.Native Copper.name=Inheemse Koper
+tile.Ore.Native Gold.name=Inheemse Goud
+tile.Ore.Native Platinum.name=Inheemse Platinum
+tile.Ore.Native Silver.name=Inheemse Zilver
+tile.Ore.Sphalerite.name=Sfaleriet
+tile.Ore.Tetrahedrite.name=Tetrahedriet
+
+#========
+#= Wood =
+#========
+#== Wood Items ==
+item.Log.Acacia.name=Acacia Stam
+item.Log.Ash.name=Essen Stam
+item.Log.Aspen.name=Espen Stam
+item.Log.Birch.name=Berken Stam
+item.Log.Chestnut.name=Kastanje Stam
+item.Log.Douglas Fir.name=Douglas Spar Stam
+item.Log.Hickory.name=Hickory Stam
+item.Log.Kapok.name=Kapok Stam
+item.Log.Maple.name=Esdoorn Stam
+item.Log.Oak.name=Eiken Stam
+item.Log.Pine.name=Dennen Stam
+item.Log.Sequoia.name=Sequoila Stam
+item.Log.Spruce.name=Sparren Stam
+item.Log.Sycamore.name=Ahornen Stam
+item.Log.White Cedar.name=Witte Cederen Stam
+item.Log.White Elm.name=Witte Iepen Stam
+item.Log.Willow.name=Wilgen Stam
+
+item.SinglePlank.Acacia.name=Acacia Plank
+item.SinglePlank.Ash.name=Essen Plank
+item.SinglePlank.Aspen.name=Espen Plank
+item.SinglePlank.Birch.name=Berken Plank
+item.SinglePlank.Chestnut.name=Kastanje Plank
+item.SinglePlank.Douglas Fir.name=Douglas Sparren Plank
+item.SinglePlank.Hickory.name=Hickory Plank
+item.SinglePlank.Kapok.name=Kapok Plank
+item.SinglePlank.Maple.name=Esdoorne Plank
+item.SinglePlank.Oak.name=Eiken Plank
+item.SinglePlank.Pine.name=Dennen Plank
+item.SinglePlank.Sequoia.name=Sequiola Plank
+item.SinglePlank.Spruce.name=Sparren Plank
+item.SinglePlank.Sycamore.name=Ahornen Plank
+item.SinglePlank.White Cedar.name=Witte Cederen Plank
+item.SinglePlank.White Elm.name=Witte Iepen Plank
+item.SinglePlank.Willow.name=Wilgen Plank
+
+item.Acacia Door.name=Acacia Deur
+item.Ash Door.name=Essen Deur
+item.Aspen Door.name=Espen Deur
+item.Birch Door.name=Berken Deur
+item.Chestnut Door.name=Kastanje Deur
+item.Douglas Fir Door.name=Douglas Sparren Deur
+item.Hickory Door.name=Hickory Deur
+item.Kapok Door.name=Kapok Deur
+item.Maple Door.name=Esdoorn Deur
+item.Oak Door.name=Eiken Deur
+item.Pine Door.name=Dennen Deur
+item.Sequoia Door.name=Sequoila Deur
+item.Spruce Door.name=Sparren Deur
+item.Sycamore Door.name=Ahornen Deur
+item.White Cedar Door.name=Witte Cederen Deur
+item.White Elm Door.name=Witte Iepen Deur
+item.Willow Door.name=Wilgen Deur
+
+item.Barrel.Acacia.name=Acacia Ton
+item.Barrel.Ash.name=Essen Ton
+item.Barrel.Aspen.name=Espen Ton
+item.Barrel.Birch.name=Berken Ton
+item.Barrel.Chestnut.name=Kastanje Ton
+item.Barrel.Douglas Fir.name=Douglas Sparren Ton
+item.Barrel.Hickory.name=Hickory Ton
+item.Barrel.Kapok.name=Kapok Ton
+item.Barrel.Maple.name=Esdoorn Ton
+item.Barrel.Oak.name=Eiken Ton
+item.Barrel.Pine.name=Dennen Ton
+item.Barrel.Sequoia.name=Sequoila Ton
+item.Barrel.Spruce.name=Sparren Ton
+item.Barrel.Sycamore.name=Ahornen Ton
+item.Barrel.White Cedar.name=Witte Cederen Ton
+item.Barrel.White Elm.name=Witte Iepen Ton
+item.Barrel.Willow.name=Wilgen Ton
+
+item.Loom.Acacia.name=
+item.Loom.Ash.name=
+item.Loom.Aspen.name=
+item.Loom.Birch.name=
+item.Loom.Chestnut.name=
+item.Loom.Douglas Fir.name=
+item.Loom.Hickory.name=
+item.Loom.Kapok.name=
+item.Loom.Maple.name=
+item.Loom.Oak.name=
+item.Loom.Pine.name=
+item.Loom.Sequoia.name=
+item.Loom.Spruce.name=
+item.Loom.Sycamore.name=
+item.Loom.White Cedar.name=
+item.Loom.White Elm.name=
+item.Loom.Willow.name=
+
+#== Wood Blocks ==
+tile.log.Acacia.name=Acacia Stam
+tile.log2.Acacia.name=Acacia Stam
+tile.log.Ash.name=Essen Stam
+tile.log.Aspen.name=Espen Stam
+tile.log.Birch.name=Berken Stam
+tile.log.Chestnut.name=Kastanje Stam
+tile.log.Douglas Fir.name=Douglas Spar Stam
+tile.log.Hickory.name=Hickory Stam
+tile.log.Kapok.name=Kapok Stam
+tile.log.Maple.name=Esdoorn Stam
+tile.log.Oak.name=Eiken Stam
+tile.log.Pine.name=Dennen Stam
+tile.log.Sequoia.name=Sequoila Stam
+tile.log.Spruce.name=Sparren Stam
+tile.log.Sycamore.name=Ahornen Stam
+tile.log.White Cedar.name=Witte Cederen Stam
+tile.log.White Elm.name=Witte Iepen Stam
+tile.log.Willow.name=Wilgen Stam
+
+tile.WoodVert2.Acacia.name=Acacia Stam
+tile.WoodVert.Ash.name=Essen Stam
+tile.WoodVert.Aspen.name=Espen Stam
+tile.WoodVert.Birch.name=Berken Stam
+tile.WoodVert.Chestnut.name=Kastanje Stam
+tile.WoodVert.Douglas Fir.name=Douglas Spar Stam
+tile.WoodVert.Hickory.name=Hickory Stam
+tile.WoodVert.Kapok.name=Kapok Stam
+tile.WoodVert.Maple.name=Esdoorn Stam
+tile.WoodVert.Oak.name=Eiken Stam
+tile.WoodVert.Pine.name=Dennen Stam
+tile.WoodVert.Sequoia.name=Sequoila Stam
+tile.WoodVert.Spruce.name=Sparren Stam
+tile.WoodVert.Sycamore.name=Ahornen Stam
+tile.WoodVert.White Cedar.name=Witte Cederen Stam
+tile.WoodVert.White Elm.name=Witte Iepen Stam
+tile.WoodVert.Willow.name=Wilgen Stam
+
+tile.WoodHoriz3.Acacia.name=Acacia Stam
+tile.WoodHoriz.Ash.name=Essen Stam
+tile.WoodHoriz.Aspen.name=Espen Stam
+tile.WoodHoriz.Birch.name=Berken Stam
+tile.WoodHoriz.Chestnut.name=Kastanje Stam
+tile.WoodHoriz.Douglas Fir.name=Douglas Spar Stam
+tile.WoodHoriz.Hickory.name=Hickory Stam
+tile.WoodHoriz2.Kapok.name=Kapok Stam
+tile.WoodHoriz.Maple.name=Esdoorn Stam
+tile.WoodHoriz.Oak.name=Eiken Stam
+tile.WoodHoriz2.Pine.name=Dennen Stam
+tile.WoodHoriz2.Sequoia.name=Sequoila Stam
+tile.WoodHoriz2.Spruce.name=Sparren Stam
+tile.WoodHoriz2.Sycamore.name=Ahornen Stam
+tile.WoodHoriz2.White Cedar.name=Witte Cederen Stam
+tile.WoodHoriz2.White Elm.name=Witte Iepen Stam
+tile.WoodHoriz2.Willow.name=Wilgen Stam
+
+tile.sapling2.Acacia.name=Acacia Stek
+tile.sapling.Ash.name=Es Stek
+tile.sapling.Aspen.name=Espen Stek
+tile.sapling.Birch.name=Berken Stek
+tile.sapling.Chestnut.name=Kastanje Stek
+tile.sapling.Douglas Fir.name=Douglas Spar Stek
+tile.sapling.Hickory.name=Hickory Stek
+tile.sapling.Kapok.name=Kapok Stek
+tile.sapling.Maple.name=Esdoorn Stek
+tile.sapling.Oak.name=Eiken Stek
+tile.sapling.Pine.name=Dennen Stek
+tile.sapling.Sequoia.name=Sequoila Stek
+tile.sapling.Spruce.name=Sparren Stek
+tile.sapling.Sycamore.name=Sycamore Stek
+tile.sapling.White Cedar.name=Witte Ceder Stek
+tile.sapling.White Elm.name=Witte Iep Stek
+tile.sapling.Willow.name=Wilgen Stek
+
+tile.leaves.Acacia.name=Acacia Bladeren
+tile.leaves.Ash.name=Es Bladeren
+tile.leaves.Aspen.name=Espen Bladeren
+tile.leaves.Birch.name=Berken Bladeren
+tile.leaves.Chestnut.name=Kastanje Bladeren
+tile.leaves.Douglas Fir.name=Douglas Spar Bladeren
+tile.leaves.Hickory.name=Hickory Bladeren
+tile.leaves.Kapok.name=Kapok Bladeren
+tile.leaves.Maple.name=Esdoorn Bladeren
+tile.leaves.Oak.name=Eiken Bladeren
+tile.leaves.Pine.name=Dennen Bladeren
+tile.leaves.Sequoia.name=Sequoila Bladeren
+tile.leaves.Spruce.name=Sparren Bladeren
+tile.leaves.Sycamore.name=Sycamore Bladeren
+tile.leaves.White Cedar.name=Witte Ceder Bladeren
+tile.leaves.White Elm.name=Witte Iep Bladeren
+tile.leaves.Willow.name=Wilgen Bladeren
+
+tile.wood2.Acacia.name=Acacia Planken
+tile.wood.Ash.name=Es Planken
+tile.wood.Aspen.name=Espen Planken
+tile.wood.Birch.name=Berken Planken
+tile.wood.Chestnut.name=Kastanje Planken
+tile.wood.Douglas Fir.name=Douglas Spar Planken
+tile.wood.Hickory.name=Hickory Planken
+tile.wood.Kapok.name=Kapok Planken
+tile.wood.Maple.name=Esdoorn Planken
+tile.wood.Oak.name=Eiken Planken
+tile.wood.Pine.name=Dennen Planken
+tile.wood.Sequoia.name=Sequoila Planken
+tile.wood.Spruce.name=Sparren Planken
+tile.wood.Sycamore.name=Sycamore Planken
+tile.wood.White Cedar.name=Witte Ceder Planken
+tile.wood.White Elm.name=Witte Iep Planken
+tile.wood.Willow.name=Wilgen Planken
+
+tile.Door Acacia.name=Acacia Deur
+tile.Door Ash.name=Essen Deur
+tile.Door Aspen.name=Espen Deur
+tile.Door Birch.name=Berken Deur
+tile.Door Chestnut.name=Kastanje Deur
+tile.Door Douglas Fir.name=Douglas Sparren Deur
+tile.Door Hickory.name=Hickory Deur
+tile.Door Kapok.name=Kapok Deur
+tile.Door Maple.name=Esdoorn Deur
+tile.Door Oak.name=Eiken Deur
+tile.Door Pine.name=Dennen Deur
+tile.Door Sequoia.name=Sequoila Deur
+tile.Door Spruce.name=Sparren Deur
+tile.Door Sycamore.name=Ahornen Deur
+tile.Door White Cedar.name=Witte Cederen Deur
+tile.Door White Elm.name=Witte Iepen Deur
+tile.Door Willow.name=Wilgen Deur
+
+tile.Barrel.Acacia.name=Acacia Ton
+tile.Barrel.Ash.name=Essen Ton
+tile.Barrel.Aspen.name=Espen Ton
+tile.Barrel.Birch.name=Berken Ton
+tile.Barrel.Chestnut.name=Kastanje Ton
+tile.Barrel.Douglas Fir.name=Douglas Sparren Ton
+tile.Barrel.Hickory.name=Hickory Ton
+tile.Barrel.Kapok.name=Kapok Ton
+tile.Barrel.Maple.name=Esdoorn Ton
+tile.Barrel.Oak.name=Eiken Ton
+tile.Barrel.Pine.name=Dennen Ton
+tile.Barrel.Sequoia.name=Sequoila Ton
+tile.Barrel.Spruce.name=Sparren Ton
+tile.Barrel.Sycamore.name=Ahornen Ton
+tile.Barrel.White Cedar.name=Witte Cederen Ton
+tile.Barrel.White Elm.name=Witte Iepen Ton
+tile.Barrel.Willow.name=Wilgen Ton
+
+tile.Loom.Acacia.name=
+tile.Loom.Ash.name=
+tile.Loom.Aspen.name=
+tile.Loom.Birch.name=
+tile.Loom.Chestnut.name=
+tile.Loom.Douglas Fir.name=
+tile.Loom.Hickory.name=
+tile.Loom.Kapok.name=
+tile.Loom.Maple.name=
+tile.Loom.Oak.name=
+tile.Loom.Pine.name=
+tile.Loom.Sequoia.name=
+tile.Loom.Spruce.name=
+tile.Loom.Sycamore.name=
+tile.Loom.White Cedar.name=
+tile.Loom.White Elm.name=
+tile.Loom.Willow.name=
+
+tile.FenceTFC.Acacia.name=Acacia Hek
+tile.FenceTFC.Ash.name=Es Hek
+tile.FenceTFC.Aspen.name=Espen Hek
+tile.FenceTFC.Birch.name=Berken Hek
+tile.FenceTFC.Chestnut.name=Kastanje Hek
+tile.FenceTFC.Douglas Fir.name=Douglas Spar Hek
+tile.FenceTFC.Hickory.name=Hickory Hek
+tile.FenceTFC.Kapok.name=Kapok Hek
+tile.FenceTFC.Maple.name=Esdoorn Hek
+tile.FenceTFC.Oak.name=Eiken Hek
+tile.FenceTFC.Pine.name=Dennen Hek
+tile.FenceTFC.Sequoia.name=Sequoila Hek
+tile.FenceTFC.Spruce.name=Sparren Hek
+tile.FenceTFC.Sycamore.name=Ahorne Hek
+tile.FenceTFC.White Cedar.name=Witte Ceder Hek
+tile.FenceTFC.White Elm.name=Witte Iep Hek
+tile.FenceTFC.Willow.name=Wilgen Hek
+
+tile.FenceGateTFC.Acacia.name=Acacia Poort
+tile.FenceGateTFC.Ash.name=Es Poort
+tile.FenceGateTFC.Aspen.name=Espen Poort
+tile.FenceGateTFC.Birch.name=Berken Poort
+tile.FenceGateTFC.Chestnut.name=Kastanje Poort
+tile.FenceGateTFC.Douglas Fir.name=Douglas Spar Poort
+tile.FenceGateTFC.Hickory.name=Hickory Poort
+tile.FenceGateTFC.Kapok.name=Kapok Poort
+tile.FenceGateTFC.Maple.name=Esdoorn Poort
+tile.FenceGateTFC.Oak.name=Eiken Poort
+tile.FenceGateTFC.Pine.name=Dennen Poort
+tile.FenceGateTFC.Sequoia.name=Sequoila Poort
+tile.FenceGateTFC.Spruce.name=Sparren Poort
+tile.FenceGateTFC.Sycamore.name=Ahorne Poort
+tile.FenceGateTFC.White Cedar.name=Witte Ceder Poort
+tile.FenceGateTFC.White Elm.name=Witte Iep Poort
+tile.FenceGateTFC.Willow.name=Wilgen Poort
+
+tile.ArmourStand.Acacia.name=Acacia Harnas Standaard
+tile.ArmourStand.Ash.name=Es Harnas Standaard
+tile.ArmourStand.Aspen.name=Espen Harnas Standaard
+tile.ArmourStand.Birch.name=Berken Harnas Standaard
+tile.ArmourStand.Chestnut.name=Kastanje Harnas Standaard
+tile.ArmourStand.Douglas Fir.name=Douglas Spar Harnas Standaard
+tile.ArmourStand.Hickory.name=Hickory Harnas Standaard
+tile.ArmourStand.Kapok.name=Kapok Harnas Standaard
+tile.ArmourStand.Maple.name=Esdoorn Harnas Standaard
+tile.ArmourStand.Oak.name=Eiken Harnas Standaard
+tile.ArmourStand.Pine.name=Dennen Harnas Standaard
+tile.ArmourStand.Sequoia.name=Sequoila Harnas Standaard
+tile.ArmourStand.Spruce.name=Sparren Harnas Standaard
+tile.ArmourStand.Sycamore.name=Ahorne Harnas Standaard
+tile.ArmourStand.White Cedar.name=Witte Ceder Harnas Standaard
+tile.ArmourStand.White Elm.name=Witte Iep Harnas Standaard
+tile.ArmourStand.Willow.name=Wilgen Harnas Standaard
+
+tile.WoodSupportV2.Acacia.name=
+tile.WoodSupportV.Ash.name=
+tile.WoodSupportV.Aspen.name=
+tile.WoodSupportV.Birch.name=
+tile.WoodSupportV.Chestnut.name=
+tile.WoodSupportV.Douglas Fir.name=
+tile.WoodSupportV.Hickory.name=
+tile.WoodSupportV.Kapok.name=
+tile.WoodSupportV.Maple.name=
+tile.WoodSupportV.Oak.name=
+tile.WoodSupportV.Pine.name=
+tile.WoodSupportV.Sequoia.name=
+tile.WoodSupportV.Spruce.name=
+tile.WoodSupportV.Sycamore.name=
+tile.WoodSupportV.White Cedar.name=
+tile.WoodSupportV.White Elm.name=
+tile.WoodSupportV.Willow.name=
+
+tile.Toolrack.Acacia.name=Acacia Gereedschapsrek
+tile.Toolrack.Ash.name=Es Gereedschapsrek
+tile.Toolrack.Aspen.name=Espen Gereedschapsrek
+tile.Toolrack.Birch.name=Berken Gereedschapsrek
+tile.Toolrack.Chestnut.name=Kastanje Gereedschapsrek
+tile.Toolrack.Douglas Fir.name=Douglas Spar Gereedschapsrek
+tile.Toolrack.Hickory.name=Hickory Gereedschapsrek
+tile.Toolrack.Kapok.name=Kapok Gereedschapsrek
+tile.Toolrack.Maple.name=Esdoorne Gereedschapsrek
+tile.Toolrack.Oak.name=Eiken Gereedschapsrek
+tile.Toolrack.Pine.name=Dennen Gereedschapsrek
+tile.Toolrack.Sequoia.name=Sequoila Gereedschapsrek
+tile.Toolrack.Spruce.name=Sparren Gereedschapsrek
+tile.Toolrack.Sycamore.name=Sycamore Gereedschapsrek
+tile.Toolrack.White Cedar.name=Witte Ceder Gereedschapsrek
+tile.Toolrack.White Elm.name=Witte Iep Gereedschapsrek
+tile.Toolrack.Willow.name=Wilgen Gereedschapsrek
+
+#=======================
+#= Tools/Weapons/Armor =
+#=======================
+
+#== Stone Heads ==
+item.Stone Hammer Head.name=Stenen Hamer Hoofd
+item.Stone Knife Blade.name=Stenen Mes Blad
+
+item.IgIn Stone Axe Head.name=Stenen Bijl Hoofd
+item.IgIn Stone Chisel Head.name=Stenen Beitel Hoofd
+item.IgIn Stone Hoe Head.name=Stenen Schoffel Hoofd
+item.IgIn Stone Javelin Head.name=Stenen Speerpunt
+item.IgIn Stone Shovel Head.name=Stenen Schep Hoofd
+
+item.Sed Stone Axe Head.name=Stenen Bijl Hoofd
+item.Sed Stone Chisel Head.name=Stenen Beitel Hoofd
+item.Sed Stone Hoe Head.name=Stenen Schoffel Hoofd
+item.Sed Stone Javelin Head.name=Stenen Speerpunt
+item.Sed Stone Shovel Head.name=Stenen Schep Hoofd
+
+item.IgEx Stone Axe Head.name=Stenen Bijl Hoofd
+item.IgEx Stone Chisel Head.name=Stenen Beitel Hoofd
+item.IgEx Stone Hoe Head.name=Stenen Schoffel Hoofd
+item.IgEx Stone Javelin Head.name=Stenen Speerpunt
+item.IgEx Stone Shovel Head.name=Stenen Schep Hoofd
+
+item.MM Stone Axe Head.name=Stenen Bijl Hoofd
+item.MM Stone Chisel Head.name=Stenen Beitel Hoofd
+item.MM Stone Hoe Head.name=Stenen Schoffel Hoofd
+item.MM Stone Javelin Head.name=Stenen Speerpunt
+item.MM Stone Shovel Head.name=Stenen Schep Hoofd
+
+#== Stone Tools ==
+item.Stone Axe.name=Stenen Bijl
+item.IgIn Stone Axe.name=Stenen Bijl
+item.Sed Stone Axe.name=Stenen Bijl
+item.IgEx Stone Axe.name=Stenen Bijl
+item.MM Stone Axe.name=Stenen Bijl
+
+item.Stone Chisel.name=Stenen Beitel
+
+item.Stone Hammer.name=Stenen Hamer
+
+item.Stone Hoe.name=Stenen Schoffel
+item.IgIn Stone Hoe.name=Stenen Schoffel
+item.Sed Stone Hoe.name=Stenen Schoffel
+item.IgEx Stone Hoe.name=Stenen Schoffel
+item.MM Stone Hoe.name=Stenen Schoffel
+
+item.Stone Javelin.name=Stenen Speer
+item.IgIn Stone Javelin.name=Stenen Speer
+item.Sed Stone Javelin.name=Stenen Speer
+item.IgEx Stone Javelin.name=Stenen Speer
+item.MM Stone Javelin.name=Stenen Speer
+
+item.Stone Knife.name=Stenen Mes
+
+item.Stone Shovel.name=Stenen Schep
+item.IgIn Stone Shovel.name=Stenen Schep
+item.Sed Stone Shovel.name=Stenen Schep
+item.IgEx Stone Shovel.name=Stenen Schep
+item.MM Stone Shovel.name=Stenen Schep
+
+#== Metal Heads ==
+#=== Axe Head ===
+item.Bismuth Bronze Axe Head.name=Bismut Bronze Bijl Hoofd
+item.Black Bronze Axe Head.name=Zwart Bronze Bijl Hoofd
+item.Black Steel Axe Head.name=Zwart Stalen Bijl Hoofd
+item.Blue Steel Axe Head.name=Blauw Stalen Bijl Hoofd
+item.Bronze Axe Head.name=Bronze Bijl Hoofd
+item.Copper Axe Head.name=Koper Bijl Hoofd
+item.Red Steel Axe Head.name=Rood Stalen Bijl Hoofd
+item.Steel Axe Head.name=Stalen Bijl Hoofd
+item.Wrought Iron Axe Head.name=Smeedijzeren Bijl Hoofd
+
+#=== Chisel Head ===
+item.Bismuth Bronze Chisel Head.name=Bismut Bronze Beitel Hoofd
+item.Black Bronze Chisel Head.name=Zwart Bronze Beitel Hoofd
+item.Black Steel Chisel Head.name=Zwart Stalen Beitel Hoofd
+item.Blue Steel Chisel Head.name=Blauw Stalen Beitel Hoofd
+item.Bronze Chisel Head.name=Bronze Beitel Hoofd
+item.Copper Chisel Head.name=Koperen Beitel Hoofd
+item.Red Steel Chisel Head.name=Rood Stalen Beitel Hoofd
+item.Steel Chisel Head.name=Stalen Beitel Hoofd
+item.Wrought Iron Chisel Head.name=Smeedijzeren Beitel Hoofd
+
+#=== Hammer Head ===
+item.Bismuth Bronze Hammer Head.name=Bismut Bronze Hamer Hoofd
+item.Black Bronze Hammer Head.name=Zwart Bronze Hamer Hoofd
+item.Black Steel Hammer Head.name=Zwart Stalen Hamer Hoofd
+item.Blue Steel Hammer Head.name=Blauw Stalen Hamer Hoofd
+item.Bronze Hammer Head.name=Bronze Hamer Hoofd
+item.Copper Hammer Head.name=Koperen Hamer Hoofd
+item.Red Steel Hammer Head.name=Rood Stalen Hamer Hoofd
+item.Steel Hammer Head.name=Stalen Hamer Hoofd
+item.Wrought Iron Hammer Head.name=Smeedijzeren Hamer Hoofd
+
+#=== Hoe Head ===
+item.Bismuth Bronze Hoe Head.name=Bismut Bronze Schoffel Hoofd
+item.Black Bronze Hoe Head.name=Zwart Bronze Schoffel Hoofd
+item.Black Steel Hoe Head.name=Zwart Stalen Schoffel Hoofd
+item.Blue Steel Hoe Head.name=Blauw Stalen Schoffel Hoofd
+item.Bronze Hoe Head.name=Bronze Schoffel Hoofd
+item.Copper Hoe Head.name=Koperen Schoffel Hoofd
+item.Red Steel Hoe Head.name=Rood Stalen Schoffel Hoofd
+item.Steel Hoe Head.name=Stalen Schoffel Hoofd
+item.Wrought Iron Hoe Head.name=Smeedijzeren Schoffel Hoofd
+
+#=== Javelin Head ===
+item.Bismuth Bronze Javelin Head.name=Bismut Bronze Speerpunt
+item.Black Bronze Javelin Head.name=Zwart Bronze Speerpunt
+item.Black Steel Javelin Head.name=Zwart Stalen Speerpunt
+item.Blue Steel Javelin Head.name=Blauw Stalen Speerpunt
+item.Bronze Javelin Head.name=Bronze Speerpunt
+item.Copper Javelin Head.name=Koperen Speerpunt
+item.Red Steel Javelin Head.name=Rood Stalen Speerpunt
+item.Steel Javelin Head.name=Stalen Speerpunt
+item.Wrought Iron Javelin Head.name=Smeedijzeren Speerpunt
+
+#=== Knife Blade ===
+item.Bismuth Bronze Knife Blade.name=Bismut Bronze Mes Blad
+item.Black Bronze Knife Blade.name=Zwart Bronze Mes Blad
+item.Black Steel Knife Blade.name=Zwart Stalen Mes Blad
+item.Blue Steel Knife Blade.name=Blauw Stalen Mes Blad
+item.Bronze Knife Blade.name=Bronze Mes Blad
+item.Copper Knife Blade.name=Koperen Mes Blad
+item.Red Steel Knife Blade.name=Rood Stalen Mes Blad
+item.Steel Knife Blade.name=Stalen Mes Blad
+item.Wrought Iron Knife Blade.name=Smeedijzeren Mes Blad
+
+#=== Mace Head ===
+item.Bismuth Bronze Mace Head.name=Bismut Bronze Strijdknots Hoofd
+item.Black Bronze Mace Head.name=Zwart Bronze Strijdknots Hoofd
+item.Black Steel Mace Head.name=Zwart Stalen Strijdknots Hoofd
+item.Blue Steel Mace Head.name=Blauw Stalen Strijdknots Hoofd
+item.Bronze Mace Head.name=Bronze Strijdknots Hoofd
+item.Copper Mace Head.name=Koperen Strijdknots Hoofd
+item.Red Steel Mace Head.name=Rood Stalen Strijdknots Hoofd
+item.Steel Mace Head.name=Stalen Strijdknots Hoofd
+item.Wrought Iron Mace Head.name=Smeedijzeren Strijdknots Hoofd
+
+#=== Pickaxe Head ===
+item.Bismuth Bronze Pick Head.name=Bismut Bronze Pikhouweel Hoofd
+item.Black Bronze Pick Head.name=Zwart Bronze Pikhouweel Hoofd
+item.Black Steel Pick Head.name=Zwart Stalen Pikhouweel Hoofd
+item.Blue Steel Pick Head.name=Blauw Stalen Pikhouweel Hoofd
+item.Bronze Pick Head.name=Bronze Pikhouweel Hoofd
+item.Copper Pick Head.name=Koperen Pikhouweel Hoofd
+item.Red Steel Pick Head.name=Rood Stalen Pikhouweel Hoofd
+item.Steel Pick Head.name=Stalen Pikhouweel Hoofd
+item.Wrought Iron Pick Head.name=Smeedijzeren Pikhouweel Hoofd
+
+#=== Prospector's Pick Head ===
+item.Bismuth Bronze ProPick Head.name=Bismut Bronze Mijnonderzoeker's Houweel Hoofd
+item.Black Bronze ProPick Head.name=Zwart Bronze Mijnonderzoeker's Houweel Hoofd
+item.Black Steel ProPick Head.name=Zwart Stalen Mijnonderzoeker's Houweel Hoofd
+item.Blue Steel ProPick Head.name=Blauw Stalen Mijnonderzoeker's Houweel Hoofd
+item.Bronze ProPick Head.name=Bronze Mijnonderzoeker's Houweel Hoofd
+item.Copper ProPick Head.name=Koperen Mijnonderzoeker's Houweel Hoofd
+item.Red Steel ProPick Head.name=Rood Stalen Mijnonderzoeker's Houweel Hoofd
+item.Steel ProPick Head.name=Stalen Mijnonderzoeker's Houweel Hoofd
+item.Wrought Iron ProPick Head.name=Smeedijzeren Mijnonderzoeker's Houweel Hoofd
+
+#=== Saw Blade ===
+item.Bismuth Bronze Saw Blade.name=Bismut Bronze Zaag Blad
+item.Black Bronze Saw Blade.name=Zwart Bronze Zaag Blad
+item.Black Steel Saw Blade.name=Zwart Stalen Zaag Blad
+item.Blue Steel Saw Blade.name=Blauw Stalen Zaag Blad
+item.Bronze Saw Blade.name=Bronze Zaag Blad
+item.Copper Saw Blade.name=Koperen Zaag Blad
+item.Red Steel Saw Blade.name=Rood Stalen Zaag Blad
+item.Steel Saw Blade.name=Stalen Zaag Blad
+item.Wrought Iron Saw Blade.name=Smeedijzeren Zaag Blad
+
+#=== Scythe Blade ===
+item.Bismuth Bronze Scythe Blade.name=Bismut Bronze Zeis Blad
+item.Black Bronze Scythe Blade.name=Zwart Bronze Zeis Blad
+item.Black Steel Scythe Blade.name=Zwart Stalen Zeis Blad
+item.Blue Steel Scythe Blade.name=Blauw Stalen Zeis Blad
+item.Bronze Scythe Blade.name=Bronze Zeis Blad
+item.Copper Scythe Blade.name=Koperen Zeis Blad
+item.Red Steel Scythe Blade.name=Rood Stalen Zeis Blad
+item.Steel Scythe Blade.name=Stalen Zeis Blad
+item.Wrought Iron Scythe Blade.name=Smeedijzeren Zeis Blad
+
+#=== Shovel Head ===
+item.Bismuth Bronze Shovel Head.name=Bismut Bronze Schep Hoofd
+item.Black Bronze Shovel Head.name=Zwart Bronze Schep Hoofd
+item.Black Steel Shovel Head.name=Zwart Stalen Schep Hoofd
+item.Blue Steel Shovel Head.name=Blauw Stalen Schep Hoofd
+item.Bronze Shovel Head.name=Bronze Schep Hoofd
+item.Copper Shovel Head.name=Koperen Schep Hoofd
+item.Red Steel Shovel Head.name=Rood Stalen Schep Hoofd
+item.Steel Shovel Head.name=Stalen Schep Hoofd
+item.Wrought Iron Shovel Head.name=Smeedijzeren Schep Hoofd
+
+#=== Sword Blade ===
+item.Bismuth Bronze Sword Blade.name=Bismut Bronze Zwaard Blad
+item.Black Bronze Sword Blade.name=Zwart Bronze Zwaard Blad
+item.Black Steel Sword Blade.name=Zwart Stalen Zwaard Blad
+item.Blue Steel Sword Blade.name=Blauw Stalen Zwaard Blad
+item.Bronze Sword Blade.name=Bronze Zwaard Blad
+item.Copper Sword Blade.name=Koperen Zwaard Blad
+item.Red Steel Sword Blade.name=Rood Stalen Zwaard Blad
+item.Steel Sword Blade.name=Stalen Zwaard Blad
+item.Wrought Iron Sword Blade.name=Smeedijzeren Zwaard Blad
+
+#== Metal Tools ==
+#=== Axe ===
+item.Bismuth Bronze Axe.name=Bismut Bronze Bijl
+item.Black Bronze Axe.name=Zwart Bronze Bijl
+item.Black Steel Axe.name=Zwart Stalen Bijl
+item.Blue Steel Axe.name=Blauw Stalen Bijl
+item.Bronze Axe.name=Bronze Bijl
+item.Copper Axe.name=Koperen Bijl
+item.Red Steel Axe.name=Rood Stalen Bijl
+item.Steel Axe.name=Stalen Bijl
+item.Wrought Iron Axe.name=Smeedijzeren Bijl
+
+#=== Chisel ===
+item.Bismuth Bronze Chisel.name=Bismut Bronze Beitel
+item.Black Bronze Chisel.name=Zwart Bronze Beitel
+item.Black Steel Chisel.name=Zwart Stalen Beitel
+item.Blue Steel Chisel.name=Blauw Stalen Beitel
+item.Bronze Chisel.name=Bronze Beitel
+item.Copper Chisel.name=Koperen Beitel
+item.Red Steel Chisel.name=Rood Stalen Beitel
+item.Steel Chisel.name=Stalen Beitel
+item.Wrought Iron Chisel.name=Smeedijzeren Beitel
+
+#=== Hammer ===
+item.Bismuth Bronze Hammer.name=Bismut Bronze Hamer
+item.Black Bronze Hammer.name=Zwart Bronze Hamer
+item.Black Steel Hammer.name=Zwart Stalen Hamer
+item.Blue Steel Hammer.name=Blauw Stalen Hamer
+item.Bronze Hammer.name=Bronze Hamer
+item.Copper Hammer.name=Koperen Hamer
+item.Red Steel Hammer.name=Rood Stalen Hamer
+item.Steel Hammer.name=Stalen Hamer
+item.Wrought Iron Hammer.name=Smeedijzeren Hamer
+
+#=== Hoe ===
+item.Bismuth Bronze Hoe.name=Bismut Bronze Schoffel
+item.Black Bronze Hoe.name=Zwart Bronze Schoffel
+item.Black Steel Hoe.name=Zwart Stalen Schoffel
+item.Blue Steel Hoe.name=Blauw Stalen Schoffel
+item.Bronze Hoe.name=Bronze Schoffel
+item.Copper Hoe.name=Koperen Schoffel
+item.Red Steel Hoe.name=Rood Stalen Schoffel
+item.Steel Hoe.name=Stalen Schoffel
+item.Wrought Iron Hoe.name=Smeedijzeren Schoffel
+
+#=== Javelin ===
+item.Bismuth Bronze Javelin.name=Bismut Bronze Speer
+item.Black Bronze Javelin.name=Zwart Bronze Speer
+item.Black Steel Javelin.name=Zwart Stalen Speer
+item.Blue Steel Javelin.name=Blauw Stalen Speer
+item.Bronze Javelin.name=Bronze Speer
+item.Copper Javelin.name=Koperen Speer
+item.Red Steel Javelin.name=Rood Stalen Speer
+item.Steel Javelin.name=Stalen Speer
+item.Wrought Iron Javelin.name=Smeedijzeren Speer
+
+#=== Knife ===
+item.Bismuth Bronze Knife.name=Bismut Bronze Mes
+item.Black Bronze Knife.name=Zwart Bronze Mes
+item.Black Steel Knife.name=Zwart Stalen Mes
+item.Blue Steel Knife.name=Blauw Stalen Mes
+item.Bronze Knife.name=Bronze Mes
+item.Copper Knife.name=Koperen Mes
+item.Red Steel Knife.name=Rood Stalen Mes
+item.Steel Knife.name=Stalen Mes
+item.Wrought Iron Knife.name=Smeedijzeren Mes
+
+#=== Mace ===
+item.Bismuth Bronze Mace.name=Bismut Bronze Strijdknots
+item.Black Bronze Mace.name=Zwart Bronze Strijdknots
+item.Black Steel Mace.name=Zwart Stalen Strijdknots
+item.Blue Steel Mace.name=Blauw Stalen Strijdknots
+item.Bronze Mace.name=Bronze Strijdknots
+item.Copper Mace.name=Koperen Strijdknots
+item.Red Steel Mace.name=Rood Stalen Strijdknots
+item.Steel Mace.name=Stalen Strijdknots
+item.Wrought Iron Mace.name=Smeedijzeren Strijdknots
+
+#=== Pickaxe ===
+item.Bismuth Bronze Pick.name=Bismut Bronze Pikhouweel
+item.Black Bronze Pick.name=Zwart Bronze Pikhouweel
+item.Black Steel Pick.name=Zwart Stalen Pikhouweel
+item.Blue Steel Pick.name=Blauw Stalen Pikhouweel
+item.Bronze Pick.name=Bronze Pikhouweel
+item.Copper Pick.name=Koper Pikhouweel
+item.Red Steel Pick.name=Rood Stalen Pikhouweel
+item.Steel Pick.name=Stalen Pikhouweel
+item.Wrought Iron Pick.name=Smeedijzeren Pikhouweel
+
+#=== Prospector's Pick ===
+item.Bismuth Bronze ProPick.name=Bismut Bronze Mijnonderzoeker's Houweel
+item.Black Bronze ProPick.name=Zwart Bronze Mijnonderzoeker's Houweel
+item.Black Steel ProPick.name=Zwart Stalen Mijnonderzoeker's Houweel
+item.Blue Steel ProPick.name=Blauw Stalen Mijnonderzoeker's Houweel
+item.Bronze ProPick.name=Bronze Mijnonderzoeker's Houweel
+item.Copper ProPick.name=Koperen Mijnonderzoeker's Houweel
+item.Red Steel ProPick.name=Rood Stalen Mijnonderzoeker's Houweel
+item.Steel ProPick.name=Stalen Mijnonderzoeker's Houweel
+item.Wrought Iron ProPick.name=Smeedijzeren Mijnonderzoeker's Houweel
+
+#=== Saw ===
+item.Bismuth Bronze Saw.name=Bismut Bronze Zaag
+item.Black Bronze Saw.name=Zwart Bronze Zaag
+item.Black Steel Saw.name=Zwart Stalen Zaag
+item.Blue Steel Saw.name=Blauw Stalen Zaag
+item.Bronze Saw.name=Bronze Zaag
+item.Copper Saw.name=Koperen Zaag
+item.Red Steel Saw.name=Rood Stalen Zaag
+item.Steel Saw.name=Stalen Zaag
+item.Wrought Iron Saw.name=Smeedijzeren Zaag
+
+#=== Scythe ===
+item.Bismuth Bronze Scythe.name=Bismut Bronze Zeis
+item.Black Bronze Scythe.name=Zwart Bronze Zeis
+item.Black Steel Scythe.name=Zwart Stalen Zeis
+item.Blue Steel Scythe.name=Blauw Stalen Zeis
+item.Bronze Scythe.name=Bronze Zeis
+item.Copper Scythe.name=Koperen Zeis
+item.Red Steel Scythe.name=Rood Stalen Zeis
+item.Steel Scythe.name=Stalen Zeis
+item.Wrought Iron Scythe.name=Smeedijzeren Zeis
+
+#=== Shovel ===
+item.Bismuth Bronze Shovel.name=Bismut Bronze Schep
+item.Black Bronze Shovel.name=Zwart Bronze Schep
+item.Black Steel Shovel.name=Zwart Stalen Schep
+item.Blue Steel Shovel.name=Blauw Stalen Schep
+item.Bronze Shovel.name=Bronze Schep
+item.Copper Shovel.name=Koperen Schep
+item.Red Steel Shovel.name=Rood Stalen Schep
+item.Steel Shovel.name=Stalen Schep
+item.Wrought Iron Shovel.name=Smeedijzeren Schep
+
+#=== Sword ===
+item.Bismuth Bronze Sword.name=Bismut Bronze Zwaard
+item.Black Bronze Sword.name=Zwart Bronze Zwaard
+item.Black Steel Sword.name=Zwart Stalen Zwaard
+item.Blue Steel Sword.name=Blauw Stalen Zwaard
+item.Bronze Sword.name=Bronze Zwaard
+item.Copper Sword.name=Koperen Zwaard
+item.Red Steel Sword.name=Rood Stalen Zwaard
+item.Steel Sword.name=Stalen Zwaard
+item.Wrought Iron Sword.name=Smeedijzeren Zwaard
+
+#=== Tuyere ===
+item.Bismuth Bronze Tuyere.name=Bismut Bronze Blaasmond
+item.Black Bronze Tuyere.name=Zwart Bronze Blaasmond
+item.Black Steel Tuyere.name=Zwart Stalen Blaasmond
+item.Blue Steel Tuyere.name=Blauw Stalen Blaasmond
+item.Bronze Tuyere.name=Bronze Blaasmond
+item.Copper Tuyere.name=Koperen Blaasmond
+item.Red Steel Tuyere.name=Rood Stalen Blaasmond
+item.Steel Tuyere.name=Stalen Blaasmond
+item.Wrought Iron Tuyere.name=SmeedIjzeren Blaasmond
+
+#== Armor ==
+#=== Helmet ===
+item.Bismuth Bronze Unfinished Helmet.name=Onvoltooide Bismut Bronze Helm Stage 1
+item.Black Bronze Unfinished Helmet.name=Onvoltooide Zwart Bronze Helm Stage 1
+item.Black Steel Unfinished Helmet.name=Onvoltooide Zwart Stalen Helm Stage 1
+item.Blue Steel Unfinished Helmet.name=Onvoltooide Blauw Stalen Helm Stage 1
+item.Bronze Unfinished Helmet.name=Onvoltooide Bronze Helm Stage 1
+item.Copper Unfinished Helmet.name=Onvoltooide Koperen Helm Stage 1
+item.Red Steel Unfinished Helmet.name=Onvoltooide Rood Stalen Helm Stage 1
+item.Steel Unfinished Helmet.name=Onvoltooide Stalen Helm Stage 1
+item.Wrought Iron Unfinished Helmet.name=Onvoltooide Smeedijzeren Helm Stage 1
+item.Bismuth Bronze Unfinished Helmet2.name=Onvoltooide Bismut Bronze Helm Stage 2
+item.Black Bronze Unfinished Helmet2.name=Onvoltooide Zwart Bronze Helm Stage 2
+item.Black Steel Unfinished Helmet2.name=Onvoltooide Zwart Stalen Helm Stage 2
+item.Blue Steel Unfinished Helmet2.name=Onvoltooide Blauw Stalen Helm Stage 2
+item.Bronze Unfinished Helmet2.name=Onvoltooide Bronze Helm Stage 2
+item.Copper Unfinished Helmet2.name=Onvoltooide Koperen Helm Stage 2
+item.Red Steel Unfinished Helmet2.name=Onvoltooide Rood Stalen Helm Stage 2
+item.Steel Unfinished Helmet2.name=Onvoltooide Stalen Helm Stage 2
+item.Wrought Iron Unfinished Helmet2.name=Onvoltooide Smeedijzeren Helm Stage 2
+item.Bismuth Bronze Helmet.name=Bismut Bronze Helm
+item.Black Bronze Helmet.name=Zwart Bronze Helm
+item.Black Steel Helmet.name=Zwart Stalen Helm
+item.Blue Steel Helmet.name=Blauw Stalen Helm
+item.Bronze Helmet.name=Bronze Helm
+item.Copper Helmet.name=Koperen Helm
+item.Red Steel Helmet.name=Rood Stalen Helm
+item.Steel Helmet.name=Stalen Helm
+item.Wrought Iron Helmet.name=Smeedijzeren Helm
+item.helmetCloth.name=Leren Helm
+
+#=== Chestplate ===
+item.Bismuth Bronze Unfinished Chestplate.name=Onvoltooide Bismut Bronze Borstharnas Stage 1
+item.Black Bronze Unfinished Chestplate.name=Onvoltooide Zwart Bronze Borstharnas Stage 1
+item.Black Steel Unfinished Chestplate.name=Onvoltooide Zwart Stalen Borstharnas Stage 1
+item.Blue Steel Unfinished Chestplate.name=Onvoltooide Blauw Stalen Borstharnas Stage 1
+item.Bronze Unfinished Chestplate.name=Onvoltooide Bronze Borstharnas Stage 1
+item.Copper Unfinished Chestplate.name=Onvoltooide Koperen Borstharnas Stage 1
+item.Red Steel Unfinished Chestplate.name=Onvoltooide Rood Stalen Borstharnas Stage 1
+item.Steel Unfinished Chestplate.name=Onvoltooide Stalen Borstharnas Stage 1
+item.Wrought Iron Unfinished Chestplate.name=Onvoltooide Smeedijzeren Borstharnas Stage 1
+item.Bismuth Bronze Unfinished Chestplate2.name=Onvoltooide Bismut Bronze Borstharnas Stage 2
+item.Black Bronze Unfinished Chestplate2.name=Onvoltooide Zwart Bronze Borstharnas Stage 2
+item.Black Steel Unfinished Chestplate2.name=Onvoltooide Zwart Stalen Borstharnas Stage 2
+item.Blue Steel Unfinished Chestplate2.name=Onvoltooide Blauw Stalen Borstharnas Stage 2
+item.Bronze Unfinished Chestplate2.name=Onvoltooide Bronze Borstharnas Stage 2
+item.Copper Unfinished Chestplate2.name=Onvoltooide Koperen Borstharnas Stage 2
+item.Red Steel Unfinished Chestplate2.name=Onvoltooide Rood Stalen Borstharnas Stage 2
+item.Steel Unfinished Chestplate2.name=Onvoltooide Stalen Borstharnas Stage 2
+item.Wrought Iron Unfinished Chestplate2.name=Onvoltooide Smeedijzeren Borstharnas Stage 2
+item.Bismuth Bronze Chestplate.name=Bismut Bronze Borstharnas
+item.Black Bronze Chestplate.name=Zwart Bronze Borstharnas
+item.Black Steel Chestplate.name=Zwart Stalen Borstharnas
+item.Blue Steel Chestplate.name=Blauw Stalen Borstharnas
+item.Bronze Chestplate.name=Bronze Borstharnas
+item.Copper Chestplate.name=Koperen Borstharnas
+item.Red Steel Chestplate.name=Rood Stalen Borstharnas
+item.Steel Chestplate.name=Stalen Borstharnas
+item.Wrought Iron Chestplate.name=Smeedijzeren Borstharnas
+item.chestplateCloth.name=Leren Tuniek
+
+#=== Greaves ===
+item.Bismuth Bronze Unfinished Greaves.name=Onvoltooide Bismut Bronze Broek Stage 1
+item.Black Bronze Unfinished Greaves.name=Onvoltooide Zwart Bronze Broek Stage 1
+item.Black Steel Unfinished Greaves.name=Onvoltooide Zwart Stalen Broek Stage 1
+item.Blue Steel Unfinished Greaves.name=Onvoltooide Blauw Stalen Broek Stage 1
+item.Bronze Unfinished Greaves.name=Onvoltooide Bronze Broek Stage 1
+item.Copper Unfinished Greaves.name=Onvoltooide Koperen Broek Stage 1
+item.Red Steel Unfinished Greaves.name=Onvoltooide Rood Stalen Broek Stage 1
+item.Steel Unfinished Greaves.name=Onvoltooide Stalen Broek Stage 1
+item.Wrought Iron Unfinished Greaves.name=Onvoltooide Smeedijzeren Broek Stage 1
+item.Bismuth Bronze Unfinished Greaves2.name=Onvoltooide Bismut Bronze Broek Stage 2
+item.Black Bronze Unfinished Greaves2.name=Onvoltooide Zwart Bronze Broek Stage 2
+item.Black Steel Unfinished Greaves2.name=Onvoltooide Zwart Stalen Broek Stage 2
+item.Blue Steel Unfinished Greaves2.name=Onvoltooide Blauw Stalen Broek Stage 2
+item.Bronze Unfinished Greaves2.name=Onvoltooide Bronze Broek Stage 2
+item.Copper Unfinished Greaves2.name=Onvoltooide Koperen Broek Stage 2
+item.Red Steel Unfinished Greaves2.name=Onvoltooide Rood Stalen Broek Stage 2
+item.Steel Unfinished Greaves2.name=Onvoltooide Stalen Broek Stage 2
+item.Wrought Iron Unfinished Greaves2.name=Onvoltooide Smeedijzeren Broek Stage 2
+item.Bismuth Bronze Greaves.name=Bismut Bronze Broek
+item.Black Bronze Greaves.name=Zwart Bronze Broek
+item.Black Steel Greaves.name=Zwart Stalen Broek
+item.Blue Steel Greaves.name=Blauw Stalen Broek
+item.Bronze Greaves.name=Bronze Broek
+item.Copper Greaves.name=Koperen Broek
+item.Red Steel Greaves.name=Rood Stalen Broek
+item.Steel Greaves.name=Stalen Broek
+item.Wrought Iron Greaves.name=Smeedijzeren Broek
+item.leggingsCloth.name=Leren Broek
+
+#=== Boots ===
+item.Bismuth Bronze Unfinished Boots.name=Onvoltooide Bismut Bronze Schoenen Stage 1
+item.Black Bronze Unfinished Boots.name=Onvoltooide Zwart Bronze Schoenen Stage 1
+item.Black Steel Unfinished Boots.name=Onvoltooide Zwart Stalen Schoenen Stage 1
+item.Blue Steel Unfinished Boots.name=Onvoltooide Blauw Stalen Schoenen Stage 1
+item.Bronze Unfinished Boots.name=Onvoltooide Bronze Schoenen Stage 1
+item.Copper Unfinished Boots.name=Onvoltooide Koperen Schoenen Stage 1
+item.Red Steel Unfinished Boots.name=Onvoltooide Rood Stalen Schoenen Stage 1
+item.Steel Unfinished Boots.name=Onvoltooide Stalen Schoenen Stage 1
+item.Wrought Iron Unfinished Boots.name=Onvoltooide Smeedijzeren Schoenen Stage 1
+item.Bismuth Bronze Unfinished Boots2.name=Onvoltooide Bismut Bronze Schoenen Stage 2
+item.Black Bronze Unfinished Boots2.name=Onvoltooide Zwart Bronze Schoenen Stage 2
+item.Black Steel Unfinished Boots2.name=Onvoltooide Zwart Stalen Schoenen Stage 2
+item.Blue Steel Unfinished Boots2.name=Onvoltooide Blauw Stalen Schoenen Stage 2
+item.Bronze Unfinished Boots2.name=Onvoltooide Bronze Schoenen Stage 2
+item.Copper Unfinished Boots2.name=Onvoltooide Koperen Schoenen Stage 2
+item.Red Steel Unfinished Boots2.name=Onvoltooide Rood Stalen Schoenen Stage 2
+item.Steel Unfinished Boots2.name=Onvoltooide Stalen Schoenen Stage 2
+item.Wrought Iron Unfinished Boots2.name=Onvoltooide Smeedijzeren Schoenen Stage 2
+item.Bismuth Bronze Boots.name=Bismut Bronze Schoenen
+item.Black Bronze Boots.name=Zwart Bronze Schoenen
+item.Black Steel Boots.name=Zwart Stalen Schoenen
+item.Blue Steel Boots.name=Blauw Stalen Schoenen
+item.Bronze Boots.name=Bronze Schoenen
+item.Copper Boots.name=Koperen Schoenen
+item.Red Steel Boots.name=Rood Stalen Schoenen
+item.Steel Boots.name=Stalen Schoenen
+item.Wrought Iron Boots.name=Smeedijzeren Schoenen
+item.bootsCloth.name=Leren Schoenen
+
+#==========
+#= Metals =
+#==========
+item.Iron Bloom.name=Geraffineerd Gesinterd IJzer
+item.Raw Iron Bloom.name=Ruw Gesinterd IJzer
+tile.Bloom.name=Gesinterd IJzer
+
+#== Unshaped ==
+item.Bismuth Bronze Unshaped.name=Onbewerkte: Bismut Brons
+item.Bismuth Unshaped.name=Onbewerkte: Bismut
+item.Black Bronze Unshaped.name=Onbewerkte: Zwart Brons
+item.Black Steel Unshaped.name=Onbewerkte: Zwart Staal
+item.Blue Steel Unshaped.name=Onbewerkte: Blauw Staal
+item.Brass Unshaped.name=Onbewerkte: Messing
+item.Bronze Unshaped.name=Onbewerkte: Brons
+item.Copper Unshaped.name=Onbewerkte: Koper
+item.Gold Unshaped.name=Onbewerkte: Goud
+item.HC Black Steel Unshaped.name=Onbewerkte: Hoog Koolstofgehalte Zwart Staal
+item.HC Blue Steel Unshaped.name=Onbewerkte: Hoog Koolstofgehalte Blauw Staal
+item.HC Red Steel Unshaped.name=Onbewerkte: Hoog Koolstofgehalte Rood Staal
+item.HC Steel Unshaped.name=Onbewerkte: Hoog Koolstofgehalte Staal
+item.Lead Unshaped.name=Onbewerkte: Lood
+item.Nickel Unshaped.name=Onbewerkte: Nikkel
+item.Pig Iron Unshaped.name=Onbewerkte: Ruw Ijzer
+item.Platinum Unshaped.name=Onbewerkte: Platina
+item.Red Steel Unshaped.name=Onbewerkte: Rood Staal
+item.Rose Gold Unshaped.name=Onbewerkte: Rose Goud
+item.Silver Unshaped.name=Onbewerkte: Zilver
+item.Steel Unshaped.name=Onbewerkte: Staal
+item.Sterling Silver Unshaped.name=Onbewerkte: Sterling Zilver
+item.Tin Unshaped.name=Onbewerkte: Tin
+item.Unknown Unshaped.name=Onbewerkte: Onbekend
+item.Weak Blue Steel Unshaped.name=Onbewerkte: Zacht Blauw Staal
+item.Weak Red Steel Unshaped.name=Onbewerkte: Zacht Rood Staal
+item.Weak Steel Unshaped.name=Onbewerkte: Zacht Staal
+item.Wrought Iron Unshaped.name=Onbewerkte: Smeedijzer
+item.Zinc Unshaped.name=Onbewerkte: Zink
+
+#== Ingot ==
+item.Bismuth Bronze Ingot.name=Bismut Bronze Staaf
+item.Bismuth Ingot.name=Bismut Staaf
+item.Black Bronze Ingot.name=Zwart Bronze Staaf
+item.Black Steel Ingot.name=Zwart Stalen Staaf
+item.Blue Steel Ingot.name=Blauw Stalen Staaf
+item.Brass Ingot.name=Messing Staaf
+item.Bronze Ingot.name=Bronze Staaf
+item.Copper Ingot.name=Koperen Staaf
+item.Gold Ingot.name=Gouden Staaf
+item.HC Black Steel Ingot.name=Hoog Koolstofgehalte Zwart Stalen Staaf
+item.HC Blue Steel Ingot.name=Hoog Koolstofgehalte Blauw Stalen Staaf
+item.HC Red Steel Ingot.name=Hoog Koolstofgehalte Rood Stalen Staaf
+item.HC Steel Ingot.name=Hoog Koolstofgehalte Stalen Staaf
+item.Lead Ingot.name=Loden Staaf
+item.Nickel Ingot.name=Nikkel Staaf
+item.Pig Iron Ingot.name=Ruwijzeren Staaf
+item.Platinum Ingot.name=Platina Staaf
+item.Red Steel Ingot.name=Rood Stalen Staaf
+item.Rose Gold Ingot.name=Rose Gouden Staaf
+item.Silver Ingot.name=Zilveren Staaf
+item.Steel Ingot.name=Stalen Staaf
+item.Sterling Silver Ingot.name=Sterling Zilver Staaf
+item.Tin Ingot.name=Tinnen Staaf
+item.Unknown Ingot.name=Onbekende Staaf
+item.Weak Blue Steel Ingot.name=Zacht Blauw Stalen Staaf
+item.Weak Red Steel Ingot.name=Zacht Rood Stalen Staaf
+item.Weak Steel Ingot.name=Zacht Stalen Staaf
+item.Wrought Iron Ingot.name=Smeedijzeren Staaf
+item.Zinc Ingot.name=Zinken Staaf
+
+#== Double Ingot ==
+item.Bismuth Bronze Double Ingot.name=Bismut Bronze Dubbele Staaf
+item.Bismuth Double Ingot.name=Bismut Dubbele Staaf
+item.Black Bronze Double Ingot.name=Zwart Bronze Dubbele Staaf
+item.Black Steel Double Ingot.name=Zwart Stalen Dubbele Staaf
+item.Blue Steel Double Ingot.name=Blauw Stalen Dubbele Staaf
+item.Brass Double Ingot.name=Messing Dubbele Staaf
+item.Bronze Double Ingot.name=Bronze Dubbele Staaf
+item.Copper Double Ingot.name=Koperen Dubbele Staaf
+item.Gold Double Ingot.name=Gouden Dubbele Staaf
+item.Lead Double Ingot.name=Loden Dubbele Staaf
+item.Nickel Double Ingot.name=Nikkel Dubbele Staaf
+item.Pig Iron Double Ingot.name=Ruwijzeren Dubbele Staaf
+item.Platinum Double Ingot.name=Platina Dubbele Staaf
+item.Red Steel Double Ingot.name=Rood Stalen Dubbele Staaf
+item.Rose Gold Double Ingot.name=Rose Gouden Dubbele Staaf
+item.Silver Double Ingot.name=Zilveren Dubbele Staaf
+item.Steel Double Ingot.name=Stalen Dubbele Staaf
+item.Sterling Silver Double Ingot.name=Sterling Zilver Dubbele Staaf
+item.Tin Double Ingot.name=Tinnen Dubbele Staaf
+item.Wrought Iron Double Ingot.name=Smeedijzeren Dubbele Staaf
+item.Zinc Double Ingot.name=Zinken Dubbele Staaf
+
+#== Sheet ==
+item.Bismuth Bronze Sheet.name=Bismut Bronze Plaat
+item.Bismuth Sheet.name=Bismut Plaat
+item.Black Bronze Sheet.name=Zwart Bronze Plaat
+item.Black Steel Sheet.name=Zwart Stalen Plaat
+item.Blue Steel Sheet.name=Blauw Stalen Plaat
+item.Brass Sheet.name=Messing Plaat
+item.Bronze Sheet.name=Bronze Plaat
+item.Copper Sheet.name=Koperen Plaat
+item.Gold Sheet.name=Gouden Plaat
+item.Lead Sheet.name=Loden Plaat
+item.Nickel Sheet.name=Nikkel Plaat
+item.Pig Iron Sheet.name=Ruwijzer Plaat
+item.Platinum Sheet.name=Platina Plaat
+item.Red Steel Sheet.name=Rood Stalen Plaat
+item.Rose Gold Sheet.name=Rose Gouden Plaat
+item.Silver Sheet.name=Zilveren Plaat
+item.Steel Sheet.name=Stalen Plaat
+item.Sterling Silver Sheet.name=Sterling Zilver Plaat
+item.Tin Sheet.name=Tinnen Plaat
+item.Wrought Iron Sheet.name=Smeedijzeren Plaat
+item.Zinc Sheet.name=Zinken Plaat
+
+#== DoubleSheet ==
+item.Bismuth Bronze Double Sheet.name=Bismut Bronze Dubbele Plaat
+item.Bismuth Double Sheet.name=Bismut Dubbele Plaat
+item.Black Bronze Double Sheet.name=Zwart Bronze Dubbele Plaat
+item.Black Steel Double Sheet.name=Zwart Stalen Dubbele Plaat
+item.Blue Steel Double Sheet.name=Blauw Stalen Dubbele Plaat
+item.Brass Double Sheet.name=Messing Dubbele Plaat
+item.Bronze Double Sheet.name=Bronze Dubbele Plaat
+item.Copper Double Sheet.name=Koperen Dubbele Plaat
+item.Gold Double Sheet.name=Gouden Dubbele Plaat
+item.Lead Double Sheet.name=Loden Dubbele Plaat
+item.Nickel Double Sheet.name=Nikkel Dubbele Plaat
+item.Pig Iron Double Sheet.name=Ruwijzer Dubbele Plaat
+item.Platinum Double Sheet.name=Platina Dubbele Plaat
+item.Red Steel Double Sheet.name=Rood Stalen Dubbele Plaat
+item.Rose Gold Double Sheet.name=Rose Gouden Dubbele Plaat
+item.Silver Double Sheet.name=Zilveren Dubbele Plaat
+item.Steel Double Sheet.name=Stalen Dubbele Plaat
+item.Sterling Silver Double Sheet.name=Sterling Zilver Dubbele Plaat
+item.Tin Double Sheet.name=Tinnen Dubbele Plaat
+item.Wrought Iron Double Sheet.name=Smeedijzeren Dubbele Plaat
+item.Zinc Double Sheet.name=Zinken Dubbele Plaat
+
+#===========
+#= Devices =
+#===========
+tile.Bellows.name=Blaasbalg
+tile.Forge.name=Smidsvuur
+tile.BlastFurnace.name=Hoog Oven
+tile.SpawnMeter.name=Beschermings Meter
+tile.Quern.name=Handmolen Onderstel
+tile.EarlyBloomery.name=SmeltOven
+tile.Crucible.name=Smeltkroes
+tile.NestBox.name=Nestkist
+item.SluiceItem.name=Sluis
+tile.LeatherRack.name=
+
+#== Anvils ==
+tile.Anvil.Stone.name=Stenen Aambeeld
+tile.Anvil.Bismuth.name=Bismut Aambeeld
+tile.Anvil2.Bismuth Bronze.name=Bismut Bronze Aambeeld
+tile.Anvil2.Black Bronze.name=Zwart Bronze Aambeeld
+tile.Anvil.Black Steel.name=Zwart Stalen Aambeeld
+tile.Anvil.Blue Steel.name=Blauw Stalen Aambeeld
+tile.Anvil.Bronze.name=Bronze Aambeeld
+tile.Anvil.Copper.name=Koperen Aambeeld
+tile.Anvil.Red Steel.name=Rood Stalen Aambeeld
+tile.Anvil2.Rose Gold.name=Rood Goude Aambeeld
+tile.Anvil.Steel.name=Stalen Aambeeld
+tile.Anvil.Tin.name=Tinnen Aambeeld
+tile.Anvil.Wrought Iron.name=IJzeren Aambeeld
+tile.Anvil.Zinc.name=Zink Aambeeld
+
+#==================
+#= Terrain Blocks =
+#==================
+tile.Grass.name=Gras
+tile.DryGrass.name=Uitgedroogd Gras
+tile.PeatGrass.name=Veen Gras
+tile.ClayGrass.name=Klei Gras
+tile.dirt.name=Aarde
+tile.sand.name=Zand
+tile.Peat.name=Veen
+tile.tilledSoil.name=
+tile.LooseRock.name=
+tile.Ice.name=
+
+#=================
+#= Miscellaneous =
+#=================
+#== Misc Items ==
+item.arrow.name=Pijl
+item.book.name=Boek
+item.stick.name=Stok
+item.coal.coal.name=Steenkool
+item.coal.charcoal.name=Houtskool
+item.Fertilizer.name=Kunstmest
+item.Reeds.name=
+
+item.Wooden Bucket Empty.name=Houten Emmer (Leeg)
+item.Wooden Bucket Water.name=Houten Emmer (Zoet Water)
+item.Wooden Bucket Salt Water.name=Houten Emmer (Zout Water)
+item.Wooden Bucket Milk.name=Houten Emmer (Melk)
+item.Lime Water.name=Kalkwater
+
+item.Red Steel Bucket Empty.name=Rood Stalen Emmer (Leeg)
+item.Red Steel Bucket Water.name=Rood Stalen Emmer (Zoet Water)
+item.Red Steel Bucket Salt Water.name=Rood Stalen Emmer (Zout Water)
+item.Blue Steel Bucket Empty.name=Blauw Stalen Emmer (Leeg)
+item.Blue Steel Bucket Lava.name=Blauw Stalen Emmer (Lava)
+
+item.GoldPan.name=Zeef
+item.Gold Pan.Sand.name=Zeef - Zand
+item.Gold Pan.Gravel.name=Zeef - Kiezel
+item.Gold Pan.Clay.name=Zeef - Klei
+item.Gold Pan.Dirt.name=Zeef - Grond
+item.Ink.name=Inkt Markering
+item.Firestarter.name=Vuur Aanmaakhout
+
+item.Quern.name=Handmolen
+item.Blueprint.name=Blauwdruk
+item.Nametag.name=
+item.WoolYarn.name=Wol Garen
+item.Wool.name=Wol
+item.WoolCloth.name=Wollen Doek
+item.SilkCloth.name=
+item.BurlapCloth.name=
+item.Mortar.name=Mortel
+item.Vinegar.name=Azijn
+
+item.Hide.small.name=Rauwe Huid (Klein)
+item.Hide.medium.name=Rauwe Huid (Middel)
+item.Hide.large.name=Rauwe Huid (Groot)
+item.Soaked Hide.small.name=Doordrenkte Huid (Klein)
+item.Soaked Hide.medium.name=Doordrenkte Huid (Middel)
+item.Soaked Hide.large.name=Doordrenkte Huid (Groot)
+item.Scraped Hide.small.name=Geschrapte Huid (Klein)
+item.Scraped Hide.medium.name=Geschrapte Huid (Middel)
+item.Scraped Hide.large.name=Geschrapte Huid (Groot)
+item.Prep Hide.small.name=Bewerkte Huid (Klein)
+item.Prep Hide.medium.name=Bewerkte Huid (Middel)
+item.Prep Hide.large.name=Bewerkte Huid (Groot)
+item.Sheep Skin.small.name=Schapenhuid (Klein)
+item.Sheep Skin.medium.name=Schapenhuid (Middel)
+item.Sheep Skin.large.name=Schapenhuid (Groot)
+item.TFC Leather.name=Leer
+item.Flat Leather.name=Vlak Leer
+item.leather.name=Leer
+
+item.minecartChest.name=Mijnwagen met Kist
+item.fishingRod.name=Vishengel
+
+item.Quiver.name=Pijlkoker
+item.Rope.name=Touw
+
+#======== Misc. Blocks========
+tile.Straw Hide Bed.name=Stro en Dierenhuid Bed
+tile.customBed.sleep.name=Dit bed is niet comfortabel genoeg om in te slapen
+tile.BasicPipe.name=Pijp
+tile.ValvePipe.name=Pijpventiel
+tile.Torch.name=
+tile.Chest.name=
+tile.Bookshelf.name=
+tile.Workbench.name=
+tile.ButtonWood.name=
+
+#= Misc. Plants =
+item.Sugarcane.name=Suikerriet
+item.Hemp.name=Hennep
+item.Straw.name=Stro
+item.Jute.name=Jute
+item.Jute Fibre.name=Jutevezel
+
+tile.Fungi.mushroom_brown.name=Paddestoel
+tile.Fungi.mushroom_red.name=
+tile.Cactus.name=
+tile.Pumpkin.name=Pompoen
+tile.Moss.name=Mos
+tile.Thatch.name=Riet
+tile.Flora.Golden Rod.name=Guldenroede
+tile.Flora.Cat Tails.name=Lisdodde
+
+item.Seeds Sugarcane.name=Suikerriet Zaden
+item.Seeds Hemp.name=Hennep Zaden
+item.Seeds Jute.name=Jute Zaden
+
+tile.TallGrass.tallgrass.name=
+tile.TallGrass.fern.name=
+tile.TallGrass.shortgrass.name=
+tile.LilyPad.name=
+tile.Vine.name=
+tile.SeaGrassStill.name=
+tile.SeaGrassIce.name=
+
+tile.Flowers.flower_nasturtium.name=
+tile.Flowers.flower_dandelion.name=
+tile.Flowers.flower_meads_milkweed.name=
+tile.Flowers.flower_tropical_milkweed.name=
+tile.Flowers.flower_butterfly_milkweed.name=
+tile.Flowers.flower_calendula.name=
+tile.Flowers2.flower_rose.name=
+tile.Flowers2.flower_blue_orchid.name=
+tile.Flowers2.flower_allium.name=
+tile.Flowers2.flower_houstonia.name=
+tile.Flowers2.flower_tulip_red.name=
+tile.Flowers2.flower_tulip_orange.name=
+tile.Flowers2.flower_tulip_white.name=
+tile.Flowers2.flower_tulip_pink.name=
+tile.Flowers2.flower_oxeye_daisy.name=
+
+#=======
+#= GUI =
+#=======
+gui.badnbt=
+
+#== Anvil GUI ==
+gui.Anvil.Plans=Tekening
+gui.Anvil.Weld=Lassen
+
+gui.Anvil.LightHit=Lichte Tik
+gui.Anvil.MediumHit=Gemiddelde Tik
+gui.Anvil.HeavyHit=Zware Tik
+gui.Anvil.Draw=Trekken
+
+gui.Anvil.Punch=Ponsen
+gui.Anvil.Bend=Buigen
+gui.Anvil.Upset=Omslaan
+gui.Anvil.Shrink=Krimp
+
+gui.Anvil.Rules=Regels
+gui.Anvil.Rule1=Elk
+gui.Anvil.Rule2=Tik, Elk
+gui.Anvil.Rule3=Tik, Laatste
+gui.Anvil.Rule4=Tik, Tweede van Laatst
+gui.Anvil.Rule5=Tik, Derde van Laatst
+gui.Anvil.Rule6=Tik, Laatste Twee
+gui.Anvil.Rule7=Tik, Laatste Drie
+gui.Anvil.Rule8=Tik, Niet Laatste
+gui.Anvil.Rule9=Pons, Elk
+gui.Anvil.Rule10=Pons, Laatste
+gui.Anvil.Rule11=Pons, Tweede van Laatst
+gui.Anvil.Rule12=Pons, Derde van Laatst
+gui.Anvil.Rule13=Pons, Laatste Twee
+gui.Anvil.Rule14=Pons, Laatste Drie
+gui.Anvil.Rule15=Pons, Niet Laatste
+gui.Anvil.Rule16=Krimp, Elk
+gui.Anvil.Rule17=Krimp, Laatste
+gui.Anvil.Rule18=Krimp, Tweede van Laatst
+gui.Anvil.Rule19=Krimp, Derde van Laatst
+gui.Anvil.Rule20=Krimp, Laatste Twee
+gui.Anvil.Rule21=Krimp, Laatste Drie
+gui.Anvil.Rule22=Krimp, Niet Laatste
+gui.Anvil.Rule23=Trekken, Elk
+gui.Anvil.Rule24=Trekken, Laatste
+gui.Anvil.Rule25=Trekken, Tweede van Laatst
+gui.Anvil.Rule26=Trekken, Derde van Laatst
+gui.Anvil.Rule27=Trekken, Laatste Twee
+gui.Anvil.Rule28=Trekken, Laatste Drie
+gui.Anvil.Rule29=Trekken, Niet Laatste
+gui.Anvil.Rule30=Omslaan, Elk
+gui.Anvil.Rule31=Omslaan, Laatste
+gui.Anvil.Rule32=Omslaan, Tweede van Laatst
+gui.Anvil.Rule33=Omslaan, Derde van Laatst
+gui.Anvil.Rule34=Omslaan, Laatste Twee
+gui.Anvil.Rule35=Omslaan, Laatste Drie
+gui.Anvil.Rule36=Omslaan, Niet Laatste
+gui.Anvil.Rule37=Buigen, Elke
+gui.Anvil.Rule38=Buigen, Laatste
+gui.Anvil.Rule39=Buigen, Tweede van Laatst
+gui.Anvil.Rule40=Buigen, Derde van Laatst
+gui.Anvil.Rule41=Buigen, Laatste Twee
+gui.Anvil.Rule42=Buigen, Laatste Drie
+gui.Anvil.Rule43=Buigen, Niet Laatste
+
+#== Tools/Weapons/Armor GUI ==
+gui.Armor.Advanced=Geavanceerd
+gui.Armor.Shift=Wisselen
+gui.Armor.ForgedBy=Gemaakt door:
+gui.Armor.Hold=Vasthouden
+gui.Armor.Crush=Verpletteren
+gui.Armor.Pierce=Doordringen
+gui.Armor.Slash=Snijden
+
+gui.Bow.Advanced=Geavanceerd
+gui.Bow.Javelins=Speren
+gui.Bow.Arrows=Pijlen
+gui.Bow.ForgedBy=Gemaakt door
+
+gui.DamageType.Error=Fout: Slechte beschadigings Type
+gui.DamageType.Crushing=Verpletterend
+gui.DamageType.Piercing=Doordringend
+gui.DamageType.Slashing=Snijdend
+
+#== Barrel GUI ==
+gui.Barrel.Empty=Leeg
+gui.Barrel.Seal=Verzegelen
+gui.Barrel.Unseal=
+gui.Barrel.ToggleOff=Legen
+gui.Barrel.ToggleOn=Vullen
+gui.Barrel.SealedOn=
+gui.Barrel.Solid=
+gui.Barrel.Liquid=
+
+#== Bloomery GUI ==
+gui.Bloomery.Charcoal=Houtskool
+gui.Bloomery.Ore=Erts
+gui.Bloomery.Output=Opbrengst
+
+#== Calendar GUI ==
+gui.Calendar.Calendar=Kalender
+gui.Calendar.DateBioxx=Bioxx's Verjaardag
+gui.Calendar.DateDunk=Dunk's Verjaardag
+gui.Calendar.DateKitty=
+
+gui.Calendar.Hour=Uur
+gui.Calendar.WitchHour=Heksen uur
+
+gui.Calendar.Day=Dag
+gui.Calendar.Sunday=Zondag
+gui.Calendar.Monday=Maandag
+gui.Calendar.Tuesday=Dinsdag
+gui.Calendar.Wednesday=Woensdag
+gui.Calendar.Thursday=Donderdag
+gui.Calendar.Friday=Vrijdag
+gui.Calendar.Saturday=Zaterdag
+
+gui.Calendar.Season=Seizoen
+gui.Calendar.EarlySpring=Vroege Lente
+gui.Calendar.Spring=Lente
+gui.Calendar.LateSpring=Late Lente
+gui.Calendar.EarlySummer=Vroege Zomer
+gui.Calendar.Summer=Zomer
+gui.Calendar.LateSummer=Late Zomer
+gui.Calendar.EarlyAutumn=Vroege Herfst
+gui.Calendar.Autumn=Herfst
+gui.Calendar.LateAutumn=Late Herfst
+gui.Calendar.EarlyWinter=Vroege Winter
+gui.Calendar.Winter=Winter
+gui.Calendar.LateWinter=Late Winter
+
+gui.Calendar.Date=Datum
+gui.Calendar.January=Januari
+gui.Calendar.February=Februari
+gui.Calendar.March=Maart
+gui.Calendar.April=April
+gui.Calendar.May=Mei
+gui.Calendar.June=Juni
+gui.Calendar.July=Juli
+gui.Calendar.August=Augustus
+gui.Calendar.September=September
+gui.Calendar.October=Oktober
+gui.Calendar.November=November
+gui.Calendar.December=December
+
+gui.Calendar.1Hour=1 Uur
+gui.Calendar.1Day=1 Dag
+gui.Calendar.1Week=1 Week
+gui.Calendar.1Month=1 Maand
+gui.Calendar.1Year=1 Jaar
+
+#== Food Prep GUI ==
+gui.FoodPrep.CreateMeal=Maak 'n maaltijd
+gui.FoodPrep.Effect=Effect
+gui.FoodPrep.Energy=Energie
+gui.FoodPrep.Filling=Verzadegent
+gui.FoodPrep.Power=Kracht
+
+#== Metals ==
+gui.metal.Bismuth=Bismut
+gui.metal.BismuthBronze=Bismut Brons
+gui.metal.BlackBronze=Zwart Brons
+gui.metal.BlackSteel=Zwart Staal
+gui.metal.BlueSteel=Blauw Staal
+gui.metal.Brass=Bras
+gui.metal.Bronze=Brons
+gui.metal.Copper=Koper
+gui.metal.Gold=Goud
+gui.metal.HCBlackSteel=Hoog Koolstof Zwart Staal
+gui.metal.HCBlueSteel=Hoog Koolstof Blauw Staal
+gui.metal.HCRedSteel=Hoog Koolstof Rood Staal
+gui.metal.Lead=Lood
+gui.metal.Nickel=Nikkel
+gui.metal.PigIron=Ruw Ijzer
+gui.metal.Platinum=Platina
+gui.metal.RedSteel=Rood Staal
+gui.metal.RoseGold=Roze Goud
+gui.metal.Silver=Zilver
+gui.metal.Steel=Staal
+gui.metal.SterlingSilver=Sterling Zilver
+gui.metal.Tin=Tin
+gui.metal.Unknown=Onbekend
+gui.metal.WeakBlueSteel=Zwak Blauw Staal
+gui.metal.WeakRedSteel=Zwak Rood Staal
+gui.metal.WeakSteel=Zwak Staal
+gui.metal.WroughtIron=Smeed Ijzer
+gui.metal.Zinc=Zink
+
+#== Plans GUI ==
+gui.plans.axe=Bijl
+gui.plans.bootsplate=Schoenen
+gui.plans.bucket=Emmer
+gui.plans.chestplate=Borstharnas
+gui.plans.chisel=Beitel
+gui.plans.hammer=Hamer
+gui.plans.helmplate=Helm
+gui.plans.hoe=Schoffel
+gui.plans.ingot=Staaf
+gui.plans.javelin=Speer
+gui.plans.knife=Mes
+gui.plans.legsplate=Broek
+gui.plans.mace=Strijdknots
+gui.plans.pickaxe=Houweel
+gui.plans.propick=Mijnonderzoeker's Houweel
+gui.plans.refinebloom=Gesinterd IJzer Verfijnen
+gui.plans.saw=Zaag
+gui.plans.scythe=Zeis
+gui.plans.sheet=Plaat
+gui.plans.shovel=Schep
+gui.plans.splitbloom=Splijten
+gui.plans.sword=Zwaard
+gui.plans.tuyere=Blaaspijp
+gui.plans.grill=
+gui.plans.shears=
+
+#== Misc GUI ==
+gui.Blueprint=Blauwdruk
+gui.Nametag=
+gui.fertilized=Kunstmest
+gui.Inventory=Inhoud
+gui.ClearSlot=Maak plaats voor de opbrengst
+gui.LogPile=Houtstapel
+gui.done=Klaar
+gui.Sluice.Soil=Aarde
+gui.Sluice=Sluis
+gui.Workbench.Crafting=Maken
+
+#== Tooltips ==
+gui.ShowHelp=§8Help: (Houd §fShift§8 vast)
+gui.Help=§8Help:
+gui.Clay.Inst0=§bRecht Klik §7met 5 in een stapel, om te vormen
+gui.Knife.Inst0=
+gui.Knife.Inst1=
+gui.Leather.Inst0=§bRecht Klik §7met een mes, in je inhoud, om te snijden
+gui.LooseRock.Inst0=§bRecht Klik §7met 2 in een stapel, om te knappen.
+gui.MeltedMetal.Inst0=§bRecht Klik §7om in een Mal te gieten
+gui.PotteryBase.Inst0=Sluip en §bRecht Klik §7om een voorwerp te plaatsen
+gui.PotteryVesselSmall.Inst0=Of §bRecht Klik §7om te openen
+gui.RawHide.Inst0=
+gui.Barrel.MoreItems=
+
+gui.Size.Tiny=Minuscuul
+gui.Size.VerySmall=Erg klein
+gui.Size.Small=Klein
+gui.Size.Medium=Gemiddeld
+gui.Size.Large=Groot
+gui.Size.VeryLarge=Erg groot
+gui.Size.Huge=Gigantisch
+
+gui.Weight.Light=Licht
+gui.Weight.Medium=Gemiddeld
+gui.Weight.Heavy=Zwaar
+
+gui.Reach.Short=Kort
+gui.Reach.Medium=Medium
+gui.Reach.Far=Ver
+
+gui.food.fruit=Fruit
+gui.food.vegetable=Groente
+gui.food.grain=Graan
+gui.food.protein=Eiwitten
+gui.food.dairy=Melkproducten
+gui.food.amount=Hoeveelheid
+gui.food.decay=Bederf
+gui.food.salted=Gezouten
+
+gui.FoodHeat.Cold=Koud
+gui.FoodHeat.Warm=Warm
+
+gui.Torch.CatchingFire=Vat Vlam
+gui.Torch.Lit=Brandend
+
+gui.ItemHeat.Liquid=Vloeibaar
+gui.ItemHeat.Solidified=
+gui.ItemHeat.Caution=Waarschuwing
+gui.ItemHeat.Warming=Warmt op
+gui.ItemHeat.Hot=Heet
+gui.ItemHeat.VeryHot=Erg Heet
+gui.ItemHeat.FaintRed=Zwak Rood
+gui.ItemHeat.DarkRed=Donker Rood
+gui.ItemHeat.BrightRed=Helder Rood
+gui.ItemHeat.Orange=Oranje
+gui.ItemHeat.Yellow=Geel
+gui.ItemHeat.YellowWhite=Geel-wit
+gui.ItemHeat.White=Wit
+gui.ItemHeat.BrilliantWhite=Gloeiend Wit
+
+gui.ingot.workable=Bewerkbaar
+gui.ingot.weldable=Lasbaar
+gui.ingot.danger=**Gevaar**
+
+gui.milk.fresh=Jonge
+gui.milk.old=Oude
+gui.milk.sour=Zure
+
+gui.units=Eenheden
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=Kan alleen in stromend water gebruikt worden
+gui.goldpan.overused=Dit gebied is te veel bewerkt. Je zal er waarschijnlijk niets vinden.
+
+gui.ProPick.Found=Gevonden:
+gui.ProPick.FoundTraces=Miniscule hoeveelheden gevonden van
+gui.ProPick.FoundSmall=Klein beetje gevonden van
+gui.ProPick.FoundMedium=Gemiddelde hoeveelheid gevonden van
+gui.ProPick.FoundLarge=Grote hoeveelheid gevonden van
+gui.ProPick.FoundVeryLarge=Gigantische hoeveelheid gevonden van
+gui.ProPick.FoundNothing=Niets gevonden
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Harnassen
+itemGroup.TFCMaterials=(TFC) Materialen
+itemGroup.TFCMisc=(TFC) Diverse
+itemGroup.TFCPottery=(TFC) Aardwerk
+itemGroup.TFCTools=(TFC) Gereedschappen
+itemGroup.TFCWeapons=(TFC) Wapens
+itemGroup.TFCDevices=(TFC) Machines
+itemGroup.TFCFoods=(TFC) Voedsel
+itemGroup.TFCBuilding=
+itemGroup.TFCDecoration=
+
+#== Skill GUI ==
+skill.armorsmith=Harnas Smeden
+skill.gensmith=Algemeen Smeden
+skill.toolsmith=Gereedschap Smeden
+skill.weaponsmith=Wapen Smeden
+skill.agriculture=Landbouw
+skill.cooking=Koken
+skill.prospecting=
+skill.butchering=
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================
+fluid.freshwater=
+fluid.saltwater=Zout water
+fluid.lavatfc=
+fluid.hotwater=
+fluid.beer=Bier
+fluid.cider=Cider
+fluid.rum=Rum
+fluid.ryewhiskey=Rogge Whiskey
+fluid.sake=Sake
+fluid.vodka=Vodka
+fluid.whiskey=Whiskey
+fluid.cornwhiskey=
+fluid.milk=Melk
+fluid.milkcurdled=Gewrongelde Melk
+fluid.limewater=Kalk Water
+fluid.tannin=Tannine
+fluid.vinegar=Azijn
+fluid.brine=
+
+gui.showtaste=
+gui.taste=
+gui.taste.sweet=
+gui.taste.sour=
+gui.taste.salty=
+gui.taste.bitter=
+gui.taste.savory=
+
+gui.taste.novice.sweet1=
+gui.taste.novice.sweet0=
+gui.taste.novice.sour1=
+gui.taste.novice.sour0=
+gui.taste.novice.salty1=
+gui.taste.novice.salty0=
+gui.taste.novice.bitter1=
+gui.taste.novice.bitter0=
+gui.taste.novice.savory1=
+gui.taste.novice.savory0=
+
+gui.taste.adept.sweet0=
+gui.taste.adept.sweet1=
+gui.taste.adept.sweet2=
+gui.taste.adept.sweet3=
+gui.taste.adept.sweet4=
+gui.taste.adept.sweet5=
+gui.taste.adept.sour0=
+gui.taste.adept.sour1=
+gui.taste.adept.sour2=
+gui.taste.adept.sour3=
+gui.taste.adept.sour4=
+gui.taste.adept.sour5=
+gui.taste.adept.salty0=
+gui.taste.adept.salty1=
+gui.taste.adept.salty2=
+gui.taste.adept.salty3=
+gui.taste.adept.salty4=
+gui.taste.adept.salty5=
+gui.taste.adept.bitter0=
+gui.taste.adept.bitter1=
+gui.taste.adept.bitter2=
+gui.taste.adept.bitter3=
+gui.taste.adept.bitter4=
+gui.taste.adept.bitter5=
+gui.taste.adept.savory0=
+gui.taste.adept.savory1=
+gui.taste.adept.savory2=
+gui.taste.adept.savory3=
+gui.taste.adept.savory4=
+gui.taste.adept.savory5=
+
+gui.taste.0=
+gui.taste.1=
+gui.taste.2=
+gui.taste.3=
+gui.taste.4=
+gui.taste.5=
+gui.taste.6=
+gui.taste.7=
+gui.taste.8=
+
+gui.skill.novice=
+gui.skill.adept=
+gui.skill.expert=
+gui.skill.master=
+gui.skillpage=
+tile.MetalTrapDoor.name=
+item.Mud Brick.name=
+item.Wet Mud Brick.name=
+gui.overburdened=
+gui.slot=
+gui.slot.back=
+word.pickled=
+word.brined=
+word.cooked=
+word.salted=
+word.smoked=
+word.dried=
+gui.barrel.pickling=
+gui.barrel.brining=
+tile.Vessel.name=
+tile.Grill.name=
+food.cooked.rare=
+food.cooked.medrare=
+food.cooked.med=
+food.cooked.medwell=
+food.cooked.well=
+food.cooked.0=
+food.cooked.1=
+food.cooked.2=
+food.cooked.3=
+food.cooked.4=
+gui.FoodPrep.Sandwich=
+gui.FoodPrep.Salad=
+item.Sandwich.name=
+item.Salad.name=
+item.ClayBowl.Ceramic Bowl.name=
+item.ClayBowl.Clay Bowl.name=
+item.Sugar.name=
+item.Sea Weed.name=

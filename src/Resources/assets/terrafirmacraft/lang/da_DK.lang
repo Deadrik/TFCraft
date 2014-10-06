@@ -1,0 +1,2450 @@
+﻿#da_DK
+#Dette er den danske sprog-konfigurationsfil, oversat af gufferdk og efterset af DukeJuke; This is the Danish language configuration file, translated by gufferdk and rewiewed by DukeJuke
+
+
+
+
+
+generator.TFCDefault=TFC Standard
+generator.TFCFlat=TFC Flad
+
+key.ToolMode=Skift Værktøjstilstand
+key.LockTool=Lås Værktøjsplacering
+
+effect.bleed=Blødning
+
+#==============
+#= Spawn Eggs =
+#==============
+entity.squidTFC.name=Blæksprutte
+entity.cowTFC.name=Ko
+entity.wolfTFC.name=Ulv
+entity.bearTFC.name=Bjørn
+entity.deerTFC.name=Rådyr
+entity.chickenTFC.name=Kylling
+entity.pigTFC.name=Gris
+entity.skeletonTFC.name=Skelet
+entity.zombieTFC.name=Zombie
+entity.spiderTFC.name=Edderkop
+entity.slimeTFC.name=Slim
+entity.silverfishTFC.name=Sølvfisk
+entity.ghastTFC.name=Ghast
+entity.caveSpiderTFC.name=Huleedderkop
+entity.blazeTFC.name=Ildånd
+entity.endermanTFC.name=Endermand
+entity.pigZombieTFC.name=Grisezombie
+entity.creeperTFC.name=Creeper
+entity.sheepTFC.name=Får
+entity.pheasantTFC.name=Fasan
+entity.horseTFC.name=Hest
+entity.irongolemTFC.name=Jerngolem
+entity.fishTFC.name=Aborre
+
+
+#==========
+#= Entity =
+#==========
+entity.notFamiliar=
+fishingRod.lineTension=
+fishingRod.lineSnap=
+fishingRod.bite=
+fishingRod.gotAway=
+
+#================
+#= Achievements =
+#================
+achievement.achLooseRock=Tid til at stene!
+achievement.achLooseRock.desc=Saml en sten op
+achievement.achSmallOre=§No stone unturned
+achievement.achSmallOre.desc=Find en malm-klump
+achievement.achWildVegetable=Samler
+achievement.achWildVegetable.desc=Find en vild grøntsag
+achievement.achRutabaga=Åndssvage løg...
+achievement.achRutabaga.desc=Find en kålrabi
+achievement.achQuern=Kværnen
+achievement.achQuern.desc=Brug en kværnsten
+achievement.achStoneAge=Velkommen til stenalderen!
+achievement.achStoneAge.desc=Slå to sten sammen og lav et stykke værktøj for at komme ind i stenalderen
+achievement.achCopperAge=Farvel stenalder!
+achievement.achCopperAge.desc=Støb noget af metal for at komme ind i kobberalderen
+achievement.achSaw=Tømreren
+achievement.achSaw.desc=Lav en sav
+achievement.achAnvil=§oHammer Time!
+achievement.achAnvil.desc=Lav en stenambolt
+achievement.achPickaxe=Tid til at Mine! (endelig)
+achievement.achPickaxe.desc=Lav en hakke
+achievement.achDiamond=DIAM- eller vent nu lige lidt...
+achievement.achDiamond.desc=Find en diamant
+achievement.achLimonite=LI-MO-NIIIIT!!
+achievement.achLimonite.desc=Find noget limonit
+achievement.achBronzeAge=Bronzealderen
+achievement.achBronzeAge.desc=Lave en bronzeambolt for at komme ind i bronzealderen
+achievement.achIronAge=Jernalderen
+achievement.achIronAge.desc=Lav og indsaml en jernluppe for at komme ind i jernalderen
+achievement.achPokeCreeper=§oSteve Irwin
+achievement.achPokeCreeper.desc=Slå den med en pind
+
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=Ingen gyldige dyr inden for rækkevidde!
+commands.transferTamed.tooMany=For mange dyr inden for rækkevidde!
+commands.transferTamed.wrongOwner=Det/den tilhører ikke dig!
+commands.transferTamed.sameTarget=Du kan ikke overdrage dig selv!
+commands.transferTamed.display.incoming=Et dyr er blevet overdraget til dig af %s!
+commands.transferTamed.display.outgoing=Du overdraget et dyr til %s!
+commands.transferTamed.wrongSender=Du kan ikke overføre dyr!
+
+#========
+#= Food =
+#========
+item.MealGeneric.name=Måltid
+item.meal.terrible=Forfærdeligt
+item.meal.poor=Ringe
+item.meal.decent=Middelmådigt
+item.meal.good=Godt
+item.meal.great=Storartet
+item.meal.fantastic=Fantastisk
+
+#== Grains ==
+item.Barley Bread.name=Bygbrød
+item.Corn Bread.name=Majsbrød
+item.Oat Bread.name=Havrebrød
+item.Rice Bread.name=Risbrød
+item.Rye Bread.name=Rugbrød
+item.Wheat Bread.name=Hvedebrød
+
+item.Barley Whole.name=Byg
+item.Maize Ear.name=Majskolbe
+item.Oat Whole.name=Havre
+item.Rice Whole.name=Ris
+item.Rye Whole.name=Rug
+item.Wheat Whole.name=Hvede
+
+item.Barley Grain.name=Bygkorn
+item.Oat Grain.name=Havrekorn
+item.Rice Grain.name=Riskorn
+item.Rye Grain.name=Rugkorn
+item.Wheat Grain.name=Hvedekorn
+
+item.Barley Ground.name=Bygmel
+item.Cornmeal Ground.name=Majsmel
+item.Oat Ground.name=Havremel
+item.Rice Ground.name=Rismel
+item.Rye Ground.name=Rugmel
+item.Wheat Ground.name=Hvedemel
+
+item.Barley Dough.name=Bygdej
+item.Cornmeal Dough.name=Majsmelsdej
+item.Oat Dough.name=Havredej
+item.Rice Dough.name=Risdej
+item.Rye Dough.name=Rugdej
+item.Wheat Dough.name=Hvededej
+
+item.Seeds Barley.name=Bygfrø
+item.Seeds Maize.name=Majsfrø
+item.Seeds Oat.name=Havrefrø
+item.Seeds Rice.name=Risfrø
+item.Seeds Rye.name=Rugfrø
+item.Seeds Wheat.name=Hvedefrø
+
+#== Fruit ==
+item.Green Apple.name=Grønt Æble
+item.Red Apple.name=Rødt Æble
+item.Banana.name=Banan
+item.Cherry.name=Kirsebær
+item.Lemon.name=Citron
+item.Olive.name=Oliven
+item.Orange.name=Appelsin
+item.Peach.name=Fersken
+item.Plum.name=Blomme
+
+item.FruitSapling.Green Apple.name=Grønt Æbletræsstikling
+item.FruitSapling.Red Apple.name=Rødt Æbletræsstikling
+item.FruitSapling.Banana.name=Banantræsstikling
+item.FruitSapling.Cherry.name=Kirsebærtræsstikling
+item.FruitSapling.Lemon.name=Citrontræsstikling
+item.FruitSapling.Olive.name=Oliventræsstikling
+item.FruitSapling.Orange.name=Appelsintræsstikling
+item.FruitSapling.Peach.name=Ferskentræsstikling
+item.FruitSapling.Plum.name=Blommetræsstikling
+
+#=== Berry Bushes ===
+tile.BerryBush.Blackberry.name=Brombærbærbusk
+tile.BerryBush.Blueberry.name=Blåbærbusk
+tile.BerryBush.Bunchberry.name=Hønsebærbusk
+tile.BerryBush.Cloudberry.name=Multebærbusk
+tile.BerryBush.Cranberry.name=Tranebærbusk
+tile.BerryBush.Elderberry.name=Hyldebærbusk
+tile.BerryBush.Gooseberry.name=Stikkelsbærbusk
+tile.BerryBush.Raspberry.name=Hindbærbusk
+tile.BerryBush.Snowberry.name=Snebærbusk
+tile.BerryBush.Strawberry.name=Jordbærbusk
+tile.BerryBush.Wintergreen.name=Bjergte-busk
+
+item.Blackberry.name=Brombær
+item.Blueberry.name=Blåbær
+item.Bunchberry.name=Hønsebær
+item.Cloudberry.name=Multebær
+item.Cranberry.name=Tranebær
+item.Elderberry.name=Hyldebær
+item.Gooseberry.name=Stikkelsbær
+item.Raspberry.name=Hindbær
+item.Snowberry.name=Snebær
+item.Strawberry.name=Jordbær
+item.Wintergreen Berry.name=Bjergte-bær
+
+item.Blackberry Leaf.name=Brombærblad
+item.Blueberry Leaf.name=Blåbærblad
+item.Bunchberry Leaf.name=Hønsebærblad
+item.Cloudberry Leaf.name=Multebærblad
+item.Cranberry Leaf.name=Tranebærblad
+item.Elderberry Leaf.name=Hyldeblad
+item.Gooseberry Leaf.name=Stikkelsbærblad
+item.Raspberry Leaf.name=Hindbærblad
+item.Snowberry Leaf.name=Snebærblad
+item.Strawberry Leaf.name=Jordbærblad
+item.Wintergreen Leaf.name=Bjergte-blad
+
+#== Protein ==
+item.Beef.name=Bøf
+item.Calamari.name=Blækspruttekød
+item.egg.name=Æg
+item.Fish.name=Fisk
+item.Mutton.name=Fårekød
+item.Porkchop.name=Svinekotelet
+item.Chicken.name=Kylling
+item.Venison.name=Vildtkød
+item.HorseMeat.name=Hestekød
+item.Egg Cooked.name=Spejlæg
+
+item.Soybeans.name=Sojabønner
+item.Seeds Soybean.name=Sojabønnefrø
+
+#== Dairy ==
+item.Cheese.name=Ost
+
+#== Vegetables ==
+item.Green Bell Pepper.name=Grøn Peberfrugt
+item.Red Bell Pepper.name=Rød Peberfrugt
+item.Yellow Bell Pepper.name=Gul Peberfrugt
+item.Cabbage.name=Kål
+item.Carrot.name=Gulerod
+item.Garlic.name=Hvidløg
+item.Greenbeans.name=Grønne Bønner
+item.Onion.name=Løg
+item.Potato.name=Kartoffel
+item.Rutabaga.name=Kålrabi
+item.Squash.name=Squash
+item.Tomato.name=Tomat
+
+item.Seeds Red Bell Pepper.name=Røde Peberfrugtsfrø
+item.Seeds Yellow Bell Pepper.name=Gule Peberfrugtsfrø
+item.Seeds Cabbage.name=Kålfrø
+item.Seeds Carrot.name=Gulerodsfrø
+item.Seeds Garlic.name=Hvidløgsfrø
+item.Seeds Greenbean.name=Grønne Bønnefrø
+item.Seeds Onion.name=Løgfrø
+item.Seeds Potato.name=Kartoffelfrø
+item.Seeds Rutabaga.name=Kålrabifrø
+item.Seeds Squash.name=Squashfrø
+item.Seeds Tomato.name=Tomatfrø
+
+#== Alcohol ==
+item.Glass Bottle.name=Tom Glasflaske
+item.Beer.name=Øl
+item.Cider.name=Cider
+item.Rum.name=Rom
+item.RyeWhiskey.name=Rugwhisky
+item.Sake.name=Sake
+item.Vodka.name=Vodka
+item.Whiskey.name=Whisky
+item.CornWhiskey.name=
+
+#===========
+#= Pottery =
+#===========
+item.Clay.Clay.name=Ler
+item.Clay.Fire Clay.name=Chamotte
+
+item.clay.clayflatlight.name=Lyst Fladt Ler
+item.clay.clayflatdark.name=Mørkt Fladt Ler
+item.clay.clayflatfire.name=Flad Chamotte
+item.clay.clayflatdarkfire.name=Mørk Flad Chamotte
+
+item.Jug.Clay Jug.name=Lerkande
+item.Jug.Ceramic Jug.name=Keramik-kande
+item.Jug.Water Jug.name=Vandkande
+
+item.Pot.Clay Pot.name=Lerpotte
+item.Pot.Ceramic Pot.name=Keramikpotte
+
+item.Small Vessel.Clay Vessel.name=Lerkar
+item.Small Vessel.Ceramic Vessel.name=Keramikkar
+
+item.Large Vessel.Clay Vessel [Large].name=Lerkar [stort]
+item.Large Vessel.Ceramic Vessel [Large].name=Keramikkar [stort]
+
+item.Mold.Clay Mold.name=Lerstøbeform
+item.Mold.Ceramic Mold.name=Keramikstøbeform
+
+item.Axe Mold.Clay Mold Axe.name=Lerstøbeform Til Økse
+item.Axe Mold.Ceramic Mold Axe.name=Øksestøbeform
+item.Axe Mold.Ceramic Mold Axe Copper.name=Øksestøbeform (Kobber)
+item.Axe Mold.Ceramic Mold Axe Bronze.name=Øksestøbeform (Bronze)
+item.Axe Mold.Ceramic Mold Axe Black Bronze.name=Øksestøbeform (Sort Bronze)
+item.Axe Mold.Ceramic Mold Axe Bismuth Bronze.name=Øksestøbeform (Bismuthbronze)
+
+item.Chisel Mold.Clay Mold Chisel.name=Lerstøbeform Til Mejsel
+item.Chisel Mold.Ceramic Mold Chisel.name=Mejselstøbeform
+item.Chisel Mold.Ceramic Mold Chisel Copper.name=Mejselstøbeform (Kobber)
+item.Chisel Mold.Ceramic Mold Chisel Bronze.name=Mejselstøbeform (Bronze)
+item.Chisel Mold.Ceramic Mold Chisel Black Bronze.name=Mejselstøbeform (Sort Bronze)
+item.Chisel Mold.Ceramic Mold Chisel Bismuth Bronze.name=Mejselstøbeform (Bismuthbronze)
+
+item.Hammer Mold.Clay Mold Hammer.name=Lerstøbeform Til Hammer
+item.Hammer Mold.Ceramic Mold Hammer.name=Hammerstøbeform
+item.Hammer Mold.Ceramic Mold Hammer Copper.name=Hammerstøbeform (Kobber)
+item.Hammer Mold.Ceramic Mold Hammer Bronze.name=Hammerstøbeform (Bronze)
+item.Hammer Mold.Ceramic Mold Hammer Black Bronze.name=Hammerstøbeform (Sort Bronze)
+item.Hammer Mold.Ceramic Mold Hammer Bismuth Bronze.name=Hammerstøbeform (Bismuthbronze)
+
+item.Hoe Mold.Clay Mold Hoe.name=Lerstøbeform Til Hakkejern
+item.Hoe Mold.Ceramic Mold Hoe.name=Hakkejernsstøbeform
+item.Hoe Mold.Ceramic Mold Hoe Copper.name=Hakkejernsstøbeform (Kobber)
+item.Hoe Mold.Ceramic Mold Hoe Bronze.name=Hakkejernsstøbeform (Bronze)
+item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=Hakkejernsstøbeform (Sort Bronze)
+item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=Hakkejernsstøbeform (Bismuthbronze)
+
+item.Knife Mold.Clay Mold Knife.name=Lerstøbeform Til Kniv
+item.Knife Mold.Ceramic Mold Knife.name=Knivsstøbeform
+item.Knife Mold.Ceramic Mold Knife Copper.name=Knivsstøbeform (Kobber)
+item.Knife Mold.Ceramic Mold Knife Bronze.name=Knivsstøbeform (Bronze)
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=Knivsstøbeform (Sort Bronze)
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=Knivsstøbeform (Bismuthbronze)
+
+item.Javelin Mold.Clay Mold Javelin.name=Lerstøbeform Til Spydspid
+item.Javelin Mold.Ceramic Mold Javelin.name=Spydspids-støbeform
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=Spydspids-støbeform (Kobber)
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=Spydspids-støbeform (Bronze)
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=Spydspids-støbeform (Sort Bronze)
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=Spydspids-støbeform (Bismuthbronze)
+
+item.Mace Mold.Clay Mold Mace.name=Lerstøbeform Til Morgenstjerne
+item.Mace Mold.Ceramic Mold Mace.name=Morgenstjernestøbeform
+item.Mace Mold.Ceramic Mold Mace Copper.name=Morgenstjernestøbeform (Kobber)
+item.Mace Mold.Ceramic Mold Mace Bronze.name=Morgenstjernestøbeform (Bronze)
+item.Mace Mold.Ceramic Mold Mace Black Bronze.name=Morgenstjernestøbeform (Sort Bronze)
+item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=Morgenstjernestøbeform (Bismuthbronze)
+
+item.Pick Mold.Clay Mold Pick.name=Lerstøbeform Til Hakke
+item.Pick Mold.Ceramic Mold Pick.name=Hakkestøbeform
+item.Pick Mold.Ceramic Mold Pick Copper.name=Hakkestøbeform (Kobber)
+item.Pick Mold.Ceramic Mold Pick Bronze.name=Hakkestøbeform (Bronze)
+item.Pick Mold.Ceramic Mold Pick Black Bronze.name=Hakkestøbeform (Sort Bronze)
+item.Pick Mold.Ceramic Mold Pick Bismuth Bronze.name=Hakkestøbeform (Bismuthbronze)
+
+item.ProPick Mold.Clay Mold ProPick.name=Lerstøbeform Til Prospekteringshakke
+item.ProPick Mold.Ceramic Mold ProPick.name=Prospekteringshakkestøbeform
+item.ProPick Mold.Ceramic Mold ProPick Copper.name=Prospekteringshakkestøbeform (Kobber)
+item.ProPick Mold.Ceramic Mold ProPick Bronze.name=Prospekteringshakkestøbeform (Bronze)
+item.ProPick Mold.Ceramic Mold ProPick Black Bronze.name=Prospekteringshakkestøbeform (Sort Bronze)
+item.ProPick Mold.Ceramic Mold ProPick Bismuth Bronze.name=Prospekteringshakkestøbeform (Bismuthbronze)
+
+item.Saw Mold.Clay Mold Saw.name=Lerstøbeform Til Sav
+item.Saw Mold.Ceramic Mold Saw.name=Savstøbeform
+item.Saw Mold.Ceramic Mold Saw Copper.name=Savstøbeform (Kobber)
+item.Saw Mold.Ceramic Mold Saw Bronze.name=Savstøbeform (Bronze)
+item.Saw Mold.Ceramic Mold Saw Black Bronze.name=Savstøbeform (Sort Bronze)
+item.Saw Mold.Ceramic Mold Saw Bismuth Bronze.name=Savstøbeform (Bismuthbronze)
+
+item.Scythe Mold.Clay Mold Scythe.name=Lerstøbeform Til Le
+item.Scythe Mold.Ceramic Mold Scythe.name=Le-støbeform
+item.Scythe Mold.Ceramic Mold Scythe Copper.name=Le-støbeform (Kobber)
+item.Scythe Mold.Ceramic Mold Scythe Bronze.name=Le-støbeform (Bronze)
+item.Scythe Mold.Ceramic Mold Scythe Black Bronze.name=Le-støbeform (Sort Bronze)
+item.Scythe Mold.Ceramic Mold Scythe Bismuth Bronze.name=Le-støbeform (Bismuthbronze)
+
+item.Shovel Mold.Clay Mold Shovel.name=Lerstøbeform Til Skovl
+item.Shovel Mold.Ceramic Mold Shovel.name=Skovlstøbeform
+item.Shovel Mold.Ceramic Mold Shovel Copper.name=Skovlstøbeform (Kobber)
+item.Shovel Mold.Ceramic Mold Shovel Bronze.name=Skovlstøbeform (Bronze)
+item.Shovel Mold.Ceramic Mold Shovel Black Bronze.name=Skovlstøbeform (Sort Bronze)
+item.Shovel Mold.Ceramic Mold Shovel Bismuth Bronze.name=Skovlstøbeform (Bismuthbronze)
+
+item.Sword Mold.Clay Mold Sword.name=Lerstøbeform Til Sværd
+item.Sword Mold.Ceramic Mold Sword.name=Sværdstøbeform
+item.Sword Mold.Ceramic Mold Sword Copper.name=Sværdstøbeform (Kobber)
+item.Sword Mold.Ceramic Mold Sword Bronze.name=Sværdstøbeform (Bronze)
+item.Sword Mold.Ceramic Mold Sword Black Bronze.name=Sværdstøbeform (Sort Bronze)
+item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=Sværdstøbeform (Bismuthbronze)
+
+item.Spindle.name=Ten
+item.Spindle Head.Clay Spindle.name=Ler-ten
+item.Spindle Head.Spindle Head.name=Ten-hoved
+
+item.Fire Brick.Fire Brick.name=Ildfast Mursten
+item.Fire Brick.Clay Fire Brick.name=Ubrændt Ildfast Mursten
+tile.FireBrick.name=Ildfast Murstensblok
+
+#= Gems =
+item.Agate.Chipped.name=Hakket Agat
+item.Amethyst.Chipped.name=Hakket Ametyst
+item.Beryl.Chipped.name=Hakket Beryl
+item.Diamond.Chipped.name=Hakket Diamant
+item.Emerald.Chipped.name=Hakket Smaragd
+item.Garnet.Chipped.name=Hakket Granat
+item.Jade.Chipped.name=Hakket Jade
+item.Jasper.Chipped.name=Hakket Jaspis
+item.Opal.Chipped.name=Hakket Opal
+item.Ruby.Chipped.name=Hakket Rubin
+item.Sapphire.Chipped.name=Hakket Safir
+item.Topaz.Chipped.name=Hakket Topas
+item.Tourmaline.Chipped.name=Hakket Turmalin
+
+item.Agate.Flawed.name=Mangelfuld Agat
+item.Amethyst.Flawed.name=Mangelfuld Ametyst
+item.Beryl.Flawed.name=Mangelfuld Beryl
+item.Diamond.Flawed.name=Mangelfuld Diamant
+item.Emerald.Flawed.name=Mangelfuld Smaragd
+item.Garnet.Flawed.name=Mangelfuld Granat
+item.Jade.Flawed.name=Mangelfuld Jade
+item.Jasper.Flawed.name=Mangelfuld Jaspis
+item.Opal.Flawed.name=Mangelfuld Opal
+item.Ruby.Flawed.name=Mangelfuld Rubin
+item.Sapphire.Flawed.name=Mangelfuld Safir
+item.Topaz.Flawed.name=Mangelfuld Topas
+item.Tourmaline.Flawed.name=Mangelfuld Turmalin
+
+item.Agate.Normal.name=Agat
+item.Amethyst.Normal.name=Ametyst
+item.Beryl.Normal.name=Beryl
+item.Diamond.Normal.name=Diamant
+item.Emerald.Normal.name=Smaragd
+item.Garnet.Normal.name=Granat
+item.Jade.Normal.name=Jade
+item.Jasper.Normal.name=Jaspis
+item.Opal.Normal.name=Opal
+item.Ruby.Normal.name=Rubin
+item.Sapphire.Normal.name=Safir
+item.Topaz.Normal.name=Topas
+item.Tourmaline.Normal.name=Turmalin
+
+item.Agate.Flawless.name=Fejlfri Agat
+item.Amethyst.Flawless.name=Fejlfri Ametyst
+item.Beryl.Flawless.name=Fejlfri Beryl
+item.Diamond.Flawless.name=Fejlfri Diamant
+item.Emerald.Flawless.name=Fejlfri Smaragd
+item.Garnet.Flawless.name=Fejlfri Granat
+item.Jade.Flawless.name=Fejlfri Jade
+item.Jasper.Flawless.name=Fejlfri Jaspis
+item.Opal.Flawless.name=Fejlfri Opal
+item.Ruby.Flawless.name=Fejlfri Rubin
+item.Sapphire.Flawless.name=Fejlfri Safir
+item.Topaz.Flawless.name=Fejlfri Topas
+item.Tourmaline.Flawless.name=Fejlfri Turmalin
+
+item.Agate.Exquisite.name=Udsøgt Agat
+item.Amethyst.Exquisite.name=Udsøgt Ametyst
+item.Beryl.Exquisite.name=Udsøgt Beryl
+item.Diamond.Exquisite.name=Udsøgt Diamant
+item.Emerald.Exquisite.name=Udsøgt Smaragd
+item.Garnet.Exquisite.name=Udsøgt Granat
+item.Jade.Exquisite.name=Udsøgt Jade
+item.Jasper.Exquisite.name=Udsøgt Jaspis
+item.Opal.Exquisite.name=Udsøgt Opal
+item.Ruby.Exquisite.name=Udsøgt Rubin
+item.Sapphire.Exquisite.name=Udsøgt Safir
+item.Topaz.Exquisite.name=Udsøgt Topas
+item.Tourmaline.Exquisite.name=Udsøgt Turmalin
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.black.name=Blæksæk
+item.dyePowder.blue.name=Lapis Lazuli
+item.dyePowder.brown.name=Kakaobønner
+item.dyePowder.cyan.name=Cyan Farve
+item.dyePowder.gray.name=Grå Farve
+item.dyePowder.green.name=Grøn farve
+item.dyePowder.lightBlue.name=Lyseblå farve
+item.dyePowder.lime.name=Limegrøn Farve
+item.dyePowder.magenta.name=Magenta farve
+item.dyePowder.orange.name=Orange Farve
+item.dyePowder.pink.name=Lyserød Farve
+item.dyePowder.purple.name=Lilla Farve
+item.dyePowder.red.name=Rød farve
+item.dyePowder.silver.name=Lysegrå farve
+item.dyePowder.white.name=Benmel
+item.dyePowder.yellow.name=Gul Farve
+
+item.Coke.name=Koks
+item.Powder.Flux.name=Flus
+item.Powder.Graphite Powder.name=Grafitpulver
+item.Powder.Hematite Powder.name=Hæmatitpulver
+item.Powder.Kaolinite Powder.name=Kaolinitpulver
+item.Powder.Lapis Lazuli Powder.name=Lapis Lazuli-pulver
+item.Powder.Limonite Powder.name=Limonitpulver
+item.Powder.Malachite Powder.name=Malakitpulver
+item.Powder.Salt.name=Salt
+item.Powder.Saltpeter Powder.name=Salpeterpulver
+item.Powder.Sulfur Powder.name=Svovlpulver
+
+#=========
+#= Stone =
+#=========
+#== Stone Items ==
+item.LooseRock.Andesite.name=Andesitsten
+item.LooseRock.Basalt.name=Basaltsten
+item.LooseRock.Chalk.name=Kridtsten
+item.LooseRock.Chert.name=Chertsten
+item.LooseRock.Claystone.name=Lerstenssten
+item.LooseRock.Conglomerate.name=Konglomeratsten
+item.LooseRock.Dacite.name=Dacitsten
+item.LooseRock.Diorite.name=Dioritsten
+item.LooseRock.Dolomite.name=Dolomitsten
+item.LooseRock.Gabbro.name=Gabbrosten
+item.LooseRock.Gneiss.name=Gnejssten
+item.LooseRock.Granite.name=Granitsten
+item.LooseRock.Limestone.name=Kalkstenssten
+item.LooseRock.Marble.name=Marmorsten
+item.LooseRock.Phyllite.name=Fyllitsten
+item.LooseRock.Quartzite.name=Kvartsitsten
+item.LooseRock.Rhyolite.name=Rhyolitsten
+item.LooseRock.Rock Salt.name=Stensaltssten
+item.LooseRock.Schist.name=Glimmerskifersten
+item.LooseRock.Shale.name=Lerskifersten
+item.LooseRock.Slate.name=Skifersten
+
+item.ItemStoneBrick.Andesite.name=Andesitmursten
+item.ItemStoneBrick.Basalt.name=Basaltmursten
+item.ItemStoneBrick.Chalk.name=Kridtmursten
+item.ItemStoneBrick.Chert.name=Chertmursten
+item.ItemStoneBrick.Claystone.name=Lerstensmursten
+item.ItemStoneBrick.Conglomerate.name=Conglomeratmursten
+item.ItemStoneBrick.Dacite.name=Dacitmursten
+item.ItemStoneBrick.Diorite.name=Dioritmursten
+item.ItemStoneBrick.Dolomite.name=Dolomitmursten
+item.ItemStoneBrick.Gabbro.name=Gabbromursten
+item.ItemStoneBrick.Gneiss.name=Gnejsmursten
+item.ItemStoneBrick.Granite.name=Granitmursten
+item.ItemStoneBrick.Limestone.name=Kalkstensmursten
+item.ItemStoneBrick.Marble.name=Marmormursten
+item.ItemStoneBrick.Phyllite.name=Fyllitmursten
+item.ItemStoneBrick.Quartzite.name=Kvartsitmursten
+item.ItemStoneBrick.Rhyolite.name=Rhyolitmursten
+item.ItemStoneBrick.Rock Salt.name=Stensaltsmursten
+item.ItemStoneBrick.Schist.name=Glimmerskifermursten
+item.ItemStoneBrick.Shale.name=Lerskifermursten
+item.ItemStoneBrick.Slate.name=Skifermursten
+
+item.FlatRock.Andesite.name=Andesit
+item.FlatRock.Basalt.name=Basalt
+item.FlatRock.Chalk.name=Kridt
+item.FlatRock.Chert.name=Chert
+item.FlatRock.Claystone.name=Lersten
+item.FlatRock.Conglomerate.name=Konglomerat
+item.FlatRock.Dacite.name=Dacit
+item.FlatRock.Diorite.name=Diorit
+item.FlatRock.Dolomite.name=Dolomit
+item.FlatRock.Gabbro.name=Gabbro
+item.FlatRock.Gneiss.name=Gnejs
+item.FlatRock.Granite.name=Granit
+item.FlatRock.Limestone.name=Kalksten
+item.FlatRock.Marble.name=Marmor
+item.FlatRock.Phyllite.name=Fyllit
+item.FlatRock.Quartzite.name=Kvartsit
+item.FlatRock.Rhyolite.name=Rhyolit
+item.FlatRock.Rock Salt.name=Stensalt
+item.FlatRock.Schist.name=Glimmerskifer
+item.FlatRock.Shale.name=Lerskifer
+item.FlatRock.Slate=Skifer
+
+#== Stone Blocks ==
+tile.WallCobble.Andesite.name=Andesit-kampestensvæg
+tile.WallCobble.Basalt.name=Basalt-kampestensvæg
+tile.WallCobble.Chalk.name=Kridt-kampestensvæg
+tile.WallCobble.Chert.name=Chert-kampestensvæg
+tile.WallCobble.Claystone.name=Lerstens-kampestensvæg
+tile.WallCobble.Conglomerate.name=Konglomerat-kampestensvæg
+tile.WallCobble.Dacite.name=Dacit-kampestensvæg
+tile.WallCobble.Diorite.name=Diorit-kampestensvæg
+tile.WallCobble.Dolomite.name=Dolomit-kampestensvæg
+tile.WallCobble.Gabbro.name=Gabbro-kampestensvæg
+tile.WallCobble.Gneiss.name=Gnejs-kampestensvæg
+tile.WallCobble.Granite.name=Granit-kampestensvæg
+tile.WallCobble.Limestone.name=Kalkstens-kampestensvæg
+tile.WallCobble.Marble.name=Marmor-kampestensvæg
+tile.WallCobble.Phyllite.name=Fyllit-kampestensvæg
+tile.WallCobble.Quartzite.name=Kvartsit-kampestensvæg
+tile.WallCobble.Rhyolite.name=Rhyolit-kampestensvæg
+tile.WallCobble.Rock Salt.name=Stensalts-kampestensvæg
+tile.WallCobble.Schist.name=Glimmerskifer-kampestensvæg
+tile.WallCobble.Shale.name=Lerskifer-kampestensvæg
+tile.WallCobble.Slate.name=Skifer-kampestensvæg
+
+tile.WallRaw.Andesite.name=Andesitvæg
+tile.WallRaw.Basalt.name=Basaltvæg
+tile.WallRaw.Chalk.name=Kridtvæg
+tile.WallRaw.Chert.name=Chertvæg
+tile.WallRaw.Claystone.name=Lerstensvæg
+tile.WallRaw.Conglomerate.name=Konglomeratvæg
+tile.WallRaw.Dacite.name=Dacitvæg
+tile.WallRaw.Diorite.name=Dioritvæg
+tile.WallRaw.Dolomite.name=Dolomitvæg
+tile.WallRaw.Gabbro.name=Gabbrovæg
+tile.WallRaw.Gneiss.name=Gnejsvæg
+tile.WallRaw.Granite.name=Granitvæg
+tile.WallRaw.Limestone.name=Kalkstensvæg
+tile.WallRaw.Marble.name=Marmorvæg
+tile.WallRaw.Phyllite.name=Fyllitvæg
+tile.WallRaw.Quartzite.name=Kvartsitvæg
+tile.WallRaw.Rhyolite.name=Rhyolitvæg
+tile.WallRaw.Rock Salt.name=Stensaltsvæg
+tile.WallRaw.Schist.name=Glimmerskifervæg
+tile.WallRaw.Shale.name=Lerskifervæg
+tile.WallRaw.Slate.name=Skifervæg
+
+tile.WallBrick.Andesite.name=Andesitmurstensvæg
+tile.WallBrick.Basalt.name=Basaltmurstensvæg
+tile.WallBrick.Chalk.name=Kridtmurstensvæg
+tile.WallBrick.Chert.name=Chertmurstensvæg
+tile.WallBrick.Claystone.name=Lerstensmurstensvæg
+tile.WallBrick.Conglomerate.name=Konglomeratmurstensvæg
+tile.WallBrick.Dacite.name=Dacitmurstensvæg
+tile.WallBrick.Diorite.name=Dioritmurstensvæg
+tile.WallBrick.Dolomite.name=Dolomitmurstensvæg
+tile.WallBrick.Gabbro.name=Gabbromurstensvæg
+tile.WallBrick.Gneiss.name=Gnejsmurstensvæg
+tile.WallBrick.Granite.name=Granitmurstensvæg
+tile.WallBrick.Limestone.name=Kalkstensmurstensvæg
+tile.WallBrick.Marble.name=Marmormurstensvæg
+tile.WallBrick.Phyllite.name=Fyllitmurstensvæg
+tile.WallBrick.Quartzite.name=Kvartsitmurstensvæg
+tile.WallBrick.Rhyolite.name=Rhyolitmurstensvæg
+tile.WallBrick.Rock Salt.name=Stensaltsmurstensvæg
+tile.WallBrick.Schist.name=Glimmerskifermurstensvæg
+tile.WallBrick.Shale.name=Lerskifermurstensvæg
+tile.WallBrick.Slate.name=Skifermurstensvæg
+
+tile.WallSmooth.Andesite.name=Tilhugget Andesitvæg
+tile.WallSmooth.Basalt.name=Tilhugget Basaltvæg
+tile.WallSmooth.Chalk.name=Tilhugget Kridtvæg
+tile.WallSmooth.Chert.name=Tilhugget Chertvæg
+tile.WallSmooth.Claystone.name=Tilhugget Lerstensvæg
+tile.WallSmooth.Conglomerate.name=Tilhugget Konglomeratvæg
+tile.WallSmooth.Dacite.name=Tilhugget Dacitvæg
+tile.WallSmooth.Diorite.name=Tilhugget Dioritvæg
+tile.WallSmooth.Dolomite.name=Tilhugget Dolomitvæg
+tile.WallSmooth.Gabbro.name=Tilhugget Gabbrovæg
+tile.WallSmooth.Gneiss.name=Tilhugget Gnejsvæg
+tile.WallSmooth.Granite.name=Tilhugget Granitvæg
+tile.WallSmooth.Limestone.name=Tilhugget Kalkstensvæg
+tile.WallSmooth.Marble.name=Tilhugget Marmorvæg
+tile.WallSmooth.Phyllite.name=Tilhugget Fyllitvæg
+tile.WallSmooth.Quartzite.name=Tilhugget Kvartsitvæg
+tile.WallSmooth.Rhyolite.name=Tilhugget Rhyolitvæg
+tile.WallSmooth.Rock Salt.name=Tilhugget Stensaltsvæg
+tile.WallSmooth.Schist.name=Tilhugget Glimmerskifervæg
+tile.WallSmooth.Shale.name=Tilhugget Lerskifervæg
+tile.WallSmooth.Slate.name=Tilhugget Skifervæg
+
+tile.IgExRock.Andesite.name=Andesit
+tile.IgExRock.Basalt.name=Basalt
+tile.SedRock.Chalk.name=Kridt
+tile.SedRock.Chert.name=Chert
+tile.SedRock.Claystone.name=Lersten
+tile.SedRock.Conglomerate.name=Konglomerat
+tile.IgExRock.Dacite.name=Dacit
+tile.IgInRock.Diorite.name=Diorit
+tile.SedRock.Dolomite.name=Dolomit
+tile.IgInRock.Gabbro.name=Gabbro
+tile.MMRock.Gneiss.name=Gnejs
+tile.IgInRock.Granite.name=Granit
+tile.SedRock.Limestone.name=Kalksten
+tile.MMRock.Marble.name=Marmor
+tile.MMRock.Phyllite.name=Fyllit
+tile.MMRock.Quartzite.name=Krartsit
+tile.IgExRock.Rhyolite.name=Rhyolit
+tile.SedRock.Rock Salt.name=Stensalt
+tile.MMRock.Schist.name=Glimmerskifer
+tile.SedRock.Shale.name=Lerskifer
+tile.MMRock.Slate.name=Skifer
+
+tile.IgExRockCobble.Andesite.name=Andesitkampestensten
+tile.IgExRockCobble.Basalt.name=Basaltkampesten
+tile.SedRockCobble.Chalk.name=Kridtkampesten
+tile.SedRockCobble.Chert.name=Chertkampesten
+tile.SedRockCobble.Claystone.name=Lerstenskampesten
+tile.SedRockCobble.Conglomerate.name=Konglomeratkampesten
+tile.IgExRockCobble.Dacite.name=Dacitkampesten
+tile.IgInRockCobble.Diorite.name=Dioritkampesten
+tile.SedRockCobble.Dolomite.name=Dolomitkampesten
+tile.IgInRockCobble.Gabbro.name=Gabbrokampesten
+tile.MMRockCobble.Gneiss.name=Gnejskampesten
+tile.IgInRockCobble.Granite.name=Granitkampesten
+tile.SedRockCobble.Limestone.name=Kalkstenskampesten
+tile.MMRockCobble.Marble.name=Marmorkampesten
+tile.MMRockCobble.Phyllite.name=Fyllitkampesten
+tile.MMRockCobble.Quartzite.name=Kvartsitkampesten
+tile.IgExRockCobble.Rhyolite.name=Rhyolitkampesten
+tile.SedRockCobble.Rock Salt.name=Stensaltskampesten
+tile.MMRockCobble.Schist.name=Glimmerskiferkampesten
+tile.SedRockCobble.Shale.name=Lerskiferkampestensten
+tile.MMRockCobble.Slate.name=Skiferkampesten
+
+tile.IgExRockSmooth.Andesite.name=Tilhugget Andesit
+tile.IgExRockSmooth.Basalt.name=Tilhugget Basalt
+tile.SedRockSmooth.Chalk.name=Tilhugget Kridt
+tile.SedRockSmooth.Chert.name=Tilhugget Chert
+tile.SedRockSmooth.Claystone.name=Tilhugget Lersten
+tile.SedRockSmooth.Conglomerate.name=Tilhugget Konglomerat
+tile.IgExRockSmooth.Dacite.name=Tilhugget Dacit
+tile.IgInRockSmooth.Diorite.name=Tilhugget Diorit
+tile.SedRockSmooth.Dolomite.name=Tilhugget Dolomit
+tile.IgInRockSmooth.Gabbro.name=Tilhugget Gabbro
+tile.MMRockSmooth.Gneiss.name=Tilhugget Gnejs
+tile.IgInRockSmooth.Granite.name=Tilhugget Granit
+tile.SedRockSmooth.Limestone.name=Tilhugget Kalksten
+tile.MMRockSmooth.Marble.name=Tilhugget Marmor
+tile.MMRockSmooth.Phyllite.name=Tilhugget Fyllit
+tile.MMRockSmooth.Quartzite.name=Tilhugget Kvartsit
+tile.IgExRockSmooth.Rhyolite.name=Tilhugget Rhyolit
+tile.SedRockSmooth.Rock Salt.name=Tilhugget Stensalt
+tile.MMRockSmooth.Schist.name=Tilhugget Glimmerskifer
+tile.SedRockSmooth.Shale.name=Tilhugget Lerskifer
+tile.MMRockSmooth.Slate.name=Tilhugget Skifer
+
+tile.IgExRockBrick.Andesite.name=Andesitmursten
+tile.IgExRockBrick.Basalt.name=Basaltmursten
+tile.SedRockBrick.Chalk.name=Kridtmursten
+tile.SedRockBrick.Chert.name=Chertmursten
+tile.SedRockBrick.Claystone.name=Lerstensmursten
+tile.SedRockBrick.Conglomerate.name=Konglomeratmursten
+tile.IgExRockBrick.Dacite.name=Dacitmursten
+tile.IgInRockBrick.Diorite.name=Dioritmursten
+tile.SedRockBrick.Dolomite.name=Dolomitmursten
+tile.IgInRockBrick.Gabbro.name=Gabbromursten
+tile.MMRockBrick.Gneiss.name=Gnejsmursten
+tile.IgInRockBrick.Granite.name=Granitmursten
+tile.SedRockBrick.Limestone.name=Kalkstensmursten
+tile.MMRockBrick.Marble.name=Marmormursten
+tile.MMRockBrick.Phyllite.name=Fyllitmursten
+tile.MMRockBrick.Quartzite.name=Kvartsitmursten
+tile.IgExRockBrick.Rhyolite.name=Rhyolitmursten
+tile.SedRockBrick.Rock Salt.name=Stensaltsmursten
+tile.MMRockBrick.Schist.name=Glimmerskifermursten
+tile.SedRockBrick.Shale.name=Lerskifermursten
+tile.MMRockBrick.Slate.name=Skifermursten
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Bituminous Coal.name=Bituminøst Kul
+item.Ore.Borax.name=Boraks
+item.Ore.Cinnabar.name=Cinnabarit
+item.Ore.Cryolite.name=Kryolit
+item.Ore.Graphite.name=Grafit
+item.Ore.Gypsum.name=Gips
+item.Ore.Jet.name=Jet
+item.Ore.Kaolinite.name=Kaolinit
+item.Ore.Kimberlite.name=Kimberlit
+item.Ore.Lapis Lazuli.name=Lapis Lazuli
+item.Ore.Lignite.name=Brunkul
+item.Ore.Microcline.name=Mikrolin
+item.Ore.Olivine.name=Olivin
+item.Ore.Petrified Wood.name=Forstenet Træ
+item.Ore.Pitchblende.name=Begblende
+item.Ore.Saltpeter.name=Salpeter
+item.Ore.Satinspar.name=Silkespat
+item.Ore.Selenite.name=Selenit
+item.Ore.Serpentine.name=Serpentin
+item.Ore.Sulfur.name=Svovl
+item.Ore.Sylvite.name=Sylvin
+
+item.Ore.Bismuthinite.name=Bismuthinit
+item.Ore.Cassiterite.name=Kassiterit
+item.Ore.Galena.name=Galena
+item.Ore.Garnierite.name=Garnierit
+item.Ore.Hematite.name=Hæmatit
+item.Ore.Limonite.name=Limonit
+item.Ore.Magnetite.name=Magnetit
+item.Ore.Malachite.name=Malakit
+item.Ore.Native Copper.name=Gedigent Kobber
+item.Ore.Native Gold.name=Gedigent Guld
+item.Ore.Native Platinum.name=Gedigent Platin
+item.Ore.Native Silver.name=Gedigent Sølv
+item.Ore.Sphalerite.name=Zinkblende
+item.Ore.Tetrahedrite.name=Tetrahedrit
+
+item.Ore.Rich Bismuthinite.name=Rig Bismuthinit
+item.Ore.Rich Cassiterite.name=Rig Kassiterit
+item.Ore.Rich Galena.name=Rig Galena
+item.Ore.Rich Garnierite.name=Rig Garnierit
+item.Ore.Rich Hematite.name=Rig Hæmatit
+item.Ore.Rich Limonite.name=Rig Limonit
+item.Ore.Rich Magnetite.name=Rig Magnetit
+item.Ore.Rich Malachite.name=Rig Malakit
+item.Ore.Rich Native Copper.name=Rigt Gedigent Kobber
+item.Ore.Rich Native Gold.name=Rigt Gedigent Guld
+item.Ore.Rich Native Platinum.name=Rigt Gedigent Platin
+item.Ore.Rich Native Silver.name=Rigt Gedigent Sølv
+item.Ore.Rich Sphalerite.name=Rig Zinkblende
+item.Ore.Rich Tetrahedrite.name=Rig Tetrahedrit
+
+item.Ore.Poor Bismuthinite.name=Dårlig Bismuthinit
+item.Ore.Poor Cassiterite.name=Dårlig Kassiterit
+item.Ore.Poor Galena.name=Dårlig Galena
+item.Ore.Poor Garnierite.name=Dårlig Garnierit
+item.Ore.Poor Hematite.name=Dårlig Hæmatit
+item.Ore.Poor Limonite.name=Dårlig Limonit
+item.Ore.Poor Magnetite.name=Dårlig Magnetit
+item.Ore.Poor Malachite.name=Dårlig Malakit
+item.Ore.Poor Native Copper.name=Dårligt Gedigent Kobber
+item.Ore.Poor Native Gold.name=Dårligt Gedigent Guld
+item.Ore.Poor Native Platinum.name=Dårligt Gedigent Platin
+item.Ore.Poor Native Silver.name=Dårligt Gedigent Sølv
+item.Ore.Poor Sphalerite.name=Dårlig Zinkblende
+item.Ore.Poor Tetrahedrite.name=Dårlig Tetrahedrit
+
+item.Small Ore.Bismuthinite.name=Lille Bismuthinit
+item.Small Ore.Cassiterite.name=Lille Kassiterit
+item.Small Ore.Galena.name=Lille Galena
+item.Small Ore.Garnierite.name=Lille Garnierit
+item.Small Ore.Hematite.name=Lille Hæmatit
+item.Small Ore.Limonite.name=Lille Limonit
+item.Small Ore.Magnetite.name=Lille Magnetit
+item.Small Ore.Malachite.name=Lille Malakit
+item.Small Ore.Native Copper.name=Gedigen Kobberklump
+item.Small Ore.Native Gold.name=Gedigen Guldklump
+item.Small Ore.Native Platinum.name=Gedigen Platinklump
+item.Small Ore.Native Silver.name=Gedigen sølvklump
+item.Small Ore.Sphalerite.name=Lille Zinkblende
+item.Small Ore.Tetrahedrite.name=Lille Tetrahedrit
+
+#== Ore Blocks ==
+tile.Ore.Bituminous Coal.name=Bituminøst Kul
+tile.Ore.Borax.name=Boraks
+tile.Ore.Cinnabar.name=Cinnabarit
+tile.Ore.Cryolite.name=Kryolit
+tile.Ore.Graphite.name=Grafit
+tile.Ore.Gypsum.name=Gips
+tile.Ore.Jet.name=Jet
+tile.Ore.Kaolinite.name=Kaolinit
+tile.Ore.Kimberlite.name=Kimberlit
+tile.Ore.Lapis Lazuli.name=Lapis Lazuli
+tile.Ore.Lignite.name=Brunkul
+tile.Ore.Microcline.name=Mikrolin
+tile.Ore.Olivine.name=Olivin
+tile.Ore.Petrified Wood.name=Forstenet Træ
+tile.Ore.Pitchblende.name=Begblende
+tile.Ore.Saltpeter.name=Salpeter
+tile.Ore.Satinspar.name=Silkespat
+tile.Ore.Selenite.name=Selenit
+tile.Ore.Serpentine.name=Serpentin
+tile.Ore.Sulfur.name=Svovl
+tile.Ore.Sylvite.name=Sylvin
+
+tile.Ore.Bismuthinite.name=Bismuthinit
+tile.Ore.Cassiterite.name=Kassiterit
+tile.Ore.Galena.name=Galena
+tile.Ore.Garnierite.name=Garnierit
+tile.Ore.Hematite.name=Hæmatit
+tile.Ore.Limonite.name=Limonit
+tile.Ore.Magnetite.name=Magnetit
+tile.Ore.Malachite.name=Malakit
+tile.Ore.Native Copper.name=Gedigent Kobber
+tile.Ore.Native Gold.name=Gedigent Guld
+tile.Ore.Native Platinum.name=Gedigent Platin
+tile.Ore.Native Silver.name=Gedigent Sølv
+tile.Ore.Sphalerite.name=Zinkblende
+tile.Ore.Tetrahedrite.name=Tetrahedrit
+
+#========
+#= Wood =
+#========
+#== Wood Items ==
+item.Log.Acacia.name=Akacie
+item.Log.Ash.name=Ask
+item.Log.Aspen.name=Asp
+item.Log.Birch.name=Birk
+item.Log.Chestnut.name=Kastanje
+item.Log.Douglas Fir.name=Douglasgran
+item.Log.Hickory.name=Valnød
+item.Log.Kapok.name=Kapok
+item.Log.Maple.name=Ahorn
+item.Log.Oak.name=Eg
+item.Log.Pine.name=Fyr
+item.Log.Sequoia.name=Kæmpefyr
+item.Log.Spruce.name=Gran
+item.Log.Sycamore.name=Morbær
+item.Log.White Cedar.name=Hvid Ceder
+item.Log.White Elm.name=Hvidelm
+item.Log.Willow.name=Pil
+
+item.SinglePlank.Acacia.name=Akacietømmer
+item.SinglePlank.Ash.name=Asketømmer
+item.SinglePlank.Aspen.name=Aspetømmer
+item.SinglePlank.Birch.name=Birketømmer
+item.SinglePlank.Chestnut.name=Kastanjetømmer
+item.SinglePlank.Douglas Fir.name=Douglasgrantømmer
+item.SinglePlank.Hickory.name=Valnøddetømmer
+item.SinglePlank.Kapok.name=Kapoktømmer
+item.SinglePlank.Maple.name=Ahorntømmer
+item.SinglePlank.Oak.name=Egetømmer
+item.SinglePlank.Pine.name=Fyrretømmer
+item.SinglePlank.Sequoia.name=Kæmpefyrretømmer
+item.SinglePlank.Spruce.name=Grantømmer
+item.SinglePlank.Sycamore.name=Morbærtømmer
+item.SinglePlank.White Cedar.name=Hvidt Cedertømmer
+item.SinglePlank.White Elm.name=Hvidelmetømmer
+item.SinglePlank.Willow.name=Piletømmer
+
+item.Acacia Door.name=Akacietræsdør
+item.Ash Door.name=Asketræsdør
+item.Aspen Door.name=Aspetræsdør
+item.Birch Door.name=Birketræsdør
+item.Chestnut Door.name=Kastanjetræsdør
+item.Douglas Fir Door.name=Douglasgrantræsdør
+item.Hickory Door.name=Valnøddetræsdør
+item.Kapok Door.name=Kapoktræsdør
+item.Maple Door.name=Ahorntræsdør
+item.Oak Door.name=Egetræsdør
+item.Pine Door.name=Fyrretræsdør
+item.Sequoia Door.name=Kæmpefyrretræsdør
+item.Spruce Door.name=Grantræsdør
+item.Sycamore Door.name=Morbærtræsdør
+item.White Cedar Door.name=Hvid Cedertræsdør
+item.White Elm Door.name=Hvidelmetræsdør
+item.Willow Door.name=Piletræsdør
+
+item.Barrel.Acacia.name=Akacietræstønde
+item.Barrel.Ash.name=Asketræstønde
+item.Barrel.Aspen.name=Aspetræstønde
+item.Barrel.Birch.name=Birketræstønde
+item.Barrel.Chestnut.name=Kastanjetræstønde
+item.Barrel.Douglas Fir.name=Douglasgrantræstønde
+item.Barrel.Hickory.name=Valnøddetræstønde
+item.Barrel.Kapok.name=Kapoktræstønde
+item.Barrel.Maple.name=Ahorntræstønde
+item.Barrel.Oak.name=Egetræstønde
+item.Barrel.Pine.name=Fyrretræstønde
+item.Barrel.Sequoia.name=Kæmpefyrretræstønde
+item.Barrel.Spruce.name=Grantræstønde
+item.Barrel.Sycamore.name=Morbærtræstønde
+item.Barrel.White Cedar.name=Hvid Cedertræstønde
+item.Barrel.White Elm.name=Hvidelmetræstønde
+item.Barrel.Willow.name=Piletræstønde
+
+item.Loom.Acacia.name=Akacietræsvæv
+item.Loom.Ash.name=Asketræsvæv
+item.Loom.Aspen.name=Aspetræsvæv
+item.Loom.Birch.name=Birketræsvæv
+item.Loom.Chestnut.name=Kastanjetræsvæv
+item.Loom.Douglas Fir.name=Douglasgrantræsvæv
+item.Loom.Hickory.name=Valnøddetræsvæv
+item.Loom.Kapok.name=Kapoktræsvæv
+item.Loom.Maple.name=Ahorntræsvæv
+item.Loom.Oak.name=Egetræsvæv
+item.Loom.Pine.name=Fyrretræsvæv
+item.Loom.Sequoia.name=Kæmpefyrretræsvæv
+item.Loom.Spruce.name=Grantræsvæv
+item.Loom.Sycamore.name=Morbærtræsvæv
+item.Loom.White Cedar.name=Hvid Cedertræsvæv
+item.Loom.White Elm.name=Hvidelmetræsvæv
+item.Loom.Willow.name=Piletræsvæv
+
+#== Wood Blocks ==
+tile.log.Acacia.name=Akaciestamme
+tile.log2.Acacia.name=Akaciestamme
+tile.log.Ash.name=Askestamme
+tile.log.Aspen.name=Aspestamme
+tile.log.Birch.name=Birkestamme
+tile.log.Chestnut.name=Kastanjestamme
+tile.log.Douglas Fir.name=Douglasgranstamme
+tile.log.Hickory.name=Valnøddestamme
+tile.log.Kapok.name=Kapokstamme
+tile.log.Maple.name=Ahornstamme
+tile.log.Oak.name=Egestamme
+tile.log.Pine.name=Fyrrestamme
+tile.log.Sequoia.name=Kæmpefyrsstamme
+tile.log.Spruce.name=Granstamme
+tile.log.Sycamore.name=Morbærstamme
+tile.log.White Cedar.name=Hvid Cederstamme
+tile.log.White Elm.name=Hvidelmestamme
+tile.log.Willow.name=Pilestamme
+
+tile.WoodVert2.Acacia.name=Akaciestamme
+tile.WoodVert.Ash.name=Askestamme
+tile.WoodVert.Aspen.name=Aspestamme
+tile.WoodVert.Birch.name=Birkestamme
+tile.WoodVert.Chestnut.name=Kastanjestamme
+tile.WoodVert.Douglas Fir.name=Douglasgranstamme
+tile.WoodVert.Hickory.name=Valnøddestamme
+tile.WoodVert.Kapok.name=Kapokstamme
+tile.WoodVert.Maple.name=Ahornstamme
+tile.WoodVert.Oak.name=Egestamme
+tile.WoodVert.Pine.name=Fyrrestamme
+tile.WoodVert.Sequoia.name=Kæmpefyrsstamme
+tile.WoodVert.Spruce.name=Granstamme
+tile.WoodVert.Sycamore.name=Morbærstamme
+tile.WoodVert.White Cedar.name=Hvid Cederstamme
+tile.WoodVert.White Elm.name=Hvidelmestamme
+tile.WoodVert.Willow.name=Pilestamme
+
+tile.WoodHoriz3.Acacia.name=Akaciestamme
+tile.WoodHoriz.Ash.name=Askestamme
+tile.WoodHoriz.Aspen.name=Aspestamme
+tile.WoodHoriz.Birch.name=Birkestamme
+tile.WoodHoriz.Chestnut.name=Kastanjestamme
+tile.WoodHoriz.Douglas Fir.name=Douglasgranstamme
+tile.WoodHoriz.Hickory.name=Valnøddestamme
+tile.WoodHoriz2.Kapok.name=Kapokstamme
+tile.WoodHoriz.Maple.name=Ahornstamme
+tile.WoodHoriz.Oak.name=Egestamme
+tile.WoodHoriz2.Pine.name=Fyrrestamme
+tile.WoodHoriz2.Sequoia.name=Kæmpefyrsstamme
+tile.WoodHoriz2.Spruce.name=Granstamme
+tile.WoodHoriz2.Sycamore.name=Morbærstamme
+tile.WoodHoriz2.White Cedar.name=Hvid Cederstamme
+tile.WoodHoriz2.White Elm.name=Hvidelmestamme
+tile.WoodHoriz2.Willow.name=Pilestamme
+
+tile.sapling2.Acacia.name=Akaciestikling
+tile.sapling.Ash.name=Askestikling
+tile.sapling.Aspen.name=Aspestikling
+tile.sapling.Birch.name=Birkestikling
+tile.sapling.Chestnut.name=Kastanjestikling
+tile.sapling.Douglas Fir.name=Douglasgranstikling
+tile.sapling.Hickory.name=Valnøddestikling
+tile.sapling.Kapok.name=Kapokstikling
+tile.sapling.Maple.name=Ahornstikling
+tile.sapling.Oak.name=Egestikling
+tile.sapling.Pine.name=Fyrrestikling
+tile.sapling.Sequoia.name=Kæmpefyrsstikling
+tile.sapling.Spruce.name=Granstikling
+tile.sapling.Sycamore.name=Morbærstikling
+tile.sapling.White Cedar.name=Hvid Cederstikling
+tile.sapling.White Elm.name=Hvidelmsstilking
+tile.sapling.Willow.name=Pilestikling
+
+tile.leaves.Acacia.name=Akacieblade
+tile.leaves.Ash.name=Askeblade
+tile.leaves.Aspen.name=Aspeblade
+tile.leaves.Birch.name=Birkeblade
+tile.leaves.Chestnut.name=Kastanjeblade
+tile.leaves.Douglas Fir.name=Douglasgrannåle
+tile.leaves.Hickory.name=Valnøddeblade
+tile.leaves.Kapok.name=Kapokblade
+tile.leaves.Maple.name=Ahornblade
+tile.leaves.Oak.name=Egeblade
+tile.leaves.Pine.name=Fyrrenåle
+tile.leaves.Sequoia.name=Kæmpefyrsnåle
+tile.leaves.Spruce.name=Grannåle
+tile.leaves.Sycamore.name=Morbærblade
+tile.leaves.White Cedar.name=Hvid Ceder-blade
+tile.leaves.White Elm.name=Hvidelmeblade
+tile.leaves.Willow.name=Pileblade
+
+tile.wood2.Acacia.name=Akacietræsplanker
+tile.wood.Ash.name=Asketræsplanker
+tile.wood.Aspen.name=Aspetræsplanker
+tile.wood.Birch.name=Birketræsplanker
+tile.wood.Chestnut.name=Kastanjetræsplanker
+tile.wood.Douglas Fir.name=Douglasgrantræsplanker
+tile.wood.Hickory.name=Valdnøddetræsplanker
+tile.wood.Kapok.name=Kapoktræsplanker
+tile.wood.Maple.name=Ahorntræsplanker
+tile.wood.Oak.name=Egetræsplanker
+tile.wood.Pine.name=Fyrretræsplanker
+tile.wood.Sequoia.name=Kæmpefyrretræsplanker
+tile.wood.Spruce.name=Grantræsplanker
+tile.wood.Sycamore.name=Morbærtræsplanker
+tile.wood.White Cedar.name=Hvid Cedertræsplanker
+tile.wood.White Elm.name=Hvidelmetræsplanker
+tile.wood.Willow.name=Piletræsplanker
+
+tile.Door Acacia.name=Akacietræsdør
+tile.Door Ash.name=Asketræsdør
+tile.Door Aspen.name=Aspetræsdør
+tile.Door Birch.name=Birketræsdør
+tile.Door Chestnut.name=Kastanjetræsdør
+tile.Door Douglas Fir.name=Douglasgrantræsdør
+tile.Door Hickory.name=Valnøddetræsdør
+tile.Door Kapok.name=Kapoktræsdør
+tile.Door Maple.name=Ahorntræsdør
+tile.Door Oak.name=Egetræsdør
+tile.Door Pine.name=Fyrretræsdør
+tile.Door Sequoia.name=Kæmpefyrretræsdør
+tile.Door Spruce.name=Grantræsdør
+tile.Door Sycamore.name=Morbærtræsdør
+tile.Door White Cedar.name=Hvid Cedertræsdør
+tile.Door White Elm.name=Hvidelmetræsdør
+tile.Door Willow.name=Piletræsdør
+
+tile.Barrel.Acacia.name=Akacietræstønde
+tile.Barrel.Ash.name=Asketræstønde
+tile.Barrel.Aspen.name=Aspetræstønde
+tile.Barrel.Birch.name=Birketræstønde
+tile.Barrel.Chestnut.name=Kastanjetræstønde
+tile.Barrel.Douglas Fir.name=Douglasgrantræstønde
+tile.Barrel.Hickory.name=Valnøddetræstønde
+tile.Barrel.Kapok.name=Kapoktræstønde
+tile.Barrel.Maple.name=Ahorntræstønde
+tile.Barrel.Oak.name=Egetræstønde
+tile.Barrel.Pine.name=Fyrretræstønde
+tile.Barrel.Sequoia.name=Kæmpefyrretræstønde
+tile.Barrel.Spruce.name=Grantræstønde
+tile.Barrel.Sycamore.name=Morbærtræstønde
+tile.Barrel.White Cedar.name=Hvid Cedertræstønde
+tile.Barrel.White Elm.name=Hvidelmetræstønde
+tile.Barrel.Willow.name=Piletræstønde
+
+tile.Loom.Acacia.name=Akacietræsvæv
+tile.Loom.Ash.name=Asketræsvæv
+tile.Loom.Aspen.name=Aspetræsvæv
+tile.Loom.Birch.name=Birketræsvæv
+tile.Loom.Chestnut.name=Kastanjetræsvæv
+tile.Loom.Douglas Fir.name=Douglasgrantræsvæv
+tile.Loom.Hickory.name=Valnøddetræsvæv
+tile.Loom.Kapok.name=Kapoktræsvæv
+tile.Loom.Maple.name=Ahorntræsvæv
+tile.Loom.Oak.name=Egetræsvæv
+tile.Loom.Pine.name=Fyrretræsvæv
+tile.Loom.Sequoia.name=Kæmpefyrretræsvæv
+tile.Loom.Spruce.name=Grantræsvæv
+tile.Loom.Sycamore.name=Morbærtræsvæv
+tile.Loom.White Cedar.name=Hvid Cedertræsvæv
+tile.Loom.White Elm.name=Hvidelmetræsvæv
+tile.Loom.Willow.name=Piletræsvæv
+
+tile.FenceTFC.Acacia.name=Akacietræshegn
+tile.FenceTFC.Ash.name=Asketræshegn
+tile.FenceTFC.Aspen.name=Aspetræshegn
+tile.FenceTFC.Birch.name=Birketræshegn
+tile.FenceTFC.Chestnut.name=Kastanjetræshegn
+tile.FenceTFC.Douglas Fir.name=Douglasgrantræshegn
+tile.FenceTFC.Hickory.name=Valnøddetræshegn
+tile.FenceTFC.Kapok.name=Kapoktræshegn
+tile.FenceTFC.Maple.name=Ahorntræshegn
+tile.FenceTFC.Oak.name=Egetræshegn
+tile.FenceTFC.Pine.name=Fyrretræshegn
+tile.FenceTFC.Sequoia.name=Kæmpefyrretræshegn
+tile.FenceTFC.Spruce.name=Grantræshegn
+tile.FenceTFC.Sycamore.name=Morbærtræshegn
+tile.FenceTFC.White Cedar.name=Hvid Cedertræshegn
+tile.FenceTFC.White Elm.name=Hvidelmetræshegn
+tile.FenceTFC.Willow.name=Piletræshegn
+
+tile.FenceGateTFC.Acacia.name=Akacietræshegnslåge
+tile.FenceGateTFC.Ash.name=Asketræshegnslåge
+tile.FenceGateTFC.Aspen.name=Aspetræshegnslåge
+tile.FenceGateTFC.Birch.name=Birketræshegnslåge
+tile.FenceGateTFC.Chestnut.name=Kastanjetræshegnslåge
+tile.FenceGateTFC.Douglas Fir.name=Douglasgrantræshegnslåge
+tile.FenceGateTFC.Hickory.name=Valnøddetræshegnslåge
+tile.FenceGateTFC.Kapok.name=Kapoktræshegnslåge
+tile.FenceGateTFC.Maple.name=Ahorntræshegnslåge
+tile.FenceGateTFC.Oak.name=Egetræshegnslåge
+tile.FenceGateTFC.Pine.name=Fyrretræshegnslåge
+tile.FenceGateTFC.Sequoia.name=Kæmpefyrretræshegnslåge
+tile.FenceGateTFC.Spruce.name=Grantræshegnslåge
+tile.FenceGateTFC.Sycamore.name=Morbærtræshegnslåge
+tile.FenceGateTFC.White Cedar.name=Hvid Cedertræshegnslåge
+tile.FenceGateTFC.White Elm.name=Hvidelmetræshegnslåge
+tile.FenceGateTFC.Willow.name=Piletræshegnslåge
+
+tile.ArmourStand.Acacia.name=Akacietræsrustningsstativ
+tile.ArmourStand.Ash.name=Asketræsrustningsstativ
+tile.ArmourStand.Aspen.name=Aspetræsrustningsstativ
+tile.ArmourStand.Birch.name=Birketræsrustningsstativ
+tile.ArmourStand.Chestnut.name=Kastanjetræsrustningsstativ
+tile.ArmourStand.Douglas Fir.name=Douglasgrantræsrustningsstativ
+tile.ArmourStand.Hickory.name=Valnøddetræsrustningsstativ
+tile.ArmourStand.Kapok.name=Kapoktræsrustningsstativ
+tile.ArmourStand.Maple.name=Ahorntræsrustningsstativ
+tile.ArmourStand.Oak.name=Egetræsrusningsstativ
+tile.ArmourStand.Pine.name=Fyrretræsrustningsstativ
+tile.ArmourStand.Sequoia.name=Kæmpefyrretræsrustningsstativ
+tile.ArmourStand.Spruce.name=Grantræsrustningsstativ
+tile.ArmourStand.Sycamore.name=Morbærtræsrustningsstativ
+tile.ArmourStand.White Cedar.name=Hvid Cedertræsrustningsstativ
+tile.ArmourStand.White Elm.name=Hvidelmetræsrustningsstativ
+tile.ArmourStand.Willow.name=Piletræsrustningsstativ
+
+tile.WoodSupportV2.Acacia.name=Akacietræsunderstøttelsesbjælke
+tile.WoodSupportV.Ash.name=Asketræsunderstøttelsesbjælke
+tile.WoodSupportV.Aspen.name=Aspetræsunderstøttelsesbjælke
+tile.WoodSupportV.Birch.name=Birketræsunderstøttelsesbjælke
+tile.WoodSupportV.Chestnut.name=Kastanjetræsunderstøttelsesbjælke
+tile.WoodSupportV.Douglas Fir.name=Douglasgrantræsunderstøttelsesbjælke
+tile.WoodSupportV.Hickory.name=Valnøddetræsunderstøttelsesbjælke
+tile.WoodSupportV.Kapok.name=Kapoktræsunderstøttelsesbjælke
+tile.WoodSupportV.Maple.name=Ahorntræsunderstøttelsesbjælke
+tile.WoodSupportV.Oak.name=Egetræsunderstøttelsesbjælke
+tile.WoodSupportV.Pine.name=Fyrretræsunderstøttelsesbjælke
+tile.WoodSupportV.Sequoia.name=Kæmpefyrretræsunderstøttelsesbjælke
+tile.WoodSupportV.Spruce.name=Grantræsunderstøttelsesbjælke
+tile.WoodSupportV.Sycamore.name=Morbærtræsunderstøttelsesbjælke
+tile.WoodSupportV.White Cedar.name=Hvidt Cedertræsunderstøttelsesbjælke
+tile.WoodSupportV.White Elm.name=Hvidelmetræsunderstøttelsesbjælke
+tile.WoodSupportV.Willow.name=Piletræsunderstøttelsesbjælke
+
+tile.Toolrack.Acacia.name=Akacietræs-værktøjsstativ
+tile.Toolrack.Ash.name=Asketræs-værktøjsstativ
+tile.Toolrack.Aspen.name=Aspetræs-værktøjsstativ
+tile.Toolrack.Birch.name=Birketræs-værktøjsstativ
+tile.Toolrack.Chestnut.name=Kastanjetræs-værktøjsstativ
+tile.Toolrack.Douglas Fir.name=Douglasgrantræs-værktøjsstativ
+tile.Toolrack.Hickory.name=Valnøddetræs-værktøjsstativ
+tile.Toolrack.Kapok.name=Kapoktræs-værktøjsstativ
+tile.Toolrack.Maple.name=Ahorntræs-værktøjsstativ
+tile.Toolrack.Oak.name=Egetræs-værktøjsstativ
+tile.Toolrack.Pine.name=Fyrretræs-værktøjsstativ
+tile.Toolrack.Sequoia.name=Kæmpefyrretræs-værktøjsstativ
+tile.Toolrack.Spruce.name=Grantræs-værktøjsstativ
+tile.Toolrack.Sycamore.name=Morbærtræs-værktøjsstativ
+tile.Toolrack.White Cedar.name=Hvidt Cedertræs-værktøjsstativ
+tile.Toolrack.White Elm.name=Hvidelmetræs-værktøjsstativ
+tile.Toolrack.Willow.name=Piletræs-værktøjsstativ
+
+#=======================
+#= Tools/Weapons/Armor =
+#=======================
+
+#== Stone Heads ==
+item.Stone Hammer Head.name=Stenhammerhoved
+item.Stone Knife Blade.name=Sten-knivsblad
+
+item.IgIn Stone Axe Head.name=Stenøksehoved
+item.IgIn Stone Chisel Head.name=Sten-mejselhoved
+item.IgIn Stone Hoe Head.name=Stenhakkejernshoved
+item.IgIn Stone Javelin Head.name=Sten-spydspids
+item.IgIn Stone Shovel Head.name=Stenskovlshoved
+
+item.Sed Stone Axe Head.name=Stenøksehoved
+item.Sed Stone Chisel Head.name=Sten-mejselhoved
+item.Sed Stone Hoe Head.name=Stenhakkejernshoved
+item.Sed Stone Javelin Head.name=Sten-spydspids
+item.Sed Stone Shovel Head.name=Stenskovlshoved
+
+item.IgEx Stone Axe Head.name=Stenøksehoved
+item.IgEx Stone Chisel Head.name=Sten-mejselhoved
+item.IgEx Stone Hoe Head.name=Stenhakkejernshoved
+item.IgEx Stone Javelin Head.name=Sten-spydspids
+item.IgEx Stone Shovel Head.name=Stenskovlshoved
+
+item.MM Stone Axe Head.name=Stenøksehoved
+item.MM Stone Chisel Head.name=Sten-mejselhoved
+item.MM Stone Hoe Head.name=Stenhakkejernshoved
+item.MM Stone Javelin Head.name=Sten-spydspids
+item.MM Stone Shovel Head.name=Stenskovlshoved
+
+#== Stone Tools ==
+item.Stone Axe.name=Stenøkse
+item.IgIn Stone Axe.name=Stenøkse
+item.Sed Stone Axe.name=Stenøkse
+item.IgEx Stone Axe.name=Stenøkse
+item.MM Stone Axe.name=Stenøkse
+
+item.Stone Chisel.name=Stenmejsel
+
+item.Stone Hammer.name=Stenhammer
+
+item.Stone Hoe.name=Stenhakkejern
+item.IgIn Stone Hoe.name=Stenhakkejern
+item.Sed Stone Hoe.name=Stenhakkejern
+item.IgEx Stone Hoe.name=Stenhakkejern
+item.MM Stone Hoe.name=Stenhakkejern
+
+item.Stone Javelin.name=Stenspyd
+item.IgIn Stone Javelin.name=Stenspyd
+item.Sed Stone Javelin.name=Stenspyd
+item.IgEx Stone Javelin.name=Stenspyd
+item.MM Stone Javelin.name=Stenspyd
+
+item.Stone Knife.name=Stenkniv
+
+item.Stone Shovel.name=Stenskovl
+item.IgIn Stone Shovel.name=Stenskovl
+item.Sed Stone Shovel.name=Stenskovl
+item.IgEx Stone Shovel.name=Stenskovl
+item.MM Stone Shovel.name=Stenskovl
+
+#== Metal Heads ==
+#=== Axe Head ===
+item.Bismuth Bronze Axe Head.name=Bismuthbronze-øksehoved
+item.Black Bronze Axe Head.name=Sort Bronzeøksehoved
+item.Black Steel Axe Head.name=Sort Ståløksehoved
+item.Blue Steel Axe Head.name=Blåstålsøksehoved
+item.Bronze Axe Head.name=Bronzeøksehoved
+item.Copper Axe Head.name=Kobber-øksehoved
+item.Red Steel Axe Head.name=Rødstålsøksehoved
+item.Steel Axe Head.name=Ståløksehoved
+item.Wrought Iron Axe Head.name=Smedejernsøksehoved
+
+#=== Chisel Head ===
+item.Bismuth Bronze Chisel Head.name=Bismuthbronze-mejselklinge
+item.Black Bronze Chisel Head.name=Sort Bronzemejselklinge
+item.Black Steel Chisel Head.name=Sort Stålmejselklinge
+item.Blue Steel Chisel Head.name=Blåstålsmejselklinge
+item.Bronze Chisel Head.name=Bronzemejselklinge
+item.Copper Chisel Head.name=Kobbermejselklinge
+item.Red Steel Chisel Head.name=Rødstålsmejselklinge
+item.Steel Chisel Head.name=Stålmejselklinge
+item.Wrought Iron Chisel Head.name=Smedejernsmejselklinge
+
+#=== Hammer Head ===
+item.Bismuth Bronze Hammer Head.name=Bismuthbronze-hammerhoved
+item.Black Bronze Hammer Head.name=Sort Bronze-hammerhoved
+item.Black Steel Hammer Head.name=Sort Stål-hammerhoved
+item.Blue Steel Hammer Head.name=Blåståls-hammerhoved
+item.Bronze Hammer Head.name=Bronze-hammerhoved
+item.Copper Hammer Head.name=Kobber-hammerhoved
+item.Red Steel Hammer Head.name=Rødståls-hammerhoved
+item.Steel Hammer Head.name=Stål-hammerhoved
+item.Wrought Iron Hammer Head.name=Smedejerns-hammerhoved
+
+#=== Hoe Head ===
+item.Bismuth Bronze Hoe Head.name=Bismuthbronze-hakkejernhoved
+item.Black Bronze Hoe Head.name=Sort Bronzehakkejernhoved
+item.Black Steel Hoe Head.name=Sort Stålhakkejernhoved
+item.Blue Steel Hoe Head.name=Blåstålshakkejernhoved
+item.Bronze Hoe Head.name=Bronzehakkejernhoved
+item.Copper Hoe Head.name=Kobber-hakkejernhoved
+item.Red Steel Hoe Head.name=Rødstålshakkejernhoved
+item.Steel Hoe Head.name=Stålhakkejernshoved
+item.Wrought Iron Hoe Head.name=Smedejerns-hakkejernhoved
+
+#=== Javelin Head ===
+item.Bismuth Bronze Javelin Head.name=Bismuthbronze-spydspids
+item.Black Bronze Javelin Head.name=Sort Bronze-spydspids
+item.Black Steel Javelin Head.name=Sort Stål-spydspids
+item.Blue Steel Javelin Head.name=Blåstålsspydspids
+item.Bronze Javelin Head.name=Bronze-spydspids
+item.Copper Javelin Head.name=Kobber-spydspids
+item.Red Steel Javelin Head.name=Rødstålsspydspids
+item.Steel Javelin Head.name=Stål-spydspids
+item.Wrought Iron Javelin Head.name=Smedejernsspydspids
+
+#=== Knife Blade ===
+item.Bismuth Bronze Knife Blade.name=Bismuthbronzeknivblad
+item.Black Bronze Knife Blade.name=Sort Bronzeknivblad
+item.Black Steel Knife Blade.name=Sort Stålknivblad
+item.Blue Steel Knife Blade.name=Blåståslknivblad
+item.Bronze Knife Blade.name=Bronzeknivblad
+item.Copper Knife Blade.name=Kobberknivblad
+item.Red Steel Knife Blade.name=Rødstålsknivblad
+item.Steel Knife Blade.name=Stålknivblad
+item.Wrought Iron Knife Blade.name=Smedejernsknivblad
+
+#=== Mace Head ===
+item.Bismuth Bronze Mace Head.name=Bismuthbronze-morgenstjernehoved
+item.Black Bronze Mace Head.name=Sort Bronze-morgenstjernehoved
+item.Black Steel Mace Head.name=Sort Stålmorgenstjernehoved
+item.Blue Steel Mace Head.name=Blåstålsmorgenstjernehoved
+item.Bronze Mace Head.name=Bronzemorgenstjernehoved
+item.Copper Mace Head.name=Kobbermorgenstjernehoved
+item.Red Steel Mace Head.name=Rødstålsmorgenstjernehoved
+item.Steel Mace Head.name=Stålmorgenstjernehoved
+item.Wrought Iron Mace Head.name=Smedejernsmorgenstjernehoved
+
+#=== Pickaxe Head ===
+item.Bismuth Bronze Pick Head.name=Bismuthbronzehakkehoved
+item.Black Bronze Pick Head.name=Sort Bronzehakkehoved
+item.Black Steel Pick Head.name=Sort Stålhakkehoved
+item.Blue Steel Pick Head.name=Blåstålshakkehoved
+item.Bronze Pick Head.name=Bronzehakkehoved
+item.Copper Pick Head.name=Kobberhakkehoved
+item.Red Steel Pick Head.name=Rødstålshakkehoved
+item.Steel Pick Head.name=Stålhakkehoved
+item.Wrought Iron Pick Head.name=Smedejernshakkehoved
+
+#=== Prospector's Pick Head ===
+item.Bismuth Bronze ProPick Head.name=Bismuthbronze-prospekteringshakkehoved
+item.Black Bronze ProPick Head.name=Sort Bronzeprospekteringshakkehoved
+item.Black Steel ProPick Head.name=Sort Stålprospekteringshakkehoved
+item.Blue Steel ProPick Head.name=Blåstålsprospekteringshakkehoved
+item.Bronze ProPick Head.name=Bronzeprospekteringshakkehoved
+item.Copper ProPick Head.name=Kobberprospecteringshakkehoved
+item.Red Steel ProPick Head.name=Rødstålsprospekteringshakkehoved
+item.Steel ProPick Head.name=Stålprospekteringshakkehoved
+item.Wrought Iron ProPick Head.name=Smedejernsprospekteringshakkehoved
+
+#=== Saw Blade ===
+item.Bismuth Bronze Saw Blade.name=Bismuthbronze-savblad
+item.Black Bronze Saw Blade.name=Sort Bronzesavblad
+item.Black Steel Saw Blade.name=Sort Stålsavblad
+item.Blue Steel Saw Blade.name=Blåstålssavblad
+item.Bronze Saw Blade.name=Bronzesavblad
+item.Copper Saw Blade.name=Kobbersavblad
+item.Red Steel Saw Blade.name=Rødstålssavblad
+item.Steel Saw Blade.name=Stålsavblad
+item.Wrought Iron Saw Blade.name=Smedejernssavblad
+
+#=== Scythe Blade ===
+item.Bismuth Bronze Scythe Blade.name=Bismuthbronze-lehoved
+item.Black Bronze Scythe Blade.name=Sort Bronzelehoved
+item.Black Steel Scythe Blade.name=Sort Stål-lehoved
+item.Blue Steel Scythe Blade.name=Blåstålslehoved
+item.Bronze Scythe Blade.name=Bronzelehoved
+item.Copper Scythe Blade.name=Kobber-lehoved
+item.Red Steel Scythe Blade.name=Rødstålslehoved
+item.Steel Scythe Blade.name=Stål-lehoved
+item.Wrought Iron Scythe Blade.name=Smedejernslehoved
+
+#=== Shovel Head ===
+item.Bismuth Bronze Shovel Head.name=Bismuthbronze-skovlhoved
+item.Black Bronze Shovel Head.name=Sort Bronzeskovlhoved
+item.Black Steel Shovel Head.name=Sort Stålskovlhoved
+item.Blue Steel Shovel Head.name=Blåstålsskovlhoved
+item.Bronze Shovel Head.name=Bronzeskovlhoved
+item.Copper Shovel Head.name=Kobber-skovlhoved
+item.Red Steel Shovel Head.name=Rødstålsskovlhoved
+item.Steel Shovel Head.name=Stålskovlhoved
+item.Wrought Iron Shovel Head.name=Smedejernsskovlhoved
+
+#=== Sword Blade ===
+item.Bismuth Bronze Sword Blade.name=Bismuthbronze-sværdklinge
+item.Black Bronze Sword Blade.name=Sort Bronzesværdklinge
+item.Black Steel Sword Blade.name=Sort Stålsværdklinge
+item.Blue Steel Sword Blade.name=Blåstålssværdklinge
+item.Bronze Sword Blade.name=Bronzesværdklinge
+item.Copper Sword Blade.name=Kobbersværdklinge
+item.Red Steel Sword Blade.name=Rødstålssværdklinge
+item.Steel Sword Blade.name=Stål-sværdklinge
+item.Wrought Iron Sword Blade.name=Smedejernssværdklinge
+
+#== Metal Tools ==
+#=== Axe ===
+item.Bismuth Bronze Axe.name=Bismuthbronze-skovl
+item.Black Bronze Axe.name=Sort Bronzeskovl
+item.Black Steel Axe.name=Sort Stålskovl
+item.Blue Steel Axe.name=Blåstålsskovl
+item.Bronze Axe.name=Bronzeskovl
+item.Copper Axe.name=Kobberskovl
+item.Red Steel Axe.name=Rødstålsskovl
+item.Steel Axe.name=Stålskovl
+item.Wrought Iron Axe.name=Smedejernsskovl
+
+#=== Chisel ===
+item.Bismuth Bronze Chisel.name=Bismuthbronzemejsel
+item.Black Bronze Chisel.name=Sort Bronzemejsel
+item.Black Steel Chisel.name=Sort Stålmejsel
+item.Blue Steel Chisel.name=Blåstålsmejsel
+item.Bronze Chisel.name=Bronzemejsel
+item.Copper Chisel.name=Kobbermejsel
+item.Red Steel Chisel.name=Rødstålsmejsel
+item.Steel Chisel.name=Stålmejsel
+item.Wrought Iron Chisel.name=Smedejernsmejsel
+
+#=== Hammer ===
+item.Bismuth Bronze Hammer.name=Bismuthbronzehammer
+item.Black Bronze Hammer.name=Sort Bronzehammer
+item.Black Steel Hammer.name=Sort Stålhammer
+item.Blue Steel Hammer.name=Blåstålshammer
+item.Bronze Hammer.name=Bronzehammer
+item.Copper Hammer.name=Kobberhammer
+item.Red Steel Hammer.name=Rødstålshammer
+item.Steel Hammer.name=Stålhammer
+item.Wrought Iron Hammer.name=Smedejernshammer
+
+#=== Hoe ===
+item.Bismuth Bronze Hoe.name=Bismuthbronze-hakkejern
+item.Black Bronze Hoe.name=Sort Bronzehakkejern
+item.Black Steel Hoe.name=Sort Stålhakkejern
+item.Blue Steel Hoe.name=Blåstålshakkejern
+item.Bronze Hoe.name=Bronzehakkejern
+item.Copper Hoe.name=Kobberhakkejern
+item.Red Steel Hoe.name=Rødstålshakkejern
+item.Steel Hoe.name=Stålhakkejern
+item.Wrought Iron Hoe.name=Smedejernshakkejern
+
+#=== Javelin ===
+item.Bismuth Bronze Javelin.name=Bismuthbronzespyd
+item.Black Bronze Javelin.name=Sort Bronzespyd
+item.Black Steel Javelin.name=Sort Stålspyd
+item.Blue Steel Javelin.name=Blåstålsspyd
+item.Bronze Javelin.name=Bronzespyd
+item.Copper Javelin.name=Kobberspyd
+item.Red Steel Javelin.name=Rødstålsspyd
+item.Steel Javelin.name=Stålspyd
+item.Wrought Iron Javelin.name=Smedejernsspyd
+
+#=== Knife ===
+item.Bismuth Bronze Knife.name=Bismuthbronzekniv
+item.Black Bronze Knife.name=Sort Bronzekniv
+item.Black Steel Knife.name=Sort Stålkniv
+item.Blue Steel Knife.name=Blåståslkniv
+item.Bronze Knife.name=Bronzekniv
+item.Copper Knife.name=Kobberkniv
+item.Red Steel Knife.name=Rødstålskniv
+item.Steel Knife.name=Stålkniv
+item.Wrought Iron Knife.name=Smedejernskniv
+
+#=== Mace ===
+item.Bismuth Bronze Mace.name=Bismuthbronze-morgenstjerne
+item.Black Bronze Mace.name=Sort Bronzemorgenstjerne
+item.Black Steel Mace.name=Sort Stålmorgenstjerne
+item.Blue Steel Mace.name=Blåstålsmorgenstjerne
+item.Bronze Mace.name=Bronzemorgenstjerne
+item.Copper Mace.name=Kobbermorgenstjerne
+item.Red Steel Mace.name=Rødstålsmorgenstjerne
+item.Steel Mace.name=Stålmorgenstjerne
+item.Wrought Iron Mace.name=Smedejernsmorgenstjerne
+
+#=== Pickaxe ===
+item.Bismuth Bronze Pick.name=Bismuthbronzehakke
+item.Black Bronze Pick.name=Sort Bronzehakke
+item.Black Steel Pick.name=Sort Stålhakke
+item.Blue Steel Pick.name=Blåstålshakke
+item.Bronze Pick.name=Bronzehakke
+item.Copper Pick.name=Kobberhakke
+item.Red Steel Pick.name=Rødstålshakke
+item.Steel Pick.name=Stålhakke
+item.Wrought Iron Pick.name=Smedejernshakke
+
+#=== Prospector's Pick ===
+item.Bismuth Bronze ProPick.name=Bismuthbronze-prospekteringshakke
+item.Black Bronze ProPick.name=Sort Bronzeprospekteringshakke
+item.Black Steel ProPick.name=Sort Stålprospekteringshakke
+item.Blue Steel ProPick.name=Blåstålsprospekteringshakke
+item.Bronze ProPick.name=Bronzeprospekteringshakke
+item.Copper ProPick.name=Kobberprospecteringshakke
+item.Red Steel ProPick.name=Rødstålsprospekteringshakke
+item.Steel ProPick.name=Stålprospekteringshakke
+item.Wrought Iron ProPick.name=Smedejernsprospekteringshakke
+
+#=== Saw ===
+item.Bismuth Bronze Saw.name=Bismuthbronzesav
+item.Black Bronze Saw.name=Sort Bronzesav
+item.Black Steel Saw.name=Sort Stålsav
+item.Blue Steel Saw.name=Blåstålssav
+item.Bronze Saw.name=Bronzesav
+item.Copper Saw.name=Kobbersav
+item.Red Steel Saw.name=Rødstålssav
+item.Steel Saw.name=Stålsav
+item.Wrought Iron Saw.name=Smedejernssav
+
+#=== Scythe ===
+item.Bismuth Bronze Scythe.name=Bismuthbronzele
+item.Black Bronze Scythe.name=Sort Bronzele
+item.Black Steel Scythe.name=Sort Stål-le
+item.Blue Steel Scythe.name=Blåstålsle
+item.Bronze Scythe.name=Bronzele
+item.Copper Scythe.name=Kobberle
+item.Red Steel Scythe.name=Rødstålsle
+item.Steel Scythe.name=Stål-le
+item.Wrought Iron Scythe.name=Smedejernsle
+
+#=== Shovel ===
+item.Bismuth Bronze Shovel.name=Bismuthbronze-skovl
+item.Black Bronze Shovel.name=Sort Bronzeskovl
+item.Black Steel Shovel.name=Sort Stålskovl
+item.Blue Steel Shovel.name=Blåstålsskovl
+item.Bronze Shovel.name=Bronzeskovl
+item.Copper Shovel.name=Kobberskovl
+item.Red Steel Shovel.name=Rødstålsskovl
+item.Steel Shovel.name=Stålskovl
+item.Wrought Iron Shovel.name=Smedejernsskovl
+
+#=== Sword ===
+item.Bismuth Bronze Sword.name=Bismuthbronzesværd
+item.Black Bronze Sword.name=Sort Bronzesværd
+item.Black Steel Sword.name=Sort Stålsværd
+item.Blue Steel Sword.name=Blåstålssværd
+item.Bronze Sword.name=Bronzesværd
+item.Copper Sword.name=Kobbersværd
+item.Red Steel Sword.name=Rødstålssværd
+item.Steel Sword.name=Stålsværd
+item.Wrought Iron Sword.name=Smedejernssværd
+
+#=== Tuyere ===
+item.Bismuth Bronze Tuyere.name=Bismuthbronze-indblæsningsrør
+item.Black Bronze Tuyere.name=Sort Bronze-indblæsningsrør
+item.Black Steel Tuyere.name=Sortstålsindblæsningsrør
+item.Blue Steel Tuyere.name=Blåstålsindblæsningsrør
+item.Bronze Tuyere.name=Bronze-indblæsningsrør
+item.Copper Tuyere.name=Kobber-indblæsningsrør
+item.Red Steel Tuyere.name=Rødstålsindblæsningsrør
+item.Steel Tuyere.name=Stål-indblæsningsrør
+item.Wrought Iron Tuyere.name=Smedejernsindblæsningsrør
+
+#== Armor ==
+#=== Helmet ===
+item.Bismuth Bronze Unfinished Helmet.name=Ufærdiggjort Bismuthbronzehjelm (Trin 1)
+item.Black Bronze Unfinished Helmet.name=Ufærdiggjort Sorte Bronzehjelm (Trin 1)
+item.Black Steel Unfinished Helmet.name=Ufærdiggjort Sorte Stålhjelm (Trin 1)
+item.Blue Steel Unfinished Helmet.name=Ufærdiggjort Blåstålshjelm (Trin 1)
+item.Bronze Unfinished Helmet.name=Ufærdiggjort Bronzehjelm (Trin 1)
+item.Copper Unfinished Helmet.name=Ufærdiggjort Kobberhjelm (Trin 1)
+item.Red Steel Unfinished Helmet.name=Ufærdiggjort Rødstålshjelm (Trin 1)
+item.Steel Unfinished Helmet.name=Ufærdiggjort Stålhjelm (Trin 1)
+item.Wrought Iron Unfinished Helmet.name=Ufærdiggjort Smedejenshjelm (Trin 1)
+item.Bismuth Bronze Unfinished Helmet2.name=Ufærdiggjort Bismuthbronzehjelm (Trin 2)
+item.Black Bronze Unfinished Helmet2.name=Ufærdiggjort Sort Bronzehjelm (Trin 2)
+item.Black Steel Unfinished Helmet2.name=Ufærdiggjort Sort Stålhjelm (Trin 2)
+item.Blue Steel Unfinished Helmet2.name=Ufærdiggjort Blåstålshjelm (Trin 2)
+item.Bronze Unfinished Helmet2.name=Ufærdiggjort Bronzehjelm (Trin 2)
+item.Copper Unfinished Helmet2.name=Ufærdiggjort Kobberhjelm (Trin 2)
+item.Red Steel Unfinished Helmet2.name=Ufærdiggjort Rødstålshjelm (Trin 2)
+item.Steel Unfinished Helmet2.name=Ufærdiggjort Stålhjelm (Trin 2)
+item.Wrought Iron Unfinished Helmet2.name=Ufærdiggjort Smedejenshjelm (Trin 2)
+item.Bismuth Bronze Helmet.name=Bismuthbronzehjelm
+item.Black Bronze Helmet.name=Sorte Bronzehjelm
+item.Black Steel Helmet.name=Sorte Stålhjelm
+item.Blue Steel Helmet.name=Blåstålshjelm
+item.Bronze Helmet.name=Bronzehjelm
+item.Copper Helmet.name=Kobberhjelm
+item.Red Steel Helmet.name=Rødstålshjelm
+item.Steel Helmet.name=Stålhjelm
+item.Wrought Iron Helmet.name=Smedejenshjelm
+item.helmetCloth.name=Læderhat
+
+#=== Chestplate ===
+item.Bismuth Bronze Unfinished Chestplate.name=Ufærdiggjort Bismuthbronzebrystplade (Trin 1)
+item.Black Bronze Unfinished Chestplate.name=Ufærdiggjort Sort Bronzebrystplade (Trin 1)
+item.Black Steel Unfinished Chestplate.name=Ufærdiggjort Sort Stålbrystplade (Trin 1)
+item.Blue Steel Unfinished Chestplate.name=Ufærdiggjort Blåstålsbrystplade (Trin 1)
+item.Bronze Unfinished Chestplate.name=Ufærdiggjort Bronzebrystplade (Trin 1)
+item.Copper Unfinished Chestplate.name=Ufærdiggjort Kobberbrystplade (Trin 1)
+item.Red Steel Unfinished Chestplate.name=Ufærdiggjort Rødstålsbrystplade (Trin 1)
+item.Steel Unfinished Chestplate.name=Ufærdiggjort Stålbrystplade (Trin 1)
+item.Wrought Iron Unfinished Chestplate.name=Ufærdiggjort Smedejensbrystplade (Trin 1)
+item.Bismuth Bronze Unfinished Chestplate2.name=Ufærdiggjort Bismuthbronzebrystplade (Trin 2)
+item.Black Bronze Unfinished Chestplate2.name=Ufærdiggjort Sorte Bronzebrystplade (Trin 2)
+item.Black Steel Unfinished Chestplate2.name=Ufærdiggjort Sorte Stålbrystplade (Trin 2)
+item.Blue Steel Unfinished Chestplate2.name=Ufærdiggjort Blåstålsbrystplade (Trin 2)
+item.Bronze Unfinished Chestplate2.name=Ufærdiggjort Bronzebrystplade (Trin 2)
+item.Copper Unfinished Chestplate2.name=Ufærdiggjort Kobberbrystplade (Trin 2)
+item.Red Steel Unfinished Chestplate2.name=Ufærdiggjort Rødstålsbrystplade (Trin 2)
+item.Steel Unfinished Chestplate2.name=Ufærdiggjort Stålbrystplade (Trin 2)
+item.Wrought Iron Unfinished Chestplate2.name=Ufærdiggjort Smedejensbrystplade (Trin 2)
+item.Bismuth Bronze Chestplate.name=Bismuthbronzebrystplade
+item.Black Bronze Chestplate.name=Sorte Bronzebrystplade
+item.Black Steel Chestplate.name=Sorte Stålbrystplade
+item.Blue Steel Chestplate.name=Blåstålsbrystplade
+item.Bronze Chestplate.name=Bronzebrystplade
+item.Copper Chestplate.name=Kobberbrystplade
+item.Red Steel Chestplate.name=Rødstålsbrystplade
+item.Steel Chestplate.name=Stålbrystplade
+item.Wrought Iron Chestplate.name=Smedejensbrystplade
+item.chestplateCloth.name=Lædertunika
+
+#=== Greaves ===
+item.Bismuth Bronze Unfinished Greaves.name=Ufærdiggjorte Bismuthbronzebenskinner (Trin 1)
+item.Black Bronze Unfinished Greaves.name=Ufærdiggjorte Sorte Bronzebenskinner (Trin 1)
+item.Black Steel Unfinished Greaves.name=Ufærdiggjorte Sorte Stålbenskinner (Trin 1)
+item.Blue Steel Unfinished Greaves.name=Ufærdiggjorte Blåstålsbenskinner (Trin 1)
+item.Bronze Unfinished Greaves.name=Ufærdiggjorte Bronzebenskinner (Trin 1)
+item.Copper Unfinished Greaves.name=Ufærdiggjorte Kobberbenskinner (Trin 1)
+item.Red Steel Unfinished Greaves.name=Ufærdiggjorte Rødstålsbenskinner (Trin 1)
+item.Steel Unfinished Greaves.name=Ufærdiggjorte Stålbenskinner (Trin 1)
+item.Wrought Iron Unfinished Greaves.name=Ufærdiggjorte Smedejensbenskinner (Trin 1)
+item.Bismuth Bronze Unfinished Greaves2.name=Ufærdiggjorte Bismuthbronzebenskinner (Trin 2)
+item.Black Bronze Unfinished Greaves2.name=Ufærdiggjorte Sorte Bronzebenskinner (Trin 2)
+item.Black Steel Unfinished Greaves2.name=Ufærdiggjorte Sorte Stålbenskinner (Trin 2)
+item.Blue Steel Unfinished Greaves2.name=Ufærdiggjorte Blåstålsbenskinner (Trin 2)
+item.Bronze Unfinished Greaves2.name=Ufærdiggjorte Bronzebenskinner (Trin 2)
+item.Copper Unfinished Greaves2.name=Ufærdiggjorte Kobberbenskinner (Trin 2)
+item.Red Steel Unfinished Greaves2.name=Ufærdiggjorte Rødstålsbenskinner (Trin 2)
+item.Steel Unfinished Greaves2.name=Ufærdiggjorte Stålbenskinner (Trin 2)
+item.Wrought Iron Unfinished Greaves2.name=Ufærdiggjorte Smedejensbenskinner (Trin 2)
+item.Bismuth Bronze Greaves.name=Bismuthbronzebenskinner
+item.Black Bronze Greaves.name=Sorte Bronzebenskinner
+item.Black Steel Greaves.name=Sorte Stålbenskinner
+item.Blue Steel Greaves.name=Blåstålsbenskinner
+item.Bronze Greaves.name=Bronzebenskinner
+item.Copper Greaves.name=Kobberbenskinner
+item.Red Steel Greaves.name=Rødstålsbenskinner
+item.Steel Greaves.name=Stålbenskinner
+item.Wrought Iron Greaves.name=Smedejensbenskinner
+item.leggingsCloth.name=Læderbukser
+
+#=== Boots ===
+item.Bismuth Bronze Unfinished Boots.name=Ufærdiggjorte Bismuthbronzestøvler (Trin 1)
+item.Black Bronze Unfinished Boots.name=Ufærdiggjorte Sorte Bronzestøvler (Trin 1)
+item.Black Steel Unfinished Boots.name=Ufærdiggjorte Sorte Stålstøvler (Trin 1)
+item.Blue Steel Unfinished Boots.name=Ufærdiggjorte Blåstålsstøvler (Trin 1)
+item.Bronze Unfinished Boots.name=Ufærdiggjorte Bronzestøvler (Trin 1)
+item.Copper Unfinished Boots.name=Ufærdiggjorte Kobberstøvler (Trin 1)
+item.Red Steel Unfinished Boots.name=Ufærdiggjorte Rødstålsstøvler (Trin 1)
+item.Steel Unfinished Boots.name=Ufærdiggjorte Stålstøvler (Trin 1)
+item.Wrought Iron Unfinished Boots.name=Ufærdiggjorte Smedejensstøvler (Trin 1)
+item.Bismuth Bronze Unfinished Boots2.name=Ufærdiggjorte Bismuthbronzestøvler (Trin 2)
+item.Black Bronze Unfinished Boots2.name=Ufærdiggjorte Sorte Bronzestøvler (Trin 2)
+item.Black Steel Unfinished Boots2.name=Ufærdiggjorte Sorte Stålstøvler (Trin 2)
+item.Blue Steel Unfinished Boots2.name=Ufærdiggjorte Blåstålsstøvler (Trin 2)
+item.Bronze Unfinished Boots2.name=Ufærdiggjorte Bronzestøvler (Trin 2)
+item.Copper Unfinished Boots2.name=Ufærdiggjorte Kobberstøvler (Trin 2)
+item.Red Steel Unfinished Boots2.name=Ufærdiggjorte Rødstålsstøvler (Trin 2)
+item.Steel Unfinished Boots2.name=Ufærdiggjorte Stålstøvler (Trin 2)
+item.Wrought Iron Unfinished Boots2.name=Ufærdiggjorte Smedejensstøvler (Trin 2)
+item.Bismuth Bronze Boots.name=Bismuthbronzestøvler
+item.Black Bronze Boots.name=Sorte Bronzestøvler
+item.Black Steel Boots.name=Sorte Stålstøvler
+item.Blue Steel Boots.name=Blåstålsstøvler
+item.Bronze Boots.name=Bronzestøvler
+item.Copper Boots.name=Kobberstøvler
+item.Red Steel Boots.name=Rødstålsstøvler
+item.Steel Boots.name=Stålstøvler
+item.Wrought Iron Boots.name=Smedejensstøvler
+item.bootsCloth.name=Læderstøvler
+
+#==========
+#= Metals =
+#==========
+item.Iron Bloom.name=Raffineret Jernluppe
+item.Raw Iron Bloom.name=Rå Jernluppe
+tile.Bloom.name=Jernluppe
+
+#== Unshaped ==
+item.Bismuth Bronze Unshaped.name=Uformet Bismuthbronze
+item.Bismuth Unshaped.name=Uformet Bismuth
+item.Black Bronze Unshaped.name=Uformet Sort Bronze
+item.Black Steel Unshaped.name=Uformet Sort Stål
+item.Blue Steel Unshaped.name=Uformet Blåstål
+item.Brass Unshaped.name=Uformet Messing
+item.Bronze Unshaped.name=Uformet Bronze
+item.Copper Unshaped.name=Uformet Kobber
+item.Gold Unshaped.name=Uformet Guld
+item.HC Black Steel Unshaped.name=Uformet Sort Højkulstofstål
+item.HC Blue Steel Unshaped.name=Uformet Højkulstof-blåstål
+item.HC Red Steel Unshaped.name=Uformet Højkulstof-rødstål
+item.HC Steel Unshaped.name=Uformet Højkulstofstål
+item.Lead Unshaped.name=Uformet Bly
+item.Nickel Unshaped.name=Uformet Nikkel
+item.Pig Iron Unshaped.name=Uformet Støbejern
+item.Platinum Unshaped.name=Uformet Platin
+item.Red Steel Unshaped.name=Uformet Rødstål
+item.Rose Gold Unshaped.name=Uformet Rødguld
+item.Silver Unshaped.name=Uformet Sølv
+item.Steel Unshaped.name=Uformet Stål
+item.Sterling Silver Unshaped.name=Uformet Sterlingsølv
+item.Tin Unshaped.name=Uformet Tin
+item.Unknown Unshaped.name=Uformet Ukendt Metal
+item.Weak Blue Steel Unshaped.name=Uformet Svagt Blåstål
+item.Weak Red Steel Unshaped.name=Uformet Svagt Rødstål
+item.Weak Steel Unshaped.name=Uformet Svagt Stål
+item.Wrought Iron Unshaped.name=Uformet Smedejern
+item.Zinc Unshaped.name=Uformet Zink
+
+#== Ingot ==
+item.Bismuth Bronze Ingot.name=Bismuthbronzebarre
+item.Bismuth Ingot.name=Bismuthbarre
+item.Black Bronze Ingot.name=Sort Bronzebarre
+item.Black Steel Ingot.name=Sort Stålbarre
+item.Blue Steel Ingot.name=Blåstålsbarre
+item.Brass Ingot.name=Messingbarre
+item.Bronze Ingot.name=Bronzebarre
+item.Copper Ingot.name=Kobberbarre
+item.Gold Ingot.name=Guldbarre
+item.HC Black Steel Ingot.name=Sort Højkulstof-stålbarre
+item.HC Blue Steel Ingot.name=Højkulstof-blåstålsbarre
+item.HC Red Steel Ingot.name=højkulstof-rødstålsbarre
+item.HC Steel Ingot.name=Højkulstof-stålbarre
+item.Lead Ingot.name=Blybarre
+item.Nickel Ingot.name=Nikkelbarre
+item.Pig Iron Ingot.name=Støbejernsbarre
+item.Platinum Ingot.name=Platinbarre
+item.Red Steel Ingot.name=Rødstålsbarre
+item.Rose Gold Ingot.name=Rødguldsbarre
+item.Silver Ingot.name=Sølvbarre
+item.Steel Ingot.name=Stålbarre
+item.Sterling Silver Ingot.name=Sterlingsølvbarre
+item.Tin Ingot.name=Tinbarre
+item.Unknown Ingot.name=Ukendt metalbarre
+item.Weak Blue Steel Ingot.name=Svag Blåstålsbarre
+item.Weak Red Steel Ingot.name=Svag Rødstålsbarre
+item.Weak Steel Ingot.name=Svag Stålbarre
+item.Wrought Iron Ingot.name=Smedejernsbarre
+item.Zinc Ingot.name=Zinkbarre
+
+#== Double Ingot ==
+item.Bismuth Bronze Double Ingot.name=Dobbelt Bismuthbronzebarre
+item.Bismuth Double Ingot.name=Dobbelt Bismuthbarre
+item.Black Bronze Double Ingot.name=Dobbelt Sort Bronzebarre
+item.Black Steel Double Ingot.name=Dobbelt Sort Stålbarre
+item.Blue Steel Double Ingot.name=Dobbelt Blåstålsbarre
+item.Brass Double Ingot.name=Dobbelt Messingbarre
+item.Bronze Double Ingot.name=Dobbelt Bronzebarre
+item.Copper Double Ingot.name=Dobbelt Kobberbarre
+item.Gold Double Ingot.name=Dobbelt Guldbarre
+item.Lead Double Ingot.name=Dobbelt Blybarre
+item.Nickel Double Ingot.name=Dobbelt Nikkelbarre
+item.Pig Iron Double Ingot.name=Dobbelt Støbejernsbarre
+item.Platinum Double Ingot.name=Dobbelt Platinbarre
+item.Red Steel Double Ingot.name=Dobbelt Rødstålsbarre
+item.Rose Gold Double Ingot.name=Dobbelt Rødguldsbarre
+item.Silver Double Ingot.name=Dobbelt Sølvbarre
+item.Steel Double Ingot.name=Dobbelt Stålbarre
+item.Sterling Silver Double Ingot.name=Dobbelt Sterlingsølvbarre
+item.Tin Double Ingot.name=Dobbelt Tinbarre
+item.Wrought Iron Double Ingot.name=Dobbelt Smedejernsbarre
+item.Zinc Double Ingot.name=Dobbelt Zinkbarre
+
+#== Sheet ==
+item.Bismuth Bronze Sheet.name=Bismuthbronzeplade
+item.Bismuth Sheet.name=Bismuthplade
+item.Black Bronze Sheet.name=Sort Bronzeplade
+item.Black Steel Sheet.name=Sort Stålplade
+item.Blue Steel Sheet.name=Blåstålsplade
+item.Brass Sheet.name=Messingplade
+item.Bronze Sheet.name=Bronzeplade
+item.Copper Sheet.name=Kobberplade
+item.Gold Sheet.name=Guldplade
+item.Lead Sheet.name=Blyplade
+item.Nickel Sheet.name=Nikkelplade
+item.Pig Iron Sheet.name=Støbejernsplade
+item.Platinum Sheet.name=Platinplade
+item.Red Steel Sheet.name=Rødstålsplade
+item.Rose Gold Sheet.name=Rødguldsplade
+item.Silver Sheet.name=Sølvplade
+item.Steel Sheet.name=Stålplade
+item.Sterling Silver Sheet.name=Sterlingsølvplade
+item.Tin Sheet.name=Tinplade
+item.Wrought Iron Sheet.name=Smedejernsplade
+item.Zinc Sheet.name=Zinkplade
+
+#== DoubleSheet ==
+item.Bismuth Bronze Double Sheet.name=Dobbelt Bismuthbronzeplade
+item.Bismuth Double Sheet.name=Dobbelt Bismuthplade
+item.Black Bronze Double Sheet.name=Dobbelt Sort Bronzeplade
+item.Black Steel Double Sheet.name=Dobbelt Sort Stålplade
+item.Blue Steel Double Sheet.name=Dobbelt Blåstålsplade
+item.Brass Double Sheet.name=Dobbelt Messingplade
+item.Bronze Double Sheet.name=Dobbelt Bronzeplade
+item.Copper Double Sheet.name=Dobbelt Kobberplade
+item.Gold Double Sheet.name=Dobbelt Guldplade
+item.Lead Double Sheet.name=Dobbelt Blyplade
+item.Nickel Double Sheet.name=Dobbelt Nikkelplade
+item.Pig Iron Double Sheet.name=Dobbelt Støbejernsplade
+item.Platinum Double Sheet.name=Dobbelt Platinplade
+item.Red Steel Double Sheet.name=Dobbelt Rødstålsplade
+item.Rose Gold Double Sheet.name=Dobbelt Rødguldsplade
+item.Silver Double Sheet.name=Dobbelt Sølvplade
+item.Steel Double Sheet.name=Dobbelt Stålplade
+item.Sterling Silver Double Sheet.name=Dobbelt Sterlingsølvplade
+item.Tin Double Sheet.name=Dobbelt Tinplade
+item.Wrought Iron Double Sheet.name=Dobbelt Smedejernsplade
+item.Zinc Double Sheet.name=Dobbelt Zinkplade
+
+#===========
+#= Devices =
+#===========
+tile.Bellows.name=Blæsebælg
+tile.Forge.name=Esse
+tile.BlastFurnace.name=Højovn
+tile.SpawnMeter.name=Beskyttelsesmåler
+tile.Quern.name=Kværnstensbase
+tile.EarlyBloomery.name=Grubeovn
+tile.Crucible.name=Digel
+tile.NestBox.name=Redekasse
+item.SluiceItem.name=Guldvaskningssliske
+tile.LeatherRack.name=Læderstativ
+
+#== Anvils ==
+tile.Anvil.Stone.name=Stenambolt
+tile.Anvil.Bismuth.name=Bismuthambolt
+tile.Anvil2.Bismuth Bronze.name=Bismuthbronzeambolt
+tile.Anvil2.Black Bronze.name=Sort Bronzeambolt
+tile.Anvil.Black Steel.name=Sort Stålambolt
+tile.Anvil.Blue Steel.name=Blå Stålambolt
+tile.Anvil.Bronze.name=Bronzeambolt
+tile.Anvil.Copper.name=Kobberambolt
+tile.Anvil.Red Steel.name=Rød Stålambolt
+tile.Anvil2.Rose Gold.name=Rødguldsambolt
+tile.Anvil.Steel.name=Stålambolt
+tile.Anvil.Tin.name=Tinambolt
+tile.Anvil.Wrought Iron.name=Smedejernsambolt
+tile.Anvil.Zinc.name=Zinkambolt
+
+#==================
+#= Terrain Blocks =
+#==================
+tile.Grass.name=Græs
+tile.DryGrass.name=Tørt Græs
+tile.PeatGrass.name=Græstørv
+tile.ClayGrass.name=Ler Med Græs
+tile.dirt.name=Jord
+tile.sand.name=Sand
+tile.Peat.name=Tørv
+tile.tilledSoil.name=Landbrugsjord
+tile.LooseRock.name=Brokker
+tile.Ice.name=Is
+
+#=================
+#= Miscellaneous =
+#=================
+#== Misc Items ==
+item.arrow.name=Pil
+item.book.name=Bog
+item.stick.name=Pind
+item.coal.coal.name=Kul
+item.coal.charcoal.name=Trækul
+item.Fertilizer.name=Gødning
+item.Reeds.name=Sukkerør
+
+item.Wooden Bucket Empty.name=Træspand (Tom)
+item.Wooden Bucket Water.name=Træspand (Ferskvand)
+item.Wooden Bucket Salt Water.name=Træspand (Saltvand)
+item.Wooden Bucket Milk.name=Træspand (Mælk)
+item.Lime Water.name=Kalkvand
+
+item.Red Steel Bucket Empty.name=Rødstålsspand (Tom)
+item.Red Steel Bucket Water.name=Rødstålsspand (Ferskvand)
+item.Red Steel Bucket Salt Water.name=Rødstålsspand (Saltvand)
+item.Blue Steel Bucket Empty.name=Blåstålsspand (Tom)
+item.Blue Steel Bucket Lava.name=Blåstålsspand (Lava)
+
+item.GoldPan.name=Guldpande
+item.Gold Pan.Sand.name=Guldpande - Sand
+item.Gold Pan.Gravel.name=Guldpande - Grus
+item.Gold Pan.Clay.name=Guldpande - Ler
+item.Gold Pan.Dirt.name=Guldpande - Jord
+item.Ink.name=Blæk
+item.Firestarter.name=Ildtænder
+
+item.Quern.name=Håndsten
+item.Blueprint.name=Arbejdstegning
+item.Nametag.name=
+item.WoolYarn.name=Uldgarn
+item.Wool.name=Uld
+item.WoolCloth.name=Uldklæde
+item.SilkCloth.name=Silkeklæde
+item.BurlapCloth.name=Hessian
+item.Mortar.name=Mørtel
+item.Vinegar.name=Eddike
+
+item.Hide.small.name=Lille Råt Skind
+item.Hide.medium.name=Mellemstort Råt Skind
+item.Hide.large.name=Stort Råt Skind
+item.Soaked Hide.small.name=Lille Opblødt Skind
+item.Soaked Hide.medium.name=Mellemstort Opblødt Skind
+item.Soaked Hide.large.name=Stort Opblødt Skind
+item.Scraped Hide.small.name=Lille Skrabet Skind
+item.Scraped Hide.medium.name=Mellemstort Skrabet Skind
+item.Scraped Hide.large.name=Stort Skrabet Skind
+item.Prep Hide.small.name=Lille Klargjort Skind
+item.Prep Hide.medium.name=Mellemstort Klargjort Skind
+item.Prep Hide.large.name=Stort Klargjort Skind
+item.Sheep Skin.small.name=Lille Fåreskind
+item.Sheep Skin.medium.name=Mellemstort Fåreskind
+item.Sheep Skin.large.name=Stort Fåreskind
+item.TFC Leather.name=Læder
+item.Flat Leather.name=Fladt Læder
+item.leather.name=Læder
+
+item.minecartChest.name=Minevogn Med Kiste
+item.fishingRod.name=Fiskestang
+
+item.Quiver.name=Pilekogger
+item.Rope.name=Reb
+
+#======== Misc. Blocks========
+tile.Straw Hide Bed.name=Strå- & Skindseng
+tile.customBed.sleep.name=Denne seng er så ukomfortabel at du ikke kan falde i søvn
+tile.BasicPipe.name=Rør
+tile.ValvePipe.name=Rør Med Ventil
+tile.Torch.name=Fakkel
+tile.Chest.name=Kiste
+tile.Bookshelf.name=Bogreol
+tile.Workbench.name=Arbejdsbord
+tile.ButtonWood.name=Træknap
+
+#= Misc. Plants =
+item.Sugarcane.name=Sukkerrør
+item.Hemp.name=Hamp
+item.Straw.name=Strå
+item.Jute.name=Jute
+item.Jute Fibre.name=Jutefiber
+
+tile.Fungi.mushroom_brown.name=Brun Svamp
+tile.Fungi.mushroom_red.name=Rød Svamp
+tile.Cactus.name=Kaktus
+tile.Pumpkin.name=Græskar
+tile.Moss.name=Mos
+tile.Thatch.name=Høballe
+tile.Flora.Golden Rod.name=Gyldenris
+tile.Flora.Cat Tails.name=Dunhammer
+
+item.Seeds Sugarcane.name=Sukkerrørsfrø
+item.Seeds Hemp.name=Hampefrø
+item.Seeds Jute.name=Jutefrø
+
+tile.TallGrass.tallgrass.name=Højt Græs
+tile.TallGrass.fern.name=Bregne
+tile.TallGrass.shortgrass.name=Kort Græs
+tile.LilyPad.name=Åkande
+tile.Vine.name=Slyngplante
+tile.SeaGrassStill.name=Søgræs
+tile.SeaGrassIce.name=Frossent Søgræs
+
+tile.Flowers.flower_nasturtium.name=Brøndkarse
+tile.Flowers.flower_dandelion.name=Mælkebøtte
+tile.Flowers.flower_meads_milkweed.name=Mjød-silkeplante
+tile.Flowers.flower_tropical_milkweed.name=Rav-silkeplante
+tile.Flowers.flower_butterfly_milkweed.name=Orange Silkeplante
+tile.Flowers.flower_calendula.name=Morgenfrue
+tile.Flowers2.flower_rose.name=Rød Rose
+tile.Flowers2.flower_blue_orchid.name=Blå Orkide
+tile.Flowers2.flower_allium.name=Prydløg
+tile.Flowers2.flower_houstonia.name=Knopurt
+tile.Flowers2.flower_tulip_red.name=Rød Tulipan
+tile.Flowers2.flower_tulip_orange.name=Orange Tulipan
+tile.Flowers2.flower_tulip_white.name=Hvid Tulipan
+tile.Flowers2.flower_tulip_pink.name=Lyserød Tulipan
+tile.Flowers2.flower_oxeye_daisy.name=Marguerit
+
+#=======
+#= GUI =
+#=======
+gui.badnbt=DÅRLIGT Info
+
+#== Anvil GUI ==
+gui.Anvil.Plans=Planer
+gui.Anvil.Weld=Sammensvejs
+
+gui.Anvil.LightHit=Let Slag
+gui.Anvil.MediumHit=Medium Slag
+gui.Anvil.HeavyHit=Tungt Slag
+gui.Anvil.Draw=Træk
+
+gui.Anvil.Punch=Stød
+gui.Anvil.Bend=Bøj
+gui.Anvil.Upset=Tryk
+gui.Anvil.Shrink=Pres
+
+gui.Anvil.Rules=Regler
+gui.Anvil.Rule1=Ligemeget
+gui.Anvil.Rule2=Slag, Ligemeget
+gui.Anvil.Rule3=Slag, Sidst
+gui.Anvil.Rule4=Slag, Næstsidst
+gui.Anvil.Rule5=Slag, Tredjesidst
+gui.Anvil.Rule6=Slag, Sidste To
+gui.Anvil.Rule7=Slag, Sidste Tre
+gui.Anvil.Rule8=Slag, Ikke Sidst
+gui.Anvil.Rule9=Stød, Ligemeget
+gui.Anvil.Rule10=Stød, Sidst
+gui.Anvil.Rule11=Stød, Næstsidst
+gui.Anvil.Rule12=Stød, Tredjesidst
+gui.Anvil.Rule13=Stød, Sidste To
+gui.Anvil.Rule14=Stød, Sidste Tre
+gui.Anvil.Rule15=Stød, Ikke Sidst
+gui.Anvil.Rule16=Pres, Ligemeget
+gui.Anvil.Rule17=Pres, Sidst
+gui.Anvil.Rule18=Pres, Næstsidst
+gui.Anvil.Rule19=Pres, Tredjesidst
+gui.Anvil.Rule20=Pres, Sidste To
+gui.Anvil.Rule21=Pres, Sidste Tre
+gui.Anvil.Rule22=Pres, Ikke Sidst
+gui.Anvil.Rule23=Træk, Ligemeget
+gui.Anvil.Rule24=Træk, Sidst
+gui.Anvil.Rule25=Træk, Næstsidst
+gui.Anvil.Rule26=Træk, Tredjesidst
+gui.Anvil.Rule27=Træk, Sidste To
+gui.Anvil.Rule28=Træk, Sidste Tre
+gui.Anvil.Rule29=Træk, Ikke Sidst
+gui.Anvil.Rule30=Tryk, Ligemeget
+gui.Anvil.Rule31=Tryk, Sidst
+gui.Anvil.Rule32=Tryk, Næstsidst
+gui.Anvil.Rule33=Tryk, Tredjesidst
+gui.Anvil.Rule34=Tryk, Sidste To
+gui.Anvil.Rule35=Tryk, Sidste Tre
+gui.Anvil.Rule36=Tryk, Ikke Sidst
+gui.Anvil.Rule37=Bøj, Ligemeget
+gui.Anvil.Rule38=Bøj, Sidst
+gui.Anvil.Rule39=Bøj, Næstsidst
+gui.Anvil.Rule40=Bøj, Tredjesidst
+gui.Anvil.Rule41=Bøj, Sidste To
+gui.Anvil.Rule42=Bøj, Sidste Tre
+gui.Anvil.Rule43=Bøj, Ikke Sidst
+
+#== Tools/Weapons/Armor GUI ==
+gui.Armor.Advanced=Avanceret
+gui.Armor.Shift=Skift
+gui.Armor.ForgedBy=Smedet af
+gui.Armor.Hold=Tryk
+gui.Armor.Crush=Smadrende
+gui.Armor.Pierce=Gennemtrængende
+gui.Armor.Slash=Skærende
+
+gui.Bow.Advanced=Avanceret
+gui.Bow.Javelins=Spyd
+gui.Bow.Arrows=Pile
+gui.Bow.ForgedBy=Lavet af
+
+gui.DamageType.Error=Fejl: Dårlig Skadetype
+gui.DamageType.Crushing=Knusende
+gui.DamageType.Piercing=Gennemtrængende
+gui.DamageType.Slashing=Skærende
+
+#== Barrel GUI ==
+gui.Barrel.Empty=Tøm
+gui.Barrel.Seal=Forsegl
+gui.Barrel.Unseal=Bryd forseglingen
+gui.Barrel.ToggleOff=Ud
+gui.Barrel.ToggleOn=Ind
+gui.Barrel.SealedOn=Forseglet den
+gui.Barrel.Solid=Opbevaring af faste ting
+gui.Barrel.Liquid=Væskeopbevaring
+
+#== Bloomery GUI ==
+gui.Bloomery.Charcoal=Trækul
+gui.Bloomery.Ore=Malm
+gui.Bloomery.Output=Produkt
+
+#== Calendar GUI ==
+gui.Calendar.Calendar=Kalender
+gui.Calendar.DateBioxx=Bioxx' Fødselsdag!
+gui.Calendar.DateDunk=Dunks Fødselsdag!
+gui.Calendar.DateKitty=Kittys Fødselsdag!
+
+gui.Calendar.Hour=Time
+gui.Calendar.WitchHour=Ulvetimen
+
+gui.Calendar.Day=Dag
+gui.Calendar.Sunday=Søndag
+gui.Calendar.Monday=Mandag
+gui.Calendar.Tuesday=Tirsdag
+gui.Calendar.Wednesday=Onsdag
+gui.Calendar.Thursday=Torsdag
+gui.Calendar.Friday=Fredag
+gui.Calendar.Saturday=Lørdag
+
+gui.Calendar.Season=Årstid
+gui.Calendar.EarlySpring=Tidligt Forår
+gui.Calendar.Spring=Forår
+gui.Calendar.LateSpring=Sent Fårår
+gui.Calendar.EarlySummer=Tidlig Sommer
+gui.Calendar.Summer=Sommer
+gui.Calendar.LateSummer=Sen Sommer
+gui.Calendar.EarlyAutumn=Tidligt Efterår
+gui.Calendar.Autumn=Efterår
+gui.Calendar.LateAutumn=Sent Efterår
+gui.Calendar.EarlyWinter=Tidlig Vinter
+gui.Calendar.Winter=Vinter
+gui.Calendar.LateWinter=Sen Vinter
+
+gui.Calendar.Date=Dato
+gui.Calendar.January=Januar
+gui.Calendar.February=Februar
+gui.Calendar.March=Marts
+gui.Calendar.April=April
+gui.Calendar.May=Maj
+gui.Calendar.June=Juni
+gui.Calendar.July=Juli
+gui.Calendar.August=August
+gui.Calendar.September=September
+gui.Calendar.October=Oktober
+gui.Calendar.November=November
+gui.Calendar.December=December
+
+gui.Calendar.1Hour=1 Time
+gui.Calendar.1Day=1 Dag
+gui.Calendar.1Week=1 Uge
+gui.Calendar.1Month=1 Måned
+gui.Calendar.1Year=1 År
+
+#== Food Prep GUI ==
+gui.FoodPrep.CreateMeal=Lav Måltid
+gui.FoodPrep.Effect=Effekt
+gui.FoodPrep.Energy=Energi
+gui.FoodPrep.Filling=Mætning
+gui.FoodPrep.Power=Styrke
+
+#== Metals ==
+gui.metal.Bismuth=Bismuth
+gui.metal.BismuthBronze=Bismuthbronze
+gui.metal.BlackBronze=Sort Bronze
+gui.metal.BlackSteel=Sort Stål
+gui.metal.BlueSteel=Blåstål
+gui.metal.Brass=Messing
+gui.metal.Bronze=Bronze
+gui.metal.Copper=Kobber
+gui.metal.Gold=Guld
+gui.metal.HCBlackSteel=Sort Højkulstofstål
+gui.metal.HCBlueSteel=Højkulstof-blåstål
+gui.metal.HCRedSteel=Højkulstof-rødstål
+gui.metal.Lead=Bly
+gui.metal.Nickel=Nikkel
+gui.metal.PigIron=Støbejern
+gui.metal.Platinum=Platin
+gui.metal.RedSteel=Rødstål
+gui.metal.RoseGold=Rødguld
+gui.metal.Silver=Sølv
+gui.metal.Steel=Stål
+gui.metal.SterlingSilver=Sterling sølv
+gui.metal.Tin=Tin
+gui.metal.Unknown=Ukendt
+gui.metal.WeakBlueSteel=Svagt Blåstål
+gui.metal.WeakRedSteel=Svagt Rødstål
+gui.metal.WeakSteel=Svagt Stål
+gui.metal.WroughtIron=Smedejern
+gui.metal.Zinc=Zink
+
+#== Plans GUI ==
+gui.plans.axe=Økse
+gui.plans.bootsplate=Støvler
+gui.plans.bucket=Spand
+gui.plans.chestplate=Brystplade
+gui.plans.chisel=Mejsel
+gui.plans.hammer=Hammer
+gui.plans.helmplate=Hjelm
+gui.plans.hoe=Hakkejern
+gui.plans.ingot=Barre
+gui.plans.javelin=Spyd
+gui.plans.knife=Kniv
+gui.plans.legsplate=Benskinner
+gui.plans.mace=Morgenstjerne
+gui.plans.pickaxe=Hakke
+gui.plans.propick=Propekteringshakke
+gui.plans.refinebloom=Oprens
+gui.plans.saw=Sav
+gui.plans.scythe=Le
+gui.plans.sheet=Plade
+gui.plans.shovel=Skovl
+gui.plans.splitbloom=Del
+gui.plans.sword=Sværd
+gui.plans.tuyere=Indblæsningsrør
+gui.plans.grill=Grill
+gui.plans.shears=Saks
+
+#== Misc GUI ==
+gui.Blueprint=Arbejdstegning
+gui.Nametag=
+gui.fertilized=Gødet
+gui.Inventory=Beholdning
+gui.ClearSlot=Tøm et produktfelt
+gui.LogPile=Brændestabel
+gui.done=Færdig
+gui.Sluice.Soil=Jord
+gui.Sluice=Guldvaskning
+gui.Workbench.Crafting=Fremstilling
+
+#== Tooltips ==
+gui.ShowHelp=§8Hjælp: (Hold §fSkift§8)
+gui.Help=§8Hjælp:
+gui.Clay.Inst0=§bHøjreklik §7med 5 i en bunke for at forme.
+gui.Knife.Inst0=
+gui.Knife.Inst1=
+gui.Leather.Inst0=§bHøjreklik §7 med en kniv i dit inventar for at skære.
+gui.LooseRock.Inst0=§bHøjreklik §7med 2 i en bunke for at tilsnitte.
+gui.MeltedMetal.Inst0=§bHøjreklik §7for at hælde i en anden støbeform.
+gui.PotteryBase.Inst0=Snig og §bHøjreklik §7for at placere objekt.
+gui.PotteryVesselSmall.Inst0=Eller §bHøjreklik §7for at åbne inventar.
+gui.RawHide.Inst0=?????
+gui.Barrel.MoreItems=§8Med mere... (Tryk §fSkift§8)
+
+gui.Size.Tiny=Mini
+gui.Size.VerySmall=Meget Lille
+gui.Size.Small=Lille
+gui.Size.Medium=Medium
+gui.Size.Large=Stor
+gui.Size.VeryLarge=Meget Stor
+gui.Size.Huge=Kæmpe
+
+gui.Weight.Light=Let
+gui.Weight.Medium=Medium
+gui.Weight.Heavy=Tung
+
+gui.Reach.Short=Kort
+gui.Reach.Medium=Medium
+gui.Reach.Far=Land
+
+gui.food.fruit=Frugt
+gui.food.vegetable=Grøntsag
+gui.food.grain=Korn
+gui.food.protein=Protein
+gui.food.dairy=Mejeri
+gui.food.amount=Mængde
+gui.food.decay=Henfald
+gui.food.salted=Salted
+
+gui.FoodHeat.Cold=Kold
+gui.FoodHeat.Warm=Lun
+
+gui.Torch.CatchingFire=Antændes
+gui.Torch.Lit=Tændt
+
+gui.ItemHeat.Liquid=Flydende
+gui.ItemHeat.Solidified=Størknet
+gui.ItemHeat.Caution=Advarsel
+gui.ItemHeat.Warming=Lunt
+gui.ItemHeat.Hot=Varmt
+gui.ItemHeat.VeryHot=Meget Varmt
+gui.ItemHeat.FaintRed=Svag Rød
+gui.ItemHeat.DarkRed=Mørkerød
+gui.ItemHeat.BrightRed=Klar Rød
+gui.ItemHeat.Orange=Orange
+gui.ItemHeat.Yellow=Gul
+gui.ItemHeat.YellowWhite=Hvidgul
+gui.ItemHeat.White=Hvid
+gui.ItemHeat.BrilliantWhite=Strålende Hvid
+
+gui.ingot.workable=Kan Bearbejdes
+gui.ingot.weldable=Kan Sammensvejses
+gui.ingot.danger=**FARE**
+
+gui.milk.fresh=Frisk
+gui.milk.old=Gammel
+gui.milk.sour=Sur
+
+gui.units=Enheder
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=Skal bruges under flydende vand
+gui.goldpan.overused=Dette område ser ud til at være udtømt for malm der kan udvindes på denne måde. Du vil sandsyneligvis ikke finde ret meget!
+
+gui.ProPick.Found=Fandt
+gui.ProPick.FoundTraces=Fandt spor af
+gui.ProPick.FoundSmall=Fandt en lille mængde
+gui.ProPick.FoundMedium=Fandt en mellemstor mængde
+gui.ProPick.FoundLarge=Fandt en stor mængde
+gui.ProPick.FoundVeryLarge=Fandt en meget stor mængde
+gui.ProPick.FoundNothing=Fandt intet af interresse
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Rustning
+itemGroup.TFCMaterials=(TFC) Materialer
+itemGroup.TFCMisc=(TFC) Blandet
+itemGroup.TFCPottery=(TFC) Keramik
+itemGroup.TFCTools=(TFC) Værktøjer
+itemGroup.TFCWeapons=(TFC) Våben
+itemGroup.TFCDevices=(TFC) Apparater
+itemGroup.TFCFoods=(TFC) Mad
+itemGroup.TFCBuilding=(TFC) Byggeblokke
+itemGroup.TFCDecoration=(TFC) Dekorative Blokke
+
+#== Skill GUI ==
+skill.armorsmith=Rustningssmedning
+skill.gensmith=Smedning
+skill.toolsmith=Værktøjssmedning
+skill.weaponsmith=Våbensmedning
+skill.agriculture=Landbrug
+skill.cooking=Madlavning
+skill.prospecting=
+skill.butchering=
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================
+fluid.freshwater=Ferskvand
+fluid.saltwater=Saltvand
+fluid.lavatfc=Lava
+fluid.hotwater=Varmt Vand
+fluid.beer=Øl
+fluid.cider=Cider
+fluid.rum=Rom
+fluid.ryewhiskey=Rugwhisky
+fluid.sake=Sake
+fluid.vodka=Vodka
+fluid.whiskey=Whisky
+fluid.cornwhiskey=
+fluid.milk=Mælk
+fluid.milkcurdled=Syrnet Mælk
+fluid.limewater=Kalkvand
+fluid.tannin=Tannin
+fluid.vinegar=Eddike
+fluid.brine=Lage
+
+gui.showtaste=§8Smag: (Tryk §fL-Ctrl§8)
+gui.taste=§8Smag:
+gui.taste.sweet=Sød
+gui.taste.sour=Sur
+gui.taste.salty=Salt
+gui.taste.bitter=Bitter
+gui.taste.savory=Umamismagende
+
+gui.taste.novice.sweet1=Sød
+gui.taste.novice.sweet0=Ikke Sød
+gui.taste.novice.sour1=Sur
+gui.taste.novice.sour0=Ikke Sur
+gui.taste.novice.salty1=Salt
+gui.taste.novice.salty0=Ikke Salt
+gui.taste.novice.bitter1=Bitter
+gui.taste.novice.bitter0=Ikke Bitter
+gui.taste.novice.savory1=Umamismagende
+gui.taste.novice.savory0=Ikke Umamismagende
+
+gui.taste.adept.sweet0=Ikke Sød
+gui.taste.adept.sweet1=Moderat Sød
+gui.taste.adept.sweet2=Sød
+gui.taste.adept.sweet3=Ret Sød
+gui.taste.adept.sweet4=Meget Sød
+gui.taste.adept.sweet5=Ekstremt Sød
+gui.taste.adept.sour0=Ikke Sur
+gui.taste.adept.sour1=Moderat Sur
+gui.taste.adept.sour2=Sur
+gui.taste.adept.sour3=Ret Sur
+gui.taste.adept.sour4=Meget Sur
+gui.taste.adept.sour5=Ekstremt Sur
+gui.taste.adept.salty0=Ikke Salt
+gui.taste.adept.salty1=Moderat Salt
+gui.taste.adept.salty2=Salt
+gui.taste.adept.salty3=Ret Salt
+gui.taste.adept.salty4=Meget Salt
+gui.taste.adept.salty5=Ekstremt Salt
+gui.taste.adept.bitter0=Ikke Bitter
+gui.taste.adept.bitter1=Moderat Bitter
+gui.taste.adept.bitter2=Bitter
+gui.taste.adept.bitter3=Ret Bitter
+gui.taste.adept.bitter4=Meget Bitter
+gui.taste.adept.bitter5=Ekstremt Bitter
+gui.taste.adept.savory0=Ikke Umamismagende
+gui.taste.adept.savory1=Moderat Umamismagende
+gui.taste.adept.savory2=Umamismagende
+gui.taste.adept.savory3=Ret Umamismagende
+gui.taste.adept.savory4=Meget Umamismagende
+gui.taste.adept.savory5=Ekstremt Umamismagende
+
+gui.taste.0=
+gui.taste.1=
+gui.taste.2=
+gui.taste.3=
+gui.taste.4=
+gui.taste.5=
+gui.taste.6=
+gui.taste.7=
+gui.taste.8=
+
+gui.skill.novice=Novice
+gui.skill.adept=Erfaren
+gui.skill.expert=Ekspert
+gui.skill.master=Mester
+gui.skillpage=Færdigheder
+tile.MetalTrapDoor.name=Gulv-lem
+item.Mud Brick.name=Muddermursten
+item.Wet Mud Brick.name=Våd muddermursten
+gui.overburdened=*Overbelastet*
+gui.slot=Felt
+gui.slot.back=Tilbage
+word.pickled=Syltet
+word.brined=Lagesaltet
+word.cooked=Tilberedt
+word.salted=Tørsaltet
+word.smoked=Røget
+word.dried=Tørret
+gui.barrel.pickling=Syltning
+gui.barrel.brining=Lagesaltning
+tile.Vessel.name=Stort Lerkar
+tile.Grill.name=Grill
+food.cooked.rare=Rød
+food.cooked.medrare=Medium/rød
+food.cooked.med=Medium
+food.cooked.medwell=Medium/gennemstegt
+food.cooked.well=Gennemstegt
+food.cooked.0=Meget lyst
+food.cooked.1=Lyst
+food.cooked.2=Medium
+food.cooked.3=Mørkt
+food.cooked.4=Meget mørkt
+gui.FoodPrep.Sandwich=Sandwich
+gui.FoodPrep.Salad=Salat
+item.Sandwich.name=
+item.Salad.name=Salat
+item.ClayBowl.Ceramic Bowl.name=
+item.ClayBowl.Clay Bowl.name=
+item.Sugar.name=
+item.Sea Weed.name=
