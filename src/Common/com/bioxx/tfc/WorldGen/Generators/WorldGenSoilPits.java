@@ -117,7 +117,9 @@ public class WorldGenSoilPits implements IWorldGenerator
 							}
 							if(flag && rand.nextInt(15) == 0)
 							{
-								world.setBlock(xCoord, world.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord, TFCBlocks.Flora, 0, 2);
+								int y = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
+								if(world.isAirBlock(xCoord, y, zCoord) && TFC_Core.isSoil(world.getBlock(xCoord, y-1, zCoord)))
+									world.setBlock(xCoord, y, zCoord, TFCBlocks.Flora, 0, 2);
 							}
 						}
 					}
