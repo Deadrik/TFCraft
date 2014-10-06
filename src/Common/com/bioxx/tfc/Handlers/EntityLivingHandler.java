@@ -26,6 +26,7 @@ import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
 import com.bioxx.tfc.Core.Player.PlayerInfo;
 import com.bioxx.tfc.Core.Player.PlayerManagerTFC;
 import com.bioxx.tfc.Core.Player.SkillStats;
+import com.bioxx.tfc.Entities.EntityProjectileTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Food.ItemMeal;
 import com.bioxx.tfc.Handlers.Network.AbstractPacket;
@@ -283,16 +284,26 @@ public class EntityLivingHandler
 		boolean processed = false;
 		if(!event.entity.worldObj.isRemote && event.recentlyHit)
 		{
-			if(event.source.getSourceOfDamage() instanceof EntityPlayer)
+			if(event.source.getSourceOfDamage() instanceof EntityPlayer || event.source.isProjectile())
 			{
-				EntityPlayer p = (EntityPlayer)event.source.getSourceOfDamage();
 				boolean foundFood = false;
 				processed = true;
 				ArrayList<EntityItem> drop = new ArrayList<EntityItem>();
+				EntityPlayer p = null;
+				if(event.source.getSourceOfDamage() instanceof EntityPlayer)
+					p = (EntityPlayer)event.source.getSourceOfDamage();
+				else if(event.source.getSourceOfDamage() instanceof EntityProjectileTFC)
+				{
+					EntityProjectileTFC proj = (EntityProjectileTFC)event.source.getSourceOfDamage();
+					if(proj.shootingEntity instanceof EntityPlayer)
+						p = (EntityPlayer)proj.shootingEntity;
+				}
 				for(EntityItem ei : event.drops)
 				{
 					if(ei.getEntityItem().getItem() instanceof IFood)
 					{
+						if(p == null)
+							continue;
 						foundFood = true;
 						float oldWeight = Food.getWeight(ei.getEntityItem());
 						Food.setWeight(ei.getEntityItem(), 0);
@@ -314,7 +325,7 @@ public class EntityLivingHandler
 				}
 				event.drops.clear();
 				event.drops.addAll(drop);
-				if(foundFood)
+				if(foundFood && p != null)
 				{
 					TFC_Core.getSkillStats(p).increaseSkill(Global.SKILL_BUTCHERING, 1);
 				}
