@@ -40,7 +40,7 @@ public class BlockClayGrass extends BlockGrass
 	@Override
 	public int quantityDropped(Random rand)
 	{
-		return rand.nextInt(4);
+		return 1+rand.nextInt(3);
 	}
 
 	/**
