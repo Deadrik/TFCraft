@@ -372,7 +372,7 @@ public class BlockWoodSupport extends BlockTerra
 
 		int meta = world.getBlockMetadata(i, j, k);
 
-		if(isVertical && isOtherVertical)//Vertical Beam
+		if(isVertical && !isOtherHorizontal)//Vertical Beam
 		{
 			//if the block directly beneath the support is not solid or a support then break the support
 			if(!world.getBlock(i, j-1, k).isOpaqueCube() && !TFCBlocks.isBlockVSupport(world.getBlock(i, j-1, k)))
