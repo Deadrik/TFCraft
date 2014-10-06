@@ -243,14 +243,18 @@ public class TECrop extends NetworkTileEntity
 	{
 		ItemStack is = crop.getSeed();
 		is.stackSize = 1;
-		if (is != null)
+		if (is != null && TFC_Core.isFarmland(worldObj.getBlock(xCoord, yCoord-1, zCoord)))
 		{
 			if(worldObj.setBlock(xCoord, yCoord, zCoord, TFCBlocks.worldItem))
 			{
 				TEWorldItem te = (TEWorldItem) worldObj.getTileEntity(xCoord, yCoord, zCoord);
 				te.storage[0] = is;
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-			}
+			}				
+		}
+		else
+		{
+			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 		}
 	}
 
