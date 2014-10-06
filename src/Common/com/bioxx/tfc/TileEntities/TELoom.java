@@ -90,7 +90,7 @@ public class TELoom extends NetworkTileEntity implements IInventory
 			recipe =LoomManager.getInstance().findPotentialRecipes(this.getStackInSlot(0));
 			if(this.getStackInSlot(0) != null){
 				LoomRecipe lr = LoomManager.getInstance().findPotentialRecipes(i);
-				if(lr.equals(recipe))
+				if(lr != null && lr.equals(recipe))
 				{
 					if(this.getStringCount() < recipe.getReqSize())
 					{
