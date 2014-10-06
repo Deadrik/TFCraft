@@ -432,15 +432,15 @@ public class BlockWoodSupport extends BlockTerra
 		}
 		else if(TFCBlocks.isBlockVSupport(downBlock) || downBlock.isOpaqueCube())
 		{
-			if(side == 1 && world.isAirBlock(x, y+1, z))
+			if(side == 1 && world.isAirBlock(x, y, z))
 				return true;
-			else if(side == 2 && (TFCBlocks.isBlockVSupport(world.getBlock(x, y-1, z-1)) || world.getBlock(x, y-1, z-1).isOpaqueCube()) && world.isAirBlock(x, y, z-1))
+			else if(side == 2 && (TFCBlocks.isBlockVSupport(world.getBlock(x, y, z-1)) || world.getBlock(x, y, z-1).isOpaqueCube()) && world.isAirBlock(x, y, z-1))
 				return true;
-			else if(side == 3 && (TFCBlocks.isBlockVSupport(world.getBlock(x, y-1, z+1)) || world.getBlock(x, y-1, z+1).isOpaqueCube()) && world.isAirBlock(x, y, z+1))
+			else if(side == 3 && (TFCBlocks.isBlockVSupport(world.getBlock(x, y, z+1)) || world.getBlock(x, y, z+1).isOpaqueCube()) && world.isAirBlock(x, y, z+1))
 				return true;
-			else if(side == 4 && (TFCBlocks.isBlockVSupport(world.getBlock(x-1, y-1, z)) || world.getBlock(x-1, y-1, z).isOpaqueCube()) && world.isAirBlock(x-1, y, z))
+			else if(side == 4 && (TFCBlocks.isBlockVSupport(world.getBlock(x-1, y, z)) || world.getBlock(x-1, y, z).isOpaqueCube()) && world.isAirBlock(x-1, y, z))
 				return true;
-			else if(side == 5 && (TFCBlocks.isBlockVSupport(world.getBlock(x+1, y-1, z)) || world.getBlock(x+1, y-1, z).isOpaqueCube()) && world.isAirBlock(x+1, y, z))
+			else if(side == 5 && (TFCBlocks.isBlockVSupport(world.getBlock(x+1, y, z)) || world.getBlock(x+1, y, z).isOpaqueCube()) && world.isAirBlock(x+1, y, z))
 				return true;
 		}
 
