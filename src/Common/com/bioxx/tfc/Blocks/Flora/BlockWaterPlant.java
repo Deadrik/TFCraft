@@ -65,7 +65,8 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(getSeaWeed(world.rand));
 		TEWaterPlant te = (TEWaterPlant)world.getTileEntity(x, y, z);
-		ret.add(new ItemStack(te.getBlockFromType(),1, metadata));
+		if(te != null)
+			ret.add(new ItemStack(te.getBlockFromType(),1, metadata));
 		return ret;
 	}
 
