@@ -242,7 +242,7 @@ public class BlockGrass extends BlockTerra
 					{
 						for(int z = -4; z < 5 && !nearWater; z++)
 						{
-							if(world.getBlock(i+x, j-y, k+z).getMaterial() == Material.water)
+							if(j < 250 && j > Global.SEALEVEL && world.getBlock(i+x, j-y, k+z).getMaterial() == Material.water)
 								nearWater = true;
 						}
 					}
