@@ -50,7 +50,7 @@ public class TEOre extends NetworkTileEntity
 	@Override
 	public Packet getDescriptionPacket()
 	{
-		if((extraData & 8) != 0 || this.yCoord > 130)
+		if((extraData & 8) != 0 || this.yCoord > 100)
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
 			createInitNBT(nbt);
