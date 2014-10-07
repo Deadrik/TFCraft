@@ -1,0 +1,2416 @@
+﻿#pt_PT
+#Este é o arquivo de configuração de idioma português, traduzido por Dimeborg e Michael, revisão de Lvxferre
+
+
+
+
+
+generator.TFCDefault=TFC Padrão
+generator.TFCFlat=TFC Plano
+
+key.ToolMode=Trocar Modo de Ferramenta
+key.LockTool=Fixar Modo de Ferramenta
+
+effect.bleed=A Sangrar
+
+#==============
+#= Spawn Eggs =
+#==============
+entity.squidTFC.name=Lula
+entity.cowTFC.name=Vaca
+entity.wolfTFC.name=Lobo
+entity.bearTFC.name=Urso
+entity.deerTFC.name=Veado
+entity.chickenTFC.name=Galinha
+entity.pigTFC.name=Porco
+entity.skeletonTFC.name=Esqueleto
+entity.zombieTFC.name=Zombi
+entity.spiderTFC.name=Aranha
+entity.slimeTFC.name=Slime
+entity.silverfishTFC.name=Bicho-da-prata
+entity.ghastTFC.name=Ghast
+entity.caveSpiderTFC.name=Aranha da Caverna
+entity.blazeTFC.name=Blaze
+entity.endermanTFC.name=Enderman
+entity.pigZombieTFC.name=Porco Zombi
+entity.creeperTFC.name=Creeper
+entity.sheepTFC.name=Ovelha
+entity.pheasantTFC.name=Faisão
+entity.horseTFC.name=Cavalo
+entity.irongolemTFC.name=Golem de Ferro
+entity.fishTFC.name=Peixe
+
+
+#==========
+#= Entity =
+#==========
+entity.notFamiliar=O animal não vai deixar você fazer isso.
+fishingRod.lineTension=A corda vai se romper!
+fishingRod.lineSnap=A corda rompeu!
+fishingRod.bite=Oh! Uma mordida!
+fishingRod.gotAway=Ele fugiu....
+
+#================
+#= Achievements =
+#================
+achievement.achLooseRock=Definitivamente uma rocha
+achievement.achLooseRock.desc=Pegue numa rocha
+achievement.achSmallOre=Nenhuma pedra por virar
+achievement.achSmallOre.desc=Encontre uma pepita de minério
+achievement.achWildVegetable=Colector
+achievement.achWildVegetable.desc=Encontre um vegetal selvagem
+achievement.achRutabaga=Cebolas estúpidas...
+achievement.achRutabaga.desc=Encontre um nabo
+achievement.achQuern=A moagem
+achievement.achQuern.desc=Use a Mó
+achievement.achStoneAge=Paleolítico!
+achievement.achStoneAge.desc=Talhe uma ferramenta de pedra para entrar na Idade da Pedra
+achievement.achCopperAge=Calcolítico!
+achievement.achCopperAge.desc=Molde algo de metal para entrar na Idade do Cobre
+achievement.achSaw=Carpinteiro
+achievement.achSaw.desc=Faça uma serra
+achievement.achAnvil=Hora de Martelar
+achievement.achAnvil.desc=Faça uma bigorna de pedra
+achievement.achPickaxe=Hora de minar! (finalmente)
+achievement.achPickaxe.desc=Faça uma picareta
+achievement.achDiamond=DIAM- oh espere, não
+achievement.achDiamond.desc=Encontre um diamante
+achievement.achLimonite=LI-MO-NIIITE!
+achievement.achLimonite.desc=Minere algumas limonites
+achievement.achBronzeAge=A Idade do Bronze
+achievement.achBronzeAge.desc=Faça uma bigorna de bronze para entrar na Idade do Bronze.
+achievement.achIronAge=A Idade do Ferro
+achievement.achIronAge.desc=Mine uma esponja de ferro para entrar na Idade do Ferro.
+achievement.achPokeCreeper=Steve Irwin
+achievement.achPokeCreeper.desc=Pica-lo com um graveto
+
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=Nenhum animal válido em alcance!
+commands.transferTamed.tooMany=Muitos animais em alcance!
+commands.transferTamed.wrongOwner=Isto não pertence a você!
+commands.transferTamed.sameTarget=Você não pode transferir para si mesmo!
+commands.transferTamed.display.incoming=Um animal foi transferido para você por %s!
+commands.transferTamed.display.outgoing=Você transferiu um animal para %s!
+commands.transferTamed.wrongSender=Você não pode transferir animais!
+
+#========
+#= Food =
+#========
+item.MealGeneric.name=Refeição
+item.meal.terrible=Terrível
+item.meal.poor=Pobre
+item.meal.decent=Decente
+item.meal.good=Bom
+item.meal.great=Excelente
+item.meal.fantastic=Fantástico
+
+#== Grains ==
+item.Barley Bread.name=Pão de Cevada
+item.Corn Bread.name=Pão de Milho
+item.Oat Bread.name=Pão de Aveia
+item.Rice Bread.name=Pão de Arroz
+item.Rye Bread.name=Pão de Centeio
+item.Wheat Bread.name=Pão de Trigo
+
+item.Barley Whole.name=Cevada
+item.Maize Ear.name=Espiga de Milho
+item.Oat Whole.name=Aveia
+item.Rice Whole.name=Arroz
+item.Rye Whole.name=Centeio
+item.Wheat Whole.name=Trigo
+
+item.Barley Grain.name=Grãos de Cevada
+item.Oat Grain.name=Grãos de Aveia
+item.Rice Grain.name=Grãos de Arroz
+item.Rye Grain.name=Grãos de Centeio
+item.Wheat Grain.name=Grãos de Trigo
+
+item.Barley Ground.name=Farinha de Cevada
+item.Cornmeal Ground.name=Farinha de Milho
+item.Oat Ground.name=Farinha de Aveia
+item.Rice Ground.name=Farinha de Arroz
+item.Rye Ground.name=Farinha de Centeio
+item.Wheat Ground.name=Farinha de Trigo
+
+item.Barley Dough.name=Massa de Cevada
+item.Cornmeal Dough.name=Massa de Milho
+item.Oat Dough.name=Massa de Aveia
+item.Rice Dough.name=Massa de Arroz
+item.Rye Dough.name=Massa de Centeio
+item.Wheat Dough.name=Massa de Trigo
+
+item.Seeds Barley.name=Sementes de Cevada
+item.Seeds Maize.name=Sementes de Milho
+item.Seeds Oat.name=Sementes de Aveia
+item.Seeds Rice.name=Sementes de Arroz
+item.Seeds Rye.name=Sementes de Centeio
+item.Seeds Wheat.name=Sementes de Trigo
+
+#== Fruit ==
+item.Green Apple.name=Maçã Verde
+item.Red Apple.name=Maçã Vermelha
+item.Banana.name=Banana
+item.Cherry.name=Cereja
+item.Lemon.name=Limão
+item.Olive.name=Azeitona
+item.Orange.name=Laranja
+item.Peach.name=Pêssego
+item.Plum.name=Ameixa
+
+item.FruitSapling.Green Apple.name=Enxerto de Macieira Verde
+item.FruitSapling.Red Apple.name=Enxerto de Macieira Vermelha
+item.FruitSapling.Banana.name=Enxerto de Bananeira
+item.FruitSapling.Cherry.name=Enxerto de Cerejeira
+item.FruitSapling.Lemon.name=Enxerto de Limoeiro
+item.FruitSapling.Olive.name=Enxerto de Oliveira
+item.FruitSapling.Orange.name=Enxerto de Laranjeira
+item.FruitSapling.Peach.name=Enxerto de Pessegueiro
+item.FruitSapling.Plum.name=Enxerto de Ameixeira
+
+#=== Berry Bushes ===
+tile.BerryBush.Blackberry.name=Arbusto de Amora-Silvestre
+tile.BerryBush.Blueberry.name=Arbusto de Mirtilo
+tile.BerryBush.Bunchberry.name=Arbusto de Corniso Canadense
+tile.BerryBush.Cloudberry.name=Arbusto de Amora-Ártica
+tile.BerryBush.Cranberry.name=Arbusto de Oxicoco
+tile.BerryBush.Elderberry.name=Arbusto de Sabugueiro
+tile.BerryBush.Gooseberry.name=Arbusto de Groselha
+tile.BerryBush.Raspberry.name=Arbusto de Framboesa
+tile.BerryBush.Snowberry.name=Arbusto de Chiococca
+tile.BerryBush.Strawberry.name=Arbusto de Morango
+tile.BerryBush.Wintergreen.name=Arbusto de Symphoricarpos
+
+item.Blackberry.name=Amora-Silvestre
+item.Blueberry.name=Mirtilo
+item.Bunchberry.name=Corniso Canadense
+item.Cloudberry.name=Amora-Branca
+item.Cranberry.name=Oxicoco
+item.Elderberry.name=Sabugueiro
+item.Gooseberry.name=Groselha
+item.Raspberry.name=Framboesa
+item.Snowberry.name=Chiococca
+item.Strawberry.name=Morango
+item.Wintergreen Berry.name=Symphoricarpos
+
+item.Blackberry Leaf.name=Folha de Amora-Silvestre
+item.Blueberry Leaf.name=Folha de Mirtilo
+item.Bunchberry Leaf.name=Folha de Corniso Canadense
+item.Cloudberry Leaf.name=Folha de Amora-Branca
+item.Cranberry Leaf.name=Folha de Oxicoco
+item.Elderberry Leaf.name=Folha de Sabugueiro
+item.Gooseberry Leaf.name=Folha de Groselha
+item.Raspberry Leaf.name=Folha de Framboesa
+item.Snowberry Leaf.name=Folha de Chiococca
+item.Strawberry Leaf.name=Folha de Morango
+item.Wintergreen Leaf.name=Folha de Symphoricarpos
+
+#== Protein ==
+item.Beef.name=Bife
+item.Calamari.name=Lula
+item.egg.name=Ovo
+item.Fish.name=Peixe
+item.Mutton.name=Carneiro
+item.Porkchop.name=Costoleta
+item.Chicken.name=Frango
+item.Venison.name=Carne de Veado
+item.HorseMeat.name=Carne de Cavalo
+item.Egg Cooked.name=Ovo Cozido
+
+item.Soybeans.name=Soja
+item.Seeds Soybean.name=Sementes de Soja
+
+#== Dairy ==
+item.Cheese.name=Queijo
+
+#== Vegetables ==
+item.Green Bell Pepper.name=Pimento Verde
+item.Red Bell Pepper.name=Pimento Vermelho
+item.Yellow Bell Pepper.name=Pimento Amarelo
+item.Cabbage.name=Couve
+item.Carrot.name=Cenoura
+item.Garlic.name=Alho
+item.Greenbeans.name=Feijão Verde
+item.Onion.name=Cebola
+item.Potato.name=Batata
+item.Rutabaga.name=Nabo
+item.Squash.name=Abóbora
+item.Tomato.name=Tomate
+
+item.Seeds Red Bell Pepper.name=Sementes de Pimento Vermelho
+item.Seeds Yellow Bell Pepper.name=Sementes de Pimento Amarelo
+item.Seeds Cabbage.name=Sementes de Couve
+item.Seeds Carrot.name=Sementes de Cenoura
+item.Seeds Garlic.name=Sementes de Alho
+item.Seeds Greenbean.name=Sementes de Feijão Verde
+item.Seeds Onion.name=Sementes de Cebola
+item.Seeds Potato.name=Sementes de Batata
+item.Seeds Rutabaga.name=Sementes de Nabo
+item.Seeds Squash.name=Sementes de Abóbora
+item.Seeds Tomato.name=Sementes de Tomate
+
+#== Alcohol ==
+item.Glass Bottle.name=Garrafa de Vidro Vazia
+item.Beer.name=Cerveja
+item.Cider.name=Sidra
+item.Rum.name=Rum
+item.RyeWhiskey.name=Uísque de Centeio
+item.Sake.name=Saquê
+item.Vodka.name=Vodca
+item.Whiskey.name=Uísque
+item.CornWhiskey.name=Uísque de Milho
+
+#===========
+#= Pottery =
+#===========
+item.Clay.Clay.name=Argila
+item.Clay.Fire Clay.name=Argila Refratária
+
+item.clay.clayflatlight.name=Argila Plana Clara
+item.clay.clayflatdark.name=Argila Plana Escura
+item.clay.clayflatfire.name=Argila Refratária Plana
+item.clay.clayflatdarkfire.name=Argila Refratária Plana Escura
+
+item.Jug.Clay Jug.name=Jarro de Argila
+item.Jug.Ceramic Jug.name=Jarro de Cerâmica
+item.Jug.Water Jug.name=Jarro de Água
+
+item.Pot.Clay Pot.name=Pote de Argila
+item.Pot.Ceramic Pot.name=Pote de Cerâmica
+
+item.Small Vessel.Clay Vessel.name=Vaso de Argila
+item.Small Vessel.Ceramic Vessel.name=Vaso de Cerâmica
+
+item.Large Vessel.Clay Vessel [Large].name=Vaso de Argila (Grande)
+item.Large Vessel.Ceramic Vessel [Large].name=Vaso de Cerâmica (Grande)
+
+item.Mold.Clay Mold.name=Molde de Argila
+item.Mold.Ceramic Mold.name=Molde de Cerâmica
+
+item.Axe Mold.Clay Mold Axe.name=Molde de Machado em Argila
+item.Axe Mold.Ceramic Mold Axe.name=Molde de Machado
+item.Axe Mold.Ceramic Mold Axe Copper.name=Molde de Machado (Cobre)
+item.Axe Mold.Ceramic Mold Axe Bronze.name=Molde de Machado (Bronze)
+item.Axe Mold.Ceramic Mold Axe Black Bronze.name=Molde de Machado (Bronze Coríntio)
+item.Axe Mold.Ceramic Mold Axe Bismuth Bronze.name=Molde de Machado (Bronze de Bismuto)
+
+item.Chisel Mold.Clay Mold Chisel.name=Molde de Formão em Argila
+item.Chisel Mold.Ceramic Mold Chisel.name=Molde de Formão
+item.Chisel Mold.Ceramic Mold Chisel Copper.name=Molde de Formão (Cobre)
+item.Chisel Mold.Ceramic Mold Chisel Bronze.name=Molde de Formão (Bronze)
+item.Chisel Mold.Ceramic Mold Chisel Black Bronze.name=Molde de Formão (Bronze Coríntio)
+item.Chisel Mold.Ceramic Mold Chisel Bismuth Bronze.name=Molde de Formão (Bronze de Bismuto)
+
+item.Hammer Mold.Clay Mold Hammer.name=Molde de Martelo em Argila
+item.Hammer Mold.Ceramic Mold Hammer.name=Molde de Martelo
+item.Hammer Mold.Ceramic Mold Hammer Copper.name=Molde de Martelo (Cobre)
+item.Hammer Mold.Ceramic Mold Hammer Bronze.name=Molde de Martelo (Bronze)
+item.Hammer Mold.Ceramic Mold Hammer Black Bronze.name=Molde de Martelo (Bronze Coríntio)
+item.Hammer Mold.Ceramic Mold Hammer Bismuth Bronze.name=Molde de Martelo (Bronze de Bismuto)
+
+item.Hoe Mold.Clay Mold Hoe.name=Molde de Enxada em Argila
+item.Hoe Mold.Ceramic Mold Hoe.name=Molde de Enxada
+item.Hoe Mold.Ceramic Mold Hoe Copper.name=Molde de Enxada (Cobre)
+item.Hoe Mold.Ceramic Mold Hoe Bronze.name=Molde de Enxada (Bronze)
+item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=Molde de Enxada (Bronze Coríntio)
+item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=Molde de Enxada (Bronze de Bismuto)
+
+item.Knife Mold.Clay Mold Knife.name=Molde de Faca em Argila
+item.Knife Mold.Ceramic Mold Knife.name=Molde de Faca
+item.Knife Mold.Ceramic Mold Knife Copper.name=Molde de Faca (Cobre)
+item.Knife Mold.Ceramic Mold Knife Bronze.name=Molde de Faca (Bronze)
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=Molde de Faca (Bronze Coríntio)
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=Molde de Faca (Bronze de Bismuto)
+
+item.Javelin Mold.Clay Mold Javelin.name=Molde de Dardo em Argila
+item.Javelin Mold.Ceramic Mold Javelin.name=Molde de Dardo
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=Molde de Dardo (Cobre)
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=Molde de Dardo (Bronze)
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=Molde de Dardo (Bronze Coríntio)
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=Molde de Dardo (Bronze de Bismuto)
+
+item.Mace Mold.Clay Mold Mace.name=Molde de Maça em Argila
+item.Mace Mold.Ceramic Mold Mace.name=Molde de Maça
+item.Mace Mold.Ceramic Mold Mace Copper.name=Molde de Maça (Cobre)
+item.Mace Mold.Ceramic Mold Mace Bronze.name=Molde de Maça (Bronze)
+item.Mace Mold.Ceramic Mold Mace Black Bronze.name=Molde de Maça (Bronze Coríntio)
+item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=Molde de Maça (Bronze de Bismuto)
+
+item.Pick Mold.Clay Mold Pick.name=Molde de Picareta em Argila
+item.Pick Mold.Ceramic Mold Pick.name=Molde de Picareta
+item.Pick Mold.Ceramic Mold Pick Copper.name=Molde de Picareta (Cobre)
+item.Pick Mold.Ceramic Mold Pick Bronze.name=Molde de Picareta (Bronze)
+item.Pick Mold.Ceramic Mold Pick Black Bronze.name=Molde de Picareta (Bronze Coríntio)
+item.Pick Mold.Ceramic Mold Pick Bismuth Bronze.name=Molde de Picareta (Bronze de Bismuto)
+
+item.ProPick Mold.Clay Mold ProPick.name=Molde de Prospectora em Argila
+item.ProPick Mold.Ceramic Mold ProPick.name=Molde de Prospectora
+item.ProPick Mold.Ceramic Mold ProPick Copper.name=Molde de Prospectora (Cobre)
+item.ProPick Mold.Ceramic Mold ProPick Bronze.name=Molde de Prospectora (Bronze)
+item.ProPick Mold.Ceramic Mold ProPick Black Bronze.name=Molde de Prospectora (Bronze Coríntio)
+item.ProPick Mold.Ceramic Mold ProPick Bismuth Bronze.name=Molde de Prospectora (Bronze de Bismuto)
+
+item.Saw Mold.Clay Mold Saw.name=Molde de Serra em Argila
+item.Saw Mold.Ceramic Mold Saw.name=Molde de Serra
+item.Saw Mold.Ceramic Mold Saw Copper.name=Molde de Serra (Cobre)
+item.Saw Mold.Ceramic Mold Saw Bronze.name=Molde de Serra (Bronze)
+item.Saw Mold.Ceramic Mold Saw Black Bronze.name=Molde de Serra (Bronze Coríntio)
+item.Saw Mold.Ceramic Mold Saw Bismuth Bronze.name=Molde de Serra (Bronze de Bismuto)
+
+item.Scythe Mold.Clay Mold Scythe.name=Molde de Gadanha em Argila
+item.Scythe Mold.Ceramic Mold Scythe.name=Molde de Gadanha em Argila
+item.Scythe Mold.Ceramic Mold Scythe Copper.name=Molde de Gadanha (Cobre)
+item.Scythe Mold.Ceramic Mold Scythe Bronze.name=Molde de Gadanha (Bronze)
+item.Scythe Mold.Ceramic Mold Scythe Black Bronze.name=Molde de Gadanha (Bronze Coríntio)
+item.Scythe Mold.Ceramic Mold Scythe Bismuth Bronze.name=Molde de Gadanha (Bronze de Bismuto)
+
+item.Shovel Mold.Clay Mold Shovel.name=Molde de Pá em Argila
+item.Shovel Mold.Ceramic Mold Shovel.name=Molde de Pá
+item.Shovel Mold.Ceramic Mold Shovel Copper.name=Molde de Pá (Cobre)
+item.Shovel Mold.Ceramic Mold Shovel Bronze.name=Molde de Pá (Bronze)
+item.Shovel Mold.Ceramic Mold Shovel Black Bronze.name=Molde de Pá (Bronze Coríntio)
+item.Shovel Mold.Ceramic Mold Shovel Bismuth Bronze.name=Molde de Pá (Bronze de Bismuto)
+
+item.Sword Mold.Clay Mold Sword.name=Molde de Espada em Argila
+item.Sword Mold.Ceramic Mold Sword.name=Molde de Espada
+item.Sword Mold.Ceramic Mold Sword Copper.name=Molde de Espada (Cobre)
+item.Sword Mold.Ceramic Mold Sword Bronze.name=Molde de Espada (Bronze)
+item.Sword Mold.Ceramic Mold Sword Black Bronze.name=Molde de Espada (Bronze Coríntio)
+item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=Molde de Espada (Bronze de Bismuto)
+
+item.Spindle.name=Fuso
+item.Spindle Head.Clay Spindle.name=Fuso de Argila
+item.Spindle Head.Spindle Head.name=Cabeça de Fuso
+
+item.Fire Brick.Fire Brick.name=Blocos Incendiados
+item.Fire Brick.Clay Fire Brick.name=Blocos de Argila Incendiados
+tile.FireBrick.name=Blocos de Tijolos Incendiados
+
+#= Gems =
+item.Agate.Chipped.name=Ágata (Lascada)
+item.Amethyst.Chipped.name=Ametista (Lascada)
+item.Beryl.Chipped.name=Berílio (Lascado)
+item.Diamond.Chipped.name=Diamante (Lascado)
+item.Emerald.Chipped.name=Esmeralda (Lascada)
+item.Garnet.Chipped.name=Granada (Lascada)
+item.Jade.Chipped.name=Jade (Lascada)
+item.Jasper.Chipped.name=Jaspe (Lascada)
+item.Opal.Chipped.name=Opala (Lascada)
+item.Ruby.Chipped.name=Rubi (Lascado)
+item.Sapphire.Chipped.name=Safira (Lascada)
+item.Topaz.Chipped.name=Topázio (Lascada)
+item.Tourmaline.Chipped.name=Turmalina (Lascada)
+
+item.Agate.Flawed.name=Ágata (Imperfeito)
+item.Amethyst.Flawed.name=Ametista (Imperfeita)
+item.Beryl.Flawed.name=Berílio (Imperfeito)
+item.Diamond.Flawed.name=Diamante (Imperfeito)
+item.Emerald.Flawed.name=Esmeralda (Imperfeita)
+item.Garnet.Flawed.name=Granada (Imperfeita)
+item.Jade.Flawed.name=Jade (Imperfeita)
+item.Jasper.Flawed.name=Jaspe (Imperfeita)
+item.Opal.Flawed.name=Opala (Imperfeita)
+item.Ruby.Flawed.name=Rubi (Imperfeito)
+item.Sapphire.Flawed.name=Safira (Imperfeita)
+item.Topaz.Flawed.name=Topázio (Imperfeita)
+item.Tourmaline.Flawed.name=Turmalina (Imperfeita)
+
+item.Agate.Normal.name=Ágata (Comum)
+item.Amethyst.Normal.name=Ametista (Comum)
+item.Beryl.Normal.name=Berílio (Comum)
+item.Diamond.Normal.name=Diamante (Comum)
+item.Emerald.Normal.name=Esmeralda (Comum)
+item.Garnet.Normal.name=Granada (Comum)
+item.Jade.Normal.name=Jade (Comum)
+item.Jasper.Normal.name=Jaspe (Comum)
+item.Opal.Normal.name=Opala (Comum)
+item.Ruby.Normal.name=Rubi (Comum)
+item.Sapphire.Normal.name=Safira (Comum)
+item.Topaz.Normal.name=Topázio (Comum)
+item.Tourmaline.Normal.name=Turmalina (Comum)
+
+item.Agate.Flawless.name=Ágata (Perfeita)
+item.Amethyst.Flawless.name=Ametista (Perfeita)
+item.Beryl.Flawless.name=Berílio (Perfeito)
+item.Diamond.Flawless.name=Diamante (Perfeito)
+item.Emerald.Flawless.name=Esmeralda (Perfeita)
+item.Garnet.Flawless.name=Granada (Perfeita)
+item.Jade.Flawless.name=Jade (Perfeita)
+item.Jasper.Flawless.name=Jaspe (Perfeita)
+item.Opal.Flawless.name=Opala (Perfeita)
+item.Ruby.Flawless.name=Rubi (Perfeito)
+item.Sapphire.Flawless.name=Safira (Perfeita)
+item.Topaz.Flawless.name=Topázio (Perfeita)
+item.Tourmaline.Flawless.name=Turmalina (Perfeita)
+
+item.Agate.Exquisite.name=Ágata (Extraordinária)
+item.Amethyst.Exquisite.name=Ametista (Extraordinária)
+item.Beryl.Exquisite.name=Berílio (Extraordinário)
+item.Diamond.Exquisite.name=Diamante (Extraordinário)
+item.Emerald.Exquisite.name=Esmeralda (Extraordinária)
+item.Garnet.Exquisite.name=Granada (Extraordinária)
+item.Jade.Exquisite.name=Jade (Extraordinária)
+item.Jasper.Exquisite.name=Jaspe (Extraordinária)
+item.Opal.Exquisite.name=Opala (Extraordinária)
+item.Ruby.Exquisite.name=Rubi (Extraordinário)
+item.Sapphire.Exquisite.name=Safira (Extraordinária)
+item.Topaz.Exquisite.name=Topázio (Extraordinária)
+item.Tourmaline.Exquisite.name=Turmalina (Extraordinária)
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.black.name=Saco de Tinta
+item.dyePowder.blue.name=Lápis-lazúli
+item.dyePowder.brown.name=Sementes de Cacau
+item.dyePowder.cyan.name=Corante Ciano
+item.dyePowder.gray.name=Corante Cinza
+item.dyePowder.green.name=Corante Verde
+item.dyePowder.lightBlue.name=Corante Azul Celeste
+item.dyePowder.lime.name=Corante Verde-limão
+item.dyePowder.magenta.name=Corante Magenta
+item.dyePowder.orange.name=Corante Laranja
+item.dyePowder.pink.name=Corante Rosa
+item.dyePowder.purple.name=Corante Roxo
+item.dyePowder.red.name=Corante Vermelho
+item.dyePowder.silver.name=Corante Prateado
+item.dyePowder.white.name=Farinha de Osso
+item.dyePowder.yellow.name=Corante Amarelo
+
+item.Coke.name=Coque
+item.Powder.Flux.name=Fundente
+item.Powder.Graphite Powder.name=Grafite em Pó
+item.Powder.Hematite Powder.name=Hematite em Pó
+item.Powder.Kaolinite Powder.name=Caulinite em Pó
+item.Powder.Lapis Lazuli Powder.name=Lápis-lazúli em Pó
+item.Powder.Limonite Powder.name=Limonite em Pó
+item.Powder.Malachite Powder.name=Malaquite em Pó
+item.Powder.Salt.name=Sal
+item.Powder.Saltpeter Powder.name=Salitre em Pó
+item.Powder.Sulfur Powder.name=Enxofre em Pó
+
+#=========
+#= Stone =
+#=========
+#== Stone Items ==
+item.LooseRock.Andesite.name=Andesito
+item.LooseRock.Basalt.name=Basalto
+item.LooseRock.Chalk.name=Giz
+item.LooseRock.Chert.name=Cherte
+item.LooseRock.Claystone.name=Argilito
+item.LooseRock.Conglomerate.name=Conglomerado
+item.LooseRock.Dacite.name=Dacito
+item.LooseRock.Diorite.name=Diorito
+item.LooseRock.Dolomite.name=Dolomito
+item.LooseRock.Gabbro.name=Gabro
+item.LooseRock.Gneiss.name=Gnaisse
+item.LooseRock.Granite.name=Granito
+item.LooseRock.Limestone.name=Calcário
+item.LooseRock.Marble.name=Mármore
+item.LooseRock.Phyllite.name=Filito
+item.LooseRock.Quartzite.name=Quartzito
+item.LooseRock.Rhyolite.name=Riólito
+item.LooseRock.Rock Salt.name=Sal-gema
+item.LooseRock.Schist.name=Xisto
+item.LooseRock.Shale.name=Folhelho
+item.LooseRock.Slate.name=Ardósia
+
+item.ItemStoneBrick.Andesite.name=Tijolo de Andesito
+item.ItemStoneBrick.Basalt.name=Tijolo de Basalto
+item.ItemStoneBrick.Chalk.name=Tijolo de Giz
+item.ItemStoneBrick.Chert.name=Tijolo de Cherte
+item.ItemStoneBrick.Claystone.name=Tijolo de Argilito
+item.ItemStoneBrick.Conglomerate.name=Tijolo de Conglomerado
+item.ItemStoneBrick.Dacite.name=Tijolo de Dacito
+item.ItemStoneBrick.Diorite.name=Tijolo de Diorito
+item.ItemStoneBrick.Dolomite.name=Tijolo de Dolomito
+item.ItemStoneBrick.Gabbro.name=Tijolo de Gabro
+item.ItemStoneBrick.Gneiss.name=Tijolo de Gnaisse
+item.ItemStoneBrick.Granite.name=Tijolo de Granito
+item.ItemStoneBrick.Limestone.name=Tijolo de Calcário
+item.ItemStoneBrick.Marble.name=Tijolo de Mármore
+item.ItemStoneBrick.Phyllite.name=Tijolo de Filito
+item.ItemStoneBrick.Quartzite.name=Tijolo de Quatzito
+item.ItemStoneBrick.Rhyolite.name=Tijolo de Riólito
+item.ItemStoneBrick.Rock Salt.name=Tijolo de Sal-gema
+item.ItemStoneBrick.Schist.name=Tijolo de Xisto
+item.ItemStoneBrick.Shale.name=Tijolo de Folhelho
+item.ItemStoneBrick.Slate.name=Tijolo de Ardósia
+
+item.FlatRock.Andesite.name=Andesito Liso
+item.FlatRock.Basalt.name=Basalto Liso
+item.FlatRock.Chalk.name=Giz Liso
+item.FlatRock.Chert.name=Cherte Liso
+item.FlatRock.Claystone.name=Argilito Liso
+item.FlatRock.Conglomerate.name=Conglomerado Liso
+item.FlatRock.Dacite.name=Dacito Liso
+item.FlatRock.Diorite.name=Diorito Liso
+item.FlatRock.Dolomite.name=Dolomito Liso
+item.FlatRock.Gabbro.name=Gabro Liso
+item.FlatRock.Gneiss.name=Gnaisse Liso
+item.FlatRock.Granite.name=Granito Liso
+item.FlatRock.Limestone.name=Calcário Liso
+item.FlatRock.Marble.name=Mármore Liso
+item.FlatRock.Phyllite.name=Filito Liso
+item.FlatRock.Quartzite.name=Quartzito Liso
+item.FlatRock.Rhyolite.name=Riólito Liso
+item.FlatRock.Rock Salt.name=Sal-gema Liso
+item.FlatRock.Schist.name=Xisto Liso
+item.FlatRock.Shale.name=Folhelho Liso
+item.FlatRock.Slate=Ardósia Liso
+
+#== Stone Blocks ==
+tile.WallCobble.Andesite.name=Muro de Pedregulho de Andesito
+tile.WallCobble.Basalt.name=Muro de Pedregulho de Basalto
+tile.WallCobble.Chalk.name=Muro de Pedregulho de Giz
+tile.WallCobble.Chert.name=Muro de Pedregulho de Cherte
+tile.WallCobble.Claystone.name=Muro de Pedregulho de Argilita
+tile.WallCobble.Conglomerate.name=Muro de Pedregulho de Conglomerado
+tile.WallCobble.Dacite.name=Muro de Pedregulho de Dacito
+tile.WallCobble.Diorite.name=Muro de Pedregulho de Diorito
+tile.WallCobble.Dolomite.name=Muro de Pedregulho de Dolomito
+tile.WallCobble.Gabbro.name=Muro de Pedregulho de Gabro
+tile.WallCobble.Gneiss.name=Muro de Pedregulho de Gnaisse
+tile.WallCobble.Granite.name=Muro de Pedregulho de Granito
+tile.WallCobble.Limestone.name=Muro de Pedregulho de Calcário
+tile.WallCobble.Marble.name=Muro de Pedregulho de Mármore
+tile.WallCobble.Phyllite.name=Muro de Pedregulho de Filito
+tile.WallCobble.Quartzite.name=Muro de Pedregulho de Quartzito
+tile.WallCobble.Rhyolite.name=Muro de Pedregulho de Riólito
+tile.WallCobble.Rock Salt.name=Muro de Pedregulho de Sal-gema
+tile.WallCobble.Schist.name=Muro de Pedregulho de Xisto
+tile.WallCobble.Shale.name=Muro de Pedregulho de Folhelho
+tile.WallCobble.Slate.name=Muro de Pedregulho de Ardósia
+
+tile.WallRaw.Andesite.name=Muro de Andesito
+tile.WallRaw.Basalt.name=Muro de Basalto
+tile.WallRaw.Chalk.name=Muro de Giz
+tile.WallRaw.Chert.name=Muro de Cherte
+tile.WallRaw.Claystone.name=Muro de Argilita
+tile.WallRaw.Conglomerate.name=Muro de Conglomerado
+tile.WallRaw.Dacite.name=Muro de Dacito
+tile.WallRaw.Diorite.name=Muro de Diorito
+tile.WallRaw.Dolomite.name=Muro de Dolomito
+tile.WallRaw.Gabbro.name=Muro de Gabro
+tile.WallRaw.Gneiss.name=Muro de Gnaisse
+tile.WallRaw.Granite.name=Muro de Granito
+tile.WallRaw.Limestone.name=Muro de Calcário
+tile.WallRaw.Marble.name=Muro de Mármore
+tile.WallRaw.Phyllite.name=Muro de Filito
+tile.WallRaw.Quartzite.name=Muro de Quartzito
+tile.WallRaw.Rhyolite.name=Muro de Riólito
+tile.WallRaw.Rock Salt.name=Muro de Sal-gema
+tile.WallRaw.Schist.name=Muro de Xisto
+tile.WallRaw.Shale.name=Muro de folhelho
+tile.WallRaw.Slate.name=Muro de Ardósia
+
+tile.WallBrick.Andesite.name=Muro de Tijolos de Andesito
+tile.WallBrick.Basalt.name=Muro de Tijolos de Basalto
+tile.WallBrick.Chalk.name=Muro de Tijolos de Giz
+tile.WallBrick.Chert.name=Muro de Tijolos de Cherte
+tile.WallBrick.Claystone.name=Muro de Tijolos de Argilita
+tile.WallBrick.Conglomerate.name=Muro de Tijolos de Conglomerado
+tile.WallBrick.Dacite.name=Muro de Tijolos de Dacito
+tile.WallBrick.Diorite.name=Muro de Tijolos de Diorito
+tile.WallBrick.Dolomite.name=Muro de Tijolos de Dolomito
+tile.WallBrick.Gabbro.name=Muro de Tijolos de Gabro
+tile.WallBrick.Gneiss.name=Muro de Tijolos de Gnaisse
+tile.WallBrick.Granite.name=Muro de Tijolos de Granito
+tile.WallBrick.Limestone.name=Muro de Tijolos de Calcário
+tile.WallBrick.Marble.name=Muro de Tijolos de Mármore
+tile.WallBrick.Phyllite.name=Muro de Tijolos de Filito
+tile.WallBrick.Quartzite.name=Muro de Tijolos de Quartzito
+tile.WallBrick.Rhyolite.name=Muro de Tijolos de Riólito
+tile.WallBrick.Rock Salt.name=Muro de Tijolos de Sal-gema
+tile.WallBrick.Schist.name=Muro de Tijolos de Xisto
+tile.WallBrick.Shale.name=Muro de Tijolos de Folhelho
+tile.WallBrick.Slate.name=Muro de Tijolos de Ardósia
+
+tile.WallSmooth.Andesite.name=Muro Polido de Andesito
+tile.WallSmooth.Basalt.name=Muro Polido de Basalto
+tile.WallSmooth.Chalk.name=Muro Polido de Giz
+tile.WallSmooth.Chert.name=Muro Polido de Cherte
+tile.WallSmooth.Claystone.name=Muro Polido de Argilita
+tile.WallSmooth.Conglomerate.name=Muro Polido de Conglomerado
+tile.WallSmooth.Dacite.name=Muro Polido de Dacito
+tile.WallSmooth.Diorite.name=Muro Polido de Diorito
+tile.WallSmooth.Dolomite.name=Muro Polido de Dolomito
+tile.WallSmooth.Gabbro.name=Muro Polido de Gabro
+tile.WallSmooth.Gneiss.name=Muro Polido de Gnaisse
+tile.WallSmooth.Granite.name=Muro Polido de Granito
+tile.WallSmooth.Limestone.name=Muro Polido de Calcário
+tile.WallSmooth.Marble.name=Muro Polido de Mármore
+tile.WallSmooth.Phyllite.name=Muro Polido de Filito
+tile.WallSmooth.Quartzite.name=Muro Polido de Quartzito
+tile.WallSmooth.Rhyolite.name=Muro Polido de Riólito
+tile.WallSmooth.Rock Salt.name=Muro Polido de Sal-gema
+tile.WallSmooth.Schist.name=Muro Polido de Xisto
+tile.WallSmooth.Shale.name=Muro Polido de Folhelho
+tile.WallSmooth.Slate.name=Muro Polido de Ardósia
+
+tile.IgExRock.Andesite.name=Andesito
+tile.IgExRock.Basalt.name=Basalto
+tile.SedRock.Chalk.name=Giz
+tile.SedRock.Chert.name=Cherte
+tile.SedRock.Claystone.name=Argilita
+tile.SedRock.Conglomerate.name=Conglomerado
+tile.IgExRock.Dacite.name=Dacito
+tile.IgInRock.Diorite.name=Diorito
+tile.SedRock.Dolomite.name=Dolomito
+tile.IgInRock.Gabbro.name=Gabro
+tile.MMRock.Gneiss.name=Gnaisse
+tile.IgInRock.Granite.name=Granito
+tile.SedRock.Limestone.name=Calcário
+tile.MMRock.Marble.name=Mármore
+tile.MMRock.Phyllite.name=Filito
+tile.MMRock.Quartzite.name=Quartzito
+tile.IgExRock.Rhyolite.name=Riólito
+tile.SedRock.Rock Salt.name=Sal-gema
+tile.MMRock.Schist.name=Xisto
+tile.SedRock.Shale.name=Folhelho
+tile.MMRock.Slate.name=Ardósia
+
+tile.IgExRockCobble.Andesite.name=Pedregulho de Andesito
+tile.IgExRockCobble.Basalt.name=Pedregulho de Basalto
+tile.SedRockCobble.Chalk.name=Pedregulho de Giz
+tile.SedRockCobble.Chert.name=Pedregulho de Cherte
+tile.SedRockCobble.Claystone.name=Pedregulho de Argilita
+tile.SedRockCobble.Conglomerate.name=Pedregulho de Conglomerado
+tile.IgExRockCobble.Dacite.name=Pedregulho de Dacito
+tile.IgInRockCobble.Diorite.name=Pedregulho de Diorito
+tile.SedRockCobble.Dolomite.name=Pedregulho de Dolomito
+tile.IgInRockCobble.Gabbro.name=Pedregulho de Gabro
+tile.MMRockCobble.Gneiss.name=Pedregulho de Gnaisse
+tile.IgInRockCobble.Granite.name=Pedregulho de Granito
+tile.SedRockCobble.Limestone.name=Pedregulho de Calcário
+tile.MMRockCobble.Marble.name=Pedregulho de Mármore
+tile.MMRockCobble.Phyllite.name=Pedregulho de Filito
+tile.MMRockCobble.Quartzite.name=Pedregulho de Quartzito
+tile.IgExRockCobble.Rhyolite.name=Pedregulho de Riólito
+tile.SedRockCobble.Rock Salt.name=Pedregulho de Sal-gema
+tile.MMRockCobble.Schist.name=Pedregulho de Xisto
+tile.SedRockCobble.Shale.name=Pedregulho de Folhelho
+tile.MMRockCobble.Slate.name=Pedregulho de Ardósia
+
+tile.IgExRockSmooth.Andesite.name=Andesito Polido
+tile.IgExRockSmooth.Basalt.name=Basalto Polido
+tile.SedRockSmooth.Chalk.name=Giz Polido
+tile.SedRockSmooth.Chert.name=Cherte Polido
+tile.SedRockSmooth.Claystone.name=Argilita Polida
+tile.SedRockSmooth.Conglomerate.name=Conglomerado Polido
+tile.IgExRockSmooth.Dacite.name=Dacito Polido
+tile.IgInRockSmooth.Diorite.name=Diorito Polido
+tile.SedRockSmooth.Dolomite.name=Dolomito Polido
+tile.IgInRockSmooth.Gabbro.name=Gabro Polido
+tile.MMRockSmooth.Gneiss.name=Gnaisse Polida
+tile.IgInRockSmooth.Granite.name=Granito Polido
+tile.SedRockSmooth.Limestone.name=Calcário Polido
+tile.MMRockSmooth.Marble.name=Mármore Polido
+tile.MMRockSmooth.Phyllite.name=Filito Polido
+tile.MMRockSmooth.Quartzite.name=Quartzito Polido
+tile.IgExRockSmooth.Rhyolite.name=Riólito Polido
+tile.SedRockSmooth.Rock Salt.name=Sal-gema Polida
+tile.MMRockSmooth.Schist.name=Xisto Polido
+tile.SedRockSmooth.Shale.name=Folhelho Polido
+tile.MMRockSmooth.Slate.name=Ardósia Polido
+
+tile.IgExRockBrick.Andesite.name=Tijolos de Andesito
+tile.IgExRockBrick.Basalt.name=Tijolos de Basalto
+tile.SedRockBrick.Chalk.name=Tijolos de Giz
+tile.SedRockBrick.Chert.name=Tijolos de Cherte
+tile.SedRockBrick.Claystone.name=Tijolos de Argilita
+tile.SedRockBrick.Conglomerate.name=Tijolos de Conglomerado
+tile.IgExRockBrick.Dacite.name=Tijolos de Dacito
+tile.IgInRockBrick.Diorite.name=Tijolos de Diorito
+tile.SedRockBrick.Dolomite.name=Tijolos de Dolomito
+tile.IgInRockBrick.Gabbro.name=Tijolos de Gabro
+tile.MMRockBrick.Gneiss.name=Tijolos de Gnaisse
+tile.IgInRockBrick.Granite.name=Tijolos de Granito
+tile.SedRockBrick.Limestone.name=Tijolos de Calcário
+tile.MMRockBrick.Marble.name=Tijolos de Mármore
+tile.MMRockBrick.Phyllite.name=Tijolos de Filito
+tile.MMRockBrick.Quartzite.name=Tijolos de Quartzito
+tile.IgExRockBrick.Rhyolite.name=Tijolos de Riólito
+tile.SedRockBrick.Rock Salt.name=Tijolos de Sal-gema
+tile.MMRockBrick.Schist.name=Tijolos de Xisto
+tile.SedRockBrick.Shale.name=Tijolos de Folhelho
+tile.MMRockBrick.Slate.name=Tijolos de Ardósia
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Bituminous Coal.name=Carvão Betuminoso
+item.Ore.Borax.name=Bórax
+item.Ore.Cinnabar.name=Cinábrio
+item.Ore.Cryolite.name=Criolita
+item.Ore.Graphite.name=Grafite
+item.Ore.Gypsum.name=Gipsita
+item.Ore.Jet.name=Azeviche
+item.Ore.Kaolinite.name=Caulinite
+item.Ore.Kimberlite.name=Kimberlito
+item.Ore.Lapis Lazuli.name=Lazulite
+item.Ore.Lignite.name=Lignito
+item.Ore.Microcline.name=Microclina
+item.Ore.Olivine.name=Olivina
+item.Ore.Petrified Wood.name=Madeira Petrificada
+item.Ore.Pitchblende.name=Pechblenda
+item.Ore.Saltpeter.name=Salitre
+item.Ore.Satinspar.name=Satinspar
+item.Ore.Selenite.name=Selenita
+item.Ore.Serpentine.name=Serpentinita
+item.Ore.Sulfur.name=Enxofre
+item.Ore.Sylvite.name=Silvita
+
+item.Ore.Bismuthinite.name=Bismutinita
+item.Ore.Cassiterite.name=Cassiterita
+item.Ore.Galena.name=Galena
+item.Ore.Garnierite.name=Garnierita
+item.Ore.Hematite.name=Hematita
+item.Ore.Limonite.name=Limonita
+item.Ore.Magnetite.name=Magnetita
+item.Ore.Malachite.name=Malaquita
+item.Ore.Native Copper.name=Cobre Nativo
+item.Ore.Native Gold.name=Ouro Nativo
+item.Ore.Native Platinum.name=Platina Nativa
+item.Ore.Native Silver.name=Prata Nativa
+item.Ore.Sphalerite.name=Esfalerita
+item.Ore.Tetrahedrite.name=Tetraedrita
+
+item.Ore.Rich Bismuthinite.name=Bismutinita Rica
+item.Ore.Rich Cassiterite.name=Cassiterita Rica
+item.Ore.Rich Galena.name=Galena Rica
+item.Ore.Rich Garnierite.name=Garnierita Rica
+item.Ore.Rich Hematite.name=Hematita Rica
+item.Ore.Rich Limonite.name=Limonita Rica
+item.Ore.Rich Magnetite.name=Magnetita Rica
+item.Ore.Rich Malachite.name=Malaquita Rica
+item.Ore.Rich Native Copper.name=Cobre Nativo Rico
+item.Ore.Rich Native Gold.name=Ouro Nativo Rico
+item.Ore.Rich Native Platinum.name=Platina Nativa Rica
+item.Ore.Rich Native Silver.name=Prata Nativa Rica
+item.Ore.Rich Sphalerite.name=Esfalerita Rica
+item.Ore.Rich Tetrahedrite.name=Tetraedrita Rica
+
+item.Ore.Poor Bismuthinite.name=Bismutinita Pobre
+item.Ore.Poor Cassiterite.name=Cassiterita Pobre
+item.Ore.Poor Galena.name=Galena Pobre
+item.Ore.Poor Garnierite.name=Garnierita Pobre
+item.Ore.Poor Hematite.name=Hematita Pobre
+item.Ore.Poor Limonite.name=Limonita Pobre
+item.Ore.Poor Magnetite.name=Magnetita Pobre
+item.Ore.Poor Malachite.name=Malaquita Pobre
+item.Ore.Poor Native Copper.name=Cobre Nativo Pobre
+item.Ore.Poor Native Gold.name=Ouro Nativo Pobre
+item.Ore.Poor Native Platinum.name=Platina Nativa Pobre
+item.Ore.Poor Native Silver.name=Prata Nativa Pobre
+item.Ore.Poor Sphalerite.name=Esfalerita Pobre
+item.Ore.Poor Tetrahedrite.name=Tetraedrita Pobre
+
+item.Small Ore.Bismuthinite.name=Bismutinita Pequena
+item.Small Ore.Cassiterite.name=Cassiterita Pequena
+item.Small Ore.Galena.name=Galena Pequena
+item.Small Ore.Garnierite.name=Garnierita Pequena
+item.Small Ore.Hematite.name=Hematita Pequena
+item.Small Ore.Limonite.name=Limonita Pequena
+item.Small Ore.Magnetite.name=Magnetita Pequena
+item.Small Ore.Malachite.name=Malaquita Pequena
+item.Small Ore.Native Copper.name=Pepita de Cobre Nativo
+item.Small Ore.Native Gold.name=Pepita de Ouro Nativo
+item.Small Ore.Native Platinum.name=Pepita de Platina Nativa
+item.Small Ore.Native Silver.name=Pepita de Prata Nativa
+item.Small Ore.Sphalerite.name=Esfalerita Pequena
+item.Small Ore.Tetrahedrite.name=Tetraedrita Pequena
+
+#== Ore Blocks ==
+tile.Ore.Bituminous Coal.name=Carvão Betuminoso
+tile.Ore.Borax.name=Bórax
+tile.Ore.Cinnabar.name=Cinábrio
+tile.Ore.Cryolite.name=Criolita
+tile.Ore.Graphite.name=Grafite
+tile.Ore.Gypsum.name=Gipsita
+tile.Ore.Jet.name=Azeviche
+tile.Ore.Kaolinite.name=Caulinite
+tile.Ore.Kimberlite.name=Kimberlito
+tile.Ore.Lapis Lazuli.name=Lazulite
+tile.Ore.Lignite.name=Lignito
+tile.Ore.Microcline.name=Microclina
+tile.Ore.Olivine.name=Olivina
+tile.Ore.Petrified Wood.name=Madeira Petrificada
+tile.Ore.Pitchblende.name=Pechblenda
+tile.Ore.Saltpeter.name=Salitre
+tile.Ore.Satinspar.name=Satinspar
+tile.Ore.Selenite.name=Selenita
+tile.Ore.Serpentine.name=Serpentinita
+tile.Ore.Sulfur.name=Enxofre
+tile.Ore.Sylvite.name=Silvita
+
+tile.Ore.Bismuthinite.name=Bismutinita
+tile.Ore.Cassiterite.name=Cassiterita
+tile.Ore.Galena.name=Galena
+tile.Ore.Garnierite.name=Garnierita
+tile.Ore.Hematite.name=Hematita
+tile.Ore.Limonite.name=Limonita
+tile.Ore.Magnetite.name=Magnetita
+tile.Ore.Malachite.name=Malaquita
+tile.Ore.Native Copper.name=Cobre Nativo
+tile.Ore.Native Gold.name=Ouro Nativo
+tile.Ore.Native Platinum.name=Platina Nativa
+tile.Ore.Native Silver.name=Prata Nativa
+tile.Ore.Sphalerite.name=Esfalerita
+tile.Ore.Tetrahedrite.name=Tetraedrita
+
+#========
+#= Wood =
+#========
+#== Wood Items ==
+item.Log.Acacia.name=Acácia
+item.Log.Ash.name=Freixo
+item.Log.Aspen.name=Choupo
+item.Log.Birch.name=Bétula
+item.Log.Chestnut.name=Castanheira
+item.Log.Douglas Fir.name=Abeto de Douglas
+item.Log.Hickory.name=Nogueira
+item.Log.Kapok.name=Mafumeira
+item.Log.Maple.name=Bordo
+item.Log.Oak.name=Carvalho
+item.Log.Pine.name=Pinheiro
+item.Log.Sequoia.name=Sequoia
+item.Log.Spruce.name=Espruce
+item.Log.Sycamore.name=Sicomoro
+item.Log.White Cedar.name=Cedro Branco
+item.Log.White Elm.name=Olmo Branco
+item.Log.Willow.name=Salgueiro
+
+item.SinglePlank.Acacia.name=Tábua de Acácia
+item.SinglePlank.Ash.name=Tábua de Freixo
+item.SinglePlank.Aspen.name=Tábua de Choupo
+item.SinglePlank.Birch.name=Tábua de Bétula
+item.SinglePlank.Chestnut.name=Tábua de Castanheiro
+item.SinglePlank.Douglas Fir.name=Tábua de Abeto de Douglas
+item.SinglePlank.Hickory.name=Tábua de Nogueira
+item.SinglePlank.Kapok.name=Tábua de Mafumeira
+item.SinglePlank.Maple.name=Tábua de Bordo
+item.SinglePlank.Oak.name=Tábua de Carvalho
+item.SinglePlank.Pine.name=Tábua de Pinheiro
+item.SinglePlank.Sequoia.name=Tábua de Sequoia
+item.SinglePlank.Spruce.name=Tábua de Espruce
+item.SinglePlank.Sycamore.name=Tábua de Sicomoro
+item.SinglePlank.White Cedar.name=Tábua de Cedro Branco
+item.SinglePlank.White Elm.name=Tábua de Olmo Branco
+item.SinglePlank.Willow.name=Tábua de Salgueiro
+
+item.Acacia Door.name=Portão de Acácia
+item.Ash Door.name=Portão de Freixo
+item.Aspen Door.name=Portão de Choupo
+item.Birch Door.name=Portão de Bétula
+item.Chestnut Door.name=Portão de Castanheiro
+item.Douglas Fir Door.name=Portão de Abeto de Douglas
+item.Hickory Door.name=Portão de Nogueira
+item.Kapok Door.name=Portão de Mafumeira
+item.Maple Door.name=Portão de Bordo
+item.Oak Door.name=Portão de Carvalho
+item.Pine Door.name=Portão de Pinheiro
+item.Sequoia Door.name=Portão de Sequoia
+item.Spruce Door.name=Portão de Espruce
+item.Sycamore Door.name=Portão de Sicomoro
+item.White Cedar Door.name=Portão de Cedro Branco
+item.White Elm Door.name=Portão de Olmo Branco
+item.Willow Door.name=Portão de Salgueiro
+
+item.Barrel.Acacia.name=Barril de Acácia
+item.Barrel.Ash.name=Barril de Freixo
+item.Barrel.Aspen.name=Barril de Choupo
+item.Barrel.Birch.name=Barril de Bétula
+item.Barrel.Chestnut.name=Barril de Castanheiro
+item.Barrel.Douglas Fir.name=Barril de Abeto de Douglas
+item.Barrel.Hickory.name=Barril de Nogueira
+item.Barrel.Kapok.name=Barril de Mafumeira
+item.Barrel.Maple.name=Barril de Bordo
+item.Barrel.Oak.name=Barril de Carvalho
+item.Barrel.Pine.name=Barril de Pinheiro
+item.Barrel.Sequoia.name=Barril de Sequoia
+item.Barrel.Spruce.name=Barril de Espruce
+item.Barrel.Sycamore.name=Barril de Sicomoro
+item.Barrel.White Cedar.name=Barril de Cedro Branco
+item.Barrel.White Elm.name=Barril de Olmo Branco
+item.Barrel.Willow.name=Barril de Salgueiro
+
+item.Loom.Acacia.name=Tecelão de Acácia
+item.Loom.Ash.name=Tecelão de Freixo
+item.Loom.Aspen.name=Tecelão de Choupo
+item.Loom.Birch.name=Tecelão de Bétula
+item.Loom.Chestnut.name=Tecelão de Castanheiro
+item.Loom.Douglas Fir.name=Tecelão de Abeto de Douglas
+item.Loom.Hickory.name=Tecelão de Nogueira
+item.Loom.Kapok.name=Tecelão de Mafumeira
+item.Loom.Maple.name=Tecelão de Bordo
+item.Loom.Oak.name=Tecelão de Carvalho
+item.Loom.Pine.name=Tecelão de Pinheiro
+item.Loom.Sequoia.name=Tecelão de Sequoia
+item.Loom.Spruce.name=Tecelão de Espruce
+item.Loom.Sycamore.name=Tecelão de Sicomoro
+item.Loom.White Cedar.name=Tecelão de Cedro Branco
+item.Loom.White Elm.name=Tecelão de Olmo Branco
+item.Loom.Willow.name=Tecelão de Salgueiro
+
+#== Wood Blocks ==
+tile.log.Acacia.name=Acácia
+tile.log2.Acacia.name=Acácia
+tile.log.Ash.name=Freixo
+tile.log.Aspen.name=Choupo
+tile.log.Birch.name=Bétula
+tile.log.Chestnut.name=Castanheiro
+tile.log.Douglas Fir.name=Abeto de Douglas
+tile.log.Hickory.name=Nogueira
+tile.log.Kapok.name=Mafumeira
+tile.log.Maple.name=Bordo
+tile.log.Oak.name=Carvalho
+tile.log.Pine.name=Pinheiro
+tile.log.Sequoia.name=Sequoia
+tile.log.Spruce.name=Espruce
+tile.log.Sycamore.name=Sicomoro
+tile.log.White Cedar.name=Cedro Branco
+tile.log.White Elm.name=Olmo Branco
+tile.log.Willow.name=Salgueiro
+
+tile.WoodVert2.Acacia.name=Acácia
+tile.WoodVert.Ash.name=Freixo
+tile.WoodVert.Aspen.name=Choupo
+tile.WoodVert.Birch.name=Bétula
+tile.WoodVert.Chestnut.name=Castanheiro
+tile.WoodVert.Douglas Fir.name=Abeto de Douglas
+tile.WoodVert.Hickory.name=Nogueira
+tile.WoodVert.Kapok.name=Mafumeira
+tile.WoodVert.Maple.name=Bordo
+tile.WoodVert.Oak.name=Carvalho
+tile.WoodVert.Pine.name=Pinheiro
+tile.WoodVert.Sequoia.name=Sequoia
+tile.WoodVert.Spruce.name=Espruce
+tile.WoodVert.Sycamore.name=Sicomoro
+tile.WoodVert.White Cedar.name=Cedro Branco
+tile.WoodVert.White Elm.name=Olmo Branco
+tile.WoodVert.Willow.name=Salgueiro
+
+tile.WoodHoriz3.Acacia.name=Acácia
+tile.WoodHoriz.Ash.name=Freixo
+tile.WoodHoriz.Aspen.name=Choupo
+tile.WoodHoriz.Birch.name=Bétula
+tile.WoodHoriz.Chestnut.name=Castanheiro
+tile.WoodHoriz.Douglas Fir.name=Abeto de Douglas
+tile.WoodHoriz.Hickory.name=Nogueira
+tile.WoodHoriz2.Kapok.name=Mafumeira
+tile.WoodHoriz.Maple.name=Bordo
+tile.WoodHoriz.Oak.name=Carvalho
+tile.WoodHoriz2.Pine.name=Pinheiro
+tile.WoodHoriz2.Sequoia.name=Sequoia
+tile.WoodHoriz2.Spruce.name=Espruce
+tile.WoodHoriz2.Sycamore.name=Sicomoro
+tile.WoodHoriz2.White Cedar.name=Cedro Branco
+tile.WoodHoriz2.White Elm.name=Olmo Branco
+tile.WoodHoriz2.Willow.name=Salgueiro
+
+tile.sapling2.Acacia.name=Enxerto de Acácia
+tile.sapling.Ash.name=Enxerto de Freixo
+tile.sapling.Aspen.name=Enxerto de Choupo
+tile.sapling.Birch.name=Enxerto de Bétula
+tile.sapling.Chestnut.name=Enxerto de Castanheiro
+tile.sapling.Douglas Fir.name=Enxerto de Abeto de Douglas
+tile.sapling.Hickory.name=Enxerto de Nogueira
+tile.sapling.Kapok.name=Enxerto de Mafumeira
+tile.sapling.Maple.name=Enxerto de Bordo
+tile.sapling.Oak.name=Enxerto de Carvalho
+tile.sapling.Pine.name=Enxerto de Pinheiro
+tile.sapling.Sequoia.name=Enxerto de Sequoia
+tile.sapling.Spruce.name=Enxerto de Espruce
+tile.sapling.Sycamore.name=Enxerto de Sicomoro
+tile.sapling.White Cedar.name=Enxerto de Cedro Branco
+tile.sapling.White Elm.name=Enxerto de Olmo Branco
+tile.sapling.Willow.name=Enxerto de Salgueiro
+
+tile.leaves.Acacia.name=Folhas de Acácia
+tile.leaves.Ash.name=Folhas de Freixo
+tile.leaves.Aspen.name=Folhas de Choupo
+tile.leaves.Birch.name=Folhas de Bétula
+tile.leaves.Chestnut.name=Folhas de Castanheiro
+tile.leaves.Douglas Fir.name=Folhas de Abeto de Douglas
+tile.leaves.Hickory.name=Folhas de Nogueira
+tile.leaves.Kapok.name=Folhas de Mafumeira
+tile.leaves.Maple.name=Folhas de Bordo
+tile.leaves.Oak.name=Folhas de Carvalho
+tile.leaves.Pine.name=Folhas de Pinheiro
+tile.leaves.Sequoia.name=Folhas de Sequoia
+tile.leaves.Spruce.name=Folhas de Espruce
+tile.leaves.Sycamore.name=Folhas de Sicomoro
+tile.leaves.White Cedar.name=Folhas de Cedro Branco
+tile.leaves.White Elm.name=Folhas de Olmo Branco
+tile.leaves.Willow.name=Folhas de Salgueiro
+
+tile.wood2.Acacia.name=Tábuas de Acácia
+tile.wood.Ash.name=Tábuas de Freixo
+tile.wood.Aspen.name=Tábuas de Choupo
+tile.wood.Birch.name=Tábuas de Bétula
+tile.wood.Chestnut.name=Tábuas de Castanheiro
+tile.wood.Douglas Fir.name=Tábuas de Abeto de Douglas
+tile.wood.Hickory.name=Tábuas de Nogueira
+tile.wood.Kapok.name=Tábuas de Mafumeira
+tile.wood.Maple.name=Tábuas de Bordo
+tile.wood.Oak.name=Tábuas de Carvalho
+tile.wood.Pine.name=Tábuas de Pinheiro
+tile.wood.Sequoia.name=Tábuas de Sequoia
+tile.wood.Spruce.name=Tábuas de Espruce
+tile.wood.Sycamore.name=Tábuas de Sicomoro
+tile.wood.White Cedar.name=Tábuas de Cedro Branco
+tile.wood.White Elm.name=Tábuas de Olmo Branco
+tile.wood.Willow.name=Tábuas de Salgueiro
+
+tile.Door Acacia.name=Portão de Acácia
+tile.Door Ash.name=Portão de Freixo
+tile.Door Aspen.name=Portão de Choupo
+tile.Door Birch.name=Portão de Bétula
+tile.Door Chestnut.name=Portão de Castanheiro
+tile.Door Douglas Fir.name=Portão de Abeto de Douglas
+tile.Door Hickory.name=Portão de Nogueira
+tile.Door Kapok.name=Portão de Mafumeira
+tile.Door Maple.name=Portão de Bordo
+tile.Door Oak.name=Portão de Carvalho
+tile.Door Pine.name=Portão de Pinheiro
+tile.Door Sequoia.name=Portão de Sequoia
+tile.Door Spruce.name=Portão de Espruce
+tile.Door Sycamore.name=Portão de Sicomoro
+tile.Door White Cedar.name=Portão de Cedro Branco
+tile.Door White Elm.name=Portão de Olmo Branco
+tile.Door Willow.name=Portão de Salgueiro
+
+tile.Barrel.Acacia.name=Barril de Acácia
+tile.Barrel.Ash.name=Barril de Freixo
+tile.Barrel.Aspen.name=Barril de Choupo
+tile.Barrel.Birch.name=Barril de Bétula
+tile.Barrel.Chestnut.name=Barril de Castanheiro
+tile.Barrel.Douglas Fir.name=Barril de Abeto de Douglas
+tile.Barrel.Hickory.name=Barril de Nogueira
+tile.Barrel.Kapok.name=Barril de Mafumeira
+tile.Barrel.Maple.name=Barril de Bordo
+tile.Barrel.Oak.name=Barril de Carvalho
+tile.Barrel.Pine.name=Barril de Pinheiro
+tile.Barrel.Sequoia.name=Barril de Sequoia
+tile.Barrel.Spruce.name=Barril de Espruce
+tile.Barrel.Sycamore.name=Barril de Sicomoro
+tile.Barrel.White Cedar.name=Barril de Cedro Branco
+tile.Barrel.White Elm.name=Barril de Olmo Branco
+tile.Barrel.Willow.name=Barril de Salgueiro
+
+tile.Loom.Acacia.name=Tecelão de Acácia
+tile.Loom.Ash.name=Tecelão de Freixo
+tile.Loom.Aspen.name=Tecelão de Choupo
+tile.Loom.Birch.name=Tecelão de Bétula
+tile.Loom.Chestnut.name=Tecelão de Castanheiro
+tile.Loom.Douglas Fir.name=Tecelão de Abeto de Douglas
+tile.Loom.Hickory.name=Tecelão de Nogueira
+tile.Loom.Kapok.name=Tecelão de Mafumeira
+tile.Loom.Maple.name=Tecelão de Bordo
+tile.Loom.Oak.name=Tecelão de Carvalho
+tile.Loom.Pine.name=Tecelão de Pinheiro
+tile.Loom.Sequoia.name=Tecelão de Sequoia
+tile.Loom.Spruce.name=Tecelão de Espruce
+tile.Loom.Sycamore.name=Tecelão de Sicomoro
+tile.Loom.White Cedar.name=Tecelão de Cedro Branco
+tile.Loom.White Elm.name=Tecelão de Olmo Branco
+tile.Loom.Willow.name=Tecelão de Salgueiro
+
+tile.FenceTFC.Acacia.name=Cerca de Acácia
+tile.FenceTFC.Ash.name=Cerca de Freixo
+tile.FenceTFC.Aspen.name=Cerca de Choupo
+tile.FenceTFC.Birch.name=Cerca de Bétula
+tile.FenceTFC.Chestnut.name=Cerca de Castanheiro
+tile.FenceTFC.Douglas Fir.name=Cerca de Abeto de Douglas
+tile.FenceTFC.Hickory.name=Cerca de Nogueira
+tile.FenceTFC.Kapok.name=Cerca de Mafumeira
+tile.FenceTFC.Maple.name=Cerca de Bordo
+tile.FenceTFC.Oak.name=Cerca de Carvalho
+tile.FenceTFC.Pine.name=Cerca de Pinheiro
+tile.FenceTFC.Sequoia.name=Cerca de Sequoia
+tile.FenceTFC.Spruce.name=Cerca de Espruce
+tile.FenceTFC.Sycamore.name=Cerca de Sicomoro
+tile.FenceTFC.White Cedar.name=Cerca de Cedro Branco
+tile.FenceTFC.White Elm.name=Cerca de Olmo Branco
+tile.FenceTFC.Willow.name=Cerca de Salgueiro
+
+tile.FenceGateTFC.Acacia.name=Portão de Acácia
+tile.FenceGateTFC.Ash.name=Portão de Freixo
+tile.FenceGateTFC.Aspen.name=Portão de Choupo
+tile.FenceGateTFC.Birch.name=Portão de Bétula
+tile.FenceGateTFC.Chestnut.name=Portão de Castanheiro
+tile.FenceGateTFC.Douglas Fir.name=Portão de Abeto de Douglas
+tile.FenceGateTFC.Hickory.name=Portão de Nogueira
+tile.FenceGateTFC.Kapok.name=Portão de Mafumeira
+tile.FenceGateTFC.Maple.name=Portão de Bordo
+tile.FenceGateTFC.Oak.name=Portão de Carvalho
+tile.FenceGateTFC.Pine.name=Portão de Pinheiro
+tile.FenceGateTFC.Sequoia.name=Portão de Sequoia
+tile.FenceGateTFC.Spruce.name=Portão de Espruce
+tile.FenceGateTFC.Sycamore.name=Portão de Sicomoro
+tile.FenceGateTFC.White Cedar.name=Portão de Cedro Branco
+tile.FenceGateTFC.White Elm.name=Portão de Olmo Branco
+tile.FenceGateTFC.Willow.name=Portão de Salgueiro
+
+tile.ArmourStand.Acacia.name=Suporte de Armadura de Acácia
+tile.ArmourStand.Ash.name=Suporte de Armadura de Freixo
+tile.ArmourStand.Aspen.name=Suporte de Armadura de Choupo
+tile.ArmourStand.Birch.name=Suporte de Armadura de Bétula
+tile.ArmourStand.Chestnut.name=Suporte de Armadura de Castanheiro
+tile.ArmourStand.Douglas Fir.name=Suporte de Armadura de Abeto de Douglas
+tile.ArmourStand.Hickory.name=Suporte de Armadura de Nogueira
+tile.ArmourStand.Kapok.name=Suporte de Armadura de Mafumeira
+tile.ArmourStand.Maple.name=Suporte de Armadura de Bordo
+tile.ArmourStand.Oak.name=Suporte de Armadura de Carvalho
+tile.ArmourStand.Pine.name=Suporte de Armadura de Pinheiro
+tile.ArmourStand.Sequoia.name=Suporte de Armadura de Sequoia
+tile.ArmourStand.Spruce.name=Suporte de Armadura de Espruce
+tile.ArmourStand.Sycamore.name=Suporte de Armadura de Sicomoro
+tile.ArmourStand.White Cedar.name=Suporte de Armadura de Cedro Branco
+tile.ArmourStand.White Elm.name=Suporte de Armadura de Olmo Branco
+tile.ArmourStand.Willow.name=Suporte de Armadura de Salgueiro
+
+tile.WoodSupportV2.Acacia.name=Suporte de Viga de Acácia
+tile.WoodSupportV.Ash.name=Suporte de Viga de Freixo
+tile.WoodSupportV.Aspen.name=Suporte de Viga de Choupo
+tile.WoodSupportV.Birch.name=Suporte de Viga de Bétula
+tile.WoodSupportV.Chestnut.name=Suporte de Viga de Castanheiro
+tile.WoodSupportV.Douglas Fir.name=Suporte de Viga de Abeto de Douglas
+tile.WoodSupportV.Hickory.name=Suporte de Viga de Nogueira
+tile.WoodSupportV.Kapok.name=Suporte de Viga de Mafumeira
+tile.WoodSupportV.Maple.name=Suporte de Viga de Bordo
+tile.WoodSupportV.Oak.name=Suporte de Viga de Carvalho
+tile.WoodSupportV.Pine.name=Suporte de Viga de Pinheiro
+tile.WoodSupportV.Sequoia.name=Suporte de Viga de Sequoia
+tile.WoodSupportV.Spruce.name=Suporte de Viga de Espruce
+tile.WoodSupportV.Sycamore.name=Suporte de Viga de Sicomoro
+tile.WoodSupportV.White Cedar.name=Suporte de Viga de Cedro Branco
+tile.WoodSupportV.White Elm.name=Suporte de Viga de Olmo Branco
+tile.WoodSupportV.Willow.name=Suporte de Viga de Salgueiro
+
+tile.Toolrack.Acacia.name=Ferramental de Acácia
+tile.Toolrack.Ash.name=Ferramental de Freixo
+tile.Toolrack.Aspen.name=Ferramental de Choupo
+tile.Toolrack.Birch.name=Ferramental de Bétula
+tile.Toolrack.Chestnut.name=Ferramental de Castanheiro
+tile.Toolrack.Douglas Fir.name=Ferramental de Abeto de Douglas
+tile.Toolrack.Hickory.name=Ferramental de Nogueira
+tile.Toolrack.Kapok.name=Ferramental de Mafumeira
+tile.Toolrack.Maple.name=Ferramental de Bordo
+tile.Toolrack.Oak.name=Ferramental de Carvalho
+tile.Toolrack.Pine.name=Ferramental de Pinheiro
+tile.Toolrack.Sequoia.name=Ferramental de Sequoia
+tile.Toolrack.Spruce.name=Ferramental de Espruce
+tile.Toolrack.Sycamore.name=Ferramental de Sicomoro
+tile.Toolrack.White Cedar.name=Ferramental de Cedro Branco
+tile.Toolrack.White Elm.name=Ferramental de Olmo Branco
+tile.Toolrack.Willow.name=Ferramental de Salgueiro
+
+#=======================
+#= Tools/Weapons/Armor =
+#=======================
+
+#== Stone Heads ==
+item.Stone Hammer Head.name=Cabeça de Martelo de Pedra
+item.Stone Knife Blade.name=Lâmina de Faca de Pedra
+
+item.IgIn Stone Axe Head.name=Cabeça de Machado de Pedra
+item.IgIn Stone Chisel Head.name=Cabeça de Formão de Pedra
+item.IgIn Stone Hoe Head.name=Cabeça de Enxada de Pedra
+item.IgIn Stone Javelin Head.name=Ponta de Dardo de Pedra
+item.IgIn Stone Shovel Head.name=Cabeça de Pá de Pedra
+
+item.Sed Stone Axe Head.name=Cabeça de Machado de Pedra
+item.Sed Stone Chisel Head.name=Cabeça de Formão de Pedra
+item.Sed Stone Hoe Head.name=Cabeça de Enxada de Pedra
+item.Sed Stone Javelin Head.name=Ponta de Dardo de Pedra
+item.Sed Stone Shovel Head.name=Cabeça de Pá de Pedra
+
+item.IgEx Stone Axe Head.name=Cabeça de Machado de Pedra
+item.IgEx Stone Chisel Head.name=Cabeça de Formão de Pedra
+item.IgEx Stone Hoe Head.name=Cabeça de Enxada de Pedra
+item.IgEx Stone Javelin Head.name=Ponta de Dardo de Pedra
+item.IgEx Stone Shovel Head.name=Cabeça de Pá de Pedra
+
+item.MM Stone Axe Head.name=Cabeça de Machado de Pedra
+item.MM Stone Chisel Head.name=Cabeça de Formão de Pedra
+item.MM Stone Hoe Head.name=Cabeça de Enxada de Pedra
+item.MM Stone Javelin Head.name=Ponta de Dardo de Pedra
+item.MM Stone Shovel Head.name=Cabeça de Pá de Pedra
+
+#== Stone Tools ==
+item.Stone Axe.name=Machado de Pedra
+item.IgIn Stone Axe.name=Machado de Pedra
+item.Sed Stone Axe.name=Machado de Pedra
+item.IgEx Stone Axe.name=Machado de Pedra
+item.MM Stone Axe.name=Machado de Pedra
+
+item.Stone Chisel.name=Formão de Pedra
+
+item.Stone Hammer.name=Martelo de Pedra
+
+item.Stone Hoe.name=Enxada de Pedra
+item.IgIn Stone Hoe.name=Enxada de Pedra
+item.Sed Stone Hoe.name=Enxada de Pedra
+item.IgEx Stone Hoe.name=Enxada de Pedra
+item.MM Stone Hoe.name=Enxada de Pedra
+
+item.Stone Javelin.name=Dardo de Pedra
+item.IgIn Stone Javelin.name=Dardo de Pedra
+item.Sed Stone Javelin.name=Dardo de Pedra
+item.IgEx Stone Javelin.name=Dardo de Pedra
+item.MM Stone Javelin.name=Dardo de Pedra
+
+item.Stone Knife.name=Faca de Pedra
+
+item.Stone Shovel.name=Pá de Pedra
+item.IgIn Stone Shovel.name=Pá de Pedra
+item.Sed Stone Shovel.name=Pá de Pedra
+item.IgEx Stone Shovel.name=Pá de Pedra
+item.MM Stone Shovel.name=Pá de Pedra
+
+#== Metal Heads ==
+#=== Axe Head ===
+item.Bismuth Bronze Axe Head.name=Cabeça de Machado de Bronze de Bismuto
+item.Black Bronze Axe Head.name=Cabeça de Machado de Bronze Coríntio
+item.Black Steel Axe Head.name=Cabeça de Machado de Aço Negro
+item.Blue Steel Axe Head.name=Cabeça de Machado de Aço Azul
+item.Bronze Axe Head.name=Cabeça de Machado de Bronze
+item.Copper Axe Head.name=Cabeça de Machado de Cobre
+item.Red Steel Axe Head.name=Cabeça de Machado de Aço Vemelho
+item.Steel Axe Head.name=Cabeça de Machado de Aço
+item.Wrought Iron Axe Head.name=Cabeça de Machado de Ferro Forjado
+
+#=== Chisel Head ===
+item.Bismuth Bronze Chisel Head.name=Cabeça de Formão de Bronze de Bismuto
+item.Black Bronze Chisel Head.name=Cabeça de Formão de Bronze Coríntio
+item.Black Steel Chisel Head.name=Cabeça de Formão de Aço Negro
+item.Blue Steel Chisel Head.name=Cabeça de Formão de Aço Azul
+item.Bronze Chisel Head.name=Cabeça de Formão de Bronze
+item.Copper Chisel Head.name=Cabeça de Formão de Cobre
+item.Red Steel Chisel Head.name=Cabeça de Formão de Aço Vermelho
+item.Steel Chisel Head.name=Cabeça de Formão de Aço
+item.Wrought Iron Chisel Head.name=Cabeça de Formão de Ferro Forjado
+
+#=== Hammer Head ===
+item.Bismuth Bronze Hammer Head.name=Cabeça de Martelo de Bronze de Bismuto
+item.Black Bronze Hammer Head.name=Cabeça de Martelo de Bronze Coríntio
+item.Black Steel Hammer Head.name=Cabeça de Martelo de Aço Negro
+item.Blue Steel Hammer Head.name=Cabeça de Martelo de Aço Azul
+item.Bronze Hammer Head.name=Cabeça de Martelo de Bronze
+item.Copper Hammer Head.name=Cabeça de Martelo de Cobre
+item.Red Steel Hammer Head.name=Cabeça de Martelo de Aço Vermelho
+item.Steel Hammer Head.name=Cabeça de Martelo de Aço
+item.Wrought Iron Hammer Head.name=Cabeça de Martelo de Ferro Forjado
+
+#=== Hoe Head ===
+item.Bismuth Bronze Hoe Head.name=Cabeça de Enxada de Bronze de Bismuto
+item.Black Bronze Hoe Head.name=Cabeça de Enxada de Bronze Coríntio
+item.Black Steel Hoe Head.name=Cabeça de Enxada de Aço Negro
+item.Blue Steel Hoe Head.name=Cabeça de Enxada de Aço Azul
+item.Bronze Hoe Head.name=Cabeça de Enxada de Bronze
+item.Copper Hoe Head.name=Cabeça de Enxada de Cobre
+item.Red Steel Hoe Head.name=Cabeça de Enxada de Aço Vermelho
+item.Steel Hoe Head.name=Cabeça de Enxada de Aço
+item.Wrought Iron Hoe Head.name=Cabeça de Enxada de Ferro Forjado
+
+#=== Javelin Head ===
+item.Bismuth Bronze Javelin Head.name=Ponta de Dardo de Bronze de Bismuto
+item.Black Bronze Javelin Head.name=Ponta de Dardo de Bronze Coríntio
+item.Black Steel Javelin Head.name=Ponta de Dardo de Aço Negro
+item.Blue Steel Javelin Head.name=Ponta de Dardo de Aço Azul
+item.Bronze Javelin Head.name=Ponta de Dardo de Bronze
+item.Copper Javelin Head.name=Ponta de Dardo de Cobre
+item.Red Steel Javelin Head.name=Ponta de Dardo de Aço Vermelho
+item.Steel Javelin Head.name=Ponta de Dardo de Aço
+item.Wrought Iron Javelin Head.name=Ponta de Dardo de Ferro Forjado
+
+#=== Knife Blade ===
+item.Bismuth Bronze Knife Blade.name=Lâmina de Faca de Bronze de Bismuto
+item.Black Bronze Knife Blade.name=Lâmina de Faca de Bronze Coríntio
+item.Black Steel Knife Blade.name=Lâmina de Faca de Aço Negro
+item.Blue Steel Knife Blade.name=Lâmina de Faca de Aço Azul
+item.Bronze Knife Blade.name=Lâmina de Faca de Bronze
+item.Copper Knife Blade.name=Lâmina de Faca de Cobre
+item.Red Steel Knife Blade.name=Lâmina de Faca de Aço Vermelho
+item.Steel Knife Blade.name=Lâmina de Faca de Aço
+item.Wrought Iron Knife Blade.name=Lâmina de Faca de Ferro Forjado
+
+#=== Mace Head ===
+item.Bismuth Bronze Mace Head.name=Cabeça de Maça de Bronze de Bismuto
+item.Black Bronze Mace Head.name=Cabeça de Maça de Bronze Coríntio
+item.Black Steel Mace Head.name=Cabeça de Maça de Aço Negro
+item.Blue Steel Mace Head.name=Cabeça de Maça de Aço Azul
+item.Bronze Mace Head.name=Cabeça de Maça de Bronze
+item.Copper Mace Head.name=Cabeça de Maça de Cobre
+item.Red Steel Mace Head.name=Cabeça de Maça de Aço Vermelho
+item.Steel Mace Head.name=Cabeça de Maça de Aço
+item.Wrought Iron Mace Head.name=Cabeça de Maça de Ferro Forjado
+
+#=== Pickaxe Head ===
+item.Bismuth Bronze Pick Head.name=Cabeça de Picareta de Bronze de Bismuto
+item.Black Bronze Pick Head.name=Cabeça de Picareta de Bronze Coríntio
+item.Black Steel Pick Head.name=Cabeça de Picareta de Aço Negro
+item.Blue Steel Pick Head.name=Cabeça de Picareta de Aço Azul
+item.Bronze Pick Head.name=Cabeça de Picareta de Bronze
+item.Copper Pick Head.name=Cabeça de Picareta de Cobre
+item.Red Steel Pick Head.name=Cabeça de Picareta de Aço Vermelho
+item.Steel Pick Head.name=Cabeça de Picareta de Aço
+item.Wrought Iron Pick Head.name=Cabeça de Picareta de Ferro Forjado
+
+#=== Prospector's Pick Head ===
+item.Bismuth Bronze ProPick Head.name=Cabeça de Prospectora de Bronze de Bismuto
+item.Black Bronze ProPick Head.name=Cabeça de Prospectora de Bronze Coríntio
+item.Black Steel ProPick Head.name=Cabeça de Prospectora de Aço Negro
+item.Blue Steel ProPick Head.name=Cabeça de Prospectora de Aço Azul
+item.Bronze ProPick Head.name=Cabeça de Prospectora de Bronze
+item.Copper ProPick Head.name=Cabeça de Prospectora de Cobre
+item.Red Steel ProPick Head.name=Cabeça de Prospectora de Aço Vermelho
+item.Steel ProPick Head.name=Cabeça de Prospectora de Aço
+item.Wrought Iron ProPick Head.name=Cabeça de Prospectora de Ferro Forjado
+
+#=== Saw Blade ===
+item.Bismuth Bronze Saw Blade.name=Lâmina de Serra de Bronze de Bismuto
+item.Black Bronze Saw Blade.name=Lâmina de Serra de Bronze Coríntio
+item.Black Steel Saw Blade.name=Lâmina de Serra de Aço Negro
+item.Blue Steel Saw Blade.name=Lâmina de Serra de Aço Azul
+item.Bronze Saw Blade.name=Lâmina de Serra de Bronze
+item.Copper Saw Blade.name=Lâmina de Serra de Cobre
+item.Red Steel Saw Blade.name=Lâmina de Serra de Aço Vermelho
+item.Steel Saw Blade.name=Lâmina de Serra de Aço
+item.Wrought Iron Saw Blade.name=Lâmina de Serra de Ferro Forjado
+
+#=== Scythe Blade ===
+item.Bismuth Bronze Scythe Blade.name=Cabeça de Gadanha de Bronze de Bismuto
+item.Black Bronze Scythe Blade.name=Cabeça de Gadanha de Bronze Coríntio
+item.Black Steel Scythe Blade.name=Cabeça de Gadanha de Aço Negro
+item.Blue Steel Scythe Blade.name=Cabeça de Gadanha de Aço Azul
+item.Bronze Scythe Blade.name=Cabeça de Gadanha de Bronze
+item.Copper Scythe Blade.name=Cabeça de Gadanha de Cobre
+item.Red Steel Scythe Blade.name=Cabeça de Gadanha de Aço Vermelho
+item.Steel Scythe Blade.name=Cabeça de Gadanha de Aço
+item.Wrought Iron Scythe Blade.name=Cabeça de Gadanha de Ferro Forjado
+
+#=== Shovel Head ===
+item.Bismuth Bronze Shovel Head.name=Cabeça de Pá de Bronze de Bismuto
+item.Black Bronze Shovel Head.name=Cabeça de Pá de Bronze Coríntio
+item.Black Steel Shovel Head.name=Cabeça de Pá de Aço Negro
+item.Blue Steel Shovel Head.name=Cabeça de Pá de Aço Azul
+item.Bronze Shovel Head.name=Cabeça de Pá de Bronze
+item.Copper Shovel Head.name=Cabeça de Pá de Cobre
+item.Red Steel Shovel Head.name=Cabeça de Pá de Aço Vermelho
+item.Steel Shovel Head.name=Cabeça de Pá de Aço
+item.Wrought Iron Shovel Head.name=Cabeça de Pá de Ferro Forjado
+
+#=== Sword Blade ===
+item.Bismuth Bronze Sword Blade.name=Lâmina de Espada de Bronze de Bismuto
+item.Black Bronze Sword Blade.name=Lâmina de Espada de Bronze Coríntio
+item.Black Steel Sword Blade.name=Lâmina de Espada de Aço Negro
+item.Blue Steel Sword Blade.name=Lâmina de Espada de Aço Azul
+item.Bronze Sword Blade.name=Lâmina de Espada de Bronze
+item.Copper Sword Blade.name=Lâmina de Espada de Cobre
+item.Red Steel Sword Blade.name=Lâmina de Espada de Aço Vermelho
+item.Steel Sword Blade.name=Lâmina de Espada de Aço
+item.Wrought Iron Sword Blade.name=Lâmina de Espada de Ferro Forjado
+
+#== Metal Tools ==
+#=== Axe ===
+item.Bismuth Bronze Axe.name=Machado de Bronze de Bismuto
+item.Black Bronze Axe.name=Machado de Bronze Coríntio
+item.Black Steel Axe.name=Machado de Aço Negro
+item.Blue Steel Axe.name=Machado de Aço Azul
+item.Bronze Axe.name=Machado de Bronze
+item.Copper Axe.name=Machado de Cobre
+item.Red Steel Axe.name=Machado de Aço Vermelho
+item.Steel Axe.name=Machado de Aço
+item.Wrought Iron Axe.name=Machado de Ferro Forjado
+
+#=== Chisel ===
+item.Bismuth Bronze Chisel.name=Formão de Bronze de Bismuto
+item.Black Bronze Chisel.name=Formão de Bronze Coríntio
+item.Black Steel Chisel.name=Formão de Aço Negro
+item.Blue Steel Chisel.name=Formão de Aço Azul
+item.Bronze Chisel.name=Formão de Bronze
+item.Copper Chisel.name=Formão de Cobre
+item.Red Steel Chisel.name=Formão de Aço Vermelho
+item.Steel Chisel.name=Formão de Aço
+item.Wrought Iron Chisel.name=Formão de Ferro Forjado
+
+#=== Hammer ===
+item.Bismuth Bronze Hammer.name=Martelo de Bronze de Bismuto
+item.Black Bronze Hammer.name=Martelo de Bronze Coríntio
+item.Black Steel Hammer.name=Martelo de Aço Negro
+item.Blue Steel Hammer.name=Martelo de Aço Azul
+item.Bronze Hammer.name=Martelo de Bronze
+item.Copper Hammer.name=Martelo de Cobre
+item.Red Steel Hammer.name=Martelo de Aço Vermelho
+item.Steel Hammer.name=Martelo de Aço
+item.Wrought Iron Hammer.name=Martelo de Ferro Forjado
+
+#=== Hoe ===
+item.Bismuth Bronze Hoe.name=Enxada de Bronze de Bismuto
+item.Black Bronze Hoe.name=Enxada de Bronze Coríntio
+item.Black Steel Hoe.name=Enxada de Aço Negro
+item.Blue Steel Hoe.name=Enxada de Aço Azul
+item.Bronze Hoe.name=Enxada de Bronze
+item.Copper Hoe.name=Enxada de Cobre
+item.Red Steel Hoe.name=Enxada de Aço Vermelho
+item.Steel Hoe.name=Enxada de Aço
+item.Wrought Iron Hoe.name=Enxada de Ferro Forjado
+
+#=== Javelin ===
+item.Bismuth Bronze Javelin.name=Dardo de Bronze de Bismuto
+item.Black Bronze Javelin.name=Dardo de Bronze Coríntio
+item.Black Steel Javelin.name=Dardo de Aço Negro
+item.Blue Steel Javelin.name=Dardo de Aço Azul
+item.Bronze Javelin.name=Dardo de Bronze
+item.Copper Javelin.name=Dardo de Cobre
+item.Red Steel Javelin.name=Dardo de Aço Vermelho
+item.Steel Javelin.name=Dardo de Aço
+item.Wrought Iron Javelin.name=Dardo de Ferro Forjado
+
+#=== Knife ===
+item.Bismuth Bronze Knife.name=Faca de Bronze de Bismuto
+item.Black Bronze Knife.name=Faca de Bronze Coríntio
+item.Black Steel Knife.name=Faca de Aço Negro
+item.Blue Steel Knife.name=Faca de Aço Azul
+item.Bronze Knife.name=Faca de Bronze
+item.Copper Knife.name=Faca de Cobre
+item.Red Steel Knife.name=Faca de Aço Vermelho
+item.Steel Knife.name=Faca de Aço
+item.Wrought Iron Knife.name=Faca de Ferro Forjado
+
+#=== Mace ===
+item.Bismuth Bronze Mace.name=Maça de Bronze de Bismuto
+item.Black Bronze Mace.name=Maça de Bronze Coríntio
+item.Black Steel Mace.name=Maça de Aço Negro
+item.Blue Steel Mace.name=Maça de Aço Azul
+item.Bronze Mace.name=Maça de Bronze
+item.Copper Mace.name=Maça de Cobre
+item.Red Steel Mace.name=Maça de Aço Vermelho
+item.Steel Mace.name=Maça de Aço
+item.Wrought Iron Mace.name=Maça de Ferro Forjado
+
+#=== Pickaxe ===
+item.Bismuth Bronze Pick.name=Picareta de Bronze de Bismuto
+item.Black Bronze Pick.name=Picareta de Bronze Coríntio
+item.Black Steel Pick.name=Picareta de Aço Negro
+item.Blue Steel Pick.name=Picareta de Aço Azul
+item.Bronze Pick.name=Picareta de Bronze
+item.Copper Pick.name=Picareta de Cobre
+item.Red Steel Pick.name=Picareta de Aço Vermelho
+item.Steel Pick.name=Picareta de Aço
+item.Wrought Iron Pick.name=Picareta de Ferro Forjado
+
+#=== Prospector's Pick ===
+item.Bismuth Bronze ProPick.name=Prospectora de Bronze de Bismuto
+item.Black Bronze ProPick.name=Prospectora de Bronze Coríntio
+item.Black Steel ProPick.name=Prospectora de Aço Negro
+item.Blue Steel ProPick.name=Prospectora de Aço Azul
+item.Bronze ProPick.name=Prospectora de Bronze
+item.Copper ProPick.name=Prospectora de Cobre
+item.Red Steel ProPick.name=Prospectora de Aço Vermelho
+item.Steel ProPick.name=Prospectora de Aço
+item.Wrought Iron ProPick.name=Prospectora de Ferro Forjado
+
+#=== Saw ===
+item.Bismuth Bronze Saw.name=Serra de Bronze de Bismuto
+item.Black Bronze Saw.name=Serra de Bronze Coríntio
+item.Black Steel Saw.name=Serra de Aço Negro
+item.Blue Steel Saw.name=Serra de Aço Azul
+item.Bronze Saw.name=Serra de Bronze
+item.Copper Saw.name=Serra de Cobre
+item.Red Steel Saw.name=Serra de Aço Vermelho
+item.Steel Saw.name=Serra de Aço
+item.Wrought Iron Saw.name=Serra de Ferro Forjado
+
+#=== Scythe ===
+item.Bismuth Bronze Scythe.name=Gadanha de Bronze de Bismuto
+item.Black Bronze Scythe.name=Gadanha de Bronze Coríntio
+item.Black Steel Scythe.name=Gadanha de Aço Negro
+item.Blue Steel Scythe.name=Gadanha de Aço Azul
+item.Bronze Scythe.name=Gadanha de Bronze
+item.Copper Scythe.name=Gadanha de Cobre
+item.Red Steel Scythe.name=Gadanha de Aço Vermelho
+item.Steel Scythe.name=Gadanha de Aço
+item.Wrought Iron Scythe.name=Gadanha de Ferro Forjado
+
+#=== Shovel ===
+item.Bismuth Bronze Shovel.name=Pá de Bronze de Bismuto
+item.Black Bronze Shovel.name=Pá de Bronze Coríntio
+item.Black Steel Shovel.name=Pá de Aço Negro
+item.Blue Steel Shovel.name=Pá de Aço Azul
+item.Bronze Shovel.name=Pá de Bronze
+item.Copper Shovel.name=Pá de Cobre
+item.Red Steel Shovel.name=Pá de Aço Vermelho
+item.Steel Shovel.name=Pá de Aço
+item.Wrought Iron Shovel.name=Pá de Ferro Forjado
+
+#=== Sword ===
+item.Bismuth Bronze Sword.name=Espada de Bronze de Bismuto
+item.Black Bronze Sword.name=Espada de Bronze Coríntio
+item.Black Steel Sword.name=Espada de Aço Negro
+item.Blue Steel Sword.name=Espada de Aço Azul
+item.Bronze Sword.name=Espada de Bronze
+item.Copper Sword.name=Espada de Cobre
+item.Red Steel Sword.name=Espada de Aço Vermelho
+item.Steel Sword.name=Espada de Aço
+item.Wrought Iron Sword.name=Espada de Ferro Forjado
+
+#=== Tuyere ===
+item.Bismuth Bronze Tuyere.name=Alcaraviz de Bronze de Bismuto
+item.Black Bronze Tuyere.name=Alcaraviz de Bronze Coríntio
+item.Black Steel Tuyere.name=Alcaraviz de Aço Negro
+item.Blue Steel Tuyere.name=Alcaraviz de Aço Azul
+item.Bronze Tuyere.name=Alcaraviz de Bronze
+item.Copper Tuyere.name=Alcaraviz de Cobre
+item.Red Steel Tuyere.name=Alcaraviz de Aço Vermelho
+item.Steel Tuyere.name=Alcaraviz de Aço
+item.Wrought Iron Tuyere.name=Alcaraviz de Ferro Forjado
+
+#== Armor ==
+#=== Helmet ===
+item.Bismuth Bronze Unfinished Helmet.name=Elmo de Bronze de Bismuto
+item.Black Bronze Unfinished Helmet.name=Elmo de Bronze Coríntio
+item.Black Steel Unfinished Helmet.name=Elmo de Aço Negro
+item.Blue Steel Unfinished Helmet.name=Elmo de Aço Azul
+item.Bronze Unfinished Helmet.name=Elmo de Bronze
+item.Copper Unfinished Helmet.name=Elmo de Cobre
+item.Red Steel Unfinished Helmet.name=Elmo de Aço Vermelho
+item.Steel Unfinished Helmet.name=Elmo de Aço
+item.Wrought Iron Unfinished Helmet.name=Elmo de Ferro Forjado
+item.Bismuth Bronze Helmet.name=Elmo de Bronze de Bismuto
+item.Black Bronze Helmet.name=Elmo de Bronze Coríntio
+item.Black Steel Helmet.name=Elmo de Aço Negro
+item.Blue Steel Helmet.name=Elmo de Aço Azul
+item.Bronze Helmet.name=Elmo de Bronze
+item.Copper Helmet.name=Elmo de Cobre
+item.Red Steel Helmet.name=Elmo de Aço Vermelho
+item.Steel Helmet.name=Elmo de Aço
+item.Wrought Iron Helmet.name=Elmo de Ferro Forjado
+item.helmetCloth.name=Touca de Couro
+
+#=== Chestplate ===
+item.Bismuth Bronze Unfinished Chestplate.name=Peitoral de Bronze de Bismuto
+item.Black Bronze Unfinished Chestplate.name=Peitoral de Bronze Coríntio
+item.Black Steel Unfinished Chestplate.name=Peitoral de Aço Negro
+item.Blue Steel Unfinished Chestplate.name=Peitoral de Aço Azul
+item.Bronze Unfinished Chestplate.name=Peitoral de Bronze
+item.Copper Unfinished Chestplate.name=Peitoral de Cobre
+item.Red Steel Unfinished Chestplate.name=Peitoral de Aço Vermelho
+item.Steel Unfinished Chestplate.name=Peitoral de Aço
+item.Wrought Iron Unfinished Chestplate.name=Peitoral de Ferro Forjado
+item.Bismuth Bronze Chestplate.name=Peitoral de Bronze de Bismuto
+item.Black Bronze Chestplate.name=Peitoral de Bronze
+item.Black Steel Chestplate.name=Peitoral de Aço Negro
+item.Blue Steel Chestplate.name=Peitoral de Aço Azul
+item.Bronze Chestplate.name=Peitoral de Bronze
+item.Copper Chestplate.name=Peitoral de Cobre
+item.Red Steel Chestplate.name=Peitoral de Aço Vermelho
+item.Steel Chestplate.name=Peitoral de Aço
+item.Wrought Iron Chestplate.name=Peitoral de Ferro Forjado
+item.chestplateCloth.name=Túnica de Couro
+
+#=== Greaves ===
+item.Bismuth Bronze Unfinished Greaves.name=Grevas de Bronze de Bismuto
+item.Black Bronze Unfinished Greaves.name=Grevas de Bronze Coríntio
+item.Black Steel Unfinished Greaves.name=Grevas de Aço Negro
+item.Blue Steel Unfinished Greaves.name=Grevas de Aço Azul
+item.Bronze Unfinished Greaves.name=Grevas de Bronze
+item.Copper Unfinished Greaves.name=Grevas de Cobre
+item.Red Steel Unfinished Greaves.name=Grevas de Aço Vermelho
+item.Steel Unfinished Greaves.name=Grevas de Aço
+item.Wrought Iron Unfinished Greaves.name=Grevas de Ferro Forjado
+item.Bismuth Bronze Greaves.name=Grevas de Bronze de Bismuto
+item.Black Bronze Greaves.name=Grevas de Bronze Coríntio
+item.Black Steel Greaves.name=Grevas de Aço Negro
+item.Blue Steel Greaves.name=Grevas de Aço Azul
+item.Bronze Greaves.name=Grevas de Bronze
+item.Copper Greaves.name=Grevas de Cobre
+item.Red Steel Greaves.name=Grevas de Aço Vermelho
+item.Steel Greaves.name=Grevas de Aço
+item.Wrought Iron Greaves.name=Grevas de Ferro Forjado
+item.leggingsCloth.name=Calças de Couro
+
+#=== Boots ===
+item.Bismuth Bronze Unfinished Boots.name=Botas de Bronze de Bismuto
+item.Black Bronze Unfinished Boots.name=Botas de Bronze Coríntio
+item.Black Steel Unfinished Boots.name=Botas de Aço Negro
+item.Blue Steel Unfinished Boots.name=Botas de Aço Azul
+item.Bronze Unfinished Boots.name=Botas de Bronze
+item.Copper Unfinished Boots.name=Botas de Cobre
+item.Red Steel Unfinished Boots.name=Botas de Aço Vermelho
+item.Steel Unfinished Boots.name=Botas de Aço
+item.Wrought Iron Unfinished Boots.name=Botas de Ferro Forjado
+item.Bismuth Bronze Boots.name=Botas de Bronze de Bismuto
+item.Black Bronze Boots.name=Botas de Bronze Coríntio
+item.Black Steel Boots.name=Botas de Aço Negro
+item.Blue Steel Boots.name=Botas de Aço Azul
+item.Bronze Boots.name=Botas de Bronze
+item.Copper Boots.name=Botas de Cobre
+item.Red Steel Boots.name=Botas de Aço Vermelho
+item.Steel Boots.name=Botas de Aço
+item.Wrought Iron Boots.name=Botas de Ferro Forjado
+item.bootsCloth.name=Botas de Couro
+
+#==========
+#= Metals =
+#==========
+item.Iron Bloom.name=Esponja de Ferro Refinado
+item.Raw Iron Bloom.name=Esponja de Ferro Bruto
+tile.Bloom.name=Ferro Forjado
+
+#== Unshaped ==
+item.Bismuth Bronze Unshaped.name=Amorfo: Bronze de Bismuto
+item.Bismuth Unshaped.name=Amorfo: Bismuto
+item.Black Bronze Unshaped.name=Amorfo: Bronze Coríntio
+item.Black Steel Unshaped.name=Amorfo: Aço Negro
+item.Blue Steel Unshaped.name=Amorfo: Aço Azul
+item.Brass Unshaped.name=Amorfo: Latão
+item.Bronze Unshaped.name=Amorfo: Bronze
+item.Copper Unshaped.name=Amorfo: Cobre
+item.Gold Unshaped.name=Amorfo: Ouro
+item.HC Black Steel Unshaped.name=Amorfo: Aço Negro de Alto Carbono
+item.HC Blue Steel Unshaped.name=Amorfo: Aço Azul de Alto Carbono
+item.HC Red Steel Unshaped.name=Amorfo: Aço Vermelho de Alto Carbono
+item.HC Steel Unshaped.name=Amorfo: Aço de Alto Carbono
+item.Lead Unshaped.name=Amorfo: Chumbo
+item.Nickel Unshaped.name=Amorfo: Níquel
+item.Pig Iron Unshaped.name=Amorfo: Ferro Gusa
+item.Platinum Unshaped.name=Amorfo: Platina
+item.Red Steel Unshaped.name=Amorfo: Aço Vermelho
+item.Rose Gold Unshaped.name=Amorfo: Ouro Rosa
+item.Silver Unshaped.name=Amorfo: Prata
+item.Steel Unshaped.name=Amorfo: Aço
+item.Sterling Silver Unshaped.name=Amorfo: Prata de Lei
+item.Tin Unshaped.name=Amorfo: Estanho
+item.Unknown Unshaped.name=Amorfo: Desconhecido
+item.Weak Blue Steel Unshaped.name=Amorfo: Aço Azul Fraco
+item.Weak Red Steel Unshaped.name=Amorfo: Aço Vermelho Fraco
+item.Weak Steel Unshaped.name=Amorfo: Aço Fraco
+item.Wrought Iron Unshaped.name=Amorfo: Ferro Forjado
+item.Zinc Unshaped.name=Amorfo: Zinco
+
+#== Ingot ==
+item.Bismuth Bronze Ingot.name=Lingote de Bronze de Bismuto
+item.Bismuth Ingot.name=Lingote de Bismuto
+item.Black Bronze Ingot.name=Lingote de Bronze Coríntio
+item.Black Steel Ingot.name=Lingote de Aço Negro
+item.Blue Steel Ingot.name=Lingote de Aço Azul
+item.Brass Ingot.name=Lingote de Latão
+item.Bronze Ingot.name=Lingote de Bronze
+item.Copper Ingot.name=Lingote de Cobre
+item.Gold Ingot.name=Lingote de Ouro
+item.HC Black Steel Ingot.name=Lingote de Aço Negro de Alto Carbono
+item.HC Blue Steel Ingot.name=Lingote de Aço Azul de Alto Carbono
+item.HC Red Steel Ingot.name=Lingote de Aço Vermelho de Alto Carbono
+item.HC Steel Ingot.name=Lingote de Aço de Alto Carbono
+item.Lead Ingot.name=Lingote de Chumbo
+item.Nickel Ingot.name=Lingote de Níquel
+item.Pig Iron Ingot.name=Lingote de Ferro Gusa
+item.Platinum Ingot.name=Lingote de Platina
+item.Red Steel Ingot.name=Lingote de Aço Vermelho
+item.Rose Gold Ingot.name=Lingote de Ouro Rosa
+item.Silver Ingot.name=Lingote de Prata
+item.Steel Ingot.name=Lingote de Aço
+item.Sterling Silver Ingot.name=Lingote de Prata de Lei
+item.Tin Ingot.name=Lingote de Estanho
+item.Unknown Ingot.name=Lingote Desconhecido
+item.Weak Blue Steel Ingot.name=Lingote de Aço Azul Fraco
+item.Weak Red Steel Ingot.name=Lingote de Aço Vermelho Fraco
+item.Weak Steel Ingot.name=Lingote de Aço Fraco
+item.Wrought Iron Ingot.name=Lingote de Ferro Forjado
+item.Zinc Ingot.name=Lingote de Zinco
+
+#== Double Ingot ==
+item.Bismuth Bronze Double Ingot.name=Lingote Duplo de Bronze de Bismuto
+item.Bismuth Double Ingot.name=Lingote Duplo de Bismuto
+item.Black Bronze Double Ingot.name=Lingote Duplo de Bronze Coríntio
+item.Black Steel Double Ingot.name=Lingote Duplo de Aço Negro
+item.Blue Steel Double Ingot.name=Lingote Duplo de Aço azul
+item.Brass Double Ingot.name=Lingote Duplo de Latão
+item.Bronze Double Ingot.name=Lingote Duplo de Bronze
+item.Copper Double Ingot.name=Lingote Duplo de Cobre
+item.Gold Double Ingot.name=Lingote Duplo de Ouro
+item.Lead Double Ingot.name=Lingote Duplo de Chumbo
+item.Nickel Double Ingot.name=Lingote Duplo de Níquel
+item.Pig Iron Double Ingot.name=Lingote Duplo de Ferro Gusa
+item.Platinum Double Ingot.name=Lingote Duplo de Platina
+item.Red Steel Double Ingot.name=Lingote Duplo de Aço Vermelho
+item.Rose Gold Double Ingot.name=Lingote Duplo de Ouro Rosa
+item.Silver Double Ingot.name=Lingote Duplo de Prata
+item.Steel Double Ingot.name=Lingote Duplo de Aço
+item.Sterling Silver Double Ingot.name=Lingote Duplo de Prata de Lei
+item.Tin Double Ingot.name=Lingote Duplo de Estanho
+item.Wrought Iron Double Ingot.name=Lingote Duplo de Ferro Forjado
+item.Zinc Double Ingot.name=Lingote Duplo de Zinco
+
+#== Sheet ==
+item.Bismuth Bronze Sheet.name=Folha de Bronze de Bismuto
+item.Bismuth Sheet.name=Folha de Bismuto
+item.Black Bronze Sheet.name=Folha de Bronze Coríntio
+item.Black Steel Sheet.name=Folha de Aço Negro
+item.Blue Steel Sheet.name=Folha de Aço Azul
+item.Brass Sheet.name=Folha de Latão
+item.Bronze Sheet.name=Folha de Bronze
+item.Copper Sheet.name=Folha de Cobre
+item.Gold Sheet.name=Folha de Ouro
+item.Lead Sheet.name=Folha de Chumbo
+item.Nickel Sheet.name=Folha de Níquel
+item.Pig Iron Sheet.name=Folha de Ferro Gusa
+item.Platinum Sheet.name=Folha de Platina
+item.Red Steel Sheet.name=Folha de Aço Vermelho
+item.Rose Gold Sheet.name=Folha de Ouro Rosa
+item.Silver Sheet.name=Folha de Prata
+item.Steel Sheet.name=Folha de Aço
+item.Sterling Silver Sheet.name=Folha de Prata de Lei
+item.Tin Sheet.name=Folha de Estanho
+item.Wrought Iron Sheet.name=Folha de Ferro Forjado
+item.Zinc Sheet.name=Folha de Zinco
+
+#== DoubleSheet ==
+item.Bismuth Bronze Double Sheet.name=Folha Dupla de Bronze de Bismuto
+item.Bismuth Double Sheet.name=Folha Dupla de Bismuto
+item.Black Bronze Double Sheet.name=Folha Dupla de Bronze Coríntio
+item.Black Steel Double Sheet.name=Folha Dupla de Aço Negro
+item.Blue Steel Double Sheet.name=Folha Dupla de Aço Azul
+item.Brass Double Sheet.name=Folha Dupla de Latão
+item.Bronze Double Sheet.name=Folha Dupla de Bronze
+item.Copper Double Sheet.name=Folha Dupla de Cobre
+item.Gold Double Sheet.name=Folha Dupla de Ouro
+item.Lead Double Sheet.name=Folha Dupla de Chumbo
+item.Nickel Double Sheet.name=Folha Dupla de Níquel
+item.Pig Iron Double Sheet.name=Folha Dupla de Ferro Gusa
+item.Platinum Double Sheet.name=Folha Dupla de Platina
+item.Red Steel Double Sheet.name=Folha Dupla de Aço Vermelho
+item.Rose Gold Double Sheet.name=Folha Dupla de Ouro Rosa
+item.Silver Double Sheet.name=Folha Dupla de Prata
+item.Steel Double Sheet.name=Folha Dupla de Aço
+item.Sterling Silver Double Sheet.name=Folha Dupla de Prata de Lei
+item.Tin Double Sheet.name=Folha Dupla de Estanho
+item.Wrought Iron Double Sheet.name=Folha Dupla de Ferro Forjado
+item.Zinc Double Sheet.name=Folha Dupla de Zinco
+
+#===========
+#= Devices =
+#===========
+tile.Bellows.name=Foles
+tile.Forge.name=Forja
+tile.BlastFurnace.name=Alto-forno
+tile.SpawnMeter.name=Medidor de Protecção
+tile.Quern.name=Mó
+tile.EarlyBloomery.name=Forja Catalã
+tile.Crucible.name=Cadinho
+tile.NestBox.name=Casa de Pássaro
+item.SluiceItem.name=Eclusa
+tile.LeatherRack.name=Ferramental para Couro
+
+#== Anvils ==
+tile.Anvil.Stone.name=Bigorna de Pedra
+tile.Anvil.Bismuth.name=Bigorna de Bismuto
+tile.Anvil2.Bismuth Bronze.name=Bigorna de Bronze de Bismuto
+tile.Anvil2.Black Bronze.name=Bigorna de Bronze Coríntio
+tile.Anvil.Black Steel.name=Bigorna de Aço Negro
+tile.Anvil.Blue Steel.name=Bigorna de Aço Azul
+tile.Anvil.Bronze.name=Bigorna de Bronze
+tile.Anvil.Copper.name=Bigorna de Cobre
+tile.Anvil.Red Steel.name=Bigorna de Aço Vermelho
+tile.Anvil2.Rose Gold.name=Bigorna de Ouro Rosa
+tile.Anvil.Steel.name=Bigorna de Aço
+tile.Anvil.Tin.name=Bigorna de Estanho
+tile.Anvil.Wrought Iron.name=Bigorna de Ferro Forjado
+tile.Anvil.Zinc.name=Bigorna de Zinco
+
+#==================
+#= Terrain Blocks =
+#==================
+tile.Grass.name=Erva
+tile.DryGrass.name=Erva Seca
+tile.PeatGrass.name=Turfa com Erva
+tile.ClayGrass.name=Argila com Erva
+tile.dirt.name=Terra
+tile.sand.name=Areia
+tile.Peat.name=Turfa
+tile.tilledSoil.name=Terra Fértil
+tile.LooseRock.name=Restos
+tile.Ice.name=Gelo
+
+#=================
+#= Miscellaneous =
+#=================
+#== Misc Items ==
+item.arrow.name=Flecha
+item.book.name=Livro
+item.stick.name=Pau
+item.coal.coal.name=Carvão
+item.coal.charcoal.name=Carvão Vegetal
+item.Fertilizer.name=Fertilizante
+item.Reeds.name=Cana-de-Açúcar
+
+item.Wooden Bucket Empty.name=Balde de Madeira (Vazio)
+item.Wooden Bucket Water.name=Balde de Madeira (Água)
+item.Wooden Bucket Salt Water.name=Balde de Madeira (Água Salgada)
+item.Wooden Bucket Milk.name=Balde de Madeira (Leite)
+item.Lime Water.name=Água de Cal
+
+item.Red Steel Bucket Empty.name=Balde de Aço Vermelho (Vazio)
+item.Red Steel Bucket Water.name=Balde de Aço Vermelho (Água)
+item.Red Steel Bucket Salt Water.name=Balde de Aço Vermelho (Água Salgada)
+item.Blue Steel Bucket Empty.name=Balde de Aço Azul (Vazio)
+item.Blue Steel Bucket Lava.name=Balde de Aço Azul (Lava)
+
+item.GoldPan.name=Bateia
+item.Gold Pan.Sand.name=Bateia (Areia)
+item.Gold Pan.Gravel.name=Bateia (Cascalho)
+item.Gold Pan.Clay.name=Bateia (Argila)
+item.Gold Pan.Dirt.name=Bateia (Terra)
+item.Ink.name=Marca
+item.Firestarter.name=Acendedor
+
+item.Quern.name=Pedra de Mó
+item.Blueprint.name=Diagrama
+item.Nametag.name=Etiqueta
+item.WoolYarn.name=Fio de Lã
+item.Wool.name=Lã
+item.WoolCloth.name=Pano de Lã
+item.SilkCloth.name=Seda
+item.BurlapCloth.name=Pano de Serapilheira
+item.Mortar.name=Argamassa
+item.Vinegar.name=Vinagre
+
+item.Hide.small.name=Couro Cru (Pequeno)
+item.Hide.medium.name=Couro Cru (Médio)
+item.Hide.large.name=Couro Cru (Grande)
+item.Soaked Hide.small.name=Couro Macerado (Pequeno)
+item.Soaked Hide.medium.name=Couro Macerado (Médio)
+item.Soaked Hide.large.name=Couro Macerado (Grande)
+item.Scraped Hide.small.name=Couro Raspado (Pequeno)
+item.Scraped Hide.medium.name=Couro Raspado (Médio)
+item.Scraped Hide.large.name=Couro Raspado (Grande)
+item.Prep Hide.small.name=Couro Preparado (Pequeno)
+item.Prep Hide.medium.name=Couro Preparado (Médio)
+item.Prep Hide.large.name=Couro Preparado (Grande)
+item.Sheep Skin.small.name=Pele de Ovelha (Pequena)
+item.Sheep Skin.medium.name=Pele de Ovelha (Média)
+item.Sheep Skin.large.name=Pele de Ovelha (Grande)
+item.TFC Leather.name=Couro
+item.Flat Leather.name=Couro Liso
+item.leather.name=Couro
+
+item.minecartChest.name=Carrinho com Baú
+item.fishingRod.name=Vara de Pescar
+
+item.Quiver.name=Aljava
+item.Rope.name=Corda
+
+#======== Misc. Blocks========
+tile.Straw Hide Bed.name=Cama de Palha e Pele
+tile.customBed.sleep.name=Essa cama é muito desconfortável para dormir
+tile.BasicPipe.name=Tubo
+tile.ValvePipe.name=Válvula
+tile.Torch.name=Tocha
+tile.Chest.name=Baú
+tile.Bookshelf.name=Estante de Livros
+tile.Workbench.name=Mesa de Trabalho
+tile.ButtonWood.name=Botão de Madeira
+
+#= Misc. Plants =
+item.Sugarcane.name=Cana-de-açúcar
+item.Hemp.name=Cânhamo
+item.Straw.name=Palha
+item.Jute.name=Juta
+item.Jute Fibre.name=Fibra de Juta
+
+tile.Fungi.mushroom_brown.name=Cogumelo
+tile.Fungi.mushroom_red.name=Cogumelo Vermelho
+tile.Cactus.name=Cacto
+tile.Pumpkin.name=Abóbora
+tile.Moss.name=Musgo
+tile.Thatch.name=Colmo
+tile.Flora.Golden Rod.name=Solidago
+tile.Flora.Cat Tails.name=Taboa
+
+item.Seeds Sugarcane.name=Sementes de Cama-de-açúcar
+item.Seeds Hemp.name=Sementes de Cânhamo
+item.Seeds Jute.name=Sementes de Juta
+
+tile.TallGrass.tallgrass.name=Relva Alta
+tile.TallGrass.fern.name=Feto
+tile.TallGrass.shortgrass.name=Relva Baixa
+tile.LilyPad.name=Nenúfar
+tile.Vine.name=Trepadeira
+tile.SeaGrassStill.name=Relva do Mar
+tile.SeaGrassIce.name=Relva do Mar Congelada
+
+tile.Flowers.flower_nasturtium.name=Chagas
+tile.Flowers.flower_dandelion.name=Dente-de-Leão
+tile.Flowers.flower_meads_milkweed.name=Asclepia de Campo
+tile.Flowers.flower_tropical_milkweed.name=Asclepia Tropical
+tile.Flowers.flower_butterfly_milkweed.name=Asclepia Borboleta
+tile.Flowers.flower_calendula.name=Calêndula
+tile.Flowers2.flower_rose.name=Papoila
+tile.Flowers2.flower_blue_orchid.name=Orquídea Azul
+tile.Flowers2.flower_allium.name=Alho
+tile.Flowers2.flower_houstonia.name=Arenaria
+tile.Flowers2.flower_tulip_red.name=Tulipa Vermelha
+tile.Flowers2.flower_tulip_orange.name=Tulipa Laranja
+tile.Flowers2.flower_tulip_white.name=Tulipa Branca
+tile.Flowers2.flower_tulip_pink.name=Tulipa Rosa
+tile.Flowers2.flower_oxeye_daisy.name=Margarida
+
+#=======
+#= GUI =
+#=======
+gui.badnbt=Informação Ruim
+
+#== Anvil GUI ==
+gui.Anvil.Plans=Planos
+gui.Anvil.Weld=Soldar
+
+gui.Anvil.LightHit=Golpe Leve
+gui.Anvil.MediumHit=Golpe Médio
+gui.Anvil.HeavyHit=Golpe Pesado
+gui.Anvil.Draw=Puxar
+
+gui.Anvil.Punch=Puncionar
+gui.Anvil.Bend=Dobrar
+gui.Anvil.Upset=Virar
+gui.Anvil.Shrink=Encolher
+
+gui.Anvil.Rules=Regras
+gui.Anvil.Rule1=Qualquer
+gui.Anvil.Rule2=Golpear, Qualquer
+gui.Anvil.Rule3=Golpear, por Último
+gui.Anvil.Rule4=Golpear, Penúltimo
+gui.Anvil.Rule5=Golpear, Antepenúltimo
+gui.Anvil.Rule6=Golpear, Últimos Dois
+gui.Anvil.Rule7=Golpear, Últimos Três
+gui.Anvil.Rule8=Golpear, Não por Último
+gui.Anvil.Rule9=Puncionar, Qualquer
+gui.Anvil.Rule10=Puncionar, por Último
+gui.Anvil.Rule11=Puncionar, Penúltimo
+gui.Anvil.Rule12=Puncionar, Antepenúltimo
+gui.Anvil.Rule13=Puncionar, Últimos Dois
+gui.Anvil.Rule14=Puncionar, Últimos Três
+gui.Anvil.Rule15=Puncionar, Não por Último
+gui.Anvil.Rule16=Encolher, Qualquer
+gui.Anvil.Rule17=Encolher, por Último
+gui.Anvil.Rule18=Encolher, Penúltimo
+gui.Anvil.Rule19=Encolher, Antepenúltimo
+gui.Anvil.Rule20=Encolher, Últimos Dois
+gui.Anvil.Rule21=Encolher, Últimos Três
+gui.Anvil.Rule22=Encolher, Não por Último
+gui.Anvil.Rule23=Puxar, Qualquer
+gui.Anvil.Rule24=Puxar, por Último
+gui.Anvil.Rule25=Puxar, Penúltimo
+gui.Anvil.Rule26=Puxar, Antepenúltimo
+gui.Anvil.Rule27=Puxar, Últimos Dois
+gui.Anvil.Rule28=Puxar, Últimos Três
+gui.Anvil.Rule29=Puxar, Não por Último
+gui.Anvil.Rule30=Virar, Qualquer
+gui.Anvil.Rule31=Virar, por Último
+gui.Anvil.Rule32=Virar, Penúltimo
+gui.Anvil.Rule33=Virar, Antepenúltimo
+gui.Anvil.Rule34=Virar, Últimos Dois
+gui.Anvil.Rule35=Virar, Últimos Três
+gui.Anvil.Rule36=Virar, Não por Último
+gui.Anvil.Rule37=Dobrar, Qualquer
+gui.Anvil.Rule38=Dobrar, por Último
+gui.Anvil.Rule39=Dobrar, Penúltimo
+gui.Anvil.Rule40=Dobrar, Antepenúltimo
+gui.Anvil.Rule41=Dobrar, Últimos Dois
+gui.Anvil.Rule42=Dobrar, Últimos Três
+gui.Anvil.Rule43=Dobrar, Não por Último
+
+#== Tools/Weapons/Armor GUI ==
+gui.Armor.Advanced=Avançado
+gui.Armor.Shift=Mudar
+gui.Armor.ForgedBy=Forjado por
+gui.Armor.Hold=Manter
+gui.Armor.Crush=Esmagar
+gui.Armor.Pierce=Perfurar
+gui.Armor.Slash=Cortar
+
+gui.Bow.Advanced=Avançado
+gui.Bow.Javelins=Dardos
+gui.Bow.Arrows=Flechas
+gui.Bow.ForgedBy=Feito por
+
+gui.DamageType.Error=Erro: Tipo Incorreto de Dano
+gui.DamageType.Crushing=Esmagamento
+gui.DamageType.Piercing=Perfurante
+gui.DamageType.Slashing=Cortante
+
+#== Barrel GUI ==
+gui.Barrel.Empty=Vazio
+gui.Barrel.Seal=Selar
+gui.Barrel.Unseal=Tirar o Selo
+gui.Barrel.ToggleOff=Saída
+gui.Barrel.ToggleOn=Entrada
+gui.Barrel.SealedOn=Selado em
+gui.Barrel.Solid=Armazenamento Sólido
+gui.Barrel.Liquid=Armazenamento Liquido
+
+#== Bloomery GUI ==
+gui.Bloomery.Charcoal=Carvão Vegetal
+gui.Bloomery.Ore=Minério
+gui.Bloomery.Output=Saída
+
+#== Calendar GUI ==
+gui.Calendar.Calendar=Calendário
+gui.Calendar.DateBioxx=Data: Aniversário do Bioxx!
+gui.Calendar.DateDunk=Data: Aniversário do Dunk!
+gui.Calendar.DateKitty=Data: Aniversário de Kitty!
+
+gui.Calendar.Hour=Hora
+gui.Calendar.WitchHour=Meia noite
+
+gui.Calendar.Day=Dia
+gui.Calendar.Sunday=Domigo
+gui.Calendar.Monday=Segunda-Feira
+gui.Calendar.Tuesday=Terça-Feira
+gui.Calendar.Wednesday=Quarta-Feira
+gui.Calendar.Thursday=Quinta-Feira
+gui.Calendar.Friday=Sexta-Feira
+gui.Calendar.Saturday=Sábado
+
+gui.Calendar.Season=Estação
+gui.Calendar.EarlySpring=Começo da Primavera
+gui.Calendar.Spring=Primavera
+gui.Calendar.LateSpring=Fim da Primavera
+gui.Calendar.EarlySummer=Começo do Verão
+gui.Calendar.Summer=Verão
+gui.Calendar.LateSummer=Fim do Verão
+gui.Calendar.EarlyAutumn=Começo do Outono
+gui.Calendar.Autumn=Outono
+gui.Calendar.LateAutumn=Fim do Outono
+gui.Calendar.EarlyWinter=Começo do Inverno
+gui.Calendar.Winter=Inverno
+gui.Calendar.LateWinter=Fim do Inverno
+
+gui.Calendar.Date=Data
+gui.Calendar.January=Janeiro
+gui.Calendar.February=Fevereiro
+gui.Calendar.March=Março
+gui.Calendar.April=Abril
+gui.Calendar.May=Maio
+gui.Calendar.June=Junho
+gui.Calendar.July=Julho
+gui.Calendar.August=Agosto
+gui.Calendar.September=Setembro
+gui.Calendar.October=Outubro
+gui.Calendar.November=Novembro
+gui.Calendar.December=Dezembro
+
+gui.Calendar.1Hour=1 Hora
+gui.Calendar.1Day=1 Dia
+gui.Calendar.1Week=1 Semana
+gui.Calendar.1Month=1 Mês
+gui.Calendar.1Year=1 Ano
+
+#== Food Prep GUI ==
+gui.FoodPrep.CreateMeal=Criar Refeição
+gui.FoodPrep.Effect=Efeito
+gui.FoodPrep.Energy=Energia
+gui.FoodPrep.Filling=Saciamento
+gui.FoodPrep.Power=Força
+
+#== Metals ==
+gui.metal.Bismuth=Bismuto
+gui.metal.BismuthBronze=Bronze de Bismuto
+gui.metal.BlackBronze=Bronze Coríntio
+gui.metal.BlackSteel=Aço Negro
+gui.metal.BlueSteel=Aço Azul
+gui.metal.Brass=Latão
+gui.metal.Bronze=Bronze
+gui.metal.Copper=Cobre
+gui.metal.Gold=Ouro
+gui.metal.HCBlackSteel=Aço Negro de Alto Carbono
+gui.metal.HCBlueSteel=Aço Azul de Alto Carbono
+gui.metal.HCRedSteel=Aço Vermelho de Alto Carbono
+gui.metal.Lead=Chumbo
+gui.metal.Nickel=Níquel
+gui.metal.PigIron=Ferro Gusa
+gui.metal.Platinum=Platina
+gui.metal.RedSteel=Aço Vermelho
+gui.metal.RoseGold=Ouro Rosa
+gui.metal.Silver=Prata
+gui.metal.Steel=Aço
+gui.metal.SterlingSilver=Prata de Lei
+gui.metal.Tin=Estanho
+gui.metal.Unknown=Desconhecido
+gui.metal.WeakBlueSteel=Aço Azul Fraco
+gui.metal.WeakRedSteel=Aço Vermelho Fraco
+gui.metal.WeakSteel=Aço Fraco
+gui.metal.WroughtIron=Ferro Forjado
+gui.metal.Zinc=Zinco
+
+#== Plans GUI ==
+gui.plans.axe=Machado
+gui.plans.bootsplate=Botas
+gui.plans.bucket=Balde
+gui.plans.chestplate=Peitoral
+gui.plans.chisel=Formão
+gui.plans.hammer=Martelo
+gui.plans.helmplate=Elmo
+gui.plans.hoe=Enxada
+gui.plans.ingot=Lingote
+gui.plans.javelin=Dardo
+gui.plans.knife=Faca
+gui.plans.legsplate=Calças
+gui.plans.mace=Maça
+gui.plans.pickaxe=Picareta
+gui.plans.propick=Prospectora
+gui.plans.refinebloom=Refinar
+gui.plans.saw=Serra
+gui.plans.scythe=Gadanha
+gui.plans.sheet=Folha
+gui.plans.shovel=Pá
+gui.plans.splitbloom=Divisão
+gui.plans.sword=Espada
+gui.plans.tuyere=Alcaraviz
+gui.plans.grill=Grelha
+gui.plans.shears=Tesoura
+
+#== Misc GUI ==
+gui.Blueprint=Diagrama
+gui.Nametag=Etiqueta
+gui.fertilized=Fertilizado
+gui.Inventory=Inventário
+gui.ClearSlot=Limpe um espaço de saída.
+gui.LogPile=Pilha de Cavacas
+gui.done=Feito
+gui.Sluice.Soil=Solo
+gui.Sluice=Eclusa
+gui.Workbench.Crafting=Criando
+
+#== Tooltips ==
+gui.ShowHelp=§8Ajuda: (Segurar§fShift§8)
+gui.Help=§8Ajuda:
+gui.Clay.Inst0=§bClique BD§7com uma pilha de 5 para moldar.
+gui.Knife.Inst0=§bRight Click §7em cima do bloco para
+gui.Knife.Inst1=criar uma área de preparação de refeições.
+gui.Leather.Inst0=§bClique BD§7com uma faca em seu inventário para cortar.
+gui.LooseRock.Inst0=§bClique BD§7com uma pilha de 2 para lascar.
+gui.MeltedMetal.Inst0=§bClique BD§7para despejar num molde de ferramenta.
+gui.PotteryBase.Inst0=Agache e §bClique BD§7para colocar objeto.
+gui.PotteryVesselSmall.Inst0=Ou §bClique BD§7para abrir inventário.
+gui.RawHide.Inst0=????
+gui.Barrel.MoreItems=§8Mais... (Segure §fShift§8)
+
+gui.Size.Tiny=Minúsculo
+gui.Size.VerySmall=Muito Pequeno
+gui.Size.Small=Pequeno
+gui.Size.Medium=Médio
+gui.Size.Large=Grande
+gui.Size.VeryLarge=Muito Grande
+gui.Size.Huge=Enorme
+
+gui.Weight.Light=Leve
+gui.Weight.Medium=Médio
+gui.Weight.Heavy=Pesado
+
+gui.Reach.Short=Curto
+gui.Reach.Medium=Médio
+gui.Reach.Far=Distante
+
+gui.food.fruit=Fruta
+gui.food.vegetable=Vegetal
+gui.food.grain=Grão
+gui.food.protein=Proteína
+gui.food.dairy=Laticínio
+gui.food.amount=Quantidade
+gui.food.decay=Apodrecimento
+gui.food.salted=Salgado
+
+gui.FoodHeat.Cold=Frio
+gui.FoodHeat.Warm=Quente
+
+gui.Torch.CatchingFire=Pegando Fogo
+gui.Torch.Lit=Aceso
+
+gui.ItemHeat.Liquid=Líquido
+gui.ItemHeat.Solidified=Solidificado
+gui.ItemHeat.Caution=Cuidado
+gui.ItemHeat.Warming=Aquecendo
+gui.ItemHeat.Hot=Quente
+gui.ItemHeat.VeryHot=Muito Quente
+gui.ItemHeat.FaintRed=Vermelho Pálido
+gui.ItemHeat.DarkRed=Vermelho Escuro
+gui.ItemHeat.BrightRed=Vermelho Brilhante
+gui.ItemHeat.Orange=Laranja
+gui.ItemHeat.Yellow=Amarelo
+gui.ItemHeat.YellowWhite=Amarelo Claro
+gui.ItemHeat.White=Branco
+gui.ItemHeat.BrilliantWhite=Branco Brilhante
+
+gui.ingot.workable=Pode Trabalhar
+gui.ingot.weldable=Pode Soldar
+gui.ingot.danger=**Perigo**
+
+gui.milk.fresh=Fresco
+gui.milk.old=Obsoleto
+gui.milk.sour=Azedo
+
+gui.units=Unidades
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=Deve ser usado sob água corrente
+gui.goldpan.overused=Esta área parece estar Esgotada. Provavelmente não iria encontrar nada aqui.
+
+gui.ProPick.Found=Encontrado
+gui.ProPick.FoundTraces=Encontrado traços de
+gui.ProPick.FoundSmall=Encontrada uma amostra pequena de
+gui.ProPick.FoundMedium=Encontrada uma amostra média de
+gui.ProPick.FoundLarge=Encontrado uma amostra grande de
+gui.ProPick.FoundVeryLarge=Encontrada uma amostra muito grande de
+gui.ProPick.FoundNothing=Nada foi encontrado de interesse.
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Armadura
+itemGroup.TFCMaterials=(TFC) Materais
+itemGroup.TFCMisc=(TFC) Miscelânea
+itemGroup.TFCPottery=(TFC) Cerâmica
+itemGroup.TFCTools=(TFC) Ferramentas
+itemGroup.TFCWeapons=(TFC) Armas
+itemGroup.TFCDevices=(TFC) Instrumentos
+itemGroup.TFCFoods=(TFC) Comidas
+itemGroup.TFCBuilding=(TFC) Blocos de Construção
+itemGroup.TFCDecoration=(TFC) Blocos Decorativos
+
+#== Skill GUI ==
+skill.armorsmith=Armaduras
+skill.gensmith=Metalurgia em Geral
+skill.toolsmith=Ferramentas
+skill.weaponsmith=Armas
+skill.agriculture=Agricultura
+skill.cooking=Cozinha
+skill.prospecting=Prospecção
+skill.butchering=Massacre
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================
+fluid.freshwater=Água Fresca
+fluid.saltwater=Água com Sal
+fluid.lavatfc=Lava
+fluid.hotwater=Água Quente
+fluid.beer=Cerveja
+fluid.cider=Sidra
+fluid.rum=Rum
+fluid.ryewhiskey=Uísque de Centeio
+fluid.sake=Saquê
+fluid.vodka=Vodca
+fluid.whiskey=Uísque
+fluid.cornwhiskey=Uísque de Milho
+fluid.milk=Leite
+fluid.milkcurdled=Leite Coalhado
+fluid.limewater=Água de Cal
+fluid.tannin=Tanino
+fluid.vinegar=Vinagre
+fluid.brine=Água Salgada
+
+gui.showtaste=§8Sabor: (Segure §fL-Ctrl§8)
+gui.taste=§8Sabor:
+gui.taste.sweet=Doce
+gui.taste.sour=Azedo
+gui.taste.salty=Salgado
+gui.taste.bitter=Amargo
+gui.taste.savory=Saboroso
+
+gui.taste.novice.sweet1=Doce
+gui.taste.novice.sweet0=Não Doce
+gui.taste.novice.sour1=Azedo
+gui.taste.novice.sour0=Não Azedo
+gui.taste.novice.salty1=Salgado
+gui.taste.novice.salty0=Não Salgado
+gui.taste.novice.bitter1=Amargo
+gui.taste.novice.bitter0=Não Amargo
+gui.taste.novice.savory1=Saboroso
+gui.taste.novice.savory0=Não Saboroso
+
+gui.taste.adept.sweet0=Não Doce
+gui.taste.adept.sweet1=Moderadamente Doce
+gui.taste.adept.sweet2=Doce
+gui.taste.adept.sweet3=Bastante Doce
+gui.taste.adept.sweet4=Muito Doce
+gui.taste.adept.sweet5=Extremamente Doce
+gui.taste.adept.sour0=Não Azedo
+gui.taste.adept.sour1=Moderadamente Azedo
+gui.taste.adept.sour2=Azedo
+gui.taste.adept.sour3=Bastante Azedo
+gui.taste.adept.sour4=Muito Azedo
+gui.taste.adept.sour5=Extremamente Azedo
+gui.taste.adept.salty0=Não Salgado
+gui.taste.adept.salty1=Moderadamente Salgado
+gui.taste.adept.salty2=Salgado
+gui.taste.adept.salty3=Bastamnte Salgado
+gui.taste.adept.salty4=Muito Salgado
+gui.taste.adept.salty5=Extremamente Salgado
+gui.taste.adept.bitter0=Não Amargo
+gui.taste.adept.bitter1=Moderadamente Amargo
+gui.taste.adept.bitter2=Amargo
+gui.taste.adept.bitter3=Bastante Amargo
+gui.taste.adept.bitter4=Muito Amargo
+gui.taste.adept.bitter5=Extremamente Amargo
+gui.taste.adept.savory0=Não Saboroso
+gui.taste.adept.savory1=Moderadamente Saboroso
+gui.taste.adept.savory2=Saboroso
+gui.taste.adept.savory3=Bastante Saboroso
+gui.taste.adept.savory4=Muito Saboroso
+gui.taste.adept.savory5=Extremamente Saboroso
+
+gui.taste.0=Não
+gui.taste.1=Não Muito
+gui.taste.2=Um pouco
+gui.taste.3=Moderadamente
+gui.taste.4=Perfeito
+gui.taste.5=Excessivamente
+gui.taste.6=Muito
+gui.taste.7=Extremamente
+gui.taste.8=Ridiculamente
+
+gui.skill.novice=Novato
+gui.skill.adept=Perito
+gui.skill.expert=Especialista
+gui.skill.master=Mestre
+gui.skillpage=Abilidades
+tile.MetalTrapDoor.name=Alçapão
+item.Mud Brick.name=Bloco de Lama
+item.Wet Mud Brick.name=Bloco de Lama Molhado
+gui.overburdened=* Sobrecarregado *
+gui.slot=Espaço
+gui.slot.back=Costas
+word.pickled=Em Salmoura
+word.brined=Metido em Salmoura
+word.cooked=Cozinhado
+word.salted=Salgado
+word.smoked=Defumado
+word.dried=Seco
+gui.barrel.pickling=Colocando em Salmoura
+gui.barrel.brining=Salgando
+tile.Vessel.name=Vaso grande
+tile.Grill.name=Grelha
+food.cooked.rare=Alcance
+food.cooked.medrare=Alcance Mediano
+food.cooked.med=Mediano
+food.cooked.medwell=Mediano Bem
+food.cooked.well=Bem Feito
+food.cooked.0=Muita Leve
+food.cooked.1=Leve
+food.cooked.2=Mediano
+food.cooked.3=Escuro
+food.cooked.4=Muito Escuro
+gui.FoodPrep.Sandwich=Sanduíche
+gui.FoodPrep.Salad=Salada
+item.Sandwich.name=Sanduíche
+item.Salad.name=Salada
+item.ClayBowl.Ceramic Bowl.name=Tigela de Cerâmica
+item.ClayBowl.Clay Bowl.name=Tigela de Argila
+item.Sugar.name=Açucar
+item.Sea Weed.name=Alga Marítima
+word.stage1=Inacabadas I
+word.stage2=Inacabadas II
