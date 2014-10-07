@@ -1,5 +1,6 @@
 package com.bioxx.tfc.Blocks;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -197,6 +198,18 @@ public class BlockWoodSupport extends BlockTerra
 	public int damageDropped(int j)
 	{
 		return j;
+	}
+
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		Block b = world.getBlock(x, y, z);
+		if(b == TFCBlocks.WoodSupportH || b == TFCBlocks.WoodSupportV)
+			ret.add(new ItemStack(TFCBlocks.WoodSupportV, 1, metadata));
+		else if(b == TFCBlocks.WoodSupportH2 || b == TFCBlocks.WoodSupportV2)
+			ret.add(new ItemStack(TFCBlocks.WoodSupportV2, 1, metadata));
+		return ret;
 	}
 
 	@Override
