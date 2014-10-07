@@ -38,7 +38,7 @@ public class FogHandler
 		if(event.fogMode >= 0)
 		{
 			//If the user changes their render range, we need to rerun all of this
-			if(renderRange != Minecraft.getMinecraft().gameSettings.renderDistanceChunks)
+			if(renderRange != Minecraft.getMinecraft().gameSettings.renderDistanceChunks || fogEnd < 16)
 			{
 				renderRange = Minecraft.getMinecraft().gameSettings.renderDistanceChunks;
 				boolean rainLast = false;

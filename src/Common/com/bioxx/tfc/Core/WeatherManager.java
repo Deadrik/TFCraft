@@ -68,7 +68,7 @@ public class WeatherManager
 				clientRand.setSeed(TFC_Time.getTotalDays());
 				float rain = TFC_Climate.getRainfall(world, x, y, z);
 				float strength = clientRand.nextFloat();
-				if(rain >= 500)
+				if(rain >= 500 && clientRand.nextInt(3) == 0)
 				{
 					float mult = 1f;
 					if(9-hour < 2)
