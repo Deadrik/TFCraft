@@ -133,7 +133,7 @@ public class TFCFluid extends Fluid
 			nbt = is.getTagCompound();
 		}
 
-		if(nbt.hasKey("isSealed"))
+		if(nbt.hasKey("Sealed"))
 			return is;
 
 		//Attempt to merge fluidstacks first
@@ -146,14 +146,14 @@ public class TFCFluid extends Fluid
 				fs.amount = ifs.amount % maxFluid;
 				ifs.amount = Math.min(ifs.amount, maxFluid);
 				nbt.setTag("fluidNBT", ifs.writeToNBT(new NBTTagCompound()));
-				nbt.setBoolean("isSealed", true);
+				nbt.setBoolean("Sealed", true);
 			}
 			else return is;
 		}
 		else 
 		{
 			nbt.setTag("fluidNBT", fs.writeToNBT(new NBTTagCompound()));
-			nbt.setBoolean("isSealed", true);
+			nbt.setBoolean("Sealed", true);
 		}
 
 		is.setTagCompound(nbt);
