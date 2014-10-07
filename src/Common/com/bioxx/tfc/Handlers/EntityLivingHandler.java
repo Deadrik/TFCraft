@@ -282,7 +282,7 @@ public class EntityLivingHandler
 	public void onLivingDrop(LivingDropsEvent event)
 	{
 		boolean processed = false;
-		if(!event.entity.worldObj.isRemote && event.recentlyHit)
+		if(!event.entity.worldObj.isRemote && event.recentlyHit && !(event.entity instanceof EntityPlayer))
 		{
 			if(event.source.getSourceOfDamage() instanceof EntityPlayer || event.source.isProjectile())
 			{
@@ -332,7 +332,7 @@ public class EntityLivingHandler
 			}
 		}
 
-		if(!processed)
+		if(!processed && !(event.entity instanceof EntityPlayer))
 		{
 			ArrayList<EntityItem> drop = new ArrayList<EntityItem>();
 			for(EntityItem ei : event.drops)
