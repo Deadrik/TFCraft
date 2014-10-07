@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
-import com.bioxx.tfc.Core.TFC_Core;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -77,13 +76,6 @@ public class BlockThatch extends BlockTerra
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
 		return canBlockStay(world, x, y, z) && super.canPlaceBlockAt(world, x, y, z);
-	}
-
-	@Override
-	public boolean canBlockStay(World world, int x, int y, int z)
-	{
-		Block id = world.getBlock(x, y - 1, z);
-		return y > 0 && y < 256 ? !TFC_Core.isGround(id) && id != this : false;
 	}
 
 	@Override
