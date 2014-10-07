@@ -1,0 +1,2450 @@
+﻿#fi_FI
+#Tämä on suomen kielen käännöstiedosto- Kääntäjinä toimivat Faro, Silvar, GSKW ja SilverWingEagle.
+
+
+
+
+
+generator.TFCDefault=TFC Oletus
+generator.TFCFlat=TFC Tasainen
+
+key.ToolMode=Vaihda työkalumoodia
+key.LockTool=Lukitse työkalun paikka
+
+effect.bleed=Verenvuoto
+
+#==============
+#= Spawn Eggs =
+#==============
+entity.squidTFC.name=Kalmari
+entity.cowTFC.name=Lehmä
+entity.wolfTFC.name=Susi
+entity.bearTFC.name=Karhu
+entity.deerTFC.name=Peura
+entity.chickenTFC.name=Kana
+entity.pigTFC.name=Sika
+entity.skeletonTFC.name=Luuranko
+entity.zombieTFC.name=Zombi
+entity.spiderTFC.name=Hämähäkki
+entity.slimeTFC.name=Limakuutio
+entity.silverfishTFC.name=Sokeritoukka
+entity.ghastTFC.name=Hornanhenki
+entity.caveSpiderTFC.name=Kaivoshämähäkki
+entity.blazeTFC.name=Roihu
+entity.endermanTFC.name=Ääreläinen
+entity.pigZombieTFC.name=Sika-Zombi
+entity.creeperTFC.name=Lurkki
+entity.sheepTFC.name=Lammas
+entity.pheasantTFC.name=Fasaani
+entity.horseTFC.name=Hevonen
+entity.irongolemTFC.name=Rautagolemi
+entity.fishTFC.name=Kala
+
+
+#==========
+#= Entity =
+#==========
+entity.notFamiliar=
+fishingRod.lineTension=
+fishingRod.lineSnap=
+fishingRod.bite=
+fishingRod.gotAway=
+
+#================
+#= Achievements =
+#================
+achievement.achLooseRock=Kivi, tietysti kivi.
+achievement.achLooseRock.desc=Nosta kivi maasta.
+achievement.achSmallOre=Ei kiviä kääntämättä
+achievement.achSmallOre.desc=Löydä malmihippu
+achievement.achWildVegetable=Keräilijä
+achievement.achWildVegetable.desc=Löydä villi kasvis
+achievement.achRutabaga=Tyhmät sipulit...
+achievement.achRutabaga.desc=Löydä villi lanttu
+achievement.achQuern=Jauhomylly
+achievement.achQuern.desc=Käytä myllyä
+achievement.achStoneAge=Paleoliittista!
+achievement.achStoneAge.desc=Tee kivi työkalu siirtyäksesi kivikaudelle
+achievement.achCopperAge=Kalkoliittinen!
+achievement.achCopperAge.desc=Vala jotain metallista siirtyäksesi kuparikaudelle
+achievement.achSaw=Puuseppä
+achievement.achSaw.desc=Tee saha
+achievement.achAnvil=Aika vasaroida
+achievement.achAnvil.desc=Tee kivinen alasin
+achievement.achPickaxe=Aika mainata
+achievement.achPickaxe.desc=Tee hakku
+achievement.achDiamond=TIMAN-Ei mitään
+achievement.achDiamond.desc=Löydä timantti
+achievement.achLimonite=JÄR-VI-MALMII!
+achievement.achLimonite.desc=Kaiva järvimalmia
+achievement.achBronzeAge=Pronssikausi
+achievement.achBronzeAge.desc=Tee prossinen alasin siirtyäksesi pronssikaudelle
+achievement.achIronAge=Rautakausi
+achievement.achIronAge.desc=Kaiva rautaa siirtyäksesi rautakaudelle
+achievement.achPokeCreeper=Steven Irwin
+achievement.achPokeCreeper.desc=Lyö lurkkia tikulla
+
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=Ei sopivia eläimiä alueella!
+commands.transferTamed.tooMany=Liikaa eläimiä alueella!
+commands.transferTamed.wrongOwner=Tuo ei kuulu sinulle!
+commands.transferTamed.sameTarget=Et voi siirtää sitä itsellesi!
+commands.transferTamed.display.incoming=%s on siirtänyt sinulle eläimen!
+commands.transferTamed.display.outgoing=Olet siirtänyt eläimen pelaajalle %s!
+commands.transferTamed.wrongSender=Et voi siirtää eläimiä!
+
+#========
+#= Food =
+#========
+item.MealGeneric.name=Ateria
+item.meal.terrible=Kamala
+item.meal.poor=Huono
+item.meal.decent=Melko hyvä
+item.meal.good=Hyvä
+item.meal.great=Mahtava
+item.meal.fantastic=Fantastinen
+
+#== Grains ==
+item.Barley Bread.name=Ohraleipä
+item.Corn Bread.name=Maissileipä
+item.Oat Bread.name=Kauraleipä
+item.Rice Bread.name=Riisileipä
+item.Rye Bread.name=Ruisleipä
+item.Wheat Bread.name=Vehnäleipä
+
+item.Barley Whole.name=Ohra
+item.Maize Ear.name=Maissintähkä
+item.Oat Whole.name=Kaura
+item.Rice Whole.name=Riisi
+item.Rye Whole.name=Ruis
+item.Wheat Whole.name=Vehnä
+
+item.Barley Grain.name=Ohranjyvät
+item.Oat Grain.name=Kauranjyvät
+item.Rice Grain.name=Riisinjyvät
+item.Rye Grain.name=Ruisjyvät
+item.Wheat Grain.name=Vehnänjyvät
+
+item.Barley Ground.name=Ohrajauho
+item.Cornmeal Ground.name=Maissijauho
+item.Oat Ground.name=Kaurajauho
+item.Rice Ground.name=Riisijauho
+item.Rye Ground.name=Ruisjauho
+item.Wheat Ground.name=Vehnäjauho
+
+item.Barley Dough.name=Ohraleipätaikina
+item.Cornmeal Dough.name=Maissileipätaikina
+item.Oat Dough.name=Kauraleipätaikina
+item.Rice Dough.name=Riisileipätaikina
+item.Rye Dough.name=Ruisleipätaikina
+item.Wheat Dough.name=Vehnäleipätaikina
+
+item.Seeds Barley.name=Ohran siemenet
+item.Seeds Maize.name=Maissin siemenet
+item.Seeds Oat.name=Kauran siemenet
+item.Seeds Rice.name=Riisin siemenet
+item.Seeds Rye.name=Rukiin siemenet
+item.Seeds Wheat.name=Vehnän siemenet
+
+#== Fruit ==
+item.Green Apple.name=Vihreä omena
+item.Red Apple.name=Punainen omena
+item.Banana.name=Banaani
+item.Cherry.name=Kirsikka
+item.Lemon.name=Sitruuna
+item.Olive.name=Oliivi
+item.Orange.name=Appelsiini
+item.Peach.name=Persikka
+item.Plum.name=Luumu
+
+item.FruitSapling.Green Apple.name=Vihreän omenapuun taimi
+item.FruitSapling.Red Apple.name=Punaisen omenapuun taimi
+item.FruitSapling.Banana.name=Banaanipuun taimi
+item.FruitSapling.Cherry.name=Kirsikkapuun taimi
+item.FruitSapling.Lemon.name=Sitruunapuun taimi
+item.FruitSapling.Olive.name=Oliivipuun taimi
+item.FruitSapling.Orange.name=Appelsiinipuun taimi
+item.FruitSapling.Peach.name=Persikkapuun taimi
+item.FruitSapling.Plum.name=Luumupuun taimi
+
+#=== Berry Bushes ===
+tile.BerryBush.Blackberry.name=Karhunvatukkapensas
+tile.BerryBush.Blueberry.name=Mustikkapensas
+tile.BerryBush.Bunchberry.name=Nippumarjapensas
+tile.BerryBush.Cloudberry.name=Hillapensas
+tile.BerryBush.Cranberry.name=Karpalopensas
+tile.BerryBush.Elderberry.name=Mustaseljanmarjapensas
+tile.BerryBush.Gooseberry.name=Karviaspensas
+tile.BerryBush.Raspberry.name=Vadelmapensas
+tile.BerryBush.Snowberry.name=Lumimarjapensas
+tile.BerryBush.Strawberry.name=Mansikkapensas
+tile.BerryBush.Wintergreen.name=Talvimarjapensas
+
+item.Blackberry.name=Karhunvatukat
+item.Blueberry.name=Mustikat
+item.Bunchberry.name=Nippumarjat
+item.Cloudberry.name=Hillat
+item.Cranberry.name=Karpalot
+item.Elderberry.name=Mustaseljanmarjat
+item.Gooseberry.name=Karviasen marjat
+item.Raspberry.name=Vadelmat
+item.Snowberry.name=Lumimarjat
+item.Strawberry.name=Mansikat
+item.Wintergreen Berry.name=Talvimarjat
+
+item.Blackberry Leaf.name=Karhunvatukan lehti
+item.Blueberry Leaf.name=Mustikan lehti
+item.Bunchberry Leaf.name=Nippumarjan lehti
+item.Cloudberry Leaf.name=Hillan lehti
+item.Cranberry Leaf.name=Karpalon lehti
+item.Elderberry Leaf.name=Mustaseljanmarjan lehti
+item.Gooseberry Leaf.name=Karviaisen lehti
+item.Raspberry Leaf.name=Vadelman lehti
+item.Snowberry Leaf.name=Lumimarjan lehti
+item.Strawberry Leaf.name=Mansikan lehti
+item.Wintergreen Leaf.name=Talvimarjan lehti
+
+#== Protein ==
+item.Beef.name=Naudanlihaa
+item.Calamari.name=Mustekala
+item.egg.name=Kananmuna
+item.Fish.name=Kala
+item.Mutton.name=Lammasta
+item.Porkchop.name=Porsaankyljys
+item.Chicken.name=Kana
+item.Venison.name=Hirvieläimen lihaa
+item.HorseMeat.name=Hevosenlihaa
+item.Egg Cooked.name=Paistettu kananmuna
+
+item.Soybeans.name=Soijapavut
+item.Seeds Soybean.name=Soijapavun siemenet
+
+#== Dairy ==
+item.Cheese.name=Juusto
+
+#== Vegetables ==
+item.Green Bell Pepper.name=Vihreä paprika
+item.Red Bell Pepper.name=Punainen paprika
+item.Yellow Bell Pepper.name=Keltainen paprika
+item.Cabbage.name=Kaali
+item.Carrot.name=Porkkana
+item.Garlic.name=Valkosipuli
+item.Greenbeans.name=Herneet
+item.Onion.name=Sipuli
+item.Potato.name=Peruna
+item.Rutabaga.name=Lanttu
+item.Squash.name=Kurpitsa
+item.Tomato.name=Tomaatti
+
+item.Seeds Red Bell Pepper.name=Punaisen paprikan siemenet
+item.Seeds Yellow Bell Pepper.name=Keltaisen paprikan siemenet
+item.Seeds Cabbage.name=Kaalin siemenet
+item.Seeds Carrot.name=Porkkanan siemenet
+item.Seeds Garlic.name=Valkosipulin siemenet
+item.Seeds Greenbean.name=Herneen siemenet
+item.Seeds Onion.name=Sipulin siemenet
+item.Seeds Potato.name=Siemenperunat
+item.Seeds Rutabaga.name=Lantun siemenet
+item.Seeds Squash.name=Kurpitsan siemenet
+item.Seeds Tomato.name=Tomaatin siemenet
+
+#== Alcohol ==
+item.Glass Bottle.name=Tyhjä lasipullo
+item.Beer.name=Olut
+item.Cider.name=Siideri
+item.Rum.name=Rommi
+item.RyeWhiskey.name=Mallasviski
+item.Sake.name=Riisiviini
+item.Vodka.name=Vodka
+item.Whiskey.name=Viski
+item.CornWhiskey.name=
+
+#===========
+#= Pottery =
+#===========
+item.Clay.Clay.name=Savi
+item.Clay.Fire Clay.name=Tulenkestävä savi
+
+item.clay.clayflatlight.name=Vaalea tasainen savi
+item.clay.clayflatdark.name=Tumma tasainen savi
+item.clay.clayflatfire.name=Tasainen tulenkestävä savi
+item.clay.clayflatdarkfire.name=Tumma tasainen tulenkestävä savi
+
+item.Jug.Clay Jug.name=Savikannu
+item.Jug.Ceramic Jug.name=Keraaminen kannu
+item.Jug.Water Jug.name=Vesikannu
+
+item.Pot.Clay Pot.name=Saviruukku
+item.Pot.Ceramic Pot.name=Keraaminen ruukku
+
+item.Small Vessel.Clay Vessel.name=Saviastia
+item.Small Vessel.Ceramic Vessel.name=Keraaminen astia
+
+item.Large Vessel.Clay Vessel [Large].name=Saviastia [Suuri]
+item.Large Vessel.Ceramic Vessel [Large].name=Keraaminen astia [Suuri]
+
+item.Mold.Clay Mold.name=Savimuotti
+item.Mold.Ceramic Mold.name=Keraaminen muotti
+
+item.Axe Mold.Clay Mold Axe.name=Savinen kirveenmuotti
+item.Axe Mold.Ceramic Mold Axe.name=Kirveenmuotti
+item.Axe Mold.Ceramic Mold Axe Copper.name=Kirveenmuotti (Kupari)
+item.Axe Mold.Ceramic Mold Axe Bronze.name=Kirveenmuotti (Pronssi)
+item.Axe Mold.Ceramic Mold Axe Black Bronze.name=Kirveenmuotti (Musta Pronssi)
+item.Axe Mold.Ceramic Mold Axe Bismuth Bronze.name=Kirveenmuotti (Vismuttipronssi)
+
+item.Chisel Mold.Clay Mold Chisel.name=Savinen taltanmuotti
+item.Chisel Mold.Ceramic Mold Chisel.name=Taltanmuotti
+item.Chisel Mold.Ceramic Mold Chisel Copper.name=Taltanmuotti (Kupari)
+item.Chisel Mold.Ceramic Mold Chisel Bronze.name=Taltanmuotti (Pronssi)
+item.Chisel Mold.Ceramic Mold Chisel Black Bronze.name=Taltanmuotti (Musta Pronssi)
+item.Chisel Mold.Ceramic Mold Chisel Bismuth Bronze.name=Taltanmuotti (Vismuttipronssi)
+
+item.Hammer Mold.Clay Mold Hammer.name=Savinen vasaranmuotti
+item.Hammer Mold.Ceramic Mold Hammer.name=Vasaranmuotti
+item.Hammer Mold.Ceramic Mold Hammer Copper.name=Vasaranmuotti (Kupari)
+item.Hammer Mold.Ceramic Mold Hammer Bronze.name=Vasaranmuotti (Pronssi)
+item.Hammer Mold.Ceramic Mold Hammer Black Bronze.name=Vasaranmuotti (Musta Pronssi)
+item.Hammer Mold.Ceramic Mold Hammer Bismuth Bronze.name=Vasaranmuotti (Vismuttipronssi)
+
+item.Hoe Mold.Clay Mold Hoe.name=Savinen kuokanmuotti
+item.Hoe Mold.Ceramic Mold Hoe.name=Kuokanmuotti
+item.Hoe Mold.Ceramic Mold Hoe Copper.name=Kuokanmuotti (Kupari)
+item.Hoe Mold.Ceramic Mold Hoe Bronze.name=Kuokanmuotti (Pronssi)
+item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=Kuokanmuotti (Musta Pronssi)
+item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=Kuokanmuotti (Vismuttipronssi)
+
+item.Knife Mold.Clay Mold Knife.name=Savinen veitsenmuotti
+item.Knife Mold.Ceramic Mold Knife.name=Veitsenmuotti
+item.Knife Mold.Ceramic Mold Knife Copper.name=Veitsenmuotti (Kupari)
+item.Knife Mold.Ceramic Mold Knife Bronze.name=Veitsenmuotti (Pronssi)
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=Veitsenmuotti (Musta Pronssi)
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=Veitsenmuotti (Vismuttipronssi)
+
+item.Javelin Mold.Clay Mold Javelin.name=Savinen keihäänkärjenmuotti
+item.Javelin Mold.Ceramic Mold Javelin.name=Keihäänkärjenmuotti
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=Keihäänkärjenmuotti (Kupari)
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=Keihäänkärjenmuotti (Pronssi)
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=Keihäänkärjenmuotti (Musta Pronssi)
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=Keihäänkärjenmuotti (Vismuttipronssi)
+
+item.Mace Mold.Clay Mold Mace.name=Savinen nuijanmuotti
+item.Mace Mold.Ceramic Mold Mace.name=Nuijanmuotti
+item.Mace Mold.Ceramic Mold Mace Copper.name=Nuijanmuotti (Kupari)
+item.Mace Mold.Ceramic Mold Mace Bronze.name=Nuijanmuotti (Pronssi)
+item.Mace Mold.Ceramic Mold Mace Black Bronze.name=Nuijanmuotti (Musta Pronssi)
+item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=Nuijanmuotti (Vismuttipronssi
+
+item.Pick Mold.Clay Mold Pick.name=Savinen hakunmuotti
+item.Pick Mold.Ceramic Mold Pick.name=Hakunmuotti
+item.Pick Mold.Ceramic Mold Pick Copper.name=Hakunmuotti (Kupari)
+item.Pick Mold.Ceramic Mold Pick Bronze.name=Hakunmuotti (Pronssi)
+item.Pick Mold.Ceramic Mold Pick Black Bronze.name=Hakunmuotti (Musta Pronssi)
+item.Pick Mold.Ceramic Mold Pick Bismuth Bronze.name=Hakunmuotti (Vismuttipronssi)
+
+item.ProPick Mold.Clay Mold ProPick.name=Savinen etsintähakunmuotti
+item.ProPick Mold.Ceramic Mold ProPick.name=Etsintähakunmuotti
+item.ProPick Mold.Ceramic Mold ProPick Copper.name=Etsintähakunmuotti (Kupari)
+item.ProPick Mold.Ceramic Mold ProPick Bronze.name=Etsintähakunmuotti (Pronssi)
+item.ProPick Mold.Ceramic Mold ProPick Black Bronze.name=Etsintähakunmuotti (Musta Pronssi)
+item.ProPick Mold.Ceramic Mold ProPick Bismuth Bronze.name=Etsintähakunmuotti (Vismuttipronssi)
+
+item.Saw Mold.Clay Mold Saw.name=Savinen sahanmuotti
+item.Saw Mold.Ceramic Mold Saw.name=Sahanmuotti
+item.Saw Mold.Ceramic Mold Saw Copper.name=Sahanmuotti (Kupari)
+item.Saw Mold.Ceramic Mold Saw Bronze.name=Sahanmuotti (Pronssi)
+item.Saw Mold.Ceramic Mold Saw Black Bronze.name=Sahanmuotti (Musta Pronssi)
+item.Saw Mold.Ceramic Mold Saw Bismuth Bronze.name=Sahanmuotti (Vismuttipronssi)
+
+item.Scythe Mold.Clay Mold Scythe.name=Savinen viikatteenmuotti
+item.Scythe Mold.Ceramic Mold Scythe.name=Viikatteenmuotti
+item.Scythe Mold.Ceramic Mold Scythe Copper.name=Viikatteenmuotti (Kupari)
+item.Scythe Mold.Ceramic Mold Scythe Bronze.name=Viikatteenmuotti (Pronssi)
+item.Scythe Mold.Ceramic Mold Scythe Black Bronze.name=Viikatteenmuotti (Musta Pronssi)
+item.Scythe Mold.Ceramic Mold Scythe Bismuth Bronze.name=Viikatteenmuotti (Vismuttipronssi)
+
+item.Shovel Mold.Clay Mold Shovel.name=Savinen lapionmuotti
+item.Shovel Mold.Ceramic Mold Shovel.name=Lapionmuotti
+item.Shovel Mold.Ceramic Mold Shovel Copper.name=Lapionmuotti (Kupari)
+item.Shovel Mold.Ceramic Mold Shovel Bronze.name=Lapionmuotti (Pronssi)
+item.Shovel Mold.Ceramic Mold Shovel Black Bronze.name=Lapionmuotti (Musta Pronssi)
+item.Shovel Mold.Ceramic Mold Shovel Bismuth Bronze.name=Lapionmuotti (Vismuttipronssi)
+
+item.Sword Mold.Clay Mold Sword.name=Savinen miekanmuotti
+item.Sword Mold.Ceramic Mold Sword.name=Miekanmuotti
+item.Sword Mold.Ceramic Mold Sword Copper.name=Miekanmuotti (Kupari)
+item.Sword Mold.Ceramic Mold Sword Bronze.name=Miekanmuotti (Pronssi)
+item.Sword Mold.Ceramic Mold Sword Black Bronze.name=Miekanmuotti (Musta Pronssi)
+item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=Miekanmuotti (Vismuttipronssi)
+
+item.Spindle.name=Värttinä
+item.Spindle Head.Clay Spindle.name=Savinen värttinänpää
+item.Spindle Head.Spindle Head.name=Värttinänpää
+
+item.Fire Brick.Fire Brick.name=
+item.Fire Brick.Clay Fire Brick.name=
+tile.FireBrick.name=
+
+#= Gems =
+item.Agate.Chipped.name=Lohjennut agaatti
+item.Amethyst.Chipped.name=Lohjennut ametisti
+item.Beryl.Chipped.name=Lohjennut berylli
+item.Diamond.Chipped.name=Lohjennut timantti
+item.Emerald.Chipped.name=Lohjennut smaragdi
+item.Garnet.Chipped.name=Lohjennut granaatti
+item.Jade.Chipped.name=Lohjennut jade
+item.Jasper.Chipped.name=Lohjennut jaspis
+item.Opal.Chipped.name=Lohjennut opaali
+item.Ruby.Chipped.name=Lohjennut rubiini
+item.Sapphire.Chipped.name=Lohjennut safiiri
+item.Topaz.Chipped.name=Lohjennut topaasi
+item.Tourmaline.Chipped.name=Lohjennut turmaliini
+
+item.Agate.Flawed.name=Virheellinen agaatti
+item.Amethyst.Flawed.name=Virheellinen ametisti
+item.Beryl.Flawed.name=Virheellinen berylli
+item.Diamond.Flawed.name=Virheellinen timantti
+item.Emerald.Flawed.name=Virheellinen smaragdi
+item.Garnet.Flawed.name=Virheellinen granaatti
+item.Jade.Flawed.name=Virheellinen jade
+item.Jasper.Flawed.name=Virheellinen jaspis
+item.Opal.Flawed.name=Virheellinen opaali
+item.Ruby.Flawed.name=Virheellinen rubiini
+item.Sapphire.Flawed.name=Virheellinen safiiri
+item.Topaz.Flawed.name=Virheellinen topaasi
+item.Tourmaline.Flawed.name=Virheellinen turmaliini
+
+item.Agate.Normal.name=Agaatti
+item.Amethyst.Normal.name=Ametisti
+item.Beryl.Normal.name=Berylli
+item.Diamond.Normal.name=Timantti
+item.Emerald.Normal.name=Smaragdi
+item.Garnet.Normal.name=Granaatti
+item.Jade.Normal.name=Jade
+item.Jasper.Normal.name=Jaspis
+item.Opal.Normal.name=Opaali
+item.Ruby.Normal.name=Rubiini
+item.Sapphire.Normal.name=Safiiri
+item.Topaz.Normal.name=Topaasi
+item.Tourmaline.Normal.name=Turmaliini
+
+item.Agate.Flawless.name=Virheetön agaatti
+item.Amethyst.Flawless.name=Virheetön ametisti
+item.Beryl.Flawless.name=Virheetön berylli
+item.Diamond.Flawless.name=Virheetön timantti
+item.Emerald.Flawless.name=Virheetön smaragdi
+item.Garnet.Flawless.name=Virheetön granaatti
+item.Jade.Flawless.name=Virheetön jade
+item.Jasper.Flawless.name=Virheetön jaspis
+item.Opal.Flawless.name=Virheetön ppaali
+item.Ruby.Flawless.name=Virheetön rubiini
+item.Sapphire.Flawless.name=Virheetön safiiri
+item.Topaz.Flawless.name=Virheetön topaasi
+item.Tourmaline.Flawless.name=Virheetön turmaliini
+
+item.Agate.Exquisite.name=Erinomainen agaatti
+item.Amethyst.Exquisite.name=Erinomainen ametisti
+item.Beryl.Exquisite.name=Erinomainen berylli
+item.Diamond.Exquisite.name=Erinomainen timantti
+item.Emerald.Exquisite.name=Erinomainen smaragdi
+item.Garnet.Exquisite.name=Erinomainen granaatti
+item.Jade.Exquisite.name=Erinomainen jade
+item.Jasper.Exquisite.name=Erinomainen jaspis
+item.Opal.Exquisite.name=Erinomainen opaali
+item.Ruby.Exquisite.name=Erinomainen rubiini
+item.Sapphire.Exquisite.name=Erinomainen safiiri
+item.Topaz.Exquisite.name=Erinomainen topaasi
+item.Tourmaline.Exquisite.name=Erinomainen turmaliini
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.black.name=Mustepussi
+item.dyePowder.blue.name=Lasuriitti
+item.dyePowder.brown.name=Kaakaopavut
+item.dyePowder.cyan.name=Sinivihreä väriaine
+item.dyePowder.gray.name=Harmaa väriaine
+item.dyePowder.green.name=Kaktuksenvihreä väriaine
+item.dyePowder.lightBlue.name=Vaaleansininen väriaine
+item.dyePowder.lime.name=Limetinvihreä väriaine
+item.dyePowder.magenta.name=Magenta väriaine
+item.dyePowder.orange.name=Oranssi väriaine
+item.dyePowder.pink.name=Pinkki väriaine
+item.dyePowder.purple.name=Purppura väriaine
+item.dyePowder.red.name=Ruusunpunainen väriaine
+item.dyePowder.silver.name=Vaaleanharmaa väriaine
+item.dyePowder.white.name=Luujauho
+item.dyePowder.yellow.name=Voikukankeltainen väriaine
+
+item.Coke.name=Koksi
+item.Powder.Flux.name=Sulate
+item.Powder.Graphite Powder.name=Grafiittijauhe
+item.Powder.Hematite Powder.name=Hematiittijauhe
+item.Powder.Kaolinite Powder.name=Kaoliniittijauhe
+item.Powder.Lapis Lazuli Powder.name=Lasuriittijauhe
+item.Powder.Limonite Powder.name=Järvimalmijauhe
+item.Powder.Malachite Powder.name=Malakiittijauhe
+item.Powder.Salt.name=Suola
+item.Powder.Saltpeter Powder.name=Salpietarijauhe
+item.Powder.Sulfur Powder.name=Rikkijauhe
+
+#=========
+#= Stone =
+#=========
+#== Stone Items ==
+item.LooseRock.Andesite.name=Andesiittikivi
+item.LooseRock.Basalt.name=Basalttikivi
+item.LooseRock.Chalk.name=Liitukivi
+item.LooseRock.Chert.name=Piikivi
+item.LooseRock.Claystone.name=Savikivi
+item.LooseRock.Conglomerate.name=Konglomeraattikivi
+item.LooseRock.Dacite.name=Dasiittikivi
+item.LooseRock.Diorite.name=Dioriittikivi
+item.LooseRock.Dolomite.name=Dolomiittikivi
+item.LooseRock.Gabbro.name=Gabrokivi
+item.LooseRock.Gneiss.name=Gneissikivi
+item.LooseRock.Granite.name=Graniittikivi
+item.LooseRock.Limestone.name=Kalkkikivi
+item.LooseRock.Marble.name=Marmorikivi
+item.LooseRock.Phyllite.name=Fylliittikivi
+item.LooseRock.Quartzite.name=Kvartsiittikivi
+item.LooseRock.Rhyolite.name=Rioliittikivi
+item.LooseRock.Rock Salt.name=Suolakivi
+item.LooseRock.Schist.name=Liuskekivi
+item.LooseRock.Shale.name=Liuskekivi
+item.LooseRock.Slate.name=Saviliuskekivi
+
+item.ItemStoneBrick.Andesite.name=Andesiittitiili
+item.ItemStoneBrick.Basalt.name=Basalttitiilii
+item.ItemStoneBrick.Chalk.name=Liitukivitiili
+item.ItemStoneBrick.Chert.name=Piikivitiili
+item.ItemStoneBrick.Claystone.name=Savikivitiili
+item.ItemStoneBrick.Conglomerate.name=Konglomeraattitiili
+item.ItemStoneBrick.Dacite.name=Dasiitti Tiili
+item.ItemStoneBrick.Diorite.name=Dioriitti Tiili
+item.ItemStoneBrick.Dolomite.name=Dolomiitti Tiili
+item.ItemStoneBrick.Gabbro.name=Gabro Tiili
+item.ItemStoneBrick.Gneiss.name=Gneissi Tiili
+item.ItemStoneBrick.Granite.name=Graniitti Tiili
+item.ItemStoneBrick.Limestone.name=Kalkkikivi Tiili
+item.ItemStoneBrick.Marble.name=Marmori Tiili
+item.ItemStoneBrick.Phyllite.name=Fylliitti Tiili
+item.ItemStoneBrick.Quartzite.name=Kvartsiitti Tiili
+item.ItemStoneBrick.Rhyolite.name=Rioliitti Murikka
+item.ItemStoneBrick.Rock Salt.name=Vuorisuolakivi Tiili
+item.ItemStoneBrick.Schist.name=Liuske Tiili
+item.ItemStoneBrick.Shale.name=Liuskakivi Tiili
+item.ItemStoneBrick.Slate.name=Saviliuske Tiili
+
+item.FlatRock.Andesite.name=Andesiitti Murikka
+item.FlatRock.Basalt.name=Basaltti Murikka
+item.FlatRock.Chalk.name=Liitukiven Murikka
+item.FlatRock.Chert.name=Limsiön Murikka
+item.FlatRock.Claystone.name=Savikiven Murikka
+item.FlatRock.Conglomerate.name=Konglomeraatti Murikka
+item.FlatRock.Dacite.name=Dasiitti Murikka
+item.FlatRock.Diorite.name=Dioriitti Murikka
+item.FlatRock.Dolomite.name=Dolomiitti Murikka
+item.FlatRock.Gabbro.name=Gabro Murikka
+item.FlatRock.Gneiss.name=Gneissi Murikka
+item.FlatRock.Granite.name=Graniitti Murikka
+item.FlatRock.Limestone.name=Kalkkikiven Murikka
+item.FlatRock.Marble.name=Marmori Murikka
+item.FlatRock.Phyllite.name=Fylliitti Murikka
+item.FlatRock.Quartzite.name=Kvartsiitti Murikka
+item.FlatRock.Rhyolite.name=Rioliitti Murikka
+item.FlatRock.Rock Salt.name=Vuorisuolakiven Murikka
+item.FlatRock.Schist.name=Liuske Murikka
+item.FlatRock.Shale.name=Liuskakiven Murikka
+item.FlatRock.Slate=Saviliuske Murikka
+
+#== Stone Blocks ==
+tile.WallCobble.Andesite.name=Andesiitti Mukulakivi Seinä
+tile.WallCobble.Basalt.name=Basaltti Mukulakivi Seinä
+tile.WallCobble.Chalk.name=Kalkki Mukulakivi Seinä
+tile.WallCobble.Chert.name=Pii Mukulakivi Seinä
+tile.WallCobble.Claystone.name=Savi Mukulakivi Seinä
+tile.WallCobble.Conglomerate.name=Konglomeraatti Mukulakivi Seinä
+tile.WallCobble.Dacite.name=Dasiitti Mukulakivi Seinä
+tile.WallCobble.Diorite.name=Dioriitti Mukulakivi Seinä
+tile.WallCobble.Dolomite.name=Dolomiitti Mukulakivi Seinä
+tile.WallCobble.Gabbro.name=Gabro Mukulakivi Seinä
+tile.WallCobble.Gneiss.name=Gneissi Mukulakivi Seinä
+tile.WallCobble.Granite.name=Graniitti Mukulakivi Seinä
+tile.WallCobble.Limestone.name=Kalkki Mukulakivi Seinä
+tile.WallCobble.Marble.name=Marmori Mukulakivi Seinä
+tile.WallCobble.Phyllite.name=Fylliitti Mukulakivi Seinä
+tile.WallCobble.Quartzite.name=Kvartsiitti Mukulakivi Seinä
+tile.WallCobble.Rhyolite.name=Rioliitti Mukulakivi Seinä
+tile.WallCobble.Rock Salt.name=Vuorisuola Mukulakivi Seinä
+tile.WallCobble.Schist.name=Liuske Mukulakivi Seinä
+tile.WallCobble.Shale.name=Liuska Mukulakivi Seinä
+tile.WallCobble.Slate.name=Saviliuske Mukulakivi Seinä
+
+tile.WallRaw.Andesite.name=Andesiitti Seinä
+tile.WallRaw.Basalt.name=Basaltti Seinä
+tile.WallRaw.Chalk.name=Kalkki Seinä
+tile.WallRaw.Chert.name=Piikivi Seinä
+tile.WallRaw.Claystone.name=Savikivi Seinä
+tile.WallRaw.Conglomerate.name=Konglomeraatti Seinä
+tile.WallRaw.Dacite.name=Dasiitti Seinä
+tile.WallRaw.Diorite.name=Dioriitti Seinä
+tile.WallRaw.Dolomite.name=Dolomiitti Seinä
+tile.WallRaw.Gabbro.name=Gabro Seinä
+tile.WallRaw.Gneiss.name=Gneissi Seinä
+tile.WallRaw.Granite.name=Graniitti Seinä
+tile.WallRaw.Limestone.name=Kalkkikivi Seinä
+tile.WallRaw.Marble.name=Marmori Seinä
+tile.WallRaw.Phyllite.name=Fylliitti Seinä
+tile.WallRaw.Quartzite.name=Kvartsiitti Seinä
+tile.WallRaw.Rhyolite.name=Rioliitti Seinä
+tile.WallRaw.Rock Salt.name=Vuorisuolakivi Seinä
+tile.WallRaw.Schist.name=Liuske Seinä
+tile.WallRaw.Shale.name=Liuskakivi Seinä
+tile.WallRaw.Slate.name=Saviliuske Seinä
+
+tile.WallBrick.Andesite.name=Andesiitti Tiiliseinä
+tile.WallBrick.Basalt.name=Basaltti Tiiliseinä
+tile.WallBrick.Chalk.name=Kalkki Tiiliseinä
+tile.WallBrick.Chert.name=Piikivi Tiiliseinä
+tile.WallBrick.Claystone.name=Savikivi Tiiliseinä
+tile.WallBrick.Conglomerate.name=Konglomeraatti Tiiliseinä
+tile.WallBrick.Dacite.name=Dasiitti Tiiliseinä
+tile.WallBrick.Diorite.name=Dioriitti Tiiliseinä
+tile.WallBrick.Dolomite.name=Dolomiitti Tiiliseinä
+tile.WallBrick.Gabbro.name=Gabro Tiiliseinä
+tile.WallBrick.Gneiss.name=Gneissi Tiiliseinä
+tile.WallBrick.Granite.name=Graniitti Tiiliseinä
+tile.WallBrick.Limestone.name=Kalkkikivi Tiiliseinä
+tile.WallBrick.Marble.name=Marmori Tiiliseinä
+tile.WallBrick.Phyllite.name=Fylliitti Tiiliseinä
+tile.WallBrick.Quartzite.name=Kvartsiitti Tiiliseinä
+tile.WallBrick.Rhyolite.name=Rioliitti Tiiliseinä
+tile.WallBrick.Rock Salt.name=Vuorisuolakivi Tiiliseinä
+tile.WallBrick.Schist.name=Liuske Tiiliseinä
+tile.WallBrick.Shale.name=Liuskakivi Tiiliseinä
+tile.WallBrick.Slate.name=Saviliuske Tiiliseinä
+
+tile.WallSmooth.Andesite.name=Andesiitti Sileä Seinä
+tile.WallSmooth.Basalt.name=Basaltti Sileä Seinä
+tile.WallSmooth.Chalk.name=Kalkki Sileä Seinä
+tile.WallSmooth.Chert.name=Piikivi Sileä Seinä
+tile.WallSmooth.Claystone.name=Savikivi Sileä Seinä
+tile.WallSmooth.Conglomerate.name=Konglomeraatti Sileä Seinä
+tile.WallSmooth.Dacite.name=Dasiitti Sileä Seinä
+tile.WallSmooth.Diorite.name=Dioriitti Sileä Seinä
+tile.WallSmooth.Dolomite.name=Dolomiitti Sileä Seinä
+tile.WallSmooth.Gabbro.name=Gabro Sileä Seinä
+tile.WallSmooth.Gneiss.name=Gneissi Sileä Seinä
+tile.WallSmooth.Granite.name=Graniitti Sileä Seinä
+tile.WallSmooth.Limestone.name=Kalkkikivi Sileä Seinä
+tile.WallSmooth.Marble.name=Marmori Sileä Seinä
+tile.WallSmooth.Phyllite.name=Fylliitti Sileä Seinä
+tile.WallSmooth.Quartzite.name=Kvartsiitti Sileä Seinä
+tile.WallSmooth.Rhyolite.name=Rioliitti Sileä Seinä
+tile.WallSmooth.Rock Salt.name=Vuorisuolakivi Sileä Seinä
+tile.WallSmooth.Schist.name=Liuske Sileä Seinä
+tile.WallSmooth.Shale.name=Liuskakivi Sileä Seinä
+tile.WallSmooth.Slate.name=Saviliuske Sileä Seinä
+
+tile.IgExRock.Andesite.name=Andesiitti
+tile.IgExRock.Basalt.name=Basaltti
+tile.SedRock.Chalk.name=Kalkki
+tile.SedRock.Chert.name=Piikivi
+tile.SedRock.Claystone.name=Savikivi
+tile.SedRock.Conglomerate.name=Konglomeraatti
+tile.IgExRock.Dacite.name=Dasiitti
+tile.IgInRock.Diorite.name=Dioriitti
+tile.SedRock.Dolomite.name=Dolomiitti
+tile.IgInRock.Gabbro.name=Gabro
+tile.MMRock.Gneiss.name=Gneissi
+tile.IgInRock.Granite.name=Graniitti
+tile.SedRock.Limestone.name=Kalkkikivi
+tile.MMRock.Marble.name=Marmori
+tile.MMRock.Phyllite.name=Fylliitti
+tile.MMRock.Quartzite.name=Kvartsiitti
+tile.IgExRock.Rhyolite.name=Rioliitti
+tile.SedRock.Rock Salt.name=Vuorisuolakivi
+tile.MMRock.Schist.name=Liuske
+tile.SedRock.Shale.name=Liuskakivi
+tile.MMRock.Slate.name=Saviliuske
+
+tile.IgExRockCobble.Andesite.name=Andesiitti Mukulakivi
+tile.IgExRockCobble.Basalt.name=Basaltti Mukulakivi
+tile.SedRockCobble.Chalk.name=Kalkki Mukulakivi
+tile.SedRockCobble.Chert.name=Pii Mukulakivi
+tile.SedRockCobble.Claystone.name=Savi Mukulakivi
+tile.SedRockCobble.Conglomerate.name=Konglomeraatti Mukulakivi
+tile.IgExRockCobble.Dacite.name=Dasiitti Mukulakivi
+tile.IgInRockCobble.Diorite.name=Dioriitti Mukulakivi
+tile.SedRockCobble.Dolomite.name=Dolomiitti Mukulakivi
+tile.IgInRockCobble.Gabbro.name=Gabro Mukulakivi
+tile.MMRockCobble.Gneiss.name=Gneissi Mukulakivi
+tile.IgInRockCobble.Granite.name=Graniitti Mukulakivi
+tile.SedRockCobble.Limestone.name=Kalkki Mukulakivi
+tile.MMRockCobble.Marble.name=Marmori Mukulakivi
+tile.MMRockCobble.Phyllite.name=Fylliitti Mukulakivi
+tile.MMRockCobble.Quartzite.name=Kvartsiitti Mukulakivi
+tile.IgExRockCobble.Rhyolite.name=Rioliitti Mukulakivi
+tile.SedRockCobble.Rock Salt.name=Vuorisuola Mukulakivi
+tile.MMRockCobble.Schist.name=Liuske Mukulakivi
+tile.SedRockCobble.Shale.name=Liuska Mukulakivi
+tile.MMRockCobble.Slate.name=Saviliuske Mukulakivi
+
+tile.IgExRockSmooth.Andesite.name=Sileä Andesiitti
+tile.IgExRockSmooth.Basalt.name=Sileä Basaltti
+tile.SedRockSmooth.Chalk.name=Sileä Kalkki
+tile.SedRockSmooth.Chert.name=Sileä Piikivi
+tile.SedRockSmooth.Claystone.name=Sileä Savikivi
+tile.SedRockSmooth.Conglomerate.name=Sileä Konglomeraatti
+tile.IgExRockSmooth.Dacite.name=Sileä Dasiitti
+tile.IgInRockSmooth.Diorite.name=Sileä Dioriitti
+tile.SedRockSmooth.Dolomite.name=Sileä Dolomiitti
+tile.IgInRockSmooth.Gabbro.name=Sileä Gabro
+tile.MMRockSmooth.Gneiss.name=Sileä Gneissi
+tile.IgInRockSmooth.Granite.name=Sileä Graniitti
+tile.SedRockSmooth.Limestone.name=Sileä Kalkkikivi
+tile.MMRockSmooth.Marble.name=Sileä Marmori
+tile.MMRockSmooth.Phyllite.name=Sileä Fylliitti
+tile.MMRockSmooth.Quartzite.name=Sileä Kvartsiitti
+tile.IgExRockSmooth.Rhyolite.name=Sileä Rioliitti
+tile.SedRockSmooth.Rock Salt.name=Sileä Vuorisuolakivi
+tile.MMRockSmooth.Schist.name=Sileä Liuske
+tile.SedRockSmooth.Shale.name=Sileä Liuskakivi
+tile.MMRockSmooth.Slate.name=Sileä Saviliuske
+
+tile.IgExRockBrick.Andesite.name=Andesiitti Tiiliä
+tile.IgExRockBrick.Basalt.name=Basaltti Tiiliä
+tile.SedRockBrick.Chalk.name=Kalkki Tiiliä
+tile.SedRockBrick.Chert.name=Piikivi Tiiliä
+tile.SedRockBrick.Claystone.name=Savikivi Tiiliä
+tile.SedRockBrick.Conglomerate.name=Konglomeraatti Tiiliä
+tile.IgExRockBrick.Dacite.name=Dasiitti Tiiliä
+tile.IgInRockBrick.Diorite.name=Dioriitti Tiiliä
+tile.SedRockBrick.Dolomite.name=Dolomiitti Tiiliä
+tile.IgInRockBrick.Gabbro.name=Gabro Tiiliä
+tile.MMRockBrick.Gneiss.name=Gneissi Tiiliä
+tile.IgInRockBrick.Granite.name=Graniitti Tiiliä
+tile.SedRockBrick.Limestone.name=Kalkkikivi Tiiliä
+tile.MMRockBrick.Marble.name=Marmori Tiiliä
+tile.MMRockBrick.Phyllite.name=Fylliitti Tiiliä
+tile.MMRockBrick.Quartzite.name=Kvartsiitti Tiiliä
+tile.IgExRockBrick.Rhyolite.name=Rioliitti Tiiliä
+tile.SedRockBrick.Rock Salt.name=Vuorisuolakivi Tiiliä
+tile.MMRockBrick.Schist.name=Liuske Tiiliä
+tile.SedRockBrick.Shale.name=Liuskakivi Tiiliä
+tile.MMRockBrick.Slate.name=Saviliuske Tiiliä
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Bituminous Coal.name=Bitumihiili
+item.Ore.Borax.name=Booraksi
+item.Ore.Cinnabar.name=Sinooperi
+item.Ore.Cryolite.name=Kryoliitti
+item.Ore.Graphite.name=Grafiitti
+item.Ore.Gypsum.name=Kipsi
+item.Ore.Jet.name=Jetti
+item.Ore.Kaolinite.name=Kaoliniitti
+item.Ore.Kimberlite.name=Kimberliitti
+item.Ore.Lapis Lazuli.name=Lapis Lazuli
+item.Ore.Lignite.name=Ligniitti
+item.Ore.Microcline.name=Mikrokliini
+item.Ore.Olivine.name=Oliviini
+item.Ore.Petrified Wood.name=Kivettynyt Puu
+item.Ore.Pitchblende.name=Pikivälke
+item.Ore.Saltpeter.name=Salpietari
+item.Ore.Satinspar.name=Satinspar
+item.Ore.Selenite.name=Seleniitti
+item.Ore.Serpentine.name=Serpentiini
+item.Ore.Sulfur.name=Rikki
+item.Ore.Sylvite.name=Sylviitti
+
+item.Ore.Bismuthinite.name=Vismutiniitti
+item.Ore.Cassiterite.name=Kassiteriitti
+item.Ore.Galena.name=Galena
+item.Ore.Garnierite.name=Garneriitti
+item.Ore.Hematite.name=Hematiitti
+item.Ore.Limonite.name=Limoniitti
+item.Ore.Magnetite.name=Magnetiitti
+item.Ore.Malachite.name=Malakiitti
+item.Ore.Native Copper.name=Luonnonkupari
+item.Ore.Native Gold.name=Luonnonkulta
+item.Ore.Native Platinum.name=Luonnoplatina
+item.Ore.Native Silver.name=Luonnonhopea
+item.Ore.Sphalerite.name=Sphaleriitti
+item.Ore.Tetrahedrite.name=Tetrahedriitti
+
+item.Ore.Rich Bismuthinite.name=Rikas Vismutiniitti
+item.Ore.Rich Cassiterite.name=Rikas Kassiteriitti
+item.Ore.Rich Galena.name=Rikas Galena
+item.Ore.Rich Garnierite.name=Rikas Garneriitti
+item.Ore.Rich Hematite.name=Rikas Hematiitti
+item.Ore.Rich Limonite.name=Rikas Limoniitti
+item.Ore.Rich Magnetite.name=Rikas Magnetiitti
+item.Ore.Rich Malachite.name=Rikas Malakiitti
+item.Ore.Rich Native Copper.name=Rikas Luonnonkupari
+item.Ore.Rich Native Gold.name=Rikas Luonnonkulta
+item.Ore.Rich Native Platinum.name=Rikas Luonnoplatina
+item.Ore.Rich Native Silver.name=Rikas Luonnonhopea
+item.Ore.Rich Sphalerite.name=Rikas Sphaleriitti
+item.Ore.Rich Tetrahedrite.name=Rikas Tetrahedriitti
+
+item.Ore.Poor Bismuthinite.name=Köyhä Vismuttimalmi
+item.Ore.Poor Cassiterite.name=Köyhä Kassiteriitti
+item.Ore.Poor Galena.name=Köyhä Galena
+item.Ore.Poor Garnierite.name=Köyhä Garneriitti
+item.Ore.Poor Hematite.name=Köyhä Hematiitti
+item.Ore.Poor Limonite.name=Köyhä Limoniitti
+item.Ore.Poor Magnetite.name=Köyhä Magnetiitti
+item.Ore.Poor Malachite.name=Köyhä Malakiitti
+item.Ore.Poor Native Copper.name=Köyhä Luonnonkupari
+item.Ore.Poor Native Gold.name=Köyhä Luonnonkulta
+item.Ore.Poor Native Platinum.name=Köyhä Luonnoplatina
+item.Ore.Poor Native Silver.name=Köyhä Luonnonhopea
+item.Ore.Poor Sphalerite.name=Köyhä Sphaleriitti
+item.Ore.Poor Tetrahedrite.name=Köyhä Tetrahedriitti
+
+item.Small Ore.Bismuthinite.name=Vismutiniitti Kimpale
+item.Small Ore.Cassiterite.name=Kassiteriitti Kimpale
+item.Small Ore.Galena.name=Galena Kimpale
+item.Small Ore.Garnierite.name=Garneriitti Kimpale
+item.Small Ore.Hematite.name=Hematiitti Kimpale
+item.Small Ore.Limonite.name=Limoniitti Kimpale
+item.Small Ore.Magnetite.name=Magnetiitti Kimpale
+item.Small Ore.Malachite.name=Malakiitti Kimpale
+item.Small Ore.Native Copper.name=Luonnonkupari Hippu
+item.Small Ore.Native Gold.name=Luonnonkulta Hippu
+item.Small Ore.Native Platinum.name=Luonnoplatina Hippu
+item.Small Ore.Native Silver.name=Luonnonhopea Hippu
+item.Small Ore.Sphalerite.name=Sphaleriitti Kimpale
+item.Small Ore.Tetrahedrite.name=Tetrahedriitti Kimpale
+
+#== Ore Blocks ==
+tile.Ore.Bituminous Coal.name=Bitumihiili
+tile.Ore.Borax.name=Booraksi
+tile.Ore.Cinnabar.name=Sinooperi
+tile.Ore.Cryolite.name=Kryoliitti
+tile.Ore.Graphite.name=Grafiitti
+tile.Ore.Gypsum.name=Kipsi
+tile.Ore.Jet.name=Jetti
+tile.Ore.Kaolinite.name=Kaoliniitti
+tile.Ore.Kimberlite.name=Kimberliitti
+tile.Ore.Lapis Lazuli.name=Lapis Lazuli
+tile.Ore.Lignite.name=Ligniitti
+tile.Ore.Microcline.name=Mikrokliini
+tile.Ore.Olivine.name=Oliviini
+tile.Ore.Petrified Wood.name=Kivettynyt Puu
+tile.Ore.Pitchblende.name=Pikivälke
+tile.Ore.Saltpeter.name=Salpietari
+tile.Ore.Satinspar.name=Satinspar
+tile.Ore.Selenite.name=Seleniitti
+tile.Ore.Serpentine.name=Serpentiini
+tile.Ore.Sulfur.name=Rikki
+tile.Ore.Sylvite.name=Sylviitti
+
+tile.Ore.Bismuthinite.name=Vismutiniitti
+tile.Ore.Cassiterite.name=Kassiteriitti
+tile.Ore.Galena.name=Galena
+tile.Ore.Garnierite.name=Garneriitti
+tile.Ore.Hematite.name=Hematiitti
+tile.Ore.Limonite.name=Limoniitti
+tile.Ore.Magnetite.name=Magnetiitti
+tile.Ore.Malachite.name=Malakiitti
+tile.Ore.Native Copper.name=Luonnonkupari
+tile.Ore.Native Gold.name=Luonnonkulta
+tile.Ore.Native Platinum.name=Luonnoplatina
+tile.Ore.Native Silver.name=Luonnonhopea
+tile.Ore.Sphalerite.name=Sphaleriitti
+tile.Ore.Tetrahedrite.name=Tetrahedriitti
+
+#========
+#= Wood =
+#========
+#== Wood Items ==
+item.Log.Acacia.name=
+item.Log.Ash.name=Saarni Pölkky
+item.Log.Aspen.name=Haapa Pölkky
+item.Log.Birch.name=Koivu Pölkky
+item.Log.Chestnut.name=Kastanja Pölkky
+item.Log.Douglas Fir.name=Jalokuusi Pölkky
+item.Log.Hickory.name=Hikkori Pölkky
+item.Log.Kapok.name=Kapokpölkky
+item.Log.Maple.name=Vaahtera Pölkky
+item.Log.Oak.name=Tammi Pölkky
+item.Log.Pine.name=Mänty Pölkky
+item.Log.Sequoia.name=Punapuu Pölkky
+item.Log.Spruce.name=Kuusi Pölkky
+item.Log.Sycamore.name=Vuorivaahtera Pölkky
+item.Log.White Cedar.name=Tuija Pölkky
+item.Log.White Elm.name=Jalava Pölkky
+item.Log.Willow.name=Paju Pölkky
+
+item.SinglePlank.Acacia.name=
+item.SinglePlank.Ash.name=Saarni Lankku
+item.SinglePlank.Aspen.name=Haapa Lankku
+item.SinglePlank.Birch.name=Koivu Lankku
+item.SinglePlank.Chestnut.name=Kastanja Lankku
+item.SinglePlank.Douglas Fir.name=Jalokuusi Lankku
+item.SinglePlank.Hickory.name=Hikkori Lankku
+item.SinglePlank.Kapok.name=Kapok Lankku
+item.SinglePlank.Maple.name=Vaahtera Lankku
+item.SinglePlank.Oak.name=Tammi Lankku
+item.SinglePlank.Pine.name=Mänty Lankku
+item.SinglePlank.Sequoia.name=Punapuu Lankku
+item.SinglePlank.Spruce.name=Kuusi Lankku
+item.SinglePlank.Sycamore.name=Vuorivaahtera Lankku
+item.SinglePlank.White Cedar.name=Tuija Lankku
+item.SinglePlank.White Elm.name=Jalava Lankku
+item.SinglePlank.Willow.name=Paju Lankku
+
+item.Acacia Door.name=
+item.Ash Door.name=Saarni Ovi
+item.Aspen Door.name=Haapa Ovi
+item.Birch Door.name=Koivu Ovi
+item.Chestnut Door.name=Kastanja Ovi
+item.Douglas Fir Door.name=Jalokuusi Ovi
+item.Hickory Door.name=Hikkori Ovi
+item.Kapok Door.name=Kapok Tvi
+item.Maple Door.name=Vaahtera Ovi
+item.Oak Door.name=Tammi Ovi
+item.Pine Door.name=Mänty Ovi
+item.Sequoia Door.name=Punapuu Ovi
+item.Spruce Door.name=Kuusi Ovi
+item.Sycamore Door.name=Vuorivaahtera Ovi
+item.White Cedar Door.name=Tuija Ovi
+item.White Elm Door.name=Jalava Ovi
+item.Willow Door.name=Paju Ovi
+
+item.Barrel.Acacia.name=
+item.Barrel.Ash.name=Saarni Tynnyri
+item.Barrel.Aspen.name=Haapa Tynnyri
+item.Barrel.Birch.name=Koivu Tynnyri
+item.Barrel.Chestnut.name=Kastanja Tynnyri
+item.Barrel.Douglas Fir.name=Jalokuusi Tynnyri
+item.Barrel.Hickory.name=Hikkori Tynnyri
+item.Barrel.Kapok.name=Kapok Tynnyri
+item.Barrel.Maple.name=Vaahtera Tynnyri
+item.Barrel.Oak.name=Tammi Tynnyri
+item.Barrel.Pine.name=Mänty Tynnyri
+item.Barrel.Sequoia.name=Punapuu Tynnyri
+item.Barrel.Spruce.name=Kuusi Tynnyri
+item.Barrel.Sycamore.name=Vuorivaahtera Tynnyri
+item.Barrel.White Cedar.name=Tuija Tynnyri
+item.Barrel.White Elm.name=Jalava Tynnyri
+item.Barrel.Willow.name=Paju Tynnyri
+
+item.Loom.Acacia.name=
+item.Loom.Ash.name=
+item.Loom.Aspen.name=
+item.Loom.Birch.name=
+item.Loom.Chestnut.name=
+item.Loom.Douglas Fir.name=
+item.Loom.Hickory.name=
+item.Loom.Kapok.name=
+item.Loom.Maple.name=
+item.Loom.Oak.name=
+item.Loom.Pine.name=
+item.Loom.Sequoia.name=
+item.Loom.Spruce.name=
+item.Loom.Sycamore.name=
+item.Loom.White Cedar.name=
+item.Loom.White Elm.name=
+item.Loom.Willow.name=
+
+#== Wood Blocks ==
+tile.log.Acacia.name=
+tile.log2.Acacia.name=
+tile.log.Ash.name=Saarni Pölkky
+tile.log.Aspen.name=Haapa Pölkky
+tile.log.Birch.name=Koivu Pölkky
+tile.log.Chestnut.name=Kastanja Pölkky
+tile.log.Douglas Fir.name=Jalokuusi Pölkky
+tile.log.Hickory.name=Hikkori Pölkky
+tile.log.Kapok.name=Kapokpölkky
+tile.log.Maple.name=Vaahtera Pölkky
+tile.log.Oak.name=Tammi Pölkky
+tile.log.Pine.name=Mänty Pölkky
+tile.log.Sequoia.name=Punapuu Pölkky
+tile.log.Spruce.name=Kuusi Pölkky
+tile.log.Sycamore.name=Vuorivaahtera Pölkky
+tile.log.White Cedar.name=Tuija Pölkky
+tile.log.White Elm.name=Jalava Pölkky
+tile.log.Willow.name=Paju Pölkky
+
+tile.WoodVert2.Acacia.name=
+tile.WoodVert.Ash.name=Saarni Pölkky
+tile.WoodVert.Aspen.name=Haapa Pölkky
+tile.WoodVert.Birch.name=Koivu Pölkky
+tile.WoodVert.Chestnut.name=Kastanja Pölkky
+tile.WoodVert.Douglas Fir.name=Jalokuusi Pölkky
+tile.WoodVert.Hickory.name=Hikkori Pölkky
+tile.WoodVert.Kapok.name=Kapokpölkky
+tile.WoodVert.Maple.name=Vaahtera Pölkky
+tile.WoodVert.Oak.name=Tammi Pölkky
+tile.WoodVert.Pine.name=Mänty Pölkky
+tile.WoodVert.Sequoia.name=Punapuu Pölkky
+tile.WoodVert.Spruce.name=Kuusi Pölkky
+tile.WoodVert.Sycamore.name=Vuorivaahtera Pölkky
+tile.WoodVert.White Cedar.name=Tuija Pölkky
+tile.WoodVert.White Elm.name=Jalava Pölkky
+tile.WoodVert.Willow.name=Paju Pölkky
+
+tile.WoodHoriz3.Acacia.name=
+tile.WoodHoriz.Ash.name=Saarni Pölkky
+tile.WoodHoriz.Aspen.name=Haapa Pölkky
+tile.WoodHoriz.Birch.name=Koivu Pölkky
+tile.WoodHoriz.Chestnut.name=Kastanja Pölkky
+tile.WoodHoriz.Douglas Fir.name=Jalokuusi Pölkky
+tile.WoodHoriz.Hickory.name=Hikkori Pölkky
+tile.WoodHoriz2.Kapok.name=Kapokpölkky
+tile.WoodHoriz.Maple.name=Vaahtera Pölkky
+tile.WoodHoriz.Oak.name=Tammi Pölkky
+tile.WoodHoriz2.Pine.name=Mänty Pölkky
+tile.WoodHoriz2.Sequoia.name=Punapuu Pölkky
+tile.WoodHoriz2.Spruce.name=Kuusi Pölkky
+tile.WoodHoriz2.Sycamore.name=Vuorivaahtera Pölkky
+tile.WoodHoriz2.White Cedar.name=Tuija Pölkky
+tile.WoodHoriz2.White Elm.name=Jalava Pölkky
+tile.WoodHoriz2.Willow.name=Paju Pölkky
+
+tile.sapling2.Acacia.name=
+tile.sapling.Ash.name=Saarni Taimi
+tile.sapling.Aspen.name=Haapa Taimi
+tile.sapling.Birch.name=Koivu Taimi
+tile.sapling.Chestnut.name=Kastanja Taimi
+tile.sapling.Douglas Fir.name=Jalokuusi Taimi
+tile.sapling.Hickory.name=Hikkori Taimi
+tile.sapling.Kapok.name=Kapok Taimi
+tile.sapling.Maple.name=Vaahtera Taimi
+tile.sapling.Oak.name=Tammi Taimi
+tile.sapling.Pine.name=Mänty Taimi
+tile.sapling.Sequoia.name=Punapuu Taimi
+tile.sapling.Spruce.name=Kuusi Taimi
+tile.sapling.Sycamore.name=Vuorivaahtera Taimi
+tile.sapling.White Cedar.name=Tuija Taimi
+tile.sapling.White Elm.name=Jalava Taimi
+tile.sapling.Willow.name=Paju Taimi
+
+tile.leaves.Acacia.name=
+tile.leaves.Ash.name=
+tile.leaves.Aspen.name=
+tile.leaves.Birch.name=
+tile.leaves.Chestnut.name=
+tile.leaves.Douglas Fir.name=
+tile.leaves.Hickory.name=
+tile.leaves.Kapok.name=
+tile.leaves.Maple.name=
+tile.leaves.Oak.name=
+tile.leaves.Pine.name=
+tile.leaves.Sequoia.name=
+tile.leaves.Spruce.name=
+tile.leaves.Sycamore.name=
+tile.leaves.White Cedar.name=
+tile.leaves.White Elm.name=
+tile.leaves.Willow.name=
+
+tile.wood2.Acacia.name=
+tile.wood.Ash.name=Saarni Lankkuja
+tile.wood.Aspen.name=Haapa Lankkuja
+tile.wood.Birch.name=Koivu Lankkuja
+tile.wood.Chestnut.name=Kastanja Lankkuja
+tile.wood.Douglas Fir.name=Jalokuusi Lankkuja
+tile.wood.Hickory.name=Hikkori Lankkuja
+tile.wood.Kapok.name=Kapok Lankkuja
+tile.wood.Maple.name=Vaahtera Lankkuja
+tile.wood.Oak.name=Tammi Lankkuja
+tile.wood.Pine.name=Mänty Lankkuja
+tile.wood.Sequoia.name=Punapuu Lankkuja
+tile.wood.Spruce.name=Kuusi Lankkuja
+tile.wood.Sycamore.name=Vuorivaahtera Lankkuja
+tile.wood.White Cedar.name=Tuija Lankkuja
+tile.wood.White Elm.name=Jalava Lankkuja
+tile.wood.Willow.name=Paju Lankkuja
+
+tile.Door Acacia.name=
+tile.Door Ash.name=Saarni Ovi
+tile.Door Aspen.name=Haapa Ovi
+tile.Door Birch.name=Koivu Ovi
+tile.Door Chestnut.name=Kastanja Ovi
+tile.Door Douglas Fir.name=Jalokuusi Ovi
+tile.Door Hickory.name=Hikkori Ovi
+tile.Door Kapok.name=Kapok Tvi
+tile.Door Maple.name=Vaahtera Ovi
+tile.Door Oak.name=Tammi Ovi
+tile.Door Pine.name=Mänty Ovi
+tile.Door Sequoia.name=Punapuu Ovi
+tile.Door Spruce.name=Kuusi Ovi
+tile.Door Sycamore.name=Vuorivaahtera Ovi
+tile.Door White Cedar.name=Tuija Ovi
+tile.Door White Elm.name=Jalava Ovi
+tile.Door Willow.name=Paju Ovi
+
+tile.Barrel.Acacia.name=
+tile.Barrel.Ash.name=Saarni Tynnyri
+tile.Barrel.Aspen.name=Haapa Tynnyri
+tile.Barrel.Birch.name=Koivu Tynnyri
+tile.Barrel.Chestnut.name=Kastanja Tynnyri
+tile.Barrel.Douglas Fir.name=Jalokuusi Tynnyri
+tile.Barrel.Hickory.name=Hikkori Tynnyri
+tile.Barrel.Kapok.name=Kapok Tynnyri
+tile.Barrel.Maple.name=Vaahtera Tynnyri
+tile.Barrel.Oak.name=Tammi Tynnyri
+tile.Barrel.Pine.name=Mänty Tynnyri
+tile.Barrel.Sequoia.name=Punapuu Tynnyri
+tile.Barrel.Spruce.name=Kuusi Tynnyri
+tile.Barrel.Sycamore.name=Vuorivaahtera Tynnyri
+tile.Barrel.White Cedar.name=Tuija Tynnyri
+tile.Barrel.White Elm.name=Jalava Tynnyri
+tile.Barrel.Willow.name=Paju Tynnyri
+
+tile.Loom.Acacia.name=
+tile.Loom.Ash.name=
+tile.Loom.Aspen.name=
+tile.Loom.Birch.name=
+tile.Loom.Chestnut.name=
+tile.Loom.Douglas Fir.name=
+tile.Loom.Hickory.name=
+tile.Loom.Kapok.name=
+tile.Loom.Maple.name=
+tile.Loom.Oak.name=
+tile.Loom.Pine.name=
+tile.Loom.Sequoia.name=
+tile.Loom.Spruce.name=
+tile.Loom.Sycamore.name=
+tile.Loom.White Cedar.name=
+tile.Loom.White Elm.name=
+tile.Loom.Willow.name=
+
+tile.FenceTFC.Acacia.name=
+tile.FenceTFC.Ash.name=
+tile.FenceTFC.Aspen.name=
+tile.FenceTFC.Birch.name=
+tile.FenceTFC.Chestnut.name=
+tile.FenceTFC.Douglas Fir.name=
+tile.FenceTFC.Hickory.name=
+tile.FenceTFC.Kapok.name=
+tile.FenceTFC.Maple.name=
+tile.FenceTFC.Oak.name=
+tile.FenceTFC.Pine.name=
+tile.FenceTFC.Sequoia.name=
+tile.FenceTFC.Spruce.name=
+tile.FenceTFC.Sycamore.name=
+tile.FenceTFC.White Cedar.name=
+tile.FenceTFC.White Elm.name=
+tile.FenceTFC.Willow.name=
+
+tile.FenceGateTFC.Acacia.name=
+tile.FenceGateTFC.Ash.name=
+tile.FenceGateTFC.Aspen.name=
+tile.FenceGateTFC.Birch.name=
+tile.FenceGateTFC.Chestnut.name=
+tile.FenceGateTFC.Douglas Fir.name=
+tile.FenceGateTFC.Hickory.name=
+tile.FenceGateTFC.Kapok.name=
+tile.FenceGateTFC.Maple.name=
+tile.FenceGateTFC.Oak.name=
+tile.FenceGateTFC.Pine.name=
+tile.FenceGateTFC.Sequoia.name=
+tile.FenceGateTFC.Spruce.name=
+tile.FenceGateTFC.Sycamore.name=
+tile.FenceGateTFC.White Cedar.name=
+tile.FenceGateTFC.White Elm.name=
+tile.FenceGateTFC.Willow.name=
+
+tile.ArmourStand.Acacia.name=
+tile.ArmourStand.Ash.name=
+tile.ArmourStand.Aspen.name=
+tile.ArmourStand.Birch.name=
+tile.ArmourStand.Chestnut.name=
+tile.ArmourStand.Douglas Fir.name=
+tile.ArmourStand.Hickory.name=
+tile.ArmourStand.Kapok.name=
+tile.ArmourStand.Maple.name=
+tile.ArmourStand.Oak.name=
+tile.ArmourStand.Pine.name=
+tile.ArmourStand.Sequoia.name=
+tile.ArmourStand.Spruce.name=
+tile.ArmourStand.Sycamore.name=
+tile.ArmourStand.White Cedar.name=
+tile.ArmourStand.White Elm.name=
+tile.ArmourStand.Willow.name=
+
+tile.WoodSupportV2.Acacia.name=
+tile.WoodSupportV.Ash.name=
+tile.WoodSupportV.Aspen.name=
+tile.WoodSupportV.Birch.name=
+tile.WoodSupportV.Chestnut.name=
+tile.WoodSupportV.Douglas Fir.name=
+tile.WoodSupportV.Hickory.name=
+tile.WoodSupportV.Kapok.name=
+tile.WoodSupportV.Maple.name=
+tile.WoodSupportV.Oak.name=
+tile.WoodSupportV.Pine.name=
+tile.WoodSupportV.Sequoia.name=
+tile.WoodSupportV.Spruce.name=
+tile.WoodSupportV.Sycamore.name=
+tile.WoodSupportV.White Cedar.name=
+tile.WoodSupportV.White Elm.name=
+tile.WoodSupportV.Willow.name=
+
+tile.Toolrack.Acacia.name=
+tile.Toolrack.Ash.name=Saarni Työkaluteline
+tile.Toolrack.Aspen.name=Haapa Työkaluteline
+tile.Toolrack.Birch.name=Koivu Työkaluteline
+tile.Toolrack.Chestnut.name=Kastanja Työkaluteline
+tile.Toolrack.Douglas Fir.name=Jalokuusi Työkaluteline
+tile.Toolrack.Hickory.name=Hikkori Työkaluteline
+tile.Toolrack.Kapok.name=Kapok Työkaluteline
+tile.Toolrack.Maple.name=Vaahtera Työkaluteline
+tile.Toolrack.Oak.name=Tammi Työkaluteline
+tile.Toolrack.Pine.name=Mänty Työkaluteline
+tile.Toolrack.Sequoia.name=Punapuu Työkaluteline
+tile.Toolrack.Spruce.name=Kuusi Työkaluteline
+tile.Toolrack.Sycamore.name=Vuorivaahtera Työkaluteline
+tile.Toolrack.White Cedar.name=Tuija Työkaluteline
+tile.Toolrack.White Elm.name=Jalava Työkaluteline
+tile.Toolrack.Willow.name=Paju Työkaluteline
+
+#=======================
+#= Tools/Weapons/Armor =
+#=======================
+
+#== Stone Heads ==
+item.Stone Hammer Head.name=Kivinen Vasaranpää
+item.Stone Knife Blade.name=Kivinen Veitsenterä
+
+item.IgIn Stone Axe Head.name=Kivinen Kirveenterä
+item.IgIn Stone Chisel Head.name=Kivinen Taltanterä
+item.IgIn Stone Hoe Head.name=Kivinen Kuokanterä
+item.IgIn Stone Javelin Head.name=Kivinen Keihäänkärki
+item.IgIn Stone Shovel Head.name=Kivinen Lapionterä
+
+item.Sed Stone Axe Head.name=Kivinen Kirveenterä
+item.Sed Stone Chisel Head.name=Kivinen Taltanterä
+item.Sed Stone Hoe Head.name=Kivinen Kuokanterä
+item.Sed Stone Javelin Head.name=Kivinen Keihäänkärki
+item.Sed Stone Shovel Head.name=Kivinen Lapionterä
+
+item.IgEx Stone Axe Head.name=Kivinen Kirveenterä
+item.IgEx Stone Chisel Head.name=Kivinen Taltanterä
+item.IgEx Stone Hoe Head.name=Kivinen Kuokanterä
+item.IgEx Stone Javelin Head.name=Kivinen Keihäänkärki
+item.IgEx Stone Shovel Head.name=Kivinen Lapionterä
+
+item.MM Stone Axe Head.name=Kivinen Kirveenterä
+item.MM Stone Chisel Head.name=Kivinen Taltanterä
+item.MM Stone Hoe Head.name=Kivinen Kuokanterä
+item.MM Stone Javelin Head.name=Kivinen Keihäänkärki
+item.MM Stone Shovel Head.name=Kivinen Lapionterä
+
+#== Stone Tools ==
+item.Stone Axe.name=Kivinen Kirves
+item.IgIn Stone Axe.name=Kivinen Kirves
+item.Sed Stone Axe.name=Kivinen Kirves
+item.IgEx Stone Axe.name=Kivinen Kirves
+item.MM Stone Axe.name=Kivinen Kirves
+
+item.Stone Chisel.name=Kivinen Taltta
+
+item.Stone Hammer.name=Kivinen Vasara
+
+item.Stone Hoe.name=Kivinen Kuokka
+item.IgIn Stone Hoe.name=Kivinen Kuokka
+item.Sed Stone Hoe.name=Kivinen Kuokka
+item.IgEx Stone Hoe.name=Kivinen Kuokka
+item.MM Stone Hoe.name=Kivinen Kuokka
+
+item.Stone Javelin.name=Kivinen Keihäs
+item.IgIn Stone Javelin.name=Kivinen Keihäs
+item.Sed Stone Javelin.name=Kivinen Keihäs
+item.IgEx Stone Javelin.name=Kivinen Keihäs
+item.MM Stone Javelin.name=Kivinen Keihäs
+
+item.Stone Knife.name=Kivinen Veitsi
+
+item.Stone Shovel.name=Kivinen Lapio
+item.IgIn Stone Shovel.name=Kivinen Lapio
+item.Sed Stone Shovel.name=Kivinen Lapio
+item.IgEx Stone Shovel.name=Kivinen Lapio
+item.MM Stone Shovel.name=Kivinen Lapio
+
+#== Metal Heads ==
+#=== Axe Head ===
+item.Bismuth Bronze Axe Head.name=Vismuttipronssinen Kirveenterä
+item.Black Bronze Axe Head.name=Mustapronssinen Kirveenterä
+item.Black Steel Axe Head.name=Mustateräksinen Kirveenterä
+item.Blue Steel Axe Head.name=Siniteräksinen Kirveenterä
+item.Bronze Axe Head.name=Pronssinen Kirveenterä
+item.Copper Axe Head.name=Kuparinen Kirveenterä
+item.Red Steel Axe Head.name=Punateräksinen Kirveenterä
+item.Steel Axe Head.name=Teräksinen Kirveenterä
+item.Wrought Iron Axe Head.name=Takorautainen Kirveenterä
+
+#=== Chisel Head ===
+item.Bismuth Bronze Chisel Head.name=Vismuttipronssinen Taltanterä
+item.Black Bronze Chisel Head.name=Mustapronssinen Taltanterä
+item.Black Steel Chisel Head.name=Mustateräksinen Taltanterä
+item.Blue Steel Chisel Head.name=Siniteräksinen Taltanterä
+item.Bronze Chisel Head.name=Pronssinen Taltanterä
+item.Copper Chisel Head.name=Kuparinen Taltanterä
+item.Red Steel Chisel Head.name=Punateräksinen Taltanterä
+item.Steel Chisel Head.name=Teräksinen Taltanterä
+item.Wrought Iron Chisel Head.name=Takorautainen Taltanterä
+
+#=== Hammer Head ===
+item.Bismuth Bronze Hammer Head.name=Vismuttipronssinen Vasaranpää
+item.Black Bronze Hammer Head.name=Mustapronssinen Vasaranpää
+item.Black Steel Hammer Head.name=Mustateräksinen Vasaranpää
+item.Blue Steel Hammer Head.name=Siniteräksinen Vasaranpää
+item.Bronze Hammer Head.name=Pronssinen Vasaranpää
+item.Copper Hammer Head.name=Kuparinen Vasaranpää
+item.Red Steel Hammer Head.name=Punateräksinen Vasaranpää
+item.Steel Hammer Head.name=Teräksinen Vasaranpään
+item.Wrought Iron Hammer Head.name=Takorautainen Vasarnpää
+
+#=== Hoe Head ===
+item.Bismuth Bronze Hoe Head.name=Vismuttipronssinen Kuokanterä
+item.Black Bronze Hoe Head.name=Mustapronssinen Kuokanterä
+item.Black Steel Hoe Head.name=Mustateräksinen Kuokanterä
+item.Blue Steel Hoe Head.name=Siniteräksinen Kuokanterä
+item.Bronze Hoe Head.name=Pronssinen Kuokanterä
+item.Copper Hoe Head.name=Kuparinen Kuokanterä
+item.Red Steel Hoe Head.name=Punateräksinen Kuokanterä
+item.Steel Hoe Head.name=Teräksinen Kuokanterä
+item.Wrought Iron Hoe Head.name=Takorautainen Kuokanterä
+
+#=== Javelin Head ===
+item.Bismuth Bronze Javelin Head.name=Vismuttipronssinen Keihäänkärki
+item.Black Bronze Javelin Head.name=Mustapronssinen Keihäänkärki
+item.Black Steel Javelin Head.name=Mustateräksinen Keihäänkärki
+item.Blue Steel Javelin Head.name=Siniteräksinen Keihäänkärki
+item.Bronze Javelin Head.name=Pronssinen Keihäänkärki
+item.Copper Javelin Head.name=Kuparinen Keihäänkärki
+item.Red Steel Javelin Head.name=Punateräksinen Keihäänkärki
+item.Steel Javelin Head.name=Teräksinen Keihäänkärki
+item.Wrought Iron Javelin Head.name=Takorautainen Keihäänkärki
+
+#=== Knife Blade ===
+item.Bismuth Bronze Knife Blade.name=Vismuttipronssinen Veitsenterä
+item.Black Bronze Knife Blade.name=Mustapronssinen Veitsenterä
+item.Black Steel Knife Blade.name=Mustateräksinen Veitsenterä
+item.Blue Steel Knife Blade.name=Siniteräksinen Veitsenterä
+item.Bronze Knife Blade.name=Pronssinen Veitsenterä
+item.Copper Knife Blade.name=Kuparinen Veitsenterä
+item.Red Steel Knife Blade.name=Punateräksinen Veitsenterä
+item.Steel Knife Blade.name=Teräksinen Veitsenterä
+item.Wrought Iron Knife Blade.name=Takorautainen Veitsenterä
+
+#=== Mace Head ===
+item.Bismuth Bronze Mace Head.name=Vismuttipronssinen Nuijanpää
+item.Black Bronze Mace Head.name=Mustapronssinen Nuijanpää
+item.Black Steel Mace Head.name=Mustateräksinen Nuijanpää
+item.Blue Steel Mace Head.name=Siniteräksinen Nuijanpää
+item.Bronze Mace Head.name=Pronssinen Nuijanpää
+item.Copper Mace Head.name=Kuparinen Nuijanpää
+item.Red Steel Mace Head.name=Punateräksinen Nuijanpää
+item.Steel Mace Head.name=Teräksinen Nuijanpää
+item.Wrought Iron Mace Head.name=Takorautainen Nuijanpää
+
+#=== Pickaxe Head ===
+item.Bismuth Bronze Pick Head.name=Vismuttipronssinen Hakunkärki
+item.Black Bronze Pick Head.name=Mustapronssinen Hakunkärki
+item.Black Steel Pick Head.name=Mustateräksinen Hakunkärki
+item.Blue Steel Pick Head.name=Siniteräksinen Hakunkärki
+item.Bronze Pick Head.name=Pronssinen Hakunkärki
+item.Copper Pick Head.name=Kuparinen Hakunkärki
+item.Red Steel Pick Head.name=Punateräksinen Hakunkärki
+item.Steel Pick Head.name=Teräksinen Hakunkärki
+item.Wrought Iron Pick Head.name=Takorautainen Hakunkärki
+
+#=== Prospector's Pick Head ===
+item.Bismuth Bronze ProPick Head.name=Vismuttipronssinen Tutkimushakunkärki
+item.Black Bronze ProPick Head.name=Mustapronssinen Tutkimushakunkärki
+item.Black Steel ProPick Head.name=Mustateräksinen Tutkimushakunkärki
+item.Blue Steel ProPick Head.name=Siniteräksinen Tutkimushakunkärki
+item.Bronze ProPick Head.name=Pronssinen Tutkimushakunkärki
+item.Copper ProPick Head.name=Kuparinen Tutkimushakunkärki
+item.Red Steel ProPick Head.name=Punateräksinen Tutkimushakunkärki
+item.Steel ProPick Head.name=Teräksinen Tutkimushakunkärki
+item.Wrought Iron ProPick Head.name=Takorautainen Tutkimushakunkärki
+
+#=== Saw Blade ===
+item.Bismuth Bronze Saw Blade.name=Vismuttipronssinen Sahanterä
+item.Black Bronze Saw Blade.name=Mustapronssinen Sahanterä
+item.Black Steel Saw Blade.name=Mustateräksinen Sahanterä
+item.Blue Steel Saw Blade.name=Siniteräksinen Sahanterä
+item.Bronze Saw Blade.name=Pronssinen Sahanterä
+item.Copper Saw Blade.name=Kuparinen Sahanterä
+item.Red Steel Saw Blade.name=Punateräksinen Sahanterä
+item.Steel Saw Blade.name=Teräksinen Sahanterä
+item.Wrought Iron Saw Blade.name=Takorautainen Sahanterä
+
+#=== Scythe Blade ===
+item.Bismuth Bronze Scythe Blade.name=Vismuttipronssinen Viikatteenterä
+item.Black Bronze Scythe Blade.name=Mustapronssinen Viikatteenterä
+item.Black Steel Scythe Blade.name=Mustateräksinen Viikatteenterä
+item.Blue Steel Scythe Blade.name=Siniteräksinen Viikatteenterä
+item.Bronze Scythe Blade.name=Pronssinen Viikatteenterä
+item.Copper Scythe Blade.name=Kuparinen Viikatteenterä
+item.Red Steel Scythe Blade.name=Punateräksinen Viikatteenterä
+item.Steel Scythe Blade.name=Teräksinen Viikatteenterä
+item.Wrought Iron Scythe Blade.name=Takorautainen Viikatteenterä
+
+#=== Shovel Head ===
+item.Bismuth Bronze Shovel Head.name=Vismuttipronssinen Lapionterä
+item.Black Bronze Shovel Head.name=Mustapronssinen Lapionterä
+item.Black Steel Shovel Head.name=Mustateräksinen Lapionterä
+item.Blue Steel Shovel Head.name=Siniteräksinen Lapionterä
+item.Bronze Shovel Head.name=Pronssinen Lapionterä
+item.Copper Shovel Head.name=Kuparinen Lapionterä
+item.Red Steel Shovel Head.name=Punateräksinen Lapionterä
+item.Steel Shovel Head.name=Teräksinen Lapionterä
+item.Wrought Iron Shovel Head.name=Takorautainen Lapionterä
+
+#=== Sword Blade ===
+item.Bismuth Bronze Sword Blade.name=Vismuttipronssinen Miekanterä
+item.Black Bronze Sword Blade.name=Mustapronssinen Miekanterä
+item.Black Steel Sword Blade.name=Mustateräksinen Miekanterä
+item.Blue Steel Sword Blade.name=Siniteräksinen Miekanterä
+item.Bronze Sword Blade.name=Pronssinen Miekanterä
+item.Copper Sword Blade.name=Kuparinen Miekanterä
+item.Red Steel Sword Blade.name=Punateräksinen Miekanterä
+item.Steel Sword Blade.name=Teräksinen Miekanterä
+item.Wrought Iron Sword Blade.name=Takorautainen Miekanterä
+
+#== Metal Tools ==
+#=== Axe ===
+item.Bismuth Bronze Axe.name=Vismuttipronssinen Kirves
+item.Black Bronze Axe.name=Mustapronssinen Kirves
+item.Black Steel Axe.name=Mustateräksinen Kirves
+item.Blue Steel Axe.name=Siniteräksinen Kirves
+item.Bronze Axe.name=Pronssinen Kirves
+item.Copper Axe.name=Kuparinen Kirves
+item.Red Steel Axe.name=Punateräksinen Kirves
+item.Steel Axe.name=Teräksinen Kirves
+item.Wrought Iron Axe.name=Takorautainen Kirves
+
+#=== Chisel ===
+item.Bismuth Bronze Chisel.name=Vismuttipronssinen Taltta
+item.Black Bronze Chisel.name=Mustapronssinen Taltta
+item.Black Steel Chisel.name=Mustateräksinen Taltta
+item.Blue Steel Chisel.name=Siniteräksinen Taltta
+item.Bronze Chisel.name=Pronssinen Taltta
+item.Copper Chisel.name=Kuparinen Taltta
+item.Red Steel Chisel.name=Punateräksinen Taltta
+item.Steel Chisel.name=Teräksinen Taltta
+item.Wrought Iron Chisel.name=Takorautainen Taltta
+
+#=== Hammer ===
+item.Bismuth Bronze Hammer.name=Vismuttipronssinen Vasara
+item.Black Bronze Hammer.name=Mustapronssinen Vasara
+item.Black Steel Hammer.name=Mustateräksinen Vasara
+item.Blue Steel Hammer.name=Siniteräksinen Vasara
+item.Bronze Hammer.name=Pronssinen Vasara
+item.Copper Hammer.name=Kuparinen Vasara
+item.Red Steel Hammer.name=Punateräksinen Vasara
+item.Steel Hammer.name=Teräksinen Vasara
+item.Wrought Iron Hammer.name=Takorautainen Vasara
+
+#=== Hoe ===
+item.Bismuth Bronze Hoe.name=Vismuttipronssinen Kuokka
+item.Black Bronze Hoe.name=Mustapronssinen Kuokka
+item.Black Steel Hoe.name=Mustateräksinen Kuokka
+item.Blue Steel Hoe.name=Siniteräksinen Kuokka
+item.Bronze Hoe.name=Pronssinen Kuokka
+item.Copper Hoe.name=Kuparinen Kuokka
+item.Red Steel Hoe.name=Punateräksinen Kuokka
+item.Steel Hoe.name=Teräksinen Kuokka
+item.Wrought Iron Hoe.name=Takorautainen Kuokka
+
+#=== Javelin ===
+item.Bismuth Bronze Javelin.name=Vismuttipronssinen Keihäs
+item.Black Bronze Javelin.name=Mustapronssinen Keihäs
+item.Black Steel Javelin.name=Mustateräksinen Keihäs
+item.Blue Steel Javelin.name=Siniteräksinen Keihäs
+item.Bronze Javelin.name=Pronssinen Keihäs
+item.Copper Javelin.name=Kuparinen Keihäs
+item.Red Steel Javelin.name=Punateräksinen Keihäs
+item.Steel Javelin.name=Teräksinen Keihäs
+item.Wrought Iron Javelin.name=Takorautainen Keihäs
+
+#=== Knife ===
+item.Bismuth Bronze Knife.name=Vismuttipronssinen Veitsi
+item.Black Bronze Knife.name=Mustapronssinen Veitsi
+item.Black Steel Knife.name=Mustateräksinen Veitsi
+item.Blue Steel Knife.name=Siniteräksinen Veitsi
+item.Bronze Knife.name=Pronssinen Veitsi
+item.Copper Knife.name=Kuparinen Veitsi
+item.Red Steel Knife.name=Punateräksinen Veitsi
+item.Steel Knife.name=Teräksinen Veitsi
+item.Wrought Iron Knife.name=Takorautainen Veitsi
+
+#=== Mace ===
+item.Bismuth Bronze Mace.name=Vismuttipronssinen Nuija
+item.Black Bronze Mace.name=Mustapronssinen Nuija
+item.Black Steel Mace.name=Mustateräksinen Nuija
+item.Blue Steel Mace.name=Siniteräksinen Nuija
+item.Bronze Mace.name=Pronssinen Nuija
+item.Copper Mace.name=Kuparinen Nuija
+item.Red Steel Mace.name=Punateräksinen Nuija
+item.Steel Mace.name=Teräksinen Nuija
+item.Wrought Iron Mace.name=Takorautainen Nuija
+
+#=== Pickaxe ===
+item.Bismuth Bronze Pick.name=Vismuttipronssinen Hakku
+item.Black Bronze Pick.name=Mustapronssinen Hakku
+item.Black Steel Pick.name=Mustateräksinen Hakku
+item.Blue Steel Pick.name=Siniteräksinen Hakku
+item.Bronze Pick.name=Pronssinen Hakku
+item.Copper Pick.name=Kuparinen Hakku
+item.Red Steel Pick.name=Punateräksinen Hakku
+item.Steel Pick.name=Teräksinen Hakku
+item.Wrought Iron Pick.name=Takorautainen Hakku
+
+#=== Prospector's Pick ===
+item.Bismuth Bronze ProPick.name=Vismuttipronssinen Tutkimushakku
+item.Black Bronze ProPick.name=Mustapronssinen Tutkimushakku
+item.Black Steel ProPick.name=Mustateräksinen Tutkimushakku
+item.Blue Steel ProPick.name=Siniteräksinen Tutkimushakku
+item.Bronze ProPick.name=Pronssinen Tutkimushakku
+item.Copper ProPick.name=Kuparinen Tutkimushakku
+item.Red Steel ProPick.name=Punateräksinen Tutkimushakku
+item.Steel ProPick.name=Teräksinen Tutkimushakku
+item.Wrought Iron ProPick.name=Takorautainen Tutkimushakku
+
+#=== Saw ===
+item.Bismuth Bronze Saw.name=Vismuttipronssinen Saha
+item.Black Bronze Saw.name=Mustapronssinen Saha
+item.Black Steel Saw.name=Mustateräksinen Saha
+item.Blue Steel Saw.name=Siniteräksinen Saha
+item.Bronze Saw.name=Pronssinen Saha
+item.Copper Saw.name=Kuparinen Saha
+item.Red Steel Saw.name=Punateräksinen Saha
+item.Steel Saw.name=Teräksinen Saha
+item.Wrought Iron Saw.name=Takorautainen Saha
+
+#=== Scythe ===
+item.Bismuth Bronze Scythe.name=Vismuttipronssinen Viikate
+item.Black Bronze Scythe.name=Mustapronssinen Viikate
+item.Black Steel Scythe.name=Mustateräksinen Viikate
+item.Blue Steel Scythe.name=Siniteräksinen Viikate
+item.Bronze Scythe.name=Pronssinen Viikate
+item.Copper Scythe.name=Kuparinen Viikate
+item.Red Steel Scythe.name=Punateräksinen Viikate
+item.Steel Scythe.name=Teräksinen Viikate
+item.Wrought Iron Scythe.name=Takorautainen Viikate
+
+#=== Shovel ===
+item.Bismuth Bronze Shovel.name=Vismuttipronssinen Lapio
+item.Black Bronze Shovel.name=Mustapronssinen Lapio
+item.Black Steel Shovel.name=Mustateräksinen Lapio
+item.Blue Steel Shovel.name=Siniteräksinen Lapio
+item.Bronze Shovel.name=Pronssinen Lapio
+item.Copper Shovel.name=Kuparinen Lapio
+item.Red Steel Shovel.name=Punateräksinen Lapio
+item.Steel Shovel.name=Teräksinen Lapio
+item.Wrought Iron Shovel.name=Takorautainen Lapio
+
+#=== Sword ===
+item.Bismuth Bronze Sword.name=Vismuttipronssinen Miekka
+item.Black Bronze Sword.name=Mustapronssinen Miekka
+item.Black Steel Sword.name=Mustateräksinen Miekka
+item.Blue Steel Sword.name=Siniteräksinen Miekka
+item.Bronze Sword.name=Pronssinen Miekka
+item.Copper Sword.name=Kuparinen Miekka
+item.Red Steel Sword.name=Punateräksinen Miekka
+item.Steel Sword.name=Teräksinen Miekka
+item.Wrought Iron Sword.name=Takorautainen Miekka
+
+#=== Tuyere ===
+item.Bismuth Bronze Tuyere.name=Vismuttipronssinen Suutin
+item.Black Bronze Tuyere.name=Mustapronssinen Suutin
+item.Black Steel Tuyere.name=Mustateräksinen Suutin
+item.Blue Steel Tuyere.name=Siniteräksinen Suutin
+item.Bronze Tuyere.name=Pronssinen Suutin
+item.Copper Tuyere.name=Kuparinen Suutin
+item.Red Steel Tuyere.name=Punateräksinen Suutin
+item.Steel Tuyere.name=Teräksinen Suutin
+item.Wrought Iron Tuyere.name=Takorautainen Suutin
+
+#== Armor ==
+#=== Helmet ===
+item.Bismuth Bronze Unfinished Helmet.name=Keskeneräinen Vismuttipronssi Kypärä Ensimmäinen Vaihe
+item.Black Bronze Unfinished Helmet.name=Keskeneräinen Mustapronssi Kypärä Ensimmäinen Vaihe
+item.Black Steel Unfinished Helmet.name=Keskeneräinen Mustateräs Kypärä Ensimmäinen Vaihe
+item.Blue Steel Unfinished Helmet.name=Keskeneräinen Siniteräs Kypärä Ensimmäinen Vaihe
+item.Bronze Unfinished Helmet.name=Keskeneräinen Pronssi Kypärä Ensimmäinen Vaihe
+item.Copper Unfinished Helmet.name=Keskeneräinen Kupari Kypärä Ensimmäinen Vaihe
+item.Red Steel Unfinished Helmet.name=Keskeneräinen Punateräs Kypärä Ensimmäinen Vaihe
+item.Steel Unfinished Helmet.name=Keskeneräinen Teräs Kypärä Ensimmäinen Vaihe
+item.Wrought Iron Unfinished Helmet.name=Keskeneräinen Takorauta Kypärä Ensimmäinen Vaihe
+item.Bismuth Bronze Unfinished Helmet2.name=Keskeneräinen Vismuttipronssi Kypärä Toinen Vaihe
+item.Black Bronze Unfinished Helmet2.name=Keskeneräinen Mustapronssi Kypärä Toinen Vaihe
+item.Black Steel Unfinished Helmet2.name=Keskeneräinen Mustateräs Kypärä Toinen Vaihe
+item.Blue Steel Unfinished Helmet2.name=Keskeneräinen Siniteräs Kypärä Toinen Vaihe
+item.Bronze Unfinished Helmet2.name=Keskeneräinen Pronssi Kypärä Toinen Vaihe
+item.Copper Unfinished Helmet2.name=Keskeneräinen Kupari Kypärä Toinen Vaihe
+item.Red Steel Unfinished Helmet2.name=Keskeneräinen Punateräs Kypärä Toinen Vaihe
+item.Steel Unfinished Helmet2.name=Keskeneräinen Teräs Kypärä Toinen Vaihe
+item.Wrought Iron Unfinished Helmet2.name=Keskeneräinen Takorauta Kypärä Toinen Vaihe
+item.Bismuth Bronze Helmet.name=Vismuttipronssi Kypärä
+item.Black Bronze Helmet.name=Mustapronssi Kypärä
+item.Black Steel Helmet.name=Mustateräs Kypärä
+item.Blue Steel Helmet.name=Siniteräs Kypärä
+item.Bronze Helmet.name=Pronssi Kypärä
+item.Copper Helmet.name=Kupari Kypärä
+item.Red Steel Helmet.name=Punateräs Kypärä
+item.Steel Helmet.name=Teräs Kypärä
+item.Wrought Iron Helmet.name=Takorauta Kypärä
+item.helmetCloth.name=
+
+#=== Chestplate ===
+item.Bismuth Bronze Unfinished Chestplate.name=Keskeneräinen Vismuttipronssi Rintalevypanssari Ensimmäinen Vaihe
+item.Black Bronze Unfinished Chestplate.name=Keskeneräinen Mustapronssi Rintalevypanssari Ensimmäinen Vaihe
+item.Black Steel Unfinished Chestplate.name=Keskeneräinen Mustateräs Rintalevypanssari Ensimmäinen Vaihe
+item.Blue Steel Unfinished Chestplate.name=Keskeneräinen Siniteräs Rintalevypanssari Ensimmäinen Vaihe
+item.Bronze Unfinished Chestplate.name=Keskeneräinen Pronssi Rintalevypanssari Ensimmäinen Vaihe
+item.Copper Unfinished Chestplate.name=Keskeneräinen Kupari Rintalevypanssari Ensimmäinen Vaihe
+item.Red Steel Unfinished Chestplate.name=Keskeneräinen Punateräs Rintalevypanssari Ensimmäinen Vaihe
+item.Steel Unfinished Chestplate.name=Keskeneräinen Teräs Rintalevypanssari Ensimmäinen Vaihe
+item.Wrought Iron Unfinished Chestplate.name=Keskeneräinen Takorauta Rintalevypanssari Ensimmäinen Vaihe
+item.Bismuth Bronze Unfinished Chestplate2.name=Keskeneräinen Vismuttipronssi Rintalevypanssari Toinen Vaihe
+item.Black Bronze Unfinished Chestplate2.name=Keskeneräinen Mustapronssi Rintalevypanssari Toinen Vaihe
+item.Black Steel Unfinished Chestplate2.name=Keskeneräinen Mustateräs Rintalevypanssari Toinen Vaihe
+item.Blue Steel Unfinished Chestplate2.name=Keskeneräinen Siniteräs Rintalevypanssari Toinen Vaihe
+item.Bronze Unfinished Chestplate2.name=Keskeneräinen Pronssi Rintalevypanssari Toinen Vaihe
+item.Copper Unfinished Chestplate2.name=Keskeneräinen Kupari Rintalevypanssari Toinen Vaihe
+item.Red Steel Unfinished Chestplate2.name=Keskeneräinen Punateräs Rintalevypanssari Toinen Vaihe
+item.Steel Unfinished Chestplate2.name=Keskeneräinen Teräs Rintalevypanssari Toinen Vaihe
+item.Wrought Iron Unfinished Chestplate2.name=Keskeneräinen Takorauta Rintalevypanssari Toinen Vaihe
+item.Bismuth Bronze Chestplate.name=Vismuttipronssi Rintalevypanssari
+item.Black Bronze Chestplate.name=Mustapronssi Rintalevypanssari
+item.Black Steel Chestplate.name=Mustateräs Rintalevypanssari
+item.Blue Steel Chestplate.name=Siniteräs Rintalevypanssari
+item.Bronze Chestplate.name=Pronssi Rintalevypanssari
+item.Copper Chestplate.name=Kupari Rintalevypanssari
+item.Red Steel Chestplate.name=Punateräs Rintalevypanssari
+item.Steel Chestplate.name=Teräs Rintalevypanssari
+item.Wrought Iron Chestplate.name=Takorauta Rintalevypanssari
+item.chestplateCloth.name=
+
+#=== Greaves ===
+item.Bismuth Bronze Unfinished Greaves.name=Keskeneräinen Vismuttipronssi Reisilevypanssari Ensimmäinen Vaihe
+item.Black Bronze Unfinished Greaves.name=Keskeneräinen Mustapronssi Reisilevypanssari Ensimmäinen Vaihe
+item.Black Steel Unfinished Greaves.name=Keskeneräinen Mustateräs Reisilevypanssari Ensimmäinen Vaihe
+item.Blue Steel Unfinished Greaves.name=Keskeneräinen Siniteräs Reisilevypanssari Ensimmäinen Vaihe
+item.Bronze Unfinished Greaves.name=Keskeneräinen Pronssi Reisilevypanssari Ensimmäinen Vaihe
+item.Copper Unfinished Greaves.name=Keskeneräinen Kupari Reisilevypanssari Ensimmäinen Vaihe
+item.Red Steel Unfinished Greaves.name=Keskeneräinen Punateräs Reisilevypanssari Ensimmäinen Vaihe
+item.Steel Unfinished Greaves.name=Keskeneräinen Teräs Reisilevypanssari Ensimmäinen Vaihe
+item.Wrought Iron Unfinished Greaves.name=Keskeneräinen Takorauta Reisilevypanssari Ensimmäinen Vaihe
+item.Bismuth Bronze Unfinished Greaves2.name=Keskeneräinen Vismuttipronssi Reisilevypanssari Toinen Vaihe
+item.Black Bronze Unfinished Greaves2.name=Keskeneräinen Mustapronssi Reisilevypanssari Toinen Vaihe
+item.Black Steel Unfinished Greaves2.name=Keskeneräinen Mustateräs Reisilevypanssari Toinen Vaihe
+item.Blue Steel Unfinished Greaves2.name=Keskeneräinen Siniteräs Reisilevypanssari Toinen Vaihe
+item.Bronze Unfinished Greaves2.name=Keskeneräinen Pronssi Reisilevypanssari Toinen Vaihe
+item.Copper Unfinished Greaves2.name=Keskeneräinen Kupari Reisilevypanssari Toinen Vaihe
+item.Red Steel Unfinished Greaves2.name=Keskeneräinen Punateräs Reisilevypanssari Toinen Vaihe
+item.Steel Unfinished Greaves2.name=Keskeneräinen Teräs Reisilevypanssari Toinen Vaihe
+item.Wrought Iron Unfinished Greaves2.name=Keskeneräinen Takorauta Reisilevypanssari Toinen Vaihe
+item.Bismuth Bronze Greaves.name=Vismuttipronssi Reisilevypanssari
+item.Black Bronze Greaves.name=Mustapronssi Reisilevypanssari
+item.Black Steel Greaves.name=Mustateräs Reisilevypanssari
+item.Blue Steel Greaves.name=Siniteräs Reisilevypanssari
+item.Bronze Greaves.name=Pronssi Reisilevypanssari
+item.Copper Greaves.name=Kupari Reisilevypanssari
+item.Red Steel Greaves.name=Punateräs Reisilevypanssari
+item.Steel Greaves.name=Teräs Reisilevypanssari
+item.Wrought Iron Greaves.name=Takorauta Reisilevypanssari
+item.leggingsCloth.name=
+
+#=== Boots ===
+item.Bismuth Bronze Unfinished Boots.name=Keskeneräinen Vismuttipronssi Jalkalevypanssari Ensimmäinen Vaihe
+item.Black Bronze Unfinished Boots.name=Keskeneräinen Mustapronssi Jalkalevypanssari Ensimmäinen Vaihe
+item.Black Steel Unfinished Boots.name=Keskeneräinen Mustateräs Jalkalevypanssari Ensimmäinen Vaihe
+item.Blue Steel Unfinished Boots.name=Keskeneräinen Siniteräs Jalkalevypanssari Ensimmäinen Vaihe
+item.Bronze Unfinished Boots.name=Keskeneräinen Pronssi Jalkalevypanssari Ensimmäinen Vaihe
+item.Copper Unfinished Boots.name=Keskeneräinen Kupari Jalkalevypanssari Ensimmäinen Vaihe
+item.Red Steel Unfinished Boots.name=Keskeneräinen Punateräs Jalkalevypanssari Ensimmäinen Vaihe
+item.Steel Unfinished Boots.name=Keskeneräinen Teräs Jalkalevypanssari Ensimmäinen Vaihe
+item.Wrought Iron Unfinished Boots.name=Keskeneräinen Takorauta Jalkalevypanssari Ensimmäinen Vaihe
+item.Bismuth Bronze Unfinished Boots2.name=Keskeneräinen Vismuttipronssi Jalkalevypanssari Toinen Vaihe
+item.Black Bronze Unfinished Boots2.name=Keskeneräinen Mustapronssi Jalkalevypanssari Toinen Vaihe
+item.Black Steel Unfinished Boots2.name=Keskeneräinen Mustateräs Jalkalevypanssari Toinen Vaihe
+item.Blue Steel Unfinished Boots2.name=Keskeneräinen Siniteräs Jalkalevypanssari Toinen Vaihe
+item.Bronze Unfinished Boots2.name=Keskeneräinen Pronssi Jalkalevypanssari Toinen Vaihe
+item.Copper Unfinished Boots2.name=Keskeneräinen Kupari Jalkalevypanssari Toinen Vaihe
+item.Red Steel Unfinished Boots2.name=Keskeneräinen Punateräs Jalkalevypanssari Toinen Vaihe
+item.Steel Unfinished Boots2.name=Keskeneräinen Teräs Jalkalevypanssari Toinen Vaihe
+item.Wrought Iron Unfinished Boots2.name=Keskeneräinen Takorauta Jalkalevypanssari Toinen Vaihe
+item.Bismuth Bronze Boots.name=Vismuttipronssi Jalkalevypanssari
+item.Black Bronze Boots.name=Mustapronssi Jalkalevypanssari
+item.Black Steel Boots.name=Mustateräs Jalkalevypanssari
+item.Blue Steel Boots.name=Siniteräs Jalkalevypanssari
+item.Bronze Boots.name=Pronssi Jalkalevypanssari
+item.Copper Boots.name=Kupari Jalkalevypanssari
+item.Red Steel Boots.name=Punateräs Jalkalevypanssari
+item.Steel Boots.name=Teräs Jalkalevypanssari
+item.Wrought Iron Boots.name=Takorauta Jalkalevypanssari
+item.bootsCloth.name=
+
+#==========
+#= Metals =
+#==========
+item.Iron Bloom.name=Jalostettu Rauta Valanne
+item.Raw Iron Bloom.name=Raaka Rauta Valanne
+tile.Bloom.name=
+
+#== Unshaped ==
+item.Bismuth Bronze Unshaped.name=Työstämätön: Vismuttipronssi
+item.Bismuth Unshaped.name=Työstämätön: Vismutti
+item.Black Bronze Unshaped.name=Työstämätön: Mustapronssi
+item.Black Steel Unshaped.name=Työstämätön: Mustateräs
+item.Blue Steel Unshaped.name=Työstämätön: Siniteräs
+item.Brass Unshaped.name=Työstämätön: Messinki
+item.Bronze Unshaped.name=Työstämätön: Pronssi
+item.Copper Unshaped.name=Työstämätön: Kupari
+item.Gold Unshaped.name=Työstämätön: Kulta
+item.HC Black Steel Unshaped.name=Työstämätön: Runsashiili Mustateräs
+item.HC Blue Steel Unshaped.name=Työstämätön: Runsashiili Siniteräs
+item.HC Red Steel Unshaped.name=Työstämätön: Runsashiili Punateräs
+item.HC Steel Unshaped.name=Työstämätön: Runsashiiliteräs
+item.Lead Unshaped.name=Työstämätön: Lyijy
+item.Nickel Unshaped.name=Työstämätön: Nikkeli
+item.Pig Iron Unshaped.name=Työstämätön: Takkirauta
+item.Platinum Unshaped.name=Työstämätön: Platina
+item.Red Steel Unshaped.name=Työstämätön: Punateräs
+item.Rose Gold Unshaped.name=Työstämätön: Ruusukulta
+item.Silver Unshaped.name=Työstämätön: Hopea
+item.Steel Unshaped.name=Työstämätön: Teräs
+item.Sterling Silver Unshaped.name=Työstämätön: Sterling-hopea
+item.Tin Unshaped.name=Työstämätön: Tina
+item.Unknown Unshaped.name=Työstämätön: Tuntematon
+item.Weak Blue Steel Unshaped.name=Työstämätön: Heikko Siniteräs
+item.Weak Red Steel Unshaped.name=Työstämätön: Heikko Punateräs
+item.Weak Steel Unshaped.name=Työstämätön: Heikko Teräs
+item.Wrought Iron Unshaped.name=Työstämätön: Valurauta
+item.Zinc Unshaped.name=Työstämätön: Sinkki
+
+#== Ingot ==
+item.Bismuth Bronze Ingot.name=Vismuttipronssi Harkko
+item.Bismuth Ingot.name=Vismutti Harkko
+item.Black Bronze Ingot.name=Mustapronssi Harkko
+item.Black Steel Ingot.name=Mustateräs Harkko
+item.Blue Steel Ingot.name=Siniteräs Harkko
+item.Brass Ingot.name=Messinki Harkko
+item.Bronze Ingot.name=Pronssi Harkko
+item.Copper Ingot.name=Kupari Harkko
+item.Gold Ingot.name=Kulta Harkko
+item.HC Black Steel Ingot.name=Runsashiili Mustateräs Harkko
+item.HC Blue Steel Ingot.name=Runsashiili Siniteräs Harkko
+item.HC Red Steel Ingot.name=Runsashiili Punateräs Harkko
+item.HC Steel Ingot.name=Runsashiiliteräs Harkko
+item.Lead Ingot.name=Lyijy Harkko
+item.Nickel Ingot.name=Nikkeli Harkko
+item.Pig Iron Ingot.name=Takkirauta Harkko
+item.Platinum Ingot.name=Platina Harkko
+item.Red Steel Ingot.name=Punateräs Harkko
+item.Rose Gold Ingot.name=Ruusukulta Harkko
+item.Silver Ingot.name=Hopea Harkko
+item.Steel Ingot.name=Teräs Harkko
+item.Sterling Silver Ingot.name=Sterling-hopea Harkko
+item.Tin Ingot.name=Tina Harkko
+item.Unknown Ingot.name=Tuntematon Harkko
+item.Weak Blue Steel Ingot.name=Heikko Siniteräs Harkko
+item.Weak Red Steel Ingot.name=Heikko Punateräs Harkko
+item.Weak Steel Ingot.name=Heikko Teräs Harkko
+item.Wrought Iron Ingot.name=Valurauta Harkko
+item.Zinc Ingot.name=Sinkki Harkko
+
+#== Double Ingot ==
+item.Bismuth Bronze Double Ingot.name=Vismuttipronssi Kaksoisharkko
+item.Bismuth Double Ingot.name=Vismutti Kaksoisharkko
+item.Black Bronze Double Ingot.name=Mustapronssi Kaksoisharkko
+item.Black Steel Double Ingot.name=Mustateräs Kaksoisharkko
+item.Blue Steel Double Ingot.name=Siniteräs Kaksoisharkko
+item.Brass Double Ingot.name=Messinki Kaksoisharkko
+item.Bronze Double Ingot.name=Pronssi Kaksoisharkko
+item.Copper Double Ingot.name=Kupari Kaksoisharkko
+item.Gold Double Ingot.name=Kulta Kaksoisharkko
+item.Lead Double Ingot.name=Lyijy Kaksoisharkko
+item.Nickel Double Ingot.name=Nikkeli Kaksoisharkko
+item.Pig Iron Double Ingot.name=Takkirauta Kaksoisharkko
+item.Platinum Double Ingot.name=Platina Kaksoisharkko
+item.Red Steel Double Ingot.name=Punateräs Kaksoisharkko
+item.Rose Gold Double Ingot.name=Ruusukulta Kaksoisharkko
+item.Silver Double Ingot.name=Hopea Kaksoisharkko
+item.Steel Double Ingot.name=Teräs Kaksoisharkko
+item.Sterling Silver Double Ingot.name=Sterling-hopea Kaksoisharkko
+item.Tin Double Ingot.name=Tina Kaksoisharkko
+item.Wrought Iron Double Ingot.name=Valurauta Kaksoisharkko
+item.Zinc Double Ingot.name=Sinkki Kaksoisharkko
+
+#== Sheet ==
+item.Bismuth Bronze Sheet.name=Vismuttipronssi Levy
+item.Bismuth Sheet.name=Vismutti Levy
+item.Black Bronze Sheet.name=Mustapronssi Levy
+item.Black Steel Sheet.name=Mustateräs Levy
+item.Blue Steel Sheet.name=Siniteräs Levy
+item.Brass Sheet.name=Messinki Levy
+item.Bronze Sheet.name=Pronssi Levy
+item.Copper Sheet.name=Kupari Levy
+item.Gold Sheet.name=Kulta Levy
+item.Lead Sheet.name=Lyijy Levy
+item.Nickel Sheet.name=Nikkeli Levy
+item.Pig Iron Sheet.name=Takkirauta Levy
+item.Platinum Sheet.name=Platina Levy
+item.Red Steel Sheet.name=Punateräs Levy
+item.Rose Gold Sheet.name=Ruusukulta Levy
+item.Silver Sheet.name=Hopea Levy
+item.Steel Sheet.name=Teräs Levy
+item.Sterling Silver Sheet.name=Sterling-hopea Levy
+item.Tin Sheet.name=Tina Levy
+item.Wrought Iron Sheet.name=Valurauta Levy
+item.Zinc Sheet.name=Sinkki Levy
+
+#== DoubleSheet ==
+item.Bismuth Bronze Double Sheet.name=Vismuttipronssi Kaksoislevy
+item.Bismuth Double Sheet.name=Vismutti Kaksoislevy
+item.Black Bronze Double Sheet.name=Mustapronssi Kaksoislevy
+item.Black Steel Double Sheet.name=Mustateräs Kaksoislevy
+item.Blue Steel Double Sheet.name=Siniteräs Kaksoislevy
+item.Brass Double Sheet.name=Messinki Kaksoislevy
+item.Bronze Double Sheet.name=Pronssi Kaksoislevy
+item.Copper Double Sheet.name=Kupari Kaksoislevy
+item.Gold Double Sheet.name=Kulta Kaksoislevy
+item.Lead Double Sheet.name=Lyijy Kaksoislevy
+item.Nickel Double Sheet.name=Nikkeli Kaksoislevy
+item.Pig Iron Double Sheet.name=Takkirauta Kaksoislevy
+item.Platinum Double Sheet.name=Platina Kaksoislevy
+item.Red Steel Double Sheet.name=Punateräs Kaksoislevy
+item.Rose Gold Double Sheet.name=Ruusukulta Kaksoislevy
+item.Silver Double Sheet.name=Hopea Kaksoislevy
+item.Steel Double Sheet.name=Teräs Kaksoislevy
+item.Sterling Silver Double Sheet.name=Sterling-hopea Kaksoislevy
+item.Tin Double Sheet.name=Tina Kaksoislevy
+item.Wrought Iron Double Sheet.name=Valurauta Kaksoislevy
+item.Zinc Double Sheet.name=Sinkki Kaksoislevy
+
+#===========
+#= Devices =
+#===========
+tile.Bellows.name=Palkeet
+tile.Forge.name=Ahjo
+tile.BlastFurnace.name=Masuuni
+tile.SpawnMeter.name=Suojauslaite
+tile.Quern.name=Myllynpohja
+tile.EarlyBloomery.name=Sulatto
+tile.Crucible.name=Sulatusastia
+tile.NestBox.name=
+item.SluiceItem.name=Malmiränni
+tile.LeatherRack.name=
+
+#== Anvils ==
+tile.Anvil.Stone.name=Kivi Alasin
+tile.Anvil.Bismuth.name=Vismutti Alasin
+tile.Anvil2.Bismuth Bronze.name=Vismuttipronssi Alasin
+tile.Anvil2.Black Bronze.name=Mustapronssi Alasin
+tile.Anvil.Black Steel.name=Mustateräs Alasin
+tile.Anvil.Blue Steel.name=Siniteräs Alasin
+tile.Anvil.Bronze.name=Pronssi Alasin
+tile.Anvil.Copper.name=Kupari Alasin
+tile.Anvil.Red Steel.name=Punateräs Alasin
+tile.Anvil2.Rose Gold.name=Ruusukulta Alasin
+tile.Anvil.Steel.name=Teräs Alasin
+tile.Anvil.Tin.name=Tina Alasin
+tile.Anvil.Wrought Iron.name=Valurauta Alasin
+tile.Anvil.Zinc.name=Sinkki Alasin
+
+#==================
+#= Terrain Blocks =
+#==================
+tile.Grass.name=Ruohoa
+tile.DryGrass.name=Kuivaa Ruohoa
+tile.PeatGrass.name=Turveruohoa
+tile.ClayGrass.name=Saviruohoa
+tile.dirt.name=Multaa
+tile.sand.name=Hiekkaa
+tile.Peat.name=Turvetta
+tile.tilledSoil.name=
+tile.LooseRock.name=
+tile.Ice.name=Jää
+
+#=================
+#= Miscellaneous =
+#=================
+#== Misc Items ==
+item.arrow.name=Nuoli
+item.book.name=Kirja
+item.stick.name=Keppi
+item.coal.coal.name=Kivihiili
+item.coal.charcoal.name=Puuhiili
+item.Fertilizer.name=
+item.Reeds.name=
+
+item.Wooden Bucket Empty.name=Puinen Sanko (Tyhjä)
+item.Wooden Bucket Water.name=
+item.Wooden Bucket Salt Water.name=
+item.Wooden Bucket Milk.name=Puinen Sanko (Maito)
+item.Lime Water.name=Kalkkivettä
+
+item.Red Steel Bucket Empty.name=Punaterässanko (Tyhjä)
+item.Red Steel Bucket Water.name=Punaterässanko (Vesi)
+item.Red Steel Bucket Salt Water.name=
+item.Blue Steel Bucket Empty.name=Siniterässanko (Tyhjä)
+item.Blue Steel Bucket Lava.name=Siniterässanko (Laava)
+
+item.GoldPan.name=Vaskooli
+item.Gold Pan.Sand.name=Vaskooli - Hiekka
+item.Gold Pan.Gravel.name=Vaskooli - Sora
+item.Gold Pan.Clay.name=Vaskooli - Savi
+item.Gold Pan.Dirt.name=Vaskooli - Multa
+item.Ink.name=Mustetta
+item.Firestarter.name=Tulipora
+
+item.Quern.name=Käsimylly
+item.Blueprint.name=Suunnitelma
+item.Nametag.name=
+item.WoolYarn.name=Villa Lankaa
+item.Wool.name=Villaa
+item.WoolCloth.name=Villa Kangasta
+item.SilkCloth.name=
+item.BurlapCloth.name=
+item.Mortar.name=Laastia
+item.Vinegar.name=Viinietikka
+
+item.Hide.small.name=Käsittelemätön Vuota
+item.Hide.medium.name=
+item.Hide.large.name=
+item.Soaked Hide.small.name=Liotettu Vuota
+item.Soaked Hide.medium.name=
+item.Soaked Hide.large.name=
+item.Scraped Hide.small.name=Kaavittu Vuota
+item.Scraped Hide.medium.name=
+item.Scraped Hide.large.name=
+item.Prep Hide.small.name=Parkittu Nahka
+item.Prep Hide.medium.name=
+item.Prep Hide.large.name=
+item.Sheep Skin.small.name=
+item.Sheep Skin.medium.name=
+item.Sheep Skin.large.name=
+item.TFC Leather.name=Nahka
+item.Flat Leather.name=Ohutnahka
+item.leather.name=Nahka
+
+item.minecartChest.name=Arkullinen Kaivoskärry
+item.fishingRod.name=Onkivapa
+
+item.Quiver.name=
+item.Rope.name=
+
+#======== Misc. Blocks========
+tile.Straw Hide Bed.name=
+tile.customBed.sleep.name=
+tile.BasicPipe.name=
+tile.ValvePipe.name=
+tile.Torch.name=Soihtu
+tile.Chest.name=Arkku
+tile.Bookshelf.name=Kirjahylly
+tile.Workbench.name=Työpöytä
+tile.ButtonWood.name=
+
+#= Misc. Plants =
+item.Sugarcane.name=Sokeriruoko
+item.Hemp.name=Hamppu
+item.Straw.name=Olki
+item.Jute.name=
+item.Jute Fibre.name=
+
+tile.Fungi.mushroom_brown.name=
+tile.Fungi.mushroom_red.name=
+tile.Cactus.name=Kaktus
+tile.Pumpkin.name=Kurpitsa
+tile.Moss.name=Sammalta
+tile.Thatch.name=Olki
+tile.Flora.Golden Rod.name=
+tile.Flora.Cat Tails.name=
+
+item.Seeds Sugarcane.name=Sokeriruo'on Siemenet
+item.Seeds Hemp.name=Hampun Siemenet
+item.Seeds Jute.name=
+
+tile.TallGrass.tallgrass.name=Ruoho
+tile.TallGrass.fern.name=Saniainen
+tile.TallGrass.shortgrass.name=
+tile.LilyPad.name=Lumpeenlehti
+tile.Vine.name=Köynnös
+tile.SeaGrassStill.name=
+tile.SeaGrassIce.name=
+
+tile.Flowers.flower_nasturtium.name=
+tile.Flowers.flower_dandelion.name=Voikukka
+tile.Flowers.flower_meads_milkweed.name=
+tile.Flowers.flower_tropical_milkweed.name=
+tile.Flowers.flower_butterfly_milkweed.name=
+tile.Flowers.flower_calendula.name=
+tile.Flowers2.flower_rose.name=
+tile.Flowers2.flower_blue_orchid.name=Sininen orkidea
+tile.Flowers2.flower_allium.name=Laukka
+tile.Flowers2.flower_houstonia.name=Keijunsilmä
+tile.Flowers2.flower_tulip_red.name=Punainen tulppaani
+tile.Flowers2.flower_tulip_orange.name=Oranssi tulppaani
+tile.Flowers2.flower_tulip_white.name=Valkoinen tulppaani
+tile.Flowers2.flower_tulip_pink.name=Vaaleanpunainen tulppaani
+tile.Flowers2.flower_oxeye_daisy.name=Päivänkakkara
+
+#=======
+#= GUI =
+#=======
+gui.badnbt=
+
+#== Anvil GUI ==
+gui.Anvil.Plans=
+gui.Anvil.Weld=Hitsaa
+
+gui.Anvil.LightHit=Kevyt Isku
+gui.Anvil.MediumHit=Keskiraskas Isku
+gui.Anvil.HeavyHit=Raskas Isku
+gui.Anvil.Draw=Venytä
+
+gui.Anvil.Punch=Rei'itä
+gui.Anvil.Bend=Taivuta
+gui.Anvil.Upset=Paksunna
+gui.Anvil.Shrink=Supista
+
+gui.Anvil.Rules=Ohjeet
+gui.Anvil.Rule1=Vapaa Valinta
+gui.Anvil.Rule2=Isku, Vapaa Valinta
+gui.Anvil.Rule3=Lyönti, Viimeisenä
+gui.Anvil.Rule4=Lyönti, Toiseksi Viimeisenä
+gui.Anvil.Rule5=Lyönti, Kolmanneksi Viimeisenä
+gui.Anvil.Rule6=Lyönti, Kaksi Viimeistä
+gui.Anvil.Rule7=Lyönti, Kolme Viimeistä
+gui.Anvil.Rule8=Lyönti, Ei viimeisenä
+gui.Anvil.Rule9=Rei'itä, Vapaa Valinta
+gui.Anvil.Rule10=Rei'itä, Viimeisenä
+gui.Anvil.Rule11=Rei'itä, Toiseksi Viimeisenä
+gui.Anvil.Rule12=Rei'itä, Kolmanneksi Viimeisenä
+gui.Anvil.Rule13=Rei'itä, Kaksi Viimeistä
+gui.Anvil.Rule14=Rei'itä Kolme Viimeistä
+gui.Anvil.Rule15=Rei'itä, Ei Viimeisenä
+gui.Anvil.Rule16=Supista, Vapaa Valinta
+gui.Anvil.Rule17=Supista, Viimeisenä
+gui.Anvil.Rule18=Supista, Toiseksi Viimeisenä
+gui.Anvil.Rule19=Supista, Kolmanneksi Viimeisenä
+gui.Anvil.Rule20=Supista, Kaksi Viimeistä
+gui.Anvil.Rule21=Supista, Kolme Viimeistä
+gui.Anvil.Rule22=Supista, Ei viimeisenä
+gui.Anvil.Rule23=Venytä, Vapaa Valinta
+gui.Anvil.Rule24=Venytä, Viimeisenä
+gui.Anvil.Rule25=Venytä, Toiseksi Viimeisenä
+gui.Anvil.Rule26=Venytä, Kolmanneksi Viimeisenä
+gui.Anvil.Rule27=Venytä, Kaksi Viimeistä
+gui.Anvil.Rule28=Venytä, Kolme Viimeistä
+gui.Anvil.Rule29=Venytä, Ei Viimeisenä
+gui.Anvil.Rule30=Paksunna, Vapaa Valinta
+gui.Anvil.Rule31=Paksunna, Viimeisenä
+gui.Anvil.Rule32=Paksunna, Toiseksi Viimeisenä
+gui.Anvil.Rule33=Paksunna, Kolmanneksi Viimeisenä
+gui.Anvil.Rule34=Paksunna, Kaksi Viimeistä
+gui.Anvil.Rule35=Paksunna, Kolme Viimeistä
+gui.Anvil.Rule36=Paksunna, Ei Viimeisenä
+gui.Anvil.Rule37=Taivuta, Vapaa Valinta
+gui.Anvil.Rule38=Taivuta, Viimeinen
+gui.Anvil.Rule39=Taivuta, Toiseksi Viimeinen
+gui.Anvil.Rule40=Taivuta, Kolmanneksi Viimeinen
+gui.Anvil.Rule41=Taivuta, Kaksi Viimeistä
+gui.Anvil.Rule42=Taivuta, Kolme Viimeistä
+gui.Anvil.Rule43=Taivuta, Ei Viimeisenä
+
+#== Tools/Weapons/Armor GUI ==
+gui.Armor.Advanced=Kehittynyt
+gui.Armor.Shift=Vaihtoa
+gui.Armor.ForgedBy=Seppä:
+gui.Armor.Hold=Painava
+gui.Armor.Crush=Murskaa
+gui.Armor.Pierce=Läpäise
+gui.Armor.Slash=Viillä
+
+gui.Bow.Advanced=
+gui.Bow.Javelins=
+gui.Bow.Arrows=
+gui.Bow.ForgedBy=
+
+gui.DamageType.Error=Virhe: Väärä Vahinko Tyyppi
+gui.DamageType.Crushing=Murskaava
+gui.DamageType.Piercing=Läpäisevä
+gui.DamageType.Slashing=Viiltävä
+
+#== Barrel GUI ==
+gui.Barrel.Empty=Tyhjä
+gui.Barrel.Seal=Sinetöity
+gui.Barrel.Unseal=
+gui.Barrel.ToggleOff=
+gui.Barrel.ToggleOn=
+gui.Barrel.SealedOn=
+gui.Barrel.Solid=
+gui.Barrel.Liquid=
+
+#== Bloomery GUI ==
+gui.Bloomery.Charcoal=Puuhiili
+gui.Bloomery.Ore=Malmi
+gui.Bloomery.Output=Tuotto
+
+#== Calendar GUI ==
+gui.Calendar.Calendar=Kalenteri
+gui.Calendar.DateBioxx=Merkkipäivä : Bioxxin Syntymäpäivä!
+gui.Calendar.DateDunk=
+gui.Calendar.DateKitty=
+
+gui.Calendar.Hour=Tunti
+gui.Calendar.WitchHour=Sydänyö
+
+gui.Calendar.Day=Päivä
+gui.Calendar.Sunday=Sunnuntai
+gui.Calendar.Monday=Maanantai
+gui.Calendar.Tuesday=Tiistai
+gui.Calendar.Wednesday=Keskiviikko
+gui.Calendar.Thursday=Torstai
+gui.Calendar.Friday=Perjantai
+gui.Calendar.Saturday=Lauantai
+
+gui.Calendar.Season=Vuodenaika
+gui.Calendar.EarlySpring=Alkukevät
+gui.Calendar.Spring=Kevät
+gui.Calendar.LateSpring=Loppukevät
+gui.Calendar.EarlySummer=Alkukesä
+gui.Calendar.Summer=Kesä
+gui.Calendar.LateSummer=Loppukesä
+gui.Calendar.EarlyAutumn=Alkusyksy
+gui.Calendar.Autumn=Syksy
+gui.Calendar.LateAutumn=Loppusyksy
+gui.Calendar.EarlyWinter=Alkutalvi
+gui.Calendar.Winter=Talvi
+gui.Calendar.LateWinter=Lopputalvi
+
+gui.Calendar.Date=Päivämäärä
+gui.Calendar.January=Tammi
+gui.Calendar.February=Helmi
+gui.Calendar.March=Marras
+gui.Calendar.April=Huhti
+gui.Calendar.May=Touko
+gui.Calendar.June=Kesä
+gui.Calendar.July=Heinä
+gui.Calendar.August=Elo
+gui.Calendar.September=Syys
+gui.Calendar.October=Loka
+gui.Calendar.November=Marras
+gui.Calendar.December=Joulu
+
+gui.Calendar.1Hour=1 Tunti
+gui.Calendar.1Day=1 Päivä
+gui.Calendar.1Week=1 Viikko
+gui.Calendar.1Month=1 Kuukausi
+gui.Calendar.1Year=1 Vuosi
+
+#== Food Prep GUI ==
+gui.FoodPrep.CreateMeal=Valmista Ateria
+gui.FoodPrep.Effect=Vaikutus
+gui.FoodPrep.Energy=Energia
+gui.FoodPrep.Filling=Täyttäyvyys
+gui.FoodPrep.Power=Teho
+
+#== Metals ==
+gui.metal.Bismuth=Vismutti
+gui.metal.BismuthBronze=Vismuttipronssi
+gui.metal.BlackBronze=Mustapronssi
+gui.metal.BlackSteel=Mustateräs
+gui.metal.BlueSteel=Siniteräs
+gui.metal.Brass=Messinki
+gui.metal.Bronze=Pronssi
+gui.metal.Copper=Kupari
+gui.metal.Gold=Kulta
+gui.metal.HCBlackSteel=Runsashiili Mustateräs
+gui.metal.HCBlueSteel=Runsashiili Siniteräs
+gui.metal.HCRedSteel=Runsashiili Punateräs
+gui.metal.Lead=Lyijy
+gui.metal.Nickel=Nikkeli
+gui.metal.PigIron=Takkirauta
+gui.metal.Platinum=Platina
+gui.metal.RedSteel=Punateräs
+gui.metal.RoseGold=Ruusukulta
+gui.metal.Silver=Hopea
+gui.metal.Steel=Teräs
+gui.metal.SterlingSilver=Sterling-hopea
+gui.metal.Tin=Tina
+gui.metal.Unknown=Tuntematon
+gui.metal.WeakBlueSteel=Heikko Siniteräs
+gui.metal.WeakRedSteel=Heikko Punateräs
+gui.metal.WeakSteel=Heikko Teräs
+gui.metal.WroughtIron=Valurauta
+gui.metal.Zinc=Sinkki
+
+#== Plans GUI ==
+gui.plans.axe=
+gui.plans.bootsplate=
+gui.plans.bucket=
+gui.plans.chestplate=
+gui.plans.chisel=
+gui.plans.hammer=
+gui.plans.helmplate=
+gui.plans.hoe=
+gui.plans.ingot=
+gui.plans.javelin=
+gui.plans.knife=
+gui.plans.legsplate=
+gui.plans.mace=
+gui.plans.pickaxe=
+gui.plans.propick=
+gui.plans.refinebloom=
+gui.plans.saw=
+gui.plans.scythe=
+gui.plans.sheet=
+gui.plans.shovel=
+gui.plans.splitbloom=
+gui.plans.sword=
+gui.plans.tuyere=
+gui.plans.grill=
+gui.plans.shears=
+
+#== Misc GUI ==
+gui.Blueprint=Suunnitelma
+gui.Nametag=
+gui.fertilized=
+gui.Inventory=Tavaralista
+gui.ClearSlot=Tyhjennä tuoteruutu
+gui.LogPile=Halkopino
+gui.done=Valmis
+gui.Sluice.Soil=Maaperä
+gui.Sluice=Malmiränni
+gui.Workbench.Crafting=Rakentaminen
+
+#== Tooltips ==
+gui.ShowHelp=§8Apu: (Paina pohjaan §fShift§8)
+gui.Help=§8Apu:
+gui.Clay.Inst0=§bHiiren Oikea §7kun viisi kasattuna muokataksesi.
+gui.Knife.Inst0=
+gui.Knife.Inst1=
+gui.Leather.Inst0=§bPaina Hiiren oikealla §7veitselläsi tavaraluottelossasi leikataksesi.
+gui.LooseRock.Inst0=§bHiiren Oikea §7kun kaksi kasattuna naputellaksesi.
+gui.MeltedMetal.Inst0=§bHiiren Oikea §7kaataaksesi työkalumuottiin.
+gui.PotteryBase.Inst0=Hiivi ja §bKäytä Hiiren Oikeaa §7asettaaksesi esineen.
+gui.PotteryVesselSmall.Inst0=Tai §bHiiren Oikealla §7tarkkaillaksesi sisältöä.
+gui.RawHide.Inst0=
+gui.Barrel.MoreItems=
+
+gui.Size.Tiny=Pienenpieni
+gui.Size.VerySmall=Erittäinpieni
+gui.Size.Small=Pieni
+gui.Size.Medium=Keskikokoinen
+gui.Size.Large=Suuri
+gui.Size.VeryLarge=Erittäin Suuri
+gui.Size.Huge=Suurensuuri
+
+gui.Weight.Light=Kevyt
+gui.Weight.Medium=Keskipainava
+gui.Weight.Heavy=Painava
+
+gui.Reach.Short=
+gui.Reach.Medium=
+gui.Reach.Far=
+
+gui.food.fruit=
+gui.food.vegetable=
+gui.food.grain=
+gui.food.protein=
+gui.food.dairy=
+gui.food.amount=
+gui.food.decay=
+gui.food.salted=
+
+gui.FoodHeat.Cold=Kylmä
+gui.FoodHeat.Warm=Lämmin
+
+gui.Torch.CatchingFire=Syttyy
+gui.Torch.Lit=Syttynyt
+
+gui.ItemHeat.Liquid=Nestemäinen
+gui.ItemHeat.Solidified=
+gui.ItemHeat.Caution=Varoitus
+gui.ItemHeat.Warming=Lämpenee
+gui.ItemHeat.Hot=Kuuma
+gui.ItemHeat.VeryHot=Erittäin Kuuma
+gui.ItemHeat.FaintRed=Heikon Punainen
+gui.ItemHeat.DarkRed=Tumman Punainen
+gui.ItemHeat.BrightRed=Kirkkaan Punainen
+gui.ItemHeat.Orange=Oranssi
+gui.ItemHeat.Yellow=Keltainen
+gui.ItemHeat.YellowWhite=Keltavalkoinen
+gui.ItemHeat.White=Valkoinen
+gui.ItemHeat.BrilliantWhite=Kirkkaan Valkoinen
+
+gui.ingot.workable=
+gui.ingot.weldable=
+gui.ingot.danger=
+
+gui.milk.fresh=
+gui.milk.old=
+gui.milk.sour=
+
+gui.units=
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=Pitää käyttää juoksevan veden alla.
+gui.goldpan.overused=
+
+gui.ProPick.Found=Löytyi
+gui.ProPick.FoundTraces=Löytyi Hieman
+gui.ProPick.FoundSmall=Löytyi pieni näyte
+gui.ProPick.FoundMedium=Löytyi keskikokoinen näyte
+gui.ProPick.FoundLarge=Löytyi iso näyte
+gui.ProPick.FoundVeryLarge=Löytyi erittäin iso näyte
+gui.ProPick.FoundNothing=Ei löytynyt mitään kiinnostavaa.
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC) Haarniskat
+itemGroup.TFCMaterials=(TFC) Materiaalit
+itemGroup.TFCMisc=(TFC) Sekalaiset
+itemGroup.TFCPottery=(TFC) Ruukut
+itemGroup.TFCTools=(TFC) Työkalut
+itemGroup.TFCWeapons=(TFC) Aseet
+itemGroup.TFCDevices=
+itemGroup.TFCFoods=(TFC) Rakennustarvikkeet
+itemGroup.TFCBuilding=(TFC) Elintarvikkeet
+itemGroup.TFCDecoration=(TFC) Koristekuutiot
+
+#== Skill GUI ==
+skill.armorsmith=
+skill.gensmith=
+skill.toolsmith=
+skill.weaponsmith=
+skill.agriculture=
+skill.cooking=
+skill.prospecting=
+skill.butchering=
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================
+fluid.freshwater=
+fluid.saltwater=
+fluid.lavatfc=
+fluid.hotwater=
+fluid.beer=Olut
+fluid.cider=Siideri
+fluid.rum=Rommi
+fluid.ryewhiskey=Mallasviski
+fluid.sake=Riisiviini
+fluid.vodka=Vodka
+fluid.whiskey=Viski
+fluid.cornwhiskey=
+fluid.milk=Maitoa
+fluid.milkcurdled=Hapantunutta Maitoa
+fluid.limewater=Kalkkivettä
+fluid.tannin=Tanniinia
+fluid.vinegar=Viinietikkaa
+fluid.brine=
+
+gui.showtaste=
+gui.taste=
+gui.taste.sweet=
+gui.taste.sour=
+gui.taste.salty=
+gui.taste.bitter=
+gui.taste.savory=
+
+gui.taste.novice.sweet1=
+gui.taste.novice.sweet0=
+gui.taste.novice.sour1=
+gui.taste.novice.sour0=
+gui.taste.novice.salty1=
+gui.taste.novice.salty0=
+gui.taste.novice.bitter1=
+gui.taste.novice.bitter0=
+gui.taste.novice.savory1=
+gui.taste.novice.savory0=
+
+gui.taste.adept.sweet0=
+gui.taste.adept.sweet1=
+gui.taste.adept.sweet2=
+gui.taste.adept.sweet3=
+gui.taste.adept.sweet4=
+gui.taste.adept.sweet5=
+gui.taste.adept.sour0=
+gui.taste.adept.sour1=
+gui.taste.adept.sour2=
+gui.taste.adept.sour3=
+gui.taste.adept.sour4=
+gui.taste.adept.sour5=
+gui.taste.adept.salty0=
+gui.taste.adept.salty1=
+gui.taste.adept.salty2=
+gui.taste.adept.salty3=
+gui.taste.adept.salty4=
+gui.taste.adept.salty5=
+gui.taste.adept.bitter0=
+gui.taste.adept.bitter1=
+gui.taste.adept.bitter2=
+gui.taste.adept.bitter3=
+gui.taste.adept.bitter4=
+gui.taste.adept.bitter5=
+gui.taste.adept.savory0=
+gui.taste.adept.savory1=
+gui.taste.adept.savory2=
+gui.taste.adept.savory3=
+gui.taste.adept.savory4=
+gui.taste.adept.savory5=
+
+gui.taste.0=
+gui.taste.1=
+gui.taste.2=
+gui.taste.3=
+gui.taste.4=
+gui.taste.5=
+gui.taste.6=
+gui.taste.7=
+gui.taste.8=
+
+gui.skill.novice=
+gui.skill.adept=
+gui.skill.expert=
+gui.skill.master=
+gui.skillpage=
+tile.MetalTrapDoor.name=
+item.Mud Brick.name=
+item.Wet Mud Brick.name=
+gui.overburdened=
+gui.slot=
+gui.slot.back=
+word.pickled=
+word.brined=
+word.cooked=
+word.salted=
+word.smoked=
+word.dried=
+gui.barrel.pickling=
+gui.barrel.brining=
+tile.Vessel.name=
+tile.Grill.name=
+food.cooked.rare=
+food.cooked.medrare=
+food.cooked.med=
+food.cooked.medwell=
+food.cooked.well=
+food.cooked.0=
+food.cooked.1=
+food.cooked.2=
+food.cooked.3=
+food.cooked.4=
+gui.FoodPrep.Sandwich=
+gui.FoodPrep.Salad=
+item.Sandwich.name=
+item.Salad.name=
+item.ClayBowl.Ceramic Bowl.name=
+item.ClayBowl.Clay Bowl.name=
+item.Sugar.name=
+item.Sea Weed.name=

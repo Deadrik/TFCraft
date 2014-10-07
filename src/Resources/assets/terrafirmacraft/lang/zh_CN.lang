@@ -1,0 +1,2450 @@
+﻿#zh_CN
+#本文件为简体中文语言配置文件,翻译者:crafteverywhere, moshee
+
+
+
+
+
+generator.TFCDefault=TFC默认生成模式
+generator.TFCFlat=TFC超平坦模式
+
+key.ToolMode=循环工具模式
+key.LockTool=锁定工具位置
+
+effect.bleed=流血
+
+#==============
+#= Spawn Eggs =
+#==============
+entity.squidTFC.name=乌贼
+entity.cowTFC.name=牛
+entity.wolfTFC.name=狼
+entity.bearTFC.name=熊
+entity.deerTFC.name=鹿
+entity.chickenTFC.name=鸡
+entity.pigTFC.name=猪
+entity.skeletonTFC.name=骷髅
+entity.zombieTFC.name=僵尸
+entity.spiderTFC.name=蜘蛛
+entity.slimeTFC.name=史莱姆
+entity.silverfishTFC.name=蠹虫
+entity.ghastTFC.name=幽魂
+entity.caveSpiderTFC.name=洞穴蜘蛛
+entity.blazeTFC.name=烈焰人
+entity.endermanTFC.name=末影人
+entity.pigZombieTFC.name=僵尸猪人
+entity.creeperTFC.name=爬行者
+entity.sheepTFC.name=羊
+entity.pheasantTFC.name=野鸡
+entity.horseTFC.name=马
+entity.irongolemTFC.name=铁傀儡
+entity.fishTFC.name=鲈鱼
+
+
+#==========
+#= Entity =
+#==========
+entity.notFamiliar=
+fishingRod.lineTension=
+fishingRod.lineSnap=
+fishingRod.bite=
+fishingRod.gotAway=
+
+#================
+#= Achievements =
+#================
+achievement.achLooseRock=明显是块岩石
+achievement.achLooseRock.desc=拾取岩石
+achievement.achSmallOre=无石不翻
+achievement.achSmallOre.desc=找到矿石颗粒
+achievement.achWildVegetable=采集者
+achievement.achWildVegetable.desc=找到野生蔬菜
+achievement.achRutabaga=愚蠢的洋葱…
+achievement.achRutabaga.desc=找到大头菜
+achievement.achQuern=磨盘
+achievement.achQuern.desc=使用磨盘
+achievement.achStoneAge=旧石器时代！
+achievement.achStoneAge.desc=敲制出石制工具进入石器时代
+achievement.achCopperAge=红铜时代！
+achievement.achCopperAge.desc=铸造金属物品进入红铜时代
+achievement.achSaw=木匠
+achievement.achSaw.desc=制造出锯子
+achievement.achAnvil=捶打时间
+achievement.achAnvil.desc=制造出石砧
+achievement.achPickaxe=(终于到了)挖矿时间！
+achievement.achPickaxe.desc=制造出鹤嘴锄
+achievement.achDiamond=钻-噢,等下,不要啊
+achievement.achDiamond.desc=找到钻石
+achievement.achLimonite=褐-铁-矿！
+achievement.achLimonite.desc=采掘到褐铁矿
+achievement.achBronzeAge=青铜时代
+achievement.achBronzeAge.desc=制造出青铜砧进入青铜时代
+achievement.achIronAge=灰铁时代
+achievement.achIronAge.desc=采掘到铁块进入灰铁时代
+achievement.achPokeCreeper=鳄鱼猎人史蒂夫·欧文
+achievement.achPokeCreeper.desc=用棍子戳它
+
+#============
+#= Commands =
+#============
+commands.transferTamed.noTamed=
+commands.transferTamed.tooMany=
+commands.transferTamed.wrongOwner=
+commands.transferTamed.sameTarget=
+commands.transferTamed.display.incoming=
+commands.transferTamed.display.outgoing=
+commands.transferTamed.wrongSender=
+
+#========
+#= Food =
+#========
+item.MealGeneric.name=膳食
+item.meal.terrible=难以下咽
+item.meal.poor=寡淡无味
+item.meal.decent=乏善可陈
+item.meal.good=美味可口
+item.meal.great=垂涎欲滴
+item.meal.fantastic=回味无穷
+
+#== Grains ==
+item.Barley Bread.name=大麦面包
+item.Corn Bread.name=玉米面包
+item.Oat Bread.name=燕麦面包
+item.Rice Bread.name=米糕
+item.Rye Bread.name=黑麦面包
+item.Wheat Bread.name=小麦面包
+
+item.Barley Whole.name=大麦
+item.Maize Ear.name=玉米穗
+item.Oat Whole.name=燕麦
+item.Rice Whole.name=稻米
+item.Rye Whole.name=黑麦
+item.Wheat Whole.name=小麦
+
+item.Barley Grain.name=大麦粒
+item.Oat Grain.name=燕麦粒
+item.Rice Grain.name=稻米粒
+item.Rye Grain.name=黑麦粒
+item.Wheat Grain.name=小麦粒
+
+item.Barley Ground.name=大麦粉
+item.Cornmeal Ground.name=玉米粉
+item.Oat Ground.name=燕麦粉
+item.Rice Ground.name=米粉
+item.Rye Ground.name=黑麦粉
+item.Wheat Ground.name=小麦粉
+
+item.Barley Dough.name=大麦面团
+item.Cornmeal Dough.name=玉米面团
+item.Oat Dough.name=燕麦面团
+item.Rice Dough.name=米团
+item.Rye Dough.name=黑麦面团
+item.Wheat Dough.name=小麦面团
+
+item.Seeds Barley.name=大麦种子
+item.Seeds Maize.name=玉米种子
+item.Seeds Oat.name=燕麦种子
+item.Seeds Rice.name=稻米种子
+item.Seeds Rye.name=黑麦种子
+item.Seeds Wheat.name=小麦种子
+
+#== Fruit ==
+item.Green Apple.name=青苹果
+item.Red Apple.name=红苹果
+item.Banana.name=香蕉
+item.Cherry.name=樱桃
+item.Lemon.name=柠檬
+item.Olive.name=橄榄
+item.Orange.name=橙子
+item.Peach.name=桃子
+item.Plum.name=李子
+
+item.FruitSapling.Green Apple.name=青苹果树苗
+item.FruitSapling.Red Apple.name=红苹果树苗
+item.FruitSapling.Banana.name=香蕉树苗
+item.FruitSapling.Cherry.name=樱桃树苗
+item.FruitSapling.Lemon.name=柠檬树苗
+item.FruitSapling.Olive.name=橄榄树苗
+item.FruitSapling.Orange.name=橙子树苗
+item.FruitSapling.Peach.name=桃树苗
+item.FruitSapling.Plum.name=李树苗
+
+#=== Berry Bushes ===
+tile.BerryBush.Blackberry.name=黑莓灌木
+tile.BerryBush.Blueberry.name=蓝莓灌木
+tile.BerryBush.Bunchberry.name=加拿大草茱萸
+tile.BerryBush.Cloudberry.name=云莓灌木
+tile.BerryBush.Cranberry.name=蔓越莓灌木
+tile.BerryBush.Elderberry.name=接骨木
+tile.BerryBush.Gooseberry.name=鹅莓灌木
+tile.BerryBush.Raspberry.name=山莓灌木
+tile.BerryBush.Snowberry.name=雪果灌木
+tile.BerryBush.Strawberry.name=草莓灌木
+tile.BerryBush.Wintergreen.name=冬青灌木
+
+item.Blackberry.name=黑莓
+item.Blueberry.name=蓝莓
+item.Bunchberry.name=山茱萸浆果
+item.Cloudberry.name=云莓
+item.Cranberry.name=蔓越莓
+item.Elderberry.name=接骨木浆果
+item.Gooseberry.name=鹅莓
+item.Raspberry.name=山莓
+item.Snowberry.name=雪果
+item.Strawberry.name=草莓
+item.Wintergreen Berry.name=冬青浆果
+
+item.Blackberry Leaf.name=黑莓叶
+item.Blueberry Leaf.name=蓝莓叶
+item.Bunchberry Leaf.name=加拿大草茱萸叶
+item.Cloudberry Leaf.name=云莓叶
+item.Cranberry Leaf.name=蔓越莓叶
+item.Elderberry Leaf.name=接骨木叶
+item.Gooseberry Leaf.name=鹅莓叶
+item.Raspberry Leaf.name=山莓叶
+item.Snowberry Leaf.name=雪果叶
+item.Strawberry Leaf.name=草莓叶
+item.Wintergreen Leaf.name=冬青叶
+
+#== Protein ==
+item.Beef.name=牛肉
+item.Calamari.name=鱿鱼
+item.egg.name=
+item.Fish.name=鱼
+item.Mutton.name=羊肉
+item.Porkchop.name=猪肉
+item.Chicken.name=鸡肉
+item.Venison.name=鹿肉
+item.HorseMeat.name=马肉
+item.Egg Cooked.name=煮鸡蛋
+
+item.Soybeans.name=大豆
+item.Seeds Soybean.name=大豆种子
+
+#== Dairy ==
+item.Cheese.name=奶酪
+
+#== Vegetables ==
+item.Green Bell Pepper.name=青色甜椒
+item.Red Bell Pepper.name=红色甜椒
+item.Yellow Bell Pepper.name=黄色甜椒
+item.Cabbage.name=卷心菜
+item.Carrot.name=胡萝卜
+item.Garlic.name=大蒜
+item.Greenbeans.name=绿豆
+item.Onion.name=洋葱
+item.Potato.name=马铃薯
+item.Rutabaga.name=大头菜
+item.Squash.name=西葫芦
+item.Tomato.name=番茄
+
+item.Seeds Red Bell Pepper.name=红色甜椒种子
+item.Seeds Yellow Bell Pepper.name=黄色甜椒种子
+item.Seeds Cabbage.name=卷心菜种子
+item.Seeds Carrot.name=胡萝卜种子
+item.Seeds Garlic.name=大蒜种子
+item.Seeds Greenbean.name=绿豆种子
+item.Seeds Onion.name=洋葱种子
+item.Seeds Potato.name=土豆种子
+item.Seeds Rutabaga.name=大头菜种子
+item.Seeds Squash.name=西葫芦种子
+item.Seeds Tomato.name=番茄种子
+
+#== Alcohol ==
+item.Glass Bottle.name=空玻璃瓶
+item.Beer.name=啤酒
+item.Cider.name=苹果酒
+item.Rum.name=朗姆酒
+item.RyeWhiskey.name=黑麦威士忌
+item.Sake.name=米酒
+item.Vodka.name=伏特加
+item.Whiskey.name=威士忌
+item.CornWhiskey.name=
+
+#===========
+#= Pottery =
+#===========
+item.Clay.Clay.name=粘土
+item.Clay.Fire Clay.name=陶土
+
+item.clay.clayflatlight.name=压平的浅色粘土
+item.clay.clayflatdark.name=压平的深色粘土
+item.clay.clayflatfire.name=压平的耐火粘土
+item.clay.clayflatdarkfire.name=压平的深色耐火粘土
+
+item.Jug.Clay Jug.name=粘土壶
+item.Jug.Ceramic Jug.name=陶瓷壶
+item.Jug.Water Jug.name=水壶
+
+item.Pot.Clay Pot.name=粘土罐
+item.Pot.Ceramic Pot.name=陶瓷罐
+
+item.Small Vessel.Clay Vessel.name=粘土花瓶
+item.Small Vessel.Ceramic Vessel.name=陶瓷花瓶
+
+item.Large Vessel.Clay Vessel [Large].name=粘土花瓶[大型]
+item.Large Vessel.Ceramic Vessel [Large].name=陶瓷花瓶[大型]
+
+item.Mold.Clay Mold.name=粘土模具
+item.Mold.Ceramic Mold.name=陶瓷模具
+
+item.Axe Mold.Clay Mold Axe.name=粘土斧头模具
+item.Axe Mold.Ceramic Mold Axe.name=斧头模具
+item.Axe Mold.Ceramic Mold Axe Copper.name=斧头模具(铜)
+item.Axe Mold.Ceramic Mold Axe Bronze.name=斧头模具(青铜)
+item.Axe Mold.Ceramic Mold Axe Black Bronze.name=斧头模具(黑青铜)
+item.Axe Mold.Ceramic Mold Axe Bismuth Bronze.name=斧头模具(铋青铜)
+
+item.Chisel Mold.Clay Mold Chisel.name=粘土凿子模具
+item.Chisel Mold.Ceramic Mold Chisel.name=凿子模具
+item.Chisel Mold.Ceramic Mold Chisel Copper.name=凿子模具(铜)
+item.Chisel Mold.Ceramic Mold Chisel Bronze.name=凿子模具(青铜)
+item.Chisel Mold.Ceramic Mold Chisel Black Bronze.name=凿子模具(黑青铜)
+item.Chisel Mold.Ceramic Mold Chisel Bismuth Bronze.name=凿子模具(铋青铜)
+
+item.Hammer Mold.Clay Mold Hammer.name=粘土锤子模具
+item.Hammer Mold.Ceramic Mold Hammer.name=锤子模具
+item.Hammer Mold.Ceramic Mold Hammer Copper.name=锤子模具(铜)
+item.Hammer Mold.Ceramic Mold Hammer Bronze.name=锤子模具(青铜)
+item.Hammer Mold.Ceramic Mold Hammer Black Bronze.name=锤子模具(黑青铜)
+item.Hammer Mold.Ceramic Mold Hammer Bismuth Bronze.name=锤子模具(铋青铜)
+
+item.Hoe Mold.Clay Mold Hoe.name=粘土锄头模具
+item.Hoe Mold.Ceramic Mold Hoe.name=锄头模具
+item.Hoe Mold.Ceramic Mold Hoe Copper.name=锄头模具(铜)
+item.Hoe Mold.Ceramic Mold Hoe Bronze.name=锄头模具(青铜)
+item.Hoe Mold.Ceramic Mold Hoe Black Bronze.name=锄头模具(黑青铜)
+item.Hoe Mold.Ceramic Mold Hoe Bismuth Bronze.name=锄头模具(铋青铜)
+
+item.Knife Mold.Clay Mold Knife.name=粘土刀模具
+item.Knife Mold.Ceramic Mold Knife.name=刀模具
+item.Knife Mold.Ceramic Mold Knife Copper.name=刀模具(铜)
+item.Knife Mold.Ceramic Mold Knife Bronze.name=刀模具(青铜)
+item.Knife Mold.Ceramic Mold Knife Black Bronze.name=刀模具(黑青铜)
+item.Knife Mold.Ceramic Mold Knife Bismuth Bronze.name=刀模具(铋青铜)
+
+item.Javelin Mold.Clay Mold Javelin.name=粘土标枪头模具
+item.Javelin Mold.Ceramic Mold Javelin.name=标枪头模具
+item.Javelin Mold.Ceramic Mold Javelin Copper.name=标枪头模具(铜)
+item.Javelin Mold.Ceramic Mold Javelin Bronze.name=标枪头模具(青铜)
+item.Javelin Mold.Ceramic Mold Javelin Black Bronze.name=标枪头模具(黑青铜)
+item.Javelin Mold.Ceramic Mold Javelin Bismuth Bronze.name=标枪头模具(铋青铜)
+
+item.Mace Mold.Clay Mold Mace.name=粘土槌模具
+item.Mace Mold.Ceramic Mold Mace.name=槌模具
+item.Mace Mold.Ceramic Mold Mace Copper.name=槌模具(铜)
+item.Mace Mold.Ceramic Mold Mace Bronze.name=槌模具(青铜)
+item.Mace Mold.Ceramic Mold Mace Black Bronze.name=槌模具(黑青铜)
+item.Mace Mold.Ceramic Mold Mace Bismuth Bronze.name=槌模具(铋青铜)
+
+item.Pick Mold.Clay Mold Pick.name=粘土镐子模具
+item.Pick Mold.Ceramic Mold Pick.name=镐子模具
+item.Pick Mold.Ceramic Mold Pick Copper.name=镐子模具(铜)
+item.Pick Mold.Ceramic Mold Pick Bronze.name=镐子模具(青铜)
+item.Pick Mold.Ceramic Mold Pick Black Bronze.name=镐子模具(黑青铜)
+item.Pick Mold.Ceramic Mold Pick Bismuth Bronze.name=镐子模具(铋青铜)
+
+item.ProPick Mold.Clay Mold ProPick.name=粘土勘矿镐模具
+item.ProPick Mold.Ceramic Mold ProPick.name=勘矿镐模具
+item.ProPick Mold.Ceramic Mold ProPick Copper.name=勘矿镐模具(铜)
+item.ProPick Mold.Ceramic Mold ProPick Bronze.name=勘矿镐模具(青铜)
+item.ProPick Mold.Ceramic Mold ProPick Black Bronze.name=勘矿镐模具(黑青铜)
+item.ProPick Mold.Ceramic Mold ProPick Bismuth Bronze.name=勘矿镐模具(铋青铜)
+
+item.Saw Mold.Clay Mold Saw.name=粘土锯模具
+item.Saw Mold.Ceramic Mold Saw.name=锯模具
+item.Saw Mold.Ceramic Mold Saw Copper.name=锯模具(铜)
+item.Saw Mold.Ceramic Mold Saw Bronze.name=锯模具(青铜)
+item.Saw Mold.Ceramic Mold Saw Black Bronze.name=锯模具(黑青铜)
+item.Saw Mold.Ceramic Mold Saw Bismuth Bronze.name=锯模具(铋青铜)
+
+item.Scythe Mold.Clay Mold Scythe.name=粘土镰刀模具
+item.Scythe Mold.Ceramic Mold Scythe.name=镰刀模具
+item.Scythe Mold.Ceramic Mold Scythe Copper.name=镰刀模具(铜)
+item.Scythe Mold.Ceramic Mold Scythe Bronze.name=镰刀模具(青铜)
+item.Scythe Mold.Ceramic Mold Scythe Black Bronze.name=镰刀模具(黑青铜)
+item.Scythe Mold.Ceramic Mold Scythe Bismuth Bronze.name=镰刀模具(铋青铜)
+
+item.Shovel Mold.Clay Mold Shovel.name=粘土铲子模具
+item.Shovel Mold.Ceramic Mold Shovel.name=铲子模具
+item.Shovel Mold.Ceramic Mold Shovel Copper.name=铲子模具(铜)
+item.Shovel Mold.Ceramic Mold Shovel Bronze.name=铲子模具(青铜)
+item.Shovel Mold.Ceramic Mold Shovel Black Bronze.name=铲子模具(黑青铜)
+item.Shovel Mold.Ceramic Mold Shovel Bismuth Bronze.name=铲子模具(铋青铜)
+
+item.Sword Mold.Clay Mold Sword.name=粘土剑模具
+item.Sword Mold.Ceramic Mold Sword.name=剑模具
+item.Sword Mold.Ceramic Mold Sword Copper.name=剑模具(铜)
+item.Sword Mold.Ceramic Mold Sword Bronze.name=剑模具(青铜)
+item.Sword Mold.Ceramic Mold Sword Black Bronze.name=剑模具(黑青铜)
+item.Sword Mold.Ceramic Mold Sword Bismuth Bronze.name=剑模具(铋青铜)
+
+item.Spindle.name=纺锤
+item.Spindle Head.Clay Spindle.name=粘土纺锤
+item.Spindle Head.Spindle Head.name=纺锤头
+
+item.Fire Brick.Fire Brick.name=耐火砖
+item.Fire Brick.Clay Fire Brick.name=耐火粘土砖
+tile.FireBrick.name=耐火砖方块
+
+#= Gems =
+item.Agate.Chipped.name=破裂的玛瑙
+item.Amethyst.Chipped.name=破裂的紫晶
+item.Beryl.Chipped.name=破裂的苍玉
+item.Diamond.Chipped.name=破裂的钻石
+item.Emerald.Chipped.name=破裂的绿宝石
+item.Garnet.Chipped.name=破裂的榴石
+item.Jade.Chipped.name=破裂的翡翠
+item.Jasper.Chipped.name=破裂的碧玉
+item.Opal.Chipped.name=破裂的蛋白石
+item.Ruby.Chipped.name=破裂的红宝石
+item.Sapphire.Chipped.name=破裂的蓝宝石
+item.Topaz.Chipped.name=破裂的黄玉
+item.Tourmaline.Chipped.name=破裂的碧玺
+
+item.Agate.Flawed.name=微瑕的玛瑙
+item.Amethyst.Flawed.name=微瑕的紫晶
+item.Beryl.Flawed.name=微瑕的苍玉
+item.Diamond.Flawed.name=微瑕的钻石
+item.Emerald.Flawed.name=微瑕的绿宝石
+item.Garnet.Flawed.name=微瑕的榴石
+item.Jade.Flawed.name=微瑕的翡翠
+item.Jasper.Flawed.name=微瑕的碧玉
+item.Opal.Flawed.name=微瑕的蛋白石
+item.Ruby.Flawed.name=微瑕的红宝石
+item.Sapphire.Flawed.name=微瑕的蓝宝石
+item.Topaz.Flawed.name=微瑕的黄玉
+item.Tourmaline.Flawed.name=微瑕的碧玺
+
+item.Agate.Normal.name=玛瑙
+item.Amethyst.Normal.name=紫晶
+item.Beryl.Normal.name=苍玉
+item.Diamond.Normal.name=钻石
+item.Emerald.Normal.name=绿宝石
+item.Garnet.Normal.name=榴石
+item.Jade.Normal.name=翡翠
+item.Jasper.Normal.name=碧玉
+item.Opal.Normal.name=蛋白石
+item.Ruby.Normal.name=红宝石
+item.Sapphire.Normal.name=蓝宝石
+item.Topaz.Normal.name=黄玉
+item.Tourmaline.Normal.name=碧玺
+
+item.Agate.Flawless.name=无瑕的玛瑙
+item.Amethyst.Flawless.name=无瑕的紫晶
+item.Beryl.Flawless.name=无瑕的苍玉
+item.Diamond.Flawless.name=无瑕的钻石
+item.Emerald.Flawless.name=无瑕的绿宝石
+item.Garnet.Flawless.name=无瑕的榴石
+item.Jade.Flawless.name=无瑕的翡翠
+item.Jasper.Flawless.name=无瑕的碧玉
+item.Opal.Flawless.name=无瑕的蛋白石
+item.Ruby.Flawless.name=无瑕的红宝石
+item.Sapphire.Flawless.name=无瑕的蓝宝石
+item.Topaz.Flawless.name=无瑕的黄玉
+item.Tourmaline.Flawless.name=无瑕的碧玺
+
+item.Agate.Exquisite.name=精美的玛瑙
+item.Amethyst.Exquisite.name=精美的紫晶
+item.Beryl.Exquisite.name=精美的苍玉
+item.Diamond.Exquisite.name=精美的钻石
+item.Emerald.Exquisite.name=精美的绿宝石
+item.Garnet.Exquisite.name=精美的榴石
+item.Jade.Exquisite.name=精美的翡翠
+item.Jasper.Exquisite.name=精美的碧玉
+item.Opal.Exquisite.name=精美的蛋白石
+item.Ruby.Exquisite.name=精美的红宝石
+item.Sapphire.Exquisite.name=精美的蓝宝石
+item.Topaz.Exquisite.name=精美的黄玉
+item.Tourmaline.Exquisite.name=精美的碧玺
+
+#===========
+#= Powders =
+#===========
+item.dyePowder.black.name=墨囊
+item.dyePowder.blue.name=青金石
+item.dyePowder.brown.name=可可豆
+item.dyePowder.cyan.name=青色颜料
+item.dyePowder.gray.name=灰色颜料
+item.dyePowder.green.name=绿色颜料
+item.dyePowder.lightBlue.name=浅蓝色颜料
+item.dyePowder.lime.name=柠檬色颜料
+item.dyePowder.magenta.name=品红色颜料
+item.dyePowder.orange.name=橙色颜料
+item.dyePowder.pink.name=粉色颜料
+item.dyePowder.purple.name=紫色颜料
+item.dyePowder.red.name=红色颜料
+item.dyePowder.silver.name=浅灰色颜料
+item.dyePowder.white.name=骨粉
+item.dyePowder.yellow.name=黄色颜料
+
+item.Coke.name=焦炭
+item.Powder.Flux.name=助焊剂
+item.Powder.Graphite Powder.name=石墨粉
+item.Powder.Hematite Powder.name=赤铁矿粉
+item.Powder.Kaolinite Powder.name=高岭石粉
+item.Powder.Lapis Lazuli Powder.name=青金石粉
+item.Powder.Limonite Powder.name=褐铁矿粉
+item.Powder.Malachite Powder.name=孔雀石粉
+item.Powder.Salt.name=盐
+item.Powder.Saltpeter Powder.name=硝石粉
+item.Powder.Sulfur Powder.name=硫磺粉
+
+#=========
+#= Stone =
+#=========
+#== Stone Items ==
+item.LooseRock.Andesite.name=安山岩
+item.LooseRock.Basalt.name=玄武岩
+item.LooseRock.Chalk.name=白垩岩
+item.LooseRock.Chert.name=角岩
+item.LooseRock.Claystone.name=粘土岩
+item.LooseRock.Conglomerate.name=砾岩
+item.LooseRock.Dacite.name=英安岩
+item.LooseRock.Diorite.name=闪长岩
+item.LooseRock.Dolomite.name=白云岩
+item.LooseRock.Gabbro.name=辉长岩
+item.LooseRock.Gneiss.name=片麻岩
+item.LooseRock.Granite.name=花岗石
+item.LooseRock.Limestone.name=石灰岩
+item.LooseRock.Marble.name=大理石
+item.LooseRock.Phyllite.name=千枚岩
+item.LooseRock.Quartzite.name=硅岩
+item.LooseRock.Rhyolite.name=流纹岩
+item.LooseRock.Rock Salt.name=盐岩
+item.LooseRock.Schist.name=片岩
+item.LooseRock.Shale.name=页岩
+item.LooseRock.Slate.name=板岩
+
+item.ItemStoneBrick.Andesite.name=安山岩砖块
+item.ItemStoneBrick.Basalt.name=玄武岩砖块
+item.ItemStoneBrick.Chalk.name=白垩岩砖块
+item.ItemStoneBrick.Chert.name=角岩砖块
+item.ItemStoneBrick.Claystone.name=粘土岩砖块
+item.ItemStoneBrick.Conglomerate.name=砾岩砖块
+item.ItemStoneBrick.Dacite.name=英安岩砖块
+item.ItemStoneBrick.Diorite.name=闪长岩砖块
+item.ItemStoneBrick.Dolomite.name=白云岩砖块
+item.ItemStoneBrick.Gabbro.name=辉长岩砖块
+item.ItemStoneBrick.Gneiss.name=片麻岩砖块
+item.ItemStoneBrick.Granite.name=花岗石砖块
+item.ItemStoneBrick.Limestone.name=石灰岩砖块
+item.ItemStoneBrick.Marble.name=大理石砖块
+item.ItemStoneBrick.Phyllite.name=千枚岩砖块
+item.ItemStoneBrick.Quartzite.name=硅岩砖块
+item.ItemStoneBrick.Rhyolite.name=流纹岩砖块
+item.ItemStoneBrick.Rock Salt.name=盐岩砖块
+item.ItemStoneBrick.Schist.name=片岩砖块
+item.ItemStoneBrick.Shale.name=页岩砖块
+item.ItemStoneBrick.Slate.name=板岩砖块
+
+item.FlatRock.Andesite.name=安山岩
+item.FlatRock.Basalt.name=玄武岩
+item.FlatRock.Chalk.name=白垩岩
+item.FlatRock.Chert.name=角岩
+item.FlatRock.Claystone.name=粘土岩
+item.FlatRock.Conglomerate.name=砾岩
+item.FlatRock.Dacite.name=英安岩
+item.FlatRock.Diorite.name=闪长岩
+item.FlatRock.Dolomite.name=白云岩
+item.FlatRock.Gabbro.name=辉长岩
+item.FlatRock.Gneiss.name=片麻岩
+item.FlatRock.Granite.name=花岗石
+item.FlatRock.Limestone.name=石灰岩
+item.FlatRock.Marble.name=大理石
+item.FlatRock.Phyllite.name=千枚岩
+item.FlatRock.Quartzite.name=硅岩
+item.FlatRock.Rhyolite.name=流纹岩
+item.FlatRock.Rock Salt.name=盐岩
+item.FlatRock.Schist.name=片岩
+item.FlatRock.Shale.name=页岩
+item.FlatRock.Slate=板岩
+
+#== Stone Blocks ==
+tile.WallCobble.Andesite.name=页岩圆石墙
+tile.WallCobble.Basalt.name=泥岩圆石墙
+tile.WallCobble.Chalk.name=英安岩圆石墙
+tile.WallCobble.Chert.name=安山岩圆石墙
+tile.WallCobble.Claystone.name=白云岩圆石墙
+tile.WallCobble.Conglomerate.name=流纹岩圆石墙
+tile.WallCobble.Dacite.name=粘土岩圆石墙
+tile.WallCobble.Diorite.name=闪长岩圆石墙
+tile.WallCobble.Dolomite.name=玄武岩圆石墙
+tile.WallCobble.Gabbro.name=辉长岩圆石墙
+tile.WallCobble.Gneiss.name=片麻岩圆石墙
+tile.WallCobble.Granite.name=花岗石圆石墙
+tile.WallCobble.Limestone.name=白垩岩圆石墙
+tile.WallCobble.Marble.name=大理石圆石墙
+tile.WallCobble.Phyllite.name=千枚岩圆石墙
+tile.WallCobble.Quartzite.name=硅岩圆石墙
+tile.WallCobble.Rhyolite.name=沙泥岩圆石墙
+tile.WallCobble.Rock Salt.name=角岩圆石墙
+tile.WallCobble.Schist.name=片岩圆石墙
+tile.WallCobble.Shale.name=砾岩圆石墙
+tile.WallCobble.Slate.name=板岩圆石墙
+
+tile.WallRaw.Andesite.name=页岩墙
+tile.WallRaw.Basalt.name=泥岩墙
+tile.WallRaw.Chalk.name=英安岩墙
+tile.WallRaw.Chert.name=安山岩墙
+tile.WallRaw.Claystone.name=白云岩墙
+tile.WallRaw.Conglomerate.name=流纹岩墙
+tile.WallRaw.Dacite.name=粘土岩墙
+tile.WallRaw.Diorite.name=闪长岩墙
+tile.WallRaw.Dolomite.name=玄武岩墙
+tile.WallRaw.Gabbro.name=辉长岩墙
+tile.WallRaw.Gneiss.name=片麻岩墙
+tile.WallRaw.Granite.name=花岗石墙
+tile.WallRaw.Limestone.name=白垩岩墙
+tile.WallRaw.Marble.name=大理石墙
+tile.WallRaw.Phyllite.name=千枚岩墙
+tile.WallRaw.Quartzite.name=硅岩墙
+tile.WallRaw.Rhyolite.name=沙泥岩墙
+tile.WallRaw.Rock Salt.name=角岩墙
+tile.WallRaw.Schist.name=片岩墙
+tile.WallRaw.Shale.name=砾岩墙
+tile.WallRaw.Slate.name=板岩墙
+
+tile.WallBrick.Andesite.name=页岩砖墙
+tile.WallBrick.Basalt.name=泥岩砖墙
+tile.WallBrick.Chalk.name=英安岩砖墙
+tile.WallBrick.Chert.name=安山岩砖墙
+tile.WallBrick.Claystone.name=白云岩砖墙
+tile.WallBrick.Conglomerate.name=流纹岩砖墙
+tile.WallBrick.Dacite.name=粘土岩砖墙
+tile.WallBrick.Diorite.name=闪长岩砖墙
+tile.WallBrick.Dolomite.name=玄武岩砖墙
+tile.WallBrick.Gabbro.name=辉长岩砖墙
+tile.WallBrick.Gneiss.name=片麻岩砖墙
+tile.WallBrick.Granite.name=花岗石砖墙
+tile.WallBrick.Limestone.name=白垩岩砖墙
+tile.WallBrick.Marble.name=大理石砖墙
+tile.WallBrick.Phyllite.name=千枚岩砖墙
+tile.WallBrick.Quartzite.name=硅岩砖墙
+tile.WallBrick.Rhyolite.name=沙泥岩砖墙
+tile.WallBrick.Rock Salt.name=角岩砖墙
+tile.WallBrick.Schist.name=片岩砖墙
+tile.WallBrick.Shale.name=砾岩砖墙
+tile.WallBrick.Slate.name=板岩砖墙
+
+tile.WallSmooth.Andesite.name=页岩光滑墙壁
+tile.WallSmooth.Basalt.name=泥岩光滑墙壁
+tile.WallSmooth.Chalk.name=英安岩光滑墙壁
+tile.WallSmooth.Chert.name=安山岩光滑墙壁
+tile.WallSmooth.Claystone.name=白云岩光滑墙壁
+tile.WallSmooth.Conglomerate.name=流纹岩光滑墙壁
+tile.WallSmooth.Dacite.name=粘土岩光滑墙壁
+tile.WallSmooth.Diorite.name=闪长岩光滑墙壁
+tile.WallSmooth.Dolomite.name=玄武岩光滑墙壁
+tile.WallSmooth.Gabbro.name=辉长岩光滑墙壁
+tile.WallSmooth.Gneiss.name=片麻岩光滑墙壁
+tile.WallSmooth.Granite.name=花岗石光滑墙壁
+tile.WallSmooth.Limestone.name=白垩岩光滑墙壁
+tile.WallSmooth.Marble.name=大理石光滑墙壁
+tile.WallSmooth.Phyllite.name=千枚岩光滑墙壁
+tile.WallSmooth.Quartzite.name=硅岩光滑墙壁
+tile.WallSmooth.Rhyolite.name=沙泥岩光滑墙壁
+tile.WallSmooth.Rock Salt.name=角岩光滑墙壁
+tile.WallSmooth.Schist.name=片岩光滑墙壁
+tile.WallSmooth.Shale.name=砾岩光滑墙壁
+tile.WallSmooth.Slate.name=板岩光滑墙壁
+
+tile.IgExRock.Andesite.name=安山岩
+tile.IgExRock.Basalt.name=玄武岩
+tile.SedRock.Chalk.name=白垩岩
+tile.SedRock.Chert.name=角岩
+tile.SedRock.Claystone.name=粘土岩
+tile.SedRock.Conglomerate.name=砾岩
+tile.IgExRock.Dacite.name=英安岩
+tile.IgInRock.Diorite.name=闪长岩
+tile.SedRock.Dolomite.name=白云岩
+tile.IgInRock.Gabbro.name=辉长岩
+tile.MMRock.Gneiss.name=片麻岩
+tile.IgInRock.Granite.name=花岗石
+tile.SedRock.Limestone.name=石灰岩
+tile.MMRock.Marble.name=大理石
+tile.MMRock.Phyllite.name=千枚岩
+tile.MMRock.Quartzite.name=硅岩
+tile.IgExRock.Rhyolite.name=流纹岩
+tile.SedRock.Rock Salt.name=盐岩
+tile.MMRock.Schist.name=片岩
+tile.SedRock.Shale.name=页岩
+tile.MMRock.Slate.name=板岩
+
+tile.IgExRockCobble.Andesite.name=安山岩圆石
+tile.IgExRockCobble.Basalt.name=玄武岩圆石
+tile.SedRockCobble.Chalk.name=白垩岩圆石
+tile.SedRockCobble.Chert.name=角岩圆石
+tile.SedRockCobble.Claystone.name=粘土岩圆石
+tile.SedRockCobble.Conglomerate.name=砾岩圆石
+tile.IgExRockCobble.Dacite.name=英安岩圆石
+tile.IgInRockCobble.Diorite.name=闪长岩圆石
+tile.SedRockCobble.Dolomite.name=白云岩圆石
+tile.IgInRockCobble.Gabbro.name=辉长岩圆石
+tile.MMRockCobble.Gneiss.name=片麻岩圆石
+tile.IgInRockCobble.Granite.name=花岗石圆石
+tile.SedRockCobble.Limestone.name=石灰岩圆石
+tile.MMRockCobble.Marble.name=大理石圆石
+tile.MMRockCobble.Phyllite.name=千枚岩圆石
+tile.MMRockCobble.Quartzite.name=硅岩圆石
+tile.IgExRockCobble.Rhyolite.name=流纹岩圆石
+tile.SedRockCobble.Rock Salt.name=盐岩圆石
+tile.MMRockCobble.Schist.name=片岩圆石
+tile.SedRockCobble.Shale.name=页岩圆石
+tile.MMRockCobble.Slate.name=板岩圆石
+
+tile.IgExRockSmooth.Andesite.name=光滑英安岩
+tile.IgExRockSmooth.Basalt.name=光滑玄武岩
+tile.SedRockSmooth.Chalk.name=光滑砂岩
+tile.SedRockSmooth.Chert.name=光滑页岩
+tile.SedRockSmooth.Claystone.name=光滑砾岩
+tile.SedRockSmooth.Conglomerate.name=光滑泥岩
+tile.IgExRockSmooth.Dacite.name=光滑流纹岩
+tile.IgInRockSmooth.Diorite.name=光滑辉长岩
+tile.SedRockSmooth.Dolomite.name=光滑岩盐
+tile.IgInRockSmooth.Gabbro.name=光滑花岗岩
+tile.MMRockSmooth.Gneiss.name=光滑片岩
+tile.IgInRockSmooth.Granite.name=光滑闪长岩
+tile.SedRockSmooth.Limestone.name=光滑石灰岩
+tile.MMRockSmooth.Marble.name=光滑板岩
+tile.MMRockSmooth.Phyllite.name=光滑千枚岩
+tile.MMRockSmooth.Quartzite.name=光滑片麻岩
+tile.IgExRockSmooth.Rhyolite.name=光滑安山岩
+tile.SedRockSmooth.Rock Salt.name=光滑白云石
+tile.MMRockSmooth.Schist.name=光滑硅岩
+tile.SedRockSmooth.Shale.name=光滑粘土石
+tile.MMRockSmooth.Slate.name=光滑大理石
+
+tile.IgExRockBrick.Andesite.name=安山岩砖块
+tile.IgExRockBrick.Basalt.name=玄武岩砖块
+tile.SedRockBrick.Chalk.name=白垩岩砖块
+tile.SedRockBrick.Chert.name=角岩砖块
+tile.SedRockBrick.Claystone.name=粘土岩砖块
+tile.SedRockBrick.Conglomerate.name=砾岩砖块
+tile.IgExRockBrick.Dacite.name=英安岩砖块
+tile.IgInRockBrick.Diorite.name=闪长岩砖块
+tile.SedRockBrick.Dolomite.name=白云岩砖块
+tile.IgInRockBrick.Gabbro.name=辉长岩砖块
+tile.MMRockBrick.Gneiss.name=片麻岩砖块
+tile.IgInRockBrick.Granite.name=花岗石砖块
+tile.SedRockBrick.Limestone.name=石灰岩砖块
+tile.MMRockBrick.Marble.name=大理石砖块
+tile.MMRockBrick.Phyllite.name=千枚岩砖块
+tile.MMRockBrick.Quartzite.name=硅岩砖块
+tile.IgExRockBrick.Rhyolite.name=流纹岩砖块
+tile.SedRockBrick.Rock Salt.name=盐岩砖块
+tile.MMRockBrick.Schist.name=片岩砖块
+tile.SedRockBrick.Shale.name=页岩砖块
+tile.MMRockBrick.Slate.name=板岩砖块
+
+#=======
+#= Ore =
+#=======
+#== Ore Items ==
+item.Ore.Bituminous Coal.name=烟煤
+item.Ore.Borax.name=硼砂
+item.Ore.Cinnabar.name=朱砂
+item.Ore.Cryolite.name=冰晶石
+item.Ore.Graphite.name=石墨
+item.Ore.Gypsum.name=石膏
+item.Ore.Jet.name=黑玉
+item.Ore.Kaolinite.name=高岭石
+item.Ore.Kimberlite.name=金伯利岩
+item.Ore.Lapis Lazuli.name=青金石
+item.Ore.Lignite.name=褐煤
+item.Ore.Microcline.name=微斜长石
+item.Ore.Olivine.name=橄榄石
+item.Ore.Petrified Wood.name=硅化木
+item.Ore.Pitchblende.name=沥青铀矿
+item.Ore.Saltpeter.name=硝石
+item.Ore.Satinspar.name=纤维石膏
+item.Ore.Selenite.name=月光石
+item.Ore.Serpentine.name=蛇纹石
+item.Ore.Sulfur.name=硫磺
+item.Ore.Sylvite.name=钾盐
+
+item.Ore.Bismuthinite.name=辉铋矿
+item.Ore.Cassiterite.name=锡精矿
+item.Ore.Galena.name=方铅矿
+item.Ore.Garnierite.name=硅镁镍矿
+item.Ore.Hematite.name=赤铁矿
+item.Ore.Limonite.name=褐铁矿
+item.Ore.Magnetite.name=磁铁矿
+item.Ore.Malachite.name=孔雀石
+item.Ore.Native Copper.name=原生铜
+item.Ore.Native Gold.name=原生金
+item.Ore.Native Platinum.name=原生铂
+item.Ore.Native Silver.name=原生银
+item.Ore.Sphalerite.name=闪锌矿
+item.Ore.Tetrahedrite.name=黝铜矿
+
+item.Ore.Rich Bismuthinite.name=富集辉铋矿
+item.Ore.Rich Cassiterite.name=富集锡精矿
+item.Ore.Rich Galena.name=富集方铅矿
+item.Ore.Rich Garnierite.name=富集硅镁镍矿
+item.Ore.Rich Hematite.name=富集赤铁矿
+item.Ore.Rich Limonite.name=富集褐铁矿
+item.Ore.Rich Magnetite.name=富集磁铁矿
+item.Ore.Rich Malachite.name=富集孔雀石
+item.Ore.Rich Native Copper.name=富集原生铜
+item.Ore.Rich Native Gold.name=富集原生金
+item.Ore.Rich Native Platinum.name=富集原生铂
+item.Ore.Rich Native Silver.name=富集原生银
+item.Ore.Rich Sphalerite.name=富集闪锌矿
+item.Ore.Rich Tetrahedrite.name=富集黝铜矿
+
+item.Ore.Poor Bismuthinite.name=贫瘠辉铋矿
+item.Ore.Poor Cassiterite.name=贫瘠锡精矿
+item.Ore.Poor Galena.name=贫瘠方铅矿
+item.Ore.Poor Garnierite.name=贫瘠硅镁镍矿
+item.Ore.Poor Hematite.name=贫瘠赤铁矿
+item.Ore.Poor Limonite.name=贫瘠褐铁矿
+item.Ore.Poor Magnetite.name=贫瘠磁铁矿
+item.Ore.Poor Malachite.name=贫瘠孔雀石
+item.Ore.Poor Native Copper.name=贫瘠原生铜
+item.Ore.Poor Native Gold.name=贫瘠原生金
+item.Ore.Poor Native Platinum.name=贫瘠原生铂
+item.Ore.Poor Native Silver.name=贫瘠原生银
+item.Ore.Poor Sphalerite.name=贫瘠闪锌矿
+item.Ore.Poor Tetrahedrite.name=贫瘠黝铜矿
+
+item.Small Ore.Bismuthinite.name=小型辉铋矿
+item.Small Ore.Cassiterite.name=小型锡精矿
+item.Small Ore.Galena.name=小型方铅矿
+item.Small Ore.Garnierite.name=小型硅镁镍矿
+item.Small Ore.Hematite.name=小型赤铁矿
+item.Small Ore.Limonite.name=小型褐铁矿
+item.Small Ore.Magnetite.name=小型磁铁矿
+item.Small Ore.Malachite.name=小型孔雀石
+item.Small Ore.Native Copper.name=原生铜粒
+item.Small Ore.Native Gold.name=原生金粒
+item.Small Ore.Native Platinum.name=原生铂粒
+item.Small Ore.Native Silver.name=原生银粒
+item.Small Ore.Sphalerite.name=小型闪锌矿
+item.Small Ore.Tetrahedrite.name=小型黝铜矿
+
+#== Ore Blocks ==
+tile.Ore.Bituminous Coal.name=烟煤
+tile.Ore.Borax.name=硼砂
+tile.Ore.Cinnabar.name=朱砂
+tile.Ore.Cryolite.name=冰晶石
+tile.Ore.Graphite.name=石墨
+tile.Ore.Gypsum.name=石膏
+tile.Ore.Jet.name=黑玉
+tile.Ore.Kaolinite.name=高岭石
+tile.Ore.Kimberlite.name=金伯利岩
+tile.Ore.Lapis Lazuli.name=青金石
+tile.Ore.Lignite.name=褐煤
+tile.Ore.Microcline.name=微斜长石
+tile.Ore.Olivine.name=橄榄石
+tile.Ore.Petrified Wood.name=硅化木
+tile.Ore.Pitchblende.name=沥青铀矿
+tile.Ore.Saltpeter.name=硝石
+tile.Ore.Satinspar.name=纤维石膏
+tile.Ore.Selenite.name=月光石
+tile.Ore.Serpentine.name=蛇纹石
+tile.Ore.Sulfur.name=硫磺
+tile.Ore.Sylvite.name=钾盐
+
+tile.Ore.Bismuthinite.name=辉铋矿
+tile.Ore.Cassiterite.name=锡精矿
+tile.Ore.Galena.name=方铅矿
+tile.Ore.Garnierite.name=硅镁镍矿
+tile.Ore.Hematite.name=赤铁矿
+tile.Ore.Limonite.name=褐铁矿
+tile.Ore.Magnetite.name=磁铁矿
+tile.Ore.Malachite.name=孔雀石
+tile.Ore.Native Copper.name=原生铜
+tile.Ore.Native Gold.name=原生金
+tile.Ore.Native Platinum.name=原生铂
+tile.Ore.Native Silver.name=原生银
+tile.Ore.Sphalerite.name=闪锌矿
+tile.Ore.Tetrahedrite.name=黝铜矿
+
+#========
+#= Wood =
+#========
+#== Wood Items ==
+item.Log.Acacia.name=金合欢原木
+item.Log.Ash.name=白蜡树原木
+item.Log.Aspen.name=白杨原木
+item.Log.Birch.name=桦树原木
+item.Log.Chestnut.name=栗树原木
+item.Log.Douglas Fir.name=花旗松树原木
+item.Log.Hickory.name=山核桃树原木
+item.Log.Kapok.name=木棉树原木
+item.Log.Maple.name=枫树原木
+item.Log.Oak.name=橡树原木
+item.Log.Pine.name=松树原木
+item.Log.Sequoia.name=红杉树原木
+item.Log.Spruce.name=云杉树原木
+item.Log.Sycamore.name=悬铃树原木
+item.Log.White Cedar.name=北美香柏树原木
+item.Log.White Elm.name=榆树原木
+item.Log.Willow.name=柳树原木
+
+item.SinglePlank.Acacia.name=金合欢木板
+item.SinglePlank.Ash.name=白蜡木板
+item.SinglePlank.Aspen.name=白杨木板
+item.SinglePlank.Birch.name=桦树木板
+item.SinglePlank.Chestnut.name=栗树木板
+item.SinglePlank.Douglas Fir.name=花旗松木板
+item.SinglePlank.Hickory.name=山核桃木板
+item.SinglePlank.Kapok.name=木棉木板
+item.SinglePlank.Maple.name=枫树木板
+item.SinglePlank.Oak.name=橡树木板
+item.SinglePlank.Pine.name=松树木板
+item.SinglePlank.Sequoia.name=红杉木板
+item.SinglePlank.Spruce.name=云杉木板
+item.SinglePlank.Sycamore.name=悬铃木板
+item.SinglePlank.White Cedar.name=北美香柏木板
+item.SinglePlank.White Elm.name=榆树木板
+item.SinglePlank.Willow.name=杨柳木板
+
+item.Acacia Door.name=金合欢木门
+item.Ash Door.name=白蜡木门
+item.Aspen Door.name=白杨木门
+item.Birch Door.name=桦木门
+item.Chestnut Door.name=栗木门
+item.Douglas Fir Door.name=花旗松木门
+item.Hickory Door.name=山核桃木门
+item.Kapok Door.name=木棉木门
+item.Maple Door.name=枫木门
+item.Oak Door.name=橡木门
+item.Pine Door.name=松木门
+item.Sequoia Door.name=红杉木门
+item.Spruce Door.name=云杉木门
+item.Sycamore Door.name=悬铃木门
+item.White Cedar Door.name=北美香柏木门
+item.White Elm Door.name=榆树木门
+item.Willow Door.name=杨柳木门
+
+item.Barrel.Acacia.name=金合欢木桶
+item.Barrel.Ash.name=白蜡木桶
+item.Barrel.Aspen.name=白杨木桶
+item.Barrel.Birch.name=桦木桶
+item.Barrel.Chestnut.name=栗木桶
+item.Barrel.Douglas Fir.name=花旗松木桶
+item.Barrel.Hickory.name=山核桃木桶
+item.Barrel.Kapok.name=木棉木桶
+item.Barrel.Maple.name=枫木桶
+item.Barrel.Oak.name=橡木桶
+item.Barrel.Pine.name=松木桶
+item.Barrel.Sequoia.name=红杉木桶
+item.Barrel.Spruce.name=云杉木桶
+item.Barrel.Sycamore.name=悬铃木桶
+item.Barrel.White Cedar.name=北美香柏木桶
+item.Barrel.White Elm.name=榆树木桶
+item.Barrel.Willow.name=杨柳木桶
+
+item.Loom.Acacia.name=
+item.Loom.Ash.name=
+item.Loom.Aspen.name=
+item.Loom.Birch.name=
+item.Loom.Chestnut.name=
+item.Loom.Douglas Fir.name=
+item.Loom.Hickory.name=
+item.Loom.Kapok.name=
+item.Loom.Maple.name=
+item.Loom.Oak.name=
+item.Loom.Pine.name=
+item.Loom.Sequoia.name=
+item.Loom.Spruce.name=
+item.Loom.Sycamore.name=
+item.Loom.White Cedar.name=
+item.Loom.White Elm.name=
+item.Loom.Willow.name=
+
+#== Wood Blocks ==
+tile.log.Acacia.name=金合欢原木
+tile.log2.Acacia.name=金合欢原木
+tile.log.Ash.name=白蜡原木
+tile.log.Aspen.name=白杨原木
+tile.log.Birch.name=桦原木
+tile.log.Chestnut.name=栗原木
+tile.log.Douglas Fir.name=花旗松原木
+tile.log.Hickory.name=山核桃原木
+tile.log.Kapok.name=木棉原木
+tile.log.Maple.name=枫原木
+tile.log.Oak.name=橡原木
+tile.log.Pine.name=松原木
+tile.log.Sequoia.name=红杉原木
+tile.log.Spruce.name=云杉原木
+tile.log.Sycamore.name=悬铃原木
+tile.log.White Cedar.name=北美香柏原木
+tile.log.White Elm.name=榆树原木
+tile.log.Willow.name=杨柳原木
+
+tile.WoodVert2.Acacia.name=金合欢原木
+tile.WoodVert.Ash.name=白蜡原木
+tile.WoodVert.Aspen.name=白杨原木
+tile.WoodVert.Birch.name=桦原木
+tile.WoodVert.Chestnut.name=栗原木
+tile.WoodVert.Douglas Fir.name=花旗松原木
+tile.WoodVert.Hickory.name=山核桃原木
+tile.WoodVert.Kapok.name=木棉原木
+tile.WoodVert.Maple.name=枫原木
+tile.WoodVert.Oak.name=橡原木
+tile.WoodVert.Pine.name=松原木
+tile.WoodVert.Sequoia.name=红杉原木
+tile.WoodVert.Spruce.name=云杉原木
+tile.WoodVert.Sycamore.name=悬铃原木
+tile.WoodVert.White Cedar.name=北美香柏原木
+tile.WoodVert.White Elm.name=榆树原木
+tile.WoodVert.Willow.name=杨柳原木
+
+tile.WoodHoriz3.Acacia.name=金合欢原木
+tile.WoodHoriz.Ash.name=白蜡原木
+tile.WoodHoriz.Aspen.name=白杨原木
+tile.WoodHoriz.Birch.name=桦原木
+tile.WoodHoriz.Chestnut.name=栗原木
+tile.WoodHoriz.Douglas Fir.name=花旗松原木
+tile.WoodHoriz.Hickory.name=山核桃原木
+tile.WoodHoriz2.Kapok.name=木棉原木
+tile.WoodHoriz.Maple.name=枫原木
+tile.WoodHoriz.Oak.name=橡原木
+tile.WoodHoriz2.Pine.name=松原木
+tile.WoodHoriz2.Sequoia.name=红杉原木
+tile.WoodHoriz2.Spruce.name=云杉原木
+tile.WoodHoriz2.Sycamore.name=悬铃原木
+tile.WoodHoriz2.White Cedar.name=北美香柏原木
+tile.WoodHoriz2.White Elm.name=榆树原木
+tile.WoodHoriz2.Willow.name=杨柳原木
+
+tile.sapling2.Acacia.name=金合欢树苗
+tile.sapling.Ash.name=白蜡树苗
+tile.sapling.Aspen.name=白杨树苗
+tile.sapling.Birch.name=桦树苗
+tile.sapling.Chestnut.name=栗树苗
+tile.sapling.Douglas Fir.name=花旗松树苗
+tile.sapling.Hickory.name=山核桃树苗
+tile.sapling.Kapok.name=木棉树苗
+tile.sapling.Maple.name=枫树苗
+tile.sapling.Oak.name=橡树苗
+tile.sapling.Pine.name=松树苗
+tile.sapling.Sequoia.name=红杉树苗
+tile.sapling.Spruce.name=云杉树苗
+tile.sapling.Sycamore.name=悬铃树苗
+tile.sapling.White Cedar.name=北美香柏树苗
+tile.sapling.White Elm.name=榆树树苗
+tile.sapling.Willow.name=杨柳树苗
+
+tile.leaves.Acacia.name=金合欢树叶
+tile.leaves.Ash.name=白蜡树叶
+tile.leaves.Aspen.name=白杨树叶
+tile.leaves.Birch.name=桦树叶
+tile.leaves.Chestnut.name=栗树叶
+tile.leaves.Douglas Fir.name=花旗松树叶
+tile.leaves.Hickory.name=山核桃树叶
+tile.leaves.Kapok.name=木棉树叶
+tile.leaves.Maple.name=枫树叶
+tile.leaves.Oak.name=橡树叶
+tile.leaves.Pine.name=松树叶
+tile.leaves.Sequoia.name=红杉树叶
+tile.leaves.Spruce.name=云杉树叶
+tile.leaves.Sycamore.name=悬铃树叶
+tile.leaves.White Cedar.name=北美香柏树叶
+tile.leaves.White Elm.name=榆树树叶
+tile.leaves.Willow.name=杨柳树叶
+
+tile.wood2.Acacia.name=金合欢木板
+tile.wood.Ash.name=白蜡木板
+tile.wood.Aspen.name=白杨木板
+tile.wood.Birch.name=桦木板
+tile.wood.Chestnut.name=栗木板
+tile.wood.Douglas Fir.name=花旗松木板
+tile.wood.Hickory.name=山核桃木板
+tile.wood.Kapok.name=木棉木板
+tile.wood.Maple.name=枫木板
+tile.wood.Oak.name=橡木板
+tile.wood.Pine.name=松木板
+tile.wood.Sequoia.name=红杉木板
+tile.wood.Spruce.name=云杉木板
+tile.wood.Sycamore.name=悬铃木板
+tile.wood.White Cedar.name=北美香柏木板
+tile.wood.White Elm.name=榆树木板
+tile.wood.Willow.name=杨柳木板
+
+tile.Door Acacia.name=金合欢木门
+tile.Door Ash.name=白蜡木门
+tile.Door Aspen.name=白杨木门
+tile.Door Birch.name=桦木门
+tile.Door Chestnut.name=栗木门
+tile.Door Douglas Fir.name=花旗松木门
+tile.Door Hickory.name=山核桃木门
+tile.Door Kapok.name=木棉木门
+tile.Door Maple.name=枫木门
+tile.Door Oak.name=橡木门
+tile.Door Pine.name=松木门
+tile.Door Sequoia.name=红杉木门
+tile.Door Spruce.name=云杉木门
+tile.Door Sycamore.name=悬铃木门
+tile.Door White Cedar.name=北美香柏木门
+tile.Door White Elm.name=榆树木门
+tile.Door Willow.name=杨柳木门
+
+tile.Barrel.Acacia.name=金合欢木桶
+tile.Barrel.Ash.name=白蜡木桶
+tile.Barrel.Aspen.name=白杨木桶
+tile.Barrel.Birch.name=桦木桶
+tile.Barrel.Chestnut.name=栗木桶
+tile.Barrel.Douglas Fir.name=花旗松木桶
+tile.Barrel.Hickory.name=山核桃木桶
+tile.Barrel.Kapok.name=木棉木桶
+tile.Barrel.Maple.name=枫木桶
+tile.Barrel.Oak.name=橡木桶
+tile.Barrel.Pine.name=松木桶
+tile.Barrel.Sequoia.name=红杉木桶
+tile.Barrel.Spruce.name=云杉木桶
+tile.Barrel.Sycamore.name=悬铃木桶
+tile.Barrel.White Cedar.name=北美香柏木桶
+tile.Barrel.White Elm.name=榆树木桶
+tile.Barrel.Willow.name=杨柳木桶
+
+tile.Loom.Acacia.name=
+tile.Loom.Ash.name=
+tile.Loom.Aspen.name=
+tile.Loom.Birch.name=
+tile.Loom.Chestnut.name=
+tile.Loom.Douglas Fir.name=
+tile.Loom.Hickory.name=
+tile.Loom.Kapok.name=
+tile.Loom.Maple.name=
+tile.Loom.Oak.name=
+tile.Loom.Pine.name=
+tile.Loom.Sequoia.name=
+tile.Loom.Spruce.name=
+tile.Loom.Sycamore.name=
+tile.Loom.White Cedar.name=
+tile.Loom.White Elm.name=
+tile.Loom.Willow.name=
+
+tile.FenceTFC.Acacia.name=金合欢木栅栏
+tile.FenceTFC.Ash.name=白蜡木栅栏
+tile.FenceTFC.Aspen.name=白杨木栅栏
+tile.FenceTFC.Birch.name=桦木栅栏
+tile.FenceTFC.Chestnut.name=栗木栅栏
+tile.FenceTFC.Douglas Fir.name=花旗松木栅栏
+tile.FenceTFC.Hickory.name=山核桃木栅栏
+tile.FenceTFC.Kapok.name=木棉木栅栏
+tile.FenceTFC.Maple.name=枫木栅栏
+tile.FenceTFC.Oak.name=橡木栅栏
+tile.FenceTFC.Pine.name=松木栅栏
+tile.FenceTFC.Sequoia.name=红杉木栅栏
+tile.FenceTFC.Spruce.name=云杉木栅栏
+tile.FenceTFC.Sycamore.name=悬铃木栅栏
+tile.FenceTFC.White Cedar.name=北美香柏木栅栏
+tile.FenceTFC.White Elm.name=榆树木栅栏
+tile.FenceTFC.Willow.name=杨柳木栅栏
+
+tile.FenceGateTFC.Acacia.name=金合欢木栅栏门
+tile.FenceGateTFC.Ash.name=白蜡木栅栏门
+tile.FenceGateTFC.Aspen.name=白杨木栅栏门
+tile.FenceGateTFC.Birch.name=桦木栅栏门
+tile.FenceGateTFC.Chestnut.name=栗木栅栏门
+tile.FenceGateTFC.Douglas Fir.name=花旗松木栅栏门
+tile.FenceGateTFC.Hickory.name=山核桃木栅栏门
+tile.FenceGateTFC.Kapok.name=木棉木栅栏门
+tile.FenceGateTFC.Maple.name=枫木栅栏门
+tile.FenceGateTFC.Oak.name=橡木栅栏门
+tile.FenceGateTFC.Pine.name=松木栅栏门
+tile.FenceGateTFC.Sequoia.name=红杉木栅栏门
+tile.FenceGateTFC.Spruce.name=云杉木栅栏门
+tile.FenceGateTFC.Sycamore.name=悬铃木栅栏门
+tile.FenceGateTFC.White Cedar.name=北美香柏木栅栏门
+tile.FenceGateTFC.White Elm.name=榆树木栅栏门
+tile.FenceGateTFC.Willow.name=杨柳木栅栏门
+
+tile.ArmourStand.Acacia.name=金合欢木盔甲架
+tile.ArmourStand.Ash.name=白蜡木盔甲架
+tile.ArmourStand.Aspen.name=白杨木盔甲架
+tile.ArmourStand.Birch.name=桦木盔甲架
+tile.ArmourStand.Chestnut.name=栗木盔甲架
+tile.ArmourStand.Douglas Fir.name=花旗松木盔甲架
+tile.ArmourStand.Hickory.name=山核桃木盔甲架
+tile.ArmourStand.Kapok.name=木棉木盔甲架
+tile.ArmourStand.Maple.name=枫木盔甲架
+tile.ArmourStand.Oak.name=橡木盔甲架
+tile.ArmourStand.Pine.name=松木盔甲架
+tile.ArmourStand.Sequoia.name=红杉木盔甲架
+tile.ArmourStand.Spruce.name=云杉木盔甲架
+tile.ArmourStand.Sycamore.name=悬铃木盔甲架
+tile.ArmourStand.White Cedar.name=北美香柏木盔甲架
+tile.ArmourStand.White Elm.name=榆树木盔甲架
+tile.ArmourStand.Willow.name=杨柳木盔甲架
+
+tile.WoodSupportV2.Acacia.name=
+tile.WoodSupportV.Ash.name=
+tile.WoodSupportV.Aspen.name=
+tile.WoodSupportV.Birch.name=
+tile.WoodSupportV.Chestnut.name=
+tile.WoodSupportV.Douglas Fir.name=
+tile.WoodSupportV.Hickory.name=
+tile.WoodSupportV.Kapok.name=
+tile.WoodSupportV.Maple.name=
+tile.WoodSupportV.Oak.name=
+tile.WoodSupportV.Pine.name=
+tile.WoodSupportV.Sequoia.name=
+tile.WoodSupportV.Spruce.name=
+tile.WoodSupportV.Sycamore.name=
+tile.WoodSupportV.White Cedar.name=
+tile.WoodSupportV.White Elm.name=
+tile.WoodSupportV.Willow.name=
+
+tile.Toolrack.Acacia.name=金合欢木工具架
+tile.Toolrack.Ash.name=白蜡木工具架
+tile.Toolrack.Aspen.name=白杨木工具架
+tile.Toolrack.Birch.name=桦木工具架
+tile.Toolrack.Chestnut.name=栗木工具架
+tile.Toolrack.Douglas Fir.name=花旗松木工具架
+tile.Toolrack.Hickory.name=山核桃木工具架
+tile.Toolrack.Kapok.name=木棉木工具架
+tile.Toolrack.Maple.name=枫木工具架
+tile.Toolrack.Oak.name=橡木工具架
+tile.Toolrack.Pine.name=松木工具架
+tile.Toolrack.Sequoia.name=红杉木工具架
+tile.Toolrack.Spruce.name=云杉木工具架
+tile.Toolrack.Sycamore.name=悬铃木工具架
+tile.Toolrack.White Cedar.name=北美香柏木工具架
+tile.Toolrack.White Elm.name=榆树木工具架
+tile.Toolrack.Willow.name=杨柳木工具架
+
+#=======================
+#= Tools/Weapons/Armor =
+#=======================
+
+#== Stone Heads ==
+item.Stone Hammer Head.name=石锤子头部
+item.Stone Knife Blade.name=石刀刃
+
+item.IgIn Stone Axe Head.name=石斧刃
+item.IgIn Stone Chisel Head.name=石凿子头部
+item.IgIn Stone Hoe Head.name=石锄头头部
+item.IgIn Stone Javelin Head.name=石标枪头部
+item.IgIn Stone Shovel Head.name=石铲子头部
+
+item.Sed Stone Axe Head.name=石斧刃
+item.Sed Stone Chisel Head.name=石凿子头部
+item.Sed Stone Hoe Head.name=石锄头头部
+item.Sed Stone Javelin Head.name=石标枪头部
+item.Sed Stone Shovel Head.name=石铲子头部
+
+item.IgEx Stone Axe Head.name=石斧刃
+item.IgEx Stone Chisel Head.name=石凿子头部
+item.IgEx Stone Hoe Head.name=石锄头头部
+item.IgEx Stone Javelin Head.name=石标枪头部
+item.IgEx Stone Shovel Head.name=石铲子头部
+
+item.MM Stone Axe Head.name=石斧刃
+item.MM Stone Chisel Head.name=石凿子头部
+item.MM Stone Hoe Head.name=石锄头头部
+item.MM Stone Javelin Head.name=石标枪头部
+item.MM Stone Shovel Head.name=石铲子头部
+
+#== Stone Tools ==
+item.Stone Axe.name=石斧头
+item.IgIn Stone Axe.name=石斧头
+item.Sed Stone Axe.name=石斧头
+item.IgEx Stone Axe.name=石斧头
+item.MM Stone Axe.name=石斧头
+
+item.Stone Chisel.name=石凿子
+
+item.Stone Hammer.name=石锤子
+
+item.Stone Hoe.name=石锄头
+item.IgIn Stone Hoe.name=石锄头
+item.Sed Stone Hoe.name=石锄头
+item.IgEx Stone Hoe.name=石锄头
+item.MM Stone Hoe.name=石锄头
+
+item.Stone Javelin.name=石标枪
+item.IgIn Stone Javelin.name=石标枪
+item.Sed Stone Javelin.name=石标枪
+item.IgEx Stone Javelin.name=石标枪
+item.MM Stone Javelin.name=石标枪
+
+item.Stone Knife.name=石刀
+
+item.Stone Shovel.name=石铲子
+item.IgIn Stone Shovel.name=石铲子
+item.Sed Stone Shovel.name=石铲子
+item.IgEx Stone Shovel.name=石铲子
+item.MM Stone Shovel.name=石铲子
+
+#== Metal Heads ==
+#=== Axe Head ===
+item.Bismuth Bronze Axe Head.name=铋青铜斧刃
+item.Black Bronze Axe Head.name=黑青铜斧刃
+item.Black Steel Axe Head.name=黑钢斧刃
+item.Blue Steel Axe Head.name=蓝钢斧刃
+item.Bronze Axe Head.name=青铜斧刃
+item.Copper Axe Head.name=铜斧刃
+item.Red Steel Axe Head.name=红钢斧刃
+item.Steel Axe Head.name=钢斧刃
+item.Wrought Iron Axe Head.name=锻铁斧刃
+
+#=== Chisel Head ===
+item.Bismuth Bronze Chisel Head.name=铋青铜凿子头部
+item.Black Bronze Chisel Head.name=黑青铜凿子头部
+item.Black Steel Chisel Head.name=黑钢凿子头部
+item.Blue Steel Chisel Head.name=蓝钢凿子头部
+item.Bronze Chisel Head.name=青铜凿子头部
+item.Copper Chisel Head.name=铜凿子头部
+item.Red Steel Chisel Head.name=红钢凿子头部
+item.Steel Chisel Head.name=钢凿子头部
+item.Wrought Iron Chisel Head.name=锻铁凿子头部
+
+#=== Hammer Head ===
+item.Bismuth Bronze Hammer Head.name=铋青铜锤头头部
+item.Black Bronze Hammer Head.name=黑青铜锤头头部
+item.Black Steel Hammer Head.name=黑钢锤头头部
+item.Blue Steel Hammer Head.name=蓝钢锤头头部
+item.Bronze Hammer Head.name=青铜锤头头部
+item.Copper Hammer Head.name=铜锤头头部
+item.Red Steel Hammer Head.name=红钢锤头头部
+item.Steel Hammer Head.name=钢锤头头部
+item.Wrought Iron Hammer Head.name=锻铁锤头头部
+
+#=== Hoe Head ===
+item.Bismuth Bronze Hoe Head.name=铋青铜锄头头部
+item.Black Bronze Hoe Head.name=黑青铜锄头头部
+item.Black Steel Hoe Head.name=黑钢锄头头部
+item.Blue Steel Hoe Head.name=蓝钢锄头头部
+item.Bronze Hoe Head.name=青铜锄头头部
+item.Copper Hoe Head.name=铜锄头头部
+item.Red Steel Hoe Head.name=红钢锄头头部
+item.Steel Hoe Head.name=钢锄头头部
+item.Wrought Iron Hoe Head.name=锻铁锄头头部
+
+#=== Javelin Head ===
+item.Bismuth Bronze Javelin Head.name=铋青铜标枪头部
+item.Black Bronze Javelin Head.name=黑青铜标枪头部
+item.Black Steel Javelin Head.name=黑钢标枪头部
+item.Blue Steel Javelin Head.name=蓝钢标枪头部
+item.Bronze Javelin Head.name=青铜标枪头部
+item.Copper Javelin Head.name=铜标枪头部
+item.Red Steel Javelin Head.name=红钢标枪头部
+item.Steel Javelin Head.name=钢标枪头部
+item.Wrought Iron Javelin Head.name=锻铁标枪头部
+
+#=== Knife Blade ===
+item.Bismuth Bronze Knife Blade.name=铋青铜刀刃
+item.Black Bronze Knife Blade.name=黑青铜刀刃
+item.Black Steel Knife Blade.name=黑钢刀刃
+item.Blue Steel Knife Blade.name=蓝钢刀刃
+item.Bronze Knife Blade.name=青铜刀刃
+item.Copper Knife Blade.name=铜刀刃
+item.Red Steel Knife Blade.name=红钢刀刃
+item.Steel Knife Blade.name=钢刀刃
+item.Wrought Iron Knife Blade.name=锻铁刀刃
+
+#=== Mace Head ===
+item.Bismuth Bronze Mace Head.name=铋青铜槌头头部
+item.Black Bronze Mace Head.name=黑青铜槌头头部
+item.Black Steel Mace Head.name=黑钢槌头头部
+item.Blue Steel Mace Head.name=蓝钢槌头头部
+item.Bronze Mace Head.name=青铜槌头头部
+item.Copper Mace Head.name=铜槌头头部
+item.Red Steel Mace Head.name=红钢槌头头部
+item.Steel Mace Head.name=钢槌头头部
+item.Wrought Iron Mace Head.name=锻铁槌头头部
+
+#=== Pickaxe Head ===
+item.Bismuth Bronze Pick Head.name=铋青铜镐头头部
+item.Black Bronze Pick Head.name=黑青铜镐头头部
+item.Black Steel Pick Head.name=黑钢镐头头部
+item.Blue Steel Pick Head.name=蓝钢镐头头部
+item.Bronze Pick Head.name=青铜镐头头部
+item.Copper Pick Head.name=铜镐头头部
+item.Red Steel Pick Head.name=红钢镐头头部
+item.Steel Pick Head.name=钢镐头头部
+item.Wrought Iron Pick Head.name=锻铁镐头头部
+
+#=== Prospector's Pick Head ===
+item.Bismuth Bronze ProPick Head.name=铋青铜勘矿镐头
+item.Black Bronze ProPick Head.name=黑青铜勘矿镐头
+item.Black Steel ProPick Head.name=黑钢勘矿镐头
+item.Blue Steel ProPick Head.name=蓝钢勘矿镐头
+item.Bronze ProPick Head.name=青铜勘矿镐头
+item.Copper ProPick Head.name=铜勘矿镐头
+item.Red Steel ProPick Head.name=红钢勘矿镐头
+item.Steel ProPick Head.name=钢勘矿镐头
+item.Wrought Iron ProPick Head.name=锻铁勘矿镐头
+
+#=== Saw Blade ===
+item.Bismuth Bronze Saw Blade.name=铋青铜锯刃
+item.Black Bronze Saw Blade.name=黑青铜锯刃
+item.Black Steel Saw Blade.name=黑钢锯刃
+item.Blue Steel Saw Blade.name=蓝钢锯刃
+item.Bronze Saw Blade.name=青铜锯刃
+item.Copper Saw Blade.name=铜锯刃
+item.Red Steel Saw Blade.name=红钢锯刃
+item.Steel Saw Blade.name=钢锯刃
+item.Wrought Iron Saw Blade.name=锻铁锯刃
+
+#=== Scythe Blade ===
+item.Bismuth Bronze Scythe Blade.name=铋青铜镰刀刃
+item.Black Bronze Scythe Blade.name=黑青铜镰刀刃
+item.Black Steel Scythe Blade.name=黑钢镰刀刃
+item.Blue Steel Scythe Blade.name=蓝钢镰刀刃
+item.Bronze Scythe Blade.name=青铜镰刀刃
+item.Copper Scythe Blade.name=铜镰刀刃
+item.Red Steel Scythe Blade.name=红钢镰刀刃
+item.Steel Scythe Blade.name=钢镰刀刃
+item.Wrought Iron Scythe Blade.name=锻铁镰刀刃
+
+#=== Shovel Head ===
+item.Bismuth Bronze Shovel Head.name=铋青铜铲子头部
+item.Black Bronze Shovel Head.name=黑青铜铲子头部
+item.Black Steel Shovel Head.name=黑钢铲子头部
+item.Blue Steel Shovel Head.name=蓝钢铲子头部
+item.Bronze Shovel Head.name=青铜铲子头部
+item.Copper Shovel Head.name=铜铲子头部
+item.Red Steel Shovel Head.name=玫瑰金铲子头部
+item.Steel Shovel Head.name=钢铲子头部
+item.Wrought Iron Shovel Head.name=锻铁铲子头部
+
+#=== Sword Blade ===
+item.Bismuth Bronze Sword Blade.name=铋青铜剑刃
+item.Black Bronze Sword Blade.name=黑青铜剑刃
+item.Black Steel Sword Blade.name=黑钢剑刃
+item.Blue Steel Sword Blade.name=蓝钢剑刃
+item.Bronze Sword Blade.name=青铜剑刃
+item.Copper Sword Blade.name=铜剑刃
+item.Red Steel Sword Blade.name=红钢剑刃
+item.Steel Sword Blade.name=钢剑刃
+item.Wrought Iron Sword Blade.name=锻铁剑刃
+
+#== Metal Tools ==
+#=== Axe ===
+item.Bismuth Bronze Axe.name=铋青铜斧头
+item.Black Bronze Axe.name=黑青铜斧头
+item.Black Steel Axe.name=黑钢斧头
+item.Blue Steel Axe.name=蓝钢斧头
+item.Bronze Axe.name=青铜斧头
+item.Copper Axe.name=铜斧头
+item.Red Steel Axe.name=红钢斧头
+item.Steel Axe.name=钢斧头
+item.Wrought Iron Axe.name=锻铁斧头
+
+#=== Chisel ===
+item.Bismuth Bronze Chisel.name=铋青铜凿子
+item.Black Bronze Chisel.name=黑青铜凿子
+item.Black Steel Chisel.name=黑钢凿子
+item.Blue Steel Chisel.name=蓝钢凿子
+item.Bronze Chisel.name=青铜凿子
+item.Copper Chisel.name=铜凿子
+item.Red Steel Chisel.name=红钢凿子
+item.Steel Chisel.name=钢凿子
+item.Wrought Iron Chisel.name=锻铁凿子
+
+#=== Hammer ===
+item.Bismuth Bronze Hammer.name=铋青铜锤子
+item.Black Bronze Hammer.name=黑青铜锤子
+item.Black Steel Hammer.name=黑钢锤子
+item.Blue Steel Hammer.name=蓝钢锤子
+item.Bronze Hammer.name=青铜锤子
+item.Copper Hammer.name=铜锤子
+item.Red Steel Hammer.name=红钢锤子
+item.Steel Hammer.name=钢锤子
+item.Wrought Iron Hammer.name=锻铁锤子
+
+#=== Hoe ===
+item.Bismuth Bronze Hoe.name=铋青铜锄头
+item.Black Bronze Hoe.name=黑青铜锄头
+item.Black Steel Hoe.name=黑钢锄头
+item.Blue Steel Hoe.name=蓝钢锄头
+item.Bronze Hoe.name=青铜锄头
+item.Copper Hoe.name=铜锄头
+item.Red Steel Hoe.name=红钢锄头
+item.Steel Hoe.name=钢锄头
+item.Wrought Iron Hoe.name=锻铁锄头
+
+#=== Javelin ===
+item.Bismuth Bronze Javelin.name=铋青铜标枪
+item.Black Bronze Javelin.name=黑青铜标枪
+item.Black Steel Javelin.name=黑钢标枪
+item.Blue Steel Javelin.name=蓝钢标枪
+item.Bronze Javelin.name=青铜标枪
+item.Copper Javelin.name=铜标枪
+item.Red Steel Javelin.name=红钢标枪
+item.Steel Javelin.name=钢标枪
+item.Wrought Iron Javelin.name=锻铁标枪
+
+#=== Knife ===
+item.Bismuth Bronze Knife.name=铋青铜刀
+item.Black Bronze Knife.name=黑青铜刀
+item.Black Steel Knife.name=黑钢刀
+item.Blue Steel Knife.name=蓝钢刀
+item.Bronze Knife.name=青铜刀
+item.Copper Knife.name=铜刀
+item.Red Steel Knife.name=红钢刀
+item.Steel Knife.name=钢刀
+item.Wrought Iron Knife.name=锻铁刀
+
+#=== Mace ===
+item.Bismuth Bronze Mace.name=铋青铜槌头
+item.Black Bronze Mace.name=黑青铜槌头
+item.Black Steel Mace.name=黑钢槌头
+item.Blue Steel Mace.name=蓝钢槌头
+item.Bronze Mace.name=青铜槌头
+item.Copper Mace.name=铜槌头
+item.Red Steel Mace.name=红钢槌头
+item.Steel Mace.name=钢槌头
+item.Wrought Iron Mace.name=锻铁槌头
+
+#=== Pickaxe ===
+item.Bismuth Bronze Pick.name=铋青铜镐头
+item.Black Bronze Pick.name=黑青铜镐头
+item.Black Steel Pick.name=黑钢镐头
+item.Blue Steel Pick.name=蓝钢镐头
+item.Bronze Pick.name=青铜镐头
+item.Copper Pick.name=铜镐头
+item.Red Steel Pick.name=红钢镐头
+item.Steel Pick.name=钢镐头
+item.Wrought Iron Pick.name=锻铁镐头
+
+#=== Prospector's Pick ===
+item.Bismuth Bronze ProPick.name=铋青铜勘矿镐
+item.Black Bronze ProPick.name=黑青铜勘矿镐
+item.Black Steel ProPick.name=黑钢勘矿镐
+item.Blue Steel ProPick.name=蓝钢勘矿镐
+item.Bronze ProPick.name=青铜勘矿镐
+item.Copper ProPick.name=铜勘矿镐
+item.Red Steel ProPick.name=红钢勘矿镐
+item.Steel ProPick.name=钢勘矿镐
+item.Wrought Iron ProPick.name=锻铁勘矿镐
+
+#=== Saw ===
+item.Bismuth Bronze Saw.name=铋青铜锯
+item.Black Bronze Saw.name=黑青铜锯
+item.Black Steel Saw.name=黑钢锯
+item.Blue Steel Saw.name=蓝钢锯
+item.Bronze Saw.name=青铜锯
+item.Copper Saw.name=铜锯
+item.Red Steel Saw.name=红钢锯
+item.Steel Saw.name=钢锯
+item.Wrought Iron Saw.name=锻铁锯
+
+#=== Scythe ===
+item.Bismuth Bronze Scythe.name=铋青铜镰刀
+item.Black Bronze Scythe.name=黑青铜镰刀
+item.Black Steel Scythe.name=黑钢镰刀
+item.Blue Steel Scythe.name=蓝钢镰刀
+item.Bronze Scythe.name=青铜镰刀
+item.Copper Scythe.name=铜镰刀
+item.Red Steel Scythe.name=红钢镰刀
+item.Steel Scythe.name=钢镰刀
+item.Wrought Iron Scythe.name=锻铁镰刀
+
+#=== Shovel ===
+item.Bismuth Bronze Shovel.name=铋青铜铲子
+item.Black Bronze Shovel.name=黑青铜铲子
+item.Black Steel Shovel.name=黑钢铲子
+item.Blue Steel Shovel.name=蓝钢铲子
+item.Bronze Shovel.name=青铜铲子
+item.Copper Shovel.name=铜铲子
+item.Red Steel Shovel.name=红钢铲子
+item.Steel Shovel.name=钢铲子
+item.Wrought Iron Shovel.name=锻铁铲子
+
+#=== Sword ===
+item.Bismuth Bronze Sword.name=铋青铜剑
+item.Black Bronze Sword.name=黑青铜剑
+item.Black Steel Sword.name=黑钢剑
+item.Blue Steel Sword.name=蓝钢剑
+item.Bronze Sword.name=青铜剑
+item.Copper Sword.name=铜剑
+item.Red Steel Sword.name=红钢剑
+item.Steel Sword.name=钢剑
+item.Wrought Iron Sword.name=锻铁剑
+
+#=== Tuyere ===
+item.Bismuth Bronze Tuyere.name=铋青铜鼓风嘴
+item.Black Bronze Tuyere.name=黑青铜鼓风嘴
+item.Black Steel Tuyere.name=黑钢鼓风嘴
+item.Blue Steel Tuyere.name=蓝钢鼓风嘴
+item.Bronze Tuyere.name=青铜鼓风嘴
+item.Copper Tuyere.name=铜质鼓风嘴
+item.Red Steel Tuyere.name=红钢鼓风嘴
+item.Steel Tuyere.name=钢质鼓风嘴
+item.Wrought Iron Tuyere.name=锻铁鼓风嘴
+
+#== Armor ==
+#=== Helmet ===
+item.Bismuth Bronze Unfinished Helmet.name=未完成铋青铜头盔阶段1
+item.Black Bronze Unfinished Helmet.name=未完成黑青铜头盔阶段1
+item.Black Steel Unfinished Helmet.name=未完成黑钢头盔阶段1
+item.Blue Steel Unfinished Helmet.name=未完成蓝钢头盔阶段1
+item.Bronze Unfinished Helmet.name=未完成青铜头盔阶段1
+item.Copper Unfinished Helmet.name=未完成铜头盔阶段1
+item.Red Steel Unfinished Helmet.name=未完成红钢头盔阶段1
+item.Steel Unfinished Helmet.name=未完成钢头盔阶段1
+item.Wrought Iron Unfinished Helmet.name=未完成锻铁头盔阶段1
+item.Bismuth Bronze Unfinished Helmet2.name=未完成铋青铜头盔阶段2
+item.Black Bronze Unfinished Helmet2.name=未完成黑青铜头盔阶段2
+item.Black Steel Unfinished Helmet2.name=未完成黑钢头盔阶段2
+item.Blue Steel Unfinished Helmet2.name=未完成蓝钢头盔阶段2
+item.Bronze Unfinished Helmet2.name=未完成青铜头盔阶段2
+item.Copper Unfinished Helmet2.name=未完成铜头盔阶段2
+item.Red Steel Unfinished Helmet2.name=未完成红钢头盔阶段2
+item.Steel Unfinished Helmet2.name=未完成钢头盔阶段2
+item.Wrought Iron Unfinished Helmet2.name=未完成锻铁头盔阶段2
+item.Bismuth Bronze Helmet.name=铋青铜头盔
+item.Black Bronze Helmet.name=黑青铜头盔
+item.Black Steel Helmet.name=黑钢头盔
+item.Blue Steel Helmet.name=蓝钢头盔
+item.Bronze Helmet.name=青铜头盔
+item.Copper Helmet.name=铜头盔
+item.Red Steel Helmet.name=红钢头盔
+item.Steel Helmet.name=钢头盔
+item.Wrought Iron Helmet.name=锻铁头盔
+item.helmetCloth.name=皮革帽子
+
+#=== Chestplate ===
+item.Bismuth Bronze Unfinished Chestplate.name=未完成铋青铜胸甲阶段1
+item.Black Bronze Unfinished Chestplate.name=未完成黑青铜胸甲阶段1
+item.Black Steel Unfinished Chestplate.name=未完成黑钢胸甲阶段1
+item.Blue Steel Unfinished Chestplate.name=未完成蓝钢胸甲阶段1
+item.Bronze Unfinished Chestplate.name=未完成青铜胸甲阶段1
+item.Copper Unfinished Chestplate.name=未完成铜胸甲阶段1
+item.Red Steel Unfinished Chestplate.name=未完成红钢胸甲阶段1
+item.Steel Unfinished Chestplate.name=未完成钢胸甲阶段1
+item.Wrought Iron Unfinished Chestplate.name=未完成锻铁胸甲阶段1
+item.Bismuth Bronze Unfinished Chestplate2.name=未完成铋青铜胸甲阶段2
+item.Black Bronze Unfinished Chestplate2.name=未完成黑青铜胸甲阶段2
+item.Black Steel Unfinished Chestplate2.name=未完成黑钢胸甲阶段2
+item.Blue Steel Unfinished Chestplate2.name=未完成蓝钢胸甲阶段2
+item.Bronze Unfinished Chestplate2.name=未完成青铜胸甲阶段2
+item.Copper Unfinished Chestplate2.name=未完成铜胸甲阶段2
+item.Red Steel Unfinished Chestplate2.name=未完成红钢胸甲阶段2
+item.Steel Unfinished Chestplate2.name=未完成钢胸甲阶段2
+item.Wrought Iron Unfinished Chestplate2.name=未完成锻铁胸甲阶段2
+item.Bismuth Bronze Chestplate.name=铋青铜胸甲
+item.Black Bronze Chestplate.name=黑青铜胸甲
+item.Black Steel Chestplate.name=黑钢胸甲
+item.Blue Steel Chestplate.name=蓝钢胸甲
+item.Bronze Chestplate.name=青铜胸甲
+item.Copper Chestplate.name=铜胸甲
+item.Red Steel Chestplate.name=红钢胸甲
+item.Steel Chestplate.name=钢胸甲
+item.Wrought Iron Chestplate.name=锻铁胸甲
+item.chestplateCloth.name=皮革衬衫
+
+#=== Greaves ===
+item.Bismuth Bronze Unfinished Greaves.name=未完成铋青铜护胫阶段1
+item.Black Bronze Unfinished Greaves.name=未完成黑青铜护胫阶段1
+item.Black Steel Unfinished Greaves.name=未完成黑钢护胫阶段1
+item.Blue Steel Unfinished Greaves.name=未完成蓝钢护胫阶段1
+item.Bronze Unfinished Greaves.name=未完成青铜护胫阶段1
+item.Copper Unfinished Greaves.name=未完成铜护胫阶段1
+item.Red Steel Unfinished Greaves.name=未完成红钢护胫阶段1
+item.Steel Unfinished Greaves.name=未完成钢护胫阶段1
+item.Wrought Iron Unfinished Greaves.name=未完成锻铁护胫阶段1
+item.Bismuth Bronze Unfinished Greaves2.name=未完成铋青铜护胫阶段2
+item.Black Bronze Unfinished Greaves2.name=未完成黑青铜护胫阶段2
+item.Black Steel Unfinished Greaves2.name=未完成黑钢护胫阶段2
+item.Blue Steel Unfinished Greaves2.name=未完成蓝钢护胫阶段2
+item.Bronze Unfinished Greaves2.name=未完成青铜护胫阶段2
+item.Copper Unfinished Greaves2.name=未完成铜护胫阶段2
+item.Red Steel Unfinished Greaves2.name=未完成红钢护胫阶段2
+item.Steel Unfinished Greaves2.name=未完成钢护胫阶段2
+item.Wrought Iron Unfinished Greaves2.name=未完成锻铁护胫阶段2
+item.Bismuth Bronze Greaves.name=铋青铜护胫
+item.Black Bronze Greaves.name=黑青铜护胫
+item.Black Steel Greaves.name=黑钢护胫
+item.Blue Steel Greaves.name=蓝钢护胫
+item.Bronze Greaves.name=青铜护胫
+item.Copper Greaves.name=铜护胫
+item.Red Steel Greaves.name=红钢护胫
+item.Steel Greaves.name=钢护胫
+item.Wrought Iron Greaves.name=锻铁护胫
+item.leggingsCloth.name=皮裤子
+
+#=== Boots ===
+item.Bismuth Bronze Unfinished Boots.name=未完成铋青铜靴子阶段1
+item.Black Bronze Unfinished Boots.name=未完成黑青铜靴子阶段1
+item.Black Steel Unfinished Boots.name=未完成黑钢靴子阶段1
+item.Blue Steel Unfinished Boots.name=未完成蓝钢靴子阶段1
+item.Bronze Unfinished Boots.name=未完成青铜靴子阶段1
+item.Copper Unfinished Boots.name=未完成铜靴子阶段1
+item.Red Steel Unfinished Boots.name=未完成红钢靴子阶段1
+item.Steel Unfinished Boots.name=未完成钢靴子阶段1
+item.Wrought Iron Unfinished Boots.name=未完成锻铁靴子阶段1
+item.Bismuth Bronze Unfinished Boots2.name=未完成铋青铜靴子阶段2
+item.Black Bronze Unfinished Boots2.name=未完成黑青铜靴子阶段2
+item.Black Steel Unfinished Boots2.name=未完成黑钢靴子阶段2
+item.Blue Steel Unfinished Boots2.name=未完成蓝钢靴子阶段2
+item.Bronze Unfinished Boots2.name=未完成青铜靴子阶段2
+item.Copper Unfinished Boots2.name=未完成铜靴子阶段2
+item.Red Steel Unfinished Boots2.name=未完成红钢靴子阶段2
+item.Steel Unfinished Boots2.name=未完成钢靴子阶段2
+item.Wrought Iron Unfinished Boots2.name=未完成锻铁靴子阶段2
+item.Bismuth Bronze Boots.name=铋青铜靴子
+item.Black Bronze Boots.name=黑青铜靴子
+item.Black Steel Boots.name=黑钢靴子
+item.Blue Steel Boots.name=蓝钢靴子
+item.Bronze Boots.name=青铜靴子
+item.Copper Boots.name=铜靴子
+item.Red Steel Boots.name=红钢靴子
+item.Steel Boots.name=钢靴子
+item.Wrought Iron Boots.name=锻铁靴子
+item.bootsCloth.name=皮靴子
+
+#==========
+#= Metals =
+#==========
+item.Iron Bloom.name=精炼铁方坯
+item.Raw Iron Bloom.name=生铁方坯
+tile.Bloom.name=铁方坯
+
+#== Unshaped ==
+item.Bismuth Bronze Unshaped.name=未成形:铋青铜
+item.Bismuth Unshaped.name=未成形:铋
+item.Black Bronze Unshaped.name=未成形:黑青铜
+item.Black Steel Unshaped.name=未成形:黑钢
+item.Blue Steel Unshaped.name=未成形:蓝钢
+item.Brass Unshaped.name=未成形:黄铜
+item.Bronze Unshaped.name=未成形:青铜
+item.Copper Unshaped.name=未成形:铜
+item.Gold Unshaped.name=未成形:金
+item.HC Black Steel Unshaped.name=未成形:高碳黑钢
+item.HC Blue Steel Unshaped.name=未成形:高碳蓝钢
+item.HC Red Steel Unshaped.name=未成形:高碳红钢
+item.HC Steel Unshaped.name=未成形:高碳钢
+item.Lead Unshaped.name=未成形:铅
+item.Nickel Unshaped.name=未成形:镍
+item.Pig Iron Unshaped.name=未成形:生铁
+item.Platinum Unshaped.name=未成形:铂
+item.Red Steel Unshaped.name=未成形:红钢
+item.Rose Gold Unshaped.name=未成形:玫瑰金
+item.Silver Unshaped.name=未成形:银
+item.Steel Unshaped.name=未成形:钢
+item.Sterling Silver Unshaped.name=未成形:纯银
+item.Tin Unshaped.name=未成形:锡
+item.Unknown Unshaped.name=未成形:未知
+item.Weak Blue Steel Unshaped.name=未成形:脆蓝钢
+item.Weak Red Steel Unshaped.name=未成形:脆红钢
+item.Weak Steel Unshaped.name=未成形:脆钢
+item.Wrought Iron Unshaped.name=未成形:锻铁
+item.Zinc Unshaped.name=未成形:锌
+
+#== Ingot ==
+item.Bismuth Bronze Ingot.name=铋青铜锭
+item.Bismuth Ingot.name=铋锭
+item.Black Bronze Ingot.name=黑青铜锭
+item.Black Steel Ingot.name=黑钢锭
+item.Blue Steel Ingot.name=蓝钢锭
+item.Brass Ingot.name=黄铜锭
+item.Bronze Ingot.name=青铜锭
+item.Copper Ingot.name=铜锭
+item.Gold Ingot.name=金锭
+item.HC Black Steel Ingot.name=高碳黑钢锭
+item.HC Blue Steel Ingot.name=高碳蓝钢锭
+item.HC Red Steel Ingot.name=高碳红钢锭
+item.HC Steel Ingot.name=高碳钢锭
+item.Lead Ingot.name=铅锭
+item.Nickel Ingot.name=镍锭
+item.Pig Iron Ingot.name=生铁锭
+item.Platinum Ingot.name=铂锭
+item.Red Steel Ingot.name=红钢锭
+item.Rose Gold Ingot.name=玫瑰金锭
+item.Silver Ingot.name=银锭
+item.Steel Ingot.name=钢锭
+item.Sterling Silver Ingot.name=纯银锭
+item.Tin Ingot.name=锡锭
+item.Unknown Ingot.name=未知锭
+item.Weak Blue Steel Ingot.name=脆蓝钢锭
+item.Weak Red Steel Ingot.name=脆红钢锭
+item.Weak Steel Ingot.name=脆钢锭
+item.Wrought Iron Ingot.name=锻铁锭
+item.Zinc Ingot.name=锌锭
+
+#== Double Ingot ==
+item.Bismuth Bronze Double Ingot.name=铋青铜双层锭
+item.Bismuth Double Ingot.name=铋双层锭
+item.Black Bronze Double Ingot.name=黑青铜双层锭
+item.Black Steel Double Ingot.name=黑钢双层锭
+item.Blue Steel Double Ingot.name=蓝钢双层锭
+item.Brass Double Ingot.name=黄铜双层锭
+item.Bronze Double Ingot.name=青铜双层锭
+item.Copper Double Ingot.name=铜双层锭
+item.Gold Double Ingot.name=金双层锭
+item.Lead Double Ingot.name=铅双层锭
+item.Nickel Double Ingot.name=镍双层锭
+item.Pig Iron Double Ingot.name=生铁双层锭
+item.Platinum Double Ingot.name=铂双层锭
+item.Red Steel Double Ingot.name=红钢双层锭
+item.Rose Gold Double Ingot.name=玫瑰金双层锭
+item.Silver Double Ingot.name=银双层锭
+item.Steel Double Ingot.name=钢双层锭
+item.Sterling Silver Double Ingot.name=纯银双层锭
+item.Tin Double Ingot.name=锡双层锭
+item.Wrought Iron Double Ingot.name=锻铁双层锭
+item.Zinc Double Ingot.name=锌双层锭
+
+#== Sheet ==
+item.Bismuth Bronze Sheet.name=铋青铜薄板
+item.Bismuth Sheet.name=铋薄板
+item.Black Bronze Sheet.name=黑青铜薄板
+item.Black Steel Sheet.name=黑钢薄板
+item.Blue Steel Sheet.name=蓝钢薄板
+item.Brass Sheet.name=青铜薄板
+item.Bronze Sheet.name=铜薄板
+item.Copper Sheet.name=钢薄板
+item.Gold Sheet.name=金薄板
+item.Lead Sheet.name=铅薄板
+item.Nickel Sheet.name=镍薄板
+item.Pig Iron Sheet.name=生铁薄板
+item.Platinum Sheet.name=铂薄板
+item.Red Steel Sheet.name=红钢薄板
+item.Rose Gold Sheet.name=玫瑰金薄板
+item.Silver Sheet.name=银薄板
+item.Steel Sheet.name=钢薄板
+item.Sterling Silver Sheet.name=纯银薄板
+item.Tin Sheet.name=锡薄板
+item.Wrought Iron Sheet.name=锻铁薄板
+item.Zinc Sheet.name=锌薄板
+
+#== DoubleSheet ==
+item.Bismuth Bronze Double Sheet.name=铋青铜双层薄板
+item.Bismuth Double Sheet.name=铋双层薄板
+item.Black Bronze Double Sheet.name=黑青铜双层薄板
+item.Black Steel Double Sheet.name=黑钢双层薄板
+item.Blue Steel Double Sheet.name=蓝钢双层薄板
+item.Brass Double Sheet.name=青铜双层薄板
+item.Bronze Double Sheet.name=铜双层薄板
+item.Copper Double Sheet.name=钢双层薄板
+item.Gold Double Sheet.name=金双层薄板
+item.Lead Double Sheet.name=铅双层薄板
+item.Nickel Double Sheet.name=镍双层薄板
+item.Pig Iron Double Sheet.name=生铁双层薄板
+item.Platinum Double Sheet.name=铂双层薄板
+item.Red Steel Double Sheet.name=红钢双层薄板
+item.Rose Gold Double Sheet.name=玫瑰金双层薄板
+item.Silver Double Sheet.name=银双层薄板
+item.Steel Double Sheet.name=钢双层薄板
+item.Sterling Silver Double Sheet.name=纯银双层薄板
+item.Tin Double Sheet.name=锡双层薄板
+item.Wrought Iron Double Sheet.name=锻铁双层薄板
+item.Zinc Double Sheet.name=锌双层薄板
+
+#===========
+#= Devices =
+#===========
+tile.Bellows.name=风箱
+tile.Forge.name=锻造炉
+tile.BlastFurnace.name=高炉
+tile.SpawnMeter.name=保护计
+tile.Quern.name=磨石座
+tile.EarlyBloomery.name=锻铁炉
+tile.Crucible.name=坩埚
+tile.NestBox.name=窝箱
+item.SluiceItem.name=洗矿槽
+tile.LeatherRack.name=鞣革架
+
+#== Anvils ==
+tile.Anvil.Stone.name=石砧
+tile.Anvil.Bismuth.name=铋砧
+tile.Anvil2.Bismuth Bronze.name=铋青铜砧
+tile.Anvil2.Black Bronze.name=黑青铜砧
+tile.Anvil.Black Steel.name=黑钢砧
+tile.Anvil.Blue Steel.name=蓝钢砧
+tile.Anvil.Bronze.name=青铜砧
+tile.Anvil.Copper.name=铜砧
+tile.Anvil.Red Steel.name=红钢砧
+tile.Anvil2.Rose Gold.name=玫瑰金砧
+tile.Anvil.Steel.name=钢砧
+tile.Anvil.Tin.name=锡砧
+tile.Anvil.Wrought Iron.name=锻铁砧
+tile.Anvil.Zinc.name=锌砧
+
+#==================
+#= Terrain Blocks =
+#==================
+tile.Grass.name=草地
+tile.DryGrass.name=干草地
+tile.PeatGrass.name=泥炭草地
+tile.ClayGrass.name=粘土草地
+tile.dirt.name=泥土
+tile.sand.name=沙子
+tile.Peat.name=泥炭
+tile.tilledSoil.name=农田
+tile.LooseRock.name=碎砾
+tile.Ice.name=冰
+
+#=================
+#= Miscellaneous =
+#=================
+#== Misc Items ==
+item.arrow.name=箭
+item.book.name=书
+item.stick.name=棍子
+item.coal.coal.name=煤炭
+item.coal.charcoal.name=木炭
+item.Fertilizer.name=化肥
+item.Reeds.name=甘蔗
+
+item.Wooden Bucket Empty.name=木桶(空)
+item.Wooden Bucket Water.name=木桶(清水)
+item.Wooden Bucket Salt Water.name=木桶(盐水)
+item.Wooden Bucket Milk.name=木桶(牛奶)
+item.Lime Water.name=石灰水
+
+item.Red Steel Bucket Empty.name=红钢桶(空)
+item.Red Steel Bucket Water.name=红钢桶(清水)
+item.Red Steel Bucket Salt Water.name=红钢桶(盐水)
+item.Blue Steel Bucket Empty.name=蓝钢桶(空)
+item.Blue Steel Bucket Lava.name=蓝钢桶(岩浆)
+
+item.GoldPan.name=淘金盘
+item.Gold Pan.Sand.name=淘金盘(沙子)
+item.Gold Pan.Gravel.name=淘金盘(沙砾)
+item.Gold Pan.Clay.name=淘金盘(粘土)
+item.Gold Pan.Dirt.name=淘金盘(泥土)
+item.Ink.name=墨点
+item.Firestarter.name=起火器
+
+item.Quern.name=磨石
+item.Blueprint.name=图纸
+item.Nametag.name=
+item.WoolYarn.name=羊毛纱
+item.Wool.name=羊毛
+item.WoolCloth.name=羊毛布匹
+item.SilkCloth.name=
+item.BurlapCloth.name=
+item.Mortar.name=砂浆
+item.Vinegar.name=醋
+
+item.Hide.small.name=小块兽皮
+item.Hide.medium.name=中块兽皮
+item.Hide.large.name=大块兽皮
+item.Soaked Hide.small.name=小块浸泡皮革
+item.Soaked Hide.medium.name=中块浸泡皮革
+item.Soaked Hide.large.name=大块浸泡皮革
+item.Scraped Hide.small.name=小块刮制皮革
+item.Scraped Hide.medium.name=中块刮制皮革
+item.Scraped Hide.large.name=大块刮制皮革
+item.Prep Hide.small.name=小块预制皮革
+item.Prep Hide.medium.name=中块预制皮革
+item.Prep Hide.large.name=大块预制皮革
+item.Sheep Skin.small.name=小块羊皮
+item.Sheep Skin.medium.name=中块羊皮
+item.Sheep Skin.large.name=大块羊皮
+item.TFC Leather.name=皮革
+item.Flat Leather.name=揉平皮革
+item.leather.name=皮革
+
+item.minecartChest.name=箱子矿车
+item.fishingRod.name=鱼竿
+
+item.Quiver.name=箭袋
+item.Rope.name=绳子
+
+#======== Misc. Blocks========
+tile.Straw Hide Bed.name=稻草和生皮床
+tile.customBed.sleep.name=这张床太不舒服了，睡不着。
+tile.BasicPipe.name=管道
+tile.ValvePipe.name=阀门
+tile.Torch.name=火把
+tile.Chest.name=箱子
+tile.Bookshelf.name=书架
+tile.Workbench.name=工作台
+tile.ButtonWood.name=木头按钮
+
+#= Misc. Plants =
+item.Sugarcane.name=甘蔗
+item.Hemp.name=亚麻
+item.Straw.name=干草
+item.Jute.name=黄麻
+item.Jute Fibre.name=黄麻纤维
+
+tile.Fungi.mushroom_brown.name=棕蘑菇
+tile.Fungi.mushroom_red.name=红蘑菇
+tile.Cactus.name=仙人掌
+tile.Pumpkin.name=南瓜
+tile.Moss.name=苔藓
+tile.Thatch.name=茅草
+tile.Flora.Golden Rod.name=一枝黄花
+tile.Flora.Cat Tails.name=香蒲
+
+item.Seeds Sugarcane.name=甘蔗种子
+item.Seeds Hemp.name=亚麻种子
+item.Seeds Jute.name=黄麻种子
+
+tile.TallGrass.tallgrass.name=高草
+tile.TallGrass.fern.name=大型蕨
+tile.TallGrass.shortgrass.name=矮草
+tile.LilyPad.name=睡莲
+tile.Vine.name=藤蔓
+tile.SeaGrassStill.name=海草
+tile.SeaGrassIce.name=霜冻海草
+
+tile.Flowers.flower_nasturtium.name=
+tile.Flowers.flower_dandelion.name=蒲公英
+tile.Flowers.flower_meads_milkweed.name=
+tile.Flowers.flower_tropical_milkweed.name=
+tile.Flowers.flower_butterfly_milkweed.name=
+tile.Flowers.flower_calendula.name=
+tile.Flowers2.flower_rose.name=红玫瑰
+tile.Flowers2.flower_blue_orchid.name=兰花
+tile.Flowers2.flower_allium.name=绒球葱
+tile.Flowers2.flower_houstonia.name=茜草花
+tile.Flowers2.flower_tulip_red.name=红色郁金香
+tile.Flowers2.flower_tulip_orange.name=橙色郁金香
+tile.Flowers2.flower_tulip_white.name=白色郁金香
+tile.Flowers2.flower_tulip_pink.name=粉色郁金香
+tile.Flowers2.flower_oxeye_daisy.name=雏菊
+
+#=======
+#= GUI =
+#=======
+gui.badnbt=NBT信息损毁
+
+#== Anvil GUI ==
+gui.Anvil.Plans=設計图
+gui.Anvil.Weld=焊接
+
+gui.Anvil.LightHit=轻击
+gui.Anvil.MediumHit=击打
+gui.Anvil.HeavyHit=重击
+gui.Anvil.Draw=牵拉
+
+gui.Anvil.Punch=冲压
+gui.Anvil.Bend=弯曲
+gui.Anvil.Upset=镦锻
+gui.Anvil.Shrink=收缩
+
+gui.Anvil.Rules=规则
+gui.Anvil.Rule1=任意
+gui.Anvil.Rule2=击打,任意
+gui.Anvil.Rule3=击打,末尾
+gui.Anvil.Rule4=击打,倒数第二
+gui.Anvil.Rule5=击打,倒数第三
+gui.Anvil.Rule6=击打,最后两个
+gui.Anvil.Rule7=击打,最后三个
+gui.Anvil.Rule8=击打,非最末
+gui.Anvil.Rule9=冲压,任意
+gui.Anvil.Rule10=冲压,末尾
+gui.Anvil.Rule11=冲压,倒数第二
+gui.Anvil.Rule12=冲压,倒数第三
+gui.Anvil.Rule13=冲压,最后两个
+gui.Anvil.Rule14=冲压,最后三个
+gui.Anvil.Rule15=冲压,非最末
+gui.Anvil.Rule16=收缩,任意
+gui.Anvil.Rule17=收缩,末尾
+gui.Anvil.Rule18=收缩,倒数第二
+gui.Anvil.Rule19=收缩,倒数第三
+gui.Anvil.Rule20=收缩,最后两个
+gui.Anvil.Rule21=收缩,最后三个
+gui.Anvil.Rule22=收缩,非最末
+gui.Anvil.Rule23=牵引,任意
+gui.Anvil.Rule24=牵引,末尾
+gui.Anvil.Rule25=牵引,倒数第二
+gui.Anvil.Rule26=牵引,倒数第三
+gui.Anvil.Rule27=牵引,最后两个
+gui.Anvil.Rule28=牵引,最后三个
+gui.Anvil.Rule29=牵引,非最末
+gui.Anvil.Rule30=镦锻,任意
+gui.Anvil.Rule31=镦锻,末尾
+gui.Anvil.Rule32=镦锻,倒数第二
+gui.Anvil.Rule33=镦锻,倒数第三
+gui.Anvil.Rule34=镦锻,最后两个
+gui.Anvil.Rule35=镦锻,最后三个
+gui.Anvil.Rule36=镦锻,非最末
+gui.Anvil.Rule37=弯曲,任意
+gui.Anvil.Rule38=弯曲,末尾
+gui.Anvil.Rule39=弯曲,倒数第二
+gui.Anvil.Rule40=弯曲,倒数第三
+gui.Anvil.Rule41=弯曲,最后两个
+gui.Anvil.Rule42=弯曲,最后三个
+gui.Anvil.Rule43=弯曲,非最末
+
+#== Tools/Weapons/Armor GUI ==
+gui.Armor.Advanced=高级
+gui.Armor.Shift=稍微变形
+gui.Armor.ForgedBy=锻造者：
+gui.Armor.Hold=未变形
+gui.Armor.Crush=碎裂
+gui.Armor.Pierce=穿刺
+gui.Armor.Slash=砍痕
+
+gui.Bow.Advanced=高级
+gui.Bow.Javelins=标枪
+gui.Bow.Arrows=箭
+gui.Bow.ForgedBy=锻造者
+
+gui.DamageType.Error=错误：不正确的伤害类型
+gui.DamageType.Crushing=压砸
+gui.DamageType.Piercing=穿刺
+gui.DamageType.Slashing=砍劈
+
+#== Barrel GUI ==
+gui.Barrel.Empty=空
+gui.Barrel.Seal=密封
+gui.Barrel.Unseal=开封
+gui.Barrel.ToggleOff=出
+gui.Barrel.ToggleOn=进
+gui.Barrel.SealedOn=封闭
+gui.Barrel.Solid=存储固体
+gui.Barrel.Liquid=存储流体
+
+#== Bloomery GUI ==
+gui.Bloomery.Charcoal=木炭
+gui.Bloomery.Ore=矿石
+gui.Bloomery.Output=出产
+
+#== Calendar GUI ==
+gui.Calendar.Calendar=日历
+gui.Calendar.DateBioxx=日期:Bioxx的生日!
+gui.Calendar.DateDunk=日期:Dunk的生日!
+gui.Calendar.DateKitty=
+
+gui.Calendar.Hour=时
+gui.Calendar.WitchHour=巫异时刻(午夜)
+
+gui.Calendar.Day=星期
+gui.Calendar.Sunday=星期日
+gui.Calendar.Monday=星期一
+gui.Calendar.Tuesday=星期二
+gui.Calendar.Wednesday=星期三
+gui.Calendar.Thursday=星期四
+gui.Calendar.Friday=星期五
+gui.Calendar.Saturday=星期六
+
+gui.Calendar.Season=季节
+gui.Calendar.EarlySpring=初春
+gui.Calendar.Spring=春
+gui.Calendar.LateSpring=晚春
+gui.Calendar.EarlySummer=初夏
+gui.Calendar.Summer=夏
+gui.Calendar.LateSummer=晚夏
+gui.Calendar.EarlyAutumn=初秋
+gui.Calendar.Autumn=秋
+gui.Calendar.LateAutumn=晚秋
+gui.Calendar.EarlyWinter=初冬
+gui.Calendar.Winter=冬
+gui.Calendar.LateWinter=晚冬
+
+gui.Calendar.Date=日期
+gui.Calendar.January=一月
+gui.Calendar.February=二月
+gui.Calendar.March=三月
+gui.Calendar.April=四月
+gui.Calendar.May=五月
+gui.Calendar.June=六月
+gui.Calendar.July=七月
+gui.Calendar.August=八月
+gui.Calendar.September=九月
+gui.Calendar.October=十月
+gui.Calendar.November=十一月
+gui.Calendar.December=十二月
+
+gui.Calendar.1Hour=1小时
+gui.Calendar.1Day=1天
+gui.Calendar.1Week=1周
+gui.Calendar.1Month=1月
+gui.Calendar.1Year=1年
+
+#== Food Prep GUI ==
+gui.FoodPrep.CreateMeal=烹调
+gui.FoodPrep.Effect=效果
+gui.FoodPrep.Energy=能量
+gui.FoodPrep.Filling=果腹
+gui.FoodPrep.Power=力量
+
+#== Metals ==
+gui.metal.Bismuth=铋
+gui.metal.BismuthBronze=铋青铜
+gui.metal.BlackBronze=黑青铜
+gui.metal.BlackSteel=黑钢
+gui.metal.BlueSteel=蓝钢
+gui.metal.Brass=青铜
+gui.metal.Bronze=铜
+gui.metal.Copper=钢
+gui.metal.Gold=金
+gui.metal.HCBlackSteel=高碳黑钢
+gui.metal.HCBlueSteel=高碳蓝钢
+gui.metal.HCRedSteel=高碳红钢
+gui.metal.Lead=铅
+gui.metal.Nickel=镍
+gui.metal.PigIron=生铁
+gui.metal.Platinum=铂
+gui.metal.RedSteel=红钢
+gui.metal.RoseGold=玫瑰金
+gui.metal.Silver=银
+gui.metal.Steel=钢
+gui.metal.SterlingSilver=纯银
+gui.metal.Tin=锡
+gui.metal.Unknown=未知
+gui.metal.WeakBlueSteel=脆蓝钢
+gui.metal.WeakRedSteel=脆红钢
+gui.metal.WeakSteel=脆钢
+gui.metal.WroughtIron=锻铁
+gui.metal.Zinc=锌
+
+#== Plans GUI ==
+gui.plans.axe=斧头
+gui.plans.bootsplate=靴子
+gui.plans.bucket=桶子
+gui.plans.chestplate=护身盔甲
+gui.plans.chisel=凿子
+gui.plans.hammer=锤子
+gui.plans.helmplate=头盔
+gui.plans.hoe=锄头
+gui.plans.ingot=锭块
+gui.plans.javelin=标枪
+gui.plans.knife=刀
+gui.plans.legsplate=护腿盔甲
+gui.plans.mace=梲
+gui.plans.pickaxe=镐头
+gui.plans.propick=勘矿镐
+gui.plans.refinebloom=提炼
+gui.plans.saw=锯
+gui.plans.scythe=大镰刀
+gui.plans.sheet=薄板
+gui.plans.shovel=铲子
+gui.plans.splitbloom=分开
+gui.plans.sword=剑
+gui.plans.tuyere=风口
+gui.plans.grill=
+gui.plans.shears=
+
+#== Misc GUI ==
+gui.Blueprint=图纸
+gui.Nametag=
+gui.fertilized=施肥了
+gui.Inventory=物品栏
+gui.ClearSlot=清理输出格
+gui.LogPile=原木垛
+gui.done=完成
+gui.Sluice.Soil=土壤
+gui.Sluice=水闸
+gui.Workbench.Crafting=合成
+
+#== Tooltips ==
+gui.ShowHelp=§8帮助: (按住§fShift§8)
+gui.Help=§8帮助:
+gui.Clay.Inst0=至少手持5个§b右击§7来塑型
+gui.Knife.Inst0=
+gui.Knife.Inst1=
+gui.Leather.Inst0=拿着刀§b右击§7来切成形
+gui.LooseRock.Inst0=至少手持两个并§b右击§7来互相砸碎对方
+gui.MeltedMetal.Inst0=右击以倒入工具模具中
+gui.PotteryBase.Inst0=潜行时§b右击§7以放置物体
+gui.PotteryVesselSmall.Inst0=或者§b右击§7以打开物品栏
+gui.RawHide.Inst0=????
+gui.Barrel.MoreItems=§8按住§fShift§8查看更多信息
+
+gui.Size.Tiny=微小
+gui.Size.VerySmall=很小
+gui.Size.Small=小
+gui.Size.Medium=中等
+gui.Size.Large=大
+gui.Size.VeryLarge=很大
+gui.Size.Huge=巨大
+
+gui.Weight.Light=轻盈
+gui.Weight.Medium=中等重量
+gui.Weight.Heavy=沉重
+
+gui.Reach.Short=短程
+gui.Reach.Medium=中程
+gui.Reach.Far=远程
+
+gui.food.fruit=水 果
+gui.food.vegetable=蔬 菜
+gui.food.grain=粮 食
+gui.food.protein=蛋白质
+gui.food.dairy=乳制品
+gui.food.amount=份量
+gui.food.decay=变质
+gui.food.salted=盐腌
+
+gui.FoodHeat.Cold=寒冷
+gui.FoodHeat.Warm=温暖
+
+gui.Torch.CatchingFire=生火
+gui.Torch.Lit=点着
+
+gui.ItemHeat.Liquid=液态
+gui.ItemHeat.Solidified=凝固
+gui.ItemHeat.Caution=警告
+gui.ItemHeat.Warming=暖
+gui.ItemHeat.Hot=烫
+gui.ItemHeat.VeryHot=灼热
+gui.ItemHeat.FaintRed=淡红
+gui.ItemHeat.DarkRed=暗红
+gui.ItemHeat.BrightRed=亮红
+gui.ItemHeat.Orange=橙色
+gui.ItemHeat.Yellow=黄
+gui.ItemHeat.YellowWhite=黄白
+gui.ItemHeat.White=白
+gui.ItemHeat.BrilliantWhite=炽白
+
+gui.ingot.workable=可加工
+gui.ingot.weldable=可焊接
+gui.ingot.danger=**危险**
+
+gui.milk.fresh=新鲜
+gui.milk.old=老
+gui.milk.sour=酸
+
+gui.units=单位
+
+#== Chat Messages ==
+gui.GoldPan.UseFull=必须在流动水中使用
+gui.goldpan.overused=这片区域资源似乎已经采尽,你可能不会再发现更多了.
+
+gui.ProPick.Found=发现了
+gui.ProPick.FoundTraces=发现了微量的
+gui.ProPick.FoundSmall=发现了少量的
+gui.ProPick.FoundMedium=发现了中等量的
+gui.ProPick.FoundLarge=发现了大量的
+gui.ProPick.FoundVeryLarge=发现了巨量的
+gui.ProPick.FoundNothing=没发现什么特别的
+
+#== Creative Tabs ==
+itemGroup.TFCArmor=(TFC)装备
+itemGroup.TFCMaterials=(TFC)材料
+itemGroup.TFCMisc=(TFC)杂项
+itemGroup.TFCPottery=(TFC)陶器
+itemGroup.TFCTools=(TFC)工具
+itemGroup.TFCWeapons=(TFC)兵器
+itemGroup.TFCDevices=(TFC)设备
+itemGroup.TFCFoods=(TFC)食物
+itemGroup.TFCBuilding=(TFC)建筑方块
+itemGroup.TFCDecoration=(TFC)装饰性方块
+
+#== Skill GUI ==
+skill.armorsmith=盔甲锻造
+skill.gensmith=普通锻造
+skill.toolsmith=工具锻造
+skill.weaponsmith=武器锻造
+skill.agriculture=农 业
+skill.cooking=料 理
+skill.prospecting=
+skill.butchering=
+
+#=====================================================
+#========Add New Stuff Here To Be Sorted Later========
+#=====================================================
+fluid.freshwater=淡水
+fluid.saltwater=盐水
+fluid.lavatfc=岩浆
+fluid.hotwater=热水
+fluid.beer=啤酒
+fluid.cider=苹果酒
+fluid.rum=朗姆酒
+fluid.ryewhiskey=黑麦威士忌
+fluid.sake=米酒
+fluid.vodka=伏特加
+fluid.whiskey=威士忌
+fluid.cornwhiskey=
+fluid.milk=牛奶
+fluid.milkcurdled=凝乳
+fluid.limewater=石灰水
+fluid.tannin=鞣酸
+fluid.vinegar=醋
+fluid.brine=卤水
+
+gui.showtaste=§8按住§fL-CTRL§8查看味道
+gui.taste=§8味道
+gui.taste.sweet=甜
+gui.taste.sour=酸
+gui.taste.salty=咸
+gui.taste.bitter=苦
+gui.taste.savory=鲜
+
+gui.taste.novice.sweet1=甜
+gui.taste.novice.sweet0=不甜
+gui.taste.novice.sour1=酸
+gui.taste.novice.sour0=不酸
+gui.taste.novice.salty1=咸
+gui.taste.novice.salty0=不咸
+gui.taste.novice.bitter1=苦
+gui.taste.novice.bitter0=不苦
+gui.taste.novice.savory1=鲜
+gui.taste.novice.savory0=不鲜
+
+gui.taste.adept.sweet0=不甜
+gui.taste.adept.sweet1=稍甜
+gui.taste.adept.sweet2=甜
+gui.taste.adept.sweet3=很甜
+gui.taste.adept.sweet4=非常甜
+gui.taste.adept.sweet5=敏甜
+gui.taste.adept.sour0=不酸
+gui.taste.adept.sour1=稍酸
+gui.taste.adept.sour2=酸
+gui.taste.adept.sour3=很酸
+gui.taste.adept.sour4=非常酸
+gui.taste.adept.sour5=揪酸
+gui.taste.adept.salty0=不咸
+gui.taste.adept.salty1=稍咸
+gui.taste.adept.salty2=咸
+gui.taste.adept.salty3=很咸
+gui.taste.adept.salty4=非常咸
+gui.taste.adept.salty5=超咸
+gui.taste.adept.bitter0=不苦
+gui.taste.adept.bitter1=稍苦
+gui.taste.adept.bitter2=苦
+gui.taste.adept.bitter3=很苦
+gui.taste.adept.bitter4=非常苦
+gui.taste.adept.bitter5=胺苦
+gui.taste.adept.savory0=不鲜
+gui.taste.adept.savory1=稍鲜
+gui.taste.adept.savory2=鲜
+gui.taste.adept.savory3=很鲜
+gui.taste.adept.savory4=非常鲜
+gui.taste.adept.savory5=极鲜
+
+gui.taste.0=
+gui.taste.1=
+gui.taste.2=
+gui.taste.3=
+gui.taste.4=
+gui.taste.5=
+gui.taste.6=
+gui.taste.7=
+gui.taste.8=
+
+gui.skill.novice=菜鸟
+gui.skill.adept=学徒
+gui.skill.expert=专家
+gui.skill.master=大师
+gui.skillpage=技能
+tile.MetalTrapDoor.name=活板门
+item.Mud Brick.name=泥砖
+item.Wet Mud Brick.name=湿泥砖
+gui.overburdened=
+gui.slot=
+gui.slot.back=
+word.pickled=
+word.brined=
+word.cooked=
+word.salted=
+word.smoked=
+word.dried=
+gui.barrel.pickling=
+gui.barrel.brining=
+tile.Vessel.name=
+tile.Grill.name=
+food.cooked.rare=
+food.cooked.medrare=
+food.cooked.med=
+food.cooked.medwell=
+food.cooked.well=
+food.cooked.0=
+food.cooked.1=
+food.cooked.2=
+food.cooked.3=
+food.cooked.4=
+gui.FoodPrep.Sandwich=
+gui.FoodPrep.Salad=
+item.Sandwich.name=
+item.Salad.name=
+item.ClayBowl.Ceramic Bowl.name=
+item.ClayBowl.Clay Bowl.name=
+item.Sugar.name=
+item.Sea Weed.name=
