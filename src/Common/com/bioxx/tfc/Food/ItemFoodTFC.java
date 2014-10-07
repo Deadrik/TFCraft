@@ -582,20 +582,14 @@ public class ItemFoodTFC extends ItemTerra implements ISize, ICookableFood, IMer
 	public EnumSize getSize(ItemStack is)
 	{
 		float weight = getFoodWeight(is);
-		if(weight < 32)
+		if(weight <= 20)
 			return EnumSize.TINY;
-		else if(weight < 64)
+		else if(weight <= 40)
 			return EnumSize.VERYSMALL;
-		else if(weight < 96)
+		else if(weight <= 80)
 			return EnumSize.SMALL;
-		else if(weight < 128)
-			return EnumSize.MEDIUM;
-		else if(weight < 160)
-			return EnumSize.LARGE;
-		else if(weight < 192)
-			return EnumSize.VERYLARGE;
 		else
-			return EnumSize.HUGE;
+			return EnumSize.MEDIUM;
 	}
 
 	@Override
