@@ -209,13 +209,13 @@ public class BlockSluice extends BlockContainer
 
 	public boolean canPlace(World world, int i, int j, int k,int dir)
 	{
-		Block var5 = world.getBlock(i, j, k);
-
 		int[] offset = headBlockToFootBlockMap[dir];
-
+		Block topBlock = world.getBlock(i, j, k);
+		Block footBlock = world.getBlock(i+offset[0],j,k+offset[1]);
 		boolean stay = (canStay(world, i,j,k,false,dir) && 
 				canStay(world, i+offset[0],j,k+offset[1],true,dir)) && 
-				(var5 == Blocks.air || var5.getMaterial().isReplaceable());
+				(topBlock == Blocks.air || topBlock.getMaterial().isReplaceable()) &&
+				(footBlock == Blocks.air || footBlock.getMaterial().isReplaceable());
 
 		return stay;
 	}
