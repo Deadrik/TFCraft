@@ -8,35 +8,26 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Textures;
-import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
-import com.bioxx.tfc.TileEntities.TEBarrel;
 import com.bioxx.tfc.TileEntities.TELoom;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -214,7 +205,7 @@ public class BlockLoom extends BlockTerraContainer
 			TileEntity te = world.getTileEntity(x, y, z);
 			if(te != null && te instanceof TELoom){
 				TELoom loomTE = (TELoom)te;
-				player.addChatMessage(new ChatComponentText(loomTE.rotation + ""));
+				//player.addChatMessage(new ChatComponentText(loomTE.rotation + ""));
 				if(!loomTE.isFinished()){
 					if(!loomTE.canWeave()){
 						loomTE.addString(player.getCurrentEquippedItem());
