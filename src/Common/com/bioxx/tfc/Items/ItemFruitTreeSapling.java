@@ -2,7 +2,6 @@ package com.bioxx.tfc.Items;
 
 import java.util.List;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +14,7 @@ import net.minecraft.world.World;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.TileEntities.TileEntityFruitTreeWood;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -40,7 +40,7 @@ public class ItemFruitTreeSapling extends ItemTerra
 	{
 		int meta = MathHelper.floor_double(player.rotationYaw * 4F / 360F + 0.5D) & 3;
 		if(side == 1 && world.getBlock(x, y, z).isNormalCube() && world.getBlock(x, y, z).isOpaqueCube() &&
-				(world.getBlock(x, y, z).getMaterial() == Material.grass || world.getBlock(x, y, z).getMaterial() == Material.ground) &&
+				TFC_Core.isSoil(world.getBlock(x, y, z)) &&
 				world.isAirBlock(x, y + 1, z) && !world.isRemote)
 		{
 

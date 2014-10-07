@@ -45,7 +45,7 @@ public class BlockGrass extends BlockTerra
 
 	public BlockGrass()
 	{
-		super();
+		super(Material.grass);
 		this.setTickRandomly(true);
 		this.setCreativeTab(TFCTabs.TFCBuilding);
 	}
