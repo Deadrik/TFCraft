@@ -1,6 +1,5 @@
 package com.bioxx.tfc.Core.Player;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
@@ -14,12 +13,12 @@ import com.bioxx.tfc.Core.TFC_Core;
 public class InventoryPlayerTFC extends InventoryPlayer {
 
 	public ItemStack[] extraEquipInventory = new ItemStack[TFC_Core.getExtraEquipInventorySize()];
-	
+
 	public InventoryPlayerTFC(EntityPlayer par1EntityPlayer) {
 		super(par1EntityPlayer);
 		this.player = par1EntityPlayer;
 	}
-	
+
 	@Override
 	public void damageArmor(float par1)
 	{
@@ -111,8 +110,13 @@ public class InventoryPlayerTFC extends InventoryPlayer {
 	@Override
 	public int clearInventory(Item p_146027_1_, int p_146027_2_)
 	{
-		for(int i = 0; i < this.extraEquipInventory.length; i++){
-			this.extraEquipInventory[i] = null;
+		for(int i = 0; i < this.extraEquipInventory.length; i++)
+		{
+			if (extraEquipInventory[i] != null && (p_146027_1_ == null || extraEquipInventory[i].getItem() == p_146027_1_) && 
+					(p_146027_2_ <= -1 || extraEquipInventory[i].getItemDamage() == p_146027_2_))
+			{
+				this.extraEquipInventory[i] = null;
+			}
 		}
 		return super.clearInventory(p_146027_1_, p_146027_2_);
 	}
