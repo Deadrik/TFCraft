@@ -1,7 +1,11 @@
 package com.bioxx.tfc.Items;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
@@ -31,6 +35,14 @@ public class ItemUnfinishedArmor extends ItemTerra
 	}
 
 	@Override
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{
+		if(is.getItemDamage() == 0)
+			arraylist.add(StatCollector.translateToLocal("word.stage1"));
+		else arraylist.add(StatCollector.translateToLocal("word.stage2"));
+	}
+
+	@Override
 	public String getItemStackDisplayName(ItemStack itemstack)
 	{
 		String s = new StringBuilder().append(super.getItemStackDisplayName(itemstack)).toString();
@@ -40,9 +52,6 @@ public class ItemUnfinishedArmor extends ItemTerra
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack)
 	{
-		if(itemstack.getItemDamage() == 1) {
-			return getUnlocalizedName().concat("2");
-		}
 		return super.getUnlocalizedName(itemstack);
 	}
 
