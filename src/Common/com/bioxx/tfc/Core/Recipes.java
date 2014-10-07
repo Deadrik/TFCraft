@@ -140,7 +140,8 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Dye,1,12),new Object[]{new ItemStack(TFCItems.Powder,1,8),new ItemStack(TFCItems.Powder,1,0), "blockSand"}));
 
 		//Mortar
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"blockSand", new ItemStack(TFCItems.Powder, 1, 0), "itemBucketWater"}));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Mortar, 16), new Object[]
+		{ "blockSand", new ItemStack(TFCItems.Powder, 1, 0), "bucketWater" }));
 
 		//Flux Powder
 		for (int i = 0; i < Global.STONE_FLUXINDEX.length; i++)
@@ -159,9 +160,10 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil2, 1, 1), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleBismuthBronze"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil2, 1, 2), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleBlackBronze"}));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.EarlyBloomery, 1), new Object[] { "PPP","P P","PPP", Character.valueOf('P'), "sheetDoubleAnyBronze"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.EarlyBloomery, 1), new Object[]
+		{ "PPP", "P P", "PPP", Character.valueOf('P'), "plateDoubleAnyBronze" }));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.BlastFurnace, 1), new Object[]
-				{ "PPP", "PCP", "PPP", Character.valueOf('P'), "sheetDoubleWroughtIron", Character.valueOf('C'), new ItemStack(TFCBlocks.Crucible, 1) }));
+		{ "PPP", "PCP", "PPP", Character.valueOf('P'), "plateDoubleWroughtIron", Character.valueOf('C'), new ItemStack(TFCBlocks.Crucible, 1) }));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP", "GKG", "PPP", Character.valueOf('P'), "stoneSmooth", Character.valueOf('K'), "gemChipped", Character.valueOf('G'), new ItemStack(Blocks.glass, 1) }));
 
@@ -182,12 +184,12 @@ public class Recipes
 
 		//Coal
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Coal, 9), new Object[] { new ItemStack(Blocks.coal_block) });
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.coal_block, 1), new Object[] { "###", "###", "###", Character.valueOf('#'), "fuelCoal" }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.coal_block, 1), new Object[] { "###", "###", "###", Character.valueOf('#'), "gemCoal" }));
 
 		//Misc Items
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Arrow, 8), "itemRock", "stickWood", new ItemStack(Items.feather, 1, 32767)));
 
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.gunpowder, 2, 0), new Object[] { "fuelCoal", new ItemStack(TFCItems.Powder, 1, 4), new ItemStack(TFCItems.Powder, 1, 3) }));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.gunpowder, 2, 0), new Object[] { "gemCharcoal", "dustSulfur", "dustSaltpeter" }));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.item_frame, 1), new Object[] { "###", "#$#", "###", Character.valueOf('#'), "stickWood", Character.valueOf('$'), "materialLeather" }));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.painting, 1), new Object[] { "###", "#$#", "###", Character.valueOf('#'), "stickWood", Character.valueOf('$'), "materialCloth" }));
@@ -201,7 +203,8 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), "ingotIron", Character.valueOf('s'), "stickWood"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.golden_rail, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), "ingotGold", Character.valueOf('s'), "stickWood", Character.valueOf('r'), Items.redstone}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.minecart, 1), new Object[] { "P P","PPP", Character.valueOf('P'), "sheetWroughtIron"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.minecart, 1), new Object[]
+		{ "P P", "PPP", Character.valueOf('P'), "plateWroughtIron" }));
 		//GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.minecartCrate, 1), new Object[] { new ItemStack(TFCBlocks.Chest), new ItemStack(Items.minecart)});
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.lever, 1), new Object[] { "P","H", Character.valueOf('P'), "stickWood", Character.valueOf('H'), "itemRock"}));
@@ -441,9 +444,9 @@ public class Recipes
 		OreDictionary.registerOre("treeLeaves", new ItemStack(TFCBlocks.Leaves2, 1, WILDCARD));
 
 		//Ores
-		OreDictionary.registerOre("oreCopper", new ItemStack(TFCItems.OreChunk, 1, 0)); //Native Copper
-		OreDictionary.registerOre("oreCopper", new ItemStack(TFCItems.OreChunk, 1, 9)); //Malachite
-		OreDictionary.registerOre("oreCopper", new ItemStack(TFCItems.OreChunk, 1, 13)); //Tetrahedrite		
+		OreDictionary.registerOre("oreNormalCopper", new ItemStack(TFCItems.OreChunk, 1, 0)); //Native Copper
+		OreDictionary.registerOre("oreNormalCopper", new ItemStack(TFCItems.OreChunk, 1, 9)); //Malachite
+		OreDictionary.registerOre("oreNormalCopper", new ItemStack(TFCItems.OreChunk, 1, 13)); //Tetrahedrite		
 		OreDictionary.registerOre("oreSmallCopper", new ItemStack(TFCItems.SmallOreChunk, 1, 0)); //Native Copper
 		OreDictionary.registerOre("oreSmallCopper", new ItemStack(TFCItems.SmallOreChunk, 1, 9)); //Malachite
 		OreDictionary.registerOre("oreSmallCopper", new ItemStack(TFCItems.SmallOreChunk, 1, 13)); //Tetrahedrite		
@@ -454,19 +457,19 @@ public class Recipes
 		OreDictionary.registerOre("orePoorCopper", new ItemStack(TFCItems.OreChunk, 1, 58)); //Malachite
 		OreDictionary.registerOre("orePoorCopper", new ItemStack(TFCItems.OreChunk, 1, 62)); //Tetrahedrite
 
-		OreDictionary.registerOre("oreGold", new ItemStack(TFCItems.OreChunk, 1, 1)); //Native Gold
+		OreDictionary.registerOre("oreNormalGold", new ItemStack(TFCItems.OreChunk, 1, 1)); //Native Gold
 		OreDictionary.registerOre("oreSmallGold", new ItemStack(TFCItems.SmallOreChunk, 1, 1)); //Native Gold
 		OreDictionary.registerOre("oreRichGold", new ItemStack(TFCItems.OreChunk, 1, 36)); //Native Gold
 		OreDictionary.registerOre("orePoorGold", new ItemStack(TFCItems.OreChunk, 1, 50)); //Native Gold
 
-		OreDictionary.registerOre("orePlatinum", new ItemStack(TFCItems.OreChunk, 1, 2)); //Native Platinum
+		OreDictionary.registerOre("oreNormalPlatinum", new ItemStack(TFCItems.OreChunk, 1, 2)); //Native Platinum
 		OreDictionary.registerOre("oreSmallPlatinum", new ItemStack(TFCItems.SmallOreChunk, 1, 2)); //Native Platinum
 		OreDictionary.registerOre("oreRichPlatinum", new ItemStack(TFCItems.OreChunk, 1, 37)); //Native Platinum
 		OreDictionary.registerOre("orePoorPlatinum", new ItemStack(TFCItems.OreChunk, 1, 51)); //Native Platinum
 
-		OreDictionary.registerOre("oreIron", new ItemStack(TFCItems.OreChunk, 1, 3)); //Hematite
-		OreDictionary.registerOre("oreIron", new ItemStack(TFCItems.OreChunk, 1, 10)); //Magnetite
-		OreDictionary.registerOre("oreIron", new ItemStack(TFCItems.OreChunk, 1, 11)); //Limonite
+		OreDictionary.registerOre("oreNormalIron", new ItemStack(TFCItems.OreChunk, 1, 3)); //Hematite
+		OreDictionary.registerOre("oreNormalIron", new ItemStack(TFCItems.OreChunk, 1, 10)); //Magnetite
+		OreDictionary.registerOre("oreNormalIron", new ItemStack(TFCItems.OreChunk, 1, 11)); //Limonite
 		OreDictionary.registerOre("oreSmallIron", new ItemStack(TFCItems.SmallOreChunk, 1, 3)); //Hematite
 		OreDictionary.registerOre("oreSmallIron", new ItemStack(TFCItems.SmallOreChunk, 1, 10)); //Magnetite
 		OreDictionary.registerOre("oreSmallIron", new ItemStack(TFCItems.SmallOreChunk, 1, 11)); //Limonite		
@@ -477,32 +480,32 @@ public class Recipes
 		OreDictionary.registerOre("orePoorIron", new ItemStack(TFCItems.OreChunk, 1, 59)); //Magnetite
 		OreDictionary.registerOre("orePoorIron", new ItemStack(TFCItems.OreChunk, 1, 60)); //Limonite
 
-		OreDictionary.registerOre("oreSilver", new ItemStack(TFCItems.OreChunk, 1, 4)); //Native Silver
+		OreDictionary.registerOre("oreNormalSilver", new ItemStack(TFCItems.OreChunk, 1, 4)); //Native Silver
 		OreDictionary.registerOre("oreSmallSilver", new ItemStack(TFCItems.SmallOreChunk, 1, 4)); //Native Silver
 		OreDictionary.registerOre("oreRichSilver", new ItemStack(TFCItems.OreChunk, 1, 39)); //Native Silver
 		OreDictionary.registerOre("orePoorSilver", new ItemStack(TFCItems.OreChunk, 1, 53)); //Native Silver
 
-		OreDictionary.registerOre("oreTin", new ItemStack(TFCItems.OreChunk, 1, 5)); //Cassiterite
+		OreDictionary.registerOre("oreNormalTin", new ItemStack(TFCItems.OreChunk, 1, 5)); //Cassiterite
 		OreDictionary.registerOre("oreSmallTin", new ItemStack(TFCItems.SmallOreChunk, 1, 5)); //Cassiterite
 		OreDictionary.registerOre("oreRichTin", new ItemStack(TFCItems.OreChunk, 1, 40)); //Cassiterite
 		OreDictionary.registerOre("orePoorTin", new ItemStack(TFCItems.OreChunk, 1, 54)); //Cassiterite
 
-		OreDictionary.registerOre("oreLead", new ItemStack(TFCItems.OreChunk, 1, 6)); //Galena
+		OreDictionary.registerOre("oreNormalLead", new ItemStack(TFCItems.OreChunk, 1, 6)); //Galena
 		OreDictionary.registerOre("oreSmallLead", new ItemStack(TFCItems.SmallOreChunk, 1, 6)); //Galena
 		OreDictionary.registerOre("oreRichLead", new ItemStack(TFCItems.OreChunk, 1, 41)); //Galena
 		OreDictionary.registerOre("orePoorLead", new ItemStack(TFCItems.OreChunk, 1, 55)); //Galena
 
-		OreDictionary.registerOre("oreBismuth", new ItemStack(TFCItems.OreChunk, 1, 7)); //Bismuthinite
+		OreDictionary.registerOre("oreNormalBismuth", new ItemStack(TFCItems.OreChunk, 1, 7)); //Bismuthinite
 		OreDictionary.registerOre("oreSmallBismuth", new ItemStack(TFCItems.SmallOreChunk, 1, 7)); //Bismuthinite
 		OreDictionary.registerOre("oreRichBismuth", new ItemStack(TFCItems.OreChunk, 1, 42)); //Bismuthinite
 		OreDictionary.registerOre("orePoorBismuth", new ItemStack(TFCItems.OreChunk, 1, 56)); //Bismuthinite
 
-		OreDictionary.registerOre("oreNickel", new ItemStack(TFCItems.OreChunk, 1, 8)); //Garnierite
+		OreDictionary.registerOre("oreNormalNickel", new ItemStack(TFCItems.OreChunk, 1, 8)); //Garnierite
 		OreDictionary.registerOre("oreSmallNickel", new ItemStack(TFCItems.SmallOreChunk, 1, 8)); //Garnierite
 		OreDictionary.registerOre("oreRichNickel", new ItemStack(TFCItems.OreChunk, 1, 43)); //Garnierite
 		OreDictionary.registerOre("orePoorNickel", new ItemStack(TFCItems.OreChunk, 1, 57)); //Garnierite
 
-		OreDictionary.registerOre("oreZinc", new ItemStack(TFCItems.OreChunk, 1, 12)); //Sphalerite
+		OreDictionary.registerOre("oreNormalZinc", new ItemStack(TFCItems.OreChunk, 1, 12)); //Sphalerite
 		OreDictionary.registerOre("oreSmallZinc", new ItemStack(TFCItems.SmallOreChunk, 1, 12)); //Sphalerite
 		OreDictionary.registerOre("oreRichZinc", new ItemStack(TFCItems.OreChunk, 1, 47)); //Sphalerite
 		OreDictionary.registerOre("orePoorZinc", new ItemStack(TFCItems.OreChunk, 1, 61)); //Sphalerite
@@ -531,6 +534,18 @@ public class Recipes
 		OreDictionary.registerOre("oreBorax", new ItemStack(TFCItems.OreChunk, 1, 32));
 		OreDictionary.registerOre("oreOlivine", new ItemStack(TFCItems.OreChunk, 1, 33));
 		OreDictionary.registerOre("oreLapis", new ItemStack(TFCItems.OreChunk, 1, 34));
+
+		//Ore Powders
+		OreDictionary.registerOre("dustFlux", new ItemStack(TFCItems.Powder, 1, 0)); //Flux
+		OreDictionary.registerOre("dustKaolinite", new ItemStack(TFCItems.Powder, 1, 1)); //Kaolinite
+		OreDictionary.registerOre("dustGraphite", new ItemStack(TFCItems.Powder, 1, 2)); //Graphite
+		OreDictionary.registerOre("dustSulfur", new ItemStack(TFCItems.Powder, 1, 3)); //Sulfur
+		OreDictionary.registerOre("dustSaltpeter", new ItemStack(TFCItems.Powder, 1, 4)); //Saltpeter
+		OreDictionary.registerOre("dustIron", new ItemStack(TFCItems.Powder, 1, 5)); //Hematite
+		OreDictionary.registerOre("dustLapis", new ItemStack(TFCItems.Powder, 1, 6)); //Lapis
+		OreDictionary.registerOre("dustIron", new ItemStack(TFCItems.Powder, 1, 7)); //Limonite
+		OreDictionary.registerOre("dustCopper", new ItemStack(TFCItems.Powder, 1, 8)); //Malachite
+		OreDictionary.registerOre("dustSalt", new ItemStack(TFCItems.Powder, 1, 9)); //Salt
 
 		//Ingots
 		OreDictionary.registerOre("ingotBismuth", new ItemStack(TFCItems.BismuthIngot));
@@ -581,54 +596,54 @@ public class Recipes
 		OreDictionary.registerOre("ingotDoubleBlueSteel", new ItemStack(TFCItems.BlueSteelIngot2x));
 
 		//Sheets
-		OreDictionary.registerOre("sheetBismuth", new ItemStack(TFCItems.BismuthSheet));
-		OreDictionary.registerOre("sheetTin", new ItemStack(TFCItems.TinSheet));
-		OreDictionary.registerOre("sheetZinc", new ItemStack(TFCItems.ZincSheet));
-		OreDictionary.registerOre("sheetCopper", new ItemStack(TFCItems.CopperSheet));
-		OreDictionary.registerOre("sheetBronze", new ItemStack(TFCItems.BronzeSheet));
-		OreDictionary.registerOre("sheetBismuthBronze", new ItemStack(TFCItems.BismuthBronzeSheet));
-		OreDictionary.registerOre("sheetBlackBronze", new ItemStack(TFCItems.BlackBronzeSheet));
-		OreDictionary.registerOre("sheetBrass", new ItemStack(TFCItems.BrassSheet));
-		OreDictionary.registerOre("sheetLead", new ItemStack(TFCItems.LeadSheet));
-		OreDictionary.registerOre("sheetGold", new ItemStack(TFCItems.GoldSheet));
-		OreDictionary.registerOre("sheetRoseGold", new ItemStack(TFCItems.RoseGoldSheet));
-		OreDictionary.registerOre("sheetSilver", new ItemStack(TFCItems.SilverSheet));
-		OreDictionary.registerOre("sheetSterlingSilver", new ItemStack(TFCItems.SterlingSilverSheet));
-		OreDictionary.registerOre("sheetPlatinum", new ItemStack(TFCItems.PlatinumSheet));
-		OreDictionary.registerOre("sheetWroughtIron", new ItemStack(TFCItems.WroughtIronSheet));
-		OreDictionary.registerOre("sheetNickel", new ItemStack(TFCItems.NickelSheet));
-		OreDictionary.registerOre("sheetPigIron", new ItemStack(TFCItems.PigIronSheet));
-		OreDictionary.registerOre("sheetSteel", new ItemStack(TFCItems.SteelSheet));
-		OreDictionary.registerOre("sheetBlackSteel", new ItemStack(TFCItems.BlackSteelSheet));
-		OreDictionary.registerOre("sheetRedSteel", new ItemStack(TFCItems.RedSteelSheet));
-		OreDictionary.registerOre("sheetBlueSteel", new ItemStack(TFCItems.BlueSteelSheet));
+		OreDictionary.registerOre("plateBismuth", new ItemStack(TFCItems.BismuthSheet));
+		OreDictionary.registerOre("plateTin", new ItemStack(TFCItems.TinSheet));
+		OreDictionary.registerOre("plateZinc", new ItemStack(TFCItems.ZincSheet));
+		OreDictionary.registerOre("plateCopper", new ItemStack(TFCItems.CopperSheet));
+		OreDictionary.registerOre("plateBronze", new ItemStack(TFCItems.BronzeSheet));
+		OreDictionary.registerOre("plateBismuthBronze", new ItemStack(TFCItems.BismuthBronzeSheet));
+		OreDictionary.registerOre("plateBlackBronze", new ItemStack(TFCItems.BlackBronzeSheet));
+		OreDictionary.registerOre("plateBrass", new ItemStack(TFCItems.BrassSheet));
+		OreDictionary.registerOre("plateLead", new ItemStack(TFCItems.LeadSheet));
+		OreDictionary.registerOre("plateGold", new ItemStack(TFCItems.GoldSheet));
+		OreDictionary.registerOre("plateRoseGold", new ItemStack(TFCItems.RoseGoldSheet));
+		OreDictionary.registerOre("plateSilver", new ItemStack(TFCItems.SilverSheet));
+		OreDictionary.registerOre("plateSterlingSilver", new ItemStack(TFCItems.SterlingSilverSheet));
+		OreDictionary.registerOre("platePlatinum", new ItemStack(TFCItems.PlatinumSheet));
+		OreDictionary.registerOre("plateWroughtIron", new ItemStack(TFCItems.WroughtIronSheet));
+		OreDictionary.registerOre("plateNickel", new ItemStack(TFCItems.NickelSheet));
+		OreDictionary.registerOre("platePigIron", new ItemStack(TFCItems.PigIronSheet));
+		OreDictionary.registerOre("plateSteel", new ItemStack(TFCItems.SteelSheet));
+		OreDictionary.registerOre("plateBlackSteel", new ItemStack(TFCItems.BlackSteelSheet));
+		OreDictionary.registerOre("plateRedSteel", new ItemStack(TFCItems.RedSteelSheet));
+		OreDictionary.registerOre("plateBlueSteel", new ItemStack(TFCItems.BlueSteelSheet));
 
 		//Double Sheets
-		OreDictionary.registerOre("sheetDoubleBismuth", new ItemStack(TFCItems.BismuthSheet2x));
-		OreDictionary.registerOre("sheetDoubleTin", new ItemStack(TFCItems.TinSheet2x));
-		OreDictionary.registerOre("sheetDoubleZinc", new ItemStack(TFCItems.ZincSheet2x));
-		OreDictionary.registerOre("sheetDoubleCopper", new ItemStack(TFCItems.CopperSheet2x));
-		OreDictionary.registerOre("sheetDoubleBronze", new ItemStack(TFCItems.BronzeSheet2x));
-		OreDictionary.registerOre("sheetDoubleBismuthBronze", new ItemStack(TFCItems.BismuthBronzeSheet2x));
-		OreDictionary.registerOre("sheetDoubleBlackBronze", new ItemStack(TFCItems.BlackBronzeSheet2x));
-		OreDictionary.registerOre("sheetDoubleBrass", new ItemStack(TFCItems.BrassSheet2x));
-		OreDictionary.registerOre("sheetDoubleLead", new ItemStack(TFCItems.LeadSheet2x));
-		OreDictionary.registerOre("sheetDoubleGold", new ItemStack(TFCItems.GoldSheet2x));
-		OreDictionary.registerOre("sheetDoubleRoseGold", new ItemStack(TFCItems.RoseGoldSheet2x));
-		OreDictionary.registerOre("sheetDoubleSilver", new ItemStack(TFCItems.SilverSheet2x));
-		OreDictionary.registerOre("sheetDoubleSterlingSilver", new ItemStack(TFCItems.SterlingSilverSheet2x));
-		OreDictionary.registerOre("sheetDoublePlatinum", new ItemStack(TFCItems.PlatinumSheet2x));
-		OreDictionary.registerOre("sheetDoubleWroughtIron", new ItemStack(TFCItems.WroughtIronSheet2x));
-		OreDictionary.registerOre("sheetDoubleNickel", new ItemStack(TFCItems.NickelSheet2x));
-		OreDictionary.registerOre("sheetDoublePigIron", new ItemStack(TFCItems.PigIronSheet2x));
-		OreDictionary.registerOre("sheetDoubleSteel", new ItemStack(TFCItems.SteelSheet2x));
-		OreDictionary.registerOre("sheetDoubleBlackSteel", new ItemStack(TFCItems.BlackSteelSheet2x));
-		OreDictionary.registerOre("sheetDoubleRedSteel", new ItemStack(TFCItems.RedSteelSheet2x));
-		OreDictionary.registerOre("sheetDoubleBlueSteel", new ItemStack(TFCItems.BlueSteelSheet2x));
+		OreDictionary.registerOre("plateDoubleBismuth", new ItemStack(TFCItems.BismuthSheet2x));
+		OreDictionary.registerOre("plateDoubleTin", new ItemStack(TFCItems.TinSheet2x));
+		OreDictionary.registerOre("plateDoubleZinc", new ItemStack(TFCItems.ZincSheet2x));
+		OreDictionary.registerOre("plateDoubleCopper", new ItemStack(TFCItems.CopperSheet2x));
+		OreDictionary.registerOre("plateDoubleBronze", new ItemStack(TFCItems.BronzeSheet2x));
+		OreDictionary.registerOre("plateDoubleBismuthBronze", new ItemStack(TFCItems.BismuthBronzeSheet2x));
+		OreDictionary.registerOre("plateDoubleBlackBronze", new ItemStack(TFCItems.BlackBronzeSheet2x));
+		OreDictionary.registerOre("plateDoubleBrass", new ItemStack(TFCItems.BrassSheet2x));
+		OreDictionary.registerOre("plateDoubleLead", new ItemStack(TFCItems.LeadSheet2x));
+		OreDictionary.registerOre("plateDoubleGold", new ItemStack(TFCItems.GoldSheet2x));
+		OreDictionary.registerOre("plateDoubleRoseGold", new ItemStack(TFCItems.RoseGoldSheet2x));
+		OreDictionary.registerOre("plateDoubleSilver", new ItemStack(TFCItems.SilverSheet2x));
+		OreDictionary.registerOre("plateDoubleSterlingSilver", new ItemStack(TFCItems.SterlingSilverSheet2x));
+		OreDictionary.registerOre("plateDoublePlatinum", new ItemStack(TFCItems.PlatinumSheet2x));
+		OreDictionary.registerOre("plateDoubleWroughtIron", new ItemStack(TFCItems.WroughtIronSheet2x));
+		OreDictionary.registerOre("plateDoubleNickel", new ItemStack(TFCItems.NickelSheet2x));
+		OreDictionary.registerOre("plateDoublePigIron", new ItemStack(TFCItems.PigIronSheet2x));
+		OreDictionary.registerOre("plateDoubleSteel", new ItemStack(TFCItems.SteelSheet2x));
+		OreDictionary.registerOre("plateDoubleBlackSteel", new ItemStack(TFCItems.BlackSteelSheet2x));
+		OreDictionary.registerOre("plateDoubleRedSteel", new ItemStack(TFCItems.RedSteelSheet2x));
+		OreDictionary.registerOre("plateDoubleBlueSteel", new ItemStack(TFCItems.BlueSteelSheet2x));
 
-		OreDictionary.registerOre("sheetDoubleAnyBronze", new ItemStack(TFCItems.BronzeSheet2x));
-		OreDictionary.registerOre("sheetDoubleAnyBronze", new ItemStack(TFCItems.BismuthBronzeSheet2x));
-		OreDictionary.registerOre("sheetDoubleAnyBronze", new ItemStack(TFCItems.BlackBronzeSheet2x));
+		OreDictionary.registerOre("plateDoubleAnyBronze", new ItemStack(TFCItems.BronzeSheet2x));
+		OreDictionary.registerOre("plateDoubleAnyBronze", new ItemStack(TFCItems.BismuthBronzeSheet2x));
+		OreDictionary.registerOre("plateDoubleAnyBronze", new ItemStack(TFCItems.BlackBronzeSheet2x));
 
 		//Gems
 		OreDictionary.registerOre("gemChippedAgate", new ItemStack(TFCItems.GemAgate));
@@ -716,10 +731,10 @@ public class Recipes
 		OreDictionary.registerOre("gemExquisiteTourmaline", new ItemStack(TFCItems.GemTourmaline, 1, 4));
 
 		//Fuel
-		OreDictionary.registerOre("fuelCoal", new ItemStack(Items.coal, 1, 0));
-		OreDictionary.registerOre("fuelCoal", new ItemStack(TFCItems.Coal, 1, 0));
-		OreDictionary.registerOre("fuelCharcoal", new ItemStack(Items.coal, 1, 1));
-		OreDictionary.registerOre("fuelCharcoal", new ItemStack(TFCItems.Coal, 1, 1));
+		OreDictionary.registerOre("gemCoal", new ItemStack(Items.coal, 1, 0));
+		OreDictionary.registerOre("gemCoal", new ItemStack(TFCItems.Coal, 1, 0));
+		OreDictionary.registerOre("gemCharcoal", new ItemStack(Items.coal, 1, 1));
+		OreDictionary.registerOre("gemCharcoal", new ItemStack(TFCItems.Coal, 1, 1));
 
 		//Stone
 		OreDictionary.registerOre("stone", new ItemStack(TFCBlocks.StoneIgEx, 1, WILDCARD));
@@ -733,12 +748,17 @@ public class Recipes
 		OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneMMCobble, 1, WILDCARD));
 		OreDictionary.registerOre("cobblestone", new ItemStack(TFCBlocks.StoneSedCobble, 1, WILDCARD));
 
+		OreDictionary.registerOre("stoneCobble", new ItemStack(TFCBlocks.StoneIgExCobble, 1, WILDCARD));
+		OreDictionary.registerOre("stoneCobble", new ItemStack(TFCBlocks.StoneIgInCobble, 1, WILDCARD));
+		OreDictionary.registerOre("stoneCobble", new ItemStack(TFCBlocks.StoneMMCobble, 1, WILDCARD));
+		OreDictionary.registerOre("stoneCobble", new ItemStack(TFCBlocks.StoneSedCobble, 1, WILDCARD));
+
 		//Stone Bricks
-		OreDictionary.registerOre("stoneBrick", new ItemStack(Blocks.stonebrick));
-		OreDictionary.registerOre("stoneBrick", new ItemStack(TFCBlocks.StoneIgExBrick, 1, WILDCARD));
-		OreDictionary.registerOre("stoneBrick", new ItemStack(TFCBlocks.StoneIgInBrick, 1, WILDCARD));
-		OreDictionary.registerOre("stoneBrick", new ItemStack(TFCBlocks.StoneMMBrick, 1, WILDCARD));
-		OreDictionary.registerOre("stoneBrick", new ItemStack(TFCBlocks.StoneSedBrick, 1, WILDCARD));
+		OreDictionary.registerOre("stoneBricks", new ItemStack(Blocks.stonebrick));
+		OreDictionary.registerOre("stoneBricks", new ItemStack(TFCBlocks.StoneIgExBrick, 1, WILDCARD));
+		OreDictionary.registerOre("stoneBricks", new ItemStack(TFCBlocks.StoneIgInBrick, 1, WILDCARD));
+		OreDictionary.registerOre("stoneBricks", new ItemStack(TFCBlocks.StoneMMBrick, 1, WILDCARD));
+		OreDictionary.registerOre("stoneBricks", new ItemStack(TFCBlocks.StoneSedBrick, 1, WILDCARD));
 
 		//Smooth Stone
 		OreDictionary.registerOre("stoneSmooth", new ItemStack(TFCBlocks.StoneIgExSmooth, 1, WILDCARD));
@@ -808,17 +828,28 @@ public class Recipes
 
 		OreDictionary.registerOre("itemRock", new ItemStack(TFCItems.LooseRock, 1, WILDCARD));
 
-		OreDictionary.registerOre("itemBucketWater", new ItemStack(Items.water_bucket));
-		OreDictionary.registerOre("itemBucketWater", new ItemStack(TFCItems.WoodenBucketWater, 1, WILDCARD));
-		OreDictionary.registerOre("itemBucketWater", new ItemStack(TFCItems.RedSteelBucketWater, 1, WILDCARD));
-		OreDictionary.registerOre("itemBucketWater", new ItemStack(TFCItems.WoodenBucketSaltWater, 1, WILDCARD));
-		OreDictionary.registerOre("itemBucketWater", new ItemStack(TFCItems.RedSteelBucketSaltWater, 1, WILDCARD));
+		OreDictionary.registerOre("bucketEmpty", new ItemStack(Items.bucket));
+		OreDictionary.registerOre("bucketEmpty", new ItemStack(TFCItems.WoodenBucketEmpty));
+		OreDictionary.registerOre("bucketEmpty", new ItemStack(TFCItems.RedSteelBucketEmpty));
+		OreDictionary.registerOre("bucketEmpty", new ItemStack(TFCItems.BlueSteelBucketEmpty));
 
-		OreDictionary.registerOre("itemBucketFreshWater", new ItemStack(TFCItems.WoodenBucketWater, 1, WILDCARD));
-		OreDictionary.registerOre("itemBucketFreshWater", new ItemStack(TFCItems.RedSteelBucketWater, 1, WILDCARD));
+		OreDictionary.registerOre("bucketWater", new ItemStack(Items.water_bucket));
+		OreDictionary.registerOre("bucketWater", new ItemStack(TFCItems.WoodenBucketWater, 1, WILDCARD));
+		OreDictionary.registerOre("bucketWater", new ItemStack(TFCItems.RedSteelBucketWater, 1, WILDCARD));
+		OreDictionary.registerOre("bucketWater", new ItemStack(TFCItems.WoodenBucketSaltWater, 1, WILDCARD));
+		OreDictionary.registerOre("bucketWater", new ItemStack(TFCItems.RedSteelBucketSaltWater, 1, WILDCARD));
 
-		OreDictionary.registerOre("itemBucketSaltWater", new ItemStack(TFCItems.WoodenBucketSaltWater, 1, WILDCARD));
-		OreDictionary.registerOre("itemBucketSaltWater", new ItemStack(TFCItems.RedSteelBucketSaltWater, 1, WILDCARD));
+		OreDictionary.registerOre("bucketFreshWater", new ItemStack(TFCItems.WoodenBucketWater, 1, WILDCARD));
+		OreDictionary.registerOre("bucketFreshWater", new ItemStack(TFCItems.RedSteelBucketWater, 1, WILDCARD));
+
+		OreDictionary.registerOre("bucketSaltWater", new ItemStack(TFCItems.WoodenBucketSaltWater, 1, WILDCARD));
+		OreDictionary.registerOre("bucketSaltWater", new ItemStack(TFCItems.RedSteelBucketSaltWater, 1, WILDCARD));
+
+		OreDictionary.registerOre("bucketLava", new ItemStack(Items.lava_bucket));
+		OreDictionary.registerOre("bucketLava", new ItemStack(TFCItems.BlueSteelBucketEmpty));
+
+		OreDictionary.registerOre("bucketMilk", new ItemStack(Items.milk_bucket));
+		OreDictionary.registerOre("bucketMilk", new ItemStack(TFCItems.WoodenBucketMilk));
 
 		//Miscellaneous Blocks
 		OreDictionary.registerOre("blockSand", new ItemStack(Blocks.sand));
