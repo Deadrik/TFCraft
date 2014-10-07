@@ -29,14 +29,15 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
+import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Interfaces.ICausesDamage;
 import com.bioxx.tfc.api.Interfaces.IInnateArmor;
 import com.bioxx.tfc.api.Util.Helper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
+public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor, ICausesDamage
 {
 	protected long animalID;
 	protected int sex;
@@ -763,5 +764,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal, IInnateArmor
 			player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.notFamiliar")));
 		}
 		return flag;
+	}
+	@Override
+	public EnumDamageType GetDamageType() 
+	{
+		return EnumDamageType.SLASHING;
 	}
 }
