@@ -90,7 +90,9 @@ public class ChunkEventHandler
 	@SubscribeEvent
 	public void onUnload(ChunkEvent.Unload event)
 	{
-		TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition).isUnloaded = true;
+		if(TFC_Core.getCDM(event.world) != null && 
+				TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition) != null)
+			TFC_Core.getCDM(event.world).getData(event.getChunk().xPosition, event.getChunk().zPosition).isUnloaded = true;
 	}
 
 	@SubscribeEvent
