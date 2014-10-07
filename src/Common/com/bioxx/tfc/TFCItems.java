@@ -1998,7 +1998,7 @@ public class TFCItems
 		SterlingSilverSheet2x = new ItemMetalSheet2x(17).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
 
 		i = 0;
-		BismuthBronzeUnfinishedBoots = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		BismuthBronzeUnfinishedBoots = 	(new ItemUnfinishedArmor().setMetal("Bismuth Bronze").setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
 		BlackBronzeUnfinishedBoots = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
 		BlackSteelUnfinishedBoots = 	(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
 		BlueSteelUnfinishedBoots = 		(new ItemUnfinishedArmor().setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;

@@ -9,10 +9,18 @@ import net.minecraft.util.StatCollector;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.Metal.MetalRegistry;
+import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.Enums.EnumSize;
+import com.bioxx.tfc.api.Interfaces.ISmeltable;
 
-public class ItemUnfinishedArmor extends ItemTerra
+public class ItemUnfinishedArmor extends ItemTerra implements ISmeltable
 {
+	public int metalID;
+	String metal;
+	short metalAmount;
+	short metalAmount2;
+	boolean smeltable = true;
 	public ItemUnfinishedArmor() 
 	{
 		super();
@@ -71,4 +79,62 @@ public class ItemUnfinishedArmor extends ItemTerra
 		return true;
 	}
 
+	@Override
+	public Metal GetMetalType(ItemStack is)
+	{
+		if (metal == null)
+		{
+			return MetalRegistry.instance.getMetalFromItem(this);
+		}
+		else
+		{
+			return MetalRegistry.instance.getMetalFromString(metal);
+		}
+	}
+
+	@Override
+	public short GetMetalReturnAmount(ItemStack is)
+	{
+		if(is.getItemDamage() == 1)
+			return metalAmount2;
+		return metalAmount;
+	}
+
+	@Override
+	public boolean isSmeltable(ItemStack is)
+	{
+		return smeltable;
+	}
+
+	@Override
+	public EnumTier GetSmeltTier(ItemStack is)
+	{
+		return EnumTier.TierI;
+	}
+
+	public ItemTerra setMetal(String m, int slot)
+	{
+		metal = m;
+		if(slot == 0)
+		{
+			this.metalAmount = 200;
+			this.metalAmount2 = 400;
+		}
+		else if(slot == 1)
+		{
+			this.metalAmount = 400;
+			this.metalAmount2 = 800;
+		}
+		else if(slot == 2)
+		{
+			this.metalAmount = 400;
+			this.metalAmount2 = 600;
+		}
+		else if(slot == 3)
+		{
+			this.metalAmount = 200;
+			this.metalAmount2 = 200;
+		}
+		return this;
+	}
 }
