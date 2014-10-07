@@ -125,11 +125,11 @@ public class BarrelRecipe
 		if(outFluid != null)
 		{
 			FluidStack fs = outFluid.copy();
-			if(!removesLiquid)
+			if(!removesLiquid && fs != null)
 			{
 				fs.amount = inFS.amount;
 			}
-			else
+			else if(fs != null && outItemStack != null)
 			{
 				fs.amount*=outItemStack.stackSize;
 			}
