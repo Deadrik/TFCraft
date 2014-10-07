@@ -61,7 +61,7 @@ public class BlockWaterPlant extends BlockSand implements ITileEntityProvider
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		if(!TFC_Core.isSaltWater(world.getBlock(x, y+1, z)))
-			return super.getDrops(world, x, y, z, metadata, fortune);
+			return new ArrayList<ItemStack>();
 
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(getSeaWeed(world.rand));
