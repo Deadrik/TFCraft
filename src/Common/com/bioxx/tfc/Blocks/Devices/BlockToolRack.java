@@ -32,12 +32,11 @@ import com.bioxx.tfc.Items.Tools.ItemSpindle;
 import com.bioxx.tfc.Items.Tools.ItemWeapon;
 import com.bioxx.tfc.TileEntities.TileEntityToolRack;
 import com.bioxx.tfc.api.Constant.Global;
-import com.bioxx.tfc.api.Interfaces.IMultipleBlock;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
+public class BlockToolRack extends BlockTerraContainer
 {
 	protected String[] woodNames;
 
@@ -45,8 +44,7 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	{
 		super(Material.wood);
 		this.setCreativeTab(TFCTabs.TFCDecoration);
-		this.woodNames = new String[16];
-		System.arraycopy(Global.WOOD_ALL, 0, this.woodNames, 0, 16);
+		this.woodNames = Global.WOOD_ALL;
 	}
 
 	@Override
@@ -320,13 +318,19 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	@Override
 	public IIcon getIcon(IBlockAccess bAccess, int x, int y, int z, int side)
 	{
-		return getBlockTypeForRender().getIcon(bAccess, x, y, z, side);
+		TileEntityToolRack te = (TileEntityToolRack) bAccess.getTileEntity(x, y, z);
+
+		if(te.woodType > 15)
+			return TFCBlocks.WoodSupportV2.getIcon(side, te.woodType);
+		return TFCBlocks.WoodSupportV.getIcon(side, te.woodType);
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
-		return getBlockTypeForRender().getIcon(side, meta);
+		if(meta > 15)
+			return TFCBlocks.WoodSupportV2.getIcon(side, meta);
+		return TFCBlocks.WoodSupportV.getIcon(side, meta);
 	}
 
 	@Override
@@ -339,12 +343,6 @@ public class BlockToolRack extends BlockTerraContainer implements IMultipleBlock
 	public void registerBlockIcons(IIconRegister registerer)
 	{
 		//Empty On Purpose
-	}
-
-	@Override
-	public Block getBlockTypeForRender()
-	{
-		return TFCBlocks.WoodSupportH;
 	}
 
 	@Override

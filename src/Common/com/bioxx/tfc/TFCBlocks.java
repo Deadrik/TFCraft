@@ -47,7 +47,6 @@ import com.bioxx.tfc.Blocks.Devices.BlockSpawnMeter;
 import com.bioxx.tfc.Blocks.Devices.BlockStand;
 import com.bioxx.tfc.Blocks.Devices.BlockStand2;
 import com.bioxx.tfc.Blocks.Devices.BlockToolRack;
-import com.bioxx.tfc.Blocks.Devices.BlockToolRack2;
 import com.bioxx.tfc.Blocks.Devices.BlockWorkbench;
 import com.bioxx.tfc.Blocks.Flora.BlockBerryBush;
 import com.bioxx.tfc.Blocks.Flora.BlockFlora;
@@ -122,7 +121,6 @@ import com.bioxx.tfc.Items.ItemBlocks.ItemMetalTrapDoor;
 import com.bioxx.tfc.Items.ItemBlocks.ItemSoil;
 import com.bioxx.tfc.Items.ItemBlocks.ItemStone;
 import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack;
-import com.bioxx.tfc.Items.ItemBlocks.ItemToolRack2;
 import com.bioxx.tfc.Items.ItemBlocks.ItemTorch;
 import com.bioxx.tfc.api.Constant.Global;
 
@@ -256,7 +254,6 @@ public class TFCBlocks
 	public static Block WoodHoriz;
 	public static Block WoodHoriz2;
 	public static Block ToolRack;
-	public static Block ToolRack2;
 	public static Block SpawnMeter;
 	public static Block FoodPrep;
 	public static Block Quern;
@@ -438,7 +435,6 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WoodHoriz4, com.bioxx.tfc.Items.ItemBlocks.ItemCustomWood2.class, "WoodHoriz4");
 
 		GameRegistry.registerBlock(ToolRack, ItemToolRack.class, "ToolRack");
-		GameRegistry.registerBlock(ToolRack2, ItemToolRack2.class, "ToolRack2");
 		GameRegistry.registerBlock(SpawnMeter, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "SpawnMeter");
 		GameRegistry.registerBlock(FoodPrep, "FoodPrep");
 		GameRegistry.registerBlock(Quern, com.bioxx.tfc.Items.ItemBlocks.ItemTerraBlock.class, "Quern");
@@ -663,7 +659,6 @@ public class TFCBlocks
 		WoodHoriz4 = new BlockLogHoriz2(8).setBlockName("WoodHoriz4").setHardness(20).setResistance(15F).setStepSound(Block.soundTypeWood);
 
 		ToolRack = new BlockToolRack().setHardness(3F).setBlockName("Toolrack");
-		ToolRack2 = new BlockToolRack2().setHardness(3F).setBlockName("Toolrack");
 		SpawnMeter = new BlockSpawnMeter().setHardness(3F).setBlockName("SpawnMeter");
 		FoodPrep = new BlockFoodPrep().setHardness(1F).setBlockName("FoodPrep");
 		Quern = new BlockQuern().setHardness(3F).setBlockName("Quern");

@@ -115,10 +115,9 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
-		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, player.worldObj);
+		MovingObjectPosition mop = Helper.getMouseOverObject(player, player.worldObj);
 
-		if(objectMouseOver != null && world.getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ) == TFCBlocks.ToolRack &&
-				world.getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ) == TFCBlocks.ToolRack2)
+		if(mop != null && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) == TFCBlocks.ToolRack)
 			return is;
 
 		player.setItemInUse(is, this.getMaxItemUseDuration(is));

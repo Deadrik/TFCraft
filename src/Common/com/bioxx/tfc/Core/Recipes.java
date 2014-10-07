@@ -74,6 +74,7 @@ public class Recipes
 		{
 			GameRegistry.addRecipe(new ItemStack(Doors[i]), new Object[] { "WW", "WW", "WW", Character.valueOf('W'), new ItemStack(TFCItems.SinglePlank, 1, i) });
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Chest, 1, i), new Object[] { "###", "# #", "###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, i) }));
+			GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack, 1, i), new Object[] { "###", "   ", "###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, i) });
 
 			int l = i%16;
 			if(i==l)
@@ -83,7 +84,7 @@ public class Recipes
 				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.WoodSupportV, 8, i), new Object[] { "A2", " 2", Character.valueOf('2'), new ItemStack(TFCItems.Logs, 1, i), Character.valueOf('A'), "itemSaw" }));
 
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Planks, 1, i), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
-				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack, 1, i), new Object[] { "###", "   ", "###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, i) });
+
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Barrel, 1, i), new Object[] { "# #", "# #", "###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, i) });
 
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Fence, 6, i), new Object[] { "LPL", "LPL", Character.valueOf('L'), new ItemStack(TFCItems.Logs, 1, i), Character.valueOf('P'), new ItemStack(TFCItems.SinglePlank, 1, i) });
@@ -100,7 +101,6 @@ public class Recipes
 				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.WoodSupportV2, 8, l), new Object[] { "A2", " 2", Character.valueOf('2'), new ItemStack(TFCItems.Logs, 1, i), Character.valueOf('A'), "itemSaw" }));;
 
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Planks2, 1, l), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
-				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ToolRack2, 1, l), new Object[] { "###", "   ", "###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, i) });
 
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Fence2, 6, l), new Object[] { "LPL", "LPL", Character.valueOf('L'), new ItemStack(TFCItems.Logs, 1, i), Character.valueOf('P'), new ItemStack(TFCItems.SinglePlank, 1, i) });
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.FenceGate2, 2, l), new Object[] { "LPL", "LPL", Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank, 1, i), Character.valueOf('P'), new ItemStack(TFCBlocks.Planks2, 1, l) });
