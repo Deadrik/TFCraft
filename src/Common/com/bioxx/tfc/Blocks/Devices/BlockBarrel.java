@@ -284,7 +284,7 @@ public class BlockBarrel extends BlockTerraContainer
 
 				if(!handleInteraction(player, te))
 				{
-					if(te.getInvCount() == 0)
+					if(te.getFluidLevel() > 0 || te.getInvCount() == 0)
 						player.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);
 					else
 						player.openGui(TerraFirmaCraft.instance, 36, world, x, y, z);
@@ -298,7 +298,7 @@ public class BlockBarrel extends BlockTerraContainer
 
 	protected boolean handleInteraction(EntityPlayer player, TEBarrel te) 
 	{
-		if (!te.getSealed()) 
+		if (!te.getSealed() && (te.mode == 0 || te.mode == 1 && te.getInvCount() == 0)) 
 		{
 			ItemStack equippedItem = player.getCurrentEquippedItem();
 			if(FluidContainerRegistry.isFilledContainer(equippedItem) && !te.getSealed())
