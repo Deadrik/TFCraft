@@ -26,7 +26,7 @@ public class ContainerLargeVessel extends ContainerBarrel
 		{
 			//Input slot
 			if(!barrel.getSealed())
-				addSlotToContainer(new SlotChest(barrel, 0, 80, 29).setSize(EnumSize.MEDIUM).addItemException(ContainerChestTFC.getExceptions()));
+				addSlotToContainer(new SlotChest(barrel, 0, 80, 29).setSize(EnumSize.MEDIUM).addItemException(ContainerBarrel.getExceptions()));
 			else
 				addSlotToContainer(new SlotForShowOnly(barrel, 0, 80, 29));
 		}
@@ -64,8 +64,14 @@ public class ContainerLargeVessel extends ContainerBarrel
 			}
 			else
 			{
-				if (!barrel.getSealed() && !this.mergeItemStack(itemstack1, 0, 9, false))
-					return null;
+				if (!barrel.getSealed() && guiTab == 1)
+				{
+					if(!this.mergeItemStack(itemstack1, 0, 9, false)){return null;}
+				}
+				else if (!barrel.getSealed() && guiTab == 0)
+				{
+					if(!this.mergeItemStack(itemstack1, 0, 1, false)){return null;}
+				}
 			}
 
 			if(itemstack1.stackSize == 0)

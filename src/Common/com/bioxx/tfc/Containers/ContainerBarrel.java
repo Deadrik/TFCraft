@@ -96,8 +96,14 @@ public class ContainerBarrel extends ContainerTFC
 			}
 			else
 			{
-				if (!barrel.getSealed() && !this.mergeItemStack(itemstack1, 0, 12, false))
-					return null;
+				if (!barrel.getSealed() && guiTab == 1)
+				{
+					if(!this.mergeItemStack(itemstack1, 0, 12, false)){return null;}
+				}
+				else if (!barrel.getSealed() && guiTab == 0)
+				{
+					if(!this.mergeItemStack(itemstack1, 0, 1, false)){return null;}
+				}
 			}
 
 			if(itemstack1.stackSize == 0)
