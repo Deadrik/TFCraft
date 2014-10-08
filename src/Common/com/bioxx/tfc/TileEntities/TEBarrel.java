@@ -437,7 +437,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				}
 			}
 
-			if(worldObj.isRaining() &&!this.getSealed() && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord))
+			if(!this.getSealed() && worldObj.canLightningStrikeAt(xCoord, yCoord+1, zCoord))
 			{
 				if(this.fluid == null)
 					fluid = new FluidStack(TFCFluid.FRESHWATER, 1);
