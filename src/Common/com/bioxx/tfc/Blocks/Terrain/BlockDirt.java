@@ -131,7 +131,7 @@ public class BlockDirt extends BlockTerra
 				{
 					EntityFallingBlockTFC entityfallingblock = new EntityFallingBlockTFC(world, (double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), this, meta);
 					world.spawnEntityInWorld(entityfallingblock);
-					world.playSoundAtEntity(entityfallingblock, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (world.rand.nextFloat()/2));
+					world.playSoundAtEntity(entityfallingblock, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (world.rand.nextFloat()/2));
 				}
 			}
 			else
