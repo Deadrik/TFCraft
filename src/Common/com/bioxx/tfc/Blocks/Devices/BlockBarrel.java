@@ -298,7 +298,7 @@ public class BlockBarrel extends BlockTerraContainer
 
 	protected boolean handleInteraction(EntityPlayer player, TEBarrel te) 
 	{
-		if (!te.getSealed() && (te.mode == 0 || te.mode == 1 && te.getInvCount() == 0)) 
+		if (!te.getSealed() && te.getInvCount() <= 1) 
 		{
 			ItemStack equippedItem = player.getCurrentEquippedItem();
 			if(FluidContainerRegistry.isFilledContainer(equippedItem) && !te.getSealed())
@@ -323,7 +323,7 @@ public class BlockBarrel extends BlockTerraContainer
 						te.addLiquid(fs);
 						if(fs.amount == 0)
 						{
-							equippedItem.getTagCompound().removeTag("isSealed");
+							equippedItem.getTagCompound().removeTag("Sealed");
 							equippedItem.getTagCompound().removeTag("fluidNBT");
 							if(equippedItem.getTagCompound().hasNoTags())
 								equippedItem.setTagCompound(null);
@@ -331,6 +331,36 @@ public class BlockBarrel extends BlockTerraContainer
 						else
 						{
 							fs.writeToNBT(equippedItem.getTagCompound().getCompoundTag("fluidNBT"));
+						}
+						return true;
+					}
+				}
+				else
+				{
+					if(te.getFluidStack() != null)
+					{
+						NBTTagCompound nbt = new NBTTagCompound();
+						if(equippedItem.getItem() instanceof ItemBarrels)
+						{
+							nbt.setTag("fluidNBT",te.getFluidStack().writeToNBT(new NBTTagCompound()));
+							nbt.setBoolean("Sealed", true);
+							te.actionEmpty();
+						}
+						else if(equippedItem.getItem() instanceof ItemLargeVessel)
+						{
+							FluidStack fs = te.getFluidStack().copy();
+							if(fs.amount > 5000)
+							{
+								fs.amount = 5000;
+								te.drainLiquid(5000);
+							}
+							else
+							{
+								te.actionEmpty();
+							}
+							nbt.setTag("fluidNBT", fs.writeToNBT(new NBTTagCompound()));
+							nbt.setBoolean("Sealed", true);
+							equippedItem.setTagCompound(nbt);
 						}
 						return true;
 					}

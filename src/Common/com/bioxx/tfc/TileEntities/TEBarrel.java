@@ -338,6 +338,9 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		return is;
 	}
 
+	/**
+	 * This attempts to remove a portion of the water in this container and put it into a valid Container Item
+	 */
 	public ItemStack removeLiquid(ItemStack is)
 	{
 		if(is == null)
@@ -359,6 +362,21 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 			}
 		}
 		return is;
+	}
+
+	/**
+	 * This removes a specified amount of liquid from the container and updates the block.
+	 */
+	public void drainLiquid(int amount)
+	{
+		if(!getSealed() && this.getFluidStack() != null)
+		{
+			this.getFluidStack().amount -= amount;
+			if(this.getFluidStack().amount <= 0)
+				this.actionEmpty();
+			else
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
 	}
 
 	@Override
@@ -669,14 +687,15 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	@Override
 	public void handleDataPacket(NBTTagCompound nbt)
 	{
-		if(!worldObj.isRemote)
+		if(nbt.hasKey("fluidID"))
 		{
-			if(nbt.hasKey("fluidID"))
-			{
-				if(nbt.getByte("fluidID") == -1)
-					fluid = null;
-			}
-			else if(nbt.hasKey("mode"))
+			if(nbt.getByte("fluidID") == -1)
+				fluid = null;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
+		if(!worldObj.isRemote)
+		{	
+			if(nbt.hasKey("mode"))
 			{
 				mode = nbt.getByte("mode");
 			}
