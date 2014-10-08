@@ -158,11 +158,11 @@ public class BlockCollapsable extends BlockTerraContainer
 
 	public static Boolean isNearSupport(World world, int i, int j, int k, int range, float collapseChance)
 	{
-		for(int y = -1; y < 1; y++)
+		for(int y = -1; y <= 1; y++)
 		{
-			for(int x = -range; x < range + 1; x++)
+			for(int x = -range; x <= range + 1; x++)
 			{
-				for(int z = -range; z < range + 1; z++)
+				for(int z = -range; z <= range + 1; z++)
 				{
 					if(TFC_Core.isHorizSupport(world.getBlock(i + x, j + y, k + z)))
 					{
