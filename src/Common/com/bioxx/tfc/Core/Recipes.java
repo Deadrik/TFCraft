@@ -141,7 +141,7 @@ public class Recipes
 
 		//Mortar
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(TFCItems.Mortar, 16), new Object[]
-		{ "blockSand", new ItemStack(TFCItems.Powder, 1, 0), "bucketWater" }));
+				{ "blockSand", new ItemStack(TFCItems.Powder, 1, 0), "bucketWater" }));
 
 		//Flux Powder
 		for (int i = 0; i < Global.STONE_FLUXINDEX.length; i++)
@@ -161,9 +161,9 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Anvil2, 1, 2), new Object[] { "###"," # ","###", Character.valueOf('#'), "ingotDoubleBlackBronze"}));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.EarlyBloomery, 1), new Object[]
-		{ "PPP", "P P", "PPP", Character.valueOf('P'), "plateDoubleAnyBronze" }));
+				{ "PPP", "P P", "PPP", Character.valueOf('P'), "plateDoubleAnyBronze" }));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.BlastFurnace, 1), new Object[]
-		{ "PPP", "PCP", "PPP", Character.valueOf('P'), "plateDoubleWroughtIron", Character.valueOf('C'), new ItemStack(TFCBlocks.Crucible, 1) }));
+				{ "PPP", "PCP", "PPP", Character.valueOf('P'), "plateDoubleWroughtIron", Character.valueOf('C'), new ItemStack(TFCBlocks.Crucible, 1) }));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP", "GKG", "PPP", Character.valueOf('P'), "stoneSmooth", Character.valueOf('K'), "gemChipped", Character.valueOf('G'), new ItemStack(Blocks.glass, 1) }));
 
@@ -204,7 +204,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), "ingotIron", Character.valueOf('s'), "stickWood"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.golden_rail, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), "ingotGold", Character.valueOf('s'), "stickWood", Character.valueOf('r'), Items.redstone}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.minecart, 1), new Object[]
-		{ "P P", "PPP", Character.valueOf('P'), "plateWroughtIron" }));
+				{ "P P", "PPP", Character.valueOf('P'), "plateWroughtIron" }));
 		//GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.minecartCrate, 1), new Object[] { new ItemStack(TFCBlocks.Chest), new ItemStack(Items.minecart)});
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.lever, 1), new Object[] { "P","H", Character.valueOf('P'), "stickWood", Character.valueOf('H'), "itemRock"}));
@@ -885,7 +885,7 @@ public class Recipes
 		RemoveRecipe(new ItemStack(Blocks.wooden_button));
 		RemoveRecipe(new ItemStack(Items.flint_and_steel));
 		RemoveRecipe(new ItemStack(Items.coal, 9));
-
+		RemoveRecipe(new ItemStack(Items.sugar));
 		//Recipe Configuration
 		if (TFCCrafting.anvilRecipe == false)
 			RemoveRecipe(new ItemStack(Blocks.anvil));
