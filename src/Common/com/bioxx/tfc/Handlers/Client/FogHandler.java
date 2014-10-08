@@ -136,6 +136,12 @@ public class FogHandler
 				fogEndFinish = event.farPlaneDistance;
 				fogDensityFinish = 0.1f;
 			}
+			else if(!shouldLerp && localWorldFog==0)
+			{
+				fogStart = event.farPlaneDistance*0.75f;
+				fogEnd = event.farPlaneDistance;
+				fogDensity = 0.1f;
+			}
 
 		}
 	}
