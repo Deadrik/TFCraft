@@ -41,7 +41,7 @@ public class ContainerBarrel extends ContainerTFC
 		{
 			//Input slot
 			if(!barrel.getSealed())
-				addSlotToContainer(new SlotChest(barrel, 0, 80, 29).setSize(EnumSize.MEDIUM));
+				addSlotToContainer(new SlotChest(barrel, 0, 80, 29).setSize(EnumSize.LARGE).addItemException(ContainerChestTFC.getExceptions()));
 			else
 				addSlotToContainer(new SlotForShowOnly(barrel, 0, 80, 29));
 		}
@@ -52,7 +52,7 @@ public class ContainerBarrel extends ContainerTFC
 				for(int k = 0; k < 3; k++)
 				{
 					if(!barrel.getSealed())
-						addSlotToContainer(new SlotChest(barrel, k+(i*3), 53+(i*18), 17+(k*18)).setSize(EnumSize.MEDIUM));
+						addSlotToContainer(new SlotChest(barrel, k+(i*3), 53+(i*18), 17+(k*18)).setSize(EnumSize.LARGE).addItemException(ContainerChestTFC.getExceptions()));
 					else
 						addSlotToContainer(new SlotForShowOnly(barrel, k+(i*3), 53+(i*18), 17+(k*18)));
 				}

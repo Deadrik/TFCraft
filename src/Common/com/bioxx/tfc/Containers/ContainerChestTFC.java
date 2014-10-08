@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.Containers.Slots.SlotChest;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
@@ -82,7 +83,8 @@ public class ContainerChestTFC extends ContainerTFC
 		exceptions.add(TFCItems.SterlingSilverIngot);
 		exceptions.add(TFCItems.TinIngot);
 		exceptions.add(TFCItems.ZincIngot);
-
+		exceptions.add(TFCBlocks.Barrel);
+		exceptions.add(TFCBlocks.Vessel);
 		return exceptions;
 	}
 
