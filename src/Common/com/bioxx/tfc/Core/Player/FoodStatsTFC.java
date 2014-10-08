@@ -398,9 +398,9 @@ public class FoodStatsTFC
 		{
 			float weight = is.getTagCompound().getFloat("foodWeight");
 			float decay = is.getTagCompound().hasKey("foodDecay") ? is.getTagCompound().getFloat("foodDecay") : 0;
-			if(decay > 0 && (weight - decay) - amount <= 0)
+			if(decay >= 0 && (weight - decay) - amount <= 0)
 				return true;
-			else if(decay < 0 && weight - amount <= 0)
+			else if(decay <= 0 && weight - amount <= 0)
 				return true;
 			else
 			{
