@@ -13,7 +13,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
+import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -43,6 +45,19 @@ public class BlockThatch extends BlockTerra
 
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
 		dropBlockAsItem(world, i, j, k, new ItemStack(this, 1, l));
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+	{
+		if(!world.isRemote)
+		{
+			Block b = world.getBlock(x, y+1, z);
+			if(TFC_Core.isSoilOrGravel(b) || b instanceof BlockCobble)
+			{
+				TFC_Core.setBlockToAirWithDrops(world, x, y, z);
+			}
+		}
 	}
 
 	@Override
