@@ -1,13 +1,17 @@
 package com.bioxx.tfc.Containers;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.Containers.Slots.SlotChest;
 import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
@@ -35,13 +39,20 @@ public class ContainerBarrel extends ContainerTFC
 
 	}
 
+	public static ArrayList<Item> getExceptions(){
+		ArrayList exceptions = new ArrayList<Item>();
+		exceptions.add(TFCBlocks.Barrel);
+		exceptions.add(TFCBlocks.Vessel);
+		return exceptions;
+	}
+
 	protected void buildLayout()
 	{
 		if(guiTab == 0)
 		{
 			//Input slot
 			if(!barrel.getSealed())
-				addSlotToContainer(new SlotChest(barrel, 0, 80, 29).setSize(EnumSize.LARGE).addItemException(ContainerChestTFC.getExceptions()));
+				addSlotToContainer(new SlotChest(barrel, 0, 80, 29).setSize(EnumSize.LARGE).addItemException(getExceptions()));
 			else
 				addSlotToContainer(new SlotForShowOnly(barrel, 0, 80, 29));
 		}
