@@ -29,7 +29,6 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.Items.Tools.ItemCustomBucketMilk;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityCowTFC extends EntityCow implements IAnimal
@@ -55,14 +54,14 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	public int angerTick;
 
 	int degreeOfDiversion = 1;
-	
+
 	private int familiarity = 0;
 	private long lastFamiliarityUpdate = 0;
 	private boolean familiarizedToday = false;
-	
+
 	protected float avgAdultWeight = 634;			//The average weight of adult males in kg
 	protected float dimorphism = 0.1822f;		//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
-											//the square root of the ratio of female mass : male mass
+	//the square root of the ratio of female mass : male mass
 
 	public EntityCowTFC(World par1World)
 	{
@@ -74,7 +73,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		conception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
-		
+
 		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
 		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
 		aggression_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1));
@@ -138,7 +137,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
 
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
-		
+
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
@@ -178,7 +177,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			super.resetInLove();
 			setInLove(true);
 		}
-		
+
 		this.handleFamiliarityUpdate();
 
 		if(angerTick > 0 && this.rand.nextInt(2)==0){
@@ -278,7 +277,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
-		
+
 		nbt.setInteger("Familiarity", familiarity);
 		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
 
@@ -305,7 +304,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
-		
+
 		familiarity = nbt.getInteger("Familiarity");
 		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
 
@@ -664,7 +663,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && this.isBreedingItemTFC(stack) && isAdult()){
+		if(stack != null && this.isBreedingItemTFC(stack) && isAdult() && !familiarizedToday){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -688,7 +687,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			this.playLivingSound();
 		}
 	}
-	
+
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
 		if(this.checkFamiliarity(InteractionEnum.NAME, player)&& !this.hasCustomNameTag()){
@@ -699,7 +698,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		this.playSound(this.getHurtSound(),  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
 		return false;
 	}
-	
+
 	@Override
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
 		boolean flag = false;

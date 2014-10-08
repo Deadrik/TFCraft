@@ -36,7 +36,6 @@ import com.bioxx.tfc.Entities.AI.EntityAIMateTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityPigTFC extends EntityPig implements IAnimal
@@ -62,12 +61,12 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	private int familiarity = 0;
 	private long lastFamiliarityUpdate = 0;
 	private boolean familiarizedToday = false;
-	
+
 	int degreeOfDiversion = 2;
-	
+
 	protected float avgAdultWeight = 119.5F;			//The average weight of adult males in kg
 	protected float dimorphism = 0.271f;	//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
-											//the square root of the ratio of female mass : male mass
+	//the square root of the ratio of female mass : male mass
 
 	public EntityPigTFC(World par1World)
 	{
@@ -146,7 +145,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		colour_mod = (float)Math.sqrt(colour_mod * colour_mod * (float)Math.sqrt((mother.getColour() + father_col) * 0.5F));
 		hard_mod = (float)Math.sqrt(hard_mod * hard_mod * (float)Math.sqrt((mother.getHardiness() + father_hard) * 0.5F));
 		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
-		
+
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
 
 		//	We hijack the growingAge to hold the day of birth rather
@@ -201,7 +200,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			super.resetInLove();;
 			setInLove(true);
 		}
-		
+
 		this.handleFamiliarityUpdate();
 
 		syncData();
@@ -274,7 +273,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
-		
+
 		nbt.setInteger("Familiarity", familiarity);
 		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
 
@@ -300,7 +299,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
-		
+
 		familiarity = nbt.getInteger("Familiarity");
 		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
 
@@ -697,7 +696,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	public void familiarize(EntityPlayer ep) 
 	{
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && this.isBreedingItemTFC(stack)){
+		if(stack != null && this.isBreedingItemTFC(stack) && !familiarizedToday){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -711,7 +710,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			this.playLivingSound();
 		}
 	}
-	
+
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
 		if(this.checkFamiliarity(InteractionEnum.NAME, player) && !this.hasCustomNameTag()){
@@ -721,7 +720,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		this.playSound(this.getHurtSound(),  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
 		return false;
 	}
-	
+
 	@Override
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
 		boolean flag = false;

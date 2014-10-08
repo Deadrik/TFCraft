@@ -32,7 +32,6 @@ import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.Items.Tools.ItemKnife;
 import com.bioxx.tfc.Items.Tools.ItemShears;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
@@ -70,16 +69,16 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	public float hard_mod = 1;		//hardiness
 	public boolean inLove;
 	public boolean isCorpse = false;
-	
+
 	protected EntityPlayer shearer = null;
-	
+
 	private int familiarity = 0;
 	private long lastFamiliarityUpdate = 0;
 	private boolean familiarizedToday = false;
-	
+
 	protected float avgAdultWeight = 50;	//The average weight of adult males in kg
 	protected float dimorphism = 0.1633f;	//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
-											//the square root of the ratio of female mass : male mass
+	//the square root of the ratio of female mass : male mass
 
 	public EntitySheepTFC(World par1World)
 	{
@@ -145,7 +144,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.posX = ((EntityLivingBase)mother).posX;
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
-		
+
 		float invSizeRatio = 1f / (2 - dimorphism);
 		size_mod = (float)Math.sqrt(size_mod * size_mod * (float)Math.sqrt((mother.getSize() + father_size) * invSizeRatio));
 		strength_mod = (float)Math.sqrt(strength_mod * strength_mod * (float)Math.sqrt((mother.getStrength() + father_str) * 0.5F));
@@ -156,7 +155,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
 
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
-		
+
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
@@ -226,7 +225,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			super.resetInLove();
 			setInLove(true);
 		}
-		
+
 		this.handleFamiliarityUpdate();
 
 		syncData();
@@ -373,7 +372,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 				player.addChatMessage(new ChatComponentText("Pregnant"));
 
 			shearer = player;
-			
+
 			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemKnife && !getSheared() && this.checkFamiliarity(InteractionEnum.SHEAR, player) && getPercentGrown(this) > 0.95F)
 			{
 				setSheared(true);
@@ -416,7 +415,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		nbt.setInteger ("Sex", sex);
 		nbt.setLong ("Animal ID", animalID);
 		nbt.setFloat ("Size Modifier", size_mod);
-		
+
 		nbt.setInteger("Familiarity", familiarity);
 		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
 
@@ -451,7 +450,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		colour_mod = nbt.getFloat ("Colour Modifier");
 		climate_mod = nbt.getFloat ("Climate Adaptation Modifier");
 		hard_mod = nbt.getFloat ("Hardiness Modifier");
-		
+
 		familiarity = nbt.getInteger("Familiarity");
 		lastFamiliarityUpdate = nbt.getLong("lastFamiliarityUpdate");
 
@@ -709,7 +708,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && this.isBreedingItemTFC(stack) && (isAdult() && familiarity < 50) || !isAdult()){
+		if(stack != null && !familiarizedToday && this.isBreedingItemTFC(stack) && (isAdult() && familiarity < 50) || !isAdult()){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -728,7 +727,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			this.playLivingSound();
 		}
 	}
-	
+
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
 		if(this.checkFamiliarity(InteractionEnum.NAME, player) && !this.hasCustomNameTag()){
@@ -738,7 +737,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.playSound(this.getHurtSound(),  6, (rand.nextFloat()/2F)+(isChild()?1.25F:0.75F));
 		return false;
 	}
-	
+
 	@Override
 	public boolean checkFamiliarity(InteractionEnum interaction, EntityPlayer player) {
 		boolean flag = false;

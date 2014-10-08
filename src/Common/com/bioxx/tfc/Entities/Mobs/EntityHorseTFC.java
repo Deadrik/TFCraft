@@ -23,7 +23,6 @@ import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.AnimalChest;
 import net.minecraft.inventory.IInvBasic;
@@ -49,7 +48,6 @@ import com.bioxx.tfc.Entities.AI.EntityAIPanicTFC;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomNameTag;
 import com.bioxx.tfc.api.Entities.IAnimal;
-import com.bioxx.tfc.api.Entities.IAnimal.InteractionEnum;
 import com.bioxx.tfc.api.Util.Helper;
 
 public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
@@ -83,14 +81,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 	private String field_110286_bQ;
 	private String[] field_110280_bR = new String[3];
-	
+
 	private int familiarity = 0;
 	private long lastFamiliarityUpdate = 0;
 	private boolean familiarizedToday = false;
-	
+
 	protected float avgAdultWeight = 550;			//The average weight of adult males in kg
 	protected float dimorphism = 0.0813f;		//1 - dimorphism = the average relative size of females : males. This is calculated by cube-square law from
-											//the square root of the ratio of female mass : male mass
+	//the square root of the ratio of female mass : male mass
 
 	public EntityHorseTFC(World par1World)
 	{
@@ -174,8 +172,8 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		colour_mod = (float)Math.sqrt(colour_mod * colour_mod * (float)Math.sqrt((mother.getColour() + father_col) * 0.5F));
 		hard_mod = (float)Math.sqrt(hard_mod * hard_mod * (float)Math.sqrt((mother.getHardiness() + father_hard) * 0.5F));
 		climate_mod = (float)Math.sqrt(climate_mod * climate_mod * (float)Math.sqrt((mother.getClimateAdaptation() + father_clim) * 0.5F));
-		
-		
+
+
 		this.familiarity = (int) (mother.getFamiliarity()<90?mother.getFamiliarity()/2:mother.getFamiliarity()*0.9f);
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
@@ -195,14 +193,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		if(this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && rand.nextInt(600) == 0 && !familiarizedToday){
 			this.familiarize(((EntityPlayer)this.riddenByEntity));
 		}
-		
+
 		syncData();
 		if(isAdult())
 			setGrowingAge(0);
 		else
 			setGrowingAge(-1);
 
-		
+
 		this.handleFamiliarityUpdate();
 		if(isPregnant())
 		{
@@ -239,19 +237,19 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 	@Override
 	public int increaseTemper(int p_110198_1_)
-    {
+	{
 		p_110198_1_*=5; //This is because we want obedience_mod and aggression_mod to have an effect
-        int j = MathHelper.clamp_int(this.getTemper() + (int)(p_110198_1_ * obedience_mod * (1f/aggression_mod)), 0, this.getMaxTemper());
-        this.setTemper(j);
-        return j;
-    }
-	
+		int j = MathHelper.clamp_int(this.getTemper() + (int)(p_110198_1_ * obedience_mod * (1f/aggression_mod)), 0, this.getMaxTemper());
+		this.setTemper(j);
+		return j;
+	}
+
 	@Override
 	public int getMaxTemper()
-    {
-        return (int)(500 * aggression_mod);
-    }
-	
+	{
+		return (int)(500 * aggression_mod);
+	}
+
 	public void syncData()
 	{
 		if(dataWatcher!= null)
@@ -584,7 +582,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		if(this.getLeashed()){
 			this.entityDropItem(new ItemStack(Items.lead,1,0),0);
 		}
-		
+
 		float foodWeight = ageMod*(this.size_mod * 4000);//528 oz (33lbs) is the average yield of lamb after slaughter and processing
 
 		TFC_Core.animalDropMeat(this, TFCItems.horseMeatRaw, foodWeight);
@@ -609,7 +607,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 
 		nbttc.setInteger("Familiarity", familiarity);
 		nbttc.setLong("lastFamUpdate", lastFamiliarityUpdate);
-		
+
 		NBTTagCompound nbt = nbttc;
 		nbt.setFloat ("Strength Modifier", strength_mod);
 		nbt.setFloat ("Aggression Modifier", aggression_mod);
@@ -666,7 +664,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
 		size_mod = nbt.getFloat ("Size Modifier");
-		
+
 		familiarity = nbt.getInteger("Familiarity");
 		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
 
@@ -1108,7 +1106,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if((this.riddenByEntity == null || !this.riddenByEntity.equals(ep)) && stack != null && this.isBreedingItemTFC(stack) && (isAdult() && familiarity < 50) || !isAdult()){
+		if((this.riddenByEntity == null || !this.riddenByEntity.equals(ep)) && !familiarizedToday && stack != null && this.isBreedingItemTFC(stack) && (isAdult() && familiarity < 50) || !isAdult()){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
@@ -1127,7 +1125,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 			this.playLivingSound();
 		}
 	}
-	
+
 	@Override
 	public boolean trySetName(String name, EntityPlayer player) {
 		if(checkFamiliarity(InteractionEnum.NAME, player)&& !this.hasCustomNameTag()){
