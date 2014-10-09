@@ -89,8 +89,8 @@ public class Recipes
 
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Fence, 6, i), new Object[] { "LPL", "LPL", Character.valueOf('L'), new ItemStack(TFCItems.Logs, 1, i), Character.valueOf('P'), new ItemStack(TFCItems.SinglePlank, 1, i) });
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.FenceGate, 2, i), new Object[] { "LPL", "LPL", Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank, 1, i), Character.valueOf('P'), new ItemStack(TFCBlocks.Planks, 1, i) });
-				/*GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand,1,i), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j),Character.valueOf('%'),
-				new ItemStack(TFCBlocks.Planks,1,i)});*/
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand, 1, i), new Object[]
+				{ "###", " # ", "%%%", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, i), Character.valueOf('%'), new ItemStack(TFCBlocks.Planks, 1, i) });
 
 				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Loom, 1, i), new Object[] { "LLL", "LSL", "L L", Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank, 1, i), Character.valueOf('S'), "stickWood" }));
 			}
@@ -105,8 +105,8 @@ public class Recipes
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Fence2, 6, l), new Object[] { "LPL", "LPL", Character.valueOf('L'), new ItemStack(TFCItems.Logs, 1, i), Character.valueOf('P'), new ItemStack(TFCItems.SinglePlank, 1, i) });
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.FenceGate2, 2, l), new Object[] { "LPL", "LPL", Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank, 1, i), Character.valueOf('P'), new ItemStack(TFCBlocks.Planks2, 1, l) });
 
-				/*GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand2,1,l), new Object[] { "###"," # ","%%%",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,i),Character.valueOf('%'),
-				new ItemStack(TFCBlocks.Planks2,1,l)});*/
+				GameRegistry.addRecipe(new ItemStack(TFCBlocks.ArmourStand2, 1, l), new Object[]
+				{ "###", " # ", "%%%", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, i), Character.valueOf('%'), new ItemStack(TFCBlocks.Planks2, 1, l) });
 
 				GameRegistry.addRecipe(new ItemStack(TFCBlocks.Barrel, 1, i), new Object[] { "# #", "# #", "###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, i) });
 				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(TFCBlocks.Loom, 1, i), new Object[] { "LLL", "LSL", "L L", Character.valueOf('L'), new ItemStack(TFCItems.SinglePlank, 1, i), Character.valueOf('S'), "stickWood" }));
