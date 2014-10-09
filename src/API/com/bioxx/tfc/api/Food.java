@@ -154,7 +154,7 @@ public class Food
 	{
 		NBTTagCompound nbt = is.getTagCompound();
 		nbt.setFloat("foodWeight", value);
-		if(getDecay(is) > value)
+		if(getDecay(is) > value || value <= 0)
 			is.stackSize = 0;
 	}
 
