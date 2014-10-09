@@ -205,11 +205,13 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			for(int i = 0; i < 5; i++)
 			{
 				ItemStack f = getStackInSlot(i);
-				if(f != null && f.getItem() instanceof IFood && ((IFood)f.getItem()).getFoodWeight(f) >= sandwichWeights[i])
+				if(f != null && ((IFood)f.getItem()).getFoodWeight(f) - ((IFood)f.getItem()).getFoodDecay(f) >= sandwichWeights[i])
+				{
 					weight += sandwichWeights[i];
+				}
 			}
 
-			if(weight < 5)
+			if(weight < 7)
 				return false;
 		}
 		return true;
@@ -236,8 +238,10 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			for(int i = 0; i < 4; i++)
 			{
 				ItemStack f = getStackInSlot(i+1);
-				if(f != null && ((IFood)f.getItem()).getFoodWeight(f) >= saladWeights[i])
+				if(f != null && ((IFood)f.getItem()).getFoodWeight(f) - ((IFood)f.getItem()).getFoodDecay(f) >= saladWeights[i])
+				{
 					weight += saladWeights[i];
+				}
 			}
 
 			if(weight < 14)
@@ -344,7 +348,8 @@ public class TEFoodPrep extends NetworkTileEntity implements IInventory
 			if(is != null)
 			{
 				is.getTagCompound().setFloat("foodWeight", ((ItemFoodTFC)is.getItem()).getFoodWeight(is) - weights[i]);
-				if(((ItemFoodTFC)is.getItem()).getFoodWeight(is) <= 0)
+				if(((ItemFoodTFC)is.getItem()).getFoodWeight(is) <= 0 || 
+						((ItemFoodTFC)is.getItem()).getFoodWeight(is) <= ((ItemFoodTFC)is.getItem()).getFoodDecay(is))
 					is.stackSize = 0;
 			}
 		}
