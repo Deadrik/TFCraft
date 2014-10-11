@@ -786,7 +786,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluid.RUM, 100), new FluidStack(TFCFluid.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelVinegarRecipe(new FluidStack(TFCFluid.CORNWHISKEY, 100), new FluidStack(TFCFluid.VINEGAR, 100)));
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluid.SALTWATER, 9000), new FluidStack(TFCFluid.VINEGAR, 1000), new FluidStack(TFCFluid.BRINE, 10000)).setSealedRecipe(false).setMinTechLevel(0).setRemovesLiquid(false));
-		BarrelManager.getInstance().addRecipe(new BarrelBriningRecipe(new FluidStack(TFCFluid.BRINE, 100), new FluidStack(TFCFluid.BRINE, 100)).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelBriningRecipe(new FluidStack(TFCFluid.BRINE, 60), new FluidStack(TFCFluid.BRINE, 60)).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.Sugarcane), 1), new FluidStack(TFCFluid.FRESHWATER, 60), ItemFoodTFC.createTag(new ItemStack(TFCItems.Sugar), 0.1f), new FluidStack(TFCFluid.FRESHWATER, 60)).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelMultiItemRecipe(new ItemStack(TFCItems.Jute, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 200), new ItemStack(TFCItems.JuteFibre, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 200)).setMinTechLevel(0));
 	}
