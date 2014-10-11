@@ -1,9 +1,13 @@
 package com.bioxx.tfc.Blocks;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -32,9 +36,26 @@ public class BlockWorldItem extends BlockTerraContainer
 		return true;
 	}
 
-	@Override
+	/*@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int l)
 	{
+	}*/
+
+	@Override
+	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
+	{
+		if(!world.isRemote)
+		{
+			TEWorldItem te = (TEWorldItem)world.getTileEntity(i, j, k);
+			EntityItem ei = new EntityItem(world, i, j, k, te.storage[0]);
+			world.spawnEntityInWorld(ei);
+		}
+	}
+
+	@Override
+	public Item getItemDropped(int metadata, Random rand, int fortune)
+	{
+		return null;
 	}
 
 	@Override
