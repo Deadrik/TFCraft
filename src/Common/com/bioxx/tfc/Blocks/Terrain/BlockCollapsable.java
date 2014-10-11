@@ -160,9 +160,9 @@ public class BlockCollapsable extends BlockTerraContainer
 	{
 		for(int y = -1; y <= 1; y++)
 		{
-			for(int x = -range; x <= range + 1; x++)
+			for(int x = -range; x <= range; x++)
 			{
-				for(int z = -range; z <= range + 1; z++)
+				for(int z = -range; z <= range; z++)
 				{
 					if(TFC_Core.isHorizSupport(world.getBlock(i + x, j + y, k + z)))
 					{
