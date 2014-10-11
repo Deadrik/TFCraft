@@ -22,6 +22,7 @@ import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.Food;
 import com.bioxx.tfc.api.TFC_ItemHeat;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Crafting.BarrelAlcoholRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelBriningRecipe;
 import com.bioxx.tfc.api.Crafting.BarrelLiquidToLiquidRecipe;
@@ -405,11 +406,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 				}
 				if(itemstack != null && itemstack.getItem() instanceof IFood)
 				{
+					float w = ((IFood)itemstack.getItem()).getFoodWeight(itemstack);
 					if(fluid.getFluid() == TFCFluid.BRINE)
 					{
 						if(Food.isBrined(itemstack))
 						{
-							float w = ((IFood)itemstack.getItem()).getFoodWeight(itemstack);
 							if(w/fluid.amount <= 0.016)
 								TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord, 0.75f);
 							else
@@ -420,10 +421,13 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					{
 						if(Food.isBrined(itemstack))
 						{
-							if(!Food.isPickled(itemstack))
+							if(!Food.isPickled(itemstack) && w/fluid.amount <= Global.FOOD_MAX_WEIGHT/this.getMaxLiquid())
+							{
+								fluid.amount -= 1 * w;
 								Food.setPickled(itemstack, true);
-							float w = ((IFood)itemstack.getItem()).getFoodWeight(itemstack);
-							if(w/fluid.amount <= 0.016)
+							}
+
+							if(Food.isPickled(itemstack) && w/fluid.amount <= Global.FOOD_MAX_WEIGHT/this.getMaxLiquid()*2)
 								TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord, 0.25f, 0.1f);
 							else
 								shouldStandardTick = true;
