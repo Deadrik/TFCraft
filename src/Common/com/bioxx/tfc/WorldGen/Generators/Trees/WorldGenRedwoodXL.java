@@ -5,14 +5,13 @@ package com.bioxx.tfc.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.WorldGen.TFCBiome;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
 
 public class WorldGenRedwoodXL extends WorldGenerator
 {
@@ -72,17 +71,14 @@ public class WorldGenRedwoodXL extends WorldGenerator
 			}
 		}
 
-		int meta = TFCBiome.getSurfaceRockLayer(world, x, z);
-		Block dirt = TFC_Core.getTypeForDirt(meta);
-//		int dirtMeta =  TFC_Core.getSoilMetaFromStone(dirtID, meta);
-		if(world.getBlock(x, y - 1, z).getMaterial().isReplaceable())
-			world.setBlock(x, y - 1, z, dirt, meta, 2);
-		if(world.getBlock(x-1, y - 1, z).getMaterial().isReplaceable())
-			world.setBlock(x - 1, y - 1, z, dirt, meta, 2);
-		if(world.getBlock(x, y - 1, z-1).getMaterial().isReplaceable())
-			world.setBlock(x, y - 1, z - 1, dirt, meta, 2);
-		if(world.getBlock(x-1, y - 1, z-1).getMaterial().isReplaceable())
-			world.setBlock(x - 1, y - 1, z - 1, dirt, meta, 2);
+		if(TFC_Core.isGrass(world.getBlock(x, y - 1, z)))
+			world.setBlock(x, y - 1, z, TFC_Core.getTypeForDirtFromGrass(world.getBlock(x, y - 1, z)), world.getBlockMetadata(x, y - 1, z), 2);
+		if(TFC_Core.isGrass(world.getBlock(x-1, y - 1, z)))
+			world.setBlock(x - 1, y - 1, z, TFC_Core.getTypeForDirtFromGrass(world.getBlock(x-1, y - 1, z)), world.getBlockMetadata(x-1, y - 1, z), 2);
+		if(TFC_Core.isGrass(world.getBlock(x, y - 1, z-1)))
+			world.setBlock(x, y - 1, z - 1, TFC_Core.getTypeForDirtFromGrass(world.getBlock(x, y - 1, z-1)), world.getBlockMetadata(x, y - 1, z-1), 2);
+		if(TFC_Core.isGrass(world.getBlock(x-1, y - 1, z-1)))
+			world.setBlock(x - 1, y - 1, z - 1, TFC_Core.getTypeForDirtFromGrass(world.getBlock(x-1, y - 1, z-1)), world.getBlockMetadata(x-1, y - 1, z-1), 2);
 
 		int l1 = rand.nextInt(2);
 		int j2 = 1;
