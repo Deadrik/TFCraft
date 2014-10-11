@@ -1,5 +1,7 @@
 package com.bioxx.tfc.Blocks;
 
+import static net.minecraftforge.common.util.ForgeDirection.UP;
+
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -13,6 +15,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCItems;
@@ -37,6 +40,18 @@ public class BlockLogPile extends BlockTerraContainer
 	public static int getDirectionFromMetadata(int i)
 	{
 		return i & 3;
+	}
+
+	@Override
+	public boolean isFireSource(World world, int x, int y, int z, ForgeDirection side)
+	{
+		TELogPile te = (TELogPile) world.getTileEntity(x, y, z);
+		int time = (int) (TFC_Time.getTotalHours()-te.fireTimer);
+		if (te.isOnFire && side == UP)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	@Override

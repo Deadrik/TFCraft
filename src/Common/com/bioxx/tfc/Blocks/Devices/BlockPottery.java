@@ -1,5 +1,7 @@
 package com.bioxx.tfc.Blocks.Devices;
 
+import static net.minecraftforge.common.util.ForgeDirection.UP;
+
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -67,6 +69,17 @@ public class BlockPottery extends BlockTerraContainer
 		TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
 		if(side == ForgeDirection.UP && te!= null && te.wood == 8)
 			return true;
+		return false;
+	}
+
+	@Override
+	public boolean isFireSource(World world, int x, int y, int z, ForgeDirection side)
+	{
+		TEPottery te = (TEPottery) world.getTileEntity(x, y, z);
+		if (te.isLit() && side == UP)
+		{
+			return true;
+		}
 		return false;
 	}
 
