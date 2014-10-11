@@ -438,10 +438,14 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 
 			if(!this.getSealed() && worldObj.canLightningStrikeAt(xCoord, yCoord+1, zCoord))
 			{
-				if(this.fluid == null)
-					fluid = new FluidStack(TFCFluid.FRESHWATER, 1);
-				else if(this.fluid != null && fluid.getFluid() == TFCFluid.FRESHWATER)
-					fluid.amount = Math.min(fluid.amount+1, getMaxLiquid());
+				int count = getInvCount();	
+				if(count == 0 ||(count == 1 && this.getInputStack() != null))
+				{
+					if(this.fluid == null)
+						fluid = new FluidStack(TFCFluid.FRESHWATER, 1);
+					else if(this.fluid != null && fluid.getFluid() == TFCFluid.FRESHWATER)
+						fluid.amount = Math.min(fluid.amount+1, getMaxLiquid());
+				}
 			}
 
 			processTimer++;
