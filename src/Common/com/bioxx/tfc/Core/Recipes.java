@@ -433,6 +433,14 @@ public class Recipes
 	{
 		//Wood & Trees
 		OreDictionary.registerOre("logWood", new ItemStack(TFCItems.Logs, 1, WILDCARD));
+		OreDictionary.registerOre("logWood", new ItemStack(TFCBlocks.LogNatural, 1, WILDCARD));
+		OreDictionary.registerOre("logWood", new ItemStack(TFCBlocks.LogNatural2, 1, WILDCARD));
+		OreDictionary.registerOre("logWood", new ItemStack(TFCBlocks.WoodHoriz, 1, WILDCARD));
+		OreDictionary.registerOre("logWood", new ItemStack(TFCBlocks.WoodHoriz2, 1, WILDCARD));
+		OreDictionary.registerOre("logWood", new ItemStack(TFCBlocks.WoodHoriz3, 1, WILDCARD));
+		OreDictionary.registerOre("logWood", new ItemStack(TFCBlocks.WoodHoriz4, 1, WILDCARD));
+		OreDictionary.registerOre("logWood", new ItemStack(TFCBlocks.WoodVert, 1, WILDCARD));
+		OreDictionary.registerOre("logWood", new ItemStack(TFCBlocks.WoodVert2, 1, WILDCARD));
 
 		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks, 1, WILDCARD));
 		OreDictionary.registerOre("plankWood", new ItemStack(TFCBlocks.Planks2, 1, WILDCARD));
