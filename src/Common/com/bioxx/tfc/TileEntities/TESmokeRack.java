@@ -95,16 +95,23 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
-
+		boolean flag = false;
 		if(!TFC_Core.areItemsEqual(storage[i], itemstack))
-			broadcastPacketInRange();
-		storage[i] = itemstack;
+		{
+			flag = true;
+		}
+
 		if(itemstack != null && !ItemStack.areItemStacksEqual(itemstack, storage[i]))
 		{
 			if(Food.getDried(itemstack) > 0)
 				driedCounter[i] = (int) (TFC_Time.getTotalHours() - Food.getDried(itemstack));
 			else
 				driedCounter[i] = (int)TFC_Time.getTotalHours();//Reset the counter if its a new item
+		}
+		if(flag)
+		{
+			storage[i] = itemstack;
+			broadcastPacketInRange();
 		}
 	}
 
@@ -167,6 +174,7 @@ public class TESmokeRack extends NetworkTileEntity implements IInventory
 	{
 		storage = new ItemStack[storage.length];
 		TFC_Core.readInventoryFromNBT(nbt, storage);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
