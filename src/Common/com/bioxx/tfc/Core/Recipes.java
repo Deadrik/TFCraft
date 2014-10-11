@@ -197,6 +197,9 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.carpet, 2, 0), new Object[] { "$$", Character.valueOf('$'), "materialCloth" }));
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Blocks.lit_pumpkin, 1), "blockTorch", "blockPumpkin"));
+		
+		GameRegistry.addRecipe(new ItemStack(TFCItems.GlassBottle, 3), new Object[]
+		{ "# #", " # ", Character.valueOf('#'), new ItemStack(Blocks.glass) });
 
 		for (int i = 0; i < 16; i++)
 			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.carpet, 1, i), new Object[] { new ItemStack(TFCItems.Dye, 1, 15 - i), new ItemStack(Blocks.carpet, 1, 32767) });
@@ -886,6 +889,8 @@ public class Recipes
 		RemoveRecipe(new ItemStack(Items.flint_and_steel));
 		RemoveRecipe(new ItemStack(Items.coal, 9));
 		RemoveRecipe(new ItemStack(Items.sugar));
+		RemoveRecipe(new ItemStack(Items.glass_bottle, 3));
+		
 		//Recipe Configuration
 		if (TFCCrafting.anvilRecipe == false)
 			RemoveRecipe(new ItemStack(Blocks.anvil));
