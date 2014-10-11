@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Blocks.Terrain.BlockCobble;
+import com.bioxx.tfc.Blocks.Terrain.BlockSand;
 import com.bioxx.tfc.Core.TFCTabs;
 import com.bioxx.tfc.Core.TFC_Core;
 
@@ -53,7 +54,7 @@ public class BlockThatch extends BlockTerra
 		if(!world.isRemote)
 		{
 			Block b = world.getBlock(x, y+1, z);
-			if(TFC_Core.isSoilOrGravel(b) || b instanceof BlockCobble)
+			if(TFC_Core.isSoilOrGravel(b) || b instanceof BlockCobble || b instanceof BlockSand)
 			{
 				TFC_Core.setBlockToAirWithDrops(world, x, y, z);
 			}
