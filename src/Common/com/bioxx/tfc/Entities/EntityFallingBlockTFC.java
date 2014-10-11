@@ -133,9 +133,10 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 
 				if (this.onGround)
 				{
-					if(canReplace(worldObj, i, j, k) && canReplace(worldObj, i, j-1, k))
+					if(canReplace(worldObj, i, j-1, k))
 					{
-						TFC_Core.setBlockToAirWithDrops(worldObj, i, j-1, k);
+						//TFC_Core.setBlockToAirWithDrops(worldObj, i, j-1, k);
+						worldObj.setBlockToAir(i, j-1, k);
 						this.onGround = false;
 					}
 				}
@@ -217,7 +218,7 @@ public class EntityFallingBlockTFC extends Entity implements IEntityAdditionalSp
 	{
 		Block b = world.getBlock(x, y, z);
 		if(canDestroy(b) && (b == Blocks.air || !worldObj.isSideSolid(x, y, z, ForgeDirection.UP)))
-			return TFC_Core.setBlockWithDrops(worldObj, x, y, z, getBlock(), blockMeta);
+			return TFC_Core.setBlockWithDrops(worldObj, x, y, z, getBlock(), this.blockMeta);
 		return false;
 	}
 
