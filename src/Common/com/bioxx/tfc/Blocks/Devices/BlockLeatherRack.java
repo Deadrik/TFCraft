@@ -1,9 +1,12 @@
 package com.bioxx.tfc.Blocks.Devices;
 
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -56,6 +59,23 @@ public class BlockLeatherRack extends BlockTerraContainer
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
+	{
+		if(!world.isRemote)
+		{
+			TELeatherRack te = (TELeatherRack)world.getTileEntity(i, j, k);
+			EntityItem ei = new EntityItem(world, i, j, k, te.leatherItem);
+			world.spawnEntityInWorld(ei);
+		}
+	}
+
+	@Override
+	public Item getItemDropped(int metadata, Random rand, int fortune)
+	{
+		return null;
 	}
 
 	@Override
