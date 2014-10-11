@@ -430,10 +430,10 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 						}
 					}
 				}
-				if(shouldStandardTick)
-				{
-					TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
-				}
+			}
+			if(shouldStandardTick)
+			{
+				TFC_Core.handleItemTicking(this, this.worldObj, xCoord, yCoord, zCoord);
 			}
 
 			if(!this.getSealed() && worldObj.canLightningStrikeAt(xCoord, yCoord+1, zCoord))
