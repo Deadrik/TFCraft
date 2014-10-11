@@ -212,6 +212,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.lever, 1), new Object[] { "P","H", Character.valueOf('P'), "stickWood", Character.valueOf('H'), "itemRock"}));
 
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.paper, 3), new Object[] { "###", Character.valueOf('#'), "itemReed"}));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.book, 1), new Object[]
 				{ new ItemStack(Items.paper), new ItemStack(Items.paper), new ItemStack(Items.paper), "materialLeather" }));
 		//GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.writabeBookTFC, 1), new Object[]{new ItemStack(Items.book, 1)});
@@ -890,6 +891,7 @@ public class Recipes
 		RemoveRecipe(new ItemStack(Items.coal, 9));
 		RemoveRecipe(new ItemStack(Items.sugar));
 		RemoveRecipe(new ItemStack(Items.glass_bottle, 3));
+		RemoveRecipe(new ItemStack(Items.paper, 3));
 		
 		//Recipe Configuration
 		if (TFCCrafting.anvilRecipe == false)
