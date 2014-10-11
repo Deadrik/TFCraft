@@ -1,6 +1,7 @@
 package com.bioxx.tfc.Blocks;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -260,6 +261,12 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 	{
 	}
 
+	@Override
+	public Item getItemDropped(int metadata, Random rand, int fortune)
+	{
+		return null;
+	}
+
 	/**
 	 * Called upon block activation (right click on the block.)
 	 */
@@ -277,9 +284,12 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 	@Override
 	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
 	{
-		TEMetalTrapDoor te = (TEMetalTrapDoor)world.getTileEntity(i, j, k);
-		EntityItem ei = new EntityItem(world, i, j, k, te.sheetStack);
-		world.spawnEntityInWorld(ei);
+		if(!world.isRemote)
+		{
+			TEMetalTrapDoor te = (TEMetalTrapDoor)world.getTileEntity(i, j, k);
+			EntityItem ei = new EntityItem(world, i, j, k, te.sheetStack);
+			world.spawnEntityInWorld(ei);
+		}
 	}
 
 	/**
