@@ -26,13 +26,13 @@ public class TFCFluid extends Fluid
 	public static final TFCFluid BEER = new TFCFluid("beer").setBaseColor(0xc39e37);
 	public static final TFCFluid RYEWHISKEY = new TFCFluid("ryewhiskey").setBaseColor(0xc77d51);
 	public static final TFCFluid WHISKEY = new TFCFluid("whiskey").setBaseColor(0x583719);
-	public static final TFCFluid CORNWHISKEY = new TFCFluid("cornwhiskey").setBaseColor(0xb7d9bc);
+	public static final TFCFluid CORNWHISKEY = new TFCFluid("cornwhiskey").setBaseColor(0xd9c7b7);
 	public static final TFCFluid SAKE = new TFCFluid("sake").setBaseColor(0xb7d9bc);
 	public static final TFCFluid VODKA = new TFCFluid("vodka").setBaseColor(0xdcdcdc);
 	public static final TFCFluid CIDER = new TFCFluid("cider").setBaseColor(0xb0ae32);
 	public static final TFCFluid TANNIN = new TFCFluid("tannin").setBaseColor(0x63594e);
 	public static final TFCFluid VINEGAR = new TFCFluid("vinegar").setBaseColor(0xc7c2aa);
-	public static final TFCFluid BRINE = new TFCFluid("brine").setBaseColor(0xc7c2aa);
+	public static final TFCFluid BRINE = new TFCFluid("brine").setBaseColor(0xdcd3c9);
 	public static final TFCFluid LIMEWATER = new TFCFluid("limewater").setBaseColor(0xb4b4b4);
 	public static final TFCFluid MILK = new TFCFluid("milk").setBaseColor(0xffffff);
 	public static final TFCFluid MILKCURDLED = new TFCFluid("milkcurdled").setBaseColor(0xfffbe8);
