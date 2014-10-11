@@ -18,6 +18,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 
 import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Blocks.Vanilla.BlockCustomDoor;
 import com.bioxx.tfc.Blocks.Vanilla.BlockCustomLilyPad;
 import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
@@ -272,6 +273,16 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	@Override
 	public float getFilledPercentage(World world, int x, int y, int z) {
 		return 1;
+	}
+
+	@Override
+	public boolean func_149807_p(World world, int x, int y, int z)
+	{
+		Block block = world.getBlock(x, y, z);
+		if(block == TFCBlocks.Thatch || block == TFCBlocks.Barrel || block == TFCBlocks.Vessel || block == TFCBlocks.BerryBush || 
+				block == TFCBlocks.SmokeRack || block instanceof BlockCustomDoor || block == TFCBlocks.IngotPile)
+			return false;
+		return super.func_149807_p(world, x, y, z);
 	}
 
 }
