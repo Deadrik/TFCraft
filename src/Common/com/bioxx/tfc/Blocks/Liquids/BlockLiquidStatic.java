@@ -31,6 +31,7 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 		flowing = f;
 		fluidType = fluid;
 		this.setTickRandomly(true);
+		fluid.setBlock(this);
 	}
 
 	@Override
