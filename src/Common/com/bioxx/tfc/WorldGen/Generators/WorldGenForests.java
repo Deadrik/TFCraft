@@ -95,32 +95,32 @@ public class WorldGenForests implements IWorldGenerator
 					gen2 = TFCBiome.getTreeGen(8, random.nextBoolean());
 				int randomNumber = random.nextInt(100);
 
-				float tree0EVTMin = EnumTree.values()[TreeType0].minEVT;
-				float tree0EVTMax = EnumTree.values()[TreeType0].maxEVT;
+				float tree0EVTMin = TreeType0 != -1 ? EnumTree.values()[TreeType0].minEVT : 0;
+				float tree0EVTMax = TreeType0 != -1 ? EnumTree.values()[TreeType0].maxEVT : 0;
 
-				float tree0RainMin = EnumTree.values()[TreeType0].minRain;
-				float tree0RainMax = EnumTree.values()[TreeType0].maxRain;
+				float tree0RainMin = TreeType0 != -1 ? EnumTree.values()[TreeType0].minRain : 0;
+				float tree0RainMax = TreeType0 != -1 ? EnumTree.values()[TreeType0].maxRain : 0;
 
-				float tree0TempMin = EnumTree.values()[TreeType0].minTemp;
-				float tree0TempMax = EnumTree.values()[TreeType0].maxTemp;
+				float tree0TempMin = TreeType0 != -1 ? EnumTree.values()[TreeType0].minTemp : 0;
+				float tree0TempMax = TreeType0 != -1 ? EnumTree.values()[TreeType0].maxTemp : 0;
 
-				float tree1EVTMin = EnumTree.values()[TreeType1].minEVT;
-				float tree1EVTMax = EnumTree.values()[TreeType1].maxEVT;
+				float tree1EVTMin = TreeType1 != -1 ? EnumTree.values()[TreeType1].minEVT : 0;
+				float tree1EVTMax = TreeType1 != -1 ? EnumTree.values()[TreeType1].maxEVT : 0;
 
-				float tree1RainMin = EnumTree.values()[TreeType1].minRain;
-				float tree1RainMax = EnumTree.values()[TreeType1].maxRain;
+				float tree1RainMin = TreeType1 != -1 ? EnumTree.values()[TreeType1].minRain : 0;
+				float tree1RainMax = TreeType1 != -1 ? EnumTree.values()[TreeType1].maxRain : 0;
 
-				float tree1TempMin = EnumTree.values()[TreeType1].minTemp;
-				float tree1TempMax = EnumTree.values()[TreeType1].maxTemp;
+				float tree1TempMin = TreeType1 != -1 ? EnumTree.values()[TreeType1].minTemp : 0;
+				float tree1TempMax = TreeType1 != -1 ? EnumTree.values()[TreeType1].maxTemp : 0;
 
-				float tree2EVTMin = EnumTree.values()[TreeType2].minEVT;
-				float tree2EVTMax = EnumTree.values()[TreeType2].maxEVT;
+				float tree2EVTMin = TreeType2 != -1 ? EnumTree.values()[TreeType2].minEVT : 0;
+				float tree2EVTMax = TreeType2 != -1 ? EnumTree.values()[TreeType2].maxEVT : 0;
 
-				float tree2RainMin = EnumTree.values()[TreeType2].minRain;
-				float tree2RainMax = EnumTree.values()[TreeType2].maxRain;
+				float tree2RainMin = TreeType2 != -1 ? EnumTree.values()[TreeType2].minRain : 0;
+				float tree2RainMax = TreeType2 != -1 ? EnumTree.values()[TreeType2].maxRain : 0;
 
-				float tree2TempMin = EnumTree.values()[TreeType2].minTemp;
-				float tree2TempMax = EnumTree.values()[TreeType2].maxTemp;
+				float tree2TempMin = TreeType2 != -1 ? EnumTree.values()[TreeType2].minTemp : 0;
+				float tree2TempMax = TreeType2 != -1 ? EnumTree.values()[TreeType2].maxTemp : 0;
 
 				boolean canSpawnTemp0 = (temperature >= tree0TempMin && temperature <= tree0TempMax);
 				int canSpawnEVTRain0 = (evt >= tree0EVTMin && evt <= tree0EVTMax && 
