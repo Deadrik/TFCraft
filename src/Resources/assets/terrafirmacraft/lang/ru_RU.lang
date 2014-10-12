@@ -1908,7 +1908,7 @@ item.Rope.name=Веревка
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Примитивная кровать
-tile.customBed.sleep.name=Эта кровать непригодна для сна
+tile.customBed.sleep=Эта кровать непригодна для сна
 tile.BasicPipe.name=Труба
 tile.ValvePipe.name=Клапан
 tile.Torch.name=Факел

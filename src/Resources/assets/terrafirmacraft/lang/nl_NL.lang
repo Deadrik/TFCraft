@@ -1908,7 +1908,7 @@ item.Rope.name=Touw
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Stro en Dierenhuid Bed
-tile.customBed.sleep.name=Dit bed is niet comfortabel genoeg om in te slapen
+tile.customBed.sleep=Dit bed is niet comfortabel genoeg om in te slapen
 tile.BasicPipe.name=Pijp
 tile.ValvePipe.name=Pijpventiel
 tile.Torch.name=

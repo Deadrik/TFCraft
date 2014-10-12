@@ -1908,7 +1908,7 @@ item.Rope.name=Seil
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Stroh- & Fellbett
-tile.customBed.sleep.name=Dieses Bett ist zu ungemütlich, um einzuschlafen.
+tile.customBed.sleep=Dieses Bett ist zu ungemütlich, um einzuschlafen.
 tile.BasicPipe.name=Röhre
 tile.ValvePipe.name=Röhre mit Ventil
 tile.Torch.name=Fackel

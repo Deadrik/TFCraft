@@ -1908,7 +1908,7 @@ item.Rope.name=Corde
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Lit de paille
-tile.customBed.sleep.name=Ce lit n'est pas assez confortable pour s'endormir.
+tile.customBed.sleep=Ce lit n'est pas assez confortable pour s'endormir.
 tile.BasicPipe.name=Tuyeau
 tile.ValvePipe.name=Valve
 tile.Torch.name=Torche

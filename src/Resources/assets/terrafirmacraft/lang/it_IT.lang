@@ -1908,7 +1908,7 @@ item.Rope.name=Corda
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Pagliericcio
-tile.customBed.sleep.name=Questo giaciglio non basta per addormentarsi
+tile.customBed.sleep=Questo giaciglio non basta per addormentarsi
 tile.BasicPipe.name=Tubo
 tile.ValvePipe.name=Valvola
 tile.Torch.name=Torcia
