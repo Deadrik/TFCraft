@@ -344,6 +344,7 @@ public class BlockBarrel extends BlockTerraContainer
 						{
 							nbt.setTag("fluidNBT",te.getFluidStack().writeToNBT(new NBTTagCompound()));
 							nbt.setBoolean("Sealed", true);
+							equippedItem.setTagCompound(nbt);
 							te.actionEmpty();
 						}
 						else if(equippedItem.getItem() instanceof ItemLargeVessel)
