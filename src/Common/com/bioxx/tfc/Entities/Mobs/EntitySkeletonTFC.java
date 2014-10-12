@@ -1,16 +1,5 @@
 package com.bioxx.tfc.Entities.Mobs;
 
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_MobData;
-import com.bioxx.tfc.Entities.EntityJavelin;
-import com.bioxx.tfc.Entities.EntityProjectileTFC;
-import com.bioxx.tfc.Items.Tools.ItemCustomBow;
-import com.bioxx.tfc.Items.Tools.ItemJavelin;
-import com.bioxx.tfc.api.Enums.EnumDamageType;
-import com.bioxx.tfc.api.Interfaces.ICausesDamage;
-import com.bioxx.tfc.api.Interfaces.IInnateArmor;
-import com.bioxx.tfc.api.Interfaces.IProjectile;
-
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -44,6 +33,17 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
+import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_MobData;
+import com.bioxx.tfc.Entities.EntityJavelin;
+import com.bioxx.tfc.Entities.EntityProjectileTFC;
+import com.bioxx.tfc.Items.Tools.ItemCustomBow;
+import com.bioxx.tfc.Items.Tools.ItemJavelin;
+import com.bioxx.tfc.api.Enums.EnumDamageType;
+import com.bioxx.tfc.api.Interfaces.ICausesDamage;
+import com.bioxx.tfc.api.Interfaces.IInnateArmor;
+import com.bioxx.tfc.api.Interfaces.IProjectile;
+
 public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, ICausesDamage, IInnateArmor
 {
 	private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 120, 15.0F);
@@ -72,7 +72,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		this.tasks.removeTask(this.aiArrowAttack);
 		ItemStack itemstack = this.getHeldItem();
 
-		if (itemstack != null && (itemstack.getItem() == TFCItems.Bow || (itemstack.getItem() instanceof ItemJavelin)))
+		if (itemstack != null && (itemstack.getItem() == Items.bow || (itemstack.getItem() instanceof ItemJavelin)))
 		{
 			this.tasks.addTask(4, this.aiArrowAttack);
 		}
@@ -301,7 +301,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		superAddRandomArmor();
 		if(this.getSkeletonType() == 0)
 		{
-			this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.Bow));
+			this.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
 		}
 		else if(this.getSkeletonType() == 1)
 		{
