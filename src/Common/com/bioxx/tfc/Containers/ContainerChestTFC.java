@@ -83,8 +83,8 @@ public class ContainerChestTFC extends ContainerTFC
 		exceptions.add(TFCItems.SterlingSilverIngot);
 		exceptions.add(TFCItems.TinIngot);
 		exceptions.add(TFCItems.ZincIngot);
-		exceptions.add(TFCBlocks.Barrel);
-		exceptions.add(TFCBlocks.Vessel);
+		exceptions.add(Item.getItemFromBlock(TFCBlocks.Barrel));
+		exceptions.add(Item.getItemFromBlock(TFCBlocks.Vessel));
 		return exceptions;
 	}
 

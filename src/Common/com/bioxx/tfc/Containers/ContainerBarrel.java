@@ -41,8 +41,8 @@ public class ContainerBarrel extends ContainerTFC
 
 	public static ArrayList<Item> getExceptions(){
 		ArrayList exceptions = new ArrayList<Item>();
-		exceptions.add(TFCBlocks.Barrel);
-		exceptions.add(TFCBlocks.Vessel);
+		exceptions.add(Item.getItemFromBlock(TFCBlocks.Barrel));
+		exceptions.add(Item.getItemFromBlock(TFCBlocks.Vessel));
 		return exceptions;
 	}
 
