@@ -796,37 +796,37 @@ public class TFCBlocks
 
 	public static void setupFire()
 	{
-		Blocks.fire.setFireInfo(LogNatural, 5, 20);
-		Blocks.fire.setFireInfo(LogNatural2, 5, 20);
+		Blocks.fire.setFireInfo(LogNatural, 5, 5);
+		Blocks.fire.setFireInfo(LogNatural2, 5, 5);
 		Blocks.fire.setFireInfo(WoodSupportV, 5, 20);
 		Blocks.fire.setFireInfo(WoodSupportV2, 5, 20);
 		Blocks.fire.setFireInfo(WoodSupportH, 5, 20);
 		Blocks.fire.setFireInfo(WoodSupportH2, 5, 20);
-		Blocks.fire.setFireInfo(Leaves, 5, 20);
-		Blocks.fire.setFireInfo(Leaves2, 5, 20);
+		Blocks.fire.setFireInfo(Leaves, 20, 20);
+		Blocks.fire.setFireInfo(Leaves2, 20, 20);
 		Blocks.fire.setFireInfo(fruitTreeWood, 5, 20);
-		Blocks.fire.setFireInfo(fruitTreeLeaves, 5, 20);
-		Blocks.fire.setFireInfo(fruitTreeLeaves2, 5, 20);
+		Blocks.fire.setFireInfo(fruitTreeLeaves, 20, 20);
+		Blocks.fire.setFireInfo(fruitTreeLeaves2, 20, 20);
 		Blocks.fire.setFireInfo(Fence, 5, 20);
 		Blocks.fire.setFireInfo(Fence2, 5, 20);
 		Blocks.fire.setFireInfo(FenceGate, 5, 20);
 		Blocks.fire.setFireInfo(FenceGate2, 5, 20);
 		Blocks.fire.setFireInfo(Chest, 5, 20);
-		Blocks.fire.setFireInfo(StrawHideBed, 5, 20);
-		Blocks.fire.setFireInfo(Thatch, 5, 20);
-		Blocks.fire.setFireInfo(WoodVert, 5, 20);
-		Blocks.fire.setFireInfo(WoodVert2, 5, 20);
-		Blocks.fire.setFireInfo(WoodHoriz, 5, 20);
-		Blocks.fire.setFireInfo(WoodHoriz2, 5, 20);
-		Blocks.fire.setFireInfo(WoodHoriz3, 5, 20);
-		Blocks.fire.setFireInfo(WoodHoriz4, 5, 20);
+		Blocks.fire.setFireInfo(StrawHideBed, 20, 20);
+		Blocks.fire.setFireInfo(Thatch, 20, 20);
+		Blocks.fire.setFireInfo(WoodVert, 5, 5);
+		Blocks.fire.setFireInfo(WoodVert2, 5, 5);
+		Blocks.fire.setFireInfo(WoodHoriz, 5, 5);
+		Blocks.fire.setFireInfo(WoodHoriz2, 5, 5);
+		Blocks.fire.setFireInfo(WoodHoriz3, 5, 5);
+		Blocks.fire.setFireInfo(WoodHoriz4, 5, 5);
 		Blocks.fire.setFireInfo(Planks, 5, 20);
 		Blocks.fire.setFireInfo(Planks2, 5, 20);
 		Blocks.fire.setFireInfo(WoodConstruct, 5, 20);
-		Blocks.fire.setFireInfo(BerryBush, 5, 20);
+		Blocks.fire.setFireInfo(BerryBush, 20, 20);
 		Blocks.fire.setFireInfo(Barrel, 5, 20);
 		Blocks.fire.setFireInfo(Crops, 20, 20);
-		Blocks.fire.setFireInfo(LogPile, 20, 20);
+		Blocks.fire.setFireInfo(LogPile, 10, 10);
 		//Blocks.fire.setFireInfo(Charcoal, 100, 20);
 		for (int i=0; i < Global.WOOD_ALL.length; i++)
 			Blocks.fire.setFireInfo(Doors[i], 5, 20);
