@@ -34,6 +34,7 @@ import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Core.TFCFluid;
 import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.Core.TFC_Climate;
+import com.bioxx.tfc.Core.TFC_OreDictionary;
 import com.bioxx.tfc.Core.Player.PlayerTracker;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.Handlers.AnvilCraftingHandler;
@@ -229,6 +230,7 @@ public class TerraFirmaCraft
 		TFCPotion.Setup();
 
 		//Register all of the recipes
+		TFC_OreDictionary.registerOreDict();
 		Recipes.registerRecipes();
 
 		ItemHeat.SetupItemHeat();
