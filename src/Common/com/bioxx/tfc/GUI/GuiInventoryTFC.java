@@ -28,6 +28,7 @@ import org.lwjgl.opengl.GL12;
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Food.TFCPotion;
 import com.bioxx.tfc.api.Constant.Global;
@@ -253,10 +254,7 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 		}
 	}
 
-	/**
-	 * This function is what controls the hotbar shortcut check when you press a
-	 * number key when hovering a stack.
-	 */
+	long spamTimer = 0;
 	@Override
 	protected boolean checkHotbarKeys(int keycode)
 	{
@@ -265,8 +263,9 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 			return false;
 		//Here is the code for quick stacking food
 		if(keycode == 31 && activeSlot != null && activeSlot.canTakeStack(player) && activeSlot.getHasStack() && 
-				activeSlot.getStack() != null && activeSlot.getStack().getItem() instanceof IFood)
+				activeSlot.getStack() != null && activeSlot.getStack().getItem() instanceof IFood && TFC_Time.getTotalTicks() > spamTimer+5)
 		{
+			spamTimer = TFC_Time.getTotalTicks();
 			Item iType = activeSlot.getStack().getItem();
 			for(int i = 9; i < 45 && getEmptyCraftSlot() != -1; i++)
 			{
@@ -281,8 +280,9 @@ public class GuiInventoryTFC extends InventoryEffectRenderer
 			}
 			return true;
 		}
-		else if(keycode == 32)
+		else if(keycode == 32 && TFC_Time.getTotalTicks() > spamTimer+5)
 		{
+			spamTimer = TFC_Time.getTotalTicks();
 			int knifeSlot = -1;
 			if(!getCraftingHasKnife())
 			{
