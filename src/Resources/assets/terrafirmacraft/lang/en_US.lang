@@ -1908,7 +1908,7 @@ item.Rope.name=Rope
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Straw & Hide Bed
-tile.customBed.sleep.name=This bed is too uncomfortable to fall asleep
+tile.customBed.sleep=This bed is too uncomfortable to fall asleep
 tile.BasicPipe.name=Pipe
 tile.ValvePipe.name=Valve Pipe
 tile.Torch.name=Torch

@@ -42,7 +42,7 @@ tile.ArmourStand.White Cedar.name=White Cedar Armour Stand
 tile.ArmourStand.White Elm.name=White Elm Armour Stand
 tile.ArmourStand.Willow.name=Willow Armour Stand
 
-tile.customBed.sleep.name=This bed is too uncomfortable to sleep in, eh?
+tile.customBed.sleep=This bed is too uncomfortable to sleep in, eh?
 
 #=================
 #= Miscellaneous =
