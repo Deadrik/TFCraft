@@ -75,7 +75,11 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
-		super.onBlockAdded(world, x, y, z);
+		//super.onBlockAdded(world, x, y, z);
+		if (world.getBlock(x, y, z) == this)
+		{
+			world.scheduleBlockUpdate(x, y, z, this, this.tickRate(world));
+		}
 		this.checkForHarden(world, x, y, z);
 	}
 
@@ -86,7 +90,7 @@ public abstract class BlockCustomLiquid extends BlockDynamicLiquid implements IF
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
-		super.onNeighborBlockChange(world, x, y, z, block);
+		//super.onNeighborBlockChange(world, x, y, z, block);
 		this.checkForHarden(world, x, y, z);
 	}
 
