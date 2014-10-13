@@ -220,7 +220,7 @@ public class BlockAnvil extends BlockTerraContainer
 		if (!par1World.isRemote && par1World.getGameRules().getGameRuleBooleanValue("doTileDrops"))
 		{
 			if(is.getItemDamage() == 0 && this == TFCBlocks.Anvil)
-				is.setItemDamage(1);
+				return;
 			float f = 0.7F;
 			double d0 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 			double d1 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
@@ -316,10 +316,10 @@ public class BlockAnvil extends BlockTerraContainer
 	public static int getDirectionFromMetadata(int i)
 	{
 		int d = i >> 3;
-		if (d == 1)
-			return 1;
-		else
-			return 0;
+			if (d == 1)
+				return 1;
+			else
+				return 0;
 	}
 
 	@Override

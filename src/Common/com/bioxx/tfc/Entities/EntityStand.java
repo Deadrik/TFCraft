@@ -1,29 +1,19 @@
 package com.bioxx.tfc.Entities;
 
-import com.bioxx.tfc.TFCBlocks;
-import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Core;
-import com.bioxx.tfc.Core.Player.InventoryPlayerTFC;
-import com.bioxx.tfc.Items.ItemTFCArmor;
-import com.bioxx.tfc.TileEntities.TEStand;
-
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.bioxx.tfc.TFCBlocks;
+import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Items.ItemTFCArmor;
 
 public class EntityStand extends EntityLiving
 {
@@ -176,10 +166,10 @@ public class EntityStand extends EntityLiving
 			}
 			for(int i = 0; i < equipable.length; i++){
 				if(equipable[i]!=null){
-				this.entityDropItem(equipable[i], 0);
+					this.entityDropItem(equipable[i], 0);
 				}
 			}
-			Block blockToDrop = woodType < 15? TFCBlocks.ArmourStand : TFCBlocks.ArmourStand2;
+			Block blockToDrop = woodType < 16? TFCBlocks.ArmourStand : TFCBlocks.ArmourStand2;
 			this.entityDropItem(new ItemStack(blockToDrop,1,woodType%16), 0);
 		}
 	}
