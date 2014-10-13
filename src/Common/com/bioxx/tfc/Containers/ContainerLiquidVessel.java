@@ -205,7 +205,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int clickedIndex)
 	{
 		ItemStack returnedStack = null;
 		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);

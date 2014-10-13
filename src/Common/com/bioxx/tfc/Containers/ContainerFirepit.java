@@ -58,7 +58,7 @@ public class ContainerFirepit extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer p, int i)
+	public ItemStack transferStackInSlotTFC(EntityPlayer p, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slotinput = (Slot)inventorySlots.get(0);

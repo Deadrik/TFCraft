@@ -40,7 +40,7 @@ public class ContainerBlastFurnace extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
+	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slot1 = (Slot)inventorySlots.get(0);

@@ -167,7 +167,7 @@ public class ContainerMold extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int clickedSlot)
+	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int clickedSlot)
 	{
 		Slot slot = (Slot)inventorySlots.get(clickedSlot);
 		Slot slot1 = (Slot)inventorySlots.get(0);
