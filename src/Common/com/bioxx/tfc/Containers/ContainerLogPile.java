@@ -50,7 +50,7 @@ public class ContainerLogPile extends ContainerTFC
 	 * Called to transfer a stack from one inventory to the other eg. when shift clicking.
 	 */
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int clickedIndex)
 	{
 		ItemStack var2 = null;
 		Slot var3 = (Slot)this.inventorySlots.get(clickedIndex);

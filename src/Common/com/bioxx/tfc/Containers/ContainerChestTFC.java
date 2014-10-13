@@ -98,7 +98,7 @@ public class ContainerChestTFC extends ContainerTFC
 	 * Called to transfer a stack from one inventory to the other eg. when shift clicking.
 	 */
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotNum)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int slotNum)
 	{
 		ItemStack var2 = null;
 		Slot slot = (Slot)this.inventorySlots.get(slotNum);

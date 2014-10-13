@@ -41,7 +41,7 @@ public class ContainerSluice extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int i)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slotpaper = (Slot)inventorySlots.get(1);

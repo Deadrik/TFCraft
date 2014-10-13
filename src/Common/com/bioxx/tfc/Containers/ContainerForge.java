@@ -58,7 +58,7 @@ public class ContainerForge extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int slotNum)
+	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int slotNum)
 	{
 		ItemStack origStack = null;
 		Slot slot = (Slot)inventorySlots.get(slotNum);

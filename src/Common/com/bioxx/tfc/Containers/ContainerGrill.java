@@ -47,7 +47,7 @@ public class ContainerGrill extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
+	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		if(slot != null && slot.getHasStack())

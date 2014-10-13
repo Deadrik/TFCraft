@@ -69,7 +69,7 @@ public class ContainerSpecialCrafting extends ContainerTFC
 	 * @return 
 	 */
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex)
+	public ItemStack transferStackInSlotTFC(EntityPlayer player, int clickedIndex)
 	{
 		ItemStack isTemp = null;
 		Slot grabbedSlot = (Slot)this.inventorySlots.get(clickedIndex);

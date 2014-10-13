@@ -3,6 +3,7 @@ package com.bioxx.tfc.Containers;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
@@ -239,4 +240,26 @@ public class ContainerTFC extends Container
 
 		return is3Tags.equals(is4Tags) &&  Math.abs(temp3 - temp4) < 5;
 	}
+	
+	public ItemStack transferStackInSlotTFC(EntityPlayer entityplayer, int slotNum)
+	{
+		return super.transferStackInSlot(entityplayer, slotNum);
+	}
+	
+	@Override
+	final public ItemStack transferStackInSlot(EntityPlayer entityplayer, int slotNum)
+	{
+		Slot slot = (Slot)this.inventorySlots.get( slotNum );
+		ItemStack is = transferStackInSlotTFC(entityplayer, slotNum);
+		
+		// send a packet to make sure that the item is removed; that it stays removed.
+		if ( ! slot.getHasStack() && entityplayer instanceof EntityPlayerMP && ! entityplayer.worldObj.isRemote )
+		{
+			EntityPlayerMP mp = (EntityPlayerMP) entityplayer;
+			mp.sendSlotContents( this, slot.slotNumber, slot.getStack() );
+		}
+		
+		return is;
+	}
+	
 }
