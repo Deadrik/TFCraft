@@ -1908,7 +1908,7 @@ item.Rope.name=ロープ
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=藁と皮のベッド
-tile.customBed.sleep.name=こんなベッドではとても寝られない
+tile.customBed.sleep=こんなベッドではとても寝られない
 tile.BasicPipe.name=パイプ
 tile.ValvePipe.name=パイプの栓
 tile.Torch.name=松明

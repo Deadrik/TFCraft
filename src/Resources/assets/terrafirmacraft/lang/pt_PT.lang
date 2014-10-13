@@ -1908,7 +1908,7 @@ item.Rope.name=Corda
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=Cama de Palha e Pele
-tile.customBed.sleep.name=Essa cama é muito desconfortável para dormir
+tile.customBed.sleep=Essa cama é muito desconfortável para dormir
 tile.BasicPipe.name=Tubo
 tile.ValvePipe.name=Válvula
 tile.Torch.name=Tocha

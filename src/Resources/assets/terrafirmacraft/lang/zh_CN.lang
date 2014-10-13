@@ -1908,7 +1908,7 @@ item.Rope.name=绳子
 
 #======== Misc. Blocks========
 tile.Straw Hide Bed.name=稻草和生皮床
-tile.customBed.sleep.name=这张床太不舒服了，睡不着。
+tile.customBed.sleep=这张床太不舒服了，睡不着。
 tile.BasicPipe.name=管道
 tile.ValvePipe.name=阀门
 tile.Torch.name=火把
