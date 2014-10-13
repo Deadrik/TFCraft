@@ -43,7 +43,7 @@ public class ItemSandwich extends ItemMeal
 	@Override
 	protected float getEatAmount(FoodStatsTFC fs, float amount)
 	{
-		float eatAmount = Math.min(amount, 9);
+		float eatAmount = Math.min(amount, 10);
 		float stomachDiff = fs.stomachLevel+eatAmount-fs.getMaxStomach(fs.player);
 		if(stomachDiff > 0)
 			eatAmount-=stomachDiff;
@@ -57,15 +57,14 @@ public class ItemSandwich extends ItemMeal
 	}
 
 	@Override
-	protected float[] getNutritionalWeights()
+	protected float[] getFoodWeights()
 	{
-		//These numbers are 5% of the oz value for each slot 1/3/2/1/1/1
-		return new float[]{0.05f,0.15f,0.1f,0.05f,0.05f,0.05f};
+		return new float[]{2f,3f,2f,2f,1f};
 	}
 
 	@Override
 	public float getFoodMaxWeight(ItemStack is) {
-		return 9;
+		return 10;
 	}
 
 	@Override

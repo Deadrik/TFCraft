@@ -124,11 +124,19 @@ public class FoodStatsTFC
 
 				if (this.stomachLevel <= 0)
 				{
-					reduceNutrition(0.012F);//3x penalty for starving
+					reduceNutrition(0.0024F);//3x penalty for starving
+				}
+				else if(this.satisfaction <= 0)
+				{
+					reduceNutrition(0.0008F);
 				}
 				else
 				{
-					reduceNutrition(0.002F);
+					this.addNutrition(EnumFoodGroup.Protein, this.satisfaction*(1-this.nutrProtein)/100, false);
+					this.addNutrition(EnumFoodGroup.Grain, this.satisfaction*(1-this.nutrGrain/100), false);
+					this.addNutrition(EnumFoodGroup.Vegetable, this.satisfaction*(1-this.nutrVeg/100), false);
+					this.addNutrition(EnumFoodGroup.Fruit, this.satisfaction*(1-this.nutrFruit/100), false);
+					this.addNutrition(EnumFoodGroup.Dairy, this.satisfaction*(1-this.nutrDairy/100), false);
 				}
 				shouldSendUpdate = true;
 			}
@@ -323,7 +331,7 @@ public class FoodStatsTFC
 
 	public void setSatisfaction(float par1)
 	{
-		this.satisfaction = par1;
+		this.satisfaction = Math.min(par1, 10);
 	}
 
 	public long getPlayerFoodSeed()
@@ -413,7 +421,14 @@ public class FoodStatsTFC
 
 	public void addNutrition(EnumFoodGroup fg, float foodAmt)
 	{
-		float amount = foodAmt/5f/50f;//converts it to 2% if it is 5oz of food
+		addNutrition(fg, foodAmt, true);
+	}
+
+	public void addNutrition(EnumFoodGroup fg, float foodAmt, boolean shouldDoMath)
+	{
+		float amount = foodAmt;
+		if(shouldDoMath)
+			amount = foodAmt/5f/20f;//converts it to 5% if it is 5oz of food
 		switch(fg)
 		{
 		case Dairy:
