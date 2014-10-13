@@ -32,6 +32,7 @@ import com.bioxx.tfc.TFCItems;
 import com.bioxx.tfc.TerraFirmaCraft;
 import com.bioxx.tfc.Blocks.BlockTerraContainer;
 import com.bioxx.tfc.Core.TFCTabs;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Textures;
 import com.bioxx.tfc.Items.ItemBlocks.ItemBarrels;
 import com.bioxx.tfc.Items.ItemBlocks.ItemLargeVessel;
@@ -315,6 +316,8 @@ public class BlockBarrel extends BlockTerraContainer
 			}
 			else if(equippedItem != null && (equippedItem.getItem() instanceof ItemBarrels || equippedItem.getItem() instanceof ItemLargeVessel))
 			{
+				ItemStack is = equippedItem.copy();
+				is.stackSize = 1;
 				if(equippedItem.hasTagCompound())
 				{
 					if(equippedItem.getTagCompound().hasKey("fluidNBT") && !equippedItem.getTagCompound().hasKey("Items") && te.getFluidLevel() < te.getMaxLiquid())
@@ -340,14 +343,16 @@ public class BlockBarrel extends BlockTerraContainer
 					if(te.getFluidStack() != null)
 					{
 						NBTTagCompound nbt = new NBTTagCompound();
-						if(equippedItem.getItem() instanceof ItemBarrels)
+						if(is.getItem() instanceof ItemBarrels)
 						{
 							nbt.setTag("fluidNBT",te.getFluidStack().writeToNBT(new NBTTagCompound()));
 							nbt.setBoolean("Sealed", true);
-							equippedItem.setTagCompound(nbt);
+							is.setTagCompound(nbt);
 							te.actionEmpty();
+							equippedItem.stackSize--;
+							TFC_Core.giveItemToPlayer(is, player);
 						}
-						else if(equippedItem.getItem() instanceof ItemLargeVessel)
+						else if(is.getItem() instanceof ItemLargeVessel)
 						{
 							FluidStack fs = te.getFluidStack().copy();
 							if(fs.amount > 5000)
@@ -361,7 +366,9 @@ public class BlockBarrel extends BlockTerraContainer
 							}
 							nbt.setTag("fluidNBT", fs.writeToNBT(new NBTTagCompound()));
 							nbt.setBoolean("Sealed", true);
-							equippedItem.setTagCompound(nbt);
+							is.setTagCompound(nbt);
+							equippedItem.stackSize--;
+							TFC_Core.giveItemToPlayer(is, player);
 						}
 						return true;
 					}
