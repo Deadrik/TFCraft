@@ -114,6 +114,21 @@ public class TFC_Time
 		return date;
 	}
 
+	public static String getDateStringFromHours(int tHours)
+	{
+		int tDays = tHours/24;
+		int div = tDays/daysInMonth;
+		int rem = 0;
+		int d = getDayOfMonth(tDays);
+		int tMonths = div;
+		div = tMonths/12;
+		rem = tMonths%12;
+		String m = TFC_Time.MONTHS[rem];
+		String date = d + " " + m + ", " + (1000+div);
+
+		return date;
+	}
+
 	public static int getHoursInMonth()
 	{
 		return 24*daysInMonth;
@@ -156,7 +171,7 @@ public class TFC_Time
 	public static int getDayOfMonth(int tDays)
 	{
 		int months = tDays/daysInMonth;
-		int rem = tDays/(months*daysInMonth);
+		int rem = tDays-(months*daysInMonth);
 		return 1+rem;
 	}
 
