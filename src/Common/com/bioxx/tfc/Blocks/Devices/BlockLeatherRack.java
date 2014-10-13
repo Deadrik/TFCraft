@@ -52,9 +52,9 @@ public class BlockLeatherRack extends BlockTerraContainer
 			}
 			else if(te.leatherItem != null)
 			{
-				EntityItem ei = new EntityItem(world, x, y, z, te.leatherItem);
+				/*EntityItem ei = new EntityItem(world, x, y, z, te.leatherItem);
 				ei.motionX = 0; ei.motionZ = 0;
-				world.spawnEntityInWorld(ei);
+				world.spawnEntityInWorld(ei);*/
 				world.setBlockToAir(x, y, z);
 			}
 		}
@@ -68,6 +68,7 @@ public class BlockLeatherRack extends BlockTerraContainer
 		{
 			TELeatherRack te = (TELeatherRack)world.getTileEntity(i, j, k);
 			EntityItem ei = new EntityItem(world, i, j, k, te.leatherItem);
+			ei.motionX = 0; ei.motionZ = 0;
 			world.spawnEntityInWorld(ei);
 		}
 	}
