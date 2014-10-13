@@ -147,6 +147,7 @@ public class TFCFluid extends Fluid
 				ifs.amount = Math.min(ifs.amount, maxFluid);
 				nbt.setTag("fluidNBT", ifs.writeToNBT(new NBTTagCompound()));
 				nbt.setBoolean("Sealed", true);
+				nbt.setInteger("SealTime", (int)TFC_Time.getTotalHours());
 			}
 			else return is;
 		}
@@ -154,6 +155,7 @@ public class TFCFluid extends Fluid
 		{
 			nbt.setTag("fluidNBT", fs.writeToNBT(new NBTTagCompound()));
 			nbt.setBoolean("Sealed", true);
+			nbt.setInteger("SealTime", (int)TFC_Time.getTotalHours());
 		}
 
 		is.setTagCompound(nbt);
