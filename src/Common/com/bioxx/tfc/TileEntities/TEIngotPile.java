@@ -178,6 +178,7 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 			if(storage[index].stackSize > 0)
 			{
 				storage[index] = new ItemStack(storage[index].getItem(), storage[index].stackSize + count, storage[index].getItemDamage());
+				worldObj.markBlockForUpdate( xCoord, yCoord, zCoord );
 			}
 		}
 		updateNeighbours();
