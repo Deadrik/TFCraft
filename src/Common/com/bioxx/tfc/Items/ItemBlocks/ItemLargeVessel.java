@@ -53,6 +53,14 @@ public class ItemLargeVessel extends ItemTerraBlock implements IEquipable
 		return EnumWeight.HEAVY;
 	}
 
+	@Override
+	public int getItemStackLimit(ItemStack is)
+	{
+		if(is.hasTagCompound())
+			return 1;
+		return super.getItemStackLimit(is);
+	}
+
 	public void createTooltip(NBTTagCompound nbt, List arraylist)
 	{
 		if(nbt != null)
