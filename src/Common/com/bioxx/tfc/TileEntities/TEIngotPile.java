@@ -276,9 +276,12 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	@Override
 	public void createInitNBT(NBTTagCompound nbt) {
 		nbt.setString("type", this.type);
-		ItemStack is = storage[0].copy();
-		is.stackTagCompound = null;
-		is.writeToNBT(nbt);
+		if(storage[0] != null)
+		{
+			ItemStack is = storage[0].copy();
+			is.stackTagCompound = null;
+			is.writeToNBT(nbt);
+		}
 	}
 
 }

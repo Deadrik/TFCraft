@@ -330,8 +330,11 @@ public class BlockIngotPile extends BlockTerraContainer
 		if(!world.isRemote)
 		{
 			TEIngotPile te = (TEIngotPile)world.getTileEntity(i, j, k);
-			EntityItem ei = new EntityItem(world, i, j, k, te.getStackInSlot(0));
-			world.spawnEntityInWorld(ei);
+			if(te.getStackInSlot(0) != null)
+			{
+				EntityItem ei = new EntityItem(world, i, j, k, te.getStackInSlot(0));
+				world.spawnEntityInWorld(ei);
+			}
 		}
 	}
 
