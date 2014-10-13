@@ -777,6 +777,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			}
 			else if(familiarity < 30){
 				familiarity -= 2*(TFC_Time.getTotalDays() - lastFamiliarityUpdate);
+				lastFamiliarityUpdate = TFC_Time.getTotalDays();
 			}
 		}
 		if(familiarity > 100)familiarity = 100;
