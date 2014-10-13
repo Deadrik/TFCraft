@@ -258,7 +258,7 @@ public class TFC_Time
 // TODO do we need this? same as getHour(), never used
 	public static int getHourOfDayFromTotalHours()
 	{
-		return getHourOfDayFromTotalHours((int)getTotalHours());
+		return  getHourOfDayFromTotalHours((int)getTotalHours());
 	}
 
 	public static int getHourOfDayFromTotalHours(int th)
