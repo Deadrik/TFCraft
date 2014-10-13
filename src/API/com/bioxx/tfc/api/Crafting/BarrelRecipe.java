@@ -85,8 +85,12 @@ public class BarrelRecipe
 	{
 		String s = "";
 		if(this.outItemStack != null)
-			s=/*outItemStack.stackSize+"x " +*/ outItemStack.getDisplayName();
-		if(!this.barrelFluid.isFluidEqual(outFluid))
+		{
+			if(outItemStack.stackSize > 1)
+				s += outItemStack.stackSize+"x ";
+			s += outItemStack.getDisplayName();
+		}
+		if(outFluid != null && !this.barrelFluid.isFluidEqual(outFluid))
 			s=outFluid.getFluid().getLocalizedName();
 		return s;
 	}
@@ -99,8 +103,13 @@ public class BarrelRecipe
 	protected int getnumberOfRuns(ItemStack inIS, FluidStack inFS)
 	{
 		int runs = 0;
-		runs = inIS.stackSize/this.inItemStack.stackSize;
-		return Math.min(runs, inFS.amount/this.getInFluid().amount);
+		int div = 0;
+		if(inIS != null && inItemStack != null)
+		{
+			runs = inIS.stackSize/this.inItemStack.stackSize;
+			div = inFS.amount/this.getInFluid().amount;
+		}
+		return Math.min(runs, div);
 	}
 
 	public ItemStack getResult(ItemStack inIS, FluidStack inFS, int sealedTime)

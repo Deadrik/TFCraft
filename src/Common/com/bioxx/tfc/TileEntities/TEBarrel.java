@@ -79,7 +79,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(this.getInvCount() == 0)
 		{
-			if(getFluidStack() != null)
+			boolean isCheese = handleCheese();
+			if(getFluidStack() != null && !isCheese)
 			{
 				recipe = BarrelManager.getInstance().findMatchingRecipe(getInputStack(), getFluidStack(), this.sealed, getTechLevel());
 				if(recipe != null && !worldObj.isRemote)
@@ -94,8 +95,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					if(recipe.isSealedRecipe() && time < recipe.sealTime)
 						return;
 
-					ItemStack origIS = getInputStack().copy();
-					FluidStack origFS = getFluidStack().copy();
+					ItemStack origIS = getInputStack() != null ? getInputStack().copy() : null;
+					FluidStack origFS = getFluidStack() != null ? getFluidStack().copy() : null;
 					if(fluid.isFluidEqual(recipe.getResultFluid(origIS, origFS, time)))
 					{
 						fluid.amount -= recipe.getResultFluid(origIS, origFS, time).amount;
@@ -103,11 +104,11 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					else
 					{
 						this.fluid = recipe.getResultFluid(origIS, origFS, time);
-						if(!(recipe instanceof BarrelLiquidToLiquidRecipe))
+						if(fluid != null && !(recipe instanceof BarrelLiquidToLiquidRecipe))
 							this.fluid.amount = origFS.amount;
 					}
 					ItemStack result = recipe.getResult(origIS, origFS, time);
-					if(fluid.getFluid() == TFCFluid.BRINE)
+					if(fluid != null && fluid.getFluid() == TFCFluid.BRINE)
 					{
 						if(result == null)
 							result = origIS.copy();
@@ -124,7 +125,36 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					this.setInventorySlotContents(0, result);
 				}
 			}
+			else if(getFluidStack() == null && !isCheese)recipe = null;
 		}
+	}
+
+	/**
+	 * We have to handle cheese by itself because the barrel recipe manager doesnt take kindly to null input items.
+	 */
+	private boolean handleCheese()
+	{
+		if(this.getSealed() && this.fluid != null && this.fluid.getFluid() == TFCFluid.MILKCURDLED && this.getInputStack() == null)
+		{
+			recipe = new BarrelRecipe(null,new FluidStack(TFCFluid.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese, 1), 160), null).setMinTechLevel(0);
+			if(!worldObj.isRemote)
+			{
+				int time = 0;
+				if(sealtime > 0)
+					time = (int)TFC_Time.getTotalHours() - sealtime;
+				else if(unsealtime > 0)
+					time = (int)TFC_Time.getTotalHours() - unsealtime;
+
+				//Make sure that the recipe meets the time requirements
+				if(time < recipe.sealTime)
+					return true;
+				float w = this.fluid.amount/62.5f;
+				this.setInventorySlotContents(0, ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese), w));
+				this.actionEmpty();
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public void setSealed()
@@ -255,12 +285,19 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack is)
 	{
-		storage[i] = is;
-		if(i == 0)
+		if(!ItemStack.areItemStacksEqual(storage[i], is))
 		{
-			ProcessItems();
-			if(!getSealed())
-				this.unsealtime = (int)TFC_Time.getTotalHours();
+			storage[i] = is;
+			if(i == 0)
+			{
+				if(storage[0] == null)
+					System.out.println("Setting input to null" + " : " + worldObj.isRemote);
+				else
+					System.out.println("Setting input to "+storage[0].getDisplayName() + " : " + worldObj.isRemote);
+				ProcessItems();
+				if(!getSealed())
+					this.unsealtime = (int)TFC_Time.getTotalHours();
+			}
 		}
 	}
 
@@ -765,7 +802,8 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.Sugar), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.RUM, 10000)));
 		BarrelManager.getInstance().addRecipe(new BarrelAlcoholRecipe(ItemFoodTFC.createTag(new ItemStack(TFCItems.CornmealGround), 160), new FluidStack(TFCFluid.FRESHWATER, 10000), null, new FluidStack(TFCFluid.CORNWHISKEY, 10000)));
 		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluid.MILK, 9000), new FluidStack(TFCFluid.VINEGAR, 1000), new FluidStack(TFCFluid.MILKCURDLED, 10000)).setMinTechLevel(0));
-		BarrelManager.getInstance().addRecipe(new BarrelRecipe(null, new FluidStack(TFCFluid.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese), 160), null).setMinTechLevel(0));
+		BarrelManager.getInstance().addRecipe(new BarrelLiquidToLiquidRecipe(new FluidStack(TFCFluid.MILK, 4000), new FluidStack(TFCFluid.VINEGAR, 1000), new FluidStack(TFCFluid.MILKCURDLED, 5000)).setMinTechLevel(0));
+		//BarrelManager.getInstance().addRecipe(new BarrelRecipeNoItem(new FluidStack(TFCFluid.MILKCURDLED, 10000), ItemFoodTFC.createTag(new ItemStack(TFCItems.Cheese), 160), null).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Logs, 1, 0), new FluidStack(TFCFluid.FRESHWATER, 1000), null, new FluidStack(TFCFluid.TANNIN, 1000)).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Logs, 1, 2), new FluidStack(TFCFluid.FRESHWATER, 1000), null, new FluidStack(TFCFluid.TANNIN, 1000)).setMinTechLevel(0));
 		BarrelManager.getInstance().addRecipe(new BarrelRecipe(new ItemStack(TFCItems.Logs, 1, 3), new FluidStack(TFCFluid.FRESHWATER, 1000), null, new FluidStack(TFCFluid.TANNIN, 1000)).setMinTechLevel(0));

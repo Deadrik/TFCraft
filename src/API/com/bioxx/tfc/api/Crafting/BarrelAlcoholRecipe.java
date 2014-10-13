@@ -39,7 +39,7 @@ public class BarrelAlcoholRecipe extends BarrelRecipe
 	{
 		if(inItemStack.hasTagCompound())
 		{
-			if(!item.hasTagCompound())
+			if(item == null || !item.hasTagCompound())
 			{
 				return false;
 			}
