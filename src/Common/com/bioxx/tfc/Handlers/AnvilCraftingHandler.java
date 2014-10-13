@@ -1,10 +1,10 @@
 package com.bioxx.tfc.Handlers;
 
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import com.bioxx.tfc.TFCItems;
+import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.api.Metal;
 import com.bioxx.tfc.api.TFC_ItemHeat;
 import com.bioxx.tfc.api.Events.AnvilCraftEvent;
@@ -24,14 +24,11 @@ public class AnvilCraftingHandler
 			int dam = event.input1.getItemDamage();
 			float temp = event.input1.getTagCompound()!=null?TFC_ItemHeat.GetTemp(event.input1):0;
 			ItemStack out1 = new ItemStack(TFCItems.Bloom, dam/100, 100);
-			ItemStack out2 = new ItemStack(TFCItems.Bloom, 1, dam-(dam/100*100));
+			ItemStack out2 = new ItemStack(TFCItems.Bloom, 1, dam % 100);
 			TFC_ItemHeat.SetTemp(out1, temp);
 			TFC_ItemHeat.SetTemp(out2, temp);
-			if(!((EntityPlayer)event.entity).inventory.addItemStackToInventory(out1))
-				event.entity.worldObj.spawnEntityInWorld(new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, out1));
-
-			if(out2.getItemDamage() > 0 && !((EntityPlayer)event.entity).inventory.addItemStackToInventory(out2))
-				event.entity.worldObj.spawnEntityInWorld(new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, out2));
+			TFC_Core.giveItemToPlayer(out1, (EntityPlayer)event.entity);
+			TFC_Core.giveItemToPlayer(out2, (EntityPlayer)event.entity);
 			event.result = null;
 		}
 	}
