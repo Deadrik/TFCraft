@@ -6,6 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -66,6 +68,18 @@ public class BlockLiquidStatic extends BlockLiquid implements IFluidBlock
 			return 16777215;
 		else
 			return 0x354d35;
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity e) 
+	{
+		if (this.blockMaterial == Material.lava)
+		{
+			if(e instanceof EntityItem)
+			{
+				e.setFire(15);
+			}
+		}
 	}
 
 	/**
