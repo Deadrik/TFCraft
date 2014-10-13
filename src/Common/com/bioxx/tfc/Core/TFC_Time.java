@@ -255,11 +255,11 @@ public class TFC_Time
 		return h;
 	}
 
-// TODO delete: same as getHour(), never used
-//	public static int getHourOfDayFromTotalHours()
-//	{
-//		return getHourOfDayFromTotalHours((int)getTotalHours());
-//	}
+// TODO do we need this? same as getHour(), never used
+	public static int getHourOfDayFromTotalHours()
+	{
+		return getHourOfDayFromTotalHours((int)getTotalHours());
+	}
 
 	public static int getHourOfDayFromTotalHours(int th)
 	{
