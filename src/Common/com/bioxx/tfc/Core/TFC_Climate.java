@@ -172,7 +172,7 @@ public class TFC_Climate
 		return getTemp(world, TFC_Time.currentDay,TFC_Time.getHour(), x, z);
 	}
 
-	protected static float getTemp(World world, int day, int th, int x, int z)
+	protected static float getTemp(World world, int day, int hour, int x, int z)
 	{
 		if(TFC_Climate.getCacheManager(world) != null)
 		{
@@ -193,16 +193,17 @@ public class TFC_Climate
 			float mod = getMonthTempFactor(_month, z);
 			float modLast = getMonthTempFactor(_lastmonth, z);
 			int day2 = day - ((day/TFC_Time.daysInMonth)*TFC_Time.daysInMonth);
-			int hour = TFC_Time.getHourOfDayFromTotalHours(th);
 
-			if(hour < 0)
-				hour = 23 + hour;
+			int h = (hour - 6) % TFC_Time.hoursInDay;
+			if (h < 0) {
+				h += TFC_Time.hoursInDay;
+			}
+			
 			float hourMod = 0;
-
-			if(hour < 12)
-				hourMod = ((float)hour/11) * 0.3F;
+			if(h < 12)
+				hourMod = ((float)h / 11) * 0.3F;
 			else
-				hourMod = 0.3F - (((float)(hour-12)/11) * 0.3F);
+				hourMod = 0.3F - ((((float)h-12) / 11) * 0.3F);
 
 			float monthMod = 0;
 			float temp = 0;
