@@ -190,8 +190,6 @@ public class EntityStand extends EntityLiving
 				}
 			}
 			else {
-				Vec3 eyeVec = ep.getPosition(1);
-				double dist = Math.sqrt(ep.getDistanceSqToEntity(this));
 				Vec3 hitVec = ep.getLookVec();
 				double angleTan = hitVec.yCoord / Math.sqrt(hitVec.xCoord * hitVec.xCoord + hitVec.zCoord * hitVec.zCoord);
 
@@ -212,7 +210,7 @@ public class EntityStand extends EntityLiving
 				else if(y >= 1.4 && y < 2){
 					slot = 3;
 				}
-				ep.addChatMessage(new ChatComponentText(slot+""));
+				
 
 				if(slot != -1){
 					ItemStack i = armor[slot];
