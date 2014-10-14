@@ -14,6 +14,7 @@ import com.bioxx.tfc.Core.TFC_Climate;
 import com.bioxx.tfc.Core.TFC_Core;
 import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Render.EntityRendererTFC;
+import com.bioxx.tfc.api.FoodRegistry;
 import com.bioxx.tfc.api.TFCOptions;
 import com.bioxx.tfc.api.Enums.EnumFoodGroup;
 import com.bioxx.tfc.api.Interfaces.IFood;
@@ -57,6 +58,11 @@ public class FoodStatsTFC
 
 	public EntityPlayer player;
 	private long nameSeed = Long.MIN_VALUE;
+	private boolean satFruit = false;
+	private boolean satVeg = false;
+	private boolean satGrain = false;
+	private boolean satProtein = false;
+	private boolean satDairy = false;
 
 	public FoodStatsTFC(EntityPlayer player)
 	{
@@ -122,6 +128,11 @@ public class FoodStatsTFC
 				}
 				this.stomachLevel = Math.max(this.stomachLevel - hunger, 0);
 
+				if(satisfaction == 0)
+				{
+					satProtein = false; satFruit = false; satVeg = false; satDairy = false; satGrain = false;
+				}
+
 				if (this.stomachLevel <= 0)
 				{
 					reduceNutrition(0.0024F);//3x penalty for starving
@@ -132,11 +143,16 @@ public class FoodStatsTFC
 				}
 				else
 				{
-					this.addNutrition(EnumFoodGroup.Protein, this.satisfaction*(1-this.nutrProtein)/100, false);
-					this.addNutrition(EnumFoodGroup.Grain, this.satisfaction*(1-this.nutrGrain/100), false);
-					this.addNutrition(EnumFoodGroup.Vegetable, this.satisfaction*(1-this.nutrVeg/100), false);
-					this.addNutrition(EnumFoodGroup.Fruit, this.satisfaction*(1-this.nutrFruit/100), false);
-					this.addNutrition(EnumFoodGroup.Dairy, this.satisfaction*(1-this.nutrDairy/100), false);
+					if(this.satProtein)
+						this.addNutrition(EnumFoodGroup.Protein, this.satisfaction*((1-this.nutrProtein)/100), false);
+					if(this.satGrain)
+						this.addNutrition(EnumFoodGroup.Grain, this.satisfaction*((1-this.nutrGrain)/100), false);
+					if(this.satVeg)
+						this.addNutrition(EnumFoodGroup.Vegetable, this.satisfaction*((1-this.nutrVeg)/100), false);
+					if(this.satFruit)
+						this.addNutrition(EnumFoodGroup.Fruit, this.satisfaction*((1-this.nutrFruit)/100), false);
+					if(this.satDairy)
+						this.addNutrition(EnumFoodGroup.Dairy, this.satisfaction*((1-this.nutrDairy)/100), false);
 				}
 				shouldSendUpdate = true;
 			}
@@ -280,30 +296,40 @@ public class FoodStatsTFC
 			this.nutrProtein = foodCompound.getFloat("nutrProtein");
 			this.nutrDairy = foodCompound.getFloat("nutrDairy");
 			this.shouldSendUpdate = foodCompound.getBoolean("shouldSendUpdate");
+			this.satFruit = foodCompound.getBoolean("satFruit");
+			this.satVeg = foodCompound.getBoolean("satVeg");
+			this.satGrain = foodCompound.getBoolean("satGrain");
+			this.satProtein = foodCompound.getBoolean("satProtein");
+			this.satDairy = foodCompound.getBoolean("satDairy");
 		}
 	}
 
 	/**
 	 * Writes food stats to an NBT object.
 	 */
-	public void writeNBT(NBTTagCompound par1NBTTagCompound)
+	public void writeNBT(NBTTagCompound nbt)
 	{
-		NBTTagCompound foodCompound = new NBTTagCompound();
-		foodCompound.setFloat("waterLevel", this.waterLevel);
-		foodCompound.setFloat("foodLevel", this.stomachLevel);
-		foodCompound.setLong("foodTickTimer", this.foodTimer);
-		foodCompound.setLong("foodHealTimer", this.foodHealTimer);
-		foodCompound.setLong("waterTimer", this.waterTimer);
-		foodCompound.setLong("soberTime", this.soberTime);
-		foodCompound.setFloat("foodSaturationLevel", this.satisfaction);
-		foodCompound.setFloat("foodExhaustionLevel", this.foodExhaustionLevel);
-		foodCompound.setFloat("nutrFruit", nutrFruit);
-		foodCompound.setFloat("nutrVeg", nutrVeg);
-		foodCompound.setFloat("nutrGrain", nutrGrain);
-		foodCompound.setFloat("nutrProtein", nutrProtein);
-		foodCompound.setFloat("nutrDairy", nutrDairy);
-		foodCompound.setBoolean("shouldSendUpdate", shouldSendUpdate);
-		par1NBTTagCompound.setTag("foodCompound", foodCompound);
+		NBTTagCompound foodNBT = new NBTTagCompound();
+		foodNBT.setFloat("waterLevel", this.waterLevel);
+		foodNBT.setFloat("foodLevel", this.stomachLevel);
+		foodNBT.setLong("foodTickTimer", this.foodTimer);
+		foodNBT.setLong("foodHealTimer", this.foodHealTimer);
+		foodNBT.setLong("waterTimer", this.waterTimer);
+		foodNBT.setLong("soberTime", this.soberTime);
+		foodNBT.setFloat("foodSaturationLevel", this.satisfaction);
+		foodNBT.setFloat("foodExhaustionLevel", this.foodExhaustionLevel);
+		foodNBT.setFloat("nutrFruit", nutrFruit);
+		foodNBT.setFloat("nutrVeg", nutrVeg);
+		foodNBT.setFloat("nutrGrain", nutrGrain);
+		foodNBT.setFloat("nutrProtein", nutrProtein);
+		foodNBT.setFloat("nutrDairy", nutrDairy);
+		foodNBT.setBoolean("shouldSendUpdate", shouldSendUpdate);
+		foodNBT.setBoolean("satFruit", satFruit);
+		foodNBT.setBoolean("satVeg", satVeg);
+		foodNBT.setBoolean("satGrain", satGrain);
+		foodNBT.setBoolean("satProtein", satProtein);
+		foodNBT.setBoolean("satDairy", satDairy);
+		nbt.setTag("foodCompound", foodNBT);
 	}
 
 	public void addFoodExhaustion(float par1)
@@ -329,9 +355,26 @@ public class FoodStatsTFC
 
 	}
 
-	public void setSatisfaction(float par1)
+	public void setSatisfaction(float par1, int[] fg)
 	{
 		this.satisfaction = Math.min(par1, 10);
+		for(int i = 0; i < fg.length; i++)
+		{
+			if(fg[i] != -1)
+			{
+				EnumFoodGroup efg = FoodRegistry.getInstance().getFoodGroup(fg[i]);
+				switch(efg)
+				{
+				case Protein:satProtein = true;break;
+				case Grain:satGrain = true;break;
+				case Fruit:satFruit = true;break;
+				case Vegetable:satVeg = true;break;
+				case Dairy:satDairy = true;break;
+				default:
+					break;
+				}
+			}
+		}
 	}
 
 	public long getPlayerFoodSeed()
@@ -428,7 +471,7 @@ public class FoodStatsTFC
 	{
 		float amount = foodAmt;
 		if(shouldDoMath)
-			amount = foodAmt/5f/20f;//converts it to 5% if it is 5oz of food
+			amount = foodAmt/5f/50f;//converts it to 5% if it is 5oz of food
 		switch(fg)
 		{
 		case Dairy:

@@ -206,12 +206,12 @@ public class ItemMeal extends ItemTerra implements IFood
 			for(int i = 0; i < fg.length; i++)
 			{
 				if(fg[i] != -1)
-					foodstats.addNutrition(FoodRegistry.getInstance().getFoodGroup(fg[i]), eatAmount*nWeights[i]*4);
+					foodstats.addNutrition(FoodRegistry.getInstance().getFoodGroup(fg[i]), eatAmount*nWeights[i]*2.5f);
 			}
 
 			//fill the stomach
 			foodstats.stomachLevel += eatAmount * getFillingBoost();
-			foodstats.setSatisfaction(foodstats.getSatisfaction() + ((eatAmount/3f) * tasteFactor));
+			foodstats.setSatisfaction(foodstats.getSatisfaction() + ((eatAmount/3f) * tasteFactor), fg);
 			//Now remove the eaten amount from the itemstack.
 			if(FoodStatsTFC.reduceFood(is, eatAmount))
 			{
