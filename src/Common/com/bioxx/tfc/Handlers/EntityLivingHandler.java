@@ -308,7 +308,7 @@ public class EntityLivingHandler
 						float oldWeight = Food.getWeight(ei.getEntityItem());
 						Food.setWeight(ei.getEntityItem(), 0);
 						float newWeight = oldWeight * (TFC_Core.getSkillStats(p).getSkillMultiplier(Global.SKILL_BUTCHERING)+0.01f);
-						while (newWeight > 0)
+						while (newWeight >= Global.FOOD_MIN_DROP_WEIGHT)
 						{
 							float fw = Helper.roundNumber(Math.min(Global.FOOD_MAX_WEIGHT, newWeight), 10);
 							if (fw < Global.FOOD_MAX_WEIGHT)
