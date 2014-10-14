@@ -756,6 +756,7 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					sealtime = (int) TFC_Time.getTotalHours();
 					unsealtime = 0;
 				}
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 
 			if(nbt.hasKey("tab"))
