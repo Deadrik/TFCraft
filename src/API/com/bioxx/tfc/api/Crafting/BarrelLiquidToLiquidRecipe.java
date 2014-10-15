@@ -50,6 +50,10 @@ public class BarrelLiquidToLiquidRecipe extends BarrelRecipe
 			{
 				fs.amount = inFS.amount+itemLiquid.amount;
 			}
+			else
+			{
+				fs.amount = ( fs.amount * inFS.amount ) / barrelFluid.amount;
+			}
 			return fs;
 		}
 		return null;
