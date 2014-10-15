@@ -165,6 +165,7 @@ public class ContainerBarrel extends ContainerTFC
 		else if (id == 2)
 		{
 			this.barrel.sealtime = val;
+			barrel.ProcessItems();
 		}
 	}
 }
