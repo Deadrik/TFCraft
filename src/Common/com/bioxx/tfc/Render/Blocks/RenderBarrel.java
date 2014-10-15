@@ -48,7 +48,7 @@ public class RenderBarrel implements ISimpleBlockRenderingHandler
 				renderer.setRenderBounds(min+0.05F, min, min+0.05F, max-0.05F, min+0.05F, max-0.05F);
 				renderer.renderStandardBlock(lidBlock, x, y, z);
 
-				if(te.fluid != null)
+				if(te.fluid != null && renderer.overrideBlockTexture == null)
 				{
 					int color = te.fluid.getFluid().getColor(te.fluid);
 					float f = (color >> 16 & 255) / 255.0F;
