@@ -41,16 +41,17 @@ public class BlockWorldItem extends BlockTerraContainer
 	{
 	}*/
 
-	@Override
-	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
-	{
-		if(!world.isRemote)
-		{
-			TEWorldItem te = (TEWorldItem)world.getTileEntity(i, j, k);
-			EntityItem ei = new EntityItem(world, i, j, k, te.storage[0]);
-			world.spawnEntityInWorld(ei);
-		}
-	}
+// TODO delete, already being done in super.breakBlock(..)
+//	@Override
+//	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
+//	{
+//		if(!world.isRemote)
+//		{
+//			TEWorldItem te = (TEWorldItem)world.getTileEntity(i, j, k);
+//			EntityItem ei = new EntityItem(world, i, j, k, te.storage[0]);
+//			world.spawnEntityInWorld(ei);
+//		}
+//	}
 
 	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune)
