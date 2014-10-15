@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -42,14 +43,26 @@ public class BlockWorldItem extends BlockTerraContainer
 	}*/
 
 	@Override
-	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
+	public void onBlockPreDestroy(World world, int x, int y, int z, int meta) 
 	{
 		if(!world.isRemote)
 		{
-			TEWorldItem te = (TEWorldItem)world.getTileEntity(i, j, k);
-			EntityItem ei = new EntityItem(world, i, j, k, te.storage[0]);
-			world.spawnEntityInWorld(ei);
+			TileEntity te = world.getTileEntity(x, y, z);
+			if (te instanceof IInventory) {
+				IInventory inv = (IInventory) te;
+				for (int i = 0; i< inv.getSizeInventory(); i++) {
+					if (inv.getStackInSlot(i) != null) {
+						EntityItem ei = new EntityItem(world, x+0.5, y+0.5, z+0.5, inv.getStackInSlot(i));
+						inv.setInventorySlotContents(i, null);  // so it is not created again in super.breakBlock()
+						ei.motionX = 0;
+						ei.motionY = 0;
+						ei.motionZ = 0;
+						world.spawnEntityInWorld(ei);
+					}
+				}
+			}
 		}
+		super.onBlockPreDestroy(world, x, y, z, meta);
 	}
 
 	@Override
