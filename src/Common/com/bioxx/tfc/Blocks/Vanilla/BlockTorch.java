@@ -255,23 +255,23 @@ public class BlockTorch extends BlockTerraContainer
 		{
 			if (world.isSideSolid(x - 1, y, z, EAST, true))
 			{
-				world.setBlockMetadataWithNotify(x, y, z, 1, 2);
+				world.setBlockMetadataWithNotify(x, y, z, 1, 3);
 			}
 			else if (world.isSideSolid(x + 1, y, z, WEST, true))
 			{
-				world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+				world.setBlockMetadataWithNotify(x, y, z, 2, 3);
 			}
 			else if (world.isSideSolid(x, y, z - 1, SOUTH, true))
 			{
-				world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+				world.setBlockMetadataWithNotify(x, y, z, 3, 3);
 			}
 			else if (world.isSideSolid(x, y, z + 1, NORTH, true))
 			{
-				world.setBlockMetadataWithNotify(x, y, z, 4, 2);
+				world.setBlockMetadataWithNotify(x, y, z, 4, 3);
 			}
 			else if (this.canSupportTorch(world, x, y - 1, z))
 			{
-				world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+				world.setBlockMetadataWithNotify(x, y, z, 5, 3);
 			}
 		}
 

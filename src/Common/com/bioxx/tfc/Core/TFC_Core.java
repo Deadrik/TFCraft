@@ -994,6 +994,11 @@ public class TFC_Core
 
 			if (is != null)
 			{
+				if(is.stackSize == 0)
+				{
+					iinv.setInventorySlotContents(i, null);
+					continue;
+				}
 				if ((is.getItem() instanceof ItemTerra && ((ItemTerra) is.getItem()).onUpdate(is, world, x, y, z)))
 					continue;
 				else if (is.getItem() instanceof ItemTerraBlock && ((ItemTerraBlock) is.getItem()).onUpdate(is, world, x, y, z))
