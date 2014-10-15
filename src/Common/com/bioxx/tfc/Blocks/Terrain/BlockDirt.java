@@ -152,40 +152,38 @@ public class BlockDirt extends BlockTerra
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random random)
+	public void updateTick(World world, int i, int j, int k, Random random)
 	{
-		if (!world.isRemote && world.doChunksNearChunkExist(x, y, z, 1))
+		if(!world.isRemote && world.doChunksNearChunkExist(i, j, k, 1))
 		{
-			int meta = world.getBlockMetadata(x, y, z);
-			if(BlockCollapsable.isNearSupport(world, x, y, z, 4, 0))
-				return;
+			int meta = world.getBlockMetadata(i, j, k);
 
-			boolean isBelowAir = world.isAirBlock(x, y - 1, z);
+			boolean isBelowAir = BlockCollapsable.canFallBelow(world, i, j-1, k);
 			byte count = 0;
 			List sides = new ArrayList<Integer>();
 
-			if(world.isAirBlock(x + 1, y, z))
+			if(world.isAirBlock(i+1, j, k))
 			{
 				count++;
-				if(world.isAirBlock(x + 1, y - 1, z))
+				if(BlockCollapsable.canFallBelow(world, i+1, j-1, k))
 					sides.add(0);
 			}
-			if(world.isAirBlock(x, y, z + 1))
+			if(world.isAirBlock(i, j, k+1))
 			{
 				count++;
-				if(world.isAirBlock(x, y - 1, z + 1))
+				if(BlockCollapsable.canFallBelow(world, i, j-1, k+1))
 					sides.add(1);
 			}
-			if(world.isAirBlock(x - 1, y, z))
+			if(world.isAirBlock(i-1, j, k))
 			{
 				count++;
-				if(world.isAirBlock(x - 1, y - 1, z))
+				if(BlockCollapsable.canFallBelow(world, i-1, j-1, k))
 					sides.add(2);
 			}
-			if(world.isAirBlock(x, y, z - 1))
+			if(world.isAirBlock(i, j, k-1))
 			{
 				count++;
-				if(world.isAirBlock(x, y - 1, z - 1))
+				if(BlockCollapsable.canFallBelow(world, i, j-1, k-1))
 					sides.add(3);
 			}
 
@@ -195,37 +193,37 @@ public class BlockDirt extends BlockTerra
 				{
 				case 0:
 				{
-					world.setBlockToAir(x, y, z);
-					world.setBlock(x + 1, y, z, this, meta, 0x2);
-					tryToFall(world, x + 1, y, z);
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i+1, j, k, this, meta, 0x2);
+					tryToFall(world, i+1, j, k);
 					break;
 				}
 				case 1:
 				{
-					world.setBlockToAir(x, y, z);
-					world.setBlock(x, y, z + 1, this, meta, 0x2);
-					tryToFall(world, x, y, z + 1);
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i, j, k+1, this, meta, 0x2);
+					tryToFall(world, i, j, k+1);
 					break;
 				}
 				case 2:
 				{
-					world.setBlockToAir(x, y, z);
-					world.setBlock(x - 1, y, z, this, meta, 0x2);
-					tryToFall(world, x - 1, y, z);
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i-1, j, k, this, meta, 0x2);
+					tryToFall(world, i-1, j, k);
 					break;
 				}
 				case 3:
 				{
-					world.setBlockToAir(x, y, z);
-					world.setBlock(x, y, z - 1, this, meta, 0x2);
-					tryToFall(world, x, y, z - 1);
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i, j, k-1, this, meta, 0x2);
+					tryToFall(world, i, j, k-1);
 					break;
 				}
 				}
 			}
 			else if(isBelowAir)
 			{
-				tryToFall(world, x, y, z);
+				tryToFall(world, i, j, k);
 			}
 		}
 	}

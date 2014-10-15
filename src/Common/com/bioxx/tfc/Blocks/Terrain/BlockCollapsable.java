@@ -71,6 +71,8 @@ public class BlockCollapsable extends BlockTerraContainer
 			return true;
 		if (block == TFCBlocks.ToolRack)
 			return true;
+		if(block == TFCBlocks.Charcoal)
+			return false;
 		if(!block.isNormalCube())
 			return true;
 		Material material = block.getMaterial();
