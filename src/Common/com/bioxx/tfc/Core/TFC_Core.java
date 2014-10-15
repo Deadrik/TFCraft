@@ -1233,7 +1233,8 @@ public class TFC_Core
 				|| isGrassType1(block)
 				|| isGrassType2(block)
 				|| isGravel(block)
-				|| block == Blocks.glass;
+				|| block == Blocks.glass
+				|| block == TFCBlocks.MetalTrapDoor;
 	}
 
 	public static void writeInventoryToNBT(NBTTagCompound nbt, ItemStack[] storage)

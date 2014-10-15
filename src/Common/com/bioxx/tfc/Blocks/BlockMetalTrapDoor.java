@@ -287,8 +287,11 @@ public class BlockMetalTrapDoor extends BlockTerraContainer
 		if(!world.isRemote)
 		{
 			TEMetalTrapDoor te = (TEMetalTrapDoor)world.getTileEntity(i, j, k);
-			EntityItem ei = new EntityItem(world, i, j, k, te.sheetStack);
-			world.spawnEntityInWorld(ei);
+			if(te != null && te.sheetStack != null)
+			{
+				EntityItem ei = new EntityItem(world, i, j, k, te.sheetStack);
+				world.spawnEntityInWorld(ei);
+			}
 		}
 	}
 
