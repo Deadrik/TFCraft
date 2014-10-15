@@ -40,8 +40,11 @@ public class TEMetalTrapDoor extends NetworkTileEntity
 		super.writeToNBT(nbt);
 		nbt.setByte("data", data);
 		NBTTagCompound st = new NBTTagCompound();
-		sheetStack.writeToNBT(st);
-		nbt.setTag("sheetType", st);
+		if(sheetStack != null)
+		{
+			sheetStack.writeToNBT(st);
+			nbt.setTag("sheetType", st);
+		}
 	}
 
 	@Override
