@@ -23,6 +23,7 @@ import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemOre;
 import com.bioxx.tfc.Items.ItemOreSmall;
 import com.bioxx.tfc.api.Metal;
+import com.bioxx.tfc.api.Constant.Global;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
 import com.bioxx.tfc.api.Interfaces.IBag;
@@ -177,6 +178,16 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					NBTTagCompound tag = is.stackTagCompound;
 					tag.setString("MetalType", output.outputType.Name);
 					tag.setInteger("MetalAmount", (int)output.outputAmount);
+					long totalH =  TFC_Time.getTotalHours();
+					tag.setLong("TempTimer", totalH);
+					is.getTagCompound().removeTag("Items");
+					is.setItemDamage(2);
+				}
+				else
+				{
+					NBTTagCompound tag = is.stackTagCompound;
+					tag.setString("MetalType", Global.UNKNOWN.Name);
+					tag.setInteger("MetalAmount", (int)total);
 					long totalH =  TFC_Time.getTotalHours();
 					tag.setLong("TempTimer", totalH);
 					is.getTagCompound().removeTag("Items");
