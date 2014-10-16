@@ -125,6 +125,7 @@ public class GuiHandler extends com.bioxx.tfc.Handlers.GuiHandler
 			if(list.size() > 0)
 			{
 				EntityHorseTFC horse = (EntityHorseTFC) list.get(0);
+				horse.updateChestSaddle();
 				//NBTTagCompound nbt = new NBTTagCompound();
 				//System.out.println(horse.isChested() + ", " + horse.getHorseType() + ", " + horse.getHorseChest().getSizeInventory());
 				//horse.writeEntityToNBT(nbt);
