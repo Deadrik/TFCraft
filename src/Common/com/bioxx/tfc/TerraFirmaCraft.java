@@ -46,6 +46,7 @@ import com.bioxx.tfc.Handlers.EntityDamageHandler;
 import com.bioxx.tfc.Handlers.EntityLivingHandler;
 import com.bioxx.tfc.Handlers.EntitySpawnHandler;
 import com.bioxx.tfc.Handlers.FoodCraftingHandler;
+import com.bioxx.tfc.Handlers.PlayerInteractHandler;
 import com.bioxx.tfc.Handlers.Network.PacketPipeline;
 import com.bioxx.tfc.WorldGen.TFCProvider;
 import com.bioxx.tfc.WorldGen.TFCProviderHell;
@@ -195,6 +196,9 @@ public class TerraFirmaCraft
 		FMLCommonHandler.instance().bus().register(new CraftingHandler());
 		FMLCommonHandler.instance().bus().register(new FoodCraftingHandler());
 
+		// Register Player Interact Handler - for drinking water.
+		MinecraftForge.EVENT_BUS.register(new PlayerInteractHandler());
+		
 		// Register the Entity Spawn Handler
 		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
 
