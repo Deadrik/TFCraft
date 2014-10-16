@@ -1,6 +1,10 @@
 package com.bioxx.tfc.Handlers;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 import com.bioxx.tfc.Core.TFC_Core;
+import com.bioxx.tfc.Core.TFC_Time;
 import com.bioxx.tfc.Core.Player.FoodStatsTFC;
 
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -21,6 +25,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 public class PlayerInteractHandler
 {
 
+	private HashMap<UUID, Long> lastDrink = new HashMap<UUID, Long>();
+	
 	@SubscribeEvent
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
@@ -73,12 +79,16 @@ public class PlayerInteractHandler
 
 	private void handleDrinkingWater(EntityPlayer entityPlayer)
 	{
+		Long last_check = lastDrink.get(entityPlayer.getUniqueID());
+		if(last_check != null && last_check + 20 > TFC_Time.getTotalTicks())
+			return;
+		lastDrink.put(entityPlayer.getUniqueID(), TFC_Time.getTotalTicks());
 		World world = entityPlayer.worldObj;
 		MovingObjectPosition mop = getMovingObjectPositionFromPlayer(world, entityPlayer, true);
 		FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(entityPlayer);
 		Boolean canDrink = fs.getMaxWater(entityPlayer) - 500 > fs.waterLevel;
 
-		// you can't drink if your under water thats silly.
+		// you can't drink if you're under water thats silly. // Is it though?
 		if ( entityPlayer.isInsideOfMaterial(Material.water))
 			return;
 
