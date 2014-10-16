@@ -409,10 +409,12 @@ public class BlockBarrel extends BlockTerraContainer
 	{
 		public int fuse;
 		World world;
+		int x, y, z;
 		public BarrelEntity(World par1World)
 		{
 			super(par1World);
 			this.fuse = 60;
+
 			this.preventEntitySpawning = true;
 			this.setSize(0.98F, 0.98F);
 			this.yOffset = this.height / 2.0F;
@@ -423,6 +425,9 @@ public class BlockBarrel extends BlockTerraContainer
 			this(par1World);
 			this.setPosition(par2, par4, par6);
 			world = par1World;
+			this.x = (int)par2;
+			this.y = (int)par4;
+			this.z = (int)par6;
 			float f = (float)(Math.random() * Math.PI * 2.0D);
 			this.motionX = -((float)Math.sin(f)) * 0.02F;
 			this.motionY = 0.20000000298023224D;
@@ -445,6 +450,7 @@ public class BlockBarrel extends BlockTerraContainer
 		private void explode()
 		{
 			float f = 64.0F;
+			this.worldObj.setBlockToAir(x, y, z);
 			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
 			setDead();
 		}
