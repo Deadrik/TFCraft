@@ -63,7 +63,7 @@ achievement.achRutabaga=愚蠢的洋葱…
 achievement.achRutabaga.desc=找到大头菜
 achievement.achQuern=磨盘
 achievement.achQuern.desc=使用磨盘
-achievement.achStoneAge=旧石器时代！
+achievement.achStoneAge=石器时代！
 achievement.achStoneAge.desc=敲制出石制工具进入石器时代
 achievement.achCopperAge=红铜时代！
 achievement.achCopperAge.desc=铸造金属物品进入红铜时代
@@ -81,7 +81,7 @@ achievement.achBronzeAge=青铜时代
 achievement.achBronzeAge.desc=制造出青铜砧进入青铜时代
 achievement.achIronAge=灰铁时代
 achievement.achIronAge.desc=采掘到铁块进入灰铁时代
-achievement.achPokeCreeper=鳄鱼猎人史蒂夫·欧文
+achievement.achPokeCreeper=[鳄鱼先生]史蒂夫·欧文
 achievement.achPokeCreeper.desc=用棍子戳它
 
 #============
@@ -2203,14 +2203,14 @@ gui.Barrel.MoreItems=§8按住§fShift§8查看更多信息
 
 gui.Size.Tiny=微小
 gui.Size.VerySmall=很小
-gui.Size.Small=小
+gui.Size.Small=小型
 gui.Size.Medium=中等
-gui.Size.Large=大
+gui.Size.Large=大型
 gui.Size.VeryLarge=很大
 gui.Size.Huge=巨大
 
 gui.Weight.Light=轻盈
-gui.Weight.Medium=中等重量
+gui.Weight.Medium=适中
 gui.Weight.Heavy=沉重
 
 gui.Reach.Short=短程
@@ -2270,26 +2270,26 @@ gui.ProPick.FoundVeryLarge=发现了巨量的
 gui.ProPick.FoundNothing=没发现什么特别的
 
 #== Creative Tabs ==
-itemGroup.TFCArmor=(TFC)装备
-itemGroup.TFCMaterials=(TFC)材料
-itemGroup.TFCMisc=(TFC)杂项
-itemGroup.TFCPottery=(TFC)陶瓷
-itemGroup.TFCTools=(TFC)工具
-itemGroup.TFCWeapons=(TFC)武器
-itemGroup.TFCDevices=(TFC)设备
-itemGroup.TFCFoods=(TFC)食物
-itemGroup.TFCBuilding=(TFC)建筑方块
-itemGroup.TFCDecoration=(TFC)装饰方块
+itemGroup.TFCArmor=[TFC]装备
+itemGroup.TFCMaterials=[TFC]材料
+itemGroup.TFCMisc=[TFC]杂项
+itemGroup.TFCPottery=[TFC]陶瓷
+itemGroup.TFCTools=[TFC]工具
+itemGroup.TFCWeapons=[TFC]武器
+itemGroup.TFCDevices=[TFC]设备
+itemGroup.TFCFoods=[TFC]食物
+itemGroup.TFCBuilding=[TFC]建筑方块
+itemGroup.TFCDecoration=[TFC]装饰方块
 
 #== Skill GUI ==
 skill.armorsmith=盔甲锻造
 skill.gensmith=普通锻造
 skill.toolsmith=工具锻造
 skill.weaponsmith=武器锻造
-skill.agriculture=农 业
-skill.cooking=料 理
-skill.prospecting=勘 探
-skill.butchering=屠 宰
+skill.agriculture=农作耕耘
+skill.cooking=食材料理
+skill.prospecting=矿产勘探
+skill.butchering=牲禽屠宰
 
 #=====================================================
 #========Add New Stuff Here To Be Sorted Later========
@@ -2373,7 +2373,7 @@ gui.taste.6=非常
 gui.taste.7=极端
 gui.taste.8=离谱
 
-gui.skill.novice=菜鸟
+gui.skill.novice=新手
 gui.skill.adept=学徒
 gui.skill.expert=专家
 gui.skill.master=大师
