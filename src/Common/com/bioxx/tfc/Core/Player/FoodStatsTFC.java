@@ -186,23 +186,13 @@ public class FoodStatsTFC
 			}
 			player.getEntityData().setLong("soberTime", soberTime);
 			long time = TFC_Time.getTotalTicks();
-			Block block = player.worldObj.getBlock((int)Math.floor(player.posX),(int)Math.floor(player.posY),(int)Math.floor(player.posZ));
-			Block block2 = player.worldObj.getBlock((int)Math.floor(player.posX),(int)Math.floor(player.posY - 1),(int)Math.floor(player.posZ));
-			if(player.capabilities.isCreativeMode)
-			{
-				long oldWaterTimer = waterTimer;
-				waterTimer = time;
-				if(player.isInWater() && (TFC_Core.isFreshWater(block) || TFC_Core.isFreshWater(block2)))
-					this.restoreWater(player, 20*(int)(time - oldWaterTimer));
-			}
-			else
+
+			if(!player.capabilities.isCreativeMode)
 			{
 				for(;waterTimer < time;  waterTimer++)
 				{
 					/**Reduce the player's water for normal living*/
 					waterLevel -= 1+(tempWaterMod/2);
-					if(player.isInWater() && (TFC_Core.isFreshWater(block) || TFC_Core.isFreshWater(block2)))
-						this.restoreWater(player, 20);
 					if(waterLevel < 0)
 						waterLevel = 0;
 					if(!TFC_Core.isPlayerInDebugMode(player) && waterLevel == 0 && temp > 35)
