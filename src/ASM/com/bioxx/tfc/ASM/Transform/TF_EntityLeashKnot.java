@@ -20,7 +20,7 @@ public class TF_EntityLeashKnot extends ClassTransformer
 	public TF_EntityLeashKnot()
 	{
 		mcpClassName = "net.minecraft.entity.EntityLeashKnot";
-		obfClassName = "rg";
+		obfClassName = "su";
 
 		List nodes = new ArrayList<InstrSet>();
 		InsnList list = new InsnList();
