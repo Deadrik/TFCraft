@@ -39,7 +39,7 @@ public class RenderVessel implements ISimpleBlockRenderingHandler
 				renderer.setRenderBounds(min+0.05F, 0, min+0.05F, max-0.05F, 0.05F, max-0.05F);
 				renderer.renderStandardBlock(block, x, y, z);
 
-				if(te.fluid != null)
+				if(te.fluid != null && renderer.overrideBlockTexture == null)
 				{
 					int color = te.fluid.getFluid().getColor(te.fluid);
 					float f = (color >> 16 & 255) / 255.0F;
