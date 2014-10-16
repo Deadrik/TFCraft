@@ -40,6 +40,12 @@ public class TELoom extends NetworkTileEntity implements IInventory
 	public LoomRecipe recipe;
 	private ResourceLocation defaultTexture = new ResourceLocation(Reference.ModID, "textures/blocks/String.png");
 
+	@Override
+	public boolean canUpdate()
+	{
+		return false;
+	}
+	
 	public TELoom()
 	{
 		storage = new ItemStack[2];

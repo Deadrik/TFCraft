@@ -23,6 +23,12 @@ public class TEIngotPile extends NetworkTileEntity implements IInventory
 	public String type;
 	public static Item[] INGOTS;
 
+	@Override
+	public boolean canUpdate()
+	{
+		return false;
+	}
+	
 	public TEIngotPile()
 	{
 		storage = new ItemStack[1];
