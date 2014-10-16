@@ -183,7 +183,7 @@ public class BlockBarrel extends BlockTerraContainer
 			{
 				BarrelEntity BE = new BarrelEntity(world, x, y, z);
 				world.spawnEntityInWorld(BE);
-				world.playSoundAtEntity(BE, "random.fuse", 1.0F, 1.0F);
+				world.playSoundAtEntity(BE, "game.tnt.primed", 1.0F, 1.0F);
 				//float f = 16.0F;
 				//EI.worldObj.createExplosion(EI, EI.posX, EI.posY, EI.posZ, f, true);
 				//world.setBlockToAir(x, y, z);
@@ -436,7 +436,7 @@ public class BlockBarrel extends BlockTerraContainer
 		public void onUpdate()
 		{
 			fuse--;
-			world.playSoundAtEntity(this, "random.fuse", 1.0F, 1.0F);
+			world.playSoundAtEntity(this, "game.tnt.primed", 1.0F, 1.0F);
 			if(fuse == 0)
 				explode();
 			worldObj.spawnParticle("smoke", posX, posY + 0.5D, posZ, new Random().nextFloat(), 1.0D, new Random().nextFloat());
