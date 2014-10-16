@@ -60,7 +60,7 @@ public class EntityAIFindNest extends EntityAIBase
 	 */
 	public boolean shouldExecute()
 	{
-		if(theCreature instanceof EntityChickenTFC)
+		if(theCreature instanceof EntityChickenTFC && !(theCreature instanceof EntityPheasantTFC))
 		{
 			if(((EntityChickenTFC)theCreature).isAdult() && ((EntityChickenTFC)theCreature).getFamiliarity() >= 15 &&
 					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY,(int)theCreature.posZ) != TFCBlocks.NestBox &&
@@ -71,7 +71,7 @@ public class EntityAIFindNest extends EntityAIBase
 			else
 				return false;
 		}
-		else if(theCreature instanceof EntityPheasantTFC)
+		/*else if(theCreature instanceof EntityPheasantTFC)
 		{
 			if(((EntityPheasantTFC)theCreature).isAdult() && ((EntityPheasantTFC)theCreature).getFamiliarity() >= 15 &&
 					this.theWorld.getBlock((int)theCreature.posX, (int)theCreature.posY,(int)theCreature.posZ) != TFCBlocks.NestBox &&
@@ -81,7 +81,7 @@ public class EntityAIFindNest extends EntityAIBase
 				return true;
 			else
 				return false;
-		}
+		}*/
 		return false;
 	}
 

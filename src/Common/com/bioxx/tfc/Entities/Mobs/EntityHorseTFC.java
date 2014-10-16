@@ -65,7 +65,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	protected boolean pregnant;
 	protected int pregnancyRequiredTime;
 	protected long conception;
-	protected float mateSizeMod;
 	public float size_mod;			//How large the animal is
 	public float strength_mod;		//how strong the animal is
 	public float aggression_mod = 1;//How aggressive / obstinate the animal is
@@ -73,6 +72,14 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 	public float colour_mod = 1;	//what the animal looks like
 	public float climate_mod = 1;	//climate adaptability
 	public float hard_mod = 1;		//hardiness
+	
+	protected float mateSizeMod = 0;
+	protected float mateStrengthMod = 0;
+	protected float mateAggroMod = 0;
+	protected float mateObedMod = 0;
+	protected float mateColMod = 0;
+	protected float mateClimMod = 0;
+	protected float mateHardMod = 0;
 	public boolean isInLove;
 	public Vec3 attackedVec = null;
 	public Entity fearSource = null;
@@ -98,7 +105,6 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		pregnant = false;
 		pregnancyRequiredTime =(int)(11.17 * TFC_Time.ticksInMonth);
 		conception = 0;
-		mateSizeMod = 0;
 		sex = rand.nextInt(2);
 		size_mod =(float)Math.sqrt((((rand.nextInt (rand.nextInt((degreeOfDiversion + 1)*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + 1F) * (1.0F - dimorphism * sex));
 		strength_mod = (float)Math.sqrt((((rand.nextInt (rand.nextInt(degreeOfDiversion*10)+1) * (rand.nextBoolean() ? 1 : -1)) * 0.01f) + size_mod));
@@ -619,6 +625,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		nbttc.setInteger ("Hunger", hunger);
 		nbttc.setBoolean("Pregnant", pregnant);
 		nbttc.setFloat("MateSize", mateSizeMod);
+		nbttc.setFloat("MateStrength", mateStrengthMod);
+		nbttc.setFloat("MateAggro", mateAggroMod);
+		nbttc.setFloat("MateObed", mateObedMod);
+		nbttc.setFloat("MateCol", mateColMod);
+		nbttc.setFloat("MateClim", mateClimMod);
+		nbttc.setFloat("MateHard", mateHardMod);
 		nbttc.setLong("ConceptionTime",conception);
 		nbttc.setInteger("Age", getBirthDay());
 
@@ -678,6 +690,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
+		mateStrengthMod = nbt.getFloat("MateStrength");
+		mateAggroMod = nbt.getFloat("MateAggro");
+		mateObedMod = nbt.getFloat("MateObed");
+		mateColMod = nbt.getFloat("MateCol");
+		mateClimMod = nbt.getFloat("MateClim");
+		mateHardMod = nbt.getFloat("MateHard");
 		conception = nbt.getLong("ConceptionTime");
 		this.setAge(nbt.getInteger ("Age"));
 
@@ -797,6 +815,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		setInLove(false);
 		otherAnimal.setInLove(false);
 		mateSizeMod = otherAnimal.getSize();
+		mateStrengthMod = otherAnimal.getStrength();
+		mateAggroMod = otherAnimal.getAggression();
+		mateObedMod = otherAnimal.getObedience();
+		mateColMod = otherAnimal.getColour();
+		mateClimMod = otherAnimal.getClimateAdaptation();
+		mateHardMod = otherAnimal.getHardiness();
 	}
 
 	@Override
@@ -898,6 +922,12 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		EntityHorseTFC entityhorse = (EntityHorseTFC) eAgeable;
 		ArrayList<Float> data = new ArrayList<Float>();
 		data.add(eAgeable.getEntityData().getFloat("MateSize"));
+		data.add(eAgeable.getEntityData().getFloat("MateStrength"));
+		data.add(eAgeable.getEntityData().getFloat("MateAggro"));
+		data.add(eAgeable.getEntityData().getFloat("MateObed"));
+		data.add(eAgeable.getEntityData().getFloat("MateCol"));
+		data.add(eAgeable.getEntityData().getFloat("MateClim"));
+		data.add(eAgeable.getEntityData().getFloat("MateHard"));
 		EntityHorseTFC entityhorse1 = new EntityHorseTFC(worldObj, this, data);
 		int i = this.getHorseType();
 		int j = entityhorse.getHorseType();
@@ -955,6 +985,7 @@ public class EntityHorseTFC extends EntityHorse implements IInvBasic, IAnimal
 		entityhorse1.getEntityAttribute(horseJumpStrength).setBaseValue(d1 / 3.0D);
 		double d2 = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + eAgeable.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + this.func_110203_cN();
 		entityhorse1.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(d2 / 3.0D);
+		entityhorse1.setHealth((float)entityhorse1.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue());
 		return entityhorse1;
 	}
 
