@@ -734,7 +734,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public void familiarize(EntityPlayer ep) {
 		ItemStack stack = ep.getHeldItem();
-		if(stack != null && !familiarizedToday && this.isBreedingItemTFC(stack) && (isAdult() && familiarity < 50) || !isAdult()){
+		if(stack != null && !familiarizedToday && this.isBreedingItemTFC(stack) && ((isAdult() && familiarity < 30) || !isAdult())){
 			if (!ep.capabilities.isCreativeMode)
 			{
 				ep.inventory.setInventorySlotContents(ep.inventory.currentItem,(((ItemFoodTFC)stack.getItem()).onConsumedByEntity(ep.getHeldItem(), worldObj, this)));
