@@ -304,14 +304,56 @@ public class BlockBarrel extends BlockTerraContainer
 			ItemStack equippedItem = player.getCurrentEquippedItem();
 			if(FluidContainerRegistry.isFilledContainer(equippedItem) && !te.getSealed())
 			{
-				ItemStack is = te.addLiquid(player.getCurrentEquippedItem());
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+				ItemStack tmp = equippedItem.copy();
+				tmp.stackSize = 1;
+				equippedItem.stackSize--;
+
+				if ( equippedItem.stackSize == 0 )
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+				
+				ItemStack is = te.addLiquid(tmp);
+
+				if ( equippedItem.stackSize == 0 && ( is.getMaxStackSize() == 1 || ! player.inventory.hasItemStack(is) ) ) // put buckets in the slot you used them from.
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+				else
+				{
+					if ( player.inventory.addItemStackToInventory(is) == false )
+						player.dropPlayerItemWithRandomChoice(is, false); // if the new item dosn't fit, drop it.
+				}
+
+				if ( player.inventoryContainer != null )
+				{
+					// for some reason the players inventory won't update without this.
+					player.inventoryContainer.detectAndSendChanges();
+				}
+				
 				return true;
 			}
 			else if(FluidContainerRegistry.isEmptyContainer(equippedItem))
 			{
-				ItemStack is = te.removeLiquid(player.getCurrentEquippedItem());
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+				ItemStack tmp = equippedItem.copy();
+				tmp.stackSize = 1;
+				equippedItem.stackSize--;
+				
+				if ( equippedItem.stackSize == 0 )
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+				
+				ItemStack is = te.removeLiquid(tmp);
+
+				if ( equippedItem.stackSize == 0 && ( is.getMaxStackSize() == 1 || ! player.inventory.hasItemStack(is) ) ) // put buckets in the slot you used them from.
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, is);
+				else
+				{
+					if ( player.inventory.addItemStackToInventory(is) == false )
+						player.dropPlayerItemWithRandomChoice(is, false); // if the new item dosn't fit, drop it.
+				}
+				
+				if ( player.inventoryContainer != null )
+				{
+					// for some reason the players inventory won't update without this.
+					player.inventoryContainer.detectAndSendChanges();
+				}
+				
 				return true;
 			}
 			else if(equippedItem != null && (equippedItem.getItem() instanceof ItemBarrels || equippedItem.getItem() instanceof ItemLargeVessel))
