@@ -2,12 +2,13 @@ package com.bioxx.tfc.Entities;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -174,6 +175,36 @@ public class EntityStand extends EntityLiving
 		}
 	}
 
+	/**
+	 * Imported from EntityLivingBNase because this does not exist on the server apparently
+	 */
+	private Vec3 getPlayerLook(EntityLivingBase entity, float p_70676_1_)
+	{
+		float f1;
+		float f2;
+		float f3;
+		float f4;
+
+		if (p_70676_1_ == 1.0F)
+		{
+			f1 = MathHelper.cos(-entity.rotationYaw * 0.017453292F - (float)Math.PI);
+			f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - (float)Math.PI);
+			f3 = -MathHelper.cos(-entity.rotationPitch * 0.017453292F);
+			f4 = MathHelper.sin(-entity.rotationPitch * 0.017453292F);
+			return Vec3.createVectorHelper((double)(f2 * f3), (double)f4, (double)(f1 * f3));
+		}
+		else
+		{
+			f1 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * p_70676_1_;
+			f2 = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * p_70676_1_;
+			f3 = MathHelper.cos(-f2 * 0.017453292F - (float)Math.PI);
+			f4 = MathHelper.sin(-f2 * 0.017453292F - (float)Math.PI);
+			float f5 = -MathHelper.cos(-f1 * 0.017453292F);
+			float f6 = MathHelper.sin(-f1 * 0.017453292F);
+			return Vec3.createVectorHelper((double)(f4 * f5), (double)f6, (double)(f3 * f5));
+		}
+	}
+
 	@Override
 	public boolean interact(EntityPlayer ep){
 		if(!worldObj.isRemote){
@@ -190,7 +221,7 @@ public class EntityStand extends EntityLiving
 				}
 			}
 			else {
-				Vec3 hitVec = ep.getLookVec();
+				Vec3 hitVec = getPlayerLook(ep, 1.0f);
 				double angleTan = hitVec.yCoord / Math.sqrt(hitVec.xCoord * hitVec.xCoord + hitVec.zCoord * hitVec.zCoord);
 
 				double xzDist = Math.sqrt(Math.pow(ep.posX - this.posX,2) + Math.pow(ep.posZ - this.posZ, 2));
@@ -210,7 +241,7 @@ public class EntityStand extends EntityLiving
 				else if(y >= 1.4 && y < 2){
 					slot = 3;
 				}
-				
+
 
 				if(slot != -1){
 					ItemStack i = armor[slot];
