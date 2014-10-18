@@ -286,6 +286,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 
 		nbt.setInteger("Familiarity", familiarity);
 		nbt.setLong("lastFamUpdate", lastFamiliarityUpdate);
+		nbt.setBoolean("Familiarized Today", familiarizedToday);
 
 		NBTTagCompound nbt2 = nbt;
 		nbt2.setFloat ("Strength Modifier", strength_mod);
@@ -319,6 +320,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 
 		familiarity = nbt.getInteger("Familiarity");
 		lastFamiliarityUpdate = nbt.getLong("lastFamUpdate");
+		familiarizedToday = nbt.getBoolean("Familiarized Today");
 
 		strength_mod = nbt.getFloat ("Strength Modifier");
 		aggression_mod = nbt.getFloat ("Aggression Modifier");
