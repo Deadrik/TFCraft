@@ -24,6 +24,13 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 		setCreativeTab(TFCTabs.TFCMaterials);
 		this.setWeight(EnumWeight.HEAVY);
 		this.setSize(EnumSize.LARGE);
+
+	}
+
+	@Override
+	public boolean canStack()
+	{
+		return false;
 	}
 
 	@Override

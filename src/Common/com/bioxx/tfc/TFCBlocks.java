@@ -566,23 +566,23 @@ public class TFCBlocks
 		Blocks.snow_layer = Snow;
 		StoneIgInCobble = new BlockIgInCobble(Material.rock).setHardness(16F).setBlockName("IgInRockCobble");
 		StoneIgIn = new BlockIgIn(Material.rock).setHardness(8F).setBlockName("IgInRock");
-		StoneIgInSmooth = new BlockIgInSmooth().setHardness(40F).setBlockName("IgInRockSmooth");
-		StoneIgInBrick = new BlockIgInBrick().setHardness(40F).setBlockName("IgInRockBrick");
+		StoneIgInSmooth = new BlockIgInSmooth().setHardness(16F).setBlockName("IgInRockSmooth");
+		StoneIgInBrick = new BlockIgInBrick().setHardness(16F).setBlockName("IgInRockBrick");
 
 		StoneSedCobble = new BlockSedCobble(Material.rock).setHardness(14F).setBlockName("SedRockCobble");
 		StoneSed = new BlockSed(Material.rock).setHardness(7F).setBlockName("SedRock");
-		StoneSedSmooth = new BlockSedSmooth().setHardness(35F).setBlockName("SedRockSmooth");
-		StoneSedBrick = new BlockSedBrick().setHardness(35F).setBlockName("SedRockBrick");
+		StoneSedSmooth = new BlockSedSmooth().setHardness(14F).setBlockName("SedRockSmooth");
+		StoneSedBrick = new BlockSedBrick().setHardness(14F).setBlockName("SedRockBrick");
 
 		StoneIgExCobble = new BlockIgExCobble(Material.rock).setHardness(16F).setBlockName("IgExRockCobble");
 		StoneIgEx = new BlockIgEx(Material.rock).setHardness(8F).setBlockName("IgExRock");
-		StoneIgExSmooth = new BlockIgExSmooth().setHardness(40F).setBlockName("IgExRockSmooth");
-		StoneIgExBrick = new BlockIgExBrick().setHardness(40F).setBlockName("IgExRockBrick");
+		StoneIgExSmooth = new BlockIgExSmooth().setHardness(16F).setBlockName("IgExRockSmooth");
+		StoneIgExBrick = new BlockIgExBrick().setHardness(16F).setBlockName("IgExRockBrick");
 
 		StoneMMCobble = new BlockMMCobble(Material.rock).setHardness(15F).setBlockName("MMRockCobble");
 		StoneMM = new BlockMM(Material.rock).setHardness(8F).setBlockName("MMRock");
-		StoneMMSmooth = new BlockMMSmooth().setHardness(35F).setBlockName("MMRockSmooth");
-		StoneMMBrick = new BlockMMBrick().setHardness(35F).setBlockName("MMRockBrick");
+		StoneMMSmooth = new BlockMMSmooth().setHardness(15F).setBlockName("MMRockSmooth");
+		StoneMMBrick = new BlockMMBrick().setHardness(15F).setBlockName("MMRockBrick");
 
 		Dirt = (new com.bioxx.tfc.Blocks.Terrain.BlockDirt(0)).setHardness(2F).setStepSound(Block.soundTypeGravel).setBlockName("dirt");
 

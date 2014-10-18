@@ -126,17 +126,19 @@ public class FoodCraftingHandler
 		boolean brined = true;
 		boolean dried = true;
 		int driedAmt = 0;
-		int count = 0;
+		int foodCount = 0;
+		int itemCount = 0;
 		int foodSlot = 0; //This is used when cutting food to track where the food originally was since the merge code may remove the stack
 		for(int i = 0; i < iinventory.getSizeInventory(); i++)
 		{
 			if(iinventory.getStackInSlot(i) == null)
 				continue;
+			itemCount++;
 			if(iinventory.getStackInSlot(i).hasTagCompound() && iinventory.getStackInSlot(i).getTagCompound().hasKey("foodWeight"))
 			{
 				ItemStack is = iinventory.getStackInSlot(i);
 				foodSlot = i;
-				if(count == 0)
+				if(foodCount == 0)
 				{
 					fuelTasteProfile = Food.getFuelProfile(is);
 					cookedTasteProfile = Food.getCookedProfile(is);
@@ -215,7 +217,7 @@ public class FoodCraftingHandler
 						else
 							finalDecay += d;
 					}
-					count++;
+					foodCount++;
 				}
 
 				if(myWeight > 0)
@@ -247,37 +249,64 @@ public class FoodCraftingHandler
 		if(craftResult.stackSize == 0)
 			craftResult.stackSize = 1;
 
-		//Check if we are doing anything other than combining the food
-		for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+		if(itemCount == 1)
 		{
-			if(iinventory.getStackInSlot(i) == null)
-				continue;
-			//If we're salting the food
-			if(iinventory.getStackInSlot(i).getItem() == TFCItems.Powder && iinventory.getStackInSlot(i).getItemDamage() == 9)
-				Food.setSalted(craftResult, true);
-
-			if(iinventory.getStackInSlot(i).getItem() instanceof ItemKnife)
+			if(Food.getDecay(craftResult) > 0)
 			{
-				if(Food.getDecay(craftResult) > 0)
+				int knifeSlot = -1;
+				for(int i = 0; i < player.inventory.getSizeInventory(); i++) 
 				{
-					FoodCraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
+					if(player.inventory.getStackInSlot(i) == null)
+						continue;
+					if(player.inventory.getStackInSlot(i).getItem() instanceof ItemKnife)
+					{
+						knifeSlot = i;
+						break;
+					}
+				}
+				if(knifeSlot >= 0)
+				{
+					player.inventory.getStackInSlot(knifeSlot).damageItem(1 , player);
 					float decay = Food.getDecay(craftResult);
 					Food.setDecay(craftResult, 0);
 					Food.setWeight(craftResult, Food.getWeight(craftResult)-decay);
 				}
-				else if(Food.getDecay(craftResult) <= 0)
+			}
+		}
+		else
+		{
+			//Check if we are doing anything other than combining the food
+			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+			{
+				if(iinventory.getStackInSlot(i) == null)
+					continue;
+				//If we're salting the food
+				if(iinventory.getStackInSlot(i).getItem() == TFCItems.Powder && iinventory.getStackInSlot(i).getItemDamage() == 9)
+					Food.setSalted(craftResult, true);
+
+				if(iinventory.getStackInSlot(i).getItem() instanceof ItemKnife)
 				{
-					if(finalWeight/2f < 1)
-					{
-						Food.setWeight(craftResult, finalWeight);
-						iinventory.getStackInSlot(i).stackSize = 2;
-					}
-					else
+					if(Food.getDecay(craftResult) > 0)
 					{
 						FoodCraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
-						Food.setWeight(iinventory.getStackInSlot(foodSlot),finalWeight/2);
-						Food.setWeight(craftResult,finalWeight/2);
-						iinventory.getStackInSlot(foodSlot).stackSize = 2;
+						float decay = Food.getDecay(craftResult);
+						Food.setDecay(craftResult, 0);
+						Food.setWeight(craftResult, Food.getWeight(craftResult)-decay);
+					}
+					else if(Food.getDecay(craftResult) <= 0)
+					{
+						if(finalWeight/2f < 1)
+						{
+							Food.setWeight(craftResult, finalWeight);
+							iinventory.getStackInSlot(i).stackSize = 2;
+						}
+						else
+						{
+							FoodCraftingHandler.DamageItem(player, iinventory, i, iinventory.getStackInSlot(i).getItem());
+							Food.setWeight(iinventory.getStackInSlot(foodSlot),finalWeight/2);
+							Food.setWeight(craftResult,finalWeight/2);
+							iinventory.getStackInSlot(foodSlot).stackSize = 2;
+						}
 					}
 				}
 			}

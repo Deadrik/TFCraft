@@ -1,17 +1,18 @@
 package com.bioxx.tfc.Blocks;
 
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import com.bioxx.tfc.Reference;
 import com.bioxx.tfc.TFCBlocks;
 import com.bioxx.tfc.TFCItems;
-import com.bioxx.tfc.Core.TFC_Achievements;
 import com.bioxx.tfc.TileEntities.TileEntityBloom;
 
 public class BlockBloom extends BlockTerraContainer
@@ -46,44 +47,23 @@ public class BlockBloom extends BlockTerraContainer
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int x, int y, int z, int side)
+	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
 	{
-		//Eject(world, x, y, z);
+		return null;
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion exp)
+	public void onBlockPreDestroy(World world, int i, int j, int k, int meta) 
 	{
-		Eject(world, x, y, z);
-	}
+		TileEntityBloom te = (TileEntityBloom)world.getTileEntity(i, j, k);
+		EntityItem ei = new EntityItem(world, i, j, k, new ItemStack(TFCItems.RawBloom, 1, te.size));
 
-	@Override
-	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta)
-	{
-		Eject(world, x, y, z);
-	}
-
-	@Override
-	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z)
-	{
-		if(!world.isRemote)
-		{
-			Eject(world, x, y, z);
-			player.triggerAchievement(TFC_Achievements.achIronAge);
-		}
-		return super.removedByPlayer(world, player, x, y, z);
-	}
-
-	public void Eject(World world, int x, int y, int z)
-	{
-		TileEntityBloom te = (TileEntityBloom)world.getTileEntity(x, y, z);
-		if(te != null)
-		{
-			int[] b = getBloomery(world, x, y, z);
-			te = (TileEntityBloom)world.getTileEntity(x, y, z);
-			dropBlockAsItem(world, x + b[0], y, z + b[1], new ItemStack(TFCItems.RawBloom, 1, te.size));
-			world.removeTileEntity(x, y, z);
-		}
+		int[] pos = getBloomery(world, i, j, k);
+		ei.posX = i + pos[0];
+		ei.posY = j + 0.5;
+		ei.posZ = k + pos[1];
+		ei.motionX = 0; ei.motionY = 0; ei.motionZ = 0;
+		world.spawnEntityInWorld(ei);
 	}
 
 	public int[] getBloomery(World world, int x, int y, int z)
