@@ -589,9 +589,10 @@ public class TEBarrel extends NetworkTileEntity implements IInventory
 					}
 					else if(fluid.getFluid() == TFCFluid.VINEGAR)
 					{
-						if(Food.isBrined(itemstack) && TFC_Time.getTotalHours() - this.sealtime >= 4)
+						if(Food.isBrined(itemstack))
 						{
-							if(!Food.isPickled(itemstack) && w/fluid.amount <= Global.FOOD_MAX_WEIGHT/this.getMaxLiquid())
+							if(!Food.isPickled(itemstack) && w/fluid.amount <= Global.FOOD_MAX_WEIGHT/this.getMaxLiquid() && this.getSealed() &&
+									sealtime != 0 && TFC_Time.getTotalHours() - sealtime >= 4)
 							{
 								fluid.amount -= 1 * w;
 								Food.setPickled(itemstack, true);
